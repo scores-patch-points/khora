@@ -1,7 +1,7 @@
-// priors-ground.js — THE RECEIVED GROUND: passages of live_priors that carry an ask (2026-09-30).
+// priors-ground.js — THE RECEIVED GROUND: passages of ethos that carry an ask (2026-09-30).
 //
 // "There is no view from nowhere; go build the ground to grow from" (user direction). When nothing handed over carries
-// an ask, the next place to stand is the received corpus — live_priors, ~2,100 public-domain and open texts with
+// an ask, the next place to stand is the received corpus — ethos, ~2,100 public-domain and open texts with
 // provenance — and every claim written from it must be LOCATED: a file, and a byte range in it.
 //
 // THE UNIT IS THE PASSAGE, NOT THE DOCUMENT. Measured 2026-09-30 against the real corpus (938 MB): "a document carries
@@ -15,7 +15,7 @@
 // corpus per NEW word, remembered in a cache file keyed by a fingerprint of the corpus (path, size, mtime of every
 // eligible file) — so the ground is found once and kept, and a changed corpus is re-read, never trusted stale. Level 2
 // reads only the candidate documents (those mentioning more than half the ask's words) and tests their passages. The
-// cache lives OUTSIDE the corpus; this module never writes into live_priors.
+// cache lives OUTSIDE the corpus; this module never writes into ethos.
 //
 // "CARRIES" IS MORE THAN HALF OF THE EVIDENCE, NOT MORE THAN HALF OF THE WORDS. A word is evidence of a subject in
 // proportion to how rare it is in this corpus: its weight is ln(1 + N/df), N the documents, df the documents that
@@ -134,7 +134,7 @@ const writeCache = (file, cache) => {
 
 /**
  * findPriorsGround({ topic, roots, cacheFile, yieldFn }) → EOPriorsGround@1
- *   roots      [{ dir, label }]        e.g. [{ dir: ".../live_priors", label: "live_priors" }]
+ *   roots      [{ dir, label }]        e.g. [{ dir: ".../ethos", label: "ethos" }]
  *   cacheFile  where word → documents is remembered (outside the corpus)
  *   yieldFn    awaited between files so a long scan never starves the server
  */
@@ -221,7 +221,7 @@ export async function findPriorsGround({ topic, roots = [], cacheFile = null, yi
 // ── THE GROUND GROWS (2026-09-30) ──────────────────────────────────────────────────────────────────────────────────────
 // What a consented web hunt earned — pages that passed admission for this ask — is kept, so the next ask of the same
 // subject finds it in the received ground and goes nowhere. It lives in its OWN root (the proxy's state/, never inside
-// live_priors), in a numbered category directory so listEligible sees it, one file per source URL. The manifest
+// ethos), in a numbered category directory so listEligible sees it, one file per source URL. The manifest
 // (earned.jsonl, beside the category directory, so it is never itself searched) records where each page came from, which
 // ask earned it, when, and the sha1 of the text kept: provenance stays with the page. A URL is data, never a path — the
 // filename is a slug of it plus its own hash, so a hostile URL keeps its page inside the directory. The same page twice

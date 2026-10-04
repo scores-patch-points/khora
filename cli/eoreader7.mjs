@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // eoreader7 — commandline entry point onto the real reading pipeline.
 //
-//   eoreader7 <file> [--priors <dir>|live_priors] [--limit N] [--out <dir>]
+//   eoreader7 <file> [--priors <dir>|ethos] [--limit N] [--out <dir>]
 //   eoreader7 -browser    the built-in browser surface (no sibling repo)
 //   eoreader7 -fold       the richer The Fold browser surface (sibling repo)
 //
@@ -35,20 +35,20 @@ const ANCHORING = { minActivation: 0.05, minMargin: 0.2 };
 // (legacy-legacy-engine.1/bin/priors/pos/en-ud-ewt.json), copied in, so the CLI
 // has no submodule dependency at all.
 const DEFAULT_POS_PRIOR = path.join(HERE, "priors/pos-prior-en.json");
-// live_priors is a sibling checkout (see reference_live_priors_github_repo
+// ethos is a sibling checkout (see reference_ethos_github_repo
 // memory) — not vendored here, and not auto-pulled. Resolve it relative to
 // this repo's parent directory, same layout as the legacy engine.1 workspace.
-const LIVE_PRIORS_POS = path.join(REPO_ROOT, "..", "live_priors/derived-priors/pos-priors/pos-prior-en.json");
+const LIVE_PRIORS_POS = path.join(REPO_ROOT, "..", "ethos/derived-priors/pos-priors/pos-prior-en.json");
 
 function usage(msg) {
   if (msg) console.error(`eoreader7: ${msg}\n`);
-  console.error(`usage: eoreader7 <file> [--priors <dir>|live_priors] [--limit N] [--out <dir>]
+  console.error(`usage: eoreader7 <file> [--priors <dir>|ethos] [--limit N] [--out <dir>]
 
   <file>              text file to read
   --priors <dir>      directory to resolve priors from; must contain a
                        pos-priors/pos-prior-en.json (or a pos/en-ud-ewt.json,
-                       the legacy engine.1-layout, file) unless --priors live_priors
-  --priors live_priors  use the live_priors checkout at ../live_priors
+                       the legacy engine.1-layout, file) unless --priors ethos
+  --priors ethos  use the ethos checkout at ../ethos
                          relative to this repo (run 'git pull' there yourself
                          first — this CLI does not fetch)
   --limit N           only read the first N encounters
@@ -59,8 +59,8 @@ function usage(msg) {
 
 function resolvePosPrior(priorsArg) {
   if (!priorsArg) return DEFAULT_POS_PRIOR;
-  if (priorsArg === "live_priors") {
-    if (!fs.existsSync(LIVE_PRIORS_POS)) usage(`live_priors checkout not found or missing derived prior at ${LIVE_PRIORS_POS}`);
+  if (priorsArg === "ethos") {
+    if (!fs.existsSync(LIVE_PRIORS_POS)) usage(`ethos checkout not found or missing derived prior at ${LIVE_PRIORS_POS}`);
     return LIVE_PRIORS_POS;
   }
   const dir = path.resolve(priorsArg);
@@ -75,7 +75,7 @@ function resolvePosPrior(priorsArg) {
   return found;
 }
 
-// live_priors' own derived-priors/pos-priors/pos-prior-en.json carries the
+// ethos' own derived-priors/pos-priors/pos-prior-en.json carries the
 // same schema tag and the same `forms` counts (built from the same UD
 // English-EWT corpus — checked by hand, word-for-word identical sample) but
 // wraps its provenance under `giver` instead of `provenance.source`, the

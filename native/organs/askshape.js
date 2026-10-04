@@ -58,7 +58,7 @@ function confusables() {
   if (_confusablesLoaded) return _confusables;
   _confusablesLoaded = true;
   try {
-    const p = path.join(HERE, "..", "..", "..", "live_priors", "derived-priors", "confusables-prior-v1.json");
+    const p = path.join(HERE, "..", "..", "..", "ethos", "derived-priors", "confusables-prior-v1.json");
     _confusables = JSON.parse(fs.readFileSync(p, "utf8")).mappings ?? null;
   } catch { _confusables = null; }
   return _confusables;

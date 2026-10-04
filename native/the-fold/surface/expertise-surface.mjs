@@ -59,7 +59,7 @@ import { CELLS, OPERATOR_GLYPHS, GRAIN_DECALS, OPERATOR_NAME, GRAIN_NAME } from 
 const execFileP = promisify(execFile);
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(HERE, "..", "..", "..");
-const LIVE_PRIORS = path.join(ROOT, "..", "live_priors");
+const LIVE_PRIORS = path.join(ROOT, "..", "ethos");
 const MODEL = process.env.EXPERTISE_MODEL ?? "gemma2:2b";
 const PORT = Number((process.argv.includes("--port") ? process.argv[process.argv.indexOf("--port") + 1] : null) ?? process.env.EXPERTISE_SURFACE_PORT ?? 8823);
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID ?? null;
