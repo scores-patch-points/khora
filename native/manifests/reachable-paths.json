@@ -1,0 +1,160 @@
+{
+  "schema": "ReachablePaths@1",
+  "purpose": "Milestone 0 reachable-path inventory — the task, output and executor paths a running turn can take, distinguished and pinned to source. A path entry that no longer resolves means the inventory is stale and the baseline must be re-measured, never silently updated.",
+  "repo": "khora",
+  "account": "scores-patch-points",
+  "sha": "c1b3986c77c094d0ede4b00c3719a495a53f2871",
+  "baselineDefects": [
+    {
+      "id": "defect-001-proxy-import",
+      "found": "2026-10-04",
+      "resolved": "2026-10-04",
+      "severity": "blocking",
+      "path": "khora/proxy-runner.mjs:30",
+      "text": "static import from ./native/legacy-ported/packages/host/corpus.js — that directory was stripped in the canonical khora (c1b3986, migration Step 1.5), so proxy-runner.mjs cannot be imported and code-loop.js (which imports runProxyTurn from it) cannot load either",
+      "affects": [
+        "task",
+        "output",
+        "executor"
+      ],
+      "falsifyingControl": "a fresh `node --input-type=module -e 'import(\"./proxy-runner.mjs\")'` under khora/ resolves without ERR_MODULE_NOT_FOUND",
+      "disposition": "RESOLVED — re-pointed both proxies to the canonical seam native/the-fold/corpus-session.js (createSession/admitChunked/sessionReferents/sessionRelations built on the native reader); also restored the migration Step 1.5 keep-list runtime imports that the canonical strip dropped (native/eval/lavar/{visual-rec,hard-meaning,elenchus-bar,capacity-swarm,eo-swarm,swarm-gate}.mjs). The falsifying control passes: both proxies import."
+    }
+  ],
+  "paths": {
+    "task": {
+      "label": "task path — request becomes a clearance and a judged shape",
+      "entry": "khora/proxy-runner.mjs:4445 (runProxyTurn)",
+      "steps": [
+        {
+          "file": "khora/proxy-runner.mjs",
+          "symbol": "runProxyTurn",
+          "line": 4445,
+          "role": "task entry: receives the request, caller, workspace"
+        },
+        {
+          "file": "khora/native/organs/ethos.js",
+          "symbol": "ethosClear",
+          "line": 67,
+          "role": "constitution runs, produces EthosClearance@1"
+        },
+        {
+          "file": "khora/native/organs/charter.js",
+          "symbol": "charterGate",
+          "line": null,
+          "role": "conduct check: the Charter (Grotius)"
+        },
+        {
+          "file": "khora/native/organs/privacy.js",
+          "symbol": "specRefusal",
+          "line": null,
+          "role": "conduct check: the spec gate (Brandeis)"
+        },
+        {
+          "file": "khora/proxy-runner.mjs",
+          "symbol": "getSession",
+          "line": 2401,
+          "role": "session built only on a valid clearance (bearing wall)",
+          "internal": true
+        },
+        {
+          "file": "khora/native/kernel/mayeroff.js",
+          "symbol": "judgeAskShape",
+          "line": 180,
+          "role": "Mayeroff null judgment on clearance.shape"
+        },
+        {
+          "file": "khora/native/kernel/mayeroff.js",
+          "symbol": "mayeroffJudge",
+          "line": 84,
+          "role": "the perturbation verdict; counterexamples pinned in tests/baseline-counterexamples.test.js"
+        }
+      ]
+    },
+    "output": {
+      "label": "output path — generated material is re-scanned before it reaches the caller",
+      "entry": "khora/native/the-fold/antistrauss.mjs:493 (reviewBlock) invoked from proxy-runner.mjs:3251",
+      "steps": [
+        {
+          "file": "khora/native/the-fold/antistrauss.mjs",
+          "symbol": "reviewBlock",
+          "line": 493,
+          "role": "output re-scan before release (AntiStrauss gate); called from proxy-runner.mjs:3251"
+        },
+        {
+          "file": "khora/native/the-fold/antistrauss.mjs",
+          "symbol": "review",
+          "line": 466,
+          "role": "audit record of the output verdict"
+        },
+        {
+          "file": "khora/proxy-runner.mjs",
+          "symbol": "proseContinuationCheck",
+          "line": 4243,
+          "role": "prose continuation guard"
+        },
+        {
+          "file": "khora/native/organs/output-claims.js",
+          "symbol": "claimKindsOf",
+          "line": null,
+          "role": "output claims typed, not asserted"
+        },
+        {
+          "file": "khora/native/organs/output-holograph.js",
+          "symbol": "groundFacts",
+          "line": null,
+          "role": "output facts grounded to sources"
+        }
+      ]
+    },
+    "executor": {
+      "label": "executor path — bounded real patches (code loop) with caller-specified tests",
+      "entry": "khora/proxy-runner.mjs:5142 (dynamic import of code-loop.js runCodeLoop)",
+      "steps": [
+        {
+          "file": "khora/proxy-runner.mjs",
+          "symbol": "runProxyTurn → runCodeLoop",
+          "line": 5142,
+          "role": "instrument-mode dispatch to the code loop"
+        },
+        {
+          "file": "khora/native/the-fold/code-loop.js",
+          "symbol": "runCodeLoop",
+          "line": 1294,
+          "role": "bounded real-patch loop"
+        },
+        {
+          "file": "khora/native/the-fold/code-loop.js",
+          "symbol": "runVoidLoop",
+          "line": 782,
+          "role": "void-unit loop (missing/located units)"
+        },
+        {
+          "file": "khora/native/the-fold/code-loop.js",
+          "symbol": "parseProposal",
+          "line": 427,
+          "role": "proposal parsed into op/path/find/add"
+        },
+        {
+          "file": "khora/native/the-fold/code-loop.js",
+          "symbol": "runTestCommand",
+          "line": 502,
+          "role": "caller-specified tests run, bounded by timeout"
+        },
+        {
+          "file": "khora/native/the-fold/code-loop.js",
+          "symbol": "buildVoidPatch",
+          "line": 753,
+          "role": "void unit body materialized as a patch"
+        }
+      ]
+    }
+  },
+  "verified": {
+    "importable": {
+      "proxy-runner.mjs": true,
+      "proxy.mjs": true
+    },
+    "note": "defect-001 resolved 2026-10-04; both proxies import"
+  }
+}

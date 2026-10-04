@@ -1009,3 +1009,22 @@ fast: 5 files (4 modified + 1 new) · tests 55→49/55, native 203→200/203, al
 clean: Feynman, Holmes, Frankfurt, Kondo (routed, nothing to report beyond the lines above).
 
 Context: user — "fix it so the tasks work. use this as error correction to develop a better system in general", after the live token-saving test. The staged diff is the error correction: locateMissingUnit + preflight (green = zero draws), fenced-read absorption, prompt budget follows the window + drawOnly material kept whole, and the hunt.js split (code-hunt.js new, essay hunt restored — pipeline-run.mjs and both falsify suites green again: 41/41). Lessons 98–101 recorded in CODING-LESSONS.md. Live verification: /v1/code with claude-sonnet-4-5 on the heimdall workspace, done in 1 round, 3/3 tests green, 14,991 in / 865 out vs 78,081 in / 600 out for the raw-dump baseline.
+
+## 2026-10-04 — constitutive ethos milestones 0-7 (khora, main)
+fast: 52 files · 91 affected tests pass · law: WARN (pre-existing dup S17 S96; P2 P5 cited, entry forthcoming)
+| lens | citation | file:line | verdict | one line |
+| Diaconis | assay/findings.js:19 | native/assay/findings.js | fixed | seeded bootstrap; two runs byte-identical (verified) |
+| Feynman | assay/findings.js:95 | native/assay/findings.js | noted | 0.5 completion margin is a declared decision-rule check, flags concern, never passes; not a silent calibration |
+| Dijkstra | — | native/eval/lavar/capacity-swarm.mjs | noted | restored migration keep-list module (defect-001), not new logic |
+| Holmes | — | native/assay/fixtures.js | clean | participant identities are controlled-fictional fixtures, observed/withheld kinds distinguished per Encounter@1 |
+| Pearl | assay/findings.js:7 | native/assay/findings.js | fixed | paired bootstrap over per-scenario differences; repeated outputs never independent samples |
+| Ostrom | — | native/assay/findings.js:48 | clean | credit/absence aggregated at per-scenario scope, not pooled |
+| Frankfurt | — | native/contracts/core.js | clean | no placeholder; schemas validate real records |
+| Alexander | — | native/constructors/compose.js | fixed | cumulative composition carries obligations; composed transitions stamped (M3 binding) |
+| Greenberg | — | native/eval/lavar/hard-meaning.mjs:163 | noted | restored keep-list module, not new language logic |
+| Kondo | — | native/contracts/standing.js | clean | nothing dead added; all new modules imported by tests |
+| LeviStrauss | — | native/eval/lavar/*.mjs | noted | reclaimed migration keep-list runtime imports (defect-001 resolution) |
+| Simon/Chekhov | — | 52 new sources | noted | chorus "no test import" notes are false positives via barrel re-export; each module exercised by its tests |
+| Marshall | P2 P5 | — | noted | cited in new seam docs; write entries or disclose in commit (forthcoming) |
+clean: — (all routed lenses reported above)
+Context: user — "now implement the plan", "continue", "go". The staged diff is the constitutive ethos development spec milestones 0-7: contracts (Encounter@1..Completion@1, replay), constructive action vocabulary + cumulative composition, exact-transition adapters in isolated runtime, pathos loop, learned procedures with re-derivation, preregistered paired ablation assay (advantage established, manifest recorded), and the khora→penelope→the-fold integration trace with replay/restart/disclosure/counterexample controls. defect-001 (stripped legacy-ported host) resolved via canonical corpus-session seam on the native reader plus restored keep-list eval/lavar runtime imports.

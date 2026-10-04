@@ -1205,16 +1205,18 @@ async function handleRequest(req, res) {
       const t0 = Date.now();
       try {
         // THE READING DOOR — khora perceives, model-free. The constitutional
-        // reader (legacy host): createSession → admitChunked → sessionReferents.
-        // The mouth is never consulted (GL-RR-04/05; a read is not a draw). The
-        // surface (holodeck) treats the returned referents as a witness beside
-        // its own finder. P2: stages run and not run are named, never implied.
-        const { createSession, admitChunked, sessionReferents, sessionRelations } = await import("./native/legacy-ported/packages/host/corpus.js");
+        // reader (canonical seam, 2026-10-04): createSession → admitChunked →
+        // sessionReferents, backed by the native reader
+        // (native/the-fold/corpus-session.js). The mouth is never consulted
+        // (GL-RR-04/05; a read is not a draw). The surface (holodeck) treats
+        // the returned referents as a witness beside its own finder. P2:
+        // stages run and not run are named, never implied.
+        const { createSession, admitChunked, sessionReferents, sessionRelations } = await import("./native/the-fold/corpus-session.js");
         const sourceId = `doc:${(name || "unnamed").replace(/[^a-zA-Z0-9_.-]/g, "_")}`;
         const session = createSession();
         admitChunked(session, { text: material, sourceId, language: "en" });
-        const cast = sessionReferents(session, { sourceId, priors: [], limit: 200 });
-        const relations = sessionRelations(session, { sourceId });
+        const cast = await sessionReferents(session, { sourceId, priors: [], limit: 200 });
+        const relations = await sessionRelations(session, { sourceId });
         const referents = (cast.referents ?? []).map((r) => ({
           surfaces: [r.display].filter(Boolean),
           routes: (r.fromPrior === true ? ["prior"] : ["witnessed"]).concat(r.individuation ? [`grain:${r.individuation}`] : []),

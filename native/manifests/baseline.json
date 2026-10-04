@@ -1,0 +1,41 @@
+{
+  "schema": "BaselineManifest@1",
+  "purpose": "Milestone 0 baseline — pinned dependency manifest for the constitutive ethos development and test specification. Every implementation assay pins these refs; abbreviated refs in prose identify this manifest.",
+  "account": "scores-patch-points",
+  "host": "github.com",
+  "date": "2026-10-04",
+  "repos": {
+    "khora":    { "dir": "khora",    "role": "perceiver", "sha": "c1b3986c77c094d0ede4b00c3719a495a53f2871" },
+    "penelope": { "dir": "penelope", "role": "keeper",    "sha": "e7ef9f4f63d1bc65fbb056311f91c27135a9099d" },
+    "the-fold": { "dir": "the-fold", "role": "surface",   "sha": "ea08b478bca4398941f9975701b8672647001aa6" },
+    "ethos":    { "dir": "ethos",    "role": "corpus",    "sha": "1c510a6b205fa472de42fddd7d950803d44bfa42" },
+    "heimdall": { "dir": "heimdall", "role": "watcher",   "sha": "50f868eb1c960ae3c82f31d23b1315bae6d9e510" },
+    "janus":    { "dir": "janus",    "role": "reasoner",  "sha": "4e2fc559f5ae3ac383c36001ea26acf06ba6cc87" }
+  },
+  "inspectionRefs": {
+    "note": "Pre-migration refs that identify the original inspection; replaced by the canonical commits above.",
+    "eoreader7": "ae38e45",
+    "penelope": "13cee6e",
+    "holodeck": "37d2fd3",
+    "the-fold": "8bd04b7",
+    "live_priors": "d009032"
+  },
+  "runtime": {
+    "node": "v24.10.0",
+    "engine": "khora/native",
+    "test": "node --test \"conformance/*.test.mjs\" \"tests/*.test.js\"",
+    "test:organs": "node --test \"organs/*.test.mjs\""
+  },
+  "dependencies": {
+    "linkedom": "^0.18.13",
+    "tesseract.js": "^7.0.0"
+  },
+  "counterexampleFixtures": {
+    "file": "khora/native/tests/baseline-counterexamples.test.js",
+    "note": "Direct kernel probes of mayeroffJudge, executed against khora@c1b3986. Each recorded result is the observed falsified behavior at baseline, not an endorsement."
+  },
+  "reachablePaths": {
+    "file": "khora/native/manifests/reachable-paths.json",
+    "note": "Task, output and executor paths distinguished, with source refs."
+  }
+}
