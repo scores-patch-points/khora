@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "documents-static",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8931", "--directory", "documents"],
+      "port": 8931
+    },
+    {
+      "name": "eoreader7-root",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8934", "--directory", "."],
+      "port": 8934
+    },
+    {
+      "name": "eoreader7-root-alt",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8935", "--directory", "."],
+      "port": 8935
+    }
+  ]
+}

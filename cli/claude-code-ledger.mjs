@@ -1,0 +1,245 @@
+#!/usr/bin/env node
+// cli/claude-code-ledger.mjs — EVERYTHING CLAUDE CODE DOES, ON EOREADER7'S RECORD
+// (2026-09-22). The user: "make sure it's all wired so the holograph has access
+// to anything Claude Code does."
+//
+// A Claude Code hook (UserPromptSubmit, PostToolUse, Stop) pipes its event JSON
+// here. Each event becomes one EOTObservation@1 line — the same line schema the
+// generation pipeline writes (native/the-fold/document-ledger.js) — appended to
+// documents/claude-code-<session>:1.jsonl, where the engine reads its ledgers.
+//
+//   HOLONS   title = /<session>/t<turn>/<tool>: a session holds turns, a turn
+//            holds its tool calls. The ledger respects the same nesting the
+//            reasoning core does.
+//   ADDRESS  every line keeps a lossless pointer to the full event in Claude
+//            Code's own transcript (transcript_path + tool_use_id); the line
+//            itself carries a bounded excerpt. One address, the whole.
+//   IDS      content-derived (sha1 of session · event · tool_use_id · time):
+//            hooks run as separate, possibly parallel, processes, so a running
+//            counter would collide.
+//   SECRETS  scrubbed before anything is written, by a DECLARED table of
+//            secret shapes (below) — a table, disclosed, not a detector.
+//
+// It also keeps per-session turn state for the reasoning gate
+// (cli/claude-code-reason-gate.mjs): a turn is "reasoned" once cli/reason.mjs
+// has run in it. It never fails the hook: any error exits 0 silently.
+import fs from "node:fs";
+import path from "node:path";
+import crypto from "node:crypto";
+import { spawn } from "node:child_process";
+import { sidOf, loadState, saveState, newTurn, engineRunOf, exempt, logError } from "./claude-code-state.mjs";
+import { surfaceFileFor } from "../native/organs/reasoning-record.js";
+import { askShapeBest } from "../native/organs/askshape.js";
+import { defaultCharter } from "../native/organs/charter.js";
+
+const HERE = path.dirname(new URL(import.meta.url).pathname);
+const DOCS = path.join(HERE, "..", "documents");
+const EXCERPT = 4000;
+// The AntiStraussian check's charter ground — built once (pure: parses a
+// fixed in-memory UDHR excerpt, no I/O), same default askshape.js's own
+// callers use elsewhere. See cli/claude-code-shape-gate.mjs's own header for
+// what this feeds.
+const charter = defaultCharter();
+
+// The spec file a `node .../reason.mjs <spec.json> ...` command names — a
+// best-effort read of the Bash command string, never a requirement: no
+// match simply means no surface is generated this call, the same typed-miss
+// discipline every other read in this file already holds (bashEditDiff's
+// own "partial witness" comment states the same principle for file
+// attribution). Quoted or bare, first .json-looking argument wins.
+const specFileOf = (cmd) => /reason\.mjs\s+(?:--\S+\s+)*['"]?([^\s'"]+\.json)['"]?/.exec(String(cmd ?? ""))?.[1] ?? null;
+
+// Fires reason-surface.mjs on the SAME spec a real reason.mjs run just
+// checked, DETACHED — this hook has a 10s timeout (settings.local.json) and
+// citeGround's real file reads/chunking can run long on a large claim set,
+// so generation must never be awaited here. Writes to a cwd-scoped path
+// (reasoning-record.js's own cwdSlug — the same fix for the same class of
+// collision that bit last-reasoning.json) so two repos' surfaces never
+// clobber each other; same-repo concurrent collisions are the same
+// disclosed, unsolved edge reasoning-record.js's own header already names.
+// The scoping key is the nearest PROJECT ROOT of the actual calling cwd
+// (projectRootOf — nearest `.git` ancestor), not raw `ev.cwd` and not a
+// value hardcoded to this checkout. MEASURED, not assumed: running
+// `cd eoreader7 && node cli/reason.mjs …` from a session whose last
+// tracked subdirectory was native/the-fold scoped the surface to
+// "...the-fold" — ev.cwd reflects whatever subdirectory a hook happened to
+// catch the session in, which drifts independently of which repo's
+// reason.mjs actually ran. Hardcoding this repo's own root (the first fix)
+// closed that for calls made from inside eoreader7, but the eo-reason
+// PLUGIN's proxy server is ONE process serving requests from potentially
+// MANY calling projects once installed elsewhere (claude-code/bin/eo-reason
+// sends the caller's own cwd as `x-er7-cwd`) — a route scoping by a
+// hardcoded eoreader7 root would ignore which project a request was
+// actually about, the identical bug one level up. projectRootOf(cwd) is
+// the one key this hook and claude-code-doorway.mjs's /v1/surface route
+// now both compute, so a surface written here is the same file that route
+// looks up. For any cwd already inside eoreader7 this returns eoreader7's
+// own root — byte-identical to the hardcoded value it replaces.
+function spawnSurface(cmd, cwd) {
+  try {
+    const spec = specFileOf(cmd);
+    if (!spec) return;
+    const specAbs = path.isAbsolute(spec) ? spec : path.resolve(cwd || process.cwd(), spec);
+    if (!fs.existsSync(specAbs)) return;
+    const out = surfaceFileFor(cwd || process.cwd());
+    fs.mkdirSync(path.dirname(out), { recursive: true });
+    const child = spawn(process.execPath, [path.join(HERE, "reason-surface.mjs"), specAbs, "--out", out], {
+      cwd: cwd || process.cwd(),
+      detached: true,
+      stdio: "ignore",
+    });
+    child.unref();
+  } catch (e) { logError("claude-code-ledger:spawnSurface", e); }
+}
+
+// The declared table of secret shapes. Anything matching is replaced before it
+// reaches disk. Extend the table; never bypass it.
+const SECRET_SHAPES = [
+  [/sk-ant-[A-Za-z0-9_-]{16,}/g, "[redacted]"],                       // Anthropic keys
+  [/\bsk-[A-Za-z0-9_-]{20,}/g, "[redacted]"],                          // OpenAI-style keys
+  [/\bgh[pousr]_[A-Za-z0-9]{20,}/g, "[redacted]"],                     // GitHub tokens
+  [/\bAKIA[0-9A-Z]{16}\b/g, "[redacted]"],                             // AWS access key ids
+  [/\bxox[abposr]-[A-Za-z0-9-]{10,}/g, "[redacted]"],                  // Slack tokens
+  [/-----BEGIN [A-Z ]*PRIVATE KEY-----[\s\S]*?-----END [A-Z ]*PRIVATE KEY-----/g, "[redacted private key]"],
+  [/\bBearer\s+[A-Za-z0-9._~+/-]{16,}=*/g, "Bearer [redacted]"],
+  [/\b((?:api|secret|access|auth)[_-]?(?:key|token)|password|passwd)(\s*[:=]\s*)["']?[^\s"',;}]{6,}/gi, "$1$2[redacted]"],
+];
+const scrub = (s) => { let t = String(s ?? ""); for (const [re, rep] of SECRET_SHAPES) t = t.replace(re, rep); return t; };
+const excerpt = (v) => { const t = typeof v === "string" ? v : JSON.stringify(v); return t && t.length > EXCERPT ? `${t.slice(0, EXCERPT)}… [${t.length - EXCERPT} more chars at the transcript address]` : (t ?? ""); };
+
+function main() {
+  let ev;
+  try { ev = JSON.parse(fs.readFileSync(0, "utf8") || "{}"); } catch { return; }
+  const sid = sidOf(ev);
+  const event = ev.hook_event_name ?? "unknown";
+  let st = loadState(sid);
+  let feedback = null;
+
+  let role, title, text, basis;
+  // Additive (2026-09-22): declaredClaims/runAt bridge run's own block scope
+  // (below, inside the PostToolUse/Bash branch) out to the shared file/id/
+  // append code further down — hoisted here, alongside role/title/text/basis,
+  // for the same reason those are.
+  let declaredClaims = [], runAt = null;
+  // A SYSTEM NOTICE is not the user's turn: a background task finishing, or a
+  // message from another session, arrives as a prompt but must neither open a
+  // turn nor wipe the turn's coverage. Declared table of their openings.
+  const NOTICE_OPENINGS = ["<task-notification>", "<cross-session-message", "[SYSTEM NOTIFICATION", "<system-reminder>"];
+  const isNotice = event === "UserPromptSubmit" && NOTICE_OPENINGS.some((o) => String(ev.prompt ?? "").trimStart().startsWith(o));
+  if (isNotice) {
+    role = "notice"; title = `/${sid}/t${st.turn}`; text = ev.prompt ?? ""; basis = "a system notice inside the user's turn — no new turn";
+  } else if (event === "UserPromptSubmit") {
+    st = newTurn(st);
+    role = "prompt"; title = `/${sid}/t${st.turn}`; text = ev.prompt ?? ""; basis = "the operator's words, unedited";
+    // ANTISTRAUSSIAN FLAG (2026-09-24): native/organs/askshape.js read over
+    // the ask itself — its EXISTENCE face already refuses to let an
+    // UNDERSTAND-framed surface launder what the content resolves to (that
+    // file's own rule, not a new one here). Own try/catch, isolated from the
+    // rest of this branch and from the saveState/ledger-append below: a bug
+    // here must never cost the turn its logging or its coverage bookkeeping.
+    // cli/claude-code-shape-gate.mjs (a Stop hook) reads st.straussian back.
+    try {
+      const shape = askShapeBest(ev.prompt ?? "", { charter });
+      if (shape.harmful) st.straussian = { shape: shape.shape, witnesses: shape.witnesses, turn: st.turn, at: new Date().toISOString() };
+    } catch (e) { logError("claude-code-ledger:antistraussian", e); }
+  } else if (event === "PostToolUse") {
+    const tool = ev.tool_name ?? "tool";
+    role = "tool"; title = `/${sid}/t${st.turn}/${tool}`;
+    text = `input: ${excerpt(ev.tool_input)}\nresult: ${excerpt(ev.tool_response)}`;
+    basis = `transcript:${ev.transcript_path ?? "?"}#${ev.tool_use_id ?? "?"}`;
+    const cmd = String(ev.tool_input?.command ?? "");
+    // An engine run, read from its own output (a command that merely mentions
+    // reason.mjs is not one): its verdict and the grounds it checked.
+    const run = tool === "Bash" ? engineRunOf(cmd, ev.tool_response) : null;
+    if (run) {
+      const stdout = String(ev.tool_response?.stdout ?? "");
+      run.errors = stdout.split("\n").filter((l) => /^\s*\[error\]/.test(l)).slice(0, 6).map((l) => l.trim());
+      st.runs.push(run);
+      st.reasoned = true;
+      st.lastReason = { at: run.at, ok: run.ok, grounds: run.grounds };
+      // Additive: only reason.mjs's --json output carries declaredClaims
+      // (Part A/B of the reason-claims design) — --compact/plain leave it
+      // undefined, and `?? []` below means no claim lines get appended for
+      // those, exactly as disclosed.
+      declaredClaims = run.declaredClaims ?? [];
+      runAt = run.at;
+      spawnSurface(cmd, ev.cwd);
+    }
+    // Files this call changed. Edit/Write name their file. A Bash result's
+    // bashEditDiff is a PARTIAL witness — it misses files an interpreter wrote
+    // and reports files another session changed at the same moment — so a
+    // reported file is this session's only when the command names it; the
+    // rest are recorded as unattributed, never held against this session.
+    const now = new Date().toISOString();
+    const mine = [];
+    if (["Edit", "Write", "NotebookEdit", "MultiEdit"].includes(tool)) {
+      const f = ev.tool_input?.file_path ?? ev.tool_input?.notebook_path;
+      if (f) mine.push(path.resolve(f));
+    } else if (tool === "Bash") {
+      for (const f of (ev.tool_response?.bashEditDiff?.files ?? []).map((x) => x.filePath).filter(Boolean)) {
+        if (cmd.includes(f) || cmd.includes(path.basename(f))) mine.push(f);
+        else if (!st.unattributed.includes(f)) st.unattributed.push(f);
+      }
+    }
+    for (const f of mine) st.changed[f] = { by: tool, at: now };
+  } else if (event === "Stop") {
+    role = "stop"; title = `/${sid}/t${st.turn}`;
+    text = ev.last_assistant_message ? excerpt(ev.last_assistant_message) : "(turn ended)";
+    basis = `transcript:${ev.transcript_path ?? "?"}; reasoned through eoreader7 this turn: ${st.reasoned}`;
+  } else {
+    role = "event"; title = `/${sid}/t${st.turn}/${event}`; text = excerpt(ev); basis = `transcript:${ev.transcript_path ?? "?"}`;
+  }
+  saveState(sid, st);
+
+  fs.mkdirSync(DOCS, { recursive: true });
+  const docId = `claude-code-${sid}:1`;
+  const file = path.join(DOCS, `${docId}.jsonl`);
+  const clean = scrub(text);
+  let start = 0; try { start = fs.statSync(file).size; } catch {}
+  const id = `${docId}:obs:${crypto.createHash("sha1").update(`${sid}\n${event}\n${ev.tool_use_id ?? ""}\n${Date.now()}\n${process.pid}`).digest("hex").slice(0, 16)}`;
+  const line = { schema: "EOTObservation@1", id, at: [start, start + clean.length], role, kind: event, title, text: clean, supersedes: null, giver: "claude-code", basis: scrub(basis), appendedAt: new Date().toISOString() };
+  fs.appendFileSync(file, JSON.stringify(line) + "\n");
+
+  // ANTISTRAUSSIAN FLAG, durable (2026-09-24): st.straussian can only be
+  // non-null here because the UserPromptSubmit branch above just set it this
+  // very call (newTurn() reset it to null at the top of that branch, and
+  // nothing else in this file writes it) — so this always means "freshly
+  // flagged this call," never a stale leftover. One more line, same
+  // schema/scrub/excerpt helpers as the line just above, so every flag is
+  // visible on eoreader7's own durable record, not only the ephemeral
+  // per-turn state file cli/claude-code-shape-gate.mjs reads.
+  if (st.straussian) {
+    const flagText = scrub(`${st.straussian.shape}: ${st.straussian.witnesses.join(" / ")}`);
+    let flagStart = 0; try { flagStart = fs.statSync(file).size; } catch {}
+    const flagId = `${docId}:obs:${crypto.createHash("sha1").update(`${sid}\n${event}\n${ev.tool_use_id ?? ""}\n${Date.now()}\n${process.pid}\nstraussian`).digest("hex").slice(0, 16)}`;
+    const flagLine = { schema: "EOTObservation@1", id: flagId, at: [flagStart, flagStart + flagText.length], role: "flag", kind: "antistraussian", title: `/${sid}/t${st.turn}/flag`, text: flagText, supersedes: null, giver: "claude-code", basis: "askShapeBest(ev.prompt) — native/organs/askshape.js", appendedAt: new Date().toISOString() };
+    fs.appendFileSync(file, JSON.stringify(flagLine) + "\n");
+  }
+
+  // Additive (2026-09-22): one more EOTObservation@1 line per claim a passing
+  // `node cli/reason.mjs <spec.json> --json` run just declared — reason.mjs's
+  // own short, already GFP-checked claims become durable log content, read
+  // back by cli/claude-code-context.mjs via exact holon containment on the
+  // ground this basis field encodes. Same shape, same scrub()/excerpt()
+  // helpers as the line just above; never a second version of either. `start`
+  // is re-read from the file per line (not reused) so each line's own `at`
+  // reflects where it actually landed, not the previous line's stale offset;
+  // the id mixes in the loop index and the claim's own ground so claims
+  // appended within the same millisecond never collide.
+  for (let i = 0; i < declaredClaims.length; i++) {
+    const claim = declaredClaims[i];
+    const claimText = excerpt(claim?.said ?? claim?.text
+      ?? `${claim?.roles?.ARG0 ?? "?"} ${claim?.rel ?? "?"} ${claim?.roles?.ARG1 ?? "?"}`);
+    const claimClean = scrub(claimText);
+    const claimBasis = scrub(`reason:${runAt}#${claim?.ground ?? "/"}`);
+    let claimStart = 0; try { claimStart = fs.statSync(file).size; } catch {}
+    const claimId = `${docId}:obs:${crypto.createHash("sha1").update(`${sid}\n${event}\n${ev.tool_use_id ?? ""}\n${Date.now()}\n${process.pid}\nclaim\n${i}\n${claim?.ground ?? ""}`).digest("hex").slice(0, 16)}`;
+    const claimLine = { schema: "EOTObservation@1", id: claimId, at: [claimStart, claimStart + claimClean.length], role: "claim", kind: "reason-claim", title: `/${sid}/t${st.turn}/claim`, text: claimClean, supersedes: null, giver: "claude-code", basis: claimBasis, appendedAt: new Date().toISOString() };
+    fs.appendFileSync(file, JSON.stringify(claimLine) + "\n");
+  }
+  if (feedback) process.stdout.write(JSON.stringify({ decision: "block", reason: feedback }));
+}
+// A hook must never break Claude Code, but a failure must not be silent
+// either: an event the record missed is logged where it can be found.
+try { main(); } catch (e) { logError("claude-code-ledger", e); }
+process.exit(0);

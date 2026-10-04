@@ -1,0 +1,556 @@
+#!/usr/bin/env node
+// cli/reason.mjs — REASONING, DONE BY THE ENGINE, NOT THE MOUTH (2026-09-22).
+//
+// The user: "prove that it improves the reasoning of a lower level model — by
+// not having the model do the reasoning. Wiring eoreader7 deeply into our
+// Claude instance is what we're getting at." This is the door: any reasoner
+// (Claude, gemma, a person) states its reasoning as claims, and eoreader7's
+// own organs decide what holds. The reasoner never grades itself.
+//
+//   node cli/reason.mjs FILE.json [--json]      (or JSON on stdin)
+//
+// {
+//   "claims":      [{ "ground": "/p3", "rel": "has-type", "roles": {"ARG0": "x", "ARG1": "int"},
+//                     "polarity": "+", "force": "default"|"strict", "id": "c1", "said": "…" }],
+//   "declare":     { "functional": [rel | {rel, role, giver}], "symmetric": [rel], "acyclic": [rel] },
+//   "identity":    "exact" (default — code-safe) | "caseless" (prose),
+//   "inferences":  [{ "kind": "same-reasoning"|"deduction"|"vacuous", "end1", "label", "end2", "relation", "yields", "ref" }],
+//   "licenses":    ["relation→yields"]   — only a named giver licenses a step (R1),
+//   "universals":  [{ "ref", "end1": "every …", "label", "end2", "tested": n, "counterexamples": ["measured …"] }],
+//   "equations":   [{ "ref", "statement": "16:13:55 - 16:12:41 >= 600" }]   — hh:mm:ss read as seconds,
+//   "order":       { "items": [..], "before": [[a, b], ..], "claims": [{ "ref", "first": a, "then": b }] }
+// }
+//
+// Organs: GFP core (organs/reasoning-lint.js lintGfp) checks whether these
+// claims agree with EACH OTHER — coherence. FALSIFICATION runs beside it, by
+// default, on every "force":"strict" claim (falsifyGfp): the narrowest
+// synthetic counterexample that claim's OWN declared "functional" or
+// "acyclic" property licenses is built and re-checked, so a clean verdict
+// means the claim was actually TESTED, not just never contradicted because
+// nothing else was in the room (organs/reasoning-lint.js's own header, and
+// THE-NULL-STATES.md's meta-null, explain why coherence alone can't tell
+// those two apart). R1 inference licences (lintInferences), refutation by
+// measured counterexample, equations by mathjs, "a must precede b" by the
+// GFP core's cycle check (a cycle when "b before a" is added is the proof;
+// otherwise a topological order is the counterexample). --ants adds a
+// second, opt-in falsification axis on top: edge-case mutation of a strict
+// claim's own role values (empty, null, self-referential), tested against
+// the real claim set — a fuzz probe, not the declared-property check above.
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import { create, all } from "mathjs";
+import { gfpClaim, claimFromTriple, claimKey, caselessIdentity, exactIdentity } from "../native/kernel/gfp-claim.js";
+import { lintGfp, lintInferences, lintLedger, falsifyGfp } from "../native/organs/reasoning-lint.js";
+import { citeGround, polarityControl, terminalLink } from "../native/organs/ground-cite.js";
+import { writeReasoningRecord } from "../native/organs/reasoning-record.js";
+import { fingerprintOf } from "../native/organs/claim-deriver.js";
+
+// STRUCTURAL IDENTITY FOR THE HYPERLEXICON SEAM (reason-claims design part
+// D). `native/organs/hyperlexicon.js`'s own `noteIdentity` contract is
+// `(subject, verb, object) => {subject, verb, object} | null` (it reads
+// `c.subject`/`c.verb`/`c.object` off whatever this returns — a `{end1,
+// label, end2}` shape would silently read as all-undefined and behave as
+// `identity: null`, defeating the seam without ever erroring). NEVER a
+// tuned similarity threshold — this repo's POLICIES.md refuses hand-picked
+// thresholds throughout — just `gfp-claim.js`'s own `caselessIdentity`
+// (NFKC + whitespace collapse + lowercase) applied per component, the same
+// helper this file already imports for `input.identity === "caseless"`.
+// note: `kernel/notes.js`'s OWN default identity (no seam given at all)
+// already trims and lowercases every end — this seam is additive
+// robustness on top of that default (NFKC normalization, INTERNAL
+// whitespace collapse, not only leading/trailing), never what makes a
+// byte-identical or merely-differently-cased repeat fold in the first
+// place; that already holds with no identity function at all.
+const structuralIdentity = (subject, verb, object) => ({ subject: caselessIdentity(subject), verb: caselessIdentity(verb), object: caselessIdentity(object) });
+
+const math = create(all);
+const limitedEvaluate = math.evaluate;
+math.import({ import: () => { throw new Error("disabled"); }, createUnit: () => { throw new Error("disabled"); }, parse: () => { throw new Error("disabled"); }, evaluate: () => { throw new Error("disabled"); } }, { override: true });
+
+const args = process.argv.slice(2);
+const asJson = args.includes("--json");
+const compact = args.includes("--compact");
+const doAnts = args.includes("--ants");
+const file = args.find((a) => !a.startsWith("--"));
+const input = JSON.parse(file ? fs.readFileSync(file, "utf8") : fs.readFileSync(0, "utf8"));
+
+const declared = (input.claims ?? []).map((c) => gfpClaim(c));
+const decl = input.declare ?? {};
+const text = input.text ?? (input.textFile ? fs.readFileSync(input.textFile, "utf8") : null);
+
+// SESSION KEY (2026-09-22, reason-claims design part A/C). `input.session`
+// is an explicit override — a caller (a test, a manual run) names its own
+// session — checked before the environment so it always wins. Otherwise the
+// Claude Code session this process is a child of, when there is one:
+// CLAUDE_CODE_SESSION_ID is set in the Bash tool's own subprocess (verified
+// live: it equals the real session_id a PostToolUse hook event for the SAME
+// command carries, and matches the transcript filename Claude Code names
+// after it), so this file — run as a bare CLI process with no hook JSON in
+// scope — CAN know which session declared a claim without needing one
+// threaded in by hand. `null` when neither is present (a shell outside
+// Claude Code, or a test that wants an explicit "no session" claim).
+//
+// DISCLOSED LIMIT, MEASURED LIVE while building this: this session key is
+// NOT a guaranteed one-conversation silo. A workflow-spawned subagent
+// (CLAUDE_CODE_CHILD_SESSION=1 in this file's own env when it is one) can
+// share CLAUDE_CODE_SESSION_ID — and the SAME transcript file — with a
+// longer-running parent/sibling turn: this exact repo's own
+// documents/claude-code-<sid>:1.jsonl for the session this fix was built
+// under held claims from unrelated prior work under that same id. For an
+// ordinary single-conversation Claude Code session (verified against 29
+// real archived documents/claude-code-*.jsonl files: session_id and the
+// transcript path they were built from are 1:1, no cross-conversation
+// mixing found), the silo is real. The bound is specific to the
+// workflow/subagent deployment mode, not a general defeat of session
+// scoping, and is exactly why `--all-sessions`/`--session <id>` exist on
+// the read side (cli/claude-code-context.mjs) rather than leaving the
+// default the only way to read this ledger.
+const sessionKey = typeof input.session === "string" && input.session.trim()
+  ? input.session.trim()
+  : (process.env.CLAUDE_CODE_SESSION_ID || process.env.CLAUDE_SESSION_ID || null);
+
+// GROUNDING: does each declared claim's own `ground` correspond to real
+// material? The GFP core below checks whether claims agree with EACH OTHER;
+// it never checks whether one holds against the bytes it names — this file's
+// own header disclosed that gap from the start. citeGround earns a real
+// citation the same way cite.js earns one for a model's prose (statistical
+// attribution against the file's own chunks, never a bare keyword match).
+// Only STRUCTURE (ground/file/line/url/ref/verdict/score) ever leaves this
+// process — no excerpt is printed or persisted anywhere below
+// (native/organs/reasoning-record.js's own header says why: the one honest
+// verbatim home for a citation is the real file at its own line, opened
+// live, never a copy that could drift and never a copy the model reads).
+const sources = declared.map((c, i) => citeGround(c, input.claims[i]?.said ?? input.claims[i]?.text));
+// Only "missing" (looks like a real path, nothing there) and "unattributed"
+// (the file is real, the claim's own words don't beat chance against it) are
+// worth a finding. "unaddressed" (a non-filesystem ground, e.g. text-mode's
+// own "/p3") is not a failure of anything and stays out of `findings`
+// entirely. Always `warn`, never `error`: an error flips `ok` to false, and
+// `ok:false` is exactly what coverageOf (claude-code-state.mjs) reads as
+// "not covered" — a claim grounded at a file THIS TURN IS CREATING would
+// then be unable to ever pass, permanently blocking the steer gate for new
+// files. Disclosed, not silent: the "missing" detail says so.
+const groundFindings = sources
+  .filter((s) => s.verdict === "missing" || s.verdict === "unattributed")
+  .map((s) => ({
+    kind: `ground_${s.verdict}`,
+    severity: "warn",
+    at: s.ground,
+    // s.detail carries a real, specific reason for a commit-ref ground
+    // (citeCommit's own message: no such commit, or not a git repo) — a
+    // "missing" verdict is not always a file, and the generic file-shaped
+    // wording below would misdescribe it.
+    detail: s.detail ?? (s.verdict === "missing"
+      ? `no file exists at this ground — expected if this turn is CREATING ${s.ground}; otherwise the address may be wrong`
+      : `${s.file} is real, but this claim's own words do not beat chance against it (score ${s.score ?? 0} vs floor ${s.floor ?? 0}) — the address exists; nothing here confirms this claim's content is actually there`),
+  }));
+
+// THE CONTROL (2026-09-23, user direction: "think how science does things
+// like this" → the meta-null THE-NULL-STATES.md names as the one to
+// fear — a guard that can never fire and so reads as rigor, found only by
+// asking whether it was ever reached). Every "cited" verdict is retested
+// against its own denial, paired against a same-shaped non-denying
+// control (polarityControl's own header explains why the pair, not just
+// the denial, is required — the naive single-wrapper version reported
+// false positives from dilution alone). `checked: false` for every other
+// verdict is skipped: there is no citation to interrogate.
+const polarityChecks = declared.map((c, i) => sources[i].verdict === "cited" ? polarityControl(c, input.claims[i]?.said ?? input.claims[i]?.text, sources[i]) : null);
+const guardFindings = polarityChecks
+  .map((pc, i) => (pc?.checked && !pc.reachable) ? { pc, ground: declared[i].ground } : null)
+  .filter(Boolean)
+  .map(({ pc, ground }) => ({
+    kind: "ground_unreachable_guard",
+    severity: "warn",
+    at: ground,
+    detail: `this citation does not distinguish the claim from its own denial (${pc.detail}) — read "cited" as presence in the file, never as support for what the claim says`,
+  }));
+
+// ── THE FULL MACHINERY, when the reasoning is given as TEXT ─────────────────
+// read (the engine's own relation reader) → referents (the pipeline's own
+// buildReferents) → hyperlexicon (every claim admitted with its witness:
+// `reader:engine` for what the engine read, `testimony:claude` for what the
+// reasoner only declared) → the holograph's fold → the GFP core. A sentence
+// the reader could not read is an UNREAD STEP: the engine cannot vouch for it.
+let read = [], unread = [], ledgerFindings = [], resolveName = null, sentencesTotal = 0, receivedVocabCount = 0;
+// hl/hlLog: the hyperlexicon and its door, hoisted out of the `if (text)`
+// block below (2026-09-22, additive) so the durable-feed integration point
+// near the end of this file — after `out` is computed, changing nothing
+// about it — can fold the SAME ledger this block already builds, instead of
+// letting it be discarded when the block ends. See cli/reasoning-ledger.mjs's
+// own header for why: today this hyperlexicon is admitted (both
+// reader:engine and testimony:claude witnesses) only to compute this run's
+// own lint findings, then thrown away — nothing about it reaches eoreader7's
+// accumulated knowledge. Both stay null when `text` is absent, exactly as
+// every other name in the hoist above already does.
+let hl = null, hlLog = null;
+if (text) {
+  const { engineRelationsFor, getPosPrior } = await import("../native/the-fold/reader-bundle.js");
+  const { buildReferents } = await import("../native/the-fold/referents.js");
+  const { splitSentences } = await import("../native/adapters/text/spans.js");
+  const TL = await import("../native/kernel/task-log.js");
+  const cube = await import("../native/kernel/cube.js");
+  const { makeHyperlexicon } = await import("../native/organs/hyperlexicon.js");
+
+  // Holons from the text's own seams: each blank-line paragraph is /pN.
+  const paras = [];
+  { let at = 0; for (const block of text.split(/\n\s*\n/)) { const start = text.indexOf(block, at); paras.push({ start, end: start + block.length }); at = start + block.length; } }
+  const groundAt = (off) => { const i = paras.findIndex((p) => off >= p.start && off < p.end); return i >= 0 ? `/p${i + 1}` : "/"; };
+
+  const edges = engineRelationsFor([text]).edges ?? [];
+
+  // RECEIVED-VOCABULARY WIDENING (2026-09-23) — a second, disclosed way for
+  // a verb to enter the vocabulary, additive to the read above. See
+  // organs/received-vocabulary-relations.js's own header for the finding
+  // this answers: discoverRelationVocab (which the pass above runs through)
+  // requires a verb to sit next to a capitalised, non-sentence-initial
+  // surface before it is admitted at all — a register mismatch, not a
+  // comprehension gap, that leaves code-domain and short subject-first turn
+  // claims unread regardless of prose-comprehension quality. Only edges the
+  // primary pass did NOT already find are kept (never a competing second
+  // reading of the same fact), and every one is marked `received: true` so
+  // it can be told apart downstream — weaker-witnessed, disclosed, never
+  // silently folded into a fully surface-anchored read.
+  const { readWithReceivedVocabulary } = await import("../native/organs/received-vocabulary-relations.js");
+  const primaryKeys = new Set(edges.map((e) => `${e.end1}|${e.label}|${e.end2}`.toLowerCase()));
+  const receivedEdges = readWithReceivedVocabulary(text, { clauseAware: true, posPrior: getPosPrior() }).edges
+    .filter((e) => !primaryKeys.has(`${e.subject}|${e.verb}|${e.object}`.toLowerCase()))
+    .map((e) => ({
+      end1: e.subject, label: e.verb, end2: e.object, polarity: e.polarity, received: true,
+      spans: [{ start: e.subjectOffset ?? e.offset ?? 0, end: (e.objectOffset ?? e.offset ?? 0) + String(e.object ?? "").length, text: `${e.subject} ${e.verb} ${e.object}` }],
+    }));
+  const allEdges = [...edges, ...receivedEdges];
+  receivedVocabCount = receivedEdges.length;
+
+  read = allEdges.map((e, i) => claimFromTriple(e.end1, e.label, e.end2, { ground: groundAt(e.spans?.[0]?.start ?? 0), polarity: e.polarity === "-" ? "-" : "+", id: `read:${i}` }));
+
+  // Unread steps: a sentence no read edge — from either pass — touches.
+  const sents = splitSentences(text);
+  sentencesTotal = sents.length;
+  for (const { text: s, offset: start } of sents) {
+    const end = start + s.length;
+    const touched = allEdges.some((e) => (e.spans ?? []).some((sp) => sp.start < end && sp.end > start));
+    if (!touched) unread.push({ kind: "unread_step", severity: "warn", at: groundAt(start), detail: `the engine read nothing in "${s.slice(0, 90)}${s.length > 90 ? "…" : ""}" — anything this step asserts rests on the reasoner alone` });
+  }
+
+  const R = buildReferents(text);
+  resolveName = R.resolveName;
+
+  // The ledger: both voices, each with its witness and its spans. Real
+  // identity through the real seam (design part D) — see structuralIdentity
+  // above — rather than the fabricated/omitted identity this ledger used to
+  // run with; identityGiver names it for the join record.
+  const taskLog = { ...TL, cellOf: cube.cellOf, noteIdentity: structuralIdentity, identityGiver: "gfp-claim:caselessIdentity(subject/verb/object)" };
+  hl = makeHyperlexicon(taskLog);
+  hlLog = hl.createHyperlexicon({ frame: { reader: "cli/reason", giver: "eoreader7" } });
+  hlLog = hl.admit(hlLog, edges.map((e) => ({ subject: e.end1, verb: e.label, object: e.end2, polarity: e.polarity, spans: (e.spans ?? []).map((sp) => ({ at: `reasoning#${sp.start}-${sp.end}`, ref: "reasoning", text: sp.text })) })), { witness: "reader:engine" }).log;
+  // A separate, weaker witness for the received-vocabulary pass — disclosed
+  // as such, never merged into "reader:engine" (which means fully surface-
+  // anchored, measured discovery; this means a small declared vocabulary
+  // widened the read). See the comment where receivedEdges is built above.
+  if (receivedEdges.length) {
+    hlLog = hl.admit(hlLog, receivedEdges.map((e) => ({ subject: e.end1, verb: e.label, object: e.end2, polarity: e.polarity, spans: (e.spans ?? []).map((sp) => ({ at: `reasoning#${sp.start}-${sp.end}`, ref: "reasoning", text: sp.text })) })), { witness: "reader:engine+received-vocab" }).log;
+  }
+  hlLog = hl.admit(hlLog, declared.map((c, i) => ({ subject: c.roles.ARG0 ?? "", verb: c.rel, object: c.roles.ARG1 ?? "", spans: [{ at: `declared#${i}`, ref: "declared", text: input.claims[i].said ?? `${c.roles.ARG0} ${c.rel} ${c.roles.ARG1}` }] })), { witness: "testimony:claude" }).log;
+  const lr = lintLedger(hlLog, { door: hl, taskLog, strictness: "report", referentIndex: { referents: new Set(), resolve: R.resolveName, represent: R.represent } });
+  ledgerFindings = lr.findings.filter((f) => f.kind === "testimony_only");
+}
+
+// Identity: through the referent organ when there is text (prose), else as declared.
+const baseIdentity = input.identity === "caseless" ? caselessIdentity : exactIdentity;
+const identity = resolveName && input.identity !== "exact"
+  ? (s) => { const ids = resolveName(s); return ids.size ? [...ids].sort().join("|") : caselessIdentity(s); }
+  : baseIdentity;
+const claims = [...read, ...declared];
+const gfp = lintGfp(claims, { ...decl, identity, strictness: "strict" });
+// FALSIFICATION, BY DEFAULT (2026-09-23) — not just coherence. gfp above
+// checks whether these claims agree with EACH OTHER; it says nothing about
+// whether a force:"strict" claim was ever actually TESTED, or just never
+// contradicted because nothing else was in the room (THE-NULL-STATES.md's
+// meta-null). falsifyGfp builds the narrowest synthetic counterexample each
+// strict claim's own declared property licenses and checks whether lintGfp
+// would catch it. See organs/reasoning-lint.js's own header for the design;
+// this runs unconditionally, the same as gfp above — no flag gates it.
+const falsify = falsifyGfp(claims, { ...decl, identity, strictness: "strict" });
+
+// Corroboration: a declared claim the engine also READ is no longer testimony.
+const readKeys = new Set(read.map((c) => claimKey(c, { identity })));
+const corroborated = declared.filter((c) => readKeys.has(claimKey(c, { identity }))).length;
+
+// Equations: a claim a model states about a quantity, checked, never trusted.
+const secondsOf = (s) => String(s).replace(/\b(\d{1,2}):(\d{2}):(\d{2})\b/g, (_, h, m, x) => String(+h * 3600 + +m * 60 + +x));
+const verify = (inf) => {
+  try {
+    const v = limitedEvaluate(secondsOf(inf.statement));
+    if (typeof v !== "boolean") return { verdict: "unchecked", detail: `evaluates to ${v}, not a truth value` };
+    return v ? { verdict: "holds", detail: "mathjs" } : { verdict: "false", detail: `mathjs: ${secondsOf(inf.statement)} is false` };
+  } catch (e) { return { verdict: "unchecked", detail: e.message }; }
+};
+// Universals: a measured counterexample is a veto.
+const refute = (inf) => (inf.counterexamples?.length
+  ? { refuted: true, detail: `${inf.counterexamples.length} counterexample(s) in ${inf.tested ?? "?"} tested: ${inf.counterexamples[0]}` }
+  : { refuted: false, detail: `no counterexample in ${inf.tested ?? "?"} tested` });
+
+const infs = [
+  ...(input.inferences ?? []),
+  ...(input.universals ?? []).map((u) => ({ ...u, kind: "universal" })),
+  ...(input.equations ?? []).map((e) => ({ ...e, kind: "equation" })),
+];
+const inf = await lintInferences(infs, { licenses: new Set(input.licenses ?? []), verify, refute, strictness: "strict" });
+
+// Order claims: "a must precede b in every consistent order" holds exactly when
+// adding "b before a" to the declared prerequisites closes a cycle. The GFP
+// core's own cycle check decides it (linear, any size): a cycle is the proof;
+// no cycle, and a topological order of the extended prerequisites is the
+// counterexample, shown. (An exhaustive search over orders — the first form —
+// cannot finish past ~10 items; a satisfiability question needs one witness.)
+const orderFindings = [];
+if (input.order?.items?.length && input.order.claims?.length) {
+  const items = input.order.items;
+  const before = input.order.before ?? [];
+  const declared = new Set(items);
+  // Every id `before`/`claims` depends on must be in `items`, or `topo`'s
+  // indegree/adjacency maps (built from `items` alone) silently miscount an
+  // edge touching an undeclared id — an id that can never reach indegree 0
+  // by construction, not because the graph truly has no valid order. That
+  // used to surface as `topo` returning null on a perfectly acyclic graph
+  // and a crash at the `.join` below; it is now a disclosed finding instead.
+  const used = new Set();
+  for (const [a, b] of before) { used.add(a); used.add(b); }
+  for (const c of input.order.claims) { used.add(c.first); used.add(c.then); }
+  const undeclared = [...used].filter((id) => !declared.has(id));
+  if (undeclared.length) {
+    orderFindings.push({ kind: "order_item_undeclared", severity: "error", at: "/order", detail: `${undeclared.length} id(s) appear in "before" or a claim but were never declared in order.items: ${undeclared.join(", ")} — every id an order claim depends on must be in the declared universe, or no order (valid or counterexample) can be built over it` });
+  } else {
+    const topo = (edges) => {
+      const indeg = new Map(items.map((n) => [n, 0])), adj = new Map(items.map((n) => [n, []]));
+      for (const [a, b] of edges) { adj.get(a)?.push(b); indeg.set(b, (indeg.get(b) ?? 0) + 1); }
+      const ready = items.filter((n) => indeg.get(n) === 0), out = [];
+      while (ready.length) { const n = ready.shift(); out.push(n); for (const m of adj.get(n) ?? []) { indeg.set(m, indeg.get(m) - 1); if (indeg.get(m) === 0) ready.push(m); } }
+      return out.length === items.length ? out : null;
+    };
+    const precedes = (a, b, extra = {}) => gfpClaim({ ground: "/order", rel: "precedes", roles: { ARG0: a, ARG1: b }, ...extra });
+    const base = lintGfp(before.map(([a, b]) => precedes(a, b)), { acyclic: ["precedes"], strictness: "strict" });
+    if (base.findings.some((f) => f.kind === "circular")) {
+      orderFindings.push({ kind: "order_prerequisites_circular", severity: "error", at: "/order", detail: `the declared prerequisites themselves close a cycle — ${base.findings.find((f) => f.kind === "circular").detail}` });
+    } else {
+      for (const c of input.order.claims) {
+        // A reflexive claim ("X must precede X") is never a genuine order
+        // constraint — no prerequisite graph can make an item precede
+        // itself. Left unguarded, `precedes(c.then, c.first)` builds a bare
+        // self-loop, which the cycle check always reports as a cycle
+        // (correctly, in isolation), so every reflexive claim would read as
+        // "entailed" regardless of the declared prerequisites — a
+        // content-independent false positive, not a witnessed proof.
+        if (c.first === c.then) {
+          orderFindings.push({ kind: "order_reflexive_claim", severity: "error", at: c.ref ?? null, detail: `"${c.first} must precede ${c.then}" is not a coherent order constraint — an item cannot precede itself, so this is never entailed by any set of prerequisites (a bare self-loop is not a proof)` });
+          continue;
+        }
+        const withCounter = lintGfp([...before.map(([a, b]) => precedes(a, b)), precedes(c.then, c.first)], { acyclic: ["precedes"], strictness: "strict" });
+        const cycle = withCounter.findings.find((f) => f.kind === "circular");
+        if (cycle) {
+          orderFindings.push({ kind: "order_entailed", severity: "info", at: c.ref ?? null, detail: `"${c.first} must precede ${c.then}" holds in every consistent order: putting ${c.then} first closes a cycle (${cycle.detail.replace(/^.*returns to its start: /, "").replace(/ — .*$/, "")})` });
+        } else {
+          const seq = topo([...before, [c.then, c.first]]);
+          orderFindings.push({ kind: "order_not_entailed", severity: "error", at: c.ref ?? null, detail: `"${c.first} must precede ${c.then}" does not follow from the declared prerequisites — a consistent order puts ${c.then} first: ${seq.join(" → ")}` });
+        }
+      }
+    }
+  }
+}
+
+// Wilson's ants: falsification by edge-case MUTATION testing on strict
+// claims — a different axis than falsifyGfp above. falsifyGfp asks "would a
+// violation of what this claim DECLARES be caught"; ants asks "what happens
+// if this claim's own role VALUES are edge cases" (empty, null, self-
+// referential, recursive) — exploratory and fuzz-shaped, so it stays
+// opt-in (--ants) rather than joining falsifyGfp as a default.
+//
+// FIXED (2026-09-23): the mutated claim used to be tested ALONE
+// (`lintGfp([testClaim], ...)`) — a single claim, with no sibling to
+// disagree with, can almost never produce an error under this checker
+// (contradiction and cycle findings are both inherently pairwise/relational,
+// the same reason falsifyGfp above compares against the real set rather
+// than in isolation), so this rarely fired regardless of what the mutation
+// actually broke. It is now tested against the real declared claim set, by
+// error-count DELTA (falsifyGfp's own comparison, for the same reason: a
+// pre-existing unrelated error in `claims` must not be misattributed to the
+// mutation). A mutation that throws while being built is now a finding
+// too, not silently swallowed — this comment used to say the exception was
+// "also a probe result" while the catch block beneath it did nothing;
+// it now does what the comment always claimed.
+let antFindings = [];
+if (doAnts) {
+  const strict = declared.filter((c) => c.force === "strict");
+  const baseAntErrors = lintGfp(claims, { ...decl, identity, strictness: "strict" }).findings.filter((f) => f.severity === "error").length;
+  for (const claim of strict) {
+    const roles = Object.values(claim.roles ?? {}).filter(Boolean);
+    if (roles.length >= 2) {
+      const antTests = [
+        { variant: "empty_string", roles: roles.map(() => "") },
+        { variant: "null_role", roles: roles.map((r, i) => i === 0 ? null : r) },
+        { variant: "recursive", roles: roles.map((r) => `${r}(${r})`) },
+        { variant: "self_ref", roles: roles.map((r) => r === roles[0] ? `${r} = ${r}` : r) },
+      ];
+      for (const test of antTests) {
+        try {
+          const testClaim = gfpClaim({ ...claim, roles: Object.fromEntries(Object.keys(claim.roles ?? {}).map((k, i) => [k, test.roles[i]])), id: `ant_${claim.id}_${test.variant}`, ground: claim.ground });
+          const testErrors = lintGfp([...claims, testClaim], { ...decl, identity, strictness: "strict" }).findings.filter((f) => f.severity === "error").length;
+          if (testErrors > baseAntErrors) {
+            antFindings.push({ kind: "ant_falsified", severity: "info", at: claim.ground, detail: `ant test "${test.variant}" falsifies: ${claim.roles.ARG0} ${claim.rel} ${claim.roles.ARG1}`, variant: test.variant });
+          }
+        } catch (e) {
+          antFindings.push({ kind: "ant_probe_error", severity: "info", at: claim.ground, detail: `ant test "${test.variant}" on "${claim.rel}" could not even be built: ${e.message} — a probe result too, disclosed rather than swallowed`, variant: test.variant });
+        }
+      }
+    }
+  }
+}
+
+const findings = [...gfp.findings, ...falsify.findings, ...inf.findings, ...orderFindings, ...unread, ...ledgerFindings, ...antFindings, ...groundFindings, ...guardFindings];
+const errors = findings.filter((f) => f.severity === "error");
+const vouched = text ? { sentences: sentencesTotal, read: sentencesTotal - unread.length, edges: read.length, receivedVocabEdges: receivedVocabCount, declared: declared.length, corroborated } : null;
+// The grounds this run checked — the hooks read them to know which files the
+// reasoning covered (cli/claude-code-state.mjs coverageOf).
+const grounds = [...new Set(declared.map((c) => c.ground))];
+// declaredClaims: the input's own claims, verbatim, no transformation — the
+// durable-log content Part B of the reason-claims design (2026-09-22) reads
+// back out of a Bash tool_response. Only ever emitted by the asJson branch
+// below (JSON.stringify(out, ...)); --compact and plain-text mode print their
+// own separate formatted output and never touch this field.
+// sources, stripped of `excerpt`: this is the --json payload a caller (this
+// process's own invoker, and claude-code-ledger.mjs reading the same Bash
+// tool_response) receives, so it is held to the same rule as the console
+// output below — structure only, never a copied verbatim byte.
+const sourcesOut = sources.map(({ excerpt, ...structural }, i) => {
+  const pc = polarityChecks[i];
+  return pc?.checked ? { ...structural, guard: { reachable: pc.reachable, negatedVerdict: pc.negatedVerdict, affirmedVerdict: pc.affirmedVerdict } } : structural;
+});
+// A run the engine read nothing in is not OK: "unread", never a clean pass.
+// Errors dominate (false); with no errors but nothing read, the verdict is
+// the third state "unread" — callers (and the exit code below) must tell it
+// apart from a vouched pass. No text at all (vouched null) keeps the boolean.
+const ok = errors.length === 0 ? (vouched && vouched.read === 0 ? "unread" : true) : false;
+const out = { ok, errors: errors.length, grounds, findings, vouched, gfp: { counts: gfp.counts, unjudged: gfp.unjudged, apart: gfp.apart, holons: gfp.holons, basis: gfp.basis }, falsify: falsify.counts, inference: inf.counts, declaredClaims: input.claims ?? [], sources: sourcesOut };
+
+// DURABLE FEED (2026-09-22; widened 2026-09-22 by the reason-claims design).
+// Two independent things get appended to eoreader7's own shared ledger
+// (documents/eoreader7-reasoning:1.jsonl, cli/reasoning-ledger.mjs), neither
+// gating the other:
+//
+//   THE STRUCTURED CLAIMS (design part A/C — THE ROOT-CAUSE FIX): every
+//   declared claim this run made, as-is (ground/rel/roles/said), whenever
+//   there is at least one — regardless of whether `text` was given. Before
+//   this widening the durable feed fired only `if (text && declared.length)`,
+//   so a bare `node cli/reason.mjs spec.json --json` run with claims but no
+//   prose to read — T1's own shape — never reached the ledger at all; the
+//   claims a caller most wants remembered (short, structured, GFP-checked)
+//   were exactly the ones this gate excluded. Read back later, AT READ TIME
+//   and SCOPED, by cli/claude-code-context.mjs (design part C/D) — this file
+//   only ever appends, never folds across runs.
+//
+//   THE FOLDED HYPERLEXICON NOTES (unchanged, additive as of the original
+//   2026-09-22 wiring): only when this run was given `text` to read, so
+//   `hl`/`hlLog` exist — both reader:engine and testimony:claude witnesses,
+//   neither dropped, folded WITHIN this one run and appended as a separate
+//   record of what this run's own reading and declaring agreed on.
+//
+// This runs regardless of `out.ok` — a failed run's reasoning is still real
+// reasoning worth keeping — and it never touches `out` itself (computed
+// above already) or throws past this file: a write failure here must never
+// change --json/--compact/plain output or the exit code below. See
+// cli/reasoning-ledger.mjs for what gets written and where, and
+// cli/claude-code-ledger.mjs for the OTHER, separate per-session audit trail
+// (never the claims store as of this widening — see its own header) this is
+// deliberately additive beside.
+if (declared.length || (text && hl && hlLog)) {
+  try {
+    const { appendReasoningLedger } = await import("./reasoning-ledger.mjs");
+    // fingerprint/source (2026-09-25, mechanical-shortcuts first slice):
+    // fingerprint is a structural digest over the ALREADY-BUILT gfpClaim
+    // object (c) and this run's own `decl` table — see
+    // native/organs/claim-deriver.js's own header for exactly what it does
+    // and does not encode. source reads back the `derivedBy` tag
+    // native/organs/claim-deriver.js's deriveClaimSpec stamps onto a
+    // mechanically-constructed claim; an ordinary hand-authored input
+    // claim carries no such field, so it defaults to "hand-authored".
+    // Telemetry only in this slice — nothing downstream reads either field
+    // to change any gate's behavior yet.
+    const declaredClaimsOut = declared.map((c, i) => ({
+      ground: c.ground, rel: c.rel, roles: c.roles,
+      said: input.claims[i]?.said ?? input.claims[i]?.text ?? null,
+      fingerprint: fingerprintOf(c, decl),
+      source: input.claims[i]?.derivedBy ? String(input.claims[i].derivedBy) : "hand-authored",
+      // polarity + the citation verdict `sources` already earned above
+      // (2026-09-25): the read-time fold (cli/claude-code-context.mjs) needs
+      // both, to tell a retraction from a restatement and a grounded run
+      // from an ungrounded one.
+      polarity: c.polarity,
+      verdict: sources[i]?.verdict ?? null,
+    }));
+    appendReasoningLedger({ hl, log: hlLog, declaredClaims: declaredClaimsOut, session: sessionKey, runAt: new Date().toISOString(), cwd: process.cwd(), grounds, ok: out.ok, errors: out.errors });
+  } catch { /* additive only; the verdict and every field of `out` above stand without it */ }
+}
+
+// The marker a hook reads: reasoning was handed to the engine this turn.
+try {
+  const dir = path.join(os.homedir(), ".claude", "eo-reason");
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, "last.json"), JSON.stringify({ at: new Date().toISOString(), cwd: process.cwd(), ok: out.ok, errors: out.errors, findings: findings.length, claims: claims.length, inferences: infs.length, vouched }, null, 1));
+} catch { /* the marker is a convenience; the verdict above stands without it */ }
+
+// THE REASONING RECORD: claims in real GFP notation + findings + grounding
+// verdicts, written straight to a file — never printed, never held only in
+// this process's stdout — so it is reviewable directly (Claude Code's own
+// show_pane, a person's editor) rather than through whatever a caller might
+// paraphrase it as. See native/organs/reasoning-record.js's own header.
+const recordPath = writeReasoningRecord({ claims: declared, findings, sources: sourcesOut });
+const cited = sources.filter((s) => s.verdict === "cited");
+const citationLine = (s) => `    ${s.verdict === "cited" ? "✓ cited" : s.verdict === "event" ? "✓ event" : s.verdict === "unattributed" ? "? unattributed" : s.verdict === "missing" ? "✗ missing" : "· " + s.verdict}  ${s.ground}${s.file ? `  →  ${terminalLink(`${s.file}:${s.line ?? "?"}`, s.url)}` : s.verdict === "event" ? `  →  ${s.hash} (${s.files?.length ?? 0} file(s) in ${s.repo})` : ""}`;
+// How many strict claims falsifyGfp had anything to say about, and what it
+// found — printed in both console modes so "OK" never reads as "untested".
+const strictCount = declared.filter((c) => c.force === "strict" && c.polarity === "+").length;
+const falsifyLine = strictCount
+  ? `  strict claims: ${falsify.counts.strict_guard_reachable ?? 0}/${strictCount} confirmed reachable by a falsification attempt` +
+    ((falsify.counts.strict_guard_unreachable ?? 0) + (falsify.counts.strict_guard_untested ?? 0) > 0
+      ? ` (${(falsify.counts.strict_guard_unreachable ?? 0)} unreachable, ${(falsify.counts.strict_guard_untested ?? 0)} untested — pass --json or see findings above)`
+      : "")
+  : null;
+
+if (asJson) console.log(JSON.stringify(out, null, 1));
+else if (compact) {
+  const header = `eoreader7 reason · ${claims.length} claim(s) · ${infs.length} inference(s) · ${input.order?.claims?.length ?? 0} order claim(s) → ${out.ok === true ? "✓ OK" : out.ok === "unread" ? "○ UNREAD (the engine read nothing — not a pass)" : `✗ ${errors.length} ERROR(S)`}`;
+  console.log(header);
+  if (!out.ok) {
+    for (const f of errors) console.log(`  ✗ ${f.kind}${f.at ? ` @ ${f.at}` : ""}: ${f.detail.split("\n")[0]}`);
+  }
+  if (falsifyLine) console.log(falsifyLine);
+  if (antFindings.length) console.log(`  ⚠ ${antFindings.length} falsification(s) from ants`);
+  if (sources.length) console.log(`  sources: ${cited.length}/${sources.length} cited — open a file:line above, or the record, to see the real bytes (never printed here)`);
+  console.log(`  grounds: ${JSON.stringify(grounds)}`);
+  if (recordPath) console.log(`  reasoning record (real GFP notation, never prose): ${recordPath}`);
+  console.log(`  (details hidden; pass --json for full report)`);
+} else {
+  console.log(`eoreader7 reason · ${claims.length} claim(s) · ${infs.length} inference(s) · ${input.order?.claims?.length ?? 0} order claim(s) → ${out.ok === true ? "OK" : out.ok === "unread" ? "UNREAD (the engine read nothing — not a pass)" : `${errors.length} ERROR(S)`}`);
+  if (vouched) console.log(`  engine vouches for ${vouched.read}/${vouched.sentences} sentence(s) it could read · ${vouched.edges} relation(s) read${vouched.receivedVocabEdges ? ` (${vouched.receivedVocabEdges} via received-vocabulary, weaker witness)` : ""} · ${vouched.corroborated}/${vouched.declared} declared claim(s) independently read`);
+  for (const f of findings) console.log(`  [${f.severity}] ${f.kind}${f.at ? ` @ ${f.at}` : ""}\n      ${f.detail}`);
+  if (gfp.unjudged) console.log(`  (${gfp.unjudged} several-valued pair(s) of undeclared relations counted, not judged)`);
+  if (gfp.apart) console.log(`  (${gfp.apart} pair(s) in sibling holons held apart)`);
+  if (falsifyLine) console.log(falsifyLine);
+  console.log(`  grounds: ${JSON.stringify(grounds)}`);
+  if (sources.length) {
+    console.log(`  sources (${cited.length}/${sources.length} cited — the real bytes live only at the address; never copied here):`);
+    for (const s of sources) console.log(citationLine(s));
+  }
+  if (recordPath) console.log(`  reasoning record (claims in real GFP case-marked notation, findings, source verdicts — never prose): ${recordPath}`);
+}
+// exitCode, not exit() (2026-09-25, found by adversarial testing): a large
+// --json payload's console.log write to a piped stdout can still be
+// in-flight (Node's pipe writes are not guaranteed synchronous) when
+// process.exit() runs, which kills the process immediately and can
+// silently truncate the output — reproduced live, a 200-claim run cut off
+// mid-string at exactly 65532 bytes every time with exit(), never with
+// exitCode. Letting Node exit naturally once the event loop drains (after
+// every pending write flushes) preserves the same exit-code semantics
+// every caller already reads (0 on ok, 1 on failure) without the risk.
+process.exitCode = out.ok === true ? 0 : 1;

@@ -1,0 +1,28 @@
+{
+  "name": "eoreader7",
+  "version": "1.0.0",
+  "description": "EOReader 7 now has a native canonical recursive-reading kernel.",
+  "main": "kernel.js",
+  "scripts": {
+    "test": "node native/scripts/check-no-legacy-submodule.mjs && node --test native/the-fold/essay-fold-falsify.test.mjs native/the-fold/pipeline-run-falsify.test.mjs native/the-fold/parameter-induction-falsify.test.mjs native/the-fold/referents-falsify.test.mjs native/the-fold/ground-replay-falsify.test.mjs native/organs/web.test.mjs native/tests/entity-profile.test.js native/conformance/block-profile.test.mjs",
+    "test:code": "node --test native/the-fold/code-loop.test.mjs native/the-fold/void-loop.test.mjs native/the-fold/void-spec-falsify.test.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scores-patch-points/khora.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/scores-patch-points/khora/issues"
+  },
+  "homepage": "https://github.com/scores-patch-points/khora#readme",
+  "dependencies": {
+    "mathjs": "^15.2.0"
+  },
+  "devDependencies": {
+    "fzstd": "^0.1.1"
+  }
+}
