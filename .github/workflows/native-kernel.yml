@@ -1,0 +1,63 @@
+name: Native v7 kernel parity
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  native-kernel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          # Full history: tests/ground-cite.test.js cites a real, pinned
+          # commit (bb97e4b, an ancestor of main) through `git cat-file` /
+          # `git show`; checkout's default depth-1 clone does not hold it.
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install root dependencies for the real reasoning gate
+        run: npm ci
+      - name: Install native adapter dependencies
+        working-directory: native
+        run: npm ci
+      # pyodide is a declared, lock-pinned dependency of native/eval/the-fold
+      # (package.json + package-lock.json). postprocess.mjs::getPyodide
+      # resolves it by file URL from native/eval/the-fold/node_modules, and
+      # the Saltzer/Popper archons (organs/salzter.js, organs/blindspot.js)
+      # and the reasoning-lint oracle (eval/the-fold/lib/pyodide-oracle.mjs)
+      # read Python through it. Without this install those scans report
+      # "pyodide unavailable" and their conformance tests fail.
+      - name: Install native/eval/the-fold's declared pyodide runtime
+        working-directory: native/eval/the-fold
+        run: npm ci
+      # The notebook, structure-swarm and holodeck end-to-end tests run real
+      # python3 (organs/er7py, the notebook cells) with numpy and matplotlib.
+      # The runner's own python has neither, so those tests failed with
+      # ModuleNotFoundError. Versions and the measurement: native/requirements-ci.txt.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install the Python packages the native tests import
+        run: python -m pip install -r native/requirements-ci.txt
+      # The screen pipeline (native/conformance/screen-pipeline.test.mjs) decodes screenshots with ffmpeg and reads their
+      # text with tesseract. Without them those tests SKIP with a named reason — they do not pass — so the runner gets both.
+      - name: Install the local binaries the screen pipeline reads with
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg tesseract-ocr
+      - name: Run native Fold parity gate
+        working-directory: native
+        run: npm test
+      - name: Run organ gate
+        working-directory: native
+        run: npm run test:organs
+      - name: Run Heimdall gate
+        working-directory: native
+        run: npm run test:heimdall
+      - name: Run root acceptance gate
+        run: npm test
+      - name: Run coding loop and void gates
+        run: npm run test:code

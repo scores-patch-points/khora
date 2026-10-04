@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Podcast List</title>
+  <style>
+body {
+  margin: 0;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color-scheme: dark;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+h1 {
+  
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 640px;
+  padding: 24px 16px;
+}
+
+.episode {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: 4px;
+  border-radius: 8px;
+  background-color: #191919;
+}
+
+.episode img {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  flex-shrink: 0;
+  margin-right: 16px;
+}
+
+.episode h3 {
+  width: 100%;
+  margin-bottom: 4px;
+  
+}
+
+.episode p {
+  
+}
+
+.ethos-badge {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #1DB954;
+  margin-left: 8px;
+}
+
+#now-playing {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #191919;
+  padding: 16px;
+}
+
+#now-playing img {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  background-color: #191919;
+  margin-bottom: 8px;
+}
+
+#now-playing-title {
+  margin-bottom: 8px;
+}
+
+#now-playing audio {
+  
+}
+
+.container input[type="text"], 
+.container button {
+  
+}
+body, html { background-color: #0d0f13; color: #ffffff; }
+#now-playing[hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Podcast List</h1>
+    <input type="text" id="feed-url" placeholder="Enter feed URL" />
+    <button onclick="subscribe()">Subscribe</button>
+  </div>
+  <div id="episodes"></div>
+  <div id="now-playing" class="now-playing" hidden>
+    <img id="now-playing-art" alt="">
+    <div class="now-playing-info">
+      <div id="now-playing-title"></div>
+      <audio id="now-playing-audio" controls></audio>
+    </div>
+  </div>
+  <script>
+    function playEpisode(url, title, art) {
+      const bar = document.getElementById("now-playing");
+      const audio = document.getElementById("now-playing-audio");
+      const titleEl = document.getElementById("now-playing-title");
+      const artEl = document.getElementById("now-playing-art");
+      audio.src = url;
+      titleEl.textContent = title;
+      if (art) artEl.src = art;
+      bar.hidden = false;
+      audio.play();
+    }
+
+    // CLICK-TO-PLAY IS FIXED SKELETON TOO, NOT LEFT TO renderEpisodes —
+    // found live this pass: asking the model to wire an inline
+    // onclick="playEpisode(...)" string risked an unescaped-interpolation
+    // vulnerability (a real gemma2:2b round shipped exactly that,
+    // correctly caught by this file's own coherenceGate lint); asking it
+    // to instead call addEventListener itself, in the SAME prompt turn,
+    // measurably cost the wiring entirely — the very next round's
+    // renderEpisodes rendered a clean, fully escaped row with no play
+    // wiring at all. One delegated listener here removes BOTH hazards:
+    // renderEpisodes only ever needs to set three plain DOM properties
+    // (data-audio/data-title/data-art), which — like .textContent — is a
+    // property assignment with no escaping question to get right, ever.
+    document.getElementById("episodes").addEventListener("click", (e) => {
+      const el = e.target.closest("[data-audio]");
+      if (el) playEpisode(el.dataset.audio, el.dataset.title, el.dataset.art);
+    });
+
+function escapeHtml(str) {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+function renderEpisodes(episodes) {
+  const episodesContainer = document.getElementById("episodes");
+  episodesContainer.innerHTML = ""; // Clear the container
+
+  episodes.forEach((episode) => {
+    const row = document.createElement("div");
+    row.className = "episode"; // Use the exact class name
+    row.dataset.audio = episode.audioUrl;
+    row.dataset.title = episode.title;
+    row.dataset.art = episode.imageUrl;
+
+    const img = document.createElement("img");
+    img.src = episode.imageUrl;
+    img.alt = ""; // Decorative image, not a text alternative
+
+    row.appendChild(img);
+
+    const title = document.createElement("h3");
+    title.textContent = episode.title;
+
+    const pubDate = document.createElement("p");
+    pubDate.textContent = "Published: " + episode.pubDate;
+
+    const ethosBadge = document.createElement("span");
+    ethosBadge.className = "ethos-badge";
+    ethosBadge.style.backgroundColor = episode.ethos === "pass" ? "green" : episode.ethos === "conflict" ? "red" : "gray";
+
+    row.appendChild(title);
+    row.appendChild(pubDate);
+    row.appendChild(ethosBadge);
+    episodesContainer.appendChild(row);
+  });
+}
+
+function subscribe() {
+  const feedUrl = document.getElementById("feed-url").value;
+  fetch(`/api/subscribe?url=${encodeURIComponent(feedUrl)}`)
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+    })
+    .then(data => {
+      if (data.show) {
+        renderEpisodes(data.episodes);
+      } else {
+        // Show an error message
+        document.getElementById("episodes").textContent = "Error: Unable to subscribe to the feed.";
+      }
+    })
+    .catch(error => {
+      console.error("Error fetching data:", error);
+      document.getElementById("episodes").textContent = "Error: Unable to subscribe to the feed.";
+    });
+}
+  </script>
+</body>
+</html>

@@ -1,0 +1,635 @@
+// proxy-api.mjs — pure wire-shape module for the EOReader7 proxy.
+// No fetch, no node:*, no engine imports.
+
+export const MODEL_PREFIX = "fold:";
+// Legacy prefixes still accepted on the wire so existing callers (er7:...) keep
+// working. The canonical prefix emitted on the roster is MODEL_PREFIX.
+export const LEGACY_MODEL_PREFIXES = ["er7:"];
+export const MODEL_PREFIXES = [MODEL_PREFIX, ...LEGACY_MODEL_PREFIXES];
+export const DISCOURSE_MAX_CHARS = 300;
+
+export function prefixModel(realName) {
+  return `${MODEL_PREFIX}${realName}`;
+}
+
+export function stripModelPrefix(modelId) {
+  if (!modelId || typeof modelId !== "string") return null;
+  for (const prefix of MODEL_PREFIXES) {
+    if (modelId.startsWith(prefix)) return modelId.slice(prefix.length);
+  }
+  return null;
+}
+
+export function turnFromMessages(messages) {
+  const list = Array.isArray(messages) ? messages : [];
+  if (!list.length) return { error: "messages must be a non-empty array" };
+  const last = list[list.length - 1];
+  if (!last || last.role !== "user")
+    return { error: 'the last message must have role "user" — eoreader7 answers a question, it does not continue an assistant turn' };
+  const task = String(last.content ?? "").trim();
+  if (!task) return { error: "the last user message has no content" };
+  const rest = list.slice(0, -1);
+  const chatHistory = rest
+    .filter((m) => m?.role === "user" || m?.role === "assistant")
+    .map((m) => ({ role: m.role, content: String(m.content ?? "") }));
+  const discourse = rest
+    .filter((m) => m?.role === "system")
+    .map((m) => String(m.content ?? ""))
+    .join(" ")
+    .trim()
+    .slice(0, DISCOURSE_MAX_CHARS);
+  const droppedRoles = [...new Set(rest.filter((m) => !["user", "assistant", "system"].includes(m?.role)).map((m) => m.role))];
+  return { task, chatHistory, discourse, droppedRoles };
+}
+
+export function parseProxyRequest(body) {
+  const model = stripModelPrefix(body?.model);
+  if (!model)
+    return {
+      error: `model must be a fold-prefixed id, e.g. "${prefixModel("llama3.1:8b")}" — got ${JSON.stringify(body?.model ?? null)}`,
+    };
+  const turn = turnFromMessages(body?.messages);
+  if (turn.error) return { error: turn.error };
+  const stream = Boolean(body?.stream);
+  // Off by default: the reading pipeline (surf, fold, resolutions,
+  // hyperlexicon) still runs — it just does its work UNCONSCIOUSLY, the
+  // model gets the grounded prompt and answers, no narration in between.
+  // Pass discloseThinking: true to see it (humanized — see humanizeNote,
+  // never a raw JSON dump).
+  const discloseThinking = body?.discloseThinking === true;
+  // Per-turn Kelsen override (degrees in Kelsen, K°): how tightly the
+  // composition is bound to the material's ground. Normally driven by the
+  // target's shape (see kelsenFromShape in the runner); a caller may pass
+  // `kelsen` explicitly to force a binding (high = literal/bound, low =
+  // impressionistic/free). null = let the shape decide.
+  const kelsen = Number.isFinite(Number(body?.kelsen)) ? Number(body?.kelsen) : null;
+  // MODE: the answer's grain. "auto" (default) is a normal conversation —
+  // every answer is a void defined and satisfied at its natural size, and
+  // long-form is entered only when the ask calls for it. Long-form has
+  // flavors: "long" is a single answer that goes further than chat
+  // provides; "projection" (aliases "compose"/"artifact"/"origami") is an
+  // ARTIFACT — content built and revised on an append-only ledger, its live
+  // projection readable in a surface (the Fold), resumable. "chat" forces
+  // the single-answer surface. Long-form is a MODE the proxy enters, never
+  // its default identity.
+  const MODES = ["chat", "long", "projection", "auto"];
+  const normalizeMode = (m) => {
+    if (m === "compose" || m === "artifact" || m === "origami") return "projection";
+    return MODES.includes(m) ? m : "auto";
+  };
+  const mode = normalizeMode(body?.mode);
+  // BROWSER-POSTED MATERIAL — attachments ride the request body so a client
+  // with no disk path (the-fold's pasted/dropped sources) can still hand the
+  // reading real bytes. Normalized to {name, text}; a name is the source's
+  // display identity, never trusted as a path.
+  const attachments = Array.isArray(body?.attachments)
+    ? body.attachments.map((a, i) => ({ name: String(a?.name ?? `attachment-${i + 1}`).slice(0, 120), text: String(a?.text ?? "") })).filter((a) => a.text.trim())
+    : [];
+  return { model, ...turn, stream, discloseThinking, kelsen, mode, attachments };
+}
+
+// ── ANTHROPIC MESSAGES API (Claude Code speaks this; the proxy is openai/
+// ollama-shaped, so the wire is translated here and nowhere else) ──────────
+
+export function flattenAnthropicContent(content) {
+  if (typeof content === "string") return content;
+  if (!Array.isArray(content)) return "";
+  return content
+    .map((b) => {
+      if (!b || typeof b !== "object") return "";
+      switch (b.type) {
+        case "text":
+          return b.text ?? "";
+        case "thinking":
+          return b.thinking ?? "";
+        case "tool_use":
+          return `[tool_use id=${b.id ?? "?"} name=${b.name ?? "?"} input=${JSON.stringify(b.input ?? {})}]`;
+        case "tool_result": {
+          const c = b.content;
+          const txt = Array.isArray(c)
+            ? c.map((x) => (typeof x === "string" ? x : x?.text ?? "")).join(" ")
+            : String(c ?? "");
+          return `[tool_result for ${b.tool_use_id ?? "?"}: ${txt}]`;
+        }
+        default:
+          return "";
+      }
+    })
+    .join("\n");
+}
+
+export function parseAnthropicRequest(body) {
+  const model = stripModelPrefix(body?.model);
+  if (!model)
+    return {
+      error: `model must be a fold-prefixed id, e.g. "${prefixModel("llama3.1:8b")}" — got ${JSON.stringify(body?.model ?? null)}`,
+    };
+  const messages = Array.isArray(body?.messages) ? body.messages : [];
+  if (!messages.length) return { error: "messages must be a non-empty array" };
+  const last = messages[messages.length - 1];
+  if (!last || last.role !== "user")
+    return { error: 'the last message must have role "user" — eoreader7 answers a question, it does not continue an assistant turn' };
+  const task = flattenAnthropicContent(last.content).trim();
+  if (!task) return { error: "the last user message has no content" };
+  const rest = messages.slice(0, -1);
+  const chatHistory = rest
+    .filter((m) => m?.role === "user" || m?.role === "assistant")
+    .map((m) => ({ role: m.role, content: flattenAnthropicContent(m.content) }));
+  const system = (Array.isArray(body?.system) ? body.system.map((b) => (typeof b === "string" ? b : b?.text ?? "")).join(" ") : String(body?.system ?? ""))
+    .trim()
+    .slice(0, DISCOURSE_MAX_CHARS);
+  const stream = Boolean(body?.stream);
+  const discloseThinking = body?.discloseThinking === true;
+  const kelsen = Number.isFinite(Number(body?.kelsen)) ? Number(body?.kelsen) : null;
+  const maxTokens = Number.isFinite(Number(body?.max_tokens)) ? Number(body?.max_tokens) : null;
+  return { model, task, chatHistory, discourse: system, stream, discloseThinking, kelsen, maxTokens,
+    attachments: Array.isArray(body?.attachments)
+      ? body.attachments.map((a, i) => ({ name: String(a?.name ?? `attachment-${i + 1}`).slice(0, 120), text: String(a?.text ?? "") })).filter((a) => a.text.trim())
+      : [] };
+}
+
+export function anthropicCountTokensResponse(chars) {
+  return { input_tokens: Math.max(1, Math.ceil(chars / 4)), output_tokens: 0 };
+}
+
+export function anthropicMessageResponse({ id, model, text, usage }) {
+  return {
+    id,
+    type: "message",
+    role: "assistant",
+    model,
+    content: [{ type: "text", text }],
+    stop_reason: "end_turn",
+    stop_sequence: null,
+    usage: {
+      input_tokens: usage?.promptTokens ?? 0,
+      output_tokens: usage?.completionTokens ?? 0,
+    },
+  };
+}
+
+export function anthropicStreamLine(type, data) {
+  return `event: ${type}\ndata: ${JSON.stringify(data)}\n\n`;
+}
+
+export function anthropicStreamStart({ id, model, inputTokens = 0 }) {
+  return anthropicStreamLine("message_start", {
+    type: "message_start",
+    message: {
+      id, type: "message", role: "assistant", model,
+      content: [], stop_reason: null, stop_sequence: null,
+      usage: { input_tokens: inputTokens, output_tokens: 0 },
+    },
+  });
+}
+
+export function anthropicContentBlockStart(index = 0) {
+  return anthropicStreamLine("content_block_start", {
+    type: "content_block_start", index,
+    content_block: { type: "text", text: "" },
+  });
+}
+
+export function anthropicContentBlockDelta(index, text) {
+  return anthropicStreamLine("content_block_delta", {
+    type: "content_block_delta", index,
+    delta: { type: "text_delta", text },
+  });
+}
+
+export function anthropicContentBlockStop(index) {
+  return anthropicStreamLine("content_block_stop", { type: "content_block_stop", index });
+}
+
+export function anthropicMessageDelta({ outputTokens = 0 } = {}) {
+  return anthropicStreamLine("message_delta", {
+    type: "message_delta",
+    delta: { stop_reason: "end_turn", stop_sequence: null },
+    usage: { output_tokens: outputTokens },
+  });
+}
+
+export function anthropicMessageStop() {
+  return anthropicStreamLine("message_stop", { type: "message_stop" });
+}
+
+export function toOpenAIModelList(realNames, { createdAt = 0 } = {}) {
+  return {
+    object: "list",
+    data: realNames.map((name) => ({ id: prefixModel(name), object: "model", created: createdAt, owned_by: "eoreader7" })),
+  };
+}
+
+export function reprefixOllamaTags(realTagsJson) {
+  const models = Array.isArray(realTagsJson?.models) ? realTagsJson.models : [];
+  return {
+    models: models.map((m) => ({ ...m, name: prefixModel(m.name ?? m.model ?? ""), model: prefixModel(m.model ?? m.name ?? "") })),
+  };
+}
+
+// humanizeNote — turns one internal reading-pipeline note ({move, ...})
+// into a plain-English line, or null to suppress it as noise.
+// This is what a client renders as "reasoning" — prose, never a JSON dump.
+// `move` names the actual reasoning step (searching, reading, surfacing,
+// composing, resolving, answering) — no artificial span/kind taxonomy.
+export function humanizeNote(note) {
+  const { move } = note ?? {};
+  switch (move) {
+    case "upstream_down":
+      return note.target && String(note.target).includes("opencode")
+        ? `The opencode server isn't responding at ${note.target} — check that 'opencode serve' is running.`
+        : `Ollama isn't responding at ${note.target}.`;
+    case "opencode_lane":
+      return `Answering via the opencode server (${note.provider}/${note.model}) — outside the local box's queue.`;
+    case "anthropic_lane":
+      return `Answering via Anthropic's own API (${note.provider}/${note.model}) — outside the local box's queue, fast-passed past Heimdall's line.`;
+    case "anthropic_usage": {
+      const parts = [`${note.output ?? 0} out / ${note.input ?? 0} in`];
+      if (note.cacheRead) parts.push(`${note.cacheRead} from cache`);
+      if (note.cacheWrite) parts.push(`${note.cacheWrite} cache-written`);
+      return `Anthropic usage: ${parts.join(", ")}.`;
+    }
+    case "opencode_usage": {
+      const parts = [`${note.output ?? 0} out / ${note.input ?? 0} in`];
+      if (note.cacheRead) parts.push(`${note.cacheRead} from cache`);
+      if (note.cost != null) parts.push(`cost ${note.cost}`);
+      return `Opencode usage: ${parts.join(", ")}.`;
+    }
+    case "mouth": {
+      // Heimdall's mouth (heimdall.mjs mouthFor): a warm on-device model
+      // answered because the asked one could not as soon — said once per turn.
+      const where = note.tier === "device" ? "on your phone" : "on this device";
+      const why = note.reason === "asked_model_cold" ? "wasn't loaded" : note.reason === "asked_model_past_promise" ? "was busy past the promised wait" : "couldn't answer as soon";
+      return `Answering with ${note.servedBy} ${where}, because ${note.asked} ${why}.`;
+    }
+    case "model_missing":
+      return `Model "${note.model}" isn't pulled — available: ${(note.available ?? []).join(", ") || "(none)"}.`;
+    case "reader_note":
+      return note.description ? `Reader note: ${note.description}${note.result ? ` — ${note.result}` : ""}` : null;
+    case "scanning":
+      return `Scanning workspace: ${note.root}`;
+    case "files_found":
+      return `Found ${note.count} file(s), ${note.chars.toLocaleString()} chars.`;
+    case "admitted":
+      return `Admitted ${note.files} file(s) into the reading.`;
+    case "conversation_folded":
+      return `Folded ${note.chars} new char(s) of the conversation into the reading.`;
+    case "read_error":
+      return `Couldn't read ${note.rel}: ${note.error}`;
+    case "reading":
+      return `Reading: ${note.count} encounter(s) across ${note.chars} chars.`;
+    case "giant_code_admitted":
+      return `Admitted a bounded slice of the giant code file ${note.rel}: ${(note.scannedChars ?? 0).toLocaleString()} of ${(note.bytes ?? 0).toLocaleString()} bytes (${(note.skippedChars ?? 0).toLocaleString()} skipped, disclosed).`;
+    case "open_question":
+      return note.description ? `Open question noticed while reading: ${note.description}` : null;
+    case "referent_index":
+      return `Referent index: ${note.referents} referent(s) from ${note.encounters} encounter(s) (${note.ms}ms).`;
+    case "resolutions_failed":
+      return `Resolutions failed: ${note.error}`;
+    case "resolutions":
+      return `Resolved the discourse at level ${note.level} (${note.ms}ms); active referents: ${note.active?.length ?? 0}.`;
+    case "surfaced":
+      return note.operator === "FIELD"
+        ? `Recalled ${note.fan} passage(s) by resemblance (the field; above its null band).`
+        : note.operator === "CONTENT+FIELD"
+          ? `Surfaced via the address ladder + the field's resemblance (${note.fan} total, ${note.boost} by resemblance).`
+          : `Surfaced material via ${note.operator} (${note.fan} candidate window(s)).`;
+    case "void": {
+      // A5: the void note is NOT one shape — a caller may attach the
+      // measured subtype ({kind, power, verdict}) and it must read
+      // distinctly in plain language. No thresholds invented here: the
+      // mapping renders only what the note carries; absent subtype falls
+      // back to the legacy gap/reason line.
+      const sub = note?.kind === "reach" && note?.power === "unknown"
+        ? "reach-unknown"
+        : note?.kind === "scan" && note?.verdict === "insufficient"
+          ? "insufficient scan"
+          : note?.verdict === "tied"
+            ? "tied evidence"
+            : note?.power === "unmeasured" || note?.kind === "unmeasured"
+              ? "unmeasured"
+              : null;
+      if (sub) return `Nothing addressed the question (${sub}${note.gap ? ` — ${note.gap}` : ""}${note.reason ? `: ${note.reason}` : ""}).`;
+      return `Nothing addressed the question (${note.gap}${note.reason ? `: ${note.reason}` : ""}).`;
+    }
+    // A6: a ledger born without a declared frame is surface-silent unless
+    // named — frameOf reports {gap:"no_frame"} and never invents one
+    // (native/kernel/notes.js). The thinking panel must carry the gap.
+    case "no_frame":
+      return note.detail ? `No frame declared — ${note.detail}.` : `No frame declared — the reading stood nowhere in particular.`;
+    // A6: expectation_violated rides through as the record's own words —
+    // a passthrough, never a paraphrase (the frame is supposed to record
+    // interpretations, not perform them).
+    case "expectation_violated":
+      return note.detail ?? note.description ?? `An expectation was violated${note.basis ? ` — ${note.basis}` : ""}.`;
+    case "composed":
+      return `Composed ${note.relations} relation edge(s), ${note.bindings} referent binding(s), ${note.hyperlexicon} hyperlexicon entr${note.hyperlexicon === 1 ? "y" : "ies"}.`;
+    case "wiki_lookup":
+      return `Looked up background on: ${(note.notes ?? []).join(", ")}`;
+    case "prompt_budget":
+      return `Prompt: system ${note.system}c + chat ${note.chatChars}c (${note.chat} msg) + material ${note.materialChars}c (${note.materialSegments} seg) + task ${note.taskChars}c, of ${note.max}c max.`;
+    case "post_note":
+      return note.message ?? null;
+    case "look":
+      return `Looked at "${note.rel}" — the text's formatting was being misread (${(note.signals ?? []).join(", ") || note.reason}). Rendered it and read the image: ${note.boxes} region(s), ${note.vision ? "a vision read" : "no vision model"}.`;
+    case "look_image":
+      return `Looked at image "${note.rel}": ${note.boxes} box(es), ${note.connectors} connector(s), ${note.vision ? "a vision model read it" : "no vision model"}, ${note.settled ? "senses agreed" : "senses still disagree"}.`;
+    case "look_images_done":
+      return `Looked at ${note.files} image(s) in the workspace.`;
+    case "look_error":
+      return `Couldn't look at "${note.rel}": ${note.error}`;
+    case "lavar_reading":
+      return note.well
+        ? `LaVar: "${note.rel}" was read well — its bytes yielded propositions and its formatting was not being misread.`
+        : `LaVar: "${note.rel}" was NOT read well — ${note.basis ?? "reading quality in doubt"}${note.shouldLook ? " Looking at it." : ""}`;
+    case "post_timeout":
+      return `Post-processing timed out — returned the model's original text.`;
+    case "web_searched":
+      return `Searched the web: ${note.pages} page(s) fetched, ${note.chars?.toLocaleString() ?? 0} chars admitted.`;
+    case "gore_boundary":
+      return `Gore's gather boundary: kept ${note.kept} of ${note.of} result(s) — ${note.basis}.`;
+    case "gore_tier":
+      return `Source tiers: preferred ${note.tiers?.preferred ?? 0}, last-resort ${note.tiers?.lastResort ?? 0}. Leading: ${(note.top ?? []).join(", ")}`;
+    case "gore":
+      return `Gore: gathering sources on "${note.cue}".`;
+    case "gore_landed":
+      return `Gore's strike on "${note.cue}" landed: ${note.pages} page(s) folded into the reading while the section was being written.`;
+    case "double_check":
+      return `REC hunting online: searching the web for "${note.cue}" to fill the shape gap.`;
+    case "void_declared":
+      return `Void declared: "${note.slot}" — ${note.cardinality ?? 0} part(s), grounded against a shadow of ${note.shadowSites ?? 0} visited site(s).`;
+    case "void_questions":
+      return `The void, DEF'd by asking: ${note.of} question(s) the piece must answer${note.open ? ` (${note.open} from the reading's own open questions)` : ""}. First: ${(note.questions ?? []).join(" | ")}`;
+    case "kelsen":
+      return `Kelsen ${note.value}° — bound to the material's ground by the shape (${note.grounded} grounded cells of ${note.cells}): ${note.value >= 0.7 ? "literal, bound" : note.value <= 0.4 ? "impressionistic, freer" : "balanced"}.`;
+    // Meta-disclosure only — never the cue's own text (that stays covert,
+    // in the mouth, per earned-cast.js's own design). Added to make the
+    // ground attention's firing visible for verification; previously fell
+    // through to the silently-dropped default.
+    case "earned_cue":
+      return `Earned cue: ${(note.attentions ?? []).length} attention(s) fired (${(note.attentions ?? []).join(", ") || "none"}) — ${note.chars ?? 0} char(s) added, act: ${note.act ?? "?"}.`;
+    case "section_eva":
+      return `Section check failed: ${(note.failures ?? []).join("; ")} (strain ${note.strain}).`;
+    case "strain":
+      return `Strain on "${note.section}": ${note.strain}.`;
+    case "citation_ledger":
+      return `Citation ledger written: ${note.citations} verbatim span(s) with byte addresses → ${note.path}`;
+    case "strike_revision":
+      return `Revision: the reading grew — "${note.section}" rewritten with the new material (${note.reason}).`;
+    case "competency":
+      return note.reached
+        ? `Competency reached: the reading was no longer meaningfully surprised by ${note.url} (${note.salient} salient, ${note.noise} noise) — we understand why, more sources would add noise.`
+        : `Still learning from ${note.url} (${note.salient} salient, ${note.noise} noise).`;
+    case "ignored":
+      return `Ignored ${note.url}: shares only ${note.score} of the question's words — retained, not read.`;
+    case "eot_ized":
+      return `EOT-ized ${note.url} at ${note.resolution} resolution (${note.salient} salient moves).`;
+    case "web_blocked":
+      return `Web search blocked by bot-challenge.`;
+    case "web_no_results":
+      return `Web search returned no results.`;
+    case "web_skipped":
+      return `Skipped a page that isn't content: ${note.url} (${note.why}${note.basis ? ` — ${note.basis}` : ""}).`;
+    case "web_error":
+      return `Web search error: ${note.detail}`;
+    case "code_gist":
+      return `Code structure: ${note.entities} entit${note.entities === 1 ? "y" : "ies"}, ${note.edges} edge(s).`;
+    case "composing_section":
+      return `Composing section ${note.index} of ${note.of}: ${note.section}`;
+    case "composing_skip":
+      return `Skipped section "${note.section}": ${note.because}`;
+    case "document_ledger":
+      return `Document ledger ${note.docId}: ${note.parts} part(s) admitted. Declared shape: ${note.declared}`;
+    case "answer_shape":
+      return `Answer shape: ${note.shape} (${note.modality}).`;
+    case "void_defined":
+      return `Void defined (${note.mode}): ${note.of} question(s) the answer must satisfy — a ${note.shape} answer.`;
+    case "mode":
+      return `Mode: ${note.mode}${note.basis ? ` — ${note.basis}` : ""}.`;
+    case "chat_satisfied":
+      return `The answer filled its void${note.failures?.length ? ` — ${note.failures.map((f) => f.detail).join("; ")}` : ""}.`;
+    case "long_auto_engaged":
+      return `The first draw hit the token cap mid-thought — continuing in the answer's own words (${note.shape}, ${note.afterChars} chars so far).`;
+    case "long_continued":
+      return note.chunks > 1 ? `Long answer, ${note.chunks} round(s), ${note.keptChars} chars kept.` : null;
+    case "long_chunk_rejected":
+      return `A continuation round added nothing sound — reverted (${note.reason}).`;
+    case "shape_check":
+      return `Shape check: ${note.ok ? "the piece matches its declared form." : `missing — ${(note.failures ?? []).join("; ")}`}`;
+    case "shape_recheck":
+      return `Shape recheck: ${note.ok ? "the piece now matches its declared form." : `still missing — ${(note.failures ?? []).join("; ")}`}`;
+    case "essay_resolutions":
+      return `The essay's own conversation, folded: ${note.sections} section(s) written, ${note.active} active referent(s) — Wolfe composes against this, never the raw prose.`;
+    case "murch":
+      return `Murch, pass ${note.round}: editing the whole — ${(note.findings ?? []).join(", ")}.`;
+    case "fisher":
+      return `Fisher: the openings repeat above chance (p=${note.p}, ${note.repeated} section(s) share a construction) — Brillat-Savarin will season them.`;
+    case "redundancy":
+      return `${note.kind === "repeated-fact" ? "Repeated fact" : note.kind === "repeated-template" ? "Repeated construction" : "Redundancy"}: ${note.detail} — Brillat-Savarin seasons it (chosen, never random).`;
+    case "mechanical":
+      return `Mechanical ${note.op}: ${note.basis} — a free, deterministic edit, EOT-recorded.`;
+    case "pacing":
+      return `Murch on pacing: ${note.basis}`;
+    case "murch_applied":
+      return `Murch applied ${note.applied} revision(s) this pass.`;
+    // FILES AS FILES — the record's own pointing, rendered for the thinking
+    // panel (never the mouth: these lines ride reasoning_content, and the
+    // firewall's mouth-facing rule is untouched). A turn that tabbed through
+    // files says which ones, and what was missing stays a named gap.
+    case "file_mentioned":
+      return `Asked about file(s): ${(note.mentions ?? []).join(", ")}.`;
+    case "file_resolved":
+      return `Reading "${note.sourceId}" for this turn (${note.kind}${note.chars ? `, ${note.chars} chars` : ""}${note.cached ? ", already admitted" : ""}${note.score != null ? `, activation ${note.score}` : ""}).`;
+    case "file_missing":
+      return `No such file for "${note.mention}" — ${note.reason ?? "not in scope"}.`;
+    case "file_unreadable":
+      return `"${note.rel ?? note.mention}" isn't readable as text — ${note.reason ?? "its contents are not invented"}.`;
+    case "file_surfaced":
+      return `Surfaced "${note.sourceId}" into the material (${note.kind}, ${note.chars} chars).`;
+    case "file_dropped":
+      return `Could not surface "${note.sourceId}" (${note.kind}) — ${note.reason ?? "budget full"}.`;
+    case "agent_list":
+      return `Sandbox: listed ${(note.files ?? []).length} virtual file(s).`;
+    case "agent_read":
+      return `Sandbox: read "${note.path}" (${note.contentChars} chars, turn ${note.turn}).`;
+    case "agent_read_miss":
+      return `Sandbox: no virtual file "${note.path}" (turn ${note.turn}).`;
+    case "agent_write":
+      return `Sandbox: wrote "${note.path}" (${note.contentChars} chars, virtual — not the real disk).`;
+    case "agent_run":
+      return `Sandbox: ran JS (${note.outputChars} chars out${note.ok ? "" : ", errored"}, turn ${note.turn}).`;
+    case "agent_done":
+      return `Sandbox: done after turn ${note.turn}.`;
+    case "agent_cap":
+      return `Sandbox: turn cap (${note.turns}) — unfinished.`;
+    case "agent_gap":
+      return `Sandbox: unparsed action (turn ${note.turn}) — ${note.reason ?? "no recognized ACTION block"}.`;
+    case "ranke":
+      return `Ranke, pass ${note.round}: ${note.ungrounded.length} section(s) drifted from the material — rewritten from the documents (Quellenkritik).`;
+    case "outline_evolved":
+      return `Outline evolved: the reading established "${note.added}" — added as a section (${note.total} total).`;
+    // Deliberately suppressed: per-file scan skips, per-segment surf detail,
+    // and raw ollama request/streaming bookkeeping — all noise, no signal.
+    default:
+      return null;
+  }
+}
+
+// THE GROUNDING GATE (2026-09-23) — `void.satisfied`/`satisfaction.ok` are
+// finalized deep inside runProxyTurn (proxy-runner.mjs's chatVoidCheck): a
+// mechanical check of the PROSE ALONE (non-empty, right shape, not meta),
+// with zero knowledge of `race` (precisionWinner, computed AFTER runProxyTurn
+// returns) or of `reading.claims` (readAnswerClaims — which sentences of the
+// answer were actually bound as checked claims against a source). The two
+// are merged as unrelated sibling keys onto the outgoing reading object at
+// each response-assembly site, with nothing reconciling them: a model
+// free-answer that CONTRADICTS its own attached source reads `satisfied:
+// true` whenever race.winner==="model" (no mechanism settled it) and
+// claims.length===0 (nothing in the answer bound to a source), because the
+// prose itself is well-formed. This is additive only — a case where a
+// mechanism won the race, or a claim actually bound to a source, is
+// untouched.
+// LAW 6 — the mouth relays a void, never declares one (2026-09-29). The
+// grounding gate above voids a model-winner with zero bound claims; this
+// detector is its prose-side companion: a PURE regex over the mouth's own
+// text that names emptiness claims ("nothing else", "no mention",
+// "there is no", "never mentioned") so a caller holding
+// void.satisfied===false can keep them tagged as unclaimed. It NEVER blocks
+// prose — it only reports. /v1/ask already returns void.satisfied +
+// disclosed.unchecked alongside the answer (proxy.mjs gatedReading site),
+// verified 2026-09-29 — the gate is callable, the prose untouched.
+export const MOUTH_VOID_CLAIM_RE = /nothing else|no .*mention|there is no|never mentioned/i;
+
+export function mouthVoidClaim(text) {
+  const s = String(text ?? "");
+  const voidClaim = MOUTH_VOID_CLAIM_RE.test(s);
+  return { voidClaim, basis: voidClaim ? "the mouth's own prose claims emptiness — relayed, never a ledger void" : null };
+}
+
+export function groundingGate(readingObj, race) {
+  if (!readingObj || !race) return readingObj;
+  const claimsCount = readingObj.reading?.claims?.length ?? readingObj.claims?.length ?? 0;
+  if (race.winner === "model" && claimsCount === 0) {
+    if (readingObj.void) readingObj.void = { ...readingObj.void, satisfied: false, basis: "the grounding gate: no claim bound to a source — an unchecked model guess never satisfies a void" };
+    if (readingObj.satisfaction) {
+      const prior = readingObj.satisfaction;
+      // THE GATE DISCLOSES ITSELF (2026-09-29, falsified by the podcast
+      // proof): ok used to flip to false while failures stayed empty and
+      // basis kept claiming "compiles and runs clean" — three fields in the
+      // same object disagreeing about the same verdict. The gate's reason
+      // now rides the fields it changes: a failure of kind `ungrounded`, a
+      // counted strain, and a basis that names the gate and why it fired.
+      const alreadyGated = (prior.failures ?? []).some((f) => f?.kind === "ungrounded");
+      readingObj.satisfaction = {
+        ...prior,
+        ok: false,
+        ...(alreadyGated ? {} : {
+          failures: [...(prior.failures ?? []), { kind: "ungrounded", detail: "no claim bound to a source — the grounding gate flips ok to false; the mechanical score above stands only as mechanics, never as standing" }],
+          totalStrain: (prior.totalStrain ?? 0) + 1,
+        }),
+        basis: `${prior.basis ?? "satisfaction"} — GROUNDING GATE: no claim bound to a source, so ok is false; the mechanical verdict is disclosed, never the standing`,
+      };
+    }
+    readingObj.disclosed = {
+      ...(readingObj.disclosed ?? null),
+      unchecked: true,
+      basis: "no mechanism settled this question and no claim bound to a source — an unchecked model guess, not a checked answer",
+    };
+  }
+  return readingObj;
+}
+
+// THE SHARED PICK (found via 256db92's follow-up, 2026-09-23): every
+// response-assembly site needs the SAME three fields off a runProxyTurn
+// `result` — void, satisfaction, and reading — reconciled through
+// groundingGate before they ride out on the wire. `result.reading` (when
+// present) is the narrow {schema, sentences, tally, claims, notes,
+// answerRecord, forms} object built in proxy-runner.mjs; void/satisfaction
+// are SEPARATE top-level siblings on `result`, not inside it. Picking them
+// explicitly here (rather than each call site spreading `result.reading ??
+// result`) is the fix itself: a narrow-but-present `result.reading` can never
+// again cause void/satisfaction to be silently dropped.
+export function gatedReading(result, race) {
+  // A6: the frame gap rides as passthrough — result.frameGap is frameOf's
+  // own output ({gap:"no_frame"} or {declared,...}), null when the caller
+  // supplied none. Never invented here (proxy-api stays pure: no engine
+  // imports); a missing gap is a typed absence, never a guessed frame.
+  // Verified 2026-09-29: /v1/ask returns void.satisfied + disclosed.unchecked
+  // beside the answer via this shared pick — the caller can gate on them.
+  const gated = groundingGate({
+    void: result?.void ?? null,
+    satisfaction: result?.satisfaction ?? null,
+    reading: result?.reading ?? null,
+    frameGap: result?.frameGap ?? result?.frame ?? null,
+  }, race);
+  // A1-close: an emptiness claim in the mouth's own prose with no satisfied
+  // void on the ledger is tagged, never blocked. Falsifier: prose claiming
+  // emptiness beside a satisfied void, or non-emptiness prose, carries none.
+  try {
+    const text = result?.text ?? race?.text ?? "";
+    const { voidClaim } = mouthVoidClaim(text);
+    const satisfied = gated?.void?.satisfied ?? null;
+    if (voidClaim && satisfied === false) {
+      gated.disclosed = {
+        ...(gated?.disclosed ?? null),
+        unclaimedEmptiness: true,
+        unclaimedEmptinessBasis: "the mouth's prose claims emptiness with no satisfied void on the ledger — relayed prose, never a ledger finding",
+      };
+    }
+  } catch { /* tagging never breaks the gate */ }
+  return gated;
+}
+
+export function openAIResponse({ id, model, text, created, usage, reading }) {
+  return {
+    id,
+    object: "chat.completion",
+    created,
+    model,
+    choices: [{ index: 0, message: { role: "assistant", content: text }, finish_reason: "stop" }],
+    usage: {
+      prompt_tokens: usage?.promptTokens ?? 0,
+      completion_tokens: usage?.completionTokens ?? 0,
+      total_tokens: (usage?.promptTokens ?? 0) + (usage?.completionTokens ?? 0),
+    },
+    reading,
+  };
+}
+
+export function openAIStreamLines({ id, model, text, created, reading }) {
+  const base = { id, object: "chat.completion.chunk", created, model };
+  return [
+    `data: ${JSON.stringify({ ...base, choices: [{ index: 0, delta: { role: "assistant", content: text }, finish_reason: null }] })}\n\n`,
+    `data: ${JSON.stringify({ ...base, choices: [{ index: 0, delta: {}, finish_reason: "stop" }], reading })}\n\n`,
+    "data: [DONE]\n\n",
+  ];
+}
+
+export function ollamaChatResponse({ model, text, createdAt, usage, reading }) {
+  return {
+    model,
+    created_at: createdAt,
+    message: { role: "assistant", content: text },
+    done: true,
+    done_reason: "stop",
+    prompt_eval_count: usage?.promptTokens ?? 0,
+    eval_count: usage?.completionTokens ?? 0,
+    reading,
+  };
+}
+
+export function ollamaChatStreamLines({ model, text, createdAt, usage, reading }) {
+  return [
+    JSON.stringify({ model, created_at: createdAt, message: { role: "assistant", content: text }, done: false }) + "\n",
+    JSON.stringify({
+      model,
+      created_at: createdAt,
+      message: { role: "assistant", content: "" },
+      done: true,
+      done_reason: "stop",
+      prompt_eval_count: usage?.promptTokens ?? 0,
+      eval_count: usage?.completionTokens ?? 0,
+      reading,
+    }) + "\n",
+  ];
+}
