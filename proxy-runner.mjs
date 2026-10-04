@@ -206,7 +206,7 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 // The received ground is two roots: live_priors (read-only, never written) and the ground this proxy has EARNED — pages a
 // consented web hunt fetched that carried an ask, kept so the ground grows (persistEarnedGround; state/, never the corpus repo).
 const EARNED_ROOT = process.env.ER7_EARNED_DIR ?? path.join(HERE, "state", "earned-ground");
-const PRIORS_ROOTS = [{ dir: process.env.ER7_PRIORS_DIR ?? path.join(HERE, "..", "live_priors"), label: "live_priors" }, { dir: EARNED_ROOT, label: "earned" }];
+const PRIORS_ROOTS = [{ dir: process.env.ER7_PRIORS_DIR ?? path.join(HERE, "..", "ethos"), label: "ethos" }, { dir: EARNED_ROOT, label: "earned" }];
 const PRIORS_CACHE = path.join(HERE, "state", "priors-words.json");
 
 // GFP CHECKING for the Charter organ (2026-09-16): the checking side reads
@@ -1350,7 +1350,7 @@ let _codeManifest = null;
 function codeManifest() {
   if (_codeManifest !== null) return _codeManifest;
   try {
-    const p = path.join(HERE, "..", "..", "..", "live_priors", "manifests", "source-code-manifest.json");
+    const p = path.join(HERE, "..", "..", "..", "ethos", "manifests", "source-code-manifest.json");
     _codeManifest = JSON.parse(fs.readFileSync(p, "utf8"));
   } catch { _codeManifest = null; }
   return _codeManifest;
@@ -1364,7 +1364,7 @@ function codeExemplar(language) {
     for (const f of repo.files ?? []) {
       if (!String(f.path ?? "").endsWith(ext)) continue;
       if (!f.local) continue;
-      const full = path.join(HERE, "..", "..", "..", "live_priors", f.local);
+      const full = path.join(HERE, "..", "..", "..", "ethos", f.local);
       try {
         const text = fs.readFileSync(full, "utf8");
         if (text.length < 2000) continue; // a stub is not a style reference
@@ -1590,7 +1590,7 @@ function loadLanguageLawPrior(language) {
   if (_lawCache.has(language)) return _lawCache.get(language);
   let prior = null;
   try {
-    const p = path.join(HERE, "..", "..", "..", "live_priors", "derived-priors", "code-priors", `${language}-language-law-prior-v1.json`);
+    const p = path.join(HERE, "..", "..", "..", "ethos", "derived-priors", "code-priors", `${language}-language-law-prior-v1.json`);
     prior = JSON.parse(fs.readFileSync(p, "utf8"));
   } catch {}
   _lawCache.set(language, prior);
@@ -5342,7 +5342,7 @@ export async function runProxyTurn({ sessionId, userId = null, model, task, chat
         priorsResult = await findPriorsGround({ topic, roots: PRIORS_ROOTS, cacheFile: PRIORS_CACHE, yieldFn: yieldToEventLoop });
         for (const p of priorsResult.passages) {
           admitChunked(session.corpus, { text: piiAdmit(session, p.text, p.id, onNote), sourceId: p.id });
-          stampAdmission(session, p.id, { task, salience: p.score, resolution: "fine", kind: "live_priors" });
+          stampAdmission(session, p.id, { task, salience: p.score, resolution: "fine", kind: "ethos" });
           priorsIds.push(p.id);
           // the reader's cost grows fast with length: the same declared window the web door reads (EOT_MAX_CHARS), the whole section stays in the corpus
           for (const enc of textEncounters(p.text.slice(0, EOT_MAX_CHARS), { source: p.id, offset: 0 })) await session.reader.step(enc);

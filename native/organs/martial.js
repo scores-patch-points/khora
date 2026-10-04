@@ -31,7 +31,7 @@ import { fileURLToPath } from "node:url";
 import { parseDeclarations, genericityOf } from "../adapters/text/code-structure.js";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const CODE_NAME_PRIOR = path.join(HERE, "..", "..", "..", "live_priors", "derived-priors", "code-priors", "code-name-prior-v1.json");
+const CODE_NAME_PRIOR = path.join(HERE, "..", "..", "..", "ethos", "derived-priors", "code-priors", "code-name-prior-v1.json");
 
 let _prior = null;
 let _priorLoaded = false;
