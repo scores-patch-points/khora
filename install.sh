@@ -68,6 +68,12 @@ ok "node $(node -v)"
 # answers and the reasoning door), and nothing else installs them.
 npm ci --omit=dev --no-audit --no-fund >/dev/null 2>&1 && ok "npm dependencies installed" \
   || ok "(npm ci failed; the proxy needs it: run npm ci in $ER7_DIR)"
+# native/ is its own package (linkedom for the reader, tesseract.js for OCR) and
+# the proxy imports it; the root install does not reach it.
+if [ -f "$ER7_DIR/native/package.json" ]; then
+  (cd "$ER7_DIR/native" && npm ci --omit=dev --no-audit --no-fund >/dev/null 2>&1) && ok "native/ dependencies installed" \
+    || ok "(native npm ci failed; the reader needs it: run npm ci in $ER7_DIR/native)"
+fi
 
 # --- 1. the model harness -------------------------------------------------------
 # Ollama is the one the proxy reads through. If it is already answering, that is

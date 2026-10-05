@@ -72,7 +72,7 @@ import { runOpenCodingLoop, AGENT_MAX_TURNS } from "./native/the-fold/sandboxed-
 // and surface-watching run inside this process — one process, no separate
 // steer port, no second checkout to drift. When imported, heimdall.mjs
 // exports its machinery and does not listen or loop on its own.
-import { heimdallStatus, admitChat, startWatcher, markInflight, disclosure, observeCall, bridgeMessage, holonTree, declareLoop, mintRule, loadedModels, isBoxSaturated, readVitals, makeRuleAuthorHolon, derivedRuleStore, releaseClaim, isServable, markServable, seedUnservableLarge, liveReap, onLog, consolidateMemory, heimdallAsk, heimdallSettings, setHeimdallSetting, onLive, recordTurnMs, runHolonTree, logLines, contentLog, restartSurface, sampleVitalsNow, backgroundTasks, killTask, warmPressureTest, warmPressureReason, isUngatedModel, emitLive, evictModel, handleReport, beginTurn, endTurn, noteMechanism, quitMemoryHogs, quitApps, restartModelServer, probeModelServer, currentParallelism, getSurfaces, refreshOllamaModels, surfaceByPort, noteSurfaceActivity, turnScope, servedDisclosure } from "./heimdall.mjs";
+import { heimdallStatus, admitChat, startWatcher, markInflight, disclosure, observeCall, bridgeMessage, holonTree, declareLoop, mintRule, loadedModels, isBoxSaturated, readVitals, makeRuleAuthorHolon, derivedRuleStore, releaseClaim, isServable, markServable, seedUnservableLarge, liveReap, onLog, consolidateMemory, heimdallAsk, heimdallSettings, setHeimdallSetting, onLive, recordTurnMs, runHolonTree, logLines, contentLog, restartSurface, sampleVitalsNow, backgroundTasks, killTask, warmPressureTest, warmPressureReason, isUngatedModel, emitLive, evictModel, handleReport, beginTurn, endTurn, noteMechanism, quitMemoryHogs, quitApps, restartModelServer, probeModelServer, currentParallelism, getSurfaces, refreshOllamaModels, stopWatcher, surfaceByPort, noteSurfaceActivity, turnScope, servedDisclosure } from "./heimdall.mjs";
 import { heldKey, findHeld, holdTurn, heldById, heldReceipt, awaitHeld } from "./held-turns.mjs";
 import { resolveServerKey, channelObserve, channelRefused, pickHost, hostBegin, hostEnd, reconcileModelServers, ledgerEva, ledgerRec, setChannelBound, liveReapIfDue, holdWindow, hopOf, messagesOf, streamAccounting, hostOwnedByPid, slaWaitMs, waiterTtlMs, serveTiersFor, mouthFor, warmSmallMouth, hostByName, onlineMouths, onlineEnabled } from "./heimdall.mjs";
 import { toOpenAIBody, fromOpenAIResponse, sseChunkToOllama, splitSse } from "./native/kernel/online-mouths.js";
@@ -118,11 +118,20 @@ import { classifyTurn } from "./native/organs/reason-gate.js";
 // them — a missing feature must never block the whole surface.
 let provisionArchon = null, recordArchon = null, loadArchonConversation = null, renderConversation = null, roster = null, DEFAULT_HS = null;
 const ARCHON_GAP = { absent: true, reason: "the-fold/archon-hyphae.mjs was deleted by the operator — the archons no longer write notes; this surface's archon verbs are typed gaps", kind: "archon_unavailable" };
-try {
-  const hyphae = await import("../the-fold/archon-hyphae.mjs");
-  ({ provisionArchon, recordArchon, loadArchonConversation, renderConversation, roster, DEFAULT_HS } = hyphae);
-} catch (err) {
-  if (err?.code !== "ERR_MODULE_NOT_FOUND") console.error(`[proxy] archon-hyphae import failed for a non-missing reason: ${err.message}`);
+// MOUNTABLE (2026-10-05): the import used to be a top-level await, so merely
+// importing this module did work. It now runs from initArchon(), called by
+// `node proxy.mjs` before it listens (same order as before) and by
+// createKhoraHandlers().start() when the Fold mounts khora. Idempotent.
+let _archonInit = null;
+function initArchon() {
+  return (_archonInit ??= (async () => {
+    try {
+      const hyphae = await import("../the-fold/archon-hyphae.mjs");
+      ({ provisionArchon, recordArchon, loadArchonConversation, renderConversation, roster, DEFAULT_HS } = hyphae);
+    } catch (err) {
+      if (err?.code !== "ERR_MODULE_NOT_FOUND") console.error(`[proxy] archon-hyphae import failed for a non-missing reason: ${err.message}`);
+    }
+  })());
 }
 const archonUnavailable = () => ARCHON_GAP;
 
@@ -174,7 +183,10 @@ function raceReading(race) {
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 
-const PORT = Number(process.env.ER7_PROXY_PORT) || 11436;
+// `let`: createKhoraHandlers(opts) re-points the shared port when the Fold mounts
+// khora (the /v1/ask self-fetch must dial the REAL shared port). `node proxy.mjs`
+// never reassigns it.
+let PORT = Number(process.env.ER7_PROXY_PORT) || 11436;
 // The surface this proxy IS, on the watcher's registry ("er7", port 11436).
 // Every live token/call event emitted from this process belongs to it, so the
 // watch surface can show which content is being generated for which server.
@@ -213,24 +225,24 @@ function promptTextOf(task, messages) {
 // The heimdall alias port — claude and older clients point here. Same server,
 // same code; keeping it means the merged watcher doesn't break existing
 // configs that route through 11437.
-const STEER_ALIAS_PORT = Number(process.env.ER7_HEIMDALL_PORT ?? 11437);
-const UPSTREAM = process.env.ER7_UPSTREAM || MODEL_SERVER_URL; // the daemon's private address — the proxy's reads never loop through its own channel
+let STEER_ALIAS_PORT = Number(process.env.ER7_HEIMDALL_PORT ?? 11437);
+let UPSTREAM = process.env.ER7_UPSTREAM || MODEL_SERVER_URL; // the daemon's private address — the proxy's reads never loop through its own channel
 // NOTE (2026-09-19): the raw passthrough to UPSTREAM was removed. There is no
 // generic forwarder left in this file — unmatched routes default-deny below
 // with a typed unserved_path gap, so POST /api/generate and friends can never
 // bypass the ethos/AntiStrauss gate. UPSTREAM survives only as a status string
 // (GET /health) and as the Ollama origin proxy-runner.mjs dials internally.
-const KEEP_WARM_INTERVAL_MS = Number(process.env.ER7_KEEP_WARM_INTERVAL_MS ?? 120000);
+let KEEP_WARM_INTERVAL_MS = Number(process.env.ER7_KEEP_WARM_INTERVAL_MS ?? 120000);
 // A whole-turn wall clock, independent of the per-call stream timeout inside
 // runProxyTurn. The client must always get a terminal chunk; a turn that is
 // slow in its post-stream work must not hang the stream forever. Generous on
 // purpose: it is a backstop over the per-call REQUEST_TIMEOUT_MS, never a
 // way to kill a slow-but-active stream.
-const TURN_DEADLINE_MS = Number(process.env.ER7_TURN_DEADLINE_MS ?? 300000);
+let TURN_DEADLINE_MS = Number(process.env.ER7_TURN_DEADLINE_MS ?? 300000);
 // /v1/code runs several model calls plus real test executions per request —
 // a generous backstop over the single-turn deadline above, never a way to
 // let a wedged loop hang the process forever.
-const CODE_LOOP_DEADLINE_MS = Number(process.env.ER7_CODE_LOOP_DEADLINE_MS ?? 600000);
+let CODE_LOOP_DEADLINE_MS = Number(process.env.ER7_CODE_LOOP_DEADLINE_MS ?? 600000);
 // Per-session virtual filesystem for /v1/agent — carried across calls in
 // the SAME conversation (a person keeps building on what they wrote three
 // messages ago), in memory only, never written to real disk. Unbounded
@@ -1559,7 +1571,7 @@ async function handleRequest(req, res) {
       let territory = null;
       if (ground) {
         try {
-          territory = await openFolder(workspace, { cacheDir: path.join(path.dirname(fileURLToPath(import.meta.url)), "state", "territory-cache"), workers: 2, limit: 60000 });
+          territory = await openFolder(workspace, { cacheDir: process.env.ER7_TERRITORY_CACHE_DIR || path.join(path.dirname(fileURLToPath(import.meta.url)), "state", "territory-cache"), workers: 2, limit: 60000 });
           log(`code ground → whole-workspace territory indexed: ${territory.files.found} files in ${(territory.timings.crawl + territory.timings.stat + territory.timings.index + territory.timings.assemble).toLocaleString()} ms`);
         } catch (e) {
           log(`code ground → territory ingest failed (fail-open): ${e.message}`);
@@ -2650,7 +2662,7 @@ async function handleRequest(req, res) {
 // and the older one's in-process watcher could re-forge the newer. The
 // driver lock names the one process that drives; every other proxy in the
 // checkout is a door only. A dead holder's lock is stale and taken.
-const DRIVER_LOCK = path.join(HERE, "state", "heimdall-driver.lock");
+let DRIVER_LOCK = process.env.ER7_DRIVER_LOCK || path.join(HERE, "state", "heimdall-driver.lock");
 function acquireDriverLock() {
   try {
     const cur = JSON.parse(fs.readFileSync(DRIVER_LOCK, "utf8"));
@@ -3081,20 +3093,31 @@ async function bootChannel() {
   if (held.length) { log(`channel: ${held.map((f) => f.host).join(",")}:${CHANNEL_PORT} is HELD by another process — callers there bypass Heimdall`); ledgerEva("channel_port_held", { port: CHANNEL_PORT, hosts: held.map((f) => f.host) }); }
 }
 
-// One handler, two doorways: the proxy port (11436, opencode) and the
-// heimdall alias port (11437, claude / older clients). Same code, one process.
-const server = http.createServer(handleRequest);
-const aliasServer = http.createServer(handleRequest);
+// ── MOUNTABLE (2026-10-05) ────────────────────────────────────────────────
+// This module used to open its listeners, take the driver lock, start the
+// watcher/holons/keep-warm and install signal handlers the moment it was
+// IMPORTED. The Fold composes khora, penelope, janus and heimdall in ONE
+// process, so importing must be inert. Everything that used to run at import
+// now runs from exactly two places:
+//   * runMain() — only when this file is the entry (`node proxy.mjs`,
+//     local-up.sh, setup-proxy.sh): identical ports, listeners, startup order
+//     and shutdown as before.
+//   * createKhoraHandlers(opts).start() — the Fold's composition root.
+const isMain = (() => {
+  try { return Boolean(process.argv[1]) && fs.realpathSync(process.argv[1]) === fs.realpathSync(fileURLToPath(import.meta.url)); }
+  catch { return false; }
+})();
 
-server.listen(PORT, "127.0.0.1", () => {
-  log(`eoreader7 proxy listening on http://127.0.0.1:${PORT}`);
-  log(`upstream: ${UPSTREAM}`);
-  log(`opencode → http://127.0.0.1:${PORT}/v1`);
-  // The heimdall alias port: claude and older clients still point at 11437.
-  // A SECOND server, the SAME handler — one process, two doorways.
-  aliasServer.listen(STEER_ALIAS_PORT, "127.0.0.1", () => {
-    log(`heimdall alias on http://127.0.0.1:${STEER_ALIAS_PORT} (the watcher runs inside this process)`);
-  });
+// What start() began, so close() can end exactly that — no more, no less.
+const _svc = { started: false, timers: [], driver: null, booted: false };
+const trackTimer = (t) => { _svc.timers.push(t); return t; };
+
+/** The body of the old listen callback, minus the listen calls: the driver
+ *  lock, the watcher, the watchdog, the holons, the keep-warm loop.
+ *  `wantChannel` boots khora's own Ollama-channel listeners (main only);
+ *  `warm` pre-loads pyodide. Synchronous, as the callback was. */
+function startServices({ wantChannel = false, warm = true } = {}) {
+  _svc.started = true;
   // HEIMDALL, WIRED IN — start the watcher (vitals + surface probes + the
   // fold surfaces' re-forge) on this process. The er7 surface IS this proxy:
   // its own port is watched for status but never re-forged (a proxy cannot
@@ -3110,10 +3133,13 @@ server.listen(PORT, "127.0.0.1", () => {
   // gate the operator reads. The proxy still answers its OWN /heimdall (the
   // disclosure), so the external watcher has something honest to probe.
   const driver = acquireDriverLock();
+  _svc.driver = driver;
   if (!driver.held) {
     log(`driver: PASSIVE — pid ${driver.pid} holds state/heimdall-driver.lock; this proxy is a door only (no watcher, no holon driver, no reaper, no watchdog, no channel)`);
-  } else {
+  } else if (wantChannel) {
     // THE CHANNEL: reconcile the daemons, ensure ours, hold Ollama's port.
+    // (`node proxy.mjs` always boots it; a mounted khora does not — the Fold
+    // mounts handleChannel on its own compat listener instead.)
     bootChannel().catch((err) => log(`channel boot error: ${err.message}`));
   }
   if (!driver.held) {
@@ -3126,7 +3152,7 @@ server.listen(PORT, "127.0.0.1", () => {
     // no in-process watcher, but the tachometers still need a reading: sample
     // CPU/GPU/RAM lightly so every surface discloses live vitals.
     sampleVitalsNow().catch(() => {});
-    setInterval(() => { sampleVitalsNow().catch(() => {}); }, 2000);
+    trackTimer(setInterval(() => { sampleVitalsNow().catch(() => {}); }, 2000));
   }
   // THE MODEL WATCHDOG (2026-09-21): the wedge that cost every turn its
   // deadline gets an ending — probe the model server cheaply; after 3 misses
@@ -3145,7 +3171,7 @@ server.listen(PORT, "127.0.0.1", () => {
   // the response closes, on every door.
   if (driver.held && (process.env.ER7_MODEL_WATCHDOG ?? "1") !== "0") {
     let hits = 0;
-    setInterval(async () => {
+    trackTimer(setInterval(async () => {
       const er7 = getSurfaces().find((s) => s.name === "er7");
       if ((er7?.inflight ?? 0) > 0) { hits = 0; return; }
       const p = await probeModelServer().catch(() => ({ ok: false }));
@@ -3158,7 +3184,7 @@ server.listen(PORT, "127.0.0.1", () => {
       if (warmPressureTest(vt)) { hits = 0; ledgerEva("probe_timeout_under_pressure", { reason: warmPressureReason(vt), surface: p.surface ?? null }); return; }
       hits += 1;
       if (hits >= 3) { hits = 0; const r = await restartModelServer().catch(() => null); log(`watchdog: model server unresponsive 3× — restarted ${r?.ok ? r.note : "(failed)"}`); }
-    }, 30000);
+    }, 30000));
   }
   // The residency holon's HYSTERESIS STATE and THRESHOLDS (module-scoped,
   // persist across cadences — the ant bridge's memory of whether it is
@@ -3310,7 +3336,7 @@ server.listen(PORT, "127.0.0.1", () => {
   // cadence gate — this interval only offers the tick.
   if (driver.held && (process.env.ER7_EXTERNAL_HEIMDALL ?? "0") === "1") {
     const holonDriverMs = Number(process.env.ER7_HOLON_DRIVER_MS ?? 30000);
-    setInterval(() => {
+    trackTimer(setInterval(() => {
       runHolonTree().catch((err) => log(`holon tree error: ${err.message}`));
       // THE WINDOW EYE IN FLEET MODE (2026-09-21, post-mortem falsification
       // 5.2): refreshOllamaModels fires the window_changed finding — a model
@@ -3335,12 +3361,12 @@ server.listen(PORT, "127.0.0.1", () => {
       // one model that is never a real turn's own hotModelSet entry.
       warmSmallMouth().then((w) => { if (w.warmed) log(`small mouth re-warmed: ${w.model}`); }).catch((err) => log(`small mouth warm error: ${err.message}`));
       sweepRevisions().catch((err) => log(`revision sweep error: ${err.message}`));
-    }, holonDriverMs).unref();
+    }, holonDriverMs).unref());
     log(`holon driver: external heimdall — holon tree + window eye driven locally every ${holonDriverMs}ms`);
   }
   // Pre-load pyodide (WASM Python) in the background so the FIRST turn's
   // post-processing does not pay the ~10-16s cold-load. Fire-and-forget.
-  warmPostprocess().then(({ available, error }) => {
+  if (warm) warmPostprocess().then(({ available, error }) => {
     log(`post-processing runtime: ${available ? "pyodide ready" : `pyodide unavailable (${error})`}`);
   });
 
@@ -3367,7 +3393,7 @@ server.listen(PORT, "127.0.0.1", () => {
         log(`keep-warm: ${model} ${ok ? "resident" : "NOT CONFIRMED"}`);
       });
     }
-    setInterval(() => {
+    trackTimer(setInterval(() => {
       if (pressuredNow()) return; // the storm deepens if warming fights callers for pages
       for (const model of hotModelSet()) {
         // Opencode-lane models have no Ollama copy to hold: keepModelHot
@@ -3383,50 +3409,148 @@ server.listen(PORT, "127.0.0.1", () => {
           }
         });
       }
-    }, KEEP_WARM_INTERVAL_MS);
+    }, KEEP_WARM_INTERVAL_MS));
   }
-});
-
-// Shutdown must actually terminate — the zombie-proxy lesson (2026-09-20).
-// `server.close(cb)` stops accepting but WAITS for every existing connection
-// to end, and a watch tab's SSE /heimdall/live connection never closes on its
-// own, so the old process lingered forever with no listening socket but its
-// full ~430MB footprint, one per restart, pushing an already swap-starved box
-// deeper into the pressure that was causing the restarts. Close the servers,
-// drop the long-lived SSE connections so the close callback can fire, and a
-// hard deadline exits whatever still holds the loop.
-// DRAIN FIRST (2026-09-21): a SIGTERM mid-turn used to closeAllConnections
-// immediately — a /v1/code loop in flight (measured: the code door) was cut
-// dead by the re-forge, the caller saw UND_ERR_SOCKET and the box looked
-// broken. In-flight turns get a bounded drain window to finish; only the
-// long-lived SSE watch streams are closed at once (they never finish on
-// their own). A turn that is still running at the deadline is still cut, but
-// a turn given a real chance to complete is no longer collateral.
-const SHUTDOWN_DRAIN_MS = Number(process.env.ER7_SHUTDOWN_DRAIN_MS ?? 30000);
-function shutdown(sig) {
-  log(`shutting down (${sig})`);
-  releaseDriverLock();
-  server.close(() => process.exit(0));
-  aliasServer.close();
-  for (const s of channelServers) { try { s.close(); } catch { /* already closed */ } }
-  const inflight = getSurfaces().find((s) => s.name === "er7")?.inflight ?? 0;
-  if (inflight > 0) {
-    log(`shutdown: ${inflight} turn(s) in flight — draining up to ${Math.round(SHUTDOWN_DRAIN_MS / 1000)}s before the hard close`);
-    const t0 = Date.now();
-    const drain = setInterval(() => {
-      const nowInflight = getSurfaces().find((s) => s.name === "er7")?.inflight ?? 0;
-      if (nowInflight <= 0 || Date.now() - t0 > SHUTDOWN_DRAIN_MS) {
-        clearInterval(drain);
-        try { server.closeAllConnections(); } catch {}
-        try { aliasServer.closeAllConnections(); } catch {}
-        setTimeout(() => process.exit(0), 200).unref();
-      }
-    }, 250);
-    return;
-  }
-  try { server.closeAllConnections(); } catch {}
-  try { aliasServer.closeAllConnections(); } catch {}
-  setTimeout(() => process.exit(0), 1500).unref();
 }
-process.on("SIGINT", () => shutdown("SIGINT"));
-process.on("SIGTERM", () => shutdown("SIGTERM"));
+
+/** Undo startServices: clear every timer it made, stop the heimdall watcher,
+ *  close any channel listeners it booted, release the driver lock. Never
+ *  exits the process. Safe to call twice or without a start. */
+function stopServices() {
+  for (const t of _svc.timers) { try { clearInterval(t); } catch { /* gone */ } }
+  _svc.timers = [];
+  try { stopWatcher?.(); } catch { /* the watcher was never started */ }
+  while (channelServers.length) { const s = channelServers.pop(); try { s.closeAllConnections?.(); s.close(); } catch { /* already closed */ } }
+  releaseDriverLock();
+  _svc.driver = null;
+  _svc.started = false;
+}
+
+/** The mountable khora. Options (all optional; each overrides the module-scope
+ *  value that was read from the environment at import — the SAME values apply
+ *  to every instance in the process, last call wins):
+ *    port          the shared Fold port; the /v1/ask self-fetch dials it
+ *    steerAliasPort, upstream, turnDeadlineMs, codeLoopDeadlineMs, keepWarmIntervalMs
+ *    stateDir      relocates the driver lock to <stateDir>/heimdall-driver.lock
+ *                  (every other state file is read from ER7_* env at import time)
+ *    driverLock    explicit lock path (beats stateDir)
+ *    bootChannel / channel   true: start() also holds the Ollama channel port
+ *                  itself (reconciles daemons — STOPS strays). Default false;
+ *                  the Fold mounts handleChannel on its own compat listener.
+ *    warm          pre-load pyodide in start() (default true)
+ *  handle() consumes EVERY request it is given (khora's own handler ends in a
+ *  typed 404 `unserved_path`, and it sets CORS headers up front), so it always
+ *  returns true: the Fold must order khora LAST. */
+export function createKhoraHandlers(opts = {}) {
+  const num = (v) => (Number.isFinite(Number(v)) && v !== null && v !== "" ? Number(v) : undefined);
+  if (num(opts.port) !== undefined) PORT = Number(opts.port);
+  if (num(opts.steerAliasPort) !== undefined) STEER_ALIAS_PORT = Number(opts.steerAliasPort);
+  if (opts.upstream) UPSTREAM = String(opts.upstream);
+  if (num(opts.turnDeadlineMs) !== undefined) TURN_DEADLINE_MS = Number(opts.turnDeadlineMs);
+  if (num(opts.codeLoopDeadlineMs) !== undefined) CODE_LOOP_DEADLINE_MS = Number(opts.codeLoopDeadlineMs);
+  if (num(opts.keepWarmIntervalMs) !== undefined) KEEP_WARM_INTERVAL_MS = Number(opts.keepWarmIntervalMs);
+  if (opts.driverLock) DRIVER_LOCK = String(opts.driverLock);
+  else if (opts.stateDir) DRIVER_LOCK = path.join(String(opts.stateDir), "heimdall-driver.lock");
+  const wantChannel = Boolean(opts.bootChannel ?? opts.channel ?? false);
+  const warm = opts.warm !== false;
+  let startP = null;
+
+  // An async handler's rejection must never escape into the Fold's server
+  // (under bare http.createServer it would be an unhandled rejection).
+  const guarded = (fn, who) => async (req, res) => {
+    try { await fn(req, res); }
+    catch (err) {
+      log(`${who} threw: ${err?.message ?? err}`);
+      try {
+        if (!res.headersSent) { res.writeHead(500, { "content-type": "application/json" }); res.end(JSON.stringify({ error: "khora handler error", type: "handler_threw" })); }
+        else if (!res.writableEnded) res.end();
+      } catch { /* the socket is gone */ }
+    }
+    return true;
+  };
+
+  return {
+    name: "khora",
+    handle: guarded(handleRequest, "handle"),
+    handleChannel: guarded(handleChannel, "handleChannel"),
+    start() {
+      return (startP ??= (async () => {
+        await initArchon();
+        if (!_svc.started) startServices({ wantChannel, warm });
+      })());
+    },
+    async close() {
+      const p = startP; startP = null;
+      if (p) await p.catch(() => {});
+      stopServices();
+    },
+  };
+}
+
+async function runMain() {
+  // The archon import used to be a top-level await — i.e. it finished before
+  // the servers were created. Same order here.
+  await initArchon();
+  // One handler, two doorways: the proxy port (11436, opencode) and the
+  // heimdall alias port (11437, claude / older clients). Same code, one process.
+  const server = http.createServer(handleRequest);
+  const aliasServer = http.createServer(handleRequest);
+
+  server.listen(PORT, "127.0.0.1", () => {
+    log(`eoreader7 proxy listening on http://127.0.0.1:${PORT}`);
+    log(`upstream: ${UPSTREAM}`);
+    log(`opencode → http://127.0.0.1:${PORT}/v1`);
+    // The heimdall alias port: claude and older clients still point at 11437.
+    // A SECOND server, the SAME handler — one process, two doorways.
+    aliasServer.listen(STEER_ALIAS_PORT, "127.0.0.1", () => {
+      log(`heimdall alias on http://127.0.0.1:${STEER_ALIAS_PORT} (the watcher runs inside this process)`);
+    });
+    startServices({ wantChannel: true, warm: true });
+  });
+
+  // Shutdown must actually terminate — the zombie-proxy lesson (2026-09-20).
+  // `server.close(cb)` stops accepting but WAITS for every existing connection
+  // to end, and a watch tab's SSE /heimdall/live connection never closes on its
+  // own, so the old process lingered forever with no listening socket but its
+  // full ~430MB footprint, one per restart, pushing an already swap-starved box
+  // deeper into the pressure that was causing the restarts. Close the servers,
+  // drop the long-lived SSE connections so the close callback can fire, and a
+  // hard deadline exits whatever still holds the loop.
+  // DRAIN FIRST (2026-09-21): a SIGTERM mid-turn used to closeAllConnections
+  // immediately — a /v1/code loop in flight (measured: the code door) was cut
+  // dead by the re-forge, the caller saw UND_ERR_SOCKET and the box looked
+  // broken. In-flight turns get a bounded drain window to finish; only the
+  // long-lived SSE watch streams are closed at once (they never finish on
+  // their own). A turn that is still running at the deadline is still cut, but
+  // a turn given a real chance to complete is no longer collateral.
+  const SHUTDOWN_DRAIN_MS = Number(process.env.ER7_SHUTDOWN_DRAIN_MS ?? 30000);
+  function shutdown(sig) {
+    log(`shutting down (${sig})`);
+    releaseDriverLock();
+    server.close(() => process.exit(0));
+    aliasServer.close();
+    for (const s of channelServers) { try { s.close(); } catch { /* already closed */ } }
+    const inflight = getSurfaces().find((s) => s.name === "er7")?.inflight ?? 0;
+    if (inflight > 0) {
+      log(`shutdown: ${inflight} turn(s) in flight — draining up to ${Math.round(SHUTDOWN_DRAIN_MS / 1000)}s before the hard close`);
+      const t0 = Date.now();
+      const drain = setInterval(() => {
+        const nowInflight = getSurfaces().find((s) => s.name === "er7")?.inflight ?? 0;
+        if (nowInflight <= 0 || Date.now() - t0 > SHUTDOWN_DRAIN_MS) {
+          clearInterval(drain);
+          try { server.closeAllConnections(); } catch {}
+          try { aliasServer.closeAllConnections(); } catch {}
+          setTimeout(() => process.exit(0), 200).unref();
+        }
+      }, 250);
+      return;
+    }
+    try { server.closeAllConnections(); } catch {}
+    try { aliasServer.closeAllConnections(); } catch {}
+    setTimeout(() => process.exit(0), 1500).unref();
+  }
+  process.on("SIGINT", () => shutdown("SIGINT"));
+  process.on("SIGTERM", () => shutdown("SIGTERM"));
+}
+
+if (isMain) runMain();

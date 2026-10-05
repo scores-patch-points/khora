@@ -4063,7 +4063,16 @@ export function startWatcher({ selfPort: p = null } = {}) {
   if (p != null) selfPort = p;
   if (_watcherStarted) return;
   _watcherStarted = true;
+  _scheduleHalted = false;
   schedule();
+}
+/** End the in-process watcher (mountable khora's close()): clear the pending
+ *  tick timer and keep an in-flight tick from re-arming it. startWatcher()
+ *  may be called again afterwards. */
+export function stopWatcher() {
+  _scheduleHalted = true;
+  _watcherStarted = false;
+  if (_scheduleTimer) { clearTimeout(_scheduleTimer); _scheduleTimer = null; }
 }
 
 const steer = http.createServer(async (req, res) => {
@@ -5124,13 +5133,16 @@ export function bridgeMessage({ model = null, note = null } = {}) {
 // eases back when the box breathes. Overlap is impossible — a slow tick is
 // simply not running two at once.
 let ticking = false;
+let _scheduleTimer = null;
+let _scheduleHalted = false; // stopWatcher(): a tick already in flight must not re-arm the timer
 async function schedule() {
   if (ticking) return;
   ticking = true;
   try { await tick(); }
   catch (err) { log(`tick error: ${err.message}`); }
   finally { ticking = false; }
-  setTimeout(schedule, selfDefenseIntervalMs);
+  if (_scheduleHalted) return;
+  _scheduleTimer = setTimeout(schedule, selfDefenseIntervalMs);
 }
 // ── STANDALONE MODE ───────────────────────────────────────────────────────
 // When heimdall.mjs is the MAIN ENTRY it runs its own steer server + watcher
