@@ -17,7 +17,7 @@
 //     effect no single step exhibits. This is the decomposition falsifier —
 //     splitting a coercion into small steps cannot launder it.
 
-import { isTransition, isObligation, OBLIGATION_SCHEMA, transitionSignature } from "./core.js";
+import { isTransition, isObligation, OBLIGATION_SCHEMA, transitionSignature, constructionProof, registerConstructor } from "./core.js";
 import { TRANSITION_SCHEMA } from "../contracts/transition.js";
 
 const DEFAULT_REPEAT_LIMIT = 1;
@@ -121,18 +121,23 @@ export function composeSteps({ purpose, steps = [], encounters = [], repeatLimit
       schema: "ConstructiveDerivation@1",
       version: 1,
       rule: "compose-steps@1",
+      author: "composeSteps",
       inputs: steps.map((s, i) => `step:${i}:${s.constructive_derivation?.rule ?? s.proposed_change}`),
       policy: "ConstitutiveEthos@0.1",
     },
     falsifiers: steps.flatMap((s) => s.falsifiers ?? []),
   };
-  // A composed transition is itself a construction: stamp its signature so the
-  // execution adapter can verify the composition was not mutated after the
-  // fact.
+  // A composed transition is itself a construction: stamp its signature and its
+  // keyed proof so the execution adapter can verify the composition was not
+  // mutated after the fact and was produced by the registered composer.
   transition.constructive_derivation = {
     ...transition.constructive_derivation,
     signature: transitionSignature(transition),
+    proof: constructionProof(transition),
   };
 
   return { ok: true, transition, disclosure: [...disclosure], bearerOps: Object.fromEntries(bearerOps) };
 }
+
+// The composition is itself a registered construction rule.
+registerConstructor({ rule: "compose-steps@1", author: "composeSteps", operation: "*" });

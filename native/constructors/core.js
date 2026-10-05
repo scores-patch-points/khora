@@ -19,7 +19,7 @@
 // purpose and context: it makes retry via another agent, channel or wording a
 // coercion, and composition must reject it.
 
-import { createHash } from "node:crypto";
+import { createHash, createHmac, randomBytes } from "node:crypto";
 import { TRANSITION_SCHEMA, validateTransition } from "../contracts/transition.js";
 
 export const OBLIGATION_SCHEMA = "UnresolvedObligation@1";
@@ -32,34 +32,100 @@ export const POLICY_VERSION = "ConstitutiveEthos@0.1";
 export const digest = (value) =>
   createHash("sha256").update(typeof value === "string" ? value : JSON.stringify(value)).digest("hex").slice(0, 20);
 
+// ── trusted authorship ───────────────────────────────────────────────────────
+// A recomputed hash proves consistency, not that an authorized constructor
+// produced the transition. The constructor registry + a keyed construction
+// proof close that gap: a derivation must name a REGISTERED constructor for its
+// rule, and the constructor stamps a keyed proof (HMAC over the transition's
+// executable fields, the rule and the recorded inputs) using a construction key
+// held only by this module. The seam verifies the proof with the same key and
+// checks the author against the registry — so a hand-authored transition that
+// merely recomputes a public hash (or names a made-up rule) is refused.
+//
+// The key is per-process: construction and binding share this module, and the
+// trace records the stamped proof for replay (replay never re-binds). A proof
+// is a property of the constructor path, not of the source text.
+
+const CONSTRUCTION_KEY = randomBytes(32);
+
+/** constructionProof(transition) — the keyed proof of authorship. */
+export function constructionProof(transition) {
+  const d = transition?.constructive_derivation ?? {};
+  return createHmac("sha256", CONSTRUCTION_KEY)
+    .update(JSON.stringify({
+      signature: transitionSignature(transition),
+      rule: d.rule ?? null,
+      author: d.author ?? null,
+      inputs: [...(d.inputs ?? [])].sort(),
+      policy: d.policy ?? POLICY_VERSION,
+    }))
+    .digest("hex");
+}
+
+/** The registry of authorized constructors: rule → { author, operation }. */
+const REGISTRY = new Map();
+
+/**
+ * registerConstructor({ rule, author, operation }) — the constructor layer
+ * registers each construction rule with the exact constructor that owns it and
+ * the operation that rule is allowed to produce. A derivation that names a rule
+ * whose author does not match the registry (or a rule no constructor registered)
+ * is not a construction.
+ */
+export function registerConstructor({ rule, author, operation }) {
+  REGISTRY.set(rule, Object.freeze({ author, operation }));
+  return REGISTRY.get(rule);
+}
+
+/** registeredConstructor(rule) — the registered author/operation, or null. */
+export function registeredConstructor(rule) {
+  return REGISTRY.get(rule) ?? null;
+}
+
+export const CONSTRUCTOR_REGISTRY = {
+  schema: "ConstructorRegistry@1",
+  version: 1,
+  entries: () => [...REGISTRY.entries()].map(([rule, { author, operation }]) => ({ rule, author, operation })),
+  has: (rule) => REGISTRY.has(rule),
+};
+
 /**
  * transitionSignature(transition) — the construction-time signature of a
  * derived transition's executable fields: operation, affected bearers, effect
- * scopes and policy. The constructor stamps this onto the derivation; the
- * execution adapter recomputes it from the transition's CURRENT fields and
- * refuses on divergence (a changed target or payload cannot inherit an old
- * derivation).
+ * forecasts (scopes AND payloads), and policy. The constructor stamps this onto
+ * the derivation; the execution adapter recomputes it from the transition's
+ * CURRENT fields and refuses on divergence (a changed target, payload, scope or
+ * policy cannot inherit an old derivation). The signature covers the payload so
+ * a changed compute spec or read ref is a changed transition.
  */
 export function transitionSignature(transition) {
   const targets = (transition?.affected_bearers ?? []).map((b) => (typeof b === "string" ? b : b?.bearer)).filter(Boolean).sort();
-  const scopes = (transition?.effect_forecasts ?? []).map((f) => f?.scope).filter(Boolean).sort();
+  const forecasts = (transition?.effect_forecasts ?? []).map((f) =>
+    digest({ effect: f?.effect, scope: f?.scope, payload: f?.payload ?? null }),
+  ).sort();
   return digest({
     operation: transition?.proposed_change ?? null,
     targets,
-    scopes,
+    forecasts,
     policy: transition?.constructive_derivation?.policy ?? POLICY_VERSION,
   });
 }
 
 // ── derivation ──────────────────────────────────────────────────────────────
-// A constructive derivation names the rule that produced the transition and
-// the inputs it consumed. It is not a gate renamed "physics": the rule must be
-// a real construction rule, and the inputs must be real records.
+// A constructive derivation names the rule that produced the transition, the
+// AUTHOR that owns that rule (from the registry), and the inputs it consumed.
+// It is not a gate renamed "physics": the rule must be a REGISTERED construction
+// rule, and the inputs must be real records.
 export function derivation({ rule, inputs = [], policy = POLICY_VERSION, signature = null }) {
+  const reg = registeredConstructor(rule);
+  if (!reg) {
+    throw new Error(`constructors: derivation names rule "${rule}" which no authorized constructor registered`);
+  }
   return Object.freeze({
     schema: DERIVATION_SCHEMA,
     version: DERIVATION_VERSION,
     rule,
+    author: reg.author,
     inputs: Object.freeze([...inputs]),
     policy,
     ...(signature ? { signature } : {}),

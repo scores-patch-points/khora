@@ -19,7 +19,9 @@ import { makeRelationReader } from "../organs/hypergraph.js";
 import { chunkSource, tokenize, blankLabelRows } from "../organs/source.js";
 import { splitSentences } from "../adapters/text/spans.js";
 import { GRAMMAR_MIN_SHARE } from "../adapters/text/grain-typing.js";
-import { extractSurfaces, discoverReferents, namesCorefer, diaNorm } from "../adapters/text/surfaces.js";
+import { discoverReferents, namesCorefer, diaNorm } from "../adapters/text/surfaces.js";
+import { extractSurfacesHeard as extractSurfaces, languageContextFor } from "./language-context.js";
+import { withEar } from "../adapters/text/active-ear.js";
 import { resolvePronouns } from "../adapters/text/pronouns.js";
 import { relationExtractorsFor } from "../adapters/text/relations-language.js";
 import { classifyWord, dominantClass } from "../adapters/text/wordclass.js";
@@ -193,7 +195,13 @@ export function engineRelationsFor(list, extra = {}) {
     return p;
   });
   const joined = passages.map((p) => p.text).join("\n\n");
-  return reader(chunkSource("material", joined, {}));
+  // THE LANGUAGE LEG: the material's own language (declared by the caller, else
+  // the one its words attest) supplies the ear the shared tokenizers hear
+  // through — word boundaries for Chinese, bound proclitics for Arabic — for
+  // the span of this synchronous read. English and undetected material read
+  // through no ear: byte-identical to before.
+  const ctx = languageContextFor(joined, { language: extra.language ?? null });
+  return withEar(ctx.ear, () => reader(chunkSource("material", joined, {})));
 }
 
 export { chunkSource };

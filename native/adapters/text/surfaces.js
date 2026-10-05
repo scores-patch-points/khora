@@ -41,6 +41,11 @@ import { NEVER_A_NAME, HONORIFIC_TITLES } from "./priors.js";
 const DIA_RE = /[áàâäéèêëíìîïóòôöúùûü]/g;
 const DIA_TO = { á:"a",à:"a",â:"a",ä:"a",é:"e",è:"e",ê:"e",ë:"e",í:"i",ì:"i",î:"i",ï:"i",ó:"o",ò:"o",ô:"o",ö:"o",ú:"u",ù:"u",û:"u",ü:"u" };
 
+// A token long enough to INDIVIDUATE a name. Three letters in an alphabet; two
+// characters in a script whose characters are morphemes (Han, Kana, Hangul) —
+// 约翰, 北京 are whole names. A fact about the script's information density.
+const DENSE_TOKEN = /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}]/u;
+export const individuatesName = (t) => t.length > (DENSE_TOKEN.test(t) ? 1 : 2);
 export const diaNorm = (t) => String(t ?? "").toLowerCase().trim().replace(DIA_RE, (c) => DIA_TO[c]);
 
 // The cell this organ occupies on the operator grid (engine/operators.js):
@@ -48,7 +53,7 @@ export const diaNorm = (t) => String(t ?? "").toLowerCase().trim().replace(DIA_R
 // statistics. Declared, checked by conformance.
 export const CELL = Object.freeze({ op: "SIG", grain: "Ground" });
 
-const rawTokensOf = (id) => diaNorm(id).split(/\s+/).filter((t) => t.length > 2);
+const rawTokensOf = (id) => diaNorm(id).split(/\s+/).filter(individuatesName);
 
 // A morphological fold applied to each token before identity comparison:
 // token -> (optionally folded) token. Absent, it is the identity — the fold
@@ -1104,7 +1109,7 @@ const deriveMinPartners = (partners) => {
 export const genericTokens = (surfaces, { minPartners } = {}) => {
   const partners = new Map(); // token -> Set(other tokens it co-occurs with in a surface)
   for (const { surface } of surfaces) {
-    const toks = diaNorm(surface).split(/\s+/).filter((t) => t.length > 2);
+    const toks = diaNorm(surface).split(/\s+/).filter(individuatesName);
     if (toks.length < 2) continue;
     for (const t of toks) {
       if (!partners.has(t)) partners.set(t, new Set());
@@ -1265,7 +1270,7 @@ export const discoverReferents = (surfaces, { minSentences, minPartners, groups,
   const indMemo = new Map();
   const individuating = (surface) => {
     let v = indMemo.get(surface);
-    if (v === undefined) { v = normOf(surface).split(/\s+/).filter((t) => t.length > 2 && !generic.has(t)); indMemo.set(surface, v); }
+    if (v === undefined) { v = normOf(surface).split(/\s+/).filter((t) => individuatesName(t) && !generic.has(t)); indMemo.set(surface, v); }
     return v;
   };
 
@@ -1277,7 +1282,7 @@ export const discoverReferents = (surfaces, { minSentences, minPartners, groups,
     const m = new Map();
     for (const entry of surfaces) {
       if (entry.sentences <= sentencesFloorOf(entry)) continue;
-      const toks = diaNorm(entry.surface).split(/\s+/).filter((t) => t.length > 2);
+      const toks = diaNorm(entry.surface).split(/\s+/).filter(individuatesName);
       for (const t of toks) {
         if (!m.has(t)) m.set(t, new Set());
         for (const u of toks) if (u !== t) m.get(t).add(u);
@@ -1326,7 +1331,7 @@ export const discoverReferents = (surfaces, { minSentences, minPartners, groups,
     // and the Network standing organ read the split alias as a top "bond"
     // — self-company, not company.
     const rescued = (bare, other) => {
-      const toks = normOf(bare).split(/\s+/).filter((t) => t.length > 2);
+      const toks = normOf(bare).split(/\s+/).filter(individuatesName);
       if (toks.length !== 1) return false;
       const ps = eligiblePartners.get(toks[0]);
       if (!ps || ps.size !== 1) return false;

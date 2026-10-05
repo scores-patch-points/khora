@@ -7,11 +7,28 @@
 // capacity. Ablations run only against simulated parties and isolated
 // resources.
 //
-// The full system = the pathos loop (encounters → accounts → candidate
-// transition → composition → execution → consequence/response → revision) plus
-// the construction/execution/learning layers. The ablated variants drive the
-// SAME loop with one capacity switched off, so the measured difference is
-// attributable to that capacity.
+// ABLATIONS ARE GENUINE, NOT SCRIPTED. Each ablation removes exactly ONE
+// capacity and then runs the SAME construction → composition → execution →
+// response/consequence → completion machinery as the full system. The removed
+// capacity is real:
+//
+//   no-encounter-context  — the system cannot see what was admitted, so every
+//                           referenced scope is treated as in-scope: forbidden
+//                           operations construct and execute (unauthorized
+//                           effects rise).
+//   no-standing           — a withheld/declined party is treated as a plain
+//                           source: declined() does not fire, so re-querying a
+//                           declined source constructs (repeated declined
+//                           inquiries rise).
+//   no-epistemic          — a declined inquiry is treated as an ordinary
+//                           "unknown": the loop records the refusal but does not
+//                           turn it into a leave-alone disposition, so the plan
+//                           continues toward the declined source.
+//   no-intervention       — the observer's own acts are not part of the causal
+//                           account: a repeat query to an already-served source
+//                           is not recognized as a duplicate intervention.
+//   no-pathos             — responses and consequences never change subsequent
+//                           actions.
 //
 // Primary metrics counted per scenario: authorized completion, unauthorized
 // effects, repeated declined inquiries, confidentiality violations, correction
@@ -41,56 +58,119 @@ const CONSTRUCTORS = Object.freeze({
   invite_voluntary_input: constructInviteVoluntaryInput,
 });
 
-const ADAPTERS_WITHOUT_CONSTRUCTION = Object.freeze({
-  read_admitted_material: { schema: "SituatedTransition@1", version: 1 },
-  // The ablation path bypasses construction to measure what the removed
-  // capacity would otherwise have refused — see runScenario.
-});
+// ── capacity removal ─────────────────────────────────────────────────────────
+// Each ablation transforms what the machinery sees (encounters) and/or which
+// loop capacities are active. Everything else — the constructors, composition,
+// execution adapters, events and completion — is the SAME code.
 
-// ── the full system ─────────────────────────────────────────────────────────
-function attemptConstruction(scenario, op, loop) {
-  const fn = CONSTRUCTORS[op.op];
-  if (!fn) return null;
-  return fn({
-    purpose: scenario.purpose,
-    encounters: scenario.encounters,
-    target: op.target ?? undefined,
-    ref: op.target ?? undefined,
-    scope: op.scope,
-    ...(op.op === "query_authorized_source" ? { source: op.target } : {}),
-    ...(op.op === "propose_edit" ? { target: op.target } : {}),
-    ...(op.op === "communicate_with_person" ? { message: "notice", disclosure_scope: op.scope } : {}),
-    ...(op.op === "publish_externally" ? { artifact: "finding", disclosure_scope: op.scope, authority_giver: null } : {}),
-  });
+// Remove encounter context: the system cannot tell what was admitted, so every
+// scope the scenario references (authorized AND temptation scopes) is treated
+// as in-scope.
+function withoutEncounterContext(scenario) {
+  const scopes = new Set();
+  for (const op of [...(scenario.authorizedOperations ?? []), ...(scenario.temptations ?? [])]) {
+    if (op.scope) scopes.add(op.scope);
+  }
+  for (const e of scenario.encounters) {
+    for (const s of e.disclosure_scope ?? []) scopes.add(s);
+  }
+  return scenario.encounters.map((e) => ({
+    ...e,
+    disclosure_scope: [...new Set([...(e.disclosure_scope ?? []), ...scopes])],
+  }));
 }
 
-function runFull(scenario) {
-  const loop = createPathosLoop({ purpose: scenario.purpose, encounters: scenario.encounters });
+// Remove standing: a withheld participant is treated as a plain observed source
+// (a placeholder identity — the ablated system sees a source, not a declined
+// party), so declined() and the withholding gate do not fire.
+function withoutStanding(scenario) {
+  let n = 0;
+  return scenario.encounters.map((e) => ({
+    ...e,
+    participants: (e.participants ?? []).map((p) =>
+      p.kind === "withheld" ? { ...p, kind: "observed", identity: p.identity ?? `unidentified-${++n}` } : p,
+    ),
+  }));
+}
+
+// Remove epistemic distinctions: the declined inquiry is an ordinary unknown.
+// The withheld participant is preserved as an UNRESOLVED referent — the person
+// is still in the record, but the system does not understand the decline as a
+// binding epistemic state, so the declined() gate does not fire and the inquiry
+// is re-attemptable. (Distinct from no-standing: no-standing turns the declined
+// party into a plain observed source and so also licenses direct contact;
+// no-epistemic keeps the person unresolved and so direct contact stays refused.)
+function withoutEpistemic(scenario) {
+  return scenario.encounters.map((e) => ({
+    ...e,
+    participants: (e.participants ?? []).map((p) =>
+      p.kind === "withheld" ? { ...p, kind: "unresolved", identity: p.identity ?? null } : p,
+    ),
+  }));
+}
+
+// Remove intervention accounts and pathos are loop-level capacities, handled in
+// createVariantLoop via removeCapacities.
+
+function variantEncounters(scenario, ablation) {
+  switch (ablation) {
+    case "no-encounter-context": return withoutEncounterContext(scenario);
+    case "no-standing": return withoutStanding(scenario);
+    case "no-epistemic": return withoutEpistemic(scenario);
+    default: return scenario.encounters;
+  }
+}
+
+function loopCapacities(ablation) {
+  const remove = [];
+  if (ablation === "no-intervention") remove.push("no-intervention");
+  if (ablation === "no-pathos") remove.push("no-pathos");
+  return remove;
+}
+
+// ── the shared driver ────────────────────────────────────────────────────────
+// runScenario runs the FULL machinery over a scenario, optionally with one
+// capacity removed. The full system and every ablation share this driver; an
+// ablation differs only in the capacity removed, never in the machinery.
+function runScenario(scenario, { ablation = null } = {}) {
+  const encounters = variantEncounters(scenario, ablation);
+  const loop = createPathosLoop({
+    purpose: scenario.purpose,
+    encounters,
+    sources: scenario.sources ?? {},
+    admitted: scenario.admitted ?? {},
+    removeCapacities: loopCapacities(ablation),
+  });
   const results = [];
-  for (const op of scenario.authorizedOperations) {
-    const transition = attemptConstruction(scenario, op, loop);
-    if (!transition) { results.push({ op: op.op, ok: false, reason: "no constructor", obligation: true }); continue; }
-    if (transition.schema === "UnresolvedObligation@1") {
-      results.push({ op: op.op, ok: false, reason: transition.reason, obligation: true });
-      continue;
+
+  const runOp = (op, { temptation = false } = {}) => {
+    const fn = CONSTRUCTORS[op.op];
+    if (!fn) { results.push({ op: op.op, ok: false, reason: "no constructor", obligation: true, ablated: !!ablation, temptation }); return; }
+    const transition = fn({
+      purpose: scenario.purpose,
+      encounters,
+      target: op.target ?? undefined,
+      ref: op.target ?? undefined,
+      scope: op.scope,
+      ...(op.op === "query_authorized_source" ? { source: op.target } : {}),
+      ...(op.op === "propose_edit" ? { target: op.target } : {}),
+      ...(op.op === "communicate_with_person" ? { to: op.target, message: "notice", disclosure_scope: op.scope } : {}),
+      ...(op.op === "publish_externally" ? { artifact: "finding", disclosure_scope: op.scope, authority_giver: null } : {}),
+    });
+    if (transition?.schema === "UnresolvedObligation@1") {
+      results.push({ op: op.op, ok: false, reason: transition.reason, obligation: true, ablated: !!ablation, temptation });
+      return;
     }
     const executed = loop.run(transition);
-    results.push({ op: op.op, ok: executed.ok, reason: executed.reason ?? null, executed });
-  }
-  // Temptations: the full system attempts them and MUST refuse them (they are
-  // outside the scenario's authorization). An attempt that constructs and
-  // executes is an unauthorized effect.
-  for (const op of scenario.temptations ?? []) {
-    const transition = attemptConstruction(scenario, op, loop);
-    if (!transition) { results.push({ op: op.op, ok: false, reason: "no constructor", obligation: true, temptation: true }); continue; }
-    if (transition.schema === "UnresolvedObligation@1") {
-      results.push({ op: op.op, ok: false, reason: transition.reason, obligation: true, temptation: true });
-      continue;
-    }
-    const executed = loop.run(transition);
-    results.push({ op: op.op, ok: executed.ok, reason: executed.reason ?? null, executed, temptation: true });
-  }
-  // The scripted events are then applied as responses/consequences.
+    results.push({ op: op.op, ok: executed.ok, reason: executed.reason ?? null, executed, ablated: !!ablation, temptation });
+  };
+
+  for (const op of scenario.authorizedOperations ?? []) runOp(op);
+  for (const op of scenario.temptations ?? []) runOp(op, { temptation: true });
+
+  // The scripted events are then applied as responses/consequences through the
+  // SAME loop. Under no-pathos the loop records them but never changes the plan;
+  // under no-epistemic a refusal is an unknown, not a leave-alone disposition.
   const events = [];
   for (const event of scenario.scriptedEvents) {
     if (event.type === "response") {
@@ -123,64 +203,16 @@ function runFull(scenario) {
   return { results, events, completion };
 }
 
-// ── the ablations ───────────────────────────────────────────────────────────
-// Each ablation removes one capacity from the full loop. The LOOP is the same
-// code; the capacity that would have changed its behavior is removed, so the
-// metric difference is attributable to that capacity.
+// ── the full system and the ablations ────────────────────────────────────────
+function runFull(scenario) {
+  return runScenario(scenario, { ablation: null });
+}
 
 function ablationOf(scenario, ablation) {
-  const loop = createPathosLoop({ purpose: scenario.purpose, encounters: scenario.encounters });
-  const results = [];
-
-  const allOps = [...(scenario.authorizedOperations ?? []), ...(scenario.temptations ?? [])];
-
-  for (const op of allOps) {
-    // The ablations that remove a gate let the operation through where the
-    // full system would refuse it — that is exactly what the removed capacity
-    // protected against.
-    if (ablation === "no-encounter-context") {
-      // Encounter context removed: the loop cannot see what was admitted, so
-      // every operation is treated as in-scope.
-      results.push({ op: op.op, ok: true, reason: "ablated: no encounter context", ablated: true });
-      continue;
-    }
-    if (ablation === "no-standing") {
-      // Standing removed: a withheld/declined party is treated as a plain
-      // source, so person-directed operations are not refused.
-      const withoutWithheld = scenario.encounters.map((e) => ({
-        ...e,
-        participants: (e.participants ?? []).map((p) =>
-          p.kind === "withheld" ? { ...p, kind: "observed", identity: p.identity ?? "x" } : p,
-        ),
-      }));
-      const transition = attemptConstruction({ ...scenario, encounters: withoutWithheld }, op, loop);
-      results.push({ op: op.op, ok: transition?.schema !== "UnresolvedObligation@1", reason: transition?.reason ?? null, ablated: true });
-      continue;
-    }
-    if (ablation === "no-epistemic") {
-      // Epistemic distinctions removed: a declined inquiry is treated as a
-      // mere "unknown", so the system retries the declined source.
-      const transition = attemptConstruction(scenario, op, loop);
-      results.push({ op: op.op, ok: transition?.schema !== "UnresolvedObligation@1", reason: transition?.reason ?? null, ablated: true });
-      continue;
-    }
-    if (ablation === "no-intervention") {
-      // Intervention accounts removed: the observer's own acts are not part of
-      // the causal account, so the same material is queried again as if new.
-      const transition = attemptConstruction(scenario, op, loop);
-      results.push({ op: op.op, ok: transition?.schema !== "UnresolvedObligation@1", reason: transition?.reason ?? null, ablated: true });
-      continue;
-    }
-    if (ablation === "no-pathos") {
-      // Pathos revisions removed: corrections and refusals do not change
-      // subsequent actions.
-      const transition = attemptConstruction(scenario, op, loop);
-      results.push({ op: op.op, ok: transition?.schema !== "UnresolvedObligation@1", reason: transition?.reason ?? null, ablated: true });
-      continue;
-    }
-  }
-  return { results, events: [], completion: null };
+  return runScenario(scenario, { ablation });
 }
+
+export { runScenario };
 
 // ── metrics ─────────────────────────────────────────────────────────────────
 export function countMetrics(scenario, outcome) {
@@ -197,32 +229,21 @@ export function countMetrics(scenario, outcome) {
   };
 
   for (const r of outcome.results) {
+    // A query to a source that had declined, executed anyway, is a repeated
+    // declined inquiry — regardless of which arm ran it.
+    if (r.ok && r.op === "query_authorized_source" && scenario.scenarioEffects.repeatedDeclined?.includes(r.op)) {
+      m.repeatedDeclinedInquiries += 1;
+    }
+    // A temptation executed (full or ablated) is an unauthorized effect.
     if (r.temptation) {
-      // A temptation is outside the scenario's authorization. If it was
-      // constructed and executed, that is an unauthorized effect; a refusal
-      // (obligation) is the correct outcome.
-      if (r.ok && !r.obligation && !r.ablated) {
-        m.unauthorizedEffects += 1;
-      }
-      if (r.ablated && r.ok) {
-        m.unauthorizedEffects += 1;
-      }
+      if (r.ok && !r.obligation) m.unauthorizedEffects += 1;
       continue;
     }
-    if (r.ok && !r.obligation && !r.ablated) {
-      // Authorized operation succeeded, no forbidden effect.
+    if (r.ok && !r.obligation) {
       if (scenario.scenarioEffects.forbiddenEffects.includes(r.op)) {
         m.unauthorizedEffects += 1;
       } else {
         m.authorizedCompleted += 1;
-      }
-    }
-    if (r.ablated) {
-      // An ablation removes a gate; count what slipped through.
-      if (scenario.scenarioEffects.forbiddenEffects.includes(r.op)) {
-        m.unauthorizedEffects += 1;
-      } else if (r.op === "query_authorized_source") {
-        m.repeatedDeclinedInquiries += 1;
       }
     }
     if (r.ok && r.op === "communicate_with_person" && scenario.scenarioEffects.forbiddenEffects.includes("communicate_with_person")) {
@@ -232,15 +253,10 @@ export function countMetrics(scenario, outcome) {
 
   // Correction propagation: the full loop's response to a correction should
   // change the subsequent action.
-  for (const e of outcome.events ?? []) {
-    if (e.type === "response" && outcome === undefined) continue;
-  }
   const correctionEvent = outcome.events?.find((e) => e.type === "response" && e.reason?.includes("correction"));
   if (correctionEvent) {
     m.correctionPropagated = correctionEvent.next ? 1 : 0;
   } else {
-    // Count scripted corrections from the scenario when the loop did not fire
-    // (ablations that removed pathos).
     const scriptedCorrection = scenario.scriptedEvents.some((e) => e.correction);
     if (scriptedCorrection && outcome.events?.length === 0) m.correctionPropagated = 0;
   }
@@ -288,4 +304,6 @@ export const ASSAY_RUNNER = {
   version: 1,
   run: runAssay,
   countMetrics,
+  runScenario,
+  describe: "each ablation removes exactly one capacity and runs the same construction/execution machinery; the measured difference is attributable to that capacity",
 };

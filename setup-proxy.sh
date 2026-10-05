@@ -194,6 +194,17 @@ if [ "$CONFIG" = "1" ]; then
       fold.models["fold:gemma2:2b"] = { name: "The Fold · Gemma 2 2B (grounded, local)", tool_call: false };
       fold.models["fold:qwen2.5-coder:1.5b"] = { name: "The Fold · Qwen2.5 Coder 1.5B (grounded, local)", tool_call: false };
       data.provider.fold = fold;
+      // the heimdall bridge provider - Code mode routes opencode coding
+      // through the bridge (which dispatches to the Fold own opencode and
+      // meters every token). The bridge is up when heimdall up is running.
+      const hm = data.provider.heimdall ?? {};
+      hm.name = "Heimdall · The Fold bridge";
+      hm.npm = hm.npm ?? "@ai-sdk/openai-compatible";
+      hm.options = hm.options ?? {};
+      hm.options.baseURL = "http://127.0.0.1:8790/v1";
+      hm.models = hm.models ?? {};
+      hm.models["qwen2.5-coder:1.5b"] = { name: "Heimdall · Qwen2.5 Coder 1.5B (routed)", tool_call: true, reasoning: false };
+      data.provider.heimdall = hm;
       // migrate any legacy er7 provider written by an older installer
       if (data.provider.er7) delete data.provider.er7;
       fs.writeFileSync(file, text.startsWith("{") && text.includes("//") ? JSON.stringify(data, null, 2) + "\n" : JSON.stringify(data, null, 2) + "\n");

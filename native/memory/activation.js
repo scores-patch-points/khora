@@ -80,6 +80,8 @@
 // untested here and is not asserted — see scripts/RESULTS.md on how badly the
 // omnimodal commitment currently holds up when actually measured.
 
+import { hear } from "../adapters/text/active-ear.js";
+import { wordFloor } from "../adapters/text/script-floor.js";
 const WORD_RE = /[\p{L}\p{N}']+/gu;
 
 // The cell this organ occupies on the operator grid (engine/operators.js):
@@ -89,7 +91,7 @@ export const CELL = Object.freeze({ op: "CON", grain: "Figure" });
 
 // Unicode-aware, unlike the Latin-1 class this was learned from: a memory that
 // can only wire English is not a memory, it is a language module.
-export const tokens = (t) => String(t ?? "").toLowerCase().match(WORD_RE) ?? [];
+export const tokens = (t) => hear(String(t ?? "").toLowerCase()).match(WORD_RE) ?? [];
 
 const bump = (map, key, amount) => map.set(key, (map.get(key) ?? 0) + amount);
 
@@ -115,6 +117,11 @@ const bump = (map, key, amount) => map.set(key, (map.get(key) ?? 0) + amount);
 // on the same terms as `completion`/`topEdges`/`edgeSlots` below.
 const IDF_FLOOR = 2.0;
 const MIN_LEN = 4;
+
+// Length floors are script-aware (adapters/text/script-floor.js): Latin keeps its
+// declared 4 and 3, a Han character (a morpheme) and an Arabic/Hebrew letter
+// (consonants only) carry more, so those scripts get a proportionally lower one.
+const floorFor = wordFloor;
 
 /**
  * The sparse code of one frame, against the tables AS THEY STAND. Nothing here
@@ -154,14 +161,14 @@ export const codeOf = (ws, state, { minLen = MIN_LEN, idfFloor = IDF_FLOOR } = {
   const cue = new Map();
 
   for (const w of ws) {
-    if (w.length < minLen) continue;
+    if (w.length < floorFor(w, minLen)) continue;
     const s = idfOf(w);
     if (s < idfFloor) continue; // must be distinctive to separate
     trace.set(w, Math.max(trace.get(w) ?? 0, s));
     if ((df.get(w) ?? 0) >= 2) cue.set(w, Math.max(cue.get(w) ?? 0, s)); // ...and must ALREADY have recurred to fire
   }
 
-  const long = ws.filter((w) => w.length >= 3);
+  const long = ws.filter((w) => w.length >= floorFor(w, 3));
   for (let i = 0; i + 2 < long.length; i++) {
     const g = `${long[i]} ${long[i + 1]} ${long[i + 2]}`;
     const seen = gramDf.get(g) ?? 0;
@@ -316,7 +323,7 @@ export const encodeFrame = (state, order, ws, trace, { edgeSlots = 24 } = {}) =>
   // frame recalled every previous frame at reach 1.
   const seenU = new Set(ws);
   for (const w of seenU) bump(state.df, w, 1);
-  const long = ws.filter((w) => w.length >= 3);
+  const long = ws.filter((w) => w.length >= floorFor(w, 3));
   const seenG = new Set();
   for (let k = 0; k + 2 < long.length; k++) seenG.add(`${long[k]} ${long[k + 1]} ${long[k + 2]}`);
   for (const g of seenG) bump(state.gramDf, g, 1);

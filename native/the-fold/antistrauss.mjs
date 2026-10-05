@@ -208,7 +208,12 @@ const SAFETY_LAWS = [
     label: "terror attack planning",
     basis: "concrete operational planning for an attack intended to kill or injure many people",
     patterns: [
-      /(?:plan|execute|prepare).{0,80}(?:mass.{0,20}(?:shooting|casualt)|attack.{0,60}(?:crowd|school|station|concert))/i,
+      // WHOLE WORDS, present-tense/gerund forms only: 'plan', 'planning', 'prepare', 'execute'. The first version had no word
+      // boundary, so 'explanation' contained 'plan' and 'planned' (narration: "he planned the attack") matched too — measured
+      // 2026-10-05 on Wikipedia's articles about the 2023 Nashville school shooting ('planning an attack on … School'), Sandy Hook
+      // and Uvalde, which refused an ordinary question about Nashville's founding. Scope (below) is the real fix; this stops the
+      // pattern matching words it never meant.
+      /\b(?:plan(?:ning)?|prepar(?:e|ing)|execut(?:e|ing))\b.{0,80}(?:mass.{0,20}(?:shooting|casualt)|attack.{0,60}(?:crowd|school|station|concert))/i,
     ],
   },
 ];
@@ -313,6 +318,47 @@ export function scanPrompt(text) {
   return hits;
 }
 
+// ── SCOPE OF THE PRE-CALL GATE (the user's ruling, 2026-10-05) ─────────────────────────────────────────────────
+// The gate guards GENERATION, not the acquisition of information, and the holograph judges intent. So the pre-call
+// scan no longer reads the whole prompt:
+//   * the person's OWN request is scanned — unless it is plainly an act of acquisition (who/what/when/why/explain/
+//     tell me about/summarise… with no generation or operational cue such as write/draft/outline/instructions/
+//     step-by-step/how to/help me/I want to): asking ABOUT an attack is not planning one;
+//   * everything else in the prompt — the system message carrying retrieved sources, earlier assistant turns, tool
+//     output — is QUOTED MATERIAL. Matches inside it never block. They are recorded, flagged, and surfaced as
+//     `contextualized`, because the perspectival standard holds: engagement with The Fold cannot, structurally,
+//     invalidate a perspective, only contextualize it. A source that discusses a shooting is a perspective, and a
+//     refusal triggered by it would be the gate invalidating that perspective — a violation, which the verdict now
+//     says out loud instead of committing silently.
+// The OUTPUT guard (reviewBlock, below) is unchanged: it judges what is GENERATED, which is where this law matters.
+// The two word lists are DECLARED (Constitution II.11), English, and conservative: a request that is not clearly
+// acquisition is scanned exactly as before.
+export const PERSPECTIVAL = Object.freeze({
+  principle: "Engagement with The Fold cannot, structurally, invalidate a perspective, only contextualize it.",
+  standing: "contextualized",
+});
+const ACQUIRE = /^\s*(?:who|what|when|where|why|which|whose|how (?:did|do|does|many|much|long|old|was|were|is|are|come)|is|are|was|were|did|does|do|tell me about|explain|describe|summari[sz]e|history of|can you (?:tell|explain|summari[sz]e)|give me (?:an )?(?:overview|summary))\b/i;
+const GENERATE = /\b(?:write|draft|compose|generate|create|outline|design|devise|help me|show me how|walk me through|step[- ]by[- ]step|instructions?|tutorial|how (?:to|do i|can i|should i|would i)|i (?:want|need|plan|intend|am going) to|let'?s|can you (?:write|help|make|build))\b/i;
+/** Is this request an act of acquiring information (and not a request to generate or to be instructed)? */
+export function isAcquisition(text) {
+  const t = String(text ?? "").trim();
+  return ACQUIRE.test(t) && !GENERATE.test(t);
+}
+/** Split a prompt into what the gate may BLOCK on (the person's request) and what it only flags (quoted material). */
+export function scopeScan(messages) {
+  const byClass = new Map(); const contextualized = []; let acquisitions = 0;
+  for (const m of messages ?? []) {
+    const role = String(m?.role ?? "user"); const text = String(m?.content ?? "");
+    if (role === "user") {
+      if (isAcquisition(text)) { acquisitions++; continue; }
+      for (const h of scanPrompt(text)) if (!byClass.has(h.class)) byClass.set(h.class, h);
+    } else {
+      for (const h of scanPrompt(text)) contextualized.push({ class: h.class, label: idByLaw.get(h.class)?.label ?? h.class, role, span: h.span });
+    }
+  }
+  return { requestHits: [...byClass.values()], contextualized, acquisitions };
+}
+
 // Tier-2 settle, shared by the pre-call gate (prompt) and the output-side
 // check (model output): the sensor's hits are admitted as raw `mentions`
 // edges (provenance = the detection bytes); the cue lights the classes; the
@@ -364,8 +410,12 @@ export function gate({ model, messages = [], route = "chat", sessionId = null, w
   const text = (messages ?? []).map((m) => String(m?.content ?? "")).join("\n");
   const promptDigest = shortDigest(text);
   const mode = effectiveMode({ forceBlock });
+  const scoped = scopeScan(messages);
 
   const verdictBase = {
+    // quoted material that matched a law is FLAGGED, never blocked (see SCOPE OF THE PRE-CALL GATE above)
+    ...(scoped.contextualized.length ? { contextualized: scoped.contextualized, perspectival: PERSPECTIVAL } : {}),
+    ...(scoped.acquisitions ? { acquisitions: scoped.acquisitions } : {}),
     at, model, route, sessionId, workspace,
     mode: MODE,
     effectiveMode: mode,
@@ -373,7 +423,10 @@ export function gate({ model, messages = [], route = "chat", sessionId = null, w
     physics: { substrate: "createReactionSubstrate (native/kernel/reaction.js)", ...physics },
   };
 
-  const hits = scanPrompt(text);
+  const hits = scoped.requestHits;
+  if (scoped.contextualized.length) {
+    appendLog({ act: "gate-context", at, model, route, sessionId, promptDigest, perspectival: PERSPECTIVAL, contextualized: scoped.contextualized.map((c) => ({ class: c.class, role: c.role })), blocked: false });
+  }
 
   // THE CANON IS UNGROUNDED — the physics spec names a canon, and a canon
   // file is missing or its sha256 no longer matches. The law tier cannot

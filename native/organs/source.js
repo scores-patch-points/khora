@@ -21,6 +21,7 @@
 //   - Whatever cannot be addressed is a typed gap, never a guess. A chunk with
 //     no term overlap is simply absent; nothing is invented to fill it.
 
+import { hear } from "../adapters/text/active-ear.js";
 import { sniffContainer } from "./measure.js";
 
 const STOPWORDS = new Set(
@@ -121,7 +122,7 @@ export function foldTypography(s) {
 }
 
 export function tokenize(text) {
-  return foldDiacritics(text)
+  return hear(foldDiacritics(text))
     .toLowerCase()
     // Unicode word/number classes, not `[a-z0-9]` — the same boundary
     // `foldTypography` already splits on, two functions up in this file, and
