@@ -1200,40 +1200,18 @@ async function handleRequest(req, res) {
         res.writeHead(400, { "content-type": "application/json" });
         res.end(JSON.stringify({ error: "maxCharacters must be an integer from 1 to 1000000" })); return;
       }
-      const material = text.slice(0, maxCharacters);
-      const truncated = material.length < text.length;
       const t0 = Date.now();
       try {
-        // THE READING DOOR — khora perceives, model-free. The constitutional
-        // reader (canonical seam, 2026-10-04): createSession → admitChunked →
-        // sessionReferents, backed by the native reader
-        // (native/the-fold/corpus-session.js). The mouth is never consulted
-        // (GL-RR-04/05; a read is not a draw). The surface (holodeck) treats
-        // the returned referents as a witness beside its own finder. P2:
-        // stages run and not run are named, never implied.
-        const { createSession, admitChunked, sessionReferents, sessionRelations } = await import("./native/the-fold/corpus-session.js");
-        const sourceId = `doc:${(name || "unnamed").replace(/[^a-zA-Z0-9_.-]/g, "_")}`;
-        const session = createSession();
-        admitChunked(session, { text: material, sourceId, language: "en" });
-        const cast = await sessionReferents(session, { sourceId, priors: [], limit: 200 });
-        const relations = await sessionRelations(session, { sourceId });
-        const referents = (cast.referents ?? []).map((r) => ({
-          surfaces: [r.display].filter(Boolean),
-          routes: (r.fromPrior === true ? ["prior"] : ["witnessed"]).concat(r.individuation ? [`grain:${r.individuation}`] : []),
-          grain: r.individuation ?? null,
-        }));
-        log(`read → ${referents.length} referents, ${(relations?.relations ?? relations ?? []).length} relations, ${Date.now() - t0}ms`);
+        // THE READING DOOR — khora perceives, model-free; the mouth is never consulted (GL-RR-04/05; a read is not a
+        // draw). The body lives in native/the-fold/read-door.mjs so a test can call it without a server. A caller may
+        // DECLARE `language` ("es", "zh-Hans"); otherwise the reader hears it from the text. It used to be forced to
+        // "en" here for every document, which switched the reader's own language leg off.
+        const { readDoor, declaredLanguage } = await import("./native/the-fold/read-door.mjs");
+        try { declaredLanguage(parsed.language); } catch (e) { res.writeHead(400, { "content-type": "application/json" }); res.end(JSON.stringify({ error: String(e.message) })); return; }
+        const out = await readDoor({ text, name, language: parsed.language ?? null, maxCharacters });
+        log(`read → ${out.referents.length} referents, ${out.relations.length} relations, language ${out.language ?? "none"} (${out.languageSource}), ${Date.now() - t0}ms`);
         res.writeHead(200, { "content-type": "application/json" });
-        res.end(JSON.stringify({
-          schema: "EORead@1", ms: Date.now() - t0,
-          source: sourceId, truncated, sourceCharacters: text.length, readCharacters: material.length, maxCharacters,
-          assembly: "constitutional-host", priorsInjected: ["language:en"], stagesNotRun: ["5b", "6", "7", "8"],
-          basis: "constitutional reader (legacy host): createSession → admitChunked → sessionReferents; model-free; priors: language en (declared — bin/priors/lang/en.json absent, engine floor used, gap disclosed); stages 1-5a run, 5b-8 not run",
-          sentences: [], relations: relations?.relations ?? relations ?? [],
-          referents, descriptorBeings: [],
-          gaps: [...(truncated ? [`input_truncated: read ${material.length} of ${text.length} characters; a prefix is different material (S2)`] : []), ...(cast.gaps ?? []).map((g) => (typeof g === "string" ? g : `${g.reason}`))].slice(0, 8),
-          disclosure: { giver: "heimdall", standing: "disclosed", rule: "a read is not a draw — the mouth is never consulted; the ground is a hypothesis (standing: hypothesis, half-life'd), never asserted (S1/P2/P3, khora)" },
-        }));
+        res.end(JSON.stringify(out));
       } catch (e) {
         log(`read error: ${String(e.message ?? e).slice(0, 140)}`);
         if (!res.headersSent) res.writeHead(500, { "content-type": "application/json" });
