@@ -11,7 +11,7 @@
 // ...specific } and returns result(...). Every returned transition validates
 // against SituatedTransition@1 (contracts/transition.js).
 
-import { unresolvedObligation, derivation, hasAdmitted, declined, participated, result, transitionSignature } from "./core.js";
+import { unresolvedObligation, derivation, hasAdmitted, declined, participated, result, transitionSignature, constructionProof, registerConstructor } from "./core.js";
 
 const t = (purpose, { operation, encounters = [], affected = [], forecasts = [], unknowns = [], derivation: d, falsifiers = [], operational_authority = "constructed" }) => {
   const transition = {
@@ -31,13 +31,19 @@ const t = (purpose, { operation, encounters = [], affected = [], forecasts = [],
     falsifiers,
   };
   // THE BINDING IS STAMPED AT CONSTRUCTION: the signature of the executable
-  // fields (operation, affected bearers, effect scopes, policy) is frozen onto
-  // the derivation. The execution adapter recomputes it from the transition's
-  // CURRENT fields and refuses on divergence — a changed target or payload
-  // cannot inherit an old derivation.
+  // fields (operation, affected bearers, effect forecasts, policy) is frozen
+  // onto the derivation, and a KEYED PROOF of authorship is stamped beside it.
+  // The execution adapter recomputes both from the transition's CURRENT fields
+  // and refuses on divergence — a changed target, payload or scope cannot
+  // inherit an old derivation, and a transition that merely recomputes the
+  // public hash without the construction key is not an authorized construction.
   return {
     ...transition,
-    constructive_derivation: { ...transition.constructive_derivation, signature: transitionSignature(transition) },
+    constructive_derivation: {
+      ...transition.constructive_derivation,
+      signature: transitionSignature(transition),
+      proof: constructionProof(transition),
+    },
   };
 };
 
@@ -94,15 +100,19 @@ export function constructInviteVoluntaryInput({ purpose, encounters = [], to, sc
 
 // ── 4. compute in isolation ─────────────────────────────────────────────────
 // The one operation licensed by research-only scope by default: it discloses
-// nothing and requires no participation.
-export function constructComputeInIsolation({ purpose, encounters = [], what, scope = "research-only" }) {
+// nothing and requires no participation. The transition carries a REAL
+// mechanical computation spec (`compute: { op, args }`), so the adapter
+// performs the computation and returns the actual value. A constructor with no
+// spec constructs a transition the adapter will refuse (a typed gap) rather
+// than fake a result.
+export function constructComputeInIsolation({ purpose, encounters = [], what, compute, scope = "research-only" }) {
   return result(t(purpose, {
     operation: "compute_in_isolation",
     encounters,
     affected: [],
-    forecasts: [{ effect: `compute ${what} without contact or disclosure`, scope, evidence: ["no bearer is affected; no disclosure"], revisable: true }],
+    forecasts: [{ effect: `compute ${what ?? "a mechanical value"} without contact or disclosure`, scope, evidence: ["no bearer is affected; no disclosure"], revisable: true, payload: { compute } }],
     unknowns: ["the result"],
-    derivation: derivation({ rule: "compute-isolation@1", inputs: [`what:${what}`] }),
+    derivation: derivation({ rule: "compute-isolation@1", inputs: [`what:${what}`, ...(compute ? [`op:${compute.op}`] : [])] }),
     falsifiers: ["computation secretly touches a network or a bearer"],
   }));
 }
@@ -221,3 +231,20 @@ export function constructCommunicateWithPerson({ purpose, encounters = [], to, m
     falsifiers: ["communication goes to a person who was never met", "communication substitutes for a response"],
   }));
 }
+
+// ── the constructor registry ────────────────────────────────────────────────
+// Every rule the vocabulary can emit is registered to the exact constructor
+// that owns it and the operation that rule is allowed to produce. A derivation
+// that names a rule no constructor registered — or claims an author that does
+// not own that rule — is not a construction, and the seam refuses it.
+registerConstructor({ rule: "read-admitted@1", author: "constructReadAdmittedMaterial", operation: "read_admitted_material" });
+registerConstructor({ rule: "query-authorized@1", author: "constructQueryAuthorizedSource", operation: "query_authorized_source" });
+registerConstructor({ rule: "invite-voluntary@1", author: "constructInviteVoluntaryInput", operation: "invite_voluntary_input" });
+registerConstructor({ rule: "compute-isolation@1", author: "constructComputeInIsolation", operation: "compute_in_isolation" });
+registerConstructor({ rule: "propose-edit@1", author: "constructProposeEdit", operation: "propose_edit" });
+registerConstructor({ rule: "materialize-private@1", author: "constructMaterializePrivateArtifact", operation: "materialize_private_artifact" });
+registerConstructor({ rule: "leave-alone@1", author: "constructLeaveAlone", operation: "leave_alone" });
+registerConstructor({ rule: "revise-plan@1", author: "constructRevisePlan", operation: "revise_plan" });
+registerConstructor({ rule: "report-gap@1", author: "constructReportGap", operation: "report_gap" });
+registerConstructor({ rule: "publish-external@1", author: "constructPublishExternally", operation: "publish_externally" });
+registerConstructor({ rule: "communicate-person@1", author: "constructCommunicateWithPerson", operation: "communicate_with_person" });

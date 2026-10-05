@@ -40,14 +40,20 @@ export const isCorrection = (response) =>
  * the required sequence. `accounts` maps a bearer to { standing, epistemic_state,
  * responses: [] }.
  */
-export function createPathosLoop({ purpose, encounters = [], accounts = {}, sources = {}, admitted = {} } = {}) {
+export function createPathosLoop({ purpose, encounters = [], accounts = {}, sources = {}, admitted = {}, runtime = null, removeCapacities = [] } = {}) {
   const state = {
     purpose,
     encounters: [...encounters],
     accounts: new Map(Object.entries(accounts)),
     traces: [],
     lastTransition: null,
-    runtime: createExecutionRuntime({ sources, admitted }),
+    runtime: runtime ?? createExecutionRuntime({ sources, admitted }),
+    // intervention account: the observer's own acts are part of the causal
+    // account. A repeat query to an already-served source is recognized as a
+    // duplicate intervention and refused unless renewed (the no-intervention
+    // capacity removes this recognition).
+    intervened: new Set(),
+    removeCapacities: [...removeCapacities],
   };
 
   const trace = (step, detail) => state.traces.push({ step, detail, at: Date.now() });
@@ -91,6 +97,17 @@ export function createPathosLoop({ purpose, encounters = [], accounts = {}, sour
     run(transition) {
       state.lastTransition = transition;
       trace("transition", transition?.proposed_change ?? "?");
+      // Intervention account: the observer's own acts are part of the causal
+      // account. Querying the same source twice for the same purpose, without a
+      // renewed reason, is a duplicate intervention — recognized and refused.
+      // The no-intervention ablation removes this recognition.
+      if (!state.removeCapacities.includes("no-intervention") && transition?.proposed_change === "query_authorized_source") {
+        const target = transition?.affected_bearers?.[0]?.bearer ?? null;
+        if (target && state.intervened.has(target)) {
+          trace("blocked", `duplicate intervention: ${target} was already queried in this run`);
+          return { ok: false, reason: `duplicate intervention: ${target} was already queried in this run; a renewed invitation with a recorded reason is required`, obligation: { operation: "query_authorized_source", reason: "duplicate intervention", missing: ["renewed invitation"] } };
+        }
+      }
       const composed = composeSteps({ purpose: state.purpose, steps: [transition], encounters: state.encounters });
       if (!composed.ok) {
         trace("blocked", composed.reason);
@@ -98,6 +115,10 @@ export function createPathosLoop({ purpose, encounters = [], accounts = {}, sour
       }
       const executed = executeTransition(composed.transition, { runtime: state.runtime });
       trace("executed", executed.ok ? executed.result?.operation ?? "ok" : executed.reason);
+      if (executed.ok && transition?.proposed_change === "query_authorized_source") {
+        const target = transition?.affected_bearers?.[0]?.bearer ?? null;
+        if (target) state.intervened.add(target);
+      }
       return executed;
     },
 
@@ -112,6 +133,21 @@ export function createPathosLoop({ purpose, encounters = [], accounts = {}, sour
       if (!responder) return { ok: false, reason: "response carries no responder" };
       const a = accountOf(responder);
       a.responses.push(response);
+
+      // no-pathos: responses are recorded but NEVER change subsequent actions.
+      if (state.removeCapacities.includes("no-pathos")) {
+        a.epistemic_state = "known";
+        return { ok: true, reason: "response recorded, plan unchanged (pathos removed)", next: null, revision: null, account: a };
+      }
+
+      // no-epistemic: a refusal is an ordinary "unknown", not a binding declined
+      // disposition — recorded, but the plan continues (the inquiry is
+      // re-attemptable).
+      if (state.removeCapacities.includes("no-epistemic")) {
+        a.epistemic_state = "unknown";
+        return { ok: true, reason: "response recorded, declined treated as unknown (epistemic distinctions removed)", next: null, revision: null, account: a };
+      }
+
       a.epistemic_state = isRefusal(response) ? "inquiry_declined" : "known";
 
       if (isRefusal(response)) {
@@ -179,20 +215,50 @@ export function createPathosLoop({ purpose, encounters = [], accounts = {}, sour
 
     /**
      * completion — a leave-alone end is a COMPLETED disposition (left_alone),
-     * never a failure badge.
+     * never a failure badge. But completion is only what the loop actually
+     * did: if no transition was ever constructed, executed or revised from
+     * (the required sequence never ran), the loop reports `failed` — it can
+     * never claim `accomplished` for work it did not do. `checks` are the
+     * caller's independently specified checks, used verbatim; when none are
+     * supplied the completion says so instead of inventing a check.
      */
     complete({ task_id = "task-pathos", checks = [] } = {}) {
       const last = state.lastTransition;
       const isLeaveAlone = last?.proposed_change === "leave_alone";
-      const completion_state = isLeaveAlone ? "left_alone" : state.traces.some((t) => t.step === "blocked") ? "blocked" : "accomplished";
+      const attempted = state.traces.some((t) => t.step === "transition" || t.step === "blocked" || t.step === "executed" || t.step === "revised-refusal" || t.step === "revised-correction" || t.step === "reopened-new-affected") || state.runtime.effects.length > 0;
+      const revised = state.traces.some((t) => t.step === "revised-refusal" || t.step === "revised-correction" || t.step === "reopened-new-affected");
+      const sequenceRan = (state.encounters.length > 0 || revised) && attempted;
+      const blocked = state.traces.some((t) => t.step === "blocked");
+      const unresolved = state.traces.filter((t) => t.step === "reopened-new-affected").map((t) => `new affected party: ${t.detail}`);
+
+      let completion_state;
+      let note;
+      if (!sequenceRan) {
+        completion_state = "failed";
+        note = "the required sequence never ran: no encounter produced a constructed, executed or revised transition — nothing claims accomplishment";
+      } else if (blocked) {
+        completion_state = "blocked";
+        note = "a step was blocked; completion is blocked, not accomplished";
+      } else if (unresolved.length > 0) {
+        completion_state = "accomplished_with_open_effects";
+        note = "the task accomplished what it could; open effects are recorded as unresolved";
+      } else if (isLeaveAlone) {
+        completion_state = "left_alone";
+        note = "leaving alone is a completed disposition, not a retrieval failure";
+      } else {
+        completion_state = "accomplished";
+        note = checks.length ? "the independently specified checks are recorded verbatim" : "no independently specified checks were supplied; completion is asserted from the loop's own record, not independently verified";
+      }
+
       return {
         schema: "Completion@1",
         version: 1,
         completion_state,
         task_id,
-        checks: checks.length ? checks : ["the pathos loop ran the required sequence"],
-        unresolved_consequences: state.traces.filter((t) => t.step === "reopened-new-affected").map((t) => `new affected party: ${t.detail}`),
-        ...(isLeaveAlone ? { note: "leaving alone is a completed disposition, not a retrieval failure" } : {}),
+        checks: [...checks],
+        ...(checks.length === 0 ? { verified: false, reason: "no independently specified checks were supplied" } : { verified: true }),
+        unresolved_consequences: unresolved,
+        ...(note ? { note } : {}),
       };
     },
   };

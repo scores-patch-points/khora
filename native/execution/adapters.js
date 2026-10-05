@@ -20,6 +20,7 @@
 // the empirical assay's business.
 
 import { bindTransition } from "./bind.js";
+import { evaluateMechanical } from "./mechanical.js";
 import { POLICY_VERSION, isTransition } from "../constructors/core.js";
 
 export const EFFECT_SCHEMA = "ExecutedEffect@1";
@@ -87,9 +88,20 @@ const adapters = Object.freeze({
   },
 
   compute_in_isolation(transition, runtime) {
-    // Pure compute: nothing is read from or written to the world. The effect
-    // record is the only trace.
-    return { ok: true, result: { computed: true, what: transition.effect_forecasts?.[0]?.effect ?? null }, effects: [recordEffect(runtime, transition, { operation: "compute_in_isolation", scope: "research-only" })] };
+    // Real computation, performed here, over the runtime's admitted material.
+    // The transition carries the mechanical spec in its forecast payload; the
+    // evaluator resolves refs against the runtime and returns the ACTUAL value.
+    // A transition with no spec, an unknown op, or an unresolved ref is a typed
+    // gap — never a canned "computed" record.
+    const spec = transition.effect_forecasts?.[0]?.payload?.compute ?? transition.effect_forecasts?.[0]?.compute ?? null;
+    const ctx = { get: (ref) => runtime.admitted.get(ref) ?? runtime.sources.get(ref) ?? null };
+    const out = evaluateMechanical(spec, ctx);
+    if (!out.ok) return { ok: false, reason: out.reason, effects: [] };
+    return {
+      ok: true,
+      result: { computed: true, value: out.value, op: out.op },
+      effects: [recordEffect(runtime, transition, { operation: "compute_in_isolation", scope: "research-only", detail: { op: out.op, value: out.value } })],
+    };
   },
 
   propose_edit(transition, runtime) {

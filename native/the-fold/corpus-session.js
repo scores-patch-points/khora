@@ -19,6 +19,7 @@
 import { createHash } from "node:crypto";
 import { splitSentences } from "../adapters/text/spans.js";
 import { createCausalTextPerceiver, textEncounters } from "../adapters/text/recursive.js";
+import { grammarFor, detectLanguage } from "./language-grammar.js";
 
 export const CORPUS_SESSION_SCHEMA = "CorpusSession@1";
 export const CORPUS_SESSION_VERSION = 1;
@@ -110,13 +111,26 @@ export function admitChunked(session, { text, sourceId, language } = {}) {
 async function readDocument(session, sourceId) {
   const doc = session.documents.get(sourceId);
   if (!doc) return null;
+  // THE LANGUAGE LEG: a declared language, else the one the text's own words
+  // attest (language-grammar.js — measured, never a silent default). Its
+  // received POS prior, frame prior and proclitics go to the perceiver, so the
+  // being tier hears nominals in any script instead of listening for capitals.
+  // An undetected / ungrammared language is recorded on the document as a
+  // typed gap and read with capitalisation alone — disclosed, not hidden.
+  let grammar = doc.language ? grammarFor(doc.language, { text: doc.text }) : { language: null, gap: "no language declared" };
+  if (!grammar.language) {
+    const heard = detectLanguage(doc.text);
+    grammar = heard.language ? { ...grammarFor(heard.language, { text: doc.text }), detected: heard } : { ...grammar, detected: heard };
+  }
+  doc.grammar = { language: grammar.language, gap: grammar.gap ?? null, detected: grammar.detected ?? null };
   const perceiver = createCausalTextPerceiver({
+    ...(grammar.language ? { posPrior: grammar.posPrior, framePrior: grammar.framePrior, proclitics: grammar.proclitics, enclitics: grammar.enclitics } : {}),
     // refreshEvery: 1 is the perceiver's documented default (recursive.js:426):
     // batching at 25 is stale. The cast projection runs at the first content
     // refresh regardless (reprojectEveryFinal guard), so a short document is
     // never starved of a cast.
     reprojectEvery: null,
-    language: doc.language ?? null,
+    language: grammar.language ?? doc.language ?? null,
   });
   const observations = [];
   // The canonical encounter generator feeds the perceiver every sentence —
