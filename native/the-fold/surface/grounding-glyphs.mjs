@@ -22,6 +22,20 @@
 export const OPERATOR_GLYPHS = Object.freeze({
   NUL: "∅", SIG: "○", INS: "●", SEG: "｜", CON: "⋈", SYN: "△", DEF: "⊢", EVA: "⊨", REC: "◉",
 });
+/** REC has been drawn three ways: ⊛ (the wiki until 2026-10-06), ↬ (penelope's
+ *  tapestry, chosen for its one-cell width) and ◉ (now). Records written under
+ *  an earlier mark still carry it, so anything that ingests an older version
+ *  reads the glyph through operatorOfGlyph, never a table of its own. Only
+ *  unambiguous marks belong here: △ was once INS and is now SYN, so it is not
+ *  aliased. */
+export const LEGACY_GLYPHS = Object.freeze({ "⊛": "REC", "↬": "REC" });
+const GLYPH_OPERATOR = Object.freeze({
+  ...Object.fromEntries(Object.entries(OPERATOR_GLYPHS).map(([op, g]) => [g, op])),
+  ...LEGACY_GLYPHS,
+});
+/** The operator a glyph stands for, current or legacy; null for anything else. */
+export const operatorOfGlyph = (g) => GLYPH_OPERATOR[g] ?? null;
+
 export const OPERATOR_GREEK = Object.freeze({
   NUL: "ν", SIG: "σ", INS: "α", SEG: "κ", CON: "ε", SYN: "η", DEF: "δ", EVA: "ψ", REC: "Ω",
 });
