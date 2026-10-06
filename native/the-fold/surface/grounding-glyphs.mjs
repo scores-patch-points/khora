@@ -7,7 +7,12 @@
 //
 //   ∅− ∅+ ∅*   ○− ○+ ○*   ●− ●+ ●*    Existence (NUL SIG INS)
 //   ｜− ｜+ ｜*  ⋈− ⋈+ ⋈*   △− △+ △*    Structure (SEG CON SYN)
-//   ⊢− ⊢+ ⊢*   ⊨− ⊨+ ⊨*   ⊛− ⊛+ ⊛*    Interpretation (DEF EVA REC)
+//   ⊢− ⊢+ ⊢*   ⊨− ⊨+ ⊨*   ◉− ◉+ ◉*    Interpretation (DEF EVA REC)
+//
+// REC's glyph is ◉ (a ring around a filled circle: the retraced run kept as
+// record, ●, inside a new open frame, ○). It was ⊛ until 2026-10-06; ⊛ never
+// matched its stated rationale. Source: eo-wiki, "Operator Naming", Practitioner
+// Glyphs. Records written earlier keep ⊛; read both as REC.
 //
 // The prose per cell (the plain-language grounding name) and the null it owes
 // (THE-NULL-STATES' pairing rule: every positive finding an organ lands has a
@@ -15,7 +20,7 @@
 // and THE-NULL-STATES.md — never invented here. Pure: no I/O, no DOM.
 
 export const OPERATOR_GLYPHS = Object.freeze({
-  NUL: "∅", SIG: "○", INS: "●", SEG: "｜", CON: "⋈", SYN: "△", DEF: "⊢", EVA: "⊨", REC: "⊛",
+  NUL: "∅", SIG: "○", INS: "●", SEG: "｜", CON: "⋈", SYN: "△", DEF: "⊢", EVA: "⊨", REC: "◉",
 });
 export const OPERATOR_GREEK = Object.freeze({
   NUL: "ν", SIG: "σ", INS: "α", SEG: "κ", CON: "ε", SYN: "η", DEF: "δ", EVA: "ψ", REC: "Ω",
