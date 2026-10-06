@@ -36,7 +36,7 @@ const GROUNDING_CELLS = Object.freeze(Object.fromEntries(
 ));
 
 // ── THE GROUNDING CHIP ────────────────────────────────────────────────────
-// Every grounded element wears its cell's glyph (∅− … ⊛*), and the glyph is a
+// Every grounded element wears its cell's glyph (∅− … ◉*), and the glyph is a
 // door: clicking it opens the modal naming the grounding act, the null it
 // owes, and the item's own byte address / verbatim / source. The cell comes
 // from the item's own `grounding` field when the data declares it, else the
@@ -1955,7 +1955,7 @@ ${profileScript}
         return '<button class="insp-ink" data-insp="being" data-name="' + escHtml(o) + '">' + escHtml(o) + ' · ' + co[o] + '</button>';
       }).join('') || '<div class="insp-empty">none co-occur</div>';
       var kind = placeNames[name.toLowerCase()] ? 'place' : 'agency';
-      html = '<h3>◉ ' + escHtml(name) + '</h3>' +
+      html = '<h3>◆ ' + escHtml(name) + '</h3>' +
         '<div class="insp-row"><span>type</span><b>' + kind + '</b></div>' +
         '<div class="insp-row"><span>rows</span><b>' + rws.length + '</b></div>' +
         '<div class="insp-row"><span>time span</span><b>' + timeSpanOf(rws) + '</b></div>' +
