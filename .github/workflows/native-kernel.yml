@@ -17,6 +17,13 @@ jobs:
           # commit (bb97e4b, an ancestor of main) through `git cat-file` /
           # `git show`; checkout's default depth-1 clone does not hold it.
           fetch-depth: 0
+      # The conductor test (native/tests/conductor.test.js) exercises the
+      # machine door through penelope's durable retention seam, imported as a
+      # sibling (../../../penelope from native/tests). Check it out next to
+      # this repo so that integration test runs for real instead of erroring
+      # on a missing module. penelope is public; the default token may clone it.
+      - name: Check out the sibling penelope (the machine door retains through it)
+        run: git clone --depth 1 https://github.com/scores-patch-points/penelope.git "${GITHUB_WORKSPACE}/../penelope"
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -25,16 +32,14 @@ jobs:
       - name: Install native adapter dependencies
         working-directory: native
         run: npm ci
-      # pyodide is a declared, lock-pinned dependency of native/eval/the-fold
-      # (package.json + package-lock.json). postprocess.mjs::getPyodide
-      # resolves it by file URL from native/eval/the-fold/node_modules, and
-      # the Saltzer/Popper archons (organs/salzter.js, organs/blindspot.js)
-      # and the reasoning-lint oracle (eval/the-fold/lib/pyodide-oracle.mjs)
-      # read Python through it. Without this install those scans report
-      # "pyodide unavailable" and their conformance tests fail.
-      - name: Install native/eval/the-fold's declared pyodide runtime
-        working-directory: native/eval/the-fold
-        run: npm ci
+      # NOTE: native/eval/the-fold (and its lock-pinned pyodide runtime) was
+      # removed in the 2026-10-04 canonical cut (c1b3986). postprocess.mjs
+      # resolves pyodide by file URL from ./native/eval/the-fold/node_modules
+      # OR ./node_modules/pyodide — neither is declared by any package.json
+      # now, and no test asserts a live pyodide, so no install step is needed;
+      # the Python-reading organs degrade to their named "pyodide unavailable"
+      # path. Re-add a lock-pinned install here only if a pyodide dependency is
+      # reintroduced.
       # The notebook, structure-swarm and holodeck end-to-end tests run real
       # python3 (organs/er7py, the notebook cells) with numpy and matplotlib.
       # The runner's own python has neither, so those tests failed with

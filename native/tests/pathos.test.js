@@ -96,7 +96,7 @@ test("a correction turns the next actual action into a report of the gap", () =>
 
 test("a new affected party reopens the derivation instead of continuing", () => {
   const loop = createPathosLoop({ purpose: "read the material", encounters: [ENC()] });
-  const first = constructComputeInIsolation({ purpose: "read the material", encounters: [ENC()], what: "sum" });
+  const first = constructComputeInIsolation({ purpose: "read the material", encounters: [ENC()], what: "sum", compute: { op: "sum", args: [[1, 2]] } });
   assert.ok(loop.run(first).ok);
   const revised = loop.reviseOnConsequence({
     schema: "Consequence@1",
