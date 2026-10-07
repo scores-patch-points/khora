@@ -29,10 +29,37 @@
 //
 // Stages 5b-8 are still not run by this host; they are named, never implied (P2).
 
+import path from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { createSession, admitChunked, sessionReferents, sessionRelations } from "./corpus-session.js";
-import { availableStems, DETECT_STEMS } from "./language-grammar.js";
-import { sentenceLanguages } from "./langid.mjs";
+import { availableStems, DETECT_STEMS, detectLanguage } from "./language-grammar.js";
 import { createActivation } from "../kernel/activation.js";
+
+// THE FOLD DETECTOR (the sibling the-fold repo's debiased, abstaining langid). Loaded lazily and optionally: if the sibling
+// repo is present, its `identify` gives a CONFIDENT language or abstains; on abstention the ear is chosen by signal. Absent,
+// the door falls back to its own detection. One detector, one door — this is the wiring the langid work asked for.
+// Preloaded ONCE (top-level await): `identify` gives a CONFIDENT language or ABSTAINS. It is used per sentence (the language
+// trails below) and, in `earSelection:"auto"`, for the document verdict — with the ear-by-signal fallback on abstention. If the
+// sibling repo is absent, `identify` is null and khora's own `detectLanguage` is the per-sentence fallback.
+let identify = null;
+try {
+  const _u = pathToFileURL(path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../the-fold/fold-chat-langid.js")).href;
+  const _m = await import(_u);
+  identify = typeof _m.identify === "function" ? _m.identify : null;
+} catch { identify = null; }
+
+const SENT_SPLIT = /(?<=[.!?])\s+|\n{2,}/;
+/** Per-sentence language rows: the fold detector when present (abstaining), else khora's detectLanguage. Trails keyed by
+ *  document hash reuse these; the row shape is what readWith reports in `languageTrail` and derives the document language from. */
+export function sentenceLanguages(text, { stems = DETECT_STEMS } = {}) {
+  const rows = [];
+  for (const raw of String(text ?? "").split(SENT_SPLIT)) {
+    const s = raw.trim(); if (s.length < 2) continue;
+    if (identify) { try { const d = identify(s); rows.push({ text: s, language: d.lang ?? "unknown", confident: !!d.confident, inherited: !!d.inherited, margin: Number.isFinite(d.margin) ? d.margin : 0, script: d.script ?? null }); continue; } catch { /* fall through to khora detection */ } }
+    try { const d = detectLanguage(s, { stems }); rows.push({ text: s, language: d?.language ?? "unknown", confident: false, inherited: false, margin: 0, script: null }); } catch { rows.push({ text: s, language: "unknown", confident: false, inherited: false, margin: 0, script: null }); }
+  }
+  return rows;
+}
 
 // ── PHEROMONE TRAILS (stigmergy; kernel/activation.js is the organ — the leafcutter handle: deposits evaporate unless
 // reinforced). The ear/space traversal leaves a decaying trace keyed by the SEGMENT SHAPE and the ear it chose, weighted by
@@ -136,8 +163,15 @@ async function readWith({ text, name = "", language = null, maxCharacters = 6000
   const ltFresh = ltKey ? LANG_TRAILS.activationOf(ltKey) >= LANG_EXPLOIT_BAR && LANG_MEMO.has(ltKey) : false;
   const langRows = ltFresh ? LANG_MEMO.get(ltKey) : sentenceLanguages(material, { stems: DETECT_STEMS }).map((s) => ({ sentence: s.text.slice(0, 120), language: s.language, confident: s.confident, inherited: s.inherited, margin: +s.margin.toFixed(1), script: s.script }));
   if (ltKey) { LANG_MEMO.set(ltKey, langRows); if (langRows.length) LANG_TRAILS.observe([ltKey]); }
+  // DERIVE THE DOCUMENT LANGUAGE from the per-sentence trail (this is what makes the trail more than a report): the confident
+  // plurality, unless the caller declared one. The session then reads under it; if none is confident the reader detects (or the
+  // caller's `earSelection:"auto"` has already chosen by signal). One detector, feeding the read.
+  const langTally = new Map();
+  for (const r of langRows) if (r.confident && r.language && r.language !== "unknown") langTally.set(r.language, (langTally.get(r.language) ?? 0) + 1);
+  let docLang = declared;
+  if (!docLang && langTally.size) { const top = [...langTally].sort((a, b) => b[1] - a[1])[0][0]; try { if (declaredLanguage(top)) docLang = top; } catch { docLang = null; } }
   const session = createSession();
-  admitChunked(session, { text: material, sourceId, ...(declared ? { language: declared } : {}) });
+  admitChunked(session, { text: material, sourceId, ...(docLang ? { language: docLang } : {}) });
   const cast = await sessionReferents(session, { sourceId, priors: [], limit: 200 });
   const relations = await sessionRelations(session, { sourceId });
   const grammar = session.documents?.get?.(sourceId)?.grammar ?? null;
@@ -237,7 +271,23 @@ function mergeBodies(bodies, langs) {
 
 /** Read `text` and describe what the reader did. Returns the EORead@1 body. `earSelection: "signal"` chooses the ear by
  *  measured signal instead of the language label, and segments script-heterogeneous material (code-switching). */
-export async function readDoor({ text, name = "", language = null, maxCharacters = 60000, now = () => Date.now(), earSelection = "detector", earCandidates = null, earProbeChars = 2000 } = {}) {
+export async function readDoor({ text, name = "", language = null, maxCharacters = 60000, now = () => Date.now(), earSelection = "detector", earCandidates = null, earProbeChars = 2000, detector = null } = {}) {
+  if (earSelection === "auto" && !declaredLanguage(language)) {
+    const det = detector ?? identify;
+    let d = null; try { d = det ? det(String(text ?? "").slice(0, 4000)) : null; } catch { d = null; }
+    let lang = null;
+    if (d?.confident && d.lang) { try { lang = declaredLanguage(d.lang); } catch { lang = null; } }
+    if (lang) {
+      const body = await readWith({ text, name, language: lang, maxCharacters, now });
+      body.languageSource = "detected"; body.detector = { lang, confident: true };
+      body.basis = `${body.basis}; language from the detector: ${lang} (confident)`;
+      return body;
+    }
+    const body = await readDoor({ text, name, maxCharacters, now, earSelection: "signal", earCandidates, earProbeChars });
+    body.detector = d ? { lang: d.lang ?? null, confident: false, abstained: true } : { available: false };
+    body.basis = `${body.basis}; detector abstained, ear chosen by signal`;
+    return body;
+  }
   if (earSelection === "signal" && !declaredLanguage(language)) {
     const material = String(text ?? "").slice(0, maxCharacters);
     const segments = scriptSegments(material);
