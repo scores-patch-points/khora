@@ -1568,7 +1568,13 @@ async function handleRequest(req, res) {
         // one mouth, disclosed: the loop's draws run in a turn scope, so the
         // mouth Heimdall serves them from is sticky and named on the result
         const scope = { sessionId, tier: turnTierAsk(req) };
-        const result = await turnScope.run(scope, () => runCodeLoop({ sessionId, userId, model, task, workspace, testCommand, maxRounds, caller: callerFromRequest(req, "code", parsed), signal: loopAbort.signal, territory }));
+        // THE FIELD, WIRED (2026-10-07): the loop hunts the workspace BEFORE it
+        // draws — a void whose implementation already exists in the code base is
+        // SNIPPED (hunt-first, zero draws), never asked of the mouth. `huntWeb`
+        // stays a caller's opt-in (parsed.huntWeb) so a live turn never reaches
+        // the network unasked. This is the minimal live wiring of GL-EN-21's
+        // "hunt reaches the field"; the draw framing (Gary) is the next seam.
+        const result = await turnScope.run(scope, () => runCodeLoop({ sessionId, userId, model, task, workspace, testCommand, maxRounds, caller: callerFromRequest(req, "code", parsed), signal: loopAbort.signal, territory, huntRoots: [workspace], huntWeb: Boolean(parsed?.huntWeb) }));
         clearTimeout(loopDeadline);
         res.removeListener("close", onDisconnect);
         // metacognition standing check (native/kernel/code-draw-standing.js,
