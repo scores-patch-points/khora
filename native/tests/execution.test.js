@@ -138,7 +138,11 @@ test("gated person-directed communication never contacts the person", () => {
 test("every performed effect is instrumented on the runtime ledger", () => {
   const runtime = createExecutionRuntime({ admitted: new Map([["cited-material", "text"]]) });
   const read = constructReadAdmittedMaterial({ purpose: "p", encounters: [ENC()], ref: "r", scope: "cited-material" });
-  const compute = constructComputeInIsolation({ purpose: "p", encounters: [ENC()], what: "sum" });
+  // The isolated compute carries a REAL mechanical spec: the adapter performs
+  // the declared computation (a whitelisted op), never a canned result. A
+  // transition with no spec is a typed gap the adapter refuses, so a spec is
+  // required for this instrumented effect to exist.
+  const compute = constructComputeInIsolation({ purpose: "p", encounters: [ENC()], what: "sum", compute: { op: "sum", args: [[1, 2]] } });
   executeTransition(read, { runtime });
   executeTransition(compute, { runtime });
   assert.equal(runtime.effects.length, 2, "instrumented side effects match their transitions");
