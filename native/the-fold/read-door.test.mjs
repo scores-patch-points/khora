@@ -2,7 +2,7 @@
 // paired with the falsifier that shows the old behaviour would fail it (Constitution II.10).
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readDoor, declaredLanguage, STAGES_NOT_RUN } from "./read-door.mjs";
+import { readDoor, declaredLanguage, STAGES_NOT_RUN, selectEarBySignal, noiseOf, contentSignal } from "./read-door.mjs";
 
 const ES = "Don Quijote fue escrito por Miguel de Cervantes. Cervantes vivió en España, y Don Quijote viaja con Sancho Panza por La Mancha. Sancho Panza admira a Don Quijote.";
 const EN = "Anna Karenina was written by Leo Tolstoy. Tolstoy lived in Russia, and Anna meets Vronsky in Moscow. Vronsky loves Anna.";
@@ -64,4 +64,25 @@ test("todo: Russian, Chinese and Japanese give the reader at least one entity fr
 test("todo: detection must not lose what forced-English found in Arabic (full name 'برج إيفل' became 'برج')", { todo: "measured regression 1/4 → 0/4 on the Arabic gold text" }, async () => {
   const AR = "برج إيفل يقع في باريس. صمم برج إيفل المهندس غوستاف إيفل. وغوستاف إيفل صمم أيضا الهيكل الداخلي لتمثال الحرية. باريس هي عاصمة فرنسا.";
   assert.ok(names(await readDoor({ text: AR })).includes("برج إيفل"));
+});
+
+test("noiseOf is deterministic and destroys collocations but keeps the text shape", () => {
+  const a = noiseOf("el presidente vive en Madrid y visita Francia cada año"), b = noiseOf("el presidente vive en Madrid y visita Francia cada año");
+  assert.equal(a, b, "deterministic");
+  assert.notEqual(a, "el presidente vive en Madrid y visita Francia cada año", "collocations destroyed");
+  assert.equal(a.length, "el presidente vive en Madrid y visita Francia cada año".length, "same length");
+});
+
+test("the ear selector is DEBIASED: 'most signal' is not 'biggest prior' — scores carry lift (signal per unit chance) and the winner is the max lift, not the max raw signal", async () => {
+  const es = "El presidente Pedro Sánchez visita Madrid cada año. Sánchez se reúne con la presidenta de la Comunidad de Madrid en el Palacio de la Moncloa. Madrid es la capital de España y Sánchez gobierna desde Madrid. La resistencia de Madrid al plan de Sánchez es fuerte, pero Sánchez insiste en su reforma de Madrid. Los ciudadanos de Madrid apoyan a Sánchez en las elecciones de Madrid cada mayo.";
+  const sel = await selectEarBySignal({ text: es, probeChars: 2000, candidates: ["eng", "spa", "fra"] });
+  assert.ok(sel.scores.every((s) => typeof s.lift === "number" && typeof s.noise === "number" && typeof s.signal === "number"), "lift and noise are disclosed per ear");
+  const max = Math.max(...sel.scores.map((s) => s.lift));
+  assert.ok(sel.scores.some((s) => s.language === sel.winner && s.lift === max), `winner ${sel.winner} carries the max lift; scores=${JSON.stringify(sel.scores)}`);
+});
+
+test("English text still wins English under the same debiased rule", async () => {
+  const en = "The president visits Spain in twenty twenty six. The government announces new reforms for the schools. Parliament debates the budget every week.";
+  const sel = await selectEarBySignal({ text: en, probeChars: 600, candidates: ["eng", "spa", "fra"] });
+  assert.equal(sel.winner, "eng", JSON.stringify(sel.scores));
 });
