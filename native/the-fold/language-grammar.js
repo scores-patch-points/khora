@@ -26,6 +26,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { makeSegmenter } from "../adapters/text/script-segment.js";
 import { makeEar } from "../adapters/text/ear.js";
+import { identifyLanguage } from "./langid.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 export const PRIORS_DIR = path.join(HERE, "..", "priors");
@@ -35,8 +36,12 @@ export const PRIORS_DIR = path.join(HERE, "..", "priors");
 const STEM = Object.freeze({
   en: "eng", es: "spa", ru: "rus", zh: "cmn", ar: "arb", he: "heb", fa: "fas", ko: "kor", ja: "jpn",
   fr: "fra", de: "deu", it: "ita", pt: "por", nl: "nld", pl: "pol", uk: "ukr", hi: "hin", vi: "vie",
-  id: "ind", sv: "swe", ur: "urd", tr: "tur", el: "ell", fi: "fin", la: "lat", sa: "san",
+  id: "ind", sv: "swe", ur: "urd", tr: "tur", el: "ell", fi: "fin", la: "lat", sa: "san", bg: "bul",
 });
+// DETECTION runs against this declared, curated set (the languages a person plausibly asks in) — the fold's finding:
+// a giant group of near cousins steals the text (Galician vs Spanish, etc.). English IS detected (the reader reads
+// it; "pos-en.json absent" would be a stale claim) — the exclusion was a grammar-selection rule, not detection.
+export const DETECT_STEMS = [...new Set(Object.values(STEM))];
 // script tags for the variants that differ by script
 const VARIANT = Object.freeze({ "zh-hans": "cmn-hans", "zh-cn": "cmn-hans", "zh-sg": "cmn-hans", "zh-hant": "cmn", "zh-tw": "cmn", "zh-hk": "cmn" });
 
@@ -92,6 +97,10 @@ export function grammarFor(name, { text = null } = {}) {
     roleConfig: cached(`role-config-${stem}.json`),
     proclitics: cached(`proclitics-${stem}.json`)?.proclitics ?? null,
     enclitics: cached(`enclitics-${stem}.json`)?.enclitics ?? null,
+    // ContractionPrior@1 (scripts/build-contraction-prior.mjs): how the treebank splits what is written as one word. null where it splits nothing.
+    contractions: cached(`contractions-${stem}.json`),
+    // RefusalFloor@1 (scripts/build-refusal-floor.mjs): the naming mass below which a word the prior has not met may be refused. null = uncalibrated.
+    refusalFloor: cached(`refusal-${stem}.json`),
     gap: null,
   });
 }
@@ -110,12 +119,20 @@ const STEM_SCRIPT = (posPrior) => {
 };
 
 /**
- * detectLanguage(text, {minCoverage, sample}) → { language, coverage, runnersUp, script } | { language:null, gap }
- * — the share of the text's words each candidate's POS prior attests; accepted outright at
- * `strongCoverage` (related languages share words, so a high share is not
- * contested), else at `minCoverage` AND `minMargin`× the runner-up.
+ * detectLanguage(text, {sample}) → { language, coverage, runnersUp, script } | { language:null, gap }
+ * — the fold's detector (langid.mjs), ported: script first, then naive Bayes over each candidate's word and
+ * character distributions, a decisive mark/clue for short asks, a margin/fit abstention. Undetected is a
+ * typed gap, never a guess. The attestation detector it replaces is kept as `detectLanguageByAttestation`.
  */
-export function detectLanguage(text, { strongCoverage = 0.3, minCoverage = 0.1, minMargin = 1.8, sample = 20000 } = {}) {
+export function detectLanguage(text, { sample = 20000, stems = DETECT_STEMS } = {}) {
+  const d = identifyLanguage(String(text ?? "").slice(0, sample), { stems });
+  if (d.confident) return { language: d.language, coverage: d.coverage, script: d.script, runnersUp: d.second ? [{ language: d.second, coverage: 0 }] : [] };
+  return { language: null, script: d.script, gap: d.gap || "undetected, never guessed", runnersUp: [] };
+}
+
+/** The detection the reader used before 2026-10-07 (word-coverage attestation against every prior on disk),
+ *  kept for comparison and for any caller that pinned its exact semantics. */
+export function detectLanguageByAttestation(text, { strongCoverage = 0.3, minCoverage = 0.1, minMargin = 1.8, sample = 20000 } = {}) {
   const sampleText = String(text ?? "").slice(0, sample).toLowerCase();
   const scriptCounts = SCRIPTS.map(([name, re]) => [name, (sampleText.match(re) ?? []).length]).sort((a, b) => b[1] - a[1]);
   const [script, nScript] = scriptCounts[0];
@@ -132,7 +149,7 @@ export function detectLanguage(text, { strongCoverage = 0.3, minCoverage = 0.1, 
     const prior = cached(`pos-${s}.json`);
     // hear it the way the reader will: its own ear (segmentation, bound morphemes)
     const g = grammarFor(s);
-    const ear = makeEar({ posPrior: prior, proclitics: g.proclitics, enclitics: g.enclitics });
+    const ear = makeEar({ posPrior: prior, proclitics: g.proclitics, enclitics: g.enclitics, contractions: g.contractions });
     let heard = ear.segment ? ear.segment(sampleText) : sampleText;
     if (ear.peel) heard = ear.peel(heard);
     const words = heard.match(/[\p{L}\p{M}\p{N}]+/gu) ?? [];
