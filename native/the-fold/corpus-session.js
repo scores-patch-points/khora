@@ -34,13 +34,19 @@ export const stableHash = (value) =>
 // A session carries admitted documents (keyed by sourceId) and spans. The
 // documents Map is the surface proxy-runner and proxy.mjs read; spans are
 // kept so a caller that wants byte-anchored chunks has them.
-export function createSession({ spanCap = DEFAULT_SPAN_CAP } = {}) {
+export function createSession({ spanCap = DEFAULT_SPAN_CAP, entityBound = false } = {}) {
   return {
     schema: CORPUS_SESSION_SCHEMA,
     version: CORPUS_SESSION_VERSION,
     documents: new Map(),
     spans: new Map(),
     spanCap,
+    // V2 ENTITY-BOUNDED RELATIONS (2026-10-07, default OFF). When on, relation ENDS that did not resolve to a
+    // referent at read time are rebound against the FINAL cast before the relation is projected out (a later
+    // mention of the same being is in the cast even when the first was not; the clause end "Stevenson was"
+    // contains the cast surface "stevenson"). See projectRelations. Off by default: the read is byte-identical
+    // to before unless a caller asks.
+    entityBound,
   };
 }
 
@@ -177,7 +183,42 @@ function projectReferents(observations) {
     .sort((a, b) => b.mentions - a.mentions);
 }
 
-function projectRelations(observations) {
+// ═══ V2 ENTITY-BOUNDED ENDS (pre-registration, written before the first gated run; default OFF) ═════════════════════
+// THE CLAIM (the plan's step b): a relation end that did NOT resolve to a referent at read time — because the
+// being is first-named here, or the end is a clause ("Stevenson was") that CONTAINS a cast surface — is rebound
+// to the FINAL cast before the relation is projected out, RAISING the both-bound share of the relation layer.
+// Rebind is by the reader's own cast: EXACT surface, else unique CONTAINMENT (surface contains exactly one cast
+// surface of length >= 3). It sets the end's ref to the referent id and its standing to "referent", and DISCLOSES
+// the method (`resolution: rebound_*`) — never a silent pick, never a guess (an ambiguous containment stays unresolved).
+// CONTROLS. K1 determinism. K2 the read is byte-identical with entityBound off (the default). K3 a SHUFFLED cast
+//   (surfaces permuted) must NOT raise the bound share — the gain must be real cast knowledge, not any-surface-matches-any.
+// FALSIFIED if entityBound on does not raise the both-bound share over off, or the shuffled-cast control raises it too.
+// ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+const relNorm = (s) => String(s ?? "").normalize("NFC").trim().toLowerCase().replace(/\s+/g, " ");
+function castSurfaceIndex(observations) {
+  const bySurface = new Map();     // normalized surface -> Set(referent id)
+  for (const obs of observations) for (const g of obs?.candidate?.graphEntries ?? []) {
+    if (g?.schema !== "EOReferent@1") continue;
+    for (const s of g.surfaces ?? []) { const k = relNorm(s); if (!k) continue; if (!bySurface.has(k)) bySurface.set(k, new Set()); bySurface.get(k).add(g.id); }
+  }
+  return bySurface;
+}
+function rebindParticipant(part, cast) {
+  if (!cast || part.standing === "referent" || !part.surface) return part;
+  const s = relNorm(part.surface);
+  if (!s) return part;
+  const exact = cast.get(s);
+  if (exact && exact.size === 1) return { ...part, ref: [...exact][0], standing: "referent", resolution: "rebound_exact", rebound: true };
+  if (s.length >= 3) {
+    const hits = new Set();
+    for (const [cs, ids] of cast) if (cs.length >= 3 && s.includes(cs)) for (const id of ids) hits.add(id);
+    if (hits.size === 1) return { ...part, ref: [...hits][0], standing: "referent", resolution: "rebound_containment", rebound: true };
+  }
+  return part;
+}
+
+function projectRelations(observations, { entityBound = false } = {}) {
+  const cast = entityBound ? castSurfaceIndex(observations) : null;
   const edges = [];
   const seen = new Set();
   for (const obs of observations) {
@@ -190,19 +231,22 @@ function projectRelations(observations) {
       // | `hypothesis`) and `resolution` — the projection threw all of it away, so a relation end could not be
       // told resolved from unresolved and had no address. We preserve them (pure retention; the join is still
       // by ref/surface downstream, so nothing decides differently). This is what lets v2 ask "is this end a
-      // cast referent?" without re-reading.
+      // cast referent?" without re-reading — and what the entityBound rebind above now answers.
       edges.push({
         relation: edge.relation,
         scope: edge.scope ? { byteOffset: edge.scope.byteOffset ?? null, offset: edge.scope.offset ?? null } : null,
-        participants: (edge.participants ?? []).map((p) => ({
-          ref: p?.ref ?? p?.surface ?? null,
-          surface: p?.surface ?? null,
-          standing: p?.standing ?? null,
-          resolution: p?.resolution ?? null,
-          role: p?.role ?? null,
-          ...(p?.occurrence ? { occurrence: p.occurrence } : {}),
-          ...(p?.surfaceKey ? { surfaceKey: p.surfaceKey } : {}),
-        })),
+        participants: (edge.participants ?? []).map((p) => {
+          const kept = {
+            ref: p?.ref ?? p?.surface ?? null,
+            surface: p?.surface ?? null,
+            standing: p?.standing ?? null,
+            resolution: p?.resolution ?? null,
+            role: p?.role ?? null,
+            ...(p?.occurrence ? { occurrence: p.occurrence } : {}),
+            ...(p?.surfaceKey ? { surfaceKey: p.surfaceKey } : {}),
+          };
+          return entityBound ? rebindParticipant(kept, cast) : kept;
+        }),
       });
     }
   }
