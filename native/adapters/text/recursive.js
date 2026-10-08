@@ -11,7 +11,7 @@ import { createNominalIndex } from "./heard-nominals.js";
 import { makeEar } from "./ear.js";
 import { wordFloor } from "./script-floor.js";
 import { classifyWord, dominantClass } from "./wordclass.js";
-import { GRAMMAR_MIN_SHARE } from "./grain-typing.js";
+import { GRAMMAR_MIN_SHARE, grammarIsDominant } from "./grain-typing.js";
 import { relationExtractorsFor } from "./relations-language.js";
 import { fragmentRelations, FRAGMENT_DISCLOSURE } from "./fragment-relations.js";
 import { directDescriptorOccurrences, descriptorOccurrence } from "./individuation.js";
@@ -298,7 +298,7 @@ function lexicalNounOccurrences(text, sequencePosition, encounterRef, posPrior, 
     if (!counts) continue;
     const total = Object.values(counts).reduce((sum, count) => sum + count, 0);
     const nounShare = total ? (counts.NOUN ?? 0) / total : 0;
-    if (nounShare <= GRAMMAR_MIN_SHARE) continue;
+    if (Number.isFinite(GRAMMAR_MIN_SHARE) && nounShare <= GRAMMAR_MIN_SHARE) continue;
     const surfaceKey = `surface:${slug(raw) || "unknown"}`;
     // A4 (THE-ADDRESS.md): a lexical occurrence is content — the id hashes
     // the source, the byte span and the surface itself, so a re-read of the
@@ -436,7 +436,7 @@ function receivedVerbTier(posPrior) {
     const total = counts.reduce((a, b) => a + b, 0);
     if (!total) continue;
     const verbish = (tags.VERB ?? 0) + (tags.AUX ?? 0);
-    if (verbish / total >= GRAMMAR_MIN_SHARE) tier.push(form);
+    if (grammarIsDominant(verbish / total)) tier.push(form);
   }
   RECEIVED_VERB_TIERS.set(posPrior, tier);
   return tier;

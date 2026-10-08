@@ -13,9 +13,17 @@
 // reading's ground is the words it has heard, and a figure is a word the
 // ground did not predict. This is the same instrument the surprise work
 // validated (lowercase words → sentence ends, above chance, with no
-// punctuation read). The gate is pure and synchronous; it reads no file and
-// calls no model.
+// punctuation read). The gate is pure and synchronous; it calls no model.
+//
+// THE NUMBERS ARE RECEIVED, NOT CODIFIED (the receptacle rule, 2026-10-08):
+// the gate's declared parameters are reading rules, so their ONE home is
+// janus/priors/reading-rules.json and khora reads them here as data. An
+// absent rule is a typed refusal on the record — the gate never supplies a
+// number of its own (a missing rule is a gap, never a guess).
 import { segmentBySurprise } from "../kernel/surprise-segments.js";
+import { loadReadingRules } from "../kernel/reading-rules.js";
+
+const _readRules = loadReadingRules();
 
 // The caller's instrument: the material's own word tokens, in order. Unicode
 // aware; digits and internal apostrophes kept (the shape the reader's own
@@ -24,11 +32,10 @@ import { segmentBySurprise } from "../kernel/surprise-segments.js";
 const TOKEN_RE = /[\p{L}\p{N}][\p{L}\p{N}'’-]*/gu;
 export const tokenEvents = (text) => String(text ?? "").match(TOKEN_RE) ?? [];
 
-// DECLARED, never fitted. The kernel refuses undeclared numbers by design
-// (`segmentBySurprise` throws); these are the values the surprise work used
-// (order 3, alpha 0.05, 20 shuffles for the cut, minLength 3) and a caller may
-// pass its own. They are declarations, not calibrated thresholds.
-export const SURPRISE_DEFAULTS = Object.freeze({ order: 3, alpha: 0.05, draws: 20, seed: 1, minLength: 3, maxTokens: 3000 });
+// The received numbers, frozen; empty when Relate has not supplied them.
+// `SURPRISE_DEFAULTS` is exported for callers that declare their own override
+// — its value is what janus read, never a khora-authored constant.
+export const SURPRISE_DEFAULTS = Object.freeze({ ...(_readRules?.rules?.surprise ?? {}) });
 
 /**
  * surpriseCut(events, opts) — the SEG+EVA gate as one compact value.
@@ -41,11 +48,16 @@ export const SURPRISE_DEFAULTS = Object.freeze({ order: 3, alpha: 0.05, draws: 2
  *  O(draws × stream) — unbounded it ran 60+ minutes-equivalents on a full
  *  document (measured 2026-10-08), so the gate reads the FIRST `maxTokens`
  *  events and says so (`streamCapped`) rather than pretending it read the
- *  whole. 3000 tokens keeps the evaluated null's draws (20) at ~2s per
- *  document. This mirrors the surprise work's own stated instrument ("first
- *  60000 chars" of Dracula).
+ *  whole (currently the received maxTokens=3000, which keeps the evaluated
+ *  null's draws 20 at ~2s per document). This mirrors the surprise work's own
+ *  stated instrument ("first 60000 chars" of Dracula). A missing rule set is a
+ *  typed refusal (`no_reading_rule`), never a khora-supplied number.
  */
 export function surpriseCut(events = [], { order = SURPRISE_DEFAULTS.order, alpha = SURPRISE_DEFAULTS.alpha, draws = SURPRISE_DEFAULTS.draws, seed = SURPRISE_DEFAULTS.seed, minLength = SURPRISE_DEFAULTS.minLength, maxTokens = SURPRISE_DEFAULTS.maxTokens } = {}) {
+  if (![order, alpha, draws, seed, minLength, maxTokens].every((x) => Number.isFinite(x))) {
+    // The rules were not received — a typed refusal, never a synthesized number.
+    return Object.freeze({ schema: "SurpriseCut@1", stream: "tokens", events: (events ?? []).length, cut: 0, nullCut: 0, figures: 0, boundaries: Object.freeze([]), segmentSizes: Object.freeze([]), refused: "no_reading_rule", source: _readRules.source, detail: _readRules.gap?.detail ?? null });
+  }
   const all = (events ?? []).map(String);
   const ev = Number.isFinite(maxTokens) && all.length > maxTokens ? all.slice(0, maxTokens) : all;
   const streamCapped = ev.length < all.length;
