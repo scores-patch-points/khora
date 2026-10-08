@@ -114,3 +114,23 @@ say the mechanism did what it said, but we can't yet say the output is true.
 
 **Severity of open defects:** none are silent — every gap above is typed or disclosed (`unbound_end`, `language_undetected`,
 `same_script_switch_unresolved`, chrome over-removal, title-token leak). The machinery is honest even where it is not yet good.
+
+## 2026-10-07 (later) — the self-record promoted from eval to the kernel
+
+- **`native/kernel/self-record.js` (EOSelfRecord@1)** — the object the recursion workstream built now lives in the kernel, not
+  only in `eval/`. It carries the immutable claim log (`emptyLog`/`readEntry`/`reviseEntry`/`projectEntries`, P1/P2/P3), the
+  evidence gate (`EVIDENCE_BAR`, `adjudicated`), the key/value revision record (`createRecord`/`valueAt`), and the participatory
+  middle (`distinguish`). Exported from `kernel/index.js`; tested in `native/tests/self-record.test.js` (9 tests: P1 immutability,
+  P2/P3 past-at-cursor, K1 determinism, the gate, and the middle's mechanical → pending → adopted → reopens arc).
+- **The evals now import the organ** (house rule: an experiment that holds moves its organ into the khora and keeps only the
+  numbers and the falsifier). `eval/recursion/{self-record,k1,middle,sidecar-record}.mjs` dropped their private copies and import
+  from `../../kernel/self-record.js`. Verified byte-identical output before/after for self-record, k1, middle, and sidecar-record
+  on `v1-gitenberg` (sidecar-record's `P1 FAILS` on that sample is pre-existing — its drop targets are absent from that document's
+  cast, not introduced here).
+- **Confidence: high for the promotion** (mechanical, deterministic, output-preserving); **the mechanism's own confidence is
+  unchanged** from the v1 entry above — **NOT yet wired into a running read loop.** The next mile is the same: feed it real
+  arrivals, let attention pick which misfits the middle reconciles, and pass the record's `asOf` through the live projections. The
+  claim-log fold (`projectEntries`) and the revision-record fold (`valueAt`) are two views of one principle; folding the sidecar's
+  own `project` onto the record is future work.
+- Falsifying control: `node --test native/tests/self-record.test.js` — the K1 test fails if a two-term in-place edit could match
+  the record's behavior; the gate test fails if a below-bar candidate is ever believed.

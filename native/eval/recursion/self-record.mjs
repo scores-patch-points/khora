@@ -29,40 +29,12 @@
 // SCOPE: a demonstration of the object on a planted reading (a reader that already projects — the sidecar) uses this shape for
 //   its memory; this file is the shape, not the sidecar wiring.
 // ═══ END OF PRE-REGISTRATION ═══════════════════════════════════════════════════════════════════════════════════════════════════
-import fs from "node:fs";
-import path from "node:path";
-import { fileURLToPath, pathToFileURL } from "node:url";
-
-export const claimKey = (c) => `${c.subject}|${c.relation}|${c.object}`;
-const freeze = (x) => Object.freeze(x);
-export const emptyLog = () => freeze([]);
-
-/** Append (immutable): returns a NEW log. */
-export function append(log, entry) {
-  const seq = log.length;
-  return freeze([...log, freeze({ seq, ...entry })]);
-}
-export const read = (log, claim, { witness = { doc: "demo" }, giver = "t" } = {}) => append(log, { op: "READ", witness, giver, claim: freeze(claim), revises: null, consequence: { kind: "claim_recorded" } });
-export const revise = (log, pastSeq, claim, { witness = { doc: "demo" }, giver = "t" } = {}) => append(log, { op: "REVISE", witness, giver, claim: freeze(claim), revises: pastSeq, consequence: { kind: "claim_revised", past: pastSeq } });
-
-/** Fold the log at cursor t (entries 0..t): key -> { meaning, source, revisedFrom }. Immutable past is honoured. */
-export function project(log, t = log.length) {
-  const out = new Map();
-  for (let i = 0; i <= Math.min(t, log.length - 1); i++) {
-    const e = log[i];
-    if (!e.claim) continue;
-    if (e.op === "REVISE" && e.revises != null) {
-      const oldK = claimKey(log[e.revises]?.claim ?? {});
-      const prev = out.get(oldK);
-      if (prev) out.set(oldK, { ...prev, revisedFrom: e.seq, revisedBy: e.seq });
-      // fall through: the new meaning is itself a key — the old one stays under its own key (P1)
-    }
-    const k = claimKey(e.claim);
-    const prev = out.get(k);
-    out.set(k, { meaning: e.claim, source: e.seq, revisedFrom: e.op === "REVISE" ? e.revises : (prev?.revisedFrom ?? null), revisedBy: null });
-  }
-  return out;
-}
+import { pathToFileURL } from "node:url";
+// The organ lives in the kernel now (2026-10-07); this eval keeps only the
+// numbers and the falsifier. The local definitions were removed so the eval
+// measures the SHIPPED module, not a private copy (house rule: an experiment
+// that holds moves its organ into the khora).
+import { claimKey, emptyLog, readEntry as read, reviseEntry as revise, projectEntries as project } from "../../kernel/self-record.js";
 
 // ── the demo ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 function run() {

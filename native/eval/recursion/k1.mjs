@@ -19,9 +19,11 @@
 // SCOPE: tests the RECORD as the mediating third (mechanical-side coherence). The participatory generating middle is ABSENT;
 //   absent halves stay unproven and unclaimed (our honesty rule).
 // ═══ END OF PRE-REGISTRATION ═══════════════════════════════════════════════════════════════════════════════════════════════════
-import { fileURLToPath, pathToFileURL } from "node:url";
+// The organ lives in the kernel now (2026-10-07): this falsifier measures the
+// SHIPPED self-record, not a private copy (house rule: an experiment that holds
+// moves its organ into the khora).
+import { createRecord, valueAt } from "../../kernel/self-record.js";
 
-export const EVIDENCE_BAR = 2;
 const key = "tesla|rival";
 
 // ── ARM A: the dyad (in-place editor) ──
@@ -31,30 +33,22 @@ function dyad() {
 }
 
 // ── ARM B: the record (append-only, re-key, evidence-gated, cursor-fold) ──
-const B = { entries: [], revisions: [] };         // log: entries [] + revisions [] (both appended, nothing rewritten)
-const adopt = (r) => r.standing !== "candidate" || Number(r.evidence ?? 0) >= EVIDENCE_BAR;
-function bBelieve(at) { return { entries: B.entries.slice(0, Math.floor(at + 1)), revisions: B.revisions.filter((r) => r.seq <= at) }; }
-function bProject(at = Infinity) {                // value of `key` at cursor: last adopted entry/revision <= at
-  let out = null;
-  for (const e of B.entries) if (e.seq <= at) out = e.value;
-  for (const r of B.revisions) if (r.seq <= at && adopt(r)) out = r.to.relation;
-  return out;
-}
+const B = createRecord([{ seq: 0, key, value: "rival of Edison" }]);
+const bProject = (at = Infinity) => valueAt(B, at, key);   // last adopted entry/revision <= at
 
 const r = await (async () => {
   const A = dyad();
   // b0
   A.apply("rival of Edison"); const aB0 = A.current();
-  B.entries.push({ seq: 0, value: "rival of Edison" });
   // w1 — single weak witness
   A.apply("friend of Edison"); const aAfterWeak = A.current();      // DYAD FLIPS
-  B.revisions.push({ seq: 1.5, key, to: { relation: "friend of Edison" }, evidence: 1, standing: "candidate" });   // candidate hangs
+  B.revisions.push({ seq: 1.5, key, to: "friend of Edison", evidence: 1, standing: "candidate" });   // candidate hangs
   const bAfterWeak = bProject();
   const aPastRecoverable = false;                 // dyad has no cursor; "b0" is unrecoverable after the flip
   const bPast0 = bProject(0);                     // cursor 0
   // c2 — corroborated
   A.apply("collaborated with Edison");
-  B.revisions.push({ seq: 2.5, key, to: { relation: "collaborated with Edison" }, evidence: 3, standing: "candidate" }); // adopts >= 2.5
+  B.revisions.push({ seq: 2.5, key, to: "collaborated with Edison", evidence: 3, standing: "candidate" }); // adopts >= 2.5
   const bNow = bProject();                        // current (>= 2.5)
   const bBeforeC = bProject(2.4);                 // a cursor between w1 and c2: should still be b0 (candidate never applied)
   return {
