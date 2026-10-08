@@ -44,8 +44,24 @@ for (let i = 0; i < clauses.length; i++) {
 }
 if (cur.length) scenes.push(cur);
 
-// SCENE VECTORS: each scene's company = the ELEMENT-KINDS it contains
-const elem = (c) => [`${actionKindOf(c.verb)}`, `r:${roleOf(c.subject)}:${roleOf(c.object)}`, `o:${c.object ? face(c.object) : "∅"}`];
+// LAYER INS: the OBJECTS and ACTORS are KINDS now — fold surfaces to their being
+// (PROIEL lemma where it exists, else ending-strip + accent-fold). Two scenes that
+// both hold δῶρα share `O:δῶρον` whatever their case. This is the weld-cure.
+const LEM = (JSON.parse(fs.readFileSync("/Users/mlacy/Documents/3.0/janus/priors/lemma/grc-lemma.json", "utf8"))).lemmas ?? {};
+const NEc = casePrior.nominalEndings ?? {};
+const stF = (s) => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+const nF = (s) => stF(s).replace(/η|ῆ|ῃ/g, "ε").replace(/ω|ῶ/g, "ο").replace(/ΐ|ϊ|ί|ῖ/g, "ι");
+const stmF = (w) => { for (let L = 3; L >= 1; L--) { const e = w.slice(-L); const t = NEc[e]; if (t && t.ranked?.[0]?.share >= 0.5 && t.ranked[0].count >= 10) return w.slice(0, w.length - L); } return w; };
+const kindOf = (s) => { const k = stF(s); return LEM[k] ?? nF(stmF(k)); };
+// THE REFERENT-PRESENCE COMPANY (Grosz's centering, made the element): a scene's
+// company is the SET of RESOLVED beings+objects it holds — the ∅ and the grammatical
+// default (tense, pro-drop seat) are the GROUND and never count. Two scenes kind
+// together when they share the same referent-config (the μνηστῆρες-scenes together,
+// the θεοί-scenes together). ∅ feeds the weld; this removes ∅.
+const elem = (c) => [
+  ...(c.subject && face(c.subject) ? [`A:${kindOf(face(c.subject))}`] : []),
+  ...(c.object && face(c.object) ? [`O:${kindOf(face(c.object))}`] : []),
+];
 const sceneVecs = scenes.map((sc, i) => {
   const names = [...new Set(sc.flatMap(elem))];
   const company = {}; for (const n of names) company[n] = sc.flatMap(elem).filter((e) => e === n).length;
