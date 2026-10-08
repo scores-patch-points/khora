@@ -20,6 +20,11 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+// Promoted 2026-10-07: the evidence gate is the kernel's now (native/kernel/self-record.js);
+// this file keeps only the sidecar-shaped fold (log lines -> cast at a cursor). Re-exported
+// so nothing that imported the gate from here breaks.
+import { EVIDENCE_BAR, adjudicated as adopted } from "../../kernel/self-record.js";
+export { EVIDENCE_BAR, adopted };
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const norm = (s) => String(s ?? "").normalize("NFC").trim();
@@ -34,10 +39,8 @@ export function loadLog(sidecarDir) {
  *  (P4; a bare provisional integer). A revision is adopted iff it is NOT standing "candidate" (it is acknowledged/given) OR its
  *  evidence weight clears the bar. A candidate is recorded in the log FIRST and hangs; the fold ignores it until the evidence
  *  arrives. Nothing escapes recursion: cast, identity and kinds all read the same gate. */
-export const EVIDENCE_BAR = 2;
 /** A revision: { revSeq, address, surface, action, to?, evidence, standing }. Immutable; seq in the log's ordinal space. */
 export const revision = (revSeq, address, surface, action, to = null, evidence = 1, standing = "candidate") => Object.freeze({ revSeq, address, surface: norm(surface).toLowerCase(), action, to: to ? norm(to) : null, evidence, standing });
-export const adopted = (r) => r.standing !== "candidate" || Number(r.evidence ?? 0) >= EVIDENCE_BAR;
 
 /** Fold the log at cursor asOf (the default = the end): per-doc cast surfaces, applying revisions with revSeq <= asOf. */
 export function project(log, { asOf = Infinity, docs = null } = {}) {

@@ -21,41 +21,10 @@
 //       changes AT ITS CURSOR, past still recoverable earlier. THE MIDDLE EARNS ITS PLACE iff B's fold re-keys at the bar while
 //       A's never does (and B preserves the past at the old cursor). FALSIFIED iff B == A (decoration).
 // ═══ END OF PRE-REGISTRATION ═══════════════════════════════════════════════════════════════════════════════════════════════════
-import { fileURLToPath, pathToFileURL } from "node:url";
-
-export const EVIDENCE_BAR = 2;
-const GET = Symbol("get");
-
-function logWith(seed = []) {
-  const R = { entries: [], revisions: [] };
-  for (const e of seed ?? []) R.entries.push({ ...e });
-  return R;
-}
-const adopt = (r) => r.standing !== "candidate" || Number(r.evidence ?? 0) >= EVIDENCE_BAR;
-const valueAt = (R, asOf, key) => {
-  let v = null;
-  for (const e of R.entries) if (e.seq <= asOf && e.key === key) v = e.value;
-  for (const r of R.revisions) if (r.seq <= asOf && r.key === key && adopt(r)) v = r.to;
-  return v;
-};
-
-/** THE MIDDLE. One witness arrives; it is reconciled with the fold at the cursor. */
-export function distinguish(R, { asOf, key, arrival, weight = 1 }) {
-  const cur = valueAt(R, asOf, key);
-  const conflict = cur != null && Number(cur) !== Number(arrival) && String(cur) !== String(arrival);
-  if (!conflict) return { mode: "mechanical", key, cur, appended: false };
-  const prior = (R.revisions ?? []).filter((r) => r.key === key && r.seq <= asOf).reduce((a, x) => a + Number(x.evidence ?? 1), 0);
-  const evidence = prior + weight;
-  const inherited = R.entries.find((e) => e.key === key)?.standing === "given";
-  const rev = { seq: asOf + 0.5, key, to: arrival, evidence, standing: "candidate", kind: "generated", ...(inherited ? { reopens: true } : {}) };
-  R.revisions.push(rev);                                             // recorded, append-only
-  const adoptedNow = adopt(rev);
-  return {
-    mode: "participatory", key, cur, to: arrival, evidence, appended: true,
-    standing: adoptedNow ? "adopted" : "pending", reopens: inherited || undefined,
-    now: valueAt(R, asOf + 0.5, key),
-  };
-}
+// The organ lives in the kernel now (2026-10-07): this falsifier measures the
+// SHIPPED participatory middle, not a private copy (house rule: an experiment
+// that holds moves its organ into the khora).
+import { createRecord as logWith, valueAt, distinguish } from "../../kernel/self-record.js";
 
 // ── K1: the middle vs no-middle on the same arrival stream ──
 const KEY = "tesla|rival";
