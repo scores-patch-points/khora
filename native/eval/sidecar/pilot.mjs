@@ -30,7 +30,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { readDoor } from "../../the-fold/read-door.mjs";
 import { createSeededRng, shuffled } from "../../kernel/rng.js";
 
-const ROOT = "/Users/mlacy/Documents/3.0/ethos";
+const ROOT = "/Users/mlacy/Documents/3.0/Zenodotus";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CAT = /^(0\d|1\d|20)-/;
 // categories that are overwhelmingly English (for the K3 ear-agrees check); declared, not measured.

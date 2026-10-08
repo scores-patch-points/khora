@@ -38,7 +38,7 @@ const DEFAULT_POS_PRIOR = path.join(HERE, "priors/pos-prior-en.json");
 // ethos is a sibling checkout (see reference_ethos_github_repo
 // memory) — not vendored here, and not auto-pulled. Resolve it relative to
 // this repo's parent directory, same layout as the legacy engine.1 workspace.
-const LIVE_PRIORS_POS = path.join(REPO_ROOT, "..", "ethos/derived-priors/pos-priors/pos-prior-en.json");
+const LIVE_PRIORS_POS = path.join(REPO_ROOT, "..", "Zenodotus/derived-priors/pos-priors/pos-prior-en.json");
 
 function usage(msg) {
   if (msg) console.error(`eoreader7: ${msg}\n`);
@@ -48,7 +48,7 @@ function usage(msg) {
   --priors <dir>      directory to resolve priors from; must contain a
                        pos-priors/pos-prior-en.json (or a pos/en-ud-ewt.json,
                        the legacy engine.1-layout, file) unless --priors ethos
-  --priors ethos  use the ethos checkout at ../ethos
+  --priors ethos  use the ethos checkout at ../Zenodotus
                          relative to this repo (run 'git pull' there yourself
                          first — this CLI does not fetch)
   --limit N           only read the first N encounters

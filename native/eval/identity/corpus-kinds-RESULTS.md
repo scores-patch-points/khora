@@ -2,7 +2,7 @@
 
 Instrument: `eval/identity/corpus-kinds.mjs` (new file, 2026-10-07; pre-registration in the file). Entities = the recurring figures
 the prior-free reader hears; relations = its gfp relations (`eval/law/impact.mjs` readWindow, R-C); kind induction =
-`induceKindsAndFunctions` (inducer method). Corpus: `/Users/mlacy/Documents/3.0/ethos`, sampled across **all 16 categories**.
+`induceKindsAndFunctions` (inducer method). Corpus: `/Users/mlacy/Documents/3.0/Zenodotus`, sampled across **all 16 categories**.
 
 ## The claim is falsified, on two independent counts
 

@@ -59,7 +59,7 @@ import { CELLS, OPERATOR_GLYPHS, GRAIN_DECALS, OPERATOR_NAME, GRAIN_NAME } from 
 const execFileP = promisify(execFile);
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(HERE, "..", "..", "..");
-const LIVE_PRIORS = path.join(ROOT, "..", "ethos");
+const LIVE_PRIORS = path.join(ROOT, "..", "Zenodotus");
 const MODEL = process.env.EXPERTISE_MODEL ?? "gemma2:2b";
 const PORT = Number((process.argv.includes("--port") ? process.argv[process.argv.indexOf("--port") + 1] : null) ?? process.env.EXPERTISE_SURFACE_PORT ?? 8823);
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID ?? null;
@@ -146,7 +146,7 @@ async function pushToLivePriors(identity) {
   const status = await git(["status", "--porcelain", "--", "derived-priors/expertise-priors"]);
   if (!status.stdout.trim()) { await git(["checkout", "main"]); return { ok: false, error: "nothing to push — no expertise recorded yet" }; }
   await git(["-c", `user.name=${identity.name || identity.login}`, "-c", `user.email=${identity.login}@users.noreply.github.com`, "commit", "-m", `expertise: ${identity.login}'s learned forms, ${new Date().toISOString()}`]);
-  const remote = `https://x-access-token:${identity.token}@github.com/scores-patch-points/ethos.git`;
+  const remote = `https://x-access-token:${identity.token}@github.com/scores-patch-points/Zenodotus.git`;
   await git(["push", remote, `${branch}:${branch}`]);
   await git(["checkout", "main"]);
   return { ok: true, branch };

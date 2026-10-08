@@ -29,7 +29,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const DEFAULT_LIVE_PRIORS = path.resolve(HERE, "../../../ethos/derived-priors");
+const DEFAULT_LIVE_PRIORS = path.resolve(HERE, "../../../Zenodotus/derived-priors");
 
 // Read fresh on every call, like correction-rule.js's correctionRulesFile —
 // never cached at import time — so a test can point this at a fixture

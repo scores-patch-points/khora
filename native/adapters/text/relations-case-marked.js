@@ -132,7 +132,7 @@ let _defaultPrior = null;
 export function defaultLatinCasePrior() {
   if (!_defaultPrior) {
     _defaultPrior = JSON.parse(
-      readFileSync(path.join(HERE, "..", "..", "..", "..", "ethos", "derived-priors", "case-priors", "case-marking-lat.json"), "utf8"),
+      readFileSync(path.join(HERE, "..", "..", "..", "..", "Zenodotus", "derived-priors", "case-priors", "case-marking-lat.json"), "utf8"),
     );
   }
   return _defaultPrior;

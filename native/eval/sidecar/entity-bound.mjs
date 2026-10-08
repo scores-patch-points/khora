@@ -25,7 +25,7 @@ import { readDoor } from "../../the-fold/read-door.mjs";
 import { bindEnd } from "./bind-relations.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = "/Users/mlacy/Documents/3.0/ethos";
+const ROOT = "/Users/mlacy/Documents/3.0/Zenodotus";
 const FAMILIES = ["gitenberg", "factbook", "udhr"];
 const norm = (s) => String(s ?? "").normalize("NFC").trim();
 

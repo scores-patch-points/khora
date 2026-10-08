@@ -15,7 +15,7 @@ import { fileURLToPath } from "node:url";
 import { readToWeft } from "../../the-fold/read-process.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const DEFAULT_ROOT = "/Users/mlacy/Documents/3.0/ethos";
+const DEFAULT_ROOT = "/Users/mlacy/Documents/3.0/Zenodotus";
 const CAT = /^(\d\d|derived|legacy|scripts)/;
 
 function argv() {

@@ -42,7 +42,7 @@ export function loadSovereigntyPrior() {
   if (_priorLoaded) return _prior;
   _priorLoaded = true;
   try {
-    const p = path.join(HERE, "..", "..", "..", "ethos", "derived-priors", "code-priors", "data-sovereignty-prior-v1.json");
+    const p = path.join(HERE, "..", "..", "..", "Zenodotus", "derived-priors", "code-priors", "data-sovereignty-prior-v1.json");
     _prior = JSON.parse(fs.readFileSync(p, "utf8"));
   } catch { _prior = null; }
   return _prior;

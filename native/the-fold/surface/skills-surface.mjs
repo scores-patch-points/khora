@@ -124,7 +124,7 @@ export function skillsHandler({ learnedDir, collect, base = "" }) {
 if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
   const a = process.argv.slice(2); const opt = (k, d = null) => { const i = a.indexOf(`--${k}`); return i >= 0 ? a[i + 1] : d; };
   const learnedDir = opt("learned", process.env.ER7_LEARNED_DIR ?? path.join(process.env.HOME ?? "", ".er7", "learned"));
-  const collect = () => collectSkills({ livePriors: opt("live-priors", path.join(process.cwd(), "..", "ethos")), layoutRules: opt("layout-rules", fileURLToPath(new URL("./layout-conventions.json", import.meta.url))), learnedDir, foldSkillsDir: opt("fold-skills"), formPriors: opt("form-priors") });
+  const collect = () => collectSkills({ livePriors: opt("live-priors", path.join(process.cwd(), "..", "Zenodotus")), layoutRules: opt("layout-rules", fileURLToPath(new URL("./layout-conventions.json", import.meta.url))), learnedDir, foldSkillsDir: opt("fold-skills"), formPriors: opt("form-priors") });
   const cmd = a[0];
   if (cmd === "concede") { const r = concedeLearned(learnedDir, a[1], a[2]); console.log(r.error ? `refused: ${r.error}` : `conceded ${a[1]}: ${a[2]}`); process.exit(r.error ? 1 : 0); }
   if (cmd === "toggle") { const r = setToggle(learnedDir, { skill: a[1], on: a[2] === "on", by: opt("by"), why: a[3] && !a[3].startsWith("--") ? a[3] : null }); console.log(r.error ? `refused: ${r.error}` : `${a[1]} → ${a[2]} (seq ${r.entry.seq})`); process.exit(r.error ? 1 : 0); }

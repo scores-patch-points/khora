@@ -27,7 +27,7 @@ import { induceKindsAndFunctions } from "../../kernel/kind-functional-induction.
 import { assertionsFromTriples } from "../../kernel/entity-profile.js";
 import { createSeededRng, shuffled } from "../../kernel/rng.js";
 
-const ROOT = "/Users/mlacy/Documents/3.0/ethos";
+const ROOT = "/Users/mlacy/Documents/3.0/Zenodotus";
 const CLOSED = new Set(["of", "the", "and", "is", "in", "to", "a", "was", "for", "on", "by", ",", "as", "that", "with", "his", "her", "it", "at", "from", "be", "are", "were", "an", "or", "not", "but", "its", "he", "she", "they", "this", "which", "who", "has", "had", "have"]);
 const CAT = /^(0\d|1\d|20)-/;
 

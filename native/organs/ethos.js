@@ -29,7 +29,7 @@ import { specRefusal } from "./privacy.js";
 import { compendium, ARCHON_COMPENDIUM } from "./archon-compendium.js";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const UDHR_PATH = decodeURIComponent(new URL("../../../ethos/06-government-legal/un-udhr/udhr-eng.txt", import.meta.url).pathname);
+const UDHR_PATH = decodeURIComponent(new URL("../../../Zenodotus/06-government-legal/un-udhr/udhr-eng.txt", import.meta.url).pathname);
 
 // ── THE CONSTITUTION: built once, armed always ──────────────────────────────
 // The FAMILY (THE-MORAL-CORE.md): the UDHR charter built from its own bytes,
