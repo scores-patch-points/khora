@@ -1,0 +1,69 @@
+GOLD2 JUDGE — GoldScenes@1 (30 hand-labelled scenes) vs rung-CON referent-trails + rung-DEF config-trails
+  base driver cut at 120000 chars → 68 scenes (gold was cut at 120000: indices align).
+  rung CON: 149 referent-trails laid, 42 SURVIVING (≥0.8).
+  rung DEF: 34 config-trails laid, 2 SURVIVING (≥0.8).  
+
+  gold types (n): assembly:9  gossip:4  reception:3  feast:3  intrigue:3  omen:2  counsel:2  proem:1  landing:1  prayer:1  voyage:1
+
+═══ HEADLINE: NMI(gold, machine) ═══
+  referent-trail  (rung CON, survivors)  NMI = 0.646  meanPurity = 50.0%
+      permutation null (20k): mean 0.622 · sd 0.028 → z = 0.9 — the NMI is INDISTINGUISHABLE from chance
+      NMI on the 26 scenes of multi-scene types only (singletons dropped): 0.603
+  referent-trail  (rung CON, full field) NMI = 0.675   [driver's own print semantics]
+  config-script   (rung DEF, floor 0.8)  NMI = 0.000  meanPurity = 100.0% (VACUOUS: all ·none)  — on the gold window it assigns 0/30 scenes
+
+═══ PER HUMAN TYPE → dominant referent-trail (rung CON, survivors) ═══
+  type        n  modal-trail   purity  spread  scenes
+  assembly    9  θεος            33%       7  1,2,3,4,5,20,21,23,25
+  gossip      4  κειν            25%       4  12,13,15,19
+  reception   3  ·none           67%       2  7,8,9
+  feast       3  τραπεζ          33%       3  10,11,18
+  intrigue    3  ·none           67%       2  22,28,29
+  omen        2  υιος            50%       2  14,24
+  counsel     2  ουτος           50%       2  16,17
+  proem       1  ·none          100%       1  0
+  landing     1  μνεστερ        100%       1  6
+  prayer      1  χειρ           100%       1  26
+  voyage      1  μεγας          100%       1  27
+
+═══ PER referent-trail → dominant human type ═══
+  ·none        × 6 → reception   33% homog
+  θεος         × 5 → assembly    60% homog
+  θυμος        × 2 → assembly    50% homog
+  μεγας        × 2 → assembly    50% homog
+  χειρ         × 2 → feast       50% homog
+  ανηρ         × 2 → gossip      50% homog
+  θαλασσα      × 1 → assembly   100% homog
+  ουρανος      × 1 → assembly   100% homog
+  μνεστερ      × 1 → landing    100% homog
+  δομα         × 1 → reception  100% homog
+  τραπεζ       × 1 → feast      100% homog
+  κειν         × 1 → gossip     100% homog
+  ποντ         × 1 → gossip     100% homog
+  υιος         × 1 → omen       100% homog
+  ουτος        × 1 → counsel    100% homog
+  αχαι         × 1 → intrigue   100% homog
+  κακος        × 1 → omen       100% homog
+
+═══ THE KEY QUESTION — court (suitors) vs assembly (gathering) ═══
+  μνηστῆρες referent-trail present in gold scenes: [6,11,17,22,25,26]  types: landing,feast,counsel,intrigue,assembly,prayer
+  assembly gold scenes: [1,2,3,4,5,20,21,23,25]
+  trails shared by an assembly scene and a suitor-holding scene: θυμος, θεος
+  court group {feast,intrigue} (n=6) modal trail: ·none ×2
+  assembly group (n=9) modal trail: θεος ×3
+
+  the label 'court/suitors' is NOT a human type in GoldScenes@1: the suitors appear inside feast/intrigue
+  (and the assembly of books 1–2). So the comparison is: does μνηστῆρες cut a distinct referent-trail, or does
+  the same court trail cover the assembly (and vice-versa)?
+
+VERDICT
+  NMI 0.646 (referent-trail, survivors) vs permutation null 0.622 ± 0.028
+  (z=0.9) — the apparent NMI is CHANCE, not tracking; on the multi-scene types only it is
+  0.603. The dominant type (assembly, n=9) is spread over 7 distinct trails with modal θεος
+  at only 33%; the μνηστῆρες referent-trail sits in 6 scenes across 6 different human types (landing,feast,counsel,intrigue,assembly,prayer); and
+  θεος/θυμος are the trails SHARED by assembly scenes and suitor-holding scenes — the same referent-trail
+  covers both the assembly and the court.
+  ONE SENTENCE — the stigmergic referent-trail is STILL A REFERENT SIGNAL (a per-scene Grosz center), not a
+  scene-KIND: its NMI against the human types is at the permutation null, its only near-clean hits are distinctive
+  referents indexing individual scenes (τράπεζα→feast, κεῖνος→gossip, μνηστῆρες→landing), and it cannot separate
+  the court from the assembly — the type-layer must be built on top of it.

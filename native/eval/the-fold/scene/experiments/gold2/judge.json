@@ -1,0 +1,396 @@
+{
+  "schema": "Gold2Judgment@1",
+  "chars": 120000,
+  "nScenes": 68,
+  "nGold": 30,
+  "nRefSurvivors": 42,
+  "nConfigSurvivors": 2,
+  "nmi": {
+    "referentTrailSurvivors": 0.6459480860495908,
+    "referentTrailFullField": 0.6750440287497278,
+    "referentTrailMultiType": 0.6028344709600705,
+    "configScript": 0
+  },
+  "null": {
+    "referentTrail": {
+      "mean": 0.622030462916626,
+      "sd": 0.027846267499847057
+    },
+    "configScript": {
+      "mean": 0,
+      "sd": 0
+    }
+  },
+  "zTrail": 0.8589166621018819,
+  "meanPurity": {
+    "referentTrail": 0.5,
+    "configScript": 1
+  },
+  "perType": [
+    {
+      "t": "assembly",
+      "n": 9,
+      "trail": "⛧θεος",
+      "purity": 0.3333333333333333,
+      "spread": 7,
+      "scenes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        20,
+        21,
+        23,
+        25
+      ]
+    },
+    {
+      "t": "gossip",
+      "n": 4,
+      "trail": "⛧κειν",
+      "purity": 0.25,
+      "spread": 4,
+      "scenes": [
+        12,
+        13,
+        15,
+        19
+      ]
+    },
+    {
+      "t": "reception",
+      "n": 3,
+      "trail": "·none",
+      "purity": 0.6666666666666666,
+      "spread": 2,
+      "scenes": [
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "t": "feast",
+      "n": 3,
+      "trail": "⛧τραπεζ",
+      "purity": 0.3333333333333333,
+      "spread": 3,
+      "scenes": [
+        10,
+        11,
+        18
+      ]
+    },
+    {
+      "t": "intrigue",
+      "n": 3,
+      "trail": "·none",
+      "purity": 0.6666666666666666,
+      "spread": 2,
+      "scenes": [
+        22,
+        28,
+        29
+      ]
+    },
+    {
+      "t": "omen",
+      "n": 2,
+      "trail": "⛧υιος",
+      "purity": 0.5,
+      "spread": 2,
+      "scenes": [
+        14,
+        24
+      ]
+    },
+    {
+      "t": "counsel",
+      "n": 2,
+      "trail": "⛧ουτος",
+      "purity": 0.5,
+      "spread": 2,
+      "scenes": [
+        16,
+        17
+      ]
+    },
+    {
+      "t": "proem",
+      "n": 1,
+      "trail": "·none",
+      "purity": 1,
+      "spread": 1,
+      "scenes": [
+        0
+      ]
+    },
+    {
+      "t": "landing",
+      "n": 1,
+      "trail": "⛧μνεστερ",
+      "purity": 1,
+      "spread": 1,
+      "scenes": [
+        6
+      ]
+    },
+    {
+      "t": "prayer",
+      "n": 1,
+      "trail": "⛧χειρ",
+      "purity": 1,
+      "spread": 1,
+      "scenes": [
+        26
+      ]
+    },
+    {
+      "t": "voyage",
+      "n": 1,
+      "trail": "⛧μεγας",
+      "purity": 1,
+      "spread": 1,
+      "scenes": [
+        27
+      ]
+    }
+  ],
+  "perTrail": [
+    {
+      "k": "·none",
+      "n": 6,
+      "top": "reception",
+      "homog": 0.3333333333333333
+    },
+    {
+      "k": "⛧θεος",
+      "n": 5,
+      "top": "assembly",
+      "homog": 0.6
+    },
+    {
+      "k": "⛧θυμος",
+      "n": 2,
+      "top": "assembly",
+      "homog": 0.5
+    },
+    {
+      "k": "⛧μεγας",
+      "n": 2,
+      "top": "assembly",
+      "homog": 0.5
+    },
+    {
+      "k": "⛧χειρ",
+      "n": 2,
+      "top": "feast",
+      "homog": 0.5
+    },
+    {
+      "k": "⛧ανηρ",
+      "n": 2,
+      "top": "gossip",
+      "homog": 0.5
+    },
+    {
+      "k": "⛧θαλασσα",
+      "n": 1,
+      "top": "assembly",
+      "homog": 1
+    },
+    {
+      "k": "⛧ουρανος",
+      "n": 1,
+      "top": "assembly",
+      "homog": 1
+    },
+    {
+      "k": "⛧μνεστερ",
+      "n": 1,
+      "top": "landing",
+      "homog": 1
+    },
+    {
+      "k": "⛧δομα",
+      "n": 1,
+      "top": "reception",
+      "homog": 1
+    },
+    {
+      "k": "⛧τραπεζ",
+      "n": 1,
+      "top": "feast",
+      "homog": 1
+    },
+    {
+      "k": "⛧κειν",
+      "n": 1,
+      "top": "gossip",
+      "homog": 1
+    },
+    {
+      "k": "⛧ποντ",
+      "n": 1,
+      "top": "gossip",
+      "homog": 1
+    },
+    {
+      "k": "⛧υιος",
+      "n": 1,
+      "top": "omen",
+      "homog": 1
+    },
+    {
+      "k": "⛧ουτος",
+      "n": 1,
+      "top": "counsel",
+      "homog": 1
+    },
+    {
+      "k": "⛧αχαι",
+      "n": 1,
+      "top": "intrigue",
+      "homog": 1
+    },
+    {
+      "k": "⛧κακος",
+      "n": 1,
+      "top": "omen",
+      "homog": 1
+    }
+  ],
+  "assignedTrail": [
+    "·none",
+    "⛧θυμος",
+    "·none",
+    "⛧θαλασσα",
+    "⛧ουρανος",
+    "⛧μεγας",
+    "⛧μνεστερ",
+    "⛧δομα",
+    "·none",
+    "·none",
+    "⛧τραπεζ",
+    "⛧χειρ",
+    "⛧κειν",
+    "⛧ποντ",
+    "⛧υιος",
+    "⛧θεος",
+    "⛧ουτος",
+    "⛧θυμος",
+    "⛧θεος",
+    "⛧ανηρ",
+    "⛧θεος",
+    "⛧ανηρ",
+    "⛧αχαι",
+    "⛧θεος",
+    "⛧κακος",
+    "⛧θεος",
+    "⛧χειρ",
+    "⛧μεγας",
+    "·none",
+    "·none"
+  ],
+  "assignedScript": [
+    "·none",
+    "·none",
+    "·none",
+    "·none",
+    "·none",
+    "·none",
+    "·none",
+    "·none",
+    "·none",
+    "·none",
+    "·none",
+    "·none",
+    "·none",
+    "·none",
+    "·none",
+    "·none",
+    "·none",
+    "·none",
+    "·none",
+    "·none",
+    "·none",
+    "·none",
+    "·none",
+    "·none",
+    "·none",
+    "·none",
+    "·none",
+    "·none",
+    "·none",
+    "·none"
+  ],
+  "gold": [
+    "proem",
+    "assembly",
+    "assembly",
+    "assembly",
+    "assembly",
+    "assembly",
+    "landing",
+    "reception",
+    "reception",
+    "reception",
+    "feast",
+    "feast",
+    "gossip",
+    "gossip",
+    "omen",
+    "gossip",
+    "counsel",
+    "counsel",
+    "feast",
+    "gossip",
+    "assembly",
+    "assembly",
+    "intrigue",
+    "assembly",
+    "omen",
+    "assembly",
+    "prayer",
+    "voyage",
+    "intrigue",
+    "intrigue"
+  ],
+  "courtVsAssembly": {
+    "court": {
+      "total": 6,
+      "c": {
+        "⛧τραπεζ": 1,
+        "⛧χειρ": 1,
+        "⛧θεος": 1,
+        "⛧αχαι": 1,
+        "·none": 2
+      },
+      "modal": [
+        "·none",
+        2
+      ]
+    },
+    "assembly": {
+      "total": 9,
+      "c": {
+        "⛧θυμος": 1,
+        "⛧ολεθρ": 1,
+        "⛧θαλασσα": 1,
+        "⛧ουρανος": 1,
+        "⛧μεγας": 1,
+        "⛧θεος": 3,
+        "⛧ανηρ": 1
+      },
+      "modal": [
+        "⛧θεος",
+        3
+      ]
+    },
+    "sharedTrails": [
+      "⛧θυμος",
+      "⛧θεος"
+    ]
+  }
+}
