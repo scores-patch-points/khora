@@ -149,7 +149,7 @@ export function declaredLanguage(language) {
 }
 
 /** The core read, one language (declared, else the reader's own detection). Returns the EORead@1 body. */
-async function readWith({ text, name = "", language = null, maxCharacters = 60000, now = () => Date.now(), memo = true } = {}) {
+async function readWith({ text, name = "", language = null, maxCharacters = 60000, now = () => Date.now(), memo = true, entityBound = false } = {}) {
   const declared = declaredLanguage(language);
   const material = String(text ?? "").slice(0, maxCharacters);
   const truncated = material.length < String(text ?? "").length;
@@ -170,7 +170,7 @@ async function readWith({ text, name = "", language = null, maxCharacters = 6000
   for (const r of langRows) if (r.confident && r.language && r.language !== "unknown") langTally.set(r.language, (langTally.get(r.language) ?? 0) + 1);
   let docLang = declared;
   if (!docLang && langTally.size) { const top = [...langTally].sort((a, b) => b[1] - a[1])[0][0]; try { if (declaredLanguage(top)) docLang = top; } catch { docLang = null; } }
-  const session = createSession();
+  const session = createSession({ entityBound });
   admitChunked(session, { text: material, sourceId, ...(docLang ? { language: docLang } : {}) });
   const cast = await sessionReferents(session, { sourceId, priors: [], limit: 200 });
   const relations = await sessionRelations(session, { sourceId });
@@ -272,19 +272,19 @@ function mergeBodies(bodies, langs) {
 
 /** Read `text` and describe what the reader did. Returns the EORead@1 body. `earSelection: "signal"` chooses the ear by
  *  measured signal instead of the language label, and segments script-heterogeneous material (code-switching). */
-export async function readDoor({ text, name = "", language = null, maxCharacters = 60000, now = () => Date.now(), earSelection = "detector", earCandidates = null, earProbeChars = 2000, detector = null } = {}) {
+export async function readDoor({ text, name = "", language = null, maxCharacters = 60000, now = () => Date.now(), earSelection = "detector", earCandidates = null, earProbeChars = 2000, detector = null, entityBound = false } = {}) {
   if (earSelection === "auto" && !declaredLanguage(language)) {
     const det = detector ?? identify;
     let d = null; try { d = det ? det(String(text ?? "").slice(0, 4000)) : null; } catch { d = null; }
     let lang = null;
     if (d?.confident && d.lang) { try { lang = declaredLanguage(d.lang); } catch { lang = null; } }
     if (lang) {
-      const body = await readWith({ text, name, language: lang, maxCharacters, now });
+      const body = await readWith({ text, name, language: lang, maxCharacters, now, entityBound });
       body.languageSource = "detected"; body.detector = { lang, confident: true };
       body.basis = `${body.basis}; language from the detector: ${lang} (confident)`;
       return body;
     }
-    const body = await readDoor({ text, name, maxCharacters, now, earSelection: "signal", earCandidates, earProbeChars });
+    const body = await readDoor({ text, name, maxCharacters, now, earSelection: "signal", earCandidates, earProbeChars, entityBound });
     body.detector = d ? { lang: d.lang ?? null, confident: false, abstained: true } : { available: false };
     body.basis = `${body.basis}; detector abstained, ear chosen by signal`;
     return body;
@@ -295,7 +295,7 @@ export async function readDoor({ text, name = "", language = null, maxCharacters
     if (segments.length > 1) {
       const spans = await selectSegmentEars({ text: material, segments, probeChars: earProbeChars, name, now });
       const bodies = [];
-      for (let i = 0; i < segments.length; i += 1) bodies.push(await readWith({ text: segments[i].text, name: `${name | 0}-${i}`, language: spans[i].language, now }));
+      for (let i = 0; i < segments.length; i += 1) bodies.push(await readWith({ text: segments[i].text, name: `${name | 0}-${i}`, language: spans[i].language, now, entityBound }));
       const langs = [...new Set(spans.map((s) => s.language).filter(Boolean))];
       const body = mergeBodies(bodies, langs);
       body.sourceCharacters = String(text ?? "").length; body.readCharacters = material.length;
@@ -305,11 +305,11 @@ export async function readDoor({ text, name = "", language = null, maxCharacters
       return body;
     }
     const sel = await selectEarBySignal({ text: material, candidates: earCandidates ?? EAR_CANDIDATES, probeChars: earProbeChars, name, now });
-    const body = await readWith({ text, name, language: sel.winner, maxCharacters, now });
+    const body = await readWith({ text, name, language: sel.winner, maxCharacters, now, entityBound });
     if (sel.winner) { body.languageSource = "by-ear"; body.priorsInjected = [`language:${sel.winner}`]; }
     body.earSelection = { method: "signal", winner: sel.winner, scores: sel.scores, explored: sel.explored, candidates: sel.candidates, shape: sel.shape };
     body.basis = `${body.basis}; ear chosen by SIGNAL (content relations over ${sel.scores.length} candidate ears): ${sel.winner} [${sel.scores.map((s) => `${s.language}:${s.signal}`).join(", ")}]`;
     return body;
   }
-  return readWith({ text, name, language, maxCharacters, now });
+  return readWith({ text, name, language, maxCharacters, now, entityBound });
 }
