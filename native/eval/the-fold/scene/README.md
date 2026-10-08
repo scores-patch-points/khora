@@ -64,6 +64,22 @@ The mechanism: a **weld** — single-linkage connects the whole corpus at a gene
   grammar (pos·case-marking·morphology) and the carried ground (expectation), never
   the kinds themselves.
 
+## Rung status (the ninth-layer build, 2026-10-08)
+
+| rung | state | record |
+|---|---|---|
+| 1 `NUL` | named | the empty chapter-expectation; bayes-surprise's `createHolograph` is its mechanism |
+| 2 `SIG` | measured | the pro-drop seam, 89.4% case on UD PROIEL; this session's 981 Odyssey clauses |
+| **3 `INS`** | **done** | `layer0-ins.mjs` + `janus/priors/lemma/grc-lemma.json`: stem by the case prior + PROIEL lemmas, ending-prior as the gate, pronouns excluded → Telemachus ×5-cases, Odysseus (incl. -ῆος), Athena, Penelope, γυνή ×5, ἀνήρ ×6, θεοί ×6 |
+| 4 `SEG` | partial | scenes bounded by bayes-to-the-holograph + position-vocabulary; arena grain still misfit |
+| 5 `FLD∨…` | principled | the weft/nomos as the garden; MOUTH-LAST |
+| 6 `CON` | **worked — stigmergically** | **`scene-trails.mjs`: deposit · evaporate · follow** — every scene deposits +1 on each referent-kind it holds; every scene evaporates (×0.92, prune <0.05); the kinds are the trails that SURVIVE because they recur (ἀνήρ 2.47, θυμός 2.41, Ζεύς 2.25, θεός, χείρ, **ξεῖνος** — the guest, the xenia center — οἶνος, θάλασσα, πῦρ). Each scene kinds to its strongest surviving trail; the sequence IS the referent-rhythm. **The static weld (0-of-20 similarity cells non-degenerate) dies; the stigmergic key is recurrence over the log — the ant-swarm's own deposit·evaporate·follow, no fitted threshold.** |
+| 7 `DEF` | not yet | the script/chapter-kind induction over the accumulated corpus in time — where recurrence lives |
+| 8 `EVA` | mechanism | bayes-deviation + polarity; the script target missing |
+| 9 `REC` | near | realize via the pivot; the reason-gate |
+
+**The standing law refuted-and-sharpened:** each element knob (∅ → pronouns → universal adjectives) excludes one more generic class and the weld survives — so the scene-kind cannot be found in the *grammatical* grain at all. It lives in recurrence (rungs 7 + 4 over the whole corpus), which is the plan's `DEF` rung. The route forward is not a finer similarity; it is more *time* — the whole Odyssey, then the corpus in chronological order, where the situation-types actually repeat.
+
 ## Hardcoded (disclosed, draft)
 
 The drivers resolve absolute workspace paths (`/Users/mlacy/Documents/3.0/…`):
