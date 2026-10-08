@@ -1,7 +1,7 @@
 // native/tests/weft.test.js — the weft: the reading log the holograph is projected from.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { emptyWeft, appendPass, clothAt, reopen, mouthFacing, holonAddress, weftAttestations, WEFT_ENTRY_SCHEMA, WEFT_ATTESTATION_SCHEMA } from "../the-fold/weft.js";
+import { emptyWeft, appendPass, clothAt, reopen, mouthFacing, holonAddress, weftAttestations, weftReferents, WEFT_ENTRY_SCHEMA, WEFT_ATTESTATION_SCHEMA } from "../the-fold/weft.js";
 
 const pass = (address, cast, relations) => ({ address, cast, relations });
 
@@ -65,6 +65,24 @@ test("weftAttestations folds at a cursor (a past reading attests only its own re
   const w = appendPass(appendPass(emptyWeft(), P1), pass("b.txt", [], [{ relation: "loved", participants: [{ surface: "A" }, { surface: "B" }], scope: { byteOffset: 1 } }]));
   assert.equal([...weftAttestations(w, { asOf: 0 })].length, 1);
   assert.equal([...weftAttestations(w)].length, 2);
+});
+
+test("weftReferents (@2 seam): a referent's COMPANY is both-bound relations, addressable", () => {
+  const P = pass("a.txt",
+    [{ ref: "ref:auto:stevenson", surface: "Stevenson", mentionsAt: [10] }, { ref: "ref:auto:treasure", surface: "Treasure Island", mentionsAt: [12] }],
+    [{ relation: "wrote", participants: [{ ref: "ref:auto:stevenson", surface: "Stevenson", standing: "referent" }, { ref: "ref:auto:treasure", surface: "Treasure Island", standing: "referent" }], scope: { byteOffset: 12 } }]);
+  const refs = [...weftReferents(appendPass(emptyWeft(), P))];
+  const stev = refs.find((r) => r.ref === "ref:auto:stevenson");
+  assert.deepEqual(stev.company, { "ref:auto:treasure": 1 });   // Map<ref,count> — company only, no content
+  assert.equal(stev.passes, 1);
+  assert.deepEqual(stev.mentionsAt, [10]);
+});
+
+test("weftReferents: an unresolved end yields no company (both-bound only)", () => {
+  const P = pass("c.txt", [{ ref: "ref:auto:x", surface: "X", mentionsAt: [1] }],
+    [{ relation: "of", participants: [{ ref: "ref:auto:x", surface: "X", standing: "referent" }, { ref: null, surface: "the", standing: "unresolved_surface" }], scope: { byteOffset: 1 } }]);
+  const refs = [...weftReferents(appendPass(emptyWeft(), P))];
+  assert.equal(refs.every((r) => Object.keys(r.company).length === 0), true);   // an unresolved end contributes no company
 });
 
 test("mouthFacing strikes every address (the shadow) and is deterministic", () => {
