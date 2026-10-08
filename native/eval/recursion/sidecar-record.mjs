@@ -119,6 +119,9 @@ async function main() {
   const a = process.argv.slice(2);
   const o = { sidecar: null, doc: null, json: false, appendRev: null, evidence: null };
   for (let i = 0; i < a.length; i++) { if (a[i] === "--sidecar") o.sidecar = a[++i]; else if (a[i] === "--doc") o.doc = a[++i]; else if (a[i] === "--json") o.json = true; else if (a[i] === "--append-rev") o.appendRev = a[++i]; else if (a[i] === "--evidence") o.evidence = Number(a[++i]); }
+  // A missing --sidecar used to reach path.resolve(null) and throw a bare TypeError (found 2026-10-07 in the
+  // foundation audit). A tool that is run wrong must say how to run it, not crash.
+  if (!o.sidecar) { console.error("usage: sidecar-record.mjs --sidecar DIR [--doc ADDRESS] [--json]\n       sidecar-record.mjs --sidecar DIR --append-rev 'doc|surface|action|to' [--evidence N]"); process.exit(2); }
   if (o.appendRev) {
     const dir = path.resolve(o.sidecar);
     const [doc, surface, action, to] = o.appendRev.split("|");
@@ -134,9 +137,13 @@ async function main() {
   const doc = o.doc ?? log[0]?.address;
   const entrySeq = log.find((e) => e.address === doc)?.seq ?? 0;
   // FUTURE LEARNING (revisions appended after the read): drop chrome that the family genericity would now catch, rename a title.
-  // These are written as append-only revisions in the log's own ordinal space.
-  const rev1 = revision(entrySeq + 0.5, doc, "gutenberg ebook", "drop");
-  const rev2 = revision(entrySeq + 0.6, doc, "project gutenberg", "drop");
+  // These are written as append-only revisions in the log's own ordinal space. STANDING "given": a chrome surface that recurs
+  // across the family is LEARNED, not a disputed candidate — the evidence gate hangs candidates (evidence < EVIDENCE_BAR), so a
+  // default `revision(...)` never applies and this demo would report P1 FAILS for the wrong reason (found in the 2026-10-07
+  // foundation audit: the drops ARE in the cast; the candidate default was silently hanging them). An evidence-bearing drop
+  // (candidate, evidence >= 2) applies the same way; the inline demo states its drops as given.
+  const rev1 = revision(entrySeq + 0.5, doc, "gutenberg ebook", "drop", null, EVIDENCE_BAR, "given");
+  const rev2 = revision(entrySeq + 0.6, doc, "project gutenberg", "drop", null, EVIDENCE_BAR, "given");
   const past = project(log, { asOf: entrySeq, docs: doc });
   log.revisions = [rev1, rev2];
   const now = project(log, { docs: doc });

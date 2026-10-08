@@ -59,10 +59,14 @@ for (const { cat, file } of sample) {
   try { body = await readDoor({ text: text.slice(0, o.chars), name: rel, earSelection: o.ear, earCandidates: o.cands, earProbeChars: 2000 }); }
   catch (err) { body = { error: String(err?.message ?? err) }; }
   const line = {
-    schema: "SidecarRead@1", address: rel, category: cat, bytes: Buffer.byteLength(text), readCharacters: body.readCharacters ?? Math.min(o.chars, text.length),
+    // SidecarRead@2 (2026-10-07): @1 kept only ref+surface (a lossy summary). @2 preserves the reader's own
+    // ADDRESSES and STANDINGS — each cast mention's byte address, each relation edge's byteOffset, and each
+    // participant's standing/resolution — so the read is auditable and re-parseable later. @1 lines are not
+    // rewritten; a @2 read is a new line (new cursor). Additive: every @1 consumer still reads ref/surface.
+    schema: "SidecarRead@2", address: rel, category: cat, bytes: Buffer.byteLength(text), readCharacters: body.readCharacters ?? Math.min(o.chars, text.length),
     language: body.language ?? null, languageSource: body.languageSource ?? null, detector: body.detector ?? null, earSelection: body.earSelection ?? null,
-    cast: (body.referents ?? []).map((r) => ({ ref: r.ref ?? null, surface: r.surfaces?.[0] ?? null })).filter((r) => r.surface),
-    relations: (body.relations ?? []).map((r) => ({ relation: r.relation, participants: (r.participants ?? []).map((p) => ({ ref: p.ref ?? null, surface: p.surface ?? null })) })),
+    cast: (body.referents ?? []).map((r) => ({ ref: r.ref ?? null, surface: r.surfaces?.[0] ?? null, allSurfaces: r.allSurfaces ?? [], mentionsAt: r.mentionsAt ?? [] })).filter((r) => r.surface),
+    relations: (body.relations ?? []).map((r) => ({ relation: r.relation, scope: r.scope ?? null, participants: (r.participants ?? []).map((p) => ({ ref: p.ref ?? null, surface: p.surface ?? null, standing: p.standing ?? null, resolution: p.resolution ?? null })) })),
     signal: (body.relations ?? []).filter((r) => (r.participants ?? []).length >= 2 && (r.participants ?? []).every((p) => { const t = String(p.surface ?? "").trim(); return t && !/^[\p{P}\p{S}]+$/u.test(t); })).length,
     gaps: body.gaps ?? [], ms: body.ms ?? (Date.now() - t0), error: body.error ?? null,
   };
