@@ -72,4 +72,5 @@ directly. The seam requires two forms; it is declared in `check-spine.mjs` with 
 
 `THE-WHEEL.md` (the one act, three positions), `THE-CORE-MECHANISM.md` (the one mechanism),
 `THE-HOLOGRAPH.md` (the handoff), `THE-ADDRESS.md` (why every part can point at the whole),
-`THE-MODULE-CENSUS.md` (module → act).
+`THE-MODULE-CENSUS.md` (module → act), **`THE-READING-PIPELINE.md`** (which reader is the reader, and the
+canonical reading process — `read-process.mjs::readToWeft` → the weft; janus folds it).
