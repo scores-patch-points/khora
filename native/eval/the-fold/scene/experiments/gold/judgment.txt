@@ -1,0 +1,29 @@
+GOLD GoldScenes@1 — 30 scenes hand-labelled (base cuts at 120000 chars: 68 scenes total)
+  gold types (n): assembly:9  gossip:4  reception:3  feast:3  intrigue:3  omen:2  counsel:2  proem:1  landing:1  prayer:1  voyage:1
+  gold labels:    proem assembly assembly assembly assembly assembly landing reception reception reception feast feast gossip gossip omen gossip counsel counsel feast gossip assembly assembly intrigue assembly omen assembly prayer voyage intrigue intrigue
+
+JUDGMENT — NMI(gold, induced) and per-gold-type purity (modal induced kind)
+  run                     | kinds(all) | kinds(on30) | NMI   | meanPurity | block sizes (top)
+  base (scene-kinds.mjs)  |          1 |           1 | 0.000 |     100.0% | 68
+  seq order-1 (bag)       |          1 |           1 | 0.000 |     100.0% | 68
+  seq order-2 (bigram)    |          2 |           2 | 0.072 |      96.7% | 67 1
+  seq order-3 (trigram)   |          8 |           6 | 0.256 |      83.3% | 61 1 1 1 1 1
+
+── base (scene-kinds.mjs) ──  NMI 0.000  meanPurity 100.0%
+   per gold-type:  assembly(9)→K00/100%  gossip(4)→K00/100%  reception(3)→K00/100%  feast(3)→K00/100%  intrigue(3)→K00/100%  omen(2)→K00/100%  counsel(2)→K00/100%  proem(1)→K00/100%  landing(1)→K00/100%  prayer(1)→K00/100%  voyage(1)→K00/100%
+   per induced-kind (top):  K00×30→assembly/30%
+
+── seq order-1 (bag) ──  NMI 0.000  meanPurity 100.0%
+   per gold-type:  assembly(9)→K00/100%  gossip(4)→K00/100%  reception(3)→K00/100%  feast(3)→K00/100%  intrigue(3)→K00/100%  omen(2)→K00/100%  counsel(2)→K00/100%  proem(1)→K00/100%  landing(1)→K00/100%  prayer(1)→K00/100%  voyage(1)→K00/100%
+   per induced-kind (top):  K00×30→assembly/30%
+
+── seq order-2 (bigram) ──  NMI 0.072  meanPurity 96.7%
+   per gold-type:  assembly(9)→K00/100%  gossip(4)→K00/100%  reception(3)→K00/67%[2k]  feast(3)→K00/100%  intrigue(3)→K00/100%  omen(2)→K00/100%  counsel(2)→K00/100%  proem(1)→K00/100%  landing(1)→K00/100%  prayer(1)→K00/100%  voyage(1)→K00/100%
+   per induced-kind (top):  K00×29→assembly/31%  K01×1→reception/100%
+
+── seq order-3 (trigram) ──  NMI 0.256  meanPurity 83.3%
+   per gold-type:  assembly(9)→K00/89%[2k]  gossip(4)→K00/75%[2k]  reception(3)→K02/33%[3k]  feast(3)→K00/100%  intrigue(3)→K00/67%[2k]  omen(2)→K00/100%  counsel(2)→K00/100%  proem(1)→K00/100%  landing(1)→K00/100%  prayer(1)→K00/100%  voyage(1)→K00/100%
+   per induced-kind (top):  K00×25→assembly/32%  K01×1→assembly/100%  K02×1→reception/100%  K03×1→reception/100%  K04×1→gossip/100%  K05×1→intrigue/100%
+
+VERDICT — base induction on the 30 gold scenes: 1 induced kind(s) present; NMI 0.000.
+  ALL THIRTY in one kind: separation ~0 (the blob). High per-type purity is vacuous — a single kind is pure by construction.

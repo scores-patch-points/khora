@@ -4,7 +4,7 @@
 // falsified against the frequency band. The Odyssey folds into its kinds.
 import fs from "node:fs";
 const KHOR = "/Users/mlacy/Documents/3.0/khora";
-const { confirmedVerbSet, greekClauses } = await import(`${KHOR}/native/eval/lavar/greek.mjs`);
+const { confirmedVerbSet, greekClauses, paradigmOf } = await import(`${KHOR}/native/eval/lavar/greek.mjs`);
 const { createHolograph, admit } = await import(`${KHOR}/native/kernel/bayes-surprise.js`);
 const { dmd } = await import(`${KHOR}/native/kernel/dmd.js`);
 const { induceKinds, frequencyBands } = await import(`${KHOR}/../janus/native/organs/kind-induction.js`);
@@ -13,6 +13,12 @@ const casePrior = JSON.parse(fs.readFileSync("/Users/mlacy/Documents/3.0/janus/p
 
 const face = (x) => { if (!x) return ""; if (typeof x === "string") return x; return String(x.head ?? x.surface ?? x.text ?? ""); };
 const seat = (x) => (x ? (x.case ?? "?") : "(∅)");
+// THE ELEMENT KINDS (the 2026-10-08 lever: induce at the KIND grain, not the surface grain)
+//   action-kind = the verb's paradigm cell (tense·voice·mood) — collapses inflected forms
+//   role-class   = the case's role seat (agent/patient/recipient), not raw Nom:Acc
+const ROLE = { Nom: "agt", Acc: "pat", Dat: "rcv", Gen: "gen", Voc: "voc" };
+const roleOf = (x) => (x ? (ROLE[x.case] ?? "?") : "(∅)");
+const actionKindOf = (v) => { const p = v ? paradigmOf(v, casePrior) : null; return p ? `v:${p.tense}:${p.voice}:${p.mood}` : `v:${String(v ?? "·")}`; };
 const ALL = confirmedVerbSet(posPrior);
 const CHARS = Number(process.argv[2] || 120000);
 const odyT = fs.readFileSync("/Users/mlacy/Documents/3.0/Zenodotus/11-multi-language/greek-originals/homer-odyssey.txt", "utf8").replace(/^---[\s\S]*?\n---\n/, "").slice(0, CHARS);
@@ -25,27 +31,42 @@ for (const c of readCl(iliadT)) admit(holo, { position: `${seat(c.subject)}:${se
 const clauses = readCl(odyT);
 const B = clauses.map((c) => admit(holo, { position: `${seat(c.subject)}:${seat(c.object)}`, actor: face(c.subject) || "(∅)", action: String(c.verb ?? "·"), outcome: c.object ? face(c.object) : "∅" }).bayes);
 
-// SCENES = action situations; boundary = a blink OR a NEW ROLE entering the position-vocabulary
+// SCENES = action situations; the boundary is a SIGNIFICANT holograph revision
+// (bayes above the 90th pct), not every blink. A situation is an arena that RUNS.
 const lens = clauses.map((c) => String(c.verb ?? "").length + face(c.subject).length + face(c.object).length);
-const scenes = []; let cur = [], roles = new Set();
+const TH = [...B].filter(Number.isFinite).sort((a, b) => a - b)[Math.floor(B.length * 0.9)] ?? 0;
+const scenes = []; let cur = [];
+const MIN_LEN = 4;
 for (let i = 0; i < clauses.length; i++) {
-  const w = lens.slice(Math.max(0, i - 3), i); const m = w.length ? w.reduce((a, b) => a + b, 0) / w.length : 0;
-  const newRole = seat(clauses[i].subject) !== "?" && !roles.has(seat(clauses[i].subject));
-  if ((lens[i] <= m * 0.65 && lens[i] >= 1) || (newRole && cur.length)) { scenes.push(cur); cur = []; roles = new Set(); }
-  cur.push(clauses[i]); roles.add(seat(clauses[i].subject)); roles.add(seat(clauses[i].object));
+  const rev = Number.isFinite(B[i]) && B[i] >= TH && B[i] > (B[i - 1] ?? 0) && B[i] >= (B[i + 1] ?? 0);
+  if (rev && cur.length >= MIN_LEN) { scenes.push(cur); cur = []; }
+  cur.push(clauses[i]);
 }
 if (cur.length) scenes.push(cur);
 
-// SCENE VECTORS: each scene's company = {position·action·outcome} elements it contains
-const elem = (c) => [`p:${seat(c.subject)}:${seat(c.object)}`, `v:${c.verb}`, `o:${face(c.object) || "∅"}`];
+// SCENE VECTORS: each scene's company = the ELEMENT-KINDS it contains
+const elem = (c) => [`${actionKindOf(c.verb)}`, `r:${roleOf(c.subject)}:${roleOf(c.object)}`, `o:${c.object ? face(c.object) : "∅"}`];
 const sceneVecs = scenes.map((sc, i) => {
   const names = [...new Set(sc.flatMap(elem))];
   const company = {}; for (const n of names) company[n] = sc.flatMap(elem).filter((e) => e === n).length;
   return { ref: `scene:${i}`, surfaces: [String(i)], mentionsAt: [], passes: 1, names, company, total: Object.values(company).reduce((a, b) => a + b, 0) };
 });
 
-// INDUCE THE KINDS — janus, from company, never taught
-const kinds = induceKinds(sceneVecs, { threshold: 0.22 });
+// INDUCE THE KINDS — janus, from company, never taught. THE THIN-COMPANY CURE:
+// an IDF-WEIGHTED COSINE — the generic elements (o:∅, pro-drop roles, the narrative
+// Past:Act:Ind) carry near-zero weight, the distinctive ones carry the kind.
+const df = new Map();
+for (const v of sceneVecs) for (const n of v.names) df.set(n, (df.get(n) ?? 0) + 1);
+const N = sceneVecs.length;
+const idf = new Map(); for (const n of df.keys()) idf.set(n, Math.log(1 + N / (1 + (df.get(n) ?? 0))));
+const wcos = (a, b) => {
+  const va = (n) => idf.get(n) * (a.company[n] ?? 0), vb = (n) => idf.get(n) * (b.company[n] ?? 0);
+  let dot = 0, la = 0, lb = 0;
+  for (const n of a.names) { dot += va(n) * (b.company[n] ? vb(n) : 0); la += va(n) * va(n); }
+  for (const n of b.names) lb += vb(n) * vb(n);
+  return la && lb ? dot / Math.sqrt(la * lb) : 0;
+};
+const kinds = induceKinds(sceneVecs, { similarityOf: wcos, threshold: 0.03 });
 
 // the kinded fold
 const kindId = new Map();

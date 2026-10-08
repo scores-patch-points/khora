@@ -37,6 +37,22 @@ That is the measured "a kind must be more than a frequency band" wall.
 pairs), outcome-kinds — then run the scene-kind induction again. The blob dissolves
 into the Ostrom kinds (reception, assembly, intrigue, landing, taboo, destruction, reunion).
 
+## The swarm falsification (2026-10-08) — scene-kinds do NOT resolve at this element layer
+
+Five ants, one EOT (Odyssey, 981 clauses), measured on the same metrics. Converged verdict: **falsified**.
+
+| ant | lever | result |
+|---|---|---|
+| terrain | sim × threshold sweep, both scene grains | **0 of 20 cells non-degenerate**; blob→singleton cliff, no middle |
+| elements | element-kinds BEFORE scene-kinds (two-level) | **falsified** — the blob moves UP a level; the degeneracy is **recursive**, not element-grain |
+| seq | bigram/trigram transitions as company | blob 100%→90%, never resolves; "right axis, elements too shallow" |
+| scenes | arena-granulation 8/15/25 + DMD-typed | **falsified** — bigger arenas share MORE generic elements and weld HARDER; blob 1.000 at every grain |
+| gold | 30 hand-labelled scenes (GoldScenes@1) as testament | **NMI 0.000** for base/bag; trigram's 8 kinds are singleton noise (NMI 0.256) |
+
+The mechanism: a **weld** — single-linkage connects the whole corpus at a generic-seat similarity floor (`o:∅` · pro-drop `(∅)` · `v:Past:Act:Ind`; coarse welds at jaccard 0.206, fine at 0.143 via `agt:gen` alone), and above the floor only unique-tail scenes survive as singletons. Two catches: the **shuffled-scene-company null is vacuous** under intrinsic separation (permuting whole vectors = a graph relabel; it fires only against an external gold), and no induced cell clears the **frequency-band** falsifier.
+
+**The one surviving lever:** the elements are TOO SHALLOW. The scenes' distinguishing content lives in the **outcomes** — δῶρα, βοῦς, μνηστῆρες, the loom, the bow — which are surface-unique or `∅`. Until the noun/object layer has its own kinds (Greek noun lemma + being resolution; the weak `greekBeings` is the known gap), role·tense·∅-outcome will always weld. **The scene-kinds need the object-kinds underneath them.**
+
 ## The law (archons: Houdini · Ostrom · Rubin · Itti-Baldi · Koopman)
 
 - A scene is an Ostrom action situation: `{positions (Ground) · actors (Figure) ·
