@@ -1249,6 +1249,43 @@ function runInstrument(name, m, ctx, { light = false } = {}) {
 }
 
 // ── the ceiling, the gap test, and the kind pipeline ─────────────────────────────
+/**
+ * The array form of BARKER.md 8.1: `rows` is the n-by-m binary signature matrix, `opts.blocks` the column indices of each feature's one-hot signatures, `opts.continuous`
+ * (optional, n-by-F) the continuous values behind them, `opts.population` or `opts.ids` the system ids. Bin t of a block is the column that holds the 1 (bin order is read as
+ * value order); the cuts the continuous draws are binned with are the midpoints between adjacent bins' value ranges, and when the bins are NOT value-ordered the
+ * continuous values are dropped (typed) and the covariance nulls cannot run. Without continuous values the nulls are N-feat and N-fam only and no kind can be called.
+ */
+function matrixFromContract(rows, o) {
+  const n = rows.length, blocks = o.blocks;
+  if (!blocks?.length) throw new TypeError("induceSystemKinds: the array form needs opts.blocks (the column indices of each feature's one-hot signatures)");
+  const ids = Array.isArray(o.ids) && o.ids.length === n ? o.ids.map(String) : Array.isArray(o.population) && o.population.length === n ? o.population.map(String) : Array.from({ length: n }, (_, i) => `s${i}`);
+  const F = blocks.length, keys = Array.from({ length: F }, (_, j) => `f${String(j).padStart(3, "0")}`), gaps = [];
+  let cont = o.continuous && o.continuous.length === n && o.continuous[0]?.length === F ? o.continuous : null;
+  const bins = [], weights = [], nBins = [], cuts = [];
+  for (let j = 0; j < F; j += 1) {
+    const cols = blocks[j], k = cols.length, col = new Int8Array(n), w = new Float64Array(n);
+    for (let i = 0; i < n; i += 1) {
+      let t = -1;
+      for (let q = 0; q < k; q += 1) if (rows[i][cols[q]] > 0) { t = q; break; }
+      col[i] = t; w[i] = t >= 0 ? Math.max(1, Math.round(rows[i][cols[t]])) : 0;
+    }
+    bins.push(col); weights.push(w); nBins.push(k);
+    cuts.push([]);
+    if (cont) {
+      const ranges = Array.from({ length: k }, () => ({ lo: Infinity, hi: -Infinity }));
+      for (let i = 0; i < n; i += 1) if (col[i] >= 0 && Number.isFinite(cont[i][j])) { ranges[col[i]].lo = Math.min(ranges[col[i]].lo, cont[i][j]); ranges[col[i]].hi = Math.max(ranges[col[i]].hi, cont[i][j]); }
+      let ok = k >= 2 && k <= 3;
+      for (let q = 0; q + 1 < k && ok; q += 1) {
+        if (ranges[q].hi === -Infinity || ranges[q + 1].lo === Infinity || ranges[q].hi > ranges[q + 1].lo) ok = false;
+        else cuts[j].push((ranges[q].hi + ranges[q + 1].lo) / 2);
+      }
+      if (!ok) { gaps.push({ type: "bins_not_value_ordered", feature: keys[j], detail: "the continuous values do not reproduce the binary blocks as ordered bins; the copula nulls cannot run" }); cont = null; }
+    }
+  }
+  const values = bins.map((_, j) => Float64Array.from({ length: n }, (__, i) => (cont ? cont[i][j] : NaN)));
+  return { kind: "blocks", ids, featureKeys: keys, groupOf: keys.map(() => null), nBins, cuts: cont ? cuts : cuts.map(() => []), bins, weights, values, branches: o.branches ? [...o.branches] : null, lineages: o.lineages ? [...o.lineages] : null, gaps, n, noContinuous: !cont };
+}
+
 function resolveKindOpts(matrix, o) {
   const instruments = o.instruments ?? INSTRUMENTS;
   for (const i of instruments) if (!INSTRUMENTS.includes(i)) throw new TypeError(`induceSystemKinds: unknown instrument ${i}`);
@@ -1485,6 +1522,57 @@ export function induceSystemKinds(matrixIn, opts = {}) {
   if (!o.strata) gaps.push({ type: "fam_not_run", detail: "no branch labels: N-fam not run; no kind is labelled by genealogy" });
   return { kinds, refused, ceiling, diagnostics, gaps };
 }
+
+const subMatrix = (m, idx) => (isBlocks(m)
+  ? { ...m, ids: idx.map((i) => m.ids[i]), n: idx.length, bins: m.bins.map((c) => Int8Array.from(idx, (i) => c[i])), weights: m.weights.map((c) => Float64Array.from(idx, (i) => c[i])), values: m.values.map((c) => Float64Array.from(idx, (i) => c[i])), branches: m.branches ? idx.map((i) => m.branches[i]) : null, lineages: m.lineages ? idx.map((i) => m.lineages[i]) : null }
+  : { ...m, ids: idx.map((i) => m.ids[i]), n: idx.length, rows: idx.map((i) => m.rows[i]), strata: m.strata ? idx.map((i) => m.strata[i]) : null, branches: m.branches ? idx.map((i) => m.branches[i]) : null, lineages: m.lineages ? idx.map((i) => m.lineages[i]) : null });
+
+/**
+ * I3 as a divisive splitter (BARKER.md 4.3): at each node the first left singular vector of the column-standardised dense matrix splits the systems by sign; the kind is the smaller
+ * side; T = sigma_1^2 / sum sigma_k^2; p comes from `draws` redeals of that node's own sub-matrix (N-feat for blocks, N-curve for presence). A side is split again while it holds at
+ * least twice the minimum kind size and the node's p is at most alpha divided by the number of splits tested so far (Holm over depth).
+ * Returns [{ members, other, memberIdx, T, depth, p, alphaAdj, size, split }] in breadth-first order; members are system ids.
+ */
+export function spectralSplits(matrix, { draws = DRAWS, alpha = ALPHA, seed = SEED, minKindSize = DEFAULTS.minKindSize, maxDepth = 6 } = {}) {
+  const m = Array.isArray(matrix) ? matrixFromContract(matrix, arguments[1] ?? {}) : matrix;
+  if (!isBlocks(m) && !isPresence(m)) throw new TypeError("spectralSplits: expected a block or presence matrix");
+  const out = [], queue = [{ idx: Array.from({ length: m.n }, (_, i) => i), depth: 1 }];
+  let tested = 0;
+  while (queue.length) {
+    const { idx, depth } = queue.shift();
+    if (idx.length < 2 * minKindSize || depth > maxDepth) continue;
+    const sub = idx.length === m.n ? m : subMatrix(m, idx), top = spectralTop(sub, minKindSize);
+    if (!top.axis) continue;
+    const { cols } = denseColumns(sub), t = gramTop(cols, sub.n);
+    const neg = [], pos = [];
+    for (let i = 0; i < sub.n; i += 1) (t.vec[i] < 0 ? neg : pos).push(i);
+    const mem = neg.length <= pos.length ? neg : pos, oth = neg.length <= pos.length ? pos : neg;
+    tested += 1;
+    const alphaAdj = alpha / tested;
+    let ge = 0;
+    for (let d = 0; d < draws; d += 1) {
+      const X = redeal(sub, { kind: isBlocks(sub) ? "feat" : "curve", rng: makeRng({ seed, purpose: "spectral-split", depth, size: idx.length, first: idx[0], d }) });
+      const { cols: c2 } = denseColumns(X), t2 = gramTop(c2, X.n);
+      if (t2 && t2.T >= t.T) ge += 1;
+    }
+    const p = (1 + ge) / (draws + 1), split = p <= alphaAdj && mem.length >= minKindSize;
+    out.push({ members: mem.map((i) => sub.ids[i]), other: oth.map((i) => sub.ids[i]), memberIdx: mem.map((i) => idx[i]), T: t.T, depth, p, alphaAdj, size: idx.length, split });
+    if (split) for (const side of [mem, oth]) queue.push({ idx: side.map((i) => idx[i]).sort((a, b) => a - b), depth: depth + 1 });
+  }
+  return out;
+}
+
+/**
+ * The ONE ceiling over the whole menu and the nulls that apply (BARKER.md 4.3), with its control built to fail. A thin view of induceSystemKinds: the candidates are
+ * judged there; this returns the ceiling and what set it. { ceiling, nulls: { feat, cov, cov1, fam, curve }, mu, sigma, tried, control }.
+ */
+export function searchAwareCeiling(matrix, opts = {}) {
+  const res = induceSystemKinds(matrix, { controlReps: DEFAULTS.controlReps, neighborSweep: false, ...opts });
+  return { ceiling: res.ceiling?.value ?? null, nulls: res.ceiling?.perNull ?? {}, mu: res.ceiling?.mu ?? null, sigma: res.ceiling?.sigma ?? null, tried: res.diagnostics.tried, control: res.diagnostics.control, candidates: res.diagnostics.candidateTable, refused: res.refused, gaps: res.gaps };
+}
+
+/** Re-exported from the kernel so a caller reaches the one-valuedness ledger through the organ (BARKER.md A11). */
+export { induceKindsAndFunctions };
 
 // ── planted worlds: a kind with a gap, a continuum without one, the real covariance with neither ──────
 /** Pairwise |correlation| among a kind world's signature features at this strength and member share (closed form). */

@@ -24,45 +24,13 @@
 //
 // Usage: node native/scripts/build-frame-prior.mjs <train.conllu> <out.json> <lang> [giver-url]
 import { readFileSync, writeFileSync } from "node:fs";
+import { parseTreebank, buildFrameData, MIN_FRAME } from "./lib/frame-build.mjs";
 
 const [IN, OUT, LANGUAGE, GIVER_URL = null] = process.argv.slice(2);
 if (!IN || !OUT || !LANGUAGE) { console.error("usage: build-frame-prior.mjs <train.conllu> <out.json> <lang> [giver-url]"); process.exit(1); }
 
-const MIN_FRAME = 5; // a frame cell is kept at >= this many hapax observations; below it the backoff speaks
-
-const sentences = [];
-let toks = [];
-for (const line of readFileSync(IN, "utf8").split("\n")) {
-  if (line.startsWith("#")) continue;
-  if (!line.trim()) { if (toks.length) sentences.push(toks); toks = []; continue; }
-  const c = line.split("\t");
-  if (!/^[0-9]+$/.test(c[0])) continue;
-  toks.push({ form: c[1].toLowerCase(), upos: c[3] });
-}
-if (toks.length) sentences.push(toks);
-
-const tally = new Map(); // form -> {upos: n}
-for (const s of sentences) for (const t of s) { const m = tally.get(t.form) ?? {}; m[t.upos] = (m[t.upos] ?? 0) + 1; tally.set(t.form, m); }
-const total = (m) => Object.values(m).reduce((a, b) => a + b, 0);
-const majority = (m) => Object.entries(m).sort((a, b) => b[1] - a[1])[0][0];
-const classOf = (form) => { const m = tally.get(form); return !m || total(m) < 2 ? "UNK" : majority(m); };
-
-const frames = {};
-const bump = (key, upos) => { (frames[key] ??= {})[upos] = (frames[key][upos] ?? 0) + 1; };
-const marginal = {};
-for (const s of sentences) {
-  for (let i = 0; i < s.length; i++) {
-    const t = s[i];
-    if (total(tally.get(t.form)) !== 1) continue; // hapax only
-    const P = i === 0 ? "^" : classOf(s[i - 1].form);
-    const N = i === s.length - 1 ? "$" : classOf(s[i + 1].form);
-    bump(`${P}|${N}`, t.upos); bump(`${P}|*`, t.upos); bump(`*|${N}`, t.upos); bump("*|*", t.upos);
-    marginal[t.upos] = (marginal[t.upos] ?? 0) + 1;
-  }
-}
-const kept = {};
-let dropped = 0;
-for (const [k, v] of Object.entries(frames)) { if (total(v) >= MIN_FRAME || k === "*|*") kept[k] = v; else dropped += 1; }
+const sentences = parseTreebank(readFileSync(IN, "utf8"));
+const { marginal, frames: kept, dropped, hapax } = buildFrameData(sentences);
 
 writeFileSync(OUT, JSON.stringify({
   schema: "FramePrior@1",
@@ -74,9 +42,9 @@ writeFileSync(OUT, JSON.stringify({
     min_frame: MIN_FRAME,
     frames_dropped_below_floor: dropped,
     sentences: sentences.length,
-    hapax: Object.values(marginal).reduce((a, b) => a + b, 0),
+    hapax,
   },
   marginal,
   frames: kept,
 }) + "\n");
-console.log(`${LANGUAGE}: ${sentences.length} sentences, ${Object.values(marginal).reduce((a, b) => a + b, 0)} hapax, ${Object.keys(kept).length} frames -> ${OUT}`);
+console.log(`${LANGUAGE}: ${sentences.length} sentences, ${hapax} hapax, ${Object.keys(kept).length} frames -> ${OUT}`);

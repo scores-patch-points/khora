@@ -32,7 +32,7 @@
 // from `Foo(1)`); no name is granted identity by letter-casing.
 import fs from "node:fs";
 
-export const EDGES_VERSION = "edges-1";
+export const EDGES_VERSION = "edges-2"; // edges-2 (2026-10-06): C preprocessor arms are alternatives (C4 A8)
 
 const LANG_ALIAS = { py: "python", js: "javascript", rb: "ruby", golang: "go" };
 const CODE = { python: ["py", "python"], javascript: ["js", "javascript"], ruby: ["rb", "ruby"], c: ["c"], go: ["go"], java: ["java"] };
@@ -272,6 +272,10 @@ function lexDirective(text, i, out, S) {
     j += 1;
   }
   const line = text.slice(start, j);
+  // conditional-compilation structure: the arms of one #if are ALTERNATIVES, so the reader must know where they begin and end
+  // (a marker spanning the directive line, typed `nl` so that every sibling lookup already skips it; readC consumes the `ppd` field)
+  const pd = /^#\s*(ifdef|ifndef|if|elifdef|elifndef|elif|else|endif)\b/.exec(line);
+  if (pd) out.push({ t: "nl", v: "\n", s: start, e: j, ln: S.ln, ppd: pd[1] === "else" || pd[1].startsWith("elif") ? "alt" : pd[1] === "endif" ? "end" : "open" });
   const m = /^#\s*(?:include|import)\s*(?:<([^>\n]*)>|"([^"\n]*)")/.exec(line);
   if (m) { out.push({ t: "inc", v: m[1] ?? m[2], s: start, e: j, ln: S.ln }); }
   // the condition of #if / #elif is an expression the grammar parses (calls such as __has_builtin(x) are calls);
@@ -426,6 +430,9 @@ class Ctx {
   decl(name, kind, at) { this.declared.push({ name, kind, at }); }
 }
 
+// bounded local lookahead / lookback (tokens): a parameter list longer than this is not scanned, which keeps the
+// reader linear on pathological or truncated input
+const SCAN_CAP = 2000;
 const isOp = (t, v) => Boolean(t) && t.t === "op" && t.v === v;
 const isId = (t, v) => Boolean(t) && t.t === "id" && (v === undefined || t.v === v);
 
@@ -625,7 +632,7 @@ function readJavaScript(C) {
         let name = null;
         const j = prevSigIdx(T, i);
         let k = j;
-        if (isOp(T[j], ")")) { let d = 0; for (k = j; k >= 0; k--) { if (isOp(T[k], ")")) d += 1; else if (isOp(T[k], "(")) { d -= 1; if (d === 0) break; } } }
+        if (isOp(T[j], ")")) { let d = 0; const lo = Math.max(-1, j - SCAN_CAP); for (k = j; k > lo; k--) { if (isOp(T[k], ")")) d += 1; else if (isOp(T[k], "(")) { d -= 1; if (d === 0) break; } } if (k <= lo) k = -1; }
         if (k >= 0) {
           let a = k - 1;
           if (isId(T[a], "async")) a -= 1;
@@ -863,7 +870,7 @@ function javaHeritage(C, T, j, child, declKind = "class") {
     if (isOp(u, "<")) { angle += 1; j += 1; continue; }
     if (isOp(u, ">")) { angle = Math.max(0, angle - 1); j += 1; continue; }
     if (angle > 0) { j += 1; continue; }
-    if (isOp(u, "(")) { let d = 0; for (; j < T.length; j++) { if (isOp(T[j], "(")) d += 1; else if (isOp(T[j], ")")) { d -= 1; if (d === 0) break; } } j += 1; continue; }
+    if (isOp(u, "(")) { let d = 0; const lim = Math.min(T.length, j + SCAN_CAP); for (; j < lim; j++) { if (isOp(T[j], "(")) d += 1; else if (isOp(T[j], ")")) { d -= 1; if (d === 0) break; } } j += 1; continue; }
     if (isId(u, "extends") || isId(u, "implements")) { rel = u.v; j += 1; continue; }
     if (isId(u, "permits")) { rel = "permits"; j += 1; continue; }
     if (isId(u) && rel) {
@@ -889,10 +896,26 @@ function readC(C) {
   let fileCall = null;
   const top = () => stack[stack.length - 1];
   const atFile = () => { const e = top(); return e.ch === "file" || (e.ch === "{" && e.kind === "link"); };
+  // PREPROCESSOR ARMS (C4 A8, 2026-10-06). `#if A { #else { #endif ... }` opens ONE block in either configuration, but a
+  // brace counter that reads both arms in sequence opens two and the scope never returns to file level (python/cpython
+  // Python_ceval.c: one function swallowed 375 callees). The arms of a conditional are ALTERNATIVES: at `#else` / `#elif`
+  // the scope is rewound to its state at the `#if`; at `#endif` the reader commits to the state at the end of the FIRST arm
+  // (the one it read first; for code that balances in every configuration all arms end alike). Single-pass, prefix only.
+  const pps = [];
+  const snap = () => ({ stack: stack.slice(), pend, fileCall });
+  const rewind = (s) => { stack.length = 0; for (const e of s.stack) stack.push(e); pend = s.pend; fileCall = s.fileCall; };
+  const ppEdge = (k) => {
+    if (k === "open") { pps.push({ entry: snap(), first: null, arm: 0 }); return; }
+    if (!pps.length) return; // a stray #else / #endif (a fragment): nothing to rewind to
+    if (k === "alt") { const f = pps[pps.length - 1]; if (f.arm === 0) { f.first = snap(); f.arm = 1; } rewind(f.entry); return; }
+    const f = pps.pop();
+    if (f.arm > 0) rewind(f.first);
+  };
   for (let i = 0; i < T.length; i++) {
     const t = T[i];
     if (t.t === "inc") { C.imp(t.v, t.s, t.e); continue; }
-    if (t.t === "nl" || t.t === "str" || t.t === "num") continue;
+    if (t.t === "nl") { if (t.ppd) ppEdge(t.ppd); continue; }
+    if (t.t === "str" || t.t === "num") continue;
     if (t.pp) {
       // the condition of #if / #elif is an expression: `__has_builtin(x)` is a call (the grammar parses it)
       if (t.t === "id" && isOp(T[i + 1], "(") && T[i + 1].pp && !C_NONCALL.has(t.v) && !C.refused(t.v) && !isOp(T[i - 1], ".")) C.call("<top>", t, T[i + 1].e);
@@ -1039,7 +1062,8 @@ function readGo(C) {
       if (isId(nx) && (isOp(T[i + 2], "(") || isOp(T[i + 2], "["))) { pend = { kind: "func", name: nx.v, level: 1 }; i += 1; continue; }
       if (isOp(nx, "(")) {
         let d = 0, j = i + 1;
-        for (; j < T.length; j++) { if (isOp(T[j], "(")) d += 1; else if (isOp(T[j], ")")) { d -= 1; if (d === 0) break; } }
+        const lim = Math.min(T.length, j + SCAN_CAP);
+        for (; j < lim; j++) { if (isOp(T[j], "(")) d += 1; else if (isOp(T[j], ")")) { d -= 1; if (d === 0) break; } }
         const nm = T[j + 1];
         if (isId(nm) && (isOp(T[j + 2], "(") || isOp(T[j + 2], "["))) { pend = { kind: "func", name: nm.v, level: 1 }; i = j + 1; continue; }
       }
@@ -1111,7 +1135,7 @@ function readRuby(C) {
         if (named && isOp(T[k], "=") && T[k].s === nm.e && isOp(T[k + 1], "(")) { named = false; k += 1; }
         if (!isId(nm)) { k = j + 1; while (T[k] && T[k].t === "op" && !isOp(T[k], "(")) k += 1; }
         const e = { ch: "kw", kind: "def", name: named ? nm.v : null, named };
-        if (isOp(T[k], "(")) { let d = 0; for (; k < T.length; k++) { if (isOp(T[k], "(")) d += 1; else if (isOp(T[k], ")")) { d -= 1; if (d === 0) break; } } k += 1; }
+        if (isOp(T[k], "(")) { let d = 0; const lim = Math.min(T.length, k + SCAN_CAP); for (; k < lim; k++) { if (isOp(T[k], "(")) d += 1; else if (isOp(T[k], ")")) { d -= 1; if (d === 0) break; } } k += 1; }
         if (isOp(T[k], "=") && !isOp(T[k + 1], "=")) e.endless = true; // `def f(x) = expr` has no `end`
         stack.push(e);
         if (named) C.decl(nm.v, "method", nm.s);
@@ -1215,7 +1239,8 @@ export function readEdges({ text, language, fileName = "", keywords = null, fina
   if (!lang) return { language: null, calls: [], imports: [], extends: [], declared: [], consumed: 0, disclosure: { error: `no edge reader for ${language ?? fileName}` } };
   const src = String(text ?? "");
   const kw = keywords ? (keywords instanceof Set ? keywords : new Set(keywords)) : null;
-  const T = lexAll(src, lang, final);
+  let T;
+  try { T = lexAll(src, lang, final); } catch (e) { return { language: lang, calls: [], imports: [], extends: [], declared: [], consumed: 0, disclosure: { error: `lexer error: ${e.message}` } }; }
   const C = new Ctx({ text: src, lang, keywords: kw, final, T });
   try { READERS[lang](C); } catch (e) { return { language: lang, calls: C.calls, imports: C.imports, extends: C.extends, declared: C.declared, consumed: 0, disclosure: { error: `reader error: ${e.message}` } }; }
   const consumed = final ? src.length : (T.length ? T[T.length - 1].e : 0);

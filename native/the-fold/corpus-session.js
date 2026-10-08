@@ -130,7 +130,7 @@ async function readDocument(session, sourceId) {
   }
   doc.grammar = { language: grammar.language, gap: grammar.gap ?? null, detected: grammar.detected ?? null };
   const perceiver = createCausalTextPerceiver({
-    ...(grammar.language ? { posPrior: grammar.posPrior, framePrior: grammar.framePrior, proclitics: grammar.proclitics, enclitics: grammar.enclitics } : {}),
+    ...(grammar.language ? { posPrior: grammar.posPrior, framePrior: grammar.framePrior, proclitics: grammar.proclitics, enclitics: grammar.enclitics, contractions: grammar.contractions } : {}),
     // refreshEvery: 1 is the perceiver's documented default (recursive.js:426):
     // batching at 25 is stale. The cast projection runs at the first content
     // refresh regardless (reprojectEveryFinal guard), so a short document is
@@ -282,7 +282,7 @@ export async function sessionRelations(session, { sourceId } = {}) {
   if (!doc) return { relations: [], gaps: [`unknown document ${sourceId}`] };
   const observations = await readDocument(session, sourceId);
   if (!observations) return { relations: [], gaps: [`no observations for ${sourceId}`] };
-  return { relations: projectRelations(observations), gaps: [] };
+  return { relations: projectRelations(observations, { entityBound: session.entityBound === true }), gaps: [] };
 }
 
 export const CORPUS_SESSION = {

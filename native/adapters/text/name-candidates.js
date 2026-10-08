@@ -273,12 +273,12 @@ function judge(unit, prev, next, g, minShare, gaps) {
 }
 
 // building an ear scans the prior's whole vocabulary; a grammar is read many times
-const earCache = new WeakMap(); // posPrior -> { proclitics, enclitics, ear }
+const earCache = new WeakMap(); // posPrior -> { proclitics, enclitics, contractions, ear }
 function cachedEar(g) {
   const hit = earCache.get(g.posPrior);
-  if (hit && hit.proclitics === g.proclitics && hit.enclitics === g.enclitics) return hit.ear;
-  const built = makeEar({ posPrior: g.posPrior, proclitics: g.proclitics, enclitics: g.enclitics });
-  earCache.set(g.posPrior, { proclitics: g.proclitics, enclitics: g.enclitics, ear: built });
+  if (hit && hit.proclitics === g.proclitics && hit.enclitics === g.enclitics && hit.contractions === (g.contractions ?? null)) return hit.ear;
+  const built = makeEar({ posPrior: g.posPrior, proclitics: g.proclitics, enclitics: g.enclitics, contractions: g.contractions ?? null });
+  earCache.set(g.posPrior, { proclitics: g.proclitics, enclitics: g.enclitics, contractions: g.contractions ?? null, ear: built });
   return built;
 }
 

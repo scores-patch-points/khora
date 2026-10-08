@@ -1,4 +1,4 @@
-/* Zhengming speaks:
+/* Zhengming — GENERATED EPIGRAPH AND COMMENTARY, NOT THE AUTHOR'S WORDS except text inside quotation marks, and only where the archon's dossier (the-fold docs/archons/dossier) verifies that quote:
  * “If  names  be  not  correct,  language  is  not  in 
 accordance  with  the  truth  of  things.     If  language  be 
 not  in  accordance  with  the  truth  of  things,   affairs 

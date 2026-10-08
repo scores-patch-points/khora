@@ -467,7 +467,7 @@ function witnessRelatedPairs(store, sentences, refs, matcher = null) {
   }
 }
 
-export function createCausalTextPerceiver({ minRelationSurfaces = 2, refreshEvery = 1, reprojectEvery = null, posPrior = null, descriptorAnchoring = null, addresses = "birth", idFactory = null, recipe = null, language = null, roleConfig = null, parseModel = null, fragmentSeam = true, framePrior = null, proclitics = null, enclitics = null } = {}) {
+export function createCausalTextPerceiver({ minRelationSurfaces = 2, refreshEvery = 1, reprojectEvery = null, posPrior = null, descriptorAnchoring = null, addresses = "birth", idFactory = null, recipe = null, language = null, roleConfig = null, parseModel = null, fragmentSeam = true, framePrior = null, proclitics = null, enclitics = null, contractions = null } = {}) {
   // `refreshEvery` (2026-09-09): 1 is the default now — batching is an
   // engineering compromise, never a model of how reading works ("people
   // don't read in 25-sentence batches" — user direction, verbatim, the
@@ -537,7 +537,7 @@ export function createCausalTextPerceiver({ minRelationSurfaces = 2, refreshEver
   // record; it does not BY ITSELF bring SVO online — only a RoleConfig does.
   // THE EAR (2026-10-05): this language's own word boundaries and bound
   // proclitics, from its received priors — never from capital letters.
-  const ear = makeEar({ posPrior, proclitics, enclitics });
+  const ear = makeEar({ posPrior, proclitics, enclitics, contractions });
   const { mode, discoverRelationVocab, extractRelations } = relationExtractorsFor({ language, roleConfig, posPrior, classifyWord, dominantClass });
   // CONTENT-ADDRESSED IDENTITY (2026-09-13, S114 — the git object model,
   // GitHub-inspired). The perceiver's edge ids were position-derived and

@@ -1,4 +1,4 @@
-/* Ise speaks:
+/* Ise — GENERATED EPIGRAPH AND COMMENTARY, NOT THE AUTHOR'S WORDS except text inside quotation marks, and only where the archon's dossier (the-fold docs/archons/dossier) verifies that quote:
  * “No.  24)  is  a  very  short  formula.  It  announces  to  the  Sun- 
 Goddess  the  rebuilding  of  her  shrine,  which  took  place  every 
 twentieth  year.”

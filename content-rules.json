@@ -162,5 +162,16 @@
   "standing": "disclosed",
   "firstAdoptedAt": 1791436100623,
   "lastSharpenAt": 1791436100623
+ },
+ "scene-fold": {
+  "type": "scene-fold",
+  "signal": "a mechanical fold of a BOOK into action situations / scene-kinds, or a scene/action-situation extraction from an EOT",
+  "read": "a SCENE is an OSTROM ACTION SITUATION: {positions (Ground) · actors (Figure) · actions->outcomes, valenced (Pattern)} with the EOT's polarity as a weak cost/benefit. Bounded by surprise: opens where the ground is most wrong (Rubin), closes where belief is revised (bayes-surprise to the holograph, admit().bayes = KL delta), typed once/finite/recurring by the DMD of the surprise stream (Koopman). Scenes are cut by the position-vocabulary ground (a NEW role ends a situation). SCENE-KINDS are INDUCED by janus from each scene's {position·action·outcome} company, never taught; priors supply only grammar + the carried ground (expectation), never the kinds. MEASURED (Odyssey, Greek 2026-10-08): genuine kinds emerged (nostos-return, god-scene, cattle-taboo) but the induction is DEGENERATE at surface element grain (the 341-of-405 blob fires the frequency-band falsifier) — the elements must be kinds first (verb lemmas, role-classes, outcome-kinds). See khora/native/eval/the-fold/scene/. Recorded whole in 3.0/the-canonical-cycle.md + identity-at-a-point.md.",
+  "falsifying": "a scene-kind equal to a frequency band; an action situation whose boundary does not move with the position-vocabulary; a scene bounded by word-surprisal instead of the delta to the holograph; or an induced kind that a shuffled-scene-company null achieves — any breaks the rule",
+  "basis": "2026-10-08 draft: khora/native/eval/the-fold/scene/{greek-read,greek-odyssey,odyssey-fold,action-situation,scene-kinds}.mjs + README.md",
+  "giver": "ant-swarm",
+  "standing": "disclosed",
+  "firstAdoptedAt": 1791473360935,
+  "lastSharpenAt": 1791473360935
  }
 }

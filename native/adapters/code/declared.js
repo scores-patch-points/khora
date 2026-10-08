@@ -13,7 +13,8 @@
 //   keywords   closed class K: REFUSES, a keyword never names a being
 //   declaring  words D (def, class, func, #define ...) derived as "the word before a def name"
 //   frames     P(def | frame) at backoff levels h4 h3 h2 h1 (with enclosing scope S) and g2 g1 (without), plus
-//              fine-kind counts
+//              fine-kind counts; since amendment A7 also the left-context-only levels c1 q2 q3 (no token to the right
+//              of the candidate is read: the strict-prefix chain CHAINS.prefix) and the coarse chain CHAINS.coarse
 //   witnesses  casing class and recurrence bucket as ONE additive log-likelihood-ratio each, never THE signal
 //
 // Priors NOMINATE (frame probability) and REFUSE (keywords); the text's own evidence ADMITS (the frame instance in
@@ -45,9 +46,30 @@ export const PARAMS = Object.freeze({
 
 export const CASING_CLASSES = Object.freeze(["pascal", "screaming", "upper1", "camel", "snake", "lower", "other"]);
 export const RECURRENCE_BUCKETS = Object.freeze(["0", "1", "2-3", "4-7", "8+"]);
-export const LEVELS = Object.freeze(["h4", "h3", "h2", "h1", "g2", "g1"]);
+// h4 h3 h2 h1 (with enclosing scope S) and g2 g1 (without) are the FROZEN levels of arm b (c3 header, FREEZE block).
+// c1 q2 q3 were added by amendment A7 (2026-10-06) as ADDITIONAL tables: c1 = previous token alone, q2 = S|L1, q3 = S|L2 L1.
+// They read NOTHING to the right of the candidate, so a chain made only of them is a strict PREFIX reader (rule 1).
+export const LEVELS = Object.freeze(["h4", "h3", "h2", "h1", "g2", "g1", "c1", "q2", "q3"]);
 const CHAIN_SCOPE = Object.freeze(["h4", "h3", "h2", "h1"]);
 const CHAIN_NOSCOPE = Object.freeze(["h4", "g2", "g1"]);
+/** the backoff chains, coarse -> fine (the estimator folds from the base rate through them in this order) */
+export const CHAINS = Object.freeze({
+  full: CHAIN_SCOPE,                                   // arm b (frozen)
+  noscope: CHAIN_NOSCOPE,                              // ablation b-scope
+  h4: Object.freeze(["h4"]),                           // b-h4: the simplest trained chain (previous | next token)
+  prefix: Object.freeze(["c1", "q2", "q3"]),           // b-prefix: left context and scope only (strict prefix)
+  coarse: Object.freeze(["c1", "h4", "h3", "h2", "h1"]), // b-coarse: arm b plus one coarse backoff level (A7, D1)
+});
+/** the reading options of every arm of the family (single source: c3-declared.mjs and its tests read this table) */
+export const ARM_OPTS = Object.freeze({
+  b: Object.freeze({}),
+  "b-casing": Object.freeze({ noCasing: true }),
+  "b-recurrence": Object.freeze({ noRecurrence: true }),
+  "b-scope": Object.freeze({ noScope: true }),
+  "b-h4": Object.freeze({ chain: "h4" }),
+  "b-prefix": Object.freeze({ chain: "prefix", noRecurrence: true }),
+  "b-coarse": Object.freeze({ chain: "coarse" }),
+});
 
 const KIND_COARSE = Object.freeze({
   function: "callable", method: "callable", class: "type", interface: "type", type: "type", enum: "type", variant: "type",
@@ -368,6 +390,10 @@ export function frameKeys(toks, i, V, params = PARAMS) {
     h1: `${S}|${L[1]} ${L[0]}|${R[0]} ${R[1]} ${R[2]}`,
     g2: `${L[0]}|${R[0]} ${R[1]}`,
     g1: `${L[1]} ${L[0]}|${R[0]} ${R[1]} ${R[2]}`,
+    // A7: left-context-only levels (no R at all: strict prefix)
+    c1: `${L[0]}`,
+    q2: `${S}|${L[0]}`,
+    q3: `${S}|${L[1]} ${L[0]}`,
   };
 }
 
@@ -694,9 +720,19 @@ export function compilePrior(prior) {
   return P;
 }
 
-function chainProb(P, keys, noScope) {
+/** the chain (array of level names) an opts object asks for */
+export function chainOf(opts = {}) {
+  if (opts.chain) {
+    const c = Array.isArray(opts.chain) ? opts.chain : CHAINS[opts.chain];
+    if (!c) throw new RangeError(`readDeclared: unknown chain ${String(opts.chain)}`);
+    return c;
+  }
+  return opts.noScope ? CHAIN_NOSCOPE : CHAIN_SCOPE;
+}
+
+function chainProb(P, keys, chain) {
   let p = P.base;
-  for (const l of noScope ? CHAIN_NOSCOPE : CHAIN_SCOPE) {
+  for (const l of chain) {
     const r = P.tables[l].get(keys[l]);
     if (!r || r[0] < P.params.MIN_N) continue;
     p = (r[1] + P.params.ALPHA * p) / (r[0] + P.params.ALPHA);
@@ -704,9 +740,9 @@ function chainProb(P, keys, noScope) {
   return p;
 }
 
-function kindOf(P, keys, noScope) {
-  for (const l of noScope ? ["g1", "g2", "h4"] : ["h1", "h2", "h3", "h4"]) {
-    const r = P.tables[l].get(keys[l]);
+function kindOf(P, keys, chain) {
+  for (let q = chain.length - 1; q >= 0; q -= 1) {
+    const r = P.tables[chain[q]].get(keys[chain[q]]);
     if (r && r[1] >= P.params.KIND_MIN && r[2]) {
       let best = null, bn = -1;
       for (const [k, c] of Object.entries(r[2])) if (c > bn || (c === bn && k < best)) { best = k; bn = c; }
@@ -719,29 +755,45 @@ function kindOf(P, keys, noScope) {
 }
 
 /**
- * readDeclared(text, prior, opts) -> [{ name, qualified, kind (coarse), fineKind, start, end, logit, p, scope }]
- * One item per distinct normalised name (the highest-logit occurrence). opts: { noCasing, noRecurrence, noScope }
- * are the ablations. The prior never produces a name that is not a token of `text`.
+ * scoreOccurrences(text, prior, opts) -> one row per CANDIDATE token (a word that is not in the closed class K):
+ * { i, name, qualified, start, end, logit, p (frame probability), scope, keys }. The admission rule is logit >= DECISION_LOGIT. This is the
+ * per-occurrence view readDeclared reduces to one item per name, and the view the c3 prefix-invariance probe compares.
  */
-export function readDeclared(text, prior, opts = {}) {
+export function scoreOccurrences(text, prior, opts = {}) {
   const P = compilePrior(prior);
+  const chain = chainOf(opts);
   const { toks } = tokenize(text, P.lex);
   annotate(text, toks, P.D);
-  const rec = recurrenceMap(toks);
-  const best = new Map();
+  const rec = opts.noRecurrence ? null : recurrenceMap(toks);
+  const out = [];
   for (let i = 0; i < toks.length; i += 1) {
     const t = toks[i];
     if (!isCandidate(t)) continue;
     const keys = frameKeys(toks, i, P.V, P.params);
-    const p = Math.min(1 - 1e-6, Math.max(1e-6, chainProb(P, keys, Boolean(opts.noScope))));
+    const p = Math.min(1 - 1e-6, Math.max(1e-6, chainProb(P, keys, chain)));
     let logit = Math.log(p / (1 - p));
     if (!opts.noCasing) logit += P.llrCasing[casingOf(t.last)] ?? 0;
-    if (!opts.noRecurrence) logit += P.llrRecur[recurrenceBucket((rec.get(t.last) ?? 1) - 1)] ?? 0;
-    if (logit < P.params.DECISION_LOGIT) continue;
-    const prev = best.get(t.last);
-    if (prev && prev.logit >= logit) continue;
-    const fine = kindOf(P, keys, Boolean(opts.noScope));
-    best.set(t.last, { name: t.last, qualified: t.x, kind: coarseKind(fine), fineKind: fine, start: t.s, end: t.e, logit, p, scope: t.S });
+    if (rec) logit += P.llrRecur[recurrenceBucket((rec.get(t.last) ?? 1) - 1)] ?? 0;
+    out.push({ i, name: t.last, qualified: t.x, start: t.s, end: t.e, logit, p, scope: t.S, keys });
+  }
+  return { rows: out, P, chain };
+}
+
+/**
+ * readDeclared(text, prior, opts) -> [{ name, qualified, kind (coarse), fineKind, start, end, logit, p, scope }]
+ * One item per distinct normalised name (the highest-logit occurrence; the first one on a tie). opts: { noCasing,
+ * noRecurrence, noScope, chain } are the ablations and the A7 arms (see ARM_OPTS). The prior never produces a name
+ * that is not a token of `text`.
+ */
+export function readDeclared(text, prior, opts = {}) {
+  const { rows, P, chain } = scoreOccurrences(text, prior, opts);
+  const best = new Map();
+  for (const r of rows) {
+    if (r.logit < P.params.DECISION_LOGIT) continue;
+    const prev = best.get(r.name);
+    if (prev && prev.logit >= r.logit) continue;
+    const fine = kindOf(P, r.keys, chain);
+    best.set(r.name, { name: r.name, qualified: r.qualified, kind: coarseKind(fine), fineKind: fine, start: r.start, end: r.end, logit: r.logit, p: r.p, scope: r.scope });
   }
   return [...best.values()].sort((a, b) => a.start - b.start);
 }

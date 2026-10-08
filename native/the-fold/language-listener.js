@@ -38,7 +38,7 @@ const STRONG = 0.3, FLOOR = 0.1, MARGIN = 1.8; // the same evidence rule as dete
 
 export function createLanguageListener({ declared = null } = {}) {
   const fixed = declared ? grammarFor(declared) : null;
-  const fixedEar = fixed?.language ? makeEar({ posPrior: fixed.posPrior, proclitics: fixed.proclitics, enclitics: fixed.enclitics }) : null;
+  const fixedEar = fixed?.language ? makeEar({ posPrior: fixed.posPrior, proclitics: fixed.proclitics, enclitics: fixed.enclitics, contractions: fixed.contractions }) : null;
   const candidates = new Map(); // family -> [{stem, grammar, ear, hit, words}]
   const view = new Map();       // family -> current stem
   const revisions = [];
@@ -54,7 +54,7 @@ export function createLanguageListener({ declared = null } = {}) {
       let sample = null;
       for (const [name, re] of SCRIPTS) { const c = forms.filter((w) => (re.lastIndex = 0, re.test(w))).length; if (!sample || c > sample[1]) sample = [name, c]; }
       if (sample[0] !== family) continue;
-      list.push({ stem, grammar, ear: makeEar({ posPrior: grammar.posPrior, proclitics: grammar.proclitics, enclitics: grammar.enclitics }), hit: 0, words: 0 });
+      list.push({ stem, grammar, ear: makeEar({ posPrior: grammar.posPrior, proclitics: grammar.proclitics, enclitics: grammar.enclitics, contractions: grammar.contractions }), hit: 0, words: 0 });
     }
     candidates.set(family, list);
     return list;
