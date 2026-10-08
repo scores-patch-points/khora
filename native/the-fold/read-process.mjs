@@ -10,24 +10,26 @@
 import { engineRelationsFor } from "./reader-bundle.js";
 import { splitSentences } from "../adapters/text/spans.js";
 import { extractSurfaces, discoverReferents } from "../adapters/text/surfaces.js";
+import { tokenEvents, surpriseCut } from "./surprise-gate.mjs";
 
 export const READ_PROCESS = Object.freeze({
   schema: "ReadProcess@1",
   reader: "native/the-fold/reader-bundle.js::engineRelationsFor",
   primed: "native/priors (pos-eng.json, morphology-eng.json) — grammarPrior === true proves it",
   unit: "one document, whole, in order (sentence-by-sentence inside the reader)",
-  emits: "WeftEntry@3 (cast: the admitted referents; edges with refs/spans addresses; vocabulary)",
+  emits: "WeftEntry@4 (cast: the admitted referents; edges with refs/spans addresses; vocabulary; surprise: the SEG+EVA cut)",
   supersedes: "the 6.1 legacy host (constitutional-read.mjs) and any chunked read — both are not this",
+  constitutive: "coreferent resolution (the cast) and surprise (surprise-gate.mjs: SEG cuts where the ground was most wrong, EVA corroborates against the shuffled null) — the canonical cycle's two gates; neither is optional",
 });
 
 const edge = (e) => ({ end1: e.end1, end1Face: e.end1Face ?? null, label: e.label, end2: e.end2, end2Face: e.end2Face ?? null, polarity: e.polarity ?? null, refs: e.refs ?? null, spans: e.spans ?? null, assertion: e.assertion ?? null });
 
-/** Read a source into a `WeftEntry@2`. The ONE reading call. Whole text in, edges out; a short source is a
+/** Read a source into a `WeftEntry@4`. The ONE reading call. Whole text in, edges out; a short source is a
  *  typed skip, a reader failure is a typed error — never silent. */
 export function readToWeft(text, { address, category = null } = {}) {
   const str = String(text ?? "");
   const bytes = Buffer.byteLength(str);
-  if (str.trim().length < 200) return { schema: "WeftEntry@3", address, category, bytes, readCharacters: 0, skipped: "too_short", vocabulary: null, cast: [], edges: [], error: null, ms: 0 };
+  if (str.trim().length < 200) return { schema: "WeftEntry@4", address, category, bytes, readCharacters: 0, skipped: "too_short", vocabulary: null, cast: [], edges: [], surprise: null, error: null, ms: 0 };
   const t0 = Date.now();
   let out = null, err = null;
   try { out = engineRelationsFor([{ text: str }], {}); } catch (e) { err = String(e?.message ?? e); }
@@ -48,12 +50,20 @@ export function readToWeft(text, { address, category = null } = {}) {
     }
     cast = [...byRef.values()].map((r) => ({ ref: r.ref, surface: r.surface, allSurfaces: [...r.allSurfaces], mentionsAt: r.mentionsAt, standing: "referent" }));
   } catch (e) { if (!err) err = `cast_failed: ${String(e?.message ?? e)}`; }
+  // SURPRISE — the canonical cycle's second constitutive gate (SEG+EVA), called
+  // here so the read that feeds the weft carries it. The instrument is the
+  // material's own token stream; the kernel's null is inside it (EVA), so a
+  // document whose ground is never surprised reports figures: 0 and says so.
+  let surprise = null;
+  try { surprise = surpriseCut(tokenEvents(str)); }
+  catch (e) { if (!err) err = `surprise_failed: ${String(e?.message ?? e)}`; }
   return {
-    schema: "WeftEntry@3", address, category, bytes,
+    schema: "WeftEntry@4", address, category, bytes,
     readCharacters: str.length,
     vocabulary: out?.vocabulary ?? null,                 // { verbs, candidates, grammarPrior } — primed proof
     cast,                                                 // the admitted referents (both-bound; the kind-induction cast)
     edges: (out?.edges ?? []).map(edge),
+    surprise,                                             // SurpriseCut@1 — where the reading's ground was most wrong, vs its shuffled null
     error: err, ms: Date.now() - t0,
   };
 }
