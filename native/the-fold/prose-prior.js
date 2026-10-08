@@ -23,7 +23,7 @@ import { sedimentPrior, scorePrequential } from "../kernel/continuation.js";
 // midi-continuation eval's own disclosed case) can point at any real prose
 // file, or so a caller with the document's own trusted prose wants that
 // instead of a fresh read.
-const CORPUS_PATH = process.env.ER7_PROSE_CORPUS ?? new URL("../../../ethos/01-literature-books/gutenberg/pg345_Dracula.txt", import.meta.url).pathname;
+const CORPUS_PATH = process.env.ER7_PROSE_CORPUS ?? new URL("../../../Zenodotus/01-literature-books/gutenberg/pg345_Dracula.txt", import.meta.url).pathname;
 const ORDER = 2;
 const HELD_OUT_FRACTION = 0.2;
 
