@@ -24,6 +24,14 @@ jobs:
       # on a missing module. penelope is public; the default token may clone it.
       - name: Check out the sibling penelope (the machine door retains through it)
         run: git clone --depth 1 https://github.com/scores-patch-points/penelope.git "${GITHUB_WORKSPACE}/../penelope"
+      # The rules of reading are Relate's: every prior (pos · frame · role-config
+      # · morph-cues · case-marking · …) lives at the workspace's janus/priors and
+      # native/the-fold/priors-home.js resolves it there (../../../janus/priors),
+      # as DATA, never a module import. Without the sibling, langid and relation
+      # reading find no priors and return null — a typed gap, but a red gate.
+      # Check janus out next to this repo, exactly as penelope is above. janus is public.
+      - name: Check out the sibling janus (the one home for the priors)
+        run: git clone --depth 1 https://github.com/scores-patch-points/janus.git "${GITHUB_WORKSPACE}/../janus"
       - uses: actions/setup-node@v4
         with:
           node-version: 22
