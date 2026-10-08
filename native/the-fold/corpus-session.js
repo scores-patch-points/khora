@@ -145,8 +145,20 @@ async function readDocument(session, sourceId) {
 
 function projectReferents(observations) {
   const byId = new Map();
+  // ADDRESSABILITY (foundation, 2026-10-07). The reader already emits EOMention@1 (one per sighting,
+  // carrying its encounter anchor) — the projection threw the anchor away, keeping only a mention COUNT.
+  // That made the read un-auditable: a later (better) parser could not re-locate where a being was seen.
+  // We now carry each mention's byte anchor through as `mentionsAt`, so the cast is addressable and the
+  // reading is re-verifiable against the material (READING-SPEC span rule: a span that cannot show its
+  // bytes cannot be self-verified). Pure preservation: no decision changes.
+  const mentionsAt = new Map();
   for (const obs of observations) {
     for (const graph of obs?.candidate?.graphEntries ?? []) {
+      if (graph?.schema === "EOMention@1" && graph.referent != null) {
+        const addr = Number.isFinite(graph?.anchor?.start) ? graph.anchor.start : Number.isFinite(graph?.anchor?.at) ? graph.anchor.at : null;
+        if (addr != null) { if (!mentionsAt.has(graph.referent)) mentionsAt.set(graph.referent, []); mentionsAt.get(graph.referent).push(addr); }
+        continue;
+      }
       if (graph?.schema !== "EOReferent@1") continue;
       if (!byId.has(graph.id)) byId.set(graph.id, { id: graph.id, surfaces: [], mentions: 0, standing: "established_by_evidence", fromPrior: false });
       const ref = byId.get(graph.id);
@@ -160,6 +172,7 @@ function projectReferents(observations) {
       display: [...r.surfaces].sort((a, b) => b.length - a.length)[0] ?? r.id,
       individuation: null,
       surfaces: [...r.surfaces],
+      mentionsAt: [...new Set(mentionsAt.get(r.id) ?? [])].sort((a, b) => a - b),
     }))
     .sort((a, b) => b.mentions - a.mentions);
 }
@@ -172,9 +185,24 @@ function projectRelations(observations) {
       const key = `${edge.relation}|${(edge.participants ?? []).map((p) => p?.ref ?? p?.surface ?? "").join("|")}`;
       if (seen.has(key)) continue;
       seen.add(key);
+      // ADDRESSABILITY (foundation, 2026-10-07). The edge already carries its ABSOLUTE byte address
+      // (`scope.byteOffset`) and each participant carries its own STANDING (`referent` | `unresolved_surface`
+      // | `hypothesis`) and `resolution` — the projection threw all of it away, so a relation end could not be
+      // told resolved from unresolved and had no address. We preserve them (pure retention; the join is still
+      // by ref/surface downstream, so nothing decides differently). This is what lets v2 ask "is this end a
+      // cast referent?" without re-reading.
       edges.push({
         relation: edge.relation,
-        participants: (edge.participants ?? []).map((p) => ({ ref: p?.ref ?? p?.surface ?? null, surface: p?.surface ?? null })),
+        scope: edge.scope ? { byteOffset: edge.scope.byteOffset ?? null, offset: edge.scope.offset ?? null } : null,
+        participants: (edge.participants ?? []).map((p) => ({
+          ref: p?.ref ?? p?.surface ?? null,
+          surface: p?.surface ?? null,
+          standing: p?.standing ?? null,
+          resolution: p?.resolution ?? null,
+          role: p?.role ?? null,
+          ...(p?.occurrence ? { occurrence: p.occurrence } : {}),
+          ...(p?.surfaceKey ? { surfaceKey: p.surfaceKey } : {}),
+        })),
       });
     }
   }

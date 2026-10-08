@@ -147,3 +147,32 @@ say the mechanism did what it said, but we can't yet say the output is true.
   a **negative that costs nothing**: it removes a wrong witness before it was adopted.
 - This repoints step (b): the relation-tier name witness must be the **cast's own admission standing**, not display casing;
   and the remaining lever is still the reader (entity-bounded ends + coreference), unchanged.
+
+## 2026-10-07 (later #3) — foundation audit: what held, what was broken, what was fixed
+
+Ran the foundation end to end before building v2 on it. **Held:** `native/tests/` — self-record, corpus-session,
+competence-r0..r5, integration, name-candidates, langid, language-reach all PASS; the recursion evals (self-record, k1,
+middle, organ-asof) run and their K1/K2 controls pass; `project.mjs` and `bind-relations.mjs` are byte-identical on re-run
+(K2 determinism verified by diff). **Broken and fixed (three):**
+
+1. **The raw sidecar was a LOSSY SUMMARY — not auditable, not re-parseable.** `SidecarRead@1` stored only
+   `{ref, surface}` per referent and per relation end: it dropped the byte anchor of every mention (`EOMention@1.anchor`),
+   the edge's absolute address (`scope.byteOffset`), and each participant's own `standing`/`resolution`. So a later, better
+   parser could not re-locate a reading, and a relation end could not be told *resolved* from *unresolved*. **Fixed
+   additively** (`SidecarRead@2`): `corpus-session.js` now retains `mentionsAt` (per mention), edge `scope`, and participant
+   `standing`/`resolution`/`occurrence`/`role`; `read-door.mjs` passes `mentionsAt`; `pilot.mjs` writes @2. @1 lines are not
+   rewritten — a @2 read is a new line. Test: `native/tests/sidecar-addressable.test.js` (3/3). **Confidence: high** (pure
+   retention; no decision changed; every @1 consumer still reads ref/surface).
+2. **`sidecar-record.mjs` crashed on a bare invocation** (`path.resolve(null)` → TypeError). Fixed: it prints usage and
+   exits 2. **Confidence: high.**
+3. **`sidecar-record`'s `P1 FAILS` was mislabeled.** The earlier entry (later, 2026-10-07) blamed "drop targets absent from
+   that document's cast". They are **present** (`gutenberg ebook`, `Project Gutenberg` in the Treasure Island cast). The real
+   cause: the demo's own revisions were created with the default `standing:"candidate", evidence:1` — **below `EVIDENCE_BAR`**,
+   so the gate correctly hung them and nothing dropped. With `standing:"given"` the drops apply and **P1 HOLDS** (K2, K3
+   hold). This was a self-inflicted demo default, not a reader defect — but the wrong explanation is retracted here. **Fixed**;
+   **confidence: high.**
+
+**What this changes for v2 (step b):** the foundation now carries the two facts v2 needs — *where* each reading sits in the
+bytes, and *whether* each relation end resolved to a referent (`standing:"referent"`) or not (`unresolved_surface`). On the
+sample, relation ends are frequently `unresolved_surface` with an occurrence-hash `ref` (not a cast id) — the precise reason
+the bound share is low. v2's target is now measurable from the record alone, without re-reading.
