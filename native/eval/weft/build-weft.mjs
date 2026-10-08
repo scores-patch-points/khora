@@ -59,14 +59,14 @@ if (o.shard) files = files.filter((_, i) => i % o.shard.n === o.shard.i);
 const todo = files.filter(({ rel }) => !done.has(rel)).slice(0, o.limit);
 
 const t0 = Date.now();
-let n = 0, errors = 0, edges = 0, chars = 0;
+let n = 0, errors = 0, edges = 0, chars = 0, figures = 0;
 const fd = fs.openSync(o.out, "a");
 const writeProgress = (current, finished) => {
   const el = (Date.now() - t0) / 1000;
   fs.writeFileSync(o.progress, JSON.stringify({
     schema: "WeftProgress@1", out: path.basename(o.out), reader: "engineRelationsFor (real)", shard: o.shard ? `${o.shard.i}/${o.shard.n}` : null,
     total: files.length, done: done.size + n, remaining: Math.max(0, files.length - (done.size + n)),
-    readThisRun: n, errors, edges, chars, perSec: el > 0 ? +(n / el).toFixed(2) : 0, elapsedSec: +el.toFixed(1),
+    readThisRun: n, errors, edges, chars, figureCuts: figures, perSec: el > 0 ? +(n / el).toFixed(2) : 0, elapsedSec: +el.toFixed(1),
     current, updated: new Date().toISOString(), finished: !!finished, pid: process.pid,
   }, null, 1));
 };
@@ -78,17 +78,18 @@ for (const { f, rel } of todo) {
   const category = rel.split(path.sep)[0];
   const entry = readToWeft(text, { address: rel, category });   // THE reading process
   edges += (entry.edges ?? []).length;
+  figures += entry.surprise?.figures ?? 0;               // SEG+EVA: the canonical cycle's surprise gate (read, never implied)
   entry.seq = done.size + n;
   fs.writeSync(fd, JSON.stringify(entry) + "\n");
   n += 1; chars += entry.readCharacters || 0; if (entry.error) errors += 1;
   writeProgress(entry.address, n === todo.length);        // every document — the page moves at once
   if (n % 5 === 0) {
     const el = (Date.now() - t0) / 1000;
-    process.stderr.write(`  ${n}/${todo.length}  ${el.toFixed(0)}s  ${(n / el).toFixed(2)}/s  err ${errors}  edges ${edges}  ${entry.address}\n`);
+    process.stderr.write(`  ${n}/${todo.length}  ${el.toFixed(0)}s  ${(n / el).toFixed(2)}/s  err ${errors}  edges ${edges}  figures ${figures}  ${entry.address}\n`);
   }
 }
 fs.closeSync(fd);
 writeProgress(null, true);
 const el = (Date.now() - t0) / 1000;
-process.stderr.write(`done: ${n} this run in ${el.toFixed(0)}s (${(n / el).toFixed(2)}/s), edges ${edges}, errors ${errors}, remaining ${Math.max(0, files.length - (done.size + n))} -> ${o.out}\n`);
-process.stdout.write(JSON.stringify({ read: n, remaining: Math.max(0, files.length - (done.size + n)), seconds: +el.toFixed(1), edges, errors, out: o.out }) + "\n");
+process.stderr.write(`done: ${n} this run in ${el.toFixed(0)}s (${(n / el).toFixed(2)}/s), edges ${edges}, figures ${figures}, errors ${errors}, remaining ${Math.max(0, files.length - (done.size + n))} -> ${o.out}\n`);
+process.stdout.write(JSON.stringify({ read: n, remaining: Math.max(0, files.length - (done.size + n)), seconds: +el.toFixed(1), edges, figures, errors, out: o.out }) + "\n");
