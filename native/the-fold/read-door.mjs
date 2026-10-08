@@ -181,6 +181,7 @@ async function readWith({ text, name = "", language = null, maxCharacters = 6000
     ref: r.id ?? null,                                  // the referent id relations carry; the join key for the sidecar projection
     surfaces: [r.display].filter(Boolean),
     allSurfaces: [...(r.surfaces ?? [])],
+    mentionsAt: [...(r.mentionsAt ?? [])],              // byte addresses of this being's sightings (addressable cast)
     routes: (r.fromPrior === true ? ["prior"] : ["witnessed"]).concat(r.individuation ? [`grain:${r.individuation}`] : []),
     grain: r.individuation ?? null,
   }));
