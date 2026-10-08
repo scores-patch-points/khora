@@ -1,7 +1,7 @@
 // native/tests/weft.test.js — the weft: the reading log the holograph is projected from.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { emptyWeft, appendPass, clothAt, reopen, mouthFacing, holonAddress, WEFT_ENTRY_SCHEMA } from "../the-fold/weft.js";
+import { emptyWeft, appendPass, clothAt, reopen, mouthFacing, holonAddress, weftAttestations, WEFT_ENTRY_SCHEMA, WEFT_ATTESTATION_SCHEMA } from "../the-fold/weft.js";
 
 const pass = (address, cast, relations) => ({ address, cast, relations });
 
@@ -48,6 +48,23 @@ test("reopen re-expands an address to the verbatim bytes (reader injected)", () 
   assert.equal(reopen("book.txt#4").gap, "no_reader_injected");
   assert.equal(reopen("book.txt#9999", { read: () => text }).gap, "address_out_of_range");
   assert.equal(reopen("nohash").gap, "not_an_address");
+});
+
+test("weftAttestations is the seam: one attestation per relation, carrying its address", () => {
+  const w = appendPass(emptyWeft(), P1);
+  const at = [...weftAttestations(w)];
+  assert.equal(at.length, 1);
+  assert.equal(at[0].schema, WEFT_ATTESTATION_SCHEMA);
+  assert.equal(at[0].witness, "a.txt#12");             // <source>#<byteOffset> — the rule re-expands into the weft
+  assert.equal(at[0].label, "wrote");
+  assert.equal(at[0].left.surface, "Stevenson");
+  assert.equal(at[0].right.surface, "Treasure Island");
+});
+
+test("weftAttestations folds at a cursor (a past reading attests only its own relations)", () => {
+  const w = appendPass(appendPass(emptyWeft(), P1), pass("b.txt", [], [{ relation: "loved", participants: [{ surface: "A" }, { surface: "B" }], scope: { byteOffset: 1 } }]));
+  assert.equal([...weftAttestations(w, { asOf: 0 })].length, 1);
+  assert.equal([...weftAttestations(w)].length, 2);
 });
 
 test("mouthFacing strikes every address (the shadow) and is deterministic", () => {
