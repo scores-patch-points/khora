@@ -134,3 +134,16 @@ say the mechanism did what it said, but we can't yet say the output is true.
   own `project` onto the record is future work.
 - Falsifying control: `node --test native/tests/self-record.test.js` — the K1 test fails if a two-term in-place edit could match
   the record's behavior; the gate test fails if a below-bar candidate is ever believed.
+
+## 2026-10-07 (later #2) — relation-end gates (v2 step a): chrome helps, the capital name-gate hurts
+
+- Wired `bind-relations.mjs`'s already-written gate functions into a run (`--chrome-gate` / `--name-gate`), measured
+  separately. A0 reproduces exactly with gates off (K1). Full numbers and reasoning: `bind-relations-RESULTS.md` A1.
+- **Chrome gate: keep.** Removes boilerplate relation ends (gitenberg 29, factbook 9; inert on udhr) at small cost.
+- **Capital name-gate: off.** It rejects genuine names the reader found (`abdelmadjid tebboune`, `bouteflika`, `mundu`) because
+  the reader's cast displays are **majority lowercase** (gitenberg 174/314, factbook 302/534, udhr 446/586) — capitalisation is
+  the source's witness, not the reader's. Keep it demonstrated, not wired.
+- **Confidence: high** for both (projection, pure fold over the frozen raw sidecar, deterministic, reproducible). The result is
+  a **negative that costs nothing**: it removes a wrong witness before it was adopted.
+- This repoints step (b): the relation-tier name witness must be the **cast's own admission standing**, not display casing;
+  and the remaining lever is still the reader (entity-bounded ends + coreference), unchanged.

@@ -45,3 +45,39 @@ not a lookup.
 
 Next: (a) filter relation ends through the cast-chrome + name-witness gates (projection, now); (b) the reader change —
 entity-bounded extraction and a coreference/individuation pass — to raise `unbound`/`probe` into `witness`.
+
+## Amendment A1 (2026-10-07) — step (a) done, and it splits: chrome helps, the capital name-gate hurts
+
+The gate functions were already written into `bindEnd`; `main()` simply never passed them. A1 wires them as a **new run**
+(`--chrome-gate` / `--name-gate`, `chromeDf 0.5` family genericity). A0 reproduces *exactly* with the gates off (K1 ✔:
+9.23% / 13.91% / 64.0%). Chrome and the name gate are measured **separately** so each is judged on its own.
+
+| family | A0 bound (share) | A1c chrome-only | A1 chrome+name |
+|---|---|---|---|
+| gitenberg | 30 (9.23%) | 21 (6.46%) — 29 chrome ends dropped | 18 (5.54%) — +31 non-name ends |
+| world-factbook | 63 (13.91%) | 59 (13.02%) — 9 chrome ends dropped | 23 (5.08%) — +89 non-name ends |
+| un-udhr | 128 (64.0%) | 128 (64.0%) — chrome inert (no ≥0.5 df) | 4 (2.0%) — +163 non-name ends |
+
+**Chrome (A1c): a small, clean win.** It removes the boilerplate ends A0 named (`gutenberg ebook` ×29 on gitenberg;
+`president` etc. on factbook) at a cost of 9 and 4 assertions, and is correctly inert on UDHR. Keep it.
+
+**The capital name-gate (A1): FALSIFIED as an improvement.** It removes 31/89/163 ends — but it is rejecting **genuine names
+the reader already found**, not junk. The reader's cast displays are **majority lowercase** in every family (gitenberg 174/314,
+factbook 302/534, udhr 446/586 lowercased), e.g. `abdelmadjid tebboune`, `bouteflika`, `mundu`, `punda`. Capitalisation is the
+**source's** witness, not the reader's — a factbook that prints a name lowercase (or a UDHR translation that never capitalises)
+is scored as "no name", and bound share collapses (UDHR 64% → 2%). So the gate does not measure name-ness; it measures the
+source's casing. `--name-gate` is left in the instrument **demonstrated and off**, not wired as a default.
+
+### What this changes about the plan
+
+- Step (a) is done: keep the **chrome** gate; drop the **capital** name-gate.
+- The name witness at this tier must be the **cast's own admission standing** (was the surface admitted as a name-bearing
+  being by the projected cast / a non-capital witness), **not** `isNameWitness` on the display's first letter.
+- Step (b) is unchanged and is now the whole of the remaining lever: the reader must emit relation ends that carry a `ref`
+  (entity-bounded extraction) and a coreference/individuation pass must move `probe`→`witness`; the low bound share is a
+  property of the reader's ends, not of the binding.
+
+### Repro (A1)
+
+`node eval/sidecar/bind-relations.mjs --dir eval/sidecar/v1-gitenberg --chrome-gate --out <out>` / add `--name-gate` for A1.
+Summary JSON now carries `chromeEnds`, `nonNameEnds`, `gate`, `verdict`, `rejections`.
