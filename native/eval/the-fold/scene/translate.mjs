@@ -37,6 +37,13 @@ const G = {
   ιερ:"sacred", ολεθρ:"ruin", φιλ:"friend", υιος:"son", προτ:"first", σιτ:"food", κιο:"pillar", ποντ:"deep-sea",
   ετος:"year", αχαι:"Achaeans", τιν:"some", οιν:"wine", μνεστερ:"suitors", γυν:"woman", δομ:"house", οικ:"house",
   χρη:"need", άνδρ:"man", γερο:"old man", ον:"him", θεων:"of the gods", ανθρωπ:"men", πάντες:"all", πολλα:"many",
+  // PROPER NAMES — the beings INS resolves; every case-form folds to the name
+  οδυσσε:"Odysseus", οδyss:"Odysseus", τηλεμαχ:"Telemachus", τηλ:"Telemachus", αθην:"Athena", αθηναιη:"Athena",
+  πηνελοπ:"Penelope", πηναλοπ:"Penelope", μενελα:"Menelaus", νεστ:"Nestor", ορεστ:"Orestes", ζευσ:"Zeus", ζευς:"Zeus",
+  διος:"Zeus", δια:"Zeus", ιθακ:"Ithaca", αργο:"Argos", σπαρτ:"Sparta", ταφ:"Taphos", φαι:"the Phaeacians",
+  αχιλλ:"Achilles", αγαμεμν:"Agamemnon", κλυταιμ:"Clytemnestra", ελεν:"Helen", θεοκλ:"Theoclymenus",
+  ευρυμ:"Eurymachus", αντιν:"Antinous", ευπε:"Eupeithes", αμφιν:"Amphinomus", κτισ:"Ctesippus",
+  ψυχ:"soul", χρυσ:"gold", ελαι:"oil", θε:"divine", ελθ:"coming", δωσ:"giving", πεμπ:"sending",
 };
 const stF = (s) => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 const fold = (k) => k.replace(/η|ῆ|ῃ/g, "ε").replace(/ω|ῶ/g, "ο").replace(/ΐ|ϊ|ί|ῖ/g, "ι");
@@ -47,18 +54,21 @@ const g = (w) => {
   const k = stF(w), s = fold(k);
   return G2[k] ?? G2[s] ?? `(?${w})`;
 };
-const src = fs.readFileSync(process.argv[2] || "odyssey-ms.log", "utf8");
-for (const line of src.split("\n")) {
-  const m = /^- scene\s+(\d+)\s+\[(.*?)\]\s+(.*)$/.exec(line);
-  if (!m) continue;
-  const center = m[2].replace(/^⛧ | \d+\.\d+/g, "");
-  const frags = m[3].split(" · ").map((f) => {
-    const x = /^(?:(\S+)\.)?(\S+)(?:\s+(\S+))?$/.exec(f.trim());
-    if (!x) return f;
-    const subj = x[1] ? `${g(x[1])}.` : "";
-    const verb = g(x[2]);
-    const obj = x[3] ? " " + g(x[3]) : "";
-    return `${subj}${verb}${obj}`;
-  });
-  console.log(`- scene ${m[1]} [${g(center.trim())}]  ${frags.join(" · ")}`);
+if (process.argv[1] && import.meta.url === `file://${process.argv[1]}`) {
+  const src = fs.readFileSync(process.argv[2] || "odyssey-ms.log", "utf8");
+  for (const line of src.split("\n")) {
+    const m = /^- scene\s+(\d+)\s+\[(.*?)\]\s+(.*)$/.exec(line);
+    if (!m) continue;
+    const center = m[2].replace(/^⛧ | \d+\.\d+/g, "");
+    const frags = m[3].split(" · ").map((f) => {
+      const x = /^(?:(\S+)\.)?(\S+)(?:\s+(\S+))?$/.exec(f.trim());
+      if (!x) return f;
+      const subj = x[1] ? `${g(x[1])}.` : "";
+      const verb = g(x[2]);
+      const obj = x[3] ? " " + g(x[3]) : "";
+      return `${subj}${verb}${obj}`;
+    });
+    console.log(`- scene ${m[1]} [${g(center.trim())}]  ${frags.join(" · ")}`);
+  }
 }
+export { g };
