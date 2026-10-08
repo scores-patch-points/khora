@@ -148,17 +148,21 @@ export const WEFT_REFERENTS_SCHEMA = "WeftReferents@2";
  *  is the number of weft passes the referent appears in. Additive to `weftAttestations`; the weft stays
  *  kind-free — the consumer induces kinds from `company` (company-induced, never taught). Pure; generator; `asOf`
  *  is a pass-seq cursor (P3), so kinds re-key without erasing. */
+const refKey = (s) => String(s ?? "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+
 export function* weftReferents(weft, { asOf = Infinity } = {}) {
   const byRef = new Map();
   const ensure = (ref) => { if (!byRef.has(ref)) byRef.set(ref, { ref, surfaces: new Set(), mentionsAt: [], passes: 0, company: new Map() }); return byRef.get(ref); };
   for (const pass of weft) {
     if (Number.isFinite(pass.seq) && pass.seq > asOf) break;
     const seen = new Set();
+    const hasCast = Array.isArray(pass.cast) && pass.cast.length > 0;
+    const castBySurface = new Map();   // refKey(surface) -> cast ref (the admitted beings)
     for (const c of pass.cast ?? []) {
       const ref = c?.ref ?? c?.surface; if (!ref) continue;
       const r = ensure(ref);
-      if (c.surface) r.surfaces.add(c.surface);
-      for (const s of c.allSurfaces ?? []) r.surfaces.add(s);
+      if (c.surface) { r.surfaces.add(c.surface); castBySurface.set(refKey(c.surface), ref); }
+      for (const s of c.allSurfaces ?? []) { r.surfaces.add(s); castBySurface.set(refKey(s), ref); }
       for (const at of c.mentionsAt ?? []) r.mentionsAt.push(at);
       if (!seen.has(ref)) { seen.add(ref); r.passes += 1; }
     }
@@ -173,12 +177,16 @@ export function* weftReferents(weft, { asOf = Infinity } = {}) {
         r.company.set(String(other), (r.company.get(String(other)) ?? 0) + 1);
       }
     }
-    // the REAL reader's shape: engineRelationsFor edges — the ends ARE the referents (keyed by surface).
+    // edges — company between BEINGS. When the pass carries a `cast` (WeftEntry@3+), only ends that
+    // resolve to admitted referents join (the reader's own cast; common nouns are NOT beings). A pass
+    // without a cast (legacy WeftEntry@2) falls back to treating the ends as the referents, disclosed.
     for (const edge of pass.edges ?? []) {
-      const a = edge?.end1Face ?? edge?.end1, b = edge?.end2Face ?? edge?.end2;
-      if (!a || !b) continue;
-      for (const s of [a, b]) { const r = ensure(s); r.surfaces.add(s); if (!seen.has(s)) { seen.add(s); r.passes += 1; } }
-      if (a !== b) { ensure(a).company.set(b, (ensure(a).company.get(b) ?? 0) + 1); ensure(b).company.set(a, (ensure(b).company.get(a) ?? 0) + 1); }
+      const A = edge?.end1Face ?? edge?.end1, B = edge?.end2Face ?? edge?.end2;
+      if (!A || !B) continue;
+      let a, b;
+      if (hasCast) { a = castBySurface.get(refKey(A)); b = castBySurface.get(refKey(B)); if (!a || !b) continue; }
+      else { a = A; b = B; for (const s of [a, b]) { const r = ensure(s); r.surfaces.add(s); if (!seen.has(s)) { seen.add(s); r.passes += 1; } } }
+      if (a !== b) { ensure(a).company.set(String(b), (ensure(a).company.get(String(b)) ?? 0) + 1); ensure(b).company.set(String(a), (ensure(b).company.get(String(a)) ?? 0) + 1); }
     }
   }
   for (const r of byRef.values()) {

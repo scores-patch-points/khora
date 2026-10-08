@@ -6,7 +6,8 @@
 // declared function words, a decisive-clue layer for short asks, and a margin/fit abstention — scored
 // 20/20 on the app's 22 languages and 51/51 on UDHR ground truth (eval/langid/UDHR-FALSIFY-RESULTS.md,
 // and khora's own 04-foldsuite-langid analysis: "use the fold's detector for production"). This module
-// builds the SAME model in-process from the SAME POSPrior@1 files (`native/priors/pos-<iso3>.json`), so
+// builds the SAME model in-process from the SAME POSPrior@1 files (`janus/priors/pos-<iso3>.json`,
+// the one home for the priors — khora reads it as data, never a module import), so
 // nothing new is kept on disk and English is treated the way this repo treats it (not detected — see
 // availableStems). The UDHR-extended tier is NOT wired here: it measured 42% wrong at 470-language
 // resolution (family-right, code-wrong), so it is a hint at best, never a routing signal.
@@ -15,10 +16,11 @@
 // grammarFor(). DECLARED thresholds as the fold (q = round(-ln p * 10); ALPHA/RHO/KW/K2/K3/FW).
 import fs from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { PRIORS_DIR } from "./priors-home.js";
 
-const HERE = path.dirname(fileURLToPath(import.meta.url));
-export const PRIORS_DIR = path.join(HERE, "..", "priors");
+// The one home for the priors (janus), resolved by priors-home.js. Re-exported
+// so callers that import PRIORS_DIR from this module keep working.
+export { PRIORS_DIR };
 
 const DECLARED = Object.freeze({
   margin: 4, wordWeight: 1, gramWeight: 0.3, minFunctionWords: 1, strongMargin: 10, minFit: 0.75,
@@ -46,9 +48,12 @@ const SINGLE = Object.freeze({
 const KW = 500, K2 = 300, K3 = 900, FW = 120, RHO = 0.25, ALPHA = 0.5;
 
 /** The pos stems the reader can be asked in: every prior on disk except English (which is the default, not
- *  detected — the repo's declared rule) and the unimorph-derived files. */
+ *  detected — the repo's declared rule), the unimorph-derived files and the `pos-prior-*` backoffs. A
+ *  missing home is no stems. */
 export function availableStems() {
-  return fs.readdirSync(PRIORS_DIR).filter((f) => /^pos-[a-z-]+\.json$/.test(f) && !/unimorph|^pos-en\.json$/.test(f)).map((f) => f.slice(4, -5)).sort();
+  try {
+    return fs.readdirSync(PRIORS_DIR).filter((f) => /^pos-[a-z-]+\.json$/.test(f) && !/unimorph|^pos-prior-|^pos-en\.json$/.test(f)).map((f) => f.slice(4, -5)).sort();
+  } catch { return []; }
 }
 
 // ── the compact model, built lazily per stem from its POSPrior@1 ─────────────
@@ -93,6 +98,48 @@ function model(stem) {
   models.set(stem, m); return m;
 }
 
+// ── the Ancient-Greek register gate (2026-10-08) ─────────────────────────────
+// Greek script is shared by Ancient (polytonic) and Modern (monotonic) Greek,
+// and the SINGLE map below names the script once: "Greek" → ell. The script
+// alone cannot choose between them, so grc was UNREACHABLE through the
+// detector. Where the priors allow it IS reachable, by measurement:
+//   • the orthographic tell — Greek Extended (U+1F00–U+1FFF) or the combining
+//     breathings/perispomeni (U+0313/0314/0342/0345) — is Ancient Greek and
+//     monotonic Greek never writes it;
+//   • else attestation against BOTH priors' own vocabularies breaks the tie
+//     (Ancient forms like μῆνιν/ἄειδε live in pos-grc, Modern ones in pos-ell).
+// A caller that NAMES a language bypasses this entirely (the declared fact
+// beats the inferred one; see identifyLanguage's `language` option). Where
+// neither signal fires, the ell path is byte-identical to before.
+const POLYTONIC = /[\u1f00-\u1fff]/u;
+const COMBINING_GREEK = /[\u0313\u0314\u0342\u0345]/u;
+const formCache = new Map();
+function wordset(stem) {
+  if (formCache.has(stem)) return formCache.get(stem);
+  const file = path.join(PRIORS_DIR, `pos-${stem}.json`);
+  let set = null;
+  try {
+    const prior = JSON.parse(fs.readFileSync(file, "utf8"));
+    set = new Set(Object.keys(prior.forms || {}).map((f) => f.normalize("NFC").toLowerCase()));
+  } catch { set = null; }
+  formCache.set(stem, set); return set;
+}
+/** ancientGreekOf(text, stems) → "grc" | "ell" — the measured register choice. */
+function ancientGreekOf(text, stems) {
+  const s = String(text ?? "");
+  if (POLYTONIC.test(s) || (s.normalize("NFD").match(COMBINING_GREEK) || []).length >= 2) return "grc";
+  if (stems.includes("grc") && stems.includes("ell")) {
+    const tokens = s.normalize("NFC").toLowerCase().match(/[\p{L}\p{M}]+/gu) || [];
+    if (tokens.length) {
+      const g = wordset("grc"), e = wordset("ell");
+      const gc = g ? tokens.filter((t) => g.has(t)).length / tokens.length : 0;
+      const ec = e ? tokens.filter((t) => e.has(t)).length / tokens.length : 0;
+      if (gc > ec && gc >= 0.1) return "grc";
+    }
+  }
+  return "ell";
+}
+
 // ── scoring (the fold's) ─────────────────────────────────────────────────────
 function decodeGroup(stems, script) {
   const g = { codes: [], wf: [], gf: [], words: new Map(), grams: new Map(), fw: [] };
@@ -135,7 +182,7 @@ for (const [code, words] of Object.entries(CUES)) for (const w of words) CUE_WOR
 /** identifyLanguage(text) → { language, confident, hits, margin, fit, script, second } | { language:null, confident:false, script, gap }.
  *  The fold's scorer: naive Bayes over words + character grams, a decisive mark/clue wins a short ask, and no
  *  shared-script winner may claim a title whose own vocabulary fits nothing. Codes are pos STEMS. */
-export function identifyLanguage(text, { stems = availableStems() } = {}) {
+export function identifyLanguage(text, { stems = availableStems(), language = null } = {}) {
   const runs = runsOf(text);
   if (!runs.length) return { language: null, confident: false, script: "Other", hits: 0, margin: 0, gap: "no letters in a known script" };
   const latinWords = runs.filter((r) => r.fam === "Latin").length;
@@ -143,6 +190,15 @@ export function identifyLanguage(text, { stems = availableStems() } = {}) {
   for (const r of runs) if (r.fam !== "Latin") { const e = byFam.get(r.fam) || { runs: 0, letters: 0, kana: 0 }; e.runs++; e.letters += r.text.length; e.kana += r.kana; byFam.set(r.fam, e); }
   let nl = null; for (const [fam, e] of byFam) if (!nl || e.letters > nl.e.letters) nl = { fam, e };
   const script = nl && nl.e.runs >= latinWords ? nl.fam : "Latin";
+  // DECLARED BEATS INFERRED: a caller that names a language with a prior on
+  // disk gets that language, bypassing the SINGLE script default — the path
+  // that makes a caller-supplied language:"grc" reach Ancient Greek while the
+  // ell default stands for everything unnamed. A named language with no prior
+  // is a typed gap, never a silent fall-back.
+  if (language) {
+    if (stems.includes(language)) return { language, script, confident: true, hits: 1, margin: Infinity, second: null, fit: 1, forced: true };
+    return { language: null, script, confident: false, hits: 0, margin: 0, gap: `caller named "${language}" but no prior for it on disk` };
+  }
   if (script === "Han") {
     const k = byFam.get("Han")?.kana || 0;
     const cand = stems.filter((s) => ["cmn", "jpn"].includes(s));
@@ -151,8 +207,12 @@ export function identifyLanguage(text, { stems = availableStems() } = {}) {
     return { language: null, script: "Han", confident: false, hits: 0, margin: 0, gap: "no Han-script prior on disk" };
   }
   if (SINGLE[script]) {
-    const lang = stems.includes(SINGLE[script]) ? SINGLE[script] : null;
-    if (lang) return { language: lang, script, confident: true, hits: 1, margin: Infinity, second: null, fit: 1 };
+    // Greek script: resolve the register (ancient grc / modern ell) where the
+    // priors allow; every other single-script language is unchanged.
+    const lang = script === "Greek" && stems.includes("grc") && stems.includes(SINGLE.Greek)
+      ? ancientGreekOf(text, stems)
+      : (stems.includes(SINGLE[script]) ? SINGLE[script] : null);
+    if (lang) return { language: lang, script, confident: true, hits: 1, margin: Infinity, second: lang === "grc" && stems.includes("ell") ? "ell" : null, fit: 1, ...(script === "Greek" ? { register: lang === "grc" ? "ancient" : "modern" } : {}) };
     return { language: null, script, confident: false, hits: 0, margin: 0, gap: "no prior on disk for this script (" + script + ")" };
   }
   const g = groupOf(stems, script);

@@ -107,5 +107,60 @@
   "signal": "any turn that asks the model to reason to a conclusion (derive, judge, infer, solve, originate a fact) instead of phrasings a register, narrating a surfaced ground, or writing notes a kernel derives from",
   "read": "route through the reason-gate (native/organs/reason-gate.js) BEFORE any model draw: register -> the mouth phrases; mechanical -> the organ settles (zero model tokens); swarm -> hard meaning answers itself; grounded -> narration of byte-addressed spans only; reasoning -> notes written, kernel derives, the answer is the derivation + disclosed notes; refuse -> a typed gap citing II.9, never a model reasoning turn. Measured live 2026-10-04: mechanical lane 17*24=408 at 0 tokens; refuse lane P!=NP at 0 tokens with II.9 cited; register phrases through the small-talk path.",
   "falsifying": "a turn the gate routes to refuse that any caller answers by asking the model to reason; a grounded narration that asserts a value no surfaced span carries; or a reasoning-lane answer that is the model own conclusion rather than a kernel derivation — any breaks the rule"
+ },
+ "weft-carries-the-cast": {
+  "type": "weft-carries-the-cast",
+  "signal": "a built weft pass (WeftEntry) is consumed by janus's stage-8 kind induction (weftReferents) but carries no cast[]/standing; or a kind induction judged on a weft whose referent set came from edges alone",
+  "read": "the weft pass MUST carry cast[] — the reader's OWN admitted referents (extractSurfaces + discoverReferents), each standing:'referent' — so weftReferents filters to both-bound beings. WeftEntry@2 dropped it; @3 carries it (readToWeft), and weftReferents gates the edges fallback to cast members when a cast is present. Without it, every edge-end (common nouns included: colonies, gravity, lung) is a 'referent' and kind induction is judged on a polluted company graph — the falsifier then fires on the pollution, not the law. Restoring the cast cleaned the kinds (names, not nouns) and removed the union-find percolation blob (one 458-member blob -> kinds <=10). Measured: khora/native/eval/weft/treebank-seed.mjs + fold-plot-test/treebank-kinds-RESULTS.md (2026-10-07).",
+  "falsifying": "a weft pass that carries its cast and still induces common nouns as beings; or an induced kind whose members are not the reader's admitted referents — either breaks the rule",
+  "basis": "swarm 2026-10-07: the stage-8 handoff (janus/KIND-INDUCTION-REPLY.md), the treebank-seeded run (poluted @2 -> clean @3), weft.js::weftReferents",
+  "giver": "ant-swarm",
+  "standing": "disclosed",
+  "firstAdoptedAt": 1791432208219,
+  "lastSharpenAt": 1791432208219
+ },
+ "identity-at-a-point": {
+  "type": "identity-at-a-point",
+  "signal": "a request to decide whether two mentions are the SAME being (coreference/identity), or an identity claim over a folded record",
+  "read": "identity is detected as the UNIVERSE FOLDED AT A POINT, following the INDUCED-KINDS DEPENDENCY ORDER, from a particular FOR-WHOM, bounded by DMD. Four seats, each an organ: (1) a referent is the fold at a point (surfaces.js:7, fold.js; Ise, kernel/identity.js — permanence through rebuilding); (2) kinds relate by resemblance in a GRAPH, never a strict tree (Xunzi, kernel/kind-graph-structure.js: relation_diversity_depth, the predicate set) and identity is read off a being's POSITION in that dependency order; (3) identity exists ONLY FOR-WHOM (S113; kernel/for-whom.js — a frame: for whom/giver, for what/question, under what/priors, on what field/ground, through what/medium, by what knowing); (4) the read is BOUNDED BY DMD (Koopman, kernel/dmd.js + rewrite-gate.js). Detection: two mentions are one being iff (a) same kind-dependency position, (b) stable under more record (re-key without erasing, P3), (c) the fold settles or cycles under the DMD bound (not a flatline, not carrying). No capital, no POS, no word list — the seats are the text's own, the kinds', the for-whom's, and the trajectory's.",
+  "falsifying": "a pair a DIFFERENT for-whom reads as two beings (or one) with NO new material (identity is not for-whom-relative); an identity whose kind-dependency position FLIPS under a farther asOf on the same record; or an identity declared with NO DMD bound matching the bounded fold — any breaks the rule",
+  "basis": "breakthrough reported 2026-10-07; grounded in khora/native/kernel/{identity.js (Ise), for-whom.js, kind-graph-structure.js (Xunzi), dmd.js (Koopman)}, adapters/text/surfaces.js:7 ('a referent is the fold at a point'), the-fold THE-WHEEL (void->being->fold). Recorded whole in 3.0/identity-at-a-point.md",
+  "giver": "ant-swarm",
+  "standing": "disclosed",
+  "firstAdoptedAt": 1791432281738,
+  "lastSharpenAt": 1791432281738
+ },
+ "the-readers-nomos": {
+  "type": "the-readers-nomos",
+  "signal": "a claim about the reader's growing priors, what carries across books, the for-whom as accumulation, or reading a corpus in order with accumulated expectations",
+  "read": "the reader's FOR-WHOM is the accumulation of expectations of how IDENTITIES and KINDS normally behave, sedimented in publication order; janus canonicalizes those expectations into NOMOS (janus/native/organs/nomos.js — 'the ledger of the rules of reading'), which feeds back as the priors khora reads by. CAST DOES NOT CARRY (a referent is the fold at a point, per book; earlier individuals never join a later book's cast); BEHAVIOR DOES (a growing prior over how kinds behave, canonicalized into nomos). Surprise is the ground so far (surprise-segments.js, Rubin: 'the ground was most wrong') plus the delta to the holograph (bayes-surprise.js, Itti & Baldi). The chronologic key is khora/native/eval/weft/chronology.mjs (a derived year from each doc's own front matter — a signal that may be wrong; a year-unknown doc is a TYPED gap, never defaulted to now). Recorded whole in 3.0/the-readers-nomos.md.",
+  "falsifying": "a nomos row that is REVEALED (no giver, no builder) — refused by licenseNomos; a CROSS-BOOK CAST LEAK (an earlier book's individual entering a later book's cast); or an expectation that does not move the reader's surprise at all (a nomos the reader does not read by) — any breaks the rule",
+  "basis": "breakthrough 2026-10-07: the chronological corpus read with a growing kind-prior; grounded in khora/native/kernel/{for-whom,surprise-segments,bayes-surprise}.js, janus/native/organs/nomos.js, khora/native/eval/weft/chronology.mjs",
+  "giver": "ant-swarm",
+  "standing": "disclosed",
+  "firstAdoptedAt": 1791433361253,
+  "lastSharpenAt": 1791433361253
+ },
+ "the-canonical-cycle": {
+  "type": "the-canonical-cycle",
+  "signal": "a question about the reader's cycle, what makes it fully activated/canonical, or the loop read -> surprise -> expectations -> nomos -> priors -> read",
+  "read": "the cycle is the NINE operators applied to the log, not a new N-step process: NUL (open the void) -> SIG (the difference) -> INS (admit the being; cast, per book) -> SEG (segment in publication time + cut where the ground was most wrong) -> (FLD∨HNT∨MTH, mouth-last) -> CON (link: how the KIND behaves, P(relation|kind)) -> DEF (the nomos row: standing/giver/binding/address) -> EVA (corroborate against the null) -> REC (record + feed the next void), with SYN the seal realizing the licensed rule into a prior khora reads by. Closing edge REC ↬ NUL = agentic. LAWS: cast does NOT carry (a referent is the fold at a point, per book) but behavior does; a rule is GIVEN or EXTRACTED, never REVEALED; no self-confirmation (a candidate is a law only when a null licenses it); the loop is the log's projection (re-key without erasing, P3; replay P159); an expectation the reader does not read by is decorative. ACTIVATION (2026-10-07): active = NUL/SIG/INS/DEF(static priors); built-but-inert = EVA (fold-at imports bayes-surprise.predict but reports wired:false), SEG (surprise organs exist, no read path calls them); missing = CON's behavior object, REC's derived-prior overlay in loadPriors, SYN, and the chronological ordered read (builder reads sharded). The minimal activation closes the loop on one book: read book1 -> surprise -> extract ONE kind-behavior expectation -> write it a derived-prior CANDIDATE (builder+source+witnesses) -> nomos row -> corroborate on book2 vs the null -> license -> SYN -> loadPriors reads it -> read book2 with it and show the surprise shift. Recorded whole in 3.0/the-canonical-cycle.md.",
+  "falsifying": "a CROSS-BOOK CAST LEAK (an earlier book's individual in a later book's cast); a REVEALED nomos row (no giver, no builder) not refused by licenseNomos; a candidate licensed without a null; a rule stored beside the weft rather than folded from it; or a licensed nomos whose presence does not move the next read's surprise — any breaks the rule",
+  "basis": "breakthrough 2026-10-07; grounded in khora/native/kernel/{fold,surfaces,for-whom,surprise-segments,bayes-surprise,identity}.js, janus/native/organs/{nomos,kind-induction,corroboration}.js, khora/native/eval/weft/chronology.mjs, khora/native/the-fold/reader-bundle.js::loadPriors, THE-WHEEL",
+  "giver": "ant-swarm",
+  "standing": "disclosed",
+  "firstAdoptedAt": 1791433547958,
+  "lastSharpenAt": 1791433547958
+ },
+ "priors-have-one-home-janus": {
+  "type": "priors-have-one-home-janus",
+  "signal": "a reading prior (pos/frame/role-config/morph-cues/morphology/case-marking/code/notation/lang) is loaded, mirrored, or placed anywhere other than janus/priors; or a question about where the priors live",
+  "read": "the rules of reading are Relate's, so EVERY prior has ONE home at <root>/janus/priors (2026-10-08; moved from khora/native/priors + Zenodotus/derived-priors/case-priors, incl. all code/notation priors). khora reads them as DATA (a path, never a module import — janus imports khora one-way, so no cycle); data-gated: an absent prior leaves the reader bare (a typed gap, never a guess); every prior names its giver and nomos folds it (licenseNomos refuses REVEALED). Consumers that still read khora/native/priors must re-point or they read a stale copy = drift. Verified: reader-bundle.js::loadPriors resolves janus/priors (grammarPrior true from there). See janus/priors/README.md.",
+  "falsifying": "a prior loaded from anywhere other than janus/priors (a copy in khora is drift); a loadPriors that silently falls back to a local copy instead of a typed bare read; or a nomos row for a REVEALED (no-giver, no-builder) prior not refused by licenseNomos — any breaks the rule",
+  "basis": "2026-10-08 port; grounded in khora/native/the-fold/reader-bundle.js::loadPriors, janus/native/organs/nomos.js",
+  "giver": "ant-swarm",
+  "standing": "disclosed",
+  "firstAdoptedAt": 1791436100623,
+  "lastSharpenAt": 1791436100623
  }
 }

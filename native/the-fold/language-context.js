@@ -49,12 +49,16 @@ export function languageContextFor(text, { language = null } = {}) {
   if (memo.has(key)) return memo.get(key);
   let grammar = language ? grammarFor(language, { text: sample }) : { language: null };
   let detected = null;
-  if (!grammar.language) { detected = detectLanguage(sample); if (detected.language) grammar = grammarFor(detected.language, { text: sample }); }
+  // A DECLARED language is authoritative (the declared fact beats the inferred
+  // one): if its priors are absent, that is a typed gap, never a silent
+  // fall-back to another language's grammar. Only a text with NO declared
+  // language has its own words choose one.
+  if (!grammar.language && !language) { detected = detectLanguage(sample); if (detected.language) grammar = grammarFor(detected.language, { text: sample }); }
   const cased = casedFraction(sample);
   const ctx = Object.freeze({
     language: grammar.language ?? null,
     grammar: grammar.language ? grammar : null,
-    ear: grammar.language ? makeEar({ posPrior: grammar.posPrior, proclitics: grammar.proclitics, enclitics: grammar.enclitics }) : null,
+    ear: grammar.language ? makeEar({ posPrior: grammar.posPrior, proclitics: grammar.proclitics, enclitics: grammar.enclitics, contractions: grammar.contractions }) : null,
     casedFraction: Number(cased.toFixed(3)),
     casedScript: cased >= CASED_SCRIPT_FLOOR,
     gap: grammar.language ? null : (detected?.gap ?? grammar.gap ?? "language undetected"),
