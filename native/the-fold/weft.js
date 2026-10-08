@@ -96,4 +96,32 @@ export function mouthFacing(cloth) {
   });
 }
 
-export const WEFT = Object.freeze({ schema: WEFT_SCHEMA, note: "the reading log; the holograph is its cloth, projected at a cursor and re-expanded by address (THE-SPINE.md, THE-HOLOGRAPH.md)" });
+export const WEFT_ATTESTATION_SCHEMA = "WeftAttestation@1";
+
+/** THE SEAM the ruliad consumes. One ATTESTATION per relation the reading saw: its ends, its label, and its
+ *  ADDRESS (`<source>#<byteOffset>`). The ruliad (the hyperlexicon generator, janus) folds this stream into
+ *  composition affordances whose `witnesses` are these addresses — every field row points back into the weft.
+ *  Both sides call THIS generator; the ruliad never re-parses the weft (one parser, no duplicate organs).
+ *  The weft stays KIND-FREE: it supplies surfaces/refs/addresses; the ruliad owns the kinds and the field. */
+export function* weftAttestations(weft, { asOf = Infinity } = {}) {
+  for (const pass of weft) {
+    if (Number.isFinite(pass.seq) && pass.seq > asOf) break;
+    for (const rel of pass.relations ?? []) {
+      const parts = rel.participants ?? [];
+      if (parts.length < 2 || !rel.relation) continue;
+      const at = rel.scope?.byteOffset;
+      yield {
+        schema: WEFT_ATTESTATION_SCHEMA,
+        witness: holonAddress(pass.address, at),
+        source: pass.address,
+        at: Number.isFinite(at) ? at : null,
+        category: pass.category ?? null,
+        label: rel.relation,
+        left: { ref: parts[0]?.ref ?? null, surface: parts[0]?.surface ?? null, standing: parts[0]?.standing ?? null },
+        right: { ref: parts[1]?.ref ?? null, surface: parts[1]?.surface ?? null, standing: parts[1]?.standing ?? null },
+      };
+    }
+  }
+}
+
+export const WEFT = Object.freeze({ schema: WEFT_SCHEMA, note: "the reading log; the holograph is its cloth, projected at a cursor and re-expanded by address. Its attestations (weftAttestations) are the seam the ruliad/hyperlexicon folds (THE-SPINE.md, THE-HOLOGRAPH.md)." });
