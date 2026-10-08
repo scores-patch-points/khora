@@ -50,6 +50,7 @@ import { sentenceSurface, passagesFromSegments } from "./native/the-fold/reading
 import { claimKindsOf } from "./native/organs/output-claims.js";
 import { engineRelationsFor } from "./native/the-fold/reader-bundle.js";
 import { answerRecord } from "./native/the-fold/answer-record.js";
+import { loadReadingRules } from "./native/kernel/reading-rules.js";
 // AntiStrauss — the safety-and-ethics gate. EVERY model call in this proxy
 // is routed through native/the-fold/antistrauss.mjs (the import is static so
 // the proxy fails closed at boot if the gate cannot load). See the module
@@ -241,10 +242,18 @@ try {
 }
 
 const GIVER = "reader:eoreader7-proxy";
-const CANONICALIZATION_FLOOR = 2;
+// The reading-rule numbers are RECEIVED, not codified (the receptacle rule,
+// 2026-10-08): their one home is janus/priors/reading-rules.json, read as
+// data. An env var is the OPERATOR's declared override and still wins; with
+// neither env nor rule, a threshold falls to 0 = no received floor (a bare
+// read applies no gate, disclosed — never a khora-invented number). When the
+// file is present these are byte-identical to the values the stack always
+// used.
+const _readRules = loadReadingRules().rules;
+const CANONICALIZATION_FLOOR = _readRules?.canonicalizationFloor;
 const ANCHORING = (process.env.ER7_ANCHORING ?? "born") === "born"
-  ? { born: true, bornActivationFloor: Number(process.env.ER7_BORN_ACTIVATION_FLOOR ?? 0.5), bornMarginFloor: Number(process.env.ER7_BORN_MARGIN_FLOOR ?? 0.3), minWindow: Number(process.env.ER7_BORN_MIN_WINDOW ?? 4) }
-  : { minActivation: Number(process.env.ER7_MIN_ACTIVATION ?? 0.05), minMargin: Number(process.env.ER7_MIN_MARGIN ?? 0.2) };
+  ? { born: true, bornActivationFloor: Number(process.env.ER7_BORN_ACTIVATION_FLOOR ?? _readRules?.bornAnchoring?.bornActivationFloor ?? 0), bornMarginFloor: Number(process.env.ER7_BORN_MARGIN_FLOOR ?? _readRules?.bornAnchoring?.bornMarginFloor ?? 0), minWindow: Number(process.env.ER7_BORN_MIN_WINDOW ?? _readRules?.bornAnchoring?.minWindow ?? 0) }
+  : { minActivation: Number(process.env.ER7_MIN_ACTIVATION ?? _readRules?.descriptorAnchoring?.minActivation ?? 0), minMargin: Number(process.env.ER7_MIN_MARGIN ?? _readRules?.descriptorAnchoring?.minMargin ?? 0) };
 
 // ── THE MODEL, NAMED — a giver with an identity, never an anonymous string.
 // Every claim the model states is cited to THIS giver (the user's
@@ -2317,7 +2326,7 @@ function getEnglishParserModel() {
   return _englishParserModel;
 }
 
-const MIN_RELATION_SURFACES = Number(process.env.ER7_MIN_RELATION_SURFACES ?? 2);
+const MIN_RELATION_SURFACES = Number(process.env.ER7_MIN_RELATION_SURFACES ?? _readRules?.minRelationSurfaces ?? 0);
 
 export function createSessionReader() {
   const POS_PRIOR = getPosPrior();
