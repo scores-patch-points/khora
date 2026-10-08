@@ -9,9 +9,11 @@
 // is a typed gap `{ language: null, gap }`, never a fall-back to another
 // language's grammar (the Greenberg rule).
 //
-// Which languages exist is read FROM DISK (`native/priors/pos-<iso3>.json`),
-// not from a list in this file; the only declared fact here is the mapping
-// between the names a caller may use (BCP-47, ISO 639-1/3) and the file stem.
+// Which languages exist is read FROM DISK (`<workspace root>/janus/priors/
+// pos-<iso3>.json` — the ONE home for the priors; khora reads it as data,
+// never a module import), not from a list in this file; the only declared
+// fact here is the mapping between the names a caller may use (BCP-47, ISO
+// 639-1/3) and the file stem.
 //
 // DETECTION is by measurement, not by a language-identification model: the
 // script of the text narrows the candidates (Unicode blocks), and among the
@@ -23,13 +25,14 @@
 // Node only (reads the priors directory).
 import fs from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 import { makeSegmenter } from "../adapters/text/script-segment.js";
 import { makeEar } from "../adapters/text/ear.js";
 import { identifyLanguage } from "./langid.mjs";
+import { PRIORS_DIR } from "./priors-home.js";
 
-const HERE = path.dirname(fileURLToPath(import.meta.url));
-export const PRIORS_DIR = path.join(HERE, "..", "priors");
+// The one home for the priors (janus), resolved by priors-home.js. Re-exported
+// so the eval/organ callers that import PRIORS_DIR from this module keep working.
+export { PRIORS_DIR };
 
 // ISO 639-1 / BCP-47 primary subtag → the prior file stem (ISO 639-3 or a
 // declared variant). A declared fact about names, not about grammar.
@@ -37,6 +40,10 @@ const STEM = Object.freeze({
   en: "eng", es: "spa", ru: "rus", zh: "cmn", ar: "arb", he: "heb", fa: "fas", ko: "kor", ja: "jpn",
   fr: "fra", de: "deu", it: "ita", pt: "por", nl: "nld", pl: "pol", uk: "ukr", hi: "hin", vi: "vie",
   id: "ind", sv: "swe", ur: "urd", tr: "tur", el: "ell", fi: "fin", la: "lat", sa: "san", bg: "bul",
+  // Ancient Greek: a register of the Greek SCRIPT, not a script of its own.
+  // Named here so the detector's candidate set carries grc; the polytonic/
+  // attestation gate in langid.mjs is what distinguishes it from ell.
+  grc: "grc",
 });
 // DETECTION runs against this declared, curated set (the languages a person plausibly asks in) — the fold's finding:
 // a giant group of near cousins steals the text (Galician vs Spanish, etc.). English IS detected (the reader reads
@@ -49,8 +56,14 @@ const read = (f) => { const p = path.join(PRIORS_DIR, f); return fs.existsSync(p
 const cache = new Map();
 const cached = (f) => { if (!cache.has(f)) cache.set(f, read(f)); return cache.get(f); };
 
-/** The prior stems present on disk. */
-export const availableStems = () => fs.readdirSync(PRIORS_DIR).filter((f) => /^pos-[a-z-]+\.json$/.test(f) && !/unimorph|^pos-en\.json$/.test(f)).map((f) => f.slice(4, -5)).sort();
+/** The prior stems present on disk. A missing home is no stems (every language
+ *  then a typed gap), never a throw. Non-language priors (unimorph-derived,
+ *  `pos-prior-*` backoffs, the legacy `pos-en`) are not language stems. */
+export const availableStems = () => {
+  try {
+    return fs.readdirSync(PRIORS_DIR).filter((f) => /^pos-[a-z-]+\.json$/.test(f) && !/unimorph|^pos-prior-|^pos-en\.json$/.test(f)).map((f) => f.slice(4, -5)).sort();
+  } catch { return []; }
+};
 
 /** A caller's language name → a prior stem, or null (a gap). */
 export function stemOf(name) {
@@ -124,8 +137,8 @@ const STEM_SCRIPT = (posPrior) => {
  * character distributions, a decisive mark/clue for short asks, a margin/fit abstention. Undetected is a
  * typed gap, never a guess. The attestation detector it replaces is kept as `detectLanguageByAttestation`.
  */
-export function detectLanguage(text, { sample = 20000, stems = DETECT_STEMS } = {}) {
-  const d = identifyLanguage(String(text ?? "").slice(0, sample), { stems });
+export function detectLanguage(text, { sample = 20000, stems = DETECT_STEMS, language = null } = {}) {
+  const d = identifyLanguage(String(text ?? "").slice(0, sample), { stems, language });
   if (d.confident) return { language: d.language, coverage: d.coverage, script: d.script, runnersUp: d.second ? [{ language: d.second, coverage: 0 }] : [] };
   return { language: null, script: d.script, gap: d.gap || "undetected, never guessed", runnersUp: [] };
 }

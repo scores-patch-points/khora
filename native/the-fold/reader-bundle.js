@@ -29,7 +29,14 @@ import { createLemmatizer, morphologyFromPrior } from "../adapters/text/morpholo
 import * as P from "../adapters/text/priors.js";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const PRIORS = path.join(HERE, "..", "priors");
+// ONE HOME FOR THE PRIORS — janus (2026-10-08): the rules of reading are Relate's,
+// so every prior (pos · frame · role-config · morph-cues · morphology · case-marking ·
+// code · notation · lang · …) lives at <root>/janus/priors, and khora READS them from
+// there as DATA (a path, never a module import — janus imports khora, one-way, so a
+// module cycle is impossible). Data-gated still: an absent file leaves the reader bare
+// (exact-match only), byte-identical to before. `../..`-tripping from this file's dir
+// (native/the-fold) lands on the three-repo root: khora/../.. .. = the workspace root.
+const PRIORS = path.join(HERE, "..", "..", "..", "janus", "priors");
 
 function readJson(file, fallback = null) {
   try {
@@ -101,14 +108,21 @@ function loadPriors() {
 // the English positional/SVO reader failing on real prose ("Ulysses S.
 // Grant was born in Point Pleasant, Ohio, in 1822" → zero edges); a role
 // grammar is earned, never implied, and it has not been earned yet.
-let _dispatch = null;
-function dispatchExtractors() {
-  return _dispatch ?? (_dispatch = relationExtractorsFor({ language: "eng", roleConfig: null, posPrior: null, classifyWord, dominantClass }));
+// Per-LANGUAGE, not English-locked (2026-10-08): `language` reaches
+// relationExtractorsFor, which carries the case-marked language leg for
+// grc/sa/la — so Homer in Greek reads through the Greek reader, not the
+// English one (an English dispatch admitted 0 Greek verbs and emitted
+// garbage labels). Cached per language; "eng" is byte-identical to before.
+const _dispatches = new Map();
+function dispatchExtractors(language = "eng") {
+  if (!_dispatches.has(language)) _dispatches.set(language, relationExtractorsFor({ language, roleConfig: null, posPrior: null, classifyWord, dominantClass }));
+  return _dispatches.get(language);
 }
 
 /** The engine's own relation reader — `reader(list)` → the reader `read(answer)` returns per-sentence claims with verdicts and addresses. */
 export function makeEngineRelationReader(extra = {}) {
   const { posPrior, verbForms, lemmatizer } = loadPriors();
+  const lang = extra.language ?? "eng";
   return makeRelationReader({
     splitSentences,
     extractSurfaces,
@@ -122,7 +136,7 @@ export function makeEngineRelationReader(extra = {}) {
     // self-gating BY DESIGN (GFP's own discoverRelationVocab, unlike the
     // old relations.js, is not meant to pre-populate a verb set) — without
     // it, an empty vocabulary would silence every edge.
-    discoverRelationVocab: (...a) => dispatchExtractors().discoverRelationVocab(...a),
+    discoverRelationVocab: (...a) => dispatchExtractors(lang).discoverRelationVocab(...a),
     // clauseAware (2026-09-23): GFP mode's extractGfpRelations gains a real
     // clause-boundary gate (adapters/text/clause-spans.js) as of this
     // wiring, replacing the flat MAX_ADJACENCY byte-window as the primary
@@ -134,7 +148,7 @@ export function makeEngineRelationReader(extra = {}) {
     // unknown option key, so this is skipped there rather than passed
     // uselessly.
     extractRelations: (text, opts = {}) => {
-      const d = dispatchExtractors();
+      const d = dispatchExtractors(lang);
       return d.extractRelations(text, d.mode === "gfp" ? { ...opts, clauseAware: true } : opts);
     },
     extractorsMode: "dispatch",
