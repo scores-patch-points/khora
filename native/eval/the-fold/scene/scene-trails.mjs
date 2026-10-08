@@ -7,7 +7,7 @@
 // to situations instead of pages. No model, no threshold to fit.
 import fs from "node:fs";
 const KHOR = "/Users/mlacy/Documents/3.0/khora";
-const { confirmedVerbSet, greekClauses } = await import(`${KHOR}/native/eval/lavar/greek.mjs`);
+const { confirmedVerbSet, greekClauses, nominalClass } = await import(`${KHOR}/native/eval/lavar/greek.mjs`);
 const { createHolograph, admit } = await import(`${KHOR}/native/kernel/bayes-surprise.js`);
 const posPrior = JSON.parse(fs.readFileSync("/Users/mlacy/Documents/3.0/janus/priors/pos-grc.json", "utf8"));
 const casePrior = JSON.parse(fs.readFileSync("/Users/mlacy/Documents/3.0/janus/priors/case-marking-grc.json", "utf8"));
@@ -20,6 +20,10 @@ const stF = (s) => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, 
 const nF = (s) => stF(s).replace(/η|ῆ|ῃ/g, "ε").replace(/ω|ῶ/g, "ο").replace(/ΐ|ϊ|ί|ῖ/g, "ι");
 const stmF = (w) => { for (let L = 3; L >= 1; L--) { const e = w.slice(-L); const t = NEc[e]; if (t && t.ranked?.[0]?.share >= 0.5 && t.ranked[0].count >= 10) return w.slice(0, w.length - L); } return w; };
 const kindOf = (s) => { const k = stF(s); return LEM[k] ?? nF(stmF(k)); };
+// THE NAME vs THE KIND (rung INS's promise, now on the trail): a PROPN referent
+// deposits on its NAME (N:οδυσσε); a common noun deposits on its KIND (ἀνήρ).
+const nameOf = (x) => { const f = face(x); if (!f) return null; const c = nominalClass(f.toLowerCase(), posPrior); return c === "PROPN" ? `N:${kindOf(f)}` : null; };
+const elementOf = (x) => { const n = nameOf(x); if (n) return n; const f = face(x); if (!f) return null; const k = kindOf(f); return k.length > 2 && !CLOSED.has(k) ? k : null; };
 const ALL = confirmedVerbSet(posPrior);
 
 const CHARS = Number(process.argv[2] || 190000);
@@ -56,7 +60,7 @@ const trails = new Map();
 const EVAP = Number(process.argv[3] || 0.92);
 for (let i = 0; i < scenes.length; i++) {
   const kinds = new Set();
-  for (const c of scenes[i]) for (const x of [c.subject, c.object]) { if (!x) continue; const f = face(x); if (!f) continue; const k = kindOf(f); if (k.length > 2 && !CLOSED.has(k)) kinds.add(k); }
+  for (const c of scenes[i]) for (const x of [c.subject, c.object]) { const e = elementOf(x); if (e) kinds.add(e); }
   for (const k of kinds) trails.set(k, (trails.get(k) ?? 0) + 1);
   for (const [k, v] of trails) { const nv = v * EVAP; if (nv < 0.05) trails.delete(k); else trails.set(k, nv); }
 }
@@ -65,11 +69,11 @@ const survivors = [...trails.entries()].filter(([, v]) => v >= 0.8).sort((a, b) 
 console.log(`${clauses.length} clauses · ${scenes.length} scenes · referent-trails laid: ${trails.size} · SURVIVING (recurrent referent-kinds): ${survivors.length}\n`);
 for (const [k, v] of survivors.slice(0, 14)) console.log(`  ⛧ ${v.toFixed(2)}  ${k}`);
 
-console.log(`\nthe kinded sequence (scene → its strongest surviving referent-trail):`);
-const sset = new Map(survivors);
+console.log(`\n## the kinded sequence — scene by scene (what the machine wrote):`);
 for (let i = 0; i < scenes.length; i++) {
   let best = null, bv = 0;
-  for (const c of scenes[i]) for (const x of [c.subject, c.object]) { if (!x) continue; const k = kindOf(face(x)); const v = trails.get(k) ?? 0; if (v > bv) { bv = v; best = k; } }
-  const f = scenes[i].map((c) => `${c.verb}`).slice(0, 2).join("/");
-  console.log(`  ${String(i).padStart(2)}  ${best ? `⛧ ${best}` : "—"} (${String(bv).slice(0, 4)})  ${f}`);
+  for (const c of scenes[i]) for (const x of [c.subject, c.object]) { const e = elementOf(x); if (!e) continue; const v = trails.get(e) ?? 0; if (v > bv) { bv = v; best = e; } }
+  const label = best ? (best.startsWith("N:") ? best.slice(2) : `⛧ ${best}`) : "—";
+  const beats = scenes[i].slice(0, 4).map((c) => `${(c.subject ? face(c.subject) : "◦")}.${c.verb}${c.object ? " " + face(c.object) : ""}`).join(" · ");
+  console.log(`- scene ${String(i).padStart(3)}  [${best ? `${label} ${bv.toFixed(2)}` : "—"}]  ${beats}`);
 }
