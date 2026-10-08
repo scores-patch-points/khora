@@ -58,7 +58,7 @@ export function clothAt(weft, { asOf = Infinity } = {}) {
       if (parts.length < 2) continue;
       const key = `${rel.relation}|${parts.join("|")}`;
       if (relations.has(key)) continue;
-      const at = rel.scope?.byteOffset;
+      const at = rel.at ?? rel.scope?.byteOffset;
       relations.set(key, { relation: rel.relation, participants: parts, address: holonAddress(pass.address, at), standing: (rel.participants ?? []).every((p) => p?.standing === "referent") ? "referent" : "mixed" });
     }
   }
@@ -109,7 +109,7 @@ export function* weftAttestations(weft, { asOf = Infinity } = {}) {
     for (const rel of pass.relations ?? []) {
       const parts = rel.participants ?? [];
       if (parts.length < 2 || !rel.relation) continue;
-      const at = rel.scope?.byteOffset;
+      const at = rel.at ?? rel.scope?.byteOffset;
       yield {
         schema: WEFT_ATTESTATION_SCHEMA,
         witness: holonAddress(pass.address, at),
@@ -121,7 +121,70 @@ export function* weftAttestations(weft, { asOf = Infinity } = {}) {
         right: { ref: parts[1]?.ref ?? null, surface: parts[1]?.surface ?? null, standing: parts[1]?.standing ?? null },
       };
     }
+    // the REAL reader's shape: engineRelationsFor edges (end1/label/end2 + refs/spans/assertion).
+    for (const edge of pass.edges ?? []) {
+      if (!edge?.label || !edge.end1 || !edge.end2) continue;
+      const s0 = edge.spans?.[0];
+      const at = Number.isFinite(s0?.start) ? s0.start : null;
+      yield {
+        schema: WEFT_ATTESTATION_SCHEMA,
+        witness: edge.refs?.[0] ?? holonAddress(pass.address, at),
+        source: pass.address,
+        at,
+        category: pass.category ?? null,
+        label: edge.label,
+        left: { ref: null, surface: edge.end1Face ?? edge.end1, standing: "referent" },
+        right: { ref: null, surface: edge.end2Face ?? edge.end2, standing: "referent" },
+      };
+    }
   }
 }
 
-export const WEFT = Object.freeze({ schema: WEFT_SCHEMA, note: "the reading log; the holograph is its cloth, projected at a cursor and re-expanded by address. Its attestations (weftAttestations) are the seam the ruliad/hyperlexicon folds (THE-SPINE.md, THE-HOLOGRAPH.md)." });
+export const WEFT_REFERENTS_SCHEMA = "WeftReferents@2";
+
+/** THE @2 SEAM janus asked for (janus/KIND-INDUCTION-REPLY.md): per-REFERENT records for kind induction, folded
+ *  at a cursor. Yields `{ ref, surfaces, mentionsAt, passes, company }` where COMPANY is a `Map<otherRef,count>`
+ *  — **company only, never content** — over BOTH-BOUND relations (`standing:"referent"` on every end). `passes`
+ *  is the number of weft passes the referent appears in. Additive to `weftAttestations`; the weft stays
+ *  kind-free — the consumer induces kinds from `company` (company-induced, never taught). Pure; generator; `asOf`
+ *  is a pass-seq cursor (P3), so kinds re-key without erasing. */
+export function* weftReferents(weft, { asOf = Infinity } = {}) {
+  const byRef = new Map();
+  const ensure = (ref) => { if (!byRef.has(ref)) byRef.set(ref, { ref, surfaces: new Set(), mentionsAt: [], passes: 0, company: new Map() }); return byRef.get(ref); };
+  for (const pass of weft) {
+    if (Number.isFinite(pass.seq) && pass.seq > asOf) break;
+    const seen = new Set();
+    for (const c of pass.cast ?? []) {
+      const ref = c?.ref ?? c?.surface; if (!ref) continue;
+      const r = ensure(ref);
+      if (c.surface) r.surfaces.add(c.surface);
+      for (const s of c.allSurfaces ?? []) r.surfaces.add(s);
+      for (const at of c.mentionsAt ?? []) r.mentionsAt.push(at);
+      if (!seen.has(ref)) { seen.add(ref); r.passes += 1; }
+    }
+    for (const rel of pass.relations ?? []) {
+      const parts = rel.participants ?? [];
+      if (parts.length < 2 || !rel.relation) continue;
+      if (!parts.every((p) => p?.standing === "referent" && p?.ref)) continue;   // both-bound only
+      for (let i = 0; i < parts.length; i += 1) {
+        const self = parts[i]?.ref; const other = parts[1 - i]?.ref ?? parts[(i + 1) % parts.length]?.ref;
+        if (!self || !other || self === other) continue;
+        const r = ensure(self);
+        r.company.set(String(other), (r.company.get(String(other)) ?? 0) + 1);
+      }
+    }
+    // the REAL reader's shape: engineRelationsFor edges — the ends ARE the referents (keyed by surface).
+    for (const edge of pass.edges ?? []) {
+      const a = edge?.end1Face ?? edge?.end1, b = edge?.end2Face ?? edge?.end2;
+      if (!a || !b) continue;
+      for (const s of [a, b]) { const r = ensure(s); r.surfaces.add(s); if (!seen.has(s)) { seen.add(s); r.passes += 1; } }
+      if (a !== b) { ensure(a).company.set(b, (ensure(a).company.get(b) ?? 0) + 1); ensure(b).company.set(a, (ensure(b).company.get(a) ?? 0) + 1); }
+    }
+  }
+  for (const r of byRef.values()) {
+    const company = {}; for (const [k, v] of r.company) company[k] = v;
+    yield freeze({ schema: WEFT_REFERENTS_SCHEMA, ref: r.ref, surfaces: freeze([...r.surfaces]), mentionsAt: freeze([...new Set(r.mentionsAt)].sort((a, b) => a - b)), passes: r.passes, company: freeze(company) });
+  }
+}
+
+export const WEFT = Object.freeze({ schema: WEFT_SCHEMA, note: "the reading log; the holograph is its cloth, projected at a cursor and re-expanded by address. Its attestations (weftAttestations) and referents (weftReferents, the @2 kind-induction seam) are what the ruliad/hyperlexicon folds (THE-SPINE.md, THE-HOLOGRAPH.md)." });

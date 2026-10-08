@@ -1,0 +1,6 @@
+# generated weft data + run artifacts — the record is PRODUCED by the read, not tracked here
+weft.*.jsonl
+*.progress.json
+*.log
+supervisor.stdout
+supervisor.log
