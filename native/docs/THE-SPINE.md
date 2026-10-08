@@ -32,16 +32,24 @@ Stated once in `janus/README.md:8-10`; not re-derived here.
 - **the weave — penelope's.** Generation as a single operation: weave by day (assemble), unweave by
   night (falsify what does not verify). Machinery: `gym/weave.mjs`, `gym/unweave.mjs`, `TAPESTRY.md`.
 
-## The seam: the record (the weft)
+## The seam: the record — the weft, woven into the cloth
 
 None of the three owns the record. **The record is the seam.** Material crosses between the bodies
 "only as addressed record — feed bytes, comp evidence, scars, verdicts — never as assertion"
-(`penelope/README.md:512`); "the ledger: his scars are her weft" (`penelope/README.md:505`). The
-perceiver's record is `native/kernel/notes.js` (what a reading heard) and `native/kernel/self-record.js`
-(the append-only claim log, cursor folds); their relationship is the wheel's (`THE-WHEEL.md:1`).
+(`penelope/README.md:512`); "the ledger: his scars are her weft" (`penelope/README.md:505`).
 
-Term for the seam: **the weft** — the record the reading leaves and the weaving stands on. (Proposed
-here; not yet used in code.)
+The record's four terms, from the loom (`native/the-fold/weft.js`):
+
+| term | in the myth | in the system |
+|---|---|---|
+| **the warp** | threads strung first, held under tension | the received structure — priors, grammar, schema |
+| **the weft** | the thread carried through, pass by pass | **the log** — the append-only record of reading passes |
+| **the cloth** | the fabric | **the holograph** — the projection from the weft |
+| the loom | Penelope at work | generation (`penelope`) |
+
+`native/the-fold/weft.js` is the weft as an organ: `appendPass` (immutable, P1), `clothAt` (fold at a
+cursor, P3), `reopen` (re-expand a holon address to bytes), `mouthFacing` (strike addresses — the shadow).
+Every holon carries a permanent `source#byte` address; the mouth never sees one.
 
 ## No duplicate organs (one home per organ)
 
