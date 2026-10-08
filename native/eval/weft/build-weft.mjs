@@ -1,35 +1,34 @@
-// native/eval/weft/build-weft.mjs — read the ethos corpus into THE WEFT: the append-only log of reading passes.
+// native/eval/weft/build-weft.mjs — read the ethos corpus into THE WEFT with the REAL reader.
 //
-//   node native/eval/weft/build-weft.mjs [--root DIR] [--out FILE] [--chars N] [--limit N] [--exclude a,b]
+//   node native/eval/weft/build-weft.mjs [--out FILE] [--root DIR] [--shard i/N] [--limit N] [--exclude a,b]
 //
-// The weft (THE-SPINE.md) is the log the holograph is projected from; each PASS is a SidecarRead@2-shaped
-// reading (addressable: per-mention byte anchors, per-relation byteOffset, per-end standing). This driver walks
-// the corpus, reads each document with the production reader (read-door, ear by detector→signal), and APPENDS
-// one WeftEntry@1 line per document. It is RESUMABLE: an address already in the out file is skipped, so a killed
-// run continues where it stopped (the log is append-only; nothing is rewritten).
+// THE READER IS THE REAL ONE — `the-fold/reader-bundle.js::engineRelationsFor` (the reading proxy-runner,
+// swarm-server and cli/reason invoke; the reading the app uses), PRIMED from `native/priors` (Sullivan:
+// pos-eng + morphology-eng → `vocabulary.grammarPrior === true`). NOT the 6.1 legacy host, NOT chunked:
+// one document, WHOLE, in order (THE-READING-PIPELINE.md).
 //
-// Disclosed defaults: --chars 20000 (a pass reads a bounded prefix; a full file read is a different, later run),
-// earSelection "auto" (detector → abstention → ear-by-signal), entityBound OFF (the shipped reader).
+// khora reads; janus folds (it consumes the weft — `weftAttestations` / `weftReferents@2`). One-way.
+// RESUMABLE (append-only, keyed by `address`) + a live progress file for the watcher. Every file yields one line.
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { readDoor } from "../../the-fold/read-door.mjs";
+import { readToWeft } from "../../the-fold/read-process.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const DEFAULT_ROOT = "/Users/mlacy/Documents/3.0/ethos";
 const CAT = /^(\d\d|derived|legacy|scripts)/;
 
 function argv() {
-  const o = { root: DEFAULT_ROOT, out: path.join(HERE, "weft.jsonl"), chars: 20000, limit: Infinity, exclude: new Set(), entityBound: false };
+  const o = { root: DEFAULT_ROOT, out: path.join(HERE, "weft.jsonl"), shard: null, limit: Infinity, exclude: new Set() };
   const a = process.argv.slice(2);
   for (let i = 0; i < a.length; i++) {
     if (a[i] === "--root") o.root = a[++i];
     else if (a[i] === "--out") o.out = a[++i];
-    else if (a[i] === "--chars") o.chars = Number(a[++i]);
+    else if (a[i] === "--shard") { const [x, n] = a[++i].split("/"); o.shard = { i: Number(x), n: Number(n) }; }
     else if (a[i] === "--limit") o.limit = Number(a[++i]);
     else if (a[i] === "--exclude") o.exclude = new Set(a[++i].split(","));
-    else if (a[i] === "--entity-bound") o.entityBound = true;
   }
+  o.progress = o.out + ".progress.json";
   return o;
 }
 function walk(dir, out = []) {
@@ -41,47 +40,55 @@ function walk(dir, out = []) {
   }
   return out;
 }
+const keyOf = (address) => address;
 function readExisting(out) {
-  if (!fs.existsSync(out)) return new Set();
   const seen = new Set();
-  for (const l of fs.readFileSync(out, "utf8").split("\n")) { if (!l) continue; try { const r = JSON.parse(l); if (r?.address) seen.add(r.address); } catch {} }
+  if (!fs.existsSync(out)) return seen;
+  for (const l of fs.readFileSync(out, "utf8").split("\n")) { if (!l) continue; try { const r = JSON.parse(l); if (r?.address) seen.add(keyOf(r.address)); } catch {} }
   return seen;
 }
 
 const o = argv();
 fs.mkdirSync(path.dirname(o.out), { recursive: true });
 const done = readExisting(o.out);
-const files = walk(o.root)
+let files = walk(o.root)
   .map((f) => ({ f, rel: path.relative(o.root, f) }))
   .filter(({ rel }) => { const c = rel.split(path.sep)[0]; return !o.exclude.has(c) && CAT.test(c); })
   .sort((a, b) => a.rel.localeCompare(b.rel));
+if (o.shard) files = files.filter((_, i) => i % o.shard.n === o.shard.i);
 const todo = files.filter(({ rel }) => !done.has(rel)).slice(0, o.limit);
 
-process.stderr.write(`weft: ${files.length} files, ${done.size} already read, ${todo.length} to read -> ${o.out}\n`);
 const t0 = Date.now();
-let n = 0, errors = 0, chars = 0;
+let n = 0, errors = 0, edges = 0, chars = 0;
 const fd = fs.openSync(o.out, "a");
+const writeProgress = (current, finished) => {
+  const el = (Date.now() - t0) / 1000;
+  fs.writeFileSync(o.progress, JSON.stringify({
+    schema: "WeftProgress@1", out: path.basename(o.out), reader: "engineRelationsFor (real)", shard: o.shard ? `${o.shard.i}/${o.shard.n}` : null,
+    total: files.length, done: done.size + n, remaining: Math.max(0, files.length - (done.size + n)),
+    readThisRun: n, errors, edges, chars, perSec: el > 0 ? +(n / el).toFixed(2) : 0, elapsedSec: +el.toFixed(1),
+    current, updated: new Date().toISOString(), finished: !!finished, pid: process.pid,
+  }, null, 1));
+};
+process.stderr.write(`weft(REAL): ${files.length} files, ${done.size} done, ${todo.length} to read -> ${o.out}\n`);
+writeProgress(null, Math.max(0, files.length - done.size) <= 0);
+
 for (const { f, rel } of todo) {
   let text = ""; try { text = fs.readFileSync(f, "utf8"); } catch { text = ""; }
-  if (text.trim().length < 200) continue;
   const category = rel.split(path.sep)[0];
-  const s0 = Date.now();
-  let body;
-  try { body = await readDoor({ text: text.slice(0, o.chars), name: rel, earSelection: "auto", entityBound: o.entityBound }); }
-  catch (err) { body = { error: String(err?.message ?? err) }; }
-  const entry = {
-    schema: "WeftEntry@1", seq: done.size + n, address: rel, category,
-    bytes: Buffer.byteLength(text), readCharacters: body.readCharacters ?? Math.min(o.chars, text.length),
-    language: body.language ?? null, languageSource: body.languageSource ?? null, detector: body.detector ?? null, earSelection: body.earSelection ?? null,
-    cast: (body.referents ?? []).map((r) => ({ ref: r.ref ?? null, surface: r.surfaces?.[0] ?? null, allSurfaces: r.allSurfaces ?? [], mentionsAt: r.mentionsAt ?? [] })).filter((r) => r.surface),
-    relations: (body.relations ?? []).map((r) => ({ relation: r.relation, scope: r.scope ?? null, participants: (r.participants ?? []).map((p) => ({ ref: p.ref ?? null, surface: p.surface ?? null, standing: p.standing ?? null, resolution: p.resolution ?? null })) })),
-    gaps: body.gaps ?? [], ms: body.ms ?? (Date.now() - s0), error: body.error ?? null,
-  };
+  const entry = readToWeft(text, { address: rel, category });   // THE reading process
+  edges += (entry.edges ?? []).length;
+  entry.seq = done.size + n;
   fs.writeSync(fd, JSON.stringify(entry) + "\n");
-  n += 1; chars += entry.readCharacters; if (entry.error) errors += 1;
-  if (n % 25 === 0) { const el = (Date.now() - t0) / 1000; process.stderr.write(`  ${n}/${todo.length}  ${el.toFixed(0)}s  ${(n / el).toFixed(2)}/s  err ${errors}  cast ${entry.cast.length} rel ${entry.relations.length} lang ${entry.language ?? "-"}  ${rel}\n`); }
+  n += 1; chars += entry.readCharacters || 0; if (entry.error) errors += 1;
+  writeProgress(entry.address, n === todo.length);        // every document — the page moves at once
+  if (n % 5 === 0) {
+    const el = (Date.now() - t0) / 1000;
+    process.stderr.write(`  ${n}/${todo.length}  ${el.toFixed(0)}s  ${(n / el).toFixed(2)}/s  err ${errors}  edges ${edges}  ${entry.address}\n`);
+  }
 }
 fs.closeSync(fd);
+writeProgress(null, true);
 const el = (Date.now() - t0) / 1000;
-process.stderr.write(`done: read ${n} docs in ${el.toFixed(0)}s (${(n / el).toFixed(2)}/s), ${(chars / 1e6).toFixed(1)}M chars, ${errors} errors -> ${o.out}\n`);
-process.stdout.write(JSON.stringify({ read: n, seconds: +el.toFixed(1), perSec: +(n / el).toFixed(2), errors, chars, out: o.out }) + "\n");
+process.stderr.write(`done: ${n} this run in ${el.toFixed(0)}s (${(n / el).toFixed(2)}/s), edges ${edges}, errors ${errors}, remaining ${Math.max(0, files.length - (done.size + n))} -> ${o.out}\n`);
+process.stdout.write(JSON.stringify({ read: n, remaining: Math.max(0, files.length - (done.size + n)), seconds: +el.toFixed(1), edges, errors, out: o.out }) + "\n");
