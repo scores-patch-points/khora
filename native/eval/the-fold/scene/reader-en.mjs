@@ -98,14 +98,17 @@ export async function readEnglish({ text = null, file = null, chars = null, out 
     if (head) c.object = head;
   }
 
-  // the referent universe: NOUN/PROPN only (PRON/ADJ/NUM/DET are not beings —
-  // the third-person doctrine, caught by class)
+  // THE REFERENT UNIVERSE is assembled at LAYER B (conversion), below. Here, at
+  // LAYER A (resolution), a pronoun is NOT excluded — it is a long referent
+  // that RESOLVES to a being ("I" to the speaker, "you" to the addressee,
+  // "he/she/it" to the hot being). The third-person doctrine is a RENDERING
+  // gate, applied only when referents are minted: a being is a named being; a
+  // pronoun never becomes one. Resolving first, converting later.
   const refMap = new Map();
   const PERSON_PRON = new Set(["i", "me", "my", "mine", "you", "your", "yours", "he", "him", "his", "she", "her", "hers", "we", "us", "our", "ours", "they", "them", "their", "theirs", "it", "its", "this", "that", "these", "those", "who", "whom", "which", "what"]);
   for (const c of clauses) for (const x of [c.subject, c.object]) {
     if (!x) continue;
     const f = String(x).toLowerCase();
-    if (PERSON_PRON.has(stF(f))) continue;
     const cl = classOf(f);
     const isBeingClass = cl === "NOUN" || cl === "PROPN";
     if (!isBeingClass && !(cl === null && (seenFreq.get(stF(f)) ?? 0) >= CASE_FREE_FLOOR)) continue;
@@ -123,7 +126,25 @@ export async function readEnglish({ text = null, file = null, chars = null, out 
   // margin, language-agnostic (no pronoun table; the Greek loop, ported whole):
   // "she listened" → elizabeth, when elizabeth is hot.
   const zaAct = createActivation({ window: WIN });
-  const refBind = new Map(); const zaSeen = new Set();
+  const refBind = new Map(); const objBind = new Map(); const zaSeen = new Set();
+  // THE DIALOGUE SEATS (2026-10-09): "I"/"you" are not unbound hot-cast — they
+  // are a WHO: the speaker being, and the addressee being (the being on stage
+  // who is not speaking). The seam tracks the most recent speaker-attribution
+  // ("said Darcy" → speaker=darcy; the addressee = the hottest on-stage being
+  // other than the speaker). Resolution FIRST (the pronoun becomes its being);
+  // third-person is a LATER rendering, enforced only when refMap is minted.
+  let speakerRef = null;
+  // SPEAKER IS STRUCTURE, NOT A WORDLIST (2026-10-09, the user's question:
+  // "are we going to hand-list this per language?" — NO. Attribution is the
+  // QUOTED SPAN: the utterance is the bytes between quotes, and the speaker
+  // is the being bound in the clause co-occurring with that span. Quotes are
+  // bytes in every script — Greek, Sanskrit, English, a screenplay — so the
+  // speaker seat is found by the same structure everywhere. A per-language
+  // SPEECH_VERB list was the regression (magic words in the canon's teeth).
+  const sentenceQuoted = new Set();
+  for (const s of sents) if (/["“”]/.test(s.text)) sentenceQuoted.add(s.order);
+  const isSpeechClause = (c) => sentenceQuoted.has(c.order) && !!subjectCandidateRef(c);
+  const addresseeOf = (exclude) => { const top = [...zaSeen].filter((r) => r !== exclude).map((r) => [r, zaAct.activationOf(r)]).sort((a, b) => b[1] - a[1]); return top[0]?.[0] ?? null; };
   const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const sMatcher2 = (() => { const u = [...new Set([...refMap.keys()].filter(Boolean))].sort((a, b) => b.length - a.length); return new RegExp(`(?<![\\p{L}\\p{N}])(?:${u.map(escapeRe).join("|")})(?![\\p{L}\\p{N}])`, "giu"); })();
   // A pronoun/ADJ-headed seat is a seat WITHOUT A BEING at it — the same gap the
@@ -132,27 +153,61 @@ export async function readEnglish({ text = null, file = null, chars = null, out 
   // chapter: "she listened" had been bound; "said she → she felt" had not — the
   // pronoun sat ON the seat, a filled gap, invisible to `!c.subject`).
   const unboundSeated = (c) => { if (c.order === undefined) return false; if (bySentence.has(c.order)) return false; if (refBind.has(c.order)) return false; const s = c.subject; if (!s) return true; const cl = classOf(s); return !(cl === "NOUN" || cl === "PROPN"); };
+  const subjectCandidateRef = (c) => {
+    const d = c.subject ? idOf(c.subject) : null; if (d) return d;
+    // RESOLUTION OF A PRONOUN-SEATED BEING THROUGH THE DIALOGUE SEATS — the
+    // pronoun BECOMES its who BEFORE any third-person conversion. First person
+    // is the speaker, second the addressee; only 3rd-person falls to heat.
+    const f = c.subject ? stF(c.subject) : null;
+    if (f && /^(i|me|my|mine|we|us|our|ours)$/.test(f) && speakerRef) return speakerRef;
+    if (f && /^(you|your|yours)$/.test(f)) { const a = addresseeOf(null); if (a) return a; }
+    return bySentence.get(c.order)?.referentId ?? refBind.get(c.order) ?? null;
+  };
+  const topActive = (exclude) => { const top = [...zaSeen].filter((r) => r !== exclude).map((r) => [r, zaAct.activationOf(r)]).sort((a, b) => b[1] - a[1]); const [ref, score] = top[0] ?? []; if (ref && score >= MIN_A) { const sc = top[1]?.[1] ?? 0; if (score > 0 && (score - sc) / score >= MIN_M) return ref; } return null; };
   for (const s of sents) {
     const named = new Set(); sMatcher2.lastIndex = 0; let m; while (m = sMatcher2.exec(s.text), m) { const r = refMap.get(m[0]) ?? refMap.get(m[0].toLowerCase()); if (r) named.add(r); }
     for (const c of clauses.filter((c) => c.order === s.order && unboundSeated(c) && !bySentence.has(c.order))) {
-      const top = [...zaSeen].map((r) => [r, zaAct.activationOf(r)]).sort((a, b) => b[1] - a[1]);
-      const [ref, score] = top[0] ?? [];
-      if (ref && score >= MIN_A) { const sc = top[1]?.[1] ?? 0; if (score > 0 && (score - sc) / score >= MIN_M) refBind.set(c.order, ref); }
+      const ref = topActive(null);
+      if (ref) refBind.set(c.order, ref);
+    }
+    // THE SPEAKER SEAT (2026-10-09): the attribution clause is the quoted
+    // span's co-occurring clause whose subject is a being — the SPEAKER of
+    // the turn. First-person pronouns ("I", "me") resolve to it; second
+    // person ("you") to the addressee (the hottest being who isn't speaking).
+    // RESOLUTION FIRST (the pronoun becomes a who); the third-person spelling
+    // is applied only when refMap is later minted at the conversion layer.
+    for (const c of clauses.filter((c) => c.order === s.order && isSpeechClause(c))) {
+      const who = subjectCandidateRef(c);
+      if (who) speakerRef = who;
+    }
+    // THE OBJECT TIER (2026-10-09): the object seat is case-marked as a DIFFERENT
+    // participant (he/him, she/her) — resolve it to the hottest being EXCLUDING
+    // this clause's own subject. Greek had held this in its Accusative; English
+    // pronoun objects ("she watched him") were starved 322/16879 edges, which
+    // starved the whole kinds-on-kinds second floor (THE-KINDS-ON-KINDS).
+    for (const c of clauses.filter((c) => c.order === s.order && !objBind.has(c.order))) {
+      const o = c.object;
+      if (!o) { objBind.set(c.order, null); continue; }
+      const direct = idOf(o);
+      if (direct) { objBind.set(c.order, -1); continue; } // -1: direct, resolved at read time
+      const subjRef = subjectCandidateRef(c);
+      const fo = stF(o);
+      // 1st-person object ("she watched me") = the speaker; 2nd-person object
+      // ("he watched you") = the addressee; 3rd-person = hot-excluding-subject.
+      if (/^(me|us)$/.test(fo) && speakerRef) { objBind.set(c.order, speakerRef); continue; }
+      if (/^(you|your|yours)$/.test(fo)) { const a = addresseeOf(subjRef ?? null); objBind.set(c.order, a ?? null); continue; }
+      const ref = topActive(subjRef ?? null);
+      objBind.set(c.order, ref ?? null);
     }
     for (const r of named) zaSeen.add(r);
     zaAct.observe([...named]);
   }
+  const objectRefOf = (c) => { const b = objBind.get(c.order); if (b === -1) return idOf(c.object) ?? null; return b ?? null; };
   const subjectRefOf = (c) => {
-    // A seat that carries a BEING directly (NOUN/PROPN) is the being itself.
-    const direct = c.subject ? idOf(c.subject) : null;
-    if (direct) return direct;
-    // A PRON/ADJ/empty seat folds to the being BY ACTIVATION (2026-10-09).
-    // Dialogue English fills the seat with a pronoun ("said she", "he
-    // wished") — Greek resolved this with case-marking; English resolves it
-    // with the same activated-cast loop, extended from the subjectless tier
-    // (below) to pronoun-seated clauses. The fold at a point: the pronoun is
-    // a long referent, resolved to the hot being at this clause's address.
-    return bySentence.get(c.order)?.referentId ?? refBind.get(c.order) ?? null;
+    // A seat that carries a BEING directly (NOUN/PROPN) is the being itself;
+    // a pronoun seat resolves through the dialogue seats (speaker/addressee)
+    // or activation — RESOLUTION FIRST, third-person conversion at refMap.
+    return subjectCandidateRef(c) ?? null;
   };
 
   // learning + scene signal (the same admission)
@@ -161,7 +216,7 @@ export async function readEnglish({ text = null, file = null, chars = null, out 
   for (const c of clauses) {
     const p = { V: c.verb };
     const s = subjectRefOf(c); if (s) p.S = s;
-    const o = c.object ? idOf(c.object) : null; if (o) p.O = o;
+    const o = objectRefOf(c); if (o) p.O = o;
     const rr = admit(holo, p); c.perSlot = rr.perSlot;
     c.learning = rr.bayes; B.push(rr.bayes);
   }
@@ -172,7 +227,7 @@ export async function readEnglish({ text = null, file = null, chars = null, out 
   const visiting = new Set();
   for (const c of clauses) {
     const s = subjectRefOf(c); if (s && !visiting.has(s)) { visiting.add(s); const h = hashOf(s); hashById.set(s, h); idByHash.set(h, s); }
-    const o = c.object ? idOf(c.object) : null; if (o && !visiting.has(o)) { visiting.add(o); const h = hashOf(o); hashById.set(o, h); idByHash.set(h, o); }
+    const o = objectRefOf(c); if (o && !visiting.has(o)) { visiting.add(o); const h = hashOf(o); hashById.set(o, h); idByHash.set(h, o); }
   }
   const yes = (id) => (id ? hashById.get(id) : null);
   const eot = {
@@ -180,12 +235,12 @@ export async function readEnglish({ text = null, file = null, chars = null, out 
     source: file ?? text, tools: "word-order S-V-O · pos-eng (UD English-EWT) · resolvePronouns · admit().bayes",
     counts: { clauses: clauses.length, sentences: sents.length, bindings: bindings.length, gaps: gaps.length, referents: visiting.size },
     referents: [...visiting].map((id) => ({ hash: hashById.get(id), name: id })),
-    edges: clauses.map((c) => ({ at: c.order, span: c.span, action: c.verb, subject: yes(subjectRefOf(c)), object: c.object ? yes(idOf(c.object)) : null })),
+    edges: clauses.map((c) => ({ at: c.order, span: c.span, action: c.verb, subject: yes(subjectRefOf(c)), object: yes(objectRefOf(c)) })),
     sceneSignal: B,
     language: "declared, not baked — English reads by word order, the prior carries the classes",
   };
   if (out) fs.writeFileSync(out, JSON.stringify(eot, null, 2));
-  return { raw, sents, clauses, refMap, idOf, subjectRefOf, bindings, gaps, B, THR, bySentence, eot, hashOf, hashById, idByHash, yes };
+  return { raw, sents, clauses, refMap, idOf, subjectRefOf, objectRefOf, objBind, bindings, gaps, B, THR, bySentence, eot, hashOf, hashById, idByHash, yes };
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
