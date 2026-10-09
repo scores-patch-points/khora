@@ -68,7 +68,12 @@ export async function readEnglish({ text = null, file = null, chars = null, out 
     if (vi >= 0) for (let j = vi + 1; j < toks.length; j++) {
       if (EN_OPENERS.has(stF(toks[j]))) {
         const next = toks[j + 1];
-        if (next && isNominal(next) && !PERSON_PRON_FOR.has(stF(next))) head = next;
+        // CARRY ONLY A PROPN: the carried object must be a BEING the reader
+        // holds (that Mr Bingley, that Netherfield) — not a temporal abstract
+        // (that time, that moment). Measured after the first pass flooded the
+        // thread with time×30/moment×27/way×22; "that way/that moment" are not
+        // referents, they are adverbial heads.
+        if (next && classOf(next) === "PROPN" && !PERSON_PRON_FOR.has(stF(next))) head = next;
         break;
       }
     }
