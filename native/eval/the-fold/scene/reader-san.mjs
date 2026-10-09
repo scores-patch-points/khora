@@ -73,14 +73,18 @@ export async function readSanSanskrit({ text = null, chars = null, out = null } 
   // (s, t, y, v in the stems) must never open referents — the telling is the
   // voice of the affected; pro-drop recovers who. Stealing the Greek rule; the
   // forms are the Sanskrit pronouns.
-  const PERSON_PRON = new Set(["aham", "tvam", "mayā", "tvayā", "mama", "tava", "asmākam", "yuṣmākam", "me", "te", "asmai", "tubhyam", "sva", "sve", "svayam", "s", "t", "y", "v", "sa", "saḥ", "sā", "tad", "tat", "tasya", "asmai", "nu", "kaḥ", "ka", "kim"]);
+  const PERSON_PRON = new Set(["aham", "tvam", "mayā", "tvayā", "mama", "tava", "asmākam", "yuṣmākam", "me", "te", "asmai", "tubhyam", "sva", "sve", "svayam", "s", "t", "y", "v", "sa", "saḥ", "sā", "tad", "tat", "tasya", "asmai", "nu", "kaḥ", "ka", "kim", "yad", "yā", "yac", "yat", "yān", "yāḥ", "tam", "tvan", "tva", "tvā", "vam", "cid", "enam", "ena", "tat", "tan", "tanum", "tān", "idam", "ayam", "iyam", "asya", "etad", "eṣa", "eṣā"]);
   for (const c of clauses) for (const x of [c.subject, c.object, c.dative]) {
     const f = face(x); if (!f) continue;
     const fs2 = stF(f);
     if (PERSON_PRON.has(fs2)) continue;
     let cat = nominalClass(f.toLowerCase(), posPrior);
     if (!(cat === "NOUN" || cat === "PROPN") && nominalLike2(f)) cat = "NOUN";
-    if (!(cat === "NOUN" || cat === "PROPN" || cat === "ADJ" || cat === "PRON" || cat === "NUM")) continue;
+    // PRON/DET are never beings — the person-recovery layer's business (the
+    // third-person doctrine, measured: the prior's own PRON class decides, no
+    // hand list). A relative/pronoun stem (yam, yad, s, t…) can not hold the
+    // telling; it points at whoever the read already holds.
+    if (!(cat === "NOUN" || cat === "PROPN" || cat === "ADJ" || cat === "NUM")) continue;
     const id = cat === "PROPN" ? "N:" + stF(f) : kindOf(f);
     refMap.set(f.toLowerCase(), id); refMap.set(stF(f), id);
   }
@@ -136,7 +140,16 @@ export async function readSanSanskrit({ text = null, chars = null, out = null } 
   const hashOf = (id) => { let h = 0x811c9dc5; for (let i = 0; i < id.length; i++) { h ^= id.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; } return "r_" + h.toString(16).padStart(8, "0"); };
   const hashById = new Map(), idByHash = new Map();
   const visiting = new Set();
-  const isPersonName = (id) => { const nm = nameOfId(id); return nm === "you" || nm === "I" || nm === "aham" || nm === "tvam"; };
+  // ONE GATE, EVERY PATH (third-person doctrine): a referent is never admitted
+  // if its rendered name is a person-pronoun OR the POS prior classes its
+  // surface as PRON/SCONJ/DET — caught at the visitor so the zaBind/bySentence
+  // routes can't leak pronoun-stems (yam, tad, yad…) into the cast either.
+  const isPersonName = (id) => {
+    const nm = nameOfId(id);
+    if (nm === "you" || nm === "I" || nm === "aham" || nm === "tvam") return true;
+    const cls = nominalClass(stF(String(id ?? "")).replace(/^N:/, ""), posPrior);
+    return !!cls && (cls === "PRON" || cls === "SCONJ" || cls === "DET");
+  };
   for (const c of clauses) {
     const s = subjectRefOf(c); if (s && !isPersonName(s) && !visiting.has(s)) { visiting.add(s); const h = hashOf(s); hashById.set(s, h); idByHash.set(h, s); }
     const o = idOf(face(c.object)); if (o && !isPersonName(o) && !visiting.has(o)) { visiting.add(o); const h = hashOf(o); hashById.set(o, h); idByHash.set(h, o); }
