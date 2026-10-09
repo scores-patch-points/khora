@@ -44,6 +44,36 @@ export async function readEnglish({ text = null, file = null, chars = null, out 
       clauses.push({ verb: t, subject, object, order: s.order, sent: s.text, span: [s.offset, s.offset + s.text.length] });
     }
   }
+  // CROSS-BOUNDARY OBJECT — THE SEAM'S OWN MACHINERY, NOT A VERB LIST
+  // (2026-10-09). greek.mjs already solves this with splitSubordinate +
+  // carryRelatives: a complementizer (that/to/who…) opens a sub-segment, and
+  // the matrix's stranded nominal is CARRIED into the embedded clause's head —
+  // "Elizabeth felt that he was kind" → split at "that", "he" enters the
+  // embedded head, and the matrix verb can take the embedded subject as its
+  // object. This is the same algorithm ported to English word-order openers;
+  // a hand-set CARRIES_OBJ verb list was the regression (magic numbers in the
+  // canon's teeth) and is removed.
+  const EN_OPENERS = new Set(["that", "who", "whom", "whose", "which", "whether", "if"]);
+  const PERSON_PRON_FOR = new Set(["i", "you", "he", "she", "it", "we", "they", "me", "him", "her", "us", "them", "that", "this", "there", "one"]);
+  const enTokens = (c) => c.sent.split(/\s+/).map((t) => t.replace(/^[^a-zA-Z0-9']+|[,.;:]$|-…$/g, "")).filter(Boolean);
+  // SPLIT+VIEW: for a matrix-verb clause with no object, look past the "that"
+  // opener and take the first nominal of the embedded clause as the carried
+  // head that rides back — the object the matrix verb's argument was.
+  for (const c of clauses) {
+    if (c.object) continue;
+    const toks = enTokens(c);
+    const cv = stF(c.verb === "was" ? "was" : c.verb);
+    let vi = -1; for (let j = 0; j < toks.length; j++) if (stF(toks[j]).startsWith(cv.slice(0, Math.min(4, cv.length)))) { vi = j; break; }
+    let head = null;
+    if (vi >= 0) for (let j = vi + 1; j < toks.length; j++) {
+      if (EN_OPENERS.has(stF(toks[j]))) {
+        const next = toks[j + 1];
+        if (next && isNominal(next) && !PERSON_PRON_FOR.has(stF(next))) head = next;
+        break;
+      }
+    }
+    if (head) c.object = head;
+  }
 
   // the referent universe: NOUN/PROPN only (PRON/ADJ/NUM/DET are not beings —
   // the third-person doctrine, caught by class)
