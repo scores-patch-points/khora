@@ -22,7 +22,26 @@ const stF = (s) => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, 
 const nF = (s) => stF(s).replace(/[āīūṝṟḷη]/g, (c) => ({ ā: "a", ī: "i", ū: "u", ṝ: "r", ṟ: "r", ḷ: "l", η: "e" }[c] ?? c));
 const NEc = casePrior.nominalEndings ?? {};
 const stmF = (w) => { for (let L = 3; L >= 1; L--) { const e = w.slice(-L); const t = NEc[e]; if (t && t.ranked?.[0]?.share >= 0.5 && t.ranked[0].count >= 10) return w.slice(0, w.length - L); } return w; };
-const kindOf = (s) => nF(stmF(stF(s)));
+
+// ── SAN-LEMMA, MEASURED (2026-10-09): the POS prior's OWN attestations decide
+// the lemma. Sanskrit inflections are regular; the residual is the longest-use
+// prior-attested nominal stem that keeps a final vowel — agnim/agniḥ/agninā all
+// answer to agni (NOUN×34 in pos-san). No dictionary, no hand-typed word; the
+// prior is the giver. Inflections collapse onto one being (soma, yama, rudra,
+// deva, agni …) exactly as grc-lemma unifies Greek.
+const VOW_X = /[aeiouāīūṝṟ]/;
+const sanAttested = (() => { const a = {}; for (const [f, tags] of Object.entries((posPrior.forms ?? {}))) a[f] = Object.entries(tags).sort((x, y) => y[1] - x[1])[0][0]; return a; })();
+const kindOf = (w) => {
+  let s = stF(w);
+  if (s.endsWith("ḥ")) s = s.slice(0, -1);
+  if (s.endsWith("m") && s.length > 3) { const core = s.slice(0, -1); if (sanAttested[core] && VOW_X.test(core[core.length - 1] ?? "")) return core; }
+  for (let L = 3; L <= Math.min(s.length, 12); L++) {
+    const c = s.slice(0, L);
+    const cls = sanAttested[c];
+    if (cls && (cls === "NOUN" || cls === "ADJ" || cls === "PROPN") && VOW_X.test(c[c.length - 1] ?? "")) return c;
+  }
+  return s;
+};
 const fold = (s) => nF(stF(s));
 const ALL = confirmedVerbSet(posPrior);
 const WIN = 160, MIN_A = 0.05, MIN_M = 0.3;
@@ -49,7 +68,12 @@ export async function readSanSanskrit({ text = null, chars = null, out = null } 
   // referent universe (NOUN/PROPN/PRON/ADJ/NUM), same fallback as Greek
   const nominalLike2 = (w) => { const c = caseOf(w, casePrior, { articleMode: "off" }); return !!(c && (c.case === "Nom" || c.case === "Acc" || c.case === "Gen" || c.case === "Dat")); };
   const refMap = new Map();
-  const PERSON_PRON = new Set(["aham", "tvam", "mayā", "tvayā", "mama", "tava", "asmākam", "yuṣmākam", "me", "te", "asmai", "asmai", "tubhyam", "sva", "sve", "svayam", "nu", "kaḥ", "ka"]);
+  // PERSON-PRONOUNS ARE NOT BEINGS (third-person doctrine, now in Sanskrit):
+  // first/second person (aham/tvam) AND the 3rd-person resumptive saḥ/sā/tad
+  // (s, t, y, v in the stems) must never open referents — the telling is the
+  // voice of the affected; pro-drop recovers who. Stealing the Greek rule; the
+  // forms are the Sanskrit pronouns.
+  const PERSON_PRON = new Set(["aham", "tvam", "mayā", "tvayā", "mama", "tava", "asmākam", "yuṣmākam", "me", "te", "asmai", "tubhyam", "sva", "sve", "svayam", "s", "t", "y", "v", "sa", "saḥ", "sā", "tad", "tat", "tasya", "asmai", "nu", "kaḥ", "ka", "kim"]);
   for (const c of clauses) for (const x of [c.subject, c.object, c.dative]) {
     const f = face(x); if (!f) continue;
     const fs2 = stF(f);
