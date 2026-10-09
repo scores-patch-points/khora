@@ -49,17 +49,44 @@ export async function readEnglish({ text = null, file = null, chars = null, out 
   let acc = 0; const sents = [];
   for (const part of parts) { sents.push({ text: part, order: sents.length, offset: acc }); acc += part.length; }
 
-  // WORD-ORDER CLAUSE: the verb is the position, the subject is the nominal
-  // before it, the object the nominal after it (S-V-O). Born in the seam, from
-  // the measured prior's VERB/NOUN classes — never a hand-typed grammar.
+  // WORD-ORDER CLAUSE — ENGLISH HAS NO CASE-ENDING, BUT POSITION IS ITS CASE
+  // (2026-10-09, the user: "from SVO to EO so it can fit in the cube and we can
+  // parse it just like greek"). The Greek seam emits {verb, subject, object,
+  // dative} with each argument {head, at, case, cell} — the cube cell (role
+  // seat). English emits the SAME shape: the seat BEFORE the verb is Nom
+  // (agent), the seat AFTER is Acc (patient), a "to"/"for"-headed nominal is
+  // Dat (recipient, the raised Field cell). An empty object is a TYPED empty
+  // slot — a gap the cube can read — never an absence. Same clause schema,
+  // position typed by the same measured prior classes as the kind-position.
   const clauses = [];
+  const seatOf = (tok, i, toks, s) => {
+    const at = s.offset + toks.slice(0, i).join(" ").length + (i ? 1 : 0);
+    return { head: tok, headLower: stF(tok), at: [at, at + tok.length], case: "Nom", cell: "agt" };
+  };
+  const objectOf = (tok, i, toks, s) => {
+    const at = s.offset + toks.slice(0, i).join(" ").length + (i ? 1 : 0);
+    return { head: tok, headLower: stF(tok), at: [at, at + tok.length], case: "Acc", cell: "pat" };
+  };
+  const dativeOf = (tok, i, toks, s) => {
+    const at = s.offset + toks.slice(0, i).join(" ").length + (i ? 1 : 0);
+    return { head: tok, headLower: stF(tok), at: [at, at + tok.length], case: "Dat", cell: "rcv" };
+  };
   for (const s of sents) {
     const toks = s.text.split(/\s+/).map((t) => t.replace(/^[^a-zA-Z0-9']+|[,.;:]$|-…$/g, "")).filter(Boolean);
     const verbs = toks.map((t, i) => ({ t, i })).filter(({ t }) => isVerb(t));
     for (const { t, i } of verbs) {
-      const subject = toks.slice(0, i).reverse().find((x) => isSeat(x)) ?? null;
-      const object = toks.slice(i + 1).find((x) => isSeat(x) && !subject) ?? null;
-      clauses.push({ verb: t, subject, object, order: s.order, sent: s.text, span: [s.offset, s.offset + s.text.length] });
+      const subjIdx = toks.slice(0, i).reduce((acc, x, j) => (isSeat(x) ? j : acc), -1);
+      const subject = subjIdx >= 0 ? seatOf(toks[subjIdx], subjIdx, toks, s) : null;
+      let object = null, dative = null;
+      for (let j = i + 1; j < toks.length && !object; j++) {
+        const f = stF(toks[j]);
+        if (f === "to" || f === "for") {
+          const k = j + 1;
+          if (k < toks.length && isSeat(toks[k]) && toks[k].toLowerCase() !== subject?.headLower) { dative = dativeOf(toks[k], k, toks, s); break; }
+        }
+        if (isSeat(toks[j]) && toks[j].toLowerCase() !== (subject?.headLower ?? "")) object = objectOf(toks[j], j, toks, s);
+      }
+      clauses.push({ verb: t, subject, object, dative, order: s.order, sent: s.text, span: [s.offset, s.offset + s.text.length] });
     }
   }
   // CROSS-BOUNDARY OBJECT — THE SEAM'S OWN MACHINERY, NOT A VERB LIST
@@ -95,7 +122,7 @@ export async function readEnglish({ text = null, file = null, chars = null, out 
         break;
       }
     }
-    if (head) c.object = head;
+    if (head) c.object = { head, headLower: stF(head), at: c.object?.at ?? c.span, case: "Acc", cell: "pat" };
   }
 
   // THE REFERENT UNIVERSE is assembled at LAYER B (conversion), below. Here, at
@@ -106,16 +133,16 @@ export async function readEnglish({ text = null, file = null, chars = null, out 
   // pronoun never becomes one. Resolving first, converting later.
   const refMap = new Map();
   const PERSON_PRON = new Set(["i", "me", "my", "mine", "you", "your", "yours", "he", "him", "his", "she", "her", "hers", "we", "us", "our", "ours", "they", "them", "their", "theirs", "it", "its", "this", "that", "these", "those", "who", "whom", "which", "what"]);
-  for (const c of clauses) for (const x of [c.subject, c.object]) {
+  for (const c of clauses) for (const x of [c.subject, c.object, c.dative]) {
     if (!x) continue;
-    const f = String(x).toLowerCase();
+    const f = String(x.head ?? x).toLowerCase();
     const cl = classOf(f);
     const isBeingClass = cl === "NOUN" || cl === "PROPN";
     if (!isBeingClass && !(cl === null && (seenFreq.get(stF(f)) ?? 0) >= CASE_FREE_FLOOR)) continue;
     const id = f; // English names are already the word — no N: flag needed (grc needed it for its no-lemma case)
     refMap.set(f.toLowerCase(), id); refMap.set(stF(f), id);
   }
-  const idOf = (x) => { if (!x) return null; const a = String(x).toLowerCase(); return refMap.get(a) ?? refMap.get(stF(a)) ?? null; };
+  const idOf = (x) => { if (!x) return null; const a = String(x.head ?? x).toLowerCase(); return refMap.get(a) ?? refMap.get(stF(a)) ?? null; };
 
   const { bindings, gaps } = resolvePronounsByActivation(sents, refMap, { window: WIN, minActivation: MIN_A, minMargin: MIN_M, language: "eng", createActivation: (o) => createActivation({ window: o.window ?? WIN }), pronounClass: {}, namedScope: "local" });
   const bySentence = new Map();
@@ -152,13 +179,13 @@ export async function readEnglish({ text = null, file = null, chars = null, out 
   // filled with a pronoun instead of leaving empty (2026-10-09, whole-book and
   // chapter: "she listened" had been bound; "said she → she felt" had not — the
   // pronoun sat ON the seat, a filled gap, invisible to `!c.subject`).
-  const unboundSeated = (c) => { if (c.order === undefined) return false; if (bySentence.has(c.order)) return false; if (refBind.has(c.order)) return false; const s = c.subject; if (!s) return true; const cl = classOf(s); return !(cl === "NOUN" || cl === "PROPN"); };
+  const unboundSeated = (c) => { if (c.order === undefined) return false; if (bySentence.has(c.order)) return false; if (refBind.has(c.order)) return false; const s = c.subject; if (!s) return true; const cl = classOf(String(s.head ?? s)); return !(cl === "NOUN" || cl === "PROPN"); };
   const subjectCandidateRef = (c) => {
     const d = c.subject ? idOf(c.subject) : null; if (d) return d;
     // RESOLUTION OF A PRONOUN-SEATED BEING THROUGH THE DIALOGUE SEATS — the
     // pronoun BECOMES its who BEFORE any third-person conversion. First person
     // is the speaker, second the addressee; only 3rd-person falls to heat.
-    const f = c.subject ? stF(c.subject) : null;
+    const f = c.subject ? stF(String(c.subject.head ?? c.subject)) : null;
     if (f && /^(i|me|my|mine|we|us|our|ours)$/.test(f) && speakerRef) return speakerRef;
     if (f && /^(you|your|yours)$/.test(f)) { const a = addresseeOf(null); if (a) return a; }
     return bySentence.get(c.order)?.referentId ?? refBind.get(c.order) ?? null;
@@ -191,7 +218,7 @@ export async function readEnglish({ text = null, file = null, chars = null, out 
       const direct = idOf(o);
       if (direct) { objBind.set(c.order, -1); continue; } // -1: direct, resolved at read time
       const subjRef = subjectCandidateRef(c);
-      const fo = stF(o);
+      const fo = stF(String(o.head ?? o));
       // 1st-person object ("she watched me") = the speaker; 2nd-person object
       // ("he watched you") = the addressee; 3rd-person = hot-excluding-subject.
       if (/^(me|us)$/.test(fo) && speakerRef) { objBind.set(c.order, speakerRef); continue; }
