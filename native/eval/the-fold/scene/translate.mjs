@@ -43,16 +43,59 @@ const G = {
   διος:"Zeus", δια:"Zeus", ιθακ:"Ithaca", αργο:"Argos", σπαρτ:"Sparta", ταφ:"Taphos", φαι:"the Phaeacians",
   αχιλλ:"Achilles", αγαμεμν:"Agamemnon", κλυταιμ:"Clytemnestra", ελεν:"Helen", θεοκλ:"Theoclymenus",
   ευρυμ:"Eurymachus", αντιν:"Antinous", ευπε:"Eupeithes", αμφιν:"Amphinomus", κτισ:"Ctesippus",
-  ψυχ:"soul", χρυσ:"gold", ελαι:"oil", θε:"divine", ελθ:"coming", δωσ:"giving", πεμπ:"sending",
+  θαρσ:"courage", αεθλ:"contest", ορνη:"stirred", ιερο:"sacred", δα:"feast", μοιν:"alone", πανο:"all", γιγν:"become",
+  δωμ:"halls", εχ:"have", φα:"say", πεμπ:"send", αγγελιη:"news", πρ:"before", πλοι:"sailing", μειν:"remain",
+  κταν:"kill", πιω:"I drink", βαλλ:"throw", γυν:"woman", ανδ:"man", ποτ:"drink", δουλ:"slave", χω:"pour",
+  ποτν:"mistress", ηρ:"hero", πνοι:"wind", σιτο:"food", κρε:"flesh", οιν:"wine", κακ:"evil", θαν:"die",
+   // the fold-summary vocabulary (2026-10-08; giver: my reading) — every form the
+   // summary's 19 reportable scenes actually hit, so the mouth can phrase them all.
+   οἶδα:"knows", μίσγεται:"mingles", ἔκτεινε:"killed", ἔθηκεν:"placed", φυτεύει:"grows",
+   κέλευε:"bid!", κέλευσον:"bid", ἐκέλευον:"they bade", ἐκέλευσεν:"bade", ἀνώγει:"urges",
+   μέλλεις:"you intend", δύναμαι:"I am able", ἤθελε:"he wished", ἴσχει:"holds", ἔχοι:"may hold",
+   ἀκούειν:"to hear", ἀκούων:"hearing", ἀπώλεσα:"I ruined", ἵκετο:"reached", ἐτελέσθη:"was fulfilled",
+   ἐλήλαται:"has been driven", ἐλθοῦσα:"having come (f.)", ἐλθόντα:"having come", ἐπιστάμενος:"knowing",
+   ἕπεσθαι:"to follow", ἔοικε:"is fitting", ἔνι:"there is", παρεῖναι:"to be present", νοστήσας:"having returned home",
+   πείθεσθαι:"to obey", πείθεσθαί:"to obey", θυγάτηρ:"daughter", θυγατήρ:"daughter", νύμφη:"nymph", νύμφ:"nymph",
+   νῆσος:"island", νησ:"island", νης:"island", σχεδίη:"raft", σχεδι:"raft", μῆλα:"flocks", πέλαγος:"open sea",
+   πένθος:"grief", νέον:"new", δόμον:"house", πάντα:"all things", ἅπαντα:"all", πάσχομεν:"we suffer", πάσχετε:"you suffer",
+   βουλὰς:"counsels", δαῖτα:"feast", κεῖνον:"that one", ἄνδρες:"men", θεοὺς:"gods", παιδὸς:"of the child",
+   Ἀχαιοί:"Achaeans", ἀχαιοί:"Achaeans", ἐγώ:"I", ἐγὼ:"I", ἐμοῦ:"of me", φίλοι:"friends", φίλον:"dear",
+   πολλὴν:"much", πολλὸν:"much", ὅσον:"as much", ἄλλας:"others", ἄλλων:"of others", ἄνθος:"bloom",
+   ἕκαστος:"each one", ἕρκος:"fence", θυμόν:"heart", χεῖρας:"hands", πόδας:"feet", προκείμενα:"lying before",
+   οὓς:"whom", μοῦνος:"alone", μέσον:"middle", κακὰ:"evils", εἰσιν:"they are", εἶπες:"you said",
+   διδοῖ:"gives", διδοῦσι:"they give", ἦγον:"they led", ἰόντες:"going", ἀεθλο:"contest", ἀέθλους:"contests",
+   αεθλο:"contest", κλε:"glory", κλέος:"glory", δαις:"feast", νυμ:"nymph", μετέρχομαι:"I go among", πόθος:"longing",
+   ἔργον:"the deed", ταῦτα:"these", πατρίδα:"homeland", τῶν:"of them", τοῦτο:"this", βουλοίμην:"I would wish",
+   σὺ:"you", Ἀργείων:"of the Argives", ἔκβαλε:"he threw out", εἰπὸν:"having spoken", ἐθέλεις:"you wish",
+   ἔκειτο:"was laid", ἔλαιον:"oil", ἐών:"being", οἶνον:"wine", τό:"the", τόν:"him", τὰ:"the", τήν:"her", αἱ:"the ones", θεοῖς:"to the gods", πατρις:"homeland", ἔπος:"word", με:"me",
+   ποίει:"made", ποιήσατο:"made", τάμνετο:"hewed", πελέκκησεν:"felled", ξέσσε:"smoothed", ἤρμοσε:"fitted", ἤρμοσεν:"fitted",
+   ἔνεικε:"brought", δῶκε:"gave", δίδωμι:"gives", ἤγαγε:"led", μήδετο:"devised", προέηκεν:"sent forth", στήσας:"having set",
+   ἐφάνη:"appeared", ἵκετο:"reached", ἔστω:"be", δώσω:"I will give", ἀνέστη:"rose", μῆλα:"flocks", ὕλην:"wood", σχεδίην:"the raft",
+   γαίη:"earth", νήσου:"of the island", ὀδυσσεύς:"Odysseus", ὀδυσσεῦ:"Odysseus", ὀδυσσῆι:"Odysseus", μήδετο:"devised the way", ΚΑΛΥΨΩ:"Calypso", Καλυψώ:"Calypso",
+   οἶδας:"know", ἴδον:"saw", εὗρον:"they found", φεῦγε:"fled", φυτεύει:"grows", λιπέσθαι:"to leave behind", ἤγαγον:"they led",
+   πλέεν:"sailed", πολλοὺς:"many", δείδιμεν:"we fear", ἴθυνε:"steers", ἄνωγε:"had commanded", ἐρα:"…", θάλασσαν:"the sea",
+   παῖδα:"the child", ἐγὼ:"I", δαῖτα:"a feast", νήσῳ:"on the island", ἐπει:"when", πλόον:"a voyage", ὄρεα:"the mountains",
+   σκέπαρνον:"the adze", πέλεκυν:"an axe", τέρετρα:"the borers", γόμφοισιν:"with pegs", ἱστία:"the sail", κάλως:"the halyards",
+   ὅδος:"the way", δόων:"…", ναῦς:"a ship", φαιήκων:"of the Phaeacians", νήεσ̣ς:"…", φερέμεν:"to carry", πομπήν:"a sending home",
+ἱέμενος:"longing", ἕκβαλε:"threw out", τάμνετο:"hewed", πελέκκησε:"felled", ξέσσε:"smoothed", ἤρμοσε:"fitted", γηθόσυνος:"glad",
+    πρῶτα:"first things", πρῶτον:"the first", βασιλεύς:"a king", βασιλῆα:"the king", ὀγδοάτῃ:"the eighth",
+    κτείνειν:"to smite", κτείνει:"smites", κτεῖναι:"to kill", κτεῖνε:"was slaying", μορ:"fate", μόρον:"fate", μοῖραν:"fate",
+    ἄγων:"leading", ἄγει:"leads", ἄγον:"led", ἔπι:"atop", αὐτὸν:"him", αὐτῆς:"of her", αὐτό:"it", ἄλλα:"else", ἄλλων:"of the others",
+    επ:"…",
 };
+
 const stF = (s) => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 const fold = (k) => k.replace(/η|ῆ|ῃ/g, "ε").replace(/ω|ῶ/g, "ο").replace(/ΐ|ϊ|ί|ῖ/g, "ι");
 const G2 = {};
 for (const [k, v] of Object.entries(G)) { const s = fold(stF(k)); G2[k] = v; if (!(s in G2)) G2[s] = v; }
 const g = (w) => {
   if (w === "◦") return "·";
-  const k = stF(w), s = fold(k);
-  return G2[k] ?? G2[s] ?? `(?${w})`;
+  // read past the case-doubt markers: `(?φίλοι)` is the seam's own uncertainty
+  // wrapper, not part of the word — the mouth must see the word, not its doubt.
+  const bare = String(w ?? "").replace(/^\(\?/, "").replace(/\?$/, "").replace(/\)$/, "").trim();
+  if (!bare) return "";
+  const k = stF(bare), s = fold(k);
+  return G2[k] ?? G2[s] ?? `?${bare}`;
 };
 if (process.argv[1] && import.meta.url === `file://${process.argv[1]}`) {
   const src = fs.readFileSync(process.argv[2] || "odyssey-ms.log", "utf8");
@@ -71,4 +114,4 @@ if (process.argv[1] && import.meta.url === `file://${process.argv[1]}`) {
     console.log(`- scene ${m[1]} [${g(center.trim())}]  ${frags.join(" · ")}`);
   }
 }
-export { g };
+export { g, G };  // G: the received dictionary heads — the ANCHORS the khora field abuts
