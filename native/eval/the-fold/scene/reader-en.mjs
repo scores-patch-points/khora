@@ -21,12 +21,30 @@ const classOf = (w) => { const c = posPrior.forms?.[stF(w)]; if (!c) return null
 const isVerb = (w) => { const c = classOf(w); return c === "VERB" || c === "AUX"; };
 const isNominal = (w) => { const c = classOf(w); return c === "NOUN" || c === "PROPN" || c === "PRON" || c === "ADJ" || c === "NUM"; };
 
+// THE CASE-FREE SEAT (2026-10-09, THE-CASE-FREE-CAST / THE-TRANSFER-FUNCTION §2):
+// a wordlist POS prior is a received vocabulary, and a never-seen proper name
+// (darcy, bingley) has NO entry — so the S-V-O seat refused the cast and "Darcy
+// was writing" bound no subject. Greek never had this hole: case-endings
+// classify ANY form. English's positional analogue, measured, is: when the
+// prior is SILENT (class === null), a token that RECURS, is NOT in this text's
+// own Zipf-derived closed class, and is not a person-pronoun is eligible as a
+// seat / referent. The prior stays authoritative when it knows; the recurrence
+// + not-closed floor carries when it's silent — extracted, never received.
+const CASE_FREE_FLOOR = 3, CASE_FREE_VETO = new Set(["i", "me", "my", "mine", "you", "your", "yours", "he", "him", "his", "she", "her", "hers", "we", "us", "our", "ours", "they", "them", "their", "theirs", "it", "its", "this", "that", "these", "those", "who", "whom", "which", "what"]);
+
 export async function readEnglish({ text = null, file = null, chars = null, out = null } = {}) {
   let raw;
   if (text) raw = text;
   else if (file) raw = fs.readFileSync(file.startsWith("/") ? file : `${TEXT_DIR}/${file}`, "utf8");
   else throw new TypeError("readEnglish: text or a source file path");
   if (chars) raw = raw.slice(0, chars);
+  // THE CASE-FREE FREQUENCY FLOOR (per book): recurring tokens the POS prior
+  // is silent about, vetoed by the text's own Zipf closed class — the seats a
+  // wordlist reader would have refused (darcy, bingley). Extracted, not received.
+  const words = (raw.match(/[a-zA-Z][a-zA-Z'’-]*/g) ?? []).map((w) => stF(w));
+  const seenFreq = new Map(); for (const w of words) seenFreq.set(w, (seenFreq.get(w) ?? 0) + 1);
+  const isCaseFreeBeing = (w) => { if (!w) return false; const f = stF(w); if (CASE_FREE_VETO.has(f)) return false; if (classOf(w) !== null) return false; return (seenFreq.get(f) ?? 0) >= CASE_FREE_FLOOR; };
+  const isSeat = (w) => isNominal(w) || isCaseFreeBeing(w);
   const parts = raw.split(/(?<=[.!?]\s+)/g).map((p) => p.trim()).filter((p) => p.split(" ").length >= 3);
   let acc = 0; const sents = [];
   for (const part of parts) { sents.push({ text: part, order: sents.length, offset: acc }); acc += part.length; }
@@ -39,8 +57,8 @@ export async function readEnglish({ text = null, file = null, chars = null, out 
     const toks = s.text.split(/\s+/).map((t) => t.replace(/^[^a-zA-Z0-9']+|[,.;:]$|-…$/g, "")).filter(Boolean);
     const verbs = toks.map((t, i) => ({ t, i })).filter(({ t }) => isVerb(t));
     for (const { t, i } of verbs) {
-      const subject = toks.slice(0, i).reverse().find((x) => isNominal(x)) ?? null;
-      const object = toks.slice(i + 1).find((x) => isNominal(x) && !subject) ?? null;
+      const subject = toks.slice(0, i).reverse().find((x) => isSeat(x)) ?? null;
+      const object = toks.slice(i + 1).find((x) => isSeat(x) && !subject) ?? null;
       clauses.push({ verb: t, subject, object, order: s.order, sent: s.text, span: [s.offset, s.offset + s.text.length] });
     }
   }
@@ -89,7 +107,8 @@ export async function readEnglish({ text = null, file = null, chars = null, out 
     const f = String(x).toLowerCase();
     if (PERSON_PRON.has(stF(f))) continue;
     const cl = classOf(f);
-    if (!(cl === "NOUN" || cl === "PROPN")) continue;
+    const isBeingClass = cl === "NOUN" || cl === "PROPN";
+    if (!isBeingClass && !(cl === null && (seenFreq.get(stF(f)) ?? 0) >= CASE_FREE_FLOOR)) continue;
     const id = f; // English names are already the word — no N: flag needed (grc needed it for its no-lemma case)
     refMap.set(f.toLowerCase(), id); refMap.set(stF(f), id);
   }
@@ -107,9 +126,15 @@ export async function readEnglish({ text = null, file = null, chars = null, out 
   const refBind = new Map(); const zaSeen = new Set();
   const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const sMatcher2 = (() => { const u = [...new Set([...refMap.keys()].filter(Boolean))].sort((a, b) => b.length - a.length); return new RegExp(`(?<![\\p{L}\\p{N}])(?:${u.map(escapeRe).join("|")})(?![\\p{L}\\p{N}])`, "giu"); })();
+  // A pronoun/ADJ-headed seat is a seat WITHOUT A BEING at it — the same gap the
+  // reference-binding tier was built to close, now ALSO for seats the S-V-O seam
+  // filled with a pronoun instead of leaving empty (2026-10-09, whole-book and
+  // chapter: "she listened" had been bound; "said she → she felt" had not — the
+  // pronoun sat ON the seat, a filled gap, invisible to `!c.subject`).
+  const unboundSeated = (c) => { if (c.order === undefined) return false; if (bySentence.has(c.order)) return false; if (refBind.has(c.order)) return false; const s = c.subject; if (!s) return true; const cl = classOf(s); return !(cl === "NOUN" || cl === "PROPN"); };
   for (const s of sents) {
     const named = new Set(); sMatcher2.lastIndex = 0; let m; while (m = sMatcher2.exec(s.text), m) { const r = refMap.get(m[0]) ?? refMap.get(m[0].toLowerCase()); if (r) named.add(r); }
-    for (const c of clauses.filter((c) => c.order === s.order && !c.subject && !bySentence.has(c.order))) {
+    for (const c of clauses.filter((c) => c.order === s.order && unboundSeated(c) && !bySentence.has(c.order))) {
       const top = [...zaSeen].map((r) => [r, zaAct.activationOf(r)]).sort((a, b) => b[1] - a[1]);
       const [ref, score] = top[0] ?? [];
       if (ref && score >= MIN_A) { const sc = top[1]?.[1] ?? 0; if (score > 0 && (score - sc) / score >= MIN_M) refBind.set(c.order, ref); }
@@ -117,7 +142,18 @@ export async function readEnglish({ text = null, file = null, chars = null, out 
     for (const r of named) zaSeen.add(r);
     zaAct.observe([...named]);
   }
-  const subjectRefOf = (c) => { if (c.subject) return idOf(c.subject) ?? null; return bySentence.get(c.order)?.referentId ?? refBind.get(c.order) ?? null; };
+  const subjectRefOf = (c) => {
+    // A seat that carries a BEING directly (NOUN/PROPN) is the being itself.
+    const direct = c.subject ? idOf(c.subject) : null;
+    if (direct) return direct;
+    // A PRON/ADJ/empty seat folds to the being BY ACTIVATION (2026-10-09).
+    // Dialogue English fills the seat with a pronoun ("said she", "he
+    // wished") — Greek resolved this with case-marking; English resolves it
+    // with the same activated-cast loop, extended from the subjectless tier
+    // (below) to pronoun-seated clauses. The fold at a point: the pronoun is
+    // a long referent, resolved to the hot being at this clause's address.
+    return bySentence.get(c.order)?.referentId ?? refBind.get(c.order) ?? null;
+  };
 
   // learning + scene signal (the same admission)
   const holo = createHolograph({ gamma: 0.9 });
