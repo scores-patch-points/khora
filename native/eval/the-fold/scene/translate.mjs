@@ -47,6 +47,8 @@ const G = {
   δωμ:"halls", εχ:"have", φα:"say", πεμπ:"send", αγγελιη:"news", πρ:"before", πλοι:"sailing", μειν:"remain",
   κταν:"kill", πιω:"I drink", βαλλ:"throw", γυν:"woman", ανδ:"man", ποτ:"drink", δουλ:"slave", χω:"pour",
   ποτν:"mistress", ηρ:"hero", πνοι:"wind", σιτο:"food", κρε:"flesh", οιν:"wine", κακ:"evil", θαν:"die",
+  προσφ:"address", φημ:"say", φατ:"say", φατο:"say", ερε:"ask", ειπ:"speak", εποτρυ:"urge", ιδ:"see", εχ:"have", βαιν:"board", κατ:"sit", ἑζ:"sit", ιεσθ:"go", βη:"go", ὀδυρ:"mourn", κλαι:"weep", μηρμηρ:"mull", ἑτοιμ:"ready", εκελευ:"bid", ἀπτομ:"set to",
+  προσεφ:"address", προσεε:"address", εζετ:"sit", εζετο:"sit", βεσετ:"go", νειτ:"return", λισσ:"implore", λισσο:"implore",
    // the fold-summary vocabulary (2026-10-08; giver: my reading) — every form the
    // summary's 19 reportable scenes actually hit, so the mouth can phrase them all.
    οἶδα:"knows", μίσγεται:"mingles", ἔκτεινε:"killed", ἔθηκεν:"placed", φυτεύει:"grows",
@@ -95,7 +97,15 @@ const g = (w) => {
   const bare = String(w ?? "").replace(/^\(\?/, "").replace(/\?$/, "").replace(/\)$/, "").trim();
   if (!bare) return "";
   const k = stF(bare), s = fold(k);
-  return G2[k] ?? G2[s] ?? `?${bare}`;
+  const exact = G2[k] ?? G2[s];
+  if (exact) return exact;
+  // LONGEST-STEM FALLBACK: the received dictionary is stem-keyed (φα:"say",
+  // βαιν:"board") — an inflected surface (φάτο, ἕζετο) folds to a longer form
+  // the table never listed, but its stem is the key. Walk longest→shortest and
+  // return the first stem that is a key. This is exactly the giver's indexing;
+  // nothing new is glossed, only already-given stems are found under surfaces.
+  for (let L = Math.min(s.length, 6); L >= 4; L--) { const cand = s.slice(0, L); if (cand in G2) return G2[cand]; }
+  return `?${bare}`;
 };
 if (process.argv[1] && import.meta.url === `file://${process.argv[1]}`) {
   const src = fs.readFileSync(process.argv[2] || "odyssey-ms.log", "utf8");
