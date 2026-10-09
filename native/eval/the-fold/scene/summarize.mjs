@@ -25,13 +25,17 @@ const r = await readGreek({ chars: CURSOR, out: `eot-odyssey-${CURSOR}.json` });
 const { clauses, B, THR, journal, subjectRefOf, idOf, nameOfId, g } = r;
 const talk = (id) => (id ? nameOfId(id) : null);   // the pretty-name swap, at talk
 
-// scenes + reportable situations (the blinks)
+// scenes + reportable situations (the blinks). SCALE-AWARE (2026-10-08): the
+// read grew 1,210 → 6,299 clauses when the unattested verbs surfaced; the old
+// thresholds (scene>=4, floor 0.72) produced ~20 micro-chapters on the bigger
+// read. A chapter is a story unit, not a blink — so scenes are larger (>=6
+// clauses) and only the strong blink peak (floor 0.9) survives.
 const SCE = []; let cur = [];
-for (let i = 0; i < clauses.length; i++) { const rev = B[i]; if (Number.isFinite(rev) && rev >= THR && rev >= (B[i - 1] ?? 0) && rev >= (B[i + 1] ?? 0) && cur.length >= 4) { SCE.push(cur); cur = []; } cur.push(i); }
+for (let i = 0; i < clauses.length; i++) { const rev = B[i]; if (Number.isFinite(rev) && rev >= THR && rev >= (B[i - 1] ?? 0) && rev >= (B[i + 1] ?? 0) && cur.length >= 6) { SCE.push(cur); cur = []; } cur.push(i); }
 if (cur.length) SCE.push(cur);
 const scenes = SCE.map((ids) => ids.map((i) => clauses[i]));
 const sums = scenes.map((sc) => sc.reduce((s, c) => s + (c.learning ?? 0), 0));
-const floor = [...sums].sort((a, b) => a - b)[Math.floor(scenes.length * 0.72)] ?? 0;
+const floor = [...sums].sort((a, b) => a - b)[Math.floor(scenes.length * 0.9)] ?? 0;
 const blinks = scenes.map((sc, si) => ({ si, sum: sums[si], sc })).filter((x) => x.sum >= floor);
 const named = (x) => { const f = face(x); if (!f) return null; if (nominalClass(f.toLowerCase(), posPrior) !== "PROPN") return null; const id = idOf(f); return id ? nameOfId(id) : null; };
 const propOf = (c) => {
@@ -103,9 +107,10 @@ const coarsen = (chs) => {
       if (!out.length) { out.push(c[i]); continue; }
       const prev = out[out.length - 1];
       const overlap = c[i].filter((e) => prev.some((x) => x.patient === e.patient)).length / Math.max(1, c[i].length);
-      // a 1-event chapter is an atom, not a story unit — it joins the telling before it;
-      // otherwise a chapter survives only when its cast really departs (>= half overlap)
-      if (c[i].length === 1 || overlap >= 0.5) { prev.push(...c[i]); changed = true; }
+      // a 1-2 event chapter is an atom, not a story unit — it joins the
+      // telling before it; otherwise a chapter survives only when its cast
+      // really departs (no midline cast continuity at all)
+      if (c[i].length <= 2 || overlap > 0) { prev.push(...c[i]); changed = true; }
       else out.push(c[i]);
     }
     c = out.filter((x) => x.length);
