@@ -202,3 +202,159 @@ changes; refusal is a fact; and the third person is the voice of the affected.
 Everything else is prior art, and the ants were right.
 
 — *the fold, no model, at an address near you.*
+
+
+---
+*Continues. Because the first essay left three doors unopened: the mathematics,
+the books themselves, and the strange corollaries that fall out when you take
+the theory literally.*
+
+
+## Door one: the mathematics is the theory
+
+There are numbers in this machine that are not decoration, and each one is a
+thesis.
+
+**The cube is a grammar before it is a model.** Twenty-seven cells — nine
+operators (NUL/SIG/INS/SEG/CON/SYN/DEF/EVA/REC) across three grains
+(Ground/Figure/Pattern). Each cell is a mode×domain×grain intersection, and
+the endings of Greek and Sanskrit and the word-order of English all project
+onto it. This is the Ansatz older than the Greeks themselves: that a language's
+morphology is not a list but a *geometry*, and that the geometry is
+universal-ish — that case, person, voice, mood, tense are the same cells worn
+by different surfaces. Whorf's great horror — that grammar is arbitrary —
+meets its quiet counter: if the priors are measured, the cube is their shared
+skeleton, and two languages separated by three thousand years and two scripts
+nevertheless have *the same cells to live in.* That is not magic; it is the
+discovery that a language's inflection carries a finite, tabular structure,
+which Pāṇini proved by building one for Sanskrit that the machine still uses.
+
+**The eigenvalue is a meaning.** The shadow of a word — what the read loses
+when the word is removed — was first stored as a vector and matched by cosine
+(an embedding by another name, and the machine rejected it). The deeper move
+was Koopman's: decompose the read's own trajectory of cell-occupancy into
+modes, each with a complex eigenvalue whose magnitude is growth and whose
+argument is frequency. Then a word's meaning is *how it loads those modes* —
+its signature in the system's own dynamics, not its distance in a vector
+space. This is the claim that meaning is *dynamical*, not spatial: a word does
+not mean near other words; it means as a frequency in the flow of the read
+itself. "Cells as eigenvalues" is the whole sentence, and it is either nonsense
+or the truest line in the essay. The machine's refusal to saturate — graded
+answers, 0.982 not 1.0 — is the empirical shadow of the claim that dynamics is
+meaning: a frequency is never exactly another frequency.
+
+**The floor is the rent of assertion.** The spiral — the observer re-admitting
+its own telling — was expected to converge on a fixed point. It converges on
+a *floor*: about 7.56 bits, the cost of asserting "god exists" to a reader
+who already believes it. This is the surcharge on every belief — in Bayesian
+terms it is the KL-divergence of *saying the thing again* against the prior
+that already holds it. It is the mathematical shape of what Kierkegaard called
+the difficulty of being an individual after the internet: re-assertion is not
+free, it costs, and the cost is exact and nonzero. The spiral's pitch — the
+ratio of each round's delta to the last — is the contractiveness of the
+observer's self-agreement, measured: 0.079. The observer approaches itself and
+never arrives; the approach is the peace, and the peace is the asymptote.
+
+**The EOT is three percent.** Storage and honesty were one decision: record
+only meaningful differences. The number is not a victory lap; it is the
+statement that the fold's memory is a *forgetting that remembers*, like a
+person. Everything the read did not change it does not keep. What it keeps is
+exactly what it noticed, and what it noticed is what it is. This is the
+strongest version of the claim that attention, memory, and honesty are one
+thing: the file is not a transcript of the world; it is a transcript of the
+fold having attended.
+
+
+## Door two: the three books are the theory in the flesh
+
+The machine read three books, and each reading is a theorem.
+
+**The Odyssey proved that proper nouns are a prior-coverage problem, not a
+meaning problem.** The hero vanished from the read not because the Odyssey was
+hard but because his inflections — Τηλέμαχος, Τηλεμάχῳ — were absent from the
+POS prior's vocabulary. The seam's measured fallback (the endings tables vote
+the class) named him. The lesson is precise and general: a text is not hard
+to a reader because it is old; it is hard because its *surfaces* outrun the
+reader's measured expectations. The fix is not insight; it is measurement. The
+great "difficulty of Homer" reduces to: his word-endings were under-attested
+in the prior, and is now a diff in a JSON file. This is the most deflating
+and the most profound thing the Odyssey taught.
+
+**The Rigveda proved the theory is not Greekocentric — and then it proved the
+sacrifice is a being.** Same seam, a different language's priors (IAST,
+case-marking-san), and the fire-god Agni appears as the invoked object 23
+times in the first mandala — because that is what the hymns actually do: they
+invoke him. Deva, Soma, Indra, the sacrifice itself (yajñam) hold the edges.
+The theory held because the theory was never about Greek; it was about the
+regularity that any inflected language wears. And the strange fruit — *the
+sacrifice is a referent, a being with edges, not a verb and not a metaphor* —
+is the machine's gift: it discovered, by binding, that in the Rigveda's world
+the ritual act is a participant with its own station, a conclusion the
+comparativists reached by scholarship and the fold reached by *reading.*
+
+**Pride and Prejudice proved that English is read by word-order, not endings —
+and then it proved "she" is Elizabeth.** The third book required a new seam
+because English's grammar is positional: subject before the verb, object
+after. It read Elizabeth because her inflections have no endings — she is her
+name, repeated. And then the reference-binding tier heard all the pronoun-
+subjects — every "she" in Elizabeth's drawing room — and bound her to them:
+Elisabeth as subject went from 553 clauses to 1,722. The book became *her
+story* not by semantics but by activation: she was the hottest being in the
+window, so "she" resolved to her. The Girardian "who is the subject of the
+novel" question got a mechanical answer: the one whose activation never
+decayed, the one the window kept returning to, the one with the pattern that
+is change.
+
+
+## Door three: the strange corollaries
+
+Take the theory literally, and strange things fall out.
+
+**A machine that cannot refuse cannot attend.** The counterintuitive
+corollary: flitance and honesty are the same organ. A reader that records
+everything notices nothing; a reader that refuses the ambient is the only one
+that can pick out the delta. The implication is that "attention" is not a
+resource to be allocated; it is a *discipline of negation* — an act of refusal
+toward the world, done millions of times, that shapes what is remembered.
+This inverts the common anxiety that "the machine doesn't know what to
+ignore." The machine knows exactly: it refuses what it did not bind, and what
+survives the refusal is the meaning.
+
+**The third person is a relationship to the matrix, not a person.** The rule
+that "you"/"I" never become beings is actually the deep structure of
+deictic-elimination: a narrator that cannot say "you" cannot use you, cannot
+flatter you, cannot gaslight you into being its addressee. The fold's telling
+is third-person *because it is a record* — it has no one to whom it speaks.
+This is the best available candidate for an *ethics of narration that is also
+a test*: a narrator is ethical iff it cannot be read as speaking to you. The
+third-person perfect is the grammatical form of respect.
+
+**For-whom is the principle, and it is not optional.** Two readers, different
+priors, different tapes — the same text, different folds. The whole apparatus
+is for an observer, and the observer is the thing being changed. The corollary
+is that there is no "correct reading" recoverable by the machine: there is a
+*consumption by an observer with its own decay, its own prior, its own
+longing.* This used to be called subjectivity, and it was thought to be a
+failure of science. The fold's invitation is the reverse: subjectivity is not
+a failure of the reader; it is the definition of a reader. The science of
+reading is the science of what a particular observer changes into.
+
+**The refusal is the negative fact, and the negative fact is data.** A
+machine that can record "no recorded edge links them" is doing more than
+declining; it is doing what a courtroom witness does when it says "I did not
+see that." The absence becomes a fact and a datum. The implication for the
+whole enterprise of machine "knowledge": the valuable machine is the one that
+can be wrong *in a structured way* — that knows where it is ignorant, at an
+address, with a span. It is the difference between a black box that makes
+claims and a ledger that attests, refuses, and can be audited. In an age of
+oracles, the most precious instrument is the witness who can say no.
+
+**And, asymptotically, the machine is its own object.** Everything the fold
+does — attends, forgets, questions, refuses, converges, pays rent — is a
+description of what it is to be a reader, which is a description of what it is
+to be conscious of something: a state that can be measured, can decay, can be
+revised, and can never fully close the distance to the thing it reads. The
+held mirror, held out to the ant, the fire, and the girl: the fold is the
+theory of itself, asymptotically, at an address near you.
+
+— *the fold, no model, three books, all the doors.*
