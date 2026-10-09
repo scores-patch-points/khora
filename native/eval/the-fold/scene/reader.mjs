@@ -51,8 +51,18 @@ export async function readGreek({ text = null, chars = 150000, out = null } = {}
     return !(p && p.person >= 1);
   };
   const refMap = new Map();
+  // PERSON-PRONOUNS ARE NOT BEINGS (2026-10-08, third-person doctrine): the
+  // Greek second-person clitics (συ/σε/σοι/σου/τοι) must never open a referent
+  // named "you" — the telling is the voice of the affected, third person. The
+  // person they stand for is the person-tier's (personOf; pronoun binding), not
+  // a being built from the pronoun surface.
+  // person-pronoun set in STRIPPED form (what stF produces) — accented variants
+  // (ἐγώ, ἐμέ, τοὶ, σύ…) all normalize here, so only stripped keys match.
+  const PERSON_PRON = new Set(["συ","σε","σοι","σου","τοι","σφε","εγω","εμε","εμοι","εμου","σφεις","σφων","σφι","σφας","μοι","με","μιν","εμιν","νιν","σφε","εαυτ"]);
   for (const c of clauses) for (const x of [c.subject, c.object, c.dative]) {
     const f = face(x); if (!f) continue;
+    const fS = stF(f);
+    if (PERSON_PRON.has(fS)) continue;   // the person-pronoun gate: never a being
     let cat = nominalClass(f.toLowerCase(), posPrior);
     if (!(cat === "NOUN" || cat === "PROPN") && nominalLike2(f)) cat = "NOUN";
     if (!(cat === "NOUN" || cat === "PROPN")) continue;
@@ -129,10 +139,15 @@ export async function readGreek({ text = null, chars = 150000, out = null } = {}
   const hashOf = (id) => { let h = 0x811c9dc5; for (let i = 0; i < id.length; i++) { h ^= id.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; } return "r_" + h.toString(16).padStart(8, "0"); };
   const hashById = new Map(), idByHash = new Map();
   const visiting = new Set();
+  // Third-person doctrine gate: a referent whose rendered name is a person-
+  // pronoun ("you", "I") is NEVER admitted — caught here at the visitor so the
+  // gate covers every binding path (subjectRefOf, idOf, dative, bySentence,
+  // zaBind) in one place. The telling is the voice of the affected.
+  const isPersonName = (id) => { const nm = nameOfId(id); return nm === "you" || nm === "I"; };
   for (const c of clauses) {
-    const s = subjectRefOf(c); if (s && !visiting.has(s)) { visiting.add(s); const h = hashOf(s); hashById.set(s, h); idByHash.set(h, s); }
-    const o = idOf(face(c.object)); if (o && !visiting.has(o)) { visiting.add(o); const h = hashOf(o); hashById.set(o, h); idByHash.set(h, o); }
-    const d = idOf(face(c.dative)); if (d && !visiting.has(d)) { visiting.add(d); const h = hashOf(d); hashById.set(d, h); idByHash.set(h, d); }
+    const s = subjectRefOf(c); if (s && !isPersonName(s) && !visiting.has(s)) { visiting.add(s); const h = hashOf(s); hashById.set(s, h); idByHash.set(h, s); }
+    const o = idOf(face(c.object)); if (o && !isPersonName(o) && !visiting.has(o)) { visiting.add(o); const h = hashOf(o); hashById.set(o, h); idByHash.set(h, o); }
+    const d = idOf(face(c.dative)); if (d && !isPersonName(d) && !visiting.has(d)) { visiting.add(d); const h = hashOf(d); hashById.set(d, h); idByHash.set(h, d); }
   }
   const nameByHash = (h) => { const id = idByHash.get(h); return id ? nameOfId(id) : null; };
   const yes = (id) => (id ? hashById.get(id) : null);
