@@ -63,7 +63,26 @@ export async function readEnglish({ text = null, file = null, chars = null, out 
   const { bindings, gaps } = resolvePronounsByActivation(sents, refMap, { window: WIN, minActivation: MIN_A, minMargin: MIN_M, language: "eng", createActivation: (o) => createActivation({ window: o.window ?? WIN }), pronounClass: {}, namedScope: "local" });
   const bySentence = new Map();
   for (const b of bindings) bySentence.set(b.sentenceOrder, b);
-  const subjectRefOf = (c) => { if (c.subject) return idOf(c.subject) ?? null; return bySentence.get(c.order)?.referentId ?? null; };
+  // THE REFERENCE-BINDING TIER (2026-10-09, the shared gap, closed for English):
+  // 18,106 of 18,117 subjectless English clauses have a named being in the last
+  // 12 — the pronoun/pro-drop is recoverable from the ACTIVATED cast, with
+  // margin, language-agnostic (no pronoun table; the Greek loop, ported whole):
+  // "she listened" → elizabeth, when elizabeth is hot.
+  const zaAct = createActivation({ window: WIN });
+  const refBind = new Map(); const zaSeen = new Set();
+  const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const sMatcher2 = (() => { const u = [...new Set([...refMap.keys()].filter(Boolean))].sort((a, b) => b.length - a.length); return new RegExp(`(?<![\\p{L}\\p{N}])(?:${u.map(escapeRe).join("|")})(?![\\p{L}\\p{N}])`, "giu"); })();
+  for (const s of sents) {
+    const named = new Set(); sMatcher2.lastIndex = 0; let m; while (m = sMatcher2.exec(s.text), m) { const r = refMap.get(m[0]) ?? refMap.get(m[0].toLowerCase()); if (r) named.add(r); }
+    for (const c of clauses.filter((c) => c.order === s.order && !c.subject && !bySentence.has(c.order))) {
+      const top = [...zaSeen].map((r) => [r, zaAct.activationOf(r)]).sort((a, b) => b[1] - a[1]);
+      const [ref, score] = top[0] ?? [];
+      if (ref && score >= MIN_A) { const sc = top[1]?.[1] ?? 0; if (score > 0 && (score - sc) / score >= MIN_M) refBind.set(c.order, ref); }
+    }
+    for (const r of named) zaSeen.add(r);
+    zaAct.observe([...named]);
+  }
+  const subjectRefOf = (c) => { if (c.subject) return idOf(c.subject) ?? null; return bySentence.get(c.order)?.referentId ?? refBind.get(c.order) ?? null; };
 
   // learning + scene signal (the same admission)
   const holo = createHolograph({ gamma: 0.9 });
