@@ -542,8 +542,23 @@ export function greekClauses(sentText, verbs, posPrior, casePrior, { beings = []
       // bare — "ὁ θάνατος ἐστίν φόβος" has no article on φόβος. The DET
       // itself is never collected (the article is a case probe, not a being).
       const nominals = [];
+      // NOMINAL-LIKE (the NOUN side of the verbLike fallback, 2026-10-08): the
+      // POSPrior never saw forms like Τηλέμαχος, so nominalClass refuses and
+      // the actor vanishes. The case prior's nominalEndings DO vote them
+      // (-ος→Nom). Read here: a token whose ending votes a strong nominal
+      // case (share ≥ 0.8) is a nominal BY MEASURED ENDING — since the
+      // dominant class of a nominal-ending word is a noun. Never hand-typed.
+      const nominalLike = (w) => {
+        const c = caseOf(w, casePrior, { articleMode: "off" });
+        if (!(c && (c.case === "Nom" || c.case === "Acc" || c.case === "Gen" || c.case === "Dat"))) return false;
+        // VETO: a form the verb-endings attest as a personal verb is not a
+        // nominal, even if its ending also votes a case (ὁμάδησαν, -μαι, …).
+        const p = personOf(w, casePrior, {});
+        if (p && p.person >= 1) return false;
+        return true;
+      };
       for (let i = 0; i < seg.length; i += 1) {
-        const cls = nominalClass(seg[i].w, posPrior);
+        let cls = nominalClass(seg[i].w, posPrior);
         if (cls === "DET") {
           // A lone article is its phrase's head (τὰ μὲν ἐστιν — the things
           // ARE); an article with its noun is never doubled (ὁ κυβερνήτης).
@@ -551,6 +566,7 @@ export function greekClauses(sentText, verbs, posPrior, casePrior, { beings = []
           if (sub && !(auxPartRefuse && sub.case === "Nom" && verbAuxBare)) nominals.push({ head: seg[i].raw, headLower: seg[i].w, at: [seg[i].start, seg[i].end], case: sub.case, cell: sub.cell, caseSrc: sub.src });
           continue;
         }
+        if (!cls && nominalLike(seg[i].w)) cls = "NOUN";   // fallback tier: case-ending votes nominal
         if (!cls || !CLAUSE_NOMINAL.has(cls)) continue;
         const prevForms = seg.slice(Math.max(0, i - 3), i).map((t) => t.raw);
         const c = caseOf(seg[i].w, casePrior, { minShare, minCount, articleMode, prevForms, articleWindow, exceptionCases, markerCases });
@@ -559,6 +575,7 @@ export function greekClauses(sentText, verbs, posPrior, casePrior, { beings = []
       const nom = nominals.filter((n) => n.case === "Nom");
       const acc = nominals.filter((n) => n.case === "Acc");
       const gen = nominals.filter((n) => n.case === "Gen");
+      const dat = nominals.filter((n) => n.case === "Dat");
       const subject = nom.length ? (nom.find((n) => n.caseSrc !== "substantive" || !verbImp) ?? null) : null;
       // A BARE ARTICLE cannot predicate a copula ("τὰ ἐστιν τὰ" says
       // nothing), but an ending-marked accusative can BE a neuter predicate
@@ -588,12 +605,21 @@ export function greekClauses(sentText, verbs, posPrior, casePrior, { beings = []
           !(selfFoldRefuse && subject && strip(n.headLower) === strip(subject.headLower)));
         if (predNom) object = predNom;
       }
+      // THE DATIVE COMPLEMENT (the Field cell: "to / for whom"). Kept beside
+      // the Acc/Gen object as the clause's own third register — never merged
+      // into the object (the patient is Acc, the recipient is Dat). The dative
+      // is preferred AFTER the verb (the recipient follows the giving), and a
+      // dative that is merely the subject redressed (a Dat wearing the same
+      // stem) is refused as a self-fold. Measured source: the same ending vote.
+      let dative = dat.length ? (dat.find((n) => n.at[0] > v.end) ?? dat[0]) : null;
+      if (dative && subject && strip(dative.headLower) === strip(subject.headLower)) dative = null;
       sub.push({
         verb: v.raw,
-        subject, object,
+        subject, object, dative,
         subjectRef: subject ? beingRefOf(subject.headLower, beingsByStem) : null,
         objectRef: object ? beingRefOf(object.headLower, beingsByStem) : null,
-        subjectCell: subject?.cell ?? null, objectCell: object?.cell ?? null,
+        dativeRef: dative ? beingRefOf(dative.headLower, beingsByStem) : null,
+        subjectCell: subject?.cell ?? null, objectCell: object?.cell ?? null, dativeCell: dative?.cell ?? null,
       });
     }
     return sub;
@@ -602,8 +628,31 @@ export function greekClauses(sentText, verbs, posPrior, casePrior, { beings = []
     let subs = splitSubordinate(seg, { match: openerMatch });
     if (carry) subs = carryRelatives(subs, verbs);
     for (const sub of subs) {
+      // THE VERB SEARCH — the sole authority is the set the prior attests.
+      // MEASURED GAP (2026-10-08, the δ'-wall): inflected heads the POSPrior
+      // never saw (ὁμάδησαν, βαῖνε, ὁμάδησε …) drop the whole clause, so the
+      // actor vanishes from the telling. The endings table (the same prior's
+      // verbPersonalEndings, via personOf) attests them: a word whose ending
+      // votes an unambiguous personal person at a HIGH floor (≥0.8) is
+      // verb-like BY MEASUREMENT — never hand-typed, refused when contested.
+      // Elision is restored for the vote (βαῖν' → βαῖνε): the apostrophe cut
+      // the final vowel, and the ending-table only votes full endings.
+      const verbLike = (w) => {
+        if (verbs.has(w)) return true;
+        const bare = String(w ?? "");
+        const restore = (ind) => {
+          for (const v of ["ε", "ο", "α", "ι"]) {
+            const p = personOf(bare.slice(0, bare.length - 1) + v, casePrior, {});
+            if (p && p.person >= 1) return true;
+          }
+          return false;
+        };
+        const p = personOf(bare, casePrior, {});
+        if (p && p.person >= 1) return true;
+        return bare.endsWith("'") ? restore(bare) : false;
+      };
       const subVerbs = [];
-      for (let i = 0; i < sub.length; i += 1) if (verbs.has(sub[i].w)) subVerbs.push(i);
+      for (let i = 0; i < sub.length; i += 1) if (verbLike(sub[i].w)) subVerbs.push(i);
       if (!subVerbs.length) continue;
       out.push(...clausesOf(sub, subVerbs));
     }

@@ -38,17 +38,28 @@ const scenes = []; let cur = [];
 for (let i = 0; i < clauses.length; i++) { const rev = Number.isFinite(B[i]) && B[i] >= TH && B[i] > (B[i - 1] ?? 0) && B[i] >= (B[i + 1] ?? 0); if (rev && cur.length >= 4) { scenes.push(cur); cur = []; } cur.push(clauses[i]); }
 if (cur.length) scenes.push(cur);
 
-// ---- KHORA: the centered propositions (pro-drop -> scene center; pronoun -> center) ----
+// ---- KHORA: the centered propositions (pro-drop + the pronoun-articles -> scene center) ----
+// SEAM 1 fix: the Greek third-person pronoun-articles (οἱ/τοι/ὁ/ἡ/ὅς/οἵ/αἱ/σφε …) are the
+// text's anaphora for the established being — THEY resolve to the scene's named center by
+// recency (Grosz backward-looking center), never guessed when no center is established.
+const PRON_S = new Set(["οι","τοι","ο","η","οἱ","οι","αι","τοι","ος","ος","η","σφε","μιν","αυτος","αυτοι","αυτους","τουτο","τα","ων","το","τους","ον","ην","ο"]);
 const propOf = (c, center) => {
   const s = face(c.subject), o = face(c.object);
+  const sk = s ? stF(s) : "";
   const sName = s && nominalClass(s.toLowerCase(), posPrior) === "PROPN";
-  const cen = sName ? g(kindOf(s)) : center;
-  return { s: s ? (sName ? g(kindOf(s)) : g(s)) : (center || "◦"), v: g(c.verb || "·"), o: o ? (PRON_OBJ.has(stF(o)) ? `him(${center || "?"})` : g(o)) : "", center: cen, verb: String(c.verb ?? "·") };
+  const name = sName ? g(kindOf(s)) : null;
+  const centerNow = name ?? center;
+  let subj;
+  if (name) subj = name;
+  else if (PRON_S.has(sk)) subj = center || g(s) || "◦";     // a pronoun-article -> the named center
+  else if (s) subj = g(s);
+  else subj = center || "◦";                                  // pro-drop -> the named center
+  return { s: subj, v: g(c.verb || "·"), o: o ? (PRON_OBJ.has(stF(o)) ? `the one(${center || "?"})` : g(o)) : "", center: centerNow, verb: String(c.verb ?? "·") };
 };
 const scenesP = scenes.map((sc) => {
   let center = null; const props = [];
-  for (const c of sc) { const p = propOf(c, center); if (p.s !== "◦" && !p.s.startsWith("him")) center = p.s; else if (p.center) center = p.center; props.push(p); }
-  return { props, firstName: center };
+  for (const c of sc) { const p = propOf(c, center); center = p.center; props.push(p); }
+  return { props, named: center };
 });
 console.log(`${clauses.length} clauses · ${scenes.length} scenes (khora) — resolved to centered propositions\n`);
 
