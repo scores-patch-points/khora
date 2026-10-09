@@ -52,6 +52,37 @@ const askDesign = (being, other, at) => {
   }
   return { refused: "no recorded edge links them" };
 };
+// ── THE THREE GRAINS (2026-10-09) — Figure · Pattern · Ground ─────────────
+// The question-organ now ASKS AT THE GEOMETRY'S OWN THREE DEPTHS, the same
+// ladder the whole fold climbs. Grain is not a decoration: each depth asks a
+// different thing and answers from a different register of the record.
+//
+// FIGURE (the being + its act at a moment): what is happening right here.
+const askFigure = (being, at) => askWhat(being, at);
+// PATTERN (the recurrence, the kind): what does this being DO over the whole
+// read? Its acts aggregated into a standing mode — the mode is the kind the
+// being comes to mean (elizabeth: refuses, walks, feels — her Pattern).
+const askPattern = (being, at) => {
+  const deeds = edges.filter((e) => e.subject === byName(being));
+  const acts = new Map();
+  for (const e of deeds) { const a = String(e.action ?? ""); if (a.length > 2) acts.set(a, (acts.get(a) ?? 0) + 1); }
+  if (!acts.size) return { refused: "this being has no recurring recorded act" };
+  const mode = [...acts].sort((a, b) => b[1] - a[1]).slice(0, 3).map(([a, n]) => `${a}×${n}`).join(", ");
+  return { answer: "its own pattern across the read", kind: mode, deeds: deeds.length };
+};
+// GROUND (the standing frame at the address): who is ALSO present around the
+// being at this span — the cast the scene stands on, the unchanging backdrop
+// (the Void: what the present difference is measured against).
+const askGround = (being, at) => {
+  const near = edges.filter((e) => Math.abs(e.at - at) <= 12);
+  const co = new Set();
+  for (const e of near) {
+    const s = name.get(e.subject), o = name.get(e.object);
+    for (const b of [s, o]) if (b && b !== being && !ROLE_PRON.has(b) && b.length > 2 && (prominence.get(b) ?? 0) >= 3) co.add(b);
+  }
+  if (!co.size) return { refused: "the read holds no standing cast around it here" };
+  return { answer: "the standing frame here", cast: [...co].slice(0, 5).join(", "), n: co.size };
+};
 const byName = (n) => { const h = eot.referents.find((r) => r.name === n); return h ? h.hash : null; };
 
 // THE LOOP: walk the read; at each moment, the HOTTEST being (max local
@@ -99,23 +130,25 @@ for (const being of castOrder) {
   if (!deeds.length) continue;
   const at = deeds[0].at;
   asked.add(being);
-  const q = [1, 1, 2, 1, 0, 1, 2][qSeq++ % 7];
+  // THE THREE GRAINS, ROTATED: Figure (the act), Pattern (the recurrence),
+  // Ground (the standing frame) — the cube's grain ladder, asked in order.
+  const grain = ["Figure", "Pattern", "Ground"][qSeq++ % 3];
   let r;
-  if (q === 0) r = askWho(being, at);
-  else if (q === 1) r = askWhat(being, at);
-  else {
-    const other = [...name.values()].filter((b) => !ROLE_PRON.has(b) && b !== being);
-    r = askDesign(being, other[qSeq % other.length] ?? null, at);
-  }
-  qlog.push({ at, being, q: ["who is acting toward it?", "what is happening to it here?", "why is it aligned with the next?"][q], ...r });
+  if (grain === "Figure") r = askFigure(being, at);
+  else if (grain === "Pattern") r = askPattern(being, at);
+  else r = askGround(being, at);
+  const qTxt = grain === "Figure" ? `${being}'s act here?` : grain === "Pattern" ? `what ${being} does across the read?` : `who stands with ${being} here?`;
+  qlog.push({ at, being, grain, q: qTxt, ...r });
   questions++;
 }
 
-console.log(`THE QUESTIONS — an interrogative reading of ${path.split("/").pop()} (no model):\n`);
+console.log(`THE QUESTIONS — an interrogative reading at the THREE GRAINS of ${path.split("/").pop()} (no model):\n`);
 for (const q of qlog) {
   const verb = q.refused ? "REFUSED" : "ANSWERED";
-  console.log(`  [at ${String(q.at).padStart(4)}] ${q.being} — ${q.q}`);
+  console.log(`  [${q.grain.padEnd(7)} at ${String(q.at).padStart(4)}] ${q.being} — ${q.q}`);
   if (q.refused) console.log(`       ✗ ${q.refused}`);
+  else if (q.grain === "Pattern") console.log(`       ✓ ${q.answer}: ${q.kind}`);
+  else if (q.grain === "Ground") console.log(`       ✓ ${q.answer}: ${q.cast}`);
   else console.log(`       ✓ ${q.answer}${q.who ? ` by ${q.who}` : ""}${q.via ? ` via ${q.via}` : ""}`);
 }
-console.log(`\n${questions} questions asked; ${qlog.filter((x) => !x.refused).length} answered, ${qlog.filter((x) => x.refused).length} refused.`);
+console.log(`\n${questions} questions asked at 3 grains; ${qlog.filter((x) => !x.refused).length} answered, ${qlog.filter((x) => x.refused).length} refused.`);
