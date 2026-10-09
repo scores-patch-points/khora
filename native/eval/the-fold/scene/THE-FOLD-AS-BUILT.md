@@ -148,7 +148,26 @@ identity. Verifying quotes by string-splitting is WRONG; verify by construction
   (boarding clause).
 - the-fold `scores-patch-points`: `0e6b975` (homeric-witness).
 
-## 8. Open seams (refused, never typed shut)
+## 8. Cross-lingual — the Sanskrit seam (2026-10-09)
+
+The architecture was always one seam with many priors. `greekClauses` is
+parameterized by a prior set; janus already carried the Sanskrit priors
+(`case-marking-san.json`, `pos-san.json` — 228 nominal endings, 530 verb
+endings, 31,132 POS forms). `reader-san.mjs` reuses the SAME machinery (case-
+vote, personOf, activation, admit, the EOT schema) with the Sanskrit priors
+and the Rigveda (IAST, GRETIL) as material.
+
+- Measured: 60,000 chars → 2,098 clauses, 1,206 sentences, 499 referents in
+  ~944ms; Agni (agn) appears as OBJECT 23× — the hymns invoke the fire-god
+  (agnim īḻe "Agni I praise", dūtam "the messenger", vṛṇīmahe "we choose").
+- The seams are the SAME janus builds: stem-normalization (inflections → one
+  being; Sanskrit has 31k forms but each surface is its own referent until a
+  san-lemma layer unifies), pronouns→referent (sva/aham/tvam), and a Sanskrit
+  gloss dictionary for names (translate-san) — the Greek dictionary is Greek.
+- The tokenizer is shared (`\p{L}` catches IAST); sentence-split on ॥|; no
+  Sanskrit articles (articleMode "off").
+
+## 9. Open seams (refused, never typed shut)
 
 - **Cube**: Kind (INS·Pattern) needs an Aspect prior; Unraveling (SEG·Pattern)
   needs a VerbForm prior — both are janus measurements, not seam patches.
