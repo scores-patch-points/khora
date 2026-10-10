@@ -1,0 +1,1668 @@
+{
+ "protocolSha256": "3b7363c5b01642c06ad5df8d059e5909f237516481e0ed8af3379aa39c4330fc",
+ "A": {
+  "baseReproducesAtlasMaxAbsDiff": 0,
+  "size": {
+   "tok7500_r0": {
+    "Pplus": "17+0opp / sign 111/117",
+    "Pminus": "21+0opp / sign 50/51"
+   },
+   "tok7500_r1": {
+    "Pplus": "22+0opp / sign 110/115",
+    "Pminus": "18+0opp / sign 49/51"
+   },
+   "tok20000": {
+    "Pplus": "42+0opp / sign 99/102",
+    "Pminus": "32+0opp / sign 51/51"
+   }
+  },
+  "tokenisation": {
+   "drop1pct": {
+    "Pplus": "113+0opp / sign 126/126",
+    "Pminus": "49+0opp / sign 53/53"
+   },
+   "dropHapax": {
+    "Pplus": "96+0opp / sign 126/126",
+    "Pminus": "44+0opp / sign 52/53"
+   },
+   "trunc5": {
+    "Pplus": "107+2opp / sign 124/126",
+    "Pminus": "42+0opp / sign 53/53"
+   },
+   "plugin": {
+    "Pplus": "126+0opp / sign 126/126",
+    "Pminus": "53+0opp / sign 53/53"
+   }
+  },
+  "binGranularityPresentPockets": {
+   "binHalf": {
+    "Pplus": "91+1opp / sign 124/126",
+    "Pminus": "38+2opp / sign 47/53",
+    "medianRetentionMinus": 0.5658506270772865
+   },
+   "binMass4": {
+    "Pplus": "106+5opp / sign 119/126",
+    "Pminus": "11+31opp / sign 15/53",
+    "medianRetentionMinus": -0.19424245950488686
+   }
+  },
+  "binSweepAllPockets": {
+   "oct": {
+    "all": "P+126 P-53",
+    "word": "P+106 P-13 pos 0.814",
+    "code": "P+14 P-32 pos 0.394"
+   },
+   "oct2": {
+    "all": "P+127 P-49",
+    "word": "P+109 P-10 pos 0.804",
+    "code": "P+15 P-29 pos 0.379"
+   },
+   "half": {
+    "all": "P+118 P-44",
+    "word": "P+96 P-15 pos 0.811",
+    "code": "P+15 P-20 pos 0.5"
+   },
+   "mass2": {
+    "all": "P+298 P-23",
+    "word": "P+236 P-15 pos 0.895",
+    "code": "P+45 P-5 pos 0.864"
+   },
+   "mass3": {
+    "all": "P+287 P-29",
+    "word": "P+223 P-14 pos 0.885",
+    "code": "P+47 P-9 pos 0.788"
+   },
+   "mass4": {
+    "all": "P+281 P-24",
+    "word": "P+223 P-11 pos 0.902",
+    "code": "P+42 P-10 pos 0.803"
+   },
+   "mass8": {
+    "all": "P+257 P-28",
+    "word": "P+199 P-12 pos 0.882",
+    "code": "P+44 P-11 pos 0.758"
+   },
+   "mass16": {
+    "all": "P+226 P-16",
+    "word": "P+165 P-5 pos 0.902",
+    "code": "P+45 P-6 pos 0.788"
+   }
+  },
+  "meanUnitLength10_reRanked": {
+   "len10full_minusRetention": 0.36797453840287897,
+   "len10full_minusSignKept": "34/42",
+   "tok7500len10_minusRetention": 0.25646880665917254,
+   "tok7500len10_minusSignKept": "34/50",
+   "signByKind": {
+    "word-grain": {
+     "n": 69,
+     "medianV": 0.00772,
+     "share_pos": 0.812
+    },
+    "code-grain": {
+     "n": 36,
+     "medianV": -0.00059,
+     "share_pos": 0.472
+    },
+    "notation": {
+     "n": 5,
+     "medianV": 0.02231,
+     "share_pos": 1
+    },
+    "charbigram": {
+     "n": 4,
+     "medianV": -0.05019,
+     "share_pos": 0
+    }
+   }
+  },
+  "meanUnitLength10_fixedRanks": {
+   "len10": {
+    "fixedRanks": {
+     "word-grain P+": {
+      "n": 103,
+      "medianRetention": 1.244,
+      "signKeptShare": 0.99
+     },
+     "code-grain P-": {
+      "n": 32,
+      "medianRetention": 0.897,
+      "signKeptShare": 0.969
+     },
+     "word-grain P-": {
+      "n": 30,
+      "medianRetention": 0.837,
+      "signKeptShare": 0.8
+     },
+     "charbigram P-": {
+      "n": 5,
+      "medianRetention": 0.964,
+      "signKeptShare": 1
+     },
+     "code-grain P+": {
+      "n": 20,
+      "medianRetention": 0.41,
+      "signKeptShare": 0.7
+     }
+    },
+    "reRanked": {
+     "word-grain P+": {
+      "n": 57,
+      "medianRetention": 1.161,
+      "signKeptShare": 0.982
+     },
+     "code-grain P-": {
+      "n": 26,
+      "medianRetention": 0.111,
+      "signKeptShare": 0.692
+     },
+     "word-grain P-": {
+      "n": 12,
+      "medianRetention": 1.411,
+      "signKeptShare": 1
+     },
+     "charbigram P-": {
+      "n": 4,
+      "medianRetention": 1.292,
+      "signKeptShare": 1
+     },
+     "code-grain P+": {
+      "n": 10,
+      "medianRetention": 0.633,
+      "signKeptShare": 0.9
+     }
+    }
+   },
+   "tok7500len10": {
+    "fixedRanks": {
+     "word-grain P+": {
+      "n": 165,
+      "medianRetention": 1.394,
+      "signKeptShare": 0.964
+     },
+     "code-grain P-": {
+      "n": 40,
+      "medianRetention": 0.896,
+      "signKeptShare": 0.975
+     },
+     "word-grain P-": {
+      "n": 40,
+      "medianRetention": 0.883,
+      "signKeptShare": 0.8
+     },
+     "charbigram P-": {
+      "n": 6,
+      "medianRetention": 1.232,
+      "signKeptShare": 1
+     },
+     "code-grain P+": {
+      "n": 23,
+      "medianRetention": 0.219,
+      "signKeptShare": 0.739
+     }
+    },
+    "reRanked": {
+     "word-grain P+": {
+      "n": 94,
+      "medianRetention": 1.309,
+      "signKeptShare": 0.947
+     },
+     "code-grain P-": {
+      "n": 32,
+      "medianRetention": 0.032,
+      "signKeptShare": 0.531
+     },
+     "word-grain P-": {
+      "n": 13,
+      "medianRetention": 1.676,
+      "signKeptShare": 1
+     },
+     "charbigram P-": {
+      "n": 5,
+      "medianRetention": 2.227,
+      "signKeptShare": 1
+     },
+     "code-grain P+": {
+      "n": 12,
+      "medianRetention": 0.436,
+      "signKeptShare": 0.75
+     }
+    }
+   },
+   "tok7500": {
+    "fixedRanks": {
+     "word-grain P+": {
+      "n": 194,
+      "medianRetention": 1.009,
+      "signKeptShare": 0.964
+     },
+     "code-grain P-": {
+      "n": 40,
+      "medianRetention": 1.032,
+      "signKeptShare": 1
+     },
+     "word-grain P-": {
+      "n": 45,
+      "medianRetention": 0.944,
+      "signKeptShare": 0.867
+     },
+     "charbigram P-": {
+      "n": 8,
+      "medianRetention": 0.99,
+      "signKeptShare": 1
+     },
+     "code-grain P+": {
+      "n": 26,
+      "medianRetention": 0.993,
+      "signKeptShare": 0.962
+     }
+    },
+    "reRanked": {
+     "word-grain P+": {
+      "n": 99,
+      "medianRetention": 1.041,
+      "signKeptShare": 0.939
+     },
+     "code-grain P-": {
+      "n": 32,
+      "medianRetention": 1.432,
+      "signKeptShare": 0.969
+     },
+     "word-grain P-": {
+      "n": 13,
+      "medianRetention": 2.286,
+      "signKeptShare": 1
+     },
+     "charbigram P-": {
+      "n": 6,
+      "medianRetention": 1.912,
+      "signKeptShare": 1
+     },
+     "code-grain P+": {
+      "n": 14,
+      "medianRetention": 0.629,
+      "signKeptShare": 0.929
+     }
+    }
+   }
+  },
+  "strataFixedRanks": {
+   "3-5": {
+    "word": {
+     "n": 93,
+     "medianV": 0.03172,
+     "sharePos": 0.968
+    },
+    "code": {
+     "n": 66,
+     "medianV": 0.00452,
+     "sharePos": 0.621
+    }
+   },
+   "6-9": {
+    "word": {
+     "n": 161,
+     "medianV": 0.0143,
+     "sharePos": 0.901
+    },
+    "code": {
+     "n": 65,
+     "medianV": -0.00933,
+     "sharePos": 0.338
+    }
+   },
+   "10-15": {
+    "word": {
+     "n": 175,
+     "medianV": 0.00743,
+     "sharePos": 0.863
+    },
+    "code": {
+     "n": 63,
+     "medianV": -0.00742,
+     "sharePos": 0.27
+    }
+   },
+   "16-30": {
+    "word": {
+     "n": 199,
+     "medianV": 0.00325,
+     "sharePos": 0.784
+    },
+    "code": {
+     "n": 19,
+     "medianV": -0.00519,
+     "sharePos": 0.263
+    }
+   },
+   "31-inf": {
+    "word": {
+     "n": 119,
+     "medianV": 0.00109,
+     "sharePos": 0.773
+    },
+    "code": {
+     "n": 2,
+     "medianV": 0.00021,
+     "sharePos": 0.5
+    }
+   }
+  },
+  "withinPocketSignChange": {
+   "pocketsWith2plusStrata": 299,
+   "signChangesAcrossStrata": 99,
+   "shortPos_longNeg": 72,
+   "shortNeg_longPos": 5
+  }
+ },
+ "B": {
+  "n": 390,
+  "maxPartialRho2": {
+   "v": 0.2957,
+   "z": 0.2522,
+   "sign": 0.4433
+  },
+  "top": [
+   {
+    "stat": "order.rareCurve",
+    "n": 390,
+    "rawRho": 0.5809,
+    "partialRho": 0.5438,
+    "partialRho2": 0.2957
+   },
+   {
+    "stat": "fig.introLeft",
+    "n": 384,
+    "rawRho": 0.4693,
+    "partialRho": 0.4287,
+    "partialRho2": 0.1838
+   },
+   {
+    "stat": "order.surprGrow",
+    "n": 390,
+    "rawRho": -0.4516,
+    "partialRho": -0.3857,
+    "partialRho2": 0.1488
+   },
+   {
+    "stat": "burst.kerFar",
+    "n": 390,
+    "rawRho": -0.3176,
+    "partialRho": -0.3717,
+    "partialRho2": 0.1381
+   },
+   {
+    "stat": "order.finalDev",
+    "n": 390,
+    "rawRho": 0.2538,
+    "partialRho": 0.3356,
+    "partialRho2": 0.1126
+   }
+  ],
+  "topSign": [
+   {
+    "stat": "order.rareCurve",
+    "n": 179,
+    "rawRho": 0.7026,
+    "partialRho": 0.6658,
+    "partialRho2": 0.4433
+   },
+   {
+    "stat": "burst.kerFar",
+    "n": 179,
+    "rawRho": -0.6894,
+    "partialRho": -0.549,
+    "partialRho2": 0.3014
+   },
+   {
+    "stat": "burst.repAdj",
+    "n": 179,
+    "rawRho": -0.6501,
+    "partialRho": -0.4926,
+    "partialRho2": 0.2427
+   },
+   {
+    "stat": "fig.introLeft",
+    "n": 178,
+    "rawRho": 0.5173,
+    "partialRho": 0.4826,
+    "partialRho2": 0.2329
+   }
+  ],
+  "rivalReaches07": {
+   "v": [],
+   "z": [],
+   "sign": []
+  },
+  "forward": {
+   "statsComplete": 54,
+   "controlsOnlyCvR2": 0.069,
+   "steps": [
+    {
+     "add": "order.rareCurve",
+     "cvR2": 0.3372
+    },
+    {
+     "add": "fig.initFollow",
+     "cvR2": 0.393
+    },
+    {
+     "add": "order.rareSlope",
+     "cvR2": 0.4293
+    },
+    {
+     "add": "order.entSlope",
+     "cvR2": 0.4908
+    },
+    {
+     "add": "phys.massAdd",
+     "cvR2": 0.5277
+    },
+    {
+     "add": "order.asym",
+     "cvR2": 0.5369
+    }
+   ]
+  },
+  "residual": {
+   "bestRival": "order.rareCurve",
+   "eta2": {
+    "register": {
+     "raw": 0.3648,
+     "afterControls": 0.295,
+     "afterBestRival": 0.2083,
+     "afterForward6": 0.1185,
+     "levels": 36
+    },
+    "group": {
+     "raw": 0.0933,
+     "afterControls": 0.0559,
+     "afterBestRival": 0.0262,
+     "afterForward6": 0.0251,
+     "levels": 6
+    },
+    "grain": {
+     "raw": 0.1193,
+     "afterControls": 0.1032,
+     "afterBestRival": 0.0342,
+     "afterForward6": 0.0093,
+     "levels": 4
+    },
+    "script": {
+     "raw": 0.0958,
+     "afterControls": 0.1216,
+     "afterBestRival": 0.0506,
+     "afterForward6": 0.0339,
+     "levels": 10
+    }
+   }
+  },
+  "signAccuracy": {
+   "baseRateMajority": 0.7039,
+   "top": [
+    {
+     "stat": "order.rareCurve",
+     "accuracy": 0.8939,
+     "n": 179
+    },
+    {
+     "stat": "burst.kerFar",
+     "accuracy": 0.7039,
+     "n": 179
+    },
+    {
+     "stat": "burst.repAdj",
+     "accuracy": 0.1844,
+     "n": 179
+    },
+    {
+     "stat": "fig.introLeft",
+     "accuracy": 0.3596,
+     "n": 178
+    },
+    {
+     "stat": "para.lcsLift",
+     "accuracy": 0.6983,
+     "n": 179
+    },
+    {
+     "stat": "order.branch",
+     "accuracy": 0.2402,
+     "n": 179
+    },
+    {
+     "stat": "order.finalDev",
+     "accuracy": 0.7095,
+     "n": 179
+    },
+    {
+     "stat": "fig.arrival",
+     "accuracy": 0.7039,
+     "n": 179
+    }
+   ],
+   "rareCurve": {
+    "stat": "order.rareCurve",
+    "accuracy": 0.8939,
+    "n": 179
+   },
+   "rareSlope": {
+    "stat": "order.rareSlope",
+    "accuracy": 0.6983,
+    "n": 179
+   },
+   "entSlope": {
+    "stat": "order.entSlope",
+    "accuracy": 0.7151,
+    "n": 179
+   }
+  }
+ },
+ "C": {
+  "C0": {
+   "exactNullTail": {
+    "oneSidedP_z_ge4": 0.002064332672194282,
+    "twoSidedP": 0.004128665344388564,
+    "presentPerCell": 0.000008522938762977568,
+    "absentBothHalves_given_null": 0.8301069937704744
+   },
+   "entCurv": {
+    "cells": 390,
+    "present": 179,
+    "expectedFalsePresent_exactT9": 0.00332,
+    "expectedFalsePresent_atlasRate": 0.0331,
+    "binomialP_atLeastObserved_exactT9": "< 1e-300 (underflow)"
+   },
+   "iid": {
+    "pockets": 2,
+    "halfCells": 4,
+    "absZge4": 0,
+    "absZge2": 1,
+    "present": 0,
+    "maxAbsZ": 2.21
+   },
+   "controls": {
+    "pockets": 20,
+    "halfCells": 40,
+    "absZge4": 0,
+    "absZge2": 4,
+    "present": 0,
+    "maxAbsZ": 2.52
+   },
+   "selection": {
+    "statsWithReversalOrPocketSpecific": 39,
+    "ofWhichSharedPmaxBelow005": 39,
+    "totalStats": 81,
+    "note": "entCurv was one of the top 8 by heterogeneity among these; a selection among ~39 candidates, not among 81"
+   }
+  },
+  "C1": {
+   "presence": [
+    {
+     "attr": "group",
+     "eta2": 0.0589,
+     "p": 0.0015,
+     "levels": 6
+    },
+    {
+     "attr": "register",
+     "eta2": 0.1922,
+     "p": 0.0005,
+     "levels": 36
+    },
+    {
+     "attr": "script",
+     "eta2": 0.0222,
+     "p": 0.47876,
+     "levels": 10
+    },
+    {
+     "attr": "tokens",
+     "eta2": 0.0954,
+     "p": 0.0005
+    },
+    {
+     "attr": "meanUnitLength",
+     "eta2": 0.1578,
+     "p": 0.0005
+    },
+    {
+     "attr": "docs",
+     "eta2": 0.1214,
+     "p": 0.0005
+    }
+   ],
+   "sign": [
+    {
+     "attr": "group",
+     "eta2": 0.2957,
+     "p": 0.0005,
+     "levels": 6
+    },
+    {
+     "attr": "register",
+     "eta2": 0.5532,
+     "p": 0.0005,
+     "levels": 26
+    },
+    {
+     "attr": "script",
+     "eta2": 0.2121,
+     "p": 0.0005,
+     "levels": 8
+    },
+    {
+     "attr": "tokens",
+     "eta2": 0.1053,
+     "p": 0.0005
+    },
+    {
+     "attr": "meanUnitLength",
+     "eta2": 0.1731,
+     "p": 0.0005
+    },
+    {
+     "attr": "docs",
+     "eta2": 0.1344,
+     "p": 0.0005
+    }
+   ],
+   "expectedEta2": [
+    0.0926,
+    0.138
+   ]
+  },
+  "C2": {
+   "strata": "group",
+   "presence": [
+    {
+     "attr": "register",
+     "eta2": 0.1922,
+     "expectedUnderStratifiedPerm": 0.1319,
+     "p": 0.0015
+    },
+    {
+     "attr": "script",
+     "eta2": 0.0222,
+     "expectedUnderStratifiedPerm": 0.0268,
+     "p": 0.65817
+    },
+    {
+     "attr": "tokens",
+     "eta2": 0.0954,
+     "expectedUnderStratifiedPerm": 0.0167,
+     "p": 0.0005
+    },
+    {
+     "attr": "meanUnitLength",
+     "eta2": 0.1578,
+     "expectedUnderStratifiedPerm": 0.011,
+     "p": 0.0005
+    },
+    {
+     "attr": "docs",
+     "eta2": 0.1214,
+     "expectedUnderStratifiedPerm": 0.0095,
+     "p": 0.0005
+    }
+   ],
+   "sign": [
+    {
+     "attr": "register",
+     "eta2": 0.5532,
+     "expectedUnderStratifiedPerm": 0.3617,
+     "p": 0.0005
+    },
+    {
+     "attr": "script",
+     "eta2": 0.2121,
+     "expectedUnderStratifiedPerm": 0.0448,
+     "p": 0.0005
+    },
+    {
+     "attr": "tokens",
+     "eta2": 0.1053,
+     "expectedUnderStratifiedPerm": 0.051,
+     "p": 0.02499
+    },
+    {
+     "attr": "meanUnitLength",
+     "eta2": 0.1731,
+     "expectedUnderStratifiedPerm": 0.0866,
+     "p": 0.0075
+    },
+    {
+     "attr": "docs",
+     "eta2": 0.1344,
+     "expectedUnderStratifiedPerm": 0.0493,
+     "p": 0.0025
+    }
+   ],
+   "strataByGrain": {
+    "presence": [
+     {
+      "attr": "register",
+      "eta2": 0.1922,
+      "expectedUnderStratifiedPerm": 0.1263,
+      "p": 0.0005
+     },
+     {
+      "attr": "meanUnitLength",
+      "eta2": 0.1578,
+      "expectedUnderStratifiedPerm": 0.0238,
+      "p": 0.0005
+     }
+    ],
+    "sign": [
+     {
+      "attr": "register",
+      "eta2": 0.5532,
+      "expectedUnderStratifiedPerm": 0.3617,
+      "p": 0.0005
+     },
+     {
+      "attr": "meanUnitLength",
+      "eta2": 0.1731,
+      "expectedUnderStratifiedPerm": 0.141,
+      "p": 0.13093
+     },
+     {
+      "attr": "script",
+      "eta2": 0.2121,
+      "expectedUnderStratifiedPerm": 0.0946,
+      "p": 0.0005
+     }
+    ]
+   }
+  },
+  "C3": {
+   "presence": {
+    "removed": 390,
+    "bestStillRegister": 390,
+    "registerEta2Range": [
+     0.1897,
+     0.1993
+    ],
+    "registerMaxP": 0.01,
+    "maxPMaxAcrossAttrs": 0.005,
+    "minP_possible": 0.005,
+    "worst": [
+     [
+      "bk-cryptic",
+      0.1897,
+      0.005
+     ],
+     [
+      "cd-cc-json",
+      0.1897,
+      0.005
+     ],
+     [
+      "cd-cc-toml",
+      0.1897,
+      0.005
+     ],
+     [
+      "cd-cc-yaml",
+      0.1897,
+      0.005
+     ],
+     [
+      "cd-gene-products",
+      0.1897,
+      0.005
+     ]
+    ]
+   },
+   "sign": {
+    "removed": 179,
+    "bestStillRegister": 179,
+    "registerEta2Range": [
+     0.5471,
+     0.572
+    ],
+    "registerMaxP": 0.005,
+    "maxPMaxAcrossAttrs": 0.005,
+    "minP_possible": 0.005,
+    "worst": [
+     [
+      "cd-cc-html",
+      0.5471,
+      0.005
+     ],
+     [
+      "cd-cc-svelte",
+      0.5471,
+      0.005
+     ],
+     [
+      "ml-lzh-shuowen",
+      0.5471,
+      0.005
+     ],
+     [
+      "cd-cc-bash",
+      0.5477,
+      0.005
+     ],
+     [
+      "cd-cc-commonlisp",
+      0.5477,
+      0.005
+     ]
+    ]
+   }
+  },
+  "C4_nocode": {
+   "nLeft": 113,
+   "nPlus": 106,
+   "nMinus": 7,
+   "shared": {
+    "n": 113,
+    "nPresent": 106,
+    "rows": [
+     {
+      "attr": "group",
+      "eta2": 0.1771,
+      "p": 0.004,
+      "levels": 6
+     },
+     {
+      "attr": "register",
+      "eta2": 0.2925,
+      "p": 0.08791,
+      "levels": 20
+     },
+     {
+      "attr": "script",
+      "eta2": 0.2766,
+      "p": 0.00999,
+      "levels": 6
+     },
+     {
+      "attr": "tokens",
+      "eta2": 0.0021,
+      "p": 0.65534
+     },
+     {
+      "attr": "meanUnitLength",
+      "eta2": 0.0192,
+      "p": 0.15784
+     },
+     {
+      "attr": "docs",
+      "eta2": 0.0025,
+      "p": 0.59241
+     }
+    ],
+    "best": {
+     "attr": "register",
+     "eta2": 0.2925,
+     "p": 0.08791208791208792
+    },
+    "pMax": 0.01598
+   }
+  },
+  "C5": {
+   "sign": {
+    "n": 179,
+    "majorityBaseline": 0.7039,
+    "register": 0.8603,
+    "group": 0.7654,
+    "grain": 0.8436,
+    "script": 0.7709,
+    "language": 0.7765,
+    "meanUnitLength_threshold": 0.7598,
+    "tokens_threshold": 0.6704,
+    "rareCurveSign": null,
+    "rareCurveSignAgreement": 0.8939
+   },
+   "presence": {
+    "n": 390,
+    "majorityBaseline": 0.541,
+    "register": 0.5974,
+    "group": 0.4897,
+    "grain": 0.6179,
+    "script": 0.5308,
+    "language": 0.5333,
+    "meanUnitLength_threshold": 0.6615,
+    "tokens_threshold": 0.641,
+    "rareCurveSign": null,
+    "rareCurveSignAgreement": 0.4077
+   }
+  },
+  "C6": {
+   "P_minus_all": 53,
+   "byGrain": {
+    "word": {
+     "plus": 106,
+     "minus": 13
+    },
+    "code": {
+     "plus": 14,
+     "minus": 32
+    },
+    "notation": {
+     "plus": 6,
+     "minus": 1
+    },
+    "charbigram": {
+     "plus": 0,
+     "minus": 7
+    }
+   },
+   "wordGrainMinus": [
+    {
+     "id": "fm-law-ar",
+     "register": "legal",
+     "language": "es",
+     "script": "latn",
+     "mul": 8.3,
+     "v": -0.0051
+    },
+    {
+     "id": "fm-pali-dn",
+     "register": "scripture",
+     "language": "pi",
+     "script": "latn",
+     "mul": 8.7,
+     "v": -0.0091
+    },
+    {
+     "id": "fm-pali-mn",
+     "register": "scripture",
+     "language": "pi",
+     "script": "latn",
+     "mul": 9.1,
+     "v": -0.0076
+    },
+    {
+     "id": "fm-sanskrit",
+     "register": "scripture",
+     "language": "sa",
+     "script": "latn",
+     "mul": 6.7,
+     "v": -0.0171
+    },
+    {
+     "id": "fm-talmud-kodashim",
+     "register": "scripture",
+     "language": "arc",
+     "script": "hebr",
+     "mul": 6.9,
+     "v": -0.0062
+    },
+    {
+     "id": "fm-talmud-moed",
+     "register": "scripture",
+     "language": "arc",
+     "script": "hebr",
+     "mul": 6.5,
+     "v": -0.0023
+    },
+    {
+     "id": "fm-talmud-nashim",
+     "register": "scripture",
+     "language": "arc",
+     "script": "hebr",
+     "mul": 6.6,
+     "v": -0.0059
+    },
+    {
+     "id": "fm-talmud-nezikin",
+     "register": "scripture",
+     "language": "arc",
+     "script": "hebr",
+     "mul": 6.6,
+     "v": -0.0054
+    },
+    {
+     "id": "fm-udhr-cyrl",
+     "register": "legal",
+     "language": "mul",
+     "script": "cyrl",
+     "mul": 13.5,
+     "v": -0.033
+    },
+    {
+     "id": "fm-udhr-other",
+     "register": "legal",
+     "language": "mul",
+     "script": "multi",
+     "mul": 14.7,
+     "v": -0.018
+    },
+    {
+     "id": "fm-wlc-latter",
+     "register": "scripture",
+     "language": "hbo",
+     "script": "hebr",
+     "mul": 14.5,
+     "v": -0.0133
+    },
+    {
+     "id": "fm-wlc-poetry",
+     "register": "scripture",
+     "language": "hbo",
+     "script": "hebr",
+     "mul": 8.2,
+     "v": -0.0271
+    },
+    {
+     "id": "ml-san-rigveda",
+     "register": "scripture",
+     "language": "san",
+     "script": "latn",
+     "mul": 7.6,
+     "v": -0.0126
+    }
+   ]
+  }
+ },
+ "A5_edgeAblation": {
+  "word P+": {
+   "n": 106,
+   "dropFirst": {
+    "evaluated": 106,
+    "sameSignShare": 0.981,
+    "medianRetention": 0.708,
+    "PRESENTsame": 65,
+    "PRESENTopp": 0
+   },
+   "dropLast": {
+    "evaluated": 106,
+    "sameSignShare": 0.887,
+    "medianRetention": 0.671,
+    "PRESENTsame": 53,
+    "PRESENTopp": 2
+   }
+  },
+  "word P-": {
+   "n": 13,
+   "dropFirst": {
+    "evaluated": 13,
+    "sameSignShare": 0.923,
+    "medianRetention": 0.647,
+    "PRESENTsame": 5,
+    "PRESENTopp": 0
+   },
+   "dropLast": {
+    "evaluated": 13,
+    "sameSignShare": 1,
+    "medianRetention": 1.288,
+    "PRESENTsame": 10,
+    "PRESENTopp": 0
+   }
+  },
+  "code P-": {
+   "n": 32,
+   "dropFirst": {
+    "evaluated": 32,
+    "sameSignShare": 0.531,
+    "medianRetention": 0.003,
+    "PRESENTsame": 5,
+    "PRESENTopp": 6
+   },
+   "dropLast": {
+    "evaluated": 32,
+    "sameSignShare": 0.875,
+    "medianRetention": 0.724,
+    "PRESENTsame": 22,
+    "PRESENTopp": 2
+   }
+  },
+  "code P+": {
+   "n": 14,
+   "dropFirst": {
+    "evaluated": 14,
+    "sameSignShare": 0.643,
+    "medianRetention": 0.402,
+    "PRESENTsame": 7,
+    "PRESENTopp": 3
+   },
+   "dropLast": {
+    "evaluated": 14,
+    "sameSignShare": 0.929,
+    "medianRetention": 1.049,
+    "PRESENTsame": 11,
+    "PRESENTopp": 1
+   }
+  },
+  "charbigram P-": {
+   "n": 7,
+   "dropFirst": {
+    "evaluated": 7,
+    "sameSignShare": 1,
+    "medianRetention": 0.864,
+    "PRESENTsame": 6,
+    "PRESENTopp": 0
+   },
+   "dropLast": {
+    "evaluated": 7,
+    "sameSignShare": 0.429,
+    "medianRetention": -0.023,
+    "PRESENTsame": 2,
+    "PRESENTopp": 1
+   }
+  },
+  "notation P+": {
+   "n": 6,
+   "dropFirst": {
+    "evaluated": 6,
+    "sameSignShare": 0.833,
+    "medianRetention": 0.593,
+    "PRESENTsame": 3,
+    "PRESENTopp": 0
+   },
+   "dropLast": {
+    "evaluated": 6,
+    "sameSignShare": 1,
+    "medianRetention": 1.109,
+    "PRESENTsame": 6,
+    "PRESENTopp": 0
+   }
+  },
+  "all P+": {
+   "n": 126,
+   "dropFirst": {
+    "evaluated": 126,
+    "sameSignShare": 0.937,
+    "medianRetention": 0.684,
+    "PRESENTsame": 75,
+    "PRESENTopp": 3
+   },
+   "dropLast": {
+    "evaluated": 126,
+    "sameSignShare": 0.897,
+    "medianRetention": 0.736,
+    "PRESENTsame": 70,
+    "PRESENTopp": 3
+   }
+  },
+  "all P-": {
+   "n": 53,
+   "dropFirst": {
+    "evaluated": 53,
+    "sameSignShare": 0.698,
+    "medianRetention": 0.267,
+    "PRESENTsame": 17,
+    "PRESENTopp": 6
+   },
+   "dropLast": {
+    "evaluated": 53,
+    "sameSignShare": 0.849,
+    "medianRetention": 0.79,
+    "PRESENTsame": 35,
+    "PRESENTopp": 3
+   }
+  }
+ },
+ "D": {
+  "claims": {
+   "nullWorldsAbsentOct": true,
+   "oneEdgeIsEnoughForPositive": [
+    [
+     "P+",
+     "P+"
+    ],
+    [
+     "P+",
+     "P+"
+    ]
+   ],
+   "driftNoEdgeStillPositive": [
+    "P+",
+    "P+"
+   ],
+   "twoEdgeMechanismCanBeNegative": [
+    {
+     "both": "P+",
+     "bothpeak": "P-"
+    },
+    {
+     "both": "P+",
+     "bothpeak": "P-"
+    }
+   ],
+   "sameWorldSignFlipsWithUnitLength": [
+    {
+     "long": "P-",
+     "short": "P+"
+    }
+   ],
+   "sameWorldSignFlipsWithBinScheme": [
+    "ecd-both-long",
+    "ecd-kwpeak-long",
+    "ecd-rareedges-long",
+    "ecd-startrich-short",
+    "ecd-rareedges-short"
+   ]
+  },
+  "atlasPlanted": [
+   {
+    "id": "pl-burst",
+    "entCurv": "M",
+    "v": 0.0005,
+    "rareCurve": "A",
+    "entSlope": "A"
+   },
+   {
+    "id": "pl-frames",
+    "entCurv": "P-",
+    "v": -0.0181,
+    "rareCurve": "P+",
+    "entSlope": "P+"
+   },
+   {
+    "id": "pl-length",
+    "entCurv": "A",
+    "v": 0.0002,
+    "rareCurve": "A",
+    "entSlope": "A"
+   },
+   {
+    "id": "pl-markov",
+    "entCurv": "A",
+    "v": -0.0006,
+    "rareCurve": "M",
+    "entSlope": "M"
+   },
+   {
+    "id": "pl-mix",
+    "entCurv": "P-",
+    "v": -0.0068,
+    "rareCurve": "P+",
+    "entSlope": "M"
+   },
+   {
+    "id": "pl-null",
+    "entCurv": "A",
+    "v": -0.0002,
+    "rareCurve": "A",
+    "entSlope": "A"
+   },
+   {
+    "id": "pl-null2",
+    "entCurv": "M",
+    "v": -0.0015,
+    "rareCurve": "A",
+    "entSlope": "A"
+   },
+   {
+    "id": "pl-parallel",
+    "entCurv": "A",
+    "v": 0.0008,
+    "rareCurve": "A",
+    "entSlope": "M"
+   }
+  ],
+  "newWorlds": [
+   {
+    "id": "ecd-null-long",
+    "oct": "A",
+    "v": -0.0001,
+    "zmin": 0.1,
+    "half": "A",
+    "mass4": "M",
+    "rareCurve": "A",
+    "entSlope": "M"
+   },
+   {
+    "id": "ecd-null2-long",
+    "oct": "A",
+    "v": -0.002,
+    "zmin": 0.6,
+    "half": "A",
+    "mass4": "A",
+    "rareCurve": "A",
+    "entSlope": "A"
+   },
+   {
+    "id": "ecd-lenmix-long",
+    "oct": "A",
+    "v": -0.0006,
+    "zmin": 0.3,
+    "half": "A",
+    "mass4": "A",
+    "rareCurve": "A",
+    "entSlope": "A"
+   },
+   {
+    "id": "ecd-both-long",
+    "oct": "P+",
+    "v": 0.0449,
+    "zmin": 31.4,
+    "half": "P+",
+    "mass4": "P-",
+    "rareCurve": "P-",
+    "entSlope": "P-"
+   },
+   {
+    "id": "ecd-start-long",
+    "oct": "P+",
+    "v": 0.0157,
+    "zmin": 18.7,
+    "half": "P+",
+    "mass4": "P+",
+    "rareCurve": "P-",
+    "entSlope": "P+"
+   },
+   {
+    "id": "ecd-end-long",
+    "oct": "P+",
+    "v": 0.0246,
+    "zmin": 16.6,
+    "half": "P+",
+    "mass4": "P+",
+    "rareCurve": "P-",
+    "entSlope": "P-"
+   },
+   {
+    "id": "ecd-drift-long",
+    "oct": "P+",
+    "v": 0.1098,
+    "zmin": 50.3,
+    "half": "P+",
+    "mass4": "P+",
+    "rareCurve": "A",
+    "entSlope": "P+"
+   },
+   {
+    "id": "ecd-mid-long",
+    "oct": "P-",
+    "v": -0.0294,
+    "zmin": 52.6,
+    "half": "P-",
+    "mass4": "P-",
+    "rareCurve": "P+",
+    "entSlope": "A"
+   },
+   {
+    "id": "ecd-kw1-long",
+    "oct": "P+",
+    "v": 0.0121,
+    "zmin": 31.7,
+    "half": "P+",
+    "mass4": "P+",
+    "rareCurve": "P-",
+    "entSlope": "P+"
+   },
+   {
+    "id": "ecd-startrich-long",
+    "oct": "P-",
+    "v": -0.1307,
+    "zmin": 24.7,
+    "half": "P-",
+    "mass4": "M",
+    "rareCurve": "P+",
+    "entSlope": "P-"
+   },
+   {
+    "id": "ecd-kwpeak-long",
+    "oct": "P-",
+    "v": -0.0171,
+    "zmin": 6,
+    "half": "M",
+    "mass4": "P+",
+    "rareCurve": "P-",
+    "entSlope": "P-"
+   },
+   {
+    "id": "ecd-bothpeak-long",
+    "oct": "P-",
+    "v": -0.0916,
+    "zmin": 55.9,
+    "half": "P-",
+    "mass4": "P-",
+    "rareCurve": "P-",
+    "entSlope": "M"
+   },
+   {
+    "id": "ecd-rareedges-long",
+    "oct": "P+",
+    "v": 0.0123,
+    "zmin": 8.9,
+    "half": "M",
+    "mass4": "P-",
+    "rareCurve": "P+",
+    "entSlope": "M"
+   },
+   {
+    "id": "ecd-null-short",
+    "oct": "A",
+    "v": 0.0001,
+    "zmin": 1.1,
+    "half": "A",
+    "mass4": "M",
+    "rareCurve": "A",
+    "entSlope": "M"
+   },
+   {
+    "id": "ecd-null2-short",
+    "oct": "M",
+    "v": 0.0049,
+    "zmin": 0.6,
+    "half": "M",
+    "mass4": "A",
+    "rareCurve": "A",
+    "entSlope": "A"
+   },
+   {
+    "id": "ecd-lenmix-short",
+    "oct": "A",
+    "v": -0.0002,
+    "zmin": 0.4,
+    "half": "A",
+    "mass4": "A",
+    "rareCurve": "A",
+    "entSlope": "A"
+   },
+   {
+    "id": "ecd-both-short",
+    "oct": "P+",
+    "v": 0.1821,
+    "zmin": 86.9,
+    "half": "P+",
+    "mass4": "P+",
+    "rareCurve": "P-",
+    "entSlope": "P-"
+   },
+   {
+    "id": "ecd-start-short",
+    "oct": "P+",
+    "v": 0.0622,
+    "zmin": 40.6,
+    "half": "P+",
+    "mass4": "P+",
+    "rareCurve": "P-",
+    "entSlope": "P+"
+   },
+   {
+    "id": "ecd-end-short",
+    "oct": "P+",
+    "v": 0.072,
+    "zmin": 49.6,
+    "half": "P+",
+    "mass4": "P+",
+    "rareCurve": "P-",
+    "entSlope": "P-"
+   },
+   {
+    "id": "ecd-drift-short",
+    "oct": "P+",
+    "v": 0.1474,
+    "zmin": 59.7,
+    "half": "P+",
+    "mass4": "P+",
+    "rareCurve": "A",
+    "entSlope": "P+"
+   },
+   {
+    "id": "ecd-mid-short",
+    "oct": "P-",
+    "v": -0.1068,
+    "zmin": 90.4,
+    "half": "P-",
+    "mass4": "P-",
+    "rareCurve": "P+",
+    "entSlope": "A"
+   },
+   {
+    "id": "ecd-kw1-short",
+    "oct": "P+",
+    "v": 0.0476,
+    "zmin": 52,
+    "half": "P+",
+    "mass4": "P+",
+    "rareCurve": "P-",
+    "entSlope": "P+"
+   },
+   {
+    "id": "ecd-startrich-short",
+    "oct": "P-",
+    "v": -0.1519,
+    "zmin": 36.5,
+    "half": "P-",
+    "mass4": "P+",
+    "rareCurve": "P+",
+    "entSlope": "P-"
+   },
+   {
+    "id": "ecd-kwpeak-short",
+    "oct": "P+",
+    "v": 0.0337,
+    "zmin": 22.5,
+    "half": "P+",
+    "mass4": "P+",
+    "rareCurve": "P-",
+    "entSlope": "P+"
+   },
+   {
+    "id": "ecd-bothpeak-short",
+    "oct": "P-",
+    "v": -0.1141,
+    "zmin": 75,
+    "half": "P-",
+    "mass4": "P-",
+    "rareCurve": "P-",
+    "entSlope": "M"
+   },
+   {
+    "id": "ecd-rareedges-short",
+    "oct": "P+",
+    "v": 0.0506,
+    "zmin": 26.1,
+    "half": "P+",
+    "mass4": "P-",
+    "rareCurve": "P+",
+    "entSlope": "A"
+   }
+  ]
+ },
+ "E": [
+  {
+   "id": "ec-cd-js",
+   "zDiffToConfirmer": 0,
+   "oct": "P-",
+   "half": "P-",
+   "mass4": "P+",
+   "plugin": "P-"
+  },
+  {
+   "id": "ec-cd-ts",
+   "zDiffToConfirmer": 0,
+   "oct": "M",
+   "half": "M",
+   "mass4": "P+",
+   "plugin": "M"
+  },
+  {
+   "id": "ec-cd-py",
+   "zDiffToConfirmer": 0,
+   "oct": "M",
+   "half": "P+",
+   "mass4": "P+",
+   "plugin": "M"
+  },
+  {
+   "id": "ec-ctl-yonge",
+   "zDiffToConfirmer": 0,
+   "oct": "A",
+   "half": "A",
+   "mass4": "A",
+   "plugin": "A"
+  },
+  {
+   "id": "ec-ctl-js",
+   "zDiffToConfirmer": 0,
+   "oct": "A",
+   "half": "A",
+   "mass4": "A",
+   "plugin": "A"
+  },
+  {
+   "id": "ec-en-awakening",
+   "zDiffToConfirmer": 0,
+   "oct": "P+",
+   "half": "P+",
+   "mass4": "P+",
+   "plugin": "P+"
+  },
+  {
+   "id": "ec-en-children",
+   "zDiffToConfirmer": 0,
+   "oct": "M",
+   "half": "M",
+   "mass4": "P+",
+   "plugin": "M"
+  },
+  {
+   "id": "ec-en-dolls-lysistrata",
+   "zDiffToConfirmer": 0,
+   "oct": "M",
+   "half": "M",
+   "mass4": "P+",
+   "plugin": "M"
+  },
+  {
+   "id": "ec-en-mouret",
+   "zDiffToConfirmer": 0,
+   "oct": "P+",
+   "half": "P+",
+   "mass4": "P+",
+   "plugin": "P+"
+  },
+  {
+   "id": "ec-en-shakespeare",
+   "zDiffToConfirmer": 0,
+   "oct": "P+",
+   "half": "P+",
+   "mass4": "P+",
+   "plugin": "P+"
+  },
+  {
+   "id": "ec-en-swisshelm",
+   "zDiffToConfirmer": 0,
+   "oct": "M",
+   "half": "M",
+   "mass4": "P+",
+   "plugin": "M"
+  },
+  {
+   "id": "ec-en-yonge",
+   "zDiffToConfirmer": 0,
+   "oct": "P+",
+   "half": "M",
+   "mass4": "P+",
+   "plugin": "P+"
+  },
+  {
+   "id": "ec-ud-lat-perseus",
+   "zDiffToConfirmer": 0,
+   "oct": "M",
+   "half": "M",
+   "mass4": "P+",
+   "plugin": "M"
+  }
+ ]
+}

@@ -1,0 +1,21 @@
+{
+ "names": {
+  "n": 497,
+  "minLen": 3,
+  "minC": 4,
+  "shareLen3": 0.0805,
+  "shareLenLe4": 0.3421
+ },
+ "unlabelled": {
+  "n": 11213,
+  "minLen": 3,
+  "minC": 4,
+  "shareLen3": 0.3854,
+  "shareLenLe4": 0.6882
+ },
+ "readerFloors": {
+  "figureLength": 3,
+  "minRecurrenceInWindow": 2
+ },
+ "floorsSatisfiedByAll": true
+}

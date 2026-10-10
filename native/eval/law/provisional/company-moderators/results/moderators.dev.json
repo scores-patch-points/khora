@@ -1,0 +1,1331 @@
+{
+ "headerSha256": "90759dc1a0d04c645948d88be97042e50ff9a39714680d0e45dd2756c37c49d9",
+ "preregSha256": "81293b19b4b03a212de3988f09684de56abdd7fb2b030f5ba30155d967142df1",
+ "B": 2000,
+ "strata": {
+  "LATER": {
+   "arm": "BOTH",
+   "n": 22,
+   "langs": [
+    "eng",
+    "spa",
+    "rus",
+    "cmn",
+    "cmn-hans",
+    "heb",
+    "fas",
+    "jpn",
+    "fra",
+    "deu",
+    "ita",
+    "por",
+    "nld",
+    "pol",
+    "ukr",
+    "hin",
+    "vie",
+    "ind",
+    "urd",
+    "tur",
+    "ell",
+    "fin"
+   ],
+   "meanAuc": 0.6154,
+   "sdAuc": 0.0623,
+   "models": [
+    {
+     "label": "M1_FWC32",
+     "skill": 0.245,
+     "rmseModel": 0.0481,
+     "rmseBase": 0.0637,
+     "maeModel": 0.0408,
+     "maeBase": 0.0521,
+     "permP_uncorrected": 0.0005,
+     "coefStd": [
+      0.0434
+     ],
+     "coefRaw": [
+      0.44685
+     ],
+     "signsAllPositive": true,
+     "intercept": 0.6154
+    },
+    {
+     "label": "M2_CHAIN",
+     "skill": 0.0674,
+     "rmseModel": 0.0594,
+     "rmseBase": 0.0637,
+     "maeModel": 0.0503,
+     "maeBase": 0.0521,
+     "permP_uncorrected": 0.03,
+     "coefStd": [
+      0.0267
+     ],
+     "coefRaw": [
+      0.1625
+     ],
+     "signsAllPositive": true,
+     "intercept": 0.6154
+    },
+    {
+     "label": "M1_FWC32+M2_CHAIN",
+     "skill": 0.3145,
+     "rmseModel": 0.0437,
+     "rmseBase": 0.0637,
+     "maeModel": 0.0345,
+     "maeBase": 0.0521,
+     "permP_uncorrected": 0.001,
+     "coefStd": [
+      0.0401,
+      0.0201
+     ],
+     "coefRaw": [
+      0.4131,
+      0.12275
+     ],
+     "signsAllPositive": true,
+     "intercept": 0.6154
+    },
+    {
+     "label": "M3_LOGPAIRS",
+     "skill": 0.1923,
+     "rmseModel": 0.0515,
+     "rmseBase": 0.0637,
+     "maeModel": 0.0405,
+     "maeBase": 0.0521,
+     "permP_uncorrected": 0.002,
+     "coefStd": [
+      0.0397
+     ],
+     "coefRaw": [
+      0.03704
+     ],
+     "signsAllPositive": true,
+     "intercept": 0.6154
+    },
+    {
+     "label": "M1_FWC32+M3_LOGPAIRS",
+     "skill": 0.4625,
+     "rmseModel": 0.0342,
+     "rmseBase": 0.0637,
+     "maeModel": 0.0299,
+     "maeBase": 0.0521,
+     "permP_uncorrected": 0.0005,
+     "coefStd": [
+      0.0377,
+      0.0333
+     ],
+     "coefRaw": [
+      0.38853,
+      0.03105
+     ],
+     "signsAllPositive": true,
+     "intercept": 0.6154
+    },
+    {
+     "label": "M2_CHAIN+M3_LOGPAIRS",
+     "skill": 0.1431,
+     "rmseModel": 0.0546,
+     "rmseBase": 0.0637,
+     "maeModel": 0.0432,
+     "maeBase": 0.0521,
+     "permP_uncorrected": 0.012,
+     "coefStd": [
+      0.0091,
+      0.0351
+     ],
+     "coefRaw": [
+      0.05568,
+      0.03279
+     ],
+     "signsAllPositive": true,
+     "intercept": 0.6154
+    },
+    {
+     "label": "M1_FWC32+M2_CHAIN+M3_LOGPAIRS",
+     "skill": 0.4391,
+     "rmseModel": 0.0357,
+     "rmseBase": 0.0637,
+     "maeModel": 0.0313,
+     "maeBase": 0.0521,
+     "permP_uncorrected": 0.0005,
+     "coefStd": [
+      0.0373,
+      0.0053,
+      0.0307
+     ],
+     "coefRaw": [
+      0.38417,
+      0.03213,
+      0.02867
+     ],
+     "signsAllPositive": true,
+     "intercept": 0.6154
+    }
+   ],
+   "bestOf7": {
+    "label": "M1_FWC32+M3_LOGPAIRS",
+    "skill": 0.4625,
+    "permP_bestOf7": 0.0005,
+    "nullBestQ95": 0.1066
+   },
+   "sdLoloResidualBest": 0.0351,
+   "rows": [
+    {
+     "lang": "eng",
+     "auc": 0.6332,
+     "pairs": 600,
+     "seApprox": 0.016,
+     "FWC32": 0.3387,
+     "CHAIN": 0.5046,
+     "predBest": 0.6594,
+     "residBest": -0.0262,
+     "residFull": -0.0251,
+     "residMeanOnly": 0.0187,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "spa",
+     "auc": 0.693,
+     "pairs": 600,
+     "seApprox": 0.015,
+     "FWC32": 0.4388,
+     "CHAIN": 0.4943,
+     "predBest": 0.6965,
+     "residBest": -0.0035,
+     "residFull": -0.0013,
+     "residMeanOnly": 0.0813,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "rus",
+     "auc": 0.5767,
+     "pairs": 110,
+     "seApprox": 0.038,
+     "FWC32": 0.2012,
+     "CHAIN": 0.424,
+     "predBest": 0.5175,
+     "residBest": 0.0592,
+     "residFull": 0.0571,
+     "residMeanOnly": -0.0405,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "cmn",
+     "auc": 0.6136,
+     "pairs": 365,
+     "seApprox": 0.021,
+     "FWC32": 0.2216,
+     "CHAIN": 0.3551,
+     "predBest": 0.5867,
+     "residBest": 0.0269,
+     "residFull": 0.0321,
+     "residMeanOnly": -0.0019,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "cmn-hans",
+     "auc": 0.6303,
+     "pairs": 369,
+     "seApprox": 0.02,
+     "FWC32": 0.222,
+     "CHAIN": 0.3551,
+     "predBest": 0.5855,
+     "residBest": 0.0448,
+     "residFull": 0.0506,
+     "residMeanOnly": 0.0156,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "heb",
+     "auc": 0.6848,
+     "pairs": 251,
+     "seApprox": 0.024,
+     "FWC32": 0.3929,
+     "CHAIN": 0.4981,
+     "predBest": 0.635,
+     "residBest": 0.0498,
+     "residFull": 0.0485,
+     "residMeanOnly": 0.0727,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "fas",
+     "auc": 0.6884,
+     "pairs": 508,
+     "seApprox": 0.017,
+     "FWC32": 0.3293,
+     "CHAIN": 0.611,
+     "predBest": 0.6427,
+     "residBest": 0.0457,
+     "residFull": 0.0435,
+     "residMeanOnly": 0.0765,
+     "outlierBest": false,
+     "family": "SOV-like"
+    },
+    {
+     "lang": "jpn",
+     "auc": 0.6173,
+     "pairs": 84,
+     "seApprox": 0.043,
+     "FWC32": 0.4293,
+     "CHAIN": 0.1656,
+     "predBest": 0.5989,
+     "residBest": 0.0184,
+     "residFull": 0.0291,
+     "residMeanOnly": 0.002,
+     "outlierBest": false,
+     "family": "SOV-like"
+    },
+    {
+     "lang": "fra",
+     "auc": 0.7259,
+     "pairs": 570,
+     "seApprox": 0.015,
+     "FWC32": 0.4212,
+     "CHAIN": 0.4827,
+     "predBest": 0.6811,
+     "residBest": 0.0448,
+     "residFull": 0.0475,
+     "residMeanOnly": 0.1158,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "deu",
+     "auc": 0.5516,
+     "pairs": 116,
+     "seApprox": 0.038,
+     "FWC32": 0.3258,
+     "CHAIN": 0.4877,
+     "predBest": 0.5823,
+     "residBest": -0.0307,
+     "residFull": -0.037,
+     "residMeanOnly": -0.0668,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "ita",
+     "auc": 0.5833,
+     "pairs": 129,
+     "seApprox": 0.035,
+     "FWC32": 0.4203,
+     "CHAIN": 0.5126,
+     "predBest": 0.6282,
+     "residBest": -0.0449,
+     "residFull": -0.0525,
+     "residMeanOnly": -0.0336,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "por",
+     "auc": 0.6548,
+     "pairs": 600,
+     "seApprox": 0.016,
+     "FWC32": 0.4329,
+     "CHAIN": 0.587,
+     "predBest": 0.7003,
+     "residBest": -0.0455,
+     "residFull": -0.047,
+     "residMeanOnly": 0.0413,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "nld",
+     "auc": 0.6438,
+     "pairs": 414,
+     "seApprox": 0.019,
+     "FWC32": 0.3706,
+     "CHAIN": 0.5094,
+     "predBest": 0.6535,
+     "residBest": -0.0097,
+     "residFull": -0.01,
+     "residMeanOnly": 0.0298,
+     "outlierBest": false,
+     "family": "SOV-like"
+    },
+    {
+     "lang": "pol",
+     "auc": 0.5497,
+     "pairs": 198,
+     "seApprox": 0.029,
+     "FWC32": 0.2328,
+     "CHAIN": 0.4178,
+     "predBest": 0.5678,
+     "residBest": -0.0181,
+     "residFull": -0.0186,
+     "residMeanOnly": -0.0688,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "ukr",
+     "auc": 0.5258,
+     "pairs": 79,
+     "seApprox": 0.046,
+     "FWC32": 0.21,
+     "CHAIN": 0.4409,
+     "predBest": 0.5135,
+     "residBest": 0.0123,
+     "residFull": 0.007,
+     "residMeanOnly": -0.0938,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "hin",
+     "auc": 0.6567,
+     "pairs": 600,
+     "seApprox": 0.016,
+     "FWC32": 0.3588,
+     "CHAIN": 0.6747,
+     "predBest": 0.6657,
+     "residBest": -0.009,
+     "residFull": -0.0145,
+     "residMeanOnly": 0.0433,
+     "outlierBest": false,
+     "family": "SOV-like"
+    },
+    {
+     "lang": "vie",
+     "auc": 0.5725,
+     "pairs": 600,
+     "seApprox": 0.016,
+     "FWC32": 0.236,
+     "CHAIN": 0.2066,
+     "predBest": 0.6242,
+     "residBest": -0.0517,
+     "residFull": -0.0552,
+     "residMeanOnly": -0.0449,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "ind",
+     "auc": 0.6142,
+     "pairs": 600,
+     "seApprox": 0.016,
+     "FWC32": 0.2439,
+     "CHAIN": 0.7351,
+     "predBest": 0.6211,
+     "residBest": -0.0069,
+     "residFull": -0.0167,
+     "residMeanOnly": -0.0012,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "urd",
+     "auc": 0.6881,
+     "pairs": 600,
+     "seApprox": 0.015,
+     "FWC32": 0.3643,
+     "CHAIN": 0.7497,
+     "predBest": 0.6648,
+     "residBest": 0.0233,
+     "residFull": 0.0179,
+     "residMeanOnly": 0.0762,
+     "outlierBest": false,
+     "family": "SOV-like"
+    },
+    {
+     "lang": "tur",
+     "auc": 0.4811,
+     "pairs": 140,
+     "seApprox": 0.035,
+     "FWC32": 0.1493,
+     "CHAIN": 0.3333,
+     "predBest": 0.528,
+     "residBest": -0.0469,
+     "residFull": -0.046,
+     "residMeanOnly": -0.1407,
+     "outlierBest": false,
+     "family": "SOV-like"
+    },
+    {
+     "lang": "ell",
+     "auc": 0.6022,
+     "pairs": 147,
+     "seApprox": 0.033,
+     "FWC32": 0.4057,
+     "CHAIN": 0.1216,
+     "predBest": 0.6232,
+     "residBest": -0.021,
+     "residFull": -0.0135,
+     "residMeanOnly": -0.0138,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "fin",
+     "auc": 0.5512,
+     "pairs": 374,
+     "seApprox": 0.021,
+     "FWC32": 0.1611,
+     "CHAIN": 0.4072,
+     "predBest": 0.5704,
+     "residBest": -0.0192,
+     "residFull": -0.0171,
+     "residMeanOnly": -0.0672,
+     "outlierBest": false,
+     "family": "SVO-like"
+    }
+   ],
+   "exploratorySpearman": {
+    "TTR": {
+     "rho": -0.724,
+     "p": 0.0005,
+     "n": 22
+    },
+    "FWC32": {
+     "rho": 0.695,
+     "p": 0.0005,
+     "n": 22
+    },
+    "hapaxTypeShare": {
+     "rho": -0.665,
+     "p": 0.0025,
+     "n": 22
+    },
+    "propnFollowedBy_ADP": {
+     "rho": 0.629,
+     "p": 0.002,
+     "n": 22
+    },
+    "log2PairsStratum": {
+     "rho": 0.602,
+     "p": 0.004,
+     "n": 22
+    },
+    "propnFollowedBy_other": {
+     "rho": -0.593,
+     "p": 0.0055,
+     "n": 22
+    },
+    "meanSentLen": {
+     "rho": 0.564,
+     "p": 0.008,
+     "n": 22
+    },
+    "propnPrecededBy_NOUN": {
+     "rho": -0.564,
+     "p": 0.0075,
+     "n": 22
+    },
+    "propnPrecededBy_PROPN": {
+     "rho": 0.546,
+     "p": 0.0105,
+     "n": 22
+    },
+    "propnFollowedBy_PROPN": {
+     "rho": 0.546,
+     "p": 0.0105,
+     "n": 22
+    },
+    "propnChain": {
+     "rho": 0.539,
+     "p": 0.01,
+     "n": 22
+    },
+    "propnHapaxTokenRate": {
+     "rho": -0.504,
+     "p": 0.0215,
+     "n": 22
+    },
+    "order_detBefore": {
+     "rho": 0.496,
+     "p": 0.0265,
+     "n": 22
+    },
+    "log2Tokens": {
+     "rho": 0.469,
+     "p": 0.0285,
+     "n": 22
+    },
+    "propnMeanChars": {
+     "rho": -0.468,
+     "p": 0.0315,
+     "n": 22
+    },
+    "propnDensity": {
+     "rho": 0.467,
+     "p": 0.033,
+     "n": 22
+    },
+    "propnPrecededBy_ADP": {
+     "rho": 0.464,
+     "p": 0.0245,
+     "n": 22
+    },
+    "casedShare": {
+     "rho": -0.438,
+     "p": 0.0365,
+     "n": 22
+    },
+    "propnHapaxTypeRate": {
+     "rho": -0.412,
+     "p": 0.0555,
+     "n": 22
+    },
+    "propnFlat": {
+     "rho": 0.394,
+     "p": 0.0755,
+     "n": 22
+    },
+    "propnFollowedBy_end": {
+     "rho": -0.347,
+     "p": 0.1074,
+     "n": 22
+    },
+    "propnPrecededBy_other": {
+     "rho": -0.334,
+     "p": 0.1304,
+     "n": 22
+    },
+    "order_amodBefore": {
+     "rho": -0.302,
+     "p": 0.1704,
+     "n": 22
+    },
+    "order_nsubjBefore": {
+     "rho": 0.253,
+     "p": 0.2444,
+     "n": 22
+    },
+    "sovLike": {
+     "rho": 0.241,
+     "p": 0.2814,
+     "n": 22
+    },
+    "propnPrecededBy_DET": {
+     "rho": 0.159,
+     "p": 0.4708,
+     "n": 22
+    },
+    "propnPrecededBy_ADJ": {
+     "rho": -0.145,
+     "p": 0.5257,
+     "n": 22
+    },
+    "order_caseBefore": {
+     "rho": -0.14,
+     "p": 0.5157,
+     "n": 22
+    },
+    "log2Sentences": {
+     "rho": 0.085,
+     "p": 0.7126,
+     "n": 22
+    },
+    "order_objAfter": {
+     "rho": -0.011,
+     "p": 0.9575,
+     "n": 22
+    },
+    "propnSentenceInitial": {
+     "rho": 0,
+     "p": 1,
+     "n": 22
+    },
+    "propnPrecededBy_none": {
+     "rho": 0,
+     "p": 1,
+     "n": 22
+    }
+   },
+   "wordOrder2fam": {
+    "sovMean": 0.6292,
+    "sovN": 6,
+    "svoMean": 0.6102,
+    "svoN": 16,
+    "diff": 0.0191
+   },
+   "verdict": {
+    "supportedBestOf7": true,
+    "singleModerators": [
+     "M1_FWC32",
+     "M2_CHAIN",
+     "M3_LOGPAIRS"
+    ]
+   }
+  },
+  "FIRST": {
+   "arm": "LEFT",
+   "n": 23,
+   "langs": [
+    "eng",
+    "spa",
+    "rus",
+    "cmn",
+    "cmn-hans",
+    "heb",
+    "fas",
+    "kor",
+    "jpn",
+    "fra",
+    "deu",
+    "ita",
+    "por",
+    "nld",
+    "pol",
+    "ukr",
+    "hin",
+    "vie",
+    "ind",
+    "urd",
+    "tur",
+    "ell",
+    "fin"
+   ],
+   "meanAuc": 0.6236,
+   "sdAuc": 0.0564,
+   "models": [
+    {
+     "label": "M1_FWC32",
+     "skill": 0.2306,
+     "rmseModel": 0.0444,
+     "rmseBase": 0.0576,
+     "maeModel": 0.0342,
+     "maeBase": 0.0505,
+     "permP_uncorrected": 0.001,
+     "coefStd": [
+      0.0387
+     ],
+     "coefRaw": [
+      0.35987
+     ],
+     "signsAllPositive": true,
+     "intercept": 0.6236
+    },
+    {
+     "label": "M2_CHAIN",
+     "skill": 0.1283,
+     "rmseModel": 0.0503,
+     "rmseBase": 0.0576,
+     "maeModel": 0.0425,
+     "maeBase": 0.0505,
+     "permP_uncorrected": 0.009,
+     "coefStd": [
+      0.0297
+     ],
+     "coefRaw": [
+      0.16407
+     ],
+     "signsAllPositive": true,
+     "intercept": 0.6236
+    },
+    {
+     "label": "M1_FWC32+M2_CHAIN",
+     "skill": 0.2253,
+     "rmseModel": 0.0447,
+     "rmseBase": 0.0576,
+     "maeModel": 0.0353,
+     "maeBase": 0.0505,
+     "permP_uncorrected": 0.0015,
+     "coefStd": [
+      0.0323,
+      0.0185
+     ],
+     "coefRaw": [
+      0.30035,
+      0.10227
+     ],
+     "signsAllPositive": true,
+     "intercept": 0.6236
+    },
+    {
+     "label": "M3_LOGPAIRS",
+     "skill": -0.0054,
+     "rmseModel": 0.058,
+     "rmseBase": 0.0576,
+     "maeModel": 0.0486,
+     "maeBase": 0.0505,
+     "permP_uncorrected": 0.2969,
+     "coefStd": [
+      0.0103
+     ],
+     "coefRaw": [
+      0.01384
+     ],
+     "signsAllPositive": true,
+     "intercept": 0.6236
+    },
+    {
+     "label": "M1_FWC32+M3_LOGPAIRS",
+     "skill": 0.1569,
+     "rmseModel": 0.0486,
+     "rmseBase": 0.0576,
+     "maeModel": 0.0372,
+     "maeBase": 0.0505,
+     "permP_uncorrected": 0.005,
+     "coefStd": [
+      0.0404,
+      -0.0046
+     ],
+     "coefRaw": [
+      0.37585,
+      -0.00625
+     ],
+     "signsAllPositive": false,
+     "intercept": 0.6236
+    },
+    {
+     "label": "M2_CHAIN+M3_LOGPAIRS",
+     "skill": 0.1124,
+     "rmseModel": 0.0512,
+     "rmseBase": 0.0576,
+     "maeModel": 0.0438,
+     "maeBase": 0.0505,
+     "permP_uncorrected": 0.0135,
+     "coefStd": [
+      0.0392,
+      -0.0149
+     ],
+     "coefRaw": [
+      0.21681,
+      -0.01998
+     ],
+     "signsAllPositive": false,
+     "intercept": 0.6236
+    },
+    {
+     "label": "M1_FWC32+M2_CHAIN+M3_LOGPAIRS",
+     "skill": 0.3018,
+     "rmseModel": 0.0402,
+     "rmseBase": 0.0576,
+     "maeModel": 0.0341,
+     "maeBase": 0.0505,
+     "permP_uncorrected": 0.001,
+     "coefStd": [
+      0.0363,
+      0.0325,
+      -0.024
+     ],
+     "coefRaw": [
+      0.33778,
+      0.17966,
+      -0.03223
+     ],
+     "signsAllPositive": false,
+     "intercept": 0.6236
+    }
+   ],
+   "bestOf7": {
+    "label": "M1_FWC32+M2_CHAIN+M3_LOGPAIRS",
+    "skill": 0.3018,
+    "permP_bestOf7": 0.001,
+    "nullBestQ95": 0.107
+   },
+   "sdLoloResidualBest": 0.0412,
+   "rows": [
+    {
+     "lang": "eng",
+     "auc": 0.6468,
+     "pairs": 600,
+     "seApprox": 0.016,
+     "FWC32": 0.3387,
+     "CHAIN": 0.5046,
+     "predBest": 0.631,
+     "residBest": 0.0158,
+     "residFull": 0.0158,
+     "residMeanOnly": 0.0243,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "spa",
+     "auc": 0.721,
+     "pairs": 600,
+     "seApprox": 0.015,
+     "FWC32": 0.4388,
+     "CHAIN": 0.4943,
+     "predBest": 0.6561,
+     "residBest": 0.0649,
+     "residFull": 0.0649,
+     "residMeanOnly": 0.1018,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "rus",
+     "auc": 0.5072,
+     "pairs": 600,
+     "seApprox": 0.017,
+     "FWC32": 0.2012,
+     "CHAIN": 0.424,
+     "predBest": 0.5819,
+     "residBest": -0.0747,
+     "residFull": -0.0747,
+     "residMeanOnly": -0.1217,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "cmn",
+     "auc": 0.5666,
+     "pairs": 534,
+     "seApprox": 0.017,
+     "FWC32": 0.2216,
+     "CHAIN": 0.3551,
+     "predBest": 0.5716,
+     "residBest": -0.005,
+     "residFull": -0.005,
+     "residMeanOnly": -0.0596,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "cmn-hans",
+     "auc": 0.5583,
+     "pairs": 530,
+     "seApprox": 0.018,
+     "FWC32": 0.222,
+     "CHAIN": 0.3551,
+     "predBest": 0.5733,
+     "residBest": -0.015,
+     "residFull": -0.015,
+     "residMeanOnly": -0.0683,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "heb",
+     "auc": 0.7048,
+     "pairs": 251,
+     "seApprox": 0.023,
+     "FWC32": 0.3929,
+     "CHAIN": 0.4981,
+     "predBest": 0.6851,
+     "residBest": 0.0197,
+     "residFull": 0.0197,
+     "residMeanOnly": 0.0849,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "fas",
+     "auc": 0.6307,
+     "pairs": 584,
+     "seApprox": 0.016,
+     "FWC32": 0.3293,
+     "CHAIN": 0.611,
+     "predBest": 0.6509,
+     "residBest": -0.0202,
+     "residFull": -0.0202,
+     "residMeanOnly": 0.0074,
+     "outlierBest": false,
+     "family": "SOV-like"
+    },
+    {
+     "lang": "kor",
+     "auc": 0.5796,
+     "pairs": 67,
+     "seApprox": 0.049,
+     "FWC32": 0.0702,
+     "CHAIN": 0.0556,
+     "predBest": 0.526,
+     "residBest": 0.0536,
+     "residFull": 0.0536,
+     "residMeanOnly": -0.046,
+     "outlierBest": false,
+     "family": "SOV-like"
+    },
+    {
+     "lang": "jpn",
+     "auc": 0.5669,
+     "pairs": 383,
+     "seApprox": 0.021,
+     "FWC32": 0.4293,
+     "CHAIN": 0.1656,
+     "predBest": 0.648,
+     "residBest": -0.0811,
+     "residFull": -0.0811,
+     "residMeanOnly": -0.0593,
+     "outlierBest": false,
+     "family": "SOV-like"
+    },
+    {
+     "lang": "fra",
+     "auc": 0.6814,
+     "pairs": 600,
+     "seApprox": 0.015,
+     "FWC32": 0.4212,
+     "CHAIN": 0.4827,
+     "predBest": 0.6529,
+     "residBest": 0.0285,
+     "residFull": 0.0285,
+     "residMeanOnly": 0.0604,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "deu",
+     "auc": 0.6771,
+     "pairs": 447,
+     "seApprox": 0.018,
+     "FWC32": 0.3258,
+     "CHAIN": 0.4877,
+     "predBest": 0.6363,
+     "residBest": 0.0408,
+     "residFull": 0.0408,
+     "residMeanOnly": 0.0559,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "ita",
+     "auc": 0.6609,
+     "pairs": 454,
+     "seApprox": 0.018,
+     "FWC32": 0.4203,
+     "CHAIN": 0.5126,
+     "predBest": 0.6755,
+     "residBest": -0.0146,
+     "residFull": -0.0146,
+     "residMeanOnly": 0.039,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "por",
+     "auc": 0.6532,
+     "pairs": 600,
+     "seApprox": 0.016,
+     "FWC32": 0.4329,
+     "CHAIN": 0.587,
+     "predBest": 0.682,
+     "residBest": -0.0288,
+     "residFull": -0.0288,
+     "residMeanOnly": 0.031,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "nld",
+     "auc": 0.6692,
+     "pairs": 533,
+     "seApprox": 0.016,
+     "FWC32": 0.3706,
+     "CHAIN": 0.5094,
+     "predBest": 0.6478,
+     "residBest": 0.0214,
+     "residFull": 0.0214,
+     "residMeanOnly": 0.0477,
+     "outlierBest": false,
+     "family": "SOV-like"
+    },
+    {
+     "lang": "pol",
+     "auc": 0.5695,
+     "pairs": 600,
+     "seApprox": 0.016,
+     "FWC32": 0.2328,
+     "CHAIN": 0.4178,
+     "predBest": 0.5821,
+     "residBest": -0.0126,
+     "residFull": -0.0126,
+     "residMeanOnly": -0.0565,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "ukr",
+     "auc": 0.5878,
+     "pairs": 296,
+     "seApprox": 0.023,
+     "FWC32": 0.21,
+     "CHAIN": 0.4409,
+     "predBest": 0.6127,
+     "residBest": -0.0249,
+     "residFull": -0.0249,
+     "residMeanOnly": -0.0374,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "hin",
+     "auc": 0.7037,
+     "pairs": 600,
+     "seApprox": 0.015,
+     "FWC32": 0.3588,
+     "CHAIN": 0.6747,
+     "predBest": 0.6645,
+     "residBest": 0.0392,
+     "residFull": 0.0392,
+     "residMeanOnly": 0.0838,
+     "outlierBest": false,
+     "family": "SOV-like"
+    },
+    {
+     "lang": "vie",
+     "auc": 0.608,
+     "pairs": 449,
+     "seApprox": 0.019,
+     "FWC32": 0.236,
+     "CHAIN": 0.2066,
+     "predBest": 0.5453,
+     "residBest": 0.0627,
+     "residFull": 0.0627,
+     "residMeanOnly": -0.0163,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "ind",
+     "auc": 0.6116,
+     "pairs": 600,
+     "seApprox": 0.016,
+     "FWC32": 0.2439,
+     "CHAIN": 0.7351,
+     "predBest": 0.6504,
+     "residBest": -0.0388,
+     "residFull": -0.0388,
+     "residMeanOnly": -0.0125,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "urd",
+     "auc": 0.6661,
+     "pairs": 516,
+     "seApprox": 0.017,
+     "FWC32": 0.3643,
+     "CHAIN": 0.7497,
+     "predBest": 0.699,
+     "residBest": -0.0329,
+     "residFull": -0.0329,
+     "residMeanOnly": 0.0444,
+     "outlierBest": false,
+     "family": "SOV-like"
+    },
+    {
+     "lang": "tur",
+     "auc": 0.5751,
+     "pairs": 260,
+     "seApprox": 0.025,
+     "FWC32": 0.1493,
+     "CHAIN": 0.3333,
+     "predBest": 0.5763,
+     "residBest": -0.0012,
+     "residFull": -0.0012,
+     "residMeanOnly": -0.0507,
+     "outlierBest": false,
+     "family": "SOV-like"
+    },
+    {
+     "lang": "ell",
+     "auc": 0.6046,
+     "pairs": 222,
+     "seApprox": 0.027,
+     "FWC32": 0.4057,
+     "CHAIN": 0.1216,
+     "predBest": 0.6453,
+     "residBest": -0.0407,
+     "residFull": -0.0407,
+     "residMeanOnly": -0.0199,
+     "outlierBest": false,
+     "family": "SVO-like"
+    },
+    {
+     "lang": "fin",
+     "auc": 0.5925,
+     "pairs": 600,
+     "seApprox": 0.016,
+     "FWC32": 0.1611,
+     "CHAIN": 0.4072,
+     "predBest": 0.545,
+     "residBest": 0.0475,
+     "residFull": 0.0475,
+     "residMeanOnly": -0.0325,
+     "outlierBest": false,
+     "family": "SVO-like"
+    }
+   ],
+   "exploratorySpearman": {
+    "TTR": {
+     "rho": -0.7,
+     "p": 0.0005,
+     "n": 23
+    },
+    "propnPrecededBy_PROPN": {
+     "rho": 0.653,
+     "p": 0.0015,
+     "n": 23
+    },
+    "propnFollowedBy_PROPN": {
+     "rho": 0.653,
+     "p": 0.0015,
+     "n": 23
+    },
+    "propnFollowedBy_other": {
+     "rho": -0.652,
+     "p": 0.0005,
+     "n": 23
+    },
+    "FWC32": {
+     "rho": 0.646,
+     "p": 0.0035,
+     "n": 23
+    },
+    "propnChain": {
+     "rho": 0.639,
+     "p": 0.0015,
+     "n": 23
+    },
+    "propnHapaxTokenRate": {
+     "rho": -0.571,
+     "p": 0.004,
+     "n": 23
+    },
+    "propnPrecededBy_other": {
+     "rho": -0.556,
+     "p": 0.0075,
+     "n": 23
+    },
+    "propnFollowedBy_ADP": {
+     "rho": 0.551,
+     "p": 0.006,
+     "n": 23
+    },
+    "propnHapaxTypeRate": {
+     "rho": -0.542,
+     "p": 0.006,
+     "n": 23
+    },
+    "propnPrecededBy_ADP": {
+     "rho": 0.53,
+     "p": 0.0075,
+     "n": 23
+    },
+    "order_amodBefore": {
+     "rho": -0.479,
+     "p": 0.0195,
+     "n": 23
+    },
+    "hapaxTypeShare": {
+     "rho": -0.473,
+     "p": 0.027,
+     "n": 23
+    },
+    "propnPrecededBy_NOUN": {
+     "rho": -0.465,
+     "p": 0.0235,
+     "n": 23
+    },
+    "propnPrecededBy_DET": {
+     "rho": 0.448,
+     "p": 0.0355,
+     "n": 23
+    },
+    "log2Tokens": {
+     "rho": 0.338,
+     "p": 0.1159,
+     "n": 23
+    },
+    "propnFlat": {
+     "rho": 0.309,
+     "p": 0.1544,
+     "n": 23
+    },
+    "propnDensity": {
+     "rho": 0.291,
+     "p": 0.1759,
+     "n": 23
+    },
+    "log2Sentences": {
+     "rho": 0.276,
+     "p": 0.2024,
+     "n": 23
+    },
+    "propnSentenceInitial": {
+     "rho": -0.256,
+     "p": 0.2419,
+     "n": 23
+    },
+    "propnPrecededBy_none": {
+     "rho": -0.256,
+     "p": 0.2419,
+     "n": 23
+    },
+    "order_nsubjBefore": {
+     "rho": -0.232,
+     "p": 0.2809,
+     "n": 23
+    },
+    "meanSentLen": {
+     "rho": 0.213,
+     "p": 0.3393,
+     "n": 23
+    },
+    "order_caseBefore": {
+     "rho": 0.171,
+     "p": 0.4408,
+     "n": 23
+    },
+    "log2PairsStratum": {
+     "rho": 0.146,
+     "p": 0.5132,
+     "n": 23
+    },
+    "order_detBefore": {
+     "rho": 0.125,
+     "p": 0.5737,
+     "n": 23
+    },
+    "casedShare": {
+     "rho": -0.094,
+     "p": 0.6747,
+     "n": 23
+    },
+    "propnPrecededBy_ADJ": {
+     "rho": 0.088,
+     "p": 0.6942,
+     "n": 23
+    },
+    "order_objAfter": {
+     "rho": -0.038,
+     "p": 0.8716,
+     "n": 23
+    },
+    "sovLike": {
+     "rho": 0.028,
+     "p": 0.9225,
+     "n": 23
+    },
+    "propnMeanChars": {
+     "rho": 0.02,
+     "p": 0.9205,
+     "n": 23
+    },
+    "propnFollowedBy_end": {
+     "rho": 0.004,
+     "p": 0.9865,
+     "n": 23
+    }
+   },
+   "wordOrder2fam": {
+    "sovMean": 0.6273,
+    "sovN": 7,
+    "svoMean": 0.622,
+    "svoN": 16,
+    "diff": 0.0054
+   },
+   "verdict": {
+    "supportedBestOf7": false,
+    "singleModerators": [
+     "M1_FWC32",
+     "M2_CHAIN"
+    ]
+   }
+  }
+ }
+}

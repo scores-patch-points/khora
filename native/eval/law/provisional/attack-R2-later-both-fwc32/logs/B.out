@@ -1,0 +1,823 @@
+{
+ "headerSha256": "a39cca101de14687a3306ab483ccfade2bce7eadd0a86e1311594c93b2e8c098",
+ "generated": "2026-10-07T06:56:09.147Z",
+ "provenance": {
+  "confirm.mjs": {
+   "sha256": "dfa55584ce533cd890c2cf9060d30688af5f446a68580a928b31785f296edd35",
+   "mtime": "2026-10-07T06:33:53.380Z"
+  },
+  "extend.mjs": {
+   "sha256": "4985e70d78c4ec5d9c8abe9dfa791e129b2ca18aad3edfd63b7b8560fc7050cd",
+   "mtime": "2026-10-07T06:36:49.411Z"
+  },
+  "rowsRecordedSha": [
+   "dfa55584ce533cd890c2cf9060d30688af5f446a68580a928b31785f296edd35"
+  ],
+  "rowsShaMatchesConfirmHeader": true,
+  "rowsMtimeRange": [
+   "2026-10-07T06:32:53.505Z",
+   "2026-10-07T06:33:13.635Z"
+  ],
+  "windowsJsonMtime": "2026-10-07T06:31:54.825Z",
+  "verdictMtime": "2026-10-07T06:33:53.942Z"
+ },
+ "sizes": {
+  "dev": 22,
+  "trainA": 10,
+  "trainB": 24,
+  "trainC": 21,
+  "testNew": 22,
+  "testOld": 22
+ },
+ "B1": {
+  "DEV": {
+   "nBig": 14,
+   "audibleBig": 12,
+   "baseRate": 0.857,
+   "nIn": 9,
+   "audibleIn": 9,
+   "shareIn": 1,
+   "nOut": 5,
+   "audibleOut": 3,
+   "shareOut": 0.6,
+   "pHyper": 0.1099,
+   "wilsonIn": [
+    0.701,
+    1
+   ]
+  },
+  "PRIMARY": {
+   "nBig": 20,
+   "audibleBig": 12,
+   "baseRate": 0.6,
+   "nIn": 12,
+   "audibleIn": 9,
+   "shareIn": 0.75,
+   "nOut": 8,
+   "audibleOut": 3,
+   "shareOut": 0.375,
+   "pHyper": 0.1132,
+   "wilsonIn": [
+    0.468,
+    0.911
+   ]
+  },
+  "TRAINC": {
+   "nBig": 15,
+   "audibleBig": 13,
+   "baseRate": 0.867,
+   "nIn": 11,
+   "audibleIn": 11,
+   "shareIn": 1,
+   "nOut": 4,
+   "audibleOut": 2,
+   "shareOut": 0.5,
+   "pHyper": 0.0571,
+   "wilsonIn": [
+    0.741,
+    1
+   ]
+  },
+  "TESTNEW": {
+   "nBig": 11,
+   "audibleBig": 7,
+   "baseRate": 0.636,
+   "nIn": 6,
+   "audibleIn": 5,
+   "shareIn": 0.833,
+   "nOut": 5,
+   "audibleOut": 2,
+   "shareOut": 0.4,
+   "pHyper": 0.197,
+   "wilsonIn": [
+    0.436,
+    0.97
+   ]
+  },
+  "TESTOLD": {
+   "nBig": 13,
+   "audibleBig": 11,
+   "baseRate": 0.846,
+   "nIn": 8,
+   "audibleIn": 7,
+   "shareIn": 0.875,
+   "nOut": 5,
+   "audibleOut": 4,
+   "shareOut": 0.8,
+   "pHyper": 0.641,
+   "wilsonIn": [
+    0.529,
+    0.978
+   ]
+  },
+  "note": "hypergeometric is valid per sample (one observation per language); FRESH stacked is not tested this way"
+ },
+ "B2": {
+  "DEV": {
+   "ruleCell": {
+    "nIn": 9,
+    "nOut": 5,
+    "shareIn": 1,
+    "shareOut": 0.6,
+    "D": 0.4
+   },
+   "maxD": 0.6,
+   "pCell": 0.0411,
+   "pSearch": 0.0283,
+   "draws": 10000
+  },
+  "PRIMARY": {
+   "ruleCell": {
+    "nIn": 12,
+    "nOut": 8,
+    "shareIn": 0.75,
+    "shareOut": 0.375,
+    "D": 0.375
+   },
+   "maxD": 0.5,
+   "pCell": 0.0718,
+   "pSearch": 0.2413,
+   "draws": 10000
+  },
+  "TESTNEW": {
+   "ruleCell": {
+    "nIn": 6,
+    "nOut": 5,
+    "shareIn": 0.833,
+    "shareOut": 0.4,
+    "D": 0.433
+   },
+   "maxD": 0.636,
+   "pCell": 0.1118,
+   "pSearch": 0.1239,
+   "draws": 10000
+  }
+ },
+ "B3": {
+  "bestOnDev": {
+   "T": 0.24,
+   "F": 150,
+   "nIn": 10,
+   "nOut": 5,
+   "shareIn": 1,
+   "shareOut": 0.4,
+   "D": 0.6
+  },
+  "devChosen_scoredOn": {
+   "PRIMARY": {
+    "T": 0.24,
+    "F": 150,
+    "nIn": 22,
+    "nOut": 7,
+    "shareIn": 0.682,
+    "shareOut": 0.571,
+    "D": 0.11
+   },
+   "TESTNEW": {
+    "T": 0.24,
+    "F": 150,
+    "nIn": 12,
+    "nOut": 5,
+    "shareIn": 0.667,
+    "shareOut": 0.2,
+    "D": 0.467
+   },
+   "TESTOLD": {
+    "T": 0.24,
+    "F": 150,
+    "nIn": 12,
+    "nOut": 6,
+    "shareIn": 0.917,
+    "shareOut": 0.333,
+    "D": 0.583
+   }
+  },
+  "bestOnPrimary": {
+   "T": 0.3,
+   "F": 300,
+   "nIn": 8,
+   "nOut": 8,
+   "shareIn": 0.875,
+   "shareOut": 0.375,
+   "D": 0.5
+  },
+  "primaryChosen_scoredOn": {
+   "DEV": {
+    "T": 0.3,
+    "F": 300,
+    "nIn": 8,
+    "nOut": 5,
+    "shareIn": 1,
+    "shareOut": 0.6,
+    "D": 0.4
+   },
+   "TESTNEW": {
+    "T": 0.3,
+    "F": 300,
+    "nIn": 5,
+    "nOut": 6,
+    "shareIn": 0.8,
+    "shareOut": 0.5,
+    "D": 0.3
+   },
+   "TESTOLD": {
+    "T": 0.3,
+    "F": 300,
+    "nIn": 6,
+    "nOut": 5,
+    "shareIn": 1,
+    "shareOut": 0.8,
+    "D": 0.2
+   }
+  },
+  "bestOnTestNew": {
+   "T": 0.36,
+   "F": 200,
+   "nIn": 4,
+   "nOut": 11,
+   "shareIn": 1,
+   "shareOut": 0.364,
+   "D": 0.636
+  },
+  "ruleCellOn": {
+   "DEV": {
+    "T": 0.2795,
+    "F": 250,
+    "nIn": 9,
+    "nOut": 5,
+    "shareIn": 1,
+    "shareOut": 0.6,
+    "D": 0.4
+   },
+   "PRIMARY": {
+    "T": 0.2795,
+    "F": 250,
+    "nIn": 12,
+    "nOut": 8,
+    "shareIn": 0.75,
+    "shareOut": 0.375,
+    "D": 0.375
+   },
+   "TRAINC": {
+    "T": 0.2795,
+    "F": 250,
+    "nIn": 11,
+    "nOut": 4,
+    "shareIn": 1,
+    "shareOut": 0.5,
+    "D": 0.5
+   },
+   "TESTNEW": {
+    "T": 0.2795,
+    "F": 250,
+    "nIn": 6,
+    "nOut": 5,
+    "shareIn": 0.833,
+    "shareOut": 0.4,
+    "D": 0.433
+   },
+   "TESTOLD": {
+    "T": 0.2795,
+    "F": 250,
+    "nIn": 8,
+    "nOut": 5,
+    "shareIn": 0.875,
+    "shareOut": 0.8,
+    "D": 0.075
+   }
+  },
+  "loco": {
+   "cladesHeldOut": 19,
+   "chosenInWindow": 0,
+   "of": 19,
+   "heldOutInScopeShare_chosen": 0.828,
+   "nChosenIn": 58,
+   "heldOutInScopeShare_rule": 0.891,
+   "nRuleIn": 46,
+   "chosen": [
+    "Germanic:0.2/300",
+    "Romance:0.2/300",
+    "Slavic:0.2/300",
+    "Sinitic:0.2/300",
+    "Afroasiatic:0.2/300",
+    "Indo-Iranian:0.2/300",
+    "Japonic:0.2/300",
+    "Austroasiatic:0.2/300",
+    "Austronesian:0.2/300",
+    "Turkic:0.2/300",
+    "Hellenic:0.2/300",
+    "Uralic:0.22/250",
+    "Celtic:0.2/300",
+    "Basque:0.22/300",
+    "Armenian:0.2/300",
+    "Kartvelian:0.2/300",
+    "Baltic:0.2/300",
+    "Dravidian:0.2/300",
+    "Niger-Congo:0.2/300"
+   ]
+  },
+  "locoFresh": {
+   "cladesHeldOut": 15,
+   "chosenInWindow": 1,
+   "of": 15,
+   "heldOutInScopeShare_chosen": 0.769,
+   "nChosenIn": 13,
+   "heldOutInScopeShare_rule": 0.778,
+   "nRuleIn": 18,
+   "chosen": [
+    "Slavic:0.36/400",
+    "Romance:0.36/250",
+    "Afroasiatic:0.36/250",
+    "Celtic:0.36/200",
+    "Germanic:0.3/200",
+    "Uralic:0.36/200",
+    "Basque:0.22/300",
+    "Hellenic:0.36/400",
+    "Armenian:0.36/250",
+    "Kartvelian:0.36/250",
+    "Turkic:0.2/200",
+    "Baltic:0.36/250",
+    "Sinitic:0.3/400",
+    "Dravidian:0.36/400",
+    "Niger-Congo:0.36/400"
+   ]
+  },
+  "surfaceF250": {
+   "DEV": {
+    "0.2": "invalid",
+    "0.22": "invalid",
+    "0.24": "10/4 in 1 out 0.5 D 0.5",
+    "0.26": "9/5 in 1 out 0.6 D 0.4",
+    "0.28": "9/5 in 1 out 0.6 D 0.4",
+    "0.3": "9/5 in 1 out 0.6 D 0.4",
+    "0.32": "9/5 in 1 out 0.6 D 0.4",
+    "0.34": "7/7 in 1 out 0.71 D 0.29",
+    "0.36": "6/8 in 1 out 0.75 D 0.25",
+    "0.38": "4/10 in 1 out 0.8 D 0.2",
+    "0.4": "invalid"
+   },
+   "PRIMARY": {
+    "0.2": "invalid",
+    "0.22": "17/3 in 0.65 out 0.33 D 0.31",
+    "0.24": "15/5 in 0.67 out 0.4 D 0.27",
+    "0.26": "13/7 in 0.69 out 0.43 D 0.26",
+    "0.28": "12/8 in 0.75 out 0.38 D 0.38",
+    "0.3": "11/9 in 0.82 out 0.33 D 0.48",
+    "0.32": "9/11 in 0.78 out 0.45 D 0.32",
+    "0.34": "8/12 in 0.88 out 0.42 D 0.46",
+    "0.36": "8/12 in 0.88 out 0.42 D 0.46",
+    "0.38": "invalid",
+    "0.4": "invalid"
+   },
+   "TESTNEW": {
+    "0.2": "invalid",
+    "0.22": "7/4 in 0.86 out 0.25 D 0.61",
+    "0.24": "7/4 in 0.86 out 0.25 D 0.61",
+    "0.26": "7/4 in 0.86 out 0.25 D 0.61",
+    "0.28": "6/5 in 0.83 out 0.4 D 0.43",
+    "0.3": "5/6 in 0.8 out 0.5 D 0.3",
+    "0.32": "5/6 in 0.8 out 0.5 D 0.3",
+    "0.34": "5/6 in 0.8 out 0.5 D 0.3",
+    "0.36": "4/7 in 1 out 0.43 D 0.57",
+    "0.38": "invalid",
+    "0.4": "invalid"
+   }
+  }
+ },
+ "B4": {
+  "PRIMARY_clade": {
+   "clades": 15,
+   "valid": 3996,
+   "shareIn": {
+    "point": 0.75,
+    "lo": 0.429,
+    "hi": 1
+   },
+   "shareOut": {
+    "point": 0.375,
+    "lo": 0,
+    "hi": 0.667
+   },
+   "D": {
+    "point": 0.375,
+    "lo": -0.1,
+    "hi": 0.889
+   },
+   "lift": {
+    "point": 0.15,
+    "lo": -0.055,
+    "hi": 0.389
+   }
+  },
+  "PRIMARY_language": {
+   "clusters": 34,
+   "valid": 4000,
+   "shareIn": {
+    "point": 0.75,
+    "lo": 0.5,
+    "hi": 1
+   },
+   "shareOut": {
+    "point": 0.375,
+    "lo": 0,
+    "hi": 0.75
+   },
+   "D": {
+    "point": 0.375,
+    "lo": -0.088,
+    "hi": 0.792
+   },
+   "lift": {
+    "point": 0.15,
+    "lo": -0.03,
+    "hi": 0.357
+   }
+  },
+  "FRESH_clade": {
+   "clades": 15,
+   "valid": 4000,
+   "shareIn": {
+    "point": 0.778,
+    "lo": 0.5,
+    "hi": 1
+   },
+   "shareOut": {
+    "point": 0.385,
+    "lo": 0,
+    "hi": 0.64
+   },
+   "D": {
+    "point": 0.393,
+    "lo": 0,
+    "hi": 0.9
+   },
+   "lift": {
+    "point": 0.165,
+    "lo": 0,
+    "hi": 0.382
+   }
+  },
+  "FRESH_language": {
+   "clusters": 34,
+   "valid": 4000,
+   "shareIn": {
+    "point": 0.778,
+    "lo": 0.545,
+    "hi": 1
+   },
+   "shareOut": {
+    "point": 0.385,
+    "lo": 0.091,
+    "hi": 0.727
+   },
+   "D": {
+    "point": 0.393,
+    "lo": -0.024,
+    "hi": 0.776
+   },
+   "lift": {
+    "point": 0.165,
+    "lo": -0.009,
+    "hi": 0.378
+   }
+  },
+  "ALLOBS_clade": {
+   "clades": 19,
+   "valid": 4000,
+   "shareIn": {
+    "point": 0.891,
+    "lo": 0.667,
+    "hi": 0.978
+   },
+   "shareOut": {
+    "point": 0.519,
+    "lo": 0.2,
+    "hi": 0.778
+   },
+   "D": {
+    "point": 0.373,
+    "lo": -0.006,
+    "hi": 0.75
+   },
+   "lift": {
+    "point": 0.138,
+    "lo": -0.003,
+    "hi": 0.299
+   }
+  }
+ },
+ "B5": {
+  "PRIMARY": {
+   "0.58": {
+    "nIn": 12,
+    "shareIn": 0.833,
+    "nOut": 8,
+    "shareOut": 0.5,
+    "baseAll": 0.7
+   },
+   "0.6": {
+    "nIn": 12,
+    "shareIn": 0.75,
+    "nOut": 8,
+    "shareOut": 0.375,
+    "baseAll": 0.6
+   },
+   "0.62": {
+    "nIn": 12,
+    "shareIn": 0.667,
+    "nOut": 8,
+    "shareOut": 0.375,
+    "baseAll": 0.55
+   },
+   "0.65": {
+    "nIn": 12,
+    "shareIn": 0.25,
+    "nOut": 8,
+    "shareOut": 0.25,
+    "baseAll": 0.25
+   }
+  },
+  "FRESH": {
+   "0.58": {
+    "nIn": 18,
+    "shareIn": 0.833,
+    "nOut": 13,
+    "shareOut": 0.538,
+    "baseAll": 0.71
+   },
+   "0.6": {
+    "nIn": 18,
+    "shareIn": 0.778,
+    "nOut": 13,
+    "shareOut": 0.385,
+    "baseAll": 0.613
+   },
+   "0.62": {
+    "nIn": 18,
+    "shareIn": 0.667,
+    "nOut": 13,
+    "shareOut": 0.308,
+    "baseAll": 0.516
+   },
+   "0.65": {
+    "nIn": 18,
+    "shareIn": 0.389,
+    "nOut": 13,
+    "shareOut": 0.231,
+    "baseAll": 0.323
+   }
+  }
+ },
+ "B6": {
+  "windowsAll": {
+   "n": 187,
+   "languages": 55,
+   "stat": {
+    "shareIn": 0.863,
+    "shareOut": 0.405,
+    "D": 0.458,
+    "lift": 0.128
+   },
+   "langBoot": {
+    "clusters": 55,
+    "valid": 4000,
+    "shareIn": {
+     "point": 0.863,
+     "lo": 0.758,
+     "hi": 0.947
+    },
+    "shareOut": {
+     "point": 0.405,
+     "lo": 0.233,
+     "hi": 0.6
+    },
+    "D": {
+     "point": 0.458,
+     "lo": 0.246,
+     "hi": 0.652
+    },
+    "lift": {
+     "point": 0.128,
+     "lo": 0.052,
+     "hi": 0.221
+    }
+   },
+   "cladeBoot": {
+    "clusters": 18,
+    "valid": 3999,
+    "shareIn": {
+     "point": 0.863,
+     "lo": 0.741,
+     "hi": 0.961
+    },
+    "shareOut": {
+     "point": 0.405,
+     "lo": 0.2,
+     "hi": 0.615
+    },
+    "D": {
+     "point": 0.458,
+     "lo": 0.2,
+     "hi": 0.708
+    },
+    "lift": {
+     "point": 0.128,
+     "lo": 0.035,
+     "hi": 0.307
+    }
+   }
+  },
+  "windowsFresh": {
+   "n": 104,
+   "langBoot": {
+    "clusters": 34,
+    "valid": 4000,
+    "shareIn": {
+     "point": 0.769,
+     "lo": 0.59,
+     "hi": 0.923
+    },
+    "shareOut": {
+     "point": 0.379,
+     "lo": 0.205,
+     "hi": 0.594
+    },
+    "D": {
+     "point": 0.39,
+     "lo": 0.13,
+     "hi": 0.621
+    },
+    "lift": {
+     "point": 0.166,
+     "lo": 0.043,
+     "hi": 0.311
+    }
+   },
+   "cladeBoot": {
+    "clusters": 15,
+    "valid": 3998,
+    "shareIn": {
+     "point": 0.769,
+     "lo": 0.714,
+     "hi": 0.862
+    },
+    "shareOut": {
+     "point": 0.379,
+     "lo": 0.154,
+     "hi": 0.531
+    },
+    "D": {
+     "point": 0.39,
+     "lo": 0.217,
+     "hi": 0.652
+    },
+    "lift": {
+     "point": 0.166,
+     "lo": 0.061,
+     "hi": 0.34
+    }
+   }
+  },
+  "languageMeans": {
+   "n": 29,
+   "ge250": 23,
+   "ALL": {
+    "nBig": 23,
+    "audibleBig": 17,
+    "baseRate": 0.739,
+    "nIn": 18,
+    "audibleIn": 15,
+    "shareIn": 0.833,
+    "nOut": 5,
+    "audibleOut": 2,
+    "shareOut": 0.4,
+    "pHyper": 0.0886,
+    "wilsonIn": [
+     0.608,
+     0.942
+    ]
+   },
+   "FRESH": {
+    "nBig": 11,
+    "audibleBig": 7,
+    "baseRate": 0.636,
+    "nIn": 7,
+    "audibleIn": 5,
+    "shareIn": 0.714,
+    "nOut": 4,
+    "audibleOut": 2,
+    "shareOut": 0.5,
+    "pHyper": 0.4697,
+    "wilsonIn": [
+     0.359,
+     0.918
+    ]
+   },
+   "cladeBoot": {
+    "clusters": 10,
+    "valid": 3874,
+    "shareIn": {
+     "point": 0.833,
+     "lo": 0.7,
+     "hi": 1
+    },
+    "shareOut": {
+     "point": 0.4,
+     "lo": 0,
+     "hi": 1
+    },
+    "D": {
+     "point": 0.433,
+     "lo": -0.19,
+     "hi": 1
+    },
+    "lift": {
+     "point": 0.094,
+     "lo": -0.025,
+     "hi": 0.364
+    }
+   }
+  }
+ },
+ "B7": {
+  "inScope": [
+   "cat:Romance:0.6395",
+   "cym:Celtic:0.6287",
+   "dan:Germanic:0.6694",
+   "fao:Germanic:0.6319",
+   "gle:Celtic:0.7961",
+   "got:Germanic:0.5642",
+   "grc:Hellenic:0.6292",
+   "lzh:Sinitic:0.5772",
+   "mlt:Afroasiatic:0.6314",
+   "nob:Germanic:0.6759",
+   "ron:Romance:0.6071",
+   "srp:Slavic:0.5904"
+  ],
+  "looClade": [
+   {
+    "without": "Romance",
+    "n": 10,
+    "share": 0.7
+   },
+   {
+    "without": "Celtic",
+    "n": 10,
+    "share": 0.7
+   },
+   {
+    "without": "Germanic",
+    "n": 8,
+    "share": 0.75
+   },
+   {
+    "without": "Hellenic",
+    "n": 11,
+    "share": 0.727
+   },
+   {
+    "without": "Sinitic",
+    "n": 11,
+    "share": 0.818
+   },
+   {
+    "without": "Afroasiatic",
+    "n": 11,
+    "share": 0.727
+   },
+   {
+    "without": "Slavic",
+    "n": 11,
+    "share": 0.818
+   }
+  ],
+  "misses": [
+   "got",
+   "lzh",
+   "srp"
+  ],
+  "withoutMissClades": {
+   "clades": [
+    "Germanic",
+    "Sinitic",
+    "Slavic"
+   ],
+   "n": 6,
+   "share": 1
+  }
+ },
+ "verdictB": {
+  "b1PrimaryP": 0.1132,
+  "b1Pass": false,
+  "b2PrimarySearchP": 0.2413,
+  "b2Pass": false,
+  "freshShare": {
+   "point": 0.778,
+   "lo": 0.5,
+   "hi": 1
+  },
+  "freshShareLowerGe50": true,
+  "liftLowerPositive": false,
+  "verdict": "STANDS_NARROWER"
+ }
+}

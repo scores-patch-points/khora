@@ -1,0 +1,3757 @@
+{
+ "headerSha256": "dfa55584ce533cd890c2cf9060d30688af5f446a68580a928b31785f296edd35",
+ "generated": "2026-10-07T06:33:53.470Z",
+ "rowsRead": 62,
+ "errors": [],
+ "pairsOnlyDevCoef": [
+  0.3118,
+  0.037
+ ],
+ "sets": {
+  "PRIMARY": {
+   "set": "PRIMARY",
+   "languages": 38,
+   "thin": [
+    "mar:14",
+    "tel:37",
+    "uig:1"
+   ],
+   "voidedPosition": [
+    "afr:0.5507"
+   ],
+   "eligible": 34,
+   "clauses": {
+    "a_direction": {
+     "rho": -0.043,
+     "p": 0.5849,
+     "pass": false
+    },
+    "b_frozenSkill": {
+     "skill": -0.1627,
+     "rmseModel": 0.0725,
+     "rmseBaseline": 0.0623,
+     "meanShift": 0.0042,
+     "pass": false
+    },
+    "c_scopeHit": {
+     "inScopeN": 12,
+     "inScopeAudibleShare": 0.75,
+     "inScopeWilson95": [
+      0.468,
+      0.911
+     ],
+     "outScopeN": 8,
+     "outScopeAudibleShare": 0.375,
+     "pass": true
+    },
+    "d_separation": {
+     "nIn": 19,
+     "nOut": 15,
+     "meanIn": 0.62,
+     "meanOut": 0.6133,
+     "diff": 0.0067,
+     "pass": false
+    },
+    "e_controls": {
+     "e2_nullMean": 0.4996,
+     "e2_nullShareGe60": 0.0059,
+     "e2_nullDraws": 170,
+     "e2_pass": true,
+     "e3_audibleLanguages": 21,
+     "e3_shuffledLe55": 18,
+     "e3_pass": true,
+     "e3_shuffleMeanAllEligible": 0.5089,
+     "e3_shufflePositionMean": 0.5063
+    }
+   },
+   "meanAuc": 0.617,
+   "shareAudible": 0.618,
+   "skillFwcOnlyFrozen": -0.2684,
+   "skillPairsOnlyFrozen": -0.0069,
+   "addsBeyondPairs": -0.1558,
+   "partialSpearmanFwcGivenPairs": -0.033,
+   "eq250": {
+    "n": 20,
+    "rho": 0.235,
+    "p": 0.1515,
+    "meanIn": 0.6221,
+    "meanOut": 0.5933,
+    "audibleShareIn": 0.75,
+    "audibleShareOut": 0.375,
+    "nIn": 12,
+    "nOut": 8
+   },
+   "graded": {
+    "intercept": 0.6181,
+    "slopeFwcPerDevSD": -0.0034,
+    "slopePairsPerDevSD": 0.0182,
+    "ciFwc": [
+     -0.0273,
+     0.0231
+    ],
+    "ciPairs": [
+     -0.0202,
+     0.0489
+    ],
+    "devSlopeFwc": 0.0377,
+    "devSlopePairs": 0.0333
+   },
+   "zones": {
+    "all": {
+     "<0.20": {
+      "n": 4,
+      "audibleShare": 0.75,
+      "meanAuc": 0.6554
+     },
+     "0.20-0.2795": {
+      "n": 11,
+      "audibleShare": 0.455,
+      "meanAuc": 0.598
+     },
+     ">=0.2795": {
+      "n": 19,
+      "audibleShare": 0.684,
+      "meanAuc": 0.62
+     }
+    },
+    "pairs>=250": {
+     "<0.20": {
+      "n": 1,
+      "audibleShare": 0,
+      "meanAuc": 0.5663
+     },
+     "0.20-0.2795": {
+      "n": 7,
+      "audibleShare": 0.429,
+      "meanAuc": 0.6097
+     },
+     ">=0.2795": {
+      "n": 12,
+      "audibleShare": 0.75,
+      "meanAuc": 0.6368
+     }
+    }
+   },
+   "rows": [
+    {
+     "stem": "be",
+     "set": "A",
+     "fwc32": 0.2291,
+     "pairs": 504,
+     "auc": 0.6485,
+     "se": 0.0172,
+     "pos": 0.5075,
+     "pred": 0.6067,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.4886,
+     "eq250": 0.6285
+    },
+    {
+     "stem": "bul",
+     "set": "B",
+     "fwc32": 0.3424,
+     "pairs": 175,
+     "auc": 0.6438,
+     "se": 0.0293,
+     "pos": 0.4694,
+     "pred": 0.6033,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.5205,
+     "eq250": null
+    },
+    {
+     "stem": "cat",
+     "set": "B",
+     "fwc32": 0.4612,
+     "pairs": 600,
+     "auc": 0.6395,
+     "se": 0.0159,
+     "pos": 0.4946,
+     "pred": 0.7047,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5391,
+     "eq250": 0.605
+    },
+    {
+     "stem": "ces",
+     "set": "B",
+     "fwc32": 0.2541,
+     "pairs": 592,
+     "auc": 0.6708,
+     "se": 0.0156,
+     "pos": 0.534,
+     "pred": 0.6236,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.5074,
+     "eq250": 0.6514
+    },
+    {
+     "stem": "chu",
+     "set": "A",
+     "fwc32": 0.2857,
+     "pairs": 191,
+     "auc": 0.6007,
+     "se": 0.0288,
+     "pos": 0.5,
+     "pred": 0.5852,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.4934,
+     "eq250": null
+    },
+    {
+     "stem": "cop",
+     "set": "A",
+     "fwc32": 0.5436,
+     "pairs": 80,
+     "auc": 0.5814,
+     "se": 0.045,
+     "pos": 0.5232,
+     "pred": 0.6464,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4489,
+     "eq250": null
+    },
+    {
+     "stem": "cym",
+     "set": "B",
+     "fwc32": 0.3791,
+     "pairs": 258,
+     "auc": 0.6287,
+     "se": 0.0244,
+     "pos": 0.5,
+     "pred": 0.635,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5477,
+     "eq250": 0.626
+    },
+    {
+     "stem": "dan",
+     "set": "B",
+     "fwc32": 0.3637,
+     "pairs": 302,
+     "auc": 0.6694,
+     "se": 0.0218,
+     "pos": 0.5138,
+     "pred": 0.636,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.513,
+     "eq250": 0.6777
+    },
+    {
+     "stem": "est",
+     "set": "B",
+     "fwc32": 0.2301,
+     "pairs": 412,
+     "auc": 0.5643,
+     "se": 0.0199,
+     "pos": 0.5042,
+     "pred": 0.5981,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.5723,
+     "eq250": 0.5406
+    },
+    {
+     "stem": "eus",
+     "set": "B",
+     "fwc32": 0.217,
+     "pairs": 327,
+     "auc": 0.6521,
+     "se": 0.0213,
+     "pos": 0.509,
+     "pred": 0.5826,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.4564,
+     "eq250": 0.6499
+    },
+    {
+     "stem": "fao",
+     "set": "A",
+     "fwc32": 0.4608,
+     "pairs": 582,
+     "auc": 0.6319,
+     "se": 0.0162,
+     "pos": 0.4999,
+     "pred": 0.7031,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5214,
+     "eq250": 0.604
+    },
+    {
+     "stem": "gle",
+     "set": "B",
+     "fwc32": 0.3645,
+     "pairs": 543,
+     "auc": 0.7961,
+     "se": 0.0135,
+     "pos": 0.5005,
+     "pred": 0.6626,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5303,
+     "eq250": 0.777
+    },
+    {
+     "stem": "glg",
+     "set": "B",
+     "fwc32": 0.4662,
+     "pairs": 66,
+     "auc": 0.4977,
+     "se": 0.0504,
+     "pos": 0.5,
+     "pred": 0.6077,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4268,
+     "eq250": null
+    },
+    {
+     "stem": "got",
+     "set": "A",
+     "fwc32": 0.3351,
+     "pairs": 264,
+     "auc": 0.5642,
+     "se": 0.0249,
+     "pos": 0.4807,
+     "pred": 0.6189,
+     "inScope": true,
+     "audible": false,
+     "shuf": 0.5283,
+     "eq250": 0.5718
+    },
+    {
+     "stem": "grc",
+     "set": "A",
+     "fwc32": 0.3603,
+     "pairs": 292,
+     "auc": 0.6292,
+     "se": 0.0229,
+     "pos": 0.5075,
+     "pred": 0.6332,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5395,
+     "eq250": 0.6311
+    },
+    {
+     "stem": "hrv",
+     "set": "B",
+     "fwc32": 0.2632,
+     "pairs": 224,
+     "auc": 0.5623,
+     "se": 0.027,
+     "pos": 0.4957,
+     "pred": 0.5836,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.5,
+     "eq250": null
+    },
+    {
+     "stem": "hun",
+     "set": "B",
+     "fwc32": 0.2555,
+     "pairs": 200,
+     "auc": 0.6111,
+     "se": 0.028,
+     "pos": 0.524,
+     "pred": 0.5755,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.5006,
+     "eq250": null
+    },
+    {
+     "stem": "hye",
+     "set": "B",
+     "fwc32": 0.2092,
+     "pairs": 409,
+     "auc": 0.5975,
+     "se": 0.0197,
+     "pos": 0.4979,
+     "pred": 0.5896,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4812,
+     "eq250": 0.593
+    },
+    {
+     "stem": "is",
+     "set": "A",
+     "fwc32": 0.3814,
+     "pairs": 242,
+     "auc": 0.6069,
+     "se": 0.0255,
+     "pos": 0.4925,
+     "pred": 0.633,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.4963,
+     "eq250": null
+    },
+    {
+     "stem": "kat",
+     "set": "B",
+     "fwc32": 0.1956,
+     "pairs": 177,
+     "auc": 0.6126,
+     "se": 0.0298,
+     "pos": 0.5068,
+     "pred": 0.5468,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.551,
+     "eq250": null
+    },
+    {
+     "stem": "kaz",
+     "set": "A",
+     "fwc32": 0.1257,
+     "pairs": 231,
+     "auc": 0.654,
+     "se": 0.0253,
+     "pos": 0.527,
+     "pred": 0.5316,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.4539,
+     "eq250": null
+    },
+    {
+     "stem": "lat",
+     "set": "A",
+     "fwc32": 0.2446,
+     "pairs": 381,
+     "auc": 0.5644,
+     "se": 0.0207,
+     "pos": 0.4964,
+     "pred": 0.6002,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.5111,
+     "eq250": 0.5574
+    },
+    {
+     "stem": "lav",
+     "set": "B",
+     "fwc32": 0.2554,
+     "pairs": 243,
+     "auc": 0.5265,
+     "se": 0.0262,
+     "pos": 0.5138,
+     "pred": 0.5842,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.5114,
+     "eq250": null
+    },
+    {
+     "stem": "lit",
+     "set": "B",
+     "fwc32": 0.1889,
+     "pairs": 145,
+     "auc": 0.7886,
+     "se": 0.0267,
+     "pos": 0.506,
+     "pred": 0.5353,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.5973,
+     "eq250": null
+    },
+    {
+     "stem": "lzh",
+     "set": "B",
+     "fwc32": 0.4012,
+     "pairs": 600,
+     "auc": 0.5772,
+     "se": 0.0164,
+     "pos": 0.5,
+     "pred": 0.6814,
+     "inScope": true,
+     "audible": false,
+     "shuf": 0.4978,
+     "eq250": 0.5618
+    },
+    {
+     "stem": "mlt",
+     "set": "B",
+     "fwc32": 0.3062,
+     "pairs": 353,
+     "auc": 0.6314,
+     "se": 0.0208,
+     "pos": 0.5188,
+     "pred": 0.6207,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5375,
+     "eq250": 0.6191
+    },
+    {
+     "stem": "nob",
+     "set": "B",
+     "fwc32": 0.378,
+     "pairs": 550,
+     "auc": 0.6759,
+     "se": 0.0161,
+     "pos": 0.5102,
+     "pred": 0.6685,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5204,
+     "eq250": 0.6461
+    },
+    {
+     "stem": "ron",
+     "set": "B",
+     "fwc32": 0.3152,
+     "pairs": 311,
+     "auc": 0.6071,
+     "se": 0.0225,
+     "pos": 0.5093,
+     "pred": 0.6185,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5251,
+     "eq250": 0.6031
+    },
+    {
+     "stem": "slk",
+     "set": "B",
+     "fwc32": 0.2628,
+     "pairs": 600,
+     "auc": 0.5703,
+     "se": 0.0165,
+     "pos": 0.5032,
+     "pred": 0.6276,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.5245,
+     "eq250": 0.5541
+    },
+    {
+     "stem": "slv",
+     "set": "B",
+     "fwc32": 0.2737,
+     "pairs": 222,
+     "auc": 0.6097,
+     "se": 0.0266,
+     "pos": 0.4971,
+     "pred": 0.5873,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.5341,
+     "eq250": null
+    },
+    {
+     "stem": "srp",
+     "set": "B",
+     "fwc32": 0.2847,
+     "pairs": 600,
+     "auc": 0.5904,
+     "se": 0.0163,
+     "pos": 0.5132,
+     "pred": 0.6361,
+     "inScope": true,
+     "audible": false,
+     "shuf": 0.5184,
+     "eq250": 0.542
+    },
+    {
+     "stem": "tam",
+     "set": "B",
+     "fwc32": 0.1699,
+     "pairs": 258,
+     "auc": 0.5663,
+     "se": 0.0252,
+     "pos": 0.4947,
+     "pred": 0.5537,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4359,
+     "eq250": 0.5718
+    },
+    {
+     "stem": "wol",
+     "set": "B",
+     "fwc32": 0.4017,
+     "pairs": 127,
+     "auc": 0.6827,
+     "se": 0.0333,
+     "pos": 0.5141,
+     "pred": 0.612,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.5584,
+     "eq250": null
+    },
+    {
+     "stem": "yor",
+     "set": "A",
+     "fwc32": 0.4215,
+     "pairs": 90,
+     "auc": 0.5252,
+     "se": 0.0431,
+     "pos": 0.4807,
+     "pred": 0.6043,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4128,
+     "eq250": null
+    }
+   ]
+  },
+  "SECONDARY": {
+   "set": "SECONDARY",
+   "languages": 24,
+   "thin": [
+    "arb:9",
+    "kor:15",
+    "vie:26"
+   ],
+   "voidedPosition": [],
+   "eligible": 21,
+   "clauses": {
+    "a_direction": {
+     "rho": 0.591,
+     "p": 0.0045,
+     "pass": true
+    },
+    "b_frozenSkill": {
+     "skill": 0.4867,
+     "rmseModel": 0.0361,
+     "rmseBaseline": 0.0703,
+     "meanShift": 0.0037,
+     "pass": true
+    },
+    "c_scopeHit": {
+     "inScopeN": 11,
+     "inScopeAudibleShare": 1,
+     "inScopeWilson95": [
+      0.741,
+      1
+     ],
+     "outScopeN": 4,
+     "outScopeAudibleShare": 0.5,
+     "pass": true
+    },
+    "d_separation": {
+     "nIn": 14,
+     "nOut": 7,
+     "meanIn": 0.6705,
+     "meanOut": 0.5655,
+     "diff": 0.105,
+     "pass": true
+    },
+    "e_controls": {
+     "e2_nullMean": 0.4944,
+     "e2_nullShareGe60": 0,
+     "e2_nullDraws": 105,
+     "e2_pass": true,
+     "e3_audibleLanguages": 15,
+     "e3_shuffledLe55": 14,
+     "e3_pass": true,
+     "e3_shuffleMeanAllEligible": 0.51,
+     "e3_shufflePositionMean": 0.5019
+    }
+   },
+   "meanAuc": 0.6355,
+   "shareAudible": 0.714,
+   "skillFwcOnlyFrozen": 0.3156,
+   "skillPairsOnlyFrozen": 0.2313,
+   "addsBeyondPairs": 0.2554,
+   "partialSpearmanFwcGivenPairs": 0.522,
+   "eq250": {
+    "n": 15,
+    "rho": 0.604,
+    "p": 0.0097,
+    "meanIn": 0.6459,
+    "meanOut": 0.5779,
+    "audibleShareIn": 0.909,
+    "audibleShareOut": 0.25,
+    "nIn": 11,
+    "nOut": 4
+   },
+   "graded": {
+    "intercept": 0.615,
+    "slopeFwcPerDevSD": 0.0429,
+    "slopePairsPerDevSD": 0.0437,
+    "ciFwc": [
+     0.0258,
+     0.0629
+    ],
+    "ciPairs": [
+     0.015,
+     0.0649
+    ],
+    "devSlopeFwc": 0.0377,
+    "devSlopePairs": 0.0333
+   },
+   "zones": {
+    "all": {
+     "<0.20": {
+      "n": 2,
+      "audibleShare": 0,
+      "meanAuc": 0.5158
+     },
+     "0.20-0.2795": {
+      "n": 5,
+      "audibleShare": 0.4,
+      "meanAuc": 0.5853
+     },
+     ">=0.2795": {
+      "n": 14,
+      "audibleShare": 0.929,
+      "meanAuc": 0.6705
+     }
+    },
+    "pairs>=250": {
+     "<0.20": {
+      "n": 1,
+      "audibleShare": 0,
+      "meanAuc": 0.5436
+     },
+     "0.20-0.2795": {
+      "n": 3,
+      "audibleShare": 0.667,
+      "meanAuc": 0.6072
+     },
+     ">=0.2795": {
+      "n": 11,
+      "audibleShare": 1,
+      "meanAuc": 0.6786
+     }
+    }
+   },
+   "rows": [
+    {
+     "stem": "cmn",
+     "set": "C",
+     "fwc32": 0.2217,
+     "pairs": 600,
+     "auc": 0.6294,
+     "se": 0.016,
+     "pos": 0.5031,
+     "pred": 0.6116,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.5166,
+     "eq250": 0.5799
+    },
+    {
+     "stem": "deu",
+     "set": "C",
+     "fwc32": 0.3413,
+     "pairs": 506,
+     "auc": 0.6863,
+     "se": 0.0166,
+     "pos": 0.5061,
+     "pred": 0.6505,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5335,
+     "eq250": 0.648
+    },
+    {
+     "stem": "ell",
+     "set": "C",
+     "fwc32": 0.4069,
+     "pairs": 242,
+     "auc": 0.7188,
+     "se": 0.0231,
+     "pos": 0.5,
+     "pred": 0.6429,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.5244,
+     "eq250": null
+    },
+    {
+     "stem": "eng",
+     "set": "C",
+     "fwc32": 0.3481,
+     "pairs": 600,
+     "auc": 0.661,
+     "se": 0.0156,
+     "pos": 0.4966,
+     "pred": 0.6607,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5675,
+     "eq250": 0.6254
+    },
+    {
+     "stem": "fas",
+     "set": "C",
+     "fwc32": 0.3328,
+     "pairs": 483,
+     "auc": 0.6934,
+     "se": 0.0168,
+     "pos": 0.5069,
+     "pred": 0.6451,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.4986,
+     "eq250": 0.6549
+    },
+    {
+     "stem": "fin",
+     "set": "C",
+     "fwc32": 0.1903,
+     "pairs": 169,
+     "auc": 0.488,
+     "se": 0.0314,
+     "pos": 0.5295,
+     "pred": 0.5427,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4738,
+     "eq250": null
+    },
+    {
+     "stem": "fra",
+     "set": "C",
+     "fwc32": 0.4129,
+     "pairs": 258,
+     "auc": 0.6771,
+     "se": 0.0235,
+     "pos": 0.4959,
+     "pred": 0.6481,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.491,
+     "eq250": 0.6799
+    },
+    {
+     "stem": "heb",
+     "set": "C",
+     "fwc32": 0.4237,
+     "pairs": 572,
+     "auc": 0.7403,
+     "se": 0.0146,
+     "pos": 0.5095,
+     "pred": 0.688,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5071,
+     "eq250": 0.6993
+    },
+    {
+     "stem": "hin",
+     "set": "C",
+     "fwc32": 0.3605,
+     "pairs": 600,
+     "auc": 0.6577,
+     "se": 0.0156,
+     "pos": 0.5098,
+     "pred": 0.6656,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5287,
+     "eq250": 0.624
+    },
+    {
+     "stem": "ind",
+     "set": "C",
+     "fwc32": 0.2478,
+     "pairs": 600,
+     "auc": 0.6518,
+     "se": 0.0157,
+     "pos": 0.4979,
+     "pred": 0.6218,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.4986,
+     "eq250": 0.635
+    },
+    {
+     "stem": "ita",
+     "set": "C",
+     "fwc32": 0.4192,
+     "pairs": 600,
+     "auc": 0.6593,
+     "se": 0.0156,
+     "pos": 0.4875,
+     "pred": 0.6884,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5252,
+     "eq250": 0.605
+    },
+    {
+     "stem": "jpn",
+     "set": "C",
+     "fwc32": 0.4339,
+     "pairs": 171,
+     "auc": 0.5941,
+     "se": 0.0306,
+     "pos": 0.5035,
+     "pred": 0.6378,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4897,
+     "eq250": null
+    },
+    {
+     "stem": "nld",
+     "set": "C",
+     "fwc32": 0.372,
+     "pairs": 517,
+     "auc": 0.6264,
+     "se": 0.0173,
+     "pos": 0.4953,
+     "pred": 0.6633,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5414,
+     "eq250": 0.5828
+    },
+    {
+     "stem": "pol",
+     "set": "C",
+     "fwc32": 0.2329,
+     "pairs": 185,
+     "auc": 0.5947,
+     "se": 0.0294,
+     "pos": 0.503,
+     "pred": 0.5633,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4751,
+     "eq250": null
+    },
+    {
+     "stem": "por",
+     "set": "C",
+     "fwc32": 0.4288,
+     "pairs": 600,
+     "auc": 0.6732,
+     "se": 0.0154,
+     "pos": 0.5074,
+     "pred": 0.6921,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5435,
+     "eq250": 0.647
+    },
+    {
+     "stem": "rus",
+     "set": "C",
+     "fwc32": 0.2059,
+     "pairs": 250,
+     "auc": 0.5403,
+     "se": 0.0257,
+     "pos": 0.496,
+     "pred": 0.5663,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.5209,
+     "eq250": 0.5403
+    },
+    {
+     "stem": "spa",
+     "set": "C",
+     "fwc32": 0.4445,
+     "pairs": 600,
+     "auc": 0.6883,
+     "se": 0.0152,
+     "pos": 0.4982,
+     "pred": 0.6982,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5093,
+     "eq250": 0.6703
+    },
+    {
+     "stem": "swe",
+     "set": "C",
+     "fwc32": 0.3442,
+     "pairs": 163,
+     "auc": 0.6088,
+     "se": 0.0311,
+     "pos": 0.4984,
+     "pred": 0.6008,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.4878,
+     "eq250": null
+    },
+    {
+     "stem": "tur",
+     "set": "C",
+     "fwc32": 0.1529,
+     "pairs": 327,
+     "auc": 0.5436,
+     "se": 0.0225,
+     "pos": 0.5,
+     "pred": 0.5577,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4892,
+     "eq250": 0.5563
+    },
+    {
+     "stem": "ukr",
+     "set": "C",
+     "fwc32": 0.2291,
+     "pairs": 168,
+     "auc": 0.5104,
+     "se": 0.0315,
+     "pos": 0.4966,
+     "pred": 0.5575,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4506,
+     "eq250": null
+    },
+    {
+     "stem": "urd",
+     "set": "C",
+     "fwc32": 0.3579,
+     "pairs": 600,
+     "auc": 0.702,
+     "se": 0.015,
+     "pos": 0.5,
+     "pred": 0.6646,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5379,
+     "eq250": 0.6678
+    }
+   ]
+  },
+  "POOLED": {
+   "set": "POOLED",
+   "languages": 62,
+   "thin": [
+    "arb:9",
+    "kor:15",
+    "mar:14",
+    "tel:37",
+    "uig:1",
+    "vie:26"
+   ],
+   "voidedPosition": [
+    "afr:0.5507"
+   ],
+   "eligible": 55,
+   "clauses": {
+    "a_direction": {
+     "rho": 0.285,
+     "p": 0.0177,
+     "pass": false
+    },
+    "b_frozenSkill": {
+     "skill": 0.0658,
+     "rmseModel": 0.0612,
+     "rmseBaseline": 0.0655,
+     "meanShift": 0.004,
+     "pass": false
+    },
+    "c_scopeHit": {
+     "inScopeN": 23,
+     "inScopeAudibleShare": 0.8696,
+     "inScopeWilson95": [
+      0.679,
+      0.955
+     ],
+     "outScopeN": 12,
+     "outScopeAudibleShare": 0.4167,
+     "pass": true
+    },
+    "d_separation": {
+     "nIn": 33,
+     "nOut": 22,
+     "meanIn": 0.6414,
+     "meanOut": 0.5981,
+     "diff": 0.0433,
+     "pass": true
+    },
+    "e_controls": {
+     "e2_nullMean": 0.4976,
+     "e2_nullShareGe60": 0.0036,
+     "e2_nullDraws": 275,
+     "e2_pass": true,
+     "e3_audibleLanguages": 36,
+     "e3_shuffledLe55": 32,
+     "e3_pass": true,
+     "e3_shuffleMeanAllEligible": 0.5093,
+     "e3_shufflePositionMean": 0.5046
+    }
+   },
+   "meanAuc": 0.6241,
+   "shareAudible": 0.655,
+   "skillFwcOnlyFrozen": -0.0521,
+   "skillPairsOnlyFrozen": 0.0902,
+   "addsBeyondPairs": -0.0244,
+   "partialSpearmanFwcGivenPairs": 0.261,
+   "eq250": {
+    "n": 35,
+    "rho": 0.456,
+    "p": 0.003,
+    "meanIn": 0.6334,
+    "meanOut": 0.5882,
+    "audibleShareIn": 0.826,
+    "audibleShareOut": 0.333,
+    "nIn": 23,
+    "nOut": 12
+   },
+   "graded": {
+    "intercept": 0.6204,
+    "slopeFwcPerDevSD": 0.0157,
+    "slopePairsPerDevSD": 0.0339,
+    "ciFwc": [
+     -0.0017,
+     0.0353
+    ],
+    "ciPairs": [
+     0.0083,
+     0.0546
+    ],
+    "devSlopeFwc": 0.0377,
+    "devSlopePairs": 0.0333
+   },
+   "zones": {
+    "all": {
+     "<0.20": {
+      "n": 6,
+      "audibleShare": 0.5,
+      "meanAuc": 0.6089
+     },
+     "0.20-0.2795": {
+      "n": 16,
+      "audibleShare": 0.438,
+      "meanAuc": 0.594
+     },
+     ">=0.2795": {
+      "n": 33,
+      "audibleShare": 0.788,
+      "meanAuc": 0.6414
+     }
+    },
+    "pairs>=250": {
+     "<0.20": {
+      "n": 2,
+      "audibleShare": 0,
+      "meanAuc": 0.555
+     },
+     "0.20-0.2795": {
+      "n": 10,
+      "audibleShare": 0.5,
+      "meanAuc": 0.6089
+     },
+     ">=0.2795": {
+      "n": 23,
+      "audibleShare": 0.87,
+      "meanAuc": 0.6568
+     }
+    }
+   },
+   "rows": [
+    {
+     "stem": "be",
+     "set": "A",
+     "fwc32": 0.2291,
+     "pairs": 504,
+     "auc": 0.6485,
+     "se": 0.0172,
+     "pos": 0.5075,
+     "pred": 0.6067,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.4886,
+     "eq250": 0.6285
+    },
+    {
+     "stem": "bul",
+     "set": "B",
+     "fwc32": 0.3424,
+     "pairs": 175,
+     "auc": 0.6438,
+     "se": 0.0293,
+     "pos": 0.4694,
+     "pred": 0.6033,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.5205,
+     "eq250": null
+    },
+    {
+     "stem": "cat",
+     "set": "B",
+     "fwc32": 0.4612,
+     "pairs": 600,
+     "auc": 0.6395,
+     "se": 0.0159,
+     "pos": 0.4946,
+     "pred": 0.7047,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5391,
+     "eq250": 0.605
+    },
+    {
+     "stem": "ces",
+     "set": "B",
+     "fwc32": 0.2541,
+     "pairs": 592,
+     "auc": 0.6708,
+     "se": 0.0156,
+     "pos": 0.534,
+     "pred": 0.6236,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.5074,
+     "eq250": 0.6514
+    },
+    {
+     "stem": "chu",
+     "set": "A",
+     "fwc32": 0.2857,
+     "pairs": 191,
+     "auc": 0.6007,
+     "se": 0.0288,
+     "pos": 0.5,
+     "pred": 0.5852,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.4934,
+     "eq250": null
+    },
+    {
+     "stem": "cmn",
+     "set": "C",
+     "fwc32": 0.2217,
+     "pairs": 600,
+     "auc": 0.6294,
+     "se": 0.016,
+     "pos": 0.5031,
+     "pred": 0.6116,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.5166,
+     "eq250": 0.5799
+    },
+    {
+     "stem": "cop",
+     "set": "A",
+     "fwc32": 0.5436,
+     "pairs": 80,
+     "auc": 0.5814,
+     "se": 0.045,
+     "pos": 0.5232,
+     "pred": 0.6464,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4489,
+     "eq250": null
+    },
+    {
+     "stem": "cym",
+     "set": "B",
+     "fwc32": 0.3791,
+     "pairs": 258,
+     "auc": 0.6287,
+     "se": 0.0244,
+     "pos": 0.5,
+     "pred": 0.635,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5477,
+     "eq250": 0.626
+    },
+    {
+     "stem": "dan",
+     "set": "B",
+     "fwc32": 0.3637,
+     "pairs": 302,
+     "auc": 0.6694,
+     "se": 0.0218,
+     "pos": 0.5138,
+     "pred": 0.636,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.513,
+     "eq250": 0.6777
+    },
+    {
+     "stem": "deu",
+     "set": "C",
+     "fwc32": 0.3413,
+     "pairs": 506,
+     "auc": 0.6863,
+     "se": 0.0166,
+     "pos": 0.5061,
+     "pred": 0.6505,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5335,
+     "eq250": 0.648
+    },
+    {
+     "stem": "ell",
+     "set": "C",
+     "fwc32": 0.4069,
+     "pairs": 242,
+     "auc": 0.7188,
+     "se": 0.0231,
+     "pos": 0.5,
+     "pred": 0.6429,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.5244,
+     "eq250": null
+    },
+    {
+     "stem": "eng",
+     "set": "C",
+     "fwc32": 0.3481,
+     "pairs": 600,
+     "auc": 0.661,
+     "se": 0.0156,
+     "pos": 0.4966,
+     "pred": 0.6607,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5675,
+     "eq250": 0.6254
+    },
+    {
+     "stem": "est",
+     "set": "B",
+     "fwc32": 0.2301,
+     "pairs": 412,
+     "auc": 0.5643,
+     "se": 0.0199,
+     "pos": 0.5042,
+     "pred": 0.5981,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.5723,
+     "eq250": 0.5406
+    },
+    {
+     "stem": "eus",
+     "set": "B",
+     "fwc32": 0.217,
+     "pairs": 327,
+     "auc": 0.6521,
+     "se": 0.0213,
+     "pos": 0.509,
+     "pred": 0.5826,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.4564,
+     "eq250": 0.6499
+    },
+    {
+     "stem": "fao",
+     "set": "A",
+     "fwc32": 0.4608,
+     "pairs": 582,
+     "auc": 0.6319,
+     "se": 0.0162,
+     "pos": 0.4999,
+     "pred": 0.7031,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5214,
+     "eq250": 0.604
+    },
+    {
+     "stem": "fas",
+     "set": "C",
+     "fwc32": 0.3328,
+     "pairs": 483,
+     "auc": 0.6934,
+     "se": 0.0168,
+     "pos": 0.5069,
+     "pred": 0.6451,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.4986,
+     "eq250": 0.6549
+    },
+    {
+     "stem": "fin",
+     "set": "C",
+     "fwc32": 0.1903,
+     "pairs": 169,
+     "auc": 0.488,
+     "se": 0.0314,
+     "pos": 0.5295,
+     "pred": 0.5427,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4738,
+     "eq250": null
+    },
+    {
+     "stem": "fra",
+     "set": "C",
+     "fwc32": 0.4129,
+     "pairs": 258,
+     "auc": 0.6771,
+     "se": 0.0235,
+     "pos": 0.4959,
+     "pred": 0.6481,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.491,
+     "eq250": 0.6799
+    },
+    {
+     "stem": "gle",
+     "set": "B",
+     "fwc32": 0.3645,
+     "pairs": 543,
+     "auc": 0.7961,
+     "se": 0.0135,
+     "pos": 0.5005,
+     "pred": 0.6626,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5303,
+     "eq250": 0.777
+    },
+    {
+     "stem": "glg",
+     "set": "B",
+     "fwc32": 0.4662,
+     "pairs": 66,
+     "auc": 0.4977,
+     "se": 0.0504,
+     "pos": 0.5,
+     "pred": 0.6077,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4268,
+     "eq250": null
+    },
+    {
+     "stem": "got",
+     "set": "A",
+     "fwc32": 0.3351,
+     "pairs": 264,
+     "auc": 0.5642,
+     "se": 0.0249,
+     "pos": 0.4807,
+     "pred": 0.6189,
+     "inScope": true,
+     "audible": false,
+     "shuf": 0.5283,
+     "eq250": 0.5718
+    },
+    {
+     "stem": "grc",
+     "set": "A",
+     "fwc32": 0.3603,
+     "pairs": 292,
+     "auc": 0.6292,
+     "se": 0.0229,
+     "pos": 0.5075,
+     "pred": 0.6332,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5395,
+     "eq250": 0.6311
+    },
+    {
+     "stem": "heb",
+     "set": "C",
+     "fwc32": 0.4237,
+     "pairs": 572,
+     "auc": 0.7403,
+     "se": 0.0146,
+     "pos": 0.5095,
+     "pred": 0.688,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5071,
+     "eq250": 0.6993
+    },
+    {
+     "stem": "hin",
+     "set": "C",
+     "fwc32": 0.3605,
+     "pairs": 600,
+     "auc": 0.6577,
+     "se": 0.0156,
+     "pos": 0.5098,
+     "pred": 0.6656,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5287,
+     "eq250": 0.624
+    },
+    {
+     "stem": "hrv",
+     "set": "B",
+     "fwc32": 0.2632,
+     "pairs": 224,
+     "auc": 0.5623,
+     "se": 0.027,
+     "pos": 0.4957,
+     "pred": 0.5836,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.5,
+     "eq250": null
+    },
+    {
+     "stem": "hun",
+     "set": "B",
+     "fwc32": 0.2555,
+     "pairs": 200,
+     "auc": 0.6111,
+     "se": 0.028,
+     "pos": 0.524,
+     "pred": 0.5755,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.5006,
+     "eq250": null
+    },
+    {
+     "stem": "hye",
+     "set": "B",
+     "fwc32": 0.2092,
+     "pairs": 409,
+     "auc": 0.5975,
+     "se": 0.0197,
+     "pos": 0.4979,
+     "pred": 0.5896,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4812,
+     "eq250": 0.593
+    },
+    {
+     "stem": "ind",
+     "set": "C",
+     "fwc32": 0.2478,
+     "pairs": 600,
+     "auc": 0.6518,
+     "se": 0.0157,
+     "pos": 0.4979,
+     "pred": 0.6218,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.4986,
+     "eq250": 0.635
+    },
+    {
+     "stem": "is",
+     "set": "A",
+     "fwc32": 0.3814,
+     "pairs": 242,
+     "auc": 0.6069,
+     "se": 0.0255,
+     "pos": 0.4925,
+     "pred": 0.633,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.4963,
+     "eq250": null
+    },
+    {
+     "stem": "ita",
+     "set": "C",
+     "fwc32": 0.4192,
+     "pairs": 600,
+     "auc": 0.6593,
+     "se": 0.0156,
+     "pos": 0.4875,
+     "pred": 0.6884,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5252,
+     "eq250": 0.605
+    },
+    {
+     "stem": "jpn",
+     "set": "C",
+     "fwc32": 0.4339,
+     "pairs": 171,
+     "auc": 0.5941,
+     "se": 0.0306,
+     "pos": 0.5035,
+     "pred": 0.6378,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4897,
+     "eq250": null
+    },
+    {
+     "stem": "kat",
+     "set": "B",
+     "fwc32": 0.1956,
+     "pairs": 177,
+     "auc": 0.6126,
+     "se": 0.0298,
+     "pos": 0.5068,
+     "pred": 0.5468,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.551,
+     "eq250": null
+    },
+    {
+     "stem": "kaz",
+     "set": "A",
+     "fwc32": 0.1257,
+     "pairs": 231,
+     "auc": 0.654,
+     "se": 0.0253,
+     "pos": 0.527,
+     "pred": 0.5316,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.4539,
+     "eq250": null
+    },
+    {
+     "stem": "lat",
+     "set": "A",
+     "fwc32": 0.2446,
+     "pairs": 381,
+     "auc": 0.5644,
+     "se": 0.0207,
+     "pos": 0.4964,
+     "pred": 0.6002,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.5111,
+     "eq250": 0.5574
+    },
+    {
+     "stem": "lav",
+     "set": "B",
+     "fwc32": 0.2554,
+     "pairs": 243,
+     "auc": 0.5265,
+     "se": 0.0262,
+     "pos": 0.5138,
+     "pred": 0.5842,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.5114,
+     "eq250": null
+    },
+    {
+     "stem": "lit",
+     "set": "B",
+     "fwc32": 0.1889,
+     "pairs": 145,
+     "auc": 0.7886,
+     "se": 0.0267,
+     "pos": 0.506,
+     "pred": 0.5353,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.5973,
+     "eq250": null
+    },
+    {
+     "stem": "lzh",
+     "set": "B",
+     "fwc32": 0.4012,
+     "pairs": 600,
+     "auc": 0.5772,
+     "se": 0.0164,
+     "pos": 0.5,
+     "pred": 0.6814,
+     "inScope": true,
+     "audible": false,
+     "shuf": 0.4978,
+     "eq250": 0.5618
+    },
+    {
+     "stem": "mlt",
+     "set": "B",
+     "fwc32": 0.3062,
+     "pairs": 353,
+     "auc": 0.6314,
+     "se": 0.0208,
+     "pos": 0.5188,
+     "pred": 0.6207,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5375,
+     "eq250": 0.6191
+    },
+    {
+     "stem": "nld",
+     "set": "C",
+     "fwc32": 0.372,
+     "pairs": 517,
+     "auc": 0.6264,
+     "se": 0.0173,
+     "pos": 0.4953,
+     "pred": 0.6633,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5414,
+     "eq250": 0.5828
+    },
+    {
+     "stem": "nob",
+     "set": "B",
+     "fwc32": 0.378,
+     "pairs": 550,
+     "auc": 0.6759,
+     "se": 0.0161,
+     "pos": 0.5102,
+     "pred": 0.6685,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5204,
+     "eq250": 0.6461
+    },
+    {
+     "stem": "pol",
+     "set": "C",
+     "fwc32": 0.2329,
+     "pairs": 185,
+     "auc": 0.5947,
+     "se": 0.0294,
+     "pos": 0.503,
+     "pred": 0.5633,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4751,
+     "eq250": null
+    },
+    {
+     "stem": "por",
+     "set": "C",
+     "fwc32": 0.4288,
+     "pairs": 600,
+     "auc": 0.6732,
+     "se": 0.0154,
+     "pos": 0.5074,
+     "pred": 0.6921,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5435,
+     "eq250": 0.647
+    },
+    {
+     "stem": "ron",
+     "set": "B",
+     "fwc32": 0.3152,
+     "pairs": 311,
+     "auc": 0.6071,
+     "se": 0.0225,
+     "pos": 0.5093,
+     "pred": 0.6185,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5251,
+     "eq250": 0.6031
+    },
+    {
+     "stem": "rus",
+     "set": "C",
+     "fwc32": 0.2059,
+     "pairs": 250,
+     "auc": 0.5403,
+     "se": 0.0257,
+     "pos": 0.496,
+     "pred": 0.5663,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.5209,
+     "eq250": 0.5403
+    },
+    {
+     "stem": "slk",
+     "set": "B",
+     "fwc32": 0.2628,
+     "pairs": 600,
+     "auc": 0.5703,
+     "se": 0.0165,
+     "pos": 0.5032,
+     "pred": 0.6276,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.5245,
+     "eq250": 0.5541
+    },
+    {
+     "stem": "slv",
+     "set": "B",
+     "fwc32": 0.2737,
+     "pairs": 222,
+     "auc": 0.6097,
+     "se": 0.0266,
+     "pos": 0.4971,
+     "pred": 0.5873,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.5341,
+     "eq250": null
+    },
+    {
+     "stem": "spa",
+     "set": "C",
+     "fwc32": 0.4445,
+     "pairs": 600,
+     "auc": 0.6883,
+     "se": 0.0152,
+     "pos": 0.4982,
+     "pred": 0.6982,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5093,
+     "eq250": 0.6703
+    },
+    {
+     "stem": "srp",
+     "set": "B",
+     "fwc32": 0.2847,
+     "pairs": 600,
+     "auc": 0.5904,
+     "se": 0.0163,
+     "pos": 0.5132,
+     "pred": 0.6361,
+     "inScope": true,
+     "audible": false,
+     "shuf": 0.5184,
+     "eq250": 0.542
+    },
+    {
+     "stem": "swe",
+     "set": "C",
+     "fwc32": 0.3442,
+     "pairs": 163,
+     "auc": 0.6088,
+     "se": 0.0311,
+     "pos": 0.4984,
+     "pred": 0.6008,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.4878,
+     "eq250": null
+    },
+    {
+     "stem": "tam",
+     "set": "B",
+     "fwc32": 0.1699,
+     "pairs": 258,
+     "auc": 0.5663,
+     "se": 0.0252,
+     "pos": 0.4947,
+     "pred": 0.5537,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4359,
+     "eq250": 0.5718
+    },
+    {
+     "stem": "tur",
+     "set": "C",
+     "fwc32": 0.1529,
+     "pairs": 327,
+     "auc": 0.5436,
+     "se": 0.0225,
+     "pos": 0.5,
+     "pred": 0.5577,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4892,
+     "eq250": 0.5563
+    },
+    {
+     "stem": "ukr",
+     "set": "C",
+     "fwc32": 0.2291,
+     "pairs": 168,
+     "auc": 0.5104,
+     "se": 0.0315,
+     "pos": 0.4966,
+     "pred": 0.5575,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4506,
+     "eq250": null
+    },
+    {
+     "stem": "urd",
+     "set": "C",
+     "fwc32": 0.3579,
+     "pairs": 600,
+     "auc": 0.702,
+     "se": 0.015,
+     "pos": 0.5,
+     "pred": 0.6646,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5379,
+     "eq250": 0.6678
+    },
+    {
+     "stem": "wol",
+     "set": "B",
+     "fwc32": 0.4017,
+     "pairs": 127,
+     "auc": 0.6827,
+     "se": 0.0333,
+     "pos": 0.5141,
+     "pred": 0.612,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.5584,
+     "eq250": null
+    },
+    {
+     "stem": "yor",
+     "set": "A",
+     "fwc32": 0.4215,
+     "pairs": 90,
+     "auc": 0.5252,
+     "se": 0.0431,
+     "pos": 0.4807,
+     "pred": 0.6043,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4128,
+     "eq250": null
+    }
+   ]
+  },
+  "A": {
+   "set": "A",
+   "languages": 10,
+   "thin": [],
+   "voidedPosition": [],
+   "eligible": 10,
+   "clauses": {
+    "a_direction": {
+     "rho": -0.382,
+     "p": 0.8678,
+     "pass": false
+    },
+    "b_frozenSkill": {
+     "skill": -0.4498,
+     "rmseModel": 0.0612,
+     "rmseBaseline": 0.0422,
+     "meanShift": -0.0156,
+     "pass": false
+    },
+    "c_scopeHit": {
+     "inScopeN": 3,
+     "inScopeAudibleShare": null,
+     "inScopeWilson95": [
+      0.208,
+      0.939
+     ],
+     "outScopeN": 2,
+     "outScopeAudibleShare": null,
+     "pass": false
+    },
+    "d_separation": {
+     "nIn": 7,
+     "nOut": 3,
+     "meanIn": 0.5914,
+     "meanOut": 0.6223,
+     "diff": -0.0309,
+     "pass": false
+    },
+    "e_controls": {
+     "e2_nullMean": 0.5022,
+     "e2_nullShareGe60": 0.02,
+     "e2_nullDraws": 50,
+     "e2_pass": true,
+     "e3_audibleLanguages": 6,
+     "e3_shuffledLe55": 6,
+     "e3_pass": true,
+     "e3_shuffleMeanAllEligible": 0.4894,
+     "e3_shufflePositionMean": 0.5061
+    }
+   },
+   "meanAuc": 0.6006,
+   "shareAudible": 0.6,
+   "skillFwcOnlyFrozen": -0.922,
+   "skillPairsOnlyFrozen": 0.1932,
+   "addsBeyondPairs": -0.643,
+   "partialSpearmanFwcGivenPairs": -0.311,
+   "eq250": {
+    "n": 5,
+    "rho": 0.2,
+    "p": 0.3837,
+    "meanIn": 0.6023,
+    "meanOut": 0.5929,
+    "audibleShareIn": 0.667,
+    "audibleShareOut": 0.5,
+    "nIn": 3,
+    "nOut": 2
+   },
+   "graded": {
+    "intercept": 0.6085,
+    "slopeFwcPerDevSD": -0.0065,
+    "slopePairsPerDevSD": 0.0237,
+    "ciFwc": [
+     -0.027,
+     0.0361
+    ],
+    "ciPairs": [
+     -0.0207,
+     0.0664
+    ],
+    "devSlopeFwc": 0.0377,
+    "devSlopePairs": 0.0333
+   },
+   "zones": {
+    "all": {
+     "<0.20": {
+      "n": 1,
+      "audibleShare": 1,
+      "meanAuc": 0.654
+     },
+     "0.20-0.2795": {
+      "n": 2,
+      "audibleShare": 0.5,
+      "meanAuc": 0.6064
+     },
+     ">=0.2795": {
+      "n": 7,
+      "audibleShare": 0.571,
+      "meanAuc": 0.5914
+     }
+    },
+    "pairs>=250": {
+     "<0.20": {
+      "n": 0,
+      "audibleShare": null,
+      "meanAuc": null
+     },
+     "0.20-0.2795": {
+      "n": 2,
+      "audibleShare": 0.5,
+      "meanAuc": 0.6064
+     },
+     ">=0.2795": {
+      "n": 3,
+      "audibleShare": 0.667,
+      "meanAuc": 0.6084
+     }
+    }
+   },
+   "rows": [
+    {
+     "stem": "be",
+     "set": "A",
+     "fwc32": 0.2291,
+     "pairs": 504,
+     "auc": 0.6485,
+     "se": 0.0172,
+     "pos": 0.5075,
+     "pred": 0.6067,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.4886,
+     "eq250": 0.6285
+    },
+    {
+     "stem": "chu",
+     "set": "A",
+     "fwc32": 0.2857,
+     "pairs": 191,
+     "auc": 0.6007,
+     "se": 0.0288,
+     "pos": 0.5,
+     "pred": 0.5852,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.4934,
+     "eq250": null
+    },
+    {
+     "stem": "cop",
+     "set": "A",
+     "fwc32": 0.5436,
+     "pairs": 80,
+     "auc": 0.5814,
+     "se": 0.045,
+     "pos": 0.5232,
+     "pred": 0.6464,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4489,
+     "eq250": null
+    },
+    {
+     "stem": "fao",
+     "set": "A",
+     "fwc32": 0.4608,
+     "pairs": 582,
+     "auc": 0.6319,
+     "se": 0.0162,
+     "pos": 0.4999,
+     "pred": 0.7031,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5214,
+     "eq250": 0.604
+    },
+    {
+     "stem": "got",
+     "set": "A",
+     "fwc32": 0.3351,
+     "pairs": 264,
+     "auc": 0.5642,
+     "se": 0.0249,
+     "pos": 0.4807,
+     "pred": 0.6189,
+     "inScope": true,
+     "audible": false,
+     "shuf": 0.5283,
+     "eq250": 0.5718
+    },
+    {
+     "stem": "grc",
+     "set": "A",
+     "fwc32": 0.3603,
+     "pairs": 292,
+     "auc": 0.6292,
+     "se": 0.0229,
+     "pos": 0.5075,
+     "pred": 0.6332,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5395,
+     "eq250": 0.6311
+    },
+    {
+     "stem": "is",
+     "set": "A",
+     "fwc32": 0.3814,
+     "pairs": 242,
+     "auc": 0.6069,
+     "se": 0.0255,
+     "pos": 0.4925,
+     "pred": 0.633,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.4963,
+     "eq250": null
+    },
+    {
+     "stem": "kaz",
+     "set": "A",
+     "fwc32": 0.1257,
+     "pairs": 231,
+     "auc": 0.654,
+     "se": 0.0253,
+     "pos": 0.527,
+     "pred": 0.5316,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.4539,
+     "eq250": null
+    },
+    {
+     "stem": "lat",
+     "set": "A",
+     "fwc32": 0.2446,
+     "pairs": 381,
+     "auc": 0.5644,
+     "se": 0.0207,
+     "pos": 0.4964,
+     "pred": 0.6002,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.5111,
+     "eq250": 0.5574
+    },
+    {
+     "stem": "yor",
+     "set": "A",
+     "fwc32": 0.4215,
+     "pairs": 90,
+     "auc": 0.5252,
+     "se": 0.0431,
+     "pos": 0.4807,
+     "pred": 0.6043,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4128,
+     "eq250": null
+    }
+   ]
+  },
+  "B": {
+   "set": "B",
+   "languages": 28,
+   "thin": [
+    "mar:14",
+    "tel:37",
+    "uig:1"
+   ],
+   "voidedPosition": [
+    "afr:0.5507"
+   ],
+   "eligible": 24,
+   "clauses": {
+    "a_direction": {
+     "rho": 0.15,
+     "p": 0.2392,
+     "pass": false
+    },
+    "b_frozenSkill": {
+     "skill": -0.1112,
+     "rmseModel": 0.0766,
+     "rmseBaseline": 0.069,
+     "meanShift": 0.0124,
+     "pass": false
+    },
+    "c_scopeHit": {
+     "inScopeN": 9,
+     "inScopeAudibleShare": 0.7778,
+     "inScopeWilson95": [
+      0.453,
+      0.937
+     ],
+     "outScopeN": 6,
+     "outScopeAudibleShare": 0.3333,
+     "pass": true
+    },
+    "d_separation": {
+     "nIn": 12,
+     "nOut": 12,
+     "meanIn": 0.6367,
+     "meanOut": 0.611,
+     "diff": 0.0256,
+     "pass": false
+    },
+    "e_controls": {
+     "e2_nullMean": 0.4985,
+     "e2_nullShareGe60": 0,
+     "e2_nullDraws": 120,
+     "e2_pass": true,
+     "e3_audibleLanguages": 15,
+     "e3_shuffledLe55": 12,
+     "e3_pass": true,
+     "e3_shuffleMeanAllEligible": 0.517,
+     "e3_shufflePositionMean": 0.5064
+    }
+   },
+   "meanAuc": 0.6238,
+   "shareAudible": 0.625,
+   "skillFwcOnlyFrozen": -0.1327,
+   "skillPairsOnlyFrozen": -0.0347,
+   "addsBeyondPairs": -0.0765,
+   "partialSpearmanFwcGivenPairs": 0.15,
+   "eq250": {
+    "n": 15,
+    "rho": 0.257,
+    "p": 0.174,
+    "meanIn": 0.6286,
+    "meanOut": 0.5935,
+    "audibleShareIn": 0.778,
+    "audibleShareOut": 0.333,
+    "nIn": 9,
+    "nOut": 6
+   },
+   "graded": {
+    "intercept": 0.6239,
+    "slopeFwcPerDevSD": 0.0028,
+    "slopePairsPerDevSD": 0.0125,
+    "ciFwc": [
+     -0.0343,
+     0.0481
+    ],
+    "ciPairs": [
+     -0.0464,
+     0.0568
+    ],
+    "devSlopeFwc": 0.0377,
+    "devSlopePairs": 0.0333
+   },
+   "zones": {
+    "all": {
+     "<0.20": {
+      "n": 3,
+      "audibleShare": 0.667,
+      "meanAuc": 0.6558
+     },
+     "0.20-0.2795": {
+      "n": 9,
+      "audibleShare": 0.444,
+      "meanAuc": 0.5961
+     },
+     ">=0.2795": {
+      "n": 12,
+      "audibleShare": 0.75,
+      "meanAuc": 0.6367
+     }
+    },
+    "pairs>=250": {
+     "<0.20": {
+      "n": 1,
+      "audibleShare": 0,
+      "meanAuc": 0.5663
+     },
+     "0.20-0.2795": {
+      "n": 5,
+      "audibleShare": 0.4,
+      "meanAuc": 0.611
+     },
+     ">=0.2795": {
+      "n": 9,
+      "audibleShare": 0.778,
+      "meanAuc": 0.6462
+     }
+    }
+   },
+   "rows": [
+    {
+     "stem": "bul",
+     "set": "B",
+     "fwc32": 0.3424,
+     "pairs": 175,
+     "auc": 0.6438,
+     "se": 0.0293,
+     "pos": 0.4694,
+     "pred": 0.6033,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.5205,
+     "eq250": null
+    },
+    {
+     "stem": "cat",
+     "set": "B",
+     "fwc32": 0.4612,
+     "pairs": 600,
+     "auc": 0.6395,
+     "se": 0.0159,
+     "pos": 0.4946,
+     "pred": 0.7047,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5391,
+     "eq250": 0.605
+    },
+    {
+     "stem": "ces",
+     "set": "B",
+     "fwc32": 0.2541,
+     "pairs": 592,
+     "auc": 0.6708,
+     "se": 0.0156,
+     "pos": 0.534,
+     "pred": 0.6236,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.5074,
+     "eq250": 0.6514
+    },
+    {
+     "stem": "cym",
+     "set": "B",
+     "fwc32": 0.3791,
+     "pairs": 258,
+     "auc": 0.6287,
+     "se": 0.0244,
+     "pos": 0.5,
+     "pred": 0.635,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5477,
+     "eq250": 0.626
+    },
+    {
+     "stem": "dan",
+     "set": "B",
+     "fwc32": 0.3637,
+     "pairs": 302,
+     "auc": 0.6694,
+     "se": 0.0218,
+     "pos": 0.5138,
+     "pred": 0.636,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.513,
+     "eq250": 0.6777
+    },
+    {
+     "stem": "est",
+     "set": "B",
+     "fwc32": 0.2301,
+     "pairs": 412,
+     "auc": 0.5643,
+     "se": 0.0199,
+     "pos": 0.5042,
+     "pred": 0.5981,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.5723,
+     "eq250": 0.5406
+    },
+    {
+     "stem": "eus",
+     "set": "B",
+     "fwc32": 0.217,
+     "pairs": 327,
+     "auc": 0.6521,
+     "se": 0.0213,
+     "pos": 0.509,
+     "pred": 0.5826,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.4564,
+     "eq250": 0.6499
+    },
+    {
+     "stem": "gle",
+     "set": "B",
+     "fwc32": 0.3645,
+     "pairs": 543,
+     "auc": 0.7961,
+     "se": 0.0135,
+     "pos": 0.5005,
+     "pred": 0.6626,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5303,
+     "eq250": 0.777
+    },
+    {
+     "stem": "glg",
+     "set": "B",
+     "fwc32": 0.4662,
+     "pairs": 66,
+     "auc": 0.4977,
+     "se": 0.0504,
+     "pos": 0.5,
+     "pred": 0.6077,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4268,
+     "eq250": null
+    },
+    {
+     "stem": "hrv",
+     "set": "B",
+     "fwc32": 0.2632,
+     "pairs": 224,
+     "auc": 0.5623,
+     "se": 0.027,
+     "pos": 0.4957,
+     "pred": 0.5836,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.5,
+     "eq250": null
+    },
+    {
+     "stem": "hun",
+     "set": "B",
+     "fwc32": 0.2555,
+     "pairs": 200,
+     "auc": 0.6111,
+     "se": 0.028,
+     "pos": 0.524,
+     "pred": 0.5755,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.5006,
+     "eq250": null
+    },
+    {
+     "stem": "hye",
+     "set": "B",
+     "fwc32": 0.2092,
+     "pairs": 409,
+     "auc": 0.5975,
+     "se": 0.0197,
+     "pos": 0.4979,
+     "pred": 0.5896,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4812,
+     "eq250": 0.593
+    },
+    {
+     "stem": "kat",
+     "set": "B",
+     "fwc32": 0.1956,
+     "pairs": 177,
+     "auc": 0.6126,
+     "se": 0.0298,
+     "pos": 0.5068,
+     "pred": 0.5468,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.551,
+     "eq250": null
+    },
+    {
+     "stem": "lav",
+     "set": "B",
+     "fwc32": 0.2554,
+     "pairs": 243,
+     "auc": 0.5265,
+     "se": 0.0262,
+     "pos": 0.5138,
+     "pred": 0.5842,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.5114,
+     "eq250": null
+    },
+    {
+     "stem": "lit",
+     "set": "B",
+     "fwc32": 0.1889,
+     "pairs": 145,
+     "auc": 0.7886,
+     "se": 0.0267,
+     "pos": 0.506,
+     "pred": 0.5353,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.5973,
+     "eq250": null
+    },
+    {
+     "stem": "lzh",
+     "set": "B",
+     "fwc32": 0.4012,
+     "pairs": 600,
+     "auc": 0.5772,
+     "se": 0.0164,
+     "pos": 0.5,
+     "pred": 0.6814,
+     "inScope": true,
+     "audible": false,
+     "shuf": 0.4978,
+     "eq250": 0.5618
+    },
+    {
+     "stem": "mlt",
+     "set": "B",
+     "fwc32": 0.3062,
+     "pairs": 353,
+     "auc": 0.6314,
+     "se": 0.0208,
+     "pos": 0.5188,
+     "pred": 0.6207,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5375,
+     "eq250": 0.6191
+    },
+    {
+     "stem": "nob",
+     "set": "B",
+     "fwc32": 0.378,
+     "pairs": 550,
+     "auc": 0.6759,
+     "se": 0.0161,
+     "pos": 0.5102,
+     "pred": 0.6685,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5204,
+     "eq250": 0.6461
+    },
+    {
+     "stem": "ron",
+     "set": "B",
+     "fwc32": 0.3152,
+     "pairs": 311,
+     "auc": 0.6071,
+     "se": 0.0225,
+     "pos": 0.5093,
+     "pred": 0.6185,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5251,
+     "eq250": 0.6031
+    },
+    {
+     "stem": "slk",
+     "set": "B",
+     "fwc32": 0.2628,
+     "pairs": 600,
+     "auc": 0.5703,
+     "se": 0.0165,
+     "pos": 0.5032,
+     "pred": 0.6276,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.5245,
+     "eq250": 0.5541
+    },
+    {
+     "stem": "slv",
+     "set": "B",
+     "fwc32": 0.2737,
+     "pairs": 222,
+     "auc": 0.6097,
+     "se": 0.0266,
+     "pos": 0.4971,
+     "pred": 0.5873,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.5341,
+     "eq250": null
+    },
+    {
+     "stem": "srp",
+     "set": "B",
+     "fwc32": 0.2847,
+     "pairs": 600,
+     "auc": 0.5904,
+     "se": 0.0163,
+     "pos": 0.5132,
+     "pred": 0.6361,
+     "inScope": true,
+     "audible": false,
+     "shuf": 0.5184,
+     "eq250": 0.542
+    },
+    {
+     "stem": "tam",
+     "set": "B",
+     "fwc32": 0.1699,
+     "pairs": 258,
+     "auc": 0.5663,
+     "se": 0.0252,
+     "pos": 0.4947,
+     "pred": 0.5537,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4359,
+     "eq250": 0.5718
+    },
+    {
+     "stem": "wol",
+     "set": "B",
+     "fwc32": 0.4017,
+     "pairs": 127,
+     "auc": 0.6827,
+     "se": 0.0333,
+     "pos": 0.5141,
+     "pred": 0.612,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.5584,
+     "eq250": null
+    }
+   ]
+  },
+  "C": {
+   "set": "C",
+   "languages": 24,
+   "thin": [
+    "arb:9",
+    "kor:15",
+    "vie:26"
+   ],
+   "voidedPosition": [],
+   "eligible": 21,
+   "clauses": {
+    "a_direction": {
+     "rho": 0.591,
+     "p": 0.0045,
+     "pass": true
+    },
+    "b_frozenSkill": {
+     "skill": 0.4867,
+     "rmseModel": 0.0361,
+     "rmseBaseline": 0.0703,
+     "meanShift": 0.0037,
+     "pass": true
+    },
+    "c_scopeHit": {
+     "inScopeN": 11,
+     "inScopeAudibleShare": 1,
+     "inScopeWilson95": [
+      0.741,
+      1
+     ],
+     "outScopeN": 4,
+     "outScopeAudibleShare": 0.5,
+     "pass": true
+    },
+    "d_separation": {
+     "nIn": 14,
+     "nOut": 7,
+     "meanIn": 0.6705,
+     "meanOut": 0.5655,
+     "diff": 0.105,
+     "pass": true
+    },
+    "e_controls": {
+     "e2_nullMean": 0.4944,
+     "e2_nullShareGe60": 0,
+     "e2_nullDraws": 105,
+     "e2_pass": true,
+     "e3_audibleLanguages": 15,
+     "e3_shuffledLe55": 14,
+     "e3_pass": true,
+     "e3_shuffleMeanAllEligible": 0.51,
+     "e3_shufflePositionMean": 0.5019
+    }
+   },
+   "meanAuc": 0.6355,
+   "shareAudible": 0.714,
+   "skillFwcOnlyFrozen": 0.3156,
+   "skillPairsOnlyFrozen": 0.2313,
+   "addsBeyondPairs": 0.2554,
+   "partialSpearmanFwcGivenPairs": 0.522,
+   "eq250": {
+    "n": 15,
+    "rho": 0.604,
+    "p": 0.0097,
+    "meanIn": 0.6459,
+    "meanOut": 0.5779,
+    "audibleShareIn": 0.909,
+    "audibleShareOut": 0.25,
+    "nIn": 11,
+    "nOut": 4
+   },
+   "graded": {
+    "intercept": 0.615,
+    "slopeFwcPerDevSD": 0.0429,
+    "slopePairsPerDevSD": 0.0437,
+    "ciFwc": [
+     0.0258,
+     0.0629
+    ],
+    "ciPairs": [
+     0.015,
+     0.0649
+    ],
+    "devSlopeFwc": 0.0377,
+    "devSlopePairs": 0.0333
+   },
+   "zones": {
+    "all": {
+     "<0.20": {
+      "n": 2,
+      "audibleShare": 0,
+      "meanAuc": 0.5158
+     },
+     "0.20-0.2795": {
+      "n": 5,
+      "audibleShare": 0.4,
+      "meanAuc": 0.5853
+     },
+     ">=0.2795": {
+      "n": 14,
+      "audibleShare": 0.929,
+      "meanAuc": 0.6705
+     }
+    },
+    "pairs>=250": {
+     "<0.20": {
+      "n": 1,
+      "audibleShare": 0,
+      "meanAuc": 0.5436
+     },
+     "0.20-0.2795": {
+      "n": 3,
+      "audibleShare": 0.667,
+      "meanAuc": 0.6072
+     },
+     ">=0.2795": {
+      "n": 11,
+      "audibleShare": 1,
+      "meanAuc": 0.6786
+     }
+    }
+   },
+   "rows": [
+    {
+     "stem": "cmn",
+     "set": "C",
+     "fwc32": 0.2217,
+     "pairs": 600,
+     "auc": 0.6294,
+     "se": 0.016,
+     "pos": 0.5031,
+     "pred": 0.6116,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.5166,
+     "eq250": 0.5799
+    },
+    {
+     "stem": "deu",
+     "set": "C",
+     "fwc32": 0.3413,
+     "pairs": 506,
+     "auc": 0.6863,
+     "se": 0.0166,
+     "pos": 0.5061,
+     "pred": 0.6505,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5335,
+     "eq250": 0.648
+    },
+    {
+     "stem": "ell",
+     "set": "C",
+     "fwc32": 0.4069,
+     "pairs": 242,
+     "auc": 0.7188,
+     "se": 0.0231,
+     "pos": 0.5,
+     "pred": 0.6429,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.5244,
+     "eq250": null
+    },
+    {
+     "stem": "eng",
+     "set": "C",
+     "fwc32": 0.3481,
+     "pairs": 600,
+     "auc": 0.661,
+     "se": 0.0156,
+     "pos": 0.4966,
+     "pred": 0.6607,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5675,
+     "eq250": 0.6254
+    },
+    {
+     "stem": "fas",
+     "set": "C",
+     "fwc32": 0.3328,
+     "pairs": 483,
+     "auc": 0.6934,
+     "se": 0.0168,
+     "pos": 0.5069,
+     "pred": 0.6451,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.4986,
+     "eq250": 0.6549
+    },
+    {
+     "stem": "fin",
+     "set": "C",
+     "fwc32": 0.1903,
+     "pairs": 169,
+     "auc": 0.488,
+     "se": 0.0314,
+     "pos": 0.5295,
+     "pred": 0.5427,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4738,
+     "eq250": null
+    },
+    {
+     "stem": "fra",
+     "set": "C",
+     "fwc32": 0.4129,
+     "pairs": 258,
+     "auc": 0.6771,
+     "se": 0.0235,
+     "pos": 0.4959,
+     "pred": 0.6481,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.491,
+     "eq250": 0.6799
+    },
+    {
+     "stem": "heb",
+     "set": "C",
+     "fwc32": 0.4237,
+     "pairs": 572,
+     "auc": 0.7403,
+     "se": 0.0146,
+     "pos": 0.5095,
+     "pred": 0.688,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5071,
+     "eq250": 0.6993
+    },
+    {
+     "stem": "hin",
+     "set": "C",
+     "fwc32": 0.3605,
+     "pairs": 600,
+     "auc": 0.6577,
+     "se": 0.0156,
+     "pos": 0.5098,
+     "pred": 0.6656,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5287,
+     "eq250": 0.624
+    },
+    {
+     "stem": "ind",
+     "set": "C",
+     "fwc32": 0.2478,
+     "pairs": 600,
+     "auc": 0.6518,
+     "se": 0.0157,
+     "pos": 0.4979,
+     "pred": 0.6218,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.4986,
+     "eq250": 0.635
+    },
+    {
+     "stem": "ita",
+     "set": "C",
+     "fwc32": 0.4192,
+     "pairs": 600,
+     "auc": 0.6593,
+     "se": 0.0156,
+     "pos": 0.4875,
+     "pred": 0.6884,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5252,
+     "eq250": 0.605
+    },
+    {
+     "stem": "jpn",
+     "set": "C",
+     "fwc32": 0.4339,
+     "pairs": 171,
+     "auc": 0.5941,
+     "se": 0.0306,
+     "pos": 0.5035,
+     "pred": 0.6378,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4897,
+     "eq250": null
+    },
+    {
+     "stem": "nld",
+     "set": "C",
+     "fwc32": 0.372,
+     "pairs": 517,
+     "auc": 0.6264,
+     "se": 0.0173,
+     "pos": 0.4953,
+     "pred": 0.6633,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5414,
+     "eq250": 0.5828
+    },
+    {
+     "stem": "pol",
+     "set": "C",
+     "fwc32": 0.2329,
+     "pairs": 185,
+     "auc": 0.5947,
+     "se": 0.0294,
+     "pos": 0.503,
+     "pred": 0.5633,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4751,
+     "eq250": null
+    },
+    {
+     "stem": "por",
+     "set": "C",
+     "fwc32": 0.4288,
+     "pairs": 600,
+     "auc": 0.6732,
+     "se": 0.0154,
+     "pos": 0.5074,
+     "pred": 0.6921,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5435,
+     "eq250": 0.647
+    },
+    {
+     "stem": "rus",
+     "set": "C",
+     "fwc32": 0.2059,
+     "pairs": 250,
+     "auc": 0.5403,
+     "se": 0.0257,
+     "pos": 0.496,
+     "pred": 0.5663,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.5209,
+     "eq250": 0.5403
+    },
+    {
+     "stem": "spa",
+     "set": "C",
+     "fwc32": 0.4445,
+     "pairs": 600,
+     "auc": 0.6883,
+     "se": 0.0152,
+     "pos": 0.4982,
+     "pred": 0.6982,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5093,
+     "eq250": 0.6703
+    },
+    {
+     "stem": "swe",
+     "set": "C",
+     "fwc32": 0.3442,
+     "pairs": 163,
+     "auc": 0.6088,
+     "se": 0.0311,
+     "pos": 0.4984,
+     "pred": 0.6008,
+     "inScope": false,
+     "audible": true,
+     "shuf": 0.4878,
+     "eq250": null
+    },
+    {
+     "stem": "tur",
+     "set": "C",
+     "fwc32": 0.1529,
+     "pairs": 327,
+     "auc": 0.5436,
+     "se": 0.0225,
+     "pos": 0.5,
+     "pred": 0.5577,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4892,
+     "eq250": 0.5563
+    },
+    {
+     "stem": "ukr",
+     "set": "C",
+     "fwc32": 0.2291,
+     "pairs": 168,
+     "auc": 0.5104,
+     "se": 0.0315,
+     "pos": 0.4966,
+     "pred": 0.5575,
+     "inScope": false,
+     "audible": false,
+     "shuf": 0.4506,
+     "eq250": null
+    },
+    {
+     "stem": "urd",
+     "set": "C",
+     "fwc32": 0.3579,
+     "pairs": 600,
+     "auc": 0.702,
+     "se": 0.015,
+     "pos": 0.5,
+     "pred": 0.6646,
+     "inScope": true,
+     "audible": true,
+     "shuf": 0.5379,
+     "eq250": 0.6678
+    }
+   ]
+  }
+ },
+ "tier": {
+  "eligiblePrimary": 34,
+  "FULL": false,
+  "SC": true,
+  "scPrimary": true,
+  "scPooled": true,
+  "controlsPrimary": true,
+  "controlsPooled": true,
+  "scFalsified": false,
+  "verdict": "PARTIAL"
+ },
+ "sub": {
+  "ISO": {
+   "rows": [
+    "cmn:0.2217/600/0.6294",
+    "ind:0.2478/600/0.6518"
+   ],
+   "pass": true
+  },
+  "LOW_PRIMARY": {
+   "n": 4,
+   "audibleShare": 0.75,
+   "pass": false,
+   "rows": [
+    "kat:0.1956/177/0.6126",
+    "kaz:0.1257/231/0.654",
+    "lit:0.1889/145/0.7886",
+    "tam:0.1699/258/0.5663"
+   ]
+  },
+  "GRADED_PRIMARY": {
+   "intercept": 0.6181,
+   "slopeFwcPerDevSD": -0.0034,
+   "slopePairsPerDevSD": 0.0182,
+   "ciFwc": [
+    -0.0273,
+    0.0231
+   ],
+   "ciPairs": [
+    -0.0202,
+    0.0489
+   ],
+   "devSlopeFwc": 0.0377,
+   "devSlopePairs": 0.0333,
+   "pass": false
+  },
+  "EQ250_PRIMARY": {
+   "n": 20,
+   "rho": 0.235,
+   "p": 0.1515,
+   "meanIn": 0.6221,
+   "meanOut": 0.5933,
+   "audibleShareIn": 0.75,
+   "audibleShareOut": 0.375,
+   "nIn": 12,
+   "nOut": 8,
+   "pass": false
+  },
+  "ADDS_PRIMARY": {
+   "addsBeyondPairs": -0.1558,
+   "pass": false,
+   "partialSpearman": -0.033
+  },
+  "LOW_POOLED": {
+   "n": 6,
+   "audibleShare": 0.5,
+   "pass": false,
+   "rows": [
+    "fin:0.1903/169/0.488",
+    "kat:0.1956/177/0.6126",
+    "kaz:0.1257/231/0.654",
+    "lit:0.1889/145/0.7886",
+    "tam:0.1699/258/0.5663",
+    "tur:0.1529/327/0.5436"
+   ]
+  },
+  "GRADED_POOLED": {
+   "intercept": 0.6204,
+   "slopeFwcPerDevSD": 0.0157,
+   "slopePairsPerDevSD": 0.0339,
+   "ciFwc": [
+    -0.0017,
+    0.0353
+   ],
+   "ciPairs": [
+    0.0083,
+    0.0546
+   ],
+   "devSlopeFwc": 0.0377,
+   "devSlopePairs": 0.0333,
+   "pass": false
+  },
+  "EQ250_POOLED": {
+   "n": 35,
+   "rho": 0.456,
+   "p": 0.003,
+   "meanIn": 0.6334,
+   "meanOut": 0.5882,
+   "audibleShareIn": 0.826,
+   "audibleShareOut": 0.333,
+   "nIn": 23,
+   "nOut": 12,
+   "pass": true
+  },
+  "ADDS_POOLED": {
+   "addsBeyondPairs": -0.0244,
+   "pass": false,
+   "partialSpearman": 0.261
+  }
+ },
+ "descriptive": {
+  "reliabilityTrainVsTest": {
+   "n": 42,
+   "spearman": 0.442,
+   "p": 0.0025,
+   "meanTrain": 0.6295,
+   "meanTest": 0.6072
+  },
+  "reliabilityTrainVsDev": {
+   "n": 20,
+   "spearman": 0.672,
+   "p": 0.001
+  },
+  "combinedPerLanguage": {
+   "n": 55,
+   "rhoFwcVsMeanAuc": 0.314,
+   "rows": [
+    {
+     "stem": "be",
+     "set": "A",
+     "fwc": 0.2291,
+     "n": 1,
+     "auc": 0.6485,
+     "trainAuc": 0.6485,
+     "testAuc": null,
+     "devAuc": null
+    },
+    {
+     "stem": "bul",
+     "set": "B",
+     "fwc": 0.3424,
+     "n": 2,
+     "auc": 0.6557,
+     "trainAuc": 0.6438,
+     "testAuc": 0.6675,
+     "devAuc": null
+    },
+    {
+     "stem": "cat",
+     "set": "B",
+     "fwc": 0.4612,
+     "n": 2,
+     "auc": 0.6793,
+     "trainAuc": 0.6395,
+     "testAuc": 0.7192,
+     "devAuc": null
+    },
+    {
+     "stem": "ces",
+     "set": "B",
+     "fwc": 0.2541,
+     "n": 1,
+     "auc": 0.6708,
+     "trainAuc": 0.6708,
+     "testAuc": null,
+     "devAuc": null
+    },
+    {
+     "stem": "chu",
+     "set": "A",
+     "fwc": 0.2857,
+     "n": 1,
+     "auc": 0.6007,
+     "trainAuc": 0.6007,
+     "testAuc": null,
+     "devAuc": null
+    },
+    {
+     "stem": "cmn",
+     "set": "C",
+     "fwc": 0.2217,
+     "n": 3,
+     "auc": 0.6222,
+     "trainAuc": 0.6294,
+     "testAuc": 0.6236,
+     "devAuc": 0.6136
+    },
+    {
+     "stem": "cop",
+     "set": "A",
+     "fwc": 0.5436,
+     "n": 1,
+     "auc": 0.5814,
+     "trainAuc": 0.5814,
+     "testAuc": null,
+     "devAuc": null
+    },
+    {
+     "stem": "cym",
+     "set": "B",
+     "fwc": 0.3791,
+     "n": 2,
+     "auc": 0.6762,
+     "trainAuc": 0.6287,
+     "testAuc": 0.7237,
+     "devAuc": null
+    },
+    {
+     "stem": "dan",
+     "set": "B",
+     "fwc": 0.3637,
+     "n": 2,
+     "auc": 0.6489,
+     "trainAuc": 0.6694,
+     "testAuc": 0.6284,
+     "devAuc": null
+    },
+    {
+     "stem": "deu",
+     "set": "C",
+     "fwc": 0.3413,
+     "n": 3,
+     "auc": 0.6269,
+     "trainAuc": 0.6863,
+     "testAuc": 0.6428,
+     "devAuc": 0.5516
+    },
+    {
+     "stem": "ell",
+     "set": "C",
+     "fwc": 0.4069,
+     "n": 3,
+     "auc": 0.6407,
+     "trainAuc": 0.7188,
+     "testAuc": 0.6012,
+     "devAuc": 0.6022
+    },
+    {
+     "stem": "eng",
+     "set": "C",
+     "fwc": 0.3481,
+     "n": 3,
+     "auc": 0.6477,
+     "trainAuc": 0.661,
+     "testAuc": 0.6489,
+     "devAuc": 0.6332
+    },
+    {
+     "stem": "est",
+     "set": "B",
+     "fwc": 0.2301,
+     "n": 2,
+     "auc": 0.5803,
+     "trainAuc": 0.5643,
+     "testAuc": 0.5963,
+     "devAuc": null
+    },
+    {
+     "stem": "eus",
+     "set": "B",
+     "fwc": 0.217,
+     "n": 2,
+     "auc": 0.6621,
+     "trainAuc": 0.6521,
+     "testAuc": 0.672,
+     "devAuc": null
+    },
+    {
+     "stem": "fao",
+     "set": "A",
+     "fwc": 0.4608,
+     "n": 1,
+     "auc": 0.6319,
+     "trainAuc": 0.6319,
+     "testAuc": null,
+     "devAuc": null
+    },
+    {
+     "stem": "fas",
+     "set": "C",
+     "fwc": 0.3328,
+     "n": 3,
+     "auc": 0.6875,
+     "trainAuc": 0.6934,
+     "testAuc": 0.6806,
+     "devAuc": 0.6884
+    },
+    {
+     "stem": "fin",
+     "set": "C",
+     "fwc": 0.1903,
+     "n": 3,
+     "auc": 0.5227,
+     "trainAuc": 0.488,
+     "testAuc": 0.5288,
+     "devAuc": 0.5512
+    },
+    {
+     "stem": "fra",
+     "set": "C",
+     "fwc": 0.4129,
+     "n": 3,
+     "auc": 0.6337,
+     "trainAuc": 0.6771,
+     "testAuc": 0.4982,
+     "devAuc": 0.7259
+    },
+    {
+     "stem": "gle",
+     "set": "B",
+     "fwc": 0.3645,
+     "n": 2,
+     "auc": 0.7117,
+     "trainAuc": 0.7961,
+     "testAuc": 0.6274,
+     "devAuc": null
+    },
+    {
+     "stem": "glg",
+     "set": "B",
+     "fwc": 0.4662,
+     "n": 2,
+     "auc": 0.529,
+     "trainAuc": 0.4977,
+     "testAuc": 0.5602,
+     "devAuc": null
+    },
+    {
+     "stem": "got",
+     "set": "A",
+     "fwc": 0.3351,
+     "n": 1,
+     "auc": 0.5642,
+     "trainAuc": 0.5642,
+     "testAuc": null,
+     "devAuc": null
+    },
+    {
+     "stem": "grc",
+     "set": "A",
+     "fwc": 0.3603,
+     "n": 1,
+     "auc": 0.6292,
+     "trainAuc": 0.6292,
+     "testAuc": null,
+     "devAuc": null
+    },
+    {
+     "stem": "heb",
+     "set": "C",
+     "fwc": 0.4237,
+     "n": 3,
+     "auc": 0.6719,
+     "trainAuc": 0.7403,
+     "testAuc": 0.5907,
+     "devAuc": 0.6848
+    },
+    {
+     "stem": "hin",
+     "set": "C",
+     "fwc": 0.3605,
+     "n": 3,
+     "auc": 0.6572,
+     "trainAuc": 0.6577,
+     "testAuc": 0.6572,
+     "devAuc": 0.6567
+    },
+    {
+     "stem": "hrv",
+     "set": "B",
+     "fwc": 0.2632,
+     "n": 2,
+     "auc": 0.5827,
+     "trainAuc": 0.5623,
+     "testAuc": 0.6032,
+     "devAuc": null
+    },
+    {
+     "stem": "hun",
+     "set": "B",
+     "fwc": 0.2555,
+     "n": 2,
+     "auc": 0.5791,
+     "trainAuc": 0.6111,
+     "testAuc": 0.5471,
+     "devAuc": null
+    },
+    {
+     "stem": "hye",
+     "set": "B",
+     "fwc": 0.2092,
+     "n": 2,
+     "auc": 0.5565,
+     "trainAuc": 0.5975,
+     "testAuc": 0.5155,
+     "devAuc": null
+    },
+    {
+     "stem": "ind",
+     "set": "C",
+     "fwc": 0.2478,
+     "n": 3,
+     "auc": 0.6416,
+     "trainAuc": 0.6518,
+     "testAuc": 0.6589,
+     "devAuc": 0.6142
+    },
+    {
+     "stem": "is",
+     "set": "A",
+     "fwc": 0.3814,
+     "n": 1,
+     "auc": 0.6069,
+     "trainAuc": 0.6069,
+     "testAuc": null,
+     "devAuc": null
+    },
+    {
+     "stem": "ita",
+     "set": "C",
+     "fwc": 0.4192,
+     "n": 3,
+     "auc": 0.6165,
+     "trainAuc": 0.6593,
+     "testAuc": 0.6068,
+     "devAuc": 0.5833
+    },
+    {
+     "stem": "jpn",
+     "set": "C",
+     "fwc": 0.4339,
+     "n": 2,
+     "auc": 0.6057,
+     "trainAuc": 0.5941,
+     "testAuc": null,
+     "devAuc": 0.6173
+    },
+    {
+     "stem": "kat",
+     "set": "B",
+     "fwc": 0.1956,
+     "n": 1,
+     "auc": 0.6126,
+     "trainAuc": 0.6126,
+     "testAuc": null,
+     "devAuc": null
+    },
+    {
+     "stem": "kaz",
+     "set": "A",
+     "fwc": 0.1257,
+     "n": 1,
+     "auc": 0.654,
+     "trainAuc": 0.654,
+     "testAuc": null,
+     "devAuc": null
+    },
+    {
+     "stem": "lat",
+     "set": "A",
+     "fwc": 0.2446,
+     "n": 1,
+     "auc": 0.5644,
+     "trainAuc": 0.5644,
+     "testAuc": null,
+     "devAuc": null
+    },
+    {
+     "stem": "lav",
+     "set": "B",
+     "fwc": 0.2554,
+     "n": 2,
+     "auc": 0.5211,
+     "trainAuc": 0.5265,
+     "testAuc": 0.5157,
+     "devAuc": null
+    },
+    {
+     "stem": "lit",
+     "set": "B",
+     "fwc": 0.1889,
+     "n": 2,
+     "auc": 0.6626,
+     "trainAuc": 0.7886,
+     "testAuc": 0.5366,
+     "devAuc": null
+    },
+    {
+     "stem": "lzh",
+     "set": "B",
+     "fwc": 0.4012,
+     "n": 2,
+     "auc": 0.5657,
+     "trainAuc": 0.5772,
+     "testAuc": 0.5542,
+     "devAuc": null
+    },
+    {
+     "stem": "mlt",
+     "set": "B",
+     "fwc": 0.3062,
+     "n": 2,
+     "auc": 0.5798,
+     "trainAuc": 0.6314,
+     "testAuc": 0.5282,
+     "devAuc": null
+    },
+    {
+     "stem": "nld",
+     "set": "C",
+     "fwc": 0.372,
+     "n": 3,
+     "auc": 0.624,
+     "trainAuc": 0.6264,
+     "testAuc": 0.6018,
+     "devAuc": 0.6438
+    },
+    {
+     "stem": "nob",
+     "set": "B",
+     "fwc": 0.378,
+     "n": 2,
+     "auc": 0.6407,
+     "trainAuc": 0.6759,
+     "testAuc": 0.6056,
+     "devAuc": null
+    },
+    {
+     "stem": "pol",
+     "set": "C",
+     "fwc": 0.2329,
+     "n": 3,
+     "auc": 0.5672,
+     "trainAuc": 0.5947,
+     "testAuc": 0.5571,
+     "devAuc": 0.5497
+    },
+    {
+     "stem": "por",
+     "set": "C",
+     "fwc": 0.4288,
+     "n": 3,
+     "auc": 0.6581,
+     "trainAuc": 0.6732,
+     "testAuc": 0.6463,
+     "devAuc": 0.6548
+    },
+    {
+     "stem": "ron",
+     "set": "B",
+     "fwc": 0.3152,
+     "n": 2,
+     "auc": 0.5814,
+     "trainAuc": 0.6071,
+     "testAuc": 0.5556,
+     "devAuc": null
+    },
+    {
+     "stem": "rus",
+     "set": "C",
+     "fwc": 0.2059,
+     "n": 3,
+     "auc": 0.5396,
+     "trainAuc": 0.5403,
+     "testAuc": 0.5017,
+     "devAuc": 0.5767
+    },
+    {
+     "stem": "slk",
+     "set": "B",
+     "fwc": 0.2628,
+     "n": 2,
+     "auc": 0.5738,
+     "trainAuc": 0.5703,
+     "testAuc": 0.5773,
+     "devAuc": null
+    },
+    {
+     "stem": "slv",
+     "set": "B",
+     "fwc": 0.2737,
+     "n": 2,
+     "auc": 0.5694,
+     "trainAuc": 0.6097,
+     "testAuc": 0.529,
+     "devAuc": null
+    },
+    {
+     "stem": "spa",
+     "set": "C",
+     "fwc": 0.4445,
+     "n": 3,
+     "auc": 0.6915,
+     "trainAuc": 0.6883,
+     "testAuc": 0.6931,
+     "devAuc": 0.693
+    },
+    {
+     "stem": "srp",
+     "set": "B",
+     "fwc": 0.2847,
+     "n": 2,
+     "auc": 0.6255,
+     "trainAuc": 0.5904,
+     "testAuc": 0.6606,
+     "devAuc": null
+    },
+    {
+     "stem": "swe",
+     "set": "C",
+     "fwc": 0.3442,
+     "n": 2,
+     "auc": 0.6696,
+     "trainAuc": 0.6088,
+     "testAuc": 0.7304,
+     "devAuc": null
+    },
+    {
+     "stem": "tam",
+     "set": "B",
+     "fwc": 0.1699,
+     "n": 2,
+     "auc": 0.5676,
+     "trainAuc": 0.5663,
+     "testAuc": 0.5689,
+     "devAuc": null
+    },
+    {
+     "stem": "tur",
+     "set": "C",
+     "fwc": 0.1529,
+     "n": 3,
+     "auc": 0.531,
+     "trainAuc": 0.5436,
+     "testAuc": 0.5682,
+     "devAuc": 0.4811
+    },
+    {
+     "stem": "ukr",
+     "set": "C",
+     "fwc": 0.2291,
+     "n": 3,
+     "auc": 0.5349,
+     "trainAuc": 0.5104,
+     "testAuc": 0.5686,
+     "devAuc": 0.5258
+    },
+    {
+     "stem": "urd",
+     "set": "C",
+     "fwc": 0.3579,
+     "n": 3,
+     "auc": 0.7038,
+     "trainAuc": 0.702,
+     "testAuc": 0.7214,
+     "devAuc": 0.6881
+    },
+    {
+     "stem": "wol",
+     "set": "B",
+     "fwc": 0.4017,
+     "n": 2,
+     "auc": 0.6836,
+     "trainAuc": 0.6827,
+     "testAuc": 0.6845,
+     "devAuc": null
+    },
+    {
+     "stem": "yor",
+     "set": "A",
+     "fwc": 0.4215,
+     "n": 1,
+     "auc": 0.5252,
+     "trainAuc": 0.5252,
+     "testAuc": null,
+     "devAuc": null
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,88 @@
+@@@@ task delegate_same_name
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def is_empty(self):
+        return len(self.items) == 0
+
+    def push(self, value):
+        self.items.append(value)
+
+    def pop(self):
+        if self.is_empty():
+            raise IndexError("pop from empty stack")
+        return self.items.pop()
+
+    def peek(self):
+        if self.is_empty():
+            raise IndexError("peek at empty stack")
+        return self.items[-1]
+
+
+stack = Stack()
+for v in [1, 2, 3]:
+    stack.push(v)
+out = [stack.peek(), stack.pop(), stack.pop(), str(stack.is_empty()).lower(), stack.pop(), str(stack.is_empty()).lower()]
+print(" ".join(str(x) for x in out))
+@@@@ task forward_reference
+def total_cost(prices):
+    return apply_tax(sum_prices(prices))
+
+
+def apply_tax(amount):
+    return amount + amount // 10
+
+
+def sum_prices(prices):
+    total = 0
+    for price in prices:
+        total += price
+    return total
+
+
+print(total_cost([100, 250, 50]))
+@@@@ task nested_definitions
+def count_down(n):
+    def step(k):
+        if k == 0:
+            return [0]
+        return [k] + step(k - 1)
+
+    return step(n)
+
+
+print(" ".join(str(x) for x in count_down(5)))
+@@@@ task method_chain
+class Builder:
+    def __init__(self):
+        self.parts = []
+
+    def add(self, text):
+        self.parts = self.parts + [text]
+        return self
+
+    def build(self):
+        return "-".join(self.parts)
+
+
+def make_label(builder, first, second):
+    return builder.add(first).add(second).build()
+
+
+print(make_label(Builder(), "alpha", "beta"))
+@@@@ task call_through_variable
+def triple(value):
+    return value * 3
+
+
+def apply_twice(fn, value):
+    return fn(fn(value))
+
+
+def run():
+    handler = triple
+    return apply_twice(handler, 5)
+
+
+print(run())

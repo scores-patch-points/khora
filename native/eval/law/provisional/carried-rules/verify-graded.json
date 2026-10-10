@@ -1,0 +1,939 @@
+{
+ "script": "verify-graded.mjs",
+ "headerSha256": "b03eaf841f4459b09874ac4d06f4d20cbbfd660e8ebc0c21f11c1dc8c4e7e26d",
+ "note": "verification-only; no reader run",
+ "stages": {
+  "g0-dev": {
+   "n": 25,
+   "dF1_G_minus_B1": {
+    "recurringGold": -0.1581,
+    "allPropnGold": 0.1181,
+    "recCounts": {
+     "up": 0,
+     "down": 24
+    },
+    "allCounts": {
+     "up": 21,
+     "down": 3
+    }
+   },
+   "exploratory_Gq_minus_B1": {
+    "recurringGold": -0.0998,
+    "allPropnGold": 0.1537,
+    "allCounts": {
+     "up": 22,
+     "down": 2
+    }
+   },
+   "single": {
+    "stemsOk": 21,
+    "of": 25,
+    "failing": [
+     "arb",
+     "kor",
+     "vie",
+     "swe"
+    ],
+    "perStem": {
+     "eng": {
+      "picked": 272,
+      "hit": 227,
+      "precision": 0.8346,
+      "baseRate": 0.1472,
+      "recall": 0.2405
+     },
+     "spa": {
+      "picked": 440,
+      "hit": 407,
+      "precision": 0.925,
+      "baseRate": 0.1246,
+      "recall": 0.2517
+     },
+     "rus": {
+      "picked": 95,
+      "hit": 92,
+      "precision": 0.9684,
+      "baseRate": 0.1283,
+      "recall": 0.1173
+     },
+     "cmn": {
+      "picked": 216,
+      "hit": 178,
+      "precision": 0.8241,
+      "baseRate": 0.0828,
+      "recall": 0.2718
+     },
+     "cmn-hans": {
+      "picked": 217,
+      "hit": 179,
+      "precision": 0.8249,
+      "baseRate": 0.0821,
+      "recall": 0.275
+     },
+     "arb": {
+      "picked": 301,
+      "hit": 0,
+      "precision": 0,
+      "baseRate": 0.0004,
+      "recall": 0
+     },
+     "heb": {
+      "picked": 92,
+      "hit": 66,
+      "precision": 0.7174,
+      "baseRate": 0.0576,
+      "recall": 0.2946
+     },
+     "fas": {
+      "picked": 234,
+      "hit": 167,
+      "precision": 0.7137,
+      "baseRate": 0.0811,
+      "recall": 0.2119
+     },
+     "kor": {
+      "picked": 73,
+      "hit": 0,
+      "precision": 0,
+      "baseRate": 0.0057,
+      "recall": 0
+     },
+     "jpn": {
+      "picked": 170,
+      "hit": 142,
+      "precision": 0.8353,
+      "baseRate": 0.0735,
+      "recall": 0.3727
+     },
+     "fra": {
+      "picked": 146,
+      "hit": 130,
+      "precision": 0.8904,
+      "baseRate": 0.1798,
+      "recall": 0.0599
+     },
+     "deu": {
+      "picked": 53,
+      "hit": 40,
+      "precision": 0.7547,
+      "baseRate": 0.0886,
+      "recall": 0.0879
+     },
+     "ita": {
+      "picked": 34,
+      "hit": 29,
+      "precision": 0.8529,
+      "baseRate": 0.1084,
+      "recall": 0.0625
+     },
+     "por": {
+      "picked": 232,
+      "hit": 210,
+      "precision": 0.9052,
+      "baseRate": 0.2169,
+      "recall": 0.0895
+     },
+     "nld": {
+      "picked": 151,
+      "hit": 133,
+      "precision": 0.8808,
+      "baseRate": 0.1165,
+      "recall": 0.2748
+     },
+     "pol": {
+      "picked": 74,
+      "hit": 69,
+      "precision": 0.9324,
+      "baseRate": 0.0672,
+      "recall": 0.0638
+     },
+     "ukr": {
+      "picked": 81,
+      "hit": 70,
+      "precision": 0.8642,
+      "baseRate": 0.0472,
+      "recall": 0.2555
+     },
+     "hin": {
+      "picked": 710,
+      "hit": 598,
+      "precision": 0.8423,
+      "baseRate": 0.1835,
+      "recall": 0.4668
+     },
+     "vie": {
+      "picked": 28,
+      "hit": 1,
+      "precision": 0.0357,
+      "baseRate": 0.0215,
+      "recall": 0.0022
+     },
+     "ind": {
+      "picked": 168,
+      "hit": 144,
+      "precision": 0.8571,
+      "baseRate": 0.3114,
+      "recall": 0.0879
+     },
+     "swe": {
+      "picked": 0,
+      "hit": 0,
+      "precision": null,
+      "baseRate": 0.0066,
+      "recall": 0
+     },
+     "urd": {
+      "picked": 324,
+      "hit": 242,
+      "precision": 0.7469,
+      "baseRate": 0.1397,
+      "recall": 0.4949
+     },
+     "tur": {
+      "picked": 68,
+      "hit": 24,
+      "precision": 0.3529,
+      "baseRate": 0.0319,
+      "recall": 0.1057
+     },
+     "ell": {
+      "picked": 55,
+      "hit": 46,
+      "precision": 0.8364,
+      "baseRate": 0.0651,
+      "recall": 0.25
+     },
+     "fin": {
+      "picked": 184,
+      "hit": 155,
+      "precision": 0.8424,
+      "baseRate": 0.0606,
+      "recall": 0.2783
+     }
+    }
+   },
+   "bornWeights": {
+    "class": 0.782,
+    "proper": 0.0687,
+    "key": 0.0996,
+    "recur": 0.0497
+   },
+   "meanAucRecurringNames": 0.863,
+   "bestSingleRule": {
+    "class": 1,
+    "proper": 15,
+    "key": 9,
+    "recur": 0
+   }
+  },
+  "g0-foldA": {
+   "n": 25,
+   "dF1_G_minus_B1": {
+    "recurringGold": -0.1774,
+    "allPropnGold": 0.09,
+    "recCounts": {
+     "up": 0,
+     "down": 23
+    },
+    "allCounts": {
+     "up": 21,
+     "down": 4
+    }
+   },
+   "exploratory_Gq_minus_B1": {
+    "recurringGold": -0.0986,
+    "allPropnGold": 0.1432,
+    "allCounts": {
+     "up": 25,
+     "down": 0
+    }
+   },
+   "single": {
+    "stemsOk": 23,
+    "of": 25,
+    "failing": [
+     "kor",
+     "vie"
+    ],
+    "perStem": {
+     "eng": {
+      "picked": 107,
+      "hit": 88,
+      "precision": 0.8224,
+      "baseRate": 0.0877,
+      "recall": 0.1337
+     },
+     "spa": {
+      "picked": 607,
+      "hit": 542,
+      "precision": 0.8929,
+      "baseRate": 0.1421,
+      "recall": 0.2145
+     },
+     "rus": {
+      "picked": 36,
+      "hit": 34,
+      "precision": 0.9444,
+      "baseRate": 0.1153,
+      "recall": 0.0403
+     },
+     "cmn": {
+      "picked": 282,
+      "hit": 223,
+      "precision": 0.7908,
+      "baseRate": 0.0962,
+      "recall": 0.2114
+     },
+     "cmn-hans": {
+      "picked": 284,
+      "hit": 225,
+      "precision": 0.7923,
+      "baseRate": 0.096,
+      "recall": 0.2137
+     },
+     "arb": {
+      "picked": 327,
+      "hit": 2,
+      "precision": 0.0061,
+      "baseRate": 0.0011,
+      "recall": 0.1429
+     },
+     "heb": {
+      "picked": 316,
+      "hit": 252,
+      "precision": 0.7975,
+      "baseRate": 0.095,
+      "recall": 0.3605
+     },
+     "fas": {
+      "picked": 648,
+      "hit": 519,
+      "precision": 0.8009,
+      "baseRate": 0.1054,
+      "recall": 0.1728
+     },
+     "kor": {
+      "picked": 62,
+      "hit": 0,
+      "precision": 0,
+      "baseRate": 0.0049,
+      "recall": 0
+     },
+     "jpn": {
+      "picked": 326,
+      "hit": 248,
+      "precision": 0.7607,
+      "baseRate": 0.0804,
+      "recall": 0.2475
+     },
+     "fra": {
+      "picked": 346,
+      "hit": 300,
+      "precision": 0.8671,
+      "baseRate": 0.1925,
+      "recall": 0.0773
+     },
+     "deu": {
+      "picked": 387,
+      "hit": 335,
+      "precision": 0.8656,
+      "baseRate": 0.2644,
+      "recall": 0.0644
+     },
+     "ita": {
+      "picked": 307,
+      "hit": 276,
+      "precision": 0.899,
+      "baseRate": 0.1123,
+      "recall": 0.2949
+     },
+     "por": {
+      "picked": 399,
+      "hit": 360,
+      "precision": 0.9023,
+      "baseRate": 0.2439,
+      "recall": 0.0945
+     },
+     "nld": {
+      "picked": 279,
+      "hit": 239,
+      "precision": 0.8566,
+      "baseRate": 0.3092,
+      "recall": 0.1125
+     },
+     "pol": {
+      "picked": 302,
+      "hit": 263,
+      "precision": 0.8709,
+      "baseRate": 0.0544,
+      "recall": 0.2079
+     },
+     "ukr": {
+      "picked": 108,
+      "hit": 74,
+      "precision": 0.6852,
+      "baseRate": 0.0555,
+      "recall": 0.1612
+     },
+     "hin": {
+      "picked": 1072,
+      "hit": 946,
+      "precision": 0.8825,
+      "baseRate": 0.2073,
+      "recall": 0.5288
+     },
+     "vie": {
+      "picked": 1,
+      "hit": 0,
+      "precision": 0,
+      "baseRate": 0.0144,
+      "recall": 0
+     },
+     "ind": {
+      "picked": 326,
+      "hit": 295,
+      "precision": 0.9049,
+      "baseRate": 0.3344,
+      "recall": 0.1193
+     },
+     "swe": {
+      "picked": 56,
+      "hit": 12,
+      "precision": 0.2143,
+      "baseRate": 0.0165,
+      "recall": 0.1446
+     },
+     "urd": {
+      "picked": 422,
+      "hit": 342,
+      "precision": 0.8104,
+      "baseRate": 0.1638,
+      "recall": 0.4465
+     },
+     "tur": {
+      "picked": 326,
+      "hit": 60,
+      "precision": 0.184,
+      "baseRate": 0.0836,
+      "recall": 0.1527
+     },
+     "ell": {
+      "picked": 64,
+      "hit": 42,
+      "precision": 0.6563,
+      "baseRate": 0.0678,
+      "recall": 0.3
+     },
+     "fin": {
+      "picked": 624,
+      "hit": 323,
+      "precision": 0.5176,
+      "baseRate": 0.1581,
+      "recall": 0.1326
+     }
+    }
+   },
+   "bornWeights": {
+    "class": 0.7051,
+    "proper": 0.0976,
+    "key": 0.1291,
+    "recur": 0.0681
+   },
+   "meanAucRecurringNames": 0.8319,
+   "bestSingleRule": {
+    "class": 2,
+    "proper": 17,
+    "key": 6,
+    "recur": 0
+   }
+  },
+  "g0-foldB": {
+   "n": 25,
+   "dF1_G_minus_B1": {
+    "recurringGold": -0.1603,
+    "allPropnGold": 0.105,
+    "recCounts": {
+     "up": 0,
+     "down": 24
+    },
+    "allCounts": {
+     "up": 22,
+     "down": 3
+    }
+   },
+   "exploratory_Gq_minus_B1": {
+    "recurringGold": -0.0899,
+    "allPropnGold": 0.144,
+    "allCounts": {
+     "up": 24,
+     "down": 1
+    }
+   },
+   "single": {
+    "stemsOk": 25,
+    "of": 25,
+    "failing": [],
+    "perStem": {
+     "eng": {
+      "picked": 320,
+      "hit": 250,
+      "precision": 0.7813,
+      "baseRate": 0.1439,
+      "recall": 0.1958
+     },
+     "spa": {
+      "picked": 532,
+      "hit": 411,
+      "precision": 0.7726,
+      "baseRate": 0.0897,
+      "recall": 0.2495
+     },
+     "rus": {
+      "picked": 118,
+      "hit": 108,
+      "precision": 0.9153,
+      "baseRate": 0.1163,
+      "recall": 0.1201
+     },
+     "cmn": {
+      "picked": 313,
+      "hit": 255,
+      "precision": 0.8147,
+      "baseRate": 0.1043,
+      "recall": 0.2406
+     },
+     "cmn-hans": {
+      "picked": 309,
+      "hit": 251,
+      "precision": 0.8123,
+      "baseRate": 0.1038,
+      "recall": 0.2372
+     },
+     "arb": {
+      "picked": 549,
+      "hit": 1,
+      "precision": 0.0018,
+      "baseRate": 0.0006,
+      "recall": 0.0588
+     },
+     "heb": {
+      "picked": 194,
+      "hit": 124,
+      "precision": 0.6392,
+      "baseRate": 0.049,
+      "recall": 0.3047
+     },
+     "fas": {
+      "picked": 708,
+      "hit": 522,
+      "precision": 0.7373,
+      "baseRate": 0.0919,
+      "recall": 0.203
+     },
+     "kor": {
+      "picked": 65,
+      "hit": 3,
+      "precision": 0.0462,
+      "baseRate": 0.0063,
+      "recall": 0.0469
+     },
+     "jpn": {
+      "picked": 307,
+      "hit": 239,
+      "precision": 0.7785,
+      "baseRate": 0.0778,
+      "recall": 0.2516
+     },
+     "fra": {
+      "picked": 313,
+      "hit": 267,
+      "precision": 0.853,
+      "baseRate": 0.1942,
+      "recall": 0.0697
+     },
+     "deu": {
+      "picked": 362,
+      "hit": 215,
+      "precision": 0.5939,
+      "baseRate": 0.122,
+      "recall": 0.1132
+     },
+     "ita": {
+      "picked": 357,
+      "hit": 305,
+      "precision": 0.8543,
+      "baseRate": 0.1028,
+      "recall": 0.2462
+     },
+     "por": {
+      "picked": 412,
+      "hit": 366,
+      "precision": 0.8883,
+      "baseRate": 0.2342,
+      "recall": 0.1019
+     },
+     "nld": {
+      "picked": 488,
+      "hit": 423,
+      "precision": 0.8668,
+      "baseRate": 0.1391,
+      "recall": 0.2113
+     },
+     "pol": {
+      "picked": 70,
+      "hit": 62,
+      "precision": 0.8857,
+      "baseRate": 0.0388,
+      "recall": 0.1297
+     },
+     "ukr": {
+      "picked": 107,
+      "hit": 28,
+      "precision": 0.2617,
+      "baseRate": 0.0224,
+      "recall": 0.1474
+     },
+     "hin": {
+      "picked": 936,
+      "hit": 727,
+      "precision": 0.7767,
+      "baseRate": 0.1839,
+      "recall": 0.4639
+     },
+     "vie": {
+      "picked": 6,
+      "hit": 2,
+      "precision": 0.3333,
+      "baseRate": 0.0148,
+      "recall": 0.0392
+     },
+     "ind": {
+      "picked": 353,
+      "hit": 312,
+      "precision": 0.8839,
+      "baseRate": 0.3405,
+      "recall": 0.1237
+     },
+     "swe": {
+      "picked": 114,
+      "hit": 25,
+      "precision": 0.2193,
+      "baseRate": 0.0204,
+      "recall": 0.2809
+     },
+     "urd": {
+      "picked": 535,
+      "hit": 413,
+      "precision": 0.772,
+      "baseRate": 0.1719,
+      "recall": 0.5195
+     },
+     "tur": {
+      "picked": 161,
+      "hit": 19,
+      "precision": 0.118,
+      "baseRate": 0.0225,
+      "recall": 0.2088
+     },
+     "ell": {
+      "picked": 36,
+      "hit": 32,
+      "precision": 0.8889,
+      "baseRate": 0.0379,
+      "recall": 0.3368
+     },
+     "fin": {
+      "picked": 218,
+      "hit": 98,
+      "precision": 0.4495,
+      "baseRate": 0.0311,
+      "recall": 0.2059
+     }
+    }
+   },
+   "bornWeights": {
+    "class": 0.7313,
+    "proper": 0.093,
+    "key": 0.1145,
+    "recur": 0.0612
+   },
+   "meanAucRecurringNames": 0.841,
+   "bestSingleRule": {
+    "class": 1,
+    "proper": 16,
+    "key": 8,
+    "recur": 0
+   }
+  }
+ },
+ "rulesStructure": {
+  "interactions": {
+   "effect of S with A on minus off": {
+    "n": 75,
+    "mean": 0.0033,
+    "up": 15,
+    "down": 0,
+    "meanEffectWhenOff": 0.0543,
+    "meanEffectWhenOn": 0.0576
+   },
+   "effect of S with R on minus off": {
+    "n": 75,
+    "mean": -0.0003,
+    "up": 0,
+    "down": 5,
+    "meanEffectWhenOff": 0.0561,
+    "meanEffectWhenOn": 0.0558
+   },
+   "effect of R with A on minus off": {
+    "n": 75,
+    "mean": 0.0002,
+    "up": 8,
+    "down": 6,
+    "meanEffectWhenOff": 0.001,
+    "meanEffectWhenOn": 0.0011
+   },
+   "effect of A with S on minus off": {
+    "n": 75,
+    "mean": 0.0033,
+    "up": 15,
+    "down": 0,
+    "meanEffectWhenOff": 0.0129,
+    "meanEffectWhenOn": 0.0163
+   },
+   "effect of R with S on minus off": {
+    "n": 75,
+    "mean": -0.0003,
+    "up": 0,
+    "down": 5,
+    "meanEffectWhenOff": 0.0012,
+    "meanEffectWhenOn": 0.0009
+   },
+   "effect of A with R on minus off": {
+    "n": 75,
+    "mean": 0.0002,
+    "up": 8,
+    "down": 6,
+    "meanEffectWhenOff": 0.0145,
+    "meanEffectWhenOn": 0.0147
+   }
+  },
+  "profileStability": {
+   "S": {
+    "n": 25,
+    "foldA_vs_foldB": 0.87,
+    "foldA_vs_DEV": 0.801,
+    "foldB_vs_DEV": 0.788
+   },
+   "R": {
+    "n": 25,
+    "foldA_vs_foldB": 0.127,
+    "foldA_vs_DEV": 0.334,
+    "foldB_vs_DEV": 0.528
+   },
+   "A": {
+    "n": 25,
+    "foldA_vs_foldB": 0.987,
+    "foldA_vs_DEV": 0.775,
+    "foldB_vs_DEV": 0.792
+   }
+  },
+  "propertyCorrelations": {
+   "S": {
+    "caseless": 0.121,
+    "ttr": -0.542,
+    "hapax": -0.338,
+    "contractions": 0.107
+   },
+   "R": {
+    "caseless": -0.254,
+    "ttr": -0.08,
+    "hapax": 0.012,
+    "contractions": 0.374
+   },
+   "A": {
+    "caseless": -0.573,
+    "ttr": -0.115,
+    "hapax": 0.011,
+    "contractions": 0.885
+   }
+  },
+  "groupMeans": {
+   "S_caseless": 0.0667,
+   "S_cased": 0.0556,
+   "A_withFile": 0.0237,
+   "A_noFile": 0
+  },
+  "evidenceRules": {
+   "note": "fold A, candidates with >= 2 arrivals pooled over blocks; Spearman between the four evidence rules per stem, averaged over stems",
+   "spearman": {
+    "class ~ proper": 0.316,
+    "class ~ key": 0.246,
+    "class ~ recur": -0.131,
+    "proper ~ key": 0.287,
+    "proper ~ recur": -0.086,
+    "key ~ recur": 0.056
+   },
+   "aucForRecurringNames": {
+    "class": {
+     "mean": 0.717,
+     "stems": 24
+    },
+    "proper": {
+     "mean": 0.958,
+     "stems": 24
+    },
+    "key": {
+     "mean": 0.681,
+     "stems": 24
+    },
+    "recur": {
+     "mean": 0.465,
+     "stems": 24
+    },
+    "proper+key (blend)": {
+     "mean": 0.959,
+     "stems": 24
+    },
+    "proper*key": {
+     "mean": 0.957,
+     "stems": 24
+    },
+    "proper, then key (ordered)": {
+     "mean": 0.965,
+     "stems": 24
+    },
+    "proper, then recur (ordered)": {
+     "mean": 0.957,
+     "stems": 24
+    },
+    "proper, then key, then recur": {
+     "mean": 0.964,
+     "stems": 24
+    },
+    "all four equal blend": {
+     "mean": 0.891,
+     "stems": 24
+    }
+   }
+  }
+ },
+ "checks": [
+  {
+   "id": "G1.g0-foldA.rec",
+   "reported": -0.177,
+   "recomputed": -0.1774,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "G1.g0-foldA.all",
+   "reported": 0.09,
+   "recomputed": 0.09,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "G2.g0-foldA.singleOk",
+   "reported": 23,
+   "recomputed": 23,
+   "tol": 0,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "G3.g0-foldA.w.class",
+   "reported": 0.705,
+   "recomputed": 0.7051,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "G3.g0-foldA.w.proper",
+   "reported": 0.098,
+   "recomputed": 0.0976,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "G3.g0-foldA.w.key",
+   "reported": 0.129,
+   "recomputed": 0.1291,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "G3.g0-foldA.w.recur",
+   "reported": 0.068,
+   "recomputed": 0.0681,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "G1.g0-foldB.rec",
+   "reported": -0.16,
+   "recomputed": -0.1603,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "G1.g0-foldB.all",
+   "reported": 0.105,
+   "recomputed": 0.105,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "G2.g0-foldB.singleOk",
+   "reported": 25,
+   "recomputed": 25,
+   "tol": 0,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "G3.g0-foldB.w.class",
+   "reported": 0.731,
+   "recomputed": 0.7313,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "G3.g0-foldB.w.proper",
+   "reported": 0.093,
+   "recomputed": 0.093,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "G3.g0-foldB.w.key",
+   "reported": 0.115,
+   "recomputed": 0.1145,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "G3.g0-foldB.w.recur",
+   "reported": 0.061,
+   "recomputed": 0.0612,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  }
+ ],
+ "summary": {
+  "n": 14,
+  "reproduced": 14,
+  "notReproduced": []
+ }
+}

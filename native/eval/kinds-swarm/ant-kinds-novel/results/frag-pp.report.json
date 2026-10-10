@@ -1,0 +1,450 @@
+{
+ "novel": "pp",
+ "tokensRead": 1978,
+ "cellTokens": 1162,
+ "determinism": {
+  "same": 40,
+  "total": 40
+ },
+ "sham": {
+  "n": 100,
+  "nonzero": 0
+ },
+ "pooledCurveD1": [
+  1.326,
+  2.741,
+  1.053,
+  1.053,
+  1.28,
+  1.028,
+  1.207,
+  1.157
+ ],
+ "curveBins": [
+  "1-1",
+  "2-2",
+  "3-3",
+  "4-5",
+  "6-9",
+  "10-17",
+  "18-33",
+  "34-1000000000"
+ ],
+ "F1": {
+  "cliff_m2_minus_m3": 1.6888,
+  "ci": [
+   1.2856,
+   2.0232
+  ],
+  "n1minus": 0.2737,
+  "pass": true
+ },
+ "F2_pooled": {
+  "slopePerDoubling": 0.0053,
+  "ci": [
+   -0.112,
+   0.1327
+  ],
+  "flat": true
+ },
+ "mechanism": {
+  "m1": {
+   "n": 180,
+   "meanD1": 1.1822,
+   "shareNull": 0.3111,
+   "shareFigure": 0,
+   "shareBeing": 0,
+   "meanDirect": 0.67,
+   "meanCollateral": 2.28
+  },
+  "m2": {
+   "n": 180,
+   "meanD1": 2.6769,
+   "shareNull": 0.0778,
+   "shareFigure": 0.9889,
+   "shareBeing": 0,
+   "meanDirect": 0.74,
+   "meanCollateral": 8.08
+  },
+  "m3+": {
+   "n": 802,
+   "meanD1": 1.0996,
+   "shareNull": 0.3953,
+   "shareFigure": 0.9988,
+   "shareBeing": 0.015,
+   "meanDirect": 0.71,
+   "meanCollateral": 2.28
+  }
+ },
+ "kinds": [
+  {
+   "k": 0,
+   "tokens": 180,
+   "popTokens": 3211,
+   "curve": [
+    {
+     "n": 30,
+     "d1": 1.44,
+     "nonNull": 0.73
+    },
+    {
+     "n": 30,
+     "d1": 2.82,
+     "nonNull": 0.93
+    },
+    {
+     "n": 30,
+     "d1": 0.93,
+     "nonNull": 0.53
+    },
+    {
+     "n": 30,
+     "d1": 1.29,
+     "nonNull": 0.63
+    },
+    {
+     "n": 30,
+     "d1": 1.08,
+     "nonNull": 0.57
+    },
+    {
+     "n": 30,
+     "d1": 1.33,
+     "nonNull": 0.6
+    },
+    null,
+    null
+   ],
+   "slopeAbove3": 0.1438,
+   "slopeCI": [
+    -0.2104,
+    0.4646
+   ],
+   "departing": false,
+   "cv": {
+    "n": 180,
+    "mse": {
+     "CONST": 2.2138,
+     "FLOOR": 1.888,
+     "FLOORLOG": 1.9042,
+     "LOG": 2.1894,
+     "HYP": 2.2098
+    },
+    "best": "FLOOR"
+   }
+  },
+  {
+   "k": 1,
+   "tokens": 232,
+   "popTokens": 6116,
+   "curve": [
+    {
+     "n": 30,
+     "d1": 1.02,
+     "nonNull": 0.67
+    },
+    {
+     "n": 30,
+     "d1": 2.71,
+     "nonNull": 0.97
+    },
+    {
+     "n": 30,
+     "d1": 1.23,
+     "nonNull": 0.67
+    },
+    {
+     "n": 30,
+     "d1": 1.68,
+     "nonNull": 0.8
+    },
+    {
+     "n": 30,
+     "d1": 0.92,
+     "nonNull": 0.6
+    },
+    {
+     "n": 30,
+     "d1": 1.5,
+     "nonNull": 0.7
+    },
+    {
+     "n": 30,
+     "d1": 1.48,
+     "nonNull": 0.83
+    },
+    {
+     "n": 22,
+     "d1": 2.49,
+     "nonNull": 0.82
+    }
+   ],
+   "slopeAbove3": 0.2108,
+   "slopeCI": [
+    -0.0259,
+    0.4637
+   ],
+   "departing": false,
+   "cv": {
+    "n": 232,
+    "mse": {
+     "CONST": 2.2792,
+     "FLOOR": 2.0924,
+     "FLOORLOG": 2.0616,
+     "LOG": 2.2845,
+     "HYP": 2.2841
+    },
+    "best": "FLOORLOG"
+   }
+  },
+  {
+   "k": 2,
+   "tokens": 180,
+   "popTokens": 6575,
+   "curve": [
+    {
+     "n": 30,
+     "d1": 1.31,
+     "nonNull": 0.7
+    },
+    {
+     "n": 30,
+     "d1": 2.27,
+     "nonNull": 0.8
+    },
+    {
+     "n": 30,
+     "d1": 0.59,
+     "nonNull": 0.4
+    },
+    {
+     "n": 30,
+     "d1": 0.61,
+     "nonNull": 0.27
+    },
+    {
+     "n": 30,
+     "d1": 0.88,
+     "nonNull": 0.67
+    },
+    {
+     "n": 30,
+     "d1": 0.94,
+     "nonNull": 0.4
+    },
+    null,
+    null
+   ],
+   "slopeAbove3": 0.1662,
+   "slopeCI": [
+    -0.1248,
+    0.5014
+   ],
+   "departing": false,
+   "cv": {
+    "n": 180,
+    "mse": {
+     "CONST": 2.0236,
+     "FLOOR": 1.7448,
+     "FLOORLOG": 1.7534,
+     "LOG": 1.959,
+     "HYP": 1.9707
+    },
+    "best": "FLOOR"
+   }
+  },
+  {
+   "k": 3,
+   "tokens": 180,
+   "popTokens": 5331,
+   "curve": [
+    {
+     "n": 30,
+     "d1": 0.81,
+     "nonNull": 0.43
+    },
+    {
+     "n": 30,
+     "d1": 2.96,
+     "nonNull": 0.93
+    },
+    {
+     "n": 30,
+     "d1": 0.61,
+     "nonNull": 0.47
+    },
+    {
+     "n": 30,
+     "d1": 0.82,
+     "nonNull": 0.6
+    },
+    {
+     "n": 30,
+     "d1": 0.53,
+     "nonNull": 0.43
+    },
+    {
+     "n": 30,
+     "d1": 0.99,
+     "nonNull": 0.67
+    },
+    null,
+    null
+   ],
+   "slopeAbove3": 0.158,
+   "slopeCI": [
+    -0.0293,
+    0.3454
+   ],
+   "departing": false,
+   "cv": {
+    "n": 180,
+    "mse": {
+     "CONST": 1.7679,
+     "FLOOR": 1.1123,
+     "FLOORLOG": 1.1084,
+     "LOG": 1.7316,
+     "HYP": 1.7695
+    },
+    "best": "FLOORLOG"
+   }
+  },
+  {
+   "k": 4,
+   "tokens": 150,
+   "popTokens": 3942,
+   "curve": [
+    {
+     "n": 30,
+     "d1": 0.86,
+     "nonNull": 0.73
+    },
+    {
+     "n": 30,
+     "d1": 2.42,
+     "nonNull": 0.93
+    },
+    {
+     "n": 30,
+     "d1": 1.35,
+     "nonNull": 0.77
+    },
+    {
+     "n": 30,
+     "d1": 0.69,
+     "nonNull": 0.57
+    },
+    {
+     "n": 30,
+     "d1": 1.08,
+     "nonNull": 0.6
+    },
+    null,
+    null,
+    null
+   ],
+   "slopeAbove3": -0.2279,
+   "slopeCI": null,
+   "departing": false,
+   "cv": {
+    "n": 150,
+    "mse": {
+     "CONST": 1.5992,
+     "FLOOR": 1.2841,
+     "FLOORLOG": 1.2946,
+     "LOG": 1.6021,
+     "HYP": 1.6108
+    },
+    "best": "FLOOR"
+   }
+  },
+  {
+   "k": 5,
+   "tokens": 240,
+   "popTokens": 60462,
+   "curve": [
+    {
+     "n": 30,
+     "d1": 1.66,
+     "nonNull": 0.87
+    },
+    {
+     "n": 30,
+     "d1": 2.88,
+     "nonNull": 0.97
+    },
+    {
+     "n": 30,
+     "d1": 1.2,
+     "nonNull": 0.6
+    },
+    {
+     "n": 30,
+     "d1": 1.09,
+     "nonNull": 0.63
+    },
+    {
+     "n": 30,
+     "d1": 1.41,
+     "nonNull": 0.77
+    },
+    {
+     "n": 30,
+     "d1": 0.99,
+     "nonNull": 0.53
+    },
+    {
+     "n": 30,
+     "d1": 1.2,
+     "nonNull": 0.63
+    },
+    {
+     "n": 30,
+     "d1": 1.16,
+     "nonNull": 0.63
+    }
+   ],
+   "slopeAbove3": -0.022,
+   "slopeCI": [
+    -0.136,
+    0.0708
+   ],
+   "departing": false,
+   "cv": {
+    "n": 240,
+    "mse": {
+     "CONST": 2.2181,
+     "FLOOR": 1.9227,
+     "FLOORLOG": 1.9319,
+     "LOG": 2.141,
+     "HYP": 2.1531
+    },
+    "best": "FLOOR"
+   }
+  }
+ ],
+ "F2_departing": [],
+ "F3": {
+  "kindsWithLowM": 6,
+  "floorWins": 4,
+  "winners": {
+   "0": "FLOOR",
+   "1": "FLOORLOG",
+   "2": "FLOOR",
+   "3": "FLOORLOG",
+   "4": "FLOOR",
+   "5": "FLOOR"
+  },
+  "pooledSampleCV": {
+   "n": 1162,
+   "mse": {
+    "CONST": 2.0663,
+    "FLOOR": 1.7499,
+    "FLOORLOG": 1.7381,
+    "LOG": 2.0577,
+    "HYP": 2.0575
+   },
+   "best": "FLOORLOG"
+  }
+ }
+}

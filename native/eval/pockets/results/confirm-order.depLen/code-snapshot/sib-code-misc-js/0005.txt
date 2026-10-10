@@ -1,0 +1,12 @@
+export function addPost(posts, { author, imageUrl, caption }) {
+  const newPost = {
+    id: "p" + Date.now(),
+    author,
+    imageUrl,
+    caption,
+    likes: [],
+    comments: [],
+    createdAt: Date.now()
+  };
+  return [...posts, newPost];
+}

@@ -1,0 +1,338 @@
+{
+ "module": "ant-kinds-chat/induce.mjs",
+ "corpus": "sms",
+ "preregSha256": "0b7ebeba45da9ec1a28d91472b1f4437f7ede987aa2eca565e12541ae8fb2878",
+ "MINC": 10,
+ "F_MAX": 1000,
+ "D": 48,
+ "LADDER": [
+  2,
+  3,
+  4,
+  6,
+  8,
+  12,
+  16,
+  24
+ ],
+ "MIN_HALF": 8,
+ "NULL_DRAWS": 4,
+ "SESOI": 0.1,
+ "devDocs": 25,
+ "conformance": {
+  "formsChecked": 25,
+  "featuresChecked": 406,
+  "mismatches": 0
+ },
+ "curve": [
+  {
+   "K": 2,
+   "real": 0.3579,
+   "realBySplit": [
+    0.3596,
+    0.3561
+   ],
+   "nullMean": 0.4449,
+   "nullMax": 0.4725,
+   "gap": -0.1147
+  },
+  {
+   "K": 3,
+   "real": 0.4784,
+   "realBySplit": [
+    0.4886,
+    0.4681
+   ],
+   "nullMean": 0.3637,
+   "nullMax": 0.3875,
+   "gap": 0.0909
+  },
+  {
+   "K": 4,
+   "real": 0.262,
+   "realBySplit": [
+    0.2766,
+    0.2474
+   ],
+   "nullMean": 0.2901,
+   "nullMax": 0.3724,
+   "gap": -0.1104
+  },
+  {
+   "K": 6,
+   "real": 0.3,
+   "realBySplit": [
+    0.3458,
+    0.2542
+   ],
+   "nullMean": 0.207,
+   "nullMax": 0.2411,
+   "gap": 0.0589
+  },
+  {
+   "K": 8,
+   "real": 0.2972,
+   "realBySplit": [
+    0.2801,
+    0.3143
+   ],
+   "nullMean": 0.1774,
+   "nullMax": 0.199,
+   "gap": 0.0982
+  },
+  {
+   "K": 12,
+   "real": 0.2441,
+   "realBySplit": [
+    0.2119,
+    0.2762
+   ],
+   "nullMean": 0.1392,
+   "nullMax": 0.1625,
+   "gap": 0.0816
+  },
+  {
+   "K": 16,
+   "real": 0.2177,
+   "realBySplit": [
+    0.2196,
+    0.2157
+   ],
+   "nullMean": 0.1154,
+   "nullMax": 0.1222,
+   "gap": 0.0954
+  },
+  {
+   "K": 24,
+   "real": 0.1994,
+   "realBySplit": [
+    0.2432,
+    0.1555
+   ],
+   "nullMean": 0.1138,
+   "nullMax": 0.1278,
+   "gap": 0.0715
+  }
+ ],
+ "vocabHalves": [
+  292,
+  270
+ ],
+ "Kstar": 8,
+ "gapKstar": 0.0982,
+ "K1_curve_holds": false,
+ "final": {
+  "V": 579,
+  "K": 8,
+  "tokenShare": [
+   0.3974,
+   0.1779,
+   0.0956,
+   0.0823,
+   0.0635,
+   0.0635,
+   0.0619,
+   0.0578
+  ],
+  "types": [
+   53,
+   70,
+   143,
+   67,
+   36,
+   56,
+   83,
+   71
+  ]
+ },
+ "frequency": {
+  "NMI_decile": 0.155,
+  "ARI_bands": 0.0854,
+  "NMI_bands": 0.1578
+ },
+ "signatures": [
+  [
+   "after=gt",
+   "after=the",
+   "after=am",
+   "after=decimal",
+   "before=do",
+   "before=is",
+   "before=if",
+   "after=love",
+   "before=for",
+   "before=when"
+  ],
+  [
+   "before=^",
+   "after=$",
+   "before=lt",
+   "before=decimal",
+   "before=k",
+   "after=bhai",
+   "after=k",
+   "after=me",
+   "after=d",
+   "after=andreu"
+  ],
+  [
+   "before=via",
+   "after=way2sms",
+   "after=com",
+   "before=sent",
+   "after=via",
+   "before=god",
+   "before=hi",
+   "before=a",
+   "after=gt",
+   "before=lt"
+  ],
+  [
+   "before=i",
+   "before=u",
+   "before=you",
+   "after=u",
+   "after=you",
+   "before=dnt",
+   "after=to",
+   "after=be",
+   "before=we",
+   "after=god"
+  ],
+  [
+   "before=to",
+   "after=it",
+   "after=a",
+   "before=will",
+   "before=you",
+   "after=you",
+   "before=can",
+   "before=and",
+   "before=u",
+   "after=to"
+  ],
+  [
+   "before=the",
+   "after=to",
+   "after=$",
+   "after=of",
+   "before=a",
+   "before=my",
+   "before=your",
+   "before=ur",
+   "before=good",
+   "before=take"
+  ],
+  [
+   "after=$",
+   "before=way2sms",
+   "after=sent",
+   "before=gud",
+   "after=he",
+   "before=good",
+   "before=kya",
+   "after=hai",
+   "before=kaha",
+   "before=ur"
+  ],
+  [
+   "before=^",
+   "after=bles",
+   "before=bhai",
+   "after=pe",
+   "before=may",
+   "after=r",
+   "after=christmas",
+   "before=na",
+   "after=is",
+   "after=kya"
+  ]
+ ],
+ "K1_holds": false,
+ "characterise": {
+  "dev": {
+   "rows": [
+    {
+     "kind": 0,
+     "types": 53,
+     "tokenShare": 0.2628,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 1,
+     "types": 70,
+     "tokenShare": 0.1177,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 2,
+     "types": 143,
+     "tokenShare": 0.0632,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 3,
+     "types": 67,
+     "tokenShare": 0.0545,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 4,
+     "types": 36,
+     "tokenShare": 0.042,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 5,
+     "types": 56,
+     "tokenShare": 0.042,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 6,
+     "types": 83,
+     "tokenShare": 0.0409,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 7,
+     "types": 71,
+     "tokenShare": 0.0382,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    }
+   ],
+   "thin": {
+    "tokenShare": 0.3387,
+    "goldShare": null
+   },
+   "goldTokens": 0,
+   "landing": null,
+   "nickTypeCount": 0
+  }
+ },
+ "seconds": 8.7
+}

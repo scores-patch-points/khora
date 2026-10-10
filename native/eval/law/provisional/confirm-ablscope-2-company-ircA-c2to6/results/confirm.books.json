@@ -1,0 +1,201 @@
+{
+ "arm": "books",
+ "headerSha256": "1bb2872ed0b491d0daaa6f6f9076359939d77c192c56199263befce7984a5f9a",
+ "daysSha256": "97ff0d9c40899ad31db4a1960e90cbd1496553d59b5b7bf57c2961d3cd0902f5",
+ "rowsSha256": "e0ba4e41cd063419ec253e74ea6b786296cf7d5a6a959aacdb874909ad4dae61",
+ "B": 1000,
+ "pairsTotal": 393,
+ "instrument": {
+  "K1_sham_zero": [
+   786,
+   786
+  ],
+  "K6_determinism": [
+   50,
+   50
+  ]
+ },
+ "computeSeconds": 36.1,
+ "docs": [
+  [
+   "pg158_Emma.txt",
+   160
+  ],
+  [
+   "pg161_Sense-and-Sensibility.txt",
+   113
+  ],
+  [
+   "pg345_Dracula.txt",
+   120
+  ]
+ ],
+ "result": {
+  "core": {
+   "pairs": 267,
+   "auc": 0.5337,
+   "ci": [
+    0.477,
+    0.5929
+   ],
+   "permQ95": 0.5358,
+   "permMean": 0.4998,
+   "permP": 0.066,
+   "perStratum": {
+    "c2": {
+     "n": 78,
+     "auc": 0.5911
+    },
+    "c3": {
+     "n": 77,
+     "auc": 0.4209
+    },
+    "c4_6": {
+     "n": 112,
+     "auc": 0.5711
+    },
+    "c7_15": {
+     "n": 0,
+     "auc": null
+    },
+    "c16p": {
+     "n": 0,
+     "auc": null
+    }
+   },
+   "controls": {
+    "R_LOGC": 0.5164,
+    "R_POS": 0.5081,
+    "R_IPOS": 0.5,
+    "R_FB": 0.5292,
+    "R_LEN": 0.5184,
+    "R_SL": 0.5196
+   },
+   "controlsInBand": true,
+   "probeAuc": 0.5138,
+   "caliper": {
+    "pairs": 57,
+    "auc": 0.4883,
+    "ci": [
+     0.3047,
+     0.6408
+    ],
+    "controls": {
+     "R_LOGC": 0.5,
+     "R_POS": 0.5127,
+     "R_IPOS": 0.5,
+     "R_FB": 0.5,
+     "R_LEN": 0.5,
+     "R_SL": 0.4948
+    },
+    "controlsInBand": true
+   }
+  },
+  "shamCompany": {
+   "ALL": 0.487,
+   "OTHERS": 0.4887
+  },
+  "perDoc": {
+   "pg158_Emma.txt": {
+    "pairs": 115,
+    "auc": 0.5632
+   },
+   "pg161_Sense-and-Sensibility.txt": {
+    "pairs": 62,
+    "auc": 0.4646
+   },
+   "pg345_Dracula.txt": {
+    "pairs": 90,
+    "auc": 0.5504
+   }
+  },
+  "reduction": {
+   "aucNegDSelf": 0.5337,
+   "aucRInit": 0.6319,
+   "aucAllInit": 0.5506,
+   "diffNegDSelfMinusRInit": {
+    "point": -0.0982,
+    "lo": -0.1543,
+    "hi": -0.0447,
+    "nBoot": 1000
+   },
+   "probeControlsPlusRInit": 0.6512,
+   "probeControlsPlusRInitPlusDSelf": 0.6573,
+   "probeControlsPlusDSelf": 0.5098,
+   "incrementalOverRInit": 0.0061,
+   "tiesOnRInit": {
+    "pairs": 101,
+    "aucNegDSelf": 0.4465
+   },
+   "perDimension": {
+    "log1p_count": 0.5164,
+    "distLeft": 0.3454,
+    "distRight": 0.4641,
+    "entLeft": 0.5766,
+    "entRight": 0.5168,
+    "initShare": 0.63,
+    "finalShare": 0.478
+   },
+   "medianDSelf": {
+    "c2": {
+     "pos": 0.7312,
+     "neg": 0.732,
+     "n": 78
+    },
+    "c3": {
+     "pos": 0.5606,
+     "neg": 0.5352,
+     "n": 77
+    },
+    "c4_6": {
+     "pos": 0.3622,
+     "neg": 0.3914,
+     "n": 112
+    }
+   }
+  },
+  "decay": {
+   "pairs": 126,
+   "auc": 0.5951,
+   "ci": [
+    0.5302,
+    0.6565
+   ],
+   "controls": {
+    "R_LOGC": 0.5563,
+    "R_POS": 0.4988,
+    "R_IPOS": 0.5,
+    "R_FB": 0.4293,
+    "R_LEN": 0.5573,
+    "R_SL": 0.4969
+   },
+   "controlsInBand": false,
+   "perStratum": {
+    "c2": {
+     "n": 0,
+     "auc": null
+    },
+    "c3": {
+     "n": 0,
+     "auc": null
+    },
+    "c4_6": {
+     "n": 0,
+     "auc": null
+    },
+    "c7_15": {
+     "n": 94,
+     "auc": 0.5895
+    },
+    "c16p": {
+     "n": 32,
+     "auc": 0.6113
+    }
+   }
+  },
+  "holdsPrimary": false,
+  "holdsCaliper": false,
+  "verdict": "FAILS(<=0.55)"
+ },
+ "analyseSeconds": 2.4
+}

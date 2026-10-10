@@ -1,0 +1,153 @@
+{
+ "source": "saved ladder results (s4 = DEV, t1 = fold A, t2 = fold B), saved graded results, and a cheap re-read of fold A",
+ "exploratory": true,
+ "interactions": {
+  "effect of S with A on minus off": {
+   "n": 75,
+   "mean": 0.0033,
+   "up": 15,
+   "down": 0,
+   "meanEffectWhenOff": 0.0543,
+   "meanEffectWhenOn": 0.0576
+  },
+  "effect of S with R on minus off": {
+   "n": 75,
+   "mean": -0.0003,
+   "up": 0,
+   "down": 5,
+   "meanEffectWhenOff": 0.0561,
+   "meanEffectWhenOn": 0.0558
+  },
+  "effect of R with A on minus off": {
+   "n": 75,
+   "mean": 0.0002,
+   "up": 8,
+   "down": 6,
+   "meanEffectWhenOff": 0.001,
+   "meanEffectWhenOn": 0.0011
+  },
+  "effect of A with S on minus off": {
+   "n": 75,
+   "mean": 0.0033,
+   "up": 15,
+   "down": 0,
+   "meanEffectWhenOff": 0.0129,
+   "meanEffectWhenOn": 0.0163
+  },
+  "effect of R with S on minus off": {
+   "n": 75,
+   "mean": -0.0003,
+   "up": 0,
+   "down": 5,
+   "meanEffectWhenOff": 0.0012,
+   "meanEffectWhenOn": 0.0009
+  },
+  "effect of A with R on minus off": {
+   "n": 75,
+   "mean": 0.0002,
+   "up": 8,
+   "down": 6,
+   "meanEffectWhenOff": 0.0145,
+   "meanEffectWhenOn": 0.0147
+  }
+ },
+ "profileStability": {
+  "S": {
+   "n": 25,
+   "foldA_vs_foldB": 0.87,
+   "foldA_vs_DEV": 0.801,
+   "foldB_vs_DEV": 0.788
+  },
+  "R": {
+   "n": 25,
+   "foldA_vs_foldB": 0.127,
+   "foldA_vs_DEV": 0.334,
+   "foldB_vs_DEV": 0.528
+  },
+  "A": {
+   "n": 25,
+   "foldA_vs_foldB": 0.987,
+   "foldA_vs_DEV": 0.775,
+   "foldB_vs_DEV": 0.792
+  }
+ },
+ "propertyCorrelations": {
+  "S": {
+   "caseless": 0.121,
+   "ttr": -0.542,
+   "hapax": -0.338,
+   "contractions": 0.107
+  },
+  "R": {
+   "caseless": -0.254,
+   "ttr": -0.08,
+   "hapax": 0.012,
+   "contractions": 0.374
+  },
+  "A": {
+   "caseless": -0.573,
+   "ttr": -0.115,
+   "hapax": 0.011,
+   "contractions": 0.885
+  }
+ },
+ "groupMeans": {
+  "S_caseless": 0.0667,
+  "S_cased": 0.0556,
+  "A_withFile": 0.0237,
+  "A_noFile": 0
+ },
+ "evidenceRules": {
+  "note": "fold A, candidates with >= 2 arrivals pooled over blocks; Spearman between the four evidence rules per stem, averaged over stems",
+  "spearman": {
+   "class ~ proper": 0.316,
+   "class ~ key": 0.246,
+   "class ~ recur": -0.131,
+   "proper ~ key": 0.287,
+   "proper ~ recur": -0.086,
+   "key ~ recur": 0.056
+  },
+  "aucForRecurringNames": {
+   "class": {
+    "mean": 0.717,
+    "stems": 24
+   },
+   "proper": {
+    "mean": 0.958,
+    "stems": 24
+   },
+   "key": {
+    "mean": 0.681,
+    "stems": 24
+   },
+   "recur": {
+    "mean": 0.465,
+    "stems": 24
+   },
+   "proper+key (blend)": {
+    "mean": 0.959,
+    "stems": 24
+   },
+   "proper*key": {
+    "mean": 0.957,
+    "stems": 24
+   },
+   "proper, then key (ordered)": {
+    "mean": 0.965,
+    "stems": 24
+   },
+   "proper, then recur (ordered)": {
+    "mean": 0.957,
+    "stems": 24
+   },
+   "proper, then key, then recur": {
+    "mean": 0.964,
+    "stems": 24
+   },
+   "all four equal blend": {
+    "mean": 0.891,
+    "stems": 24
+   }
+  }
+ }
+}

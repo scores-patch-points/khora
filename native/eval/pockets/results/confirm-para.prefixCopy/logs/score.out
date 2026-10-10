@@ -1,0 +1,33 @@
+id                         class      tokens meanLen      vD      vC      zD      zC status     z50 st     docNull st
+sp-js-fold                 code       291042    12.5  0.0879  0.0888   131.5   128.7 PRESENT+   PRESENT+   PRESENT+
+sp-js-heimdall             code       160415     8.6  0.0611  0.0720    48.4    47.2 PRESENT+   PRESENT+   PRESENT+
+sp-js-eoreader7            code       291147     9.2  0.0457  0.0350    87.6   147.1 PRESENT+   PRESENT+   PRESENT+
+sp-py-foldvenv             code       293941     4.6  0.0523  0.0404   399.6   276.6 PRESENT+   PRESENT+   PRESENT+
+sp-py-first                code       232966     7.0  0.0271  0.0214   185.2    72.5 PRESENT+   PRESENT+   PRESENT+
+sp-en-poe-works2           prose       96647    23.0  0.0140  0.0178    11.0    17.1 PRESENT+   PRESENT+   PRESENT+
+sp-en-chopin-awakening     prose       64408    14.5  0.0166  0.0160    16.5    14.1 PRESENT+   PRESENT+   PRESENT+
+sp-en-hesse-siddhartha     prose       39270    21.0  0.0434  0.0295    29.7    33.8 PRESENT+   PRESENT+   PRESENT+
+sp-en-zola-mouret          prose      128496    16.0  0.0114  0.0087    17.6    19.6 PRESENT+   PRESENT+   PRESENT+
+sp-en-waikna               prose       85322    25.2  0.0088  0.0034     6.6     1.8 AMBIGUOUS  AMBIGUOUS  AMBIGUOUS
+sp-en-about-london         prose       55661    25.0  0.0131  0.0246     8.3    17.7 PRESENT+   PRESENT+   PRESENT+
+sp-en-warren-forces        prose       35736    17.7  0.0222  0.0083    14.3     3.2 AMBIGUOUS  AMBIGUOUS  AMBIGUOUS
+sp-en-kafka-metamorphosis  prose       22048    28.2  0.0033  0.0116     1.2     4.9 AMBIGUOUS  AMBIGUOUS  ABSENT
+sp-ud-afr                  ud          30498    23.2  0.0397  0.0211    14.6    10.7 PRESENT+   PRESENT+   AMBIGUOUS
+sp-ud-ces                  ud         299923    17.3  0.0050  0.0087    34.4    61.7 PRESENT+   PRESENT+   PRESENT+
+sp-ud-dan                  ud          68296    15.6  0.0019  0.0011     1.0    -1.3 ABSENT     ABSENT     AMBIGUOUS
+sp-ud-ell                  ud          37783    23.2  0.0224  0.0121    20.2     9.8 PRESENT+   PRESENT+   AMBIGUOUS
+sp-ud-gle                  ud          85922    21.5  0.0022  0.0015     2.0    -0.2 ABSENT     ABSENT     ABSENT
+sp-ud-hye                  ud          65187    15.0  0.0076  0.0064    50.2    24.2 PRESENT+   PRESENT+   AMBIGUOUS
+sp-ud-ita                  ud         240871    18.4  0.0301  0.0313    63.0    78.9 PRESENT+   PRESENT+   PRESENT+
+sp-ud-kat                  ud          33092    14.9  0.0019  0.0055   null     6.4 UNDEFINED             
+sp-ud-lit                  ud          37825    16.2  0.0101  0.0158    30.3    19.4 PRESENT+   PRESENT+   AMBIGUOUS
+sp-ud-mlt                  ud          20056    17.9  0.0165  0.0133     6.8     4.2 PRESENT+   PRESENT+   ABSENT
+sp-ud-nld                  ud         163958    13.4  0.0594  0.0437   101.5   144.9 PRESENT+   PRESENT+   PRESENT+
+sp-ud-rus                  ud          58306    15.1  0.0031  0.0028     1.5     0.8 ABSENT     ABSENT     ABSENT
+sp-ud-tur                  ud          30973     9.0  0.0069  0.0050    34.3   null UNDEFINED             
+sp-ud-wol                  ud          20635    17.4  0.0200  0.0262    11.8    13.1 PRESENT+   PRESENT+   AMBIGUOUS
+sp-en-aesop-stickney       children    29256    15.6  0.0158  0.0078     8.7     5.2 PRESENT+   PRESENT+   AMBIGUOUS
+sp-en-pooh                 children    22984    10.7  0.0143  0.0193    16.6    11.6 PRESENT+   PRESENT+   PRESENT+
+sp-protein-aa              notation   292094   328.9  0.0850  0.0707     0.7    -0.0 ABSENT     ABSENT     ABSENT
+sp-smiles-ccd              notation   156499    26.1  0.1987  0.1766     0.0    -0.3 ABSENT     ABSENT     ABSENT
+VERDICT PARTIAL holding code,ud,notation failing prose,children | constant holds: false | global: true

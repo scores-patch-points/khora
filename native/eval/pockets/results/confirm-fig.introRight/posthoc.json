@@ -1,0 +1,316 @@
+{
+ "note": "post-hoc, not pre-registered, does not enter the verdict",
+ "rho": {
+  "atlas": {
+   "n": 384,
+   "v": 0.485,
+   "z": -0.067,
+   "d": -0.074
+  },
+  "siblings": {
+   "n": 31,
+   "v": -0.1,
+   "z": -0.428,
+   "d": -0.428
+  },
+  "siblingsCodeDiagram": {
+   "n": 7,
+   "v": -0.607,
+   "d": -0.964
+  }
+ },
+ "docGroups": {
+  "sib-js-fold": {
+   "groups": 10,
+   "meanD": -0.03,
+   "se": 0.022,
+   "t": -1.375,
+   "groupsWithDpositive": 3,
+   "dPerGroup": [
+    -0.052,
+    -0.035,
+    -0.075,
+    -0.164,
+    -0.062,
+    -0.028,
+    0.061,
+    -0.029,
+    0.023,
+    0.065
+   ],
+   "preregD": -0.014,
+   "preregStatus": "AMBIGUOUS"
+  },
+  "sib-js-heimdall": {
+   "groups": 10,
+   "meanD": 0.048,
+   "se": 0.02,
+   "t": 2.415,
+   "groupsWithDpositive": 8,
+   "dPerGroup": [
+    0.036,
+    -0.001,
+    0.147,
+    0.046,
+    0.042,
+    0.001,
+    0.013,
+    0.046,
+    0.168,
+    -0.021
+   ],
+   "preregD": 0.09,
+   "preregStatus": "AMBIGUOUS"
+  },
+  "sib-js-eoreader7": {
+   "groups": 10,
+   "meanD": 0.041,
+   "se": 0.017,
+   "t": 2.446,
+   "groupsWithDpositive": 8,
+   "dPerGroup": [
+    -0.058,
+    0.02,
+    -0.008,
+    0.1,
+    0.052,
+    0.008,
+    0.069,
+    0.048,
+    0.122,
+    0.055
+   ],
+   "preregD": 0.01,
+   "preregStatus": "ABSENT"
+  },
+  "sib-py-foldvenv": {
+   "groups": 10,
+   "meanD": 0.15,
+   "se": 0.09,
+   "t": 1.656,
+   "groupsWithDpositive": 9,
+   "dPerGroup": [
+    0.077,
+    0.069,
+    0.121,
+    0.082,
+    -0.045,
+    0.034,
+    0.055,
+    0.072,
+    0.953,
+    0.078
+   ],
+   "preregD": 0.187,
+   "preregStatus": "AMBIGUOUS"
+  },
+  "sib-bpmn-miwg-heldout": {
+   "groups": 10,
+   "meanD": -0.8,
+   "se": 0.07,
+   "t": -11.431,
+   "groupsWithDpositive": 0,
+   "dPerGroup": [
+    -0.585,
+    -0.692,
+    -1.066,
+    -0.997,
+    -0.814,
+    -1.22,
+    -0.623,
+    -0.672,
+    -0.58,
+    -0.754
+   ],
+   "preregD": -0.752,
+   "preregStatus": "PRESENT-"
+  },
+  "sib-bpmn-kogito-heldout": {
+   "groups": 10,
+   "meanD": -0.349,
+   "se": 0.035,
+   "t": -10.073,
+   "groupsWithDpositive": 0,
+   "dPerGroup": [
+    -0.362,
+    -0.243,
+    -0.454,
+    -0.247,
+    -0.453,
+    -0.513,
+    -0.354,
+    -0.156,
+    -0.371,
+    -0.34
+   ],
+   "preregD": -0.33,
+   "preregStatus": "PRESENT-"
+  },
+  "sib-ud-ces-train": {
+   "groups": 10,
+   "meanD": -0.031,
+   "se": 0.008,
+   "t": -3.764,
+   "groupsWithDpositive": 0,
+   "dPerGroup": [
+    -0.013,
+    -0.069,
+    -0.018,
+    -0.031,
+    -0.087,
+    -0.007,
+    -0.026,
+    -0.019,
+    -0.022,
+    -0.017
+   ],
+   "preregD": -0.035,
+   "preregStatus": "AMBIGUOUS"
+  },
+  "sib-ud-ita-train": {
+   "groups": 10,
+   "meanD": 0.043,
+   "se": 0.01,
+   "t": 4.483,
+   "groupsWithDpositive": 10,
+   "dPerGroup": [
+    0.021,
+    0.015,
+    0.107,
+    0.038,
+    0.051,
+    0.005,
+    0.051,
+    0.049,
+    0.069,
+    0.021
+   ],
+   "preregD": 0.027,
+   "preregStatus": "AMBIGUOUS"
+  },
+  "sib-ud-nld-train": {
+   "groups": 10,
+   "meanD": 0.015,
+   "se": 0.012,
+   "t": 1.271,
+   "groupsWithDpositive": 6,
+   "dPerGroup": [
+    0.064,
+    -0.014,
+    -0.014,
+    0.053,
+    0.065,
+    0.014,
+    -0.026,
+    0.043,
+    0.001,
+    -0.033
+   ],
+   "preregD": -0.03,
+   "preregStatus": "AMBIGUOUS"
+  },
+  "sib-en-zola-mouret": {
+   "groups": 10,
+   "meanD": 0.031,
+   "se": 0.011,
+   "t": 2.9,
+   "groupsWithDpositive": 8,
+   "dPerGroup": [
+    0.047,
+    0.034,
+    0.047,
+    0.008,
+    0.076,
+    -0.017,
+    -0.022,
+    0.029,
+    0.033,
+    0.079
+   ],
+   "preregD": -0.004,
+   "preregStatus": "ABSENT"
+  },
+  "sib-en-cary-dante": {
+   "groups": 9,
+   "meanD": 0.024,
+   "se": 0.016,
+   "t": 1.511,
+   "groupsWithDpositive": 5,
+   "dPerGroup": [
+    -0.001,
+    0.123,
+    0.049,
+    -0.029,
+    -0.018,
+    0.021,
+    0.068,
+    0.006,
+    -0.001
+   ],
+   "preregD": -0.003,
+   "preregStatus": "ABSENT"
+  }
+ },
+ "overlap": {
+  "sib-js-fold": {
+   "nearestAtlas": [
+    "cd-cc-javascript",
+    "cd-e09-eoapp-js"
+   ],
+   "lineShare": 0.013,
+   "tokenShareInAtlasVocab": 0.846,
+   "typeShareInAtlasVocab": 0.312
+  },
+  "sib-js-heimdall": {
+   "nearestAtlas": [
+    "cd-cc-javascript",
+    "cd-e09-eoapp-js"
+   ],
+   "lineShare": 0.02,
+   "tokenShareInAtlasVocab": 0.863,
+   "typeShareInAtlasVocab": 0.518
+  },
+  "sib-js-eoreader7": {
+   "nearestAtlas": [
+    "cd-cc-javascript",
+    "cd-e09-eoapp-js"
+   ],
+   "lineShare": 0.014,
+   "tokenShareInAtlasVocab": 0.827,
+   "typeShareInAtlasVocab": 0.332
+  },
+  "sib-py-foldvenv": {
+   "nearestAtlas": [
+    "cd-cc-python",
+    "cd-e09-python"
+   ],
+   "lineShare": 0.019,
+   "tokenShareInAtlasVocab": 0.77,
+   "typeShareInAtlasVocab": 0.194
+  },
+  "sib-bpmn-miwg-heldout": {
+   "nearestAtlas": [
+    "cd-bpmn-miwg"
+   ],
+   "lineShare": 0.561,
+   "tokenShareInAtlasVocab": 0.891,
+   "typeShareInAtlasVocab": 0.191
+  },
+  "sib-bpmn-kogito-heldout": {
+   "nearestAtlas": [
+    "cd-bpmn-kogito"
+   ],
+   "lineShare": 0.685,
+   "tokenShareInAtlasVocab": 0.923,
+   "typeShareInAtlasVocab": 0.377
+  },
+  "sib-bpmn-activiti-heldout": {
+   "nearestAtlas": [
+    "cd-bpmn-activiti"
+   ],
+   "lineShare": 0.609,
+   "tokenShareInAtlasVocab": 0.939,
+   "typeShareInAtlasVocab": 0.576
+  }
+ }
+}

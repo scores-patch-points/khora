@@ -1,0 +1,859 @@
+{
+ "note": "POST-HOC; not part of the registered verdict",
+ "effect": [
+  {
+   "id": "rr-en-about-london",
+   "kind": "reportage",
+   "ratioD": 3.099,
+   "ratioC": 2.222,
+   "excessD": 0.02334,
+   "excessC": 0.01335,
+   "zD": 88.1,
+   "zC": 58.3,
+   "tokens": 53609
+  },
+  {
+   "id": "rr-en-among-forces",
+   "kind": "essay",
+   "ratioD": 3.899,
+   "ratioC": 3.705,
+   "excessD": 0.0309,
+   "excessC": 0.02932,
+   "zD": 134,
+   "zC": 104.8,
+   "tokens": 35707
+  },
+  {
+   "id": "rr-en-mouret",
+   "kind": "novel",
+   "ratioD": 5.982,
+   "ratioC": 6.194,
+   "excessD": 0.05371,
+   "excessC": 0.05572,
+   "zD": 265.1,
+   "zC": 195.4,
+   "tokens": 126434
+  },
+  {
+   "id": "rr-en-poe2",
+   "kind": "novel",
+   "ratioD": 3.512,
+   "ratioC": 3.767,
+   "excessD": 0.0291,
+   "excessC": 0.03152,
+   "zD": 144.5,
+   "zC": 146.7,
+   "tokens": 94473
+  },
+  {
+   "id": "rr-en-waikna",
+   "kind": "memoir",
+   "ratioD": 4.548,
+   "ratioC": 5.002,
+   "excessD": 0.04092,
+   "excessC": 0.04567,
+   "zD": 128.7,
+   "zC": 193.7,
+   "tokens": 74854
+  },
+  {
+   "id": "rr-en-dolls-house",
+   "kind": "drama",
+   "ratioD": 3.521,
+   "ratioC": 4.925,
+   "excessD": 0.0277,
+   "excessC": 0.04378,
+   "zD": 99.1,
+   "zC": 131.7,
+   "tokens": 22597
+  },
+  {
+   "id": "rr-en-early-plays",
+   "kind": "drama",
+   "ratioD": 2.323,
+   "ratioC": 2.116,
+   "excessD": 0.01216,
+   "excessC": 0.01026,
+   "zD": 52.7,
+   "zC": 61.8,
+   "tokens": 31927
+  },
+  {
+   "id": "rr-cd-js",
+   "kind": "code",
+   "ratioD": 5.034,
+   "ratioC": 5.499,
+   "excessD": 0.06382,
+   "excessC": 0.05687,
+   "zD": 84.5,
+   "zC": 163.4,
+   "tokens": 291182
+  },
+  {
+   "id": "rr-cd-ts",
+   "kind": "code",
+   "ratioD": 5.083,
+   "ratioC": 3.917,
+   "excessD": 0.08295,
+   "excessC": 0.07567,
+   "zD": 84.7,
+   "zC": 61.2,
+   "tokens": 291930
+  },
+  {
+   "id": "rr-cd-py",
+   "kind": "code",
+   "ratioD": 6.51,
+   "ratioC": 6.479,
+   "excessD": 0.09954,
+   "excessC": 0.09998,
+   "zD": 80.4,
+   "zC": 142.6,
+   "tokens": 90463
+  },
+  {
+   "id": "rr-bpmn-miwg-heldout",
+   "kind": "diagram",
+   "ratioD": 12.593,
+   "ratioC": 8.362,
+   "excessD": 0.51085,
+   "excessC": 0.46269,
+   "zD": 390.7,
+   "zC": 248.8,
+   "tokens": 292132
+  },
+  {
+   "id": "rr-bpmn-kogito-heldout",
+   "kind": "diagram",
+   "ratioD": 7.834,
+   "ratioC": 8.277,
+   "excessD": 0.46076,
+   "excessC": 0.47009,
+   "zD": 204.4,
+   "zC": 270,
+   "tokens": 161917
+  },
+  {
+   "id": "rr-bpmn-activiti-heldout",
+   "kind": "diagram",
+   "ratioD": 9.467,
+   "ratioC": 8.406,
+   "excessD": 0.34564,
+   "excessC": 0.37319,
+   "zD": 166.9,
+   "zC": 102.4,
+   "tokens": 68568
+  },
+  {
+   "id": "rr-oc-irc-ho-0607",
+   "kind": "chat",
+   "ratioD": 4.991,
+   "ratioC": 4.91,
+   "excessD": 0.04012,
+   "excessC": 0.03884,
+   "zD": 151.4,
+   "zC": 184,
+   "tokens": 44326
+  },
+  {
+   "id": "rr-oc-irc-ho-0809",
+   "kind": "chat",
+   "ratioD": 4.992,
+   "ratioC": 6.708,
+   "excessD": 0.04021,
+   "excessC": 0.05716,
+   "zD": 145.1,
+   "zC": 341.5,
+   "tokens": 44366
+  },
+  {
+   "id": "rr-ud-ita",
+   "kind": "treebank",
+   "ratioD": 7.034,
+   "ratioC": 6.121,
+   "excessD": 0.07399,
+   "excessC": 0.06222,
+   "zD": 359.1,
+   "zC": 398.7,
+   "tokens": 240871
+  },
+  {
+   "id": "rr-ud-nld",
+   "kind": "treebank",
+   "ratioD": 3.442,
+   "ratioC": 3.292,
+   "excessD": 0.03095,
+   "excessC": 0.0261,
+   "zD": 84.5,
+   "zC": 154.6,
+   "tokens": 163958
+  },
+  {
+   "id": "rr-ud-rus",
+   "kind": "treebank",
+   "ratioD": 5.803,
+   "ratioC": 5.508,
+   "excessD": 0.04942,
+   "excessC": 0.04762,
+   "zD": 87.6,
+   "zC": 75.6,
+   "tokens": 58306
+  },
+  {
+   "id": "rr-ud-ces",
+   "kind": "treebank",
+   "ratioD": 4.004,
+   "ratioC": 4.377,
+   "excessD": 0.02715,
+   "excessC": 0.03059,
+   "zD": 338.9,
+   "zC": 372.4,
+   "tokens": 299995
+  },
+  {
+   "id": "rr-ud-dan",
+   "kind": "treebank",
+   "ratioD": 3.848,
+   "ratioC": 4.041,
+   "excessD": 0.02639,
+   "excessC": 0.02837,
+   "zD": 268.6,
+   "zC": 187.8,
+   "tokens": 68296
+  },
+  {
+   "id": "rr-ud-lit",
+   "kind": "treebank",
+   "ratioD": 5.942,
+   "ratioC": 4.473,
+   "excessD": 0.04673,
+   "excessC": 0.03218,
+   "zD": 256.8,
+   "zC": 256.9,
+   "tokens": 37825
+  },
+  {
+   "id": "rr-ud-ell",
+   "kind": "treebank",
+   "ratioD": 11.909,
+   "ratioC": 8.647,
+   "excessD": 0.11025,
+   "excessC": 0.07564,
+   "zD": 535.7,
+   "zC": 168.5,
+   "tokens": 37783
+  },
+  {
+   "id": "rr-ud-tur",
+   "kind": "treebank",
+   "ratioD": 3.054,
+   "ratioC": 3.157,
+   "excessD": 0.01811,
+   "excessC": 0.01891,
+   "zD": 97.6,
+   "zC": 77.9,
+   "tokens": 30973
+  },
+  {
+   "id": "rr-ud-hye",
+   "kind": "treebank",
+   "ratioD": 4.329,
+   "ratioC": 3.299,
+   "excessD": 0.03095,
+   "excessC": 0.02001,
+   "zD": 108.7,
+   "zC": 234.5,
+   "tokens": 65187
+  },
+  {
+   "id": "rr-ud-kat",
+   "kind": "treebank",
+   "ratioD": 6.084,
+   "ratioC": 5.83,
+   "excessD": 0.04986,
+   "excessC": 0.04583,
+   "zD": 162.6,
+   "zC": 271.4,
+   "tokens": 33092
+  },
+  {
+   "id": "rr-ud-gle",
+   "kind": "treebank",
+   "ratioD": 5.917,
+   "ratioC": 6.149,
+   "excessD": 0.05124,
+   "excessC": 0.05352,
+   "zD": 275.8,
+   "zC": 270.7,
+   "tokens": 85922
+  },
+  {
+   "id": "rr-ud-afr",
+   "kind": "treebank",
+   "ratioD": 8.567,
+   "ratioC": 6.423,
+   "excessD": 0.08894,
+   "excessC": 0.06533,
+   "zD": 366.6,
+   "zC": 186.5,
+   "tokens": 30498
+  },
+  {
+   "id": "rr-ud-mlt",
+   "kind": "treebank",
+   "ratioD": 4.179,
+   "ratioC": 4.319,
+   "excessD": 0.03236,
+   "excessC": 0.04102,
+   "zD": 94.6,
+   "zC": 63.7,
+   "tokens": 20056
+  },
+  {
+   "id": "rr-ud-wol",
+   "kind": "treebank",
+   "ratioD": 4.837,
+   "ratioC": 5.017,
+   "excessD": 0.03851,
+   "excessC": 0.04075,
+   "zD": 271.2,
+   "zC": 112.9,
+   "tokens": 20635
+  },
+  {
+   "id": "rr-seq-codons",
+   "kind": "sequence-codons",
+   "ratioD": 1.03,
+   "ratioC": 1.027,
+   "excessD": 0.0002,
+   "excessC": 0.00019,
+   "zD": 8,
+   "zC": 8,
+   "tokens": 291942
+  },
+  {
+   "id": "rr-law-fr-heldout",
+   "kind": "legal",
+   "ratioD": 12.601,
+   "ratioC": 14.508,
+   "excessD": 0.12701,
+   "excessC": 0.15256,
+   "zD": 795.2,
+   "zC": 1372.9,
+   "tokens": 296993
+  },
+  {
+   "id": "rr-factbook-heldout",
+   "kind": "reference",
+   "ratioD": 6.105,
+   "ratioC": 5.674,
+   "excessD": 0.24931,
+   "excessC": 0.23893,
+   "zD": 323.4,
+   "zC": 206.6,
+   "tokens": 297658
+  },
+  {
+   "id": "rr-wiki-heldout",
+   "kind": "encyclopedia",
+   "ratioD": 8.127,
+   "ratioC": 7.283,
+   "excessD": 0.07875,
+   "excessC": 0.07103,
+   "zD": 287.1,
+   "zC": 545.2,
+   "tokens": 177879
+  },
+  {
+   "id": "rr-ntrs-heldout",
+   "kind": "academic",
+   "ratioD": 8.412,
+   "ratioC": 8.541,
+   "excessD": 0.09258,
+   "excessC": 0.09264,
+   "zD": 1004.1,
+   "zC": 412.5,
+   "tokens": 296249
+  },
+  {
+   "id": "rr-seq-protein",
+   "kind": "sequence-protein",
+   "ratioD": 1.006,
+   "ratioC": 1.012,
+   "excessD": 0.00006,
+   "excessC": 0.00012,
+   "zD": 1.3,
+   "zC": 3.4,
+   "tokens": 291024
+  }
+ ],
+ "effectSummary": {
+  "minRatio": 1.006,
+  "medianRatio": 5.2075,
+  "rhoLogTokensVsMinAbsZ": 0.337,
+  "rhoLogTokensVsMeanV": 0.326
+ },
+ "carriers": {
+  "rr-en-about-london": {
+   "tokens": 53609,
+   "eligible": 593,
+   "softShare": 0.0488,
+   "top10ShareOfTotal": 0.322,
+   "top": [
+    {
+     "type": "part",
+     "next": "of",
+     "m": 0.88,
+     "n": 25,
+     "soft": 1
+    },
+    {
+     "type": "tells",
+     "next": "us",
+     "m": 0.86,
+     "n": 14,
+     "soft": 1
+    },
+    {
+     "type": "earl",
+     "next": "of",
+     "m": 0.86,
+     "n": 14,
+     "soft": 1
+    },
+    {
+     "type": "according",
+     "next": "to",
+     "m": 1,
+     "n": 12,
+     "soft": 1
+    },
+    {
+     "type": "breach",
+     "next": "of",
+     "m": 1,
+     "n": 12,
+     "soft": 1
+    },
+    {
+     "type": "spite",
+     "next": "of",
+     "m": 1,
+     "n": 11,
+     "soft": 1
+    },
+    {
+     "type": "connected",
+     "next": "with",
+     "m": 1,
+     "n": 11,
+     "soft": 1
+    },
+    {
+     "type": "amounted",
+     "next": "to",
+     "m": 1,
+     "n": 10,
+     "soft": 1
+    },
+    {
+     "type": "instead",
+     "next": "of",
+     "m": 0.75,
+     "n": 12,
+     "soft": 0.717
+    },
+    {
+     "type": "parts",
+     "next": "of",
+     "m": 0.73,
+     "n": 11,
+     "soft": 0.616
+    },
+    {
+     "type": "use",
+     "next": "of",
+     "m": 0.73,
+     "n": 11,
+     "soft": 0.616
+    },
+    {
+     "type": "across",
+     "next": "the",
+     "m": 0.7,
+     "n": 10,
+     "soft": 0.513
+    }
+   ]
+  },
+  "rr-en-dolls-house": {
+   "tokens": 22597,
+   "eligible": 276,
+   "softShare": 0.062,
+   "top10ShareOfTotal": 0.498,
+   "top": [
+    {
+     "type": "doctor",
+     "next": "rank",
+     "m": 0.9,
+     "n": 40,
+     "soft": 1
+    },
+    {
+     "type": "thank",
+     "next": "you",
+     "m": 0.86,
+     "n": 14,
+     "soft": 1
+    },
+    {
+     "type": "try",
+     "next": "and",
+     "m": 0.85,
+     "n": 13,
+     "soft": 1
+    },
+    {
+     "type": "able",
+     "next": "to",
+     "m": 1,
+     "n": 13,
+     "soft": 1
+    },
+    {
+     "type": "wonderful",
+     "next": "thing",
+     "m": 0.83,
+     "n": 12,
+     "soft": 1
+    },
+    {
+     "type": "mr",
+     "next": "krogstad",
+     "m": 0.9,
+     "n": 10,
+     "soft": 1
+    },
+    {
+     "type": "sort",
+     "next": "of",
+     "m": 0.79,
+     "n": 14,
+     "soft": 0.909
+    },
+    {
+     "type": "listen",
+     "next": "to",
+     "m": 0.73,
+     "n": 11,
+     "soft": 0.616
+    },
+    {
+     "type": "fancy",
+     "next": "dress",
+     "m": 0.7,
+     "n": 10,
+     "soft": 0.513
+    },
+    {
+     "type": "ought",
+     "next": "to",
+     "m": 0.69,
+     "n": 16,
+     "soft": 0.472
+    },
+    {
+     "type": "going",
+     "next": "to",
+     "m": 0.67,
+     "n": 42,
+     "soft": 0.411
+    },
+    {
+     "type": "sweet",
+     "next": "little",
+     "m": 0.64,
+     "n": 11,
+     "soft": 0.336
+    }
+   ]
+  },
+  "rr-en-mouret": {
+   "tokens": 126434,
+   "eligible": 1257,
+   "softShare": 0.0728,
+   "top10ShareOfTotal": 0.109,
+   "top": [
+    {
+     "type": "la",
+     "next": "teuse",
+     "m": 0.84,
+     "n": 184,
+     "soft": 1
+    },
+    {
+     "type": "began",
+     "next": "to",
+     "m": 0.83,
+     "n": 63,
+     "soft": 1
+    },
+    {
+     "type": "monsieur",
+     "next": "le",
+     "m": 0.84,
+     "n": 57,
+     "soft": 1
+    },
+    {
+     "type": "le",
+     "next": "curé",
+     "m": 0.98,
+     "n": 49,
+     "soft": 1
+    },
+    {
+     "type": "sight",
+     "next": "of",
+     "m": 0.83,
+     "n": 47,
+     "soft": 1
+    },
+    {
+     "type": "able",
+     "next": "to",
+     "m": 0.98,
+     "n": 45,
+     "soft": 1
+    },
+    {
+     "type": "les",
+     "next": "artaud",
+     "m": 0.87,
+     "n": 38,
+     "soft": 1
+    },
+    {
+     "type": "used",
+     "next": "to",
+     "m": 0.81,
+     "n": 37,
+     "soft": 1
+    },
+    {
+     "type": "tried",
+     "next": "to",
+     "m": 0.92,
+     "n": 37,
+     "soft": 1
+    },
+    {
+     "type": "front",
+     "next": "of",
+     "m": 0.8,
+     "n": 35,
+     "soft": 1
+    },
+    {
+     "type": "midst",
+     "next": "of",
+     "m": 0.94,
+     "n": 33,
+     "soft": 1
+    },
+    {
+     "type": "edge",
+     "next": "of",
+     "m": 0.81,
+     "n": 27,
+     "soft": 1
+    }
+   ]
+  },
+  "rr-en-early-plays": {
+   "tokens": 31927,
+   "eligible": 359,
+   "softShare": 0.0235,
+   "top10ShareOfTotal": 0.321,
+   "top": [
+    {
+     "type": "re",
+     "next": "enter",
+     "m": 1,
+     "n": 12,
+     "soft": 1
+    },
+    {
+     "type": "master",
+     "next": "doctor",
+     "m": 0.72,
+     "n": 25,
+     "soft": 0.587
+    },
+    {
+     "type": "common",
+     "next": "weale",
+     "m": 0.56,
+     "n": 16,
+     "soft": 0.205
+    },
+    {
+     "type": "shew",
+     "next": "thee",
+     "m": 0.55,
+     "n": 11,
+     "soft": 0.183
+    },
+    {
+     "type": "body",
+     "next": "and",
+     "m": 0.54,
+     "n": 13,
+     "soft": 0.175
+    },
+    {
+     "type": "canst",
+     "next": "thou",
+     "m": 0.5,
+     "n": 12,
+     "soft": 0.135
+    },
+    {
+     "type": "those",
+     "next": "that",
+     "m": 0.48,
+     "n": 31,
+     "soft": 0.122
+    },
+    {
+     "type": "english",
+     "next": "king",
+     "m": 0.46,
+     "n": 26,
+     "soft": 0.105
+    },
+    {
+     "type": "cursed",
+     "next": "be",
+     "m": 0.45,
+     "n": 11,
+     "soft": 0.1
+    },
+    {
+     "type": "full",
+     "next": "of",
+     "m": 0.45,
+     "n": 11,
+     "soft": 0.1
+    },
+    {
+     "type": "follow",
+     "next": "me",
+     "m": 0.45,
+     "n": 11,
+     "soft": 0.1
+    },
+    {
+     "type": "fall",
+     "next": "to",
+     "m": 0.43,
+     "n": 14,
+     "soft": 0.084
+    }
+   ]
+  }
+ },
+ "leak": [
+  {
+   "sibling": "rr-bpmn-miwg-heldout",
+   "atlas": "cd-bpmn-miwg",
+   "siblingUnitsChecked": 19991,
+   "exactDuplicateUnits": 9383,
+   "share": 0.4694
+  },
+  {
+   "sibling": "rr-bpmn-kogito-heldout",
+   "atlas": "cd-bpmn-kogito",
+   "siblingUnitsChecked": 11834,
+   "exactDuplicateUnits": 7454,
+   "share": 0.6299
+  },
+  {
+   "sibling": "rr-bpmn-activiti-heldout",
+   "atlas": "cd-bpmn-activiti",
+   "siblingUnitsChecked": 5174,
+   "exactDuplicateUnits": 3017,
+   "share": 0.5831
+  },
+  {
+   "sibling": "rr-oc-irc-ho-0607",
+   "atlas": "oc-irc-ubuntu-0607",
+   "siblingUnitsChecked": 2792,
+   "exactDuplicateUnits": 72,
+   "share": 0.0258
+  },
+  {
+   "sibling": "rr-oc-irc-ho-0809",
+   "atlas": "oc-irc-ubuntu-0809",
+   "siblingUnitsChecked": 2706,
+   "exactDuplicateUnits": 78,
+   "share": 0.0288
+  },
+  {
+   "sibling": "rr-seq-protein",
+   "atlas": "cd-protein-aa",
+   "siblingUnitsChecked": 918,
+   "exactDuplicateUnits": 5,
+   "share": 0.0054
+  },
+  {
+   "sibling": "rr-seq-codons",
+   "atlas": "cd-codons",
+   "siblingUnitsChecked": 918,
+   "exactDuplicateUnits": 0,
+   "share": 0
+  },
+  {
+   "sibling": "rr-law-fr-heldout",
+   "atlas": "fm-law-fr",
+   "siblingUnitsChecked": 11060,
+   "exactDuplicateUnits": 722,
+   "share": 0.0653
+  },
+  {
+   "sibling": "rr-factbook-heldout",
+   "atlas": "fm-factbook",
+   "siblingUnitsChecked": 10197,
+   "exactDuplicateUnits": 3612,
+   "share": 0.3542
+  },
+  {
+   "sibling": "rr-wiki-heldout",
+   "atlas": "fm-wikipedia",
+   "siblingUnitsChecked": 7254,
+   "exactDuplicateUnits": 1,
+   "share": 0.0001
+  },
+  {
+   "sibling": "rr-ntrs-heldout",
+   "atlas": "fm-ntrs-1965-71",
+   "siblingUnitsChecked": 15122,
+   "exactDuplicateUnits": 203,
+   "share": 0.0134
+  },
+  {
+   "sibling": "rr-cd-js",
+   "atlas": "cd-e09-eoapp-js",
+   "siblingUnitsChecked": 22242,
+   "exactDuplicateUnits": 2120,
+   "share": 0.0953
+  },
+  {
+   "sibling": "rr-cd-py",
+   "atlas": "cd-e09-python",
+   "siblingUnitsChecked": 4991,
+   "exactDuplicateUnits": 0,
+   "share": 0
+  }
+ ]
+}

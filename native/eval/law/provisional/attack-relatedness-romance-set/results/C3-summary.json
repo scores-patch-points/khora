@@ -1,0 +1,185 @@
+{
+ "headerSha256": "b04f2eae2d6a49cfe93aeb12cc5de9fa0a7eee31bccf462431db6871b6042a93",
+ "perSplit": {
+  "dev": {
+   "BOTH": {
+    "n": 5,
+    "a": 0.6778,
+    "g": 0.6433,
+    "e": 0.5836,
+    "aMinusG": 0.0345,
+    "aMinusE": 0.0941,
+    "germanic": {
+     "n": 5,
+     "a": 0.6445,
+     "aMinusG": 0.0164,
+     "aMinusE": 0.0466
+    }
+   },
+   "ONLYTOP4": {
+    "n": 5,
+    "a": 0.6349,
+    "g": 0.5811,
+    "e": 0.5443,
+    "aMinusG": 0.0538,
+    "aMinusE": 0.0905,
+    "germanic": {
+     "n": 5,
+     "a": 0.5544,
+     "aMinusG": -0.0079,
+     "aMinusE": 0.0049
+    }
+   },
+   "RARE": {
+    "n": 5,
+    "a": 0.6379,
+    "g": 0.6309,
+    "e": 0.6053,
+    "aMinusG": 0.007,
+    "aMinusE": 0.0327,
+    "germanic": {
+     "n": 5,
+     "a": 0.6578,
+     "aMinusG": 0.0216,
+     "aMinusE": 0.0513
+    }
+   }
+  },
+  "test": {
+   "BOTH": {
+    "n": 5,
+    "a": 0.6644,
+    "g": 0.6563,
+    "e": 0.5897,
+    "aMinusG": 0.0081,
+    "aMinusE": 0.0747,
+    "germanic": {
+     "n": 7,
+     "a": 0.6778,
+     "aMinusG": 0.0291,
+     "aMinusE": 0.0748
+    }
+   },
+   "ONLYTOP4": {
+    "n": 5,
+    "a": 0.6317,
+    "g": 0.5882,
+    "e": 0.5432,
+    "aMinusG": 0.0435,
+    "aMinusE": 0.0885,
+    "germanic": {
+     "n": 7,
+     "a": 0.5874,
+     "aMinusG": 0.0144,
+     "aMinusE": 0.0295
+    }
+   },
+   "RARE": {
+    "n": 5,
+    "a": 0.6372,
+    "g": 0.6411,
+    "e": 0.6101,
+    "aMinusG": -0.0038,
+    "aMinusE": 0.0271,
+    "germanic": {
+     "n": 7,
+     "a": 0.6887,
+     "aMinusG": 0.0252,
+     "aMinusE": 0.0575
+    }
+   }
+  },
+  "X": {
+   "BOTH": {
+    "n": 5,
+    "a": 0.6896,
+    "g": 0.658,
+    "e": 0.5969,
+    "aMinusG": 0.0316,
+    "aMinusE": 0.0927,
+    "germanic": {
+     "n": 4,
+     "a": 0.6388,
+     "aMinusG": 0.0119,
+     "aMinusE": 0.0407
+    }
+   },
+   "ONLYTOP4": {
+    "n": 5,
+    "a": 0.6574,
+    "g": 0.6053,
+    "e": 0.558,
+    "aMinusG": 0.0521,
+    "aMinusE": 0.0994,
+    "germanic": {
+     "n": 4,
+     "a": 0.5606,
+     "aMinusG": -0.0097,
+     "aMinusE": 0.0137
+    }
+   },
+   "RARE": {
+    "n": 5,
+    "a": 0.659,
+    "g": 0.654,
+    "e": 0.6184,
+    "aMinusG": 0.0049,
+    "aMinusE": 0.0405,
+    "germanic": {
+     "n": 4,
+     "a": 0.6434,
+     "aMinusG": 0.0063,
+     "aMinusE": 0.0249
+    }
+   }
+  },
+  "Y": {
+   "BOTH": {
+    "n": 5,
+    "a": 0.6655,
+    "g": 0.6485,
+    "e": 0.5902,
+    "aMinusG": 0.017,
+    "aMinusE": 0.0753,
+    "germanic": {
+     "n": 4,
+     "a": 0.631,
+     "aMinusG": 0.0068,
+     "aMinusE": 0.0309
+    }
+   },
+   "ONLYTOP4": {
+    "n": 5,
+    "a": 0.6159,
+    "g": 0.6004,
+    "e": 0.5516,
+    "aMinusG": 0.0155,
+    "aMinusE": 0.0644,
+    "germanic": {
+     "n": 4,
+     "a": 0.5494,
+     "aMinusG": -0.013,
+     "aMinusE": -0.0012
+    }
+   },
+   "RARE": {
+    "n": 5,
+    "a": 0.6268,
+    "g": 0.6215,
+    "e": 0.6015,
+    "aMinusG": 0.0053,
+    "aMinusE": 0.0253,
+    "germanic": {
+     "n": 4,
+     "a": 0.6443,
+     "aMinusG": 0.0154,
+     "aMinusE": 0.0242
+    }
+   }
+  }
+ },
+ "groups": {},
+ "ONLYTOP4_replicatesInSplits": 3,
+ "ONLYTOP4_verdict": "REPLICATES",
+ "RARE_genusAgnosticSplits": 4
+}

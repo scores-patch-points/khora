@@ -1,0 +1,280 @@
+@@@@ task fibonacci
+function fibonacci(n) {
+  if (n < 2) {
+    return n;
+  }
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+const values = [];
+for (let i = 0; i <= 10; i++) {
+  values.push(fibonacci(i));
+}
+console.log(values.join(" "));
+@@@@ task gcd
+function gcd(a, b) {
+  if (b === 0) {
+    return a;
+  }
+  return gcd(b, a % b);
+}
+
+const pairs = [[48, 18], [17, 5], [0, 9], [100, 75]];
+console.log(pairs.map((p) => gcd(p[0], p[1])).join(" "));
+@@@@ task binary_search
+function searchRange(items, target, low, high) {
+  if (low > high) {
+    return -1;
+  }
+  const mid = Math.floor((low + high) / 2);
+  if (items[mid] === target) {
+    return mid;
+  }
+  if (items[mid] < target) {
+    return searchRange(items, target, mid + 1, high);
+  }
+  return searchRange(items, target, low, mid - 1);
+}
+
+function binarySearch(items, target) {
+  return searchRange(items, target, 0, items.length - 1);
+}
+
+const data = [1, 3, 5, 7, 9, 11, 13];
+console.log([7, 1, 13, 4].map((t) => binarySearch(data, t)).join(" "));
+@@@@ task quicksort
+function partition(items, low, high) {
+  const pivot = items[high];
+  let i = low - 1;
+  for (let j = low; j < high; j++) {
+    if (items[j] <= pivot) {
+      i += 1;
+      const tmp = items[i];
+      items[i] = items[j];
+      items[j] = tmp;
+    }
+  }
+  const tmp = items[i + 1];
+  items[i + 1] = items[high];
+  items[high] = tmp;
+  return i + 1;
+}
+
+function quicksort(items, low, high) {
+  if (low < high) {
+    const p = partition(items, low, high);
+    quicksort(items, low, p - 1);
+    quicksort(items, p + 1, high);
+  }
+}
+
+const data = [5, 2, 9, 1, 5, 6, 0, 3];
+quicksort(data, 0, data.length - 1);
+console.log(data.join(" "));
+@@@@ task merge_sort
+function merge(left, right) {
+  const result = [];
+  let i = 0;
+  let j = 0;
+  while (i < left.length && j < right.length) {
+    if (left[i] <= right[j]) {
+      result.push(left[i]);
+      i += 1;
+    } else {
+      result.push(right[j]);
+      j += 1;
+    }
+  }
+  return result.concat(left.slice(i), right.slice(j));
+}
+
+function mergeSort(items) {
+  if (items.length <= 1) {
+    return items;
+  }
+  const mid = Math.floor(items.length / 2);
+  return merge(mergeSort(items.slice(0, mid)), mergeSort(items.slice(mid)));
+}
+
+console.log(mergeSort([38, 27, 43, 3, 9, 82, 10]).join(" "));
+@@@@ task factorial
+function factorial(n) {
+  if (n <= 1) {
+    return 1;
+  }
+  return n * factorial(n - 1);
+}
+
+const values = [];
+for (let i = 0; i <= 10; i++) {
+  values.push(factorial(i));
+}
+console.log(values.join(" "));
+@@@@ task palindrome
+function normalize(text) {
+  let out = "";
+  for (const ch of text) {
+    if (/[A-Za-z0-9]/.test(ch)) {
+      out += ch.toLowerCase();
+    }
+  }
+  return out;
+}
+
+function reverseText(text) {
+  let out = "";
+  for (const ch of text) {
+    out = ch + out;
+  }
+  return out;
+}
+
+function isPalindrome(text) {
+  const cleaned = normalize(text);
+  return cleaned === reverseText(cleaned);
+}
+
+const samples = ["A man, a plan, a canal: Panama", "hello", "Was it a car or a cat I saw?"];
+console.log(samples.map((s) => String(isPalindrome(s))).join(" "));
+@@@@ task word_count
+function splitWords(text) {
+  return text.split(" ");
+}
+
+function countWords(text) {
+  const counts = {};
+  for (const word of splitWords(text)) {
+    counts[word] = (counts[word] || 0) + 1;
+  }
+  return counts;
+}
+
+const counts = countWords("the quick brown fox jumps over the lazy dog the end");
+console.log(Object.keys(counts).sort().map((w) => w + "=" + counts[w]).join(" "));
+@@@@ task fizzbuzz
+function isDivisible(n, d) {
+  return n % d === 0;
+}
+
+function fizzBuzz(n) {
+  if (isDivisible(n, 15)) {
+    return "FizzBuzz";
+  }
+  if (isDivisible(n, 3)) {
+    return "Fizz";
+  }
+  if (isDivisible(n, 5)) {
+    return "Buzz";
+  }
+  return String(n);
+}
+
+const out = [];
+for (let i = 1; i <= 15; i++) {
+  out.push(fizzBuzz(i));
+}
+console.log(out.join(" "));
+@@@@ task linked_list
+class Node {
+  constructor(value, next) {
+    this.value = value;
+    this.next = next;
+  }
+}
+
+function reverseList(node, previous) {
+  if (node === null) {
+    return previous;
+  }
+  const following = node.next;
+  node.next = previous;
+  return reverseList(following, node);
+}
+
+function toArray(node) {
+  const values = [];
+  while (node !== null) {
+    values.push(node.value);
+    node = node.next;
+  }
+  return values;
+}
+
+let head = null;
+for (const v of [5, 4, 3, 2, 1]) {
+  head = new Node(v, head);
+}
+console.log(toArray(reverseList(head, null)).join(" "));
+@@@@ task stack
+class Stack {
+  constructor() {
+    this.items = [];
+  }
+
+  push(value) {
+    this.items[this.items.length] = value;
+  }
+
+  isEmpty() {
+    return this.items.length === 0;
+  }
+
+  pop() {
+    if (this.isEmpty()) {
+      throw new Error("pop from empty stack");
+    }
+    const value = this.items[this.items.length - 1];
+    this.items.length = this.items.length - 1;
+    return value;
+  }
+
+  peek() {
+    if (this.isEmpty()) {
+      throw new Error("peek at empty stack");
+    }
+    return this.items[this.items.length - 1];
+  }
+}
+
+const stack = new Stack();
+for (const v of [1, 2, 3]) {
+  stack.push(v);
+}
+const out = [stack.peek(), stack.pop(), stack.pop(), String(stack.isEmpty()), stack.pop(), String(stack.isEmpty())];
+console.log(out.join(" "));
+@@@@ task tree_traversal
+class TreeNode {
+  constructor(value, left, right) {
+    this.value = value;
+    this.left = left;
+    this.right = right;
+  }
+}
+
+function inorder(node, out) {
+  if (node === null) {
+    return;
+  }
+  inorder(node.left, out);
+  out.push(node.value);
+  inorder(node.right, out);
+}
+
+function preorder(node, out) {
+  if (node === null) {
+    return;
+  }
+  out.push(node.value);
+  preorder(node.left, out);
+  preorder(node.right, out);
+}
+
+const root = new TreeNode(4,
+  new TreeNode(2, new TreeNode(1, null, null), new TreeNode(3, null, null)),
+  new TreeNode(6, new TreeNode(5, null, null), new TreeNode(7, null, null)));
+let visited = [];
+inorder(root, visited);
+console.log(visited.join(" "));
+visited = [];
+preorder(root, visited);
+console.log(visited.join(" "));

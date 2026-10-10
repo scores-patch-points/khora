@@ -1,0 +1,16 @@
+VERDICT PARTIAL  (header sha256 c636ece8b6f1 matches prereg.sha256)
+id                      role    expect   status    outcome          z(d)   z(c)  v(d)     v(c)    vInRange  z50(d/c)   plugin    rareCurve
+ec-en-yonge             strong  PRESENT+ PRESENT+  CONFIRMED         7.4    6.7   0.0056  0.0051  true     5.8/5.2   PRESENT+  PRESENT+
+ec-en-mouret            strong  PRESENT+ PRESENT+  CONFIRMED        20.8   10.9   0.0051  0.0079  true     11.6/9.5  PRESENT+  AMBIGUOUS
+ec-en-awakening         strong  PRESENT+ PRESENT+  CONFIRMED        11.2   18.2   0.0075  0.0067  true     8.7/9.5   PRESENT+  AMBIGUOUS
+ec-en-children          strong  PRESENT+ AMBIGUOUS UNINFORMATIVE     2.8    1.7   0.0040  0.0024  false    2.4/2.0   AMBIGUOUS AMBIGUOUS
+ec-en-shakespeare       strong  PRESENT+ PRESENT+  CONFIRMED        10.6   15.3   0.0083  0.0080  true     12.1/12.6 PRESENT+  PRESENT+
+ec-en-dolls-lysistrata  strong  PRESENT+ AMBIGUOUS UNINFORMATIVE     6.1    3.1   0.0112  0.0066  true     6.7/4.1   AMBIGUOUS AMBIGUOUS
+ec-en-swisshelm         weak    PRESENT+ AMBIGUOUS UNINFORMATIVE     3.4    4.3   0.0023  0.0034  true     4.0/4.3   AMBIGUOUS PRESENT+
+ec-ud-lat-perseus       weak    PRESENT+ AMBIGUOUS UNINFORMATIVE     2.6    3.6   0.0235  0.0330  true     2.9/3.8   AMBIGUOUS AMBIGUOUS
+ec-cd-js                strong  PRESENT- PRESENT-  CONFIRMED       -10.9  -13.2  -0.0081 -0.0107  true     -9.3/-11.4PRESENT-  PRESENT-
+ec-cd-ts                strong  PRESENT- AMBIGUOUS UNINFORMATIVE   -30.1    4.3  -0.0274  0.0025  true     -28.7/3.3 AMBIGUOUS PRESENT-
+ec-cd-py                explore PRESENT+ AMBIGUOUS UNINFORMATIVE     1.9    7.8   0.0020  0.0085  true     3.0/10.0  AMBIGUOUS AMBIGUOUS
+ec-ctl-yonge            control ABSENT   ABSENT    CONFIRMED         0.3    1.8   0.0006  0.0014  true     0.5/1.6   ABSENT    ABSENT
+ec-ctl-js               control ABSENT   ABSENT    CONFIRMED        -0.9   -0.8  -0.0006 -0.0002  true     -0.8/-0.5 ABSENT    ABSENT
+{"counts":{"scored":12,"strong":8,"confirmed":7,"refuted":0,"uninformative":5,"confirmedPresentPlusStrong":4,"confirmedPresentMinusStrong":1,"controlRefuted":0},"kinds":{"prose-novel":{"n":3,"confirmed":3,"refuted":0,"uninformative":0,"state":"holds"},"prose-memoir":{"n":1,"confirmed":0,"refuted":0,"uninformative":1,"state":"untested"},"prose-children":{"n":1,"confirmed":0,"refuted":0,"uninformative":1,"state":"untested"},"drama":{"n":2,"confirmed":1,"refuted":0,"uninformative":1,"state":"holds"},"treebank":{"n":1,"confirmed":0,"refuted":0,"uninformative":1,"state":"untested"},"code":{"n":2,"confirmed":1,"refuted":0,"uninformative":1,"state":"holds"},"control":{"n":2,"confirmed":2,"refuted":0,"uninformative":0,"state":"holds"}},"planGroups":{"prose-novel":true,"drama":true,"treebank":true,"code":true,"control":true},"A_MM":{"survives":true},"A_LS":{"survives":true},"A_UL":{"survives":true,"regMatch":5,"baseMatch":4},"A_RV":{"survives":false,"nRival":5,"confirmedNC":5},"A_MU":{"scoredCells":12,"chancePerCell":0.00008488153720463878,"expectedChancePresentCells":0.0010185784464556654,"observedPresentCells":5,"binomialTail":3.487998728195955e-18},"leak":true}

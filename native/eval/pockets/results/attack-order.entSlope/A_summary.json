@@ -1,0 +1,543 @@
+{
+ "n": 245,
+ "baseMaxAbsDiffToAtlas": 0,
+ "variants": {
+  "tok7500_r0": {
+   "evaluated": 208,
+   "undefinedBecauseFewUnitsOrNullSd": 35,
+   "skipped": {
+    "undefined (N<2000 or V<30)": 2
+   },
+   "byOriginal": {
+    "P+": {
+     "n": 84,
+     "P_same": 11,
+     "P_opposite": 7,
+     "M": 49,
+     "A": 17,
+     "undef": 0,
+     "signKept": 39,
+     "signedDetectedSame": 19,
+     "signedDetectedOpp": 24,
+     "medianDrift": -0.015327330185009072,
+     "medianV0": 0.01472455,
+     "medianV": -0.0012183964408492216
+    },
+    "P-": {
+     "n": 124,
+     "P_same": 94,
+     "P_opposite": 0,
+     "M": 27,
+     "A": 3,
+     "undef": 0,
+     "signKept": 121,
+     "signedDetectedSame": 114,
+     "signedDetectedOpp": 0,
+     "medianDrift": -0.025030857472046957,
+     "medianV0": -0.032910499999999995,
+     "medianV": -0.05891147237157236
+    }
+   },
+   "spearmanVvsV0": 0.9220434409221595,
+   "rhoV_unitLen0": 0.21241065793830757,
+   "rhoV_unitLenReduced": 0.2138201234311074,
+   "rhoV_logTokens0": 0.1349261410063594,
+   "rhoV0_unitLen0": 0.23064595656641057,
+   "reducedPresent": {
+    "n": 112,
+    "pos": 11,
+    "registerSignSplit": {
+     "eta2": 0.519515587922429,
+     "p": 0.000999000999000999
+    },
+    "groupSignSplit": {
+     "eta2": 0.03488250922994399,
+     "p": 0.5644355644355644
+    },
+    "agreeWithOriginalSign": 0.9375
+   },
+   "registerEta2OfV": {
+    "eta2": 0.4135445988176661,
+    "p": 0.000999000999000999
+   }
+  },
+  "tok7500len10_r0": {
+   "evaluated": 197,
+   "undefinedBecauseFewUnitsOrNullSd": 1,
+   "skipped": {
+    "unreachable": 47
+   },
+   "byOriginal": {
+    "P+": {
+     "n": 90,
+     "P_same": 11,
+     "P_opposite": 19,
+     "M": 46,
+     "A": 14,
+     "undef": 0,
+     "signKept": 31,
+     "signedDetectedSame": 21,
+     "signedDetectedOpp": 40,
+     "medianDrift": -0.017893244221558836,
+     "medianV0": 0.012984699999999998,
+     "medianV": -0.007816160263656875
+    },
+    "P-": {
+     "n": 107,
+     "P_same": 59,
+     "P_opposite": 0,
+     "M": 39,
+     "A": 9,
+     "undef": 0,
+     "signKept": 105,
+     "signedDetectedSame": 82,
+     "signedDetectedOpp": 0,
+     "medianDrift": -0.008967887088711709,
+     "medianV0": -0.029011549999999997,
+     "medianV": -0.033916788562361105
+    }
+   },
+   "spearmanVvsV0": 0.7102753422550376,
+   "rhoV_unitLen0": -0.05180678639706921,
+   "rhoV_unitLenReduced": -0.031032129684968313,
+   "rhoV_logTokens0": 0.20948904622565417,
+   "rhoV0_unitLen0": 0.33938263814986075,
+   "reducedPresent": {
+    "n": 89,
+    "pos": 11,
+    "registerSignSplit": {
+     "eta2": 0.7443331241408164,
+     "p": 0.000999000999000999
+    },
+    "groupSignSplit": {
+     "eta2": 0.19924735520889367,
+     "p": 0.004995004995004995
+    },
+    "agreeWithOriginalSign": 0.7865168539325843
+   },
+   "registerEta2OfV": {
+    "eta2": 0.3413080292593782,
+    "p": 0.001998001998001998
+   }
+  },
+  "tok7500_r1": {
+   "evaluated": 210,
+   "undefinedBecauseFewUnitsOrNullSd": 34,
+   "skipped": {
+    "undefined (N<2000 or V<30)": 1
+   },
+   "byOriginal": {
+    "P+": {
+     "n": 86,
+     "P_same": 7,
+     "P_opposite": 6,
+     "M": 54,
+     "A": 19,
+     "undef": 0,
+     "signKept": 43,
+     "signedDetectedSame": 21,
+     "signedDetectedOpp": 17,
+     "medianDrift": -0.013383371101335643,
+     "medianV0": 0.01472455,
+     "medianV": -0.0002716868334733387
+    },
+    "P-": {
+     "n": 124,
+     "P_same": 90,
+     "P_opposite": 0,
+     "M": 30,
+     "A": 4,
+     "undef": 0,
+     "signKept": 123,
+     "signedDetectedSame": 115,
+     "signedDetectedOpp": 0,
+     "medianDrift": -0.024214230655731438,
+     "medianV0": -0.032910499999999995,
+     "medianV": -0.06093363649957252
+    }
+   },
+   "spearmanVvsV0": 0.914475546902586,
+   "rhoV_unitLen0": 0.2158974177896657,
+   "rhoV_unitLenReduced": 0.21448299767082507,
+   "rhoV_logTokens0": 0.12614867397339571,
+   "rhoV0_unitLen0": 0.2337533516320064,
+   "reducedPresent": {
+    "n": 103,
+    "pos": 7,
+    "registerSignSplit": {
+     "eta2": 0.5000354308390027,
+     "p": 0.006993006993006993
+    },
+    "groupSignSplit": {
+     "eta2": 0.03753063725490198,
+     "p": 0.4865134865134865
+    },
+    "agreeWithOriginalSign": 0.941747572815534
+   },
+   "registerEta2OfV": {
+    "eta2": 0.4174918592570439,
+    "p": 0.000999000999000999
+   }
+  },
+  "tok7500len10_r1": {
+   "evaluated": 196,
+   "undefinedBecauseFewUnitsOrNullSd": 1,
+   "skipped": {
+    "unreachable": 48
+   },
+   "byOriginal": {
+    "P+": {
+     "n": 90,
+     "P_same": 11,
+     "P_opposite": 18,
+     "M": 49,
+     "A": 12,
+     "undef": 0,
+     "signKept": 36,
+     "signedDetectedSame": 23,
+     "signedDetectedOpp": 33,
+     "medianDrift": -0.019520995659873173,
+     "medianV0": 0.012984699999999998,
+     "medianV": -0.004981682742038007
+    },
+    "P-": {
+     "n": 106,
+     "P_same": 59,
+     "P_opposite": 0,
+     "M": 36,
+     "A": 11,
+     "undef": 0,
+     "signKept": 102,
+     "signedDetectedSame": 79,
+     "signedDetectedOpp": 1,
+     "medianDrift": -0.010762885478105843,
+     "medianV0": -0.029341350000000002,
+     "medianV": -0.03190689470431331
+    }
+   },
+   "spearmanVvsV0": 0.7406370279466726,
+   "rhoV_unitLen0": -0.0661428491740312,
+   "rhoV_unitLenReduced": -0.06257281514714437,
+   "rhoV_logTokens0": 0.270022978118812,
+   "rhoV0_unitLen0": 0.33820653603104656,
+   "reducedPresent": {
+    "n": 88,
+    "pos": 11,
+    "registerSignSplit": {
+     "eta2": 0.7064935064935065,
+     "p": 0.000999000999000999
+    },
+    "groupSignSplit": {
+     "eta2": 0.13783186510459236,
+     "p": 0.04195804195804196
+    },
+    "agreeWithOriginalSign": 0.7954545454545454
+   },
+   "registerEta2OfV": {
+    "eta2": 0.3442756452111429,
+    "p": 0.001998001998001998
+   }
+  },
+  "tok20000": {
+   "evaluated": 209,
+   "undefinedBecauseFewUnitsOrNullSd": 3,
+   "skipped": {
+    "too small": 33
+   },
+   "byOriginal": {
+    "P+": {
+     "n": 102,
+     "P_same": 39,
+     "P_opposite": 6,
+     "M": 47,
+     "A": 10,
+     "undef": 0,
+     "signKept": 82,
+     "signedDetectedSame": 61,
+     "signedDetectedOpp": 9,
+     "medianDrift": -0.0049230565733868,
+     "medianV0": 0.012984699999999998,
+     "medianV": 0.0065955201105152945
+    },
+    "P-": {
+     "n": 107,
+     "P_same": 91,
+     "P_opposite": 0,
+     "M": 15,
+     "A": 1,
+     "undef": 0,
+     "signKept": 107,
+     "signedDetectedSame": 104,
+     "signedDetectedOpp": 0,
+     "medianDrift": -0.010303925886719283,
+     "medianV0": -0.027484249999999998,
+     "medianV": -0.040778079074865
+    }
+   },
+   "spearmanVvsV0": 0.9440362269309638,
+   "rhoV_unitLen0": 0.3137941006362059,
+   "rhoV_unitLenReduced": 0.3136205899363794,
+   "rhoV_logTokens0": -0.007654190432656715,
+   "rhoV0_unitLen0": 0.3327277985172722,
+   "reducedPresent": {
+    "n": 136,
+    "pos": 39,
+    "registerSignSplit": {
+     "eta2": 0.5889321064578816,
+     "p": 0.000999000999000999
+    },
+    "groupSignSplit": {
+     "eta2": 0.24670071826706427,
+     "p": 0.000999000999000999
+    },
+    "agreeWithOriginalSign": 0.9558823529411765
+   },
+   "registerEta2OfV": {
+    "eta2": 0.43738883763426745,
+    "p": 0.000999000999000999
+   }
+  },
+  "len10full": {
+   "evaluated": 132,
+   "undefinedBecauseFewUnitsOrNullSd": 0,
+   "skipped": {
+    "unreachable": 113
+   },
+   "byOriginal": {
+    "P+": {
+     "n": 46,
+     "P_same": 26,
+     "P_opposite": 2,
+     "M": 16,
+     "A": 2,
+     "undef": 0,
+     "signKept": 35,
+     "signedDetectedSame": 27,
+     "signedDetectedOpp": 5,
+     "medianDrift": -0.00605454700674842,
+     "medianV0": 0.015851225,
+     "medianV": 0.01216229750050531
+    },
+    "P-": {
+     "n": 86,
+     "P_same": 64,
+     "P_opposite": 0,
+     "M": 20,
+     "A": 2,
+     "undef": 0,
+     "signKept": 82,
+     "signedDetectedSame": 75,
+     "signedDetectedOpp": 0,
+     "medianDrift": -0.0018439027971250419,
+     "medianV0": -0.02475915,
+     "medianV": -0.021889569823808408
+    }
+   },
+   "spearmanVvsV0": 0.8524677411780666,
+   "rhoV_unitLen0": -0.10679731963155976,
+   "rhoV_unitLenReduced": -0.03548600856756743,
+   "rhoV_logTokens0": 0.4183921180367525,
+   "rhoV0_unitLen0": 0.17131243877287405,
+   "reducedPresent": {
+    "n": 92,
+    "pos": 26,
+    "registerSignSplit": {
+     "eta2": 0.478228851758263,
+     "p": 0.000999000999000999
+    },
+    "groupSignSplit": {
+     "eta2": 0.206228956228956,
+     "p": 0.002997002997002997
+    },
+    "agreeWithOriginalSign": 0.9782608695652174
+   },
+   "registerEta2OfV": {
+    "eta2": 0.453690432344713,
+    "p": 0.000999000999000999
+   }
+  },
+  "drop1pct": {
+   "evaluated": 245,
+   "undefinedBecauseFewUnitsOrNullSd": 0,
+   "skipped": {},
+   "byOriginal": {
+    "P+": {
+     "n": 109,
+     "P_same": 102,
+     "P_opposite": 0,
+     "M": 7,
+     "A": 0,
+     "undef": 0,
+     "signKept": 109,
+     "signedDetectedSame": 109,
+     "signedDetectedOpp": 0,
+     "medianDrift": 0.00003729089574783587,
+     "medianV0": 0.013300099999999999,
+     "medianV": 0.013404936019723094
+    },
+    "P-": {
+     "n": 136,
+     "P_same": 127,
+     "P_opposite": 0,
+     "M": 9,
+     "A": 0,
+     "undef": 0,
+     "signKept": 136,
+     "signedDetectedSame": 136,
+     "signedDetectedOpp": 0,
+     "medianDrift": 0.00016000884812694335,
+     "medianV0": -0.032333799999999996,
+     "medianV": -0.032218864435888186
+    }
+   },
+   "spearmanVvsV0": 0.9996907359505177,
+   "rhoV_unitLen0": 0.25438605259652847,
+   "rhoV_unitLenReduced": 0.25563815290210445,
+   "rhoV_logTokens0": 0.2079817901336741,
+   "rhoV0_unitLen0": 0.25266102796861944,
+   "reducedPresent": {
+    "n": 229,
+    "pos": 102,
+    "registerSignSplit": {
+     "eta2": 0.6024034396718496,
+     "p": 0.000999000999000999
+    },
+    "groupSignSplit": {
+     "eta2": 0.269160022597202,
+     "p": 0.000999000999000999
+    },
+    "agreeWithOriginalSign": 1
+   },
+   "registerEta2OfV": {
+    "eta2": 0.37731866959586263,
+    "p": 0.000999000999000999
+   }
+  },
+  "dropHapax": {
+   "evaluated": 245,
+   "undefinedBecauseFewUnitsOrNullSd": 0,
+   "skipped": {},
+   "byOriginal": {
+    "P+": {
+     "n": 109,
+     "P_same": 89,
+     "P_opposite": 0,
+     "M": 20,
+     "A": 0,
+     "undef": 0,
+     "signKept": 107,
+     "signedDetectedSame": 98,
+     "signedDetectedOpp": 1,
+     "medianDrift": -0.001693594804374421,
+     "medianV0": 0.013300099999999999,
+     "medianV": 0.011484358281522774
+    },
+    "P-": {
+     "n": 136,
+     "P_same": 107,
+     "P_opposite": 0,
+     "M": 27,
+     "A": 2,
+     "undef": 0,
+     "signKept": 132,
+     "signedDetectedSame": 118,
+     "signedDetectedOpp": 0,
+     "medianDrift": 0.002234858499218357,
+     "medianV0": -0.032333799999999996,
+     "medianV": -0.01925186363619685
+    }
+   },
+   "spearmanVvsV0": 0.9338852214216354,
+   "rhoV_unitLen0": 0.3661405572751705,
+   "rhoV_unitLenReduced": 0.42986070877771343,
+   "rhoV_logTokens0": 0.08409496776594869,
+   "rhoV0_unitLen0": 0.25266102796861944,
+   "reducedPresent": {
+    "n": 196,
+    "pos": 89,
+    "registerSignSplit": {
+     "eta2": 0.6081849684495915,
+     "p": 0.000999000999000999
+    },
+    "groupSignSplit": {
+     "eta2": 0.27973569682797456,
+     "p": 0.000999000999000999
+    },
+    "agreeWithOriginalSign": 1
+   },
+   "registerEta2OfV": {
+    "eta2": 0.387968126017712,
+    "p": 0.000999000999000999
+   }
+  },
+  "trunc5": {
+   "evaluated": 245,
+   "undefinedBecauseFewUnitsOrNullSd": 0,
+   "skipped": {},
+   "byOriginal": {
+    "P+": {
+     "n": 109,
+     "P_same": 91,
+     "P_opposite": 1,
+     "M": 17,
+     "A": 0,
+     "undef": 0,
+     "signKept": 108,
+     "signedDetectedSame": 99,
+     "signedDetectedOpp": 1,
+     "medianDrift": -0.000481613143168828,
+     "medianV0": 0.013300099999999999,
+     "medianV": 0.011752103076103436
+    },
+    "P-": {
+     "n": 136,
+     "P_same": 103,
+     "P_opposite": 0,
+     "M": 28,
+     "A": 5,
+     "undef": 0,
+     "signKept": 133,
+     "signedDetectedSame": 120,
+     "signedDetectedOpp": 1,
+     "medianDrift": 0.003422827413126325,
+     "medianV0": -0.032333799999999996,
+     "medianV": -0.022451022709672926
+    }
+   },
+   "spearmanVvsV0": 0.9565602330496373,
+   "rhoV_unitLen0": 0.34253938068434175,
+   "rhoV_unitLenReduced": 0.34198973471835753,
+   "rhoV_logTokens0": 0.09367889320961914,
+   "rhoV0_unitLen0": 0.25266102796861944,
+   "reducedPresent": {
+    "n": 195,
+    "pos": 91,
+    "registerSignSplit": {
+     "eta2": 0.6011993958422545,
+     "p": 0.000999000999000999
+    },
+    "groupSignSplit": {
+     "eta2": 0.2709106267295929,
+     "p": 0.000999000999000999
+    },
+    "agreeWithOriginalSign": 0.9948717948717949
+   },
+   "registerEta2OfV": {
+    "eta2": 0.37250851342818453,
+    "p": 0.000999000999000999
+   }
+  },
+  "tok7500_replicateCeiling": {
+   "nBoth": 243,
+   "bothPresent": 95,
+   "sameSignWhenBothPresent": 95,
+   "spearmanV_r0_r1": 0.9779221482612016
+  },
+  "tok7500len10_replicateCeiling": {
+   "nBoth": 197,
+   "bothPresent": 71,
+   "sameSignWhenBothPresent": 71,
+   "spearmanV_r0_r1": 0.9573754744168087
+  }
+ }
+}

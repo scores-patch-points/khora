@@ -1,0 +1,462 @@
+{
+ "module": "eval/law/name-floor1.mjs",
+ "rowsKept": 1998,
+ "rowsDropped": 0,
+ "corpora": [
+  {
+   "name": "eng",
+   "kind": "UD",
+   "M": 128,
+   "rows": 200
+  },
+  {
+   "name": "spa",
+   "kind": "UD",
+   "M": 128,
+   "rows": 200
+  },
+  {
+   "name": "rus",
+   "kind": "UD",
+   "M": 115,
+   "rows": 200
+  },
+  {
+   "name": "fas",
+   "kind": "UD",
+   "M": 128,
+   "rows": 200
+  },
+  {
+   "name": "jpn",
+   "kind": "UD",
+   "M": 101,
+   "rows": 200
+  },
+  {
+   "name": "tur",
+   "kind": "UD",
+   "M": 128,
+   "rows": 200
+  },
+  {
+   "name": "kubuntu/2006-03-15.txt",
+   "kind": "IRC",
+   "M": 256,
+   "rows": 98
+  },
+  {
+   "name": "kubuntu/2007-03-15.txt",
+   "kind": "IRC",
+   "M": 256,
+   "rows": 100
+  },
+  {
+   "name": "ubuntu/2005-03-15.txt",
+   "kind": "IRC",
+   "M": 256,
+   "rows": 100
+  },
+  {
+   "name": "ubuntu/2010-07-15.txt",
+   "kind": "IRC",
+   "M": 256,
+   "rows": 100
+  },
+  {
+   "name": "ubuntu/2012-03-15.txt",
+   "kind": "IRC",
+   "M": 256,
+   "rows": 100
+  },
+  {
+   "name": "ubuntu/2013-03-15.txt",
+   "kind": "IRC",
+   "M": 256,
+   "rows": 100
+  },
+  {
+   "name": "ubuntu/2013-07-15.txt",
+   "kind": "IRC",
+   "M": 256,
+   "rows": 100
+  },
+  {
+   "name": "ubuntu/2015-07-15.txt",
+   "kind": "IRC",
+   "M": 256,
+   "rows": 100
+  }
+ ],
+ "rivals": {
+  "LEFT": 0.569,
+  "POSITION": 0.5132,
+  "RIVALS": 0.5162
+ },
+ "determinism": {
+  "same": 40,
+  "total": 40
+ },
+ "sham": {
+  "n": 200,
+  "nullShare": 1
+ },
+ "variants": {
+  "V0": {
+   "opts": {},
+   "F": 0,
+   "nonNullShare": {
+    "names": 0.2723,
+    "controls": 0.3253
+   },
+   "S_ENTRY": 0.4995,
+   "FULL": {
+    "pooled": 0.575,
+    "UD": 0.5495,
+    "IRC": 0.6019,
+    "permQ95": 0.5195,
+    "blocksAbove060": 6,
+    "perBlock": [
+     {
+      "name": "eng",
+      "n": 200,
+      "auc": 0.5781
+     },
+     {
+      "name": "spa",
+      "n": 200,
+      "auc": 0.6527
+     },
+     {
+      "name": "rus",
+      "n": 200,
+      "auc": 0.5168
+     },
+     {
+      "name": "fas",
+      "n": 200,
+      "auc": 0.4984
+     },
+     {
+      "name": "jpn",
+      "n": 200,
+      "auc": 0.5679
+     },
+     {
+      "name": "tur",
+      "n": 200,
+      "auc": 0.5085
+     },
+     {
+      "name": "kubuntu/2006-03-15.txt",
+      "n": 98,
+      "auc": 0.6335
+     },
+     {
+      "name": "kubuntu/2007-03-15.txt",
+      "n": 100,
+      "auc": 0.6352
+     },
+     {
+      "name": "ubuntu/2005-03-15.txt",
+      "n": 100,
+      "auc": 0.6416
+     },
+     {
+      "name": "ubuntu/2010-07-15.txt",
+      "n": 100,
+      "auc": 0.5108
+     },
+     {
+      "name": "ubuntu/2012-03-15.txt",
+      "n": 100,
+      "auc": 0.5696
+     },
+     {
+      "name": "ubuntu/2013-03-15.txt",
+      "n": 100,
+      "auc": 0.5248
+     },
+     {
+      "name": "ubuntu/2013-07-15.txt",
+      "n": 100,
+      "auc": 0.6436
+     },
+     {
+      "name": "ubuntu/2015-07-15.txt",
+      "n": 100,
+      "auc": 0.644
+     }
+    ]
+   },
+   "channels": {
+    "sig": 0.5575,
+    "atm": 0.4628,
+    "span": 0.5166,
+    "c": 0.5662
+   },
+   "FULL_plus_LEFT": 0.5938,
+   "FULLplusLEFT_minus_LEFT": {
+    "point": 0.0248,
+    "lo": -0.0242,
+    "hi": 0.0692,
+    "n": 1000
+   },
+   "FULL_minus_RIVALS": {
+    "point": 0.0588,
+    "lo": 0.031,
+    "hi": 0.0914,
+    "n": 1000
+   }
+  },
+  "V1": {
+   "opts": {
+    "minMentions": 1,
+    "minRec": 1
+   },
+   "F": 0,
+   "nonNullShare": {
+    "names": 0.3914,
+    "controls": 0.4004
+   },
+   "S_ENTRY": 0.4995,
+   "FULL": {
+    "pooled": 0.546,
+    "UD": 0.5239,
+    "IRC": 0.5581,
+    "permQ95": 0.5207,
+    "blocksAbove060": 3,
+    "perBlock": [
+     {
+      "name": "eng",
+      "n": 200,
+      "auc": 0.5388
+     },
+     {
+      "name": "spa",
+      "n": 200,
+      "auc": 0.5966
+     },
+     {
+      "name": "rus",
+      "n": 200,
+      "auc": 0.5383
+     },
+     {
+      "name": "fas",
+      "n": 200,
+      "auc": 0.445
+     },
+     {
+      "name": "jpn",
+      "n": 200,
+      "auc": 0.4663
+     },
+     {
+      "name": "tur",
+      "n": 200,
+      "auc": 0.624
+     },
+     {
+      "name": "kubuntu/2006-03-15.txt",
+      "n": 98,
+      "auc": 0.6227
+     },
+     {
+      "name": "kubuntu/2007-03-15.txt",
+      "n": 100,
+      "auc": 0.6328
+     },
+     {
+      "name": "ubuntu/2005-03-15.txt",
+      "n": 100,
+      "auc": 0.5744
+     },
+     {
+      "name": "ubuntu/2010-07-15.txt",
+      "n": 100,
+      "auc": 0.4652
+     },
+     {
+      "name": "ubuntu/2012-03-15.txt",
+      "n": 100,
+      "auc": 0.5236
+     },
+     {
+      "name": "ubuntu/2013-03-15.txt",
+      "n": 100,
+      "auc": 0.5556
+     },
+     {
+      "name": "ubuntu/2013-07-15.txt",
+      "n": 100,
+      "auc": 0.5508
+     },
+     {
+      "name": "ubuntu/2015-07-15.txt",
+      "n": 100,
+      "auc": 0.5576
+     }
+    ]
+   },
+   "channels": {
+    "sig": 0.5263,
+    "atm": 0.4628,
+    "span": 0.5045,
+    "c": 0.5662
+   },
+   "FULL_plus_LEFT": 0.5601,
+   "FULLplusLEFT_minus_LEFT": {
+    "point": -0.0089,
+    "lo": -0.0472,
+    "hi": 0.0261,
+    "n": 1000
+   },
+   "FULL_minus_RIVALS": {
+    "point": 0.0298,
+    "lo": 0.0014,
+    "hi": 0.0603,
+    "n": 1000
+   }
+  },
+  "V2": {
+   "opts": {
+    "minMentions": 1,
+    "minRec": 1
+   },
+   "F": 32,
+   "nonNullShare": {
+    "names": 0.5135,
+    "controls": 0.4184
+   },
+   "S_ENTRY": 0.5531,
+   "FULL": {
+    "pooled": 0.6472,
+    "UD": 0.54,
+    "IRC": 0.7701,
+    "permQ95": 0.5222,
+    "blocksAbove060": 10,
+    "perBlock": [
+     {
+      "name": "eng",
+      "n": 200,
+      "auc": 0.6454
+     },
+     {
+      "name": "spa",
+      "n": 200,
+      "auc": 0.5439
+     },
+     {
+      "name": "rus",
+      "n": 200,
+      "auc": 0.5495
+     },
+     {
+      "name": "fas",
+      "n": 200,
+      "auc": 0.4726
+     },
+     {
+      "name": "jpn",
+      "n": 200,
+      "auc": 0.4476
+     },
+     {
+      "name": "tur",
+      "n": 200,
+      "auc": 0.6011
+     },
+     {
+      "name": "kubuntu/2006-03-15.txt",
+      "n": 98,
+      "auc": 0.7934
+     },
+     {
+      "name": "kubuntu/2007-03-15.txt",
+      "n": 100,
+      "auc": 0.786
+     },
+     {
+      "name": "ubuntu/2005-03-15.txt",
+      "n": 100,
+      "auc": 0.8124
+     },
+     {
+      "name": "ubuntu/2010-07-15.txt",
+      "n": 100,
+      "auc": 0.616
+     },
+     {
+      "name": "ubuntu/2012-03-15.txt",
+      "n": 100,
+      "auc": 0.6908
+     },
+     {
+      "name": "ubuntu/2013-03-15.txt",
+      "n": 100,
+      "auc": 0.814
+     },
+     {
+      "name": "ubuntu/2013-07-15.txt",
+      "n": 100,
+      "auc": 0.8592
+     },
+     {
+      "name": "ubuntu/2015-07-15.txt",
+      "n": 100,
+      "auc": 0.8088
+     }
+    ]
+   },
+   "channels": {
+    "sig": 0.5703,
+    "atm": 0.5977,
+    "span": 0.6275,
+    "c": 0.6541
+   },
+   "FULL_plus_LEFT": 0.6615,
+   "FULLplusLEFT_minus_LEFT": {
+    "point": 0.0925,
+    "lo": 0.0146,
+    "hi": 0.1782,
+    "n": 1000
+   },
+   "FULL_minus_RIVALS": {
+    "point": 0.131,
+    "lo": 0.0706,
+    "hi": 0.1991,
+    "n": 1000
+   }
+  }
+ },
+ "secondsCollect": {
+  "V0": 1820.1,
+  "V1": 3065.6,
+  "V2": 3186.9
+ },
+ "V1_minus_V0": {
+  "point": -0.029,
+  "lo": -0.0551,
+  "hi": 0.0006,
+  "n": 1000
+ },
+ "V2_minus_V1": {
+  "point": 0.1012,
+  "lo": 0.0469,
+  "hi": 0.1648,
+  "n": 1000
+ },
+ "verdict": {
+  "F1_reference_deaf_slot_channel": false,
+  "F2_floor1_causal_hears": false,
+  "F3_beyond_company": false,
+  "F4_lookahead_adds": true,
+  "F5_reported_UD_IRC": [
+   0.5239,
+   0.5581
+  ],
+  "positionControlInside": true
+ },
+ "headerSha256": "e0dd1d60ce6d0014121391308cb0773ce774add0fb15f5ba2590613bd9d636fa"
+}

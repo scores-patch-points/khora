@@ -1,0 +1,80 @@
+{
+ "cell": "E1-B",
+ "set": "B",
+ "headerSha256": "235e66d12163e9a7eead028c74caca6c0bcb3bd3ca970eaa547fabbad75e113b",
+ "scoperHashes": {
+  "groupsSha256": "b2cad7b4a50c77400c1dfc82a91d53092b9327aaa138dbdf1a1ea07e300650d7",
+  "libSha256": "eaa1d06de53f4ab04a861b646e8d0e0e79bdf71bac2cdb6fbaac4486d024bfe4",
+  "analysisSha256": "cc19ee5bfc496a877c429d0380cf21e30be0e51c3d5b51ac27ec2d7ff9311868"
+ },
+ "confirmLibSha256": "587d63cb993611e72ff799e29ee1f02e44c3ea5f9876faea91ee26ba30c925f5",
+ "confirmE1Sha256": "86049cffa38ca738fc83b5aa2143639d732ef6e6aa66b6aed4bbf178173e435d",
+ "targets": {
+  "fra": {
+   "pairs": 600,
+   "r": {
+    "mean": 0.6774,
+    "n": 20,
+    "pool": 5
+   },
+   "g": {
+    "mean": 0.5391,
+    "n": 20,
+    "pool": 4
+   },
+   "o": {
+    "mean": 0.6011,
+    "n": 20,
+    "pool": 18
+   },
+   "genealogyBeyondTeam": 0.0763,
+   "team": -0.062
+  },
+  "por": {
+   "pairs": 600,
+   "r": {
+    "mean": 0.6756,
+    "n": 20,
+    "pool": 5
+   },
+   "g": {
+    "mean": 0.5573,
+    "n": 20,
+    "pool": 4
+   },
+   "o": {
+    "mean": 0.5795,
+    "n": 20,
+    "pool": 18
+   },
+   "genealogyBeyondTeam": 0.0961,
+   "team": -0.0222
+  },
+  "spaGSD": {
+   "pairs": 600,
+   "r": {
+    "mean": 0.6806,
+    "n": 20,
+    "pool": 4
+   },
+   "g": {
+    "mean": 0.5389,
+    "n": 20,
+    "pool": 4
+   },
+   "o": {
+    "mean": 0.5961,
+    "n": 20,
+    "pool": 18
+   },
+   "genealogyBeyondTeam": 0.0845,
+   "team": -0.0572
+  }
+ },
+ "means": {
+  "genealogyBeyondTeam": 0.0856,
+  "team": -0.0471,
+  "n": 3
+ },
+ "seconds": 2.5
+}

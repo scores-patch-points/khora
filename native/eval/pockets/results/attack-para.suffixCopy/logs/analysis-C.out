@@ -1,0 +1,198 @@
+{
+ "multiplicity": {
+  "statistics": 81,
+  "realPockets": 391,
+  "cellsTested": 31671,
+  "definedRealCells": 29680,
+  "halfCells": 59360,
+  "observedPresentRealCells": 22017,
+  "sharePresent": 0.7418,
+  "plantedIid": {
+   "halfCells": 307,
+   "absZge4": 4,
+   "rate4": 0.01303,
+   "presentCellsObserved": 0
+  },
+  "controls": {
+   "halfCells": 2913,
+   "absZge4": 13,
+   "rate4": 0.004463,
+   "presentCellsObserved": 0
+  },
+  "binomialReference": {
+   "p": 0.00008488153720463878,
+   "mean": 2.519,
+   "sd": 1.587
+  },
+  "expectedFalsePresentAllCells": 2.52,
+  "expectedFalsePresentSuffixCopy": 0.03,
+  "expectedFalsePresentSuffixCopyUsingControlsRate": 0.0035,
+  "suffixCopyPresentCells": 279,
+  "suffixCopyDefined": 353,
+  "presentRateRankOfSuffixCopy": 49,
+  "medianPresentRateOver81Stats": 0.832,
+  "statsWithPresentRateAbove50pct": 65,
+  "paraFamilyRates": [
+   "para.formulaCov:1.00",
+   "para.refrain:0.95",
+   "para.adjNg2:0.92",
+   "para.lcsLift:0.90",
+   "para.dupShare:0.87",
+   "para.adjNg3:0.87",
+   "para.tmplReuse:0.84",
+   "para.posPar:0.84",
+   "para.adjNg4:0.83",
+   "para.suffixCopy:0.79",
+   "para.prefixCopy:0.78",
+   "para.lagDecay:0.56"
+  ]
+ },
+ "shared": {
+  "reproduction": {
+   "n": 353,
+   "nPresent": 279,
+   "eta2": {
+    "group": 0.1014,
+    "register": 0.2727,
+    "script": 0.0383,
+    "tokens": 0.1418,
+    "meanUnitLength": 0.0797,
+    "docs": 0.127
+   },
+   "atlasLawTable": {
+    "group": 0.1014,
+    "register": 0.2727,
+    "script": 0.0383,
+    "tokens": 0.1418,
+    "meanUnitLength": 0.0797,
+    "docs": 0.127
+   }
+  },
+  "perm": {
+   "group": {
+    "eta2": 0.1014,
+    "p": 0.0005,
+    "nullMean": 0.0142,
+    "nullMax": 0.0574
+   },
+   "register": {
+    "eta2": 0.2727,
+    "p": 0.0005,
+    "nullMean": 0.0966,
+    "nullMax": 0.1971
+   },
+   "script": {
+    "eta2": 0.0383,
+    "p": 0.15092,
+    "nullMean": 0.0259,
+    "nullMax": 0.0919
+   },
+   "tokens": {
+    "eta2": 0.1418,
+    "p": 0.0005,
+    "nullMean": 0.0027,
+    "nullMax": 0.033
+   },
+   "meanUnitLength": {
+    "eta2": 0.0797,
+    "p": 0.0005,
+    "nullMean": 0.0028,
+    "nullMax": 0.0627
+   },
+   "docs": {
+    "eta2": 0.127,
+    "p": 0.0005,
+    "nullMean": 0.0028,
+    "nullMax": 0.0336
+   }
+  },
+  "westfallYoungMinP": {
+   "minObservedP": 0.0005,
+   "adjustedP": 0.0005,
+   "note": "permutation p floor is 1/2001 = 0.0005; adjusted p counts permutations whose smallest attribute-wise p is at most the observed smallest"
+  },
+  "registerWithinGroupStratified": {
+   "eta2": 0.2727,
+   "nullMean": 0.1696,
+   "p": 0.0015
+  },
+  "leaveOnePocketOut": {
+   "registerEta2": {
+    "min": 0.2648,
+    "max": 0.2849
+   },
+   "groupEta2": {
+    "min": 0.0978,
+    "max": 0.1075
+   }
+  },
+  "leaveOneRegisterOut": {
+   "lowest5": [
+    {
+     "dropped": "code",
+     "nDropped": 47,
+     "eta2": 0.2418
+    },
+    {
+     "dropped": "sequence",
+     "nDropped": 2,
+     "eta2": 0.2567
+    },
+    {
+     "dropped": "religion",
+     "nDropped": 2,
+     "eta2": 0.2567
+    },
+    {
+     "dropped": "scripture",
+     "nDropped": 25,
+     "eta2": 0.2577
+    },
+    {
+     "dropped": "nomenclature",
+     "nDropped": 4,
+     "eta2": 0.2611
+    }
+   ],
+   "highest3": [
+    {
+     "dropped": "notation",
+     "nDropped": 14,
+     "eta2": 0.2856
+    },
+    {
+     "dropped": "treatise",
+     "nDropped": 25,
+     "eta2": 0.2884
+    },
+    {
+     "dropped": "novel",
+     "nDropped": 25,
+     "eta2": 0.2966
+    }
+   ]
+  },
+  "afterDroppingAllHundredPercentRegisters": {
+   "dropped": [
+    "dialect",
+    "diagram",
+    "code",
+    "markup",
+    "config",
+    "scripture"
+   ],
+   "nRemaining": 253,
+   "presentRemaining": 179,
+   "eta2": 0.1875,
+   "nullMean": 0.11,
+   "p": 0.007
+  },
+  "panel81": {
+   "nTestable": 66,
+   "nSignificantP05": 58,
+   "nSignificantP001": 54,
+   "medianEta2": 0.254,
+   "suffixCopyRank": 27
+  }
+ }
+}

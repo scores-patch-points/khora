@@ -1,0 +1,271 @@
+{
+ "headerSha256": "1ed259a41ca4aff5366c19d3c9c0fdf617d6fecb475ce36c53ee8b860e0b8d2c",
+ "groupsSha256": "b2cad7b4a50c77400c1dfc82a91d53092b9327aaa138dbdf1a1ea07e300650d7",
+ "libSha256": "eaa1d06de53f4ab04a861b646e8d0e0e79bdf71bac2cdb6fbaac4486d024bfe4",
+ "analysisSha256": "cc19ee5bfc496a877c429d0380cf21e30be0e51c3d5b51ac27ec2d7ff9311868",
+ "cacheSha256": "14aa17a147dce6824d460696c6d78f0bc928849705d43338b844a8eba5cd2d56",
+ "chosen": [
+  {
+   "cell": "FIRST-BOTH",
+   "group": "genus:Romance",
+   "tier": "STRICT",
+   "devNPass": 6,
+   "devN": 7,
+   "scope": [
+    "cat",
+    "fra",
+    "por",
+    "ita",
+    "spa",
+    "glg",
+    "ron"
+   ]
+  }
+ ],
+ "results": [
+  {
+   "cell": "FIRST-BOTH",
+   "group": "genus:Romance",
+   "tier": "STRICT",
+   "scope": [
+    "cat",
+    "fra",
+    "por",
+    "ita",
+    "spa",
+    "glg",
+    "ron"
+   ],
+   "thinOnTest": [],
+   "forms": {
+    "A": {
+     "verdict": "HOLDS",
+     "inScope": {
+      "kind": "genus",
+      "group": "Romance",
+      "sameSet": "a",
+      "ctrlSet": "e",
+      "n": 7,
+      "nPass": 5,
+      "meanSame": 0.6548,
+      "meanCtrl": 0.5731,
+      "diffBoot": {
+       "mean": 0.0817,
+       "lo": 0.0628,
+       "hi": 0.097,
+       "n": 7,
+       "pos": 7
+      },
+      "positionControl": 0.5005,
+      "shuffledControl": 0.5247,
+      "passing": [
+       "cat",
+       "fra",
+       "ita",
+       "por",
+       "spa"
+      ],
+      "failing": [
+       "glg",
+       "ron"
+      ],
+      "rows": [
+       {
+        "t": "cat",
+        "same": 0.6777,
+        "ctrl": 0.5853,
+        "diff": 0.0924,
+        "q95": 0.5281,
+        "pass": true,
+        "pos": 0.4994,
+        "shuf": 0.539
+       },
+       {
+        "t": "fra",
+        "same": 0.6852,
+        "ctrl": 0.6054,
+        "diff": 0.0798,
+        "q95": 0.5333,
+        "pass": true,
+        "pos": 0.5055,
+        "shuf": 0.5386
+       },
+       {
+        "t": "glg",
+        "same": 0.5872,
+        "ctrl": 0.5263,
+        "diff": 0.0609,
+        "q95": 0.5434,
+        "pass": false,
+        "pos": 0.5024,
+        "shuf": 0.5296
+       },
+       {
+        "t": "ita",
+        "same": 0.6615,
+        "ctrl": 0.5582,
+        "diff": 0.1033,
+        "q95": 0.5359,
+        "pass": true,
+        "pos": 0.4975,
+        "shuf": 0.4968
+       },
+       {
+        "t": "por",
+        "same": 0.6689,
+        "ctrl": 0.5685,
+        "diff": 0.1004,
+        "q95": 0.5264,
+        "pass": true,
+        "pos": 0.5007,
+        "shuf": 0.5372
+       },
+       {
+        "t": "ron",
+        "same": 0.5938,
+        "ctrl": 0.558,
+        "diff": 0.0358,
+        "q95": 0.5332,
+        "pass": false,
+        "pos": 0.4995,
+        "shuf": 0.5006
+       },
+       {
+        "t": "spa",
+        "same": 0.7096,
+        "ctrl": 0.6103,
+        "diff": 0.0993,
+        "q95": 0.5307,
+        "pass": true,
+        "pos": 0.4984,
+        "shuf": 0.5312
+       }
+      ]
+     },
+     "outOfScope": {
+      "n": 0,
+      "nPass": 0,
+      "meanSame": null,
+      "meanCtrl": null,
+      "passing": [],
+      "failing": []
+     }
+    },
+    "B": {
+     "verdict": "PARTIALLY HOLDS",
+     "inScope": {
+      "kind": "genus",
+      "group": "Romance",
+      "sameSet": "a",
+      "ctrlSet": "e",
+      "n": 7,
+      "nPass": 4,
+      "meanSame": 0.6396,
+      "meanCtrl": 0.5811,
+      "diffBoot": {
+       "mean": 0.0585,
+       "lo": 0.0336,
+       "hi": 0.0807,
+       "n": 7,
+       "pos": 7
+      },
+      "positionControl": 0.4995,
+      "shuffledControl": 0.5193,
+      "passing": [
+       "cat",
+       "ita",
+       "por",
+       "spa"
+      ],
+      "failing": [
+       "fra",
+       "glg",
+       "ron"
+      ],
+      "rows": [
+       {
+        "t": "cat",
+        "same": 0.6566,
+        "ctrl": 0.6049,
+        "diff": 0.0517,
+        "q95": 0.529,
+        "pass": true,
+        "pos": 0.5002,
+        "shuf": 0.5354
+       },
+       {
+        "t": "fra",
+        "same": 0.6585,
+        "ctrl": 0.6181,
+        "diff": 0.0404,
+        "q95": 0.5355,
+        "pass": false,
+        "pos": 0.5035,
+        "shuf": 0.524
+       },
+       {
+        "t": "glg",
+        "same": 0.578,
+        "ctrl": 0.5319,
+        "diff": 0.0461,
+        "q95": 0.5365,
+        "pass": false,
+        "pos": 0.4904,
+        "shuf": 0.521
+       },
+       {
+        "t": "ita",
+        "same": 0.6698,
+        "ctrl": 0.563,
+        "diff": 0.1068,
+        "q95": 0.5314,
+        "pass": true,
+        "pos": 0.5038,
+        "shuf": 0.4932
+       },
+       {
+        "t": "por",
+        "same": 0.6554,
+        "ctrl": 0.5689,
+        "diff": 0.0865,
+        "q95": 0.5241,
+        "pass": true,
+        "pos": 0.4997,
+        "shuf": 0.5283
+       },
+       {
+        "t": "ron",
+        "same": 0.5707,
+        "ctrl": 0.5691,
+        "diff": 0.0016,
+        "q95": 0.5337,
+        "pass": false,
+        "pos": 0.4994,
+        "shuf": 0.505
+       },
+       {
+        "t": "spa",
+        "same": 0.688,
+        "ctrl": 0.6119,
+        "diff": 0.0761,
+        "q95": 0.5307,
+        "pass": true,
+        "pos": 0.4996,
+        "shuf": 0.5282
+       }
+      ]
+     },
+     "outOfScope": {
+      "n": 0,
+      "nPass": 0,
+      "meanSame": null,
+      "meanCtrl": null,
+      "passing": [],
+      "failing": []
+     }
+    }
+   },
+   "verdictA": "HOLDS"
+  }
+ ]
+}

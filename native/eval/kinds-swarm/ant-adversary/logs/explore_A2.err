@@ -1,0 +1,7 @@
+exploratory filter minlen 3 lenmatch true: 256 rows kept
+A2:INIT 120 4s
+A2:STRICT-INIT 120 4s
+A2:NONINIT 136 5s
+A2:STRICT-NONINIT 136 4s
+A2:POOL 256 10s
+A2:STRICT-POOL 256 7s

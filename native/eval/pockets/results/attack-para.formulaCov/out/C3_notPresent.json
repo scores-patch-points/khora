@@ -1,0 +1,283 @@
+{
+ "nPresent": 242,
+ "nNotPresent": 149,
+ "statusCounts": {
+  "zundef": 148,
+  "P+": 242,
+  "M": 1
+ },
+ "status_vs_tokens": {
+  "medianPresent": 186699.0,
+  "medianNot": 44542,
+  "eta2": 0.343458511081261,
+  "p": 0.0004997501249375312,
+  "spearman_with_present": 0.6222144905204469
+ },
+ "status_vs_logTokens": {
+  "medianPresent": 12.1372527769669,
+  "medianNot": 10.704187843260796,
+  "eta2": 0.40231092038710187,
+  "p": 0.0004997501249375312,
+  "spearman_with_present": 0.6222144905204469
+ },
+ "status_vs_meanUnitLength": {
+  "medianPresent": 12.027999999999999,
+  "medianNot": 15.7195,
+  "eta2": 3.38192485569963e-06,
+  "p": 0.974512743628186,
+  "spearman_with_present": -0.1819146803227422
+ },
+ "status_vs_docs": {
+  "medianPresent": 119.5,
+  "medianNot": 49,
+  "eta2": 0.10943671467477095,
+  "p": 0.0004997501249375312,
+  "spearman_with_present": 0.4142302763773209
+ },
+ "byGroup": {
+  "ml": {
+   "present": 48,
+   "notPresent": 57,
+   "sharePresent": 0.45714285714285713
+  },
+  "cd": {
+   "present": 87,
+   "notPresent": 2,
+   "sharePresent": 0.9775280898876404
+  },
+  "bk": {
+   "present": 41,
+   "notPresent": 40,
+   "sharePresent": 0.5061728395061729
+  },
+  "fm": {
+   "present": 50,
+   "notPresent": 11,
+   "sharePresent": 0.819672131147541
+  },
+  "ud": {
+   "present": 7,
+   "notPresent": 27,
+   "sharePresent": 0.20588235294117646
+  },
+  "oc": {
+   "present": 9,
+   "notPresent": 12,
+   "sharePresent": 0.42857142857142855
+  }
+ },
+ "byRegister": {
+  "code": {
+   "present": 47,
+   "notPresent": 0,
+   "sharePresent": 1.0
+  },
+  "treebank": {
+   "present": 7,
+   "notPresent": 27,
+   "sharePresent": 0.20588235294117646
+  },
+  "legal": {
+   "present": 26,
+   "notPresent": 5,
+   "sharePresent": 0.8387096774193549
+  },
+  "treatise": {
+   "present": 14,
+   "notPresent": 13,
+   "sharePresent": 0.5185185185185185
+  },
+  "scripture": {
+   "present": 20,
+   "notPresent": 6,
+   "sharePresent": 0.7692307692307693
+  },
+  "novel": {
+   "present": 14,
+   "notPresent": 11,
+   "sharePresent": 0.56
+  },
+  "chat": {
+   "present": 10,
+   "notPresent": 10,
+   "sharePresent": 0.5
+  },
+  "book": {
+   "present": 6,
+   "notPresent": 13,
+   "sharePresent": 0.3157894736842105
+  },
+  "children": {
+   "present": 2,
+   "notPresent": 15,
+   "sharePresent": 0.11764705882352941
+  },
+  "notation": {
+   "present": 14,
+   "notPresent": 2,
+   "sharePresent": 0.875
+  },
+  "poetry": {
+   "present": 7,
+   "notPresent": 6,
+   "sharePresent": 0.5384615384615384
+  },
+  "memoir": {
+   "present": 4,
+   "notPresent": 9,
+   "sharePresent": 0.3076923076923077
+  },
+  "dialect": {
+   "present": 8,
+   "notPresent": 5,
+   "sharePresent": 0.6153846153846154
+  },
+  "academic": {
+   "present": 11,
+   "notPresent": 1,
+   "sharePresent": 0.9166666666666666
+  },
+  "drama": {
+   "present": 0,
+   "notPresent": 12,
+   "sharePresent": 0.0
+  },
+  "translation": {
+   "present": 9,
+   "notPresent": 0,
+   "sharePresent": 1.0
+  },
+  "history": {
+   "present": 5,
+   "notPresent": 3,
+   "sharePresent": 0.625
+  },
+  "diagram": {
+   "present": 7,
+   "notPresent": 0,
+   "sharePresent": 1.0
+  },
+  "markup": {
+   "present": 5,
+   "notPresent": 0,
+   "sharePresent": 1.0
+  },
+  "reportage": {
+   "present": 4,
+   "notPresent": 0,
+   "sharePresent": 1.0
+  },
+  "encyclopedia": {
+   "present": 3,
+   "notPresent": 1,
+   "sharePresent": 0.75
+  },
+  "nomenclature": {
+   "present": 4,
+   "notPresent": 0,
+   "sharePresent": 1.0
+  },
+  "essay": {
+   "present": 2,
+   "notPresent": 1,
+   "sharePresent": 0.6666666666666666
+  },
+  "config": {
+   "present": 3,
+   "notPresent": 0,
+   "sharePresent": 1.0
+  },
+  "speech": {
+   "present": 1,
+   "notPresent": 2,
+   "sharePresent": 0.3333333333333333
+  },
+  "docs": {
+   "present": 2,
+   "notPresent": 0,
+   "sharePresent": 1.0
+  },
+  "sequence": {
+   "present": 2,
+   "notPresent": 0,
+   "sharePresent": 1.0
+  },
+  "lexicon": {
+   "present": 1,
+   "notPresent": 1,
+   "sharePresent": 0.5
+  },
+  "religion": {
+   "present": 2,
+   "notPresent": 0,
+   "sharePresent": 1.0
+  },
+  "sms": {
+   "present": 0,
+   "notPresent": 2,
+   "sharePresent": 0.0
+  },
+  "wordplay": {
+   "present": 0,
+   "notPresent": 1,
+   "sharePresent": 0.0
+  },
+  "biography": {
+   "present": 0,
+   "notPresent": 1,
+   "sharePresent": 0.0
+  },
+  "lyrics": {
+   "present": 1,
+   "notPresent": 0,
+   "sharePresent": 1.0
+  },
+  "reference": {
+   "present": 1,
+   "notPresent": 0,
+   "sharePresent": 1.0
+  },
+  "news": {
+   "present": 0,
+   "notPresent": 1,
+   "sharePresent": 0.0
+  },
+  "email": {
+   "present": 0,
+   "notPresent": 1,
+   "sharePresent": 0.0
+  }
+ },
+ "cramerV_status_group": {
+  "V": 0.5127180554844014,
+  "p": 0.0004997501249375312
+ },
+ "cramerV_status_register": {
+  "V": 0.6408996305773558,
+  "p": 0.0004997501249375312
+ },
+ "sharePresent_tokens>=20000": {
+  "n": 391,
+  "share": 0.618925831202046
+ },
+ "sharePresent_tokens>=30000": {
+  "n": 351,
+  "share": 0.6752136752136753
+ },
+ "sharePresent_tokens>=40000": {
+  "n": 324,
+  "share": 0.7222222222222222
+ },
+ "sharePresent_tokens>=60000": {
+  "n": 263,
+  "share": 0.7984790874524715
+ },
+ "sharePresent_tokens>=100000": {
+  "n": 205,
+  "share": 0.8780487804878049
+ },
+ "sharePresent_tokens>=150000": {
+  "n": 153,
+  "share": 0.9477124183006536
+ }
+}

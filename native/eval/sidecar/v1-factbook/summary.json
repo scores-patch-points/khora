@@ -1,0 +1,210 @@
+{
+ "slice": {
+  "docsRequested": 20,
+  "docsRead": 20,
+  "charsCap": 3000,
+  "candidates": [
+   "eng",
+   "spa",
+   "fra",
+   "deu",
+   "ita",
+   "por"
+  ],
+  "perCat": 1
+ },
+ "totals": {
+  "usable": 20,
+  "usableShare": 1,
+  "meanCast": 26.7,
+  "meanRelations": 22.6,
+  "errors": 0
+ },
+ "K3_earAgreesOnEnglish": {
+  "englishDocs": 0,
+  "agreed": 0
+ },
+ "verdict": "PASSING",
+ "rows": [
+  {
+   "address": "06-government-legal/world-factbook/africa_ag.txt",
+   "cast": 39,
+   "relations": 25,
+   "signal": 25,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/world-factbook/africa_ao.txt",
+   "cast": 33,
+   "relations": 28,
+   "signal": 28,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/world-factbook/africa_bc.txt",
+   "cast": 18,
+   "relations": 16,
+   "signal": 16,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/world-factbook/africa_bn.txt",
+   "cast": 25,
+   "relations": 22,
+   "signal": 22,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/world-factbook/africa_by.txt",
+   "cast": 20,
+   "relations": 22,
+   "signal": 22,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/world-factbook/africa_cd.txt",
+   "cast": 34,
+   "relations": 30,
+   "signal": 30,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/world-factbook/africa_cf.txt",
+   "cast": 21,
+   "relations": 19,
+   "signal": 19,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/world-factbook/africa_cg.txt",
+   "cast": 25,
+   "relations": 24,
+   "signal": 24,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/world-factbook/africa_cm.txt",
+   "cast": 22,
+   "relations": 11,
+   "signal": 11,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/world-factbook/africa_cn.txt",
+   "cast": 24,
+   "relations": 21,
+   "signal": 21,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/world-factbook/africa_ct.txt",
+   "cast": 33,
+   "relations": 25,
+   "signal": 25,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/world-factbook/africa_cv.txt",
+   "cast": 23,
+   "relations": 19,
+   "signal": 19,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/world-factbook/africa_dj.txt",
+   "cast": 29,
+   "relations": 26,
+   "signal": 26,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/world-factbook/africa_eg.txt",
+   "cast": 22,
+   "relations": 23,
+   "signal": 23,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/world-factbook/africa_ek.txt",
+   "cast": 31,
+   "relations": 21,
+   "signal": 21,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/world-factbook/africa_er.txt",
+   "cast": 24,
+   "relations": 23,
+   "signal": 23,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/world-factbook/africa_et.txt",
+   "cast": 28,
+   "relations": 29,
+   "signal": 29,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/world-factbook/africa_ga.txt",
+   "cast": 21,
+   "relations": 21,
+   "signal": 21,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/world-factbook/africa_gb.txt",
+   "cast": 28,
+   "relations": 26,
+   "signal": 26,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/world-factbook/africa_gh.txt",
+   "cast": 34,
+   "relations": 22,
+   "signal": 22,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  }
+ ]
+}

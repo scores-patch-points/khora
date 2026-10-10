@@ -1,0 +1,132 @@
+{
+ "ctrlF": {
+  "pairs": 278,
+  "castMeanD1": 1.2814,
+  "ctrlMeanD1": 1.3151,
+  "m1": {
+   "n": 40,
+   "meanDiff": -0.1737,
+   "ci": [
+    -0.7229,
+    0.3761
+   ],
+   "excludes0": false
+  },
+  "m2": {
+   "n": 40,
+   "meanDiff": -0.3065,
+   "ci": [
+    -0.9854,
+    0.3524
+   ],
+   "excludes0": false
+  },
+  "m3+": {
+   "n": 198,
+   "meanDiff": 0.0497,
+   "ci": [
+    -0.2918,
+    0.4239
+   ],
+   "excludes0": false
+  },
+  "m3+_midOnly": {
+   "n": 102,
+   "meanDiff": -0.2138,
+   "ci": [
+    -0.5549,
+    0.1524
+   ],
+   "excludes0": false
+  },
+  "slopeCastMinusCtrl": {
+   "point": 0.3766,
+   "castSlope": 0.1754,
+   "ctrlSlope": -0.2012,
+   "ci": [
+    0.1237,
+    0.641
+   ],
+   "excludes0": true
+  },
+  "position": {
+   "castShareInitial": 0.4281,
+   "ctrlShareInitial": 0.4245,
+   "castShareBeing": 0.2914,
+   "ctrlShareBeing": 0.0683,
+   "castShareFigure": 0.8705,
+   "ctrlShareFigure": 0.8453
+  }
+ },
+ "ctrlK": {
+  "pairs": 280,
+  "castMeanD1": 1.2722,
+  "ctrlMeanD1": 1.3885,
+  "m1": {
+   "n": 40,
+   "meanDiff": -0.8668,
+   "ci": [
+    -1.2979,
+    -0.4973
+   ],
+   "excludes0": true
+  },
+  "m2": {
+   "n": 40,
+   "meanDiff": -0.4843,
+   "ci": [
+    -1.2969,
+    0.1576
+   ],
+   "excludes0": false
+  },
+  "m3+": {
+   "n": 200,
+   "meanDiff": 0.1075,
+   "ci": [
+    -0.2618,
+    0.4965
+   ],
+   "excludes0": false
+  },
+  "m3+_midOnly": {
+   "n": 104,
+   "meanDiff": -0.0615,
+   "ci": [
+    -0.3517,
+    0.2543
+   ],
+   "excludes0": false
+  },
+  "slopeCastMinusCtrl": {
+   "point": 0.3412,
+   "castSlope": 0.1582,
+   "ctrlSlope": -0.1831,
+   "ci": [
+    0.0451,
+    0.614
+   ],
+   "excludes0": true
+  },
+  "position": {
+   "castShareInitial": 0.425,
+   "ctrlShareInitial": 0.425,
+   "castShareBeing": 0.2893,
+   "ctrlShareBeing": 0.0464,
+   "castShareFigure": 0.8714,
+   "ctrlShareFigure": 0.8393
+  }
+ },
+ "F5": {
+  "kinds": 6,
+  "H": 0.06133,
+  "nullQ95": 0.08693,
+  "nullMedian": 0.0319,
+  "HPass": false,
+  "pH": 0.1548,
+  "Hslope": 0.02789,
+  "nullSlopeQ95": 0.1522,
+  "HslopePass": false,
+  "pHslope": 0.7752
+ }
+}

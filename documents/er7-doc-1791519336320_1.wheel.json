@@ -1,0 +1,402 @@
+{
+  "schema": "EOWheel@1",
+  "task": "List every Boulder City Council member named in this document with their title (Mayor, Mayor Pro Tem, or Council Member). One per line: Name — Title.",
+  "turns": [
+    {
+      "seq": 1,
+      "phase": "plan",
+      "operator": "SEG",
+      "grain": "Field",
+      "face": "Murch",
+      "def": {
+        "phase": "plan",
+        "satisfaction": "the void's staged phases, ordered toward a climbing arc, each phase a question in the register's form",
+        "basis": null
+      },
+      "eva": {
+        "phase": "plan",
+        "measure": {
+          "sections": 6,
+          "first": "What is Mayor Pro Tem, and how does it relate to List every Boulder City Council",
+          "arc": "climbing"
+        },
+        "basis": "the predicted fortune arc must match the genre's accumulated shape; the read below is its EVA",
+        "verdict": null
+      },
+      "rec": {
+        "sections": [
+          "What is Mayor Pro Tem, and how does it relate to List every Boulder City Council member named in this document with their title (Mayor, Mayor Pro Tem, or Council Member)? What is Boulder City Council, and how does it relate to List every Boulder City Council member named in this document with their title (Mayor, Mayor Pro Tem, or Council Member)? What is Council Member, and how does it relate to List every Boulder City Council member named in this document with their title (Mayor, Mayor Pro Tem, or Council Member)? Does List every Boulder City Council member named in this document with their title (Mayor, Mayor Pro Tem, or Council Member) name ONE being that clears its ground, or several that must be kept apart? Which List every Boulder City Council member named in this document with their title (Mayor, Mayor Pro Tem, or Council Member) is this — the names and the referent, so one being is meant, not a byte string?",
+          "What is List every Boulder City Council member named in this document with their title (Mayor, Mayor Pro Tem, or Council Member), marked off from everything adjacent to it — what space is this essay, and what is it NOT? What baseline account of List every Boulder City Council member named in this document with their title (Mayor, Mayor Pro Tem, or Council Member) must be built before any judgment can land on it?",
+          "What KIND is List every Boulder City Council member named in this document with their title (Mayor, Mayor Pro Tem, or Council Member) — and do its kinds hold as kinds against the material, or are they unresolved? How many distinct List every Boulder City Council member named in this document with their title (Mayor, Mayor Pro Tem, or Council Member) keep recurring as the same kind across the sources — each candidate signed as a proposal?",
+          "What extent must the essay cover, and in what units — List every Boulder City Council member named in this document with their title (Mayor, Mayor Pro Tem, or Council Member)'s range, scale, span — so a hole is a visible uncovered stretch? What connective field do List every Boulder City Council member named in this document with their title (Mayor, Mayor Pro Tem, or Council Member)'s relations live in — the ambient of possible relations before any single one is confirmed?",
+          "Where do the parts of List every Boulder City Council member named in this document with their title (Mayor, Mayor Pro Tem, or Council Member)'s story part at natural seams — what separates into distinct chapters at the material's own bridges? What recurring relation runs through List every Boulder City Council member named in this document with their title (Mayor, Mayor Pro Tem, or Council Member)'s story — the same cause → consequence cycle found at a real recurrence floor?",
+          "What binds each named thing to List every Boulder City Council member named in this document with their title (Mayor, Mayor Pro Tem, or Council Member) — the material's own edges, each span-verified against the bytes? Where do two sources about List every Boulder City Council member named in this document with their title (Mayor, Mayor Pro Tem, or Council Member) agree into one claim with two witnesses — which re-sightings fold into the same note?"
+        ],
+        "register": null
+      },
+      "basis": null
+    },
+    {
+      "seq": 2,
+      "phase": "declare",
+      "operator": "DEF",
+      "grain": "Atmosphere",
+      "face": "the void declares",
+      "def": {
+        "phase": "declare",
+        "satisfaction": "the piece is declared in the staged register: no felt target — the register's own shape stands",
+        "basis": null
+      },
+      "eva": {
+        "phase": "declare",
+        "measure": {
+          "feltTarget": null,
+          "genre": null
+        },
+        "basis": "the frame is declared before the write; EVA measures the write against it",
+        "verdict": null
+      },
+      "rec": {
+        "feltTarget": null,
+        "register": null
+      },
+      "basis": null
+    },
+    {
+      "seq": 3,
+      "phase": "read",
+      "operator": "CON",
+      "grain": "Link",
+      "face": "Gore",
+      "def": {
+        "phase": "read",
+        "satisfaction": "each phase's sub-satisfaction: what would satisfy THIS phase, from THIS material",
+        "basis": null
+      },
+      "eva": {
+        "phase": "read",
+        "measure": {
+          "propositions": 1,
+          "referents": 0,
+          "surprise": 0
+        },
+        "basis": "the reader's own surprise on the material is the EVA — the felt dimension of the read",
+        "verdict": null
+      },
+      "rec": {
+        "relations": 1,
+        "referents": 0,
+        "surprise": 0,
+        "ground": true
+      },
+      "basis": null
+    },
+    {
+      "seq": 4,
+      "phase": "write",
+      "operator": "SYN",
+      "grain": "Field",
+      "face": "Wolfe",
+      "def": {
+        "phase": "write",
+        "satisfaction": "the parts compose into one carried ground — the artifact itself, Wolfe's work",
+        "basis": null
+      },
+      "eva": {
+        "phase": "write",
+        "measure": {
+          "parts": 2,
+          "chars": 6125,
+          "grounded": true,
+          "seed": null,
+          "cast": []
+        },
+        "basis": "the write is the SYNthesis of the read's ground into one piece — measured against the declare; every cast member keeps its provenance",
+        "verdict": null
+      },
+      "rec": {
+        "parts": 2,
+        "chars": 6125,
+        "voice": "register",
+        "seed": null,
+        "cast": []
+      },
+      "basis": null
+    },
+    {
+      "seq": 5,
+      "phase": "verdict",
+      "operator": "EVA",
+      "grain": "Lens",
+      "face": "LaVar",
+      "def": {
+        "phase": "verdict",
+        "satisfaction": "satisfaction = climbing arc, felt releases, grounded claims — DEF'd before the plan",
+        "basis": null
+      },
+      "eva": {
+        "phase": "verdict",
+        "measure": {
+          "ok": false,
+          "filled": 2,
+          "of": 2,
+          "failures": 0,
+          "strain": 1,
+          "feltTarget": null,
+          "feltRead": 0,
+          "feltGap": null,
+          "ranke": 1,
+          "unsupported": 2,
+          "dmca": {
+            "ok": true,
+            "quoted": 0,
+            "copied": 0
+          },
+          "categorized": {
+            "derivation": "Invent",
+            "field": "Invent",
+            "echo": {
+              "ratio": 0,
+              "window": {
+                "n": 6,
+                "min": 0,
+                "max": 0
+              },
+              "disagreement": false
+            },
+            "cell": {
+              "grain": "Pattern",
+              "phase": "Structure",
+              "derivation": "Invent",
+              "name": "System",
+              "archon": "Alexander"
+            },
+            "reproduce": {
+              "quoted": 0,
+              "copied": 0
+            },
+            "derive": 0,
+            "invent": 2,
+            "paraphraseCandidates": 1,
+            "paraphraseEquated": 0,
+            "paraphraseChased": {
+              "candidates": 1,
+              "equated": 0,
+              "unEquated": 1,
+              "equatedRows": [],
+              "unEquatedSpans": [
+                {
+                  "span": "a of on the council is for , are in public.",
+                  "why": "no claim row of this record resolves in this span FOR this whom"
+                }
+              ],
+              "rows": 1,
+              "indexResolved": true,
+              "whom": {
+                "face": "LaVar",
+                "ethos": "the EVA lens of this fold"
+              },
+              "movedFromInvent": 0,
+              "confirmedCompany": 0,
+              "groundedByMeaning": 0,
+              "basis": "the record equated 0 of 1 candidate span(s) FOR the LaVar face of this fold (the EVA lens of this fold); 1 un-equatable; 1 claim row(s) on the record"
+            }
+          }
+        },
+        "basis": "the artifact is measured against the declare — a real difference, never a softmax",
+        "verdict": null
+      },
+      "rec": {
+        "ok": false,
+        "filled": 2,
+        "of": 2,
+        "failures": [],
+        "totalStrain": 1,
+        "recall": 0,
+        "covered": 0,
+        "ofPropositions": 0,
+        "basis": "LaVar: the material carried no propositions to grade against — total (incl. prompted echo) 0, 1 of 1 propositions were handed to the mouth and cannot score unprompted",
+        "perSection": [
+          {
+            "sectionIndex": 0,
+            "carried": 0
+          },
+          {
+            "sectionIndex": 1,
+            "carried": 0
+          }
+        ],
+        "total": {
+          "ok": false,
+          "filled": 2,
+          "of": 2,
+          "failures": [],
+          "totalStrain": 1,
+          "recall": 0,
+          "covered": 0,
+          "ofPropositions": 1,
+          "basis": "LaVar: the essay re-states 0 of the material's 1 EOT propositions (0% recall)",
+          "perSection": [
+            {
+              "sectionIndex": 0,
+              "carried": 0
+            },
+            {
+              "sectionIndex": 1,
+              "carried": 0
+            }
+          ]
+        },
+        "handed": 1,
+        "ofTotal": 1,
+        "ranke": {
+          "verbatim": 1,
+          "company": 0,
+          "unsupported": 2,
+          "of": 3,
+          "basis": "mechanically attributed against 1 retained source(s): 1 verbatim, 0 company-supported (paraphrase, atoms byte-addressed), 2 unsupported (disclosed)"
+        },
+        "dmca": {
+          "ok": true,
+          "derivation": 0,
+          "quoted": 0,
+          "copied": 0,
+          "paraphraseUnmeasured": true,
+          "boundary": "shuffle-null (n=6; the run must survive the source's words being scrambled) — the verbatim end of the derivation spectrum",
+          "basis": "derivation 0% — no order-specific reproduction detected. WARNING: paraphrase is UNMEASURED by this verbatim instrument — silence here reads as 'invented' but may be grounded-and-reworded company the instrument cannot see."
+        },
+        "categorized": {
+          "reproduce": {
+            "quoted": 0,
+            "copied": 0
+          },
+          "derive": 0,
+          "invent": 2,
+          "units": {
+            "reproduce": "unique order-specific 6-gram runs (dedup — a copy reused N× reads once)",
+            "derive": "citation-ledger sentence rows (per-sentence attribution)",
+            "invent": "citation-ledger sentence rows (per-sentence attribution)"
+          },
+          "derivation": "Invent",
+          "field": "Invent",
+          "derivationRatio": 0,
+          "derivationWindow": {
+            "n": 6,
+            "min": 0,
+            "max": 0
+          },
+          "echo": {
+            "ratio": 0,
+            "window": {
+              "n": 6,
+              "min": 0,
+              "max": 0
+            },
+            "disagreement": false
+          },
+          "paraphraseUnmeasured": true,
+          "paraphraseCandidates": 1,
+          "paraphraseSurfaces": [
+            {
+              "span": "a of on the council is for , are in public.",
+              "ends": {
+                "end1": "public",
+                "end2": "public",
+                "from": "longest-words"
+              },
+              "source": "Interested members of the public may receive these emails, but may not post emails to the hotline."
+            }
+          ],
+          "disagreement": false,
+          "cell": {
+            "grain": "Pattern",
+            "phase": "Structure",
+            "derivation": "Invent",
+            "name": "System",
+            "archon": "Alexander"
+          },
+          "basis": "Shadow chase found 1 span(s) whose claim-vocabulary the sources' own sentences carry — the verbatim instrument cannot equate them, the WITNESS is the licensed door (chaseParaphrase). The sound spans share a surface with these source sentences: \"Interested members of the public may receive these emails, b\". The paraphrase archon (YadaYadaYada) owns this chase. Field/echo projection: Invent STANDS as the field (the category the next read primes on); below the field, still on the record, the echo is ratio=0.0%, window=0.00…0.00@n=6, instruments-agree=true. The meaning chase is stanced FOR the LaVar face of this fold (the EVA lens of this fold) — equated by the record's own claim rows, never a model — 0 of 1 candidate span(s) resolve to the record's own claim rows (label + ends through the referent index, never a model) — grounded-by-meaning, moved to derived (0 from invented, 0 company confirmed, undefined unrowed added); 1 named and disclosed un-equatable FOR the LaVar face of this fold (the EVA lens of this fold), never launderable, never a model's conviction. Cell: System (Alexander)..",
+          "spans": 23,
+          "spanUnit": "words",
+          "rows": 3,
+          "paraphraseEquated": 0,
+          "paraphraseRows": [],
+          "paraphraseChase": {
+            "candidates": 1,
+            "equated": 0,
+            "unEquated": 1,
+            "equatedRows": [],
+            "unEquatedSpans": [
+              {
+                "span": "a of on the council is for , are in public.",
+                "why": "no claim row of this record resolves in this span FOR this whom"
+              }
+            ],
+            "rows": 1,
+            "indexResolved": true,
+            "whom": {
+              "face": "LaVar",
+              "ethos": "the EVA lens of this fold"
+            },
+            "movedFromInvent": 0,
+            "confirmedCompany": 0,
+            "groundedByMeaning": 0,
+            "basis": "the record equated 0 of 1 candidate span(s) FOR the LaVar face of this fold (the EVA lens of this fold); 1 un-equatable; 1 claim row(s) on the record"
+          }
+        },
+        "paraphraseChased": {
+          "candidates": 1,
+          "equated": 0,
+          "unEquated": 1,
+          "equatedRows": [],
+          "unEquatedSpans": [
+            {
+              "span": "a of on the council is for , are in public.",
+              "why": "no claim row of this record resolves in this span FOR this whom"
+            }
+          ],
+          "rows": 1,
+          "indexResolved": true,
+          "whom": {
+            "face": "LaVar",
+            "ethos": "the EVA lens of this fold"
+          },
+          "movedFromInvent": 0,
+          "confirmedCompany": 0,
+          "groundedByMeaning": 0,
+          "basis": "the record equated 0 of 1 candidate span(s) FOR the LaVar face of this fold (the EVA lens of this fold); 1 un-equatable; 1 claim row(s) on the record"
+        }
+      },
+      "basis": null
+    },
+    {
+      "seq": 6,
+      "phase": "fold",
+      "operator": "REC",
+      "grain": "Atmosphere",
+      "face": "Murch",
+      "def": {
+        "phase": "fold",
+        "satisfaction": "the superseding satisfaction — corrected against what this run's material actually allowed",
+        "basis": null
+      },
+      "eva": {
+        "phase": "fold",
+        "measure": {
+          "ok": false,
+          "noGround": false,
+          "felt": 0
+        },
+        "basis": "a failed criterion supersedes the DEF by appending, never editing — the ledger's law",
+        "verdict": null
+      },
+      "rec": {
+        "ok": false,
+        "genre": null,
+        "ground": true,
+        "sidecar": "append-only: this run's shape+felt fold back into the genre's impression"
+      },
+      "basis": null
+    }
+  ]
+}

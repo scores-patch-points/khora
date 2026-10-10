@@ -1,0 +1,113 @@
+{
+ "headerSha256": "cb6f1960ac902bd9208f8fed6c694e1cc1591fe02f5508b7630c954ef29a5969",
+ "zones": {
+  "clean": {
+   "nPos": 9767,
+   "nNeg": 9767,
+   "L1uposShare": {
+    "DET": {
+     "PROPN": 0.096,
+     "NOUN": 0.29
+    },
+    "ADP": {
+     "PROPN": 0.208,
+     "NOUN": 0.22
+    },
+    "ADJ": {
+     "PROPN": 0.034,
+     "NOUN": 0.131
+    },
+    "NOUN": {
+     "PROPN": 0.13,
+     "NOUN": 0.101
+    },
+    "PROPN": {
+     "PROPN": 0.345,
+     "NOUN": 0.019
+    },
+    "NUM": {
+     "PROPN": 0.01,
+     "NOUN": 0.034
+    },
+    "VERB": {
+     "PROPN": 0.032,
+     "NOUN": 0.052
+    },
+    "AUX": {
+     "PROPN": 0.01,
+     "NOUN": 0.012
+    },
+    "PRON": {
+     "PROPN": 0.008,
+     "NOUN": 0.026
+    },
+    "edge": {
+     "PROPN": 0.05,
+     "NOUN": 0.05
+    },
+    "other": {
+     "PROPN": 0.076,
+     "NOUN": 0.065
+    }
+   },
+   "meanBinL1": {
+    "PROPN": 6.39,
+    "NOUN": 4.83
+   }
+  },
+  "deaf": {
+   "nPos": 5341,
+   "nNeg": 5341,
+   "L1uposShare": {
+    "DET": {
+     "PROPN": 0.004,
+     "NOUN": 0.043
+    },
+    "ADP": {
+     "PROPN": 0.068,
+     "NOUN": 0.085
+    },
+    "ADJ": {
+     "PROPN": 0.033,
+     "NOUN": 0.175
+    },
+    "NOUN": {
+     "PROPN": 0.235,
+     "NOUN": 0.26
+    },
+    "PROPN": {
+     "PROPN": 0.314,
+     "NOUN": 0.048
+    },
+    "NUM": {
+     "PROPN": 0.013,
+     "NOUN": 0.029
+    },
+    "VERB": {
+     "PROPN": 0.087,
+     "NOUN": 0.098
+    },
+    "AUX": {
+     "PROPN": 0.035,
+     "NOUN": 0.025
+    },
+    "PRON": {
+     "PROPN": 0.007,
+     "NOUN": 0.021
+    },
+    "edge": {
+     "PROPN": 0.098,
+     "NOUN": 0.098
+    },
+    "other": {
+     "PROPN": 0.106,
+     "NOUN": 0.117
+    }
+   },
+   "meanBinL1": {
+    "PROPN": 8.14,
+    "NOUN": 7.73
+   }
+  }
+ }
+}

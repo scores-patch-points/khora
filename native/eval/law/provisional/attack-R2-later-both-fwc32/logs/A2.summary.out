@@ -1,0 +1,202 @@
+{
+ "reproAllOk": true,
+ "variants": {
+  "PUNCTKEEP": {
+   "IN23": {
+    "inSet": 23,
+    "valid": 23,
+    "meanAuc": 0.653,
+    "audible": 19,
+    "audibleShare": 0.826,
+    "meanOrigSameN": 0.6568,
+    "meanDrop": 0.0038,
+    "meanDropFull": 0.0038,
+    "meanOrigFull": 0.6568,
+    "meanPairs": 486.6,
+    "voided": [],
+    "tooFew": 0,
+    "verdict": "SURVIVES"
+   },
+   "IN12": {
+    "inSet": 12,
+    "valid": 12,
+    "meanAuc": 0.6464,
+    "audible": 8,
+    "audibleShare": 0.667,
+    "meanOrigSameN": 0.6367,
+    "meanDrop": -0.0097,
+    "meanDropFull": -0.0096,
+    "meanOrigFull": 0.6368,
+    "meanPairs": 438,
+    "voided": [],
+    "tooFew": 0
+   },
+   "OUT": {
+    "inSet": 12,
+    "valid": 12,
+    "meanAuc": 0.6341,
+    "audible": 8,
+    "audibleShare": 0.667,
+    "meanOrigSameN": 0.5998,
+    "meanDrop": -0.0343,
+    "meanDropFull": -0.0341,
+    "meanOrigFull": 0.5999,
+    "meanPairs": 439.3,
+    "voided": [],
+    "tooFew": 0
+   }
+  },
+  "NEGNOUN": {
+   "IN23": {
+    "inSet": 23,
+    "valid": 23,
+    "meanAuc": 0.6602,
+    "audible": 21,
+    "audibleShare": 0.913,
+    "meanOrigSameN": 0.6566,
+    "meanDrop": -0.0036,
+    "meanDropFull": -0.0034,
+    "meanOrigFull": 0.6568,
+    "meanPairs": 466.5,
+    "voided": [],
+    "tooFew": 0,
+    "verdict": "SURVIVES"
+   },
+   "IN12": {
+    "inSet": 12,
+    "valid": 12,
+    "meanAuc": 0.6371,
+    "audible": 10,
+    "audibleShare": 0.833,
+    "meanOrigSameN": 0.6366,
+    "meanDrop": -0.0006,
+    "meanDropFull": -0.0004,
+    "meanOrigFull": 0.6368,
+    "meanPairs": 406.1,
+    "voided": [],
+    "tooFew": 0
+   },
+   "OUT": {
+    "inSet": 12,
+    "valid": 12,
+    "meanAuc": 0.5793,
+    "audible": 5,
+    "audibleShare": 0.417,
+    "meanOrigSameN": 0.5987,
+    "meanDrop": 0.0194,
+    "meanDropFull": 0.0206,
+    "meanOrigFull": 0.5999,
+    "meanPairs": 418.7,
+    "voided": [],
+    "tooFew": 0
+   }
+  },
+  "NEGVERB": {
+   "IN23": {
+    "inSet": 23,
+    "valid": 20,
+    "meanAuc": 0.7563,
+    "audible": 20,
+    "audibleShare": 1,
+    "meanOrigSameN": 0.6535,
+    "meanDrop": -0.1028,
+    "meanDropFull": -0.098,
+    "meanOrigFull": 0.6582,
+    "meanPairs": 417.2,
+    "voided": [
+     "cat:0.5517",
+     "cym:0.5543",
+     "por:0.5762"
+    ],
+    "tooFew": 0,
+    "verdict": "SURVIVES"
+   },
+   "IN12": {
+    "inSet": 12,
+    "valid": 10,
+    "meanAuc": 0.7219,
+    "audible": 10,
+    "audibleShare": 1,
+    "meanOrigSameN": 0.6339,
+    "meanDrop": -0.0881,
+    "meanDropFull": -0.0847,
+    "meanOrigFull": 0.6373,
+    "meanPairs": 375.5,
+    "voided": [
+     "cat:0.5517",
+     "cym:0.5543"
+    ],
+    "tooFew": 0
+   },
+   "OUT": {
+    "inSet": 12,
+    "valid": 10,
+    "meanAuc": 0.6997,
+    "audible": 9,
+    "audibleShare": 0.9,
+    "meanOrigSameN": 0.5934,
+    "meanDrop": -0.1063,
+    "meanDropFull": -0.1012,
+    "meanOrigFull": 0.5985,
+    "meanPairs": 367.3,
+    "voided": [
+     "ces:0.5541",
+     "tur:0.5725"
+    ],
+    "tooFew": 0
+   }
+  },
+  "NEGADJ": {
+   "IN23": {
+    "inSet": 23,
+    "valid": 20,
+    "meanAuc": 0.7056,
+    "audible": 18,
+    "audibleShare": 0.9,
+    "meanOrigSameN": 0.6505,
+    "meanDrop": -0.0552,
+    "meanDropFull": -0.0451,
+    "meanOrigFull": 0.6606,
+    "meanPairs": 377,
+    "voided": [
+     "deu:0.5619",
+     "mlt:0.5507"
+    ],
+    "tooFew": 1,
+    "verdict": "SURVIVES"
+   },
+   "IN12": {
+    "inSet": 12,
+    "valid": 10,
+    "meanAuc": 0.6672,
+    "audible": 8,
+    "audibleShare": 0.8,
+    "meanOrigSameN": 0.6276,
+    "meanDrop": -0.0397,
+    "meanDropFull": -0.024,
+    "meanOrigFull": 0.6432,
+    "meanPairs": 298,
+    "voided": [
+     "mlt:0.5507"
+    ],
+    "tooFew": 1
+   },
+   "OUT": {
+    "inSet": 12,
+    "valid": 11,
+    "meanAuc": 0.6357,
+    "audible": 7,
+    "audibleShare": 0.636,
+    "meanOrigSameN": 0.5925,
+    "meanDrop": -0.0432,
+    "meanDropFull": -0.0327,
+    "meanOrigFull": 0.603,
+    "meanPairs": 306,
+    "voided": [
+     "tam:0.5514"
+    ],
+    "tooFew": 0
+   }
+  }
+ }
+}

@@ -1,0 +1,1067 @@
+{
+ "nDefined": 390,
+ "C0": {
+  "exactNullTail": {
+   "oneSidedP_z_ge4": 0.002064332672194282,
+   "twoSidedP": 0.004128665344388564,
+   "presentPerCell": 0.000008522938762977568,
+   "absentBothHalves_given_null": 0.8301069937704744
+  },
+  "atlasCells": {
+   "realDefinedCellsAllStats": 29680,
+   "observedPresentRealCellsAllStats": 22017,
+   "shareObservedPresent": 0.7418,
+   "iidWorldRate4": 0.01303,
+   "pPresentFromRate4": 0.00008488153720463878
+  },
+  "entCurv": {
+   "cells": 390,
+   "present": 179,
+   "expectedFalsePresent_exactT9": 0.00332,
+   "expectedFalsePresent_atlasRate": 0.0331,
+   "binomialP_atLeastObserved_exactT9": "< 1e-300 (underflow)"
+  },
+  "iidWorlds": {
+   "pockets": 2,
+   "halfCells": 4,
+   "absZge4": 0,
+   "absZge2": 1,
+   "present": 0,
+   "maxAbsZ": 2.21
+  },
+  "lawFreeControls": {
+   "pockets": 20,
+   "halfCells": 40,
+   "absZge4": 0,
+   "absZge2": 4,
+   "present": 0,
+   "maxAbsZ": 2.52
+  },
+  "structuredPlanted": {
+   "pockets": 6,
+   "halfCells": 12,
+   "absZge4": 5,
+   "absZge2": 5,
+   "present": 2,
+   "maxAbsZ": 16.09,
+   "detail": [
+    {
+     "id": "pl-burst",
+     "v": [
+      0.0004,
+      0.0007
+     ],
+     "z": [
+      0.5,
+      5.3
+     ],
+     "status": "M"
+    },
+    {
+     "id": "pl-frames",
+     "v": [
+      -0.0201,
+      -0.0161
+     ],
+     "z": [
+      -16.1,
+      -13.2
+     ],
+     "status": "P-"
+    },
+    {
+     "id": "pl-length",
+     "v": [
+      0,
+      0.0004
+     ],
+     "z": [
+      0.3,
+      0.6
+     ],
+     "status": "A"
+    },
+    {
+     "id": "pl-markov",
+     "v": [
+      -0.0008,
+      -0.0005
+     ],
+     "z": [
+      -1.6,
+      -1.4
+     ],
+     "status": "A"
+    },
+    {
+     "id": "pl-mix",
+     "v": [
+      -0.0072,
+      -0.0064
+     ],
+     "z": [
+      -16,
+      -7.9
+     ],
+     "status": "P-"
+    },
+    {
+     "id": "pl-parallel",
+     "v": [
+      0.0004,
+      0.0011
+     ],
+     "z": [
+      1,
+      1.3
+     ],
+     "status": "A"
+    }
+   ]
+  },
+  "selection": {
+   "statsWithReversalOrPocketSpecific": 39,
+   "ofWhichSharedPmaxBelow005": 39,
+   "totalStats": 81,
+   "note": "entCurv was one of the top 8 by heterogeneity among these; a selection among ~39 candidates, not among 81"
+  }
+ },
+ "C1": {
+  "presence": {
+   "n": 390,
+   "nPresent": 179,
+   "rows": [
+    {
+     "attr": "group",
+     "eta2": 0.0589,
+     "p": 0.0015,
+     "levels": 6
+    },
+    {
+     "attr": "register",
+     "eta2": 0.1922,
+     "p": 0.0005,
+     "levels": 36
+    },
+    {
+     "attr": "script",
+     "eta2": 0.0222,
+     "p": 0.47876,
+     "levels": 10
+    },
+    {
+     "attr": "tokens",
+     "eta2": 0.0954,
+     "p": 0.0005
+    },
+    {
+     "attr": "meanUnitLength",
+     "eta2": 0.1578,
+     "p": 0.0005
+    },
+    {
+     "attr": "docs",
+     "eta2": 0.1214,
+     "p": 0.0005
+    }
+   ],
+   "best": {
+    "attr": "register",
+    "eta2": 0.1922,
+    "p": 0.0004997501249375312
+   },
+   "pMax": 0.0005
+  },
+  "sign": {
+   "n": 179,
+   "nPresent": 126,
+   "rows": [
+    {
+     "attr": "group",
+     "eta2": 0.2957,
+     "p": 0.0005,
+     "levels": 6
+    },
+    {
+     "attr": "register",
+     "eta2": 0.5532,
+     "p": 0.0005,
+     "levels": 26
+    },
+    {
+     "attr": "script",
+     "eta2": 0.2121,
+     "p": 0.0005,
+     "levels": 8
+    },
+    {
+     "attr": "tokens",
+     "eta2": 0.1053,
+     "p": 0.0005
+    },
+    {
+     "attr": "meanUnitLength",
+     "eta2": 0.1731,
+     "p": 0.0005
+    },
+    {
+     "attr": "docs",
+     "eta2": 0.1344,
+     "p": 0.0005
+    }
+   ],
+   "best": {
+    "attr": "register",
+    "eta2": 0.5532,
+    "p": 0.0004997501249375312
+   },
+   "pMax": 0.0005
+  },
+  "registerEta2ExpectedUnderPermutation_presence": 0.0926,
+  "registerEta2ExpectedUnderPermutation_sign": 0.138
+ },
+ "C2": {
+  "strata": "group",
+  "presence": [
+   {
+    "attr": "register",
+    "eta2": 0.1922,
+    "expectedUnderStratifiedPerm": 0.1319,
+    "p": 0.0015
+   },
+   {
+    "attr": "script",
+    "eta2": 0.0222,
+    "expectedUnderStratifiedPerm": 0.0268,
+    "p": 0.65817
+   },
+   {
+    "attr": "tokens",
+    "eta2": 0.0954,
+    "expectedUnderStratifiedPerm": 0.0167,
+    "p": 0.0005
+   },
+   {
+    "attr": "meanUnitLength",
+    "eta2": 0.1578,
+    "expectedUnderStratifiedPerm": 0.011,
+    "p": 0.0005
+   },
+   {
+    "attr": "docs",
+    "eta2": 0.1214,
+    "expectedUnderStratifiedPerm": 0.0095,
+    "p": 0.0005
+   }
+  ],
+  "sign": [
+   {
+    "attr": "register",
+    "eta2": 0.5532,
+    "expectedUnderStratifiedPerm": 0.3617,
+    "p": 0.0005
+   },
+   {
+    "attr": "script",
+    "eta2": 0.2121,
+    "expectedUnderStratifiedPerm": 0.0448,
+    "p": 0.0005
+   },
+   {
+    "attr": "tokens",
+    "eta2": 0.1053,
+    "expectedUnderStratifiedPerm": 0.051,
+    "p": 0.02499
+   },
+   {
+    "attr": "meanUnitLength",
+    "eta2": 0.1731,
+    "expectedUnderStratifiedPerm": 0.0866,
+    "p": 0.0075
+   },
+   {
+    "attr": "docs",
+    "eta2": 0.1344,
+    "expectedUnderStratifiedPerm": 0.0493,
+    "p": 0.0025
+   }
+  ],
+  "strataByGrain": {
+   "presence": [
+    {
+     "attr": "register",
+     "eta2": 0.1922,
+     "expectedUnderStratifiedPerm": 0.1263,
+     "p": 0.0005
+    },
+    {
+     "attr": "meanUnitLength",
+     "eta2": 0.1578,
+     "expectedUnderStratifiedPerm": 0.0238,
+     "p": 0.0005
+    }
+   ],
+   "sign": [
+    {
+     "attr": "register",
+     "eta2": 0.5532,
+     "expectedUnderStratifiedPerm": 0.3617,
+     "p": 0.0005
+    },
+    {
+     "attr": "meanUnitLength",
+     "eta2": 0.1731,
+     "expectedUnderStratifiedPerm": 0.141,
+     "p": 0.13093
+    },
+    {
+     "attr": "script",
+     "eta2": 0.2121,
+     "expectedUnderStratifiedPerm": 0.0946,
+     "p": 0.0005
+    }
+   ]
+  }
+ },
+ "C3": {
+  "presence": {
+   "removed": 390,
+   "bestStillRegister": 390,
+   "registerEta2Range": [
+    0.1897,
+    0.1993
+   ],
+   "registerMaxP": 0.01,
+   "maxPMaxAcrossAttrs": 0.005,
+   "minP_possible": 0.005,
+   "worst": [
+    [
+     "bk-cryptic",
+     0.1897,
+     0.005
+    ],
+    [
+     "cd-cc-json",
+     0.1897,
+     0.005
+    ],
+    [
+     "cd-cc-toml",
+     0.1897,
+     0.005
+    ],
+    [
+     "cd-cc-yaml",
+     0.1897,
+     0.005
+    ],
+    [
+     "cd-gene-products",
+     0.1897,
+     0.005
+    ]
+   ]
+  },
+  "sign": {
+   "removed": 179,
+   "bestStillRegister": 179,
+   "registerEta2Range": [
+    0.5471,
+    0.572
+   ],
+   "registerMaxP": 0.005,
+   "maxPMaxAcrossAttrs": 0.005,
+   "minP_possible": 0.005,
+   "worst": [
+    [
+     "cd-cc-html",
+     0.5471,
+     0.005
+    ],
+    [
+     "cd-cc-svelte",
+     0.5471,
+     0.005
+    ],
+    [
+     "ml-lzh-shuowen",
+     0.5471,
+     0.005
+    ],
+    [
+     "cd-cc-bash",
+     0.5477,
+     0.005
+    ],
+    [
+     "cd-cc-commonlisp",
+     0.5477,
+     0.005
+    ]
+   ]
+  }
+ },
+ "C4": {
+  "presence": {
+   "byGroup": [
+    {
+     "removed": "bk",
+     "nLeft": 309,
+     "nIndicator1": 140,
+     "bestAttr": "register",
+     "bestEta2": 0.2317,
+     "bestP": 0.001,
+     "registerEta2": 0.2317,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "cd",
+     "nLeft": 302,
+     "nIndicator1": 124,
+     "bestAttr": "meanUnitLength",
+     "bestEta2": 0.1576,
+     "bestP": 0.001,
+     "registerEta2": 0.1473,
+     "registerP": 0.004,
+     "pMax": 0.001
+    },
+    {
+     "removed": "fm",
+     "nLeft": 329,
+     "nIndicator1": 149,
+     "bestAttr": "register",
+     "bestEta2": 0.2053,
+     "bestP": 0.001,
+     "registerEta2": 0.2053,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "ml",
+     "nLeft": 285,
+     "nIndicator1": 141,
+     "bestAttr": "register",
+     "bestEta2": 0.2805,
+     "bestP": 0.001,
+     "registerEta2": 0.2805,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "oc",
+     "nLeft": 369,
+     "nIndicator1": 169,
+     "bestAttr": "register",
+     "bestEta2": 0.2,
+     "bestP": 0.001,
+     "registerEta2": 0.2,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "ud",
+     "nLeft": 356,
+     "nIndicator1": 172,
+     "bestAttr": "register",
+     "bestEta2": 0.1825,
+     "bestP": 0.002,
+     "registerEta2": 0.1825,
+     "registerP": 0.002,
+     "pMax": 0.001
+    }
+   ],
+   "byGrain": [
+    {
+     "removed": "word",
+     "nLeft": 94,
+     "nIndicator1": 60,
+     "bestAttr": "register",
+     "bestEta2": 0.2488,
+     "bestP": 0.02,
+     "registerEta2": 0.2488,
+     "registerP": 0.02,
+     "pMax": 0.02
+    },
+    {
+     "removed": "notation",
+     "nLeft": 372,
+     "nIndicator1": 172,
+     "bestAttr": "register",
+     "bestEta2": 0.1873,
+     "bestP": 0.001,
+     "registerEta2": 0.1873,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "code",
+     "nLeft": 324,
+     "nIndicator1": 133,
+     "bestAttr": "register",
+     "bestEta2": 0.1663,
+     "bestP": 0.003,
+     "registerEta2": 0.1663,
+     "registerP": 0.003,
+     "pMax": 0.001
+    },
+    {
+     "removed": "charbigram",
+     "nLeft": 380,
+     "nIndicator1": 172,
+     "bestAttr": "register",
+     "bestEta2": 0.2016,
+     "bestP": 0.001,
+     "registerEta2": 0.2016,
+     "registerP": 0.001,
+     "pMax": 0.001
+    }
+   ],
+   "byRegister_top10": [
+    {
+     "removed": "children",
+     "nLeft": 373,
+     "nIndicator1": 172,
+     "bestAttr": "register",
+     "bestEta2": 0.2004,
+     "bestP": 0.001,
+     "registerEta2": 0.2004,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "treatise",
+     "nLeft": 363,
+     "nIndicator1": 168,
+     "bestAttr": "register",
+     "bestEta2": 0.2054,
+     "bestP": 0.001,
+     "registerEta2": 0.2054,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "novel",
+     "nLeft": 365,
+     "nIndicator1": 164,
+     "bestAttr": "register",
+     "bestEta2": 0.2002,
+     "bestP": 0.001,
+     "registerEta2": 0.2002,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "notation",
+     "nLeft": 374,
+     "nIndicator1": 173,
+     "bestAttr": "register",
+     "bestEta2": 0.1989,
+     "bestP": 0.001,
+     "registerEta2": 0.1989,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "code",
+     "nLeft": 343,
+     "nIndicator1": 146,
+     "bestAttr": "register",
+     "bestEta2": 0.1843,
+     "bestP": 0.001,
+     "registerEta2": 0.1843,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "legal",
+     "nLeft": 359,
+     "nIndicator1": 168,
+     "bestAttr": "register",
+     "bestEta2": 0.2041,
+     "bestP": 0.001,
+     "registerEta2": 0.2041,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "scripture",
+     "nLeft": 364,
+     "nIndicator1": 162,
+     "bestAttr": "register",
+     "bestEta2": 0.1953,
+     "bestP": 0.001,
+     "registerEta2": 0.1953,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "book",
+     "nLeft": 371,
+     "nIndicator1": 173,
+     "bestAttr": "register",
+     "bestEta2": 0.1971,
+     "bestP": 0.001,
+     "registerEta2": 0.1971,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "chat",
+     "nLeft": 370,
+     "nIndicator1": 170,
+     "bestAttr": "register",
+     "bestEta2": 0.2025,
+     "bestP": 0.001,
+     "registerEta2": 0.2025,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "treebank",
+     "nLeft": 356,
+     "nIndicator1": 172,
+     "bestAttr": "register",
+     "bestEta2": 0.1825,
+     "bestP": 0.001,
+     "registerEta2": 0.1825,
+     "registerP": 0.001,
+     "pMax": 0.001
+    }
+   ]
+  },
+  "sign": {
+   "byGroup": [
+    {
+     "removed": "bk",
+     "nLeft": 140,
+     "nIndicator1": 87,
+     "bestAttr": "register",
+     "bestEta2": 0.4963,
+     "bestP": 0.001,
+     "registerEta2": 0.4963,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "cd",
+     "nLeft": 124,
+     "nIndicator1": 104,
+     "bestAttr": "script",
+     "bestEta2": 0.6675,
+     "bestP": 0.001,
+     "registerEta2": 0.3783,
+     "registerP": 0.002,
+     "pMax": 0.001
+    },
+    {
+     "removed": "fm",
+     "nLeft": 149,
+     "nIndicator1": 109,
+     "bestAttr": "register",
+     "bestEta2": 0.6352,
+     "bestP": 0.001,
+     "registerEta2": 0.6352,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "ml",
+     "nLeft": 141,
+     "nIndicator1": 95,
+     "bestAttr": "register",
+     "bestEta2": 0.6127,
+     "bestP": 0.001,
+     "registerEta2": 0.6127,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "oc",
+     "nLeft": 169,
+     "nIndicator1": 116,
+     "bestAttr": "register",
+     "bestEta2": 0.5417,
+     "bestP": 0.001,
+     "registerEta2": 0.5417,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "ud",
+     "nLeft": 172,
+     "nIndicator1": 119,
+     "bestAttr": "register",
+     "bestEta2": 0.5454,
+     "bestP": 0.001,
+     "registerEta2": 0.5454,
+     "registerP": 0.001,
+     "pMax": 0.001
+    }
+   ],
+   "byGrain": [
+    {
+     "removed": "word",
+     "nLeft": 60,
+     "nIndicator1": 20,
+     "bestAttr": "register",
+     "bestEta2": 0.5318,
+     "bestP": 0.001,
+     "registerEta2": 0.5318,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "code",
+     "nLeft": 133,
+     "nIndicator1": 112,
+     "bestAttr": "script",
+     "bestEta2": 0.6326,
+     "bestP": 0.001,
+     "registerEta2": 0.3679,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "notation",
+     "nLeft": 172,
+     "nIndicator1": 120,
+     "bestAttr": "register",
+     "bestEta2": 0.5635,
+     "bestP": 0.001,
+     "registerEta2": 0.5635,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "charbigram",
+     "nLeft": 172,
+     "nIndicator1": 126,
+     "bestAttr": "register",
+     "bestEta2": 0.6302,
+     "bestP": 0.001,
+     "registerEta2": 0.6302,
+     "registerP": 0.001,
+     "pMax": 0.001
+    }
+   ],
+   "byRegister_top10": [
+    {
+     "removed": "children",
+     "nLeft": 172,
+     "nIndicator1": 119,
+     "bestAttr": "register",
+     "bestEta2": 0.5454,
+     "bestP": 0.001,
+     "registerEta2": 0.5454,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "novel",
+     "nLeft": 164,
+     "nIndicator1": 111,
+     "bestAttr": "register",
+     "bestEta2": 0.5353,
+     "bestP": 0.001,
+     "registerEta2": 0.5353,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "drama",
+     "nLeft": 173,
+     "nIndicator1": 120,
+     "bestAttr": "register",
+     "bestEta2": 0.5465,
+     "bestP": 0.001,
+     "registerEta2": 0.5465,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "treatise",
+     "nLeft": 168,
+     "nIndicator1": 118,
+     "bestAttr": "register",
+     "bestEta2": 0.5874,
+     "bestP": 0.001,
+     "registerEta2": 0.5874,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "dialect",
+     "nLeft": 169,
+     "nIndicator1": 116,
+     "bestAttr": "register",
+     "bestEta2": 0.5417,
+     "bestP": 0.001,
+     "registerEta2": 0.5417,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "code",
+     "nLeft": 146,
+     "nIndicator1": 121,
+     "bestAttr": "script",
+     "bestEta2": 0.5174,
+     "bestP": 0.001,
+     "registerEta2": 0.4002,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "legal",
+     "nLeft": 168,
+     "nIndicator1": 119,
+     "bestAttr": "register",
+     "bestEta2": 0.593,
+     "bestP": 0.001,
+     "registerEta2": 0.593,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "scripture",
+     "nLeft": 162,
+     "nIndicator1": 119,
+     "bestAttr": "register",
+     "bestEta2": 0.6026,
+     "bestP": 0.001,
+     "registerEta2": 0.6026,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "chat",
+     "nLeft": 170,
+     "nIndicator1": 117,
+     "bestAttr": "register",
+     "bestEta2": 0.543,
+     "bestP": 0.001,
+     "registerEta2": 0.543,
+     "registerP": 0.001,
+     "pMax": 0.001
+    },
+    {
+     "removed": "treebank",
+     "nLeft": 172,
+     "nIndicator1": 119,
+     "bestAttr": "register",
+     "bestEta2": 0.5454,
+     "bestP": 0.001,
+     "registerEta2": 0.5454,
+     "registerP": 0.001,
+     "pMax": 0.001
+    }
+   ],
+   "removeCodeAndCharbigramAndHebrew": {
+    "nLeft": 113,
+    "nPlus": 106,
+    "nMinus": 7,
+    "shared": {
+     "n": 113,
+     "nPresent": 106,
+     "rows": [
+      {
+       "attr": "group",
+       "eta2": 0.1771,
+       "p": 0.004,
+       "levels": 6
+      },
+      {
+       "attr": "register",
+       "eta2": 0.2925,
+       "p": 0.08791,
+       "levels": 20
+      },
+      {
+       "attr": "script",
+       "eta2": 0.2766,
+       "p": 0.00999,
+       "levels": 6
+      },
+      {
+       "attr": "tokens",
+       "eta2": 0.0021,
+       "p": 0.65534
+      },
+      {
+       "attr": "meanUnitLength",
+       "eta2": 0.0192,
+       "p": 0.15784
+      },
+      {
+       "attr": "docs",
+       "eta2": 0.0025,
+       "p": 0.59241
+      }
+     ],
+     "best": {
+      "attr": "register",
+      "eta2": 0.2925,
+      "p": 0.08791208791208792
+     },
+     "pMax": 0.01598
+    }
+   }
+  }
+ },
+ "C5": {
+  "sign": {
+   "n": 179,
+   "majorityBaseline": 0.7039,
+   "register": 0.8603,
+   "group": 0.7654,
+   "grain": 0.8436,
+   "script": 0.7709,
+   "language": 0.7765,
+   "meanUnitLength_threshold": 0.7598,
+   "tokens_threshold": 0.6704,
+   "rareCurveSign": null,
+   "rareCurveSignAgreement": 0.8939
+  },
+  "presence": {
+   "n": 390,
+   "majorityBaseline": 0.541,
+   "register": 0.5974,
+   "group": 0.4897,
+   "grain": 0.6179,
+   "script": 0.5308,
+   "language": 0.5333,
+   "meanUnitLength_threshold": 0.6615,
+   "tokens_threshold": 0.641,
+   "rareCurveSign": null,
+   "rareCurveSignAgreement": 0.4077
+  }
+ },
+ "C6": {
+  "P_minus_all": 53,
+  "byGrain": {
+   "word": {
+    "plus": 106,
+    "minus": 13
+   },
+   "code": {
+    "plus": 14,
+    "minus": 32
+   },
+   "notation": {
+    "plus": 6,
+    "minus": 1
+   },
+   "charbigram": {
+    "plus": 0,
+    "minus": 7
+   }
+  },
+  "wordGrainMinus": [
+   {
+    "id": "fm-law-ar",
+    "register": "legal",
+    "language": "es",
+    "script": "latn",
+    "mul": 8.3,
+    "v": -0.0051
+   },
+   {
+    "id": "fm-pali-dn",
+    "register": "scripture",
+    "language": "pi",
+    "script": "latn",
+    "mul": 8.7,
+    "v": -0.0091
+   },
+   {
+    "id": "fm-pali-mn",
+    "register": "scripture",
+    "language": "pi",
+    "script": "latn",
+    "mul": 9.1,
+    "v": -0.0076
+   },
+   {
+    "id": "fm-sanskrit",
+    "register": "scripture",
+    "language": "sa",
+    "script": "latn",
+    "mul": 6.7,
+    "v": -0.0171
+   },
+   {
+    "id": "fm-talmud-kodashim",
+    "register": "scripture",
+    "language": "arc",
+    "script": "hebr",
+    "mul": 6.9,
+    "v": -0.0062
+   },
+   {
+    "id": "fm-talmud-moed",
+    "register": "scripture",
+    "language": "arc",
+    "script": "hebr",
+    "mul": 6.5,
+    "v": -0.0023
+   },
+   {
+    "id": "fm-talmud-nashim",
+    "register": "scripture",
+    "language": "arc",
+    "script": "hebr",
+    "mul": 6.6,
+    "v": -0.0059
+   },
+   {
+    "id": "fm-talmud-nezikin",
+    "register": "scripture",
+    "language": "arc",
+    "script": "hebr",
+    "mul": 6.6,
+    "v": -0.0054
+   },
+   {
+    "id": "fm-udhr-cyrl",
+    "register": "legal",
+    "language": "mul",
+    "script": "cyrl",
+    "mul": 13.5,
+    "v": -0.033
+   },
+   {
+    "id": "fm-udhr-other",
+    "register": "legal",
+    "language": "mul",
+    "script": "multi",
+    "mul": 14.7,
+    "v": -0.018
+   },
+   {
+    "id": "fm-wlc-latter",
+    "register": "scripture",
+    "language": "hbo",
+    "script": "hebr",
+    "mul": 14.5,
+    "v": -0.0133
+   },
+   {
+    "id": "fm-wlc-poetry",
+    "register": "scripture",
+    "language": "hbo",
+    "script": "hebr",
+    "mul": 8.2,
+    "v": -0.0271
+   },
+   {
+    "id": "ml-san-rigveda",
+    "register": "scripture",
+    "language": "san",
+    "script": "latn",
+    "mul": 7.6,
+    "v": -0.0126
+   }
+  ]
+ }
+}

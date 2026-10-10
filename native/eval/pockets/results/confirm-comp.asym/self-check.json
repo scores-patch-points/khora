@@ -1,0 +1,64 @@
+{
+ "id": "bk-alice",
+ "maxAbsDiff": 0,
+ "rows": [
+  {
+   "half": "discover",
+   "field": "v",
+   "atlas": -0.011839291036614828,
+   "here": -0.011839291036614828,
+   "absDiff": 0
+  },
+  {
+   "half": "discover",
+   "field": "nullMean",
+   "atlas": 0.000024663647244684007,
+   "here": 0.000024663647244684007,
+   "absDiff": 0
+  },
+  {
+   "half": "discover",
+   "field": "nullSd",
+   "atlas": 0.0022154603603061233,
+   "here": 0.0022154603603061233,
+   "absDiff": 0
+  },
+  {
+   "half": "discover",
+   "field": "z",
+   "atlas": -5.355074230360049,
+   "here": -5.355074230360049,
+   "absDiff": 0
+  },
+  {
+   "half": "confirm",
+   "field": "v",
+   "atlas": -0.002912939189064693,
+   "here": -0.002912939189064693,
+   "absDiff": 0
+  },
+  {
+   "half": "confirm",
+   "field": "nullMean",
+   "atlas": 0.0009503308988050395,
+   "here": 0.0009503308988050395,
+   "absDiff": 0
+  },
+  {
+   "half": "confirm",
+   "field": "nullSd",
+   "atlas": 0.0016400046766004315,
+   "here": 0.0016400046766004315,
+   "absDiff": 0
+  },
+  {
+   "half": "confirm",
+   "field": "z",
+   "atlas": -2.3556457752778557,
+   "here": -2.3556457752778557,
+   "absDiff": 0
+  }
+ ],
+ "variantSelfCheckMaxDiff": 0,
+ "pass": true
+}

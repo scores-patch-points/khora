@@ -1,0 +1,111 @@
+"""A short headline composed from eoreader7's own segmentation of the title
+— not a model's invention. Legistar titles are single bureaucratic
+run-ons ("A resolution accepting the terms of a cooperative purchasing
+master agreement for a cloud-based solution for scalable computing and
+storage related to computer-aided dispatch for the Department of Emergency
+Communication, the Metropolitan Nashville Police Department and other
+departments as approved by the Metropolitan Purchasing Agent"), which makes
+a feed of them unreadable.
+
+The reader already does the work: it surfaces the whole title as one
+referent with its prepositional joints intact, and puts the title's own
+verb at the head of `cast`. So the gist is mechanical — split the reader's
+surface on the joints it encoded, drop the empty carrier phrases, keep the
+contentful heads. Nothing is generated; every word here appears in the
+title."""
+from __future__ import annotations
+
+import re
+
+# The joints eoreader7 leaves in a surface key, longest first so
+# "related_to" wins over "to".
+JOINTS = ["_related_to_", "_pertaining_to_", "_by_and_between_", "_between_",
+          "_for_", "_with_", "_of_", "_to_", "_from_", "_and_"]
+
+# Carrier phrases that hold no content. These aren't stopwords — they're
+# the procurement *vehicle*, which is near-identical across every matter
+# ("cooperative purchasing master agreement" appears in most of the feed).
+# What distinguishes one matter from another is what's being bought and for
+# whom, which sits at the tail of these titles.
+CARRIER = {
+    "resolution", "ordinance", "substitute ordinance", "terms",
+    "terms and conditions", "amendment", "metropolitan government",
+    "nashville", "davidson county", "metropolitan government of nashville",
+    "metropolitan government of nashville and davidson county",
+    "approval", "purpose", "use", "contract", "agreement", "execution",
+    "other departments", "departments as", "various departments",
+    "provision", "cooperative purchasing master agreement", "master agreement",
+    "cooperative purchasing agreement", "sole source contract", "full scope",
+    "scope", "work", "services", "related services", "purchase", "purchases",
+    "metropolitan purchasing agent", "originating agency", "behalf",
+    "department", "departments", "department agency", "council", "metro",
+}
+
+LEAD_VERBS = ["accepting", "approving", "amending", "authorizing", "appropriating",
+              "abandoning", "accepting and approving", "ratifying", "requesting",
+              "establishing", "declaring", "adopting", "exempting", "repealing"]
+
+ARTICLES = re.compile(r"^(a|an|the)\s+", re.I)
+MAX_PARTS = 3
+MAX_CHARS = 90
+
+
+def _clean(fragment: str) -> str:
+    f = fragment.replace("_", " ").strip(" ,.;:")
+    f = ARTICLES.sub("", f).strip()
+    return re.sub(r"\s+", " ", f)
+
+
+def _title_surface(title: str, surfaces: list[str]) -> str | None:
+    """The reader's own surface for the title: the longest surface whose
+    words the title actually contains."""
+    t = re.sub(r"[^a-z0-9 ]", " ", (title or "").lower())
+    t = re.sub(r"\s+", " ", t)
+    best = None
+    for s in surfaces or []:
+        words = s.replace("_", " ")
+        if len(words) < 25:
+            continue
+        head = " ".join(words.split()[:5])
+        if head and head in t and (best is None or len(words) > len(best)):
+            best = words
+    return best
+
+
+def gist(title: str, surfaces: list[str], cast: list[str]) -> str:
+    """Returns a short headline, or "" if the title is already short enough
+    to stand on its own."""
+    title = (title or "").strip()
+    if len(title) <= MAX_CHARS:
+        return ""
+
+    verb = ""
+    for c in (cast or [])[:6]:
+        if c.lower() in LEAD_VERBS:
+            verb = c.lower()
+            break
+
+    surface = _title_surface(title, surfaces)
+    source = surface if surface else re.sub(r"^.*?\b(?:resolution|ordinance)\b", "", title, flags=re.I)
+
+    pattern = "|".join(re.escape(j) for j in JOINTS)
+    raw = re.split(pattern, "_" + source.replace(" ", "_") + "_")
+    parts = []
+    for frag in raw:
+        c = _clean(frag)
+        if not c or len(c) < 4 or c.lower() in CARRIER:
+            continue
+        if any(c.lower() in p.lower() or p.lower() in c.lower() for p in parts):
+            continue
+        parts.append(c)
+
+    if not parts:
+        return ""
+    # Keep the tail: the subject and the department it's for come last in
+    # these titles, while the front is the procurement vehicle.
+    if len(parts) > MAX_PARTS:
+        parts = parts[-MAX_PARTS:]
+    head = " · ".join(parts[:MAX_PARTS])
+    if len(head) > MAX_CHARS:
+        head = head[: MAX_CHARS - 1].rsplit(" ", 1)[0] + "…"
+    return f"{verb.capitalize()}: {head}" if verb else head

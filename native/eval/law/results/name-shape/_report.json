@@ -1,0 +1,2031 @@
+{
+ "stems": 25,
+ "perLanguage": {
+  "eng": {
+   "windows": 4,
+   "M": 128,
+   "propnTokensDeleted": 97.3,
+   "magnitudePropn": 0.2708,
+   "T1": {
+    "cosPropnVsRandom": 0.8468,
+    "nullQ05": 0.853,
+    "nullMedian": 0.9583,
+    "informative": true,
+    "specific": true
+   },
+   "T2": {
+    "splitHalfPropn": 0.9838,
+    "vsNoun": 0.9829,
+    "vsVerb": 0.9278,
+    "vsAdj": 0.9284,
+    "distinct": true
+   },
+   "determinism": {
+    "same": true
+   },
+   "sham": {
+    "changed": 0
+   },
+   "imprintPropn": [
+    0.224,
+    0.247,
+    0.246,
+    0.001,
+    0.282
+   ],
+   "imprintRandom": [
+    0.092,
+    0.348,
+    0.118,
+    0.001,
+    0.44
+   ],
+   "imprintLabels": [
+    "end1",
+    "label",
+    "end2",
+    "entry",
+    "no-slot"
+   ],
+   "T5": {
+    "cosImprintPropnVsRandom": 0.8929,
+    "nullQ05": 0.9409,
+    "informative": true,
+    "specific": true
+   },
+   "collateralVsRandom": 0.9799,
+   "T6": {
+    "amplificationPropn": 0.7348,
+    "amplificationRandom": 2.5018,
+    "higher": false
+   },
+   "slotsPerPropnToken": 1.1184,
+   "noSlotShare": 0.5049,
+   "T3": {
+    "tokens": 120,
+    "nullShare": {
+     "PROPN": 0.35,
+     "other": 0.1833
+    },
+    "aucOwnPrototype": 0.5532,
+    "aucSameFamilyPrototype": 0.5501,
+    "aucOtherFamilyPrototype": 0.5526,
+    "family": "SVO-like#1",
+    "permQ95": 0.5794
+   }
+  },
+  "spa": {
+   "windows": 4,
+   "M": 128,
+   "propnTokensDeleted": 289.8,
+   "magnitudePropn": 0.4438,
+   "T1": {
+    "cosPropnVsRandom": 0.9866,
+    "nullQ05": 0.9422,
+    "nullMedian": 0.989,
+    "informative": true,
+    "specific": false
+   },
+   "T2": {
+    "splitHalfPropn": 0.9864,
+    "vsNoun": 0.9237,
+    "vsVerb": 0.9273,
+    "vsAdj": 0.9611,
+    "distinct": true
+   },
+   "determinism": {
+    "same": true
+   },
+   "sham": {
+    "changed": 0
+   },
+   "imprintPropn": [
+    0.27,
+    0.173,
+    0.309,
+    0,
+    0.248
+   ],
+   "imprintRandom": [
+    0.196,
+    0.386,
+    0.193,
+    0.001,
+    0.223
+   ],
+   "imprintLabels": [
+    "end1",
+    "label",
+    "end2",
+    "entry",
+    "no-slot"
+   ],
+   "T5": {
+    "cosImprintPropnVsRandom": 0.8793,
+    "nullQ05": 0.9433,
+    "informative": true,
+    "specific": true
+   },
+   "collateralVsRandom": 0.9896,
+   "T6": {
+    "amplificationPropn": 3.3845,
+    "amplificationRandom": 3.609,
+    "higher": false
+   },
+   "slotsPerPropnToken": 0.8393,
+   "noSlotShare": 0.2895,
+   "T3": {
+    "tokens": 120,
+    "nullShare": {
+     "PROPN": 0.1333,
+     "other": 0.15
+    },
+    "aucOwnPrototype": 0.5317,
+    "aucSameFamilyPrototype": 0.4778,
+    "aucOtherFamilyPrototype": 0.4783,
+    "family": "SVO-like#0",
+    "permQ95": 0.5724
+   }
+  },
+  "rus": {
+   "windows": 4,
+   "M": 115,
+   "propnTokensDeleted": 173.3,
+   "magnitudePropn": 0.1992,
+   "T1": {
+    "cosPropnVsRandom": 0.9904,
+    "nullQ05": 0.8518,
+    "nullMedian": 0.9592,
+    "informative": true,
+    "specific": false
+   },
+   "T2": {
+    "splitHalfPropn": 0.8348,
+    "vsNoun": 0.9357,
+    "vsVerb": 0.8399,
+    "vsAdj": 0.935,
+    "distinct": false
+   },
+   "determinism": {
+    "same": true
+   },
+   "sham": {
+    "changed": 0
+   },
+   "imprintPropn": [
+    0.044,
+    0.124,
+    0.05,
+    0,
+    0.782
+   ],
+   "imprintRandom": [
+    0.037,
+    0.192,
+    0.04,
+    0,
+    0.73
+   ],
+   "imprintLabels": [
+    "end1",
+    "label",
+    "end2",
+    "entry",
+    "no-slot"
+   ],
+   "T5": {
+    "cosImprintPropnVsRandom": 0.995,
+    "nullQ05": 0.9925,
+    "informative": false,
+    "specific": false
+   },
+   "collateralVsRandom": 0.9895,
+   "T6": {
+    "amplificationPropn": 1.473,
+    "amplificationRandom": 2.3711,
+    "higher": false
+   },
+   "slotsPerPropnToken": 0.2061,
+   "noSlotShare": 0.7704,
+   "T3": {
+    "tokens": 120,
+    "nullShare": {
+     "PROPN": 0.15,
+     "other": 0.2
+    },
+    "aucOwnPrototype": 0.4039,
+    "aucSameFamilyPrototype": 0.5536,
+    "aucOtherFamilyPrototype": 0.5503,
+    "family": "SVO-like#0",
+    "permQ95": 0.6026
+   }
+  },
+  "cmn": {
+   "windows": 4,
+   "M": 100,
+   "propnTokensDeleted": 218.5,
+   "magnitudePropn": 0.3928,
+   "T1": {
+    "cosPropnVsRandom": 0.9828,
+    "nullQ05": 0.9315,
+    "nullMedian": 0.979,
+    "informative": true,
+    "specific": false
+   },
+   "T2": {
+    "splitHalfPropn": 0.9842,
+    "vsNoun": 0.7674,
+    "vsVerb": 0.9207,
+    "vsAdj": 0.9859,
+    "distinct": false
+   },
+   "determinism": {
+    "same": true
+   },
+   "sham": {
+    "changed": 0
+   },
+   "imprintPropn": [
+    0.166,
+    0.201,
+    0.172,
+    0,
+    0.46
+   ],
+   "imprintRandom": [
+    0.115,
+    0.346,
+    0.113,
+    0.001,
+    0.426
+   ],
+   "imprintLabels": [
+    "end1",
+    "label",
+    "end2",
+    "entry",
+    "no-slot"
+   ],
+   "T5": {
+    "cosImprintPropnVsRandom": 0.956,
+    "nullQ05": 0.9669,
+    "informative": false,
+    "specific": false
+   },
+   "collateralVsRandom": 0.9657,
+   "T6": {
+    "amplificationPropn": 1.5539,
+    "amplificationRandom": 1.9042,
+    "higher": false
+   },
+   "slotsPerPropnToken": 0.5326,
+   "noSlotShare": 0.4492,
+   "T3": {
+    "tokens": 120,
+    "nullShare": {
+     "PROPN": 0.1833,
+     "other": 0.2333
+    },
+    "aucOwnPrototype": 0.4481,
+    "aucSameFamilyPrototype": 0.4297,
+    "aucOtherFamilyPrototype": 0.4389,
+    "family": "SVO-like#1",
+    "permQ95": 0.5747
+   }
+  },
+  "cmn-hans": {
+   "windows": 4,
+   "M": 100,
+   "propnTokensDeleted": 218.5,
+   "magnitudePropn": 0.3938,
+   "T1": {
+    "cosPropnVsRandom": 0.9783,
+    "nullQ05": 0.9418,
+    "nullMedian": 0.9801,
+    "informative": true,
+    "specific": false
+   },
+   "T2": {
+    "splitHalfPropn": 0.9851,
+    "vsNoun": 0.7725,
+    "vsVerb": 0.9162,
+    "vsAdj": 0.9857,
+    "distinct": false
+   },
+   "determinism": {
+    "same": true
+   },
+   "sham": {
+    "changed": 0
+   },
+   "imprintPropn": [
+    0.166,
+    0.201,
+    0.172,
+    0,
+    0.46
+   ],
+   "imprintRandom": [
+    0.116,
+    0.346,
+    0.116,
+    0,
+    0.422
+   ],
+   "imprintLabels": [
+    "end1",
+    "label",
+    "end2",
+    "entry",
+    "no-slot"
+   ],
+   "T5": {
+    "cosImprintPropnVsRandom": 0.9558,
+    "nullQ05": 0.9731,
+    "informative": false,
+    "specific": false
+   },
+   "collateralVsRandom": 0.9635,
+   "T6": {
+    "amplificationPropn": 1.5603,
+    "amplificationRandom": 1.8248,
+    "higher": false
+   },
+   "slotsPerPropnToken": 0.5326,
+   "noSlotShare": 0.4492,
+   "T3": {
+    "tokens": 120,
+    "nullShare": {
+     "PROPN": 0.2,
+     "other": 0.15
+    },
+    "aucOwnPrototype": 0.5328,
+    "aucSameFamilyPrototype": 0.4636,
+    "aucOtherFamilyPrototype": 0.4939,
+    "family": "SVO-like#1",
+    "permQ95": 0.5797
+   }
+  },
+  "arb": {
+   "windows": 4,
+   "M": 128,
+   "propnTokensDeleted": 5.5,
+   "magnitudePropn": 0.0094,
+   "T1": {
+    "cosPropnVsRandom": 0.9605,
+    "nullQ05": 0.0538,
+    "nullMedian": 0.8039,
+    "informative": true,
+    "specific": false
+   },
+   "T2": {
+    "splitHalfPropn": 0.9574,
+    "vsNoun": 0.5899,
+    "vsVerb": 0.9921,
+    "vsAdj": 0.9523,
+    "distinct": false
+   },
+   "determinism": {
+    "same": true
+   },
+   "sham": {
+    "changed": 0
+   },
+   "imprintPropn": [
+    0.087,
+    0.652,
+    0.087,
+    0,
+    0.174
+   ],
+   "imprintRandom": [
+    0.246,
+    0.355,
+    0.194,
+    0,
+    0.206
+   ],
+   "imprintLabels": [
+    "end1",
+    "label",
+    "end2",
+    "entry",
+    "no-slot"
+   ],
+   "T5": {
+    "cosImprintPropnVsRandom": 0.8628,
+    "nullQ05": 0.2673,
+    "informative": true,
+    "specific": false
+   },
+   "collateralVsRandom": 0.9892,
+   "T6": {
+    "amplificationPropn": 3.5263,
+    "amplificationRandom": 5.0255,
+    "higher": false
+   },
+   "slotsPerPropnToken": 0.825,
+   "noSlotShare": 0.2167,
+   "T3": {
+    "tokens": 24,
+    "nullShare": {
+     "PROPN": 0.0833,
+     "other": 0.3333
+    },
+    "aucOwnPrototype": 0.7465,
+    "aucSameFamilyPrototype": 0.4167,
+    "aucOtherFamilyPrototype": 0.5,
+    "family": "SVO-like#0",
+    "permQ95": 0.7049
+   }
+  },
+  "heb": {
+   "windows": 4,
+   "M": 96,
+   "propnTokensDeleted": 108,
+   "magnitudePropn": 0.3111,
+   "T1": {
+    "cosPropnVsRandom": 0.9861,
+    "nullQ05": 0.9374,
+    "nullMedian": 0.983,
+    "informative": true,
+    "specific": false
+   },
+   "T2": {
+    "splitHalfPropn": 0.9926,
+    "vsNoun": 0.807,
+    "vsVerb": 0.8207,
+    "vsAdj": 0.9243,
+    "distinct": true
+   },
+   "determinism": {
+    "same": true
+   },
+   "sham": {
+    "changed": 0
+   },
+   "imprintPropn": [
+    0.273,
+    0.157,
+    0.273,
+    0.002,
+    0.295
+   ],
+   "imprintRandom": [
+    0.236,
+    0.294,
+    0.228,
+    0.003,
+    0.239
+   ],
+   "imprintLabels": [
+    "end1",
+    "label",
+    "end2",
+    "entry",
+    "no-slot"
+   ],
+   "T5": {
+    "cosImprintPropnVsRandom": 0.9507,
+    "nullQ05": 0.895,
+    "informative": true,
+    "specific": false
+   },
+   "collateralVsRandom": 0.9879,
+   "T6": {
+    "amplificationPropn": 3.088,
+    "amplificationRandom": 3.3961,
+    "higher": false
+   },
+   "slotsPerPropnToken": 0.769,
+   "noSlotShare": 0.346,
+   "T3": {
+    "tokens": 120,
+    "nullShare": {
+     "PROPN": 0.1833,
+     "other": 0.0333
+    },
+    "aucOwnPrototype": 0.5485,
+    "aucSameFamilyPrototype": 0.5819,
+    "aucOtherFamilyPrototype": 0.5886,
+    "family": "SVO-like#0",
+    "permQ95": 0.5725
+   }
+  },
+  "fas": {
+   "windows": 4,
+   "M": 128,
+   "propnTokensDeleted": 79,
+   "magnitudePropn": 0.15,
+   "T1": {
+    "cosPropnVsRandom": 0.9921,
+    "nullQ05": 0.8227,
+    "nullMedian": 0.9628,
+    "informative": true,
+    "specific": false
+   },
+   "T2": {
+    "splitHalfPropn": 0.9948,
+    "vsNoun": 0.716,
+    "vsVerb": 0.8302,
+    "vsAdj": 0.9646,
+    "distinct": true
+   },
+   "determinism": {
+    "same": true
+   },
+   "sham": {
+    "changed": 0
+   },
+   "imprintPropn": [
+    0.186,
+    0.258,
+    0.107,
+    0,
+    0.45
+   ],
+   "imprintRandom": [
+    0.162,
+    0.401,
+    0.166,
+    0.003,
+    0.269
+   ],
+   "imprintLabels": [
+    "end1",
+    "label",
+    "end2",
+    "entry",
+    "no-slot"
+   ],
+   "T5": {
+    "cosImprintPropnVsRandom": 0.9059,
+    "nullQ05": 0.8229,
+    "informative": true,
+    "specific": false
+   },
+   "collateralVsRandom": 0.987,
+   "T6": {
+    "amplificationPropn": 2.8057,
+    "amplificationRandom": 2.852,
+    "higher": false
+   },
+   "slotsPerPropnToken": 0.5508,
+   "noSlotShare": 0.4538,
+   "T3": {
+    "tokens": 120,
+    "nullShare": {
+     "PROPN": 0.05,
+     "other": 0.15
+    },
+    "aucOwnPrototype": 0.5679,
+    "aucSameFamilyPrototype": 0.5854,
+    "aucOtherFamilyPrototype": 0.539,
+    "family": "SOV-like#2",
+    "permQ95": 0.5743
+   }
+  },
+  "kor": {
+   "windows": 4,
+   "M": 128,
+   "propnTokensDeleted": 11.3,
+   "magnitudePropn": 0.0433,
+   "T1": {
+    "cosPropnVsRandom": 0.709,
+    "nullQ05": 0,
+    "nullMedian": 0.659,
+    "informative": true,
+    "specific": false
+   },
+   "T2": {
+    "splitHalfPropn": 0.7748,
+    "vsNoun": 0.8783,
+    "vsVerb": 0.8277,
+    "vsAdj": 0.8963,
+    "distinct": false
+   },
+   "determinism": {
+    "same": true
+   },
+   "sham": {
+    "changed": 0
+   },
+   "imprintPropn": [
+    0.085,
+    0.064,
+    0.085,
+    0,
+    0.766
+   ],
+   "imprintRandom": [
+    0.035,
+    0.243,
+    0.02,
+    0.002,
+    0.7
+   ],
+   "imprintLabels": [
+    "end1",
+    "label",
+    "end2",
+    "entry",
+    "no-slot"
+   ],
+   "T5": {
+    "cosImprintPropnVsRandom": 0.9635,
+    "nullQ05": 0.7036,
+    "informative": true,
+    "specific": false
+   },
+   "collateralVsRandom": 0.9133,
+   "T6": {
+    "amplificationPropn": 3,
+    "amplificationRandom": 1.3212,
+    "higher": true
+   },
+   "slotsPerPropnToken": 0.2216,
+   "noSlotShare": 0.821,
+   "T3": {
+    "tokens": 20,
+    "nullShare": {
+     "PROPN": 0,
+     "other": 0
+    },
+    "aucOwnPrototype": 0.455,
+    "aucSameFamilyPrototype": 0.4,
+    "aucOtherFamilyPrototype": 0.43,
+    "family": "SOV-like#2",
+    "permQ95": 0.705
+   }
+  },
+  "jpn": {
+   "windows": 4,
+   "M": 101,
+   "propnTokensDeleted": 96.8,
+   "magnitudePropn": 0.2184,
+   "T1": {
+    "cosPropnVsRandom": 0.8967,
+    "nullQ05": 0.8298,
+    "nullMedian": 0.9641,
+    "informative": true,
+    "specific": false
+   },
+   "T2": {
+    "splitHalfPropn": 0.9956,
+    "vsNoun": 0.8199,
+    "vsVerb": 0.8199,
+    "vsAdj": 0.9562,
+    "distinct": true
+   },
+   "determinism": {
+    "same": true
+   },
+   "sham": {
+    "changed": 0
+   },
+   "imprintPropn": [
+    0.165,
+    0.229,
+    0.127,
+    0.002,
+    0.476
+   ],
+   "imprintRandom": [
+    0.077,
+    0.435,
+    0.065,
+    0.002,
+    0.421
+   ],
+   "imprintLabels": [
+    "end1",
+    "label",
+    "end2",
+    "entry",
+    "no-slot"
+   ],
+   "T5": {
+    "cosImprintPropnVsRandom": 0.9215,
+    "nullQ05": 0.9556,
+    "informative": false,
+    "specific": false
+   },
+   "collateralVsRandom": 0.9672,
+   "T6": {
+    "amplificationPropn": 2.2381,
+    "amplificationRandom": 1.7897,
+    "higher": true
+   },
+   "slotsPerPropnToken": 0.544,
+   "noSlotShare": 0.4931,
+   "T3": {
+    "tokens": 120,
+    "nullShare": {
+     "PROPN": 0.0333,
+     "other": 0.0833
+    },
+    "aucOwnPrototype": 0.61,
+    "aucSameFamilyPrototype": 0.6367,
+    "aucOtherFamilyPrototype": 0.6814,
+    "family": "SOV-like#2",
+    "permQ95": 0.5951
+   }
+  },
+  "fra": {
+   "windows": 4,
+   "M": 128,
+   "propnTokensDeleted": 233.5,
+   "magnitudePropn": 0.2632,
+   "T1": {
+    "cosPropnVsRandom": 0.9814,
+    "nullQ05": 0.9677,
+    "nullMedian": 0.9912,
+    "informative": false,
+    "specific": false
+   },
+   "T2": {
+    "splitHalfPropn": 0.985,
+    "vsNoun": 0.9259,
+    "vsVerb": 0.9804,
+    "vsAdj": 0.9889,
+    "distinct": false
+   },
+   "determinism": {
+    "same": true
+   },
+   "sham": {
+    "changed": 0
+   },
+   "imprintPropn": [
+    0.093,
+    0.281,
+    0.121,
+    0,
+    0.506
+   ],
+   "imprintRandom": [
+    0.06,
+    0.47,
+    0.066,
+    0,
+    0.403
+   ],
+   "imprintLabels": [
+    "end1",
+    "label",
+    "end2",
+    "entry",
+    "no-slot"
+   ],
+   "T5": {
+    "cosImprintPropnVsRandom": 0.9342,
+    "nullQ05": 0.983,
+    "informative": false,
+    "specific": false
+   },
+   "collateralVsRandom": 0.9962,
+   "T6": {
+    "amplificationPropn": 2.3087,
+    "amplificationRandom": 2.5372,
+    "higher": false
+   },
+   "slotsPerPropnToken": 0.477,
+   "noSlotShare": 0.4901,
+   "T3": {
+    "tokens": 114,
+    "nullShare": {
+     "PROPN": 0.0526,
+     "other": 0.0877
+    },
+    "aucOwnPrototype": 0.5854,
+    "aucSameFamilyPrototype": 0.5674,
+    "aucOtherFamilyPrototype": 0.4772,
+    "family": "SVO-like#1",
+    "permQ95": 0.588
+   }
+  },
+  "deu": {
+   "windows": 4,
+   "M": 128,
+   "propnTokensDeleted": 87.8,
+   "magnitudePropn": 0.1277,
+   "T1": {
+    "cosPropnVsRandom": 0.9964,
+    "nullQ05": 0.8444,
+    "nullMedian": 0.9686,
+    "informative": true,
+    "specific": false
+   },
+   "T2": {
+    "splitHalfPropn": 0.972,
+    "vsNoun": 0.9575,
+    "vsVerb": 0.9827,
+    "vsAdj": 0.9946,
+    "distinct": false
+   },
+   "determinism": {
+    "same": true
+   },
+   "sham": {
+    "changed": 0
+   },
+   "imprintPropn": [
+    0.063,
+    0.402,
+    0.035,
+    0,
+    0.5
+   ],
+   "imprintRandom": [
+    0.059,
+    0.547,
+    0.045,
+    0,
+    0.349
+   ],
+   "imprintLabels": [
+    "end1",
+    "label",
+    "end2",
+    "entry",
+    "no-slot"
+   ],
+   "T5": {
+    "cosImprintPropnVsRandom": 0.9479,
+    "nullQ05": 0.9361,
+    "informative": true,
+    "specific": false
+   },
+   "collateralVsRandom": 0.9943,
+   "T6": {
+    "amplificationPropn": 2.8038,
+    "amplificationRandom": 3.1963,
+    "higher": false
+   },
+   "slotsPerPropnToken": 0.4427,
+   "noSlotShare": 0.475,
+   "T3": {
+    "tokens": 120,
+    "nullShare": {
+     "PROPN": 0.3167,
+     "other": 0.1833
+    },
+    "aucOwnPrototype": 0.5836,
+    "aucSameFamilyPrototype": 0.5647,
+    "aucOtherFamilyPrototype": 0.5647,
+    "family": "SVO-like#0",
+    "permQ95": 0.579
+   }
+  },
+  "ita": {
+   "windows": 4,
+   "M": 112,
+   "propnTokensDeleted": 122,
+   "magnitudePropn": 0.2168,
+   "T1": {
+    "cosPropnVsRandom": 0.9799,
+    "nullQ05": 0.7162,
+    "nullMedian": 0.9361,
+    "informative": true,
+    "specific": false
+   },
+   "T2": {
+    "splitHalfPropn": 0.8632,
+    "vsNoun": 0.9277,
+    "vsVerb": 0.9045,
+    "vsAdj": 0.9377,
+    "distinct": false
+   },
+   "determinism": {
+    "same": true
+   },
+   "sham": {
+    "changed": 0
+   },
+   "imprintPropn": [
+    0.095,
+    0.182,
+    0.11,
+    0,
+    0.614
+   ],
+   "imprintRandom": [
+    0.088,
+    0.314,
+    0.095,
+    0.002,
+    0.502
+   ],
+   "imprintLabels": [
+    "end1",
+    "label",
+    "end2",
+    "entry",
+    "no-slot"
+   ],
+   "T5": {
+    "cosImprintPropnVsRandom": 0.9653,
+    "nullQ05": 0.8628,
+    "informative": true,
+    "specific": false
+   },
+   "collateralVsRandom": 0.9852,
+   "T6": {
+    "amplificationPropn": 2.8342,
+    "amplificationRandom": 2.9017,
+    "higher": false
+   },
+   "slotsPerPropnToken": 0.3929,
+   "noSlotShare": 0.5859,
+   "T3": {
+    "tokens": 118,
+    "nullShare": {
+     "PROPN": 0.1695,
+     "other": 0.0678
+    },
+    "aucOwnPrototype": 0.397,
+    "aucSameFamilyPrototype": 0.4352,
+    "aucOtherFamilyPrototype": 0.4441,
+    "family": "SVO-like#0",
+    "permQ95": 0.5938
+   }
+  },
+  "por": {
+   "windows": 4,
+   "M": 128,
+   "propnTokensDeleted": 335,
+   "magnitudePropn": 0.3846,
+   "T1": {
+    "cosPropnVsRandom": 0.9878,
+    "nullQ05": 0.9703,
+    "nullMedian": 0.991,
+    "informative": false,
+    "specific": false
+   },
+   "T2": {
+    "splitHalfPropn": 0.993,
+    "vsNoun": 0.9742,
+    "vsVerb": 0.9507,
+    "vsAdj": 0.9653,
+    "distinct": true
+   },
+   "determinism": {
+    "same": true
+   },
+   "sham": {
+    "changed": 0
+   },
+   "imprintPropn": [
+    0.137,
+    0.233,
+    0.162,
+    0,
+    0.468
+   ],
+   "imprintRandom": [
+    0.12,
+    0.329,
+    0.126,
+    0.001,
+    0.423
+   ],
+   "imprintLabels": [
+    "end1",
+    "label",
+    "end2",
+    "entry",
+    "no-slot"
+   ],
+   "T5": {
+    "cosImprintPropnVsRandom": 0.9799,
+    "nullQ05": 0.9879,
+    "informative": false,
+    "specific": false
+   },
+   "collateralVsRandom": 0.9947,
+   "T6": {
+    "amplificationPropn": 1.8437,
+    "amplificationRandom": 2.6303,
+    "higher": false
+   },
+   "slotsPerPropnToken": 0.5255,
+   "noSlotShare": 0.4685,
+   "T3": {
+    "tokens": 120,
+    "nullShare": {
+     "PROPN": 0.1167,
+     "other": 0.1
+    },
+    "aucOwnPrototype": 0.4696,
+    "aucSameFamilyPrototype": 0.4932,
+    "aucOtherFamilyPrototype": 0.4979,
+    "family": "SVO-like#1",
+    "permQ95": 0.5832
+   }
+  },
+  "nld": {
+   "windows": 4,
+   "M": 128,
+   "propnTokensDeleted": 198,
+   "magnitudePropn": 0.3384,
+   "T1": {
+    "cosPropnVsRandom": 0.9857,
+    "nullQ05": 0.9551,
+    "nullMedian": 0.9841,
+    "informative": true,
+    "specific": false
+   },
+   "T2": {
+    "splitHalfPropn": 0.9924,
+    "vsNoun": 0.9683,
+    "vsVerb": 0.9517,
+    "vsAdj": 0.9397,
+    "distinct": true
+   },
+   "determinism": {
+    "same": true
+   },
+   "sham": {
+    "changed": 0
+   },
+   "imprintPropn": [
+    0.2,
+    0.196,
+    0.182,
+    0.002,
+    0.419
+   ],
+   "imprintRandom": [
+    0.147,
+    0.351,
+    0.157,
+    0.002,
+    0.342
+   ],
+   "imprintLabels": [
+    "end1",
+    "label",
+    "end2",
+    "entry",
+    "no-slot"
+   ],
+   "T5": {
+    "cosImprintPropnVsRandom": 0.9418,
+    "nullQ05": 0.9654,
+    "informative": false,
+    "specific": false
+   },
+   "collateralVsRandom": 0.9708,
+   "T6": {
+    "amplificationPropn": 1.9226,
+    "amplificationRandom": 2.1794,
+    "higher": false
+   },
+   "slotsPerPropnToken": 0.5724,
+   "noSlotShare": 0.438,
+   "T3": {
+    "tokens": 104,
+    "nullShare": {
+     "PROPN": 0.2308,
+     "other": 0.2692
+    },
+    "aucOwnPrototype": 0.5313,
+    "aucSameFamilyPrototype": 0.4647,
+    "aucOtherFamilyPrototype": 0.4614,
+    "family": "SOV-like#2",
+    "permQ95": 0.581
+   }
+  },
+  "pol": {
+   "windows": 4,
+   "M": 128,
+   "propnTokensDeleted": 66.5,
+   "magnitudePropn": 0.0802,
+   "T1": {
+    "cosPropnVsRandom": 0.9091,
+    "nullQ05": 0.5253,
+    "nullMedian": 0.8604,
+    "informative": true,
+    "specific": false
+   },
+   "T2": {
+    "splitHalfPropn": 0.8589,
+    "vsNoun": 0.7862,
+    "vsVerb": 0.9457,
+    "vsAdj": 0.9818,
+    "distinct": false
+   },
+   "determinism": {
+    "same": true
+   },
+   "sham": {
+    "changed": 0
+   },
+   "imprintPropn": [
+    0.023,
+    0.125,
+    0.004,
+    0,
+    0.848
+   ],
+   "imprintRandom": [
+    0.025,
+    0.253,
+    0.026,
+    0.001,
+    0.696
+   ],
+   "imprintLabels": [
+    "end1",
+    "label",
+    "end2",
+    "entry",
+    "no-slot"
+   ],
+   "T5": {
+    "cosImprintPropnVsRandom": 0.9792,
+    "nullQ05": 0.8989,
+    "informative": true,
+    "specific": false
+   },
+   "collateralVsRandom": 0.9311,
+   "T6": {
+    "amplificationPropn": 3.7436,
+    "amplificationRandom": 2.3668,
+    "higher": true
+   },
+   "slotsPerPropnToken": 0.1385,
+   "noSlotShare": 0.8293,
+   "T3": {
+    "tokens": 120,
+    "nullShare": {
+     "PROPN": 0.2167,
+     "other": 0.1833
+    },
+    "aucOwnPrototype": 0.5764,
+    "aucSameFamilyPrototype": 0.5182,
+    "aucOtherFamilyPrototype": 0.521,
+    "family": "SVO-like#0",
+    "permQ95": 0.5829
+   }
+  },
+  "ukr": {
+   "windows": 4,
+   "M": 128,
+   "propnTokensDeleted": 90.3,
+   "magnitudePropn": 0.1397,
+   "T1": {
+    "cosPropnVsRandom": 0.991,
+    "nullQ05": 0.7525,
+    "nullMedian": 0.9384,
+    "informative": true,
+    "specific": false
+   },
+   "T2": {
+    "splitHalfPropn": 0.9536,
+    "vsNoun": 0.9287,
+    "vsVerb": 0.9767,
+    "vsAdj": 0.9602,
+    "distinct": false
+   },
+   "determinism": {
+    "same": true
+   },
+   "sham": {
+    "changed": 0
+   },
+   "imprintPropn": [
+    0.116,
+    0.119,
+    0.097,
+    0,
+    0.669
+   ],
+   "imprintRandom": [
+    0.084,
+    0.252,
+    0.076,
+    0.003,
+    0.585
+   ],
+   "imprintLabels": [
+    "end1",
+    "label",
+    "end2",
+    "entry",
+    "no-slot"
+   ],
+   "T5": {
+    "cosImprintPropnVsRandom": 0.9734,
+    "nullQ05": 0.9277,
+    "informative": true,
+    "specific": false
+   },
+   "collateralVsRandom": 0.9801,
+   "T6": {
+    "amplificationPropn": 2.1417,
+    "amplificationRandom": 2.8598,
+    "higher": false
+   },
+   "slotsPerPropnToken": 0.3489,
+   "noSlotShare": 0.6587,
+   "T3": {
+    "tokens": 106,
+    "nullShare": {
+     "PROPN": 0.283,
+     "other": 0.2264
+    },
+    "aucOwnPrototype": 0.5141,
+    "aucSameFamilyPrototype": 0.4989,
+    "aucOtherFamilyPrototype": 0.4936,
+    "family": "SVO-like#0",
+    "permQ95": 0.5943
+   }
+  },
+  "hin": {
+   "windows": 4,
+   "M": 128,
+   "propnTokensDeleted": 328.5,
+   "magnitudePropn": 0.3797,
+   "T1": {
+    "cosPropnVsRandom": 0.9943,
+    "nullQ05": 0.8785,
+    "nullMedian": 0.9716,
+    "informative": true,
+    "specific": false
+   },
+   "T2": {
+    "splitHalfPropn": 0.9548,
+    "vsNoun": 0.9509,
+    "vsVerb": 0.9903,
+    "vsAdj": 0.5957,
+    "distinct": false
+   },
+   "determinism": {
+    "same": true
+   },
+   "sham": {
+    "changed": 0
+   },
+   "imprintPropn": [
+    0.042,
+    0.066,
+    0.029,
+    0,
+    0.863
+   ],
+   "imprintRandom": [
+    0.042,
+    0.093,
+    0.047,
+    0.001,
+    0.817
+   ],
+   "imprintLabels": [
+    "end1",
+    "label",
+    "end2",
+    "entry",
+    "no-slot"
+   ],
+   "T5": {
+    "cosImprintPropnVsRandom": 0.999,
+    "nullQ05": 0.9969,
+    "informative": false,
+    "specific": false
+   },
+   "collateralVsRandom": 0.9494,
+   "T6": {
+    "amplificationPropn": 1.1271,
+    "amplificationRandom": 1.2419,
+    "higher": false
+   },
+   "slotsPerPropnToken": 0.141,
+   "noSlotShare": 0.8647,
+   "T3": {
+    "tokens": 120,
+    "nullShare": {
+     "PROPN": 0.7833,
+     "other": 0.8333
+    },
+    "aucOwnPrototype": 0.5204,
+    "aucSameFamilyPrototype": 0.4732,
+    "aucOtherFamilyPrototype": 0.4671,
+    "family": "SOV-like#2",
+    "permQ95": 0.5549
+   }
+  },
+  "vie": {
+   "windows": 4,
+   "M": 128,
+   "propnTokensDeleted": 122.3,
+   "magnitudePropn": 0.3039,
+   "T1": {
+    "cosPropnVsRandom": 0.9931,
+    "nullQ05": 0.9879,
+    "nullMedian": 0.9976,
+    "informative": false,
+    "specific": false
+   },
+   "T2": {
+    "splitHalfPropn": 0.9991,
+    "vsNoun": 0.8178,
+    "vsVerb": 0.9624,
+    "vsAdj": 0.9993,
+    "distinct": false
+   },
+   "determinism": {
+    "same": true
+   },
+   "sham": {
+    "changed": 0
+   },
+   "imprintPropn": [
+    0.294,
+    0.321,
+    0.275,
+    0.001,
+    0.109
+   ],
+   "imprintRandom": [
+    0.261,
+    0.345,
+    0.266,
+    0.001,
+    0.127
+   ],
+   "imprintLabels": [
+    "end1",
+    "label",
+    "end2",
+    "entry",
+    "no-slot"
+   ],
+   "T5": {
+    "cosImprintPropnVsRandom": 0.9962,
+    "nullQ05": 0.9758,
+    "informative": false,
+    "specific": false
+   },
+   "collateralVsRandom": 0.9991,
+   "T6": {
+    "amplificationPropn": 2.9176,
+    "amplificationRandom": 4.2479,
+    "higher": false
+   },
+   "slotsPerPropnToken": 1.8742,
+   "noSlotShare": 0.2538,
+   "T3": {
+    "tokens": 120,
+    "nullShare": {
+     "PROPN": 0.1833,
+     "other": 0.2167
+    },
+    "aucOwnPrototype": 0.5435,
+    "aucSameFamilyPrototype": 0.5006,
+    "aucOtherFamilyPrototype": 0.5419,
+    "family": "SVO-like#1",
+    "permQ95": 0.5857
+   }
+  },
+  "ind": {
+   "windows": 4,
+   "M": 111,
+   "propnTokensDeleted": 460,
+   "magnitudePropn": 0.5388,
+   "T1": {
+    "cosPropnVsRandom": 0.9906,
+    "nullQ05": 0.9691,
+    "nullMedian": 0.9936,
+    "informative": false,
+    "specific": false
+   },
+   "T2": {
+    "splitHalfPropn": 0.999,
+    "vsNoun": 0.9839,
+    "vsVerb": 0.963,
+    "vsAdj": 0.9692,
+    "distinct": true
+   },
+   "determinism": {
+    "same": true
+   },
+   "sham": {
+    "changed": 0
+   },
+   "imprintPropn": [
+    0.127,
+    0.303,
+    0.143,
+    0,
+    0.427
+   ],
+   "imprintRandom": [
+    0.128,
+    0.443,
+    0.119,
+    0.002,
+    0.307
+   ],
+   "imprintLabels": [
+    "end1",
+    "label",
+    "end2",
+    "entry",
+    "no-slot"
+   ],
+   "T5": {
+    "cosImprintPropnVsRandom": 0.9458,
+    "nullQ05": 0.9922,
+    "informative": false,
+    "specific": false
+   },
+   "collateralVsRandom": 0.9812,
+   "T6": {
+    "amplificationPropn": 2.0646,
+    "amplificationRandom": 2.0943,
+    "higher": false
+   },
+   "slotsPerPropnToken": 0.5226,
+   "noSlotShare": 0.3891,
+   "T3": {
+    "tokens": 120,
+    "nullShare": {
+     "PROPN": 0.3167,
+     "other": 0.2667
+    },
+    "aucOwnPrototype": 0.63,
+    "aucSameFamilyPrototype": 0.5385,
+    "aucOtherFamilyPrototype": 0.4496,
+    "family": "SVO-like#1",
+    "permQ95": 0.5826
+   }
+  },
+  "swe": {
+   "windows": 4,
+   "M": 100,
+   "propnTokensDeleted": 6.8,
+   "magnitudePropn": 0.0145,
+   "T1": {
+    "cosPropnVsRandom": 0.9959,
+    "nullQ05": 0.0971,
+    "nullMedian": 0.7024,
+    "informative": true,
+    "specific": false
+   },
+   "T2": {
+    "splitHalfPropn": 0.0523,
+    "vsNoun": 0.8091,
+    "vsVerb": 0.9291,
+    "vsAdj": 0.8966,
+    "distinct": false
+   },
+   "determinism": {
+    "same": true
+   },
+   "sham": {
+    "changed": 0
+   },
+   "imprintPropn": [
+    0.143,
+    0.214,
+    0.107,
+    0,
+    0.536
+   ],
+   "imprintRandom": [
+    0.073,
+    0.497,
+    0.087,
+    0,
+    0.343
+   ],
+   "imprintLabels": [
+    "end1",
+    "label",
+    "end2",
+    "entry",
+    "no-slot"
+   ],
+   "T5": {
+    "cosImprintPropnVsRandom": 0.8355,
+    "nullQ05": 0.4951,
+    "informative": true,
+    "specific": false
+   },
+   "collateralVsRandom": 0.9811,
+   "T6": {
+    "amplificationPropn": 3.2308,
+    "amplificationRandom": 4.7606,
+    "higher": false
+   },
+   "slotsPerPropnToken": 0.4417,
+   "noSlotShare": 0.5278
+  },
+  "urd": {
+   "windows": 4,
+   "M": 110,
+   "propnTokensDeleted": 301.3,
+   "magnitudePropn": 0.4173,
+   "T1": {
+    "cosPropnVsRandom": 0.9671,
+    "nullQ05": 0.9624,
+    "nullMedian": 0.9942,
+    "informative": false,
+    "specific": false
+   },
+   "T2": {
+    "splitHalfPropn": 0.9961,
+    "vsNoun": 0.8469,
+    "vsVerb": 0.988,
+    "vsAdj": 0.9783,
+    "distinct": true
+   },
+   "determinism": {
+    "same": true
+   },
+   "sham": {
+    "changed": 0
+   },
+   "imprintPropn": [
+    0.313,
+    0.244,
+    0.179,
+    0.003,
+    0.26
+   ],
+   "imprintRandom": [
+    0.236,
+    0.291,
+    0.264,
+    0.007,
+    0.201
+   ],
+   "imprintLabels": [
+    "end1",
+    "label",
+    "end2",
+    "entry",
+    "no-slot"
+   ],
+   "T5": {
+    "cosImprintPropnVsRandom": 0.9627,
+    "nullQ05": 0.9586,
+    "informative": true,
+    "specific": false
+   },
+   "collateralVsRandom": 0.974,
+   "T6": {
+    "amplificationPropn": 2.963,
+    "amplificationRandom": 2.7946,
+    "higher": true
+   },
+   "slotsPerPropnToken": 0.7173,
+   "noSlotShare": 0.2531,
+   "T3": {
+    "tokens": 120,
+    "nullShare": {
+     "PROPN": 0.2667,
+     "other": 0.1667
+    },
+    "aucOwnPrototype": 0.5346,
+    "aucSameFamilyPrototype": 0.495,
+    "aucOtherFamilyPrototype": 0.4561,
+    "family": "SOV-like#2",
+    "permQ95": 0.5832
+   }
+  },
+  "tur": {
+   "windows": 4,
+   "M": 128,
+   "propnTokensDeleted": 28,
+   "magnitudePropn": 0.1181,
+   "T1": {
+    "cosPropnVsRandom": 0.9756,
+    "nullQ05": 0.2302,
+    "nullMedian": 0.7684,
+    "informative": true,
+    "specific": false
+   },
+   "T2": {
+    "splitHalfPropn": 0.9017,
+    "vsNoun": 0.8898,
+    "vsVerb": 0.8176,
+    "vsAdj": 0.8678,
+    "distinct": true
+   },
+   "determinism": {
+    "same": true
+   },
+   "sham": {
+    "changed": 0
+   },
+   "imprintPropn": [
+    0.184,
+    0.192,
+    0.176,
+    0.008,
+    0.44
+   ],
+   "imprintRandom": [
+    0.1,
+    0.22,
+    0.115,
+    0.013,
+    0.552
+   ],
+   "imprintLabels": [
+    "end1",
+    "label",
+    "end2",
+    "entry",
+    "no-slot"
+   ],
+   "T5": {
+    "cosImprintPropnVsRandom": 0.9713,
+    "nullQ05": 0.7704,
+    "informative": true,
+    "specific": false
+   },
+   "collateralVsRandom": 0.9633,
+   "T6": {
+    "amplificationPropn": 1.8286,
+    "amplificationRandom": 2.9655,
+    "higher": false
+   },
+   "slotsPerPropnToken": 0.4206,
+   "noSlotShare": 0.5902,
+   "T3": {
+    "tokens": 120,
+    "nullShare": {
+     "PROPN": 0.2167,
+     "other": 0.1667
+    },
+    "aucOwnPrototype": 0.689,
+    "aucSameFamilyPrototype": 0.655,
+    "aucOtherFamilyPrototype": 0.6914,
+    "family": "SOV-like#2",
+    "permQ95": 0.5833
+   }
+  },
+  "ell": {
+   "windows": 4,
+   "M": 80,
+   "propnTokensDeleted": 82.5,
+   "magnitudePropn": 0.1788,
+   "T1": {
+    "cosPropnVsRandom": 0.9891,
+    "nullQ05": 0.8255,
+    "nullMedian": 0.98,
+    "informative": true,
+    "specific": false
+   },
+   "T2": {
+    "splitHalfPropn": 0.9954,
+    "vsNoun": 0.9111,
+    "vsVerb": 0.9746,
+    "vsAdj": 0.9838,
+    "distinct": true
+   },
+   "determinism": {
+    "same": true
+   },
+   "sham": {
+    "changed": 0
+   },
+   "imprintPropn": [
+    0.193,
+    0.308,
+    0.118,
+    0,
+    0.381
+   ],
+   "imprintRandom": [
+    0.117,
+    0.445,
+    0.139,
+    0.002,
+    0.298
+   ],
+   "imprintLabels": [
+    "end1",
+    "label",
+    "end2",
+    "entry",
+    "no-slot"
+   ],
+   "T5": {
+    "cosImprintPropnVsRandom": 0.9489,
+    "nullQ05": 0.9186,
+    "informative": true,
+    "specific": false
+   },
+   "collateralVsRandom": 0.9944,
+   "T6": {
+    "amplificationPropn": 2.961,
+    "amplificationRandom": 3.9189,
+    "higher": false
+   },
+   "slotsPerPropnToken": 0.6364,
+   "noSlotShare": 0.3765,
+   "T3": {
+    "tokens": 120,
+    "nullShare": {
+     "PROPN": 0.2667,
+     "other": 0.1833
+    },
+    "aucOwnPrototype": 0.5926,
+    "aucSameFamilyPrototype": 0.4308,
+    "aucOtherFamilyPrototype": 0.4939,
+    "family": "SVO-like#0",
+    "permQ95": 0.5825
+   }
+  },
+  "fin": {
+   "windows": 4,
+   "M": 128,
+   "propnTokensDeleted": 93.5,
+   "magnitudePropn": 0.2016,
+   "T1": {
+    "cosPropnVsRandom": 0.9504,
+    "nullQ05": 0.5913,
+    "nullMedian": 0.9346,
+    "informative": true,
+    "specific": false
+   },
+   "T2": {
+    "splitHalfPropn": 0.9513,
+    "vsNoun": 0.8092,
+    "vsVerb": 0.8839,
+    "vsAdj": 0.8859,
+    "distinct": true
+   },
+   "determinism": {
+    "same": true
+   },
+   "sham": {
+    "changed": 0
+   },
+   "imprintPropn": [
+    0.169,
+    0.101,
+    0.145,
+    0.019,
+    0.566
+   ],
+   "imprintRandom": [
+    0.124,
+    0.229,
+    0.123,
+    0.008,
+    0.516
+   ],
+   "imprintLabels": [
+    "end1",
+    "label",
+    "end2",
+    "entry",
+    "no-slot"
+   ],
+   "T5": {
+    "cosImprintPropnVsRandom": 0.9715,
+    "nullQ05": 0.823,
+    "informative": true,
+    "specific": false
+   },
+   "collateralVsRandom": 0.9263,
+   "T6": {
+    "amplificationPropn": 2.4088,
+    "amplificationRandom": 2.7232,
+    "higher": false
+   },
+   "slotsPerPropnToken": 0.3591,
+   "noSlotShare": 0.6169,
+   "T3": {
+    "tokens": 120,
+    "nullShare": {
+     "PROPN": 0.2667,
+     "other": 0.2833
+    },
+    "aucOwnPrototype": 0.5117,
+    "aucSameFamilyPrototype": 0.5539,
+    "aucOtherFamilyPrototype": 0.5761,
+    "family": "SVO-like#0",
+    "permQ95": 0.5853
+   }
+  }
+ },
+ "families": {
+  "centroids": [
+   {
+    "cluster": 0,
+    "name": "SVO-like",
+    "subjectBefore": 0.74,
+    "objectBefore": 0.19
+   },
+   {
+    "cluster": 1,
+    "name": "SVO-like",
+    "subjectBefore": 0.96,
+    "objectBefore": 0.05
+   },
+   {
+    "cluster": 2,
+    "name": "SOV-like",
+    "subjectBefore": 0.96,
+    "objectBefore": 0.88
+   }
+  ],
+  "membership": {
+   "eng": "SVO-like#1",
+   "spa": "SVO-like#0",
+   "rus": "SVO-like#0",
+   "cmn": "SVO-like#1",
+   "cmn-hans": "SVO-like#1",
+   "arb": "SVO-like#0",
+   "heb": "SVO-like#0",
+   "fas": "SOV-like#2",
+   "kor": "SOV-like#2",
+   "jpn": "SOV-like#2",
+   "fra": "SVO-like#1",
+   "deu": "SVO-like#0",
+   "ita": "SVO-like#0",
+   "por": "SVO-like#1",
+   "nld": "SOV-like#2",
+   "pol": "SVO-like#0",
+   "ukr": "SVO-like#0",
+   "hin": "SOV-like#2",
+   "vie": "SVO-like#1",
+   "ind": "SVO-like#1",
+   "swe": "SVO-like#1",
+   "urd": "SOV-like#2",
+   "tur": "SOV-like#2",
+   "ell": "SVO-like#0",
+   "fin": "SVO-like#0"
+  },
+  "points": {
+   "eng": [
+    0.96,
+    0.03
+   ],
+   "spa": [
+    0.83,
+    0.14
+   ],
+   "rus": [
+    0.79,
+    0.14
+   ],
+   "cmn": [
+    1,
+    0
+   ],
+   "cmn-hans": [
+    1,
+    0
+   ],
+   "arb": [
+    0.46,
+    0
+   ],
+   "heb": [
+    0.71,
+    0.03
+   ],
+   "fas": [
+    1,
+    1
+   ],
+   "kor": [
+    0.98,
+    0.96
+   ],
+   "jpn": [
+    1,
+    1
+   ],
+   "fra": [
+    0.97,
+    0.19
+   ],
+   "deu": [
+    0.78,
+    0.46
+   ],
+   "ita": [
+    0.75,
+    0.16
+   ],
+   "por": [
+    0.91,
+    0.08
+   ],
+   "nld": [
+    0.79,
+    0.64
+   ],
+   "pol": [
+    0.74,
+    0.16
+   ],
+   "ukr": [
+    0.78,
+    0.28
+   ],
+   "hin": [
+    0.99,
+    0.81
+   ],
+   "vie": [
+    1,
+    0.01
+   ],
+   "ind": [
+    0.98,
+    0.04
+   ],
+   "swe": [
+    0.83,
+    0.06
+   ],
+   "urd": [
+    0.99,
+    0.81
+   ],
+   "tur": [
+    0.96,
+    0.97
+   ],
+   "ell": [
+    0.73,
+    0.19
+   ],
+   "fin": [
+    0.84,
+    0.3
+   ]
+  }
+ },
+ "T4a": {
+  "meanSameMinusDifferent": 0.0098,
+  "permutationP": 0.1612,
+  "pairs": 300,
+  "languages": 25,
+  "meanSame": 0.904,
+  "meanDifferent": 0.8942
+ },
+ "T4c": {
+  "imprint": {
+   "languages": 25,
+   "meanSameMinusDifferent": -0.0166,
+   "permutationP": 0.9
+  },
+  "collateral": {
+   "languages": 25,
+   "meanSameMinusDifferent": 0.0051,
+   "permutationP": 0.2122
+  },
+  "totalShadow": {
+   "meanSameMinusDifferent": 0.0098,
+   "permutationP": 0.1612
+  }
+ },
+ "T5": {
+  "informative": 15,
+  "specific": 2
+ },
+ "T6": {
+  "languages": 25,
+  "propnHigher": 4,
+  "meanAmplificationPropn": 2.4186,
+  "meanAmplificationRandom": 2.8006
+ },
+ "T4b": {
+  "languages": 24,
+  "meanAucSame": 0.5119,
+  "meanAucOther": 0.5162,
+  "meanDiff": -0.0043,
+  "sameBeatsOther": 8
+ },
+ "T3": {
+  "languages": 24,
+  "meanAuc": 0.5449,
+  "above060": 4,
+  "aboveOwnPermQ95": 6
+ },
+ "T1": {
+  "informative": 20,
+  "specific": 1
+ },
+ "T2": {
+  "languages": 25,
+  "distinct": 12
+ },
+ "verdict": {
+  "shapeExists": false,
+  "familySpecific": false,
+  "determinismAll": true,
+  "shamAllNull": true
+ },
+ "headerSha256": "fbf611505faace7bb995fffb9b64282c2c1b82456917de966cf574882fe22b74"
+}

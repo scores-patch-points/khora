@@ -1,0 +1,157 @@
+{
+ "wave": 1,
+ "headerSha256": "3ca5319938d8eb20036ceaa69a3f492b7c1dc5d5ca5d39c773f31e7fa300ebaf",
+ "perCorpus": {
+  "ud-deu-A": {
+   "bodies": 71,
+   "medianSamples": 7,
+   "phiVsLogN": 0.055,
+   "m_g1_energy": {
+    "rho": 0.1926,
+    "raw": 0.2,
+    "n": 71
+   },
+   "m_g2_curvature": {
+    "gap": "too_few"
+   },
+   "g1VsLogN": -0.2874
+  },
+  "ud-eng-A": {
+   "bodies": 80,
+   "medianSamples": 8,
+   "phiVsLogN": -0.1391,
+   "m_g1_energy": {
+    "rho": 0.0405,
+    "raw": 0.0077,
+    "n": 80
+   },
+   "m_g2_curvature": {
+    "gap": "too_few"
+   },
+   "g1VsLogN": -0.2256
+  },
+  "ud-fas-A": {
+   "bodies": 64,
+   "medianSamples": 5,
+   "phiVsLogN": -0.2508,
+   "m_g1_energy": {
+    "rho": 0.3487,
+    "raw": 0.3473,
+    "n": 64
+   },
+   "m_g2_curvature": {
+    "gap": "too_few"
+   },
+   "g1VsLogN": 0.04
+  },
+  "ud-fra-A": {
+   "bodies": 62,
+   "medianSamples": 6,
+   "phiVsLogN": 0.157,
+   "m_g1_energy": {
+    "rho": 0.0754,
+    "raw": 0.125,
+    "n": 62
+   },
+   "m_g2_curvature": {
+    "gap": "too_few"
+   },
+   "g1VsLogN": -0.3519
+  },
+  "ud-hin-A": {
+   "bodies": 103,
+   "medianSamples": 5,
+   "phiVsLogN": 0.2042,
+   "m_g1_energy": {
+    "rho": 0.0118,
+    "raw": 0.0065,
+    "n": 103
+   },
+   "m_g2_curvature": {
+    "gap": "too_few"
+   },
+   "g1VsLogN": 0.0251
+  },
+  "ud-jpn-A": {
+   "bodies": 37,
+   "medianSamples": 18,
+   "phiVsLogN": -0.0021,
+   "m_g1_energy": {
+    "rho": -0.1051,
+    "raw": -0.105,
+    "n": 37
+   },
+   "m_g2_curvature": {
+    "gap": "too_few"
+   },
+   "g1VsLogN": -0.0453
+  },
+  "ud-spa-A": {
+   "bodies": 76,
+   "medianSamples": 5,
+   "phiVsLogN": -0.0723,
+   "m_g1_energy": {
+    "rho": -0.0333,
+    "raw": -0.0621,
+    "n": 76
+   },
+   "m_g2_curvature": {
+    "gap": "too_few"
+   },
+   "g1VsLogN": -0.4479
+  },
+  "ud-tur-A": {
+   "gap": "too_few_bodies",
+   "bodies": 7
+  },
+  "wp": {
+   "bodies": 79,
+   "medianSamples": 5,
+   "phiVsLogN": 0.0635,
+   "m_g1_energy": {
+    "rho": 0.3145,
+    "raw": 0.3154,
+    "n": 79
+   },
+   "m_g2_curvature": {
+    "gap": "too_few"
+   },
+   "g1VsLogN": -0.3641
+  }
+ },
+ "pooled": {
+  "m_g1_energy": {
+   "n": 572,
+   "partialRho": 0.114,
+   "ci": {
+    "lo": 0.0287,
+    "hi": 0.2042
+   },
+   "rawRho": 0.117,
+   "slopeZ": 0.108,
+   "spread": 0.9942,
+   "derangedQ95": 0.0638,
+   "derangedMean": -0.0039,
+   "positiveInCorpora": 6,
+   "corpora": 8,
+   "survives": false,
+   "falsified": false
+  },
+  "m_g2_curvature": {
+   "gap": "too_few",
+   "n": 0
+  }
+ },
+ "reliability": {
+  "pairs": 456,
+  "spearman": 0.5982,
+  "pass": true
+ },
+ "verdict": {
+  "underpowered": false,
+  "equivalenceSurvives": false,
+  "falsified": false,
+  "PQ1_withinPm010": false,
+  "PQ2_slopeBelow015": false
+ }
+}

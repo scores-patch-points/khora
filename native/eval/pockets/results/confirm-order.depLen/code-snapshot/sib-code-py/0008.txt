@@ -1,0 +1,410 @@
+#!/usr/bin/env python3
+"""
+CaseLink account pool — aliases, log redaction, cooldowns, exclusive leases.
+
+Three rules this module exists to enforce:
+
+1. USERNAMES NEVER REACH THE LOG. live_stream.py republishes the caselink log
+   verbatim on a public, CORS-* SSE endpoint, so every account name written to
+   the log was being broadcast to anyone who opened the feed. Accounts are
+   addressed by ALIAS everywhere, and a logging.Filter scrubs any username that
+   still slips through (e.g. inside an exception message or a page dump).
+
+2. TWO PROCESSES NEVER SHARE AN ACCOUNT. CaseLink authenticates a session, not
+   a request; a second login on the same account displaces the first. An
+   exclusive, pid-checked lease per account makes that impossible rather than
+   merely unlikely.
+
+3. A SHARED ACCOUNT BACKS OFF WHEN IT IS DISPLACED. ALPHA belongs to a person
+   who uses it for their own work. If our session is displaced we stop using
+   that account for cooldown_minutes rather than fighting them for it.
+"""
+import os, sys, json, time, errno, logging, hashlib
+from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
+
+CT = ZoneInfo("America/Chicago")
+
+ZERO = timezone.utc
+
+DEFAULT_ACCOUNTS_FILE = "/mnt/intelechia/caselink/.accounts.json"
+DEFAULT_STATE_FILE    = "/mnt/intelechia/caselink/account_state.json"
+DEFAULT_LEASE_DIR     = "/mnt/intelechia/caselink/account_leases"
+
+ACCOUNTS_FILE = os.environ.get("CASELINK_ACCOUNTS", DEFAULT_ACCOUNTS_FILE)
+STATE_FILE    = os.environ.get("CASELINK_ACCOUNT_STATE", DEFAULT_STATE_FILE)
+LEASE_DIR     = os.environ.get("CASELINK_ACCOUNT_LEASES", DEFAULT_LEASE_DIR)
+
+LEASE_TTL_SECONDS = int(os.environ.get("CASELINK_LEASE_TTL", "3600"))
+# How long to wait before re-checking an account that is merely leased by
+# another worker (as opposed to time-blocked).
+LEASED_POLL_SECONDS = int(os.environ.get("CASELINK_LEASED_POLL", "900"))
+
+# Per-account killswitch, mirroring the primary scraper's KILLSWITCH file:
+# `KILLSWITCH.ALPHA` blocks that one account from being leased at all, by
+# anything, until the file is removed. Independent of cooldowns, which expire
+# on their own -- a killswitch stays until a human clears it.
+KILLSWITCH_DIR = os.environ.get("CASELINK_KILLSWITCH_DIR",
+                                "/mnt/intelechia/caselink")
+
+
+def killswitched(alias):
+    return os.path.exists(os.path.join(KILLSWITCH_DIR, f"KILLSWITCH.{alias}"))
+
+
+def killswitch_reason(alias):
+    """One line. The file may be a paragraph, but this goes into a log that is
+    republished line-by-line to a public feed, where a multi-line reason turns
+    into a wall of unrelated-looking entries."""
+    try:
+        with open(os.path.join(KILLSWITCH_DIR, f"KILLSWITCH.{alias}")) as f:
+            return " ".join(f.read().split())[:160]
+    except Exception:
+        return ""
+
+
+def in_hours(account):
+    """Is this account inside its permitted hours?
+
+    Hours are given in America/Chicago and converted at check time. The VM
+    clock is UTC, so a hardcoded UTC hour would silently drift by an hour
+    twice a year -- the same trap the scraper's scheduler already avoids.
+
+    An account belonging to somebody who uses it for their own work gets a
+    window when they are not working, so we never contend for their session.
+    """
+    hrs = account.get("hours_ct")
+    if not hrs or len(hrs) != 2:
+        return True, ""
+    start, end = int(hrs[0]), int(hrs[1])
+    h = datetime.now(CT).hour
+    ok = (start <= h < end) if start < end else (h >= start or h < end)
+    return ok, f"{start:02d}:00-{end:02d}:00 CT"
+
+log = logging.getLogger(__name__)
+
+
+# ---------------------------------------------------------------------------
+# Registry
+# ---------------------------------------------------------------------------
+
+def load_accounts():
+    """[{alias, user, pass, roles, shared, cooldown_minutes, priority}, ...]"""
+    try:
+        with open(ACCOUNTS_FILE) as f:
+            data = json.load(f)
+    except FileNotFoundError:
+        return []
+    except Exception as e:
+        log.error(f"  accounts: could not read registry: {type(e).__name__}")
+        return []
+    out = []
+    for a in data.get("accounts", data if isinstance(data, list) else []):
+        if not a.get("user") or not a.get("alias"):
+            continue
+        a.setdefault("roles", ["sweep"])
+        a.setdefault("shared", False)
+        a.setdefault("cooldown_minutes", 90)
+        a.setdefault("priority", 100)
+        out.append(a)
+    out.sort(key=lambda a: a["priority"])
+    return out
+
+
+def alias_for(username, accounts=None):
+    """Stable, non-identifying label for a username. Unknown accounts get a
+    hashed pseudonym rather than leaking the name we failed to map."""
+    u = (username or "").strip().lower()
+    if not u:
+        return "UNKNOWN"
+    for a in (accounts if accounts is not None else load_accounts()):
+        if a["user"].strip().lower() == u:
+            return a["alias"]
+    return "ACCT-" + hashlib.sha256(u.encode()).hexdigest()[:6].upper()
+
+
+# ---------------------------------------------------------------------------
+# Log redaction
+# ---------------------------------------------------------------------------
+
+class RedactAccounts(logging.Filter):
+    """Replace every known username with its alias in any log record.
+
+    Belt and braces behind alias-only log statements: exception text, page
+    dumps and error bodies can all carry the account name, and the log is
+    published verbatim to a public endpoint.
+    """
+    def __init__(self, accounts=None):
+        super().__init__()
+        accts = accounts if accounts is not None else load_accounts()
+        # longest first so a username that contains another is replaced whole
+        self.pairs = sorted(
+            [(a["user"], a["alias"]) for a in accts if a.get("user")],
+            key=lambda p: len(p[0]), reverse=True)
+        self.secrets = [a["pass"] for a in accts if a.get("pass")]
+
+    def _scrub(self, text):
+        low = text.lower()
+        for user, alias in self.pairs:
+            u = user.lower()
+            if u in low:
+                # case-insensitive replace, preserving surrounding text
+                out, i = [], 0
+                while True:
+                    j = low.find(u, i)
+                    if j < 0:
+                        out.append(text[i:]); break
+                    out.append(text[i:j]); out.append(alias)
+                    i = j + len(u)
+                text = "".join(out); low = text.lower()
+        for s in self.secrets:
+            if s and s in text:
+                text = text.replace(s, "<redacted>")
+        return text
+
+    def filter(self, record):
+        try:
+            if isinstance(record.msg, str) and record.msg:
+                record.msg = self._scrub(record.msg)
+            if record.args:
+                if isinstance(record.args, dict):
+                    record.args = {k: (self._scrub(v) if isinstance(v, str) else v)
+                                   for k, v in record.args.items()}
+                else:
+                    record.args = tuple(
+                        self._scrub(a) if isinstance(a, str) else a
+                        for a in record.args)
+        except Exception:
+            pass  # never let redaction break logging
+        return True
+
+
+def install_redaction(accounts=None):
+    """Attach the filter to every handler on the root logger."""
+    f = RedactAccounts(accounts)
+    root = logging.getLogger()
+    for h in root.handlers:
+        h.addFilter(f)
+    root.addFilter(f)
+    return f
+
+
+# ---------------------------------------------------------------------------
+# Cooldown state
+# ---------------------------------------------------------------------------
+
+def _read_state():
+    try:
+        with open(STATE_FILE) as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
+def _write_state(state):
+    tmp = STATE_FILE + ".tmp"
+    os.makedirs(os.path.dirname(STATE_FILE), exist_ok=True)
+    with open(tmp, "w") as f:
+        json.dump(state, f, indent=1, sort_keys=True)
+    os.replace(tmp, STATE_FILE)
+    try:
+        os.chmod(STATE_FILE, 0o600)
+    except OSError:
+        pass
+
+
+def in_cooldown(alias):
+    """(bool, seconds_remaining)"""
+    st = _read_state().get(alias) or {}
+    until = st.get("cooldown_until")
+    if not until:
+        return False, 0
+    try:
+        dt = datetime.fromisoformat(until)
+    except Exception:
+        return False, 0
+    now = datetime.now(dt.tzinfo or ZERO)
+    if dt > now:
+        return True, int((dt - now).total_seconds())
+    return False, 0
+
+
+def start_cooldown(alias, minutes, reason=""):
+    st = _read_state()
+    until = datetime.now(ZERO) + timedelta(minutes=minutes)
+    st.setdefault(alias, {}).update({
+        "cooldown_until": until.isoformat(),
+        "cooldown_reason": reason[:200],
+        "cooldown_started": datetime.now(ZERO).isoformat(),
+    })
+    _write_state(st)
+    log.warning(f"  {alias}: cooling down {minutes}min ({reason})")
+
+
+def clear_cooldown(alias):
+    st = _read_state()
+    if alias in st:
+        st[alias].pop("cooldown_until", None)
+        st[alias].pop("cooldown_reason", None)
+        _write_state(st)
+
+
+def note_result(alias, ok, detail=""):
+    st = _read_state()
+    e = st.setdefault(alias, {})
+    e["last_try"] = datetime.now(ZERO).isoformat()
+    e["last_result"] = "ok" if ok else "fail"
+    if detail:
+        e["last_detail"] = detail[:200]
+    if ok:
+        e["consecutive_failures"] = 0
+    else:
+        e["consecutive_failures"] = e.get("consecutive_failures", 0) + 1
+    _write_state(st)
+    return e.get("consecutive_failures", 0)
+
+
+# ---------------------------------------------------------------------------
+# Exclusive account lease
+# ---------------------------------------------------------------------------
+
+def _pid_alive(pid):
+    try:
+        os.kill(pid, 0)
+        return True
+    except OSError as e:
+        return e.errno == errno.EPERM
+
+
+class AccountLease:
+    """Exclusive claim on one account, so no two processes ever log in as it.
+
+    Uses O_EXCL creation (atomic on a local filesystem) plus a liveness check,
+    so a lease left behind by a killed process is reclaimed rather than
+    deadlocking the pool.
+    """
+    def __init__(self, alias):
+        self.alias = alias
+        self.path = os.path.join(LEASE_DIR, f"{alias}.lease")
+        self.held = False
+
+    def acquire(self):
+        os.makedirs(LEASE_DIR, exist_ok=True)
+        for attempt in (1, 2):
+            try:
+                fd = os.open(self.path, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+                with os.fdopen(fd, "w") as f:
+                    json.dump({"pid": os.getpid(), "alias": self.alias,
+                               "acquired": datetime.now(ZERO).isoformat(),
+                               "host": os.uname().nodename}, f)
+                self.held = True
+                return True
+            except FileExistsError:
+                if attempt == 2:
+                    return False
+                if not self._reclaim_if_stale():
+                    return False
+        return False
+
+    def _reclaim_if_stale(self):
+        try:
+            with open(self.path) as f:
+                info = json.load(f)
+        except Exception:
+            info = {}
+        pid = info.get("pid")
+        age = time.time() - os.path.getmtime(self.path) if os.path.exists(self.path) else 1e9
+        stale = (pid and not _pid_alive(int(pid))) or age > LEASE_TTL_SECONDS
+        if stale:
+            log.info(f"  {self.alias}: reclaiming stale lease "
+                     f"(pid {pid} gone or {int(age)}s old)")
+            try:
+                os.unlink(self.path)
+                return True
+            except OSError:
+                return False
+        return False
+
+    def release(self):
+        if not self.held:
+            return
+        try:
+            os.unlink(self.path)
+        except OSError:
+            pass
+        self.held = False
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exc):
+        self.release()
+
+
+def seconds_until_available(role="sweep", accounts=None, default=900, cap=3600):
+    """How long until some account for `role` could next be used.
+
+    Used instead of a fixed retry interval so a worker parked outside its
+    hours sleeps until those hours actually begin, rather than waking every
+    few minutes to log the same line into a feed people are watching.
+    """
+    accts = accounts if accounts is not None else load_accounts()
+    now = datetime.now(CT)
+    best = None
+    for a in accts:
+        if role not in a.get("roles", []):
+            continue
+        if killswitched(a["alias"]):
+            continue          # only a human clearing the file releases this
+        waits = []
+        allowed, _ = in_hours(a)
+        if not allowed:
+            start = int(a["hours_ct"][0])
+            nxt = now.replace(hour=start, minute=0, second=0, microsecond=0)
+            if nxt <= now:
+                nxt += timedelta(days=1)
+            waits.append((nxt - now).total_seconds())
+        cooling, remaining = in_cooldown(a["alias"])
+        if cooling:
+            waits.append(remaining)
+        if not waits:
+            # Nothing is blocking it by TIME -- another worker simply holds the
+            # lease and will keep holding it for its whole leg. Polling every
+            # minute for that just fills the log; check back occasionally.
+            waits.append(LEASED_POLL_SECONDS)
+        wait = max(waits) if waits else LEASED_POLL_SECONDS
+        best = wait if best is None else min(best, wait)
+    if best is None:
+        return default
+    return int(max(60, min(cap, best)))
+
+
+def acquire_account(role="sweep", accounts=None):
+    """Pick the highest-priority account for `role` that is neither in
+    cooldown nor already leased, and lease it.
+
+    Returns (account_dict, AccountLease) or (None, None).
+    """
+    accts = accounts if accounts is not None else load_accounts()
+    for a in accts:
+        if role not in a.get("roles", []):
+            continue
+        if killswitched(a["alias"]):
+            log.info(f"  {a['alias']}: KILLSWITCH engaged — skipping "
+                     f"({killswitch_reason(a['alias']) or 'no reason recorded'})")
+            continue
+        allowed, window = in_hours(a)
+        if not allowed:
+            log.info(f"  {a['alias']}: outside its permitted hours ({window}) "
+                     f"— skipping")
+            continue
+        cooling, remaining = in_cooldown(a["alias"])
+        if cooling:
+            log.info(f"  {a['alias']}: in cooldown, {remaining // 60}min left — skipping")
+            continue
+        lease = AccountLease(a["alias"])
+        if not lease.acquire():
+            log.info(f"  {a['alias']}: already leased by another worker — skipping")
+            continue
+        return a, lease
+    return None, None

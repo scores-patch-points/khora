@@ -1,0 +1,42 @@
+{
+ "bk-great-expect/discover(full half)": {
+  "tokens": 99856,
+  "types": 8031,
+  "cpuSecCallsInOrder": [
+   0.087,
+   0.044,
+   0.043,
+   0.029
+  ]
+ },
+ "bk-great-expect/confirm(full half)": {
+  "tokens": 86726,
+  "types": 7626,
+  "cpuSecCallsInOrder": [
+   0.034,
+   0.031,
+   0.024,
+   0.023
+  ]
+ },
+ "pl-burst(all)": {
+  "tokens": 100616,
+  "types": 4629,
+  "cpuSecCallsInOrder": [
+   0.041,
+   0.029,
+   0.035,
+   0.019
+  ]
+ },
+ "bk-great-expect/discover with ~20k extra types": {
+  "tokens": 99856,
+  "types": 39503,
+  "cpuSecCallsInOrder": [
+   0.047,
+   0.052,
+   0.056,
+   0.101
+  ]
+ }
+}

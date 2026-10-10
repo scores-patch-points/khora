@@ -1,0 +1,288 @@
+{
+ "module": "eval/law/name-rule-informal.mjs",
+ "corpus": "irc",
+ "dry": false,
+ "M": 256,
+ "gold": {
+  "files": [
+   "kubuntu/2006-07-15.txt",
+   "kubuntu/2008-03-15.txt",
+   "ubuntu/2006-07-15.txt",
+   "ubuntu/2007-03-15.txt",
+   "ubuntu/2009-07-15.txt",
+   "ubuntu/2014-07-15.txt"
+  ],
+  "nicks": 1909,
+  "positives": 19590
+ },
+ "sample": {
+  "laterPairs": 300,
+  "firstPairs": 300,
+  "firstDropped": 0
+ },
+ "later": {
+  "tag": "LATER matched by frequency, frame-causal",
+  "n": 600,
+  "pairs": 300,
+  "auc": {
+   "S_ENTRY": 0.8433,
+   "S_OWN": 0.6686,
+   "S_ALL": 0.5973,
+   "S_SPAN": 0.4922,
+   "R_BURST": 0.7602,
+   "R_FREQ": 0.8529,
+   "R_POS": 0.4839
+  },
+  "ci": {
+   "S_ENTRY": {
+    "lo": 0.8083,
+    "hi": 0.8833
+   },
+   "S_OWN": {
+    "lo": 0.6164,
+    "hi": 0.7201
+   },
+   "S_ALL": {
+    "lo": 0.5459,
+    "hi": 0.6365
+   },
+   "S_SPAN": {
+    "lo": 0.4411,
+    "hi": 0.536
+   },
+   "R_BURST": {
+    "lo": 0.7013,
+    "hi": 0.8138
+   },
+   "R_FREQ": {
+    "lo": 0.8403,
+    "hi": 0.8663
+   },
+   "R_POS": {
+    "lo": 0.4157,
+    "hi": 0.5437
+   }
+  },
+  "null": {
+   "q95": 0.5333,
+   "mean": 0.4999
+  },
+  "trace": {
+   "NAME": 0.82,
+   "UNLABELLED": 0.66,
+   "noSlotName": 0.21,
+   "noSlotUnlabelled": 0.4333
+  },
+  "diffToBurst": {
+   "point": 0.0831,
+   "lo": 0.0337,
+   "hi": 0.1287
+  },
+  "diffs": {
+   "S_ENTRY - S_SPAN": {
+    "point": 0.3512,
+    "lo": 0.3044,
+    "hi": 0.3986
+   },
+   "S_ENTRY - S_ALL": {
+    "point": 0.246,
+    "lo": 0.1927,
+    "hi": 0.3018
+   },
+   "S_ENTRY - R_BURST": {
+    "point": 0.0831,
+    "lo": 0.0337,
+    "hi": 0.1287
+   }
+  },
+  "medianExtentTokens": {
+   "NAME": 352,
+   "UNLABELLED": 0
+  }
+ },
+ "firstCausal": {
+  "tag": "FIRST matched by position, frame-causal",
+  "n": 600,
+  "pairs": 300,
+  "auc": {
+   "S_ENTRY": 0.5,
+   "S_OWN": 0.3065,
+   "S_ALL": 0.3199,
+   "S_SPAN": 0.3158,
+   "R_BURST": 0.6246,
+   "R_FREQ": 0.5,
+   "R_POS": 0.5003
+  },
+  "ci": {
+   "S_ENTRY": {
+    "lo": 0.5,
+    "hi": 0.5
+   },
+   "S_OWN": {
+    "lo": 0.2697,
+    "hi": 0.3517
+   },
+   "S_ALL": {
+    "lo": 0.2846,
+    "hi": 0.36
+   },
+   "S_SPAN": {
+    "lo": 0.2862,
+    "hi": 0.358
+   },
+   "R_BURST": {
+    "lo": 0.5875,
+    "hi": 0.6557
+   },
+   "R_FREQ": {
+    "lo": 0.5,
+    "hi": 0.5
+   },
+   "R_POS": {
+    "lo": 0.5003,
+    "hi": 0.5011
+   }
+  },
+  "null": {
+   "q95": 0.5,
+   "mean": 0.5
+  },
+  "trace": {
+   "NAME": 0.1033,
+   "UNLABELLED": 0.47,
+   "noSlotName": 0.9267,
+   "noSlotUnlabelled": 0.5367
+  },
+  "diffToBurst": {
+   "point": -0.1246,
+   "lo": -0.1557,
+   "hi": -0.0877
+  },
+  "diffs": {
+   "S_ENTRY - S_SPAN": {
+    "point": 0.1842,
+    "lo": 0.1431,
+    "hi": 0.2137
+   },
+   "S_ENTRY - S_ALL": {
+    "point": 0.1801,
+    "lo": 0.1388,
+    "hi": 0.2141
+   },
+   "S_ENTRY - R_BURST": {
+    "point": -0.1246,
+    "lo": -0.1557,
+    "hi": -0.0877
+   }
+  },
+  "medianExtentTokens": {
+   "NAME": 0,
+   "UNLABELLED": 0
+  }
+ },
+ "firstNoncausal": {
+  "tag": "FIRST NON-CAUSAL F=32",
+  "n": 600,
+  "pairs": 300,
+  "auc": {
+   "S_ENTRY": 0.6483,
+   "S_OWN": 0.4535,
+   "S_ALL": 0.4717,
+   "S_SPAN": 0.4516,
+   "R_BURST": 0.6246,
+   "R_FREQ": 0.5,
+   "R_POS": 0.5003
+  },
+  "ci": {
+   "S_ENTRY": {
+    "lo": 0.605,
+    "hi": 0.69
+   },
+   "S_OWN": {
+    "lo": 0.3894,
+    "hi": 0.5133
+   },
+   "S_ALL": {
+    "lo": 0.4183,
+    "hi": 0.5235
+   },
+   "S_SPAN": {
+    "lo": 0.392,
+    "hi": 0.5052
+   },
+   "R_BURST": {
+    "lo": 0.5912,
+    "hi": 0.6527
+   },
+   "R_FREQ": {
+    "lo": 0.5,
+    "hi": 0.5
+   },
+   "R_POS": {
+    "lo": 0.5003,
+    "hi": 0.5011
+   }
+  },
+  "null": {
+   "q95": 0.525,
+   "mean": 0.5001
+  },
+  "trace": {
+   "NAME": 0.5167,
+   "UNLABELLED": 0.61,
+   "noSlotName": 0.5767,
+   "noSlotUnlabelled": 0.4433
+  },
+  "diffToBurst": {
+   "point": 0.0238,
+   "lo": -0.0338,
+   "hi": 0.0873
+  },
+  "diffs": {
+   "S_ENTRY - S_SPAN": {
+    "point": 0.1967,
+    "lo": 0.1646,
+    "hi": 0.2236
+   },
+   "S_ENTRY - S_ALL": {
+    "point": 0.1766,
+    "lo": 0.1432,
+    "hi": 0.2192
+   },
+   "S_ENTRY - R_BURST": {
+    "point": 0.0238,
+    "lo": -0.0338,
+    "hi": 0.0873
+   }
+  },
+  "medianExtentTokens": {
+   "NAME": 0,
+   "UNLABELLED": 0
+  }
+ },
+ "K1_sham": {
+  "nullShare": 1,
+  "n": 600
+ },
+ "K5_licence": {
+  "positivesNonNullShare": 0.82,
+  "n": 300,
+  "pass": true
+ },
+ "K6_determinism": {
+  "same": 40,
+  "total": 40
+ },
+ "K4_position": {
+  "aucPosition": 0.4839,
+  "inside": true
+ },
+ "verdict": {
+  "V1_discriminates": true,
+  "V2_beyond_burstiness": true,
+  "V3_single_mention_causal": false,
+  "V4_slot_not_span": true,
+  "verdict": "HOLDS",
+  "seconds": 2606.9
+ }
+}

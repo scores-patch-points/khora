@@ -1,0 +1,73 @@
+{
+ "corpus": "irc",
+ "doc": "ubuntu/2010-07-15",
+ "M": 256,
+ "tag": "d2",
+ "strata": [
+  "c4_6",
+  "c7_15",
+  "c16p"
+ ],
+ "sizes": {
+  "nA": 12,
+  "nB": 10,
+  "n1": 6
+ },
+ "design": {
+  "A:c4_6": {
+   "requested": 12,
+   "got": 12,
+   "dropped": 2,
+   "nPos": 627,
+   "nNegPool": 414
+  },
+  "B:c4_6": {
+   "requested": 10,
+   "got": 10,
+   "dropped": 0,
+   "nPos": 111,
+   "nNegPool": 8505
+  },
+  "A:c7_15": {
+   "requested": 12,
+   "got": 12,
+   "dropped": 5,
+   "nPos": 810,
+   "nNegPool": 661
+  },
+  "B:c7_15": {
+   "requested": 10,
+   "got": 10,
+   "dropped": 0,
+   "nPos": 227,
+   "nNegPool": 9652
+  },
+  "A:c16p": {
+   "requested": 12,
+   "got": 12,
+   "dropped": 25,
+   "nPos": 385,
+   "nNegPool": 410
+  },
+  "B:c16p": {
+   "requested": 10,
+   "got": 10,
+   "dropped": 8,
+   "nPos": 59,
+   "nNegPool": 10252
+  }
+ },
+ "tokensRead": 132,
+ "gaps": 0,
+ "seconds": 510.773,
+ "K1_sham": {
+  "nullShare": 1,
+  "n": 8
+ },
+ "K6_determinism": {
+  "same": 8,
+  "n": 8
+ },
+ "headerSha256": "6c0cd12e3d866e11b3da0b284d424e806fb867092872cfdfe4406c7fae58692c",
+ "file": "data/discovery/ubuntu_2010-07-15.d2.c4_6-c7_15-c16p.jsonl"
+}

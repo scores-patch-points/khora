@@ -1,0 +1,179 @@
+#!/usr/bin/env node
+// Copy each organ from a CLEAN git checkout at its recorded commit into organs/<name>/ and write ORGANS.lock.
+//   node scripts/build-organs.mjs [--dry-run] [--verify] [--out organs] [--lock ORGANS.lock]
+//                                 [--src khora=../khora-fold] [--src penelope=...] ...
+// Only git-tracked files are copied (so nothing untracked leaks in), minus: .git, node_modules, top-level state/ and
+// logs/, *.jsonl runtime files, .env files, .DS_Store. A dirty source (modified OR untracked files) is refused.
+import { execFileSync } from "node:child_process";
+import { createHash } from "node:crypto";
+import {
+  cpSync, existsSync, lstatSync, mkdirSync, readFileSync, readdirSync, renameSync, rmSync, statSync, writeFileSync,
+} from "node:fs";
+import { basename, dirname, join, resolve, sep } from "node:path";
+import { fileURLToPath } from "node:url";
+
+export const LOCK_SCHEMA = "FoldOrgansLock@1";
+export const MARKER = ".fold-organ.json";
+export const RUNTIME_TOP_LEVEL = Object.freeze(["state", "logs", "node_modules"]);
+
+const HERE = fileURLToPath(new URL("..", import.meta.url));
+export const DEFAULT_SOURCES = Object.freeze({
+  khora: "../khora-fold", penelope: "../penelope-fold", janus: "../janus-fold", heimdall: "../heimdall",
+});
+
+const git = (dir, ...args) => execFileSync("git", ["-C", dir, ...args], { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] });
+
+export function isExcluded(rel) {
+  const parts = rel.split("/");
+  if (parts.includes(".git") || parts.includes("node_modules")) return true;
+  if (RUNTIME_TOP_LEVEL.includes(parts[0])) return true;
+  const base = parts[parts.length - 1];
+  return base.endsWith(".jsonl") || base === ".DS_Store" || base === ".env" || base.startsWith(".env.");
+}
+
+export function inspectSource(name, dir) {
+  const abs = resolve(dir);
+  if (!existsSync(abs)) throw new Error(`${name}: source ${abs} does not exist`);
+  let top;
+  try { top = git(abs, "rev-parse", "--show-toplevel").trim(); } catch { throw new Error(`${name}: ${abs} is not a git repository`); }
+  const commit = git(abs, "rev-parse", "HEAD").trim();
+  const dirty = git(abs, "status", "--porcelain", "--untracked-files=all").trim().length > 0;
+  let repo;
+  try { repo = git(abs, "config", "--get", "remote.origin.url").trim(); } catch { repo = ""; }
+  return { name, dir: abs, top, commit, dirty, repo: repo || `path:${basename(top)}` };
+}
+
+function trackedFiles(dir) {
+  return git(dir, "ls-files", "-z").split("\0").filter(Boolean);
+}
+
+export function hashTree(root, files) {
+  const h = createHash("sha256");
+  for (const rel of [...files].sort()) {
+    const p = join(root, rel);
+    const st = lstatSync(p);
+    const exec = st.mode & 0o111 ? "x" : "-";
+    const fh = createHash("sha256").update(st.isSymbolicLink() ? "" : readFileSync(p)).digest("hex");
+    h.update(`${rel}\0${exec}\0${fh}\n`);
+  }
+  return h.digest("hex");
+}
+
+function listFiles(root, rel = "") {
+  const out = [];
+  for (const e of readdirSync(join(root, rel), { withFileTypes: true })) {
+    const r = rel ? `${rel}/${e.name}` : e.name;
+    if (r === MARKER) continue;
+    if (e.isDirectory()) out.push(...listFiles(root, r));
+    else out.push(r);
+  }
+  return out;
+}
+
+/** Everything that would be copied for one source, without touching the disk. */
+export function plan(name, dir) {
+  const src = inspectSource(name, dir);
+  // the organ is the repo root; a subdirectory checkout would make ls-files paths relative to dir, which still works
+  const all = trackedFiles(src.dir);
+  const files = all.filter((f) => !isExcluded(f) && existsSync(join(src.dir, f)));
+  return { ...src, files, excluded: all.length - files.length };
+}
+
+function installOne(p, outDir) {
+  const dest = join(outDir, p.name);
+  if (existsSync(dest) && !existsSync(join(dest, MARKER)) && readdirSync(dest).filter((n) => n !== ".gitkeep").length) {
+    throw new Error(`${p.name}: ${dest} exists and was not produced by build-organs (no ${MARKER}); refusing to overwrite`);
+  }
+  const tmp = join(outDir, `.${p.name}.new`);
+  rmSync(tmp, { recursive: true, force: true });
+  mkdirSync(tmp, { recursive: true });
+  for (const f of p.files) {
+    const to = join(tmp, f);
+    mkdirSync(dirname(to), { recursive: true });
+    cpSync(join(p.dir, f), to, { dereference: false, verbatimSymlinks: true });
+  }
+  writeFileSync(join(tmp, MARKER), JSON.stringify({ name: p.name, commit: p.commit }, null, 2) + "\n");
+  // keep what the organ has accumulated at runtime: symlinks (relocated state) and state/logs/node_modules
+  if (existsSync(dest)) {
+    for (const e of readdirSync(dest, { withFileTypes: true })) {
+      if (existsSync(join(tmp, e.name))) continue;
+      if (e.isSymbolicLink() || RUNTIME_TOP_LEVEL.includes(e.name)) renameSync(join(dest, e.name), join(tmp, e.name));
+    }
+    rmSync(dest, { recursive: true, force: true });
+  }
+  renameSync(tmp, dest);
+  return dest;
+}
+
+export function buildOrgans({ sources, outDir, lockPath, dryRun = false, log = console.log } = {}) {
+  const plans = Object.entries(sources).map(([name, dir]) => plan(name, dir));
+  const dirty = plans.filter((p) => p.dirty);
+  for (const p of plans) {
+    log(`${p.name}: ${p.dir} @ ${p.commit.slice(0, 12)} ${p.dirty ? "DIRTY" : "clean"}  ${p.files.length} files, ${p.excluded} excluded`);
+  }
+  if (dirty.length) throw new Error(`refusing dirty source(s): ${dirty.map((p) => p.name).join(", ")} (commit or stash first)`);
+  if (dryRun) { log("dry run: nothing written"); return { dryRun: true, plans, lock: null }; }
+
+  mkdirSync(outDir, { recursive: true });
+  const entries = [];
+  for (const p of plans) {
+    const dest = installOne(p, outDir);
+    const sha256 = hashTree(dest, listFiles(dest).filter((f) => !isExcluded(f)));
+    entries.push({ name: p.name, repo: p.repo, commit: p.commit, dirty: false, sha256, files: p.files.length });
+  }
+  // merge with any existing lock so building a subset does not drop the others
+  let prior = [];
+  try { prior = JSON.parse(readFileSync(lockPath, "utf8")).organs || []; } catch { /* first build */ }
+  const merged = [...prior.filter((o) => !entries.some((e) => e.name === o.name)), ...entries].sort((a, b) => a.name.localeCompare(b.name));
+  const lock = { schema: LOCK_SCHEMA, organs: merged };
+  writeFileSync(lockPath, JSON.stringify(lock, null, 2) + "\n");
+  log(`wrote ${lockPath}`);
+  return { dryRun: false, plans, lock };
+}
+
+/** Re-hash organs/ against ORGANS.lock. Returns [{ name, ok, reason? }]. */
+export function verifyLock({ outDir, lockPath }) {
+  const lock = JSON.parse(readFileSync(lockPath, "utf8"));
+  return (lock.organs || []).map((o) => {
+    const dir = join(outDir, o.name);
+    if (!existsSync(dir)) return { name: o.name, ok: false, reason: "missing" };
+    const sha = hashTree(dir, listFiles(dir).filter((f) => !isExcluded(f)));
+    return sha === o.sha256 ? { name: o.name, ok: true } : { name: o.name, ok: false, reason: "tree differs from lock" };
+  });
+}
+
+function parseArgs(argv) {
+  const a = { dryRun: false, verify: false, out: join(HERE, "organs"), lock: join(HERE, "ORGANS.lock"), src: {} };
+  for (let i = 0; i < argv.length; i++) {
+    const t = argv[i];
+    if (t === "--dry-run") a.dryRun = true;
+    else if (t === "--verify") a.verify = true;
+    else if (t === "--out") a.out = resolve(argv[++i]);
+    else if (t === "--lock") a.lock = resolve(argv[++i]);
+    else if (t === "--src") {
+      const v = argv[++i] || "";
+      const k = v.indexOf("=");
+      if (k < 1) throw new Error("--src expects name=path");
+      a.src[v.slice(0, k)] = resolve(v.slice(k + 1));
+    } else throw new Error(`unknown argument ${t}`);
+  }
+  return a;
+}
+
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  try {
+    const a = parseArgs(process.argv.slice(2));
+    if (a.verify) {
+      const r = verifyLock({ outDir: a.out, lockPath: a.lock });
+      for (const x of r) console.log(`${x.ok ? "PASS" : "FAIL"}  ${x.name}${x.reason ? "  " + x.reason : ""}`);
+      process.exit(r.every((x) => x.ok) ? 0 : 1);
+    }
+    const sources = Object.keys(a.src).length
+      ? a.src
+      : Object.fromEntries(Object.entries(DEFAULT_SOURCES).map(([k, v]) => [k, resolve(HERE, v)]));
+    buildOrgans({ sources, outDir: a.out, lockPath: a.lock, dryRun: a.dryRun });
+  } catch (e) {
+    console.error(`build-organs: ${e.message}`);
+    process.exit(1);
+  }
+}

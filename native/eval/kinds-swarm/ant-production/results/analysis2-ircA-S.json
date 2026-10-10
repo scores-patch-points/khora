@@ -1,0 +1,152 @@
+{
+ "corpus": "ircA",
+ "arms": {
+  "real": {
+   "n": 60,
+   "seenShare": {
+    "NAME": 0.1,
+    "CTL": 1
+   },
+   "refNonNull": {
+    "NAME": 0.7333,
+    "CTL": 0.6667
+   },
+   "singleAUC": {
+    "ownExists": 0.5667,
+    "ownMentions": 0.5256,
+    "refAbs": 0.4594,
+    "refBornLost": 0.4667,
+    "relLost": 0.4667,
+    "relBorn": 0.4833,
+    "relCollateral": 0.4833,
+    "kindFlips": 0.5167,
+    "FREQ_n": 0.5083,
+    "seen": 0.05
+   },
+   "strata": {
+    "seen": {
+     "nName": 3,
+     "nCtl": 30,
+     "ownExists": {
+      "NAME": 0,
+      "CTL": 0.5667
+     },
+     "refNonNull": {
+      "NAME": 0.3333,
+      "CTL": 0.6667
+     }
+    },
+    "unseen": {
+     "nName": 27,
+     "nCtl": 0,
+     "ownExists": {
+      "NAME": 0.7778,
+      "CTL": null
+     },
+     "refNonNull": {
+      "NAME": 0.7778,
+      "CTL": null
+     }
+    }
+   }
+  },
+  "deranged": {
+   "n": 60,
+   "seenShare": {
+    "NAME": 0.1,
+    "CTL": 1
+   },
+   "refNonNull": {
+    "NAME": 0.7333,
+    "CTL": 0.5667
+   },
+   "singleAUC": {
+    "ownExists": 0.6,
+    "ownMentions": 0.5511,
+    "refAbs": 0.4844,
+    "refBornLost": 0.5167,
+    "relLost": 0.49,
+    "relBorn": 0.4667,
+    "relCollateral": 0.4667,
+    "kindFlips": 0.5167,
+    "FREQ_n": 0.5083,
+    "seen": 0.05
+   },
+   "strata": {
+    "seen": {
+     "nName": 3,
+     "nCtl": 30,
+     "ownExists": {
+      "NAME": 0,
+      "CTL": 0.5
+     },
+     "refNonNull": {
+      "NAME": 0,
+      "CTL": 0.5667
+     }
+    },
+    "unseen": {
+     "nName": 27,
+     "nCtl": 0,
+     "ownExists": {
+      "NAME": 0.7778,
+      "CTL": null
+     },
+     "refNonNull": {
+      "NAME": 0.8148,
+      "CTL": null
+     }
+    }
+   }
+  },
+  "null": {
+   "n": 60,
+   "seenShare": {
+    "NAME": 0.1,
+    "CTL": 1
+   },
+   "refNonNull": {
+    "NAME": 0,
+    "CTL": 0
+   },
+   "singleAUC": {
+    "ownExists": 0.5,
+    "ownMentions": 0.5,
+    "refAbs": 0.5,
+    "refBornLost": 0.5,
+    "relLost": 0.5,
+    "relBorn": 0.4833,
+    "relCollateral": 0.4833,
+    "kindFlips": 0.5167,
+    "FREQ_n": 0.5083,
+    "seen": 0.05
+   },
+   "strata": {
+    "seen": {
+     "nName": 3,
+     "nCtl": 30,
+     "ownExists": {
+      "NAME": 0,
+      "CTL": 0
+     },
+     "refNonNull": {
+      "NAME": 0,
+      "CTL": 0
+     }
+    },
+    "unseen": {
+     "nName": 27,
+     "nCtl": 0,
+     "ownExists": {
+      "NAME": 0,
+      "CTL": null
+     },
+     "refNonNull": {
+      "NAME": 0,
+      "CTL": null
+     }
+    }
+   }
+  }
+ }
+}

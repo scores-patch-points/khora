@@ -1,0 +1,36 @@
+// E1 K-frontier: accuracy vs shipped size, K in {100,200,300,500,1000}, quantised 8-bit. ARM=udhr|plus
+import path from "node:path";
+import { RES, rj, wj, makeRng, shuffle, SEED, wilson } from "../lib/common.mjs";
+import { loadArm, loadWindows } from "./arm.mjs";
+import { score, softmax } from "./model.mjs";
+import { buildPruned, toModel, serialize } from "./prune.mjs";
+
+const ARM = process.env.ARM || "udhr";
+const arm = loadArm(ARM); const { base, C, fam, nf } = arm;
+const covered = loadWindows(arm);
+const rng = makeRng(SEED + 11);
+const dev = shuffle(covered.filter((w) => w.split === "dev"), rng).slice(0, 3000);
+const testPool = covered.filter((w) => w.split === "test");
+const test = []; for (const n of [4, 8, 12, 20]) test.push(...shuffle(testPool.filter((w) => w.n === n), rng).slice(0, 3000));
+const famPost = (p) => { const f = new Float64Array(nf); for (let c = 0; c < C; c++) f[fam[c]] += p[c]; return f; };
+const am = (a) => { let b = 0; for (let i = 1; i < a.length; i++) if (a[i] > a[b]) b = i; return b; };
+const evalSet = (m, ws, T) => ws.map((w) => { const s = score(m, w.text); const f = famPost(softmax(s, T)); const k = am(f); return { ok: w.truthFams.has(k), n: w.n, label: w.label, strat: w.stratum }; });
+const fitT = (m, ws) => { const sc = ws.map((w) => score(m, w.text)); let best = null; for (const T of [1, 2, 3, 5, 8, 12, 20, 30, 50, 80]) { let s = 0; ws.forEach((w, i) => { const f = famPost(softmax(sc[i], T)); let p = 0; for (const fi of w.truthFams) p += f[fi]; s += -Math.log(Math.max(p, 1e-12)); }); s /= ws.length; if (!best || s < best.nll) best = { T, nll: s }; } return best.T; };
+const res = [];
+for (const K of [100, 200, 300, 500, 1000, 3000, 1e9]) {
+  let bestL = null;
+  for (const lambda of K >= 1e9 ? [0] : [0, 1, 2, 3]) {
+    const p = buildPruned(base, K, lambda); const m = toModel(p);
+    const e = evalSet(m, dev, 1); const acc = e.filter((x) => x.ok).length / e.length;
+    if (!bestL || acc > bestL.acc) bestL = { lambda, acc, p, m };
+  }
+  const T = fitT(bestL.m, dev);
+  const e = evalSet(bestL.m, test, T);
+  const byN = {}; for (const n of [4, 8, 12, 20]) { const it = e.filter((x) => x.n === n); byN[n] = +(it.filter((x) => x.ok).length / it.length).toFixed(4); }
+  // macro over languages (N=8)
+  const macro8 = (() => { const by = {}; for (const x of e.filter((x) => x.n === 8)) { (by[x.label] ||= [0, 0]); by[x.label][0] += x.ok ? 1 : 0; by[x.label][1]++; } const v = Object.values(by).map(([a, n]) => a / n); return v.reduce((a, b) => a + b, 0) / v.length; })();
+  const ser = serialize(bestL.p);
+  const row = { arm: ARM, K: K >= 1e9 ? "all" : K, lambda: bestL.lambda, T, devAcc: +bestL.acc.toFixed(4), testFamByN: byN, testFamMacro8: +macro8.toFixed(4), nTest: e.length, entries: bestL.m.entries, uniqueGrams: ser.nGrams, sizes: ser.sizes };
+  res.push(row); console.log(JSON.stringify(row));
+}
+wj(path.join(RES, `e1-frontier-${ARM}.json`), res);

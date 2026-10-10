@@ -1,0 +1,51 @@
+{
+ "corpus": "ud",
+ "doc": "fra.dev",
+ "M": 128,
+ "tag": "d",
+ "strata": [
+  "c1",
+  "c2"
+ ],
+ "sizes": {
+  "nA": 0,
+  "nB": 50,
+  "n1": 25
+ },
+ "design": {
+  "A:c1": {
+   "requested": 25,
+   "got": 11,
+   "dropped": 0,
+   "nPos": 11,
+   "nNegPool": 61
+  },
+  "B:c1": {
+   "requested": 25,
+   "got": 25,
+   "dropped": 0,
+   "nPos": 236,
+   "nNegPool": 3218
+  },
+  "B:c2": {
+   "requested": 50,
+   "got": 50,
+   "dropped": 0,
+   "nPos": 110,
+   "nNegPool": 1826
+  }
+ },
+ "tokensRead": 172,
+ "gaps": 0,
+ "seconds": 532.348,
+ "K1_sham": {
+  "nullShare": 1,
+  "n": 8
+ },
+ "K6_determinism": {
+  "same": 8,
+  "n": 8
+ },
+ "headerSha256": "6c0cd12e3d866e11b3da0b284d424e806fb867092872cfdfe4406c7fae58692c",
+ "file": "data/discovery-ud/fra.dev.d.c1-c2.jsonl"
+}

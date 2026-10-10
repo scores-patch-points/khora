@@ -1,0 +1,125 @@
+{
+ "tokens": 1052,
+ "M64_by_cprime": {
+  "c1": {
+   "names": {
+    "n": 46,
+    "entry_gt0": 0,
+    "share": 0.0
+   },
+   "unlabelled": {
+    "n": 64,
+    "entry_gt0": 0,
+    "share": 0.0
+   }
+  },
+  "c16p": {
+   "names": {
+    "n": 3,
+    "entry_gt0": 2,
+    "share": 0.667
+   },
+   "unlabelled": {
+    "n": 2,
+    "entry_gt0": 0,
+    "share": 0.0
+   }
+  },
+  "c2": {
+   "names": {
+    "n": 49,
+    "entry_gt0": 0,
+    "share": 0.0
+   },
+   "unlabelled": {
+    "n": 76,
+    "entry_gt0": 0,
+    "share": 0.0
+   }
+  },
+  "c3": {
+   "names": {
+    "n": 66,
+    "entry_gt0": 8,
+    "share": 0.121
+   },
+   "unlabelled": {
+    "n": 75,
+    "entry_gt0": 0,
+    "share": 0.0
+   }
+  },
+  "c4_6": {
+   "names": {
+    "n": 238,
+    "entry_gt0": 125,
+    "share": 0.525
+   },
+   "unlabelled": {
+    "n": 194,
+    "entry_gt0": 0,
+    "share": 0.0
+   }
+  },
+  "c7_15": {
+   "names": {
+    "n": 124,
+    "entry_gt0": 105,
+    "share": 0.847
+   },
+   "unlabelled": {
+    "n": 115,
+    "entry_gt0": 1,
+    "share": 0.009
+   }
+  }
+ },
+ "M256_same_tokens_by_c256": {
+  "c16p": {
+   "names": {
+    "n": 80,
+    "entry_gt0": 65,
+    "share": 0.812
+   },
+   "unlabelled": {
+    "n": 80,
+    "entry_gt0": 3,
+    "share": 0.037
+   }
+  },
+  "c4_6": {
+   "names": {
+    "n": 238,
+    "entry_gt0": 117,
+    "share": 0.492
+   },
+   "unlabelled": {
+    "n": 238,
+    "entry_gt0": 0,
+    "share": 0.0
+   }
+  },
+  "c7_15": {
+   "names": {
+    "n": 208,
+    "entry_gt0": 160,
+    "share": 0.769
+   },
+   "unlabelled": {
+    "n": 208,
+    "entry_gt0": 1,
+    "share": 0.005
+   }
+  }
+ },
+ "c256>=7_and_cprime<=3": {
+  "names": [
+   4,
+   70
+  ],
+  "unlabelled": [
+   0,
+   84
+  ]
+ }
+}

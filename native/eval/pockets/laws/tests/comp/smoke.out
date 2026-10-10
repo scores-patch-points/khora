@@ -1,0 +1,6 @@
+pl-null 46232 tokens 46.3 ms cpu {"divSlope":0.872,"rigidL":0,"rigidR":0,"condR":0.9993,"condL":0.9993,"sameL":0.0196,"sameR":0.0208,"asym":-0.0009,"miDecay":0.0439,"initEnt":3.5785,"finEnt":3.5749,"edgeGap":-0.0349}
+   MI 0.0026 0.0029 0.0026 0.0035 0.0038 0.004 0.0061 0.0054 | N 41732 37232 32770 28455 24418 20753 17519 14720
+pl-markov 48318 tokens 23.4 ms cpu {"divSlope":0.7489,"rigidL":0,"rigidR":0.0001,"condR":0.8363,"condL":0.8363,"sameL":0.0618,"sameR":0.0614,"asym":0.005,"miDecay":2.0793,"initEnt":3.5792,"finEnt":3.5801,"edgeGap":0.0013}
+   MI 0.5856 0.2085 0.0769 0.033 0.014 0.008 0.0053 0.0055 | N 43615 38912 34269 29785 25560 21726 18341 15407
+pl-frames 49077 tokens 11.2 ms cpu {"divSlope":0.7091,"rigidL":0.0001,"rigidR":0.0003,"condR":0.9584,"condL":0.9578,"sameL":0.0696,"sameR":0.0756,"asym":0.0259,"miDecay":null,"initEnt":3.1545,"finEnt":3.4221,"edgeGap":1.1468}
+   MI 0.1444 0.3466 0.074 0.0587 0.0203    | N 37508 25939 14370 5413 970 0 0 0

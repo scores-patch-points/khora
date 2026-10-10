@@ -1,0 +1,373 @@
+{
+ "predictFrozen": "09303aacc306b0139fc24e9fa926698e4013271e1b047a82d6f7953da90b5a05",
+ "inertStats": [
+  "abbrev",
+  "lenCV",
+  "lenLogSkew"
+ ],
+ "timing": {
+  "tokens": 150014,
+  "units": 7354,
+  "cpuMsEachCall": [
+   38,
+   28,
+   43,
+   31,
+   26
+  ],
+  "cpuMsMedian": 31,
+  "wallMsMedian": 663,
+  "budgetMs": 700,
+  "machineLoadNote": "wall time inflated by the shared machine; CPU time is the budget evidence"
+ },
+ "determinism": {
+  "identical": true
+ },
+ "scriptInvariance": {
+  "cyrillic": {
+   "identicalToLatin": true,
+   "diffs": []
+  },
+  "cjk": {
+   "identicalToLatin": true,
+   "diffs": []
+  },
+  "astral": {
+   "identicalToLatin": true,
+   "diffs": []
+  }
+ },
+ "edgeNoNaN": true,
+ "calibration60IidWorlds": {
+  "reference": "Student t with 9 df (10 null draws): sd 1.134, P(|z|>=2) 0.077, P(|z|>=3) 0.015, P(|z|>=4) 0.0031",
+  "perStat": {
+   "zipfAlpha": {
+    "n": 60,
+    "rateGe2": 0.083,
+    "rateGe3": 0.067,
+    "rateGe4": 0.017,
+    "meanZ": -0.19,
+    "sdZ": 1.41
+   },
+   "heapsBeta": {
+    "n": 60,
+    "rateGe2": 0.067,
+    "rateGe3": 0,
+    "rateGe4": 0,
+    "meanZ": 0.05,
+    "sdZ": 1.15
+   },
+   "ttr": {
+    "n": 60,
+    "rateGe2": 0.1,
+    "rateGe3": 0.05,
+    "rateGe4": 0.017,
+    "meanZ": -0.2,
+    "sdZ": 1.34
+   },
+   "hapaxShare": {
+    "n": 60,
+    "rateGe2": 0.117,
+    "rateGe3": 0.017,
+    "rateGe4": 0.017,
+    "meanZ": 0.1,
+    "sdZ": 1.3
+   },
+   "rankBinEnt": {
+    "n": 60,
+    "rateGe2": 0.117,
+    "rateGe3": 0,
+    "rateGe4": 0,
+    "meanZ": 0.07,
+    "sdZ": 1.23
+   },
+   "abbrev": {
+    "n": 0,
+    "rateGe2": null,
+    "rateGe3": null,
+    "rateGe4": null,
+    "meanZ": null,
+    "sdZ": null
+   },
+   "menzerath": {
+    "n": 60,
+    "rateGe2": 0.05,
+    "rateGe3": 0,
+    "rateGe4": 0,
+    "meanZ": 0.25,
+    "sdZ": 1.11
+   },
+   "recurLen": {
+    "n": 60,
+    "rateGe2": 0.133,
+    "rateGe3": 0.05,
+    "rateGe4": 0.05,
+    "meanZ": -0.02,
+    "sdZ": 1.6
+   },
+   "lenAcf1": {
+    "n": 60,
+    "rateGe2": 0.05,
+    "rateGe3": 0.033,
+    "rateGe4": 0.017,
+    "meanZ": 0.26,
+    "sdZ": 1.14
+   },
+   "lenDocEps": {
+    "n": 60,
+    "rateGe2": 0.033,
+    "rateGe3": 0,
+    "rateGe4": 0,
+    "meanZ": 0.01,
+    "sdZ": 1.06
+   },
+   "lenCV": {
+    "n": 0,
+    "rateGe2": null,
+    "rateGe3": null,
+    "rateGe4": null,
+    "meanZ": null,
+    "sdZ": null
+   },
+   "lenLogSkew": {
+    "n": 0,
+    "rateGe2": null,
+    "rateGe3": null,
+    "rateGe4": null,
+    "meanZ": null,
+    "sdZ": null
+   }
+  }
+ },
+ "lawFreeWorldsWithAbsZge4": [],
+ "plantedRecovery": [
+  {
+   "world": "pl-burst",
+   "stat": "ttr",
+   "expectedSign": -1,
+   "zDiscoverConfirm": [
+    -58.48,
+    -82.46
+   ],
+   "firesInEveryHalfTested": true,
+   "halvesTested": 2
+  },
+  {
+   "world": "pl-burst",
+   "stat": "hapaxShare",
+   "expectedSign": -1,
+   "zDiscoverConfirm": [
+    -28.37,
+    -59.07
+   ],
+   "firesInEveryHalfTested": true,
+   "halvesTested": 2
+  },
+  {
+   "world": "pl-burst",
+   "stat": "rankBinEnt",
+   "expectedSign": -1,
+   "zDiscoverConfirm": [
+    -126,
+    -190.59
+   ],
+   "firesInEveryHalfTested": true,
+   "halvesTested": 2
+  },
+  {
+   "world": "pl-burst",
+   "stat": "zipfAlpha",
+   "expectedSign": -1,
+   "zDiscoverConfirm": [
+    -10.8,
+    -10.84
+   ],
+   "firesInEveryHalfTested": true,
+   "halvesTested": 2
+  },
+  {
+   "world": "pl-burst",
+   "stat": "recurLen",
+   "expectedSign": 1,
+   "zDiscoverConfirm": [
+    38.82,
+    34.78
+   ],
+   "firesInEveryHalfTested": true,
+   "halvesTested": 2
+  },
+  {
+   "world": "pl-parallel",
+   "stat": "ttr",
+   "expectedSign": -1,
+   "zDiscoverConfirm": [
+    -22.04,
+    null
+   ],
+   "firesInEveryHalfTested": true,
+   "halvesTested": 1
+  },
+  {
+   "world": "pl-length",
+   "stat": "menzerath",
+   "expectedSign": -1,
+   "zDiscoverConfirm": [
+    -32.66,
+    -30.03
+   ],
+   "firesInEveryHalfTested": true,
+   "halvesTested": 2
+  },
+  {
+   "world": "inline-rhythm",
+   "stat": "lenAcf1",
+   "expectedSign": 1,
+   "zDiscoverConfirm": [
+    54.03,
+    null
+   ],
+   "firesInEveryHalfTested": true,
+   "halvesTested": 1
+  },
+  {
+   "world": "inline-rhythm",
+   "stat": "lenDocEps",
+   "expectedSign": 1,
+   "zDiscoverConfirm": [
+    191.67,
+    null
+   ],
+   "firesInEveryHalfTested": true,
+   "halvesTested": 1
+  },
+  {
+   "world": "inline-topical",
+   "stat": "ttr",
+   "expectedSign": -1,
+   "zDiscoverConfirm": [
+    -51.57,
+    null
+   ],
+   "firesInEveryHalfTested": true,
+   "halvesTested": 1
+  }
+ ],
+ "abbrevPermutationNull": [
+  {
+   "id": "pl-null",
+   "rhoObserved": 0.0313,
+   "permNullMean": -0.0019,
+   "permNullSd": 0.0442,
+   "zPermutation": 0.75,
+   "computeValue": 0.0313
+  },
+  {
+   "id": "pl-length",
+   "rhoObserved": -0.7048,
+   "permNullMean": -0.0039,
+   "permNullSd": 0.0444,
+   "zPermutation": -15.8,
+   "computeValue": -0.7048
+  },
+  {
+   "id": "real-pride",
+   "rhoObserved": -0.4525,
+   "permNullMean": -0.0043,
+   "permNullSd": 0.0454,
+   "zPermutation": -9.87,
+   "computeValue": -0.4525
+  },
+  {
+   "id": "inline-topical",
+   "rhoObserved": 0.0306,
+   "permNullMean": -0.0025,
+   "permNullSd": 0.0419,
+   "zPermutation": 0.79,
+   "computeValue": 0.0306
+  }
+ ],
+ "sizeAndUnitLengthConfound": {
+  "note": "Spearman of v across the 13 test slices; slices are heterogeneous by design, so this is a smoke indicator, not the atlas G1 gate",
+  "perStat": {
+   "zipfAlpha": {
+    "n": 13,
+    "rhoVsMeanUnitLen": 0.06,
+    "rhoVsTokens": -0.25
+   },
+   "heapsBeta": {
+    "n": 13,
+    "rhoVsMeanUnitLen": -0.21,
+    "rhoVsTokens": -0.15
+   },
+   "ttr": {
+    "n": 13,
+    "rhoVsMeanUnitLen": -0.08,
+    "rhoVsTokens": 0.47
+   },
+   "hapaxShare": {
+    "n": 13,
+    "rhoVsMeanUnitLen": -0.25,
+    "rhoVsTokens": -0.31
+   },
+   "rankBinEnt": {
+    "n": 13,
+    "rhoVsMeanUnitLen": -0.18,
+    "rhoVsTokens": 0.1
+   },
+   "abbrev": {
+    "n": 13,
+    "rhoVsMeanUnitLen": -0.23,
+    "rhoVsTokens": 0.32
+   },
+   "menzerath": {
+    "n": 13,
+    "rhoVsMeanUnitLen": -0.27,
+    "rhoVsTokens": 0.09
+   },
+   "recurLen": {
+    "n": 13,
+    "rhoVsMeanUnitLen": -0.02,
+    "rhoVsTokens": -0.13
+   },
+   "lenAcf1": {
+    "n": 13,
+    "rhoVsMeanUnitLen": -0.07,
+    "rhoVsTokens": 0.35
+   },
+   "lenDocEps": {
+    "n": 13,
+    "rhoVsMeanUnitLen": 0.35,
+    "rhoVsTokens": 0.7
+   },
+   "lenCV": {
+    "n": 13,
+    "rhoVsMeanUnitLen": 0.63,
+    "rhoVsTokens": 0.34
+   },
+   "lenLogSkew": {
+    "n": 13,
+    "rhoVsMeanUnitLen": -0.14,
+    "rhoVsTokens": -0.2
+   }
+  }
+ },
+ "randomCutControl": {
+  "menzerath": 0.75,
+  "lenAcf1": -0.19,
+  "lenDocEps": -1.17
+ },
+ "realTextZ": {
+  "zipfAlpha": -4.08,
+  "heapsBeta": 1.75,
+  "ttr": -23.96,
+  "hapaxShare": -9.64,
+  "rankBinEnt": -32.33,
+  "abbrev": null,
+  "menzerath": -12.25,
+  "recurLen": 6.45,
+  "lenAcf1": 34.27,
+  "lenDocEps": 15.02,
+  "lenCV": null,
+  "lenLogSkew": null
+ }
+}

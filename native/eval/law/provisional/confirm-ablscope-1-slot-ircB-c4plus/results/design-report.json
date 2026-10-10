@@ -1,0 +1,9421 @@
+{
+ "tag": "ac",
+ "arms": {
+  "E_CORE": {
+   "note": "PRIMARY: untouched English ubuntu/kubuntu/xubuntu days",
+   "days": 33,
+   "perDay": {
+    "ubuntu/2014-03-15|real": {
+     "units": 675,
+     "goldForms": 50,
+     "pairs": {
+      "B:c2": 1,
+      "B:c4_6": 1,
+      "B:c7_15": 1,
+      "A:c4_6": 10,
+      "A:c7_15": 9
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 554,
+       "posCandidates": 3
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 725,
+       "posCandidates": 1
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 973,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 14,
+       "N": 13
+      },
+      "A:c3": {
+       "P": 15,
+       "N": 17
+      },
+      "A:c4_6": {
+       "P": 35,
+       "N": 17
+      },
+      "A:c7_15": {
+       "P": 33,
+       "N": 31
+      },
+      "A:c16p": {
+       "P": 22,
+       "N": 23
+      },
+      "B:c2": {
+       "P": 2,
+       "N": 321
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 286
+      },
+      "B:c4_6": {
+       "P": 3,
+       "N": 555
+      },
+      "B:c7_15": {
+       "P": 1,
+       "N": 726
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 973
+      }
+     }
+    },
+    "kubuntu/2007-03-15|real": {
+     "units": 4112,
+     "goldForms": 163,
+     "pairs": {
+      "B:c2": 18,
+      "B:c3": 12,
+      "B:c4_6": 16,
+      "B:c7_15": 26,
+      "B:c16p": 7,
+      "A:c4_6": 108,
+      "A:c7_15": 64,
+      "A:c16p": 12
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 4179,
+       "posCandidates": 28
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 4939,
+       "posCandidates": 40
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 4618,
+       "posCandidates": 10
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 91,
+       "N": 223
+      },
+      "A:c3": {
+       "P": 93,
+       "N": 158
+      },
+      "A:c4_6": {
+       "P": 238,
+       "N": 350
+      },
+      "A:c7_15": {
+       "P": 367,
+       "N": 440
+      },
+      "A:c16p": {
+       "P": 159,
+       "N": 282
+      },
+      "B:c2": {
+       "P": 23,
+       "N": 3147
+      },
+      "B:c3": {
+       "P": 13,
+       "N": 2227
+      },
+      "B:c4_6": {
+       "P": 28,
+       "N": 4195
+      },
+      "B:c7_15": {
+       "P": 40,
+       "N": 4965
+      },
+      "B:c16p": {
+       "P": 10,
+       "N": 4625
+      }
+     }
+    },
+    "kubuntu/2009-07-15|real": {
+     "units": 1441,
+     "goldForms": 61,
+     "pairs": {
+      "B:c2": 1,
+      "B:c3": 1,
+      "B:c4_6": 3,
+      "B:c7_15": 5,
+      "A:c4_6": 28,
+      "A:c7_15": 10
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 1318,
+       "posCandidates": 3
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 1541,
+       "posCandidates": 7
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 1361,
+       "posCandidates": 3
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 24,
+       "N": 86
+      },
+      "A:c3": {
+       "P": 23,
+       "N": 76
+      },
+      "A:c4_6": {
+       "P": 55,
+       "N": 86
+      },
+      "A:c7_15": {
+       "P": 64,
+       "N": 162
+      },
+      "A:c16p": {
+       "P": 27,
+       "N": 98
+      },
+      "B:c2": {
+       "P": 1,
+       "N": 891
+      },
+      "B:c3": {
+       "P": 1,
+       "N": 703
+      },
+      "B:c4_6": {
+       "P": 3,
+       "N": 1321
+      },
+      "B:c7_15": {
+       "P": 7,
+       "N": 1546
+      },
+      "B:c16p": {
+       "P": 3,
+       "N": 1361
+      }
+     }
+    },
+    "kubuntu/2010-03-15|real": {
+     "units": 769,
+     "goldForms": 52,
+     "pairs": {
+      "B:c3": 1,
+      "B:c4_6": 2,
+      "B:c7_15": 1,
+      "A:c4_6": 15,
+      "A:c7_15": 5,
+      "A:c16p": 4
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 543,
+       "posCandidates": 3
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 685,
+       "posCandidates": 2
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 675,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 15,
+       "N": 22
+      },
+      "A:c3": {
+       "P": 13,
+       "N": 28
+      },
+      "A:c4_6": {
+       "P": 32,
+       "N": 33
+      },
+      "A:c7_15": {
+       "P": 33,
+       "N": 44
+      },
+      "A:c16p": {
+       "P": 9,
+       "N": 38
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 349
+      },
+      "B:c3": {
+       "P": 1,
+       "N": 352
+      },
+      "B:c4_6": {
+       "P": 3,
+       "N": 545
+      },
+      "B:c7_15": {
+       "P": 2,
+       "N": 686
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 675
+      }
+     }
+    },
+    "kubuntu/2010-07-15|real": {
+     "units": 512,
+     "goldForms": 33,
+     "pairs": {
+      "B:c4_6": 1,
+      "A:c4_6": 1,
+      "A:c7_15": 2
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 217,
+       "posCandidates": 1
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 296,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 335,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 4,
+       "N": 10
+      },
+      "A:c3": {
+       "P": 3,
+       "N": 13
+      },
+      "A:c4_6": {
+       "P": 3,
+       "N": 17
+      },
+      "A:c7_15": {
+       "P": 2,
+       "N": 25
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 27
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 135
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 132
+      },
+      "B:c4_6": {
+       "P": 1,
+       "N": 218
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 296
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 335
+      }
+     }
+    },
+    "kubuntu/2011-03-15|real": {
+     "units": 1440,
+     "goldForms": 37,
+     "pairs": {
+      "B:c7_15": 4,
+      "A:c4_6": 16,
+      "A:c7_15": 14,
+      "A:c16p": 1
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 1212,
+       "posCandidates": 0
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 1493,
+       "posCandidates": 9
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 1411,
+       "posCandidates": 2
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 13,
+       "N": 49
+      },
+      "A:c3": {
+       "P": 13,
+       "N": 40
+      },
+      "A:c4_6": {
+       "P": 48,
+       "N": 106
+      },
+      "A:c7_15": {
+       "P": 117,
+       "N": 133
+      },
+      "A:c16p": {
+       "P": 17,
+       "N": 51
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 828
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 655
+      },
+      "B:c4_6": {
+       "P": 0,
+       "N": 1212
+      },
+      "B:c7_15": {
+       "P": 9,
+       "N": 1497
+      },
+      "B:c16p": {
+       "P": 2,
+       "N": 1411
+      }
+     }
+    },
+    "kubuntu/2011-07-15|real": {
+     "units": 531,
+     "goldForms": 33,
+     "pairs": {
+      "A:c4_6": 7,
+      "A:c7_15": 8
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 259,
+       "posCandidates": 0
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 275,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 232,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 5,
+       "N": 11
+      },
+      "A:c3": {
+       "P": 7,
+       "N": 13
+      },
+      "A:c4_6": {
+       "P": 14,
+       "N": 25
+      },
+      "A:c7_15": {
+       "P": 19,
+       "N": 27
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 23
+      },
+      "B:c2": {
+       "P": 1,
+       "N": 142
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 172
+      },
+      "B:c4_6": {
+       "P": 0,
+       "N": 259
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 275
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 232
+      }
+     }
+    },
+    "kubuntu/2012-03-15|real": {
+     "units": 359,
+     "goldForms": 20,
+     "pairs": {
+      "A:c4_6": 4,
+      "A:c7_15": 3
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 152,
+       "posCandidates": 0
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 176,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 143,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 3,
+       "N": 1
+      },
+      "A:c3": {
+       "P": 3,
+       "N": 5
+      },
+      "A:c4_6": {
+       "P": 10,
+       "N": 6
+      },
+      "A:c7_15": {
+       "P": 10,
+       "N": 4
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 3
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 58
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 70
+      },
+      "B:c4_6": {
+       "P": 0,
+       "N": 152
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 176
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 143
+      }
+     }
+    },
+    "kubuntu/2012-07-15|real": {
+     "units": 511,
+     "goldForms": 28,
+     "pairs": {
+      "B:c2": 1,
+      "B:c3": 1,
+      "B:c7_15": 1,
+      "A:c4_6": 2,
+      "A:c16p": 1
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 213,
+       "posCandidates": 0
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 212,
+       "posCandidates": 1
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 272,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 2,
+       "N": 8
+      },
+      "A:c3": {
+       "P": 3,
+       "N": 12
+      },
+      "A:c4_6": {
+       "P": 5,
+       "N": 35
+      },
+      "A:c7_15": {
+       "P": 3,
+       "N": 32
+      },
+      "A:c16p": {
+       "P": 1,
+       "N": 32
+      },
+      "B:c2": {
+       "P": 1,
+       "N": 107
+      },
+      "B:c3": {
+       "P": 1,
+       "N": 110
+      },
+      "B:c4_6": {
+       "P": 0,
+       "N": 213
+      },
+      "B:c7_15": {
+       "P": 1,
+       "N": 213
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 272
+      }
+     }
+    },
+    "kubuntu/2013-03-15|real": {
+     "units": 423,
+     "goldForms": 20,
+     "pairs": {
+      "B:c3": 1,
+      "B:c4_6": 1,
+      "A:c4_6": 4,
+      "A:c7_15": 2
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 130,
+       "posCandidates": 1
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 155,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 125,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 5,
+       "N": 5
+      },
+      "A:c3": {
+       "P": 3,
+       "N": 5
+      },
+      "A:c4_6": {
+       "P": 8,
+       "N": 16
+      },
+      "A:c7_15": {
+       "P": 3,
+       "N": 28
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 12
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 64
+      },
+      "B:c3": {
+       "P": 1,
+       "N": 87
+      },
+      "B:c4_6": {
+       "P": 1,
+       "N": 131
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 155
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 125
+      }
+     }
+    },
+    "kubuntu/2013-07-15|real": {
+     "skipped": "too short",
+     "units": 106
+    },
+    "kubuntu/2014-03-15|real": {
+     "skipped": "too short",
+     "units": 66
+    },
+    "kubuntu/2014-07-15|real": {
+     "units": 396,
+     "goldForms": 26,
+     "pairs": {
+      "B:c4_6": 1,
+      "A:c7_15": 1
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 138,
+       "posCandidates": 1
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 152,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 165,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 1,
+       "N": 4
+      },
+      "A:c3": {
+       "P": 1,
+       "N": 3
+      },
+      "A:c4_6": {
+       "P": 1,
+       "N": 13
+      },
+      "A:c7_15": {
+       "P": 6,
+       "N": 15
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 16
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 59
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 77
+      },
+      "B:c4_6": {
+       "P": 1,
+       "N": 139
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 152
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 165
+      }
+     }
+    },
+    "kubuntu/2015-03-15|real": {
+     "skipped": "too short",
+     "units": 110
+    },
+    "kubuntu/2015-07-15|real": {
+     "units": 411,
+     "goldForms": 23,
+     "pairs": {},
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 239,
+       "posCandidates": 0
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 253,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 237,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 1,
+       "N": 2
+      },
+      "A:c3": {
+       "P": 1,
+       "N": 3
+      },
+      "A:c4_6": {
+       "P": 4,
+       "N": 11
+      },
+      "A:c7_15": {
+       "P": 4,
+       "N": 10
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 5
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 83
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 103
+      },
+      "B:c4_6": {
+       "P": 0,
+       "N": 239
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 253
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 237
+      }
+     }
+    },
+    "xubuntu/2007-03-15|real": {
+     "units": 1052,
+     "goldForms": 32,
+     "pairs": {
+      "B:c2": 2,
+      "B:c3": 1,
+      "B:c7_15": 2,
+      "A:c4_6": 6,
+      "A:c7_15": 4,
+      "A:c16p": 3
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 876,
+       "posCandidates": 1
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 1052,
+       "posCandidates": 3
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 954,
+       "posCandidates": 1
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 11,
+       "N": 50
+      },
+      "A:c3": {
+       "P": 10,
+       "N": 35
+      },
+      "A:c4_6": {
+       "P": 26,
+       "N": 61
+      },
+      "A:c7_15": {
+       "P": 38,
+       "N": 83
+      },
+      "A:c16p": {
+       "P": 4,
+       "N": 80
+      },
+      "B:c2": {
+       "P": 3,
+       "N": 543
+      },
+      "B:c3": {
+       "P": 1,
+       "N": 473
+      },
+      "B:c4_6": {
+       "P": 1,
+       "N": 876
+      },
+      "B:c7_15": {
+       "P": 3,
+       "N": 1054
+      },
+      "B:c16p": {
+       "P": 1,
+       "N": 954
+      }
+     }
+    },
+    "xubuntu/2007-07-15|real": {
+     "units": 454,
+     "goldForms": 15,
+     "pairs": {
+      "B:c3": 1
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 126,
+       "posCandidates": 0
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 143,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 154,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 2,
+       "N": 9
+      },
+      "A:c3": {
+       "P": 2,
+       "N": 11
+      },
+      "A:c4_6": {
+       "P": 4,
+       "N": 26
+      },
+      "A:c7_15": {
+       "P": 1,
+       "N": 20
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 12
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 57
+      },
+      "B:c3": {
+       "P": 1,
+       "N": 82
+      },
+      "B:c4_6": {
+       "P": 0,
+       "N": 126
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 143
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 154
+      }
+     }
+    },
+    "xubuntu/2008-03-15|real": {
+     "units": 295,
+     "goldForms": 10,
+     "pairs": {},
+     "natural": {
+      "c4_6": {
+       "drawn": 28,
+       "pool": 28,
+       "posCandidates": 0
+      },
+      "c7_15": {
+       "drawn": 19,
+       "pool": 19,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 22,
+       "pool": 22,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 0,
+       "N": 2
+      },
+      "A:c3": {
+       "P": 0,
+       "N": 1
+      },
+      "A:c4_6": {
+       "P": 0,
+       "N": 3
+      },
+      "A:c7_15": {
+       "P": 1,
+       "N": 1
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 4
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 7
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 14
+      },
+      "B:c4_6": {
+       "P": 0,
+       "N": 28
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 19
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 22
+      }
+     }
+    },
+    "xubuntu/2008-07-15|real": {
+     "units": 587,
+     "goldForms": 25,
+     "pairs": {
+      "B:c4_6": 1,
+      "A:c4_6": 7,
+      "A:c7_15": 5
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 278,
+       "posCandidates": 1
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 300,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 329,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 7,
+       "N": 11
+      },
+      "A:c3": {
+       "P": 8,
+       "N": 16
+      },
+      "A:c4_6": {
+       "P": 17,
+       "N": 28
+      },
+      "A:c7_15": {
+       "P": 19,
+       "N": 30
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 24
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 151
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 149
+      },
+      "B:c4_6": {
+       "P": 1,
+       "N": 279
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 300
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 329
+      }
+     }
+    },
+    "xubuntu/2009-03-15|real": {
+     "units": 466,
+     "goldForms": 31,
+     "pairs": {
+      "B:c2": 1,
+      "A:c4_6": 3
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 199,
+       "posCandidates": 0
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 243,
+       "posCandidates": 1
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 200,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 1,
+       "N": 11
+      },
+      "A:c3": {
+       "P": 2,
+       "N": 16
+      },
+      "A:c4_6": {
+       "P": 5,
+       "N": 21
+      },
+      "A:c7_15": {
+       "P": 1,
+       "N": 27
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 26
+      },
+      "B:c2": {
+       "P": 1,
+       "N": 78
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 86
+      },
+      "B:c4_6": {
+       "P": 0,
+       "N": 199
+      },
+      "B:c7_15": {
+       "P": 1,
+       "N": 243
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 200
+      }
+     }
+    },
+    "xubuntu/2009-07-15|real": {
+     "units": 290,
+     "goldForms": 25,
+     "pairs": {
+      "A:c4_6": 1
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 23,
+       "pool": 23,
+       "posCandidates": 0
+      },
+      "c7_15": {
+       "drawn": 21,
+       "pool": 21,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 10,
+       "pool": 10,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 0,
+       "N": 0
+      },
+      "A:c3": {
+       "P": 0,
+       "N": 5
+      },
+      "A:c4_6": {
+       "P": 1,
+       "N": 9
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 3
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 0
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 2
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 15
+      },
+      "B:c4_6": {
+       "P": 0,
+       "N": 23
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 21
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 10
+      }
+     }
+    },
+    "xubuntu/2010-03-15|real": {
+     "skipped": "too short",
+     "units": 118
+    },
+    "xubuntu/2010-07-15|real": {
+     "skipped": "too short",
+     "units": 191
+    },
+    "xubuntu/2011-03-15|real": {
+     "units": 366,
+     "goldForms": 15,
+     "pairs": {
+      "B:c3": 1,
+      "A:c4_6": 1
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 118,
+       "posCandidates": 0
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 152,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 128,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 2,
+       "N": 5
+      },
+      "A:c3": {
+       "P": 1,
+       "N": 4
+      },
+      "A:c4_6": {
+       "P": 1,
+       "N": 11
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 20
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 11
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 33
+      },
+      "B:c3": {
+       "P": 1,
+       "N": 56
+      },
+      "B:c4_6": {
+       "P": 0,
+       "N": 118
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 152
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 128
+      }
+     }
+    },
+    "xubuntu/2011-07-15|real": {
+     "units": 341,
+     "goldForms": 22,
+     "pairs": {
+      "B:c7_15": 1,
+      "A:c4_6": 1,
+      "A:c7_15": 1
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 76,
+       "pool": 76,
+       "posCandidates": 0
+      },
+      "c7_15": {
+       "drawn": 80,
+       "pool": 80,
+       "posCandidates": 1
+      },
+      "c16p": {
+       "drawn": 91,
+       "pool": 91,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 2,
+       "N": 3
+      },
+      "A:c3": {
+       "P": 3,
+       "N": 2
+      },
+      "A:c4_6": {
+       "P": 7,
+       "N": 4
+      },
+      "A:c7_15": {
+       "P": 1,
+       "N": 12
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 9
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 19
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 41
+      },
+      "B:c4_6": {
+       "P": 0,
+       "N": 76
+      },
+      "B:c7_15": {
+       "P": 1,
+       "N": 81
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 91
+      }
+     }
+    },
+    "xubuntu/2012-03-15|real": {
+     "skipped": "too short",
+     "units": 201
+    },
+    "xubuntu/2012-07-15|real": {
+     "skipped": "too short",
+     "units": 136
+    },
+    "xubuntu/2013-03-15|real": {
+     "units": 302,
+     "goldForms": 29,
+     "pairs": {
+      "B:c4_6": 1
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 86,
+       "pool": 86,
+       "posCandidates": 1
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 118,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 88,
+       "pool": 88,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 1,
+       "N": 1
+      },
+      "A:c3": {
+       "P": 1,
+       "N": 4
+      },
+      "A:c4_6": {
+       "P": 3,
+       "N": 7
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 5
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 2
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 17
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 42
+      },
+      "B:c4_6": {
+       "P": 1,
+       "N": 87
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 118
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 88
+      }
+     }
+    },
+    "xubuntu/2013-07-15|real": {
+     "skipped": "too short",
+     "units": 241
+    },
+    "xubuntu/2014-03-15|real": {
+     "skipped": "too short",
+     "units": 254
+    },
+    "xubuntu/2014-07-15|real": {
+     "skipped": "too short",
+     "units": 79
+    },
+    "xubuntu/2015-03-15|real": {
+     "skipped": "too short",
+     "units": 56
+    },
+    "xubuntu/2015-07-15|real": {
+     "skipped": "too short",
+     "units": 132
+    }
+   },
+   "pairs": 481,
+   "pooledControls": {
+    "A:c4_6": {
+     "n": 214,
+     "R_LOGC": 0.505,
+     "R_POS": 0.504,
+     "R_IPOS": 0.5,
+     "R_FB": 0.436,
+     "R_LEN": 0.546,
+     "R_SL": 0.534
+    },
+    "A:c7_15": {
+     "n": 128,
+     "R_LOGC": 0.514,
+     "R_POS": 0.509,
+     "R_IPOS": 0.5,
+     "R_FB": 0.416,
+     "R_LEN": 0.573,
+     "R_SL": 0.518
+    },
+    "A:c16p": {
+     "n": 21,
+     "R_LOGC": 0.553,
+     "R_POS": 0.472,
+     "R_IPOS": 0.5,
+     "R_FB": 0.333,
+     "R_LEN": 0.493,
+     "R_SL": 0.571
+    },
+    "B:c2": {
+     "n": 24,
+     "R_LOGC": 0.5,
+     "R_POS": 0.507,
+     "R_IPOS": 0.418,
+     "R_FB": 0.513,
+     "R_LEN": 0.505,
+     "R_SL": 0.464
+    },
+    "B:c3": {
+     "n": 19,
+     "R_LOGC": 0.5,
+     "R_POS": 0.481,
+     "R_IPOS": 0.537,
+     "R_FB": 0.489,
+     "R_LEN": 0.514,
+     "R_SL": 0.46
+    },
+    "B:c4_6": {
+     "n": 27,
+     "R_LOGC": 0.5,
+     "R_POS": 0.477,
+     "R_IPOS": 0.501,
+     "R_FB": 0.525,
+     "R_LEN": 0.512,
+     "R_SL": 0.477
+    },
+    "B:c7_15": {
+     "n": 41,
+     "R_LOGC": 0.528,
+     "R_POS": 0.499,
+     "R_IPOS": 0.509,
+     "R_FB": 0.474,
+     "R_LEN": 0.535,
+     "R_SL": 0.48
+    }
+   }
+  },
+  "E_SRV": {
+   "note": "untouched English ubuntu-server days (same register, channel not named in the rule scope)",
+   "days": 17,
+   "perDay": {
+    "ubuntu-server/2007-11-15|real": {
+     "units": 398,
+     "goldForms": 18,
+     "pairs": {
+      "B:c3": 1,
+      "A:c4_6": 1
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 134,
+       "posCandidates": 0
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 163,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 193,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 3,
+       "N": 7
+      },
+      "A:c3": {
+       "P": 2,
+       "N": 9
+      },
+      "A:c4_6": {
+       "P": 3,
+       "N": 16
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 18
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 9
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 63
+      },
+      "B:c3": {
+       "P": 1,
+       "N": 77
+      },
+      "B:c4_6": {
+       "P": 0,
+       "N": 134
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 163
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 193
+      }
+     }
+    },
+    "ubuntu-server/2008-03-15|real": {
+     "units": 698,
+     "goldForms": 15,
+     "pairs": {
+      "B:c4_6": 1,
+      "A:c4_6": 8,
+      "A:c7_15": 5
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 596,
+       "posCandidates": 1
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 575,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 857,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 3,
+       "N": 23
+      },
+      "A:c3": {
+       "P": 5,
+       "N": 29
+      },
+      "A:c4_6": {
+       "P": 9,
+       "N": 46
+      },
+      "A:c7_15": {
+       "P": 9,
+       "N": 35
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 49
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 294
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 300
+      },
+      "B:c4_6": {
+       "P": 1,
+       "N": 597
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 575
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 857
+      }
+     }
+    },
+    "ubuntu-server/2008-07-15|real": {
+     "units": 601,
+     "goldForms": 17,
+     "pairs": {
+      "B:c4_6": 2,
+      "B:c7_15": 6,
+      "A:c4_6": 7,
+      "A:c7_15": 2
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 336,
+       "posCandidates": 3
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 350,
+       "posCandidates": 6
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 301,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 2,
+       "N": 12
+      },
+      "A:c3": {
+       "P": 2,
+       "N": 24
+      },
+      "A:c4_6": {
+       "P": 7,
+       "N": 35
+      },
+      "A:c7_15": {
+       "P": 4,
+       "N": 46
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 29
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 210
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 205
+      },
+      "B:c4_6": {
+       "P": 3,
+       "N": 338
+      },
+      "B:c7_15": {
+       "P": 6,
+       "N": 356
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 301
+      }
+     }
+    },
+    "ubuntu-server/2009-03-15|real": {
+     "skipped": "too short",
+     "units": 112
+    },
+    "ubuntu-server/2009-07-15|real": {
+     "units": 482,
+     "goldForms": 21,
+     "pairs": {
+      "B:c3": 2,
+      "B:c4_6": 1,
+      "A:c4_6": 6,
+      "A:c7_15": 4
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 254,
+       "posCandidates": 1
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 315,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 215,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 7,
+       "N": 11
+      },
+      "A:c3": {
+       "P": 4,
+       "N": 15
+      },
+      "A:c4_6": {
+       "P": 6,
+       "N": 29
+      },
+      "A:c7_15": {
+       "P": 5,
+       "N": 27
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 10
+      },
+      "B:c2": {
+       "P": 1,
+       "N": 120
+      },
+      "B:c3": {
+       "P": 2,
+       "N": 142
+      },
+      "B:c4_6": {
+       "P": 1,
+       "N": 255
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 315
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 215
+      }
+     }
+    },
+    "ubuntu-server/2010-03-15|real": {
+     "units": 660,
+     "goldForms": 39,
+     "pairs": {
+      "B:c2": 1,
+      "A:c4_6": 8,
+      "A:c7_15": 6
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 488,
+       "posCandidates": 0
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 567,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 658,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 11,
+       "N": 9
+      },
+      "A:c3": {
+       "P": 12,
+       "N": 11
+      },
+      "A:c4_6": {
+       "P": 32,
+       "N": 24
+      },
+      "A:c7_15": {
+       "P": 51,
+       "N": 45
+      },
+      "A:c16p": {
+       "P": 16,
+       "N": 32
+      },
+      "B:c2": {
+       "P": 1,
+       "N": 241
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 246
+      },
+      "B:c4_6": {
+       "P": 0,
+       "N": 488
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 567
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 658
+      }
+     }
+    },
+    "ubuntu-server/2010-07-15|real": {
+     "units": 840,
+     "goldForms": 48,
+     "pairs": {
+      "B:c3": 1,
+      "B:c4_6": 1,
+      "A:c4_6": 21,
+      "A:c7_15": 13,
+      "A:c16p": 2
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 671,
+       "posCandidates": 1
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 725,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 699,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 18,
+       "N": 30
+      },
+      "A:c3": {
+       "P": 18,
+       "N": 30
+      },
+      "A:c4_6": {
+       "P": 31,
+       "N": 67
+      },
+      "A:c7_15": {
+       "P": 31,
+       "N": 70
+      },
+      "A:c16p": {
+       "P": 2,
+       "N": 37
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 448
+      },
+      "B:c3": {
+       "P": 1,
+       "N": 394
+      },
+      "B:c4_6": {
+       "P": 1,
+       "N": 672
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 725
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 699
+      }
+     }
+    },
+    "ubuntu-server/2011-03-15|real": {
+     "units": 629,
+     "goldForms": 36,
+     "pairs": {
+      "A:c4_6": 8,
+      "A:c7_15": 6
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 528,
+       "posCandidates": 0
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 555,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 580,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 9,
+       "N": 24
+      },
+      "A:c3": {
+       "P": 10,
+       "N": 16
+      },
+      "A:c4_6": {
+       "P": 17,
+       "N": 25
+      },
+      "A:c7_15": {
+       "P": 13,
+       "N": 43
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 33
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 274
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 275
+      },
+      "B:c4_6": {
+       "P": 0,
+       "N": 528
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 555
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 580
+      }
+     }
+    },
+    "ubuntu-server/2011-07-15|real": {
+     "units": 446,
+     "goldForms": 23,
+     "pairs": {
+      "B:c2": 1,
+      "A:c4_6": 1
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 234,
+       "posCandidates": 0
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 247,
+       "posCandidates": 1
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 275,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 3,
+       "N": 7
+      },
+      "A:c3": {
+       "P": 4,
+       "N": 7
+      },
+      "A:c4_6": {
+       "P": 8,
+       "N": 6
+      },
+      "A:c7_15": {
+       "P": 9,
+       "N": 13
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 12
+      },
+      "B:c2": {
+       "P": 1,
+       "N": 107
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 130
+      },
+      "B:c4_6": {
+       "P": 0,
+       "N": 234
+      },
+      "B:c7_15": {
+       "P": 1,
+       "N": 247
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 275
+      }
+     }
+    },
+    "ubuntu-server/2012-03-15|real": {
+     "units": 373,
+     "goldForms": 19,
+     "pairs": {
+      "B:c4_6": 2,
+      "A:c4_6": 2,
+      "A:c7_15": 1
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 126,
+       "posCandidates": 2
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 159,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 159,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 5,
+       "N": 3
+      },
+      "A:c3": {
+       "P": 6,
+       "N": 5
+      },
+      "A:c4_6": {
+       "P": 13,
+       "N": 7
+      },
+      "A:c7_15": {
+       "P": 7,
+       "N": 10
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 8
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 44
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 86
+      },
+      "B:c4_6": {
+       "P": 2,
+       "N": 128
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 159
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 159
+      }
+     }
+    },
+    "ubuntu-server/2012-07-15|real": {
+     "units": 291,
+     "goldForms": 17,
+     "pairs": {
+      "B:c4_6": 1,
+      "A:c4_6": 2
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 46,
+       "pool": 46,
+       "posCandidates": 1
+      },
+      "c7_15": {
+       "drawn": 40,
+       "pool": 40,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 26,
+       "pool": 26,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 1,
+       "N": 1
+      },
+      "A:c3": {
+       "P": 1,
+       "N": 1
+      },
+      "A:c4_6": {
+       "P": 4,
+       "N": 6
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 1
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 6
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 7
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 21
+      },
+      "B:c4_6": {
+       "P": 1,
+       "N": 47
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 40
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 26
+      }
+     }
+    },
+    "ubuntu-server/2013-03-15|real": {
+     "units": 505,
+     "goldForms": 27,
+     "pairs": {
+      "B:c4_6": 1,
+      "A:c4_6": 4,
+      "A:c7_15": 2
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 342,
+       "posCandidates": 1
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 307,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 365,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 3,
+       "N": 7
+      },
+      "A:c3": {
+       "P": 3,
+       "N": 9
+      },
+      "A:c4_6": {
+       "P": 11,
+       "N": 29
+      },
+      "A:c7_15": {
+       "P": 10,
+       "N": 34
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 41
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 179
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 201
+      },
+      "B:c4_6": {
+       "P": 1,
+       "N": 343
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 307
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 365
+      }
+     }
+    },
+    "ubuntu-server/2013-07-15|real": {
+     "units": 669,
+     "goldForms": 20,
+     "pairs": {
+      "A:c4_6": 2,
+      "A:c7_15": 3
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 412,
+       "posCandidates": 0
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 485,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 497,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 2,
+       "N": 24
+      },
+      "A:c3": {
+       "P": 0,
+       "N": 15
+      },
+      "A:c4_6": {
+       "P": 6,
+       "N": 40
+      },
+      "A:c7_15": {
+       "P": 3,
+       "N": 61
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 52
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 223
+      },
+      "B:c3": {
+       "P": 1,
+       "N": 248
+      },
+      "B:c4_6": {
+       "P": 0,
+       "N": 412
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 485
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 497
+      }
+     }
+    },
+    "ubuntu-server/2014-03-15|real": {
+     "skipped": "too short",
+     "units": 106
+    },
+    "ubuntu-server/2014-07-15|real": {
+     "units": 410,
+     "goldForms": 15,
+     "pairs": {
+      "A:c4_6": 3,
+      "A:c7_15": 2
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 169,
+       "posCandidates": 0
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 222,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 203,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 2,
+       "N": 7
+      },
+      "A:c3": {
+       "P": 2,
+       "N": 8
+      },
+      "A:c4_6": {
+       "P": 6,
+       "N": 16
+      },
+      "A:c7_15": {
+       "P": 4,
+       "N": 25
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 17
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 68
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 106
+      },
+      "B:c4_6": {
+       "P": 0,
+       "N": 169
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 222
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 203
+      }
+     }
+    },
+    "ubuntu-server/2015-03-15|real": {
+     "skipped": "too short",
+     "units": 61
+    },
+    "ubuntu-server/2015-07-15|real": {
+     "skipped": "too short",
+     "units": 77
+    }
+   },
+   "pairs": 140,
+   "pooledControls": {
+    "A:c4_6": {
+     "n": 73,
+     "R_LOGC": 0.438,
+     "R_POS": 0.48,
+     "R_IPOS": 0.5,
+     "R_FB": 0.501,
+     "R_LEN": 0.53,
+     "R_SL": 0.5
+    },
+    "A:c7_15": {
+     "n": 44,
+     "R_LOGC": 0.519,
+     "R_POS": 0.495,
+     "R_IPOS": 0.5,
+     "R_FB": 0.299,
+     "R_LEN": 0.553,
+     "R_SL": 0.527
+    },
+    "B:c4_6": {
+     "n": 9,
+     "R_LOGC": 0.426,
+     "R_POS": 0.556,
+     "R_IPOS": 0.5,
+     "R_FB": 0.451,
+     "R_LEN": 0.512,
+     "R_SL": 0.549
+    }
+   }
+  },
+  "E_REUSE": {
+   "note": "NOT untouched: English days read by name-rule-informal / name-company only; scope replication, excluded from the verdict",
+   "days": 14,
+   "perDay": {
+    "ubuntu/2004-11-15|real": {
+     "units": 5106,
+     "goldForms": 176,
+     "pairs": {
+      "B:c2": 10,
+      "B:c3": 7,
+      "B:c4_6": 14,
+      "B:c7_15": 14,
+      "B:c16p": 14,
+      "A:c4_6": 10,
+      "A:c7_15": 10,
+      "A:c16p": 10
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 30,
+       "pool": 4718,
+       "posCandidates": 44
+      },
+      "c7_15": {
+       "drawn": 30,
+       "pool": 4936,
+       "posCandidates": 90
+      },
+      "c16p": {
+       "drawn": 30,
+       "pool": 4701,
+       "posCandidates": 44
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 155,
+       "N": 228
+      },
+      "A:c3": {
+       "P": 155,
+       "N": 174
+      },
+      "A:c4_6": {
+       "P": 354,
+       "N": 375
+      },
+      "A:c7_15": {
+       "P": 504,
+       "N": 403
+      },
+      "A:c16p": {
+       "P": 494,
+       "N": 310
+      },
+      "B:c2": {
+       "P": 19,
+       "N": 3717
+      },
+      "B:c3": {
+       "P": 8,
+       "N": 2723
+      },
+      "B:c4_6": {
+       "P": 44,
+       "N": 4732
+      },
+      "B:c7_15": {
+       "P": 90,
+       "N": 4950
+      },
+      "B:c16p": {
+       "P": 44,
+       "N": 4715
+      }
+     }
+    },
+    "ubuntu/2005-03-15|real": {
+     "units": 7532,
+     "goldForms": 264,
+     "pairs": {
+      "B:c2": 10,
+      "B:c3": 10,
+      "B:c4_6": 14,
+      "B:c7_15": 14,
+      "B:c16p": 14,
+      "A:c4_6": 10,
+      "A:c7_15": 10,
+      "A:c16p": 10
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 30,
+       "pool": 6249,
+       "posCandidates": 78
+      },
+      "c7_15": {
+       "drawn": 30,
+       "pool": 6177,
+       "posCandidates": 178
+      },
+      "c16p": {
+       "drawn": 30,
+       "pool": 6056,
+       "posCandidates": 25
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 242,
+       "N": 392
+      },
+      "A:c3": {
+       "P": 216,
+       "N": 326
+      },
+      "A:c4_6": {
+       "P": 487,
+       "N": 597
+      },
+      "A:c7_15": {
+       "P": 740,
+       "N": 695
+      },
+      "A:c16p": {
+       "P": 353,
+       "N": 457
+      },
+      "B:c2": {
+       "P": 28,
+       "N": 5160
+      },
+      "B:c3": {
+       "P": 29,
+       "N": 3574
+      },
+      "B:c4_6": {
+       "P": 78,
+       "N": 6263
+      },
+      "B:c7_15": {
+       "P": 178,
+       "N": 6191
+      },
+      "B:c16p": {
+       "P": 25,
+       "N": 6070
+      }
+     }
+    },
+    "ubuntu/2006-07-15|real": {
+     "units": 11216,
+     "goldForms": 469,
+     "pairs": {
+      "B:c2": 10,
+      "B:c3": 10,
+      "B:c4_6": 14,
+      "B:c7_15": 14,
+      "B:c16p": 14,
+      "A:c4_6": 10,
+      "A:c7_15": 10,
+      "A:c16p": 10
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 30,
+       "pool": 12954,
+       "posCandidates": 60
+      },
+      "c7_15": {
+       "drawn": 30,
+       "pool": 14578,
+       "posCandidates": 84
+      },
+      "c16p": {
+       "drawn": 30,
+       "pool": 15357,
+       "posCandidates": 28
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 396,
+       "N": 489
+      },
+      "A:c3": {
+       "P": 369,
+       "N": 347
+      },
+      "A:c4_6": {
+       "P": 873,
+       "N": 770
+      },
+      "A:c7_15": {
+       "P": 1512,
+       "N": 966
+      },
+      "A:c16p": {
+       "P": 1211,
+       "N": 797
+      },
+      "B:c2": {
+       "P": 38,
+       "N": 10180
+      },
+      "B:c3": {
+       "P": 25,
+       "N": 7157
+      },
+      "B:c4_6": {
+       "P": 60,
+       "N": 12968
+      },
+      "B:c7_15": {
+       "P": 84,
+       "N": 14592
+      },
+      "B:c16p": {
+       "P": 28,
+       "N": 15371
+      }
+     }
+    },
+    "ubuntu/2007-03-15|real": {
+     "units": 10657,
+     "goldForms": 520,
+     "pairs": {
+      "B:c2": 10,
+      "B:c3": 10,
+      "B:c4_6": 14,
+      "B:c7_15": 14,
+      "B:c16p": 12,
+      "A:c4_6": 10,
+      "A:c7_15": 10,
+      "A:c16p": 10
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 30,
+       "pool": 12309,
+       "posCandidates": 85
+      },
+      "c7_15": {
+       "drawn": 30,
+       "pool": 13889,
+       "posCandidates": 74
+      },
+      "c16p": {
+       "drawn": 30,
+       "pool": 15759,
+       "posCandidates": 62
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 413,
+       "N": 438
+      },
+      "A:c3": {
+       "P": 390,
+       "N": 348
+      },
+      "A:c4_6": {
+       "P": 853,
+       "N": 654
+      },
+      "A:c7_15": {
+       "P": 1318,
+       "N": 894
+      },
+      "A:c16p": {
+       "P": 1171,
+       "N": 592
+      },
+      "B:c2": {
+       "P": 58,
+       "N": 9505
+      },
+      "B:c3": {
+       "P": 49,
+       "N": 6642
+      },
+      "B:c4_6": {
+       "P": 85,
+       "N": 12323
+      },
+      "B:c7_15": {
+       "P": 74,
+       "N": 13903
+      },
+      "B:c16p": {
+       "P": 62,
+       "N": 15771
+      }
+     }
+    },
+    "ubuntu/2009-07-15|real": {
+     "units": 9765,
+     "goldForms": 495,
+     "pairs": {
+      "B:c2": 10,
+      "B:c3": 10,
+      "B:c4_6": 14,
+      "B:c7_15": 14,
+      "B:c16p": 14,
+      "A:c4_6": 10,
+      "A:c7_15": 10,
+      "A:c16p": 10
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 30,
+       "pool": 12263,
+       "posCandidates": 167
+      },
+      "c7_15": {
+       "drawn": 30,
+       "pool": 14903,
+       "posCandidates": 152
+      },
+      "c16p": {
+       "drawn": 30,
+       "pool": 15215,
+       "posCandidates": 71
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 400,
+       "N": 319
+      },
+      "A:c3": {
+       "P": 364,
+       "N": 241
+      },
+      "A:c4_6": {
+       "P": 831,
+       "N": 513
+      },
+      "A:c7_15": {
+       "P": 1556,
+       "N": 661
+      },
+      "A:c16p": {
+       "P": 1595,
+       "N": 413
+      },
+      "B:c2": {
+       "P": 113,
+       "N": 9193
+      },
+      "B:c3": {
+       "P": 89,
+       "N": 6557
+      },
+      "B:c4_6": {
+       "P": 167,
+       "N": 12277
+      },
+      "B:c7_15": {
+       "P": 152,
+       "N": 14917
+      },
+      "B:c16p": {
+       "P": 71,
+       "N": 15229
+      }
+     }
+    },
+    "ubuntu/2012-07-15|real": {
+     "units": 4216,
+     "goldForms": 261,
+     "pairs": {
+      "B:c2": 10,
+      "B:c3": 10,
+      "B:c4_6": 14,
+      "B:c7_15": 14,
+      "B:c16p": 9,
+      "A:c4_6": 10,
+      "A:c7_15": 10,
+      "A:c16p": 8
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 30,
+       "pool": 5389,
+       "posCandidates": 54
+      },
+      "c7_15": {
+       "drawn": 30,
+       "pool": 5704,
+       "posCandidates": 68
+      },
+      "c16p": {
+       "drawn": 30,
+       "pool": 7284,
+       "posCandidates": 46
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 158,
+       "N": 145
+      },
+      "A:c3": {
+       "P": 152,
+       "N": 133
+      },
+      "A:c4_6": {
+       "P": 317,
+       "N": 268
+      },
+      "A:c7_15": {
+       "P": 492,
+       "N": 262
+      },
+      "A:c16p": {
+       "P": 247,
+       "N": 228
+      },
+      "B:c2": {
+       "P": 21,
+       "N": 3971
+      },
+      "B:c3": {
+       "P": 20,
+       "N": 2759
+      },
+      "B:c4_6": {
+       "P": 54,
+       "N": 5403
+      },
+      "B:c7_15": {
+       "P": 68,
+       "N": 5718
+      },
+      "B:c16p": {
+       "P": 46,
+       "N": 7293
+      }
+     }
+    },
+    "ubuntu/2014-07-15|real": {
+     "units": 2915,
+     "goldForms": 181,
+     "pairs": {
+      "B:c2": 10,
+      "B:c3": 5,
+      "B:c4_6": 11,
+      "B:c7_15": 9,
+      "B:c16p": 2,
+      "A:c4_6": 10,
+      "A:c7_15": 10,
+      "A:c16p": 5
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 30,
+       "pool": 3738,
+       "posCandidates": 13
+      },
+      "c7_15": {
+       "drawn": 30,
+       "pool": 4117,
+       "posCandidates": 12
+      },
+      "c16p": {
+       "drawn": 30,
+       "pool": 6296,
+       "posCandidates": 10
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 96,
+       "N": 125
+      },
+      "A:c3": {
+       "P": 96,
+       "N": 91
+      },
+      "A:c4_6": {
+       "P": 197,
+       "N": 191
+      },
+      "A:c7_15": {
+       "P": 252,
+       "N": 231
+      },
+      "A:c16p": {
+       "P": 324,
+       "N": 124
+      },
+      "B:c2": {
+       "P": 12,
+       "N": 2720
+      },
+      "B:c3": {
+       "P": 5,
+       "N": 1977
+      },
+      "B:c4_6": {
+       "P": 13,
+       "N": 3749
+      },
+      "B:c7_15": {
+       "P": 12,
+       "N": 4126
+      },
+      "B:c16p": {
+       "P": 10,
+       "N": 6298
+      }
+     }
+    },
+    "ubuntu/2015-03-15|real": {
+     "units": 3245,
+     "goldForms": 162,
+     "pairs": {
+      "B:c2": 10,
+      "B:c3": 10,
+      "B:c4_6": 12,
+      "B:c7_15": 14,
+      "B:c16p": 7,
+      "A:c4_6": 10,
+      "A:c7_15": 10,
+      "A:c16p": 10
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 30,
+       "pool": 3733,
+       "posCandidates": 14
+      },
+      "c7_15": {
+       "drawn": 30,
+       "pool": 4076,
+       "posCandidates": 23
+      },
+      "c16p": {
+       "drawn": 30,
+       "pool": 4156,
+       "posCandidates": 17
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 85,
+       "N": 141
+      },
+      "A:c3": {
+       "P": 86,
+       "N": 122
+      },
+      "A:c4_6": {
+       "P": 190,
+       "N": 233
+      },
+      "A:c7_15": {
+       "P": 252,
+       "N": 267
+      },
+      "A:c16p": {
+       "P": 182,
+       "N": 169
+      },
+      "B:c2": {
+       "P": 14,
+       "N": 2767
+      },
+      "B:c3": {
+       "P": 11,
+       "N": 2058
+      },
+      "B:c4_6": {
+       "P": 14,
+       "N": 3745
+      },
+      "B:c7_15": {
+       "P": 23,
+       "N": 4090
+      },
+      "B:c16p": {
+       "P": 17,
+       "N": 4163
+      }
+     }
+    },
+    "kubuntu/2005-07-15|real": {
+     "units": 1798,
+     "goldForms": 65,
+     "pairs": {
+      "B:c2": 4,
+      "B:c3": 3,
+      "B:c4_6": 7,
+      "B:c7_15": 8,
+      "A:c4_6": 10,
+      "A:c7_15": 10,
+      "A:c16p": 3
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 30,
+       "pool": 1100,
+       "posCandidates": 7
+      },
+      "c7_15": {
+       "drawn": 30,
+       "pool": 1148,
+       "posCandidates": 9
+      },
+      "c16p": {
+       "drawn": 30,
+       "pool": 999,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 20,
+       "N": 123
+      },
+      "A:c3": {
+       "P": 19,
+       "N": 99
+      },
+      "A:c4_6": {
+       "P": 44,
+       "N": 170
+      },
+      "A:c7_15": {
+       "P": 64,
+       "N": 181
+      },
+      "A:c16p": {
+       "P": 26,
+       "N": 83
+      },
+      "B:c2": {
+       "P": 4,
+       "N": 929
+      },
+      "B:c3": {
+       "P": 3,
+       "N": 704
+      },
+      "B:c4_6": {
+       "P": 7,
+       "N": 1107
+      },
+      "B:c7_15": {
+       "P": 9,
+       "N": 1156
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 999
+      }
+     }
+    },
+    "kubuntu/2005-11-15|real": {
+     "units": 2240,
+     "goldForms": 64,
+     "pairs": {
+      "B:c2": 3,
+      "B:c3": 2,
+      "B:c4_6": 6,
+      "A:c4_6": 10,
+      "A:c7_15": 7
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 30,
+       "pool": 1568,
+       "posCandidates": 6
+      },
+      "c7_15": {
+       "drawn": 30,
+       "pool": 1415,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 30,
+       "pool": 1097,
+       "posCandidates": 6
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 26,
+       "N": 145
+      },
+      "A:c3": {
+       "P": 24,
+       "N": 98
+      },
+      "A:c4_6": {
+       "P": 52,
+       "N": 162
+      },
+      "A:c7_15": {
+       "P": 69,
+       "N": 198
+      },
+      "A:c16p": {
+       "P": 24,
+       "N": 120
+      },
+      "B:c2": {
+       "P": 3,
+       "N": 1172
+      },
+      "B:c3": {
+       "P": 3,
+       "N": 855
+      },
+      "B:c4_6": {
+       "P": 6,
+       "N": 1574
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 1415
+      },
+      "B:c16p": {
+       "P": 6,
+       "N": 1097
+      }
+     }
+    },
+    "kubuntu/2006-07-15|real": {
+     "units": 2861,
+     "goldForms": 121,
+     "pairs": {
+      "B:c2": 9,
+      "B:c3": 5,
+      "B:c4_6": 11,
+      "B:c7_15": 10,
+      "B:c16p": 3,
+      "A:c4_6": 10,
+      "A:c7_15": 10,
+      "A:c16p": 4
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 30,
+       "pool": 2579,
+       "posCandidates": 11
+      },
+      "c7_15": {
+       "drawn": 30,
+       "pool": 3058,
+       "posCandidates": 17
+      },
+      "c16p": {
+       "drawn": 30,
+       "pool": 2467,
+       "posCandidates": 8
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 66,
+       "N": 160
+      },
+      "A:c3": {
+       "P": 61,
+       "N": 123
+      },
+      "A:c4_6": {
+       "P": 140,
+       "N": 210
+      },
+      "A:c7_15": {
+       "P": 246,
+       "N": 252
+      },
+      "A:c16p": {
+       "P": 193,
+       "N": 159
+      },
+      "B:c2": {
+       "P": 10,
+       "N": 1983
+      },
+      "B:c3": {
+       "P": 5,
+       "N": 1449
+      },
+      "B:c4_6": {
+       "P": 11,
+       "N": 2590
+      },
+      "B:c7_15": {
+       "P": 17,
+       "N": 3068
+      },
+      "B:c16p": {
+       "P": 8,
+       "N": 2470
+      }
+     }
+    },
+    "kubuntu/2007-07-15|real": {
+     "units": 5499,
+     "goldForms": 148,
+     "pairs": {
+      "B:c2": 10,
+      "B:c3": 10,
+      "B:c4_6": 14,
+      "B:c7_15": 14,
+      "A:c4_6": 10,
+      "A:c7_15": 10,
+      "A:c16p": 5
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 30,
+       "pool": 4870,
+       "posCandidates": 27
+      },
+      "c7_15": {
+       "drawn": 30,
+       "pool": 5435,
+       "posCandidates": 40
+      },
+      "c16p": {
+       "drawn": 30,
+       "pool": 4191,
+       "posCandidates": 11
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 111,
+       "N": 347
+      },
+      "A:c3": {
+       "P": 106,
+       "N": 267
+      },
+      "A:c4_6": {
+       "P": 262,
+       "N": 518
+      },
+      "A:c7_15": {
+       "P": 461,
+       "N": 557
+      },
+      "A:c16p": {
+       "P": 168,
+       "N": 345
+      },
+      "B:c2": {
+       "P": 16,
+       "N": 3926
+      },
+      "B:c3": {
+       "P": 12,
+       "N": 2816
+      },
+      "B:c4_6": {
+       "P": 27,
+       "N": 4884
+      },
+      "B:c7_15": {
+       "P": 40,
+       "N": 5449
+      },
+      "B:c16p": {
+       "P": 11,
+       "N": 4191
+      }
+     }
+    },
+    "kubuntu/2008-03-15|real": {
+     "units": 2525,
+     "goldForms": 118,
+     "pairs": {
+      "B:c2": 10,
+      "B:c3": 7,
+      "B:c4_6": 10,
+      "B:c7_15": 7,
+      "A:c4_6": 10,
+      "A:c7_15": 10,
+      "A:c16p": 1
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 30,
+       "pool": 1939,
+       "posCandidates": 12
+      },
+      "c7_15": {
+       "drawn": 30,
+       "pool": 2051,
+       "posCandidates": 9
+      },
+      "c16p": {
+       "drawn": 30,
+       "pool": 1796,
+       "posCandidates": 1
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 43,
+       "N": 162
+      },
+      "A:c3": {
+       "P": 46,
+       "N": 124
+      },
+      "A:c4_6": {
+       "P": 104,
+       "N": 215
+      },
+      "A:c7_15": {
+       "P": 141,
+       "N": 257
+      },
+      "A:c16p": {
+       "P": 37,
+       "N": 167
+      },
+      "B:c2": {
+       "P": 13,
+       "N": 1440
+      },
+      "B:c3": {
+       "P": 8,
+       "N": 1088
+      },
+      "B:c4_6": {
+       "P": 12,
+       "N": 1949
+      },
+      "B:c7_15": {
+       "P": 9,
+       "N": 2058
+      },
+      "B:c16p": {
+       "P": 1,
+       "N": 1796
+      }
+     }
+    },
+    "kubuntu/2008-07-15|real": {
+     "units": 2190,
+     "goldForms": 95,
+     "pairs": {
+      "B:c2": 3,
+      "B:c3": 7,
+      "B:c4_6": 5,
+      "B:c7_15": 11,
+      "B:c16p": 1,
+      "A:c4_6": 10,
+      "A:c7_15": 10,
+      "A:c16p": 8
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 30,
+       "pool": 2122,
+       "posCandidates": 5
+      },
+      "c7_15": {
+       "drawn": 30,
+       "pool": 2612,
+       "posCandidates": 13
+      },
+      "c16p": {
+       "drawn": 30,
+       "pool": 2478,
+       "posCandidates": 2
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 37,
+       "N": 92
+      },
+      "A:c3": {
+       "P": 33,
+       "N": 83
+      },
+      "A:c4_6": {
+       "P": 81,
+       "N": 146
+      },
+      "A:c7_15": {
+       "P": 102,
+       "N": 185
+      },
+      "A:c16p": {
+       "P": 78,
+       "N": 213
+      },
+      "B:c2": {
+       "P": 3,
+       "N": 1440
+      },
+      "B:c3": {
+       "P": 7,
+       "N": 1099
+      },
+      "B:c4_6": {
+       "P": 5,
+       "N": 2127
+      },
+      "B:c7_15": {
+       "P": 13,
+       "N": 2623
+      },
+      "B:c16p": {
+       "P": 2,
+       "N": 2479
+      }
+     }
+    }
+   },
+   "pairs": 1003,
+   "pooledControls": {
+    "A:c4_6": {
+     "n": 140,
+     "R_LOGC": 0.508,
+     "R_POS": 0.507,
+     "R_IPOS": 0.5,
+     "R_FB": 0.474,
+     "R_LEN": 0.518,
+     "R_SL": 0.49
+    },
+    "A:c7_15": {
+     "n": 137,
+     "R_LOGC": 0.512,
+     "R_POS": 0.501,
+     "R_IPOS": 0.5,
+     "R_FB": 0.449,
+     "R_LEN": 0.54,
+     "R_SL": 0.535
+    },
+    "A:c16p": {
+     "n": 94,
+     "R_LOGC": 0.517,
+     "R_POS": 0.489,
+     "R_IPOS": 0.5,
+     "R_FB": 0.372,
+     "R_LEN": 0.555,
+     "R_SL": 0.52
+    },
+    "B:c2": {
+     "n": 119,
+     "R_LOGC": 0.5,
+     "R_POS": 0.497,
+     "R_IPOS": 0.491,
+     "R_FB": 0.504,
+     "R_LEN": 0.505,
+     "R_SL": 0.485
+    },
+    "B:c3": {
+     "n": 106,
+     "R_LOGC": 0.5,
+     "R_POS": 0.499,
+     "R_IPOS": 0.511,
+     "R_FB": 0.497,
+     "R_LEN": 0.502,
+     "R_SL": 0.487
+    },
+    "B:c4_6": {
+     "n": 160,
+     "R_LOGC": 0.511,
+     "R_POS": 0.495,
+     "R_IPOS": 0.508,
+     "R_FB": 0.49,
+     "R_LEN": 0.506,
+     "R_SL": 0.486
+    },
+    "B:c7_15": {
+     "n": 157,
+     "R_LOGC": 0.515,
+     "R_POS": 0.51,
+     "R_IPOS": 0.487,
+     "R_FB": 0.469,
+     "R_LEN": 0.505,
+     "R_SL": 0.489
+    },
+    "B:c16p": {
+     "n": 90,
+     "R_LOGC": 0.525,
+     "R_POS": 0.499,
+     "R_IPOS": 0.489,
+     "R_FB": 0.409,
+     "R_LEN": 0.52,
+     "R_SL": 0.494
+    }
+   }
+  },
+  "X_DE": {
+   "note": "extension: German IRC",
+   "days": 11,
+   "perDay": {
+    "ubuntu-de/2010-11-15|real": {
+     "units": 591,
+     "goldForms": 50,
+     "pairs": {
+      "B:c3": 2,
+      "B:c4_6": 6,
+      "B:c7_15": 3,
+      "A:c4_6": 10,
+      "A:c7_15": 4
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 322,
+       "posCandidates": 8
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 420,
+       "posCandidates": 7
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 850,
+       "posCandidates": 1
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 21,
+       "N": 15
+      },
+      "A:c3": {
+       "P": 16,
+       "N": 9
+      },
+      "A:c4_6": {
+       "P": 35,
+       "N": 16
+      },
+      "A:c7_15": {
+       "P": 31,
+       "N": 14
+      },
+      "A:c16p": {
+       "P": 2,
+       "N": 52
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 185
+      },
+      "B:c3": {
+       "P": 4,
+       "N": 225
+      },
+      "B:c4_6": {
+       "P": 8,
+       "N": 328
+      },
+      "B:c7_15": {
+       "P": 7,
+       "N": 423
+      },
+      "B:c16p": {
+       "P": 1,
+       "N": 850
+      }
+     }
+    },
+    "ubuntu-de/2011-03-15|real": {
+     "units": 539,
+     "goldForms": 45,
+     "pairs": {
+      "B:c2": 2,
+      "B:c3": 2,
+      "B:c4_6": 3,
+      "B:c7_15": 1,
+      "A:c4_6": 8
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 283,
+       "posCandidates": 5
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 320,
+       "posCandidates": 2
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 532,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 7,
+       "N": 15
+      },
+      "A:c3": {
+       "P": 10,
+       "N": 9
+      },
+      "A:c4_6": {
+       "P": 20,
+       "N": 22
+      },
+      "A:c7_15": {
+       "P": 8,
+       "N": 33
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 37
+      },
+      "B:c2": {
+       "P": 2,
+       "N": 187
+      },
+      "B:c3": {
+       "P": 2,
+       "N": 176
+      },
+      "B:c4_6": {
+       "P": 5,
+       "N": 286
+      },
+      "B:c7_15": {
+       "P": 2,
+       "N": 321
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 532
+      }
+     }
+    },
+    "ubuntu-de/2011-07-15|real": {
+     "units": 949,
+     "goldForms": 43,
+     "pairs": {
+      "B:c2": 2,
+      "B:c3": 3,
+      "B:c4_6": 5,
+      "B:c7_15": 2,
+      "A:c4_6": 22,
+      "A:c7_15": 23,
+      "A:c16p": 7
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 654,
+       "posCandidates": 6
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 839,
+       "posCandidates": 3
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 1646,
+       "posCandidates": 2
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 19,
+       "N": 38
+      },
+      "A:c3": {
+       "P": 19,
+       "N": 26
+      },
+      "A:c4_6": {
+       "P": 34,
+       "N": 46
+      },
+      "A:c7_15": {
+       "P": 56,
+       "N": 74
+      },
+      "A:c16p": {
+       "P": 15,
+       "N": 116
+      },
+      "B:c2": {
+       "P": 2,
+       "N": 501
+      },
+      "B:c3": {
+       "P": 3,
+       "N": 458
+      },
+      "B:c4_6": {
+       "P": 6,
+       "N": 659
+      },
+      "B:c7_15": {
+       "P": 3,
+       "N": 841
+      },
+      "B:c16p": {
+       "P": 2,
+       "N": 1646
+      }
+     }
+    },
+    "ubuntu-de/2012-03-15|real": {
+     "units": 518,
+     "goldForms": 26,
+     "pairs": {
+      "B:c2": 1,
+      "B:c7_15": 2,
+      "A:c4_6": 7,
+      "A:c7_15": 4
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 330,
+       "posCandidates": 0
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 377,
+       "posCandidates": 2
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 520,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 4,
+       "N": 11
+      },
+      "A:c3": {
+       "P": 5,
+       "N": 14
+      },
+      "A:c4_6": {
+       "P": 9,
+       "N": 26
+      },
+      "A:c7_15": {
+       "P": 17,
+       "N": 22
+      },
+      "A:c16p": {
+       "P": 2,
+       "N": 39
+      },
+      "B:c2": {
+       "P": 1,
+       "N": 163
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 145
+      },
+      "B:c4_6": {
+       "P": 0,
+       "N": 330
+      },
+      "B:c7_15": {
+       "P": 2,
+       "N": 379
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 520
+      }
+     }
+    },
+    "ubuntu-de/2012-07-15|real": {
+     "units": 444,
+     "goldForms": 26,
+     "pairs": {
+      "B:c4_6": 2,
+      "A:c4_6": 7,
+      "A:c7_15": 1
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 166,
+       "posCandidates": 2
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 249,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 321,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 2,
+       "N": 3
+      },
+      "A:c3": {
+       "P": 5,
+       "N": 7
+      },
+      "A:c4_6": {
+       "P": 14,
+       "N": 19
+      },
+      "A:c7_15": {
+       "P": 5,
+       "N": 23
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 37
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 71
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 79
+      },
+      "B:c4_6": {
+       "P": 2,
+       "N": 168
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 249
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 321
+      }
+     }
+    },
+    "ubuntu-de/2013-03-15|real": {
+     "units": 499,
+     "goldForms": 27,
+     "pairs": {
+      "B:c7_15": 1,
+      "A:c4_6": 2,
+      "A:c7_15": 4
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 293,
+       "posCandidates": 0
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 463,
+       "posCandidates": 1
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 667,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 8,
+       "N": 6
+      },
+      "A:c3": {
+       "P": 7,
+       "N": 10
+      },
+      "A:c4_6": {
+       "P": 11,
+       "N": 14
+      },
+      "A:c7_15": {
+       "P": 18,
+       "N": 38
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 31
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 177
+      },
+      "B:c3": {
+       "P": 1,
+       "N": 170
+      },
+      "B:c4_6": {
+       "P": 0,
+       "N": 293
+      },
+      "B:c7_15": {
+       "P": 1,
+       "N": 464
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 667
+      }
+     }
+    },
+    "ubuntu-de/2013-11-15|real": {
+     "skipped": "too short",
+     "units": 149
+    },
+    "ubuntu-de/2014-03-15|real": {
+     "skipped": "too short",
+     "units": 122
+    },
+    "ubuntu-de/2014-07-15|real": {
+     "skipped": "too short",
+     "units": 90
+    },
+    "ubuntu-de/2015-03-15|real": {
+     "skipped": "too short",
+     "units": 70
+    },
+    "ubuntu-de/2015-07-15|real": {
+     "skipped": "too short",
+     "units": 240
+    }
+   },
+   "pairs": 136,
+   "pooledControls": {
+    "A:c4_6": {
+     "n": 56,
+     "R_LOGC": 0.514,
+     "R_POS": 0.523,
+     "R_IPOS": 0.5,
+     "R_FB": 0.467,
+     "R_LEN": 0.538,
+     "R_SL": 0.525
+    },
+    "A:c7_15": {
+     "n": 36,
+     "R_LOGC": 0.517,
+     "R_POS": 0.496,
+     "R_IPOS": 0.5,
+     "R_FB": 0.245,
+     "R_LEN": 0.598,
+     "R_SL": 0.545
+    },
+    "B:c4_6": {
+     "n": 16,
+     "R_LOGC": 0.576,
+     "R_POS": 0.498,
+     "R_IPOS": 0.504,
+     "R_FB": 0.5,
+     "R_LEN": 0.504,
+     "R_SL": 0.477
+    },
+    "B:c7_15": {
+     "n": 9,
+     "R_LOGC": 0.549,
+     "R_POS": 0.593,
+     "R_IPOS": 0.512,
+     "R_FB": 0.457,
+     "R_LEN": 0.5,
+     "R_SL": 0.525
+    }
+   }
+  },
+  "X_ES": {
+   "note": "extension: Spanish IRC",
+   "days": 10,
+   "perDay": {
+    "ubuntu-es/2010-11-15|real": {
+     "units": 1817,
+     "goldForms": 56,
+     "pairs": {
+      "B:c2": 1,
+      "B:c3": 4,
+      "B:c4_6": 3,
+      "B:c7_15": 2,
+      "A:c4_6": 37,
+      "A:c7_15": 22
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 966,
+       "posCandidates": 3
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 765,
+       "posCandidates": 2
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 657,
+       "posCandidates": 4
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 24,
+       "N": 79
+      },
+      "A:c3": {
+       "P": 19,
+       "N": 65
+      },
+      "A:c4_6": {
+       "P": 51,
+       "N": 123
+      },
+      "A:c7_15": {
+       "P": 66,
+       "N": 136
+      },
+      "A:c16p": {
+       "P": 10,
+       "N": 95
+      },
+      "B:c2": {
+       "P": 1,
+       "N": 811
+      },
+      "B:c3": {
+       "P": 4,
+       "N": 613
+      },
+      "B:c4_6": {
+       "P": 3,
+       "N": 969
+      },
+      "B:c7_15": {
+       "P": 2,
+       "N": 767
+      },
+      "B:c16p": {
+       "P": 4,
+       "N": 657
+      }
+     }
+    },
+    "ubuntu-es/2011-03-15|real": {
+     "units": 1737,
+     "goldForms": 55,
+     "pairs": {
+      "B:c2": 4,
+      "B:c3": 6,
+      "B:c4_6": 17,
+      "B:c7_15": 11,
+      "B:c16p": 4,
+      "A:c4_6": 24,
+      "A:c7_15": 8,
+      "A:c16p": 4
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 903,
+       "posCandidates": 17
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 989,
+       "posCandidates": 24
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 627,
+       "posCandidates": 10
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 19,
+       "N": 100
+      },
+      "A:c3": {
+       "P": 13,
+       "N": 68
+      },
+      "A:c4_6": {
+       "P": 33,
+       "N": 142
+      },
+      "A:c7_15": {
+       "P": 42,
+       "N": 140
+      },
+      "A:c16p": {
+       "P": 9,
+       "N": 74
+      },
+      "B:c2": {
+       "P": 4,
+       "N": 784
+      },
+      "B:c3": {
+       "P": 8,
+       "N": 563
+      },
+      "B:c4_6": {
+       "P": 17,
+       "N": 920
+      },
+      "B:c7_15": {
+       "P": 24,
+       "N": 1000
+      },
+      "B:c16p": {
+       "P": 10,
+       "N": 631
+      }
+     }
+    },
+    "ubuntu-es/2011-07-15|real": {
+     "units": 677,
+     "goldForms": 31,
+     "pairs": {
+      "B:c2": 2,
+      "B:c3": 2,
+      "B:c4_6": 2,
+      "B:c7_15": 1,
+      "A:c4_6": 11,
+      "A:c7_15": 6
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 318,
+       "posCandidates": 3
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 270,
+       "posCandidates": 3
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 305,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 9,
+       "N": 10
+      },
+      "A:c3": {
+       "P": 10,
+       "N": 13
+      },
+      "A:c4_6": {
+       "P": 22,
+       "N": 38
+      },
+      "A:c7_15": {
+       "P": 17,
+       "N": 48
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 34
+      },
+      "B:c2": {
+       "P": 3,
+       "N": 231
+      },
+      "B:c3": {
+       "P": 2,
+       "N": 218
+      },
+      "B:c4_6": {
+       "P": 3,
+       "N": 320
+      },
+      "B:c7_15": {
+       "P": 3,
+       "N": 271
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 305
+      }
+     }
+    },
+    "ubuntu-es/2012-03-15|real": {
+     "skipped": "too short",
+     "units": 131
+    },
+    "ubuntu-es/2012-07-15|real": {
+     "units": 379,
+     "goldForms": 18,
+     "pairs": {
+      "B:c4_6": 1
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 83,
+       "pool": 83,
+       "posCandidates": 1
+      },
+      "c7_15": {
+       "drawn": 40,
+       "pool": 40,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 86,
+       "pool": 86,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 1,
+       "N": 2
+      },
+      "A:c3": {
+       "P": 1,
+       "N": 4
+      },
+      "A:c4_6": {
+       "P": 1,
+       "N": 7
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 7
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 9
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 33
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 47
+      },
+      "B:c4_6": {
+       "P": 1,
+       "N": 84
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 40
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 86
+      }
+     }
+    },
+    "ubuntu-es/2013-03-15|real": {
+     "units": 473,
+     "goldForms": 12,
+     "pairs": {},
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 115,
+       "posCandidates": 0
+      },
+      "c7_15": {
+       "drawn": 99,
+       "pool": 99,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 97,
+       "pool": 97,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 2,
+       "N": 10
+      },
+      "A:c3": {
+       "P": 2,
+       "N": 9
+      },
+      "A:c4_6": {
+       "P": 0,
+       "N": 16
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 14
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 15
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 60
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 87
+      },
+      "B:c4_6": {
+       "P": 0,
+       "N": 115
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 99
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 97
+      }
+     }
+    },
+    "ubuntu-es/2013-07-15|real": {
+     "units": 462,
+     "goldForms": 19,
+     "pairs": {
+      "B:c2": 1,
+      "B:c4_6": 1,
+      "A:c4_6": 2,
+      "A:c7_15": 1
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 133,
+       "posCandidates": 1
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 116,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 129,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 2,
+       "N": 8
+      },
+      "A:c3": {
+       "P": 3,
+       "N": 9
+      },
+      "A:c4_6": {
+       "P": 6,
+       "N": 12
+      },
+      "A:c7_15": {
+       "P": 4,
+       "N": 20
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 15
+      },
+      "B:c2": {
+       "P": 1,
+       "N": 82
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 82
+      },
+      "B:c4_6": {
+       "P": 1,
+       "N": 134
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 116
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 129
+      }
+     }
+    },
+    "ubuntu-es/2014-03-15|real": {
+     "skipped": "too short",
+     "units": 150
+    },
+    "ubuntu-es/2015-07-15|real": {
+     "skipped": "too short",
+     "units": 91
+    },
+    "ubuntu-es/2015-11-15|real": {
+     "skipped": "too short",
+     "units": 194
+    }
+   },
+   "pairs": 177,
+   "pooledControls": {
+    "A:c4_6": {
+     "n": 74,
+     "R_LOGC": 0.51,
+     "R_POS": 0.51,
+     "R_IPOS": 0.5,
+     "R_FB": 0.454,
+     "R_LEN": 0.521,
+     "R_SL": 0.516
+    },
+    "A:c7_15": {
+     "n": 37,
+     "R_LOGC": 0.508,
+     "R_POS": 0.514,
+     "R_IPOS": 0.5,
+     "R_FB": 0.362,
+     "R_LEN": 0.531,
+     "R_SL": 0.504
+    },
+    "B:c2": {
+     "n": 8,
+     "R_LOGC": 0.5,
+     "R_POS": 0.438,
+     "R_IPOS": 0.398,
+     "R_FB": 0.508,
+     "R_LEN": 0.516,
+     "R_SL": 0.539
+    },
+    "B:c3": {
+     "n": 12,
+     "R_LOGC": 0.5,
+     "R_POS": 0.521,
+     "R_IPOS": 0.524,
+     "R_FB": 0.472,
+     "R_LEN": 0.503,
+     "R_SL": 0.49
+    },
+    "B:c4_6": {
+     "n": 24,
+     "R_LOGC": 0.528,
+     "R_POS": 0.51,
+     "R_IPOS": 0.477,
+     "R_FB": 0.489,
+     "R_LEN": 0.511,
+     "R_SL": 0.482
+    },
+    "B:c7_15": {
+     "n": 14,
+     "R_LOGC": 0.543,
+     "R_POS": 0.5,
+     "R_IPOS": 0.526,
+     "R_FB": 0.469,
+     "R_LEN": 0.492,
+     "R_SL": 0.436
+    }
+   }
+  },
+  "X_IT": {
+   "note": "extension: Italian IRC",
+   "days": 11,
+   "perDay": {
+    "ubuntu-it/2010-11-15|real": {
+     "units": 1171,
+     "goldForms": 45,
+     "pairs": {
+      "B:c2": 2,
+      "B:c3": 1,
+      "B:c4_6": 4,
+      "B:c7_15": 10,
+      "B:c16p": 1,
+      "A:c4_6": 25,
+      "A:c7_15": 15
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 620,
+       "posCandidates": 4
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 482,
+       "posCandidates": 16
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 485,
+       "posCandidates": 1
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 22,
+       "N": 51
+      },
+      "A:c3": {
+       "P": 22,
+       "N": 24
+      },
+      "A:c4_6": {
+       "P": 58,
+       "N": 51
+      },
+      "A:c7_15": {
+       "P": 86,
+       "N": 69
+      },
+      "A:c16p": {
+       "P": 17,
+       "N": 43
+      },
+      "B:c2": {
+       "P": 3,
+       "N": 549
+      },
+      "B:c3": {
+       "P": 1,
+       "N": 443
+      },
+      "B:c4_6": {
+       "P": 4,
+       "N": 624
+      },
+      "B:c7_15": {
+       "P": 16,
+       "N": 492
+      },
+      "B:c16p": {
+       "P": 1,
+       "N": 486
+      }
+     }
+    },
+    "ubuntu-it/2011-03-15|real": {
+     "units": 889,
+     "goldForms": 28,
+     "pairs": {
+      "B:c2": 2,
+      "B:c4_6": 2,
+      "B:c7_15": 1,
+      "B:c16p": 2,
+      "A:c4_6": 1,
+      "A:c7_15": 1
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 538,
+       "posCandidates": 2
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 450,
+       "posCandidates": 2
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 388,
+       "posCandidates": 2
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 2,
+       "N": 27
+      },
+      "A:c3": {
+       "P": 4,
+       "N": 22
+      },
+      "A:c4_6": {
+       "P": 5,
+       "N": 46
+      },
+      "A:c7_15": {
+       "P": 15,
+       "N": 40
+      },
+      "A:c16p": {
+       "P": 5,
+       "N": 30
+      },
+      "B:c2": {
+       "P": 2,
+       "N": 395
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 299
+      },
+      "B:c4_6": {
+       "P": 2,
+       "N": 540
+      },
+      "B:c7_15": {
+       "P": 2,
+       "N": 451
+      },
+      "B:c16p": {
+       "P": 2,
+       "N": 390
+      }
+     }
+    },
+    "ubuntu-it/2011-07-15|real": {
+     "units": 690,
+     "goldForms": 35,
+     "pairs": {
+      "B:c2": 1,
+      "B:c3": 1,
+      "B:c4_6": 4,
+      "B:c7_15": 3,
+      "A:c4_6": 13,
+      "A:c7_15": 8
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 425,
+       "posCandidates": 6
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 332,
+       "posCandidates": 4
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 369,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 9,
+       "N": 23
+      },
+      "A:c3": {
+       "P": 10,
+       "N": 21
+      },
+      "A:c4_6": {
+       "P": 20,
+       "N": 34
+      },
+      "A:c7_15": {
+       "P": 27,
+       "N": 48
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 29
+      },
+      "B:c2": {
+       "P": 1,
+       "N": 312
+      },
+      "B:c3": {
+       "P": 1,
+       "N": 273
+      },
+      "B:c4_6": {
+       "P": 6,
+       "N": 429
+      },
+      "B:c7_15": {
+       "P": 4,
+       "N": 335
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 369
+      }
+     }
+    },
+    "ubuntu-it/2012-03-15|real": {
+     "units": 1335,
+     "goldForms": 38,
+     "pairs": {
+      "B:c2": 2,
+      "B:c3": 2,
+      "B:c4_6": 7,
+      "B:c7_15": 7,
+      "B:c16p": 3,
+      "A:c4_6": 5,
+      "A:c7_15": 19,
+      "A:c16p": 2
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 842,
+       "posCandidates": 10
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 712,
+       "posCandidates": 18
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 515,
+       "posCandidates": 5
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 14,
+       "N": 51
+      },
+      "A:c3": {
+       "P": 12,
+       "N": 39
+      },
+      "A:c4_6": {
+       "P": 24,
+       "N": 54
+      },
+      "A:c7_15": {
+       "P": 47,
+       "N": 72
+      },
+      "A:c16p": {
+       "P": 34,
+       "N": 45
+      },
+      "B:c2": {
+       "P": 2,
+       "N": 641
+      },
+      "B:c3": {
+       "P": 3,
+       "N": 504
+      },
+      "B:c4_6": {
+       "P": 10,
+       "N": 849
+      },
+      "B:c7_15": {
+       "P": 18,
+       "N": 719
+      },
+      "B:c16p": {
+       "P": 5,
+       "N": 518
+      }
+     }
+    },
+    "ubuntu-it/2012-07-15|real": {
+     "units": 797,
+     "goldForms": 31,
+     "pairs": {
+      "B:c2": 1,
+      "B:c4_6": 1,
+      "A:c4_6": 2
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 312,
+       "posCandidates": 1
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 266,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 228,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 6,
+       "N": 26
+      },
+      "A:c3": {
+       "P": 6,
+       "N": 27
+      },
+      "A:c4_6": {
+       "P": 11,
+       "N": 28
+      },
+      "A:c7_15": {
+       "P": 9,
+       "N": 39
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 26
+      },
+      "B:c2": {
+       "P": 1,
+       "N": 260
+      },
+      "B:c3": {
+       "P": 1,
+       "N": 199
+      },
+      "B:c4_6": {
+       "P": 1,
+       "N": 313
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 266
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 228
+      }
+     }
+    },
+    "ubuntu-it/2013-03-15|real": {
+     "units": 1023,
+     "goldForms": 27,
+     "pairs": {
+      "B:c2": 1,
+      "B:c3": 2,
+      "B:c4_6": 2,
+      "B:c7_15": 3,
+      "B:c16p": 1,
+      "A:c4_6": 13,
+      "A:c7_15": 15,
+      "A:c16p": 6
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 567,
+       "posCandidates": 2
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 446,
+       "posCandidates": 4
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 552,
+       "posCandidates": 1
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 9,
+       "N": 31
+      },
+      "A:c3": {
+       "P": 7,
+       "N": 28
+      },
+      "A:c4_6": {
+       "P": 20,
+       "N": 50
+      },
+      "A:c7_15": {
+       "P": 37,
+       "N": 68
+      },
+      "A:c16p": {
+       "P": 10,
+       "N": 49
+      },
+      "B:c2": {
+       "P": 1,
+       "N": 501
+      },
+      "B:c3": {
+       "P": 3,
+       "N": 343
+      },
+      "B:c4_6": {
+       "P": 2,
+       "N": 569
+      },
+      "B:c7_15": {
+       "P": 4,
+       "N": 449
+      },
+      "B:c16p": {
+       "P": 1,
+       "N": 553
+      }
+     }
+    },
+    "ubuntu-it/2013-07-15|real": {
+     "units": 1684,
+     "goldForms": 35,
+     "pairs": {
+      "B:c2": 3,
+      "B:c3": 1,
+      "B:c4_6": 4,
+      "B:c7_15": 7,
+      "A:c4_6": 23,
+      "A:c7_15": 13
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 881,
+       "posCandidates": 4
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 718,
+       "posCandidates": 9
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 547,
+       "posCandidates": 1
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 14,
+       "N": 77
+      },
+      "A:c3": {
+       "P": 17,
+       "N": 77
+      },
+      "A:c4_6": {
+       "P": 34,
+       "N": 128
+      },
+      "A:c7_15": {
+       "P": 67,
+       "N": 77
+      },
+      "A:c16p": {
+       "P": 9,
+       "N": 96
+      },
+      "B:c2": {
+       "P": 3,
+       "N": 761
+      },
+      "B:c3": {
+       "P": 2,
+       "N": 516
+      },
+      "B:c4_6": {
+       "P": 4,
+       "N": 885
+      },
+      "B:c7_15": {
+       "P": 9,
+       "N": 725
+      },
+      "B:c16p": {
+       "P": 1,
+       "N": 547
+      }
+     }
+    },
+    "ubuntu-it/2014-03-15|real": {
+     "units": 1458,
+     "goldForms": 20,
+     "pairs": {
+      "B:c2": 1,
+      "B:c3": 2,
+      "B:c4_6": 3,
+      "B:c7_15": 2,
+      "B:c16p": 1,
+      "A:c4_6": 15,
+      "A:c7_15": 5,
+      "A:c16p": 4
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 842,
+       "posCandidates": 4
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 767,
+       "posCandidates": 2
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 566,
+       "posCandidates": 1
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 8,
+       "N": 64
+      },
+      "A:c3": {
+       "P": 8,
+       "N": 52
+      },
+      "A:c4_6": {
+       "P": 22,
+       "N": 110
+      },
+      "A:c7_15": {
+       "P": 17,
+       "N": 129
+      },
+      "A:c16p": {
+       "P": 16,
+       "N": 72
+      },
+      "B:c2": {
+       "P": 1,
+       "N": 696
+      },
+      "B:c3": {
+       "P": 2,
+       "N": 513
+      },
+      "B:c4_6": {
+       "P": 4,
+       "N": 845
+      },
+      "B:c7_15": {
+       "P": 2,
+       "N": 769
+      },
+      "B:c16p": {
+       "P": 1,
+       "N": 567
+      }
+     }
+    },
+    "ubuntu-it/2014-07-15|real": {
+     "units": 714,
+     "goldForms": 12,
+     "pairs": {
+      "B:c3": 1,
+      "A:c4_6": 5,
+      "A:c7_15": 2
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 304,
+       "posCandidates": 0
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 226,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 203,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 3,
+       "N": 27
+      },
+      "A:c3": {
+       "P": 2,
+       "N": 22
+      },
+      "A:c4_6": {
+       "P": 6,
+       "N": 24
+      },
+      "A:c7_15": {
+       "P": 5,
+       "N": 23
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 20
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 218
+      },
+      "B:c3": {
+       "P": 1,
+       "N": 211
+      },
+      "B:c4_6": {
+       "P": 0,
+       "N": 304
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 226
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 203
+      }
+     }
+    },
+    "ubuntu-it/2015-03-15|real": {
+     "units": 878,
+     "goldForms": 18,
+     "pairs": {
+      "B:c3": 1,
+      "B:c4_6": 1,
+      "A:c4_6": 4
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 100,
+       "pool": 476,
+       "posCandidates": 2
+      },
+      "c7_15": {
+       "drawn": 100,
+       "pool": 383,
+       "posCandidates": 3
+      },
+      "c16p": {
+       "drawn": 100,
+       "pool": 421,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 6,
+       "N": 26
+      },
+      "A:c3": {
+       "P": 5,
+       "N": 23
+      },
+      "A:c4_6": {
+       "P": 5,
+       "N": 41
+      },
+      "A:c7_15": {
+       "P": 4,
+       "N": 34
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 163
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 324
+      },
+      "B:c3": {
+       "P": 1,
+       "N": 257
+      },
+      "B:c4_6": {
+       "P": 2,
+       "N": 477
+      },
+      "B:c7_15": {
+       "P": 3,
+       "N": 383
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 421
+      }
+     }
+    },
+    "ubuntu-it/2015-07-15|real": {
+     "units": 365,
+     "goldForms": 22,
+     "pairs": {},
+     "natural": {
+      "c4_6": {
+       "drawn": 87,
+       "pool": 87,
+       "posCandidates": 0
+      },
+      "c7_15": {
+       "drawn": 80,
+       "pool": 80,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 92,
+       "pool": 92,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 2,
+       "N": 3
+      },
+      "A:c3": {
+       "P": 0,
+       "N": 9
+      },
+      "A:c4_6": {
+       "P": 0,
+       "N": 11
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 10
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 2
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 36
+      },
+      "B:c3": {
+       "P": 1,
+       "N": 53
+      },
+      "B:c4_6": {
+       "P": 0,
+       "N": 87
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 80
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 92
+      }
+     }
+    }
+   },
+   "pairs": 289,
+   "pooledControls": {
+    "A:c4_6": {
+     "n": 106,
+     "R_LOGC": 0.504,
+     "R_POS": 0.494,
+     "R_IPOS": 0.5,
+     "R_FB": 0.416,
+     "R_LEN": 0.554,
+     "R_SL": 0.531
+    },
+    "A:c7_15": {
+     "n": 78,
+     "R_LOGC": 0.517,
+     "R_POS": 0.496,
+     "R_IPOS": 0.5,
+     "R_FB": 0.396,
+     "R_LEN": 0.519,
+     "R_SL": 0.52
+    },
+    "A:c16p": {
+     "n": 12,
+     "R_LOGC": 0.531,
+     "R_POS": 0.326,
+     "R_IPOS": 0.5,
+     "R_FB": 0.229,
+     "R_LEN": 0.465,
+     "R_SL": 0.514
+    },
+    "B:c2": {
+     "n": 13,
+     "R_LOGC": 0.5,
+     "R_POS": 0.479,
+     "R_IPOS": 0.541,
+     "R_FB": 0.536,
+     "R_LEN": 0.53,
+     "R_SL": 0.337
+    },
+    "B:c3": {
+     "n": 11,
+     "R_LOGC": 0.5,
+     "R_POS": 0.504,
+     "R_IPOS": 0.517,
+     "R_FB": 0.492,
+     "R_LEN": 0.517,
+     "R_SL": 0.434
+    },
+    "B:c4_6": {
+     "n": 28,
+     "R_LOGC": 0.542,
+     "R_POS": 0.514,
+     "R_IPOS": 0.515,
+     "R_FB": 0.489,
+     "R_LEN": 0.554,
+     "R_SL": 0.441
+    },
+    "B:c7_15": {
+     "n": 33,
+     "R_LOGC": 0.508,
+     "R_POS": 0.476,
+     "R_IPOS": 0.49,
+     "R_FB": 0.417,
+     "R_LEN": 0.516,
+     "R_SL": 0.488
+    },
+    "B:c16p": {
+     "n": 8,
+     "R_LOGC": 0.531,
+     "R_POS": 0.422,
+     "R_IPOS": 0.398,
+     "R_FB": 0.227,
+     "R_LEN": 0.578,
+     "R_SL": 0.359
+    }
+   }
+  },
+  "SHUF": {
+   "note": "mechanism controls: scrambled streams",
+   "days": 3,
+   "perDay": {
+    "kubuntu/2007-03-15|real": {
+     "units": 4112,
+     "goldForms": 163,
+     "pairs": {
+      "B:c4_6": 16,
+      "B:c7_15": 26,
+      "B:c16p": 7
+     },
+     "natural": {},
+     "candidateCounts": {
+      "A:c2": {
+       "P": 91,
+       "N": 223
+      },
+      "A:c3": {
+       "P": 93,
+       "N": 158
+      },
+      "A:c4_6": {
+       "P": 238,
+       "N": 350
+      },
+      "A:c7_15": {
+       "P": 367,
+       "N": 440
+      },
+      "A:c16p": {
+       "P": 159,
+       "N": 282
+      },
+      "B:c2": {
+       "P": 23,
+       "N": 3147
+      },
+      "B:c3": {
+       "P": 13,
+       "N": 2227
+      },
+      "B:c4_6": {
+       "P": 28,
+       "N": 4195
+      },
+      "B:c7_15": {
+       "P": 40,
+       "N": 4965
+      },
+      "B:c16p": {
+       "P": 10,
+       "N": 4625
+      }
+     }
+    },
+    "kubuntu/2007-07-15|real": {
+     "units": 5499,
+     "goldForms": 148,
+     "pairs": {
+      "B:c4_6": 20,
+      "B:c7_15": 30
+     },
+     "natural": {},
+     "candidateCounts": {
+      "A:c2": {
+       "P": 111,
+       "N": 347
+      },
+      "A:c3": {
+       "P": 106,
+       "N": 267
+      },
+      "A:c4_6": {
+       "P": 262,
+       "N": 518
+      },
+      "A:c7_15": {
+       "P": 461,
+       "N": 557
+      },
+      "A:c16p": {
+       "P": 168,
+       "N": 345
+      },
+      "B:c2": {
+       "P": 16,
+       "N": 3926
+      },
+      "B:c3": {
+       "P": 12,
+       "N": 2816
+      },
+      "B:c4_6": {
+       "P": 27,
+       "N": 4884
+      },
+      "B:c7_15": {
+       "P": 40,
+       "N": 5449
+      },
+      "B:c16p": {
+       "P": 11,
+       "N": 4191
+      }
+     }
+    },
+    "ubuntu/2005-03-15|real": {
+     "units": 7532,
+     "goldForms": 264,
+     "pairs": {
+      "B:c4_6": 30,
+      "B:c7_15": 30,
+      "B:c16p": 16
+     },
+     "natural": {},
+     "candidateCounts": {
+      "A:c2": {
+       "P": 242,
+       "N": 392
+      },
+      "A:c3": {
+       "P": 216,
+       "N": 326
+      },
+      "A:c4_6": {
+       "P": 487,
+       "N": 597
+      },
+      "A:c7_15": {
+       "P": 740,
+       "N": 695
+      },
+      "A:c16p": {
+       "P": 353,
+       "N": 457
+      },
+      "B:c2": {
+       "P": 28,
+       "N": 5160
+      },
+      "B:c3": {
+       "P": 29,
+       "N": 3574
+      },
+      "B:c4_6": {
+       "P": 78,
+       "N": 6263
+      },
+      "B:c7_15": {
+       "P": 178,
+       "N": 6191
+      },
+      "B:c16p": {
+       "P": 25,
+       "N": 6070
+      }
+     }
+    },
+    "kubuntu/2007-03-15|shufW": {
+     "units": 4112,
+     "goldForms": 163,
+     "pairs": {
+      "B:c4_6": 30,
+      "B:c7_15": 30,
+      "B:c16p": 30
+     },
+     "natural": {},
+     "candidateCounts": {
+      "A:c2": {
+       "P": 27,
+       "N": 347
+      },
+      "A:c3": {
+       "P": 20,
+       "N": 237
+      },
+      "A:c4_6": {
+       "P": 37,
+       "N": 457
+      },
+      "A:c7_15": {
+       "P": 47,
+       "N": 550
+      },
+      "A:c16p": {
+       "P": 23,
+       "N": 387
+      },
+      "B:c2": {
+       "P": 87,
+       "N": 3023
+      },
+      "B:c3": {
+       "P": 86,
+       "N": 2148
+      },
+      "B:c4_6": {
+       "P": 229,
+       "N": 4088
+      },
+      "B:c7_15": {
+       "P": 360,
+       "N": 4855
+      },
+      "B:c16p": {
+       "P": 146,
+       "N": 4520
+      }
+     }
+    },
+    "kubuntu/2007-07-15|shufW": {
+     "units": 5499,
+     "goldForms": 148,
+     "pairs": {
+      "B:c4_6": 30,
+      "B:c7_15": 30,
+      "B:c16p": 27
+     },
+     "natural": {},
+     "candidateCounts": {
+      "A:c2": {
+       "P": 31,
+       "N": 524
+      },
+      "A:c3": {
+       "P": 20,
+       "N": 376
+      },
+      "A:c4_6": {
+       "P": 52,
+       "N": 619
+      },
+      "A:c7_15": {
+       "P": 83,
+       "N": 608
+      },
+      "A:c16p": {
+       "P": 36,
+       "N": 401
+      },
+      "B:c2": {
+       "P": 96,
+       "N": 3749
+      },
+      "B:c3": {
+       "P": 98,
+       "N": 2707
+      },
+      "B:c4_6": {
+       "P": 237,
+       "N": 4783
+      },
+      "B:c7_15": {
+       "P": 418,
+       "N": 5398
+      },
+      "B:c16p": {
+       "P": 143,
+       "N": 4135
+      }
+     }
+    },
+    "ubuntu/2005-03-15|shufW": {
+     "units": 7532,
+     "goldForms": 264,
+     "pairs": {
+      "B:c4_6": 30,
+      "B:c7_15": 30,
+      "B:c16p": 30
+     },
+     "natural": {},
+     "candidateCounts": {
+      "A:c2": {
+       "P": 57,
+       "N": 672
+      },
+      "A:c3": {
+       "P": 44,
+       "N": 439
+      },
+      "A:c4_6": {
+       "P": 104,
+       "N": 892
+      },
+      "A:c7_15": {
+       "P": 178,
+       "N": 787
+      },
+      "A:c16p": {
+       "P": 75,
+       "N": 637
+      },
+      "B:c2": {
+       "P": 213,
+       "N": 4880
+      },
+      "B:c3": {
+       "P": 201,
+       "N": 3461
+      },
+      "B:c4_6": {
+       "P": 461,
+       "N": 5968
+      },
+      "B:c7_15": {
+       "P": 740,
+       "N": 6099
+      },
+      "B:c16p": {
+       "P": 303,
+       "N": 5890
+      }
+     }
+    },
+    "kubuntu/2007-03-15|shufG": {
+     "units": 4112,
+     "goldForms": 163,
+     "pairs": {
+      "B:c4_6": 30,
+      "B:c7_15": 14
+     },
+     "natural": {},
+     "candidateCounts": {
+      "A:c2": {
+       "P": 31,
+       "N": 379
+      },
+      "A:c3": {
+       "P": 22,
+       "N": 251
+      },
+      "A:c4_6": {
+       "P": 25,
+       "N": 431
+      },
+      "A:c7_15": {
+       "P": 1,
+       "N": 468
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 446
+      },
+      "B:c2": {
+       "P": 319,
+       "N": 3284
+      },
+      "B:c3": {
+       "P": 185,
+       "N": 2222
+      },
+      "B:c4_6": {
+       "P": 213,
+       "N": 3787
+      },
+      "B:c7_15": {
+       "P": 29,
+       "N": 4380
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 4030
+      }
+     }
+    },
+    "kubuntu/2007-07-15|shufG": {
+     "units": 5499,
+     "goldForms": 148,
+     "pairs": {
+      "B:c4_6": 30,
+      "B:c7_15": 18
+     },
+     "natural": {},
+     "candidateCounts": {
+      "A:c2": {
+       "P": 37,
+       "N": 567
+      },
+      "A:c3": {
+       "P": 26,
+       "N": 370
+      },
+      "A:c4_6": {
+       "P": 43,
+       "N": 628
+      },
+      "A:c7_15": {
+       "P": 4,
+       "N": 601
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 447
+      },
+      "B:c2": {
+       "P": 290,
+       "N": 4119
+      },
+      "B:c3": {
+       "P": 219,
+       "N": 2617
+      },
+      "B:c4_6": {
+       "P": 285,
+       "N": 4358
+      },
+      "B:c7_15": {
+       "P": 58,
+       "N": 4444
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 3760
+      }
+     }
+    },
+    "ubuntu/2005-03-15|shufG": {
+     "units": 7532,
+     "goldForms": 264,
+     "pairs": {
+      "B:c4_6": 30,
+      "B:c7_15": 18
+     },
+     "natural": {},
+     "candidateCounts": {
+      "A:c2": {
+       "P": 65,
+       "N": 747
+      },
+      "A:c3": {
+       "P": 42,
+       "N": 431
+      },
+      "A:c4_6": {
+       "P": 34,
+       "N": 784
+      },
+      "A:c7_15": {
+       "P": 17,
+       "N": 691
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 752
+      },
+      "B:c2": {
+       "P": 603,
+       "N": 5196
+      },
+      "B:c3": {
+       "P": 322,
+       "N": 3280
+      },
+      "B:c4_6": {
+       "P": 302,
+       "N": 5510
+      },
+      "B:c7_15": {
+       "P": 122,
+       "N": 5187
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 5189
+      }
+     }
+    }
+   },
+   "pairs": 582,
+   "pooledControls": {
+    "B:c4_6": {
+     "n": 246,
+     "R_LOGC": 0.502,
+     "R_POS": 0.493,
+     "R_IPOS": 0.501,
+     "R_FB": 0.498,
+     "R_LEN": 0.502,
+     "R_SL": 0.5
+    },
+    "B:c7_15": {
+     "n": 226,
+     "R_LOGC": 0.505,
+     "R_POS": 0.498,
+     "R_IPOS": 0.506,
+     "R_FB": 0.482,
+     "R_LEN": 0.512,
+     "R_SL": 0.499
+    },
+    "B:c16p": {
+     "n": 110,
+     "R_LOGC": 0.526,
+     "R_POS": 0.49,
+     "R_IPOS": 0.501,
+     "R_FB": 0.408,
+     "R_LEN": 0.519,
+     "R_SL": 0.499
+    }
+   }
+  },
+  "UD": {
+   "note": "exploratory: UD test splits (written text), M=128 sentences",
+   "days": 53,
+   "perDay": {
+    "ud:afr|real": {
+     "units": 425,
+     "goldForms": 108,
+     "pairs": {
+      "B:c2": 8,
+      "B:c3": 4,
+      "B:c4_6": 8,
+      "B:c7_15": 4
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 460,
+       "posCandidates": 11
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 489,
+       "posCandidates": 10
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 1772,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 0,
+       "N": 18
+      },
+      "A:c3": {
+       "P": 0,
+       "N": 13
+      },
+      "A:c4_6": {
+       "P": 1,
+       "N": 13
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 22
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 136
+      },
+      "B:c2": {
+       "P": 8,
+       "N": 466
+      },
+      "B:c3": {
+       "P": 6,
+       "N": 344
+      },
+      "B:c4_6": {
+       "P": 11,
+       "N": 468
+      },
+      "B:c7_15": {
+       "P": 10,
+       "N": 493
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 1772
+      }
+     }
+    },
+    "ud:arb|real": {
+     "units": 680,
+     "goldForms": 16,
+     "pairs": {
+      "B:c2": 2,
+      "B:c3": 2,
+      "B:c7_15": 1
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 1977,
+       "posCandidates": 0
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 1748,
+       "posCandidates": 1
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 1185,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 0,
+       "N": 27
+      },
+      "A:c3": {
+       "P": 0,
+       "N": 28
+      },
+      "A:c4_6": {
+       "P": 0,
+       "N": 27
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 36
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 10
+      },
+      "B:c2": {
+       "P": 2,
+       "N": 1788
+      },
+      "B:c3": {
+       "P": 2,
+       "N": 1389
+      },
+      "B:c4_6": {
+       "P": 0,
+       "N": 1977
+      },
+      "B:c7_15": {
+       "P": 1,
+       "N": 1749
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 1185
+      }
+     }
+    },
+    "ud:bul|real": {
+     "units": 1116,
+     "goldForms": 579,
+     "pairs": {
+      "B:c2": 30,
+      "B:c3": 22,
+      "B:c4_6": 15,
+      "B:c7_15": 3
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 414,
+       "posCandidates": 28
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 115,
+       "posCandidates": 3
+      },
+      "c16p": {
+       "drawn": 5,
+       "pool": 5,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 7,
+       "N": 69
+      },
+      "A:c3": {
+       "P": 1,
+       "N": 54
+      },
+      "A:c4_6": {
+       "P": 3,
+       "N": 56
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 45
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 2
+      },
+      "B:c2": {
+       "P": 37,
+       "N": 732
+      },
+      "B:c3": {
+       "P": 22,
+       "N": 354
+      },
+      "B:c4_6": {
+       "P": 28,
+       "N": 429
+      },
+      "B:c7_15": {
+       "P": 3,
+       "N": 118
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 5
+      }
+     }
+    },
+    "ud:cat|real": {
+     "units": 1846,
+     "goldForms": 2236,
+     "pairs": {
+      "B:c2": 30,
+      "B:c3": 30,
+      "B:c4_6": 493,
+      "B:c7_15": 154,
+      "B:c16p": 7
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 1357,
+       "posCandidates": 671
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 1128,
+       "posCandidates": 336
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 4486,
+       "posCandidates": 17
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 38,
+       "N": 34
+      },
+      "A:c3": {
+       "P": 22,
+       "N": 41
+      },
+      "A:c4_6": {
+       "P": 29,
+       "N": 89
+      },
+      "A:c7_15": {
+       "P": 12,
+       "N": 108
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 224
+      },
+      "B:c2": {
+       "P": 702,
+       "N": 2660
+      },
+      "B:c3": {
+       "P": 482,
+       "N": 1401
+      },
+      "B:c4_6": {
+       "P": 671,
+       "N": 1850
+      },
+      "B:c7_15": {
+       "P": 336,
+       "N": 1282
+      },
+      "B:c16p": {
+       "P": 17,
+       "N": 4493
+      }
+     }
+    },
+    "ud:ces|real": {
+     "units": 628,
+     "goldForms": 91,
+     "pairs": {
+      "B:c2": 8,
+      "B:c3": 6,
+      "B:c4_6": 6,
+      "B:c7_15": 1
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 529,
+       "posCandidates": 6
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 308,
+       "posCandidates": 2
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 26,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 2,
+       "N": 32
+      },
+      "A:c3": {
+       "P": 2,
+       "N": 28
+      },
+      "A:c4_6": {
+       "P": 2,
+       "N": 49
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 31
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 2
+      },
+      "B:c2": {
+       "P": 8,
+       "N": 566
+      },
+      "B:c3": {
+       "P": 6,
+       "N": 449
+      },
+      "B:c4_6": {
+       "P": 6,
+       "N": 535
+      },
+      "B:c7_15": {
+       "P": 2,
+       "N": 309
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 26
+      }
+     }
+    },
+    "ud:cmn|real": {
+     "units": 500,
+     "goldForms": 631,
+     "pairs": {
+      "B:c2": 4,
+      "B:c3": 8
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 0,
+       "pool": 0,
+       "posCandidates": 3
+      },
+      "c7_15": {
+       "drawn": 3,
+       "pool": 3,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 0,
+       "pool": 0,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 0,
+       "N": 6
+      },
+      "A:c3": {
+       "P": 1,
+       "N": 1
+      },
+      "A:c4_6": {
+       "P": 1,
+       "N": 0
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 1
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 0
+      },
+      "B:c2": {
+       "P": 4,
+       "N": 18
+      },
+      "B:c3": {
+       "P": 10,
+       "N": 8
+      },
+      "B:c4_6": {
+       "P": 3,
+       "N": 0
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 3
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 0
+      }
+     }
+    },
+    "ud:cmn-hans|real": {
+     "units": 500,
+     "goldForms": 630,
+     "pairs": {
+      "B:c2": 4,
+      "B:c3": 7
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 0,
+       "pool": 0,
+       "posCandidates": 3
+      },
+      "c7_15": {
+       "drawn": 3,
+       "pool": 3,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 0,
+       "pool": 0,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 0,
+       "N": 6
+      },
+      "A:c3": {
+       "P": 1,
+       "N": 1
+      },
+      "A:c4_6": {
+       "P": 1,
+       "N": 0
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 1
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 0
+      },
+      "B:c2": {
+       "P": 4,
+       "N": 18
+      },
+      "B:c3": {
+       "P": 10,
+       "N": 8
+      },
+      "B:c4_6": {
+       "P": 3,
+       "N": 0
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 3
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 0
+      }
+     }
+    },
+    "ud:cym|real": {
+     "units": 953,
+     "goldForms": 401,
+     "pairs": {
+      "B:c2": 30,
+      "B:c3": 30,
+      "B:c4_6": 26,
+      "B:c7_15": 8
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 865,
+       "posCandidates": 32
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 716,
+       "posCandidates": 35
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 385,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 2,
+       "N": 50
+      },
+      "A:c3": {
+       "P": 0,
+       "N": 36
+      },
+      "A:c4_6": {
+       "P": 0,
+       "N": 68
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 70
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 144
+      },
+      "B:c2": {
+       "P": 62,
+       "N": 1050
+      },
+      "B:c3": {
+       "P": 36,
+       "N": 653
+      },
+      "B:c4_6": {
+       "P": 32,
+       "N": 891
+      },
+      "B:c7_15": {
+       "P": 35,
+       "N": 724
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 385
+      }
+     }
+    },
+    "ud:dan|real": {
+     "units": 565,
+     "goldForms": 387,
+     "pairs": {
+      "B:c2": 30,
+      "B:c3": 28,
+      "B:c4_6": 15
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 407,
+       "posCandidates": 16
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 338,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 706,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 3,
+       "N": 14
+      },
+      "A:c3": {
+       "P": 4,
+       "N": 18
+      },
+      "A:c4_6": {
+       "P": 2,
+       "N": 18
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 46
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 91
+      },
+      "B:c2": {
+       "P": 34,
+       "N": 370
+      },
+      "B:c3": {
+       "P": 29,
+       "N": 246
+      },
+      "B:c4_6": {
+       "P": 16,
+       "N": 422
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 338
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 706
+      }
+     }
+    },
+    "ud:deu|real": {
+     "units": 977,
+     "goldForms": 714,
+     "pairs": {
+      "B:c2": 30,
+      "B:c3": 25,
+      "B:c4_6": 21,
+      "B:c7_15": 2
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 677,
+       "posCandidates": 26
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 933,
+       "posCandidates": 2
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 2011,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 3,
+       "N": 53
+      },
+      "A:c3": {
+       "P": 4,
+       "N": 27
+      },
+      "A:c4_6": {
+       "P": 1,
+       "N": 63
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 87
+      },
+      "A:c16p": {
+       "P": 1,
+       "N": 236
+      },
+      "B:c2": {
+       "P": 52,
+       "N": 792
+      },
+      "B:c3": {
+       "P": 25,
+       "N": 476
+      },
+      "B:c4_6": {
+       "P": 26,
+       "N": 698
+      },
+      "B:c7_15": {
+       "P": 2,
+       "N": 935
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 2011
+      }
+     }
+    },
+    "ud:ell|real": {
+     "units": 456,
+     "goldForms": 180,
+     "pairs": {
+      "B:c2": 18,
+      "B:c3": 19,
+      "B:c4_6": 22,
+      "B:c7_15": 3
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 408,
+       "posCandidates": 23
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 365,
+       "posCandidates": 3
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 1407,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 0,
+       "N": 17
+      },
+      "A:c3": {
+       "P": 0,
+       "N": 18
+      },
+      "A:c4_6": {
+       "P": 0,
+       "N": 28
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 21
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 35
+      },
+      "B:c2": {
+       "P": 18,
+       "N": 455
+      },
+      "B:c3": {
+       "P": 19,
+       "N": 336
+      },
+      "B:c4_6": {
+       "P": 23,
+       "N": 430
+      },
+      "B:c7_15": {
+       "P": 3,
+       "N": 368
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 1407
+      }
+     }
+    },
+    "ud:eng|real": {
+     "units": 2046,
+     "goldForms": 1182,
+     "pairs": {
+      "B:c2": 30,
+      "B:c3": 30,
+      "B:c4_6": 103,
+      "B:c7_15": 40
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 1228,
+       "posCandidates": 117
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 1403,
+       "posCandidates": 65
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 1588,
+       "posCandidates": 1
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 36,
+       "N": 147
+      },
+      "A:c3": {
+       "P": 21,
+       "N": 105
+      },
+      "A:c4_6": {
+       "P": 25,
+       "N": 163
+      },
+      "A:c7_15": {
+       "P": 17,
+       "N": 167
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 138
+      },
+      "B:c2": {
+       "P": 143,
+       "N": 1449
+      },
+      "B:c3": {
+       "P": 94,
+       "N": 891
+      },
+      "B:c4_6": {
+       "P": 117,
+       "N": 1331
+      },
+      "B:c7_15": {
+       "P": 65,
+       "N": 1443
+      },
+      "B:c16p": {
+       "P": 1,
+       "N": 1588
+      }
+     }
+    },
+    "ud:est|real": {
+     "units": 3207,
+     "goldForms": 1622,
+     "pairs": {
+      "B:c2": 30,
+      "B:c3": 30,
+      "B:c4_6": 173,
+      "B:c7_15": 62,
+      "B:c16p": 7
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 2527,
+       "posCandidates": 209
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 1948,
+       "posCandidates": 122
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 905,
+       "posCandidates": 26
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 43,
+       "N": 302
+      },
+      "A:c3": {
+       "P": 40,
+       "N": 195
+      },
+      "A:c4_6": {
+       "P": 53,
+       "N": 288
+      },
+      "A:c7_15": {
+       "P": 48,
+       "N": 258
+      },
+      "A:c16p": {
+       "P": 10,
+       "N": 103
+      },
+      "B:c2": {
+       "P": 244,
+       "N": 3433
+      },
+      "B:c3": {
+       "P": 177,
+       "N": 2075
+      },
+      "B:c4_6": {
+       "P": 209,
+       "N": 2700
+      },
+      "B:c7_15": {
+       "P": 122,
+       "N": 2010
+      },
+      "B:c16p": {
+       "P": 26,
+       "N": 912
+      }
+     }
+    },
+    "ud:eus|real": {
+     "units": 1799,
+     "goldForms": 1401,
+     "pairs": {
+      "B:c2": 30,
+      "B:c3": 17,
+      "B:c4_6": 7,
+      "B:c7_15": 1
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 1118,
+       "posCandidates": 7
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 1212,
+       "posCandidates": 1
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 311,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 26,
+       "N": 142
+      },
+      "A:c3": {
+       "P": 4,
+       "N": 64
+      },
+      "A:c4_6": {
+       "P": 2,
+       "N": 87
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 48
+      },
+      "A:c16p": {
+       "P": 1,
+       "N": 2
+      },
+      "B:c2": {
+       "P": 77,
+       "N": 1784
+      },
+      "B:c3": {
+       "P": 17,
+       "N": 892
+      },
+      "B:c4_6": {
+       "P": 7,
+       "N": 1125
+      },
+      "B:c7_15": {
+       "P": 1,
+       "N": 1213
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 311
+      }
+     }
+    },
+    "ud:fas|real": {
+     "units": 1455,
+     "goldForms": 678,
+     "pairs": {
+      "B:c2": 30,
+      "B:c3": 30,
+      "B:c4_6": 33,
+      "B:c7_15": 4
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 833,
+       "posCandidates": 47
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 853,
+       "posCandidates": 17
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 830,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 19,
+       "N": 115
+      },
+      "A:c3": {
+       "P": 7,
+       "N": 61
+      },
+      "A:c4_6": {
+       "P": 12,
+       "N": 61
+      },
+      "A:c7_15": {
+       "P": 1,
+       "N": 45
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 40
+      },
+      "B:c2": {
+       "P": 116,
+       "N": 1499
+      },
+      "B:c3": {
+       "P": 50,
+       "N": 754
+      },
+      "B:c4_6": {
+       "P": 47,
+       "N": 866
+      },
+      "B:c7_15": {
+       "P": 17,
+       "N": 857
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 830
+      }
+     }
+    },
+    "ud:fin|real": {
+     "units": 1555,
+     "goldForms": 659,
+     "pairs": {
+      "B:c2": 30,
+      "B:c3": 30,
+      "B:c4_6": 65,
+      "B:c7_15": 31
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 942,
+       "posCandidates": 68
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 739,
+       "posCandidates": 52
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 242,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 19,
+       "N": 102
+      },
+      "A:c3": {
+       "P": 26,
+       "N": 81
+      },
+      "A:c4_6": {
+       "P": 30,
+       "N": 98
+      },
+      "A:c7_15": {
+       "P": 20,
+       "N": 58
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 17
+      },
+      "B:c2": {
+       "P": 67,
+       "N": 1179
+      },
+      "B:c3": {
+       "P": 44,
+       "N": 731
+      },
+      "B:c4_6": {
+       "P": 68,
+       "N": 1007
+      },
+      "B:c7_15": {
+       "P": 52,
+       "N": 770
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 242
+      }
+     }
+    },
+    "ud:fra|real": {
+     "units": 416,
+     "goldForms": 406,
+     "pairs": {
+      "B:c2": 9,
+      "B:c3": 10,
+      "B:c7_15": 4
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 241,
+       "posCandidates": 0
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 293,
+       "posCandidates": 7
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 512,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 0,
+       "N": 13
+      },
+      "A:c3": {
+       "P": 1,
+       "N": 7
+      },
+      "A:c4_6": {
+       "P": 0,
+       "N": 17
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 21
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 32
+      },
+      "B:c2": {
+       "P": 9,
+       "N": 242
+      },
+      "B:c3": {
+       "P": 10,
+       "N": 156
+      },
+      "B:c4_6": {
+       "P": 0,
+       "N": 241
+      },
+      "B:c7_15": {
+       "P": 7,
+       "N": 297
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 512
+      }
+     }
+    },
+    "ud:gle|real": {
+     "units": 451,
+     "goldForms": 383,
+     "pairs": {
+      "B:c2": 18,
+      "B:c3": 16,
+      "B:c4_6": 6,
+      "B:c7_15": 12
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 384,
+       "posCandidates": 6
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 397,
+       "posCandidates": 32
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 376,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 0,
+       "N": 12
+      },
+      "A:c3": {
+       "P": 0,
+       "N": 17
+      },
+      "A:c4_6": {
+       "P": 0,
+       "N": 27
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 24
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 31
+      },
+      "B:c2": {
+       "P": 18,
+       "N": 354
+      },
+      "B:c3": {
+       "P": 16,
+       "N": 254
+      },
+      "B:c4_6": {
+       "P": 6,
+       "N": 390
+      },
+      "B:c7_15": {
+       "P": 32,
+       "N": 409
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 376
+      }
+     }
+    },
+    "ud:glg|real": {
+     "units": 861,
+     "goldForms": 275,
+     "pairs": {
+      "B:c2": 19,
+      "B:c3": 14,
+      "B:c4_6": 8,
+      "B:c7_15": 4
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 1255,
+       "posCandidates": 11
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 685,
+       "posCandidates": 30
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 1555,
+       "posCandidates": 7
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 0,
+       "N": 41
+      },
+      "A:c3": {
+       "P": 1,
+       "N": 29
+      },
+      "A:c4_6": {
+       "P": 3,
+       "N": 65
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 59
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 83
+      },
+      "B:c2": {
+       "P": 19,
+       "N": 1962
+      },
+      "B:c3": {
+       "P": 14,
+       "N": 1130
+      },
+      "B:c4_6": {
+       "P": 11,
+       "N": 1263
+      },
+      "B:c7_15": {
+       "P": 30,
+       "N": 689
+      },
+      "B:c16p": {
+       "P": 7,
+       "N": 1555
+      }
+     }
+    },
+    "ud:heb|real": {
+     "units": 491,
+     "goldForms": 322,
+     "pairs": {
+      "B:c2": 30,
+      "B:c3": 30,
+      "B:c4_6": 34,
+      "B:c7_15": 7
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 492,
+       "posCandidates": 36
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 386,
+       "posCandidates": 7
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 457,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 1,
+       "N": 23
+      },
+      "A:c3": {
+       "P": 0,
+       "N": 18
+      },
+      "A:c4_6": {
+       "P": 1,
+       "N": 25
+      },
+      "A:c7_15": {
+       "P": 1,
+       "N": 18
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 6
+      },
+      "B:c2": {
+       "P": 33,
+       "N": 427
+      },
+      "B:c3": {
+       "P": 31,
+       "N": 379
+      },
+      "B:c4_6": {
+       "P": 36,
+       "N": 526
+      },
+      "B:c7_15": {
+       "P": 7,
+       "N": 393
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 457
+      }
+     }
+    },
+    "ud:hin|real": {
+     "units": 1684,
+     "goldForms": 1569,
+     "pairs": {
+      "B:c2": 30,
+      "B:c3": 30,
+      "B:c4_6": 389,
+      "B:c7_15": 137,
+      "B:c16p": 12
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 1625,
+       "posCandidates": 514
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 1576,
+       "posCandidates": 263
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 873,
+       "posCandidates": 49
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 93,
+       "N": 145
+      },
+      "A:c3": {
+       "P": 73,
+       "N": 107
+      },
+      "A:c4_6": {
+       "P": 81,
+       "N": 150
+      },
+      "A:c7_15": {
+       "P": 44,
+       "N": 106
+      },
+      "A:c16p": {
+       "P": 2,
+       "N": 33
+      },
+      "B:c2": {
+       "P": 530,
+       "N": 2053
+      },
+      "B:c3": {
+       "P": 377,
+       "N": 1353
+      },
+      "B:c4_6": {
+       "P": 514,
+       "N": 2014
+      },
+      "B:c7_15": {
+       "P": 263,
+       "N": 1713
+      },
+      "B:c16p": {
+       "P": 49,
+       "N": 885
+      }
+     }
+    },
+    "ud:hrv|real": {
+     "units": 1136,
+     "goldForms": 898,
+     "pairs": {
+      "B:c2": 30,
+      "B:c3": 30,
+      "B:c4_6": 70,
+      "B:c7_15": 28,
+      "B:c16p": 4
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 791,
+       "posCandidates": 80
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 571,
+       "posCandidates": 40
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 187,
+       "posCandidates": 25
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 14,
+       "N": 99
+      },
+      "A:c3": {
+       "P": 8,
+       "N": 67
+      },
+      "A:c4_6": {
+       "P": 9,
+       "N": 90
+      },
+      "A:c7_15": {
+       "P": 2,
+       "N": 67
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 16
+      },
+      "B:c2": {
+       "P": 113,
+       "N": 1412
+      },
+      "B:c3": {
+       "P": 71,
+       "N": 764
+      },
+      "B:c4_6": {
+       "P": 80,
+       "N": 861
+      },
+      "B:c7_15": {
+       "P": 40,
+       "N": 599
+      },
+      "B:c16p": {
+       "P": 25,
+       "N": 191
+      }
+     }
+    },
+    "ud:hun|real": {
+     "units": 449,
+     "goldForms": 485,
+     "pairs": {
+      "B:c2": 30,
+      "B:c3": 30,
+      "B:c4_6": 42,
+      "B:c7_15": 14,
+      "B:c16p": 2
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 339,
+       "posCandidates": 45
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 296,
+       "posCandidates": 25
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 117,
+       "posCandidates": 3
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 3,
+       "N": 23
+      },
+      "A:c3": {
+       "P": 3,
+       "N": 15
+      },
+      "A:c4_6": {
+       "P": 8,
+       "N": 14
+      },
+      "A:c7_15": {
+       "P": 1,
+       "N": 14
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 5
+      },
+      "B:c2": {
+       "P": 42,
+       "N": 386
+      },
+      "B:c3": {
+       "P": 44,
+       "N": 304
+      },
+      "B:c4_6": {
+       "P": 45,
+       "N": 381
+      },
+      "B:c7_15": {
+       "P": 25,
+       "N": 310
+      },
+      "B:c16p": {
+       "P": 3,
+       "N": 119
+      }
+     }
+    },
+    "ud:hye|real": {
+     "units": 600,
+     "goldForms": 454,
+     "pairs": {
+      "B:c2": 28,
+      "B:c3": 22,
+      "B:c4_6": 25,
+      "B:c7_15": 5
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 443,
+       "posCandidates": 29
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 195,
+       "posCandidates": 16
+      },
+      "c16p": {
+       "drawn": 11,
+       "pool": 11,
+       "posCandidates": 12
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 6,
+       "N": 46
+      },
+      "A:c3": {
+       "P": 4,
+       "N": 43
+      },
+      "A:c4_6": {
+       "P": 2,
+       "N": 50
+      },
+      "A:c7_15": {
+       "P": 4,
+       "N": 16
+      },
+      "A:c16p": {
+       "P": 3,
+       "N": 1
+      },
+      "B:c2": {
+       "P": 31,
+       "N": 499
+      },
+      "B:c3": {
+       "P": 25,
+       "N": 408
+      },
+      "B:c4_6": {
+       "P": 29,
+       "N": 468
+      },
+      "B:c7_15": {
+       "P": 16,
+       "N": 200
+      },
+      "B:c16p": {
+       "P": 12,
+       "N": 11
+      }
+     }
+    },
+    "ud:ind|real": {
+     "units": 557,
+     "goldForms": 1535,
+     "pairs": {
+      "B:c2": 30,
+      "B:c3": 30,
+      "B:c4_6": 101,
+      "B:c7_15": 22
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 393,
+       "posCandidates": 114
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 449,
+       "posCandidates": 46
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 1110,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 5,
+       "N": 41
+      },
+      "A:c3": {
+       "P": 6,
+       "N": 28
+      },
+      "A:c4_6": {
+       "P": 6,
+       "N": 35
+      },
+      "A:c7_15": {
+       "P": 4,
+       "N": 26
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 34
+      },
+      "B:c2": {
+       "P": 100,
+       "N": 509
+      },
+      "B:c3": {
+       "P": 108,
+       "N": 315
+      },
+      "B:c4_6": {
+       "P": 114,
+       "N": 494
+      },
+      "B:c7_15": {
+       "P": 46,
+       "N": 471
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 1110
+      }
+     }
+    },
+    "ud:ita|real": {
+     "units": 482,
+     "goldForms": 436,
+     "pairs": {
+      "B:c2": 13,
+      "B:c3": 8,
+      "B:c4_6": 13
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 254,
+       "posCandidates": 13
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 193,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 283,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 0,
+       "N": 14
+      },
+      "A:c3": {
+       "P": 1,
+       "N": 9
+      },
+      "A:c4_6": {
+       "P": 1,
+       "N": 19
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 45
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 39
+      },
+      "B:c2": {
+       "P": 13,
+       "N": 306
+      },
+      "B:c3": {
+       "P": 8,
+       "N": 215
+      },
+      "B:c4_6": {
+       "P": 13,
+       "N": 267
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 193
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 283
+      }
+     }
+    },
+    "ud:jpn|real": {
+     "units": 543,
+     "goldForms": 260,
+     "pairs": {},
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 40,
+       "posCandidates": 0
+      },
+      "c7_15": {
+       "drawn": 6,
+       "pool": 6,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 0,
+       "pool": 0,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 0,
+       "N": 8
+      },
+      "A:c3": {
+       "P": 0,
+       "N": 5
+      },
+      "A:c4_6": {
+       "P": 0,
+       "N": 6
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 0
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 0
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 85
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 47
+      },
+      "B:c4_6": {
+       "P": 0,
+       "N": 40
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 6
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 0
+      }
+     }
+    },
+    "ud:kat|real": {
+     "units": 481,
+     "goldForms": 209,
+     "pairs": {
+      "B:c2": 5,
+      "B:c3": 4,
+      "B:c4_6": 9,
+      "B:c7_15": 3
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 525,
+       "posCandidates": 9
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 337,
+       "posCandidates": 3
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 147,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 1,
+       "N": 36
+      },
+      "A:c3": {
+       "P": 1,
+       "N": 27
+      },
+      "A:c4_6": {
+       "P": 7,
+       "N": 45
+      },
+      "A:c7_15": {
+       "P": 1,
+       "N": 26
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 3
+      },
+      "B:c2": {
+       "P": 5,
+       "N": 476
+      },
+      "B:c3": {
+       "P": 4,
+       "N": 353
+      },
+      "B:c4_6": {
+       "P": 9,
+       "N": 534
+      },
+      "B:c7_15": {
+       "P": 3,
+       "N": 340
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 147
+      }
+     }
+    },
+    "ud:kor|real": {
+     "units": 989,
+     "goldForms": 59,
+     "pairs": {},
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 39,
+       "posCandidates": 0
+      },
+      "c7_15": {
+       "drawn": 0,
+       "pool": 0,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 0,
+       "pool": 0,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 0,
+       "N": 25
+      },
+      "A:c3": {
+       "P": 0,
+       "N": 4
+      },
+      "A:c4_6": {
+       "P": 0,
+       "N": 0
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 0
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 0
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 186
+      },
+      "B:c3": {
+       "P": 0,
+       "N": 59
+      },
+      "B:c4_6": {
+       "P": 0,
+       "N": 39
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 0
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 0
+      }
+     }
+    },
+    "ud:lav|real": {
+     "units": 2412,
+     "goldForms": 900,
+     "pairs": {
+      "B:c2": 30,
+      "B:c3": 30,
+      "B:c4_6": 62,
+      "B:c7_15": 20,
+      "B:c16p": 3
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 1554,
+       "posCandidates": 81
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 1566,
+       "posCandidates": 41
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 538,
+       "posCandidates": 15
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 18,
+       "N": 233
+      },
+      "A:c3": {
+       "P": 11,
+       "N": 139
+      },
+      "A:c4_6": {
+       "P": 13,
+       "N": 190
+      },
+      "A:c7_15": {
+       "P": 7,
+       "N": 197
+      },
+      "A:c16p": {
+       "P": 2,
+       "N": 46
+      },
+      "B:c2": {
+       "P": 105,
+       "N": 2439
+      },
+      "B:c3": {
+       "P": 80,
+       "N": 1362
+      },
+      "B:c4_6": {
+       "P": 81,
+       "N": 1616
+      },
+      "B:c7_15": {
+       "P": 41,
+       "N": 1586
+      },
+      "B:c16p": {
+       "P": 15,
+       "N": 541
+      }
+     }
+    },
+    "ud:lit|real": {
+     "units": 684,
+     "goldForms": 149,
+     "pairs": {
+      "B:c2": 11,
+      "B:c3": 16,
+      "B:c4_6": 9,
+      "B:c7_15": 2
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 456,
+       "posCandidates": 10
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 346,
+       "posCandidates": 5
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 127,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 2,
+       "N": 57
+      },
+      "A:c3": {
+       "P": 0,
+       "N": 36
+      },
+      "A:c4_6": {
+       "P": 1,
+       "N": 67
+      },
+      "A:c7_15": {
+       "P": 1,
+       "N": 52
+      },
+      "A:c16p": {
+       "P": 1,
+       "N": 16
+      },
+      "B:c2": {
+       "P": 11,
+       "N": 461
+      },
+      "B:c3": {
+       "P": 16,
+       "N": 382
+      },
+      "B:c4_6": {
+       "P": 10,
+       "N": 465
+      },
+      "B:c7_15": {
+       "P": 5,
+       "N": 348
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 127
+      }
+     }
+    },
+    "ud:lzh|real": {
+     "units": 5528,
+     "goldForms": 644,
+     "pairs": {},
+     "natural": {
+      "c4_6": {
+       "drawn": 3,
+       "pool": 3,
+       "posCandidates": 1
+      },
+      "c7_15": {
+       "drawn": 1,
+       "pool": 1,
+       "posCandidates": 1
+      },
+      "c16p": {
+       "drawn": 0,
+       "pool": 0,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 2,
+       "N": 0
+      },
+      "A:c3": {
+       "P": 1,
+       "N": 0
+      },
+      "A:c4_6": {
+       "P": 2,
+       "N": 0
+      },
+      "A:c7_15": {
+       "P": 4,
+       "N": 0
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 0
+      },
+      "B:c2": {
+       "P": 0,
+       "N": 1
+      },
+      "B:c3": {
+       "P": 1,
+       "N": 1
+      },
+      "B:c4_6": {
+       "P": 1,
+       "N": 3
+      },
+      "B:c7_15": {
+       "P": 1,
+       "N": 1
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 0
+      }
+     }
+    },
+    "ud:mar|real": {
+     "skipped": "too short",
+     "units": 47
+    },
+    "ud:mlt|real": {
+     "units": 518,
+     "goldForms": 87,
+     "pairs": {
+      "B:c2": 10,
+      "B:c3": 7,
+      "B:c4_6": 14,
+      "B:c7_15": 8
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 693,
+       "posCandidates": 15
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 719,
+       "posCandidates": 12
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 542,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 0,
+       "N": 26
+      },
+      "A:c3": {
+       "P": 1,
+       "N": 25
+      },
+      "A:c4_6": {
+       "P": 2,
+       "N": 52
+      },
+      "A:c7_15": {
+       "P": 2,
+       "N": 73
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 51
+      },
+      "B:c2": {
+       "P": 10,
+       "N": 506
+      },
+      "B:c3": {
+       "P": 7,
+       "N": 429
+      },
+      "B:c4_6": {
+       "P": 15,
+       "N": 707
+      },
+      "B:c7_15": {
+       "P": 12,
+       "N": 727
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 542
+      }
+     }
+    },
+    "ud:nld|real": {
+     "units": 596,
+     "goldForms": 343,
+     "pairs": {
+      "B:c2": 30,
+      "B:c3": 26,
+      "B:c4_6": 36,
+      "B:c7_15": 6,
+      "B:c16p": 9
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 451,
+       "posCandidates": 40
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 649,
+       "posCandidates": 22
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 474,
+       "posCandidates": 35
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 5,
+       "N": 24
+      },
+      "A:c3": {
+       "P": 6,
+       "N": 14
+      },
+      "A:c4_6": {
+       "P": 1,
+       "N": 25
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 37
+      },
+      "A:c16p": {
+       "P": 2,
+       "N": 37
+      },
+      "B:c2": {
+       "P": 38,
+       "N": 492
+      },
+      "B:c3": {
+       "P": 28,
+       "N": 360
+      },
+      "B:c4_6": {
+       "P": 40,
+       "N": 487
+      },
+      "B:c7_15": {
+       "P": 22,
+       "N": 655
+      },
+      "B:c16p": {
+       "P": 35,
+       "N": 483
+      }
+     }
+    },
+    "ud:nob|real": {
+     "units": 1939,
+     "goldForms": 666,
+     "pairs": {
+      "B:c2": 30,
+      "B:c3": 30,
+      "B:c4_6": 180,
+      "B:c7_15": 90,
+      "B:c16p": 14
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 1452,
+       "posCandidates": 208
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 1351,
+       "posCandidates": 203
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 2802,
+       "posCandidates": 107
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 24,
+       "N": 118
+      },
+      "A:c3": {
+       "P": 27,
+       "N": 86
+      },
+      "A:c4_6": {
+       "P": 38,
+       "N": 101
+      },
+      "A:c7_15": {
+       "P": 35,
+       "N": 112
+      },
+      "A:c16p": {
+       "P": 20,
+       "N": 356
+      },
+      "B:c2": {
+       "P": 146,
+       "N": 1783
+      },
+      "B:c3": {
+       "P": 119,
+       "N": 1200
+      },
+      "B:c4_6": {
+       "P": 208,
+       "N": 1632
+      },
+      "B:c7_15": {
+       "P": 203,
+       "N": 1441
+      },
+      "B:c16p": {
+       "P": 107,
+       "N": 2816
+      }
+     }
+    },
+    "ud:pol|real": {
+     "units": 2215,
+     "goldForms": 979,
+     "pairs": {
+      "B:c2": 30,
+      "B:c3": 11,
+      "B:c4_6": 2
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 1016,
+       "posCandidates": 2
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 586,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 954,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 2,
+       "N": 158
+      },
+      "A:c3": {
+       "P": 0,
+       "N": 83
+      },
+      "A:c4_6": {
+       "P": 0,
+       "N": 104
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 77
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 79
+      },
+      "B:c2": {
+       "P": 32,
+       "N": 1858
+      },
+      "B:c3": {
+       "P": 11,
+       "N": 892
+      },
+      "B:c4_6": {
+       "P": 2,
+       "N": 1018
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 586
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 954
+      }
+     }
+    },
+    "ud:por|real": {
+     "units": 1200,
+     "goldForms": 2088,
+     "pairs": {
+      "B:c2": 30,
+      "B:c3": 30,
+      "B:c4_6": 72,
+      "B:c7_15": 16,
+      "B:c16p": 1
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 667,
+       "posCandidates": 109
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 525,
+       "posCandidates": 33
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 1265,
+       "posCandidates": 1
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 5,
+       "N": 53
+      },
+      "A:c3": {
+       "P": 3,
+       "N": 31
+      },
+      "A:c4_6": {
+       "P": 2,
+       "N": 75
+      },
+      "A:c7_15": {
+       "P": 1,
+       "N": 64
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 56
+      },
+      "B:c2": {
+       "P": 333,
+       "N": 1367
+      },
+      "B:c3": {
+       "P": 167,
+       "N": 603
+      },
+      "B:c4_6": {
+       "P": 109,
+       "N": 739
+      },
+      "B:c7_15": {
+       "P": 33,
+       "N": 541
+      },
+      "B:c16p": {
+       "P": 1,
+       "N": 1266
+      }
+     }
+    },
+    "ud:ron|real": {
+     "units": 729,
+     "goldForms": 349,
+     "pairs": {
+      "B:c2": 20,
+      "B:c3": 14,
+      "B:c4_6": 9,
+      "B:c7_15": 4
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 629,
+       "posCandidates": 9
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 380,
+       "posCandidates": 4
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 478,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 2,
+       "N": 30
+      },
+      "A:c3": {
+       "P": 2,
+       "N": 40
+      },
+      "A:c4_6": {
+       "P": 0,
+       "N": 50
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 24
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 15
+      },
+      "B:c2": {
+       "P": 20,
+       "N": 786
+      },
+      "B:c3": {
+       "P": 14,
+       "N": 481
+      },
+      "B:c4_6": {
+       "P": 9,
+       "N": 638
+      },
+      "B:c7_15": {
+       "P": 4,
+       "N": 384
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 478
+      }
+     }
+    },
+    "ud:rus|real": {
+     "units": 601,
+     "goldForms": 671,
+     "pairs": {
+      "B:c2": 7,
+      "B:c3": 10,
+      "B:c4_6": 4
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 203,
+       "posCandidates": 13
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 197,
+       "posCandidates": 0
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 20,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 0,
+       "N": 33
+      },
+      "A:c3": {
+       "P": 0,
+       "N": 19
+      },
+      "A:c4_6": {
+       "P": 0,
+       "N": 17
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 6
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 0
+      },
+      "B:c2": {
+       "P": 7,
+       "N": 373
+      },
+      "B:c3": {
+       "P": 11,
+       "N": 206
+      },
+      "B:c4_6": {
+       "P": 13,
+       "N": 207
+      },
+      "B:c7_15": {
+       "P": 0,
+       "N": 197
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 20
+      }
+     }
+    },
+    "ud:slk|real": {
+     "units": 1061,
+     "goldForms": 737,
+     "pairs": {
+      "B:c2": 30,
+      "B:c3": 18,
+      "B:c4_6": 13,
+      "B:c7_15": 1
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 244,
+       "posCandidates": 16
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 153,
+       "posCandidates": 1
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 52,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 21,
+       "N": 56
+      },
+      "A:c3": {
+       "P": 16,
+       "N": 33
+      },
+      "A:c4_6": {
+       "P": 15,
+       "N": 29
+      },
+      "A:c7_15": {
+       "P": 1,
+       "N": 26
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 9
+      },
+      "B:c2": {
+       "P": 47,
+       "N": 480
+      },
+      "B:c3": {
+       "P": 20,
+       "N": 229
+      },
+      "B:c4_6": {
+       "P": 16,
+       "N": 257
+      },
+      "B:c7_15": {
+       "P": 1,
+       "N": 154
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 52
+      }
+     }
+    },
+    "ud:slv|real": {
+     "units": 1282,
+     "goldForms": 695,
+     "pairs": {
+      "B:c2": 30,
+      "B:c3": 25,
+      "B:c4_6": 15,
+      "B:c7_15": 5
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 686,
+       "posCandidates": 18
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 533,
+       "posCandidates": 5
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 114,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 3,
+       "N": 110
+      },
+      "A:c3": {
+       "P": 3,
+       "N": 73
+      },
+      "A:c4_6": {
+       "P": 2,
+       "N": 54
+      },
+      "A:c7_15": {
+       "P": 1,
+       "N": 57
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 15
+      },
+      "B:c2": {
+       "P": 34,
+       "N": 1212
+      },
+      "B:c3": {
+       "P": 26,
+       "N": 601
+      },
+      "B:c4_6": {
+       "P": 18,
+       "N": 701
+      },
+      "B:c7_15": {
+       "P": 5,
+       "N": 538
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 114
+      }
+     }
+    },
+    "ud:spa|real": {
+     "units": 1721,
+     "goldForms": 1823,
+     "pairs": {
+      "B:c2": 30,
+      "B:c3": 30,
+      "B:c4_6": 321,
+      "B:c7_15": 72,
+      "B:c16p": 1
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 1646,
+       "posCandidates": 368
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 1332,
+       "posCandidates": 103
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 4380,
+       "posCandidates": 1
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 32,
+       "N": 68
+      },
+      "A:c3": {
+       "P": 39,
+       "N": 52
+      },
+      "A:c4_6": {
+       "P": 30,
+       "N": 104
+      },
+      "A:c7_15": {
+       "P": 10,
+       "N": 65
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 189
+      },
+      "B:c2": {
+       "P": 549,
+       "N": 2711
+      },
+      "B:c3": {
+       "P": 359,
+       "N": 1617
+      },
+      "B:c4_6": {
+       "P": 368,
+       "N": 1967
+      },
+      "B:c7_15": {
+       "P": 103,
+       "N": 1404
+      },
+      "B:c16p": {
+       "P": 1,
+       "N": 4381
+      }
+     }
+    },
+    "ud:srp|real": {
+     "units": 520,
+     "goldForms": 438,
+     "pairs": {
+      "B:c2": 30,
+      "B:c3": 30,
+      "B:c4_6": 53,
+      "B:c7_15": 18,
+      "B:c16p": 1
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 346,
+       "posCandidates": 55
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 241,
+       "posCandidates": 26
+      },
+      "c16p": {
+       "drawn": 6,
+       "pool": 6,
+       "posCandidates": 26
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 7,
+       "N": 34
+      },
+      "A:c3": {
+       "P": 7,
+       "N": 28
+      },
+      "A:c4_6": {
+       "P": 6,
+       "N": 41
+      },
+      "A:c7_15": {
+       "P": 2,
+       "N": 18
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 0
+      },
+      "B:c2": {
+       "P": 59,
+       "N": 480
+      },
+      "B:c3": {
+       "P": 49,
+       "N": 341
+      },
+      "B:c4_6": {
+       "P": 55,
+       "N": 399
+      },
+      "B:c7_15": {
+       "P": 26,
+       "N": 259
+      },
+      "B:c16p": {
+       "P": 26,
+       "N": 7
+      }
+     }
+    },
+    "ud:swe|real": {
+     "units": 1219,
+     "goldForms": 125,
+     "pairs": {
+      "B:c2": 26,
+      "B:c3": 15,
+      "B:c4_6": 20,
+      "B:c7_15": 1
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 1245,
+       "posCandidates": 20
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 1196,
+       "posCandidates": 2
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 2746,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 2,
+       "N": 82
+      },
+      "A:c3": {
+       "P": 2,
+       "N": 52
+      },
+      "A:c4_6": {
+       "P": 1,
+       "N": 91
+      },
+      "A:c7_15": {
+       "P": 0,
+       "N": 111
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 243
+      },
+      "B:c2": {
+       "P": 26,
+       "N": 1329
+      },
+      "B:c3": {
+       "P": 15,
+       "N": 914
+      },
+      "B:c4_6": {
+       "P": 20,
+       "N": 1265
+      },
+      "B:c7_15": {
+       "P": 2,
+       "N": 1197
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 2746
+      }
+     }
+    },
+    "ud:tam|real": {
+     "skipped": "too short",
+     "units": 120
+    },
+    "ud:tel|real": {
+     "skipped": "too short",
+     "units": 146
+    },
+    "ud:tur|real": {
+     "units": 1100,
+     "goldForms": 199,
+     "pairs": {
+      "B:c2": 19,
+      "B:c3": 20,
+      "B:c4_6": 22,
+      "B:c7_15": 7
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 316,
+       "posCandidates": 24
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 240,
+       "posCandidates": 12
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 203,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 12,
+       "N": 109
+      },
+      "A:c3": {
+       "P": 14,
+       "N": 75
+      },
+      "A:c4_6": {
+       "P": 27,
+       "N": 73
+      },
+      "A:c7_15": {
+       "P": 12,
+       "N": 32
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 27
+      },
+      "B:c2": {
+       "P": 19,
+       "N": 505
+      },
+      "B:c3": {
+       "P": 20,
+       "N": 317
+      },
+      "B:c4_6": {
+       "P": 24,
+       "N": 338
+      },
+      "B:c7_15": {
+       "P": 12,
+       "N": 247
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 203
+      }
+     }
+    },
+    "ud:uig|real": {
+     "units": 900,
+     "goldForms": 12,
+     "pairs": {
+      "B:c2": 3,
+      "B:c3": 2,
+      "B:c4_6": 7,
+      "B:c7_15": 3
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 501,
+       "posCandidates": 7
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 263,
+       "posCandidates": 4
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 132,
+       "posCandidates": 0
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 1,
+       "N": 95
+      },
+      "A:c3": {
+       "P": 1,
+       "N": 77
+      },
+      "A:c4_6": {
+       "P": 1,
+       "N": 99
+      },
+      "A:c7_15": {
+       "P": 1,
+       "N": 39
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 31
+      },
+      "B:c2": {
+       "P": 3,
+       "N": 678
+      },
+      "B:c3": {
+       "P": 2,
+       "N": 440
+      },
+      "B:c4_6": {
+       "P": 7,
+       "N": 508
+      },
+      "B:c7_15": {
+       "P": 4,
+       "N": 266
+      },
+      "B:c16p": {
+       "P": 0,
+       "N": 132
+      }
+     }
+    },
+    "ud:ukr|real": {
+     "units": 898,
+     "goldForms": 399,
+     "pairs": {
+      "B:c2": 26,
+      "B:c3": 19,
+      "B:c4_6": 14,
+      "B:c7_15": 7
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 606,
+       "posCandidates": 27
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 398,
+       "posCandidates": 39
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 50,
+       "posCandidates": 35
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 1,
+       "N": 66
+      },
+      "A:c3": {
+       "P": 2,
+       "N": 39
+      },
+      "A:c4_6": {
+       "P": 0,
+       "N": 38
+      },
+      "A:c7_15": {
+       "P": 2,
+       "N": 31
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 1
+      },
+      "B:c2": {
+       "P": 27,
+       "N": 786
+      },
+      "B:c3": {
+       "P": 21,
+       "N": 525
+      },
+      "B:c4_6": {
+       "P": 27,
+       "N": 620
+      },
+      "B:c7_15": {
+       "P": 39,
+       "N": 405
+      },
+      "B:c16p": {
+       "P": 35,
+       "N": 50
+      }
+     }
+    },
+    "ud:urd|real": {
+     "units": 535,
+     "goldForms": 729,
+     "pairs": {
+      "B:c2": 30,
+      "B:c3": 30,
+      "B:c4_6": 187,
+      "B:c7_15": 102,
+      "B:c16p": 11
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 605,
+       "posCandidates": 212
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 596,
+       "posCandidates": 150
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 982,
+       "posCandidates": 19
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 21,
+       "N": 34
+      },
+      "A:c3": {
+       "P": 14,
+       "N": 20
+      },
+      "A:c4_6": {
+       "P": 21,
+       "N": 38
+      },
+      "A:c7_15": {
+       "P": 11,
+       "N": 37
+      },
+      "A:c16p": {
+       "P": 0,
+       "N": 16
+      },
+      "B:c2": {
+       "P": 134,
+       "N": 667
+      },
+      "B:c3": {
+       "P": 130,
+       "N": 557
+      },
+      "B:c4_6": {
+       "P": 212,
+       "N": 792
+      },
+      "B:c7_15": {
+       "P": 150,
+       "N": 698
+      },
+      "B:c16p": {
+       "P": 19,
+       "N": 993
+      }
+     }
+    },
+    "ud:vie|real": {
+     "units": 800,
+     "goldForms": 108,
+     "pairs": {
+      "B:c2": 18,
+      "B:c3": 18,
+      "B:c4_6": 36,
+      "B:c7_15": 34,
+      "B:c16p": 20
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 860,
+       "posCandidates": 43
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 1077,
+       "posCandidates": 90
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 431,
+       "posCandidates": 107
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 4,
+       "N": 71
+      },
+      "A:c3": {
+       "P": 0,
+       "N": 47
+      },
+      "A:c4_6": {
+       "P": 8,
+       "N": 77
+      },
+      "A:c7_15": {
+       "P": 30,
+       "N": 98
+      },
+      "A:c16p": {
+       "P": 7,
+       "N": 32
+      },
+      "B:c2": {
+       "P": 19,
+       "N": 711
+      },
+      "B:c3": {
+       "P": 19,
+       "N": 488
+      },
+      "B:c4_6": {
+       "P": 43,
+       "N": 896
+      },
+      "B:c7_15": {
+       "P": 90,
+       "N": 1111
+      },
+      "B:c16p": {
+       "P": 107,
+       "N": 451
+      }
+     }
+    },
+    "ud:wol|real": {
+     "units": 470,
+     "goldForms": 348,
+     "pairs": {
+      "B:c2": 30,
+      "B:c3": 27,
+      "B:c4_6": 38,
+      "B:c7_15": 30,
+      "B:c16p": 7
+     },
+     "natural": {
+      "c4_6": {
+       "drawn": 20,
+       "pool": 506,
+       "posCandidates": 51
+      },
+      "c7_15": {
+       "drawn": 20,
+       "pool": 585,
+       "posCandidates": 47
+      },
+      "c16p": {
+       "drawn": 20,
+       "pool": 152,
+       "posCandidates": 38
+      }
+     },
+     "candidateCounts": {
+      "A:c2": {
+       "P": 5,
+       "N": 25
+      },
+      "A:c3": {
+       "P": 6,
+       "N": 20
+      },
+      "A:c4_6": {
+       "P": 5,
+       "N": 31
+      },
+      "A:c7_15": {
+       "P": 2,
+       "N": 42
+      },
+      "A:c16p": {
+       "P": 2,
+       "N": 5
+      },
+      "B:c2": {
+       "P": 34,
+       "N": 331
+      },
+      "B:c3": {
+       "P": 29,
+       "N": 319
+      },
+      "B:c4_6": {
+       "P": 51,
+       "N": 544
+      },
+      "B:c7_15": {
+       "P": 47,
+       "N": 615
+      },
+      "B:c16p": {
+       "P": 38,
+       "N": 159
+      }
+     }
+    }
+   },
+   "pairs": 5879,
+   "pooledControls": {
+    "B:c2": {
+     "n": 1056,
+     "R_LOGC": 0.5,
+     "R_POS": 0.497,
+     "R_IPOS": 0.502,
+     "R_FB": 0.498,
+     "R_LEN": 0.501,
+     "R_SL": 0.5
+    },
+    "B:c3": {
+     "n": 950,
+     "R_LOGC": 0.5,
+     "R_POS": 0.5,
+     "R_IPOS": 0.505,
+     "R_FB": 0.494,
+     "R_LEN": 0.498,
+     "R_SL": 0.501
+    },
+    "B:c4_6": {
+     "n": 2798,
+     "R_LOGC": 0.501,
+     "R_POS": 0.502,
+     "R_IPOS": 0.498,
+     "R_FB": 0.495,
+     "R_LEN": 0.5,
+     "R_SL": 0.501
+    },
+    "B:c7_15": {
+     "n": 976,
+     "R_LOGC": 0.505,
+     "R_POS": 0.499,
+     "R_IPOS": 0.494,
+     "R_FB": 0.461,
+     "R_LEN": 0.505,
+     "R_SL": 0.505
+    },
+    "B:c16p": {
+     "n": 99,
+     "R_LOGC": 0.529,
+     "R_POS": 0.517,
+     "R_IPOS": 0.52,
+     "R_FB": 0.416,
+     "R_LEN": 0.524,
+     "R_SL": 0.512
+    }
+   }
+  }
+ },
+ "ledgerSize": 30,
+ "designSha256": "7b70f89881c224311aa04f5dd56a06870e4e85ff29cc3310bf90edf403a9b675",
+ "tokens": 37572
+}

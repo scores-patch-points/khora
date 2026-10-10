@@ -1,0 +1,1886 @@
+{
+ "headerSha256": "187ca66da5a037ce23c7ba17b6fc23b7f63696af5d873234634438e3c1a22e55",
+ "runHdr": [
+  "894ce06cb18607e7"
+ ],
+ "P": {
+  "P1": {
+   "rho": 0.1114,
+   "p": 0.1929,
+   "n": 63,
+   "pass": false,
+   "byFamily": {
+    "irc": 3,
+    "code": 2,
+    "book": 6,
+    "ud": 52
+   }
+  },
+  "P2": {
+   "valid": 3,
+   "cells": [
+    [
+     "irc-kubuntu",
+     0.6395,
+     0.5552
+    ],
+    [
+     "irc-ubuntu-server",
+     0.6339,
+     0.555
+    ],
+    [
+     "irc-xubuntu",
+     0.5736,
+     0.5
+    ]
+   ],
+   "pass": false
+  },
+  "P3": {
+   "valid": 2,
+   "cells": [
+    [
+     "code-py",
+     0.589,
+     0.5412
+    ],
+    [
+     "code-rb",
+     0.5797,
+     0.5247
+    ]
+   ],
+   "pass": false
+  },
+  "P4": {
+   "valid": 6,
+   "cells": [
+    [
+     "book-anne-of-green-gables",
+     0.4483
+    ],
+    [
+     "book-crime-and-punishment",
+     0.4984
+    ],
+    [
+     "book-great-expectations",
+     0.4822
+    ],
+    [
+     "book-the-war-of-the-worlds",
+     0.4633
+    ],
+    [
+     "book-treasure-island",
+     0.5074
+    ],
+    [
+     "book-wuthering-heights",
+     0.5633
+    ]
+   ],
+   "nLow": 2,
+   "pass": false
+  },
+  "P5": {
+   "valid": 52,
+   "median": 0.455,
+   "POS": 1,
+   "NEG": 17,
+   "FLAT": 34,
+   "pass": true
+  },
+  "P6": {
+   "irc": 0.1493,
+   "code": 0.0564,
+   "book": 0.0433,
+   "ud": -0.0529,
+   "pass": {
+    "irc": true,
+    "code": true,
+    "book": false
+   }
+  }
+ },
+ "controls": {
+  "sham-irc": {
+   "n": 3,
+   "medDev": 0.0067,
+   "ok": true
+  },
+  "sham-code": {
+   "n": 3,
+   "medDev": 0.0172,
+   "ok": true
+  },
+  "sham-book": {
+   "n": 6,
+   "medDev": 0.0142,
+   "ok": true
+  },
+  "sham-ud": {
+   "n": 58,
+   "medDev": 0.015,
+   "ok": true
+  },
+  "impl": {
+   "n": 40,
+   "shareWithin003": 0.975,
+   "ok": true
+  }
+ },
+ "tables": {
+  "registers": {
+   "irc-kubuntu": {
+    "fam": "irc",
+    "rareL_edge": 0.1051,
+    "pairs": 147,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5034,
+     "len": 0.602,
+     "slen": 0.568
+    },
+    "DLx": 0.6395,
+    "lo": 0.5552,
+    "hi": 0.7167,
+    "pPerm": 0.0055,
+    "shuf": 0.4683,
+    "shufPairs": 189,
+    "registeredDLx": 0.6621,
+    "registeredPairs": 182,
+    "registeredLogn": 0.4478
+   },
+   "irc-ubuntu-server": {
+    "fam": "irc",
+    "rareL_edge": 0.0968,
+    "pairs": 112,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4688,
+     "len": 0.6205,
+     "slen": 0.5536
+    },
+    "DLx": 0.6339,
+    "lo": 0.555,
+    "hi": 0.7212,
+    "pPerm": 0.006,
+    "shuf": 0.4846,
+    "shufPairs": 162,
+    "registeredDLx": 0.6006,
+    "registeredPairs": 159,
+    "registeredLogn": 0.3774
+   },
+   "irc-xubuntu": {
+    "fam": "irc",
+    "rareL_edge": 0.1072,
+    "pairs": 129,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.469,
+     "len": 0.655,
+     "slen": 0.5465
+    },
+    "DLx": 0.5736,
+    "lo": 0.5,
+    "hi": 0.6542,
+    "pPerm": 0.0815,
+    "shuf": 0.5435,
+    "shufPairs": 161,
+    "registeredDLx": 0.6333,
+    "registeredPairs": 150,
+    "registeredLogn": 0.43
+   },
+   "code-js": {
+    "fam": "code",
+    "rareL_edge": 0.1409,
+    "pairs": 437,
+    "valid": false,
+    "posOk": true,
+    "freqOk": false,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4394,
+     "len": 0.4931,
+     "slen": 0.3993
+    },
+    "DLx": 0.6831,
+    "lo": 0.6309,
+    "hi": 0.7349,
+    "pPerm": 0.0005,
+    "shuf": 0.4561,
+    "shufPairs": 444,
+    "registeredDLx": 0.6754,
+    "registeredPairs": 479,
+    "registeredLogn": 0.501
+   },
+   "code-py": {
+    "fam": "code",
+    "rareL_edge": 0.1732,
+    "pairs": 590,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4966,
+     "len": 0.5669,
+     "slen": 0.4542
+    },
+    "DLx": 0.589,
+    "lo": 0.5412,
+    "hi": 0.6325,
+    "pPerm": 0.0005,
+    "shuf": 0.5042,
+    "shufPairs": 598,
+    "registeredDLx": 0.6175,
+    "registeredPairs": 600,
+    "registeredLogn": 0.5242
+   },
+   "code-rb": {
+    "fam": "code",
+    "rareL_edge": 0.1338,
+    "pairs": 389,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5077,
+     "len": 0.5835,
+     "slen": 0.4332
+    },
+    "DLx": 0.5797,
+    "lo": 0.5247,
+    "hi": 0.6402,
+    "pPerm": 0.007,
+    "shuf": 0.5233,
+    "shufPairs": 408,
+    "registeredDLx": 0.6149,
+    "registeredPairs": 483,
+    "registeredLogn": 0.5362
+   },
+   "book-anne-of-green-gables": {
+    "fam": "book",
+    "rareL_edge": 0.0362,
+    "pairs": 319,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4906,
+     "len": 0.5439,
+     "slen": 0.4639
+    },
+    "DLx": 0.4483,
+    "lo": 0.3652,
+    "hi": 0.5316,
+    "pPerm": 0.2169,
+    "shuf": 0.5234,
+    "shufPairs": 321,
+    "registeredDLx": 0.4055,
+    "registeredPairs": 328,
+    "registeredLogn": 0.5137
+   },
+   "book-crime-and-punishment": {
+    "fam": "book",
+    "rareL_edge": 0.0369,
+    "pairs": 317,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5095,
+     "len": 0.6215,
+     "slen": 0.4905
+    },
+    "DLx": 0.4984,
+    "lo": 0.4182,
+    "hi": 0.5818,
+    "pPerm": 1,
+    "shuf": 0.5129,
+    "shufPairs": 310,
+    "registeredDLx": 0.5078,
+    "registeredPairs": 320,
+    "registeredLogn": 0.5125
+   },
+   "book-great-expectations": {
+    "fam": "book",
+    "rareL_edge": 0.0335,
+    "pairs": 309,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4919,
+     "len": 0.4935,
+     "slen": 0.4515
+    },
+    "DLx": 0.4822,
+    "lo": 0.4006,
+    "hi": 0.5552,
+    "pPerm": 0.6797,
+    "shuf": 0.4078,
+    "shufPairs": 309,
+    "registeredDLx": 0.4073,
+    "registeredPairs": 313,
+    "registeredLogn": 0.4633
+   },
+   "book-the-war-of-the-worlds": {
+    "fam": "book",
+    "rareL_edge": 0.0222,
+    "pairs": 150,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.48,
+     "len": 0.6133,
+     "slen": 0.5133
+    },
+    "DLx": 0.4633,
+    "lo": 0.3633,
+    "hi": 0.5867,
+    "pPerm": 0.5482,
+    "shuf": 0.42,
+    "shufPairs": 150,
+    "registeredDLx": 0.3791,
+    "registeredPairs": 153,
+    "registeredLogn": 0.3497
+   },
+   "book-treasure-island": {
+    "fam": "book",
+    "rareL_edge": 0.0341,
+    "pairs": 135,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5111,
+     "len": 0.4963,
+     "slen": 0.4815
+    },
+    "DLx": 0.5074,
+    "lo": 0.3963,
+    "hi": 0.6333,
+    "pPerm": 0.9485,
+    "shuf": 0.4222,
+    "shufPairs": 135,
+    "registeredDLx": 0.4929,
+    "registeredPairs": 141,
+    "registeredLogn": 0.5035
+   },
+   "book-wuthering-heights": {
+    "fam": "book",
+    "rareL_edge": 0.0275,
+    "pairs": 158,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5411,
+     "len": 0.5538,
+     "slen": 0.462
+    },
+    "DLx": 0.5633,
+    "lo": 0.456,
+    "hi": 0.6772,
+    "pPerm": 0.2954,
+    "shuf": 0.4359,
+    "shufPairs": 156,
+    "registeredDLx": 0.5525,
+    "registeredPairs": 162,
+    "registeredLogn": 0.5617
+   },
+   "ud-af_afribooms": {
+    "fam": "ud",
+    "rareL_edge": 0.0262,
+    "pairs": 57,
+    "valid": false,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4825,
+     "len": 0.4035,
+     "slen": 0.5175
+    },
+    "DLx": 0.4474,
+    "lo": 0.2969,
+    "hi": 0.6017,
+    "pPerm": 0.6112,
+    "shuf": 0.5175,
+    "shufPairs": 57,
+    "registeredDLx": 0.4138,
+    "registeredPairs": 58,
+    "registeredLogn": 0.4052
+   },
+   "ud-ar_padt": {
+    "fam": "ud",
+    "rareL_edge": 0.0146,
+    "pairs": 5,
+    "valid": false,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5,
+     "len": 0.5,
+     "slen": 0.6
+    },
+    "DLx": 0.8,
+    "lo": 0,
+    "hi": 1,
+    "pPerm": 0.7496,
+    "shuf": 0.5,
+    "shufPairs": 5,
+    "registeredDLx": 0.6,
+    "registeredPairs": 5,
+    "registeredLogn": 0.8
+   },
+   "ud-be_hse": {
+    "fam": "ud",
+    "rareL_edge": 0.1019,
+    "pairs": 600,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4908,
+     "len": 0.4675,
+     "slen": 0.5075
+    },
+    "DLx": 0.4375,
+    "lo": 0.3866,
+    "hi": 0.4894,
+    "pPerm": 0.013,
+    "shuf": 0.52,
+    "shufPairs": 600,
+    "registeredDLx": 0.4292,
+    "registeredPairs": 600,
+    "registeredLogn": 0.4383
+   },
+   "ud-bg_btb": {
+    "fam": "ud",
+    "rareL_edge": 0.0857,
+    "pairs": 518,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4971,
+     "len": 0.4044,
+     "slen": 0.4894
+    },
+    "DLx": 0.4102,
+    "lo": 0.3566,
+    "hi": 0.4692,
+    "pPerm": 0.0035,
+    "shuf": 0.5105,
+    "shufPairs": 523,
+    "registeredDLx": 0.3861,
+    "registeredPairs": 540,
+    "registeredLogn": 0.4611
+   },
+   "ud-ca_ancora": {
+    "fam": "ud",
+    "rareL_edge": 0.0206,
+    "pairs": 600,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5017,
+     "len": 0.4742,
+     "slen": 0.515
+    },
+    "DLx": 0.4925,
+    "lo": 0.4435,
+    "hi": 0.5413,
+    "pPerm": 0.7886,
+    "shuf": 0.5058,
+    "shufPairs": 600,
+    "registeredDLx": 0.4858,
+    "registeredPairs": 600,
+    "registeredLogn": 0.4758
+   },
+   "ud-cop_scriptorium": {
+    "fam": "ud",
+    "rareL_edge": 0.0369,
+    "pairs": 76,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5066,
+     "len": 0.6316,
+     "slen": 0.4803
+    },
+    "DLx": 0.5263,
+    "lo": 0.3649,
+    "hi": 0.6623,
+    "pPerm": 0.8016,
+    "shuf": 0.4808,
+    "shufPairs": 78,
+    "registeredDLx": 0.512,
+    "registeredPairs": 83,
+    "registeredLogn": 0.5663
+   },
+   "ud-cs_pdt": {
+    "fam": "ud",
+    "rareL_edge": 0.0753,
+    "pairs": 281,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5125,
+     "len": 0.4324,
+     "slen": 0.484
+    },
+    "DLx": 0.3719,
+    "lo": 0.3057,
+    "hi": 0.4388,
+    "pPerm": 0.0005,
+    "shuf": 0.4843,
+    "shufPairs": 286,
+    "registeredDLx": 0.3698,
+    "registeredPairs": 288,
+    "registeredLogn": 0.5035
+   },
+   "ud-cu_proiel": {
+    "fam": "ud",
+    "rareL_edge": 0.0965,
+    "pairs": 231,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.487,
+     "len": 0.4784,
+     "slen": 0.4091
+    },
+    "DLx": 0.4242,
+    "lo": 0.3468,
+    "hi": 0.5021,
+    "pPerm": 0.0655,
+    "shuf": 0.4762,
+    "shufPairs": 231,
+    "registeredDLx": 0.3642,
+    "registeredPairs": 232,
+    "registeredLogn": 0.4116
+   },
+   "ud-cy_ccg": {
+    "fam": "ud",
+    "rareL_edge": 0.0408,
+    "pairs": 211,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4953,
+     "len": 0.4668,
+     "slen": 0.4858
+    },
+    "DLx": 0.4929,
+    "lo": 0.4123,
+    "hi": 0.566,
+    "pPerm": 0.9185,
+    "shuf": 0.4741,
+    "shufPairs": 212,
+    "registeredDLx": 0.5323,
+    "registeredPairs": 217,
+    "registeredLogn": 0.4539
+   },
+   "ud-da_ddt": {
+    "fam": "ud",
+    "rareL_edge": 0.0513,
+    "pairs": 465,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4957,
+     "len": 0.4882,
+     "slen": 0.5161
+    },
+    "DLx": 0.5043,
+    "lo": 0.4546,
+    "hi": 0.5573,
+    "pPerm": 0.911,
+    "shuf": 0.5297,
+    "shufPairs": 471,
+    "registeredDLx": 0.4949,
+    "registeredPairs": 489,
+    "registeredLogn": 0.4305
+   },
+   "ud-de_gsd": {
+    "fam": "ud",
+    "rareL_edge": 0.035,
+    "pairs": 600,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4942,
+     "len": 0.4708,
+     "slen": 0.5117
+    },
+    "DLx": 0.4858,
+    "lo": 0.4398,
+    "hi": 0.5285,
+    "pPerm": 0.5537,
+    "shuf": 0.5408,
+    "shufPairs": 600,
+    "registeredDLx": 0.4658,
+    "registeredPairs": 600,
+    "registeredLogn": 0.4717
+   },
+   "ud-en_ewt": {
+    "fam": "ud",
+    "rareL_edge": 0.0451,
+    "pairs": 389,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4987,
+     "len": 0.4319,
+     "slen": 0.5103
+    },
+    "DLx": 0.4344,
+    "lo": 0.3731,
+    "hi": 0.495,
+    "pPerm": 0.0335,
+    "shuf": 0.4911,
+    "shufPairs": 394,
+    "registeredDLx": 0.4235,
+    "registeredPairs": 412,
+    "registeredLogn": 0.4345
+   },
+   "ud-es_gsd": {
+    "fam": "ud",
+    "rareL_edge": 0.025,
+    "pairs": 600,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4958,
+     "len": 0.4642,
+     "slen": 0.5358
+    },
+    "DLx": 0.4792,
+    "lo": 0.4318,
+    "hi": 0.527,
+    "pPerm": 0.4108,
+    "shuf": 0.5058,
+    "shufPairs": 600,
+    "registeredDLx": 0.4892,
+    "registeredPairs": 600,
+    "registeredLogn": 0.4658
+   },
+   "ud-et_edt": {
+    "fam": "ud",
+    "rareL_edge": 0.0764,
+    "pairs": 600,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5017,
+     "len": 0.5192,
+     "slen": 0.485
+    },
+    "DLx": 0.4608,
+    "lo": 0.4174,
+    "hi": 0.5107,
+    "pPerm": 0.1029,
+    "shuf": 0.5,
+    "shufPairs": 600,
+    "registeredDLx": 0.465,
+    "registeredPairs": 600,
+    "registeredLogn": 0.4525
+   },
+   "ud-eu_bdt": {
+    "fam": "ud",
+    "rareL_edge": 0.1106,
+    "pairs": 600,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4983,
+     "len": 0.4408,
+     "slen": 0.5483
+    },
+    "DLx": 0.4225,
+    "lo": 0.382,
+    "hi": 0.4625,
+    "pPerm": 0.001,
+    "shuf": 0.5033,
+    "shufPairs": 600,
+    "registeredDLx": 0.4475,
+    "registeredPairs": 600,
+    "registeredLogn": 0.44
+   },
+   "ud-fi_tdt": {
+    "fam": "ud",
+    "rareL_edge": 0.0909,
+    "pairs": 600,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4983,
+     "len": 0.4383,
+     "slen": 0.5125
+    },
+    "DLx": 0.4825,
+    "lo": 0.4339,
+    "hi": 0.5264,
+    "pPerm": 0.4513,
+    "shuf": 0.5358,
+    "shufPairs": 600,
+    "registeredDLx": 0.4883,
+    "registeredPairs": 600,
+    "registeredLogn": 0.4967
+   },
+   "ud-fo_farpahc": {
+    "fam": "ud",
+    "rareL_edge": 0.0347,
+    "pairs": 143,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4895,
+     "len": 0.535,
+     "slen": 0.458
+    },
+    "DLx": 0.549,
+    "lo": 0.446,
+    "hi": 0.6544,
+    "pPerm": 0.4218,
+    "shuf": 0.457,
+    "shufPairs": 151,
+    "registeredDLx": 0.5884,
+    "registeredPairs": 164,
+    "registeredLogn": 0.4878
+   },
+   "ud-fr_gsd": {
+    "fam": "ud",
+    "rareL_edge": 0.0233,
+    "pairs": 315,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5079,
+     "len": 0.446,
+     "slen": 0.5206
+    },
+    "DLx": 0.481,
+    "lo": 0.4112,
+    "hi": 0.5528,
+    "pPerm": 0.5997,
+    "shuf": 0.5763,
+    "shufPairs": 321,
+    "registeredDLx": 0.4924,
+    "registeredPairs": 328,
+    "registeredLogn": 0.4497
+   },
+   "ud-ga_idt": {
+    "fam": "ud",
+    "rareL_edge": 0.0372,
+    "pairs": 341,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4956,
+     "len": 0.5,
+     "slen": 0.5499
+    },
+    "DLx": 0.4677,
+    "lo": 0.4018,
+    "hi": 0.5273,
+    "pPerm": 0.3468,
+    "shuf": 0.5206,
+    "shufPairs": 339,
+    "registeredDLx": 0.4684,
+    "registeredPairs": 348,
+    "registeredLogn": 0.4526
+   },
+   "ud-gl_treegal": {
+    "fam": "ud",
+    "rareL_edge": 0.0353,
+    "pairs": 152,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5,
+     "len": 0.5329,
+     "slen": 0.3618
+    },
+    "DLx": 0.4079,
+    "lo": 0.3142,
+    "hi": 0.5065,
+    "pPerm": 0.081,
+    "shuf": 0.5162,
+    "shufPairs": 154,
+    "registeredDLx": 0.3599,
+    "registeredPairs": 157,
+    "registeredLogn": 0.4268
+   },
+   "ud-got_proiel": {
+    "fam": "ud",
+    "rareL_edge": 0.062,
+    "pairs": 195,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4974,
+     "len": 0.5359,
+     "slen": 0.4795
+    },
+    "DLx": 0.4513,
+    "lo": 0.3744,
+    "hi": 0.5259,
+    "pPerm": 0.2564,
+    "shuf": 0.4821,
+    "shufPairs": 195,
+    "registeredDLx": 0.4534,
+    "registeredPairs": 204,
+    "registeredLogn": 0.4828
+   },
+   "ud-grc_proiel": {
+    "fam": "ud",
+    "rareL_edge": 0.0712,
+    "pairs": 160,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5094,
+     "len": 0.4781,
+     "slen": 0.4594
+    },
+    "DLx": 0.375,
+    "lo": 0.2848,
+    "hi": 0.5,
+    "pPerm": 0.02,
+    "shuf": 0.4594,
+    "shufPairs": 160,
+    "registeredDLx": 0.4238,
+    "registeredPairs": 164,
+    "registeredLogn": 0.5061
+   },
+   "ud-he_htb": {
+    "fam": "ud",
+    "rareL_edge": 0.0366,
+    "pairs": 600,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4917,
+     "len": 0.5083,
+     "slen": 0.4767
+    },
+    "DLx": 0.5467,
+    "lo": 0.5025,
+    "hi": 0.5992,
+    "pPerm": 0.0555,
+    "shuf": 0.4592,
+    "shufPairs": 600,
+    "registeredDLx": 0.5108,
+    "registeredPairs": 600,
+    "registeredLogn": 0.4575
+   },
+   "ud-hi_hdtb": {
+    "fam": "ud",
+    "rareL_edge": 0.0636,
+    "pairs": 600,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4942,
+     "len": 0.4858,
+     "slen": 0.5433
+    },
+    "DLx": 0.5117,
+    "lo": 0.4668,
+    "hi": 0.5565,
+    "pPerm": 0.6587,
+    "shuf": 0.5283,
+    "shufPairs": 600,
+    "registeredDLx": 0.5567,
+    "registeredPairs": 600,
+    "registeredLogn": 0.5058
+   },
+   "ud-hr_set": {
+    "fam": "ud",
+    "rareL_edge": 0.0552,
+    "pairs": 600,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4958,
+     "len": 0.4825,
+     "slen": 0.5225
+    },
+    "DLx": 0.3183,
+    "lo": 0.2736,
+    "hi": 0.3613,
+    "pPerm": 0.0005,
+    "shuf": 0.5167,
+    "shufPairs": 600,
+    "registeredDLx": 0.2917,
+    "registeredPairs": 600,
+    "registeredLogn": 0.4692
+   },
+   "ud-hu_szeged": {
+    "fam": "ud",
+    "rareL_edge": 0.0277,
+    "pairs": 222,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5023,
+     "len": 0.5405,
+     "slen": 0.518
+    },
+    "DLx": 0.4505,
+    "lo": 0.3744,
+    "hi": 0.5189,
+    "pPerm": 0.2124,
+    "shuf": 0.4912,
+    "shufPairs": 227,
+    "registeredDLx": 0.4498,
+    "registeredPairs": 239,
+    "registeredLogn": 0.5356
+   },
+   "ud-hy_armtdp": {
+    "fam": "ud",
+    "rareL_edge": 0.0616,
+    "pairs": 391,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4923,
+     "len": 0.468,
+     "slen": 0.5332
+    },
+    "DLx": 0.5217,
+    "lo": 0.4729,
+    "hi": 0.5718,
+    "pPerm": 0.4378,
+    "shuf": 0.4811,
+    "shufPairs": 397,
+    "registeredDLx": 0.5281,
+    "registeredPairs": 409,
+    "registeredLogn": 0.434
+   },
+   "ud-id_gsd": {
+    "fam": "ud",
+    "rareL_edge": 0.0545,
+    "pairs": 600,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4925,
+     "len": 0.4575,
+     "slen": 0.485
+    },
+    "DLx": 0.4392,
+    "lo": 0.3926,
+    "hi": 0.4815,
+    "pPerm": 0.0095,
+    "shuf": 0.5117,
+    "shufPairs": 600,
+    "registeredDLx": 0.4875,
+    "registeredPairs": 600,
+    "registeredLogn": 0.4892
+   },
+   "ud-is_icepahc": {
+    "fam": "ud",
+    "rareL_edge": 0.0222,
+    "pairs": 600,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4975,
+     "len": 0.5675,
+     "slen": 0.4883
+    },
+    "DLx": 0.3667,
+    "lo": 0.3182,
+    "hi": 0.4147,
+    "pPerm": 0.0005,
+    "shuf": 0.5167,
+    "shufPairs": 600,
+    "registeredDLx": 0.4083,
+    "registeredPairs": 600,
+    "registeredLogn": 0.4717
+   },
+   "ud-it_isdt": {
+    "fam": "ud",
+    "rareL_edge": 0.0404,
+    "pairs": 600,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.495,
+     "len": 0.5125,
+     "slen": 0.53
+    },
+    "DLx": 0.505,
+    "lo": 0.4595,
+    "hi": 0.5555,
+    "pPerm": 0.8521,
+    "shuf": 0.5158,
+    "shufPairs": 600,
+    "registeredDLx": 0.5117,
+    "registeredPairs": 600,
+    "registeredLogn": 0.4658
+   },
+   "ud-ja_gsd": {
+    "fam": "ud",
+    "rareL_edge": 0.0844,
+    "pairs": 164,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5,
+     "len": 0.5579,
+     "slen": 0.5091
+    },
+    "DLx": 0.5701,
+    "lo": 0.4846,
+    "hi": 0.6485,
+    "pPerm": 0.1204,
+    "shuf": 0.5265,
+    "shufPairs": 170,
+    "registeredDLx": 0.5983,
+    "registeredPairs": 173,
+    "registeredLogn": 0.474
+   },
+   "ud-ka_glc": {
+    "fam": "ud",
+    "rareL_edge": 0.0713,
+    "pairs": 135,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4889,
+     "len": 0.4111,
+     "slen": 0.4963
+    },
+    "DLx": 0.5519,
+    "lo": 0.4492,
+    "hi": 0.6579,
+    "pPerm": 0.3468,
+    "shuf": 0.5458,
+    "shufPairs": 131,
+    "registeredDLx": 0.5071,
+    "registeredPairs": 141,
+    "registeredLogn": 0.4184
+   },
+   "ud-kk_ktb": {
+    "fam": "ud",
+    "rareL_edge": 0.0559,
+    "pairs": 1,
+    "valid": false,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5,
+     "len": 0,
+     "slen": 0
+    },
+    "DLx": 1,
+    "lo": 1,
+    "hi": 1,
+    "pPerm": 1,
+    "shuf": 0.5,
+    "shufPairs": 2,
+    "registeredDLx": 0.6667,
+    "registeredPairs": 3,
+    "registeredLogn": 0.5
+   },
+   "ud-ko_gsd": {
+    "fam": "ud",
+    "rareL_edge": 0.0877,
+    "pairs": 30,
+    "valid": false,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5,
+     "len": 0.5833,
+     "slen": 0.4833
+    },
+    "DLx": 0.55,
+    "lo": 0.4063,
+    "hi": 0.6964,
+    "pPerm": 0.6492,
+    "shuf": 0.4833,
+    "shufPairs": 30,
+    "registeredDLx": 0.55,
+    "registeredPairs": 30,
+    "registeredLogn": 0.5667
+   },
+   "ud-la_proiel": {
+    "fam": "ud",
+    "rareL_edge": 0.0517,
+    "pairs": 322,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5047,
+     "len": 0.4953,
+     "slen": 0.4876
+    },
+    "DLx": 0.455,
+    "lo": 0.3962,
+    "hi": 0.5201,
+    "pPerm": 0.1524,
+    "shuf": 0.5062,
+    "shufPairs": 320,
+    "registeredDLx": 0.4202,
+    "registeredPairs": 332,
+    "registeredLogn": 0.4096
+   },
+   "ud-lt_alksnis": {
+    "fam": "ud",
+    "rareL_edge": 0.0559,
+    "pairs": 91,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.511,
+     "len": 0.4945,
+     "slen": 0.4341
+    },
+    "DLx": 0.4066,
+    "lo": 0.2841,
+    "hi": 0.5326,
+    "pPerm": 0.1924,
+    "shuf": 0.478,
+    "shufPairs": 91,
+    "registeredDLx": 0.4096,
+    "registeredPairs": 94,
+    "registeredLogn": 0.5532
+   },
+   "ud-lv_lvtb": {
+    "fam": "ud",
+    "rareL_edge": 0.0561,
+    "pairs": 389,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4949,
+     "len": 0.446,
+     "slen": 0.4781
+    },
+    "DLx": 0.5334,
+    "lo": 0.4805,
+    "hi": 0.5853,
+    "pPerm": 0.2319,
+    "shuf": 0.4821,
+    "shufPairs": 391,
+    "registeredDLx": 0.5,
+    "registeredPairs": 412,
+    "registeredLogn": 0.4551
+   },
+   "ud-lzh_kyoto": {
+    "fam": "ud",
+    "rareL_edge": 0.2044,
+    "pairs": 469,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5043,
+     "len": 0.6546,
+     "slen": 0.532
+    },
+    "DLx": 0.5096,
+    "lo": 0.4551,
+    "hi": 0.564,
+    "pPerm": 0.7696,
+    "shuf": 0.5265,
+    "shufPairs": 471,
+    "registeredDLx": 0.5127,
+    "registeredPairs": 471,
+    "registeredLogn": 0.4639
+   },
+   "ud-mt_mudt": {
+    "fam": "ud",
+    "rareL_edge": 0.0387,
+    "pairs": 213,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5023,
+     "len": 0.4977,
+     "slen": 0.4765
+    },
+    "DLx": 0.3826,
+    "lo": 0.2985,
+    "hi": 0.4733,
+    "pPerm": 0.0135,
+    "shuf": 0.5188,
+    "shufPairs": 213,
+    "registeredDLx": 0.4005,
+    "registeredPairs": 221,
+    "registeredLogn": 0.4118
+   },
+   "ud-nl_alpino": {
+    "fam": "ud",
+    "rareL_edge": 0.0283,
+    "pairs": 591,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5068,
+     "len": 0.5008,
+     "slen": 0.5195
+    },
+    "DLx": 0.4264,
+    "lo": 0.3795,
+    "hi": 0.4675,
+    "pPerm": 0.004,
+    "shuf": 0.4933,
+    "shufPairs": 599,
+    "registeredDLx": 0.4375,
+    "registeredPairs": 600,
+    "registeredLogn": 0.4517
+   },
+   "ud-no_bokmaal": {
+    "fam": "ud",
+    "rareL_edge": 0.062,
+    "pairs": 600,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5075,
+     "len": 0.4825,
+     "slen": 0.4675
+    },
+    "DLx": 0.3442,
+    "lo": 0.2955,
+    "hi": 0.387,
+    "pPerm": 0.0005,
+    "shuf": 0.5017,
+    "shufPairs": 600,
+    "registeredDLx": 0.35,
+    "registeredPairs": 600,
+    "registeredLogn": 0.505
+   },
+   "ud-pl_pdb": {
+    "fam": "ud",
+    "rareL_edge": 0.0954,
+    "pairs": 250,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.498,
+     "len": 0.398,
+     "slen": 0.494
+    },
+    "DLx": 0.474,
+    "lo": 0.416,
+    "hi": 0.5338,
+    "pPerm": 0.4473,
+    "shuf": 0.4882,
+    "shufPairs": 254,
+    "registeredDLx": 0.4811,
+    "registeredPairs": 264,
+    "registeredLogn": 0.4773
+   },
+   "ud-pt_bosque": {
+    "fam": "ud",
+    "rareL_edge": 0.0411,
+    "pairs": 600,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4967,
+     "len": 0.5025,
+     "slen": 0.4942
+    },
+    "DLx": 0.4267,
+    "lo": 0.3795,
+    "hi": 0.4759,
+    "pPerm": 0.003,
+    "shuf": 0.5333,
+    "shufPairs": 600,
+    "registeredDLx": 0.4517,
+    "registeredPairs": 600,
+    "registeredLogn": 0.465
+   },
+   "ud-ro_rrt": {
+    "fam": "ud",
+    "rareL_edge": 0.0449,
+    "pairs": 189,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5026,
+     "len": 0.4683,
+     "slen": 0.463
+    },
+    "DLx": 0.455,
+    "lo": 0.3777,
+    "hi": 0.5291,
+    "pPerm": 0.3068,
+    "shuf": 0.4706,
+    "shufPairs": 187,
+    "registeredDLx": 0.4339,
+    "registeredPairs": 189,
+    "registeredLogn": 0.4074
+   },
+   "ud-ru_syntagrus": {
+    "fam": "ud",
+    "rareL_edge": 0.0555,
+    "pairs": 320,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5031,
+     "len": 0.4797,
+     "slen": 0.4797
+    },
+    "DLx": 0.4484,
+    "lo": 0.3722,
+    "hi": 0.5127,
+    "pPerm": 0.1434,
+    "shuf": 0.5345,
+    "shufPairs": 319,
+    "registeredDLx": 0.4109,
+    "registeredPairs": 331,
+    "registeredLogn": 0.4743
+   },
+   "ud-sk_snk": {
+    "fam": "ud",
+    "rareL_edge": 0.1331,
+    "pairs": 325,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4938,
+     "len": 0.4523,
+     "slen": 0.4738
+    },
+    "DLx": 0.4677,
+    "lo": 0.4063,
+    "hi": 0.526,
+    "pPerm": 0.3318,
+    "shuf": 0.4938,
+    "shufPairs": 323,
+    "registeredDLx": 0.4882,
+    "registeredPairs": 339,
+    "registeredLogn": 0.4853
+   },
+   "ud-sl_ssj": {
+    "fam": "ud",
+    "rareL_edge": 0.0533,
+    "pairs": 219,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5,
+     "len": 0.4795,
+     "slen": 0.4977
+    },
+    "DLx": 0.468,
+    "lo": 0.4,
+    "hi": 0.5262,
+    "pPerm": 0.3788,
+    "shuf": 0.5407,
+    "shufPairs": 221,
+    "registeredDLx": 0.4978,
+    "registeredPairs": 232,
+    "registeredLogn": 0.4784
+   },
+   "ud-sr_set": {
+    "fam": "ud",
+    "rareL_edge": 0.0538,
+    "pairs": 600,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4933,
+     "len": 0.4933,
+     "slen": 0.5075
+    },
+    "DLx": 0.3633,
+    "lo": 0.3197,
+    "hi": 0.4095,
+    "pPerm": 0.0005,
+    "shuf": 0.5308,
+    "shufPairs": 600,
+    "registeredDLx": 0.335,
+    "registeredPairs": 600,
+    "registeredLogn": 0.4875
+   },
+   "ud-sv_talbanken": {
+    "fam": "ud",
+    "rareL_edge": 0.0526,
+    "pairs": 160,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4938,
+     "len": 0.3469,
+     "slen": 0.4594
+    },
+    "DLx": 0.3312,
+    "lo": 0.2484,
+    "hi": 0.4091,
+    "pPerm": 0.001,
+    "shuf": 0.5525,
+    "shufPairs": 162,
+    "registeredDLx": 0.3455,
+    "registeredPairs": 165,
+    "registeredLogn": 0.4333
+   },
+   "ud-ta_ttb": {
+    "fam": "ud",
+    "rareL_edge": 0.0728,
+    "pairs": 199,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.495,
+     "len": 0.5628,
+     "slen": 0.5251
+    },
+    "DLx": 0.5729,
+    "lo": 0.4975,
+    "hi": 0.6488,
+    "pPerm": 0.067,
+    "shuf": 0.5237,
+    "shufPairs": 211,
+    "registeredDLx": 0.567,
+    "registeredPairs": 224,
+    "registeredLogn": 0.5246
+   },
+   "ud-tr_imst": {
+    "fam": "ud",
+    "rareL_edge": 0.1062,
+    "pairs": 330,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4955,
+     "len": 0.5409,
+     "slen": 0.5515
+    },
+    "DLx": 0.4909,
+    "lo": 0.4336,
+    "hi": 0.554,
+    "pPerm": 0.7956,
+    "shuf": 0.5299,
+    "shufPairs": 334,
+    "registeredDLx": 0.549,
+    "registeredPairs": 337,
+    "registeredLogn": 0.4332
+   },
+   "ud-ug_udt": {
+    "fam": "ud",
+    "rareL_edge": 0.0852,
+    "pairs": 17,
+    "valid": false,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5294,
+     "len": 0.5,
+     "slen": 0.5882
+    },
+    "DLx": 0.5588,
+    "lo": 0.3235,
+    "hi": 0.7813,
+    "pPerm": 0.8116,
+    "shuf": 0.7353,
+    "shufPairs": 17,
+    "registeredDLx": 0.3824,
+    "registeredPairs": 17,
+    "registeredLogn": 0.6176
+   },
+   "ud-uk_iu": {
+    "fam": "ud",
+    "rareL_edge": 0.0564,
+    "pairs": 238,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5105,
+     "len": 0.4643,
+     "slen": 0.5462
+    },
+    "DLx": 0.4181,
+    "lo": 0.3481,
+    "hi": 0.4916,
+    "pPerm": 0.0295,
+    "shuf": 0.5288,
+    "shufPairs": 243,
+    "registeredDLx": 0.4779,
+    "registeredPairs": 249,
+    "registeredLogn": 0.5221
+   },
+   "ud-ur_udtb": {
+    "fam": "ud",
+    "rareL_edge": 0.0429,
+    "pairs": 600,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4933,
+     "len": 0.5158,
+     "slen": 0.5142
+    },
+    "DLx": 0.4467,
+    "lo": 0.3972,
+    "hi": 0.4976,
+    "pPerm": 0.036,
+    "shuf": 0.5175,
+    "shufPairs": 600,
+    "registeredDLx": 0.4758,
+    "registeredPairs": 600,
+    "registeredLogn": 0.4408
+   },
+   "ud-vi_vtb": {
+    "fam": "ud",
+    "rareL_edge": 0.0737,
+    "pairs": 197,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5,
+     "len": 0.5609,
+     "slen": 0.4975
+    },
+    "DLx": 0.3452,
+    "lo": 0.2698,
+    "hi": 0.4229,
+    "pPerm": 0.001,
+    "shuf": 0.4799,
+    "shufPairs": 199,
+    "registeredDLx": 0.3561,
+    "registeredPairs": 205,
+    "registeredLogn": 0.4293
+   },
+   "ud-wo_wtb": {
+    "fam": "ud",
+    "rareL_edge": 0.0578,
+    "pairs": 268,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4963,
+     "len": 0.5466,
+     "slen": 0.4944
+    },
+    "DLx": 0.4515,
+    "lo": 0.3807,
+    "hi": 0.5153,
+    "pPerm": 0.1909,
+    "shuf": 0.4521,
+    "shufPairs": 282,
+    "registeredDLx": 0.4532,
+    "registeredPairs": 299,
+    "registeredLogn": 0.4766
+   },
+   "ud-zh_gsd": {
+    "fam": "ud",
+    "rareL_edge": 0.051,
+    "pairs": 600,
+    "valid": true,
+    "posOk": true,
+    "freqOk": true,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4958,
+     "len": 0.4192,
+     "slen": 0.4833
+    },
+    "DLx": 0.51,
+    "lo": 0.4669,
+    "hi": 0.5525,
+    "pPerm": 0.6732,
+    "shuf": 0.5175,
+    "shufPairs": 600,
+    "registeredDLx": 0.515,
+    "registeredPairs": 600,
+    "registeredLogn": 0.435
+   }
+  }
+ },
+ "report": {
+  "rho": {
+   "noCode": {
+    "rho": 0.0241,
+    "p": 0.4298,
+    "n": 61
+   },
+   "noIrc": {
+    "rho": -0.0076,
+    "p": 0.5372,
+    "n": 60
+   },
+   "noUd": {
+    "rho": 0.6909,
+    "p": 0.0175,
+    "n": 11
+   },
+   "udOnly": {
+    "rho": -0.0453,
+    "p": 0.6167,
+    "n": 52
+   },
+   "nonUd": {
+    "rho": 0.6909,
+    "p": 0.0175,
+    "n": 11
+   }
+  },
+  "validity": {
+   "irc": {
+    "total": 3,
+    "pairsGe60": 3,
+    "posOk": 3,
+    "valid": 3
+   },
+   "code": {
+    "total": 3,
+    "pairsGe60": 3,
+    "posOk": 3,
+    "valid": 2
+   },
+   "book": {
+    "total": 6,
+    "pairsGe60": 6,
+    "posOk": 6,
+    "valid": 6
+   },
+   "ud": {
+    "total": 57,
+    "pairsGe60": 52,
+    "posOk": 52,
+    "valid": 52
+   }
+  },
+  "signAccuracy": {
+   "n": 34,
+   "hit": 24,
+   "acc": 0.7059,
+   "pOneSidedBinom": 0.0122,
+   "byFamily": {
+    "irc": {
+     "n": 2,
+     "hit": 2
+    },
+    "code": {
+     "n": 2,
+     "hit": 2
+    },
+    "book": {
+     "n": 6,
+     "hit": 4
+    },
+    "ud": {
+     "n": 24,
+     "hit": 16
+    }
+   }
+  },
+  "udSignedAbove": [
+   [
+    "ud-be_hse",
+    0.1019,
+    0.4375
+   ],
+   [
+    "ud-eu_bdt",
+    0.1106,
+    0.4225
+   ],
+   [
+    "ud-lzh_kyoto",
+    0.2044,
+    0.5096
+   ],
+   [
+    "ud-sk_snk",
+    0.1331,
+    0.4677
+   ],
+   [
+    "ud-tr_imst",
+    0.1062,
+    0.4909
+   ]
+  ]
+ },
+ "posthoc": {
+  "note": "position-only validity (scoper convention); NOT the registered verdict",
+  "P1": {
+   "rho": 0.1515,
+   "p": 0.1109,
+   "n": 64
+  },
+  "irc": {
+   "valid": 3,
+   "cells": [
+    [
+     "irc-kubuntu",
+     0.6395,
+     0.5552,
+     0.5034
+    ],
+    [
+     "irc-ubuntu-server",
+     0.6339,
+     0.555,
+     0.4688
+    ],
+    [
+     "irc-xubuntu",
+     0.5736,
+     0.5,
+     0.469
+    ]
+   ],
+   "delta": 0.1493
+  },
+  "code": {
+   "valid": 3,
+   "delta": 0.0848
+  },
+  "book": {
+   "valid": 6,
+   "nLow": 2,
+   "delta": 0.0433
+  },
+  "ud": {
+   "valid": 52,
+   "median": 0.455,
+   "POS": 1,
+   "NEG": 17,
+   "delta": -0.0529
+  }
+ },
+ "famPass": {
+  "irc": false,
+  "code": false,
+  "book": false,
+  "ud": true
+ },
+ "verdict": "PARTIAL: holds(ud) fails(irc,code,book) P1=false"
+}

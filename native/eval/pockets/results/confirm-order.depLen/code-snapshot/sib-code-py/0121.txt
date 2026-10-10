@@ -1,0 +1,62 @@
+#!/usr/bin/env python3
+"""Give every matter a readable handle, not just the deep-read ones.
+
+summarize.py works from the TITLE alone — no OCR, no eoreader7, no
+network — so this can cover all 8,000+ matters in one pass, where the
+scan pipeline only ever reached the few hundred it deep-read for
+surveillance. Two columns come out of it:
+
+  headline     a summary we're actually confident in, or NULL
+  clean_title  Metro's own words with the ceremonial preamble removed
+
+NULL is a real answer here. A summary that misreads a matter is worse
+than Metro's own sentence, so when no reader is confident the column
+stays empty and the UI falls back to clean_title.
+"""
+from __future__ import annotations
+
+import sqlite3
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "src"))
+sys.path.insert(0, str(ROOT / "webapp"))
+
+from summarize import summarize, clean_title  # noqa: E402
+
+DB_PATH = ROOT / "webapp" / "watch.db"
+
+
+def main() -> None:
+    con = sqlite3.connect(DB_PATH)
+    con.row_factory = sqlite3.Row
+    have = {r[1] for r in con.execute("PRAGMA table_info(matters)").fetchall()}
+    for col in ("headline", "clean_title"):
+        if col not in have:
+            con.execute(f"ALTER TABLE matters ADD COLUMN {col} TEXT")
+    con.commit()
+
+    rows = con.execute(
+        "SELECT matter_id, title, type_name, body_name FROM matters WHERE title IS NOT NULL"
+    ).fetchall()
+    summarized = 0
+    for i, r in enumerate(rows, 1):
+        h = summarize(r["title"], r["type_name"] or "", r["body_name"] or "")
+        ct = clean_title(r["title"])
+        if h:
+            summarized += 1
+        con.execute("UPDATE matters SET headline = ?, clean_title = ? WHERE matter_id = ?",
+                    (h or None, ct, r["matter_id"]))
+        if i % 2000 == 0:
+            con.commit()
+            print(f"  {i}/{len(rows)}")
+    con.commit()
+    con.close()
+    pct = (100.0 * summarized / len(rows)) if rows else 0
+    print(f"done: {len(rows)} matters, {summarized} summarized ({pct:.0f}%), "
+          f"{len(rows) - summarized} fall back to a cleaned title")
+
+
+if __name__ == "__main__":
+    main()

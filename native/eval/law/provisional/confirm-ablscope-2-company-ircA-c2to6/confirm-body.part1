@@ -1,0 +1,63 @@
+import fs from "node:fs";
+import path from "node:path";
+import { createHash } from "node:crypto";
+import { fileURLToPath } from "node:url";
+import { seedFor } from "../../impact.mjs";
+import { loadIrcDay, IRC_ROOT } from "../ablation-scope/lib-data.mjs";
+import { loadBookCaps } from "../ablation-scope/lib-book2.mjs";
+import { loadUd, UD } from "../ablation-scope/lib-ud.mjs";
+import { indexAndCandidates, pairsForCellV3 } from "../ablation-scope/lib-pairs.mjs";
+import { cvScores } from "../../name-war-and-peace.mjs";
+import { companyAt, shuffleDoc, occOf, memberOf, strat, perStratum, aucOfPairs, boot, perm, caliperOf, controlAucs, inBand, round, mean, quantile, CONTROLS, DESC } from "./lib-dself.mjs";
+import { rngFor } from "../../impact.mjs";
+
+const HERE = path.dirname(fileURLToPath(import.meta.url));
+const args = process.argv.slice(2), opt = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : d; };
+const ARM = opt("--arm", "en"), STAGE = opt("--stage", "both"), B = Number(opt("--B", 1000));
+const SELF = fs.readFileSync(fileURLToPath(import.meta.url), "utf8");
+const HEADER_SHA = createHash("sha256").update(SELF.split("// ═══ END OF PRE-REGISTRATION")[0]).digest("hex");
+const DAYS_FILE = path.join(HERE, "results", "days.json"), ROWS = path.join(HERE, "results", `rows.${ARM}.jsonl`), OUT = path.join(HERE, "results", `confirm.${ARM}.json`), CTL = path.join(HERE, "results", `ctl.${ARM}.json`);
+const BK = "/Users/mlacy/Documents/3.0/ethos/01-literature-books/gitenberg";
+const PRIM = ["c2", "c3", "c4_6"], DEC = ["c7_15", "c16p"], ALLS = [...PRIM, ...DEC];
+const sha = (f) => createHash("sha256").update(fs.readFileSync(f)).digest("hex");
+
+/** The documents of one arm with their design (reader window M, cluster-block count K, per-cell cap, cells). */
+function docsOf(arm) {
+  const days = JSON.parse(fs.readFileSync(DAYS_FILE, "utf8"));
+  const irc = (list) => list.map((d) => () => loadIrcDay(path.join(IRC_ROOT, `${d.name}.txt`), d.name));
+  if (arm === "en") return { M: 256, K: 4, loaders: irc(days.english), cells: [["A", ALLS, 150], ["B", ALLS, 40]] };
+  if (arm === "other") return { M: 256, K: 4, loaders: irc(days.other), cells: [["A", PRIM, 150]] };
+  if (arm === "books") return { M: 128, K: 10, loaders: ["pg158_Emma.txt", "pg161_Sense-and-Sensibility.txt", "pg345_Dracula.txt"].map((f) => () => loadBookCaps(path.join(BK, f), f)), cells: [["A", ALLS, 60]] };
+  if (arm === "ud") {
+    const stems = fs.readdirSync(UD).sort().filter((s) => fs.existsSync(`${UD}/${s}/test.conllu`)), keep = JSON.parse(fs.readFileSync(path.join(HERE, "results", "other-design.json"), "utf8")).ud.filter((u) => u.pairs >= 10).map((u) => u.stem);
+    return { M: 128, K: 2, loaders: stems.filter((s) => keep.includes(s)).map((s) => () => loadUd(s, "test")), cells: [["A", PRIM, 40]] };
+  }
+  throw new Error(`unknown arm ${arm}`);
+}
+
+async function compute() {
+  const t0 = Date.now(), D = docsOf(ARM), M = D.M;
+  fs.writeFileSync(ROWS, "");
+  const ctl = { K6_same: 0, K6_n: 0, K1_zero: 0, K1_n: 0, docs: [], design: {} };
+  for (const load of D.loaders) {
+    const doc = load(), cand = indexAndCandidates(doc, M), occ = occOf(doc), shuf = shuffleDoc(doc.stream, seedFor("ablscope2-shuf", doc.name)), lines = [];
+    let planned = 0;
+    for (const [grp, strata, n] of D.cells) for (const st of strata) {
+      const r = pairsForCellV3(cand, doc, M, { grp, stratum: st, n, seedTag: "confirm2" });
+      ctl.design[`${doc.name}|${grp}:${st}`] = { got: r.pairs.length, nPos: r.nPos, dropped: r.dropped }; planned += r.pairs.length;
+      r.pairs.forEach((p, k) => {
+        const mp = memberOf(doc, shuf, occ, p.pos, M), mn = memberOf(doc, shuf, occ, p.neg, M);
+        for (const m of [mp, mn]) { ctl.K1_n += 1; if (m.sham === 0) ctl.K1_zero += 1; }
+        if (ctl.K6_n < 50 && k % 7 === 0) { ctl.K6_n += 1; if (companyAt(doc.stream, p.pos.s, p.pos.i, M).dSelf === mp.dSelf) ctl.K6_same += 1; }
+        const block = `${doc.name}|q${Math.min(D.K - 1, Math.floor((D.K * p.pos.s) / cand.nMsg))}`;
+        lines.push(JSON.stringify({ id: `${doc.name}#${grp}${st}#${k}`, arm: ARM, doc: doc.name, grp, stratum: st, block, p: mp, n: mn }));
+      });
+    }
+    fs.appendFileSync(ROWS, lines.map((l) => l + "\n").join(""));
+    ctl.docs.push([doc.name, planned]);
+    console.error(`${ARM} ${doc.name}: ${planned} pairs, ${((Date.now() - t0) / 1000).toFixed(0)} s`);
+  }
+  ctl.seconds = round((Date.now() - t0) / 1000, 1); ctl.headerSha256 = HEADER_SHA; ctl.daysSha256 = sha(DAYS_FILE);
+  fs.writeFileSync(CTL, JSON.stringify(ctl, null, 1));
+}
+const loadRows = () => fs.readFileSync(ROWS, "utf8").split("\n").filter(Boolean).map((l) => JSON.parse(l));

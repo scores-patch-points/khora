@@ -1,0 +1,70 @@
+{
+ "a UD-eng -> IRC": 0.6317,
+ "b all-UD -> IRC": 0.8433,
+ "d IRC -> UD-eng": 0.5659,
+ "e all-UD-but-eng -> IRC": 0.8572,
+ "Z a UD-eng -> IRC": 0.6655,
+ "Z b all-UD -> IRC": 0.7435,
+ "Z d IRC -> UD-eng": 0.5586,
+ "Z e all-UD-but-eng -> IRC": 0.7525,
+ "arm RIVALS: UD-eng -> IRC": 0.8016,
+ "arm RIVALS: IRC -> UD-eng": 0.5453,
+ "arm MAGNITUDE: UD-eng -> IRC": 0.2137,
+ "arm MAGNITUDE: IRC -> UD-eng": 0.4355,
+ "arm SHAPE24: UD-eng -> IRC": 0.6069,
+ "arm SHAPE24: IRC -> UD-eng": 0.5448,
+ "arm SLOT: UD-eng -> IRC": 0.6256,
+ "arm SLOT: IRC -> UD-eng": 0.5306,
+ "arm ATM: UD-eng -> IRC": 0.5728,
+ "arm ATM: IRC -> UD-eng": 0.5409,
+ "arm SPAN: UD-eng -> IRC": 0.6593,
+ "arm SPAN: IRC -> UD-eng": 0.5323,
+ "arm C: UD-eng -> IRC": 0.8293,
+ "arm C: IRC -> UD-eng": 0.5595,
+ "c IRC LOFO": {
+  "FULL": 0.9647,
+  "SLOT": 0.9419,
+  "ATM": 0.8819,
+  "SPAN": 0.9673,
+  "C": 0.9545,
+  "SHAPE24": 0.9057,
+  "MAGNITUDE": 0.8132,
+  "RIVALS": 0.9736,
+  "POSITION": 0.4532,
+  "FULL+RIVALS": 0.9678
+ },
+ "f SVO-like(k) vs SOV-like(k) -> IRC / UD-eng": {
+  "k": 6,
+  "sovLangs": [
+   "fas",
+   "jpn",
+   "nld",
+   "hin",
+   "urd",
+   "tur"
+  ],
+  "svoPool": [
+   "spa",
+   "rus",
+   "heb",
+   "fra",
+   "deu",
+   "ita",
+   "por",
+   "pol",
+   "ukr",
+   "vie",
+   "ind",
+   "ell",
+   "fin"
+  ],
+  "irc": {
+   "svo": 0.5518,
+   "sov": 0.8214
+  },
+  "eng": {
+   "svo": 0.6134,
+   "sov": 0.6072
+  }
+ }
+}

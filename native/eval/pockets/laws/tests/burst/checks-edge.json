@@ -1,0 +1,218 @@
+{
+ "tiny": {
+  "tokens": 3,
+  "units": 2,
+  "nonFinite": 0,
+  "nulls": [
+   "burstB",
+   "burstBmid",
+   "burstM",
+   "repAdj",
+   "kerSlope",
+   "kerCurv",
+   "kerFar",
+   "persist",
+   "driftSlope",
+   "driftTail",
+   "hurst"
+  ],
+  "values": {
+   "burstB": null,
+   "burstBmid": null,
+   "burstM": null,
+   "repAdj": null,
+   "kerSlope": null,
+   "kerCurv": null,
+   "kerFar": null,
+   "persist": null,
+   "driftSlope": null,
+   "driftTail": null,
+   "hurst": null
+  }
+ },
+ "oneType": {
+  "tokens": 9000,
+  "units": 3000,
+  "nonFinite": 0,
+  "nulls": [
+   "burstB",
+   "burstBmid",
+   "burstM",
+   "repAdj",
+   "kerSlope",
+   "kerCurv",
+   "kerFar",
+   "persist",
+   "driftSlope",
+   "driftTail",
+   "hurst"
+  ],
+  "values": {
+   "burstB": null,
+   "burstBmid": null,
+   "burstM": null,
+   "repAdj": null,
+   "kerSlope": null,
+   "kerCurv": null,
+   "kerFar": null,
+   "persist": null,
+   "driftSlope": null,
+   "driftTail": null,
+   "hurst": null
+  }
+ },
+ "twoTypes": {
+  "tokens": 7500,
+  "units": 3000,
+  "nonFinite": 0,
+  "nulls": [
+   "burstB",
+   "burstBmid",
+   "burstM",
+   "repAdj",
+   "kerSlope",
+   "kerCurv",
+   "kerFar",
+   "persist",
+   "driftSlope",
+   "driftTail",
+   "hurst"
+  ],
+  "values": {
+   "burstB": null,
+   "burstBmid": null,
+   "burstM": null,
+   "repAdj": null,
+   "kerSlope": null,
+   "kerCurv": null,
+   "kerFar": null,
+   "persist": null,
+   "driftSlope": null,
+   "driftTail": null,
+   "hurst": null
+  }
+ },
+ "unitsOfOne": {
+  "tokens": 8000,
+  "units": 8000,
+  "nonFinite": 0,
+  "nulls": [
+   "burstM",
+   "persist",
+   "driftSlope",
+   "driftTail",
+   "hurst"
+  ],
+  "values": {
+   "burstB": -1,
+   "burstBmid": -1,
+   "burstM": null,
+   "repAdj": -3.644,
+   "kerSlope": -0.6911,
+   "kerCurv": 0.1222,
+   "kerFar": -6.8017,
+   "persist": null,
+   "driftSlope": null,
+   "driftTail": null,
+   "hurst": null
+  }
+ },
+ "singleDocument": {
+  "tokens": 6000,
+  "units": 2000,
+  "nonFinite": 0,
+  "nulls": [
+   "burstBmid",
+   "burstM",
+   "persist",
+   "driftSlope",
+   "driftTail"
+  ],
+  "values": {
+   "burstB": -1,
+   "burstBmid": null,
+   "burstM": null,
+   "repAdj": -3.3949,
+   "kerSlope": -0.9387,
+   "kerCurv": 0.0198,
+   "kerFar": -7.9007,
+   "persist": null,
+   "driftSlope": null,
+   "driftTail": null,
+   "hurst": 0.643
+  }
+ },
+ "fewUnitsLongLines": {
+  "tokens": 12000,
+  "units": 40,
+  "nonFinite": 0,
+  "nulls": [
+   "burstBmid",
+   "burstM",
+   "persist",
+   "driftSlope",
+   "driftTail"
+  ],
+  "values": {
+   "burstB": -1,
+   "burstBmid": null,
+   "burstM": null,
+   "repAdj": -2.7109,
+   "kerSlope": -0.9815,
+   "kerCurv": -0.0022,
+   "kerFar": -7.4575,
+   "persist": null,
+   "driftSlope": null,
+   "driftTail": null,
+   "hurst": 0.4703
+  }
+ },
+ "cyrillicLike": {
+  "tokens": 10000,
+  "units": 2500,
+  "nonFinite": 0,
+  "nulls": [
+   "burstM",
+   "persist",
+   "driftSlope",
+   "driftTail"
+  ],
+  "values": {
+   "burstB": -1,
+   "burstBmid": -1,
+   "burstM": null,
+   "repAdj": -5.2817,
+   "kerSlope": 1.4369,
+   "kerCurv": 0.6114,
+   "kerFar": -0.2911,
+   "persist": null,
+   "driftSlope": null,
+   "driftTail": null,
+   "hurst": 0.4082
+  }
+ },
+ "cjkChars": {
+  "tokens": 8000,
+  "units": 4000,
+  "nonFinite": 0,
+  "nulls": [
+   "burstM",
+   "persist",
+   "driftSlope",
+   "driftTail"
+  ],
+  "values": {
+   "burstB": -1,
+   "burstBmid": -1,
+   "burstM": null,
+   "repAdj": -2.815,
+   "kerSlope": -0.8271,
+   "kerCurv": 0.0701,
+   "kerFar": -6.6285,
+   "persist": null,
+   "driftSlope": null,
+   "driftTail": null,
+   "hurst": 1.1612
+  }
+ }
+}

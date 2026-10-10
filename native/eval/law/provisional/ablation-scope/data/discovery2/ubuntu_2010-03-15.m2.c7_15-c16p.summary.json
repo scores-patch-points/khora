@@ -1,0 +1,59 @@
+{
+ "corpus": "irc",
+ "doc": "ubuntu/2010-03-15",
+ "M": 256,
+ "tag": "m2",
+ "match": "v2",
+ "strata": [
+  "c7_15",
+  "c16p"
+ ],
+ "sizes": {
+  "nA": 14,
+  "nB": 14,
+  "n1": 0
+ },
+ "design": {
+  "A:c7_15": {
+   "requested": 14,
+   "got": 14,
+   "dropped": 15,
+   "nPos": 982,
+   "nNegPool": 704
+  },
+  "B:c7_15": {
+   "requested": 14,
+   "got": 14,
+   "dropped": 3,
+   "nPos": 237,
+   "nNegPool": 12238
+  },
+  "A:c16p": {
+   "requested": 14,
+   "got": 14,
+   "dropped": 28,
+   "nPos": 457,
+   "nNegPool": 519
+  },
+  "B:c16p": {
+   "requested": 14,
+   "got": 14,
+   "dropped": 5,
+   "nPos": 45,
+   "nNegPool": 13034
+  }
+ },
+ "tokensRead": 112,
+ "gaps": 0,
+ "seconds": 677.641,
+ "K1_sham": {
+  "nullShare": 1,
+  "n": 8
+ },
+ "K6_determinism": {
+  "same": 8,
+  "n": 8
+ },
+ "headerSha256": "6c0cd12e3d866e11b3da0b284d424e806fb867092872cfdfe4406c7fae58692c",
+ "file": "data/discovery2/ubuntu_2010-03-15.m2.c7_15-c16p.jsonl"
+}

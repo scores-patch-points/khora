@@ -1,0 +1,247 @@
+{
+ "nPresentAtlas": 275,
+ "kinds": {
+  "unit-order": {
+   "status": {
+    "P+": 272,
+    "M": 3
+   },
+   "nPplus": 272,
+   "robustPoissonBothHalves": 245,
+   "pooledPoissonZge4": 273,
+   "medianPooledRatio": 23.61,
+   "shareRatioAbove1": 100,
+   "shareRatioBelow1": 0
+  },
+  "within-doc": {
+   "status": {
+    "P+": 194,
+    "M": 65,
+    "A": 15,
+    "P-": 1
+   },
+   "nPplus": 194,
+   "robustPoissonBothHalves": 174,
+   "pooledPoissonZge4": 230,
+   "medianPooledRatio": 3.55,
+   "shareRatioAbove1": 95.6,
+   "shareRatioBelow1": 4.4
+  },
+  "len": {
+   "status": {
+    "P+": 267,
+    "M": 6,
+    "zundef": 2
+   },
+   "nPplus": 267,
+   "robustPoissonBothHalves": 244,
+   "pooledPoissonZge4": 273,
+   "medianPooledRatio": 17.92,
+   "shareRatioAbove1": 100,
+   "shareRatioBelow1": 0
+  },
+  "doc-len": {
+   "status": {
+    "P+": 192,
+    "M": 67,
+    "A": 15,
+    "P-": 1
+   },
+   "nPplus": 192,
+   "robustPoissonBothHalves": 169,
+   "pooledPoissonZge4": 221,
+   "medianPooledRatio": 2.79,
+   "shareRatioAbove1": 97.5,
+   "shareRatioBelow1": 2.5
+  }
+ },
+ "byGroup": {
+  "bk": {
+   "unit-order": "52/54",
+   "within-doc": "36/54",
+   "len": "52/54",
+   "doc-len": "33/54"
+  },
+  "cd": {
+   "unit-order": "75/75",
+   "within-doc": "66/75",
+   "len": "75/75",
+   "doc-len": "65/75"
+  },
+  "fm": {
+   "unit-order": "56/56",
+   "within-doc": "38/56",
+   "len": "55/56",
+   "doc-len": "40/56"
+  },
+  "ml": {
+   "unit-order": "60/61",
+   "within-doc": "36/61",
+   "len": "59/61",
+   "doc-len": "36/61"
+  },
+  "oc": {
+   "unit-order": "18/18",
+   "within-doc": "15/18",
+   "len": "18/18",
+   "doc-len": "15/18"
+  },
+  "ud": {
+   "unit-order": "11/11",
+   "within-doc": "3/11",
+   "len": "8/11",
+   "doc-len": "3/11"
+  }
+ },
+ "decomposition": {
+  "n": 241,
+  "note": "pockets with >= 20 hits; share of log(obs/null_global) explained by the null that keeps documents (docShare), length classes (lenShare), or both (docLenShare)",
+  "median": {
+   "docShare": 0.624,
+   "lenShare": 0.088,
+   "docLenShare": 0.674
+  },
+  "byGroup": {
+   "bk": {
+    "n": 41,
+    "docShare": 0.467,
+    "lenShare": 0.06,
+    "docLenShare": 0.553,
+    "medianRatioGlobal": 21.9
+   },
+   "cd": {
+    "n": 75,
+    "docShare": 0.728,
+    "lenShare": 0.126,
+    "docLenShare": 0.797,
+    "medianRatioGlobal": 61.4
+   },
+   "fm": {
+    "n": 55,
+    "docShare": 0.644,
+    "lenShare": 0.07,
+    "docLenShare": 0.68,
+    "medianRatioGlobal": 18.4
+   },
+   "ml": {
+    "n": 47,
+    "docShare": 0.503,
+    "lenShare": 0.065,
+    "docLenShare": 0.587,
+    "medianRatioGlobal": 19.5
+   },
+   "oc": {
+    "n": 18,
+    "docShare": 0.589,
+    "lenShare": 0.052,
+    "docLenShare": 0.615,
+    "medianRatioGlobal": 38
+   },
+   "ud": {
+    "n": 5,
+    "docShare": 0.74,
+    "lenShare": -0.012,
+    "docLenShare": 0.835,
+    "medianRatioGlobal": 24.5
+   }
+  },
+  "code": {
+   "n": 47,
+   "docShare": 0.721,
+   "lenShare": 0.116,
+   "docLenShare": 0.796
+  },
+  "quantiles": {
+   "docShare": [
+    0.393,
+    0.498,
+    0.624,
+    0.74,
+    0.832
+   ],
+   "lenShare": [
+    -0.022,
+    0.032,
+    0.088,
+    0.143,
+    0.219
+   ],
+   "docLenShare": [
+    0.462,
+    0.563,
+    0.674,
+    0.792,
+    0.86
+   ]
+  },
+  "shareOfPocketsWithLenShareAbove05": 0,
+  "shareOfPocketsWithDocShareAbove05": 73.9,
+  "shareOfPocketsWithDocShareAbove08": 14.1
+ },
+ "allPockets": {
+  "unit-order": {
+   "A": 31,
+   "M": 54,
+   "P+": 285,
+   "zundef": 17,
+   "P-": 4
+  },
+  "within-doc": {
+   "zundef": 9,
+   "M": 109,
+   "P+": 200,
+   "A": 66,
+   "P-": 7
+  },
+  "len": {
+   "A": 30,
+   "P+": 291,
+   "zundef": 14,
+   "M": 54,
+   "P-": 2
+  },
+  "doc-len": {
+   "A": 70,
+   "M": 114,
+   "P+": 196,
+   "zundef": 6,
+   "P-": 5
+  }
+ },
+ "joint": {
+  "allFour": 182,
+  "unitOrderAndWithinDoc": 194,
+  "unitOrderAndLen": 266,
+  "unitOrderAndDocLen": 192
+ },
+ "ratioQuantiles": {
+  "unit-order": [
+   6.8,
+   12.54,
+   23.61,
+   48.18,
+   86.7
+  ],
+  "within-doc": [
+   1.46,
+   2.21,
+   3.55,
+   5.16,
+   7.25
+  ],
+  "len": [
+   5.19,
+   9.61,
+   17.92,
+   35.99,
+   53.79
+  ],
+  "doc-len": [
+   1.4,
+   1.9,
+   2.79,
+   4,
+   5.51
+  ]
+ }
+}

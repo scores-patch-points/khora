@@ -1,0 +1,119 @@
+#!/usr/bin/env python3
+"""NPJ's local dev server: `python3 -m http.server`, minus the stale files.
+
+Plain http.server sends only Last-Modified, so Chrome treats each file as
+fresh for 10% of its age (untouched 48 days: ~4.8 days) and a normal reload
+does not revalidate the <script src>/<link> files in index.html; on any load
+no service worker controls, an edited file keeps running stale. This handler
+sends `Cache-Control: no-cache` on every response, so the browser revalidates
+every file on every load, and a strong ETag from the file's st_mtime_ns and
+size, so an edit is caught even inside Last-Modified's one-second granularity
+or when mtime moves backwards (a restore that keeps old times). Unchanged
+files still answer 304, so reloads stay cheap.
+
+    python3 serve.py [-b ADDRESS] [-d DIRECTORY] [-p VERSION] [port]
+
+Same flags and defaults as `python3 -m http.server`, except that DIRECTORY
+defaults to this file's folder (the NPJ root) instead of the current one.
+"""
+import argparse
+import contextlib
+import datetime
+import email.utils
+import http.server
+import os
+import socket
+from http import HTTPStatus
+
+
+class NoCacheHandler(http.server.SimpleHTTPRequestHandler):
+    def end_headers(self):
+        # Every response: files, 304s, redirects, listings, errors.
+        self.send_header("Cache-Control", "no-cache")
+        super().end_headers()
+
+    def send_head(self):
+        path = self.translate_path(self.path)
+        if os.path.isdir(path) and path.endswith("/"):
+            for index in getattr(self, "index_pages", ("index.html", "index.htm")):
+                if os.path.isfile(os.path.join(path, index)):
+                    path = os.path.join(path, index)
+                    break
+        if path.endswith("/") or not os.path.isfile(path):
+            return super().send_head()  # redirect, listing or 404, as the stdlib answers
+        try:
+            f = open(path, "rb")
+        except OSError:
+            return super().send_head()
+        try:
+            # Validators come from the open file, so they describe the bytes served.
+            fs = os.fstat(f.fileno())
+            etag = '"%x-%x"' % (fs.st_mtime_ns, fs.st_size)
+            if self.not_modified(etag, fs.st_mtime):
+                f.close()
+                self.send_response(HTTPStatus.NOT_MODIFIED)
+                self.send_header("ETag", etag)
+                self.end_headers()
+                return None
+            self.send_response(HTTPStatus.OK)
+            self.send_header("Content-type", self.guess_type(path))
+            self.send_header("Content-Length", str(fs.st_size))
+            self.send_header("Last-Modified", self.date_time_string(fs.st_mtime))
+            self.send_header("ETag", etag)
+            self.end_headers()
+            return f
+        except BaseException:
+            f.close()
+            raise
+
+    def not_modified(self, etag, mtime):
+        # RFC 9110 13.2.2: when If-None-Match is sent it decides alone. Browsers
+        # send it alongside If-Modified-Since, whose whole-second "not newer
+        # than" test would call a same-second or backdated edit unmodified.
+        inm = self.headers.get("If-None-Match")
+        if inm is not None:
+            tags = [t.strip() for t in inm.split(",")]
+            return "*" in tags or etag in (t.removeprefix("W/") for t in tags)
+        ims = self.headers.get("If-Modified-Since")
+        if ims is None:
+            return False
+        try:
+            since = email.utils.parsedate_to_datetime(ims)
+        except (TypeError, IndexError, OverflowError, ValueError):
+            return False  # ill-formed: ignored, as the stdlib does
+        if since.tzinfo is None:
+            since = since.replace(tzinfo=datetime.timezone.utc)
+        return int(mtime) <= since.timestamp()
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Serve NPJ locally; every response says Cache-Control: no-cache.")
+    parser.add_argument("-b", "--bind", metavar="ADDRESS",
+                        help="bind to this address (default: all interfaces)")
+    parser.add_argument("-d", "--directory",
+                        default=os.path.dirname(os.path.abspath(__file__)),
+                        help="serve this directory (default: the NPJ root, this file's folder)")
+    parser.add_argument("-p", "--protocol", metavar="VERSION", default="HTTP/1.0",
+                        help="conform to this HTTP version (default: %(default)s)")
+    parser.add_argument("port", default=8000, type=int, nargs="?",
+                        help="bind to this port (default: %(default)s)")
+    args = parser.parse_args()
+
+    class DualStackServer(http.server.ThreadingHTTPServer):
+        # As `python3 -m http.server` does: take IPv4 on the IPv6 socket too,
+        # and hand each request the directory to serve.
+        def server_bind(self):
+            with contextlib.suppress(Exception):
+                self.socket.setsockopt(socket.IPPROTO_IPV6, socket.IPV6_V6ONLY, 0)
+            return super().server_bind()
+
+        def finish_request(self, request, client_address):
+            self.RequestHandlerClass(request, client_address, self, directory=args.directory)
+
+    http.server.test(HandlerClass=NoCacheHandler, ServerClass=DualStackServer,
+                     port=args.port, bind=args.bind, protocol=args.protocol)
+
+
+if __name__ == "__main__":
+    main()

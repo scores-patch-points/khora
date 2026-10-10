@@ -1,0 +1,39 @@
+// shared: build the training base for an E1 arm. ARM "udhr" (pre-registered) or "plus" (exploratory: UDHR + ethos dev-train files, capped).
+import fs from "node:fs";
+import path from "node:path";
+import crypto from "node:crypto";
+import { DATA, ETHOS, rj, makeRng, shuffle, SEED, splitOf } from "../lib/common.mjs";
+import { ACCEPT, FAMILIES } from "./accept.mjs";
+import { countClasses } from "./model.mjs";
+
+export const fileSplit2 = (rel) => crypto.createHash("sha1").update(rel).digest()[1] % 2; // 0 = train2, 1 = dev2 (within dev)
+
+export function loadArm(ARM, CAP = 200000) {
+  const udhr = rj(path.join(DATA, "e1-udhr.json"));
+  const trainRel = new Set(); const added = {};
+  if (ARM === "plus") {
+    const files = rj(path.join(DATA, "e1-files.json")); const rr = makeRng(SEED + 3);
+    const byLabel = {};
+    for (const f of files) if (f.split === "dev" && fileSplit2(f.rel) === 0 && ACCEPT[f.label]) { (byLabel[f.label] ||= []).push(f); trainRel.add(f.rel); }
+    for (const [lab, fs_] of Object.entries(byLabel)) {
+      let lines = [];
+      for (const f of fs_) { let t = fs.readFileSync(path.join(ETHOS, f.rel), "utf8").replace(/^---\n[\s\S]*?\n---\n/, ""); if (f.stratum === "chat") t = t.split("\n").map((l) => l.replace(/^<[^>]{1,30}>\s*/, "").replace(/&lt;#&gt;|&amp;|&lt;|&gt;/g, " ")).join("\n"); t = t.slice(Math.floor(t.length * 0.1), Math.floor(t.length * 0.9)); lines.push(...t.split("\n").filter((l) => l.trim().length > 10)); }
+      lines = shuffle(lines, rr); let acc = ""; for (const l of lines) { if (acc.length >= CAP) break; acc += "\n" + l; }
+      for (const c of ACCEPT[lab]) if (udhr[c]) udhr[c].text += acc;
+      added[lab] = acc.length;
+    }
+  }
+  const base = countClasses(udhr);
+  const cidx = new Map(base.classes.map((c, i) => [c, i]));
+  const C = base.classes.length;
+  const fam = new Int32Array(C).fill(-1); let nf = 0;
+  for (const f of FAMILIES) { const ids = f.filter((c) => cidx.has(c)).map((c) => cidx.get(c)); if (ids.length) { for (const i of ids) fam[i] = nf; nf++; } }
+  for (let i = 0; i < C; i++) if (fam[i] < 0) fam[i] = nf++;
+  return { udhr, base, cidx, C, fam, nf, trainRel, added };
+}
+
+export function loadWindows(arm) {
+  const windows = rj(path.join(DATA, "e1-windows.json"));
+  for (const w of windows) { const a = (ACCEPT[w.label] || []).filter((c) => arm.cidx.has(c)); w.acc = a.map((c) => arm.cidx.get(c)); w.truthFams = new Set(w.acc.map((i) => arm.fam[i])); w.covered = a.length > 0 && w.stratum !== "control"; }
+  return windows.filter((w) => w.covered && !arm.trainRel.has(w.file));
+}

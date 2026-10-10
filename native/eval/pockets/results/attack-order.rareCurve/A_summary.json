@@ -1,0 +1,865 @@
+{
+ "nPockets": 390,
+ "baseMatchesAtlas": 390,
+ "variants": {
+  "base": {
+   "nRun": 390,
+   "nSkipped": 0,
+   "skipReasons": [],
+   "statusAll": {
+    "M": 102,
+    "P+": 174,
+    "A": 33,
+    "P-": 81
+   },
+   "basePplus": {
+    "n": 174,
+    "signAgree": 174,
+    "signAgreeFrac": 1,
+    "stillPresentSameSign": 174,
+    "presentOppositeSign": 0,
+    "medianRetention": 1,
+    "medianV": 0.0442,
+    "medianV0": 0.0442
+   },
+   "basePminus": {
+    "n": 81,
+    "signAgree": 81,
+    "signAgreeFrac": 1,
+    "stillPresentSameSign": 81,
+    "presentOppositeSign": 0,
+    "medianRetention": 1,
+    "medianV": -0.0816,
+    "medianV0": -0.0816
+   },
+   "baseNotPresent": {
+    "n": 135,
+    "signAgree": 135,
+    "signAgreeFrac": 1,
+    "stillPresentSameSign": 0,
+    "presentOppositeSign": 0,
+    "medianRetention": 1,
+    "medianV": 0.0113,
+    "medianV0": 0.0113
+   },
+   "lawLevel": {
+    "nPplus": 174,
+    "nPminus": 81,
+    "reversal": true
+   }
+  },
+  "tok7500_r0": {
+   "nRun": 322,
+   "nSkipped": 68,
+   "skipReasons": [
+    "undefined",
+    "undefined (N<2000 or V<30)"
+   ],
+   "statusAll": {
+    "M": 170,
+    "A": 39,
+    "P+": 68,
+    "P-": 45
+   },
+   "basePplus": {
+    "n": 148,
+    "signAgree": 148,
+    "signAgreeFrac": 1,
+    "stillPresentSameSign": 66,
+    "presentOppositeSign": 0,
+    "medianRetention": 1.012,
+    "medianV": 0.0517,
+    "medianV0": 0.05
+   },
+   "basePminus": {
+    "n": 75,
+    "signAgree": 75,
+    "signAgreeFrac": 1,
+    "stillPresentSameSign": 45,
+    "presentOppositeSign": 0,
+    "medianRetention": 1.03,
+    "medianV": -0.0901,
+    "medianV0": -0.0816
+   },
+   "baseNotPresent": {
+    "n": 99,
+    "signAgree": 93,
+    "signAgreeFrac": 0.939,
+    "stillPresentSameSign": 0,
+    "presentOppositeSign": 2,
+    "medianRetention": 1.093,
+    "medianV": 0.0167,
+    "medianV0": 0.0113
+   },
+   "lawLevel": {
+    "nPplus": 68,
+    "nPminus": 45,
+    "reversal": true
+   }
+  },
+  "tok7500_r1": {
+   "nRun": 324,
+   "nSkipped": 66,
+   "skipReasons": [
+    "undefined",
+    "undefined (N<2000 or V<30)"
+   ],
+   "statusAll": {
+    "A": 47,
+    "M": 156,
+    "P+": 74,
+    "P-": 47
+   },
+   "basePplus": {
+    "n": 149,
+    "signAgree": 149,
+    "signAgreeFrac": 1,
+    "stillPresentSameSign": 71,
+    "presentOppositeSign": 0,
+    "medianRetention": 1.036,
+    "medianV": 0.0509,
+    "medianV0": 0.0501
+   },
+   "basePminus": {
+    "n": 75,
+    "signAgree": 75,
+    "signAgreeFrac": 1,
+    "stillPresentSameSign": 47,
+    "presentOppositeSign": 0,
+    "medianRetention": 1.031,
+    "medianV": -0.0866,
+    "medianV0": -0.0816
+   },
+   "baseNotPresent": {
+    "n": 100,
+    "signAgree": 91,
+    "signAgreeFrac": 0.91,
+    "stillPresentSameSign": 0,
+    "presentOppositeSign": 3,
+    "medianRetention": 1.082,
+    "medianV": 0.0157,
+    "medianV0": 0.0114
+   },
+   "lawLevel": {
+    "nPplus": 74,
+    "nPminus": 47,
+    "reversal": true
+   }
+  },
+  "tok20000_r0": {
+   "nRun": 299,
+   "nSkipped": 91,
+   "skipReasons": [
+    "too small",
+    "undefined",
+    "undefined (N<2000 or V<30)"
+   ],
+   "statusAll": {
+    "M": 131,
+    "P+": 79,
+    "A": 31,
+    "P-": 58
+   },
+   "basePplus": {
+    "n": 132,
+    "signAgree": 132,
+    "signAgreeFrac": 1,
+    "stillPresentSameSign": 76,
+    "presentOppositeSign": 0,
+    "medianRetention": 1.009,
+    "medianV": 0.0372,
+    "medianV0": 0.0358
+   },
+   "basePminus": {
+    "n": 75,
+    "signAgree": 75,
+    "signAgreeFrac": 1,
+    "stillPresentSameSign": 58,
+    "presentOppositeSign": 0,
+    "medianRetention": 1.013,
+    "medianV": -0.0803,
+    "medianV0": -0.0763
+   },
+   "baseNotPresent": {
+    "n": 92,
+    "signAgree": 87,
+    "signAgreeFrac": 0.946,
+    "stillPresentSameSign": 0,
+    "presentOppositeSign": 3,
+    "medianRetention": 1.008,
+    "medianV": 0.0107,
+    "medianV0": 0.0091
+   },
+   "lawLevel": {
+    "nPplus": 79,
+    "nPminus": 58,
+    "reversal": true
+   }
+  },
+  "tok20000_r1": {
+   "nRun": 299,
+   "nSkipped": 91,
+   "skipReasons": [
+    "too small",
+    "undefined",
+    "undefined (N<2000 or V<30)"
+   ],
+   "statusAll": {
+    "A": 28,
+    "P+": 80,
+    "M": 132,
+    "P-": 59
+   },
+   "basePplus": {
+    "n": 132,
+    "signAgree": 132,
+    "signAgreeFrac": 1,
+    "stillPresentSameSign": 74,
+    "presentOppositeSign": 0,
+    "medianRetention": 1.023,
+    "medianV": 0.0362,
+    "medianV0": 0.0358
+   },
+   "basePminus": {
+    "n": 75,
+    "signAgree": 75,
+    "signAgreeFrac": 1,
+    "stillPresentSameSign": 59,
+    "presentOppositeSign": 0,
+    "medianRetention": 1.012,
+    "medianV": -0.0779,
+    "medianV0": -0.0763
+   },
+   "baseNotPresent": {
+    "n": 92,
+    "signAgree": 87,
+    "signAgreeFrac": 0.946,
+    "stillPresentSameSign": 0,
+    "presentOppositeSign": 6,
+    "medianRetention": 1.01,
+    "medianV": 0.0083,
+    "medianV0": 0.0091
+   },
+   "lawLevel": {
+    "nPplus": 80,
+    "nPminus": 59,
+    "reversal": true
+   }
+  },
+  "len10": {
+   "nRun": 198,
+   "nSkipped": 192,
+   "skipReasons": [
+    "unreachable"
+   ],
+   "statusAll": {
+    "M": 73,
+    "P+": 78,
+    "A": 12,
+    "P-": 35
+   },
+   "basePplus": {
+    "n": 88,
+    "signAgree": 88,
+    "signAgreeFrac": 1,
+    "stillPresentSameSign": 68,
+    "presentOppositeSign": 0,
+    "medianRetention": 1.033,
+    "medianV": 0.0559,
+    "medianV0": 0.0539
+   },
+   "basePminus": {
+    "n": 59,
+    "signAgree": 46,
+    "signAgreeFrac": 0.78,
+    "stillPresentSameSign": 35,
+    "presentOppositeSign": 4,
+    "medianRetention": 0.541,
+    "medianV": -0.0347,
+    "medianV0": -0.0711
+   },
+   "baseNotPresent": {
+    "n": 51,
+    "signAgree": 43,
+    "signAgreeFrac": 0.843,
+    "stillPresentSameSign": 0,
+    "presentOppositeSign": 6,
+    "medianRetention": 1.065,
+    "medianV": 0.0213,
+    "medianV0": 0.0104
+   },
+   "lawLevel": {
+    "nPplus": 78,
+    "nPminus": 35,
+    "reversal": true
+   }
+  },
+  "t7500m10_r0": {
+   "nRun": 284,
+   "nSkipped": 106,
+   "skipReasons": [
+    "unreachable",
+    "undefined"
+   ],
+   "statusAll": {
+    "A": 58,
+    "M": 132,
+    "P+": 67,
+    "P-": 27
+   },
+   "basePplus": {
+    "n": 135,
+    "signAgree": 133,
+    "signAgreeFrac": 0.985,
+    "stillPresentSameSign": 62,
+    "presentOppositeSign": 0,
+    "medianRetention": 1.106,
+    "medianV": 0.05,
+    "medianV0": 0.0429
+   },
+   "basePminus": {
+    "n": 73,
+    "signAgree": 58,
+    "signAgreeFrac": 0.795,
+    "stillPresentSameSign": 26,
+    "presentOppositeSign": 0,
+    "medianRetention": 0.372,
+    "medianV": -0.0338,
+    "medianV0": -0.0763
+   },
+   "baseNotPresent": {
+    "n": 76,
+    "signAgree": 56,
+    "signAgreeFrac": 0.737,
+    "stillPresentSameSign": 1,
+    "presentOppositeSign": 5,
+    "medianRetention": 0.881,
+    "medianV": 0.016,
+    "medianV0": 0.0066
+   },
+   "lawLevel": {
+    "nPplus": 67,
+    "nPminus": 27,
+    "reversal": true
+   }
+  },
+  "t20000m10_r0": {
+   "nRun": 193,
+   "nSkipped": 197,
+   "skipReasons": [
+    "unreachable",
+    "too small"
+   ],
+   "statusAll": {
+    "P+": 69,
+    "A": 19,
+    "M": 76,
+    "P-": 29
+   },
+   "basePplus": {
+    "n": 89,
+    "signAgree": 88,
+    "signAgreeFrac": 0.989,
+    "stillPresentSameSign": 63,
+    "presentOppositeSign": 0,
+    "medianRetention": 1.08,
+    "medianV": 0.0473,
+    "medianV0": 0.0383
+   },
+   "basePminus": {
+    "n": 67,
+    "signAgree": 52,
+    "signAgreeFrac": 0.776,
+    "stillPresentSameSign": 29,
+    "presentOppositeSign": 3,
+    "medianRetention": 0.336,
+    "medianV": -0.0297,
+    "medianV0": -0.0763
+   },
+   "baseNotPresent": {
+    "n": 37,
+    "signAgree": 26,
+    "signAgreeFrac": 0.703,
+    "stillPresentSameSign": 0,
+    "presentOppositeSign": 3,
+    "medianRetention": 0.692,
+    "medianV": 0.0106,
+    "medianV0": 0.0057
+   },
+   "lawLevel": {
+    "nPplus": 69,
+    "nPminus": 29,
+    "reversal": true
+   }
+  },
+  "t7500m10_r1": {
+   "nRun": 285,
+   "nSkipped": 105,
+   "skipReasons": [
+    "unreachable"
+   ],
+   "statusAll": {
+    "A": 53,
+    "M": 141,
+    "P+": 68,
+    "P-": 23
+   },
+   "basePplus": {
+    "n": 135,
+    "signAgree": 134,
+    "signAgreeFrac": 0.993,
+    "stillPresentSameSign": 62,
+    "presentOppositeSign": 0,
+    "medianRetention": 1.118,
+    "medianV": 0.0513,
+    "medianV0": 0.0429
+   },
+   "basePminus": {
+    "n": 73,
+    "signAgree": 60,
+    "signAgreeFrac": 0.822,
+    "stillPresentSameSign": 23,
+    "presentOppositeSign": 0,
+    "medianRetention": 0.396,
+    "medianV": -0.0388,
+    "medianV0": -0.0763
+   },
+   "baseNotPresent": {
+    "n": 77,
+    "signAgree": 57,
+    "signAgreeFrac": 0.74,
+    "stillPresentSameSign": 0,
+    "presentOppositeSign": 6,
+    "medianRetention": 1.001,
+    "medianV": 0.0166,
+    "medianV0": 0.0067
+   },
+   "lawLevel": {
+    "nPplus": 68,
+    "nPminus": 23,
+    "reversal": true
+   }
+  },
+  "t20000m10_r1": {
+   "nRun": 193,
+   "nSkipped": 197,
+   "skipReasons": [
+    "unreachable",
+    "too small"
+   ],
+   "statusAll": {
+    "P+": 64,
+    "M": 83,
+    "A": 15,
+    "P-": 31
+   },
+   "basePplus": {
+    "n": 89,
+    "signAgree": 88,
+    "signAgreeFrac": 0.989,
+    "stillPresentSameSign": 60,
+    "presentOppositeSign": 0,
+    "medianRetention": 1.084,
+    "medianV": 0.0486,
+    "medianV0": 0.0383
+   },
+   "basePminus": {
+    "n": 67,
+    "signAgree": 50,
+    "signAgreeFrac": 0.746,
+    "stillPresentSameSign": 31,
+    "presentOppositeSign": 1,
+    "medianRetention": 0.35,
+    "medianV": -0.0296,
+    "medianV0": -0.0763
+   },
+   "baseNotPresent": {
+    "n": 37,
+    "signAgree": 26,
+    "signAgreeFrac": 0.703,
+    "stillPresentSameSign": 0,
+    "presentOppositeSign": 3,
+    "medianRetention": 0.871,
+    "medianV": 0.0129,
+    "medianV0": 0.0057
+   },
+   "lawLevel": {
+    "nPplus": 64,
+    "nPminus": 31,
+    "reversal": true
+   }
+  },
+  "dedup": {
+   "nRun": 390,
+   "nSkipped": 0,
+   "skipReasons": [],
+   "statusAll": {
+    "M": 110,
+    "P+": 177,
+    "A": 28,
+    "P-": 75
+   },
+   "basePplus": {
+    "n": 174,
+    "signAgree": 174,
+    "signAgreeFrac": 1,
+    "stillPresentSameSign": 163,
+    "presentOppositeSign": 0,
+    "medianRetention": 1.002,
+    "medianV": 0.045,
+    "medianV0": 0.0442
+   },
+   "basePminus": {
+    "n": 81,
+    "signAgree": 80,
+    "signAgreeFrac": 0.988,
+    "stillPresentSameSign": 73,
+    "presentOppositeSign": 0,
+    "medianRetention": 0.982,
+    "medianV": -0.0794,
+    "medianV0": -0.0816
+   },
+   "baseNotPresent": {
+    "n": 135,
+    "signAgree": 131,
+    "signAgreeFrac": 0.97,
+    "stillPresentSameSign": 2,
+    "presentOppositeSign": 14,
+    "medianRetention": 0.999,
+    "medianV": 0.0115,
+    "medianV0": 0.0113
+   },
+   "lawLevel": {
+    "nPplus": 177,
+    "nPminus": 75,
+    "reversal": true
+   }
+  },
+  "drop1pct": {
+   "nRun": 390,
+   "nSkipped": 0,
+   "skipReasons": [],
+   "statusAll": {
+    "M": 102,
+    "P+": 182,
+    "A": 25,
+    "P-": 81
+   },
+   "basePplus": {
+    "n": 174,
+    "signAgree": 174,
+    "signAgreeFrac": 1,
+    "stillPresentSameSign": 163,
+    "presentOppositeSign": 0,
+    "medianRetention": 1,
+    "medianV": 0.0446,
+    "medianV0": 0.0442
+   },
+   "basePminus": {
+    "n": 81,
+    "signAgree": 81,
+    "signAgreeFrac": 1,
+    "stillPresentSameSign": 79,
+    "presentOppositeSign": 0,
+    "medianRetention": 1,
+    "medianV": -0.0816,
+    "medianV0": -0.0816
+   },
+   "baseNotPresent": {
+    "n": 135,
+    "signAgree": 134,
+    "signAgreeFrac": 0.993,
+    "stillPresentSameSign": 2,
+    "presentOppositeSign": 19,
+    "medianRetention": 0.999,
+    "medianV": 0.011,
+    "medianV0": 0.0113
+   },
+   "lawLevel": {
+    "nPplus": 182,
+    "nPminus": 81,
+    "reversal": true
+   }
+  },
+  "dropHapax": {
+   "nRun": 390,
+   "nSkipped": 0,
+   "skipReasons": [],
+   "statusAll": {
+    "A": 28,
+    "M": 108,
+    "P+": 178,
+    "P-": 76
+   },
+   "basePplus": {
+    "n": 174,
+    "signAgree": 174,
+    "signAgreeFrac": 1,
+    "stillPresentSameSign": 155,
+    "presentOppositeSign": 0,
+    "medianRetention": 1.012,
+    "medianV": 0.04,
+    "medianV0": 0.0442
+   },
+   "basePminus": {
+    "n": 81,
+    "signAgree": 81,
+    "signAgreeFrac": 1,
+    "stillPresentSameSign": 73,
+    "presentOppositeSign": 0,
+    "medianRetention": 0.987,
+    "medianV": -0.0798,
+    "medianV0": -0.0816
+   },
+   "baseNotPresent": {
+    "n": 135,
+    "signAgree": 120,
+    "signAgreeFrac": 0.889,
+    "stillPresentSameSign": 3,
+    "presentOppositeSign": 23,
+    "medianRetention": 1.02,
+    "medianV": 0.0135,
+    "medianV0": 0.0113
+   },
+   "lawLevel": {
+    "nPplus": 178,
+    "nPminus": 76,
+    "reversal": true
+   }
+  },
+  "trunc5": {
+   "nRun": 390,
+   "nSkipped": 0,
+   "skipReasons": [],
+   "statusAll": {
+    "A": 25,
+    "M": 102,
+    "P+": 183,
+    "P-": 80
+   },
+   "basePplus": {
+    "n": 174,
+    "signAgree": 173,
+    "signAgreeFrac": 0.994,
+    "stillPresentSameSign": 170,
+    "presentOppositeSign": 1,
+    "medianRetention": 1.024,
+    "medianV": 0.0439,
+    "medianV0": 0.0442
+   },
+   "basePminus": {
+    "n": 81,
+    "signAgree": 81,
+    "signAgreeFrac": 1,
+    "stillPresentSameSign": 75,
+    "presentOppositeSign": 0,
+    "medianRetention": 1,
+    "medianV": -0.089,
+    "medianV0": -0.0816
+   },
+   "baseNotPresent": {
+    "n": 135,
+    "signAgree": 123,
+    "signAgreeFrac": 0.911,
+    "stillPresentSameSign": 4,
+    "presentOppositeSign": 13,
+    "medianRetention": 1,
+    "medianV": 0.0117,
+    "medianV0": 0.0113
+   },
+   "lawLevel": {
+    "nPplus": 183,
+    "nPminus": 80,
+    "reversal": true
+   }
+  },
+  "xcount": {
+   "nRun": 390,
+   "nSkipped": 0,
+   "skipReasons": [],
+   "statusAll": {
+    "M": 108,
+    "P+": 163,
+    "A": 39,
+    "P-": 80
+   },
+   "basePplus": {
+    "n": 174,
+    "signAgree": 174,
+    "signAgreeFrac": 1,
+    "stillPresentSameSign": 160,
+    "presentOppositeSign": 0,
+    "medianRetention": 0.973,
+    "medianV": 0.0419,
+    "medianV0": 0.0442
+   },
+   "basePminus": {
+    "n": 81,
+    "signAgree": 81,
+    "signAgreeFrac": 1,
+    "stillPresentSameSign": 78,
+    "presentOppositeSign": 0,
+    "medianRetention": 0.95,
+    "medianV": -0.0779,
+    "medianV0": -0.0816
+   },
+   "baseNotPresent": {
+    "n": 135,
+    "signAgree": 122,
+    "signAgreeFrac": 0.904,
+    "stillPresentSameSign": 2,
+    "presentOppositeSign": 3,
+    "medianRetention": 0.932,
+    "medianV": 0.0113,
+    "medianV0": 0.0113
+   },
+   "lawLevel": {
+    "nPplus": 163,
+    "nPminus": 80,
+    "reversal": true
+   }
+  },
+  "xlin": {
+   "nRun": 390,
+   "nSkipped": 0,
+   "skipReasons": [],
+   "statusAll": {
+    "P-": 77,
+    "A": 82,
+    "M": 153,
+    "P+": 78
+   },
+   "basePplus": {
+    "n": 174,
+    "signAgree": 159,
+    "signAgreeFrac": 0.914,
+    "stillPresentSameSign": 67,
+    "presentOppositeSign": 1,
+    "medianRetention": 0.364,
+    "medianV": 0.0167,
+    "medianV0": 0.0442
+   },
+   "basePminus": {
+    "n": 81,
+    "signAgree": 77,
+    "signAgreeFrac": 0.951,
+    "stillPresentSameSign": 63,
+    "presentOppositeSign": 3,
+    "medianRetention": 0.459,
+    "medianV": -0.0329,
+    "medianV0": -0.0816
+   },
+   "baseNotPresent": {
+    "n": 135,
+    "signAgree": 82,
+    "signAgreeFrac": 0.607,
+    "stillPresentSameSign": 13,
+    "presentOppositeSign": 8,
+    "medianRetention": 0.261,
+    "medianV": -0.0023,
+    "medianV0": 0.0113
+   },
+   "lawLevel": {
+    "nPplus": 78,
+    "nPminus": 77,
+    "reversal": true
+   }
+  },
+  "xhap": {
+   "nRun": 389,
+   "nSkipped": 1,
+   "skipReasons": [
+    "undefined"
+   ],
+   "statusAll": {
+    "P-": 46,
+    "M": 176,
+    "A": 120,
+    "P+": 47
+   },
+   "basePplus": {
+    "n": 174,
+    "signAgree": 127,
+    "signAgreeFrac": 0.73,
+    "stillPresentSameSign": 36,
+    "presentOppositeSign": 1,
+    "medianRetention": 0.129,
+    "medianV": 0.0063,
+    "medianV0": 0.0442
+   },
+   "basePminus": {
+    "n": 81,
+    "signAgree": 64,
+    "signAgreeFrac": 0.79,
+    "stillPresentSameSign": 36,
+    "presentOppositeSign": 8,
+    "medianRetention": 0.205,
+    "medianV": -0.0139,
+    "medianV0": -0.0816
+   },
+   "baseNotPresent": {
+    "n": 134,
+    "signAgree": 73,
+    "signAgreeFrac": 0.545,
+    "stillPresentSameSign": 9,
+    "presentOppositeSign": 3,
+    "medianRetention": 0.109,
+    "medianV": -0.003,
+    "medianV0": 0.0114
+   },
+   "lawLevel": {
+    "nPplus": 47,
+    "nPminus": 46,
+    "reversal": true
+   }
+  },
+  "xcont": {
+   "nRun": 389,
+   "nSkipped": 1,
+   "skipReasons": [
+    "undefined"
+   ],
+   "statusAll": {
+    "P-": 71,
+    "A": 95,
+    "M": 155,
+    "P+": 68
+   },
+   "basePplus": {
+    "n": 173,
+    "signAgree": 150,
+    "signAgreeFrac": 0.867,
+    "stillPresentSameSign": 58,
+    "presentOppositeSign": 2,
+    "medianRetention": 0.308,
+    "medianV": 0.0146,
+    "medianV0": 0.0442
+   },
+   "basePminus": {
+    "n": 81,
+    "signAgree": 73,
+    "signAgreeFrac": 0.901,
+    "stillPresentSameSign": 55,
+    "presentOppositeSign": 2,
+    "medianRetention": 0.401,
+    "medianV": -0.032,
+    "medianV0": -0.0816
+   },
+   "baseNotPresent": {
+    "n": 135,
+    "signAgree": 75,
+    "signAgreeFrac": 0.556,
+    "stillPresentSameSign": 14,
+    "presentOppositeSign": 8,
+    "medianRetention": 0.199,
+    "medianV": -0.0021,
+    "medianV0": 0.0113
+   },
+   "lawLevel": {
+    "nPplus": 68,
+    "nPminus": 71,
+    "reversal": true
+   }
+  }
+ }
+}

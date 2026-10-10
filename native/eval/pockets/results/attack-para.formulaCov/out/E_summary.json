@@ -1,0 +1,227 @@
+{
+ "n": 391,
+ "atlasPresent242": {
+  "n": 242,
+  "all": {
+   "P+": 242
+  },
+  "head100": {
+   "P+": 234,
+   "AMBIG": 7,
+   "ABSENT": 1
+  },
+  "tail1_100": {
+   "P+": 235,
+   "ABSENT": 6,
+   "AMBIG": 1
+  },
+  "tail2_100": {
+   "P+": 233,
+   "ABSENT": 7,
+   "AMBIG": 2
+  },
+  "shareOfV": {
+   "head100": {
+    "medianShareOfV": 0.2478841949879113,
+    "medianShareOfExcess": 0.23442351715555856,
+    "n": 242,
+    "group_cd": 0.18972636520543942,
+    "group_bk": 0.26047744779039694,
+    "group_fm": 0.230932977017738,
+    "group_ml": 0.2942969630244755,
+    "group_oc": 0.31445271077779174,
+    "group_ud": 0.22155265300170157,
+    "reg_code": 0.12765915852556436,
+    "reg_novel": 0.2697265911505866,
+    "reg_legal": 0.27628751577022065,
+    "reg_scripture": 0.1803521799396416,
+    "reg_treatise": 0.34227467117351307,
+    "reg_chat": 0.3108844609168543,
+    "reg_treebank": 0.22155265300170157,
+    "reg_notation": 0.9538510436837652,
+    "reg_poetry": 0.17223213319864278
+   },
+   "tail1_100": {
+    "medianShareOfV": 0.8064260802424055,
+    "medianShareOfExcess": 0.8185559430356286,
+    "n": 242,
+    "group_cd": 0.8625925016766708,
+    "group_bk": 0.7636919713309052,
+    "group_fm": 0.8586374154395133,
+    "group_ml": 0.7528162590864873,
+    "group_oc": 0.7380967117473105,
+    "group_ud": 0.8033621475996723,
+    "reg_code": 0.9218891539057703,
+    "reg_novel": 0.7493995438960979,
+    "reg_legal": 0.85174510351848,
+    "reg_scripture": 0.8854132396824753,
+    "reg_treatise": 0.7069881413465247,
+    "reg_chat": 0.7470426772597584,
+    "reg_treebank": 0.8033621475996723,
+    "reg_notation": 0.06086188173750123,
+    "reg_poetry": 0.8340882608652763
+   },
+   "tail2_100": {
+    "medianShareOfV": 0.43021379650168,
+    "medianShareOfExcess": 0.4633935612623272,
+    "n": 242,
+    "group_cd": 0.6270601462854364,
+    "group_bk": 0.27488348945917784,
+    "group_fm": 0.5746797055288493,
+    "group_ml": 0.31210595575704736,
+    "group_oc": 0.45686142643781213,
+    "group_ud": 0.27087833368324865,
+    "reg_code": 0.7208072502431792,
+    "reg_novel": 0.2394931297455243,
+    "reg_legal": 0.5620424994045456,
+    "reg_scripture": 0.667749676867762,
+    "reg_treatise": 0.2664517665937618,
+    "reg_chat": 0.4592676099867734,
+    "reg_treebank": 0.27087833368324865,
+    "reg_notation": 0.004419497244261324,
+    "reg_poetry": 0.49046450719622214
+   }
+  },
+  "tail1AbsentWhileAllPresent": [
+   [
+    "cd-codons",
+    "sequence"
+   ],
+   [
+    "cd-smiles-chembl",
+    "notation"
+   ],
+   [
+    "cd-smiles-ccd",
+    "notation"
+   ],
+   [
+    "cd-protein-aa",
+    "sequence"
+   ],
+   [
+    "cd-smiles-pubchem",
+    "notation"
+   ],
+   [
+    "cd-smiles-chebi",
+    "notation"
+   ]
+  ],
+  "tail2AbsentWhileAllPresent_n": 7,
+  "headOnlyPresentTailAbsent_n": 6
+ },
+ "all391": {
+  "n": 391,
+  "all": {
+   "P+": 380,
+   "AMBIG": 7,
+   "ABSENT": 4
+  },
+  "head100": {
+   "P+": 345,
+   "AMBIG": 24,
+   "ABSENT": 22
+  },
+  "tail1_100": {
+   "P+": 372,
+   "ABSENT": 10,
+   "AMBIG": 9
+  },
+  "tail2_100": {
+   "P+": 359,
+   "ABSENT": 14,
+   "AMBIG": 18
+  },
+  "shareOfV": {
+   "head100": {
+    "medianShareOfV": 0.2486543298575378,
+    "medianShareOfExcess": 0.23935585926130895,
+    "n": 387,
+    "group_cd": 0.19297840432671948,
+    "group_bk": 0.27897573451077634,
+    "group_fm": 0.22540619184294738,
+    "group_ml": 0.23967721865182898,
+    "group_oc": 0.2941788087432606,
+    "group_ud": 0.23577632656354197,
+    "reg_code": 0.12765915852556436,
+    "reg_novel": 0.27548465847303955,
+    "reg_legal": 0.2718775633526968,
+    "reg_scripture": 0.16012810176079503,
+    "reg_treatise": 0.23915727502347106,
+    "reg_chat": 0.2939650286106625,
+    "reg_treebank": 0.23577632656354197,
+    "reg_notation": 0.9283642641655003,
+    "reg_poetry": 0.15667063829983524
+   },
+   "tail1_100": {
+    "medianShareOfV": 0.8033621475996723,
+    "medianShareOfExcess": 0.813859708233823,
+    "n": 387,
+    "group_cd": 0.8617607821085156,
+    "group_bk": 0.7484657548152793,
+    "group_fm": 0.8502913097048022,
+    "group_ml": 0.7971301679037228,
+    "group_oc": 0.7394835006588708,
+    "group_ud": 0.8182679416812908,
+    "reg_code": 0.9218891539057703,
+    "reg_novel": 0.7484657548152793,
+    "reg_legal": 0.84601765371175,
+    "reg_scripture": 0.8507960191968867,
+    "reg_treatise": 0.7957584364585238,
+    "reg_chat": 0.7413071408185022,
+    "reg_treebank": 0.8182679416812908,
+    "reg_notation": 0.09017303147844485,
+    "reg_poetry": 0.8573942804800365
+   },
+   "tail2_100": {
+    "medianShareOfV": 0.4158667694836911,
+    "medianShareOfExcess": 0.42983001246653396,
+    "n": 387,
+    "group_cd": 0.6240757489374689,
+    "group_bk": 0.26712498075208746,
+    "group_fm": 0.5848615804732126,
+    "group_ml": 0.4066396570311957,
+    "group_oc": 0.4725970766792644,
+    "group_ud": 0.3618535022496221,
+    "reg_code": 0.7208072502431792,
+    "reg_novel": 0.2285275088855722,
+    "reg_legal": 0.574629861680326,
+    "reg_scripture": 0.6220922413659089,
+    "reg_treatise": 0.46490175145313045,
+    "reg_chat": 0.4739452842837323,
+    "reg_treebank": 0.3618535022496221,
+    "reg_notation": 0.007373963056461607,
+    "reg_poetry": 0.5435646165641849
+   }
+  },
+  "tail1AbsentWhileAllPresent": [
+   [
+    "cd-codons",
+    "sequence"
+   ],
+   [
+    "cd-smiles-chembl",
+    "notation"
+   ],
+   [
+    "cd-smiles-ccd",
+    "notation"
+   ],
+   [
+    "cd-protein-aa",
+    "sequence"
+   ],
+   [
+    "cd-smiles-pubchem",
+    "notation"
+   ],
+   [
+    "cd-smiles-chebi",
+    "notation"
+   ]
+  ],
+  "tail2AbsentWhileAllPresent_n": 7,
+  "headOnlyPresentTailAbsent_n": 6
+ }
+}

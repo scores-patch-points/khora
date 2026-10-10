@@ -1,0 +1,231 @@
+{
+ "part": "a",
+ "dry": false,
+ "seconds": 0.3,
+ "sha": "077117134b4f27aace61e2d3ea1fa6a4a644b077f521c57ff254dd0f0f5966f9",
+ "headline": {
+  "strat": {
+   "EN": {
+    "covered": 22,
+    "nPos": 38,
+    "clusters": 16,
+    "auc": {
+     "ishare": 0.9267,
+     "i": 0.5,
+     "len": 0.431,
+     "cl": 0.5,
+     "lc": 0.4299
+    },
+    "ci": [
+     0.8381,
+     0.9819
+    ],
+    "shuf": {
+     "covered": 30,
+     "auc": 0.5855
+    },
+    "shufDrop": 0.3412,
+    "beyond": {
+     "covered": 22,
+     "auc": 0.9267,
+     "ci": [
+      0.8399,
+      0.981
+     ]
+    },
+    "checks": {
+     "cov": false,
+     "controls": false,
+     "auc": true,
+     "lower": true,
+     "shuf": true,
+     "beyond": true
+    },
+    "holds": false,
+    "failed": [
+     "cov",
+     "controls"
+    ]
+   },
+   "NONEN": {
+    "covered": 12,
+    "nPos": 16,
+    "clusters": 9,
+    "auc": {
+     "ishare": 0.75,
+     "i": 0.4306,
+     "len": 0.5382,
+     "cl": 0.5,
+     "lc": 0.5
+    },
+    "ci": [
+     0.5303,
+     0.9444
+    ],
+    "shuf": {
+     "covered": 15,
+     "auc": 0.6427
+    },
+    "shufDrop": 0.1073,
+    "beyond": {
+     "covered": 12,
+     "auc": 0.7611,
+     "ci": [
+      0.5333,
+      0.9533
+     ]
+    },
+    "checks": {
+     "cov": false,
+     "controls": false,
+     "auc": true,
+     "lower": false,
+     "shuf": true,
+     "beyond": false
+    },
+    "holds": false,
+    "failed": [
+     "cov",
+     "controls",
+     "lower",
+     "beyond"
+    ]
+   },
+   "POOLED": {
+    "covered": 38,
+    "nPos": 54,
+    "clusters": 27,
+    "auc": {
+     "ishare": 0.7573,
+     "i": 0.4786,
+     "len": 0.4726,
+     "cl": 0.5,
+     "lc": 0.4586
+    },
+    "ci": [
+     0.6624,
+     0.8441
+    ],
+    "shuf": {
+     "covered": 50,
+     "auc": 0.5375
+    },
+    "shufDrop": 0.2198,
+    "beyond": {
+     "covered": 38,
+     "auc": 0.7713,
+     "ci": [
+      0.6809,
+      0.8522
+     ]
+    },
+    "checks": {
+     "cov": false,
+     "controls": true,
+     "auc": true,
+     "lower": true,
+     "shuf": true,
+     "beyond": true
+    },
+    "holds": false,
+    "failed": [
+     "cov"
+    ]
+   }
+  },
+  "coverage": {
+   "EN": {
+    "nPos": 38,
+    "pairs": 28,
+    "dropped": 10
+   },
+   "NONEN": {
+    "nPos": 16,
+    "pairs": 14,
+    "dropped": 2
+   }
+  },
+  "POOLED": {
+   "variant": "VOID",
+   "auc": 0.7976,
+   "ci": [
+    0.7024,
+    0.8929
+   ],
+   "n": 42,
+   "ctl": {
+    "i": 0.4881,
+    "len": 0.4643,
+    "cl": 0.5714,
+    "lc": 0.4762,
+    "mday": 0.4167,
+    "b": 0.5357
+   },
+   "holdsCore": false,
+   "reason": "controls out of band; strict subset too small or out of band",
+   "shufDrop": 0.1956,
+   "beyond": {
+    "CNT_C128": {
+     "kept": 39,
+     "share": 0.9286,
+     "auc": 0.7821
+    }
+   }
+  },
+  "EN": {
+   "n": 28,
+   "auc": 0.875,
+   "ci": [
+    0.7679,
+    0.9464
+   ],
+   "ctl": {
+    "i": 0.5,
+    "len": 0.4643,
+    "cl": 0.5714,
+    "lc": 0.4643
+   }
+  },
+  "NONEN": {
+   "n": 14,
+   "auc": 0.6429,
+   "ci": [
+    0.3929,
+    0.8214
+   ],
+   "ctl": {
+    "i": 0.4643,
+    "len": 0.4643,
+    "cl": 0.5714,
+    "lc": 0.5
+   }
+  },
+  "natPOOLED": {
+   "tp": 13,
+   "fp": 116,
+   "fn": 41,
+   "tn": 8370,
+   "precision": 0.1008,
+   "recall": 0.2407,
+   "fpr": 0.0137,
+   "prevalence": 0.0063
+  },
+  "recallByDayPos": {
+   "0-49": {
+    "pos": 16,
+    "flagged": 1,
+    "recall": 0.0625
+   },
+   "50-99": {
+    "pos": 29,
+    "flagged": 8,
+    "recall": 0.2759
+   },
+   "100+": {
+    "pos": 9,
+    "flagged": 4,
+    "recall": 0.4444
+   }
+  }
+ }
+}

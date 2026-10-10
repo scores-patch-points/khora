@@ -1,0 +1,70 @@
+{
+ "PROPN:all": {
+  "languages": 17,
+  "SIG": 0.573,
+  "CONF": 0.554,
+  "SIGCONF": 0.59,
+  "incMean": 0.036,
+  "incCI": [
+   0,
+   0.075
+  ],
+  "nSigBeatsConf": 10,
+  "incPositive": 11,
+  "initPos": 0.115,
+  "initNeg": 0.051,
+  "lenPos": 25.418,
+  "lenNeg": 24.724
+ },
+ "PROPN:posMatched": {
+  "languages": 15,
+  "SIG": 0.454,
+  "CONF": 0.462,
+  "SIGCONF": 0.468,
+  "incMean": 0.006,
+  "incCI": [
+   -0.083,
+   0.085
+  ],
+  "nSigBeatsConf": 8,
+  "incPositive": 9,
+  "initPos": 0.029,
+  "initNeg": 0.029,
+  "lenPos": 29.173,
+  "lenNeg": 27.9
+ },
+ "NOUN:all": {
+  "languages": 20,
+  "SIG": 0.577,
+  "CONF": 0.518,
+  "SIGCONF": 0.588,
+  "incMean": 0.07,
+  "incCI": [
+   0.043,
+   0.098
+  ],
+  "nSigBeatsConf": 15,
+  "incPositive": 17,
+  "initPos": 0.048,
+  "initNeg": 0.081,
+  "lenPos": 25.63,
+  "lenNeg": 24.555
+ },
+ "NOUN:posMatched": {
+  "languages": 19,
+  "SIG": 0.579,
+  "CONF": 0.451,
+  "SIGCONF": 0.574,
+  "incMean": 0.123,
+  "incCI": [
+   0.081,
+   0.171
+  ],
+  "nSigBeatsConf": 17,
+  "incPositive": 18,
+  "initPos": 0.017,
+  "initNeg": 0.017,
+  "lenPos": 30.058,
+  "lenNeg": 28.237
+ }
+}

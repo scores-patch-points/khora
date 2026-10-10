@@ -1,0 +1,567 @@
+{
+ "A_codeOverProse": {
+  "atlas": {
+   "nCode": 47,
+   "nProse": 45,
+   "medianCode": 0.3520625,
+   "medianProse": 0.036875649999999996,
+   "factorV": 9.547289335916792
+  },
+  "size60": {
+   "nCode": 44,
+   "nProse": 43,
+   "medianCode": 0.2998561161844009,
+   "medianProse": 0.017527400045764807,
+   "factorV": 17.107849161967174,
+   "factorExcess": 16.73709852776819
+  },
+  "size60_L8": {
+   "nCode": 44,
+   "nProse": 43,
+   "medianCode": 0.21965836674689854,
+   "medianProse": 0.007637545079887786,
+   "factorV": 28.76033652820362,
+   "factorExcess": 28.335338708623173
+  },
+  "size60_L16": {
+   "nCode": 44,
+   "nProse": 43,
+   "medianCode": 0.26966034003748973,
+   "medianProse": 0.013258723378839932,
+   "factorV": 20.338333663997414,
+   "factorExcess": 20.022927830774762
+  },
+  "size60_L32": {
+   "nCode": 44,
+   "nProse": 43,
+   "medianCode": 0.2962431702849244,
+   "medianProse": 0.014796594383824413,
+   "factorV": 20.021037449588835,
+   "factorExcess": 19.884000943399595
+  },
+  "size30": {
+   "nCode": 45,
+   "nProse": 41,
+   "medianCode": 0.2674336711320393,
+   "medianProse": 0.011642662675512838,
+   "factorV": 22.97014682856981,
+   "factorExcess": 22.679146436313037
+  },
+  "size30_L16": {
+   "nCode": 45,
+   "nProse": 41,
+   "medianCode": 0.23658259614512644,
+   "medianProse": 0.007820092836482218,
+   "factorV": 30.253169763077967,
+   "factorExcess": 30.3537568284683
+  },
+  "full_dedupe": {
+   "nCode": 47,
+   "nProse": 45,
+   "medianCode": 0.16341113247062822,
+   "medianProse": 0.03243578792853441,
+   "factorV": 5.0379886818433715,
+   "factorExcess": 4.881467530430658
+  }
+ },
+ "A_notPresentListed": {
+  "size30": {
+   "n": 20,
+   "items": [
+    {
+     "id": "ml-pc-faust-de",
+     "register": "drama",
+     "tokens": 30693,
+     "class": "AMBIG",
+     "v": [
+      0,
+      0.005705171462068392
+     ]
+    },
+    {
+     "id": "ml-lat-livy",
+     "register": "history",
+     "tokens": 299894,
+     "class": "AMBIG",
+     "v": [
+      0.003545156429936469,
+      0
+     ]
+    },
+    {
+     "id": "bk-sense-sens",
+     "register": "novel",
+     "tokens": 119922,
+     "class": "AMBIG",
+     "v": [
+      0,
+      0.007106076210220635
+     ]
+    },
+    {
+     "id": "ml-pc-robinson-de",
+     "register": "book",
+     "tokens": 62030,
+     "class": "AMBIG",
+     "v": [
+      0.0007211971869764966,
+      0
+     ]
+    },
+    {
+     "id": "ml-deu-ranke",
+     "register": "history",
+     "tokens": 118665,
+     "class": "ABSENT",
+     "v": [
+      0,
+      0
+     ]
+    },
+    {
+     "id": "cd-smiles-pubchem",
+     "register": "notation",
+     "tokens": 166163,
+     "class": "AMBIG",
+     "v": [
+      0.9777468706533909,
+      0.9865586612068
+     ]
+    },
+    {
+     "id": "ud-slv",
+     "register": "treebank",
+     "tokens": 43877,
+     "class": "AMBIG",
+     "v": [
+      0.001362862009955279,
+      0
+     ]
+    },
+    {
+     "id": "ml-lat-tacitus",
+     "register": "history",
+     "tokens": 111703,
+     "class": "AMBIG",
+     "v": [
+      0,
+      0.0030068123087403364
+     ]
+    },
+    {
+     "id": "bk-hirschfeld-de",
+     "register": "academic",
+     "tokens": 177006,
+     "class": "AMBIG",
+     "v": [
+      0,
+      0.001638560797800892
+     ]
+    },
+    {
+     "id": "ml-grc-comedy",
+     "register": "drama",
+     "tokens": 31070,
+     "class": "AMBIG",
+     "v": [
+      0.010869565217035415,
+      0.004780433574524068
+     ]
+    },
+    {
+     "id": "ml-lzh-shuowen",
+     "register": "lexicon",
+     "tokens": 64913,
+     "class": "ABSENT",
+     "v": [
+      0,
+      0
+     ]
+    },
+    {
+     "id": "ud-est",
+     "register": "treebank",
+     "tokens": 76385,
+     "class": "ABSENT",
+     "v": [
+      0,
+      0
+     ]
+    },
+    {
+     "id": "oc-lccc",
+     "register": "chat",
+     "tokens": 51899,
+     "class": "AMBIG",
+     "v": [
+      0.0004164064130236511,
+      0.005263886964712583
+     ]
+    },
+    {
+     "id": "bk-cryptic",
+     "register": "wordplay",
+     "tokens": 299791,
+     "class": "AMBIG",
+     "v": [
+      0.0007804370443409425,
+      0
+     ]
+    },
+    {
+     "id": "bk-wpa-tx",
+     "register": "dialect",
+     "tokens": 299341,
+     "class": "AMBIG",
+     "v": [
+      0,
+      0.01207024486757291
+     ]
+    },
+    {
+     "id": "ml-grc-plotinus",
+     "register": "treatise",
+     "tokens": 201085,
+     "class": "AMBIG",
+     "v": [
+      0,
+      0.00566197980515426
+     ]
+    },
+    {
+     "id": "ud-fas",
+     "register": "treebank",
+     "tokens": 44542,
+     "class": "AMBIG",
+     "v": [
+      0.0028689259461316396,
+      0
+     ]
+    },
+    {
+     "id": "bk-aeneid-la",
+     "register": "poetry",
+     "tokens": 63791,
+     "class": "AMBIG",
+     "v": [
+      0,
+      0.0016720140993129462
+     ]
+    },
+    {
+     "id": "ud-eus",
+     "register": "treebank",
+     "tokens": 40201,
+     "class": "ABSENT",
+     "v": [
+      0,
+      0
+     ]
+    },
+    {
+     "id": "ml-grc-stoic",
+     "register": "treatise",
+     "tokens": 120117,
+     "class": "AMBIG",
+     "v": [
+      0,
+      0.0029493505753634963
+     ]
+    }
+   ]
+  },
+  "size60": {
+   "n": 6,
+   "items": [
+    {
+     "id": "cd-protein-aa",
+     "register": "sequence",
+     "tokens": 293973,
+     "class": "AMBIG",
+     "v": [
+      0.3325397819826321,
+      0.28735969720673893
+     ]
+    },
+    {
+     "id": "cd-smiles-pubchem",
+     "register": "notation",
+     "tokens": 166163,
+     "class": "AMBIG",
+     "v": [
+      0.9869255432849968,
+      0.9896711947676522
+     ]
+    },
+    {
+     "id": "ml-pc-gulliver-it",
+     "register": "book",
+     "tokens": 93781,
+     "class": "AMBIG",
+     "v": [
+      0,
+      0.008521414443748654
+     ]
+    },
+    {
+     "id": "ml-lat-tacitus",
+     "register": "history",
+     "tokens": 111703,
+     "class": "AMBIG",
+     "v": [
+      0,
+      0.000680256683153857
+     ]
+    },
+    {
+     "id": "ml-lzh-shuowen",
+     "register": "lexicon",
+     "tokens": 64913,
+     "class": "ABSENT",
+     "v": [
+      0,
+      0
+     ]
+    },
+    {
+     "id": "ml-lzh-shiji",
+     "register": "history",
+     "tokens": 291823,
+     "class": "AMBIG",
+     "v": [
+      0.0017805915522330906,
+      0
+     ]
+    }
+   ]
+  },
+  "size60_L16": {
+   "n": 5,
+   "items": [
+    {
+     "id": "cd-protein-aa",
+     "register": "sequence",
+     "tokens": 293973,
+     "class": "ABSENT",
+     "v": [
+      0.21521848317388503,
+      0.1885128071089639
+     ]
+    },
+    {
+     "id": "ml-pc-gulliver-it",
+     "register": "book",
+     "tokens": 93781,
+     "class": "AMBIG",
+     "v": [
+      0,
+      0.003953591486606456
+     ]
+    },
+    {
+     "id": "ml-lat-tacitus",
+     "register": "history",
+     "tokens": 111703,
+     "class": "AMBIG",
+     "v": [
+      0,
+      0.00034016690824500984
+     ]
+    },
+    {
+     "id": "ml-lzh-shiji",
+     "register": "history",
+     "tokens": 291823,
+     "class": "AMBIG",
+     "v": [
+      0.0008910386968636885,
+      0
+     ]
+    },
+    {
+     "id": "bk-wuthering",
+     "register": "novel",
+     "tokens": 117108,
+     "class": "AMBIG",
+     "v": [
+      0.0023786869651303277,
+      0
+     ]
+    }
+   ]
+  }
+ },
+ "D": {
+  "iidWorlds": 12,
+  "iidReps": 36,
+  "iidDefinedHalfCells": 66,
+  "iidHalfCellsAbsZge4": 0,
+  "iidPresentPlus_reps": 0,
+  "iidUndefinedReps": 3,
+  "iidVrange": [
+   0.0,
+   0.9219683335850277
+  ],
+  "iid_v_by_world": {
+   "iid_a0.6_D1": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "iid_a1.0_D1": [
+    0.0023,
+    0.0026,
+    0.0028
+   ],
+   "iid_a1.3_D1": [
+    0.2405,
+    0.241,
+    0.242
+   ],
+   "iid_a1.6_D1": [
+    0.6859,
+    0.6899,
+    0.6921
+   ],
+   "iid_a2.0_D1": [
+    0.9199,
+    0.9216,
+    0.922
+   ],
+   "iid_a1.3_D2": [
+    0.2707,
+    0.2739,
+    0.2861
+   ],
+   "iid_a1.3_L6": [
+    0.1688,
+    0.1721,
+    0.174
+   ],
+   "iid_a1.3_L40": [
+    0.3046,
+    0.3109,
+    0.3114
+   ],
+   "iid_a1.0_V300_D1": [
+    0.0365,
+    0.0399,
+    0.0403
+   ],
+   "iid_a1.0_V50_D1": [
+    0.2843,
+    0.2867,
+    0.294
+   ],
+   "iid_a1.5_V50_L6": [
+    0.6786,
+    0.6831,
+    0.6845
+   ],
+   "iid_a1.0_V20_L4": [
+    0.3046,
+    0.3084,
+    0.3094
+   ]
+  },
+  "orderWorlds_status10": {
+   "sorted_a1.0_D2": [
+    "P+",
+    "P+",
+    "P+"
+   ],
+   "runs_a1.0_p0.5": [
+    "P+",
+    "P+",
+    "P+"
+   ],
+   "flow_s3": [
+    "M",
+    "P+",
+    "P+"
+   ],
+   "flow_s11": [
+    "P+",
+    "P+",
+    "P+"
+   ],
+   "dupWithin_a1.0_p0.05": [
+    "P+",
+    "P+",
+    "M"
+   ],
+   "dupWithin_a1.0_p0.2": [
+    "P+",
+    "P+",
+    "P+"
+   ],
+   "boiler_a1.0_p0.1": [
+    "P+",
+    "P+",
+    "P+"
+   ],
+   "skeleton_pF0.5": [
+    "P+",
+    "P+",
+    "P+"
+   ],
+   "skeleton_pF0.3": [
+    "P+",
+    "P+",
+    "P+"
+   ]
+  },
+  "orderWorlds_minZ10": {
+   "sorted_a1.0_D2": 262.2538454728739,
+   "runs_a1.0_p0.5": 136.94341318869596,
+   "flow_s3": 2.8009124193852903,
+   "flow_s11": 15.237388765347232,
+   "dupWithin_a1.0_p0.05": 3.0035220676350427,
+   "dupWithin_a1.0_p0.2": 76.46963477361976,
+   "boiler_a1.0_p0.1": 78.47477470191293,
+   "skeleton_pF0.5": 24.364225732720037,
+   "skeleton_pF0.3": 30.145376771328436
+  }
+ },
+ "timeFamilies": {
+  "pocket": "bk-moby-dick",
+  "tokens": 50005,
+  "families": {
+   "burst": {
+    "cpuSeconds": 0.061062,
+    "stats": 11
+   },
+   "comp": {
+    "cpuSeconds": 0.039382,
+    "stats": 12
+   },
+   "fig": {
+    "cpuSeconds": 0.04787,
+    "stats": 12
+   },
+   "freq": {
+    "cpuSeconds": 0.033368,
+    "stats": 12
+   },
+   "order": {
+    "cpuSeconds": 0.052333,
+    "stats": 11
+   },
+   "para": {
+    "cpuSeconds": 0.109672,
+    "stats": 12
+   },
+   "phys": {
+    "cpuSeconds": 0.169618,
+    "stats": 11
+   }
+  }
+ },
+ "B_file": "B_rival.json",
+ "B2_file": "B2.json",
+ "C1_file": "C1_constant.json",
+ "C2_file": "C2_multiplicity.json",
+ "C3_file": "C3_notPresent.json",
+ "E_file": "E_summary.json",
+ "A_file": "A_summary.json"
+}

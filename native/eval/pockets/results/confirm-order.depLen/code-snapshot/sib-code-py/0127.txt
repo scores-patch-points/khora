@@ -1,0 +1,217 @@
+"""The real Metro Nashville departments, so the beneficiary slot resolves
+to an actual organization instead of whatever capitalized run a regex
+happened to catch.
+
+Sourced from nashville.gov/departments (60 entries, fetched 2026-09-16).
+Legistar's own /bodies endpoint is no help here — it returns Council
+committees and commissions, not the operating departments that legislation
+actually names ("Department of Emergency Communications", "Metro Water
+Services").
+
+ALIASES carry the shorthand these titles actually use. A resolution says
+"MNPD" or "the Police Department", never the full legal name."""
+from __future__ import annotations
+
+import re
+
+DEPARTMENTS = [
+    "Agricultural Extension Service",
+    "Assessor of Property",
+    "Beer Permits Office",
+    "Chancery Court Clerk and Master",
+    "Circuit Court Clerk",
+    "Codes and Building Safety",
+    "Criminal Court Clerk",
+    "Criminal Justice Planning",
+    "Davidson County Clerk",
+    "Davidson County Election Commission",
+    "Davidson County Register of Deeds",
+    "Davidson County Sheriff's Office",
+    "Department of Emergency Communications",
+    "District Attorney",
+    "Finance Department",
+    "General Services Department",
+    "General Sessions Court",
+    "Historic Preservation",
+    "Human Relations",
+    "Human Resources",
+    "Information Technology Services",
+    "Justice Integration Services",
+    "Juvenile Court",
+    "Juvenile Court Clerk",
+    "Law Department",
+    "Mayor's Office",
+    "Metro Arts",
+    "Metro Council",
+    "Metro Nashville Community Oversight",
+    "Metro Nashville District Energy System",
+    "Metro Nashville Public Schools",
+    "Metro Public Health Department",
+    "Metro Water Services",
+    "Metropolitan Action Commission",
+    "Metropolitan Clerk",
+    "Metropolitan Development and Housing Agency",
+    "Metropolitan Nashville Police Department",
+    "Metropolitan Social Services",
+    "Metropolitan Sports Authority",
+    "Municipal Auditorium",
+    "Music City Center",
+    "Nashville Community Review Board",
+    "Nashville Department of Transportation and Multimodal Infrastructure",
+    "Nashville Department of Waste Services",
+    "Nashville Farmers' Market",
+    "Nashville Fire Department",
+    "Nashville General Hospital",
+    "Nashville Public Library",
+    "Office of Emergency Management",
+    "Office of Family Safety",
+    "Office of Homeless Services",
+    "Office of Internal Audit",
+    "Office of the Metropolitan Trustee",
+    "Parks and Recreation",
+    "Planning Department",
+    "Public Defender's Office",
+    "State Trial Courts",
+    "The Fairgrounds Nashville",
+    "WeGo Public Transit",
+]
+
+# What legislation actually writes, mapped to the canonical department.
+ALIASES = {
+    "mnpd": "Metropolitan Nashville Police Department",
+    "metropolitan nashville police department": "Metropolitan Nashville Police Department",
+    "nashville police department": "Metropolitan Nashville Police Department",
+    "police department": "Metropolitan Nashville Police Department",
+    "metro police": "Metropolitan Nashville Police Department",
+    "nashville fire department": "Nashville Fire Department",
+    "fire department": "Nashville Fire Department",
+    "nfd": "Nashville Fire Department",
+    "department of emergency communication": "Department of Emergency Communications",
+    "department of emergency communications": "Department of Emergency Communications",
+    "emergency communications district": "Department of Emergency Communications",
+    "emergency communication": "Department of Emergency Communications",
+    "dec": "Department of Emergency Communications",
+    "waste services": "Nashville Department of Waste Services",
+    "waste services department": "Nashville Department of Waste Services",
+    "water services": "Metro Water Services",
+    "metro water services": "Metro Water Services",
+    "ndot": "Nashville Department of Transportation and Multimodal Infrastructure",
+    "department of transportation": "Nashville Department of Transportation and Multimodal Infrastructure",
+    "transportation and multimodal infrastructure": "Nashville Department of Transportation and Multimodal Infrastructure",
+    "public library": "Nashville Public Library",
+    "nashville public library": "Nashville Public Library",
+    "general services": "General Services Department",
+    "general services department": "General Services Department",
+    "finance department": "Finance Department",
+    "department of finance": "Finance Department",
+    "public health": "Metro Public Health Department",
+    "metropolitan board of health": "Metro Public Health Department",
+    "board of health": "Metro Public Health Department",
+    "health department": "Metro Public Health Department",
+    "parks and recreation": "Parks and Recreation",
+    "board of parks and recreation": "Parks and Recreation",
+    "information technology services": "Information Technology Services",
+    "its": "Information Technology Services",
+    "sheriff": "Davidson County Sheriff's Office",
+    "sheriff's office": "Davidson County Sheriff's Office",
+    "davidson county sheriff": "Davidson County Sheriff's Office",
+    "codes": "Codes and Building Safety",
+    "codes department": "Codes and Building Safety",
+    "planning commission": "Planning Department",
+    "planning department": "Planning Department",
+    "state trial courts": "State Trial Courts",
+    "juvenile court": "Juvenile Court",
+    "public defender": "Public Defender's Office",
+    "district attorney": "District Attorney",
+    "metro schools": "Metro Nashville Public Schools",
+    "metropolitan nashville public schools": "Metro Nashville Public Schools",
+    "mnps": "Metro Nashville Public Schools",
+    "mdha": "Metropolitan Development and Housing Agency",
+    "wego": "WeGo Public Transit",
+    "mayor": "Mayor's Office",
+    "office of the mayor": "Mayor's Office",
+    "law department": "Law Department",
+    "department of law": "Law Department",
+    "human resources": "Human Resources",
+    "office of emergency management": "Office of Emergency Management",
+    "office of family safety": "Office of Family Safety",
+    "office of homeless services": "Office of Homeless Services",
+    "community oversight": "Metro Nashville Community Oversight",
+    "community review board": "Nashville Community Review Board",
+}
+
+_LOOKUP = {d.lower(): d for d in DEPARTMENTS}
+_LOOKUP.update(ALIASES)
+# Longest first so "nashville fire department" wins over "fire department".
+_ORDERED = sorted(_LOOKUP.items(), key=lambda kv: -len(kv[0]))
+
+
+def resolve(fragment: str) -> str:
+    """Canonical department for a fragment of title text, or "" if none."""
+    if not fragment:
+        return ""
+    f = re.sub(r"[^a-z0-9 ]", " ", fragment.lower())
+    f = re.sub(r"\s+", " ", f).strip()
+    if f in _LOOKUP:
+        return _LOOKUP[f]
+    for key, canon in _ORDERED:
+        if len(key) >= 4 and key in f:
+            return canon
+    return ""
+
+
+def spans_in(text: str) -> list[tuple[int, int, str]]:
+    """Where each department is named, as (start, end, canonical name).
+
+    Offsets index the ORIGINAL text, so punctuation is flattened in place
+    rather than collapsed — collapsing runs of whitespace would shift every
+    offset after the first comma and make the spans lie. Longest key wins,
+    and overlapping matches are dropped, so "Metropolitan Nashville
+    Department of Emergency Communications" is one span rather than that
+    plus a nested "Emergency Communications"."""
+    flat = re.sub(r"[^A-Za-z0-9]", " ", text or "").lower()
+    taken: list[tuple[int, int, str]] = []
+    for key, canon in _ORDERED:
+        if len(key) < 4:
+            continue
+        start = 0
+        while True:
+            i = flat.find(key, start)
+            if i < 0:
+                break
+            j = i + len(key)
+            start = j
+            # whole words only — "fire department" must not match inside
+            # "campfire department"
+            if (i > 0 and flat[i - 1].isalnum()) or (j < len(flat) and flat[j].isalnum()):
+                continue
+            if any(i < b and a < j for a, b, _ in taken):
+                continue
+            taken.append((i, j, canon))
+    return sorted(taken)
+
+
+def surface_forms(canonical: str) -> list[str]:
+    """Every string that resolves TO this canonical department — the
+    canonical name itself plus any alias — so a title search can match
+    however the title actually phrased it ("MNPD" as often as "Metropolitan
+    Nashville Police Department"). A title never carries `matters.body_name`
+    — that column is the deciding council BODY (a committee, or "Metropolitan
+    Council"), a different field entirely — so this is what a department
+    filter actually has to search."""
+    forms = [canonical]
+    for alias, canon in ALIASES.items():
+        if canon == canonical:
+            forms.append(alias)
+    return forms
+
+
+def find_in(text: str) -> list[str]:
+    """Every department named in a span of text, most specific first."""
+    t = re.sub(r"[^a-z0-9 ]", " ", (text or "").lower())
+    t = re.sub(r"\s+", " ", t)
+    out = []
+    for key, canon in _ORDERED:
+        if len(key) >= 4 and key in t and canon not in out:
+            out.append(canon)
+    return out

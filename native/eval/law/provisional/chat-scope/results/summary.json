@@ -1,0 +1,5470 @@
+{
+ "headerSha256": {
+  "discover": "b4dcd46ed1e626d32de8595df8672efd4367fd1c14adff3fd0cf522b79e68b50",
+  "confirm": "48953d24ecb1dcd589fd4052e956a4df4524e09cec0a60de6f45b4376fb386f3"
+ },
+ "selectionSha256": "1b29344d0a992b427c270e99be7abc293dfd32a73c529f66774df2c8af0dc58c",
+ "rules": {
+  "R1": {
+   "column": "ISHARE_Cinf",
+   "theta": 0.67,
+   "stratum": "LATER",
+   "verdict": {
+    "cellHolds": true,
+    "auc": 0.8497,
+    "ci": [
+     0.8379,
+     0.8631
+    ],
+    "wordshufAuc": 0.6438,
+    "shufDrop": 0.2059,
+    "shufOk": true,
+    "beyond": {
+     "kept": 652,
+     "share": 0.2742,
+     "auc": 0.7653
+    },
+    "beyondOk": true,
+    "HOLDS": true
+   },
+   "scope": {
+    "ALL|ALL": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 2520,
+      "days": 34,
+      "auc": 0.8494,
+      "ci": [
+       0.8367,
+       0.8635
+      ],
+      "dayCi": [
+       0.7837,
+       0.9031
+      ],
+      "tpr": 0.6544,
+      "fpr": 0.1258,
+      "balPrec": 0.8388,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 691,
+        "share": 0.2742,
+        "auc": 0.767
+       },
+       "CNT_C32": {
+        "kept": 797,
+        "share": 0.3163,
+        "auc": 0.8055
+       },
+       "CNT_Cinf": {
+        "kept": 971,
+        "share": 0.3853,
+        "auc": 0.8373
+       }
+      },
+      "ctl": {
+       "i": 0.5087,
+       "len": 0.5093,
+       "cl": 0.4996,
+       "lc": 0.5014
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 2956,
+      "days": 41,
+      "ctlOk": true,
+      "auc": 0.8784,
+      "ci": [
+       0.8654,
+       0.8895
+      ]
+     }
+    },
+    "ALL|INIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 1770,
+      "days": 32,
+      "auc": 0.863,
+      "ci": [
+       0.8472,
+       0.8797
+      ],
+      "dayCi": [
+       0.8423,
+       0.8871
+      ],
+      "tpr": 0.7548,
+      "fpr": 0.1757,
+      "balPrec": 0.8112,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 445,
+        "share": 0.2514,
+        "auc": 0.7562
+       },
+       "CNT_C32": {
+        "kept": 497,
+        "share": 0.2808,
+        "auc": 0.8058
+       },
+       "CNT_Cinf": {
+        "kept": 712,
+        "share": 0.4023,
+        "auc": 0.835
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.513,
+       "cl": 0.5003,
+       "lc": 0.5096
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 2043,
+      "days": 40,
+      "ctlOk": true,
+      "auc": 0.8882,
+      "ci": [
+       0.8767,
+       0.9006
+      ]
+     }
+    },
+    "ALL|NONINIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 750,
+      "days": 23,
+      "auc": 0.8173,
+      "ci": [
+       0.7893,
+       0.8453
+      ],
+      "dayCi": [
+       0.6564,
+       0.9588
+      ],
+      "tpr": 0.4173,
+      "fpr": 0.008,
+      "balPrec": 0.9812,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 246,
+        "share": 0.328,
+        "auc": 0.7866
+       },
+       "CNT_C32": {
+        "kept": 300,
+        "share": 0.4,
+        "auc": 0.805
+       },
+       "CNT_Cinf": {
+        "kept": 259,
+        "share": 0.3453,
+        "auc": 0.8436
+       }
+      },
+      "ctl": {
+       "i": 0.5293,
+       "len": 0.5007,
+       "cl": 0.498,
+       "lc": 0.482
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 913,
+      "days": 32,
+      "ctlOk": true,
+      "auc": 0.8565,
+      "ci": [
+       0.833,
+       0.8779
+      ]
+     }
+    },
+    "EN|ALL": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 2378,
+      "days": 23,
+      "auc": 0.8497,
+      "ci": [
+       0.8379,
+       0.8631
+      ],
+      "dayCi": [
+       0.7743,
+       0.9067
+      ],
+      "tpr": 0.6653,
+      "fpr": 0.1287,
+      "balPrec": 0.8379,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 652,
+        "share": 0.2742,
+        "auc": 0.7653
+       },
+       "CNT_C32": {
+        "kept": 750,
+        "share": 0.3154,
+        "auc": 0.8067
+       },
+       "CNT_Cinf": {
+        "kept": 904,
+        "share": 0.3802,
+        "auc": 0.839
+       }
+      },
+      "ctl": {
+       "i": 0.5071,
+       "len": 0.5097,
+       "cl": 0.4996,
+       "lc": 0.4996
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 2768,
+      "days": 28,
+      "ctlOk": true,
+      "auc": 0.8772,
+      "ci": [
+       0.8647,
+       0.8876
+      ]
+     }
+    },
+    "EN|INIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 1673,
+      "days": 21,
+      "auc": 0.8634,
+      "ci": [
+       0.8479,
+       0.8793
+      ],
+      "dayCi": [
+       0.8389,
+       0.8914
+      ],
+      "tpr": 0.7699,
+      "fpr": 0.1811,
+      "balPrec": 0.8096,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 418,
+        "share": 0.2499,
+        "auc": 0.7524
+       },
+       "CNT_C32": {
+        "kept": 471,
+        "share": 0.2815,
+        "auc": 0.8068
+       },
+       "CNT_Cinf": {
+        "kept": 664,
+        "share": 0.3969,
+        "auc": 0.8373
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.5137,
+       "cl": 0.5,
+       "lc": 0.5093
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 1905,
+      "days": 28,
+      "ctlOk": true,
+      "auc": 0.889,
+      "ci": [
+       0.8745,
+       0.9045
+      ]
+     }
+    },
+    "EN|NONINIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 705,
+      "days": 17,
+      "auc": 0.817,
+      "ci": [
+       0.7844,
+       0.8447
+      ],
+      "dayCi": [
+       0.6368,
+       0.968
+      ],
+      "tpr": 0.417,
+      "fpr": 0.0043,
+      "balPrec": 0.9899,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 234,
+        "share": 0.3319,
+        "auc": 0.7885
+       },
+       "CNT_C32": {
+        "kept": 279,
+        "share": 0.3957,
+        "auc": 0.8065
+       },
+       "CNT_Cinf": {
+        "kept": 240,
+        "share": 0.3404,
+        "auc": 0.8438
+       }
+      },
+      "ctl": {
+       "i": 0.5241,
+       "len": 0.5,
+       "cl": 0.4986,
+       "lc": 0.4766
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 863,
+      "days": 21,
+      "ctlOk": true,
+      "auc": 0.8511,
+      "ci": [
+       0.8279,
+       0.8749
+      ]
+     }
+    },
+    "NONEN|ALL": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 142,
+      "days": 11,
+      "auc": 0.8451,
+      "ci": [
+       0.7852,
+       0.9014
+      ],
+      "dayCi": [
+       0.8099,
+       0.9308
+      ],
+      "tpr": 0.4718,
+      "fpr": 0.0775,
+      "balPrec": 0.859,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 39,
+        "share": 0.2746,
+        "auc": 0.7949
+       },
+       "CNT_C32": {
+        "kept": 47,
+        "share": 0.331,
+        "auc": 0.7872
+       },
+       "CNT_Cinf": {
+        "kept": 67,
+        "share": 0.4718,
+        "auc": 0.8134
+       }
+      },
+      "ctl": {
+       "i": 0.5352,
+       "len": 0.5035,
+       "cl": 0.5,
+       "lc": 0.5317
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 188,
+      "days": 13,
+      "ctlOk": false,
+      "auc": 0.8963,
+      "ci": [
+       0.8537,
+       0.9362
+      ]
+     }
+    },
+    "NONEN|INIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 97,
+      "days": 11,
+      "auc": 0.8557,
+      "ci": [
+       0.7887,
+       0.9072
+      ],
+      "dayCi": [
+       0.8143,
+       0.9364
+      ],
+      "tpr": 0.4948,
+      "fpr": 0.0825,
+      "balPrec": 0.8571,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 27,
+        "share": 0.2784,
+        "auc": 0.8148
+       },
+       "CNT_C32": {
+        "kept": 26,
+        "share": 0.268,
+        "auc": 0.7885
+       },
+       "CNT_Cinf": {
+        "kept": 48,
+        "share": 0.4948,
+        "auc": 0.8021
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.5,
+       "cl": 0.5052,
+       "lc": 0.5155
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 138,
+      "days": 12,
+      "ctlOk": false,
+      "auc": 0.8768,
+      "ci": [
+       0.8297,
+       0.9275
+      ]
+     }
+    },
+    "NONEN|NONINIT": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 45,
+      "days": 6,
+      "auc": 0.8222,
+      "ci": [
+       0.7,
+       0.9333
+      ],
+      "dayCi": [
+       0.6944,
+       0.9231
+      ],
+      "tpr": 0.4222,
+      "fpr": 0.0667,
+      "balPrec": 0.8636,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 12,
+        "share": 0.2667,
+        "auc": null
+       },
+       "CNT_C32": {
+        "kept": 21,
+        "share": 0.4667,
+        "auc": 0.7857
+       },
+       "CNT_Cinf": {
+        "kept": 19,
+        "share": 0.4222,
+        "auc": null
+       }
+      },
+      "ctl": {
+       "i": 0.6111,
+       "len": 0.5111,
+       "cl": 0.4889,
+       "lc": 0.5667
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": {
+      "n": 50,
+      "days": 11,
+      "ctlOk": true,
+      "auc": 0.95
+     }
+    },
+    "DE|ALL": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 27,
+      "days": 4,
+      "auc": 0.8519,
+      "ci": null,
+      "dayCi": null,
+      "tpr": 0.3333,
+      "fpr": 0,
+      "balPrec": 1,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 9,
+        "share": 0.3333,
+        "auc": null
+       },
+       "CNT_C32": {
+        "kept": 7,
+        "share": 0.2593,
+        "auc": null
+       },
+       "CNT_Cinf": {
+        "kept": 14,
+        "share": 0.5185,
+        "auc": null
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.537,
+       "cl": 0.5,
+       "lc": 0.4444
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": {
+      "n": 43,
+      "days": 4,
+      "ctlOk": false,
+      "auc": 0.8605
+     }
+    },
+    "DE|INIT": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 23,
+      "days": 4,
+      "auc": 0.8478,
+      "ci": null,
+      "dayCi": null,
+      "tpr": 0.3913,
+      "fpr": 0,
+      "balPrec": 1,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 8,
+        "share": 0.3478,
+        "auc": null
+       },
+       "CNT_C32": {
+        "kept": 5,
+        "share": 0.2174,
+        "auc": null
+       },
+       "CNT_Cinf": {
+        "kept": 12,
+        "share": 0.5217,
+        "auc": null
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.5435,
+       "cl": 0.5,
+       "lc": 0.4348
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": {
+      "n": 34,
+      "days": 4,
+      "ctlOk": false,
+      "auc": 0.8235
+     }
+    },
+    "ES|ALL": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 57,
+      "days": 2,
+      "auc": 0.8421,
+      "ci": [
+       0.7368,
+       0.9298
+      ],
+      "dayCi": [
+       null,
+       null
+      ],
+      "tpr": 0.5088,
+      "fpr": 0.1404,
+      "balPrec": 0.7838,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 15,
+        "share": 0.2632,
+        "auc": null
+       },
+       "CNT_C32": {
+        "kept": 25,
+        "share": 0.4386,
+        "auc": 0.84
+       },
+       "CNT_Cinf": {
+        "kept": 22,
+        "share": 0.386,
+        "auc": 0.8636
+       }
+      },
+      "ctl": {
+       "i": 0.5351,
+       "len": 0.4825,
+       "cl": 0.5088,
+       "lc": 0.5789
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": {
+      "n": 55,
+      "days": 3,
+      "ctlOk": false,
+      "auc": 0.9
+     }
+    },
+    "ES|INIT": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 37,
+      "days": 2,
+      "auc": 0.8108,
+      "ci": null,
+      "dayCi": null,
+      "tpr": 0.4595,
+      "fpr": 0.1351,
+      "balPrec": 0.7727,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 10,
+        "share": 0.2703,
+        "auc": null
+       },
+       "CNT_C32": {
+        "kept": 16,
+        "share": 0.4324,
+        "auc": null
+       },
+       "CNT_Cinf": {
+        "kept": 14,
+        "share": 0.3784,
+        "auc": null
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.4865,
+       "cl": 0.5135,
+       "lc": 0.6351
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": {
+      "n": 35,
+      "days": 2,
+      "ctlOk": false,
+      "auc": 0.8857
+     }
+    },
+    "ES|NONINIT": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 20,
+      "days": 1,
+      "auc": 0.9,
+      "ci": null,
+      "dayCi": null,
+      "tpr": 0.6,
+      "fpr": 0.15,
+      "balPrec": 0.8,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 5,
+        "share": 0.25,
+        "auc": null
+       },
+       "CNT_C32": {
+        "kept": 9,
+        "share": 0.45,
+        "auc": null
+       },
+       "CNT_Cinf": {
+        "kept": 8,
+        "share": 0.4,
+        "auc": null
+       }
+      },
+      "ctl": {
+       "i": 0.6,
+       "len": 0.475,
+       "cl": 0.5,
+       "lc": 0.475
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": {
+      "n": 20,
+      "days": 3,
+      "ctlOk": false,
+      "auc": 0.925
+     }
+    },
+    "IT|ALL": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 58,
+      "days": 5,
+      "auc": 0.8448,
+      "ci": [
+       0.7586,
+       0.9138
+      ],
+      "dayCi": [
+       0.783,
+       0.9773
+      ],
+      "tpr": 0.5,
+      "fpr": 0.0517,
+      "balPrec": 0.9063,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 15,
+        "share": 0.2586,
+        "auc": null
+       },
+       "CNT_C32": {
+        "kept": 15,
+        "share": 0.2586,
+        "auc": null
+       },
+       "CNT_Cinf": {
+        "kept": 31,
+        "share": 0.5345,
+        "auc": 0.8065
+       }
+      },
+      "ctl": {
+       "i": 0.5517,
+       "len": 0.5086,
+       "cl": 0.4914,
+       "lc": 0.5259
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": {
+      "n": 90,
+      "days": 6,
+      "ctlOk": false,
+      "auc": 0.9111,
+      "ci": [
+       0.8556,
+       0.9667
+      ]
+     }
+    },
+    "IT|INIT": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 37,
+      "days": 5,
+      "auc": 0.9054,
+      "ci": null,
+      "dayCi": null,
+      "tpr": 0.5946,
+      "fpr": 0.0811,
+      "balPrec": 0.88,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 9,
+        "share": 0.2432,
+        "auc": null
+       },
+       "CNT_C32": {
+        "kept": 5,
+        "share": 0.1351,
+        "auc": null
+       },
+       "CNT_Cinf": {
+        "kept": 22,
+        "share": 0.5946,
+        "auc": 0.8409
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.4865,
+       "cl": 0.5,
+       "lc": 0.4459
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": {
+      "n": 69,
+      "days": 6,
+      "ctlOk": false,
+      "auc": 0.8986,
+      "ci": [
+       0.8333,
+       0.9565
+      ]
+     }
+    },
+    "IT|NONINIT": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 21,
+      "days": 4,
+      "auc": 0.7381,
+      "ci": null,
+      "dayCi": null,
+      "tpr": 0.3333,
+      "fpr": 0,
+      "balPrec": 1,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 6,
+        "share": 0.2857,
+        "auc": null
+       },
+       "CNT_C32": {
+        "kept": 10,
+        "share": 0.4762,
+        "auc": null
+       },
+       "CNT_Cinf": {
+        "kept": 9,
+        "share": 0.4286,
+        "auc": null
+       }
+      },
+      "ctl": {
+       "i": 0.6429,
+       "len": 0.5476,
+       "cl": 0.4762,
+       "lc": 0.6667
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": {
+      "n": 21,
+      "days": 6,
+      "ctlOk": false,
+      "auc": 0.9524
+     }
+    },
+    "ubuntu|ALL": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 2068,
+      "days": 7,
+      "auc": 0.8414,
+      "ci": [
+       0.8242,
+       0.8561
+      ],
+      "dayCi": [
+       0.7585,
+       0.9134
+      ],
+      "tpr": 0.6707,
+      "fpr": 0.1286,
+      "balPrec": 0.8391,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 551,
+        "share": 0.2664,
+        "auc": 0.7514
+       },
+       "CNT_C32": {
+        "kept": 657,
+        "share": 0.3177,
+        "auc": 0.8037
+       },
+       "CNT_Cinf": {
+        "kept": 757,
+        "share": 0.3661,
+        "auc": 0.8329
+       }
+      },
+      "ctl": {
+       "i": 0.5073,
+       "len": 0.508,
+       "cl": 0.4995,
+       "lc": 0.5065
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 2565,
+      "days": 8,
+      "ctlOk": true,
+      "auc": 0.8782,
+      "ci": [
+       0.8655,
+       0.8912
+      ]
+     }
+    },
+    "ubuntu|INIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 1462,
+      "days": 7,
+      "auc": 0.8611,
+      "ci": [
+       0.8444,
+       0.8806
+      ],
+      "dayCi": [
+       0.8373,
+       0.8975
+      ],
+      "tpr": 0.7756,
+      "fpr": 0.1806,
+      "balPrec": 0.8112,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 355,
+        "share": 0.2428,
+        "auc": 0.7507
+       },
+       "CNT_C32": {
+        "kept": 415,
+        "share": 0.2839,
+        "auc": 0.8108
+       },
+       "CNT_Cinf": {
+        "kept": 556,
+        "share": 0.3803,
+        "auc": 0.8372
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.5123,
+       "cl": 0.4997,
+       "lc": 0.5123
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 1753,
+      "days": 8,
+      "ctlOk": true,
+      "auc": 0.8928,
+      "ci": [
+       0.8779,
+       0.9059
+      ]
+     }
+    },
+    "ubuntu|NONINIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 606,
+      "days": 7,
+      "auc": 0.7937,
+      "ci": [
+       0.7616,
+       0.8251
+      ],
+      "dayCi": [
+       0.6332,
+       0.9766
+      ],
+      "tpr": 0.4175,
+      "fpr": 0.0033,
+      "balPrec": 0.9922,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 196,
+        "share": 0.3234,
+        "auc": 0.7526
+       },
+       "CNT_C32": {
+        "kept": 242,
+        "share": 0.3993,
+        "auc": 0.7913
+       },
+       "CNT_Cinf": {
+        "kept": 201,
+        "share": 0.3317,
+        "auc": 0.8209
+       }
+      },
+      "ctl": {
+       "i": 0.5248,
+       "len": 0.4975,
+       "cl": 0.4992,
+       "lc": 0.4926
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 812,
+      "days": 8,
+      "ctlOk": true,
+      "auc": 0.8467,
+      "ci": [
+       0.822,
+       0.8725
+      ]
+     }
+    },
+    "kubuntu|ALL": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 260,
+      "days": 6,
+      "auc": 0.8942,
+      "ci": [
+       0.8538,
+       0.9231
+      ],
+      "dayCi": [
+       0.6579,
+       0.9071
+      ],
+      "tpr": 0.6154,
+      "fpr": 0.1385,
+      "balPrec": 0.8163,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 78,
+        "share": 0.3,
+        "auc": 0.8205
+       },
+       "CNT_C32": {
+        "kept": 71,
+        "share": 0.2731,
+        "auc": 0.7887
+       },
+       "CNT_Cinf": {
+        "kept": 124,
+        "share": 0.4769,
+        "auc": 0.8629
+       }
+      },
+      "ctl": {
+       "i": 0.5058,
+       "len": 0.5327,
+       "cl": 0.5,
+       "lc": 0.4615
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 153,
+      "days": 7,
+      "ctlOk": false,
+      "auc": 0.8824,
+      "ci": [
+       0.8301,
+       0.9281
+      ]
+     }
+    },
+    "kubuntu|INIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 167,
+      "days": 6,
+      "auc": 0.8593,
+      "ci": [
+       0.8024,
+       0.9162
+      ],
+      "dayCi": [
+       0.5667,
+       0.8851
+      ],
+      "tpr": 0.7305,
+      "fpr": 0.2096,
+      "balPrec": 0.7771,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 44,
+        "share": 0.2635,
+        "auc": 0.7045
+       },
+       "CNT_C32": {
+        "kept": 38,
+        "share": 0.2275,
+        "auc": 0.6974
+       },
+       "CNT_Cinf": {
+        "kept": 87,
+        "share": 0.521,
+        "auc": 0.8218
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.5419,
+       "cl": 0.503,
+       "lc": 0.515
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 113,
+      "days": 7,
+      "ctlOk": false,
+      "auc": 0.8673,
+      "ci": [
+       0.8053,
+       0.9115
+      ]
+     }
+    },
+    "kubuntu|NONINIT": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 93,
+      "days": 4,
+      "auc": 0.957,
+      "ci": [
+       0.9194,
+       0.9892
+      ],
+      "dayCi": [
+       0.7273,
+       0.9713
+      ],
+      "tpr": 0.4086,
+      "fpr": 0.0108,
+      "balPrec": 0.9744,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 34,
+        "share": 0.3656,
+        "auc": 0.9706
+       },
+       "CNT_C32": {
+        "kept": 33,
+        "share": 0.3548,
+        "auc": 0.8939
+       },
+       "CNT_Cinf": {
+        "kept": 37,
+        "share": 0.3978,
+        "auc": 0.9595
+       }
+      },
+      "ctl": {
+       "i": 0.5161,
+       "len": 0.5161,
+       "cl": 0.4946,
+       "lc": 0.3656
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": {
+      "n": 40,
+      "days": 5,
+      "ctlOk": true,
+      "auc": 0.925
+     }
+    },
+    "ubuntu-server|ALL": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 41,
+      "days": 6,
+      "auc": 0.9512,
+      "ci": [
+       0.9024,
+       0.9878
+      ],
+      "dayCi": [
+       0.85,
+       0.9846
+      ],
+      "tpr": 0.7073,
+      "fpr": 0.0732,
+      "balPrec": 0.9063,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 20,
+        "share": 0.4878,
+        "auc": 0.9
+       },
+       "CNT_C32": {
+        "kept": 18,
+        "share": 0.439,
+        "auc": null
+       },
+       "CNT_Cinf": {
+        "kept": 18,
+        "share": 0.439,
+        "auc": null
+       }
+      },
+      "ctl": {
+       "i": 0.4878,
+       "len": 0.439,
+       "cl": 0.5,
+       "lc": 0.4268
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": {
+      "n": 26,
+      "days": 7,
+      "ctlOk": false,
+      "auc": 0.7885
+     }
+    },
+    "ubuntu-server|INIT": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 37,
+      "days": 6,
+      "auc": 0.9459,
+      "ci": null,
+      "dayCi": null,
+      "tpr": 0.7027,
+      "fpr": 0.0811,
+      "balPrec": 0.8966,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 18,
+        "share": 0.4865,
+        "auc": null
+       },
+       "CNT_C32": {
+        "kept": 15,
+        "share": 0.4054,
+        "auc": null
+       },
+       "CNT_Cinf": {
+        "kept": 18,
+        "share": 0.4865,
+        "auc": null
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.4324,
+       "cl": 0.5,
+       "lc": 0.4054
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": {
+      "n": 19,
+      "days": 7,
+      "ctlOk": true,
+      "auc": 0.7632
+     }
+    },
+    "EN_2004-07|ALL": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 617,
+      "days": 3,
+      "auc": 0.8898,
+      "ci": [
+       0.8671,
+       0.9157
+      ],
+      "dayCi": [
+       null,
+       null
+      ],
+      "tpr": 0.7229,
+      "fpr": 0.1313,
+      "balPrec": 0.8463,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 164,
+        "share": 0.2658,
+        "auc": 0.7957
+       },
+       "CNT_C32": {
+        "kept": 182,
+        "share": 0.295,
+        "auc": 0.8434
+       },
+       "CNT_Cinf": {
+        "kept": 243,
+        "share": 0.3938,
+        "auc": 0.8519
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.5267,
+       "cl": 0.4992,
+       "lc": 0.4822
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 881,
+      "days": 5,
+      "ctlOk": true,
+      "auc": 0.8842
+     }
+    },
+    "EN_2004-07|INIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 459,
+      "days": 3,
+      "auc": 0.8682,
+      "ci": [
+       0.8377,
+       0.8943
+      ],
+      "dayCi": [
+       null,
+       null
+      ],
+      "tpr": 0.7887,
+      "fpr": 0.1743,
+      "balPrec": 0.819,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 106,
+        "share": 0.2309,
+        "auc": 0.717
+       },
+       "CNT_C32": {
+        "kept": 122,
+        "share": 0.2658,
+        "auc": 0.8074
+       },
+       "CNT_Cinf": {
+        "kept": 187,
+        "share": 0.4074,
+        "auc": 0.8289
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.5425,
+       "cl": 0.5,
+       "lc": 0.5098
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 619,
+      "days": 5,
+      "ctlOk": true,
+      "auc": 0.9265
+     }
+    },
+    "EN_2004-07|NONINIT": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 158,
+      "days": 2,
+      "auc": 0.9525,
+      "ci": [
+       0.9146,
+       0.981
+      ],
+      "dayCi": [
+       null,
+       null
+      ],
+      "tpr": 0.5316,
+      "fpr": 0.0063,
+      "balPrec": 0.9882,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 58,
+        "share": 0.3671,
+        "auc": 0.9397
+       },
+       "CNT_C32": {
+        "kept": 60,
+        "share": 0.3797,
+        "auc": 0.9167
+       },
+       "CNT_Cinf": {
+        "kept": 56,
+        "share": 0.3544,
+        "auc": 0.9286
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.481,
+       "cl": 0.4968,
+       "lc": 0.4019
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": {
+      "n": 262,
+      "days": 5,
+      "ctlOk": true,
+      "auc": 0.7844
+     }
+    },
+    "EN_2008-11|ALL": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 1589,
+      "days": 13,
+      "auc": 0.8244,
+      "ci": [
+       0.8059,
+       0.8439
+      ],
+      "dayCi": [
+       0.7306,
+       0.9193
+      ],
+      "tpr": 0.6457,
+      "fpr": 0.1278,
+      "balPrec": 0.8348,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 439,
+        "share": 0.2763,
+        "auc": 0.7437
+       },
+       "CNT_C32": {
+        "kept": 523,
+        "share": 0.3291,
+        "auc": 0.7868
+       },
+       "CNT_Cinf": {
+        "kept": 578,
+        "share": 0.3638,
+        "auc": 0.8235
+       }
+      },
+      "ctl": {
+       "i": 0.5101,
+       "len": 0.5025,
+       "cl": 0.5,
+       "lc": 0.506
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 1292,
+      "days": 12,
+      "ctlOk": true,
+      "auc": 0.8735
+     }
+    },
+    "EN_2008-11|INIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 1081,
+      "days": 12,
+      "auc": 0.8534,
+      "ci": [
+       0.8316,
+       0.8723
+      ],
+      "dayCi": [
+       0.8272,
+       0.9001
+      ],
+      "tpr": 0.7724,
+      "fpr": 0.1859,
+      "balPrec": 0.806,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 273,
+        "share": 0.2525,
+        "auc": 0.7564
+       },
+       "CNT_C32": {
+        "kept": 313,
+        "share": 0.2895,
+        "auc": 0.8003
+       },
+       "CNT_Cinf": {
+        "kept": 411,
+        "share": 0.3802,
+        "auc": 0.8321
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.4981,
+       "cl": 0.5005,
+       "lc": 0.5097
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 828,
+      "days": 12,
+      "ctlOk": true,
+      "auc": 0.8877
+     }
+    },
+    "EN_2008-11|NONINIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 508,
+      "days": 10,
+      "auc": 0.7628,
+      "ci": [
+       0.7244,
+       0.8022
+      ],
+      "dayCi": [
+       0.5789,
+       0.975
+      ],
+      "tpr": 0.376,
+      "fpr": 0.0039,
+      "balPrec": 0.9896,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 166,
+        "share": 0.3268,
+        "auc": 0.7229
+       },
+       "CNT_C32": {
+        "kept": 210,
+        "share": 0.4134,
+        "auc": 0.7667
+       },
+       "CNT_Cinf": {
+        "kept": 167,
+        "share": 0.3287,
+        "auc": 0.8024
+       }
+      },
+      "ctl": {
+       "i": 0.5315,
+       "len": 0.5118,
+       "cl": 0.499,
+       "lc": 0.498
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 464,
+      "days": 10,
+      "ctlOk": true,
+      "auc": 0.8481
+     }
+    },
+    "EN_2012-15|ALL": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 172,
+      "days": 7,
+      "auc": 0.939,
+      "ci": [
+       0.907,
+       0.9651
+      ],
+      "dayCi": [
+       0.6111,
+       0.9578
+      ],
+      "tpr": 0.6395,
+      "fpr": 0.1279,
+      "balPrec": 0.8333,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 49,
+        "share": 0.2849,
+        "auc": 0.8571
+       },
+       "CNT_C32": {
+        "kept": 45,
+        "share": 0.2616,
+        "auc": 0.8889
+       },
+       "CNT_Cinf": {
+        "kept": 83,
+        "share": 0.4826,
+        "auc": 0.9096
+       }
+      },
+      "ctl": {
+       "i": 0.5058,
+       "len": 0.5145,
+       "cl": 0.4971,
+       "lc": 0.5029
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 595,
+      "days": 11,
+      "ctlOk": true,
+      "auc": 0.8748
+     }
+    },
+    "EN_2012-15|INIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 133,
+      "days": 6,
+      "auc": 0.9286,
+      "ci": [
+       0.8835,
+       0.9624
+      ],
+      "dayCi": [
+       0.4545,
+       0.9507
+      ],
+      "tpr": 0.6842,
+      "fpr": 0.1654,
+      "balPrec": 0.8053,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 39,
+        "share": 0.2932,
+        "auc": 0.8205
+       },
+       "CNT_C32": {
+        "kept": 36,
+        "share": 0.2707,
+        "auc": 0.8611
+       },
+       "CNT_Cinf": {
+        "kept": 66,
+        "share": 0.4962,
+        "auc": 0.8939
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.5414,
+       "cl": 0.4962,
+       "lc": 0.5038
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 458,
+      "days": 11,
+      "ctlOk": true,
+      "auc": 0.8406
+     }
+    },
+    "EN_2012-15|NONINIT": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 39,
+      "days": 5,
+      "auc": 0.9744,
+      "ci": null,
+      "dayCi": null,
+      "tpr": 0.4872,
+      "fpr": 0,
+      "balPrec": 1,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 10,
+        "share": 0.2564,
+        "auc": null
+       },
+       "CNT_C32": {
+        "kept": 9,
+        "share": 0.2308,
+        "auc": null
+       },
+       "CNT_Cinf": {
+        "kept": 17,
+        "share": 0.4359,
+        "auc": null
+       }
+      },
+      "ctl": {
+       "i": 0.5256,
+       "len": 0.4231,
+       "cl": 0.5,
+       "lc": 0.5
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": {
+      "n": 137,
+      "days": 6,
+      "ctlOk": false,
+      "auc": 0.9891
+     }
+    },
+    "NONEN_2004-11|ALL": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 76,
+      "days": 3,
+      "auc": 0.8421,
+      "ci": [
+       0.7566,
+       0.9079
+      ],
+      "dayCi": [
+       null,
+       null
+      ],
+      "tpr": 0.4868,
+      "fpr": 0.1053,
+      "balPrec": 0.8222,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 19,
+        "share": 0.25,
+        "auc": null
+       },
+       "CNT_C32": {
+        "kept": 28,
+        "share": 0.3684,
+        "auc": 0.7857
+       },
+       "CNT_Cinf": {
+        "kept": 30,
+        "share": 0.3947,
+        "auc": 0.8167
+       }
+      },
+      "ctl": {
+       "i": 0.5329,
+       "len": 0.4803,
+       "cl": 0.5066,
+       "lc": 0.5395
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 130,
+      "days": 6,
+      "ctlOk": false,
+      "auc": 0.8962
+     }
+    },
+    "NONEN_2004-11|INIT": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 50,
+      "days": 3,
+      "auc": 0.81,
+      "ci": [
+       0.7,
+       0.91
+      ],
+      "dayCi": [
+       null,
+       null
+      ],
+      "tpr": 0.46,
+      "fpr": 0.1,
+      "balPrec": 0.8214,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 12,
+        "share": 0.24,
+        "auc": null
+       },
+       "CNT_C32": {
+        "kept": 16,
+        "share": 0.32,
+        "auc": null
+       },
+       "CNT_Cinf": {
+        "kept": 19,
+        "share": 0.38,
+        "auc": null
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.48,
+       "cl": 0.51,
+       "lc": 0.57
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": {
+      "n": 93,
+      "days": 6,
+      "ctlOk": false,
+      "auc": 0.8817
+     }
+    },
+    "NONEN_2004-11|NONINIT": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 26,
+      "days": 3,
+      "auc": 0.9038,
+      "ci": null,
+      "dayCi": null,
+      "tpr": 0.5385,
+      "fpr": 0.1154,
+      "balPrec": 0.8235,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 7,
+        "share": 0.2692,
+        "auc": null
+       },
+       "CNT_C32": {
+        "kept": 12,
+        "share": 0.4615,
+        "auc": null
+       },
+       "CNT_Cinf": {
+        "kept": 11,
+        "share": 0.4231,
+        "auc": null
+       }
+      },
+      "ctl": {
+       "i": 0.5962,
+       "len": 0.4808,
+       "cl": 0.5,
+       "lc": 0.4808
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": {
+      "n": 37,
+      "days": 6,
+      "ctlOk": false,
+      "auc": 0.9324
+     }
+    },
+    "NONEN_2012-15|ALL": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 66,
+      "days": 8,
+      "auc": 0.8485,
+      "ci": [
+       0.7576,
+       0.9242
+      ],
+      "dayCi": [
+       0.7913,
+       0.9571
+      ],
+      "tpr": 0.4545,
+      "fpr": 0.0455,
+      "balPrec": 0.9091,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 20,
+        "share": 0.303,
+        "auc": 0.85
+       },
+       "CNT_C32": {
+        "kept": 19,
+        "share": 0.2879,
+        "auc": null
+       },
+       "CNT_Cinf": {
+        "kept": 37,
+        "share": 0.5606,
+        "auc": 0.8108
+       }
+      },
+      "ctl": {
+       "i": 0.5379,
+       "len": 0.5303,
+       "cl": 0.4924,
+       "lc": 0.5227
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 58,
+      "days": 7,
+      "ctlOk": false,
+      "auc": 0.8966
+     }
+    },
+    "NONEN_2012-15|INIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": false,
+      "n": 47,
+      "days": 8,
+      "auc": 0.9043,
+      "ci": [
+       0.8404,
+       0.9681
+      ],
+      "dayCi": [
+       0.875,
+       0.9565
+      ],
+      "tpr": 0.5319,
+      "fpr": 0.0638,
+      "balPrec": 0.8929,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 15,
+        "share": 0.3191,
+        "auc": null
+       },
+       "CNT_C32": {
+        "kept": 10,
+        "share": 0.2128,
+        "auc": null
+       },
+       "CNT_Cinf": {
+        "kept": 29,
+        "share": 0.617,
+        "auc": 0.8448
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.5213,
+       "cl": 0.5,
+       "lc": 0.4574
+      },
+      "note": "n too small"
+     },
+     "discovery": {
+      "n": 45,
+      "days": 6,
+      "ctlOk": false,
+      "auc": 0.8667
+     }
+    },
+    "NONEN_2012-15|NONINIT": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 19,
+      "days": 3,
+      "auc": 0.7105,
+      "ci": null,
+      "dayCi": null,
+      "tpr": 0.2632,
+      "fpr": 0,
+      "balPrec": 1,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 5,
+        "share": 0.2632,
+        "auc": null
+       },
+       "CNT_C32": {
+        "kept": 9,
+        "share": 0.4737,
+        "auc": null
+       },
+       "CNT_Cinf": {
+        "kept": 8,
+        "share": 0.4211,
+        "auc": null
+       }
+      },
+      "ctl": {
+       "i": 0.6316,
+       "len": 0.5526,
+       "cl": 0.4737,
+       "lc": 0.6842
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": {
+      "n": 13,
+      "days": 5,
+      "ctlOk": true,
+      "auc": 1
+     }
+    },
+    "EN_swarm|ALL": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 2272,
+      "days": 7,
+      "auc": 0.8473,
+      "ci": [
+       0.8347,
+       0.8618
+      ],
+      "dayCi": [
+       0.7713,
+       0.9118
+      ],
+      "tpr": 0.6664,
+      "fpr": 0.1285,
+      "balPrec": 0.8383,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 606,
+        "share": 0.2667,
+        "auc": 0.7574
+       },
+       "CNT_C32": {
+        "kept": 712,
+        "share": 0.3134,
+        "auc": 0.8062
+       },
+       "CNT_Cinf": {
+        "kept": 848,
+        "share": 0.3732,
+        "auc": 0.8379
+       }
+      },
+      "ctl": {
+       "i": 0.5073,
+       "len": 0.511,
+       "cl": 0.4996,
+       "lc": 0.5031
+      },
+      "note": ""
+     },
+     "discovery": null
+    },
+    "EN_swarm|INIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 1582,
+      "days": 7,
+      "auc": 0.8613,
+      "ci": [
+       0.8464,
+       0.8748
+      ],
+      "dayCi": [
+       0.8393,
+       0.8941
+      ],
+      "tpr": 0.775,
+      "fpr": 0.1827,
+      "balPrec": 0.8092,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 377,
+        "share": 0.2383,
+        "auc": 0.7414
+       },
+       "CNT_C32": {
+        "kept": 438,
+        "share": 0.2769,
+        "auc": 0.8059
+       },
+       "CNT_Cinf": {
+        "kept": 614,
+        "share": 0.3881,
+        "auc": 0.8363
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.5168,
+       "cl": 0.5,
+       "lc": 0.5149
+      },
+      "note": ""
+     },
+     "discovery": null
+    },
+    "EN_swarm|NONINIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 690,
+      "days": 7,
+      "auc": 0.8152,
+      "ci": [
+       0.787,
+       0.8449
+      ],
+      "dayCi": [
+       0.6515,
+       0.9745
+      ],
+      "tpr": 0.4174,
+      "fpr": 0.0043,
+      "balPrec": 0.9897,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 229,
+        "share": 0.3319,
+        "auc": 0.7838
+       },
+       "CNT_C32": {
+        "kept": 274,
+        "share": 0.3971,
+        "auc": 0.8066
+       },
+       "CNT_Cinf": {
+        "kept": 234,
+        "share": 0.3391,
+        "auc": 0.8419
+       }
+      },
+      "ctl": {
+       "i": 0.5239,
+       "len": 0.4978,
+       "cl": 0.4986,
+       "lc": 0.4761
+      },
+      "note": ""
+     },
+     "discovery": null
+    },
+    "EN_notSwarm|ALL": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 106,
+      "days": 16,
+      "auc": 0.9009,
+      "ci": [
+       0.8491,
+       0.9434
+      ],
+      "dayCi": [
+       0.8415,
+       0.9524
+      ],
+      "tpr": 0.6415,
+      "fpr": 0.1321,
+      "balPrec": 0.8293,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 46,
+        "share": 0.434,
+        "auc": 0.8696
+       },
+       "CNT_C32": {
+        "kept": 38,
+        "share": 0.3585,
+        "auc": 0.8158
+       },
+       "CNT_Cinf": {
+        "kept": 56,
+        "share": 0.5283,
+        "auc": 0.8571
+       }
+      },
+      "ctl": {
+       "i": 0.5047,
+       "len": 0.4811,
+       "cl": 0.5,
+       "lc": 0.4245
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": null
+    },
+    "EN_notSwarm|INIT": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 91,
+      "days": 14,
+      "auc": 0.9011,
+      "ci": [
+       0.8407,
+       0.9505
+      ],
+      "dayCi": [
+       0.79,
+       0.9435
+      ],
+      "tpr": 0.6813,
+      "fpr": 0.1538,
+      "balPrec": 0.8158,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 41,
+        "share": 0.4505,
+        "auc": 0.8537
+       },
+       "CNT_C32": {
+        "kept": 33,
+        "share": 0.3626,
+        "auc": 0.8182
+       },
+       "CNT_Cinf": {
+        "kept": 50,
+        "share": 0.5495,
+        "auc": 0.85
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.4615,
+       "cl": 0.5,
+       "lc": 0.4121
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": null
+    },
+    "EN_notSwarm|NONINIT": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 15,
+      "days": 10,
+      "auc": 0.9,
+      "ci": null,
+      "dayCi": null,
+      "tpr": 0.4,
+      "fpr": 0,
+      "balPrec": 1,
+      "beyond": {
+       "CNT_C128": {
+        "kept": 5,
+        "share": 0.3333,
+        "auc": null
+       },
+       "CNT_C32": {
+        "kept": 5,
+        "share": 0.3333,
+        "auc": null
+       },
+       "CNT_Cinf": {
+        "kept": 6,
+        "share": 0.4,
+        "auc": null
+       }
+      },
+      "ctl": {
+       "i": 0.5333,
+       "len": 0.6,
+       "cl": 0.5,
+       "lc": 0.5
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": null
+    }
+   }
+  },
+  "R2": {
+   "column": "INIT_Tinf",
+   "theta": 2,
+   "stratum": "FIRST",
+   "verdict": {
+    "cellHolds": true,
+    "auc": 0.685,
+    "ci": [
+     0.6614,
+     0.7085
+    ],
+    "wordshufAuc": 0.5505,
+    "shufDrop": 0.1345,
+    "shufOk": true,
+    "beyond": {
+     "kept": 438,
+     "share": 0.9821,
+     "auc": 0.6826
+    },
+    "beyondOk": true,
+    "HOLDS": true
+   },
+   "scope": {
+    "ALL|ALL": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 472,
+      "days": 29,
+      "auc": 0.6822,
+      "ci": [
+       0.6621,
+       0.7055
+      ],
+      "dayCi": [
+       0.6517,
+       0.6998
+      ],
+      "tpr": 0.3072,
+      "fpr": 0.0953,
+      "balPrec": 0.7632,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 464,
+        "share": 0.9831,
+        "auc": 0.68
+       },
+       "CNT_T128": {
+        "kept": 333,
+        "share": 0.7055,
+        "auc": 0.5931
+       }
+      },
+      "ctl": {
+       "i": 0.4958,
+       "len": 0.4703,
+       "cl": 0.4894,
+       "lc": 0.4968
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 582,
+      "days": 35,
+      "ctlOk": true,
+      "auc": 0.6924,
+      "ci": [
+       0.6727,
+       0.7122
+      ]
+     }
+    },
+    "ALL|INIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 313,
+      "days": 26,
+      "auc": 0.6406,
+      "ci": [
+       0.615,
+       0.6677
+      ],
+      "dayCi": [
+       0.6092,
+       0.6624
+      ],
+      "tpr": 0.2684,
+      "fpr": 0.1118,
+      "balPrec": 0.7059,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 306,
+        "share": 0.9776,
+        "auc": 0.6373
+       },
+       "CNT_T128": {
+        "kept": 233,
+        "share": 0.7444,
+        "auc": 0.5601
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.4744,
+       "cl": 0.4888,
+       "lc": 0.5016
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 394,
+      "days": 31,
+      "ctlOk": true,
+      "auc": 0.6637,
+      "ci": [
+       0.6383,
+       0.6878
+      ]
+     }
+    },
+    "ALL|NONINIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 159,
+      "days": 17,
+      "auc": 0.7642,
+      "ci": [
+       0.717,
+       0.805
+      ],
+      "dayCi": [
+       0.6934,
+       0.8067
+      ],
+      "tpr": 0.3836,
+      "fpr": 0.0629,
+      "balPrec": 0.8592,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 158,
+        "share": 0.9937,
+        "auc": 0.7627
+       },
+       "CNT_T128": {
+        "kept": 100,
+        "share": 0.6289,
+        "auc": 0.67
+       }
+      },
+      "ctl": {
+       "i": 0.4874,
+       "len": 0.4623,
+       "cl": 0.4906,
+       "lc": 0.4874
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 188,
+      "days": 21,
+      "ctlOk": true,
+      "auc": 0.7527,
+      "ci": [
+       0.7128,
+       0.7926
+      ]
+     }
+    },
+    "EN|ALL": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 446,
+      "days": 20,
+      "auc": 0.685,
+      "ci": [
+       0.6614,
+       0.7085
+      ],
+      "dayCi": [
+       0.6602,
+       0.6992
+      ],
+      "tpr": 0.3184,
+      "fpr": 0.0987,
+      "balPrec": 0.7634,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 438,
+        "share": 0.9821,
+        "auc": 0.6826
+       },
+       "CNT_T128": {
+        "kept": 312,
+        "share": 0.6996,
+        "auc": 0.5962
+       }
+      },
+      "ctl": {
+       "i": 0.4944,
+       "len": 0.4697,
+       "cl": 0.4899,
+       "lc": 0.4966
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 534,
+      "days": 23,
+      "ctlOk": true,
+      "auc": 0.6919,
+      "ci": [
+       0.6695,
+       0.7107
+      ]
+     }
+    },
+    "EN|INIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 296,
+      "days": 19,
+      "auc": 0.6402,
+      "ci": [
+       0.6098,
+       0.6689
+      ],
+      "dayCi": [
+       0.6115,
+       0.662
+      ],
+      "tpr": 0.2736,
+      "fpr": 0.1149,
+      "balPrec": 0.7043,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 289,
+        "share": 0.9764,
+        "auc": 0.6367
+       },
+       "CNT_T128": {
+        "kept": 220,
+        "share": 0.7432,
+        "auc": 0.5614
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.4747,
+       "cl": 0.4882,
+       "lc": 0.5017
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 358,
+      "days": 20,
+      "ctlOk": true,
+      "auc": 0.6634,
+      "ci": [
+       0.6355,
+       0.6899
+      ]
+     }
+    },
+    "EN|NONINIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 150,
+      "days": 12,
+      "auc": 0.7733,
+      "ci": [
+       0.73,
+       0.8133
+      ],
+      "dayCi": [
+       0.6993,
+       0.8192
+      ],
+      "tpr": 0.4067,
+      "fpr": 0.0667,
+      "balPrec": 0.8592,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 149,
+        "share": 0.9933,
+        "auc": 0.7718
+       },
+       "CNT_T128": {
+        "kept": 92,
+        "share": 0.6133,
+        "auc": 0.6793
+       }
+      },
+      "ctl": {
+       "i": 0.4833,
+       "len": 0.46,
+       "cl": 0.4933,
+       "lc": 0.4867
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 176,
+      "days": 15,
+      "ctlOk": true,
+      "auc": 0.75,
+      "ci": [
+       0.7074,
+       0.7869
+      ]
+     }
+    },
+    "NONEN|ALL": {
+     "confirm": {
+      "variant": "full",
+      "holds": false,
+      "n": 26,
+      "days": 9,
+      "auc": 0.6346,
+      "ci": null,
+      "dayCi": null,
+      "tpr": 0.1154,
+      "fpr": 0.0385,
+      "balPrec": 0.75,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 26,
+        "share": 1,
+        "auc": 0.6346
+       },
+       "CNT_T128": {
+        "kept": 21,
+        "share": 0.8077,
+        "auc": 0.5476
+       }
+      },
+      "ctl": {
+       "i": 0.5192,
+       "len": 0.4808,
+       "cl": 0.4808,
+       "lc": 0.5
+      },
+      "note": "n too small"
+     },
+     "discovery": {
+      "n": 48,
+      "days": 12,
+      "ctlOk": true,
+      "auc": 0.6979
+     }
+    },
+    "NONEN|INIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": false,
+      "n": 17,
+      "days": 7,
+      "auc": 0.6471,
+      "ci": null,
+      "dayCi": null,
+      "tpr": 0.1765,
+      "fpr": 0.0588,
+      "balPrec": 0.75,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 17,
+        "share": 1,
+        "auc": null
+       },
+       "CNT_T128": {
+        "kept": 13,
+        "share": 0.7647,
+        "auc": null
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.4706,
+       "cl": 0.5,
+       "lc": 0.5
+      },
+      "note": "n too small"
+     },
+     "discovery": {
+      "n": 36,
+      "days": 11,
+      "ctlOk": true,
+      "auc": 0.6667
+     }
+    },
+    "ES|ALL": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 15,
+      "days": 2,
+      "auc": 0.6333,
+      "ci": null,
+      "dayCi": null,
+      "tpr": 0.0667,
+      "fpr": 0,
+      "balPrec": 1,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 15,
+        "share": 1,
+        "auc": null
+       },
+       "CNT_T128": {
+        "kept": 13,
+        "share": 0.8667,
+        "auc": null
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.4,
+       "cl": 0.4667,
+       "lc": 0.5
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": {
+      "n": 14,
+      "days": 3,
+      "ctlOk": true,
+      "auc": 0.6786
+     }
+    },
+    "ubuntu|ALL": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 389,
+      "days": 7,
+      "auc": 0.6915,
+      "ci": [
+       0.6658,
+       0.7159
+      ],
+      "dayCi": [
+       0.673,
+       0.7071
+      ],
+      "tpr": 0.3393,
+      "fpr": 0.108,
+      "balPrec": 0.7586,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 381,
+        "share": 0.9794,
+        "auc": 0.689
+       },
+       "CNT_T128": {
+        "kept": 265,
+        "share": 0.6812,
+        "auc": 0.6
+       }
+      },
+      "ctl": {
+       "i": 0.4974,
+       "len": 0.464,
+       "cl": 0.4897,
+       "lc": 0.5
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 477,
+      "days": 8,
+      "ctlOk": true,
+      "auc": 0.6981,
+      "ci": [
+       0.6709,
+       0.7222
+      ]
+     }
+    },
+    "ubuntu|INIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 256,
+      "days": 7,
+      "auc": 0.6445,
+      "ci": [
+       0.6191,
+       0.6797
+      ],
+      "dayCi": [
+       0.6136,
+       0.6689
+      ],
+      "tpr": 0.2969,
+      "fpr": 0.125,
+      "balPrec": 0.7037,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 249,
+        "share": 0.9727,
+        "auc": 0.6406
+       },
+       "CNT_T128": {
+        "kept": 185,
+        "share": 0.7227,
+        "auc": 0.5622
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.4648,
+       "cl": 0.4863,
+       "lc": 0.5039
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 316,
+      "days": 8,
+      "ctlOk": true,
+      "auc": 0.6646,
+      "ci": [
+       0.6361,
+       0.6915
+      ]
+     }
+    },
+    "ubuntu|NONINIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 133,
+      "days": 7,
+      "auc": 0.782,
+      "ci": [
+       0.7293,
+       0.8308
+      ],
+      "dayCi": [
+       0.7174,
+       0.8289
+      ],
+      "tpr": 0.4211,
+      "fpr": 0.0752,
+      "balPrec": 0.8485,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 132,
+        "share": 0.9925,
+        "auc": 0.7803
+       },
+       "CNT_T128": {
+        "kept": 80,
+        "share": 0.6015,
+        "auc": 0.6875
+       }
+      },
+      "ctl": {
+       "i": 0.4925,
+       "len": 0.4624,
+       "cl": 0.4962,
+       "lc": 0.4925
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 161,
+      "days": 8,
+      "ctlOk": true,
+      "auc": 0.764,
+      "ci": [
+       0.7236,
+       0.7981
+      ]
+     }
+    },
+    "kubuntu|ALL": {
+     "confirm": {
+      "variant": "full",
+      "holds": false,
+      "n": 38,
+      "days": 6,
+      "auc": 0.6579,
+      "ci": null,
+      "dayCi": null,
+      "tpr": 0.2105,
+      "fpr": 0.0526,
+      "balPrec": 0.8,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 38,
+        "share": 1,
+        "auc": 0.6579
+       },
+       "CNT_T128": {
+        "kept": 30,
+        "share": 0.7895,
+        "auc": 0.5833
+       }
+      },
+      "ctl": {
+       "i": 0.4605,
+       "len": 0.5132,
+       "cl": 0.4868,
+       "lc": 0.4605
+      },
+      "note": "n too small"
+     },
+     "discovery": {
+      "n": 34,
+      "days": 6,
+      "ctlOk": false,
+      "auc": 0.6471
+     }
+    },
+    "kubuntu|INIT": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 25,
+      "days": 6,
+      "auc": 0.62,
+      "ci": null,
+      "dayCi": null,
+      "tpr": 0.12,
+      "fpr": 0.08,
+      "balPrec": 0.6,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 25,
+        "share": 1,
+        "auc": 0.62
+       },
+       "CNT_T128": {
+        "kept": 22,
+        "share": 0.88,
+        "auc": 0.5682
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.56,
+       "cl": 0.5,
+       "lc": 0.48
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": {
+      "n": 25,
+      "days": 5,
+      "ctlOk": false,
+      "auc": 0.66
+     }
+    },
+    "kubuntu|NONINIT": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 13,
+      "days": 3,
+      "auc": 0.7308,
+      "ci": null,
+      "dayCi": null,
+      "tpr": 0.3846,
+      "fpr": 0,
+      "balPrec": 1,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 13,
+        "share": 1,
+        "auc": null
+       },
+       "CNT_T128": {
+        "kept": 8,
+        "share": 0.6154,
+        "auc": null
+       }
+      },
+      "ctl": {
+       "i": 0.3846,
+       "len": 0.4231,
+       "cl": 0.4615,
+       "lc": 0.4231
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": {
+      "n": 9,
+      "days": 3,
+      "ctlOk": false,
+      "auc": 0.6111
+     }
+    },
+    "ubuntu-server|ALL": {
+     "confirm": {
+      "variant": "full",
+      "holds": false,
+      "n": 10,
+      "days": 3,
+      "auc": 0.6,
+      "ci": null,
+      "dayCi": null,
+      "tpr": 0.2,
+      "fpr": 0,
+      "balPrec": 1,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 10,
+        "share": 1,
+        "auc": null
+       },
+       "CNT_T128": {
+        "kept": 8,
+        "share": 0.8,
+        "auc": null
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.55,
+       "cl": 0.5,
+       "lc": 0.5
+      },
+      "note": "n too small"
+     },
+     "discovery": {
+      "n": 11,
+      "days": 5,
+      "ctlOk": true,
+      "auc": 0.6818
+     }
+    },
+    "ubuntu-server|INIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": false,
+      "n": 10,
+      "days": 3,
+      "auc": 0.6,
+      "ci": null,
+      "dayCi": null,
+      "tpr": 0.2,
+      "fpr": 0,
+      "balPrec": 1,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 10,
+        "share": 1,
+        "auc": null
+       },
+       "CNT_T128": {
+        "kept": 8,
+        "share": 0.8,
+        "auc": null
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.55,
+       "cl": 0.5,
+       "lc": 0.5
+      },
+      "note": "n too small"
+     },
+     "discovery": {
+      "n": 10,
+      "days": 5,
+      "ctlOk": true,
+      "auc": 0.7
+     }
+    },
+    "EN_2004-07|ALL": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 101,
+      "days": 2,
+      "auc": 0.7129,
+      "ci": [
+       0.6683,
+       0.7673
+      ],
+      "dayCi": [
+       null,
+       null
+      ],
+      "tpr": 0.3069,
+      "fpr": 0.099,
+      "balPrec": 0.7561,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 101,
+        "share": 1,
+        "auc": 0.7129
+       },
+       "CNT_T128": {
+        "kept": 61,
+        "share": 0.604,
+        "auc": 0.5902
+       }
+      },
+      "ctl": {
+       "i": 0.495,
+       "len": 0.4604,
+       "cl": 0.4802,
+       "lc": 0.4802
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 178,
+      "days": 4,
+      "ctlOk": true,
+      "auc": 0.6966
+     }
+    },
+    "EN_2004-07|INIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 64,
+      "days": 2,
+      "auc": 0.6719,
+      "ci": [
+       0.6172,
+       0.7344
+      ],
+      "dayCi": [
+       null,
+       null
+      ],
+      "tpr": 0.25,
+      "fpr": 0.125,
+      "balPrec": 0.6667,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 64,
+        "share": 1,
+        "auc": 0.6719
+       },
+       "CNT_T128": {
+        "kept": 41,
+        "share": 0.6406,
+        "auc": 0.561
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.4688,
+       "cl": 0.4844,
+       "lc": 0.4766
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 128,
+      "days": 4,
+      "ctlOk": true,
+      "auc": 0.6602
+     }
+    },
+    "EN_2004-07|NONINIT": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 37,
+      "days": 2,
+      "auc": 0.7838,
+      "ci": null,
+      "dayCi": null,
+      "tpr": 0.4054,
+      "fpr": 0.0541,
+      "balPrec": 0.8824,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 37,
+        "share": 1,
+        "auc": 0.7838
+       },
+       "CNT_T128": {
+        "kept": 20,
+        "share": 0.5405,
+        "auc": 0.65
+       }
+      },
+      "ctl": {
+       "i": 0.4865,
+       "len": 0.4459,
+       "cl": 0.473,
+       "lc": 0.4865
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": {
+      "n": 50,
+      "days": 4,
+      "ctlOk": false,
+      "auc": 0.79
+     }
+    },
+    "EN_2008-11|ALL": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 309,
+      "days": 11,
+      "auc": 0.6828,
+      "ci": [
+       0.6521,
+       0.7104
+      ],
+      "dayCi": [
+       0.6554,
+       0.7019
+      ],
+      "tpr": 0.3366,
+      "fpr": 0.1036,
+      "balPrec": 0.7647,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 302,
+        "share": 0.9773,
+        "auc": 0.6805
+       },
+       "CNT_T128": {
+        "kept": 223,
+        "share": 0.7217,
+        "auc": 0.6031
+       }
+      },
+      "ctl": {
+       "i": 0.4935,
+       "len": 0.4822,
+       "cl": 0.4903,
+       "lc": 0.5
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 270,
+      "days": 10,
+      "ctlOk": true,
+      "auc": 0.6926
+     }
+    },
+    "EN_2008-11|INIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 208,
+      "days": 10,
+      "auc": 0.6394,
+      "ci": [
+       0.6034,
+       0.6779
+      ],
+      "dayCi": [
+       0.6043,
+       0.6695
+      ],
+      "tpr": 0.2981,
+      "fpr": 0.1154,
+      "balPrec": 0.7209,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 201,
+        "share": 0.9663,
+        "auc": 0.6343
+       },
+       "CNT_T128": {
+        "kept": 159,
+        "share": 0.7644,
+        "auc": 0.566
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.488,
+       "cl": 0.488,
+       "lc": 0.5096
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 179,
+      "days": 9,
+      "ctlOk": true,
+      "auc": 0.6704
+     }
+    },
+    "EN_2008-11|NONINIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 101,
+      "days": 7,
+      "auc": 0.7723,
+      "ci": [
+       0.7228,
+       0.8168
+      ],
+      "dayCi": [
+       0.6765,
+       0.8433
+      ],
+      "tpr": 0.4158,
+      "fpr": 0.0792,
+      "balPrec": 0.84,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 101,
+        "share": 1,
+        "auc": 0.7723
+       },
+       "CNT_T128": {
+        "kept": 64,
+        "share": 0.6337,
+        "auc": 0.6953
+       }
+      },
+      "ctl": {
+       "i": 0.4802,
+       "len": 0.4703,
+       "cl": 0.495,
+       "lc": 0.4802
+      },
+      "note": ""
+     },
+     "discovery": {
+      "n": 91,
+      "days": 5,
+      "ctlOk": true,
+      "auc": 0.7363
+     }
+    },
+    "EN_2012-15|ALL": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 36,
+      "days": 7,
+      "auc": 0.625,
+      "ci": null,
+      "dayCi": null,
+      "tpr": 0.1944,
+      "fpr": 0.0556,
+      "balPrec": 0.7778,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 35,
+        "share": 0.9722,
+        "auc": 0.6143
+       },
+       "CNT_T128": {
+        "kept": 28,
+        "share": 0.7778,
+        "auc": 0.5536
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.3889,
+       "cl": 0.5139,
+       "lc": 0.5139
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": {
+      "n": 86,
+      "days": 9,
+      "ctlOk": true,
+      "auc": 0.6802
+     }
+    },
+    "EN_2012-15|INIT": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 24,
+      "days": 7,
+      "auc": 0.5625,
+      "ci": null,
+      "dayCi": null,
+      "tpr": 0.125,
+      "fpr": 0.0833,
+      "balPrec": 0.6,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 24,
+        "share": 1,
+        "auc": 0.5625
+       },
+       "CNT_T128": {
+        "kept": 20,
+        "share": 0.8333,
+        "auc": 0.525
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.375,
+       "cl": 0.5,
+       "lc": 0.5
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": {
+      "n": 51,
+      "days": 7,
+      "ctlOk": true,
+      "auc": 0.6471
+     }
+    },
+    "EN_2012-15|NONINIT": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 12,
+      "days": 3,
+      "auc": 0.75,
+      "ci": null,
+      "dayCi": null,
+      "tpr": 0.3333,
+      "fpr": 0,
+      "balPrec": 1,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 11,
+        "share": 0.9167,
+        "auc": null
+       },
+       "CNT_T128": {
+        "kept": 8,
+        "share": 0.6667,
+        "auc": null
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.4167,
+       "cl": 0.5417,
+       "lc": 0.5417
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": {
+      "n": 35,
+      "days": 6,
+      "ctlOk": false,
+      "auc": 0.7286
+     }
+    },
+    "NONEN_2004-11|ALL": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 16,
+      "days": 3,
+      "auc": 0.7188,
+      "ci": null,
+      "dayCi": null,
+      "tpr": 0.1875,
+      "fpr": 0.0625,
+      "balPrec": 0.75,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 16,
+        "share": 1,
+        "auc": null
+       },
+       "CNT_T128": {
+        "kept": 11,
+        "share": 0.6875,
+        "auc": null
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.4375,
+       "cl": 0.4688,
+       "lc": 0.5
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": {
+      "n": 31,
+      "days": 6,
+      "ctlOk": true,
+      "auc": 0.6935
+     }
+    },
+    "NONEN_2004-11|INIT": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 10,
+      "days": 3,
+      "auc": 0.75,
+      "ci": null,
+      "dayCi": null,
+      "tpr": 0.3,
+      "fpr": 0.1,
+      "balPrec": 0.75,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 10,
+        "share": 1,
+        "auc": null
+       },
+       "CNT_T128": {
+        "kept": 6,
+        "share": 0.6,
+        "auc": null
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.4,
+       "cl": 0.5,
+       "lc": 0.5
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": {
+      "n": 24,
+      "days": 6,
+      "ctlOk": true,
+      "auc": 0.6458
+     }
+    },
+    "NONEN_2012-15|ALL": {
+     "confirm": {
+      "variant": "full",
+      "holds": false,
+      "n": 10,
+      "days": 6,
+      "auc": 0.5,
+      "ci": null,
+      "dayCi": null,
+      "tpr": 0,
+      "fpr": 0,
+      "balPrec": null,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 10,
+        "share": 1,
+        "auc": null
+       },
+       "CNT_T128": {
+        "kept": 10,
+        "share": 1,
+        "auc": null
+       }
+      },
+      "ctl": {
+       "i": 0.55,
+       "len": 0.55,
+       "cl": 0.5,
+       "lc": 0.5
+      },
+      "note": "n too small"
+     },
+     "discovery": {
+      "n": 17,
+      "days": 6,
+      "ctlOk": false,
+      "auc": 0.7059
+     }
+    },
+    "EN_swarm|ALL": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 402,
+      "days": 7,
+      "auc": 0.6915,
+      "ci": [
+       0.6642,
+       0.7164
+      ],
+      "dayCi": [
+       0.6739,
+       0.7067
+      ],
+      "tpr": 0.3383,
+      "fpr": 0.107,
+      "balPrec": 0.7598,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 394,
+        "share": 0.9801,
+        "auc": 0.6891
+       },
+       "CNT_T128": {
+        "kept": 274,
+        "share": 0.6816,
+        "auc": 0.5985
+       }
+      },
+      "ctl": {
+       "i": 0.4938,
+       "len": 0.4701,
+       "cl": 0.4876,
+       "lc": 0.495
+      },
+      "note": ""
+     },
+     "discovery": null
+    },
+    "EN_swarm|INIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 264,
+      "days": 7,
+      "auc": 0.6458,
+      "ci": [
+       0.6136,
+       0.6761
+      ],
+      "dayCi": [
+       0.6164,
+       0.6702
+      ],
+      "tpr": 0.2917,
+      "fpr": 0.125,
+      "balPrec": 0.7,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 257,
+        "share": 0.9735,
+        "auc": 0.642
+       },
+       "CNT_T128": {
+        "kept": 192,
+        "share": 0.7273,
+        "auc": 0.5625
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.4735,
+       "cl": 0.4867,
+       "lc": 0.5019
+      },
+      "note": ""
+     },
+     "discovery": null
+    },
+    "EN_swarm|NONINIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": true,
+      "n": 138,
+      "days": 7,
+      "auc": 0.779,
+      "ci": [
+       0.7355,
+       0.8261
+      ],
+      "dayCi": [
+       0.715,
+       0.8253
+      ],
+      "tpr": 0.4275,
+      "fpr": 0.0725,
+      "balPrec": 0.8551,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 137,
+        "share": 0.9928,
+        "auc": 0.7774
+       },
+       "CNT_T128": {
+        "kept": 82,
+        "share": 0.5942,
+        "auc": 0.6829
+       }
+      },
+      "ctl": {
+       "i": 0.4819,
+       "len": 0.4638,
+       "cl": 0.4891,
+       "lc": 0.4819
+      },
+      "note": ""
+     },
+     "discovery": null
+    },
+    "EN_notSwarm|ALL": {
+     "confirm": {
+      "variant": "full",
+      "holds": false,
+      "n": 44,
+      "days": 13,
+      "auc": 0.625,
+      "ci": [
+       0.5568,
+       0.6818
+      ],
+      "dayCi": [
+       0.575,
+       0.6636
+      ],
+      "tpr": 0.1364,
+      "fpr": 0.0227,
+      "balPrec": 0.8571,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 44,
+        "share": 1,
+        "auc": 0.625
+       },
+       "CNT_T128": {
+        "kept": 38,
+        "share": 0.8636,
+        "auc": 0.5789
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.4659,
+       "cl": 0.5114,
+       "lc": 0.5114
+      },
+      "note": "n too small"
+     },
+     "discovery": null
+    },
+    "EN_notSwarm|INIT": {
+     "confirm": {
+      "variant": "full",
+      "holds": false,
+      "n": 32,
+      "days": 12,
+      "auc": 0.5938,
+      "ci": null,
+      "dayCi": null,
+      "tpr": 0.125,
+      "fpr": 0.0313,
+      "balPrec": 0.8,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 32,
+        "share": 1,
+        "auc": 0.5938
+       },
+       "CNT_T128": {
+        "kept": 28,
+        "share": 0.875,
+        "auc": 0.5536
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.4844,
+       "cl": 0.5,
+       "lc": 0.5
+      },
+      "note": "n too small"
+     },
+     "discovery": null
+    },
+    "EN_notSwarm|NONINIT": {
+     "confirm": {
+      "variant": "VOID",
+      "holds": false,
+      "n": 12,
+      "days": 5,
+      "auc": 0.7083,
+      "ci": null,
+      "dayCi": null,
+      "tpr": 0.1667,
+      "fpr": 0,
+      "balPrec": 1,
+      "beyond": {
+       "CNT_Tinf": {
+        "kept": 12,
+        "share": 1,
+        "auc": null
+       },
+       "CNT_T128": {
+        "kept": 10,
+        "share": 0.8333,
+        "auc": null
+       }
+      },
+      "ctl": {
+       "i": 0.5,
+       "len": 0.4167,
+       "cl": 0.5417,
+       "lc": 0.5417
+      },
+      "note": "controls out of band (point estimate only)"
+     },
+     "discovery": null
+    }
+   }
+  }
+ },
+ "secondary": {
+  "LATER|EN": {
+   "n": 2378,
+   "confirm": {
+    "CNT_C8": 0.636,
+    "INIT_C8": 0.6764,
+    "ISHARE_C8": 0.6882,
+    "CNT_C32": 0.7277,
+    "INIT_C32": 0.7788,
+    "ISHARE_C32": 0.7778,
+    "CNT_C128": 0.7426,
+    "INIT_C128": 0.7994,
+    "ISHARE_C128": 0.8045,
+    "NBIN_C128": 0.7801,
+    "NDIV_C128": 0.8448,
+    "CNT_Cinf": 0.5078,
+    "INIT_Cinf": 0.804,
+    "ISHARE_Cinf": 0.8497,
+    "NBIN_Cinf": 0.8267,
+    "NDIV_Cinf": 0.8225,
+    "CNT_T8": 0.6754,
+    "INIT_T8": 0.7361,
+    "ISHARE_T8": 0.7475,
+    "CNT_T32": 0.7639,
+    "INIT_T32": 0.8152,
+    "ISHARE_T32": 0.8127,
+    "CNT_T128": 0.7876,
+    "INIT_T128": 0.8324,
+    "ISHARE_T128": 0.8196,
+    "NBIN_T128": 0.8616,
+    "NDIV_T128": 0.8694,
+    "CNT_Tinf": 0.5513,
+    "INIT_Tinf": 0.8791,
+    "ISHARE_Tinf": 0.8783,
+    "NBIN_Tinf": 0.9319,
+    "NDIV_Tinf": 0.8328,
+    "REC_C": 0.7954,
+    "FNEXT": 0.5406,
+    "CON_C": 0.5257
+   },
+   "discoveryEN": {
+    "CNT_C8": 0.6073,
+    "INIT_C8": 0.6494,
+    "ISHARE_C8": 0.6693,
+    "CNT_C32": 0.6982,
+    "INIT_C32": 0.7495,
+    "ISHARE_C32": 0.7561,
+    "CNT_C128": 0.7215,
+    "INIT_C128": 0.7836,
+    "ISHARE_C128": 0.7971,
+    "NBIN_C128": 0.7713,
+    "NDIV_C128": 0.8206,
+    "CNT_Cinf": 0.5314,
+    "INIT_Cinf": 0.819,
+    "ISHARE_Cinf": 0.8772,
+    "NBIN_Cinf": 0.8512,
+    "NDIV_Cinf": 0.8266,
+    "CNT_T8": 0.651,
+    "INIT_T8": 0.7029,
+    "ISHARE_T8": 0.7198,
+    "CNT_T32": 0.7426,
+    "INIT_T32": 0.8004,
+    "ISHARE_T32": 0.8009,
+    "CNT_T128": 0.7673,
+    "INIT_T128": 0.8181,
+    "ISHARE_T128": 0.8194,
+    "NBIN_T128": 0.8457,
+    "NDIV_T128": 0.8564,
+    "CNT_Tinf": 0.5746,
+    "INIT_Tinf": 0.8788,
+    "ISHARE_Tinf": 0.879,
+    "NBIN_Tinf": 0.9335,
+    "NDIV_Tinf": 0.8158,
+    "REC_C": 0.7737,
+    "FNEXT": 0.5172,
+    "CON_C": 0.5502
+   }
+  },
+  "LATER|DE": {
+   "n": 27,
+   "confirm": {
+    "CNT_C8": 0.7407,
+    "INIT_C8": 0.7407,
+    "ISHARE_C8": 0.6852,
+    "CNT_C32": 0.8333,
+    "INIT_C32": 0.8519,
+    "ISHARE_C32": 0.8333,
+    "CNT_C128": 0.7593,
+    "INIT_C128": 0.8889,
+    "ISHARE_C128": 0.8148,
+    "NBIN_C128": 0.7222,
+    "NDIV_C128": 0.8889,
+    "CNT_Cinf": 0.5741,
+    "INIT_Cinf": 0.8519,
+    "ISHARE_Cinf": 0.8519,
+    "NBIN_Cinf": 0.7222,
+    "NDIV_Cinf": 0.8519,
+    "CNT_T8": 0.7037,
+    "INIT_T8": 0.7593,
+    "ISHARE_T8": 0.7222,
+    "CNT_T32": 0.7963,
+    "INIT_T32": 0.8704,
+    "ISHARE_T32": 0.8704,
+    "CNT_T128": 0.8148,
+    "INIT_T128": 0.9259,
+    "ISHARE_T128": 0.8889,
+    "NBIN_T128": 0.8889,
+    "NDIV_T128": 0.963,
+    "CNT_Tinf": 0.463,
+    "INIT_Tinf": 0.8704,
+    "ISHARE_Tinf": 0.8704,
+    "NBIN_Tinf": 0.8704,
+    "NDIV_Tinf": 0.9074,
+    "REC_C": 0.8704,
+    "FNEXT": 0.5185,
+    "CON_C": 0.537
+   },
+   "discoveryEN": {
+    "CNT_C8": 0.6744,
+    "INIT_C8": 0.7442,
+    "ISHARE_C8": 0.7674,
+    "CNT_C32": 0.7558,
+    "INIT_C32": 0.8372,
+    "ISHARE_C32": 0.8837,
+    "CNT_C128": 0.7791,
+    "INIT_C128": 0.9419,
+    "ISHARE_C128": 0.8953,
+    "NBIN_C128": 0.8488,
+    "NDIV_C128": 0.9419,
+    "CNT_Cinf": 0.5465,
+    "INIT_Cinf": 0.8372,
+    "ISHARE_Cinf": 0.8605,
+    "NBIN_Cinf": 0.7907,
+    "NDIV_Cinf": 0.907,
+    "CNT_T8": 0.686,
+    "INIT_T8": 0.8023,
+    "ISHARE_T8": 0.7674,
+    "CNT_T32": 0.7791,
+    "INIT_T32": 0.9302,
+    "ISHARE_T32": 0.8837,
+    "CNT_T128": 0.7907,
+    "INIT_T128": 0.9419,
+    "ISHARE_T128": 0.8837,
+    "NBIN_T128": 0.9419,
+    "NDIV_T128": 0.9419,
+    "CNT_Tinf": 0.5233,
+    "INIT_Tinf": 0.8372,
+    "ISHARE_Tinf": 0.8372,
+    "NBIN_Tinf": 0.9186,
+    "NDIV_Tinf": 0.9302,
+    "REC_C": 0.8837,
+    "FNEXT": 0.4651,
+    "CON_C": 0.4767
+   }
+  },
+  "LATER|ES": {
+   "n": 57,
+   "confirm": {
+    "CNT_C8": 0.6404,
+    "INIT_C8": 0.6316,
+    "ISHARE_C8": 0.5965,
+    "CNT_C32": 0.7544,
+    "INIT_C32": 0.807,
+    "ISHARE_C32": 0.6842,
+    "CNT_C128": 0.886,
+    "INIT_C128": 0.886,
+    "ISHARE_C128": 0.7105,
+    "NBIN_C128": 0.807,
+    "NDIV_C128": 0.8684,
+    "CNT_Cinf": 0.5877,
+    "INIT_Cinf": 0.807,
+    "ISHARE_Cinf": 0.8421,
+    "NBIN_Cinf": 0.7719,
+    "NDIV_Cinf": 0.8421,
+    "CNT_T8": 0.7456,
+    "INIT_T8": 0.7281,
+    "ISHARE_T8": 0.6404,
+    "CNT_T32": 0.8596,
+    "INIT_T32": 0.9123,
+    "ISHARE_T32": 0.7544,
+    "CNT_T128": 0.9474,
+    "INIT_T128": 0.9474,
+    "ISHARE_T128": 0.7895,
+    "NBIN_T128": 0.8947,
+    "NDIV_T128": 0.9474,
+    "CNT_Tinf": 0.6316,
+    "INIT_Tinf": 0.8509,
+    "ISHARE_Tinf": 0.8509,
+    "NBIN_Tinf": 0.8158,
+    "NDIV_Tinf": 0.8246,
+    "REC_C": 0.8947,
+    "FNEXT": 0.3596,
+    "CON_C": 0.6228
+   },
+   "discoveryEN": {
+    "CNT_C8": 0.6545,
+    "INIT_C8": 0.6818,
+    "ISHARE_C8": 0.6727,
+    "CNT_C32": 0.8,
+    "INIT_C32": 0.8455,
+    "ISHARE_C32": 0.7727,
+    "CNT_C128": 0.8091,
+    "INIT_C128": 0.8818,
+    "ISHARE_C128": 0.8727,
+    "NBIN_C128": 0.8182,
+    "NDIV_C128": 0.8545,
+    "CNT_Cinf": 0.5545,
+    "INIT_Cinf": 0.7909,
+    "ISHARE_Cinf": 0.9,
+    "NBIN_Cinf": 0.7364,
+    "NDIV_Cinf": 0.7636,
+    "CNT_T8": 0.6727,
+    "INIT_T8": 0.7455,
+    "ISHARE_T8": 0.7545,
+    "CNT_T32": 0.8273,
+    "INIT_T32": 0.8818,
+    "ISHARE_T32": 0.8364,
+    "CNT_T128": 0.8727,
+    "INIT_T128": 0.9182,
+    "ISHARE_T128": 0.9091,
+    "NBIN_T128": 0.8818,
+    "NDIV_T128": 0.8818,
+    "CNT_Tinf": 0.5727,
+    "INIT_Tinf": 0.9455,
+    "ISHARE_Tinf": 0.9455,
+    "NBIN_Tinf": 0.8636,
+    "NDIV_Tinf": 0.7182,
+    "REC_C": 0.8182,
+    "FNEXT": 0.5455,
+    "CON_C": 0.4455
+   }
+  },
+  "LATER|IT": {
+   "n": 58,
+   "confirm": {
+    "CNT_C8": 0.7759,
+    "INIT_C8": 0.7759,
+    "ISHARE_C8": 0.75,
+    "CNT_C32": 0.7931,
+    "INIT_C32": 0.8534,
+    "ISHARE_C32": 0.819,
+    "CNT_C128": 0.7931,
+    "INIT_C128": 0.8707,
+    "ISHARE_C128": 0.8276,
+    "NBIN_C128": 0.8017,
+    "NDIV_C128": 0.8707,
+    "CNT_Cinf": 0.5259,
+    "INIT_Cinf": 0.7672,
+    "ISHARE_Cinf": 0.8448,
+    "NBIN_Cinf": 0.7069,
+    "NDIV_Cinf": 0.7328,
+    "CNT_T8": 0.8534,
+    "INIT_T8": 0.8534,
+    "ISHARE_T8": 0.8448,
+    "CNT_T32": 0.8362,
+    "INIT_T32": 0.8879,
+    "ISHARE_T32": 0.8707,
+    "CNT_T128": 0.9138,
+    "INIT_T128": 0.8966,
+    "ISHARE_T128": 0.8707,
+    "NBIN_T128": 0.8448,
+    "NDIV_T128": 0.8448,
+    "CNT_Tinf": 0.431,
+    "INIT_Tinf": 0.9052,
+    "ISHARE_Tinf": 0.9138,
+    "NBIN_Tinf": 0.8793,
+    "NDIV_Tinf": 0.8276,
+    "REC_C": 0.8707,
+    "FNEXT": 0.4397,
+    "CON_C": 0.5517
+   },
+   "discoveryEN": {
+    "CNT_C8": 0.7556,
+    "INIT_C8": 0.8,
+    "ISHARE_C8": 0.8111,
+    "CNT_C32": 0.8,
+    "INIT_C32": 0.8667,
+    "ISHARE_C32": 0.8722,
+    "CNT_C128": 0.7056,
+    "INIT_C128": 0.8778,
+    "ISHARE_C128": 0.9,
+    "NBIN_C128": 0.8167,
+    "NDIV_C128": 0.8833,
+    "CNT_Cinf": 0.4889,
+    "INIT_Cinf": 0.8556,
+    "ISHARE_Cinf": 0.9111,
+    "NBIN_Cinf": 0.7944,
+    "NDIV_Cinf": 0.8667,
+    "CNT_T8": 0.8444,
+    "INIT_T8": 0.8889,
+    "ISHARE_T8": 0.8833,
+    "CNT_T32": 0.8889,
+    "INIT_T32": 0.9333,
+    "ISHARE_T32": 0.9444,
+    "CNT_T128": 0.8778,
+    "INIT_T128": 0.9389,
+    "ISHARE_T128": 0.9,
+    "NBIN_T128": 0.9722,
+    "NDIV_T128": 0.9833,
+    "CNT_Tinf": 0.6944,
+    "INIT_Tinf": 0.9333,
+    "ISHARE_Tinf": 0.8889,
+    "NBIN_Tinf": 0.95,
+    "NDIV_Tinf": 0.9333,
+    "REC_C": 0.8889,
+    "FNEXT": 0.55,
+    "CON_C": 0.45
+   }
+  },
+  "LATER|NONEN": {
+   "n": 142,
+   "confirm": {
+    "CNT_C8": 0.7148,
+    "INIT_C8": 0.7113,
+    "ISHARE_C8": 0.6761,
+    "CNT_C32": 0.7852,
+    "INIT_C32": 0.8345,
+    "ISHARE_C32": 0.7676,
+    "CNT_C128": 0.8239,
+    "INIT_C128": 0.8803,
+    "ISHARE_C128": 0.7782,
+    "NBIN_C128": 0.7887,
+    "NDIV_C128": 0.8732,
+    "CNT_Cinf": 0.5599,
+    "INIT_Cinf": 0.7993,
+    "ISHARE_Cinf": 0.8451,
+    "NBIN_Cinf": 0.7359,
+    "NDIV_Cinf": 0.7993,
+    "CNT_T8": 0.7817,
+    "INIT_T8": 0.7852,
+    "ISHARE_T8": 0.7394,
+    "CNT_T32": 0.838,
+    "INIT_T32": 0.8944,
+    "ISHARE_T32": 0.8239,
+    "CNT_T128": 0.9085,
+    "INIT_T128": 0.9225,
+    "ISHARE_T128": 0.8415,
+    "NBIN_T128": 0.8732,
+    "NDIV_T128": 0.9085,
+    "CNT_Tinf": 0.5176,
+    "INIT_Tinf": 0.8768,
+    "ISHARE_Tinf": 0.8803,
+    "NBIN_Tinf": 0.8521,
+    "NDIV_Tinf": 0.8415,
+    "REC_C": 0.8803,
+    "FNEXT": 0.4225,
+    "CON_C": 0.5775
+   },
+   "discoveryEN": {
+    "CNT_C8": 0.7074,
+    "INIT_C8": 0.7527,
+    "ISHARE_C8": 0.7606,
+    "CNT_C32": 0.7899,
+    "INIT_C32": 0.8537,
+    "ISHARE_C32": 0.8457,
+    "CNT_C128": 0.7527,
+    "INIT_C128": 0.8936,
+    "ISHARE_C128": 0.891,
+    "NBIN_C128": 0.8245,
+    "NDIV_C128": 0.8883,
+    "CNT_Cinf": 0.5213,
+    "INIT_Cinf": 0.8324,
+    "ISHARE_Cinf": 0.8963,
+    "NBIN_Cinf": 0.7766,
+    "NDIV_Cinf": 0.8457,
+    "CNT_T8": 0.758,
+    "INIT_T8": 0.8271,
+    "ISHARE_T8": 0.8191,
+    "CNT_T32": 0.8457,
+    "INIT_T32": 0.9176,
+    "ISHARE_T32": 0.8989,
+    "CNT_T128": 0.8564,
+    "INIT_T128": 0.9335,
+    "ISHARE_T128": 0.8989,
+    "NBIN_T128": 0.9388,
+    "NDIV_T128": 0.9441,
+    "CNT_Tinf": 0.6197,
+    "INIT_Tinf": 0.9149,
+    "ISHARE_Tinf": 0.8936,
+    "NBIN_Tinf": 0.9176,
+    "NDIV_Tinf": 0.8697,
+    "REC_C": 0.867,
+    "FNEXT": 0.5293,
+    "CON_C": 0.4548
+   }
+  },
+  "FIRST|EN": {
+   "n": 446,
+   "confirm": {
+    "CNT_C8": 0.5,
+    "INIT_C8": 0.5,
+    "ISHARE_C8": 0.5,
+    "CNT_C32": 0.5,
+    "INIT_C32": 0.5,
+    "ISHARE_C32": 0.5,
+    "CNT_C128": 0.5,
+    "INIT_C128": 0.5,
+    "ISHARE_C128": 0.5,
+    "NBIN_C128": 0.5,
+    "NDIV_C128": 0.5,
+    "CNT_Cinf": 0.5,
+    "INIT_Cinf": 0.5,
+    "ISHARE_Cinf": 0.5,
+    "NBIN_Cinf": 0.5,
+    "NDIV_Cinf": 0.5,
+    "CNT_T8": 0.5583,
+    "INIT_T8": 0.5897,
+    "ISHARE_T8": 0.6009,
+    "CNT_T32": 0.6065,
+    "INIT_T32": 0.6413,
+    "ISHARE_T32": 0.6469,
+    "CNT_T128": 0.6211,
+    "INIT_T128": 0.6581,
+    "ISHARE_T128": 0.657,
+    "NBIN_T128": 0.5953,
+    "NDIV_T128": 0.6648,
+    "CNT_Tinf": 0.5191,
+    "INIT_Tinf": 0.685,
+    "ISHARE_Tinf": 0.6816,
+    "NBIN_Tinf": 0.6401,
+    "NDIV_Tinf": 0.6883,
+    "REC_C": 0.5,
+    "FNEXT": 0.5168,
+    "CON_C": 0.5
+   },
+   "discoveryEN": {
+    "CNT_C8": 0.5,
+    "INIT_C8": 0.5,
+    "ISHARE_C8": 0.5,
+    "CNT_C32": 0.5,
+    "INIT_C32": 0.5,
+    "ISHARE_C32": 0.5,
+    "CNT_C128": 0.5,
+    "INIT_C128": 0.5,
+    "ISHARE_C128": 0.5,
+    "NBIN_C128": 0.5,
+    "NDIV_C128": 0.5,
+    "CNT_Cinf": 0.5,
+    "INIT_Cinf": 0.5,
+    "ISHARE_Cinf": 0.5,
+    "NBIN_Cinf": 0.5,
+    "NDIV_Cinf": 0.5,
+    "CNT_T8": 0.574,
+    "INIT_T8": 0.5993,
+    "ISHARE_T8": 0.6105,
+    "CNT_T32": 0.6039,
+    "INIT_T32": 0.6283,
+    "ISHARE_T32": 0.6301,
+    "CNT_T128": 0.6217,
+    "INIT_T128": 0.6489,
+    "ISHARE_T128": 0.6489,
+    "NBIN_T128": 0.5955,
+    "NDIV_T128": 0.6592,
+    "CNT_Tinf": 0.5346,
+    "INIT_Tinf": 0.6919,
+    "ISHARE_Tinf": 0.691,
+    "NBIN_Tinf": 0.6367,
+    "NDIV_Tinf": 0.6854,
+    "REC_C": 0.5,
+    "FNEXT": 0.5169,
+    "CON_C": 0.5
+   }
+  },
+  "FIRST|DE": {
+   "n": 6,
+   "confirm": {
+    "CNT_C8": 0.5,
+    "INIT_C8": 0.5,
+    "ISHARE_C8": 0.5,
+    "CNT_C32": 0.5,
+    "INIT_C32": 0.5,
+    "ISHARE_C32": 0.5,
+    "CNT_C128": 0.5,
+    "INIT_C128": 0.5,
+    "ISHARE_C128": 0.5,
+    "NBIN_C128": 0.5,
+    "NDIV_C128": 0.5,
+    "CNT_Cinf": 0.5,
+    "INIT_Cinf": 0.5,
+    "ISHARE_Cinf": 0.5,
+    "NBIN_Cinf": 0.5,
+    "NDIV_Cinf": 0.5,
+    "CNT_T8": 0.5833,
+    "INIT_T8": 0.5833,
+    "ISHARE_T8": 0.5833,
+    "CNT_T32": 0.5,
+    "INIT_T32": 0.5833,
+    "ISHARE_T32": 0.6667,
+    "CNT_T128": 0.3333,
+    "INIT_T128": 0.5833,
+    "ISHARE_T128": 0.6667,
+    "NBIN_T128": 0.5833,
+    "NDIV_T128": 0.5833,
+    "CNT_Tinf": 0.5,
+    "INIT_Tinf": 0.6667,
+    "ISHARE_Tinf": 0.6667,
+    "NBIN_Tinf": 0.5833,
+    "NDIV_Tinf": 0.6667,
+    "REC_C": 0.5,
+    "FNEXT": 0,
+    "CON_C": 0.5
+   },
+   "discoveryEN": {
+    "CNT_C8": 0.5,
+    "INIT_C8": 0.5,
+    "ISHARE_C8": 0.5,
+    "CNT_C32": 0.5,
+    "INIT_C32": 0.5,
+    "ISHARE_C32": 0.5,
+    "CNT_C128": 0.5,
+    "INIT_C128": 0.5,
+    "ISHARE_C128": 0.5,
+    "NBIN_C128": 0.5,
+    "NDIV_C128": 0.5,
+    "CNT_Cinf": 0.5,
+    "INIT_Cinf": 0.5,
+    "ISHARE_Cinf": 0.5,
+    "NBIN_Cinf": 0.5,
+    "NDIV_Cinf": 0.5,
+    "CNT_T8": 0.6071,
+    "INIT_T8": 0.5714,
+    "ISHARE_T8": 0.5357,
+    "CNT_T32": 0.6786,
+    "INIT_T32": 0.6786,
+    "ISHARE_T32": 0.6429,
+    "CNT_T128": 0.6071,
+    "INIT_T128": 0.6786,
+    "ISHARE_T128": 0.6429,
+    "NBIN_T128": 0.5714,
+    "NDIV_T128": 0.6786,
+    "CNT_Tinf": 0.5714,
+    "INIT_Tinf": 0.7143,
+    "ISHARE_Tinf": 0.6786,
+    "NBIN_Tinf": 0.5714,
+    "NDIV_Tinf": 0.7143,
+    "REC_C": 0.5,
+    "FNEXT": 0.5714,
+    "CON_C": 0.5
+   }
+  },
+  "FIRST|ES": {
+   "n": 15,
+   "confirm": {
+    "CNT_C8": 0.5,
+    "INIT_C8": 0.5,
+    "ISHARE_C8": 0.5,
+    "CNT_C32": 0.5,
+    "INIT_C32": 0.5,
+    "ISHARE_C32": 0.5,
+    "CNT_C128": 0.5,
+    "INIT_C128": 0.5,
+    "ISHARE_C128": 0.5,
+    "NBIN_C128": 0.5,
+    "NDIV_C128": 0.5,
+    "CNT_Cinf": 0.5,
+    "INIT_Cinf": 0.5,
+    "ISHARE_Cinf": 0.5,
+    "NBIN_Cinf": 0.5,
+    "NDIV_Cinf": 0.5,
+    "CNT_T8": 0.5,
+    "INIT_T8": 0.5333,
+    "ISHARE_T8": 0.5667,
+    "CNT_T32": 0.5333,
+    "INIT_T32": 0.5667,
+    "ISHARE_T32": 0.6,
+    "CNT_T128": 0.5667,
+    "INIT_T128": 0.6,
+    "ISHARE_T128": 0.6,
+    "NBIN_T128": 0.5333,
+    "NDIV_T128": 0.6,
+    "CNT_Tinf": 0.5333,
+    "INIT_Tinf": 0.6333,
+    "ISHARE_Tinf": 0.6333,
+    "NBIN_Tinf": 0.5333,
+    "NDIV_Tinf": 0.6333,
+    "REC_C": 0.5,
+    "FNEXT": 0.5,
+    "CON_C": 0.5
+   },
+   "discoveryEN": {
+    "CNT_C8": 0.5,
+    "INIT_C8": 0.5,
+    "ISHARE_C8": 0.5,
+    "CNT_C32": 0.5,
+    "INIT_C32": 0.5,
+    "ISHARE_C32": 0.5,
+    "CNT_C128": 0.5,
+    "INIT_C128": 0.5,
+    "ISHARE_C128": 0.5,
+    "NBIN_C128": 0.5,
+    "NDIV_C128": 0.5,
+    "CNT_Cinf": 0.5,
+    "INIT_Cinf": 0.5,
+    "ISHARE_Cinf": 0.5,
+    "NBIN_Cinf": 0.5,
+    "NDIV_Cinf": 0.5,
+    "CNT_T8": 0.6429,
+    "INIT_T8": 0.6071,
+    "ISHARE_T8": 0.5357,
+    "CNT_T32": 0.6071,
+    "INIT_T32": 0.6429,
+    "ISHARE_T32": 0.6071,
+    "CNT_T128": 0.5714,
+    "INIT_T128": 0.6071,
+    "ISHARE_T128": 0.5714,
+    "NBIN_T128": 0.5714,
+    "NDIV_T128": 0.6071,
+    "CNT_Tinf": 0.5,
+    "INIT_Tinf": 0.6786,
+    "ISHARE_Tinf": 0.6786,
+    "NBIN_Tinf": 0.6071,
+    "NDIV_Tinf": 0.6786,
+    "REC_C": 0.5,
+    "FNEXT": 0.6429,
+    "CON_C": 0.5
+   }
+  },
+  "FIRST|IT": {
+   "n": 5,
+   "confirm": {
+    "CNT_C8": 0.5,
+    "INIT_C8": 0.5,
+    "ISHARE_C8": 0.5,
+    "CNT_C32": 0.5,
+    "INIT_C32": 0.5,
+    "ISHARE_C32": 0.5,
+    "CNT_C128": 0.5,
+    "INIT_C128": 0.5,
+    "ISHARE_C128": 0.5,
+    "NBIN_C128": 0.5,
+    "NDIV_C128": 0.5,
+    "CNT_Cinf": 0.5,
+    "INIT_Cinf": 0.5,
+    "ISHARE_Cinf": 0.5,
+    "NBIN_Cinf": 0.5,
+    "NDIV_Cinf": 0.5,
+    "CNT_T8": 0.6,
+    "INIT_T8": 0.6,
+    "ISHARE_T8": 0.6,
+    "CNT_T32": 0.6,
+    "INIT_T32": 0.6,
+    "ISHARE_T32": 0.6,
+    "CNT_T128": 0.6,
+    "INIT_T128": 0.6,
+    "ISHARE_T128": 0.6,
+    "NBIN_T128": 0.6,
+    "NDIV_T128": 0.6,
+    "CNT_Tinf": 0.5,
+    "INIT_Tinf": 0.6,
+    "ISHARE_Tinf": 0.6,
+    "NBIN_Tinf": 0.6,
+    "NDIV_Tinf": 0.4,
+    "REC_C": 0.5,
+    "FNEXT": 0.5,
+    "CON_C": 0.5
+   },
+   "discoveryEN": {
+    "CNT_C8": 0.5,
+    "INIT_C8": 0.5,
+    "ISHARE_C8": 0.5,
+    "CNT_C32": 0.5,
+    "INIT_C32": 0.5,
+    "ISHARE_C32": 0.5,
+    "CNT_C128": 0.5,
+    "INIT_C128": 0.5,
+    "ISHARE_C128": 0.5,
+    "NBIN_C128": 0.5,
+    "NDIV_C128": 0.5,
+    "CNT_Cinf": 0.5,
+    "INIT_Cinf": 0.5,
+    "ISHARE_Cinf": 0.5,
+    "NBIN_Cinf": 0.5,
+    "NDIV_Cinf": 0.5,
+    "CNT_T8": 0.65,
+    "INIT_T8": 0.65,
+    "ISHARE_T8": 0.625,
+    "CNT_T32": 0.725,
+    "INIT_T32": 0.7,
+    "ISHARE_T32": 0.675,
+    "CNT_T128": 0.7,
+    "INIT_T128": 0.7,
+    "ISHARE_T128": 0.675,
+    "NBIN_T128": 0.625,
+    "NDIV_T128": 0.7,
+    "CNT_Tinf": 0.475,
+    "INIT_Tinf": 0.7,
+    "ISHARE_Tinf": 0.7,
+    "NBIN_Tinf": 0.625,
+    "NDIV_Tinf": 0.7,
+    "REC_C": 0.5,
+    "FNEXT": 0.475,
+    "CON_C": 0.5
+   }
+  },
+  "FIRST|NONEN": {
+   "n": 26,
+   "confirm": {
+    "CNT_C8": 0.5,
+    "INIT_C8": 0.5,
+    "ISHARE_C8": 0.5,
+    "CNT_C32": 0.5,
+    "INIT_C32": 0.5,
+    "ISHARE_C32": 0.5,
+    "CNT_C128": 0.5,
+    "INIT_C128": 0.5,
+    "ISHARE_C128": 0.5,
+    "NBIN_C128": 0.5,
+    "NDIV_C128": 0.5,
+    "CNT_Cinf": 0.5,
+    "INIT_Cinf": 0.5,
+    "ISHARE_Cinf": 0.5,
+    "NBIN_Cinf": 0.5,
+    "NDIV_Cinf": 0.5,
+    "CNT_T8": 0.5385,
+    "INIT_T8": 0.5577,
+    "ISHARE_T8": 0.5769,
+    "CNT_T32": 0.5385,
+    "INIT_T32": 0.5769,
+    "ISHARE_T32": 0.6154,
+    "CNT_T128": 0.5192,
+    "INIT_T128": 0.5962,
+    "ISHARE_T128": 0.6154,
+    "NBIN_T128": 0.5577,
+    "NDIV_T128": 0.5962,
+    "CNT_Tinf": 0.5192,
+    "INIT_Tinf": 0.6346,
+    "ISHARE_Tinf": 0.6346,
+    "NBIN_Tinf": 0.5577,
+    "NDIV_Tinf": 0.5962,
+    "REC_C": 0.5,
+    "FNEXT": 0.3846,
+    "CON_C": 0.5
+   },
+   "discoveryEN": {
+    "CNT_C8": 0.5,
+    "INIT_C8": 0.5,
+    "ISHARE_C8": 0.5,
+    "CNT_C32": 0.5,
+    "INIT_C32": 0.5,
+    "ISHARE_C32": 0.5,
+    "CNT_C128": 0.5,
+    "INIT_C128": 0.5,
+    "ISHARE_C128": 0.5,
+    "NBIN_C128": 0.5,
+    "NDIV_C128": 0.5,
+    "CNT_Cinf": 0.5,
+    "INIT_Cinf": 0.5,
+    "ISHARE_Cinf": 0.5,
+    "NBIN_Cinf": 0.5,
+    "NDIV_Cinf": 0.5,
+    "CNT_T8": 0.6354,
+    "INIT_T8": 0.6146,
+    "ISHARE_T8": 0.5729,
+    "CNT_T32": 0.6771,
+    "INIT_T32": 0.6771,
+    "ISHARE_T32": 0.6458,
+    "CNT_T128": 0.6354,
+    "INIT_T128": 0.6667,
+    "ISHARE_T128": 0.6354,
+    "NBIN_T128": 0.5938,
+    "NDIV_T128": 0.6667,
+    "CNT_Tinf": 0.5104,
+    "INIT_Tinf": 0.6979,
+    "ISHARE_Tinf": 0.6875,
+    "NBIN_Tinf": 0.6042,
+    "NDIV_Tinf": 0.6979,
+    "REC_C": 0.5,
+    "FNEXT": 0.5521,
+    "CON_C": 0.5
+   }
+  }
+ },
+ "naturalPrevalence": {
+  "EN": {
+   "R1": {
+    "NONINIT": {
+     "tp": 1077,
+     "fn": 1031,
+     "fp": 545,
+     "tn": 376305,
+     "precision": 0.664,
+     "recall": 0.5109,
+     "fpr": 0.0014,
+     "prevalence": 0.0056
+    },
+    "ALL": {
+     "tp": 17293,
+     "fn": 4504,
+     "fp": 3397,
+     "tn": 394798,
+     "precision": 0.8358,
+     "recall": 0.7934,
+     "fpr": 0.0085,
+     "prevalence": 0.0519
+    },
+    "INIT": {
+     "tp": 16216,
+     "fn": 3473,
+     "fp": 2852,
+     "tn": 18493,
+     "precision": 0.8504,
+     "recall": 0.8236,
+     "fpr": 0.1336,
+     "prevalence": 0.4798
+    }
+   },
+   "POS": {
+    "NONINIT": {
+     "tp": 0,
+     "fn": 2108,
+     "fp": 0,
+     "tn": 376850,
+     "precision": 0,
+     "recall": 0,
+     "fpr": 0,
+     "prevalence": 0.0056
+    },
+    "ALL": {
+     "tp": 19689,
+     "fn": 2108,
+     "fp": 21345,
+     "tn": 376850,
+     "precision": 0.4798,
+     "recall": 0.9033,
+     "fpr": 0.0536,
+     "prevalence": 0.0519
+    },
+    "INIT": {
+     "tp": 19689,
+     "fn": 0,
+     "fp": 21345,
+     "tn": 0,
+     "precision": 0.4798,
+     "recall": 1,
+     "fpr": 1,
+     "prevalence": 0.4798
+    }
+   },
+   "R2": {
+    "NONINIT": {
+     "tp": 233,
+     "fn": 122,
+     "fp": 1950,
+     "tn": 56419,
+     "precision": 0.1067,
+     "recall": 0.6563,
+     "fpr": 0.0334,
+     "prevalence": 0.006
+    },
+    "ALL": {
+     "tp": 1769,
+     "fn": 706,
+     "fp": 2529,
+     "tn": 59671,
+     "precision": 0.4116,
+     "recall": 0.7147,
+     "fpr": 0.0407,
+     "prevalence": 0.0383
+    },
+    "INIT": {
+     "tp": 1536,
+     "fn": 584,
+     "fp": 579,
+     "tn": 3252,
+     "precision": 0.7262,
+     "recall": 0.7245,
+     "fpr": 0.1511,
+     "prevalence": 0.3562
+    }
+   }
+  },
+  "ALL": {
+   "R1": {
+    "NONINIT": {
+     "tp": 1155,
+     "fn": 1147,
+     "fp": 741,
+     "tn": 412658,
+     "precision": 0.6092,
+     "recall": 0.5017,
+     "fpr": 0.0018,
+     "prevalence": 0.0055
+    },
+    "ALL": {
+     "tp": 18045,
+     "fn": 4982,
+     "fp": 4230,
+     "tn": 434074,
+     "precision": 0.8101,
+     "recall": 0.7836,
+     "fpr": 0.0097,
+     "prevalence": 0.0499
+    },
+    "INIT": {
+     "tp": 16890,
+     "fn": 3835,
+     "fp": 3489,
+     "tn": 21416,
+     "precision": 0.8288,
+     "recall": 0.815,
+     "fpr": 0.1401,
+     "prevalence": 0.4542
+    }
+   },
+   "POS": {
+    "NONINIT": {
+     "tp": 0,
+     "fn": 2302,
+     "fp": 0,
+     "tn": 413399,
+     "precision": 0,
+     "recall": 0,
+     "fpr": 0,
+     "prevalence": 0.0055
+    },
+    "ALL": {
+     "tp": 20725,
+     "fn": 2302,
+     "fp": 24905,
+     "tn": 413399,
+     "precision": 0.4542,
+     "recall": 0.9,
+     "fpr": 0.0568,
+     "prevalence": 0.0499
+    },
+    "INIT": {
+     "tp": 20725,
+     "fn": 0,
+     "fp": 24905,
+     "tn": 0,
+     "precision": 0.4542,
+     "recall": 1,
+     "fpr": 1,
+     "prevalence": 0.4542
+    }
+   },
+   "R2": {
+    "NONINIT": {
+     "tp": 265,
+     "fn": 140,
+     "fp": 2329,
+     "tn": 72866,
+     "precision": 0.1022,
+     "recall": 0.6543,
+     "fpr": 0.031,
+     "prevalence": 0.0054
+    },
+    "ALL": {
+     "tp": 1907,
+     "fn": 791,
+     "fp": 3061,
+     "tn": 77232,
+     "precision": 0.3839,
+     "recall": 0.7068,
+     "fpr": 0.0381,
+     "prevalence": 0.0325
+    },
+    "INIT": {
+     "tp": 1642,
+     "fn": 651,
+     "fp": 732,
+     "tn": 4366,
+     "precision": 0.6917,
+     "recall": 0.7161,
+     "fpr": 0.1436,
+     "prevalence": 0.3102
+    }
+   }
+  },
+  "DE": {
+   "R1": {
+    "NONINIT": {
+     "tp": 8,
+     "fn": 13,
+     "fp": 24,
+     "tn": 10527,
+     "precision": 0.25,
+     "recall": 0.381,
+     "fpr": 0.0023,
+     "prevalence": 0.002
+    },
+    "ALL": {
+     "tp": 192,
+     "fn": 111,
+     "fp": 132,
+     "tn": 11232,
+     "precision": 0.5926,
+     "recall": 0.6337,
+     "fpr": 0.0116,
+     "prevalence": 0.026
+    },
+    "INIT": {
+     "tp": 184,
+     "fn": 98,
+     "fp": 108,
+     "tn": 705,
+     "precision": 0.6301,
+     "recall": 0.6525,
+     "fpr": 0.1328,
+     "prevalence": 0.2575
+    }
+   },
+   "POS": {
+    "NONINIT": {
+     "tp": 0,
+     "fn": 21,
+     "fp": 0,
+     "tn": 10551,
+     "precision": 0,
+     "recall": 0,
+     "fpr": 0,
+     "prevalence": 0.002
+    },
+    "ALL": {
+     "tp": 282,
+     "fn": 21,
+     "fp": 813,
+     "tn": 10551,
+     "precision": 0.2575,
+     "recall": 0.9307,
+     "fpr": 0.0715,
+     "prevalence": 0.026
+    },
+    "INIT": {
+     "tp": 282,
+     "fn": 0,
+     "fp": 813,
+     "tn": 0,
+     "precision": 0.2575,
+     "recall": 1,
+     "fpr": 1,
+     "prevalence": 0.2575
+    }
+   },
+   "R2": {
+    "INIT": {
+     "tp": 43,
+     "fn": 32,
+     "fp": 39,
+     "tn": 286,
+     "precision": 0.5244,
+     "recall": 0.5733,
+     "fpr": 0.12,
+     "prevalence": 0.1875
+    },
+    "ALL": {
+     "tp": 49,
+     "fn": 37,
+     "fp": 139,
+     "tn": 5390,
+     "precision": 0.2606,
+     "recall": 0.5698,
+     "fpr": 0.0251,
+     "prevalence": 0.0153
+    },
+    "NONINIT": {
+     "tp": 6,
+     "fn": 5,
+     "fp": 100,
+     "tn": 5104,
+     "precision": 0.0566,
+     "recall": 0.5455,
+     "fpr": 0.0192,
+     "prevalence": 0.0021
+    }
+   }
+  },
+  "NONEN": {
+   "R1": {
+    "NONINIT": {
+     "tp": 78,
+     "fn": 116,
+     "fp": 196,
+     "tn": 36353,
+     "precision": 0.2847,
+     "recall": 0.4021,
+     "fpr": 0.0054,
+     "prevalence": 0.0053
+    },
+    "ALL": {
+     "tp": 752,
+     "fn": 478,
+     "fp": 833,
+     "tn": 39276,
+     "precision": 0.4744,
+     "recall": 0.6114,
+     "fpr": 0.0208,
+     "prevalence": 0.0298
+    },
+    "INIT": {
+     "tp": 674,
+     "fn": 362,
+     "fp": 637,
+     "tn": 2923,
+     "precision": 0.5141,
+     "recall": 0.6506,
+     "fpr": 0.1789,
+     "prevalence": 0.2254
+    }
+   },
+   "POS": {
+    "NONINIT": {
+     "tp": 0,
+     "fn": 194,
+     "fp": 0,
+     "tn": 36549,
+     "precision": 0,
+     "recall": 0,
+     "fpr": 0,
+     "prevalence": 0.0053
+    },
+    "ALL": {
+     "tp": 1036,
+     "fn": 194,
+     "fp": 3560,
+     "tn": 36549,
+     "precision": 0.2254,
+     "recall": 0.8423,
+     "fpr": 0.0888,
+     "prevalence": 0.0298
+    },
+    "INIT": {
+     "tp": 1036,
+     "fn": 0,
+     "fp": 3560,
+     "tn": 0,
+     "precision": 0.2254,
+     "recall": 1,
+     "fpr": 1,
+     "prevalence": 0.2254
+    }
+   },
+   "R2": {
+    "INIT": {
+     "tp": 106,
+     "fn": 67,
+     "fp": 153,
+     "tn": 1114,
+     "precision": 0.4093,
+     "recall": 0.6127,
+     "fpr": 0.1208,
+     "prevalence": 0.1201
+    },
+    "ALL": {
+     "tp": 138,
+     "fn": 85,
+     "fp": 532,
+     "tn": 17561,
+     "precision": 0.206,
+     "recall": 0.6188,
+     "fpr": 0.0294,
+     "prevalence": 0.0122
+    },
+    "NONINIT": {
+     "tp": 32,
+     "fn": 18,
+     "fp": 379,
+     "tn": 16447,
+     "precision": 0.0779,
+     "recall": 0.64,
+     "fpr": 0.0225,
+     "prevalence": 0.003
+    }
+   }
+  },
+  "ES": {
+   "R1": {
+    "NONINIT": {
+     "tp": 31,
+     "fn": 41,
+     "fp": 45,
+     "tn": 6347,
+     "precision": 0.4079,
+     "recall": 0.4306,
+     "fpr": 0.007,
+     "prevalence": 0.0111
+    },
+    "ALL": {
+     "tp": 108,
+     "fn": 128,
+     "fp": 159,
+     "tn": 7038,
+     "precision": 0.4045,
+     "recall": 0.4576,
+     "fpr": 0.0221,
+     "prevalence": 0.0318
+    },
+    "INIT": {
+     "tp": 77,
+     "fn": 87,
+     "fp": 114,
+     "tn": 691,
+     "precision": 0.4031,
+     "recall": 0.4695,
+     "fpr": 0.1416,
+     "prevalence": 0.1692
+    }
+   },
+   "POS": {
+    "NONINIT": {
+     "tp": 0,
+     "fn": 72,
+     "fp": 0,
+     "tn": 6392,
+     "precision": 0,
+     "recall": 0,
+     "fpr": 0,
+     "prevalence": 0.0111
+    },
+    "ALL": {
+     "tp": 164,
+     "fn": 72,
+     "fp": 805,
+     "tn": 6392,
+     "precision": 0.1692,
+     "recall": 0.6949,
+     "fpr": 0.1119,
+     "prevalence": 0.0318
+    },
+    "INIT": {
+     "tp": 164,
+     "fn": 0,
+     "fp": 805,
+     "tn": 0,
+     "precision": 0.1692,
+     "recall": 1,
+     "fpr": 1,
+     "prevalence": 0.1692
+    }
+   },
+   "R2": {
+    "NONINIT": {
+     "tp": 6,
+     "fn": 9,
+     "fp": 77,
+     "tn": 2972,
+     "precision": 0.0723,
+     "recall": 0.4,
+     "fpr": 0.0253,
+     "prevalence": 0.0049
+    },
+    "ALL": {
+     "tp": 24,
+     "fn": 28,
+     "fp": 115,
+     "tn": 3241,
+     "precision": 0.1727,
+     "recall": 0.4615,
+     "fpr": 0.0343,
+     "prevalence": 0.0153
+    },
+    "INIT": {
+     "tp": 18,
+     "fn": 19,
+     "fp": 38,
+     "tn": 269,
+     "precision": 0.3214,
+     "recall": 0.4865,
+     "fpr": 0.1238,
+     "prevalence": 0.1076
+    }
+   }
+  },
+  "IT": {
+   "R1": {
+    "NONINIT": {
+     "tp": 39,
+     "fn": 62,
+     "fp": 127,
+     "tn": 19479,
+     "precision": 0.2349,
+     "recall": 0.3861,
+     "fpr": 0.0065,
+     "prevalence": 0.0051
+    },
+    "ALL": {
+     "tp": 452,
+     "fn": 239,
+     "fp": 542,
+     "tn": 21006,
+     "precision": 0.4547,
+     "recall": 0.6541,
+     "fpr": 0.0252,
+     "prevalence": 0.0311
+    },
+    "INIT": {
+     "tp": 413,
+     "fn": 177,
+     "fp": 415,
+     "tn": 1527,
+     "precision": 0.4988,
+     "recall": 0.7,
+     "fpr": 0.2137,
+     "prevalence": 0.233
+    }
+   },
+   "POS": {
+    "NONINIT": {
+     "tp": 0,
+     "fn": 101,
+     "fp": 0,
+     "tn": 19606,
+     "precision": 0,
+     "recall": 0,
+     "fpr": 0,
+     "prevalence": 0.0051
+    },
+    "ALL": {
+     "tp": 590,
+     "fn": 101,
+     "fp": 1942,
+     "tn": 19606,
+     "precision": 0.233,
+     "recall": 0.8538,
+     "fpr": 0.0901,
+     "prevalence": 0.0311
+    },
+    "INIT": {
+     "tp": 590,
+     "fn": 0,
+     "fp": 1942,
+     "tn": 0,
+     "precision": 0.233,
+     "recall": 1,
+     "fpr": 1,
+     "prevalence": 0.233
+    }
+   },
+   "R2": {
+    "INIT": {
+     "tp": 45,
+     "fn": 16,
+     "fp": 76,
+     "tn": 559,
+     "precision": 0.3719,
+     "recall": 0.7377,
+     "fpr": 0.1197,
+     "prevalence": 0.0876
+    },
+    "ALL": {
+     "tp": 65,
+     "fn": 20,
+     "fp": 278,
+     "tn": 8930,
+     "precision": 0.1895,
+     "recall": 0.7647,
+     "fpr": 0.0302,
+     "prevalence": 0.0091
+    },
+    "NONINIT": {
+     "tp": 20,
+     "fn": 4,
+     "fp": 202,
+     "tn": 8371,
+     "precision": 0.0901,
+     "recall": 0.8333,
+     "fpr": 0.0236,
+     "prevalence": 0.0028
+    }
+   }
+  }
+ },
+ "probe": {
+  "LATER|INIT|fit EN -> eval EN": {
+   "nFit": 1905,
+   "nEval": 1673,
+   "auc": 0.607,
+   "ci": [
+    0.587,
+    0.6276
+   ],
+   "nullQ95": 0.5201,
+   "table": [
+    0.56,
+    -0.06,
+    -0.15,
+    -0.14,
+    0.59,
+    0.42,
+    0.32,
+    -0.07,
+    -0.36,
+    -0.66,
+    -0.46,
+    -0.23,
+    0
+   ]
+  },
+  "LATER|INIT|fit EN -> eval NONEN": {
+   "nFit": 1905,
+   "nEval": 97,
+   "auc": 0.5103,
+   "ci": [
+    0.433,
+    0.5979
+   ],
+   "nullQ95": 0.5835,
+   "table": [
+    0.56,
+    -0.06,
+    -0.15,
+    -0.14,
+    0.59,
+    0.42,
+    0.32,
+    -0.07,
+    -0.36,
+    -0.66,
+    -0.46,
+    -0.23,
+    0
+   ]
+  },
+  "LATER|INIT|fit NONEN -> eval NONEN": {
+   "nFit": 138,
+   "nEval": 97,
+   "auc": 0.5103,
+   "ci": [
+    0.4227,
+    0.6031
+   ],
+   "nullQ95": 0.5835,
+   "table": [
+    0.41,
+    0.29,
+    -0.49,
+    0.22,
+    0.48,
+    0.58,
+    -0.77,
+    -0.24,
+    0.47,
+    -0.64,
+    0.18,
+    0.92,
+    0
+   ]
+  },
+  "LATER|NONINIT|fit EN -> eval EN": {
+   "nFit": 863,
+   "nEval": 705,
+   "auc": 0.5149,
+   "ci": [
+    0.4858,
+    0.5433
+   ],
+   "nullQ95": 0.531,
+   "table": [
+    -0.89,
+    -1.75,
+    -0.75,
+    -0.45,
+    0.3,
+    0.3,
+    0,
+    -0.03,
+    0.51,
+    0.03,
+    0.15,
+    0.28,
+    0.03
+   ]
+  },
+  "LATER|NONINIT|fit EN -> eval NONEN": {
+   "nFit": 863,
+   "nEval": 45,
+   "auc": 0.5,
+   "ci": [
+    0.3778,
+    0.6
+   ],
+   "nullQ95": 0.6226,
+   "table": [
+    -0.89,
+    -1.75,
+    -0.75,
+    -0.45,
+    0.3,
+    0.3,
+    0,
+    -0.03,
+    0.51,
+    0.03,
+    0.15,
+    0.28,
+    0.03
+   ]
+  },
+  "LATER|NONINIT|fit NONEN -> eval NONEN": {
+   "nFit": 50,
+   "nEval": 45,
+   "auc": 0.5333,
+   "ci": [
+    0.4222,
+    0.6333
+   ],
+   "nullQ95": 0.6226,
+   "table": [
+    1.39,
+    -0.41,
+    0,
+    0,
+    0.51,
+    -1.95,
+    0.29,
+    0.15,
+    -0.29,
+    0.41,
+    -0.41,
+    0,
+    0.04
+   ]
+  },
+  "FIRST|INIT|fit EN -> eval EN": {
+   "nFit": 358,
+   "nEval": 296,
+   "auc": 0.647,
+   "ci": [
+    0.5946,
+    0.6976
+   ],
+   "nullQ95": 0.5478,
+   "table": [
+    -0.33,
+    -1.25,
+    -0.1,
+    -0.21,
+    0.79,
+    -0.21,
+    0.63,
+    0.1,
+    -0.38,
+    0.22,
+    -0.33,
+    -0.46,
+    0
+   ]
+  },
+  "FIRST|NONINIT|fit EN -> eval EN": {
+   "nFit": 176,
+   "nEval": 150,
+   "auc": 0.5133,
+   "ci": [
+    0.46,
+    0.5633
+   ],
+   "nullQ95": 0.5672,
+   "table": [
+    0.41,
+    -0.69,
+    -0.15,
+    0.47,
+    0.69,
+    -0.45,
+    -0.29,
+    -0.92,
+    -0.51,
+    0.15,
+    0,
+    0.44,
+    0.06
+   ]
+  }
+ },
+ "limits": {
+  "EN": {
+   "recallByMessageIndex": {
+    "0-99": "252/432=0.58",
+    "100-499": "1363/1810=0.75",
+    "500-1999": "3588/4527=0.79",
+    "2000+": "12090/15028=0.80"
+   },
+   "fpRateByMessageIndex": {
+    "0-99": "116/10427=0.0111",
+    "100-499": "435/48746=0.0089",
+    "500-1999": "744/82676=0.0090",
+    "2000+": "2102/256346=0.0082"
+   },
+   "topFP": "hello:615 hey:387 ryan:119 hmm:101 jordan:92 jack:88 int:55 adrian:54 drac:44 mark:43 metalgeek:41 kris:40 aidan:36 heh:34 odd:34 diesel:33 abhi:33 logical:32 yeah:32 yes:32 difh:29 hmmm:27 embed:26 lol:25 okay:24 yup:24 besonen:24 how:23 spanglish:22 elsebis:21",
+   "topMissed": "was:231 user:104 ubotu:80 ubottu:61 n00b:50 root:45 hardware:43 blueskaj:27 ikonia:25 eth0:23 hamid1990:22 bazhang:21 bobslob:21 nick:19 rww:18 tritium:17 flannel:17 test:17 gui:16 zaden:16 llutz:14 seveas:13 m4ld:13 nickrud:13 pici:12 intelikey:12 jrib:11 job:11 zykotick9:11 zteam:11"
+  },
+  "DE": {
+   "recallByMessageIndex": {
+    "0-99": "33/54=0.61",
+    "100-499": "148/232=0.64",
+    "500-1999": "11/17=0.65",
+    "2000+": "0/0=0.00"
+   },
+   "fpRateByMessageIndex": {
+    "0-99": "21/2210=0.0095",
+    "100-499": "109/8761=0.0124",
+    "500-1999": "2/393=0.0051",
+    "2000+": "0/0=0.0000"
+   },
+   "topFP": "title:36 hallo:15 also:12 acpi:10 bus:9 hans:8 maze:7 hmm:4 okay:3 kann:3 wilde:3 wenn:2 nein:2 moin:2 naja:2 noktar:2 mein:1 guten:1 xrandr:1 gut:1 ansonsten:1 nopaste:1 niklasfi:1 hey:1 https:1 deswegen:1 usr:1 gute:1",
+   "topMissed": "siedhuss:9 p01nt3r:6 yaster:5 kahja:5 orcor:4 tuor:4 letothe2nd:4 sdx23:3 ppq:3 bekks:3 hamster:3 isotop7:3 k1l:2 schischibunti:2 grullers:2 sysopa:2 deem:2 dadrc:2 spiritoftux:2 zeitsofa:1 luchs:1 sds58:1 papachaotica:1 dauerflucher:1 fuchs:1 bullgard:1 minipluto:1 ring0:1 joschi:1 michi1802:1"
+  },
+  "ES": {
+   "recallByMessageIndex": {
+    "0-99": "14/29=0.48",
+    "100-499": "11/37=0.30",
+    "500-1999": "83/170=0.49",
+    "2000+": "0/0=0.00"
+   },
+   "fpRateByMessageIndex": {
+    "0-99": "12/422=0.0284",
+    "100-499": "51/2265=0.0225",
+    "500-1999": "96/4510=0.0213",
+    "2000+": "0/0=0.0000"
+   },
+   "topFP": "hola:65 gracias:19 entiendo:9 alguien:8 vale:7 jajajaja:5 aja:5 entonces:2 lol:2 suele:2 dime:2 cool:2 aber:2 bueno:2 dentro:2 buenas:2 comando:1 parece:1 buenos:1 error:1 oye:1 jajaja:1 dame:1 existe:1 correcto:1 busca:1 perdona:1 qué:1 pon:1 sólo:1",
+   "topMissed": "cossier:21 fosco:10 pupilo:9 linuxreign:9 mimecar:9 chasis:8 idroj07:8 seyacat:7 algabe:6 chiche:4 ayuda:4 gusan0r:4 renzo:3 bl4ckc00k1e:2 neoranger:2 thedemon007:2 dannylopez68:1 dabor:1 sadlymistaken:1 hashashin:1 rommel:1 mauricio:1 reisilver:1 songer7:1 jose:1 eliezer:1 erabuelo:1 moshi:1 alberto:1 doby:1"
+  },
+  "IT": {
+   "recallByMessageIndex": {
+    "0-99": "75/114=0.66",
+    "100-499": "197/271=0.73",
+    "500-1999": "180/306=0.59",
+    "2000+": "0/0=0.00"
+   },
+   "fpRateByMessageIndex": {
+    "0-99": "21/1129=0.0186",
+    "100-499": "241/8226=0.0293",
+    "500-1999": "280/12193=0.0230",
+    "2000+": "0/0=0.0000"
+   },
+   "topFP": "ciao:163 cristian:108 fra:76 calimero:31 salve:22 angel:22 matti:20 vit:17 lol:16 cioè:9 test:7 posta:5 ecco:4 scusate:4 diels:2 gipiana:2 ergo:2 sera:2 net:2 dove:2 okay:2 comunque:2 certo:2 buon:1 omg:1 giorno:1 ola:1 buongiorno:1 cerco:1 error:1",
+   "topMissed": "linux:34 jester:14 nicotano:13 mibofra:10 urus:10 akis24:9 cristian:8 stefano67:8 andrewldn:6 luca73:5 goamon:5 minavagante:5 select:4 ivan:4 fasos:4 a1b2c3:4 crisrock:4 billionaire:4 ubo:4 filippo:4 vice:4 mtjbuntu:4 carlos77:4 polden:3 giuvanni:3 gatolopez70:3 lilluz82:3 nicole89:3 pasquale:3 browser:3"
+  }
+ },
+ "controls": {
+  "wordshuf": {
+   "R1|EN": {
+    "n": 3164,
+    "auc": 0.6438
+   },
+   "R1|NONEN": {
+    "n": 339,
+    "auc": 0.5501
+   },
+   "R2|EN": {
+    "n": 871,
+    "auc": 0.5505
+   },
+   "R2|NONEN": {
+    "n": 66,
+    "auc": 0.553
+   }
+  },
+  "msgshuf": {
+   "R1|EN": {
+    "n": 2379,
+    "auc": 0.8619
+   },
+   "R1|NONEN": {
+    "n": 129,
+    "auc": 0.8605
+   },
+   "R2|EN": {
+    "n": 417,
+    "auc": 0.6547
+   },
+   "R2|NONEN": {
+    "n": 29,
+    "auc": 0.569
+   }
+  }
+ }
+}

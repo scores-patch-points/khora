@@ -1,0 +1,6349 @@
+{
+ "mode": "ud",
+ "headerSha256": "3377f5b2020b273959ab433ffc535df916d34f04148759056d3fc771430c61ad",
+ "code": {
+  "lib.mjs": "36faf1085b0c9600",
+  "ix.mjs": "d132940676488a63",
+  "stats.mjs": "df418312e03ee5af",
+  "cells.mjs": "c7bb966c2e45b320",
+  "days.json": "abfe96613771fe98"
+ },
+ "rule": {
+  "column": "INIT_Tinf",
+  "theta": 2,
+  "minN": 60,
+  "auc": 0.62,
+  "lower": 0.55,
+  "dayLower": 0.55,
+  "shufDrop": 0.05,
+  "beyondAuc": 0.6
+ },
+ "preregFile": "prereg.sha256.txt",
+ "stems": [
+  "afr",
+  "arb",
+  "bul",
+  "cat",
+  "ces",
+  "cmn",
+  "cmn-hans",
+  "cym",
+  "dan",
+  "deu",
+  "ell",
+  "eng",
+  "est",
+  "eus",
+  "fas",
+  "fin",
+  "fra",
+  "gle",
+  "glg",
+  "heb",
+  "hin",
+  "hrv",
+  "hun",
+  "hye",
+  "ind",
+  "ita",
+  "jpn",
+  "kat",
+  "kor",
+  "lav",
+  "lit",
+  "lzh",
+  "mar",
+  "mlt",
+  "nld",
+  "nob",
+  "pol",
+  "por",
+  "ron",
+  "rus",
+  "slk",
+  "slv",
+  "spa",
+  "srp",
+  "swe",
+  "tam",
+  "tel",
+  "tur",
+  "uig",
+  "ukr",
+  "urd",
+  "vie",
+  "wol"
+ ],
+ "udSplit": "test",
+ "perLanguage": {
+  "afr": {
+   "nMsg": 425,
+   "variant": "VOID",
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 96,
+     "ctl": {
+      "i": 0.4635,
+      "len": 0.6146,
+      "cl": 0.4792,
+      "lc": 0.5
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M8",
+     "n": 96,
+     "ctl": {
+      "i": 0.5104,
+      "len": 0.6563,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M4strict",
+     "n": 0
+    }
+   ],
+   "holds": false,
+   "core": false,
+   "note": "controls out of [0.45,0.55] in M4, M8 and the strict subset (or no pairs)",
+   "report": {
+    "M4": {
+     "n": 96,
+     "days": 1,
+     "ctl": {
+      "i": 0.4635,
+      "len": 0.6146,
+      "cl": 0.4792,
+      "lc": 0.5
+     },
+     "ctlOk": false,
+     "auc": 0.5052,
+     "ci": [
+      0.5,
+      0.5156
+     ],
+     "thr": null
+    },
+    "M8": {
+     "n": 96,
+     "days": 1,
+     "ctl": {
+      "i": 0.5104,
+      "len": 0.6563,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": false,
+     "auc": 0.5052,
+     "ci": [
+      0.5,
+      0.5208
+     ],
+     "thr": null
+    }
+   }
+  },
+  "arb": {
+   "nMsg": 680,
+   "variant": "VOID",
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 11,
+     "ctl": {
+      "i": 0.5,
+      "len": 0.5455,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    },
+    {
+     "variant": "M8",
+     "n": 11,
+     "ctl": {
+      "i": 0.5,
+      "len": 0.5455,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    },
+    {
+     "variant": "M4strict",
+     "n": 0
+    }
+   ],
+   "holds": false,
+   "core": false,
+   "note": "controls fine but n below the minimum (60; strict 40)",
+   "report": {
+    "M4": {
+     "n": 11,
+     "days": 1,
+     "ctl": {
+      "i": 0.5,
+      "len": 0.5455,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": true,
+     "auc": 0.5,
+     "ci": [
+      0.5,
+      0.5
+     ],
+     "thr": null
+    },
+    "M8": {
+     "n": 11,
+     "days": 1,
+     "ctl": {
+      "i": 0.5,
+      "len": 0.5455,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": true,
+     "auc": 0.5,
+     "ci": [
+      0.5,
+      0.5
+     ],
+     "thr": null
+    }
+   }
+  },
+  "bul": {
+   "nMsg": 1116,
+   "variant": "M4",
+   "n": 400,
+   "days": 1,
+   "ctl": {
+    "i": 0.52,
+    "len": 0.4725,
+    "cl": 0.5075,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 400,
+     "ctl": {
+      "i": 0.52,
+      "len": 0.4725,
+      "cl": 0.5075,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5,
+   "ci": [
+    0.4938,
+    0.5062
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5411,
+   "nullQ95Flip": 0.505,
+   "thr": {
+    "n": 400,
+    "tpr": 0,
+    "fpr": 0,
+    "balPrec": null
+   },
+   "tieShare": 0.985,
+   "bothZero": 0.985,
+   "beyondCNT_Tinf": {
+    "kept": 400,
+    "share": 1,
+    "auc": 0.5,
+    "ci": [
+     0.4938,
+     0.5062
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 377,
+    "share": 0.9425,
+    "auc": 0.5,
+    "ci": [
+     0.4947,
+     0.5053
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.5,
+    "CNT_T128": 0.5075,
+    "INIT_T128": 0.5012
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.5025,
+    "LAST_Tinf": 0.5025
+   },
+   "FNEXT": 0.4075,
+   "wordshuf": {
+    "n": 400,
+    "auc": 0.5012,
+    "ctl": {
+     "i": 0.4913,
+     "len": 0.5012,
+     "cl": 0.4975,
+     "lc": 0.5
+    },
+    "drop": -0.0012
+   },
+   "msgshuf": {
+    "n": 400,
+    "auc": 0.5038,
+    "ctl": {
+     "i": 0.5188,
+     "len": 0.4562,
+     "cl": 0.5,
+     "lc": 0.5
+    },
+    "drop": -0.0038
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 0,
+    "binomP": 1
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "cat": {
+   "nMsg": 1840,
+   "variant": "M4",
+   "n": 400,
+   "days": 1,
+   "ctl": {
+    "i": 0.51,
+    "len": 0.5437,
+    "cl": 0.4975,
+    "lc": 0.4975
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 400,
+     "ctl": {
+      "i": 0.51,
+      "len": 0.5437,
+      "cl": 0.4975,
+      "lc": 0.4975
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5138,
+   "ci": [
+    0.5025,
+    0.525
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5411,
+   "nullQ95Flip": 0.5088,
+   "thr": {
+    "n": 400,
+    "tpr": 0.0025,
+    "fpr": 0.0025,
+    "balPrec": 0.5
+   },
+   "tieShare": 0.9525,
+   "bothZero": 0.95,
+   "beyondCNT_Tinf": {
+    "kept": 394,
+    "share": 0.985,
+    "auc": 0.5127,
+    "ci": [
+     0.5038,
+     0.5228
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 315,
+    "share": 0.7875,
+    "auc": 0.5063,
+    "ci": [
+     0.4984,
+     0.5143
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.505,
+    "CNT_T128": 0.565,
+    "INIT_T128": 0.5088
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.5025,
+    "LAST_Tinf": 0.4988
+   },
+   "FNEXT": 0.3875,
+   "wordshuf": {
+    "n": 400,
+    "auc": 0.4975,
+    "ctl": {
+     "i": 0.5,
+     "len": 0.545,
+     "cl": 0.5,
+     "lc": 0.4913
+    },
+    "drop": 0.0163
+   },
+   "msgshuf": {
+    "n": 400,
+    "auc": 0.5075,
+    "ctl": {
+     "i": 0.5175,
+     "len": 0.4938,
+     "cl": 0.5062,
+     "lc": 0.4988
+    },
+    "drop": 0.0063
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 1,
+    "binomP": 0.5
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "ces": {
+   "nMsg": 628,
+   "variant": "VOID",
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 70,
+     "ctl": {
+      "i": 0.55,
+      "len": 0.5571,
+      "cl": 0.5143,
+      "lc": 0.5
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M8",
+     "n": 70,
+     "ctl": {
+      "i": 0.5714,
+      "len": 0.6286,
+      "cl": 0.5071,
+      "lc": 0.5
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M4strict",
+     "n": 15,
+     "ctl": {
+      "i": 0.5,
+      "len": 0.5,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "holds": false,
+   "core": false,
+   "note": "controls fine but n below the minimum (60; strict 40)",
+   "report": {
+    "M4": {
+     "n": 70,
+     "days": 1,
+     "ctl": {
+      "i": 0.55,
+      "len": 0.5571,
+      "cl": 0.5143,
+      "lc": 0.5
+     },
+     "ctlOk": false,
+     "auc": 0.5071,
+     "ci": [
+      0.5,
+      0.5214
+     ],
+     "thr": null
+    },
+    "M8": {
+     "n": 70,
+     "days": 1,
+     "ctl": {
+      "i": 0.5714,
+      "len": 0.6286,
+      "cl": 0.5071,
+      "lc": 0.5
+     },
+     "ctlOk": false,
+     "auc": 0.4929,
+     "ci": [
+      0.4714,
+      0.5143
+     ],
+     "thr": null
+    }
+   }
+  },
+  "cmn": {
+   "nMsg": 500,
+   "variant": "VOID",
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 41,
+     "ctl": {
+      "i": 0.4146,
+      "len": 0.4024,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M8",
+     "n": 41,
+     "ctl": {
+      "i": 0.4268,
+      "len": 0.4268,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M4strict",
+     "n": 3,
+     "ctl": {
+      "i": 0.5,
+      "len": 0.5,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "holds": false,
+   "core": false,
+   "note": "controls fine but n below the minimum (60; strict 40)",
+   "report": {
+    "M4": {
+     "n": 41,
+     "days": 1,
+     "ctl": {
+      "i": 0.4146,
+      "len": 0.4024,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": false,
+     "auc": 0.5,
+     "ci": [
+      0.5,
+      0.5
+     ],
+     "thr": null
+    },
+    "M8": {
+     "n": 41,
+     "days": 1,
+     "ctl": {
+      "i": 0.4268,
+      "len": 0.4268,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": false,
+     "auc": 0.5,
+     "ci": [
+      0.5,
+      0.5
+     ],
+     "thr": null
+    }
+   }
+  },
+  "cmn-hans": {
+   "nMsg": 500,
+   "variant": "VOID",
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 41,
+     "ctl": {
+      "i": 0.4634,
+      "len": 0.4634,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    },
+    {
+     "variant": "M8",
+     "n": 41,
+     "ctl": {
+      "i": 0.378,
+      "len": 0.4024,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M4strict",
+     "n": 4,
+     "ctl": {
+      "i": 0.5,
+      "len": 0.5,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "holds": false,
+   "core": false,
+   "note": "controls fine but n below the minimum (60; strict 40)",
+   "report": {
+    "M4": {
+     "n": 41,
+     "days": 1,
+     "ctl": {
+      "i": 0.4634,
+      "len": 0.4634,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": true,
+     "auc": 0.5,
+     "ci": [
+      0.5,
+      0.5
+     ],
+     "thr": null
+    },
+    "M8": {
+     "n": 41,
+     "days": 1,
+     "ctl": {
+      "i": 0.378,
+      "len": 0.4024,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": false,
+     "auc": 0.5,
+     "ci": [
+      0.5,
+      0.5
+     ],
+     "thr": null
+    }
+   }
+  },
+  "cym": {
+   "nMsg": 953,
+   "variant": "M4",
+   "n": 314,
+   "days": 1,
+   "ctl": {
+    "i": 0.4793,
+    "len": 0.5016,
+    "cl": 0.4873,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 314,
+     "ctl": {
+      "i": 0.4793,
+      "len": 0.5016,
+      "cl": 0.4873,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.4984,
+   "ci": [
+    0.4952,
+    0.5
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5464,
+   "nullQ95Flip": 0.5016,
+   "thr": {
+    "n": 314,
+    "tpr": 0,
+    "fpr": 0,
+    "balPrec": null
+   },
+   "tieShare": 0.9968,
+   "bothZero": 0.9968,
+   "beyondCNT_Tinf": {
+    "kept": 310,
+    "share": 0.9873,
+    "auc": 0.4984,
+    "ci": [
+     0.4952,
+     0.5
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 290,
+    "share": 0.9236,
+    "auc": 0.5,
+    "ci": [
+     0.5,
+     0.5
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.5032,
+    "CNT_T128": 0.5064,
+    "INIT_T128": 0.5
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.5048,
+    "LAST_Tinf": 0.5127
+   },
+   "FNEXT": 0.414,
+   "wordshuf": {
+    "n": 304,
+    "auc": 0.4967,
+    "ctl": {
+     "i": 0.472,
+     "len": 0.477,
+     "cl": 0.4885,
+     "lc": 0.5
+    },
+    "drop": 0.0017
+   },
+   "msgshuf": {
+    "n": 317,
+    "auc": 0.5,
+    "ctl": {
+     "i": 0.4968,
+     "len": 0.5063,
+     "cl": 0.4984,
+     "lc": 0.5016
+    },
+    "drop": -0.0016
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 0,
+    "binomP": 1
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "dan": {
+   "nMsg": 565,
+   "variant": "M4",
+   "n": 289,
+   "days": 1,
+   "ctl": {
+    "i": 0.5035,
+    "len": 0.4965,
+    "cl": 0.4931,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 289,
+     "ctl": {
+      "i": 0.5035,
+      "len": 0.4965,
+      "cl": 0.4931,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5035,
+   "ci": [
+    0.4965,
+    0.5104
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5484,
+   "nullQ95Flip": 0.5069,
+   "thr": {
+    "n": 289,
+    "tpr": 0,
+    "fpr": 0,
+    "balPrec": null
+   },
+   "tieShare": 0.9862,
+   "bothZero": 0.9862,
+   "beyondCNT_Tinf": {
+    "kept": 287,
+    "share": 0.9931,
+    "auc": 0.5017,
+    "ci": [
+     0.4948,
+     0.507
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 275,
+    "share": 0.9516,
+    "auc": 0.5018,
+    "ci": [
+     0.5,
+     0.5055
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.5035,
+    "CNT_T128": 0.5225,
+    "INIT_T128": 0.5052
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.4983,
+    "LAST_Tinf": 0.5
+   },
+   "FNEXT": 0.4031,
+   "wordshuf": {
+    "n": 288,
+    "auc": 0.5035,
+    "ctl": {
+     "i": 0.5087,
+     "len": 0.4878,
+     "cl": 0.4965,
+     "lc": 0.5
+    },
+    "drop": 0
+   },
+   "msgshuf": {
+    "n": 293,
+    "auc": 0.5,
+    "ctl": {
+     "i": 0.4949,
+     "len": 0.5102,
+     "cl": 0.4846,
+     "lc": 0.5
+    },
+    "drop": 0.0035
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 1,
+    "binomP": 0.5
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "deu": {
+   "nMsg": 977,
+   "variant": "M4",
+   "n": 400,
+   "days": 1,
+   "ctl": {
+    "i": 0.4512,
+    "len": 0.5125,
+    "cl": 0.485,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 400,
+     "ctl": {
+      "i": 0.4512,
+      "len": 0.5125,
+      "cl": 0.485,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5125,
+   "ci": [
+    0.505,
+    0.5212
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5411,
+   "nullQ95Flip": 0.5075,
+   "thr": {
+    "n": 400,
+    "tpr": 0,
+    "fpr": 0,
+    "balPrec": null
+   },
+   "tieShare": 0.975,
+   "bothZero": 0.975,
+   "beyondCNT_Tinf": {
+    "kept": 398,
+    "share": 0.995,
+    "auc": 0.5126,
+    "ci": [
+     0.505,
+     0.5214
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 380,
+    "share": 0.95,
+    "auc": 0.5079,
+    "ci": [
+     0.5026,
+     0.5145
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.4975,
+    "CNT_T128": 0.5062,
+    "INIT_T128": 0.5038
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.5012,
+    "LAST_Tinf": 0.4975
+   },
+   "FNEXT": 0.4088,
+   "wordshuf": {
+    "n": 400,
+    "auc": 0.5,
+    "ctl": {
+     "i": 0.5112,
+     "len": 0.5475,
+     "cl": 0.49,
+     "lc": 0.5
+    },
+    "drop": 0.0125
+   },
+   "msgshuf": {
+    "n": 400,
+    "auc": 0.5038,
+    "ctl": {
+     "i": 0.4662,
+     "len": 0.5437,
+     "cl": 0.4875,
+     "lc": 0.5
+    },
+    "drop": 0.0087
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 1,
+    "binomP": 0.5
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "ell": {
+   "nMsg": 456,
+   "variant": "M4",
+   "n": 134,
+   "days": 1,
+   "ctl": {
+    "i": 0.4888,
+    "len": 0.4925,
+    "cl": 0.4851,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 134,
+     "ctl": {
+      "i": 0.4888,
+      "len": 0.4925,
+      "cl": 0.4851,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5,
+   "ci": [
+    0.5,
+    0.5
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5711,
+   "nullQ95Flip": 0.5,
+   "thr": {
+    "n": 134,
+    "tpr": 0,
+    "fpr": 0,
+    "balPrec": null
+   },
+   "tieShare": 1,
+   "bothZero": 1,
+   "beyondCNT_Tinf": {
+    "kept": 132,
+    "share": 0.9851,
+    "auc": 0.5,
+    "ci": [
+     0.5,
+     0.5
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 117,
+    "share": 0.8731,
+    "auc": 0.5,
+    "ci": [
+     0.5,
+     0.5
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.4963,
+    "CNT_T128": 0.4888,
+    "INIT_T128": 0.5
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.5,
+    "LAST_Tinf": 0.5261
+   },
+   "FNEXT": 0.4963,
+   "wordshuf": {
+    "n": 128,
+    "auc": 0.5,
+    "ctl": {
+     "i": 0.5313,
+     "len": 0.4375,
+     "cl": 0.5039,
+     "lc": 0.5
+    },
+    "drop": 0
+   },
+   "msgshuf": {
+    "n": 138,
+    "auc": 0.4964,
+    "ctl": {
+     "i": 0.4891,
+     "len": 0.4601,
+     "cl": 0.4891,
+     "lc": 0.5
+    },
+    "drop": 0.0036
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 0,
+    "binomP": 1
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "eng": {
+   "nMsg": 2040,
+   "variant": "M4",
+   "n": 400,
+   "days": 1,
+   "ctl": {
+    "i": 0.4913,
+    "len": 0.4925,
+    "cl": 0.5275,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 400,
+     "ctl": {
+      "i": 0.4913,
+      "len": 0.4925,
+      "cl": 0.5275,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5138,
+   "ci": [
+    0.5012,
+    0.525
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5411,
+   "nullQ95Flip": 0.5088,
+   "thr": {
+    "n": 400,
+    "tpr": 0.005,
+    "fpr": 0,
+    "balPrec": 1
+   },
+   "tieShare": 0.9425,
+   "bothZero": 0.9375,
+   "beyondCNT_Tinf": {
+    "kept": 393,
+    "share": 0.9825,
+    "auc": 0.514,
+    "ci": [
+     0.5013,
+     0.5254
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 354,
+    "share": 0.885,
+    "auc": 0.5085,
+    "ci": [
+     0.5,
+     0.5184
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.4963,
+    "CNT_T128": 0.535,
+    "INIT_T128": 0.515
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.495,
+    "LAST_Tinf": 0.5038
+   },
+   "FNEXT": 0.4475,
+   "wordshuf": {
+    "n": 400,
+    "auc": 0.5125,
+    "ctl": {
+     "i": 0.5238,
+     "len": 0.4788,
+     "cl": 0.5238,
+     "lc": 0.4988
+    },
+    "drop": 0.0013
+   },
+   "msgshuf": {
+    "n": 400,
+    "auc": 0.505,
+    "ctl": {
+     "i": 0.4938,
+     "len": 0.495,
+     "cl": 0.525,
+     "lc": 0.4988
+    },
+    "drop": 0.0088
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 1,
+    "binomP": 0.5
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "est": {
+   "nMsg": 3206,
+   "variant": "M4",
+   "n": 400,
+   "days": 1,
+   "ctl": {
+    "i": 0.5262,
+    "len": 0.4825,
+    "cl": 0.4863,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 400,
+     "ctl": {
+      "i": 0.5262,
+      "len": 0.4825,
+      "cl": 0.4863,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.52,
+   "ci": [
+    0.51,
+    0.53
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5411,
+   "nullQ95Flip": 0.5075,
+   "thr": {
+    "n": 400,
+    "tpr": 0.01,
+    "fpr": 0.0025,
+    "balPrec": 0.8
+   },
+   "tieShare": 0.955,
+   "bothZero": 0.9525,
+   "beyondCNT_Tinf": {
+    "kept": 395,
+    "share": 0.9875,
+    "auc": 0.5203,
+    "ci": [
+     0.5101,
+     0.5304
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 342,
+    "share": 0.855,
+    "auc": 0.5088,
+    "ci": [
+     0.5029,
+     0.5161
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.505,
+    "CNT_T128": 0.55,
+    "INIT_T128": 0.5175
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.4963,
+    "LAST_Tinf": 0.5012
+   },
+   "FNEXT": 0.4213,
+   "wordshuf": {
+    "n": 400,
+    "auc": 0.5,
+    "ctl": {
+     "i": 0.4813,
+     "len": 0.475,
+     "cl": 0.4925,
+     "lc": 0.5
+    },
+    "drop": 0.02
+   },
+   "msgshuf": {
+    "n": 400,
+    "auc": 0.5188,
+    "ctl": {
+     "i": 0.51,
+     "len": 0.4825,
+     "cl": 0.4963,
+     "lc": 0.5
+    },
+    "drop": 0.0012
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 1,
+    "binomP": 0.5
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "eus": {
+   "nMsg": 1799,
+   "variant": "M4",
+   "n": 400,
+   "days": 1,
+   "ctl": {
+    "i": 0.4913,
+    "len": 0.5138,
+    "cl": 0.485,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 400,
+     "ctl": {
+      "i": 0.4913,
+      "len": 0.5138,
+      "cl": 0.485,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5088,
+   "ci": [
+    0.4988,
+    0.5212
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5411,
+   "nullQ95Flip": 0.5088,
+   "thr": {
+    "n": 400,
+    "tpr": 0.005,
+    "fpr": 0.0025,
+    "balPrec": 0.6667
+   },
+   "tieShare": 0.9525,
+   "bothZero": 0.95,
+   "beyondCNT_Tinf": {
+    "kept": 398,
+    "share": 0.995,
+    "auc": 0.5063,
+    "ci": [
+     0.4962,
+     0.5163
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 383,
+    "share": 0.9575,
+    "auc": 0.5052,
+    "ci": [
+     0.4948,
+     0.5157
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.5025,
+    "CNT_T128": 0.4963,
+    "INIT_T128": 0.5038
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.5,
+    "LAST_Tinf": 0.5
+   },
+   "FNEXT": 0.3638,
+   "wordshuf": {
+    "n": 400,
+    "auc": 0.4988,
+    "ctl": {
+     "i": 0.515,
+     "len": 0.4775,
+     "cl": 0.5025,
+     "lc": 0.4988
+    },
+    "drop": 0.0101
+   },
+   "msgshuf": {
+    "n": 400,
+    "auc": 0.5062,
+    "ctl": {
+     "i": 0.5225,
+     "len": 0.485,
+     "cl": 0.4825,
+     "lc": 0.5
+    },
+    "drop": 0.0026
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 1,
+    "binomP": 0.5
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "fas": {
+   "nMsg": 1455,
+   "variant": "M4",
+   "n": 400,
+   "days": 1,
+   "ctl": {
+    "i": 0.4637,
+    "len": 0.5062,
+    "cl": 0.5,
+    "lc": 0.4975
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 400,
+     "ctl": {
+      "i": 0.4637,
+      "len": 0.5062,
+      "cl": 0.5,
+      "lc": 0.4975
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5038,
+   "ci": [
+    0.4963,
+    0.5112
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5411,
+   "nullQ95Flip": 0.5062,
+   "thr": {
+    "n": 400,
+    "tpr": 0.005,
+    "fpr": 0.005,
+    "balPrec": 0.5
+   },
+   "tieShare": 0.9775,
+   "bothZero": 0.9725,
+   "beyondCNT_Tinf": {
+    "kept": 381,
+    "share": 0.9525,
+    "auc": 0.5039,
+    "ci": [
+     0.4974,
+     0.5105
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 370,
+    "share": 0.925,
+    "auc": 0.5054,
+    "ci": [
+     0.5,
+     0.5122
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.485,
+    "CNT_T128": 0.49,
+    "INIT_T128": 0.4988
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.505,
+    "LAST_Tinf": 0.4988
+   },
+   "FNEXT": 0.4437,
+   "wordshuf": {
+    "n": 400,
+    "auc": 0.5025,
+    "ctl": {
+     "i": 0.47,
+     "len": 0.5162,
+     "cl": 0.4963,
+     "lc": 0.5025
+    },
+    "drop": 0.0013
+   },
+   "msgshuf": {
+    "n": 400,
+    "auc": 0.5075,
+    "ctl": {
+     "i": 0.47,
+     "len": 0.5363,
+     "cl": 0.5,
+     "lc": 0.5
+    },
+    "drop": -0.0037
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 1,
+    "binomP": 0.5
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "fin": {
+   "nMsg": 1555,
+   "variant": "M4",
+   "n": 400,
+   "days": 1,
+   "ctl": {
+    "i": 0.5112,
+    "len": 0.5025,
+    "cl": 0.4888,
+    "lc": 0.5012
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 400,
+     "ctl": {
+      "i": 0.5112,
+      "len": 0.5025,
+      "cl": 0.4888,
+      "lc": 0.5012
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5162,
+   "ci": [
+    0.5025,
+    0.53
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5411,
+   "nullQ95Flip": 0.5112,
+   "thr": {
+    "n": 400,
+    "tpr": 0.0125,
+    "fpr": 0.0125,
+    "balPrec": 0.5
+   },
+   "tieShare": 0.9175,
+   "bothZero": 0.915,
+   "beyondCNT_Tinf": {
+    "kept": 393,
+    "share": 0.9825,
+    "auc": 0.514,
+    "ci": [
+     0.5,
+     0.528
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 368,
+    "share": 0.92,
+    "auc": 0.5041,
+    "ci": [
+     0.4932,
+     0.5163
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.4963,
+    "CNT_T128": 0.5212,
+    "INIT_T128": 0.5175
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.5012,
+    "LAST_Tinf": 0.495
+   },
+   "FNEXT": 0.4788,
+   "wordshuf": {
+    "n": 400,
+    "auc": 0.4925,
+    "ctl": {
+     "i": 0.4975,
+     "len": 0.4863,
+     "cl": 0.4888,
+     "lc": 0.5
+    },
+    "drop": 0.0237
+   },
+   "msgshuf": {
+    "n": 400,
+    "auc": 0.51,
+    "ctl": {
+     "i": 0.5025,
+     "len": 0.4763,
+     "cl": 0.4738,
+     "lc": 0.5
+    },
+    "drop": 0.0062
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 1,
+    "binomP": 0.5
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "fra": {
+   "nMsg": 416,
+   "variant": "M4",
+   "n": 323,
+   "days": 1,
+   "ctl": {
+    "i": 0.5062,
+    "len": 0.5294,
+    "cl": 0.5077,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 323,
+     "ctl": {
+      "i": 0.5062,
+      "len": 0.5294,
+      "cl": 0.5077,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5015,
+   "ci": [
+    0.5,
+    0.5046
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5458,
+   "nullQ95Flip": 0.5015,
+   "thr": {
+    "n": 323,
+    "tpr": 0,
+    "fpr": 0,
+    "balPrec": null
+   },
+   "tieShare": 0.9969,
+   "bothZero": 0.9969,
+   "beyondCNT_Tinf": {
+    "kept": 320,
+    "share": 0.9907,
+    "auc": 0.5016,
+    "ci": [
+     0.5,
+     0.5047
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 308,
+    "share": 0.9536,
+    "auc": 0.5016,
+    "ci": [
+     0.5,
+     0.5065
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.4954,
+    "CNT_T128": 0.4985,
+    "INIT_T128": 0.5
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.4969,
+    "LAST_Tinf": 0.4969
+   },
+   "FNEXT": 0.3545,
+   "wordshuf": {
+    "n": 325,
+    "auc": 0.4969,
+    "ctl": {
+     "i": 0.4954,
+     "len": 0.4923,
+     "cl": 0.5031,
+     "lc": 0.5015
+    },
+    "drop": 0.0046
+   },
+   "msgshuf": {
+    "n": 323,
+    "auc": 0.5015,
+    "ctl": {
+     "i": 0.5774,
+     "len": 0.5139,
+     "cl": 0.5093,
+     "lc": 0.5
+    },
+    "drop": 0
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 1,
+    "binomP": 0.5
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "gle": {
+   "nMsg": 450,
+   "variant": "M8",
+   "n": 292,
+   "days": 1,
+   "ctl": {
+    "i": 0.4726,
+    "len": 0.4658,
+    "cl": 0.488,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 294,
+     "ctl": {
+      "i": 0.449,
+      "len": 0.449,
+      "cl": 0.4932,
+      "lc": 0.4966
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M8",
+     "n": 292,
+     "ctl": {
+      "i": 0.4726,
+      "len": 0.4658,
+      "cl": 0.488,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5034,
+   "ci": [
+    0.5,
+    0.5086
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5481,
+   "nullQ95Flip": 0.5034,
+   "thr": {
+    "n": 292,
+    "tpr": 0,
+    "fpr": 0,
+    "balPrec": null
+   },
+   "tieShare": 0.9932,
+   "bothZero": 0.9932,
+   "beyondCNT_Tinf": {
+    "kept": 282,
+    "share": 0.9658,
+    "auc": 0.5035,
+    "ci": [
+     0.5,
+     0.5089
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 277,
+    "share": 0.9486,
+    "auc": 0.5018,
+    "ci": [
+     0.5,
+     0.5054
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.4983,
+    "CNT_T128": 0.4983,
+    "INIT_T128": 0.5
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.4966,
+    "LAST_Tinf": 0.5086
+   },
+   "FNEXT": 0.4161,
+   "wordshuf": {
+    "n": 294,
+    "auc": 0.5,
+    "ctl": {
+     "i": 0.4473,
+     "len": 0.4609,
+     "cl": 0.4966,
+     "lc": 0.5
+    },
+    "drop": 0.0034
+   },
+   "msgshuf": {
+    "n": 295,
+    "auc": 0.5051,
+    "ctl": {
+     "i": 0.5136,
+     "len": 0.4576,
+     "cl": 0.4966,
+     "lc": 0.5
+    },
+    "drop": -0.0017
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 1,
+    "binomP": 0.5
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "glg": {
+   "nMsg": 861,
+   "variant": "M4",
+   "n": 231,
+   "days": 1,
+   "ctl": {
+    "i": 0.5152,
+    "len": 0.4762,
+    "cl": 0.4935,
+    "lc": 0.5022
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 231,
+     "ctl": {
+      "i": 0.5152,
+      "len": 0.4762,
+      "cl": 0.4935,
+      "lc": 0.5022
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5,
+   "ci": [
+    0.4935,
+    0.5065
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5541,
+   "nullQ95Flip": 0.5043,
+   "thr": {
+    "n": 231,
+    "tpr": 0,
+    "fpr": 0,
+    "balPrec": null
+   },
+   "tieShare": 0.9913,
+   "bothZero": 0.9913,
+   "beyondCNT_Tinf": {
+    "kept": 222,
+    "share": 0.961,
+    "auc": 0.5,
+    "ci": [
+     0.4932,
+     0.5068
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 219,
+    "share": 0.9481,
+    "auc": 0.5023,
+    "ci": [
+     0.5,
+     0.5068
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.4935,
+    "CNT_T128": 0.4978,
+    "INIT_T128": 0.5022
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.4978,
+    "LAST_Tinf": 0.5
+   },
+   "FNEXT": 0.3961,
+   "wordshuf": {
+    "n": 231,
+    "auc": 0.5022,
+    "ctl": {
+     "i": 0.5303,
+     "len": 0.4675,
+     "cl": 0.5108,
+     "lc": 0.5
+    },
+    "drop": -0.0022
+   },
+   "msgshuf": {
+    "n": 230,
+    "auc": 0.4978,
+    "ctl": {
+     "i": 0.513,
+     "len": 0.4957,
+     "cl": 0.5,
+     "lc": 0.5
+    },
+    "drop": 0.0022
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 0,
+    "binomP": 1
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "heb": {
+   "nMsg": 491,
+   "variant": "M4",
+   "n": 239,
+   "days": 1,
+   "ctl": {
+    "i": 0.4749,
+    "len": 0.4749,
+    "cl": 0.5,
+    "lc": 0.4979
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 239,
+     "ctl": {
+      "i": 0.4749,
+      "len": 0.4749,
+      "cl": 0.5,
+      "lc": 0.4979
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5146,
+   "ci": [
+    0.5042,
+    0.5272
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5532,
+   "nullQ95Flip": 0.5105,
+   "thr": {
+    "n": 239,
+    "tpr": 0.0042,
+    "fpr": 0.0042,
+    "balPrec": 0.5
+   },
+   "tieShare": 0.9623,
+   "bothZero": 0.9623,
+   "beyondCNT_Tinf": {
+    "kept": 233,
+    "share": 0.9749,
+    "auc": 0.515,
+    "ci": [
+     0.5043,
+     0.5279
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 219,
+    "share": 0.9163,
+    "auc": 0.5068,
+    "ci": [
+     0.4977,
+     0.5183
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.5042,
+    "CNT_T128": 0.5272,
+    "INIT_T128": 0.5126
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.5105,
+    "LAST_Tinf": 0.5084
+   },
+   "FNEXT": 0.364,
+   "wordshuf": {
+    "n": 247,
+    "auc": 0.504,
+    "ctl": {
+     "i": 0.4291,
+     "len": 0.419,
+     "cl": 0.5,
+     "lc": 0.5
+    },
+    "drop": 0.0106
+   },
+   "msgshuf": {
+    "n": 238,
+    "auc": 0.5021,
+    "ctl": {
+     "i": 0.4601,
+     "len": 0.4874,
+     "cl": 0.5,
+     "lc": 0.5
+    },
+    "drop": 0.0125
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 1,
+    "binomP": 0.5
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "hin": {
+   "nMsg": 1684,
+   "variant": "VOID",
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 400,
+     "ctl": {
+      "i": 0.4325,
+      "len": 0.54,
+      "cl": 0.5012,
+      "lc": 0.5
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M8",
+     "n": 400,
+     "ctl": {
+      "i": 0.3937,
+      "len": 0.5413,
+      "cl": 0.4988,
+      "lc": 0.4988
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M4strict",
+     "n": 23,
+     "ctl": {
+      "i": 0.5,
+      "len": 0.5,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "holds": false,
+   "core": false,
+   "note": "controls fine but n below the minimum (60; strict 40)",
+   "report": {
+    "M4": {
+     "n": 400,
+     "days": 1,
+     "ctl": {
+      "i": 0.4325,
+      "len": 0.54,
+      "cl": 0.5012,
+      "lc": 0.5
+     },
+     "ctlOk": false,
+     "auc": 0.5288,
+     "ci": [
+      0.5162,
+      0.5413
+     ],
+     "thr": null
+    },
+    "M8": {
+     "n": 400,
+     "days": 1,
+     "ctl": {
+      "i": 0.3937,
+      "len": 0.5413,
+      "cl": 0.4988,
+      "lc": 0.4988
+     },
+     "ctlOk": false,
+     "auc": 0.5225,
+     "ci": [
+      0.5088,
+      0.5363
+     ],
+     "thr": null
+    }
+   }
+  },
+  "hrv": {
+   "nMsg": 1136,
+   "variant": "VOID",
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 400,
+     "ctl": {
+      "i": 0.505,
+      "len": 0.5837,
+      "cl": 0.4963,
+      "lc": 0.5
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M8",
+     "n": 400,
+     "ctl": {
+      "i": 0.5337,
+      "len": 0.5513,
+      "cl": 0.4988,
+      "lc": 0.5
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M4strict",
+     "n": 30,
+     "ctl": {
+      "i": 0.5,
+      "len": 0.5,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "holds": false,
+   "core": false,
+   "note": "controls fine but n below the minimum (60; strict 40)",
+   "report": {
+    "M4": {
+     "n": 400,
+     "days": 1,
+     "ctl": {
+      "i": 0.505,
+      "len": 0.5837,
+      "cl": 0.4963,
+      "lc": 0.5
+     },
+     "ctlOk": false,
+     "auc": 0.5088,
+     "ci": [
+      0.4988,
+      0.5188
+     ],
+     "thr": null
+    },
+    "M8": {
+     "n": 400,
+     "days": 1,
+     "ctl": {
+      "i": 0.5337,
+      "len": 0.5513,
+      "cl": 0.4988,
+      "lc": 0.5
+     },
+     "ctlOk": false,
+     "auc": 0.505,
+     "ci": [
+      0.495,
+      0.5162
+     ],
+     "thr": null
+    }
+   }
+  },
+  "hun": {
+   "nMsg": 449,
+   "variant": "M4",
+   "n": 396,
+   "days": 1,
+   "ctl": {
+    "i": 0.4912,
+    "len": 0.4785,
+    "cl": 0.5051,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 396,
+     "ctl": {
+      "i": 0.4912,
+      "len": 0.4785,
+      "cl": 0.5051,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5126,
+   "ci": [
+    0.5051,
+    0.5215
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5413,
+   "nullQ95Flip": 0.5076,
+   "thr": {
+    "n": 396,
+    "tpr": 0.0051,
+    "fpr": 0,
+    "balPrec": 1
+   },
+   "tieShare": 0.9697,
+   "bothZero": 0.9697,
+   "beyondCNT_Tinf": {
+    "kept": 392,
+    "share": 0.9899,
+    "auc": 0.5128,
+    "ci": [
+     0.5051,
+     0.5204
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 373,
+    "share": 0.9419,
+    "auc": 0.508,
+    "ci": [
+     0.5013,
+     0.5161
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.4949,
+    "CNT_T128": 0.5202,
+    "INIT_T128": 0.5126
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.5013,
+    "LAST_Tinf": 0.5013
+   },
+   "FNEXT": 0.4583,
+   "wordshuf": {
+    "n": 394,
+    "auc": 0.4975,
+    "ctl": {
+     "i": 0.4911,
+     "len": 0.4467,
+     "cl": 0.4848,
+     "lc": 0.5
+    },
+    "drop": 0.0151
+   },
+   "msgshuf": {
+    "n": 389,
+    "auc": 0.5064,
+    "ctl": {
+     "i": 0.5141,
+     "len": 0.4769,
+     "cl": 0.4961,
+     "lc": 0.5
+    },
+    "drop": 0.0062
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 1,
+    "binomP": 0.5
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "hye": {
+   "nMsg": 600,
+   "variant": "M4",
+   "n": 357,
+   "days": 1,
+   "ctl": {
+    "i": 0.521,
+    "len": 0.5476,
+    "cl": 0.4776,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 357,
+     "ctl": {
+      "i": 0.521,
+      "len": 0.5476,
+      "cl": 0.4776,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5056,
+   "ci": [
+    0.4986,
+    0.514
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5435,
+   "nullQ95Flip": 0.5056,
+   "thr": {
+    "n": 357,
+    "tpr": 0.0028,
+    "fpr": 0,
+    "balPrec": 1
+   },
+   "tieShare": 0.9776,
+   "bothZero": 0.9776,
+   "beyondCNT_Tinf": {
+    "kept": 353,
+    "share": 0.9888,
+    "auc": 0.5057,
+    "ci": [
+     0.4986,
+     0.5156
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 340,
+    "share": 0.9524,
+    "auc": 0.5059,
+    "ci": [
+     0.5,
+     0.5132
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.4986,
+    "CNT_T128": 0.5056,
+    "INIT_T128": 0.5028
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.5,
+    "LAST_Tinf": 0.4972
+   },
+   "FNEXT": 0.4482,
+   "wordshuf": {
+    "n": 334,
+    "auc": 0.4985,
+    "ctl": {
+     "i": 0.5045,
+     "len": 0.5284,
+     "cl": 0.482,
+     "lc": 0.5
+    },
+    "drop": 0.0071
+   },
+   "msgshuf": {
+    "n": 360,
+    "auc": 0.5083,
+    "ctl": {
+     "i": 0.5014,
+     "len": 0.5458,
+     "cl": 0.4931,
+     "lc": 0.5
+    },
+    "drop": -0.0027
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 1,
+    "binomP": 0.5
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "ind": {
+   "nMsg": 557,
+   "variant": "M4",
+   "n": 400,
+   "days": 1,
+   "ctl": {
+    "i": 0.475,
+    "len": 0.455,
+    "cl": 0.4925,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 400,
+     "ctl": {
+      "i": 0.475,
+      "len": 0.455,
+      "cl": 0.4925,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5,
+   "ci": [
+    0.4938,
+    0.5062
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5411,
+   "nullQ95Flip": 0.505,
+   "thr": {
+    "n": 400,
+    "tpr": 0,
+    "fpr": 0,
+    "balPrec": null
+   },
+   "tieShare": 0.985,
+   "bothZero": 0.985,
+   "beyondCNT_Tinf": {
+    "kept": 380,
+    "share": 0.95,
+    "auc": 0.5026,
+    "ci": [
+     0.4987,
+     0.5079
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 378,
+    "share": 0.945,
+    "auc": 0.504,
+    "ci": [
+     0.5,
+     0.5093
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.4788,
+    "CNT_T128": 0.4925,
+    "INIT_T128": 0.5012
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.5,
+    "LAST_Tinf": 0.4975
+   },
+   "FNEXT": 0.4325,
+   "wordshuf": {
+    "n": 400,
+    "auc": 0.5,
+    "ctl": {
+     "i": 0.49,
+     "len": 0.44,
+     "cl": 0.4913,
+     "lc": 0.5
+    },
+    "drop": 0
+   },
+   "msgshuf": {
+    "n": 400,
+    "auc": 0.5,
+    "ctl": {
+     "i": 0.455,
+     "len": 0.4313,
+     "cl": 0.4888,
+     "lc": 0.5
+    },
+    "drop": 0
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 0,
+    "binomP": 1
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "ita": {
+   "nMsg": 482,
+   "variant": "M4",
+   "n": 291,
+   "days": 1,
+   "ctl": {
+    "i": 0.5326,
+    "len": 0.5344,
+    "cl": 0.4914,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 291,
+     "ctl": {
+      "i": 0.5326,
+      "len": 0.5344,
+      "cl": 0.4914,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.4983,
+   "ci": [
+    0.4948,
+    0.5
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5482,
+   "nullQ95Flip": 0.5017,
+   "thr": {
+    "n": 291,
+    "tpr": 0,
+    "fpr": 0,
+    "balPrec": null
+   },
+   "tieShare": 0.9966,
+   "bothZero": 0.9966,
+   "beyondCNT_Tinf": {
+    "kept": 287,
+    "share": 0.9863,
+    "auc": 0.5,
+    "ci": [
+     0.5,
+     0.5
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 278,
+    "share": 0.9553,
+    "auc": 0.5,
+    "ci": [
+     0.5,
+     0.5
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.4931,
+    "CNT_T128": 0.5017,
+    "INIT_T128": 0.4983
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.4983,
+    "LAST_Tinf": 0.5
+   },
+   "FNEXT": 0.3625,
+   "wordshuf": {
+    "n": 300,
+    "auc": 0.4983,
+    "ctl": {
+     "i": 0.4967,
+     "len": 0.565,
+     "cl": 0.495,
+     "lc": 0.5
+    },
+    "drop": 0
+   },
+   "msgshuf": {
+    "n": 303,
+    "auc": 0.5,
+    "ctl": {
+     "i": 0.5611,
+     "len": 0.5792,
+     "cl": 0.4967,
+     "lc": 0.5
+    },
+    "drop": -0.0017
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 0,
+    "binomP": 1
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "jpn": {
+   "nMsg": 543,
+   "variant": "VOID",
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 85,
+     "ctl": {
+      "i": 0.4588,
+      "len": 0.4471,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M8",
+     "n": 85,
+     "ctl": {
+      "i": 0.3882,
+      "len": 0.5118,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M4strict",
+     "n": 7,
+     "ctl": {
+      "i": 0.5,
+      "len": 0.5,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "holds": false,
+   "core": false,
+   "note": "controls fine but n below the minimum (60; strict 40)",
+   "report": {
+    "M4": {
+     "n": 85,
+     "days": 1,
+     "ctl": {
+      "i": 0.4588,
+      "len": 0.4471,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": false,
+     "auc": 0.5,
+     "ci": [
+      0.4824,
+      0.5176
+     ],
+     "thr": null
+    },
+    "M8": {
+     "n": 85,
+     "days": 1,
+     "ctl": {
+      "i": 0.3882,
+      "len": 0.5118,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": false,
+     "auc": 0.5,
+     "ci": [
+      0.4824,
+      0.5176
+     ],
+     "thr": null
+    }
+   }
+  },
+  "kat": {
+   "nMsg": 481,
+   "variant": "M8",
+   "n": 187,
+   "days": 1,
+   "ctl": {
+    "i": 0.4599,
+    "len": 0.5053,
+    "cl": 0.5,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 187,
+     "ctl": {
+      "i": 0.4198,
+      "len": 0.5348,
+      "cl": 0.4866,
+      "lc": 0.5
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M8",
+     "n": 187,
+     "ctl": {
+      "i": 0.4599,
+      "len": 0.5053,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5,
+   "ci": [
+    0.5,
+    0.5
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5601,
+   "nullQ95Flip": 0.5,
+   "thr": {
+    "n": 187,
+    "tpr": 0,
+    "fpr": 0,
+    "balPrec": null
+   },
+   "tieShare": 1,
+   "bothZero": 1,
+   "beyondCNT_Tinf": {
+    "kept": 186,
+    "share": 0.9947,
+    "auc": 0.5,
+    "ci": [
+     0.5,
+     0.5
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 182,
+    "share": 0.9733,
+    "auc": 0.5,
+    "ci": [
+     0.5,
+     0.5
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.4973,
+    "CNT_T128": 0.4973,
+    "INIT_T128": 0.5
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.5027,
+    "LAST_Tinf": 0.5
+   },
+   "FNEXT": 0.4813,
+   "wordshuf": {
+    "n": 189,
+    "auc": 0.5,
+    "ctl": {
+     "i": 0.4947,
+     "len": 0.4947,
+     "cl": 0.4868,
+     "lc": 0.5
+    },
+    "drop": 0
+   },
+   "msgshuf": {
+    "n": 188,
+    "auc": 0.5027,
+    "ctl": {
+     "i": 0.4441,
+     "len": 0.4894,
+     "cl": 0.4867,
+     "lc": 0.5
+    },
+    "drop": -0.0027
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 0,
+    "binomP": 1
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "kor": {
+   "nMsg": 989,
+   "variant": "VOID",
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 41,
+     "ctl": {
+      "i": 0.4756,
+      "len": 0.4878,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    },
+    {
+     "variant": "M8",
+     "n": 41,
+     "ctl": {
+      "i": 0.4024,
+      "len": 0.4878,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M4strict",
+     "n": 9,
+     "ctl": {
+      "i": 0.5,
+      "len": 0.5,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "holds": false,
+   "core": false,
+   "note": "controls fine but n below the minimum (60; strict 40)",
+   "report": {
+    "M4": {
+     "n": 41,
+     "days": 1,
+     "ctl": {
+      "i": 0.4756,
+      "len": 0.4878,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": true,
+     "auc": 0.5,
+     "ci": [
+      0.5,
+      0.5
+     ],
+     "thr": null
+    },
+    "M8": {
+     "n": 41,
+     "days": 1,
+     "ctl": {
+      "i": 0.4024,
+      "len": 0.4878,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": false,
+     "auc": 0.5,
+     "ci": [
+      0.5,
+      0.5
+     ],
+     "thr": null
+    }
+   }
+  },
+  "lav": {
+   "nMsg": 2409,
+   "variant": "M4",
+   "n": 400,
+   "days": 1,
+   "ctl": {
+    "i": 0.5038,
+    "len": 0.505,
+    "cl": 0.5012,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 400,
+     "ctl": {
+      "i": 0.5038,
+      "len": 0.505,
+      "cl": 0.5012,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5088,
+   "ci": [
+    0.4988,
+    0.5188
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5411,
+   "nullQ95Flip": 0.5088,
+   "thr": {
+    "n": 400,
+    "tpr": 0.0025,
+    "fpr": 0.0025,
+    "balPrec": 0.5
+   },
+   "tieShare": 0.9575,
+   "bothZero": 0.9575,
+   "beyondCNT_Tinf": {
+    "kept": 398,
+    "share": 0.995,
+    "auc": 0.5088,
+    "ci": [
+     0.4987,
+     0.5188
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 360,
+    "share": 0.9,
+    "auc": 0.5069,
+    "ci": [
+     0.4972,
+     0.5167
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.5038,
+    "CNT_T128": 0.5262,
+    "INIT_T128": 0.5075
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.5,
+    "LAST_Tinf": 0.5025
+   },
+   "FNEXT": 0.4063,
+   "wordshuf": {
+    "n": 400,
+    "auc": 0.5025,
+    "ctl": {
+     "i": 0.5088,
+     "len": 0.5175,
+     "cl": 0.4975,
+     "lc": 0.5
+    },
+    "drop": 0.0063
+   },
+   "msgshuf": {
+    "n": 400,
+    "auc": 0.51,
+    "ctl": {
+     "i": 0.4763,
+     "len": 0.515,
+     "cl": 0.4963,
+     "lc": 0.4988
+    },
+    "drop": -0.0012
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 1,
+    "binomP": 0.5
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "lit": {
+   "nMsg": 684,
+   "variant": "M4",
+   "n": 130,
+   "days": 1,
+   "ctl": {
+    "i": 0.5115,
+    "len": 0.5038,
+    "cl": 0.5077,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 130,
+     "ctl": {
+      "i": 0.5115,
+      "len": 0.5038,
+      "cl": 0.5077,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5115,
+   "ci": [
+    0.4962,
+    0.5269
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5721,
+   "nullQ95Flip": 0.5115,
+   "thr": {
+    "n": 130,
+    "tpr": 0,
+    "fpr": 0,
+    "balPrec": null
+   },
+   "tieShare": 0.9615,
+   "bothZero": 0.9615,
+   "beyondCNT_Tinf": {
+    "kept": 130,
+    "share": 1,
+    "auc": 0.5115,
+    "ci": [
+     0.4962,
+     0.5269
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 124,
+    "share": 0.9538,
+    "auc": 0.5121,
+    "ci": [
+     0.5,
+     0.5282
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.5038,
+    "CNT_T128": 0.5231,
+    "INIT_T128": 0.5154
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.5,
+    "LAST_Tinf": 0.4962
+   },
+   "FNEXT": 0.4462,
+   "wordshuf": {
+    "n": 126,
+    "auc": 0.496,
+    "ctl": {
+     "i": 0.5,
+     "len": 0.5357,
+     "cl": 0.5159,
+     "lc": 0.5
+    },
+    "drop": 0.0155
+   },
+   "msgshuf": {
+    "n": 126,
+    "auc": 0.504,
+    "ctl": {
+     "i": 0.5397,
+     "len": 0.496,
+     "cl": 0.496,
+     "lc": 0.5
+    },
+    "drop": 0.0075
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 1,
+    "binomP": 0.5
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "lzh": {
+   "nMsg": 5528,
+   "variant": "VOID",
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 0
+    },
+    {
+     "variant": "M8",
+     "n": 0
+    },
+    {
+     "variant": "M4strict",
+     "n": 0
+    }
+   ],
+   "holds": false,
+   "core": false,
+   "note": "controls out of [0.45,0.55] in M4, M8 and the strict subset (or no pairs)",
+   "report": {
+    "M4": {
+     "n": 0,
+     "days": 0
+    },
+    "M8": {
+     "n": 0,
+     "days": 0
+    }
+   }
+  },
+  "mar": {
+   "nMsg": 47,
+   "variant": "VOID",
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 1,
+     "ctl": {
+      "i": 1,
+      "len": 0.5,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M8",
+     "n": 1,
+     "ctl": {
+      "i": 1,
+      "len": 0.5,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M4strict",
+     "n": 0
+    }
+   ],
+   "holds": false,
+   "core": false,
+   "note": "controls out of [0.45,0.55] in M4, M8 and the strict subset (or no pairs)",
+   "report": {
+    "M4": {
+     "n": 1,
+     "days": 1,
+     "ctl": {
+      "i": 1,
+      "len": 0.5,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": false,
+     "auc": 0.5,
+     "thr": null
+    },
+    "M8": {
+     "n": 1,
+     "days": 1,
+     "ctl": {
+      "i": 1,
+      "len": 0.5,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": false,
+     "auc": 0.5,
+     "thr": null
+    }
+   }
+  },
+  "mlt": {
+   "nMsg": 518,
+   "variant": "VOID",
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 53,
+     "ctl": {
+      "i": 0.5094,
+      "len": 0.5283,
+      "cl": 0.5,
+      "lc": 0.5094
+     },
+     "ctlOk": true
+    },
+    {
+     "variant": "M8",
+     "n": 52,
+     "ctl": {
+      "i": 0.5192,
+      "len": 0.4904,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    },
+    {
+     "variant": "M4strict",
+     "n": 3,
+     "ctl": {
+      "i": 0.5,
+      "len": 0.5,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "holds": false,
+   "core": false,
+   "note": "controls fine but n below the minimum (60; strict 40)",
+   "report": {
+    "M4": {
+     "n": 53,
+     "days": 1,
+     "ctl": {
+      "i": 0.5094,
+      "len": 0.5283,
+      "cl": 0.5,
+      "lc": 0.5094
+     },
+     "ctlOk": true,
+     "auc": 0.5377,
+     "ci": [
+      0.5094,
+      0.5755
+     ],
+     "thr": null
+    },
+    "M8": {
+     "n": 52,
+     "days": 1,
+     "ctl": {
+      "i": 0.5192,
+      "len": 0.4904,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": true,
+     "auc": 0.5192,
+     "ci": [
+      0.4808,
+      0.5577
+     ],
+     "thr": null
+    }
+   }
+  },
+  "nld": {
+   "nMsg": 596,
+   "variant": "VOID",
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 215,
+     "ctl": {
+      "i": 0.5419,
+      "len": 0.5953,
+      "cl": 0.4977,
+      "lc": 0.5
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M8",
+     "n": 215,
+     "ctl": {
+      "i": 0.5279,
+      "len": 0.5651,
+      "cl": 0.4907,
+      "lc": 0.5
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M4strict",
+     "n": 19,
+     "ctl": {
+      "i": 0.5,
+      "len": 0.5,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "holds": false,
+   "core": false,
+   "note": "controls fine but n below the minimum (60; strict 40)",
+   "report": {
+    "M4": {
+     "n": 215,
+     "days": 1,
+     "ctl": {
+      "i": 0.5419,
+      "len": 0.5953,
+      "cl": 0.4977,
+      "lc": 0.5
+     },
+     "ctlOk": false,
+     "auc": 0.5116,
+     "ci": [
+      0.5023,
+      0.5233
+     ],
+     "thr": null
+    },
+    "M8": {
+     "n": 215,
+     "days": 1,
+     "ctl": {
+      "i": 0.5279,
+      "len": 0.5651,
+      "cl": 0.4907,
+      "lc": 0.5
+     },
+     "ctlOk": false,
+     "auc": 0.5116,
+     "ci": [
+      0.5023,
+      0.5256
+     ],
+     "thr": null
+    }
+   }
+  },
+  "nob": {
+   "nMsg": 1939,
+   "variant": "M4",
+   "n": 400,
+   "days": 1,
+   "ctl": {
+    "i": 0.5038,
+    "len": 0.5,
+    "cl": 0.51,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 400,
+     "ctl": {
+      "i": 0.5038,
+      "len": 0.5,
+      "cl": 0.51,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5313,
+   "ci": [
+    0.5175,
+    0.545
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5411,
+   "nullQ95Flip": 0.5112,
+   "thr": {
+    "n": 400,
+    "tpr": 0.0125,
+    "fpr": 0,
+    "balPrec": 1
+   },
+   "tieShare": 0.9075,
+   "bothZero": 0.9075,
+   "beyondCNT_Tinf": {
+    "kept": 396,
+    "share": 0.99,
+    "auc": 0.5303,
+    "ci": [
+     0.5177,
+     0.5429
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 332,
+    "share": 0.83,
+    "auc": 0.5105,
+    "ci": [
+     0.5,
+     0.5211
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.5,
+    "CNT_T128": 0.5575,
+    "INIT_T128": 0.5288
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.5025,
+    "LAST_Tinf": 0.5038
+   },
+   "FNEXT": 0.4088,
+   "wordshuf": {
+    "n": 400,
+    "auc": 0.4963,
+    "ctl": {
+     "i": 0.4825,
+     "len": 0.5162,
+     "cl": 0.5088,
+     "lc": 0.5
+    },
+    "drop": 0.035
+   },
+   "msgshuf": {
+    "n": 400,
+    "auc": 0.5138,
+    "ctl": {
+     "i": 0.495,
+     "len": 0.5038,
+     "cl": 0.5175,
+     "lc": 0.4988
+    },
+    "drop": 0.0175
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 1,
+    "binomP": 0.5
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "pol": {
+   "nMsg": 2215,
+   "variant": "M4",
+   "n": 400,
+   "days": 1,
+   "ctl": {
+    "i": 0.5387,
+    "len": 0.4525,
+    "cl": 0.4988,
+    "lc": 0.5012
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 400,
+     "ctl": {
+      "i": 0.5387,
+      "len": 0.4525,
+      "cl": 0.4988,
+      "lc": 0.5012
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.4975,
+   "ci": [
+    0.49,
+    0.505
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5411,
+   "nullQ95Flip": 0.505,
+   "thr": {
+    "n": 400,
+    "tpr": 0,
+    "fpr": 0.0025,
+    "balPrec": 0
+   },
+   "tieShare": 0.98,
+   "bothZero": 0.9775,
+   "beyondCNT_Tinf": {
+    "kept": 395,
+    "share": 0.9875,
+    "auc": 0.4962,
+    "ci": [
+     0.4886,
+     0.5025
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 389,
+    "share": 0.9725,
+    "auc": 0.4987,
+    "ci": [
+     0.4923,
+     0.5051
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.505,
+    "CNT_T128": 0.4913,
+    "INIT_T128": 0.4988
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.4963,
+    "LAST_Tinf": 0.5088
+   },
+   "FNEXT": 0.4263,
+   "wordshuf": {
+    "n": 400,
+    "auc": 0.4963,
+    "ctl": {
+     "i": 0.4975,
+     "len": 0.4725,
+     "cl": 0.4938,
+     "lc": 0.5012
+    },
+    "drop": 0.0012
+   },
+   "msgshuf": {
+    "n": 400,
+    "auc": 0.5025,
+    "ctl": {
+     "i": 0.5038,
+     "len": 0.455,
+     "cl": 0.4925,
+     "lc": 0.5
+    },
+    "drop": -0.005
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 0,
+    "binomP": 1
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "por": {
+   "nMsg": 1200,
+   "variant": "M4",
+   "n": 400,
+   "days": 1,
+   "ctl": {
+    "i": 0.5313,
+    "len": 0.5112,
+    "cl": 0.505,
+    "lc": 0.5025
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 400,
+     "ctl": {
+      "i": 0.5313,
+      "len": 0.5112,
+      "cl": 0.505,
+      "lc": 0.5025
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5012,
+   "ci": [
+    0.4963,
+    0.5062
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5411,
+   "nullQ95Flip": 0.5038,
+   "thr": {
+    "n": 400,
+    "tpr": 0,
+    "fpr": 0,
+    "balPrec": null
+   },
+   "tieShare": 0.9875,
+   "bothZero": 0.9875,
+   "beyondCNT_Tinf": {
+    "kept": 386,
+    "share": 0.965,
+    "auc": 0.5013,
+    "ci": [
+     0.4961,
+     0.5065
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 362,
+    "share": 0.905,
+    "auc": 0.5014,
+    "ci": [
+     0.4972,
+     0.5055
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.4913,
+    "CNT_T128": 0.485,
+    "INIT_T128": 0.5012
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.5025,
+    "LAST_Tinf": 0.5
+   },
+   "FNEXT": 0.3713,
+   "wordshuf": {
+    "n": 400,
+    "auc": 0.5,
+    "ctl": {
+     "i": 0.4938,
+     "len": 0.4688,
+     "cl": 0.4975,
+     "lc": 0.5012
+    },
+    "drop": 0.0012
+   },
+   "msgshuf": {
+    "n": 400,
+    "auc": 0.4988,
+    "ctl": {
+     "i": 0.4775,
+     "len": 0.55,
+     "cl": 0.5012,
+     "lc": 0.5
+    },
+    "drop": 0.0024
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 1,
+    "binomP": 0.5
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "ron": {
+   "nMsg": 729,
+   "variant": "M4",
+   "n": 312,
+   "days": 1,
+   "ctl": {
+    "i": 0.5064,
+    "len": 0.4952,
+    "cl": 0.5032,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 312,
+     "ctl": {
+      "i": 0.5064,
+      "len": 0.4952,
+      "cl": 0.5032,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5,
+   "ci": [
+    0.4936,
+    0.5064
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5466,
+   "nullQ95Flip": 0.5064,
+   "thr": {
+    "n": 312,
+    "tpr": 0,
+    "fpr": 0.0032,
+    "balPrec": 0
+   },
+   "tieShare": 0.9872,
+   "bothZero": 0.9872,
+   "beyondCNT_Tinf": {
+    "kept": 306,
+    "share": 0.9808,
+    "auc": 0.5,
+    "ci": [
+     0.4935,
+     0.5065
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 289,
+    "share": 0.9263,
+    "auc": 0.4983,
+    "ci": [
+     0.4913,
+     0.5052
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.4968,
+    "CNT_T128": 0.516,
+    "INIT_T128": 0.5016
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.5,
+    "LAST_Tinf": 0.5048
+   },
+   "FNEXT": 0.4215,
+   "wordshuf": {
+    "n": 307,
+    "auc": 0.5033,
+    "ctl": {
+     "i": 0.487,
+     "len": 0.5065,
+     "cl": 0.5033,
+     "lc": 0.5
+    },
+    "drop": -0.0033
+   },
+   "msgshuf": {
+    "n": 308,
+    "auc": 0.5016,
+    "ctl": {
+     "i": 0.5195,
+     "len": 0.5162,
+     "cl": 0.5016,
+     "lc": 0.5
+    },
+    "drop": -0.0016
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 0,
+    "binomP": 1
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "rus": {
+   "nMsg": 601,
+   "variant": "M4",
+   "n": 400,
+   "days": 1,
+   "ctl": {
+    "i": 0.4975,
+    "len": 0.48,
+    "cl": 0.4963,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 400,
+     "ctl": {
+      "i": 0.4975,
+      "len": 0.48,
+      "cl": 0.4963,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5012,
+   "ci": [
+    0.5,
+    0.5038
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5411,
+   "nullQ95Flip": 0.5012,
+   "thr": {
+    "n": 400,
+    "tpr": 0,
+    "fpr": 0,
+    "balPrec": null
+   },
+   "tieShare": 0.9975,
+   "bothZero": 0.9975,
+   "beyondCNT_Tinf": {
+    "kept": 393,
+    "share": 0.9825,
+    "auc": 0.5013,
+    "ci": [
+     0.5,
+     0.5038
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 393,
+    "share": 0.9825,
+    "auc": 0.5013,
+    "ci": [
+     0.5,
+     0.5038
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.4925,
+    "CNT_T128": 0.4988,
+    "INIT_T128": 0.5
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.5012,
+    "LAST_Tinf": 0.5
+   },
+   "FNEXT": 0.475,
+   "wordshuf": {
+    "n": 400,
+    "auc": 0.4988,
+    "ctl": {
+     "i": 0.52,
+     "len": 0.4863,
+     "cl": 0.4913,
+     "lc": 0.5
+    },
+    "drop": 0.0024
+   },
+   "msgshuf": {
+    "n": 400,
+    "auc": 0.4988,
+    "ctl": {
+     "i": 0.4988,
+     "len": 0.515,
+     "cl": 0.4875,
+     "lc": 0.5
+    },
+    "drop": 0.0024
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 1,
+    "binomP": 0.5
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "slk": {
+   "nMsg": 1049,
+   "variant": "M4",
+   "n": 400,
+   "days": 1,
+   "ctl": {
+    "i": 0.5138,
+    "len": 0.505,
+    "cl": 0.4975,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 400,
+     "ctl": {
+      "i": 0.5138,
+      "len": 0.505,
+      "cl": 0.4975,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5112,
+   "ci": [
+    0.5025,
+    0.5212
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5411,
+   "nullQ95Flip": 0.5062,
+   "thr": {
+    "n": 400,
+    "tpr": 0.0025,
+    "fpr": 0,
+    "balPrec": 1
+   },
+   "tieShare": 0.9625,
+   "bothZero": 0.96,
+   "beyondCNT_Tinf": {
+    "kept": 397,
+    "share": 0.9925,
+    "auc": 0.5113,
+    "ci": [
+     0.5025,
+     0.5214
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 364,
+    "share": 0.91,
+    "auc": 0.5,
+    "ci": [
+     0.4931,
+     0.5069
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.4975,
+    "CNT_T128": 0.505,
+    "INIT_T128": 0.5075
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.4963,
+    "LAST_Tinf": 0.5025
+   },
+   "FNEXT": 0.5687,
+   "wordshuf": {
+    "n": 400,
+    "auc": 0.4975,
+    "ctl": {
+     "i": 0.5162,
+     "len": 0.5112,
+     "cl": 0.4975,
+     "lc": 0.5
+    },
+    "drop": 0.0137
+   },
+   "msgshuf": {
+    "n": 400,
+    "auc": 0.5088,
+    "ctl": {
+     "i": 0.515,
+     "len": 0.5212,
+     "cl": 0.5038,
+     "lc": 0.5
+    },
+    "drop": 0.0024
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 1,
+    "binomP": 0.5
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "slv": {
+   "nMsg": 1282,
+   "variant": "M4",
+   "n": 400,
+   "days": 1,
+   "ctl": {
+    "i": 0.5325,
+    "len": 0.4963,
+    "cl": 0.5025,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 400,
+     "ctl": {
+      "i": 0.5325,
+      "len": 0.4963,
+      "cl": 0.5025,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5,
+   "ci": [
+    0.4938,
+    0.5062
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5411,
+   "nullQ95Flip": 0.505,
+   "thr": {
+    "n": 400,
+    "tpr": 0.0025,
+    "fpr": 0.0025,
+    "balPrec": 0.5
+   },
+   "tieShare": 0.985,
+   "bothZero": 0.985,
+   "beyondCNT_Tinf": {
+    "kept": 393,
+    "share": 0.9825,
+    "auc": 0.5,
+    "ci": [
+     0.4936,
+     0.5064
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 372,
+    "share": 0.93,
+    "auc": 0.5013,
+    "ci": [
+     0.5,
+     0.5054
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.4975,
+    "CNT_T128": 0.5262,
+    "INIT_T128": 0.5025
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.5,
+    "LAST_Tinf": 0.5
+   },
+   "FNEXT": 0.47,
+   "wordshuf": {
+    "n": 400,
+    "auc": 0.4963,
+    "ctl": {
+     "i": 0.5288,
+     "len": 0.4913,
+     "cl": 0.4925,
+     "lc": 0.5
+    },
+    "drop": 0.0037
+   },
+   "msgshuf": {
+    "n": 400,
+    "auc": 0.5012,
+    "ctl": {
+     "i": 0.5075,
+     "len": 0.5175,
+     "cl": 0.495,
+     "lc": 0.4988
+    },
+    "drop": -0.0012
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 0,
+    "binomP": 1
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "spa": {
+   "nMsg": 1721,
+   "variant": "M4",
+   "n": 400,
+   "days": 1,
+   "ctl": {
+    "i": 0.5363,
+    "len": 0.4975,
+    "cl": 0.505,
+    "lc": 0.4963
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 400,
+     "ctl": {
+      "i": 0.5363,
+      "len": 0.4975,
+      "cl": 0.505,
+      "lc": 0.4963
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5162,
+   "ci": [
+    0.5062,
+    0.5262
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5411,
+   "nullQ95Flip": 0.5088,
+   "thr": {
+    "n": 400,
+    "tpr": 0.01,
+    "fpr": 0.0025,
+    "balPrec": 0.8
+   },
+   "tieShare": 0.9525,
+   "bothZero": 0.9525,
+   "beyondCNT_Tinf": {
+    "kept": 397,
+    "share": 0.9925,
+    "auc": 0.5164,
+    "ci": [
+     0.5063,
+     0.5277
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 318,
+    "share": 0.795,
+    "auc": 0.5094,
+    "ci": [
+     0.5016,
+     0.5173
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.4938,
+    "CNT_T128": 0.5563,
+    "INIT_T128": 0.5175
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.5,
+    "LAST_Tinf": 0.505
+   },
+   "FNEXT": 0.3425,
+   "wordshuf": {
+    "n": 400,
+    "auc": 0.4925,
+    "ctl": {
+     "i": 0.5387,
+     "len": 0.505,
+     "cl": 0.4988,
+     "lc": 0.4963
+    },
+    "drop": 0.0237
+   },
+   "msgshuf": {
+    "n": 400,
+    "auc": 0.5275,
+    "ctl": {
+     "i": 0.5088,
+     "len": 0.52,
+     "cl": 0.505,
+     "lc": 0.5025
+    },
+    "drop": -0.0113
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 1,
+    "binomP": 0.5
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "srp": {
+   "nMsg": 520,
+   "variant": "M4",
+   "n": 352,
+   "days": 1,
+   "ctl": {
+    "i": 0.5469,
+    "len": 0.5,
+    "cl": 0.4915,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 352,
+     "ctl": {
+      "i": 0.5469,
+      "len": 0.5,
+      "cl": 0.4915,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5071,
+   "ci": [
+    0.4972,
+    0.517
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5438,
+   "nullQ95Flip": 0.5071,
+   "thr": {
+    "n": 352,
+    "tpr": 0.0028,
+    "fpr": 0.0028,
+    "balPrec": 0.5
+   },
+   "tieShare": 0.9631,
+   "bothZero": 0.9545,
+   "beyondCNT_Tinf": {
+    "kept": 352,
+    "share": 1,
+    "auc": 0.5071,
+    "ci": [
+     0.4986,
+     0.517
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 303,
+    "share": 0.8608,
+    "auc": 0.5,
+    "ci": [
+     0.495,
+     0.505
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.5028,
+    "CNT_T128": 0.5341,
+    "INIT_T128": 0.5071
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.5043,
+    "LAST_Tinf": 0.5071
+   },
+   "FNEXT": 0.4233,
+   "wordshuf": {
+    "n": 343,
+    "auc": 0.4913,
+    "ctl": {
+     "i": 0.4752,
+     "len": 0.5277,
+     "cl": 0.484,
+     "lc": 0.5
+    },
+    "drop": 0.0158
+   },
+   "msgshuf": {
+    "n": 346,
+    "auc": 0.5029,
+    "ctl": {
+     "i": 0.5477,
+     "len": 0.5318,
+     "cl": 0.4913,
+     "lc": 0.4986
+    },
+    "drop": 0.0042
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 1,
+    "binomP": 0.5
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "swe": {
+   "nMsg": 1219,
+   "variant": "VOID",
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 98,
+     "ctl": {
+      "i": 0.4694,
+      "len": 0.4337,
+      "cl": 0.5,
+      "lc": 0.4949
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M8",
+     "n": 97,
+     "ctl": {
+      "i": 0.4175,
+      "len": 0.4124,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M4strict",
+     "n": 14,
+     "ctl": {
+      "i": 0.5,
+      "len": 0.5,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "holds": false,
+   "core": false,
+   "note": "controls fine but n below the minimum (60; strict 40)",
+   "report": {
+    "M4": {
+     "n": 98,
+     "days": 1,
+     "ctl": {
+      "i": 0.4694,
+      "len": 0.4337,
+      "cl": 0.5,
+      "lc": 0.4949
+     },
+     "ctlOk": false,
+     "auc": 0.5,
+     "ci": [
+      0.4796,
+      0.5204
+     ],
+     "thr": null
+    },
+    "M8": {
+     "n": 97,
+     "days": 1,
+     "ctl": {
+      "i": 0.4175,
+      "len": 0.4124,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": false,
+     "auc": 0.5052,
+     "ci": [
+      0.4897,
+      0.5258
+     ],
+     "thr": null
+    }
+   }
+  },
+  "tam": {
+   "nMsg": 120,
+   "variant": "VOID",
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 71,
+     "ctl": {
+      "i": 0.4718,
+      "len": 0.5915,
+      "cl": 0.507,
+      "lc": 0.5
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M8",
+     "n": 71,
+     "ctl": {
+      "i": 0.4085,
+      "len": 0.6197,
+      "cl": 0.5141,
+      "lc": 0.5
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M4strict",
+     "n": 3,
+     "ctl": {
+      "i": 0.5,
+      "len": 0.5,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "holds": false,
+   "core": false,
+   "note": "controls fine but n below the minimum (60; strict 40)",
+   "report": {
+    "M4": {
+     "n": 71,
+     "days": 1,
+     "ctl": {
+      "i": 0.4718,
+      "len": 0.5915,
+      "cl": 0.507,
+      "lc": 0.5
+     },
+     "ctlOk": false,
+     "auc": 0.507,
+     "ci": [
+      0.4859,
+      0.5352
+     ],
+     "thr": null
+    },
+    "M8": {
+     "n": 71,
+     "days": 1,
+     "ctl": {
+      "i": 0.4085,
+      "len": 0.6197,
+      "cl": 0.5141,
+      "lc": 0.5
+     },
+     "ctlOk": false,
+     "auc": 0.507,
+     "ci": [
+      0.4789,
+      0.5352
+     ],
+     "thr": null
+    }
+   }
+  },
+  "tel": {
+   "nMsg": 146,
+   "variant": "VOID",
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 5,
+     "ctl": {
+      "i": 0.5,
+      "len": 0.5,
+      "cl": 0.4,
+      "lc": 0.5
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M8",
+     "n": 5,
+     "ctl": {
+      "i": 0.5,
+      "len": 0.5,
+      "cl": 0.4,
+      "lc": 0.5
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M4strict",
+     "n": 4,
+     "ctl": {
+      "i": 0.5,
+      "len": 0.5,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "holds": false,
+   "core": false,
+   "note": "controls fine but n below the minimum (60; strict 40)",
+   "report": {
+    "M4": {
+     "n": 5,
+     "days": 1,
+     "ctl": {
+      "i": 0.5,
+      "len": 0.5,
+      "cl": 0.4,
+      "lc": 0.5
+     },
+     "ctlOk": false,
+     "auc": 0.5,
+     "thr": null
+    },
+    "M8": {
+     "n": 5,
+     "days": 1,
+     "ctl": {
+      "i": 0.5,
+      "len": 0.5,
+      "cl": 0.4,
+      "lc": 0.5
+     },
+     "ctlOk": false,
+     "auc": 0.5,
+     "thr": null
+    }
+   }
+  },
+  "tur": {
+   "nMsg": 1100,
+   "variant": "M4",
+   "n": 148,
+   "days": 1,
+   "ctl": {
+    "i": 0.4527,
+    "len": 0.5439,
+    "cl": 0.4831,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 148,
+     "ctl": {
+      "i": 0.4527,
+      "len": 0.5439,
+      "cl": 0.4831,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.4966,
+   "ci": [
+    0.4831,
+    0.5068
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5676,
+   "nullQ95Flip": 0.5101,
+   "thr": {
+    "n": 148,
+    "tpr": 0,
+    "fpr": 0,
+    "balPrec": null
+   },
+   "tieShare": 0.9797,
+   "bothZero": 0.9662,
+   "beyondCNT_Tinf": {
+    "kept": 145,
+    "share": 0.9797,
+    "auc": 0.5,
+    "ci": [
+     0.4897,
+     0.5103
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 140,
+    "share": 0.9459,
+    "auc": 0.4964,
+    "ci": [
+     0.4893,
+     0.5
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.4966,
+    "CNT_T128": 0.5203,
+    "INIT_T128": 0.5034
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.4966,
+    "LAST_Tinf": 0.5034
+   },
+   "FNEXT": 0.473,
+   "wordshuf": {
+    "n": 161,
+    "auc": 0.4969,
+    "ctl": {
+     "i": 0.4938,
+     "len": 0.5186,
+     "cl": 0.4876,
+     "lc": 0.5
+    },
+    "drop": -0.0003
+   },
+   "msgshuf": {
+    "n": 152,
+    "auc": 0.5099,
+    "ctl": {
+     "i": 0.4441,
+     "len": 0.5658,
+     "cl": 0.4868,
+     "lc": 0.5
+    },
+    "drop": -0.0133
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 0,
+    "binomP": 1
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "uig": {
+   "nMsg": 900,
+   "variant": "VOID",
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 7,
+     "ctl": {
+      "i": 0.3571,
+      "len": 0.4286,
+      "cl": 0.5714,
+      "lc": 0.5
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M8",
+     "n": 7,
+     "ctl": {
+      "i": 0.5,
+      "len": 0.6429,
+      "cl": 0.4286,
+      "lc": 0.5
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M4strict",
+     "n": 1,
+     "ctl": {
+      "i": 0.5,
+      "len": 0.5,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "holds": false,
+   "core": false,
+   "note": "controls fine but n below the minimum (60; strict 40)",
+   "report": {
+    "M4": {
+     "n": 7,
+     "days": 1,
+     "ctl": {
+      "i": 0.3571,
+      "len": 0.4286,
+      "cl": 0.5714,
+      "lc": 0.5
+     },
+     "ctlOk": false,
+     "auc": 0.5,
+     "thr": null
+    },
+    "M8": {
+     "n": 7,
+     "days": 1,
+     "ctl": {
+      "i": 0.5,
+      "len": 0.6429,
+      "cl": 0.4286,
+      "lc": 0.5
+     },
+     "ctlOk": false,
+     "auc": 0.5,
+     "thr": null
+    }
+   }
+  },
+  "ukr": {
+   "nMsg": 858,
+   "variant": "M4",
+   "n": 339,
+   "days": 1,
+   "ctl": {
+    "i": 0.4985,
+    "len": 0.4572,
+    "cl": 0.4971,
+    "lc": 0.5015
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 339,
+     "ctl": {
+      "i": 0.4985,
+      "len": 0.4572,
+      "cl": 0.4971,
+      "lc": 0.5015
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5044,
+   "ci": [
+    0.4985,
+    0.5118
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5447,
+   "nullQ95Flip": 0.5044,
+   "thr": {
+    "n": 339,
+    "tpr": 0,
+    "fpr": 0,
+    "balPrec": null
+   },
+   "tieShare": 0.9853,
+   "bothZero": 0.9853,
+   "beyondCNT_Tinf": {
+    "kept": 333,
+    "share": 0.9823,
+    "auc": 0.506,
+    "ci": [
+     0.5015,
+     0.5105
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 319,
+    "share": 0.941,
+    "auc": 0.5031,
+    "ci": [
+     0.4984,
+     0.5094
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.5,
+    "CNT_T128": 0.5162,
+    "INIT_T128": 0.5044
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.4941,
+    "LAST_Tinf": 0.5103
+   },
+   "FNEXT": 0.444,
+   "wordshuf": {
+    "n": 342,
+    "auc": 0.5,
+    "ctl": {
+     "i": 0.5175,
+     "len": 0.5058,
+     "cl": 0.5029,
+     "lc": 0.5
+    },
+    "drop": 0.0044
+   },
+   "msgshuf": {
+    "n": 335,
+    "auc": 0.5015,
+    "ctl": {
+     "i": 0.5478,
+     "len": 0.4881,
+     "cl": 0.5,
+     "lc": 0.5
+    },
+    "drop": 0.0029
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 1,
+    "binomP": 0.5
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  },
+  "urd": {
+   "nMsg": 535,
+   "variant": "VOID",
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 400,
+     "ctl": {
+      "i": 0.4113,
+      "len": 0.47,
+      "cl": 0.5,
+      "lc": 0.4975
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M8",
+     "n": 400,
+     "ctl": {
+      "i": 0.41,
+      "len": 0.4763,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M4strict",
+     "n": 13,
+     "ctl": {
+      "i": 0.5,
+      "len": 0.5,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "holds": false,
+   "core": false,
+   "note": "controls fine but n below the minimum (60; strict 40)",
+   "report": {
+    "M4": {
+     "n": 400,
+     "days": 1,
+     "ctl": {
+      "i": 0.4113,
+      "len": 0.47,
+      "cl": 0.5,
+      "lc": 0.4975
+     },
+     "ctlOk": false,
+     "auc": 0.5138,
+     "ci": [
+      0.4988,
+      0.5262
+     ],
+     "thr": null
+    },
+    "M8": {
+     "n": 400,
+     "days": 1,
+     "ctl": {
+      "i": 0.41,
+      "len": 0.4763,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": false,
+     "auc": 0.5138,
+     "ci": [
+      0.5,
+      0.5262
+     ],
+     "thr": null
+    }
+   }
+  },
+  "vie": {
+   "nMsg": 800,
+   "variant": "VOID",
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 62,
+     "ctl": {
+      "i": 0.629,
+      "len": 0.4839,
+      "cl": 0.5645,
+      "lc": 0.5161
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M8",
+     "n": 61,
+     "ctl": {
+      "i": 0.6393,
+      "len": 0.3934,
+      "cl": 0.5656,
+      "lc": 0.5
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M4strict",
+     "n": 7,
+     "ctl": {
+      "i": 0.5,
+      "len": 0.5,
+      "cl": 0.5,
+      "lc": 0.5714
+     },
+     "ctlOk": false
+    }
+   ],
+   "holds": false,
+   "core": false,
+   "note": "controls out of [0.45,0.55] in M4, M8 and the strict subset (or no pairs)",
+   "report": {
+    "M4": {
+     "n": 62,
+     "days": 1,
+     "ctl": {
+      "i": 0.629,
+      "len": 0.4839,
+      "cl": 0.5645,
+      "lc": 0.5161
+     },
+     "ctlOk": false,
+     "auc": 0.4919,
+     "ci": [
+      0.4677,
+      0.5161
+     ],
+     "thr": null
+    },
+    "M8": {
+     "n": 61,
+     "days": 1,
+     "ctl": {
+      "i": 0.6393,
+      "len": 0.3934,
+      "cl": 0.5656,
+      "lc": 0.5
+     },
+     "ctlOk": false,
+     "auc": 0.5,
+     "ci": [
+      0.4754,
+      0.5246
+     ],
+     "thr": null
+    }
+   }
+  },
+  "wol": {
+   "nMsg": 470,
+   "variant": "M4",
+   "n": 244,
+   "days": 1,
+   "ctl": {
+    "i": 0.5082,
+    "len": 0.5164,
+    "cl": 0.5,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 244,
+     "ctl": {
+      "i": 0.5082,
+      "len": 0.5164,
+      "cl": 0.5,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.5061,
+   "ci": [
+    0.4959,
+    0.5164
+   ],
+   "dayCi": [
+    null,
+    null
+   ],
+   "nullQ95Analytic": 0.5527,
+   "nullQ95Flip": 0.5102,
+   "thr": {
+    "n": 244,
+    "tpr": 0.0041,
+    "fpr": 0,
+    "balPrec": 1
+   },
+   "tieShare": 0.9713,
+   "bothZero": 0.9713,
+   "beyondCNT_Tinf": {
+    "kept": 242,
+    "share": 0.9918,
+    "auc": 0.5041,
+    "ci": [
+     0.4938,
+     0.5124
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 222,
+    "share": 0.9098,
+    "auc": 0.5,
+    "ci": [
+     0.491,
+     0.509
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.498,
+    "CNT_T128": 0.5184,
+    "INIT_T128": 0.5061
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.5123,
+    "LAST_Tinf": 0.5123
+   },
+   "FNEXT": 0.3873,
+   "wordshuf": {
+    "n": 223,
+    "auc": 0.5157,
+    "ctl": {
+     "i": 0.5135,
+     "len": 0.5291,
+     "cl": 0.5,
+     "lc": 0.5
+    },
+    "drop": -0.0096
+   },
+   "msgshuf": {
+    "n": 233,
+    "auc": 0.5043,
+    "ctl": {
+     "i": 0.5,
+     "len": 0.5107,
+     "cl": 0.5,
+     "lc": 0.5
+    },
+    "drop": 0.0018
+   },
+   "perDaySummary": {
+    "daysWithN10": 1,
+    "above05": 1,
+    "binomP": 0.5
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": false,
+    "beyondCNT_Tinf": false
+   },
+   "holds": false
+  }
+ },
+ "coverage": [
+  {
+   "day": "afr",
+   "Q": 4,
+   "nMsg": 425,
+   "pairs": 96,
+   "dropped": 12,
+   "nPos": 108,
+   "nNeg": 1935
+  },
+  {
+   "day": "afr",
+   "Q": 8,
+   "nMsg": 425,
+   "pairs": 96,
+   "dropped": 12,
+   "nPos": 108,
+   "nNeg": 1935
+  },
+  {
+   "day": "arb",
+   "Q": 4,
+   "nMsg": 680,
+   "pairs": 11,
+   "dropped": 4,
+   "nPos": 15,
+   "nNeg": 5187
+  },
+  {
+   "day": "arb",
+   "Q": 8,
+   "nMsg": 680,
+   "pairs": 11,
+   "dropped": 4,
+   "nPos": 15,
+   "nNeg": 5187
+  },
+  {
+   "day": "bul",
+   "Q": 4,
+   "nMsg": 1116,
+   "pairs": 400,
+   "dropped": 93,
+   "nPos": 563,
+   "nNeg": 4716
+  },
+  {
+   "day": "bul",
+   "Q": 8,
+   "nMsg": 1116,
+   "pairs": 400,
+   "dropped": 94,
+   "nPos": 563,
+   "nNeg": 4716
+  },
+  {
+   "day": "cat",
+   "Q": 4,
+   "nMsg": 1840,
+   "pairs": 400,
+   "dropped": 64,
+   "nPos": 1954,
+   "nNeg": 6243
+  },
+  {
+   "day": "cat",
+   "Q": 8,
+   "nMsg": 1840,
+   "pairs": 400,
+   "dropped": 80,
+   "nPos": 1954,
+   "nNeg": 6243
+  },
+  {
+   "day": "ces",
+   "Q": 4,
+   "nMsg": 628,
+   "pairs": 70,
+   "dropped": 21,
+   "nPos": 91,
+   "nNeg": 3886
+  },
+  {
+   "day": "ces",
+   "Q": 8,
+   "nMsg": 628,
+   "pairs": 70,
+   "dropped": 21,
+   "nPos": 91,
+   "nNeg": 3886
+  },
+  {
+   "day": "cmn",
+   "Q": 4,
+   "nMsg": 500,
+   "pairs": 41,
+   "dropped": 574,
+   "nPos": 615,
+   "nNeg": 65
+  },
+  {
+   "day": "cmn",
+   "Q": 8,
+   "nMsg": 500,
+   "pairs": 41,
+   "dropped": 574,
+   "nPos": 615,
+   "nNeg": 65
+  },
+  {
+   "day": "cmn-hans",
+   "Q": 4,
+   "nMsg": 500,
+   "pairs": 41,
+   "dropped": 573,
+   "nPos": 614,
+   "nNeg": 65
+  },
+  {
+   "day": "cmn-hans",
+   "Q": 8,
+   "nMsg": 500,
+   "pairs": 41,
+   "dropped": 573,
+   "nPos": 614,
+   "nNeg": 65
+  },
+  {
+   "day": "cym",
+   "Q": 4,
+   "nMsg": 953,
+   "pairs": 314,
+   "dropped": 70,
+   "nPos": 384,
+   "nNeg": 2962
+  },
+  {
+   "day": "cym",
+   "Q": 8,
+   "nMsg": 953,
+   "pairs": 314,
+   "dropped": 70,
+   "nPos": 384,
+   "nNeg": 2962
+  },
+  {
+   "day": "dan",
+   "Q": 4,
+   "nMsg": 565,
+   "pairs": 289,
+   "dropped": 95,
+   "nPos": 384,
+   "nNeg": 2581
+  },
+  {
+   "day": "dan",
+   "Q": 8,
+   "nMsg": 565,
+   "pairs": 289,
+   "dropped": 95,
+   "nPos": 384,
+   "nNeg": 2581
+  },
+  {
+   "day": "deu",
+   "Q": 4,
+   "nMsg": 977,
+   "pairs": 400,
+   "dropped": 119,
+   "nPos": 686,
+   "nNeg": 4042
+  },
+  {
+   "day": "deu",
+   "Q": 8,
+   "nMsg": 977,
+   "pairs": 400,
+   "dropped": 123,
+   "nPos": 686,
+   "nNeg": 4042
+  },
+  {
+   "day": "ell",
+   "Q": 4,
+   "nMsg": 456,
+   "pairs": 134,
+   "dropped": 41,
+   "nPos": 175,
+   "nNeg": 2646
+  },
+  {
+   "day": "ell",
+   "Q": 8,
+   "nMsg": 456,
+   "pairs": 134,
+   "dropped": 41,
+   "nPos": 175,
+   "nNeg": 2646
+  },
+  {
+   "day": "eng",
+   "Q": 4,
+   "nMsg": 2040,
+   "pairs": 400,
+   "dropped": 240,
+   "nPos": 1083,
+   "nNeg": 3197
+  },
+  {
+   "day": "eng",
+   "Q": 8,
+   "nMsg": 2040,
+   "pairs": 400,
+   "dropped": 271,
+   "nPos": 1083,
+   "nNeg": 3197
+  },
+  {
+   "day": "est",
+   "Q": 4,
+   "nMsg": 3206,
+   "pairs": 400,
+   "dropped": 57,
+   "nPos": 1554,
+   "nNeg": 12421
+  },
+  {
+   "day": "est",
+   "Q": 8,
+   "nMsg": 3206,
+   "pairs": 400,
+   "dropped": 71,
+   "nPos": 1554,
+   "nNeg": 12421
+  },
+  {
+   "day": "eus",
+   "Q": 4,
+   "nMsg": 1799,
+   "pairs": 400,
+   "dropped": 64,
+   "nPos": 1387,
+   "nNeg": 6068
+  },
+  {
+   "day": "eus",
+   "Q": 8,
+   "nMsg": 1799,
+   "pairs": 400,
+   "dropped": 58,
+   "nPos": 1387,
+   "nNeg": 6068
+  },
+  {
+   "day": "fas",
+   "Q": 4,
+   "nMsg": 1455,
+   "pairs": 400,
+   "dropped": 89,
+   "nPos": 599,
+   "nNeg": 5477
+  },
+  {
+   "day": "fas",
+   "Q": 8,
+   "nMsg": 1455,
+   "pairs": 400,
+   "dropped": 94,
+   "nPos": 599,
+   "nNeg": 5477
+  },
+  {
+   "day": "fin",
+   "Q": 4,
+   "nMsg": 1555,
+   "pairs": 400,
+   "dropped": 71,
+   "nPos": 653,
+   "nNeg": 7247
+  },
+  {
+   "day": "fin",
+   "Q": 8,
+   "nMsg": 1555,
+   "pairs": 400,
+   "dropped": 83,
+   "nPos": 653,
+   "nNeg": 7247
+  },
+  {
+   "day": "fra",
+   "Q": 4,
+   "nMsg": 416,
+   "pairs": 323,
+   "dropped": 72,
+   "nPos": 395,
+   "nNeg": 2353
+  },
+  {
+   "day": "fra",
+   "Q": 8,
+   "nMsg": 416,
+   "pairs": 323,
+   "dropped": 72,
+   "nPos": 395,
+   "nNeg": 2353
+  },
+  {
+   "day": "gle",
+   "Q": 4,
+   "nMsg": 450,
+   "pairs": 294,
+   "dropped": 74,
+   "nPos": 368,
+   "nNeg": 2255
+  },
+  {
+   "day": "gle",
+   "Q": 8,
+   "nMsg": 450,
+   "pairs": 292,
+   "dropped": 76,
+   "nPos": 368,
+   "nNeg": 2255
+  },
+  {
+   "day": "glg",
+   "Q": 4,
+   "nMsg": 861,
+   "pairs": 231,
+   "dropped": 36,
+   "nPos": 267,
+   "nNeg": 5580
+  },
+  {
+   "day": "glg",
+   "Q": 8,
+   "nMsg": 861,
+   "pairs": 231,
+   "dropped": 36,
+   "nPos": 267,
+   "nNeg": 5580
+  },
+  {
+   "day": "heb",
+   "Q": 4,
+   "nMsg": 491,
+   "pairs": 239,
+   "dropped": 76,
+   "nPos": 315,
+   "nNeg": 2564
+  },
+  {
+   "day": "heb",
+   "Q": 8,
+   "nMsg": 491,
+   "pairs": 238,
+   "dropped": 77,
+   "nPos": 315,
+   "nNeg": 2564
+  },
+  {
+   "day": "hin",
+   "Q": 4,
+   "nMsg": 1684,
+   "pairs": 400,
+   "dropped": 179,
+   "nPos": 1316,
+   "nNeg": 3178
+  },
+  {
+   "day": "hin",
+   "Q": 8,
+   "nMsg": 1684,
+   "pairs": 400,
+   "dropped": 165,
+   "nPos": 1316,
+   "nNeg": 3178
+  },
+  {
+   "day": "hrv",
+   "Q": 4,
+   "nMsg": 1136,
+   "pairs": 400,
+   "dropped": 64,
+   "nPos": 881,
+   "nNeg": 6767
+  },
+  {
+   "day": "hrv",
+   "Q": 8,
+   "nMsg": 1136,
+   "pairs": 400,
+   "dropped": 43,
+   "nPos": 881,
+   "nNeg": 6767
+  },
+  {
+   "day": "hun",
+   "Q": 4,
+   "nMsg": 449,
+   "pairs": 396,
+   "dropped": 79,
+   "nPos": 475,
+   "nNeg": 3536
+  },
+  {
+   "day": "hun",
+   "Q": 8,
+   "nMsg": 449,
+   "pairs": 396,
+   "dropped": 79,
+   "nPos": 475,
+   "nNeg": 3536
+  },
+  {
+   "day": "hye",
+   "Q": 4,
+   "nMsg": 600,
+   "pairs": 357,
+   "dropped": 94,
+   "nPos": 451,
+   "nNeg": 3314
+  },
+  {
+   "day": "hye",
+   "Q": 8,
+   "nMsg": 600,
+   "pairs": 357,
+   "dropped": 94,
+   "nPos": 451,
+   "nNeg": 3314
+  },
+  {
+   "day": "ind",
+   "Q": 4,
+   "nMsg": 557,
+   "pairs": 400,
+   "dropped": 186,
+   "nPos": 1424,
+   "nNeg": 2049
+  },
+  {
+   "day": "ind",
+   "Q": 8,
+   "nMsg": 557,
+   "pairs": 400,
+   "dropped": 176,
+   "nPos": 1424,
+   "nNeg": 2049
+  },
+  {
+   "day": "ita",
+   "Q": 4,
+   "nMsg": 482,
+   "pairs": 291,
+   "dropped": 125,
+   "nPos": 416,
+   "nNeg": 2519
+  },
+  {
+   "day": "ita",
+   "Q": 8,
+   "nMsg": 482,
+   "pairs": 291,
+   "dropped": 125,
+   "nPos": 416,
+   "nNeg": 2519
+  },
+  {
+   "day": "jpn",
+   "Q": 4,
+   "nMsg": 543,
+   "pairs": 85,
+   "dropped": 174,
+   "nPos": 259,
+   "nNeg": 775
+  },
+  {
+   "day": "jpn",
+   "Q": 8,
+   "nMsg": 543,
+   "pairs": 85,
+   "dropped": 174,
+   "nPos": 259,
+   "nNeg": 775
+  },
+  {
+   "day": "kat",
+   "Q": 4,
+   "nMsg": 481,
+   "pairs": 187,
+   "dropped": 19,
+   "nPos": 206,
+   "nNeg": 3792
+  },
+  {
+   "day": "kat",
+   "Q": 8,
+   "nMsg": 481,
+   "pairs": 187,
+   "dropped": 19,
+   "nPos": 206,
+   "nNeg": 3792
+  },
+  {
+   "day": "kor",
+   "Q": 4,
+   "nMsg": 989,
+   "pairs": 41,
+   "dropped": 14,
+   "nPos": 55,
+   "nNeg": 5270
+  },
+  {
+   "day": "kor",
+   "Q": 8,
+   "nMsg": 989,
+   "pairs": 41,
+   "dropped": 14,
+   "nPos": 55,
+   "nNeg": 5270
+  },
+  {
+   "day": "lav",
+   "Q": 4,
+   "nMsg": 2409,
+   "pairs": 400,
+   "dropped": 63,
+   "nPos": 888,
+   "nNeg": 10505
+  },
+  {
+   "day": "lav",
+   "Q": 8,
+   "nMsg": 2409,
+   "pairs": 400,
+   "dropped": 57,
+   "nPos": 888,
+   "nNeg": 10505
+  },
+  {
+   "day": "lit",
+   "Q": 4,
+   "nMsg": 684,
+   "pairs": 130,
+   "dropped": 18,
+   "nPos": 148,
+   "nNeg": 4076
+  },
+  {
+   "day": "lit",
+   "Q": 8,
+   "nMsg": 684,
+   "pairs": 130,
+   "dropped": 18,
+   "nPos": 148,
+   "nNeg": 4076
+  },
+  {
+   "day": "lzh",
+   "Q": 4,
+   "nMsg": 5528,
+   "pairs": 0,
+   "dropped": 490,
+   "nPos": 490,
+   "nNeg": 5
+  },
+  {
+   "day": "lzh",
+   "Q": 8,
+   "nMsg": 5528,
+   "pairs": 0,
+   "dropped": 490,
+   "nPos": 490,
+   "nNeg": 5
+  },
+  {
+   "day": "mar",
+   "Q": 4,
+   "nMsg": 47,
+   "pairs": 1,
+   "dropped": 5,
+   "nPos": 6,
+   "nNeg": 130
+  },
+  {
+   "day": "mar",
+   "Q": 8,
+   "nMsg": 47,
+   "pairs": 1,
+   "dropped": 5,
+   "nPos": 6,
+   "nNeg": 130
+  },
+  {
+   "day": "mlt",
+   "Q": 4,
+   "nMsg": 518,
+   "pairs": 53,
+   "dropped": 32,
+   "nPos": 85,
+   "nNeg": 2455
+  },
+  {
+   "day": "mlt",
+   "Q": 8,
+   "nMsg": 518,
+   "pairs": 52,
+   "dropped": 33,
+   "nPos": 85,
+   "nNeg": 2455
+  },
+  {
+   "day": "nld",
+   "Q": 4,
+   "nMsg": 596,
+   "pairs": 215,
+   "dropped": 108,
+   "nPos": 323,
+   "nNeg": 2218
+  },
+  {
+   "day": "nld",
+   "Q": 8,
+   "nMsg": 596,
+   "pairs": 215,
+   "dropped": 108,
+   "nPos": 323,
+   "nNeg": 2218
+  },
+  {
+   "day": "nob",
+   "Q": 4,
+   "nMsg": 1939,
+   "pairs": 400,
+   "dropped": 134,
+   "nPos": 640,
+   "nNeg": 5121
+  },
+  {
+   "day": "nob",
+   "Q": 8,
+   "nMsg": 1939,
+   "pairs": 400,
+   "dropped": 147,
+   "nPos": 640,
+   "nNeg": 5121
+  },
+  {
+   "day": "pol",
+   "Q": 4,
+   "nMsg": 2215,
+   "pairs": 400,
+   "dropped": 24,
+   "nPos": 955,
+   "nNeg": 10269
+  },
+  {
+   "day": "pol",
+   "Q": 8,
+   "nMsg": 2215,
+   "pairs": 400,
+   "dropped": 22,
+   "nPos": 955,
+   "nNeg": 10269
+  },
+  {
+   "day": "por",
+   "Q": 4,
+   "nMsg": 1200,
+   "pairs": 400,
+   "dropped": 65,
+   "nPos": 1869,
+   "nNeg": 4743
+  },
+  {
+   "day": "por",
+   "Q": 8,
+   "nMsg": 1200,
+   "pairs": 400,
+   "dropped": 91,
+   "nPos": 1869,
+   "nNeg": 4743
+  },
+  {
+   "day": "ron",
+   "Q": 4,
+   "nMsg": 729,
+   "pairs": 312,
+   "dropped": 36,
+   "nPos": 348,
+   "nNeg": 4609
+  },
+  {
+   "day": "ron",
+   "Q": 8,
+   "nMsg": 729,
+   "pairs": 312,
+   "dropped": 36,
+   "nPos": 348,
+   "nNeg": 4609
+  },
+  {
+   "day": "rus",
+   "Q": 4,
+   "nMsg": 601,
+   "pairs": 400,
+   "dropped": 68,
+   "nPos": 668,
+   "nNeg": 4214
+  },
+  {
+   "day": "rus",
+   "Q": 8,
+   "nMsg": 601,
+   "pairs": 400,
+   "dropped": 66,
+   "nPos": 668,
+   "nNeg": 4214
+  },
+  {
+   "day": "slk",
+   "Q": 4,
+   "nMsg": 1049,
+   "pairs": 400,
+   "dropped": 89,
+   "nPos": 721,
+   "nNeg": 4354
+  },
+  {
+   "day": "slk",
+   "Q": 8,
+   "nMsg": 1049,
+   "pairs": 400,
+   "dropped": 111,
+   "nPos": 721,
+   "nNeg": 4354
+  },
+  {
+   "day": "slv",
+   "Q": 4,
+   "nMsg": 1282,
+   "pairs": 400,
+   "dropped": 40,
+   "nPos": 684,
+   "nNeg": 7629
+  },
+  {
+   "day": "slv",
+   "Q": 8,
+   "nMsg": 1282,
+   "pairs": 400,
+   "dropped": 43,
+   "nPos": 684,
+   "nNeg": 7629
+  },
+  {
+   "day": "spa",
+   "Q": 4,
+   "nMsg": 1721,
+   "pairs": 400,
+   "dropped": 64,
+   "nPos": 1614,
+   "nNeg": 7362
+  },
+  {
+   "day": "spa",
+   "Q": 8,
+   "nMsg": 1721,
+   "pairs": 400,
+   "dropped": 80,
+   "nPos": 1614,
+   "nNeg": 7362
+  },
+  {
+   "day": "srp",
+   "Q": 4,
+   "nMsg": 520,
+   "pairs": 352,
+   "dropped": 80,
+   "nPos": 432,
+   "nNeg": 3240
+  },
+  {
+   "day": "srp",
+   "Q": 8,
+   "nMsg": 520,
+   "pairs": 352,
+   "dropped": 80,
+   "nPos": 432,
+   "nNeg": 3240
+  },
+  {
+   "day": "swe",
+   "Q": 4,
+   "nMsg": 1219,
+   "pairs": 98,
+   "dropped": 25,
+   "nPos": 123,
+   "nNeg": 4299
+  },
+  {
+   "day": "swe",
+   "Q": 8,
+   "nMsg": 1219,
+   "pairs": 97,
+   "dropped": 26,
+   "nPos": 123,
+   "nNeg": 4299
+  },
+  {
+   "day": "tam",
+   "Q": 4,
+   "nMsg": 120,
+   "pairs": 71,
+   "dropped": 83,
+   "nPos": 154,
+   "nNeg": 630
+  },
+  {
+   "day": "tam",
+   "Q": 8,
+   "nMsg": 120,
+   "pairs": 71,
+   "dropped": 83,
+   "nPos": 154,
+   "nNeg": 630
+  },
+  {
+   "day": "tel",
+   "Q": 4,
+   "nMsg": 146,
+   "pairs": 5,
+   "dropped": 5,
+   "nPos": 10,
+   "nNeg": 296
+  },
+  {
+   "day": "tel",
+   "Q": 8,
+   "nMsg": 146,
+   "pairs": 5,
+   "dropped": 5,
+   "nPos": 10,
+   "nNeg": 296
+  },
+  {
+   "day": "tur",
+   "Q": 4,
+   "nMsg": 1100,
+   "pairs": 148,
+   "dropped": 49,
+   "nPos": 197,
+   "nNeg": 3594
+  },
+  {
+   "day": "tur",
+   "Q": 8,
+   "nMsg": 1100,
+   "pairs": 148,
+   "dropped": 49,
+   "nPos": 197,
+   "nNeg": 3594
+  },
+  {
+   "day": "uig",
+   "Q": 4,
+   "nMsg": 900,
+   "pairs": 7,
+   "dropped": 4,
+   "nPos": 11,
+   "nNeg": 3818
+  },
+  {
+   "day": "uig",
+   "Q": 8,
+   "nMsg": 900,
+   "pairs": 7,
+   "dropped": 4,
+   "nPos": 11,
+   "nNeg": 3818
+  },
+  {
+   "day": "ukr",
+   "Q": 4,
+   "nMsg": 858,
+   "pairs": 339,
+   "dropped": 54,
+   "nPos": 393,
+   "nNeg": 5570
+  },
+  {
+   "day": "ukr",
+   "Q": 8,
+   "nMsg": 858,
+   "pairs": 338,
+   "dropped": 55,
+   "nPos": 393,
+   "nNeg": 5570
+  },
+  {
+   "day": "urd",
+   "Q": 4,
+   "nMsg": 535,
+   "pairs": 400,
+   "dropped": 181,
+   "nPos": 649,
+   "nNeg": 1908
+  },
+  {
+   "day": "urd",
+   "Q": 8,
+   "nMsg": 535,
+   "pairs": 400,
+   "dropped": 188,
+   "nPos": 649,
+   "nNeg": 1908
+  },
+  {
+   "day": "vie",
+   "Q": 4,
+   "nMsg": 800,
+   "pairs": 62,
+   "dropped": 38,
+   "nPos": 100,
+   "nNeg": 1770
+  },
+  {
+   "day": "vie",
+   "Q": 8,
+   "nMsg": 800,
+   "pairs": 61,
+   "dropped": 39,
+   "nPos": 100,
+   "nNeg": 1770
+  },
+  {
+   "day": "wol",
+   "Q": 4,
+   "nMsg": 470,
+   "pairs": 244,
+   "dropped": 94,
+   "nPos": 338,
+   "nNeg": 1355
+  },
+  {
+   "day": "wol",
+   "Q": 8,
+   "nMsg": 470,
+   "pairs": 244,
+   "dropped": 94,
+   "nPos": 338,
+   "nNeg": 1355
+  }
+ ],
+ "pooledAll": {
+  "variant": "M4",
+  "n": 13477,
+  "days": 52,
+  "ctl": {
+   "i": 0.4979,
+   "len": 0.5027,
+   "cl": 0.4979,
+   "lc": 0.4999
+  },
+  "ctlOk": true,
+  "tried": [
+   {
+    "variant": "M4",
+    "n": 13477,
+    "ctl": {
+     "i": 0.4979,
+     "len": 0.5027,
+     "cl": 0.4979,
+     "lc": 0.4999
+    },
+    "ctlOk": true
+   }
+  ],
+  "auc": 0.5079,
+  "ci": [
+   0.5065,
+   0.5095
+  ],
+  "dayCi": [
+   0.5053,
+   0.5106
+  ],
+  "nullQ95Analytic": 0.5071,
+  "nullQ95Flip": 0.5013,
+  "thr": {
+   "n": 13477,
+   "tpr": 0.0039,
+   "fpr": 0.0018,
+   "balPrec": 0.6842
+  },
+  "tieShare": 0.9676,
+  "bothZero": 0.9662,
+  "beyondCNT_Tinf": {
+   "kept": 13260,
+   "share": 0.9839,
+   "auc": 0.5079,
+   "ci": [
+    0.5064,
+    0.5092
+   ]
+  },
+  "beyondCNT_T128": {
+   "kept": 12273,
+   "share": 0.9107,
+   "auc": 0.5041,
+   "ci": [
+    0.5029,
+    0.5052
+   ]
+  },
+  "rivalAuc": {
+   "CNT_Tinf": 0.4978,
+   "CNT_T128": 0.5183,
+   "INIT_T128": 0.5074
+  },
+  "slotSham": {
+   "SEC_Tinf": 0.5003,
+   "LAST_Tinf": 0.5018
+  },
+  "FNEXT": 0.4303,
+  "wordshuf": {
+   "n": 13444,
+   "auc": 0.4997,
+   "ctl": {
+    "i": 0.4986,
+    "len": 0.5022,
+    "cl": 0.4971,
+    "lc": 0.4995
+   },
+   "drop": 0.0082
+  },
+  "msgshuf": {
+   "n": 13460,
+   "auc": 0.5058,
+   "ctl": {
+    "i": 0.4977,
+    "len": 0.5072,
+    "cl": 0.4974,
+    "lc": 0.4998
+   },
+   "drop": 0.0021
+  },
+  "perDaySummary": {
+   "daysWithN10": 49,
+   "above05": 31,
+   "binomP": 0.0427
+  },
+  "core": false,
+  "companions": {
+   "dayCi": false,
+   "wordshuf": false,
+   "beyondCNT_Tinf": false
+  },
+  "holds": false
+ },
+ "eng": {
+  "variant": "M4",
+  "n": 400,
+  "days": 1,
+  "ctl": {
+   "i": 0.4913,
+   "len": 0.4925,
+   "cl": 0.5275,
+   "lc": 0.5
+  },
+  "ctlOk": true,
+  "tried": [
+   {
+    "variant": "M4",
+    "n": 400,
+    "ctl": {
+     "i": 0.4913,
+     "len": 0.4925,
+     "cl": 0.5275,
+     "lc": 0.5
+    },
+    "ctlOk": true
+   }
+  ],
+  "auc": 0.5138,
+  "ci": [
+   0.5012,
+   0.525
+  ],
+  "dayCi": [
+   null,
+   null
+  ],
+  "nullQ95Analytic": 0.5411,
+  "nullQ95Flip": 0.5088,
+  "thr": {
+   "n": 400,
+   "tpr": 0.005,
+   "fpr": 0,
+   "balPrec": 1
+  },
+  "tieShare": 0.9425,
+  "bothZero": 0.9375,
+  "beyondCNT_Tinf": {
+   "kept": 393,
+   "share": 0.9825,
+   "auc": 0.514,
+   "ci": [
+    0.5013,
+    0.5254
+   ]
+  },
+  "beyondCNT_T128": {
+   "kept": 354,
+   "share": 0.885,
+   "auc": 0.5085,
+   "ci": [
+    0.5,
+    0.5184
+   ]
+  },
+  "rivalAuc": {
+   "CNT_Tinf": 0.4963,
+   "CNT_T128": 0.535,
+   "INIT_T128": 0.515
+  },
+  "slotSham": {
+   "SEC_Tinf": 0.495,
+   "LAST_Tinf": 0.5038
+  },
+  "FNEXT": 0.4475,
+  "wordshuf": {
+   "n": 400,
+   "auc": 0.5125,
+   "ctl": {
+    "i": 0.5238,
+    "len": 0.4788,
+    "cl": 0.5238,
+    "lc": 0.4988
+   },
+   "drop": 0.0013
+  },
+  "msgshuf": {
+   "n": 400,
+   "auc": 0.505,
+   "ctl": {
+    "i": 0.4938,
+    "len": 0.495,
+    "cl": 0.525,
+    "lc": 0.4988
+   },
+   "drop": 0.0088
+  },
+  "perDaySummary": {
+   "daysWithN10": 1,
+   "above05": 1,
+   "binomP": 0.5
+  },
+  "core": false,
+  "companions": {
+   "dayCi": false,
+   "wordshuf": false,
+   "beyondCNT_Tinf": false
+  },
+  "holds": false
+ },
+ "summary": {
+  "languages": 53,
+  "testable": 34,
+  "void": 19,
+  "core": [],
+  "holdsAll": [],
+  "coreShare": 0,
+  "aucAbove05": 23,
+  "aucTable": {
+   "bul": 0.5,
+   "cat": 0.5138,
+   "cym": 0.4984,
+   "dan": 0.5035,
+   "deu": 0.5125,
+   "ell": 0.5,
+   "eng": 0.5138,
+   "est": 0.52,
+   "eus": 0.5088,
+   "fas": 0.5038,
+   "fin": 0.5162,
+   "fra": 0.5015,
+   "gle": 0.5034,
+   "glg": 0.5,
+   "heb": 0.5146,
+   "hun": 0.5126,
+   "hye": 0.5056,
+   "ind": 0.5,
+   "ita": 0.4983,
+   "kat": 0.5,
+   "lav": 0.5088,
+   "lit": 0.5115,
+   "nob": 0.5313,
+   "pol": 0.4975,
+   "por": 0.5012,
+   "ron": 0.5,
+   "rus": 0.5012,
+   "slk": 0.5112,
+   "slv": 0.5,
+   "spa": 0.5162,
+   "srp": 0.5071,
+   "tur": 0.4966,
+   "ukr": 0.5044,
+   "wol": 0.5061
+  }
+ },
+ "predictions": {
+  "pooledAuc_0_46_0_60": true,
+  "coreShare_le_0_25": true,
+  "engAuc_0_45_0_62": true
+ },
+ "seconds": 6.7
+}

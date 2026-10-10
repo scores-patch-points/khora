@@ -1,0 +1,66 @@
+{
+ "EN": {
+  "recallByMessageIndex": {
+   "0-99": "252/432=0.58",
+   "100-499": "1363/1810=0.75",
+   "500-1999": "3588/4527=0.79",
+   "2000+": "12090/15028=0.80"
+  },
+  "fpRateByMessageIndex": {
+   "0-99": "116/10427=0.0111",
+   "100-499": "435/48746=0.0089",
+   "500-1999": "744/82676=0.0090",
+   "2000+": "2102/256346=0.0082"
+  },
+  "topFP": "hello:615 hey:387 ryan:119 hmm:101 jordan:92 jack:88 int:55 adrian:54 drac:44 mark:43 metalgeek:41 kris:40 aidan:36 heh:34 odd:34 diesel:33 abhi:33 logical:32 yeah:32 yes:32 difh:29 hmmm:27 embed:26 lol:25 okay:24 yup:24 besonen:24 how:23 spanglish:22 elsebis:21",
+  "topMissed": "was:231 user:104 ubotu:80 ubottu:61 n00b:50 root:45 hardware:43 blueskaj:27 ikonia:25 eth0:23 hamid1990:22 bazhang:21 bobslob:21 nick:19 rww:18 tritium:17 flannel:17 test:17 gui:16 zaden:16 llutz:14 seveas:13 m4ld:13 nickrud:13 pici:12 intelikey:12 jrib:11 job:11 zykotick9:11 zteam:11"
+ },
+ "DE": {
+  "recallByMessageIndex": {
+   "0-99": "33/54=0.61",
+   "100-499": "148/232=0.64",
+   "500-1999": "11/17=0.65",
+   "2000+": "0/0=0.00"
+  },
+  "fpRateByMessageIndex": {
+   "0-99": "21/2210=0.0095",
+   "100-499": "109/8761=0.0124",
+   "500-1999": "2/393=0.0051",
+   "2000+": "0/0=0.0000"
+  },
+  "topFP": "title:36 hallo:15 also:12 acpi:10 bus:9 hans:8 maze:7 hmm:4 okay:3 kann:3 wilde:3 wenn:2 nein:2 moin:2 naja:2 noktar:2 mein:1 guten:1 xrandr:1 gut:1 ansonsten:1 nopaste:1 niklasfi:1 hey:1 https:1 deswegen:1 usr:1 gute:1",
+  "topMissed": "siedhuss:9 p01nt3r:6 yaster:5 kahja:5 orcor:4 tuor:4 letothe2nd:4 sdx23:3 ppq:3 bekks:3 hamster:3 isotop7:3 k1l:2 schischibunti:2 grullers:2 sysopa:2 deem:2 dadrc:2 spiritoftux:2 zeitsofa:1 luchs:1 sds58:1 papachaotica:1 dauerflucher:1 fuchs:1 bullgard:1 minipluto:1 ring0:1 joschi:1 michi1802:1"
+ },
+ "ES": {
+  "recallByMessageIndex": {
+   "0-99": "14/29=0.48",
+   "100-499": "11/37=0.30",
+   "500-1999": "83/170=0.49",
+   "2000+": "0/0=0.00"
+  },
+  "fpRateByMessageIndex": {
+   "0-99": "12/422=0.0284",
+   "100-499": "51/2265=0.0225",
+   "500-1999": "96/4510=0.0213",
+   "2000+": "0/0=0.0000"
+  },
+  "topFP": "hola:65 gracias:19 entiendo:9 alguien:8 vale:7 jajajaja:5 aja:5 entonces:2 lol:2 suele:2 dime:2 cool:2 aber:2 bueno:2 dentro:2 buenas:2 comando:1 parece:1 buenos:1 error:1 oye:1 jajaja:1 dame:1 existe:1 correcto:1 busca:1 perdona:1 qué:1 pon:1 sólo:1",
+  "topMissed": "cossier:21 fosco:10 pupilo:9 linuxreign:9 mimecar:9 chasis:8 idroj07:8 seyacat:7 algabe:6 chiche:4 ayuda:4 gusan0r:4 renzo:3 bl4ckc00k1e:2 neoranger:2 thedemon007:2 dannylopez68:1 dabor:1 sadlymistaken:1 hashashin:1 rommel:1 mauricio:1 reisilver:1 songer7:1 jose:1 eliezer:1 erabuelo:1 moshi:1 alberto:1 doby:1"
+ },
+ "IT": {
+  "recallByMessageIndex": {
+   "0-99": "75/114=0.66",
+   "100-499": "197/271=0.73",
+   "500-1999": "180/306=0.59",
+   "2000+": "0/0=0.00"
+  },
+  "fpRateByMessageIndex": {
+   "0-99": "21/1129=0.0186",
+   "100-499": "241/8226=0.0293",
+   "500-1999": "280/12193=0.0230",
+   "2000+": "0/0=0.0000"
+  },
+  "topFP": "ciao:163 cristian:108 fra:76 calimero:31 salve:22 angel:22 matti:20 vit:17 lol:16 cioè:9 test:7 posta:5 ecco:4 scusate:4 diels:2 gipiana:2 ergo:2 sera:2 net:2 dove:2 okay:2 comunque:2 certo:2 buon:1 omg:1 giorno:1 ola:1 buongiorno:1 cerco:1 error:1",
+  "topMissed": "linux:34 jester:14 nicotano:13 mibofra:10 urus:10 akis24:9 cristian:8 stefano67:8 andrewldn:6 luca73:5 goamon:5 minavagante:5 select:4 ivan:4 fasos:4 a1b2c3:4 crisrock:4 billionaire:4 ubo:4 filippo:4 vice:4 mtjbuntu:4 carlos77:4 polden:3 giuvanni:3 gatolopez70:3 lilluz82:3 nicole89:3 pasquale:3 browser:3"
+ }
+}

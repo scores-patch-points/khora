@@ -1,0 +1,387 @@
+{
+ "origReference": {
+  "IN12": {
+   "n": 12,
+   "meanAuc": 0.6368,
+   "audibleShare": 0.75
+  },
+  "IN23": {
+   "n": 23,
+   "meanAuc": 0.6568,
+   "audibleShare": 0.87
+  },
+  "OUT": {
+   "n": 12,
+   "meanAuc": 0.5999,
+   "audibleShare": 0.417
+  },
+  "OUT12": {
+   "n": 8,
+   "meanAuc": 0.6043,
+   "audibleShare": 0.375
+  }
+ },
+ "tiePairsIdentical": true,
+ "variants": {
+  "S1": {
+   "IN23": {
+    "inSet": 23,
+    "valid": 23,
+    "meanAuc": 0.6519,
+    "audibleShare": 0.913,
+    "audible": 21,
+    "meanOrigSameN": 0.6522,
+    "meanDrop": 0.0003,
+    "meanOrigFull": 0.6568,
+    "meanPairs": 445.5,
+    "pairsGe250": 19,
+    "voided": [],
+    "tooFew": 0,
+    "verdict": "SURVIVES"
+   },
+   "IN12": {
+    "inSet": 12,
+    "valid": 12,
+    "meanAuc": 0.6429,
+    "audibleShare": 0.833,
+    "audible": 10,
+    "meanOrigSameN": 0.6285,
+    "meanDrop": -0.0144,
+    "meanOrigFull": 0.6368,
+    "meanPairs": 377.5,
+    "pairsGe250": 9,
+    "voided": [],
+    "tooFew": 0
+   },
+   "OUT": {
+    "inSet": 12,
+    "valid": 12,
+    "meanAuc": 0.5968,
+    "audibleShare": 0.5,
+    "audible": 6,
+    "meanOrigSameN": 0.5993,
+    "meanDrop": 0.0025,
+    "meanOrigFull": 0.5999,
+    "meanPairs": 396.6,
+    "pairsGe250": 10,
+    "voided": [],
+    "tooFew": 0
+   }
+  },
+  "S2": {
+   "IN23": {
+    "inSet": 23,
+    "valid": 23,
+    "meanAuc": 0.6395,
+    "audibleShare": 0.783,
+    "audible": 18,
+    "meanOrigSameN": 0.6505,
+    "meanDrop": 0.011,
+    "meanOrigFull": 0.6568,
+    "meanPairs": 390.2,
+    "pairsGe250": 16,
+    "voided": [],
+    "tooFew": 0,
+    "verdict": "NARROWS"
+   },
+   "IN12": {
+    "inSet": 12,
+    "valid": 12,
+    "meanAuc": 0.6275,
+    "audibleShare": 0.583,
+    "audible": 7,
+    "meanOrigSameN": 0.6336,
+    "meanDrop": 0.0061,
+    "meanOrigFull": 0.6368,
+    "meanPairs": 328.3,
+    "pairsGe250": 6,
+    "voided": [],
+    "tooFew": 0
+   },
+   "OUT": {
+    "inSet": 12,
+    "valid": 12,
+    "meanAuc": 0.5696,
+    "audibleShare": 0.333,
+    "audible": 4,
+    "meanOrigSameN": 0.5905,
+    "meanDrop": 0.0209,
+    "meanOrigFull": 0.5999,
+    "meanPairs": 324.7,
+    "pairsGe250": 7,
+    "voided": [],
+    "tooFew": 0
+   }
+  },
+  "S3": {
+   "IN23": {
+    "inSet": 23,
+    "valid": 20,
+    "meanAuc": 0.6129,
+    "audibleShare": 0.65,
+    "audible": 13,
+    "meanOrigSameN": 0.624,
+    "meanDrop": 0.0111,
+    "meanOrigFull": 0.6639,
+    "meanPairs": 178.8,
+    "pairsGe250": 5,
+    "voided": [],
+    "tooFew": 3,
+    "verdict": "NARROWS"
+   },
+   "IN12": {
+    "inSet": 12,
+    "valid": 9,
+    "meanAuc": 0.6079,
+    "audibleShare": 0.667,
+    "audible": 6,
+    "meanOrigSameN": 0.5983,
+    "meanDrop": -0.0096,
+    "meanOrigFull": 0.6459,
+    "meanPairs": 139.4,
+    "pairsGe250": 1,
+    "voided": [],
+    "tooFew": 3
+   },
+   "OUT": {
+    "inSet": 12,
+    "valid": 9,
+    "meanAuc": 0.5383,
+    "audibleShare": 0,
+    "audible": 0,
+    "meanOrigSameN": 0.5807,
+    "meanDrop": 0.0424,
+    "meanOrigFull": 0.6079,
+    "meanPairs": 180.8,
+    "pairsGe250": 2,
+    "voided": [],
+    "tooFew": 3
+   }
+  },
+  "U": {
+   "IN23": {
+    "inSet": 23,
+    "valid": 22,
+    "meanAuc": 0.6216,
+    "audibleShare": 0.727,
+    "audible": 16,
+    "meanOrigSameN": 0.6358,
+    "meanDrop": 0.0142,
+    "meanOrigFull": 0.661,
+    "meanPairs": 236.8,
+    "pairsGe250": 10,
+    "voided": [],
+    "tooFew": 1,
+    "verdict": "NARROWS"
+   },
+   "IN12": {
+    "inSet": 12,
+    "valid": 11,
+    "meanAuc": 0.5858,
+    "audibleShare": 0.455,
+    "audible": 5,
+    "meanOrigSameN": 0.6117,
+    "meanDrop": 0.0259,
+    "meanOrigFull": 0.6433,
+    "meanPairs": 161.4,
+    "pairsGe250": 2,
+    "voided": [],
+    "tooFew": 1
+   },
+   "OUT": {
+    "inSet": 12,
+    "valid": 12,
+    "meanAuc": 0.5482,
+    "audibleShare": 0.167,
+    "audible": 2,
+    "meanOrigSameN": 0.5688,
+    "meanDrop": 0.0206,
+    "meanOrigFull": 0.5999,
+    "meanPairs": 195.8,
+    "pairsGe250": 2,
+    "voided": [],
+    "tooFew": 0
+   }
+  },
+  "TIEmid": {
+   "IN23": {
+    "inSet": 23,
+    "valid": 23,
+    "meanAuc": 0.6532,
+    "audibleShare": 0.826,
+    "audible": 19,
+    "meanOrigSameN": 0.6568,
+    "meanDrop": 0.0036,
+    "meanOrigFull": 0.6568,
+    "meanPairs": 486.6,
+    "pairsGe250": 23,
+    "voided": [],
+    "tooFew": 0,
+    "verdict": "SURVIVES"
+   },
+   "IN12": {
+    "inSet": 12,
+    "valid": 12,
+    "meanAuc": 0.6334,
+    "audibleShare": 0.667,
+    "audible": 8,
+    "meanOrigSameN": 0.6368,
+    "meanDrop": 0.0033,
+    "meanOrigFull": 0.6368,
+    "meanPairs": 437.9,
+    "pairsGe250": 12,
+    "voided": [],
+    "tooFew": 0
+   },
+   "OUT": {
+    "inSet": 12,
+    "valid": 12,
+    "meanAuc": 0.5967,
+    "audibleShare": 0.5,
+    "audible": 6,
+    "meanOrigSameN": 0.5999,
+    "meanDrop": 0.0033,
+    "meanOrigFull": 0.5999,
+    "meanPairs": 438.3,
+    "pairsGe250": 12,
+    "voided": [],
+    "tooFew": 0
+   }
+  },
+  "TIErand": {
+   "IN23": {
+    "inSet": 23,
+    "valid": 23,
+    "meanAuc": 0.656,
+    "audibleShare": 0.87,
+    "audible": 20,
+    "meanOrigSameN": 0.6568,
+    "meanDrop": 0.0008,
+    "meanOrigFull": 0.6568,
+    "meanPairs": 486.6,
+    "pairsGe250": 23,
+    "voided": [],
+    "tooFew": 0,
+    "verdict": "SURVIVES"
+   },
+   "IN12": {
+    "inSet": 12,
+    "valid": 12,
+    "meanAuc": 0.6361,
+    "audibleShare": 0.75,
+    "audible": 9,
+    "meanOrigSameN": 0.6368,
+    "meanDrop": 0.0007,
+    "meanOrigFull": 0.6368,
+    "meanPairs": 437.9,
+    "pairsGe250": 12,
+    "voided": [],
+    "tooFew": 0
+   },
+   "OUT": {
+    "inSet": 12,
+    "valid": 12,
+    "meanAuc": 0.6022,
+    "audibleShare": 0.5,
+    "audible": 6,
+    "meanOrigSameN": 0.5999,
+    "meanDrop": -0.0023,
+    "meanOrigFull": 0.5999,
+    "meanPairs": 438.3,
+    "pairsGe250": 12,
+    "voided": [],
+    "tooFew": 0
+   }
+  },
+  "INTERIOR": {
+   "IN23": {
+    "inSet": 23,
+    "valid": 23,
+    "meanAuc": 0.6288,
+    "audibleShare": 0.652,
+    "audible": 15,
+    "meanOrigSameN": 0.6443,
+    "meanDrop": 0.0155,
+    "meanOrigFull": 0.6568,
+    "meanPairs": 306.3,
+    "pairsGe250": 14,
+    "voided": [],
+    "tooFew": 0,
+    "verdict": "NARROWS"
+   },
+   "IN12": {
+    "inSet": 12,
+    "valid": 12,
+    "meanAuc": 0.5998,
+    "audibleShare": 0.417,
+    "audible": 5,
+    "meanOrigSameN": 0.6217,
+    "meanDrop": 0.0219,
+    "meanOrigFull": 0.6368,
+    "meanPairs": 250.1,
+    "pairsGe250": 4,
+    "voided": [],
+    "tooFew": 0
+   },
+   "OUT": {
+    "inSet": 12,
+    "valid": 12,
+    "meanAuc": 0.5876,
+    "audibleShare": 0.417,
+    "audible": 5,
+    "meanOrigSameN": 0.5929,
+    "meanDrop": 0.0052,
+    "meanOrigFull": 0.5999,
+    "meanPairs": 234.8,
+    "pairsGe250": 5,
+    "voided": [],
+    "tooFew": 0
+   }
+  },
+  "NOPROP": {
+   "IN23": {
+    "inSet": 23,
+    "valid": 23,
+    "meanAuc": 0.6177,
+    "audibleShare": 0.565,
+    "audible": 13,
+    "meanOrigSameN": 0.6211,
+    "meanDrop": 0.0034,
+    "meanOrigFull": 0.6568,
+    "meanPairs": 188.4,
+    "pairsGe250": 4,
+    "voided": [],
+    "tooFew": 0,
+    "verdict": "NARROWS"
+   },
+   "IN12": {
+    "inSet": 12,
+    "valid": 12,
+    "meanAuc": 0.604,
+    "audibleShare": 0.5,
+    "audible": 6,
+    "meanOrigSameN": 0.6122,
+    "meanDrop": 0.0083,
+    "meanOrigFull": 0.6368,
+    "meanPairs": 207.2,
+    "pairsGe250": 2,
+    "voided": [],
+    "tooFew": 0
+   },
+   "OUT": {
+    "inSet": 12,
+    "valid": 12,
+    "meanAuc": 0.6003,
+    "audibleShare": 0.5,
+    "audible": 6,
+    "meanOrigSameN": 0.5652,
+    "meanDrop": -0.0351,
+    "meanOrigFull": 0.5999,
+    "meanPairs": 196,
+    "pairsGe250": 3,
+    "voided": [],
+    "tooFew": 0
+   }
+  }
+ }
+}

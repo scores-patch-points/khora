@@ -1,0 +1,67 @@
+{
+ "candidates": [
+  [
+   "irc.A:c.surprisalDestroyed",
+   0.743,
+   [
+    0.7163,
+    0.7681
+   ],
+   [
+    "c2",
+    "c3",
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ]
+  ],
+  [
+   "irc.B:c.dSelf",
+   0.732,
+   [
+    0.7021,
+    0.7659
+   ],
+   [
+    "c2",
+    "c3",
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ]
+  ],
+  [
+   "wp.A:atm.activation.self",
+   0.6615,
+   [
+    0.6276,
+    0.6999
+   ],
+   [
+    "c2",
+    "c3",
+    "c4_6",
+    "c7_15"
+   ]
+  ],
+  [
+   "wp.B:sig.n(rel-end1/b2)",
+   0.5965,
+   [
+    0.5582,
+    0.6247
+   ],
+   [
+    "c4_6",
+    "c16p"
+   ]
+  ]
+ ],
+ "predictions": {
+  "Q1_ircA_nominated": true,
+  "Q2_company_or_atm": true,
+  "Q3_wpB_none": false,
+  "Q4_same_component_A_and_B": true
+ },
+ "headerSha256": "e920fbce4a44ed78f1b44c5c09c6b05f6a53dabcce98fa9fa7b6696cf13edede"
+}

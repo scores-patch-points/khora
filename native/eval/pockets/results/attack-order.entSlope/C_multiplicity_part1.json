@@ -1,0 +1,187 @@
+{
+ "n390": 390,
+ "nPresent": 245,
+ "nPos": 109,
+ "multiplicity": {
+  "nStatistics": 81,
+  "nRealPockets": 391,
+  "definedRealCells": 29680,
+  "observedPresentRealCells": 22017,
+  "shareObservedPresent": 0.7418126684636118,
+  "plantedIid": {
+   "halfCells": 307,
+   "absZge4": 4,
+   "pPresentPerCell": 0.00008488153720463878,
+   "expectedFalsePresentAllCells": 2.519,
+   "expectedFalsePresentEntSlope390": 0.03310379950980912,
+   "ruleOfThreeUpperPerCell": 0.0196078431372549,
+   "expectedFalseEntSlope390AtRuleOfThree": 7.647058823529411
+  },
+  "controls20": {
+   "definedCells": 1447,
+   "presentObserved": 0,
+   "entSlopeCellsInControls": {
+    "A": 17,
+    "M": 3
+   }
+  },
+  "entSlopePresentExcessOverNull": 244.9668962004902
+ },
+ "reversalCheapness": {
+  "nStatsWithStatusReversal": 38,
+  "of": 81,
+  "entSlopeMinoritySignShare": 0.4448979591836735,
+  "rankByBalance": [
+   {
+    "stat": "comp.asym",
+    "pos": 116,
+    "neg": 98,
+    "bal": 0.45794392523364486
+   },
+   {
+    "stat": "fig.introRight",
+    "pos": 14,
+    "neg": 17,
+    "bal": 0.45161290322580644
+   },
+   {
+    "stat": "order.entSlope",
+    "pos": 109,
+    "neg": 136,
+    "bal": 0.4448979591836735
+   },
+   {
+    "stat": "freq.zipfAlpha",
+    "pos": 59,
+    "neg": 77,
+    "bal": 0.4338235294117647
+   },
+   {
+    "stat": "order.depLen",
+    "pos": 91,
+    "neg": 49,
+    "bal": 0.35
+   },
+   {
+    "stat": "order.rareCurve",
+    "pos": 174,
+    "neg": 81,
+    "bal": 0.3176470588235294
+   },
+   {
+    "stat": "order.entCurv",
+    "pos": 126,
+    "neg": 53,
+    "bal": 0.29608938547486036
+   },
+   {
+    "stat": "fig.converge",
+    "pos": 11,
+    "neg": 4,
+    "bal": 0.26666666666666666
+   }
+  ],
+  "nReversalWithMinorityShareAtLeast20pct": 12,
+  "presentShareOfCellsInRevStats": 0.6355000842193393
+ },
+ "signSplit": {
+  "n": 245,
+  "levels": {
+   "register": 29,
+   "group": 6,
+   "language": 99,
+   "script": 8,
+   "grain": 4,
+   "groupLang": 111,
+   "groupGrain": 11
+  },
+  "register_plainPerm": {
+   "eta2": 0.5564944340950481,
+   "nullMean": 0.11442214599211624,
+   "p": 0.0004997501249375312
+  },
+  "group_plainPerm": {
+   "eta2": 0.2727254790665805,
+   "nullMean": 0.020532574530920236,
+   "p": 0.0004997501249375312
+  },
+  "language_plainPerm": {
+   "eta2": 0.6174874518974725,
+   "nullMean": 0.40084136388747865,
+   "p": 0.0004997501249375312
+  },
+  "script_plainPerm": {
+   "eta2": 0.0798129616159723,
+   "nullMean": 0.029331611601893914,
+   "p": 0.0014992503748125937
+  },
+  "grain_plainPerm": {
+   "eta2": 0.07450080949811143,
+   "nullMean": 0.012335547085806736,
+   "p": 0.0009995002498750624
+  },
+  "registerWithinGroup": {
+   "eta2": 0.5564944340950481,
+   "nullMean": 0.30222847005384057,
+   "p": 0.0004997501249375312
+  },
+  "registerWithinLanguage": {
+   "eta2": 0.5564944340950481,
+   "nullMean": 0.37184909088969154,
+   "p": 0.0004997501249375312
+  },
+  "registerWithinGroupLanguage": {
+   "eta2": 0.5564944340950481,
+   "nullMean": 0.5167798154398642,
+   "p": 0.04547726136931534
+  },
+  "registerWithinGroupGrain": {
+   "eta2": 0.5564944340950481,
+   "nullMean": 0.3472225329914292,
+   "p": 0.0004997501249375312
+  },
+  "languageWithinRegister": {
+   "eta2": 0.6174874518974725,
+   "nullMean": 0.49326981583918117,
+   "p": 0.0004997501249375312
+  },
+  "groupWithinRegister": {
+   "eta2": 0.2727254790665805,
+   "nullMean": 0.2328936989144972,
+   "p": 0.014992503748125937
+  },
+  "englishOnly": {
+   "n": 82,
+   "nPos": 64,
+   "register_plainPerm": {
+    "eta2": 0.8389963624338621,
+    "nullMean": 0.2483372097160625,
+    "p": 0.0004997501249375312
+   },
+   "registerWithinGroup": {
+    "eta2": 0.8389963624338621,
+    "nullMean": 0.7408948123346538,
+    "p": 0.03498250874562719
+   }
+  },
+  "nonEnglish": {
+   "n": 163,
+   "nPos": 45,
+   "register_plainPerm": {
+    "eta2": 0.4986225972758028,
+    "nullMean": 0.11272136330847084,
+    "p": 0.0004997501249375312
+   }
+  },
+  "signShareByLanguageClass": {
+   "english": {
+    "n": 82,
+    "pos": 64
+   },
+   "nonEnglish": {
+    "n": 163,
+    "pos": 45
+   }
+  }
+ }
+}

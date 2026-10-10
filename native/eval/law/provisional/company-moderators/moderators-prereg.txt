@@ -1,0 +1,45 @@
+COMPANY-MODERATORS: pre-registration of candidate moderators (written 2026-10-07, BEFORE any moderator value, descriptor or regression was computed)
+=========================================================================================================================================
+QUESTION. name-company found a language-general company signal (BOTH@LATER mean AUC 0.615, LEFT@FIRST 0.624) that is very uneven across languages
+(fra 0.73 ... tur 0.48). Which language/stream property predicts where it is strong?
+
+DISCLOSURE (what I had seen before writing this). I read NAME-COMPANY-RESULTS.md and printed results/name-company-pairblocks/own.json, so I HAVE SEEN every
+language's own-language AUC (LATER LEFT/BOTH, FIRST LEFT/BOTH) and pair counts, and the report's remark that tur/ukr/pol/fin/deu are weak and fra/spa/fas/urd/heb
+strong. I noticed while printing that the weak languages mostly have few pairs (ukr 79, jpn 84, rus 110, deu 116, ita 129, tur 140). M1 and M3 below were
+suggested by that look; so the directions are NOT blind for these two. They are therefore not allowed to count as confirmed by the dev regression alone: the
+rules emitted from this file are confirmed (or killed) only on UD test.conllu, including 28 languages that name-company never touched
+(afr bul cat ces cym dan est eus gle glg hrv hun hye kat lav lit lzh mar mlt nob ron slk slv srp tam tel uig wol). I have seen no company AUC and no
+descriptor for those 28 languages, and no test.conllu of any language has been opened by anything in this lens.
+
+DEPENDENT VARIABLES (evaluation side only; from own.json of the valid, PAIRBLOCK run; thin languages excluded, as name-company excluded them):
+  Y_LATER = BOTH@LATER own-language CV AUC (22 languages); Y_FIRST = LEFT@FIRST own-language CV AUC (23 languages).
+
+THE THREE CANDIDATE MODERATORS (at most three; everything else below is exploratory and gets no regression):
+  M1  FWC32  = share of stream tokens whose form is among the 32 commonest forms of that file's own stream (lowercase words, punctuation dropped, as
+              readConlluStream; ties broken by form string). STREAM-OBSERVABLE: needs no label, no case, no POS.
+              PREDICTED DIRECTION: POSITIVE. Mechanism: the company profile codes each neighbour by its frequency-rank bin; where closed-class words are
+              separate high-rank tokens (analytic languages; postpositions in Hindi/Urdu/Persian), a name's left/right neighbours differ in rank-bin from a
+              matched open-class word's. Where function is carried by suffixes (tur, fin, hun, pol, rus), the neighbour bins carry little.
+  M2  CHAIN  = share of PROPN tokens (gold UPOS, evaluation side) that have an immediately adjacent PROPN in the same sentence of the punctuation-dropped
+              stream (multiword names). PREDICTED DIRECTION: POSITIVE. Mechanism: a name inside a name has rare-form neighbours; a matched ordinary word
+              rarely does.
+  M3  LOGPAIRS = log2(matched pairs available in that stratum), from own.json. A NUISANCE moderator (sample size of the probe; 52 features on 60-600 pairs).
+              PREDICTED DIRECTION: POSITIVE. It is not a language property; it is in the model to stop M1/M2 taking credit for training size.
+
+MODELS (fixed now): OLS with intercept. The 7 non-empty subsets of {M1, M2, M3}; features z-scored inside each training fold. Metrics: leave-one-language-out
+(LOLO) prediction of each language's AUC; RMSE and MAE of the model vs the mean-only LOLO baseline; skill = 1 - RMSE_model / RMSE_baseline.
+  SELECTION CORRECTION: the primary statistic is the BEST skill over the 7 models. Its null is the same best-of-7 statistic recomputed on 2000 permutations of
+  the AUC vector against the moderator rows (language-label permutation). A moderator set is SUPPORTED (provisional, dev-only) iff best-of-7 skill >= 0.10, its
+  permutation p <= 0.05, and the sign of every coefficient in the winning model equals the predicted sign. A single moderator is called a MODERATOR iff the
+  single-moderator model has skill > 0, sign as predicted, and permutation p <= 0.05 (uncorrected, flagged as such).
+RESIDUALS: per-language LOLO residual (observed - predicted); OUTLIER if |residual| >= 2 x the SD of LOLO residuals. Approximate sampling SE of each language's
+  AUC is reported (Hanley-McNeil with n = pairs) so that residuals can be read against measurement noise.
+EXPLORATORY (no inference, no regression; Spearman rho with each AUC and a 2000-permutation p, labelled EXPLORATORY because ~20 descriptors x 2 outcomes
+  are scanned): share of PROPN preceded (stream-left neighbour) by ADP/DET/ADJ/NOUN/PROPN/none; share of PROPN sentence-initial; PROPN hapax rate (tokens
+  and types); mean PROPN character length; PROPN density; mean sentence length; sentences; LATER/FIRST pairs; cased-script (analysis variable only, share of
+  tokens with form != lowercase form); word-order shares from dev gold deprel (nsubj-before-verb, obj-after-verb, case-before-head (prepositions),
+  amod-before-noun, det-before-noun) and SOV-like/SVO-like from results/name-shape/_report.json.
+EMITTING RULES: at most 2. A rule is emitted only if its moderator set is SUPPORTED or MODERATOR as above; its scope threshold is the moderator value at which
+  the dev-fitted model predicts AUC = 0.60, fixed from dev; its confirmation is on UD test.conllu with pass/fail fixed in a SECOND header (the confirmation
+  script) BEFORE any test.conllu is opened. If nothing is supported, the null is reported as the finding and no rule is emitted as supported; a partial or
+  directional effect is reported as provisional with its numbers.

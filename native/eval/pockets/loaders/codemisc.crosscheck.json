@@ -1,0 +1,300 @@
+{
+ "source": "/Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-code/data/lex",
+ "filesChecked": 32,
+ "skippedMissingSource": 0,
+ "skippedOther": 0,
+ "medianCoverage": 1,
+ "minCoverage": 1,
+ "medianShareOfMine": 0.5269,
+ "minShare": 0.2348,
+ "rows": [
+  {
+   "lex": "js-0.json",
+   "lang": "js",
+   "file": "/Users/mlacy/Documents/3.0/khora/native/eval/coding-competence/build-java-priors.mjs",
+   "lexerIdentifierTokens": 3472,
+   "myTokens": 6826,
+   "coverage": 1,
+   "shareOfMine": 0.5086
+  },
+  {
+   "lex": "js-1.json",
+   "lang": "js",
+   "file": "/Users/mlacy/Documents/3.0/khora/native/organs/measure.js",
+   "lexerIdentifierTokens": 2501,
+   "myTokens": 7349,
+   "coverage": 1,
+   "shareOfMine": 0.3403
+  },
+  {
+   "lex": "js-10.json",
+   "lang": "js",
+   "file": "/Users/mlacy/Documents/jupyter/node_modules/eslint/node_modules/doctrine/lib/doctrine.js",
+   "lexerIdentifierTokens": 1564,
+   "myTokens": 2374,
+   "coverage": 1,
+   "shareOfMine": 0.6588
+  },
+  {
+   "lex": "js-11.json",
+   "lang": "js",
+   "file": "/Users/mlacy/Documents/jupyter/node_modules/@xmldom/xmldom/lib/entities.js",
+   "lexerIdentifierTokens": 2144,
+   "myTokens": 4642,
+   "coverage": 1,
+   "shareOfMine": 0.4619
+  },
+  {
+   "lex": "js-2.json",
+   "lang": "js",
+   "file": "/Users/mlacy/Documents/3.0/khora/native/eval/competence/r2-class.mjs",
+   "lexerIdentifierTokens": 5296,
+   "myTokens": 10157,
+   "coverage": 1,
+   "shareOfMine": 0.5214
+  },
+  {
+   "lex": "js-3.json",
+   "lang": "js",
+   "file": "/Users/mlacy/Documents/3.0/khora/native/eval/barker/transfer.mjs",
+   "lexerIdentifierTokens": 10769,
+   "myTokens": 16147,
+   "coverage": 1,
+   "shareOfMine": 0.6669
+  },
+  {
+   "lex": "js-4.json",
+   "lang": "js",
+   "file": "/Users/mlacy/Documents/3.0/khora/native/adapters/text/recursive.js",
+   "lexerIdentifierTokens": 2833,
+   "myTokens": 7204,
+   "coverage": 1,
+   "shareOfMine": 0.3933
+  },
+  {
+   "lex": "js-5.json",
+   "lang": "js",
+   "file": "/Users/mlacy/Documents/3.0/khora/native/adapters/notation/genetic.js",
+   "lexerIdentifierTokens": 4195,
+   "myTokens": 6649,
+   "coverage": 1,
+   "shareOfMine": 0.6309
+  },
+  {
+   "lex": "js-6.json",
+   "lang": "js",
+   "file": "/Users/mlacy/Documents/jupyter/node_modules/filelist/node_modules/minimatch/minimatch.js",
+   "lexerIdentifierTokens": 1560,
+   "myTokens": 3420,
+   "coverage": 1,
+   "shareOfMine": 0.4561
+  },
+  {
+   "lex": "js-7.json",
+   "lang": "js",
+   "file": "/Users/mlacy/Documents/jupyter/node_modules/webpack/lib/cache/PackFileCacheStrategy.js",
+   "lexerIdentifierTokens": 2775,
+   "myTokens": 4107,
+   "coverage": 1,
+   "shareOfMine": 0.6757
+  },
+  {
+   "lex": "js-8.json",
+   "lang": "js",
+   "file": "/Users/mlacy/Documents/jupyter/node_modules/es-abstract/operations/2018.js",
+   "lexerIdentifierTokens": 676,
+   "myTokens": 2879,
+   "coverage": 1,
+   "shareOfMine": 0.2348
+  },
+  {
+   "lex": "js-9.json",
+   "lang": "js",
+   "file": "/Users/mlacy/Documents/jupyter/node_modules/uri-js/dist/es5/uri.all.js",
+   "lexerIdentifierTokens": 3546,
+   "myTokens": 5415,
+   "coverage": 1,
+   "shareOfMine": 0.6548
+  },
+  {
+   "lex": "py-0.json",
+   "lang": "py",
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/email/message.py",
+   "lexerIdentifierTokens": 2262,
+   "myTokens": 5644,
+   "coverage": 1,
+   "shareOfMine": 0.4008
+  },
+  {
+   "lex": "py-1.json",
+   "lang": "py",
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/logging/config.py",
+   "lexerIdentifierTokens": 2468,
+   "myTokens": 4478,
+   "coverage": 1,
+   "shareOfMine": 0.5511
+  },
+  {
+   "lex": "py-10.json",
+   "lang": "py",
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/xml/etree/ElementTree.py",
+   "lexerIdentifierTokens": 3925,
+   "myTokens": 8287,
+   "coverage": 1,
+   "shareOfMine": 0.4736
+  },
+  {
+   "lex": "py-11.json",
+   "lang": "py",
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/email/_header_value_parser.py",
+   "lexerIdentifierTokens": 6414,
+   "myTokens": 12017,
+   "coverage": 1,
+   "shareOfMine": 0.5337
+  },
+  {
+   "lex": "py-2.json",
+   "lang": "py",
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/re/_compiler.py",
+   "lexerIdentifierTokens": 2063,
+   "myTokens": 2691,
+   "coverage": 1,
+   "shareOfMine": 0.7666
+  },
+  {
+   "lex": "py-3.json",
+   "lang": "py",
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/_bootstrap.py",
+   "lexerIdentifierTokens": 2964,
+   "myTokens": 6464,
+   "coverage": 1,
+   "shareOfMine": 0.4585
+  },
+  {
+   "lex": "py-4.json",
+   "lang": "py",
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/_py_warnings.py",
+   "lexerIdentifierTokens": 1782,
+   "myTokens": 3382,
+   "coverage": 1,
+   "shareOfMine": 0.5269
+  },
+  {
+   "lex": "py-5.json",
+   "lang": "py",
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/_collections_abc.py",
+   "lexerIdentifierTokens": 2127,
+   "myTokens": 3512,
+   "coverage": 1,
+   "shareOfMine": 0.6056
+  },
+  {
+   "lex": "py-6.json",
+   "lang": "py",
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pydoc.py",
+   "lexerIdentifierTokens": 6869,
+   "myTokens": 11819,
+   "coverage": 1,
+   "shareOfMine": 0.5812
+  },
+  {
+   "lex": "py-7.json",
+   "lang": "py",
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/annotationlib.py",
+   "lexerIdentifierTokens": 2632,
+   "myTokens": 4552,
+   "coverage": 1,
+   "shareOfMine": 0.5782
+  },
+  {
+   "lex": "py-8.json",
+   "lang": "py",
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/optparse.py",
+   "lexerIdentifierTokens": 2879,
+   "myTokens": 6305,
+   "coverage": 1,
+   "shareOfMine": 0.4566
+  },
+  {
+   "lex": "py-9.json",
+   "lang": "py",
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/proactor_events.py",
+   "lexerIdentifierTokens": 2329,
+   "myTokens": 3229,
+   "coverage": 1,
+   "shareOfMine": 0.7213
+  },
+  {
+   "lex": "rb-0.json",
+   "lang": "rb",
+   "file": "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/net/imap.rb",
+   "lexerIdentifierTokens": 5000,
+   "myTokens": 11756,
+   "coverage": 1,
+   "shareOfMine": 0.4253
+  },
+  {
+   "lex": "rb-1.json",
+   "lang": "rb",
+   "file": "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/mkmf.rb",
+   "lexerIdentifierTokens": 4968,
+   "myTokens": 10213,
+   "coverage": 1,
+   "shareOfMine": 0.4864
+  },
+  {
+   "lex": "rb-2.json",
+   "lang": "rb",
+   "file": "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems.rb",
+   "lexerIdentifierTokens": 1599,
+   "myTokens": 4439,
+   "coverage": 1,
+   "shareOfMine": 0.3602
+  },
+  {
+   "lex": "rb-3.json",
+   "lang": "rb",
+   "file": "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/matrix.rb",
+   "lexerIdentifierTokens": 3872,
+   "myTokens": 6941,
+   "coverage": 1,
+   "shareOfMine": 0.5578
+  },
+  {
+   "lex": "rb-4.json",
+   "lang": "rb",
+   "file": "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/fileutils.rb",
+   "lexerIdentifierTokens": 2756,
+   "myTokens": 5856,
+   "coverage": 1,
+   "shareOfMine": 0.4706
+  },
+  {
+   "lex": "rb-5.json",
+   "lang": "rb",
+   "file": "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rss/rss.rb",
+   "lexerIdentifierTokens": 2256,
+   "myTokens": 3341,
+   "coverage": 1,
+   "shareOfMine": 0.6752
+  },
+  {
+   "lex": "rb-6.json",
+   "lang": "rb",
+   "file": "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/uri/generic.rb",
+   "lexerIdentifierTokens": 1701,
+   "myTokens": 4060,
+   "coverage": 1,
+   "shareOfMine": 0.419
+  },
+  {
+   "lex": "rb-7.json",
+   "lang": "rb",
+   "file": "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/resolv.rb",
+   "lexerIdentifierTokens": 4320,
+   "myTokens": 7534,
+   "coverage": 1,
+   "shareOfMine": 0.5734
+  }
+ ]
+}

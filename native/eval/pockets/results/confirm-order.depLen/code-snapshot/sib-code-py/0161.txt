@@ -1,0 +1,29 @@
+"""RSS podcast feed reading. Stdlib only."""
+
+
+def parse_feed(xml_text):
+    """Parse an RSS 2.0 podcast feed into a list of episode dicts, in the feed's
+    own order, one per item.
+
+    Do this, using xml.etree.ElementTree imported as ET:
+
+    1. root = ET.fromstring(xml_text)
+    2. NS = {"itunes": "http://www.itunes.com/dtds/podcast-1.0.dtd"}
+    3. For each item in root.iter("item"), build a dict:
+       - "title": item.findtext("title") or ""
+       - "audio_url": item.find("enclosure").get("url") if item.find("enclosure")
+         is not None else ""
+       - "guid": item.findtext("guid") or audio_url
+       - "pub_date": item.findtext("pubDate") or ""
+       - "duration_seconds": parse the itunes:duration element INLINE, with no
+         helper function: take el = item.find("itunes:duration", NS); if el is
+         None or el.text is empty, use None; otherwise let t = el.text.strip()
+         and, if ":" is in t, split on ":" and int() each part, then with two
+         parts use minutes * 60 + seconds and with three parts use
+         hours * 3600 + minutes * 60 + seconds; if ":" is not in t, int(t).
+       Append the dict to the list.
+    4. Return the list.
+
+    Do not define any other function. A feed with no item elements returns [].
+    """
+    raise NotImplementedError

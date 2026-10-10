@@ -1,0 +1,636 @@
+#!/usr/bin/env node
+// pipeline-run.mjs — THE ARBITRARY GENERATION PIPELINE, END TO END, EVERY
+// STAGE ON THE RECORD. The nine stages (user, 2026-09-22), each proven by
+// its own falsifier before the next was wired:
+//
+//   1 PROMPT     the ask, verbatim                       ("prompt")
+//   2 VOID       the form gate + the void on every level ("register", "void")
+//   3 SURF       seek across sources shaped like the void ("surf")
+//   4 SHAPE      learn the form's shape; NO → SURF again  ("shape")
+//   5 HUNT       ethos: what earns admission to the ground ("hunt", "ground")
+//   6 SKELETON   the reason-linted composition            ("arrange")
+//   7 SK. LOOP   recompose what a finding licenses, settle ("arrange")
+//   8 PATHOS     additive passes until Gebser arrives     ("check", "arrive")
+//   9 PIECE      the folded output, verdicts beneath it   ("piece")
+//
+// Each stage appends its own work product to an append-only ledger before the
+// next stage runs, so a run killed at any boundary leaves everything up to
+// that boundary readable, and `phase-report.mjs` lays the stages out in order.
+// The floor stage matters most for that: once the draft exists, the piece
+// already exists as the material's own sentences in the piece's order, and
+// every model call after it can only improve on a product that is already
+// true. Nothing here is specific to essays — the register decides the voice,
+// the ground decides the parts, the ask decides which parts are drawn.
+//
+// Model calls go through the engine's own gated wire (`streamOllamaChat`),
+// never a raw fetch: the safety-and-ethics gate sees every one.
+//
+//   node native/the-fold/pipeline-run.mjs --task "…" --ground FILE [--model gemma2:2b]
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { writeVoiceFor, voiceIsDeclaredFor } from "../kernel/register.js";
+import { createDocumentLedger, appendLedgerLine } from "./document-ledger.js";
+import { buildDraft, draftLines, floorProjection, drawnParts } from "./eot-draft.js";
+import { buildReferents, attachReferents } from "./referents.js";
+import { declareVoidSpec, declareFormAsync, voidSpecLines, topicOf, askedExtent } from "./void-spec.js";
+import { induceParameter, wordsPerPageClaim } from "./parameter-induction.js";
+import { surfLines, liveWeb } from "./surf.js";
+import { surfForShape, shapeLines, matchShape } from "./shape.js";
+import { huntGround, huntLines } from "./hunt.js";
+import { skeletonLoop, skeletonLoopLine } from "./skeleton-loop.js";
+import { loadEotParser, attachEot, notationOf, clauseComplete, clauseCore } from "./eot-notation.js";
+import { arrangeEssay, arrangedDraft, outlineLines, selectToBudget } from "./arrange.js";
+import { steerOutline } from "./steer.js";
+import { floorPiece, measurePiece, judgeLoop, loopLine } from "./loop-check.js";
+import { prosify, anchorsFor, carries } from "./prosify.js";
+import { tightenPiece, turnPass } from "./finish.js";
+import { flesh2 } from "./flesh2.js";
+import { readPiece } from "./revision-spiral.js";
+import { gebserArrival, houdiniExclusivity } from "./archon-rules.js";
+import { renderPhaseReport } from "./phase-report.mjs";
+
+const HERE = path.dirname(fileURLToPath(import.meta.url));
+const DOCS = path.join(HERE, "..", "..", "documents");
+
+const arg = (name, dflt = null) => { const i = process.argv.indexOf(`--${name}`); return i > 0 ? process.argv[i + 1] : dflt; };
+
+// Apply ONE bridge to a piece, for per-candidate checkLoop calls in the
+// pathos loop's turns stage — the same part-prepend turnPass already does
+// when building its own whole-parts result, done here one candidate at a
+// time so each can be measured and kept-or-reverted on its own. Matches by
+// PART ID only, never by text, so it has no collision risk.
+export const applyBridge = (basePiece, b) => basePiece.map((p) => (p.id !== b.part ? p : { ...p, pieces: [{ text: b.sentence, carries: [] }, ...p.pieces] }));
+
+// Every position where `before` (the piece going into tightenPiece) and
+// `after` (tightenPiece's own whole-parts result) differ IS a kept rewrite,
+// found POSITIONALLY (2026-09-26, fixed after review: matching by text
+// collided whenever a part held two identical-text sentences — a real,
+// recognized case elsewhere in this file; see the RESTORE step's own
+// duplicate guard a few lines above the pathos loop). tightenPiece
+// (finish.js:190-249) always does exactly one push per input piece, never
+// adding or removing one, so `before`/`after` are guaranteed the same shape
+// position for position — matching by (partIndex, pieceIndex) is therefore
+// exact and can never confuse two identically-worded sentences.
+export function diffTightenEdits(before, after) {
+  const edits = [];
+  for (let pi = 0; pi < before.length; pi++) {
+    const b = before[pi]?.pieces ?? [];
+    const a = after[pi]?.pieces ?? [];
+    for (let ci = 0; ci < b.length; ci++) {
+      if (a[ci] && b[ci].text !== a[ci].text) edits.push({ partIndex: pi, pieceIndex: ci, part: before[pi].id, from: b[ci].text, to: a[ci].text });
+    }
+  }
+  return edits;
+}
+
+// Apply ONE positional tighten edit to a piece — by (partIndex, pieceIndex),
+// never by a text search, so two identical-text sentences in the same part
+// are never confused with one another.
+export const applyTightenEdit = (basePiece, e) => basePiece.map((p, pi) => (pi !== e.partIndex ? p : { ...p, pieces: p.pieces.map((pc, ci) => (ci !== e.pieceIndex ? pc : { text: e.to, carries: [...pc.carries] })) }));
+
+export async function runPipeline({ task, groundFiles = [], groundText = null, model = "gemma2:2b", id = null, draw = null, arrange = null, flesh = "prosify", web = null, pathosBudget = null, onStage = null } = {}) {
+  const docId = `${id ?? `pipe-${Date.now()}`}:1`;
+  const ledger = createDocumentLedger({ docId, title: task.slice(0, 80) });
+  const write = (role, title, text, basis, giver = "eoreader7:pipeline", supersedes = null) => {
+    const line = appendLedgerLine(ledger, { role, title, text: String(text ?? ""), giver, basis, ...(supersedes ? { supersedes } : {}) }, { dir: DOCS });
+    if (onStage) onStage({ role, title });
+    return line;
+  };
+  // THE FOLDED EOT IS THE CURRENT STATE (user direction, 2026-09-21: "we're
+  // interested in the Folded version… we'll see things change as we
+  // recursively alter it"). Every statement's CURRENT ledger line is tracked,
+  // so an alteration supersedes it rather than sitting beside it. The ledger
+  // keeps every version; the fold shows the one that stands.
+  const current = new Map();
+
+  // 1. PROMPT — the ask exactly as given.
+  write("prompt", "The ask", task, "the operator's words, unedited");
+
+  // 2. REGISTER — what kind of thing is asked for, and in whose voice. The
+  // form is a gate (void-spec.js declareForm): an anaphor in the ask ("again")
+  // points at this engine's own last piece; else a received sign; else the
+  // form-word is carried unresolved for SURF. Never a silent default.
+  // The mouth, gated (proxy-runner's streamOllamaChat sees every call); defined
+  // here because the form gate's ambiguity tier may need one narrow question.
+  const gatedDraw = draw ?? (async (messages, maxTokens) => {
+    const { streamOllamaChat } = await import("../../proxy-runner.mjs");
+    let out = "";
+    for await (const chunk of streamOllamaChat(model, messages, { maxTokens })) if (typeof chunk === "string") out += chunk;
+    return out;
+  });
+  const form = await declareFormAsync(task, { documentsDir: DOCS, excludeDocId: docId, draw: gatedDraw });
+  const register = form.register;
+  const field = form.field;
+  const topic = topicOf(task);
+  const spoken = topic ?? form.token ?? task;
+  const voiceRaw = writeVoiceFor(register, spoken);
+  let voice = { opening: typeof voiceRaw.opening === "function" ? voiceRaw.opening(spoken) : voiceRaw.opening, body: typeof voiceRaw.body === "function" ? voiceRaw.body(spoken) : voiceRaw.body };
+  write("register", `Register: ${field ?? "unresolved"}`, `field: ${field} [${form.basis}] — ${form.source}\nform-word: ${form.token ?? "(none)"}${form.cue ? `\nanaphor: "${form.cue}"${form.referent ? ` → ${form.referent.docId}: "${form.referent.prompt}" [${form.tier}]${form.votes ? `\nvotes: ${form.votes.map((v) => `${v.docId}: ${v.vote === true ? "yes" : v.vote === false ? "no" : "?"}`).join(" · ")}` : ""}` : " (unresolved)"}` : ""}\nmode: ${register?.mode}\ntenor: ${register?.tenor?.tenor}\ntopic: ${topic ?? "(none stated)"}\nvoice declared for this field: ${voiceIsDeclaredFor(register)}\n\nopening voice:\n${voice.opening}\n\nbody voice:\n${voice.body}`, register?.basis ?? "derived from the ask");
+
+
+  // 3. SURF — seek across multiple sources for material shaped like the void
+  // (surf.js): exemplars of the form-word, sources about the subject. The web
+  // is injected; without one the stage is recorded as not run, never as "the
+  // web had nothing". What comes back is CANDIDATE material with provenance —
+  // stage 4 judges it, and it never outranks the operator's ground.
+  let surfed = null, shape = null;
+  if (web) {
+    // 3 → 4 → (NO) → 3: surfForShape runs the surf, learns the shape from what
+    // came back, and goes back to the web once with structure queries when
+    // nothing was agreed — bounded, then stops with the gap stated.
+    const r = await surfForShape({ spec: declareVoidSpec({ task, form }), web });
+    surfed = r.surfed; shape = r.shape;
+    write("surf", `Surf: ${surfed.fetched} source(s) from ${surfed.hosts.length} host(s)${surfed.multiple ? "" : " — not multiple"}${r.rounds > 1 ? ` · ${r.rounds} rounds` : ""}`, surfLines(surfed).join("\n"), surfed.basis, "eoreader7:surf");
+    // 4. SHAPE-MATCH — the form's shape, as more hosts than not state it.
+    write("shape", `Shape: ${shape.learned ? shape.agreedUnits.map((a) => `${a.n} ${a.unit}${a.n === 1 ? "" : "s"}`).join(", ") || `${shape.parts.length} named part(s)` : "not learned"}`, shapeLines(shape).join("\n") || "(no claim on any source)", shape.basis, "eoreader7:shape");
+  } else {
+    write("surf", "Surf: not run", "no web given — the ground is the operator's material only", "unmeasured: stage 3 needs a web (surf.js liveWeb); nothing was sought, so nothing was found", "eoreader7:surf");
+    write("shape", "Shape: not learned", "no surf, so no sources to learn the form's shape from", "unmeasured: stage 4 reads stage 3's sources", "eoreader7:shape");
+  }
+
+  // THE ADMISSION UNIT: a line when the sources agree the form is counted in
+  // lines (measured), else when the register is lyric (declared), else a
+  // sentence. Measured live 2026-09-22: the mouth wrote a fourteen-line sonnet
+  // and the pipeline read it as four sentences.
+  const unit = shape?.agreedUnits?.some((a) => a.unit === "line") ? "line" : field === "lyric" ? "line" : "sentence";
+  const unitBasis = unit === "line" ? (shape?.agreedUnits?.some((a) => a.unit === "line") ? "measured: the sources agree the form is counted in lines (shape.js)" : "declared: the register is lyric (kernel/register.js)") : "declared: prose is admitted a sentence at a time (admission.js)";
+  const joinUnits = (pcs) => pcs.map((x) => x.text).join(unit === "line" ? "\n" : " ");
+
+  // 5. HUNT / GROUND (ethos, hunt.js) — the operator's material is the ground
+  // by being handed over (tier 0). What SURF brought back earns admission
+  // paragraph by paragraph, by carrying the void's subject (the referent
+  // organ over the operator's material) — tier 1, after it, never above it.
+  // groundText (2026-09-26): a caller with an in-memory ground string (e.g.
+  // proxy-runner.mjs's own groundingText()) bypasses the file read entirely —
+  // additive only; every existing caller still passes groundFiles and this
+  // branch is never taken for them.
+  const operatorId = groundText != null ? "in-memory-ground" : (groundFiles.map((f) => path.basename(f)).join("+") || "none");
+  const operatorGround = groundText != null ? String(groundText) : groundFiles.map((f) => fs.readFileSync(f, "utf8")).join("\n\n");
+  const R0 = buildReferents(operatorGround);
+  const d0 = attachReferents(buildDraft({ task, ground: operatorGround, sourceId: operatorId }), R0);
+  const hunted = huntGround({ operator: { id: operatorId, text: operatorGround }, surfed, topic, R: R0, subject: d0.subjectRefs ?? new Set() });
+  write("hunt", `Hunt: ${hunted.admitted} fetched source(s) admitted, ${hunted.refused.length} refused`, huntLines(hunted).join("\n") || "(nothing to admit or refuse)", hunted.basis, "eoreader7:hunt");
+  const ground = hunted.ground;
+  const operatorLine = groundText != null ? `in-memory ground — ${operatorGround.length} bytes (tier 0)` : groundFiles.map((f) => `${path.basename(f)} — ${fs.statSync(f).size} bytes (tier 0)`).join("\n");
+  write("ground", `Ground: ${hunted.sources.map((s) => `${s.id} (tier ${s.tier})`).join(", ") || "none"}`, `${operatorLine}${hunted.sources.filter((s) => s.tier === 1).map((s) => `\n${s.id} — ${s.text.length} chars admitted of ${s.url} (tier 1)`).join("")}\n\ntotal: ${ground.length} characters`, hunted.admitted ? "the operator's material first, then what fetched pages earned by carrying the subject" : "the operator's material only; nothing fetched earned admission");
+
+  // EOT DRAFT — the piece as witnessed spans, before prose.
+  let draft = buildDraft({ task, ground, sourceId: operatorId, sources: hunted.map });
+  // WHO, NOT WHICH STRING: one resolver over the material, carried by the
+  // draft, asked by every later stage (referents.js).
+  const R = buildReferents(ground);
+  attachReferents(draft, R);
+  write("eot-draft", `EOT draft: ${drawnParts(draft).length} part(s)`, draftLines(draft).join("\n"), draft.basis, "eoreader7:eot-draft");
+  // ONE LINE PER STATEMENT, so a surface can show the draft forming line by
+  // line and every later line can point back at a statement by its id.
+  // THE DRAFT IN EOT NOTATION (eot-notation.js): each statement's meaning,
+  // parsed by the in-house English parser, as a cube-addressed tree beside its
+  // witnessed bytes. Optional — without the parser the statement stands as its
+  // span, and the ledger says why.
+  const parser = await loadEotParser();
+  if (parser.ok) {
+    const records = parser.parse(ground, operatorId);
+    const fit = attachEot(drawnParts(draft).flatMap((p) => p.children), records);
+    write("eot-draft", "EOT notation attached", `${records.length} parsed record(s); ${fit.exact} statement(s) match one record exactly, ${fit.split} span several, ${fit.none} have none`, `parser: ${parser.provenance?.treebank ?? "UD_English-EWT"}, held-out LAS ${parser.provenance?.heldOut?.LAS ?? parser.provenance?.scores?.LAS ?? "see provenance"} — the parse is the engine's, errors included`, "eoreader7:eot-notation");
+  } else {
+    write("eot-draft", "EOT notation not attached", parser.reason, "the draft stands as witnessed spans", "eoreader7:eot-notation");
+  }
+  for (const part of drawnParts(draft)) {
+    write("eot", `${part.id}${part.bridge ? (part.bridge.name ? ` ← ${part.bridge.name}` : " ← (transition to write)") : ""}`, `part ${part.id} [${part.span.start}–${part.span.end}]`, part.bridge?.name ? `planned turn: takes up "${part.bridge.name}" from ${part.bridge.from}` : (part.bridge ? `planned turn: none shared with ${part.bridge.from}` : "opens the piece"), "eoreader7:eot-draft");
+    for (const pt of part.children) {
+      const notation = (pt.eot ?? []).map((r) => notationOf(r)).join("\n\n");
+      current.set(pt.id, write("eot", pt.id, notation ? `${notation}\n\n“${pt.text}”` : pt.text, `witness ${pt.span.sourceId} ${pt.span.start}–${pt.span.end}`, "eoreader7:eot-draft").id);
+    }
+  }
+
+  // THE VOID, DECLARED ON EVERY LEVEL — whole, part, sentence, verbiage,
+  // grounding — each operator with its value and its basis, before any prose.
+  const spec = declareVoidSpec({ task, ground, draft, form, unit, unitBasis });
+  write("void", `Void: declared on every level`, voidSpecLines(spec).join("\n"), spec.basis, "eoreader7:void-spec");
+  write("referents", `Referents: ${R.size}`, [...(draft.subjectRefs ?? [])].map((id) => `subject: ${R.represent(id)}`).join("\n") || "(no being named in most parts)", "the engine's referent organ over the material; a fact names beings, not strings", "eoreader7:referents");
+  const draftText = new Map(drawnParts(draft).flatMap((p) => p.children.map((pt) => [pt.id, pt.text])));
+
+  // THE ARRANGEMENT (arrange.js) — the first pass at the essay's shape,
+  // composed from the material rather than copied from its paragraphing:
+  // thesis, body groups by the beings they are about, ordered by extent, a
+  // tension slot taken from the material or declared a gap, a return. The
+  // reasoning checks (off-thesis, inversion, conflicting figures, circular
+  // claim) are written as findings. No model call. Every later stage reads
+  // the arranged draft; the source-ordered one stays on the ledger above.
+  // `arrange` may be injected (a skeleton arm: plans/generation-terrain-stance.md).
+  // 6 → 7. THE SKELETON, THEN THE SKELETON LOOP (skeleton-loop.js): the
+  // outline composed and reason-linted, then recomposed — one licensed
+  // finding per loop, judged against the last — until nothing is licensed.
+  // ROLE VOCABULARY (2026-09-24): a real section-role structure for this
+  // form-word, consulted before arrangement, never hand-typed here.
+  // canonical-sections.js's own declared WHITE_PAPER_SECTIONS is deliberately
+  // NOT used — only a real corroborated hunt or form-priors.js's fold of a
+  // prior one. Checked first: the learned prior (no cost, no web). Not found
+  // and --web was given: one fresh hunt, which logs itself for the next ask
+  // about the same form. Neither: no vocabulary, disclosed, body groups keep
+  // their existing positional labels — a stated gap, never a guess.
+  let roleVocabulary = null, roleVocabularyBasis = "no --web given and no prior observation for this form-word — body groups keep positional labels";
+  if (form.token) {
+    const { foldFormPrior } = await import("./form-priors.js");
+    const prior = foldFormPrior(form.token);
+    if (prior && prior.roles.length) { roleVocabulary = prior.vocabulary; roleVocabularyBasis = prior.basis; }
+    else if (web) {
+      const { huntDeclaredStructure } = await import("./canonical-sections.js");
+      const hunted = await huntDeclaredStructure(form.token, { web, learn: true });
+      if (hunted.vocabulary.filter((v) => v.role !== "title").length) { roleVocabulary = hunted.vocabulary; roleVocabularyBasis = hunted.fromPrior ? hunted.basis : `freshly hunted this run: ${hunted.basis}`; }
+    }
+  }
+  const roleNames = roleVocabulary ? roleVocabulary.filter((v) => v.role !== "title").map((v) => v.role) : [];
+  write("arrange", `Role vocabulary: ${roleNames.length} role(s)`, roleNames.join(", ") || "(none available)", roleVocabularyBasis, "eoreader7:form-priors");
+  // pValue: 0.05, the same significance level this codebase already uses
+  // in its own committed tests (arrange-loadbearing.test.mjs, ablation-
+  // pressure-calibration.mjs) -- not a newly hand-set threshold. Without
+  // this, arrangeEssay's own contract guarantees loadBearing stays null on
+  // every real pipeline run (checked this session: pipeline-run.mjs never
+  // supplied pValue before now, so the field, built and tested, was proven
+  // but inert here).
+  const composedArrange = arrange ?? ((args) => arrangeEssay({ ...args, ...(roleVocabulary ? { roleVocabulary } : {}), pValue: 0.05 }));
+  const sk = skeletonLoop({ draft, spec, shape, task, arrange: composedArrange, onLoop: (l) => write("arrange", `Skeleton loop ${l.n} · ${l.judge.verdict}${l.judge.keep ? "" : " · undone"}`, skeletonLoopLine(l), l.judge.why, "eoreader7:skeleton-loop") });
+  let outline = sk.outline;
+  const thesisLoadBearingNote = outline.thesis ? ` — thesis load-bearing: ${outline.thesis.loadBearing === null ? "no extractable claims" : outline.thesis.loadBearing}` : "";
+  write("arrange", `Arrangement: ${outline.slots.length} slot(s)${sk.settled ? " · settled" : ""}`, outlineLines(outline, draft).join("\n"), `${outline.basis}; ${sk.basis}${thesisLoadBearingNote}`, "eoreader7:arrange");
+  // THE MOUTH STEERS SOME PHYSICS (steer.js): it votes on which of the ask's
+  // questions each section answers and whether neighbours are one section;
+  // the mechanics license or refuse each vote, and every vote is recorded.
+  const steered = await steerOutline({ outline, draft, task, draw: gatedDraw, onVote: (v) => write("arrange", `Mouth vote · ${v.force} · ${v.kept ? "licensed" : "refused"}`, v.reply, v.why, `model:${model}`) });
+  if (steered.outline !== outline) {
+    outline = steered.outline;
+    write("arrange", `Arrangement, steered: ${outline.slots.length} slot(s)`, outlineLines(outline, draft).join("\n"), outline.basis, "eoreader7:steer", null);
+  }
+  // SELECTION: the sections closest to the ask fill the length the ask states,
+  // or the essay form's declared shape; everything else stays in the sources.
+  // A stated PAGE count needs a words-per-page conversion this engine never
+  // hand-sets (2026-09-26, direct user correction) — induceParameter learns
+  // it, memory-first, then real multi-host-corroborated search, only when
+  // the ask actually states one and a web injection is available.
+  const wordsPerPage = askedExtent(task)?.unit === "page" && web
+    ? await induceParameter("words-per-page", { query: "how many words are on a typical page", extractClaim: wordsPerPageClaim, search: web.search, fetch: web.fetch })
+    : null;
+  const sel = selectToBudget({ outline, draft, task, shape, wordsPerPage });
+  if (sel.dropped.length) {
+    outline = sel.outline;
+    write("arrange", `Selection: ${sel.dropped.length} section(s) left out`, sel.dropped.map((d) => `${d.slot}: ${d.statements.map((id) => draftText.get(id)).join(" ").slice(0, 160)}…`).join("\n"), `${sel.budget?.basis} — ${sel.dropped[0].why}`, "eoreader7:select");
+    write("arrange", `Arrangement, selected: ${outline.slots.length} slot(s)`, outlineLines(outline, draft).join("\n"), outline.basis, "eoreader7:select");
+  }
+  draft = arrangedDraft(draft, outline);
+  // THE VOICE, AS INFORMATION ONLY (Gary: information, not prohibition; the
+  // model is the mouth). The shared register voice told the mouth "open with
+  // a surprising thesis … never a description" and "do not discuss the
+  // essay"; the arrangement has now chosen the thesis sentence, so the mouth
+  // is handed it as a fact, and nothing tells it what not to say.
+  // THE CLAIM THE MOUTH IS TOLD IS THE DRAFT'S OWN BYTES, read by statement
+  // id — never a field an arranger might fill with a rendering (the reading
+  // archons, 2026-09-25); a mismatch is said on the ledger, and the bytes win.
+  const thesisText = outline.thesis ? (draftText.get(outline.thesis.id) ?? null) : null;
+  if (outline.thesis?.text && thesisText !== outline.thesis.text) write("register", "Voice: the arranger's thesis text was not the draft's bytes", `outline.thesis.text: ${outline.thesis.text}\ndraft ${outline.thesis.id}: ${thesisText ?? "(not a drawn statement)"}`, "the mouth is handed the draft's own sentence; the arranger's text is recorded, not spoken", "eoreader7:steer");
+  // The form-word is the ask's own ("sonnet", "essay", "piece"), never "essay"
+  // for everything; the subject only when one was stated.
+  const named = form.token ?? "piece";
+  const what = `This is ${/^[aeiou]/i.test(named) ? "an" : "a"} ${named}${topic ? ` on ${topic}` : ""}.${thesisText ? ` Its claim: "${thesisText}"` : ""}`;
+  voice = { opening: what, body: what };
+  // EVERY LOOP LEAVES SOMETHING USEFUL (loop-check.js): each loop's piece is
+  // measured against the last; a loop that lost ground is undone.
+  let lastPiece = null, lastMeasure = null;
+  const checkLoop = (name, candidate, opts = {}) => {
+    const m = measurePiece(candidate, { draft, ground, task, parse: parser.ok ? parser.parse : null, loadBearing: outline?.thesis?.loadBearing ?? null });
+    const j = judgeLoop(lastMeasure, m, opts);
+    write("check", `Loop · ${name} · ${j.verdict}${j.keep ? "" : " · undone"}`, loopLine(name, m, j), j.why, "eoreader7:loop-check");
+    if (j.keep) { lastPiece = candidate; lastMeasure = m; return candidate; }
+    return lastPiece;
+  };
+  checkLoop("floor (the selected source sentences, in outline order)", floorPiece(draft));
+  write("register", "Voice, as information", `opening:\n${voice.opening}\n\nbody:\n${voice.body}`, "the thesis sentence the arrangement chose, quoted from the draft's own bytes and handed to the mouth as a fact; no instruction about what not to say (Gary)", "eoreader7:steer");
+  for (const part of drawnParts(draft)) {
+    write("arrange", `${part.id} (${part.slot})${part.bridge ? (part.bridge.name ? ` ← ${part.bridge.name}` : " ← (transition to write)") : ""}`, part.children.map((pt) => pt.id).join(" "), `from ${part.from.join(", ")}`, "eoreader7:arrange");
+  }
+
+  // 6. FLOOR — the piece, already, as the material's own sentences.
+  const floor = floorProjection(draft);
+  write("floor", "Floor projection", floor.join("\n\n"), "no model call: true and grounded by construction — every later stage must beat this", "eoreader7:eot-draft");
+
+  // 7. PROSIFIED PASS — flesh on the draft, recursively.
+  // Every record and every finished part is written the moment it exists, so
+  // the ledger — and any surface reading it — grows line by line.
+  const fleshLine = new Map();
+  const emitRecord = (rec) => {
+    const lines = [
+      `level: ${rec.level} · node ${rec.node}`,
+      rec.error ? `draw refused: ${rec.error}` : "",
+      `\nasked:\n${rec.prompt}`,
+      `\nthe mouth said:\n${rec.raw || "(nothing)"}`,
+      `\nadmitted:\n${rec.survivors.map((x, i) => `[${rec.roads[i]}] ${x}`).join("\n") || "(none)"}`,
+      rec.refusals.length ? `\nrefused:\n${rec.refusals.map((r) => `[${r.kind}${r.basis ? `: ${r.basis}` : ""}] ${r.sentence}`).join("\n")}` : "",
+      rec.floor ? `\nfloor: ${rec.floor}` : "",
+    ].filter(Boolean).join("\n");
+    write("prosify", `Prose ${rec.level} ${rec.node}: ${rec.carried.length ? `carried ${rec.carried.join(", ")}` : "carried nothing"}${rec.missing.length ? `; missing ${rec.missing.join(", ")}` : ""}`, lines, `${rec.survivors.length} admitted, ${rec.refusals.length} refused${rec.floor ? ", fell to the floor" : ""}`, `model:${model}`);
+    // THE FLESH, AND WHAT IT TEACHES THE EOT. A rewrite or a floor that
+    // replaces a partial sentence supersedes that sentence's flesh line; two
+    // statements said in one sentence become one joined statement that
+    // supersedes both; a floored statement is superseded by its floor.
+    const replaced = rec.replaces ? fleshLine.get(rec.replaces) ?? null : null;
+    for (const ps of rec.perSentence ?? []) {
+      const l = write("flesh", `${rec.node} → ${ps.carries.join(", ") || "(carries no statement on its own)"}`, ps.sentence, `${ps.carries.length ? `carries ${ps.carries.join(", ")}` : "admitted, but anchors no single statement: connective prose"}${replaced ? " — rewritten from a sentence that carried it only in part" : ""}`, `model:${model}`, replaced);
+      fleshLine.set(ps.sentence, l.id);
+      if (ps.carries.length >= 2) {
+        const ids = [...new Set(ps.carries.map((id) => current.get(id)).filter(Boolean))];
+        const texts = ps.carries.map((id) => draftText.get(id)).filter(Boolean);
+        const joined = write("eot", ps.carries.join(" + "), texts.join(" ⟷ "), `joined by the flesh; witness: "${ps.sentence.slice(0, 160)}"`, "eoreader7:flesh→eot", ids.length ? ids : null);
+        for (const id of ps.carries) current.set(id, joined.id);
+      }
+    }
+    if (rec.floor) {
+      const fl = write("flesh", `${rec.node} → ${rec.node} (floor)`, rec.floor, `the source sentence itself${replaced ? ", in place of a sentence that carried it only in part" : ""}`, "eoreader7:floor", replaced);
+      fleshLine.set(rec.floor, fl.id);
+      const prev = current.get(rec.node);
+      const line = write("eot", `${rec.node} (floor)`, rec.floor, "the mouth could not carry this statement; it stands in the piece as its own source sentence", "eoreader7:flesh→eot", prev ?? null);
+      current.set(rec.node, line.id);
+    }
+  };
+  const partLine = new Map();
+  const emitPart = (p) => partLine.set(p.id, write("part", p.id, p.prose, `${p.status}: ${p.carriedWhole} of ${p.of} fact(s) carried by the whole-part draw, ${p.recursed} by a finer draw, ${p.floored} at the floor`, `model:${model}`).id);
+  const t0 = Date.now();
+  // HORA, NOT TEMPUS (Koestler's retelling of Simon's two watchmakers, in
+  // The Ghost in the Machine): every loop above the floor is a stable whole in
+  // itself and a part of the next. If a level fails — the mouth goes away, a
+  // stage throws — the piece is the last loop's stable whole, the run still
+  // completes, and the ledger says where it stopped. Tempus loses the watch;
+  // Hora loses only the subassembly in hand.
+  let piece = lastPiece;
+  let failedAt = null, stage = "prose", result = null;
+  const spiral = async () => {
+    // F1 (prosify.js): each section drawn whole, finer draws and floors where
+    // the coarse draw fell short. F2 (flesh2.js): the same material at three
+    // measured levels — one sentence per section, then a paragraph with the
+    // section's kind and spans, then the remaining spans woven in — every level
+    // loop-checked against the one below (plans/generation-terrain-stance.md).
+    result = flesh === "flesh2"
+      ? await flesh2({ draft, draw: gatedDraw, voice, ground, task, onRecord: emitRecord })
+      : await prosify(draft, { draw: gatedDraw, voice, ground, task, unit, onRecord: emitRecord, onPart: emitPart });
+    // ── 8–12. THE ARCHONS READ, THEIR REVISIONS RUN, THEY READ AGAIN ────────
+    // Every rule here was taught to the archon whose charge it serves
+    // (archon-rules.js). The pipeline only carries out what a finding licenses,
+    // in the order a writer would: fold what has no job, tighten what oversells,
+    // then earn the transitions between what remains.
+    piece = checkLoop("prose", result.parts.map((p) => ({ id: p.id, pieces: (p.pieces ?? []).map((x) => ({ ...x })) })), { addsFindings: true });
+    const ctx = () => ({ piece, draft, ground, task, parse: parser.ok ? parser.parse : null });
+    // HOUDINI IS OUTSIDE THE GRID, LIKE GEBSER: his findings carry no `cell`,
+    // so they group under their own "Harry Houdini" line in the re-read loop
+    // below by the same generic per-cell grouping every other archon already
+    // uses -- no change needed there. They flow into the SAME licenses-driven
+    // fold action and the SAME gebserArrival(findings) gate every grid
+    // finding already does, so an apparatus leak is folded out exactly as
+    // Clark's or Caro's "has no job" findings already are.
+    const readAll = () => { const r = readPiece(ctx()); return { ...r, findings: [...r.findings, ...houdiniExclusivity("", ctx())] }; };
+    const archonLines = new Map();
+    const pieceText = () => piece.map((p) => joinUnits(p.pieces)).join("\n\n");
+
+    // ── 8. THE PATHOS PASS, LOOPED UNTIL GEBSER ARRIVES — BOUNDED BY BUDGET ──
+    // The floor is ethos and logos settled (the skeleton's own sentences, true
+    // by construction); everything from the prose on is pathos — texture,
+    // cadence, transitions — ADDITIVE ONLY: judgeLoop undoes any loop that
+    // loses a fact or a question. Each pass: the archons read, the pipeline
+    // carries out what a finding licenses (fold what has no job, restore what
+    // links what the material keeps apart, repair a splice, floor a dropped
+    // statement, tighten what oversells, earn the transitions), they read
+    // again, and Gebser says whether the piece has arrived. Not arrived, with
+    // something still licensed, and budget left → another pass. The budget is
+    // model calls — the prose pass's own count unless the caller states one
+    // — never a level count; a pass that changes nothing ends the loop too.
+    let read = readAll();
+    for (const f of read.findings) {
+      const l = write("archon", `${f.editor} · ${f.kind}${f.part ? ` · ${f.part}` : ""}`, f.sentence ?? f.detail, `${f.cell} — ${f.licenses ? `licenses ${f.licenses}` : "reported"}: ${f.detail}`, `archon:${f.cell}`);
+      (archonLines.get(f.cell) ?? archonLines.set(f.cell, []).get(f.cell)).push(l.id);
+    }
+    write("archon", "Untaught archons", read.untaught.map((u) => `${u.editor} (${u.cell}): ${u.charge}`).join("\n"), "no probe yet — named rather than faked");
+    const firstRead = read.findings.length;
+    const proseCalls = result.calls ?? result.records.length;
+    const budget = pathosBudget ?? Math.max(1, proseCalls);
+    const totals = { passes: 0, calls: 0, folded: 0, lish: 0, tightCalls: 0, rewritesKept: 0, bridgeCalls: 0, bridgesKept: 0 };
+    let g = null, licensed = [], shapeCheck = null, stopped = null;
+    for (;;) {
+      const pass = ++totals.passes;
+      const tag = (name) => `pathos ${pass} · ${name}`;
+      const before = pieceText();
+      let undone = false;
+      const keepOrUndo = (name, candidate) => { const kept = checkLoop(tag(name), candidate); if (kept !== candidate) undone = true; return kept; };
+      stage = "archons";
+
+      // FOLD: what Clark and Caro found has no job leaves the piece.
+      const toFold = new Map(read.findings.filter((f) => f.licenses === "fold" && f.sentence).map((f) => [f.sentence, f]));
+      piece = piece.map((p) => ({ ...p, pieces: p.pieces.filter((pc) => !toFold.has(pc.text)) }));
+      for (const [sentence, f] of toFold) write("flesh", `(folded by ${f.editor})`, "", `${f.detail} — folded out of the piece`, `archon:${f.cell}`, fleshLine.get(sentence) ?? null);
+      write("fold", `Fold: ${toFold.size} sentence(s)`, [...toFold.keys()].join("\n") || "(nothing had no job)", "licensed by Clark (restatement) and Caro (unverified)", "eoreader7:finish");
+      totals.folded += toFold.size;
+
+      // RESTORE: a sentence Kidder & Todd found linking what the material keeps
+      // apart is replaced by the source sentences of the statements it carries —
+      // true by construction; the prose's voice is the price, the truth is not.
+      const toRestore = new Map(read.findings.filter((f) => f.licenses === "restore" && f.sentence).map((f) => [f.sentence, f]));
+      piece = piece.map((p) => ({ ...p, pieces: p.pieces.flatMap((pc) => {
+        const f = toRestore.get(pc.text);
+        if (!f) return [pc];
+        return pc.carries.map((id) => ({ text: draftText.get(id), carries: [id] })).filter((x) => x.text && !p.pieces.some((o) => o !== pc && o.text === x.text));
+      }) }));
+      for (const [sentence, f] of toRestore) {
+        const back = f.carries.map((id) => draftText.get(id)).filter(Boolean).join(" ");
+        const l = write("flesh", `(restored by ${f.editor})`, back, `${f.detail} — the source sentence(s) stand in its place`, `archon:${f.cell}`, fleshLine.get(sentence) ?? null);
+        for (const id of f.carries) if (draftText.get(id)) fleshLine.set(draftText.get(id), l.id);
+      }
+
+      // REPAIR: Clark's splice — a sentence glued to its own source — is replaced
+      // by its most verbatim half, only if every fact it carried survives.
+      const anchorsNow = anchorsFor(draft);
+      for (const f of read.findings.filter((x) => x.licenses === "repair" && x.sentence && x.repair)) {
+        piece = piece.map((p) => ({ ...p, pieces: p.pieces.map((pc) => {
+          if (pc.text !== f.sentence) return pc;
+          const ok = pc.carries.every((id) => carries(anchorsNow.get(id), [f.repair]).ok);
+          const l = write("flesh", `${p.id} (repaired by ${f.editor})`, ok ? f.repair : pc.text, ok ? `${f.detail} — the verbatim half stands` : `${f.detail} — repair refused: it would drop a fact`, `archon:${f.cell}`, fleshLine.get(pc.text) ?? null);
+          if (!ok) return pc;
+          fleshLine.set(f.repair, l.id);
+          return { ...pc, text: f.repair };
+        }) }));
+      }
+
+      // FLOOR WHAT WAS DROPPED: Kidder & Todd's statement_dropped licenses the
+      // source sentence itself, placed at its statement's position in the part.
+      // (Run 11: "p5.2 is not carried — missing 1927" was found on both reads and
+      // nothing acted on it.)
+      const dropped = read.findings.filter((f) => f.licenses === "floor" && f.statement && f.part);
+      for (const f of dropped) {
+        const dp = drawnParts(draft).find((x) => x.id === f.part);
+        const i = piece.findIndex((x) => x.id === f.part);
+        if (!dp || i < 0) continue;
+        const ids = dp.children.map((c) => c.id);
+        const at = ids.indexOf(f.statement);
+        const pieces = [...piece[i].pieces];
+        let pos = 0;
+        pieces.forEach((pc, k) => { if (pc.carries.some((id) => ids.indexOf(id) >= 0 && ids.indexOf(id) < at)) pos = k + 1; });
+        pieces.splice(pos, 0, { text: draftText.get(f.statement), carries: [f.statement] });
+        piece = piece.map((x, k) => (k === i ? { ...x, pieces } : x));
+        const l = write("flesh", `${f.statement} (floor, by ${f.editor})`, draftText.get(f.statement), `${f.detail} — the source sentence stands at its statement's place`, `archon:${f.cell}`);
+        fleshLine.set(draftText.get(f.statement), l.id);
+      }
+      piece = keepOrUndo("archons (fold, restore, repair, floor)", piece);
+
+      // TIGHTEN: every sentence Zinsser flagged, rewritten plainly, kept only if
+      // its facts keep their anchors.
+      const targets = new Map();
+      for (const f of read.findings.filter((x) => x.licenses === "rewrite" && x.sentence)) {
+        targets.set(f.sentence, [...new Set([...(targets.get(f.sentence) ?? []), ...(f.words ?? [])])]);
+      }
+      stage = "tighten";
+      const tight = await tightenPiece(piece, { draft, draw: gatedDraw, ground, task, voice, targets, unit, complete: parser.ok ? (t) => clauseComplete(parser, t) : null, core: parser.ok ? (t) => clauseCore(parser, t) : null });
+      if (tight.skipped) write("tighten", "Tighten: not run on verse", "(the lines stand as the mouth wrote them)", tight.skipped, "archon:micro.ethos");
+      for (const c of tight.changes) {
+        write("tighten", `${c.kept ? "Rewritten" : "Kept as it was"} · ${c.part} · ${c.tics.join(", ")}`, c.kept ? `${c.from}\n→ ${c.to}` : c.from, c.by === "lish-cut" ? "Lish's cut: decoration with no fact in it removed, no model call; every anchor kept" : c.kept ? "Zinsser's finding, rewritten plainly; every anchor kept" : `rewrite refused: ${c.reasons.join("; ")}`, c.by === "lish-cut" ? "archon:micro.pathos" : `model:${model}`);
+        if (c.kept) {
+          const l = write("flesh", `${c.part} (tightened)`, c.to, "rewritten plainly for Zinsser; every anchor kept", `model:${model}`, fleshLine.get(c.from) ?? null);
+          fleshLine.set(c.to, l.id);
+        }
+      }
+      const tightCalls = tight.changes.filter((c) => c.by !== "lish-cut").length;
+      totals.tightCalls += tightCalls;
+      // PER-CANDIDATE, NOT WHOLE-BATCH (2026-09-26, Step 7 of
+      // plans/generation-terrain-stance.md): checking the whole pass's
+      // rewrites as one candidate meant a single rewrite's own side effect
+      // (a new finding it happens to trip elsewhere) discarded every other
+      // rewrite bundled into the same pass, even genuinely good ones. Found
+      // POSITIONALLY (diffTightenEdits), never by text match — the earlier
+      // version of this fix matched by sentence text and silently collided
+      // whenever a part held two identical-text sentences (caught by
+      // review). NOTE: a per-candidate revert here does NOT set `undone` —
+      // that flag stays scoped to the archons (fold/restore/repair/floor)
+      // stage's own still-whole-batch check above, so a pass with real net
+      // progress elsewhere is not hard-stopped by one reverted candidate
+      // (also caught by review: the old version let any revert here trip
+      // the same pass-ending "Hora" stop a full-batch failure used to,
+      // undermining the very fix this comment describes).
+      const keptChanges = tight.changes.filter((x) => x.kept);
+      const tightEdits = diffTightenEdits(piece, tight.parts);
+      for (let k = 0; k < tightEdits.length; k++) {
+        const edit = tightEdits[k];
+        const change = keptChanges[k] ?? null;
+        const candidate = applyTightenEdit(piece, edit);
+        const result = checkLoop(tag(`tighten · ${edit.part}`), candidate);
+        if (result !== candidate) {
+          if (change) change.revertedByLoopCheck = true;
+          write("check", `Loop · ${tag(`tighten · ${edit.part}`)} · reverted on its own`, `"${edit.from}"\n→ "${edit.to}"`, "this rewrite's own side effect regressed the piece as a whole; reverted alone, the pass's other rewrites stand", "eoreader7:loop-check");
+        }
+        piece = result;
+      }
+      totals.lish += tight.changes.filter((c) => c.by === "lish-cut" && !c.revertedByLoopCheck).length;
+      totals.rewritesKept += tight.changes.filter((c) => c.kept && c.by !== "lish-cut" && !c.revertedByLoopCheck).length;
+
+      // TURNS: Clark's unearned transitions, one bridging sentence each.
+      let bridges = [];
+      stage = "turns";
+      if (read.findings.some((f) => f.kind === "missing_transition")) {
+        const tp = await turnPass(piece, { draft, draw: gatedDraw, ground, voice, unit });
+        bridges = tp.bridges;
+        for (const b of tp.bridges) {
+          write("turn", `${b.kept ? "Bridge kept" : "Bridge refused"} · ${b.part}`, b.sentence ?? "(none)", b.kept ? "takes up the last part and hands on to this one" : b.reasons.join("; "), `model:${model}`);
+          if (b.kept) fleshLine.set(b.sentence, write("flesh", `${b.part} (bridge)`, b.sentence, "a transition Clark's finding licensed", `model:${model}`).id);
+        }
+        // PER-CANDIDATE, NOT WHOLE-BATCH: same reasoning as tighten, above.
+        // applyBridge matches by part id, never by text, so it has no
+        // collision risk analogous to tighten's (fixed above).
+        for (const b of tp.bridges.filter((x) => x.kept)) {
+          const candidate = applyBridge(piece, b);
+          // addsFindings: true — a bridge is a TRANSITION SENTENCE, its charge
+          // is to add; the finding its own sentence trips is the finding that
+          // licensed it (Clark's missing_transition), exactly as the prose
+          // loop's new findings are its expected work (judgeLoop, 2026-09-21).
+          // Falsified 2026-10-02: without this, every bridge was undone as
+          // "more findings," and the turns pass could never land a transition.
+          const result = checkLoop(tag(`turns · ${b.part}`), candidate, { addsFindings: true });
+          if (result !== candidate) {
+            b.revertedByLoopCheck = true;
+            write("check", `Loop · ${tag(`turns · ${b.part}`)} · reverted on its own`, b.sentence ?? "(none)", "this bridge's own side effect regressed the piece as a whole; reverted alone, the pass's other bridges stand", "eoreader7:loop-check");
+          }
+          piece = result;
+        }
+      }
+      totals.bridgeCalls += bridges.length; totals.bridgesKept += bridges.filter((b) => b.kept && !b.revertedByLoopCheck).length;
+      totals.calls += tightCalls + bridges.length;
+
+      // RE-READ: each archon's reading supersedes its last, so the fold shows
+      // what each editor still finds.
+      stage = "arrival";
+      const again = readAll();
+      const cells = new Set([...read.findings.map((f) => f.cell), ...again.findings.map((f) => f.cell)]);
+      for (const cell of cells) {
+        const now = again.findings.filter((f) => f.cell === cell);
+        const editor = (now[0] ?? read.findings.find((f) => f.cell === cell)).editor;
+        const l = write("archon", `${editor} · re-read ${pass}`, now.length ? now.map((f) => `[${f.kind}${f.part ? ` ${f.part}` : ""}] ${f.sentence ?? f.detail}`).join("\n") : "nothing left to find", `${cell} — ${now.length} finding(s) after pass ${pass}`, `archon:${cell}`, archonLines.get(cell) ?? null);
+        archonLines.set(cell, [l.id]);
+      }
+      licensed = again.findings.filter((f) => f.licenses);
+      const byEditor = {};
+      for (const f of licensed) byEditor[f.editor] = (byEditor[f.editor] ?? 0) + 1;
+      // ARRIVAL IS GEBSER'S READING: the origin present in every part, none of it
+      // lost, and no single editor's perspective with the last word — and the
+      // shape the sources agreed on (stage 4), where this engine can measure it.
+      g = gebserArrival({ piece, draft, findings: again.findings });
+      shapeCheck = shape?.learned ? matchShape(shape, pieceText()) : null;
+      const shapeOk = shapeCheck ? shapeCheck.ok !== false : true;
+      const arrived = g.arrived && shapeOk;
+      const changed = pieceText() !== before;
+      stopped = arrived ? "arrived" : !licensed.length ? "nothing left licensing a revision, though not arrived" : undone ? "a loop was undone — Hora: the piece stands at the last stable loop" : !changed ? "a pass that changed nothing" : totals.calls >= budget ? `the budget of ${budget} model call(s) is spent` : null;
+      write("arrive", `Gebser · pass ${pass} · ${arrived ? "Arrived" : "Not yet arrived"}${stopped && !arrived ? " · stopped" : ""}`,
+        [g.basis, shapeCheck ? `shape: ${shapeCheck.basis}` : "shape: none learned to match", ...Object.entries(byEditor).map(([e, n]) => `${e}: ${n} finding(s) still licensing a revision`), stopped && !arrived ? `stopped: ${stopped}` : ""].filter(Boolean).join("\n"),
+        `diaphaneity ${g.diaphaneity} · ${totals.calls} of ${budget} model call(s) spent on pathos · untaught, and so unable to object: ${again.untaught.map((u) => u.editor).join(", ") || "none"}`, "archon:gebser");
+      if (stopped) break;
+      read = again;
+    }
+    stage = "summary";
+
+    const secs = Math.round((Date.now() - t0) / 1000);
+    const floored = result.parts.reduce((s, p) => s + p.floored, 0);
+    const facts = result.parts.reduce((s, p) => s + p.of, 0);
+    write("summary", "Run summary", `model calls: ${proseCalls + totals.calls + steered.votes.length} (steer ${steered.votes.length}, prose ${proseCalls}, tighten ${totals.tightCalls}, turns ${totals.bridgeCalls})\npathos passes: ${totals.passes} (budget ${budget} call(s); stopped: ${stopped})\nmouth votes licensed: ${steered.votes.filter((v) => v.kept).length} of ${steered.votes.length}\nseconds from prose to arrival: ${secs}\nfacts in the draft: ${facts}\nfacts at the floor: ${floored}\nparts carried whole: ${result.parts.filter((p) => p.status === "carried whole").length} of ${result.parts.length}\narchon findings, first read: ${firstRead}\nsentences folded: ${totals.folded}\nLish cuts (no model): ${totals.lish}\nrewrites kept: ${totals.rewritesKept} of ${totals.tightCalls}\nbridges kept: ${totals.bridgesKept} of ${totals.bridgeCalls}\nfindings still licensing a revision: ${licensed.length}\narrived: ${g?.arrived && (shapeCheck ? shapeCheck.ok !== false : true)}`, "measured on this run");
+
+
+  };
+  try { await spiral(); }
+  catch (e) {
+    failedAt = stage;
+    piece = lastPiece;
+    write("check", `Loop · failed at ${stage} · the piece stands at the last stable loop`, `${String(e?.message ?? e).slice(0, 300)}`, "Hora's rule: the subassembly in hand is lost, the wholes below it stand", "eoreader7:loop-check");
+  }
+  // THE PIECE, AS IT NOW STANDS: each part's line supersedes its earlier one.
+  for (const p of piece ?? []) write("part", p.id, joinUnits(p.pieces), failedAt ? `the last stable loop's piece (the run failed at ${failedAt})` : "after the pathos passes", "eoreader7:finish", partLine.get(p.id) ?? null);
+  // 9. THE PIECE — the folded output. Append-only: every loop's verdict is
+  // still on the record beneath it (the "check" lines), and this line is the
+  // one that stands.
+  const verdicts = (ledger.lines ?? []).filter((l) => l.role === "check");
+  write("piece", `Piece: ${(piece ?? []).length} part(s)${failedAt ? ` · failed at ${failedAt}` : ""}`, (piece ?? []).map((p) => joinUnits(p.pieces)).join("\n\n"), `${verdicts.length} loop verdict(s); unit: ${unit} (${unitBasis}) on the record beneath this line; ${failedAt ? "the last stable loop's piece" : "the piece as it stands after the pathos passes"}`, "eoreader7:piece");
+
+  const report = path.join(DOCS, `${docId.replace(/:1$/, "")}.phases.html`);
+  fs.writeFileSync(report, renderPhaseReport(docId.replace(/:1$/, "")));
+  // piece/pieceText (2026-09-26): `result` is the raw pre-archon draft, NOT
+  // the finished piece (every existing caller already knew this and read the
+  // ledger's own role:"piece" line back instead). These two additive fields
+  // give a caller the finished, archon-revised text directly, computed with
+  // the EXACT same expression already used for that ledger line above, so
+  // pieceText can never diverge from what the ledger itself records.
+  return { docId, report, result, piece, pieceText: (piece ?? []).map((p) => joinUnits(p.pieces)).join("\n\n") };
+}
+
+if (import.meta.url === `file://${process.argv[1]}`) {
+  const task = arg("task");
+  const groundArg = arg("ground");
+  if (!task || !groundArg) { console.error('usage: pipeline-run.mjs --task "…" --ground FILE[,FILE] [--model gemma2:2b] [--id NAME] [--web] [--budget CALLS]'); process.exit(1); }
+  // --budget: model calls the pathos loop may spend. Measured on nine-live-1
+  // (2026-09-22): the default (the prose pass's own count, 6) was spent
+  // inside pass 1 (9 tighten + 3 turns), so on real material the default is
+  // one pass; a second pass needs the budget stated.
+  const out = await runPipeline({ task, groundFiles: groundArg.split(","), model: arg("model", "gemma2:2b"), id: arg("id"), web: process.argv.includes("--web") ? liveWeb() : null, pathosBudget: arg("budget") ? Number(arg("budget")) : null, onStage: (s) => console.error(`  · ${s.role}: ${s.title}`) });
+  console.log(out.report);
+  process.exit(0);
+}

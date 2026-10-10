@@ -1,0 +1,665 @@
+{
+ "hdr": "30c360e4d16fe3081f4ca6773a26683f778233d15641e8545bca4b7545aa02e0",
+ "rung": "K0",
+ "ud": {
+  "FULL": {
+   "nValid": 52,
+   "medAuc": {
+    "pInitX": 0.5667,
+    "logn": 0.4667,
+    "loc": 0.5905,
+    "rec": 0.5756,
+    "burst": 0.5867,
+    "span": 0.6318,
+    "invLen": 0.5059,
+    "relPos": 0.5677,
+    "meanIdx": 0.5583,
+    "charLen": 0.4775,
+    "pInit": 0.5761,
+    "antiFinalX": 0.4845
+   },
+   "shareWithin03": {
+    "logn": 0.0962,
+    "loc": 0.7308,
+    "rec": 0.6154,
+    "burst": 0.75,
+    "span": 0.75,
+    "invLen": 0.4615,
+    "relPos": 0.5962,
+    "meanIdx": 0.5192,
+    "charLen": 0.2115,
+    "pInit": 0.6923,
+    "antiFinalX": 0.2885
+   },
+   "medDiff": {
+    "logn": 0.1027,
+    "loc": -0.0244,
+    "rec": 0.0108,
+    "burst": -0.0092,
+    "span": -0.0602,
+    "invLen": 0.0397,
+    "relPos": 0.0217,
+    "meanIdx": 0.0147,
+    "charLen": 0.1008,
+    "pInit": -0.0008,
+    "antiFinalX": 0.0827
+   },
+   "reproduces": {
+    "logn": false,
+    "loc": true,
+    "rec": true,
+    "burst": true,
+    "span": true,
+    "invLen": false,
+    "relPos": true,
+    "meanIdx": true,
+    "charLen": false,
+    "pInit": true,
+    "antiFinalX": false
+   }
+  },
+  "CAUSAL4": {
+   "nValid": 44,
+   "medAuc": {
+    "pInitX": 0.5774,
+    "logn": 0.4785,
+    "loc": 0.5786,
+    "rec": 0.5769,
+    "burst": 0.5749,
+    "span": 0.5829,
+    "invLen": 0.5111,
+    "relPos": 0.5694,
+    "meanIdx": 0.5661,
+    "charLen": 0.4858,
+    "pInit": 0.5694,
+    "antiFinalX": 0.5024
+   },
+   "shareWithin03": {
+    "logn": 0.1136,
+    "loc": 0.6818,
+    "rec": 0.7727,
+    "burst": 0.6136,
+    "span": 0.7045,
+    "invLen": 0.4545,
+    "relPos": 0.6136,
+    "meanIdx": 0.6364,
+    "charLen": 0.2727,
+    "pInit": 0.7273,
+    "antiFinalX": 0.3182
+   },
+   "medDiff": {
+    "logn": 0.0976,
+    "loc": -0.0119,
+    "rec": 0,
+    "burst": -0.0053,
+    "span": -0.0286,
+    "invLen": 0.0332,
+    "relPos": 0.0043,
+    "meanIdx": 0.0058,
+    "charLen": 0.1,
+    "pInit": -0.0024,
+    "antiFinalX": 0.0538
+   },
+   "reproduces": {
+    "logn": false,
+    "loc": true,
+    "rec": true,
+    "burst": true,
+    "span": true,
+    "invLen": false,
+    "relPos": true,
+    "meanIdx": true,
+    "charLen": false,
+    "pInit": true,
+    "antiFinalX": false
+   }
+  }
+ },
+ "irc": {
+  "irc-en-fresh|FULL": {
+   "pairs": 600,
+   "posCtl": 0.5,
+   "pInitX": 0.9017,
+   "lo": 0.8756,
+   "hi": 0.9219,
+   "rivals": {
+    "logn": {
+     "auc": 0.4983,
+     "diff": 0.4033,
+     "lo": 0.3555,
+     "hi": 0.4513,
+     "reproduces": false
+    },
+    "loc": {
+     "auc": 0.8392,
+     "diff": 0.0625,
+     "lo": 0.0285,
+     "hi": 0.0945,
+     "reproduces": false
+    },
+    "rec": {
+     "auc": 0.7292,
+     "diff": 0.1725,
+     "lo": 0.1368,
+     "hi": 0.2104,
+     "reproduces": false
+    },
+    "burst": {
+     "auc": 0.8333,
+     "diff": 0.0683,
+     "lo": 0.0422,
+     "hi": 0.1025,
+     "reproduces": false
+    },
+    "span": {
+     "auc": 0.8717,
+     "diff": 0.03,
+     "lo": -0.0016,
+     "hi": 0.0641,
+     "reproduces": true
+    },
+    "invLen": {
+     "auc": 0.7,
+     "diff": 0.2017,
+     "lo": 0.1476,
+     "hi": 0.2508,
+     "reproduces": false
+    },
+    "relPos": {
+     "auc": 0.9042,
+     "diff": -0.0025,
+     "lo": -0.0187,
+     "hi": 0.014,
+     "reproduces": true
+    },
+    "meanIdx": {
+     "auc": 0.9067,
+     "diff": -0.005,
+     "lo": -0.0244,
+     "hi": 0.0173,
+     "reproduces": true
+    },
+    "charLen": {
+     "auc": 0.595,
+     "diff": 0.3067,
+     "lo": 0.2572,
+     "hi": 0.3526,
+     "reproduces": false
+    },
+    "pInit": {
+     "auc": 0.9217,
+     "diff": -0.02,
+     "lo": -0.0345,
+     "hi": -0.0082,
+     "reproduces": true
+    },
+    "antiFinalX": {
+     "auc": 0.8083,
+     "diff": 0.0933,
+     "lo": 0.0539,
+     "hi": 0.1343,
+     "reproduces": false
+    }
+   }
+  },
+  "irc-en-fresh|CAUSAL4": {
+   "pairs": 600,
+   "posCtl": 0.5,
+   "pInitX": 0.9167,
+   "lo": 0.8907,
+   "hi": 0.9421,
+   "rivals": {
+    "logn": {
+     "auc": 0.425,
+     "diff": 0.4917,
+     "lo": 0.4518,
+     "hi": 0.5349,
+     "reproduces": false
+    },
+    "loc": {
+     "auc": 0.7933,
+     "diff": 0.1233,
+     "lo": 0.0802,
+     "hi": 0.1587,
+     "reproduces": false
+    },
+    "rec": {
+     "auc": 0.7367,
+     "diff": 0.18,
+     "lo": 0.1358,
+     "hi": 0.2263,
+     "reproduces": false
+    },
+    "burst": {
+     "auc": 0.7767,
+     "diff": 0.14,
+     "lo": 0.1033,
+     "hi": 0.1786,
+     "reproduces": false
+    },
+    "span": {
+     "auc": 0.8533,
+     "diff": 0.0633,
+     "lo": 0.0253,
+     "hi": 0.0936,
+     "reproduces": false
+    },
+    "invLen": {
+     "auc": 0.65,
+     "diff": 0.2667,
+     "lo": 0.2088,
+     "hi": 0.3205,
+     "reproduces": false
+    },
+    "relPos": {
+     "auc": 0.9008,
+     "diff": 0.0158,
+     "lo": -0.0067,
+     "hi": 0.0348,
+     "reproduces": true
+    },
+    "meanIdx": {
+     "auc": 0.9117,
+     "diff": 0.005,
+     "lo": -0.0129,
+     "hi": 0.0268,
+     "reproduces": true
+    },
+    "charLen": {
+     "auc": 0.5908,
+     "diff": 0.3258,
+     "lo": 0.2741,
+     "hi": 0.3668,
+     "reproduces": false
+    },
+    "pInit": {
+     "auc": 0.9217,
+     "diff": -0.005,
+     "lo": -0.0196,
+     "hi": 0.0084,
+     "reproduces": true
+    },
+    "antiFinalX": {
+     "auc": 0.755,
+     "diff": 0.1617,
+     "lo": 0.1179,
+     "hi": 0.2058,
+     "reproduces": false
+    }
+   }
+  }
+ },
+ "code": {
+  "code-py|FULL": {
+   "pairs": 992,
+   "posCtl": 0.5,
+   "pInitX": 0.6678,
+   "lo": 0.6355,
+   "hi": 0.7069,
+   "rivals": {
+    "logn": {
+     "auc": 0.568,
+     "diff": 0.0998,
+     "lo": 0.0509,
+     "hi": 0.1481,
+     "reproduces": false
+    },
+    "loc": {
+     "auc": 0.6946,
+     "diff": -0.0267,
+     "lo": -0.0665,
+     "hi": 0.0148,
+     "reproduces": true
+    },
+    "rec": {
+     "auc": 0.6673,
+     "diff": 0.0005,
+     "lo": -0.0423,
+     "hi": 0.0475,
+     "reproduces": true
+    },
+    "burst": {
+     "auc": 0.6951,
+     "diff": -0.0272,
+     "lo": -0.0687,
+     "hi": 0.0233,
+     "reproduces": true
+    },
+    "span": {
+     "auc": 0.7334,
+     "diff": -0.0655,
+     "lo": -0.1081,
+     "hi": -0.0149,
+     "reproduces": true
+    },
+    "invLen": {
+     "auc": 0.6023,
+     "diff": 0.0655,
+     "lo": 0.0036,
+     "hi": 0.1183,
+     "reproduces": false
+    },
+    "relPos": {
+     "auc": 0.5086,
+     "diff": 0.1593,
+     "lo": 0.1241,
+     "hi": 0.1955,
+     "reproduces": false
+    },
+    "meanIdx": {
+     "auc": 0.5398,
+     "diff": 0.128,
+     "lo": 0.0787,
+     "hi": 0.1738,
+     "reproduces": false
+    },
+    "charLen": {
+     "auc": 0.5786,
+     "diff": 0.0892,
+     "lo": 0.0472,
+     "hi": 0.1348,
+     "reproduces": false
+    },
+    "pInit": {
+     "auc": 0.693,
+     "diff": -0.0252,
+     "lo": -0.0508,
+     "hi": 0.001,
+     "reproduces": true
+    },
+    "antiFinalX": {
+     "auc": 0.4068,
+     "diff": 0.2611,
+     "lo": 0.2071,
+     "hi": 0.3092,
+     "reproduces": false
+    }
+   }
+  },
+  "code-py|CAUSAL4": {
+   "pairs": 712,
+   "posCtl": 0.5,
+   "pInitX": 0.6503,
+   "lo": 0.6071,
+   "hi": 0.6896,
+   "rivals": {
+    "logn": {
+     "auc": 0.5084,
+     "diff": 0.1419,
+     "lo": 0.0934,
+     "hi": 0.1884,
+     "reproduces": false
+    },
+    "loc": {
+     "auc": 0.6903,
+     "diff": -0.04,
+     "lo": -0.0878,
+     "hi": 0.0108,
+     "reproduces": true
+    },
+    "rec": {
+     "auc": 0.6735,
+     "diff": -0.0232,
+     "lo": -0.0659,
+     "hi": 0.0227,
+     "reproduces": true
+    },
+    "burst": {
+     "auc": 0.7289,
+     "diff": -0.0787,
+     "lo": -0.1259,
+     "hi": -0.0247,
+     "reproduces": true
+    },
+    "span": {
+     "auc": 0.7191,
+     "diff": -0.0688,
+     "lo": -0.125,
+     "hi": -0.0081,
+     "reproduces": true
+    },
+    "invLen": {
+     "auc": 0.5829,
+     "diff": 0.0674,
+     "lo": -0.0049,
+     "hi": 0.13,
+     "reproduces": false
+    },
+    "relPos": {
+     "auc": 0.4698,
+     "diff": 0.1805,
+     "lo": 0.1334,
+     "hi": 0.2278,
+     "reproduces": false
+    },
+    "meanIdx": {
+     "auc": 0.5077,
+     "diff": 0.1426,
+     "lo": 0.08,
+     "hi": 0.2012,
+     "reproduces": false
+    },
+    "charLen": {
+     "auc": 0.5456,
+     "diff": 0.1046,
+     "lo": 0.0473,
+     "hi": 0.1694,
+     "reproduces": false
+    },
+    "pInit": {
+     "auc": 0.6566,
+     "diff": -0.0063,
+     "lo": -0.0411,
+     "hi": 0.0275,
+     "reproduces": true
+    },
+    "antiFinalX": {
+     "auc": 0.3694,
+     "diff": 0.2809,
+     "lo": 0.2251,
+     "hi": 0.3449,
+     "reproduces": false
+    }
+   }
+  },
+  "code-js|FULL": {
+   "pairs": 721,
+   "posCtl": 0.5,
+   "pInitX": 0.5881,
+   "lo": 0.5445,
+   "hi": 0.6341,
+   "rivals": {
+    "logn": {
+     "auc": 0.5097,
+     "diff": 0.0784,
+     "lo": 0.0252,
+     "hi": 0.1368,
+     "reproduces": false
+    },
+    "loc": {
+     "auc": 0.6713,
+     "diff": -0.0832,
+     "lo": -0.1353,
+     "hi": -0.0307,
+     "reproduces": true
+    },
+    "rec": {
+     "auc": 0.6387,
+     "diff": -0.0506,
+     "lo": -0.1093,
+     "hi": 0.0083,
+     "reproduces": true
+    },
+    "burst": {
+     "auc": 0.7025,
+     "diff": -0.1144,
+     "lo": -0.1746,
+     "hi": -0.059,
+     "reproduces": true
+    },
+    "span": {
+     "auc": 0.6616,
+     "diff": -0.0735,
+     "lo": -0.1413,
+     "hi": -0.011,
+     "reproduces": true
+    },
+    "invLen": {
+     "auc": 0.7233,
+     "diff": -0.1352,
+     "lo": -0.2028,
+     "hi": -0.0673,
+     "reproduces": true
+    },
+    "relPos": {
+     "auc": 0.5721,
+     "diff": 0.016,
+     "lo": -0.0233,
+     "hi": 0.0593,
+     "reproduces": true
+    },
+    "meanIdx": {
+     "auc": 0.6359,
+     "diff": -0.0479,
+     "lo": -0.1017,
+     "hi": 0.0123,
+     "reproduces": true
+    },
+    "charLen": {
+     "auc": 0.491,
+     "diff": 0.0971,
+     "lo": 0.0371,
+     "hi": 0.1516,
+     "reproduces": false
+    },
+    "pInit": {
+     "auc": 0.7094,
+     "diff": -0.1214,
+     "lo": -0.1596,
+     "hi": -0.0866,
+     "reproduces": true
+    },
+    "antiFinalX": {
+     "auc": 0.4563,
+     "diff": 0.1318,
+     "lo": 0.0758,
+     "hi": 0.1838,
+     "reproduces": false
+    }
+   }
+  },
+  "code-js|CAUSAL4": {
+   "pairs": 504,
+   "posCtl": 0.5,
+   "pInitX": 0.5446,
+   "lo": 0.499,
+   "hi": 0.5951,
+   "rivals": {
+    "logn": {
+     "auc": 0.5437,
+     "diff": 0.001,
+     "lo": -0.08,
+     "hi": 0.0574,
+     "reproduces": true
+    },
+    "loc": {
+     "auc": 0.6032,
+     "diff": -0.0585,
+     "lo": -0.1228,
+     "hi": 0.0019,
+     "reproduces": true
+    },
+    "rec": {
+     "auc": 0.6151,
+     "diff": -0.0704,
+     "lo": -0.1447,
+     "hi": -0.0048,
+     "reproduces": true
+    },
+    "burst": {
+     "auc": 0.6746,
+     "diff": -0.13,
+     "lo": -0.1963,
+     "hi": -0.0674,
+     "reproduces": true
+    },
+    "span": {
+     "auc": 0.5972,
+     "diff": -0.0526,
+     "lo": -0.1116,
+     "hi": 0.0208,
+     "reproduces": true
+    },
+    "invLen": {
+     "auc": 0.6399,
+     "diff": -0.0952,
+     "lo": -0.1746,
+     "hi": 0,
+     "reproduces": true
+    },
+    "relPos": {
+     "auc": 0.5476,
+     "diff": -0.003,
+     "lo": -0.0607,
+     "hi": 0.0404,
+     "reproduces": true
+    },
+    "meanIdx": {
+     "auc": 0.623,
+     "diff": -0.0784,
+     "lo": -0.1442,
+     "hi": -0.0175,
+     "reproduces": true
+    },
+    "charLen": {
+     "auc": 0.504,
+     "diff": 0.0407,
+     "lo": -0.0418,
+     "hi": 0.1113,
+     "reproduces": false
+    },
+    "pInit": {
+     "auc": 0.622,
+     "diff": -0.0774,
+     "lo": -0.1171,
+     "hi": -0.0372,
+     "reproduces": true
+    },
+    "antiFinalX": {
+     "auc": 0.4216,
+     "diff": 0.123,
+     "lo": 0.0566,
+     "hi": 0.2004,
+     "reproduces": false
+    }
+   }
+  }
+ },
+ "recut": {
+  "udValid": 52,
+  "udMedian": 0.5025,
+  "udValidControl": true,
+  "irc": [
+   {
+    "auc": 0.4767,
+    "lo": 0.4331,
+    "hi": 0.5281,
+    "valid": true
+   }
+  ],
+  "code": [
+   {
+    "reg": "code-py",
+    "auc": 0.4848,
+    "lo": 0.4415,
+    "hi": 0.522
+   },
+   {
+    "reg": "code-js",
+    "auc": 0.4501,
+    "lo": 0.4062,
+    "hi": 0.493
+   }
+  ]
+ }
+}

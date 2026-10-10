@@ -1,0 +1,19 @@
+"""The listening queue. Stdlib only."""
+
+
+def build_queue(episodes, state):
+    """Return the listening queue as a list of episode dicts.
+
+    - Exclude every episode whose guid is in state["played"].
+    - Order the rest newest first by the pub_date string (descending string
+      order is acceptable), preserving feed order for equal pub_dates.
+
+    `episodes` is a list of episode dicts (see feed.parse_feed); `state` is the
+    dict returned by store.fold_events.
+    """
+    queue = []
+    for episode in episodes:
+        if episode["guid"] not in state["played"]:
+            queue.append(episode)
+    queue.sort(key=lambda x: x["pub_date"], reverse=True)
+    return queue

@@ -1,0 +1,20 @@
+{
+ "verdict": {
+  "FRAGILITY_SUPPORTED": false,
+  "COUNT_INDEPENDENT_kinds": [],
+  "NO_SCOPE": true,
+  "activeCells": [],
+  "runValid": true
+ },
+ "rules": [],
+ "predictions": {
+  "P1_fragility_gradient": false,
+  "P2_floor": false,
+  "P3_matching_collapses_irc": false,
+  "P4_wp": false,
+  "P5_record_beats_scalar": false,
+  "P6_extent": false,
+  "P7_decay": false
+ },
+ "headerSha256": "339480a6bc5e603a6f1a421a013dbfee6bf3ec2a5ca161a42d199a0e7e2e393d"
+}

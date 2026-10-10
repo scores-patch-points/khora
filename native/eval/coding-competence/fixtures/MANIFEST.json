@@ -1,0 +1,1201 @@
+{
+ "authored": true,
+ "fixtures": {
+  "bash.sh": {
+   "calls": [
+    ".",
+    "area",
+    "describe",
+    "echo",
+    "source",
+    "tr"
+   ],
+   "defs": [
+    "LIMIT",
+    "area",
+    "describe"
+   ],
+   "extends": null,
+   "file": "bash.sh",
+   "imports": [
+    "./lib.sh",
+    "./other.sh"
+   ],
+   "known": {},
+   "language": "bash"
+  },
+  "c.c": {
+   "calls": [
+    "SQUARE",
+    "area",
+    "helper",
+    "printf"
+   ],
+   "defs": [
+    "Circle",
+    "Color",
+    "LIMIT",
+    "SQUARE",
+    "area",
+    "helper",
+    "main"
+   ],
+   "extends": [],
+   "file": "c.c",
+   "imports": [
+    "shape.h",
+    "stdio.h"
+   ],
+   "known": {},
+   "language": "c"
+  },
+  "clojure.clj": {
+   "calls": [
+    "*",
+    "area",
+    "str"
+   ],
+   "defs": [
+    "Circle",
+    "Drawable",
+    "area",
+    "describe",
+    "limit",
+    "shapes.core"
+   ],
+   "extends": null,
+   "file": "clojure.clj",
+   "imports": [
+    "clojure.set",
+    "clojure.string"
+   ],
+   "known": {},
+   "language": "clojure"
+  },
+  "cobol.cob": {
+   "calls": [
+    "DESCRIBE-PARA"
+   ],
+   "defs": [
+    "DESCRIBE-PARA",
+    "MAIN-PARA",
+    "SHAPES",
+    "WS-AREA",
+    "WS-R"
+   ],
+   "extends": null,
+   "file": "cobol.cob",
+   "imports": null,
+   "known": {},
+   "language": "cobol"
+  },
+  "commonlisp.lisp": {
+   "calls": [
+    "*",
+    "+",
+    "area",
+    "format"
+   ],
+   "defs": [
+    "area",
+    "circle",
+    "describe-shape",
+    "shape",
+    "twice"
+   ],
+   "extends": null,
+   "file": "commonlisp.lisp",
+   "imports": [
+    "shapes"
+   ],
+   "known": {},
+   "language": "commonlisp"
+  },
+  "cpp.cpp": {
+   "calls": [
+    "area",
+    "describe",
+    "twice"
+   ],
+   "defs": [
+    "Circle",
+    "Shape",
+    "area",
+    "describe",
+    "geo",
+    "main",
+    "twice"
+   ],
+   "extends": [
+    "Circle<Drawable",
+    "Circle<Shape"
+   ],
+   "file": "cpp.cpp",
+   "imports": [
+    "iostream",
+    "shape.hpp"
+   ],
+   "known": {},
+   "language": "cpp"
+  },
+  "csharp.cs": {
+   "calls": [
+    "Area",
+    "Describe",
+    "WriteLine"
+   ],
+   "defs": [
+    "Area",
+    "Circle",
+    "Demo",
+    "Describe",
+    "Draw",
+    "IDrawable",
+    "Main",
+    "Program",
+    "Shape"
+   ],
+   "extends": [
+    "Circle<IDrawable",
+    "Circle<Shape"
+   ],
+   "file": "csharp.cs",
+   "imports": [
+    "System",
+    "System.Collections.Generic"
+   ],
+   "known": {},
+   "language": "csharp"
+  },
+  "css.css": {
+   "calls": [
+    "calc",
+    "rotate",
+    "url",
+    "var"
+   ],
+   "defs": [
+    "--main-color",
+    "spin"
+   ],
+   "extends": null,
+   "file": "css.css",
+   "imports": [
+    "base.css"
+   ],
+   "known": {},
+   "language": "css"
+  },
+  "dart.dart": {
+   "calls": [
+    "Circle",
+    "area",
+    "describe",
+    "print"
+   ],
+   "defs": [
+    "Circle",
+    "Drawable",
+    "Shape",
+    "area",
+    "describe",
+    "draw",
+    "main"
+   ],
+   "extends": [
+    "Circle<Comparable",
+    "Circle<Drawable",
+    "Circle<Shape"
+   ],
+   "file": "dart.dart",
+   "imports": [
+    "dart:math",
+    "package:flutter/material.dart"
+   ],
+   "known": {},
+   "language": "dart"
+  },
+  "elixir.ex": {
+   "calls": [
+    "area",
+    "puts"
+   ],
+   "defs": [
+    "Shapes.Circle",
+    "area",
+    "describe",
+    "helper"
+   ],
+   "extends": [
+    "Shapes.Circle<GenServer"
+   ],
+   "file": "elixir.ex",
+   "imports": [
+    "Enum",
+    "GenServer",
+    "Logger",
+    "Shapes.Util"
+   ],
+   "known": {},
+   "language": "elixir"
+  },
+  "elm.elm": {
+   "calls": [
+    "area",
+    "fromFloat"
+   ],
+   "defs": [
+    "Circle",
+    "Name",
+    "Shape",
+    "Shapes",
+    "Square",
+    "area",
+    "describe"
+   ],
+   "extends": null,
+   "file": "elm.elm",
+   "imports": [
+    "Html",
+    "List"
+   ],
+   "known": {},
+   "language": "elm"
+  },
+  "erlang.erl": {
+   "calls": [
+    "area",
+    "format"
+   ],
+   "defs": [
+    "area",
+    "circle",
+    "describe",
+    "shapes"
+   ],
+   "extends": [
+    "shapes<gen_server"
+   ],
+   "file": "erlang.erl",
+   "imports": [
+    "lists"
+   ],
+   "known": {},
+   "language": "erlang"
+  },
+  "fortran.f90": {
+   "calls": [
+    "area",
+    "describe"
+   ],
+   "defs": [
+    "area",
+    "circle",
+    "describe",
+    "main",
+    "shape",
+    "shapes"
+   ],
+   "extends": [
+    "circle<shape"
+   ],
+   "file": "fortran.f90",
+   "imports": [
+    "shapes"
+   ],
+   "known": {},
+   "language": "fortran"
+  },
+  "go.go": {
+   "calls": [
+    "Area",
+    "Println",
+    "ToUpper",
+    "describe"
+   ],
+   "defs": [
+    "Area",
+    "Circle",
+    "Drawable",
+    "Shape",
+    "describe",
+    "main"
+   ],
+   "extends": [
+    "Circle<Shape"
+   ],
+   "file": "go.go",
+   "imports": [
+    "fmt",
+    "strings"
+   ],
+   "known": {},
+   "language": "go"
+  },
+  "groovy.groovy": {
+   "calls": [
+    "area",
+    "describe",
+    "println"
+   ],
+   "defs": [
+    "Circle",
+    "Drawable",
+    "Shape",
+    "area",
+    "describe",
+    "draw"
+   ],
+   "extends": [
+    "Circle<Drawable",
+    "Circle<Shape"
+   ],
+   "file": "groovy.groovy",
+   "imports": [
+    "groovy.json.JsonSlurper",
+    "java.util.List"
+   ],
+   "known": {},
+   "language": "groovy"
+  },
+  "haskell.hs": {
+   "calls": [
+    "area",
+    "describe",
+    "putStrLn",
+    "show"
+   ],
+   "defs": [
+    "Circle",
+    "Name",
+    "Shape",
+    "area",
+    "describe",
+    "main"
+   ],
+   "extends": [
+    "Circle<Shape"
+   ],
+   "file": "haskell.hs",
+   "imports": [
+    "Data.List",
+    "Data.Map"
+   ],
+   "known": {},
+   "language": "haskell"
+  },
+  "html.html": {
+   "calls": [],
+   "defs": [
+    "main"
+   ],
+   "extends": null,
+   "file": "html.html",
+   "imports": [
+    "app.js",
+    "logo.png",
+    "style.css"
+   ],
+   "known": {},
+   "language": "html"
+  },
+  "java.java": {
+   "calls": [
+    "area",
+    "describe",
+    "println"
+   ],
+   "defs": [
+    "Circle",
+    "Drawable",
+    "Main",
+    "Shape",
+    "area",
+    "describe",
+    "draw",
+    "main"
+   ],
+   "extends": [
+    "Circle<Drawable",
+    "Circle<Shape"
+   ],
+   "file": "java.java",
+   "imports": [
+    "java.util.List",
+    "java.util.Map"
+   ],
+   "known": {},
+   "language": "java"
+  },
+  "javascript.js": {
+   "calls": [
+    "area",
+    "describe",
+    "helper",
+    "log",
+    "main",
+    "pjoin",
+    "toFixed"
+   ],
+   "defs": [
+    "Circle",
+    "Shape",
+    "area",
+    "describe",
+    "helper",
+    "main",
+    "unit"
+   ],
+   "extends": [
+    "Circle<Shape"
+   ],
+   "file": "javascript.js",
+   "imports": [
+    "node:fs",
+    "os",
+    "path"
+   ],
+   "known": {},
+   "language": "javascript"
+  },
+  "json.json": {
+   "calls": null,
+   "defs": [],
+   "extends": null,
+   "file": "json.json",
+   "imports": null,
+   "known": {},
+   "language": "json"
+  },
+  "julia.jl": {
+   "calls": [
+    "Circle",
+    "area",
+    "describe",
+    "println"
+   ],
+   "defs": [
+    "Circle",
+    "Geo",
+    "Shape",
+    "area",
+    "describe"
+   ],
+   "extends": [
+    "Circle<Shape"
+   ],
+   "file": "julia.jl",
+   "imports": [
+    "Base",
+    "LinearAlgebra"
+   ],
+   "known": {},
+   "language": "julia"
+  },
+  "kotlin.kt": {
+   "calls": [
+    "Circle",
+    "area",
+    "describe",
+    "println"
+   ],
+   "defs": [
+    "Circle",
+    "Drawable",
+    "Shape",
+    "Util",
+    "area",
+    "c",
+    "describe",
+    "draw",
+    "helper",
+    "main"
+   ],
+   "extends": [
+    "Circle<Drawable",
+    "Circle<Shape"
+   ],
+   "file": "kotlin.kt",
+   "imports": [
+    "java.util.List",
+    "kotlin.math.PI"
+   ],
+   "known": {
+    "defs": "Util (a top-level `object` declaration) is mis-parsed by the grammar as an object_literal expression without any ERROR, so it is NOT found; `c` is a local val that the shipped tags call definition.constant"
+   },
+   "language": "kotlin"
+  },
+  "latex.tex": {
+   "calls": [
+    "\\area",
+    "\\pi"
+   ],
+   "defs": [
+    "\\area",
+    "sec:shapes"
+   ],
+   "extends": null,
+   "file": "latex.tex",
+   "imports": [
+    "amsmath",
+    "article",
+    "chapter"
+   ],
+   "known": {},
+   "language": "latex"
+  },
+  "lean.lean": {
+   "calls": null,
+   "defs": [
+    "Circle",
+    "Shape",
+    "area_nonneg",
+    "describe",
+    "main"
+   ],
+   "extends": [
+    "Circle<Shape"
+   ],
+   "file": "lean.lean",
+   "imports": [
+    "Std.Data.HashMap"
+   ],
+   "known": {},
+   "language": "lean"
+  },
+  "lua.lua": {
+   "calls": [
+    "area",
+    "describe",
+    "new",
+    "print",
+    "require",
+    "setmetatable"
+   ],
+   "defs": [
+    "area",
+    "describe",
+    "new"
+   ],
+   "extends": null,
+   "file": "lua.lua",
+   "imports": [
+    "json"
+   ],
+   "known": {},
+   "language": "lua"
+  },
+  "markdown.md": {
+   "calls": null,
+   "defs": [
+    "Shapes",
+    "Usage"
+   ],
+   "extends": null,
+   "file": "markdown.md",
+   "imports": null,
+   "known": {},
+   "language": "markdown"
+  },
+  "matlab.m": {
+   "calls": [
+    "area",
+    "describe",
+    "fprintf"
+   ],
+   "defs": [
+    "area",
+    "describe"
+   ],
+   "extends": null,
+   "file": "matlab.m",
+   "imports": null,
+   "known": {},
+   "language": "matlab"
+  },
+  "matlab__classdef.m": {
+   "calls": null,
+   "defs": [
+    "Circle",
+    "area"
+   ],
+   "extends": [
+    "Circle<Shape"
+   ],
+   "file": "matlab__classdef.m",
+   "imports": null,
+   "known": {},
+   "language": "matlab"
+  },
+  "nim.nim": {
+   "calls": [
+    "area",
+    "describe",
+    "echo"
+   ],
+   "defs": [
+    "Circle",
+    "Shape",
+    "area",
+    "describe",
+    "double"
+   ],
+   "extends": [
+    "Circle<Shape",
+    "Shape<RootObj"
+   ],
+   "file": "nim.nim",
+   "imports": [
+    "math",
+    "os",
+    "strutils"
+   ],
+   "known": {},
+   "language": "nim"
+  },
+  "objc.m": {
+   "calls": [
+    "NSLog",
+    "alloc",
+    "area",
+    "init"
+   ],
+   "defs": [
+    "Circle",
+    "Drawable",
+    "area",
+    "draw",
+    "main"
+   ],
+   "extends": [
+    "Circle<Drawable",
+    "Circle<Shape"
+   ],
+   "file": "objc.m",
+   "imports": [
+    "Foundation/Foundation.h",
+    "Shape.h"
+   ],
+   "known": {},
+   "language": "objc"
+  },
+  "ocaml.ml": {
+   "calls": [
+    "area",
+    "describe",
+    "print_endline",
+    "sprintf"
+   ],
+   "defs": [
+    "Circle",
+    "M",
+    "Square",
+    "area",
+    "base_shape",
+    "circle",
+    "describe",
+    "shape"
+   ],
+   "extends": [
+    "circle<base_shape"
+   ],
+   "file": "ocaml.ml",
+   "imports": [
+    "Printf"
+   ],
+   "known": {},
+   "language": "ocaml"
+  },
+  "perl.pl": {
+   "calls": [
+    "area",
+    "bless",
+    "describe",
+    "new",
+    "print"
+   ],
+   "defs": [
+    "Shape",
+    "area",
+    "describe",
+    "main",
+    "new"
+   ],
+   "extends": null,
+   "file": "perl.pl",
+   "imports": [
+    "List::Util",
+    "parent",
+    "strict",
+    "warnings"
+   ],
+   "known": {},
+   "language": "perl"
+  },
+  "php.php": {
+   "calls": [
+    "area",
+    "describe"
+   ],
+   "defs": [
+    "Circle",
+    "Drawable",
+    "Shape",
+    "__construct",
+    "area",
+    "describe",
+    "draw"
+   ],
+   "extends": [
+    "Circle<Drawable",
+    "Circle<Shape"
+   ],
+   "file": "php.php",
+   "imports": [
+    "Foo\\Bar",
+    "Foo\\Baz",
+    "shape.php"
+   ],
+   "known": {},
+   "language": "php"
+  },
+  "powershell.ps1": {
+   "calls": [
+    "Area",
+    "Get-Area",
+    "Import-Module",
+    "Write-Host",
+    "new"
+   ],
+   "defs": [
+    "Area",
+    "Circle",
+    "Describe",
+    "Get-Area",
+    "Shape"
+   ],
+   "extends": [
+    "Circle<Shape"
+   ],
+   "file": "powershell.ps1",
+   "imports": [
+    "Pester"
+   ],
+   "known": {},
+   "language": "powershell"
+  },
+  "python.py": {
+   "calls": [
+    "Circle",
+    "area",
+    "describe",
+    "join",
+    "main",
+    "print"
+   ],
+   "defs": [
+    "Circle",
+    "LIMIT",
+    "Shape",
+    "__init__",
+    "area",
+    "describe",
+    "main"
+   ],
+   "extends": [
+    "Circle<Drawable",
+    "Circle<Shape"
+   ],
+   "file": "python.py",
+   "imports": [
+    "collections",
+    "math",
+    "os.path"
+   ],
+   "known": {},
+   "language": "python"
+  },
+  "r.R": {
+   "calls": [
+    "area",
+    "describe",
+    "library",
+    "paste",
+    "print",
+    "require"
+   ],
+   "defs": [
+    "area",
+    "describe"
+   ],
+   "extends": null,
+   "file": "r.R",
+   "imports": [
+    "stats",
+    "utils"
+   ],
+   "known": {},
+   "language": "r"
+  },
+  "racket.rkt": {
+   "calls": [
+    "*",
+    "area",
+    "circle",
+    "displayln",
+    "shape-r"
+   ],
+   "defs": [
+    "area",
+    "circle",
+    "limit",
+    "shape"
+   ],
+   "extends": [
+    "circle<shape"
+   ],
+   "file": "racket.rkt",
+   "imports": [
+    "racket/list",
+    "util.rkt"
+   ],
+   "known": {},
+   "language": "racket"
+  },
+  "ruby.rb": {
+   "calls": [
+    "area",
+    "describe",
+    "include",
+    "new",
+    "puts",
+    "raise",
+    "require",
+    "require_relative"
+   ],
+   "defs": [
+    "Circle",
+    "Drawable",
+    "Shape",
+    "area",
+    "describe",
+    "draw",
+    "initialize"
+   ],
+   "extends": [
+    "Circle<Drawable",
+    "Circle<Shape"
+   ],
+   "file": "ruby.rb",
+   "imports": [
+    "json",
+    "shape"
+   ],
+   "known": {},
+   "language": "ruby"
+  },
+  "rust.rs": {
+   "calls": [
+    "draw",
+    "new",
+    "println"
+   ],
+   "defs": [
+    "Circle",
+    "Color",
+    "Drawable",
+    "Named",
+    "area",
+    "draw",
+    "helper",
+    "main",
+    "name",
+    "twice",
+    "util"
+   ],
+   "extends": [
+    "Circle<Drawable",
+    "Named<Debug"
+   ],
+   "file": "rust.rs",
+   "imports": [
+    "std::collections::HashMap",
+    "std::fmt"
+   ],
+   "known": {
+    "calls": "calls inside macro token trees (println! arguments) are not parsed into call nodes by the grammar"
+   },
+   "language": "rust"
+  },
+  "scala.scala": {
+   "calls": [
+    "area",
+    "describe",
+    "println"
+   ],
+   "defs": [
+    "Circle",
+    "Drawable",
+    "Main",
+    "Shape",
+    "area",
+    "describe",
+    "draw",
+    "main"
+   ],
+   "extends": [
+    "Circle<Drawable",
+    "Circle<Shape"
+   ],
+   "file": "scala.scala",
+   "imports": [
+    "java.util.{List => JList, Map}",
+    "scala.collection.mutable"
+   ],
+   "known": {},
+   "language": "scala"
+  },
+  "scheme.scm": {
+   "calls": [
+    "*",
+    "area",
+    "describe",
+    "display"
+   ],
+   "defs": [
+    "area",
+    "describe",
+    "limit"
+   ],
+   "extends": null,
+   "file": "scheme.scm",
+   "imports": [
+    "scheme base",
+    "scheme write"
+   ],
+   "known": {},
+   "language": "scheme"
+  },
+  "solidity.sol": {
+   "calls": [
+    "helper"
+   ],
+   "defs": [
+    "Circle",
+    "Drawn",
+    "IDrawable",
+    "Shape",
+    "area",
+    "draw",
+    "helper",
+    "twice"
+   ],
+   "extends": [
+    "Circle<IDrawable",
+    "Circle<Shape",
+    "Shape<Base"
+   ],
+   "file": "solidity.sol",
+   "imports": [
+    "./Base.sol",
+    "./Util.sol"
+   ],
+   "known": {},
+   "language": "solidity"
+  },
+  "sql.sql": {
+   "calls": [
+    "area"
+   ],
+   "defs": [
+    "area",
+    "big_shapes",
+    "idx_shapes_name",
+    "shapes"
+   ],
+   "extends": null,
+   "file": "sql.sql",
+   "imports": null,
+   "known": {},
+   "language": "sql"
+  },
+  "svelte.svelte": {
+   "calls": null,
+   "defs": [
+    "inc"
+   ],
+   "extends": null,
+   "file": "svelte.svelte",
+   "imports": [
+    "./Button.svelte"
+   ],
+   "known": {},
+   "language": "svelte"
+  },
+  "swift.swift": {
+   "calls": [
+    "Circle",
+    "area",
+    "describe",
+    "print"
+   ],
+   "defs": [
+    "Circle",
+    "Color",
+    "Drawable",
+    "Point",
+    "Shape",
+    "area",
+    "c",
+    "describe",
+    "draw",
+    "init",
+    "r",
+    "x",
+    "y"
+   ],
+   "extends": [
+    "Circle<Drawable",
+    "Circle<Shape"
+   ],
+   "file": "swift.swift",
+   "imports": [
+    "Foundation",
+    "UIKit"
+   ],
+   "known": {
+    "defs": "shipped tags count stored properties (r x y c) as definition.property"
+   },
+   "language": "swift"
+  },
+  "toml.toml": {
+   "calls": null,
+   "defs": [
+    "bin",
+    "dependencies",
+    "package"
+   ],
+   "extends": null,
+   "file": "toml.toml",
+   "imports": null,
+   "known": {},
+   "language": "toml"
+  },
+  "tsx.tsx": {
+   "calls": [
+    "log"
+   ],
+   "defs": [
+    "App",
+    "Panel",
+    "Props",
+    "render"
+   ],
+   "extends": [
+    "Panel<Component"
+   ],
+   "file": "tsx.tsx",
+   "imports": [
+    "./button",
+    "react"
+   ],
+   "known": {},
+   "language": "tsx"
+  },
+  "typescript.ts": {
+   "calls": [
+    "area",
+    "describe",
+    "join",
+    "log",
+    "toFixed"
+   ],
+   "defs": [
+    "Circle",
+    "Color",
+    "Drawable",
+    "Point",
+    "Shape",
+    "area",
+    "describe",
+    "draw",
+    "main"
+   ],
+   "extends": [
+    "Circle<Drawable",
+    "Circle<Shape"
+   ],
+   "file": "typescript.ts",
+   "imports": [
+    "path",
+    "stream"
+   ],
+   "known": {},
+   "language": "typescript"
+  },
+  "verilog.v": {
+   "calls": [
+    "$display",
+    "adder"
+   ],
+   "defs": [
+    "adder",
+    "top"
+   ],
+   "extends": null,
+   "file": "verilog.v",
+   "imports": [
+    "defs.vh"
+   ],
+   "known": {},
+   "language": "verilog"
+  },
+  "vue.vue": {
+   "calls": null,
+   "defs": [
+    "data"
+   ],
+   "extends": null,
+   "file": "vue.vue",
+   "imports": [
+    "./Button.vue"
+   ],
+   "known": {},
+   "language": "vue"
+  },
+  "yaml.yaml": {
+   "calls": null,
+   "defs": [
+    "base"
+   ],
+   "extends": null,
+   "file": "yaml.yaml",
+   "imports": null,
+   "known": {},
+   "language": "yaml"
+  },
+  "zig.zig": {
+   "calls": [
+    "helper",
+    "print",
+    "sum"
+   ],
+   "defs": [
+    "Point",
+    "helper",
+    "main",
+    "p",
+    "std",
+    "sum"
+   ],
+   "extends": null,
+   "file": "zig.zig",
+   "imports": [
+    "std"
+   ],
+   "known": {},
+   "language": "zig"
+  }
+ },
+ "note": "AUTHORED by the model for the gold-extractor self-test (P4). Expectations were written by reading each fixture, not from tool output. Not natural data; never a held-out gold."
+}

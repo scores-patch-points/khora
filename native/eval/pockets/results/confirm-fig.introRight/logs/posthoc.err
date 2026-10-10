@@ -1,0 +1,19 @@
+docGroups sib-js-fold: mean d -0.030 se 0.022 t -1.37 pos 3/10
+docGroups sib-js-heimdall: mean d 0.048 se 0.020 t 2.41 pos 8/10
+docGroups sib-js-eoreader7: mean d 0.041 se 0.017 t 2.45 pos 8/10
+docGroups sib-py-foldvenv: mean d 0.150 se 0.090 t 1.66 pos 9/10
+docGroups sib-bpmn-miwg-heldout: mean d -0.800 se 0.070 t -11.43 pos 0/10
+docGroups sib-bpmn-kogito-heldout: mean d -0.349 se 0.035 t -10.07 pos 0/10
+docGroups sib-ud-ces-train: mean d -0.031 se 0.008 t -3.76 pos 0/10
+docGroups sib-ud-ita-train: mean d 0.043 se 0.010 t 4.48 pos 10/10
+docGroups sib-ud-nld-train: mean d 0.015 se 0.012 t 1.27 pos 6/10
+docGroups sib-en-zola-mouret: mean d 0.031 se 0.011 t 2.90 pos 8/10
+docGroups sib-en-cary-dante: mean d 0.024 se 0.016 t 1.51 pos 5/9
+overlap sib-js-fold: {"nearestAtlas":["cd-cc-javascript","cd-e09-eoapp-js"],"lineShare":0.013,"tokenShareInAtlasVocab":0.846,"typeShareInAtlasVocab":0.312}
+overlap sib-js-heimdall: {"nearestAtlas":["cd-cc-javascript","cd-e09-eoapp-js"],"lineShare":0.02,"tokenShareInAtlasVocab":0.863,"typeShareInAtlasVocab":0.518}
+overlap sib-js-eoreader7: {"nearestAtlas":["cd-cc-javascript","cd-e09-eoapp-js"],"lineShare":0.014,"tokenShareInAtlasVocab":0.827,"typeShareInAtlasVocab":0.332}
+overlap sib-py-foldvenv: {"nearestAtlas":["cd-cc-python","cd-e09-python"],"lineShare":0.019,"tokenShareInAtlasVocab":0.77,"typeShareInAtlasVocab":0.194}
+overlap sib-bpmn-miwg-heldout: {"nearestAtlas":["cd-bpmn-miwg"],"lineShare":0.561,"tokenShareInAtlasVocab":0.891,"typeShareInAtlasVocab":0.191}
+overlap sib-bpmn-kogito-heldout: {"nearestAtlas":["cd-bpmn-kogito"],"lineShare":0.685,"tokenShareInAtlasVocab":0.923,"typeShareInAtlasVocab":0.377}
+overlap sib-bpmn-activiti-heldout: {"nearestAtlas":["cd-bpmn-activiti"],"lineShare":0.609,"tokenShareInAtlasVocab":0.939,"typeShareInAtlasVocab":0.576}
+posthoc done

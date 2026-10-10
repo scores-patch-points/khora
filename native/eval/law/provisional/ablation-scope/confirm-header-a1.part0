@@ -1,0 +1,41 @@
+// eval/law/provisional/ablation-scope/confirm-rules.mjs — CONFIRMATION of the frozen candidate rules on UNUSED IRC days and an UNUSED book (Middlemarch).
+//
+//   node confirm-rules-a1.mjs --rules results/frozen-rules.json --data data/confirmation --train data/discovery2 --out results/confirmation-a1.json [--B 1000]
+//
+// ═══ AMENDMENT A1 (written after the STRICT run of confirm-rules.mjs, whose header and sha256 are unchanged and whose output is kept as results/confirmation-strict.json) ═══════════════════════
+// WHAT HAPPENED. The strict run (per-cell rule: a stratum is VOID when any control's 99% interval excludes 0.5) returned VOID for every IRC candidate: with 200-240 pairs per stratum the interval is narrow and the
+//   residual imbalance of the matching (form-frequency bin AUC 0.42-0.47, message length 0.45-0.47, local count 0.555 in one cell) is flagged although each is a few hundredths from chance. That rule is mis-specified at n >= 200
+//   (it was written for n of about 60). The registered verdict for IRC under the strict rule is therefore VOID and stays in the record.
+// WHAT I HAD SEEN WHEN I WROTE A1: the controls and void flags of the first four IRC candidates (not their AUCs), the counts of pairs that survive exact-match calipers, and the Middlemarch numbers the strict run printed:
+//   book-arm atm.activation.self PASS 0.669 [0.586, 0.755]; c.dRight FAIL 0.545; S_ENTRY on Middlemarch A 0.711 (limit L2 predicted <= 0.58: FAILED); S_ENTRY on Middlemarch B 0.500; X-rules on the book: IRC-A S_ENTRY rule 0.767,
+//   IRC-A -c.dSelf 0.704, IRC-A c.surprisalDestroyed 0.507, IRC-B c.dSelf 0.560. I had NOT seen any IRC AUC.
+// THE AMENDMENT (changes the void logic, and tightens elsewhere; everything else is as registered below): (1) the per-cell 99%-CI rule is still computed and reported (voidCell) but no longer drops a stratum; the registered POOLED rule
+//   stays (each control pooled over the scope in [0.45, 0.55]). (2) NEW gate V2: a ridge-logistic probe on the six control variables alone, leave-one-block-out over the scope pairs, must score <= 0.58, else VOID: the residual imbalance,
+//   as a multivariate combination, is bounded. (3) NEW gate V3: on the strict-caliper subset (exact form-frequency bin, exact length, |ln message-length ratio| <= 0.25, |ln local-count ratio| <= 0.15) the AUC must be >= 0.58 and
+//   within 0.10 of the full AUC when >= 20 caliper pairs exist (when fewer, reported and not gating). PASS thresholds are unchanged (0.62, lower bound 0.55, permutation, consistency, 2/3 of strata at 0.58, 60 pairs).
+// ═══ END OF AMENDMENT A1 ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+// ═══ PRE-REGISTRATION (FOLD-CONSTITUTION II.5; written after discovery (rounds 1 and 2) and the freeze of the rules, and BEFORE any record of data/confirmation was opened) ═══
+// WHAT IS FROZEN. results/frozen-rules.json (its sha256 is written into the output): 10 candidate rules, each = (kind, group, strata, one fixed oriented score, a fixed operator and threshold), plus 14 LIMIT scopes.
+//   candidates: slot arm IRC A S_ENTRY>=1 c4_6..c7_15; IRC B EXTENT>=3 at c4_6; IRC B EXTENT>=6 at c16p; IRC B S_ENTRY>=1 c4_6..c16p (E1, declared an extension BEFORE confirmation);
+//   company arm IRC A c.surprisalDestroyed>3.2008 (c2..c16p); IRC A -c.dSelf>-0.4562 (c2..c4_6); IRC B c.dSelf>0.5305 (c2..c16p); IRC B span.mentionShift>0 (c4_6..c16p);
+//   book arm (from War and Peace) atm.activation.self lower=name (c2..c7_15) and c.dRight>0.1191 (c3..c7_15), applied to Middlemarch group A. Nothing was nominated for War and Peace group B.
+//   Thresholds: slot-arm values are those emitted by analyse-strata.mjs (S_ENTRY>=1 is the natural one), component thresholds are the balanced-accuracy-best percentile of the discovery negatives (the only fitted numbers).
+// DISCLOSURE. I have seen: round 1 (results/d1) and round 2 (results/d2) of the discovery, the component scan, the UD dev analysis (results/ud1: S_ENTRY identically 0, probe 0.56), descriptive tables of
+//   S_ENTRY>0 shares by stratum and class (IRC B names 34%/52%/75% vs unlabelled 2%/2%/0% at c4_6/c7_15/c16p), and the design-time control balance of the confirmation pairs (design-check.mjs, no ablation read).
+//   I have NOT opened any confirmation JSONL, only their shard stderr progress lines and the K1/K6 control fields. The first discovery attempt of this lens had a pair-id collision bug and a cluster-block defect for single-document
+//   corpora; both were fixed before any number in this file was produced (see features.mjs); a smoke run on that buggy data was seen and discarded.
+// DATA. data/confirmation = 8 IRC channel-days unused by name-rule-informal, name-company, and by every round of this lens (kubuntu/2006-03-15, ubuntu/2006-03-15, 2007-07-15, 2009-03-15, 2011-03-15, 2011-07-15, 2012-03-15, 2013-07-15;
+//   some were read by other ants with other instruments) and Middlemarch (Eliot, pg145; not used by any earlier khora test). Matching v3, strata c2..c16p, groups A and B, same reader and window as discovery (M=256 / 128).
+// PASS (per candidate; computed over the non-void strata of its frozen scope). All of: pooled stratified AUC >= 0.62 (tightened from the discovery 0.60 because ten candidates are tested); 95% cluster-bootstrap lower bound > 0.55;
+//   AUC above the within-pair label-swap permutation q95; pooled controls (R_LOGC, R_POS, R_IPOS, R_FB, R_LEN, R_SL) each in [0.45, 0.55]; non-void strata >= half of the scope; >= 3 groups (IRC days / book fifths) with
+//   AUC > 0.5 and >= 75% of the evaluable groups; >= 2/3 of the live strata with stratum AUC >= 0.58; >= 60 pairs. A stratum is VOID when any control's 99% bootstrap interval excludes 0.5 (it is dropped and reported).
+//   VOID verdict when too few strata survive or the pooled controls fail; FAIL otherwise. Also reported for each: TPR / TNR at the frozen threshold, AUC difference to the burstiness rival R_BURST, non-null shares.
+// FINAL RULES (at most 2): the PASS candidates ranked by lower bound, at most one per (group, family) with family in {slot, company, record}; scope as CONFIRMED = strata with stratum AUC >= 0.58.
+// LIMITS (predicted failures; each is a scope boundary). L1 S_ENTRY on IRC B c2+c3: pooled AUC in [0.45, 0.55]. L2/L3 S_ENTRY on Middlemarch A / B: pooled AUC <= 0.58. L4 S_ENTRY on IRC A outside its scope (c2, c3, c16p): reported.
+//   X-rules: every IRC candidate applied unchanged to Middlemarch (same group): pooled AUC <= 0.58 (the rules do not transfer from chat to a novel).
+// PROBE TRANSFER (a fitted ridge-logistic + PCA-24 on the whole record, trained on the discovery pairs, scored on confirmation pairs; existence test, never a rule): irc A, irc B, book A, book B, and the same on the matching variables alone.
+// BLIND PREDICTIONS (belief).
+//   F1 E1 (IRC B S_ENTRY>=1, c4_6..c16p) PASS (0.80).   F2 IRC B c.dSelf PASS (0.70).   F3 IRC A c.surprisalDestroyed PASS (0.65).   F4 IRC A -c.dSelf (c2..c4_6) PASS (0.60).   F5 IRC A S_ENTRY (c4_6..c7_15) PASS (0.35).
+//   F6 IRC B EXTENT at c4_6 PASS (0.40) and at c16p PASS (0.50).   F7 neither book-arm candidate PASSes on Middlemarch (0.75).   F8 at least two candidates PASS (0.85).   F9 L1 holds (0.90), L2 and L3 hold (0.85).
+//   F10 every X-rule stays <= 0.58 on Middlemarch (0.70 each).   F11 probe transfer: IRC A >= 0.70 and IRC B >= 0.65 (0.65); the matching-variable probe <= 0.55 everywhere (0.85).
+// ═══ END OF PRE-REGISTRATION ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════

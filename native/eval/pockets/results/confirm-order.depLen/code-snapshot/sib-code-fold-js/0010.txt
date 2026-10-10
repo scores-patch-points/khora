@@ -1,0 +1,233 @@
+// fold-chat-agentfeed.js — the agent's work, shown as it happens.
+//
+// One renderer for two uses: LIVE (events arrive from runAgent while the door
+// is still thinking — a ticking clock on the step in flight, so a long dispatch
+// never looks frozen) and REPLAY (a stored event list drawn again after a
+// reload, with no timers). Same rows either way, so what you watched is what
+// the record keeps.
+
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+const secs = (ms) => (ms < 1000 ? `${Math.round(ms)}ms` : `${(ms / 1000).toFixed(ms < 10000 ? 1 : 0)}s`);
+const size = (n) => (n >= 1024 ? `${(n / 1024).toFixed(1)} KB` : `${n} chars`);
+
+/** Build the feed inside `host`. `live` adds the ticking clock and Stop. */
+export function createFeed(host, { live = false, onStop = null, onRetry = null, onAuditOpen = null } = {}) {
+  const root = el("div", "agentrun" + (live ? " running" : ""));
+  const head = el("div", "ar-head");
+  const state = el("span", "ar-state", live ? "working" : "agent run");
+  const roundTag = el("span", "ar-round-tag", "");
+  const clock = el("span", "ar-clock", "");
+  const stop = el("button", "ar-stop", "Stop"); stop.type = "button"; stop.hidden = !live; stop.title = "Stop after the current step";
+  head.append(el("span", "ar-spin"), state, roundTag, el("span", "ar-grow"), clock, stop);
+  const planBox = el("details", "ar-planbox"); planBox.hidden = true; planBox.open = true;
+  const planSum = el("summary", "ar-plan-h", "plan");
+  const plan = el("ol", "ar-plan");
+  planBox.append(planSum, plan);
+  const log = el("div", "ar-log");
+  const foot = el("div", "ar-foot"); foot.hidden = true;
+  const footText = el("span", "ar-foot-t");
+  const retry = el("button", "ar-retry", "Try again"); retry.type = "button"; retry.hidden = true;
+  retry.onclick = () => { retry.disabled = true; onRetry?.(); };
+  foot.append(footText, retry);
+  root.append(head, planBox, log, foot);
+  host.append(root);
+
+  let t0 = null, tick = null, actRow = null, obsRow = null, readRow = null, derRow = null, actStart = 0, obsStart = 0, readStart = 0, derStart = 0, lastEventAt = 0;
+  const row = (kind, icon, label, detail, pipe = null) => {
+    const r = el("div", "ar-row " + kind);
+    r.append(el("span", "ar-ic", icon));
+    if (pipe) r.append(el("span", "ar-pipe " + pipe, pipe));
+    r.append(el("span", "ar-lab", label));
+    if (detail) r.append(el("span", "ar-det", detail));
+    r.append(el("span", "ar-t", ""));
+    log.append(r);
+    return r;
+  };
+  const stamp = (r, ms) => { const t = r.querySelector(".ar-t"); if (t) t.textContent = ms == null ? "" : secs(ms); };
+  const settle = (r, kind, icon, label, detail) => {
+    if (!r) return row(kind, icon, label, detail);
+    r.className = "ar-row " + kind;
+    r.querySelector(".ar-ic").textContent = icon;
+    if (label != null) r.querySelector(".ar-lab").textContent = label;
+    let d = r.querySelector(".ar-det");
+    if (detail) { if (!d) { d = el("span", "ar-det"); r.insertBefore(d, r.querySelector(".ar-t")); } d.textContent = detail; }
+    return r;
+  };
+  const sub = (lines, cls = "ar-sub") => { for (const l of lines) log.append(el("div", cls, l)); };
+
+  // A long silent step says what it is doing and that Stop works — a frozen
+  // looking row is the worst feedback an agent can give.
+  const hintFor = (r, text) => {
+    if (!r || r._hint) return;
+    const h = el("div", "ar-sub ar-hint", text); r.after(h); r._hint = h;
+  };
+  const dropHint = (r) => { if (r?._hint) { r._hint.remove(); r._hint = null; } };
+
+  const startClock = () => {
+    if (!live || tick) return;
+    tick = setInterval(() => {
+      const now = Date.now();
+      clock.textContent = secs(now - t0);
+      if (actRow && actRow.classList.contains("run")) {
+        stamp(actRow, now - actStart);
+        if (now - actStart > 8000) hintFor(actRow, actRow._pipe === "khora"
+          ? "the agent loop takes several model turns (list → read → write → run) — still going. Stop cancels."
+          : actRow._pipe === "remote"
+            ? "waiting on the outside model through heimdall — public free endpoints can take 10–40s. Stop cancels."
+            : "a small local model draws slowly: penelope runs the swarm, field, hunt and mouth stages in turn — still going. Stop cancels.");
+      }
+      if (obsRow && obsRow.classList.contains("run")) stamp(obsRow, now - obsStart);
+      if (readRow && readRow.classList.contains("run")) stamp(readRow, now - readStart);
+      if (derRow && derRow.classList.contains("run")) stamp(derRow, now - derStart);
+    }, 250);
+  };
+  const stopClock = () => { if (tick) clearInterval(tick); tick = null; };
+
+  function push(e) {
+    lastEventAt = e.at ?? lastEventAt;
+    switch (e.type) {
+      case "start":
+        t0 = Date.now() - (e.at || 0);
+        state.textContent = live ? "working" : "agent run";
+        startClock();
+        break;
+      case "plan":
+        planBox.hidden = false; plan.textContent = "";
+        planSum.textContent = `plan · ${e.steps.length} steps`;
+        for (const s of e.steps) plan.append(el("li", "", s));
+        break;
+      case "reading":
+        readStart = Date.now();
+        readRow = row("run", "◐", "reading the ask…", null, "khora");
+        break;
+      case "read":
+        if (e.error) { settle(readRow, "info", "•", "the khora read did not answer — going on without it", e.error); }
+        else {
+          const none = !e.referents && !e.relations;
+          settle(readRow, "ok", "✓", "read the ask", none
+            ? `no referents or relations found${e.gaps ? ` · ${e.gaps} gap(s) disclosed` : ""} — the page is held to the controls the ask names`
+            : `${e.referents} referent(s) · ${e.relations} relation(s)${e.gaps ? ` · ${e.gaps} gap(s)` : ""}${e.names?.length ? " · " + e.names.join(", ") : ""}`);
+          stamp(readRow, e.ms);
+        }
+        readRow = null;
+        break;
+      case "requirements":
+        row("info", "•", e.terms.length ? "the page will be held to" : "the ask names no controls to hold the page to", e.terms.length ? e.terms.map((t) => "“" + t + "”").join(" · ") : "");
+        break;
+      case "deriving":
+        derStart = Date.now();
+        derRow = row("run", "◐", `ruling on what was observed (${e.claims} claim${e.claims === 1 ? "" : "s"})…`, null, "janus");
+        break;
+      case "derive":
+        if (e.error) { settle(derRow, "info", "•", "janus could not be reached — judged from the measured facts instead", e.error); }
+        else if (e.ok) { settle(derRow, "ok", "✓", "every claim holds", `${e.held || (e.findings || []).length} held · none refuted`); stamp(derRow, e.ms); }
+        else { settle(derRow, "bad", "✗", `refuted ${e.refuted} claim${e.refuted === 1 ? "" : "s"}`, `${e.held || 0} held — the engine's veto, not the model's opinion`); stamp(derRow, e.ms); }
+        derRow = null;
+        break;
+      case "audit": {
+        const L = { gate: "raw · the provider can read it", abstract: "abstracted", worlds: "possible worlds", direct: "direct from this page" };
+        row("info", "↗", `${e.entries.length} request${e.entries.length === 1 ? "" : "s"} left this machine`, `${e.summary.hosts.map((h) => h.host).join(", ") || "—"} · ${e.summary.bytes >= 1024 ? (e.summary.bytes / 1024).toFixed(1) + " KB" : e.summary.bytes + " B"}${e.summary.leaks ? ` · ⚠ ${e.summary.leaks} leak(s) flagged` : " · no leaks flagged"}`, "audit");
+        for (const x of e.entries) {
+          const ok = x.verified === true, bad = x.verified === false;
+          const r = row(bad || x.leaks ? "bad" : ok ? "ok" : "info", bad ? "✗" : ok ? "✓" : "•", `${x.model || x.host}`, `${L[x.level] || x.level} · ${x.bytes} B · ${ok ? "heimdall's ledger agrees" : bad ? "heimdall's ledger DISAGREES: " + x.problems[0] : x.via === "direct" ? "no second ledger (direct)" : "not yet verified"}${x.status === "failed" ? " · failed" : ""}`);
+          r.classList.add("ar-audit-row"); r.dataset.auditId = x.id; r.title = "open the exact bytes in the evidence drawer";
+          r.style.cursor = "pointer"; r.onclick = () => onAuditOpen?.(x.id);
+        }
+        break;
+      }
+      case "escalate":
+        dropHint(actRow);
+        if (actRow) { settle(actRow, "warn", "↗", "not waiting on the local machine", e.reason); actRow = null; }
+        else row("warn", "↗", "going to a sealed remote model", e.reason, "sealed");
+        sub(["only your task text and the last attempt's code leave this machine, through heimdall's sealed-external gate — never workspace files"], "ar-sub ar-seal");
+        break;
+      case "try":
+        if (actRow) settle(actRow, "run", "◐", null, "trying " + e.model + "…");
+        break;
+      case "wait": {
+        dropHint(actRow);
+        if (actRow) { settle(actRow, "warn", "⏳", `heimdall says the machine is busy — waiting (attempt ${e.attempt}/${e.of})`, e.reason); actRow = null; }
+        const w = row("warn", "⏳", "retrying in", "", null);
+        const t = w.querySelector(".ar-det") || el("span", "ar-det"); if (!t.parentNode) w.insertBefore(t, w.querySelector(".ar-t"));
+        let left = e.seconds; t.textContent = left + "s";
+        const iv = live ? setInterval(() => { left -= 1; t.textContent = left > 0 ? left + "s" : "now"; if (left <= 0) clearInterval(iv); }, 1000) : null;
+        if (!live) t.textContent = e.seconds + "s";
+        break;
+      }
+      case "round":
+        if (e.round === 1) planBox.open = false;
+        roundTag.textContent = `round ${e.round}/${e.of}`;
+        log.append(el("div", "ar-roundhead", `round ${e.round} of ${e.of}${e.repair ? " · repairing" : ""}`));
+        break;
+      case "repair":
+        row("warn", "↻", `going again — ${e.findings.length} problem${e.findings.length === 1 ? "" : "s"} found last time`);
+        sub(e.findings, "ar-sub ar-find");
+        break;
+      case "act":
+        actStart = Date.now();
+        actRow = row("run", "◐",
+          e.pipeline === "remote" ? "asking a sealed remote model…"
+            : e.pipeline === "khora" ? (e.continuing ? "the agent loop is revising (same session)…" : "the agent loop is working in its sandbox…")
+            : (e.continuing ? "composing a revision (same session)…" : "composing the code…"),
+          null, e.pipeline === "remote" ? "sealed" : e.pipeline === "khora" ? "khora" : "penelope");
+        actRow._pipe = e.pipeline;
+        break;
+      case "tool":
+        row("tool", "▸", `${e.tool}${e.title ? " · " + e.title : ""}`, e.status && e.status !== "done" ? `[${e.status}]` : "");
+        break;
+      case "acted":
+        dropHint(actRow);
+        settle(actRow, "ok", "✓", e.lane === "khora-agent" ? "the agent loop finished" : "answered", `${e.lane === "sealed-remote" ? (e.model || "remote") + " · sealed-external" : (e.lane || "door")} · ${e.kind} · ${size(e.chars)}${e.executed === false ? " · composed, not executed" : ""}${e.escalated ? " · escalated to the frontier" : ""}`);
+        stamp(actRow, e.ms); actRow = null;
+        break;
+      case "observing":
+        obsStart = Date.now();
+        obsRow = row("run", "◐", e.kind === "html" ? "running it and clicking its controls…" : "running it…", null, "sandbox");
+        break;
+      case "check": {
+        if (obsRow) { settle(obsRow, "obs", "◉", "ran it"); stamp(obsRow, Date.now() - obsStart); obsRow = null; }
+        const k = e.ok === true ? "ok" : e.ok === false ? "bad" : "info";
+        row(k, e.ok === true ? "✓" : e.ok === false ? "✗" : "•", e.name, e.detail || "");
+        break;
+      }
+      case "done": {
+        stopClock(); root.classList.remove("running"); stop.hidden = true;
+        root.classList.add(e.ok ? "ok" : "bad");
+        state.textContent = e.ok ? "done" : "gave up";
+        foot.hidden = false;
+        footText.textContent = e.ok
+          ? `✓ it holds — ${e.rounds} round${e.rounds === 1 ? "" : "s"}, ${e.passed} check${e.passed === 1 ? "" : "s"} passed · ${secs(e.at || 0)}`
+          : `✗ still failing after ${e.rounds} round${e.rounds === 1 ? "" : "s"} — the last attempt is below, with what was wrong: ${(e.findings || []).join(" · ")}`;
+        retry.hidden = !(live && onRetry && !e.ok);
+        break;
+      }
+      case "stopped":
+        stopClock(); root.classList.remove("running"); stop.hidden = true; root.classList.add("stopped");
+        state.textContent = "stopped";
+        dropHint(actRow);
+        if (actRow) settle(actRow, "info", "■", "stopped while waiting on the door");
+        if (obsRow) settle(obsRow, "info", "■", "stopped while observing");
+        foot.hidden = false; footText.textContent = `■ stopped by you · ${secs(e.at || 0)}`; retry.hidden = !(live && onRetry);
+        break;
+      case "error":
+        stopClock(); root.classList.remove("running"); stop.hidden = true; root.classList.add("bad");
+        state.textContent = "failed";
+        dropHint(actRow);
+        if (actRow) { settle(actRow, "bad", "✗", "the door did not answer", e.message); actRow = null; }
+        foot.hidden = false; footText.textContent = `✗ ${e.message}`; retry.hidden = !(live && onRetry);
+        break;
+    }
+    const scroller = host.closest(".thread, .chat, main") || null;
+    if (live && scroller) scroller.scrollTop = scroller.scrollHeight;
+  }
+
+  stop.onclick = () => { stop.disabled = true; stop.textContent = "Stopping…"; onStop?.(); };
+  return { push, root, dispose: stopClock };
+}
+
+/** Draw a stored trace — the same rows, no clock. */
+export function replayFeed(host, events, opts = {}) {
+  const f = createFeed(host, { live: false, ...opts });
+  for (const e of events || []) f.push(e);
+  return f;
+}

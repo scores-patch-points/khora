@@ -1,0 +1,39 @@
+{
+ "headerSha256": "363c29dc01e90fa4bdf941e3f1f8820930dc6c575b68dc23b65bbbd984ce4d3e",
+ "sizes": {
+  "P_T1": 75,
+  "P_REUSE": 407,
+  "P_ALL": 497,
+  "P_X": 136,
+  "P_S1conf": 324
+ },
+ "rowCounts": {
+  "positives": 1147,
+  "natural": 10716,
+  "allUnlabelled": 12439
+ },
+ "C1verdict": {
+  "sEntryAuc": 0.8239,
+  "cheapReproducing": [],
+  "initialReproducing": [
+   "cInit",
+   "rinit",
+   "flag_cInit1",
+   "flag_rinit25",
+   "flag_rinit50"
+  ],
+  "cheapMax": 0.5576,
+  "outcome": "DOMINATED_BY_INITIAL_SLOT_RIVAL"
+ },
+ "C3verdict": {
+  "real": 0.8429,
+  "shufK": 0.8315,
+  "shufW": 0.5075,
+  "shufG": 0.5036,
+  "shufKcarriesFirstSlot": true,
+  "shufKneedsMore": false,
+  "shufWorGreproduce": false,
+  "confirmerShufWgShufG_withinTolerance": true
+ },
+ "C4verdict": "ECHO"
+}

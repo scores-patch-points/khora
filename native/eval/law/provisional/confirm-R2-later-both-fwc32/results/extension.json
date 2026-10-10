@@ -1,0 +1,1505 @@
+{
+ "headerSha256": "4985e70d78c4ec5d9c8abe9dfa791e129b2ca18aad3edfd63b7b8560fc7050cd",
+ "status": "POST-HOC EXTENSION",
+ "sets": {
+  "PRIMARY": {
+   "languagesInSet": 38,
+   "withGe3Windows": 15,
+   "windowsTotal": 82,
+   "X1": {
+    "n": 15,
+    "rho": 0.625,
+    "p": 0.0085
+   },
+   "X2": {
+    "languages": 15,
+    "windows": 82,
+    "msb": 0.00582,
+    "msw": 0.001933,
+    "icc1": 0.269,
+    "iccK": 0.668,
+    "withinSD": 0.044,
+    "rhoAttenuationCorrected": 0.765
+   },
+   "X3": {
+    "inN": 7,
+    "inAudible": 5,
+    "inShare": 0.714,
+    "inWilson": [
+     0.359,
+     0.918
+    ],
+    "outN": 4,
+    "outAudible": 2,
+    "outShare": 0.5,
+    "fisherP": 0.5758,
+    "meanIn": 0.623,
+    "meanOut": 0.5947,
+    "diffAllLangs": 0.0302,
+    "pass": true
+   },
+   "X5": {
+    "n": 1,
+    "audibleShare": 0,
+    "langs": [
+     "est:0.187/0.573"
+    ]
+   },
+   "X4": {
+    "windows": 82,
+    "raw": {
+     "rho": 0.017,
+     "p": 0.4519
+    },
+    "pairsAdjusted": {
+     "rho": 0.04,
+     "p": 0.3759
+    },
+    "withinPairsSlopePerLog2": 0.0063
+   },
+   "rows": [
+    {
+     "stem": "be",
+     "set": "A",
+     "nWin": 6,
+     "meanFwc": 0.2261,
+     "meanPairs": 584,
+     "meanAuc": 0.6081,
+     "sdAuc": 0.0256,
+     "aucs": [
+      0.6485,
+      0.5904,
+      0.5981,
+      0.5838,
+      0.5969,
+      0.631
+     ]
+    },
+    {
+     "stem": "bul",
+     "set": "B",
+     "nWin": 3,
+     "meanFwc": 0.3197,
+     "meanPairs": 458,
+     "meanAuc": 0.6525,
+     "sdAuc": 0.0372,
+     "aucs": [
+      0.6438,
+      0.6933,
+      0.6204
+     ]
+    },
+    {
+     "stem": "cat",
+     "set": "B",
+     "nWin": 6,
+     "meanFwc": 0.4623,
+     "meanPairs": 600,
+     "meanAuc": 0.6625,
+     "sdAuc": 0.0255,
+     "aucs": [
+      0.6395,
+      0.6276,
+      0.6891,
+      0.6863,
+      0.6763,
+      0.656
+     ]
+    },
+    {
+     "stem": "ces",
+     "set": "B",
+     "nWin": 5,
+     "meanFwc": 0.2497,
+     "meanPairs": 237,
+     "meanAuc": 0.578,
+     "sdAuc": 0.0828,
+     "aucs": [
+      0.6708,
+      0.6008,
+      0.4482,
+      0.6109,
+      0.5593
+     ]
+    },
+    {
+     "stem": "chu",
+     "set": "A",
+     "nWin": 6,
+     "meanFwc": 0.2859,
+     "meanPairs": 190,
+     "meanAuc": 0.5852,
+     "sdAuc": 0.0562,
+     "aucs": [
+      0.6007,
+      0.5912,
+      0.5198,
+      0.5413,
+      0.5771,
+      0.6814
+     ]
+    },
+    {
+     "stem": "est",
+     "set": "B",
+     "nWin": 6,
+     "meanFwc": 0.1872,
+     "meanPairs": 567,
+     "meanAuc": 0.5725,
+     "sdAuc": 0.0252,
+     "aucs": [
+      0.5643,
+      0.5979,
+      0.5744,
+      0.5335,
+      0.6017,
+      0.5632
+     ]
+    },
+    {
+     "stem": "grc",
+     "set": "A",
+     "nWin": 6,
+     "meanFwc": 0.3385,
+     "meanPairs": 354,
+     "meanAuc": 0.6089,
+     "sdAuc": 0.0533,
+     "aucs": [
+      0.6292,
+      0.6073,
+      0.6553,
+      0.6134,
+      0.6418,
+      0.5063
+     ]
+    },
+    {
+     "stem": "hrv",
+     "set": "B",
+     "nWin": 3,
+     "meanFwc": 0.2643,
+     "meanPairs": 475,
+     "meanAuc": 0.6247,
+     "sdAuc": 0.0544,
+     "aucs": [
+      0.5623,
+      0.662,
+      0.6499
+     ]
+    },
+    {
+     "stem": "is",
+     "set": "A",
+     "nWin": 6,
+     "meanFwc": 0.3886,
+     "meanPairs": 407,
+     "meanAuc": 0.5892,
+     "sdAuc": 0.029,
+     "aucs": [
+      0.6069,
+      0.5934,
+      0.6189,
+      0.5422,
+      0.6065,
+      0.5674
+     ]
+    },
+    {
+     "stem": "lat",
+     "set": "A",
+     "nWin": 6,
+     "meanFwc": 0.3012,
+     "meanPairs": 371,
+     "meanAuc": 0.5839,
+     "sdAuc": 0.0552,
+     "aucs": [
+      0.5644,
+      0.565,
+      0.5259,
+      0.543,
+      0.647,
+      0.6581
+     ]
+    },
+    {
+     "stem": "lav",
+     "set": "B",
+     "nWin": 6,
+     "meanFwc": 0.2123,
+     "meanPairs": 361,
+     "meanAuc": 0.5735,
+     "sdAuc": 0.0421,
+     "aucs": [
+      0.5265,
+      0.5372,
+      0.6229,
+      0.6002,
+      0.6099,
+      0.5441
+     ]
+    },
+    {
+     "stem": "lzh",
+     "set": "B",
+     "nWin": 6,
+     "meanFwc": 0.3385,
+     "meanPairs": 524,
+     "meanAuc": 0.6029,
+     "sdAuc": 0.0268,
+     "aucs": [
+      0.5772,
+      0.5667,
+      0.6305,
+      0.6094,
+      0.6316,
+      0.6019
+     ]
+    },
+    {
+     "stem": "nob",
+     "set": "B",
+     "nWin": 6,
+     "meanFwc": 0.3692,
+     "meanPairs": 537,
+     "meanAuc": 0.6611,
+     "sdAuc": 0.0254,
+     "aucs": [
+      0.6759,
+      0.7046,
+      0.6535,
+      0.6368,
+      0.6406,
+      0.6549
+     ]
+    },
+    {
+     "stem": "ron",
+     "set": "B",
+     "nWin": 5,
+     "meanFwc": 0.3345,
+     "meanPairs": 171,
+     "meanAuc": 0.5988,
+     "sdAuc": 0.0533,
+     "aucs": [
+      0.6071,
+      0.6444,
+      0.5124,
+      0.6398,
+      0.5901
+     ]
+    },
+    {
+     "stem": "slv",
+     "set": "B",
+     "nWin": 6,
+     "meanFwc": 0.2783,
+     "meanPairs": 187,
+     "meanAuc": 0.5587,
+     "sdAuc": 0.0378,
+     "aucs": [
+      0.6097,
+      0.5538,
+      0.5906,
+      0.5602,
+      0.5323,
+      0.5057
+     ]
+    }
+   ]
+  },
+  "C": {
+   "languagesInSet": 24,
+   "withGe3Windows": 14,
+   "windowsTotal": 72,
+   "X1": {
+    "n": 14,
+    "rho": 0.288,
+    "p": 0.1522
+   },
+   "X2": {
+    "languages": 14,
+    "windows": 72,
+    "msb": 0.012341,
+    "msw": 0.001673,
+    "icc1": 0.554,
+    "iccK": 0.864,
+    "withinSD": 0.0409,
+    "rhoAttenuationCorrected": 0.31
+   },
+   "X3": {
+    "inN": 11,
+    "inAudible": 10,
+    "inShare": 0.909,
+    "inWilson": [
+     0.623,
+     0.984
+    ],
+    "outN": 1,
+    "outAudible": 0,
+    "outShare": 0,
+    "fisherP": 0.1667,
+    "meanIn": 0.666,
+    "meanOut": 0.5398,
+    "diffAllLangs": 0.1126,
+    "pass": "NOT EVALUABLE"
+   },
+   "X5": {
+    "n": 1,
+    "audibleShare": 0,
+    "langs": [
+     "fin:0.179/0.540"
+    ]
+   },
+   "X4": {
+    "windows": 72,
+    "raw": {
+     "rho": -0.027,
+     "p": 0.5581
+    },
+    "pairsAdjusted": {
+     "rho": 0.139,
+     "p": 0.1172
+    },
+    "withinPairsSlopePerLog2": 0.0485
+   },
+   "rows": [
+    {
+     "stem": "deu",
+     "set": "C",
+     "nWin": 6,
+     "meanFwc": 0.3413,
+     "meanPairs": 447,
+     "meanAuc": 0.6407,
+     "sdAuc": 0.0699,
+     "aucs": [
+      0.6863,
+      0.6521,
+      0.6865,
+      0.6507,
+      0.5016,
+      0.6669
+     ]
+    },
+    {
+     "stem": "eng",
+     "set": "C",
+     "nWin": 5,
+     "meanFwc": 0.3558,
+     "meanPairs": 531,
+     "meanAuc": 0.6403,
+     "sdAuc": 0.0583,
+     "aucs": [
+      0.661,
+      0.7196,
+      0.6556,
+      0.5825,
+      0.5828
+     ]
+    },
+    {
+     "stem": "fas",
+     "set": "C",
+     "nWin": 6,
+     "meanFwc": 0.3359,
+     "meanPairs": 452,
+     "meanAuc": 0.6877,
+     "sdAuc": 0.0302,
+     "aucs": [
+      0.6934,
+      0.6376,
+      0.7305,
+      0.6914,
+      0.6956,
+      0.6778
+     ]
+    },
+    {
+     "stem": "fin",
+     "set": "C",
+     "nWin": 4,
+     "meanFwc": 0.1791,
+     "meanPairs": 344,
+     "meanAuc": 0.5398,
+     "sdAuc": 0.0357,
+     "aucs": [
+      0.488,
+      0.545,
+      0.5599,
+      0.5663
+     ]
+    },
+    {
+     "stem": "fra",
+     "set": "C",
+     "nWin": 6,
+     "meanFwc": 0.4178,
+     "meanPairs": 266,
+     "meanAuc": 0.698,
+     "sdAuc": 0.0192,
+     "aucs": [
+      0.6771,
+      0.7315,
+      0.6983,
+      0.6845,
+      0.6913,
+      0.7055
+     ]
+    },
+    {
+     "stem": "heb",
+     "set": "C",
+     "nWin": 3,
+     "meanFwc": 0.4127,
+     "meanPairs": 523,
+     "meanAuc": 0.7105,
+     "sdAuc": 0.0259,
+     "aucs": [
+      0.7403,
+      0.6937,
+      0.6976
+     ]
+    },
+    {
+     "stem": "hin",
+     "set": "C",
+     "nWin": 6,
+     "meanFwc": 0.3617,
+     "meanPairs": 600,
+     "meanAuc": 0.6472,
+     "sdAuc": 0.0246,
+     "aucs": [
+      0.6577,
+      0.6718,
+      0.6262,
+      0.6215,
+      0.6769,
+      0.6292
+     ]
+    },
+    {
+     "stem": "ita",
+     "set": "C",
+     "nWin": 6,
+     "meanFwc": 0.4308,
+     "meanPairs": 533,
+     "meanAuc": 0.6796,
+     "sdAuc": 0.0372,
+     "aucs": [
+      0.6593,
+      0.6519,
+      0.7067,
+      0.6494,
+      0.6679,
+      0.7425
+     ]
+    },
+    {
+     "stem": "jpn",
+     "set": "C",
+     "nWin": 5,
+     "meanFwc": 0.4305,
+     "meanPairs": 179,
+     "meanAuc": 0.6245,
+     "sdAuc": 0.0396,
+     "aucs": [
+      0.5941,
+      0.6413,
+      0.6868,
+      0.5983,
+      0.6021
+     ]
+    },
+    {
+     "stem": "nld",
+     "set": "C",
+     "nWin": 5,
+     "meanFwc": 0.3857,
+     "meanPairs": 488,
+     "meanAuc": 0.5969,
+     "sdAuc": 0.0641,
+     "aucs": [
+      0.6264,
+      0.4884,
+      0.593,
+      0.6509,
+      0.626
+     ]
+    },
+    {
+     "stem": "pol",
+     "set": "C",
+     "nWin": 5,
+     "meanFwc": 0.2396,
+     "meanPairs": 141,
+     "meanAuc": 0.5602,
+     "sdAuc": 0.034,
+     "aucs": [
+      0.5947,
+      0.5254,
+      0.5437,
+      0.5987,
+      0.5383
+     ]
+    },
+    {
+     "stem": "por",
+     "set": "C",
+     "nWin": 6,
+     "meanFwc": 0.4276,
+     "meanPairs": 600,
+     "meanAuc": 0.6392,
+     "sdAuc": 0.0202,
+     "aucs": [
+      0.6732,
+      0.6332,
+      0.6494,
+      0.6359,
+      0.6137,
+      0.63
+     ]
+    },
+    {
+     "stem": "spa",
+     "set": "C",
+     "nWin": 6,
+     "meanFwc": 0.4417,
+     "meanPairs": 600,
+     "meanAuc": 0.6798,
+     "sdAuc": 0.0316,
+     "aucs": [
+      0.6883,
+      0.7073,
+      0.6729,
+      0.7166,
+      0.6295,
+      0.6642
+     ]
+    },
+    {
+     "stem": "urd",
+     "set": "C",
+     "nWin": 3,
+     "meanFwc": 0.3554,
+     "meanPairs": 600,
+     "meanAuc": 0.7058,
+     "sdAuc": 0.0396,
+     "aucs": [
+      0.702,
+      0.7472,
+      0.6682
+     ]
+    }
+   ]
+  },
+  "POOLED": {
+   "languagesInSet": 62,
+   "withGe3Windows": 29,
+   "windowsTotal": 154,
+   "X1": {
+    "n": 29,
+    "rho": 0.703,
+    "p": 0.0002
+   },
+   "X2": {
+    "languages": 29,
+    "windows": 154,
+    "msb": 0.011372,
+    "msw": 0.001812,
+    "icc1": 0.499,
+    "iccK": 0.841,
+    "withinSD": 0.0426,
+    "rhoAttenuationCorrected": 0.767
+   },
+   "X3": {
+    "inN": 18,
+    "inAudible": 15,
+    "inShare": 0.833,
+    "inWilson": [
+     0.608,
+     0.942
+    ],
+    "outN": 5,
+    "outAudible": 2,
+    "outShare": 0.4,
+    "fisherP": 0.0886,
+    "meanIn": 0.6493,
+    "meanOut": 0.5837,
+    "diffAllLangs": 0.0657,
+    "pass": true
+   },
+   "X5": {
+    "n": 2,
+    "audibleShare": 0,
+    "langs": [
+     "est:0.187/0.573",
+     "fin:0.179/0.540"
+    ]
+   },
+   "X4": {
+    "windows": 154,
+    "raw": {
+     "rho": 0.002,
+     "p": 0.4826
+    },
+    "pairsAdjusted": {
+     "rho": 0.05,
+     "p": 0.2782
+    },
+    "withinPairsSlopePerLog2": 0.0185
+   },
+   "rows": [
+    {
+     "stem": "be",
+     "set": "A",
+     "nWin": 6,
+     "meanFwc": 0.2261,
+     "meanPairs": 584,
+     "meanAuc": 0.6081,
+     "sdAuc": 0.0256,
+     "aucs": [
+      0.6485,
+      0.5904,
+      0.5981,
+      0.5838,
+      0.5969,
+      0.631
+     ]
+    },
+    {
+     "stem": "bul",
+     "set": "B",
+     "nWin": 3,
+     "meanFwc": 0.3197,
+     "meanPairs": 458,
+     "meanAuc": 0.6525,
+     "sdAuc": 0.0372,
+     "aucs": [
+      0.6438,
+      0.6933,
+      0.6204
+     ]
+    },
+    {
+     "stem": "cat",
+     "set": "B",
+     "nWin": 6,
+     "meanFwc": 0.4623,
+     "meanPairs": 600,
+     "meanAuc": 0.6625,
+     "sdAuc": 0.0255,
+     "aucs": [
+      0.6395,
+      0.6276,
+      0.6891,
+      0.6863,
+      0.6763,
+      0.656
+     ]
+    },
+    {
+     "stem": "ces",
+     "set": "B",
+     "nWin": 5,
+     "meanFwc": 0.2497,
+     "meanPairs": 237,
+     "meanAuc": 0.578,
+     "sdAuc": 0.0828,
+     "aucs": [
+      0.6708,
+      0.6008,
+      0.4482,
+      0.6109,
+      0.5593
+     ]
+    },
+    {
+     "stem": "chu",
+     "set": "A",
+     "nWin": 6,
+     "meanFwc": 0.2859,
+     "meanPairs": 190,
+     "meanAuc": 0.5852,
+     "sdAuc": 0.0562,
+     "aucs": [
+      0.6007,
+      0.5912,
+      0.5198,
+      0.5413,
+      0.5771,
+      0.6814
+     ]
+    },
+    {
+     "stem": "deu",
+     "set": "C",
+     "nWin": 6,
+     "meanFwc": 0.3413,
+     "meanPairs": 447,
+     "meanAuc": 0.6407,
+     "sdAuc": 0.0699,
+     "aucs": [
+      0.6863,
+      0.6521,
+      0.6865,
+      0.6507,
+      0.5016,
+      0.6669
+     ]
+    },
+    {
+     "stem": "eng",
+     "set": "C",
+     "nWin": 5,
+     "meanFwc": 0.3558,
+     "meanPairs": 531,
+     "meanAuc": 0.6403,
+     "sdAuc": 0.0583,
+     "aucs": [
+      0.661,
+      0.7196,
+      0.6556,
+      0.5825,
+      0.5828
+     ]
+    },
+    {
+     "stem": "est",
+     "set": "B",
+     "nWin": 6,
+     "meanFwc": 0.1872,
+     "meanPairs": 567,
+     "meanAuc": 0.5725,
+     "sdAuc": 0.0252,
+     "aucs": [
+      0.5643,
+      0.5979,
+      0.5744,
+      0.5335,
+      0.6017,
+      0.5632
+     ]
+    },
+    {
+     "stem": "fas",
+     "set": "C",
+     "nWin": 6,
+     "meanFwc": 0.3359,
+     "meanPairs": 452,
+     "meanAuc": 0.6877,
+     "sdAuc": 0.0302,
+     "aucs": [
+      0.6934,
+      0.6376,
+      0.7305,
+      0.6914,
+      0.6956,
+      0.6778
+     ]
+    },
+    {
+     "stem": "fin",
+     "set": "C",
+     "nWin": 4,
+     "meanFwc": 0.1791,
+     "meanPairs": 344,
+     "meanAuc": 0.5398,
+     "sdAuc": 0.0357,
+     "aucs": [
+      0.488,
+      0.545,
+      0.5599,
+      0.5663
+     ]
+    },
+    {
+     "stem": "fra",
+     "set": "C",
+     "nWin": 6,
+     "meanFwc": 0.4178,
+     "meanPairs": 266,
+     "meanAuc": 0.698,
+     "sdAuc": 0.0192,
+     "aucs": [
+      0.6771,
+      0.7315,
+      0.6983,
+      0.6845,
+      0.6913,
+      0.7055
+     ]
+    },
+    {
+     "stem": "grc",
+     "set": "A",
+     "nWin": 6,
+     "meanFwc": 0.3385,
+     "meanPairs": 354,
+     "meanAuc": 0.6089,
+     "sdAuc": 0.0533,
+     "aucs": [
+      0.6292,
+      0.6073,
+      0.6553,
+      0.6134,
+      0.6418,
+      0.5063
+     ]
+    },
+    {
+     "stem": "heb",
+     "set": "C",
+     "nWin": 3,
+     "meanFwc": 0.4127,
+     "meanPairs": 523,
+     "meanAuc": 0.7105,
+     "sdAuc": 0.0259,
+     "aucs": [
+      0.7403,
+      0.6937,
+      0.6976
+     ]
+    },
+    {
+     "stem": "hin",
+     "set": "C",
+     "nWin": 6,
+     "meanFwc": 0.3617,
+     "meanPairs": 600,
+     "meanAuc": 0.6472,
+     "sdAuc": 0.0246,
+     "aucs": [
+      0.6577,
+      0.6718,
+      0.6262,
+      0.6215,
+      0.6769,
+      0.6292
+     ]
+    },
+    {
+     "stem": "hrv",
+     "set": "B",
+     "nWin": 3,
+     "meanFwc": 0.2643,
+     "meanPairs": 475,
+     "meanAuc": 0.6247,
+     "sdAuc": 0.0544,
+     "aucs": [
+      0.5623,
+      0.662,
+      0.6499
+     ]
+    },
+    {
+     "stem": "is",
+     "set": "A",
+     "nWin": 6,
+     "meanFwc": 0.3886,
+     "meanPairs": 407,
+     "meanAuc": 0.5892,
+     "sdAuc": 0.029,
+     "aucs": [
+      0.6069,
+      0.5934,
+      0.6189,
+      0.5422,
+      0.6065,
+      0.5674
+     ]
+    },
+    {
+     "stem": "ita",
+     "set": "C",
+     "nWin": 6,
+     "meanFwc": 0.4308,
+     "meanPairs": 533,
+     "meanAuc": 0.6796,
+     "sdAuc": 0.0372,
+     "aucs": [
+      0.6593,
+      0.6519,
+      0.7067,
+      0.6494,
+      0.6679,
+      0.7425
+     ]
+    },
+    {
+     "stem": "jpn",
+     "set": "C",
+     "nWin": 5,
+     "meanFwc": 0.4305,
+     "meanPairs": 179,
+     "meanAuc": 0.6245,
+     "sdAuc": 0.0396,
+     "aucs": [
+      0.5941,
+      0.6413,
+      0.6868,
+      0.5983,
+      0.6021
+     ]
+    },
+    {
+     "stem": "lat",
+     "set": "A",
+     "nWin": 6,
+     "meanFwc": 0.3012,
+     "meanPairs": 371,
+     "meanAuc": 0.5839,
+     "sdAuc": 0.0552,
+     "aucs": [
+      0.5644,
+      0.565,
+      0.5259,
+      0.543,
+      0.647,
+      0.6581
+     ]
+    },
+    {
+     "stem": "lav",
+     "set": "B",
+     "nWin": 6,
+     "meanFwc": 0.2123,
+     "meanPairs": 361,
+     "meanAuc": 0.5735,
+     "sdAuc": 0.0421,
+     "aucs": [
+      0.5265,
+      0.5372,
+      0.6229,
+      0.6002,
+      0.6099,
+      0.5441
+     ]
+    },
+    {
+     "stem": "lzh",
+     "set": "B",
+     "nWin": 6,
+     "meanFwc": 0.3385,
+     "meanPairs": 524,
+     "meanAuc": 0.6029,
+     "sdAuc": 0.0268,
+     "aucs": [
+      0.5772,
+      0.5667,
+      0.6305,
+      0.6094,
+      0.6316,
+      0.6019
+     ]
+    },
+    {
+     "stem": "nld",
+     "set": "C",
+     "nWin": 5,
+     "meanFwc": 0.3857,
+     "meanPairs": 488,
+     "meanAuc": 0.5969,
+     "sdAuc": 0.0641,
+     "aucs": [
+      0.6264,
+      0.4884,
+      0.593,
+      0.6509,
+      0.626
+     ]
+    },
+    {
+     "stem": "nob",
+     "set": "B",
+     "nWin": 6,
+     "meanFwc": 0.3692,
+     "meanPairs": 537,
+     "meanAuc": 0.6611,
+     "sdAuc": 0.0254,
+     "aucs": [
+      0.6759,
+      0.7046,
+      0.6535,
+      0.6368,
+      0.6406,
+      0.6549
+     ]
+    },
+    {
+     "stem": "pol",
+     "set": "C",
+     "nWin": 5,
+     "meanFwc": 0.2396,
+     "meanPairs": 141,
+     "meanAuc": 0.5602,
+     "sdAuc": 0.034,
+     "aucs": [
+      0.5947,
+      0.5254,
+      0.5437,
+      0.5987,
+      0.5383
+     ]
+    },
+    {
+     "stem": "por",
+     "set": "C",
+     "nWin": 6,
+     "meanFwc": 0.4276,
+     "meanPairs": 600,
+     "meanAuc": 0.6392,
+     "sdAuc": 0.0202,
+     "aucs": [
+      0.6732,
+      0.6332,
+      0.6494,
+      0.6359,
+      0.6137,
+      0.63
+     ]
+    },
+    {
+     "stem": "ron",
+     "set": "B",
+     "nWin": 5,
+     "meanFwc": 0.3345,
+     "meanPairs": 171,
+     "meanAuc": 0.5988,
+     "sdAuc": 0.0533,
+     "aucs": [
+      0.6071,
+      0.6444,
+      0.5124,
+      0.6398,
+      0.5901
+     ]
+    },
+    {
+     "stem": "slv",
+     "set": "B",
+     "nWin": 6,
+     "meanFwc": 0.2783,
+     "meanPairs": 187,
+     "meanAuc": 0.5587,
+     "sdAuc": 0.0378,
+     "aucs": [
+      0.6097,
+      0.5538,
+      0.5906,
+      0.5602,
+      0.5323,
+      0.5057
+     ]
+    },
+    {
+     "stem": "spa",
+     "set": "C",
+     "nWin": 6,
+     "meanFwc": 0.4417,
+     "meanPairs": 600,
+     "meanAuc": 0.6798,
+     "sdAuc": 0.0316,
+     "aucs": [
+      0.6883,
+      0.7073,
+      0.6729,
+      0.7166,
+      0.6295,
+      0.6642
+     ]
+    },
+    {
+     "stem": "urd",
+     "set": "C",
+     "nWin": 3,
+     "meanFwc": 0.3554,
+     "meanPairs": 600,
+     "meanAuc": 0.7058,
+     "sdAuc": 0.0396,
+     "aucs": [
+      0.702,
+      0.7472,
+      0.6682
+     ]
+    }
+   ]
+  },
+  "A": {
+   "languagesInSet": 10,
+   "withGe3Windows": 5,
+   "windowsTotal": 30,
+   "X1": {
+    "n": 5,
+    "rho": 0.1,
+    "p": 0.4706
+   },
+   "X2": {
+    "languages": 5,
+    "windows": 30,
+    "msb": 0.000925,
+    "msw": 0.00211,
+    "icc1": -0.103,
+    "iccK": -1.281,
+    "withinSD": 0.0459,
+    "rhoAttenuationCorrected": 0.447
+   },
+   "X3": {
+    "inN": 3,
+    "inAudible": 1,
+    "inShare": 0.333,
+    "inWilson": [
+     0.061,
+     0.792
+    ],
+    "outN": 1,
+    "outAudible": 1,
+    "outShare": 1,
+    "fisherP": 1,
+    "meanIn": 0.594,
+    "meanOut": 0.6081,
+    "diffAllLangs": -0.0163,
+    "pass": "NOT EVALUABLE"
+   },
+   "X5": {
+    "n": 0,
+    "audibleShare": null,
+    "langs": []
+   },
+   "X4": {
+    "windows": 30,
+    "raw": {
+     "rho": 0.023,
+     "p": 0.4546
+    },
+    "pairsAdjusted": {
+     "rho": 0.053,
+     "p": 0.4034
+    },
+    "withinPairsSlopePerLog2": -0.0081
+   },
+   "rows": [
+    {
+     "stem": "be",
+     "set": "A",
+     "nWin": 6,
+     "meanFwc": 0.2261,
+     "meanPairs": 584,
+     "meanAuc": 0.6081,
+     "sdAuc": 0.0256,
+     "aucs": [
+      0.6485,
+      0.5904,
+      0.5981,
+      0.5838,
+      0.5969,
+      0.631
+     ]
+    },
+    {
+     "stem": "chu",
+     "set": "A",
+     "nWin": 6,
+     "meanFwc": 0.2859,
+     "meanPairs": 190,
+     "meanAuc": 0.5852,
+     "sdAuc": 0.0562,
+     "aucs": [
+      0.6007,
+      0.5912,
+      0.5198,
+      0.5413,
+      0.5771,
+      0.6814
+     ]
+    },
+    {
+     "stem": "grc",
+     "set": "A",
+     "nWin": 6,
+     "meanFwc": 0.3385,
+     "meanPairs": 354,
+     "meanAuc": 0.6089,
+     "sdAuc": 0.0533,
+     "aucs": [
+      0.6292,
+      0.6073,
+      0.6553,
+      0.6134,
+      0.6418,
+      0.5063
+     ]
+    },
+    {
+     "stem": "is",
+     "set": "A",
+     "nWin": 6,
+     "meanFwc": 0.3886,
+     "meanPairs": 407,
+     "meanAuc": 0.5892,
+     "sdAuc": 0.029,
+     "aucs": [
+      0.6069,
+      0.5934,
+      0.6189,
+      0.5422,
+      0.6065,
+      0.5674
+     ]
+    },
+    {
+     "stem": "lat",
+     "set": "A",
+     "nWin": 6,
+     "meanFwc": 0.3012,
+     "meanPairs": 371,
+     "meanAuc": 0.5839,
+     "sdAuc": 0.0552,
+     "aucs": [
+      0.5644,
+      0.565,
+      0.5259,
+      0.543,
+      0.647,
+      0.6581
+     ]
+    }
+   ]
+  },
+  "B": {
+   "languagesInSet": 28,
+   "withGe3Windows": 10,
+   "windowsTotal": 52,
+   "X1": {
+    "n": 10,
+    "rho": 0.758,
+    "p": 0.0072
+   },
+   "X2": {
+    "languages": 10,
+    "windows": 52,
+    "msb": 0.008399,
+    "msw": 0.001827,
+    "icc1": 0.41,
+    "iccK": 0.782,
+    "withinSD": 0.0427,
+    "rhoAttenuationCorrected": 0.857
+   },
+   "X3": {
+    "inN": 4,
+    "inAudible": 4,
+    "inShare": 1,
+    "inWilson": [
+     0.51,
+     1
+    ],
+    "outN": 3,
+    "outAudible": 1,
+    "outShare": 0.333,
+    "fisherP": 0.1429,
+    "meanIn": 0.6447,
+    "meanOut": 0.5902,
+    "diffAllLangs": 0.054,
+    "pass": true
+   },
+   "X5": {
+    "n": 1,
+    "audibleShare": 0,
+    "langs": [
+     "est:0.187/0.573"
+    ]
+   },
+   "X4": {
+    "windows": 52,
+    "raw": {
+     "rho": 0.037,
+     "p": 0.3977
+    },
+    "pairsAdjusted": {
+     "rho": 0.1,
+     "p": 0.2452
+    },
+    "withinPairsSlopePerLog2": 0.0106
+   },
+   "rows": [
+    {
+     "stem": "bul",
+     "set": "B",
+     "nWin": 3,
+     "meanFwc": 0.3197,
+     "meanPairs": 458,
+     "meanAuc": 0.6525,
+     "sdAuc": 0.0372,
+     "aucs": [
+      0.6438,
+      0.6933,
+      0.6204
+     ]
+    },
+    {
+     "stem": "cat",
+     "set": "B",
+     "nWin": 6,
+     "meanFwc": 0.4623,
+     "meanPairs": 600,
+     "meanAuc": 0.6625,
+     "sdAuc": 0.0255,
+     "aucs": [
+      0.6395,
+      0.6276,
+      0.6891,
+      0.6863,
+      0.6763,
+      0.656
+     ]
+    },
+    {
+     "stem": "ces",
+     "set": "B",
+     "nWin": 5,
+     "meanFwc": 0.2497,
+     "meanPairs": 237,
+     "meanAuc": 0.578,
+     "sdAuc": 0.0828,
+     "aucs": [
+      0.6708,
+      0.6008,
+      0.4482,
+      0.6109,
+      0.5593
+     ]
+    },
+    {
+     "stem": "est",
+     "set": "B",
+     "nWin": 6,
+     "meanFwc": 0.1872,
+     "meanPairs": 567,
+     "meanAuc": 0.5725,
+     "sdAuc": 0.0252,
+     "aucs": [
+      0.5643,
+      0.5979,
+      0.5744,
+      0.5335,
+      0.6017,
+      0.5632
+     ]
+    },
+    {
+     "stem": "hrv",
+     "set": "B",
+     "nWin": 3,
+     "meanFwc": 0.2643,
+     "meanPairs": 475,
+     "meanAuc": 0.6247,
+     "sdAuc": 0.0544,
+     "aucs": [
+      0.5623,
+      0.662,
+      0.6499
+     ]
+    },
+    {
+     "stem": "lav",
+     "set": "B",
+     "nWin": 6,
+     "meanFwc": 0.2123,
+     "meanPairs": 361,
+     "meanAuc": 0.5735,
+     "sdAuc": 0.0421,
+     "aucs": [
+      0.5265,
+      0.5372,
+      0.6229,
+      0.6002,
+      0.6099,
+      0.5441
+     ]
+    },
+    {
+     "stem": "lzh",
+     "set": "B",
+     "nWin": 6,
+     "meanFwc": 0.3385,
+     "meanPairs": 524,
+     "meanAuc": 0.6029,
+     "sdAuc": 0.0268,
+     "aucs": [
+      0.5772,
+      0.5667,
+      0.6305,
+      0.6094,
+      0.6316,
+      0.6019
+     ]
+    },
+    {
+     "stem": "nob",
+     "set": "B",
+     "nWin": 6,
+     "meanFwc": 0.3692,
+     "meanPairs": 537,
+     "meanAuc": 0.6611,
+     "sdAuc": 0.0254,
+     "aucs": [
+      0.6759,
+      0.7046,
+      0.6535,
+      0.6368,
+      0.6406,
+      0.6549
+     ]
+    },
+    {
+     "stem": "ron",
+     "set": "B",
+     "nWin": 5,
+     "meanFwc": 0.3345,
+     "meanPairs": 171,
+     "meanAuc": 0.5988,
+     "sdAuc": 0.0533,
+     "aucs": [
+      0.6071,
+      0.6444,
+      0.5124,
+      0.6398,
+      0.5901
+     ]
+    },
+    {
+     "stem": "slv",
+     "set": "B",
+     "nWin": 6,
+     "meanFwc": 0.2783,
+     "meanPairs": 187,
+     "meanAuc": 0.5587,
+     "sdAuc": 0.0378,
+     "aucs": [
+      0.6097,
+      0.5538,
+      0.5906,
+      0.5602,
+      0.5323,
+      0.5057
+     ]
+    }
+   ]
+  }
+ },
+ "windowLevelZones": {
+  "<0.20": {
+   "windows": 17,
+   "audibleShare": 0.294,
+   "meanAuc": 0.5816
+  },
+  "0.20-0.2795": {
+   "windows": 47,
+   "audibleShare": 0.383,
+   "meanAuc": 0.5872
+  },
+  ">=0.2795": {
+   "windows": 123,
+   "audibleShare": 0.789,
+   "meanAuc": 0.6397
+  }
+ }
+}

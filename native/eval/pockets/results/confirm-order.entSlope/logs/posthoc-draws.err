@@ -1,0 +1,14 @@
+ent-en-mouret {"expect":"PRESENT+","z10":{"discover":16.82,"confirm":21.5,"status":"PRESENT+"},"z100":{"discover":18.56,"confirm":25.82,"status":"PRESENT+"}}
+ent-en-poe2 {"expect":"PRESENT+","z10":{"discover":7.33,"confirm":14.31,"status":"PRESENT+"},"z100":{"discover":6.46,"confirm":10.9,"status":"PRESENT+"}}
+ent-en-waikna {"expect":"PRESENT+","z10":{"discover":-6.17,"confirm":3.35,"status":"AMBIGUOUS"},"z100":{"discover":-5.29,"confirm":4.32,"status":"AMBIGUOUS"}}
+ent-en-awakening {"expect":"PRESENT+","z10":{"discover":19.7,"confirm":15.05,"status":"PRESENT+"},"z100":{"discover":10.61,"confirm":8.2,"status":"PRESENT+"}}
+ent-en-siddhartha {"expect":"PRESENT+","z10":{"discover":9.15,"confirm":5.51,"status":"PRESENT+"},"z100":{"discover":12.85,"confirm":4.2,"status":"PRESENT+"}}
+ent-en-dolls-house {"expect":"PRESENT-","z10":{"discover":4.63,"confirm":4.3,"status":"PRESENT+"},"z100":{"discover":4.94,"confirm":4.75,"status":"PRESENT+"}}
+ent-en-early-plays {"expect":"PRESENT-","z10":{"discover":-2.3,"confirm":0.1,"status":"AMBIGUOUS"},"z100":{"discover":-2.96,"confirm":-0.11,"status":"AMBIGUOUS"}}
+ent-ud-lat-perseus {"expect":"PRESENT-","z10":{"discover":-15.74,"confirm":-10.41,"status":"PRESENT-"},"z100":{"discover":-14.96,"confirm":-13.76,"status":"PRESENT-"}}
+ent-cd-js {"expect":"PRESENT-","z10":{"discover":-21.51,"confirm":-37.4,"status":"PRESENT-"},"z100":{"discover":-30.74,"confirm":-22.53,"status":"PRESENT-"}}
+ent-cd-ts {"expect":"PRESENT-","z10":{"discover":-39.42,"confirm":-18.74,"status":"PRESENT-"},"z100":{"discover":-22.26,"confirm":-26.65,"status":"PRESENT-"}}
+ent-cd-py {"expect":"PRESENT-","z10":{"discover":-17.66,"confirm":-19.69,"status":"PRESENT-"},"z100":{"discover":-14.68,"confirm":-22,"status":"PRESENT-"}}
+ent-ctl-mouret {"expect":"ABSENT","z10":{"discover":0.01,"confirm":0.64,"status":"ABSENT"},"z100":{"discover":0.03,"confirm":0.89,"status":"ABSENT"}}
+ent-ctl-awakening {"expect":"ABSENT","z10":{"discover":0.28,"confirm":0.32,"status":"ABSENT"},"z100":{"discover":0.59,"confirm":0.31,"status":"ABSENT"}}
+ent-ctl-cd-ts {"expect":"ABSENT","z10":{"discover":-0.86,"confirm":-0.99,"status":"ABSENT"},"z100":{"discover":-0.9,"confirm":-0.84,"status":"ABSENT"}}

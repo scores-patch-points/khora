@@ -1,0 +1,478 @@
+{
+ "books": [
+  {
+   "name": "pg158_Emma.txt",
+   "units": 8407,
+   "goldForms": 52,
+   "P": 472,
+   "N": 922,
+   "pairs": 115,
+   "controls": {
+    "R_LOGC": 0.5255,
+    "R_POS": 0.506,
+    "R_IPOS": 0.5,
+    "R_FB": 0.5262,
+    "R_LEN": 0.5105,
+    "R_SL": 0.5388
+   }
+  },
+  {
+   "name": "pg161_Sense-and-Sensibility.txt",
+   "units": 5048,
+   "goldForms": 39,
+   "P": 117,
+   "N": 556,
+   "pairs": 62,
+   "controls": {
+    "R_LOGC": 0.5,
+    "R_POS": 0.5056,
+    "R_IPOS": 0.5,
+    "R_FB": 0.5314,
+    "R_LEN": 0.5351,
+    "R_SL": 0.5163
+   }
+  },
+  {
+   "name": "pg345_Dracula.txt",
+   "units": 8788,
+   "goldForms": 45,
+   "P": 181,
+   "N": 1070,
+   "pairs": 90,
+   "controls": {
+    "R_LOGC": 0.5134,
+    "R_POS": 0.5134,
+    "R_IPOS": 0.5,
+    "R_FB": 0.5275,
+    "R_LEN": 0.5238,
+    "R_SL": 0.501
+   }
+  }
+ ],
+ "ud": [
+  {
+   "stem": "afr",
+   "units": 425,
+   "goldForms": 108,
+   "P": 1,
+   "N": 44,
+   "pairs": 0
+  },
+  {
+   "stem": "arb",
+   "units": 680,
+   "goldForms": 16,
+   "P": 0,
+   "N": 82,
+   "pairs": 0
+  },
+  {
+   "stem": "bul",
+   "units": 1116,
+   "goldForms": 579,
+   "P": 11,
+   "N": 179,
+   "pairs": 7
+  },
+  {
+   "stem": "cat",
+   "units": 1846,
+   "goldForms": 2236,
+   "P": 89,
+   "N": 164,
+   "pairs": 31
+  },
+  {
+   "stem": "ces",
+   "units": 628,
+   "goldForms": 91,
+   "P": 6,
+   "N": 109,
+   "pairs": 5
+  },
+  {
+   "stem": "cmn",
+   "units": 500,
+   "goldForms": 631,
+   "P": 2,
+   "N": 7,
+   "pairs": 0
+  },
+  {
+   "stem": "cmn-hans",
+   "units": 500,
+   "goldForms": 630,
+   "P": 2,
+   "N": 7,
+   "pairs": 0
+  },
+  {
+   "stem": "cym",
+   "units": 953,
+   "goldForms": 401,
+   "P": 2,
+   "N": 154,
+   "pairs": 2
+  },
+  {
+   "stem": "dan",
+   "units": 565,
+   "goldForms": 387,
+   "P": 9,
+   "N": 50,
+   "pairs": 8
+  },
+  {
+   "stem": "deu",
+   "units": 977,
+   "goldForms": 714,
+   "P": 8,
+   "N": 143,
+   "pairs": 4
+  },
+  {
+   "stem": "ell",
+   "units": 456,
+   "goldForms": 180,
+   "P": 0,
+   "N": 63,
+   "pairs": 0
+  },
+  {
+   "stem": "eng",
+   "units": 2046,
+   "goldForms": 1182,
+   "P": 82,
+   "N": 415,
+   "pairs": 52
+  },
+  {
+   "stem": "est",
+   "units": 3207,
+   "goldForms": 1622,
+   "P": 136,
+   "N": 785,
+   "pairs": 111
+  },
+  {
+   "stem": "eus",
+   "units": 1799,
+   "goldForms": 1401,
+   "P": 32,
+   "N": 293,
+   "pairs": 30
+  },
+  {
+   "stem": "fas",
+   "units": 1455,
+   "goldForms": 678,
+   "P": 38,
+   "N": 237,
+   "pairs": 36
+  },
+  {
+   "stem": "fin",
+   "units": 1555,
+   "goldForms": 659,
+   "P": 75,
+   "N": 281,
+   "pairs": 58
+  },
+  {
+   "stem": "fra",
+   "units": 416,
+   "goldForms": 406,
+   "P": 1,
+   "N": 37,
+   "pairs": 0
+  },
+  {
+   "stem": "gle",
+   "units": 451,
+   "goldForms": 383,
+   "P": 0,
+   "N": 56,
+   "pairs": 0
+  },
+  {
+   "stem": "glg",
+   "units": 861,
+   "goldForms": 275,
+   "P": 4,
+   "N": 135,
+   "pairs": 2
+  },
+  {
+   "stem": "heb",
+   "units": 491,
+   "goldForms": 322,
+   "P": 2,
+   "N": 66,
+   "pairs": 2
+  },
+  {
+   "stem": "hin",
+   "units": 1684,
+   "goldForms": 1569,
+   "P": 247,
+   "N": 402,
+   "pairs": 177
+  },
+  {
+   "stem": "hrv",
+   "units": 1136,
+   "goldForms": 898,
+   "P": 31,
+   "N": 256,
+   "pairs": 30
+  },
+  {
+   "stem": "hun",
+   "units": 449,
+   "goldForms": 485,
+   "P": 14,
+   "N": 52,
+   "pairs": 9
+  },
+  {
+   "stem": "hye",
+   "units": 600,
+   "goldForms": 454,
+   "P": 12,
+   "N": 139,
+   "pairs": 9
+  },
+  {
+   "stem": "ind",
+   "units": 557,
+   "goldForms": 1535,
+   "P": 17,
+   "N": 104,
+   "pairs": 13
+  },
+  {
+   "stem": "ita",
+   "units": 482,
+   "goldForms": 436,
+   "P": 2,
+   "N": 42,
+   "pairs": 2
+  },
+  {
+   "stem": "jpn",
+   "units": 543,
+   "goldForms": 260,
+   "P": 0,
+   "N": 19,
+   "pairs": 0
+  },
+  {
+   "stem": "kat",
+   "units": 481,
+   "goldForms": 209,
+   "P": 9,
+   "N": 108,
+   "pairs": 9
+  },
+  {
+   "stem": "kor",
+   "units": 989,
+   "goldForms": 59,
+   "P": 0,
+   "N": 29,
+   "pairs": 0
+  },
+  {
+   "stem": "lav",
+   "units": 2412,
+   "goldForms": 900,
+   "P": 42,
+   "N": 562,
+   "pairs": 36
+  },
+  {
+   "stem": "lit",
+   "units": 684,
+   "goldForms": 149,
+   "P": 3,
+   "N": 160,
+   "pairs": 0
+  },
+  {
+   "stem": "lzh",
+   "units": 5528,
+   "goldForms": 644,
+   "P": 5,
+   "N": 0,
+   "pairs": 0
+  },
+  {
+   "stem": "mar",
+   "units": 47,
+   "goldForms": 6,
+   "P": 0,
+   "N": 0,
+   "pairs": 0
+  },
+  {
+   "stem": "mlt",
+   "units": 518,
+   "goldForms": 87,
+   "P": 3,
+   "N": 103,
+   "pairs": 2
+  },
+  {
+   "stem": "nld",
+   "units": 596,
+   "goldForms": 343,
+   "P": 12,
+   "N": 63,
+   "pairs": 6
+  },
+  {
+   "stem": "nob",
+   "units": 1939,
+   "goldForms": 666,
+   "P": 89,
+   "N": 305,
+   "pairs": 64
+  },
+  {
+   "stem": "pol",
+   "units": 2215,
+   "goldForms": 979,
+   "P": 2,
+   "N": 345,
+   "pairs": 2
+  },
+  {
+   "stem": "por",
+   "units": 1200,
+   "goldForms": 2088,
+   "P": 10,
+   "N": 159,
+   "pairs": 8
+  },
+  {
+   "stem": "ron",
+   "units": 729,
+   "goldForms": 349,
+   "P": 4,
+   "N": 120,
+   "pairs": 4
+  },
+  {
+   "stem": "rus",
+   "units": 601,
+   "goldForms": 671,
+   "P": 0,
+   "N": 69,
+   "pairs": 0
+  },
+  {
+   "stem": "slk",
+   "units": 1061,
+   "goldForms": 737,
+   "P": 52,
+   "N": 118,
+   "pairs": 38
+  },
+  {
+   "stem": "slv",
+   "units": 1282,
+   "goldForms": 695,
+   "P": 8,
+   "N": 237,
+   "pairs": 8
+  },
+  {
+   "stem": "spa",
+   "units": 1721,
+   "goldForms": 1823,
+   "P": 101,
+   "N": 224,
+   "pairs": 58
+  },
+  {
+   "stem": "srp",
+   "units": 520,
+   "goldForms": 438,
+   "P": 20,
+   "N": 103,
+   "pairs": 19
+  },
+  {
+   "stem": "swe",
+   "units": 1219,
+   "goldForms": 125,
+   "P": 5,
+   "N": 225,
+   "pairs": 5
+  },
+  {
+   "stem": "tam",
+   "units": 120,
+   "goldForms": 154,
+   "P": 0,
+   "N": 0,
+   "pairs": 0
+  },
+  {
+   "stem": "tel",
+   "units": 146,
+   "goldForms": 10,
+   "P": 1,
+   "N": 5,
+   "pairs": 1
+  },
+  {
+   "stem": "tur",
+   "units": 1100,
+   "goldForms": 199,
+   "P": 53,
+   "N": 257,
+   "pairs": 40
+  },
+  {
+   "stem": "uig",
+   "units": 900,
+   "goldForms": 12,
+   "P": 3,
+   "N": 271,
+   "pairs": 3
+  },
+  {
+   "stem": "ukr",
+   "units": 898,
+   "goldForms": 399,
+   "P": 3,
+   "N": 143,
+   "pairs": 2
+  },
+  {
+   "stem": "urd",
+   "units": 535,
+   "goldForms": 729,
+   "P": 56,
+   "N": 92,
+   "pairs": 41
+  },
+  {
+   "stem": "vie",
+   "units": 800,
+   "goldForms": 108,
+   "P": 12,
+   "N": 195,
+   "pairs": 12
+  },
+  {
+   "stem": "wol",
+   "units": 470,
+   "goldForms": 348,
+   "P": 16,
+   "N": 76,
+   "pairs": 12
+  }
+ ]
+}

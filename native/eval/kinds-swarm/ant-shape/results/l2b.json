@@ -1,0 +1,19 @@
+{
+ "2-family": {
+  "same": 0.1582,
+  "other": 0.1231,
+  "diff": 0.0352,
+  "nSame": 133,
+  "nOther": 96,
+  "p": 0.2077
+ },
+ "3-cluster": {
+  "same": 0.166,
+  "other": 0.1336,
+  "diff": 0.0325,
+  "nSame": 70,
+  "nOther": 159,
+  "p": 0.1753
+ },
+ "meanPairCorr": 0.1435
+}

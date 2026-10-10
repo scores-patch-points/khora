@@ -1,0 +1,10 @@
+{
+ "file": "/Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-kinds-chat/results/analysis.irc.conf.json",
+ "rows": 2533,
+ "jointRows": 1541,
+ "verdicts": {
+  "K2_J1": "J1 not shown (lower bound <= 0)",
+  "K2_S1": "S1 record accuracy 0.1008 vs null q95 0.0705; record - freq-only = -0.0278 (SESOI 0.03)",
+  "K3": "K arm: AUC REC_cond 0.8283 (block CI 0.776,0.8746); COUNT 0.7307; REC_cond - COUNT {\"point\":0.084,\"blockCI\":[0.0281,0.1699],\"pairCI\":[0.0375,0.1308]}; RECCOUNT_cond - COUNT {\"point\":0.0749,\"blockCI\":[0.0118,0.151],\"pairCI\":[0.0254,0.123]}"
+ }
+}

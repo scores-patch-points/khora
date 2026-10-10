@@ -1,0 +1,1888 @@
+{
+ "module": "eval/law/name-company.mjs",
+ "denominators": {
+  "LATER": 22,
+  "FIRST": 23
+ },
+ "own": {
+  "eng": {
+   "LATER": {
+    "pairs": 600,
+    "dropped": 4,
+    "thin": false,
+    "LEFT": 0.566,
+    "RIGHT": 0.5662,
+    "BOTH": 0.6005,
+    "POSITION": 0.3717,
+    "CHARLEN": 0.3906,
+    "FREQ": 0.4034,
+    "RIVALS": 0.3672,
+    "LEFT+RIVALS": 0.5529,
+    "BOTH+RIVALS": 0.592,
+    "permQ95": 0.508
+   },
+   "FIRST": {
+    "pairs": 600,
+    "dropped": 36,
+    "thin": false,
+    "LEFT": 0.6252,
+    "RIGHT": 0.586,
+    "BOTH": 0.6384,
+    "POSITION": 0.4196,
+    "CHARLEN": 0.4084,
+    "FREQ": 0.4119,
+    "RIVALS": 0.395,
+    "LEFT+RIVALS": 0.5919,
+    "BOTH+RIVALS": 0.6183,
+    "permQ95": 0.5089
+   }
+  },
+  "spa": {
+   "LATER": {
+    "pairs": 600,
+    "dropped": 6,
+    "thin": false,
+    "LEFT": 0.6381,
+    "RIGHT": 0.6138,
+    "BOTH": 0.684,
+    "POSITION": 0.434,
+    "CHARLEN": 0.4473,
+    "FREQ": 0.4566,
+    "RIVALS": 0.4116,
+    "LEFT+RIVALS": 0.6238,
+    "BOTH+RIVALS": 0.672,
+    "permQ95": 0.524
+   },
+   "FIRST": {
+    "pairs": 600,
+    "dropped": 6,
+    "thin": false,
+    "LEFT": 0.7147,
+    "RIGHT": 0.6686,
+    "BOTH": 0.7719,
+    "POSITION": 0.3658,
+    "CHARLEN": 0.3875,
+    "FREQ": 0.3989,
+    "RIVALS": 0.3509,
+    "LEFT+RIVALS": 0.7043,
+    "BOTH+RIVALS": 0.7635,
+    "permQ95": 0.4882
+   }
+  },
+  "rus": {
+   "LATER": {
+    "pairs": 110,
+    "dropped": 0,
+    "thin": false,
+    "LEFT": 0.5621,
+    "RIGHT": 0.6019,
+    "BOTH": 0.5529,
+    "POSITION": 0.3429,
+    "CHARLEN": 0.4171,
+    "FREQ": 0.5003,
+    "RIVALS": 0.346,
+    "LEFT+RIVALS": 0.5161,
+    "BOTH+RIVALS": 0.5286,
+    "permQ95": 0.5859
+   },
+   "FIRST": {
+    "pairs": 600,
+    "dropped": 0,
+    "thin": false,
+    "LEFT": 0.499,
+    "RIGHT": 0.5445,
+    "BOTH": 0.5429,
+    "POSITION": 0.4507,
+    "CHARLEN": 0.4538,
+    "FREQ": 0.4646,
+    "RIVALS": 0.4303,
+    "LEFT+RIVALS": 0.4851,
+    "BOTH+RIVALS": 0.5349,
+    "permQ95": 0.537
+   }
+  },
+  "cmn": {
+   "LATER": {
+    "pairs": 365,
+    "dropped": 28,
+    "thin": false,
+    "LEFT": 0.5645,
+    "RIGHT": 0.5684,
+    "BOTH": 0.6051,
+    "POSITION": 0.374,
+    "CHARLEN": 0.4172,
+    "FREQ": 0.4155,
+    "RIVALS": 0.3632,
+    "LEFT+RIVALS": 0.5363,
+    "BOTH+RIVALS": 0.593,
+    "permQ95": 0.5203
+   },
+   "FIRST": {
+    "pairs": 534,
+    "dropped": 129,
+    "thin": false,
+    "LEFT": 0.5421,
+    "RIGHT": 0.6203,
+    "BOTH": 0.6361,
+    "POSITION": 0.4164,
+    "CHARLEN": 0.4427,
+    "FREQ": 0.4305,
+    "RIVALS": 0.3995,
+    "LEFT+RIVALS": 0.5079,
+    "BOTH+RIVALS": 0.6104,
+    "permQ95": 0.5243
+   }
+  },
+  "cmn-hans": {
+   "LATER": {
+    "pairs": 369,
+    "dropped": 28,
+    "thin": false,
+    "LEFT": 0.5539,
+    "RIGHT": 0.5893,
+    "BOTH": 0.6286,
+    "POSITION": 0.3996,
+    "CHARLEN": 0.4381,
+    "FREQ": 0.4368,
+    "RIVALS": 0.4015,
+    "LEFT+RIVALS": 0.5342,
+    "BOTH+RIVALS": 0.6127,
+    "permQ95": 0.5386
+   },
+   "FIRST": {
+    "pairs": 530,
+    "dropped": 129,
+    "thin": false,
+    "LEFT": 0.5256,
+    "RIGHT": 0.6161,
+    "BOTH": 0.612,
+    "POSITION": 0.4211,
+    "CHARLEN": 0.4386,
+    "FREQ": 0.4364,
+    "RIVALS": 0.4071,
+    "LEFT+RIVALS": 0.5184,
+    "BOTH+RIVALS": 0.6061,
+    "permQ95": 0.5161
+   }
+  },
+  "arb": {
+   "LATER": {
+    "pairs": 13,
+    "dropped": 1,
+    "thin": true
+   },
+   "FIRST": {
+    "pairs": 13,
+    "dropped": 0,
+    "thin": true
+   }
+  },
+  "heb": {
+   "LATER": {
+    "pairs": 251,
+    "dropped": 23,
+    "thin": false,
+    "LEFT": 0.6138,
+    "RIGHT": 0.5528,
+    "BOTH": 0.6789,
+    "POSITION": 0.3704,
+    "CHARLEN": 0.3919,
+    "FREQ": 0.4282,
+    "RIVALS": 0.3459,
+    "LEFT+RIVALS": 0.5978,
+    "BOTH+RIVALS": 0.666,
+    "permQ95": 0.5512
+   },
+   "FIRST": {
+    "pairs": 251,
+    "dropped": 3,
+    "thin": false,
+    "LEFT": 0.6738,
+    "RIGHT": 0.6187,
+    "BOTH": 0.7084,
+    "POSITION": 0.3276,
+    "CHARLEN": 0.3667,
+    "FREQ": 0.3746,
+    "RIVALS": 0.3184,
+    "LEFT+RIVALS": 0.6483,
+    "BOTH+RIVALS": 0.6913,
+    "permQ95": 0.5303
+   }
+  },
+  "fas": {
+   "LATER": {
+    "pairs": 508,
+    "dropped": 12,
+    "thin": false,
+    "LEFT": 0.6218,
+    "RIGHT": 0.6063,
+    "BOTH": 0.6795,
+    "POSITION": 0.3805,
+    "CHARLEN": 0.437,
+    "FREQ": 0.455,
+    "RIVALS": 0.3804,
+    "LEFT+RIVALS": 0.5741,
+    "BOTH+RIVALS": 0.6567,
+    "permQ95": 0.5306
+   },
+   "FIRST": {
+    "pairs": 584,
+    "dropped": 4,
+    "thin": false,
+    "LEFT": 0.6188,
+    "RIGHT": 0.6189,
+    "BOTH": 0.6792,
+    "POSITION": 0.4156,
+    "CHARLEN": 0.4566,
+    "FREQ": 0.4576,
+    "RIVALS": 0.4137,
+    "LEFT+RIVALS": 0.6067,
+    "BOTH+RIVALS": 0.6729,
+    "permQ95": 0.5195
+   }
+  },
+  "kor": {
+   "LATER": {
+    "pairs": 5,
+    "dropped": 0,
+    "thin": true
+   },
+   "FIRST": {
+    "pairs": 67,
+    "dropped": 0,
+    "thin": false,
+    "LEFT": 0.509,
+    "RIGHT": 0.589,
+    "BOTH": 0.5809,
+    "POSITION": 0.2746,
+    "CHARLEN": 0.3118,
+    "FREQ": 0.3291,
+    "RIVALS": 0.2416,
+    "LEFT+RIVALS": 0.4632,
+    "BOTH+RIVALS": 0.546,
+    "permQ95": 0.5419
+   }
+  },
+  "jpn": {
+   "LATER": {
+    "pairs": 84,
+    "dropped": 4,
+    "thin": false,
+    "LEFT": 0.4785,
+    "RIGHT": 0.6699,
+    "BOTH": 0.6429,
+    "POSITION": 0.2915,
+    "CHARLEN": 0.3703,
+    "FREQ": 0.3938,
+    "RIVALS": 0.2622,
+    "LEFT+RIVALS": 0.4026,
+    "BOTH+RIVALS": 0.5947,
+    "permQ95": 0.5884
+   },
+   "FIRST": {
+    "pairs": 383,
+    "dropped": 6,
+    "thin": false,
+    "LEFT": 0.575,
+    "RIGHT": 0.6125,
+    "BOTH": 0.641,
+    "POSITION": 0.413,
+    "CHARLEN": 0.4347,
+    "FREQ": 0.4435,
+    "RIVALS": 0.3984,
+    "LEFT+RIVALS": 0.5501,
+    "BOTH+RIVALS": 0.6266,
+    "permQ95": 0.5306
+   }
+  },
+  "fra": {
+   "LATER": {
+    "pairs": 570,
+    "dropped": 25,
+    "thin": false,
+    "LEFT": 0.6778,
+    "RIGHT": 0.6589,
+    "BOTH": 0.7147,
+    "POSITION": 0.4348,
+    "CHARLEN": 0.4582,
+    "FREQ": 0.4632,
+    "RIVALS": 0.4065,
+    "LEFT+RIVALS": 0.6684,
+    "BOTH+RIVALS": 0.7128,
+    "permQ95": 0.5419
+   },
+   "FIRST": {
+    "pairs": 600,
+    "dropped": 8,
+    "thin": false,
+    "LEFT": 0.675,
+    "RIGHT": 0.6248,
+    "BOTH": 0.7149,
+    "POSITION": 0.4388,
+    "CHARLEN": 0.4581,
+    "FREQ": 0.4613,
+    "RIVALS": 0.4292,
+    "LEFT+RIVALS": 0.6712,
+    "BOTH+RIVALS": 0.7137,
+    "permQ95": 0.5234
+   }
+  },
+  "deu": {
+   "LATER": {
+    "pairs": 116,
+    "dropped": 3,
+    "thin": false,
+    "LEFT": 0.511,
+    "RIGHT": 0.507,
+    "BOTH": 0.5295,
+    "POSITION": 0.3183,
+    "CHARLEN": 0.3726,
+    "FREQ": 0.4097,
+    "RIVALS": 0.3102,
+    "LEFT+RIVALS": 0.4644,
+    "BOTH+RIVALS": 0.5189,
+    "permQ95": 0.5605
+   },
+   "FIRST": {
+    "pairs": 447,
+    "dropped": 2,
+    "thin": false,
+    "LEFT": 0.6771,
+    "RIGHT": 0.5452,
+    "BOTH": 0.6887,
+    "POSITION": 0.4077,
+    "CHARLEN": 0.3894,
+    "FREQ": 0.3986,
+    "RIVALS": 0.3888,
+    "LEFT+RIVALS": 0.6583,
+    "BOTH+RIVALS": 0.6732,
+    "permQ95": 0.5064
+   }
+  },
+  "ita": {
+   "LATER": {
+    "pairs": 129,
+    "dropped": 3,
+    "thin": false,
+    "LEFT": 0.6458,
+    "RIGHT": 0.4544,
+    "BOTH": 0.5842,
+    "POSITION": 0.3152,
+    "CHARLEN": 0.399,
+    "FREQ": 0.3937,
+    "RIVALS": 0.2839,
+    "LEFT+RIVALS": 0.5573,
+    "BOTH+RIVALS": 0.5312,
+    "permQ95": 0.5685
+   },
+   "FIRST": {
+    "pairs": 454,
+    "dropped": 9,
+    "thin": false,
+    "LEFT": 0.637,
+    "RIGHT": 0.5605,
+    "BOTH": 0.6413,
+    "POSITION": 0.3463,
+    "CHARLEN": 0.3632,
+    "FREQ": 0.3741,
+    "RIVALS": 0.3246,
+    "LEFT+RIVALS": 0.5928,
+    "BOTH+RIVALS": 0.6236,
+    "permQ95": 0.5107
+   }
+  },
+  "por": {
+   "LATER": {
+    "pairs": 600,
+    "dropped": 3,
+    "thin": false,
+    "LEFT": 0.6407,
+    "RIGHT": 0.5709,
+    "BOTH": 0.6537,
+    "POSITION": 0.4207,
+    "CHARLEN": 0.4447,
+    "FREQ": 0.482,
+    "RIVALS": 0.4043,
+    "LEFT+RIVALS": 0.6195,
+    "BOTH+RIVALS": 0.6369,
+    "permQ95": 0.5309
+   },
+   "FIRST": {
+    "pairs": 600,
+    "dropped": 13,
+    "thin": false,
+    "LEFT": 0.6672,
+    "RIGHT": 0.6294,
+    "BOTH": 0.7029,
+    "POSITION": 0.4615,
+    "CHARLEN": 0.4683,
+    "FREQ": 0.4725,
+    "RIVALS": 0.4477,
+    "LEFT+RIVALS": 0.6579,
+    "BOTH+RIVALS": 0.6978,
+    "permQ95": 0.5279
+   }
+  },
+  "nld": {
+   "LATER": {
+    "pairs": 414,
+    "dropped": 147,
+    "thin": false,
+    "LEFT": 0.6567,
+    "RIGHT": 0.4868,
+    "BOTH": 0.6323,
+    "POSITION": 0.4012,
+    "CHARLEN": 0.4035,
+    "FREQ": 0.4759,
+    "RIVALS": 0.3807,
+    "LEFT+RIVALS": 0.6248,
+    "BOTH+RIVALS": 0.6047,
+    "permQ95": 0.5423
+   },
+   "FIRST": {
+    "pairs": 533,
+    "dropped": 25,
+    "thin": false,
+    "LEFT": 0.644,
+    "RIGHT": 0.5279,
+    "BOTH": 0.6374,
+    "POSITION": 0.3579,
+    "CHARLEN": 0.3728,
+    "FREQ": 0.3934,
+    "RIVALS": 0.3545,
+    "LEFT+RIVALS": 0.6212,
+    "BOTH+RIVALS": 0.6204,
+    "permQ95": 0.4947
+   }
+  },
+  "pol": {
+   "LATER": {
+    "pairs": 198,
+    "dropped": 10,
+    "thin": false,
+    "LEFT": 0.5411,
+    "RIGHT": 0.529,
+    "BOTH": 0.5548,
+    "POSITION": 0.348,
+    "CHARLEN": 0.3736,
+    "FREQ": 0.4041,
+    "RIVALS": 0.3351,
+    "LEFT+RIVALS": 0.4979,
+    "BOTH+RIVALS": 0.5294,
+    "permQ95": 0.5574
+   },
+   "FIRST": {
+    "pairs": 600,
+    "dropped": 4,
+    "thin": false,
+    "LEFT": 0.578,
+    "RIGHT": 0.4978,
+    "BOTH": 0.5812,
+    "POSITION": 0.4044,
+    "CHARLEN": 0.4282,
+    "FREQ": 0.4487,
+    "RIVALS": 0.3856,
+    "LEFT+RIVALS": 0.5442,
+    "BOTH+RIVALS": 0.5571,
+    "permQ95": 0.5163
+   }
+  },
+  "ukr": {
+   "LATER": {
+    "pairs": 79,
+    "dropped": 29,
+    "thin": false,
+    "LEFT": 0.5391,
+    "RIGHT": 0.418,
+    "BOTH": 0.5262,
+    "POSITION": 0.3358,
+    "CHARLEN": 0.3604,
+    "FREQ": 0.414,
+    "RIVALS": 0.2842,
+    "LEFT+RIVALS": 0.5107,
+    "BOTH+RIVALS": 0.4912,
+    "permQ95": 0.5974
+   },
+   "FIRST": {
+    "pairs": 296,
+    "dropped": 2,
+    "thin": false,
+    "LEFT": 0.5489,
+    "RIGHT": 0.4693,
+    "BOTH": 0.5516,
+    "POSITION": 0.344,
+    "CHARLEN": 0.3545,
+    "FREQ": 0.3742,
+    "RIVALS": 0.3174,
+    "LEFT+RIVALS": 0.5223,
+    "BOTH+RIVALS": 0.5292,
+    "permQ95": 0.491
+   }
+  },
+  "hin": {
+   "LATER": {
+    "pairs": 600,
+    "dropped": 16,
+    "thin": false,
+    "LEFT": 0.6089,
+    "RIGHT": 0.6055,
+    "BOTH": 0.6579,
+    "POSITION": 0.4428,
+    "CHARLEN": 0.4473,
+    "FREQ": 0.4448,
+    "RIVALS": 0.4062,
+    "LEFT+RIVALS": 0.5873,
+    "BOTH+RIVALS": 0.6486,
+    "permQ95": 0.5328
+   },
+   "FIRST": {
+    "pairs": 600,
+    "dropped": 5,
+    "thin": false,
+    "LEFT": 0.6913,
+    "RIGHT": 0.6114,
+    "BOTH": 0.7091,
+    "POSITION": 0.4249,
+    "CHARLEN": 0.4393,
+    "FREQ": 0.431,
+    "RIVALS": 0.4048,
+    "LEFT+RIVALS": 0.6806,
+    "BOTH+RIVALS": 0.6996,
+    "permQ95": 0.5169
+   }
+  },
+  "vie": {
+   "LATER": {
+    "pairs": 600,
+    "dropped": 0,
+    "thin": false,
+    "LEFT": 0.5519,
+    "RIGHT": 0.4777,
+    "BOTH": 0.5365,
+    "POSITION": 0.3611,
+    "CHARLEN": 0.3588,
+    "FREQ": 0.3623,
+    "RIVALS": 0.3351,
+    "LEFT+RIVALS": 0.5231,
+    "BOTH+RIVALS": 0.5186,
+    "permQ95": 0.4973
+   },
+   "FIRST": {
+    "pairs": 449,
+    "dropped": 1,
+    "thin": false,
+    "LEFT": 0.5841,
+    "RIGHT": 0.5637,
+    "BOTH": 0.6045,
+    "POSITION": 0.4047,
+    "CHARLEN": 0.4314,
+    "FREQ": 0.448,
+    "RIVALS": 0.3988,
+    "LEFT+RIVALS": 0.5574,
+    "BOTH+RIVALS": 0.5918,
+    "permQ95": 0.527
+   }
+  },
+  "ind": {
+   "LATER": {
+    "pairs": 600,
+    "dropped": 41,
+    "thin": false,
+    "LEFT": 0.5395,
+    "RIGHT": 0.5905,
+    "BOTH": 0.6149,
+    "POSITION": 0.4253,
+    "CHARLEN": 0.4366,
+    "FREQ": 0.4449,
+    "RIVALS": 0.4061,
+    "LEFT+RIVALS": 0.5042,
+    "BOTH+RIVALS": 0.5828,
+    "permQ95": 0.539
+   },
+   "FIRST": {
+    "pairs": 600,
+    "dropped": 25,
+    "thin": false,
+    "LEFT": 0.5907,
+    "RIGHT": 0.5951,
+    "BOTH": 0.6451,
+    "POSITION": 0.4669,
+    "CHARLEN": 0.4328,
+    "FREQ": 0.4621,
+    "RIVALS": 0.4431,
+    "LEFT+RIVALS": 0.5768,
+    "BOTH+RIVALS": 0.6357,
+    "permQ95": 0.5165
+   }
+  },
+  "swe": {
+   "LATER": {
+    "pairs": 10,
+    "dropped": 4,
+    "thin": true
+   },
+   "FIRST": {
+    "pairs": 20,
+    "dropped": 2,
+    "thin": true
+   }
+  },
+  "urd": {
+   "LATER": {
+    "pairs": 600,
+    "dropped": 51,
+    "thin": false,
+    "LEFT": 0.6541,
+    "RIGHT": 0.5973,
+    "BOTH": 0.691,
+    "POSITION": 0.4556,
+    "CHARLEN": 0.4213,
+    "FREQ": 0.4339,
+    "RIVALS": 0.4155,
+    "LEFT+RIVALS": 0.6426,
+    "BOTH+RIVALS": 0.6739,
+    "permQ95": 0.5303
+   },
+   "FIRST": {
+    "pairs": 516,
+    "dropped": 18,
+    "thin": false,
+    "LEFT": 0.6466,
+    "RIGHT": 0.6856,
+    "BOTH": 0.7422,
+    "POSITION": 0.4088,
+    "CHARLEN": 0.4487,
+    "FREQ": 0.4371,
+    "RIVALS": 0.3872,
+    "LEFT+RIVALS": 0.6304,
+    "BOTH+RIVALS": 0.7335,
+    "permQ95": 0.53
+   }
+  },
+  "tur": {
+   "LATER": {
+    "pairs": 140,
+    "dropped": 13,
+    "thin": false,
+    "LEFT": 0.4775,
+    "RIGHT": 0.4274,
+    "BOTH": 0.4715,
+    "POSITION": 0.3837,
+    "CHARLEN": 0.3701,
+    "FREQ": 0.373,
+    "RIVALS": 0.3568,
+    "LEFT+RIVALS": 0.4275,
+    "BOTH+RIVALS": 0.442,
+    "permQ95": 0.541
+   },
+   "FIRST": {
+    "pairs": 260,
+    "dropped": 1,
+    "thin": false,
+    "LEFT": 0.4705,
+    "RIGHT": 0.502,
+    "BOTH": 0.5471,
+    "POSITION": 0.3687,
+    "CHARLEN": 0.3524,
+    "FREQ": 0.362,
+    "RIVALS": 0.3524,
+    "LEFT+RIVALS": 0.4631,
+    "BOTH+RIVALS": 0.5419,
+    "permQ95": 0.471
+   }
+  },
+  "ell": {
+   "LATER": {
+    "pairs": 147,
+    "dropped": 0,
+    "thin": false,
+    "LEFT": 0.5999,
+    "RIGHT": 0.5246,
+    "BOTH": 0.6015,
+    "POSITION": 0.3766,
+    "CHARLEN": 0.3624,
+    "FREQ": 0.3738,
+    "RIVALS": 0.3399,
+    "LEFT+RIVALS": 0.5744,
+    "BOTH+RIVALS": 0.5862,
+    "permQ95": 0.5672
+   },
+   "FIRST": {
+    "pairs": 222,
+    "dropped": 1,
+    "thin": false,
+    "LEFT": 0.5393,
+    "RIGHT": 0.4746,
+    "BOTH": 0.5292,
+    "POSITION": 0.3766,
+    "CHARLEN": 0.38,
+    "FREQ": 0.3741,
+    "RIVALS": 0.3441,
+    "LEFT+RIVALS": 0.5017,
+    "BOTH+RIVALS": 0.5003,
+    "permQ95": 0.5431
+   }
+  },
+  "fin": {
+   "LATER": {
+    "pairs": 374,
+    "dropped": 27,
+    "thin": false,
+    "LEFT": 0.5065,
+    "RIGHT": 0.53,
+    "BOTH": 0.5268,
+    "POSITION": 0.3844,
+    "CHARLEN": 0.3961,
+    "FREQ": 0.4143,
+    "RIVALS": 0.3211,
+    "LEFT+RIVALS": 0.431,
+    "BOTH+RIVALS": 0.4828,
+    "permQ95": 0.539
+   },
+   "FIRST": {
+    "pairs": 600,
+    "dropped": 6,
+    "thin": false,
+    "LEFT": 0.5162,
+    "RIGHT": 0.4645,
+    "BOTH": 0.5396,
+    "POSITION": 0.331,
+    "CHARLEN": 0.3468,
+    "FREQ": 0.3508,
+    "RIVALS": 0.3155,
+    "LEFT+RIVALS": 0.483,
+    "BOTH+RIVALS": 0.5108,
+    "permQ95": 0.462
+   }
+  }
+ },
+ "C1": {
+  "LATER": {
+   "LEFT": {
+    "mean": 0.5795,
+    "ge060": 9,
+    "ge065": 3,
+    "n": 22
+   },
+   "RIGHT": {
+    "mean": 0.5521,
+    "ge060": 6,
+    "ge065": 2,
+    "n": 22
+   },
+   "BOTH": {
+    "mean": 0.6076,
+    "ge060": 14,
+    "ge065": 7,
+    "n": 22
+   },
+   "POSITION": {
+    "mean": 0.3804,
+    "ge060": 0,
+    "ge065": 0,
+    "n": 22
+   },
+   "CHARLEN": {
+    "mean": 0.4052,
+    "ge060": 0,
+    "ge065": 0,
+    "n": 22
+   },
+   "FREQ": {
+    "mean": 0.4263,
+    "ge060": 0,
+    "ge065": 0,
+    "n": 22
+   },
+   "RIVALS": {
+    "mean": 0.3574,
+    "ge060": 0,
+    "ge065": 0,
+    "n": 22
+   },
+   "LEFT+RIVALS": {
+    "mean": 0.5441,
+    "ge060": 5,
+    "ge065": 1,
+    "n": 22
+   },
+   "BOTH+RIVALS": {
+    "mean": 0.5853,
+    "ge060": 9,
+    "ge065": 5,
+    "n": 22
+   },
+   "permQ95Mean": 0.5451
+  },
+  "FIRST": {
+   "LEFT": {
+    "mean": 0.5978,
+    "ge060": 11,
+    "ge065": 6,
+    "n": 23
+   },
+   "RIGHT": {
+    "mean": 0.5751,
+    "ge060": 10,
+    "ge065": 2,
+    "n": 23
+   },
+   "BOTH": {
+    "mean": 0.6368,
+    "ge060": 16,
+    "ge065": 8,
+    "n": 23
+   },
+   "POSITION": {
+    "mean": 0.3933,
+    "ge060": 0,
+    "ge065": 0,
+    "n": 23
+   },
+   "CHARLEN": {
+    "mean": 0.4072,
+    "ge060": 0,
+    "ge065": 0,
+    "n": 23
+   },
+   "FREQ": {
+    "mean": 0.4146,
+    "ge060": 0,
+    "ge065": 0,
+    "n": 23
+   },
+   "RIVALS": {
+    "mean": 0.376,
+    "ge060": 0,
+    "ge065": 0,
+    "n": 23
+   },
+   "LEFT+RIVALS": {
+    "mean": 0.5755,
+    "ge060": 9,
+    "ge065": 5,
+    "n": 23
+   },
+   "BOTH+RIVALS": {
+    "mean": 0.6217,
+    "ge060": 15,
+    "ge065": 8,
+    "n": 23
+   },
+   "permQ95Mean": 0.5145
+  }
+ },
+ "C5": {
+  "LATER_BOTH_plus_RIVALS_minus_RIVALS": {
+   "mean": 0.2278,
+   "lo": 0.2051,
+   "hi": 0.25,
+   "ge003": 22
+  },
+  "FIRST_LEFT_plus_RIVALS_minus_RIVALS": {
+   "mean": 0.1995,
+   "lo": 0.1693,
+   "hi": 0.2279,
+   "ge003": 23
+  }
+ },
+ "C2": {
+  "LATER_BOTH_2fam": {
+   "languages": 22,
+   "mean": 0.0327,
+   "lo": 0.0056,
+   "hi": 0.0592,
+   "sameBeatsOther": 12,
+   "otherBeatsSame": 9,
+   "signP": 0.3318,
+   "meanSame": 0.5431,
+   "meanOther": 0.5104,
+   "perLanguage": {
+    "eng": {
+     "same": 0.5778,
+     "other": 0.5467,
+     "diff": 0.0311,
+     "k": 6,
+     "family": "SVO"
+    },
+    "spa": {
+     "same": 0.6267,
+     "other": 0.5009,
+     "diff": 0.1258,
+     "k": 6,
+     "family": "SVO"
+    },
+    "rus": {
+     "same": 0.541,
+     "other": 0.4453,
+     "diff": 0.0957,
+     "k": 6,
+     "family": "SVO"
+    },
+    "cmn": {
+     "same": 0.5464,
+     "other": 0.5621,
+     "diff": -0.0157,
+     "k": 6,
+     "family": "SVO"
+    },
+    "cmn-hans": {
+     "same": 0.532,
+     "other": 0.5512,
+     "diff": -0.0192,
+     "k": 6,
+     "family": "SVO"
+    },
+    "heb": {
+     "same": 0.4735,
+     "other": 0.5735,
+     "diff": -0.1,
+     "k": 6,
+     "family": "SVO"
+    },
+    "fas": {
+     "same": 0.5372,
+     "other": 0.5534,
+     "diff": -0.0161,
+     "k": 5,
+     "family": "SOV"
+    },
+    "jpn": {
+     "same": 0.5524,
+     "other": 0.5582,
+     "diff": -0.0058,
+     "k": 5,
+     "family": "SOV"
+    },
+    "fra": {
+     "same": 0.6396,
+     "other": 0.4635,
+     "diff": 0.1761,
+     "k": 6,
+     "family": "SVO"
+    },
+    "deu": {
+     "same": 0.5034,
+     "other": 0.5664,
+     "diff": -0.063,
+     "k": 6,
+     "family": "SVO"
+    },
+    "ita": {
+     "same": 0.5943,
+     "other": 0.459,
+     "diff": 0.1353,
+     "k": 6,
+     "family": "SVO"
+    },
+    "por": {
+     "same": 0.5589,
+     "other": 0.4769,
+     "diff": 0.082,
+     "k": 6,
+     "family": "SVO"
+    },
+    "nld": {
+     "same": 0.5056,
+     "other": 0.5414,
+     "diff": -0.0359,
+     "k": 5,
+     "family": "SOV"
+    },
+    "pol": {
+     "same": 0.5242,
+     "other": 0.4956,
+     "diff": 0.0286,
+     "k": 6,
+     "family": "SVO"
+    },
+    "ukr": {
+     "same": 0.511,
+     "other": 0.511,
+     "diff": 0,
+     "k": 6,
+     "family": "SVO"
+    },
+    "hin": {
+     "same": 0.5797,
+     "other": 0.5156,
+     "diff": 0.0641,
+     "k": 5,
+     "family": "SOV"
+    },
+    "vie": {
+     "same": 0.4741,
+     "other": 0.4827,
+     "diff": -0.0087,
+     "k": 6,
+     "family": "SVO"
+    },
+    "ind": {
+     "same": 0.5164,
+     "other": 0.5032,
+     "diff": 0.0133,
+     "k": 6,
+     "family": "SVO"
+    },
+    "urd": {
+     "same": 0.5298,
+     "other": 0.4573,
+     "diff": 0.0725,
+     "k": 5,
+     "family": "SOV"
+    },
+    "tur": {
+     "same": 0.5453,
+     "other": 0.4834,
+     "diff": 0.0619,
+     "k": 5,
+     "family": "SOV"
+    },
+    "ell": {
+     "same": 0.574,
+     "other": 0.4743,
+     "diff": 0.0997,
+     "k": 6,
+     "family": "SVO"
+    },
+    "fin": {
+     "same": 0.5046,
+     "other": 0.5075,
+     "diff": -0.0029,
+     "k": 6,
+     "family": "SVO"
+    }
+   }
+  },
+  "LATER_BOTH_3cl": {
+   "languages": 22,
+   "mean": 0.006,
+   "lo": -0.0173,
+   "hi": 0.0266,
+   "sameBeatsOther": 11,
+   "otherBeatsSame": 11,
+   "signP": 0.5841,
+   "meanSame": 0.5417,
+   "meanOther": 0.5357,
+   "perLanguage": {
+    "eng": {
+     "same": 0.5753,
+     "other": 0.5801,
+     "diff": -0.0049,
+     "k": 6,
+     "family": "SVO-like#1"
+    },
+    "spa": {
+     "same": 0.6223,
+     "other": 0.5959,
+     "diff": 0.0265,
+     "k": 8,
+     "family": "SVO-like#0"
+    },
+    "rus": {
+     "same": 0.5489,
+     "other": 0.4891,
+     "diff": 0.0598,
+     "k": 8,
+     "family": "SVO-like#0"
+    },
+    "cmn": {
+     "same": 0.5655,
+     "other": 0.5496,
+     "diff": 0.0159,
+     "k": 6,
+     "family": "SVO-like#1"
+    },
+    "cmn-hans": {
+     "same": 0.5592,
+     "other": 0.5287,
+     "diff": 0.0305,
+     "k": 6,
+     "family": "SVO-like#1"
+    },
+    "heb": {
+     "same": 0.3918,
+     "other": 0.5489,
+     "diff": -0.1571,
+     "k": 8,
+     "family": "SVO-like#0"
+    },
+    "fas": {
+     "same": 0.539,
+     "other": 0.5532,
+     "diff": -0.0143,
+     "k": 5,
+     "family": "SOV-like#2"
+    },
+    "jpn": {
+     "same": 0.5627,
+     "other": 0.527,
+     "diff": 0.0357,
+     "k": 5,
+     "family": "SOV-like#2"
+    },
+    "fra": {
+     "same": 0.5717,
+     "other": 0.6357,
+     "diff": -0.064,
+     "k": 6,
+     "family": "SVO-like#1"
+    },
+    "deu": {
+     "same": 0.4796,
+     "other": 0.5492,
+     "diff": -0.0696,
+     "k": 8,
+     "family": "SVO-like#0"
+    },
+    "ita": {
+     "same": 0.6368,
+     "other": 0.5518,
+     "diff": 0.085,
+     "k": 8,
+     "family": "SVO-like#0"
+    },
+    "por": {
+     "same": 0.556,
+     "other": 0.5564,
+     "diff": -0.0004,
+     "k": 6,
+     "family": "SVO-like#1"
+    },
+    "nld": {
+     "same": 0.5073,
+     "other": 0.5486,
+     "diff": -0.0413,
+     "k": 5,
+     "family": "SOV-like#2"
+    },
+    "pol": {
+     "same": 0.5129,
+     "other": 0.5212,
+     "diff": -0.0083,
+     "k": 8,
+     "family": "SVO-like#0"
+    },
+    "ukr": {
+     "same": 0.5296,
+     "other": 0.5298,
+     "diff": -0.0003,
+     "k": 8,
+     "family": "SVO-like#0"
+    },
+    "hin": {
+     "same": 0.5912,
+     "other": 0.5123,
+     "diff": 0.079,
+     "k": 5,
+     "family": "SOV-like#2"
+    },
+    "vie": {
+     "same": 0.4668,
+     "other": 0.4719,
+     "diff": -0.0051,
+     "k": 6,
+     "family": "SVO-like#1"
+    },
+    "ind": {
+     "same": 0.5268,
+     "other": 0.5157,
+     "diff": 0.0111,
+     "k": 6,
+     "family": "SVO-like#1"
+    },
+    "urd": {
+     "same": 0.5423,
+     "other": 0.4584,
+     "diff": 0.0839,
+     "k": 5,
+     "family": "SOV-like#2"
+    },
+    "tur": {
+     "same": 0.5427,
+     "other": 0.4948,
+     "diff": 0.0479,
+     "k": 5,
+     "family": "SOV-like#2"
+    },
+    "ell": {
+     "same": 0.5864,
+     "other": 0.5632,
+     "diff": 0.0232,
+     "k": 8,
+     "family": "SVO-like#0"
+    },
+    "fin": {
+     "same": 0.5034,
+     "other": 0.5048,
+     "diff": -0.0014,
+     "k": 8,
+     "family": "SVO-like#0"
+    }
+   }
+  },
+  "FIRST_LEFT_2fam": {
+   "languages": 23,
+   "mean": -0.0001,
+   "lo": -0.0108,
+   "hi": 0.0099,
+   "sameBeatsOther": 14,
+   "otherBeatsSame": 9,
+   "signP": 0.2024,
+   "meanSame": 0.5693,
+   "meanOther": 0.5694,
+   "perLanguage": {
+    "eng": {
+     "same": 0.6236,
+     "other": 0.6196,
+     "diff": 0.004,
+     "k": 7,
+     "family": "SVO"
+    },
+    "spa": {
+     "same": 0.6495,
+     "other": 0.633,
+     "diff": 0.0165,
+     "k": 7,
+     "family": "SVO"
+    },
+    "rus": {
+     "same": 0.5123,
+     "other": 0.5257,
+     "diff": -0.0133,
+     "k": 7,
+     "family": "SVO"
+    },
+    "cmn": {
+     "same": 0.4761,
+     "other": 0.5008,
+     "diff": -0.0247,
+     "k": 7,
+     "family": "SVO"
+    },
+    "cmn-hans": {
+     "same": 0.4873,
+     "other": 0.5166,
+     "diff": -0.0294,
+     "k": 7,
+     "family": "SVO"
+    },
+    "heb": {
+     "same": 0.5535,
+     "other": 0.623,
+     "diff": -0.0696,
+     "k": 7,
+     "family": "SVO"
+    },
+    "fas": {
+     "same": 0.5963,
+     "other": 0.583,
+     "diff": 0.0133,
+     "k": 6,
+     "family": "SOV"
+    },
+    "kor": {
+     "same": 0.5309,
+     "other": 0.5518,
+     "diff": -0.0209,
+     "k": 6,
+     "family": "SOV"
+    },
+    "jpn": {
+     "same": 0.4847,
+     "other": 0.4938,
+     "diff": -0.0091,
+     "k": 6,
+     "family": "SOV"
+    },
+    "fra": {
+     "same": 0.6407,
+     "other": 0.602,
+     "diff": 0.0387,
+     "k": 7,
+     "family": "SVO"
+    },
+    "deu": {
+     "same": 0.637,
+     "other": 0.6367,
+     "diff": 0.0002,
+     "k": 7,
+     "family": "SVO"
+    },
+    "ita": {
+     "same": 0.606,
+     "other": 0.5844,
+     "diff": 0.0216,
+     "k": 7,
+     "family": "SVO"
+    },
+    "por": {
+     "same": 0.5758,
+     "other": 0.5557,
+     "diff": 0.0202,
+     "k": 7,
+     "family": "SVO"
+    },
+    "nld": {
+     "same": 0.6071,
+     "other": 0.6274,
+     "diff": -0.0204,
+     "k": 6,
+     "family": "SOV"
+    },
+    "pol": {
+     "same": 0.5514,
+     "other": 0.5485,
+     "diff": 0.0029,
+     "k": 7,
+     "family": "SVO"
+    },
+    "ukr": {
+     "same": 0.6027,
+     "other": 0.5693,
+     "diff": 0.0334,
+     "k": 7,
+     "family": "SVO"
+    },
+    "hin": {
+     "same": 0.6449,
+     "other": 0.6164,
+     "diff": 0.0286,
+     "k": 6,
+     "family": "SOV"
+    },
+    "vie": {
+     "same": 0.5278,
+     "other": 0.5573,
+     "diff": -0.0295,
+     "k": 7,
+     "family": "SVO"
+    },
+    "ind": {
+     "same": 0.5655,
+     "other": 0.594,
+     "diff": -0.0285,
+     "k": 7,
+     "family": "SVO"
+    },
+    "urd": {
+     "same": 0.6101,
+     "other": 0.5756,
+     "diff": 0.0345,
+     "k": 6,
+     "family": "SOV"
+    },
+    "tur": {
+     "same": 0.5302,
+     "other": 0.5291,
+     "diff": 0.0011,
+     "k": 6,
+     "family": "SOV"
+    },
+    "ell": {
+     "same": 0.4952,
+     "other": 0.4801,
+     "diff": 0.015,
+     "k": 7,
+     "family": "SVO"
+    },
+    "fin": {
+     "same": 0.5856,
+     "other": 0.5733,
+     "diff": 0.0123,
+     "k": 7,
+     "family": "SVO"
+    }
+   }
+  },
+  "FIRST_LEFT_3cl": {
+   "languages": 23,
+   "mean": -0.0023,
+   "lo": -0.0136,
+   "hi": 0.0081,
+   "sameBeatsOther": 12,
+   "otherBeatsSame": 11,
+   "signP": 0.5,
+   "meanSame": 0.57,
+   "meanOther": 0.5723,
+   "perLanguage": {
+    "eng": {
+     "same": 0.6075,
+     "other": 0.6187,
+     "diff": -0.0111,
+     "k": 6,
+     "family": "SVO-like#1"
+    },
+    "spa": {
+     "same": 0.6651,
+     "other": 0.6565,
+     "diff": 0.0086,
+     "k": 8,
+     "family": "SVO-like#0"
+    },
+    "rus": {
+     "same": 0.5207,
+     "other": 0.5112,
+     "diff": 0.0096,
+     "k": 8,
+     "family": "SVO-like#0"
+    },
+    "cmn": {
+     "same": 0.4884,
+     "other": 0.4887,
+     "diff": -0.0003,
+     "k": 6,
+     "family": "SVO-like#1"
+    },
+    "cmn-hans": {
+     "same": 0.5033,
+     "other": 0.4912,
+     "diff": 0.0121,
+     "k": 6,
+     "family": "SVO-like#1"
+    },
+    "heb": {
+     "same": 0.515,
+     "other": 0.6018,
+     "diff": -0.0868,
+     "k": 8,
+     "family": "SVO-like#0"
+    },
+    "fas": {
+     "same": 0.5926,
+     "other": 0.5854,
+     "diff": 0.0072,
+     "k": 6,
+     "family": "SOV-like#2"
+    },
+    "kor": {
+     "same": 0.5375,
+     "other": 0.5471,
+     "diff": -0.0096,
+     "k": 6,
+     "family": "SOV-like#2"
+    },
+    "jpn": {
+     "same": 0.494,
+     "other": 0.5058,
+     "diff": -0.0118,
+     "k": 6,
+     "family": "SOV-like#2"
+    },
+    "fra": {
+     "same": 0.597,
+     "other": 0.6399,
+     "diff": -0.0429,
+     "k": 6,
+     "family": "SVO-like#1"
+    },
+    "deu": {
+     "same": 0.6344,
+     "other": 0.6449,
+     "diff": -0.0105,
+     "k": 8,
+     "family": "SVO-like#0"
+    },
+    "ita": {
+     "same": 0.6402,
+     "other": 0.6053,
+     "diff": 0.0349,
+     "k": 8,
+     "family": "SVO-like#0"
+    },
+    "por": {
+     "same": 0.5547,
+     "other": 0.5838,
+     "diff": -0.0291,
+     "k": 6,
+     "family": "SVO-like#1"
+    },
+    "nld": {
+     "same": 0.5988,
+     "other": 0.6279,
+     "diff": -0.0291,
+     "k": 6,
+     "family": "SOV-like#2"
+    },
+    "pol": {
+     "same": 0.5692,
+     "other": 0.5405,
+     "diff": 0.0287,
+     "k": 8,
+     "family": "SVO-like#0"
+    },
+    "ukr": {
+     "same": 0.598,
+     "other": 0.5961,
+     "diff": 0.0019,
+     "k": 8,
+     "family": "SVO-like#0"
+    },
+    "hin": {
+     "same": 0.6425,
+     "other": 0.6203,
+     "diff": 0.0222,
+     "k": 6,
+     "family": "SOV-like#2"
+    },
+    "vie": {
+     "same": 0.5372,
+     "other": 0.5352,
+     "diff": 0.002,
+     "k": 6,
+     "family": "SVO-like#1"
+    },
+    "ind": {
+     "same": 0.5664,
+     "other": 0.5795,
+     "diff": -0.013,
+     "k": 6,
+     "family": "SVO-like#1"
+    },
+    "urd": {
+     "same": 0.6005,
+     "other": 0.5707,
+     "diff": 0.0298,
+     "k": 6,
+     "family": "SOV-like#2"
+    },
+    "tur": {
+     "same": 0.5292,
+     "other": 0.5344,
+     "diff": -0.0052,
+     "k": 6,
+     "family": "SOV-like#2"
+    },
+    "ell": {
+     "same": 0.5287,
+     "other": 0.501,
+     "diff": 0.0277,
+     "k": 8,
+     "family": "SVO-like#0"
+    },
+    "fin": {
+     "same": 0.5899,
+     "other": 0.5771,
+     "diff": 0.0128,
+     "k": 8,
+     "family": "SVO-like#0"
+    }
+   }
+  },
+  "LATER_POSITION_2fam_control": {
+   "languages": 22,
+   "mean": -0.0003,
+   "lo": -0.0035,
+   "hi": 0.0028,
+   "sameBeatsOther": 9,
+   "otherBeatsSame": 13,
+   "signP": 0.8569,
+   "meanSame": 0.5023,
+   "meanOther": 0.5026,
+   "perLanguage": {
+    "eng": {
+     "same": 0.5021,
+     "other": 0.5094,
+     "diff": -0.0073,
+     "k": 6,
+     "family": "SVO"
+    },
+    "spa": {
+     "same": 0.5032,
+     "other": 0.5056,
+     "diff": -0.0024,
+     "k": 6,
+     "family": "SVO"
+    },
+    "rus": {
+     "same": 0.5018,
+     "other": 0.5049,
+     "diff": -0.0031,
+     "k": 6,
+     "family": "SVO"
+    },
+    "cmn": {
+     "same": 0.5012,
+     "other": 0.4969,
+     "diff": 0.0043,
+     "k": 6,
+     "family": "SVO"
+    },
+    "cmn-hans": {
+     "same": 0.4998,
+     "other": 0.5009,
+     "diff": -0.0011,
+     "k": 6,
+     "family": "SVO"
+    },
+    "heb": {
+     "same": 0.5037,
+     "other": 0.4993,
+     "diff": 0.0044,
+     "k": 6,
+     "family": "SVO"
+    },
+    "fas": {
+     "same": 0.498,
+     "other": 0.4995,
+     "diff": -0.0015,
+     "k": 5,
+     "family": "SOV"
+    },
+    "jpn": {
+     "same": 0.5303,
+     "other": 0.5119,
+     "diff": 0.0184,
+     "k": 5,
+     "family": "SOV"
+    },
+    "fra": {
+     "same": 0.5017,
+     "other": 0.5025,
+     "diff": -0.0008,
+     "k": 6,
+     "family": "SVO"
+    },
+    "deu": {
+     "same": 0.503,
+     "other": 0.5222,
+     "diff": -0.0192,
+     "k": 6,
+     "family": "SVO"
+    },
+    "ita": {
+     "same": 0.5063,
+     "other": 0.5105,
+     "diff": -0.0042,
+     "k": 6,
+     "family": "SVO"
+    },
+    "por": {
+     "same": 0.5008,
+     "other": 0.5006,
+     "diff": 0.0002,
+     "k": 6,
+     "family": "SVO"
+    },
+    "nld": {
+     "same": 0.4979,
+     "other": 0.5008,
+     "diff": -0.0029,
+     "k": 5,
+     "family": "SOV"
+    },
+    "pol": {
+     "same": 0.4993,
+     "other": 0.5054,
+     "diff": -0.0061,
+     "k": 6,
+     "family": "SVO"
+    },
+    "ukr": {
+     "same": 0.4926,
+     "other": 0.4785,
+     "diff": 0.0141,
+     "k": 6,
+     "family": "SVO"
+    },
+    "hin": {
+     "same": 0.4949,
+     "other": 0.5039,
+     "diff": -0.009,
+     "k": 5,
+     "family": "SOV"
+    },
+    "vie": {
+     "same": 0.5007,
+     "other": 0.5024,
+     "diff": -0.0017,
+     "k": 6,
+     "family": "SVO"
+    },
+    "ind": {
+     "same": 0.5018,
+     "other": 0.4971,
+     "diff": 0.0047,
+     "k": 6,
+     "family": "SVO"
+    },
+    "urd": {
+     "same": 0.5117,
+     "other": 0.5082,
+     "diff": 0.0035,
+     "k": 5,
+     "family": "SOV"
+    },
+    "tur": {
+     "same": 0.505,
+     "other": 0.4973,
+     "diff": 0.0078,
+     "k": 5,
+     "family": "SOV"
+    },
+    "ell": {
+     "same": 0.4993,
+     "other": 0.5038,
+     "diff": -0.0045,
+     "k": 6,
+     "family": "SVO"
+    },
+    "fin": {
+     "same": 0.4958,
+     "other": 0.4952,
+     "diff": 0.0005,
+     "k": 6,
+     "family": "SVO"
+    }
+   }
+  }
+ },
+ "C3": {
+  "days": [
+   "kubuntu/2005-07-15.txt",
+   "kubuntu/2005-11-15.txt",
+   "kubuntu/2007-07-15.txt",
+   "kubuntu/2008-07-15.txt",
+   "ubuntu/2004-11-15.txt",
+   "ubuntu/2005-03-15.txt",
+   "ubuntu/2012-07-15.txt",
+   "ubuntu/2015-03-15.txt"
+  ],
+  "ircPairs": {
+   "LATER": 1200,
+   "FIRST": 726
+  },
+  "ircPositionControl": {
+   "LATER": 0.5279,
+   "FIRST": 0.5455
+  },
+  "LATER": {
+   "arm": "BOTH",
+   "udPooledToIrc": 0.4573,
+   "udEngToIrc": 0.4674,
+   "udSvoToIrc": 0.4542,
+   "udSovToIrc": 0.5293,
+   "udPooledToIrcPositionArm": 0.4739,
+   "ircLeaveOneDayOut": 0.6067,
+   "ircToUdEng": 0.5048
+  },
+  "FIRST": {
+   "arm": "LEFT",
+   "udPooledToIrc": 0.5153,
+   "udEngToIrc": 0.5126,
+   "udSvoToIrc": 0.5086,
+   "udSovToIrc": 0.5273,
+   "udPooledToIrcPositionArm": 0.4747,
+   "ircLeaveOneDayOut": 0.5259,
+   "ircToUdEng": 0.5461
+  }
+ },
+ "C4": {
+  "eng": {
+   "pairs": 600,
+   "real": {
+    "BOTH": 0.6005,
+    "LEFT": 0.566,
+    "POSITION": 0.3717
+   },
+   "shuffled": {
+    "BOTH": 0.5149,
+    "LEFT": 0.4673,
+    "POSITION": 0.3584
+   }
+  },
+  "spa": {
+   "pairs": 600,
+   "real": {
+    "BOTH": 0.684,
+    "LEFT": 0.6381,
+    "POSITION": 0.434
+   },
+   "shuffled": {
+    "BOTH": 0.4226,
+    "LEFT": 0.4178,
+    "POSITION": 0.4119
+   }
+  },
+  "rus": {
+   "pairs": 110,
+   "real": {
+    "BOTH": 0.5529,
+    "LEFT": 0.5621,
+    "POSITION": 0.3429
+   },
+   "shuffled": {
+    "BOTH": 0.4534,
+    "LEFT": 0.5005,
+    "POSITION": 0.3373
+   }
+  },
+  "fas": {
+   "pairs": 520,
+   "real": {
+    "BOTH": 0.6795,
+    "LEFT": 0.6218,
+    "POSITION": 0.3805
+   },
+   "shuffled": {
+    "BOTH": 0.5291,
+    "LEFT": 0.4996,
+    "POSITION": 0.3858
+   }
+  },
+  "jpn": {
+   "pairs": 88,
+   "real": {
+    "BOTH": 0.6429,
+    "LEFT": 0.4785,
+    "POSITION": 0.2915
+   },
+   "shuffled": {
+    "BOTH": 0.6152,
+    "LEFT": 0.6118,
+    "POSITION": 0.3693
+   }
+  },
+  "tur": {
+   "pairs": 147,
+   "real": {
+    "BOTH": 0.4715,
+    "LEFT": 0.4775,
+    "POSITION": 0.3837
+   },
+   "shuffled": {
+    "BOTH": 0.3946,
+    "LEFT": 0.426,
+    "POSITION": 0.418
+   }
+  },
+  "hin": {
+   "pairs": 600,
+   "real": {
+    "BOTH": 0.6579,
+    "LEFT": 0.6089,
+    "POSITION": 0.4428
+   },
+   "shuffled": {
+    "BOTH": 0.5008,
+    "LEFT": 0.5266,
+    "POSITION": 0.4251
+   }
+  },
+  "fin": {
+   "pairs": 395,
+   "real": {
+    "BOTH": 0.5268,
+    "LEFT": 0.5065,
+    "POSITION": 0.3844
+   },
+   "shuffled": {
+    "BOTH": 0.518,
+    "LEFT": 0.5017,
+    "POSITION": 0.4339
+   }
+  }
+ },
+ "seconds": 222.5,
+ "headerSha256": "c3234d9b030573ca82c85049929c35cb65d1eafd4c16dd4344de018cb03652e1"
+}

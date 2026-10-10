@@ -1,0 +1,321 @@
+{
+ "E1": {
+  "shuf": {
+   "ud": {
+    "n": 35,
+    "medAbsDev_DLx": 0.0304,
+    "medAbsDev_DRx": 0.0256,
+    "medAUC_DLx": 0.5217,
+    "medAUC_Ax": 0.4933,
+    "within003": 9
+   },
+   "irc": {
+    "n": 4,
+    "medAbsDev_DLx": 0.0234,
+    "medAbsDev_DRx": 0.0504,
+    "medAUC_DLx": 0.4532,
+    "medAUC_Ax": 0.4332,
+    "within003": 1
+   },
+   "book": {
+    "n": 3,
+    "medAbsDev_DLx": 0.0143,
+    "medAbsDev_DRx": 0.0125,
+    "medAUC_DLx": 0.5143,
+    "medAUC_Ax": 0.4758,
+    "within003": 1
+   },
+   "code": {
+    "n": 3,
+    "medAbsDev_DLx": 0.0117,
+    "medAbsDev_DRx": 0.0106,
+    "medAUC_DLx": 0.4915,
+    "medAUC_Ax": 0.5168,
+    "within003": 1
+   }
+  },
+  "sham": {
+   "ud": {
+    "n": 49,
+    "medAbsDev_DLx": 0.0219,
+    "medAbsDev_DRx": 0.0217,
+    "medAUC_DLx": 0.49,
+    "medAUC_Ax": 0.4978,
+    "within003": 18
+   },
+   "irc": {
+    "n": 4,
+    "medAbsDev_DLx": 0.0117,
+    "medAbsDev_DRx": 0.0142,
+    "medAUC_DLx": 0.4867,
+    "medAUC_Ax": 0.5225,
+    "within003": 2
+   },
+   "book": {
+    "n": 3,
+    "medAbsDev_DLx": 0.0067,
+    "medAbsDev_DRx": 0.04,
+    "medAUC_DLx": 0.4933,
+    "medAUC_Ax": 0.47,
+    "within003": 0
+   },
+   "code": {
+    "n": 3,
+    "medAbsDev_DLx": 0.0093,
+    "medAbsDev_DRx": 0.0161,
+    "medAUC_DLx": 0.4907,
+    "medAUC_Ax": 0.4953,
+    "within003": 2
+   }
+  }
+ },
+ "E2": {
+  "ud|FULL": {
+   "rawSign": "NEG",
+   "sameSignOnExcess": 12,
+   "of": 35,
+   "medAbsDevExcess": 0.0574,
+   "company": false
+  },
+  "irc|FULL": {
+   "rawSign": "NEG",
+   "sameSignOnExcess": 0,
+   "of": 4,
+   "medAbsDevExcess": 0.115,
+   "company": false
+  },
+  "book|FULL": {
+   "rawSign": "NEG",
+   "sameSignOnExcess": 3,
+   "of": 3,
+   "medAbsDevExcess": 0.1895,
+   "company": true
+  },
+  "code|FULL": {
+   "rawSign": "POS",
+   "sameSignOnExcess": 3,
+   "of": 3,
+   "medAbsDevExcess": 0.1357,
+   "company": true
+  },
+  "ud|CAUSAL4": {
+   "rawSign": "NEG",
+   "sameSignOnExcess": 2,
+   "of": 19,
+   "medAbsDevExcess": 0.0433,
+   "company": false
+  },
+  "irc|CAUSAL4": {
+   "rawSign": "NEG",
+   "sameSignOnExcess": 0,
+   "of": 3,
+   "medAbsDevExcess": 0.0714,
+   "company": false
+  },
+  "book|CAUSAL4": {
+   "rawSign": "NEG",
+   "sameSignOnExcess": 3,
+   "of": 3,
+   "medAbsDevExcess": 0.1712,
+   "company": true
+  },
+  "code|CAUSAL4": {
+   "rawSign": "POS",
+   "sameSignOnExcess": 3,
+   "of": 3,
+   "medAbsDevExcess": 0.1663,
+   "company": true
+  }
+ },
+ "E5": {
+  "ud": {
+   "DLf": {
+    "fullMed": 0.4261,
+    "causalMed": 0.4444,
+    "fullPOS": 0,
+    "fullNEG": 20,
+    "valid": 35,
+    "shufPass": false
+   },
+   "DLx": {
+    "fullMed": 0.4597,
+    "causalMed": 0.4651,
+    "fullPOS": 1,
+    "fullNEG": 12,
+    "valid": 35,
+    "shufPass": false
+   },
+   "Af": {
+    "fullMed": 0.5539,
+    "causalMed": 0.5347,
+    "fullPOS": 12,
+    "fullNEG": 1,
+    "valid": 35,
+    "shufPass": false
+   },
+   "Ax": {
+    "fullMed": 0.5309,
+    "causalMed": 0.5263,
+    "fullPOS": 11,
+    "fullNEG": 3,
+    "valid": 35,
+    "shufPass": false
+   }
+  },
+  "irc": {
+   "DLf": {
+    "fullMed": 0.1225,
+    "causalMed": 0.1833,
+    "fullPOS": 0,
+    "fullNEG": 4,
+    "valid": 4,
+    "shufPass": false
+   },
+   "DLx": {
+    "fullMed": 0.615,
+    "causalMed": 0.5714,
+    "fullPOS": 4,
+    "fullNEG": 0,
+    "valid": 4,
+    "shufPass": false
+   },
+   "Af": {
+    "fullMed": 0.8873,
+    "causalMed": 0.8844,
+    "fullPOS": 4,
+    "fullNEG": 0,
+    "valid": 4,
+    "shufPass": false
+   },
+   "Ax": {
+    "fullMed": 0.5125,
+    "causalMed": 0.4898,
+    "fullPOS": 0,
+    "fullNEG": 0,
+    "valid": 4,
+    "shufPass": false
+   }
+  },
+  "book": {
+   "DLf": {
+    "fullMed": 0.2489,
+    "causalMed": 0.3037,
+    "fullPOS": 0,
+    "fullNEG": 3,
+    "valid": 3,
+    "shufPass": true
+   },
+   "DLx": {
+    "fullMed": 0.3105,
+    "causalMed": 0.3288,
+    "fullPOS": 0,
+    "fullNEG": 3,
+    "valid": 3,
+    "shufPass": true
+   },
+   "Af": {
+    "fullMed": 0.7158,
+    "causalMed": 0.6458,
+    "fullPOS": 2,
+    "fullNEG": 0,
+    "valid": 3,
+    "shufPass": true
+   },
+   "Ax": {
+    "fullMed": 0.6883,
+    "causalMed": 0.6484,
+    "fullPOS": 3,
+    "fullNEG": 0,
+    "valid": 3,
+    "shufPass": true
+   }
+  },
+  "code": {
+   "DLf": {
+    "fullMed": 0.6267,
+    "causalMed": 0.6461,
+    "fullPOS": 3,
+    "fullNEG": 0,
+    "valid": 3,
+    "shufPass": true
+   },
+   "DLx": {
+    "fullMed": 0.6357,
+    "causalMed": 0.6663,
+    "fullPOS": 3,
+    "fullNEG": 0,
+    "valid": 3,
+    "shufPass": true
+   },
+   "Af": {
+    "fullMed": 0.4054,
+    "causalMed": 0.4577,
+    "fullPOS": 0,
+    "fullNEG": 3,
+    "valid": 3,
+    "shufPass": true
+   },
+   "Ax": {
+    "fullMed": 0.4192,
+    "causalMed": 0.4144,
+    "fullPOS": 0,
+    "fullNEG": 3,
+    "valid": 3,
+    "shufPass": true
+   }
+  }
+ },
+ "D5": {
+  "all": {
+   "points": 45,
+   "byFamily": {
+    "ud": 35,
+    "irc": 4,
+    "book": 3,
+    "code": 3
+   },
+   "maxAbsRho": 0.5752,
+   "argmax": [
+    "rareL_edge",
+    "DLx",
+    0.5752
+   ],
+   "nullQ95": 0.4455,
+   "perm_p": 0.0005
+  },
+  "nl": {
+   "points": 42,
+   "byFamily": {
+    "ud": 35,
+    "irc": 4,
+    "book": 3,
+    "code": 0
+   },
+   "maxAbsRho": 0.4931,
+   "argmax": [
+    "initRareEnrich",
+    "Ax",
+    -0.4931
+   ],
+   "nullQ95": 0.4642,
+   "perm_p": 0.025
+  },
+  "ud": {
+   "points": 35,
+   "byFamily": {
+    "ud": 35,
+    "irc": 0,
+    "book": 0,
+    "code": 0
+   },
+   "maxAbsRho": 0.5148,
+   "argmax": [
+    "finalRareEnrich",
+    "Ax",
+    0.5148
+   ],
+   "nullQ95": 0.5036,
+   "perm_p": 0.0425
+  }
+ }
+}

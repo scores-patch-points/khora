@@ -1,0 +1,34 @@
+  fas rec 100/688 57316ms
+  fas rec 200/688 112478ms
+  fas rec 300/688 174411ms
+  fas rec 400/688 988231ms
+  fas rec 500/688 1041266ms
+  fas rec 600/688 1090326ms
+fas rec: 688 records, 240 pairs, eligible 10965 1142277ms
+  eng rec 100/725 48658ms
+  eng rec 200/725 93386ms
+  eng rec 300/725 239335ms
+  eng rec 400/725 379859ms
+  eng rec 500/725 488611ms
+  eng rec 600/725 548522ms
+  eng rec 700/725 605309ms
+eng rec: 725 records, 240 pairs, eligible 12928 626545ms
+node:fs:440
+    return binding.readFileUtf8(path, stringToFlags(options.flag));
+                   ^
+
+Error: ENOENT: no such file or directory, open '/Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-kinds-ud/induced/spa.json'
+    at Object.readFileSync (node:fs:440:20)
+    at load (file:///Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-kinds-ud/sig.mjs:27:29)
+    at runRec (file:///Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-kinds-ud/sig.mjs:38:13)
+    at file:///Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-kinds-ud/sig.mjs:146:31
+    at ModuleJob.run (node:internal/modules/esm/module_job:377:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:691:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-kinds-ud/induced/spa.json'
+}
+
+Node.js v24.10.0

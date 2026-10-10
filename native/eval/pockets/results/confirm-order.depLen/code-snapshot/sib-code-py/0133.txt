@@ -1,0 +1,57 @@
+"""Build a bounded, signal-maximizing screen slice from a full extracted text.
+
+eoreader7's in-order reader is O(n^2) in encounters; a 147 KB contract reads
+in minutes while an 18 KB slice reads in seconds. The classifier needs the
+reader's SURFACES, and the surveillance signal lives in (a) the front of the
+document (the resolution text and any certification) and (b) the clauses that
+name the technology. So the screen slice is: the first ~12 KB, plus a window
+around the first occurrence of each core lexicon term anywhere in the text
+("Public Safety Video Surveillance Solutions" can sit at page 40).
+
+Extraction still reads EVERY page (full OCR) — this only bounds what eoreader7
+is asked to read. Snowden's full in-order read is reserved for flagged
+candidates.
+"""
+
+from __future__ import annotations
+
+import re
+
+FRONT_CHARS = 12_000
+WINDOW_BEFORE = 350
+WINDOW_AFTER = 500
+MAX_WINDOWS = 14
+
+CORE = [
+    "surveillance", "camera", "drone", "unmanned", "video", "license plate",
+    "lpr", "plate reader", "fusus", "motorola", "biometric", "facial",
+    "monitor", "record", "sensor", "thermal", "track", "stingray", "imsi",
+    "cell site", "rfid", "radar", "body camera", "cctv", "shotspotter",
+]
+
+
+def screen_slice(text: str) -> str:
+    """Front + first-occurrence windows over the core lexicon."""
+    front = text[:FRONT_CHARS]
+    parts = [front]
+    seen: set[str] = set()
+    pattern = re.compile(r"\b(" + "|".join(CORE) + r")\w*", re.IGNORECASE)
+    for m in pattern.finditer(text):
+        w = m.group(1).lower()
+        if w in seen:
+            continue
+        seen.add(w)
+        a = max(0, m.start() - WINDOW_BEFORE)
+        b = min(len(text), m.end() + WINDOW_AFTER)
+        parts.append(text[a:b])
+        if len(seen) >= MAX_WINDOWS:
+            break
+    joined = "\n\n".join(parts)
+    joined = re.sub(r"[ \t]+", " ", joined)
+    joined = re.sub(r"\n{3,}", "\n\n", joined)
+    return joined
+
+
+def slice_stats(text: str) -> dict:
+    s = screen_slice(text)
+    return {"full_chars": len(text), "slice_chars": len(s), "ratio": round(len(s) / max(1, len(text)), 3)}

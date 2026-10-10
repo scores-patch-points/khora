@@ -1,0 +1,288 @@
+[
+ {
+  "id": "ec-en-yonge",
+  "group": "sib",
+  "register": "novel",
+  "language": "en",
+  "tokens": 104137,
+  "units": 5271,
+  "docs": 53,
+  "thin": false,
+  "vocab": 9208,
+  "meanUnitLength": 19.76,
+  "halfTokens": {
+   "discover": 47537,
+   "confirm": 56600
+  },
+  "halfDocs": {
+   "discover": 25,
+   "confirm": 28
+  },
+  "contentSha256": "a60a5c84dc71d336fb01f2f2a1587b80b3da91a6b443142d4f1e96b76e3ac240",
+  "source": "/Users/mlacy/Documents/New Project/eochat-content-cv-demo/vendor/eoPriors/global_south_corpus/gutenberg/pg5700.txt"
+ },
+ {
+  "id": "ec-en-mouret",
+  "group": "sib",
+  "register": "novel",
+  "language": "en",
+  "tokens": 126434,
+  "units": 7974,
+  "docs": 80,
+  "thin": false,
+  "vocab": 9722,
+  "meanUnitLength": 15.86,
+  "halfTokens": {
+   "discover": 70982,
+   "confirm": 55452
+  },
+  "halfDocs": {
+   "discover": 43,
+   "confirm": 37
+  },
+  "contentSha256": "72b33276994ab88d3125bc80435baccb7d6212509f5bded112fc3c9aefcd7368",
+  "source": "/Users/mlacy/Documents/3.0/ethos/11-multi-language/gutenberg-non-en/es/pg14200_La_Divina_Comedia__Dante_.txt"
+ },
+ {
+  "id": "ec-en-awakening",
+  "group": "sib",
+  "register": "novel",
+  "language": "en",
+  "tokens": 64499,
+  "units": 4448,
+  "docs": 44,
+  "thin": false,
+  "vocab": 6869,
+  "meanUnitLength": 14.5,
+  "halfTokens": {
+   "discover": 29443,
+   "confirm": 35056
+  },
+  "halfDocs": {
+   "discover": 21,
+   "confirm": 23
+  },
+  "contentSha256": "58ffb6e78f7500568ca56118b4db34bac10eb523e55d7dda3b29cf3a6b62b923",
+  "source": "/Users/mlacy/Documents/3.0/ethos/11-multi-language/gutenberg-non-en/en/pg160_Crime_and_Punishment__Dostoyevsky_.txt"
+ },
+ {
+  "id": "ec-en-swisshelm",
+  "group": "sib",
+  "register": "memoir",
+  "language": "en",
+  "tokens": 99108,
+  "units": 4515,
+  "docs": 45,
+  "thin": false,
+  "vocab": 9039,
+  "meanUnitLength": 21.95,
+  "halfTokens": {
+   "discover": 49734,
+   "confirm": 49374
+  },
+  "halfDocs": {
+   "discover": 22,
+   "confirm": 23
+  },
+  "contentSha256": "6f2bd4bfe460d7717121b7bab0231743197d5d00127f500aafcb089989441c04",
+  "source": "/Users/mlacy/Documents/New Project/eochat-content-cv-demo/vendor/eoPriors/global_south_corpus/gutenberg/pg12052.txt"
+ },
+ {
+  "id": "ec-en-children",
+  "group": "sib",
+  "register": "children",
+  "language": "en",
+  "tokens": 45786,
+  "units": 3656,
+  "docs": 37,
+  "thin": false,
+  "vocab": 3756,
+  "meanUnitLength": 12.52,
+  "halfTokens": {
+   "discover": 15912,
+   "confirm": 29874
+  },
+  "halfDocs": {
+   "discover": 13,
+   "confirm": 24
+  },
+  "contentSha256": "fc8acf1f66a1e5935b5334731f9d246fce2c22a556682214003fa00413922dea",
+  "source": "/Users/mlacy/Documents/3.0/ethos/11-multi-language/gutenberg-non-en/de/pg67098_Die_Verwandlung__Kafka_.txt + /Users/mlacy/Documents/3.0/ethos/11-multi-language/gutenberg-non-en/fi/pg49010_Runeberg_runoelmat__Finnish_.txt"
+ },
+ {
+  "id": "ec-en-shakespeare",
+  "group": "sib",
+  "register": "drama",
+  "language": "en",
+  "tokens": 299964,
+  "units": 23608,
+  "docs": 236,
+  "thin": false,
+  "vocab": 16924,
+  "meanUnitLength": 12.71,
+  "halfTokens": {
+   "discover": 128134,
+   "confirm": 171830
+  },
+  "halfDocs": {
+   "discover": 101,
+   "confirm": 135
+  },
+  "contentSha256": "af77eaf7660b5d6189075e5de4ce27516769e1b41735b66bec2c2475038efeaa",
+  "source": "/Users/mlacy/Documents/3.0/eochat/vendor/live_priors/01-literature-books/gutenberg/pg100_Complete_Works_of_Shakespeare.txt"
+ },
+ {
+  "id": "ec-en-dolls-lysistrata",
+  "group": "sib",
+  "register": "drama",
+  "language": "en",
+  "tokens": 33985,
+  "units": 3568,
+  "docs": 36,
+  "thin": false,
+  "vocab": 4229,
+  "meanUnitLength": 9.52,
+  "halfTokens": {
+   "discover": 14931,
+   "confirm": 19054
+  },
+  "halfDocs": {
+   "discover": 16,
+   "confirm": 20
+  },
+  "contentSha256": "5388b59c4243f98f9d468c1a80e770388b7d594d1e40c513c8bc8065b107ef38",
+  "source": "/Users/mlacy/Documents/3.0/ethos/11-multi-language/gutenberg-non-en/en/pg2542_War_and_Peace.txt + /Users/mlacy/Documents/3.0/ethos/11-multi-language/gutenberg-non-en/fr/pg7700_De_la_d_mocratie_en_Am_rique__Tocqueville_.txt"
+ },
+ {
+  "id": "ec-ud-lat-perseus",
+  "group": "sib",
+  "register": "treebank",
+  "language": "lat",
+  "tokens": 21484,
+  "units": 1987,
+  "docs": 81,
+  "thin": false,
+  "vocab": 9048,
+  "meanUnitLength": 10.81,
+  "halfTokens": {
+   "discover": 10977,
+   "confirm": 10507
+  },
+  "halfDocs": {
+   "discover": 42,
+   "confirm": 39
+  },
+  "contentSha256": "5bf497e5ee0403164731b4ab92157489ecdab4eb6316b72d099d94941ba1474f",
+  "source": "/Users/mlacy/Documents/3.0/eoreader7-latest/native/eval/fixtures/ud-latin-perseus/la_perseus-ud-train.conllu + /Users/mlacy/Documents/3.0/eoreader7-latest/native/eval/fixtures/ud-latin-perseus/la_perseus-ud-test.conllu"
+ },
+ {
+  "id": "ec-cd-js",
+  "group": "sib",
+  "register": "code",
+  "language": "x-javascript",
+  "tokens": 291206,
+  "units": 35291,
+  "docs": 194,
+  "thin": false,
+  "vocab": 13824,
+  "meanUnitLength": 8.25,
+  "halfTokens": {
+   "discover": 166552,
+   "confirm": 124654
+  },
+  "halfDocs": {
+   "discover": 94,
+   "confirm": 100
+  },
+  "contentSha256": "5bc0635bcb67ad783533b2eaf28d443024291397f0e89ec2ccbdca95d35ac079",
+  "source": "/Users/mlacy/Documents/3.0/{heimdall,eopm,holodeck,eochat,eo-teachings,ab,NPJ,eoreader6.1-RETIRED,fold,eo-evidence,eo-historian,eoreaderhandbook} .js,.mjs,.cjs"
+ },
+ {
+  "id": "ec-cd-ts",
+  "group": "sib",
+  "register": "code",
+  "language": "x-typescript",
+  "tokens": 291497,
+  "units": 59295,
+  "docs": 359,
+  "thin": false,
+  "vocab": 24957,
+  "meanUnitLength": 4.92,
+  "halfTokens": {
+   "discover": 126194,
+   "confirm": 165303
+  },
+  "halfDocs": {
+   "discover": 177,
+   "confirm": 182
+  },
+  "contentSha256": "a4272eb9b1361a3dd40eb8bbd088c8f89161f0fa5a5b9b29e6ab85a0e428a3b4",
+  "source": "/Users/mlacy/Documents/3.0/{opencode-fold} .ts,.tsx"
+ },
+ {
+  "id": "ec-cd-py",
+  "group": "sib",
+  "register": "code",
+  "language": "x-python",
+  "tokens": 147899,
+  "units": 25528,
+  "docs": 192,
+  "thin": false,
+  "vocab": 11162,
+  "meanUnitLength": 5.79,
+  "halfTokens": {
+   "discover": 70573,
+   "confirm": 77326
+  },
+  "halfDocs": {
+   "discover": 92,
+   "confirm": 100
+  },
+  "contentSha256": "54f6cfd5f8ad84966a76698621b754fe6d89282d4c6036d5ddbf60a24394a830",
+  "source": "/Users/mlacy/Documents/3.0/{er7-redteam,nashville-legistar-archive,the-fold,khora-fold,eoreader7-latest,eo-evidence,live_priors-latest,test run} .py"
+ },
+ {
+  "id": "ec-ctl-yonge",
+  "group": "sib",
+  "register": "control",
+  "language": "en",
+  "tokens": 104137,
+  "units": 5271,
+  "docs": 53,
+  "thin": false,
+  "vocab": 9208,
+  "meanUnitLength": 19.76,
+  "halfTokens": {
+   "discover": 49667,
+   "confirm": 54470
+  },
+  "halfDocs": {
+   "discover": 26,
+   "confirm": 27
+  },
+  "contentSha256": "791c1dc8ba3d04b36842c52e99c1160d5f9263603f8a83a4f00fc4bb3c627dc3",
+  "source": "shuffled-real control of ec-en-yonge"
+ },
+ {
+  "id": "ec-ctl-js",
+  "group": "sib",
+  "register": "control",
+  "language": "x-javascript",
+  "tokens": 291206,
+  "units": 35291,
+  "docs": 194,
+  "thin": false,
+  "vocab": 13824,
+  "meanUnitLength": 8.25,
+  "halfTokens": {
+   "discover": 124956,
+   "confirm": 166250
+  },
+  "halfDocs": {
+   "discover": 96,
+   "confirm": 98
+  },
+  "contentSha256": "a14a979d96c056ea3c259b9eff4a46819b35aa63ec0eba08c3b921485e825e02",
+  "source": "shuffled-real control of ec-cd-js"
+ }
+]

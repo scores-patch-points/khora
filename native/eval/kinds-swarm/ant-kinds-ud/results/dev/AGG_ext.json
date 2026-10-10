@@ -1,0 +1,707 @@
+{
+ "src": "dev",
+ "stems": [
+  "kor",
+  "fra",
+  "ita",
+  "nld",
+  "por",
+  "deu",
+  "urd",
+  "pol",
+  "heb"
+ ],
+ "verdict": {
+  "K1": "SUPPORTED",
+  "K2": "NOT FALSIFIED by the registered rule, but weak: T2a 6/9, T2b shadow 5/9",
+  "K3": "FALSIFIED (supported in < 40% of languages)",
+  "K4": "NOT SUPPORTED"
+ },
+ "headerSha256": "85a7227147bbdb3820b9b869af708d3860e63641e1d58cc981c55e993c1d353b",
+ "languages": {
+  "kor": {
+   "tokens": 10375,
+   "nForms": 196,
+   "Kstar": 2,
+   "margin": 0.5854,
+   "leaves": 4,
+   "curve": "2:0.5854 3:0.3693 4:0.3738 6:0.3161 8:0.3428 12:0.3282",
+   "chronoMargin": 0.6567,
+   "chronoPass": true,
+   "tercilesPassed": 2,
+   "nmiBands": 0.0027,
+   "nmiUpos": 0.1016,
+   "nmiUposShuffled": 0.0345,
+   "nmiLeavesUpos": 0.1659,
+   "k1pass": true,
+   "ctrlShareK1": 0.9,
+   "ctrlEmpiricalP": 0.091,
+   "obsMargin": 0.5854,
+   "nominalKinds": 0,
+   "propnKinds": 0,
+   "maxPropnShare": 0,
+   "maxNominalShare": 0.288,
+   "propnForms5": null
+  },
+  "fra": {
+   "tokens": 31919,
+   "nForms": 688,
+   "Kstar": 2,
+   "margin": 0.338,
+   "leaves": 4,
+   "curve": "2:0.338 3:0.1625 4:0.2256 6:0.2337 8:0.2175 12:0.2005 16:0.1291 24:0.0975",
+   "chronoMargin": 0.3635,
+   "chronoPass": true,
+   "tercilesPassed": 2,
+   "nmiBands": 0.0075,
+   "nmiUpos": 0.2159,
+   "nmiUposShuffled": 0.0985,
+   "nmiLeavesUpos": 0.3596,
+   "k1pass": true,
+   "ctrlShareK1": 0.9,
+   "ctrlEmpiricalP": 0.091,
+   "obsMargin": 0.338,
+   "nominalKinds": 2,
+   "propnKinds": 0,
+   "maxPropnShare": 0.047,
+   "maxNominalShare": 0.729,
+   "propnForms5": null
+  },
+  "ita": {
+   "tokens": 10494,
+   "nForms": 205,
+   "Kstar": 2,
+   "margin": 0.3275,
+   "leaves": 4,
+   "curve": "2:0.3275 3:0.106 4:0.1005 6:0.1112 8:-0.0216 12:0.0138",
+   "chronoMargin": 0.0881,
+   "chronoPass": true,
+   "tercilesPassed": 3,
+   "nmiBands": 0.0178,
+   "nmiUpos": 0.1277,
+   "nmiUposShuffled": 0.0777,
+   "nmiLeavesUpos": 0.4327,
+   "k1pass": true,
+   "ctrlShareK1": 1,
+   "ctrlEmpiricalP": 0.091,
+   "obsMargin": 0.3275,
+   "nominalKinds": 2,
+   "propnKinds": 0,
+   "maxPropnShare": 0.027,
+   "maxNominalShare": 0.806,
+   "propnForms5": null
+  },
+  "nld": {
+   "tokens": 10159,
+   "nForms": 269,
+   "Kstar": 3,
+   "margin": 0.1421,
+   "leaves": 5,
+   "curve": "2:0.0938 3:0.1421 4:0.1021 6:0.0821 8:0.0439 12:0.0148 16:0.0445",
+   "chronoMargin": 0.102,
+   "chronoPass": true,
+   "tercilesPassed": 2,
+   "nmiBands": 0.0349,
+   "nmiUpos": 0.3445,
+   "nmiUposShuffled": 0.0845,
+   "nmiLeavesUpos": 0.4029,
+   "k1pass": true,
+   "ctrlShareK1": 0.9,
+   "ctrlEmpiricalP": 0.091,
+   "obsMargin": 0.1421,
+   "nominalKinds": 1,
+   "propnKinds": 0,
+   "maxPropnShare": 0.125,
+   "maxNominalShare": 0.532,
+   "propnForms5": null
+  },
+  "por": {
+   "tokens": 27959,
+   "nForms": 699,
+   "Kstar": 3,
+   "margin": 0.4998,
+   "leaves": 6,
+   "curve": "2:0.374 3:0.4998 4:0.387 6:0.3129 8:0.2521 12:0.1945 16:0.1146 24:0.0235",
+   "chronoMargin": 0.5471,
+   "chronoPass": true,
+   "tercilesPassed": 3,
+   "nmiBands": 0.0154,
+   "nmiUpos": 0.215,
+   "nmiUposShuffled": 0.1092,
+   "nmiLeavesUpos": 0.3371,
+   "k1pass": true,
+   "ctrlShareK1": 1,
+   "ctrlEmpiricalP": 0.091,
+   "obsMargin": 0.4998,
+   "nominalKinds": 4,
+   "propnKinds": 0,
+   "maxPropnShare": 0.367,
+   "maxNominalShare": 0.904,
+   "propnForms5": null
+  },
+  "deu": {
+   "tokens": 10808,
+   "nForms": 276,
+   "Kstar": 2,
+   "margin": 0.1779,
+   "leaves": 6,
+   "curve": "2:0.1779 3:0.0294 4:0.0155 6:0.0399 8:-0.0114 12:-0.026 16:-0.0932",
+   "chronoMargin": 0.0378,
+   "chronoPass": true,
+   "tercilesPassed": 2,
+   "nmiBands": 0.0019,
+   "nmiUpos": 0.2608,
+   "nmiUposShuffled": 0.054,
+   "nmiLeavesUpos": 0.3229,
+   "k1pass": true,
+   "ctrlShareK1": 1,
+   "ctrlEmpiricalP": 0.091,
+   "obsMargin": 0.1779,
+   "nominalKinds": 0,
+   "propnKinds": 0,
+   "maxPropnShare": 0.042,
+   "maxNominalShare": 0.441,
+   "propnForms5": null
+  },
+  "urd": {
+   "tokens": 13888,
+   "nForms": 504,
+   "Kstar": 6,
+   "margin": 0.1821,
+   "leaves": 10,
+   "curve": "2:0.0136 3:0.0967 4:0.1227 6:0.1821 8:0.1326 12:0.1276 16:0.088",
+   "chronoMargin": 0.0788,
+   "chronoPass": true,
+   "tercilesPassed": 2,
+   "nmiBands": 0.0276,
+   "nmiUpos": 0.3532,
+   "nmiUposShuffled": 0.1185,
+   "nmiLeavesUpos": 0.3863,
+   "k1pass": true,
+   "ctrlShareK1": 1,
+   "ctrlEmpiricalP": 0.091,
+   "obsMargin": 0.1821,
+   "nominalKinds": 2,
+   "propnKinds": 0,
+   "maxPropnShare": 0.271,
+   "maxNominalShare": 0.77,
+   "propnForms5": null
+  },
+  "pol": {
+   "tokens": 28929,
+   "nForms": 711,
+   "Kstar": 3,
+   "margin": 0.2042,
+   "leaves": 9,
+   "curve": "2:-0.0257 3:0.2042 4:0.1647 6:0.0993 8:0.0993 12:0.0931 16:0.0697 24:0.0313",
+   "chronoMargin": 0.1081,
+   "chronoPass": true,
+   "tercilesPassed": 2,
+   "nmiBands": 0.0141,
+   "nmiUpos": 0.0921,
+   "nmiUposShuffled": 0.0827,
+   "nmiLeavesUpos": 0.2169,
+   "k1pass": true,
+   "ctrlShareK1": 1,
+   "ctrlEmpiricalP": 0.091,
+   "obsMargin": 0.2042,
+   "nominalKinds": 3,
+   "propnKinds": 0,
+   "maxPropnShare": 0.032,
+   "maxNominalShare": 0.764,
+   "propnForms5": null
+  },
+  "heb": {
+   "tokens": 10054,
+   "nForms": 279,
+   "Kstar": 2,
+   "margin": 0.3254,
+   "leaves": 4,
+   "curve": "2:0.3254 3:0.2167 4:0.1846 6:0.0954 8:0.1213 12:0.0667 16:0.0705",
+   "chronoMargin": 0.3118,
+   "chronoPass": true,
+   "tercilesPassed": 2,
+   "nmiBands": 0.0038,
+   "nmiUpos": 0.2296,
+   "nmiUposShuffled": 0.0875,
+   "nmiLeavesUpos": 0.3089,
+   "k1pass": true,
+   "ctrlShareK1": 0.9,
+   "ctrlEmpiricalP": 0.091,
+   "obsMargin": 0.3254,
+   "nominalKinds": 1,
+   "propnKinds": 0,
+   "maxPropnShare": 0.14,
+   "maxNominalShare": 0.854,
+   "propnForms5": null
+  }
+ },
+ "K1": {
+  "verdictLanguages": 9,
+  "passAll": 9,
+  "passA": 9,
+  "passB": 9,
+  "passC": 9,
+  "ctrlShareMean": 0.9556,
+  "ctrlEmpiricalPle0p1": 9,
+  "medianKstar": 2,
+  "nmiBandsMedian": 0.0141,
+  "nmiBandsBelow030": 9,
+  "nmiUposVsShuffled": "0.2159 vs 0.0845",
+  "languagesWithNominalKind": 7,
+  "languagesWithPropnKind": 0
+ },
+ "K2": {
+  "verdictLanguages": 9,
+  "T2a_all_pass": 6,
+  "T2a_all_available": 9,
+  "T2a_all_unrestricted_pass": 9,
+  "T2a_nominal_pass": 1,
+  "T2a_nominal_available": 5,
+  "T2b_shadow_pass": 5,
+  "T2b_imprint_pass": 6,
+  "T2b_collateral_pass": 3,
+  "T2b_available": 9,
+  "slopeP_le05": 0,
+  "simpson": {
+   "PROPN": {
+    "reversalAbove": 0,
+    "cancellationAbove": 0,
+    "anyAbove": 0,
+    "available": 9
+   },
+   "NOUN": {
+    "reversalAbove": 0,
+    "cancellationAbove": 1,
+    "anyAbove": 1,
+    "available": 9
+   }
+  },
+  "goldPropnSpecific": 8,
+  "goldPropnCos": {
+   "kor": 0.6249,
+   "fra": 0.9866,
+   "ita": 0.9753,
+   "nld": 0.9784,
+   "por": 0.9848,
+   "deu": 0.9957,
+   "urd": 0.9693,
+   "pol": 0.9867,
+   "heb": 0.9873
+  },
+  "goldNounSpecific": 9,
+  "shamAllNull": true,
+  "determinismAll": true,
+  "P6": {
+   "languagesWithBoth": 0,
+   "higher": 0,
+   "specificKinds": 0,
+   "detail": []
+  },
+  "P6x_exploratory": {
+   "n": 9,
+   "kindFartherThanPooled": 2,
+   "kindSpecific": 2,
+   "pooledSpecific": 8,
+   "detail": [
+    {
+     "stem": "kor",
+     "kind": "0",
+     "propnShare": 0,
+     "cosKind": 0.9975,
+     "cosPooled": 0.6249,
+     "specificKind": false,
+     "specificPooled": true,
+     "kindFartherThanPooled": false
+    },
+    {
+     "stem": "fra",
+     "kind": "3",
+     "propnShare": 0.047,
+     "cosKind": 0.9925,
+     "cosPooled": 0.9866,
+     "specificKind": true,
+     "specificPooled": true,
+     "kindFartherThanPooled": false
+    },
+    {
+     "stem": "ita",
+     "kind": "2",
+     "propnShare": 0.027,
+     "cosKind": 0.9802,
+     "cosPooled": 0.9753,
+     "specificKind": true,
+     "specificPooled": true,
+     "kindFartherThanPooled": false
+    },
+    {
+     "stem": "nld",
+     "kind": "4",
+     "propnShare": 0.125,
+     "cosKind": 0.9928,
+     "cosPooled": 0.9784,
+     "specificKind": false,
+     "specificPooled": true,
+     "kindFartherThanPooled": false
+    },
+    {
+     "stem": "por",
+     "kind": "3",
+     "propnShare": 0.367,
+     "cosKind": 0.9953,
+     "cosPooled": 0.9848,
+     "specificKind": false,
+     "specificPooled": true,
+     "kindFartherThanPooled": false
+    },
+    {
+     "stem": "deu",
+     "kind": "1",
+     "propnShare": 0.042,
+     "cosKind": 0.9307,
+     "cosPooled": 0.9957,
+     "specificKind": false,
+     "specificPooled": true,
+     "kindFartherThanPooled": true
+    },
+    {
+     "stem": "urd",
+     "kind": "9",
+     "propnShare": 0.271,
+     "cosKind": 0.9948,
+     "cosPooled": 0.9693,
+     "specificKind": false,
+     "specificPooled": true,
+     "kindFartherThanPooled": false
+    },
+    {
+     "stem": "pol",
+     "kind": "7",
+     "propnShare": 0.032,
+     "cosKind": 0.9881,
+     "cosPooled": 0.9867,
+     "specificKind": false,
+     "specificPooled": false,
+     "kindFartherThanPooled": false
+    },
+    {
+     "stem": "heb",
+     "kind": "1",
+     "propnShare": 0.14,
+     "cosKind": 0.9671,
+     "cosPooled": 0.9873,
+     "specificKind": false,
+     "specificPooled": true,
+     "kindFartherThanPooled": true
+    }
+   ]
+  },
+  "kindsSpecific": {
+   "kor": "2/4",
+   "fra": "1/4",
+   "ita": "2/4",
+   "nld": "1/5",
+   "por": "1/6",
+   "deu": "3/6",
+   "urd": "4/10",
+   "pol": "0/8",
+   "heb": "2/4"
+  },
+  "topCoordinatesByLanguageCount": [
+   [
+    "traceSize.self",
+    4
+   ],
+   [
+    "n(rel-end2/b0)",
+    4
+   ],
+   [
+    "n(ref-entry/b0)",
+    2
+   ],
+   [
+    "n(rel-label/b0)",
+    2
+   ],
+   [
+    "activation.self",
+    2
+   ],
+   [
+    "codeSize.self",
+    2
+   ],
+   [
+    "emptied@rel-end2/b0",
+    1
+   ],
+   [
+    "emptied@rel-end1/b1",
+    1
+   ],
+   [
+    "novelty.self",
+    1
+   ],
+   [
+    "n(rel-end1/b1)",
+    1
+   ],
+   [
+    "n(rel-end1/b0)",
+    1
+   ],
+   [
+    "recalled.self",
+    1
+   ]
+  ]
+ },
+ "K3": {
+  "languages": 8,
+  "PROPN": {
+   "C-P": {
+    "mean": 0.0113,
+    "positiveLoGt0": 2,
+    "atLeast003LoGt0": 2,
+    "negativeHiLt0": 1
+   },
+   "PK-Kd": {
+    "mean": 0.0815,
+    "positiveLoGt0": 4,
+    "atLeast003LoGt0": 4,
+    "negativeHiLt0": 0
+   },
+   "C-PK": {
+    "mean": -0.0405,
+    "positiveLoGt0": 0,
+    "atLeast003LoGt0": 0,
+    "negativeHiLt0": 3
+   },
+   "PK-P": {
+    "mean": 0.0518,
+    "positiveLoGt0": 4,
+    "atLeast003LoGt0": 4,
+    "negativeHiLt0": 0
+   },
+   "C-Kd": {
+    "mean": 0.041,
+    "positiveLoGt0": 0,
+    "atLeast003LoGt0": 0,
+    "negativeHiLt0": 1
+   }
+  },
+  "PROPN_supported": 0,
+  "meanAuc": {
+   "P": 0.584,
+   "Kd": 0.5543,
+   "PK": 0.6358,
+   "C": 0.5953
+  },
+  "NOUN": {
+   "languages": 9,
+   "supported": 0,
+   "meanAuc": {
+    "P": 0.5896,
+    "Kd": 0.6467,
+    "PK": 0.6856,
+    "C": 0.6275
+   },
+   "PKminusKdLoGt0": 6,
+   "CminusPKLoGt0": 0
+  },
+  "K3b": {
+   "languagesWithDetectableKind": 5,
+   "detectableKinds": {
+    "kor": "1/3",
+    "fra": "0/2",
+    "ita": "0/2",
+    "nld": "0/3",
+    "por": "0/4",
+    "deu": "1/3",
+    "urd": "4/8",
+    "pol": "1/7",
+    "heb": "2/2"
+   }
+  },
+  "withinKindAucP": {
+   "fra": "k1:0.442 k3:0.8917 k-1:0.6443",
+   "ita": "k0:0.6119 k-1:0.6524",
+   "nld": "k0:0.5357 k-1:0.5279",
+   "por": "k0:0.6632 k1:0.5544 k5:0.4167 k-1:0.5122",
+   "deu": "k-1:0.5333",
+   "urd": "k1:0.6659 k3:0.6241 k-1:0.5259",
+   "pol": "k-1:0.5584",
+   "heb": "k2:0.6879 k-1:0.5424"
+  }
+ },
+ "K4": {
+  "languages": [
+   "kor",
+   "fra",
+   "ita",
+   "nld",
+   "por",
+   "deu",
+   "urd",
+   "pol",
+   "heb"
+  ],
+  "families3": {
+   "kor": "SOV",
+   "fra": "SVOA",
+   "ita": "SVOB",
+   "nld": "SOV",
+   "por": "SVOA",
+   "deu": "SVOB",
+   "urd": "SOV",
+   "pol": "SVOB",
+   "heb": "SVOB"
+  },
+  "alignmentMean": {
+   "kinds": 0.4983,
+   "freqBands": 0.5127,
+   "randomPartitions": 0.2725
+  },
+  "signature3": {
+   "gap": -0.0318,
+   "p": 0.7631,
+   "within": 0.4754,
+   "across": 0.5071
+  },
+  "signature2": {
+   "gap": 0.0316,
+   "p": 0.2191,
+   "within": 0.5141,
+   "across": 0.4825
+  },
+  "freqBand3": {
+   "gap": -0.0705,
+   "p": 0.9497,
+   "within": 0.4618,
+   "across": 0.5323
+  },
+  "freqBand2": {
+   "gap": 0.0041,
+   "p": 0.3818,
+   "within": 0.5147,
+   "across": 0.5107
+  },
+  "randomPartitionGap3_mean": -0.0124,
+  "Kstar3": {
+   "gap": 0.0308,
+   "p": 0.4983,
+   "within": 1.2,
+   "across": 1.2308
+  },
+  "Kstar2": {
+   "gap": 0.6667,
+   "p": 0.2191,
+   "within": 0.8889,
+   "across": 1.5556
+  },
+  "leaves3": {
+   "gap": -0.8308,
+   "p": 0.9805,
+   "within": 3.1,
+   "across": 2.2692
+  },
+  "leaves2": {
+   "gap": 0,
+   "p": 0.4137,
+   "within": 2.5,
+   "across": 2.5
+  },
+  "Kstar": {
+   "kor": 2,
+   "fra": 2,
+   "ita": 2,
+   "nld": 3,
+   "por": 3,
+   "deu": 2,
+   "urd": 6,
+   "pol": 3,
+   "heb": 2
+  },
+  "leaves": {
+   "kor": 4,
+   "fra": 4,
+   "ita": 4,
+   "nld": 5,
+   "por": 6,
+   "deu": 6,
+   "urd": 10,
+   "pol": 9,
+   "heb": 4
+  },
+  "supported": false
+ },
+ "predictions": {
+  "P1": {
+   "claim": ">= 8/10 pass K1 (a,b,c); median K* in [3,12]",
+   "observed": "9/9 pass all; a:9 b:9 c:9; median K*=2",
+   "held": false
+  },
+  "P2": {
+   "claim": "NMI(kinds, freq bands) < 0.30 in a majority",
+   "observed": "9/9, median 0.0141",
+   "held": true
+  },
+  "P3": {
+   "claim": ">=1 noun-like kind in every language; >=1 proper-noun-like (PROPN share >= 0.5) kind in >= 5/10",
+   "observed": "nominal-kind languages 7/9; PROPN-majority-kind languages 0/9",
+   "held": false
+  },
+  "P4": {
+   "claim": "T2a (freq-stratified) in >= 7/10; nominal stratum >= 5/10",
+   "observed": "all 6/9; nominal 1/5",
+   "held": false
+  },
+  "P5": {
+   "claim": "T2b shadow dispersion beats all 20 null draws in >= 6/10",
+   "observed": "5/9 (imprint 6, collateral 3)",
+   "held": false
+  },
+  "P6": {
+   "claim": "a PROPN-like kind has larger shadow z than pooled gold PROPN in >= 6/10 of the languages having both",
+   "observed": "0/0",
+   "held": false
+  },
+  "P7": {
+   "claim": "Simpson reversal or cancellation above chance in >= 3/10 languages (PROPN or NOUN stratum)",
+   "observed": "PROPN 0/9, NOUN 1/9",
+   "held": false
+  },
+  "P8": {
+   "claim": "mention-count slopes differ between kinds (p <= 0.05) in >= 5/10",
+   "observed": "0/9",
+   "held": false
+  },
+  "P9": {
+   "claim": "C - P > 0 (lower bound > 0) in >= 8/10",
+   "observed": "2/8",
+   "held": false
+  },
+  "P10": {
+   "claim": "PK - Kd >= 0.03 (lower > 0) in <= 3/10",
+   "observed": "4/8",
+   "held": false
+  },
+  "P11": {
+   "claim": "C - PK >= 0.03 (lower > 0) in <= 3/10",
+   "observed": "0/8",
+   "held": true
+  },
+  "P12": {
+   "claim": "K3b: >= 1 detectable kind in every language",
+   "observed": "5/9",
+   "held": false
+  },
+  "P13": {
+   "claim": "K4 NOT supported (p > 0.05); alignment of kind signatures above the random-partition baseline",
+   "observed": "signature3 p=0.7631 signature2 p=0.2191 K* p=0.4983; alignment kinds 0.4983 vs random 0.2725 vs freq bands 0.5127",
+   "held": true
+  }
+ }
+}

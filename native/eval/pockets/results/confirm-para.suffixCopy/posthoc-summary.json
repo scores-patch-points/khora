@@ -1,0 +1,2933 @@
+{
+ "headerSha256": "2ba3e8011e188a5e1241c0a2956bc7ced36deda4e1efb7296786738d8ed05436",
+ "draws": 100,
+ "note": "A1 noDup, A2 long6, A3 last1/cond: planned in the frozen header. A8 (Poisson tail of the event count given the 100-draw null event mean) and A9 (same-stem atlas dev+test v) were ADDED after the 10-draw z were seen, because laws/para.mjs warns that sparse nulls make the 10-draw z unreliable.",
+ "A4": {
+  "rhoSuffixVsPrefix": 0.704,
+  "rhoSuffixVsAdjNg3": 0.792,
+  "n": 23
+ },
+ "A5": {
+  "rhoVvsLogTokens": 0.455,
+  "rhoMeanZvsLogTokens": 0.639,
+  "n": 23,
+  "note": "classes differ in size (code ~291k tokens, prose 23k-128k): read within class, not across"
+ },
+ "A6": {
+  "cells": 23,
+  "pPerCellAtlasFalsePresent": 0.00008488,
+  "expectedFalsePresent": 0.00195,
+  "observedPresentPlus10": 17
+ },
+ "A8sign": {
+  "cells": 18,
+  "observedAboveExpected": 18,
+  "binomialP": 0.000003814697265625,
+  "note": "English prose + children half-cells: observed suffix events vs the 100-draw unit-order null mean (sign test, halves treated as independent)"
+ },
+ "A9": [
+  {
+   "stem": "eng",
+   "atlasTokens": 43098,
+   "atlasV": [
+    0.0119,
+    0.0176
+   ],
+   "atlasNullMean": [
+    0.000359,
+    0.000236
+   ],
+   "atlasZ": [
+    16.6,
+    56.9
+   ],
+   "trainTokens": 176883,
+   "trainV": [
+    0.0124,
+    0.0121
+   ],
+   "trainNullMean": [
+    0.000079,
+    0.0002
+   ],
+   "trainZ": [
+    89.1,
+    47.8
+   ],
+   "trainStatus": "PRESENT+",
+   "excessRatioAtlas": 49.6,
+   "excessRatioTrain": 87.9
+  },
+  {
+   "stem": "hrv",
+   "atlasTokens": 40049,
+   "atlasV": [
+    0.00625,
+    0.00476
+   ],
+   "atlasNullMean": [
+    0.000104,
+    0.0000951
+   ],
+   "atlasZ": [
+    18.7,
+    15.5
+   ],
+   "trainTokens": 132085,
+   "trainV": [
+    0.00447,
+    0.00688
+   ],
+   "trainNullMean": [
+    0.0000319,
+    0.000201
+   ],
+   "trainZ": [
+    44,
+    48.2
+   ],
+   "trainStatus": "PRESENT+",
+   "excessRatioAtlas": 55.2,
+   "excessRatioTrain": 48.8
+  },
+  {
+   "stem": "slv",
+   "atlasTokens": 43877,
+   "atlasV": [
+    0.00237,
+    0.00348
+   ],
+   "atlasNullMean": [
+    0.0000791,
+    0.000174
+   ],
+   "atlasZ": [
+    9.16,
+    9.02
+   ],
+   "trainTokens": 179497,
+   "trainV": [
+    0.00103,
+    0.0026
+   ],
+   "trainNullMean": [
+    0.0000206,
+    0.0000186
+   ],
+   "trainZ": [
+    15.5,
+    43.9
+   ],
+   "trainStatus": "PRESENT+",
+   "excessRatioAtlas": 23.1,
+   "excessRatioTrain": 92.6
+  },
+  {
+   "stem": "heb",
+   "atlasTokens": 20684,
+   "atlasV": [
+    0.00783,
+    0.00546
+   ],
+   "atlasNullMean": [
+    0.000522,
+    0.000912
+   ],
+   "atlasZ": [
+    6.64,
+    4.74
+   ],
+   "trainTokens": 119348,
+   "trainV": [
+    0.00901,
+    0.0116
+   ],
+   "trainNullMean": [
+    0.000943,
+    0.00135
+   ],
+   "trainZ": [
+    16.6,
+    22.5
+   ],
+   "trainStatus": "PRESENT+",
+   "excessRatioAtlas": 9.27,
+   "excessRatioTrain": 8.97
+  },
+  {
+   "stem": "urd",
+   "atlasTokens": 27670,
+   "atlasV": [
+    0.0208,
+    0.023
+   ],
+   "atlasNullMean": [
+    0.00625,
+    0.00541
+   ],
+   "atlasZ": [
+    4.44,
+    6.06
+   ],
+   "trainTokens": 102096,
+   "trainV": [
+    0.0291,
+    0.0338
+   ],
+   "trainNullMean": [
+    0.00411,
+    0.00531
+   ],
+   "trainZ": [
+    17.3,
+    28.1
+   ],
+   "trainStatus": "PRESENT+",
+   "excessRatioAtlas": 3.76,
+   "excessRatioTrain": 6.68
+  },
+  {
+   "stem": "slk",
+   "atlasTokens": 21212,
+   "atlasV": [
+    0.00395,
+    0.00208
+   ],
+   "atlasNullMean": [
+    0.000298,
+    0.000105
+   ],
+   "atlasZ": [
+    5.45,
+    5.94
+   ],
+   "trainTokens": 65159,
+   "trainV": [
+    0.00241,
+    0.00226
+   ],
+   "trainNullMean": [
+    0.0000268,
+    0.0000755
+   ],
+   "trainZ": [
+    28.1,
+    12.9
+   ],
+   "trainStatus": "PRESENT+",
+   "excessRatioAtlas": 15,
+   "excessRatioTrain": 45.7
+  },
+  {
+   "stem": "fas",
+   "atlasTokens": 44542,
+   "atlasV": [
+    0.000602,
+    0.00353
+   ],
+   "atlasNullMean": [
+    0.00199,
+    0.00194
+   ],
+   "atlasZ": [
+    -1.15,
+    1.22
+   ],
+   "trainTokens": 299972,
+   "trainV": [
+    0.00585,
+    0.00622
+   ],
+   "trainNullMean": [
+    0.00217,
+    0.00227
+   ],
+   "trainZ": [
+    6.82,
+    6.96
+   ],
+   "trainStatus": "PRESENT+",
+   "excessRatioAtlas": 1.05,
+   "excessRatioTrain": 2.72
+  },
+  {
+   "stem": "ind",
+   "atlasTokens": 20310,
+   "atlasV": [
+    0,
+    0.00205
+   ],
+   "atlasNullMean": [
+    0.000517,
+    0.000615
+   ],
+   "atlasZ": [
+    -0.621,
+    1.45
+   ],
+   "trainTokens": 80944,
+   "trainV": [
+    0.000898,
+    0.000972
+   ],
+   "trainNullMean": [
+    0.000359,
+    0.000389
+   ],
+   "trainZ": [
+    1.52,
+    1.16
+   ],
+   "trainStatus": "ABSENT",
+   "excessRatioAtlas": 1.81,
+   "excessRatioTrain": 2.5
+  },
+  {
+   "stem": "jpn",
+   "atlasTokens": 22225,
+   "atlasV": [
+    0.0263,
+    0.0128
+   ],
+   "atlasNullMean": [
+    0.0197,
+    0.0128
+   ],
+   "atlasZ": [
+    0.81,
+    0.00105
+   ],
+   "trainTokens": 146279,
+   "trainV": [
+    0.0176,
+    0.0183
+   ],
+   "trainNullMean": [
+    0.0168,
+    0.019
+   ],
+   "trainZ": [
+    0.549,
+    -0.363
+   ],
+   "trainStatus": "ABSENT",
+   "excessRatioAtlas": 1.2,
+   "excessRatioTrain": 1
+  },
+  {
+   "stem": "kor",
+   "atlasTokens": 20436,
+   "atlasV": [
+    0.00116,
+    0
+   ],
+   "atlasNullMean": [
+    0.000463,
+    0.000301
+   ],
+   "atlasZ": [
+    0.858,
+    -0.444
+   ],
+   "trainTokens": 49012,
+   "trainV": [
+    0,
+    0.000434
+   ],
+   "trainNullMean": [
+    0.000261,
+    0.000174
+   ],
+   "trainZ": [
+    -0.707,
+    1.16
+   ],
+   "trainStatus": "ABSENT",
+   "excessRatioAtlas": 1.52,
+   "excessRatioTrain": 1
+  }
+ ],
+ "A9rho": {
+  "n": 10,
+  "rhoVAtlasVsTrain": 0.927,
+  "rhoExcessRatio": 0.875
+ },
+ "table": [
+  {
+   "id": "sfx-cd-py314",
+   "cls": "code",
+   "tokens": 291020,
+   "status10": "PRESENT+",
+   "v": [
+    0.02668379700571677,
+    0.023687752355726843
+   ],
+   "events": [
+    540,
+    704
+   ],
+   "expectedEvents": [
+    6.86,
+    9.47
+   ],
+   "A1_noDup": {
+    "z": [
+     235,
+     246
+    ],
+    "events": [
+     507,
+     643
+    ],
+    "status": "PRESENT+"
+   },
+   "A2_long6": {
+    "pairs": [
+     3833,
+     5231
+    ],
+    "events": [
+     163,
+     143
+    ],
+    "z": [
+     76.8,
+     92.9
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_last1": {
+    "v": [
+     0.089,
+     0.0871
+    ],
+    "z": [
+     209,
+     219
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_cond": {
+    "v": [
+     0.3,
+     0.272
+    ],
+    "nullMean": [
+     0.0911,
+     0.0752
+    ],
+    "z": [
+     7.15,
+     8.58
+    ],
+    "eventsOf": [
+     1802,
+     2590
+    ]
+   },
+   "A8_poisson": {
+    "p": [
+     1e-300,
+     1e-300
+    ],
+    "z": [
+     37,
+     37
+    ],
+    "status": "PRESENT+",
+    "noDupStatus": "PRESENT+"
+   },
+   "A8_pooled": {
+    "events": 1244,
+    "expected": 16.3,
+    "z": 37
+   },
+   "A4_prefixCopy": {
+    "z": [
+     145,
+     102
+    ],
+    "v": [
+     0.0332,
+     0.0182
+    ],
+    "status": "PRESENT+"
+   },
+   "A4_adjNg3": {
+    "z": [
+     380,
+     247
+    ],
+    "v": [
+     0.00794,
+     0.00506
+    ],
+    "status": "PRESENT+"
+   }
+  },
+  {
+   "id": "sfx-cd-rb26",
+   "cls": "code",
+   "tokens": 291169,
+   "status10": "PRESENT+",
+   "v": [
+    0.027171167124834028,
+    0.031463132158023654
+   ],
+   "events": [
+    484,
+    978
+   ],
+   "expectedEvents": [
+    2.09,
+    136
+   ],
+   "A1_noDup": {
+    "z": [
+     438,
+     98.6
+    ],
+    "events": [
+     451,
+     795
+    ],
+    "status": "PRESENT+"
+   },
+   "A2_long6": {
+    "pairs": [
+     2842,
+     2810
+    ],
+    "events": [
+     103,
+     167
+    ],
+    "z": [
+     91.2,
+     103
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_last1": {
+    "v": [
+     0.116,
+     0.108
+    ],
+    "z": [
+     290,
+     174
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_cond": {
+    "v": [
+     0.234,
+     0.29
+    ],
+    "nullMean": [
+     0.0529,
+     0.519
+    ],
+    "z": [
+     5.85,
+     -7.14
+    ],
+    "eventsOf": [
+     2066,
+     3370
+    ]
+   },
+   "A8_poisson": {
+    "p": [
+     1e-300,
+     1e-300
+    ],
+    "z": [
+     37,
+     37
+    ],
+    "status": "PRESENT+",
+    "noDupStatus": "PRESENT+"
+   },
+   "A8_pooled": {
+    "events": 1462,
+    "expected": 138,
+    "z": 37
+   },
+   "A4_prefixCopy": {
+    "z": [
+     196,
+     48.6
+    ],
+    "v": [
+     0.0301,
+     0.0272
+    ],
+    "status": "PRESENT+"
+   },
+   "A4_adjNg3": {
+    "z": [
+     293,
+     110
+    ],
+    "v": [
+     0.00387,
+     0.00641
+    ],
+    "status": "PRESENT+"
+   }
+  },
+  {
+   "id": "sfx-cd-chdr",
+   "cls": "code",
+   "tokens": 291492,
+   "status10": "PRESENT+",
+   "v": [
+    0.047424939732991334,
+    0.023717119447610457
+   ],
+   "events": [
+    1082,
+    495
+   ],
+   "expectedEvents": [
+    11.2,
+    36.7
+   ],
+   "A1_noDup": {
+    "z": [
+     486,
+     112
+    ],
+    "events": [
+     1020,
+     489
+    ],
+    "status": "PRESENT+"
+   },
+   "A2_long6": {
+    "pairs": [
+     7726,
+     6150
+    ],
+    "events": [
+     660,
+     247
+    ],
+    "z": [
+     202,
+     69
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_last1": {
+    "v": [
+     0.11,
+     0.0816
+    ],
+    "z": [
+     383,
+     217
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_cond": {
+    "v": [
+     0.431,
+     0.291
+    ],
+    "nullMean": [
+     0.262,
+     0.552
+    ],
+    "z": [
+     3.68,
+     -4.43
+    ],
+    "eventsOf": [
+     2508,
+     1703
+    ]
+   },
+   "A8_poisson": {
+    "p": [
+     1e-300,
+     1e-300
+    ],
+    "z": [
+     37,
+     37
+    ],
+    "status": "PRESENT+",
+    "noDupStatus": "PRESENT+"
+   },
+   "A8_pooled": {
+    "events": 1577,
+    "expected": 47.8,
+    "z": 37
+   },
+   "A4_prefixCopy": {
+    "z": [
+     321,
+     66.6
+    ],
+    "v": [
+     0.0425,
+     0.02
+    ],
+    "status": "PRESENT+"
+   },
+   "A4_adjNg3": {
+    "z": [
+     84.2,
+     55.9
+    ],
+    "v": [
+     0.00406,
+     0.00315
+    ],
+    "status": "PRESENT+"
+   }
+  },
+  {
+   "id": "sfx-cd-npmjs",
+   "cls": "code",
+   "tokens": 291137,
+   "status10": "PRESENT+",
+   "v": [
+    0.033269725379796,
+    0.03643616001227201
+   ],
+   "events": [
+    802,
+    950
+   ],
+   "expectedEvents": [
+    5.24,
+    9.95
+   ],
+   "A1_noDup": {
+    "z": [
+     449,
+     392
+    ],
+    "events": [
+     731,
+     779
+    ],
+    "status": "PRESENT+"
+   },
+   "A2_long6": {
+    "pairs": [
+     3771,
+     4152
+    ],
+    "events": [
+     153,
+     210
+    ],
+    "z": [
+     90.5,
+     132
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_last1": {
+    "v": [
+     0.124,
+     0.127
+    ],
+    "z": [
+     295,
+     344
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_cond": {
+    "v": [
+     0.269,
+     0.286
+    ],
+    "nullMean": [
+     0.0668,
+     0.114
+    ],
+    "z": [
+     7.57,
+     5.05
+    ],
+    "eventsOf": [
+     2981,
+     3321
+    ]
+   },
+   "A8_poisson": {
+    "p": [
+     1e-300,
+     1e-300
+    ],
+    "z": [
+     37,
+     37
+    ],
+    "status": "PRESENT+",
+    "noDupStatus": "PRESENT+"
+   },
+   "A8_pooled": {
+    "events": 1752,
+    "expected": 15.2,
+    "z": 37
+   },
+   "A4_prefixCopy": {
+    "z": [
+     93.5,
+     223
+    ],
+    "v": [
+     0.0202,
+     0.0378
+    ],
+    "status": "PRESENT+"
+   },
+   "A4_adjNg3": {
+    "z": [
+     203,
+     98.7
+    ],
+    "v": [
+     0.00342,
+     0.00461
+    ],
+    "status": "PRESENT+"
+   }
+  },
+  {
+   "id": "sfx-en-poe-works2",
+   "cls": "prose",
+   "tokens": 96647,
+   "status10": "PRESENT+",
+   "v": [
+    0.0024461839529976714,
+    0.0041450777198406286
+   ],
+   "events": [
+    5,
+    8
+   ],
+   "expectedEvents": [
+    0.61,
+    0.28
+   ],
+   "A1_noDup": {
+    "z": [
+     6.35,
+     13.9
+    ],
+    "events": [
+     5,
+     8
+    ],
+    "status": "PRESENT+"
+   },
+   "A2_long6": {
+    "pairs": [
+     1748,
+     1680
+    ],
+    "events": [
+     4,
+     6
+    ],
+    "z": [
+     5.69,
+     11.6
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_last1": {
+    "v": [
+     0.00734,
+     0.00777
+    ],
+    "z": [
+     8.52,
+     9.9
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_cond": {
+    "v": [
+     null,
+     null
+    ],
+    "nullMean": [
+     null,
+     null
+    ],
+    "z": [
+     null,
+     null
+    ],
+    "eventsOf": [
+     15,
+     15
+    ]
+   },
+   "A8_poisson": {
+    "p": [
+     0.000425,
+     7.31e-10
+    ],
+    "z": [
+     3.34,
+     6.05
+    ],
+    "status": "AMBIGUOUS",
+    "noDupStatus": "AMBIGUOUS"
+   },
+   "A8_pooled": {
+    "events": 13,
+    "expected": 0.89,
+    "z": 6.64
+   },
+   "A4_prefixCopy": {
+    "z": [
+     13.5,
+     14.3
+    ],
+    "v": [
+     0.0161,
+     0.0161
+    ],
+    "status": "PRESENT+"
+   },
+   "A4_adjNg3": {
+    "z": [
+     43.7,
+     22
+    ],
+    "v": [
+     0.0000832,
+     0.000098
+    ],
+    "status": "PRESENT+"
+   }
+  },
+  {
+   "id": "sfx-en-chopin-awakening",
+   "cls": "prose",
+   "tokens": 64408,
+   "status10": "PRESENT+",
+   "v": [
+    0.0078028747429925716,
+    0.004132231404582853
+   ],
+   "events": [
+    19,
+    7
+   ],
+   "expectedEvents": [
+    0.59,
+    0.66
+   ],
+   "A1_noDup": {
+    "z": [
+     23.1,
+     8.64
+    ],
+    "events": [
+     18,
+     7
+    ],
+    "status": "PRESENT+"
+   },
+   "A2_long6": {
+    "pairs": [
+     1811,
+     1303
+    ],
+    "events": [
+     9,
+     6
+    ],
+    "z": [
+     13.7,
+     8.18
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_last1": {
+    "v": [
+     0.0164,
+     0.0118
+    ],
+    "z": [
+     10.8,
+     5.9
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_cond": {
+    "v": [
+     null,
+     null
+    ],
+    "nullMean": [
+     null,
+     null
+    ],
+    "z": [
+     null,
+     null
+    ],
+    "eventsOf": [
+     40,
+     20
+    ]
+   },
+   "A8_poisson": {
+    "p": [
+     2.08e-22,
+     0.00000609
+    ],
+    "z": [
+     9.67,
+     4.37
+    ],
+    "status": "PRESENT+",
+    "noDupStatus": "PRESENT+"
+   },
+   "A8_pooled": {
+    "events": 26,
+    "expected": 1.25,
+    "z": 10.3
+   },
+   "A4_prefixCopy": {
+    "z": [
+     18.5,
+     9.3
+    ],
+    "v": [
+     0.0181,
+     0.0136
+    ],
+    "status": "PRESENT+"
+   },
+   "A4_adjNg3": {
+    "z": [
+     56.2,
+     26.8
+    ],
+    "v": [
+     0.000161,
+     0.000172
+    ],
+    "status": "PRESENT+"
+   }
+  },
+  {
+   "id": "sfx-en-zola-mouret",
+   "cls": "prose",
+   "tokens": 128496,
+   "status10": "PRESENT+",
+   "v": [
+    0.004179985246992146,
+    0.003306281935692823
+   ],
+   "events": [
+    17,
+    11
+   ],
+   "expectedEvents": [
+    1.18,
+    0.78
+   ],
+   "A1_noDup": {
+    "z": [
+     7.94,
+     5.09
+    ],
+    "events": [
+     10,
+     5
+    ],
+    "status": "PRESENT+"
+   },
+   "A2_long6": {
+    "pairs": [
+     3209,
+     2529
+    ],
+    "events": [
+     7,
+     1
+    ],
+    "z": [
+     6.35,
+     0.732
+    ],
+    "status": "AMBIGUOUS"
+   },
+   "A3_last1": {
+    "v": [
+     0.00885,
+     0.00932
+    ],
+    "z": [
+     6.95,
+     5.97
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_cond": {
+    "v": [
+     null,
+     null
+    ],
+    "nullMean": [
+     null,
+     null
+    ],
+    "z": [
+     null,
+     null
+    ],
+    "eventsOf": [
+     36,
+     31
+    ]
+   },
+   "A8_poisson": {
+    "p": [
+     1.54e-14,
+     7.98e-10
+    ],
+    "z": [
+     7.59,
+     6.03
+    ],
+    "status": "PRESENT+",
+    "noDupStatus": "AMBIGUOUS"
+   },
+   "A8_pooled": {
+    "events": 28,
+    "expected": 1.96,
+    "z": 9.77
+   },
+   "A4_prefixCopy": {
+    "z": [
+     17.8,
+     11.2
+    ],
+    "v": [
+     0.0108,
+     0.00932
+    ],
+    "status": "PRESENT+"
+   },
+   "A4_adjNg3": {
+    "z": [
+     50.4,
+     23.4
+    ],
+    "v": [
+     0.0000679,
+     0.0000731
+    ],
+    "status": "PRESENT+"
+   }
+  },
+  {
+   "id": "sfx-en-waikna",
+   "cls": "prose",
+   "tokens": 85322,
+   "status10": "AMBIGUOUS",
+   "v": [
+    0.005482456140271097,
+    0.0020661157022914267
+   ],
+   "events": [
+    10,
+    3
+   ],
+   "expectedEvents": [
+    0.56,
+    0.32
+   ],
+   "A1_noDup": {
+    "z": [
+     10.4,
+     4.72
+    ],
+    "events": [
+     9,
+     3
+    ],
+    "status": "PRESENT+"
+   },
+   "A2_long6": {
+    "pairs": [
+     1591,
+     1343
+    ],
+    "events": [
+     6,
+     1
+    ],
+    "z": [
+     6.38,
+     1.28
+    ],
+    "status": "AMBIGUOUS"
+   },
+   "A3_last1": {
+    "v": [
+     0.00932,
+     0.00826
+    ],
+    "z": [
+     9.11,
+     7.78
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_cond": {
+    "v": [
+     null,
+     null
+    ],
+    "nullMean": [
+     null,
+     null
+    ],
+    "z": [
+     null,
+     null
+    ],
+    "eventsOf": [
+     17,
+     12
+    ]
+   },
+   "A8_poisson": {
+    "p": [
+     5.03e-10,
+     0.0043
+    ],
+    "z": [
+     6.11,
+     2.63
+    ],
+    "status": "AMBIGUOUS",
+    "noDupStatus": "AMBIGUOUS"
+   },
+   "A8_pooled": {
+    "events": 13,
+    "expected": 0.88,
+    "z": 6.66
+   },
+   "A4_prefixCopy": {
+    "z": [
+     4.41,
+     3.41
+    ],
+    "v": [
+     0.00768,
+     0.00482
+    ],
+    "status": "AMBIGUOUS"
+   },
+   "A4_adjNg3": {
+    "z": [
+     9.05,
+     22
+    ],
+    "v": [
+     0.0000439,
+     0.0000538
+    ],
+    "status": "PRESENT+"
+   }
+  },
+  {
+   "id": "sfx-en-about-london",
+   "cls": "prose",
+   "tokens": 55661,
+   "status10": "AMBIGUOUS",
+   "v": [
+    0.00690448791738163,
+    0.002321981423847319
+   ],
+   "events": [
+    6,
+    3
+   ],
+   "expectedEvents": [
+    0.22,
+    0.28
+   ],
+   "A1_noDup": {
+    "z": [
+     11.9,
+     5.35
+    ],
+    "events": [
+     6,
+     3
+    ],
+    "status": "PRESENT+"
+   },
+   "A2_long6": {
+    "pairs": [
+     739,
+     1103
+    ],
+    "events": [
+     3,
+     2
+    ],
+    "z": [
+     5.94,
+     3.87
+    ],
+    "status": "AMBIGUOUS"
+   },
+   "A3_last1": {
+    "v": [
+     0.0138,
+     0.00774
+    ],
+    "z": [
+     7.95,
+     6.5
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_cond": {
+    "v": [
+     null,
+     null
+    ],
+    "nullMean": [
+     null,
+     null
+    ],
+    "z": [
+     null,
+     null
+    ],
+    "eventsOf": [
+     12,
+     10
+    ]
+   },
+   "A8_poisson": {
+    "p": [
+     1.3e-7,
+     0.00297
+    ],
+    "z": [
+     5.15,
+     2.75
+    ],
+    "status": "AMBIGUOUS",
+    "noDupStatus": "AMBIGUOUS"
+   },
+   "A8_pooled": {
+    "events": 9,
+    "expected": 0.5,
+    "z": 5.79
+   },
+   "A4_prefixCopy": {
+    "z": [
+     19.2,
+     19.1
+    ],
+    "v": [
+     0.023,
+     0.0155
+    ],
+    "status": "PRESENT+"
+   },
+   "A4_adjNg3": {
+    "z": [
+     20.2,
+     12.9
+    ],
+    "v": [
+     0.000106,
+     0.000131
+    ],
+    "status": "PRESENT+"
+   }
+  },
+  {
+   "id": "sfx-en-hesse-siddhartha",
+   "cls": "prose-exploratory",
+   "tokens": 39270,
+   "status10": "PRESENT+",
+   "v": [
+    0.004918032786918047,
+    0.0082712985940816
+   ],
+   "events": [
+    3,
+    10
+   ],
+   "expectedEvents": [
+    0.27,
+    0.69
+   ],
+   "A1_noDup": {
+    "z": [
+     4.99,
+     12.7
+    ],
+    "events": [
+     3,
+     10
+    ],
+    "status": "PRESENT+"
+   },
+   "A2_long6": {
+    "pairs": [
+     499,
+     968
+    ],
+    "events": [
+     3,
+     6
+    ],
+    "z": [
+     5.16,
+     7.63
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_last1": {
+    "v": [
+     0.0311,
+     0.0289
+    ],
+    "z": [
+     10.5,
+     10
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_cond": {
+    "v": [
+     null,
+     null
+    ],
+    "nullMean": [
+     null,
+     null
+    ],
+    "z": [
+     null,
+     null
+    ],
+    "eventsOf": [
+     19,
+     35
+    ]
+   },
+   "A8_poisson": {
+    "p": [
+     0.00268,
+     3.61e-9
+    ],
+    "z": [
+     2.78,
+     5.79
+    ],
+    "status": "AMBIGUOUS",
+    "noDupStatus": "AMBIGUOUS"
+   },
+   "A8_pooled": {
+    "events": 13,
+    "expected": 0.96,
+    "z": 6.5
+   },
+   "A4_prefixCopy": {
+    "z": [
+     11.2,
+     53
+    ],
+    "v": [
+     0.0197,
+     0.0422
+    ],
+    "status": "PRESENT+"
+   },
+   "A4_adjNg3": {
+    "z": [
+     38.6,
+     44.5
+    ],
+    "v": [
+     0.000272,
+     0.000404
+    ],
+    "status": "PRESENT+"
+   }
+  },
+  {
+   "id": "sfx-en-warren-forces",
+   "cls": "prose-exploratory",
+   "tokens": 35736,
+   "status10": "PRESENT+",
+   "v": [
+    0.0029585798820335185,
+    0.0032432432435598457
+   ],
+   "events": [
+    3,
+    3
+   ],
+   "expectedEvents": [
+    0.27,
+    0.16
+   ],
+   "A1_noDup": {
+    "z": [
+     5.57,
+     6.92
+    ],
+    "events": [
+     3,
+     3
+    ],
+    "status": "PRESENT+"
+   },
+   "A2_long6": {
+    "pairs": [
+     845,
+     757
+    ],
+    "events": [
+     3,
+     3
+    ],
+    "z": [
+     5.6,
+     7.61
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_last1": {
+    "v": [
+     0.0217,
+     0.0108
+    ],
+    "z": [
+     12.3,
+     6.71
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_cond": {
+    "v": [
+     null,
+     null
+    ],
+    "nullMean": [
+     null,
+     null
+    ],
+    "z": [
+     null,
+     null
+    ],
+    "eventsOf": [
+     22,
+     10
+    ]
+   },
+   "A8_poisson": {
+    "p": [
+     0.00268,
+     0.000606
+    ],
+    "z": [
+     2.78,
+     3.24
+    ],
+    "status": "AMBIGUOUS",
+    "noDupStatus": "AMBIGUOUS"
+   },
+   "A8_pooled": {
+    "events": 6,
+    "expected": 0.43,
+    "z": 4.37
+   },
+   "A4_prefixCopy": {
+    "z": [
+     8.26,
+     5.94
+    ],
+    "v": [
+     0.0207,
+     0.013
+    ],
+    "status": "PRESENT+"
+   },
+   "A4_adjNg3": {
+    "z": [
+     29.9,
+     49.4
+    ],
+    "v": [
+     0.000207,
+     0.000266
+    ],
+    "status": "PRESENT+"
+   }
+  },
+  {
+   "id": "sfx-en-aesop-stickney",
+   "cls": "children-exploratory",
+   "tokens": 29256,
+   "status10": "PRESENT+",
+   "v": [
+    0.006511627906547801,
+    0.008415147264713596
+   ],
+   "events": [
+    7,
+    6
+   ],
+   "expectedEvents": [
+    0.41,
+    0.47
+   ],
+   "A1_noDup": {
+    "z": [
+     8.18,
+     7.06
+    ],
+    "events": [
+     6,
+     5
+    ],
+    "status": "PRESENT+"
+   },
+   "A2_long6": {
+    "pairs": [
+     702,
+     458
+    ],
+    "events": [
+     3,
+     5
+    ],
+    "z": [
+     6.25,
+     9.09
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_last1": {
+    "v": [
+     0.0242,
+     0.0295
+    ],
+    "z": [
+     13.6,
+     10.2
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_cond": {
+    "v": [
+     null,
+     null
+    ],
+    "nullMean": [
+     null,
+     null
+    ],
+    "z": [
+     null,
+     null
+    ],
+    "eventsOf": [
+     26,
+     21
+    ]
+   },
+   "A8_poisson": {
+    "p": [
+     2.7e-7,
+     0.00001
+    ],
+    "z": [
+     5.01,
+     4.26
+    ],
+    "status": "PRESENT+",
+    "noDupStatus": "AMBIGUOUS"
+   },
+   "A8_pooled": {
+    "events": 13,
+    "expected": 0.88,
+    "z": 6.66
+   },
+   "A4_prefixCopy": {
+    "z": [
+     7.93,
+     3.21
+    ],
+    "v": [
+     0.014,
+     0.00842
+    ],
+    "status": "AMBIGUOUS"
+   },
+   "A4_adjNg3": {
+    "z": [
+     17.1,
+     10.4
+    ],
+    "v": [
+     0.000226,
+     0.000135
+    ],
+    "status": "PRESENT+"
+   }
+  },
+  {
+   "id": "sfx-en-pooh",
+   "cls": "children-exploratory",
+   "tokens": 22984,
+   "status10": "AMBIGUOUS",
+   "v": [
+    0.011688311687976238,
+    0.012444444444554392
+   ],
+   "events": [
+    9,
+    14
+   ],
+   "expectedEvents": [
+    2.22,
+    2.5
+   ],
+   "A1_noDup": {
+    "z": [
+     3.8,
+     6.04
+    ],
+    "events": [
+     7,
+     12
+    ],
+    "status": "AMBIGUOUS"
+   },
+   "A2_long6": {
+    "pairs": [
+     306,
+     496
+    ],
+    "events": [
+     4,
+     4
+    ],
+    "z": [
+     5.63,
+     3.11
+    ],
+    "status": "AMBIGUOUS"
+   },
+   "A3_last1": {
+    "v": [
+     0.0182,
+     0.032
+    ],
+    "z": [
+     1.96,
+     8.32
+    ],
+    "status": "AMBIGUOUS"
+   },
+   "A3_cond": {
+    "v": [
+     null,
+     null
+    ],
+    "nullMean": [
+     null,
+     null
+    ],
+    "z": [
+     null,
+     null
+    ],
+    "eventsOf": [
+     14,
+     36
+    ]
+   },
+   "A8_poisson": {
+    "p": [
+     0.0005,
+     4.2e-7
+    ],
+    "z": [
+     3.29,
+     4.93
+    ],
+    "status": "AMBIGUOUS",
+    "noDupStatus": "AMBIGUOUS"
+   },
+   "A8_pooled": {
+    "events": 23,
+    "expected": 4.72,
+    "z": 5.95
+   },
+   "A4_prefixCopy": {
+    "z": [
+     11.4,
+     11.3
+    ],
+    "v": [
+     0.0221,
+     0.0133
+    ],
+    "status": "PRESENT+"
+   },
+   "A4_adjNg3": {
+    "z": [
+     32.2,
+     30
+    ],
+    "v": [
+     0.00106,
+     0.000761
+    ],
+    "status": "PRESENT+"
+   }
+  },
+  {
+   "id": "sfx-ud-eng",
+   "cls": "ud-present",
+   "tokens": 176883,
+   "status10": "PRESENT+",
+   "v": [
+    0.01237911025145877,
+    0.012099921936169267
+   ],
+   "events": [
+    64,
+    62
+   ],
+   "expectedEvents": [
+    0.6,
+    0.48
+   ],
+   "A1_noDup": {
+    "z": [
+     90.6,
+     96.5
+    ],
+    "events": [
+     60,
+     57
+    ],
+    "status": "PRESENT+"
+   },
+   "A2_long6": {
+    "pairs": [
+     3764,
+     3784
+    ],
+    "events": [
+     53,
+     49
+    ],
+    "z": [
+     71.2,
+     85.1
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_last1": {
+    "v": [
+     0.0257,
+     0.0246
+    ],
+    "z": [
+     57.3,
+     48.5
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_cond": {
+    "v": [
+     0.481,
+     0.492
+    ],
+    "nullMean": [
+     null,
+     null
+    ],
+    "z": [
+     null,
+     null
+    ],
+    "eventsOf": [
+     133,
+     126
+    ]
+   },
+   "A8_poisson": {
+    "p": [
+     2.77e-104,
+     3.42e-106
+    ],
+    "z": [
+     21.7,
+     21.9
+    ],
+    "status": "PRESENT+",
+    "noDupStatus": "PRESENT+"
+   },
+   "A8_pooled": {
+    "events": 126,
+    "expected": 1.08,
+    "z": 30.8
+   },
+   "A4_prefixCopy": {
+    "z": [
+     50.2,
+     37.7
+    ],
+    "v": [
+     0.0263,
+     0.0238
+    ],
+    "status": "PRESENT+"
+   },
+   "A4_adjNg3": {
+    "z": [
+     119,
+     146
+    ],
+    "v": [
+     0.000522,
+     0.000453
+    ],
+    "status": "PRESENT+"
+   }
+  },
+  {
+   "id": "sfx-ud-hrv",
+   "cls": "ud-present",
+   "tokens": 132085,
+   "status10": "PRESENT+",
+   "v": [
+    0.004472843450457731,
+    0.0068846815838696784
+   ],
+   "events": [
+    14,
+    24
+   ],
+   "expectedEvents": [
+    0.15,
+    0.42
+   ],
+   "A1_noDup": {
+    "z": [
+     31.8,
+     29.7
+    ],
+    "events": [
+     14,
+     24
+    ],
+    "status": "PRESENT+"
+   },
+   "A2_long6": {
+    "pairs": [
+     2885,
+     3193
+    ],
+    "events": [
+     14,
+     23
+    ],
+    "z": [
+     34.4,
+     28.6
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_last1": {
+    "v": [
+     0.0141,
+     0.0141
+    ],
+    "z": [
+     30.7,
+     28
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_cond": {
+    "v": [
+     null,
+     null
+    ],
+    "nullMean": [
+     null,
+     null
+    ],
+    "z": [
+     null,
+     null
+    ],
+    "eventsOf": [
+     44,
+     49
+    ]
+   },
+   "A8_poisson": {
+    "p": [
+     2.91e-23,
+     9.78e-34
+    ],
+    "z": [
+     9.87,
+     12
+    ],
+    "status": "PRESENT+",
+    "noDupStatus": "PRESENT+"
+   },
+   "A8_pooled": {
+    "events": 38,
+    "expected": 0.57,
+    "z": 15.6
+   },
+   "A4_prefixCopy": {
+    "z": [
+     16.1,
+     42.9
+    ],
+    "v": [
+     0.00511,
+     0.00602
+    ],
+    "status": "PRESENT+"
+   },
+   "A4_adjNg3": {
+    "z": [
+     161,
+     118
+    ],
+    "v": [
+     0.000169,
+     0.000174
+    ],
+    "status": "PRESENT+"
+   }
+  },
+  {
+   "id": "sfx-ud-slv",
+   "cls": "ud-present",
+   "tokens": 179497,
+   "status10": "PRESENT+",
+   "v": [
+    0.00103263114397123,
+    0.002600780234388367
+   ],
+   "events": [
+    5,
+    14
+   ],
+   "expectedEvents": [
+    0.11,
+    0.16
+   ],
+   "A1_noDup": {
+    "z": [
+     11.3,
+     42.5
+    ],
+    "events": [
+     4,
+     14
+    ],
+    "status": "PRESENT+"
+   },
+   "A2_long6": {
+    "pairs": [
+     4048,
+     4633
+    ],
+    "events": [
+     3,
+     11
+    ],
+    "z": [
+     8.54,
+     32.6
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_last1": {
+    "v": [
+     0.00682,
+     0.00669
+    ],
+    "z": [
+     34.2,
+     32.3
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_cond": {
+    "v": [
+     null,
+     null
+    ],
+    "nullMean": [
+     null,
+     null
+    ],
+    "z": [
+     null,
+     null
+    ],
+    "eventsOf": [
+     33,
+     36
+    ]
+   },
+   "A8_poisson": {
+    "p": [
+     1.22e-7,
+     7.12e-23
+    ],
+    "z": [
+     5.16,
+     9.78
+    ],
+    "status": "PRESENT+",
+    "noDupStatus": "PRESENT+"
+   },
+   "A8_pooled": {
+    "events": 19,
+    "expected": 0.27,
+    "z": 11.1
+   },
+   "A4_prefixCopy": {
+    "z": [
+     22.7,
+     19.3
+    ],
+    "v": [
+     0.00434,
+     0.00297
+    ],
+    "status": "PRESENT+"
+   },
+   "A4_adjNg3": {
+    "z": [
+     73.8,
+     54
+    ],
+    "v": [
+     0.0000867,
+     0.0000853
+    ],
+    "status": "PRESENT+"
+   }
+  },
+  {
+   "id": "sfx-ud-heb",
+   "cls": "ud-present",
+   "tokens": 119348,
+   "status10": "PRESENT+",
+   "v": [
+    0.009005145797345904,
+    0.011569610489459592
+   ],
+   "events": [
+    21,
+    30
+   ],
+   "expectedEvents": [
+    2.09,
+    2.59
+   ],
+   "A1_noDup": {
+    "z": [
+     13.1,
+     17.7
+    ],
+    "events": [
+     21,
+     30
+    ],
+    "status": "PRESENT+"
+   },
+   "A2_long6": {
+    "pairs": [
+     2162,
+     2401
+    ],
+    "events": [
+     20,
+     30
+    ],
+    "z": [
+     12.8,
+     17.9
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_last1": {
+    "v": [
+     0.0236,
+     0.0216
+    ],
+    "z": [
+     20.2,
+     19
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_cond": {
+    "v": [
+     0.382,
+     0.536
+    ],
+    "nullMean": [
+     null,
+     null
+    ],
+    "z": [
+     null,
+     null
+    ],
+    "eventsOf": [
+     55,
+     56
+    ]
+   },
+   "A8_poisson": {
+    "p": [
+     1.41e-14,
+     7.73e-22
+    ],
+    "z": [
+     7.61,
+     9.53
+    ],
+    "status": "PRESENT+",
+    "noDupStatus": "PRESENT+"
+   },
+   "A8_pooled": {
+    "events": 51,
+    "expected": 4.68,
+    "z": 12.2
+   },
+   "A4_prefixCopy": {
+    "z": [
+     16,
+     13
+    ],
+    "v": [
+     0.012,
+     0.00848
+    ],
+    "status": "PRESENT+"
+   },
+   "A4_adjNg3": {
+    "z": [
+     48.3,
+     114
+    ],
+    "v": [
+     0.000321,
+     0.000428
+    ],
+    "status": "PRESENT+"
+   }
+  },
+  {
+   "id": "sfx-ud-urd",
+   "cls": "ud-present",
+   "tokens": 102096,
+   "status10": "PRESENT+",
+   "v": [
+    0.02910958904067229,
+    0.03381869422264572
+   ],
+   "events": [
+    51,
+    72
+   ],
+   "expectedEvents": [
+    7.01,
+    9.62
+   ],
+   "A1_noDup": {
+    "z": [
+     11.9,
+     15.4
+    ],
+    "events": [
+     39,
+     57
+    ],
+    "status": "PRESENT+"
+   },
+   "A2_long6": {
+    "pairs": [
+     1728,
+     2095
+    ],
+    "events": [
+     51,
+     72
+    ],
+    "z": [
+     16.2,
+     20.1
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_last1": {
+    "v": [
+     0.171,
+     0.186
+    ],
+    "z": [
+     11.6,
+     13.4
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_cond": {
+    "v": [
+     0.17,
+     0.182
+    ],
+    "nullMean": [
+     0.0401,
+     0.0412
+    ],
+    "z": [
+     8.62,
+     10.4
+    ],
+    "eventsOf": [
+     300,
+     396
+    ]
+   },
+   "A8_poisson": {
+    "p": [
+     9.1e-27,
+     7.67e-38
+    ],
+    "z": [
+     10.6,
+     12.8
+    ],
+    "status": "PRESENT+",
+    "noDupStatus": "PRESENT+"
+   },
+   "A8_pooled": {
+    "events": 123,
+    "expected": 16.6,
+    "z": 16.7
+   },
+   "A4_prefixCopy": {
+    "z": [
+     21.2,
+     44.6
+    ],
+    "v": [
+     0.0377,
+     0.0446
+    ],
+    "status": "PRESENT+"
+   },
+   "A4_adjNg3": {
+    "z": [
+     163,
+     300
+    ],
+    "v": [
+     0.00105,
+     0.000909
+    ],
+    "status": "PRESENT+"
+   }
+  },
+  {
+   "id": "sfx-ud-slk",
+   "cls": "ud-present",
+   "tokens": 65159,
+   "status10": "PRESENT+",
+   "v": [
+    0.002406417112069903,
+    0.0022618748425884405
+   ],
+   "events": [
+    9,
+    9
+   ],
+   "expectedEvents": [
+    0.16,
+    0.24
+   ],
+   "A1_noDup": {
+    "z": [
+     13.9,
+     17.7
+    ],
+    "events": [
+     5,
+     7
+    ],
+    "status": "PRESENT+"
+   },
+   "A2_long6": {
+    "pairs": [
+     1487,
+     1670
+    ],
+    "events": [
+     5,
+     2
+    ],
+    "z": [
+     20.9,
+     10.7
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_last1": {
+    "v": [
+     0.00775,
+     0.00628
+    ],
+    "z": [
+     21.9,
+     16.3
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_cond": {
+    "v": [
+     null,
+     null
+    ],
+    "nullMean": [
+     null,
+     null
+    ],
+    "z": [
+     null,
+     null
+    ],
+    "eventsOf": [
+     29,
+     25
+    ]
+   },
+   "A8_poisson": {
+    "p": [
+     1.64e-13,
+     5.87e-12
+    ],
+    "z": [
+     7.28,
+     6.78
+    ],
+    "status": "PRESENT+",
+    "noDupStatus": "PRESENT+"
+   },
+   "A8_pooled": {
+    "events": 18,
+    "expected": 0.4,
+    "z": 10
+   },
+   "A4_prefixCopy": {
+    "z": [
+     19.2,
+     29.4
+    ],
+    "v": [
+     0.00428,
+     0.00603
+    ],
+    "status": "PRESENT+"
+   },
+   "A4_adjNg3": {
+    "z": [
+     18.3,
+     21.2
+    ],
+    "v": [
+     0.000196,
+     0.000149
+    ],
+    "status": "PRESENT+"
+   }
+  },
+  {
+   "id": "sfx-ud-fas",
+   "cls": "ud-absent",
+   "tokens": 299972,
+   "status10": "PRESENT+",
+   "v": [
+    0.00584795321628917,
+    0.006216505895281443
+   ],
+   "events": [
+    54,
+    58
+   ],
+   "expectedEvents": [
+    21.3,
+    22.2
+   ],
+   "A1_noDup": {
+    "z": [
+     7.64,
+     7.29
+    ],
+    "events": [
+     54,
+     57
+    ],
+    "status": "PRESENT+"
+   },
+   "A2_long6": {
+    "pairs": [
+     8193,
+     8370
+    ],
+    "events": [
+     50,
+     46
+    ],
+    "z": [
+     6.94,
+     5.09
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_last1": {
+    "v": [
+     0.0571,
+     0.0507
+    ],
+    "z": [
+     18.7,
+     17.6
+    ],
+    "status": "PRESENT+"
+   },
+   "A3_cond": {
+    "v": [
+     0.102,
+     0.123
+    ],
+    "nullMean": [
+     0.0842,
+     0.0921
+    ],
+    "z": [
+     1.21,
+     1.57
+    ],
+    "eventsOf": [
+     527,
+     473
+    ]
+   },
+   "A8_poisson": {
+    "p": [
+     2.13e-9,
+     1.81e-10
+    ],
+    "z": [
+     5.87,
+     6.27
+    ],
+    "status": "PRESENT+",
+    "noDupStatus": "PRESENT+"
+   },
+   "A8_pooled": {
+    "events": 112,
+    "expected": 43.5,
+    "z": 8.62
+   },
+   "A4_prefixCopy": {
+    "z": [
+     9.19,
+     11.6
+    ],
+    "v": [
+     0.00162,
+     0.00161
+    ],
+    "status": "PRESENT+"
+   },
+   "A4_adjNg3": {
+    "z": [
+     245,
+     218
+    ],
+    "v": [
+     0.0002,
+     0.00021
+    ],
+    "status": "PRESENT+"
+   }
+  },
+  {
+   "id": "sfx-ud-ind",
+   "cls": "ud-absent",
+   "tokens": 80944,
+   "status10": "ABSENT",
+   "v": [
+    0.0008984725964182871,
+    0.00097228974209429
+   ],
+   "events": [
+    2,
+    2
+   ],
+   "expectedEvents": [
+    1.02,
+    1.29
+   ],
+   "A1_noDup": {
+    "z": [
+     0.996,
+     0.664
+    ],
+    "events": [
+     2,
+     2
+    ],
+    "status": "ABSENT"
+   },
+   "A2_long6": {
+    "pairs": [
+     2049,
+     1885
+    ],
+    "events": [
+     2,
+     2
+    ],
+    "z": [
+     1.03,
+     0.876
+    ],
+    "status": "ABSENT"
+   },
+   "A3_last1": {
+    "v": [
+     0.00539,
+     0.00681
+    ],
+    "z": [
+     -0.56,
+     0.379
+    ],
+    "status": "ABSENT"
+   },
+   "A3_cond": {
+    "v": [
+     null,
+     null
+    ],
+    "nullMean": [
+     null,
+     null
+    ],
+    "z": [
+     null,
+     null
+    ],
+    "eventsOf": [
+     12,
+     14
+    ]
+   },
+   "A8_poisson": {
+    "p": [
+     0.272,
+     0.37
+    ],
+    "z": [
+     0.608,
+     0.332
+    ],
+    "status": "ABSENT",
+    "noDupStatus": "ABSENT"
+   },
+   "A8_pooled": {
+    "events": 4,
+    "expected": 2.31,
+    "z": 0.832
+   },
+   "A4_prefixCopy": {
+    "z": [
+     -0.474,
+     -0.776
+    ],
+    "v": [
+     0.000449,
+     0.000486
+    ],
+    "status": "ABSENT"
+   },
+   "A4_adjNg3": {
+    "z": [
+     -0.449,
+     -0.334
+    ],
+    "v": [
+     0.00000538,
+     0.00000558
+    ],
+    "status": "ABSENT"
+   }
+  },
+  {
+   "id": "sfx-ud-jpn",
+   "cls": "ud-absent",
+   "tokens": 146279,
+   "status10": "ABSENT",
+   "v": [
+    0.017597087378817378,
+    0.018260869564983295
+   ],
+   "events": [
+    58,
+    63
+   ],
+   "expectedEvents": [
+    52.9,
+    66.6
+   ],
+   "A1_noDup": {
+    "z": [
+     0.703,
+     -0.439
+    ],
+    "events": [
+     58,
+     63
+    ],
+    "status": "ABSENT"
+   },
+   "A2_long6": {
+    "pairs": [
+     2875,
+     3084
+    ],
+    "events": [
+     58,
+     63
+    ],
+    "z": [
+     0.756,
+     -0.402
+    ],
+    "status": "ABSENT"
+   },
+   "A3_last1": {
+    "v": [
+     0.0916,
+     0.102
+    ],
+    "z": [
+     -0.884,
+     -0.809
+    ],
+    "status": "ABSENT"
+   },
+   "A3_cond": {
+    "v": [
+     0.192,
+     0.179
+    ],
+    "nullMean": [
+     0.167,
+     0.183
+    ],
+    "z": [
+     1.22,
+     -0.167
+    ],
+    "eventsOf": [
+     302,
+     351
+    ]
+   },
+   "A8_poisson": {
+    "p": [
+     0.26,
+     0.686
+    ],
+    "z": [
+     0.645,
+     -0.483
+    ],
+    "status": "ABSENT",
+    "noDupStatus": "ABSENT"
+   },
+   "A8_pooled": {
+    "events": 121,
+    "expected": 119,
+    "z": 0.108
+   },
+   "A4_prefixCopy": {
+    "z": [
+     -1.06,
+     1.08
+    ],
+    "v": [
+     0.000303,
+     0.00116
+    ],
+    "status": "ABSENT"
+   },
+   "A4_adjNg3": {
+    "z": [
+     2.17,
+     -0.757
+    ],
+    "v": [
+     0.000072,
+     0.0000554
+    ],
+    "status": "AMBIGUOUS"
+   }
+  },
+  {
+   "id": "sfx-ud-kor",
+   "cls": "ud-absent",
+   "tokens": 49012,
+   "status10": "ABSENT",
+   "v": [
+    0,
+    0.0004344048657003441
+   ],
+   "events": [
+    0,
+    1
+   ],
+   "expectedEvents": [
+    0.61,
+    0.59
+   ],
+   "A1_noDup": {
+    "z": [
+     -0.724,
+     -0.813
+    ],
+    "events": [
+     0,
+     0
+    ],
+    "status": "ABSENT"
+   },
+   "A2_long6": {
+    "pairs": [
+     1087,
+     1238
+    ],
+    "events": [
+     0,
+     0
+    ],
+    "z": [
+     -0.725,
+     -0.624
+    ],
+    "status": "ABSENT"
+   },
+   "A3_last1": {
+    "v": [
+     0.00782,
+     0.00695
+    ],
+    "z": [
+     0.932,
+     0.0599
+    ],
+    "status": "ABSENT"
+   },
+   "A3_cond": {
+    "v": [
+     null,
+     null
+    ],
+    "nullMean": [
+     null,
+     null
+    ],
+    "z": [
+     null,
+     null
+    ],
+    "eventsOf": [
+     15,
+     16
+    ]
+   },
+   "A8_poisson": {
+    "p": [
+     1,
+     0.446
+    ],
+    "z": [
+     null,
+     0.136
+    ],
+    "status": "AMBIGUOUS(z undefined)",
+    "noDupStatus": "AMBIGUOUS(z undefined)"
+   },
+   "A8_pooled": {
+    "events": 1,
+    "expected": 1.2,
+    "z": -0.521
+   },
+   "A4_prefixCopy": {
+    "z": [
+     -0.316,
+     2.85
+    ],
+    "v": [
+     0,
+     0.000434
+    ],
+    "status": "AMBIGUOUS"
+   },
+   "A4_adjNg3": {
+    "z": [
+     null,
+     6.7
+    ],
+    "v": [
+     0,
+     0.0000163
+    ],
+    "status": "AMBIGUOUS(z undefined)"
+   }
+  }
+ ]
+}

@@ -1,0 +1,36 @@
+{
+ "slice": {
+  "docs": 20,
+  "chromeDf": 0.5,
+  "in": "v1-udhr/sidecar.jsonl"
+ },
+ "before": {
+  "cast": 584,
+  "capitalShare": 0.24,
+  "relations": 200,
+  "relBothEndsShare": 0.26
+ },
+ "after": {
+  "cast": 30,
+  "relations": 94,
+  "docsWith2Names": 7,
+  "chromeSurvivors": 0
+ },
+ "chromeExamples": [
+  "united nations high commissioner (10/20 corpus)",
+  "human rights language (10/20 corpus)",
+  "un general assembly (10/20 corpus)",
+  "adopted (10/20 corpus)",
+  "december (10/20 corpus)",
+  "declaration (10/20 corpus)",
+  "ohchr (10/20 corpus)",
+  "office (10/20 corpus)",
+  "paris (10/20 corpus)",
+  "publisher (10/20 corpus)",
+  "un (10/20 corpus)",
+  "united nations high commissioner (10/20 un-udhr)",
+  "human rights language (10/20 un-udhr)",
+  "un general assembly (10/20 un-udhr)"
+ ],
+ "verdict": "PASSING"
+}

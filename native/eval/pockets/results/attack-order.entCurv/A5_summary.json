@@ -1,0 +1,141 @@
+{
+ "n": 391,
+ "groups": {
+  "word P+": {
+   "n": 106,
+   "dropFirst": {
+    "evaluated": 106,
+    "sameSignShare": 0.981,
+    "medianRetention": 0.708,
+    "PRESENTsame": 65,
+    "PRESENTopp": 0
+   },
+   "dropLast": {
+    "evaluated": 106,
+    "sameSignShare": 0.887,
+    "medianRetention": 0.671,
+    "PRESENTsame": 53,
+    "PRESENTopp": 2
+   }
+  },
+  "word P-": {
+   "n": 13,
+   "dropFirst": {
+    "evaluated": 13,
+    "sameSignShare": 0.923,
+    "medianRetention": 0.647,
+    "PRESENTsame": 5,
+    "PRESENTopp": 0
+   },
+   "dropLast": {
+    "evaluated": 13,
+    "sameSignShare": 1,
+    "medianRetention": 1.288,
+    "PRESENTsame": 10,
+    "PRESENTopp": 0
+   }
+  },
+  "code P-": {
+   "n": 32,
+   "dropFirst": {
+    "evaluated": 32,
+    "sameSignShare": 0.531,
+    "medianRetention": 0.003,
+    "PRESENTsame": 5,
+    "PRESENTopp": 6
+   },
+   "dropLast": {
+    "evaluated": 32,
+    "sameSignShare": 0.875,
+    "medianRetention": 0.724,
+    "PRESENTsame": 22,
+    "PRESENTopp": 2
+   }
+  },
+  "code P+": {
+   "n": 14,
+   "dropFirst": {
+    "evaluated": 14,
+    "sameSignShare": 0.643,
+    "medianRetention": 0.402,
+    "PRESENTsame": 7,
+    "PRESENTopp": 3
+   },
+   "dropLast": {
+    "evaluated": 14,
+    "sameSignShare": 0.929,
+    "medianRetention": 1.049,
+    "PRESENTsame": 11,
+    "PRESENTopp": 1
+   }
+  },
+  "charbigram P-": {
+   "n": 7,
+   "dropFirst": {
+    "evaluated": 7,
+    "sameSignShare": 1,
+    "medianRetention": 0.864,
+    "PRESENTsame": 6,
+    "PRESENTopp": 0
+   },
+   "dropLast": {
+    "evaluated": 7,
+    "sameSignShare": 0.429,
+    "medianRetention": -0.023,
+    "PRESENTsame": 2,
+    "PRESENTopp": 1
+   }
+  },
+  "notation P+": {
+   "n": 6,
+   "dropFirst": {
+    "evaluated": 6,
+    "sameSignShare": 0.833,
+    "medianRetention": 0.593,
+    "PRESENTsame": 3,
+    "PRESENTopp": 0
+   },
+   "dropLast": {
+    "evaluated": 6,
+    "sameSignShare": 1,
+    "medianRetention": 1.109,
+    "PRESENTsame": 6,
+    "PRESENTopp": 0
+   }
+  },
+  "all P+": {
+   "n": 126,
+   "dropFirst": {
+    "evaluated": 126,
+    "sameSignShare": 0.937,
+    "medianRetention": 0.684,
+    "PRESENTsame": 75,
+    "PRESENTopp": 3
+   },
+   "dropLast": {
+    "evaluated": 126,
+    "sameSignShare": 0.897,
+    "medianRetention": 0.736,
+    "PRESENTsame": 70,
+    "PRESENTopp": 3
+   }
+  },
+  "all P-": {
+   "n": 53,
+   "dropFirst": {
+    "evaluated": 53,
+    "sameSignShare": 0.698,
+    "medianRetention": 0.267,
+    "PRESENTsame": 17,
+    "PRESENTopp": 6
+   },
+   "dropLast": {
+    "evaluated": 53,
+    "sameSignShare": 0.849,
+    "medianRetention": 0.79,
+    "PRESENTsame": 35,
+    "PRESENTopp": 3
+   }
+  }
+ }
+}

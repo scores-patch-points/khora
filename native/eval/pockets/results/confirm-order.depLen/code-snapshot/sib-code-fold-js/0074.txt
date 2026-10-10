@@ -1,0 +1,26 @@
+// IBM Model 1 (EM), sparse; scoring as per-token log-likelihood ratio against the target unigram.
+import { wordSegs, norm } from "../lib/common.mjs";
+export const toks = (t) => wordSegs(t, "und").map((x) => norm(x.t)).filter((w) => /[\p{L}\p{N}]/u.test(w));
+export function trainM1(pairs, { iters = 10, minCount = 2, maxLen = 60 } = {}) {
+  // pairs: [{src:[tokens], tgt:[tokens]}] ; learns t(tgt|src)
+  const cs = new Map(), ct = new Map(); for (const p of pairs) { for (const w of p.src) cs.set(w, (cs.get(w) || 0) + 1); for (const w of p.tgt) ct.set(w, (ct.get(w) || 0) + 1); }
+  const UNK = "\u0000unk"; const ms = (w) => (cs.get(w) >= minCount ? w : UNK), mt = (w) => (ct.get(w) >= minCount ? w : UNK);
+  const data = pairs.map((p) => ({ s: ["\u0000null", ...p.src.slice(0, maxLen).map(ms)], t: p.tgt.slice(0, maxLen).map(mt) })).filter((p) => p.t.length && p.s.length > 1);
+  const tv = new Set(); for (const d of data) for (const w of d.t) tv.add(w); const V = tv.size || 1;
+  let t = new Map(); const get = (s, w) => { const m = t.get(s); return m ? (m.get(w) ?? 1 / V) : 1 / V; };
+  for (let it = 0; it < iters; it++) {
+    const cnt = new Map(), tot = new Map();
+    for (const d of data) for (const w of d.t) { let z = 0; for (const s of d.s) z += get(s, w); for (const s of d.s) { const c = get(s, w) / z; let m = cnt.get(s); if (!m) { m = new Map(); cnt.set(s, m); } m.set(w, (m.get(w) || 0) + c); tot.set(s, (tot.get(s) || 0) + c); } }
+    const nt = new Map(); for (const [s, m] of cnt) { const z = tot.get(s); const mm = new Map(); for (const [w, c] of m) mm.set(w, c / z); nt.set(s, mm); } t = nt;
+  }
+  // target unigram (add-one over V)
+  let N = 0; for (const [w, c] of ct) N += c; const uni = (w) => ((ct.get(w) >= minCount ? ct.get(w) : [...ct.values()].filter((c) => c < minCount).reduce((a, b) => a + b, 0) || 1) + 1) / (N + V + 1);
+  const unkMass = [...ct.values()].filter((c) => c < minCount).reduce((a, b) => a + b, 0);
+  const uniP = (w) => { const k = ct.get(w); return ((k >= minCount ? k : Math.max(unkMass, 1)) + 1) / (N + V + 1); };
+  return { t, V, uniP, ms, mt, trainPairs: data.length, srcVocab: cs.size, tgtVocab: ct.size, get };
+}
+/** mean per-target-token log-likelihood ratio of P(tgt|src) vs unigram */
+export function scoreM1(model, src, tgt) {
+  const s = ["\u0000null", ...src.slice(0, 60).map(model.ms)]; const t = tgt.slice(0, 60).map(model.mt); if (!t.length) return 0;
+  let sum = 0; for (const w of t) { let z = 0; for (const e of s) z += model.get(e, w); z /= s.length; sum += Math.log(Math.max(z, 1e-12)) - Math.log(model.uniP(w)); } return sum / t.length;
+}

@@ -1,0 +1,92 @@
+import unittest
+
+from podcast.feed import parse_feed
+from podcast.opml import parse_opml
+from podcast.store import fold_events
+from podcast.queue import build_queue
+
+RSS = """<?xml version="1.0"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
+<channel>
+<title>Test Cast</title>
+<item>
+  <title>Episode One</title>
+  <guid>ep1</guid>
+  <pubDate>Mon, 01 Jan 2024 10:00:00 GMT</pubDate>
+  <enclosure url="https://example.com/1.mp3" type="audio/mpeg" length="123"/>
+  <itunes:duration>1:02:03</itunes:duration>
+</item>
+<item>
+  <title>Episode Two</title>
+  <guid>ep2</guid>
+  <pubDate>Tue, 02 Jan 2024 10:00:00 GMT</pubDate>
+  <enclosure url="https://example.com/2.mp3" type="audio/mpeg" length="456"/>
+  <itunes:duration>65</itunes:duration>
+</item>
+</channel>
+</rss>"""
+
+OPML = """<?xml version="1.0"?>
+<opml version="2.0"><body>
+<outline text="A" xmlUrl="https://a.example/feed"/>
+<outline text="Folder">
+  <outline text="B" xmlUrl="https://b.example/feed"/>
+</outline>
+<outline text="NoUrl"/>
+</body></opml>"""
+
+
+class FeedTest(unittest.TestCase):
+    def test_parse_feed(self):
+        eps = parse_feed(RSS)
+        self.assertEqual(len(eps), 2)
+        self.assertEqual(eps[0]["title"], "Episode One")
+        self.assertEqual(eps[0]["audio_url"], "https://example.com/1.mp3")
+        self.assertEqual(eps[0]["guid"], "ep1")
+        self.assertEqual(eps[0]["pub_date"], "Mon, 01 Jan 2024 10:00:00 GMT")
+        self.assertEqual(eps[0]["duration_seconds"], 3723)
+        self.assertEqual(eps[1]["duration_seconds"], 65)
+
+    def test_empty_feed(self):
+        self.assertEqual(parse_feed("<rss><channel></channel></rss>"), [])
+
+
+class OpmlTest(unittest.TestCase):
+    def test_parse_opml(self):
+        self.assertEqual(parse_opml(OPML), ["https://a.example/feed", "https://b.example/feed"])
+
+    def test_empty(self):
+        self.assertEqual(parse_opml("<opml><body></body></opml>"), [])
+
+
+class StoreTest(unittest.TestCase):
+    def test_fold(self):
+        events = [
+            {"op": "subscribe", "url": "A"},
+            {"op": "subscribe", "url": "B"},
+            {"op": "position", "guid": "ep1", "seconds": 30},
+            {"op": "played", "guid": "ep1"},
+            {"op": "unsubscribe", "url": "B"},
+            {"op": "subscribe", "url": "A"},
+            {"op": "subscribe", "url": "C"},
+        ]
+        st = fold_events(events)
+        self.assertEqual(st["subscriptions"], ["A", "C"])
+        self.assertEqual(st["positions"], {"ep1": 30})
+        self.assertEqual(st["played"], ["ep1"])
+
+
+class QueueTest(unittest.TestCase):
+    def test_queue(self):
+        eps = [
+            {"guid": "a", "pub_date": "2024-01-01"},
+            {"guid": "b", "pub_date": "2024-01-03"},
+            {"guid": "c", "pub_date": "2024-01-02"},
+        ]
+        st = {"played": ["b"], "subscriptions": [], "positions": {}}
+        q = build_queue(eps, st)
+        self.assertEqual([e["guid"] for e in q], ["c", "a"])
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -1,0 +1,37 @@
+
+// ── PROBE transfer (a fitted classifier trained on DISCOVERY pairs, tested on confirmation pairs; an existence test, not a rule) ───────────────────────────────────────────────────────────
+function probeTransfer(trainPairs, testPairs, kindTrain, kindTest, group, vecKey) {
+  const POOLED = ["c2", "c3", "c4_6", "c7_15", "c16p"];
+  const tr = cellPairs(trainPairs, kindTrain, group, POOLED), te = cellPairs(testPairs, kindTest, group, POOLED);
+  const mem = (by) => Object.values(by).flat().flatMap((x) => [{ m: x.p, y: 1 }, { m: x.n, y: 0 }]);
+  const A = mem(tr), T = mem(te);
+  if (A.length < 100 || T.length < 40) return { skipped: "too few" };
+  let [Xtr, Xte] = standardise(A.map((r) => r.m[vecKey]), T.map((r) => r.m[vecKey]));
+  if (Xtr[0].length > 24) { const pca = fitPCA(Xtr, 24); Xtr = Xtr.map((r) => projectPCA(pca, r)); Xte = Xte.map((r) => projectPCA(pca, r)); }
+  const w = fitLogit(Xtr, A.map((r) => r.y));
+  T.forEach((r, k) => { r.m.PROBE_T = predict(w, Xte[k]); });
+  const b = bootStrat(te, (m) => m.PROBE_T, { B, seed: SEED + 77 });
+  return { trainPairs: A.length / 2, testPairs: T.length / 2, auc: b.point, ci: [b.lo, b.hi], perStratum: Object.fromEntries(POOLED.map((st) => [st, te[st].length >= 2 ? round(aucPairs(te[st], (m) => m.PROBE_T)) : null])) };
+}
+
+async function main() {
+  const t0 = Date.now(), rows = loadRows(DATA), pairs = withVectors(buildPairs(rows));
+  const sums = fs.readdirSync(DATA).filter((f) => f.endsWith(".summary.json")).map((f) => JSON.parse(fs.readFileSync(path.join(DATA, f), "utf8")));
+  const k1n = sums.reduce((a, s) => a + s.K1_sham.n, 0), k1 = sums.reduce((a, s) => a + (s.K1_sham.nullShare ?? 0) * s.K1_sham.n, 0), k6n = sums.reduce((a, s) => a + s.K6_determinism.n, 0), k6 = sums.reduce((a, s) => a + s.K6_determinism.same, 0);
+  const result = { module: "eval/law/provisional/ablation-scope/confirm-rules.mjs", rulesFile: RULES_F, rulesFileSha256: createHash("sha256").update(fs.readFileSync(RULES_F)).digest("hex"), data: DATA, B, rows: rows.length, pairs: pairs.length,
+    K1_sham: { nullShare: k1n ? round(k1 / k1n) : null, n: k1n }, K6_determinism: { same: k6, n: k6n }, candidates: {}, limits: {}, probes: {}, finalRules: [] };
+  result.runValid = result.K1_sham.nullShare === 1 && k6 === k6n;
+  for (const spec of frozen.candidates) { result.candidates[spec.tag] = evalScope(pairs, spec, spec.tag); console.error(`${spec.tag}: ${result.candidates[spec.tag].verdict} auc ${result.candidates[spec.tag].auc} ${JSON.stringify(result.candidates[spec.tag].ci)} (${((Date.now() - t0) / 1000).toFixed(0)} s)`); }
+  for (const spec of frozen.limits) { result.limits[spec.tag] = evalScope(pairs, spec, spec.tag); console.error(`${spec.tag}: auc ${result.limits[spec.tag].auc} (${((Date.now() - t0) / 1000).toFixed(0)} s)`); }
+  const train = withVectors(buildPairs(loadRows(TRAIN)));
+  for (const [kt, ke, g] of [["irc", "irc", "A"], ["irc", "irc", "B"], ["wp", "mm", "A"], ["wp", "mm", "B"]]) result.probes[`${ke}.${g}`] = { record: probeTransfer(train, pairs, kt, ke, g, "rv"), controlVector: probeTransfer(train, pairs, kt, ke, g, "cv") };
+  const pass = Object.values(result.candidates).filter((c) => c.verdict === "PASS").sort((a, b) => b.ci[0] - a.ci[0]);
+  const fam = (c) => `${c.spec.group}:${frozen.candidates.find((x) => x.id === c.spec.id)?.scoreKind === "ablation" ? "slot" : /^c\./.test(c.spec.score) ? "company" : "record"}`, seen = new Set();
+  for (const c of pass) { const k = fam(c); if (seen.has(k) || result.finalRules.length >= 2) continue; seen.add(k); result.finalRules.push({ id: c.spec.id, tag: Object.keys(result.candidates).find((t) => result.candidates[t] === c), confirmedAuc: c.auc, ci: c.ci, scope: c.liveStrata.filter((st) => c.cells[st].auc >= 0.58), threshold: c.spec.threshold, tpr: c.tpr, tnr: c.tnr }); }
+  result.headerSha256 = createHash("sha256").update(fs.readFileSync(fileURLToPath(import.meta.url), "utf8").split("// ═══ END OF PRE-REGISTRATION")[0]).digest("hex");
+  result.seconds = round((Date.now() - t0) / 1000, 1);
+  fs.mkdirSync(path.dirname(OUTF), { recursive: true });
+  fs.writeFileSync(OUTF, JSON.stringify(result, null, 1));
+  console.log(JSON.stringify({ runValid: result.runValid, verdicts: Object.fromEntries(Object.entries(result.candidates).map(([k, v]) => [k, v.verdict])), finalRules: result.finalRules.map((r) => r.id), headerSha256: result.headerSha256 }, null, 1));
+}
+await main();

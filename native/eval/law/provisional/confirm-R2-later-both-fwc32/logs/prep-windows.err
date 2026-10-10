@@ -1,0 +1,62 @@
+afr B dev 194 train 1315 r1 1018 194 file -> 29 953 tokens 20016   dup 0
+bul B dev 1115 train 8907 r1 7337 1115 file -> 623 1807 tokens 20014   dup 0
+cat B dev 1709 train 13123 r1 7103 1709 file -> 10376 732 tokens 20002   dup 0
+ces B dev 603 train 23478 r1 7156 603 file -> 1156 1603 tokens 20037   dup 5
+cym B dev 409 train 1355 r1 207 409 file -> 616 739 tokens 14272 REDUCED  dup 1
+dan B dev 562 train 4382 r1 2426 562 file -> 298 1297 tokens 20030   dup 1
+est B dev 3122 train 24601 r1 19769 3122 file -> 17601 1848 tokens 20000   dup 7
+eus B dev 1798 train 5396 r1 2343 1798 file -> 132 2121 tokens 19965   dup 9
+gle B dev 451 train 3998 r1 1818 451 file -> 3159 838 tokens 20023   dup 0
+glg B dev 860 train 2272 r1 1164 860 file -> 223 631 tokens 20010   dup 0
+hrv B dev 960 train 6913 r1 3021 960 file -> 4700 990 tokens 19979   dup 1
+hun B dev 441 train 910 r1 166 441 file -> 607 303 tokens 7518 REDUCED  dup 0
+hye B dev 575 train 4352 r1 3731 575 file -> 2168 1250 tokens 19988   dup 5
+kat B dev 469 train 2214 r1 938 469 file -> 0 938 tokens 14918 REDUCED  dup 10
+lav B dev 2106 train 15057 r1 5795 2106 file -> 623 1955 tokens 19996   dup 6
+lit B dev 617 train 2341 r1 846 617 file -> 1463 878 tokens 15605 REDUCED  dup 1
+lzh B dev 6102 train 74604 r1 9252 6102 file -> 70708 3791 tokens 19535   dup 336
+mar B dev 46 train 373 r1 173 46 file -> 219 154 tokens 1073 REDUCED  dup 0
+mlt B dev 433 train 1123 r1 607 433 file -> 0 607 tokens 11032 REDUCED  dup 2
+nob B dev 2409 train 15696 r1 11496 2409 file -> 6652 1644 tokens 19998   dup 4
+ron B dev 752 train 8043 r1 1341 752 file -> 6896 896 tokens 20001   dup 0
+slk B dev 1060 train 8483 r1 2842 1060 file -> 5367 2987 tokens 20003   dup 0
+slv B dev 1250 train 10901 r1 4262 1250 file -> 1391 1130 tokens 20011   dup 0
+srp B dev 536 train 3328 r1 485 536 file -> 1911 1027 tokens 20001   dup 0
+tam B dev 80 train 400 r1 284 80 file -> 0 284 tokens 4150 REDUCED  dup 0
+tel B dev 131 train 1051 r1 502 131 file -> 0 502 tokens 1883 REDUCED  dup 4
+uig B dev 900 train 1656 r1 241 900 file -> 1141 515 tokens 4227 REDUCED  dup 0
+wol B dev 449 train 1188 r1 257 449 file -> 706 482 tokens 8953 REDUCED  dup 0
+eng C dev 1987 train 12504 r1 8441 1987 file -> 5418 1281 tokens 20000   dup 6
+spa C dev 1654 train 14286 r1 7367 1654 file -> 2969 532 tokens 20042   dup 0
+rus C dev 579 train 3850 r1 2679 579 file -> 1310 1243 tokens 20010   dup 0
+cmn C dev 500 train 3997 r1 1845 500 file -> 825 923 tokens 20013   dup 0
+arb C dev 909 train 6070 r1 1416 909 file -> 2965 601 tokens 20042   dup 1
+heb C dev 484 train 5166 r1 2100 484 file -> 749 770 tokens 20023   dup 0
+fas C dev 1456 train 26196 r1 6025 1456 file -> 8622 1303 tokens 20007   dup 0
+kor C dev 950 train 4400 r1 989 950 file -> 2156 1795 tokens 19488   dup 64
+jpn C dev 507 train 7050 r1 1939 507 file -> 175 934 tokens 20002   dup 0
+fra C dev 1476 train 14450 r1 3777 1476 file -> 1706 924 tokens 20014   dup 1
+deu C dev 799 train 13813 r1 5210 799 file -> 10682 1143 tokens 20040   dup 0
+ita C dev 564 train 13121 r1 4035 564 file -> 91 1146 tokens 20017   dup 0
+por C dev 1204 train 9616 r1 4390 1204 file -> 3373 863 tokens 20001   dup 0
+nld C dev 718 train 12289 r1 1864 718 file -> 5641 1164 tokens 20011   dup 0
+pol C dev 2215 train 17722 r1 7033 2215 file -> 4692 1363 tokens 19992   dup 6
+ukr C dev 673 train 5521 r1 3877 673 file -> 402 1603 tokens 20000   dup 0
+hin C dev 1659 train 13306 r1 1589 1659 file -> 9571 974 tokens 20000   dup 0
+vie C dev 1123 train 1400 r1 161 1123 file -> 0 161 tokens 1920 REDUCED  dup 2
+ind C dev 559 train 4481 r1 239 559 file -> 1963 1036 tokens 20001   dup 0
+swe C dev 504 train 4315 r1 1738 504 file -> 2259 1433 tokens 20007   dup 2
+urd C dev 552 train 4043 r1 352 552 file -> 3248 778 tokens 20001   dup 0
+tur C dev 1090 train 3430 r1 768 1090 file -> 1858 1572 tokens 13632 REDUCED  dup 1
+ell C dev 403 train 1662 r1 977 403 file -> 79 858 tokens 20049   dup 4
+fin C dev 1364 train 12217 r1 9083 1364 file -> 1532 1564 tokens 19987   dup 4
+be A be_hse:train N 22838 tokens 221989 -> 16623 2217 20010
+is A is_icepahc:train N 34007 tokens 623713 -> 29736 1384 20000
+lat A la_proiel:train N 16196 tokens 177558 -> 13917 1187 20012
+grc A grc_proiel:train N 15016 tokens 187039 -> 4986 2043 20048
+got A got_proiel:train N 3387 tokens 35024 -> 1133 1972 20050
+chu A cu_proiel:train N 18327 tokens 159710 -> 7503 1873 20004
+cop A cop_scriptorium:train N 1419 tokens 33362 -> 1 890 20052
+fao A fo_farpahc:train N 1020 tokens 18693 -> 0 1020 18693
+kaz A kk_ktb:test N 1047 tokens 8025 -> 0 1047 8025
+yor A yo_ytb:test N 317 tokens 7129 -> 0 317 7129

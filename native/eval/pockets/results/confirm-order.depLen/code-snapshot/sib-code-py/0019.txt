@@ -1,0 +1,85 @@
+"""Fetch-backed transport standing in for aiohttp/Playwright.
+
+This is the one piece that's genuinely new. Everything in caselink_client.py
+that used to be `await page.goto(...)` / `await frame.query_selector(...)` or
+`await session.post(...)` now goes through `get()`/`post()` here instead,
+which speak to caselink.nashville.gov through the relay in relay/server.mjs
+because a browser tab cannot reach that host directly (no CORS headers there
+— confirmed live: a cross-origin fetch throws "Failed to fetch").
+
+Session state: CaseLink authenticates by cookie, but fetch() never exposes
+Set-Cookie to JS and refuses to let us set a literal Cookie header ourselves.
+So the relay hands the cookie jar back as a custom `X-Relay-Cookie` header,
+and this module just holds that opaque string in memory and resends it —
+the relay itself keeps no session state between calls.
+
+CaseLink's pages declare `charset=windows-1252` (seen live on the login page)
+so responses are decoded as cp1252, not assumed UTF-8.
+"""
+from __future__ import annotations
+
+from dataclasses import dataclass
+from urllib.parse import urlencode
+
+try:
+    from pyodide.http import pyfetch  # type: ignore
+    IN_PYODIDE = True
+except ImportError:  # running under plain CPython, e.g. for local tests
+    IN_PYODIDE = False
+
+
+RELAY_URL = "http://localhost:8787/caselink-relay"
+
+
+@dataclass
+class Response:
+    status: int
+    text: str
+    url: str
+
+
+class CaseLinkTransport:
+    """Owns the one thing that must persist across requests: the cookie jar."""
+
+    def __init__(self, relay_url: str = RELAY_URL):
+        self.relay_url = relay_url
+        self._cookie = ""
+
+    async def get(self, path: str) -> Response:
+        return await self._request("GET", path)
+
+    async def post(self, path: str, fields: dict) -> Response:
+        body = urlencode(fields)
+        return await self._request(
+            "POST", path, body=body, content_type="application/x-www-form-urlencoded"
+        )
+
+    async def _request(
+        self, method: str, path: str, body: str = "", content_type: str | None = None
+    ) -> Response:
+        if not IN_PYODIDE:
+            raise RuntimeError(
+                "CaseLinkTransport needs Pyodide's pyfetch; run under a real "
+                "Pyodide page, or substitute a fake transport for local tests."
+            )
+        import json as _json
+
+        payload = _json.dumps(
+            {"path": path, "method": method, "body": body, "contentType": content_type}
+        )
+        resp = await pyfetch(
+            self.relay_url,
+            method="POST",
+            headers={"Content-Type": "application/json", "X-Relay-Cookie": self._cookie},
+            body=payload,
+        )
+        new_cookie = resp.headers.get("X-Relay-Cookie") or resp.headers.get("x-relay-cookie")
+        if new_cookie is not None:
+            self._cookie = new_cookie
+        raw = await resp.bytes()
+        text = raw.decode("cp1252", errors="replace")
+        return Response(status=resp.status, text=text, url=path)
+
+    def reset_session(self) -> None:
+        """Drop the cookie jar — start over as a logged-out client."""
+        self._cookie = ""

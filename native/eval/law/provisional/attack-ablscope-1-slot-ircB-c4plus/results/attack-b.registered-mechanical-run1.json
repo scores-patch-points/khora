@@ -1,0 +1,683 @@
+{
+ "module": "eval/law/provisional/attack-ablscope-1-slot-ircB-c4plus/attack-b-forking.mjs",
+ "rule": "ablscope-1-slot-ircB-c4plus",
+ "B": 1000,
+ "splits": 400,
+ "tokensLoaded": 37572,
+ "missing": 0,
+ "B1": {
+  "headerRecomputedEqualsLogged": true,
+  "headerRecomputedEqualsJson": true,
+  "headerSha256": "9ea935088986f8ee3ef09cee89f8d109f1cf72b168ae6113209afebe3a991c7d",
+  "headerLogPredatesFirstReadFile": true,
+  "headerLogTime": "2026-10-07T07:25:09.268Z",
+  "firstReadFileBirth": "2026-10-07T07:25:58.471Z",
+  "analyseMjsLastModified": "2026-10-07T07:28:36.495Z",
+  "analyseBodyEditedAfterFirstRead": true,
+  "passListCode": {
+   "auc062": true,
+   "lb055": true,
+   "permQ95": true,
+   "controlsInBand": true,
+   "probe058": true,
+   "consistency75": true,
+   "spec095": true
+  },
+  "perDayT1": {
+   "days": 13,
+   "aucStrictlyAbove05": 11,
+   "aucEqual05": 2,
+   "aucBelow05": 0,
+   "daysAllZero": 2,
+   "detail": [
+    {
+     "day": "kubuntu/2007-03-15",
+     "pairs": 49,
+     "auc": 0.8163,
+     "allZero": false,
+     "namesFlagged": 32
+    },
+    {
+     "day": "kubuntu/2009-07-15",
+     "pairs": 8,
+     "auc": 1,
+     "allZero": false,
+     "namesFlagged": 8
+    },
+    {
+     "day": "kubuntu/2010-03-15",
+     "pairs": 3,
+     "auc": 0.8333,
+     "allZero": false,
+     "namesFlagged": 2
+    },
+    {
+     "day": "kubuntu/2010-07-15",
+     "pairs": 1,
+     "auc": 1,
+     "allZero": false,
+     "namesFlagged": 1
+    },
+    {
+     "day": "kubuntu/2011-03-15",
+     "pairs": 4,
+     "auc": 0.875,
+     "allZero": false,
+     "namesFlagged": 3
+    },
+    {
+     "day": "kubuntu/2012-07-15",
+     "pairs": 1,
+     "auc": 1,
+     "allZero": false,
+     "namesFlagged": 1
+    },
+    {
+     "day": "kubuntu/2013-03-15",
+     "pairs": 1,
+     "auc": 0.5,
+     "allZero": true,
+     "namesFlagged": 0
+    },
+    {
+     "day": "kubuntu/2014-07-15",
+     "pairs": 1,
+     "auc": 0.5,
+     "allZero": true,
+     "namesFlagged": 0
+    },
+    {
+     "day": "ubuntu/2014-03-15",
+     "pairs": 2,
+     "auc": 1,
+     "allZero": false,
+     "namesFlagged": 2
+    },
+    {
+     "day": "xubuntu/2007-03-15",
+     "pairs": 2,
+     "auc": 0.75,
+     "allZero": false,
+     "namesFlagged": 1
+    },
+    {
+     "day": "xubuntu/2008-07-15",
+     "pairs": 1,
+     "auc": 1,
+     "allZero": false,
+     "namesFlagged": 1
+    },
+    {
+     "day": "xubuntu/2011-07-15",
+     "pairs": 1,
+     "auc": 1,
+     "allZero": false,
+     "namesFlagged": 1
+    },
+    {
+     "day": "xubuntu/2013-03-15",
+     "pairs": 1,
+     "auc": 1,
+     "allZero": false,
+     "namesFlagged": 1
+    }
+   ]
+  },
+  "floor": {
+   "E_CORE_E_SRV": {
+    "pairs": 49,
+    "namesFlagged": 0,
+    "controlsFlagged": 0
+   },
+   "E_REUSE": {
+    "pairs": 225,
+    "namesFlagged": 0.0222,
+    "controlsFlagged": 0
+   }
+  },
+  "floorTestHasNoPower": true
+ },
+ "B2": {
+  "days": 46,
+  "splits": 400,
+  "selectionFrequency": {
+   "A:c4_6": 0,
+   "A:c7_15": 0,
+   "A:c16p": 0.015,
+   "B:c2": 0,
+   "B:c3": 0,
+   "B:c4_6": 1,
+   "B:c7_15": 1,
+   "B:c16p": 0.998
+  },
+  "exactRegisteredScopeFrequency": 0.983,
+  "noCellSelected": 0,
+  "registeredHeldOut": {
+   "median": 0.823,
+   "p05": 0.7937,
+   "p95": 0.8548,
+   "min": 0.7764,
+   "specMedian": 0.99,
+   "specP05": 0.9836
+  },
+  "selectedScopeHeldOut": {
+   "n": 400,
+   "median": 0.8226,
+   "p05": 0.7932,
+   "p95": 0.8548
+  },
+  "stable": {
+   "b46_b715_ge90": true,
+   "b16p_ge60": true,
+   "floorCellsLe5": true,
+   "groupALe10": true,
+   "p05HeldOutGe070": true,
+   "p05HeldOutGe062": true,
+   "lowSelection70": false
+  },
+  "bySource": {
+   "reuseToCore": {
+    "sel": [
+     "B:c4_6",
+     "B:c7_15",
+     "B:c16p"
+    ],
+    "selectedHeld": {
+     "auc": 0.8555555555555555,
+     "spec": 0.9777777777777777,
+     "n": 90
+    },
+    "registeredHeld": {
+     "auc": 0.8555555555555555,
+     "spec": 0.9777777777777777,
+     "n": 90
+    }
+   },
+   "coreToReuse": {
+    "sel": [
+     "B:c4_6",
+     "B:c7_15"
+    ],
+    "selectedHeld": {
+     "auc": 0.7933753943217665,
+     "spec": 0.9936908517350158,
+     "n": 317
+    },
+    "registeredHeld": {
+     "auc": 0.816953316953317,
+     "spec": 0.9926289926289926,
+     "n": 407
+    }
+   }
+  }
+ },
+ "B3a": {
+  "cells": {
+   "A:c4_6": 0.7541,
+   "A:c7_15": 0.822,
+   "A:c16p": 0.8034,
+   "B:c2": 0.5,
+   "B:c3": 0.5194,
+   "B:c4_6": 0.7398,
+   "B:c7_15": 0.875,
+   "B:c16p": 0.8866
+  },
+  "observedMax": 0.8866,
+  "nullMaxQ95": 0.5812,
+  "nullMaxMean": 0.5411,
+  "p": 0.001,
+  "minCellAucOfRegistered": 0.7398
+ },
+ "B3b": {
+  "sets": {
+   "T1_E_CORE": {
+    "pairs": 75,
+    "auc": 0.8467,
+    "p": 0.001,
+    "nullExceed062": 0.009,
+    "nullQ95": 0.58,
+    "holm": 0.038
+   },
+   "T2_E_REUSE": {
+    "pairs": 407,
+    "auc": 0.817,
+    "p": 0.001,
+    "nullExceed062": 0,
+    "nullQ95": 0.5319,
+    "holm": 0.038
+   },
+   "T3_E_SRV": {
+    "pairs": 15,
+    "auc": 0.9,
+    "p": 0.001,
+    "nullExceed062": 0.207,
+    "nullQ95": 0.7,
+    "holm": 0.038
+   },
+   "X_DE": {
+    "pairs": 25,
+    "auc": 0.86,
+    "p": 0.001,
+    "nullExceed062": 0.132,
+    "nullQ95": 0.62,
+    "holm": 0.038
+   },
+   "X_ES": {
+    "pairs": 42,
+    "auc": 0.8452,
+    "p": 0.001,
+    "nullExceed062": 0.031,
+    "nullQ95": 0.6071,
+    "holm": 0.038
+   },
+   "X_IT": {
+    "pairs": 69,
+    "auc": 0.6957,
+    "p": 0.001,
+    "nullExceed062": 0.001,
+    "nullQ95": 0.5652,
+    "holm": 0.038
+   },
+   "X_ALL": {
+    "pairs": 136,
+    "auc": 0.7721,
+    "p": 0.001,
+    "nullExceed062": 0,
+    "nullQ95": 0.5515,
+    "holm": 0.038
+   },
+   "UD:bul": {
+    "pairs": 18,
+    "auc": 0.5,
+    "p": 1,
+    "nullExceed062": 0,
+    "nullQ95": 0.5,
+    "holm": 1
+   },
+   "UD:cat": {
+    "pairs": 654,
+    "auc": 0.5015,
+    "p": 0.2547,
+    "nullExceed062": 0,
+    "nullQ95": 0.5015,
+    "holm": 1
+   },
+   "UD:cym": {
+    "pairs": 34,
+    "auc": 0.4853,
+    "p": 1,
+    "nullExceed062": 0,
+    "nullQ95": 0.5147,
+    "holm": 1
+   },
+   "UD:dan": {
+    "pairs": 15,
+    "auc": 0.4667,
+    "p": 1,
+    "nullExceed062": 0,
+    "nullQ95": 0.5333,
+    "holm": 1
+   },
+   "UD:deu": {
+    "pairs": 23,
+    "auc": 0.5,
+    "p": 1,
+    "nullExceed062": 0,
+    "nullQ95": 0.5,
+    "holm": 1
+   },
+   "UD:ell": {
+    "pairs": 25,
+    "auc": 0.5,
+    "p": 1,
+    "nullExceed062": 0,
+    "nullQ95": 0.5,
+    "holm": 1
+   },
+   "UD:eng": {
+    "pairs": 143,
+    "auc": 0.5105,
+    "p": 0.2228,
+    "nullExceed062": 0,
+    "nullQ95": 0.5175,
+    "holm": 1
+   },
+   "UD:est": {
+    "pairs": 242,
+    "auc": 0.5124,
+    "p": 0.0839,
+    "nullExceed062": 0,
+    "nullQ95": 0.5124,
+    "holm": 1
+   },
+   "UD:fas": {
+    "pairs": 37,
+    "auc": 0.527,
+    "p": 0.2627,
+    "nullExceed062": 0,
+    "nullQ95": 0.527,
+    "holm": 1
+   },
+   "UD:fin": {
+    "pairs": 96,
+    "auc": 0.5625,
+    "p": 0.002,
+    "nullExceed062": 0,
+    "nullQ95": 0.5313,
+    "holm": 0.062
+   },
+   "UD:gle": {
+    "pairs": 18,
+    "auc": 0.4722,
+    "p": 1,
+    "nullExceed062": 0,
+    "nullQ95": 0.5278,
+    "holm": 1
+   },
+   "UD:heb": {
+    "pairs": 41,
+    "auc": 0.5,
+    "p": 1,
+    "nullExceed062": 0,
+    "nullQ95": 0.5,
+    "holm": 1
+   },
+   "UD:hin": {
+    "pairs": 538,
+    "auc": 0.5,
+    "p": 1,
+    "nullExceed062": 0,
+    "nullQ95": 0.5,
+    "holm": 1
+   },
+   "UD:hrv": {
+    "pairs": 102,
+    "auc": 0.5049,
+    "p": 0.5015,
+    "nullExceed062": 0,
+    "nullQ95": 0.5049,
+    "holm": 1
+   },
+   "UD:hun": {
+    "pairs": 58,
+    "auc": 0.5,
+    "p": 1,
+    "nullExceed062": 0,
+    "nullQ95": 0.5,
+    "holm": 1
+   },
+   "UD:hye": {
+    "pairs": 30,
+    "auc": 0.5167,
+    "p": 0.4965,
+    "nullExceed062": 0,
+    "nullQ95": 0.5167,
+    "holm": 1
+   },
+   "UD:ind": {
+    "pairs": 123,
+    "auc": 0.4919,
+    "p": 1,
+    "nullExceed062": 0,
+    "nullQ95": 0.5081,
+    "holm": 1
+   },
+   "UD:lav": {
+    "pairs": 85,
+    "auc": 0.5235,
+    "p": 0.1479,
+    "nullExceed062": 0,
+    "nullQ95": 0.5235,
+    "holm": 1
+   },
+   "UD:mlt": {
+    "pairs": 22,
+    "auc": 0.5,
+    "p": 1,
+    "nullExceed062": 0,
+    "nullQ95": 0.5,
+    "holm": 1
+   },
+   "UD:nld": {
+    "pairs": 51,
+    "auc": 0.4902,
+    "p": 1,
+    "nullExceed062": 0,
+    "nullQ95": 0.5098,
+    "holm": 1
+   },
+   "UD:nob": {
+    "pairs": 284,
+    "auc": 0.4982,
+    "p": 0.7742,
+    "nullExceed062": 0,
+    "nullQ95": 0.5088,
+    "holm": 1
+   },
+   "UD:por": {
+    "pairs": 88,
+    "auc": 0.4943,
+    "p": 1,
+    "nullExceed062": 0,
+    "nullQ95": 0.5057,
+    "holm": 1
+   },
+   "UD:slv": {
+    "pairs": 20,
+    "auc": 0.5,
+    "p": 1,
+    "nullExceed062": 0,
+    "nullQ95": 0.5,
+    "holm": 1
+   },
+   "UD:spa": {
+    "pairs": 393,
+    "auc": 0.4975,
+    "p": 0.9401,
+    "nullExceed062": 0,
+    "nullQ95": 0.5051,
+    "holm": 1
+   },
+   "UD:srp": {
+    "pairs": 71,
+    "auc": 0.5,
+    "p": 1,
+    "nullExceed062": 0,
+    "nullQ95": 0.5,
+    "holm": 1
+   },
+   "UD:swe": {
+    "pairs": 20,
+    "auc": 0.525,
+    "p": 0.4855,
+    "nullExceed062": 0,
+    "nullQ95": 0.525,
+    "holm": 1
+   },
+   "UD:tur": {
+    "pairs": 29,
+    "auc": 0.6207,
+    "p": 0.009,
+    "nullExceed062": 0.008,
+    "nullQ95": 0.5862,
+    "holm": 0.27
+   },
+   "UD:ukr": {
+    "pairs": 21,
+    "auc": 0.4286,
+    "p": 1,
+    "nullExceed062": 0,
+    "nullQ95": 0.5714,
+    "holm": 1
+   },
+   "UD:urd": {
+    "pairs": 300,
+    "auc": 0.5,
+    "p": 0.6953,
+    "nullExceed062": 0,
+    "nullQ95": 0.5067,
+    "holm": 1
+   },
+   "UD:vie": {
+    "pairs": 90,
+    "auc": 0.5333,
+    "p": 0.038,
+    "nullExceed062": 0,
+    "nullQ95": 0.5222,
+    "holm": 1
+   },
+   "UD:wol": {
+    "pairs": 75,
+    "auc": 0.4867,
+    "p": 0.9491,
+    "nullExceed062": 0,
+    "nullQ95": 0.5267,
+    "holm": 1
+   }
+  },
+  "numberOfSets": 38,
+  "udLanguages": 31,
+  "udObservedCountGe062": 1,
+  "udExpectedCountGe062Null": 0.01,
+  "udNullCountQ95": 0,
+  "udNullCountMean": 0.01,
+  "udObservedMax": 0.6207,
+  "udNullMaxQ95": 0.5862,
+  "udMaxP": 0.001,
+  "udCountP": 0.009,
+  "udLanguagesGe062": [
+   [
+    "UD:tur",
+    0.6207,
+    29,
+    0.009,
+    0.27
+   ]
+  ],
+  "englishHolm": {
+   "T1": 0.038,
+   "T2": 0.038
+  },
+  "extensionLanguagesHolm": {
+   "DE": 0.038,
+   "ES": 0.038,
+   "IT": 0.038,
+   "ALL": 0.038
+  }
+ },
+ "B3": {
+  "multiplicityDoesNotExplainEnglish": false,
+  "udCountInsideNullBand": false
+ },
+ "B4": {
+  "all": {
+   "pairs": 497,
+   "auc": 0.8239
+  },
+  "byChannel": {
+   "ubuntu": {
+    "pairs": 302,
+    "days": 9,
+    "auc": 0.8212,
+    "sens": 0.6523,
+    "spec": 0.9901
+   },
+   "kubuntu": {
+    "pairs": 175,
+    "days": 14,
+    "auc": 0.82,
+    "sens": 0.6457,
+    "spec": 0.9943
+   },
+   "xubuntu": {
+    "pairs": 5,
+    "days": 4,
+    "auc": null,
+    "sens": 0.8,
+    "spec": 1
+   },
+   "ubuntu-server": {
+    "pairs": 15,
+    "days": 7,
+    "auc": 0.9,
+    "sens": 0.8667,
+    "spec": 0.9333
+   }
+  },
+  "byYearBand": {
+   ">=2012": {
+    "pairs": 102,
+    "days": 11,
+    "auc": 0.8137,
+    "sens": 0.6373,
+    "spec": 0.9902
+   },
+   "<=2008": {
+    "pairs": 334,
+    "days": 15,
+    "auc": 0.8278,
+    "sens": 0.6647,
+    "spec": 0.991
+   },
+   "2009-2011": {
+    "pairs": 61,
+    "days": 8,
+    "auc": 0.8197,
+    "sens": 0.6557,
+    "spec": 0.9836
+   }
+  },
+  "byArm": {
+   "E_CORE": {
+    "pairs": 75,
+    "days": 13,
+    "auc": 0.8467,
+    "sens": 0.7067,
+    "spec": 0.9867
+   },
+   "E_SRV": {
+    "pairs": 15,
+    "days": 7,
+    "auc": 0.9,
+    "sens": 0.8667,
+    "spec": 0.9333
+   },
+   "E_REUSE": {
+    "pairs": 407,
+    "days": 14,
+    "auc": 0.817,
+    "sens": 0.6413,
+    "spec": 0.9926
+   }
+  },
+  "leaveOneDayOut": {
+   "days": 34,
+   "min": 0.8165,
+   "max": 0.8354
+  },
+  "flaggedNamesTotal": 327,
+  "positiveFormsFlagged": 206,
+  "top3FormsShareOfFlagged": 0.0642,
+  "aucWithoutTop3Forms": 0.8162,
+  "failingGroups": [],
+  "scopeHolds": true
+ },
+ "B5": {
+  "ge1": 0.8239,
+  "ge2": 0.5,
+  "ge3": 0.5,
+  "SALL": 0.7182,
+  "S_raw": 0.8239,
+  "ge1WithinOf002OfBest": true
+ },
+ "verdictAttackB": "SUCCESSFUL",
+ "verdictSoftFlags": {
+  "b16pLt60": false,
+  "scopeBandFails": false,
+  "udOutsideNull": true,
+  "p05Lt070": false,
+  "groupAFlags": false,
+  "floorCellsFlag": false
+ },
+ "headerSha256": "db4777400514e4abf3fed8abc8257b28cd8d4635445987fab386169d6e79b324"
+}

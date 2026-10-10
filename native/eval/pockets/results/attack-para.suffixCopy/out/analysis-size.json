@@ -1,0 +1,79 @@
+{
+ "bins": [
+  {
+   "tokens": "0-50000",
+   "cls": "code",
+   "n": 1,
+   "defined": 1,
+   "P+": 1,
+   "shareOfAll": 100,
+   "shareOfDefined": 100
+  },
+  {
+   "tokens": "0-50000",
+   "cls": "non-code",
+   "n": 93,
+   "defined": 72,
+   "P+": 41,
+   "shareOfAll": 44.1,
+   "shareOfDefined": 56.9
+  },
+  {
+   "tokens": "50000-100000",
+   "cls": "code",
+   "n": 2,
+   "defined": 2,
+   "P+": 2,
+   "shareOfAll": 100,
+   "shareOfDefined": 100
+  },
+  {
+   "tokens": "50000-100000",
+   "cls": "non-code",
+   "n": 90,
+   "defined": 76,
+   "P+": 50,
+   "shareOfAll": 55.6,
+   "shareOfDefined": 65.8
+  },
+  {
+   "tokens": "100000-200000",
+   "cls": "code",
+   "n": 5,
+   "defined": 5,
+   "P+": 5,
+   "shareOfAll": 100,
+   "shareOfDefined": 100
+  },
+  {
+   "tokens": "100000-200000",
+   "cls": "non-code",
+   "n": 84,
+   "defined": 83,
+   "P+": 70,
+   "shareOfAll": 83.3,
+   "shareOfDefined": 84.3
+  },
+  {
+   "tokens": "200000-1000000000",
+   "cls": "code",
+   "n": 39,
+   "defined": 39,
+   "P+": 39,
+   "shareOfAll": 100,
+   "shareOfDefined": 100
+  },
+  {
+   "tokens": "200000-1000000000",
+   "cls": "non-code",
+   "n": 77,
+   "defined": 75,
+   "P+": 67,
+   "shareOfAll": 87,
+   "shareOfDefined": 89.3
+  }
+ ],
+ "spearmanZvsLogTokensNonCode": 0.434,
+ "spearmanVvsLogTokensNonCode": 0.169,
+ "nNonCode": 306
+}

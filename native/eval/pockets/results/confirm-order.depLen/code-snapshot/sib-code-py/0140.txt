@@ -1,0 +1,287 @@
+"""Build/refresh the SQLite store behind the site from matters.jsonl +
+scan_*.json. Idempotent — safe to rerun after every pipeline pass."""
+from __future__ import annotations
+
+import json
+import sqlite3
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+DB_PATH = ROOT / "webapp" / "watch.db"
+
+SCHEMA = """
+CREATE TABLE IF NOT EXISTS matters (
+  matter_id INTEGER PRIMARY KEY,
+  matter_guid TEXT,
+  file TEXT,
+  title TEXT,
+  type_name TEXT,
+  status_name TEXT,
+  intro_date TEXT,
+  agenda_date TEXT,
+  passed_date TEXT,
+  enactment_date TEXT,
+  body_name TEXT,
+  last_modified TEXT
+);
+CREATE INDEX IF NOT EXISTS idx_matters_title ON matters(title);
+CREATE INDEX IF NOT EXISTS idx_matters_file ON matters(file);
+
+CREATE TABLE IF NOT EXISTS scan_results (
+  matter_id INTEGER PRIMARY KEY,
+  file TEXT,
+  title TEXT,
+  l1 TEXT,
+  l2 TEXT,
+  l1_score REAL,
+  l2_score REAL,
+  label TEXT,
+  score REAL,
+  evidence_json TEXT,
+  relation_edges INTEGER,
+  n_graph_entries INTEGER,
+  archives_json TEXT,
+  sidecar_archive_json TEXT,
+  grounded_evidence_json TEXT,
+  document_snippets_json TEXT,
+  slots_json TEXT,
+  headline TEXT,
+  notified INTEGER DEFAULT 0,
+  scanned_at TEXT
+);
+CREATE INDEX IF NOT EXISTS idx_scan_score ON scan_results(score DESC);
+
+CREATE TABLE IF NOT EXISTS subscribers (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  email TEXT UNIQUE NOT NULL,
+  min_score REAL DEFAULT 0,
+  active INTEGER DEFAULT 1,
+  unsubscribe_token TEXT UNIQUE NOT NULL,
+  account_id TEXT,
+  created_at TEXT
+);
+
+-- A real send is logged here the moment it happens, but only for a
+-- subscriber who supplied an account_id (i.e. was logged into their
+-- device-linked account when they subscribed). This table itself is
+-- plaintext and server-side — it has to be, the sender has no decryption
+-- key — but it is small, short-lived staging: the browser fetches its own
+-- account's rows on next load, folds them into the person's OWN encrypted
+-- blob (ACCOUNT.notes.__digestLog in webapp/main.py's client JS), and the
+-- row is deleted once consumed. Nothing here outlives being read once.
+CREATE TABLE IF NOT EXISTS pending_digest_events (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  account_id TEXT NOT NULL,
+  ts TEXT,
+  kind TEXT,
+  matter_ids_json TEXT,
+  created_at TEXT
+);
+CREATE INDEX IF NOT EXISTS idx_pending_digest_account ON pending_digest_events(account_id);
+
+-- Zero-knowledge account storage: every value here is opaque to us. The
+-- browser encrypts `blob` client-side; we never see plaintext content,
+-- the password, or anything that identifies a person beyond what they
+-- chose to type as a handle. account_id is device-derived by default
+-- (sha256 of a random secret that lives only in that browser's IndexedDB);
+-- handle_index exists only so a password can address the SAME account_id
+-- from a different device.
+CREATE TABLE IF NOT EXISTS account_blobs (
+  account_id TEXT PRIMARY KEY,
+  salt TEXT,
+  wrapped_dek_device TEXT,
+  wrapped_dek_password TEXT,
+  blob TEXT,
+  version INTEGER DEFAULT 1,
+  updated_at TEXT
+);
+
+CREATE TABLE IF NOT EXISTS handle_index (
+  handle_hash TEXT PRIMARY KEY,
+  account_id TEXT NOT NULL,
+  created_at TEXT
+);
+
+-- One row per (email, matter) a person is following. We snapshot what we
+-- last told them about so follow_check.py only reports genuine changes,
+-- and only sends the 5-days-out heads-up once per agenda date.
+CREATE TABLE IF NOT EXISTS follows (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  email TEXT NOT NULL,
+  matter_id INTEGER NOT NULL,
+  active INTEGER DEFAULT 1,
+  last_seen_status TEXT,
+  last_seen_modified TEXT,
+  last_seen_agenda_date TEXT,
+  agenda_alert_sent_for TEXT,
+  unfollow_token TEXT UNIQUE NOT NULL,
+  created_at TEXT,
+  UNIQUE(email, matter_id)
+);
+"""
+
+
+# Columns added after the first deploy. CREATE TABLE IF NOT EXISTS silently
+# does nothing for an existing table, so new columns must be ALTERed in —
+# and the database now holds real subscriber, account, and follow rows, so
+# recreating it is not an option.
+ADDED_COLUMNS = {
+    "matters": [
+        ("passed_date", "TEXT"),
+        ("enactment_date", "TEXT"),
+        ("last_modified", "TEXT"),
+        # A readable handle for EVERY matter, not just the deep-read ones —
+        # summarize.py derives these from the title alone, so no OCR needed.
+        ("headline", "TEXT"),
+        ("clean_title", "TEXT"),
+    ],
+    "scan_results": [
+        ("archives_json", "TEXT"),
+        ("sidecar_archive_json", "TEXT"),
+        ("grounded_evidence_json", "TEXT"),
+        ("document_snippets_json", "TEXT"),
+        ("slots_json", "TEXT"),
+        ("headline", "TEXT"),
+        ("declared_use", "TEXT"),
+        ("notified", "INTEGER DEFAULT 0"),
+    ],
+    "subscribers": [
+        ("account_id", "TEXT"),
+    ],
+}
+
+
+def migrate(con: sqlite3.Connection) -> list[str]:
+    applied = []
+    for table, cols in ADDED_COLUMNS.items():
+        have = {r[1] for r in con.execute(f"PRAGMA table_info({table})").fetchall()}
+        if not have:
+            continue  # table doesn't exist yet; SCHEMA will create it whole
+        for name, decl in cols:
+            if name not in have:
+                con.execute(f"ALTER TABLE {table} ADD COLUMN {name} {decl}")
+                applied.append(f"{table}.{name}")
+    con.commit()
+    return applied
+
+
+def matter_url(matter_id: int, matter_guid: str | None) -> str:
+    # See webapp/main.py's matter_url for why: the WebAPI's MatterId/MatterGuid
+    # don't match the public site's own ID/GUID space. gateway.aspx resolves it.
+    return f"https://nashville.legistar.com/gateway.aspx?m=l&id={matter_id}"
+
+
+def load_matters_jsonl(con: sqlite3.Connection, path: Path) -> int:
+    n = 0
+    cur = con.cursor()
+    with path.open() as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            m = json.loads(line)
+            cur.execute(
+                """INSERT INTO matters
+                   (matter_id, matter_guid, file, title, type_name, status_name,
+                    intro_date, agenda_date, passed_date, enactment_date, body_name, last_modified)
+                   VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
+                   ON CONFLICT(matter_id) DO UPDATE SET
+                     matter_guid=excluded.matter_guid, file=excluded.file,
+                     title=excluded.title, type_name=excluded.type_name,
+                     status_name=excluded.status_name, intro_date=excluded.intro_date,
+                     agenda_date=excluded.agenda_date, passed_date=excluded.passed_date,
+                     enactment_date=excluded.enactment_date, body_name=excluded.body_name,
+                     last_modified=excluded.last_modified
+                """,
+                (
+                    m.get("MatterId"), m.get("MatterGuid"), m.get("MatterFile"),
+                    m.get("MatterTitle"), m.get("MatterTypeName"), m.get("MatterStatusName"),
+                    m.get("MatterIntroDate"), m.get("MatterAgendaDate"), m.get("MatterPassedDate"),
+                    m.get("MatterEnactmentDate"), m.get("MatterBodyName"), m.get("MatterLastModifiedUtc"),
+                ),
+            )
+            n += 1
+    con.commit()
+    return n
+
+
+def load_scan_json(con: sqlite3.Connection, path: Path, scanned_at: str) -> int:
+    d = json.loads(path.read_text())
+    items = d.get("all") or d.get("flagged") or []
+    cur = con.cursor()
+    n = 0
+    for x in items:
+        if not isinstance(x, dict) or x.get("matterId") is None:
+            continue
+        cur.execute(
+            """INSERT INTO scan_results
+               (matter_id, file, title, l1, l2, l1_score, l2_score, label, score,
+                evidence_json, relation_edges, n_graph_entries, archives_json,
+                sidecar_archive_json, grounded_evidence_json, document_snippets_json,
+                slots_json, headline, declared_use, scanned_at)
+               VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+               ON CONFLICT(matter_id) DO UPDATE SET
+                 file=excluded.file, title=excluded.title, l1=excluded.l1, l2=excluded.l2,
+                 l1_score=excluded.l1_score, l2_score=excluded.l2_score,
+                 label=excluded.label, score=excluded.score,
+                 evidence_json=excluded.evidence_json,
+                 relation_edges=excluded.relation_edges, n_graph_entries=excluded.n_graph_entries,
+                 archives_json=excluded.archives_json,
+                 sidecar_archive_json=excluded.sidecar_archive_json,
+                 grounded_evidence_json=excluded.grounded_evidence_json,
+                 document_snippets_json=excluded.document_snippets_json,
+                 slots_json=excluded.slots_json, headline=excluded.headline,
+                 declared_use=excluded.declared_use,
+                 scanned_at=excluded.scanned_at
+            """,
+            (
+                x.get("matterId"), x.get("file"), x.get("title"), x.get("l1"), x.get("l2"),
+                x.get("l1_score"), x.get("l2_score"), x.get("label"), x.get("score"),
+                json.dumps(x.get("evidence") or []), x.get("relationEdges"), x.get("nGraphEntries"),
+                json.dumps(x.get("archives") or []),
+                json.dumps(x.get("sidecarArchive")) if x.get("sidecarArchive") else None,
+                json.dumps(x.get("groundedEvidence") or []),
+                json.dumps(x.get("documentSnippets") or []),
+                json.dumps(x.get("slots") or {}), x.get("headline"), x.get("declaredUse"),
+                scanned_at,
+            ),
+        )
+        n += 1
+    con.commit()
+    return n
+
+
+def main() -> None:
+    import datetime
+
+    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+    con = sqlite3.connect(DB_PATH)
+    con.executescript(SCHEMA)
+    added = migrate(con)
+    if added:
+        print(f"schema migrated: {', '.join(added)}")
+
+    total_m = 0
+    p = ROOT / "data" / "matters.jsonl"
+    if p.exists():
+        total_m += load_matters_jsonl(con, p)
+    print(f"matters loaded/updated: {total_m}")
+
+    total_s = 0
+    now = datetime.datetime.utcnow().isoformat()
+    # scan_latest.json only — it's a superset of the old 2026-only
+    # scan_2026.json, and loading both meant the stale file (computed before
+    # today's classifier fixes) loaded SECOND and silently overwrote the
+    # corrected results for every overlapping matter. Caught live: totalFlagged
+    # jumped from a correct 145 to a re-corrupted 185 the moment this ran.
+    p = ROOT / "reports" / "scan_latest.json"
+    if p.exists():
+        total_s += load_scan_json(con, p, now)
+    print(f"scan results loaded/updated: {total_s}")
+
+    con.close()
+
+
+if __name__ == "__main__":
+    main()

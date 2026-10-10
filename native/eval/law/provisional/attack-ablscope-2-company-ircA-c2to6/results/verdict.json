@@ -1,0 +1,30 @@
+{
+ "ruleId": "ablscope-2-company-ircA-c2to6",
+ "verdict": "STANDS_NARROWER",
+ "headerSha256": {
+  "attack-A": "a99d00678f8b746779cfc75259f4125a4de3d52fd949f6d416946b3702ba3f39",
+  "attack-A2": "9fe3fecbd215ea40d7579c769569709528ebe851250cb0e40f112e2e1bf253d9",
+  "attack-A3": "51f7cc7b255196bd6f8d6a61d4b47b645ff1925a996255ebae21fb3af70dbe98",
+  "attack-B": "06c5914fe21119c1945c5133f07ec257ae6d12cc6e85fbafb37632bcb1e9c386",
+  "attack-C": "a9b88339678bb3f4973ee7fcf5e8c32c55b8f68edc17b17ee5bdb6c815b37b72",
+  "attack-C2": "f980b03ef73ba06f5a2c26a57a091489feab1b26e0e8fa7d046f9dbf199e64da",
+  "attack-C3": "278ae754933750f9c223b4271438efdaf8f98ddef8d2588333c4de29e546f063"
+ },
+ "survived": [
+  "A: no hidden channel (independent raw-text re-implementation reproduces c.dSelf exactly on 120 members)",
+  "A: strict re-matching (exact c, exact fbin, |dlen|<=1) 0.850 [0.794, 0.903], 136 pairs, controls in band",
+  "A: not carried by a few nicks (132 distinct positive forms; leave-top-10-out 0.835)",
+  "B: confirmer pre-registration integrity (header sha, mtimes, rows sha, tightening only)",
+  "B: day-split hold-out of the registered scope (median 0.835, q05 0.787, >=0.65 in 2000/2000 splits); sign test 13/13 p=1.2e-4",
+  "B: 77 fresh positives on 9 unused days: population AUC 0.842 [0.786, 0.901] (controls out of band, descriptive)"
+ ],
+ "fell": [
+  "C: plain initial-share count R_INIT beats c.dSelf on the same rows: 0.880 vs 0.834, delta +0.0465 [0.019, 0.078]; nInit, LOO_INIT, minusNI the same; strict set +0.0615 [0.015, 0.114]",
+  "C: dSelf is a count function: R^2 0.951 on (c, nInit) cells, count-only reconstruction 0.813, residual AUC after counts 0.455 [0.41, 0.50]; first-token-fixed shuffle keeps 0.833 (3 seeds 0.839/0.824/0.833)",
+  "B: registered upper edge c<=6 is not re-derivable (c7_15 enters the derived scope in 2000/2000 splits); registered decay clause is a property of the observable's resolution, not of the phenomenon",
+  "B: -dSelf is only the 3rd best of 30 signed company/descriptor scores on the confirmation data (initShare 0.878, entLeft 0.856 above it)"
+ ],
+ "notRefuted": [
+  "C3: at c2 the ablation may keep a sliver over the binary R_INIT: delta +0.032 [-0.017, 0.084], +0.040 [-0.020, 0.098]; ties 0.624 [0.496, 0.755] n=30"
+ ]
+}

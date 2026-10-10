@@ -1,0 +1,709 @@
+{
+ "worlds": [
+  {
+   "id": "d-null-s0.8-D1-r0",
+   "statusGlobal": "undef",
+   "zGlobal": [
+    -0.47434164902525694,
+    null
+   ],
+   "vGlobal": [
+    0,
+    0
+   ],
+   "statusWithin": "A",
+   "zWithin": [
+    -0.43204937989385744,
+    -0.434190583314643
+   ],
+   "posParGlobal": "A",
+   "firstTokGlobal": "A",
+   "posParTailGlobal": "A"
+  },
+  {
+   "id": "d-null-s0.8-D1-r1",
+   "statusGlobal": "undef",
+   "zGlobal": [
+    null,
+    -0.474341649025257
+   ],
+   "vGlobal": [
+    0,
+    0
+   ],
+   "statusWithin": "A",
+   "zWithin": [
+    -0.25010636035367384,
+    -0.3792798584280137
+   ],
+   "posParGlobal": "A",
+   "firstTokGlobal": "A",
+   "posParTailGlobal": "A"
+  },
+  {
+   "id": "d-null-s0.8-D2-r0",
+   "statusGlobal": "undef",
+   "zGlobal": [
+    null,
+    null
+   ],
+   "vGlobal": [
+    0,
+    0
+   ],
+   "statusWithin": "A",
+   "zWithin": [
+    -0.20207259421636908,
+    -0.41140458340474195
+   ],
+   "posParGlobal": "A",
+   "firstTokGlobal": "A",
+   "posParTailGlobal": "A"
+  },
+  {
+   "id": "d-null-s0.8-D2-r1",
+   "statusGlobal": "undef",
+   "zGlobal": [
+    null,
+    null
+   ],
+   "vGlobal": [
+    0,
+    0
+   ],
+   "statusWithin": "undef",
+   "zWithin": [
+    -0.1414213562373096,
+    null
+   ],
+   "posParGlobal": "A",
+   "firstTokGlobal": "A",
+   "posParTailGlobal": "A"
+  },
+  {
+   "id": "d-null-s1-D1-r0",
+   "statusGlobal": "A",
+   "zGlobal": [
+    -1.0606601721587117,
+    -0.737864787728829
+   ],
+   "vGlobal": [
+    0.00017503938397567254,
+    0
+   ],
+   "statusWithin": "A",
+   "zWithin": [
+    -0.7009132425510072,
+    -1.2385124322999261
+   ],
+   "posParGlobal": "A",
+   "firstTokGlobal": "A",
+   "posParTailGlobal": "A"
+  },
+  {
+   "id": "d-null-s1-D1-r1",
+   "statusGlobal": "A",
+   "zGlobal": [
+    -0.5581563056514383,
+    0.3162277645695333
+   ],
+   "vGlobal": [
+    0.0004017677783849649,
+    0.0004415985868035932
+   ],
+   "statusWithin": "A",
+   "zWithin": [
+    0.029204718433228253,
+    0.4358009637684107
+   ],
+   "posParGlobal": "A",
+   "firstTokGlobal": "A",
+   "posParTailGlobal": "A"
+  },
+  {
+   "id": "d-null-s1-D2-r0",
+   "statusGlobal": "M",
+   "zGlobal": [
+    -0.7378647870321325,
+    2.8460498941515415
+   ],
+   "vGlobal": [
+    0.0002780867635010509,
+    0.0013386880855250638
+   ],
+   "statusWithin": "A",
+   "zWithin": [
+    -0.5297310009594384,
+    1.7955604949396007
+   ],
+   "posParGlobal": "A",
+   "firstTokGlobal": "A",
+   "posParTailGlobal": "A"
+  },
+  {
+   "id": "d-null-s1-D2-r1",
+   "statusGlobal": "A",
+   "zGlobal": [
+    -0.6895983262221452,
+    -1.106797181466137
+   ],
+   "vGlobal": [
+    0.0003009328920597909,
+    0
+   ],
+   "statusWithin": "A",
+   "zWithin": [
+    -0.32431292855991023,
+    -1.6711813810091394
+   ],
+   "posParGlobal": "A",
+   "firstTokGlobal": "A",
+   "posParTailGlobal": "A"
+  },
+  {
+   "id": "d-null-s1.3-D1-r0",
+   "statusGlobal": "A",
+   "zGlobal": [
+    0.5432156729311954,
+    -0.6809084837825433
+   ],
+   "vGlobal": [
+    0.01207371319651429,
+    0.009403107113939768
+   ],
+   "statusWithin": "A",
+   "zWithin": [
+    1.0905284553068015,
+    -0.3988620174105782
+   ],
+   "posParGlobal": "A",
+   "firstTokGlobal": "A",
+   "posParTailGlobal": "A"
+  },
+  {
+   "id": "d-null-s1.3-D1-r1",
+   "statusGlobal": "A",
+   "zGlobal": [
+    0.21421880941255558,
+    -1.5776212752244203
+   ],
+   "vGlobal": [
+    0.010779436152915878,
+    0.008443163097581419
+   ],
+   "statusWithin": "A",
+   "zWithin": [
+    0.8645217631023506,
+    -1.309784131027815
+   ],
+   "posParGlobal": "M",
+   "firstTokGlobal": "A",
+   "posParTailGlobal": "A"
+  },
+  {
+   "id": "d-null-s1.3-D2-r0",
+   "statusGlobal": "A",
+   "zGlobal": [
+    -1.5856368392989895,
+    0.7008979921467875
+   ],
+   "vGlobal": [
+    0.008783344176663377,
+    0.011023176935850643
+   ],
+   "statusWithin": "A",
+   "zWithin": [
+    -1.0826492986628777,
+    0.30004485773080053
+   ],
+   "posParGlobal": "M",
+   "firstTokGlobal": "M",
+   "posParTailGlobal": "M"
+  },
+  {
+   "id": "d-null-s1.3-D2-r1",
+   "statusGlobal": "A",
+   "zGlobal": [
+    1.1202363934914585,
+    -1.2718308824760254
+   ],
+   "vGlobal": [
+    0.011047979797695007,
+    0.008931063354793878
+   ],
+   "statusWithin": "A",
+   "zWithin": [
+    1.118017112447505,
+    -0.22342802671619544
+   ],
+   "posParGlobal": "M",
+   "firstTokGlobal": "A",
+   "posParTailGlobal": "M"
+  },
+  {
+   "id": "d-null-s1.6-D1-r0",
+   "statusGlobal": "A",
+   "zGlobal": [
+    -0.017529178540878158,
+    -0.35811327605500476
+   ],
+   "vGlobal": [
+    0.048070256529172184,
+    0.05192307692323084
+   ],
+   "statusWithin": "A",
+   "zWithin": [
+    -0.24892854690491978,
+    0.4180488630220051
+   ],
+   "posParGlobal": "A",
+   "firstTokGlobal": "A",
+   "posParTailGlobal": "A"
+  },
+  {
+   "id": "d-null-s1.6-D1-r1",
+   "statusGlobal": "A",
+   "zGlobal": [
+    0.39044954977161445,
+    0.9879259887477898
+   ],
+   "vGlobal": [
+    0.05581723975501518,
+    0.05404391067713732
+   ],
+   "statusWithin": "A",
+   "zWithin": [
+    1.0006813525421063,
+    0.9685599329208452
+   ],
+   "posParGlobal": "A",
+   "firstTokGlobal": "A",
+   "posParTailGlobal": "A"
+  },
+  {
+   "id": "d-null-s1.6-D2-r0",
+   "statusGlobal": "A",
+   "zGlobal": [
+    0.7931346702259942,
+    -1.5356418068963151
+   ],
+   "vGlobal": [
+    0.05151213027602353,
+    0.04391433992987004
+   ],
+   "statusWithin": "A",
+   "zWithin": [
+    -0.2404749722230913,
+    -1.3016479815162048
+   ],
+   "posParGlobal": "A",
+   "firstTokGlobal": "M",
+   "posParTailGlobal": "A"
+  },
+  {
+   "id": "d-null-s1.6-D2-r1",
+   "statusGlobal": "A",
+   "zGlobal": [
+    0.8701347711638279,
+    -0.3131365112879137
+   ],
+   "vGlobal": [
+    0.05441323971899692,
+    0.04688731284477399
+   ],
+   "statusWithin": "A",
+   "zWithin": [
+    0.5959990140003936,
+    -0.10340445800599782
+   ],
+   "posParGlobal": "A",
+   "firstTokGlobal": "A",
+   "posParTailGlobal": "M"
+  },
+  {
+   "id": "d-opener-M10",
+   "statusGlobal": "M",
+   "zGlobal": [
+    -0.5832302121659619,
+    2.233374823259081
+   ],
+   "vGlobal": [
+    0.09483738912877016,
+    0.10536325599059637
+   ],
+   "statusWithin": "A",
+   "zWithin": [
+    -0.9821282836755787,
+    1.0587556248174157
+   ],
+   "posParGlobal": "M",
+   "firstTokGlobal": "M",
+   "posParTailGlobal": "M"
+  },
+  {
+   "id": "d-opener-M30",
+   "statusGlobal": "A",
+   "zGlobal": [
+    0.7196397974335392,
+    -0.26615347621378727
+   ],
+   "vGlobal": [
+    0.03354453969404858,
+    0.031383737517899135
+   ],
+   "statusWithin": "A",
+   "zWithin": [
+    0.00762470221071264,
+    -0.6546214633780512
+   ],
+   "posParGlobal": "A",
+   "firstTokGlobal": "A",
+   "posParTailGlobal": "A"
+  },
+  {
+   "id": "d-opener-M300",
+   "statusGlobal": "A",
+   "zGlobal": [
+    1.0636682445805872,
+    1.9836105322874378
+   ],
+   "vGlobal": [
+    0.004273504273442086,
+    0.004671078240789939
+   ],
+   "statusWithin": "A",
+   "zWithin": [
+    1.5156808259953156,
+    1.548485811282118
+   ],
+   "posParGlobal": "M",
+   "firstTokGlobal": "A",
+   "posParTailGlobal": "M"
+  },
+  {
+   "id": "d-cast-K3",
+   "statusGlobal": "P+",
+   "zGlobal": [
+    240.53148587059823,
+    261.0342432896822
+   ],
+   "vGlobal": [
+    0.3272027373823221,
+    0.34894661484941025
+   ],
+   "statusWithin": "A",
+   "zWithin": [
+    -0.8131401855650442,
+    1.0458610018380816
+   ],
+   "posParGlobal": "P+",
+   "firstTokGlobal": "P+",
+   "posParTailGlobal": "A"
+  },
+  {
+   "id": "d-cast-K10",
+   "statusGlobal": "P+",
+   "zGlobal": [
+    91.1583518555918,
+    136.81598502010812
+   ],
+   "vGlobal": [
+    0.1030885661693901,
+    0.10226049515586055
+   ],
+   "statusWithin": "A",
+   "zWithin": [
+    -0.14710061306365765,
+    -0.2501020344436395
+   ],
+   "posParGlobal": "P+",
+   "firstTokGlobal": "P+",
+   "posParTailGlobal": "A"
+  },
+  {
+   "id": "d-cast-K30",
+   "statusGlobal": "P+",
+   "zGlobal": [
+    30.47954317280295,
+    48.22218045444458
+   ],
+   "vGlobal": [
+    0.03293607800605969,
+    0.035879862930414674
+   ],
+   "statusWithin": "A",
+   "zWithin": [
+    -1.690211062842431,
+    0.4713264979789633
+   ],
+   "posParGlobal": "P+",
+   "firstTokGlobal": "P+",
+   "posParTailGlobal": "A"
+  },
+  {
+   "id": "d-lencoup-rho0",
+   "statusGlobal": "A",
+   "zGlobal": [
+    -1.7894796788905512,
+    -0.9721102333644719
+   ],
+   "vGlobal": [
+    0.056469061012649036,
+    0.06124560314492555
+   ],
+   "statusWithin": "A",
+   "zWithin": [
+    -1.9147384834208967,
+    -0.6458105903587281
+   ],
+   "posParGlobal": "A",
+   "firstTokGlobal": "M",
+   "posParTailGlobal": "A"
+  },
+  {
+   "id": "d-lencoup-rho0.8",
+   "statusGlobal": "P+",
+   "zGlobal": [
+    7.4269158252000995,
+    16.444424513157095
+   ],
+   "vGlobal": [
+    0.09553739786315418,
+    0.10231352213759237
+   ],
+   "statusWithin": "P+",
+   "zWithin": [
+    8.42963011176678,
+    12.413190011173205
+   ],
+   "posParGlobal": "P+",
+   "firstTokGlobal": "P+",
+   "posParTailGlobal": "A"
+  },
+  {
+   "id": "d-lencoup-rho0.95",
+   "statusGlobal": "P+",
+   "zGlobal": [
+    13.395229389609783,
+    12.600557529326004
+   ],
+   "vGlobal": [
+    0.10911136108006758,
+    0.11288180610881682
+   ],
+   "statusWithin": "P+",
+   "zWithin": [
+    9.554297753310404,
+    12.684240118006333
+   ],
+   "posParGlobal": "P+",
+   "firstTokGlobal": "P+",
+   "posParTailGlobal": "A"
+  },
+  {
+   "id": "d-refract-K6",
+   "statusGlobal": "P-",
+   "zGlobal": [
+    -33.55468664741471,
+    -26.38896301129501
+   ],
+   "vGlobal": [
+    0,
+    0
+   ],
+   "statusWithin": "P-",
+   "zWithin": [
+    -34.07007779832716,
+    -35.247329522170304
+   ],
+   "posParGlobal": "P-",
+   "firstTokGlobal": "P-",
+   "posParTailGlobal": "A"
+  },
+  {
+   "id": "pl-null",
+   "statusGlobal": "M",
+   "zGlobal": [
+    2.2883102176128873,
+    2.0446626032894333
+   ],
+   "vGlobal": [
+    0.00067355186365603,
+    0.0007800312014296651
+   ],
+   "statusWithin": "A",
+   "zWithin": [
+    1.3805599515094733,
+    1.6511372545797878
+   ],
+   "posParGlobal": "A",
+   "firstTokGlobal": "M",
+   "posParTailGlobal": "A"
+  },
+  {
+   "id": "pl-burst",
+   "statusGlobal": "P+",
+   "zGlobal": [
+    6.062177826491071,
+    10.419989945825904
+   ],
+   "vGlobal": [
+    0.002267002519147354,
+    0.003189227498296532
+   ],
+   "statusWithin": "M",
+   "zWithin": [
+    3.5883622007236244,
+    7.822959821033611
+   ],
+   "posParGlobal": "P+",
+   "firstTokGlobal": "P+",
+   "posParTailGlobal": "P+"
+  },
+  {
+   "id": "pl-markov",
+   "statusGlobal": "A",
+   "zGlobal": [
+    0.8755950358306073,
+    0.761513334023521
+   ],
+   "vGlobal": [
+    0.0017185821698149084,
+    0.001788908765774977
+   ],
+   "statusWithin": "A",
+   "zWithin": [
+    0.6361087063785118,
+    0.9848074324612722
+   ],
+   "posParGlobal": "A",
+   "firstTokGlobal": "A",
+   "posParTailGlobal": "A"
+  },
+  {
+   "id": "pl-frames",
+   "statusGlobal": "M",
+   "zGlobal": [
+    1.7540650475148651,
+    2.48310611617724
+   ],
+   "vGlobal": [
+    0.002048695926532673,
+    0.0024928446127887582
+   ],
+   "statusWithin": "A",
+   "zWithin": [
+    -0.5823534059967778,
+    -0.13171131623969148
+   ],
+   "posParGlobal": "M",
+   "firstTokGlobal": "P+",
+   "posParTailGlobal": "A"
+  },
+  {
+   "id": "pl-parallel",
+   "statusGlobal": "P+",
+   "zGlobal": [
+    419.4367129201444,
+    337.4323076691369
+   ],
+   "vGlobal": [
+    0.16261900136032637,
+    0.16602665461959987
+   ],
+   "statusWithin": "P+",
+   "zWithin": [
+    161.22561125067307,
+    161.5234566184529
+   ],
+   "posParGlobal": "P+",
+   "firstTokGlobal": "P+",
+   "posParTailGlobal": "P+"
+  },
+  {
+   "id": "pl-length",
+   "statusGlobal": "A",
+   "zGlobal": [
+    -0.07771916402262599,
+    -1.0606601724395979
+   ],
+   "vGlobal": [
+    0.00022680880010739202,
+    0.00019190174589311937
+   ],
+   "statusWithin": "A",
+   "zWithin": [
+    -0.5533859585982503,
+    -1.0329356031131707
+   ],
+   "posParGlobal": "M",
+   "firstTokGlobal": "A",
+   "posParTailGlobal": "M"
+  },
+  {
+   "id": "pl-mix",
+   "statusGlobal": "P+",
+   "zGlobal": [
+    5.4524336096467945,
+    7.869470852158081
+   ],
+   "vGlobal": [
+    0.0020353508298285306,
+    0.0018346034430578584
+   ],
+   "statusWithin": "A",
+   "zWithin": [
+    0.5802316632451014,
+    0.5017359832236926
+   ],
+   "posParGlobal": "P+",
+   "firstTokGlobal": "P+",
+   "posParTailGlobal": "P+"
+  },
+  {
+   "id": "pl-null2",
+   "statusGlobal": "A",
+   "zGlobal": [
+    0.1277914128817808,
+    -1.3179863474576379
+   ],
+   "vGlobal": [
+    0.011520737327373354,
+    0.007950028392770037
+   ],
+   "statusWithin": "A",
+   "zWithin": [
+    0.09537819985643649,
+    -1.6608628795659623
+   ],
+   "posParGlobal": "A",
+   "firstTokGlobal": "A",
+   "posParTailGlobal": "A"
+  }
+ ],
+ "iid": {
+  "n": 18,
+  "present": 0,
+  "status": {
+   "undef": 4,
+   "A": 12,
+   "M": 2
+  }
+ },
+ "noMechanismPPlus": [
+  "d-cast-K3",
+  "d-cast-K10",
+  "d-cast-K30",
+  "d-lencoup-rho0.8",
+  "d-lencoup-rho0.95",
+  "pl-burst",
+  "pl-mix"
+ ],
+ "noMechanismPPlusStillWithin": [
+  "d-lencoup-rho0.8",
+  "d-lencoup-rho0.95"
+ ],
+ "refractoryPMinus": [
+  "d-refract-K6"
+ ]
+}

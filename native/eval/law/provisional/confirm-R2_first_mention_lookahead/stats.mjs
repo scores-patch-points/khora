@@ -1,0 +1,22 @@
+// stats.mjs — paired AUC (within-pair win rate, ties 0.5), pair / day-cluster bootstrap, sign-flip null, fixed-threshold rule metrics, rival-conditioned AUC, controls, strict subset.
+import { rngOf, round } from "./lib.mjs";
+export const BAND = [0.45, 0.55], CTL = ["i", "len", "cl", "lc"];
+const q = (xs, p) => { const s = xs.slice().sort((a, b) => a - b); return s.length ? s[Math.min(s.length - 1, Math.max(0, Math.ceil(p * s.length) - 1))] : null; };
+const win = (p, col) => { const d = p.pos[col] - p.neg[col]; return d > 0 ? 1 : d === 0 ? 0.5 : 0; };
+export const pAuc = (ps, col) => (ps.length ? ps.reduce((s, p) => s + win(p, col), 0) / ps.length : null);
+export function bootPairs(ps, col, B = 1000, seed = "bp") { const n = ps.length; if (n < 10) return [null, null]; const r = rngOf("R2confirm", seed, col), d = ps.map((p) => win(p, col)), v = []; for (let b = 0; b < B; b++) { let s = 0; for (let k = 0; k < n; k++) s += d[Math.floor(r() * n)]; v.push(s / n); } return [round(q(v, 0.025)), round(q(v, 0.975))]; }
+export function bootDays(ps, col, B = 1000, seed = "bd") { const by = new Map(); for (const p of ps) (by.get(p.day) ?? by.set(p.day, []).get(p.day)).push(p); const days = [...by.values()]; if (days.length < 4) return [null, null]; const r = rngOf("R2confirm", seed, col), v = []; for (let b = 0; b < B; b++) { let s = 0, n = 0; for (let k = 0; k < days.length; k++) { const g = days[Math.floor(r() * days.length)]; for (const p of g) s += win(p, col); n += g.length; } v.push(s / n); } return [round(q(v, 0.025)), round(q(v, 0.975))]; }
+/** sign-flip permutation q95 of the paired AUC (swap labels inside random pairs): the empirical "null q95". */
+export function flipQ95(ps, col, B = 2000, seed = "sf") { const r = rngOf("R2confirm", seed, col), d = ps.map((p) => win(p, col)), v = []; for (let b = 0; b < B; b++) { let s = 0; for (const x of d) s += r() < 0.5 ? x : 1 - x; v.push(s / d.length); } return round(q(v, 0.95)); }
+export const nullQ95 = (n) => round(0.5 + (1.645 * 0.5) / Math.sqrt(Math.max(1, n)));
+/** Fixed rule score >= theta: TPR on positives, FPR on matched negatives, balanced precision TPR/(TPR+FPR). */
+export function thrRule(ps, col, theta) { let tp = 0, fp = 0; for (const p of ps) { if (p.pos[col] >= theta) tp++; if (p.neg[col] >= theta) fp++; } const n = ps.length; return { n, tpr: round(tp / n), fpr: round(fp / n), balPrec: tp + fp ? round(tp / (tp + fp)) : null }; }
+/** AUC restricted to pairs whose rival column falls in the same log2(1+x) bin: 'beyond the rival'. */
+export function beyond(ps, col, rival) { const f = (x) => Math.floor(Math.log2(1 + x)), keep = ps.filter((p) => f(p.pos[rival]) === f(p.neg[rival])); return { kept: keep.length, share: round(keep.length / Math.max(1, ps.length)), auc: keep.length >= 40 ? round(pAuc(keep, col)) : null, ci: keep.length >= 40 ? bootPairs(keep, col, 500, "bey-" + rival) : null }; }
+export const ctlOf = (ps) => { const o = {}; for (const c of CTL) o[c] = round(pAuc(ps, c)); return o; };
+export const ctlOk = (c) => CTL.every((k) => c[k] >= BAND[0] && c[k] <= BAND[1]);
+export const strictOf = (ps) => ps.filter((p) => p.pos.len === p.neg.len && p.pos.cl === p.neg.cl && p.pos.i === p.neg.i && Math.abs(p.pos.lc - p.neg.lc) <= 0.15);
+export const groupBy = (xs, f) => { const m = new Map(); for (const x of xs) { const k = f(x); (m.get(k) ?? m.set(k, []).get(k)).push(x); } return m; };
+/** Population (unmatched) AUC of a score against labels y (Mann-Whitney, ties 0.5) and the precision/recall of a threshold rule. */
+export function popAuc(rows, col) { const pos = rows.filter((r) => r.y), neg = rows.filter((r) => !r.y); if (!pos.length || !neg.length) return null; const all = rows.map((r) => [r[col], r.y]).sort((a, b) => a[0] - b[0]); let rs = 0, i = 0; while (i < all.length) { let j = i; while (j < all.length && all[j][0] === all[i][0]) j++; const rk = (i + j + 1) / 2; for (let k = i; k < j; k++) if (all[k][1]) rs += rk; i = j; } return round((rs - (pos.length * (pos.length + 1)) / 2) / (pos.length * neg.length)); }
+export function tally(rows, col, theta) { let tp = 0, fp = 0, fn = 0, tn = 0; for (const r of rows) { const f = r[col] >= theta; if (r.y) f ? tp++ : fn++; else f ? fp++ : tn++; } return { tp, fp, fn, tn, precision: round(tp / Math.max(1, tp + fp)), recall: round(tp / Math.max(1, tp + fn)), fpr: round(fp / Math.max(1, fp + tn)), prevalence: round((tp + fn) / Math.max(1, rows.length)), flagRate: round((tp + fp) / Math.max(1, rows.length)) }; }

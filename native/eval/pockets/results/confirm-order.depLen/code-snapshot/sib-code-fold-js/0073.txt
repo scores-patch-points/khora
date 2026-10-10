@@ -1,0 +1,104 @@
+// E4 part B: pronoun-carry, evaluating the repo's fold-chat-mind.js as it is (read-only import).
+import path from "node:path";
+import { pathToFileURL } from "node:url";
+import { ETHOS, FOLD, RES, rj, wj, wilson, mulberry32, SEED, quantile } from "../lib/common.mjs";
+import { FOLLOW, NEWTOPIC } from "../data/e4-dialogues.mjs";
+
+const mind = await import(pathToFileURL(path.join(FOLD, "fold-chat-mind.js")).href);
+const { admitReferents, resolveQuestion, emptyReferents, mentions, segments, fold, DECLARED } = mind;
+
+// ---- priors -> hints ----
+const MIN_COUNT = 5; // declared (see PREREG E4): removes the UD tagging noise forms (the, is, there, ...)
+function pronounPrior(file) {
+  const j = rj(path.join(ETHOS, "derived-priors/pronoun-priors", file));
+  const all = [], personal = [], neut = [], dropped = [];
+  for (const [f, v] of Object.entries(j.forms)) {
+    const g = v.gender || {}; const tot = Object.values(g).reduce((a, b) => a + b, 0);
+    if (tot < MIN_COUNT) { dropped.push(f); continue; }
+    all.push(f);
+    const mf = (g.Masc || 0) + (g.Fem || 0);
+    if (mf / tot >= 0.5) personal.push(f); else neut.push(f);
+  }
+  return { all, personal, neut, dropped };
+}
+const PP = { en: pronounPrior("pronoun-en.json"), ru: pronounPrior("pronoun-ru.json") };
+// POST-HOC cleaning of the pronoun prior with the POS prior: keep a form only if >= 0.5 of its UPOS mass in UD is PRON ("the" is DET, "there" ADV, "is" AUX: tagging noise in the Person=3 file)
+for (const [l, file] of [["en", "pos-prior-en.json"], ["ru", "pos-prior-ru.json"]]) { const forms = rj(path.join(ETHOS, "derived-priors/pos-priors", file)).forms; const pronShare = (w) => { const f = forms[w.toLowerCase()]; if (!f) return null; const t = Object.values(f).reduce((a, b) => a + b, 0); return (f.PRON || 0) / t; }; PP[l].allClean = PP[l].all.filter((w) => { const s = pronShare(w); return s !== null && s >= 0.5; }); PP[l].removedByPos = PP[l].all.filter((w) => !PP[l].allClean.includes(w)); }
+console.log("POS-cleaned third-person forms en:", PP.en.allClean.join(","), "| removed:", PP.en.removedByPos.join(","));
+console.log("POS-cleaned third-person forms ru:", PP.ru.allClean.join(","), "| removed:", PP.ru.removedByPos.join(","));
+const nameTitles = (l) => { try { return rj(path.join(ETHOS, "derived-priors/name-priors", `name-parts-${l}.json`)).titles || []; } catch { return []; } };
+const TITLES = { en: nameTitles("en"), es: nameTitles("es"), ru: nameTitles("ru") };
+console.log("pronoun prior en personal:", PP.en.personal.join(","), "| neut/other:", PP.en.neut.join(","), "| dropped(<5):", PP.en.dropped.join(","));
+console.log("pronoun prior ru personal:", PP.ru.personal.join(","), "| neut/other:", PP.ru.neut.join(","), "| dropped:", PP.ru.dropped.length);
+console.log("titles en", TITLES.en.length, "es", TITLES.es.length, "ru", TITLES.ru.length);
+
+const HAND_ZH = { personalPronouns: ["他", "她"] };
+const hintsFor = (cond, lang) => {
+  if (cond === "H0") return null;
+  if (cond === "H1") return PP[lang] ? { personalPronouns: PP[lang].personal } : null;
+  if (cond === "H2") return PP[lang] || TITLES[lang]?.length ? { personalPronouns: PP[lang]?.personal || [], titles: TITLES[lang] || [] } : null;
+  if (cond === "Hhand") return lang === "zh" ? HAND_ZH : null;
+  return null;
+};
+// wrapper G: carry only if the question contains a third-person pronoun form from the prior (any gender/number); no prior -> typed gap, no carry
+const hasPrior = (l) => !!PP[l];
+// G3 = POST-HOC: G2 with the third-person list cleaned by the POS prior (PRON share >= 0.5)
+// G  = registered wrapper (trigger: any third-person form; resolution hints H2).
+// G2 = POST-HOC (not pre-registered): same trigger; person-restriction hint only where grammatical gender = natural gender (en); ru/es pass no personalPronouns.
+// Gp = POST-HOC: trigger on personal (Masc/Fem) forms only (drops it/they/one), resolution as G2.
+function resolveG(q2, record, lang, mode = "G") {
+  if (!hasPrior(lang)) return { carried: [], reason: "gap:no-pronoun-prior", gap: true };
+  const segs = segments(q2).map((s) => fold(s.text));
+  const forms = mode === "Gp" ? PP[lang].personal : mode === "G3" ? PP[lang].allClean : PP[lang].all;
+  const trig = forms.some((p) => segs.includes(fold(p)));
+  if (!trig) return { carried: [], reason: "no-pronoun-trigger" };
+  const hints = mode === "G" ? hintsFor("H2", lang) : (lang === "en" ? hintsFor("H2", lang) : { titles: TITLES[lang] || [] });
+  return resolveQuestion(q2, record, { hints });
+}
+
+const CONDS = ["H0", "H1", "H2", "Hhand", "G", "G2", "Gp", "G3"];
+const rows = [];
+for (const lang of Object.keys(FOLLOW)) {
+  const F = FOLLOW[lang], N = NEWTOPIC[lang];
+  F.forEach(([q1, a1, titles, q2, gold, sub], i) => {
+    for (const cond of CONDS) {
+      if (cond === "Hhand" && lang !== "zh") continue;
+      const isG = cond === "G" || cond === "G2" || cond === "Gp" || cond === "G3"; const hints = isG ? hintsFor("H2", lang) : hintsFor(cond, lang);
+      const rec = admitReferents(emptyReferents(), { question: q1, answer: a1, sources: titles.map((t) => ({ title: t })) }, { hints });
+      const res = isG ? resolveG(q2, rec, lang, cond) : resolveQuestion(q2, rec, { hints });
+      const carried = (res.carried || []).map((c) => c.surface);
+      const isGold = (s) => gold.some((g) => mentions(s, g) || mentions(g, s));
+      rows.push({ lang, kind: "follow", sub, cond, i, q2, carried, reason: res.reason, correct: carried.some(isGold), top1: carried.length ? isGold(carried[0]) : false, any: carried.length > 0, record: rec.entities.slice(0, 4).map((e) => `${e.surface}:${e.weight.toFixed(1)}`) });
+    }
+  });
+  N.forEach(([q2, sub], j) => {
+    const i = j % F.length; const [q1, a1, titles] = F[i];
+    for (const cond of CONDS) {
+      if (cond === "Hhand" && lang !== "zh") continue;
+      const isG = cond === "G" || cond === "G2" || cond === "Gp" || cond === "G3"; const hints = isG ? hintsFor("H2", lang) : hintsFor(cond, lang);
+      const rec = admitReferents(emptyReferents(), { question: q1, answer: a1, sources: titles.map((t) => ({ title: t })) }, { hints });
+      const res = isG ? resolveG(q2, rec, lang, cond) : resolveQuestion(q2, rec, { hints });
+      const carried = (res.carried || []).map((c) => c.surface);
+      rows.push({ lang, kind: "new", sub, cond, i: j, q2, carried, reason: res.reason, falseCarry: carried.length > 0 });
+    }
+  });
+}
+const pct = (k, n) => { const [lo, hi] = wilson(k, n); return `${(100 * k / n).toFixed(0)}% [${(100 * lo).toFixed(0)},${(100 * hi).toFixed(0)}] (${k}/${n})`; };
+const R = { minCount: MIN_COUNT, declared: DECLARED, priors: { en: PP.en, ru: PP.ru }, titles: { en: TITLES.en.length, es: TITLES.es.length, ru: TITLES.ru.length }, follow: {}, newTopic: {}, bySub: {}, paired: {}, rows };
+const groups = { en: ["en"], ru: ["ru"], es: ["es"], zh: ["zh"], "en+ru": ["en", "ru"], all: ["en", "ru", "es", "zh"] };
+for (const [g, langs] of Object.entries(groups)) {
+  R.follow[g] = {}; R.newTopic[g] = {};
+  for (const cond of CONDS) {
+    const f = rows.filter((r) => r.kind === "follow" && r.cond === cond && langs.includes(r.lang)); if (!f.length) continue;
+    const n = rows.filter((r) => r.kind === "new" && r.cond === cond && langs.includes(r.lang));
+    const k = (fn) => f.filter(fn).length;
+    R.follow[g][cond] = { n: f.length, correctInCarried: pct(k((r) => r.correct), f.length), top1: pct(k((r) => r.top1), f.length), carriedWrong: pct(k((r) => r.any && !r.correct), f.length), missNothingCarried: pct(k((r) => !r.any), f.length) };
+    R.newTopic[g][cond] = { n: n.length, falseCarry: pct(n.filter((r) => r.falseCarry).length, n.length), estimate: n.filter((r) => r.falseCarry).length / n.length, ci: wilson(n.filter((r) => r.falseCarry).length, n.length) };
+  }
+}
+for (const lang of ["en", "ru"]) for (const cond of ["H0", "H2", "G", "G2", "Gp", "G3"]) { R.bySub[lang + ":" + cond] = {}; for (const sub of ["topic", "impersonal", "smalltalk", "long"]) { const n = rows.filter((r) => r.kind === "new" && r.lang === lang && r.cond === cond && r.sub === sub); if (n.length) R.bySub[lang + ":" + cond][sub] = pct(n.filter((r) => r.falseCarry).length, n.length); } for (const sub of ["main", "secondary", "ellipsis"]) { const f = rows.filter((r) => r.kind === "follow" && r.lang === lang && r.cond === cond && r.sub === sub); if (f.length) R.bySub[lang + ":" + cond]["follow-" + sub] = pct(f.filter((r) => r.correct).length, f.length); } }
+// paired H0 vs H1/H2 on follow-ups (correct-in-carried) per language: discordant counts
+for (const lang of ["en", "ru"]) for (const c2 of ["H1", "H2", "G", "G2", "Gp", "G3"]) { let a = 0, b = 0; for (const r0 of rows.filter((r) => r.kind === "follow" && r.cond === "H0" && r.lang === lang)) { const r2 = rows.find((r) => r.kind === "follow" && r.cond === c2 && r.lang === lang && r.i === r0.i); if (r0.correct && !r2.correct) a++; if (!r0.correct && r2.correct) b++; } R.paired[`${lang}:${c2} vs H0`] = { H0onlyCorrect: a, otherOnlyCorrect: b }; }
+wj(path.join(RES, "e4-carry.json"), R);
+for (const g of Object.keys(groups)) { console.log("== " + g); for (const cond of CONDS) if (R.follow[g][cond]) console.log(cond.padEnd(6), "FOLLOW n=" + R.follow[g][cond].n, "correct-in-carried", R.follow[g][cond].correctInCarried, "| top1", R.follow[g][cond].top1, "| carried-wrong", R.follow[g][cond].carriedWrong, "| nothing", R.follow[g][cond].missNothingCarried, " || NEW falseCarry", R.newTopic[g][cond].falseCarry); }
+console.log(JSON.stringify(R.bySub, null, 1)); console.log(JSON.stringify(R.paired));

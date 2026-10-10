@@ -1,0 +1,17 @@
+{
+ "sameInputSameOutput": true,
+ "sameNullSeedSameOutput": true,
+ "sample": {
+  "burstB": 0.12137820755382603,
+  "burstBmid": 0.13453956472386117,
+  "burstM": 0.0525925863338393,
+  "repAdj": -2.2047131210564532,
+  "kerSlope": 0.3820516798059991,
+  "kerCurv": -0.23112323160627526,
+  "kerFar": 0.1548109633015013,
+  "persist": 2.3298950306124886,
+  "driftSlope": -0.5427352054330877,
+  "driftTail": 0.3176526313653175,
+  "hurst": 0.5526268939951606
+ }
+}

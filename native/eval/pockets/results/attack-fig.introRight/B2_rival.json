@@ -1,0 +1,64 @@
+{
+ "d2_partial": 0.8389576625840172,
+ "d3_partial": 0.8458880171454017,
+ "n": 54,
+ "d2_partial_present31": 0.8953661664864809,
+ "d2_rho_code": 0.3970588235294118,
+ "d2_rho_diagram": 0.6999999999999998,
+ "d2_rho_natural-grain PRESENT": 0.9757575757575757,
+ "battery54": [
+  [
+   "phys.affect",
+   -0.5976964490324748
+  ],
+  [
+   "freq.abbrev",
+   -0.585709671778303
+  ],
+  [
+   "comp.sameR",
+   -0.5218041388850079
+  ],
+  [
+   "phys.massExp",
+   0.5180831754359922
+  ],
+  [
+   "comp.rigidR",
+   -0.5165792702887722
+  ],
+  [
+   "comp.initEnt",
+   0.5108029462853286
+  ],
+  [
+   "fig.initFollow",
+   0.4905269636164753
+  ],
+  [
+   "comp.sameL",
+   -0.48922002340287646
+  ]
+ ],
+ "covR2": {
+  "all real (384) logTokens+meanUL": 0.014141033418602067,
+  "all real (384) +hapaxShare+ttr": 0.027898953535683724,
+  "code+diagram (54) logTokens+meanUL": 0.0067084845014613315,
+  "code+diagram (54) +hapaxShare+ttr": 0.28423084161525236
+ },
+ "greedy": {
+  "chosen": [
+   "comp.edgeGap",
+   "phys.affect",
+   "burst.burstM"
+  ],
+  "r2": 0.17542807651958814,
+  "r2controls": 0.014141033418602067,
+  "candidates": 60
+ },
+ "greedyNull": {
+  "mean": 0.036363972126492734,
+  "max": 0.060048208641518275,
+  "draws": 12
+ }
+}

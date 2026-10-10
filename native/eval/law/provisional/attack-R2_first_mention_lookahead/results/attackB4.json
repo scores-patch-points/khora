@@ -1,0 +1,227 @@
+{
+ "headerSha256": "1ad63201dc47b3cb2b74c610f332c112b1286f50bd3e728f842089148880fb8e",
+ "code": {
+  "common.mjs": "5f2b3417bddb872c",
+  "stats.mjs": "545acdde873ebce2",
+  "hdr.mjs": "57412b6ec9d9c475"
+ },
+ "partitions": {
+  "SD": {
+   "LOW": {
+    "n": 333,
+    "days": 22,
+    "aucMean": 0.5866,
+    "ciDay": [
+     0.5721,
+     0.6004
+    ],
+    "thr2": {
+     "th": 2,
+     "tpr": 0,
+     "fpr": 0,
+     "balPrec": null
+    }
+   },
+   "HIGH": {
+    "n": 202,
+    "days": 17,
+    "aucMean": 0.8713,
+    "ciDay": [
+     0.8485,
+     0.9079
+    ],
+    "thr2": {
+     "th": 2,
+     "tpr": 0.8614,
+     "fpr": 0.3119,
+     "balPrec": 0.7342
+    }
+   }
+  },
+  "SC": {
+   "LOW": {
+    "n": 292,
+    "days": 20,
+    "aucMean": 0.5736,
+    "ciDay": [
+     0.554,
+     0.5892
+    ],
+    "thr2": {
+     "th": 2,
+     "tpr": 0,
+     "fpr": 0,
+     "balPrec": null
+    }
+   },
+   "HIGH": {
+    "n": 155,
+    "days": 11,
+    "aucMean": 0.8753,
+    "ciDay": [
+     0.8509,
+     0.9076
+    ],
+    "thr2": {
+     "th": 2,
+     "tpr": 0.8968,
+     "fpr": 0.2968,
+     "balPrec": 0.7514
+    }
+   }
+  },
+  "CF": {
+   "LOW": {
+    "n": 328,
+    "days": 16,
+    "aucMean": 0.5915,
+    "ciDay": [
+     0.5694,
+     0.6209
+    ],
+    "thr2": {
+     "th": 2,
+     "tpr": 0,
+     "fpr": 0,
+     "balPrec": null
+    }
+   },
+   "HIGH": {
+    "n": 157,
+    "days": 14,
+    "aucMean": 0.8652,
+    "ciDay": [
+     0.8203,
+     0.9079
+    ],
+    "thr2": {
+     "th": 2,
+     "tpr": 0.9045,
+     "fpr": 0.3503,
+     "balPrec": 0.7208
+    }
+   }
+  },
+  "ALL_EN": {
+   "LOW": {
+    "n": 953,
+    "days": 58,
+    "aucMean": 0.5843,
+    "ciDay": [
+     0.5743,
+     0.5969
+    ],
+    "thr2": {
+     "th": 2,
+     "tpr": 0,
+     "fpr": 0,
+     "balPrec": null
+    }
+   },
+   "HIGH": {
+    "n": 514,
+    "days": 42,
+    "aucMean": 0.8706,
+    "ciDay": [
+     0.8542,
+     0.8925
+    ],
+    "thr2": {
+     "th": 2,
+     "tpr": 0.8852,
+     "fpr": 0.3191,
+     "balPrec": 0.7351
+    }
+   }
+  }
+ },
+ "splits": {
+  "productiveDays": 32,
+  "highQ025": 0.8522,
+  "highMin": 0.8371,
+  "highMedian": 0.8716,
+  "lowQ975": 0.5958,
+  "lowMax": 0.6026,
+  "bothHigh080": 1,
+  "bothLowLt062": 1
+ },
+ "facetsHigh": {
+  "INIT": {
+   "n": 301,
+   "auc": 0.8472,
+   "ciDay": [
+    0.8185,
+    0.8728
+   ]
+  },
+  "NONINIT": {
+   "n": 213,
+   "auc": 0.9061,
+   "ciDay": [
+    0.8729,
+    0.9384
+   ]
+  },
+  "ubuntu": {
+   "n": 471,
+   "auc": 0.8673,
+   "ciDay": [
+    0.8504,
+    0.8884
+   ]
+  },
+  "kubuntu": {
+   "n": 36,
+   "auc": 0.9167,
+   "ciDay": [
+    0.8472,
+    1
+   ]
+  },
+  "big": {
+   "n": 413,
+   "auc": 0.8717,
+   "ciDay": [
+    0.8516,
+    0.8957
+   ]
+  },
+  "small": {
+   "n": 101,
+   "auc": 0.8713,
+   "ciDay": [
+    0.8253,
+    0.9195
+   ]
+  },
+  "2004-07": {
+   "n": 193,
+   "auc": 0.8912,
+   "ciDay": [
+    0.8542,
+    0.9317
+   ]
+  },
+  "2008-11": {
+   "n": 254,
+   "auc": 0.8642,
+   "ciDay": [
+    0.8436,
+    0.8905
+   ]
+  },
+  "2012-15": {
+   "n": 67,
+   "auc": 0.8433,
+   "ciDay": [
+    0.7869,
+    0.8944
+   ]
+  }
+ },
+ "verdict": {
+  "highReplicates": true,
+  "lowWeak": true
+ },
+ "seconds": 0
+}

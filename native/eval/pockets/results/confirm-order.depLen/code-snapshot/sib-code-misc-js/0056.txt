@@ -1,0 +1,71 @@
+// rtc.test.mjs — defect 7: ICE `disconnected` is recoverable. A fake
+// RTCPeerConnection is injected via globalThis; mock timers drive the grace.
+import test from "node:test";
+import assert from "node:assert/strict";
+
+class FakePC {
+  constructor() { this.connectionState = "new"; FakePC.last = this; }
+  createDataChannel() { return { readyState: "connecting", close() {} }; }
+  close() { this.connectionState = "closed"; }
+  set(state) { this.connectionState = state; this.onconnectionstatechange?.(); }
+}
+globalThis.RTCPeerConnection = FakePC;
+const { RtcPeer, DISCONNECT_GRACE_MS } = await import("./rtc.js");
+
+function mk(t) {
+  if (!t._on) { t.mock.timers.enable({ apis: ["setTimeout"] }); t._on = true; }
+  const ev = [];
+  const peer = new RtcPeer({ signal: () => {}, onOpen: () => ev.push("open"), onClose: () => ev.push("close"), onMessage: () => {} });
+  return { peer, ev, pc: FakePC.last };
+}
+
+test("a transient disconnected that recovers inside the grace never announces close", (t) => {
+  const { peer, ev, pc } = mk(t);
+  pc.set("connected");
+  assert.deepEqual(ev, ["open"]);
+  pc.set("disconnected");
+  t.mock.timers.tick(DISCONNECT_GRACE_MS - 1);
+  assert.equal(peer.opened, true, "still open while we wait");
+  pc.set("connected");
+  t.mock.timers.tick(DISCONNECT_GRACE_MS * 2);
+  assert.deepEqual(ev, ["open"], "no close, no second open");
+  assert.equal(peer.opened, true);
+});
+
+test("a disconnected that does not recover closes after the grace, once", (t) => {
+  const { peer, ev, pc } = mk(t);
+  pc.set("connected");
+  pc.set("disconnected");
+  t.mock.timers.tick(DISCONNECT_GRACE_MS);
+  assert.deepEqual(ev, ["open", "close"]);
+  assert.equal(peer.opened, false);
+  pc.set("failed"); // a second death report is the same death
+  assert.deepEqual(ev, ["open", "close"]);
+});
+
+test("failed and closed are immediate", (t) => {
+  for (const state of ["failed", "closed"]) {
+    const { ev, pc } = mk(t);
+    pc.set("connected");
+    pc.set(state);
+    assert.deepEqual(ev, ["open", "close"], state);
+  }
+});
+
+test("after a close, a fresh connected announces open again (the announce flag resets)", (t) => {
+  const { peer, ev, pc } = mk(t);
+  pc.set("connected");
+  pc.set("failed");
+  pc.set("connected");
+  assert.deepEqual(ev, ["open", "close", "open"]);
+  assert.equal(peer.opened, true);
+});
+
+test("close() cancels a pending grace timer", (t) => {
+  const { peer, ev, pc } = mk(t);
+  pc.set("connected");
+  pc.set("disconnected");
+  peer.close();
+  t.mock.timers.tick(DISCONNECT_GRACE_MS * 2);
+  assert.deepEqual(ev, ["open"]);
+});

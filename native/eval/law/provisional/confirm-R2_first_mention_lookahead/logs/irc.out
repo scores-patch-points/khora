@@ -1,0 +1,54 @@
+{
+ "mode": "irc",
+ "headerSha256": "3377f5b2020b273959ab433ffc535df916d34f04148759056d3fc771430c61ad",
+ "verdict": {
+  "verdict": "CONFIRMED",
+  "why": "primary cell holds (a-e)",
+  "primaryHolds": true,
+  "subScopeHolding": [
+   "EN_INIT",
+   "EN_NONINIT",
+   "EN_ubuntu",
+   "EN_kubuntu",
+   "EN_2004-07",
+   "EN_2008-11",
+   "EN_big",
+   "EN_small"
+  ],
+  "subScopeFailing": [
+   "EN_2012-15"
+  ],
+  "mode": "irc"
+ },
+ "primary": {
+  "variant": "M4",
+  "n": 485,
+  "days": 16,
+  "auc": 0.6845,
+  "ci": [
+   0.6629,
+   0.7062
+  ],
+  "dayCi": [
+   0.6575,
+   0.7053
+  ],
+  "ctl": {
+   "i": 0.4979,
+   "len": 0.4928,
+   "cl": 0.499,
+   "lc": 0.5103
+  },
+  "thr": {
+   "n": 485,
+   "tpr": 0.2928,
+   "fpr": 0.1093,
+   "balPrec": 0.7282
+  },
+  "wordshuf": 0.5573,
+  "drop": 0.1272,
+  "msgshuf": 0.6563,
+  "beyond": 0.6752,
+  "beyond128": 0.5924
+ }
+}

@@ -1,0 +1,463 @@
+{
+ "n": 390,
+ "strata": [
+  "3-4",
+  "5-6",
+  "7-9",
+  "10-14",
+  "15-24",
+  "25+"
+ ],
+ "byClass": {
+  "word(atlas P+)": [
+   {
+    "stratum": "3-4",
+    "nPockets": 32,
+    "nPplus": 27,
+    "nPminus": 0,
+    "nPos": 31,
+    "medianV": 0.1823
+   },
+   {
+    "stratum": "5-6",
+    "nPockets": 54,
+    "nPplus": 44,
+    "nPminus": 0,
+    "nPos": 53,
+    "medianV": 0.1304
+   },
+   {
+    "stratum": "7-9",
+    "nPockets": 87,
+    "nPplus": 56,
+    "nPminus": 0,
+    "nPos": 85,
+    "medianV": 0.0874
+   },
+   {
+    "stratum": "10-14",
+    "nPockets": 101,
+    "nPplus": 56,
+    "nPminus": 0,
+    "nPos": 99,
+    "medianV": 0.0541
+   },
+   {
+    "stratum": "15-24",
+    "nPockets": 103,
+    "nPplus": 56,
+    "nPminus": 0,
+    "nPos": 102,
+    "medianV": 0.036
+   },
+   {
+    "stratum": "25+",
+    "nPockets": 90,
+    "nPplus": 22,
+    "nPminus": 0,
+    "nPos": 89,
+    "medianV": 0.0154
+   }
+  ],
+  "word(atlas P-)": [
+   {
+    "stratum": "3-4",
+    "nPockets": 10,
+    "nPplus": 3,
+    "nPminus": 2,
+    "nPos": 8,
+    "medianV": 0.03
+   },
+   {
+    "stratum": "5-6",
+    "nPockets": 12,
+    "nPplus": 2,
+    "nPminus": 4,
+    "nPos": 3,
+    "medianV": -0.0432
+   },
+   {
+    "stratum": "7-9",
+    "nPockets": 14,
+    "nPplus": 1,
+    "nPminus": 8,
+    "nPos": 2,
+    "medianV": -0.0437
+   },
+   {
+    "stratum": "10-14",
+    "nPockets": 18,
+    "nPplus": 0,
+    "nPminus": 10,
+    "nPos": 1,
+    "medianV": -0.0423
+   },
+   {
+    "stratum": "15-24",
+    "nPockets": 18,
+    "nPplus": 0,
+    "nPminus": 12,
+    "nPos": 0,
+    "medianV": -0.0454
+   },
+   {
+    "stratum": "25+",
+    "nPockets": 11,
+    "nPplus": 0,
+    "nPminus": 5,
+    "nPos": 0,
+    "medianV": -0.0272
+   }
+  ],
+  "word(other)": [
+   {
+    "stratum": "3-4",
+    "nPockets": 10,
+    "nPplus": 3,
+    "nPminus": 0,
+    "nPos": 8,
+    "medianV": 0.0528
+   },
+   {
+    "stratum": "5-6",
+    "nPockets": 16,
+    "nPplus": 4,
+    "nPminus": 0,
+    "nPos": 10,
+    "medianV": 0.019
+   },
+   {
+    "stratum": "7-9",
+    "nPockets": 33,
+    "nPplus": 3,
+    "nPminus": 1,
+    "nPos": 27,
+    "medianV": 0.0207
+   },
+   {
+    "stratum": "10-14",
+    "nPockets": 41,
+    "nPplus": 0,
+    "nPminus": 2,
+    "nPos": 27,
+    "medianV": 0.0174
+   },
+   {
+    "stratum": "15-24",
+    "nPockets": 56,
+    "nPplus": 0,
+    "nPminus": 2,
+    "nPos": 38,
+    "medianV": 0.0135
+   },
+   {
+    "stratum": "25+",
+    "nPockets": 64,
+    "nPplus": 0,
+    "nPminus": 4,
+    "nPos": 38,
+    "medianV": 0.0042
+   }
+  ],
+  "code": [
+   {
+    "stratum": "3-4",
+    "nPockets": 66,
+    "nPplus": 12,
+    "nPminus": 40,
+    "nPos": 18,
+    "medianV": -0.0909
+   },
+   {
+    "stratum": "5-6",
+    "nPockets": 64,
+    "nPplus": 7,
+    "nPminus": 44,
+    "nPos": 12,
+    "medianV": -0.0995
+   },
+   {
+    "stratum": "7-9",
+    "nPockets": 64,
+    "nPplus": 8,
+    "nPminus": 38,
+    "nPos": 16,
+    "medianV": -0.0691
+   },
+   {
+    "stratum": "10-14",
+    "nPockets": 63,
+    "nPplus": 7,
+    "nPminus": 22,
+    "nPos": 26,
+    "medianV": -0.0198
+   },
+   {
+    "stratum": "15-24",
+    "nPockets": 35,
+    "nPplus": 3,
+    "nPminus": 4,
+    "nPos": 18,
+    "medianV": 0.0035
+   },
+   {
+    "stratum": "25+",
+    "nPockets": 3,
+    "nPplus": 0,
+    "nPminus": 0,
+    "nPos": 3,
+    "medianV": 0.0192
+   }
+  ],
+  "notation": [
+   {
+    "stratum": "3-4",
+    "nPockets": 5,
+    "nPplus": 2,
+    "nPminus": 1,
+    "nPos": 2,
+    "medianV": -0.003
+   },
+   {
+    "stratum": "5-6",
+    "nPockets": 7,
+    "nPplus": 1,
+    "nPminus": 2,
+    "nPos": 4,
+    "medianV": 0.0205
+   },
+   {
+    "stratum": "7-9",
+    "nPockets": 8,
+    "nPplus": 3,
+    "nPminus": 3,
+    "nPos": 4,
+    "medianV": 0.014
+   },
+   {
+    "stratum": "10-14",
+    "nPockets": 10,
+    "nPplus": 3,
+    "nPminus": 1,
+    "nPos": 6,
+    "medianV": 0.0199
+   },
+   {
+    "stratum": "15-24",
+    "nPockets": 8,
+    "nPplus": 3,
+    "nPminus": 0,
+    "nPos": 8,
+    "medianV": 0.0259
+   },
+   {
+    "stratum": "25+",
+    "nPockets": 9,
+    "nPplus": 1,
+    "nPminus": 2,
+    "nPos": 3,
+    "medianV": -0.0032
+   }
+  ],
+  "charbigram": [
+   {
+    "stratum": "3-4",
+    "nPockets": 5,
+    "nPplus": 0,
+    "nPminus": 4,
+    "nPos": 1,
+    "medianV": -0.1607
+   },
+   {
+    "stratum": "5-6",
+    "nPockets": 6,
+    "nPplus": 0,
+    "nPminus": 6,
+    "nPos": 0,
+    "medianV": -0.1747
+   },
+   {
+    "stratum": "7-9",
+    "nPockets": 6,
+    "nPplus": 0,
+    "nPminus": 6,
+    "nPos": 0,
+    "medianV": -0.1847
+   },
+   {
+    "stratum": "10-14",
+    "nPockets": 5,
+    "nPplus": 0,
+    "nPminus": 5,
+    "nPos": 0,
+    "medianV": -0.1222
+   },
+   {
+    "stratum": "15-24",
+    "nPockets": 6,
+    "nPplus": 0,
+    "nPminus": 5,
+    "nPos": 0,
+    "medianV": -0.1065
+   },
+   {
+    "stratum": "25+",
+    "nPockets": 3,
+    "nPplus": 0,
+    "nPminus": 3,
+    "nPos": 0,
+    "medianV": -0.0757
+   }
+  ],
+  "ALL word grain": [
+   {
+    "stratum": "3-4",
+    "nPockets": 52,
+    "nPplus": 33,
+    "nPminus": 2,
+    "nPos": 47,
+    "medianV": 0.1286
+   },
+   {
+    "stratum": "5-6",
+    "nPockets": 82,
+    "nPplus": 50,
+    "nPminus": 4,
+    "nPos": 66,
+    "medianV": 0.0917
+   },
+   {
+    "stratum": "7-9",
+    "nPockets": 134,
+    "nPplus": 60,
+    "nPminus": 9,
+    "nPos": 114,
+    "medianV": 0.0639
+   },
+   {
+    "stratum": "10-14",
+    "nPockets": 160,
+    "nPplus": 56,
+    "nPminus": 12,
+    "nPos": 127,
+    "medianV": 0.0393
+   },
+   {
+    "stratum": "15-24",
+    "nPockets": 177,
+    "nPplus": 56,
+    "nPminus": 14,
+    "nPos": 140,
+    "medianV": 0.0285
+   },
+   {
+    "stratum": "25+",
+    "nPockets": 165,
+    "nPplus": 22,
+    "nPminus": 9,
+    "nPos": 127,
+    "medianV": 0.0112
+   }
+  ],
+  "ALL code grain": [
+   {
+    "stratum": "3-4",
+    "nPockets": 66,
+    "nPplus": 12,
+    "nPminus": 40,
+    "nPos": 18,
+    "medianV": -0.0909
+   },
+   {
+    "stratum": "5-6",
+    "nPockets": 64,
+    "nPplus": 7,
+    "nPminus": 44,
+    "nPos": 12,
+    "medianV": -0.0995
+   },
+   {
+    "stratum": "7-9",
+    "nPockets": 64,
+    "nPplus": 8,
+    "nPminus": 38,
+    "nPos": 16,
+    "medianV": -0.0691
+   },
+   {
+    "stratum": "10-14",
+    "nPockets": 63,
+    "nPplus": 7,
+    "nPminus": 22,
+    "nPos": 26,
+    "medianV": -0.0198
+   },
+   {
+    "stratum": "15-24",
+    "nPockets": 35,
+    "nPplus": 3,
+    "nPminus": 4,
+    "nPos": 18,
+    "medianV": 0.0035
+   },
+   {
+    "stratum": "25+",
+    "nPockets": 3,
+    "nPplus": 0,
+    "nPminus": 0,
+    "nPos": 3,
+    "medianV": 0.0192
+   }
+  ]
+ },
+ "codePminus": [
+  {
+   "stratum": "3-4",
+   "n": 45,
+   "nPos": 4,
+   "nPminus": 38,
+   "nPplus": 2,
+   "medianV": -0.1551
+  },
+  {
+   "stratum": "5-6",
+   "n": 44,
+   "nPos": 1,
+   "nPminus": 42,
+   "nPplus": 0,
+   "medianV": -0.1594
+  },
+  {
+   "stratum": "7-9",
+   "n": 44,
+   "nPos": 2,
+   "nPminus": 34,
+   "nPplus": 2,
+   "medianV": -0.1126
+  },
+  {
+   "stratum": "10-14",
+   "n": 44,
+   "nPos": 13,
+   "nPminus": 20,
+   "nPplus": 2,
+   "medianV": -0.0362
+  },
+  {
+   "stratum": "15-24",
+   "n": 26,
+   "nPos": 10,
+   "nPminus": 4,
+   "nPplus": 0,
+   "medianV": -0.0189
+  },
+  {
+   "stratum": "25+",
+   "n": 0,
+   "nPos": 0,
+   "nPminus": 0,
+   "nPplus": 0,
+   "medianV": null
+  }
+ ]
+}

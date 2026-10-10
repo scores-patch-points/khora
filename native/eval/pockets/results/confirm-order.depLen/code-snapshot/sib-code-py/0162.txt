@@ -1,0 +1,16 @@
+"""OPML subscription import. Stdlib only."""
+
+
+def parse_opml(xml_text):
+    """Return the list of feed URLs found in an OPML document: the `xmlUrl`
+    attribute of every <outline> that has one, in document order, skipping
+    outlines without an xmlUrl (folders and separators). Use
+    xml.etree.ElementTree. A document with no xmlUrl returns [].
+    """
+    import xml.etree.ElementTree as ET
+    episodes = []
+    root = ET.fromstring(xml_text)
+    for outline in root.findall('.//outline'):
+        if 'xmlUrl' in outline.attrib:
+            episodes.append(outline.attrib['xmlUrl'])
+    return episodes

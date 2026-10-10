@@ -1,0 +1,5273 @@
+{
+ "cell": "FIRST-BOTH",
+ "headerSha256": "d14e70f806a71fa7d810aebe5d1d9baf53f53e81d2cb6ee54821cf2999b7ec30",
+ "groupsSha256": "b2cad7b4a50c77400c1dfc82a91d53092b9327aaa138dbdf1a1ea07e300650d7",
+ "libSha256": "eaa1d06de53f4ab04a861b646e8d0e0e79bdf71bac2cdb6fbaac4486d024bfe4",
+ "analysisSha256": "cc19ee5bfc496a877c429d0380cf21e30be0e51c3d5b51ac27ec2d7ff9311868",
+ "variant": "FP3",
+ "eval": {
+  "n": 46,
+  "nPass": 14,
+  "passing": [
+   "bul",
+   "deu",
+   "glg",
+   "hrv",
+   "por",
+   "cat",
+   "fra",
+   "heb",
+   "ita",
+   "nob",
+   "slv",
+   "urd",
+   "hin",
+   "spa"
+  ],
+  "failing": [
+   "cmn",
+   "est",
+   "fin",
+   "ind",
+   "kat",
+   "lit",
+   "nld",
+   "slk",
+   "srp",
+   "ukr",
+   "wol",
+   "cym",
+   "ell",
+   "eus",
+   "hun",
+   "kor",
+   "lzh",
+   "ron",
+   "tam",
+   "ces",
+   "dan",
+   "eng",
+   "fas",
+   "gle",
+   "hye",
+   "jpn",
+   "lav",
+   "mlt",
+   "pol",
+   "rus",
+   "tur",
+   "vie"
+  ],
+  "meanNear": 0.5874,
+  "meanRand": 0.5638,
+  "meanFar": 0.5389,
+  "meanNearShuf": 0.5784,
+  "gainOverRandom": {
+   "mean": 0.0236,
+   "lo": 0.0146,
+   "hi": 0.0328,
+   "n": 46,
+   "pos": 37
+  },
+  "nearMinusFar": {
+   "mean": 0.0485,
+   "lo": 0.0321,
+   "hi": 0.063,
+   "n": 46,
+   "pos": 38
+  },
+  "nearMinusNearShuf": {
+   "mean": 0.009,
+   "lo": 0.0042,
+   "hi": 0.0142,
+   "n": 46,
+   "pos": 27
+  },
+  "positionControl": 0.5009,
+  "shuffledTarget": 0.526,
+  "sameGenusShareRomance": 0.8571,
+  "sameGenusShareOther": 0.2564,
+  "rows": [
+   {
+    "t": "bul",
+    "near": 0.6496,
+    "far": 0.6027,
+    "rand": 0.6075,
+    "nearShuf": 0.624,
+    "pass": true,
+    "pos": 0.5036,
+    "shuf": 0.5474,
+    "sgs": 0.3333,
+    "donors": [
+     "ron",
+     "fas",
+     "hrv"
+    ]
+   },
+   {
+    "t": "cmn",
+    "near": 0.5311,
+    "far": 0.5463,
+    "rand": 0.5045,
+    "nearShuf": 0.5256,
+    "pass": false,
+    "pos": 0.5039,
+    "shuf": 0.5362,
+    "sgs": 0,
+    "donors": [
+     "ces",
+     "ind",
+     "kat"
+    ]
+   },
+   {
+    "t": "deu",
+    "near": 0.6366,
+    "far": 0.5275,
+    "rand": 0.6023,
+    "nearShuf": 0.6482,
+    "pass": true,
+    "pos": 0.499,
+    "shuf": 0.5638,
+    "sgs": 1,
+    "donors": [
+     "dan",
+     "eng",
+     "nob"
+    ]
+   },
+   {
+    "t": "est",
+    "near": 0.5904,
+    "far": 0.5166,
+    "rand": 0.5975,
+    "nearShuf": 0.5898,
+    "pass": false,
+    "pos": 0.5001,
+    "shuf": 0.5556,
+    "sgs": 0.3333,
+    "donors": [
+     "fin",
+     "lav",
+     "slk"
+    ]
+   },
+   {
+    "t": "fin",
+    "near": 0.5785,
+    "far": 0.5169,
+    "rand": 0.5634,
+    "nearShuf": 0.5629,
+    "pass": false,
+    "pos": 0.4988,
+    "shuf": 0.5506,
+    "sgs": 0.3333,
+    "donors": [
+     "est",
+     "lav",
+     "slk"
+    ]
+   },
+   {
+    "t": "glg",
+    "near": 0.6545,
+    "far": 0.561,
+    "rand": 0.5816,
+    "nearShuf": 0.6524,
+    "pass": true,
+    "pos": 0.4987,
+    "shuf": 0.5327,
+    "sgs": 1,
+    "donors": [
+     "por",
+     "spa",
+     "cat"
+    ]
+   },
+   {
+    "t": "hrv",
+    "near": 0.6352,
+    "far": 0.5433,
+    "rand": 0.5897,
+    "nearShuf": 0.6391,
+    "pass": true,
+    "pos": 0.504,
+    "shuf": 0.5169,
+    "sgs": 0.6667,
+    "donors": [
+     "slv",
+     "srp",
+     "ron"
+    ]
+   },
+   {
+    "t": "ind",
+    "near": 0.5433,
+    "far": 0.5488,
+    "rand": 0.56,
+    "nearShuf": 0.5597,
+    "pass": false,
+    "pos": 0.5167,
+    "shuf": 0.5171,
+    "sgs": 0,
+    "donors": [
+     "ces",
+     "cmn",
+     "hye"
+    ]
+   },
+   {
+    "t": "kat",
+    "near": 0.5454,
+    "far": 0.5207,
+    "rand": 0.566,
+    "nearShuf": 0.552,
+    "pass": false,
+    "pos": 0.4996,
+    "shuf": 0.5293,
+    "sgs": 0,
+    "donors": [
+     "hye",
+     "lit",
+     "ces"
+    ]
+   },
+   {
+    "t": "lit",
+    "near": 0.5468,
+    "far": 0.566,
+    "rand": 0.5666,
+    "nearShuf": 0.5567,
+    "pass": false,
+    "pos": 0.4998,
+    "shuf": 0.5057,
+    "sgs": 0,
+    "donors": [
+     "hye",
+     "kat",
+     "cmn"
+    ]
+   },
+   {
+    "t": "nld",
+    "near": 0.6076,
+    "far": 0.5705,
+    "rand": 0.5892,
+    "nearShuf": 0.5806,
+    "pass": false,
+    "pos": 0.4978,
+    "shuf": 0.5128,
+    "sgs": 0.6667,
+    "donors": [
+     "eng",
+     "gle",
+     "deu"
+    ]
+   },
+   {
+    "t": "por",
+    "near": 0.6715,
+    "far": 0.5811,
+    "rand": 0.5947,
+    "nearShuf": 0.666,
+    "pass": true,
+    "pos": 0.4972,
+    "shuf": 0.5189,
+    "sgs": 1,
+    "donors": [
+     "glg",
+     "spa",
+     "fra"
+    ]
+   },
+   {
+    "t": "slk",
+    "near": 0.5533,
+    "far": 0.4758,
+    "rand": 0.5216,
+    "nearShuf": 0.5417,
+    "pass": false,
+    "pos": 0.5011,
+    "shuf": 0.5115,
+    "sgs": 0.3333,
+    "donors": [
+     "ukr",
+     "lav",
+     "fin"
+    ]
+   },
+   {
+    "t": "srp",
+    "near": 0.5974,
+    "far": 0.5906,
+    "rand": 0.5639,
+    "nearShuf": 0.5526,
+    "pass": false,
+    "pos": 0.5069,
+    "shuf": 0.5236,
+    "sgs": 0.6667,
+    "donors": [
+     "hrv",
+     "fas",
+     "ces"
+    ]
+   },
+   {
+    "t": "ukr",
+    "near": 0.5828,
+    "far": 0.5179,
+    "rand": 0.5699,
+    "nearShuf": 0.5645,
+    "pass": false,
+    "pos": 0.502,
+    "shuf": 0.552,
+    "sgs": 0.6667,
+    "donors": [
+     "slk",
+     "lav",
+     "pol"
+    ]
+   },
+   {
+    "t": "wol",
+    "near": 0.6264,
+    "far": 0.5919,
+    "rand": 0.6066,
+    "nearShuf": 0.6221,
+    "pass": false,
+    "pos": 0.5004,
+    "shuf": 0.5062,
+    "sgs": 0,
+    "donors": [
+     "cym",
+     "urd",
+     "mlt"
+    ]
+   },
+   {
+    "t": "cat",
+    "near": 0.6827,
+    "far": 0.5041,
+    "rand": 0.6187,
+    "nearShuf": 0.6616,
+    "pass": true,
+    "pos": 0.4992,
+    "shuf": 0.5249,
+    "sgs": 1,
+    "donors": [
+     "spa",
+     "ita",
+     "fra"
+    ]
+   },
+   {
+    "t": "cym",
+    "near": 0.6053,
+    "far": 0.5868,
+    "rand": 0.5896,
+    "nearShuf": 0.6052,
+    "pass": false,
+    "pos": 0.5036,
+    "shuf": 0.5025,
+    "sgs": 0.3333,
+    "donors": [
+     "urd",
+     "mlt",
+     "gle"
+    ]
+   },
+   {
+    "t": "ell",
+    "near": 0.4678,
+    "far": 0.4171,
+    "rand": 0.5067,
+    "nearShuf": 0.4554,
+    "pass": false,
+    "pos": 0.4902,
+    "shuf": 0.491,
+    "sgs": 0,
+    "donors": [
+     "gle",
+     "dan",
+     "nld"
+    ]
+   },
+   {
+    "t": "eus",
+    "near": 0.5355,
+    "far": 0.4831,
+    "rand": 0.5207,
+    "nearShuf": 0.5246,
+    "pass": false,
+    "pos": 0.4988,
+    "shuf": 0.4883,
+    "sgs": 0,
+    "donors": [
+     "slk",
+     "fin",
+     "lav"
+    ]
+   },
+   {
+    "t": "fra",
+    "near": 0.7145,
+    "far": 0.557,
+    "rand": 0.6143,
+    "nearShuf": 0.7145,
+    "pass": true,
+    "pos": 0.5,
+    "shuf": 0.5346,
+    "sgs": 1,
+    "donors": [
+     "spa",
+     "ita",
+     "cat"
+    ]
+   },
+   {
+    "t": "heb",
+    "near": 0.6453,
+    "far": 0.5794,
+    "rand": 0.5732,
+    "nearShuf": 0.6049,
+    "pass": true,
+    "pos": 0.5008,
+    "shuf": 0.5041,
+    "sgs": 0,
+    "donors": [
+     "gle",
+     "nld",
+     "jpn"
+    ]
+   },
+   {
+    "t": "hun",
+    "near": 0.4701,
+    "far": 0.5022,
+    "rand": 0.5158,
+    "nearShuf": 0.4749,
+    "pass": false,
+    "pos": 0.4956,
+    "shuf": 0.5272,
+    "sgs": 0,
+    "donors": [
+     "ces",
+     "srp",
+     "hrv"
+    ]
+   },
+   {
+    "t": "ita",
+    "near": 0.6754,
+    "far": 0.5294,
+    "rand": 0.6049,
+    "nearShuf": 0.6289,
+    "pass": true,
+    "pos": 0.4996,
+    "shuf": 0.5277,
+    "sgs": 1,
+    "donors": [
+     "cat",
+     "fra",
+     "spa"
+    ]
+   },
+   {
+    "t": "kor",
+    "near": 0.4688,
+    "far": 0.5855,
+    "rand": 0.4315,
+    "nearShuf": 0.4298,
+    "pass": false,
+    "pos": 0.5109,
+    "shuf": 0.5441,
+    "sgs": 0,
+    "donors": [
+     "est",
+     "fin",
+     "tur"
+    ]
+   },
+   {
+    "t": "lzh",
+    "near": 0.5152,
+    "far": 0.5073,
+    "rand": 0.5258,
+    "nearShuf": 0.4835,
+    "pass": false,
+    "pos": 0.4747,
+    "shuf": 0.5194,
+    "sgs": 0,
+    "donors": [
+     "eng",
+     "vie",
+     "wol"
+    ]
+   },
+   {
+    "t": "nob",
+    "near": 0.6705,
+    "far": 0.5834,
+    "rand": 0.6263,
+    "nearShuf": 0.6764,
+    "pass": true,
+    "pos": 0.5017,
+    "shuf": 0.5344,
+    "sgs": 1,
+    "donors": [
+     "dan",
+     "deu",
+     "eng"
+    ]
+   },
+   {
+    "t": "ron",
+    "near": 0.6019,
+    "far": 0.5409,
+    "rand": 0.5777,
+    "nearShuf": 0.6137,
+    "pass": false,
+    "pos": 0.5038,
+    "shuf": 0.5306,
+    "sgs": 0,
+    "donors": [
+     "bul",
+     "hrv",
+     "srp"
+    ]
+   },
+   {
+    "t": "slv",
+    "near": 0.6073,
+    "far": 0.5109,
+    "rand": 0.5742,
+    "nearShuf": 0.5835,
+    "pass": true,
+    "pos": 0.4989,
+    "shuf": 0.5446,
+    "sgs": 1,
+    "donors": [
+     "hrv",
+     "pol",
+     "ukr"
+    ]
+   },
+   {
+    "t": "tam",
+    "near": 0.5219,
+    "far": 0.4892,
+    "rand": 0.5144,
+    "nearShuf": 0.5148,
+    "pass": false,
+    "pos": 0.5107,
+    "shuf": 0.5089,
+    "sgs": 0,
+    "donors": [
+     "lzh",
+     "wol",
+     "vie"
+    ]
+   },
+   {
+    "t": "urd",
+    "near": 0.6074,
+    "far": 0.533,
+    "rand": 0.5491,
+    "nearShuf": 0.6124,
+    "pass": true,
+    "pos": 0.5028,
+    "shuf": 0.5044,
+    "sgs": 0.3333,
+    "donors": [
+     "hin",
+     "mlt",
+     "cym"
+    ]
+   },
+   {
+    "t": "ces",
+    "near": 0.5256,
+    "far": 0.4902,
+    "rand": 0.4993,
+    "nearShuf": 0.4934,
+    "pass": false,
+    "pos": 0.5043,
+    "shuf": 0.5166,
+    "sgs": 0,
+    "donors": [
+     "cmn",
+     "hye",
+     "ind"
+    ]
+   },
+   {
+    "t": "dan",
+    "near": 0.644,
+    "far": 0.5892,
+    "rand": 0.6181,
+    "nearShuf": 0.6524,
+    "pass": false,
+    "pos": 0.4985,
+    "shuf": 0.5432,
+    "sgs": 0.6667,
+    "donors": [
+     "nob",
+     "deu",
+     "gle"
+    ]
+   },
+   {
+    "t": "eng",
+    "near": 0.5984,
+    "far": 0.5533,
+    "rand": 0.5903,
+    "nearShuf": 0.5996,
+    "pass": false,
+    "pos": 0.4919,
+    "shuf": 0.5578,
+    "sgs": 0.6667,
+    "donors": [
+     "deu",
+     "nld",
+     "gle"
+    ]
+   },
+   {
+    "t": "fas",
+    "near": 0.5646,
+    "far": 0.5413,
+    "rand": 0.5653,
+    "nearShuf": 0.5659,
+    "pass": false,
+    "pos": 0.5026,
+    "shuf": 0.5477,
+    "sgs": 0,
+    "donors": [
+     "srp",
+     "ron",
+     "bul"
+    ]
+   },
+   {
+    "t": "gle",
+    "near": 0.5779,
+    "far": 0.5399,
+    "rand": 0.5349,
+    "nearShuf": 0.5691,
+    "pass": false,
+    "pos": 0.5021,
+    "shuf": 0.5418,
+    "sgs": 0,
+    "donors": [
+     "eng",
+     "nld",
+     "hin"
+    ]
+   },
+   {
+    "t": "hin",
+    "near": 0.6253,
+    "far": 0.5998,
+    "rand": 0.5884,
+    "nearShuf": 0.6057,
+    "pass": true,
+    "pos": 0.505,
+    "shuf": 0.5187,
+    "sgs": 0.3333,
+    "donors": [
+     "gle",
+     "urd",
+     "jpn"
+    ]
+   },
+   {
+    "t": "hye",
+    "near": 0.6242,
+    "far": 0.5401,
+    "rand": 0.6228,
+    "nearShuf": 0.6281,
+    "pass": false,
+    "pos": 0.4971,
+    "shuf": 0.5833,
+    "sgs": 0,
+    "donors": [
+     "kat",
+     "lit",
+     "ces"
+    ]
+   },
+   {
+    "t": "jpn",
+    "near": 0.5711,
+    "far": 0.5395,
+    "rand": 0.549,
+    "nearShuf": 0.5172,
+    "pass": false,
+    "pos": 0.5009,
+    "shuf": 0.5066,
+    "sgs": 0,
+    "donors": [
+     "hin",
+     "heb",
+     "gle"
+    ]
+   },
+   {
+    "t": "lav",
+    "near": 0.5969,
+    "far": 0.5174,
+    "rand": 0.5915,
+    "nearShuf": 0.6024,
+    "pass": false,
+    "pos": 0.4993,
+    "shuf": 0.5334,
+    "sgs": 0,
+    "donors": [
+     "est",
+     "fin",
+     "slk"
+    ]
+   },
+   {
+    "t": "mlt",
+    "near": 0.5371,
+    "far": 0.5398,
+    "rand": 0.507,
+    "nearShuf": 0.5376,
+    "pass": false,
+    "pos": 0.5014,
+    "shuf": 0.5331,
+    "sgs": 0,
+    "donors": [
+     "urd",
+     "cym",
+     "gle"
+    ]
+   },
+   {
+    "t": "pol",
+    "near": 0.5495,
+    "far": 0.5061,
+    "rand": 0.5439,
+    "nearShuf": 0.5537,
+    "pass": false,
+    "pos": 0.5003,
+    "shuf": 0.5146,
+    "sgs": 0.6667,
+    "donors": [
+     "lav",
+     "slv",
+     "slk"
+    ]
+   },
+   {
+    "t": "rus",
+    "near": 0.5248,
+    "far": 0.49,
+    "rand": 0.5086,
+    "nearShuf": 0.5276,
+    "pass": false,
+    "pos": 0.5009,
+    "shuf": 0.4928,
+    "sgs": 0,
+    "donors": [
+     "est",
+     "lav",
+     "fin"
+    ]
+   },
+   {
+    "t": "spa",
+    "near": 0.7013,
+    "far": 0.5707,
+    "rand": 0.6223,
+    "nearShuf": 0.6961,
+    "pass": true,
+    "pos": 0.4968,
+    "shuf": 0.5001,
+    "sgs": 1,
+    "donors": [
+     "cat",
+     "por",
+     "fra"
+    ]
+   },
+   {
+    "t": "tur",
+    "near": 0.5132,
+    "far": 0.5576,
+    "rand": 0.5383,
+    "nearShuf": 0.5136,
+    "pass": false,
+    "pos": 0.5147,
+    "shuf": 0.5017,
+    "sgs": 0,
+    "donors": [
+     "eus",
+     "fin",
+     "slk"
+    ]
+   },
+   {
+    "t": "vie",
+    "near": 0.5286,
+    "far": 0.5296,
+    "rand": 0.5274,
+    "nearShuf": 0.5225,
+    "pass": false,
+    "pos": 0.5036,
+    "shuf": 0.5369,
+    "sgs": 0,
+    "donors": [
+     "deu",
+     "mlt",
+     "ind"
+    ]
+   }
+  ]
+ },
+ "scope": [
+  "bul",
+  "deu",
+  "glg",
+  "hrv",
+  "por",
+  "cat",
+  "fra",
+  "heb",
+  "ita",
+  "nob",
+  "slv",
+  "urd",
+  "hin",
+  "spa"
+ ],
+ "sets": {
+  "bul": {
+   "near": {
+    "mean": 0.6496,
+    "pos": 0.5036,
+    "shuf": 0.5474,
+    "q95": 0.5242,
+    "pairs": 587,
+    "used": {
+     "ron": 20,
+     "fas": 20,
+     "hrv": 20
+    },
+    "donors": [
+     "ron",
+     "fas",
+     "hrv"
+    ],
+    "sameGenusShare": 0.3333
+   },
+   "far": {
+    "mean": 0.6027,
+    "pos": 0.5032,
+    "shuf": 0.5379,
+    "q95": 0.5306,
+    "pairs": 587,
+    "used": {
+     "lzh": 20,
+     "wol": 20,
+     "tam": 20
+    },
+    "donors": [
+     "lzh",
+     "wol",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.624,
+    "pos": 0.5027,
+    "shuf": 0.5365,
+    "q95": 0.5292,
+    "pairs": 587,
+    "used": {
+     "ron": 20,
+     "fas": 20,
+     "slv": 20
+    },
+    "donors": [
+     "ron",
+     "fas",
+     "slv"
+    ]
+   },
+   "rand": {
+    "mean": 0.6075,
+    "pos": 0.4999,
+    "shuf": 0.5473,
+    "q95": 0.5315,
+    "pairs": 587,
+    "used": {
+     "eng": 2,
+     "heb": 5,
+     "hin": 3,
+     "nob": 4,
+     "ind": 1,
+     "est": 3,
+     "cmn": 1,
+     "wol": 1,
+     "gle": 2,
+     "lit": 3,
+     "ell": 3,
+     "slv": 2,
+     "hun": 3,
+     "jpn": 1,
+     "ukr": 1,
+     "lav": 2,
+     "urd": 3,
+     "glg": 1,
+     "fas": 1,
+     "nld": 4,
+     "fra": 3,
+     "spa": 1,
+     "slk": 1,
+     "ita": 1,
+     "por": 2,
+     "lzh": 1,
+     "vie": 1,
+     "cat": 1,
+     "fin": 1,
+     "eus": 1,
+     "mlt": 1
+    }
+   }
+  },
+  "cmn": {
+   "near": {
+    "mean": 0.5311,
+    "pos": 0.5039,
+    "shuf": 0.5362,
+    "q95": 0.5271,
+    "pairs": 534,
+    "used": {
+     "ces": 20,
+     "ind": 20,
+     "kat": 20
+    },
+    "donors": [
+     "ces",
+     "ind",
+     "kat"
+    ],
+    "sameGenusShare": 0
+   },
+   "far": {
+    "mean": 0.5463,
+    "pos": 0.5012,
+    "shuf": 0.5155,
+    "q95": 0.5232,
+    "pairs": 534,
+    "used": {
+     "lzh": 20,
+     "wol": 20,
+     "tam": 20
+    },
+    "donors": [
+     "lzh",
+     "wol",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.5256,
+    "pos": 0.5039,
+    "shuf": 0.531,
+    "q95": 0.527,
+    "pairs": 534,
+    "used": {
+     "ces": 20,
+     "ind": 20,
+     "kat": 20
+    },
+    "donors": [
+     "ces",
+     "ind",
+     "kat"
+    ]
+   },
+   "rand": {
+    "mean": 0.5045,
+    "pos": 0.5005,
+    "shuf": 0.5169,
+    "q95": 0.5287,
+    "pairs": 534,
+    "used": {
+     "hye": 3,
+     "por": 2,
+     "kat": 3,
+     "cat": 1,
+     "dan": 4,
+     "hin": 1,
+     "lit": 3,
+     "ell": 3,
+     "fas": 2,
+     "cym": 1,
+     "hrv": 3,
+     "ukr": 2,
+     "nob": 1,
+     "rus": 1,
+     "hun": 2,
+     "fin": 1,
+     "nld": 3,
+     "lzh": 1,
+     "wol": 1,
+     "heb": 1,
+     "bul": 2,
+     "tam": 1,
+     "eng": 2,
+     "gle": 2,
+     "lav": 1,
+     "eus": 2,
+     "ita": 1,
+     "fra": 2,
+     "srp": 1,
+     "pol": 1,
+     "est": 1,
+     "urd": 1,
+     "glg": 2,
+     "tur": 1,
+     "vie": 1
+    }
+   }
+  },
+  "deu": {
+   "near": {
+    "mean": 0.6366,
+    "pos": 0.499,
+    "shuf": 0.5638,
+    "q95": 0.5332,
+    "pairs": 447,
+    "used": {
+     "dan": 20,
+     "eng": 20,
+     "nob": 20
+    },
+    "donors": [
+     "dan",
+     "eng",
+     "nob"
+    ],
+    "sameGenusShare": 1
+   },
+   "far": {
+    "mean": 0.5275,
+    "pos": 0.5135,
+    "shuf": 0.4797,
+    "q95": 0.5302,
+    "pairs": 447,
+    "used": {
+     "wol": 20,
+     "lzh": 20,
+     "tam": 20
+    },
+    "donors": [
+     "wol",
+     "lzh",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.6482,
+    "pos": 0.4992,
+    "shuf": 0.5619,
+    "q95": 0.5364,
+    "pairs": 447,
+    "used": {
+     "nob": 20,
+     "eng": 20,
+     "dan": 20
+    },
+    "donors": [
+     "nob",
+     "eng",
+     "dan"
+    ]
+   },
+   "rand": {
+    "mean": 0.6023,
+    "pos": 0.5017,
+    "shuf": 0.5473,
+    "q95": 0.5283,
+    "pairs": 447,
+    "used": {
+     "heb": 2,
+     "fas": 4,
+     "ind": 4,
+     "pol": 3,
+     "eng": 2,
+     "slv": 3,
+     "ell": 2,
+     "wol": 1,
+     "por": 4,
+     "hun": 3,
+     "mlt": 1,
+     "hrv": 2,
+     "lit": 1,
+     "nld": 2,
+     "ron": 2,
+     "fra": 1,
+     "slk": 2,
+     "dan": 2,
+     "hye": 1,
+     "cym": 2,
+     "glg": 3,
+     "est": 1,
+     "tur": 1,
+     "gle": 1,
+     "tam": 1,
+     "jpn": 1,
+     "cat": 1,
+     "fin": 1,
+     "urd": 1,
+     "hin": 1,
+     "lzh": 1,
+     "vie": 1,
+     "lav": 1,
+     "kat": 1
+    }
+   }
+  },
+  "est": {
+   "near": {
+    "mean": 0.5904,
+    "pos": 0.5001,
+    "shuf": 0.5556,
+    "q95": 0.5317,
+    "pairs": 600,
+    "used": {
+     "fin": 20,
+     "lav": 20,
+     "slk": 20
+    },
+    "donors": [
+     "fin",
+     "lav",
+     "slk"
+    ],
+    "sameGenusShare": 0.3333
+   },
+   "far": {
+    "mean": 0.5166,
+    "pos": 0.4984,
+    "shuf": 0.5118,
+    "q95": 0.529,
+    "pairs": 600,
+    "used": {
+     "lzh": 20,
+     "wol": 20,
+     "tam": 20
+    },
+    "donors": [
+     "lzh",
+     "wol",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.5898,
+    "pos": 0.4996,
+    "shuf": 0.5493,
+    "q95": 0.5342,
+    "pairs": 600,
+    "used": {
+     "fin": 20,
+     "lav": 20,
+     "slk": 20
+    },
+    "donors": [
+     "fin",
+     "lav",
+     "slk"
+    ]
+   },
+   "rand": {
+    "mean": 0.5975,
+    "pos": 0.5,
+    "shuf": 0.561,
+    "q95": 0.5224,
+    "pairs": 600,
+    "used": {
+     "gle": 1,
+     "hin": 4,
+     "ukr": 1,
+     "fin": 3,
+     "kat": 2,
+     "eus": 3,
+     "glg": 1,
+     "ces": 2,
+     "heb": 2,
+     "nld": 4,
+     "urd": 1,
+     "dan": 2,
+     "spa": 3,
+     "bul": 3,
+     "pol": 2,
+     "ell": 3,
+     "hun": 5,
+     "por": 1,
+     "tam": 2,
+     "lav": 1,
+     "hye": 2,
+     "lzh": 1,
+     "nob": 1,
+     "slk": 2,
+     "wol": 2,
+     "jpn": 1,
+     "fas": 1,
+     "srp": 1,
+     "ind": 1,
+     "slv": 1,
+     "hrv": 1
+    }
+   }
+  },
+  "fin": {
+   "near": {
+    "mean": 0.5785,
+    "pos": 0.4988,
+    "shuf": 0.5506,
+    "q95": 0.5267,
+    "pairs": 600,
+    "used": {
+     "est": 20,
+     "lav": 20,
+     "slk": 20
+    },
+    "donors": [
+     "est",
+     "lav",
+     "slk"
+    ],
+    "sameGenusShare": 0.3333
+   },
+   "far": {
+    "mean": 0.5169,
+    "pos": 0.4986,
+    "shuf": 0.5251,
+    "q95": 0.529,
+    "pairs": 600,
+    "used": {
+     "lzh": 20,
+     "wol": 20,
+     "tam": 20
+    },
+    "donors": [
+     "lzh",
+     "wol",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.5629,
+    "pos": 0.5006,
+    "shuf": 0.5514,
+    "q95": 0.5325,
+    "pairs": 600,
+    "used": {
+     "est": 20,
+     "lav": 20,
+     "eus": 20
+    },
+    "donors": [
+     "est",
+     "lav",
+     "eus"
+    ]
+   },
+   "rand": {
+    "mean": 0.5634,
+    "pos": 0.5002,
+    "shuf": 0.5324,
+    "q95": 0.5233,
+    "pairs": 600,
+    "used": {
+     "nld": 1,
+     "lzh": 2,
+     "heb": 3,
+     "fra": 4,
+     "eus": 3,
+     "ell": 1,
+     "cmn": 2,
+     "deu": 4,
+     "kat": 1,
+     "slv": 4,
+     "ron": 1,
+     "rus": 4,
+     "lit": 4,
+     "ind": 2,
+     "wol": 3,
+     "mlt": 2,
+     "gle": 1,
+     "jpn": 1,
+     "ita": 1,
+     "pol": 3,
+     "ukr": 1,
+     "eng": 1,
+     "spa": 1,
+     "est": 2,
+     "cym": 1,
+     "tam": 1,
+     "dan": 2,
+     "urd": 1,
+     "hrv": 1,
+     "fas": 1,
+     "bul": 1
+    }
+   }
+  },
+  "glg": {
+   "near": {
+    "mean": 0.6545,
+    "pos": 0.4987,
+    "shuf": 0.5327,
+    "q95": 0.5452,
+    "pairs": 239,
+    "used": {
+     "por": 20,
+     "spa": 20,
+     "cat": 20
+    },
+    "donors": [
+     "por",
+     "spa",
+     "cat"
+    ],
+    "sameGenusShare": 1
+   },
+   "far": {
+    "mean": 0.561,
+    "pos": 0.4938,
+    "shuf": 0.5189,
+    "q95": 0.544,
+    "pairs": 239,
+    "used": {
+     "tur": 20,
+     "lzh": 20,
+     "tam": 20
+    },
+    "donors": [
+     "tur",
+     "lzh",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.6524,
+    "pos": 0.4989,
+    "shuf": 0.5317,
+    "q95": 0.5427,
+    "pairs": 239,
+    "used": {
+     "por": 20,
+     "spa": 20,
+     "cat": 20
+    },
+    "donors": [
+     "por",
+     "spa",
+     "cat"
+    ]
+   },
+   "rand": {
+    "mean": 0.5816,
+    "pos": 0.497,
+    "shuf": 0.5099,
+    "q95": 0.5415,
+    "pairs": 239,
+    "used": {
+     "eng": 2,
+     "cat": 3,
+     "lav": 4,
+     "kat": 5,
+     "urd": 1,
+     "ron": 1,
+     "mlt": 2,
+     "rus": 4,
+     "spa": 1,
+     "ita": 1,
+     "cmn": 2,
+     "hye": 1,
+     "gle": 2,
+     "slk": 3,
+     "pol": 1,
+     "est": 1,
+     "dan": 2,
+     "lit": 2,
+     "ind": 1,
+     "vie": 1,
+     "ell": 1,
+     "nob": 1,
+     "ukr": 1,
+     "wol": 3,
+     "fin": 2,
+     "fas": 1,
+     "por": 2,
+     "tam": 1,
+     "hun": 1,
+     "lzh": 2,
+     "hin": 1,
+     "ces": 2,
+     "tur": 1,
+     "heb": 1
+    }
+   }
+  },
+  "hrv": {
+   "near": {
+    "mean": 0.6352,
+    "pos": 0.504,
+    "shuf": 0.5169,
+    "q95": 0.5284,
+    "pairs": 600,
+    "used": {
+     "slv": 20,
+     "srp": 20,
+     "ron": 20
+    },
+    "donors": [
+     "slv",
+     "srp",
+     "ron"
+    ],
+    "sameGenusShare": 0.6667
+   },
+   "far": {
+    "mean": 0.5433,
+    "pos": 0.5032,
+    "shuf": 0.5075,
+    "q95": 0.5258,
+    "pairs": 600,
+    "used": {
+     "lzh": 20,
+     "wol": 20,
+     "tam": 20
+    },
+    "donors": [
+     "lzh",
+     "wol",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.6391,
+    "pos": 0.5041,
+    "shuf": 0.5218,
+    "q95": 0.5324,
+    "pairs": 600,
+    "used": {
+     "slv": 20,
+     "ron": 20,
+     "srp": 20
+    },
+    "donors": [
+     "slv",
+     "ron",
+     "srp"
+    ]
+   },
+   "rand": {
+    "mean": 0.5897,
+    "pos": 0.5011,
+    "shuf": 0.5138,
+    "q95": 0.5285,
+    "pairs": 600,
+    "used": {
+     "por": 2,
+     "spa": 2,
+     "lzh": 2,
+     "ind": 4,
+     "srp": 2,
+     "lav": 1,
+     "hye": 2,
+     "eus": 2,
+     "nld": 3,
+     "rus": 2,
+     "vie": 2,
+     "bul": 1,
+     "pol": 1,
+     "nob": 1,
+     "wol": 2,
+     "cym": 2,
+     "ell": 1,
+     "slk": 3,
+     "mlt": 2,
+     "gle": 1,
+     "fra": 3,
+     "fas": 2,
+     "ukr": 3,
+     "fin": 1,
+     "dan": 1,
+     "est": 2,
+     "ron": 2,
+     "tur": 3,
+     "tam": 2,
+     "slv": 1,
+     "cmn": 1,
+     "eng": 1
+    }
+   }
+  },
+  "ind": {
+   "near": {
+    "mean": 0.5433,
+    "pos": 0.5167,
+    "shuf": 0.5171,
+    "q95": 0.5266,
+    "pairs": 600,
+    "used": {
+     "ces": 20,
+     "cmn": 20,
+     "hye": 20
+    },
+    "donors": [
+     "ces",
+     "cmn",
+     "hye"
+    ],
+    "sameGenusShare": 0
+   },
+   "far": {
+    "mean": 0.5488,
+    "pos": 0.5112,
+    "shuf": 0.5153,
+    "q95": 0.5256,
+    "pairs": 600,
+    "used": {
+     "lzh": 20,
+     "wol": 20,
+     "tam": 20
+    },
+    "donors": [
+     "lzh",
+     "wol",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.5597,
+    "pos": 0.5172,
+    "shuf": 0.5213,
+    "q95": 0.5254,
+    "pairs": 600,
+    "used": {
+     "cmn": 20,
+     "ces": 20,
+     "srp": 20
+    },
+    "donors": [
+     "cmn",
+     "ces",
+     "srp"
+    ]
+   },
+   "rand": {
+    "mean": 0.56,
+    "pos": 0.5037,
+    "shuf": 0.5217,
+    "q95": 0.5265,
+    "pairs": 600,
+    "used": {
+     "spa": 3,
+     "hun": 1,
+     "deu": 2,
+     "urd": 2,
+     "ita": 2,
+     "lit": 2,
+     "fra": 2,
+     "ron": 3,
+     "fas": 1,
+     "slv": 3,
+     "dan": 3,
+     "eng": 4,
+     "lzh": 2,
+     "por": 2,
+     "eus": 2,
+     "gle": 1,
+     "srp": 2,
+     "cmn": 2,
+     "wol": 1,
+     "hin": 2,
+     "fin": 2,
+     "ell": 2,
+     "vie": 1,
+     "cym": 1,
+     "ukr": 2,
+     "cat": 2,
+     "bul": 1,
+     "tam": 1,
+     "est": 1,
+     "tur": 1,
+     "heb": 1,
+     "pol": 1,
+     "rus": 1,
+     "glg": 1
+    }
+   }
+  },
+  "kat": {
+   "near": {
+    "mean": 0.5454,
+    "pos": 0.4996,
+    "shuf": 0.5293,
+    "q95": 0.5516,
+    "pairs": 174,
+    "used": {
+     "hye": 20,
+     "lit": 20,
+     "ces": 20
+    },
+    "donors": [
+     "hye",
+     "lit",
+     "ces"
+    ],
+    "sameGenusShare": 0
+   },
+   "far": {
+    "mean": 0.5207,
+    "pos": 0.5011,
+    "shuf": 0.5315,
+    "q95": 0.5463,
+    "pairs": 174,
+    "used": {
+     "lzh": 20,
+     "wol": 20,
+     "tam": 20
+    },
+    "donors": [
+     "lzh",
+     "wol",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.552,
+    "pos": 0.4997,
+    "shuf": 0.5109,
+    "q95": 0.5602,
+    "pairs": 174,
+    "used": {
+     "hye": 20,
+     "ces": 20,
+     "lit": 20
+    },
+    "donors": [
+     "hye",
+     "ces",
+     "lit"
+    ]
+   },
+   "rand": {
+    "mean": 0.566,
+    "pos": 0.5006,
+    "shuf": 0.493,
+    "q95": 0.5474,
+    "pairs": 174,
+    "used": {
+     "hye": 3,
+     "urd": 3,
+     "slk": 3,
+     "ita": 4,
+     "wol": 2,
+     "ces": 2,
+     "por": 4,
+     "bul": 1,
+     "tam": 1,
+     "lav": 1,
+     "ron": 4,
+     "hun": 2,
+     "dan": 1,
+     "hrv": 4,
+     "fas": 1,
+     "ind": 1,
+     "gle": 1,
+     "mlt": 2,
+     "eng": 1,
+     "fra": 1,
+     "vie": 1,
+     "nld": 1,
+     "est": 1,
+     "ukr": 4,
+     "cym": 2,
+     "pol": 1,
+     "glg": 1,
+     "nob": 1,
+     "fin": 1,
+     "hin": 1,
+     "slv": 1,
+     "lzh": 1,
+     "heb": 1,
+     "cat": 1
+    }
+   }
+  },
+  "lit": {
+   "near": {
+    "mean": 0.5468,
+    "pos": 0.4998,
+    "shuf": 0.5057,
+    "q95": 0.5428,
+    "pairs": 191,
+    "used": {
+     "hye": 20,
+     "kat": 20,
+     "cmn": 20
+    },
+    "donors": [
+     "hye",
+     "kat",
+     "cmn"
+    ],
+    "sameGenusShare": 0
+   },
+   "far": {
+    "mean": 0.566,
+    "pos": 0.498,
+    "shuf": 0.5168,
+    "q95": 0.5478,
+    "pairs": 191,
+    "used": {
+     "glg": 20,
+     "wol": 20,
+     "tam": 20
+    },
+    "donors": [
+     "glg",
+     "wol",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.5567,
+    "pos": 0.4992,
+    "shuf": 0.503,
+    "q95": 0.5447,
+    "pairs": 191,
+    "used": {
+     "hye": 20,
+     "kat": 20,
+     "cmn": 20
+    },
+    "donors": [
+     "hye",
+     "kat",
+     "cmn"
+    ]
+   },
+   "rand": {
+    "mean": 0.5666,
+    "pos": 0.4997,
+    "shuf": 0.5131,
+    "q95": 0.5402,
+    "pairs": 191,
+    "used": {
+     "fin": 1,
+     "urd": 3,
+     "deu": 1,
+     "hun": 2,
+     "jpn": 1,
+     "vie": 3,
+     "cym": 5,
+     "cat": 3,
+     "srp": 3,
+     "ukr": 4,
+     "dan": 1,
+     "rus": 1,
+     "ell": 3,
+     "hrv": 1,
+     "pol": 1,
+     "est": 2,
+     "mlt": 2,
+     "fas": 2,
+     "kat": 1,
+     "ces": 1,
+     "ind": 1,
+     "tam": 1,
+     "fra": 3,
+     "eus": 2,
+     "eng": 1,
+     "cmn": 1,
+     "nld": 3,
+     "heb": 3,
+     "spa": 1,
+     "hye": 1,
+     "gle": 1,
+     "tur": 1
+    }
+   }
+  },
+  "nld": {
+   "near": {
+    "mean": 0.6076,
+    "pos": 0.4978,
+    "shuf": 0.5128,
+    "q95": 0.5289,
+    "pairs": 533,
+    "used": {
+     "eng": 20,
+     "gle": 20,
+     "deu": 20
+    },
+    "donors": [
+     "eng",
+     "gle",
+     "deu"
+    ],
+    "sameGenusShare": 0.6667
+   },
+   "far": {
+    "mean": 0.5705,
+    "pos": 0.5034,
+    "shuf": 0.5217,
+    "q95": 0.5329,
+    "pairs": 533,
+    "used": {
+     "fin": 20,
+     "est": 20,
+     "tam": 20
+    },
+    "donors": [
+     "fin",
+     "est",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.5806,
+    "pos": 0.4997,
+    "shuf": 0.5302,
+    "q95": 0.5315,
+    "pairs": 533,
+    "used": {
+     "hin": 20,
+     "gle": 20,
+     "eng": 20
+    },
+    "donors": [
+     "hin",
+     "gle",
+     "eng"
+    ]
+   },
+   "rand": {
+    "mean": 0.5892,
+    "pos": 0.5011,
+    "shuf": 0.5203,
+    "q95": 0.5267,
+    "pairs": 533,
+    "used": {
+     "cat": 2,
+     "wol": 4,
+     "ind": 4,
+     "kat": 2,
+     "rus": 1,
+     "lzh": 2,
+     "pol": 1,
+     "spa": 2,
+     "jpn": 3,
+     "ell": 5,
+     "eng": 3,
+     "glg": 1,
+     "por": 3,
+     "slv": 2,
+     "deu": 1,
+     "tam": 2,
+     "nob": 3,
+     "dan": 2,
+     "slk": 2,
+     "urd": 1,
+     "hye": 1,
+     "heb": 1,
+     "cym": 1,
+     "tur": 1,
+     "hrv": 2,
+     "fra": 2,
+     "ron": 2,
+     "eus": 1,
+     "ces": 1,
+     "mlt": 1,
+     "lit": 1
+    }
+   }
+  },
+  "por": {
+   "near": {
+    "mean": 0.6715,
+    "pos": 0.4972,
+    "shuf": 0.5189,
+    "q95": 0.5292,
+    "pairs": 600,
+    "used": {
+     "glg": 20,
+     "spa": 20,
+     "fra": 20
+    },
+    "donors": [
+     "glg",
+     "spa",
+     "fra"
+    ],
+    "sameGenusShare": 1
+   },
+   "far": {
+    "mean": 0.5811,
+    "pos": 0.507,
+    "shuf": 0.5053,
+    "q95": 0.5274,
+    "pairs": 600,
+    "used": {
+     "wol": 20,
+     "lzh": 20,
+     "tam": 20
+    },
+    "donors": [
+     "wol",
+     "lzh",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.666,
+    "pos": 0.5011,
+    "shuf": 0.5164,
+    "q95": 0.528,
+    "pairs": 600,
+    "used": {
+     "glg": 20,
+     "spa": 20,
+     "fra": 20
+    },
+    "donors": [
+     "glg",
+     "spa",
+     "fra"
+    ]
+   },
+   "rand": {
+    "mean": 0.5947,
+    "pos": 0.505,
+    "shuf": 0.5138,
+    "q95": 0.5291,
+    "pairs": 600,
+    "used": {
+     "slk": 3,
+     "cat": 3,
+     "ukr": 2,
+     "ron": 3,
+     "hrv": 1,
+     "ell": 2,
+     "eus": 2,
+     "cym": 5,
+     "vie": 2,
+     "bul": 3,
+     "jpn": 1,
+     "hin": 1,
+     "gle": 1,
+     "mlt": 2,
+     "glg": 3,
+     "deu": 1,
+     "fas": 1,
+     "slv": 1,
+     "pol": 1,
+     "heb": 2,
+     "cmn": 2,
+     "ita": 2,
+     "lzh": 2,
+     "fin": 2,
+     "nld": 1,
+     "eng": 2,
+     "fra": 2,
+     "lit": 1,
+     "ind": 1,
+     "urd": 1,
+     "tur": 1,
+     "nob": 2,
+     "srp": 1
+    }
+   }
+  },
+  "slk": {
+   "near": {
+    "mean": 0.5533,
+    "pos": 0.5011,
+    "shuf": 0.5115,
+    "q95": 0.5242,
+    "pairs": 538,
+    "used": {
+     "ukr": 20,
+     "lav": 20,
+     "fin": 20
+    },
+    "donors": [
+     "ukr",
+     "lav",
+     "fin"
+    ],
+    "sameGenusShare": 0.3333
+   },
+   "far": {
+    "mean": 0.4758,
+    "pos": 0.506,
+    "shuf": 0.4958,
+    "q95": 0.5298,
+    "pairs": 538,
+    "used": {
+     "lzh": 20,
+     "wol": 20,
+     "tam": 20
+    },
+    "donors": [
+     "lzh",
+     "wol",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.5417,
+    "pos": 0.5041,
+    "shuf": 0.5117,
+    "q95": 0.5233,
+    "pairs": 538,
+    "used": {
+     "eus": 20,
+     "ukr": 20,
+     "lav": 20
+    },
+    "donors": [
+     "eus",
+     "ukr",
+     "lav"
+    ]
+   },
+   "rand": {
+    "mean": 0.5216,
+    "pos": 0.5025,
+    "shuf": 0.5022,
+    "q95": 0.5247,
+    "pairs": 538,
+    "used": {
+     "ces": 4,
+     "bul": 2,
+     "heb": 2,
+     "lit": 1,
+     "jpn": 3,
+     "ita": 2,
+     "cmn": 1,
+     "tam": 1,
+     "cat": 2,
+     "fin": 2,
+     "hye": 2,
+     "nob": 1,
+     "rus": 3,
+     "eus": 1,
+     "eng": 1,
+     "ell": 1,
+     "gle": 2,
+     "dan": 3,
+     "ind": 2,
+     "est": 4,
+     "ukr": 1,
+     "kat": 2,
+     "wol": 1,
+     "fra": 1,
+     "hun": 1,
+     "lzh": 1,
+     "glg": 2,
+     "nld": 2,
+     "lav": 1,
+     "ron": 1,
+     "tur": 1,
+     "cym": 1,
+     "fas": 1,
+     "slv": 1,
+     "deu": 1,
+     "por": 1,
+     "hin": 1
+    }
+   }
+  },
+  "srp": {
+   "near": {
+    "mean": 0.5974,
+    "pos": 0.5069,
+    "shuf": 0.5236,
+    "q95": 0.533,
+    "pairs": 491,
+    "used": {
+     "hrv": 20,
+     "fas": 20,
+     "ces": 20
+    },
+    "donors": [
+     "hrv",
+     "fas",
+     "ces"
+    ],
+    "sameGenusShare": 0.6667
+   },
+   "far": {
+    "mean": 0.5906,
+    "pos": 0.5007,
+    "shuf": 0.4972,
+    "q95": 0.5269,
+    "pairs": 491,
+    "used": {
+     "wol": 20,
+     "lzh": 20,
+     "tam": 20
+    },
+    "donors": [
+     "wol",
+     "lzh",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.5526,
+    "pos": 0.5051,
+    "shuf": 0.5248,
+    "q95": 0.5278,
+    "pairs": 491,
+    "used": {
+     "fas": 20,
+     "ron": 20,
+     "ces": 20
+    },
+    "donors": [
+     "fas",
+     "ron",
+     "ces"
+    ]
+   },
+   "rand": {
+    "mean": 0.5639,
+    "pos": 0.5008,
+    "shuf": 0.517,
+    "q95": 0.5254,
+    "pairs": 491,
+    "used": {
+     "fin": 2,
+     "dan": 3,
+     "lit": 2,
+     "est": 2,
+     "cat": 3,
+     "ind": 1,
+     "slv": 2,
+     "cym": 3,
+     "deu": 4,
+     "hye": 2,
+     "ita": 1,
+     "nld": 1,
+     "pol": 1,
+     "ell": 4,
+     "eus": 2,
+     "mlt": 1,
+     "fas": 3,
+     "ukr": 1,
+     "urd": 1,
+     "hin": 2,
+     "glg": 1,
+     "eng": 1,
+     "bul": 1,
+     "hun": 1,
+     "jpn": 4,
+     "por": 2,
+     "ces": 1,
+     "rus": 2,
+     "ron": 2,
+     "spa": 2,
+     "kat": 1,
+     "lzh": 1
+    }
+   }
+  },
+  "ukr": {
+   "near": {
+    "mean": 0.5828,
+    "pos": 0.502,
+    "shuf": 0.552,
+    "q95": 0.5419,
+    "pairs": 296,
+    "used": {
+     "slk": 20,
+     "lav": 20,
+     "pol": 20
+    },
+    "donors": [
+     "slk",
+     "lav",
+     "pol"
+    ],
+    "sameGenusShare": 0.6667
+   },
+   "far": {
+    "mean": 0.5179,
+    "pos": 0.501,
+    "shuf": 0.5681,
+    "q95": 0.541,
+    "pairs": 296,
+    "used": {
+     "lzh": 20,
+     "wol": 20,
+     "tam": 20
+    },
+    "donors": [
+     "lzh",
+     "wol",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.5645,
+    "pos": 0.5019,
+    "shuf": 0.5395,
+    "q95": 0.5355,
+    "pairs": 296,
+    "used": {
+     "eus": 20,
+     "slk": 20,
+     "lav": 20
+    },
+    "donors": [
+     "eus",
+     "slk",
+     "lav"
+    ]
+   },
+   "rand": {
+    "mean": 0.5699,
+    "pos": 0.4998,
+    "shuf": 0.563,
+    "q95": 0.5415,
+    "pairs": 296,
+    "used": {
+     "fin": 5,
+     "nob": 2,
+     "hin": 5,
+     "lzh": 2,
+     "por": 1,
+     "tam": 2,
+     "mlt": 1,
+     "cmn": 1,
+     "glg": 1,
+     "rus": 2,
+     "deu": 3,
+     "eus": 3,
+     "pol": 1,
+     "ita": 1,
+     "bul": 1,
+     "fas": 3,
+     "ces": 3,
+     "slk": 1,
+     "ell": 1,
+     "srp": 2,
+     "jpn": 1,
+     "slv": 2,
+     "dan": 2,
+     "kat": 2,
+     "vie": 1,
+     "eng": 2,
+     "hrv": 1,
+     "fra": 2,
+     "tur": 1,
+     "lit": 1,
+     "hun": 1,
+     "spa": 1,
+     "est": 1,
+     "cym": 1
+    }
+   }
+  },
+  "wol": {
+   "near": {
+    "mean": 0.6264,
+    "pos": 0.5004,
+    "shuf": 0.5062,
+    "q95": 0.5431,
+    "pairs": 240,
+    "used": {
+     "cym": 20,
+     "urd": 20,
+     "mlt": 20
+    },
+    "donors": [
+     "cym",
+     "urd",
+     "mlt"
+    ],
+    "sameGenusShare": 0
+   },
+   "far": {
+    "mean": 0.5919,
+    "pos": 0.5004,
+    "shuf": 0.4829,
+    "q95": 0.5451,
+    "pairs": 240,
+    "used": {
+     "rus": 20,
+     "fin": 20,
+     "est": 20
+    },
+    "donors": [
+     "rus",
+     "fin",
+     "est"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.6221,
+    "pos": 0.4982,
+    "shuf": 0.5099,
+    "q95": 0.5464,
+    "pairs": 240,
+    "used": {
+     "cym": 20,
+     "urd": 20,
+     "mlt": 20
+    },
+    "donors": [
+     "cym",
+     "urd",
+     "mlt"
+    ]
+   },
+   "rand": {
+    "mean": 0.6066,
+    "pos": 0.5012,
+    "shuf": 0.5064,
+    "q95": 0.5503,
+    "pairs": 240,
+    "used": {
+     "vie": 3,
+     "tam": 3,
+     "slk": 1,
+     "jpn": 2,
+     "lzh": 1,
+     "ind": 2,
+     "gle": 1,
+     "srp": 2,
+     "ita": 2,
+     "bul": 3,
+     "slv": 1,
+     "cmn": 2,
+     "ron": 1,
+     "glg": 1,
+     "hin": 2,
+     "nob": 4,
+     "rus": 2,
+     "hrv": 1,
+     "heb": 2,
+     "ell": 3,
+     "eng": 3,
+     "pol": 1,
+     "cat": 1,
+     "spa": 1,
+     "hun": 1,
+     "urd": 3,
+     "cym": 1,
+     "por": 1,
+     "kat": 1,
+     "fra": 1,
+     "eus": 2,
+     "fas": 2,
+     "hye": 1,
+     "ukr": 1,
+     "ces": 1
+    }
+   }
+  },
+  "cat": {
+   "near": {
+    "mean": 0.6827,
+    "pos": 0.4992,
+    "shuf": 0.5249,
+    "q95": 0.5292,
+    "pairs": 600,
+    "used": {
+     "spa": 20,
+     "ita": 20,
+     "fra": 20
+    },
+    "donors": [
+     "spa",
+     "ita",
+     "fra"
+    ],
+    "sameGenusShare": 1
+   },
+   "far": {
+    "mean": 0.5041,
+    "pos": 0.5037,
+    "shuf": 0.4828,
+    "q95": 0.5247,
+    "pairs": 600,
+    "used": {
+     "tur": 20,
+     "lzh": 20,
+     "tam": 20
+    },
+    "donors": [
+     "tur",
+     "lzh",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.6616,
+    "pos": 0.4981,
+    "shuf": 0.5372,
+    "q95": 0.5267,
+    "pairs": 600,
+    "used": {
+     "spa": 20,
+     "ita": 20,
+     "jpn": 20
+    },
+    "donors": [
+     "spa",
+     "ita",
+     "jpn"
+    ]
+   },
+   "rand": {
+    "mean": 0.6187,
+    "pos": 0.5022,
+    "shuf": 0.5228,
+    "q95": 0.5247,
+    "pairs": 600,
+    "used": {
+     "spa": 5,
+     "gle": 2,
+     "vie": 1,
+     "nld": 6,
+     "lav": 2,
+     "ces": 4,
+     "eng": 2,
+     "cmn": 3,
+     "lit": 2,
+     "hin": 1,
+     "pol": 1,
+     "glg": 1,
+     "deu": 2,
+     "hrv": 2,
+     "por": 2,
+     "ukr": 2,
+     "kat": 1,
+     "fin": 1,
+     "ind": 1,
+     "eus": 2,
+     "ita": 1,
+     "dan": 2,
+     "bul": 1,
+     "tam": 1,
+     "hye": 3,
+     "lzh": 1,
+     "est": 1,
+     "nob": 1,
+     "ell": 1,
+     "hun": 2,
+     "fas": 2,
+     "cym": 1
+    }
+   }
+  },
+  "cym": {
+   "near": {
+    "mean": 0.6053,
+    "pos": 0.5036,
+    "shuf": 0.5025,
+    "q95": 0.5472,
+    "pairs": 213,
+    "used": {
+     "urd": 20,
+     "mlt": 20,
+     "gle": 20
+    },
+    "donors": [
+     "urd",
+     "mlt",
+     "gle"
+    ],
+    "sameGenusShare": 0.3333
+   },
+   "far": {
+    "mean": 0.5868,
+    "pos": 0.502,
+    "shuf": 0.5331,
+    "q95": 0.5494,
+    "pairs": 213,
+    "used": {
+     "rus": 20,
+     "fin": 20,
+     "est": 20
+    },
+    "donors": [
+     "rus",
+     "fin",
+     "est"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.6052,
+    "pos": 0.5035,
+    "shuf": 0.5004,
+    "q95": 0.5459,
+    "pairs": 213,
+    "used": {
+     "urd": 20,
+     "mlt": 20,
+     "gle": 20
+    },
+    "donors": [
+     "urd",
+     "mlt",
+     "gle"
+    ]
+   },
+   "rand": {
+    "mean": 0.5896,
+    "pos": 0.5012,
+    "shuf": 0.5221,
+    "q95": 0.5584,
+    "pairs": 213,
+    "used": {
+     "dan": 4,
+     "heb": 2,
+     "ron": 2,
+     "ind": 3,
+     "hrv": 2,
+     "glg": 2,
+     "hye": 1,
+     "jpn": 1,
+     "nob": 3,
+     "rus": 3,
+     "cat": 2,
+     "nld": 1,
+     "spa": 2,
+     "urd": 2,
+     "tur": 2,
+     "ell": 1,
+     "hun": 2,
+     "srp": 2,
+     "cmn": 3,
+     "vie": 1,
+     "fra": 2,
+     "est": 1,
+     "kat": 2,
+     "hin": 2,
+     "wol": 3,
+     "por": 2,
+     "tam": 1,
+     "lav": 1,
+     "slk": 1,
+     "fas": 2,
+     "fin": 2
+    }
+   }
+  },
+  "ell": {
+   "near": {
+    "mean": 0.4678,
+    "pos": 0.4902,
+    "shuf": 0.491,
+    "q95": 0.5406,
+    "pairs": 222,
+    "used": {
+     "gle": 20,
+     "dan": 20,
+     "nld": 20
+    },
+    "donors": [
+     "gle",
+     "dan",
+     "nld"
+    ],
+    "sameGenusShare": 0
+   },
+   "far": {
+    "mean": 0.4171,
+    "pos": 0.4828,
+    "shuf": 0.4819,
+    "q95": 0.5466,
+    "pairs": 222,
+    "used": {
+     "fin": 20,
+     "lzh": 20,
+     "tam": 20
+    },
+    "donors": [
+     "fin",
+     "lzh",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.4554,
+    "pos": 0.4825,
+    "shuf": 0.4935,
+    "q95": 0.5556,
+    "pairs": 222,
+    "used": {
+     "jpn": 20,
+     "hin": 20,
+     "dan": 20
+    },
+    "donors": [
+     "jpn",
+     "hin",
+     "dan"
+    ]
+   },
+   "rand": {
+    "mean": 0.5067,
+    "pos": 0.4944,
+    "shuf": 0.5065,
+    "q95": 0.5447,
+    "pairs": 222,
+    "used": {
+     "hye": 5,
+     "lav": 2,
+     "fas": 2,
+     "heb": 2,
+     "nob": 1,
+     "est": 1,
+     "tam": 3,
+     "jpn": 1,
+     "hrv": 2,
+     "rus": 1,
+     "vie": 4,
+     "por": 5,
+     "wol": 2,
+     "tur": 1,
+     "ukr": 2,
+     "urd": 2,
+     "deu": 2,
+     "dan": 2,
+     "lzh": 1,
+     "ind": 1,
+     "spa": 1,
+     "hun": 2,
+     "srp": 3,
+     "ces": 2,
+     "cat": 3,
+     "glg": 2,
+     "slv": 1,
+     "ron": 1,
+     "gle": 1,
+     "slk": 1,
+     "kat": 1
+    }
+   }
+  },
+  "eus": {
+   "near": {
+    "mean": 0.5355,
+    "pos": 0.4988,
+    "shuf": 0.4883,
+    "q95": 0.5257,
+    "pairs": 600,
+    "used": {
+     "slk": 20,
+     "fin": 20,
+     "lav": 20
+    },
+    "donors": [
+     "slk",
+     "fin",
+     "lav"
+    ],
+    "sameGenusShare": 0
+   },
+   "far": {
+    "mean": 0.4831,
+    "pos": 0.5066,
+    "shuf": 0.5138,
+    "q95": 0.523,
+    "pairs": 600,
+    "used": {
+     "lzh": 20,
+     "wol": 20,
+     "tam": 20
+    },
+    "donors": [
+     "lzh",
+     "wol",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.5246,
+    "pos": 0.5067,
+    "shuf": 0.483,
+    "q95": 0.5275,
+    "pairs": 600,
+    "used": {
+     "slk": 20,
+     "lav": 20,
+     "ukr": 20
+    },
+    "donors": [
+     "slk",
+     "lav",
+     "ukr"
+    ]
+   },
+   "rand": {
+    "mean": 0.5207,
+    "pos": 0.5029,
+    "shuf": 0.4907,
+    "q95": 0.5247,
+    "pairs": 600,
+    "used": {
+     "tam": 4,
+     "heb": 2,
+     "urd": 2,
+     "srp": 3,
+     "mlt": 1,
+     "fas": 1,
+     "ron": 3,
+     "kat": 3,
+     "slk": 3,
+     "ita": 3,
+     "ukr": 2,
+     "hun": 2,
+     "cat": 2,
+     "tur": 2,
+     "hye": 1,
+     "fin": 5,
+     "hrv": 1,
+     "cmn": 1,
+     "pol": 1,
+     "deu": 1,
+     "nob": 2,
+     "lav": 2,
+     "por": 2,
+     "dan": 1,
+     "hin": 1,
+     "slv": 2,
+     "lit": 1,
+     "lzh": 1,
+     "eng": 1,
+     "bul": 1,
+     "jpn": 2,
+     "glg": 1
+    }
+   }
+  },
+  "fra": {
+   "near": {
+    "mean": 0.7145,
+    "pos": 0.5,
+    "shuf": 0.5346,
+    "q95": 0.5312,
+    "pairs": 600,
+    "used": {
+     "spa": 20,
+     "ita": 20,
+     "cat": 20
+    },
+    "donors": [
+     "spa",
+     "ita",
+     "cat"
+    ],
+    "sameGenusShare": 1
+   },
+   "far": {
+    "mean": 0.557,
+    "pos": 0.4991,
+    "shuf": 0.505,
+    "q95": 0.5267,
+    "pairs": 600,
+    "used": {
+     "wol": 20,
+     "lzh": 20,
+     "tam": 20
+    },
+    "donors": [
+     "wol",
+     "lzh",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.7145,
+    "pos": 0.5005,
+    "shuf": 0.5373,
+    "q95": 0.5255,
+    "pairs": 600,
+    "used": {
+     "spa": 20,
+     "cat": 20,
+     "ita": 20
+    },
+    "donors": [
+     "spa",
+     "cat",
+     "ita"
+    ]
+   },
+   "rand": {
+    "mean": 0.6143,
+    "pos": 0.4995,
+    "shuf": 0.5261,
+    "q95": 0.5285,
+    "pairs": 600,
+    "used": {
+     "ind": 4,
+     "hun": 3,
+     "cym": 3,
+     "ukr": 1,
+     "eus": 1,
+     "tur": 1,
+     "fin": 2,
+     "heb": 2,
+     "wol": 3,
+     "cat": 1,
+     "srp": 3,
+     "pol": 2,
+     "spa": 2,
+     "lit": 2,
+     "hrv": 2,
+     "cmn": 2,
+     "hye": 2,
+     "nob": 3,
+     "ces": 1,
+     "rus": 2,
+     "est": 1,
+     "glg": 1,
+     "mlt": 2,
+     "nld": 2,
+     "tam": 1,
+     "jpn": 2,
+     "slk": 1,
+     "eng": 1,
+     "fas": 1,
+     "kat": 1,
+     "lav": 1,
+     "hin": 1,
+     "ron": 1,
+     "gle": 1,
+     "slv": 1
+    }
+   }
+  },
+  "heb": {
+   "near": {
+    "mean": 0.6453,
+    "pos": 0.5008,
+    "shuf": 0.5041,
+    "q95": 0.5369,
+    "pairs": 251,
+    "used": {
+     "gle": 20,
+     "nld": 20,
+     "jpn": 20
+    },
+    "donors": [
+     "gle",
+     "nld",
+     "jpn"
+    ],
+    "sameGenusShare": 0
+   },
+   "far": {
+    "mean": 0.5794,
+    "pos": 0.4994,
+    "shuf": 0.4751,
+    "q95": 0.538,
+    "pairs": 251,
+    "used": {
+     "tur": 20,
+     "est": 20,
+     "tam": 20
+    },
+    "donors": [
+     "tur",
+     "est",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.6049,
+    "pos": 0.5002,
+    "shuf": 0.4863,
+    "q95": 0.5391,
+    "pairs": 251,
+    "used": {
+     "nld": 20,
+     "ita": 20,
+     "jpn": 20
+    },
+    "donors": [
+     "nld",
+     "ita",
+     "jpn"
+    ]
+   },
+   "rand": {
+    "mean": 0.5732,
+    "pos": 0.5006,
+    "shuf": 0.5031,
+    "q95": 0.5342,
+    "pairs": 251,
+    "used": {
+     "cmn": 3,
+     "ces": 1,
+     "spa": 2,
+     "fas": 3,
+     "slk": 3,
+     "deu": 2,
+     "rus": 3,
+     "lav": 1,
+     "srp": 2,
+     "urd": 2,
+     "eus": 2,
+     "ind": 1,
+     "ukr": 1,
+     "slv": 3,
+     "est": 4,
+     "hrv": 1,
+     "mlt": 4,
+     "ell": 2,
+     "bul": 2,
+     "nld": 2,
+     "glg": 2,
+     "ron": 2,
+     "fin": 1,
+     "por": 2,
+     "eng": 1,
+     "hin": 1,
+     "kat": 2,
+     "cym": 2,
+     "fra": 1,
+     "nob": 1,
+     "vie": 1
+    }
+   }
+  },
+  "hun": {
+   "near": {
+    "mean": 0.4701,
+    "pos": 0.4956,
+    "shuf": 0.5272,
+    "q95": 0.5334,
+    "pairs": 372,
+    "used": {
+     "ces": 20,
+     "srp": 20,
+     "hrv": 20
+    },
+    "donors": [
+     "ces",
+     "srp",
+     "hrv"
+    ],
+    "sameGenusShare": 0
+   },
+   "far": {
+    "mean": 0.5022,
+    "pos": 0.4969,
+    "shuf": 0.5249,
+    "q95": 0.5349,
+    "pairs": 372,
+    "used": {
+     "wol": 20,
+     "lzh": 20,
+     "tam": 20
+    },
+    "donors": [
+     "wol",
+     "lzh",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.4749,
+    "pos": 0.4941,
+    "shuf": 0.5258,
+    "q95": 0.5316,
+    "pairs": 372,
+    "used": {
+     "ces": 20,
+     "srp": 20,
+     "hrv": 20
+    },
+    "donors": [
+     "ces",
+     "srp",
+     "hrv"
+    ]
+   },
+   "rand": {
+    "mean": 0.5158,
+    "pos": 0.4981,
+    "shuf": 0.5231,
+    "q95": 0.5362,
+    "pairs": 372,
+    "used": {
+     "kat": 3,
+     "slv": 2,
+     "hrv": 2,
+     "ell": 1,
+     "cat": 5,
+     "ita": 2,
+     "ind": 4,
+     "mlt": 1,
+     "fas": 1,
+     "hin": 3,
+     "tur": 1,
+     "cym": 3,
+     "rus": 2,
+     "wol": 3,
+     "lit": 2,
+     "ukr": 1,
+     "bul": 3,
+     "eus": 1,
+     "nob": 1,
+     "fra": 2,
+     "glg": 1,
+     "ron": 1,
+     "gle": 2,
+     "deu": 1,
+     "slk": 2,
+     "lzh": 1,
+     "vie": 2,
+     "est": 2,
+     "nld": 1,
+     "ces": 2,
+     "dan": 1,
+     "eng": 1
+    }
+   }
+  },
+  "ita": {
+   "near": {
+    "mean": 0.6754,
+    "pos": 0.4996,
+    "shuf": 0.5277,
+    "q95": 0.5342,
+    "pairs": 454,
+    "used": {
+     "cat": 20,
+     "fra": 20,
+     "spa": 20
+    },
+    "donors": [
+     "cat",
+     "fra",
+     "spa"
+    ],
+    "sameGenusShare": 1
+   },
+   "far": {
+    "mean": 0.5294,
+    "pos": 0.4923,
+    "shuf": 0.4901,
+    "q95": 0.533,
+    "pairs": 454,
+    "used": {
+     "tur": 20,
+     "lzh": 20,
+     "tam": 20
+    },
+    "donors": [
+     "tur",
+     "lzh",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.6289,
+    "pos": 0.4996,
+    "shuf": 0.5286,
+    "q95": 0.5288,
+    "pairs": 454,
+    "used": {
+     "jpn": 20,
+     "cat": 20,
+     "fra": 20
+    },
+    "donors": [
+     "jpn",
+     "cat",
+     "fra"
+    ]
+   },
+   "rand": {
+    "mean": 0.6049,
+    "pos": 0.4976,
+    "shuf": 0.5136,
+    "q95": 0.5328,
+    "pairs": 454,
+    "used": {
+     "lzh": 1,
+     "bul": 2,
+     "hin": 2,
+     "por": 3,
+     "gle": 1,
+     "est": 2,
+     "jpn": 3,
+     "srp": 3,
+     "nld": 2,
+     "deu": 2,
+     "cmn": 1,
+     "slv": 2,
+     "ell": 2,
+     "tam": 3,
+     "spa": 2,
+     "heb": 1,
+     "ces": 2,
+     "pol": 2,
+     "fra": 3,
+     "vie": 1,
+     "wol": 2,
+     "cat": 1,
+     "fin": 2,
+     "kat": 1,
+     "rus": 3,
+     "dan": 1,
+     "slk": 1,
+     "ind": 1,
+     "nob": 1,
+     "eng": 1,
+     "glg": 1,
+     "ukr": 1,
+     "eus": 1,
+     "hun": 1,
+     "lit": 1,
+     "hye": 1
+    }
+   }
+  },
+  "kor": {
+   "near": {
+    "mean": 0.4688,
+    "pos": 0.5109,
+    "shuf": 0.5441,
+    "q95": 0.5706,
+    "pairs": 67,
+    "used": {
+     "est": 20,
+     "fin": 20,
+     "tur": 20
+    },
+    "donors": [
+     "est",
+     "fin",
+     "tur"
+    ],
+    "sameGenusShare": 0
+   },
+   "far": {
+    "mean": 0.5855,
+    "pos": 0.5016,
+    "shuf": 0.5589,
+    "q95": 0.5716,
+    "pairs": 67,
+    "used": {
+     "cym": 20,
+     "wol": 20,
+     "tam": 20
+    },
+    "donors": [
+     "cym",
+     "wol",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.4298,
+    "pos": 0.502,
+    "shuf": 0.548,
+    "q95": 0.5844,
+    "pairs": 67,
+    "used": {
+     "est": 20,
+     "fin": 20,
+     "lav": 20
+    },
+    "donors": [
+     "est",
+     "fin",
+     "lav"
+    ]
+   },
+   "rand": {
+    "mean": 0.4315,
+    "pos": 0.5073,
+    "shuf": 0.5344,
+    "q95": 0.596,
+    "pairs": 67,
+    "used": {
+     "fra": 8,
+     "kat": 3,
+     "lit": 3,
+     "rus": 2,
+     "lzh": 2,
+     "slv": 1,
+     "heb": 3,
+     "por": 2,
+     "ind": 3,
+     "est": 2,
+     "glg": 1,
+     "ron": 2,
+     "cat": 1,
+     "cmn": 1,
+     "hrv": 1,
+     "dan": 1,
+     "fas": 2,
+     "deu": 1,
+     "cym": 1,
+     "gle": 2,
+     "bul": 1,
+     "fin": 1,
+     "jpn": 1,
+     "pol": 3,
+     "urd": 2,
+     "hun": 2,
+     "hin": 1,
+     "nld": 1,
+     "vie": 2,
+     "lav": 1,
+     "eus": 1,
+     "tam": 1,
+     "ell": 1
+    }
+   }
+  },
+  "lzh": {
+   "near": {
+    "mean": 0.5152,
+    "pos": 0.4747,
+    "shuf": 0.5194,
+    "q95": 0.5244,
+    "pairs": 600,
+    "used": {
+     "eng": 20,
+     "vie": 20,
+     "wol": 20
+    },
+    "donors": [
+     "eng",
+     "vie",
+     "wol"
+    ],
+    "sameGenusShare": 0
+   },
+   "far": {
+    "mean": 0.5073,
+    "pos": 0.518,
+    "shuf": 0.4925,
+    "q95": 0.5215,
+    "pairs": 600,
+    "used": {
+     "por": 20,
+     "glg": 20,
+     "rus": 20
+    },
+    "donors": [
+     "por",
+     "glg",
+     "rus"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.4835,
+    "pos": 0.4821,
+    "shuf": 0.4888,
+    "q95": 0.5255,
+    "pairs": 600,
+    "used": {
+     "eng": 20,
+     "vie": 20,
+     "mlt": 20
+    },
+    "donors": [
+     "eng",
+     "vie",
+     "mlt"
+    ]
+   },
+   "rand": {
+    "mean": 0.5258,
+    "pos": 0.5121,
+    "shuf": 0.5159,
+    "q95": 0.5257,
+    "pairs": 600,
+    "used": {
+     "urd": 2,
+     "hye": 1,
+     "tam": 1,
+     "fra": 2,
+     "heb": 1,
+     "gle": 2,
+     "hin": 1,
+     "lav": 3,
+     "tur": 1,
+     "cat": 2,
+     "hun": 3,
+     "wol": 1,
+     "jpn": 3,
+     "slv": 1,
+     "pol": 2,
+     "ind": 3,
+     "rus": 3,
+     "bul": 2,
+     "ita": 2,
+     "glg": 1,
+     "por": 2,
+     "slk": 2,
+     "fas": 1,
+     "cmn": 2,
+     "est": 1,
+     "mlt": 3,
+     "lit": 2,
+     "cym": 1,
+     "eus": 1,
+     "ukr": 1,
+     "kat": 1,
+     "eng": 1,
+     "dan": 2,
+     "srp": 1,
+     "hrv": 1,
+     "spa": 1
+    }
+   }
+  },
+  "nob": {
+   "near": {
+    "mean": 0.6705,
+    "pos": 0.5017,
+    "shuf": 0.5344,
+    "q95": 0.525,
+    "pairs": 600,
+    "used": {
+     "dan": 20,
+     "deu": 20,
+     "eng": 20
+    },
+    "donors": [
+     "dan",
+     "deu",
+     "eng"
+    ],
+    "sameGenusShare": 1
+   },
+   "far": {
+    "mean": 0.5834,
+    "pos": 0.5008,
+    "shuf": 0.5163,
+    "q95": 0.5277,
+    "pairs": 600,
+    "used": {
+     "wol": 20,
+     "lzh": 20,
+     "tam": 20
+    },
+    "donors": [
+     "wol",
+     "lzh",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.6764,
+    "pos": 0.501,
+    "shuf": 0.5381,
+    "q95": 0.5313,
+    "pairs": 600,
+    "used": {
+     "dan": 20,
+     "deu": 20,
+     "eng": 20
+    },
+    "donors": [
+     "dan",
+     "deu",
+     "eng"
+    ]
+   },
+   "rand": {
+    "mean": 0.6263,
+    "pos": 0.5004,
+    "shuf": 0.524,
+    "q95": 0.5254,
+    "pairs": 600,
+    "used": {
+     "dan": 2,
+     "fin": 2,
+     "lit": 3,
+     "eus": 1,
+     "deu": 1,
+     "jpn": 3,
+     "est": 2,
+     "vie": 3,
+     "hrv": 4,
+     "fas": 1,
+     "wol": 3,
+     "ukr": 1,
+     "kat": 1,
+     "hun": 2,
+     "heb": 3,
+     "pol": 1,
+     "srp": 4,
+     "ita": 1,
+     "cat": 1,
+     "lzh": 2,
+     "tam": 1,
+     "lav": 2,
+     "ind": 1,
+     "ell": 3,
+     "hye": 2,
+     "nld": 1,
+     "glg": 2,
+     "bul": 1,
+     "por": 1,
+     "eng": 1,
+     "slv": 1,
+     "gle": 1,
+     "tur": 1,
+     "hin": 1
+    }
+   }
+  },
+  "ron": {
+   "near": {
+    "mean": 0.6019,
+    "pos": 0.5038,
+    "shuf": 0.5306,
+    "q95": 0.529,
+    "pairs": 414,
+    "used": {
+     "bul": 20,
+     "hrv": 20,
+     "srp": 20
+    },
+    "donors": [
+     "bul",
+     "hrv",
+     "srp"
+    ],
+    "sameGenusShare": 0
+   },
+   "far": {
+    "mean": 0.5409,
+    "pos": 0.5019,
+    "shuf": 0.4955,
+    "q95": 0.5288,
+    "pairs": 414,
+    "used": {
+     "wol": 20,
+     "lzh": 20,
+     "tam": 20
+    },
+    "donors": [
+     "wol",
+     "lzh",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.6137,
+    "pos": 0.5029,
+    "shuf": 0.5452,
+    "q95": 0.5309,
+    "pairs": 414,
+    "used": {
+     "fas": 20,
+     "bul": 20,
+     "hrv": 20
+    },
+    "donors": [
+     "fas",
+     "bul",
+     "hrv"
+    ]
+   },
+   "rand": {
+    "mean": 0.5777,
+    "pos": 0.5004,
+    "shuf": 0.5271,
+    "q95": 0.5359,
+    "pairs": 414,
+    "used": {
+     "slv": 1,
+     "cym": 1,
+     "fas": 3,
+     "fra": 1,
+     "fin": 3,
+     "ukr": 1,
+     "pol": 1,
+     "rus": 3,
+     "deu": 3,
+     "gle": 4,
+     "spa": 1,
+     "urd": 1,
+     "lit": 3,
+     "lav": 3,
+     "hin": 1,
+     "eng": 1,
+     "wol": 1,
+     "srp": 1,
+     "ita": 1,
+     "jpn": 2,
+     "hun": 1,
+     "nob": 2,
+     "nld": 3,
+     "por": 1,
+     "bul": 1,
+     "ell": 1,
+     "dan": 2,
+     "kat": 2,
+     "heb": 1,
+     "mlt": 1,
+     "slk": 1,
+     "tam": 2,
+     "ind": 1,
+     "lzh": 1,
+     "ces": 1,
+     "glg": 1,
+     "cmn": 1,
+     "vie": 1
+    }
+   }
+  },
+  "slv": {
+   "near": {
+    "mean": 0.6073,
+    "pos": 0.4989,
+    "shuf": 0.5446,
+    "q95": 0.5273,
+    "pairs": 600,
+    "used": {
+     "hrv": 20,
+     "pol": 20,
+     "ukr": 20
+    },
+    "donors": [
+     "hrv",
+     "pol",
+     "ukr"
+    ],
+    "sameGenusShare": 1
+   },
+   "far": {
+    "mean": 0.5109,
+    "pos": 0.5001,
+    "shuf": 0.5239,
+    "q95": 0.5271,
+    "pairs": 600,
+    "used": {
+     "lzh": 20,
+     "wol": 20,
+     "tam": 20
+    },
+    "donors": [
+     "lzh",
+     "wol",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.5835,
+    "pos": 0.5,
+    "shuf": 0.5423,
+    "q95": 0.5282,
+    "pairs": 600,
+    "used": {
+     "hrv": 20,
+     "pol": 20,
+     "ron": 20
+    },
+    "donors": [
+     "hrv",
+     "pol",
+     "ron"
+    ]
+   },
+   "rand": {
+    "mean": 0.5742,
+    "pos": 0.5003,
+    "shuf": 0.5414,
+    "q95": 0.5285,
+    "pairs": 600,
+    "used": {
+     "rus": 2,
+     "hun": 1,
+     "ukr": 1,
+     "gle": 4,
+     "ron": 2,
+     "nld": 4,
+     "jpn": 3,
+     "cat": 2,
+     "fin": 4,
+     "nob": 4,
+     "ces": 2,
+     "ell": 3,
+     "urd": 1,
+     "bul": 3,
+     "cym": 2,
+     "spa": 2,
+     "hrv": 2,
+     "eus": 2,
+     "wol": 1,
+     "deu": 1,
+     "tam": 1,
+     "hye": 1,
+     "pol": 2,
+     "fas": 1,
+     "fra": 2,
+     "heb": 1,
+     "ita": 1,
+     "hin": 1,
+     "mlt": 1,
+     "est": 1,
+     "slk": 1,
+     "cmn": 1
+    }
+   }
+  },
+  "tam": {
+   "near": {
+    "mean": 0.5219,
+    "pos": 0.5107,
+    "shuf": 0.5089,
+    "q95": 0.5705,
+    "pairs": 103,
+    "used": {
+     "lzh": 20,
+     "wol": 20,
+     "vie": 20
+    },
+    "donors": [
+     "lzh",
+     "wol",
+     "vie"
+    ],
+    "sameGenusShare": 0
+   },
+   "far": {
+    "mean": 0.4892,
+    "pos": 0.5025,
+    "shuf": 0.4859,
+    "q95": 0.5849,
+    "pairs": 103,
+    "used": {
+     "pol": 20,
+     "rus": 20,
+     "est": 20
+    },
+    "donors": [
+     "pol",
+     "rus",
+     "est"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.5148,
+    "pos": 0.5089,
+    "shuf": 0.528,
+    "q95": 0.5694,
+    "pairs": 103,
+    "used": {
+     "lzh": 20,
+     "wol": 20,
+     "mlt": 20
+    },
+    "donors": [
+     "lzh",
+     "wol",
+     "mlt"
+    ]
+   },
+   "rand": {
+    "mean": 0.5144,
+    "pos": 0.5036,
+    "shuf": 0.4844,
+    "q95": 0.5715,
+    "pairs": 103,
+    "used": {
+     "cym": 4,
+     "bul": 2,
+     "hye": 2,
+     "kat": 3,
+     "dan": 1,
+     "lav": 1,
+     "lit": 3,
+     "eng": 3,
+     "rus": 1,
+     "urd": 2,
+     "hin": 2,
+     "ind": 1,
+     "cmn": 3,
+     "fas": 2,
+     "por": 2,
+     "hun": 2,
+     "slk": 3,
+     "nob": 2,
+     "lzh": 2,
+     "jpn": 2,
+     "hrv": 1,
+     "est": 1,
+     "ita": 1,
+     "eus": 3,
+     "nld": 2,
+     "vie": 1,
+     "ukr": 1,
+     "ron": 1,
+     "gle": 1,
+     "tur": 1,
+     "mlt": 1,
+     "slv": 1,
+     "srp": 2
+    }
+   }
+  },
+  "urd": {
+   "near": {
+    "mean": 0.6074,
+    "pos": 0.5028,
+    "shuf": 0.5044,
+    "q95": 0.5288,
+    "pairs": 516,
+    "used": {
+     "hin": 20,
+     "mlt": 20,
+     "cym": 20
+    },
+    "donors": [
+     "hin",
+     "mlt",
+     "cym"
+    ],
+    "sameGenusShare": 0.3333
+   },
+   "far": {
+    "mean": 0.533,
+    "pos": 0.5035,
+    "shuf": 0.5128,
+    "q95": 0.5289,
+    "pairs": 516,
+    "used": {
+     "rus": 20,
+     "fin": 20,
+     "est": 20
+    },
+    "donors": [
+     "rus",
+     "fin",
+     "est"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.6124,
+    "pos": 0.5041,
+    "shuf": 0.5104,
+    "q95": 0.5362,
+    "pairs": 516,
+    "used": {
+     "cym": 20,
+     "mlt": 20,
+     "hin": 20
+    },
+    "donors": [
+     "cym",
+     "mlt",
+     "hin"
+    ]
+   },
+   "rand": {
+    "mean": 0.5491,
+    "pos": 0.5023,
+    "shuf": 0.5057,
+    "q95": 0.5262,
+    "pairs": 516,
+    "used": {
+     "mlt": 2,
+     "ind": 1,
+     "fas": 2,
+     "tur": 2,
+     "srp": 3,
+     "jpn": 4,
+     "ces": 1,
+     "slk": 3,
+     "eng": 1,
+     "est": 3,
+     "kat": 2,
+     "hrv": 2,
+     "slv": 2,
+     "tam": 4,
+     "ukr": 3,
+     "deu": 1,
+     "por": 3,
+     "hin": 2,
+     "wol": 2,
+     "hye": 3,
+     "cmn": 1,
+     "ron": 2,
+     "bul": 1,
+     "nob": 2,
+     "eus": 1,
+     "lzh": 1,
+     "lav": 1,
+     "fra": 1,
+     "cym": 1,
+     "vie": 1,
+     "hun": 1,
+     "heb": 1
+    }
+   }
+  },
+  "ces": {
+   "near": {
+    "mean": 0.5256,
+    "pos": 0.5043,
+    "shuf": 0.5166,
+    "q95": 0.5557,
+    "pairs": 188,
+    "used": {
+     "cmn": 20,
+     "hye": 20,
+     "ind": 20
+    },
+    "donors": [
+     "cmn",
+     "hye",
+     "ind"
+    ],
+    "sameGenusShare": 0
+   },
+   "far": {
+    "mean": 0.4902,
+    "pos": 0.5041,
+    "shuf": 0.4688,
+    "q95": 0.5476,
+    "pairs": 188,
+    "used": {
+     "lzh": 20,
+     "wol": 20,
+     "tam": 20
+    },
+    "donors": [
+     "lzh",
+     "wol",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.4934,
+    "pos": 0.5055,
+    "shuf": 0.5006,
+    "q95": 0.546,
+    "pairs": 188,
+    "used": {
+     "kat": 20,
+     "cmn": 20,
+     "ind": 20
+    },
+    "donors": [
+     "kat",
+     "cmn",
+     "ind"
+    ]
+   },
+   "rand": {
+    "mean": 0.4993,
+    "pos": 0.5015,
+    "shuf": 0.4846,
+    "q95": 0.5459,
+    "pairs": 188,
+    "used": {
+     "ukr": 2,
+     "dan": 1,
+     "heb": 1,
+     "ind": 3,
+     "cym": 1,
+     "ron": 2,
+     "urd": 1,
+     "lzh": 2,
+     "eus": 2,
+     "hun": 2,
+     "glg": 3,
+     "eng": 1,
+     "nld": 1,
+     "ell": 1,
+     "nob": 1,
+     "lav": 2,
+     "pol": 1,
+     "wol": 2,
+     "slk": 3,
+     "gle": 1,
+     "jpn": 2,
+     "fra": 2,
+     "fin": 2,
+     "cmn": 2,
+     "hin": 1,
+     "srp": 2,
+     "lit": 1,
+     "cat": 2,
+     "slv": 2,
+     "est": 3,
+     "mlt": 2,
+     "vie": 1,
+     "por": 1,
+     "deu": 1,
+     "hrv": 1,
+     "tur": 1,
+     "hye": 1
+    }
+   }
+  },
+  "dan": {
+   "near": {
+    "mean": 0.644,
+    "pos": 0.4985,
+    "shuf": 0.5432,
+    "q95": 0.5347,
+    "pairs": 384,
+    "used": {
+     "nob": 20,
+     "deu": 20,
+     "gle": 20
+    },
+    "donors": [
+     "nob",
+     "deu",
+     "gle"
+    ],
+    "sameGenusShare": 0.6667
+   },
+   "far": {
+    "mean": 0.5892,
+    "pos": 0.5062,
+    "shuf": 0.5184,
+    "q95": 0.5305,
+    "pairs": 384,
+    "used": {
+     "tur": 20,
+     "lzh": 20,
+     "tam": 20
+    },
+    "donors": [
+     "tur",
+     "lzh",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.6524,
+    "pos": 0.4968,
+    "shuf": 0.5394,
+    "q95": 0.5351,
+    "pairs": 384,
+    "used": {
+     "nob": 20,
+     "deu": 20,
+     "gle": 20
+    },
+    "donors": [
+     "nob",
+     "deu",
+     "gle"
+    ]
+   },
+   "rand": {
+    "mean": 0.6181,
+    "pos": 0.5014,
+    "shuf": 0.5207,
+    "q95": 0.5317,
+    "pairs": 384,
+    "used": {
+     "fin": 1,
+     "nob": 4,
+     "pol": 4,
+     "wol": 1,
+     "srp": 1,
+     "kat": 1,
+     "bul": 1,
+     "hin": 4,
+     "lav": 1,
+     "hye": 1,
+     "eus": 1,
+     "nld": 3,
+     "lit": 2,
+     "fas": 1,
+     "deu": 1,
+     "cat": 1,
+     "glg": 3,
+     "jpn": 3,
+     "eng": 3,
+     "ces": 1,
+     "tur": 2,
+     "slk": 2,
+     "spa": 1,
+     "heb": 1,
+     "vie": 1,
+     "tam": 3,
+     "ita": 1,
+     "est": 2,
+     "ukr": 1,
+     "mlt": 1,
+     "slv": 1,
+     "fra": 1,
+     "hun": 1,
+     "hrv": 3,
+     "urd": 1
+    }
+   }
+  },
+  "eng": {
+   "near": {
+    "mean": 0.5984,
+    "pos": 0.4919,
+    "shuf": 0.5578,
+    "q95": 0.5249,
+    "pairs": 600,
+    "used": {
+     "deu": 20,
+     "nld": 20,
+     "gle": 20
+    },
+    "donors": [
+     "deu",
+     "nld",
+     "gle"
+    ],
+    "sameGenusShare": 0.6667
+   },
+   "far": {
+    "mean": 0.5533,
+    "pos": 0.5039,
+    "shuf": 0.5314,
+    "q95": 0.5301,
+    "pairs": 600,
+    "used": {
+     "fin": 20,
+     "est": 20,
+     "tam": 20
+    },
+    "donors": [
+     "fin",
+     "est",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.5996,
+    "pos": 0.4988,
+    "shuf": 0.5549,
+    "q95": 0.5309,
+    "pairs": 600,
+    "used": {
+     "deu": 20,
+     "nld": 20,
+     "gle": 20
+    },
+    "donors": [
+     "deu",
+     "nld",
+     "gle"
+    ]
+   },
+   "rand": {
+    "mean": 0.5903,
+    "pos": 0.4945,
+    "shuf": 0.5506,
+    "q95": 0.523,
+    "pairs": 600,
+    "used": {
+     "nld": 3,
+     "nob": 1,
+     "hin": 2,
+     "por": 3,
+     "fra": 1,
+     "cat": 1,
+     "lzh": 2,
+     "fas": 2,
+     "spa": 2,
+     "ind": 3,
+     "hun": 1,
+     "tam": 3,
+     "lav": 2,
+     "eus": 1,
+     "tur": 1,
+     "srp": 2,
+     "jpn": 1,
+     "urd": 3,
+     "rus": 1,
+     "kat": 2,
+     "fin": 4,
+     "ita": 3,
+     "wol": 1,
+     "slv": 1,
+     "hrv": 2,
+     "ces": 2,
+     "slk": 1,
+     "cym": 5,
+     "cmn": 1,
+     "ukr": 2,
+     "ell": 1
+    }
+   }
+  },
+  "fas": {
+   "near": {
+    "mean": 0.5646,
+    "pos": 0.5026,
+    "shuf": 0.5477,
+    "q95": 0.5303,
+    "pairs": 584,
+    "used": {
+     "srp": 20,
+     "ron": 20,
+     "bul": 20
+    },
+    "donors": [
+     "srp",
+     "ron",
+     "bul"
+    ],
+    "sameGenusShare": 0
+   },
+   "far": {
+    "mean": 0.5413,
+    "pos": 0.5034,
+    "shuf": 0.5251,
+    "q95": 0.5274,
+    "pairs": 584,
+    "used": {
+     "wol": 20,
+     "lzh": 20,
+     "tam": 20
+    },
+    "donors": [
+     "wol",
+     "lzh",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.5659,
+    "pos": 0.5026,
+    "shuf": 0.5496,
+    "q95": 0.5324,
+    "pairs": 584,
+    "used": {
+     "ron": 20,
+     "srp": 20,
+     "bul": 20
+    },
+    "donors": [
+     "ron",
+     "srp",
+     "bul"
+    ]
+   },
+   "rand": {
+    "mean": 0.5653,
+    "pos": 0.5015,
+    "shuf": 0.5288,
+    "q95": 0.5276,
+    "pairs": 584,
+    "used": {
+     "slv": 5,
+     "tam": 2,
+     "heb": 1,
+     "eus": 1,
+     "ukr": 2,
+     "pol": 3,
+     "est": 1,
+     "hye": 3,
+     "cym": 2,
+     "glg": 1,
+     "hin": 2,
+     "eng": 2,
+     "lav": 1,
+     "ind": 1,
+     "nld": 2,
+     "ell": 1,
+     "rus": 1,
+     "ita": 2,
+     "por": 1,
+     "spa": 2,
+     "kat": 2,
+     "gle": 2,
+     "ces": 1,
+     "ron": 1,
+     "lzh": 2,
+     "slk": 4,
+     "bul": 2,
+     "vie": 1,
+     "srp": 1,
+     "cmn": 2,
+     "mlt": 2,
+     "dan": 1,
+     "fra": 1,
+     "jpn": 1,
+     "cat": 1
+    }
+   }
+  },
+  "gle": {
+   "near": {
+    "mean": 0.5779,
+    "pos": 0.5021,
+    "shuf": 0.5418,
+    "q95": 0.533,
+    "pairs": 363,
+    "used": {
+     "eng": 20,
+     "nld": 20,
+     "hin": 20
+    },
+    "donors": [
+     "eng",
+     "nld",
+     "hin"
+    ],
+    "sameGenusShare": 0
+   },
+   "far": {
+    "mean": 0.5399,
+    "pos": 0.503,
+    "shuf": 0.5242,
+    "q95": 0.5397,
+    "pairs": 363,
+    "used": {
+     "fin": 20,
+     "est": 20,
+     "tam": 20
+    },
+    "donors": [
+     "fin",
+     "est",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.5691,
+    "pos": 0.5023,
+    "shuf": 0.5443,
+    "q95": 0.5333,
+    "pairs": 363,
+    "used": {
+     "hin": 20,
+     "nld": 20,
+     "eng": 20
+    },
+    "donors": [
+     "hin",
+     "nld",
+     "eng"
+    ]
+   },
+   "rand": {
+    "mean": 0.5349,
+    "pos": 0.5008,
+    "shuf": 0.5348,
+    "q95": 0.5328,
+    "pairs": 363,
+    "used": {
+     "ita": 2,
+     "jpn": 1,
+     "glg": 2,
+     "ell": 1,
+     "ukr": 2,
+     "slk": 3,
+     "nob": 2,
+     "hye": 3,
+     "deu": 3,
+     "lzh": 2,
+     "tur": 1,
+     "por": 1,
+     "ces": 2,
+     "hrv": 3,
+     "vie": 1,
+     "dan": 1,
+     "fas": 2,
+     "srp": 3,
+     "hun": 3,
+     "urd": 1,
+     "pol": 1,
+     "rus": 2,
+     "cat": 2,
+     "spa": 3,
+     "slv": 2,
+     "nld": 1,
+     "eus": 1,
+     "fin": 2,
+     "fra": 1,
+     "heb": 1,
+     "lit": 2,
+     "cmn": 1,
+     "est": 1,
+     "ron": 1
+    }
+   }
+  },
+  "hin": {
+   "near": {
+    "mean": 0.6253,
+    "pos": 0.505,
+    "shuf": 0.5187,
+    "q95": 0.5278,
+    "pairs": 600,
+    "used": {
+     "gle": 20,
+     "urd": 20,
+     "jpn": 20
+    },
+    "donors": [
+     "gle",
+     "urd",
+     "jpn"
+    ],
+    "sameGenusShare": 0.3333
+   },
+   "far": {
+    "mean": 0.5998,
+    "pos": 0.5082,
+    "shuf": 0.5235,
+    "q95": 0.5218,
+    "pairs": 600,
+    "used": {
+     "fin": 20,
+     "est": 20,
+     "tam": 20
+    },
+    "donors": [
+     "fin",
+     "est",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.6057,
+    "pos": 0.4986,
+    "shuf": 0.5121,
+    "q95": 0.5284,
+    "pairs": 600,
+    "used": {
+     "gle": 20,
+     "nld": 20,
+     "ell": 20
+    },
+    "donors": [
+     "gle",
+     "nld",
+     "ell"
+    ]
+   },
+   "rand": {
+    "mean": 0.5884,
+    "pos": 0.5009,
+    "shuf": 0.5051,
+    "q95": 0.5275,
+    "pairs": 600,
+    "used": {
+     "kat": 3,
+     "fra": 2,
+     "hye": 1,
+     "dan": 2,
+     "heb": 3,
+     "slk": 1,
+     "lit": 2,
+     "srp": 4,
+     "rus": 3,
+     "eus": 1,
+     "slv": 2,
+     "hrv": 1,
+     "vie": 2,
+     "glg": 2,
+     "pol": 3,
+     "spa": 1,
+     "ces": 1,
+     "lav": 1,
+     "ita": 2,
+     "eng": 2,
+     "lzh": 1,
+     "bul": 1,
+     "ell": 2,
+     "ron": 4,
+     "ind": 1,
+     "tur": 1,
+     "ukr": 2,
+     "fas": 1,
+     "jpn": 1,
+     "deu": 1,
+     "gle": 1,
+     "cym": 1,
+     "hun": 1,
+     "mlt": 1,
+     "nob": 1,
+     "cmn": 1
+    }
+   }
+  },
+  "hye": {
+   "near": {
+    "mean": 0.6242,
+    "pos": 0.4971,
+    "shuf": 0.5833,
+    "q95": 0.5363,
+    "pairs": 376,
+    "used": {
+     "kat": 20,
+     "lit": 20,
+     "ces": 20
+    },
+    "donors": [
+     "kat",
+     "lit",
+     "ces"
+    ],
+    "sameGenusShare": 0
+   },
+   "far": {
+    "mean": 0.5401,
+    "pos": 0.5063,
+    "shuf": 0.5286,
+    "q95": 0.5343,
+    "pairs": 376,
+    "used": {
+     "lzh": 20,
+     "wol": 20,
+     "tam": 20
+    },
+    "donors": [
+     "lzh",
+     "wol",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.6281,
+    "pos": 0.4989,
+    "shuf": 0.5848,
+    "q95": 0.5379,
+    "pairs": 376,
+    "used": {
+     "kat": 20,
+     "lit": 20,
+     "ces": 20
+    },
+    "donors": [
+     "kat",
+     "lit",
+     "ces"
+    ]
+   },
+   "rand": {
+    "mean": 0.6228,
+    "pos": 0.5042,
+    "shuf": 0.5545,
+    "q95": 0.5375,
+    "pairs": 376,
+    "used": {
+     "hun": 3,
+     "deu": 2,
+     "pol": 3,
+     "hin": 4,
+     "nld": 1,
+     "slk": 1,
+     "nob": 3,
+     "eng": 2,
+     "srp": 4,
+     "ell": 2,
+     "est": 2,
+     "bul": 2,
+     "ukr": 2,
+     "cym": 2,
+     "glg": 2,
+     "slv": 3,
+     "mlt": 1,
+     "lzh": 3,
+     "ces": 1,
+     "hrv": 2,
+     "kat": 3,
+     "eus": 2,
+     "wol": 2,
+     "spa": 2,
+     "fin": 1,
+     "lav": 1,
+     "ind": 1,
+     "fas": 1,
+     "ron": 1,
+     "gle": 1
+    }
+   }
+  },
+  "jpn": {
+   "near": {
+    "mean": 0.5711,
+    "pos": 0.5009,
+    "shuf": 0.5066,
+    "q95": 0.5313,
+    "pairs": 383,
+    "used": {
+     "hin": 20,
+     "heb": 20,
+     "gle": 20
+    },
+    "donors": [
+     "hin",
+     "heb",
+     "gle"
+    ],
+    "sameGenusShare": 0
+   },
+   "far": {
+    "mean": 0.5395,
+    "pos": 0.4982,
+    "shuf": 0.5007,
+    "q95": 0.533,
+    "pairs": 383,
+    "used": {
+     "lzh": 20,
+     "tur": 20,
+     "tam": 20
+    },
+    "donors": [
+     "lzh",
+     "tur",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.5172,
+    "pos": 0.5003,
+    "shuf": 0.5014,
+    "q95": 0.5329,
+    "pairs": 383,
+    "used": {
+     "ita": 20,
+     "cat": 20,
+     "ell": 20
+    },
+    "donors": [
+     "ita",
+     "cat",
+     "ell"
+    ]
+   },
+   "rand": {
+    "mean": 0.549,
+    "pos": 0.5011,
+    "shuf": 0.5028,
+    "q95": 0.5262,
+    "pairs": 383,
+    "used": {
+     "ces": 2,
+     "est": 4,
+     "lit": 1,
+     "ell": 2,
+     "por": 3,
+     "ita": 2,
+     "vie": 1,
+     "ukr": 1,
+     "cat": 1,
+     "gle": 2,
+     "ind": 2,
+     "deu": 2,
+     "tur": 2,
+     "rus": 1,
+     "dan": 2,
+     "heb": 5,
+     "cym": 1,
+     "urd": 3,
+     "tam": 1,
+     "bul": 1,
+     "eus": 1,
+     "slk": 2,
+     "slv": 2,
+     "kat": 1,
+     "lzh": 3,
+     "cmn": 1,
+     "fin": 1,
+     "glg": 2,
+     "eng": 2,
+     "pol": 1,
+     "ron": 2,
+     "fas": 1,
+     "nob": 1,
+     "spa": 1
+    }
+   }
+  },
+  "lav": {
+   "near": {
+    "mean": 0.5969,
+    "pos": 0.4993,
+    "shuf": 0.5334,
+    "q95": 0.5242,
+    "pairs": 600,
+    "used": {
+     "est": 20,
+     "fin": 20,
+     "slk": 20
+    },
+    "donors": [
+     "est",
+     "fin",
+     "slk"
+    ],
+    "sameGenusShare": 0
+   },
+   "far": {
+    "mean": 0.5174,
+    "pos": 0.5003,
+    "shuf": 0.4971,
+    "q95": 0.5273,
+    "pairs": 600,
+    "used": {
+     "lzh": 20,
+     "wol": 20,
+     "tam": 20
+    },
+    "donors": [
+     "lzh",
+     "wol",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.6024,
+    "pos": 0.4987,
+    "shuf": 0.5323,
+    "q95": 0.5283,
+    "pairs": 600,
+    "used": {
+     "est": 20,
+     "eus": 20,
+     "fin": 20
+    },
+    "donors": [
+     "est",
+     "eus",
+     "fin"
+    ]
+   },
+   "rand": {
+    "mean": 0.5915,
+    "pos": 0.4993,
+    "shuf": 0.528,
+    "q95": 0.5243,
+    "pairs": 600,
+    "used": {
+     "spa": 3,
+     "nob": 3,
+     "gle": 1,
+     "bul": 4,
+     "slk": 2,
+     "hye": 2,
+     "ell": 2,
+     "fas": 3,
+     "urd": 2,
+     "vie": 3,
+     "lzh": 2,
+     "dan": 1,
+     "fin": 2,
+     "cat": 2,
+     "heb": 3,
+     "ita": 3,
+     "eus": 3,
+     "jpn": 1,
+     "tam": 1,
+     "hrv": 1,
+     "ces": 2,
+     "rus": 1,
+     "lit": 1,
+     "est": 3,
+     "hin": 1,
+     "cym": 1,
+     "slv": 1,
+     "mlt": 2,
+     "ind": 1,
+     "hun": 1,
+     "ron": 1,
+     "cmn": 1
+    }
+   }
+  },
+  "mlt": {
+   "near": {
+    "mean": 0.5371,
+    "pos": 0.5014,
+    "shuf": 0.5331,
+    "q95": 0.5464,
+    "pairs": 169,
+    "used": {
+     "urd": 20,
+     "cym": 20,
+     "gle": 20
+    },
+    "donors": [
+     "urd",
+     "cym",
+     "gle"
+    ],
+    "sameGenusShare": 0
+   },
+   "far": {
+    "mean": 0.5398,
+    "pos": 0.5013,
+    "shuf": 0.526,
+    "q95": 0.5471,
+    "pairs": 169,
+    "used": {
+     "rus": 20,
+     "fin": 20,
+     "est": 20
+    },
+    "donors": [
+     "rus",
+     "fin",
+     "est"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.5376,
+    "pos": 0.5013,
+    "shuf": 0.5301,
+    "q95": 0.5436,
+    "pairs": 169,
+    "used": {
+     "urd": 20,
+     "cym": 20,
+     "gle": 20
+    },
+    "donors": [
+     "urd",
+     "cym",
+     "gle"
+    ]
+   },
+   "rand": {
+    "mean": 0.507,
+    "pos": 0.5014,
+    "shuf": 0.5177,
+    "q95": 0.547,
+    "pairs": 169,
+    "used": {
+     "hun": 4,
+     "ces": 3,
+     "jpn": 2,
+     "tur": 4,
+     "eus": 2,
+     "tam": 1,
+     "hrv": 4,
+     "cmn": 3,
+     "gle": 2,
+     "ell": 3,
+     "vie": 4,
+     "spa": 1,
+     "slk": 1,
+     "lzh": 1,
+     "dan": 2,
+     "fin": 2,
+     "wol": 2,
+     "hin": 2,
+     "kat": 2,
+     "heb": 1,
+     "est": 2,
+     "eng": 1,
+     "deu": 2,
+     "rus": 1,
+     "ind": 3,
+     "fra": 1,
+     "lav": 1,
+     "nld": 1,
+     "srp": 1,
+     "urd": 1
+    }
+   }
+  },
+  "pol": {
+   "near": {
+    "mean": 0.5495,
+    "pos": 0.5003,
+    "shuf": 0.5146,
+    "q95": 0.5259,
+    "pairs": 600,
+    "used": {
+     "lav": 20,
+     "slv": 20,
+     "slk": 20
+    },
+    "donors": [
+     "lav",
+     "slv",
+     "slk"
+    ],
+    "sameGenusShare": 0.6667
+   },
+   "far": {
+    "mean": 0.5061,
+    "pos": 0.501,
+    "shuf": 0.4995,
+    "q95": 0.5256,
+    "pairs": 600,
+    "used": {
+     "lzh": 20,
+     "wol": 20,
+     "tam": 20
+    },
+    "donors": [
+     "lzh",
+     "wol",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.5537,
+    "pos": 0.5005,
+    "shuf": 0.5255,
+    "q95": 0.5265,
+    "pairs": 600,
+    "used": {
+     "lav": 20,
+     "slv": 20,
+     "est": 20
+    },
+    "donors": [
+     "lav",
+     "slv",
+     "est"
+    ]
+   },
+   "rand": {
+    "mean": 0.5439,
+    "pos": 0.5013,
+    "shuf": 0.5202,
+    "q95": 0.5254,
+    "pairs": 600,
+    "used": {
+     "mlt": 1,
+     "lit": 3,
+     "jpn": 4,
+     "ell": 2,
+     "cmn": 1,
+     "nob": 3,
+     "fra": 1,
+     "tam": 1,
+     "eus": 4,
+     "nld": 3,
+     "fin": 2,
+     "heb": 1,
+     "cat": 2,
+     "slv": 4,
+     "glg": 3,
+     "gle": 1,
+     "est": 1,
+     "hye": 2,
+     "slk": 1,
+     "dan": 1,
+     "srp": 2,
+     "lzh": 2,
+     "urd": 1,
+     "ukr": 1,
+     "cym": 1,
+     "deu": 4,
+     "hrv": 1,
+     "ces": 1,
+     "por": 2,
+     "tur": 1,
+     "ron": 1,
+     "vie": 1,
+     "kat": 1
+    }
+   }
+  },
+  "rus": {
+   "near": {
+    "mean": 0.5248,
+    "pos": 0.5009,
+    "shuf": 0.4928,
+    "q95": 0.5244,
+    "pairs": 600,
+    "used": {
+     "est": 20,
+     "lav": 20,
+     "fin": 20
+    },
+    "donors": [
+     "est",
+     "lav",
+     "fin"
+    ],
+    "sameGenusShare": 0
+   },
+   "far": {
+    "mean": 0.49,
+    "pos": 0.5007,
+    "shuf": 0.4937,
+    "q95": 0.5249,
+    "pairs": 600,
+    "used": {
+     "lzh": 20,
+     "wol": 20,
+     "tam": 20
+    },
+    "donors": [
+     "lzh",
+     "wol",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.5276,
+    "pos": 0.5011,
+    "shuf": 0.4939,
+    "q95": 0.5263,
+    "pairs": 600,
+    "used": {
+     "est": 20,
+     "fin": 20,
+     "lav": 20
+    },
+    "donors": [
+     "est",
+     "fin",
+     "lav"
+    ]
+   },
+   "rand": {
+    "mean": 0.5086,
+    "pos": 0.5003,
+    "shuf": 0.4941,
+    "q95": 0.5268,
+    "pairs": 600,
+    "used": {
+     "jpn": 1,
+     "ind": 4,
+     "vie": 1,
+     "fin": 1,
+     "ita": 1,
+     "ron": 2,
+     "urd": 1,
+     "hun": 2,
+     "lav": 2,
+     "glg": 2,
+     "bul": 1,
+     "nob": 3,
+     "heb": 3,
+     "hrv": 2,
+     "deu": 1,
+     "hye": 3,
+     "lit": 1,
+     "tam": 2,
+     "pol": 3,
+     "mlt": 2,
+     "gle": 2,
+     "cmn": 2,
+     "cym": 3,
+     "dan": 3,
+     "kat": 1,
+     "srp": 1,
+     "cat": 1,
+     "hin": 1,
+     "tur": 1,
+     "ukr": 3,
+     "ces": 1,
+     "slk": 1,
+     "slv": 1,
+     "fra": 1
+    }
+   }
+  },
+  "spa": {
+   "near": {
+    "mean": 0.7013,
+    "pos": 0.4968,
+    "shuf": 0.5001,
+    "q95": 0.5345,
+    "pairs": 600,
+    "used": {
+     "cat": 20,
+     "por": 20,
+     "fra": 20
+    },
+    "donors": [
+     "cat",
+     "por",
+     "fra"
+    ],
+    "sameGenusShare": 1
+   },
+   "far": {
+    "mean": 0.5707,
+    "pos": 0.4983,
+    "shuf": 0.4892,
+    "q95": 0.5273,
+    "pairs": 600,
+    "used": {
+     "wol": 20,
+     "lzh": 20,
+     "tam": 20
+    },
+    "donors": [
+     "wol",
+     "lzh",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.6961,
+    "pos": 0.4961,
+    "shuf": 0.4985,
+    "q95": 0.5285,
+    "pairs": 600,
+    "used": {
+     "fra": 20,
+     "cat": 20,
+     "por": 20
+    },
+    "donors": [
+     "fra",
+     "cat",
+     "por"
+    ]
+   },
+   "rand": {
+    "mean": 0.6223,
+    "pos": 0.4992,
+    "shuf": 0.5032,
+    "q95": 0.5247,
+    "pairs": 600,
+    "used": {
+     "bul": 5,
+     "kat": 3,
+     "ukr": 4,
+     "vie": 1,
+     "cmn": 1,
+     "hye": 1,
+     "ron": 3,
+     "eus": 1,
+     "dan": 1,
+     "lav": 2,
+     "nob": 2,
+     "hrv": 4,
+     "glg": 1,
+     "eng": 1,
+     "ind": 1,
+     "lit": 1,
+     "heb": 1,
+     "cym": 3,
+     "slk": 2,
+     "mlt": 1,
+     "slv": 2,
+     "hin": 1,
+     "cat": 1,
+     "deu": 1,
+     "srp": 4,
+     "tam": 1,
+     "fas": 1,
+     "por": 2,
+     "est": 1,
+     "lzh": 1,
+     "urd": 1,
+     "gle": 1,
+     "tur": 2,
+     "ita": 1,
+     "ell": 1
+    }
+   }
+  },
+  "tur": {
+   "near": {
+    "mean": 0.5132,
+    "pos": 0.5147,
+    "shuf": 0.5017,
+    "q95": 0.5491,
+    "pairs": 260,
+    "used": {
+     "eus": 20,
+     "fin": 20,
+     "slk": 20
+    },
+    "donors": [
+     "eus",
+     "fin",
+     "slk"
+    ],
+    "sameGenusShare": 0
+   },
+   "far": {
+    "mean": 0.5576,
+    "pos": 0.4898,
+    "shuf": 0.5513,
+    "q95": 0.5454,
+    "pairs": 260,
+    "used": {
+     "glg": 20,
+     "wol": 20,
+     "tam": 20
+    },
+    "donors": [
+     "glg",
+     "wol",
+     "tam"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.5136,
+    "pos": 0.515,
+    "shuf": 0.502,
+    "q95": 0.5409,
+    "pairs": 260,
+    "used": {
+     "eus": 20,
+     "fin": 20,
+     "slk": 20
+    },
+    "donors": [
+     "eus",
+     "fin",
+     "slk"
+    ]
+   },
+   "rand": {
+    "mean": 0.5383,
+    "pos": 0.5031,
+    "shuf": 0.524,
+    "q95": 0.5454,
+    "pairs": 260,
+    "used": {
+     "spa": 1,
+     "hrv": 4,
+     "eus": 1,
+     "srp": 3,
+     "cym": 2,
+     "ell": 3,
+     "pol": 3,
+     "ukr": 1,
+     "nob": 1,
+     "hin": 4,
+     "gle": 4,
+     "slk": 1,
+     "jpn": 1,
+     "fra": 3,
+     "fin": 2,
+     "urd": 2,
+     "nld": 1,
+     "cmn": 1,
+     "hun": 1,
+     "eng": 2,
+     "lzh": 2,
+     "mlt": 1,
+     "rus": 2,
+     "ron": 2,
+     "ind": 1,
+     "cat": 1,
+     "ita": 2,
+     "hye": 2,
+     "slv": 1,
+     "lav": 1,
+     "heb": 1,
+     "deu": 1,
+     "est": 1,
+     "lit": 1
+    }
+   }
+  },
+  "vie": {
+   "near": {
+    "mean": 0.5286,
+    "pos": 0.5036,
+    "shuf": 0.5369,
+    "q95": 0.5294,
+    "pairs": 449,
+    "used": {
+     "deu": 20,
+     "mlt": 20,
+     "ind": 20
+    },
+    "donors": [
+     "deu",
+     "mlt",
+     "ind"
+    ],
+    "sameGenusShare": 0
+   },
+   "far": {
+    "mean": 0.5296,
+    "pos": 0.4948,
+    "shuf": 0.5388,
+    "q95": 0.5333,
+    "pairs": 449,
+    "used": {
+     "spa": 20,
+     "por": 20,
+     "glg": 20
+    },
+    "donors": [
+     "spa",
+     "por",
+     "glg"
+    ]
+   },
+   "nearShuf": {
+    "mean": 0.5225,
+    "pos": 0.5038,
+    "shuf": 0.5338,
+    "q95": 0.5298,
+    "pairs": 449,
+    "used": {
+     "mlt": 20,
+     "deu": 20,
+     "ind": 20
+    },
+    "donors": [
+     "mlt",
+     "deu",
+     "ind"
+    ]
+   },
+   "rand": {
+    "mean": 0.5274,
+    "pos": 0.501,
+    "shuf": 0.5121,
+    "q95": 0.5255,
+    "pairs": 449,
+    "used": {
+     "nld": 2,
+     "fra": 2,
+     "wol": 2,
+     "hin": 2,
+     "eus": 4,
+     "lav": 2,
+     "heb": 1,
+     "lzh": 1,
+     "slk": 4,
+     "urd": 4,
+     "hrv": 2,
+     "eng": 3,
+     "cym": 2,
+     "dan": 1,
+     "hye": 2,
+     "ron": 5,
+     "pol": 1,
+     "fas": 2,
+     "por": 2,
+     "lit": 1,
+     "kat": 3,
+     "gle": 1,
+     "srp": 2,
+     "tur": 1,
+     "hun": 3,
+     "est": 1,
+     "bul": 1,
+     "ita": 1,
+     "glg": 1,
+     "ind": 1
+    }
+   }
+  }
+ }
+}

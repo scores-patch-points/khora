@@ -1,0 +1,148 @@
+
+======== FRESH ========
+IRC (controls shufMedDev=0.0267 shamMedDev=0.0267; PASS=true)
+  irc-en-fresh         pairs  600 valid Y  FULL 0.915 [0.893,0.937] p=0.001  CAUSAL4 0.918 (600)  LOO 0.890  Delta 0.445  sham 0.473  pFinalX 0.205 pInit 0.918 invLen 0.648 ctrl {"pos":0.5,"logn":0.4708,"len":0.5658,"slen":0.59}
+  irc-en-kubuntu       pairs  347 valid Y  FULL 0.928 [0.897,0.959] p=0.001  CAUSAL4 0.949 (194)  LOO 0.931  Delta 0.489  sham 0.468  pFinalX 0.291 pInit 0.926 invLen 0.585 ctrl {"pos":0.5,"logn":0.4813,"len":0.621,"slen":0.6686}
+  irc-en-neverread     pairs   24 valid n  FULL 0.979 [0.913,1.000] p=0.003  CAUSAL4   -   (3)  LOO   -    Delta   -    sham 0.508  pFinalX 0.313 pInit 0.979 invLen 0.729 ctrl {"pos":0.5,"logn":0.3542,"len":0.5833,"slen":0.4583}
+  irc-en-ubuntu        pairs  438 valid Y  FULL 0.950 [0.928,0.970] p=0.001  CAUSAL4 0.947 (282)  LOO 0.940  Delta 0.423  sham 0.457  pFinalX 0.258 pInit 0.940 invLen 0.644 ctrl {"pos":0.5,"logn":0.5137,"len":0.6062,"slen":0.6062}
+  irc-en-ubuntu-server pairs  293 valid Y  FULL 0.947 [0.915,0.974] p=0.001  CAUSAL4 0.928 (167)  LOO 0.938  Delta 0.471  sham 0.459  pFinalX 0.241 pInit 0.932 invLen 0.602 ctrl {"pos":0.5,"logn":0.4334,"len":0.5648,"slen":0.6024}
+  irc-en-xubuntu       pairs  201 valid Y  FULL 0.930 [0.891,0.965] p=0.001  CAUSAL4 0.941 (102)  LOO 0.930  Delta 0.439  sham 0.477  pFinalX 0.318 pInit 0.928 invLen 0.557 ctrl {"pos":0.5,"logn":0.4502,"len":0.602,"slen":0.5572}
+UD PN: cells 59, valid 52, thin 7; FULL median lower 0.5661 true 0.5685; CAUSAL4 median lower 0.5546 true 0.558 over 44; POS 27 NEG 1 FLAT 24; AUC>0.5 45/52; Delta median 0.0759 (n 52); controls {"shufMedDev":0.0275,"shamMedDev":0.0183,"nShuf":52,"nSham":56,"ok":true}; quantiles {"p10":0.4968,"p25":0.5205,"p75":0.6488,"p90":0.6795}; pFinalX median 0.5131; PO median 0.5825; LOO median 0.581; strict-valid 14 median 0.5817; gates {"medFull":true,"medCausal":true,"neg":true,"gt50":true,"pos":true,"delta":true,"control":true} PASS=true
+  strata (median of cell AUCs): {"evalInitial":{"med":0.6118,"n":31},"evalNonInitial":{"med":0.5644,"n":52},"nMent3-5":{"med":0.5454,"n":52},"nMent6-15":{"med":0.5916,"n":52},"nMent16+":{"med":0.6282,"n":33}}
+  ud-af_afribooms          pairs   58 x THIN FULL 0.534 [0.389,0.678] CAUSAL4   -   Delta   -   pFinalX   -   PO   -   LOO   -  
+  ud-ar_padt               pairs    2 x THIN FULL 0.000 [0.000,0.000] CAUSAL4   -   Delta   -   pFinalX   -   PO   -   LOO   -  
+  ud-be_hse                pairs  530   FLAT FULL 0.486 [0.435,0.540] CAUSAL4 0.479 Delta -0.008 pFinalX 0.482 PO 0.470 LOO 0.450
+  ud-bg_btb                pairs  600   FLAT FULL 0.542 [0.489,0.591] CAUSAL4 0.515 Delta 0.076 pFinalX 0.485 PO 0.542 LOO 0.585
+  ud-ca_ancora             pairs  600   POS  FULL 0.582 [0.533,0.627] CAUSAL4 0.547 Delta 0.077 pFinalX 0.512 PO 0.588 LOO 0.588
+  ud-cop_scriptorium       pairs   81   POS  FULL 0.704 [0.566,0.810] CAUSAL4   -   Delta 0.210 pFinalX 0.444 PO 0.756 LOO 0.634
+  ud-cs_pdt                pairs  258   FLAT FULL 0.535 [0.444,0.609] CAUSAL4 0.488 Delta -0.012 pFinalX 0.438 PO 0.446 LOO 0.481
+  ud-cu_proiel             pairs  161   FLAT FULL 0.515 [0.406,0.607] CAUSAL4 0.583 Delta 0.000 pFinalX 0.484 PO 0.521 LOO 0.484
+  ud-cy_ccg                pairs  214   FLAT FULL 0.526 [0.443,0.604] CAUSAL4 0.500 Delta -0.016 pFinalX 0.638 PO 0.484 LOO 0.477
+  ud-da_ddt                pairs  425   POS  FULL 0.636 [0.579,0.695] CAUSAL4 0.694 Delta 0.099 pFinalX 0.439 PO 0.650 LOO 0.678
+  ud-de_gsd                pairs  600   POS  FULL 0.584 [0.535,0.630] CAUSAL4 0.554 Delta 0.042 pFinalX 0.516 PO 0.593 LOO 0.563
+  ud-en_ewt                pairs  600   POS  FULL 0.582 [0.528,0.632] CAUSAL4 0.549 Delta 0.077 pFinalX 0.372 PO 0.584 LOO 0.584
+  ud-es_gsd                pairs  600   FLAT FULL 0.516 [0.467,0.562] CAUSAL4 0.513 Delta 0.043 pFinalX 0.532 PO 0.497 LOO 0.532
+  ud-et_edt                pairs  600   POS  FULL 0.667 [0.621,0.708] CAUSAL4 0.607 Delta 0.106 pFinalX 0.508 PO 0.619 LOO 0.626
+  ud-eu_bdt                pairs  600   POS  FULL 0.678 [0.637,0.721] CAUSAL4 0.686 Delta 0.155 pFinalX 0.527 PO 0.698 LOO 0.705
+  ud-fi_tdt                pairs  261   POS  FULL 0.678 [0.607,0.748] CAUSAL4 0.713 Delta 0.212 pFinalX 0.418 PO 0.636 LOO 0.660
+  ud-fo_farpahc            pairs  160   FLAT FULL 0.528 [0.436,0.616] CAUSAL4 0.563 Delta -0.009 pFinalX 0.541 PO 0.537 LOO 0.563
+  ud-fr_gsd                pairs  368   POS  FULL 0.591 [0.530,0.649] CAUSAL4 0.561 Delta 0.080 pFinalX 0.564 PO 0.568 LOO 0.612
+  ud-ga_idt                pairs  476   FLAT FULL 0.502 [0.453,0.554] CAUSAL4 0.466 Delta -0.018 pFinalX 0.559 PO 0.470 LOO 0.494
+  ud-gl_treegal            pairs  157   FLAT FULL 0.497 [0.392,0.611] CAUSAL4   -   Delta 0.035 pFinalX 0.522 PO 0.594 LOO 0.510
+  ud-got_proiel            pairs  203   FLAT FULL 0.542 [0.464,0.605] CAUSAL4 0.474 Delta 0.066 pFinalX 0.571 PO 0.500 LOO 0.507
+  ud-grc_proiel            pairs  309   POS  FULL 0.586 [0.515,0.645] CAUSAL4 0.574 Delta 0.031 pFinalX 0.515 PO 0.547 LOO 0.589
+  ud-he_htb                pairs  600   FLAT FULL 0.536 [0.483,0.589] CAUSAL4 0.624 Delta 0.052 pFinalX 0.468 PO 0.553 LOO 0.562
+  ud-hi_hdtb               pairs  600   POS  FULL 0.702 [0.666,0.742] CAUSAL4 0.622 Delta 0.163 pFinalX 0.582 PO 0.695 LOO 0.689
+  ud-hr_set                pairs  189   FLAT FULL 0.566 [0.468,0.654] CAUSAL4 0.477 Delta 0.111 pFinalX 0.540 PO 0.536 LOO 0.566
+  ud-hu_szeged             pairs  222   POS  FULL 0.673 [0.594,0.750] CAUSAL4 0.647 Delta 0.147 pFinalX 0.534 PO 0.663 LOO 0.614
+  ud-hy_armtdp             pairs  432   POS  FULL 0.611 [0.542,0.666] CAUSAL4 0.615 Delta 0.071 pFinalX 0.442 PO 0.621 LOO 0.634
+  ud-id_gsd                pairs  600   FLAT FULL 0.458 [0.409,0.504] CAUSAL4 0.444 Delta -0.043 pFinalX 0.570 PO 0.484 LOO 0.443
+  ud-is_icepahc            pairs  600   FLAT FULL 0.463 [0.413,0.509] CAUSAL4 0.458 Delta -0.003 pFinalX 0.416 PO 0.443 LOO 0.457
+  ud-it_isdt               pairs  279   FLAT FULL 0.536 [0.471,0.606] CAUSAL4 0.500 Delta 0.048 pFinalX 0.532 PO 0.495 LOO 0.498
+  ud-ja_gsd                pairs  197   POS  FULL 0.655 [0.576,0.727] CAUSAL4   -   Delta 0.117 pFinalX 0.477 PO 0.648 LOO 0.691
+  ud-ka_glc                pairs  141   POS  FULL 0.667 [0.569,0.758] CAUSAL4   -   Delta 0.096 pFinalX 0.468 PO 0.638 LOO 0.631
+  ud-kk_ktb                pairs    1 x THIN FULL 1.000 [1.000,1.000] CAUSAL4   -   Delta   -   pFinalX   -   PO   -   LOO   -  
+  ud-ko_gsd                pairs   28 x THIN FULL 0.536 [0.333,0.750] CAUSAL4   -   Delta   -   pFinalX   -   PO   -   LOO   -  
+  ud-la_proiel             pairs  317   FLAT FULL 0.520 [0.458,0.597] CAUSAL4 0.494 Delta 0.039 pFinalX 0.568 PO 0.534 LOO 0.596
+  ud-lt_alksnis            pairs   93   FLAT FULL 0.495 [0.372,0.615] CAUSAL4   -   Delta 0.107 pFinalX 0.344 PO 0.586 LOO 0.559
+  ud-lv_lvtb               pairs  266   FLAT FULL 0.553 [0.478,0.636] CAUSAL4 0.494 Delta 0.113 pFinalX 0.462 PO 0.541 LOO 0.575
+  ud-lzh_kyoto             pairs  600   POS  FULL 0.727 [0.684,0.766] CAUSAL4 0.698 Delta 0.253 pFinalX 0.334 PO 0.701 LOO 0.708
+  ud-mt_mudt               pairs  215   POS  FULL 0.660 [0.576,0.738] CAUSAL4 0.495 Delta 0.078 pFinalX 0.563 PO 0.577 LOO 0.579
+  ud-nl_alpino             pairs  594   POS  FULL 0.608 [0.559,0.660] CAUSAL4 0.587 Delta 0.099 pFinalX 0.498 PO 0.585 LOO 0.619
+  ud-no_bokmaal            pairs  600   POS  FULL 0.579 [0.531,0.619] CAUSAL4 0.584 Delta 0.043 pFinalX 0.454 PO 0.613 LOO 0.594
+  ud-pl_pdb                pairs  287   FLAT FULL 0.565 [0.498,0.637] CAUSAL4 0.593 Delta 0.073 pFinalX 0.557 PO 0.587 LOO 0.523
+  ud-pt_bosque             pairs  600   POS  FULL 0.571 [0.525,0.613] CAUSAL4 0.615 Delta 0.099 pFinalX 0.507 PO 0.581 LOO 0.583
+  ud-ro_rrt                pairs  215   NEG  FULL 0.416 [0.336,0.493] CAUSAL4   -   Delta -0.070 pFinalX 0.570 PO 0.440 LOO 0.484
+  ud-ru_syntagrus          pairs  374   FLAT FULL 0.541 [0.483,0.600] CAUSAL4 0.541 Delta 0.037 pFinalX 0.523 PO 0.501 LOO 0.535
+  ud-sk_snk                pairs  400   POS  FULL 0.686 [0.631,0.748] CAUSAL4 0.682 Delta 0.241 pFinalX 0.459 PO 0.596 LOO 0.672
+  ud-sl_ssj                pairs  205   POS  FULL 0.649 [0.569,0.727] CAUSAL4   -   Delta 0.180 pFinalX 0.522 PO 0.646 LOO 0.693
+  ud-sr_set                pairs  600   POS  FULL 0.563 [0.512,0.614] CAUSAL4 0.517 Delta 0.105 pFinalX 0.563 PO 0.557 LOO 0.573
+  ud-sv_talbanken          pairs  210   FLAT FULL 0.540 [0.450,0.613] CAUSAL4 0.569 Delta 0.002 pFinalX 0.426 PO 0.493 LOO 0.429
+  ud-ta_ttb                pairs  200   POS  FULL 0.695 [0.621,0.760] CAUSAL4   -   Delta 0.173 pFinalX 0.590 PO 0.674 LOO 0.700
+  ud-tr_imst               pairs  337   POS  FULL 0.679 [0.613,0.741] CAUSAL4 0.640 Delta 0.137 pFinalX 0.510 PO 0.691 LOO 0.694
+  ud-ug_udt                pairs   17 x THIN FULL 0.765 [0.579,1.000] CAUSAL4   -   Delta   -   pFinalX   -   PO   -   LOO   -  
+  ud-uk_iu                 pairs  225   FLAT FULL 0.511 [0.427,0.596] CAUSAL4 0.472 Delta 0.035 pFinalX 0.480 PO 0.592 LOO 0.525
+  ud-ur_udtb               pairs  600   POS  FULL 0.642 [0.594,0.683] CAUSAL4 0.591 Delta 0.157 pFinalX 0.622 PO 0.658 LOO 0.634
+  ud-vi_vtb                pairs  205   FLAT FULL 0.500 [0.422,0.580] CAUSAL4 0.555 Delta -0.022 pFinalX 0.534 PO 0.527 LOO 0.502
+  ud-wo_wtb                pairs  293   FLAT FULL 0.502 [0.422,0.571] CAUSAL4 0.503 Delta 0.022 pFinalX 0.532 PO 0.537 LOO 0.539
+  ud-zh_gsd                pairs  600   POS  FULL 0.609 [0.560,0.652] CAUSAL4 0.610 Delta 0.106 pFinalX 0.371 PO 0.639 LOO 0.642
+BOOKS (nPass 1/4; Delta median 0.029; controls {"shufMedDev":0.013,"shamMedDev":0.0033,"nShuf":4,"nSham":4,"ok":true}; PASS=false)
+  book-dorian-gray     pairs  168 valid Y FULL 0.589 [0.497,0.689] p=0.043 CAUSAL4 0.443 Delta 0.113 sham 0.513 pFinalX 0.571 pInit 0.658 invLen 0.643 ctrl {"pos":0.5,"logn":0.4048,"len":0.5179,"slen":0.4583}
+  book-dracula         pairs  306 valid Y FULL 0.588 [0.503,0.663] p=0.022 CAUSAL4 0.496 Delta 0.062 sham 0.508 pFinalX 0.497 pInit 0.644 invLen 0.667 ctrl {"pos":0.5,"logn":0.3922,"len":0.6029,"slen":0.4918}
+  book-moby-dick       pairs  458 valid Y FULL 0.384 [0.327,0.441] p=1 CAUSAL4 0.410 Delta -0.103 sham 0.503 pFinalX 0.537 pInit 0.511 invLen 0.697 ctrl {"pos":0.5,"logn":0.4334,"len":0.5131,"slen":0.4858}
+  book-sherlock        pairs  345 valid Y FULL 0.539 [0.464,0.606] p=0.1688 CAUSAL4 0.511 Delta 0.029 sham 0.500 pFinalX 0.487 pInit 0.616 invLen 0.658 ctrl {"pos":0.5,"logn":0.3957,"len":0.5377,"slen":0.4971}
+CODE (controls {"shufMedDev":0.0053,"shamMedDev":0.0125,"nShuf":2,"nSham":2,"ok":true}; py pass true; js pass true)
+  code-js    pairs  725 valid Y FULL 0.577 [0.532,0.612] p=0.002 CAUSAL4 0.576 shuf 0.495 Delta 0.082 sham 0.487 pFinalX 0.553 pInit 0.695 invLen 0.706 pass true ctrl {"pos":0.5,"logn":0.5621,"len":0.4945,"slen":0.511}
+  code-py    pairs  991 valid Y FULL 0.645 [0.609,0.680] p=0.001 CAUSAL4 0.615 shuf 0.464 Delta 0.182 sham 0.444 pFinalX 0.592 pInit 0.688 invLen 0.629 pass true ctrl {"pos":0.5,"logn":0.5545,"len":0.554,"slen":0.444}
+
+======== REPLICATE ========
+IRC (controls shufMedDev=0.0238 shamMedDev=0.0117)
+  irc-de               pairs  156 valid Y  FULL 0.920 [0.874,0.956] p=0.001  CAUSAL4 0.926 (95)  LOO 0.906  Delta 0.444  sham 0.548  pFinalX 0.324 pInit 0.910 invLen 0.638 ctrl {"pos":0.5,"logn":0.5192,"len":0.4904,"slen":0.6026}
+  irc-en               pairs  600 valid Y  FULL 0.854 [0.820,0.884] p=0.001  CAUSAL4 0.840 (600)  LOO 0.853  Delta 0.328  sham 0.512  pFinalX 0.261 pInit 0.857 invLen 0.664 ctrl {"pos":0.5,"logn":0.4933,"len":0.5442,"slen":0.5908}
+  irc-es               pairs  160 valid Y  FULL 0.897 [0.841,0.953] p=0.001  CAUSAL4 0.867 (98)  LOO 0.900  Delta 0.416  sham 0.547  pFinalX 0.428 pInit 0.875 invLen 0.622 ctrl {"pos":0.5,"logn":0.4656,"len":0.5844,"slen":0.5844}
+  irc-it               pairs  222 valid Y  FULL 0.923 [0.879,0.960] p=0.001  CAUSAL4 0.917 (145)  LOO 0.927  Delta 0.463  sham 0.490  pFinalX 0.297 pInit 0.890 invLen 0.545 ctrl {"pos":0.5,"logn":0.4977,"len":0.5203,"slen":0.6622}
+UD PN: cells 52, valid 35, thin 17; FULL median lower 0.5883 true 0.5883; CAUSAL4 median lower 0.5835 true 0.5868 over 16; POS 18 NEG 2 FLAT 15; AUC>0.5 28/35; Delta median 0.0841 (n 35); controls {"shufMedDev":0.0489,"shamMedDev":0.0237,"nShuf":35,"nSham":49,"ok":false}; quantiles {"p10":0.4459,"p25":0.5156,"p75":0.6316,"p90":0.6725}; pFinalX median 0.5216; PO median 0.597; LOO median 0.5811; strict-valid 7 median 0.5883; gates {"medFull":true,"medCausal":true,"neg":true,"gt50":true,"pos":true,"delta":true,"control":false} PASS=false
+  strata (median of cell AUCs): {"evalInitial":{"med":0.6646,"n":15},"evalNonInitial":{"med":0.5886,"n":35},"nMent3-5":{"med":0.5611,"n":35},"nMent6-15":{"med":0.61,"n":32},"nMent16+":{"med":0.6538,"n":13}}
+  ud-afr                   pairs   13 x THIN FULL 0.538 [0.357,0.727] CAUSAL4   -   Delta   -   pFinalX   -   PO   -   LOO   -  
+  ud-arb                   pairs    8 x THIN FULL 0.125 [0.000,0.375] CAUSAL4   -   Delta   -   pFinalX   -   PO   -   LOO   -  
+  ud-bul                   pairs   94   FLAT FULL 0.447 [0.316,0.593] CAUSAL4   -   Delta -0.120 pFinalX 0.468 PO 0.464 LOO 0.479
+  ud-cat                   pairs  600   POS  FULL 0.627 [0.582,0.667] CAUSAL4 0.578 Delta 0.104 pFinalX 0.581 PO 0.629 LOO 0.623
+  ud-ces                   pairs   25 x THIN FULL 0.640 [0.360,0.875] CAUSAL4   -   Delta   -   pFinalX   -   PO   -   LOO   -  
+  ud-cmn                   pairs  148   POS  FULL 0.622 [0.517,0.737] CAUSAL4   -   Delta 0.072 pFinalX 0.290 PO 0.599 LOO 0.558
+  ud-cym                   pairs  136   FLAT FULL 0.434 [0.345,0.508] CAUSAL4   -   Delta -0.059 pFinalX 0.625 PO 0.493 LOO 0.402
+  ud-dan                   pairs   87   FLAT FULL 0.609 [0.477,0.722] CAUSAL4   -   Delta 0.049 pFinalX 0.414 PO 0.656 LOO 0.714
+  ud-deu                   pairs  114   POS  FULL 0.632 [0.523,0.730] CAUSAL4   -   Delta 0.132 pFinalX 0.561 PO 0.667 LOO 0.627
+  ud-ell                   pairs   76   NEG  FULL 0.342 [0.232,0.473] CAUSAL4   -   Delta 0.000 pFinalX 0.711 PO 0.408 LOO 0.329
+  ud-eng                   pairs  486   POS  FULL 0.610 [0.555,0.661] CAUSAL4 0.648 Delta 0.084 pFinalX 0.441 PO 0.561 LOO 0.594
+  ud-est                   pairs  600   POS  FULL 0.635 [0.586,0.688] CAUSAL4 0.623 Delta 0.113 pFinalX 0.402 PO 0.618 LOO 0.638
+  ud-eus                   pairs  227   POS  FULL 0.712 [0.638,0.782] CAUSAL4 0.667 Delta 0.154 pFinalX 0.540 PO 0.728 LOO 0.683
+  ud-fas                   pairs  266   FLAT FULL 0.560 [0.489,0.625] CAUSAL4 0.490 Delta 0.109 pFinalX 0.492 PO 0.561 LOO 0.581
+  ud-fin                   pairs  212   POS  FULL 0.653 [0.574,0.729] CAUSAL4 0.718 Delta 0.167 pFinalX 0.389 PO 0.621 LOO 0.663
+  ud-fra                   pairs   36 x THIN FULL 0.389 [0.188,0.568] CAUSAL4   -   Delta   -   pFinalX   -   PO   -   LOO   -  
+  ud-gle                   pairs   60   FLAT FULL 0.517 [0.345,0.667] CAUSAL4   -   Delta 0.056 pFinalX 0.700 PO 0.426 LOO 0.550
+  ud-glg                   pairs   50 x THIN FULL 0.540 [0.380,0.692] CAUSAL4   -   Delta   -   pFinalX   -   PO   -   LOO   -  
+  ud-heb                   pairs  139   FLAT FULL 0.464 [0.370,0.562] CAUSAL4   -   Delta -0.018 pFinalX 0.522 PO 0.490 LOO 0.569
+  ud-hin                   pairs  600   POS  FULL 0.702 [0.659,0.739] CAUSAL4 0.658 Delta 0.182 pFinalX 0.605 PO 0.712 LOO 0.677
+  ud-hrv                   pairs  328   FLAT FULL 0.512 [0.447,0.583] CAUSAL4 0.465 Delta 0.033 pFinalX 0.546 PO 0.462 LOO 0.518
+  ud-hun                   pairs  128   FLAT FULL 0.516 [0.426,0.609] CAUSAL4   -   Delta 0.123 pFinalX 0.406 PO 0.549 LOO 0.578
+  ud-hye                   pairs  116   POS  FULL 0.629 [0.518,0.740] CAUSAL4   -   Delta 0.276 pFinalX 0.388 PO 0.569 LOO 0.612
+  ud-ind                   pairs  342   FLAT FULL 0.446 [0.387,0.500] CAUSAL4 0.391 Delta -0.088 pFinalX 0.583 PO 0.475 LOO 0.469
+  ud-ita                   pairs   46 x THIN FULL 0.391 [0.239,0.575] CAUSAL4   -   Delta   -   pFinalX   -   PO   -   LOO   -  
+  ud-jpn                   pairs   17 x THIN FULL 0.706 [0.467,0.895] CAUSAL4   -   Delta   -   pFinalX   -   PO   -   LOO   -  
+  ud-kat                   pairs   18 x THIN FULL 0.722 [0.500,0.938] CAUSAL4   -   Delta   -   pFinalX   -   PO   -   LOO   -  
+  ud-kor                   pairs    6 x THIN FULL 1.000 [1.000,1.000] CAUSAL4   -   Delta   -   pFinalX   -   PO   -   LOO   -  
+  ud-lav                   pairs  267   POS  FULL 0.622 [0.544,0.704] CAUSAL4 0.674 Delta 0.067 pFinalX 0.401 PO 0.645 LOO 0.633
+  ud-lit                   pairs   46 x THIN FULL 0.533 [0.344,0.674] CAUSAL4   -   Delta   -   pFinalX   -   PO   -   LOO   -  
+  ud-lzh                   pairs  600   POS  FULL 0.665 [0.620,0.711] CAUSAL4 0.639 Delta 0.176 pFinalX 0.375 PO 0.677 LOO 0.673
+  ud-mar                   pairs    1 x THIN FULL 1.000 [1.000,1.000] CAUSAL4   -   Delta   -   pFinalX   -   PO   -   LOO   -  
+  ud-mlt                   pairs   60   FLAT FULL 0.550 [0.365,0.723] CAUSAL4   -   Delta -0.006 pFinalX 0.483 PO 0.619 LOO 0.667
+  ud-nld                   pairs  129   POS  FULL 0.670 [0.552,0.786] CAUSAL4   -   Delta 0.247 pFinalX 0.578 PO 0.657 LOO 0.664
+  ud-nob                   pairs  441   POS  FULL 0.608 [0.554,0.658] CAUSAL4 0.575 Delta 0.181 pFinalX 0.454 PO 0.607 LOO 0.575
+  ud-pol                   pairs   84   FLAT FULL 0.548 [0.443,0.661] CAUSAL4   -   Delta -0.024 pFinalX 0.643 PO 0.568 LOO 0.583
+  ud-por                   pairs  600   POS  FULL 0.588 [0.544,0.626] CAUSAL4 0.583 Delta 0.071 pFinalX 0.512 PO 0.602 LOO 0.587
+  ud-ron                   pairs   52 x THIN FULL 0.538 [0.370,0.706] CAUSAL4   -   Delta   -   pFinalX   -   PO   -   LOO   -  
+  ud-rus                   pairs   23 x THIN FULL 0.696 [0.500,0.857] CAUSAL4   -   Delta   -   pFinalX   -   PO   -   LOO   -  
+  ud-slk                   pairs  166   POS  FULL 0.605 [0.527,0.677] CAUSAL4   -   Delta 0.221 pFinalX 0.539 PO 0.575 LOO 0.579
+  ud-slv                   pairs   94   FLAT FULL 0.553 [0.423,0.663] CAUSAL4   -   Delta 0.128 pFinalX 0.511 PO 0.558 LOO 0.575
+  ud-spa                   pairs  600   POS  FULL 0.672 [0.630,0.714] CAUSAL4 0.584 Delta 0.181 pFinalX 0.599 PO 0.683 LOO 0.632
+  ud-srp                   pairs  202   FLAT FULL 0.540 [0.458,0.618] CAUSAL4 0.590 Delta 0.066 pFinalX 0.559 PO 0.550 LOO 0.537
+  ud-swe                   pairs   54 x THIN FULL 0.537 [0.365,0.732] CAUSAL4   -   Delta   -   pFinalX   -   PO   -   LOO   -  
+  ud-tam                   pairs   58 x THIN FULL 0.655 [0.524,0.781] CAUSAL4   -   Delta   -   pFinalX   -   PO 0.603 LOO   -  
+  ud-tel                   pairs    2 x THIN FULL 0.250 [0.000,0.500] CAUSAL4   -   Delta   -   pFinalX   -   PO   -   LOO   -  
+  ud-tur                   pairs   75   POS  FULL 0.760 [0.632,0.873] CAUSAL4   -   Delta 0.216 pFinalX 0.587 PO 0.797 LOO 0.827
+  ud-uig                   pairs   12 x THIN FULL 0.583 [0.273,0.909] CAUSAL4   -   Delta   -   pFinalX   -   PO   -   LOO   -  
+  ud-ukr                   pairs   67   FLAT FULL 0.448 [0.328,0.568] CAUSAL4   -   Delta -0.127 pFinalX 0.507 PO 0.464 LOO 0.507
+  ud-urd                   pairs  505   POS  FULL 0.574 [0.527,0.616] CAUSAL4 0.571 Delta 0.062 pFinalX 0.521 PO 0.595 LOO 0.565
+  ud-vie                   pairs   73   FLAT FULL 0.520 [0.375,0.647] CAUSAL4   -   Delta 0.111 pFinalX 0.712 PO 0.613 LOO 0.514
+  ud-wol                   pairs  140   NEG  FULL 0.386 [0.286,0.489] CAUSAL4   -   Delta -0.055 pFinalX 0.536 PO 0.409 LOO 0.396
+BOOKS (nPass 2/3; Delta median 0.1413; controls {"shufMedDev":0.0284,"shamMedDev":0.025,"nShuf":3,"nSham":3,"ok":true}; PASS=true)
+  book-frankenstein    pairs  129 valid Y FULL 0.550 [0.434,0.667] p=0.2298 CAUSAL4 0.495 Delta 0.039 sham 0.500 pFinalX 0.651 pInit 0.667 invLen 0.698 ctrl {"pos":0.5,"logn":0.4612,"len":0.4922,"slen":0.4729}
+  book-middlemarch     pairs  427 valid Y FULL 0.686 [0.623,0.741] p=0.001 CAUSAL4 0.576 Delta 0.215 sham 0.533 pFinalX 0.550 pInit 0.742 invLen 0.703 ctrl {"pos":0.5,"logn":0.4368,"len":0.5246,"slen":0.4848}
+  book-tom-sawyer      pairs  177 valid Y FULL 0.610 [0.514,0.706] p=0.022 CAUSAL4 0.586 Delta 0.141 sham 0.475 pFinalX 0.424 pInit 0.701 invLen 0.723 ctrl {"pos":0.5,"logn":0.4774,"len":0.4633,"slen":0.4548}
+CODE (controls {"shufMedDev":0.0107,"shamMedDev":0.0547,"nShuf":2,"nSham":2,"ok":false}; py pass true; js pass false)
+  code-js    pairs  807 valid Y FULL 0.522 [0.482,0.557] p=0.1419 CAUSAL4 0.547 shuf 0.528 Delta -0.006 sham 0.555 pFinalX 0.540 pInit 0.672 invLen 0.683 pass false ctrl {"pos":0.5,"logn":0.5384,"len":0.5099,"slen":0.4585}
+  code-py    pairs  829 valid Y FULL 0.650 [0.611,0.687] p=0.001 CAUSAL4 0.645 shuf 0.489 Delta 0.160 sham 0.561 pFinalX 0.561 pInit 0.637 invLen 0.521 pass true ctrl {"pos":0.5,"logn":0.5525,"len":0.5519,"slen":0.4849}
+
+famPass {"irc-en":true,"ud-prose":true,"novels":false,"code-py":true,"code-js(out-of-scope; literal passIf)":true}
+VERDICT PARTIAL {"passingFamilies":["irc-en","ud-prose","code-py","code-js(out-of-scope; literal passIf)"],"failingFamilies":["novels"],"untestable":["irc-de","irc-es","irc-it (no fresh day exists: all 32 non-en days were read by the scoper)"]}
+UD typology groups (exploratory) {"SVO-ish":{"n":37,"medTrue":0.5625,"min":0.4163,"max":0.7267},"VSO":{"n":3,"medTrue":0.5257,"min":0.5021,"max":0.7037},"FREESYN":{"n":4,"medTrue":0.5312,"min":0.5155,"max":0.5858},"SOV":{"n":8,"medTrue":0.6725,"min":0.6111,"max":0.7017}}

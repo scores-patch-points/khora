@@ -1,0 +1,622 @@
+{
+ "headerSha256": "2d37ab2fed6e9e5fc662b4cff285cc96decf6515d6f57aeb29ccea40874deaef",
+ "codeSha256": "1980f7f913fa510c88badbcaf9bd592a830ff608ec3188b14e99edca66d59def",
+ "D1": {
+  "25": {
+   "donors": 46,
+   "n": 36,
+   "meanAuc": 0.5824,
+   "meanCtrl": 0.5393,
+   "contrast": {
+    "mean": 0.0427,
+    "lo": 0.0384,
+    "hi": 0.0472,
+    "n": 9
+   },
+   "nPass": 8
+  },
+  "50": {
+   "donors": 46,
+   "n": 36,
+   "meanAuc": 0.6044,
+   "meanCtrl": 0.5473,
+   "contrast": {
+    "mean": 0.0586,
+    "lo": 0.0523,
+    "hi": 0.065,
+    "n": 9
+   },
+   "nPass": 16
+  },
+  "100": {
+   "donors": 46,
+   "n": 36,
+   "meanAuc": 0.6361,
+   "meanCtrl": 0.5584,
+   "contrast": {
+    "mean": 0.0778,
+    "lo": 0.0688,
+    "hi": 0.0861,
+    "n": 9
+   },
+   "nPass": 35
+  },
+  "200": {
+   "donors": 45,
+   "n": 36,
+   "meanAuc": 0.6534,
+   "meanCtrl": 0.571,
+   "contrast": {
+    "mean": 0.0823,
+    "lo": 0.0745,
+    "hi": 0.0901,
+    "n": 9
+   },
+   "nPass": 35
+  },
+  "400": {
+   "donors": 40,
+   "n": 29,
+   "meanAuc": 0.6674,
+   "meanCtrl": 0.5813,
+   "contrast": {
+    "mean": 0.087,
+    "lo": 0.0776,
+    "hi": 0.0963,
+    "n": 9
+   },
+   "nPass": 28
+  },
+  "robustSmall": true,
+  "lowerBound": false
+ },
+ "D2": {
+  "perTarget": {
+   "por": {
+    "formA": {
+     "n": 5,
+     "auc": 0.6138,
+     "diff": 0.0679
+    },
+    "formB": {
+     "n": 5,
+     "auc": 0.5885,
+     "diff": 0.0457
+    }
+   },
+   "glg": {
+    "formA": {
+     "n": 5,
+     "auc": 0.5556,
+     "diff": 0.0467
+    },
+    "formB": {
+     "n": 5,
+     "auc": 0.5435,
+     "diff": 0.0303
+    }
+   },
+   "cat": {
+    "formA": {
+     "n": 5,
+     "auc": 0.6547,
+     "diff": 0.0954
+    },
+    "formB": {
+     "n": 5,
+     "auc": 0.6255,
+     "diff": 0.0582
+    }
+   },
+   "fra": {
+    "formA": {
+     "n": 5,
+     "auc": 0.6354,
+     "diff": 0.075
+    },
+    "formB": {
+     "n": 5,
+     "auc": 0.6002,
+     "diff": 0.032
+    }
+   },
+   "ita": {
+    "formA": {
+     "n": 5,
+     "auc": 0.622,
+     "diff": 0.0975
+    },
+    "formB": {
+     "n": 5,
+     "auc": 0.5995,
+     "diff": 0.061
+    }
+   },
+   "spa": {
+    "formA": {
+     "n": 5,
+     "auc": 0.6632,
+     "diff": 0.1043
+    },
+    "formB": {
+     "n": 5,
+     "auc": 0.6314,
+     "diff": 0.0601
+    }
+   },
+   "nob": {
+    "formA": {
+     "n": 1,
+     "auc": 0.6389,
+     "diff": 0.0625
+    },
+    "formB": {
+     "n": 2,
+     "auc": 0.6472,
+     "diff": 0.0708
+    }
+   },
+   "swe": {
+    "formA": {
+     "n": 2,
+     "auc": 0.6504,
+     "diff": 0.0628
+    },
+    "formB": {
+     "n": 2,
+     "auc": 0.6279,
+     "diff": 0.0573
+    }
+   },
+   "dan": {
+    "formA": {
+     "n": 1,
+     "auc": 0.6269,
+     "diff": 0.0593
+    },
+    "formB": {
+     "n": 2,
+     "auc": 0.6165,
+     "diff": 0.0486
+    }
+   }
+  },
+  "meanDiffFormA": 0.0746,
+  "meanDiffFormB": 0.0516,
+  "gap": 0.023,
+  "donorsExplainGap": true
+ },
+ "D3": {
+  "perTarget": {
+   "afr": {
+    "cluster": "CWGm",
+    "ceiling": 0.7404,
+    "ctrl": 0.6222,
+    "sister": 0.6683,
+    "gain": 0.1182,
+    "informative": true,
+    "recovered": 0.3906,
+    "sisterPass": true
+   },
+   "bul": {
+    "cluster": "SSl",
+    "ceiling": 0.6156,
+    "ctrl": 0.5688,
+    "sister": 0.5927,
+    "gain": 0.0468,
+    "informative": true,
+    "recovered": 0.5107,
+    "sisterPass": false
+   },
+   "cat": {
+    "cluster": "IWR",
+    "ceiling": 0.645,
+    "ctrl": 0.5519,
+    "sister": 0.6288,
+    "gain": 0.0931,
+    "informative": true,
+    "recovered": 0.8257,
+    "sisterPass": true
+   },
+   "ces": {
+    "cluster": "WSl",
+    "ceiling": 0.5696,
+    "ctrl": 0.5446,
+    "sister": 0.5165,
+    "gain": 0.025,
+    "informative": false,
+    "recovered": null,
+    "sisterPass": false
+   },
+   "cmn": {
+    "cluster": "Sinitic",
+    "ceiling": 0.5221,
+    "ctrl": 0.5064,
+    "sister": 0.4931,
+    "gain": 0.0157,
+    "informative": false,
+    "recovered": null,
+    "sisterPass": false
+   },
+   "cym": {
+    "cluster": "Celtic",
+    "ceiling": 0.6272,
+    "ctrl": 0.5535,
+    "sister": 0.598,
+    "gain": 0.0736,
+    "informative": true,
+    "recovered": 0.6037,
+    "sisterPass": false
+   },
+   "dan": {
+    "cluster": "NGm",
+    "ceiling": 0.6519,
+    "ctrl": 0.576,
+    "sister": 0.6387,
+    "gain": 0.0759,
+    "informative": true,
+    "recovered": 0.8266,
+    "sisterPass": true
+   },
+   "deu": {
+    "cluster": "CWGm",
+    "ceiling": 0.5552,
+    "ctrl": 0.5454,
+    "sister": 0.5753,
+    "gain": 0.0098,
+    "informative": false,
+    "recovered": null,
+    "sisterPass": false
+   },
+   "est": {
+    "cluster": "Finnic",
+    "ceiling": 0.5555,
+    "ctrl": 0.5484,
+    "sister": 0.5186,
+    "gain": 0.0071,
+    "informative": false,
+    "recovered": null,
+    "sisterPass": false
+   },
+   "fin": {
+    "cluster": "Finnic",
+    "ceiling": 0.5215,
+    "ctrl": 0.5271,
+    "sister": 0.5259,
+    "gain": -0.0056,
+    "informative": false,
+    "recovered": null,
+    "sisterPass": false
+   },
+   "fra": {
+    "cluster": "IWR",
+    "ceiling": 0.6589,
+    "ctrl": 0.5603,
+    "sister": 0.6518,
+    "gain": 0.0986,
+    "informative": true,
+    "recovered": 0.9283,
+    "sisterPass": true
+   },
+   "gle": {
+    "cluster": "Celtic",
+    "ceiling": 0.5887,
+    "ctrl": 0.5469,
+    "sister": 0.5936,
+    "gain": 0.0418,
+    "informative": true,
+    "recovered": 1.118,
+    "sisterPass": false
+   },
+   "glg": {
+    "cluster": "IWR",
+    "ceiling": 0.6815,
+    "ctrl": 0.5788,
+    "sister": 0.6375,
+    "gain": 0.1027,
+    "informative": true,
+    "recovered": 0.571,
+    "sisterPass": true
+   },
+   "hin": {
+    "cluster": "Hind",
+    "ceiling": 0.6446,
+    "ctrl": 0.565,
+    "sister": 0.6516,
+    "gain": 0.0796,
+    "informative": true,
+    "recovered": 1.0874,
+    "sisterPass": true
+   },
+   "hrv": {
+    "cluster": "SSl",
+    "ceiling": 0.6063,
+    "ctrl": 0.5588,
+    "sister": 0.5887,
+    "gain": 0.0475,
+    "informative": true,
+    "recovered": 0.6303,
+    "sisterPass": false
+   },
+   "ita": {
+    "cluster": "IWR",
+    "ceiling": 0.6486,
+    "ctrl": 0.5347,
+    "sister": 0.625,
+    "gain": 0.1139,
+    "informative": true,
+    "recovered": 0.7924,
+    "sisterPass": true
+   },
+   "lav": {
+    "cluster": "Baltic",
+    "ceiling": 0.557,
+    "ctrl": 0.5432,
+    "sister": 0.5625,
+    "gain": 0.0138,
+    "informative": false,
+    "recovered": null,
+    "sisterPass": false
+   },
+   "lit": {
+    "cluster": "Baltic",
+    "ceiling": 0.5878,
+    "ctrl": 0.5846,
+    "sister": 0.6132,
+    "gain": 0.0032,
+    "informative": false,
+    "recovered": null,
+    "sisterPass": true
+   },
+   "lzh": {
+    "cluster": "Sinitic",
+    "ceiling": 0.545,
+    "ctrl": 0.4912,
+    "sister": 0.4853,
+    "gain": 0.0537,
+    "informative": true,
+    "recovered": -0.1104,
+    "sisterPass": false
+   },
+   "nld": {
+    "cluster": "CWGm",
+    "ceiling": 0.5091,
+    "ctrl": 0.544,
+    "sister": 0.5844,
+    "gain": -0.0349,
+    "informative": false,
+    "recovered": null,
+    "sisterPass": false
+   },
+   "nob": {
+    "cluster": "NGm",
+    "ceiling": 0.6811,
+    "ctrl": 0.5857,
+    "sister": 0.6765,
+    "gain": 0.0954,
+    "informative": true,
+    "recovered": 0.9526,
+    "sisterPass": true
+   },
+   "pol": {
+    "cluster": "WSl",
+    "ceiling": 0.571,
+    "ctrl": 0.5465,
+    "sister": 0.5389,
+    "gain": 0.0245,
+    "informative": false,
+    "recovered": null,
+    "sisterPass": false
+   },
+   "por": {
+    "cluster": "IWR",
+    "ceiling": 0.6225,
+    "ctrl": 0.5499,
+    "sister": 0.6103,
+    "gain": 0.0726,
+    "informative": true,
+    "recovered": 0.8313,
+    "sisterPass": true
+   },
+   "rus": {
+    "cluster": "ESl",
+    "ceiling": 0.5808,
+    "ctrl": 0.5504,
+    "sister": 0.5306,
+    "gain": 0.0304,
+    "informative": false,
+    "recovered": null,
+    "sisterPass": false
+   },
+   "slk": {
+    "cluster": "WSl",
+    "ceiling": 0.5419,
+    "ctrl": 0.5325,
+    "sister": 0.5221,
+    "gain": 0.0093,
+    "informative": false,
+    "recovered": null,
+    "sisterPass": false
+   },
+   "slv": {
+    "cluster": "SSl",
+    "ceiling": 0.6106,
+    "ctrl": 0.5725,
+    "sister": 0.593,
+    "gain": 0.0382,
+    "informative": false,
+    "recovered": null,
+    "sisterPass": false
+   },
+   "spa": {
+    "cluster": "IWR",
+    "ceiling": 0.6495,
+    "ctrl": 0.5481,
+    "sister": 0.6368,
+    "gain": 0.1013,
+    "informative": true,
+    "recovered": 0.8749,
+    "sisterPass": true
+   },
+   "srp": {
+    "cluster": "SSl",
+    "ceiling": 0.6044,
+    "ctrl": 0.555,
+    "sister": 0.5942,
+    "gain": 0.0494,
+    "informative": true,
+    "recovered": 0.7939,
+    "sisterPass": false
+   },
+   "swe": {
+    "cluster": "NGm",
+    "ceiling": 0.6901,
+    "ctrl": 0.5796,
+    "sister": 0.66,
+    "gain": 0.1104,
+    "informative": true,
+    "recovered": 0.7273,
+    "sisterPass": true
+   },
+   "ukr": {
+    "cluster": "ESl",
+    "ceiling": 0.5362,
+    "ctrl": 0.5474,
+    "sister": 0.5369,
+    "gain": -0.0112,
+    "informative": false,
+    "recovered": null,
+    "sisterPass": false
+   },
+   "urd": {
+    "cluster": "Hind",
+    "ceiling": 0.683,
+    "ctrl": 0.5585,
+    "sister": 0.6084,
+    "gain": 0.1245,
+    "informative": true,
+    "recovered": 0.4007,
+    "sisterPass": true
+   }
+  },
+  "perCluster": {
+   "IWR": {
+    "targets": 6,
+    "informative": 6,
+    "meanRecovered": 0.8039,
+    "meanCeiling": 0.651,
+    "meanSister": 0.6317,
+    "meanCtrl": 0.5539,
+    "verdict": "POSITIVE"
+   },
+   "NGm": {
+    "targets": 3,
+    "informative": 3,
+    "meanRecovered": 0.8355,
+    "meanCeiling": 0.6744,
+    "meanSister": 0.6584,
+    "meanCtrl": 0.5804,
+    "verdict": "POSITIVE"
+   },
+   "CWGm": {
+    "targets": 3,
+    "informative": 1,
+    "meanRecovered": 0.3906,
+    "meanCeiling": 0.6016,
+    "meanSister": 0.6093,
+    "meanCtrl": 0.5705,
+    "verdict": "UNINFORMATIVE"
+   },
+   "Hind": {
+    "targets": 2,
+    "informative": 2,
+    "meanRecovered": 0.744,
+    "meanCeiling": 0.6638,
+    "meanSister": 0.63,
+    "meanCtrl": 0.5617,
+    "verdict": "POSITIVE"
+   },
+   "SSl": {
+    "targets": 4,
+    "informative": 3,
+    "meanRecovered": 0.645,
+    "meanCeiling": 0.6092,
+    "meanSister": 0.5921,
+    "meanCtrl": 0.5638,
+    "verdict": "POSITIVE"
+   },
+   "WSl": {
+    "targets": 3,
+    "informative": 0,
+    "meanRecovered": null,
+    "meanCeiling": 0.5608,
+    "meanSister": 0.5258,
+    "meanCtrl": 0.5412,
+    "verdict": "UNINFORMATIVE"
+   },
+   "ESl": {
+    "targets": 2,
+    "informative": 0,
+    "meanRecovered": null,
+    "meanCeiling": 0.5585,
+    "meanSister": 0.5337,
+    "meanCtrl": 0.5489,
+    "verdict": "UNINFORMATIVE"
+   },
+   "Finnic": {
+    "targets": 2,
+    "informative": 0,
+    "meanRecovered": null,
+    "meanCeiling": 0.5385,
+    "meanSister": 0.5222,
+    "meanCtrl": 0.5377,
+    "verdict": "UNINFORMATIVE"
+   },
+   "Baltic": {
+    "targets": 2,
+    "informative": 0,
+    "meanRecovered": null,
+    "meanCeiling": 0.5724,
+    "meanSister": 0.5878,
+    "meanCtrl": 0.5639,
+    "verdict": "UNINFORMATIVE"
+   },
+   "Celtic": {
+    "targets": 2,
+    "informative": 2,
+    "meanRecovered": 0.8609,
+    "meanCeiling": 0.6079,
+    "meanSister": 0.5958,
+    "meanCtrl": 0.5502,
+    "verdict": "POSITIVE"
+   },
+   "Turkic": {
+    "targets": 0,
+    "informative": 0,
+    "meanRecovered": null,
+    "meanCeiling": null,
+    "meanSister": null,
+    "meanCtrl": null,
+    "verdict": "UNINFORMATIVE"
+   },
+   "Sinitic": {
+    "targets": 2,
+    "informative": 1,
+    "meanRecovered": -0.1104,
+    "meanCeiling": 0.5335,
+    "meanSister": 0.4892,
+    "meanCtrl": 0.4988,
+    "verdict": "UNINFORMATIVE"
+   },
+   "Semitic": {
+    "targets": 0,
+    "informative": 0,
+    "meanRecovered": null,
+    "meanCeiling": null,
+    "meanSister": null,
+    "meanCtrl": null,
+    "verdict": "UNINFORMATIVE"
+   }
+  }
+ }
+}

@@ -1,0 +1,1406 @@
+{
+ "headerSha256": "bc717f450ce9d88699783038873828620d8d7dbc3fb9dcfb4bc3d2896dc724dd",
+ "split": "dev",
+ "languages": {
+  "eng": {
+   "sentences": 1987,
+   "tokens": 22073,
+   "meanSentLen": 11.109,
+   "FWC32": 0.3387,
+   "TTR": 0.2157,
+   "hapaxTypeShare": 0.5686,
+   "casedShare": 0.183,
+   "propn": {
+    "n": 1867,
+    "density": 0.0846,
+    "precededBy": {
+     "ADP": 0.2014,
+     "DET": 0.0964,
+     "ADJ": 0.0605,
+     "NOUN": 0.052,
+     "PROPN": 0.2924,
+     "none": 0.1452,
+     "other": 0.1521
+    },
+    "followedBy": {
+     "ADP": 0.0712,
+     "PROPN": 0.2924,
+     "end": 0.196,
+     "other": 0.4403
+    },
+    "CHAIN": 0.5046,
+    "sentenceInitial": 0.1452,
+    "flatShare": 0.2983,
+    "hapaxTokenRate": 0.3321,
+    "hapaxTypeRate": 0.6917,
+    "meanChars": 6.994
+   },
+   "wordOrder": {
+    "nsubjBefore": {
+     "share": 0.9579,
+     "n": 2136
+    },
+    "objAfter": {
+     "share": 0.9553,
+     "n": 1209
+    },
+    "caseBefore": {
+     "share": 0.9524,
+     "n": 2017
+    },
+    "amodBefore": {
+     "share": 0.9827,
+     "n": 1326
+    },
+    "detBefore": {
+     "share": 1,
+     "n": 1841
+    }
+   }
+  },
+  "spa": {
+   "sentences": 1654,
+   "tokens": 47173,
+   "meanSentLen": 28.521,
+   "FWC32": 0.4388,
+   "TTR": 0.204,
+   "hapaxTypeShare": 0.5937,
+   "casedShare": 0.1207,
+   "propn": {
+    "n": 3927,
+    "density": 0.0832,
+    "precededBy": {
+     "ADP": 0.2394,
+     "DET": 0.2327,
+     "ADJ": 0.0413,
+     "NOUN": 0.0596,
+     "PROPN": 0.286,
+     "none": 0.0481,
+     "other": 0.0929
+    },
+    "followedBy": {
+     "ADP": 0.1859,
+     "PROPN": 0.286,
+     "end": 0.0858,
+     "other": 0.4423
+    },
+    "CHAIN": 0.4943,
+    "sentenceInitial": 0.0481,
+    "flatShare": 0.3272,
+    "hapaxTokenRate": 0.2452,
+    "hapaxTypeRate": 0.6168,
+    "meanChars": 6.427
+   },
+   "wordOrder": {
+    "nsubjBefore": {
+     "share": 0.8255,
+     "n": 2774
+    },
+    "objAfter": {
+     "share": 0.8444,
+     "n": 2320
+    },
+    "caseBefore": {
+     "share": 0.984,
+     "n": 7441
+    },
+    "amodBefore": {
+     "share": 0.2895,
+     "n": 2874
+    },
+    "detBefore": {
+     "share": 0.9953,
+     "n": 8045
+    }
+   }
+  },
+  "rus": {
+   "sentences": 579,
+   "tokens": 9469,
+   "meanSentLen": 16.354,
+   "FWC32": 0.2012,
+   "TTR": 0.5908,
+   "hapaxTypeShare": 0.8191,
+   "casedShare": 0.1995,
+   "propn": {
+    "n": 868,
+    "density": 0.0917,
+    "precededBy": {
+     "ADP": 0.1429,
+     "DET": 0,
+     "ADJ": 0.0691,
+     "NOUN": 0.3491,
+     "PROPN": 0.2373,
+     "none": 0.0714,
+     "other": 0.1302
+    },
+    "followedBy": {
+     "ADP": 0.0922,
+     "PROPN": 0.2373,
+     "end": 0.1624,
+     "other": 0.5081
+    },
+    "CHAIN": 0.424,
+    "sentenceInitial": 0.0714,
+    "flatShare": 0.1498,
+    "hapaxTokenRate": 0.8018,
+    "hapaxTypeRate": 0.9211,
+    "meanChars": 6.668
+   },
+   "wordOrder": {
+    "nsubjBefore": {
+     "share": 0.7731,
+     "n": 670
+    },
+    "objAfter": {
+     "share": 0.8472,
+     "n": 360
+    },
+    "caseBefore": {
+     "share": 0.9975,
+     "n": 1214
+    },
+    "amodBefore": {
+     "share": 0.9692,
+     "n": 1234
+    },
+    "detBefore": {
+     "share": 0.9937,
+     "n": 158
+    }
+   }
+  },
+  "cmn": {
+   "sentences": 500,
+   "tokens": 10901,
+   "meanSentLen": 21.802,
+   "FWC32": 0.2216,
+   "TTR": 0.3946,
+   "hapaxTypeShare": 0.6689,
+   "casedShare": 0.0069,
+   "propn": {
+    "n": 1056,
+    "density": 0.0969,
+    "precededBy": {
+     "ADP": 0.0928,
+     "DET": 0.0028,
+     "ADJ": 0.0057,
+     "NOUN": 0.1496,
+     "PROPN": 0.1903,
+     "none": 0.0985,
+     "other": 0.4602
+    },
+    "followedBy": {
+     "ADP": 0.0265,
+     "PROPN": 0.1903,
+     "end": 0.0189,
+     "other": 0.7642
+    },
+    "CHAIN": 0.3551,
+    "sentenceInitial": 0.0985,
+    "flatShare": 0.2955,
+    "hapaxTokenRate": 0.4858,
+    "hapaxTypeRate": 0.7814,
+    "meanChars": 2.117
+   },
+   "wordOrder": {
+    "nsubjBefore": {
+     "share": 0.9979,
+     "n": 956
+    },
+    "objAfter": {
+     "share": 0.9988,
+     "n": 818
+    },
+    "caseBefore": {
+     "share": 0.5255,
+     "n": 921
+    },
+    "amodBefore": {
+     "share": 1,
+     "n": 197
+    },
+    "detBefore": {
+     "share": 1,
+     "n": 135
+    }
+   }
+  },
+  "cmn-hans": {
+   "sentences": 500,
+   "tokens": 10895,
+   "meanSentLen": 21.79,
+   "FWC32": 0.222,
+   "TTR": 0.393,
+   "hapaxTypeShare": 0.6665,
+   "casedShare": 0.0069,
+   "propn": {
+    "n": 1056,
+    "density": 0.0969,
+    "precededBy": {
+     "ADP": 0.0928,
+     "DET": 0.0028,
+     "ADJ": 0.0057,
+     "NOUN": 0.1496,
+     "PROPN": 0.1903,
+     "none": 0.0985,
+     "other": 0.4602
+    },
+    "followedBy": {
+     "ADP": 0.0265,
+     "PROPN": 0.1903,
+     "end": 0.0189,
+     "other": 0.7642
+    },
+    "CHAIN": 0.3551,
+    "sentenceInitial": 0.0985,
+    "flatShare": 0.2955,
+    "hapaxTokenRate": 0.482,
+    "hapaxTypeRate": 0.7804,
+    "meanChars": 2.117
+   },
+   "wordOrder": {
+    "nsubjBefore": {
+     "share": 0.9979,
+     "n": 956
+    },
+    "objAfter": {
+     "share": 0.9988,
+     "n": 818
+    },
+    "caseBefore": {
+     "share": 0.5255,
+     "n": 921
+    },
+    "amodBefore": {
+     "share": 1,
+     "n": 197
+    },
+    "detBefore": {
+     "share": 1,
+     "n": 135
+    }
+   }
+  },
+  "arb": {
+   "sentences": 909,
+   "tokens": 27357,
+   "meanSentLen": 30.096,
+   "FWC32": 0.3098,
+   "TTR": 0.2493,
+   "hapaxTypeShare": 0.5655,
+   "casedShare": 0.0001,
+   "propn": {
+    "n": 27,
+    "density": 0.001,
+    "precededBy": {
+     "ADP": 0.0741,
+     "DET": 0,
+     "ADJ": 0.037,
+     "NOUN": 0.1481,
+     "PROPN": 0,
+     "none": 0,
+     "other": 0.7407
+    },
+    "followedBy": {
+     "ADP": 0.1111,
+     "PROPN": 0,
+     "end": 0.037,
+     "other": 0.8519
+    },
+    "CHAIN": 0,
+    "sentenceInitial": 0,
+    "flatShare": 0,
+    "hapaxTokenRate": 0.3704,
+    "hapaxTypeRate": 0.7143,
+    "meanChars": 4.815
+   },
+   "wordOrder": {
+    "nsubjBefore": {
+     "share": 0.4473,
+     "n": 1925
+    },
+    "objAfter": {
+     "share": 0.9966,
+     "n": 882
+    },
+    "caseBefore": {
+     "share": 0.9945,
+     "n": 4171
+    },
+    "amodBefore": {
+     "share": 0.004,
+     "n": 2223
+    },
+    "detBefore": {
+     "share": 0.8964,
+     "n": 193
+    }
+   }
+  },
+  "heb": {
+   "sentences": 484,
+   "tokens": 10054,
+   "meanSentLen": 20.773,
+   "FWC32": 0.3929,
+   "TTR": 0.3091,
+   "hapaxTypeShare": 0.6676,
+   "casedShare": 0,
+   "propn": {
+    "n": 528,
+    "density": 0.0525,
+    "precededBy": {
+     "ADP": 0.2784,
+     "DET": 0.017,
+     "ADJ": 0.0246,
+     "NOUN": 0.2159,
+     "PROPN": 0.2803,
+     "none": 0.072,
+     "other": 0.1117
+    },
+    "followedBy": {
+     "ADP": 0.1155,
+     "PROPN": 0.2803,
+     "end": 0.1174,
+     "other": 0.4867
+    },
+    "CHAIN": 0.4981,
+    "sentenceInitial": 0.072,
+    "flatShare": 0.4375,
+    "hapaxTokenRate": 0.3087,
+    "hapaxTypeRate": 0.6641,
+    "meanChars": 5.117
+   },
+   "wordOrder": {
+    "nsubjBefore": {
+     "share": 0.7183,
+     "n": 646
+    },
+    "objAfter": {
+     "share": 0.9865,
+     "n": 297
+    },
+    "caseBefore": {
+     "share": 0.9978,
+     "n": 1836
+    },
+    "amodBefore": {
+     "share": 0,
+     "n": 574
+    },
+    "detBefore": {
+     "share": 0.9684,
+     "n": 1203
+    }
+   }
+  },
+  "fas": {
+   "sentences": 1456,
+   "tokens": 22821,
+   "meanSentLen": 15.674,
+   "FWC32": 0.3293,
+   "TTR": 0.2946,
+   "hapaxTypeShare": 0.6557,
+   "casedShare": 0.0003,
+   "propn": {
+    "n": 1108,
+    "density": 0.0486,
+    "precededBy": {
+     "ADP": 0.1444,
+     "DET": 0.0009,
+     "ADJ": 0.0415,
+     "NOUN": 0.2247,
+     "PROPN": 0.37,
+     "none": 0.1155,
+     "other": 0.1029
+    },
+    "followedBy": {
+     "ADP": 0.2157,
+     "PROPN": 0.37,
+     "end": 0.0018,
+     "other": 0.4125
+    },
+    "CHAIN": 0.611,
+    "sentenceInitial": 0.1155,
+    "flatShare": 0.3538,
+    "hapaxTokenRate": 0.3628,
+    "hapaxTypeRate": 0.75,
+    "meanChars": 5.162
+   },
+   "wordOrder": {
+    "nsubjBefore": {
+     "share": 0.9934,
+     "n": 1365
+    },
+    "objAfter": {
+     "share": 0.0071,
+     "n": 986
+    },
+    "caseBefore": {
+     "share": 0.7854,
+     "n": 3565
+    },
+    "amodBefore": {
+     "share": 0.0483,
+     "n": 1180
+    },
+    "detBefore": {
+     "share": 1,
+     "n": 532
+    }
+   }
+  },
+  "kor": {
+   "sentences": 950,
+   "tokens": 10375,
+   "meanSentLen": 10.921,
+   "FWC32": 0.0702,
+   "TTR": 0.7217,
+   "hapaxTypeShare": 0.862,
+   "casedShare": 0.0133,
+   "propn": {
+    "n": 72,
+    "density": 0.0069,
+    "precededBy": {
+     "ADP": 0.0139,
+     "DET": 0,
+     "ADJ": 0,
+     "NOUN": 0.5139,
+     "PROPN": 0.0278,
+     "none": 0.0694,
+     "other": 0.375
+    },
+    "followedBy": {
+     "ADP": 0.1111,
+     "PROPN": 0.0278,
+     "end": 0.0278,
+     "other": 0.8333
+    },
+    "CHAIN": 0.0556,
+    "sentenceInitial": 0.0694,
+    "flatShare": 0.1944,
+    "hapaxTokenRate": 0.8333,
+    "hapaxTypeRate": 0.9714,
+    "meanChars": 3.708
+   },
+   "wordOrder": {
+    "nsubjBefore": {
+     "share": 0.9891,
+     "n": 1195
+    },
+    "objAfter": {
+     "share": 0.0259,
+     "n": 810
+    },
+    "caseBefore": {
+     "share": 0.0082,
+     "n": 243
+    },
+    "amodBefore": {
+     "share": 0.9638,
+     "n": 221
+    },
+    "detBefore": {
+     "share": 0.9912,
+     "n": 114
+    }
+   }
+  },
+  "jpn": {
+   "sentences": 507,
+   "tokens": 11121,
+   "meanSentLen": 21.935,
+   "FWC32": 0.4293,
+   "TTR": 0.3204,
+   "hapaxTypeShare": 0.7098,
+   "casedShare": 0.009,
+   "propn": {
+    "n": 477,
+    "density": 0.0429,
+    "precededBy": {
+     "ADP": 0.3417,
+     "DET": 0.0021,
+     "ADJ": 0,
+     "NOUN": 0.1405,
+     "PROPN": 0.0922,
+     "none": 0.1405,
+     "other": 0.283
+    },
+    "followedBy": {
+     "ADP": 0.3543,
+     "PROPN": 0.0922,
+     "end": 0.0063,
+     "other": 0.5472
+    },
+    "CHAIN": 0.1656,
+    "sentenceInitial": 0.1405,
+    "flatShare": 0.5954,
+    "hapaxTokenRate": 0.7191,
+    "hapaxTypeRate": 0.8821,
+    "meanChars": 3.092
+   },
+   "wordOrder": {
+    "nsubjBefore": {
+     "share": 1,
+     "n": 536
+    },
+    "objAfter": {
+     "share": 0,
+     "n": 328
+    },
+    "caseBefore": {
+     "share": 0,
+     "n": 2632
+    },
+    "amodBefore": {
+     "share": 1,
+     "n": 37
+    },
+    "detBefore": {
+     "share": 1,
+     "n": 53
+    }
+   }
+  },
+  "fra": {
+   "sentences": 1476,
+   "tokens": 31919,
+   "meanSentLen": 21.625,
+   "FWC32": 0.4212,
+   "TTR": 0.2767,
+   "hapaxTypeShare": 0.696,
+   "casedShare": 0.1419,
+   "propn": {
+    "n": 2550,
+    "density": 0.0799,
+    "precededBy": {
+     "ADP": 0.2749,
+     "DET": 0.169,
+     "ADJ": 0.0227,
+     "NOUN": 0.1051,
+     "PROPN": 0.282,
+     "none": 0.0584,
+     "other": 0.0878
+    },
+    "followedBy": {
+     "ADP": 0.1435,
+     "PROPN": 0.282,
+     "end": 0.1431,
+     "other": 0.4314
+    },
+    "CHAIN": 0.4827,
+    "sentenceInitial": 0.0584,
+    "flatShare": 0.2396,
+    "hapaxTokenRate": 0.6569,
+    "hapaxTypeRate": 0.8705,
+    "meanChars": 6.646
+   },
+   "wordOrder": {
+    "nsubjBefore": {
+     "share": 0.971,
+     "n": 2000
+    },
+    "objAfter": {
+     "share": 0.8411,
+     "n": 1183
+    },
+    "caseBefore": {
+     "share": 1,
+     "n": 5249
+    },
+    "amodBefore": {
+     "share": 0.307,
+     "n": 1889
+    },
+    "detBefore": {
+     "share": 1,
+     "n": 5464
+    }
+   }
+  },
+  "deu": {
+   "sentences": 799,
+   "tokens": 10808,
+   "meanSentLen": 13.527,
+   "FWC32": 0.3258,
+   "TTR": 0.3519,
+   "hapaxTypeShare": 0.7357,
+   "casedShare": 0.3298,
+   "propn": {
+    "n": 568,
+    "density": 0.0526,
+    "precededBy": {
+     "ADP": 0.1637,
+     "DET": 0.1743,
+     "ADJ": 0.0194,
+     "NOUN": 0.2077,
+     "PROPN": 0.2676,
+     "none": 0.0405,
+     "other": 0.1268
+    },
+    "followedBy": {
+     "ADP": 0.0968,
+     "PROPN": 0.2676,
+     "end": 0.0968,
+     "other": 0.5387
+    },
+    "CHAIN": 0.4877,
+    "sentenceInitial": 0.0405,
+    "flatShare": 0.25,
+    "hapaxTokenRate": 0.6673,
+    "hapaxTypeRate": 0.8636,
+    "meanChars": 6.613
+   },
+   "wordOrder": {
+    "nsubjBefore": {
+     "share": 0.8383,
+     "n": 1064
+    },
+    "objAfter": {
+     "share": 0.4064,
+     "n": 502
+    },
+    "caseBefore": {
+     "share": 0.9851,
+     "n": 1073
+    },
+    "amodBefore": {
+     "share": 0.9869,
+     "n": 534
+    },
+    "detBefore": {
+     "share": 0.9994,
+     "n": 1564
+    }
+   }
+  },
+  "ita": {
+   "sentences": 564,
+   "tokens": 10494,
+   "meanSentLen": 18.606,
+   "FWC32": 0.4203,
+   "TTR": 0.3553,
+   "hapaxTypeShare": 0.7377,
+   "casedShare": 0.1093,
+   "propn": {
+    "n": 595,
+    "density": 0.0567,
+    "precededBy": {
+     "ADP": 0.2387,
+     "DET": 0.1882,
+     "ADJ": 0.0286,
+     "NOUN": 0.0908,
+     "PROPN": 0.2891,
+     "none": 0.037,
+     "other": 0.1277
+    },
+    "followedBy": {
+     "ADP": 0.1328,
+     "PROPN": 0.2891,
+     "end": 0.1832,
+     "other": 0.395
+    },
+    "CHAIN": 0.5126,
+    "sentenceInitial": 0.037,
+    "flatShare": 0.2588,
+    "hapaxTokenRate": 0.6487,
+    "hapaxTypeRate": 0.8503,
+    "meanChars": 6.188
+   },
+   "wordOrder": {
+    "nsubjBefore": {
+     "share": 0.7575,
+     "n": 598
+    },
+    "objAfter": {
+     "share": 0.8795,
+     "n": 415
+    },
+    "caseBefore": {
+     "share": 0.9994,
+     "n": 1642
+    },
+    "amodBefore": {
+     "share": 0.3193,
+     "n": 667
+    },
+    "detBefore": {
+     "share": 0.9984,
+     "n": 1895
+    }
+   }
+  },
+  "por": {
+   "sentences": 1204,
+   "tokens": 27959,
+   "meanSentLen": 23.222,
+   "FWC32": 0.4329,
+   "TTR": 0.2625,
+   "hapaxTypeShare": 0.6669,
+   "casedShare": 0.1503,
+   "propn": {
+    "n": 3143,
+    "density": 0.1124,
+    "precededBy": {
+     "ADP": 0.1852,
+     "DET": 0.2899,
+     "ADJ": 0.0223,
+     "NOUN": 0.0598,
+     "PROPN": 0.3417,
+     "none": 0.0309,
+     "other": 0.0703
+    },
+    "followedBy": {
+     "ADP": 0.2068,
+     "PROPN": 0.3417,
+     "end": 0.098,
+     "other": 0.3535
+    },
+    "CHAIN": 0.587,
+    "sentenceInitial": 0.0309,
+    "flatShare": 0.1899,
+    "hapaxTokenRate": 0.4117,
+    "hapaxTypeRate": 0.7678,
+    "meanChars": 6.24
+   },
+   "wordOrder": {
+    "nsubjBefore": {
+     "share": 0.9007,
+     "n": 1661
+    },
+    "objAfter": {
+     "share": 0.9251,
+     "n": 1162
+    },
+    "caseBefore": {
+     "share": 0.994,
+     "n": 4862
+    },
+    "amodBefore": {
+     "share": 0.3148,
+     "n": 1550
+    },
+    "detBefore": {
+     "share": 0.9994,
+     "n": 4902
+    }
+   }
+  },
+  "nld": {
+   "sentences": 718,
+   "tokens": 10159,
+   "meanSentLen": 14.149,
+   "FWC32": 0.3706,
+   "TTR": 0.3258,
+   "hapaxTypeShare": 0.684,
+   "casedShare": 0.1767,
+   "propn": {
+    "n": 1119,
+    "density": 0.1101,
+    "precededBy": {
+     "ADP": 0.2154,
+     "DET": 0.0974,
+     "ADJ": 0.025,
+     "NOUN": 0.1028,
+     "PROPN": 0.3038,
+     "none": 0.1028,
+     "other": 0.1528
+    },
+    "followedBy": {
+     "ADP": 0.1206,
+     "PROPN": 0.3038,
+     "end": 0.0795,
+     "other": 0.496
+    },
+    "CHAIN": 0.5094,
+    "sentenceInitial": 0.1028,
+    "flatShare": 0.2735,
+    "hapaxTokenRate": 0.328,
+    "hapaxTypeRate": 0.6638,
+    "meanChars": 6.338
+   },
+   "wordOrder": {
+    "nsubjBefore": {
+     "share": 0.8069,
+     "n": 963
+    },
+    "objAfter": {
+     "share": 0.496,
+     "n": 377
+    },
+    "caseBefore": {
+     "share": 0.9819,
+     "n": 1272
+    },
+    "amodBefore": {
+     "share": 0.9862,
+     "n": 508
+    },
+    "detBefore": {
+     "share": 1,
+     "n": 1282
+    }
+   }
+  },
+  "pol": {
+   "sentences": 2215,
+   "tokens": 28929,
+   "meanSentLen": 13.06,
+   "FWC32": 0.2328,
+   "TTR": 0.4255,
+   "hapaxTypeShare": 0.7656,
+   "casedShare": 0.1355,
+   "propn": {
+    "n": 1204,
+    "density": 0.0416,
+    "precededBy": {
+     "ADP": 0.1777,
+     "DET": 0.0091,
+     "ADJ": 0.0573,
+     "NOUN": 0.2633,
+     "PROPN": 0.2284,
+     "none": 0.0922,
+     "other": 0.1719
+    },
+    "followedBy": {
+     "ADP": 0.0939,
+     "PROPN": 0.2284,
+     "end": 0.152,
+     "other": 0.5257
+    },
+    "CHAIN": 0.4178,
+    "sentenceInitial": 0.0922,
+    "flatShare": 0.1885,
+    "hapaxTokenRate": 0.7409,
+    "hapaxTypeRate": 0.899,
+    "meanChars": 6.658
+   },
+   "wordOrder": {
+    "nsubjBefore": {
+     "share": 0.7488,
+     "n": 2082
+    },
+    "objAfter": {
+     "share": 0.8216,
+     "n": 1525
+    },
+    "caseBefore": {
+     "share": 0.9986,
+     "n": 3659
+    },
+    "amodBefore": {
+     "share": 0.6091,
+     "n": 2924
+    },
+    "detBefore": {
+     "share": 0.9299,
+     "n": 656
+    }
+   }
+  },
+  "ukr": {
+   "sentences": 673,
+   "tokens": 10183,
+   "meanSentLen": 15.131,
+   "FWC32": 0.21,
+   "TTR": 0.5148,
+   "hapaxTypeShare": 0.7694,
+   "casedShare": 0.1272,
+   "propn": {
+    "n": 406,
+    "density": 0.0399,
+    "precededBy": {
+     "ADP": 0.1527,
+     "DET": 0.0049,
+     "ADJ": 0.0296,
+     "NOUN": 0.3867,
+     "PROPN": 0.266,
+     "none": 0.0369,
+     "other": 0.1232
+    },
+    "followedBy": {
+     "ADP": 0.0739,
+     "PROPN": 0.266,
+     "end": 0.1502,
+     "other": 0.5099
+    },
+    "CHAIN": 0.4409,
+    "sentenceInitial": 0.0369,
+    "flatShare": 0.3325,
+    "hapaxTokenRate": 0.6034,
+    "hapaxTypeRate": 0.8191,
+    "meanChars": 6.564
+   },
+   "wordOrder": {
+    "nsubjBefore": {
+     "share": 0.7844,
+     "n": 793
+    },
+    "objAfter": {
+     "share": 0.7555,
+     "n": 589
+    },
+    "caseBefore": {
+     "share": 1,
+     "n": 1155
+    },
+    "amodBefore": {
+     "share": 0.9716,
+     "n": 1022
+    },
+    "detBefore": {
+     "share": 0.9867,
+     "n": 301
+    }
+   }
+  },
+  "hin": {
+   "sentences": 1659,
+   "tokens": 32850,
+   "meanSentLen": 19.801,
+   "FWC32": 0.3588,
+   "TTR": 0.1623,
+   "hapaxTypeShare": 0.5091,
+   "casedShare": 0,
+   "propn": {
+    "n": 4214,
+    "density": 0.1283,
+    "precededBy": {
+     "ADP": 0.1609,
+     "DET": 0.0007,
+     "ADJ": 0.0268,
+     "NOUN": 0.1054,
+     "PROPN": 0.4309,
+     "none": 0.1149,
+     "other": 0.1604
+    },
+    "followedBy": {
+     "ADP": 0.4086,
+     "PROPN": 0.4309,
+     "end": 0.0005,
+     "other": 0.1599
+    },
+    "CHAIN": 0.6747,
+    "sentenceInitial": 0.1149,
+    "flatShare": 0.3662,
+    "hapaxTokenRate": 0.1723,
+    "hapaxTypeRate": 0.5817,
+    "meanChars": 5.715
+   },
+   "wordOrder": {
+    "nsubjBefore": {
+     "share": 0.9881,
+     "n": 2104
+    },
+    "objAfter": {
+     "share": 0.2372,
+     "n": 1661
+    },
+    "caseBefore": {
+     "share": 0.0009,
+     "n": 6674
+    },
+    "amodBefore": {
+     "share": 0.9627,
+     "n": 1501
+    },
+    "detBefore": {
+     "share": 1,
+     "n": 710
+    }
+   }
+  },
+  "vie": {
+   "sentences": 1123,
+   "tokens": 22645,
+   "meanSentLen": 20.165,
+   "FWC32": 0.236,
+   "TTR": 0.191,
+   "hapaxTypeShare": 0.5227,
+   "casedShare": 0.1069,
+   "propn": {
+    "n": 1060,
+    "density": 0.0468,
+    "precededBy": {
+     "ADP": 0.0991,
+     "DET": 0,
+     "ADJ": 0.0123,
+     "NOUN": 0.5962,
+     "PROPN": 0.1151,
+     "none": 0.0443,
+     "other": 0.133
+    },
+    "followedBy": {
+     "ADP": 0.066,
+     "PROPN": 0.1151,
+     "end": 0.1094,
+     "other": 0.7094
+    },
+    "CHAIN": 0.2066,
+    "sentenceInitial": 0.0443,
+    "flatShare": 0.4292,
+    "hapaxTokenRate": 0.2651,
+    "hapaxTypeRate": 0.6407,
+    "meanChars": 6.663
+   },
+   "wordOrder": {
+    "nsubjBefore": {
+     "share": 0.9983,
+     "n": 1726
+    },
+    "objAfter": {
+     "share": 0.9995,
+     "n": 1835
+    },
+    "caseBefore": {
+     "share": 0.9993,
+     "n": 1460
+    },
+    "amodBefore": {
+     "share": 0.0023,
+     "n": 434
+    },
+    "detBefore": {
+     "share": 0.7001,
+     "n": 797
+    }
+   }
+  },
+  "ind": {
+   "sentences": 559,
+   "tokens": 10803,
+   "meanSentLen": 19.326,
+   "FWC32": 0.2439,
+   "TTR": 0.3849,
+   "hapaxTypeShare": 0.683,
+   "casedShare": 0.259,
+   "propn": {
+    "n": 2322,
+    "density": 0.2149,
+    "precededBy": {
+     "ADP": 0.1227,
+     "DET": 0.0073,
+     "ADJ": 0.0155,
+     "NOUN": 0.1555,
+     "PROPN": 0.4854,
+     "none": 0.0784,
+     "other": 0.1352
+    },
+    "followedBy": {
+     "ADP": 0.0672,
+     "PROPN": 0.4854,
+     "end": 0.0853,
+     "other": 0.3622
+    },
+    "CHAIN": 0.7351,
+    "sentenceInitial": 0.0784,
+    "flatShare": 0.3734,
+    "hapaxTokenRate": 0.5073,
+    "hapaxTypeRate": 0.8082,
+    "meanChars": 6.085
+   },
+   "wordOrder": {
+    "nsubjBefore": {
+     "share": 0.9823,
+     "n": 961
+    },
+    "objAfter": {
+     "share": 0.9574,
+     "n": 564
+    },
+    "caseBefore": {
+     "share": 0.9855,
+     "n": 1172
+    },
+    "amodBefore": {
+     "share": 0.115,
+     "n": 461
+    },
+    "detBefore": {
+     "share": 0.44,
+     "n": 350
+    }
+   }
+  },
+  "swe": {
+   "sentences": 504,
+   "tokens": 8835,
+   "meanSentLen": 17.53,
+   "FWC32": 0.3566,
+   "TTR": 0.295,
+   "hapaxTypeShare": 0.6543,
+   "casedShare": 0.0652,
+   "propn": {
+    "n": 36,
+    "density": 0.0041,
+    "precededBy": {
+     "ADP": 0.3333,
+     "DET": 0,
+     "ADJ": 0,
+     "NOUN": 0.0833,
+     "PROPN": 0.3056,
+     "none": 0.1667,
+     "other": 0.1111
+    },
+    "followedBy": {
+     "ADP": 0.0556,
+     "PROPN": 0.3056,
+     "end": 0.0278,
+     "other": 0.6111
+    },
+    "CHAIN": 0.5278,
+    "sentenceInitial": 0.1667,
+    "flatShare": 0.3056,
+    "hapaxTokenRate": 0.4722,
+    "hapaxTypeRate": 0.7826,
+    "meanChars": 5.778
+   },
+   "wordOrder": {
+    "nsubjBefore": {
+     "share": 0.8406,
+     "n": 872
+    },
+    "objAfter": {
+     "share": 0.9604,
+     "n": 480
+    },
+    "caseBefore": {
+     "share": 0.9896,
+     "n": 961
+    },
+    "amodBefore": {
+     "share": 0.9968,
+     "n": 623
+    },
+    "detBefore": {
+     "share": 0.998,
+     "n": 500
+    }
+   }
+  },
+  "urd": {
+   "sentences": 552,
+   "tokens": 13888,
+   "meanSentLen": 25.159,
+   "FWC32": 0.3643,
+   "TTR": 0.2074,
+   "hapaxTypeShare": 0.5278,
+   "casedShare": 0.0011,
+   "propn": {
+    "n": 1506,
+    "density": 0.1084,
+    "precededBy": {
+     "ADP": 0.1169,
+     "DET": 0,
+     "ADJ": 0.0193,
+     "NOUN": 0.1726,
+     "PROPN": 0.4688,
+     "none": 0.0624,
+     "other": 0.16
+    },
+    "followedBy": {
+     "ADP": 0.34,
+     "PROPN": 0.4688,
+     "end": 0,
+     "other": 0.1912
+    },
+    "CHAIN": 0.7497,
+    "sentenceInitial": 0.0624,
+    "flatShare": 0.4163,
+    "hapaxTokenRate": 0.2065,
+    "hapaxTypeRate": 0.6218,
+    "meanChars": 4.312
+   },
+   "wordOrder": {
+    "nsubjBefore": {
+     "share": 0.9927,
+     "n": 687
+    },
+    "objAfter": {
+     "share": 0.235,
+     "n": 634
+    },
+    "caseBefore": {
+     "share": 0.0139,
+     "n": 2801
+    },
+    "amodBefore": {
+     "share": 0.994,
+     "n": 828
+    },
+    "detBefore": {
+     "share": 0.9967,
+     "n": 307
+    }
+   }
+  },
+  "tur": {
+   "sentences": 1090,
+   "tokens": 8564,
+   "meanSentLen": 7.857,
+   "FWC32": 0.1493,
+   "TTR": 0.5433,
+   "hapaxTypeShare": 0.7544,
+   "casedShare": 0.1947,
+   "propn": {
+    "n": 414,
+    "density": 0.0483,
+    "precededBy": {
+     "ADP": 0.0242,
+     "DET": 0.0048,
+     "ADJ": 0.0386,
+     "NOUN": 0.2367,
+     "PROPN": 0.2029,
+     "none": 0.2271,
+     "other": 0.2657
+    },
+    "followedBy": {
+     "ADP": 0.0411,
+     "PROPN": 0.2029,
+     "end": 0.0894,
+     "other": 0.6667
+    },
+    "CHAIN": 0.3333,
+    "sentenceInitial": 0.2271,
+    "flatShare": 0.1836,
+    "hapaxTokenRate": 0.4662,
+    "hapaxTypeRate": 0.7444,
+    "meanChars": 6.867
+   },
+   "wordOrder": {
+    "nsubjBefore": {
+     "share": 0.8505,
+     "n": 729
+    },
+    "objAfter": {
+     "share": 0.1006,
+     "n": 626
+    },
+    "caseBefore": {
+     "share": 0.0025,
+     "n": 404
+    },
+    "amodBefore": {
+     "share": 0.9849,
+     "n": 597
+    },
+    "detBefore": {
+     "share": 0.9938,
+     "n": 325
+    }
+   }
+  },
+  "ell": {
+   "sentences": 403,
+   "tokens": 9404,
+   "meanSentLen": 23.335,
+   "FWC32": 0.4057,
+   "TTR": 0.3419,
+   "hapaxTypeShare": 0.6896,
+   "casedShare": 0.1424,
+   "propn": {
+    "n": 370,
+    "density": 0.0393,
+    "precededBy": {
+     "ADP": 0.0081,
+     "DET": 0.6459,
+     "ADJ": 0.0865,
+     "NOUN": 0.1216,
+     "PROPN": 0.0676,
+     "none": 0.0027,
+     "other": 0.0676
+    },
+    "followedBy": {
+     "ADP": 0.0919,
+     "PROPN": 0.0676,
+     "end": 0.2081,
+     "other": 0.6324
+    },
+    "CHAIN": 0.1216,
+    "sentenceInitial": 0.0027,
+    "flatShare": 0.1108,
+    "hapaxTokenRate": 0.4216,
+    "hapaxTypeRate": 0.7067,
+    "meanChars": 7.592
+   },
+   "wordOrder": {
+    "nsubjBefore": {
+     "share": 0.7386,
+     "n": 593
+    },
+    "objAfter": {
+     "share": 0.8485,
+     "n": 330
+    },
+    "caseBefore": {
+     "share": 1,
+     "n": 936
+    },
+    "amodBefore": {
+     "share": 0.9636,
+     "n": 824
+    },
+    "detBefore": {
+     "share": 0.9879,
+     "n": 2143
+    }
+   }
+  },
+  "fin": {
+   "sentences": 1364,
+   "tokens": 15688,
+   "meanSentLen": 11.501,
+   "FWC32": 0.1611,
+   "TTR": 0.5122,
+   "hapaxTypeShare": 0.7686,
+   "casedShare": 0.149,
+   "propn": {
+    "n": 1061,
+    "density": 0.0676,
+    "precededBy": {
+     "ADP": 0.0226,
+     "DET": 0,
+     "ADJ": 0.0273,
+     "NOUN": 0.1923,
+     "PROPN": 0.2488,
+     "none": 0.1942,
+     "other": 0.3148
+    },
+    "followedBy": {
+     "ADP": 0.0254,
+     "PROPN": 0.2488,
+     "end": 0.0669,
+     "other": 0.6588
+    },
+    "CHAIN": 0.4072,
+    "sentenceInitial": 0.1942,
+    "flatShare": 0.1979,
+    "hapaxTokenRate": 0.4769,
+    "hapaxTypeRate": 0.7639,
+    "meanChars": 7.355
+   },
+   "wordOrder": {
+    "nsubjBefore": {
+     "share": 0.8395,
+     "n": 1489
+    },
+    "objAfter": {
+     "share": 0.6847,
+     "n": 1037
+    },
+    "caseBefore": {
+     "share": 0.1367,
+     "n": 278
+    },
+    "amodBefore": {
+     "share": 0.9947,
+     "n": 947
+    },
+    "detBefore": {
+     "share": 0.9858,
+     "n": 351
+    }
+   }
+  }
+ }
+}

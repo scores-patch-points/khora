@@ -1,0 +1,147 @@
+"""Compare the three scoring layers on the golden/background corpus.
+
+Evaluation design:
+  - Layer 1 (evidence keywords) and Layer 2 (shape surfaces): deterministic,
+    no training. Evaluated on all 37 documents. Layer 2 reuses the eoreader7
+    surfaces already computed in reports/eo_matrix.json.
+  - Layer 3 (embeddings): a genuine held-out test. Prototypes are fit ONLY on
+    the OTHER-CITIES goldens + background. The 11 NASHVILLE goldens (which
+    include the RS2026-2264 test case) are scored but were never prototypes —
+    so if embedding catches them, it is generalizing, not memorizing.
+
+Output: reports/layer_eval.json + a printed table.
+
+Usage:
+  python scripts/eval_layers.py [--out reports/layer_eval.json]
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+from pathlib import Path
+
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+
+from scorer import evidence_keywords, shape_surfaces, EmbeddingScorer, fuse
+
+GOLD_NASHVILLE = Path("goldens/nashville")
+GOLD_OTHER = Path("goldens/other-cities")
+BACKGROUND = Path("corpus/background")
+
+
+def read_texts(d: Path) -> list[tuple[str, str]]:
+    return [(p.name, p.read_text()) for p in d.glob("*.txt")]
+
+
+def summarize(rows: list[dict], key: str) -> dict:
+    tp = sum(1 for r in rows if r["gold"] == 1 and r[key] == 1)
+    fp = sum(1 for r in rows if r["gold"] == 0 and r[key] == 1)
+    fn = sum(1 for r in rows if r["gold"] == 1 and r[key] == 0)
+    tn = sum(1 for r in rows if r["gold"] == 0 and r[key] == 0)
+    prec = tp / (tp + fp) if tp + fp else float("nan")
+    rec = tp / (tp + fn) if tp + fn else float("nan")
+    acc = (tp + tn) / len(rows) if rows else float("nan")
+    return {"tp": tp, "fp": fp, "fn": fn, "tn": tn, "precision": round(prec, 3),
+            "recall": round(rec, 3), "accuracy": round(acc, 3)}
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out", default="reports/layer_eval.json")
+    ap.add_argument("--model", default="sentence-transformers/all-MiniLM-L6-v2")
+    ap.add_argument("--no-embed", action="store_true")
+    args = ap.parse_args()
+
+    nashville = read_texts(GOLD_NASHVILLE)
+    other = read_texts(GOLD_OTHER)
+    background = read_texts(BACKGROUND)
+
+    # eoreader7 surfaces already computed
+    matrix = {r["file"]: r for r in json.loads(Path("reports/eo_matrix.json").read_text())}
+
+    print(f"nashville goldens={len(nashville)} other-city goldens={len(other)} background={len(background)}")
+
+    rows: list[dict] = []
+
+    # ---- Layer 1: evidence keywords on raw text (all 37) ----------------
+    for fname, text in nashville + other + background:
+        is_gold = 1 if fname in {n[0] for n in nashville + other} else 0
+        l1 = evidence_keywords(text, title="")
+        rows.append({"file": fname, "gold": is_gold, "l1": 1 if l1["label"] == "surveillance" else 0,
+                     "l1_score": l1["score"]})
+
+    # ---- Layer 2: shape surfaces (all 37, from saved eoreader7 output) ---
+    for r in rows:
+        fname = r["file"]
+        m = matrix.get(fname)
+        if m:
+            l2 = shape_surfaces(m["surfaces"], n_entries=m["nGraphEntries"],
+                                relation_edges=m["relationEdges"])
+            r["l2"] = 1 if l2["label"] == "surveillance" else 0
+            r["l2_score"] = l2["score"]
+        else:
+            r["l2"] = None
+
+    # ---- Layer 3: embeddings, held-out (prototypes = other-city + bg) ----
+    if not args.no_embed:
+        es = EmbeddingScorer(args.model)
+        # prototypes: OTHER-CITY goldens (surveillance) + ALL background except
+        # the one being tested (leave-one-out) so no doc compares against itself.
+        surv_protos = [t for _, t in other]
+        bg_texts = [t for _, t in background]
+        test_items = nashville + background
+        by_name = {}
+        for fname, text in test_items:
+            is_bg = fname in {b[0] for b in background}
+            loo_bg = [t for n, t in background if n != fname]
+            es.fit(surv_protos, loo_bg if loo_bg else bg_texts)
+            by_name[fname] = es.score(text)
+        for r in rows:
+            if r["file"] in by_name:
+                s = by_name[r["file"]]
+                r["l3_margin"] = s["margin"]
+                r["l3_surv"] = s["surv_sim"]
+                r["l3"] = 1 if s["margin"] > 0.05 and s["surv_sim"] > 0.6 else 0
+            else:
+                r["l3"] = None
+
+    # ---- fusion on rows where l2 exists ---------------------------------
+    for r in rows:
+        if r.get("l2") is not None and r.get("l3") is not None:
+            fused = fuse(
+                {"label": "surveillance" if r["l1"] else "background", "score": r["l1_score"]},
+                {"label": "surveillance" if r["l2"] else "background", "score": r["l2_score"]},
+                {"margin": r.get("l3_margin", 0), "surv_sim": r.get("l3_surv", 0)},
+            )
+            r["fused"] = 1 if fused["label"] == "surveillance" else 0
+
+    print("\n== layer comparison ==")
+    for key in ["l1", "l2", "l3", "fused"]:
+        valid = [r for r in rows if r.get(key) is not None]
+        s = summarize(valid, key)
+        print(f"  {key:7} P={s['precision']} R={s['recall']} A={s['accuracy']} "
+              f"(TP{s['tp']}/FP{s['fp']}/FN{s['fn']}/TN{s['tn']})")
+
+    # show the test case specifically
+    for r in rows:
+        if "RS2026-2264" in r["file"]:
+            print("\nRS2026-2264 (test case):")
+            print(f"  l1 evidence-keywords: {r['l1_score']} -> {'SURV' if r['l1'] else 'bg'}")
+            print(f"  l2 shape-surfaces:    {r['l2_score']} -> {'SURV' if r['l2'] else 'bg'}")
+            print(f"  l3 embedding:         margin={r.get('l3_margin')} surv={r.get('l3_surv')} -> {'SURV' if r.get('l3') else 'bg'}")
+            if r.get("l3") is None:
+                print("  l3 embedding: not scored (held-out split did not include it)")
+
+    out = Path(args.out)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps({"rows": rows, "summary": {
+        key: summarize([r for r in rows if r.get(key) is not None], key)
+        for key in ["l1", "l2", "l3", "fused"]
+    }}, indent=2))
+    print(f"\nwrote {out}")
+
+
+if __name__ == "__main__":
+    main()

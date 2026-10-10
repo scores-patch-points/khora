@@ -1,0 +1,73 @@
+// free-bench-run.test.mjs — the runner end to end against a mock heimdall: discovery through /api/tags, sealed-gate flag on the wire,
+// streamed SSE, a 3-turn conversation that carries history, mask scoring, a dead model reported DOWN, the files written.
+import test from "node:test";
+import assert from "node:assert/strict";
+import http from "node:http";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import { spawn } from "node:child_process";
+import { fileURLToPath } from "node:url";
+
+const SCRIPT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "scripts", "free-bench.mjs");
+
+/** A mock heimdall. `good` answers mask edits correctly (echoes the code, adds the requested functions); `dead` is quota-limited; `ghost` answers empty. */
+function mockBridge(seen) {
+  return http.createServer((req, res) => {
+    let raw = ""; req.on("data", (c) => (raw += c));
+    req.on("end", () => {
+      const json = (code, o, h = {}) => { res.writeHead(code, { "content-type": "application/json", ...h }); res.end(JSON.stringify(o)); };
+      if (req.url === "/api/version") return json(200, { version: "0.0.0-heimdall-bridge" });
+      if (req.url === "/api/tags") return json(200, { models: ["good", "dead", "ghost"].map((n) => ({ name: `pollinations:${n}`, heimdall: { frontier: "pollinations", privacy: "sealed-external" } })) });
+      if (req.url !== "/v1/chat/completions") return json(404, { error: "no" });
+      const b = JSON.parse(raw);
+      seen.push({ model: b.model, privacy: b.heimdall_privacy, headers: req.headers, messages: b.messages });
+      if (b.model.endsWith("dead")) return json(429, { error: { message: "Daily token quota exceeded. Retry after 9999 seconds.", code: "quota_exceeded" } });
+      let text = "";
+      if (!b.model.endsWith("ghost")) {
+        const first = b.messages.find((m) => m.role === "user").content;
+        const code = (first.match(/```python\n([\s\S]*?)```/) || [, ""])[1];
+        const fns = b.messages.filter((m) => m.role === "user").map((m) => (m.content.match(/function named `(\w+)`/) || [])[1]).filter(Boolean);
+        text = "```python\n" + code + fns.map((f) => `\ndef ${f}():\n    return []\n`).join("") + "```";
+      }
+      res.writeHead(200, { "content-type": "text/event-stream" });
+      for (let i = 0; i < text.length; i += 40) res.write(`data: ${JSON.stringify({ choices: [{ delta: { content: text.slice(i, i + 40) } }] })}\n\n`);
+      res.end("data: [DONE]\n\n");
+    });
+  });
+}
+
+test("the runner: finds the heimdall, sends sealed turns, scores them, reports the dead, writes the record", async () => {
+  const seen = [];
+  const server = mockBridge(seen);
+  await new Promise((r) => server.listen(0, "127.0.0.1", r));
+  const url = `http://127.0.0.1:${server.address().port}`;
+  const out = fs.mkdtempSync(path.join(os.tmpdir(), "free-bench-"));
+  try {
+    const code = await new Promise((resolve) => spawn(process.execPath, [SCRIPT, "--bridges", url, "--no-local", "--n", "1", "--families", "mask", "--seed", "7", "--out", out, "--max-minutes", "2"], { stdio: "ignore" }).on("exit", resolve));
+    assert.equal(code, 0);
+    const run = JSON.parse(fs.readFileSync(path.join(out, "latest.json"), "utf8"));
+    const by = Object.fromEntries(run.results.map((r) => [r.model, r]));
+    // the live model: every placeholder survived, every requested edit is there, over three turns
+    const good = by["pollinations:good"];
+    assert.equal(good.probe.ok, true);
+    assert.equal(good.trials[0].turns.length, 3);
+    assert.ok(good.trials[0].turns.every((t) => t.status === "ok" && t.exact && t.placeholdersIntact && t.editDone), JSON.stringify(good.trials[0].turns.map((t) => [t.status, t.exact, t.lost, t.mangled])));
+    assert.equal(good.summary.chainsAllExact, 1);
+    assert.ok(good.summary.p50TotalMs >= 0 && good.summary.p50TtftMs >= 0);
+    // the quota-limited one is DOWN with the reason named; the silent one is reported, not treated as an answer
+    assert.equal(by["pollinations:dead"].summary.verdict.grade, "DOWN");
+    assert.equal(by["pollinations:dead"].probe.status, "quota");
+    assert.equal(by["pollinations:ghost"].summary.verdict.grade, "DOWN");
+    assert.equal(by["pollinations:ghost"].probe.status, "empty");
+    // everything went through the heimdall, under the sealed gate, with an audit id
+    assert.ok(seen.length > 0 && seen.every((s) => s.privacy === "sealed-external" && /^bench-7-/.test(s.headers["x-fold-audit"])));
+    // follow-ups carry history: turn 3's request includes the model's own turn-1 and turn-2 replies
+    const t3 = seen.filter((s) => s.model.endsWith("good")).find((s) => s.messages.length === 5);
+    assert.ok(t3, "the third turn was sent with the whole conversation");
+    // nothing but placeholders left (no real names, paths or emails)
+    assert.ok(!seen.some((s) => /@|\/Users\//.test(JSON.stringify(s.messages))));
+    for (const f of ["LATEST.md", "history.ndjson"]) assert.ok(fs.existsSync(path.join(out, f)), f);
+    assert.match(fs.readFileSync(path.join(out, "LATEST.md"), "utf8"), /Placeholder fidelity/);
+  } finally { server.close(); fs.rmSync(out, { recursive: true, force: true }); }
+});

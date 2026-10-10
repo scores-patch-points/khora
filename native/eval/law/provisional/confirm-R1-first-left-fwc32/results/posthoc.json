@@ -1,0 +1,326 @@
+{
+ "headerSha256": "d1cd7533cbde9e61a5cbd6b508727a573a29b3aa32bdeb06a17464fad56ebe1e",
+ "n": 47,
+ "status": "POST-HOC",
+ "rho": {
+  "fwc8": 0.725,
+  "fwc16": 0.753,
+  "fwc32": 0.73,
+  "fwc64": 0.681,
+  "fwc128": 0.63,
+  "meanSentLen": 0.619,
+  "ttr": -0.606,
+  "hapax": -0.58,
+  "log2tokens": 0.194,
+  "log2pairs": 0.237
+ },
+ "partial": {
+  "fwc32|meanSentLen": 0.524,
+  "meanSentLen|fwc32": 0.207,
+  "fwc32|ttr": 0.527,
+  "ttr|fwc32": -0.147,
+  "fwc32|hapax": 0.556,
+  "fwc32|log2pairs": 0.733,
+  "fwc16|meanSentLen": 0.558,
+  "fwc64|meanSentLen": 0.473
+ },
+ "corrAmongModerators": {
+  "fwc32~meanSentLen": 0.712,
+  "fwc32~ttr": -0.737,
+  "meanSentLen~ttr": -0.468
+ },
+ "zones": [
+  {
+   "zone": "0-0.2",
+   "n": 7,
+   "audible": 0,
+   "meanAuc": 0.521,
+   "meanShuf": 0.529,
+   "gap": -0.008,
+   "meanS2": 0.582,
+   "s2Above50": 7
+  },
+  {
+   "zone": "0.2-0.24",
+   "n": 8,
+   "audible": 1,
+   "meanAuc": 0.556,
+   "meanShuf": 0.505,
+   "gap": 0.051,
+   "meanS2": 0.561,
+   "s2Above50": 7
+  },
+  {
+   "zone": "0.24-0.28",
+   "n": 7,
+   "audible": 2,
+   "meanAuc": 0.58,
+   "meanShuf": 0.502,
+   "gap": 0.079,
+   "meanS2": 0.559,
+   "s2Above50": 7
+  },
+  {
+   "zone": "0.28-+",
+   "n": 25,
+   "audible": 21,
+   "meanAuc": 0.647,
+   "meanShuf": 0.517,
+   "gap": 0.131,
+   "meanS2": 0.612,
+   "s2Above50": 24
+  }
+ ],
+ "cuts": [
+  {
+   "t": 0.2,
+   "nAbove": 40,
+   "audibleAbove": 0.6,
+   "nBelow": 7,
+   "audibleBelow": 0
+  },
+  {
+   "t": 0.21,
+   "nAbove": 38,
+   "audibleAbove": 0.632,
+   "nBelow": 9,
+   "audibleBelow": 0
+  },
+  {
+   "t": 0.22,
+   "nAbove": 35,
+   "audibleAbove": 0.657,
+   "nBelow": 12,
+   "audibleBelow": 0.083
+  },
+  {
+   "t": 0.23,
+   "nAbove": 34,
+   "audibleAbove": 0.676,
+   "nBelow": 13,
+   "audibleBelow": 0.077
+  },
+  {
+   "t": 0.24,
+   "nAbove": 32,
+   "audibleAbove": 0.719,
+   "nBelow": 15,
+   "audibleBelow": 0.067
+  },
+  {
+   "t": 0.25,
+   "nAbove": 30,
+   "audibleAbove": 0.767,
+   "nBelow": 17,
+   "audibleBelow": 0.059
+  },
+  {
+   "t": 0.26,
+   "nAbove": 29,
+   "audibleAbove": 0.793,
+   "nBelow": 18,
+   "audibleBelow": 0.056
+  },
+  {
+   "t": 0.27,
+   "nAbove": 28,
+   "audibleAbove": 0.786,
+   "nBelow": 19,
+   "audibleBelow": 0.105
+  },
+  {
+   "t": 0.28,
+   "nAbove": 25,
+   "audibleAbove": 0.84,
+   "nBelow": 22,
+   "audibleBelow": 0.136
+  },
+  {
+   "t": 0.29,
+   "nAbove": 24,
+   "audibleAbove": 0.833,
+   "nBelow": 23,
+   "audibleBelow": 0.174
+  },
+  {
+   "t": 0.3,
+   "nAbove": 24,
+   "audibleAbove": 0.833,
+   "nBelow": 23,
+   "audibleBelow": 0.174
+  },
+  {
+   "t": 0.31,
+   "nAbove": 24,
+   "audibleAbove": 0.833,
+   "nBelow": 23,
+   "audibleBelow": 0.174
+  },
+  {
+   "t": 0.32,
+   "nAbove": 23,
+   "audibleAbove": 0.826,
+   "nBelow": 24,
+   "audibleBelow": 0.208
+  },
+  {
+   "t": 0.33,
+   "nAbove": 23,
+   "audibleAbove": 0.826,
+   "nBelow": 24,
+   "audibleBelow": 0.208
+  },
+  {
+   "t": 0.34,
+   "nAbove": 23,
+   "audibleAbove": 0.826,
+   "nBelow": 24,
+   "audibleBelow": 0.208
+  },
+  {
+   "t": 0.35,
+   "nAbove": 18,
+   "audibleAbove": 0.889,
+   "nBelow": 29,
+   "audibleBelow": 0.276
+  },
+  {
+   "t": 0.36,
+   "nAbove": 15,
+   "audibleAbove": 0.867,
+   "nBelow": 32,
+   "audibleBelow": 0.344
+  }
+ ],
+ "looCut": {
+  "accuracy": 0.787,
+  "chosenCuts": [
+   0.25,
+   0.26,
+   0.28
+  ],
+  "balancedAccuracyAt": {
+   "0.2378": 0.826,
+   "0.26": 0.869,
+   "0.28": 0.852,
+   "0.3": 0.83
+  }
+ },
+ "clades": [
+  {
+   "clade": "Romance",
+   "n": 6,
+   "meanFwc32": 0.426,
+   "meanAuc": 0.666,
+   "audible": 6,
+   "langs": "cat:0.6917 glg:0.6117 ron:0.6723 spa:0.6902 fra:0.7014 por:0.6258"
+  },
+  {
+   "clade": "Germanic",
+   "n": 7,
+   "meanFwc32": 0.379,
+   "meanAuc": 0.657,
+   "audible": 7,
+   "langs": "afr:0.6993 dan:0.6692 nob:0.7123 eng:0.6393 deu:0.6345 nld:0.6297 swe:0.617"
+  },
+  {
+   "clade": "Slavic",
+   "n": 9,
+   "meanFwc32": 0.251,
+   "meanAuc": 0.6,
+   "audible": 4,
+   "langs": "bul:0.6726 ces:0.5905 hrv:0.6374 slk:0.5523 slv:0.5653 srp:0.6263 rus:0.5574 pol:0.5825 ukr:0.6148"
+  },
+  {
+   "clade": "Celtic",
+   "n": 2,
+   "meanFwc32": 0.378,
+   "meanAuc": 0.632,
+   "audible": 2,
+   "langs": "cym:0.6627 gle:0.6018"
+  },
+  {
+   "clade": "Baltic",
+   "n": 2,
+   "meanFwc32": 0.191,
+   "meanAuc": 0.574,
+   "audible": 0,
+   "langs": "lav:0.5826 lit:0.5645"
+  },
+  {
+   "clade": "IndoIranian",
+   "n": 3,
+   "meanFwc32": 0.351,
+   "meanAuc": 0.666,
+   "audible": 2,
+   "langs": "fas:0.594 hin:0.6849 urd:0.7194"
+  },
+  {
+   "clade": "Semitic",
+   "n": 2,
+   "meanFwc32": 0.342,
+   "meanAuc": 0.678,
+   "audible": 2,
+   "langs": "mlt:0.676 heb:0.6799"
+  },
+  {
+   "clade": "Sinitic",
+   "n": 2,
+   "meanFwc32": 0.286,
+   "meanAuc": 0.546,
+   "audible": 0,
+   "langs": "lzh:0.5168 cmn:0.5759"
+  },
+  {
+   "clade": "JapKor",
+   "n": 2,
+   "meanFwc32": 0.247,
+   "meanAuc": 0.517,
+   "audible": 0,
+   "langs": "kor:0.4444 jpn:0.5887"
+  },
+  {
+   "clade": "Uralic",
+   "n": 3,
+   "meanFwc32": 0.197,
+   "meanAuc": 0.522,
+   "audible": 0,
+   "langs": "est:0.5261 hun:0.5415 fin:0.4974"
+  },
+  {
+   "clade": "Turkic",
+   "n": 1,
+   "meanFwc32": 0.175,
+   "meanAuc": 0.463,
+   "audible": 0,
+   "langs": "tur:0.4633"
+  },
+  {
+   "clade": "Dravidian",
+   "n": 1,
+   "meanFwc32": 0.217,
+   "meanAuc": 0.446,
+   "audible": 0,
+   "langs": "tam:0.4461"
+  },
+  {
+   "clade": "Isolates_others",
+   "n": 7,
+   "meanFwc32": 0.272,
+   "meanAuc": 0.569,
+   "audible": 1,
+   "langs": "eus:0.549 hye:0.5699 kat:0.568 wol:0.608 vie:0.5384 ind:0.5629 ell:0.5845"
+  }
+ ],
+ "cleanZoneMisses": [
+  "lzh fwc 0.3414 auc 0.5168 (se 0.0309) pairs 175 shuf 0.5355",
+  "fas fwc 0.3402 auc 0.594 (se 0.0191) pairs 437 shuf 0.4904",
+  "jpn fwc 0.426 auc 0.5887 (se 0.02) pairs 400 shuf 0.5197",
+  "ell fwc 0.3954 auc 0.5845 (se 0.0256) pairs 246 shuf 0.5299"
+ ],
+ "belowCutHits": [
+  "hrv fwc 0.2616 auc 0.6374 (se 0.0161) pairs 585",
+  "srp fwc 0.2791 auc 0.6263 (se 0.0167) pairs 554",
+  "ukr fwc 0.2138 auc 0.6148 (se 0.0217) pairs 333"
+ ]
+}

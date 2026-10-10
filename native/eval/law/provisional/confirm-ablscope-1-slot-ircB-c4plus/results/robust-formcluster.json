@@ -1,0 +1,44 @@
+{
+ "note": "POST-HOC",
+ "E_CORE": {
+  "arms": [
+   "E_CORE"
+  ],
+  "pairs": 75,
+  "positiveForms": 49,
+  "auc": 0.8466666666666667,
+  "formClusterCi": [
+   0.7662337662337663,
+   0.9375
+  ],
+  "median": 0.8518518518518519
+ },
+ "E_REUSE": {
+  "arms": [
+   "E_REUSE"
+  ],
+  "pairs": 407,
+  "positiveForms": 228,
+  "auc": 0.816953316953317,
+  "formClusterCi": [
+   0.7761363636363636,
+   0.8577023498694517
+  ],
+  "median": 0.8177215189873418
+ },
+ "X": {
+  "arms": [
+   "X_DE",
+   "X_ES",
+   "X_IT"
+  ],
+  "pairs": 136,
+  "positiveForms": 79,
+  "auc": 0.7720588235294118,
+  "formClusterCi": [
+   0.706766917293233,
+   0.8435114503816794
+  ],
+  "median": 0.772
+ }
+}

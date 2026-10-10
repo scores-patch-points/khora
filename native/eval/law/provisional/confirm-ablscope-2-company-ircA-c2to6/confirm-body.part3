@@ -1,0 +1,64 @@
+
+// ── the arms ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+function analyseEn(rows, ctl) {
+  const A = rows.filter((r) => r.grp === "A"), Bg = rows.filter((r) => r.grp === "B"), prim = A.filter((r) => PRIM.includes(r.stratum)), dec = A.filter((r) => DEC.includes(r.stratum));
+  const core = evalCore(prim, NEG, { seed: 101 }), res = { core };
+  res.days = dayStats(prim); res.leaveOneDayOut = leaveOneDayOut(prim, NEG);
+  res.perChannel = perGroup(prim, (x) => x.doc.split("/")[0], NEG); res.perYear = perGroup(prim, (x) => x.doc.split("/")[1].slice(0, 4), NEG);
+  res.shamCompany = { ALL: round(strat(prim, (m) => -m.shufAll)), OTHERS: round(strat(prim, (m) => -m.shufOthers)) };
+  res.S1_formCluster = boot(prim.map((x) => ({ ...x, block: `${x.doc}|${x.p.w}` })), (ps) => strat(ps, NEG), { B, seed: 102 });
+  res.reduction = reduction(prim); res.K0 = k0();
+  const all = [...prim, ...dec], isPrim = (x) => PRIM.includes(x.stratum);
+  res.decay = { pairs: dec.length, perStratum: perStratum(dec, NEG), controls: dec.length >= 10 ? controlAucs(dec) : null };
+  if (dec.length >= 60) { const c = evalCore(dec, NEG, { seed: 103, probe: false }); res.decay.auc = c.auc; res.decay.ci = c.ci;
+    res.decay.diffPrimMinusDecay = boot(all, (ps) => strat(ps.filter(isPrim), NEG) - strat(ps.filter((x) => !isPrim(x)), NEG), { B, seed: 104 }); }
+  res.boundary = { score: "+c.dSelf on non-initial tokens", ...evalCore(Bg, (m) => m.dSelf, { seed: 201 }) };
+  res.boundary.holds = res.boundary.controlsInBand && res.boundary.auc >= 0.62 && res.boundary.ci[0] > 0.55;
+  const T = {}, st = core.perStratum, ev = PRIM.map((s) => st[s]).filter((x) => x.n >= 30), cal = core.caliper;
+  T.T1 = core.auc >= 0.65; T.T2 = core.ci[0] > 0.58; T.T3 = core.auc > core.permQ95; T.T4 = core.auc > 0.5; T.T5 = core.controlsInBand; T.T6 = core.probeAuc <= 0.58;
+  T.T7 = ev.length > 0 && ev.every((x) => x.auc >= 0.58); T.T8 = res.days.daysWithPairs >= 8 && (res.days.share == null || res.days.share >= 0.75);
+  T.T9 = cal.pairs < 40 ? null : cal.auc >= 0.58 && cal.auc >= core.auc - 0.1 && cal.controlsInBand;
+  T.T10 = res.K0.pass && ctl.K1_zero === ctl.K1_n && ctl.K6_same === ctl.K6_n; T.T11 = res.shamCompany.ALL >= 0.44 && res.shamCompany.ALL <= 0.56;
+  T.T12 = res.decay.auc == null ? null : res.decay.auc <= core.auc - 0.05 && res.decay.diffPrimMinusDecay.lo > 0;
+  const failed = Object.keys(T).filter((k) => k !== "T12" && T[k] === false);
+  res.tests = T; res.failedGating = failed;
+  res.autoVerdict = core.auc < 0.58 || core.ci[0] <= 0.5 || !T.T4 ? "NOT_CONFIRMED" : !failed.length && T.T12 !== false ? "CONFIRMED" : "PARTIAL(inspect)";
+  return res;
+}
+function analyseGeneric(rows, arm) {
+  const prim = rows.filter((r) => r.grp === "A" && PRIM.includes(r.stratum)), dec = rows.filter((r) => r.grp === "A" && DEC.includes(r.stratum)), core = evalCore(prim, NEG, { seed: 301 }), res = { core };
+  res.shamCompany = { ALL: round(strat(prim, (m) => -m.shufAll)), OTHERS: round(strat(prim, (m) => -m.shufOthers)) };
+  res.perDoc = perGroup(prim, (x) => x.doc, NEG, 10); if (arm === "other") res.perChannel = perGroup(prim, (x) => x.doc.split("/")[0], NEG, 10);
+  res.reduction = prim.length >= 20 ? reduction(prim) : null;
+  if (dec.length >= 20) { const c = evalCore(dec, NEG, { seed: 303, probe: false }); res.decay = { pairs: dec.length, auc: c.auc, ci: c.ci, controls: c.controls, controlsInBand: c.controlsInBand, perStratum: c.perStratum }; }
+  const hold = (c) => c.controlsInBand && c.auc >= 0.62 && c.ci[0] > 0.55 && c.permQ95 != null && c.auc > c.permQ95, cal = core.caliper;
+  res.holdsPrimary = prim.length >= 60 && hold(core); res.holdsCaliper = cal.pairs >= 40 && cal.controlsInBand && cal.auc >= 0.62 && cal.ci[0] > 0.55;
+  res.verdict = res.holdsPrimary ? "HOLDS" : core.controlsInBand ? (arm === "books" && core.auc <= 0.55 ? "FAILS(<=0.55)" : arm === "books" && core.auc < 0.62 ? "INCONCLUSIVE" : "DOES NOT HOLD")
+    : cal.pairs >= 20 && cal.controlsInBand ? (res.holdsCaliper ? "HOLDS(caliper)" : "DOES NOT HOLD(caliper)") : "VOID";
+  return res;
+}
+function analyseUd(rows) {
+  const prim = rows.filter((r) => r.grp === "A" && PRIM.includes(r.stratum)), core = evalCore(prim, NEG, { seed: 401 }), res = { core }, by = groupBy(prim, (x) => x.doc);
+  res.shamCompany = { ALL: round(strat(prim, (m) => -m.shufAll)), OTHERS: round(strat(prim, (m) => -m.shufOthers)) };
+  const langs = [...by].filter(([, ps]) => ps.length >= 25).map(([d]) => d).sort(), obs = Object.fromEntries(langs.map((d) => [d, strat(by.get(d), NEG)])), rnd = rngFor(seedFor("ablscope2-ud-fw"));
+  const mx = [], mn = [];
+  for (let b = 0; b < 500; b++) { const v = langs.map((d) => strat(by.get(d).map((x) => (rnd() < 0.5 ? { ...x, p: x.n, n: x.p } : x)), NEG)).filter((x) => x != null); mx.push(Math.max(...v)); mn.push(Math.min(...v)); }
+  res.familyWise = { languagesEvaluated: langs.length, maxNullQ95: round(quantile(mx, 0.95)), minNullQ05: round(quantile(mn, 0.05)) };
+  res.perLanguage = Object.fromEntries([...by].sort().map(([d, ps]) => [d.replace(".test", ""), { pairs: ps.length, auc: ps.length >= 25 ? round(obs[d]) : null, exceeds: ps.length >= 25 ? obs[d] > res.familyWise.maxNullQ95 : null, reversed: ps.length >= 25 ? obs[d] < res.familyWise.minNullQ05 : null }]));
+  res.exceptional = Object.entries(res.perLanguage).filter(([, v]) => v.exceeds).map(([k]) => k); res.reversed = Object.entries(res.perLanguage).filter(([, v]) => v.reversed).map(([k]) => k);
+  res.reduction = prim.length >= 20 ? reduction(prim) : null;
+  res.pooledHolds = core.controlsInBand && core.auc >= 0.62 && core.ci[0] > 0.55;
+  return res;
+}
+
+async function main() {
+  if (STAGE !== "analyse") await compute();
+  if (STAGE === "compute") return;
+  const t0 = Date.now(), rows = loadRows(), ctl = JSON.parse(fs.readFileSync(CTL, "utf8"));
+  const res = { arm: ARM, headerSha256: HEADER_SHA, daysSha256: sha(DAYS_FILE), rowsSha256: sha(ROWS), B, pairsTotal: rows.length, instrument: { K1_sham_zero: [ctl.K1_zero, ctl.K1_n], K6_determinism: [ctl.K6_same, ctl.K6_n] }, computeSeconds: ctl.seconds, docs: ctl.docs };
+  res.result = ARM === "en" ? analyseEn(rows, ctl) : ARM === "ud" ? analyseUd(rows) : analyseGeneric(rows, ARM);
+  res.analyseSeconds = round((Date.now() - t0) / 1000, 1);
+  fs.writeFileSync(OUT, JSON.stringify(res, null, 1));
+  const c = res.result.core ?? {}; console.log(JSON.stringify({ file: OUT, arm: ARM, pairs: rows.length, auc: c.auc, ci: c.ci, verdict: res.result.autoVerdict ?? res.result.verdict, headerSha256: HEADER_SHA }));
+}
+await main();

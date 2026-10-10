@@ -1,0 +1,499 @@
+{
+ "present": {
+  "label": "atlas PRESENT pockets",
+  "nPockets": 214,
+  "kinds": {
+   "bag": {
+    "nHalves": 428,
+    "pearson": -0.01593475430139695,
+    "spearman": -0.08117009388650265,
+    "reproductionR2": -0.006111233979895214,
+    "signAgreeBig": 0.4682080924855491,
+    "nBig": 346,
+    "medianAbsErr": 0.01878161450913536,
+    "medianAbsReal": 0.01870038265756272,
+    "twinPresentPockets": 0,
+    "twinPresentSameSignAsReal": 0,
+    "twinPresentOppositeSign": 0
+   },
+   "pos": {
+    "nHalves": 428,
+    "pearson": -0.0656566147769109,
+    "spearman": 0.07779351030461801,
+    "reproductionR2": -0.11318615872181126,
+    "signAgreeBig": 0.5346820809248555,
+    "nBig": 346,
+    "medianAbsErr": 0.018184573143404947,
+    "medianAbsReal": 0.01870038265756272,
+    "twinPresentPockets": 39,
+    "twinPresentSameSignAsReal": 17,
+    "twinPresentOppositeSign": 22
+   },
+   "edge": {
+    "nHalves": 428,
+    "pearson": -0.05882096612783115,
+    "spearman": 0.13032302460830114,
+    "reproductionR2": -0.10313730496929141,
+    "signAgreeBig": 0.546242774566474,
+    "nBig": 346,
+    "medianAbsErr": 0.018296900321631573,
+    "medianAbsReal": 0.01870038265756272,
+    "twinPresentPockets": 35,
+    "twinPresentSameSignAsReal": 14,
+    "twinPresentOppositeSign": 21
+   },
+   "mk1": {
+    "nHalves": 428,
+    "pearson": 0.39993943905626966,
+    "spearman": 0.4619207971437173,
+    "reproductionR2": 0.15941237411179554,
+    "signAgreeBig": 0.7861271676300579,
+    "nBig": 346,
+    "medianAbsErr": 0.014394429419627673,
+    "medianAbsReal": 0.01870038265756272,
+    "twinPresentPockets": 119,
+    "twinPresentSameSignAsReal": 94,
+    "twinPresentOppositeSign": 25
+   },
+   "mk1sym": {
+    "nHalves": 428,
+    "pearson": 0.12352967255741963,
+    "spearman": 0.1774294343621753,
+    "reproductionR2": 0.009220455605799205,
+    "signAgreeBig": 0.615606936416185,
+    "nBig": 346,
+    "medianAbsErr": 0.018134356727477333,
+    "medianAbsReal": 0.01870038265756272,
+    "twinPresentPockets": 11,
+    "twinPresentSameSignAsReal": 5,
+    "twinPresentOppositeSign": 6
+   }
+  }
+ },
+ "all": {
+  "label": "all real pockets with a defined cell",
+  "nPockets": 384,
+  "kinds": {
+   "bag": {
+    "nHalves": 767,
+    "pearson": -0.020124338363741844,
+    "spearman": -0.07754472917609893,
+    "reproductionR2": -0.006681265867224839,
+    "signAgreeBig": 0.4598698481561822,
+    "nBig": 461,
+    "medianAbsErr": 0.012888862200924665,
+    "medianAbsReal": 0.012708238212678797,
+    "twinPresentPockets": 0,
+    "twinPresentSameSignAsReal": 0,
+    "twinPresentOppositeSign": 0
+   },
+   "pos": {
+    "nHalves": 768,
+    "pearson": -0.041815439466181735,
+    "spearman": 0.06294830716164002,
+    "reproductionR2": -0.12992426339880625,
+    "signAgreeBig": 0.5432900432900433,
+    "nBig": 462,
+    "medianAbsErr": 0.012901683997974967,
+    "medianAbsReal": 0.01272832102384527,
+    "twinPresentPockets": 62,
+    "twinPresentSameSignAsReal": 35,
+    "twinPresentOppositeSign": 27
+   },
+   "edge": {
+    "nHalves": 768,
+    "pearson": -0.04455347744374604,
+    "spearman": 0.09211129334563081,
+    "reproductionR2": -0.11515976005898598,
+    "signAgreeBig": 0.551948051948052,
+    "nBig": 462,
+    "medianAbsErr": 0.013177125639245947,
+    "medianAbsReal": 0.01272832102384527,
+    "twinPresentPockets": 56,
+    "twinPresentSameSignAsReal": 32,
+    "twinPresentOppositeSign": 24
+   },
+   "mk1": {
+    "nHalves": 768,
+    "pearson": 0.33342735855850303,
+    "spearman": 0.36603404220418667,
+    "reproductionR2": 0.10043451654122881,
+    "signAgreeBig": 0.7337662337662337,
+    "nBig": 462,
+    "medianAbsErr": 0.011941419292441356,
+    "medianAbsReal": 0.01272832102384527,
+    "twinPresentPockets": 183,
+    "twinPresentSameSignAsReal": 109,
+    "twinPresentOppositeSign": 74
+   },
+   "mk1sym": {
+    "nHalves": 768,
+    "pearson": 0.13669255871809194,
+    "spearman": 0.10761967997178815,
+    "reproductionR2": 0.014204285356174684,
+    "signAgreeBig": 0.5974025974025974,
+    "nBig": 462,
+    "medianAbsErr": 0.01246260297297977,
+    "medianAbsReal": 0.01272832102384527,
+    "twinPresentPockets": 15,
+    "twinPresentSameSignAsReal": 7,
+    "twinPresentOppositeSign": 8
+   }
+  }
+ },
+ "presentPos": {
+  "label": "atlas P+ pockets",
+  "nPockets": 116,
+  "kinds": {
+   "bag": {
+    "nHalves": 232,
+    "pearson": -0.07263167207566992,
+    "spearman": -0.07919925272300586,
+    "reproductionR2": -1.2645213022028172,
+    "signAgreeBig": 0.48148148148148145,
+    "nBig": 189,
+    "medianAbsErr": 0.018344599430587367,
+    "medianAbsReal": 0.018277016073787886,
+    "twinPresentPockets": 0,
+    "twinPresentSameSignAsReal": 0,
+    "twinPresentOppositeSign": 0
+   },
+   "pos": {
+    "nHalves": 232,
+    "pearson": -0.29931797422455414,
+    "spearman": -0.20900499530068867,
+    "reproductionR2": -1.9246567751550794,
+    "signAgreeBig": 0.37566137566137564,
+    "nBig": 189,
+    "medianAbsErr": 0.018587171434193136,
+    "medianAbsReal": 0.018277016073787886,
+    "twinPresentPockets": 24,
+    "twinPresentSameSignAsReal": 4,
+    "twinPresentOppositeSign": 20
+   },
+   "edge": {
+    "nHalves": 232,
+    "pearson": -0.20688694352386316,
+    "spearman": -0.1521135368996846,
+    "reproductionR2": -1.8373257389713418,
+    "signAgreeBig": 0.32275132275132273,
+    "nBig": 189,
+    "medianAbsErr": 0.018804465347833504,
+    "medianAbsReal": 0.018277016073787886,
+    "twinPresentPockets": 22,
+    "twinPresentSameSignAsReal": 3,
+    "twinPresentOppositeSign": 19
+   },
+   "mk1": {
+    "nHalves": 232,
+    "pearson": -0.06311740219518751,
+    "spearman": -0.09662322286267824,
+    "reproductionR2": -0.8891410252528877,
+    "signAgreeBig": 0.8042328042328042,
+    "nBig": 189,
+    "medianAbsErr": 0.00968656281322634,
+    "medianAbsReal": 0.018277016073787886,
+    "twinPresentPockets": 76,
+    "twinPresentSameSignAsReal": 71,
+    "twinPresentOppositeSign": 5
+   },
+   "mk1sym": {
+    "nHalves": 232,
+    "pearson": 0.2230592271627326,
+    "spearman": 0.001766326022652795,
+    "reproductionR2": -1.2285814650092957,
+    "signAgreeBig": 0.5343915343915344,
+    "nBig": 189,
+    "medianAbsErr": 0.017946448944532248,
+    "medianAbsReal": 0.018277016073787886,
+    "twinPresentPockets": 8,
+    "twinPresentSameSignAsReal": 4,
+    "twinPresentOppositeSign": 4
+   }
+  }
+ },
+ "presentNeg": {
+  "label": "atlas P- pockets",
+  "nPockets": 98,
+  "kinds": {
+   "bag": {
+    "nHalves": 196,
+    "pearson": 0.11214249347868933,
+    "spearman": 0.01967024998207014,
+    "reproductionR2": -1.312982376127409,
+    "signAgreeBig": 0.45222929936305734,
+    "nBig": 157,
+    "medianAbsErr": 0.019481142378034135,
+    "medianAbsReal": 0.019263531949837417,
+    "twinPresentPockets": 0,
+    "twinPresentSameSignAsReal": 0,
+    "twinPresentOppositeSign": 0
+   },
+   "pos": {
+    "nHalves": 196,
+    "pearson": 0.16997955452784463,
+    "spearman": 0.34709177696849924,
+    "reproductionR2": -1.0402826372030818,
+    "signAgreeBig": 0.7261146496815286,
+    "nBig": 157,
+    "medianAbsErr": 0.017800375631914167,
+    "medianAbsReal": 0.019263531949837417,
+    "twinPresentPockets": 15,
+    "twinPresentSameSignAsReal": 13,
+    "twinPresentOppositeSign": 2
+   },
+   "edge": {
+    "nHalves": 196,
+    "pearson": 0.11302421080576733,
+    "spearman": 0.3656910167425033,
+    "reproductionR2": -1.0972913997117213,
+    "signAgreeBig": 0.8152866242038217,
+    "nBig": 157,
+    "medianAbsErr": 0.0174566047284584,
+    "medianAbsReal": 0.019263531949837417,
+    "twinPresentPockets": 13,
+    "twinPresentSameSignAsReal": 11,
+    "twinPresentOppositeSign": 2
+   },
+   "mk1": {
+    "nHalves": 196,
+    "pearson": 0.33806526200545917,
+    "spearman": 0.5118281283618484,
+    "reproductionR2": -0.9359522068771513,
+    "signAgreeBig": 0.7643312101910829,
+    "nBig": 157,
+    "medianAbsErr": 0.016970147840304976,
+    "medianAbsReal": 0.019263531949837417,
+    "twinPresentPockets": 43,
+    "twinPresentSameSignAsReal": 23,
+    "twinPresentOppositeSign": 20
+   },
+   "mk1sym": {
+    "nHalves": 196,
+    "pearson": -0.019979277214618462,
+    "spearman": 0.14529082230315007,
+    "reproductionR2": -1.2795082932867556,
+    "signAgreeBig": 0.7133757961783439,
+    "nBig": 157,
+    "medianAbsErr": 0.0182625338456782,
+    "medianAbsReal": 0.019263531949837417,
+    "twinPresentPockets": 3,
+    "twinPresentSameSignAsReal": 1,
+    "twinPresentOppositeSign": 2
+   }
+  }
+ },
+ "present_en": {
+  "label": "PRESENT, class en",
+  "nPockets": 78,
+  "kinds": {
+   "bag": {
+    "nHalves": 156,
+    "pearson": -0.06585054776448006,
+    "spearman": -0.06716189091368874,
+    "reproductionR2": -0.510229444708487,
+    "signAgreeBig": 0.5051546391752577,
+    "nBig": 97,
+    "medianAbsErr": 0.012180225017149845,
+    "medianAbsReal": 0.012168906169600553,
+    "twinPresentPockets": 0,
+    "twinPresentSameSignAsReal": 0,
+    "twinPresentOppositeSign": 0
+   },
+   "pos": {
+    "nHalves": 156,
+    "pearson": -0.04765036493890149,
+    "spearman": -0.14337690253038518,
+    "reproductionR2": -0.5317457910060999,
+    "signAgreeBig": 0.44329896907216493,
+    "nBig": 97,
+    "medianAbsErr": 0.012702698554295896,
+    "medianAbsReal": 0.012168906169600553,
+    "twinPresentPockets": 3,
+    "twinPresentSameSignAsReal": 0,
+    "twinPresentOppositeSign": 3
+   },
+   "edge": {
+    "nHalves": 156,
+    "pearson": -0.1578432700060896,
+    "spearman": -0.19051698250383273,
+    "reproductionR2": -0.5899053293809349,
+    "signAgreeBig": 0.30927835051546393,
+    "nBig": 97,
+    "medianAbsErr": 0.012835594581750794,
+    "medianAbsReal": 0.012168906169600553,
+    "twinPresentPockets": 3,
+    "twinPresentSameSignAsReal": 0,
+    "twinPresentOppositeSign": 3
+   },
+   "mk1": {
+    "nHalves": 156,
+    "pearson": 0.1604455872808503,
+    "spearman": 0.12192315594822273,
+    "reproductionR2": -0.021814157243331245,
+    "signAgreeBig": 0.865979381443299,
+    "nBig": 97,
+    "medianAbsErr": 0.007886054277719774,
+    "medianAbsReal": 0.012168906169600553,
+    "twinPresentPockets": 67,
+    "twinPresentSameSignAsReal": 52,
+    "twinPresentOppositeSign": 15
+   },
+   "mk1sym": {
+    "nHalves": 156,
+    "pearson": 0.23668986557692692,
+    "spearman": 0.2538161242907493,
+    "reproductionR2": -0.44732311179859896,
+    "signAgreeBig": 0.6494845360824743,
+    "nBig": 97,
+    "medianAbsErr": 0.012045001260244477,
+    "medianAbsReal": 0.012168906169600553,
+    "twinPresentPockets": 1,
+    "twinPresentSameSignAsReal": 1,
+    "twinPresentOppositeSign": 0
+   }
+  }
+ },
+ "present_other": {
+  "label": "PRESENT, class other",
+  "nPockets": 93,
+  "kinds": {
+   "bag": {
+    "nHalves": 186,
+    "pearson": -0.06287755846112947,
+    "spearman": -0.1669073938523654,
+    "reproductionR2": -0.14574838157589975,
+    "signAgreeBig": 0.4152046783625731,
+    "nBig": 171,
+    "medianAbsErr": 0.02450381686022297,
+    "medianAbsReal": 0.02499834191451919,
+    "twinPresentPockets": 0,
+    "twinPresentSameSignAsReal": 0,
+    "twinPresentOppositeSign": 0
+   },
+   "pos": {
+    "nHalves": 186,
+    "pearson": 0.2886358306406124,
+    "spearman": 0.3142380261924854,
+    "reproductionR2": -0.005761076417664546,
+    "signAgreeBig": 0.6666666666666666,
+    "nBig": 171,
+    "medianAbsErr": 0.021924202523023642,
+    "medianAbsReal": 0.02499834191451919,
+    "twinPresentPockets": 11,
+    "twinPresentSameSignAsReal": 10,
+    "twinPresentOppositeSign": 1
+   },
+   "edge": {
+    "nHalves": 186,
+    "pearson": 0.3080723293336192,
+    "spearman": 0.4299344022304174,
+    "reproductionR2": -0.014410555503306277,
+    "signAgreeBig": 0.7777777777777778,
+    "nBig": 171,
+    "medianAbsErr": 0.022619277838111573,
+    "medianAbsReal": 0.02499834191451919,
+    "twinPresentPockets": 8,
+    "twinPresentSameSignAsReal": 6,
+    "twinPresentOppositeSign": 2
+   },
+   "mk1": {
+    "nHalves": 186,
+    "pearson": 0.5413395954275138,
+    "spearman": 0.604496267873877,
+    "reproductionR2": 0.1781393748065162,
+    "signAgreeBig": 0.8245614035087719,
+    "nBig": 171,
+    "medianAbsErr": 0.01692447618337817,
+    "medianAbsReal": 0.02499834191451919,
+    "twinPresentPockets": 33,
+    "twinPresentSameSignAsReal": 29,
+    "twinPresentOppositeSign": 4
+   },
+   "mk1sym": {
+    "nHalves": 186,
+    "pearson": 0.16520121478639252,
+    "spearman": 0.16857274732037542,
+    "reproductionR2": -0.093751555235154,
+    "signAgreeBig": 0.6549707602339181,
+    "nBig": 171,
+    "medianAbsErr": 0.024010874811867977,
+    "medianAbsReal": 0.02499834191451919,
+    "twinPresentPockets": 0,
+    "twinPresentSameSignAsReal": 0,
+    "twinPresentOppositeSign": 0
+   }
+  }
+ },
+ "present_code": {
+  "label": "PRESENT, class code",
+  "nPockets": 43,
+  "kinds": {
+   "bag": {
+    "nHalves": 86,
+    "pearson": 0.07318070093993762,
+    "spearman": 0.014745978583895467,
+    "reproductionR2": -0.14537344496735005,
+    "signAgreeBig": 0.5384615384615384,
+    "nBig": 78,
+    "medianAbsErr": 0.028762233197513885,
+    "medianAbsReal": 0.028707246460989135,
+    "twinPresentPockets": 0,
+    "twinPresentSameSignAsReal": 0,
+    "twinPresentOppositeSign": 0
+   },
+   "pos": {
+    "nHalves": 86,
+    "pearson": -0.24546425581281914,
+    "spearman": -0.2789848577763102,
+    "reproductionR2": -0.5325111707023404,
+    "signAgreeBig": 0.358974358974359,
+    "nBig": 78,
+    "medianAbsErr": 0.038229764186690565,
+    "medianAbsReal": 0.028707246460989135,
+    "twinPresentPockets": 25,
+    "twinPresentSameSignAsReal": 7,
+    "twinPresentOppositeSign": 18
+   },
+   "edge": {
+    "nHalves": 86,
+    "pearson": -0.17357944842572798,
+    "spearman": -0.2277937638567857,
+    "reproductionR2": -0.49192155286112094,
+    "signAgreeBig": 0.3333333333333333,
+    "nBig": 78,
+    "medianAbsErr": 0.03633283018633182,
+    "medianAbsReal": 0.028707246460989135,
+    "twinPresentPockets": 24,
+    "twinPresentSameSignAsReal": 8,
+    "twinPresentOppositeSign": 16
+   },
+   "mk1": {
+    "nHalves": 86,
+    "pearson": 0.20459718166394159,
+    "spearman": 0.11284494551629794,
+    "reproductionR2": -0.11768108923760079,
+    "signAgreeBig": 0.6025641025641025,
+    "nBig": 78,
+    "medianAbsErr": 0.02970341316921831,
+    "medianAbsReal": 0.028707246460989135,
+    "twinPresentPockets": 19,
+    "twinPresentSameSignAsReal": 13,
+    "twinPresentOppositeSign": 6
+   },
+   "mk1sym": {
+    "nHalves": 86,
+    "pearson": 0.06633481871589977,
+    "spearman": 0.12050568423038822,
+    "reproductionR2": -0.16592447723575487,
+    "signAgreeBig": 0.48717948717948717,
+    "nBig": 78,
+    "medianAbsErr": 0.03038296809956962,
+    "medianAbsReal": 0.028707246460989135,
+    "twinPresentPockets": 10,
+    "twinPresentSameSignAsReal": 4,
+    "twinPresentOppositeSign": 6
+   }
+  }
+ }
+}

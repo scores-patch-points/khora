@@ -1,0 +1,205 @@
+{
+ "sizes": {
+  "sib-js-fold": 12481,
+  "sib-js-heimdall": 8517,
+  "sib-js-eoreader7": 18670,
+  "asym-cd-js": 16176,
+  "ent-cd-js": 13714,
+  "sfx-cd-npmjs": 8642,
+  "asym-cd-ts": 9537,
+  "ent-cd-ts": 2170,
+  "sib-py-foldvenv": 9948,
+  "asym-cd-py": 2309,
+  "ent-cd-py": 6015,
+  "sfx-cd-py314": 10464,
+  "sfx-cd-rb26": 8412,
+  "sfx-cd-chdr": 10199,
+  "rl-css-repos": 4679,
+  "rl-yaml-repos": 489,
+  "asym-en-about-london": 1846,
+  "asym-en-among-forces": 1631,
+  "asym-en-mouret": 5884,
+  "asym-en-poe2": 3429,
+  "asym-en-awakening": 3224,
+  "ec-en-yonge": 3779,
+  "asym-en-waikna": 2688,
+  "ec-en-swisshelm": 3679,
+  "ec-en-children": 2056,
+  "asym-en-dolls-house": 1208,
+  "asym-en-early-plays": 1253,
+  "ec-en-shakespeare": 13679,
+  "asym-oc-irc-ho-0607": 2167,
+  "asym-oc-irc-ho-0809": 2160,
+  "asym-ud-ita": 10413,
+  "asym-ud-nld": 8408,
+  "asym-ud-rus": 3115,
+  "asym-ud-ces": 14548,
+  "asym-ud-dan": 3385,
+  "asym-ud-lit": 1765,
+  "asym-ud-ell": 1493,
+  "asym-ud-tur": 1635,
+  "asym-ud-hye": 3146,
+  "asym-ud-kat": 1966,
+  "asym-ud-gle": 3511,
+  "asym-ud-afr": 1221,
+  "asym-ud-mlt": 837,
+  "asym-ud-wol": 1022,
+  "ent-ud-lat-perseus": 1205,
+  "sib-bpmn-miwg-heldout": 6721,
+  "sib-bpmn-kogito-heldout": 3336,
+  "sib-bpmn-activiti-heldout": 1578,
+  "rl-law-fr-heldout": 9796,
+  "sp-smiles-ccd": 5835,
+  "rl-codons-heldout": 887,
+  "rl-smiles-pubchem-heldout": 2991,
+  "sp-protein-aa": 888,
+  "rl-ctl-en-mouret": 5884,
+  "rl-ctl-js-fold": 14517
+ },
+ "pairsAbove0_05pct": [
+  {
+   "smaller": "ent-cd-js",
+   "larger": "asym-cd-js",
+   "shared": 736,
+   "share": 0.053667784745515534
+  },
+  {
+   "smaller": "ent-cd-js",
+   "larger": "sib-js-eoreader7",
+   "shared": 262,
+   "share": 0.019104564678430802
+  },
+  {
+   "smaller": "ent-cd-ts",
+   "larger": "asym-cd-js",
+   "shared": 21,
+   "share": 0.00967741935483871
+  },
+  {
+   "smaller": "sib-bpmn-activiti-heldout",
+   "larger": "sib-bpmn-kogito-heldout",
+   "shared": 12,
+   "share": 0.0076045627376425855
+  },
+  {
+   "smaller": "ent-cd-ts",
+   "larger": "sib-js-eoreader7",
+   "shared": 10,
+   "share": 0.004608294930875576
+  },
+  {
+   "smaller": "sib-bpmn-activiti-heldout",
+   "larger": "sib-bpmn-miwg-heldout",
+   "shared": 7,
+   "share": 0.004435994930291508
+  },
+  {
+   "smaller": "rl-yaml-repos",
+   "larger": "asym-cd-py",
+   "shared": 2,
+   "share": 0.00408997955010225
+  },
+  {
+   "smaller": "asym-cd-py",
+   "larger": "sfx-cd-npmjs",
+   "shared": 7,
+   "share": 0.0030316154179298397
+  },
+  {
+   "smaller": "asym-cd-py",
+   "larger": "sfx-cd-chdr",
+   "shared": 7,
+   "share": 0.0030316154179298397
+  },
+  {
+   "smaller": "asym-cd-py",
+   "larger": "sfx-cd-py314",
+   "shared": 5,
+   "share": 0.0021654395842356
+  },
+  {
+   "smaller": "sfx-cd-rb26",
+   "larger": "sfx-cd-chdr",
+   "shared": 16,
+   "share": 0.0019020446980504042
+  },
+  {
+   "smaller": "sfx-cd-chdr",
+   "larger": "sfx-cd-py314",
+   "shared": 19,
+   "share": 0.0018629277380135308
+  },
+  {
+   "smaller": "sib-js-heimdall",
+   "larger": "ent-cd-js",
+   "shared": 15,
+   "share": 0.0017611835153222965
+  },
+  {
+   "smaller": "sfx-cd-rb26",
+   "larger": "sfx-cd-npmjs",
+   "shared": 14,
+   "share": 0.0016642891107941037
+  },
+  {
+   "smaller": "sib-bpmn-kogito-heldout",
+   "larger": "sib-bpmn-miwg-heldout",
+   "shared": 5,
+   "share": 0.001498800959232614
+  },
+  {
+   "smaller": "asym-oc-irc-ho-0809",
+   "larger": "asym-oc-irc-ho-0607",
+   "shared": 3,
+   "share": 0.001388888888888889
+  },
+  {
+   "smaller": "ent-cd-ts",
+   "larger": "ent-cd-js",
+   "shared": 3,
+   "share": 0.0013824884792626728
+  },
+  {
+   "smaller": "rl-smiles-pubchem-heldout",
+   "larger": "sp-smiles-ccd",
+   "shared": 4,
+   "share": 0.0013373453694416582
+  },
+  {
+   "smaller": "sfx-cd-npmjs",
+   "larger": "sfx-cd-chdr",
+   "shared": 11,
+   "share": 0.0012728535061328396
+  },
+  {
+   "smaller": "sib-js-heimdall",
+   "larger": "sib-js-fold",
+   "shared": 10,
+   "share": 0.0011741223435481978
+  },
+  {
+   "smaller": "asym-cd-js",
+   "larger": "sib-js-eoreader7",
+   "shared": 16,
+   "share": 0.0009891196834817012
+  },
+  {
+   "smaller": "sfx-cd-npmjs",
+   "larger": "sfx-cd-py314",
+   "shared": 7,
+   "share": 0.0008099976857208979
+  },
+  {
+   "smaller": "sib-js-heimdall",
+   "larger": "asym-cd-js",
+   "shared": 5,
+   "share": 0.0005870611717740989
+  },
+  {
+   "smaller": "sib-js-fold",
+   "larger": "ent-cd-js",
+   "shared": 7,
+   "share": 0.0005608524957936063
+  }
+ ]
+}

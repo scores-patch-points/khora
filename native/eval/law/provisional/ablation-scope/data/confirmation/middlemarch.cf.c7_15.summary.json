@@ -1,0 +1,44 @@
+{
+ "corpus": "mm",
+ "doc": "middlemarch",
+ "M": 128,
+ "tag": "cf",
+ "match": "v3",
+ "strata": [
+  "c7_15"
+ ],
+ "sizes": {
+  "nA": 30,
+  "nB": 60,
+  "n1": 0
+ },
+ "design": {
+  "A:c7_15": {
+   "requested": 30,
+   "got": 30,
+   "dropped": 59,
+   "nPos": 917,
+   "nNegPool": 1314
+  },
+  "B:c7_15": {
+   "requested": 60,
+   "got": 60,
+   "dropped": 15,
+   "nPos": 1638,
+   "nNegPool": 26287
+  }
+ },
+ "tokensRead": 180,
+ "gaps": 0,
+ "seconds": 240.95,
+ "K1_sham": {
+  "nullShare": 1,
+  "n": 8
+ },
+ "K6_determinism": {
+  "same": 8,
+  "n": 8
+ },
+ "headerSha256": "6c0cd12e3d866e11b3da0b284d424e806fb867092872cfdfe4406c7fae58692c",
+ "file": "data/confirmation/middlemarch.cf.c7_15.jsonl"
+}

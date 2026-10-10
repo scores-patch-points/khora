@@ -1,0 +1,284 @@
+{
+ "leaveOnePocketOut": {
+  "presenceRegister": {
+   "n": 390,
+   "etaMin": 0.24257250319770923,
+   "etaMax": 0.25310826282530124,
+   "pMax": 0.0024937655860349127,
+   "nPgt05": 0,
+   "worst": {
+    "drop": "bk-cryptic",
+    "eta2": 0.24257250319770923,
+    "p": 0.0024937655860349127
+   }
+  },
+  "signSplitRegister": {
+   "n": 140,
+   "etaMin": 0.4151880815943319,
+   "etaMax": 0.44597313841361447,
+   "pMax": 0.0024937655860349127,
+   "nPgt05": 0,
+   "worst": {
+    "drop": "cd-chebi-defs",
+    "eta2": 0.4151880815943319,
+    "p": 0.0024937655860349127
+   }
+  },
+  "permutations": 400
+ },
+ "leaveOne_register_Out": {
+  "presenceRegister": {
+   "n": 36,
+   "etaMin": 0.18368799550618042,
+   "etaMax": 0.2680582564601784,
+   "pMax": 0.0024937655860349127,
+   "nPgt05": 0,
+   "worst": {
+    "drop": "notation",
+    "nDropped": 16,
+    "eta2": 0.18368799550618042,
+    "p": 0.0024937655860349127
+   }
+  },
+  "signSplitRegister": {
+   "n": 36,
+   "etaMin": 0.3896639163305835,
+   "etaMax": 0.4670989658489664,
+   "pMax": 0.0024937655860349127,
+   "nPgt05": 0,
+   "worst": {
+    "drop": "nomenclature",
+    "nDropped": 4,
+    "eta2": 0.3896639163305835,
+    "p": 0.0024937655860349127
+   }
+  }
+ },
+ "leaveOne_group_Out": {
+  "presenceRegister": {
+   "n": 6,
+   "etaMin": 0.17250154778952195,
+   "etaMax": 0.29827980646937147,
+   "pMax": 0.0024937655860349127,
+   "nPgt05": 0,
+   "worst": {
+    "drop": "cd",
+    "nDropped": 88,
+    "eta2": 0.17250154778952195,
+    "p": 0.0024937655860349127
+   }
+  },
+  "signSplitRegister": {
+   "n": 6,
+   "etaMin": 0.3693291868515083,
+   "etaMax": 0.48115850970017654,
+   "pMax": 0.004987531172069825,
+   "nPgt05": 0,
+   "worst": {
+    "drop": "bk",
+    "nDropped": 36,
+    "eta2": 0.3693291868515083,
+    "p": 0.004987531172069825
+   }
+  }
+ },
+ "leaveOne_language_Out": {
+  "presenceRegister": {
+   "n": 143,
+   "etaMin": 0.22874020221445834,
+   "etaMax": 0.280142094397119,
+   "pMax": 0.0024937655860349127,
+   "nPgt05": 0,
+   "worst": {
+    "drop": "mul",
+    "nDropped": 10,
+    "eta2": 0.22874020221445834,
+    "p": 0.0024937655860349127
+   }
+  },
+  "signSplitRegister": {
+   "n": 143,
+   "etaMin": 0.3615298821548822,
+   "etaMax": 0.48941583959752566,
+   "pMax": 0.004987531172069825,
+   "nPgt05": 0,
+   "worst": {
+    "drop": "x-scala",
+    "nDropped": 1,
+    "eta2": 0.4190453354515854,
+    "p": 0.004987531172069825
+   }
+  }
+ },
+ "signPrediction": {
+  "nPresent": 140,
+  "nPositive": 91,
+  "majorityBaseline": 0.65,
+  "looAccuracyRegister": 0.75,
+  "looAccuracyGroup": 0.7357142857142858,
+  "looAccuracyCdVsOther": 0.7357142857142858,
+  "pRegisterVsPermutedLabels": 0.0001999600079984003,
+  "pGroupVsPermutedLabels": 0.0001999600079984003,
+  "permutations": 5000,
+  "nullRegisterMean": 0.6009042857142857,
+  "nullGroupMean": 0.6358600000000099
+ },
+ "purity": {
+  "registersWith4plus": 18,
+  "pureRegisters": 8,
+  "p": 0.00004999750012499375,
+  "table": [
+   {
+    "register": "academic",
+    "pos": 7,
+    "neg": 2
+   },
+   {
+    "register": "book",
+    "pos": 6,
+    "neg": 2
+   },
+   {
+    "register": "chat",
+    "pos": 4,
+    "neg": 0
+   },
+   {
+    "register": "code",
+    "pos": 4,
+    "neg": 8
+   },
+   {
+    "register": "diagram",
+    "pos": 1,
+    "neg": 4
+   },
+   {
+    "register": "dialect",
+    "pos": 7,
+    "neg": 0
+   },
+   {
+    "register": "history",
+    "pos": 3,
+    "neg": 2
+   },
+   {
+    "register": "legal",
+    "pos": 5,
+    "neg": 4
+   },
+   {
+    "register": "memoir",
+    "pos": 6,
+    "neg": 0
+   },
+   {
+    "register": "nomenclature",
+    "pos": 0,
+    "neg": 4
+   },
+   {
+    "register": "notation",
+    "pos": 7,
+    "neg": 9
+   },
+   {
+    "register": "novel",
+    "pos": 11,
+    "neg": 0
+   },
+   {
+    "register": "poetry",
+    "pos": 3,
+    "neg": 1
+   },
+   {
+    "register": "reportage",
+    "pos": 4,
+    "neg": 0
+   },
+   {
+    "register": "scripture",
+    "pos": 4,
+    "neg": 7
+   },
+   {
+    "register": "translation",
+    "pos": 4,
+    "neg": 0
+   },
+   {
+    "register": "treatise",
+    "pos": 2,
+    "neg": 3
+   },
+   {
+    "register": "treebank",
+    "pos": 4,
+    "neg": 0
+   }
+  ]
+ },
+ "signSplitStrata": {
+  "nonCd": {
+   "n": 98,
+   "pos": 76,
+   "neg": 22,
+   "register": {
+    "eta2": 0.3967210985452613,
+    "p": 0.001999000499750125
+   },
+   "group": {
+    "eta2": 0.19105255339775476,
+    "p": 0.0014992503748125937
+   }
+  },
+  "cdOnly": {
+   "n": 42,
+   "pos": 15,
+   "neg": 27,
+   "register": {
+    "eta2": 0.23216049382716045,
+    "p": 0.16941529235382308
+   },
+   "group": {
+    "eta2": -9.210739167260559e-17,
+    "p": 1
+   }
+  },
+  "wordGrain": {
+   "n": 95,
+   "pos": 77,
+   "neg": 18,
+   "register": {
+    "eta2": 0.46377556226041033,
+    "p": 0.0029985007496251873
+   },
+   "group": {
+    "eta2": 0.23308481641815046,
+    "p": 0.0014992503748125937
+   }
+  },
+  "nonCdWord": {
+   "n": 91,
+   "pos": 76,
+   "neg": 15,
+   "register": {
+    "eta2": 0.4298389597731707,
+    "p": 0.004497751124437781
+   },
+   "group": {
+    "eta2": 0.1667202729044838,
+    "p": 0.005497251374312844
+   }
+  }
+ },
+ "registerOnlyFamily": {
+  "nStats": 73,
+  "depLenRegisterZ": 8.76957322894751,
+  "adjustedP": 0.0004997501249375312,
+  "medianMaxZ": 2.832238185523695,
+  "maxMaxZ": 7.186912614376601
+ }
+}

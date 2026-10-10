@@ -1,0 +1,95 @@
+{
+ "irc": {
+  "asym-oc-irc-ho-0607": {
+   "messagesGe6": 2792,
+   "verbatimInKin": 72,
+   "verbatimInAnyUbuntu": 76,
+   "shareInKin": 0.025787965616045846,
+   "shareInAnyUbuntu": 0.027220630372492838,
+   "kin": "oc-irc-ubuntu-0607"
+  },
+  "asym-oc-irc-ho-0809": {
+   "messagesGe6": 2706,
+   "verbatimInKin": 78,
+   "verbatimInAnyUbuntu": 83,
+   "shareInKin": 0.028824833702882482,
+   "shareInAnyUbuntu": 0.03067257945306726,
+   "kin": "oc-irc-ubuntu-0809"
+  }
+ },
+ "code": {
+  "asym-cd-js": "the user's JavaScript: chat server and scripts, a project-manager web app, tests, teaching tools; 408 unique candidate files (663 found; dropped {\"atlasCopy\":57,\"repeated\":198}), 175 in the pocket; token-drop counters: {\"lines\":51607,\"emptyLines\":11549,\"overlongLines\":0,\"tokens\":295254,\"droppedNumeric\":9941,\"droppedUnspaced\":32,\"droppedLong\":0,\"droppedPunct\":72}",
+  "asym-cd-ts": "TypeScript of a coding-agent CLI/app monorepo (opencode fork), node_modules/i18n/generated trees dropped; 3010 unique candidate files (3020 found; dropped {\"atlasCopy\":0,\"repeated\":10}), 467 in the pocket; token-drop counters: {\"lines\":89867,\"emptyLines\":23697,\"overlongLines\":17,\"tokens\":291346,\"droppedNumeric\":15245,\"droppedUnspaced\":13,\"droppedLong\":0,\"droppedPunct\":83}",
+  "asym-cd-py": "Python of a red-team harness and the open-source evaluation toolkits it vendors; 127 unique candidate files (127 found; dropped {\"atlasCopy\":0,\"repeated\":0}), 127 in the pocket; token-drop counters: {\"lines\":20048,\"emptyLines\":4315,\"overlongLines\":77,\"tokens\":90463,\"droppedNumeric\":3654,\"droppedUnspaced\":90,\"droppedLong\":0,\"droppedPunct\":229}"
+ },
+ "ud": {
+  "asym-ud-ita": {
+   "devTestSentences": 1046,
+   "trainSentencesAlsoInDevTest": 6
+  },
+  "asym-ud-nld": {
+   "devTestSentences": 1314,
+   "trainSentencesAlsoInDevTest": 0
+  },
+  "asym-ud-rus": {
+   "devTestSentences": 1177,
+   "trainSentencesAlsoInDevTest": 65
+  },
+  "asym-ud-ces": {
+   "devTestSentences": 1224,
+   "trainSentencesAlsoInDevTest": 6
+  },
+  "asym-ud-dan": {
+   "devTestSentences": 1126,
+   "trainSentencesAlsoInDevTest": 5
+  },
+  "asym-ud-lit": {
+   "devTestSentences": 1291,
+   "trainSentencesAlsoInDevTest": 7
+  },
+  "asym-ud-ell": {
+   "devTestSentences": 836,
+   "trainSentencesAlsoInDevTest": 8
+  },
+  "asym-ud-tur": {
+   "devTestSentences": 2163,
+   "trainSentencesAlsoInDevTest": 1
+  },
+  "asym-ud-hye": {
+   "devTestSentences": 1165,
+   "trainSentencesAlsoInDevTest": 23
+  },
+  "asym-ud-kat": {
+   "devTestSentences": 935,
+   "trainSentencesAlsoInDevTest": 12
+  },
+  "asym-ud-gle": {
+   "devTestSentences": 901,
+   "trainSentencesAlsoInDevTest": 4
+  },
+  "asym-ud-afr": {
+   "devTestSentences": 619,
+   "trainSentencesAlsoInDevTest": 1
+  },
+  "asym-ud-mlt": {
+   "devTestSentences": 950,
+   "trainSentencesAlsoInDevTest": 2
+  },
+  "asym-ud-wol": {
+   "devTestSentences": 919,
+   "trainSentencesAlsoInDevTest": 0
+  }
+ },
+ "prose": {
+  "pg32773": [],
+  "pg15807": [],
+  "pg2542": [],
+  "pg43668": [],
+  "pg14200": [],
+  "pg2148": [],
+  "pg160_": [],
+  "pg74987": [],
+  "pg76749": [],
+  "doctor-faustus-1604": []
+ }
+}

@@ -1,0 +1,288 @@
+id                       role                    tok status         zD      zC       vD       vC plug      deep      fnBefore
+asym-en-about-london     headline-A            53609 PRESENT+     10.8    15.0   0.0093   0.0182 PRESENT+  PRESENT+  AMBIGUOUS
+asym-en-among-forces     headline-A            35707 PRESENT+      7.4    19.5   0.0150   0.0192 PRESENT+  AMBIGUOUS ABSENT
+asym-oc-irc-ho-0607      headline-A            44326 PRESENT+     13.9     6.9   0.0171   0.0074 PRESENT+  PRESENT+  AMBIGUOUS
+asym-oc-irc-ho-0809      headline-A            44366 AMBIGUOUS     3.8    18.8   0.0061   0.0194 AMBIGUOUS PRESENT+  AMBIGUOUS
+asym-cd-js               headline-A           295254 PRESENT+     80.1    28.6   0.0457   0.0339 PRESENT+  PRESENT+  AMBIGUOUS
+asym-cd-ts               headline-A           291346 PRESENT+     18.9     7.6   0.0250   0.0087 PRESENT+  AMBIGUOUS PRESENT+
+asym-en-dolls-house      headline-B            22597 AMBIGUOUS     8.2    -3.2   0.0169  -0.0119 AMBIGUOUS AMBIGUOUS AMBIGUOUS
+asym-en-early-plays      headline-B            31927 AMBIGUOUS     2.8    -7.8   0.0044  -0.0080 AMBIGUOUS AMBIGUOUS AMBIGUOUS
+asym-en-plays-pooled     power-check           54524 AMBIGUOUS    -3.5     0.4  -0.0028   0.0002 AMBIGUOUS AMBIGUOUS AMBIGUOUS
+asym-cd-py               secondary-code        90463 AMBIGUOUS    10.6     1.1   0.0198   0.0030 AMBIGUOUS PRESENT+  PRESENT+
+asym-en-mouret           secondary-narrative  126434 PRESENT-     -8.7   -13.8  -0.0077  -0.0088 PRESENT-  PRESENT-  AMBIGUOUS
+asym-en-poe2             secondary-narrative   94473 AMBIGUOUS     0.2     7.6   0.0002   0.0054 AMBIGUOUS AMBIGUOUS ABSENT
+asym-en-awakening        secondary-narrative   64499 AMBIGUOUS    -3.3    -4.1  -0.0039  -0.0037 AMBIGUOUS PRESENT-  AMBIGUOUS
+asym-en-waikna           secondary-narrative   74854 PRESENT-    -18.6    -8.7  -0.0135  -0.0066 PRESENT-  PRESENT-  ABSENT
+asym-ud-ita              secondary-treebank   240871 ABSENT       -0.2     1.2   0.0003   0.0016 ABSENT    AMBIGUOUS AMBIGUOUS
+asym-ud-nld              secondary-treebank   163958 PRESENT+     12.1    10.5   0.0146   0.0137 PRESENT+  PRESENT+  PRESENT+
+asym-ud-rus              secondary-treebank    58306 AMBIGUOUS     3.6     4.3   0.0291   0.0316 AMBIGUOUS AMBIGUOUS PRESENT+
+asym-ud-ces              secondary-treebank   299982 PRESENT-     -6.7   -14.2  -0.0114  -0.0314 PRESENT-  PRESENT-  PRESENT+
+asym-ud-dan              secondary-treebank    68296 PRESENT+      5.4     4.2   0.0107   0.0059 PRESENT+  PRESENT+  PRESENT+
+asym-ud-lit              secondary-treebank    37825 AMBIGUOUS     1.8     6.8   0.0106   0.0322 AMBIGUOUS AMBIGUOUS AMBIGUOUS
+asym-ud-ell              secondary-treebank    37783 PRESENT-    -26.2   -17.3  -0.0422  -0.0322 PRESENT-  PRESENT-  PRESENT+
+asym-ud-tur              secondary-treebank    30973 AMBIGUOUS     3.6     2.3   0.0153   0.0235 AMBIGUOUS nodata    AMBIGUOUS
+asym-ud-hye              secondary-treebank    65187 ABSENT       -1.8     0.8  -0.0130   0.0055 ABSENT    ABSENT    ABSENT
+asym-ud-kat              secondary-treebank    33092 AMBIGUOUS     5.7     2.8   0.0470   0.0186 AMBIGUOUS nodata    ABSENT
+asym-ud-gle              secondary-treebank    85922 PRESENT-    -20.8   -32.7  -0.0252  -0.0305 PRESENT-  PRESENT-  ABSENT
+asym-ud-afr              secondary-treebank    30498 AMBIGUOUS     0.7    -3.0   0.0007  -0.0049 AMBIGUOUS AMBIGUOUS ABSENT
+asym-ud-mlt              secondary-treebank    20056 PRESENT-     -5.6    -5.6  -0.0262  -0.0285 PRESENT-  PRESENT-  AMBIGUOUS
+asym-ud-wol              secondary-treebank    20635 AMBIGUOUS     1.2     9.3   0.0031   0.0226 AMBIGUOUS AMBIGUOUS AMBIGUOUS
+asym-ctl-about-london    control               53609 ABSENT       -0.3     0.6   0.0006   0.0003 ABSENT    ABSENT    ABSENT
+asym-ctl-cd-js           control              295254 ABSENT       -0.6     1.3  -0.0009   0.0011 ABSENT    ABSENT    ABSENT
+{
+ "verdict": "PARTIAL",
+ "verdictBasis": {
+  "headlineScored": 5,
+  "headlineMatch": 5,
+  "scoredA": 5,
+  "matchA": 5,
+  "scoredB": 0,
+  "matchB": 0,
+  "reversedA": 0,
+  "unscoredHeadline": [
+   "asym-oc-irc-ho-0809:AMBIGUOUS",
+   "asym-en-dolls-house:AMBIGUOUS",
+   "asym-en-early-plays:AMBIGUOUS"
+  ]
+ },
+ "blindScore": {
+  "n": 10,
+  "hold": 10
+ },
+ "groups": {
+  "code": {
+   "plusOfThree": 2,
+   "ruleHolds": true,
+   "rows": [
+    "asym-cd-js:PRESENT+",
+    "asym-cd-ts:PRESENT+",
+    "asym-cd-py:AMBIGUOUS"
+   ]
+  },
+  "narrative": {
+   "plus": 0,
+   "minus": 2,
+   "ruleHolds": true,
+   "rows": [
+    "asym-en-mouret:PRESENT-",
+    "asym-en-poe2:AMBIGUOUS",
+    "asym-en-awakening:AMBIGUOUS",
+    "asym-en-waikna:PRESENT-"
+   ]
+  },
+  "treebank": {
+   "presentPlus": 2,
+   "presentMinus": 4,
+   "informative": true,
+   "ruleHolds": true,
+   "absent": 2,
+   "ambiguous": 6,
+   "n": 14
+  }
+ },
+ "instrument": {
+  "controls": [
+   {
+    "id": "asym-ctl-about-london",
+    "status": "ABSENT",
+    "zD": -0.30150025598158103,
+    "zC": 0.5995314191377814
+   },
+   {
+    "id": "asym-ctl-cd-js",
+    "status": "ABSENT",
+    "zD": -0.5913330482138239,
+    "zC": 1.2614140966340783
+   }
+  ],
+  "anyControlPresent": false,
+  "variantSelfCheckMaxDiff": 0
+ },
+ "constants": {
+  "scored": 7,
+  "inRange": 5
+ }
+}
+{
+ "ADV-1 estimator": {
+  "presentCells": 13,
+  "unchanged": 13,
+  "changed": [],
+  "fractionChanged": 0,
+  "estimatorFragile": false
+ },
+ "ADV-2 unit edge": {
+  "presentCells": 13,
+  "unchanged": 11,
+  "undefined": [],
+  "changed": [
+   "asym-en-among-forces: PRESENT+ -> AMBIGUOUS (z 3.1, 14.7)",
+   "asym-cd-ts: PRESENT+ -> AMBIGUOUS (z 3.1, 16.8)"
+  ],
+  "fractionUnchangedWhereDefined": 0.8461538461538461,
+  "survives": true
+ },
+ "ADV-3 rival order.fnBefore": {
+  "siblingsBothPresent": 5,
+  "signAgreement": 0.6,
+  "disagree": [
+   "asym-ud-ces: asym PRESENT-, fnBefore PRESENT+",
+   "asym-ud-ell: asym PRESENT-, fnBefore PRESENT+"
+  ],
+  "siblingSpearmanOfMeanZ": 0.2148962148962149,
+  "siblingsInSpearman": 27,
+  "atlas": {
+   "realPockets": 377,
+   "spearmanV": 0.027271416119545245,
+   "spearmanMeanZ": 0.008746104307366229,
+   "bothPresent": 89,
+   "bothPresentSameSign": 41
+  },
+  "notIndependent": false
+ },
+ "ADV-4 language vs register (atlas only)": {
+  "presentCells": 214,
+  "etaSquaredSignOnRegister": {
+   "eta2": 0.30194746823195606,
+   "levels": 31,
+   "n": 214
+  },
+  "etaSquaredSignOnEnglishFlag": {
+   "eta2": 0.11465138850096195,
+   "levels": 2,
+   "n": 214
+  },
+  "etaSquaredSignOnRegisterWithinEnglish": {
+   "eta2": 0.46024682306940445,
+   "levels": 24,
+   "n": 82
+  },
+  "etaSquaredSignOnRegisterXEnglish": {
+   "eta2": 0.47606450014525314,
+   "levels": 42,
+   "n": 214
+  },
+  "tableByEnglish": {
+   "en": {
+    "P+": 62,
+    "P-": 20
+   },
+   "non-en": {
+    "P+": 54,
+    "P-": 78
+   }
+  },
+  "dramaByEnglish": {
+   "non-en": {
+    "P+": 0,
+    "P-": 9
+   }
+  },
+  "shareOfPresentMinusThatIsNonEnglish": 0.7959183673469388,
+  "englishFlagExplainsAtLeastAsMuchAsRegister": false
+ },
+ "ADV-5 multiplicity": {
+  "siblingsTested": 27,
+  "cellsTested": 54,
+  "pFalsePresentPerSibling": 0.00008488153720463878,
+  "expectedFalsePresentSiblings": 0.002291801504525247,
+  "probAtLeastOneFalse": 0.0022892743811797622,
+  "observedPresentSiblings": 13,
+  "controlsPresent": 0
+ },
+ "ADV-6 leakage": {
+  "irc": {
+   "asym-oc-irc-ho-0607": {
+    "messagesGe6": 2792,
+    "verbatimInKin": 72,
+    "verbatimInAnyUbuntu": 76,
+    "shareInKin": 0.025787965616045846,
+    "shareInAnyUbuntu": 0.027220630372492838,
+    "kin": "oc-irc-ubuntu-0607"
+   },
+   "asym-oc-irc-ho-0809": {
+    "messagesGe6": 2706,
+    "verbatimInKin": 78,
+    "verbatimInAnyUbuntu": 83,
+    "shareInKin": 0.028824833702882482,
+    "shareInAnyUbuntu": 0.03067257945306726,
+    "kin": "oc-irc-ubuntu-0809"
+   }
+  },
+  "code": {
+   "asym-cd-js": "the user's JavaScript: chat server and scripts, a project-manager web app, tests, teaching tools; 408 unique candidate files (663 found; dropped {\"atlasCopy\":57,\"repeated\":198}), 175 in the pocket; token-drop counters: {\"lines\":51607,\"emptyLines\":11549,\"overlongLines\":0,\"tokens\":295254,\"droppedNumeric\":9941,\"droppedUnspaced\":32,\"droppedLong\":0,\"droppedPunct\":72}",
+   "asym-cd-ts": "TypeScript of a coding-agent CLI/app monorepo (opencode fork), node_modules/i18n/generated trees dropped; 3010 unique candidate files (3020 found; dropped {\"atlasCopy\":0,\"repeated\":10}), 467 in the pocket; token-drop counters: {\"lines\":89867,\"emptyLines\":23697,\"overlongLines\":17,\"tokens\":291346,\"droppedNumeric\":15245,\"droppedUnspaced\":13,\"droppedLong\":0,\"droppedPunct\":83}",
+   "asym-cd-py": "Python of a red-team harness and the open-source evaluation toolkits it vendors; 127 unique candidate files (127 found; dropped {\"atlasCopy\":0,\"repeated\":0}), 127 in the pocket; token-drop counters: {\"lines\":20048,\"emptyLines\":4315,\"overlongLines\":77,\"tokens\":90463,\"droppedNumeric\":3654,\"droppedUnspaced\":90,\"droppedLong\":0,\"droppedPunct\":229}"
+  },
+  "ud": {
+   "asym-ud-ita": {
+    "devTestSentences": 1046,
+    "trainSentencesAlsoInDevTest": 6
+   },
+   "asym-ud-nld": {
+    "devTestSentences": 1314,
+    "trainSentencesAlsoInDevTest": 0
+   },
+   "asym-ud-rus": {
+    "devTestSentences": 1177,
+    "trainSentencesAlsoInDevTest": 65
+   },
+   "asym-ud-ces": {
+    "devTestSentences": 1224,
+    "trainSentencesAlsoInDevTest": 6
+   },
+   "asym-ud-dan": {
+    "devTestSentences": 1126,
+    "trainSentencesAlsoInDevTest": 5
+   },
+   "asym-ud-lit": {
+    "devTestSentences": 1291,
+    "trainSentencesAlsoInDevTest": 7
+   },
+   "asym-ud-ell": {
+    "devTestSentences": 836,
+    "trainSentencesAlsoInDevTest": 8
+   },
+   "asym-ud-tur": {
+    "devTestSentences": 2163,
+    "trainSentencesAlsoInDevTest": 1
+   },
+   "asym-ud-hye": {
+    "devTestSentences": 1165,
+    "trainSentencesAlsoInDevTest": 23
+   },
+   "asym-ud-kat": {
+    "devTestSentences": 935,
+    "trainSentencesAlsoInDevTest": 12
+   },
+   "asym-ud-gle": {
+    "devTestSentences": 901,
+    "trainSentencesAlsoInDevTest": 4
+   },
+   "asym-ud-afr": {
+    "devTestSentences": 619,
+    "trainSentencesAlsoInDevTest": 1
+   },
+   "asym-ud-mlt": {
+    "devTestSentences": 950,
+    "trainSentencesAlsoInDevTest": 2
+   },
+   "asym-ud-wol": {
+    "devTestSentences": 919,
+    "trainSentencesAlsoInDevTest": 0
+   }
+  },
+  "prose": {
+   "pg32773": [],
+   "pg15807": [],
+   "pg2542": [],
+   "pg43668": [],
+   "pg14200": [],
+   "pg2148": [],
+   "pg160_": [],
+   "pg74987": [],
+   "pg76749": [],
+   "doctor-faustus-1604": []
+  }
+ }
+}

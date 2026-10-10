@@ -1,0 +1,559 @@
+#!/usr/bin/env python3
+import asyncio
+import json
+import os
+import time
+from aiohttp import web
+
+clients = set()
+
+# Each entry is one COLUMN in the live scraper view: a stable worker id, the
+# kind of work it does, and the log it writes. The account alias is not fixed
+# here because a sweep slot leases whichever account is free at the time.
+LOG_SOURCES = [
+    {"path": "/mnt/intelechia/logs/caselink-out.log",    "worker": "primary", "kind": "primary"},
+    {"path": "/mnt/intelechia/logs/caselink-error.log",  "worker": "primary", "kind": "primary"},
+    {"path": "/mnt/intelechia/logs/sweep-1-error.log",   "worker": "sweep-1", "kind": "sweep"},
+    {"path": "/mnt/intelechia/logs/sweep-2-error.log",   "worker": "sweep-2", "kind": "sweep"},
+]
+LOG_FILES = [s["path"] for s in LOG_SOURCES]
+_SRC_BY_PATH = {s["path"]: s for s in LOG_SOURCES}
+
+BACKLOG_LINES = 50
+
+# Wall-clock of the last line each worker's tailer forwarded. This is how the
+# health page tells "the feed is quiet because the scraper is between cases"
+# from "the feed is dead" -- the two look identical from the browser.
+LAST_LINE_AT = {}
+
+# ---------------------------------------------------------------------------
+# Account-name redaction
+# ---------------------------------------------------------------------------
+# This endpoint is public and CORS-*. The scraper now writes aliases only, but
+# months of history in the rotated logs still contain real account names, and
+# the backlog replay would hand them to every client that connects. Redact on
+# the way out so the archive cannot leak either.
+ACCOUNTS_FILE = os.environ.get("CASELINK_ACCOUNTS",
+                               "/mnt/intelechia/caselink/.accounts.json")
+_REDACTIONS = []
+
+def _load_redactions():
+    global _REDACTIONS
+    try:
+        with open(ACCOUNTS_FILE) as f:
+            data = json.load(f)
+        pairs = []
+        for a in data.get("accounts", []):
+            if a.get("user") and a.get("alias"):
+                pairs.append((a["user"].lower(), a["alias"]))
+            if a.get("pass"):
+                pairs.append((a["pass"].lower(), "<redacted>"))
+        # longest first, so a name containing another is replaced whole
+        _REDACTIONS = sorted(pairs, key=lambda p: len(p[0]), reverse=True)
+    except Exception:
+        _REDACTIONS = []
+
+def redact(line):
+    if not line or not _REDACTIONS:
+        return line
+    low = line.lower()
+    for needle, repl in _REDACTIONS:
+        if needle in low:
+            out, i = [], 0
+            while True:
+                j = low.find(needle, i)
+                if j < 0:
+                    out.append(line[i:]); break
+                out.append(line[i:j]); out.append(repl)
+                i = j + len(needle)
+            line = "".join(out); low = line.lower()
+    return line
+
+_load_redactions()
+
+def broadcast(data):
+    for q in list(clients):
+        q.put_nowait(data)
+
+def read_tail_lines(path, n=BACKLOG_LINES):
+    if not os.path.exists(path):
+        return []
+    try:
+        with open(path, "rb") as f:
+            f.seek(0, os.SEEK_END)
+            size = f.tell()
+            block = 4096
+            data = b""
+            pos = size
+            lines = []
+            while pos > 0 and len(lines) <= n:
+                read_size = min(block, pos)
+                pos -= read_size
+                f.seek(pos)
+                data = f.read(read_size) + data
+                lines = data.split(b"\n")
+            return [l.decode(errors="replace") for l in lines[-n:] if l.strip()]
+    except Exception:
+        return []
+
+async def tail_file(path, label):
+    """Follow a log file across rotation.
+
+    logrotate runs these with `copytruncate`, which empties the file IN PLACE
+    at midnight while we hold an open handle seeked past the old end. Every
+    readline() then returns "" forever and the feed goes silent -- the page
+    still renders, because the backlog is re-read on each connect, so it looks
+    alive while streaming nothing. That is exactly what happened at 00:00 UTC
+    on 2026-09-05: the scrapers kept writing and the feed delivered nothing for
+    an hour.
+
+    Two cases to survive, and they are not the same:
+      * copytruncate -- same inode, file suddenly shorter than our position
+      * create/rename -- a brand new file with a different inode
+    """
+    while not os.path.exists(path):
+        await asyncio.sleep(2)
+    f = open(path, "r")
+    f.seek(0, os.SEEK_END)
+    inode = os.fstat(f.fileno()).st_ino
+    meta = _SRC_BY_PATH.get(path, {})
+    try:
+        while True:
+            line = f.readline()
+            if line:
+                LAST_LINE_AT[meta.get("worker", label)] = time.time()
+                broadcast({"type": "log", "source": label,
+                           "worker": meta.get("worker", label),
+                           "kind": meta.get("kind", "primary"),
+                           "line": redact(line.rstrip("\n"))})
+                continue
+
+            await asyncio.sleep(0.3)
+            try:
+                st = os.stat(path)
+            except FileNotFoundError:
+                continue
+
+            if st.st_ino != inode:
+                # Rotated by rename; reopen and read the new file from the top.
+                try:
+                    f.close()
+                except Exception:
+                    pass
+                f = open(path, "r")
+                inode = os.fstat(f.fileno()).st_ino
+            elif st.st_size < f.tell():
+                # Truncated under us; our offset is past EOF. Rewind.
+                f.seek(0)
+    finally:
+        try:
+            f.close()
+        except Exception:
+            pass
+
+async def start_tailers(app):
+    for path in LOG_FILES:
+        label = os.path.basename(path)
+        app["tailers"].append(asyncio.create_task(tail_file(path, label)))
+
+async def stream_handler(request):
+    resp = web.StreamResponse(
+        status=200,
+        headers={
+            "Content-Type": "text/event-stream",
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+            "Access-Control-Allow-Origin": "*",
+            "X-Accel-Buffering": "no",
+        },
+    )
+    await resp.prepare(request)
+    q = asyncio.Queue()
+    clients.add(q)
+    try:
+        await resp.write(b": connected\n\n")
+        for path in LOG_FILES:
+            label = os.path.basename(path)
+            meta = _SRC_BY_PATH.get(path, {})
+            for line in read_tail_lines(path):
+                payload = f"data: {json.dumps({'type': 'log', 'source': label, 'worker': meta.get('worker', label), 'kind': meta.get('kind', 'primary'), 'line': redact(line), 'backlog': True})}\n\n".encode()
+                await resp.write(payload)
+        while True:
+            try:
+                data = await asyncio.wait_for(q.get(), timeout=15)
+                payload = f"data: {json.dumps(data)}\n\n".encode()
+                await resp.write(payload)
+            except asyncio.TimeoutError:
+                # A real SSE *data* event, not just a ": ping" comment. Comment
+                # lines keep the TCP connection warm through proxies but are
+                # invisible to EventSource's onmessage -- the browser has no
+                # way to tell "quiet because idle" from "quiet because the
+                # connection silently died" (a half-open TCP connection after
+                # sleep/wake or a WiFi/VPN blip doesn't reliably fire onerror).
+                # A visible heartbeat lets the client track "time since any
+                # message" and reconnect on its own if that gap gets too long,
+                # instead of sitting frozen indefinitely.
+                payload = f"data: {json.dumps({'type': 'heartbeat', 'ts': time.time()})}\n\n".encode()
+                await resp.write(payload)
+    except (ConnectionResetError, asyncio.CancelledError):
+        pass
+    finally:
+        clients.discard(q)
+    return resp
+
+async def publish_handler(request):
+    try:
+        data = await request.json()
+    except Exception:
+        return web.json_response({"error": "invalid json"}, status=400)
+    broadcast(data)
+    return web.json_response({"ok": True, "delivered_to": len(clients)})
+
+async def health_handler(request):
+    return web.json_response({"ok": True, "clients": len(clients)})
+
+async def options_handler(request):
+    return web.Response(
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type",
+        }
+    )
+
+app = web.Application()
+app["tailers"] = []
+app.on_startup.append(start_tailers)
+async def workers_handler(request):
+    """What the live view needs to lay out its columns, without scraping it
+    back out of the log text."""
+    out = []
+    seen = set()
+    for s in LOG_SOURCES:
+        if s["worker"] in seen:
+            continue
+        seen.add(s["worker"])
+        exists = os.path.exists(s["path"])
+        out.append({
+            "worker": s["worker"], "kind": s["kind"],
+            "live": exists,
+            "mtime": os.path.getmtime(s["path"]) if exists else None,
+        })
+    state = {}
+    try:
+        with open(os.environ.get("CASELINK_ACCOUNT_STATE",
+                  "/mnt/intelechia/caselink/account_state.json")) as f:
+            state = json.load(f)
+    except Exception:
+        pass
+    return web.json_response({"workers": out, "accounts": state,
+                              "now": time.time()},
+                             headers={"Access-Control-Allow-Origin": "*"})
+
+# ---------------------------------------------------------------------------
+# /sync -- health of the whole detainer-warrant sync, computed from VM-local
+# files. Nothing here is guessed from process liveness alone: the August outage
+# looked healthy in `pm2 list` for six days.
+# ---------------------------------------------------------------------------
+import re as _re, subprocess as _sp, glob as _glob
+from datetime import datetime as _dt, timedelta as _td, date as _date
+from zoneinfo import ZoneInfo as _Zone
+_CT = _Zone("America/Chicago")
+
+CASELINK_DIR  = "/mnt/intelechia/caselink"
+SNAPSHOT      = "/home/admin/.n8n-files/caselink/snapshot.jsonl"
+PRIMARY_LOG   = "/mnt/intelechia/logs/caselink-error.log"
+SWEEP_DIR     = os.path.join(CASELINK_DIR, "sweep")
+
+_snap_cache = {"at": 0, "data": None}
+SNAP_CACHE_SECONDS = 600   # a 143MB scan; the numbers move once a cycle anyway
+
+
+def _scan_snapshot():
+    """Coverage + enrichment figures from the served snapshot, cached."""
+    now = time.time()
+    if _snap_cache["data"] and now - _snap_cache["at"] < SNAP_CACHE_SECONDS:
+        return _snap_cache["data"]
+    per_day, total, pending, with_addr, flagged, newest = {}, 0, 0, 0, 0, None
+    # Backlog, counted from the record itself rather than from any queue.
+    never_enriched = flagged_only = unfindable = no_addr_reachable = 0
+    stale = {"<=7d": 0, "8-30d": 0, "31-90d": 0, ">90d": 0, "never": 0}
+    now_ct = _dt.now(_CT)
+    try:
+        with open(SNAPSHOT) as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    c = json.loads(line).get("data") or {}
+                except Exception:
+                    continue
+                total += 1
+                is_pending = c.get("status") == "PENDING"
+                if is_pending:
+                    pending += 1
+                    # How long since anyone confirmed this case is still open?
+                    lc = c.get("last_checked")
+                    try:
+                        age = (now_ct - _dt.fromisoformat(lc)).days if lc else None
+                    except Exception:
+                        age = None
+                    if age is None:      stale["never"] += 1
+                    elif age <= 7:       stale["<=7d"] += 1
+                    elif age <= 30:      stale["8-30d"] += 1
+                    elif age <= 90:      stale["31-90d"] += 1
+                    else:                stale[">90d"] += 1
+                has_addr = bool(c.get("Address_1") or c.get("address_formatted"))
+                if has_addr:
+                    with_addr += 1
+                elif c.get("address_status") == "unfindable":
+                    unfindable += 1
+                elif (c.get("address_attempts") or 0) < 3:
+                    no_addr_reachable += 1
+                if not c.get("enriched"):
+                    never_enriched += 1
+                elif c.get("needs_enrichment"):
+                    flagged_only += 1
+                if (not c.get("enriched")) or c.get("needs_enrichment"):
+                    flagged += 1
+                fd = (c.get("file_date") or "").strip()
+                if len(fd) == 10:
+                    mm, dd, yy = fd.split("/")
+                    key = f"{yy}-{mm}-{dd}"
+                    per_day[key] = per_day.get(key, 0) + 1
+                    if newest is None or key > newest:
+                        newest = key
+    except Exception as e:
+        return {"error": f"{type(e).__name__}"}
+
+    # Coverage check: a weekday with zero filings inside the last 14 days,
+    # today excluded, is a gap. Weekends are near-zero by nature.
+    today = _dt.now(_CT).date()
+    days = []
+    for i in range(14, 0, -1):
+        d = today - _td(days=i)
+        k = d.isoformat()
+        days.append({"date": k, "dow": d.strftime("%a"), "n": per_day.get(k, 0),
+                     "weekend": d.weekday() >= 5})
+    gaps = [d["date"] for d in days if not d["weekend"] and d["n"] == 0]
+    data = {
+        "total": total, "pending": pending, "closed": total - pending,
+        "with_address": with_addr,
+        "address_pct": round(100.0 * with_addr / total, 1) if total else None,
+        "flagged_for_enrichment": flagged,
+        "backlog": {
+            # status
+            "pending_status_stale": stale,
+            "need_status_update": stale["8-30d"] + stale["31-90d"] + stale[">90d"] + stale["never"],
+            # enrichment
+            "never_enriched": never_enriched,
+            "flagged_for_redrill": flagged_only,
+            "no_address_reachable": no_addr_reachable,
+            "address_unfindable": unfindable,
+        },
+        "newest_file_date": newest,
+        "days": days, "gaps": gaps,
+        "today_so_far": per_day.get(today.isoformat(), 0),
+        "scanned_at": _dt.now(_CT).isoformat(),
+    }
+    _snap_cache.update(at=now, data=data)
+    return data
+
+
+def _tail(path, n=4000):
+    try:
+        with open(path, "rb") as f:
+            f.seek(0, os.SEEK_END)
+            size = f.tell()
+            f.seek(max(0, size - 400_000))
+            lines = f.read().decode(errors="replace").splitlines()
+        return lines[-n:]
+    except Exception:
+        return []
+
+
+def _primary_status():
+    """What the primary's own log says it last did."""
+    lines = _tail(PRIMARY_LOG)
+    out = {"last_cycle_at": None, "last_cycle_seconds": None, "total": None,
+           "pending": None, "enriched": None, "last_merge": None,
+           "job3_backlog": None, "addresses_last_hour": 0, "cases_last_hour": 0,
+           "last_line_at": None, "logins_failed_recent": 0}
+    hour_ago = _dt.now(_CT) - _td(hours=1)
+    for ln in lines:
+        m = _re.match(r"^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})", ln)
+        ts = None
+        if m:
+            try:
+                ts = _dt.strptime(m.group(1), "%Y-%m-%d %H:%M:%S")
+                out["last_line_at"] = m.group(1)
+            except Exception:
+                pass
+        if "CYCLE COMPLETE" in ln:
+            mm = _re.search(r"CYCLE COMPLETE \((\d+)s\)", ln)
+            out["last_cycle_at"] = m.group(1) if m else None
+            out["last_cycle_seconds"] = int(mm.group(1)) if mm else None
+        mm = _re.search(r"Total: (\d+) \((\d+) pending, (\d+) enriched\)", ln)
+        if mm:
+            out["total"], out["pending"], out["enriched"] = map(int, mm.groups())
+        mm = _re.search(r"Merged (\d+) sweep drop\(s\): (\d+) observations, (\d+) status changes, (\d+) new", ln)
+        if mm:
+            out["last_merge"] = {"drops": int(mm.group(1)), "observations": int(mm.group(2)),
+                                 "status_changes": int(mm.group(3)), "new": int(mm.group(4))}
+        mm = _re.search(r"JOB 3: Enriching \d+/(\d+)", ln)
+        if mm:
+            out["job3_backlog"] = int(mm.group(1))
+        if ts and ts.replace(tzinfo=_CT) >= hour_ago:
+            if "Extracted address" in ln:
+                out["addresses_last_hour"] += 1
+            if _re.search(r"✓ \d{2}GT\d+\s*$", ln):
+                out["cases_last_hour"] += 1
+            if "User-Id or Password is incorrect" in ln or "Login failed" in ln:
+                out["logins_failed_recent"] += 1
+    return out
+
+
+def _sweep_status():
+    try:
+        pass_no = json.load(open(os.path.join(SWEEP_DIR, "pass.json"))).get("pass", 1)
+    except Exception:
+        pass_no = 1
+    done = _glob.glob(os.path.join(SWEEP_DIR, "done", f"p{pass_no:03d}-*.done"))
+    swept = skipped = rows = 0
+    latest = 0
+    for p in done:
+        try:
+            d = json.load(open(p))
+        except Exception:
+            continue
+        if d.get("skipped"):
+            skipped += 1
+        else:
+            swept += 1
+            rows += int(d.get("rows") or 0)
+        latest = max(latest, os.path.getmtime(p))
+    try:
+        import sweep_windows
+        sys_path_ok = True
+    except Exception:
+        sys_path_ok = False
+    total_windows = None
+    if sys_path_ok:
+        cutoff = _dt.now(_CT).replace(tzinfo=None) - _td(days=21)
+        total_windows = int(((cutoff - sweep_windows.EPOCH).days - sweep_windows.WINDOW_DAYS)
+                            // sweep_windows.WINDOW_DAYS) + 1
+    pend = None
+    try:
+        pend = json.load(open(os.path.join(SWEEP_DIR, "pending_index.json")))
+        pend = {"open_total": pend.get("open_total"),
+                "windows_with_open": len(pend.get("windows") or {}),
+                "generated_at": pend.get("generated_at")}
+    except Exception:
+        pass
+    claims = [os.path.basename(c) for c in _glob.glob(os.path.join(SWEEP_DIR, "claims", "*.claim"))]
+    return {
+        "pass": pass_no, "windows_swept": swept, "windows_skipped_closed": skipped,
+        "windows_total": total_windows, "statuses_observed": rows,
+        "drops_waiting": len(_glob.glob(os.path.join(SWEEP_DIR, "drops", "*.jsonl"))),
+        "claims_open": claims,
+        "last_window_at": _dt.fromtimestamp(latest, _CT).isoformat() if latest else None,
+        "pending_index": pend,
+    }
+
+
+def _accounts_status():
+    out = []
+    try:
+        accts = json.load(open(os.path.join(CASELINK_DIR, ".accounts.json"))).get("accounts", [])
+    except Exception:
+        accts = []
+    try:
+        state = json.load(open(os.path.join(CASELINK_DIR, "account_state.json")))
+    except Exception:
+        state = {}
+    for a in accts:
+        alias = a.get("alias")
+        lease_p = os.path.join(CASELINK_DIR, "account_leases", f"{alias}.lease")
+        lease = None
+        if os.path.exists(lease_p):
+            try:
+                lease = json.load(open(lease_p))
+                pid = int(lease.get("pid", 0))
+                try:
+                    os.kill(pid, 0); lease["alive"] = True
+                except OSError:
+                    lease["alive"] = False
+            except Exception:
+                lease = {"alive": None}
+        st = state.get(alias, {})
+        cooling = False
+        try:
+            cooling = bool(st.get("cooldown_until")) and _dt.fromisoformat(st["cooldown_until"]) > _dt.now(_dt.fromisoformat(st["cooldown_until"]).tzinfo)
+        except Exception:
+            pass
+        out.append({
+            "alias": alias, "roles": a.get("roles"), "shared": a.get("shared", False),
+            "hours_ct": a.get("hours_ct"),
+            "killswitch": os.path.exists(os.path.join(CASELINK_DIR, f"KILLSWITCH.{alias}")),
+            "leased": bool(lease), "lease_alive": (lease or {}).get("alive"),
+            "cooling": cooling, "cooldown_until": st.get("cooldown_until"),
+            "last_result": st.get("last_result"), "last_try": st.get("last_try"),
+        })
+    return out
+
+
+def _pm2_status():
+    try:
+        raw = _sp.run(["/usr/bin/pm2", "jlist"], capture_output=True, text=True, timeout=8).stdout
+        procs = json.loads(raw or "[]")
+    except Exception:
+        return []
+    out = []
+    for p in procs:
+        name = p.get("name", "")
+        if not (name.startswith("caselink") or name == "live-stream"):
+            continue
+        env = p.get("pm2_env", {})
+        up = env.get("pm_uptime")
+        out.append({
+            "name": name, "status": env.get("status"),
+            "restarts": env.get("restart_time"),
+            "uptime_seconds": int((time.time() * 1000 - up) / 1000) if up and env.get("status") == "online" else None,
+            "memory_mb": round((p.get("monit", {}).get("memory") or 0) / 1048576, 1),
+        })
+    return out
+
+
+async def sync_handler(request):
+    now = time.time()
+    snap_mtime = os.path.getmtime(SNAPSHOT) if os.path.exists(SNAPSHOT) else None
+    body = {
+        "now": _dt.now(_CT).isoformat(),
+        "processes": _pm2_status(),
+        "accounts": _accounts_status(),
+        "primary": _primary_status(),
+        "sweep": _sweep_status(),
+        "data": _scan_snapshot(),
+        "feed": {
+            "clients": len(clients),
+            "seconds_since_line": {w: int(now - t) for w, t in LAST_LINE_AT.items()},
+        },
+        "snapshot": {
+            "path": SNAPSHOT,
+            "age_seconds": int(now - snap_mtime) if snap_mtime else None,
+            "bytes": os.path.getsize(SNAPSHOT) if snap_mtime else None,
+        },
+    }
+    return web.json_response(body, headers={"Access-Control-Allow-Origin": "*",
+                                            "Cache-Control": "no-store"})
+
+app.router.add_get("/sync", sync_handler)
+app.router.add_get("/workers", workers_handler)
+app.router.add_get("/stream", stream_handler)
+app.router.add_post("/publish", publish_handler)
+app.router.add_get("/health", health_handler)
+app.router.add_route("OPTIONS", "/{tail:.*}", options_handler)
+
+if __name__ == "__main__":
+    web.run_app(app, host="127.0.0.1", port=8421)

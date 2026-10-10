@@ -1,0 +1,1166 @@
+{
+ "group": "oc",
+ "sourceRoot": "/Users/mlacy/Documents/3.0/ethos/19-organic-community",
+ "loader": "loaders/organic.mjs",
+ "pocketCount": 21,
+ "totalTokens": 2394783,
+ "thin": [],
+ "problems": [],
+ "pockets": [
+  {
+   "id": "oc-irc-ubuntu-0406",
+   "tokens": 282163,
+   "docs": 324,
+   "units": 32382,
+   "register": "chat",
+   "language": "en",
+   "script": "latn",
+   "family": "irc-ubuntu",
+   "era": "2004-11-15..2006-03-15",
+   "thin": false,
+   "overCap": false,
+   "meanUnitLen": 8.714,
+   "tokensBeforeCap": 282163,
+   "docsBeforeCap": 324,
+   "tokenisation": "word: lowercase NFC maximal runs of letters/marks/digits with inner apostrophes; every token holds a letter (pure numbers dropped); URLs ('://' or leading 'www.') dropped as chunks; no punctuation tokens.",
+   "docDef": "~100 consecutive messages (even blocks, 67-150) inside ONE channel-day; 4 channel-days in this era (a channel-day is too few documents: each channel has only 10-23 sampled days).",
+   "source": "ubuntu-irc/ubuntu/ 2004-11-15..2006-03-15",
+   "counters": {
+    "linesSeen": 32919,
+    "emptyUnits": 537,
+    "addresseeColon": 7863,
+    "urlsDropped": 898,
+    "bracePlaceholders": 0,
+    "emoticonsDropped": 443,
+    "zhSingletons": 0,
+    "lowercaseUnstable": 0
+   },
+   "contentSha256": "2bad0846445e5a97b49ccc223ad49bcbc8271452b276d74eb7a5de2c5cec7cef"
+  },
+  {
+   "id": "oc-irc-ubuntu-0607",
+   "tokens": 299434,
+   "docs": 284,
+   "units": 28424,
+   "register": "chat",
+   "language": "en",
+   "script": "latn",
+   "family": "irc-ubuntu",
+   "era": "2006-07-15..2007-07-15",
+   "thin": false,
+   "overCap": false,
+   "meanUnitLen": 10.535,
+   "tokensBeforeCap": 343760,
+   "docsBeforeCap": 327,
+   "tokenisation": "word: lowercase NFC maximal runs of letters/marks/digits with inner apostrophes; every token holds a letter (pure numbers dropped); URLs ('://' or leading 'www.') dropped as chunks; no punctuation tokens.",
+   "docDef": "~100 consecutive messages (even blocks, 67-150) inside ONE channel-day; 3 channel-days in this era (a channel-day is too few documents: each channel has only 10-23 sampled days).",
+   "source": "ubuntu-irc/ubuntu/ 2006-07-15..2007-07-15",
+   "counters": {
+    "linesSeen": 33124,
+    "emptyUnits": 396,
+    "addresseeColon": 10515,
+    "urlsDropped": 1434,
+    "bracePlaceholders": 0,
+    "emoticonsDropped": 460,
+    "zhSingletons": 0,
+    "lowercaseUnstable": 0
+   },
+   "contentSha256": "4bf58340dda67e3d3b02e49622622d8662701056ca14e9d5b17e3deb4517168b"
+  },
+  {
+   "id": "oc-irc-ubuntu-0809",
+   "tokens": 299611,
+   "docs": 272,
+   "units": 27145,
+   "register": "chat",
+   "language": "en",
+   "script": "latn",
+   "family": "irc-ubuntu",
+   "era": "2008-03-15..2009-03-15",
+   "thin": false,
+   "overCap": false,
+   "meanUnitLen": 11.037,
+   "tokensBeforeCap": 343977,
+   "docsBeforeCap": 313,
+   "tokenisation": "word: lowercase NFC maximal runs of letters/marks/digits with inner apostrophes; every token holds a letter (pure numbers dropped); URLs ('://' or leading 'www.') dropped as chunks; no punctuation tokens.",
+   "docDef": "~100 consecutive messages (even blocks, 67-150) inside ONE channel-day; 3 channel-days in this era (a channel-day is too few documents: each channel has only 10-23 sampled days).",
+   "source": "ubuntu-irc/ubuntu/ 2008-03-15..2009-03-15",
+   "counters": {
+    "linesSeen": 31630,
+    "emptyUnits": 391,
+    "addresseeColon": 10336,
+    "urlsDropped": 1491,
+    "bracePlaceholders": 0,
+    "emoticonsDropped": 339,
+    "zhSingletons": 0,
+    "lowercaseUnstable": 0
+   },
+   "contentSha256": "6ad050d64894ba269137cdca7c4d454ffc16333b21c6ab0207cd584347dea721"
+  },
+  {
+   "id": "oc-irc-ubuntu-0910",
+   "tokens": 287599,
+   "docs": 250,
+   "units": 25045,
+   "register": "chat",
+   "language": "en",
+   "script": "latn",
+   "family": "irc-ubuntu",
+   "era": "2009-07-15..2010-07-15",
+   "thin": false,
+   "overCap": false,
+   "meanUnitLen": 11.483,
+   "tokensBeforeCap": 287599,
+   "docsBeforeCap": 250,
+   "tokenisation": "word: lowercase NFC maximal runs of letters/marks/digits with inner apostrophes; every token holds a letter (pure numbers dropped); URLs ('://' or leading 'www.') dropped as chunks; no punctuation tokens.",
+   "docDef": "~100 consecutive messages (even blocks, 67-150) inside ONE channel-day; 3 channel-days in this era (a channel-day is too few documents: each channel has only 10-23 sampled days).",
+   "source": "ubuntu-irc/ubuntu/ 2009-07-15..2010-07-15",
+   "counters": {
+    "linesSeen": 25278,
+    "emptyUnits": 233,
+    "addresseeColon": 9597,
+    "urlsDropped": 1142,
+    "bracePlaceholders": 0,
+    "emoticonsDropped": 238,
+    "zhSingletons": 0,
+    "lowercaseUnstable": 0
+   },
+   "contentSha256": "d08f72b591e737815996fecf69ce8c0359a9bd8ea935e5d5d53755ae07941839"
+  },
+  {
+   "id": "oc-irc-ubuntu-1112",
+   "tokens": 238581,
+   "docs": 214,
+   "units": 21445,
+   "register": "chat",
+   "language": "en",
+   "script": "latn",
+   "family": "irc-ubuntu",
+   "era": "2011-03-15..2012-07-15",
+   "thin": false,
+   "overCap": false,
+   "meanUnitLen": 11.125,
+   "tokensBeforeCap": 238581,
+   "docsBeforeCap": 214,
+   "tokenisation": "word: lowercase NFC maximal runs of letters/marks/digits with inner apostrophes; every token holds a letter (pure numbers dropped); URLs ('://' or leading 'www.') dropped as chunks; no punctuation tokens.",
+   "docDef": "~100 consecutive messages (even blocks, 67-150) inside ONE channel-day; 4 channel-days in this era (a channel-day is too few documents: each channel has only 10-23 sampled days).",
+   "source": "ubuntu-irc/ubuntu/ 2011-03-15..2012-07-15",
+   "counters": {
+    "linesSeen": 21734,
+    "emptyUnits": 289,
+    "addresseeColon": 6708,
+    "urlsDropped": 1075,
+    "bracePlaceholders": 0,
+    "emoticonsDropped": 200,
+    "zhSingletons": 0,
+    "lowercaseUnstable": 0
+   },
+   "contentSha256": "54b7739af2098bcfac1b28082523a2abff295c345b2241d27018fa2b4ccc53e7"
+  },
+  {
+   "id": "oc-irc-ubuntu-1315",
+   "tokens": 193337,
+   "docs": 171,
+   "units": 17065,
+   "register": "chat",
+   "language": "en",
+   "script": "latn",
+   "family": "irc-ubuntu",
+   "era": "2013-03-15..2015-07-15",
+   "thin": false,
+   "overCap": false,
+   "meanUnitLen": 11.329,
+   "tokensBeforeCap": 193337,
+   "docsBeforeCap": 171,
+   "tokenisation": "word: lowercase NFC maximal runs of letters/marks/digits with inner apostrophes; every token holds a letter (pure numbers dropped); URLs ('://' or leading 'www.') dropped as chunks; no punctuation tokens.",
+   "docDef": "~100 consecutive messages (even blocks, 67-150) inside ONE channel-day; 6 channel-days in this era (a channel-day is too few documents: each channel has only 10-23 sampled days).",
+   "source": "ubuntu-irc/ubuntu/ 2013-03-15..2015-07-15",
+   "counters": {
+    "linesSeen": 17285,
+    "emptyUnits": 220,
+    "addresseeColon": 5518,
+    "urlsDropped": 892,
+    "bracePlaceholders": 0,
+    "emoticonsDropped": 147,
+    "zhSingletons": 0,
+    "lowercaseUnstable": 0
+   },
+   "contentSha256": "6224408f5f66a07f7a0bb9abd9cf2bdc3c962872232bed07f5222c6786622d16"
+  },
+  {
+   "id": "oc-irc-kubuntu-0506",
+   "tokens": 75407,
+   "docs": 94,
+   "units": 9489,
+   "register": "chat",
+   "language": "en",
+   "script": "latn",
+   "family": "irc-kubuntu",
+   "era": "2005-07-15..2006-07-15",
+   "thin": false,
+   "overCap": false,
+   "meanUnitLen": 7.947,
+   "tokensBeforeCap": 75407,
+   "docsBeforeCap": 94,
+   "tokenisation": "word: lowercase NFC maximal runs of letters/marks/digits with inner apostrophes; every token holds a letter (pure numbers dropped); URLs ('://' or leading 'www.') dropped as chunks; no punctuation tokens.",
+   "docDef": "~100 consecutive messages (even blocks, 67-150) inside ONE channel-day; 4 channel-days in this era (a channel-day is too few documents: each channel has only 10-23 sampled days).",
+   "source": "ubuntu-irc/kubuntu/ 2005-07-15..2006-07-15",
+   "counters": {
+    "linesSeen": 9724,
+    "emptyUnits": 235,
+    "addresseeColon": 2158,
+    "urlsDropped": 340,
+    "bracePlaceholders": 0,
+    "emoticonsDropped": 179,
+    "zhSingletons": 0,
+    "lowercaseUnstable": 0
+   },
+   "contentSha256": "9cc2fb5ba33a07c0a0f4083e31f5dd08b6cbd25bc115faa1fdea8aaf8db0c1bf"
+  },
+  {
+   "id": "oc-irc-kubuntu-0708",
+   "tokens": 124621,
+   "docs": 143,
+   "units": 14244,
+   "register": "chat",
+   "language": "en",
+   "script": "latn",
+   "family": "irc-kubuntu",
+   "era": "2007-03-15..2008-07-15",
+   "thin": false,
+   "overCap": false,
+   "meanUnitLen": 8.749,
+   "tokensBeforeCap": 124621,
+   "docsBeforeCap": 143,
+   "tokenisation": "word: lowercase NFC maximal runs of letters/marks/digits with inner apostrophes; every token holds a letter (pure numbers dropped); URLs ('://' or leading 'www.') dropped as chunks; no punctuation tokens.",
+   "docDef": "~100 consecutive messages (even blocks, 67-150) inside ONE channel-day; 4 channel-days in this era (a channel-day is too few documents: each channel has only 10-23 sampled days).",
+   "source": "ubuntu-irc/kubuntu/ 2007-03-15..2008-07-15",
+   "counters": {
+    "linesSeen": 14532,
+    "emptyUnits": 288,
+    "addresseeColon": 3101,
+    "urlsDropped": 668,
+    "bracePlaceholders": 0,
+    "emoticonsDropped": 214,
+    "zhSingletons": 0,
+    "lowercaseUnstable": 0
+   },
+   "contentSha256": "15e23ee0a2279432b4471eb66790c5cf6dcde6578aef747df49fc2d57840a245"
+  },
+  {
+   "id": "oc-irc-kubuntu-0915",
+   "tokens": 85621,
+   "docs": 91,
+   "units": 9139,
+   "register": "chat",
+   "language": "en",
+   "script": "latn",
+   "family": "irc-kubuntu",
+   "era": "2009-03-15..2015-07-15",
+   "thin": false,
+   "overCap": false,
+   "meanUnitLen": 9.369,
+   "tokensBeforeCap": 85621,
+   "docsBeforeCap": 91,
+   "tokenisation": "word: lowercase NFC maximal runs of letters/marks/digits with inner apostrophes; every token holds a letter (pure numbers dropped); URLs ('://' or leading 'www.') dropped as chunks; no punctuation tokens.",
+   "docDef": "~100 consecutive messages (even blocks, 67-150) inside ONE channel-day; 14 channel-days in this era (a channel-day is too few documents: each channel has only 10-23 sampled days).",
+   "source": "ubuntu-irc/kubuntu/ 2009-03-15..2015-07-15",
+   "counters": {
+    "linesSeen": 9321,
+    "emptyUnits": 182,
+    "addresseeColon": 1995,
+    "urlsDropped": 332,
+    "bracePlaceholders": 0,
+    "emoticonsDropped": 131,
+    "zhSingletons": 0,
+    "lowercaseUnstable": 0
+   },
+   "contentSha256": "5aae03acecdb5ff8e0cbc3913d012787d8e4536d00450ff0a405fdedada829d5"
+  },
+  {
+   "id": "oc-irc-ubuntu-server-0710",
+   "tokens": 38537,
+   "docs": 38,
+   "units": 3750,
+   "register": "chat",
+   "language": "en",
+   "script": "latn",
+   "family": "irc-ubuntu-server",
+   "era": "2007-11-15..2010-07-15",
+   "thin": false,
+   "overCap": false,
+   "meanUnitLen": 10.277,
+   "tokensBeforeCap": 38537,
+   "docsBeforeCap": 38,
+   "tokenisation": "word: lowercase NFC maximal runs of letters/marks/digits with inner apostrophes; every token holds a letter (pure numbers dropped); URLs ('://' or leading 'www.') dropped as chunks; no punctuation tokens.",
+   "docDef": "~100 consecutive messages (even blocks, 67-150) inside ONE channel-day; 7 channel-days in this era (a channel-day is too few documents: each channel has only 10-23 sampled days).",
+   "source": "ubuntu-irc/ubuntu-server/ 2007-11-15..2010-07-15",
+   "counters": {
+    "linesSeen": 3813,
+    "emptyUnits": 63,
+    "addresseeColon": 696,
+    "urlsDropped": 156,
+    "bracePlaceholders": 0,
+    "emoticonsDropped": 39,
+    "zhSingletons": 0,
+    "lowercaseUnstable": 0
+   },
+   "contentSha256": "3706990cd5013081c5eabcaec216be6ff8209f84b6461153e9c32cf9505ac960"
+  },
+  {
+   "id": "oc-irc-ubuntu-server-1115",
+   "tokens": 37449,
+   "docs": 36,
+   "units": 3538,
+   "register": "chat",
+   "language": "en",
+   "script": "latn",
+   "family": "irc-ubuntu-server",
+   "era": "2011-03-15..2015-07-15",
+   "thin": false,
+   "overCap": false,
+   "meanUnitLen": 10.585,
+   "tokensBeforeCap": 37449,
+   "docsBeforeCap": 36,
+   "tokenisation": "word: lowercase NFC maximal runs of letters/marks/digits with inner apostrophes; every token holds a letter (pure numbers dropped); URLs ('://' or leading 'www.') dropped as chunks; no punctuation tokens.",
+   "docDef": "~100 consecutive messages (even blocks, 67-150) inside ONE channel-day; 10 channel-days in this era (a channel-day is too few documents: each channel has only 10-23 sampled days).",
+   "source": "ubuntu-irc/ubuntu-server/ 2011-03-15..2015-07-15",
+   "counters": {
+    "linesSeen": 3599,
+    "emptyUnits": 61,
+    "addresseeColon": 796,
+    "urlsDropped": 174,
+    "bracePlaceholders": 0,
+    "emoticonsDropped": 20,
+    "zhSingletons": 0,
+    "lowercaseUnstable": 0
+   },
+   "contentSha256": "0e850a44f8fdf04d7ca8699e27d341d46f0a5a86a5ec0b57b226ef56db7abb08"
+  },
+  {
+   "id": "oc-irc-ubuntu-it-1012",
+   "tokens": 38919,
+   "docs": 49,
+   "units": 4837,
+   "register": "chat",
+   "language": "it",
+   "script": "latn",
+   "family": "irc-ubuntu-it",
+   "era": "2010-11-15..2012-07-15",
+   "thin": false,
+   "overCap": false,
+   "meanUnitLen": 8.046,
+   "tokensBeforeCap": 38919,
+   "docsBeforeCap": 49,
+   "tokenisation": "word: lowercase NFC maximal runs of letters/marks/digits with inner apostrophes; every token holds a letter (pure numbers dropped); URLs ('://' or leading 'www.') dropped as chunks; no punctuation tokens.",
+   "docDef": "~100 consecutive messages (even blocks, 67-150) inside ONE channel-day; 5 channel-days in this era (a channel-day is too few documents: each channel has only 10-23 sampled days).",
+   "source": "ubuntu-irc/ubuntu-it/ 2010-11-15..2012-07-15",
+   "counters": {
+    "linesSeen": 4954,
+    "emptyUnits": 117,
+    "addresseeColon": 1062,
+    "urlsDropped": 235,
+    "bracePlaceholders": 0,
+    "emoticonsDropped": 46,
+    "zhSingletons": 0,
+    "lowercaseUnstable": 0
+   },
+   "contentSha256": "21b5f0fdeff00c458cc765331acd94ecbf2054902b46a17f1194111ca9a17fa9"
+  },
+  {
+   "id": "oc-irc-ubuntu-it-1315",
+   "tokens": 43496,
+   "docs": 62,
+   "units": 6045,
+   "register": "chat",
+   "language": "it",
+   "script": "latn",
+   "family": "irc-ubuntu-it",
+   "era": "2013-03-15..2015-07-15",
+   "thin": false,
+   "overCap": false,
+   "meanUnitLen": 7.195,
+   "tokensBeforeCap": 43496,
+   "docsBeforeCap": 62,
+   "tokenisation": "word: lowercase NFC maximal runs of letters/marks/digits with inner apostrophes; every token holds a letter (pure numbers dropped); URLs ('://' or leading 'www.') dropped as chunks; no punctuation tokens.",
+   "docDef": "~100 consecutive messages (even blocks, 67-150) inside ONE channel-day; 6 channel-days in this era (a channel-day is too few documents: each channel has only 10-23 sampled days).",
+   "source": "ubuntu-irc/ubuntu-it/ 2013-03-15..2015-07-15",
+   "counters": {
+    "linesSeen": 6235,
+    "emptyUnits": 190,
+    "addresseeColon": 798,
+    "urlsDropped": 297,
+    "bracePlaceholders": 0,
+    "emoticonsDropped": 58,
+    "zhSingletons": 0,
+    "lowercaseUnstable": 0
+   },
+   "contentSha256": "dfff8463baa748fe611890b88bd7e135bdd9e9cf221f551f58c66b018fc7a641"
+  },
+  {
+   "id": "oc-irc-xubuntu",
+   "tokens": 51581,
+   "docs": 56,
+   "units": 5525,
+   "register": "chat",
+   "language": "en",
+   "script": "latn",
+   "family": "irc-xubuntu",
+   "era": "2007-03-15..2015-07-15",
+   "thin": false,
+   "overCap": false,
+   "meanUnitLen": 9.336,
+   "tokensBeforeCap": 51581,
+   "docsBeforeCap": 56,
+   "tokenisation": "word: lowercase NFC maximal runs of letters/marks/digits with inner apostrophes; every token holds a letter (pure numbers dropped); URLs ('://' or leading 'www.') dropped as chunks; no punctuation tokens.",
+   "docDef": "~100 consecutive messages (even blocks, 67-150) inside ONE channel-day; 18 channel-days in this era (a channel-day is too few documents: each channel has only 10-23 sampled days).",
+   "source": "ubuntu-irc/xubuntu/ 2007-03-15..2015-07-15",
+   "counters": {
+    "linesSeen": 5647,
+    "emptyUnits": 122,
+    "addresseeColon": 748,
+    "urlsDropped": 208,
+    "bracePlaceholders": 0,
+    "emoticonsDropped": 78,
+    "zhSingletons": 0,
+    "lowercaseUnstable": 0
+   },
+   "contentSha256": "b3c47102cdb6ccedfc1a35d88925a69fdc50c11ec86a4f3c04c2a0c69cd5d00d"
+  },
+  {
+   "id": "oc-irc-ubuntu-es",
+   "tokens": 44491,
+   "docs": 61,
+   "units": 6038,
+   "register": "chat",
+   "language": "es",
+   "script": "latn",
+   "family": "irc-ubuntu-es",
+   "era": "2010-11-15..2015-11-15",
+   "thin": false,
+   "overCap": false,
+   "meanUnitLen": 7.368,
+   "tokensBeforeCap": 44491,
+   "docsBeforeCap": 61,
+   "tokenisation": "word: lowercase NFC maximal runs of letters/marks/digits with inner apostrophes; every token holds a letter (pure numbers dropped); URLs ('://' or leading 'www.') dropped as chunks; no punctuation tokens.",
+   "docDef": "~100 consecutive messages (even blocks, 67-150) inside ONE channel-day; 10 channel-days in this era (a channel-day is too few documents: each channel has only 10-23 sampled days).",
+   "source": "ubuntu-irc/ubuntu-es/ 2010-11-15..2015-11-15",
+   "counters": {
+    "linesSeen": 6198,
+    "emptyUnits": 160,
+    "addresseeColon": 410,
+    "urlsDropped": 149,
+    "bracePlaceholders": 0,
+    "emoticonsDropped": 57,
+    "zhSingletons": 0,
+    "lowercaseUnstable": 0
+   },
+   "contentSha256": "aad7f38aec5b71e1c8dadbd940ca9de8cd52bd83a9946ad4da45034d98b7cf6f"
+  },
+  {
+   "id": "oc-irc-ubuntu-de",
+   "tokens": 43510,
+   "docs": 40,
+   "units": 4151,
+   "register": "chat",
+   "language": "de",
+   "script": "latn",
+   "family": "irc-ubuntu-de",
+   "era": "2010-11-15..2015-07-15",
+   "thin": false,
+   "overCap": false,
+   "meanUnitLen": 10.482,
+   "tokensBeforeCap": 43510,
+   "docsBeforeCap": 40,
+   "tokenisation": "word: lowercase NFC maximal runs of letters/marks/digits with inner apostrophes; every token holds a letter (pure numbers dropped); URLs ('://' or leading 'www.') dropped as chunks; no punctuation tokens.",
+   "docDef": "~100 consecutive messages (even blocks, 67-150) inside ONE channel-day; 11 channel-days in this era (a channel-day is too few documents: each channel has only 10-23 sampled days).",
+   "source": "ubuntu-irc/ubuntu-de/ 2010-11-15..2015-07-15",
+   "counters": {
+    "linesSeen": 4249,
+    "emptyUnits": 98,
+    "addresseeColon": 1058,
+    "urlsDropped": 216,
+    "bracePlaceholders": 0,
+    "emoticonsDropped": 49,
+    "zhSingletons": 0,
+    "lowercaseUnstable": 0
+   },
+   "contentSha256": "26db71b30c102e8896367047c79d6c911b8655d69cab4b07d09ada8325eeda58"
+  },
+  {
+   "id": "oc-cosem",
+   "tokens": 55649,
+   "docs": 40,
+   "units": 14572,
+   "register": "chat",
+   "language": "en",
+   "script": "latn",
+   "family": "cosem",
+   "era": "2016-2017",
+   "thin": false,
+   "overCap": false,
+   "meanUnitLen": 3.819,
+   "tokensBeforeCap": 55649,
+   "docsBeforeCap": 40,
+   "tokenisation": "word: lowercase NFC maximal runs of letters/marks/digits with inner apostrophes; every token holds a letter (pure numbers dropped); URLs ('://' or leading 'www.') dropped as chunks; no punctuation tokens. Scrub placeholders {{EMAIL}}/{{TWITTER}} dropped (counted).",
+   "docDef": "one source file = a ~500-message stretch of one group conversation (conversations 17CF01, 17CF02, 17CF03 are pooled; 40 files).",
+   "source": "cosem/*.txt (CoSEM, Gonzales et al. 2021)",
+   "counters": {
+    "linesSeen": 17605,
+    "emptyUnits": 3033,
+    "addresseeColon": 0,
+    "urlsDropped": 0,
+    "bracePlaceholders": 59,
+    "emoticonsDropped": 0,
+    "zhSingletons": 0,
+    "lowercaseUnstable": 0
+   },
+   "contentSha256": "cc1922fa6ae30db78adbcbfb8d5c92e068783f471a28ca427242e9b136f17160"
+  },
+  {
+   "id": "oc-nussms-en",
+   "tokens": 37051,
+   "docs": 25,
+   "units": 3526,
+   "register": "sms",
+   "language": "en",
+   "script": "latn",
+   "family": "nussms",
+   "era": "2009-2010",
+   "thin": false,
+   "overCap": false,
+   "meanUnitLen": 10.508,
+   "tokensBeforeCap": 37051,
+   "docsBeforeCap": 25,
+   "tokenisation": "word: lowercase NFC maximal runs of letters/marks/digits with inner apostrophes; every token holds a letter (pure numbers dropped); URLs ('://' or leading 'www.') dropped as chunks; no punctuation tokens.",
+   "docDef": "one source file = one contributor's SMS for one period (25 files, ~90-200 messages each).",
+   "source": "nus-sms/en/*.txt (NUS SMS corpus, Chen & Kan 2013)",
+   "counters": {
+    "linesSeen": 3560,
+    "emptyUnits": 34,
+    "addresseeColon": 0,
+    "urlsDropped": 3,
+    "bracePlaceholders": 429,
+    "emoticonsDropped": 35,
+    "zhSingletons": 0,
+    "lowercaseUnstable": 0
+   },
+   "contentSha256": "5fdc0801fac9919e4a0924189cb6106e322f4aa0fa948606f06d73464e1fa6cd"
+  },
+  {
+   "id": "oc-nussms-zh",
+   "tokens": 32208,
+   "docs": 20,
+   "units": 2761,
+   "register": "sms",
+   "language": "zh",
+   "script": "hani",
+   "family": "nussms",
+   "era": "2008-2009",
+   "thin": false,
+   "overCap": false,
+   "meanUnitLen": 11.665,
+   "tokensBeforeCap": 32208,
+   "docsBeforeCap": 20,
+   "tokenisation": "CHARACTER BIGRAMS: the source is unsegmented; each run of Han characters becomes overlapping character bigrams (a run of one character stays a unigram, counted in counters.zhSingletons); non-Han words as word runs; URLs/placeholders dropped. NOT comparable at word grain with word-tokenised pockets.",
+   "docDef": "one source file = one contributor's SMS for one period (20 files).",
+   "source": "nus-sms/zh/*.txt (NUS SMS corpus, Chen & Kan 2013)",
+   "counters": {
+    "linesSeen": 2784,
+    "emptyUnits": 23,
+    "addresseeColon": 0,
+    "urlsDropped": 0,
+    "bracePlaceholders": 72,
+    "emoticonsDropped": 67,
+    "zhSingletons": 567,
+    "lowercaseUnstable": 0
+   },
+   "contentSha256": "82c06488debefa7342860ca7133d3e9c40f4ea87f53e55b454fae9beb4a1c91f"
+  },
+  {
+   "id": "oc-lccc",
+   "tokens": 51899,
+   "docs": 40,
+   "units": 7161,
+   "register": "chat",
+   "language": "zh",
+   "script": "hani",
+   "family": "lccc",
+   "era": "2010s",
+   "thin": false,
+   "overCap": false,
+   "meanUnitLen": 7.247,
+   "tokensBeforeCap": 51899,
+   "docsBeforeCap": 40,
+   "tokenisation": "WORD grain from the source's OWN segmentation (LCCC ships space-separated words); tokens = those words with punctuation tokens and pure numbers dropped; Latin words as words.",
+   "docDef": "one source file = a batch of ~37 dialogues (~160-180 turns) concatenated without separators (40 files); dialogue boundaries are not recoverable, so unit adjacency across a dialogue boundary is not discourse.",
+   "source": "lccc/*.txt (LCCC, thu-coai, MIT)",
+   "counters": {
+    "linesSeen": 7172,
+    "emptyUnits": 11,
+    "addresseeColon": 0,
+    "urlsDropped": 0,
+    "bracePlaceholders": 0,
+    "emoticonsDropped": 0,
+    "zhSingletons": 0,
+    "lowercaseUnstable": 0
+   },
+   "contentSha256": "82cdae4f3de23eacc7f25f2703f0ec1f7755113a4aa10a275ca6ce2730062364"
+  },
+  {
+   "id": "oc-enron",
+   "tokens": 33619,
+   "docs": 1266,
+   "units": 3226,
+   "register": "email",
+   "language": "en",
+   "script": "latn",
+   "family": "enron",
+   "era": "1999-2001",
+   "thin": false,
+   "overCap": false,
+   "meanUnitLen": 10.421,
+   "tokensBeforeCap": 33619,
+   "docsBeforeCap": 1266,
+   "tokenisation": "word: lowercase NFC maximal runs of letters/marks/digits with inner apostrophes; every token holds a letter (pure numbers dropped); URLs ('://' or leading 'www.') dropped as chunks; no punctuation tokens. Sentences end at . ! ? plus whitespace.",
+   "docDef": "one email (after cleaning and exact de-duplication on header+body; the ten mailboxes' 60 monthly files are pooled). Most emails are 1-3 sentences, so documents are short.",
+   "source": "enron/*/*.txt (10 mailboxes, FERC release via CMU)",
+   "counters": {
+    "linesSeen": 0,
+    "emptyUnits": 0,
+    "addresseeColon": 0,
+    "urlsDropped": 36,
+    "bracePlaceholders": 0,
+    "emoticonsDropped": 0,
+    "zhSingletons": 0,
+    "lowercaseUnstable": 0,
+    "emails": 3553,
+    "emptyAfterClean": 662,
+    "duplicates": 1625,
+    "qpSoftBreaks": 176,
+    "qpBytes": 254,
+    "fenceCuts": 857,
+    "quotedLines": 938
+   },
+   "contentSha256": "3674d066dfc05997e481927ce343e05c8e947718dfe7c090db2700d57a7fee5a"
+  }
+ ],
+ "skipped": [
+  {
+   "what": "documents beyond the 300k-token cap",
+   "why": "oc-irc-ubuntu-0607: kept 299434 of 343760 tokens (whole documents by sha256 order, cap 300000)"
+  },
+  {
+   "what": "documents beyond the 300k-token cap",
+   "why": "oc-irc-ubuntu-0809: kept 299611 of 343977 tokens (whole documents by sha256 order, cap 300000)"
+  },
+  {
+   "what": "IRC messages / SMS lines / chat lines with no token (emoticon-only, URL-only, punctuation-only, '??')",
+   "why": "a unit cannot be empty; counted per pocket in counters.emptyUnits"
+  },
+  {
+   "what": "URLs ('://' or leading 'www.'), brace/XML scrub placeholders ({{EMAIL}}, {{TWITTER}}, <#>), isolated ':p' ':d' ';o' faces",
+   "why": "not words of the language; dropped inside the message, counted per pocket (urlsDropped, bracePlaceholders, emoticonsDropped)"
+  },
+  {
+   "what": "Enron: 662 emails with no body left after removing headers/quotes/fenced blocks",
+   "why": "empty unit lists are invalid; source bodies are truncated, many emails are header-only"
+  },
+  {
+   "what": "Enron: 1625 exact duplicate emails (same header line and body)",
+   "why": "the same message filed in several folders/mailboxes would inflate repetition statistics"
+  },
+  {
+   "what": "Enron: no split by mailbox or era",
+   "why": "after cleaning only ~34k tokens remain in total; no mailbox or era reaches the 20k-token minimum with sibling pockets also kept"
+  },
+  {
+   "what": "COSEM: conversations 17CF01/17CF02/17CF03 not made separate pockets",
+   "why": "17CF01+17CF02 are 10 files (<20 docs, <20k tokens); pooled into one pocket (file tags kept in meta.docSource)"
+  },
+  {
+   "what": "IRC xubuntu, ubuntu-es, ubuntu-de not split into eras; kubuntu 2009-2015 and ubuntu-server/ubuntu-it two eras only",
+   "why": "rule: split a channel into eras only while each era keeps >= 35k tokens (so each discover/confirm half keeps >= ~17k)"
+  },
+  {
+   "what": "README mentions pt and zh Ubuntu channels",
+   "why": "only ubuntu, kubuntu, xubuntu, ubuntu-server, ubuntu-de, ubuntu-es, ubuntu-it exist on disk"
+  },
+  {
+   "what": "NUS SMS: README says Singapore; the files carry contributor 'Tao Chen' only, country India (en, 25 files) and China (zh, 20 files)",
+   "why": "pockets are labelled by what the files say; this is one contributor's SMS, not a population sample"
+  },
+  {
+   "what": "LCCC: dialogue boundaries",
+   "why": "files concatenate ~37 dialogues without separators, so consecutive lines may belong to different dialogues"
+  },
+  {
+   "what": "Enron emails dated 1979-12-31 (kean-s, 1979-12-*.txt)",
+   "why": "a placeholder date in the source; the text is kept (it is real email), only the era label is approximate"
+  }
+ ],
+ "eraBasis": {
+  "ubuntu": [
+   [
+    "2004-11-15",
+    44756
+   ],
+   [
+    "2005-03-15",
+    61182
+   ],
+   [
+    "2005-07-15",
+    85264
+   ],
+   [
+    "2006-03-15",
+    90961
+   ],
+   [
+    "2006-07-15",
+    117770
+   ],
+   [
+    "2007-03-15",
+    110710
+   ],
+   [
+    "2007-07-15",
+    115280
+   ],
+   [
+    "2008-03-15",
+    104218
+   ],
+   [
+    "2008-07-15",
+    139310
+   ],
+   [
+    "2009-03-15",
+    100449
+   ],
+   [
+    "2009-07-15",
+    111817
+   ],
+   [
+    "2010-03-15",
+    96155
+   ],
+   [
+    "2010-07-15",
+    79627
+   ],
+   [
+    "2011-03-15",
+    73099
+   ],
+   [
+    "2011-07-15",
+    64855
+   ],
+   [
+    "2012-03-15",
+    50783
+   ],
+   [
+    "2012-07-15",
+    49844
+   ],
+   [
+    "2013-03-15",
+    38256
+   ],
+   [
+    "2013-07-15",
+    41181
+   ],
+   [
+    "2014-03-15",
+    8879
+   ],
+   [
+    "2014-07-15",
+    35781
+   ],
+   [
+    "2015-03-15",
+    33827
+   ],
+   [
+    "2015-07-15",
+    35413
+   ]
+  ],
+  "kubuntu": [
+   [
+    "2005-07-15",
+    12925
+   ],
+   [
+    "2005-11-15",
+    15559
+   ],
+   [
+    "2006-03-15",
+    22052
+   ],
+   [
+    "2006-07-15",
+    24871
+   ],
+   [
+    "2007-03-15",
+    39340
+   ],
+   [
+    "2007-07-15",
+    44958
+   ],
+   [
+    "2008-03-15",
+    19250
+   ],
+   [
+    "2008-07-15",
+    21073
+   ],
+   [
+    "2009-03-15",
+    17724
+   ],
+   [
+    "2009-07-15",
+    14071
+   ],
+   [
+    "2010-03-15",
+    7259
+   ],
+   [
+    "2010-07-15",
+    5221
+   ],
+   [
+    "2011-03-15",
+    13783
+   ],
+   [
+    "2011-07-15",
+    4674
+   ],
+   [
+    "2012-03-15",
+    3840
+   ],
+   [
+    "2012-07-15",
+    4656
+   ],
+   [
+    "2013-03-15",
+    3049
+   ],
+   [
+    "2013-07-15",
+    832
+   ],
+   [
+    "2014-03-15",
+    603
+   ],
+   [
+    "2014-07-15",
+    4083
+   ],
+   [
+    "2015-03-15",
+    1023
+   ],
+   [
+    "2015-07-15",
+    4803
+   ]
+  ],
+  "xubuntu": [
+   [
+    "2007-03-15",
+    9202
+   ],
+   [
+    "2007-07-15",
+    3351
+   ],
+   [
+    "2008-03-15",
+    2933
+   ],
+   [
+    "2008-07-15",
+    4718
+   ],
+   [
+    "2009-03-15",
+    3970
+   ],
+   [
+    "2009-07-15",
+    2493
+   ],
+   [
+    "2010-03-15",
+    913
+   ],
+   [
+    "2010-07-15",
+    2036
+   ],
+   [
+    "2011-03-15",
+    3360
+   ],
+   [
+    "2011-07-15",
+    3040
+   ],
+   [
+    "2012-03-15",
+    2047
+   ],
+   [
+    "2012-07-15",
+    1455
+   ],
+   [
+    "2013-03-15",
+    3169
+   ],
+   [
+    "2013-07-15",
+    2987
+   ],
+   [
+    "2014-03-15",
+    2631
+   ],
+   [
+    "2014-07-15",
+    935
+   ],
+   [
+    "2015-03-15",
+    805
+   ],
+   [
+    "2015-07-15",
+    1536
+   ]
+  ],
+  "ubuntu-server": [
+   [
+    "2007-11-15",
+    4174
+   ],
+   [
+    "2008-03-15",
+    8000
+   ],
+   [
+    "2008-07-15",
+    5230
+   ],
+   [
+    "2009-03-15",
+    1268
+   ],
+   [
+    "2009-07-15",
+    4290
+   ],
+   [
+    "2010-03-15",
+    7576
+   ],
+   [
+    "2010-07-15",
+    7999
+   ],
+   [
+    "2011-03-15",
+    7032
+   ],
+   [
+    "2011-07-15",
+    4609
+   ],
+   [
+    "2012-03-15",
+    4178
+   ],
+   [
+    "2012-07-15",
+    2653
+   ],
+   [
+    "2013-03-15",
+    5198
+   ],
+   [
+    "2013-07-15",
+    6210
+   ],
+   [
+    "2014-03-15",
+    1468
+   ],
+   [
+    "2014-07-15",
+    4380
+   ],
+   [
+    "2015-03-15",
+    675
+   ],
+   [
+    "2015-07-15",
+    1046
+   ]
+  ],
+  "ubuntu-de": [
+   [
+    "2010-11-15",
+    6175
+   ],
+   [
+    "2011-03-15",
+    5267
+   ],
+   [
+    "2011-07-15",
+    9761
+   ],
+   [
+    "2012-03-15",
+    5526
+   ],
+   [
+    "2012-07-15",
+    3824
+   ],
+   [
+    "2013-03-15",
+    5660
+   ],
+   [
+    "2013-11-15",
+    2199
+   ],
+   [
+    "2014-03-15",
+    1002
+   ],
+   [
+    "2014-07-15",
+    995
+   ],
+   [
+    "2015-03-15",
+    566
+   ],
+   [
+    "2015-07-15",
+    2535
+   ]
+  ],
+  "ubuntu-es": [
+   [
+    "2010-11-15",
+    12376
+   ],
+   [
+    "2011-03-15",
+    12892
+   ],
+   [
+    "2011-07-15",
+    5965
+   ],
+   [
+    "2012-03-15",
+    976
+   ],
+   [
+    "2012-07-15",
+    2694
+   ],
+   [
+    "2013-03-15",
+    3214
+   ],
+   [
+    "2013-07-15",
+    3460
+   ],
+   [
+    "2014-03-15",
+    967
+   ],
+   [
+    "2015-07-15",
+    790
+   ],
+   [
+    "2015-11-15",
+    1157
+   ]
+  ],
+  "ubuntu-it": [
+   [
+    "2010-11-15",
+    8914
+   ],
+   [
+    "2011-03-15",
+    7501
+   ],
+   [
+    "2011-07-15",
+    6114
+   ],
+   [
+    "2012-03-15",
+    10792
+   ],
+   [
+    "2012-07-15",
+    5598
+   ],
+   [
+    "2013-03-15",
+    7781
+   ],
+   [
+    "2013-07-15",
+    11086
+   ],
+   [
+    "2014-03-15",
+    10332
+   ],
+   [
+    "2014-07-15",
+    4883
+   ],
+   [
+    "2015-03-15",
+    6224
+   ],
+   [
+    "2015-07-15",
+    3190
+   ]
+  ]
+ }
+}

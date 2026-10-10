@@ -1,0 +1,312 @@
+{
+ "calibration": {
+  "cells": 220,
+  "absZ4": 1,
+  "absZ2": 23
+ },
+ "planted": {
+  "iidCellsAbsZ4": 0,
+  "iidCells": 44,
+  "recovery": {
+   "pl-burst": {
+    "attrPMI": "+",
+    "voidShare": "-",
+    "gravAlpha": "+"
+   },
+   "pl-markov": {
+    "massAdd": "-",
+    "massExp": "-",
+    "attrPMI": "+",
+    "attrDecay": "+",
+    "gravAlpha": "+",
+    "affect": "+"
+   },
+   "pl-frames": {
+    "massExp": "-",
+    "attrPMI": "+",
+    "attrDecay": "+",
+    "voidShare": "-",
+    "voidRescue": "+",
+    "gravAlpha": "+",
+    "affect": "+"
+   },
+   "pl-parallel": {
+    "massExp": "+",
+    "attrPMI": "+",
+    "attrDecay": "+",
+    "voidShare": "-",
+    "voidRescue": "+"
+   },
+   "pl-mix": {
+    "massExp": "-",
+    "attrPMI": "+",
+    "attrDecay": "+",
+    "voidShare": "-",
+    "gravAlpha": "+",
+    "gravBeta": "-",
+    "affect": "+"
+   }
+  }
+ },
+ "firstLook": {
+  "massAdd": {
+   "predicted": "specific",
+   "+": 0,
+   "-": 5,
+   "absent": 2,
+   "ambiguous": 0,
+   "undefined": 0
+  },
+  "massExp": {
+   "predicted": "specific",
+   "+": 0,
+   "-": 7,
+   "absent": 0,
+   "ambiguous": 0,
+   "undefined": 0
+  },
+  "attrPMI": {
+   "predicted": "universal+",
+   "+": 6,
+   "-": 0,
+   "absent": 0,
+   "ambiguous": 0,
+   "undefined": 1
+  },
+  "attrDecay": {
+   "predicted": "universal+",
+   "+": 6,
+   "-": 0,
+   "absent": 0,
+   "ambiguous": 0,
+   "undefined": 1
+  },
+  "voidShare": {
+   "predicted": "universal-",
+   "+": 0,
+   "-": 7,
+   "absent": 0,
+   "ambiguous": 0,
+   "undefined": 0
+  },
+  "voidRescue": {
+   "predicted": "universal+",
+   "+": 7,
+   "-": 0,
+   "absent": 0,
+   "ambiguous": 0,
+   "undefined": 0
+  },
+  "gravAlpha": {
+   "predicted": "universal+",
+   "+": 7,
+   "-": 0,
+   "absent": 0,
+   "ambiguous": 0,
+   "undefined": 0
+  },
+  "gravBeta": {
+   "predicted": "universal-",
+   "+": 0,
+   "-": 3,
+   "absent": 1,
+   "ambiguous": 3,
+   "undefined": 0
+  },
+  "gravAlphaSd": {
+   "predicted": "universal+",
+   "+": 1,
+   "-": 0,
+   "absent": 5,
+   "ambiguous": 1,
+   "undefined": 0
+  },
+  "affect": {
+   "predicted": "universal+",
+   "+": 6,
+   "-": 0,
+   "absent": 1,
+   "ambiguous": 0,
+   "undefined": 0
+  },
+  "affectAsym": {
+   "predicted": "specific",
+   "+": 0,
+   "-": 0,
+   "absent": 3,
+   "ambiguous": 4,
+   "undefined": 0
+  }
+ },
+ "predictFrozen": {
+  "frozenSha256": "0227988e28f8caf88b091eaaa1821ee7c5873c244b8ecd8c525f9b7921eb3655",
+  "currentSha256": "0227988e28f8caf88b091eaaa1821ee7c5873c244b8ecd8c525f9b7921eb3655",
+  "unchanged": true
+ },
+ "determinism": {
+  "computeIdentical": true,
+  "atlasCellsIdentical": true
+ },
+ "script": {
+  "cyrillic": true,
+  "cjk": true
+ },
+ "size": {
+  "massAdd": {
+   "v": [
+    0.9154,
+    0.9162,
+    0.9174,
+    0.916
+   ],
+   "spearmanWithLogN": 0.4,
+   "relRange": 0.002
+  },
+  "massExp": {
+   "v": [
+    0.9038,
+    0.9074,
+    0.9129,
+    0.9133
+   ],
+   "spearmanWithLogN": 1,
+   "relRange": 0.01
+  },
+  "attrPMI": {
+   "v": [
+    0.7398,
+    0.7167,
+    0.6953,
+    0.7063
+   ],
+   "spearmanWithLogN": -0.8,
+   "relRange": 0.062
+  },
+  "attrDecay": {
+   "v": [
+    0.46,
+    0.4994,
+    0.5043,
+    0.5072
+   ],
+   "spearmanWithLogN": 1,
+   "relRange": 0.096
+  },
+  "voidShare": {
+   "v": [
+    0.341,
+    0.3359,
+    0.3358,
+    0.3303
+   ],
+   "spearmanWithLogN": -1,
+   "relRange": 0.032
+  },
+  "voidRescue": {
+   "v": [
+    0.0649,
+    0.0624,
+    0.0618,
+    0.0637
+   ],
+   "spearmanWithLogN": -0.4,
+   "relRange": 0.049
+  },
+  "gravAlpha": {
+   "v": [
+    0.4479,
+    0.518,
+    0.4963,
+    0.5088
+   ],
+   "spearmanWithLogN": 0.4,
+   "relRange": 0.142
+  },
+  "gravBeta": {
+   "v": [
+    -0.0539,
+    -0.082,
+    -0.1075,
+    -0.087
+   ],
+   "spearmanWithLogN": -0.8,
+   "relRange": 0.648
+  },
+  "gravAlphaSd": {
+   "v": [
+    0.0564,
+    0.0202,
+    0.0469,
+    0.0456
+   ],
+   "spearmanWithLogN": -0.4,
+   "relRange": 0.857
+  },
+  "affect": {
+   "v": [
+    0.0956,
+    0.1002,
+    0.0995,
+    0.0985
+   ],
+   "spearmanWithLogN": 0.2,
+   "relRange": 0.047
+  },
+  "affectAsym": {
+   "v": [
+    0.0184,
+    0.0422,
+    -0.0755,
+    -0.0316
+   ],
+   "spearmanWithLogN": -0.6,
+   "relRange": 10.123
+  }
+ },
+ "unitLengthIid": {
+  "massAdd": [
+   0.8,
+   0.006
+  ],
+  "massExp": [
+   1,
+   0.087
+  ],
+  "attrPMI": [
+   0.2,
+   0.013
+  ],
+  "attrDecay": [
+   -0.4,
+   4.941
+  ],
+  "voidShare": [
+   -0.8,
+   0.005
+  ],
+  "voidRescue": [
+   1,
+   0.667
+  ],
+  "gravAlpha": [
+   0,
+   8.155
+  ],
+  "gravBeta": [
+   0.8,
+   3.062
+  ],
+  "gravAlphaSd": [
+   0.8,
+   0.285
+  ],
+  "affect": [
+   -0.2,
+   1.031
+  ],
+  "affectAsym": [
+   0.2,
+   425.135
+  ]
+ }
+}

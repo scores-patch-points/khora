@@ -117,14 +117,25 @@ export function pointCapacities(nl, caps = listCapacities()) {
 }
 
 /** yieldOf(result) — measured signal from one runCapacity output:
- * referent / edge / filler / claim counts; any gap (not_yet_executable,
- * no_material, bad_query) yields 0 — noise that can never admit. Pure. */
+ * referent / edge / filler / claim counts; the structural products the
+ * SEG/EVA adapters now emit (parts, components, a determinate witness); any
+ * gap (not_yet_executable, no_material, bad_query, unexamined) yields 0 —
+ * noise that can never admit. Pure. */
 export function yieldOf(result) {
   if (!result || typeof result !== "object" || result.gap) return 0;
   if (Array.isArray(result.referents)) return result.referents.length;
   if (Array.isArray(result.fillers)) return result.fillers.length;
   if (Array.isArray(result.edges)) return result.edges.length;
   if (Array.isArray(result.claims)) return result.claims.length;
+  // unravel (SEG·Pattern): the parts a seam separates are the product; a
+  // network with no seam yields 0 (the organ refused, it did not fabricate).
+  if (Array.isArray(result.parts)) return result.parts.length;
+  if (Array.isArray(result.components)) return result.components.length;
+  // witness (EVA·Lens): a determinate verdict is signal — `ok` true (a
+  // clean artifact) counts as 1, `ok` false counts its findings. An
+  // unexamined witness carried the `unexamined`/`gap` above and is 0, never
+  // a silent clean.
+  if (typeof result.ok === "boolean") return result.ok ? 1 : (result.findings?.length ?? 1);
   if (Number.isFinite(result.count)) return result.count;
   return 0;
 }

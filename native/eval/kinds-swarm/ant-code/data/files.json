@@ -1,0 +1,214 @@
+{
+ "js": [
+  {
+   "file": "/Users/mlacy/Documents/3.0/khora/native/eval/coding-competence/build-java-priors.mjs",
+   "pool": "khora"
+  },
+  {
+   "file": "/Users/mlacy/Documents/3.0/khora/native/organs/measure.js",
+   "pool": "khora"
+  },
+  {
+   "file": "/Users/mlacy/Documents/3.0/khora/native/eval/competence/r2-class.mjs",
+   "pool": "khora"
+  },
+  {
+   "file": "/Users/mlacy/Documents/3.0/khora/native/eval/barker/transfer.mjs",
+   "pool": "khora"
+  },
+  {
+   "file": "/Users/mlacy/Documents/3.0/khora/native/adapters/text/recursive.js",
+   "pool": "khora"
+  },
+  {
+   "file": "/Users/mlacy/Documents/3.0/khora/native/adapters/notation/genetic.js",
+   "pool": "khora"
+  },
+  {
+   "file": "/Users/mlacy/Documents/jupyter/node_modules/filelist/node_modules/minimatch/minimatch.js",
+   "pool": "node_modules"
+  },
+  {
+   "file": "/Users/mlacy/Documents/jupyter/node_modules/webpack/lib/cache/PackFileCacheStrategy.js",
+   "pool": "node_modules"
+  },
+  {
+   "file": "/Users/mlacy/Documents/jupyter/node_modules/es-abstract/operations/2018.js",
+   "pool": "node_modules"
+  },
+  {
+   "file": "/Users/mlacy/Documents/jupyter/node_modules/uri-js/dist/es5/uri.all.js",
+   "pool": "node_modules"
+  },
+  {
+   "file": "/Users/mlacy/Documents/jupyter/node_modules/eslint/node_modules/doctrine/lib/doctrine.js",
+   "pool": "node_modules"
+  },
+  {
+   "file": "/Users/mlacy/Documents/jupyter/node_modules/@xmldom/xmldom/lib/entities.js",
+   "pool": "node_modules"
+  }
+ ],
+ "py": [
+  {
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/email/message.py",
+   "pool": "stdlib"
+  },
+  {
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/logging/config.py",
+   "pool": "stdlib"
+  },
+  {
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/re/_compiler.py",
+   "pool": "stdlib"
+  },
+  {
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/_bootstrap.py",
+   "pool": "stdlib"
+  },
+  {
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/_py_warnings.py",
+   "pool": "stdlib"
+  },
+  {
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/_collections_abc.py",
+   "pool": "stdlib"
+  },
+  {
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pydoc.py",
+   "pool": "stdlib"
+  },
+  {
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/annotationlib.py",
+   "pool": "stdlib"
+  },
+  {
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/optparse.py",
+   "pool": "stdlib"
+  },
+  {
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/proactor_events.py",
+   "pool": "stdlib"
+  },
+  {
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/xml/etree/ElementTree.py",
+   "pool": "stdlib"
+  },
+  {
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/email/_header_value_parser.py",
+   "pool": "stdlib"
+  }
+ ],
+ "counts": {
+  "A": 109,
+  "B": 187,
+  "P": 118
+ },
+ "skipped": {
+  "ja": [
+   [
+    "/Users/mlacy/Documents/3.0/khora/native/the-fold/interact.js",
+    "units 449"
+   ]
+  ],
+  "jb": [],
+  "py": [
+   [
+    "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/heapq.py",
+    "units 278"
+   ],
+   [
+    "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/ast.py",
+    "units 413"
+   ],
+   [
+    "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/gzip.py",
+    "units 468"
+   ],
+   [
+    "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/gettext.py",
+    "units 426"
+   ],
+   [
+    "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/mimetypes.py",
+    "units 257"
+   ],
+   [
+    "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/tokenize.py",
+    "units 397"
+   ],
+   [
+    "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/html/parser.py",
+    "units 366"
+   ],
+   [
+    "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/events.py",
+    "units 393"
+   ],
+   [
+    "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pprint.py",
+    "units 472"
+   ]
+  ],
+  "rb": [
+   [
+    "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/time.rb",
+    "units"
+   ],
+   [
+    "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/psych.rb",
+    "units"
+   ],
+   [
+    "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/open-uri.rb",
+    "units"
+   ],
+   [
+    "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/net/smtp.rb",
+    "units"
+   ],
+   [
+    "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/csv.rb",
+    "units"
+   ],
+   [
+    "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/cgi/core.rb",
+    "units"
+   ]
+  ]
+ },
+ "rb": [
+  {
+   "file": "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/net/imap.rb",
+   "pool": "ruby-stdlib"
+  },
+  {
+   "file": "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/mkmf.rb",
+   "pool": "ruby-stdlib"
+  },
+  {
+   "file": "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rubygems.rb",
+   "pool": "ruby-stdlib"
+  },
+  {
+   "file": "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/matrix.rb",
+   "pool": "ruby-stdlib"
+  },
+  {
+   "file": "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/fileutils.rb",
+   "pool": "ruby-stdlib"
+  },
+  {
+   "file": "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rss/rss.rb",
+   "pool": "ruby-stdlib"
+  },
+  {
+   "file": "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/uri/generic.rb",
+   "pool": "ruby-stdlib"
+  },
+  {
+   "file": "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/resolv.rb",
+   "pool": "ruby-stdlib"
+  }
+ ]
+}

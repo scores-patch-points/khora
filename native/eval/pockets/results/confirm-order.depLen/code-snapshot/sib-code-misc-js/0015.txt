@@ -1,0 +1,124 @@
+// FOLD_HOME: where the Fold keeps everything that is not code.
+//   <home>/data/<organ>/   organ state (symlinked in from the organ's own directory by linkState)
+//   <home>/logs/           log files
+//   <home>/run/            pid files and the like
+//   <home>/fold.env        KEY=VALUE, mode 0600: secrets live HERE, never in a plist or a log
+import {
+  chmodSync, closeSync, cpSync, existsSync, lstatSync, mkdirSync, openSync, readFileSync, readdirSync,
+  readlinkSync, renameSync, rmdirSync, statSync, symlinkSync, unlinkSync, writeSync,
+} from "node:fs";
+import { basename, dirname, isAbsolute, join, resolve } from "node:path";
+
+export function ensureHome(home) {
+  const dirs = { home, data: join(home, "data"), logs: join(home, "logs"), run: join(home, "run") };
+  mkdirSync(home, { recursive: true, mode: 0o700 });
+  for (const d of [dirs.data, dirs.logs, dirs.run]) mkdirSync(d, { recursive: true, mode: 0o700 });
+  const envFile = join(home, "fold.env");
+  if (!existsSync(envFile)) {
+    const fd = openSync(envFile, "wx", 0o600);
+    writeSync(fd, "# The Fold: secrets and settings, KEY=VALUE. Keep this file 0600. Never commit it.\n");
+    closeSync(fd);
+  }
+  try { chmodSync(envFile, 0o600); } catch { /* best effort */ }
+  return { ...dirs, envFile };
+}
+
+export function parseEnvText(text) {
+  const out = {};
+  for (const raw of String(text).split(/\r?\n/)) {
+    const line = raw.trim();
+    if (!line || line.startsWith("#")) continue;
+    const m = /^(?:export\s+)?([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)$/.exec(line);
+    if (!m) continue;
+    let v = m[2].trim();
+    if ((v.startsWith('"') && v.endsWith('"') && v.length >= 2) || (v.startsWith("'") && v.endsWith("'") && v.length >= 2)) v = v.slice(1, -1);
+    out[m[1]] = v;
+  }
+  return out;
+}
+
+/** Load fold.env into `env` without overriding anything already set. Returns the names applied (never the values). */
+export function loadEnvFile(file, env = process.env) {
+  let text;
+  try { text = readFileSync(file, "utf8"); } catch { return []; }
+  const applied = [];
+  for (const [k, v] of Object.entries(parseEnvText(text))) {
+    if (env[k] === undefined) { env[k] = v; applied.push(k); }
+  }
+  return applied;
+}
+
+function isEmpty(p) {
+  let st;
+  try { st = lstatSync(p); } catch { return true; }
+  if (st.isSymbolicLink()) return false;
+  if (st.isDirectory()) return readdirSync(p).length === 0;
+  return st.size === 0;
+}
+
+function exists(p) {
+  try { lstatSync(p); return true; } catch { return false; }
+}
+
+/**
+ * Point organ-local state paths at <home>/data/<name>/<key>.
+ *   map: { key: 'path relative to organDir' }   e.g. { state: 'state', documents: 'documents', swatch: 'gym/swatch.jsonl' }
+ * Rules (nothing is ever deleted):
+ *   - already a symlink to the target            -> 'linked' (idempotent)
+ *   - a symlink somewhere else                   -> 'foreign-link' (left alone)
+ *   - real content and the target is empty/absent -> content is MOVED (rename; copy + keep a .pre-fold original on EXDEV), then linked -> 'migrated'
+ *   - real content and a non-empty target        -> 'conflict' (both left untouched)
+ *   - nothing local                              -> target prepared, link created -> 'created'
+ * Returns [{ key, local, target, action }].
+ */
+export function linkState(organDir, map, home, { name = basename(resolve(organDir)) } = {}) {
+  const results = [];
+  const base = join(resolve(home), "data", name);
+  mkdirSync(base, { recursive: true });
+  for (const [key, rel] of Object.entries(map || {})) {
+    if (isAbsolute(rel) || rel.split(/[\\/]/).includes("..")) { results.push({ key, local: rel, target: null, action: "rejected" }); continue; }
+    const local = join(resolve(organDir), rel);
+    const target = join(base, key);
+    const done = (action) => results.push({ key, local, target, action });
+
+    let st = null;
+    try { st = lstatSync(local); } catch { /* absent */ }
+
+    if (st && st.isSymbolicLink()) {
+      let dest = "";
+      try { dest = resolve(dirname(local), readlinkSync(local)); } catch { /* unreadable */ }
+      done(dest === target ? "linked" : "foreign-link");
+      continue;
+    }
+
+    if (st) {
+      if (exists(target) && !isEmpty(target)) { done("conflict"); continue; }
+      if (exists(target)) {
+        // an empty placeholder at the target (proved empty above): clear it so the move can land
+        if (statSync(target).isDirectory()) rmdirSync(target); else unlinkSync(target);
+      }
+      mkdirSync(dirname(target), { recursive: true });
+      try {
+        renameSync(local, target);
+      } catch (e) {
+        if (e.code !== "EXDEV") throw e;
+        cpSync(local, target, { recursive: true, errorOnExist: true, force: false });
+        renameSync(local, local + ".pre-fold");
+      }
+      mkdirSync(dirname(local), { recursive: true });
+      symlinkSync(target, local);
+      done("migrated");
+      continue;
+    }
+
+    // nothing local: prepare the target (a dir for extension-less names; a file stays absent until first write)
+    if (!exists(target)) {
+      mkdirSync(dirname(target), { recursive: true });
+      if (!/\.[A-Za-z0-9]+$/.test(basename(rel))) mkdirSync(target, { recursive: true });
+    }
+    mkdirSync(dirname(local), { recursive: true });
+    symlinkSync(target, local);
+    done("created");
+  }
+  return results;
+}

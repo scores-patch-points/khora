@@ -1,0 +1,294 @@
+{
+ "L4": {
+  "tokens": 50012,
+  "units": 12503,
+  "docs": 51,
+  "cells": {
+   "massAdd": {
+    "v": 0.90113,
+    "nullMean": 0.92183,
+    "nullSd": 0.00118,
+    "z": -17.58
+   },
+   "massExp": {
+    "v": 0.85242,
+    "nullMean": 0.88505,
+    "nullSd": 0.00147,
+    "z": -22.16
+   },
+   "attrPMI": {
+    "v": 0.724,
+    "nullMean": 0.45676,
+    "nullSd": 0.00273,
+    "z": 97.77
+   },
+   "attrDecay": {
+    "v": 0.53668,
+    "nullMean": 0.21447,
+    "nullSd": 0.00438,
+    "z": 73.52
+   },
+   "voidShare": {
+    "v": 0.30858,
+    "nullMean": 0.34922,
+    "nullSd": 0.00122,
+    "z": -33.21
+   },
+   "voidRescue": {
+    "v": 0.0487,
+    "nullMean": 0.01063,
+    "nullSd": 0.00087,
+    "z": 43.52
+   },
+   "gravAlpha": {
+    "v": 0.52637,
+    "nullMean": 0.0037,
+    "nullSd": 0.01812,
+    "z": 28.85
+   },
+   "gravBeta": {
+    "v": -0.09295,
+    "nullMean": 0.01906,
+    "nullSd": 0.01899,
+    "z": -5.9
+   },
+   "gravAlphaSd": {
+    "v": 0.03751,
+    "nullMean": 0.03414,
+    "nullSd": 0.0105,
+    "z": 0.32
+   },
+   "affect": {
+    "v": 0.09378,
+    "nullMean": 0.08079,
+    "nullSd": 0.0015,
+    "z": 8.69
+   },
+   "affectAsym": {
+    "v": 0.14903,
+    "nullMean": -0.00556,
+    "nullSd": 0.07767,
+    "z": 1.99
+   }
+  }
+ },
+ "L8": {
+  "tokens": 50008,
+  "units": 6251,
+  "docs": 51,
+  "cells": {
+   "massAdd": {
+    "v": 0.90538,
+    "nullMean": 0.92224,
+    "nullSd": 0.00158,
+    "z": -10.64
+   },
+   "massExp": {
+    "v": 0.89476,
+    "nullMean": 0.92306,
+    "nullSd": 0.00098,
+    "z": -28.96
+   },
+   "attrPMI": {
+    "v": 0.72397,
+    "nullMean": 0.40697,
+    "nullSd": 0.00206,
+    "z": 154.21
+   },
+   "attrDecay": {
+    "v": 0.53654,
+    "nullMean": 0.11248,
+    "nullSd": 0.00561,
+    "z": 75.62
+   },
+   "voidShare": {
+    "v": 0.30482,
+    "nullMean": 0.34875,
+    "nullSd": 0.0016,
+    "z": -27.47
+   },
+   "voidRescue": {
+    "v": 0.06038,
+    "nullMean": 0.00772,
+    "nullSd": 0.00067,
+    "z": 78.79
+   },
+   "gravAlpha": {
+    "v": 0.52576,
+    "nullMean": -0.0109,
+    "nullSd": 0.00941,
+    "z": 57.06
+   },
+   "gravBeta": {
+    "v": -0.09301,
+    "nullMean": 0.0177,
+    "nullSd": 0.01445,
+    "z": -7.66
+   },
+   "gravAlphaSd": {
+    "v": 0.03738,
+    "nullMean": 0.03635,
+    "nullSd": 0.00831,
+    "z": 0.12
+   },
+   "affect": {
+    "v": 0.08869,
+    "nullMean": 0.05493,
+    "nullSd": 0.00207,
+    "z": 16.29
+   },
+   "affectAsym": {
+    "v": 0.06063,
+    "nullMean": -0.0275,
+    "nullSd": 0.12415,
+    "z": 0.71
+   }
+  }
+ },
+ "L16": {
+  "tokens": 50000,
+  "units": 3125,
+  "docs": 50,
+  "cells": {
+   "massAdd": {
+    "v": 0.90919,
+    "nullMean": 0.92283,
+    "nullSd": 0.00152,
+    "z": -8.96
+   },
+   "massExp": {
+    "v": 0.91407,
+    "nullMean": 0.93923,
+    "nullSd": 0.00111,
+    "z": -22.57
+   },
+   "attrPMI": {
+    "v": 0.72365,
+    "nullMean": 0.37032,
+    "nullSd": 0.00197,
+    "z": 178.98
+   },
+   "attrDecay": {
+    "v": 0.53725,
+    "nullMean": 0.04354,
+    "nullSd": 0.0041,
+    "z": 120.36
+   },
+   "voidShare": {
+    "v": 0.30198,
+    "nullMean": 0.34876,
+    "nullSd": 0.0014,
+    "z": -33.53
+   },
+   "voidRescue": {
+    "v": 0.06911,
+    "nullMean": 0.00593,
+    "nullSd": 0.0007,
+    "z": 90.03
+   },
+   "gravAlpha": {
+    "v": 0.5252,
+    "nullMean": 0.00333,
+    "nullSd": 0.00991,
+    "z": 52.64
+   },
+   "gravBeta": {
+    "v": -0.09491,
+    "nullMean": 0.013,
+    "nullSd": 0.01546,
+    "z": -6.98
+   },
+   "gravAlphaSd": {
+    "v": 0.0367,
+    "nullMean": 0.03981,
+    "nullSd": 0.01188,
+    "z": -0.26
+   },
+   "affect": {
+    "v": 0.08574,
+    "nullMean": 0.04071,
+    "nullSd": 0.00302,
+    "z": 14.9
+   },
+   "affectAsym": {
+    "v": 0.05227,
+    "nullMean": -0.03813,
+    "nullSd": 0.12392,
+    "z": 0.73
+   }
+  }
+ },
+ "L32": {
+  "tokens": 49984,
+  "units": 1562,
+  "docs": 49,
+  "cells": {
+   "massAdd": {
+    "v": 0.91293,
+    "nullMean": 0.92554,
+    "nullSd": 0.00086,
+    "z": -14.68
+   },
+   "massExp": {
+    "v": 0.92279,
+    "nullMean": 0.94589,
+    "nullSd": 0.00083,
+    "z": -28
+   },
+   "attrPMI": {
+    "v": 0.72384,
+    "nullMean": 0.34904,
+    "nullSd": 0.00167,
+    "z": 224.89
+   },
+   "attrDecay": {
+    "v": 0.5373,
+    "nullMean": 0.01779,
+    "nullSd": 0.00433,
+    "z": 119.93
+   },
+   "voidShare": {
+    "v": 0.29927,
+    "nullMean": 0.3482,
+    "nullSd": 0.00169,
+    "z": -28.94
+   },
+   "voidRescue": {
+    "v": 0.07422,
+    "nullMean": 0.00568,
+    "nullSd": 0.00083,
+    "z": 82.31
+   },
+   "gravAlpha": {
+    "v": 0.52721,
+    "nullMean": 0.0028,
+    "nullSd": 0.01742,
+    "z": 30.1
+   },
+   "gravBeta": {
+    "v": -0.09354,
+    "nullMean": 0.01199,
+    "nullSd": 0.01494,
+    "z": -7.06
+   },
+   "gravAlphaSd": {
+    "v": 0.03689,
+    "nullMean": 0.04253,
+    "nullSd": 0.01005,
+    "z": -0.56
+   },
+   "affect": {
+    "v": 0.08494,
+    "nullMean": 0.032,
+    "nullSd": 0.00416,
+    "z": 12.73
+   },
+   "affectAsym": {
+    "v": 0.04773,
+    "nullMean": 0.08969,
+    "nullSd": 0.18457,
+    "z": -0.23
+   }
+  }
+ }
+}

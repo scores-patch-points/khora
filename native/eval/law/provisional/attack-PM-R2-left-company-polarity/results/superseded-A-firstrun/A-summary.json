@@ -1,0 +1,401 @@
+{
+ "families": {
+  "irc": {
+   "M0": {
+    "cells": 3,
+    "pairsTotal": 491,
+    "valid": 0,
+    "medAll": 0.51,
+    "medValid": null,
+    "POS": 0,
+    "NEG": 0,
+    "nLowValid": 0,
+    "pooledAll": {
+     "auc": 0.5204,
+     "lo": 0.4727,
+     "hi": 0.5754,
+     "pairs": 491,
+     "clusters": 189
+    },
+    "pooledValid": null,
+    "medDLxF": 0.8,
+    "medEsP": 0.8886,
+    "medEsN": 0.3516,
+    "perReg": {
+     "irc-kubuntu": {
+      "pairs": 182,
+      "auc": 0.5082,
+      "lo": 0.4294,
+      "hi": 0.5988,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.4478,
+       "es": 0.9368,
+       "fs": 0.0604,
+       "ch": 0.6538,
+       "slen": 0.6264
+      },
+      "DLxF": 0.9615,
+      "Dobs": 0.0852,
+      "nDnull": 0.9368,
+      "esP": 0.8886,
+      "esN": 0.3516
+     },
+     "irc-ubuntu-server": {
+      "pairs": 159,
+      "auc": 0.544,
+      "lo": 0.4561,
+      "hi": 0.622,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.3774,
+       "es": 0.9245,
+       "fs": 0.0629,
+       "ch": 0.5377,
+       "slen": 0.5314
+      },
+      "DLxF": 0.7778,
+      "Dobs": 0.0786,
+      "nDnull": 0.9214,
+      "esP": 0.9046,
+      "esN": 0.3413
+     },
+     "irc-xubuntu": {
+      "pairs": 150,
+      "auc": 0.51,
+      "lo": 0.4355,
+      "hi": 0.5774,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.43,
+       "es": 0.86,
+       "fs": 0.14,
+       "ch": 0.6067,
+       "slen": 0.5367
+      },
+      "DLxF": 0.8,
+      "Dobs": 0.1733,
+      "nDnull": 0.85,
+      "esP": 0.8745,
+      "esN": 0.4232
+     }
+    }
+   },
+   "M1": {
+    "cells": 3,
+    "pairsTotal": 431,
+    "valid": 0,
+    "medAll": 0.4872,
+    "medValid": null,
+    "POS": 0,
+    "NEG": 0,
+    "nLowValid": 0,
+    "pooledAll": {
+     "auc": 0.4872,
+     "lo": 0.4368,
+     "hi": 0.5386,
+     "pairs": 431,
+     "clusters": 186
+    },
+    "pooledValid": null,
+    "medDLxF": 0.6818,
+    "medEsP": 0.8803,
+    "medEsN": 0.4183,
+    "perReg": {
+     "irc-kubuntu": {
+      "pairs": 156,
+      "auc": 0.4872,
+      "lo": 0.3987,
+      "hi": 0.5629,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5321,
+       "es": 0.9006,
+       "fs": 0.0769,
+       "ch": 0.6571,
+       "slen": 0.5417
+      },
+      "DLxF": 0.7273,
+      "Dobs": 0.1154,
+      "nDnull": 0.9006,
+      "esP": 0.8798,
+      "esN": 0.4183
+     },
+     "irc-ubuntu-server": {
+      "pairs": 134,
+      "auc": 0.5075,
+      "lo": 0.3993,
+      "hi": 0.5963,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.4963,
+       "es": 0.903,
+       "fs": 0.1119,
+       "ch": 0.5933,
+       "slen": 0.5522
+      },
+      "DLxF": 0.6429,
+      "Dobs": 0.097,
+      "nDnull": 0.8993,
+      "esP": 0.8963,
+      "esN": 0.4146
+     },
+     "irc-xubuntu": {
+      "pairs": 141,
+      "auc": 0.4681,
+      "lo": 0.3873,
+      "hi": 0.5387,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.4929,
+       "es": 0.8617,
+       "fs": 0.156,
+       "ch": 0.6418,
+       "slen": 0.5106
+      },
+      "DLxF": 0.6818,
+      "Dobs": 0.1489,
+      "nDnull": 0.8617,
+      "esP": 0.8803,
+      "esN": 0.5053
+     }
+    }
+   },
+   "M2": {
+    "cells": 3,
+    "pairsTotal": 94,
+    "valid": 0,
+    "medAll": 0.4605,
+    "medValid": null,
+    "POS": 0,
+    "NEG": 0,
+    "nLowValid": 0,
+    "pooledAll": {
+     "auc": 0.4894,
+     "lo": 0.401,
+     "hi": 0.5765,
+     "pairs": 94,
+     "clusters": 59
+    },
+    "pooledValid": null,
+    "medDLxF": 0.5,
+    "medEsP": 0.797,
+    "medEsN": 0.8024,
+    "perReg": {
+     "irc-kubuntu": {
+      "pairs": 27,
+      "auc": 0.3519,
+      "lo": 0.2333,
+      "hi": 0.46,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.6667,
+       "es": 0.6296,
+       "fs": 0.4074,
+       "ch": 0.7963,
+       "slen": 0.6481
+      },
+      "DLxF": 0,
+      "Dobs": 0.3704,
+      "nDnull": 0.6111,
+      "esP": 0.8397,
+      "esN": 0.8272
+     },
+     "irc-ubuntu-server": {
+      "pairs": 29,
+      "auc": 0.6552,
+      "lo": 0.5,
+      "hi": 0.8194,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5345,
+       "es": 0.431,
+       "fs": 0.5345,
+       "ch": 0.5862,
+       "slen": 0.6034
+      },
+      "DLxF": 0.9286,
+      "Dobs": 0.5517,
+      "nDnull": 0.4483,
+      "esP": 0.797,
+      "esN": 0.8024
+     },
+     "irc-xubuntu": {
+      "pairs": 38,
+      "auc": 0.4605,
+      "lo": 0.3214,
+      "hi": 0.6,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5132,
+       "es": 0.5526,
+       "fs": 0.4605,
+       "ch": 0.6316,
+       "slen": 0.4737
+      },
+      "DLxF": 0.5,
+      "Dobs": 0.4605,
+      "nDnull": 0.5526,
+      "esP": 0.7751,
+      "esN": 0.7666
+     }
+    }
+   },
+   "M3": {
+    "cells": 3,
+    "pairsTotal": 12,
+    "valid": 0,
+    "medAll": 0.5,
+    "medValid": null,
+    "POS": 0,
+    "NEG": 0,
+    "nLowValid": 0,
+    "pooledAll": {
+     "auc": 0.7083,
+     "lo": 0.3571,
+     "hi": 0.9091,
+     "pairs": 12,
+     "clusters": 5
+    },
+    "pooledValid": null,
+    "medDLxF": 0.5,
+    "medEsP": 0.2143,
+    "medEsN": 0.2143,
+    "perReg": {
+     "irc-kubuntu": {
+      "pairs": 2,
+      "auc": 0.25,
+      "lo": 0.25,
+      "hi": 0.25,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.25,
+       "es": 0.5,
+       "fs": 0.25,
+       "ch": 1,
+       "slen": 0.75
+      },
+      "DLxF": 0,
+      "Dobs": 0.5,
+      "nDnull": 0.25,
+      "esP": 0,
+      "esN": 0
+     },
+     "irc-ubuntu-server": {
+      "pairs": 7,
+      "auc": 0.9286,
+      "lo": 0.5,
+      "hi": 1,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5,
+       "es": 0.5,
+       "fs": 0.5,
+       "ch": 0.7143,
+       "slen": 0.5
+      },
+      "DLxF": 0.9286,
+      "Dobs": 0.5,
+      "nDnull": 0.5,
+      "esP": 0.7082,
+      "esN": 0.6992
+     },
+     "irc-xubuntu": {
+      "pairs": 3,
+      "auc": 0.5,
+      "lo": 0.5,
+      "hi": 0.5,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5,
+       "es": 0.5,
+       "fs": 0.5,
+       "ch": 0.5,
+       "slen": 0.6667
+      },
+      "DLxF": 0.5,
+      "Dobs": 0.5,
+      "nDnull": 0.5,
+      "esP": 0.2143,
+      "esN": 0.2143
+     }
+    }
+   },
+   "M4": {
+    "cells": 2,
+    "pairsTotal": 4,
+    "valid": 0,
+    "medAll": 0.25,
+    "medValid": null,
+    "POS": 0,
+    "NEG": 0,
+    "nLowValid": 0,
+    "pooledAll": {
+     "auc": 0.625,
+     "lo": 0.25,
+     "hi": 1,
+     "pairs": 4,
+     "clusters": 2
+    },
+    "pooledValid": null,
+    "medDLxF": 0,
+    "medEsP": 0,
+    "medEsN": 0,
+    "perReg": {
+     "irc-kubuntu": {
+      "pairs": 2,
+      "auc": 0.25,
+      "lo": 0.25,
+      "hi": 0.25,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.25,
+       "es": 0.5,
+       "fs": 0.25,
+       "ch": 1,
+       "slen": 0.75
+      },
+      "DLxF": 0,
+      "Dobs": 0.5,
+      "nDnull": 0.25,
+      "esP": 0,
+      "esN": 0
+     },
+     "irc-ubuntu-server": {
+      "pairs": 2,
+      "auc": 1,
+      "lo": 1,
+      "hi": 1,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5,
+       "es": 0.5,
+       "fs": 0.5,
+       "ch": 0.5,
+       "slen": 0.75
+      },
+      "DLxF": null,
+      "Dobs": 0,
+      "nDnull": 1,
+      "esP": 0,
+      "esN": 0
+     }
+    }
+   }
+  }
+ }
+}

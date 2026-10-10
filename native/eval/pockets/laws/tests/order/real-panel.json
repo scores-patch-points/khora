@@ -1,0 +1,10581 @@
+{
+ "bk-great-expect": {
+  "tokens": 186582,
+  "units": 9959,
+  "meanUnitLen": 18.74,
+  "cpuSec": {
+   "discover": 0.063,
+   "confirm": 0.011
+  },
+  "halves": {
+   "discover": {
+    "tokens": 99856,
+    "rareSlope": {
+     "v": 0.07153,
+     "nullMean": 0.00011,
+     "nullSd": 0.00312,
+     "z": 22.87
+    },
+    "rareCurve": {
+     "v": 0.02136,
+     "nullMean": 0.00187,
+     "nullSd": 0.00442,
+     "z": 4.41
+    },
+    "fnBefore": {
+     "v": 0.01824,
+     "nullMean": 0.00002,
+     "nullSd": 0.00521,
+     "z": 3.5
+    },
+    "depLen": {
+     "v": 0.01188,
+     "nullMean": -0.00047,
+     "nullSd": 0.00203,
+     "z": 6.07
+    },
+    "initDev": {
+     "v": -0.36052,
+     "nullMean": 0.00311,
+     "nullSd": 0.01297,
+     "z": -28.03
+    },
+    "finalDev": {
+     "v": 0.56589,
+     "nullMean": -0.00075,
+     "nullSd": 0.01737,
+     "z": 32.62
+    },
+    "surprGrow": {
+     "v": -0.01174,
+     "nullMean": -0.00108,
+     "nullSd": 0.00231,
+     "z": -4.61
+    },
+    "entSlope": {
+     "v": 0.01273,
+     "nullMean": 0.0002,
+     "nullSd": 0.00078,
+     "z": 16.13
+    },
+    "entCurv": {
+     "v": 0.003,
+     "nullMean": -0.00009,
+     "nullSd": 0.00103,
+     "z": 3.01
+    },
+    "branch": {
+     "v": -0.12679,
+     "nullMean": 0.00182,
+     "nullSd": 0.00549,
+     "z": -23.43
+    },
+    "asym": {
+     "v": 0.06877,
+     "nullMean": -0.00009,
+     "nullSd": 0.00014,
+     "z": 484.97
+    }
+   },
+   "confirm": {
+    "tokens": 86726,
+    "rareSlope": {
+     "v": 0.07139,
+     "nullMean": 0.00093,
+     "nullSd": 0.00264,
+     "z": 26.65
+    },
+    "rareCurve": {
+     "v": 0.02064,
+     "nullMean": 0.00109,
+     "nullSd": 0.00283,
+     "z": 6.91
+    },
+    "fnBefore": {
+     "v": 0.01531,
+     "nullMean": -0.00213,
+     "nullSd": 0.00403,
+     "z": 4.33
+    },
+    "depLen": {
+     "v": 0.01218,
+     "nullMean": -0.0017,
+     "nullSd": 0.00235,
+     "z": 5.91
+    },
+    "initDev": {
+     "v": -0.37715,
+     "nullMean": -0.00343,
+     "nullSd": 0.01413,
+     "z": -26.45
+    },
+    "finalDev": {
+     "v": 0.58393,
+     "nullMean": -0.00148,
+     "nullSd": 0.01241,
+     "z": 47.17
+    },
+    "surprGrow": {
+     "v": -0.01363,
+     "nullMean": 0.00011,
+     "nullSd": 0.00273,
+     "z": -5.04
+    },
+    "entSlope": {
+     "v": 0.0134,
+     "nullMean": 0.00002,
+     "nullSd": 0.00077,
+     "z": 17.28
+    },
+    "entCurv": {
+     "v": 0.00404,
+     "nullMean": 0.00001,
+     "nullSd": 0.00092,
+     "z": 4.38
+    },
+    "branch": {
+     "v": -0.12197,
+     "nullMean": 0.00092,
+     "nullSd": 0.00281,
+     "z": -43.78
+    },
+    "asym": {
+     "v": 0.06402,
+     "nullMean": -0.00014,
+     "nullSd": 0.00014,
+     "z": 449.89
+    }
+   }
+  }
+ },
+ "bk-alice": {
+  "tokens": 26775,
+  "units": 1698,
+  "meanUnitLen": 15.77,
+  "cpuSec": {
+   "discover": 0.005,
+   "confirm": 0.001
+  },
+  "halves": {
+   "discover": {
+    "tokens": 18169,
+    "rareSlope": {
+     "v": 0.08526,
+     "nullMean": -0.00032,
+     "nullSd": 0.00645,
+     "z": 13.27
+    },
+    "rareCurve": {
+     "v": 0.04289,
+     "nullMean": 0.00092,
+     "nullSd": 0.00894,
+     "z": 4.7
+    },
+    "fnBefore": {
+     "v": -0.00386,
+     "nullMean": 0.00137,
+     "nullSd": 0.00623,
+     "z": -0.84
+    },
+    "depLen": {
+     "v": 0.01439,
+     "nullMean": -0.00203,
+     "nullSd": 0.00509,
+     "z": 3.22
+    },
+    "initDev": {
+     "v": -0.29484,
+     "nullMean": 0.0091,
+     "nullSd": 0.02649,
+     "z": -11.47
+    },
+    "finalDev": {
+     "v": 0.60402,
+     "nullMean": -0.00343,
+     "nullSd": 0.0411,
+     "z": 14.78
+    },
+    "surprGrow": {
+     "v": -0.03011,
+     "nullMean": 0.00004,
+     "nullSd": 0.00646,
+     "z": -4.66
+    },
+    "entSlope": {
+     "v": 0.01067,
+     "nullMean": -0.00028,
+     "nullSd": 0.00165,
+     "z": 6.64
+    },
+    "entCurv": {
+     "v": 0.00747,
+     "nullMean": -0.00033,
+     "nullSd": 0.00108,
+     "z": 7.22
+    },
+    "branch": {
+     "v": -0.11423,
+     "nullMean": 0.00388,
+     "nullSd": 0.01043,
+     "z": -11.32
+    },
+    "asym": {
+     "v": 0.07408,
+     "nullMean": -0.00063,
+     "nullSd": 0.00081,
+     "z": 92.64
+    }
+   },
+   "confirm": {
+    "tokens": 8606,
+    "rareSlope": {
+     "v": 0.09022,
+     "nullMean": -0.0008,
+     "nullSd": 0.00939,
+     "z": 9.69
+    },
+    "rareCurve": {
+     "v": 0.01569,
+     "nullMean": 0.00392,
+     "nullSd": 0.01611,
+     "z": 0.73
+    },
+    "fnBefore": {
+     "v": 0.00508,
+     "nullMean": 0.00727,
+     "nullSd": 0.01316,
+     "z": -0.17
+    },
+    "depLen": {
+     "v": 0.0145,
+     "nullMean": 0.00126,
+     "nullSd": 0.0068,
+     "z": 1.95
+    },
+    "initDev": {
+     "v": -0.34428,
+     "nullMean": 0.0212,
+     "nullSd": 0.04029,
+     "z": -9.07
+    },
+    "finalDev": {
+     "v": 0.59695,
+     "nullMean": -0.01768,
+     "nullSd": 0.02771,
+     "z": 22.18
+    },
+    "surprGrow": {
+     "v": -0.02576,
+     "nullMean": -0.00305,
+     "nullSd": 0.01172,
+     "z": -1.94
+    },
+    "entSlope": {
+     "v": 0.01102,
+     "nullMean": -0.00072,
+     "nullSd": 0.00242,
+     "z": 4.84
+    },
+    "entCurv": {
+     "v": 0.00976,
+     "nullMean": -0.00071,
+     "nullSd": 0.00188,
+     "z": 5.57
+    },
+    "branch": {
+     "v": -0.1319,
+     "nullMean": 0.00297,
+     "nullSd": 0.01144,
+     "z": -11.79
+    },
+    "asym": {
+     "v": 0.05598,
+     "nullMean": -0.00212,
+     "nullSd": 0.00084,
+     "z": 69.28
+    }
+   }
+  }
+ },
+ "bk-moby-dick": {
+  "tokens": 216603,
+  "units": 10246,
+  "meanUnitLen": 21.14,
+  "cpuSec": {
+   "discover": 0.014,
+   "confirm": 0.022
+  },
+  "halves": {
+   "discover": {
+    "tokens": 108724,
+    "rareSlope": {
+     "v": 0.06573,
+     "nullMean": 0.00029,
+     "nullSd": 0.0024,
+     "z": 27.24
+    },
+    "rareCurve": {
+     "v": 0.01653,
+     "nullMean": 0.00007,
+     "nullSd": 0.00309,
+     "z": 5.33
+    },
+    "fnBefore": {
+     "v": 0.01014,
+     "nullMean": -0.00046,
+     "nullSd": 0.00301,
+     "z": 3.52
+    },
+    "depLen": {
+     "v": 0.00539,
+     "nullMean": 0.00003,
+     "nullSd": 0.00307,
+     "z": 1.74
+    },
+    "initDev": {
+     "v": -0.30884,
+     "nullMean": 0.00625,
+     "nullSd": 0.01203,
+     "z": -26.18
+    },
+    "finalDev": {
+     "v": 0.6062,
+     "nullMean": -0.00318,
+     "nullSd": 0.01215,
+     "z": 50.16
+    },
+    "surprGrow": {
+     "v": -0.03445,
+     "nullMean": -0.00058,
+     "nullSd": 0.00216,
+     "z": -15.66
+    },
+    "entSlope": {
+     "v": 0.00935,
+     "nullMean": 0.00006,
+     "nullSd": 0.00068,
+     "z": 13.73
+    },
+    "entCurv": {
+     "v": 0.00309,
+     "nullMean": -0.00007,
+     "nullSd": 0.00028,
+     "z": 11.39
+    },
+    "branch": {
+     "v": -0.04471,
+     "nullMean": 0.00012,
+     "nullSd": 0.0038,
+     "z": -11.8
+    },
+    "asym": {
+     "v": 0.07406,
+     "nullMean": -0.00013,
+     "nullSd": 0.00008,
+     "z": 906.34
+    }
+   },
+   "confirm": {
+    "tokens": 107879,
+    "rareSlope": {
+     "v": 0.06295,
+     "nullMean": -0.00024,
+     "nullSd": 0.00364,
+     "z": 17.34
+    },
+    "rareCurve": {
+     "v": 0.01846,
+     "nullMean": -0.00099,
+     "nullSd": 0.0033,
+     "z": 5.9
+    },
+    "fnBefore": {
+     "v": 0.0113,
+     "nullMean": 0.0009,
+     "nullSd": 0.00196,
+     "z": 5.31
+    },
+    "depLen": {
+     "v": 0.01224,
+     "nullMean": -0.00023,
+     "nullSd": 0.00192,
+     "z": 6.48
+    },
+    "initDev": {
+     "v": -0.28847,
+     "nullMean": -0.00221,
+     "nullSd": 0.0152,
+     "z": -18.83
+    },
+    "finalDev": {
+     "v": 0.59958,
+     "nullMean": -0.00044,
+     "nullSd": 0.01563,
+     "z": 38.39
+    },
+    "surprGrow": {
+     "v": -0.03591,
+     "nullMean": 0.00106,
+     "nullSd": 0.00246,
+     "z": -15.05
+    },
+    "entSlope": {
+     "v": 0.00941,
+     "nullMean": -0.00028,
+     "nullSd": 0.00057,
+     "z": 17.01
+    },
+    "entCurv": {
+     "v": 0.00295,
+     "nullMean": 0.00003,
+     "nullSd": 0.00047,
+     "z": 6.25
+    },
+    "branch": {
+     "v": -0.05241,
+     "nullMean": -0.00033,
+     "nullSd": 0.0037,
+     "z": -14.09
+    },
+    "asym": {
+     "v": 0.0757,
+     "nullMean": -0.00013,
+     "nullSd": 0.00013,
+     "z": 586.66
+    }
+   }
+  }
+ },
+ "bk-emma": {
+  "tokens": 160994,
+  "units": 7589,
+  "meanUnitLen": 21.21,
+  "cpuSec": {
+   "discover": 0.012,
+   "confirm": 0.006
+  },
+  "halves": {
+   "discover": {
+    "tokens": 103643,
+    "rareSlope": {
+     "v": 0.07648,
+     "nullMean": -0.00254,
+     "nullSd": 0.00285,
+     "z": 27.68
+    },
+    "rareCurve": {
+     "v": 0.01891,
+     "nullMean": 0.00021,
+     "nullSd": 0.00418,
+     "z": 4.48
+    },
+    "fnBefore": {
+     "v": 0.01895,
+     "nullMean": -0.00008,
+     "nullSd": 0.00371,
+     "z": 5.13
+    },
+    "depLen": {
+     "v": 0.00395,
+     "nullMean": 0.00072,
+     "nullSd": 0.00138,
+     "z": 2.33
+    },
+    "initDev": {
+     "v": -0.46846,
+     "nullMean": 0.00801,
+     "nullSd": 0.00875,
+     "z": -54.44
+    },
+    "finalDev": {
+     "v": 0.64454,
+     "nullMean": -0.00391,
+     "nullSd": 0.01103,
+     "z": 58.81
+    },
+    "surprGrow": {
+     "v": -0.00335,
+     "nullMean": 0.00216,
+     "nullSd": 0.00204,
+     "z": -2.71
+    },
+    "entSlope": {
+     "v": 0.02255,
+     "nullMean": -0.00092,
+     "nullSd": 0.00132,
+     "z": 17.75
+    },
+    "entCurv": {
+     "v": 0.00683,
+     "nullMean": -0.00018,
+     "nullSd": 0.00108,
+     "z": 6.49
+    },
+    "branch": {
+     "v": -0.18183,
+     "nullMean": 0.0021,
+     "nullSd": 0.00358,
+     "z": -51.44
+    },
+    "asym": {
+     "v": 0.05543,
+     "nullMean": -0.00008,
+     "nullSd": 0.00014,
+     "z": 409.68
+    }
+   },
+   "confirm": {
+    "tokens": 57351,
+    "rareSlope": {
+     "v": 0.07988,
+     "nullMean": 0.0006,
+     "nullSd": 0.00486,
+     "z": 16.32
+    },
+    "rareCurve": {
+     "v": 0.02264,
+     "nullMean": -0.00175,
+     "nullSd": 0.00468,
+     "z": 5.21
+    },
+    "fnBefore": {
+     "v": 0.01234,
+     "nullMean": -0.00044,
+     "nullSd": 0.00658,
+     "z": 1.94
+    },
+    "depLen": {
+     "v": 0.00756,
+     "nullMean": -0.00061,
+     "nullSd": 0.00291,
+     "z": 2.81
+    },
+    "initDev": {
+     "v": -0.44243,
+     "nullMean": 0.00036,
+     "nullSd": 0.02197,
+     "z": -20.15
+    },
+    "finalDev": {
+     "v": 0.65871,
+     "nullMean": 0.00014,
+     "nullSd": 0.02393,
+     "z": 27.53
+    },
+    "surprGrow": {
+     "v": -0.00999,
+     "nullMean": 0.00027,
+     "nullSd": 0.00411,
+     "z": -2.5
+    },
+    "entSlope": {
+     "v": 0.0198,
+     "nullMean": 0.00035,
+     "nullSd": 0.00094,
+     "z": 20.71
+    },
+    "entCurv": {
+     "v": 0.00597,
+     "nullMean": 0.0002,
+     "nullSd": 0.00082,
+     "z": 7.08
+    },
+    "branch": {
+     "v": -0.18456,
+     "nullMean": 0.00338,
+     "nullSd": 0.00546,
+     "z": -34.43
+    },
+    "asym": {
+     "v": 0.02401,
+     "nullMean": -0.00014,
+     "nullSd": 0.00019,
+     "z": 128.97
+    }
+   }
+  }
+ },
+ "bk-prince": {
+  "tokens": 49473,
+  "units": 1332,
+  "meanUnitLen": 37.14,
+  "cpuSec": {
+   "discover": 0.006,
+   "confirm": 0.003
+  },
+  "halves": {
+   "discover": {
+    "tokens": 25482,
+    "rareSlope": {
+     "v": 0.01641,
+     "nullMean": 0.00133,
+     "nullSd": 0.00528,
+     "z": 2.85
+    },
+    "rareCurve": {
+     "v": 0.02528,
+     "nullMean": 0.00201,
+     "nullSd": 0.00501,
+     "z": 4.64
+    },
+    "fnBefore": {
+     "v": -0.00595,
+     "nullMean": -0.0004,
+     "nullSd": 0.00615,
+     "z": -0.9
+    },
+    "depLen": {
+     "v": 0.00716,
+     "nullMean": -0.00098,
+     "nullSd": 0.00381,
+     "z": 2.14
+    },
+    "initDev": {
+     "v": -0.2583,
+     "nullMean": 0.00195,
+     "nullSd": 0.03143,
+     "z": -8.28
+    },
+    "finalDev": {
+     "v": 0.6945,
+     "nullMean": 0.00842,
+     "nullSd": 0.04952,
+     "z": 13.86
+    },
+    "surprGrow": {
+     "v": -0.00302,
+     "nullMean": -0.0014,
+     "nullSd": 0.00539,
+     "z": -0.3
+    },
+    "entSlope": {
+     "v": 0.00509,
+     "nullMean": 0.00025,
+     "nullSd": 0.00186,
+     "z": 2.61
+    },
+    "entCurv": {
+     "v": 0.00236,
+     "nullMean": 0.00062,
+     "nullSd": 0.00126,
+     "z": 1.38
+    },
+    "branch": {
+     "v": -0.23295,
+     "nullMean": 0.00002,
+     "nullSd": 0.0147,
+     "z": -15.85
+    },
+    "asym": {
+     "v": 0.06514,
+     "nullMean": -0.00053,
+     "nullSd": 0.00047,
+     "z": 139.69
+    }
+   },
+   "confirm": {
+    "tokens": 23991,
+    "rareSlope": {
+     "v": 0.02688,
+     "nullMean": -0.0001,
+     "nullSd": 0.00883,
+     "z": 3.05
+    },
+    "rareCurve": {
+     "v": 0.02286,
+     "nullMean": -0.00239,
+     "nullSd": 0.00475,
+     "z": 5.32
+    },
+    "fnBefore": {
+     "v": 0.01226,
+     "nullMean": 0.0002,
+     "nullSd": 0.00359,
+     "z": 3.36
+    },
+    "depLen": {
+     "v": 0.02389,
+     "nullMean": 0.00064,
+     "nullSd": 0.00306,
+     "z": 7.6
+    },
+    "initDev": {
+     "v": -0.32153,
+     "nullMean": -0.02618,
+     "nullSd": 0.02822,
+     "z": -10.47
+    },
+    "finalDev": {
+     "v": 0.69859,
+     "nullMean": 0.0026,
+     "nullSd": 0.0335,
+     "z": 20.77
+    },
+    "surprGrow": {
+     "v": -0.00237,
+     "nullMean": 0.0021,
+     "nullSd": 0.00793,
+     "z": -0.56
+    },
+    "entSlope": {
+     "v": 0.00286,
+     "nullMean": -0.00017,
+     "nullSd": 0.00097,
+     "z": 3.12
+    },
+    "entCurv": {
+     "v": 0.00009,
+     "nullMean": 0.00029,
+     "nullSd": 0.0012,
+     "z": -0.17
+    },
+    "branch": {
+     "v": -0.2682,
+     "nullMean": 0.00013,
+     "nullSd": 0.00493,
+     "z": -54.45
+    },
+    "asym": {
+     "v": 0.06112,
+     "nullMean": -0.00076,
+     "nullSd": 0.00044,
+     "z": 141.63
+    }
+   }
+  }
+ },
+ "bk-federalist": {
+  "tokens": 192303,
+  "units": 6308,
+  "meanUnitLen": 30.49,
+  "cpuSec": {
+   "discover": 0.012,
+   "confirm": 0.018
+  },
+  "halves": {
+   "discover": {
+    "tokens": 115620,
+    "rareSlope": {
+     "v": 0.04089,
+     "nullMean": 0.00109,
+     "nullSd": 0.00283,
+     "z": 14.05
+    },
+    "rareCurve": {
+     "v": 0.01129,
+     "nullMean": -0.00036,
+     "nullSd": 0.00196,
+     "z": 5.93
+    },
+    "fnBefore": {
+     "v": 0.00428,
+     "nullMean": -0.00053,
+     "nullSd": 0.00359,
+     "z": 1.34
+    },
+    "depLen": {
+     "v": 0.01768,
+     "nullMean": 0.0008,
+     "nullSd": 0.00247,
+     "z": 6.84
+    },
+    "initDev": {
+     "v": -0.4747,
+     "nullMean": -0.01108,
+     "nullSd": 0.01869,
+     "z": -24.81
+    },
+    "finalDev": {
+     "v": 0.76262,
+     "nullMean": 0.00065,
+     "nullSd": 0.01737,
+     "z": 43.86
+    },
+    "surprGrow": {
+     "v": -0.01414,
+     "nullMean": 0.00017,
+     "nullSd": 0.00258,
+     "z": -5.54
+    },
+    "entSlope": {
+     "v": 0.00418,
+     "nullMean": 0.00023,
+     "nullSd": 0.00089,
+     "z": 4.45
+    },
+    "entCurv": {
+     "v": 0.00154,
+     "nullMean": 0.00002,
+     "nullSd": 0.00053,
+     "z": 2.85
+    },
+    "branch": {
+     "v": -0.16125,
+     "nullMean": 0.00146,
+     "nullSd": 0.00264,
+     "z": -61.52
+    },
+    "asym": {
+     "v": 0.13659,
+     "nullMean": -0.00007,
+     "nullSd": 0.00011,
+     "z": 1293.67
+    }
+   },
+   "confirm": {
+    "tokens": 76683,
+    "rareSlope": {
+     "v": 0.04224,
+     "nullMean": 0.00035,
+     "nullSd": 0.00311,
+     "z": 13.49
+    },
+    "rareCurve": {
+     "v": 0.01826,
+     "nullMean": -0.0021,
+     "nullSd": 0.00489,
+     "z": 4.16
+    },
+    "fnBefore": {
+     "v": 0.00097,
+     "nullMean": 0.00197,
+     "nullSd": 0.00544,
+     "z": -0.18
+    },
+    "depLen": {
+     "v": 0.01213,
+     "nullMean": -0.00007,
+     "nullSd": 0.00262,
+     "z": 4.66
+    },
+    "initDev": {
+     "v": -0.44856,
+     "nullMean": 0.00077,
+     "nullSd": 0.02722,
+     "z": -16.51
+    },
+    "finalDev": {
+     "v": 0.79586,
+     "nullMean": -0.00727,
+     "nullSd": 0.01535,
+     "z": 52.33
+    },
+    "surprGrow": {
+     "v": -0.01777,
+     "nullMean": -0.00028,
+     "nullSd": 0.00235,
+     "z": -7.44
+    },
+    "entSlope": {
+     "v": 0.00607,
+     "nullMean": 0.00011,
+     "nullSd": 0.00077,
+     "z": 7.77
+    },
+    "entCurv": {
+     "v": 0.00078,
+     "nullMean": 0.00038,
+     "nullSd": 0.00048,
+     "z": 0.84
+    },
+    "branch": {
+     "v": -0.16932,
+     "nullMean": 0.00106,
+     "nullSd": 0.00607,
+     "z": -28.06
+    },
+    "asym": {
+     "v": 0.12726,
+     "nullMean": -0.00014,
+     "nullSd": 0.00015,
+     "z": 836.26
+    }
+   }
+  }
+ },
+ "bk-dante": {
+  "tokens": 113750,
+  "units": 4065,
+  "meanUnitLen": 27.98,
+  "cpuSec": {
+   "discover": 0.006,
+   "confirm": 0.007
+  },
+  "halves": {
+   "discover": {
+    "tokens": 53223,
+    "rareSlope": {
+     "v": 0.06167,
+     "nullMean": -0.00039,
+     "nullSd": 0.00529,
+     "z": 11.73
+    },
+    "rareCurve": {
+     "v": 0.02452,
+     "nullMean": -0.00114,
+     "nullSd": 0.00501,
+     "z": 5.12
+    },
+    "fnBefore": {
+     "v": 0.01423,
+     "nullMean": -0.0005,
+     "nullSd": 0.00283,
+     "z": 5.2
+    },
+    "depLen": {
+     "v": 0.00911,
+     "nullMean": -0.00004,
+     "nullSd": 0.00262,
+     "z": 3.49
+    },
+    "initDev": {
+     "v": -0.31774,
+     "nullMean": -0.00638,
+     "nullSd": 0.02614,
+     "z": -11.91
+    },
+    "finalDev": {
+     "v": 0.73242,
+     "nullMean": -0.00175,
+     "nullSd": 0.02167,
+     "z": 33.88
+    },
+    "surprGrow": {
+     "v": -0.02302,
+     "nullMean": 0.00113,
+     "nullSd": 0.0043,
+     "z": -5.62
+    },
+    "entSlope": {
+     "v": 0.00604,
+     "nullMean": -0.0002,
+     "nullSd": 0.00076,
+     "z": 8.17
+    },
+    "entCurv": {
+     "v": 0.00312,
+     "nullMean": -0.00044,
+     "nullSd": 0.00087,
+     "z": 4.1
+    },
+    "branch": {
+     "v": -0.16124,
+     "nullMean": -0.00203,
+     "nullSd": 0.004,
+     "z": -39.76
+    },
+    "asym": {
+     "v": 0.06385,
+     "nullMean": -0.00031,
+     "nullSd": 0.0002,
+     "z": 314.8
+    }
+   },
+   "confirm": {
+    "tokens": 60527,
+    "rareSlope": {
+     "v": 0.06626,
+     "nullMean": -0.00209,
+     "nullSd": 0.00185,
+     "z": 36.95
+    },
+    "rareCurve": {
+     "v": 0.02179,
+     "nullMean": 0.00004,
+     "nullSd": 0.0042,
+     "z": 5.18
+    },
+    "fnBefore": {
+     "v": 0.01284,
+     "nullMean": -0.00072,
+     "nullSd": 0.0045,
+     "z": 3.01
+    },
+    "depLen": {
+     "v": 0.00727,
+     "nullMean": -0.00029,
+     "nullSd": 0.00289,
+     "z": 2.62
+    },
+    "initDev": {
+     "v": -0.35349,
+     "nullMean": 0.00904,
+     "nullSd": 0.02673,
+     "z": -13.56
+    },
+    "finalDev": {
+     "v": 0.7391,
+     "nullMean": -0.01383,
+     "nullSd": 0.01232,
+     "z": 61.12
+    },
+    "surprGrow": {
+     "v": -0.0202,
+     "nullMean": 0.00144,
+     "nullSd": 0.00324,
+     "z": -6.67
+    },
+    "entSlope": {
+     "v": 0.00323,
+     "nullMean": -0.00013,
+     "nullSd": 0.00099,
+     "z": 3.4
+    },
+    "entCurv": {
+     "v": 0.00179,
+     "nullMean": -0.00024,
+     "nullSd": 0.00086,
+     "z": 2.36
+    },
+    "branch": {
+     "v": -0.15935,
+     "nullMean": -0.00087,
+     "nullSd": 0.0056,
+     "z": -28.3
+    },
+    "asym": {
+     "v": 0.06295,
+     "nullMean": -0.00035,
+     "nullSd": 0.00022,
+     "z": 290.74
+    }
+   }
+  }
+ },
+ "bk-whitman": {
+  "tokens": 124038,
+  "units": 3838,
+  "meanUnitLen": 32.32,
+  "cpuSec": {
+   "discover": 0.008,
+   "confirm": 0.006
+  },
+  "halves": {
+   "discover": {
+    "tokens": 75882,
+    "rareSlope": {
+     "v": 0.02688,
+     "nullMean": -0.00164,
+     "nullSd": 0.00512,
+     "z": 5.57
+    },
+    "rareCurve": {
+     "v": -0.01226,
+     "nullMean": 0.00138,
+     "nullSd": 0.00389,
+     "z": -3.51
+    },
+    "fnBefore": {
+     "v": 0.0057,
+     "nullMean": 0.00084,
+     "nullSd": 0.00584,
+     "z": 0.83
+    },
+    "depLen": {
+     "v": -0.01747,
+     "nullMean": -0.00058,
+     "nullSd": 0.00241,
+     "z": -7
+    },
+    "initDev": {
+     "v": -0.3332,
+     "nullMean": 0.02166,
+     "nullSd": 0.0243,
+     "z": -14.6
+    },
+    "finalDev": {
+     "v": 0.47268,
+     "nullMean": -0.00591,
+     "nullSd": 0.01977,
+     "z": 24.2
+    },
+    "surprGrow": {
+     "v": 0.00071,
+     "nullMean": -0.00035,
+     "nullSd": 0.00298,
+     "z": 0.36
+    },
+    "entSlope": {
+     "v": 0.00023,
+     "nullMean": -0.00003,
+     "nullSd": 0.00037,
+     "z": 0.7
+    },
+    "entCurv": {
+     "v": -0.00026,
+     "nullMean": -0.00006,
+     "nullSd": 0.00034,
+     "z": -0.58
+    },
+    "branch": {
+     "v": -0.19314,
+     "nullMean": -0.0002,
+     "nullSd": 0.00415,
+     "z": -46.54
+    },
+    "asym": {
+     "v": 0.07532,
+     "nullMean": -0.00022,
+     "nullSd": 0.00013,
+     "z": 577.03
+    }
+   },
+   "confirm": {
+    "tokens": 48156,
+    "rareSlope": {
+     "v": 0.03167,
+     "nullMean": 0.0014,
+     "nullSd": 0.00602,
+     "z": 5.03
+    },
+    "rareCurve": {
+     "v": -0.00084,
+     "nullMean": 0.00024,
+     "nullSd": 0.00225,
+     "z": -0.48
+    },
+    "fnBefore": {
+     "v": -0.00291,
+     "nullMean": 0.00112,
+     "nullSd": 0.00525,
+     "z": -0.77
+    },
+    "depLen": {
+     "v": -0.01179,
+     "nullMean": -0.00021,
+     "nullSd": 0.00179,
+     "z": -6.45
+    },
+    "initDev": {
+     "v": -0.26949,
+     "nullMean": 0.00599,
+     "nullSd": 0.02266,
+     "z": -12.16
+    },
+    "finalDev": {
+     "v": 0.44773,
+     "nullMean": -0.0004,
+     "nullSd": 0.02633,
+     "z": 17.02
+    },
+    "surprGrow": {
+     "v": -0.00721,
+     "nullMean": -0.002,
+     "nullSd": 0.00567,
+     "z": -0.92
+    },
+    "entSlope": {
+     "v": -0.00076,
+     "nullMean": -0.00038,
+     "nullSd": 0.00049,
+     "z": -0.77
+    },
+    "entCurv": {
+     "v": -0.00066,
+     "nullMean": -0.0002,
+     "nullSd": 0.00048,
+     "z": -0.95
+    },
+    "branch": {
+     "v": -0.16894,
+     "nullMean": 0.00162,
+     "nullSd": 0.00663,
+     "z": -25.71
+    },
+    "asym": {
+     "v": 0.07733,
+     "nullMean": -0.00016,
+     "nullSd": 0.00027,
+     "z": 289.05
+    }
+   }
+  }
+ },
+ "bk-faust-de": {
+  "tokens": 29451,
+  "units": 2969,
+  "meanUnitLen": 9.92,
+  "cpuSec": {
+   "discover": 0.002,
+   "confirm": 0.002
+  },
+  "halves": {
+   "discover": {
+    "tokens": 12149,
+    "rareSlope": {
+     "v": 0.15476,
+     "nullMean": 0.00073,
+     "nullSd": 0.01252,
+     "z": 12.3
+    },
+    "rareCurve": {
+     "v": 0.04722,
+     "nullMean": -0.00544,
+     "nullSd": 0.00578,
+     "z": 9.11
+    },
+    "fnBefore": {
+     "v": 0.06568,
+     "nullMean": 0.0031,
+     "nullSd": 0.00911,
+     "z": 6.87
+    },
+    "depLen": {
+     "v": 0.00898,
+     "nullMean": 0.00115,
+     "nullSd": 0.0083,
+     "z": 0.94
+    },
+    "initDev": {
+     "v": -0.44949,
+     "nullMean": -0.01085,
+     "nullSd": 0.02583,
+     "z": -16.98
+    },
+    "finalDev": {
+     "v": 0.66125,
+     "nullMean": 0.00111,
+     "nullSd": 0.02562,
+     "z": 25.77
+    },
+    "surprGrow": {
+     "v": -0.09023,
+     "nullMean": -0.00006,
+     "nullSd": 0.0123,
+     "z": -7.33
+    },
+    "entSlope": {
+     "v": -0.04345,
+     "nullMean": 0.00072,
+     "nullSd": 0.00439,
+     "z": -10.07
+    },
+    "entCurv": {
+     "v": 0.01087,
+     "nullMean": -0.00097,
+     "nullSd": 0.00245,
+     "z": 4.83
+    },
+    "branch": {
+     "v": -0.14215,
+     "nullMean": -0.00053,
+     "nullSd": 0.01466,
+     "z": -9.66
+    },
+    "asym": {
+     "v": 0.02671,
+     "nullMean": -0.00099,
+     "nullSd": 0.00115,
+     "z": 24.09
+    }
+   },
+   "confirm": {
+    "tokens": 17302,
+    "rareSlope": {
+     "v": 0.15726,
+     "nullMean": 0.0002,
+     "nullSd": 0.00713,
+     "z": 22.01
+    },
+    "rareCurve": {
+     "v": 0.05404,
+     "nullMean": 0.00393,
+     "nullSd": 0.0073,
+     "z": 6.86
+    },
+    "fnBefore": {
+     "v": 0.05556,
+     "nullMean": 0,
+     "nullSd": 0.00652,
+     "z": 8.53
+    },
+    "depLen": {
+     "v": 0.01331,
+     "nullMean": 0.00093,
+     "nullSd": 0.00326,
+     "z": 3.79
+    },
+    "initDev": {
+     "v": -0.45293,
+     "nullMean": 0.01088,
+     "nullSd": 0.02092,
+     "z": -22.17
+    },
+    "finalDev": {
+     "v": 0.66848,
+     "nullMean": -0.00444,
+     "nullSd": 0.02156,
+     "z": 31.22
+    },
+    "surprGrow": {
+     "v": -0.08524,
+     "nullMean": -0.00116,
+     "nullSd": 0.00888,
+     "z": -9.47
+    },
+    "entSlope": {
+     "v": -0.0254,
+     "nullMean": -0.00075,
+     "nullSd": 0.00273,
+     "z": -9.03
+    },
+    "entCurv": {
+     "v": 0.0113,
+     "nullMean": 0.00171,
+     "nullSd": 0.00244,
+     "z": 3.93
+    },
+    "branch": {
+     "v": -0.15521,
+     "nullMean": -0.00213,
+     "nullSd": 0.01186,
+     "z": -12.9
+    },
+    "asym": {
+     "v": 0.02453,
+     "nullMean": -0.00068,
+     "nullSd": 0.00081,
+     "z": 31.03
+    }
+   }
+  }
+ },
+ "bk-aeneid-la": {
+  "tokens": 63791,
+  "units": 3266,
+  "meanUnitLen": 19.53,
+  "cpuSec": {
+   "discover": 0.004,
+   "confirm": 0.005
+  },
+  "halves": {
+   "discover": {
+    "tokens": 25923,
+    "rareSlope": {
+     "v": 0.10643,
+     "nullMean": -0.00291,
+     "nullSd": 0.00847,
+     "z": 12.9
+    },
+    "rareCurve": {
+     "v": -0.01623,
+     "nullMean": -0.00153,
+     "nullSd": 0.00562,
+     "z": -2.61
+    },
+    "fnBefore": {
+     "v": 0.03182,
+     "nullMean": -0.00033,
+     "nullSd": 0.00349,
+     "z": 9.21
+    },
+    "depLen": {
+     "v": -0.00272,
+     "nullMean": 0.00128,
+     "nullSd": 0.00476,
+     "z": -0.84
+    },
+    "initDev": {
+     "v": -0.46537,
+     "nullMean": 0.00539,
+     "nullSd": 0.02328,
+     "z": -20.22
+    },
+    "finalDev": {
+     "v": 0.36516,
+     "nullMean": -0.0175,
+     "nullSd": 0.0326,
+     "z": 11.74
+    },
+    "surprGrow": {
+     "v": -0.05866,
+     "nullMean": 0.00247,
+     "nullSd": 0.00781,
+     "z": -7.83
+    },
+    "entSlope": {
+     "v": -0.06159,
+     "nullMean": 0.00125,
+     "nullSd": 0.00607,
+     "z": -10.36
+    },
+    "entCurv": {
+     "v": -0.00345,
+     "nullMean": 0.00113,
+     "nullSd": 0.00362,
+     "z": -1.26
+    },
+    "branch": {
+     "v": 0.07318,
+     "nullMean": -0.00205,
+     "nullSd": 0.00808,
+     "z": 9.31
+    },
+    "asym": {
+     "v": 0.01516,
+     "nullMean": -0.00043,
+     "nullSd": 0.0007,
+     "z": 22.36
+    }
+   },
+   "confirm": {
+    "tokens": 37868,
+    "rareSlope": {
+     "v": 0.11513,
+     "nullMean": 0.00085,
+     "nullSd": 0.0021,
+     "z": 54.3
+    },
+    "rareCurve": {
+     "v": -0.01935,
+     "nullMean": -0.0006,
+     "nullSd": 0.00629,
+     "z": -2.98
+    },
+    "fnBefore": {
+     "v": 0.01647,
+     "nullMean": -0.00164,
+     "nullSd": 0.00248,
+     "z": 7.29
+    },
+    "depLen": {
+     "v": 0.00205,
+     "nullMean": 0.00169,
+     "nullSd": 0.00433,
+     "z": 0.08
+    },
+    "initDev": {
+     "v": -0.52517,
+     "nullMean": -0.01106,
+     "nullSd": 0.02498,
+     "z": -20.58
+    },
+    "finalDev": {
+     "v": 0.3799,
+     "nullMean": -0.00295,
+     "nullSd": 0.01207,
+     "z": 31.73
+    },
+    "surprGrow": {
+     "v": -0.06405,
+     "nullMean": 0.00005,
+     "nullSd": 0.00329,
+     "z": -19.46
+    },
+    "entSlope": {
+     "v": -0.0635,
+     "nullMean": -0.00095,
+     "nullSd": 0.00144,
+     "z": -43.43
+    },
+    "entCurv": {
+     "v": -0.0048,
+     "nullMean": 0.00076,
+     "nullSd": 0.00438,
+     "z": -1.27
+    },
+    "branch": {
+     "v": 0.06359,
+     "nullMean": 0.00168,
+     "nullSd": 0.01067,
+     "z": 5.8
+    },
+    "asym": {
+     "v": 0.01605,
+     "nullMean": -0.00046,
+     "nullSd": 0.00033,
+     "z": 49.87
+    }
+   }
+  }
+ },
+ "bk-dracula": {
+  "tokens": 161957,
+  "units": 9251,
+  "meanUnitLen": 17.51,
+  "cpuSec": {
+   "discover": 0.01,
+   "confirm": 0.01
+  },
+  "halves": {
+   "discover": {
+    "tokens": 81887,
+    "rareSlope": {
+     "v": 0.09822,
+     "nullMean": 0.00012,
+     "nullSd": 0.00285,
+     "z": 34.42
+    },
+    "rareCurve": {
+     "v": 0.02568,
+     "nullMean": -0.0002,
+     "nullSd": 0.00402,
+     "z": 6.44
+    },
+    "fnBefore": {
+     "v": 0.02143,
+     "nullMean": 0.00095,
+     "nullSd": 0.00624,
+     "z": 3.28
+    },
+    "depLen": {
+     "v": 0.01142,
+     "nullMean": 0.00055,
+     "nullSd": 0.00236,
+     "z": 4.6
+    },
+    "initDev": {
+     "v": -0.45852,
+     "nullMean": -0.00251,
+     "nullSd": 0.01586,
+     "z": -28.75
+    },
+    "finalDev": {
+     "v": 0.68123,
+     "nullMean": 0.00799,
+     "nullSd": 0.011,
+     "z": 61.2
+    },
+    "surprGrow": {
+     "v": -0.01925,
+     "nullMean": 0.00108,
+     "nullSd": 0.00235,
+     "z": -8.66
+    },
+    "entSlope": {
+     "v": 0.01564,
+     "nullMean": -0.00027,
+     "nullSd": 0.00087,
+     "z": 18.36
+    },
+    "entCurv": {
+     "v": 0.00438,
+     "nullMean": 0.00005,
+     "nullSd": 0.00073,
+     "z": 5.92
+    },
+    "branch": {
+     "v": -0.14903,
+     "nullMean": -0.00207,
+     "nullSd": 0.0062,
+     "z": -23.7
+    },
+    "asym": {
+     "v": 0.07638,
+     "nullMean": -0.00012,
+     "nullSd": 0.00011,
+     "z": 678.99
+    }
+   },
+   "confirm": {
+    "tokens": 80070,
+    "rareSlope": {
+     "v": 0.09287,
+     "nullMean": -0.00069,
+     "nullSd": 0.00288,
+     "z": 32.44
+    },
+    "rareCurve": {
+     "v": 0.02533,
+     "nullMean": -0.00174,
+     "nullSd": 0.00344,
+     "z": 7.88
+    },
+    "fnBefore": {
+     "v": 0.02631,
+     "nullMean": -0.0006,
+     "nullSd": 0.00471,
+     "z": 5.71
+    },
+    "depLen": {
+     "v": 0.00919,
+     "nullMean": -0.00084,
+     "nullSd": 0.00159,
+     "z": 6.32
+    },
+    "initDev": {
+     "v": -0.44118,
+     "nullMean": -0.00308,
+     "nullSd": 0.00853,
+     "z": -51.36
+    },
+    "finalDev": {
+     "v": 0.66439,
+     "nullMean": 0.00056,
+     "nullSd": 0.01582,
+     "z": 41.96
+    },
+    "surprGrow": {
+     "v": -0.01967,
+     "nullMean": 0.00082,
+     "nullSd": 0.00291,
+     "z": -7.05
+    },
+    "entSlope": {
+     "v": 0.0229,
+     "nullMean": -0.00018,
+     "nullSd": 0.00093,
+     "z": 24.94
+    },
+    "entCurv": {
+     "v": 0.00645,
+     "nullMean": 0.00028,
+     "nullSd": 0.00098,
+     "z": 6.3
+    },
+    "branch": {
+     "v": -0.15114,
+     "nullMean": -0.00047,
+     "nullSd": 0.00578,
+     "z": -26.08
+    },
+    "asym": {
+     "v": 0.07273,
+     "nullMean": -0.0002,
+     "nullSd": 0.0001,
+     "z": 762.23
+    }
+   }
+  }
+ },
+ "bk-einstein": {
+  "tokens": 63106,
+  "units": 3540,
+  "meanUnitLen": 17.83,
+  "cpuSec": {
+   "discover": 0.003,
+   "confirm": 0.004
+  },
+  "halves": {
+   "discover": {
+    "tokens": 23409,
+    "rareSlope": {
+     "v": 0.03505,
+     "nullMean": 0.00199,
+     "nullSd": 0.00544,
+     "z": 6.07
+    },
+    "rareCurve": {
+     "v": 0.02681,
+     "nullMean": -0.00148,
+     "nullSd": 0.00441,
+     "z": 6.42
+    },
+    "fnBefore": {
+     "v": 0.01916,
+     "nullMean": -0.00129,
+     "nullSd": 0.00768,
+     "z": 2.66
+    },
+    "depLen": {
+     "v": 0.01546,
+     "nullMean": 0.00162,
+     "nullSd": 0.00232,
+     "z": 5.96
+    },
+    "initDev": {
+     "v": -0.17436,
+     "nullMean": 0.00162,
+     "nullSd": 0.02884,
+     "z": -6.1
+    },
+    "finalDev": {
+     "v": 0.42543,
+     "nullMean": -0.00359,
+     "nullSd": 0.02833,
+     "z": 15.14
+    },
+    "surprGrow": {
+     "v": -0.02067,
+     "nullMean": -0.00187,
+     "nullSd": 0.00485,
+     "z": -3.87
+    },
+    "entSlope": {
+     "v": -0.00345,
+     "nullMean": -0.00004,
+     "nullSd": 0.00154,
+     "z": -2.21
+    },
+    "entCurv": {
+     "v": 0.00521,
+     "nullMean": -0.00017,
+     "nullSd": 0.00142,
+     "z": 3.78
+    },
+    "branch": {
+     "v": -0.05541,
+     "nullMean": -0.00087,
+     "nullSd": 0.0066,
+     "z": -8.26
+    },
+    "asym": {
+     "v": 0.08512,
+     "nullMean": -0.00049,
+     "nullSd": 0.00036,
+     "z": 240.31
+    }
+   },
+   "confirm": {
+    "tokens": 39697,
+    "rareSlope": {
+     "v": 0.034,
+     "nullMean": 0.00197,
+     "nullSd": 0.00444,
+     "z": 7.22
+    },
+    "rareCurve": {
+     "v": 0.02825,
+     "nullMean": -0.00532,
+     "nullSd": 0.00594,
+     "z": 5.65
+    },
+    "fnBefore": {
+     "v": 0.01781,
+     "nullMean": -0.00386,
+     "nullSd": 0.00579,
+     "z": 3.74
+    },
+    "depLen": {
+     "v": 0.01003,
+     "nullMean": -0.00155,
+     "nullSd": 0.00376,
+     "z": 3.08
+    },
+    "initDev": {
+     "v": -0.19203,
+     "nullMean": -0.01254,
+     "nullSd": 0.01949,
+     "z": -9.21
+    },
+    "finalDev": {
+     "v": 0.42916,
+     "nullMean": -0.00948,
+     "nullSd": 0.01941,
+     "z": 22.6
+    },
+    "surprGrow": {
+     "v": -0.02109,
+     "nullMean": 0.00034,
+     "nullSd": 0.00555,
+     "z": -3.87
+    },
+    "entSlope": {
+     "v": -0.00118,
+     "nullMean": 0.00011,
+     "nullSd": 0.00139,
+     "z": -0.93
+    },
+    "entCurv": {
+     "v": 0.00356,
+     "nullMean": 0.00028,
+     "nullSd": 0.00099,
+     "z": 3.32
+    },
+    "branch": {
+     "v": -0.04089,
+     "nullMean": -0.00003,
+     "nullSd": 0.00806,
+     "z": -5.07
+    },
+    "asym": {
+     "v": 0.08613,
+     "nullMean": -0.00053,
+     "nullSd": 0.00027,
+     "z": 326.73
+    }
+   }
+  }
+ },
+ "bk-origin-species": {
+  "tokens": 150959,
+  "units": 4057,
+  "meanUnitLen": 37.21,
+  "cpuSec": {
+   "discover": 0.008,
+   "confirm": 0.009
+  },
+  "halves": {
+   "discover": {
+    "tokens": 68280,
+    "rareSlope": {
+     "v": 0.04151,
+     "nullMean": -0.0011,
+     "nullSd": 0.00363,
+     "z": 11.73
+    },
+    "rareCurve": {
+     "v": 0.02413,
+     "nullMean": -0.00124,
+     "nullSd": 0.00306,
+     "z": 8.28
+    },
+    "fnBefore": {
+     "v": 0.01904,
+     "nullMean": 0.00184,
+     "nullSd": 0.00488,
+     "z": 3.52
+    },
+    "depLen": {
+     "v": 0.01559,
+     "nullMean": 0.00027,
+     "nullSd": 0.00213,
+     "z": 7.2
+    },
+    "initDev": {
+     "v": -0.27924,
+     "nullMean": -0.0014,
+     "nullSd": 0.01634,
+     "z": -17
+    },
+    "finalDev": {
+     "v": 0.72279,
+     "nullMean": -0.01661,
+     "nullSd": 0.02274,
+     "z": 32.51
+    },
+    "surprGrow": {
+     "v": -0.01231,
+     "nullMean": 0.00192,
+     "nullSd": 0.00367,
+     "z": -3.88
+    },
+    "entSlope": {
+     "v": 0.00243,
+     "nullMean": -0.00007,
+     "nullSd": 0.00059,
+     "z": 4.28
+    },
+    "entCurv": {
+     "v": 0.00046,
+     "nullMean": 0.00005,
+     "nullSd": 0.00054,
+     "z": 0.75
+    },
+    "branch": {
+     "v": -0.10388,
+     "nullMean": -0.00031,
+     "nullSd": 0.00367,
+     "z": -28.21
+    },
+    "asym": {
+     "v": 0.08849,
+     "nullMean": -0.0002,
+     "nullSd": 0.00021,
+     "z": 420.45
+    }
+   },
+   "confirm": {
+    "tokens": 82679,
+    "rareSlope": {
+     "v": 0.03927,
+     "nullMean": -0.00081,
+     "nullSd": 0.00346,
+     "z": 11.58
+    },
+    "rareCurve": {
+     "v": 0.02689,
+     "nullMean": -0.00185,
+     "nullSd": 0.00311,
+     "z": 9.25
+    },
+    "fnBefore": {
+     "v": 0.00059,
+     "nullMean": -0.00253,
+     "nullSd": 0.00418,
+     "z": 0.75
+    },
+    "depLen": {
+     "v": 0.01099,
+     "nullMean": 0.00197,
+     "nullSd": 0.00221,
+     "z": 4.08
+    },
+    "initDev": {
+     "v": -0.26701,
+     "nullMean": -0.0074,
+     "nullSd": 0.02245,
+     "z": -11.56
+    },
+    "finalDev": {
+     "v": 0.78632,
+     "nullMean": 0.00839,
+     "nullSd": 0.02033,
+     "z": 38.26
+    },
+    "surprGrow": {
+     "v": -0.01268,
+     "nullMean": 0.00046,
+     "nullSd": 0.00251,
+     "z": -5.24
+    },
+    "entSlope": {
+     "v": 0.00643,
+     "nullMean": 0.00025,
+     "nullSd": 0.00099,
+     "z": 6.24
+    },
+    "entCurv": {
+     "v": 0.00085,
+     "nullMean": 0.00018,
+     "nullSd": 0.00033,
+     "z": 2.01
+    },
+    "branch": {
+     "v": -0.08588,
+     "nullMean": -0.00052,
+     "nullSd": 0.00442,
+     "z": -19.32
+    },
+    "asym": {
+     "v": 0.09309,
+     "nullMean": -0.00021,
+     "nullSd": 0.00011,
+     "z": 812.54
+    }
+   }
+  }
+ },
+ "bk-quixote-es": {
+  "tokens": 299677,
+  "units": 8546,
+  "meanUnitLen": 35.07,
+  "cpuSec": {
+   "discover": 0.019,
+   "confirm": 0.015
+  },
+  "halves": {
+   "discover": {
+    "tokens": 150812,
+    "rareSlope": {
+     "v": 0.03603,
+     "nullMean": 0.00131,
+     "nullSd": 0.0028,
+     "z": 12.42
+    },
+    "rareCurve": {
+     "v": 0.03727,
+     "nullMean": -0.00068,
+     "nullSd": 0.0018,
+     "z": 21.04
+    },
+    "fnBefore": {
+     "v": -0.01724,
+     "nullMean": 0.00089,
+     "nullSd": 0.00251,
+     "z": -7.24
+    },
+    "depLen": {
+     "v": 0.00127,
+     "nullMean": -0.00034,
+     "nullSd": 0.002,
+     "z": 0.8
+    },
+    "initDev": {
+     "v": -0.02654,
+     "nullMean": -0.00636,
+     "nullSd": 0.02008,
+     "z": -1
+    },
+    "finalDev": {
+     "v": 0.83505,
+     "nullMean": 0.0003,
+     "nullSd": 0.02047,
+     "z": 40.78
+    },
+    "surprGrow": {
+     "v": -0.01785,
+     "nullMean": -0.00016,
+     "nullSd": 0.00175,
+     "z": -10.1
+    },
+    "entSlope": {
+     "v": 0.00652,
+     "nullMean": 0.00024,
+     "nullSd": 0.00063,
+     "z": 9.95
+    },
+    "entCurv": {
+     "v": 0.00027,
+     "nullMean": -0.00008,
+     "nullSd": 0.00062,
+     "z": 0.57
+    },
+    "branch": {
+     "v": -0.22736,
+     "nullMean": 0.00012,
+     "nullSd": 0.00374,
+     "z": -60.87
+    },
+    "asym": {
+     "v": 0.06277,
+     "nullMean": -0.00009,
+     "nullSd": 0.00005,
+     "z": 1154.55
+    }
+   },
+   "confirm": {
+    "tokens": 124192,
+    "rareSlope": {
+     "v": 0.03897,
+     "nullMean": 0.00301,
+     "nullSd": 0.0044,
+     "z": 8.17
+    },
+    "rareCurve": {
+     "v": 0.04146,
+     "nullMean": -0.00096,
+     "nullSd": 0.00275,
+     "z": 15.43
+    },
+    "fnBefore": {
+     "v": -0.01551,
+     "nullMean": -0.00076,
+     "nullSd": 0.00426,
+     "z": -3.46
+    },
+    "depLen": {
+     "v": -0.0003,
+     "nullMean": -0.00085,
+     "nullSd": 0.00208,
+     "z": 0.27
+    },
+    "initDev": {
+     "v": 0.01997,
+     "nullMean": 0.00525,
+     "nullSd": 0.00892,
+     "z": 1.65
+    },
+    "finalDev": {
+     "v": 0.83031,
+     "nullMean": 0.00387,
+     "nullSd": 0.0158,
+     "z": 52.31
+    },
+    "surprGrow": {
+     "v": -0.02209,
+     "nullMean": -0.00227,
+     "nullSd": 0.00301,
+     "z": -6.57
+    },
+    "entSlope": {
+     "v": 0.00854,
+     "nullMean": 0.00052,
+     "nullSd": 0.00066,
+     "z": 12.09
+    },
+    "entCurv": {
+     "v": 0.00066,
+     "nullMean": 0.00028,
+     "nullSd": 0.00066,
+     "z": 0.58
+    },
+    "branch": {
+     "v": -0.23692,
+     "nullMean": -0.00189,
+     "nullSd": 0.00504,
+     "z": -46.62
+    },
+    "asym": {
+     "v": 0.06544,
+     "nullMean": -0.00016,
+     "nullSd": 0.00011,
+     "z": 584.06
+    }
+   }
+  }
+ },
+ "ud-eng": {
+  "tokens": 43098,
+  "units": 4015,
+  "meanUnitLen": 10.73,
+  "cpuSec": {
+   "discover": 0.005,
+   "confirm": 0.003
+  },
+  "halves": {
+   "discover": {
+    "tokens": 19492,
+    "rareSlope": {
+     "v": 0.11907,
+     "nullMean": 0.00121,
+     "nullSd": 0.00683,
+     "z": 17.25
+    },
+    "rareCurve": {
+     "v": 0.05823,
+     "nullMean": -0.00233,
+     "nullSd": 0.00729,
+     "z": 8.31
+    },
+    "fnBefore": {
+     "v": 0.03305,
+     "nullMean": -0.00118,
+     "nullSd": 0.0068,
+     "z": 5.03
+    },
+    "depLen": {
+     "v": 0.01738,
+     "nullMean": -0.00284,
+     "nullSd": 0.0039,
+     "z": 5.19
+    },
+    "initDev": {
+     "v": -0.30996,
+     "nullMean": -0.00489,
+     "nullSd": 0.01646,
+     "z": -18.53
+    },
+    "finalDev": {
+     "v": 0.62606,
+     "nullMean": 0.00459,
+     "nullSd": 0.02266,
+     "z": 27.43
+    },
+    "surprGrow": {
+     "v": -0.05179,
+     "nullMean": -0.00159,
+     "nullSd": 0.0061,
+     "z": -8.23
+    },
+    "entSlope": {
+     "v": -0.00671,
+     "nullMean": -0.0002,
+     "nullSd": 0.00249,
+     "z": -2.61
+    },
+    "entCurv": {
+     "v": 0.00768,
+     "nullMean": 0.00018,
+     "nullSd": 0.0013,
+     "z": 5.76
+    },
+    "branch": {
+     "v": -0.11774,
+     "nullMean": -0.00599,
+     "nullSd": 0.0083,
+     "z": -13.47
+    },
+    "asym": {
+     "v": 0.05692,
+     "nullMean": -0.00075,
+     "nullSd": 0.00095,
+     "z": 60.87
+    }
+   },
+   "confirm": {
+    "tokens": 23606,
+    "rareSlope": {
+     "v": 0.11266,
+     "nullMean": -0.00028,
+     "nullSd": 0.0067,
+     "z": 16.86
+    },
+    "rareCurve": {
+     "v": 0.06263,
+     "nullMean": -0.00134,
+     "nullSd": 0.00778,
+     "z": 8.23
+    },
+    "fnBefore": {
+     "v": 0.01503,
+     "nullMean": -0.00144,
+     "nullSd": 0.00447,
+     "z": 3.68
+    },
+    "depLen": {
+     "v": 0.00351,
+     "nullMean": 0.00074,
+     "nullSd": 0.00467,
+     "z": 0.59
+    },
+    "initDev": {
+     "v": -0.26625,
+     "nullMean": 0.00127,
+     "nullSd": 0.0141,
+     "z": -18.97
+    },
+    "finalDev": {
+     "v": 0.62854,
+     "nullMean": 0.00358,
+     "nullSd": 0.02656,
+     "z": 23.53
+    },
+    "surprGrow": {
+     "v": -0.05426,
+     "nullMean": -0.00156,
+     "nullSd": 0.00647,
+     "z": -8.14
+    },
+    "entSlope": {
+     "v": -0.00682,
+     "nullMean": 0.00039,
+     "nullSd": 0.00141,
+     "z": -5.13
+    },
+    "entCurv": {
+     "v": 0.00997,
+     "nullMean": 0.00003,
+     "nullSd": 0.00121,
+     "z": 8.19
+    },
+    "branch": {
+     "v": -0.0889,
+     "nullMean": -0.00214,
+     "nullSd": 0.01116,
+     "z": -7.77
+    },
+    "asym": {
+     "v": 0.06385,
+     "nullMean": -0.00053,
+     "nullSd": 0.00057,
+     "z": 113.22
+    }
+   }
+  }
+ },
+ "ud-jpn": {
+  "tokens": 22225,
+  "units": 1050,
+  "meanUnitLen": 21.17,
+  "cpuSec": {
+   "discover": 0.003,
+   "confirm": 0.001
+  },
+  "halves": {
+   "discover": {
+    "tokens": 11685,
+    "rareSlope": {
+     "v": -0.11252,
+     "nullMean": -0.00325,
+     "nullSd": 0.01006,
+     "z": -10.86
+    },
+    "rareCurve": {
+     "v": 0.00213,
+     "nullMean": 0.00006,
+     "nullSd": 0.00838,
+     "z": 0.25
+    },
+    "fnBefore": {
+     "v": 0.00277,
+     "nullMean": 0.00001,
+     "nullSd": 0.00578,
+     "z": 0.48
+    },
+    "depLen": {
+     "v": 0.00499,
+     "nullMean": -0.0015,
+     "nullSd": 0.00548,
+     "z": 1.19
+    },
+    "initDev": {
+     "v": 0.67063,
+     "nullMean": 0.0041,
+     "nullSd": 0.0408,
+     "z": 16.34
+    },
+    "finalDev": {
+     "v": -0.30582,
+     "nullMean": -0.0071,
+     "nullSd": 0.055,
+     "z": -5.43
+    },
+    "surprGrow": {
+     "v": -0.01688,
+     "nullMean": 0.00253,
+     "nullSd": 0.0073,
+     "z": -2.66
+    },
+    "entSlope": {
+     "v": 0.00699,
+     "nullMean": 0.00242,
+     "nullSd": 0.00411,
+     "z": 1.11
+    },
+    "entCurv": {
+     "v": 0.00109,
+     "nullMean": 0.00209,
+     "nullSd": 0.00365,
+     "z": -0.27
+    },
+    "branch": {
+     "v": -0.42056,
+     "nullMean": 0.0061,
+     "nullSd": 0.01021,
+     "z": -41.78
+    },
+    "asym": {
+     "v": 0.04874,
+     "nullMean": -0.0007,
+     "nullSd": 0.00091,
+     "z": 54.6
+    }
+   },
+   "confirm": {
+    "tokens": 10540,
+    "rareSlope": {
+     "v": -0.0885,
+     "nullMean": 0.00053,
+     "nullSd": 0.01777,
+     "z": -5.01
+    },
+    "rareCurve": {
+     "v": 0.01835,
+     "nullMean": -0.00082,
+     "nullSd": 0.01461,
+     "z": 1.31
+    },
+    "fnBefore": {
+     "v": -0.01184,
+     "nullMean": -0.00311,
+     "nullSd": 0.00529,
+     "z": -1.65
+    },
+    "depLen": {
+     "v": 0.00768,
+     "nullMean": 0.00035,
+     "nullSd": 0.00596,
+     "z": 1.23
+    },
+    "initDev": {
+     "v": 0.71402,
+     "nullMean": -0.02158,
+     "nullSd": 0.0626,
+     "z": 11.75
+    },
+    "finalDev": {
+     "v": -0.20078,
+     "nullMean": -0.01872,
+     "nullSd": 0.05144,
+     "z": -3.54
+    },
+    "surprGrow": {
+     "v": -0.02024,
+     "nullMean": 0.00082,
+     "nullSd": 0.0124,
+     "z": -1.7
+    },
+    "entSlope": {
+     "v": 0.00014,
+     "nullMean": -0.00145,
+     "nullSd": 0.00774,
+     "z": 0.2
+    },
+    "entCurv": {
+     "v": 0.00282,
+     "nullMean": 0.00038,
+     "nullSd": 0.00581,
+     "z": 0.42
+    },
+    "branch": {
+     "v": -0.41505,
+     "nullMean": -0.00362,
+     "nullSd": 0.0129,
+     "z": -31.9
+    },
+    "asym": {
+     "v": 0.03603,
+     "nullMean": -0.00147,
+     "nullSd": 0.00117,
+     "z": 32.1
+    }
+   }
+  }
+ },
+ "ud-kor": {
+  "tokens": 20436,
+  "units": 1939,
+  "meanUnitLen": 10.54,
+  "cpuSec": {
+   "discover": 0.002,
+   "confirm": 0.002
+  },
+  "halves": {
+   "discover": {
+    "tokens": 9228,
+    "rareSlope": {
+     "v": -0.06256,
+     "nullMean": -0.00074,
+     "nullSd": 0.00988,
+     "z": -6.26
+    },
+    "rareCurve": {
+     "v": -0.04823,
+     "nullMean": 0.00346,
+     "nullSd": 0.00993,
+     "z": -5.21
+    },
+    "fnBefore": {
+     "v": -0.0137,
+     "nullMean": 0.00053,
+     "nullSd": 0.00412,
+     "z": -3.45
+    },
+    "depLen": {
+     "v": -0.00326,
+     "nullMean": 0.00476,
+     "nullSd": 0.00795,
+     "z": -1.01
+    },
+    "initDev": {
+     "v": -0.01214,
+     "nullMean": 0.00618,
+     "nullSd": 0.03073,
+     "z": -0.6
+    },
+    "finalDev": {
+     "v": -0.11109,
+     "nullMean": 0.00085,
+     "nullSd": 0.02394,
+     "z": -4.68
+    },
+    "surprGrow": {
+     "v": 0.07525,
+     "nullMean": -0.00049,
+     "nullSd": 0.01038,
+     "z": 7.3
+    },
+    "entSlope": {
+     "v": 0.06912,
+     "nullMean": 0.00207,
+     "nullSd": 0.01822,
+     "z": 3.68
+    },
+    "entCurv": {
+     "v": -0.02427,
+     "nullMean": 0.01029,
+     "nullSd": 0.01848,
+     "z": -1.87
+    },
+    "branch": {
+     "v": 0.06469,
+     "nullMean": -0.00266,
+     "nullSd": 0.02167,
+     "z": 3.11
+    },
+    "asym": {
+     "v": 0.01451,
+     "nullMean": -0.00146,
+     "nullSd": 0.00093,
+     "z": 17.1
+    }
+   },
+   "confirm": {
+    "tokens": 11208,
+    "rareSlope": {
+     "v": -0.07763,
+     "nullMean": 0.00423,
+     "nullSd": 0.00992,
+     "z": -8.26
+    },
+    "rareCurve": {
+     "v": -0.07586,
+     "nullMean": 0.00011,
+     "nullSd": 0.00884,
+     "z": -8.59
+    },
+    "fnBefore": {
+     "v": -0.01433,
+     "nullMean": 0.00203,
+     "nullSd": 0.00422,
+     "z": -3.88
+    },
+    "depLen": {
+     "v": 0.00852,
+     "nullMean": 0.00095,
+     "nullSd": 0.0056,
+     "z": 1.35
+    },
+    "initDev": {
+     "v": -0.06046,
+     "nullMean": -0.0022,
+     "nullSd": 0.02259,
+     "z": -2.58
+    },
+    "finalDev": {
+     "v": -0.22163,
+     "nullMean": 0.00116,
+     "nullSd": 0.03698,
+     "z": -6.02
+    },
+    "surprGrow": {
+     "v": 0.10308,
+     "nullMean": -0.00417,
+     "nullSd": 0.01041,
+     "z": 10.3
+    },
+    "entSlope": {
+     "v": 0.11451,
+     "nullMean": -0.0111,
+     "nullSd": 0.01954,
+     "z": 6.43
+    },
+    "entCurv": {
+     "v": -0.05028,
+     "nullMean": 0.00049,
+     "nullSd": 0.01823,
+     "z": -2.79
+    },
+    "branch": {
+     "v": 0.04995,
+     "nullMean": 0.00696,
+     "nullSd": 0.01389,
+     "z": 3.1
+    },
+    "asym": {
+     "v": 0.00808,
+     "nullMean": -0.00205,
+     "nullSd": 0.0009,
+     "z": 11.25
+    }
+   }
+  }
+ },
+ "ud-hin": {
+  "tokens": 64983,
+  "units": 3343,
+  "meanUnitLen": 19.44,
+  "cpuSec": {
+   "discover": 0.005,
+   "confirm": 0.004
+  },
+  "halves": {
+   "discover": {
+    "tokens": 32739,
+    "rareSlope": {
+     "v": -0.02717,
+     "nullMean": 0.00017,
+     "nullSd": 0.00713,
+     "z": -3.83
+    },
+    "rareCurve": {
+     "v": -0.02556,
+     "nullMean": -0.00068,
+     "nullSd": 0.00563,
+     "z": -4.42
+    },
+    "fnBefore": {
+     "v": 0.00229,
+     "nullMean": -0.00094,
+     "nullSd": 0.00952,
+     "z": 0.34
+    },
+    "depLen": {
+     "v": -0.00559,
+     "nullMean": 0.00231,
+     "nullSd": 0.00581,
+     "z": -1.36
+    },
+    "initDev": {
+     "v": 0.35793,
+     "nullMean": -0.00082,
+     "nullSd": 0.02445,
+     "z": 14.67
+    },
+    "finalDev": {
+     "v": -0.53389,
+     "nullMean": -0.00309,
+     "nullSd": 0.02666,
+     "z": -19.91
+    },
+    "surprGrow": {
+     "v": 0.00757,
+     "nullMean": 0.00018,
+     "nullSd": 0.00853,
+     "z": 0.87
+    },
+    "entSlope": {
+     "v": -0.0018,
+     "nullMean": 0.00024,
+     "nullSd": 0.00188,
+     "z": -1.08
+    },
+    "entCurv": {
+     "v": 0.00005,
+     "nullMean": -0.00025,
+     "nullSd": 0.00104,
+     "z": 0.29
+    },
+    "branch": {
+     "v": -0.20991,
+     "nullMean": 0.00634,
+     "nullSd": 0.01133,
+     "z": -19.08
+    },
+    "asym": {
+     "v": 0.032,
+     "nullMean": -0.00048,
+     "nullSd": 0.00051,
+     "z": 63.93
+    }
+   },
+   "confirm": {
+    "tokens": 32244,
+    "rareSlope": {
+     "v": -0.03583,
+     "nullMean": 0.00017,
+     "nullSd": 0.006,
+     "z": -6
+    },
+    "rareCurve": {
+     "v": -0.02826,
+     "nullMean": 0.00295,
+     "nullSd": 0.00674,
+     "z": -4.63
+    },
+    "fnBefore": {
+     "v": -0.01991,
+     "nullMean": -0.00091,
+     "nullSd": 0.00919,
+     "z": -2.07
+    },
+    "depLen": {
+     "v": 0.00732,
+     "nullMean": 0.00278,
+     "nullSd": 0.00433,
+     "z": 1.05
+    },
+    "initDev": {
+     "v": 0.37945,
+     "nullMean": -0.00079,
+     "nullSd": 0.02277,
+     "z": 16.7
+    },
+    "finalDev": {
+     "v": -0.54806,
+     "nullMean": -0.00381,
+     "nullSd": 0.02346,
+     "z": -23.2
+    },
+    "surprGrow": {
+     "v": 0.01309,
+     "nullMean": 0.00016,
+     "nullSd": 0.00637,
+     "z": 2.03
+    },
+    "entSlope": {
+     "v": -0.00489,
+     "nullMean": -0.00006,
+     "nullSd": 0.00153,
+     "z": -3.16
+    },
+    "entCurv": {
+     "v": 0.00222,
+     "nullMean": 0.00051,
+     "nullSd": 0.00107,
+     "z": 1.6
+    },
+    "branch": {
+     "v": -0.22037,
+     "nullMean": -0.00228,
+     "nullSd": 0.00705,
+     "z": -30.94
+    },
+    "asym": {
+     "v": 0.0452,
+     "nullMean": -0.00024,
+     "nullSd": 0.00025,
+     "z": 179.37
+    }
+   }
+  }
+ },
+ "ud-fra": {
+  "tokens": 39700,
+  "units": 1892,
+  "meanUnitLen": 20.98,
+  "cpuSec": {
+   "discover": 0.003,
+   "confirm": 0.004
+  },
+  "halves": {
+   "discover": {
+    "tokens": 18312,
+    "rareSlope": {
+     "v": 0.04609,
+     "nullMean": 0.00013,
+     "nullSd": 0.00819,
+     "z": 5.61
+    },
+    "rareCurve": {
+     "v": 0.03978,
+     "nullMean": 0.00422,
+     "nullSd": 0.00768,
+     "z": 4.63
+    },
+    "fnBefore": {
+     "v": -0.0148,
+     "nullMean": -0.00126,
+     "nullSd": 0.00463,
+     "z": -2.92
+    },
+    "depLen": {
+     "v": 0.00742,
+     "nullMean": -0.00081,
+     "nullSd": 0.00232,
+     "z": 3.55
+    },
+    "initDev": {
+     "v": -0.37218,
+     "nullMean": 0.00774,
+     "nullSd": 0.02298,
+     "z": -16.54
+    },
+    "finalDev": {
+     "v": 0.85072,
+     "nullMean": 0.00582,
+     "nullSd": 0.0298,
+     "z": 28.35
+    },
+    "surprGrow": {
+     "v": -0.0182,
+     "nullMean": -0.00025,
+     "nullSd": 0.00849,
+     "z": -2.11
+    },
+    "entSlope": {
+     "v": -0.01826,
+     "nullMean": -0.00113,
+     "nullSd": 0.0044,
+     "z": -3.9
+    },
+    "entCurv": {
+     "v": 0.00362,
+     "nullMean": 0.00071,
+     "nullSd": 0.00325,
+     "z": 0.89
+    },
+    "branch": {
+     "v": -0.11834,
+     "nullMean": 0.00723,
+     "nullSd": 0.00513,
+     "z": -24.46
+    },
+    "asym": {
+     "v": 0.11229,
+     "nullMean": -0.00047,
+     "nullSd": 0.00068,
+     "z": 166.94
+    }
+   },
+   "confirm": {
+    "tokens": 21388,
+    "rareSlope": {
+     "v": 0.05033,
+     "nullMean": -0.00373,
+     "nullSd": 0.00719,
+     "z": 7.52
+    },
+    "rareCurve": {
+     "v": 0.05408,
+     "nullMean": -0.00098,
+     "nullSd": 0.00809,
+     "z": 6.81
+    },
+    "fnBefore": {
+     "v": -0.00445,
+     "nullMean": 0.00042,
+     "nullSd": 0.004,
+     "z": -1.22
+    },
+    "depLen": {
+     "v": 0.01264,
+     "nullMean": 0.00096,
+     "nullSd": 0.00326,
+     "z": 3.59
+    },
+    "initDev": {
+     "v": -0.33622,
+     "nullMean": 0.008,
+     "nullSd": 0.03958,
+     "z": -8.7
+    },
+    "finalDev": {
+     "v": 0.87821,
+     "nullMean": 0.00133,
+     "nullSd": 0.01842,
+     "z": 47.6
+    },
+    "surprGrow": {
+     "v": -0.02325,
+     "nullMean": 0.00187,
+     "nullSd": 0.00586,
+     "z": -4.28
+    },
+    "entSlope": {
+     "v": -0.02349,
+     "nullMean": 0.00094,
+     "nullSd": 0.00348,
+     "z": -7.03
+    },
+    "entCurv": {
+     "v": 0.00365,
+     "nullMean": -0.00047,
+     "nullSd": 0.00361,
+     "z": 1.14
+    },
+    "branch": {
+     "v": -0.109,
+     "nullMean": 0.00164,
+     "nullSd": 0.01029,
+     "z": -10.76
+    },
+    "asym": {
+     "v": 0.12744,
+     "nullMean": -0.00058,
+     "nullSd": 0.00065,
+     "z": 196.14
+    }
+   }
+  }
+ },
+ "ud-fin": {
+  "tokens": 32885,
+  "units": 2919,
+  "meanUnitLen": 11.27,
+  "cpuSec": {
+   "discover": 0.005,
+   "confirm": 0.002
+  },
+  "halves": {
+   "discover": {
+    "tokens": 15134,
+    "rareSlope": {
+     "v": 0.1145,
+     "nullMean": 0.00089,
+     "nullSd": 0.00923,
+     "z": 12.31
+    },
+    "rareCurve": {
+     "v": 0.09377,
+     "nullMean": -0.00081,
+     "nullSd": 0.00942,
+     "z": 10.04
+    },
+    "fnBefore": {
+     "v": 0.03068,
+     "nullMean": 0.00117,
+     "nullSd": 0.00442,
+     "z": 6.68
+    },
+    "depLen": {
+     "v": -0.00307,
+     "nullMean": 0.00248,
+     "nullSd": 0.00911,
+     "z": -0.61
+    },
+    "initDev": {
+     "v": -0.04911,
+     "nullMean": 0.00403,
+     "nullSd": 0.03311,
+     "z": -1.6
+    },
+    "finalDev": {
+     "v": 0.4679,
+     "nullMean": 0.00227,
+     "nullSd": 0.0254,
+     "z": 18.33
+    },
+    "surprGrow": {
+     "v": -0.10558,
+     "nullMean": -0.0013,
+     "nullSd": 0.01075,
+     "z": -9.7
+    },
+    "entSlope": {
+     "v": -0.12311,
+     "nullMean": -0.00229,
+     "nullSd": 0.00778,
+     "z": -15.54
+    },
+    "entCurv": {
+     "v": 0.03366,
+     "nullMean": -0.00085,
+     "nullSd": 0.00589,
+     "z": 5.86
+    },
+    "branch": {
+     "v": -0.0598,
+     "nullMean": 0.00288,
+     "nullSd": 0.01494,
+     "z": -4.2
+    },
+    "asym": {
+     "v": 0.00866,
+     "nullMean": -0.00098,
+     "nullSd": 0.0009,
+     "z": 10.67
+    }
+   },
+   "confirm": {
+    "tokens": 17751,
+    "rareSlope": {
+     "v": 0.10785,
+     "nullMean": 0.0039,
+     "nullSd": 0.00617,
+     "z": 16.84
+    },
+    "rareCurve": {
+     "v": 0.09745,
+     "nullMean": 0.00152,
+     "nullSd": 0.00588,
+     "z": 16.32
+    },
+    "fnBefore": {
+     "v": 0.00019,
+     "nullMean": 0.00194,
+     "nullSd": 0.00677,
+     "z": -0.26
+    },
+    "depLen": {
+     "v": 0.00506,
+     "nullMean": -0.00092,
+     "nullSd": 0.00543,
+     "z": 1.1
+    },
+    "initDev": {
+     "v": -0.04212,
+     "nullMean": -0.00805,
+     "nullSd": 0.01815,
+     "z": -1.88
+    },
+    "finalDev": {
+     "v": 0.48204,
+     "nullMean": 0.01314,
+     "nullSd": 0.02428,
+     "z": 19.31
+    },
+    "surprGrow": {
+     "v": -0.09866,
+     "nullMean": -0.00208,
+     "nullSd": 0.00846,
+     "z": -11.42
+    },
+    "entSlope": {
+     "v": -0.12379,
+     "nullMean": -0.00344,
+     "nullSd": 0.00558,
+     "z": -21.58
+    },
+    "entCurv": {
+     "v": 0.04477,
+     "nullMean": -0.00016,
+     "nullSd": 0.00408,
+     "z": 11
+    },
+    "branch": {
+     "v": -0.03498,
+     "nullMean": -0.00754,
+     "nullSd": 0.00802,
+     "z": -3.42
+    },
+    "asym": {
+     "v": 0.01708,
+     "nullMean": -0.00043,
+     "nullSd": 0.00081,
+     "z": 21.59
+    }
+   }
+  }
+ },
+ "ud-cmn": {
+  "tokens": 20450,
+  "units": 1000,
+  "meanUnitLen": 20.45,
+  "cpuSec": {
+   "discover": 0.002,
+   "confirm": 0.001
+  },
+  "halves": {
+   "discover": {
+    "tokens": 11622,
+    "rareSlope": {
+     "v": 0.05505,
+     "nullMean": -0.00114,
+     "nullSd": 0.00663,
+     "z": 8.47
+    },
+    "rareCurve": {
+     "v": 0.01413,
+     "nullMean": 0.00186,
+     "nullSd": 0.01103,
+     "z": 1.11
+    },
+    "fnBefore": {
+     "v": 0.03191,
+     "nullMean": 0.00143,
+     "nullSd": 0.00613,
+     "z": 4.97
+    },
+    "depLen": {
+     "v": 0.01568,
+     "nullMean": -0.00148,
+     "nullSd": 0.00793,
+     "z": 2.16
+    },
+    "initDev": {
+     "v": -0.03412,
+     "nullMean": -0.01141,
+     "nullSd": 0.04057,
+     "z": -0.56
+    },
+    "finalDev": {
+     "v": 0.47852,
+     "nullMean": 0.01085,
+     "nullSd": 0.04169,
+     "z": 11.22
+    },
+    "surprGrow": {
+     "v": -0.03004,
+     "nullMean": 0.00263,
+     "nullSd": 0.00665,
+     "z": -4.91
+    },
+    "entSlope": {
+     "v": -0.03773,
+     "nullMean": -0.00026,
+     "nullSd": 0.00592,
+     "z": -6.32
+    },
+    "entCurv": {
+     "v": 0.00812,
+     "nullMean": 0.00177,
+     "nullSd": 0.0068,
+     "z": 0.93
+    },
+    "branch": {
+     "v": -0.11973,
+     "nullMean": -0.00226,
+     "nullSd": 0.01455,
+     "z": -8.08
+    },
+    "asym": {
+     "v": 0.01288,
+     "nullMean": -0.00105,
+     "nullSd": 0.0009,
+     "z": 15.54
+    }
+   },
+   "confirm": {
+    "tokens": 8828,
+    "rareSlope": {
+     "v": 0.04373,
+     "nullMean": 0.00019,
+     "nullSd": 0.01218,
+     "z": 3.58
+    },
+    "rareCurve": {
+     "v": 0.0226,
+     "nullMean": 0.00008,
+     "nullSd": 0.01541,
+     "z": 1.46
+    },
+    "fnBefore": {
+     "v": 0.03658,
+     "nullMean": -0.00149,
+     "nullSd": 0.01028,
+     "z": 3.7
+    },
+    "depLen": {
+     "v": 0.01954,
+     "nullMean": -0.00224,
+     "nullSd": 0.00963,
+     "z": 2.26
+    },
+    "initDev": {
+     "v": -0.00755,
+     "nullMean": -0.00975,
+     "nullSd": 0.05559,
+     "z": 0.04
+    },
+    "finalDev": {
+     "v": 0.45746,
+     "nullMean": 0.01912,
+     "nullSd": 0.04445,
+     "z": 9.86
+    },
+    "surprGrow": {
+     "v": -0.02448,
+     "nullMean": 0.00094,
+     "nullSd": 0.0112,
+     "z": -2.27
+    },
+    "entSlope": {
+     "v": -0.03451,
+     "nullMean": 0.00043,
+     "nullSd": 0.00885,
+     "z": -3.95
+    },
+    "entCurv": {
+     "v": 0.00247,
+     "nullMean": -0.00055,
+     "nullSd": 0.0086,
+     "z": 0.35
+    },
+    "branch": {
+     "v": -0.0958,
+     "nullMean": 0.0023,
+     "nullSd": 0.02011,
+     "z": -4.88
+    },
+    "asym": {
+     "v": 0.01068,
+     "nullMean": -0.00149,
+     "nullSd": 0.00198,
+     "z": 6.14
+    }
+   }
+  }
+ },
+ "ud-arb": {
+  "tokens": 52252,
+  "units": 1589,
+  "meanUnitLen": 32.88,
+  "cpuSec": {
+   "discover": 0.005,
+   "confirm": 0.004
+  },
+  "halves": {
+   "discover": {
+    "tokens": 23252,
+    "rareSlope": {
+     "v": 0.03995,
+     "nullMean": -0.00012,
+     "nullSd": 0.00414,
+     "z": 9.68
+    },
+    "rareCurve": {
+     "v": -0.03162,
+     "nullMean": 0.00089,
+     "nullSd": 0.00572,
+     "z": -5.68
+    },
+    "fnBefore": {
+     "v": -0.0135,
+     "nullMean": -0.00041,
+     "nullSd": 0.00193,
+     "z": -6.79
+    },
+    "depLen": {
+     "v": 0.01011,
+     "nullMean": -0.00231,
+     "nullSd": 0.00529,
+     "z": 2.35
+    },
+    "initDev": {
+     "v": -0.9822,
+     "nullMean": 0.00946,
+     "nullSd": 0.02843,
+     "z": -34.88
+    },
+    "finalDev": {
+     "v": 0.39327,
+     "nullMean": -0.00824,
+     "nullSd": 0.04075,
+     "z": 9.85
+    },
+    "surprGrow": {
+     "v": 0.03746,
+     "nullMean": 0.00033,
+     "nullSd": 0.00384,
+     "z": 9.67
+    },
+    "entSlope": {
+     "v": -0.01228,
+     "nullMean": 0.00081,
+     "nullSd": 0.00175,
+     "z": -7.46
+    },
+    "entCurv": {
+     "v": -0.00181,
+     "nullMean": 0.00053,
+     "nullSd": 0.00161,
+     "z": -1.45
+    },
+    "branch": {
+     "v": -0.15225,
+     "nullMean": -0.00064,
+     "nullSd": 0.00645,
+     "z": -23.51
+    },
+    "asym": {
+     "v": 0.02151,
+     "nullMean": -0.00035,
+     "nullSd": 0.00067,
+     "z": 32.53
+    }
+   },
+   "confirm": {
+    "tokens": 29000,
+    "rareSlope": {
+     "v": 0.03803,
+     "nullMean": 0.00181,
+     "nullSd": 0.00538,
+     "z": 6.73
+    },
+    "rareCurve": {
+     "v": -0.01666,
+     "nullMean": -0.00227,
+     "nullSd": 0.00503,
+     "z": -2.86
+    },
+    "fnBefore": {
+     "v": -0.00364,
+     "nullMean": 0.00221,
+     "nullSd": 0.00216,
+     "z": -2.7
+    },
+    "depLen": {
+     "v": 0.00048,
+     "nullMean": -0.00052,
+     "nullSd": 0.00388,
+     "z": 0.26
+    },
+    "initDev": {
+     "v": -0.98146,
+     "nullMean": -0.01228,
+     "nullSd": 0.02828,
+     "z": -34.27
+    },
+    "finalDev": {
+     "v": 0.43015,
+     "nullMean": 0.01134,
+     "nullSd": 0.03421,
+     "z": 12.24
+    },
+    "surprGrow": {
+     "v": 0.03207,
+     "nullMean": -0.00077,
+     "nullSd": 0.0046,
+     "z": 7.14
+    },
+    "entSlope": {
+     "v": -0.01051,
+     "nullMean": -0.00048,
+     "nullSd": 0.00195,
+     "z": -5.13
+    },
+    "entCurv": {
+     "v": -0.00114,
+     "nullMean": -0.00079,
+     "nullSd": 0.00184,
+     "z": -0.19
+    },
+    "branch": {
+     "v": -0.15419,
+     "nullMean": 0.00687,
+     "nullSd": 0.00711,
+     "z": -22.66
+    },
+    "asym": {
+     "v": 0.02432,
+     "nullMean": -0.00055,
+     "nullSd": 0.00041,
+     "z": 60.29
+    }
+   }
+  }
+ },
+ "ud-spa": {
+  "tokens": 93017,
+  "units": 3375,
+  "meanUnitLen": 27.56,
+  "cpuSec": {
+   "discover": 0.011,
+   "confirm": 0.006
+  },
+  "halves": {
+   "discover": {
+    "tokens": 48101,
+    "rareSlope": {
+     "v": 0.02884,
+     "nullMean": 0.00106,
+     "nullSd": 0.00327,
+     "z": 8.49
+    },
+    "rareCurve": {
+     "v": 0.03546,
+     "nullMean": -0.00021,
+     "nullSd": 0.00334,
+     "z": 10.68
+    },
+    "fnBefore": {
+     "v": -0.03647,
+     "nullMean": 0.00087,
+     "nullSd": 0.00356,
+     "z": -10.5
+    },
+    "depLen": {
+     "v": 0.02738,
+     "nullMean": 0.00014,
+     "nullSd": 0.00247,
+     "z": 11.04
+    },
+    "initDev": {
+     "v": -0.36617,
+     "nullMean": -0.01086,
+     "nullSd": 0.01788,
+     "z": -19.87
+    },
+    "finalDev": {
+     "v": 0.8054,
+     "nullMean": -0.00396,
+     "nullSd": 0.02516,
+     "z": 32.17
+    },
+    "surprGrow": {
+     "v": -0.00917,
+     "nullMean": 0.00006,
+     "nullSd": 0.00277,
+     "z": -3.33
+    },
+    "entSlope": {
+     "v": -0.00607,
+     "nullMean": -0.00017,
+     "nullSd": 0.00123,
+     "z": -4.78
+    },
+    "entCurv": {
+     "v": -0.00481,
+     "nullMean": -0.00072,
+     "nullSd": 0.00107,
+     "z": -3.83
+    },
+    "branch": {
+     "v": -0.14763,
+     "nullMean": 0.00052,
+     "nullSd": 0.00611,
+     "z": -24.25
+    },
+    "asym": {
+     "v": 0.16508,
+     "nullMean": -0.00028,
+     "nullSd": 0.00008,
+     "z": 2031.77
+    }
+   },
+   "confirm": {
+    "tokens": 44916,
+    "rareSlope": {
+     "v": 0.03751,
+     "nullMean": -0.00004,
+     "nullSd": 0.00561,
+     "z": 6.69
+    },
+    "rareCurve": {
+     "v": 0.03475,
+     "nullMean": -0.00193,
+     "nullSd": 0.00593,
+     "z": 6.19
+    },
+    "fnBefore": {
+     "v": -0.02961,
+     "nullMean": 0.00033,
+     "nullSd": 0.00469,
+     "z": -6.39
+    },
+    "depLen": {
+     "v": 0.01855,
+     "nullMean": 0.00036,
+     "nullSd": 0.00172,
+     "z": 10.59
+    },
+    "initDev": {
+     "v": -0.37207,
+     "nullMean": -0.00298,
+     "nullSd": 0.02237,
+     "z": -16.5
+    },
+    "finalDev": {
+     "v": 0.81661,
+     "nullMean": -0.00026,
+     "nullSd": 0.01401,
+     "z": 58.33
+    },
+    "surprGrow": {
+     "v": -0.01286,
+     "nullMean": 0.00009,
+     "nullSd": 0.0036,
+     "z": -3.6
+    },
+    "entSlope": {
+     "v": -0.0082,
+     "nullMean": -0.00021,
+     "nullSd": 0.00175,
+     "z": -4.55
+    },
+    "entCurv": {
+     "v": -0.00074,
+     "nullMean": 0.00049,
+     "nullSd": 0.00059,
+     "z": -2.11
+    },
+    "branch": {
+     "v": -0.15011,
+     "nullMean": 0.00233,
+     "nullSd": 0.00855,
+     "z": -17.83
+    },
+    "asym": {
+     "v": 0.1593,
+     "nullMean": -0.0003,
+     "nullSd": 0.00023,
+     "z": 682.78
+    }
+   }
+  }
+ },
+ "ud-deu": {
+  "tokens": 24568,
+  "units": 1776,
+  "meanUnitLen": 13.83,
+  "cpuSec": {
+   "discover": 0.003,
+   "confirm": 0.003
+  },
+  "halves": {
+   "discover": {
+    "tokens": 10871,
+    "rareSlope": {
+     "v": 0.14225,
+     "nullMean": 0.00576,
+     "nullSd": 0.00597,
+     "z": 22.87
+    },
+    "rareCurve": {
+     "v": 0.04605,
+     "nullMean": 0.00204,
+     "nullSd": 0.01251,
+     "z": 3.52
+    },
+    "fnBefore": {
+     "v": 0.05934,
+     "nullMean": 0.00172,
+     "nullSd": 0.00678,
+     "z": 8.5
+    },
+    "depLen": {
+     "v": 0.00818,
+     "nullMean": 0.00199,
+     "nullSd": 0.00585,
+     "z": 1.06
+    },
+    "initDev": {
+     "v": -0.53494,
+     "nullMean": -0.00818,
+     "nullSd": 0.03814,
+     "z": -13.81
+    },
+    "finalDev": {
+     "v": 0.61724,
+     "nullMean": -0.00647,
+     "nullSd": 0.03702,
+     "z": 16.85
+    },
+    "surprGrow": {
+     "v": -0.07239,
+     "nullMean": -0.00521,
+     "nullSd": 0.00665,
+     "z": -10.1
+    },
+    "entSlope": {
+     "v": -0.06794,
+     "nullMean": -0.00075,
+     "nullSd": 0.00474,
+     "z": -14.17
+    },
+    "entCurv": {
+     "v": 0.0104,
+     "nullMean": -0.00037,
+     "nullSd": 0.00612,
+     "z": 1.76
+    },
+    "branch": {
+     "v": -0.02725,
+     "nullMean": 0.00202,
+     "nullSd": 0.01727,
+     "z": -1.7
+    },
+    "asym": {
+     "v": 0.04033,
+     "nullMean": -0.00157,
+     "nullSd": 0.00099,
+     "z": 42.23
+    }
+   },
+   "confirm": {
+    "tokens": 13697,
+    "rareSlope": {
+     "v": 0.11849,
+     "nullMean": -0.00165,
+     "nullSd": 0.00903,
+     "z": 13.3
+    },
+    "rareCurve": {
+     "v": 0.06107,
+     "nullMean": 0.00133,
+     "nullSd": 0.01107,
+     "z": 5.4
+    },
+    "fnBefore": {
+     "v": 0.02691,
+     "nullMean": 0.00057,
+     "nullSd": 0.00945,
+     "z": 2.79
+    },
+    "depLen": {
+     "v": 0.0144,
+     "nullMean": -0.00169,
+     "nullSd": 0.00651,
+     "z": 2.47
+    },
+    "initDev": {
+     "v": -0.50453,
+     "nullMean": 0.00661,
+     "nullSd": 0.03588,
+     "z": -14.25
+    },
+    "finalDev": {
+     "v": 0.58002,
+     "nullMean": -0.01253,
+     "nullSd": 0.02893,
+     "z": 20.48
+    },
+    "surprGrow": {
+     "v": -0.05264,
+     "nullMean": -0.00041,
+     "nullSd": 0.00811,
+     "z": -6.44
+    },
+    "entSlope": {
+     "v": -0.05257,
+     "nullMean": 0.00125,
+     "nullSd": 0.00628,
+     "z": -8.57
+    },
+    "entCurv": {
+     "v": 0.01055,
+     "nullMean": -0.00065,
+     "nullSd": 0.00355,
+     "z": 3.15
+    },
+    "branch": {
+     "v": -0.03555,
+     "nullMean": 0.00005,
+     "nullSd": 0.01419,
+     "z": -2.51
+    },
+    "asym": {
+     "v": 0.04555,
+     "nullMean": -0.00088,
+     "nullSd": 0.00072,
+     "z": 64.32
+    }
+   }
+  }
+ },
+ "ud-ukr": {
+  "tokens": 23503,
+  "units": 1519,
+  "meanUnitLen": 15.47,
+  "cpuSec": {
+   "discover": 0.002,
+   "confirm": 0.002
+  },
+  "halves": {
+   "discover": {
+    "tokens": 10460,
+    "rareSlope": {
+     "v": 0.06818,
+     "nullMean": -0.00685,
+     "nullSd": 0.01328,
+     "z": 5.65
+    },
+    "rareCurve": {
+     "v": 0.02053,
+     "nullMean": -0.00264,
+     "nullSd": 0.00714,
+     "z": 3.25
+    },
+    "fnBefore": {
+     "v": 0.03632,
+     "nullMean": -0.00142,
+     "nullSd": 0.00849,
+     "z": 4.44
+    },
+    "depLen": {
+     "v": -0.01606,
+     "nullMean": 0.00373,
+     "nullSd": 0.00637,
+     "z": -3.11
+    },
+    "initDev": {
+     "v": -0.3017,
+     "nullMean": -0.00551,
+     "nullSd": 0.03528,
+     "z": -8.39
+    },
+    "finalDev": {
+     "v": 0.46928,
+     "nullMean": -0.0219,
+     "nullSd": 0.02326,
+     "z": 21.12
+    },
+    "surprGrow": {
+     "v": -0.02773,
+     "nullMean": 0.00972,
+     "nullSd": 0.01389,
+     "z": -2.7
+    },
+    "entSlope": {
+     "v": -0.05518,
+     "nullMean": 0.00554,
+     "nullSd": 0.01344,
+     "z": -4.52
+    },
+    "entCurv": {
+     "v": 0.00232,
+     "nullMean": -0.00234,
+     "nullSd": 0.00591,
+     "z": 0.79
+    },
+    "branch": {
+     "v": -0.11243,
+     "nullMean": -0.00904,
+     "nullSd": 0.01519,
+     "z": -6.81
+    },
+    "asym": {
+     "v": 0.00768,
+     "nullMean": -0.00118,
+     "nullSd": 0.00145,
+     "z": 6.11
+    }
+   },
+   "confirm": {
+    "tokens": 13043,
+    "rareSlope": {
+     "v": 0.06376,
+     "nullMean": -0.00036,
+     "nullSd": 0.00652,
+     "z": 9.83
+    },
+    "rareCurve": {
+     "v": 0.01897,
+     "nullMean": 0.00046,
+     "nullSd": 0.01042,
+     "z": 1.78
+    },
+    "fnBefore": {
+     "v": 0.02335,
+     "nullMean": -0.00125,
+     "nullSd": 0.00608,
+     "z": 4.05
+    },
+    "depLen": {
+     "v": 0.00664,
+     "nullMean": -0.00265,
+     "nullSd": 0.00443,
+     "z": 2.1
+    },
+    "initDev": {
+     "v": -0.30803,
+     "nullMean": 0.00098,
+     "nullSd": 0.01132,
+     "z": -27.31
+    },
+    "finalDev": {
+     "v": 0.47167,
+     "nullMean": -0.00229,
+     "nullSd": 0.04098,
+     "z": 11.57
+    },
+    "surprGrow": {
+     "v": -0.02324,
+     "nullMean": 0.00126,
+     "nullSd": 0.00643,
+     "z": -3.81
+    },
+    "entSlope": {
+     "v": -0.05617,
+     "nullMean": -0.00164,
+     "nullSd": 0.00796,
+     "z": -6.85
+    },
+    "entCurv": {
+     "v": 0.00506,
+     "nullMean": 0.00106,
+     "nullSd": 0.00652,
+     "z": 0.61
+    },
+    "branch": {
+     "v": -0.12644,
+     "nullMean": 0.00476,
+     "nullSd": 0.01071,
+     "z": -12.25
+    },
+    "asym": {
+     "v": 0.00809,
+     "nullMean": -0.00179,
+     "nullSd": 0.00058,
+     "z": 17.05
+    }
+   }
+  }
+ },
+ "ud-pol": {
+  "tokens": 56265,
+  "units": 4430,
+  "meanUnitLen": 12.7,
+  "cpuSec": {
+   "discover": 0.004,
+   "confirm": 0.006
+  },
+  "halves": {
+   "discover": {
+    "tokens": 26108,
+    "rareSlope": {
+     "v": 0.09097,
+     "nullMean": -0.00026,
+     "nullSd": 0.00566,
+     "z": 16.13
+    },
+    "rareCurve": {
+     "v": 0.08518,
+     "nullMean": 0.00097,
+     "nullSd": 0.00598,
+     "z": 14.08
+    },
+    "fnBefore": {
+     "v": 0.02027,
+     "nullMean": -0.00225,
+     "nullSd": 0.00312,
+     "z": 7.21
+    },
+    "depLen": {
+     "v": 0.01926,
+     "nullMean": 0.00131,
+     "nullSd": 0.00555,
+     "z": 3.24
+    },
+    "initDev": {
+     "v": -0.08196,
+     "nullMean": 0.01076,
+     "nullSd": 0.01642,
+     "z": -5.65
+    },
+    "finalDev": {
+     "v": 0.63006,
+     "nullMean": -0.01399,
+     "nullSd": 0.0202,
+     "z": 31.88
+    },
+    "surprGrow": {
+     "v": -0.07578,
+     "nullMean": -0.00063,
+     "nullSd": 0.00564,
+     "z": -13.33
+    },
+    "entSlope": {
+     "v": -0.0787,
+     "nullMean": -0.00282,
+     "nullSd": 0.00591,
+     "z": -12.83
+    },
+    "entCurv": {
+     "v": 0.02047,
+     "nullMean": 0.00069,
+     "nullSd": 0.00394,
+     "z": 5.02
+    },
+    "branch": {
+     "v": -0.11095,
+     "nullMean": 0.00093,
+     "nullSd": 0.00767,
+     "z": -14.58
+    },
+    "asym": {
+     "v": 0.01318,
+     "nullMean": -0.00033,
+     "nullSd": 0.00074,
+     "z": 18.28
+    }
+   },
+   "confirm": {
+    "tokens": 30157,
+    "rareSlope": {
+     "v": 0.08233,
+     "nullMean": 0.00035,
+     "nullSd": 0.00462,
+     "z": 17.75
+    },
+    "rareCurve": {
+     "v": 0.07785,
+     "nullMean": -0.00172,
+     "nullSd": 0.00225,
+     "z": 35.34
+    },
+    "fnBefore": {
+     "v": 0.01238,
+     "nullMean": -0.00146,
+     "nullSd": 0.0043,
+     "z": 3.22
+    },
+    "depLen": {
+     "v": -0.00223,
+     "nullMean": 0.00237,
+     "nullSd": 0.00274,
+     "z": -1.68
+    },
+    "initDev": {
+     "v": -0.10018,
+     "nullMean": -0.00947,
+     "nullSd": 0.01826,
+     "z": -4.97
+    },
+    "finalDev": {
+     "v": 0.63432,
+     "nullMean": -0.00039,
+     "nullSd": 0.02162,
+     "z": 29.35
+    },
+    "surprGrow": {
+     "v": -0.06226,
+     "nullMean": 0.0009,
+     "nullSd": 0.00334,
+     "z": -18.91
+    },
+    "entSlope": {
+     "v": -0.06373,
+     "nullMean": -0.00104,
+     "nullSd": 0.00326,
+     "z": -19.24
+    },
+    "entCurv": {
+     "v": 0.01354,
+     "nullMean": 0.00023,
+     "nullSd": 0.00249,
+     "z": 5.34
+    },
+    "branch": {
+     "v": -0.11087,
+     "nullMean": 0.00142,
+     "nullSd": 0.00787,
+     "z": -14.27
+    },
+    "asym": {
+     "v": 0.01356,
+     "nullMean": -0.0004,
+     "nullSd": 0.00059,
+     "z": 23.76
+    }
+   }
+  }
+ },
+ "ud-hrv": {
+  "tokens": 40049,
+  "units": 2096,
+  "meanUnitLen": 19.11,
+  "cpuSec": {
+   "discover": 0.003,
+   "confirm": 0.003
+  },
+  "halves": {
+   "discover": {
+    "tokens": 19142,
+    "rareSlope": {
+     "v": 0.05251,
+     "nullMean": 0.00144,
+     "nullSd": 0.00404,
+     "z": 12.66
+    },
+    "rareCurve": {
+     "v": 0.06126,
+     "nullMean": -0.0034,
+     "nullSd": 0.00851,
+     "z": 7.6
+    },
+    "fnBefore": {
+     "v": 0.03002,
+     "nullMean": -0.00067,
+     "nullSd": 0.00411,
+     "z": 7.47
+    },
+    "depLen": {
+     "v": 0.00368,
+     "nullMean": -0.00014,
+     "nullSd": 0.00722,
+     "z": 0.53
+    },
+    "initDev": {
+     "v": 0.05438,
+     "nullMean": -0.00486,
+     "nullSd": 0.04133,
+     "z": 1.43
+    },
+    "finalDev": {
+     "v": 0.4827,
+     "nullMean": 0.00058,
+     "nullSd": 0.02147,
+     "z": 22.46
+    },
+    "surprGrow": {
+     "v": -0.06242,
+     "nullMean": -0.00057,
+     "nullSd": 0.00645,
+     "z": -9.59
+    },
+    "entSlope": {
+     "v": -0.03405,
+     "nullMean": -0.00049,
+     "nullSd": 0.00377,
+     "z": -8.91
+    },
+    "entCurv": {
+     "v": 0.00854,
+     "nullMean": 0.00048,
+     "nullSd": 0.00445,
+     "z": 1.81
+    },
+    "branch": {
+     "v": -0.05166,
+     "nullMean": -0.00581,
+     "nullSd": 0.01125,
+     "z": -4.08
+    },
+    "asym": {
+     "v": 0.01836,
+     "nullMean": -0.00058,
+     "nullSd": 0.00058,
+     "z": 32.59
+    }
+   },
+   "confirm": {
+    "tokens": 20907,
+    "rareSlope": {
+     "v": 0.05628,
+     "nullMean": -0.00218,
+     "nullSd": 0.00678,
+     "z": 8.62
+    },
+    "rareCurve": {
+     "v": 0.06874,
+     "nullMean": -0.00109,
+     "nullSd": 0.00577,
+     "z": 12.11
+    },
+    "fnBefore": {
+     "v": 0.02381,
+     "nullMean": -0.00003,
+     "nullSd": 0.00305,
+     "z": 7.82
+    },
+    "depLen": {
+     "v": 0.00542,
+     "nullMean": -0.00234,
+     "nullSd": 0.0066,
+     "z": 1.18
+    },
+    "initDev": {
+     "v": 0.15174,
+     "nullMean": -0.00266,
+     "nullSd": 0.02907,
+     "z": 5.31
+    },
+    "finalDev": {
+     "v": 0.53523,
+     "nullMean": -0.01318,
+     "nullSd": 0.03007,
+     "z": 18.24
+    },
+    "surprGrow": {
+     "v": -0.0708,
+     "nullMean": 0.00242,
+     "nullSd": 0.00579,
+     "z": -12.66
+    },
+    "entSlope": {
+     "v": -0.04479,
+     "nullMean": 0.00157,
+     "nullSd": 0.00472,
+     "z": -9.83
+    },
+    "entCurv": {
+     "v": 0.00844,
+     "nullMean": -0.00022,
+     "nullSd": 0.00306,
+     "z": 2.83
+    },
+    "branch": {
+     "v": -0.05179,
+     "nullMean": -0.00312,
+     "nullSd": 0.01136,
+     "z": -4.29
+    },
+    "asym": {
+     "v": 0.02332,
+     "nullMean": -0.00069,
+     "nullSd": 0.00059,
+     "z": 40.94
+    }
+   }
+  }
+ },
+ "ud-est": {
+  "tokens": 76385,
+  "units": 6321,
+  "meanUnitLen": 12.08,
+  "cpuSec": {
+   "discover": 0.006,
+   "confirm": 0.006
+  },
+  "halves": {
+   "discover": {
+    "tokens": 39370,
+    "rareSlope": {
+     "v": 0.10195,
+     "nullMean": 0.00239,
+     "nullSd": 0.00551,
+     "z": 18.06
+    },
+    "rareCurve": {
+     "v": 0.06521,
+     "nullMean": -0.00125,
+     "nullSd": 0.0039,
+     "z": 17.05
+    },
+    "fnBefore": {
+     "v": 0.02285,
+     "nullMean": -0.00104,
+     "nullSd": 0.00359,
+     "z": 6.66
+    },
+    "depLen": {
+     "v": 0.00374,
+     "nullMean": 0.00041,
+     "nullSd": 0.00259,
+     "z": 1.29
+    },
+    "initDev": {
+     "v": -0.12856,
+     "nullMean": 0.00255,
+     "nullSd": 0.01812,
+     "z": -7.23
+    },
+    "finalDev": {
+     "v": 0.46141,
+     "nullMean": 0.0004,
+     "nullSd": 0.01843,
+     "z": 25.02
+    },
+    "surprGrow": {
+     "v": -0.08208,
+     "nullMean": -0.00341,
+     "nullSd": 0.00567,
+     "z": -13.88
+    },
+    "entSlope": {
+     "v": -0.06539,
+     "nullMean": -0.00134,
+     "nullSd": 0.00354,
+     "z": -18.09
+    },
+    "entCurv": {
+     "v": 0.01821,
+     "nullMean": -0.00066,
+     "nullSd": 0.00234,
+     "z": 8.06
+    },
+    "branch": {
+     "v": -0.04188,
+     "nullMean": -0.00306,
+     "nullSd": 0.00824,
+     "z": -4.71
+    },
+    "asym": {
+     "v": 0.01082,
+     "nullMean": -0.00027,
+     "nullSd": 0.00029,
+     "z": 38.39
+    }
+   },
+   "confirm": {
+    "tokens": 37015,
+    "rareSlope": {
+     "v": 0.11214,
+     "nullMean": -0.00161,
+     "nullSd": 0.0027,
+     "z": 42.11
+    },
+    "rareCurve": {
+     "v": 0.06548,
+     "nullMean": -0.00073,
+     "nullSd": 0.00409,
+     "z": 16.2
+    },
+    "fnBefore": {
+     "v": 0.02544,
+     "nullMean": -0.00138,
+     "nullSd": 0.00239,
+     "z": 11.2
+    },
+    "depLen": {
+     "v": 0.00351,
+     "nullMean": -0.00008,
+     "nullSd": 0.00229,
+     "z": 1.57
+    },
+    "initDev": {
+     "v": -0.15506,
+     "nullMean": 0.00294,
+     "nullSd": 0.00739,
+     "z": -21.39
+    },
+    "finalDev": {
+     "v": 0.49332,
+     "nullMean": -0.00202,
+     "nullSd": 0.01773,
+     "z": 27.94
+    },
+    "surprGrow": {
+     "v": -0.09022,
+     "nullMean": 0.00174,
+     "nullSd": 0.00345,
+     "z": -26.68
+    },
+    "entSlope": {
+     "v": -0.06891,
+     "nullMean": 0.00107,
+     "nullSd": 0.00277,
+     "z": -25.22
+    },
+    "entCurv": {
+     "v": 0.01874,
+     "nullMean": -0.00131,
+     "nullSd": 0.00288,
+     "z": 6.97
+    },
+    "branch": {
+     "v": -0.06269,
+     "nullMean": -0.00367,
+     "nullSd": 0.00837,
+     "z": -7.05
+    },
+    "asym": {
+     "v": 0.01259,
+     "nullMean": -0.00024,
+     "nullSd": 0.0005,
+     "z": 25.64
+    }
+   }
+  }
+ },
+ "ud-eus": {
+  "tokens": 40201,
+  "units": 3597,
+  "meanUnitLen": 11.18,
+  "cpuSec": {
+   "discover": 0.005,
+   "confirm": 0.003
+  },
+  "halves": {
+   "discover": {
+    "tokens": 19033,
+    "rareSlope": {
+     "v": -0.083,
+     "nullMean": 0.00143,
+     "nullSd": 0.00845,
+     "z": -9.99
+    },
+    "rareCurve": {
+     "v": 0.07881,
+     "nullMean": 0.00048,
+     "nullSd": 0.0076,
+     "z": 10.31
+    },
+    "fnBefore": {
+     "v": -0.03124,
+     "nullMean": 0.00211,
+     "nullSd": 0.00415,
+     "z": -8.05
+    },
+    "depLen": {
+     "v": 0.0036,
+     "nullMean": 0.00063,
+     "nullSd": 0.00409,
+     "z": 0.73
+    },
+    "initDev": {
+     "v": 0.28759,
+     "nullMean": -0.00058,
+     "nullSd": 0.02143,
+     "z": 13.44
+    },
+    "finalDev": {
+     "v": -0.07824,
+     "nullMean": 0.00414,
+     "nullSd": 0.03043,
+     "z": -2.71
+    },
+    "surprGrow": {
+     "v": 0.03711,
+     "nullMean": -0.00135,
+     "nullSd": 0.00858,
+     "z": 4.49
+    },
+    "entSlope": {
+     "v": 0.05468,
+     "nullMean": -0.00146,
+     "nullSd": 0.00723,
+     "z": 7.77
+    },
+    "entCurv": {
+     "v": 0.03072,
+     "nullMean": 0.00193,
+     "nullSd": 0.00421,
+     "z": 6.84
+    },
+    "branch": {
+     "v": 0.08812,
+     "nullMean": -0.00404,
+     "nullSd": 0.00821,
+     "z": 11.22
+    },
+    "asym": {
+     "v": 0.0133,
+     "nullMean": -0.00043,
+     "nullSd": 0.0007,
+     "z": 19.49
+    }
+   },
+   "confirm": {
+    "tokens": 21168,
+    "rareSlope": {
+     "v": -0.0726,
+     "nullMean": -0.00364,
+     "nullSd": 0.00565,
+     "z": -12.2
+    },
+    "rareCurve": {
+     "v": 0.07725,
+     "nullMean": -0.00305,
+     "nullSd": 0.0056,
+     "z": 14.33
+    },
+    "fnBefore": {
+     "v": -0.01846,
+     "nullMean": 0.0002,
+     "nullSd": 0.00406,
+     "z": -4.6
+    },
+    "depLen": {
+     "v": 0.00735,
+     "nullMean": -0.00125,
+     "nullSd": 0.00632,
+     "z": 1.36
+    },
+    "initDev": {
+     "v": 0.27176,
+     "nullMean": -0.00337,
+     "nullSd": 0.01222,
+     "z": 22.52
+    },
+    "finalDev": {
+     "v": -0.07072,
+     "nullMean": -0.00442,
+     "nullSd": 0.02147,
+     "z": -3.09
+    },
+    "surprGrow": {
+     "v": 0.03068,
+     "nullMean": 0.00473,
+     "nullSd": 0.00688,
+     "z": 3.78
+    },
+    "entSlope": {
+     "v": 0.04598,
+     "nullMean": 0.00272,
+     "nullSd": 0.00407,
+     "z": 10.63
+    },
+    "entCurv": {
+     "v": 0.03335,
+     "nullMean": -0.00038,
+     "nullSd": 0.005,
+     "z": 6.75
+    },
+    "branch": {
+     "v": 0.08782,
+     "nullMean": -0.00075,
+     "nullSd": 0.01519,
+     "z": 5.83
+    },
+    "asym": {
+     "v": 0.01683,
+     "nullMean": -0.0008,
+     "nullSd": 0.00049,
+     "z": 35.63
+    }
+   }
+  }
+ },
+ "ud-fas": {
+  "tokens": 44542,
+  "units": 2911,
+  "meanUnitLen": 15.3,
+  "cpuSec": {
+   "discover": 0.004,
+   "confirm": 0.003
+  },
+  "halves": {
+   "discover": {
+    "tokens": 26511,
+    "rareSlope": {
+     "v": 0.02267,
+     "nullMean": 0.00335,
+     "nullSd": 0.00691,
+     "z": 2.8
+    },
+    "rareCurve": {
+     "v": 0.0571,
+     "nullMean": 0.00576,
+     "nullSd": 0.00553,
+     "z": 9.29
+    },
+    "fnBefore": {
+     "v": -0.0321,
+     "nullMean": 0.0029,
+     "nullSd": 0.00527,
+     "z": -6.64
+    },
+    "depLen": {
+     "v": 0.02721,
+     "nullMean": 0.00171,
+     "nullSd": 0.00379,
+     "z": 6.73
+    },
+    "initDev": {
+     "v": 0.03773,
+     "nullMean": 0.00107,
+     "nullSd": 0.0226,
+     "z": 1.62
+    },
+    "finalDev": {
+     "v": -0.06433,
+     "nullMean": 0.02314,
+     "nullSd": 0.02262,
+     "z": -3.87
+    },
+    "surprGrow": {
+     "v": -0.04166,
+     "nullMean": -0.0036,
+     "nullSd": 0.00608,
+     "z": -6.26
+    },
+    "entSlope": {
+     "v": -0.00157,
+     "nullMean": -0.00049,
+     "nullSd": 0.00242,
+     "z": -0.44
+    },
+    "entCurv": {
+     "v": 0.01211,
+     "nullMean": 0.0015,
+     "nullSd": 0.00154,
+     "z": 6.88
+    },
+    "branch": {
+     "v": -0.01989,
+     "nullMean": -0.0019,
+     "nullSd": 0.00837,
+     "z": -2.15
+    },
+    "asym": {
+     "v": 0.02604,
+     "nullMean": -0.00094,
+     "nullSd": 0.0005,
+     "z": 54.38
+    }
+   },
+   "confirm": {
+    "tokens": 18031,
+    "rareSlope": {
+     "v": 0.00872,
+     "nullMean": 0.00144,
+     "nullSd": 0.01008,
+     "z": 0.72
+    },
+    "rareCurve": {
+     "v": 0.04915,
+     "nullMean": 0.00128,
+     "nullSd": 0.00653,
+     "z": 7.33
+    },
+    "fnBefore": {
+     "v": -0.01978,
+     "nullMean": 0.00193,
+     "nullSd": 0.00782,
+     "z": -2.78
+    },
+    "depLen": {
+     "v": 0.01991,
+     "nullMean": 0.00099,
+     "nullSd": 0.00674,
+     "z": 2.81
+    },
+    "initDev": {
+     "v": 0.01053,
+     "nullMean": -0.00847,
+     "nullSd": 0.03491,
+     "z": 0.54
+    },
+    "finalDev": {
+     "v": -0.12166,
+     "nullMean": 0.0135,
+     "nullSd": 0.02636,
+     "z": -5.13
+    },
+    "surprGrow": {
+     "v": -0.02978,
+     "nullMean": -0.00118,
+     "nullSd": 0.00727,
+     "z": -3.94
+    },
+    "entSlope": {
+     "v": 0.00254,
+     "nullMean": -0.00022,
+     "nullSd": 0.00382,
+     "z": 0.73
+    },
+    "entCurv": {
+     "v": 0.01596,
+     "nullMean": -0.00021,
+     "nullSd": 0.00214,
+     "z": 7.57
+    },
+    "branch": {
+     "v": -0.00449,
+     "nullMean": -0.00296,
+     "nullSd": 0.00676,
+     "z": -0.23
+    },
+    "asym": {
+     "v": 0.02967,
+     "nullMean": -0.00094,
+     "nullSd": 0.00054,
+     "z": 56.78
+    }
+   }
+  }
+ },
+ "ud-heb": {
+  "tokens": 20684,
+  "units": 975,
+  "meanUnitLen": 21.21,
+  "cpuSec": {
+   "discover": 0.001,
+   "confirm": 0.001
+  },
+  "halves": {
+   "discover": {
+    "tokens": 8347,
+    "rareSlope": {
+     "v": 0.02376,
+     "nullMean": -0.00262,
+     "nullSd": 0.01261,
+     "z": 2.09
+    },
+    "rareCurve": {
+     "v": 0.02461,
+     "nullMean": -0.00588,
+     "nullSd": 0.00955,
+     "z": 3.19
+    },
+    "fnBefore": {
+     "v": -0.00952,
+     "nullMean": -0.00444,
+     "nullSd": 0.01089,
+     "z": -0.47
+    },
+    "depLen": {
+     "v": 0.00817,
+     "nullMean": 0.00355,
+     "nullSd": 0.00682,
+     "z": 0.68
+    },
+    "initDev": {
+     "v": -0.20087,
+     "nullMean": -0.01373,
+     "nullSd": 0.03754,
+     "z": -4.99
+    },
+    "finalDev": {
+     "v": 0.54972,
+     "nullMean": -0.03127,
+     "nullSd": 0.04196,
+     "z": 13.85
+    },
+    "surprGrow": {
+     "v": -0.01965,
+     "nullMean": 0.00492,
+     "nullSd": 0.01073,
+     "z": -2.29
+    },
+    "entSlope": {
+     "v": -0.0049,
+     "nullMean": 0.00103,
+     "nullSd": 0.00521,
+     "z": -1.14
+    },
+    "entCurv": {
+     "v": 0.00082,
+     "nullMean": 0.0003,
+     "nullSd": 0.0046,
+     "z": 0.11
+    },
+    "branch": {
+     "v": -0.3761,
+     "nullMean": -0.00196,
+     "nullSd": 0.01139,
+     "z": -32.86
+    },
+    "asym": {
+     "v": 0.05889,
+     "nullMean": -0.0005,
+     "nullSd": 0.00194,
+     "z": 30.58
+    }
+   },
+   "confirm": {
+    "tokens": 12337,
+    "rareSlope": {
+     "v": 0.02929,
+     "nullMean": -0.00074,
+     "nullSd": 0.00738,
+     "z": 4.07
+    },
+    "rareCurve": {
+     "v": 0.0316,
+     "nullMean": -0.00806,
+     "nullSd": 0.00727,
+     "z": 5.45
+    },
+    "fnBefore": {
+     "v": -0.00853,
+     "nullMean": -0.00035,
+     "nullSd": 0.00606,
+     "z": -1.35
+    },
+    "depLen": {
+     "v": 0.01468,
+     "nullMean": 0.00096,
+     "nullSd": 0.00623,
+     "z": 2.2
+    },
+    "initDev": {
+     "v": -0.19428,
+     "nullMean": -0.00929,
+     "nullSd": 0.03772,
+     "z": -4.9
+    },
+    "finalDev": {
+     "v": 0.57604,
+     "nullMean": 0.00267,
+     "nullSd": 0.02755,
+     "z": 20.81
+    },
+    "surprGrow": {
+     "v": -0.01959,
+     "nullMean": 0.0013,
+     "nullSd": 0.00673,
+     "z": -3.1
+    },
+    "entSlope": {
+     "v": -0.00926,
+     "nullMean": 0.00053,
+     "nullSd": 0.00571,
+     "z": -1.71
+    },
+    "entCurv": {
+     "v": -0.0026,
+     "nullMean": -0.0023,
+     "nullSd": 0.00421,
+     "z": -0.07
+    },
+    "branch": {
+     "v": -0.34817,
+     "nullMean": 0.00234,
+     "nullSd": 0.01343,
+     "z": -26.1
+    },
+    "asym": {
+     "v": 0.059,
+     "nullMean": -0.00072,
+     "nullSd": 0.00106,
+     "z": 56.43
+    }
+   }
+  }
+ },
+ "ud-vie": {
+  "tokens": 32040,
+  "units": 1923,
+  "meanUnitLen": 16.66,
+  "cpuSec": {
+   "discover": 0.002,
+   "confirm": 0.002
+  },
+  "halves": {
+   "discover": {
+    "tokens": 16961,
+    "rareSlope": {
+     "v": 0.07098,
+     "nullMean": -0.00462,
+     "nullSd": 0.01114,
+     "z": 6.78
+    },
+    "rareCurve": {
+     "v": 0.02674,
+     "nullMean": -0.00021,
+     "nullSd": 0.00774,
+     "z": 3.48
+    },
+    "fnBefore": {
+     "v": 0.00904,
+     "nullMean": -0.00549,
+     "nullSd": 0.00874,
+     "z": 1.66
+    },
+    "depLen": {
+     "v": -0.01413,
+     "nullMean": 0.00059,
+     "nullSd": 0.00624,
+     "z": -2.36
+    },
+    "initDev": {
+     "v": -0.173,
+     "nullMean": 0.01408,
+     "nullSd": 0.03046,
+     "z": -6.14
+    },
+    "finalDev": {
+     "v": 0.43499,
+     "nullMean": -0.01638,
+     "nullSd": 0.02642,
+     "z": 17.09
+    },
+    "surprGrow": {
+     "v": -0.05115,
+     "nullMean": 0.00379,
+     "nullSd": 0.01243,
+     "z": -4.42
+    },
+    "entSlope": {
+     "v": 0.0015,
+     "nullMean": 0.00052,
+     "nullSd": 0.00314,
+     "z": 0.31
+    },
+    "entCurv": {
+     "v": 0.00725,
+     "nullMean": 0.00012,
+     "nullSd": 0.00219,
+     "z": 3.26
+    },
+    "branch": {
+     "v": -0.02079,
+     "nullMean": 0.00456,
+     "nullSd": 0.01378,
+     "z": -1.84
+    },
+    "asym": {
+     "v": 0.01602,
+     "nullMean": -0.00054,
+     "nullSd": 0.00082,
+     "z": 20.15
+    }
+   },
+   "confirm": {
+    "tokens": 15079,
+    "rareSlope": {
+     "v": 0.07282,
+     "nullMean": 0.0021,
+     "nullSd": 0.00838,
+     "z": 8.44
+    },
+    "rareCurve": {
+     "v": 0.03666,
+     "nullMean": -0.0025,
+     "nullSd": 0.00749,
+     "z": 5.23
+    },
+    "fnBefore": {
+     "v": -0.01327,
+     "nullMean": -0.00042,
+     "nullSd": 0.01036,
+     "z": -1.24
+    },
+    "depLen": {
+     "v": 0.00746,
+     "nullMean": 0.00199,
+     "nullSd": 0.00795,
+     "z": 0.69
+    },
+    "initDev": {
+     "v": -0.17882,
+     "nullMean": -0.02162,
+     "nullSd": 0.03274,
+     "z": -4.8
+    },
+    "finalDev": {
+     "v": 0.46058,
+     "nullMean": -0.00578,
+     "nullSd": 0.037,
+     "z": 12.6
+    },
+    "surprGrow": {
+     "v": -0.05591,
+     "nullMean": 0.00087,
+     "nullSd": 0.0108,
+     "z": -5.26
+    },
+    "entSlope": {
+     "v": 0.00256,
+     "nullMean": -0.0008,
+     "nullSd": 0.00339,
+     "z": 0.99
+    },
+    "entCurv": {
+     "v": 0.01218,
+     "nullMean": -0.00031,
+     "nullSd": 0.0021,
+     "z": 5.95
+    },
+    "branch": {
+     "v": -0.02722,
+     "nullMean": 0.00432,
+     "nullSd": 0.01096,
+     "z": -2.88
+    },
+    "asym": {
+     "v": 0.00918,
+     "nullMean": -0.00047,
+     "nullSd": 0.00052,
+     "z": 18.49
+    }
+   }
+  }
+ },
+ "ud-ind": {
+  "tokens": 20310,
+  "units": 1116,
+  "meanUnitLen": 18.2,
+  "cpuSec": {
+   "discover": 0.002,
+   "confirm": 0.001
+  },
+  "halves": {
+   "discover": {
+    "tokens": 11315,
+    "rareSlope": {
+     "v": 0.01212,
+     "nullMean": -0.00028,
+     "nullSd": 0.00934,
+     "z": 1.33
+    },
+    "rareCurve": {
+     "v": 0.05197,
+     "nullMean": -0.00261,
+     "nullSd": 0.0078,
+     "z": 7
+    },
+    "fnBefore": {
+     "v": -0.02397,
+     "nullMean": -0.00132,
+     "nullSd": 0.00749,
+     "z": -3.02
+    },
+    "depLen": {
+     "v": 0.0066,
+     "nullMean": 0.00049,
+     "nullSd": 0.00559,
+     "z": 1.09
+    },
+    "initDev": {
+     "v": 0.12842,
+     "nullMean": -0.00113,
+     "nullSd": 0.05262,
+     "z": 2.46
+    },
+    "finalDev": {
+     "v": 0.32398,
+     "nullMean": -0.00796,
+     "nullSd": 0.03416,
+     "z": 9.72
+    },
+    "surprGrow": {
+     "v": -0.01682,
+     "nullMean": -0.00013,
+     "nullSd": 0.01031,
+     "z": -1.62
+    },
+    "entSlope": {
+     "v": -0.01076,
+     "nullMean": 0.00094,
+     "nullSd": 0.00585,
+     "z": -2
+    },
+    "entCurv": {
+     "v": 0.00806,
+     "nullMean": 0.00023,
+     "nullSd": 0.00481,
+     "z": 1.63
+    },
+    "branch": {
+     "v": -0.15163,
+     "nullMean": 0.00111,
+     "nullSd": 0.01416,
+     "z": -10.79
+    },
+    "asym": {
+     "v": 0.01154,
+     "nullMean": -0.0018,
+     "nullSd": 0.0011,
+     "z": 12.15
+    }
+   },
+   "confirm": {
+    "tokens": 8995,
+    "rareSlope": {
+     "v": 0.02611,
+     "nullMean": 0.00238,
+     "nullSd": 0.01372,
+     "z": 1.73
+    },
+    "rareCurve": {
+     "v": 0.06506,
+     "nullMean": 0.00459,
+     "nullSd": 0.01085,
+     "z": 5.57
+    },
+    "fnBefore": {
+     "v": -0.01077,
+     "nullMean": -0.00105,
+     "nullSd": 0.00405,
+     "z": -2.4
+    },
+    "depLen": {
+     "v": 0.02037,
+     "nullMean": -0.00084,
+     "nullSd": 0.00541,
+     "z": 3.92
+    },
+    "initDev": {
+     "v": 0.0774,
+     "nullMean": -0.00268,
+     "nullSd": 0.03672,
+     "z": 2.18
+    },
+    "finalDev": {
+     "v": 0.36775,
+     "nullMean": 0.00779,
+     "nullSd": 0.04915,
+     "z": 7.32
+    },
+    "surprGrow": {
+     "v": -0.02535,
+     "nullMean": -0.00269,
+     "nullSd": 0.01242,
+     "z": -1.82
+    },
+    "entSlope": {
+     "v": -0.02189,
+     "nullMean": -0.0012,
+     "nullSd": 0.00975,
+     "z": -2.12
+    },
+    "entCurv": {
+     "v": 0.01861,
+     "nullMean": 0.00125,
+     "nullSd": 0.00833,
+     "z": 2.08
+    },
+    "branch": {
+     "v": -0.12411,
+     "nullMean": 0.00438,
+     "nullSd": 0.02061,
+     "z": -6.23
+    },
+    "asym": {
+     "v": 0.0235,
+     "nullMean": -0.00168,
+     "nullSd": 0.00112,
+     "z": 22.58
+    }
+   }
+  }
+ },
+ "ud-swe": {
+  "tokens": 26765,
+  "units": 1723,
+  "meanUnitLen": 15.53,
+  "cpuSec": {
+   "discover": 0.002,
+   "confirm": 0.002
+  },
+  "halves": {
+   "discover": {
+    "tokens": 13732,
+    "rareSlope": {
+     "v": 0.09997,
+     "nullMean": -0.00158,
+     "nullSd": 0.00942,
+     "z": 10.78
+    },
+    "rareCurve": {
+     "v": 0.06238,
+     "nullMean": 0.00008,
+     "nullSd": 0.00637,
+     "z": 9.79
+    },
+    "fnBefore": {
+     "v": 0.0216,
+     "nullMean": 0.00016,
+     "nullSd": 0.00762,
+     "z": 2.81
+    },
+    "depLen": {
+     "v": 0.00138,
+     "nullMean": 0.00422,
+     "nullSd": 0.00921,
+     "z": -0.31
+    },
+    "initDev": {
+     "v": -0.26893,
+     "nullMean": 0.00842,
+     "nullSd": 0.02963,
+     "z": -9.36
+    },
+    "finalDev": {
+     "v": 0.67122,
+     "nullMean": 0.00639,
+     "nullSd": 0.02946,
+     "z": 22.57
+    },
+    "surprGrow": {
+     "v": -0.06106,
+     "nullMean": 0.00027,
+     "nullSd": 0.01083,
+     "z": -5.66
+    },
+    "entSlope": {
+     "v": -0.00844,
+     "nullMean": 0.00083,
+     "nullSd": 0.00246,
+     "z": -3.76
+    },
+    "entCurv": {
+     "v": 0.01154,
+     "nullMean": 0.00056,
+     "nullSd": 0.00276,
+     "z": 3.98
+    },
+    "branch": {
+     "v": -0.15134,
+     "nullMean": 0.00005,
+     "nullSd": 0.0093,
+     "z": -16.28
+    },
+    "asym": {
+     "v": 0.01631,
+     "nullMean": -0.00101,
+     "nullSd": 0.00116,
+     "z": 14.94
+    }
+   },
+   "confirm": {
+    "tokens": 13033,
+    "rareSlope": {
+     "v": 0.09178,
+     "nullMean": -0.00327,
+     "nullSd": 0.01175,
+     "z": 8.09
+    },
+    "rareCurve": {
+     "v": 0.06262,
+     "nullMean": 0.00553,
+     "nullSd": 0.00681,
+     "z": 8.38
+    },
+    "fnBefore": {
+     "v": 0.0086,
+     "nullMean": -0.00287,
+     "nullSd": 0.00967,
+     "z": 1.19
+    },
+    "depLen": {
+     "v": 0.00562,
+     "nullMean": 0,
+     "nullSd": 0.00636,
+     "z": 0.88
+    },
+    "initDev": {
+     "v": -0.25294,
+     "nullMean": 0.01363,
+     "nullSd": 0.02295,
+     "z": -11.62
+    },
+    "finalDev": {
+     "v": 0.7346,
+     "nullMean": 0.0123,
+     "nullSd": 0.03266,
+     "z": 22.12
+    },
+    "surprGrow": {
+     "v": -0.05809,
+     "nullMean": 0.00097,
+     "nullSd": 0.01021,
+     "z": -5.78
+    },
+    "entSlope": {
+     "v": -0.02196,
+     "nullMean": 0.00245,
+     "nullSd": 0.00516,
+     "z": -4.73
+    },
+    "entCurv": {
+     "v": 0.01497,
+     "nullMean": 0.00083,
+     "nullSd": 0.00235,
+     "z": 6.02
+    },
+    "branch": {
+     "v": -0.15815,
+     "nullMean": -0.00582,
+     "nullSd": 0.01425,
+     "z": -10.69
+    },
+    "asym": {
+     "v": 0.01774,
+     "nullMean": -0.00037,
+     "nullSd": 0.0009,
+     "z": 20.22
+    }
+   }
+  }
+ },
+ "ud-nob": {
+  "tokens": 57790,
+  "units": 4348,
+  "meanUnitLen": 13.29,
+  "cpuSec": {
+   "discover": 0.004,
+   "confirm": 0.004
+  },
+  "halves": {
+   "discover": {
+    "tokens": 26929,
+    "rareSlope": {
+     "v": 0.11029,
+     "nullMean": -0.00158,
+     "nullSd": 0.00491,
+     "z": 22.77
+    },
+    "rareCurve": {
+     "v": 0.05986,
+     "nullMean": -0.00304,
+     "nullSd": 0.00659,
+     "z": 9.54
+    },
+    "fnBefore": {
+     "v": 0.0142,
+     "nullMean": 0.00051,
+     "nullSd": 0.00552,
+     "z": 2.48
+    },
+    "depLen": {
+     "v": 0.0084,
+     "nullMean": -0.00078,
+     "nullSd": 0.00442,
+     "z": 2.08
+    },
+    "initDev": {
+     "v": -0.24123,
+     "nullMean": 0.00174,
+     "nullSd": 0.02912,
+     "z": -8.34
+    },
+    "finalDev": {
+     "v": 0.6853,
+     "nullMean": 0.00023,
+     "nullSd": 0.01843,
+     "z": 37.17
+    },
+    "surprGrow": {
+     "v": -0.063,
+     "nullMean": 0.00111,
+     "nullSd": 0.00554,
+     "z": -11.57
+    },
+    "entSlope": {
+     "v": -0.01519,
+     "nullMean": 0.00065,
+     "nullSd": 0.00208,
+     "z": -7.63
+    },
+    "entCurv": {
+     "v": 0.00766,
+     "nullMean": -0.00153,
+     "nullSd": 0.00207,
+     "z": 4.43
+    },
+    "branch": {
+     "v": -0.19192,
+     "nullMean": -0.00335,
+     "nullSd": 0.00833,
+     "z": -22.65
+    },
+    "asym": {
+     "v": 0.01293,
+     "nullMean": -0.00038,
+     "nullSd": 0.00032,
+     "z": 41.78
+    }
+   },
+   "confirm": {
+    "tokens": 30861,
+    "rareSlope": {
+     "v": 0.10637,
+     "nullMean": 0.00452,
+     "nullSd": 0.00574,
+     "z": 17.74
+    },
+    "rareCurve": {
+     "v": 0.06851,
+     "nullMean": 0.00083,
+     "nullSd": 0.00602,
+     "z": 11.24
+    },
+    "fnBefore": {
+     "v": 0.01906,
+     "nullMean": 0.0006,
+     "nullSd": 0.0056,
+     "z": 3.3
+    },
+    "depLen": {
+     "v": 0.00545,
+     "nullMean": -0.00135,
+     "nullSd": 0.00434,
+     "z": 1.56
+    },
+    "initDev": {
+     "v": -0.22612,
+     "nullMean": -0.01051,
+     "nullSd": 0.02143,
+     "z": -10.06
+    },
+    "finalDev": {
+     "v": 0.68715,
+     "nullMean": 0.00743,
+     "nullSd": 0.01651,
+     "z": 41.17
+    },
+    "surprGrow": {
+     "v": -0.06145,
+     "nullMean": -0.00271,
+     "nullSd": 0.0052,
+     "z": -11.3
+    },
+    "entSlope": {
+     "v": -0.01429,
+     "nullMean": -0.00143,
+     "nullSd": 0.00112,
+     "z": -11.45
+    },
+    "entCurv": {
+     "v": 0.006,
+     "nullMean": 0.00009,
+     "nullSd": 0.00231,
+     "z": 2.56
+    },
+    "branch": {
+     "v": -0.21977,
+     "nullMean": 0.00018,
+     "nullSd": 0.00866,
+     "z": -25.39
+    },
+    "asym": {
+     "v": 0.02337,
+     "nullMean": -0.00043,
+     "nullSd": 0.00045,
+     "z": 52.83
+    }
+   }
+  }
+ },
+ "ud-ron": {
+  "tokens": 28447,
+  "units": 1481,
+  "meanUnitLen": 19.21,
+  "cpuSec": {
+   "discover": 0.002,
+   "confirm": 0.002
+  },
+  "halves": {
+   "discover": {
+    "tokens": 15587,
+    "rareSlope": {
+     "v": 0.04516,
+     "nullMean": -0.00019,
+     "nullSd": 0.00985,
+     "z": 4.61
+    },
+    "rareCurve": {
+     "v": 0.07949,
+     "nullMean": -0.00016,
+     "nullSd": 0.00738,
+     "z": 10.79
+    },
+    "fnBefore": {
+     "v": -0.00845,
+     "nullMean": 0.00248,
+     "nullSd": 0.00775,
+     "z": -1.41
+    },
+    "depLen": {
+     "v": 0.01109,
+     "nullMean": 0.00409,
+     "nullSd": 0.00684,
+     "z": 1.02
+    },
+    "initDev": {
+     "v": -0.01305,
+     "nullMean": -0.00099,
+     "nullSd": 0.02924,
+     "z": -0.41
+    },
+    "finalDev": {
+     "v": 0.7163,
+     "nullMean": 0.01028,
+     "nullSd": 0.03846,
+     "z": 18.36
+    },
+    "surprGrow": {
+     "v": -0.03981,
+     "nullMean": 0.00025,
+     "nullSd": 0.00934,
+     "z": -4.29
+    },
+    "entSlope": {
+     "v": -0.0288,
+     "nullMean": 0.00086,
+     "nullSd": 0.00436,
+     "z": -6.8
+    },
+    "entCurv": {
+     "v": 0.0084,
+     "nullMean": 0.00105,
+     "nullSd": 0.00441,
+     "z": 1.67
+    },
+    "branch": {
+     "v": -0.25326,
+     "nullMean": 0.00509,
+     "nullSd": 0.01526,
+     "z": -16.93
+    },
+    "asym": {
+     "v": 0.02739,
+     "nullMean": -0.00082,
+     "nullSd": 0.001,
+     "z": 28.33
+    }
+   },
+   "confirm": {
+    "tokens": 12860,
+    "rareSlope": {
+     "v": 0.04088,
+     "nullMean": -0.0089,
+     "nullSd": 0.00722,
+     "z": 6.89
+    },
+    "rareCurve": {
+     "v": 0.06127,
+     "nullMean": -0.00386,
+     "nullSd": 0.00886,
+     "z": 7.35
+    },
+    "fnBefore": {
+     "v": 0.00514,
+     "nullMean": -0.00311,
+     "nullSd": 0.00377,
+     "z": 2.19
+    },
+    "depLen": {
+     "v": 0.01221,
+     "nullMean": 0.00054,
+     "nullSd": 0.00648,
+     "z": 1.8
+    },
+    "initDev": {
+     "v": -0.08391,
+     "nullMean": 0.0167,
+     "nullSd": 0.0255,
+     "z": -3.95
+    },
+    "finalDev": {
+     "v": 0.69602,
+     "nullMean": -0.01789,
+     "nullSd": 0.03635,
+     "z": 19.64
+    },
+    "surprGrow": {
+     "v": -0.0273,
+     "nullMean": 0.00779,
+     "nullSd": 0.00774,
+     "z": -4.54
+    },
+    "entSlope": {
+     "v": -0.02719,
+     "nullMean": 0.0062,
+     "nullSd": 0.00581,
+     "z": -5.75
+    },
+    "entCurv": {
+     "v": 0.00976,
+     "nullMean": -0.00129,
+     "nullSd": 0.00501,
+     "z": 2.2
+    },
+    "branch": {
+     "v": -0.2512,
+     "nullMean": 0.00546,
+     "nullSd": 0.01531,
+     "z": -16.76
+    },
+    "asym": {
+     "v": 0.02146,
+     "nullMean": -0.00054,
+     "nullSd": 0.00156,
+     "z": 14.13
+    }
+   }
+  }
+ },
+ "ud-lav": {
+  "tokens": 57899,
+  "units": 4513,
+  "meanUnitLen": 12.83,
+  "cpuSec": {
+   "discover": 0.004,
+   "confirm": 0.004
+  },
+  "halves": {
+   "discover": {
+    "tokens": 30207,
+    "rareSlope": {
+     "v": 0.11133,
+     "nullMean": 0.00233,
+     "nullSd": 0.00785,
+     "z": 13.89
+    },
+    "rareCurve": {
+     "v": 0.06404,
+     "nullMean": -0.00454,
+     "nullSd": 0.00742,
+     "z": 9.24
+    },
+    "fnBefore": {
+     "v": 0.02762,
+     "nullMean": 0.00054,
+     "nullSd": 0.00537,
+     "z": 5.05
+    },
+    "depLen": {
+     "v": 0.00748,
+     "nullMean": -0.00271,
+     "nullSd": 0.00367,
+     "z": 2.77
+    },
+    "initDev": {
+     "v": -0.25578,
+     "nullMean": -0.00552,
+     "nullSd": 0.01449,
+     "z": -17.27
+    },
+    "finalDev": {
+     "v": 0.61593,
+     "nullMean": -0.00821,
+     "nullSd": 0.02299,
+     "z": 27.15
+    },
+    "surprGrow": {
+     "v": -0.07106,
+     "nullMean": -0.00193,
+     "nullSd": 0.00891,
+     "z": -7.76
+    },
+    "entSlope": {
+     "v": -0.07039,
+     "nullMean": -0.00097,
+     "nullSd": 0.00637,
+     "z": -10.9
+    },
+    "entCurv": {
+     "v": 0.00915,
+     "nullMean": -0.00094,
+     "nullSd": 0.00535,
+     "z": 1.88
+    },
+    "branch": {
+     "v": -0.08721,
+     "nullMean": -0.00406,
+     "nullSd": 0.00606,
+     "z": -13.72
+    },
+    "asym": {
+     "v": 0.01794,
+     "nullMean": -0.00044,
+     "nullSd": 0.00039,
+     "z": 47.48
+    }
+   },
+   "confirm": {
+    "tokens": 27692,
+    "rareSlope": {
+     "v": 0.09142,
+     "nullMean": 0.00035,
+     "nullSd": 0.00506,
+     "z": 18
+    },
+    "rareCurve": {
+     "v": 0.06838,
+     "nullMean": 0.00138,
+     "nullSd": 0.00592,
+     "z": 11.31
+    },
+    "fnBefore": {
+     "v": 0.01745,
+     "nullMean": 0.00203,
+     "nullSd": 0.00467,
+     "z": 3.3
+    },
+    "depLen": {
+     "v": 0.00878,
+     "nullMean": -0.00038,
+     "nullSd": 0.00478,
+     "z": 1.92
+    },
+    "initDev": {
+     "v": -0.20394,
+     "nullMean": 0.00251,
+     "nullSd": 0.02142,
+     "z": -9.64
+    },
+    "finalDev": {
+     "v": 0.60479,
+     "nullMean": 0.00832,
+     "nullSd": 0.02065,
+     "z": 28.89
+    },
+    "surprGrow": {
+     "v": -0.06124,
+     "nullMean": -0.00108,
+     "nullSd": 0.00446,
+     "z": -13.49
+    },
+    "entSlope": {
+     "v": -0.05848,
+     "nullMean": 0.00034,
+     "nullSd": 0.00357,
+     "z": -16.48
+    },
+    "entCurv": {
+     "v": 0.01358,
+     "nullMean": 0.00127,
+     "nullSd": 0.00341,
+     "z": 3.61
+    },
+    "branch": {
+     "v": -0.08867,
+     "nullMean": -0.00115,
+     "nullSd": 0.01129,
+     "z": -7.75
+    },
+    "asym": {
+     "v": 0.01862,
+     "nullMean": -0.0006,
+     "nullSd": 0.00046,
+     "z": 42.19
+    }
+   }
+  }
+ },
+ "ud-urd": {
+  "tokens": 27670,
+  "units": 1087,
+  "meanUnitLen": 25.46,
+  "cpuSec": {
+   "discover": 0.001,
+   "confirm": 0.002
+  },
+  "halves": {
+   "discover": {
+    "tokens": 11310,
+    "rareSlope": {
+     "v": -0.02382,
+     "nullMean": -0.00156,
+     "nullSd": 0.00771,
+     "z": -2.89
+    },
+    "rareCurve": {
+     "v": 0.00937,
+     "nullMean": -0.00325,
+     "nullSd": 0.01152,
+     "z": 1.1
+    },
+    "fnBefore": {
+     "v": -0.02556,
+     "nullMean": 0.00112,
+     "nullSd": 0.00976,
+     "z": -2.73
+    },
+    "depLen": {
+     "v": 0.00019,
+     "nullMean": -0.00214,
+     "nullSd": 0.00436,
+     "z": 0.54
+    },
+    "initDev": {
+     "v": 0.31265,
+     "nullMean": -0.00517,
+     "nullSd": 0.04722,
+     "z": 6.73
+    },
+    "finalDev": {
+     "v": -0.41647,
+     "nullMean": 0.00065,
+     "nullSd": 0.04645,
+     "z": -8.98
+    },
+    "surprGrow": {
+     "v": 0.00543,
+     "nullMean": 0.00325,
+     "nullSd": 0.00764,
+     "z": 0.29
+    },
+    "entSlope": {
+     "v": 0.00403,
+     "nullMean": -0.0002,
+     "nullSd": 0.00209,
+     "z": 2.02
+    },
+    "entCurv": {
+     "v": 0.00457,
+     "nullMean": 0.00011,
+     "nullSd": 0.00175,
+     "z": 2.55
+    },
+    "branch": {
+     "v": -0.24326,
+     "nullMean": -0.00054,
+     "nullSd": 0.01223,
+     "z": -19.84
+    },
+    "asym": {
+     "v": 0.01941,
+     "nullMean": -0.00097,
+     "nullSd": 0.00076,
+     "z": 26.86
+    }
+   },
+   "confirm": {
+    "tokens": 16360,
+    "rareSlope": {
+     "v": -0.02737,
+     "nullMean": 0.00137,
+     "nullSd": 0.00791,
+     "z": -3.63
+    },
+    "rareCurve": {
+     "v": 0.01472,
+     "nullMean": 0.00044,
+     "nullSd": 0.01288,
+     "z": 1.11
+    },
+    "fnBefore": {
+     "v": -0.01438,
+     "nullMean": 0.00183,
+     "nullSd": 0.00439,
+     "z": -3.69
+    },
+    "depLen": {
+     "v": 0.00238,
+     "nullMean": 0.00188,
+     "nullSd": 0.00302,
+     "z": 0.16
+    },
+    "initDev": {
+     "v": 0.30733,
+     "nullMean": 0.0035,
+     "nullSd": 0.05043,
+     "z": 6.02
+    },
+    "finalDev": {
+     "v": -0.35059,
+     "nullMean": 0.01024,
+     "nullSd": 0.04213,
+     "z": -8.57
+    },
+    "surprGrow": {
+     "v": 0.02364,
+     "nullMean": -0.00191,
+     "nullSd": 0.00909,
+     "z": 2.81
+    },
+    "entSlope": {
+     "v": 0.00099,
+     "nullMean": 0.00004,
+     "nullSd": 0.00234,
+     "z": 0.4
+    },
+    "entCurv": {
+     "v": 0.00518,
+     "nullMean": -0.00075,
+     "nullSd": 0.00215,
+     "z": 2.76
+    },
+    "branch": {
+     "v": -0.23071,
+     "nullMean": -0.00126,
+     "nullSd": 0.01123,
+     "z": -20.43
+    },
+    "asym": {
+     "v": 0.02434,
+     "nullMean": -0.00044,
+     "nullSd": 0.00089,
+     "z": 27.69
+    }
+   }
+  }
+ },
+ "ud-cym": {
+  "tokens": 23433,
+  "units": 1362,
+  "meanUnitLen": 17.2,
+  "cpuSec": {
+   "discover": 0.001,
+   "confirm": 0.001
+  },
+  "halves": {
+   "discover": {
+    "tokens": 11060,
+    "rareSlope": {
+     "v": 0.0759,
+     "nullMean": 0.00138,
+     "nullSd": 0.01134,
+     "z": 6.57
+    },
+    "rareCurve": {
+     "v": 0.05451,
+     "nullMean": 0.00296,
+     "nullSd": 0.00973,
+     "z": 5.3
+    },
+    "fnBefore": {
+     "v": 0.01247,
+     "nullMean": -0.00162,
+     "nullSd": 0.00997,
+     "z": 1.41
+    },
+    "depLen": {
+     "v": 0.00977,
+     "nullMean": -0.00105,
+     "nullSd": 0.00718,
+     "z": 1.51
+    },
+    "initDev": {
+     "v": -0.16523,
+     "nullMean": 0.01742,
+     "nullSd": 0.04598,
+     "z": -3.97
+    },
+    "finalDev": {
+     "v": 0.71989,
+     "nullMean": -0.00257,
+     "nullSd": 0.04187,
+     "z": 17.26
+    },
+    "surprGrow": {
+     "v": -0.03692,
+     "nullMean": -0.00227,
+     "nullSd": 0.01032,
+     "z": -3.36
+    },
+    "entSlope": {
+     "v": -0.01751,
+     "nullMean": -0.00226,
+     "nullSd": 0.00414,
+     "z": -3.68
+    },
+    "entCurv": {
+     "v": 0.00438,
+     "nullMean": 0.00134,
+     "nullSd": 0.00337,
+     "z": 0.9
+    },
+    "branch": {
+     "v": -0.29052,
+     "nullMean": 0.0034,
+     "nullSd": 0.00973,
+     "z": -30.21
+    },
+    "asym": {
+     "v": 0.04385,
+     "nullMean": -0.00073,
+     "nullSd": 0.00096,
+     "z": 46.4
+    }
+   },
+   "confirm": {
+    "tokens": 12373,
+    "rareSlope": {
+     "v": 0.07204,
+     "nullMean": -0.00049,
+     "nullSd": 0.0084,
+     "z": 8.63
+    },
+    "rareCurve": {
+     "v": 0.04856,
+     "nullMean": 0.00062,
+     "nullSd": 0.01221,
+     "z": 3.92
+    },
+    "fnBefore": {
+     "v": 0.02793,
+     "nullMean": 0.00622,
+     "nullSd": 0.00618,
+     "z": 3.52
+    },
+    "depLen": {
+     "v": 0.01218,
+     "nullMean": 0.00308,
+     "nullSd": 0.00747,
+     "z": 1.22
+    },
+    "initDev": {
+     "v": -0.16539,
+     "nullMean": -0.00575,
+     "nullSd": 0.02602,
+     "z": -6.13
+    },
+    "finalDev": {
+     "v": 0.66336,
+     "nullMean": 0.01997,
+     "nullSd": 0.03659,
+     "z": 17.58
+    },
+    "surprGrow": {
+     "v": -0.03446,
+     "nullMean": 0.00085,
+     "nullSd": 0.00974,
+     "z": -3.62
+    },
+    "entSlope": {
+     "v": -0.00932,
+     "nullMean": 0.00031,
+     "nullSd": 0.00261,
+     "z": -3.69
+    },
+    "entCurv": {
+     "v": 0.00294,
+     "nullMean": -0.00032,
+     "nullSd": 0.00179,
+     "z": 1.83
+    },
+    "branch": {
+     "v": -0.29736,
+     "nullMean": 0.00569,
+     "nullSd": 0.01482,
+     "z": -20.45
+    },
+    "asym": {
+     "v": 0.04415,
+     "nullMean": -0.00005,
+     "nullSd": 0.00097,
+     "z": 45.75
+    }
+   }
+  }
+ },
+ "ud-cat": {
+  "tokens": 103648,
+  "units": 3549,
+  "meanUnitLen": 29.2,
+  "cpuSec": {
+   "discover": 0.006,
+   "confirm": 0.008
+  },
+  "halves": {
+   "discover": {
+    "tokens": 51635,
+    "rareSlope": {
+     "v": 0.04797,
+     "nullMean": -0.00108,
+     "nullSd": 0.00286,
+     "z": 17.13
+    },
+    "rareCurve": {
+     "v": 0.01579,
+     "nullMean": -0.00069,
+     "nullSd": 0.00289,
+     "z": 5.7
+    },
+    "fnBefore": {
+     "v": -0.03017,
+     "nullMean": 0.00166,
+     "nullSd": 0.00615,
+     "z": -5.18
+    },
+    "depLen": {
+     "v": 0.01773,
+     "nullMean": -0.00083,
+     "nullSd": 0.0017,
+     "z": 10.89
+    },
+    "initDev": {
+     "v": -0.4886,
+     "nullMean": 0.00322,
+     "nullSd": 0.01842,
+     "z": -26.7
+    },
+    "finalDev": {
+     "v": 0.85876,
+     "nullMean": -0.01903,
+     "nullSd": 0.02579,
+     "z": 34.04
+    },
+    "surprGrow": {
+     "v": -0.01486,
+     "nullMean": 0.00146,
+     "nullSd": 0.00183,
+     "z": -8.94
+    },
+    "entSlope": {
+     "v": -0.00433,
+     "nullMean": -0.00001,
+     "nullSd": 0.00082,
+     "z": -5.24
+    },
+    "entCurv": {
+     "v": -0.00246,
+     "nullMean": 0.00012,
+     "nullSd": 0.00103,
+     "z": -2.49
+    },
+    "branch": {
+     "v": -0.16832,
+     "nullMean": -0.0009,
+     "nullSd": 0.00594,
+     "z": -28.2
+    },
+    "asym": {
+     "v": 0.14166,
+     "nullMean": -0.00011,
+     "nullSd": 0.00021,
+     "z": 686.09
+    }
+   },
+   "confirm": {
+    "tokens": 52013,
+    "rareSlope": {
+     "v": 0.05088,
+     "nullMean": 0.00204,
+     "nullSd": 0.00436,
+     "z": 11.2
+    },
+    "rareCurve": {
+     "v": 0.02453,
+     "nullMean": -0.00097,
+     "nullSd": 0.00462,
+     "z": 5.52
+    },
+    "fnBefore": {
+     "v": -0.02826,
+     "nullMean": 0.00204,
+     "nullSd": 0.00428,
+     "z": -7.08
+    },
+    "depLen": {
+     "v": 0.01719,
+     "nullMean": -0.00076,
+     "nullSd": 0.00274,
+     "z": 6.54
+    },
+    "initDev": {
+     "v": -0.45583,
+     "nullMean": -0.00563,
+     "nullSd": 0.02369,
+     "z": -19.01
+    },
+    "finalDev": {
+     "v": 0.88979,
+     "nullMean": -0.00368,
+     "nullSd": 0.0313,
+     "z": 28.55
+    },
+    "surprGrow": {
+     "v": -0.01429,
+     "nullMean": -0.00122,
+     "nullSd": 0.00211,
+     "z": -6.19
+    },
+    "entSlope": {
+     "v": -0.00373,
+     "nullMean": -0.0005,
+     "nullSd": 0.00085,
+     "z": -3.79
+    },
+    "entCurv": {
+     "v": -0.00025,
+     "nullMean": -0.0005,
+     "nullSd": 0.00109,
+     "z": 0.23
+    },
+    "branch": {
+     "v": -0.16036,
+     "nullMean": 0.00301,
+     "nullSd": 0.00747,
+     "z": -21.86
+    },
+    "asym": {
+     "v": 0.12802,
+     "nullMean": -0.00026,
+     "nullSd": 0.0002,
+     "z": 644.87
+    }
+   }
+  }
+ },
+ "ud-por": {
+  "tokens": 53894,
+  "units": 2404,
+  "meanUnitLen": 22.42,
+  "cpuSec": {
+   "discover": 0.003,
+   "confirm": 0.004
+  },
+  "halves": {
+   "discover": {
+    "tokens": 27068,
+    "rareSlope": {
+     "v": 0.03756,
+     "nullMean": -0.00189,
+     "nullSd": 0.00737,
+     "z": 5.35
+    },
+    "rareCurve": {
+     "v": 0.03951,
+     "nullMean": -0.00301,
+     "nullSd": 0.00772,
+     "z": 5.51
+    },
+    "fnBefore": {
+     "v": -0.01783,
+     "nullMean": -0.00096,
+     "nullSd": 0.00988,
+     "z": -1.71
+    },
+    "depLen": {
+     "v": 0.02739,
+     "nullMean": 0.00248,
+     "nullSd": 0.00245,
+     "z": 10.16
+    },
+    "initDev": {
+     "v": -0.29876,
+     "nullMean": -0.00727,
+     "nullSd": 0.03103,
+     "z": -9.39
+    },
+    "finalDev": {
+     "v": 0.76905,
+     "nullMean": -0.00488,
+     "nullSd": 0.0218,
+     "z": 35.51
+    },
+    "surprGrow": {
+     "v": -0.0184,
+     "nullMean": 0.00184,
+     "nullSd": 0.00699,
+     "z": -2.9
+    },
+    "entSlope": {
+     "v": -0.00642,
+     "nullMean": -0.00101,
+     "nullSd": 0.00342,
+     "z": -1.58
+    },
+    "entCurv": {
+     "v": 0.00016,
+     "nullMean": 0.00106,
+     "nullSd": 0.00238,
+     "z": -0.38
+    },
+    "branch": {
+     "v": -0.07647,
+     "nullMean": 0.00389,
+     "nullSd": 0.0129,
+     "z": -6.23
+    },
+    "asym": {
+     "v": 0.15565,
+     "nullMean": -0.00029,
+     "nullSd": 0.00036,
+     "z": 433.66
+    }
+   },
+   "confirm": {
+    "tokens": 26826,
+    "rareSlope": {
+     "v": 0.04343,
+     "nullMean": 0.00161,
+     "nullSd": 0.00365,
+     "z": 11.45
+    },
+    "rareCurve": {
+     "v": 0.02469,
+     "nullMean": 0.0008,
+     "nullSd": 0.00697,
+     "z": 3.43
+    },
+    "fnBefore": {
+     "v": -0.02609,
+     "nullMean": -0.0002,
+     "nullSd": 0.00463,
+     "z": -5.6
+    },
+    "depLen": {
+     "v": 0.02411,
+     "nullMean": 0.00119,
+     "nullSd": 0.00291,
+     "z": 7.88
+    },
+    "initDev": {
+     "v": -0.35329,
+     "nullMean": -0.00086,
+     "nullSd": 0.01731,
+     "z": -20.36
+    },
+    "finalDev": {
+     "v": 0.77341,
+     "nullMean": -0.00961,
+     "nullSd": 0.01507,
+     "z": 51.95
+    },
+    "surprGrow": {
+     "v": -0.02011,
+     "nullMean": -0.00175,
+     "nullSd": 0.00234,
+     "z": -7.84
+    },
+    "entSlope": {
+     "v": -0.01132,
+     "nullMean": 0.00026,
+     "nullSd": 0.00246,
+     "z": -4.71
+    },
+    "entCurv": {
+     "v": -0.00421,
+     "nullMean": 0.00047,
+     "nullSd": 0.00287,
+     "z": -1.63
+    },
+    "branch": {
+     "v": -0.09448,
+     "nullMean": -0.00047,
+     "nullSd": 0.00819,
+     "z": -11.48
+    },
+    "asym": {
+     "v": 0.15412,
+     "nullMean": -0.00039,
+     "nullSd": 0.00034,
+     "z": 458.22
+    }
+   }
+  }
+ },
+ "ud-glg": {
+  "tokens": 52772,
+  "units": 1721,
+  "meanUnitLen": 30.66,
+  "cpuSec": {
+   "discover": 0.003,
+   "confirm": 0.004
+  },
+  "halves": {
+   "discover": {
+    "tokens": 24333,
+    "rareSlope": {
+     "v": 0.02757,
+     "nullMean": -0.00066,
+     "nullSd": 0.00664,
+     "z": 4.25
+    },
+    "rareCurve": {
+     "v": 0.02612,
+     "nullMean": 0.00221,
+     "nullSd": 0.0065,
+     "z": 3.68
+    },
+    "fnBefore": {
+     "v": -0.0489,
+     "nullMean": 0.00145,
+     "nullSd": 0.00596,
+     "z": -8.45
+    },
+    "depLen": {
+     "v": 0.02574,
+     "nullMean": 0.00175,
+     "nullSd": 0.00336,
+     "z": 7.15
+    },
+    "initDev": {
+     "v": -0.34136,
+     "nullMean": 0.03241,
+     "nullSd": 0.03482,
+     "z": -10.73
+    },
+    "finalDev": {
+     "v": 0.83801,
+     "nullMean": 0.00074,
+     "nullSd": 0.03648,
+     "z": 22.95
+    },
+    "surprGrow": {
+     "v": -0.01308,
+     "nullMean": -0.00001,
+     "nullSd": 0.00653,
+     "z": -2
+    },
+    "entSlope": {
+     "v": -0.00993,
+     "nullMean": -0.00058,
+     "nullSd": 0.0021,
+     "z": -4.45
+    },
+    "entCurv": {
+     "v": -0.00265,
+     "nullMean": 0.00151,
+     "nullSd": 0.0024,
+     "z": -1.73
+    },
+    "branch": {
+     "v": -0.10151,
+     "nullMean": -0.00478,
+     "nullSd": 0.005,
+     "z": -19.36
+    },
+    "asym": {
+     "v": 0.11757,
+     "nullMean": -0.00035,
+     "nullSd": 0.0004,
+     "z": 295.93
+    }
+   },
+   "confirm": {
+    "tokens": 28439,
+    "rareSlope": {
+     "v": 0.04169,
+     "nullMean": -0.0012,
+     "nullSd": 0.00715,
+     "z": 6
+    },
+    "rareCurve": {
+     "v": 0.02931,
+     "nullMean": -0.00149,
+     "nullSd": 0.00582,
+     "z": 5.29
+    },
+    "fnBefore": {
+     "v": -0.02522,
+     "nullMean": 0.00038,
+     "nullSd": 0.00693,
+     "z": -3.69
+    },
+    "depLen": {
+     "v": 0.02544,
+     "nullMean": 0.00099,
+     "nullSd": 0.00421,
+     "z": 5.8
+    },
+    "initDev": {
+     "v": -0.35492,
+     "nullMean": -0.00143,
+     "nullSd": 0.03492,
+     "z": -10.12
+    },
+    "finalDev": {
+     "v": 0.84423,
+     "nullMean": 0.00693,
+     "nullSd": 0.0362,
+     "z": 23.13
+    },
+    "surprGrow": {
+     "v": -0.02639,
+     "nullMean": 0.00091,
+     "nullSd": 0.00525,
+     "z": -5.2
+    },
+    "entSlope": {
+     "v": -0.00847,
+     "nullMean": 0.00013,
+     "nullSd": 0.00301,
+     "z": -2.86
+    },
+    "entCurv": {
+     "v": -0.0036,
+     "nullMean": 0.00002,
+     "nullSd": 0.00251,
+     "z": -1.44
+    },
+    "branch": {
+     "v": -0.10783,
+     "nullMean": -0.00146,
+     "nullSd": 0.01141,
+     "z": -9.32
+    },
+    "asym": {
+     "v": 0.11616,
+     "nullMean": -0.00035,
+     "nullSd": 0.00043,
+     "z": 272.21
+    }
+   }
+  }
+ },
+ "ml-grc-homer": {
+  "tokens": 188755,
+  "units": 26399,
+  "meanUnitLen": 7.15,
+  "cpuSec": {
+   "discover": 0.013,
+   "confirm": 0.028
+  },
+  "halves": {
+   "discover": {
+    "tokens": 80563,
+    "rareSlope": {
+     "v": 0.21557,
+     "nullMean": 0.00123,
+     "nullSd": 0.00364,
+     "z": 58.89
+    },
+    "rareCurve": {
+     "v": 0.09843,
+     "nullMean": 0.00022,
+     "nullSd": 0.00355,
+     "z": 27.66
+    },
+    "fnBefore": {
+     "v": 0.10519,
+     "nullMean": 0.00049,
+     "nullSd": 0.00543,
+     "z": 19.27
+    },
+    "depLen": {
+     "v": -0.0086,
+     "nullMean": 0.00037,
+     "nullSd": 0.00448,
+     "z": -2
+    },
+    "initDev": {
+     "v": -0.00326,
+     "nullMean": -0.00178,
+     "nullSd": 0.01062,
+     "z": -0.14
+    },
+    "finalDev": {
+     "v": 0.46384,
+     "nullMean": 0.0028,
+     "nullSd": 0.00553,
+     "z": 83.42
+    },
+    "surprGrow": {
+     "v": -0.25254,
+     "nullMean": -0.00115,
+     "nullSd": 0.00323,
+     "z": -77.94
+    },
+    "entSlope": {
+     "v": -0.08046,
+     "nullMean": -0.00043,
+     "nullSd": 0.00123,
+     "z": -64.86
+    },
+    "entCurv": {
+     "v": 0.01936,
+     "nullMean": 0.00008,
+     "nullSd": 0.00113,
+     "z": 17.03
+    },
+    "branch": {
+     "v": 0.06693,
+     "nullMean": 0.00289,
+     "nullSd": 0.00462,
+     "z": 13.87
+    },
+    "asym": {
+     "v": 0.0301,
+     "nullMean": -0.0002,
+     "nullSd": 0.00021,
+     "z": 146.04
+    }
+   },
+   "confirm": {
+    "tokens": 108192,
+    "rareSlope": {
+     "v": 0.21002,
+     "nullMean": -0.00016,
+     "nullSd": 0.0035,
+     "z": 60
+    },
+    "rareCurve": {
+     "v": 0.10335,
+     "nullMean": 0.00097,
+     "nullSd": 0.00432,
+     "z": 23.69
+    },
+    "fnBefore": {
+     "v": 0.10411,
+     "nullMean": -0.00071,
+     "nullSd": 0.002,
+     "z": 52.43
+    },
+    "depLen": {
+     "v": -0.01315,
+     "nullMean": 0.00111,
+     "nullSd": 0.00255,
+     "z": -5.58
+    },
+    "initDev": {
+     "v": 0.01263,
+     "nullMean": 0.00355,
+     "nullSd": 0.00804,
+     "z": 1.13
+    },
+    "finalDev": {
+     "v": 0.45638,
+     "nullMean": 0.00032,
+     "nullSd": 0.00749,
+     "z": 60.88
+    },
+    "surprGrow": {
+     "v": -0.25116,
+     "nullMean": -0.00097,
+     "nullSd": 0.00482,
+     "z": -51.92
+    },
+    "entSlope": {
+     "v": -0.07672,
+     "nullMean": 0.00017,
+     "nullSd": 0.00133,
+     "z": -57.6
+    },
+    "entCurv": {
+     "v": 0.01944,
+     "nullMean": 0.00017,
+     "nullSd": 0.00107,
+     "z": 17.98
+    },
+    "branch": {
+     "v": 0.06537,
+     "nullMean": 0.00083,
+     "nullSd": 0.00431,
+     "z": 14.98
+    },
+    "asym": {
+     "v": 0.02274,
+     "nullMean": -0.00012,
+     "nullSd": 0.00012,
+     "z": 185.95
+    }
+   }
+  }
+ },
+ "ml-lat-livy": {
+  "tokens": 299894,
+  "units": 16593,
+  "meanUnitLen": 18.07,
+  "cpuSec": {
+   "discover": 0.031,
+   "confirm": 0.033
+  },
+  "halves": {
+   "discover": {
+    "tokens": 142367,
+    "rareSlope": {
+     "v": 0.05619,
+     "nullMean": 0.0015,
+     "nullSd": 0.00263,
+     "z": 20.8
+    },
+    "rareCurve": {
+     "v": 0.02504,
+     "nullMean": -0.00014,
+     "nullSd": 0.00355,
+     "z": 7.1
+    },
+    "fnBefore": {
+     "v": -0.00248,
+     "nullMean": 0.0011,
+     "nullSd": 0.00234,
+     "z": -1.53
+    },
+    "depLen": {
+     "v": 0.00923,
+     "nullMean": 0.0003,
+     "nullSd": 0.00166,
+     "z": 5.37
+    },
+    "initDev": {
+     "v": -0.07476,
+     "nullMean": -0.00385,
+     "nullSd": 0.01017,
+     "z": -6.97
+    },
+    "finalDev": {
+     "v": 0.27022,
+     "nullMean": 0.00206,
+     "nullSd": 0.01193,
+     "z": 22.47
+    },
+    "surprGrow": {
+     "v": -0.05025,
+     "nullMean": -0.0012,
+     "nullSd": 0.0024,
+     "z": -20.46
+    },
+    "entSlope": {
+     "v": -0.00729,
+     "nullMean": -0.00027,
+     "nullSd": 0.00102,
+     "z": -6.89
+    },
+    "entCurv": {
+     "v": 0.00449,
+     "nullMean": -0.00014,
+     "nullSd": 0.00054,
+     "z": 8.51
+    },
+    "branch": {
+     "v": -0.01514,
+     "nullMean": 0.00141,
+     "nullSd": 0.00246,
+     "z": -6.73
+    },
+    "asym": {
+     "v": 0.01094,
+     "nullMean": -0.00016,
+     "nullSd": 0.00009,
+     "z": 117.58
+    }
+   },
+   "confirm": {
+    "tokens": 150857,
+    "rareSlope": {
+     "v": 0.06246,
+     "nullMean": 0.00019,
+     "nullSd": 0.00329,
+     "z": 18.92
+    },
+    "rareCurve": {
+     "v": 0.0254,
+     "nullMean": -0.00056,
+     "nullSd": 0.00254,
+     "z": 10.23
+    },
+    "fnBefore": {
+     "v": -0.00369,
+     "nullMean": 0.00078,
+     "nullSd": 0.00254,
+     "z": -1.76
+    },
+    "depLen": {
+     "v": 0.00645,
+     "nullMean": -0.00066,
+     "nullSd": 0.00219,
+     "z": 3.26
+    },
+    "initDev": {
+     "v": -0.09413,
+     "nullMean": -0.00144,
+     "nullSd": 0.00537,
+     "z": -17.26
+    },
+    "finalDev": {
+     "v": 0.29167,
+     "nullMean": 0.00033,
+     "nullSd": 0.01267,
+     "z": 23
+    },
+    "surprGrow": {
+     "v": -0.05538,
+     "nullMean": 0.00004,
+     "nullSd": 0.00325,
+     "z": -17.07
+    },
+    "entSlope": {
+     "v": -0.00785,
+     "nullMean": -0.00025,
+     "nullSd": 0.00073,
+     "z": -10.45
+    },
+    "entCurv": {
+     "v": 0.00466,
+     "nullMean": -0.00007,
+     "nullSd": 0.00075,
+     "z": 6.32
+    },
+    "branch": {
+     "v": -0.01072,
+     "nullMean": 0.00015,
+     "nullSd": 0.00368,
+     "z": -2.95
+    },
+    "asym": {
+     "v": 0.01126,
+     "nullMean": -0.00015,
+     "nullSd": 0.00008,
+     "z": 137.39
+    }
+   }
+  }
+ },
+ "ml-san-mahabharata": {
+  "tokens": 299935,
+  "units": 53168,
+  "meanUnitLen": 5.64,
+  "cpuSec": {
+   "discover": 0.025,
+   "confirm": 0.022
+  },
+  "halves": {
+   "discover": {
+    "tokens": 145254,
+    "rareSlope": {
+     "v": 0.02886,
+     "nullMean": -0.00035,
+     "nullSd": 0.00384,
+     "z": 7.61
+    },
+    "rareCurve": {
+     "v": 0.05428,
+     "nullMean": -0.00086,
+     "nullSd": 0.00201,
+     "z": 27.39
+    },
+    "fnBefore": {
+     "v": 0.01133,
+     "nullMean": 0.00056,
+     "nullSd": 0.00326,
+     "z": 3.3
+    },
+    "depLen": {
+     "v": 0.00602,
+     "nullMean": -0.00002,
+     "nullSd": 0.00243,
+     "z": 2.48
+    },
+    "initDev": {
+     "v": 0.07306,
+     "nullMean": -0.00117,
+     "nullSd": 0.00595,
+     "z": 12.48
+    },
+    "finalDev": {
+     "v": 0.08831,
+     "nullMean": -0.00066,
+     "nullSd": 0.00429,
+     "z": 20.73
+    },
+    "surprGrow": {
+     "v": -0.08778,
+     "nullMean": 0.00136,
+     "nullSd": 0.00361,
+     "z": -24.67
+    },
+    "entSlope": {
+     "v": -0.01252,
+     "nullMean": 0.00015,
+     "nullSd": 0.00228,
+     "z": -5.55
+    },
+    "entCurv": {
+     "v": 0.01967,
+     "nullMean": -0.00015,
+     "nullSd": 0.00126,
+     "z": 15.73
+    },
+    "branch": {
+     "v": -0.10503,
+     "nullMean": -0.00134,
+     "nullSd": 0.00261,
+     "z": -39.68
+    },
+    "asym": {
+     "v": 0.01236,
+     "nullMean": -0.00008,
+     "nullSd": 0.0001,
+     "z": 120.64
+    }
+   },
+   "confirm": {
+    "tokens": 150386,
+    "rareSlope": {
+     "v": 0.03064,
+     "nullMean": -0.0002,
+     "nullSd": 0.00364,
+     "z": 8.47
+    },
+    "rareCurve": {
+     "v": 0.05717,
+     "nullMean": 0.00078,
+     "nullSd": 0.00252,
+     "z": 22.34
+    },
+    "fnBefore": {
+     "v": 0.00769,
+     "nullMean": 0.00016,
+     "nullSd": 0.00307,
+     "z": 2.46
+    },
+    "depLen": {
+     "v": 0.00508,
+     "nullMean": 0.00088,
+     "nullSd": 0.0021,
+     "z": 2.01
+    },
+    "initDev": {
+     "v": 0.07709,
+     "nullMean": 0.001,
+     "nullSd": 0.00653,
+     "z": 11.66
+    },
+    "finalDev": {
+     "v": 0.09773,
+     "nullMean": 0.00033,
+     "nullSd": 0.00567,
+     "z": 17.19
+    },
+    "surprGrow": {
+     "v": -0.09228,
+     "nullMean": -0.00029,
+     "nullSd": 0.00301,
+     "z": -30.59
+    },
+    "entSlope": {
+     "v": -0.00989,
+     "nullMean": 0.00012,
+     "nullSd": 0.00175,
+     "z": -5.74
+    },
+    "entCurv": {
+     "v": 0.01734,
+     "nullMean": 0.00044,
+     "nullSd": 0.00108,
+     "z": 15.61
+    },
+    "branch": {
+     "v": -0.10627,
+     "nullMean": 0.00021,
+     "nullSd": 0.00645,
+     "z": -16.51
+    },
+    "asym": {
+     "v": 0.0131,
+     "nullMean": -0.00016,
+     "nullSd": 0.00011,
+     "z": 123.43
+    }
+   }
+  }
+ },
+ "ml-arb-hadith": {
+  "tokens": 299431,
+  "units": 12368,
+  "meanUnitLen": 24.21,
+  "cpuSec": {
+   "discover": 0.023,
+   "confirm": 0.021
+  },
+  "halves": {
+   "discover": {
+    "tokens": 150403,
+    "rareSlope": {
+     "v": 0.22597,
+     "nullMean": -0.00001,
+     "nullSd": 0.00149,
+     "z": 151.96
+    },
+    "rareCurve": {
+     "v": -0.06395,
+     "nullMean": 0.00043,
+     "nullSd": 0.00263,
+     "z": -24.52
+    },
+    "fnBefore": {
+     "v": 0.01829,
+     "nullMean": 0.00087,
+     "nullSd": 0.00196,
+     "z": 8.9
+    },
+    "depLen": {
+     "v": -0.065,
+     "nullMean": 0.00043,
+     "nullSd": 0.00129,
+     "z": -50.67
+    },
+    "initDev": {
+     "v": -0.6111,
+     "nullMean": -0.00011,
+     "nullSd": 0.01477,
+     "z": -41.36
+    },
+    "finalDev": {
+     "v": 0.50711,
+     "nullMean": 0.00195,
+     "nullSd": 0.00854,
+     "z": 59.14
+    },
+    "surprGrow": {
+     "v": -0.02058,
+     "nullMean": -0.00027,
+     "nullSd": 0.00136,
+     "z": -14.99
+    },
+    "entSlope": {
+     "v": 0.01902,
+     "nullMean": 0.00011,
+     "nullSd": 0.00037,
+     "z": 51.01
+    },
+    "entCurv": {
+     "v": 0.01577,
+     "nullMean": 0.00005,
+     "nullSd": 0.00047,
+     "z": 33.12
+    },
+    "branch": {
+     "v": -0.16063,
+     "nullMean": -0.00009,
+     "nullSd": 0.00394,
+     "z": -40.74
+    },
+    "asym": {
+     "v": 0.0652,
+     "nullMean": -0.00011,
+     "nullSd": 0.00009,
+     "z": 727.72
+    }
+   },
+   "confirm": {
+    "tokens": 136697,
+    "rareSlope": {
+     "v": 0.23066,
+     "nullMean": 0.00029,
+     "nullSd": 0.00282,
+     "z": 81.75
+    },
+    "rareCurve": {
+     "v": -0.0637,
+     "nullMean": 0.00077,
+     "nullSd": 0.00262,
+     "z": -24.64
+    },
+    "fnBefore": {
+     "v": 0.01443,
+     "nullMean": 0.00019,
+     "nullSd": 0.00223,
+     "z": 6.37
+    },
+    "depLen": {
+     "v": -0.06388,
+     "nullMean": -0.00128,
+     "nullSd": 0.00162,
+     "z": -38.62
+    },
+    "initDev": {
+     "v": -0.65693,
+     "nullMean": 0.00333,
+     "nullSd": 0.00887,
+     "z": -74.45
+    },
+    "finalDev": {
+     "v": 0.49368,
+     "nullMean": 0.00038,
+     "nullSd": 0.01367,
+     "z": 36.09
+    },
+    "surprGrow": {
+     "v": -0.02609,
+     "nullMean": -0.00031,
+     "nullSd": 0.0027,
+     "z": -9.54
+    },
+    "entSlope": {
+     "v": 0.01693,
+     "nullMean": 0.00005,
+     "nullSd": 0.00039,
+     "z": 42.91
+    },
+    "entCurv": {
+     "v": 0.01505,
+     "nullMean": 0.00003,
+     "nullSd": 0.00028,
+     "z": 54.11
+    },
+    "branch": {
+     "v": -0.16157,
+     "nullMean": -0.00144,
+     "nullSd": 0.00282,
+     "z": -56.86
+    },
+    "asym": {
+     "v": 0.05835,
+     "nullMean": -0.00009,
+     "nullSd": 0.00013,
+     "z": 435.59
+    }
+   }
+  }
+ },
+ "ml-lzh-shiji": {
+  "tokens": 291823,
+  "units": 37803,
+  "meanUnitLen": 7.72,
+  "cpuSec": {
+   "discover": 0.025,
+   "confirm": 0.03
+  },
+  "halves": {
+   "discover": {
+    "tokens": 149678,
+    "rareSlope": {
+     "v": 0.00073,
+     "nullMean": -0.00096,
+     "nullSd": 0.00266,
+     "z": 0.64
+    },
+    "rareCurve": {
+     "v": -0.11958,
+     "nullMean": -0.0012,
+     "nullSd": 0.00305,
+     "z": -38.88
+    },
+    "fnBefore": {
+     "v": -0.00939,
+     "nullMean": -0.00045,
+     "nullSd": 0.00119,
+     "z": -7.55
+    },
+    "depLen": {
+     "v": -0.01808,
+     "nullMean": -0.0005,
+     "nullSd": 0.0023,
+     "z": -7.65
+    },
+    "initDev": {
+     "v": -0.10336,
+     "nullMean": 0.00048,
+     "nullSd": 0.00569,
+     "z": -18.23
+    },
+    "finalDev": {
+     "v": -0.3553,
+     "nullMean": -0.00422,
+     "nullSd": 0.00747,
+     "z": -46.99
+    },
+    "surprGrow": {
+     "v": 0.04598,
+     "nullMean": 0.001,
+     "nullSd": 0.00264,
+     "z": 17.03
+    },
+    "entSlope": {
+     "v": -0.01592,
+     "nullMean": 0.00053,
+     "nullSd": 0.00223,
+     "z": -7.37
+    },
+    "entCurv": {
+     "v": -0.03647,
+     "nullMean": -0.00074,
+     "nullSd": 0.00225,
+     "z": -15.89
+    },
+    "branch": {
+     "v": -0.00298,
+     "nullMean": 0.00011,
+     "nullSd": 0.00301,
+     "z": -1.03
+    },
+    "asym": {
+     "v": 0.0123,
+     "nullMean": -0.00011,
+     "nullSd": 0.00009,
+     "z": 140.35
+    }
+   },
+   "confirm": {
+    "tokens": 142145,
+    "rareSlope": {
+     "v": -0.00183,
+     "nullMean": 0.00033,
+     "nullSd": 0.00282,
+     "z": -0.77
+    },
+    "rareCurve": {
+     "v": -0.12382,
+     "nullMean": -0.00126,
+     "nullSd": 0.00147,
+     "z": -83.43
+    },
+    "fnBefore": {
+     "v": -0.00912,
+     "nullMean": 0.00038,
+     "nullSd": 0.00149,
+     "z": -6.39
+    },
+    "depLen": {
+     "v": -0.01958,
+     "nullMean": -0.00061,
+     "nullSd": 0.00296,
+     "z": -6.41
+    },
+    "initDev": {
+     "v": -0.09576,
+     "nullMean": -0.00132,
+     "nullSd": 0.00665,
+     "z": -14.21
+    },
+    "finalDev": {
+     "v": -0.37924,
+     "nullMean": -0.00018,
+     "nullSd": 0.00755,
+     "z": -50.21
+    },
+    "surprGrow": {
+     "v": 0.04846,
+     "nullMean": -0.00005,
+     "nullSd": 0.00207,
+     "z": 23.41
+    },
+    "entSlope": {
+     "v": -0.01479,
+     "nullMean": -0.00002,
+     "nullSd": 0.00178,
+     "z": -8.3
+    },
+    "entCurv": {
+     "v": -0.03414,
+     "nullMean": -0.00163,
+     "nullSd": 0.00149,
+     "z": -21.76
+    },
+    "branch": {
+     "v": -0.00209,
+     "nullMean": 0.00108,
+     "nullSd": 0.00451,
+     "z": -0.7
+    },
+    "asym": {
+     "v": 0.01221,
+     "nullMean": -0.00011,
+     "nullSd": 0.00014,
+     "z": 89.4
+    }
+   }
+  }
+ },
+ "ml-jpn-genji": {
+  "tokens": 299353,
+  "units": 17466,
+  "meanUnitLen": 17.14,
+  "cpuSec": {
+   "discover": 0.03,
+   "confirm": 0.034
+  },
+  "halves": {
+   "discover": {
+    "tokens": 151095,
+    "rareSlope": {
+     "v": -0.10799,
+     "nullMean": -0.00042,
+     "nullSd": 0.00306,
+     "z": -35.19
+    },
+    "rareCurve": {
+     "v": -0.05529,
+     "nullMean": 0.0003,
+     "nullSd": 0.00264,
+     "z": -21.06
+    },
+    "fnBefore": {
+     "v": -0.01766,
+     "nullMean": -0.0005,
+     "nullSd": 0.00266,
+     "z": -6.44
+    },
+    "depLen": {
+     "v": -0.00971,
+     "nullMean": 0.00028,
+     "nullSd": 0.00132,
+     "z": -7.59
+    },
+    "initDev": {
+     "v": 0.1618,
+     "nullMean": 0.00237,
+     "nullSd": 0.01319,
+     "z": 12.09
+    },
+    "finalDev": {
+     "v": -0.57366,
+     "nullMean": 0.00026,
+     "nullSd": 0.01095,
+     "z": -52.42
+    },
+    "surprGrow": {
+     "v": 0.04323,
+     "nullMean": 0,
+     "nullSd": 0.00279,
+     "z": 15.51
+    },
+    "entSlope": {
+     "v": 0.00142,
+     "nullMean": 0.00003,
+     "nullSd": 0.00125,
+     "z": 1.11
+    },
+    "entCurv": {
+     "v": 0.00373,
+     "nullMean": -0.00023,
+     "nullSd": 0.00099,
+     "z": 4.02
+    },
+    "branch": {
+     "v": 0.09716,
+     "nullMean": -0.00151,
+     "nullSd": 0.00429,
+     "z": 22.97
+    },
+    "asym": {
+     "v": 0.02277,
+     "nullMean": -0.00012,
+     "nullSd": 0.00011,
+     "z": 203.88
+    }
+   },
+   "confirm": {
+    "tokens": 137965,
+    "rareSlope": {
+     "v": -0.11402,
+     "nullMean": 0.00056,
+     "nullSd": 0.0022,
+     "z": -52.14
+    },
+    "rareCurve": {
+     "v": -0.06362,
+     "nullMean": -0.00116,
+     "nullSd": 0.00328,
+     "z": -19.05
+    },
+    "fnBefore": {
+     "v": -0.01518,
+     "nullMean": 0.00065,
+     "nullSd": 0.00402,
+     "z": -3.94
+    },
+    "depLen": {
+     "v": -0.00697,
+     "nullMean": 0.0002,
+     "nullSd": 0.00163,
+     "z": -4.41
+    },
+    "initDev": {
+     "v": 0.15425,
+     "nullMean": 0.00221,
+     "nullSd": 0.0068,
+     "z": 22.36
+    },
+    "finalDev": {
+     "v": -0.58529,
+     "nullMean": -0.00124,
+     "nullSd": 0.01271,
+     "z": -45.95
+    },
+    "surprGrow": {
+     "v": 0.04836,
+     "nullMean": -0.00137,
+     "nullSd": 0.0023,
+     "z": 21.59
+    },
+    "entSlope": {
+     "v": -0.0005,
+     "nullMean": 0.00025,
+     "nullSd": 0.0012,
+     "z": -0.63
+    },
+    "entCurv": {
+     "v": 0.00065,
+     "nullMean": -0.00034,
+     "nullSd": 0.00108,
+     "z": 0.92
+    },
+    "branch": {
+     "v": 0.09316,
+     "nullMean": -0.00045,
+     "nullSd": 0.0048,
+     "z": 19.52
+    },
+    "asym": {
+     "v": 0.02116,
+     "nullMean": -0.0001,
+     "nullSd": 0.00009,
+     "z": 233.68
+    }
+   }
+  }
+ },
+ "ml-jpn-soseki": {
+  "tokens": 152636,
+  "units": 9139,
+  "meanUnitLen": 16.7,
+  "cpuSec": {
+   "discover": 0.021,
+   "confirm": 0.019
+  },
+  "halves": {
+   "discover": {
+    "tokens": 82252,
+    "rareSlope": {
+     "v": -0.16295,
+     "nullMean": -0.00027,
+     "nullSd": 0.0022,
+     "z": -73.85
+    },
+    "rareCurve": {
+     "v": -0.16395,
+     "nullMean": 0.0023,
+     "nullSd": 0.00297,
+     "z": -55.92
+    },
+    "fnBefore": {
+     "v": -0.02584,
+     "nullMean": 0.00103,
+     "nullSd": 0.00296,
+     "z": -9.07
+    },
+    "depLen": {
+     "v": -0.0271,
+     "nullMean": -0.00001,
+     "nullSd": 0.00198,
+     "z": -13.71
+    },
+    "initDev": {
+     "v": -0.07606,
+     "nullMean": 0.00098,
+     "nullSd": 0.01375,
+     "z": -5.6
+    },
+    "finalDev": {
+     "v": -1.13903,
+     "nullMean": 0.00371,
+     "nullSd": 0.01778,
+     "z": -64.28
+    },
+    "surprGrow": {
+     "v": 0.13175,
+     "nullMean": 0.00032,
+     "nullSd": 0.00259,
+     "z": 50.83
+    },
+    "entSlope": {
+     "v": 0.06201,
+     "nullMean": 0.00004,
+     "nullSd": 0.00104,
+     "z": 59.57
+    },
+    "entCurv": {
+     "v": -0.01984,
+     "nullMean": 0.00041,
+     "nullSd": 0.0015,
+     "z": -13.52
+    },
+    "branch": {
+     "v": 0.20142,
+     "nullMean": 0.00164,
+     "nullSd": 0.00574,
+     "z": 34.78
+    },
+    "asym": {
+     "v": 0.02109,
+     "nullMean": -0.00027,
+     "nullSd": 0.00007,
+     "z": 289.7
+    }
+   },
+   "confirm": {
+    "tokens": 70384,
+    "rareSlope": {
+     "v": -0.16341,
+     "nullMean": 0.00141,
+     "nullSd": 0.00265,
+     "z": -62.17
+    },
+    "rareCurve": {
+     "v": -0.16121,
+     "nullMean": -0.00062,
+     "nullSd": 0.00345,
+     "z": -46.48
+    },
+    "fnBefore": {
+     "v": -0.02216,
+     "nullMean": -0.00022,
+     "nullSd": 0.00365,
+     "z": -6.02
+    },
+    "depLen": {
+     "v": -0.03253,
+     "nullMean": -0.00018,
+     "nullSd": 0.00264,
+     "z": -12.25
+    },
+    "initDev": {
+     "v": -0.08395,
+     "nullMean": -0.00372,
+     "nullSd": 0.01053,
+     "z": -7.62
+    },
+    "finalDev": {
+     "v": -1.14447,
+     "nullMean": 0.00825,
+     "nullSd": 0.01061,
+     "z": -108.66
+    },
+    "surprGrow": {
+     "v": 0.13781,
+     "nullMean": -0.00064,
+     "nullSd": 0.00327,
+     "z": 42.32
+    },
+    "entSlope": {
+     "v": 0.05721,
+     "nullMean": -0.00098,
+     "nullSd": 0.00151,
+     "z": 38.64
+    },
+    "entCurv": {
+     "v": -0.01344,
+     "nullMean": -0.00093,
+     "nullSd": 0.00193,
+     "z": -6.48
+    },
+    "branch": {
+     "v": 0.18252,
+     "nullMean": -0.0021,
+     "nullSd": 0.00304,
+     "z": 60.71
+    },
+    "asym": {
+     "v": 0.03264,
+     "nullMean": -0.00028,
+     "nullSd": 0.00016,
+     "z": 211.12
+    }
+   }
+  }
+ },
+ "ml-fas-masnavi": {
+  "tokens": 299951,
+  "units": 24523,
+  "meanUnitLen": 12.23,
+  "cpuSec": {
+   "discover": 0.057,
+   "confirm": 0.058
+  },
+  "halves": {
+   "discover": {
+    "tokens": 149284,
+    "rareSlope": {
+     "v": 0.09024,
+     "nullMean": 0.00117,
+     "nullSd": 0.0021,
+     "z": 42.33
+    },
+    "rareCurve": {
+     "v": 0.0659,
+     "nullMean": 0.00071,
+     "nullSd": 0.00307,
+     "z": 21.25
+    },
+    "fnBefore": {
+     "v": 0.03919,
+     "nullMean": 0.00205,
+     "nullSd": 0.00264,
+     "z": 14.05
+    },
+    "depLen": {
+     "v": 0.04218,
+     "nullMean": -0.00019,
+     "nullSd": 0.00193,
+     "z": 21.94
+    },
+    "initDev": {
+     "v": -0.21246,
+     "nullMean": -0.0017,
+     "nullSd": 0.00627,
+     "z": -33.62
+    },
+    "finalDev": {
+     "v": 0.55883,
+     "nullMean": 0.00129,
+     "nullSd": 0.00961,
+     "z": 58.04
+    },
+    "surprGrow": {
+     "v": -0.05196,
+     "nullMean": -0.00093,
+     "nullSd": 0.0035,
+     "z": -14.59
+    },
+    "entSlope": {
+     "v": 0.00121,
+     "nullMean": -0.00006,
+     "nullSd": 0.00042,
+     "z": 2.99
+    },
+    "entCurv": {
+     "v": -0.00081,
+     "nullMean": 0.00009,
+     "nullSd": 0.00042,
+     "z": -2.14
+    },
+    "branch": {
+     "v": -0.20678,
+     "nullMean": 0.0008,
+     "nullSd": 0.00458,
+     "z": -45.31
+    },
+    "asym": {
+     "v": 0.01101,
+     "nullMean": -0.00008,
+     "nullSd": 0.00013,
+     "z": 82.86
+    }
+   },
+   "confirm": {
+    "tokens": 150667,
+    "rareSlope": {
+     "v": 0.08688,
+     "nullMean": 0.00079,
+     "nullSd": 0.00246,
+     "z": 35
+    },
+    "rareCurve": {
+     "v": 0.0615,
+     "nullMean": 0.00076,
+     "nullSd": 0.00282,
+     "z": 21.55
+    },
+    "fnBefore": {
+     "v": 0.03618,
+     "nullMean": -0.00027,
+     "nullSd": 0.00464,
+     "z": 7.85
+    },
+    "depLen": {
+     "v": 0.0463,
+     "nullMean": -0.00043,
+     "nullSd": 0.00297,
+     "z": 15.75
+    },
+    "initDev": {
+     "v": -0.22037,
+     "nullMean": -0.0015,
+     "nullSd": 0.00921,
+     "z": -23.76
+    },
+    "finalDev": {
+     "v": 0.54149,
+     "nullMean": 0.00793,
+     "nullSd": 0.0118,
+     "z": 45.23
+    },
+    "surprGrow": {
+     "v": -0.04623,
+     "nullMean": -0.00033,
+     "nullSd": 0.00276,
+     "z": -16.62
+    },
+    "entSlope": {
+     "v": 0.00233,
+     "nullMean": -0.00008,
+     "nullSd": 0.00043,
+     "z": 5.65
+    },
+    "entCurv": {
+     "v": -0.00004,
+     "nullMean": -0.00003,
+     "nullSd": 0.0005,
+     "z": -0.01
+    },
+    "branch": {
+     "v": -0.21156,
+     "nullMean": 0.00091,
+     "nullSd": 0.00402,
+     "z": -52.81
+    },
+    "asym": {
+     "v": 0.01205,
+     "nullMean": -0.00009,
+     "nullSd": 0.00006,
+     "z": 217.85
+    }
+   }
+  }
+ },
+ "ml-deu-nietzsche": {
+  "tokens": 299797,
+  "units": 12339,
+  "meanUnitLen": 24.3,
+  "cpuSec": {
+   "discover": 0.028,
+   "confirm": 0.059
+  },
+  "halves": {
+   "discover": {
+    "tokens": 146424,
+    "rareSlope": {
+     "v": 0.08834,
+     "nullMean": -0.00038,
+     "nullSd": 0.00377,
+     "z": 23.54
+    },
+    "rareCurve": {
+     "v": 0.02431,
+     "nullMean": 0.00009,
+     "nullSd": 0.00286,
+     "z": 8.47
+    },
+    "fnBefore": {
+     "v": 0.02663,
+     "nullMean": -0.00071,
+     "nullSd": 0.00294,
+     "z": 9.31
+    },
+    "depLen": {
+     "v": -0.00015,
+     "nullMean": -0.00067,
+     "nullSd": 0.00195,
+     "z": 0.27
+    },
+    "initDev": {
+     "v": -0.48104,
+     "nullMean": 0.00714,
+     "nullSd": 0.00942,
+     "z": -51.85
+    },
+    "finalDev": {
+     "v": 0.61548,
+     "nullMean": -0.00147,
+     "nullSd": 0.01012,
+     "z": 60.96
+    },
+    "surprGrow": {
+     "v": -0.03564,
+     "nullMean": -0.00002,
+     "nullSd": 0.00337,
+     "z": -10.56
+    },
+    "entSlope": {
+     "v": 0.00084,
+     "nullMean": 0.00002,
+     "nullSd": 0.00044,
+     "z": 1.87
+    },
+    "entCurv": {
+     "v": 0.00136,
+     "nullMean": 0.00003,
+     "nullSd": 0.00036,
+     "z": 3.68
+    },
+    "branch": {
+     "v": -0.16669,
+     "nullMean": 0.00136,
+     "nullSd": 0.00447,
+     "z": -37.63
+    },
+    "asym": {
+     "v": 0.02408,
+     "nullMean": -0.0001,
+     "nullSd": 0.00011,
+     "z": 230.06
+    }
+   },
+   "confirm": {
+    "tokens": 152833,
+    "rareSlope": {
+     "v": 0.0895,
+     "nullMean": -0.00038,
+     "nullSd": 0.00232,
+     "z": 38.68
+    },
+    "rareCurve": {
+     "v": 0.02121,
+     "nullMean": 0.00007,
+     "nullSd": 0.00149,
+     "z": 14.22
+    },
+    "fnBefore": {
+     "v": 0.03008,
+     "nullMean": 0.00104,
+     "nullSd": 0.00243,
+     "z": 11.94
+    },
+    "depLen": {
+     "v": 0.00058,
+     "nullMean": -0.00044,
+     "nullSd": 0.00206,
+     "z": 0.5
+    },
+    "initDev": {
+     "v": -0.48381,
+     "nullMean": -0.00009,
+     "nullSd": 0.00695,
+     "z": -69.56
+    },
+    "finalDev": {
+     "v": 0.61076,
+     "nullMean": 0.00295,
+     "nullSd": 0.00768,
+     "z": 79.12
+    },
+    "surprGrow": {
+     "v": -0.03681,
+     "nullMean": 0.0002,
+     "nullSd": 0.00182,
+     "z": -20.32
+    },
+    "entSlope": {
+     "v": 0.00157,
+     "nullMean": -0.00003,
+     "nullSd": 0.0003,
+     "z": 5.3
+    },
+    "entCurv": {
+     "v": 0.00074,
+     "nullMean": 0.00013,
+     "nullSd": 0.0004,
+     "z": 1.52
+    },
+    "branch": {
+     "v": -0.1542,
+     "nullMean": 0.00028,
+     "nullSd": 0.00158,
+     "z": -97.86
+    },
+    "asym": {
+     "v": 0.01852,
+     "nullMean": -0.00011,
+     "nullSd": 0.00009,
+     "z": 205.63
+    }
+   }
+  }
+ },
+ "ml-fra-pascal": {
+  "tokens": 153180,
+  "units": 8280,
+  "meanUnitLen": 18.5,
+  "cpuSec": {
+   "discover": 0.015,
+   "confirm": 0.026
+  },
+  "halves": {
+   "discover": {
+    "tokens": 73239,
+    "rareSlope": {
+     "v": 0.05408,
+     "nullMean": 0.00085,
+     "nullSd": 0.00299,
+     "z": 17.78
+    },
+    "rareCurve": {
+     "v": 0.05107,
+     "nullMean": -0.0007,
+     "nullSd": 0.00407,
+     "z": 12.73
+    },
+    "fnBefore": {
+     "v": -0.01736,
+     "nullMean": -0.00067,
+     "nullSd": 0.0056,
+     "z": -2.98
+    },
+    "depLen": {
+     "v": 0.00737,
+     "nullMean": -0.00093,
+     "nullSd": 0.00252,
+     "z": 3.3
+    },
+    "initDev": {
+     "v": -0.22745,
+     "nullMean": 0.00676,
+     "nullSd": 0.01262,
+     "z": -18.55
+    },
+    "finalDev": {
+     "v": 0.72601,
+     "nullMean": -0.00122,
+     "nullSd": 0.01431,
+     "z": 50.81
+    },
+    "surprGrow": {
+     "v": -0.0236,
+     "nullMean": -0.00044,
+     "nullSd": 0.00305,
+     "z": -7.6
+    },
+    "entSlope": {
+     "v": 0.00766,
+     "nullMean": -0.00001,
+     "nullSd": 0.00057,
+     "z": 13.4
+    },
+    "entCurv": {
+     "v": 0.00181,
+     "nullMean": 0.0002,
+     "nullSd": 0.00041,
+     "z": 3.98
+    },
+    "branch": {
+     "v": -0.21553,
+     "nullMean": -0.00371,
+     "nullSd": 0.00515,
+     "z": -41.1
+    },
+    "asym": {
+     "v": 0.02224,
+     "nullMean": -0.00027,
+     "nullSd": 0.0002,
+     "z": 111.58
+    }
+   },
+   "confirm": {
+    "tokens": 79941,
+    "rareSlope": {
+     "v": 0.05023,
+     "nullMean": -0.00043,
+     "nullSd": 0.00415,
+     "z": 12.22
+    },
+    "rareCurve": {
+     "v": 0.05167,
+     "nullMean": -0.00048,
+     "nullSd": 0.00403,
+     "z": 12.93
+    },
+    "fnBefore": {
+     "v": -0.02224,
+     "nullMean": -0.00048,
+     "nullSd": 0.00409,
+     "z": -5.32
+    },
+    "depLen": {
+     "v": 0.00866,
+     "nullMean": 0.00051,
+     "nullSd": 0.0024,
+     "z": 3.39
+    },
+    "initDev": {
+     "v": -0.22247,
+     "nullMean": -0.00163,
+     "nullSd": 0.01641,
+     "z": -13.46
+    },
+    "finalDev": {
+     "v": 0.72618,
+     "nullMean": -0.00793,
+     "nullSd": 0.01216,
+     "z": 60.35
+    },
+    "surprGrow": {
+     "v": -0.02077,
+     "nullMean": 0.00078,
+     "nullSd": 0.00367,
+     "z": -5.87
+    },
+    "entSlope": {
+     "v": 0.00857,
+     "nullMean": 0.00013,
+     "nullSd": 0.00079,
+     "z": 10.72
+    },
+    "entCurv": {
+     "v": 0.00268,
+     "nullMean": 0.00033,
+     "nullSd": 0.00054,
+     "z": 4.32
+    },
+    "branch": {
+     "v": -0.19899,
+     "nullMean": 0.00127,
+     "nullSd": 0.00503,
+     "z": -39.8
+    },
+    "asym": {
+     "v": 0.02441,
+     "nullMean": -0.00012,
+     "nullSd": 0.00018,
+     "z": 135.13
+    }
+   }
+  }
+ },
+ "oc-irc-ubuntu-0406": {
+  "tokens": 282163,
+  "units": 32382,
+  "meanUnitLen": 8.71,
+  "cpuSec": {
+   "discover": 0.049,
+   "confirm": 0.056
+  },
+  "halves": {
+   "discover": {
+    "tokens": 140622,
+    "rareSlope": {
+     "v": 0.05906,
+     "nullMean": -0.00303,
+     "nullSd": 0.0025,
+     "z": 24.84
+    },
+    "rareCurve": {
+     "v": 0.13562,
+     "nullMean": -0.00003,
+     "nullSd": 0.00264,
+     "z": 51.48
+    },
+    "fnBefore": {
+     "v": 0.02354,
+     "nullMean": 0.0019,
+     "nullSd": 0.00412,
+     "z": 5.25
+    },
+    "depLen": {
+     "v": 0.01838,
+     "nullMean": 0.00029,
+     "nullSd": 0.00266,
+     "z": 6.81
+    },
+    "initDev": {
+     "v": 0.26069,
+     "nullMean": 0.00246,
+     "nullSd": 0.00927,
+     "z": 27.86
+    },
+    "finalDev": {
+     "v": 0.43042,
+     "nullMean": -0.00192,
+     "nullSd": 0.00621,
+     "z": 69.61
+    },
+    "surprGrow": {
+     "v": -0.08892,
+     "nullMean": 0.00249,
+     "nullSd": 0.00175,
+     "z": -52.35
+    },
+    "entSlope": {
+     "v": -0.00814,
+     "nullMean": -0.00027,
+     "nullSd": 0.00054,
+     "z": -14.53
+    },
+    "entCurv": {
+     "v": 0.00304,
+     "nullMean": -0.00017,
+     "nullSd": 0.00045,
+     "z": 7.12
+    },
+    "branch": {
+     "v": -0.07449,
+     "nullMean": 0.00053,
+     "nullSd": 0.00544,
+     "z": -13.8
+    },
+    "asym": {
+     "v": 0.02469,
+     "nullMean": -0.0001,
+     "nullSd": 0.00011,
+     "z": 232.27
+    }
+   },
+   "confirm": {
+    "tokens": 141541,
+    "rareSlope": {
+     "v": 0.06072,
+     "nullMean": -0.00018,
+     "nullSd": 0.00244,
+     "z": 24.99
+    },
+    "rareCurve": {
+     "v": 0.14154,
+     "nullMean": -0.00046,
+     "nullSd": 0.00246,
+     "z": 57.84
+    },
+    "fnBefore": {
+     "v": 0.0193,
+     "nullMean": 0.00048,
+     "nullSd": 0.00401,
+     "z": 4.69
+    },
+    "depLen": {
+     "v": 0.01471,
+     "nullMean": -0.00101,
+     "nullSd": 0.00183,
+     "z": 8.58
+    },
+    "initDev": {
+     "v": 0.26001,
+     "nullMean": 0.00047,
+     "nullSd": 0.00459,
+     "z": 56.51
+    },
+    "finalDev": {
+     "v": 0.45083,
+     "nullMean": -0.00053,
+     "nullSd": 0.00729,
+     "z": 61.88
+    },
+    "surprGrow": {
+     "v": -0.09148,
+     "nullMean": 0.00011,
+     "nullSd": 0.00286,
+     "z": -32.04
+    },
+    "entSlope": {
+     "v": -0.00516,
+     "nullMean": -0.00002,
+     "nullSd": 0.00094,
+     "z": -5.47
+    },
+    "entCurv": {
+     "v": 0.00369,
+     "nullMean": -0.0001,
+     "nullSd": 0.00057,
+     "z": 6.61
+    },
+    "branch": {
+     "v": -0.0736,
+     "nullMean": -0.00011,
+     "nullSd": 0.00517,
+     "z": -14.21
+    },
+    "asym": {
+     "v": 0.02987,
+     "nullMean": -0.00014,
+     "nullSd": 0.00012,
+     "z": 253.86
+    }
+   }
+  }
+ },
+ "oc-irc-ubuntu-0910": {
+  "tokens": 287599,
+  "units": 25045,
+  "meanUnitLen": 11.48,
+  "cpuSec": {
+   "discover": 0.028,
+   "confirm": 0.033
+  },
+  "halves": {
+   "discover": {
+    "tokens": 133084,
+    "rareSlope": {
+     "v": 0.02886,
+     "nullMean": 0.0003,
+     "nullSd": 0.00295,
+     "z": 9.67
+    },
+    "rareCurve": {
+     "v": 0.13054,
+     "nullMean": 0.00061,
+     "nullSd": 0.00347,
+     "z": 37.49
+    },
+    "fnBefore": {
+     "v": -0.01264,
+     "nullMean": 0.0002,
+     "nullSd": 0.00403,
+     "z": -3.19
+    },
+    "depLen": {
+     "v": 0.00762,
+     "nullMean": 0.00024,
+     "nullSd": 0.00139,
+     "z": 5.32
+    },
+    "initDev": {
+     "v": 0.42221,
+     "nullMean": 0.0051,
+     "nullSd": 0.00789,
+     "z": 52.89
+    },
+    "finalDev": {
+     "v": 0.42569,
+     "nullMean": 0.00743,
+     "nullSd": 0.00899,
+     "z": 46.5
+    },
+    "surprGrow": {
+     "v": -0.06492,
+     "nullMean": -0.00116,
+     "nullSd": 0.00258,
+     "z": -24.67
+    },
+    "entSlope": {
+     "v": -0.00951,
+     "nullMean": -0.00021,
+     "nullSd": 0.00073,
+     "z": -12.76
+    },
+    "entCurv": {
+     "v": 0.00018,
+     "nullMean": -0.00008,
+     "nullSd": 0.00072,
+     "z": 0.36
+    },
+    "branch": {
+     "v": -0.08345,
+     "nullMean": -0.0019,
+     "nullSd": 0.0027,
+     "z": -30.22
+    },
+    "asym": {
+     "v": 0.0244,
+     "nullMean": -0.00006,
+     "nullSd": 0.00008,
+     "z": 319.33
+    }
+   },
+   "confirm": {
+    "tokens": 150093,
+    "rareSlope": {
+     "v": 0.02889,
+     "nullMean": 0.00033,
+     "nullSd": 0.00329,
+     "z": 8.67
+    },
+    "rareCurve": {
+     "v": 0.13389,
+     "nullMean": -0.00052,
+     "nullSd": 0.0028,
+     "z": 48.08
+    },
+    "fnBefore": {
+     "v": 0.00117,
+     "nullMean": 0.0003,
+     "nullSd": 0.00253,
+     "z": 0.34
+    },
+    "depLen": {
+     "v": 0.00955,
+     "nullMean": 0.00084,
+     "nullSd": 0.00153,
+     "z": 5.7
+    },
+    "initDev": {
+     "v": 0.42369,
+     "nullMean": 0.00042,
+     "nullSd": 0.01036,
+     "z": 40.86
+    },
+    "finalDev": {
+     "v": 0.42454,
+     "nullMean": 0.00047,
+     "nullSd": 0.00871,
+     "z": 48.69
+    },
+    "surprGrow": {
+     "v": -0.07317,
+     "nullMean": 0.00037,
+     "nullSd": 0.00229,
+     "z": -32.1
+    },
+    "entSlope": {
+     "v": -0.00852,
+     "nullMean": -0.00041,
+     "nullSd": 0.00056,
+     "z": -14.44
+    },
+    "entCurv": {
+     "v": 0.0012,
+     "nullMean": 0.00003,
+     "nullSd": 0.00062,
+     "z": 1.9
+    },
+    "branch": {
+     "v": -0.07404,
+     "nullMean": 0.00016,
+     "nullSd": 0.00303,
+     "z": -24.47
+    },
+    "asym": {
+     "v": 0.02516,
+     "nullMean": -0.00006,
+     "nullSd": 0.00007,
+     "z": 357.53
+    }
+   }
+  }
+ },
+ "oc-enron": {
+  "tokens": 33619,
+  "units": 3226,
+  "meanUnitLen": 10.42,
+  "cpuSec": {
+   "discover": 0.003,
+   "confirm": 0.004
+  },
+  "halves": {
+   "discover": {
+    "tokens": 15995,
+    "rareSlope": {
+     "v": 0.12515,
+     "nullMean": -0.00436,
+     "nullSd": 0.00652,
+     "z": 19.86
+    },
+    "rareCurve": {
+     "v": 0.05168,
+     "nullMean": 0.00162,
+     "nullSd": 0.00605,
+     "z": 8.27
+    },
+    "fnBefore": {
+     "v": 0.04391,
+     "nullMean": -0.0011,
+     "nullSd": 0.00471,
+     "z": 9.55
+    },
+    "depLen": {
+     "v": 0.00226,
+     "nullMean": -0.00007,
+     "nullSd": 0.00657,
+     "z": 0.35
+    },
+    "initDev": {
+     "v": -0.29826,
+     "nullMean": 0.01015,
+     "nullSd": 0.02495,
+     "z": -12.36
+    },
+    "finalDev": {
+     "v": 0.57036,
+     "nullMean": -0.00605,
+     "nullSd": 0.01994,
+     "z": 28.91
+    },
+    "surprGrow": {
+     "v": -0.05899,
+     "nullMean": 0.00179,
+     "nullSd": 0.00588,
+     "z": -10.34
+    },
+    "entSlope": {
+     "v": -0.01687,
+     "nullMean": 0.00079,
+     "nullSd": 0.00109,
+     "z": -16.27
+    },
+    "entCurv": {
+     "v": 0.0058,
+     "nullMean": 0.00006,
+     "nullSd": 0.00116,
+     "z": 4.92
+    },
+    "branch": {
+     "v": -0.07253,
+     "nullMean": 0.00076,
+     "nullSd": 0.00881,
+     "z": -8.32
+    },
+    "asym": {
+     "v": 0.05732,
+     "nullMean": -0.00087,
+     "nullSd": 0.00082,
+     "z": 70.8
+    }
+   },
+   "confirm": {
+    "tokens": 17624,
+    "rareSlope": {
+     "v": 0.10405,
+     "nullMean": -0.00166,
+     "nullSd": 0.00974,
+     "z": 10.85
+    },
+    "rareCurve": {
+     "v": 0.03886,
+     "nullMean": -0.00032,
+     "nullSd": 0.00593,
+     "z": 6.6
+    },
+    "fnBefore": {
+     "v": 0.02615,
+     "nullMean": 0.00339,
+     "nullSd": 0.00958,
+     "z": 2.38
+    },
+    "depLen": {
+     "v": 0.02132,
+     "nullMean": 0.00081,
+     "nullSd": 0.00556,
+     "z": 3.69
+    },
+    "initDev": {
+     "v": -0.24838,
+     "nullMean": 0.00902,
+     "nullSd": 0.03085,
+     "z": -8.34
+    },
+    "finalDev": {
+     "v": 0.51039,
+     "nullMean": -0.00475,
+     "nullSd": 0.03057,
+     "z": 16.85
+    },
+    "surprGrow": {
+     "v": -0.05062,
+     "nullMean": 0.00034,
+     "nullSd": 0.00843,
+     "z": -6.04
+    },
+    "entSlope": {
+     "v": -0.00926,
+     "nullMean": -0.00025,
+     "nullSd": 0.0024,
+     "z": -3.75
+    },
+    "entCurv": {
+     "v": 0.00807,
+     "nullMean": -0.00008,
+     "nullSd": 0.00119,
+     "z": 6.82
+    },
+    "branch": {
+     "v": -0.09535,
+     "nullMean": 0.00195,
+     "nullSd": 0.00903,
+     "z": -10.77
+    },
+    "asym": {
+     "v": 0.04975,
+     "nullMean": -0.00099,
+     "nullSd": 0.0009,
+     "z": 56.19
+    }
+   }
+  }
+ },
+ "oc-nussms-zh": {
+  "tokens": 32208,
+  "units": 2761,
+  "meanUnitLen": 11.67,
+  "cpuSec": {
+   "discover": 0.003,
+   "confirm": 0.004
+  },
+  "halves": {
+   "discover": {
+    "tokens": 12649,
+    "rareSlope": {
+     "v": 0.09371,
+     "nullMean": 0.00109,
+     "nullSd": 0.01082,
+     "z": 8.56
+    },
+    "rareCurve": {
+     "v": -0.07678,
+     "nullMean": -0.00582,
+     "nullSd": 0.01212,
+     "z": -5.85
+    },
+    "fnBefore": {
+     "v": 0.02474,
+     "nullMean": 0.00371,
+     "nullSd": 0.00633,
+     "z": 3.32
+    },
+    "depLen": {
+     "v": -0.01627,
+     "nullMean": 0.00209,
+     "nullSd": 0.00801,
+     "z": -2.29
+    },
+    "initDev": {
+     "v": -0.51178,
+     "nullMean": -0.00871,
+     "nullSd": 0.04554,
+     "z": -11.05
+    },
+    "finalDev": {
+     "v": 0.0502,
+     "nullMean": -0.00807,
+     "nullSd": 0.03454,
+     "z": 1.69
+    },
+    "surprGrow": {
+     "v": -0.02897,
+     "nullMean": -0.00007,
+     "nullSd": 0.01252,
+     "z": -2.31
+    },
+    "entSlope": {
+     "v": -0.10503,
+     "nullMean": -0.00019,
+     "nullSd": 0.0121,
+     "z": -8.66
+    },
+    "entCurv": {
+     "v": -0.02809,
+     "nullMean": -0.00483,
+     "nullSd": 0.0163,
+     "z": -1.43
+    },
+    "branch": {
+     "v": -0.04632,
+     "nullMean": -0.00234,
+     "nullSd": 0.01609,
+     "z": -2.73
+    },
+    "asym": {
+     "v": 0.00594,
+     "nullMean": -0.00043,
+     "nullSd": 0.00086,
+     "z": 7.4
+    }
+   },
+   "confirm": {
+    "tokens": 19559,
+    "rareSlope": {
+     "v": 0.10084,
+     "nullMean": 0.00169,
+     "nullSd": 0.00566,
+     "z": 17.52
+    },
+    "rareCurve": {
+     "v": -0.11041,
+     "nullMean": -0.00479,
+     "nullSd": 0.00651,
+     "z": -16.23
+    },
+    "fnBefore": {
+     "v": 0.02937,
+     "nullMean": 0.00191,
+     "nullSd": 0.00346,
+     "z": 7.95
+    },
+    "depLen": {
+     "v": -0.01274,
+     "nullMean": 0.00152,
+     "nullSd": 0.00525,
+     "z": -2.72
+    },
+    "initDev": {
+     "v": -0.48885,
+     "nullMean": -0.00215,
+     "nullSd": 0.01987,
+     "z": -24.49
+    },
+    "finalDev": {
+     "v": -0.01736,
+     "nullMean": -0.00372,
+     "nullSd": 0.01023,
+     "z": -1.33
+    },
+    "surprGrow": {
+     "v": -0.01961,
+     "nullMean": -0.00092,
+     "nullSd": 0.0081,
+     "z": -2.31
+    },
+    "entSlope": {
+     "v": -0.08257,
+     "nullMean": -0.00141,
+     "nullSd": 0.00677,
+     "z": -12
+    },
+    "entCurv": {
+     "v": -0.04591,
+     "nullMean": -0.00327,
+     "nullSd": 0.0057,
+     "z": -7.48
+    },
+    "branch": {
+     "v": -0.04763,
+     "nullMean": 0.00046,
+     "nullSd": 0.01075,
+     "z": -4.47
+    },
+    "asym": {
+     "v": 0.01391,
+     "nullMean": -0.00056,
+     "nullSd": 0.00048,
+     "z": 30.1
+    }
+   }
+  }
+ },
+ "oc-irc-ubuntu-de": {
+  "tokens": 43510,
+  "units": 4151,
+  "meanUnitLen": 10.48,
+  "cpuSec": {
+   "discover": 0.004,
+   "confirm": 0.005
+  },
+  "halves": {
+   "discover": {
+    "tokens": 17610,
+    "rareSlope": {
+     "v": 0.11132,
+     "nullMean": -0.00225,
+     "nullSd": 0.00764,
+     "z": 14.87
+    },
+    "rareCurve": {
+     "v": 0.0703,
+     "nullMean": 0.00162,
+     "nullSd": 0.00621,
+     "z": 11.06
+    },
+    "fnBefore": {
+     "v": 0.02864,
+     "nullMean": -0.00193,
+     "nullSd": 0.00923,
+     "z": 3.31
+    },
+    "depLen": {
+     "v": 0.0145,
+     "nullMean": 0.00349,
+     "nullSd": 0.00615,
+     "z": 1.79
+    },
+    "initDev": {
+     "v": -0.03252,
+     "nullMean": 0.01224,
+     "nullSd": 0.01798,
+     "z": -2.49
+    },
+    "finalDev": {
+     "v": 0.44146,
+     "nullMean": 0.00122,
+     "nullSd": 0.01422,
+     "z": 30.96
+    },
+    "surprGrow": {
+     "v": -0.11489,
+     "nullMean": -0.00096,
+     "nullSd": 0.00846,
+     "z": -13.47
+    },
+    "entSlope": {
+     "v": -0.02074,
+     "nullMean": 0.00081,
+     "nullSd": 0.00236,
+     "z": -9.12
+    },
+    "entCurv": {
+     "v": 0.01108,
+     "nullMean": 0.00057,
+     "nullSd": 0.00247,
+     "z": 4.25
+    },
+    "branch": {
+     "v": 0.02659,
+     "nullMean": 0.00272,
+     "nullSd": 0.00901,
+     "z": 2.65
+    },
+    "asym": {
+     "v": 0.0169,
+     "nullMean": -0.00103,
+     "nullSd": 0.0006,
+     "z": 30.01
+    }
+   },
+   "confirm": {
+    "tokens": 25900,
+    "rareSlope": {
+     "v": 0.11264,
+     "nullMean": -0.00086,
+     "nullSd": 0.00585,
+     "z": 19.41
+    },
+    "rareCurve": {
+     "v": 0.07732,
+     "nullMean": -0.00066,
+     "nullSd": 0.00681,
+     "z": 11.44
+    },
+    "fnBefore": {
+     "v": 0.02465,
+     "nullMean": 0.00032,
+     "nullSd": 0.00518,
+     "z": 4.7
+    },
+    "depLen": {
+     "v": 0.01234,
+     "nullMean": 0.00226,
+     "nullSd": 0.00228,
+     "z": 4.42
+    },
+    "initDev": {
+     "v": -0.0152,
+     "nullMean": -0.00144,
+     "nullSd": 0.01345,
+     "z": -1.02
+    },
+    "finalDev": {
+     "v": 0.44533,
+     "nullMean": -0.00785,
+     "nullSd": 0.02774,
+     "z": 16.34
+    },
+    "surprGrow": {
+     "v": -0.11356,
+     "nullMean": 0.00128,
+     "nullSd": 0.00577,
+     "z": -19.92
+    },
+    "entSlope": {
+     "v": -0.01937,
+     "nullMean": 0.00033,
+     "nullSd": 0.00209,
+     "z": -9.43
+    },
+    "entCurv": {
+     "v": 0.0076,
+     "nullMean": 0.00008,
+     "nullSd": 0.00189,
+     "z": 3.98
+    },
+    "branch": {
+     "v": 0.02198,
+     "nullMean": -0.00313,
+     "nullSd": 0.01266,
+     "z": 1.98
+    },
+    "asym": {
+     "v": 0.01056,
+     "nullMean": -0.00038,
+     "nullSd": 0.00038,
+     "z": 28.94
+    }
+   }
+  }
+ },
+ "cd-cc-python": {
+  "tokens": 291072,
+  "units": 67773,
+  "meanUnitLen": 4.29,
+  "cpuSec": {
+   "discover": 0.047,
+   "confirm": 0.019
+  },
+  "halves": {
+   "discover": {
+    "tokens": 140520,
+    "rareSlope": {
+     "v": 0.1021,
+     "nullMean": 0.00004,
+     "nullSd": 0.00291,
+     "z": 35.07
+    },
+    "rareCurve": {
+     "v": -0.00403,
+     "nullMean": -0.0008,
+     "nullSd": 0.00382,
+     "z": -0.85
+    },
+    "fnBefore": {
+     "v": 0.0473,
+     "nullMean": 0.00114,
+     "nullSd": 0.00309,
+     "z": 14.93
+    },
+    "depLen": {
+     "v": 0.00245,
+     "nullMean": 0.00016,
+     "nullSd": 0.00276,
+     "z": 0.83
+    },
+    "initDev": {
+     "v": -0.21708,
+     "nullMean": 0.00068,
+     "nullSd": 0.00731,
+     "z": -29.78
+    },
+    "finalDev": {
+     "v": 0.2064,
+     "nullMean": -0.00062,
+     "nullSd": 0.00436,
+     "z": 47.53
+    },
+    "surprGrow": {
+     "v": -0.0306,
+     "nullMean": -0.00125,
+     "nullSd": 0.00218,
+     "z": -13.44
+    },
+    "entSlope": {
+     "v": -0.02247,
+     "nullMean": 0.00004,
+     "nullSd": 0.00099,
+     "z": -22.63
+    },
+    "entCurv": {
+     "v": 0.00149,
+     "nullMean": -0.0003,
+     "nullSd": 0.00056,
+     "z": 3.2
+    },
+    "branch": {
+     "v": -0.13082,
+     "nullMean": -0.0004,
+     "nullSd": 0.00559,
+     "z": -23.34
+    },
+    "asym": {
+     "v": 0.04831,
+     "nullMean": -0.00015,
+     "nullSd": 0.00011,
+     "z": 430.77
+    }
+   },
+   "confirm": {
+    "tokens": 150354,
+    "rareSlope": {
+     "v": 0.11965,
+     "nullMean": 0.00121,
+     "nullSd": 0.0029,
+     "z": 40.86
+    },
+    "rareCurve": {
+     "v": -0.00227,
+     "nullMean": 0.00042,
+     "nullSd": 0.00262,
+     "z": -1.03
+    },
+    "fnBefore": {
+     "v": 0.05927,
+     "nullMean": -0.00048,
+     "nullSd": 0.00433,
+     "z": 13.79
+    },
+    "depLen": {
+     "v": -0.01808,
+     "nullMean": 0.00172,
+     "nullSd": 0.0037,
+     "z": -5.35
+    },
+    "initDev": {
+     "v": -0.22791,
+     "nullMean": -0.00177,
+     "nullSd": 0.00554,
+     "z": -40.82
+    },
+    "finalDev": {
+     "v": 0.22391,
+     "nullMean": 0.00243,
+     "nullSd": 0.00435,
+     "z": 50.91
+    },
+    "surprGrow": {
+     "v": -0.03629,
+     "nullMean": 0.00007,
+     "nullSd": 0.00228,
+     "z": -15.91
+    },
+    "entSlope": {
+     "v": -0.01897,
+     "nullMean": 0.00002,
+     "nullSd": 0.00105,
+     "z": -18.04
+    },
+    "entCurv": {
+     "v": 0.00087,
+     "nullMean": 0,
+     "nullSd": 0.00079,
+     "z": 1.1
+    },
+    "branch": {
+     "v": -0.10673,
+     "nullMean": -0.00312,
+     "nullSd": 0.00596,
+     "z": -17.38
+    },
+    "asym": {
+     "v": 0.04276,
+     "nullMean": -0.00008,
+     "nullSd": 0.00011,
+     "z": 403.84
+    }
+   }
+  }
+ },
+ "cd-cc-javascript": {
+  "tokens": 164505,
+  "units": 48308,
+  "meanUnitLen": 3.41,
+  "cpuSec": {
+   "discover": 0.011,
+   "confirm": 0.011
+  },
+  "halves": {
+   "discover": {
+    "tokens": 85435,
+    "rareSlope": {
+     "v": 0.26687,
+     "nullMean": 0.00276,
+     "nullSd": 0.00297,
+     "z": 88.86
+    },
+    "rareCurve": {
+     "v": -0.20749,
+     "nullMean": 0.00136,
+     "nullSd": 0.00355,
+     "z": -58.81
+    },
+    "fnBefore": {
+     "v": 0.07903,
+     "nullMean": -0.00007,
+     "nullSd": 0.00664,
+     "z": 11.92
+    },
+    "depLen": {
+     "v": 0.00147,
+     "nullMean": -0.00022,
+     "nullSd": 0.00506,
+     "z": 0.33
+    },
+    "initDev": {
+     "v": -0.65559,
+     "nullMean": -0.0015,
+     "nullSd": 0.00857,
+     "z": -76.36
+    },
+    "finalDev": {
+     "v": 0.204,
+     "nullMean": 0.00403,
+     "nullSd": 0.00601,
+     "z": 33.28
+    },
+    "surprGrow": {
+     "v": 0.05007,
+     "nullMean": -0.00175,
+     "nullSd": 0.00478,
+     "z": 10.83
+    },
+    "entSlope": {
+     "v": -0.05237,
+     "nullMean": -0.0002,
+     "nullSd": 0.0016,
+     "z": -32.64
+    },
+    "entCurv": {
+     "v": -0.03032,
+     "nullMean": 0.00032,
+     "nullSd": 0.0012,
+     "z": -25.5
+    },
+    "branch": {
+     "v": -0.09535,
+     "nullMean": 0.00235,
+     "nullSd": 0.00645,
+     "z": -15.14
+    },
+    "asym": {
+     "v": 0.10085,
+     "nullMean": -0.00018,
+     "nullSd": 0.00026,
+     "z": 389.49
+    }
+   },
+   "confirm": {
+    "tokens": 79070,
+    "rareSlope": {
+     "v": 0.27297,
+     "nullMean": -0.00139,
+     "nullSd": 0.00268,
+     "z": 102.28
+    },
+    "rareCurve": {
+     "v": -0.16975,
+     "nullMean": 0.00084,
+     "nullSd": 0.00288,
+     "z": -59.14
+    },
+    "fnBefore": {
+     "v": 0.07809,
+     "nullMean": -0.00122,
+     "nullSd": 0.0041,
+     "z": 19.36
+    },
+    "depLen": {
+     "v": -0.01566,
+     "nullMean": 0.00132,
+     "nullSd": 0.00337,
+     "z": -5.03
+    },
+    "initDev": {
+     "v": -0.63546,
+     "nullMean": 0.00024,
+     "nullSd": 0.00463,
+     "z": -137.34
+    },
+    "finalDev": {
+     "v": 0.25251,
+     "nullMean": 0.0007,
+     "nullSd": 0.00716,
+     "z": 35.19
+    },
+    "surprGrow": {
+     "v": 0.0385,
+     "nullMean": 0.0004,
+     "nullSd": 0.00179,
+     "z": 21.22
+    },
+    "entSlope": {
+     "v": -0.07427,
+     "nullMean": 0.00059,
+     "nullSd": 0.00138,
+     "z": -54.14
+    },
+    "entCurv": {
+     "v": -0.0263,
+     "nullMean": 0.00027,
+     "nullSd": 0.0009,
+     "z": -29.64
+    },
+    "branch": {
+     "v": -0.12971,
+     "nullMean": 0.0016,
+     "nullSd": 0.00678,
+     "z": -19.38
+    },
+    "asym": {
+     "v": 0.07501,
+     "nullMean": -0.00019,
+     "nullSd": 0.0002,
+     "z": 373.52
+    }
+   }
+  }
+ },
+ "cd-cc-rust": {
+  "tokens": 292681,
+  "units": 67048,
+  "meanUnitLen": 4.37,
+  "cpuSec": {
+   "discover": 0.019,
+   "confirm": 0.017
+  },
+  "halves": {
+   "discover": {
+    "tokens": 150045,
+    "rareSlope": {
+     "v": 0.21744,
+     "nullMean": -0.00017,
+     "nullSd": 0.00454,
+     "z": 47.92
+    },
+    "rareCurve": {
+     "v": -0.15354,
+     "nullMean": 0.00194,
+     "nullSd": 0.0023,
+     "z": -67.73
+    },
+    "fnBefore": {
+     "v": 0.0498,
+     "nullMean": 0.0007,
+     "nullSd": 0.0041,
+     "z": 11.98
+    },
+    "depLen": {
+     "v": -0.00366,
+     "nullMean": 0.00122,
+     "nullSd": 0.00147,
+     "z": -3.32
+    },
+    "initDev": {
+     "v": -0.5714,
+     "nullMean": 0.00235,
+     "nullSd": 0.0075,
+     "z": -76.5
+    },
+    "finalDev": {
+     "v": 0.19288,
+     "nullMean": 0.00253,
+     "nullSd": 0.0071,
+     "z": 26.83
+    },
+    "surprGrow": {
+     "v": 0.06183,
+     "nullMean": -0.00104,
+     "nullSd": 0.00365,
+     "z": 17.23
+    },
+    "entSlope": {
+     "v": -0.05929,
+     "nullMean": -0.00036,
+     "nullSd": 0.00104,
+     "z": -56.73
+    },
+    "entCurv": {
+     "v": -0.01694,
+     "nullMean": 0.00001,
+     "nullSd": 0.00066,
+     "z": -25.54
+    },
+    "branch": {
+     "v": 0.01385,
+     "nullMean": 0.00023,
+     "nullSd": 0.00389,
+     "z": 3.5
+    },
+    "asym": {
+     "v": 0.06648,
+     "nullMean": -0.00007,
+     "nullSd": 0.00014,
+     "z": 480.66
+    }
+   },
+   "confirm": {
+    "tokens": 138185,
+    "rareSlope": {
+     "v": 0.22999,
+     "nullMean": -0.00123,
+     "nullSd": 0.0035,
+     "z": 66.05
+    },
+    "rareCurve": {
+     "v": -0.14167,
+     "nullMean": 0.00117,
+     "nullSd": 0.00366,
+     "z": -39.06
+    },
+    "fnBefore": {
+     "v": 0.06463,
+     "nullMean": -0.00135,
+     "nullSd": 0.00665,
+     "z": 9.93
+    },
+    "depLen": {
+     "v": -0.00591,
+     "nullMean": -0.00145,
+     "nullSd": 0.00293,
+     "z": -1.52
+    },
+    "initDev": {
+     "v": -0.59782,
+     "nullMean": 0.00371,
+     "nullSd": 0.00633,
+     "z": -95.1
+    },
+    "finalDev": {
+     "v": 0.23932,
+     "nullMean": 0.00026,
+     "nullSd": 0.00854,
+     "z": 28.01
+    },
+    "surprGrow": {
+     "v": 0.04551,
+     "nullMean": -0.00011,
+     "nullSd": 0.00372,
+     "z": 12.26
+    },
+    "entSlope": {
+     "v": -0.06353,
+     "nullMean": 0.00042,
+     "nullSd": 0.00103,
+     "z": -61.94
+    },
+    "entCurv": {
+     "v": -0.01795,
+     "nullMean": 0.00013,
+     "nullSd": 0.0009,
+     "z": -20.05
+    },
+    "branch": {
+     "v": 0.0127,
+     "nullMean": -0.00056,
+     "nullSd": 0.00612,
+     "z": 2.17
+    },
+    "asym": {
+     "v": 0.08676,
+     "nullMean": -0.00011,
+     "nullSd": 0.0001,
+     "z": 912.55
+    }
+   }
+  }
+ },
+ "cd-cc-java": {
+  "tokens": 238179,
+  "units": 49943,
+  "meanUnitLen": 4.77,
+  "cpuSec": {
+   "discover": 0.013,
+   "confirm": 0.014
+  },
+  "halves": {
+   "discover": {
+    "tokens": 112019,
+    "rareSlope": {
+     "v": 0.35033,
+     "nullMean": 0.00287,
+     "nullSd": 0.00313,
+     "z": 111.02
+    },
+    "rareCurve": {
+     "v": -0.12053,
+     "nullMean": 0.00018,
+     "nullSd": 0.00511,
+     "z": -23.62
+    },
+    "fnBefore": {
+     "v": 0.06749,
+     "nullMean": -0.00131,
+     "nullSd": 0.00556,
+     "z": 12.37
+    },
+    "depLen": {
+     "v": -0.03197,
+     "nullMean": -0.00108,
+     "nullSd": 0.00214,
+     "z": -14.44
+    },
+    "initDev": {
+     "v": -0.66797,
+     "nullMean": -0.00358,
+     "nullSd": 0.00864,
+     "z": -76.92
+    },
+    "finalDev": {
+     "v": 0.42798,
+     "nullMean": 0.00445,
+     "nullSd": 0.0067,
+     "z": 63.21
+    },
+    "surprGrow": {
+     "v": 0.05268,
+     "nullMean": -0.00073,
+     "nullSd": 0.00327,
+     "z": 16.32
+    },
+    "entSlope": {
+     "v": -0.06366,
+     "nullMean": -0.00065,
+     "nullSd": 0.0009,
+     "z": -70.29
+    },
+    "entCurv": {
+     "v": -0.02133,
+     "nullMean": 0.00034,
+     "nullSd": 0.0008,
+     "z": -27.23
+    },
+    "branch": {
+     "v": 0.11538,
+     "nullMean": 0.00244,
+     "nullSd": 0.00614,
+     "z": 18.41
+    },
+    "asym": {
+     "v": 0.09138,
+     "nullMean": -0.00022,
+     "nullSd": 0.00013,
+     "z": 727.9
+    }
+   },
+   "confirm": {
+    "tokens": 126160,
+    "rareSlope": {
+     "v": 0.40541,
+     "nullMean": -0.00069,
+     "nullSd": 0.00169,
+     "z": 240.45
+    },
+    "rareCurve": {
+     "v": -0.11031,
+     "nullMean": 0.00063,
+     "nullSd": 0.003,
+     "z": -37.03
+    },
+    "fnBefore": {
+     "v": 0.10116,
+     "nullMean": -0.00015,
+     "nullSd": 0.00449,
+     "z": 22.57
+    },
+    "depLen": {
+     "v": -0.0473,
+     "nullMean": -0.00122,
+     "nullSd": 0.00487,
+     "z": -9.47
+    },
+    "initDev": {
+     "v": -0.73381,
+     "nullMean": 0.00115,
+     "nullSd": 0.00267,
+     "z": -274.75
+    },
+    "finalDev": {
+     "v": 0.52589,
+     "nullMean": -0.00008,
+     "nullSd": 0.00603,
+     "z": 87.18
+    },
+    "surprGrow": {
+     "v": 0.04763,
+     "nullMean": -0.00027,
+     "nullSd": 0.00164,
+     "z": 29.22
+    },
+    "entSlope": {
+     "v": -0.04068,
+     "nullMean": -0.00038,
+     "nullSd": 0.00113,
+     "z": -35.71
+    },
+    "entCurv": {
+     "v": -0.00846,
+     "nullMean": 0.00025,
+     "nullSd": 0.00078,
+     "z": -11.22
+    },
+    "branch": {
+     "v": 0.17222,
+     "nullMean": 0.00065,
+     "nullSd": 0.00414,
+     "z": 41.45
+    },
+    "asym": {
+     "v": 0.1179,
+     "nullMean": -0.00013,
+     "nullSd": 0.00012,
+     "z": 948.67
+    }
+   }
+  }
+ },
+ "cd-cc-haskell": {
+  "tokens": 291410,
+  "units": 61219,
+  "meanUnitLen": 4.76,
+  "cpuSec": {
+   "discover": 0.018,
+   "confirm": 0.02
+  },
+  "halves": {
+   "discover": {
+    "tokens": 143488,
+    "rareSlope": {
+     "v": -0.0004,
+     "nullMean": 0.00089,
+     "nullSd": 0.00297,
+     "z": -0.43
+    },
+    "rareCurve": {
+     "v": -0.03756,
+     "nullMean": -0.00025,
+     "nullSd": 0.0026,
+     "z": -14.33
+    },
+    "fnBefore": {
+     "v": 0.01672,
+     "nullMean": 0.00002,
+     "nullSd": 0.00504,
+     "z": 3.31
+    },
+    "depLen": {
+     "v": 0.00986,
+     "nullMean": 0.00103,
+     "nullSd": 0.00342,
+     "z": 2.58
+    },
+    "initDev": {
+     "v": -0.02997,
+     "nullMean": -0.00106,
+     "nullSd": 0.00574,
+     "z": -5.04
+    },
+    "finalDev": {
+     "v": -0.06406,
+     "nullMean": 0.00063,
+     "nullSd": 0.00454,
+     "z": -14.23
+    },
+    "surprGrow": {
+     "v": 0.06011,
+     "nullMean": -0.00134,
+     "nullSd": 0.0031,
+     "z": 19.83
+    },
+    "entSlope": {
+     "v": -0.00722,
+     "nullMean": -0.00017,
+     "nullSd": 0.00127,
+     "z": -5.57
+    },
+    "entCurv": {
+     "v": -0.01081,
+     "nullMean": 0.00018,
+     "nullSd": 0.00114,
+     "z": -9.67
+    },
+    "branch": {
+     "v": -0.00412,
+     "nullMean": -0.00183,
+     "nullSd": 0.00571,
+     "z": -0.4
+    },
+    "asym": {
+     "v": 0.02701,
+     "nullMean": -0.00013,
+     "nullSd": 0.00013,
+     "z": 205.57
+    }
+   },
+   "confirm": {
+    "tokens": 147922,
+    "rareSlope": {
+     "v": -0.00175,
+     "nullMean": -0.00006,
+     "nullSd": 0.00286,
+     "z": -0.59
+    },
+    "rareCurve": {
+     "v": -0.02368,
+     "nullMean": -0.00088,
+     "nullSd": 0.00249,
+     "z": -9.17
+    },
+    "fnBefore": {
+     "v": 0.01081,
+     "nullMean": 0.00155,
+     "nullSd": 0.00399,
+     "z": 2.32
+    },
+    "depLen": {
+     "v": -0.0035,
+     "nullMean": 0.00016,
+     "nullSd": 0.00374,
+     "z": -0.98
+    },
+    "initDev": {
+     "v": -0.02041,
+     "nullMean": 0.0002,
+     "nullSd": 0.00538,
+     "z": -3.83
+    },
+    "finalDev": {
+     "v": -0.03081,
+     "nullMean": -0.00312,
+     "nullSd": 0.00483,
+     "z": -5.73
+    },
+    "surprGrow": {
+     "v": 0.03777,
+     "nullMean": -0.00072,
+     "nullSd": 0.00356,
+     "z": 10.8
+    },
+    "entSlope": {
+     "v": -0.00469,
+     "nullMean": -0.00013,
+     "nullSd": 0.00087,
+     "z": -5.25
+    },
+    "entCurv": {
+     "v": -0.01036,
+     "nullMean": 0.00004,
+     "nullSd": 0.00069,
+     "z": -15
+    },
+    "branch": {
+     "v": 0.01847,
+     "nullMean": -0.00121,
+     "nullSd": 0.0055,
+     "z": 3.58
+    },
+    "asym": {
+     "v": 0.02371,
+     "nullMean": -0.00012,
+     "nullSd": 0.00015,
+     "z": 162.86
+    }
+   }
+  }
+ },
+ "cd-cc-json": {
+  "tokens": 294773,
+  "units": 65981,
+  "meanUnitLen": 4.47,
+  "cpuSec": {
+   "discover": 0.023,
+   "confirm": 0.018
+  },
+  "halves": {
+   "discover": {
+    "tokens": 151191,
+    "rareSlope": {
+     "v": 0.07413,
+     "nullMean": 0.00014,
+     "nullSd": 0.0051,
+     "z": 14.52
+    },
+    "rareCurve": {
+     "v": 0.07406,
+     "nullMean": 0.00038,
+     "nullSd": 0.00343,
+     "z": 21.48
+    },
+    "fnBefore": {
+     "v": 0.00699,
+     "nullMean": -0.00089,
+     "nullSd": 0.00255,
+     "z": 3.09
+    },
+    "depLen": {
+     "v": -0.00652,
+     "nullMean": -0.00057,
+     "nullSd": 0.00223,
+     "z": -2.67
+    },
+    "initDev": {
+     "v": 0.06975,
+     "nullMean": -0.00041,
+     "nullSd": 0.00706,
+     "z": 9.94
+    },
+    "finalDev": {
+     "v": 0.15899,
+     "nullMean": 0.0011,
+     "nullSd": 0.00836,
+     "z": 18.89
+    },
+    "surprGrow": {
+     "v": -0.06234,
+     "nullMean": 0.00012,
+     "nullSd": 0.0046,
+     "z": -13.58
+    },
+    "entSlope": {
+     "v": 0.00444,
+     "nullMean": 0.00009,
+     "nullSd": 0.00211,
+     "z": 2.06
+    },
+    "entCurv": {
+     "v": 0.01674,
+     "nullMean": 0,
+     "nullSd": 0.00076,
+     "z": 22.17
+    },
+    "branch": {
+     "v": 0.01065,
+     "nullMean": -0.00053,
+     "nullSd": 0.00469,
+     "z": 2.38
+    },
+    "asym": {
+     "v": 0.02287,
+     "nullMean": -0.00018,
+     "nullSd": 0.00008,
+     "z": 284.68
+    }
+   },
+   "confirm": {
+    "tokens": 139338,
+    "rareSlope": {
+     "v": 0.07573,
+     "nullMean": 0.00267,
+     "nullSd": 0.00257,
+     "z": 28.42
+    },
+    "rareCurve": {
+     "v": 0.0656,
+     "nullMean": 0.0001,
+     "nullSd": 0.0031,
+     "z": 21.12
+    },
+    "fnBefore": {
+     "v": 0.03119,
+     "nullMean": 0.00056,
+     "nullSd": 0.00275,
+     "z": 11.14
+    },
+    "depLen": {
+     "v": -0.00615,
+     "nullMean": -0.0019,
+     "nullSd": 0.00184,
+     "z": -2.32
+    },
+    "initDev": {
+     "v": 0.055,
+     "nullMean": -0.00396,
+     "nullSd": 0.00652,
+     "z": 9.05
+    },
+    "finalDev": {
+     "v": 0.18513,
+     "nullMean": 0.00371,
+     "nullSd": 0.00641,
+     "z": 28.28
+    },
+    "surprGrow": {
+     "v": -0.05525,
+     "nullMean": -0.00145,
+     "nullSd": 0.00252,
+     "z": -21.34
+    },
+    "entSlope": {
+     "v": 0.00374,
+     "nullMean": -0.00074,
+     "nullSd": 0.00098,
+     "z": 4.57
+    },
+    "entCurv": {
+     "v": 0.00967,
+     "nullMean": -0.0003,
+     "nullSd": 0.0009,
+     "z": 11.04
+    },
+    "branch": {
+     "v": -0.01039,
+     "nullMean": 0.00187,
+     "nullSd": 0.00326,
+     "z": -3.77
+    },
+    "asym": {
+     "v": 0.01697,
+     "nullMean": -0.00013,
+     "nullSd": 0.00012,
+     "z": 139.86
+    }
+   }
+  }
+ },
+ "cd-cc-sql": {
+  "tokens": 142489,
+  "units": 26187,
+  "meanUnitLen": 5.44,
+  "cpuSec": {
+   "discover": 0.008,
+   "confirm": 0.007
+  },
+  "halves": {
+   "discover": {
+    "tokens": 76127,
+    "rareSlope": {
+     "v": 0.07822,
+     "nullMean": 0.00177,
+     "nullSd": 0.00481,
+     "z": 15.88
+    },
+    "rareCurve": {
+     "v": 0.04392,
+     "nullMean": 0.00054,
+     "nullSd": 0.00261,
+     "z": 16.6
+    },
+    "fnBefore": {
+     "v": 0.03857,
+     "nullMean": 0.00268,
+     "nullSd": 0.00639,
+     "z": 5.62
+    },
+    "depLen": {
+     "v": -0.08427,
+     "nullMean": -0.00145,
+     "nullSd": 0.00521,
+     "z": -15.9
+    },
+    "initDev": {
+     "v": 0.02645,
+     "nullMean": -0.00484,
+     "nullSd": 0.01027,
+     "z": 3.05
+    },
+    "finalDev": {
+     "v": 0.16936,
+     "nullMean": 0.00443,
+     "nullSd": 0.01096,
+     "z": 15.04
+    },
+    "surprGrow": {
+     "v": -0.01701,
+     "nullMean": -0.00184,
+     "nullSd": 0.00402,
+     "z": -3.77
+    },
+    "entSlope": {
+     "v": 0.02781,
+     "nullMean": 0.00073,
+     "nullSd": 0.00072,
+     "z": 37.81
+    },
+    "entCurv": {
+     "v": 0.01851,
+     "nullMean": -0.00018,
+     "nullSd": 0.00074,
+     "z": 25.31
+    },
+    "branch": {
+     "v": 0.178,
+     "nullMean": -0.00028,
+     "nullSd": 0.00822,
+     "z": 21.68
+    },
+    "asym": {
+     "v": 0.11262,
+     "nullMean": -0.00019,
+     "nullSd": 0.00021,
+     "z": 535.04
+    }
+   },
+   "confirm": {
+    "tokens": 66362,
+    "rareSlope": {
+     "v": 0.09827,
+     "nullMean": -0.00029,
+     "nullSd": 0.00468,
+     "z": 21.08
+    },
+    "rareCurve": {
+     "v": 0.08701,
+     "nullMean": -0.00073,
+     "nullSd": 0.00448,
+     "z": 19.58
+    },
+    "fnBefore": {
+     "v": 0.09523,
+     "nullMean": -0.00417,
+     "nullSd": 0.00654,
+     "z": 15.19
+    },
+    "depLen": {
+     "v": 0.00512,
+     "nullMean": -0.00101,
+     "nullSd": 0.00487,
+     "z": 1.26
+    },
+    "initDev": {
+     "v": 0.02203,
+     "nullMean": 0.00118,
+     "nullSd": 0.00861,
+     "z": 2.42
+    },
+    "finalDev": {
+     "v": 0.2598,
+     "nullMean": -0.00239,
+     "nullSd": 0.0105,
+     "z": 24.98
+    },
+    "surprGrow": {
+     "v": -0.04144,
+     "nullMean": 0.00022,
+     "nullSd": 0.00463,
+     "z": -9
+    },
+    "entSlope": {
+     "v": 0.01733,
+     "nullMean": -0.00017,
+     "nullSd": 0.00094,
+     "z": 18.62
+    },
+    "entCurv": {
+     "v": 0.02832,
+     "nullMean": -0.0003,
+     "nullSd": 0.00086,
+     "z": 33.39
+    },
+    "branch": {
+     "v": 0.1969,
+     "nullMean": 0.00142,
+     "nullSd": 0.00852,
+     "z": 22.96
+    },
+    "asym": {
+     "v": 0.12827,
+     "nullMean": -0.00002,
+     "nullSd": 0.00031,
+     "z": 417.93
+    }
+   }
+  }
+ },
+ "cd-chess-lichess": {
+  "tokens": 291221,
+  "units": 4325,
+  "meanUnitLen": 67.33,
+  "cpuSec": {
+   "discover": 0.017,
+   "confirm": 0.018
+  },
+  "halves": {
+   "discover": {
+    "tokens": 139548,
+    "rareSlope": {
+     "v": 0.45312,
+     "nullMean": 0.00003,
+     "nullSd": 0.00323,
+     "z": 140.11
+    },
+    "rareCurve": {
+     "v": -0.20461,
+     "nullMean": -0.00051,
+     "nullSd": 0.00314,
+     "z": -64.98
+    },
+    "fnBefore": {
+     "v": 0.01148,
+     "nullMean": -0.00091,
+     "nullSd": 0.0032,
+     "z": 3.87
+    },
+    "depLen": {
+     "v": -0.17657,
+     "nullMean": 0.00096,
+     "nullSd": 0.00211,
+     "z": -84.18
+    },
+    "initDev": {
+     "v": -1.76459,
+     "nullMean": -0.01133,
+     "nullSd": 0.02506,
+     "z": -69.97
+    },
+    "finalDev": {
+     "v": 0.7193,
+     "nullMean": -0.00098,
+     "nullSd": 0.02752,
+     "z": 26.17
+    },
+    "surprGrow": {
+     "v": 0.08092,
+     "nullMean": 0.00101,
+     "nullSd": 0.00277,
+     "z": 28.8
+    },
+    "entSlope": {
+     "v": -0.14676,
+     "nullMean": 0,
+     "nullSd": 0.00219,
+     "z": -67.07
+    },
+    "entCurv": {
+     "v": -0.00765,
+     "nullMean": -0.00077,
+     "nullSd": 0.00185,
+     "z": -3.71
+    },
+    "branch": {
+     "v": 0.05584,
+     "nullMean": 0.00011,
+     "nullSd": 0.00362,
+     "z": 15.41
+    },
+    "asym": {
+     "v": 0.00795,
+     "nullMean": -0.00009,
+     "nullSd": 0.00005,
+     "z": 151.96
+    }
+   },
+   "confirm": {
+    "tokens": 151673,
+    "rareSlope": {
+     "v": 0.46099,
+     "nullMean": -0.00163,
+     "nullSd": 0.00137,
+     "z": 337.27
+    },
+    "rareCurve": {
+     "v": -0.19859,
+     "nullMean": -0.00066,
+     "nullSd": 0.0025,
+     "z": -79.28
+    },
+    "fnBefore": {
+     "v": 0.00782,
+     "nullMean": 0.00084,
+     "nullSd": 0.00371,
+     "z": 1.88
+    },
+    "depLen": {
+     "v": -0.17531,
+     "nullMean": -0.00062,
+     "nullSd": 0.00161,
+     "z": -108.4
+    },
+    "initDev": {
+     "v": -1.70333,
+     "nullMean": 0.01184,
+     "nullSd": 0.01746,
+     "z": -98.23
+    },
+    "finalDev": {
+     "v": 0.73315,
+     "nullMean": -0.00223,
+     "nullSd": 0.01857,
+     "z": 39.59
+    },
+    "surprGrow": {
+     "v": 0.08087,
+     "nullMean": 0.00051,
+     "nullSd": 0.00244,
+     "z": 32.89
+    },
+    "entSlope": {
+     "v": -0.14947,
+     "nullMean": 0.00114,
+     "nullSd": 0.0019,
+     "z": -79.21
+    },
+    "entCurv": {
+     "v": -0.0054,
+     "nullMean": -0.00011,
+     "nullSd": 0.00082,
+     "z": -6.43
+    },
+    "branch": {
+     "v": 0.05424,
+     "nullMean": -0.00001,
+     "nullSd": 0.00309,
+     "z": 17.53
+    },
+    "asym": {
+     "v": 0.00791,
+     "nullMean": -0.00011,
+     "nullSd": 0.00006,
+     "z": 125.79
+    }
+   }
+  }
+ },
+ "cd-smiles-chebi": {
+  "tokens": 94307,
+  "units": 2961,
+  "meanUnitLen": 31.85,
+  "cpuSec": {
+   "discover": 0.005,
+   "confirm": 0.004
+  },
+  "halves": {
+   "discover": {
+    "tokens": 46596,
+    "rareSlope": {
+     "v": 0.05679,
+     "nullMean": -0.00052,
+     "nullSd": 0.00597,
+     "z": 9.6
+    },
+    "rareCurve": {
+     "v": -0.01382,
+     "nullMean": 0.00193,
+     "nullSd": 0.00398,
+     "z": -3.96
+    },
+    "fnBefore": {
+     "v": null,
+     "nullMean": null,
+     "nullSd": null,
+     "z": null
+    },
+    "depLen": {
+     "v": -0.06961,
+     "nullMean": -0.00028,
+     "nullSd": 0.0016,
+     "z": -43.31
+    },
+    "initDev": {
+     "v": -0.13208,
+     "nullMean": 0.0109,
+     "nullSd": 0.02784,
+     "z": -5.14
+    },
+    "finalDev": {
+     "v": 0.19752,
+     "nullMean": 0.00101,
+     "nullSd": 0.0245,
+     "z": 8.02
+    },
+    "surprGrow": {
+     "v": -0.02886,
+     "nullMean": 0.00093,
+     "nullSd": 0.00372,
+     "z": -8.02
+    },
+    "entSlope": {
+     "v": 0.02071,
+     "nullMean": -0.00101,
+     "nullSd": 0.00667,
+     "z": 3.26
+    },
+    "entCurv": {
+     "v": 0.00775,
+     "nullMean": -0.00141,
+     "nullSd": 0.00348,
+     "z": 2.64
+    },
+    "branch": {
+     "v": 0.01973,
+     "nullMean": 0.00308,
+     "nullSd": 0.00896,
+     "z": 1.86
+    },
+    "asym": {
+     "v": 0.02941,
+     "nullMean": -0.00029,
+     "nullSd": 0.00011,
+     "z": 277.12
+    }
+   },
+   "confirm": {
+    "tokens": 47711,
+    "rareSlope": {
+     "v": 0.07135,
+     "nullMean": 0.00276,
+     "nullSd": 0.00498,
+     "z": 13.77
+    },
+    "rareCurve": {
+     "v": 0.00057,
+     "nullMean": 0.00057,
+     "nullSd": 0.00617,
+     "z": 0
+    },
+    "fnBefore": {
+     "v": null,
+     "nullMean": null,
+     "nullSd": null,
+     "z": null
+    },
+    "depLen": {
+     "v": -0.0827,
+     "nullMean": -0.00076,
+     "nullSd": 0.00283,
+     "z": -28.92
+    },
+    "initDev": {
+     "v": -0.11403,
+     "nullMean": -0.00776,
+     "nullSd": 0.03409,
+     "z": -3.12
+    },
+    "finalDev": {
+     "v": 0.23462,
+     "nullMean": 0.00232,
+     "nullSd": 0.02072,
+     "z": 11.21
+    },
+    "surprGrow": {
+     "v": -0.03754,
+     "nullMean": 0.00028,
+     "nullSd": 0.00647,
+     "z": -5.84
+    },
+    "entSlope": {
+     "v": 0.00736,
+     "nullMean": 0.00229,
+     "nullSd": 0.00466,
+     "z": 1.09
+    },
+    "entCurv": {
+     "v": -0.00047,
+     "nullMean": -0.00125,
+     "nullSd": 0.00626,
+     "z": 0.12
+    },
+    "branch": {
+     "v": 0.02292,
+     "nullMean": 0.00299,
+     "nullSd": 0.00726,
+     "z": 2.74
+    },
+    "asym": {
+     "v": 0.02754,
+     "nullMean": -0.00026,
+     "nullSd": 0.0001,
+     "z": 268.39
+    }
+   }
+  }
+ },
+ "cd-protein-aa": {
+  "tokens": 293973,
+  "units": 894,
+  "meanUnitLen": 328.83,
+  "cpuSec": {
+   "discover": 0.005,
+   "confirm": 0.004
+  },
+  "halves": {
+   "discover": {
+    "tokens": 151380,
+    "rareSlope": {
+     "v": null,
+     "nullMean": null,
+     "nullSd": null,
+     "z": null
+    },
+    "rareCurve": {
+     "v": null,
+     "nullMean": null,
+     "nullSd": null,
+     "z": null
+    },
+    "fnBefore": {
+     "v": null,
+     "nullMean": null,
+     "nullSd": null,
+     "z": null
+    },
+    "depLen": {
+     "v": null,
+     "nullMean": null,
+     "nullSd": null,
+     "z": null
+    },
+    "initDev": {
+     "v": null,
+     "nullMean": null,
+     "nullSd": null,
+     "z": null
+    },
+    "finalDev": {
+     "v": null,
+     "nullMean": null,
+     "nullSd": null,
+     "z": null
+    },
+    "surprGrow": {
+     "v": null,
+     "nullMean": null,
+     "nullSd": null,
+     "z": null
+    },
+    "entSlope": {
+     "v": null,
+     "nullMean": null,
+     "nullSd": null,
+     "z": null
+    },
+    "entCurv": {
+     "v": null,
+     "nullMean": null,
+     "nullSd": null,
+     "z": null
+    },
+    "branch": {
+     "v": null,
+     "nullMean": null,
+     "nullSd": null,
+     "z": null
+    },
+    "asym": {
+     "v": null,
+     "nullMean": null,
+     "nullSd": null,
+     "z": null
+    }
+   },
+   "confirm": {
+    "tokens": 118810,
+    "rareSlope": {
+     "v": null,
+     "nullMean": null,
+     "nullSd": null,
+     "z": null
+    },
+    "rareCurve": {
+     "v": null,
+     "nullMean": null,
+     "nullSd": null,
+     "z": null
+    },
+    "fnBefore": {
+     "v": null,
+     "nullMean": null,
+     "nullSd": null,
+     "z": null
+    },
+    "depLen": {
+     "v": null,
+     "nullMean": null,
+     "nullSd": null,
+     "z": null
+    },
+    "initDev": {
+     "v": null,
+     "nullMean": null,
+     "nullSd": null,
+     "z": null
+    },
+    "finalDev": {
+     "v": null,
+     "nullMean": null,
+     "nullSd": null,
+     "z": null
+    },
+    "surprGrow": {
+     "v": null,
+     "nullMean": null,
+     "nullSd": null,
+     "z": null
+    },
+    "entSlope": {
+     "v": null,
+     "nullMean": null,
+     "nullSd": null,
+     "z": null
+    },
+    "entCurv": {
+     "v": null,
+     "nullMean": null,
+     "nullSd": null,
+     "z": null
+    },
+    "branch": {
+     "v": null,
+     "nullMean": null,
+     "nullSd": null,
+     "z": null
+    },
+    "asym": {
+     "v": null,
+     "nullMean": null,
+     "nullSd": null,
+     "z": null
+    }
+   }
+  }
+ },
+ "cd-cc-cobol": {
+  "tokens": 291502,
+  "units": 59070,
+  "meanUnitLen": 4.93,
+  "cpuSec": {
+   "discover": 0.013,
+   "confirm": 0.013
+  },
+  "halves": {
+   "discover": {
+    "tokens": 146250,
+    "rareSlope": {
+     "v": 0.04431,
+     "nullMean": 0.00112,
+     "nullSd": 0.00276,
+     "z": 15.63
+    },
+    "rareCurve": {
+     "v": -0.03934,
+     "nullMean": -0.00051,
+     "nullSd": 0.00292,
+     "z": -13.28
+    },
+    "fnBefore": {
+     "v": -0.05676,
+     "nullMean": 0.00159,
+     "nullSd": 0.01137,
+     "z": -5.13
+    },
+    "depLen": {
+     "v": 0.00267,
+     "nullMean": 0.00018,
+     "nullSd": 0.00328,
+     "z": 0.76
+    },
+    "initDev": {
+     "v": -0.16006,
+     "nullMean": -0.00196,
+     "nullSd": 0.00623,
+     "z": -25.39
+    },
+    "finalDev": {
+     "v": -0.03231,
+     "nullMean": -0.00012,
+     "nullSd": 0.00529,
+     "z": -6.09
+    },
+    "surprGrow": {
+     "v": 0.15946,
+     "nullMean": 0.00071,
+     "nullSd": 0.00228,
+     "z": 69.63
+    },
+    "entSlope": {
+     "v": -0.07531,
+     "nullMean": -0.00018,
+     "nullSd": 0.00074,
+     "z": -101.4
+    },
+    "entCurv": {
+     "v": 0.0219,
+     "nullMean": -0.00019,
+     "nullSd": 0.00081,
+     "z": 27.17
+    },
+    "branch": {
+     "v": 0.08556,
+     "nullMean": 0.00172,
+     "nullSd": 0.00532,
+     "z": 15.75
+    },
+    "asym": {
+     "v": 0.10238,
+     "nullMean": -0.00008,
+     "nullSd": 0.00007,
+     "z": 1491.21
+    }
+   },
+   "confirm": {
+    "tokens": 145252,
+    "rareSlope": {
+     "v": 0.0748,
+     "nullMean": -0.00073,
+     "nullSd": 0.00173,
+     "z": 43.71
+    },
+    "rareCurve": {
+     "v": -0.08068,
+     "nullMean": -0.00002,
+     "nullSd": 0.00274,
+     "z": -29.43
+    },
+    "fnBefore": {
+     "v": -0.10989,
+     "nullMean": 0.00267,
+     "nullSd": 0.00714,
+     "z": -15.77
+    },
+    "depLen": {
+     "v": 0.01765,
+     "nullMean": -0.0001,
+     "nullSd": 0.00264,
+     "z": 6.71
+    },
+    "initDev": {
+     "v": -0.24705,
+     "nullMean": 0.00096,
+     "nullSd": 0.00523,
+     "z": -47.43
+    },
+    "finalDev": {
+     "v": -0.02518,
+     "nullMean": -0.00128,
+     "nullSd": 0.0026,
+     "z": -9.19
+    },
+    "surprGrow": {
+     "v": 0.11262,
+     "nullMean": 0.00053,
+     "nullSd": 0.0029,
+     "z": 38.66
+    },
+    "entSlope": {
+     "v": -0.04427,
+     "nullMean": -0.00055,
+     "nullSd": 0.00111,
+     "z": -39.25
+    },
+    "entCurv": {
+     "v": 0.0065,
+     "nullMean": 0.00044,
+     "nullSd": 0.00061,
+     "z": 10.02
+    },
+    "branch": {
+     "v": 0.06274,
+     "nullMean": 0.00213,
+     "nullSd": 0.00477,
+     "z": 12.71
+    },
+    "asym": {
+     "v": 0.14874,
+     "nullMean": -0.00015,
+     "nullSd": 0.00011,
+     "z": 1364.07
+    }
+   }
+  }
+ },
+ "fm-quran-ar": {
+  "tokens": 75883,
+  "units": 5859,
+  "meanUnitLen": 12.95,
+  "cpuSec": {
+   "discover": 0.006,
+   "confirm": 0.009
+  },
+  "halves": {
+   "discover": {
+    "tokens": 31990,
+    "rareSlope": {
+     "v": 0.05712,
+     "nullMean": -0.00214,
+     "nullSd": 0.0047,
+     "z": 12.6
+    },
+    "rareCurve": {
+     "v": 0.00007,
+     "nullMean": 0.00123,
+     "nullSd": 0.00711,
+     "z": -0.16
+    },
+    "fnBefore": {
+     "v": 0.02052,
+     "nullMean": -0.00059,
+     "nullSd": 0.00439,
+     "z": 4.81
+    },
+    "depLen": {
+     "v": -0.00791,
+     "nullMean": 0.0002,
+     "nullSd": 0.00562,
+     "z": -1.44
+    },
+    "initDev": {
+     "v": -0.26297,
+     "nullMean": 0.00835,
+     "nullSd": 0.02448,
+     "z": -11.08
+    },
+    "finalDev": {
+     "v": 0.50025,
+     "nullMean": -0.00124,
+     "nullSd": 0.01352,
+     "z": 37.1
+    },
+    "surprGrow": {
+     "v": -0.03422,
+     "nullMean": 0.00136,
+     "nullSd": 0.00325,
+     "z": -10.93
+    },
+    "entSlope": {
+     "v": -0.01755,
+     "nullMean": 0.0005,
+     "nullSd": 0.003,
+     "z": -6.02
+    },
+    "entCurv": {
+     "v": -0.01223,
+     "nullMean": 0.00063,
+     "nullSd": 0.00303,
+     "z": -4.25
+    },
+    "branch": {
+     "v": -0.09235,
+     "nullMean": -0.00044,
+     "nullSd": 0.00996,
+     "z": -9.23
+    },
+    "asym": {
+     "v": 0.02211,
+     "nullMean": -0.00046,
+     "nullSd": 0.00029,
+     "z": 78.05
+    }
+   },
+   "confirm": {
+    "tokens": 43893,
+    "rareSlope": {
+     "v": 0.06638,
+     "nullMean": 0.00179,
+     "nullSd": 0.00521,
+     "z": 12.39
+    },
+    "rareCurve": {
+     "v": 0.00721,
+     "nullMean": -0.00138,
+     "nullSd": 0.00551,
+     "z": 1.56
+    },
+    "fnBefore": {
+     "v": 0.01274,
+     "nullMean": 0.00312,
+     "nullSd": 0.00269,
+     "z": 3.57
+    },
+    "depLen": {
+     "v": -0.01134,
+     "nullMean": -0.00019,
+     "nullSd": 0.00214,
+     "z": -5.22
+    },
+    "initDev": {
+     "v": -0.25426,
+     "nullMean": -0.00388,
+     "nullSd": 0.01863,
+     "z": -13.44
+    },
+    "finalDev": {
+     "v": 0.53136,
+     "nullMean": 0.0049,
+     "nullSd": 0.02223,
+     "z": 23.68
+    },
+    "surprGrow": {
+     "v": -0.05135,
+     "nullMean": -0.00119,
+     "nullSd": 0.00512,
+     "z": -9.8
+    },
+    "entSlope": {
+     "v": -0.01457,
+     "nullMean": -0.00133,
+     "nullSd": 0.00281,
+     "z": -4.71
+    },
+    "entCurv": {
+     "v": -0.0067,
+     "nullMean": -0.00071,
+     "nullSd": 0.00244,
+     "z": -2.46
+    },
+    "branch": {
+     "v": -0.08975,
+     "nullMean": 0.00065,
+     "nullSd": 0.00679,
+     "z": -13.32
+    },
+    "asym": {
+     "v": 0.02564,
+     "nullMean": -0.00036,
+     "nullSd": 0.0003,
+     "z": 87.08
+    }
+   }
+  }
+ },
+ "fm-quran-en-sahih": {
+  "tokens": 154733,
+  "units": 5859,
+  "meanUnitLen": 26.41,
+  "cpuSec": {
+   "discover": 0.011,
+   "confirm": 0.009
+  },
+  "halves": {
+   "discover": {
+    "tokens": 81106,
+    "rareSlope": {
+     "v": 0.07958,
+     "nullMean": -0.00227,
+     "nullSd": 0.0034,
+     "z": 24.08
+    },
+    "rareCurve": {
+     "v": -0.0049,
+     "nullMean": 0.0005,
+     "nullSd": 0.00373,
+     "z": -1.45
+    },
+    "fnBefore": {
+     "v": 0.03419,
+     "nullMean": -0.00091,
+     "nullSd": 0.0056,
+     "z": 6.26
+    },
+    "depLen": {
+     "v": 0.01444,
+     "nullMean": 0.00067,
+     "nullSd": 0.00184,
+     "z": 7.48
+    },
+    "initDev": {
+     "v": -0.72201,
+     "nullMean": 0.005,
+     "nullSd": 0.01838,
+     "z": -39.56
+    },
+    "finalDev": {
+     "v": 1.01236,
+     "nullMean": -0.00352,
+     "nullSd": 0.01338,
+     "z": 75.93
+    },
+    "surprGrow": {
+     "v": -0.02491,
+     "nullMean": 0.00132,
+     "nullSd": 0.00366,
+     "z": -7.17
+    },
+    "entSlope": {
+     "v": 0.01772,
+     "nullMean": -0.00015,
+     "nullSd": 0.00228,
+     "z": 7.85
+    },
+    "entCurv": {
+     "v": 0.00589,
+     "nullMean": 0.00046,
+     "nullSd": 0.00105,
+     "z": 5.17
+    },
+    "branch": {
+     "v": -0.15379,
+     "nullMean": -0.00253,
+     "nullSd": 0.00351,
+     "z": -43.13
+    },
+    "asym": {
+     "v": 0.06532,
+     "nullMean": -0.00021,
+     "nullSd": 0.00011,
+     "z": 605.88
+    }
+   },
+   "confirm": {
+    "tokens": 73627,
+    "rareSlope": {
+     "v": 0.05819,
+     "nullMean": 0.00118,
+     "nullSd": 0.00499,
+     "z": 11.42
+    },
+    "rareCurve": {
+     "v": -0.00475,
+     "nullMean": 0.00175,
+     "nullSd": 0.00396,
+     "z": -1.64
+    },
+    "fnBefore": {
+     "v": 0.0288,
+     "nullMean": 0.00324,
+     "nullSd": 0.00658,
+     "z": 3.88
+    },
+    "depLen": {
+     "v": 0.00956,
+     "nullMean": 0.00016,
+     "nullSd": 0.00212,
+     "z": 4.43
+    },
+    "initDev": {
+     "v": -0.66843,
+     "nullMean": 0.00121,
+     "nullSd": 0.01859,
+     "z": -36.02
+    },
+    "finalDev": {
+     "v": 0.98286,
+     "nullMean": 0.00728,
+     "nullSd": 0.02084,
+     "z": 46.81
+    },
+    "surprGrow": {
+     "v": -0.03259,
+     "nullMean": -0.00136,
+     "nullSd": 0.00352,
+     "z": -8.88
+    },
+    "entSlope": {
+     "v": 0.01373,
+     "nullMean": 0.00089,
+     "nullSd": 0.00117,
+     "z": 10.98
+    },
+    "entCurv": {
+     "v": 0.00606,
+     "nullMean": -0.00011,
+     "nullSd": 0.00077,
+     "z": 8.03
+    },
+    "branch": {
+     "v": -0.1654,
+     "nullMean": 0.00225,
+     "nullSd": 0.00473,
+     "z": -35.42
+    },
+    "asym": {
+     "v": 0.05947,
+     "nullMean": -0.00013,
+     "nullSd": 0.00016,
+     "z": 383.11
+    }
+   }
+  }
+ },
+ "fm-wlc-torah": {
+  "tokens": 80052,
+  "units": 5853,
+  "meanUnitLen": 13.68,
+  "cpuSec": {
+   "discover": 0.009,
+   "confirm": 0.006
+  },
+  "halves": {
+   "discover": {
+    "tokens": 46852,
+    "rareSlope": {
+     "v": 0.07515,
+     "nullMean": 0.00382,
+     "nullSd": 0.0057,
+     "z": 12.51
+    },
+    "rareCurve": {
+     "v": 0.0202,
+     "nullMean": 0.00088,
+     "nullSd": 0.00246,
+     "z": 7.87
+    },
+    "fnBefore": {
+     "v": 0.01374,
+     "nullMean": 0.00153,
+     "nullSd": 0.00303,
+     "z": 4.03
+    },
+    "depLen": {
+     "v": -0.0129,
+     "nullMean": 0.00104,
+     "nullSd": 0.00422,
+     "z": -3.31
+    },
+    "initDev": {
+     "v": 0.04384,
+     "nullMean": -0.00236,
+     "nullSd": 0.01362,
+     "z": 3.39
+    },
+    "finalDev": {
+     "v": 0.28202,
+     "nullMean": 0.01336,
+     "nullSd": 0.01437,
+     "z": 18.69
+    },
+    "surprGrow": {
+     "v": -0.09345,
+     "nullMean": -0.00408,
+     "nullSd": 0.00455,
+     "z": -19.63
+    },
+    "entSlope": {
+     "v": -0.02049,
+     "nullMean": -0.00096,
+     "nullSd": 0.00179,
+     "z": -10.88
+    },
+    "entCurv": {
+     "v": -0.00057,
+     "nullMean": -0.00046,
+     "nullSd": 0.00084,
+     "z": -0.12
+    },
+    "branch": {
+     "v": -0.11236,
+     "nullMean": -0.0036,
+     "nullSd": 0.00915,
+     "z": -11.88
+    },
+    "asym": {
+     "v": 0.01915,
+     "nullMean": -0.00028,
+     "nullSd": 0.00035,
+     "z": 54.88
+    }
+   },
+   "confirm": {
+    "tokens": 33200,
+    "rareSlope": {
+     "v": 0.08564,
+     "nullMean": 0.00246,
+     "nullSd": 0.0063,
+     "z": 13.21
+    },
+    "rareCurve": {
+     "v": -0.00713,
+     "nullMean": 0.0023,
+     "nullSd": 0.00663,
+     "z": -1.42
+    },
+    "fnBefore": {
+     "v": 0.02146,
+     "nullMean": -0.00129,
+     "nullSd": 0.00422,
+     "z": 5.39
+    },
+    "depLen": {
+     "v": -0.0094,
+     "nullMean": 0.00008,
+     "nullSd": 0.00599,
+     "z": -1.58
+    },
+    "initDev": {
+     "v": -0.0811,
+     "nullMean": 0.00659,
+     "nullSd": 0.01151,
+     "z": -7.62
+    },
+    "finalDev": {
+     "v": 0.27293,
+     "nullMean": 0.00385,
+     "nullSd": 0.01796,
+     "z": 14.99
+    },
+    "surprGrow": {
+     "v": -0.07935,
+     "nullMean": -0.00347,
+     "nullSd": 0.00556,
+     "z": -13.64
+    },
+    "entSlope": {
+     "v": -0.02442,
+     "nullMean": -0.00026,
+     "nullSd": 0.00274,
+     "z": -8.82
+    },
+    "entCurv": {
+     "v": -0.00443,
+     "nullMean": 0.00086,
+     "nullSd": 0.00249,
+     "z": -2.13
+    },
+    "branch": {
+     "v": -0.11213,
+     "nullMean": 0.00286,
+     "nullSd": 0.00903,
+     "z": -12.73
+    },
+    "asym": {
+     "v": 0.01326,
+     "nullMean": -0.00015,
+     "nullSd": 0.00023,
+     "z": 58.44
+    }
+   }
+  }
+ }
+}

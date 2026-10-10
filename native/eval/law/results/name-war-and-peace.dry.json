@@ -1,0 +1,324 @@
+{
+ "module": "eval/law/name-war-and-peace.mjs",
+ "dry": true,
+ "M": 128,
+ "nPairsRequested": 40,
+ "book": {
+  "sentences": 30844,
+  "labelled": {
+   "COMMON": 3419,
+   "FUNC": 129,
+   "NAME": 402,
+   "CHAR": 65
+  }
+ },
+ "sample": {
+  "laterPairs": 40,
+  "firstPairs": 40,
+  "firstDropped": 0,
+  "func": 20
+ },
+ "O1_trace": {
+  "later": {
+   "CHAR": {
+    "n": 9,
+    "nonNull": 4,
+    "noSlot": 5,
+    "nonNullShare": 0.4444,
+    "noSlotShare": 0.5556
+   },
+   "COMMON": {
+    "n": 40,
+    "nonNull": 33,
+    "noSlot": 10,
+    "nonNullShare": 0.825,
+    "noSlotShare": 0.25
+   },
+   "NAME": {
+    "n": 31,
+    "nonNull": 17,
+    "noSlot": 16,
+    "nonNullShare": 0.5484,
+    "noSlotShare": 0.5161
+   }
+  },
+  "laterByLabel": {
+   "NAME": 0.525,
+   "COMMON": 0.825
+  },
+  "firstCausal": {
+   "NAME": {
+    "n": 29,
+    "nonNull": 13,
+    "noSlot": 19,
+    "nonNullShare": 0.4483,
+    "noSlotShare": 0.6552
+   },
+   "COMMON": {
+    "n": 40,
+    "nonNull": 26,
+    "noSlot": 17,
+    "nonNullShare": 0.65,
+    "noSlotShare": 0.425
+   },
+   "CHAR": {
+    "n": 11,
+    "nonNull": 6,
+    "noSlot": 8,
+    "nonNullShare": 0.5455,
+    "noSlotShare": 0.7273
+   }
+  },
+  "firstNoncausal": {
+   "NAME": {
+    "n": 29,
+    "nonNull": 14,
+    "noSlot": 21,
+    "nonNullShare": 0.4828,
+    "noSlotShare": 0.7241
+   },
+   "COMMON": {
+    "n": 40,
+    "nonNull": 30,
+    "noSlot": 12,
+    "nonNullShare": 0.75,
+    "noSlotShare": 0.3
+   },
+   "CHAR": {
+    "n": 11,
+    "nonNull": 8,
+    "noSlot": 5,
+    "nonNullShare": 0.7273,
+    "noSlotShare": 0.4545
+   }
+  },
+  "func": {
+   "FUNC": {
+    "n": 20,
+    "nonNull": 17,
+    "noSlot": 4,
+    "nonNullShare": 0.85,
+    "noSlotShare": 0.2
+   }
+  }
+ },
+ "O6_extent": {
+  "later": {
+   "NAME": {
+    "medianTokens": 0,
+    "p90Tokens": 20,
+    "medianFrames": 0
+   },
+   "COMMON": {
+    "medianTokens": 1,
+    "p90Tokens": 730,
+    "medianFrames": 0
+   }
+  },
+  "firstNoncausal": {
+   "NAME": {
+    "medianTokens": 0,
+    "p90Tokens": 168,
+    "medianFrames": 0
+   },
+   "COMMON": {
+    "medianTokens": 1,
+    "p90Tokens": 183,
+    "medianFrames": 0
+   }
+  }
+ },
+ "K1_sham": {
+  "nullShare": 1,
+  "n": 80
+ },
+ "K5_licence": {
+  "charLaterNonNullShare": 0.4444,
+  "n": 9,
+  "pass": false
+ },
+ "K6_determinism": {
+  "same": 40,
+  "total": 40
+ },
+ "O2_later": {
+  "tag": "LATER matched by frequency, frame-causal",
+  "n": 80,
+  "auc": {
+   "SLOT": 0.6775,
+   "SLOT+ATM": 0.6238,
+   "SPAN": 0.6406,
+   "COMPSTRUCT": 0.7319,
+   "FREQ": 0.7169,
+   "BURST": 0.6431,
+   "CAP": 1,
+   "COMPANY-LITE": 0.3212,
+   "POSITION": 0.4344,
+   "FREQ+CAP+BURST": 1,
+   "SLOT+ATM+FREQ": 0.6038,
+   "SLOT+ATM+FREQ+CAP+BURST": 1
+  },
+  "diffs": {
+   "SLOT+ATM - SPAN": {
+    "point": -0.0169,
+    "lo": -0.1349,
+    "hi": 0.0609,
+    "n": 1000
+   },
+   "SLOT+ATM+FREQ - FREQ": {
+    "point": -0.1131,
+    "lo": -0.1702,
+    "hi": -0.0274,
+    "n": 1000
+   },
+   "SLOT+ATM+FREQ+CAP+BURST - FREQ+CAP+BURST": {
+    "point": 0,
+    "lo": 0,
+    "hi": 0,
+    "n": 1000
+   },
+   "SLOT+ATM - COMPSTRUCT": {
+    "point": -0.1081,
+    "lo": -0.2005,
+    "hi": -0.0311,
+    "n": 1000
+   }
+  },
+  "permutationNull": {
+   "q95": 0.5975,
+   "mean": 0.5,
+   "draws": 5
+  }
+ },
+ "O2_first_causal": {
+  "tag": "FIRST matched by position, frame-causal",
+  "n": 80,
+  "auc": {
+   "SLOT": null,
+   "SLOT+ATM": null,
+   "SPAN": null,
+   "COMPSTRUCT": null,
+   "FREQ": null,
+   "BURST": null,
+   "CAP": null,
+   "COMPANY-LITE": null,
+   "POSITION": null,
+   "FREQ+CAP+BURST": null,
+   "SLOT+ATM+FREQ": null,
+   "SLOT+ATM+FREQ+CAP+BURST": null
+  },
+  "diffs": {
+   "SLOT+ATM - SPAN": {
+    "point": 0,
+    "lo": null,
+    "hi": null,
+    "n": 0
+   },
+   "SLOT+ATM+FREQ - FREQ": {
+    "point": 0,
+    "lo": null,
+    "hi": null,
+    "n": 0
+   },
+   "SLOT+ATM+FREQ+CAP+BURST - FREQ+CAP+BURST": {
+    "point": 0,
+    "lo": null,
+    "hi": null,
+    "n": 0
+   },
+   "SLOT+ATM - COMPSTRUCT": {
+    "point": 0,
+    "lo": null,
+    "hi": null,
+    "n": 0
+   }
+  },
+  "permutationNull": {
+   "q95": null,
+   "mean": null,
+   "draws": 0
+  }
+ },
+ "O5_first_noncausal": {
+  "tag": "FIRST matched by position, NON-CAUSAL F=32",
+  "n": 80,
+  "auc": {
+   "SLOT": null,
+   "SLOT+ATM": null,
+   "SPAN": null,
+   "COMPSTRUCT": null,
+   "FREQ": null,
+   "BURST": null,
+   "CAP": null,
+   "COMPANY-LITE": null,
+   "POSITION": null,
+   "FREQ+CAP+BURST": null,
+   "SLOT+ATM+FREQ": null,
+   "SLOT+ATM+FREQ+CAP+BURST": null
+  },
+  "diffs": {
+   "SLOT+ATM - SPAN": {
+    "point": 0,
+    "lo": null,
+    "hi": null,
+    "n": 0
+   },
+   "SLOT+ATM+FREQ - FREQ": {
+    "point": 0,
+    "lo": null,
+    "hi": null,
+    "n": 0
+   },
+   "SLOT+ATM+FREQ+CAP+BURST - FREQ+CAP+BURST": {
+    "point": 0,
+    "lo": null,
+    "hi": null,
+    "n": 0
+   },
+   "SLOT+ATM - COMPSTRUCT": {
+    "point": 0,
+    "lo": null,
+    "hi": null,
+    "n": 0
+   }
+  },
+  "permutationNull": {
+   "q95": null,
+   "mean": null,
+   "draws": 0
+  }
+ },
+ "K3_company_shuffle": {
+  "n": 40,
+  "aucSlotAtm": 0.6025,
+  "unshuffledSameRows": 0.695
+ },
+ "K4_position": {
+  "aucPositionLater": 0.4344,
+  "inside": false
+ },
+ "verdict": {
+  "V1_discriminates": false,
+  "V2_beyond_rivals": false,
+  "V3_single_mention_causal": false,
+  "V4_slot_not_span": false,
+  "verdict": "UNDERPOWERED(reader)",
+  "seconds": 105.1
+ },
+ "cost": {
+  "readingsLater": {
+   "snapshots": 80,
+   "readings": 240,
+   "tokens": 80,
+   "requested": 80,
+   "seconds": 43.514
+  },
+  "readingsFirst": {
+   "snapshots": 35,
+   "readings": 115,
+   "tokens": 80,
+   "requested": 80,
+   "seconds": 10.729
+  }
+ }
+}

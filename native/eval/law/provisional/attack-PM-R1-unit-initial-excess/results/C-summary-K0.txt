@@ -1,0 +1,97 @@
+UD FULL valid cells 52: median AUC pInitX 0.567
+    logn       medAUC 0.467  med(pInitX - rival) 0.103  share of cells within 0.03: 0.096  REPRODUCES false
+    loc        medAUC 0.591  med(pInitX - rival) -0.024  share of cells within 0.03: 0.731  REPRODUCES true
+    rec        medAUC 0.576  med(pInitX - rival) 0.011  share of cells within 0.03: 0.615  REPRODUCES true
+    burst      medAUC 0.587  med(pInitX - rival) -0.009  share of cells within 0.03: 0.750  REPRODUCES true
+    span       medAUC 0.632  med(pInitX - rival) -0.060  share of cells within 0.03: 0.750  REPRODUCES true
+    invLen     medAUC 0.506  med(pInitX - rival) 0.040  share of cells within 0.03: 0.462  REPRODUCES false
+    relPos     medAUC 0.568  med(pInitX - rival) 0.022  share of cells within 0.03: 0.596  REPRODUCES true
+    meanIdx    medAUC 0.558  med(pInitX - rival) 0.015  share of cells within 0.03: 0.519  REPRODUCES true
+    charLen    medAUC 0.477  med(pInitX - rival) 0.101  share of cells within 0.03: 0.211  REPRODUCES false
+    pInit      medAUC 0.576  med(pInitX - rival) -0.001  share of cells within 0.03: 0.692  REPRODUCES true (family sibling)
+    antiFinalX medAUC 0.484  med(pInitX - rival) 0.083  share of cells within 0.03: 0.288  REPRODUCES false (family sibling)
+UD CAUSAL4 valid cells 44: median AUC pInitX 0.577
+    logn       medAUC 0.478  med(pInitX - rival) 0.098  share of cells within 0.03: 0.114  REPRODUCES false
+    loc        medAUC 0.579  med(pInitX - rival) -0.012  share of cells within 0.03: 0.682  REPRODUCES true
+    rec        medAUC 0.577  med(pInitX - rival) 0.000  share of cells within 0.03: 0.773  REPRODUCES true
+    burst      medAUC 0.575  med(pInitX - rival) -0.005  share of cells within 0.03: 0.614  REPRODUCES true
+    span       medAUC 0.583  med(pInitX - rival) -0.029  share of cells within 0.03: 0.705  REPRODUCES true
+    invLen     medAUC 0.511  med(pInitX - rival) 0.033  share of cells within 0.03: 0.455  REPRODUCES false
+    relPos     medAUC 0.569  med(pInitX - rival) 0.004  share of cells within 0.03: 0.614  REPRODUCES true
+    meanIdx    medAUC 0.566  med(pInitX - rival) 0.006  share of cells within 0.03: 0.636  REPRODUCES true
+    charLen    medAUC 0.486  med(pInitX - rival) 0.100  share of cells within 0.03: 0.273  REPRODUCES false
+    pInit      medAUC 0.569  med(pInitX - rival) -0.002  share of cells within 0.03: 0.727  REPRODUCES true (family sibling)
+    antiFinalX medAUC 0.502  med(pInitX - rival) 0.054  share of cells within 0.03: 0.318  REPRODUCES false (family sibling)
+irc-en-fresh FULL pairs 600 pInitX 0.902 [0.876,0.922]
+    logn       AUC 0.498  pInitX - rival 0.403 [0.355,0.451]  REPRODUCES false
+    loc        AUC 0.839  pInitX - rival 0.063 [0.029,0.095]  REPRODUCES false
+    rec        AUC 0.729  pInitX - rival 0.172 [0.137,0.210]  REPRODUCES false
+    burst      AUC 0.833  pInitX - rival 0.068 [0.042,0.102]  REPRODUCES false
+    span       AUC 0.872  pInitX - rival 0.030 [-0.002,0.064]  REPRODUCES true
+    invLen     AUC 0.700  pInitX - rival 0.202 [0.148,0.251]  REPRODUCES false
+    relPos     AUC 0.904  pInitX - rival -0.003 [-0.019,0.014]  REPRODUCES true
+    meanIdx    AUC 0.907  pInitX - rival -0.005 [-0.024,0.017]  REPRODUCES true
+    charLen    AUC 0.595  pInitX - rival 0.307 [0.257,0.353]  REPRODUCES false
+    pInit      AUC 0.922  pInitX - rival -0.020 [-0.035,-0.008]  REPRODUCES true (family sibling)
+    antiFinalX AUC 0.808  pInitX - rival 0.093 [0.054,0.134]  REPRODUCES false (family sibling)
+irc-en-fresh CAUSAL4 pairs 600 pInitX 0.917 [0.891,0.942]
+    logn       AUC 0.425  pInitX - rival 0.492 [0.452,0.535]  REPRODUCES false
+    loc        AUC 0.793  pInitX - rival 0.123 [0.080,0.159]  REPRODUCES false
+    rec        AUC 0.737  pInitX - rival 0.180 [0.136,0.226]  REPRODUCES false
+    burst      AUC 0.777  pInitX - rival 0.140 [0.103,0.179]  REPRODUCES false
+    span       AUC 0.853  pInitX - rival 0.063 [0.025,0.094]  REPRODUCES false
+    invLen     AUC 0.650  pInitX - rival 0.267 [0.209,0.321]  REPRODUCES false
+    relPos     AUC 0.901  pInitX - rival 0.016 [-0.007,0.035]  REPRODUCES true
+    meanIdx    AUC 0.912  pInitX - rival 0.005 [-0.013,0.027]  REPRODUCES true
+    charLen    AUC 0.591  pInitX - rival 0.326 [0.274,0.367]  REPRODUCES false
+    pInit      AUC 0.922  pInitX - rival -0.005 [-0.020,0.008]  REPRODUCES true (family sibling)
+    antiFinalX AUC 0.755  pInitX - rival 0.162 [0.118,0.206]  REPRODUCES false (family sibling)
+code-py FULL pairs 992 pInitX 0.668 [0.635,0.707]
+    logn       AUC 0.568  pInitX - rival 0.100 [0.051,0.148]  REPRODUCES false
+    loc        AUC 0.695  pInitX - rival -0.027 [-0.067,0.015]  REPRODUCES true
+    rec        AUC 0.667  pInitX - rival 0.001 [-0.042,0.048]  REPRODUCES true
+    burst      AUC 0.695  pInitX - rival -0.027 [-0.069,0.023]  REPRODUCES true
+    span       AUC 0.733  pInitX - rival -0.066 [-0.108,-0.015]  REPRODUCES true
+    invLen     AUC 0.602  pInitX - rival 0.066 [0.004,0.118]  REPRODUCES false
+    relPos     AUC 0.509  pInitX - rival 0.159 [0.124,0.196]  REPRODUCES false
+    meanIdx    AUC 0.540  pInitX - rival 0.128 [0.079,0.174]  REPRODUCES false
+    charLen    AUC 0.579  pInitX - rival 0.089 [0.047,0.135]  REPRODUCES false
+    pInit      AUC 0.693  pInitX - rival -0.025 [-0.051,0.001]  REPRODUCES true (family sibling)
+    antiFinalX AUC 0.407  pInitX - rival 0.261 [0.207,0.309]  REPRODUCES false (family sibling)
+code-py CAUSAL4 pairs 712 pInitX 0.650 [0.607,0.690]
+    logn       AUC 0.508  pInitX - rival 0.142 [0.093,0.188]  REPRODUCES false
+    loc        AUC 0.690  pInitX - rival -0.040 [-0.088,0.011]  REPRODUCES true
+    rec        AUC 0.673  pInitX - rival -0.023 [-0.066,0.023]  REPRODUCES true
+    burst      AUC 0.729  pInitX - rival -0.079 [-0.126,-0.025]  REPRODUCES true
+    span       AUC 0.719  pInitX - rival -0.069 [-0.125,-0.008]  REPRODUCES true
+    invLen     AUC 0.583  pInitX - rival 0.067 [-0.005,0.130]  REPRODUCES false
+    relPos     AUC 0.470  pInitX - rival 0.180 [0.133,0.228]  REPRODUCES false
+    meanIdx    AUC 0.508  pInitX - rival 0.143 [0.080,0.201]  REPRODUCES false
+    charLen    AUC 0.546  pInitX - rival 0.105 [0.047,0.169]  REPRODUCES false
+    pInit      AUC 0.657  pInitX - rival -0.006 [-0.041,0.028]  REPRODUCES true (family sibling)
+    antiFinalX AUC 0.369  pInitX - rival 0.281 [0.225,0.345]  REPRODUCES false (family sibling)
+code-js FULL pairs 721 pInitX 0.588 [0.544,0.634]
+    logn       AUC 0.510  pInitX - rival 0.078 [0.025,0.137]  REPRODUCES false
+    loc        AUC 0.671  pInitX - rival -0.083 [-0.135,-0.031]  REPRODUCES true
+    rec        AUC 0.639  pInitX - rival -0.051 [-0.109,0.008]  REPRODUCES true
+    burst      AUC 0.703  pInitX - rival -0.114 [-0.175,-0.059]  REPRODUCES true
+    span       AUC 0.662  pInitX - rival -0.073 [-0.141,-0.011]  REPRODUCES true
+    invLen     AUC 0.723  pInitX - rival -0.135 [-0.203,-0.067]  REPRODUCES true
+    relPos     AUC 0.572  pInitX - rival 0.016 [-0.023,0.059]  REPRODUCES true
+    meanIdx    AUC 0.636  pInitX - rival -0.048 [-0.102,0.012]  REPRODUCES true
+    charLen    AUC 0.491  pInitX - rival 0.097 [0.037,0.152]  REPRODUCES false
+    pInit      AUC 0.709  pInitX - rival -0.121 [-0.160,-0.087]  REPRODUCES true (family sibling)
+    antiFinalX AUC 0.456  pInitX - rival 0.132 [0.076,0.184]  REPRODUCES false (family sibling)
+code-js CAUSAL4 pairs 504 pInitX 0.545 [0.499,0.595]
+    logn       AUC 0.544  pInitX - rival 0.001 [-0.080,0.057]  REPRODUCES true
+    loc        AUC 0.603  pInitX - rival -0.059 [-0.123,0.002]  REPRODUCES true
+    rec        AUC 0.615  pInitX - rival -0.070 [-0.145,-0.005]  REPRODUCES true
+    burst      AUC 0.675  pInitX - rival -0.130 [-0.196,-0.067]  REPRODUCES true
+    span       AUC 0.597  pInitX - rival -0.053 [-0.112,0.021]  REPRODUCES true
+    invLen     AUC 0.640  pInitX - rival -0.095 [-0.175,0.000]  REPRODUCES true
+    relPos     AUC 0.548  pInitX - rival -0.003 [-0.061,0.040]  REPRODUCES true
+    meanIdx    AUC 0.623  pInitX - rival -0.078 [-0.144,-0.018]  REPRODUCES true
+    charLen    AUC 0.504  pInitX - rival 0.041 [-0.042,0.111]  REPRODUCES false
+    pInit      AUC 0.622  pInitX - rival -0.077 [-0.117,-0.037]  REPRODUCES true (family sibling)
+    antiFinalX AUC 0.422  pInitX - rival 0.123 [0.057,0.200]  REPRODUCES false (family sibling)
+RE-CUT control: UD median 0.502 over 52 valid cells (valid true); IRC [{"auc":0.4767,"lo":0.4331,"hi":0.5281,"valid":true}]; code [{"reg":"code-py","auc":0.4848,"lo":0.4415,"hi":0.522},{"reg":"code-js","auc":0.4501,"lo":0.4062,"hi":0.493}]

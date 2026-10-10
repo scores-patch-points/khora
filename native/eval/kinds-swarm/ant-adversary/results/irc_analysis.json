@@ -1,0 +1,3512 @@
+{
+ "prereg": "PREREG_IRC.md",
+ "sha256": "9354086406f1e9504fdcf5fa3a272392f91441c2272cb7bf22d4754de865458c",
+ "days": [
+  {
+   "day": "kubuntu/2005-07-15",
+   "set": "A",
+   "msgs": 1798,
+   "INIT": {
+    "pairs": 40,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 129
+   },
+   "NONINIT": {
+    "pairs": 23,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 23
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 196,
+    "neg": 7851,
+    "posInit": 173
+   }
+  },
+  {
+   "day": "kubuntu/2005-11-15",
+   "set": "A",
+   "msgs": 2240,
+   "INIT": {
+    "pairs": 40,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 159
+   },
+   "NONINIT": {
+    "pairs": 18,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 18
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 213,
+    "neg": 9853,
+    "posInit": 195
+   }
+  },
+  {
+   "day": "kubuntu/2006-03-15",
+   "set": "A",
+   "msgs": 2668,
+   "INIT": {
+    "pairs": 40,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 248
+   },
+   "NONINIT": {
+    "pairs": 40,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 44
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 509,
+    "neg": 15328,
+    "posInit": 465
+   }
+  },
+  {
+   "day": "kubuntu/2008-07-15",
+   "set": "A",
+   "msgs": 2190,
+   "INIT": {
+    "pairs": 40,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 215
+   },
+   "NONINIT": {
+    "pairs": 30,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 30
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 361,
+    "neg": 14501,
+    "posInit": 331
+   }
+  },
+  {
+   "day": "kubuntu/2009-03-15",
+   "set": "A",
+   "msgs": 2132,
+   "INIT": {
+    "pairs": 40,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 188
+   },
+   "NONINIT": {
+    "pairs": 40,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 42
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 270,
+    "neg": 11961,
+    "posInit": 228
+   }
+  },
+  {
+   "day": "ubuntu/2004-11-15",
+   "set": "A",
+   "msgs": 5106,
+   "INIT": {
+    "pairs": 40,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 793
+   },
+   "NONINIT": {
+    "pairs": 40,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 106
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 1867,
+    "neg": 31492,
+    "posInit": 1662
+   }
+  },
+  {
+   "day": "ubuntu/2011-03-15",
+   "set": "A",
+   "msgs": 6662,
+   "INIT": {
+    "pairs": 40,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 1428
+   },
+   "NONINIT": {
+    "pairs": 40,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 195
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 2804,
+    "neg": 54772,
+    "posInit": 2325
+   }
+  },
+  {
+   "day": "ubuntu/2011-07-15",
+   "set": "A",
+   "msgs": 6156,
+   "INIT": {
+    "pairs": 40,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 1178
+   },
+   "NONINIT": {
+    "pairs": 40,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 148
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 2655,
+    "neg": 48084,
+    "posInit": 2503
+   }
+  },
+  {
+   "day": "ubuntu/2015-03-15",
+   "set": "A",
+   "msgs": 3245,
+   "INIT": {
+    "pairs": 40,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 440
+   },
+   "NONINIT": {
+    "pairs": 40,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 78
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 874,
+    "neg": 24468,
+    "posInit": 795
+   }
+  },
+  {
+   "day": "ubuntu/2015-07-15",
+   "set": "A",
+   "msgs": 3229,
+   "INIT": {
+    "pairs": 40,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 586
+   },
+   "NONINIT": {
+    "pairs": 40,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 74
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 1065,
+    "neg": 25668,
+    "posInit": 991
+   }
+  },
+  {
+   "day": "kubuntu/2009-07-15",
+   "set": "B",
+   "msgs": 1441,
+   "INIT": {
+    "pairs": 12,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 155
+   },
+   "NONINIT": {
+    "pairs": 12,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 15
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 208,
+    "neg": 8728,
+    "posInit": 193
+   }
+  },
+  {
+   "day": "kubuntu/2010-03-15",
+   "set": "B",
+   "msgs": 769,
+   "INIT": {
+    "pairs": 12,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 86
+   },
+   "NONINIT": {
+    "pairs": 6,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 6
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 108,
+    "neg": 3996,
+    "posInit": 102
+   }
+  },
+  {
+   "day": "kubuntu/2011-03-15",
+   "set": "B",
+   "msgs": 1440,
+   "INIT": {
+    "pairs": 12,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 109
+   },
+   "NONINIT": {
+    "pairs": 11,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 11
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 219,
+    "neg": 8535,
+    "posInit": 208
+   }
+  },
+  {
+   "day": "ubuntu-server/2008-03-15",
+   "set": "B",
+   "msgs": 698,
+   "INIT": {
+    "pairs": 12,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 22
+   },
+   "NONINIT": {
+    "pairs": 1,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 1
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 27,
+    "neg": 3865,
+    "posInit": 26
+   }
+  },
+  {
+   "day": "ubuntu-server/2008-07-15",
+   "set": "B",
+   "msgs": 601,
+   "INIT": {
+    "pairs": 12,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 15
+   },
+   "NONINIT": {
+    "pairs": 9,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 9
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 24,
+    "neg": 2234,
+    "posInit": 15
+   }
+  },
+  {
+   "day": "ubuntu-server/2010-03-15",
+   "set": "B",
+   "msgs": 660,
+   "INIT": {
+    "pairs": 12,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 93
+   },
+   "NONINIT": {
+    "pairs": 1,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 1
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 123,
+    "neg": 3279,
+    "posInit": 122
+   }
+  },
+  {
+   "day": "ubuntu-server/2010-07-15",
+   "set": "B",
+   "msgs": 840,
+   "INIT": {
+    "pairs": 12,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 88
+   },
+   "NONINIT": {
+    "pairs": 2,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 2
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 102,
+    "neg": 4476,
+    "posInit": 100
+   }
+  },
+  {
+   "day": "ubuntu-server/2011-03-15",
+   "set": "B",
+   "msgs": 629,
+   "INIT": {
+    "pairs": 12,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 49
+   },
+   "NONINIT": {
+    "pairs": 0,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 0
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 49,
+    "neg": 3304,
+    "posInit": 49
+   }
+  },
+  {
+   "day": "ubuntu-server/2013-07-15",
+   "set": "B",
+   "msgs": 669,
+   "INIT": {
+    "pairs": 11,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 11
+   },
+   "NONINIT": {
+    "pairs": 1,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 1
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 12,
+    "neg": 2805,
+    "posInit": 11
+   }
+  },
+  {
+   "day": "ubuntu/2014-03-15",
+   "set": "B",
+   "msgs": 675,
+   "INIT": {
+    "pairs": 12,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 103
+   },
+   "NONINIT": {
+    "pairs": 6,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 6
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 125,
+    "neg": 4126,
+    "posInit": 119
+   }
+  },
+  {
+   "day": "xubuntu/2007-03-15",
+   "set": "B",
+   "msgs": 1052,
+   "INIT": {
+    "pairs": 12,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 73
+   },
+   "NONINIT": {
+    "pairs": 9,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 9
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 97,
+    "neg": 5772,
+    "posInit": 88
+   }
+  },
+  {
+   "day": "xubuntu/2008-07-15",
+   "set": "B",
+   "msgs": 587,
+   "INIT": {
+    "pairs": 12,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 50
+   },
+   "NONINIT": {
+    "pairs": 1,
+    "relaxed": 0,
+    "dropped": 0,
+    "posAvailable": 1
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 52,
+    "neg": 1907,
+    "posInit": 51
+   }
+  }
+ ],
+ "groups": {
+  "A:INIT": {
+   "name": "A:INIT",
+   "n": 800,
+   "pairs": 400,
+   "days": 10,
+   "auc": {
+    "S_ENTRY": 0.7688,
+    "S_OWN": 0.7373,
+    "S_ALL": 0.6425,
+    "S_SPAN": 0.7094,
+    "R_LOCAL": 0.7004,
+    "R_BURST": 0.7355,
+    "R_RECENCY": 0.7171,
+    "R_MSGLEN": 0.6708,
+    "R_IDX": 0.5,
+    "R_FREQ": 0.49,
+    "R_POSMSG": 0.5322,
+    "IMP": 0.8702,
+    "FULL": 0.8787,
+    "RIV": 0.8035,
+    "RIVIMP": 0.874,
+    "POS": 0.6676,
+    "IMPS": 0.7441
+   },
+   "ci": {
+    "S_ENTRY": [
+     0.7362,
+     0.7987
+    ],
+    "S_OWN": [
+     0.7138,
+     0.7579
+    ],
+    "S_ALL": [
+     0.6105,
+     0.6791
+    ],
+    "S_SPAN": [
+     0.6845,
+     0.7316
+    ],
+    "R_LOCAL": [
+     0.6635,
+     0.7339
+    ],
+    "R_BURST": [
+     0.6912,
+     0.7738
+    ],
+    "R_RECENCY": [
+     0.6766,
+     0.7563
+    ],
+    "R_MSGLEN": [
+     0.6263,
+     0.7174
+    ],
+    "R_IDX": [
+     0.5,
+     0.5
+    ],
+    "R_FREQ": [
+     0.4763,
+     0.5023
+    ],
+    "R_POSMSG": [
+     0.4978,
+     0.5624
+    ],
+    "IMP": [
+     0.8288,
+     0.9045
+    ],
+    "FULL": [
+     0.8381,
+     0.9162
+    ],
+    "RIV": [
+     0.7656,
+     0.833
+    ],
+    "RIVIMP": [
+     0.8314,
+     0.913
+    ],
+    "POS": [
+     0.6247,
+     0.715
+    ],
+    "IMPS": [
+     0.7072,
+     0.7852
+    ]
+   },
+   "flipQ95": {
+    "S_ENTRY": 0.5313,
+    "S_OWN": 0.5309,
+    "S_ALL": 0.5295,
+    "S_SPAN": 0.5311,
+    "R_LOCAL": 0.5307,
+    "IMP": 0.5406,
+    "FULL": 0.5395,
+    "RIV": 0.538,
+    "RIVIMP": 0.5415,
+    "IMPS": 0.5366
+   },
+   "wAuc": {},
+   "increment": {
+    "point": 0.0705,
+    "ci": [
+     0.0443,
+     0.0964
+    ]
+   },
+   "incrementFitNull": {
+    "B": 50,
+    "q95": 0.0552,
+    "mean": 0.0005
+   },
+   "matching": {
+    "init": [
+     1,
+     1
+    ],
+    "idx": [
+     0,
+     0
+    ],
+    "logLen": [
+     2.138,
+     1.539
+    ],
+    "logDayCount": [
+     2.547,
+     2.577
+    ],
+    "logNwin": [
+     1.74,
+     1.241
+    ],
+    "last16": [
+     1.94,
+     0.865
+    ],
+    "logGap": [
+     1.946,
+     3.122
+    ],
+    "posMsg": [
+     2055.16,
+     1897.195
+    ]
+   },
+   "K5_posNonNull": 0.8125,
+   "negNonNull": 0.4525,
+   "shuffledPosNonNull": 0.485,
+   "posMedianExtent": 399,
+   "negMedianExtent": 0
+  },
+  "A:STRICT-INIT": {
+   "name": "A:STRICT-INIT",
+   "n": 346,
+   "pairs": 173,
+   "days": 10,
+   "auc": {
+    "S_ENTRY": 0.7457,
+    "S_OWN": 0.7295,
+    "S_ALL": 0.679,
+    "S_SPAN": 0.7534,
+    "R_LOCAL": 0.59,
+    "R_BURST": 0.6587,
+    "R_RECENCY": 0.6777,
+    "R_MSGLEN": 0.6668,
+    "R_IDX": 0.5,
+    "R_FREQ": 0.4848,
+    "R_POSMSG": 0.5154,
+    "IMP": 0.7976,
+    "FULL": 0.8275,
+    "RIV": 0.7169,
+    "RIVIMP": 0.8121,
+    "POS": 0.6617,
+    "IMPS": 0.6379
+   },
+   "ci": {
+    "S_ENTRY": [
+     0.7024,
+     0.7893
+    ],
+    "S_OWN": [
+     0.6912,
+     0.7636
+    ],
+    "S_ALL": [
+     0.6276,
+     0.7259
+    ],
+    "S_SPAN": [
+     0.708,
+     0.7896
+    ],
+    "R_LOCAL": [
+     0.5544,
+     0.6257
+    ],
+    "R_BURST": [
+     0.5871,
+     0.7292
+    ],
+    "R_RECENCY": [
+     0.6125,
+     0.7458
+    ],
+    "R_MSGLEN": [
+     0.5957,
+     0.7306
+    ],
+    "R_IDX": [
+     0.5,
+     0.5
+    ],
+    "R_FREQ": [
+     0.4682,
+     0.4991
+    ],
+    "R_POSMSG": [
+     0.467,
+     0.5575
+    ],
+    "IMP": [
+     0.7434,
+     0.8509
+    ],
+    "FULL": [
+     0.7812,
+     0.8739
+    ],
+    "RIV": [
+     0.6572,
+     0.773
+    ],
+    "RIVIMP": [
+     0.7706,
+     0.8467
+    ],
+    "POS": [
+     0.5913,
+     0.7268
+    ],
+    "IMPS": [
+     0.5851,
+     0.6992
+    ]
+   },
+   "flipQ95": {
+    "S_ENTRY": 0.5434,
+    "S_OWN": 0.545,
+    "S_ALL": 0.548,
+    "S_SPAN": 0.5508,
+    "R_LOCAL": 0.5328,
+    "IMP": 0.5583,
+    "FULL": 0.5625,
+    "RIV": 0.5492,
+    "RIVIMP": 0.5569,
+    "IMPS": 0.5498
+   },
+   "wAuc": {},
+   "increment": {
+    "point": 0.0952,
+    "ci": [
+     0.0396,
+     0.1573
+    ]
+   },
+   "matching": {
+    "init": [
+     1,
+     1
+    ],
+    "idx": [
+     0,
+     0
+    ],
+    "logLen": [
+     2.221,
+     1.671
+    ],
+    "logDayCount": [
+     2.786,
+     2.835
+    ],
+    "logNwin": [
+     1.865,
+     1.618
+    ],
+    "last16": [
+     1.827,
+     1.179
+    ],
+    "logGap": [
+     1.985,
+     2.878
+    ],
+    "posMsg": [
+     1980.694,
+     1905.815
+    ]
+   },
+   "K5_posNonNull": 0.8382,
+   "negNonNull": 0.4566,
+   "shuffledPosNonNull": 0.5029,
+   "posMedianExtent": 535,
+   "negMedianExtent": 0
+  },
+  "A:NONINIT": {
+   "name": "A:NONINIT",
+   "n": 702,
+   "pairs": 351,
+   "days": 10,
+   "auc": {
+    "S_ENTRY": 0.7621,
+    "S_OWN": 0.6272,
+    "S_ALL": 0.5368,
+    "S_SPAN": 0.5242,
+    "R_LOCAL": 0.6948,
+    "R_BURST": 0.6654,
+    "R_RECENCY": 0.6733,
+    "R_MSGLEN": 0.3895,
+    "R_IDX": 0.4981,
+    "R_FREQ": 0.5004,
+    "R_POSMSG": 0.5104,
+    "IMP": 0.8548,
+    "FULL": 0.8925,
+    "RIV": 0.7735,
+    "RIVIMP": 0.8709,
+    "POS": 0.6135,
+    "IMPS": 0.675
+   },
+   "ci": {
+    "S_ENTRY": [
+     0.7158,
+     0.8003
+    ],
+    "S_OWN": [
+     0.5899,
+     0.671
+    ],
+    "S_ALL": [
+     0.4948,
+     0.5742
+    ],
+    "S_SPAN": [
+     0.4756,
+     0.5659
+    ],
+    "R_LOCAL": [
+     0.6592,
+     0.7272
+    ],
+    "R_BURST": [
+     0.6156,
+     0.7154
+    ],
+    "R_RECENCY": [
+     0.6356,
+     0.7102
+    ],
+    "R_MSGLEN": [
+     0.3651,
+     0.4118
+    ],
+    "R_IDX": [
+     0.4933,
+     0.5024
+    ],
+    "R_FREQ": [
+     0.4905,
+     0.5135
+    ],
+    "R_POSMSG": [
+     0.4489,
+     0.574
+    ],
+    "IMP": [
+     0.8064,
+     0.8937
+    ],
+    "FULL": [
+     0.8643,
+     0.9208
+    ],
+    "RIV": [
+     0.7405,
+     0.8087
+    ],
+    "RIVIMP": [
+     0.8359,
+     0.9034
+    ],
+    "POS": [
+     0.5881,
+     0.6396
+    ],
+    "IMPS": [
+     0.6018,
+     0.7334
+    ]
+   },
+   "flipQ95": {
+    "S_ENTRY": 0.5313,
+    "S_OWN": 0.5337,
+    "S_ALL": 0.5338,
+    "S_SPAN": 0.5342,
+    "R_LOCAL": 0.5329,
+    "IMP": 0.5411,
+    "FULL": 0.5423,
+    "RIV": 0.5374,
+    "RIVIMP": 0.5423,
+    "IMPS": 0.5378
+   },
+   "wAuc": {},
+   "increment": {
+    "point": 0.0974,
+    "ci": [
+     0.0779,
+     0.1138
+    ]
+   },
+   "incrementFitNull": {
+    "B": 50,
+    "q95": 0.0628,
+    "mean": 0.009
+   },
+   "matching": {
+    "init": [
+     0,
+     0
+    ],
+    "idx": [
+     3.607,
+     4.131
+    ],
+    "logLen": [
+     1.874,
+     2.228
+    ],
+    "logDayCount": [
+     2.935,
+     2.944
+    ],
+    "logNwin": [
+     1.848,
+     1.316
+    ],
+    "last16": [
+     1.319,
+     0.652
+    ],
+    "logGap": [
+     2.348,
+     3.238
+    ],
+    "posMsg": [
+     2042.222,
+     1985.578
+    ]
+   },
+   "K5_posNonNull": 0.7778,
+   "negNonNull": 0.6068,
+   "shuffledPosNonNull": 0.4444,
+   "posMedianExtent": 532,
+   "negMedianExtent": 0
+  },
+  "A:STRICT-NONINIT": {
+   "name": "A:STRICT-NONINIT",
+   "n": 346,
+   "pairs": 173,
+   "days": 10,
+   "auc": {
+    "S_ENTRY": 0.8092,
+    "S_OWN": 0.6664,
+    "S_ALL": 0.6022,
+    "S_SPAN": 0.5825,
+    "R_LOCAL": 0.6579,
+    "R_BURST": 0.6264,
+    "R_RECENCY": 0.614,
+    "R_MSGLEN": 0.4038,
+    "R_IDX": 0.4968,
+    "R_FREQ": 0.5015,
+    "R_POSMSG": 0.5078,
+    "IMP": 0.8475,
+    "FULL": 0.871,
+    "RIV": 0.7081,
+    "RIVIMP": 0.8468,
+    "POS": 0.6008,
+    "IMPS": 0.6274
+   },
+   "ci": {
+    "S_ENTRY": [
+     0.7635,
+     0.8517
+    ],
+    "S_OWN": [
+     0.6106,
+     0.7241
+    ],
+    "S_ALL": [
+     0.5645,
+     0.6318
+    ],
+    "S_SPAN": [
+     0.514,
+     0.6529
+    ],
+    "R_LOCAL": [
+     0.6126,
+     0.7034
+    ],
+    "R_BURST": [
+     0.5526,
+     0.6962
+    ],
+    "R_RECENCY": [
+     0.5373,
+     0.6811
+    ],
+    "R_MSGLEN": [
+     0.3548,
+     0.4513
+    ],
+    "R_IDX": [
+     0.4891,
+     0.5048
+    ],
+    "R_FREQ": [
+     0.4844,
+     0.5215
+    ],
+    "R_POSMSG": [
+     0.4404,
+     0.561
+    ],
+    "IMP": [
+     0.797,
+     0.8956
+    ],
+    "FULL": [
+     0.8187,
+     0.921
+    ],
+    "RIV": [
+     0.6471,
+     0.761
+    ],
+    "RIVIMP": [
+     0.785,
+     0.8991
+    ],
+    "POS": [
+     0.5375,
+     0.6556
+    ],
+    "IMPS": [
+     0.5216,
+     0.7073
+    ]
+   },
+   "flipQ95": {
+    "S_ENTRY": 0.5491,
+    "S_OWN": 0.5439,
+    "S_ALL": 0.5455,
+    "S_SPAN": 0.5496,
+    "R_LOCAL": 0.5391,
+    "IMP": 0.5553,
+    "FULL": 0.5631,
+    "RIV": 0.5473,
+    "RIVIMP": 0.5551,
+    "IMPS": 0.5544
+   },
+   "wAuc": {},
+   "increment": {
+    "point": 0.1387,
+    "ci": [
+     0.099,
+     0.1705
+    ]
+   },
+   "matching": {
+    "init": [
+     0,
+     0
+    ],
+    "idx": [
+     3.78,
+     4.173
+    ],
+    "logLen": [
+     1.939,
+     2.236
+    ],
+    "logDayCount": [
+     3.23,
+     3.248
+    ],
+    "logNwin": [
+     2.041,
+     1.627
+    ],
+    "last16": [
+     1.318,
+     0.803
+    ],
+    "logGap": [
+     2.405,
+     2.922
+    ],
+    "posMsg": [
+     2032.514,
+     1972.127
+    ]
+   },
+   "K5_posNonNull": 0.8208,
+   "negNonNull": 0.5607,
+   "shuffledPosNonNull": 0.4509,
+   "posMedianExtent": 839,
+   "negMedianExtent": 0
+  },
+  "A:POOL": {
+   "name": "A:POOL",
+   "n": 1502,
+   "pairs": 751,
+   "days": 10,
+   "auc": {
+    "S_ENTRY": 0.7656,
+    "S_OWN": 0.6864,
+    "S_ALL": 0.5945,
+    "S_SPAN": 0.6165,
+    "R_LOCAL": 0.697,
+    "R_BURST": 0.7008,
+    "R_RECENCY": 0.6974,
+    "R_MSGLEN": 0.5411,
+    "R_IDX": 0.4996,
+    "R_FREQ": 0.494,
+    "R_POSMSG": 0.5216,
+    "IMP": 0.8645,
+    "FULL": 0.8267,
+    "RIV": 0.7785,
+    "RIVIMP": 0.8677,
+    "POS": 0.5423,
+    "IMPS": 0.7103
+   },
+   "ci": {
+    "S_ENTRY": [
+     0.7368,
+     0.7961
+    ],
+    "S_OWN": [
+     0.7065,
+     0.7476
+    ],
+    "S_ALL": [
+     0.6023,
+     0.6675
+    ],
+    "S_SPAN": [
+     0.67,
+     0.7165
+    ],
+    "R_LOCAL": [
+     0.6648,
+     0.7299
+    ],
+    "R_BURST": [
+     0.6861,
+     0.7669
+    ],
+    "R_RECENCY": [
+     0.677,
+     0.7498
+    ],
+    "R_MSGLEN": [
+     0.609,
+     0.6956
+    ],
+    "R_IDX": [
+     0.5,
+     0.5
+    ],
+    "R_FREQ": [
+     0.4776,
+     0.502
+    ],
+    "R_POSMSG": [
+     0.4998,
+     0.5572
+    ],
+    "IMP": [
+     0.8179,
+     0.9008
+    ],
+    "FULL": [
+     0.7117,
+     0.9014
+    ],
+    "RIV": [
+     0.7604,
+     0.8281
+    ],
+    "RIVIMP": [
+     0.8258,
+     0.9083
+    ],
+    "POS": [
+     0.6082,
+     0.6944
+    ],
+    "IMPS": [
+     0.698,
+     0.7773
+    ]
+   },
+   "flipQ95": {
+    "S_ENTRY": 0.5233,
+    "S_OWN": 0.5243,
+    "S_ALL": 0.5233,
+    "S_SPAN": 0.5251,
+    "R_LOCAL": 0.5235,
+    "IMP": 0.5295,
+    "FULL": 0.5245,
+    "RIV": 0.5268,
+    "RIVIMP": 0.5278,
+    "IMPS": 0.5254
+   },
+   "wAuc": {
+    "S_ENTRY": 0.7682,
+    "S_OWN": 0.7288,
+    "S_ALL": 0.6346,
+    "S_SPAN": 0.6929,
+    "R_LOCAL": 0.6997,
+    "R_BURST": 0.7294,
+    "R_RECENCY": 0.7138,
+    "R_MSGLEN": 0.6491,
+    "R_IDX": 0.5,
+    "R_FREQ": 0.4906,
+    "R_POSMSG": 0.5303,
+    "IMP": 0.8616,
+    "FULL": 0.8115,
+    "RIV": 0.7946,
+    "RIVIMP": 0.8696,
+    "POS": 0.6474,
+    "IMPS": 0.734
+   },
+   "increment": {
+    "point": 0.0892,
+    "ci": [
+     0.0532,
+     0.0974
+    ]
+   },
+   "incrementWeighted": 0.075,
+   "incrementFitNull": {
+    "B": 50,
+    "q95": 0.0391,
+    "mean": 0.0028
+   },
+   "matching": {
+    "init": [
+     0.533,
+     0.533
+    ],
+    "idx": [
+     1.686,
+     1.931
+    ],
+    "logLen": [
+     2.015,
+     1.861
+    ],
+    "logDayCount": [
+     2.728,
+     2.749
+    ],
+    "logNwin": [
+     1.79,
+     1.276
+    ],
+    "last16": [
+     1.65,
+     0.766
+    ],
+    "logGap": [
+     2.134,
+     3.176
+    ],
+    "posMsg": [
+     2049.113,
+     1938.503
+    ]
+   },
+   "K5_posNonNull": 0.7963,
+   "negNonNull": 0.5246,
+   "shuffledPosNonNull": 0.466,
+   "posMedianExtent": 452,
+   "negMedianExtent": 0
+  },
+  "A:STRICT-POOL": {
+   "name": "A:STRICT-POOL",
+   "n": 692,
+   "pairs": 346,
+   "days": 10,
+   "auc": {
+    "S_ENTRY": 0.7775,
+    "S_OWN": 0.6985,
+    "S_ALL": 0.6412,
+    "S_SPAN": 0.6627,
+    "R_LOCAL": 0.6237,
+    "R_BURST": 0.6443,
+    "R_RECENCY": 0.6473,
+    "R_MSGLEN": 0.5388,
+    "R_IDX": 0.4992,
+    "R_FREQ": 0.4922,
+    "R_POSMSG": 0.5108,
+    "IMP": 0.8358,
+    "FULL": 0.8629,
+    "RIV": 0.697,
+    "RIVIMP": 0.8243,
+    "POS": 0.5302,
+    "IMPS": 0.6094
+   },
+   "ci": {
+    "S_ENTRY": [
+     0.7337,
+     0.8141
+    ],
+    "S_OWN": [
+     0.6732,
+     0.7243
+    ],
+    "S_ALL": [
+     0.6182,
+     0.6627
+    ],
+    "S_SPAN": [
+     0.6228,
+     0.7038
+    ],
+    "R_LOCAL": [
+     0.5926,
+     0.6554
+    ],
+    "R_BURST": [
+     0.5854,
+     0.6919
+    ],
+    "R_RECENCY": [
+     0.5894,
+     0.6995
+    ],
+    "R_MSGLEN": [
+     0.4938,
+     0.5838
+    ],
+    "R_IDX": [
+     0.4969,
+     0.5011
+    ],
+    "R_FREQ": [
+     0.4815,
+     0.5048
+    ],
+    "R_POSMSG": [
+     0.4753,
+     0.546
+    ],
+    "IMP": [
+     0.7868,
+     0.8807
+    ],
+    "FULL": [
+     0.8136,
+     0.9033
+    ],
+    "RIV": [
+     0.6371,
+     0.7471
+    ],
+    "RIVIMP": [
+     0.7715,
+     0.8695
+    ],
+    "POS": [
+     0.4875,
+     0.5819
+    ],
+    "IMPS": [
+     0.5484,
+     0.6601
+    ]
+   },
+   "flipQ95": {
+    "S_ENTRY": 0.5347,
+    "S_OWN": 0.5308,
+    "S_ALL": 0.5381,
+    "S_SPAN": 0.5363,
+    "R_LOCAL": 0.524,
+    "IMP": 0.5424,
+    "FULL": 0.543,
+    "RIV": 0.5329,
+    "RIVIMP": 0.541,
+    "IMPS": 0.5369
+   },
+   "wAuc": {},
+   "increment": {
+    "point": 0.1272,
+    "ci": [
+     0.0891,
+     0.1643
+    ]
+   },
+   "matching": {
+    "init": [
+     0.5,
+     0.5
+    ],
+    "idx": [
+     1.89,
+     2.087
+    ],
+    "logLen": [
+     2.08,
+     1.953
+    ],
+    "logDayCount": [
+     3.008,
+     3.042
+    ],
+    "logNwin": [
+     1.953,
+     1.622
+    ],
+    "last16": [
+     1.572,
+     0.991
+    ],
+    "logGap": [
+     2.195,
+     2.9
+    ],
+    "posMsg": [
+     2006.604,
+     1938.971
+    ]
+   },
+   "K5_posNonNull": 0.8295,
+   "negNonNull": 0.5087,
+   "shuffledPosNonNull": 0.4769,
+   "posMedianExtent": 671,
+   "negMedianExtent": 0
+  },
+  "B:INIT": {
+   "name": "B:INIT",
+   "n": 286,
+   "pairs": 143,
+   "days": 12,
+   "auc": {
+    "S_ENTRY": 0.8112,
+    "S_OWN": 0.7789,
+    "S_ALL": 0.7136,
+    "S_SPAN": 0.7899,
+    "R_LOCAL": 0.6147,
+    "R_BURST": 0.8019,
+    "R_RECENCY": 0.7999,
+    "R_MSGLEN": 0.6865,
+    "R_IDX": 0.5,
+    "R_FREQ": 0.4984,
+    "R_POSMSG": 0.5274,
+    "IMP": 0.8493,
+    "FULL": 0.8775,
+    "RIV": 0.8464,
+    "RIVIMP": 0.8958,
+    "POS": 0.6809,
+    "IMPS": 0.7714
+   },
+   "ci": {
+    "S_ENTRY": [
+     0.7708,
+     0.8497
+    ],
+    "S_OWN": [
+     0.7504,
+     0.8099
+    ],
+    "S_ALL": [
+     0.6637,
+     0.7627
+    ],
+    "S_SPAN": [
+     0.7531,
+     0.8301
+    ],
+    "R_LOCAL": [
+     0.5721,
+     0.665
+    ],
+    "R_BURST": [
+     0.7334,
+     0.8531
+    ],
+    "R_RECENCY": [
+     0.7613,
+     0.8356
+    ],
+    "R_MSGLEN": [
+     0.6088,
+     0.7529
+    ],
+    "R_IDX": [
+     0.5,
+     0.5
+    ],
+    "R_FREQ": [
+     0.4576,
+     0.5436
+    ],
+    "R_POSMSG": [
+     0.4257,
+     0.6312
+    ],
+    "IMP": [
+     0.8061,
+     0.8881
+    ],
+    "FULL": [
+     0.8342,
+     0.9211
+    ],
+    "RIV": [
+     0.7898,
+     0.8857
+    ],
+    "RIVIMP": [
+     0.8586,
+     0.9289
+    ],
+    "POS": [
+     0.604,
+     0.7483
+    ],
+    "IMPS": [
+     0.7269,
+     0.8165
+    ]
+   },
+   "flipQ95": {
+    "S_ENTRY": 0.5594,
+    "S_OWN": 0.5543,
+    "S_ALL": 0.561,
+    "S_SPAN": 0.5581,
+    "R_LOCAL": 0.5492,
+    "IMP": 0.5696,
+    "FULL": 0.5628,
+    "RIV": 0.566,
+    "RIVIMP": 0.5728,
+    "IMPS": 0.5619
+   },
+   "wAuc": {},
+   "increment": {
+    "point": 0.0493,
+    "ci": [
+     0.0128,
+     0.0833
+    ]
+   },
+   "matching": {
+    "init": [
+     1,
+     1
+    ],
+    "idx": [
+     0,
+     0
+    ],
+    "logLen": [
+     2.219,
+     1.609
+    ],
+    "logDayCount": [
+     2.276,
+     2.29
+    ],
+    "logNwin": [
+     1.62,
+     1.368
+    ],
+    "last16": [
+     1.86,
+     0.503
+    ],
+    "logGap": [
+     1.912,
+     3.557
+    ],
+    "posMsg": [
+     518.301,
+     544.357
+    ]
+   },
+   "K5_posNonNull": 0.8741,
+   "negNonNull": 0.3706,
+   "shuffledPosNonNull": 0.5315,
+   "posMedianExtent": 430,
+   "negMedianExtent": 0
+  },
+  "B:STRICT-INIT": {
+   "name": "B:STRICT-INIT",
+   "n": 148,
+   "pairs": 74,
+   "days": 12,
+   "auc": {
+    "S_ENTRY": 0.8243,
+    "S_OWN": 0.8076,
+    "S_ALL": 0.7916,
+    "S_SPAN": 0.8563,
+    "R_LOCAL": 0.5568,
+    "R_BURST": 0.7843,
+    "R_RECENCY": 0.7894,
+    "R_MSGLEN": 0.7077,
+    "R_IDX": 0.5,
+    "R_FREQ": 0.4649,
+    "R_POSMSG": 0.5112,
+    "IMP": 0.8428,
+    "FULL": 0.8749,
+    "RIV": 0.8347,
+    "RIVIMP": 0.8831,
+    "POS": 0.7034,
+    "IMPS": 0.7653
+   },
+   "ci": {
+    "S_ENTRY": [
+     0.7733,
+     0.8688
+    ],
+    "S_OWN": [
+     0.7501,
+     0.864
+    ],
+    "S_ALL": [
+     0.7032,
+     0.8775
+    ],
+    "S_SPAN": [
+     0.7789,
+     0.9227
+    ],
+    "R_LOCAL": [
+     0.494,
+     0.6274
+    ],
+    "R_BURST": [
+     0.7032,
+     0.849
+    ],
+    "R_RECENCY": [
+     0.74,
+     0.8409
+    ],
+    "R_MSGLEN": [
+     0.635,
+     0.7669
+    ],
+    "R_IDX": [
+     0.5,
+     0.5
+    ],
+    "R_FREQ": [
+     0.4153,
+     0.5207
+    ],
+    "R_POSMSG": [
+     0.3944,
+     0.6204
+    ],
+    "IMP": [
+     0.7602,
+     0.9179
+    ],
+    "FULL": [
+     0.8027,
+     0.9404
+    ],
+    "RIV": [
+     0.7473,
+     0.9042
+    ],
+    "RIVIMP": [
+     0.8288,
+     0.9319
+    ],
+    "POS": [
+     0.6329,
+     0.7639
+    ],
+    "IMPS": [
+     0.712,
+     0.8208
+    ]
+   },
+   "flipQ95": {
+    "S_ENTRY": 0.5676,
+    "S_OWN": 0.5871,
+    "S_ALL": 0.5783,
+    "S_SPAN": 0.5899,
+    "R_LOCAL": 0.5582,
+    "IMP": 0.6057,
+    "FULL": 0.597,
+    "RIV": 0.5844,
+    "RIVIMP": 0.5968,
+    "IMPS": 0.5884
+   },
+   "wAuc": {},
+   "increment": {
+    "point": 0.0484,
+    "ci": [
+     -0.0078,
+     0.1078
+    ]
+   },
+   "matching": {
+    "init": [
+     1,
+     1
+    ],
+    "idx": [
+     0,
+     0
+    ],
+    "logLen": [
+     2.245,
+     1.53
+    ],
+    "logDayCount": [
+     2.419,
+     2.49
+    ],
+    "logNwin": [
+     1.765,
+     1.619
+    ],
+    "last16": [
+     1.946,
+     0.689
+    ],
+    "logGap": [
+     1.883,
+     3.245
+    ],
+    "posMsg": [
+     533.068,
+     568.095
+    ]
+   },
+   "K5_posNonNull": 0.9054,
+   "negNonNull": 0.2703,
+   "shuffledPosNonNull": 0.5811,
+   "posMedianExtent": 677,
+   "negMedianExtent": 0
+  },
+  "B:NONINIT": {
+   "name": "B:NONINIT",
+   "n": 118,
+   "pairs": 59,
+   "days": 11,
+   "auc": {
+    "S_ENTRY": 0.822,
+    "S_OWN": 0.6594,
+    "S_ALL": 0.5342,
+    "S_SPAN": 0.5872,
+    "R_LOCAL": 0.6481,
+    "R_BURST": 0.7501,
+    "R_RECENCY": 0.6985,
+    "R_MSGLEN": 0.2993,
+    "R_IDX": 0.4937,
+    "R_FREQ": 0.4711,
+    "R_POSMSG": 0.4634,
+    "IMP": 0.8567,
+    "FULL": 0.8972,
+    "RIV": 0.7745,
+    "RIVIMP": 0.8851,
+    "POS": 0.7011,
+    "IMPS": 0.6731
+   },
+   "ci": {
+    "S_ENTRY": [
+     0.7342,
+     0.9018
+    ],
+    "S_OWN": [
+     0.5467,
+     0.7369
+    ],
+    "S_ALL": [
+     0.4731,
+     0.588
+    ],
+    "S_SPAN": [
+     0.4757,
+     0.67
+    ],
+    "R_LOCAL": [
+     0.5372,
+     0.7479
+    ],
+    "R_BURST": [
+     0.6772,
+     0.8334
+    ],
+    "R_RECENCY": [
+     0.6249,
+     0.7996
+    ],
+    "R_MSGLEN": [
+     0.2335,
+     0.3804
+    ],
+    "R_IDX": [
+     0.486,
+     0.5037
+    ],
+    "R_FREQ": [
+     0.4283,
+     0.5074
+    ],
+    "R_POSMSG": [
+     0.3554,
+     0.5463
+    ],
+    "IMP": [
+     0.7851,
+     0.9261
+    ],
+    "FULL": [
+     0.8344,
+     0.9427
+    ],
+    "RIV": [
+     0.7065,
+     0.8216
+    ],
+    "RIVIMP": [
+     0.8243,
+     0.9448
+    ],
+    "POS": [
+     0.6157,
+     0.7768
+    ],
+    "IMPS": [
+     0.5939,
+     0.7299
+    ]
+   },
+   "flipQ95": {
+    "S_ENTRY": 0.5847,
+    "S_OWN": 0.5816,
+    "S_ALL": 0.5832,
+    "S_SPAN": 0.5827,
+    "R_LOCAL": 0.5803,
+    "IMP": 0.6027,
+    "FULL": 0.603,
+    "RIV": 0.5901,
+    "RIVIMP": 0.6116,
+    "IMPS": 0.5791
+   },
+   "wAuc": {},
+   "increment": {
+    "point": 0.1106,
+    "ci": [
+     0.0464,
+     0.1917
+    ]
+   },
+   "matching": {
+    "init": [
+     0,
+     0
+    ],
+    "idx": [
+     3.085,
+     3.458
+    ],
+    "logLen": [
+     1.799,
+     2.411
+    ],
+    "logDayCount": [
+     2.581,
+     2.634
+    ],
+    "logNwin": [
+     1.86,
+     1.517
+    ],
+    "last16": [
+     1.61,
+     0.424
+    ],
+    "logGap": [
+     2.347,
+     3.266
+    ],
+    "posMsg": [
+     557.051,
+     613.203
+    ]
+   },
+   "K5_posNonNull": 0.8305,
+   "negNonNull": 0.6271,
+   "shuffledPosNonNull": 0.3729,
+   "posMedianExtent": 541,
+   "negMedianExtent": 0
+  },
+  "B:STRICT-NONINIT": {
+   "name": "B:STRICT-NONINIT",
+   "n": 68,
+   "pairs": 34,
+   "days": 10,
+   "auc": {
+    "S_ENTRY": 0.8529,
+    "S_OWN": 0.6566,
+    "S_ALL": 0.5817,
+    "S_SPAN": 0.5813,
+    "R_LOCAL": 0.6237,
+    "R_BURST": 0.7509,
+    "R_RECENCY": 0.7016,
+    "R_MSGLEN": 0.2863,
+    "R_IDX": 0.4931,
+    "R_FREQ": 0.4338,
+    "R_POSMSG": 0.4654,
+    "IMP": 0.8469,
+    "FULL": 0.8875,
+    "RIV": 0.7699,
+    "RIVIMP": 0.8979,
+    "POS": 0.7033,
+    "IMPS": 0.6194
+   },
+   "ci": {
+    "S_ENTRY": [
+     0.7742,
+     0.9286
+    ],
+    "S_OWN": [
+     0.4152,
+     0.7792
+    ],
+    "S_ALL": [
+     0.4266,
+     0.697
+    ],
+    "S_SPAN": [
+     0.3097,
+     0.7115
+    ],
+    "R_LOCAL": [
+     0.4742,
+     0.716
+    ],
+    "R_BURST": [
+     0.6752,
+     0.8828
+    ],
+    "R_RECENCY": [
+     0.625,
+     0.868
+    ],
+    "R_MSGLEN": [
+     0.1998,
+     0.3998
+    ],
+    "R_IDX": [
+     0.4696,
+     0.5078
+    ],
+    "R_FREQ": [
+     0.3543,
+     0.477
+    ],
+    "R_POSMSG": [
+     0.3533,
+     0.5351
+    ],
+    "IMP": [
+     0.7788,
+     0.9247
+    ],
+    "FULL": [
+     0.814,
+     0.9507
+    ],
+    "RIV": [
+     0.6826,
+     0.8388
+    ],
+    "RIVIMP": [
+     0.8512,
+     0.9424
+    ],
+    "POS": [
+     0.5806,
+     0.794
+    ],
+    "IMPS": [
+     0.5033,
+     0.7189
+    ]
+   },
+   "flipQ95": {
+    "S_ENTRY": 0.6176,
+    "S_OWN": 0.6159,
+    "S_ALL": 0.5952,
+    "S_SPAN": 0.599,
+    "R_LOCAL": 0.5865,
+    "IMP": 0.6228,
+    "FULL": 0.6358,
+    "RIV": 0.5969,
+    "RIVIMP": 0.622,
+    "IMPS": 0.6047
+   },
+   "wAuc": {},
+   "increment": {
+    "point": 0.128,
+    "ci": [
+     0.0536,
+     0.2296
+    ]
+   },
+   "matching": {
+    "init": [
+     0,
+     0
+    ],
+    "idx": [
+     3.147,
+     3.794
+    ],
+    "logLen": [
+     1.835,
+     2.5
+    ],
+    "logDayCount": [
+     2.743,
+     2.881
+    ],
+    "logNwin": [
+     2.062,
+     1.81
+    ],
+    "last16": [
+     1.676,
+     0.441
+    ],
+    "logGap": [
+     2.349,
+     3.184
+    ],
+    "posMsg": [
+     598.382,
+     668.088
+    ]
+   },
+   "K5_posNonNull": 0.8529,
+   "negNonNull": 0.6471,
+   "shuffledPosNonNull": 0.3529,
+   "posMedianExtent": 712,
+   "negMedianExtent": 0
+  },
+  "B:POOL": {
+   "name": "B:POOL",
+   "n": 404,
+   "pairs": 202,
+   "days": 12,
+   "auc": {
+    "S_ENTRY": 0.8144,
+    "S_OWN": 0.7444,
+    "S_ALL": 0.6664,
+    "S_SPAN": 0.7244,
+    "R_LOCAL": 0.6216,
+    "R_BURST": 0.7872,
+    "R_RECENCY": 0.7776,
+    "R_MSGLEN": 0.5715,
+    "R_IDX": 0.4995,
+    "R_FREQ": 0.4916,
+    "R_POSMSG": 0.5091,
+    "IMP": 0.8486,
+    "FULL": 0.8993,
+    "RIV": 0.8088,
+    "RIVIMP": 0.8843,
+    "POS": 0.5641,
+    "IMPS": 0.7419
+   },
+   "ci": {
+    "S_ENTRY": [
+     0.7748,
+     0.8458
+    ],
+    "S_OWN": [
+     0.7386,
+     0.8005
+    ],
+    "S_ALL": [
+     0.655,
+     0.7522
+    ],
+    "S_SPAN": [
+     0.7337,
+     0.8146
+    ],
+    "R_LOCAL": [
+     0.5719,
+     0.6613
+    ],
+    "R_BURST": [
+     0.7263,
+     0.8458
+    ],
+    "R_RECENCY": [
+     0.7547,
+     0.8318
+    ],
+    "R_MSGLEN": [
+     0.5843,
+     0.7184
+    ],
+    "R_IDX": [
+     0.4999,
+     0.5
+    ],
+    "R_FREQ": [
+     0.4591,
+     0.5382
+    ],
+    "R_POSMSG": [
+     0.4317,
+     0.6212
+    ],
+    "IMP": [
+     0.8085,
+     0.8815
+    ],
+    "FULL": [
+     0.8523,
+     0.9374
+    ],
+    "RIV": [
+     0.7795,
+     0.868
+    ],
+    "RIVIMP": [
+     0.8556,
+     0.9159
+    ],
+    "POS": [
+     0.5785,
+     0.7156
+    ],
+    "IMPS": [
+     0.7306,
+     0.792
+    ]
+   },
+   "flipQ95": {
+    "S_ENTRY": 0.547,
+    "S_OWN": 0.5482,
+    "S_ALL": 0.5476,
+    "S_SPAN": 0.5487,
+    "R_LOCAL": 0.54,
+    "IMP": 0.5554,
+    "FULL": 0.5579,
+    "RIV": 0.5495,
+    "RIVIMP": 0.5536,
+    "IMPS": 0.55
+   },
+   "wAuc": {
+    "S_ENTRY": 0.812,
+    "S_OWN": 0.7696,
+    "S_ALL": 0.7013,
+    "S_SPAN": 0.7717,
+    "R_LOCAL": 0.6163,
+    "R_BURST": 0.798,
+    "R_RECENCY": 0.7945,
+    "R_MSGLEN": 0.6552,
+    "R_IDX": 0.5,
+    "R_FREQ": 0.4967,
+    "R_POSMSG": 0.5225,
+    "IMP": 0.8506,
+    "FULL": 0.8983,
+    "RIV": 0.8325,
+    "RIVIMP": 0.8864,
+    "POS": 0.6492,
+    "IMPS": 0.7615
+   },
+   "increment": {
+    "point": 0.0755,
+    "ci": [
+     0.0244,
+     0.0873
+    ]
+   },
+   "incrementWeighted": 0.0539,
+   "matching": {
+    "init": [
+     0.708,
+     0.708
+    ],
+    "idx": [
+     0.901,
+     1.01
+    ],
+    "logLen": [
+     2.096,
+     1.843
+    ],
+    "logDayCount": [
+     2.365,
+     2.39
+    ],
+    "logNwin": [
+     1.69,
+     1.412
+    ],
+    "last16": [
+     1.787,
+     0.48
+    ],
+    "logGap": [
+     2.039,
+     3.472
+    ],
+    "posMsg": [
+     529.619,
+     564.465
+    ]
+   },
+   "K5_posNonNull": 0.8614,
+   "negNonNull": 0.4455,
+   "shuffledPosNonNull": 0.4851,
+   "posMedianExtent": 479,
+   "negMedianExtent": 0
+  },
+  "B:STRICT-POOL": {
+   "name": "B:STRICT-POOL",
+   "n": 216,
+   "pairs": 108,
+   "days": 12,
+   "auc": {
+    "S_ENTRY": 0.8333,
+    "S_OWN": 0.7596,
+    "S_ALL": 0.7329,
+    "S_SPAN": 0.7626,
+    "R_LOCAL": 0.5746,
+    "R_BURST": 0.7768,
+    "R_RECENCY": 0.7659,
+    "R_MSGLEN": 0.5771,
+    "R_IDX": 0.4993,
+    "R_FREQ": 0.4565,
+    "R_POSMSG": 0.4961,
+    "IMP": 0.861,
+    "FULL": 0.9108,
+    "RIV": 0.7895,
+    "RIVIMP": 0.8964,
+    "POS": 0.5763,
+    "IMPS": 0.724
+   },
+   "ci": {
+    "S_ENTRY": [
+     0.7941,
+     0.8711
+    ],
+    "S_OWN": [
+     0.6941,
+     0.8182
+    ],
+    "S_ALL": [
+     0.6498,
+     0.8183
+    ],
+    "S_SPAN": [
+     0.6953,
+     0.8368
+    ],
+    "R_LOCAL": [
+     0.4979,
+     0.649
+    ],
+    "R_BURST": [
+     0.7093,
+     0.8371
+    ],
+    "R_RECENCY": [
+     0.7163,
+     0.829
+    ],
+    "R_MSGLEN": [
+     0.5016,
+     0.6557
+    ],
+    "R_IDX": [
+     0.4968,
+     0.5003
+    ],
+    "R_FREQ": [
+     0.4129,
+     0.5007
+    ],
+    "R_POSMSG": [
+     0.4252,
+     0.5863
+    ],
+    "IMP": [
+     0.8134,
+     0.9039
+    ],
+    "FULL": [
+     0.8659,
+     0.9506
+    ],
+    "RIV": [
+     0.7313,
+     0.8426
+    ],
+    "RIVIMP": [
+     0.8655,
+     0.9292
+    ],
+    "POS": [
+     0.5022,
+     0.6574
+    ],
+    "IMPS": [
+     0.6752,
+     0.7725
+    ]
+   },
+   "flipQ95": {
+    "S_ENTRY": 0.5556,
+    "S_OWN": 0.5656,
+    "S_ALL": 0.5664,
+    "S_SPAN": 0.5639,
+    "R_LOCAL": 0.5453,
+    "IMP": 0.5802,
+    "FULL": 0.5742,
+    "RIV": 0.5683,
+    "RIVIMP": 0.5778,
+    "IMPS": 0.5678
+   },
+   "wAuc": {},
+   "increment": {
+    "point": 0.1069,
+    "ci": [
+     0.0734,
+     0.1445
+    ]
+   },
+   "matching": {
+    "init": [
+     0.685,
+     0.685
+    ],
+    "idx": [
+     0.991,
+     1.194
+    ],
+    "logLen": [
+     2.116,
+     1.835
+    ],
+    "logDayCount": [
+     2.521,
+     2.613
+    ],
+    "logNwin": [
+     1.859,
+     1.679
+    ],
+    "last16": [
+     1.861,
+     0.611
+    ],
+    "logGap": [
+     2.03,
+     3.226
+    ],
+    "posMsg": [
+     553.63,
+     599.574
+    ]
+   },
+   "K5_posNonNull": 0.8889,
+   "negNonNull": 0.3889,
+   "shuffledPosNonNull": 0.5093,
+   "posMedianExtent": 688,
+   "negMedianExtent": 0
+  },
+  "AB:INIT": {
+   "name": "AB:INIT",
+   "n": 1086,
+   "pairs": 543,
+   "days": 22,
+   "auc": {
+    "S_ENTRY": 0.7799,
+    "S_OWN": 0.7483,
+    "S_ALL": 0.662,
+    "S_SPAN": 0.7314,
+    "R_LOCAL": 0.6796,
+    "R_BURST": 0.7508,
+    "R_RECENCY": 0.7399,
+    "R_MSGLEN": 0.6753,
+    "R_IDX": 0.5,
+    "R_FREQ": 0.492,
+    "R_POSMSG": 0.5163,
+    "IMP": 0.8782,
+    "FULL": 0.8954,
+    "RIV": 0.8135,
+    "RIVIMP": 0.8887,
+    "POS": 0.6721,
+    "IMPS": 0.7529
+   },
+   "ci": {
+    "S_ENTRY": [
+     0.7558,
+     0.8059
+    ],
+    "S_OWN": [
+     0.7291,
+     0.7688
+    ],
+    "S_ALL": [
+     0.632,
+     0.6976
+    ],
+    "S_SPAN": [
+     0.7083,
+     0.7603
+    ],
+    "R_LOCAL": [
+     0.644,
+     0.7073
+    ],
+    "R_BURST": [
+     0.7106,
+     0.7885
+    ],
+    "R_RECENCY": [
+     0.7085,
+     0.7763
+    ],
+    "R_MSGLEN": [
+     0.6345,
+     0.7137
+    ],
+    "R_IDX": [
+     0.5,
+     0.5
+    ],
+    "R_FREQ": [
+     0.4782,
+     0.5062
+    ],
+    "R_POSMSG": [
+     0.4843,
+     0.543
+    ],
+    "IMP": [
+     0.848,
+     0.9056
+    ],
+    "FULL": [
+     0.8677,
+     0.9233
+    ],
+    "RIV": [
+     0.7808,
+     0.8415
+    ],
+    "RIVIMP": [
+     0.8559,
+     0.919
+    ],
+    "POS": [
+     0.6317,
+     0.711
+    ],
+    "IMPS": [
+     0.7215,
+     0.7886
+    ]
+   },
+   "flipQ95": {
+    "S_ENTRY": 0.5295,
+    "S_OWN": 0.5297,
+    "S_ALL": 0.5272,
+    "S_SPAN": 0.5282,
+    "R_LOCAL": 0.5272,
+    "IMP": 0.5327,
+    "FULL": 0.5348,
+    "RIV": 0.5298,
+    "RIVIMP": 0.5332,
+    "IMPS": 0.5312
+   },
+   "wAuc": {},
+   "increment": {
+    "point": 0.0753,
+    "ci": [
+     0.0554,
+     0.0947
+    ]
+   },
+   "matching": {
+    "init": [
+     1,
+     1
+    ],
+    "idx": [
+     0,
+     0
+    ],
+    "logLen": [
+     2.159,
+     1.558
+    ],
+    "logDayCount": [
+     2.476,
+     2.501
+    ],
+    "logNwin": [
+     1.708,
+     1.275
+    ],
+    "last16": [
+     1.919,
+     0.77
+    ],
+    "logGap": [
+     1.937,
+     3.236
+    ],
+    "posMsg": [
+     1650.425,
+     1540.923
+    ]
+   },
+   "K5_posNonNull": 0.8287,
+   "negNonNull": 0.4309,
+   "shuffledPosNonNull": 0.4972,
+   "posMedianExtent": 420,
+   "negMedianExtent": 0
+  },
+  "AB:STRICT-INIT": {
+   "name": "AB:STRICT-INIT",
+   "n": 494,
+   "pairs": 247,
+   "days": 22,
+   "auc": {
+    "S_ENTRY": 0.7692,
+    "S_OWN": 0.7535,
+    "S_ALL": 0.7138,
+    "S_SPAN": 0.7843,
+    "R_LOCAL": 0.5817,
+    "R_BURST": 0.6942,
+    "R_RECENCY": 0.7126,
+    "R_MSGLEN": 0.6791,
+    "R_IDX": 0.5,
+    "R_FREQ": 0.4806,
+    "R_POSMSG": 0.5014,
+    "IMP": 0.8404,
+    "FULL": 0.8561,
+    "RIV": 0.7586,
+    "RIVIMP": 0.8537,
+    "POS": 0.6745,
+    "IMPS": 0.6795
+   },
+   "ci": {
+    "S_ENTRY": [
+     0.7336,
+     0.8103
+    ],
+    "S_OWN": [
+     0.7179,
+     0.7921
+    ],
+    "S_ALL": [
+     0.6668,
+     0.7666
+    ],
+    "S_SPAN": [
+     0.742,
+     0.8315
+    ],
+    "R_LOCAL": [
+     0.5494,
+     0.6111
+    ],
+    "R_BURST": [
+     0.6415,
+     0.7577
+    ],
+    "R_RECENCY": [
+     0.6663,
+     0.7683
+    ],
+    "R_MSGLEN": [
+     0.6278,
+     0.7285
+    ],
+    "R_IDX": [
+     0.5,
+     0.5
+    ],
+    "R_FREQ": [
+     0.4619,
+     0.4959
+    ],
+    "R_POSMSG": [
+     0.4664,
+     0.5361
+    ],
+    "IMP": [
+     0.8031,
+     0.8808
+    ],
+    "FULL": [
+     0.8155,
+     0.8943
+    ],
+    "RIV": [
+     0.7118,
+     0.8116
+    ],
+    "RIVIMP": [
+     0.8165,
+     0.8924
+    ],
+    "POS": [
+     0.6234,
+     0.7254
+    ],
+    "IMPS": [
+     0.6286,
+     0.737
+    ]
+   },
+   "flipQ95": {
+    "S_ENTRY": 0.5385,
+    "S_OWN": 0.542,
+    "S_ALL": 0.5433,
+    "S_SPAN": 0.5465,
+    "R_LOCAL": 0.5284,
+    "IMP": 0.5481,
+    "FULL": 0.5497,
+    "RIV": 0.547,
+    "RIVIMP": 0.5477,
+    "IMPS": 0.5454
+   },
+   "wAuc": {},
+   "increment": {
+    "point": 0.0951,
+    "ci": [
+     0.058,
+     0.1317
+    ]
+   },
+   "matching": {
+    "init": [
+     1,
+     1
+    ],
+    "idx": [
+     0,
+     0
+    ],
+    "logLen": [
+     2.228,
+     1.629
+    ],
+    "logDayCount": [
+     2.676,
+     2.732
+    ],
+    "logNwin": [
+     1.835,
+     1.618
+    ],
+    "last16": [
+     1.862,
+     1.032
+    ],
+    "logGap": [
+     1.954,
+     2.988
+    ],
+    "posMsg": [
+     1546.992,
+     1505.04
+    ]
+   },
+   "K5_posNonNull": 0.8583,
+   "negNonNull": 0.4008,
+   "shuffledPosNonNull": 0.5263,
+   "posMedianExtent": 606,
+   "negMedianExtent": 0
+  },
+  "AB:NONINIT": {
+   "name": "AB:NONINIT",
+   "n": 820,
+   "pairs": 410,
+   "days": 21,
+   "auc": {
+    "S_ENTRY": 0.7707,
+    "S_OWN": 0.6318,
+    "S_ALL": 0.5367,
+    "S_SPAN": 0.5331,
+    "R_LOCAL": 0.6882,
+    "R_BURST": 0.6775,
+    "R_RECENCY": 0.6775,
+    "R_MSGLEN": 0.3758,
+    "R_IDX": 0.4976,
+    "R_FREQ": 0.4973,
+    "R_POSMSG": 0.5017,
+    "IMP": 0.6819,
+    "FULL": 0.8998,
+    "RIV": 0.7764,
+    "RIVIMP": 0.8785,
+    "POS": 0.6287,
+    "IMPS": 0.6864
+   },
+   "ci": {
+    "S_ENTRY": [
+     0.7302,
+     0.8101
+    ],
+    "S_OWN": [
+     0.5958,
+     0.6776
+    ],
+    "S_ALL": [
+     0.5012,
+     0.5709
+    ],
+    "S_SPAN": [
+     0.4908,
+     0.5815
+    ],
+    "R_LOCAL": [
+     0.6546,
+     0.7191
+    ],
+    "R_BURST": [
+     0.6333,
+     0.7255
+    ],
+    "R_RECENCY": [
+     0.6445,
+     0.7113
+    ],
+    "R_MSGLEN": [
+     0.3468,
+     0.399
+    ],
+    "R_IDX": [
+     0.4932,
+     0.5018
+    ],
+    "R_FREQ": [
+     0.4862,
+     0.509
+    ],
+    "R_POSMSG": [
+     0.4519,
+     0.5541
+    ],
+    "IMP": [
+     0.6083,
+     0.802
+    ],
+    "FULL": [
+     0.8739,
+     0.9291
+    ],
+    "RIV": [
+     0.7467,
+     0.8066
+    ],
+    "RIVIMP": [
+     0.8482,
+     0.9096
+    ],
+    "POS": [
+     0.6038,
+     0.6601
+    ],
+    "IMPS": [
+     0.6232,
+     0.7361
+    ]
+   },
+   "flipQ95": {
+    "S_ENTRY": 0.5293,
+    "S_OWN": 0.5282,
+    "S_ALL": 0.5312,
+    "S_SPAN": 0.5303,
+    "R_LOCAL": 0.5309,
+    "IMP": 0.5223,
+    "FULL": 0.5414,
+    "RIV": 0.5374,
+    "RIVIMP": 0.5386,
+    "IMPS": 0.5329
+   },
+   "wAuc": {},
+   "increment": {
+    "point": 0.1021,
+    "ci": [
+     0.0841,
+     0.1195
+    ]
+   },
+   "matching": {
+    "init": [
+     0,
+     0
+    ],
+    "idx": [
+     3.532,
+     4.034
+    ],
+    "logLen": [
+     1.863,
+     2.254
+    ],
+    "logDayCount": [
+     2.884,
+     2.9
+    ],
+    "logNwin": [
+     1.849,
+     1.345
+    ],
+    "last16": [
+     1.361,
+     0.62
+    ],
+    "logGap": [
+     2.348,
+     3.242
+    ],
+    "posMsg": [
+     1828.502,
+     1788.09
+    ]
+   },
+   "K5_posNonNull": 0.7854,
+   "negNonNull": 0.6098,
+   "shuffledPosNonNull": 0.4341,
+   "posMedianExtent": 532,
+   "negMedianExtent": 0
+  },
+  "AB:STRICT-NONINIT": {
+   "name": "AB:STRICT-NONINIT",
+   "n": 414,
+   "pairs": 207,
+   "days": 20,
+   "auc": {
+    "S_ENTRY": 0.8164,
+    "S_OWN": 0.664,
+    "S_ALL": 0.5985,
+    "S_SPAN": 0.5821,
+    "R_LOCAL": 0.6548,
+    "R_BURST": 0.6481,
+    "R_RECENCY": 0.6284,
+    "R_MSGLEN": 0.3831,
+    "R_IDX": 0.4957,
+    "R_FREQ": 0.494,
+    "R_POSMSG": 0.4987,
+    "IMP": 0.858,
+    "FULL": 0.8893,
+    "RIV": 0.7268,
+    "RIVIMP": 0.8645,
+    "POS": 0.6209,
+    "IMPS": 0.6533
+   },
+   "ci": {
+    "S_ENTRY": [
+     0.7753,
+     0.8521
+    ],
+    "S_OWN": [
+     0.6072,
+     0.717
+    ],
+    "S_ALL": [
+     0.5566,
+     0.6327
+    ],
+    "S_SPAN": [
+     0.5166,
+     0.6469
+    ],
+    "R_LOCAL": [
+     0.6084,
+     0.6943
+    ],
+    "R_BURST": [
+     0.5816,
+     0.7126
+    ],
+    "R_RECENCY": [
+     0.5634,
+     0.6871
+    ],
+    "R_MSGLEN": [
+     0.3313,
+     0.4256
+    ],
+    "R_IDX": [
+     0.4877,
+     0.502
+    ],
+    "R_FREQ": [
+     0.4742,
+     0.5091
+    ],
+    "R_POSMSG": [
+     0.4453,
+     0.5425
+    ],
+    "IMP": [
+     0.8123,
+     0.9006
+    ],
+    "FULL": [
+     0.846,
+     0.9323
+    ],
+    "RIV": [
+     0.673,
+     0.7741
+    ],
+    "RIVIMP": [
+     0.8154,
+     0.9112
+    ],
+    "POS": [
+     0.5664,
+     0.6756
+    ],
+    "IMPS": [
+     0.5668,
+     0.725
+    ]
+   },
+   "flipQ95": {
+    "S_ENTRY": 0.5459,
+    "S_OWN": 0.5428,
+    "S_ALL": 0.5414,
+    "S_SPAN": 0.5457,
+    "R_LOCAL": 0.5335,
+    "IMP": 0.5542,
+    "FULL": 0.5557,
+    "RIV": 0.5434,
+    "RIVIMP": 0.5512,
+    "IMPS": 0.552
+   },
+   "wAuc": {},
+   "increment": {
+    "point": 0.1376,
+    "ci": [
+     0.1052,
+     0.1669
+    ]
+   },
+   "matching": {
+    "init": [
+     0,
+     0
+    ],
+    "idx": [
+     3.676,
+     4.111
+    ],
+    "logLen": [
+     1.922,
+     2.279
+    ],
+    "logDayCount": [
+     3.15,
+     3.188
+    ],
+    "logNwin": [
+     2.044,
+     1.657
+    ],
+    "last16": [
+     1.377,
+     0.744
+    ],
+    "logGap": [
+     2.396,
+     2.965
+    ],
+    "posMsg": [
+     1796.957,
+     1757.937
+    ]
+   },
+   "K5_posNonNull": 0.8261,
+   "negNonNull": 0.5749,
+   "shuffledPosNonNull": 0.4348,
+   "posMedianExtent": 752,
+   "negMedianExtent": 0
+  },
+  "AB:POOL": {
+   "name": "AB:POOL",
+   "n": 1906,
+   "pairs": 953,
+   "days": 22,
+   "auc": {
+    "S_ENTRY": 0.776,
+    "S_OWN": 0.6988,
+    "S_ALL": 0.6104,
+    "S_SPAN": 0.6394,
+    "R_LOCAL": 0.6824,
+    "R_BURST": 0.7187,
+    "R_RECENCY": 0.7147,
+    "R_MSGLEN": 0.5475,
+    "R_IDX": 0.4996,
+    "R_FREQ": 0.4933,
+    "R_POSMSG": 0.5095,
+    "IMP": 0.8682,
+    "FULL": 0.8021,
+    "RIV": 0.7812,
+    "RIVIMP": 0.8797,
+    "POS": 0.5492,
+    "IMPS": 0.719
+   },
+   "ci": {
+    "S_ENTRY": [
+     0.7531,
+     0.8063
+    ],
+    "S_OWN": [
+     0.7193,
+     0.7589
+    ],
+    "S_ALL": [
+     0.6239,
+     0.685
+    ],
+    "S_SPAN": [
+     0.6901,
+     0.7428
+    ],
+    "R_LOCAL": [
+     0.6466,
+     0.7072
+    ],
+    "R_BURST": [
+     0.7072,
+     0.7802
+    ],
+    "R_RECENCY": [
+     0.7004,
+     0.7698
+    ],
+    "R_MSGLEN": [
+     0.6165,
+     0.6924
+    ],
+    "R_IDX": [
+     0.5,
+     0.5
+    ],
+    "R_FREQ": [
+     0.4786,
+     0.5044
+    ],
+    "R_POSMSG": [
+     0.4849,
+     0.5406
+    ],
+    "IMP": [
+     0.8358,
+     0.8953
+    ],
+    "FULL": [
+     0.6755,
+     0.9191
+    ],
+    "RIV": [
+     0.7694,
+     0.8274
+    ],
+    "RIVIMP": [
+     0.8514,
+     0.914
+    ],
+    "POS": [
+     0.6155,
+     0.691
+    ],
+    "IMPS": [
+     0.7101,
+     0.7766
+    ]
+   },
+   "flipQ95": {
+    "S_ENTRY": 0.5199,
+    "S_OWN": 0.5207,
+    "S_ALL": 0.52,
+    "S_SPAN": 0.5204,
+    "R_LOCAL": 0.5205,
+    "IMP": 0.5258,
+    "FULL": 0.522,
+    "RIV": 0.5262,
+    "RIVIMP": 0.5252,
+    "IMPS": 0.5229
+   },
+   "wAuc": {
+    "S_ENTRY": 0.7792,
+    "S_OWN": 0.7393,
+    "S_ALL": 0.6528,
+    "S_SPAN": 0.7137,
+    "R_LOCAL": 0.68,
+    "R_BURST": 0.7449,
+    "R_RECENCY": 0.7354,
+    "R_MSGLEN": 0.652,
+    "R_IDX": 0.5,
+    "R_FREQ": 0.4921,
+    "R_POSMSG": 0.515,
+    "IMP": 0.8683,
+    "FULL": 0.8016,
+    "RIV": 0.8013,
+    "RIVIMP": 0.884,
+    "POS": 0.6506,
+    "IMPS": 0.741
+   },
+   "increment": {
+    "point": 0.0985,
+    "ci": [
+     0.0678,
+     0.1006
+    ]
+   },
+   "incrementWeighted": 0.0827,
+   "matching": {
+    "init": [
+     0.57,
+     0.57
+    ],
+    "idx": [
+     1.519,
+     1.736
+    ],
+    "logLen": [
+     2.032,
+     1.857
+    ],
+    "logDayCount": [
+     2.651,
+     2.673
+    ],
+    "logNwin": [
+     1.769,
+     1.305
+    ],
+    "last16": [
+     1.679,
+     0.705
+    ],
+    "logGap": [
+     2.114,
+     3.239
+    ],
+    "posMsg": [
+     1727.038,
+     1647.259
+    ]
+   },
+   "K5_posNonNull": 0.8101,
+   "negNonNull": 0.5079,
+   "shuffledPosNonNull": 0.4701,
+   "posMedianExtent": 459,
+   "negMedianExtent": 0
+  },
+  "AB:STRICT-POOL": {
+   "name": "AB:STRICT-POOL",
+   "n": 908,
+   "pairs": 454,
+   "days": 22,
+   "auc": {
+    "S_ENTRY": 0.7907,
+    "S_OWN": 0.7134,
+    "S_ALL": 0.6637,
+    "S_SPAN": 0.6865,
+    "R_LOCAL": 0.6144,
+    "R_BURST": 0.6752,
+    "R_RECENCY": 0.6752,
+    "R_MSGLEN": 0.5474,
+    "R_IDX": 0.4991,
+    "R_FREQ": 0.4859,
+    "R_POSMSG": 0.4999,
+    "IMP": 0.8566,
+    "FULL": 0.8903,
+    "RIV": 0.7158,
+    "RIVIMP": 0.8527,
+    "POS": 0.5471,
+    "IMPS": 0.6516
+   },
+   "ci": {
+    "S_ENTRY": [
+     0.7586,
+     0.8259
+    ],
+    "S_OWN": [
+     0.687,
+     0.7464
+    ],
+    "S_ALL": [
+     0.6344,
+     0.7025
+    ],
+    "S_SPAN": [
+     0.6488,
+     0.7329
+    ],
+    "R_LOCAL": [
+     0.5831,
+     0.6451
+    ],
+    "R_BURST": [
+     0.6273,
+     0.7246
+    ],
+    "R_RECENCY": [
+     0.6307,
+     0.7256
+    ],
+    "R_MSGLEN": [
+     0.5082,
+     0.5902
+    ],
+    "R_IDX": [
+     0.4974,
+     0.5004
+    ],
+    "R_FREQ": [
+     0.4718,
+     0.4966
+    ],
+    "R_POSMSG": [
+     0.4731,
+     0.5261
+    ],
+    "IMP": [
+     0.8197,
+     0.8919
+    ],
+    "FULL": [
+     0.8548,
+     0.9262
+    ],
+    "RIV": [
+     0.6626,
+     0.7606
+    ],
+    "RIVIMP": [
+     0.8104,
+     0.8915
+    ],
+    "POS": [
+     0.5071,
+     0.5931
+    ],
+    "IMPS": [
+     0.5984,
+     0.7004
+    ]
+   },
+   "flipQ95": {
+    "S_ENTRY": 0.5308,
+    "S_OWN": 0.5286,
+    "S_ALL": 0.5321,
+    "S_SPAN": 0.5317,
+    "R_LOCAL": 0.5214,
+    "IMP": 0.5368,
+    "FULL": 0.5403,
+    "RIV": 0.5294,
+    "RIVIMP": 0.5368,
+    "IMPS": 0.5331
+   },
+   "wAuc": {},
+   "increment": {
+    "point": 0.1369,
+    "ci": [
+     0.1092,
+     0.1655
+    ]
+   },
+   "matching": {
+    "init": [
+     0.544,
+     0.544
+    ],
+    "idx": [
+     1.676,
+     1.874
+    ],
+    "logLen": [
+     2.088,
+     1.925
+    ],
+    "logDayCount": [
+     2.892,
+     2.94
+    ],
+    "logNwin": [
+     1.931,
+     1.636
+    ],
+    "last16": [
+     1.641,
+     0.901
+    ],
+    "logGap": [
+     2.156,
+     2.978
+    ],
+    "posMsg": [
+     1660.963,
+     1620.348
+    ]
+   },
+   "K5_posNonNull": 0.8436,
+   "negNonNull": 0.4802,
+   "shuffledPosNonNull": 0.4846,
+   "posMedianExtent": 676,
+   "negMedianExtent": 0
+  }
+ }
+}

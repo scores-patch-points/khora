@@ -1,0 +1,224 @@
+{
+ "docs": 20,
+ "relations": 200,
+ "bothBound": 128,
+ "boundShare": 0.64,
+ "byBasis": {
+  "witness": 95,
+  "probe": 6,
+  "mixed": 27
+ },
+ "ambiguous": 0,
+ "unbound": 72,
+ "self": 20,
+ "sample": [
+  {
+   "schema": "EORelationAssertion@1",
+   "id": "rel-assert:06-government-legal/un-udhr/udhr-007.txt:1",
+   "relation": "e punda ua",
+   "end1": {
+    "referent": "ref:auto:mundu",
+    "surface": "mundu",
+    "basis": "probe",
+    "standing": "nominated",
+    "alternatives": null
+   },
+   "end2": {
+    "referent": "ref:auto:mundu",
+    "surface": "mundu",
+    "basis": "probe",
+    "standing": "nominated",
+    "alternatives": null
+   },
+   "doc": "06-government-legal/un-udhr/udhr-007.txt",
+   "language": "por",
+   "standing": "nominated",
+   "witness": {
+    "doc": "06-government-legal/un-udhr/udhr-007.txt",
+    "basis": "sidecar-projection"
+   }
+  },
+  {
+   "schema": "EORelationAssertion@1",
+   "id": "rel-assert:06-government-legal/un-udhr/udhr-007.txt:2",
+   "relation": "ploteçón di",
+   "end1": {
+    "referent": "ref:auto:punda",
+    "surface": "punda",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "end2": {
+    "referent": "ref:auto:diretu",
+    "surface": "Dirêtu",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "doc": "06-government-legal/un-udhr/udhr-007.txt",
+   "language": "por",
+   "standing": "witnessed",
+   "witness": {
+    "doc": "06-government-legal/un-udhr/udhr-007.txt",
+    "basis": "sidecar-projection"
+   }
+  },
+  {
+   "schema": "EORelationAssertion@1",
+   "id": "rel-assert:06-government-legal/un-udhr/udhr-007.txt:3",
+   "relation": "di",
+   "end1": {
+    "referent": "ref:auto:diretu",
+    "surface": "Dirêtu",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "end2": {
+    "referent": "ref:auto:home",
+    "surface": "Hómé",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "doc": "06-government-legal/un-udhr/udhr-007.txt",
+   "language": "por",
+   "standing": "witnessed",
+   "witness": {
+    "doc": "06-government-legal/un-udhr/udhr-007.txt",
+    "basis": "sidecar-projection"
+   }
+  },
+  {
+   "schema": "EORelationAssertion@1",
+   "id": "rel-assert:06-government-legal/un-udhr/udhr-007.txt:4",
+   "relation": "baseado ni ua ligime di",
+   "end1": {
+    "referent": "ref:auto:home",
+    "surface": "Hómé",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "end2": {
+    "referent": "ref:auto:diretu",
+    "surface": "Dirêtu",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "doc": "06-government-legal/un-udhr/udhr-007.txt",
+   "language": "por",
+   "standing": "witnessed",
+   "witness": {
+    "doc": "06-government-legal/un-udhr/udhr-007.txt",
+    "basis": "sidecar-projection"
+   }
+  },
+  {
+   "schema": "EORelationAssertion@1",
+   "id": "rel-assert:06-government-legal/un-udhr/udhr-007.txt:5",
+   "relation": "sá importante lumadu, pa",
+   "end1": {
+    "referent": "ref:auto:diretu",
+    "surface": "Dirêtu",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "end2": {
+    "referent": "ref:auto:home",
+    "surface": "Hómé",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "doc": "06-government-legal/un-udhr/udhr-007.txt",
+   "language": "por",
+   "standing": "witnessed",
+   "witness": {
+    "doc": "06-government-legal/un-udhr/udhr-007.txt",
+    "basis": "sidecar-projection"
+   }
+  },
+  {
+   "schema": "EORelationAssertion@1",
+   "id": "rel-assert:06-government-legal/un-udhr/udhr-008.txt:7",
+   "relation": "na",
+   "end1": {
+    "referent": "ref:auto:suma",
+    "surface": "suma",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "end2": {
+    "referent": "ref:auto:mundu",
+    "surface": "mundu",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "doc": "06-government-legal/un-udhr/udhr-008.txt",
+   "language": "ita",
+   "standing": "witnessed",
+   "witness": {
+    "doc": "06-government-legal/un-udhr/udhr-008.txt",
+    "basis": "sidecar-projection"
+   }
+  },
+  {
+   "schema": "EORelationAssertion@1",
+   "id": "rel-assert:06-government-legal/un-udhr/udhr-009.txt:8",
+   "relation": "uixi,",
+   "end1": {
+    "referent": "ref:auto:kutetulula_kuila",
+    "surface": "kutetulula kuila",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "end2": {
+    "referent": "ref:auto:kia",
+    "surface": "kia tokala",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "doc": "06-government-legal/un-udhr/udhr-009.txt",
+   "language": "ind",
+   "standing": "witnessed",
+   "witness": {
+    "doc": "06-government-legal/un-udhr/udhr-009.txt",
+    "basis": "sidecar-projection"
+   }
+  },
+  {
+   "schema": "EORelationAssertion@1",
+   "id": "rel-assert:06-government-legal/un-udhr/udhr-009.txt:9",
+   "relation": "tokala bu kale o dikuatenenu dia",
+   "end1": {
+    "referent": "ref:auto:kia",
+    "surface": "kia tokala",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "end2": {
+    "referent": "ref:auto:ubinganu",
+    "surface": "kia ubinganu",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "doc": "06-government-legal/un-udhr/udhr-009.txt",
+   "language": "ind",
+   "standing": "witnessed",
+   "witness": {
+    "doc": "06-government-legal/un-udhr/udhr-009.txt",
+    "basis": "sidecar-projection"
+   }
+  }
+ ]
+}

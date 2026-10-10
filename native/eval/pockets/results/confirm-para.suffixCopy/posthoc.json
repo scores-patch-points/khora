@@ -1,0 +1,2767 @@
+{
+ "headerSha256": "2ba3e8011e188a5e1241c0a2956bc7ced36deda4e1efb7296786738d8ed05436",
+ "draws": 100,
+ "note": "A1 noDup, A2 long6, A3 last1/cond: planned in the frozen header. A8 (Poisson tail of the event count given the 100-draw null event mean) and A9 (same-stem atlas dev+test v) were ADDED after the 10-draw z were seen, because laws/para.mjs warns that sparse nulls make the 10-draw z unreliable.",
+ "pockets": {
+  "sfx-cd-py314": {
+   "id": "sfx-cd-py314",
+   "tokens": 291020,
+   "halves": {
+    "discover": {
+     "base": {
+      "events": 540,
+      "pairs": 20237,
+      "v": 0.026683797005485003,
+      "nullMean": 0.0003450402053886379,
+      "nullSd": 0.00011746051256704103,
+      "z": 224.23498948264353,
+      "nullEventsMean": 6.86,
+      "poissonP": 1e-300,
+      "poissonZ": 37.04745470427304
+     },
+     "noDup": {
+      "events": 507,
+      "pairs": 20204,
+      "v": 0.025094040784003166,
+      "nullMean": 0.00026558486199627484,
+      "nullSd": 0.00010554666253971337,
+      "z": 235.23676944938782,
+      "nullEventsMean": 5.28,
+      "poissonP": 1e-300,
+      "poissonZ": 37.04745470427304
+     },
+     "long6": {
+      "events": 163,
+      "pairs": 3833,
+      "v": 0.042525436994521264,
+      "nullMean": 0.0008345302132792669,
+      "nullSd": 0.0005428912865904382,
+      "z": 76.79420873205866,
+      "nullEventsMean": 2.04,
+      "poissonP": 1.937347265877153e-242,
+      "poissonZ": 33.23114606621113
+     },
+     "last1": {
+      "events": 1802,
+      "pairs": 20237,
+      "v": 0.08904481889608143,
+      "nullMean": 0.003783901658195016,
+      "nullSd": 0.0004082193576220202,
+      "z": 208.8605443273258,
+      "nullEventsMean": 75.23,
+      "poissonP": 1e-300,
+      "poissonZ": 37.04745470427304
+     },
+     "cond": {
+      "events": 540,
+      "pairs": 1802,
+      "v": 0.29966703662597116,
+      "nullMean": 0.09110472321997377,
+      "nullSd": 0.02915925200600104,
+      "z": 7.152526181504066,
+      "nullEventsMean": 6.86,
+      "poissonP": 1e-300,
+      "poissonZ": null
+     }
+    },
+    "confirm": {
+     "base": {
+      "events": 704,
+      "pairs": 29720,
+      "v": 0.023687752355316286,
+      "nullMean": 0.00032111920601817564,
+      "nullSd": 0.00009643873249003048,
+      "z": 242.29510846913792,
+      "nullEventsMean": 9.47,
+      "poissonP": 1e-300,
+      "poissonZ": 37.04745470427304
+     },
+     "noDup": {
+      "events": 643,
+      "pairs": 29659,
+      "v": 0.021679759937961497,
+      "nullMean": 0.000250609604838918,
+      "nullSd": 0.00008714736712808231,
+      "z": 245.89555645011865,
+      "nullEventsMean": 7.39,
+      "poissonP": 1e-300,
+      "poissonZ": 37.04745470427304
+     },
+     "long6": {
+      "events": 143,
+      "pairs": 5231,
+      "v": 0.027337029248709614,
+      "nullMean": 0.00027684746455077327,
+      "nullSd": 0.00029117970407870915,
+      "z": 92.93292563016057,
+      "nullEventsMean": 0.87,
+      "poissonP": 2.45524679149339e-257,
+      "poissonZ": 34.24693723503826
+     },
+     "last1": {
+      "events": 2590,
+      "pairs": 29720,
+      "v": 0.08714670255720054,
+      "nullMean": 0.004280042138600981,
+      "nullSd": 0.00037797045658038547,
+      "z": 219.24110463108582,
+      "nullEventsMean": 126.22,
+      "poissonP": 1e-300,
+      "poissonZ": 37.04745470427304
+     },
+     "cond": {
+      "events": 704,
+      "pairs": 2590,
+      "v": 0.27181467181467184,
+      "nullMean": 0.07522084095565647,
+      "nullSd": 0.022901847956194203,
+      "z": 8.584190727099957,
+      "nullEventsMean": 9.47,
+      "poissonP": 1e-300,
+      "poissonZ": null
+     }
+    }
+   }
+  },
+  "sfx-cd-rb26": {
+   "id": "sfx-cd-rb26",
+   "tokens": 291169,
+   "halves": {
+    "discover": {
+     "base": {
+      "events": 484,
+      "pairs": 17813,
+      "v": 0.02717116712513333,
+      "nullMean": 0.0001238398017740156,
+      "nullSd": 0.00009232104182181924,
+      "z": 292.97034337590117,
+      "nullEventsMean": 2.09,
+      "poissonP": 1e-300,
+      "poissonZ": 37.04745470427304
+     },
+     "noDup": {
+      "events": 451,
+      "pairs": 17780,
+      "v": 0.025365579302587177,
+      "nullMean": 0.00005808038441138583,
+      "nullSd": 0.00005774984300266592,
+      "z": 438.2262808404087,
+      "nullEventsMean": 0.98,
+      "poissonP": 1e-300,
+      "poissonZ": 37.04745470427304
+     },
+     "long6": {
+      "events": 103,
+      "pairs": 2842,
+      "v": 0.036242083040112595,
+      "nullMean": 0.00026392579938273625,
+      "nullSd": 0.0003942829276212515,
+      "z": 91.24959444171142,
+      "nullEventsMean": 0.46,
+      "poissonP": 1.1760989807272226e-199,
+      "poissonZ": 30.12440804413037
+     },
+     "last1": {
+      "events": 2066,
+      "pairs": 17813,
+      "v": 0.115982709257284,
+      "nullMean": 0.0027968258031794146,
+      "nullSd": 0.0003902837472768608,
+      "z": 290.0092157150792,
+      "nullEventsMean": 47.21,
+      "poissonP": 1e-300,
+      "poissonZ": 37.04745470427304
+     },
+     "cond": {
+      "events": 484,
+      "pairs": 2066,
+      "v": 0.23426911907066797,
+      "nullMean": 0.05286374998739881,
+      "nullSd": 0.031018983200952584,
+      "z": 5.848204884991144,
+      "nullEventsMean": 2.09,
+      "poissonP": 1e-300,
+      "poissonZ": null
+     }
+    },
+    "confirm": {
+     "base": {
+      "events": 978,
+      "pairs": 31084,
+      "v": 0.03146313215802342,
+      "nullMean": 0.004797441137007345,
+      "nullSd": 0.00037574774805533155,
+      "z": 70.96700155629239,
+      "nullEventsMean": 135.98,
+      "poissonP": 1e-300,
+      "poissonZ": 37.04745470427304
+     },
+     "noDup": {
+      "events": 795,
+      "pairs": 30901,
+      "v": 0.025727322740364388,
+      "nullMean": 0.0015686700590550814,
+      "nullSd": 0.00024510304071259306,
+      "z": 98.56529160581755,
+      "nullEventsMean": 44.32,
+      "poissonP": 1e-300,
+      "poissonZ": 37.04745470427304
+     },
+     "long6": {
+      "events": 167,
+      "pairs": 2810,
+      "v": 0.059430604982206404,
+      "nullMean": 0.0003428867229397956,
+      "nullSd": 0.0005718209038561339,
+      "z": 103.33256070353919,
+      "nullEventsMean": 0.33,
+      "poissonP": 1e-300,
+      "poissonZ": 37.04745470427304
+     },
+     "last1": {
+      "events": 3370,
+      "pairs": 31084,
+      "v": 0.10841590528889461,
+      "nullMean": 0.009247750049719125,
+      "nullSd": 0.0005688499713535341,
+      "z": 174.33094881452237,
+      "nullEventsMean": 262.12,
+      "poissonP": 1e-300,
+      "poissonZ": 37.04745470427304
+     },
+     "cond": {
+      "events": 978,
+      "pairs": 3370,
+      "v": 0.29020771513353116,
+      "nullMean": 0.5191640749300958,
+      "nullSd": 0.03208490333361555,
+      "z": -7.13595292514675,
+      "nullEventsMean": 135.98,
+      "poissonP": 1e-300,
+      "poissonZ": null
+     }
+    }
+   }
+  },
+  "sfx-cd-chdr": {
+   "id": "sfx-cd-chdr",
+   "tokens": 291492,
+   "halves": {
+    "discover": {
+     "base": {
+      "events": 1082,
+      "pairs": 22815,
+      "v": 0.04742493973263204,
+      "nullMean": 0.0005008892404149115,
+      "nullSd": 0.0001366721398413954,
+      "z": 343.3329612507078,
+      "nullEventsMean": 11.19,
+      "poissonP": 1e-300,
+      "poissonZ": 37.04745470427304
+     },
+     "noDup": {
+      "events": 1020,
+      "pairs": 22753,
+      "v": 0.04482925328528106,
+      "nullMean": 0.00022791388989981746,
+      "nullSd": 0.00009183473473698302,
+      "z": 485.6696055487131,
+      "nullEventsMean": 5.09,
+      "poissonP": 1e-300,
+      "poissonZ": 37.04745470427304
+     },
+     "long6": {
+      "events": 660,
+      "pairs": 7726,
+      "v": 0.08542583484338596,
+      "nullMean": 0.001105905007886344,
+      "nullSd": 0.0004177188882957106,
+      "z": 201.8580729722905,
+      "nullEventsMean": 5.03,
+      "poissonP": 1e-300,
+      "poissonZ": 37.04745470427304
+     },
+     "last1": {
+      "events": 2508,
+      "pairs": 22815,
+      "v": 0.1099276791584484,
+      "nullMean": 0.0019610696213672478,
+      "nullSd": 0.0002816318189032684,
+      "z": 383.3608359933373,
+      "nullEventsMean": 43.81,
+      "poissonP": 1e-300,
+      "poissonZ": 37.04745470427304
+     },
+     "cond": {
+      "events": 1082,
+      "pairs": 2508,
+      "v": 0.4314194577352472,
+      "nullMean": 0.2623439710155029,
+      "nullSd": 0.04593261832720782,
+      "z": 3.6809459786357053,
+      "nullEventsMean": 11.19,
+      "poissonP": 1e-300,
+      "poissonZ": null
+     }
+    },
+    "confirm": {
+     "base": {
+      "events": 495,
+      "pairs": 20871,
+      "v": 0.02371711944803795,
+      "nullMean": 0.0017728732724382663,
+      "nullSd": 0.0002794130060702227,
+      "z": 78.53695317992678,
+      "nullEventsMean": 36.66,
+      "poissonP": 1e-300,
+      "poissonZ": 37.04745470427304
+     },
+     "noDup": {
+      "events": 489,
+      "pairs": 20865,
+      "v": 0.023436376707404744,
+      "nullMean": 0.000781282294258901,
+      "nullSd": 0.00020295592267031583,
+      "z": 111.62568756343744,
+      "nullEventsMean": 16.14,
+      "poissonP": 1e-300,
+      "poissonZ": 37.04745470427304
+     },
+     "long6": {
+      "events": 247,
+      "pairs": 6150,
+      "v": 0.04016260162601626,
+      "nullMean": 0.0013899818531916564,
+      "nullSd": 0.0005621768129638792,
+      "z": 68.96872812738332,
+      "nullEventsMean": 4.91,
+      "poissonP": 1e-300,
+      "poissonZ": 37.04745470427304
+     },
+     "last1": {
+      "events": 1703,
+      "pairs": 20871,
+      "v": 0.081596473575775,
+      "nullMean": 0.0032091741061218665,
+      "nullSd": 0.0003607970060673528,
+      "z": 217.26150203979233,
+      "nullEventsMean": 66.36,
+      "poissonP": 1e-300,
+      "poissonZ": 37.04745470427304
+     },
+     "cond": {
+      "events": 495,
+      "pairs": 1703,
+      "v": 0.2906635349383441,
+      "nullMean": 0.5515442711426152,
+      "nullSd": 0.05889861177019175,
+      "z": -4.429318932374248,
+      "nullEventsMean": 36.66,
+      "poissonP": 1e-300,
+      "poissonZ": null
+     }
+    }
+   }
+  },
+  "sfx-cd-npmjs": {
+   "id": "sfx-cd-npmjs",
+   "tokens": 291137,
+   "halves": {
+    "discover": {
+     "base": {
+      "events": 802,
+      "pairs": 24106,
+      "v": 0.03326972537957355,
+      "nullMean": 0.0002250315948111355,
+      "nullSd": 0.00009397961577166131,
+      "z": 351.61554464161514,
+      "nullEventsMean": 5.24,
+      "poissonP": 1e-300,
+      "poissonZ": 37.04745470427304
+     },
+     "noDup": {
+      "events": 731,
+      "pairs": 24035,
+      "v": 0.03041397961306428,
+      "nullMean": 0.00010436343444185692,
+      "nullSd": 0.00006747325781078656,
+      "z": 449.20931880329334,
+      "nullEventsMean": 2.43,
+      "poissonP": 1e-300,
+      "poissonZ": 37.04745470427304
+     },
+     "long6": {
+      "events": 153,
+      "pairs": 3771,
+      "v": 0.0405727923627685,
+      "nullMean": 0.00035095121704329513,
+      "nullSd": 0.00044438580791626313,
+      "z": 90.51108390325624,
+      "nullEventsMean": 0.85,
+      "poissonP": 3.40363970365315e-281,
+      "poissonZ": 35.813879913699594
+     },
+     "last1": {
+      "events": 2981,
+      "pairs": 24106,
+      "v": 0.12366215879863934,
+      "nullMean": 0.0033704017017319237,
+      "nullSd": 0.00040830396379277963,
+      "z": 294.61324837384456,
+      "nullEventsMean": 78.48,
+      "poissonP": 1e-300,
+      "poissonZ": 37.04745470427304
+     },
+     "cond": {
+      "events": 802,
+      "pairs": 2981,
+      "v": 0.2690372358269037,
+      "nullMean": 0.06682881780952271,
+      "nullSd": 0.02669785756548699,
+      "z": 7.573956731224046,
+      "nullEventsMean": 5.24,
+      "poissonP": 1e-300,
+      "poissonZ": null
+     }
+    },
+    "confirm": {
+     "base": {
+      "events": 950,
+      "pairs": 26073,
+      "v": 0.03643616001227323,
+      "nullMean": 0.00038904666317012004,
+      "nullSd": 0.00012556121302498762,
+      "z": 287.08796674279876,
+      "nullEventsMean": 9.95,
+      "poissonP": 1e-300,
+      "poissonZ": 37.04745470427304
+     },
+     "noDup": {
+      "events": 779,
+      "pairs": 25902,
+      "v": 0.03007489769129797,
+      "nullMean": 0.0001103015605791035,
+      "nullSd": 0.00007651257083814782,
+      "z": 391.62971264035804,
+      "nullEventsMean": 2.82,
+      "poissonP": 1e-300,
+      "poissonZ": 37.04745470427304
+     },
+     "long6": {
+      "events": 210,
+      "pairs": 4152,
+      "v": 0.05057803468208093,
+      "nullMean": 0.00036983796757575804,
+      "nullSd": 0.00038178066767237346,
+      "z": 131.5105791516702,
+      "nullEventsMean": 0.96,
+      "poissonP": 1e-300,
+      "poissonZ": 37.04745470427304
+     },
+     "last1": {
+      "events": 3321,
+      "pairs": 26073,
+      "v": 0.1273731446323783,
+      "nullMean": 0.003400894742490586,
+      "nullSd": 0.0003601188432376948,
+      "z": 344.25371573256,
+      "nullEventsMean": 86.98,
+      "poissonP": 1e-300,
+      "poissonZ": 37.04745470427304
+     },
+     "cond": {
+      "events": 950,
+      "pairs": 3321,
+      "v": 0.28605841613971694,
+      "nullMean": 0.11406292550523611,
+      "nullSd": 0.034056802030274606,
+      "z": 5.050253705018645,
+      "nullEventsMean": 9.95,
+      "poissonP": 1e-300,
+      "poissonZ": null
+     }
+    }
+   }
+  },
+  "sfx-en-poe-works2": {
+   "id": "sfx-en-poe-works2",
+   "tokens": 96647,
+   "halves": {
+    "discover": {
+     "base": {
+      "events": 5,
+      "pairs": 2044,
+      "v": 0.002446183953033268,
+      "nullMean": 0.00029927232395837115,
+      "nullSd": 0.0003683252904691048,
+      "z": 5.828846632661463,
+      "nullEventsMean": 0.61,
+      "poissonP": 0.00042497193800425923,
+      "poissonZ": 3.3362166087310645
+     },
+     "noDup": {
+      "events": 5,
+      "pairs": 2044,
+      "v": 0.002446183953033268,
+      "nullMean": 0.0002551306264685514,
+      "nullSd": 0.0003450488766299931,
+      "z": 6.349979596989828,
+      "nullEventsMean": 0.52,
+      "poissonP": 0.000205987318707299,
+      "poissonZ": 3.532454671146329
+     },
+     "long6": {
+      "events": 4,
+      "pairs": 1748,
+      "v": 0.002288329519450801,
+      "nullMean": 0.00021453984130883702,
+      "nullSd": 0.0003644431772174204,
+      "z": 5.690296341876027,
+      "nullEventsMean": 0.36,
+      "poissonP": 0.0005256395024666122,
+      "poissonZ": 3.2766690724627776
+     },
+     "last1": {
+      "events": 15,
+      "pairs": 2044,
+      "v": 0.007338551859099804,
+      "nullMean": 0.0012901617531062438,
+      "nullSd": 0.0007100048372690239,
+      "z": 8.51880126515504,
+      "nullEventsMean": 2.63,
+      "poissonP": 1.3112550060780476e-7,
+      "poissonZ": 5.148487155618286
+     },
+     "cond": {
+      "events": 5,
+      "pairs": 15,
+      "v": null,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 0.61,
+      "poissonP": 0.00042497193800425923,
+      "poissonZ": null
+     }
+    },
+    "confirm": {
+     "base": {
+      "events": 8,
+      "pairs": 1930,
+      "v": 0.004145077720207254,
+      "nullMean": 0.0001454599818911203,
+      "nullSd": 0.00028671364771114526,
+      "z": 13.949868693887984,
+      "nullEventsMean": 0.28,
+      "poissonP": 7.308412338036166e-10,
+      "poissonZ": 6.048161328112461
+     },
+     "noDup": {
+      "events": 8,
+      "pairs": 1930,
+      "v": 0.004145077720207254,
+      "nullMean": 0.0001454599818911203,
+      "nullSd": 0.00028671364771114526,
+      "z": 13.949868693887984,
+      "nullEventsMean": 0.28,
+      "poissonP": 7.308412338036166e-10,
+      "poissonZ": 6.048161328112461
+     },
+     "long6": {
+      "events": 6,
+      "pairs": 1680,
+      "v": 0.0035714285714285713,
+      "nullMean": 0.00013476304661518582,
+      "nullSd": 0.00029628632636364855,
+      "z": 11.599136440050819,
+      "nullEventsMean": 0.22,
+      "poissonP": 1.3045802891787e-7,
+      "poissonZ": 5.149444279441246
+     },
+     "last1": {
+      "events": 15,
+      "pairs": 1930,
+      "v": 0.007772020725388601,
+      "nullMean": 0.001111702131175554,
+      "nullSd": 0.0006726443699476198,
+      "z": 9.901693809957408,
+      "nullEventsMean": 2.14,
+      "poissonP": 9.377479523846721e-9,
+      "poissonZ": 5.622787013659327
+     },
+     "cond": {
+      "events": 8,
+      "pairs": 15,
+      "v": null,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 0.28,
+      "poissonP": 7.308412338036166e-10,
+      "poissonZ": null
+     }
+    }
+   }
+  },
+  "sfx-en-chopin-awakening": {
+   "id": "sfx-en-chopin-awakening",
+   "tokens": 64408,
+   "halves": {
+    "discover": {
+     "base": {
+      "events": 19,
+      "pairs": 2435,
+      "v": 0.0078028747433264885,
+      "nullMean": 0.00024226283980632141,
+      "nullSd": 0.00032024663149878664,
+      "z": 23.60871640752547,
+      "nullEventsMean": 0.59,
+      "poissonP": 2.0789560795873407e-22,
+      "poissonZ": 9.666792668188565
+     },
+     "noDup": {
+      "events": 18,
+      "pairs": 2434,
+      "v": 0.007395234182415777,
+      "nullMean": 0.0002340509746989024,
+      "nullSd": 0.00031030864844974174,
+      "z": 23.07761399333578,
+      "nullEventsMean": 0.57,
+      "poissonP": 3.673382440059182e-21,
+      "poissonZ": 9.368269867906449
+     },
+     "long6": {
+      "events": 9,
+      "pairs": 1811,
+      "v": 0.004969630038652678,
+      "nullMean": 0.00024427309255493527,
+      "nullSd": 0.0003450498176208309,
+      "z": 13.694709299311537,
+      "nullEventsMean": 0.43,
+      "poissonP": 9.412738466565531e-10,
+      "poissonZ": 6.007259928603552
+     },
+     "last1": {
+      "events": 40,
+      "pairs": 2435,
+      "v": 0.01642710472279261,
+      "nullMean": 0.003145255927556463,
+      "nullSd": 0.0012315914632728127,
+      "z": 10.784297546153137,
+      "nullEventsMean": 7.66,
+      "poissonP": 1.6599508445315697e-16,
+      "poissonZ": 8.160664258351721
+     },
+     "cond": {
+      "events": 19,
+      "pairs": 40,
+      "v": null,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 0.59,
+      "poissonP": 2.0789560795873407e-22,
+      "poissonZ": null
+     }
+    },
+    "confirm": {
+     "base": {
+      "events": 7,
+      "pairs": 1694,
+      "v": 0.004132231404958678,
+      "nullMean": 0.0003909152602669288,
+      "nullSd": 0.00043912867144063486,
+      "z": 8.519863056123702,
+      "nullEventsMean": 0.66,
+      "poissonP": 0.000006092007406657689,
+      "poissonZ": 4.374194069539812
+     },
+     "noDup": {
+      "events": 7,
+      "pairs": 1694,
+      "v": 0.004132231404958678,
+      "nullMean": 0.00036129782762970355,
+      "nullSd": 0.00043646444093368736,
+      "z": 8.63972691397762,
+      "nullEventsMean": 0.61,
+      "poissonP": 0.0000036651037218041376,
+      "poissonZ": 4.483765422112136
+     },
+     "long6": {
+      "events": 6,
+      "pairs": 1303,
+      "v": 0.004604758250191865,
+      "nullMean": 0.0003852380906401176,
+      "nullSd": 0.0005157440882127847,
+      "z": 8.181422251825921,
+      "nullEventsMean": 0.48,
+      "poissonP": 0.000011277669436909209,
+      "poissonZ": 4.237927473846754
+     },
+     "last1": {
+      "events": 20,
+      "pairs": 1694,
+      "v": 0.011806375442739079,
+      "nullMean": 0.0035540830200768325,
+      "nullSd": 0.0013988455063747268,
+      "z": 5.899359425365733,
+      "nullEventsMean": 6,
+      "poissonP": 0.0000051801689370119485,
+      "poissonZ": 4.409429143501733
+     },
+     "cond": {
+      "events": 7,
+      "pairs": 20,
+      "v": null,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 0.66,
+      "poissonP": 0.000006092007406657689,
+      "poissonZ": null
+     }
+    }
+   }
+  },
+  "sfx-en-hesse-siddhartha": {
+   "id": "sfx-en-hesse-siddhartha",
+   "tokens": 39270,
+   "halves": {
+    "discover": {
+     "base": {
+      "events": 3,
+      "pairs": 610,
+      "v": 0.004918032786885246,
+      "nullMean": 0.0004425961203080143,
+      "nullSd": 0.0009565695851999815,
+      "z": 4.678631576647497,
+      "nullEventsMean": 0.27,
+      "poissonP": 0.0026828596236181555,
+      "poissonZ": 2.7845826345595013
+     },
+     "noDup": {
+      "events": 3,
+      "pairs": 610,
+      "v": 0.004918032786885246,
+      "nullMean": 0.0003934427110641585,
+      "nullSd": 0.0009060320451502106,
+      "z": 4.993852149093643,
+      "nullEventsMean": 0.24,
+      "poissonP": 0.0019265698787570339,
+      "poissonZ": 2.890282659553041
+     },
+     "long6": {
+      "events": 3,
+      "pairs": 499,
+      "v": 0.006012024048096192,
+      "nullMean": 0.00045285820508863644,
+      "nullSd": 0.0010773866064091521,
+      "z": 5.159861659628231,
+      "nullEventsMean": 0.22,
+      "poissonP": 0.001506111575084273,
+      "poissonZ": 2.966810296126039
+     },
+     "last1": {
+      "events": 19,
+      "pairs": 610,
+      "v": 0.03114754098360656,
+      "nullMean": 0.004179281917304854,
+      "nullSd": 0.0025767739963885677,
+      "z": 10.465900037837464,
+      "nullEventsMean": 2.55,
+      "poissonP": 3.895139738977856e-11,
+      "poissonZ": 6.504183229065579
+     },
+     "cond": {
+      "events": 3,
+      "pairs": 19,
+      "v": null,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 0.27,
+      "poissonP": 0.0026828596236181555,
+      "poissonZ": null
+     }
+    },
+    "confirm": {
+     "base": {
+      "events": 10,
+      "pairs": 1209,
+      "v": 0.008271298593879239,
+      "nullMean": 0.0005706102304342776,
+      "nullSd": 0.0006072939842851935,
+      "z": 12.680330388105103,
+      "nullEventsMean": 0.69,
+      "poissonP": 3.606118255445958e-9,
+      "poissonZ": 5.785561674497018
+     },
+     "noDup": {
+      "events": 10,
+      "pairs": 1209,
+      "v": 0.008271298593879239,
+      "nullMean": 0.0005706102304342776,
+      "nullSd": 0.0006072939842851935,
+      "z": 12.680330388105103,
+      "nullEventsMean": 0.69,
+      "poissonP": 3.606118255445958e-9,
+      "poissonZ": 5.785561674497018
+     },
+     "long6": {
+      "events": 6,
+      "pairs": 968,
+      "v": 0.006198347107438017,
+      "nullMean": 0.0006302265498029747,
+      "nullSd": 0.000730043580587472,
+      "z": 7.627107073737064,
+      "nullEventsMean": 0.59,
+      "poissonP": 0.00003542783209956392,
+      "poissonZ": 3.9734281756842016
+     },
+     "last1": {
+      "events": 35,
+      "pairs": 1209,
+      "v": 0.028949545078577336,
+      "nullMean": 0.005201853864610462,
+      "nullSd": 0.002374987896886462,
+      "z": 9.999078835348755,
+      "nullEventsMean": 6.29,
+      "poissonP": 1.948561541641927e-15,
+      "poissonZ": 7.857752531170562
+     },
+     "cond": {
+      "events": 10,
+      "pairs": 35,
+      "v": null,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 0.69,
+      "poissonP": 3.606118255445958e-9,
+      "poissonZ": null
+     }
+    }
+   }
+  },
+  "sfx-en-zola-mouret": {
+   "id": "sfx-en-zola-mouret",
+   "tokens": 128496,
+   "halves": {
+    "discover": {
+     "base": {
+      "events": 17,
+      "pairs": 4067,
+      "v": 0.004179985247110892,
+      "nullMean": 0.0002910542932996479,
+      "nullSd": 0.0002723963225423228,
+      "z": 14.276738090717112,
+      "nullEventsMean": 1.18,
+      "poissonP": 1.540968445473324e-14,
+      "poissonZ": 7.594387738071719
+     },
+     "noDup": {
+      "events": 10,
+      "pairs": 4060,
+      "v": 0.0024630541871921183,
+      "nullMean": 0.0002836560177640057,
+      "nullSd": 0.00027463477821964427,
+      "z": 7.935623388837878,
+      "nullEventsMean": 1.15,
+      "poissonP": 3.9378373658584554e-7,
+      "poissonZ": 4.938217829767019
+     },
+     "long6": {
+      "events": 7,
+      "pairs": 3209,
+      "v": 0.0021813649111872857,
+      "nullMean": 0.0002768228436664373,
+      "nullSd": 0.0002999901153838702,
+      "z": 6.348682739375523,
+      "nullEventsMean": 0.86,
+      "poissonP": 0.00003268064742490485,
+      "poissonZ": 3.992597655053508
+     },
+     "last1": {
+      "events": 36,
+      "pairs": 4067,
+      "v": 0.008851733464470126,
+      "nullMean": 0.002732894135467816,
+      "nullSd": 0.0008798890296267106,
+      "z": 6.954103441428521,
+      "nullEventsMean": 11.08,
+      "poissonP": 2.363186147541075e-9,
+      "poissonZ": 5.856177061416232
+     },
+     "cond": {
+      "events": 17,
+      "pairs": 36,
+      "v": null,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 1.18,
+      "poissonP": 1.540968445473324e-14,
+      "poissonZ": null
+     }
+    },
+    "confirm": {
+     "base": {
+      "events": 11,
+      "pairs": 3327,
+      "v": 0.0033062819356777877,
+      "nullMean": 0.00023520339961313917,
+      "nullSd": 0.0002591922166686335,
+      "z": 11.848652615949865,
+      "nullEventsMean": 0.78,
+      "poissonP": 7.982986434913374e-10,
+      "poissonZ": 6.033920515012424
+     },
+     "noDup": {
+      "events": 5,
+      "pairs": 3321,
+      "v": 0.0015055706112616681,
+      "nullMean": 0.00022615453228122553,
+      "nullSd": 0.00025123025988777544,
+      "z": 5.092603413107791,
+      "nullEventsMean": 0.75,
+      "poissonP": 0.001064677772785793,
+      "poissonZ": 3.0718659039293663
+     },
+     "long6": {
+      "events": 1,
+      "pairs": 2529,
+      "v": 0.00039541320680110717,
+      "nullMean": 0.00019496615224762342,
+      "nullSd": 0.0002738065109174613,
+      "z": 0.7320755590574992,
+      "nullEventsMean": 0.48,
+      "poissonP": 0.38121660819385916,
+      "poissonZ": 0.30185179567480946
+     },
+     "last1": {
+      "events": 31,
+      "pairs": 3327,
+      "v": 0.009317703636910129,
+      "nullMean": 0.003187839319217385,
+      "nullSd": 0.0010269143565051046,
+      "z": 5.969206953688425,
+      "nullEventsMean": 10.57,
+      "poissonP": 2.5819771916966605e-7,
+      "poissonZ": 5.01989685823538
+     },
+     "cond": {
+      "events": 11,
+      "pairs": 31,
+      "v": null,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 0.78,
+      "poissonP": 7.982986434913374e-10,
+      "poissonZ": null
+     }
+    }
+   }
+  },
+  "sfx-en-waikna": {
+   "id": "sfx-en-waikna",
+   "tokens": 85322,
+   "halves": {
+    "discover": {
+     "base": {
+      "events": 10,
+      "pairs": 1824,
+      "v": 0.005482456140350877,
+      "nullMean": 0.0003084095587414019,
+      "nullSd": 0.00044495536161725185,
+      "z": 11.628237409711586,
+      "nullEventsMean": 0.56,
+      "poissonP": 5.029237122213182e-10,
+      "poissonZ": 6.108099267316186
+     },
+     "noDup": {
+      "events": 9,
+      "pairs": 1823,
+      "v": 0.004936917169500823,
+      "nullMean": 0.0003084095587414019,
+      "nullSd": 0.00044495536161725185,
+      "z": 10.402184151543807,
+      "nullEventsMean": 0.56,
+      "poissonP": 9.028510903913888e-9,
+      "poissonZ": 5.629331037882177
+     },
+     "long6": {
+      "events": 6,
+      "pairs": 1591,
+      "v": 0.003771213073538655,
+      "nullMean": 0.0003675439954632001,
+      "nullSd": 0.0005335490875646947,
+      "z": 6.379298845043471,
+      "nullEventsMean": 0.54,
+      "poissonP": 0.000021727573286617536,
+      "poissonZ": 4.088298818194139
+     },
+     "last1": {
+      "events": 17,
+      "pairs": 1824,
+      "v": 0.00932017543859649,
+      "nullMean": 0.0010684246939021529,
+      "nullSd": 0.000905515154737138,
+      "z": 9.112769346295192,
+      "nullEventsMean": 1.94,
+      "poissonP": 3.533713545481081e-11,
+      "poissonZ": 6.5188062267530285
+     },
+     "cond": {
+      "events": 10,
+      "pairs": 17,
+      "v": null,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 0.56,
+      "poissonP": 5.029237122213182e-10,
+      "poissonZ": null
+     }
+    },
+    "confirm": {
+     "base": {
+      "events": 3,
+      "pairs": 1452,
+      "v": 0.002066115702479339,
+      "nullMean": 0.0002207705933252,
+      "nullSd": 0.0003907862644447666,
+      "z": 4.722134007898219,
+      "nullEventsMean": 0.32,
+      "poissonP": 0.004304440364555003,
+      "poissonZ": 2.627605374483085
+     },
+     "noDup": {
+      "events": 3,
+      "pairs": 1452,
+      "v": 0.002066115702479339,
+      "nullMean": 0.0002207705933252,
+      "nullSd": 0.0003907862644447666,
+      "z": 4.722134007898219,
+      "nullEventsMean": 0.32,
+      "poissonP": 0.004304440364555003,
+      "poissonZ": 2.627605374483085
+     },
+     "long6": {
+      "events": 1,
+      "pairs": 1343,
+      "v": 0.0007446016381236039,
+      "nullMean": 0.00022124660363979627,
+      "nullSd": 0.00040998698456254953,
+      "z": 1.2765162168311763,
+      "nullEventsMean": 0.29,
+      "poissonP": 0.2517364324214347,
+      "poissonZ": 0.6687307216003169
+     },
+     "last1": {
+      "events": 12,
+      "pairs": 1452,
+      "v": 0.008264462809917356,
+      "nullMean": 0.0011175794170703796,
+      "nullSd": 0.0009186574716535037,
+      "z": 7.779704202463194,
+      "nullEventsMean": 1.62,
+      "poissonP": 1.5398661752040206e-7,
+      "poissonZ": 5.118260388970886
+     },
+     "cond": {
+      "events": 3,
+      "pairs": 12,
+      "v": null,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 0.32,
+      "poissonP": 0.004304440364555003,
+      "poissonZ": null
+     }
+    }
+   }
+  },
+  "sfx-en-about-london": {
+   "id": "sfx-en-about-london",
+   "tokens": 55661,
+   "halves": {
+    "discover": {
+     "base": {
+      "events": 6,
+      "pairs": 869,
+      "v": 0.006904487917146145,
+      "nullMean": 0.0002533370258134028,
+      "nullSd": 0.0005569774439421563,
+      "z": 11.941508518293755,
+      "nullEventsMean": 0.22,
+      "poissonP": 1.3045802891787e-7,
+      "poissonZ": 5.149444279441246
+     },
+     "noDup": {
+      "events": 6,
+      "pairs": 869,
+      "v": 0.006904487917146145,
+      "nullMean": 0.0002533370258134028,
+      "nullSd": 0.0005569774439421563,
+      "z": 11.941508518293755,
+      "nullEventsMean": 0.22,
+      "poissonP": 1.3045802891787e-7,
+      "poissonZ": 5.149444279441246
+     },
+     "long6": {
+      "events": 3,
+      "pairs": 739,
+      "v": 0.0040595399188092015,
+      "nullMean": 0.00029165317794739435,
+      "nullSd": 0.0006338130094181963,
+      "z": 5.944792367579374,
+      "nullEventsMean": 0.21,
+      "poissonP": 0.0013196797524309839,
+      "poissonZ": 3.0072012820331766
+     },
+     "last1": {
+      "events": 12,
+      "pairs": 869,
+      "v": 0.01380897583429229,
+      "nullMean": 0.0016467630358387292,
+      "nullSd": 0.0015290463448820015,
+      "z": 7.954116524435454,
+      "nullEventsMean": 1.43,
+      "poissonP": 4.100212999869227e-8,
+      "poissonZ": 5.362378462207245
+     },
+     "cond": {
+      "events": 6,
+      "pairs": 12,
+      "v": null,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 0.22,
+      "poissonP": 1.3045802891787e-7,
+      "poissonZ": null
+     }
+    },
+    "confirm": {
+     "base": {
+      "events": 3,
+      "pairs": 1292,
+      "v": 0.0023219814241486067,
+      "nullMean": 0.00021683817234342064,
+      "nullSd": 0.0003981081252779804,
+      "z": 5.287868089442441,
+      "nullEventsMean": 0.28,
+      "poissonP": 0.0029700882716069605,
+      "poissonZ": 2.7514387620389855
+     },
+     "noDup": {
+      "events": 3,
+      "pairs": 1292,
+      "v": 0.0023219814241486067,
+      "nullMean": 0.00020909223895844775,
+      "nullSd": 0.00039466704905074526,
+      "z": 5.353599167379411,
+      "nullEventsMean": 0.27,
+      "poissonP": 0.0026828596236181555,
+      "poissonZ": 2.7845826345595013
+     },
+     "long6": {
+      "events": 2,
+      "pairs": 1103,
+      "v": 0.001813236627379873,
+      "nullMean": 0.00021301653291805965,
+      "nullSd": 0.00041335715670364365,
+      "z": 3.8712770990175236,
+      "nullEventsMean": 0.23,
+      "poissonP": 0.022723668920899165,
+      "poissonZ": 2.0009257539043963
+     },
+     "last1": {
+      "events": 10,
+      "pairs": 1292,
+      "v": 0.007739938080495356,
+      "nullMean": 0.0013087270606505538,
+      "nullSd": 0.0009888473114788355,
+      "z": 6.503745265006417,
+      "nullEventsMean": 1.69,
+      "poissonP": 0.00001138844303057921,
+      "poissonZ": 4.235732491787493
+     },
+     "cond": {
+      "events": 3,
+      "pairs": 10,
+      "v": null,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 0.28,
+      "poissonP": 0.0029700882716069605,
+      "poissonZ": null
+     }
+    }
+   }
+  },
+  "sfx-en-warren-forces": {
+   "id": "sfx-en-warren-forces",
+   "tokens": 35736,
+   "halves": {
+    "discover": {
+     "base": {
+      "events": 3,
+      "pairs": 1014,
+      "v": 0.0029585798816568047,
+      "nullMean": 0.0002665839521094975,
+      "nullSd": 0.0004831355953932778,
+      "z": 5.571926298156509,
+      "nullEventsMean": 0.27,
+      "poissonP": 0.0026828596236181555,
+      "poissonZ": 2.7845826345595013
+     },
+     "noDup": {
+      "events": 3,
+      "pairs": 1014,
+      "v": 0.0029585798816568047,
+      "nullMean": 0.0002665839521094975,
+      "nullSd": 0.0004831355953932778,
+      "z": 5.571926298156509,
+      "nullEventsMean": 0.27,
+      "poissonP": 0.0026828596236181555,
+      "poissonZ": 2.7845826345595013
+     },
+     "long6": {
+      "events": 3,
+      "pairs": 845,
+      "v": 0.0035502958579881655,
+      "nullMean": 0.0003106980016099099,
+      "nullSd": 0.0005787402780892954,
+      "z": 5.597671319980963,
+      "nullEventsMean": 0.26,
+      "poissonP": 0.002413458287345943,
+      "poissonZ": 2.818721640978236
+     },
+     "last1": {
+      "events": 22,
+      "pairs": 1014,
+      "v": 0.021696252465483234,
+      "nullMean": 0.0018366189982079958,
+      "nullSd": 0.0016128660642232057,
+      "z": 12.313256449375482,
+      "nullEventsMean": 1.86,
+      "poissonP": 1.2800155442387822e-16,
+      "poissonZ": 8.191996713770136
+     },
+     "cond": {
+      "events": 3,
+      "pairs": 22,
+      "v": null,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 0.27,
+      "poissonP": 0.0026828596236181555,
+      "poissonZ": null
+     }
+    },
+    "confirm": {
+     "base": {
+      "events": 3,
+      "pairs": 925,
+      "v": 0.003243243243243243,
+      "nullMean": 0.00017313677313677314,
+      "nullSd": 0.0004541909409929601,
+      "z": 6.759506174637807,
+      "nullEventsMean": 0.16,
+      "poissonP": 0.0006057643004273427,
+      "poissonZ": 3.2364013054192875
+     },
+     "noDup": {
+      "events": 3,
+      "pairs": 925,
+      "v": 0.003243243243243243,
+      "nullMean": 0.0001623142623142623,
+      "nullSd": 0.0004451129299249668,
+      "z": 6.921679362242604,
+      "nullEventsMean": 0.15,
+      "poissonP": 0.0005028623764016213,
+      "poissonZ": 3.2891545882856055
+     },
+     "long6": {
+      "events": 3,
+      "pairs": 757,
+      "v": 0.003963011889035667,
+      "nullMean": 0.00014767098389728426,
+      "nullSd": 0.0005011152736985655,
+      "z": 7.6136990935810385,
+      "nullEventsMean": 0.11,
+      "poissonP": 0.00020431330230964603,
+      "poissonZ": 3.5346111219883403
+     },
+     "last1": {
+      "events": 10,
+      "pairs": 925,
+      "v": 0.010810810810810811,
+      "nullMean": 0.0017962209467609037,
+      "nullSd": 0.0013427964037406091,
+      "z": 6.713296102773355,
+      "nullEventsMean": 1.66,
+      "poissonP": 0.000009780363876487784,
+      "poissonZ": 4.26979926647406
+     },
+     "cond": {
+      "events": 3,
+      "pairs": 10,
+      "v": null,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 0.16,
+      "poissonP": 0.0006057643004273427,
+      "poissonZ": null
+     }
+    }
+   }
+  },
+  "sfx-en-aesop-stickney": {
+   "id": "sfx-en-aesop-stickney",
+   "tokens": 29256,
+   "halves": {
+    "discover": {
+     "base": {
+      "events": 7,
+      "pairs": 1075,
+      "v": 0.0065116279069767444,
+      "nullMean": 0.0003817594493680309,
+      "nullSd": 0.0006760950655638354,
+      "z": 9.06657771935764,
+      "nullEventsMean": 0.41,
+      "poissonP": 2.702129544426333e-7,
+      "poissonZ": 5.011154445949605
+     },
+     "noDup": {
+      "events": 6,
+      "pairs": 1074,
+      "v": 0.00558659217877095,
+      "nullMean": 0.0003352304986946083,
+      "nullSd": 0.0006419272279442742,
+      "z": 8.180618380830255,
+      "nullEventsMean": 0.36,
+      "poissonP": 0.0000022228528263581816,
+      "poissonZ": 4.58924911376302
+     },
+     "long6": {
+      "events": 3,
+      "pairs": 702,
+      "v": 0.004273504273504274,
+      "nullMean": 0.0002649140629159587,
+      "nullSd": 0.0006416905992301876,
+      "z": 6.246920580412541,
+      "nullEventsMean": 0.18,
+      "poissonP": 0.0008497731098364078,
+      "poissonZ": 3.1385357935145226
+     },
+     "last1": {
+      "events": 26,
+      "pairs": 1075,
+      "v": 0.024186046511627906,
+      "nullMean": 0.002812180823906703,
+      "nullSd": 0.0015767247102703216,
+      "z": 13.555863968198203,
+      "nullEventsMean": 3.02,
+      "poissonP": 4.114008712833311e-16,
+      "poissonZ": 8.050324476648202
+     },
+     "cond": {
+      "events": 7,
+      "pairs": 26,
+      "v": null,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 0.41,
+      "poissonP": 2.702129544426333e-7,
+      "poissonZ": null
+     }
+    },
+    "confirm": {
+     "base": {
+      "events": 6,
+      "pairs": 713,
+      "v": 0.008415147265077139,
+      "nullMean": 0.0006607652894852552,
+      "nullSd": 0.0009037705635389572,
+      "z": 8.580033792235401,
+      "nullEventsMean": 0.47,
+      "poissonP": 0.000010024179001126902,
+      "poissonZ": 4.2643054726386005
+     },
+     "noDup": {
+      "events": 5,
+      "pairs": 712,
+      "v": 0.007022471910112359,
+      "nullMean": 0.0006467005918762538,
+      "nullSd": 0.0009029920855926311,
+      "z": 7.060716721621879,
+      "nullEventsMean": 0.46,
+      "poissonP": 0.00011723673446293515,
+      "poissonZ": 3.678767860545901
+     },
+     "long6": {
+      "events": 5,
+      "pairs": 458,
+      "v": 0.010917030567685589,
+      "nullMean": 0.0006490766057224161,
+      "nullSd": 0.0011299042040286672,
+      "z": 9.087455312895411,
+      "nullEventsMean": 0.3,
+      "poissonP": 0.000015785040541659984,
+      "poissonZ": 4.161816242637254
+     },
+     "last1": {
+      "events": 21,
+      "pairs": 713,
+      "v": 0.029453015427769985,
+      "nullMean": 0.004330690816698034,
+      "nullSd": 0.0024594742273697733,
+      "z": 10.214510211777428,
+      "nullEventsMean": 3.08,
+      "poissonP": 1.89936985146162e-11,
+      "poissonZ": 6.611303711353443
+     },
+     "cond": {
+      "events": 6,
+      "pairs": 21,
+      "v": null,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 0.47,
+      "poissonP": 0.000010024179001126902,
+      "poissonZ": null
+     }
+    }
+   }
+  },
+  "sfx-en-pooh": {
+   "id": "sfx-en-pooh",
+   "tokens": 22984,
+   "halves": {
+    "discover": {
+     "base": {
+      "events": 9,
+      "pairs": 770,
+      "v": 0.011688311688311689,
+      "nullMean": 0.0028855629656869236,
+      "nullSd": 0.0018425067838686478,
+      "z": 4.777593656475955,
+      "nullEventsMean": 2.22,
+      "poissonP": 0.0005004871170248666,
+      "poissonZ": 3.2904866010035008
+     },
+     "noDup": {
+      "events": 7,
+      "pairs": 768,
+      "v": 0.009114583333333334,
+      "nullMean": 0.002496677166912363,
+      "nullSd": 0.0017400119303466856,
+      "z": 3.8033682706430625,
+      "nullEventsMean": 1.92,
+      "poissonP": 0.0036458570811582222,
+      "poissonZ": 2.683606587694165
+     },
+     "long6": {
+      "events": 4,
+      "pairs": 306,
+      "v": 0.013071895424836602,
+      "nullMean": 0.0011859082445806353,
+      "nullSd": 0.0021123817744577948,
+      "z": 5.626817710689091,
+      "nullEventsMean": 0.33,
+      "poissonP": 0.00038004354877929305,
+      "poissonZ": 3.367146213648563
+     },
+     "last1": {
+      "events": 14,
+      "pairs": 770,
+      "v": 0.01818181818181818,
+      "nullMean": 0.011349415482976792,
+      "nullSd": 0.00348823500772325,
+      "z": 1.9586990795384673,
+      "nullEventsMean": 8.73,
+      "poissonP": 0.06105827489048982,
+      "poissonZ": 1.5462697115755732
+     },
+     "cond": {
+      "events": 9,
+      "pairs": 14,
+      "v": null,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 2.22,
+      "poissonP": 0.0005004871170248666,
+      "poissonZ": null
+     }
+    },
+    "confirm": {
+     "base": {
+      "events": 14,
+      "pairs": 1125,
+      "v": 0.012444444444444444,
+      "nullMean": 0.0022237481817431095,
+      "nullSd": 0.0014605944790272746,
+      "z": 6.997627616330649,
+      "nullEventsMean": 2.5,
+      "poissonP": 4.1991758336561604e-7,
+      "poissonZ": 4.925672494452172
+     },
+     "noDup": {
+      "events": 12,
+      "pairs": 1123,
+      "v": 0.01068566340160285,
+      "nullMean": 0.0021171449935835206,
+      "nullSd": 0.0014179837426331289,
+      "z": 6.042747988145474,
+      "nullEventsMean": 2.38,
+      "poissonP": 0.000007786142049429034,
+      "poissonZ": 4.3203728562547274
+     },
+     "long6": {
+      "events": 4,
+      "pairs": 496,
+      "v": 0.008064516129032258,
+      "nullMean": 0.001700132366601467,
+      "nullSd": 0.002049297702033679,
+      "z": 3.105641389298838,
+      "nullEventsMean": 0.77,
+      "poissonP": 0.007976520802374432,
+      "poissonZ": 2.4104178673213017
+     },
+     "last1": {
+      "events": 36,
+      "pairs": 1125,
+      "v": 0.032,
+      "nullMean": 0.011021715402076892,
+      "nullSd": 0.0025211330333097183,
+      "z": 8.320974863584658,
+      "nullEventsMean": 12.39,
+      "poissonP": 3.745357957098354e-8,
+      "poissonZ": 5.378698058746341
+     },
+     "cond": {
+      "events": 14,
+      "pairs": 36,
+      "v": null,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 2.5,
+      "poissonP": 4.1991758336561604e-7,
+      "poissonZ": null
+     }
+    }
+   }
+  },
+  "sfx-ud-eng": {
+   "id": "sfx-ud-eng",
+   "tokens": 176883,
+   "halves": {
+    "discover": {
+     "base": {
+      "events": 64,
+      "pairs": 5170,
+      "v": 0.012379110251450677,
+      "nullMean": 0.00011850286075794277,
+      "nullSd": 0.00014591190888117145,
+      "z": 84.02746208109438,
+      "nullEventsMean": 0.6,
+      "poissonP": 2.7651160082223276e-104,
+      "poissonZ": 21.65472618838639
+     },
+     "noDup": {
+      "events": 60,
+      "pairs": 5166,
+      "v": 0.011614401858304297,
+      "nullMean": 0.00009676678781691034,
+      "nullSd": 0.00012707625092793766,
+      "z": 90.63562220622012,
+      "nullEventsMean": 0.49,
+      "poissonP": 1.9155252413716085e-101,
+      "poissonZ": 21.351191648023715
+     },
+     "long6": {
+      "events": 53,
+      "pairs": 3764,
+      "v": 0.0140807651434644,
+      "nullMean": 0.00014229590905169952,
+      "nullSd": 0.00019585232032809686,
+      "z": 71.16826193870268,
+      "nullEventsMean": 0.49,
+      "poissonP": 5.503282800371253e-87,
+      "poissonZ": 19.73433168818148
+     },
+     "last1": {
+      "events": 133,
+      "pairs": 5170,
+      "v": 0.02572533849129594,
+      "nullMean": 0.0011416197530194228,
+      "nullSd": 0.0004293233211136025,
+      "z": 57.261549814042034,
+      "nullEventsMean": 5.78,
+      "poissonP": 4.709045405555688e-128,
+      "poissonZ": 24.04541069808018
+     },
+     "cond": {
+      "events": 64,
+      "pairs": 133,
+      "v": 0.48120300751879697,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 0.6,
+      "poissonP": 2.7651160082223276e-104,
+      "poissonZ": null
+     }
+    },
+    "confirm": {
+     "base": {
+      "events": 62,
+      "pairs": 5124,
+      "v": 0.01209992193598751,
+      "nullMean": 0.00009562738795463032,
+      "nullSd": 0.00011841246228507071,
+      "z": 101.37695236108914,
+      "nullEventsMean": 0.48,
+      "poissonP": 3.4191658908749734e-106,
+      "poissonZ": 21.8562302051322
+     },
+     "noDup": {
+      "events": 57,
+      "pairs": 5119,
+      "v": 0.011134987302207463,
+      "nullMean": 0.00008766757654244113,
+      "nullSd": 0.00011443293611461103,
+      "z": 96.53968604458866,
+      "nullEventsMean": 0.44,
+      "poissonP": 7.608099298947955e-98,
+      "poissonZ": 20.960330988334956
+     },
+     "long6": {
+      "events": 49,
+      "pairs": 3784,
+      "v": 0.012949260042283297,
+      "nullMean": 0.00009128765349359173,
+      "nullSd": 0.00015105592094042408,
+      "z": 85.12061168301271,
+      "nullEventsMean": 0.32,
+      "poissonP": 6.792941888731424e-88,
+      "poissonZ": 19.839797152142424
+     },
+     "last1": {
+      "events": 126,
+      "pairs": 5124,
+      "v": 0.02459016393442623,
+      "nullMean": 0.0011689578366991136,
+      "nullSd": 0.000482627345498807,
+      "z": 48.52855172041844,
+      "nullEventsMean": 5.87,
+      "poissonP": 8.800144300668175e-118,
+      "poissonZ": 23.04263087167409
+     },
+     "cond": {
+      "events": 62,
+      "pairs": 126,
+      "v": 0.49206349206349204,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 0.48,
+      "poissonP": 3.4191658908749734e-106,
+      "poissonZ": null
+     }
+    }
+   }
+  },
+  "sfx-ud-hrv": {
+   "id": "sfx-ud-hrv",
+   "tokens": 132085,
+   "halves": {
+    "discover": {
+     "base": {
+      "events": 14,
+      "pairs": 3130,
+      "v": 0.0044728434504792336,
+      "nullMean": 0.000047916179848429044,
+      "nullSd": 0.00013902083450041913,
+      "z": 31.829238304690683,
+      "nullEventsMean": 0.15,
+      "poissonP": 2.911301237436134e-23,
+      "poissonZ": 9.866039074880256
+     },
+     "noDup": {
+      "events": 14,
+      "pairs": 3130,
+      "v": 0.0044728434504792336,
+      "nullMean": 0.000047916179848429044,
+      "nullSd": 0.00013902083450041913,
+      "z": 31.829238304690683,
+      "nullEventsMean": 0.15,
+      "poissonP": 2.911301237436134e-23,
+      "poissonZ": 9.866039074880256
+     },
+     "long6": {
+      "events": 14,
+      "pairs": 2885,
+      "v": 0.004852686308492201,
+      "nullMean": 0.00004859910329056434,
+      "nullSd": 0.00013973711195252762,
+      "z": 34.3794653980949,
+      "nullEventsMean": 0.14,
+      "poissonP": 1.1185437247865655e-23,
+      "poissonZ": 9.961578401142493
+     },
+     "last1": {
+      "events": 44,
+      "pairs": 3130,
+      "v": 0.014057507987220448,
+      "nullMean": 0.0006899428113018163,
+      "nullSd": 0.00043474885439222954,
+      "z": 30.747787005916848,
+      "nullEventsMean": 2.16,
+      "poissonP": 2.3693475928045404e-41,
+      "poissonZ": 13.418016654620727
+     },
+     "cond": {
+      "events": 14,
+      "pairs": 44,
+      "v": null,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 0.15,
+      "poissonP": 2.911301237436134e-23,
+      "poissonZ": null
+     }
+    },
+    "confirm": {
+     "base": {
+      "events": 24,
+      "pairs": 3486,
+      "v": 0.0068846815834767644,
+      "nullMean": 0.00012047205578428258,
+      "nullSd": 0.00022764924505944232,
+      "z": 29.713296549374697,
+      "nullEventsMean": 0.42,
+      "poissonP": 9.777478792000914e-34,
+      "poissonZ": 12.049153125428326
+     },
+     "noDup": {
+      "events": 24,
+      "pairs": 3486,
+      "v": 0.0068846815834767644,
+      "nullMean": 0.00012047205578428258,
+      "nullSd": 0.00022764924505944232,
+      "z": 29.713296549374697,
+      "nullEventsMean": 0.42,
+      "poissonP": 9.777478792000914e-34,
+      "poissonZ": 12.049153125428326
+     },
+     "long6": {
+      "events": 23,
+      "pairs": 3193,
+      "v": 0.007203257124960852,
+      "nullMean": 0.00012208750344408625,
+      "nullSd": 0.0002473321326301375,
+      "z": 28.63020484324212,
+      "nullEventsMean": 0.39,
+      "poissonP": 1.0464710345553945e-32,
+      "poissonZ": 11.85214177200211
+     },
+     "last1": {
+      "events": 49,
+      "pairs": 3486,
+      "v": 0.014056224899598393,
+      "nullMean": 0.0006998990271162033,
+      "nullSd": 0.00047776307382344077,
+      "z": 27.955961028118452,
+      "nullEventsMean": 2.44,
+      "poissonP": 1.4455193917946873e-45,
+      "poissonZ": 14.119234538386726
+     },
+     "cond": {
+      "events": 24,
+      "pairs": 49,
+      "v": null,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 0.42,
+      "poissonP": 9.777478792000914e-34,
+      "poissonZ": null
+     }
+    }
+   }
+  },
+  "sfx-ud-slv": {
+   "id": "sfx-ud-slv",
+   "tokens": 179497,
+   "halves": {
+    "discover": {
+     "base": {
+      "events": 5,
+      "pairs": 4842,
+      "v": 0.0010326311441553077,
+      "nullMean": 0.00002269828622049675,
+      "nullSd": 0.00007121024468770546,
+      "z": 14.182409600808143,
+      "nullEventsMean": 0.11,
+      "poissonP": 1.22468473500786e-7,
+      "poissonZ": 5.161283223528353
+     },
+     "noDup": {
+      "events": 4,
+      "pairs": 4841,
+      "v": 0.0008262755629002272,
+      "nullMean": 0.00002269828622049675,
+      "nullSd": 0.00007121024468770546,
+      "z": 11.284574013245443,
+      "nullEventsMean": 0.11,
+      "poissonP": 0.000005587429963032655,
+      "poissonZ": 4.393014754960671
+     },
+     "long6": {
+      "events": 3,
+      "pairs": 4048,
+      "v": 0.0007411067193675889,
+      "nullMean": 0.000025139056163459613,
+      "nullSd": 0.00008379279088540731,
+      "z": 8.544501927179711,
+      "nullEventsMean": 0.1,
+      "poissonP": 0.00015465307026467178,
+      "poissonZ": 3.6075193886733676
+     },
+     "last1": {
+      "events": 33,
+      "pairs": 4842,
+      "v": 0.006815365551425031,
+      "nullMean": 0.00022086927818382732,
+      "nullSd": 0.0001929767625224809,
+      "z": 34.172488889552056,
+      "nullEventsMean": 1.07,
+      "poissonP": 3.803277502380488e-37,
+      "poissonZ": 12.6801566915565
+     },
+     "cond": {
+      "events": 5,
+      "pairs": 33,
+      "v": null,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 0.11,
+      "poissonP": 1.22468473500786e-7,
+      "poissonZ": null
+     }
+    },
+    "confirm": {
+     "base": {
+      "events": 14,
+      "pairs": 5383,
+      "v": 0.002600780234070221,
+      "nullMean": 0.00002972217216619979,
+      "nullSd": 0.00007336333305861496,
+      "z": 35.04554597934949,
+      "nullEventsMean": 0.16,
+      "poissonP": 7.119319750592253e-23,
+      "poissonZ": 9.775900641463254
+     },
+     "noDup": {
+      "events": 14,
+      "pairs": 5383,
+      "v": 0.002600780234070221,
+      "nullMean": 0.000022289990564319812,
+      "nullSd": 0.00006066567651436729,
+      "z": 42.50328013560097,
+      "nullEventsMean": 0.12,
+      "poissonP": 1.3167408849412415e-24,
+      "poissonZ": 10.172074239549694
+     },
+     "long6": {
+      "events": 11,
+      "pairs": 4633,
+      "v": 0.0023742715303259228,
+      "nullMean": 0.00002646287263665731,
+      "nullSd": 0.00007202292118478714,
+      "z": 32.5980759884143,
+      "nullEventsMean": 0.12,
+      "poissonP": 1.6675699381824516e-18,
+      "poissonZ": 8.69902946626909
+     },
+     "last1": {
+      "events": 36,
+      "pairs": 5383,
+      "v": 0.0066877206018948546,
+      "nullMean": 0.00023964649155559003,
+      "nullSd": 0.0001998527090251921,
+      "z": 32.26413162869092,
+      "nullEventsMean": 1.29,
+      "poissonP": 7.34262850263126e-39,
+      "poissonZ": 12.985936093393434
+     },
+     "cond": {
+      "events": 14,
+      "pairs": 36,
+      "v": null,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 0.16,
+      "poissonP": 7.119319750592253e-23,
+      "poissonZ": null
+     }
+    }
+   }
+  },
+  "sfx-ud-heb": {
+   "id": "sfx-ud-heb",
+   "tokens": 119348,
+   "halves": {
+    "discover": {
+     "base": {
+      "events": 21,
+      "pairs": 2332,
+      "v": 0.009005145797598629,
+      "nullMean": 0.0008959471200549704,
+      "nullSd": 0.0006125948354601192,
+      "z": 13.237458444214354,
+      "nullEventsMean": 2.09,
+      "poissonP": 1.413187363488801e-14,
+      "poissonZ": 7.605589329033978
+     },
+     "noDup": {
+      "events": 21,
+      "pairs": 2332,
+      "v": 0.009005145797598629,
+      "nullMean": 0.0008916626299092978,
+      "nullSd": 0.0006173771655403087,
+      "z": 13.141858203629333,
+      "nullEventsMean": 2.08,
+      "poissonP": 1.2899853413940627e-14,
+      "poissonZ": 7.617375843977303
+     },
+     "long6": {
+      "events": 20,
+      "pairs": 2162,
+      "v": 0.009250693802035153,
+      "nullMean": 0.0009609342595831663,
+      "nullSd": 0.0006455045650077939,
+      "z": 12.842294217318038,
+      "nullEventsMean": 2.06,
+      "poissonP": 1.0994703386620116e-13,
+      "poissonZ": 7.335665794720532
+     },
+     "last1": {
+      "events": 55,
+      "pairs": 2332,
+      "v": 0.02358490566037736,
+      "nullMean": 0.0029063191611540485,
+      "nullSd": 0.0010241057451834306,
+      "z": 20.19184698111376,
+      "nullEventsMean": 6.78,
+      "poissonP": 5.312992165319666e-31,
+      "poissonZ": 11.518438189086385
+     },
+     "cond": {
+      "events": 21,
+      "pairs": 55,
+      "v": 0.38181818181818183,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 2.09,
+      "poissonP": 1.413187363488801e-14,
+      "poissonZ": null
+     }
+    },
+    "confirm": {
+     "base": {
+      "events": 30,
+      "pairs": 2593,
+      "v": 0.011569610489780177,
+      "nullMean": 0.0009997392726337337,
+      "nullSd": 0.0005986945568663355,
+      "z": 17.654864397750444,
+      "nullEventsMean": 2.59,
+      "poissonP": 7.731951058377817e-22,
+      "poissonZ": 9.531392427281048
+     },
+     "noDup": {
+      "events": 30,
+      "pairs": 2593,
+      "v": 0.011569610489780177,
+      "nullMean": 0.0009997392726337337,
+      "nullSd": 0.0005986945568663355,
+      "z": 17.654864397750444,
+      "nullEventsMean": 2.59,
+      "poissonP": 7.731951058377817e-22,
+      "poissonZ": 9.531392427281048
+     },
+     "long6": {
+      "events": 30,
+      "pairs": 2401,
+      "v": 0.012494793835901708,
+      "nullMean": 0.0010804529475704535,
+      "nullSd": 0.0006359385115074681,
+      "z": 17.948812159958663,
+      "nullEventsMean": 2.58,
+      "poissonP": 6.951497796249108e-22,
+      "poissonZ": 9.542430986247311
+     },
+     "last1": {
+      "events": 56,
+      "pairs": 2593,
+      "v": 0.021596606247589665,
+      "nullMean": 0.0027290473710882934,
+      "nullSd": 0.0009940553389649115,
+      "z": 18.980390866516302,
+      "nullEventsMean": 7.07,
+      "poissonP": 5.0410516479175675e-31,
+      "poissonZ": 11.52296539762709
+     },
+     "cond": {
+      "events": 30,
+      "pairs": 56,
+      "v": 0.5357142857142857,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 2.59,
+      "poissonP": 7.731951058377817e-22,
+      "poissonZ": null
+     }
+    }
+   }
+  },
+  "sfx-ud-urd": {
+   "id": "sfx-ud-urd",
+   "tokens": 102096,
+   "halves": {
+    "discover": {
+     "base": {
+      "events": 51,
+      "pairs": 1752,
+      "v": 0.02910958904109589,
+      "nullMean": 0.004001141552511413,
+      "nullSd": 0.0015467229137521045,
+      "z": 16.233319662715388,
+      "nullEventsMean": 7.01,
+      "poissonP": 9.104590796328817e-27,
+      "poissonZ": 10.645677256866055
+     },
+     "noDup": {
+      "events": 39,
+      "pairs": 1740,
+      "v": 0.022413793103448276,
+      "nullMean": 0.003932896140235583,
+      "nullSd": 0.001549711379508219,
+      "z": 11.925379917567211,
+      "nullEventsMean": 6.89,
+      "poissonP": 2.953436362554818e-17,
+      "poissonZ": 8.366641614130355
+     },
+     "long6": {
+      "events": 51,
+      "pairs": 1728,
+      "v": 0.029513888888888888,
+      "nullMean": 0.004058761387436891,
+      "nullSd": 0.001568869128099604,
+      "z": 16.22514398781382,
+      "nullEventsMean": 7.01,
+      "poissonP": 9.104590796328817e-27,
+      "poissonZ": 10.645677256866055
+     },
+     "last1": {
+      "events": 300,
+      "pairs": 1752,
+      "v": 0.17123287671232876,
+      "nullMean": 0.09963470319634701,
+      "nullSd": 0.006174859177709729,
+      "z": 11.595110342668201,
+      "nullEventsMean": 174.56,
+      "poissonP": 4.5835401884644786e-18,
+      "poissonZ": 8.583529066750327
+     },
+     "cond": {
+      "events": 51,
+      "pairs": 300,
+      "v": 0.17,
+      "nullMean": 0.040076530711452216,
+      "nullSd": 0.015079663891094393,
+      "z": 8.61580670675802,
+      "nullEventsMean": 7.01,
+      "poissonP": 9.104590796328817e-27,
+      "poissonZ": null
+     }
+    },
+    "confirm": {
+     "base": {
+      "events": 72,
+      "pairs": 2129,
+      "v": 0.033818694222639736,
+      "nullMean": 0.004518553311413809,
+      "nullSd": 0.0014623213108622734,
+      "z": 20.036732483881252,
+      "nullEventsMean": 9.62,
+      "poissonP": 7.672430958668419e-38,
+      "poissonZ": 12.805033137074469
+     },
+     "noDup": {
+      "events": 57,
+      "pairs": 2114,
+      "v": 0.02696310312204352,
+      "nullMean": 0.004509201167550157,
+      "nullSd": 0.0014611311729271614,
+      "z": 15.367478547124742,
+      "nullEventsMean": 9.6,
+      "poissonP": 1.9533807477953702e-25,
+      "poissonZ": 10.356273181093414
+     },
+     "long6": {
+      "events": 72,
+      "pairs": 2095,
+      "v": 0.03436754176610979,
+      "nullMean": 0.0045594083426394785,
+      "nullSd": 0.001482563202748688,
+      "z": 20.105809565626416,
+      "nullEventsMean": 9.55,
+      "poissonP": 4.858408218821831e-38,
+      "poissonZ": 12.840456640862048
+     },
+     "last1": {
+      "events": 396,
+      "pairs": 2129,
+      "v": 0.18600281822451856,
+      "nullMean": 0.10992954438703613,
+      "nullSd": 0.005656151661716948,
+      "z": 13.449652411616926,
+      "nullEventsMean": 234.04,
+      "poissonP": 3.770548997751709e-22,
+      "poissonZ": 9.605652730039623
+     },
+     "cond": {
+      "events": 72,
+      "pairs": 396,
+      "v": 0.18181818181818182,
+      "nullMean": 0.041174017276637845,
+      "nullSd": 0.013467993606771192,
+      "z": 10.442844617243766,
+      "nullEventsMean": 9.62,
+      "poissonP": 7.672430958668419e-38,
+      "poissonZ": null
+     }
+    }
+   }
+  },
+  "sfx-ud-slk": {
+   "id": "sfx-ud-slk",
+   "tokens": 65159,
+   "halves": {
+    "discover": {
+     "base": {
+      "events": 9,
+      "pairs": 3740,
+      "v": 0.0024064171122994654,
+      "nullMean": 0.000042873243403978214,
+      "nullSd": 0.00009872992830882771,
+      "z": 23.939487340680632,
+      "nullEventsMean": 0.16,
+      "poissonP": 1.6399258571886963e-13,
+      "poissonZ": 7.281936688013568
+     },
+     "noDup": {
+      "events": 5,
+      "pairs": 3736,
+      "v": 0.0013383297644539614,
+      "nullMean": 0.0000375113127236793,
+      "nullSd": 0.00009343946368396581,
+      "z": 13.92151025320474,
+      "nullEventsMean": 0.14,
+      "poissonP": 3.9891130939780505e-7,
+      "poissonZ": 4.9356943730145755
+     },
+     "long6": {
+      "events": 5,
+      "pairs": 1487,
+      "v": 0.0033624747814391394,
+      "nullMean": 0.00003638929150697926,
+      "nullSd": 0.00015942662957793566,
+      "z": 20.862797505897248,
+      "nullEventsMean": 0.05,
+      "poissonP": 2.4979513360065066e-9,
+      "poissonZ": 5.846956361353249
+     },
+     "last1": {
+      "events": 29,
+      "pairs": 3740,
+      "v": 0.007754010695187166,
+      "nullMean": 0.0004501023109144997,
+      "nullSd": 0.00033393949642490867,
+      "z": 21.87195124406334,
+      "nullEventsMean": 1.68,
+      "poissonP": 7.634747868572372e-26,
+      "poissonZ": 10.445786280248145
+     },
+     "cond": {
+      "events": 9,
+      "pairs": 29,
+      "v": null,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 0.16,
+      "poissonP": 1.6399258571886963e-13,
+      "poissonZ": null
+     }
+    },
+    "confirm": {
+     "base": {
+      "events": 9,
+      "pairs": 3979,
+      "v": 0.002261874842925358,
+      "nullMean": 0.00006037422351585867,
+      "nullSd": 0.00011373318441186332,
+      "z": 19.356713089446078,
+      "nullEventsMean": 0.24,
+      "poissonP": 5.867241600334267e-12,
+      "poissonZ": 6.783015932168652
+     },
+     "noDup": {
+      "events": 7,
+      "pairs": 3977,
+      "v": 0.001760120693990445,
+      "nullMean": 0.000037732067654372756,
+      "nullSd": 0.00009708330760091775,
+      "z": 17.741346776279283,
+      "nullEventsMean": 0.15,
+      "poissonP": 2.9734932050665534e-10,
+      "poissonZ": 6.191441466849192
+     },
+     "long6": {
+      "events": 2,
+      "pairs": 1670,
+      "v": 0.0011976047904191617,
+      "nullMean": 0.000019278670148379264,
+      "nullSd": 0.0001101831008157155,
+      "z": 10.694254486825232,
+      "nullEventsMean": 0.03,
+      "poissonP": 0.0004411004450365774,
+      "poissonZ": 3.325850021852182
+     },
+     "last1": {
+      "events": 25,
+      "pairs": 3979,
+      "v": 0.0062829856747926615,
+      "nullMean": 0.0005660608146038892,
+      "nullSd": 0.0003510643630889287,
+      "z": 16.28454910628627,
+      "nullEventsMean": 2.25,
+      "poissonP": 4.741569070651659e-18,
+      "poissonZ": 8.579630766699653
+     },
+     "cond": {
+      "events": 9,
+      "pairs": 25,
+      "v": null,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 0.24,
+      "poissonP": 5.867241600334267e-12,
+      "poissonZ": null
+     }
+    }
+   }
+  },
+  "sfx-ud-fas": {
+   "id": "sfx-ud-fas",
+   "tokens": 299972,
+   "halves": {
+    "discover": {
+     "base": {
+      "events": 54,
+      "pairs": 9234,
+      "v": 0.005847953216374269,
+      "nullMean": 0.002306624879348623,
+      "nullSd": 0.00046340517656748986,
+      "z": 7.641969740728371,
+      "nullEventsMean": 21.3,
+      "poissonP": 2.1306712152814455e-9,
+      "poissonZ": 5.8733602678250945
+     },
+     "noDup": {
+      "events": 54,
+      "pairs": 9234,
+      "v": 0.005847953216374269,
+      "nullMean": 0.002306624879348623,
+      "nullSd": 0.00046340517656748986,
+      "z": 7.641969740728371,
+      "nullEventsMean": 21.3,
+      "poissonP": 2.1306712152814455e-9,
+      "poissonZ": 5.8733602678250945
+     },
+     "long6": {
+      "events": 50,
+      "pairs": 8193,
+      "v": 0.006102770657878677,
+      "nullMean": 0.0025435552857717585,
+      "nullSd": 0.0005130305038609769,
+      "z": 6.937629137684588,
+      "nullEventsMean": 20.73,
+      "poissonP": 3.6886185252849565e-8,
+      "poissonZ": 5.381445540150998
+     },
+     "last1": {
+      "events": 527,
+      "pairs": 9234,
+      "v": 0.05707169157461555,
+      "nullMean": 0.02734706910666829,
+      "nullSd": 0.0015926998094762048,
+      "z": 18.663041391160128,
+      "nullEventsMean": 252.53,
+      "poissonP": 2.225180043082447e-51,
+      "poissonZ": 15.033255879360949
+     },
+     "cond": {
+      "events": 54,
+      "pairs": 527,
+      "v": 0.10246679316888045,
+      "nullMean": 0.08417196380876367,
+      "nullSd": 0.015152523059219264,
+      "z": 1.2073784206509186,
+      "nullEventsMean": 21.3,
+      "poissonP": 2.1306712152814455e-9,
+      "poissonZ": null
+     }
+    },
+    "confirm": {
+     "base": {
+      "events": 58,
+      "pairs": 9330,
+      "v": 0.006216505894962487,
+      "nullMean": 0.002376159152328273,
+      "nullSd": 0.0005118731742535756,
+      "z": 7.502535658826602,
+      "nullEventsMean": 22.17,
+      "poissonP": 1.8075403087415342e-10,
+      "poissonZ": 6.269407002406982
+     },
+     "noDup": {
+      "events": 57,
+      "pairs": 9329,
+      "v": 0.006109979633401222,
+      "nullMean": 0.002376159152328273,
+      "nullSd": 0.0005118731742535756,
+      "z": 7.294425003845309,
+      "nullEventsMean": 22.17,
+      "poissonP": 4.776417614293675e-10,
+      "poissonZ": 6.116326628038308
+     },
+     "long6": {
+      "events": 46,
+      "pairs": 8370,
+      "v": 0.005495818399044205,
+      "nullMean": 0.002586149096754662,
+      "nullSd": 0.0005714477130264162,
+      "z": 5.091750716578751,
+      "nullEventsMean": 21.52,
+      "poissonP": 0.0000030491644953463696,
+      "poissonZ": 4.522839235171199
+     },
+     "last1": {
+      "events": 473,
+      "pairs": 9330,
+      "v": 0.05069667738478028,
+      "nullMean": 0.025788354530065685,
+      "nullSd": 0.001412606345596806,
+      "z": 17.632883309887145,
+      "nullEventsMean": 240.61,
+      "poissonP": 4.445117981667726e-40,
+      "poissonZ": 13.198929457303336
+     },
+     "cond": {
+      "events": 58,
+      "pairs": 473,
+      "v": 0.1226215644820296,
+      "nullMean": 0.09214667572163807,
+      "nullSd": 0.019387159778062626,
+      "z": 1.571910950817826,
+      "nullEventsMean": 22.17,
+      "poissonP": 1.8075403087415342e-10,
+      "poissonZ": null
+     }
+    }
+   }
+  },
+  "sfx-ud-ind": {
+   "id": "sfx-ud-ind",
+   "tokens": 80944,
+   "halves": {
+    "discover": {
+     "base": {
+      "events": 2,
+      "pairs": 2226,
+      "v": 0.0008984725965858042,
+      "nullMean": 0.0004581706026550944,
+      "nullSd": 0.0004422489672599638,
+      "z": 0.9955975627454444,
+      "nullEventsMean": 1.02,
+      "poissonP": 0.2715982208503819,
+      "poissonZ": 0.6076380661846252
+     },
+     "noDup": {
+      "events": 2,
+      "pairs": 2226,
+      "v": 0.0008984725965858042,
+      "nullMean": 0.0004581706026550944,
+      "nullSd": 0.0004422489672599638,
+      "z": 0.9955975627454444,
+      "nullEventsMean": 1.02,
+      "poissonP": 0.2715982208503819,
+      "poissonZ": 0.6076380661846252
+     },
+     "long6": {
+      "events": 2,
+      "pairs": 2049,
+      "v": 0.0009760858955588092,
+      "nullMean": 0.0004883084339425066,
+      "nullSd": 0.00047561542634679644,
+      "z": 1.0255711539108872,
+      "nullEventsMean": 1,
+      "poissonP": 0.2642411176571152,
+      "poissonZ": 0.6299916058162021
+     },
+     "last1": {
+      "events": 12,
+      "pairs": 2226,
+      "v": 0.005390835579514825,
+      "nullMean": 0.006261629908120655,
+      "nullSd": 0.0015555273041036276,
+      "z": -0.5598065211125467,
+      "nullEventsMean": 13.94,
+      "poissonP": 0.7348660491627532,
+      "poissonZ": -0.6272622023784964
+     },
+     "cond": {
+      "events": 2,
+      "pairs": 12,
+      "v": null,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 1.02,
+      "poissonP": 0.2715982208503819,
+      "poissonZ": null
+     }
+    },
+    "confirm": {
+     "base": {
+      "events": 2,
+      "pairs": 2057,
+      "v": 0.0009722897423432182,
+      "nullMean": 0.000627569216633795,
+      "nullSd": 0.0005187839783260545,
+      "z": 0.66447797177878,
+      "nullEventsMean": 1.29,
+      "poissonP": 0.36962990672446716,
+      "poissonZ": 0.3323916574391157
+     },
+     "noDup": {
+      "events": 2,
+      "pairs": 2057,
+      "v": 0.0009722897423432182,
+      "nullMean": 0.000627569216633795,
+      "nullSd": 0.0005187839783260545,
+      "z": 0.66447797177878,
+      "nullEventsMean": 1.29,
+      "poissonP": 0.36962990672446716,
+      "poissonZ": 0.3323916574391157
+     },
+     "long6": {
+      "events": 2,
+      "pairs": 1885,
+      "v": 0.0010610079575596816,
+      "nullMean": 0.0005893486857704262,
+      "nullSd": 0.0005384783177238179,
+      "z": 0.8759113529083012,
+      "nullEventsMean": 1.11,
+      "poissonP": 0.30463059213135113,
+      "poissonZ": 0.5107230550747932
+     },
+     "last1": {
+      "events": 14,
+      "pairs": 2057,
+      "v": 0.006806028196402528,
+      "nullMean": 0.006183282178406739,
+      "nullSd": 0.0016425779784386048,
+      "z": 0.37912721719778364,
+      "nullEventsMean": 12.71,
+      "poissonP": 0.3951076229024662,
+      "poissonZ": 0.26561036359665424
+     },
+     "cond": {
+      "events": 2,
+      "pairs": 14,
+      "v": null,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 1.29,
+      "poissonP": 0.36962990672446716,
+      "poissonZ": null
+     }
+    }
+   }
+  },
+  "sfx-ud-jpn": {
+   "id": "sfx-ud-jpn",
+   "tokens": 146279,
+   "halves": {
+    "discover": {
+     "base": {
+      "events": 58,
+      "pairs": 3296,
+      "v": 0.017597087378640776,
+      "nullMean": 0.01605861483096931,
+      "nullSd": 0.002187144330975717,
+      "z": 0.7034161055960725,
+      "nullEventsMean": 52.91,
+      "poissonP": 0.25951159886132724,
+      "poissonZ": 0.6445292556289365
+     },
+     "noDup": {
+      "events": 58,
+      "pairs": 3296,
+      "v": 0.017597087378640776,
+      "nullMean": 0.01605861483096931,
+      "nullSd": 0.002187144330975717,
+      "z": 0.7034161055960725,
+      "nullEventsMean": 52.91,
+      "poissonP": 0.25951159886132724,
+      "poissonZ": 0.6445292556289365
+     },
+     "long6": {
+      "events": 58,
+      "pairs": 2875,
+      "v": 0.02017391304347826,
+      "nullMean": 0.018303341533675067,
+      "nullSd": 0.0024728734481698437,
+      "z": 0.7564364084978109,
+      "nullEventsMean": 52.51,
+      "poissonP": 0.24170766540983832,
+      "poissonZ": 0.7005397123878798
+     },
+     "last1": {
+      "events": 302,
+      "pairs": 3296,
+      "v": 0.09162621359223301,
+      "nullMean": 0.09604489048528864,
+      "nullSd": 0.004999347986124734,
+      "z": -0.8838506351866859,
+      "nullEventsMean": 316.45,
+      "poissonP": 0.7989025985905472,
+      "poissonZ": -0.8375400259479261
+     },
+     "cond": {
+      "events": 58,
+      "pairs": 302,
+      "v": 0.19205298013245034,
+      "nullMean": 0.1671222633054429,
+      "nullSd": 0.020457988774257127,
+      "z": 1.2186299006273036,
+      "nullEventsMean": 52.91,
+      "poissonP": 0.25951159886132724,
+      "poissonZ": null
+     }
+    },
+    "confirm": {
+     "base": {
+      "events": 63,
+      "pairs": 3450,
+      "v": 0.018260869565217393,
+      "nullMean": 0.01929440489839113,
+      "nullSd": 0.0023511416012540853,
+      "z": -0.4395887226113712,
+      "nullEventsMean": 66.57,
+      "poissonP": 0.685583319272812,
+      "poissonZ": -0.48295174909389305
+     },
+     "noDup": {
+      "events": 63,
+      "pairs": 3450,
+      "v": 0.018260869565217393,
+      "nullMean": 0.019291575260730984,
+      "nullSd": 0.0023455142027993567,
+      "z": -0.43943698754134597,
+      "nullEventsMean": 66.56,
+      "poissonP": 0.6851522575357816,
+      "poissonZ": -0.4817371951327565
+     },
+     "long6": {
+      "events": 63,
+      "pairs": 3084,
+      "v": 0.020428015564202335,
+      "nullMean": 0.021477271362741822,
+      "nullSd": 0.0026130745245066217,
+      "z": -0.40154070949721515,
+      "nullEventsMean": 66.21,
+      "poissonP": 0.6698819258805672,
+      "poissonZ": -0.43915399169282976
+     },
+     "last1": {
+      "events": 351,
+      "pairs": 3450,
+      "v": 0.10173913043478261,
+      "nullMean": 0.10549443009587646,
+      "nullSd": 0.004643010045516389,
+      "z": -0.8088071368099293,
+      "nullEventsMean": 363.98,
+      "poissonP": 0.7587226586960318,
+      "poissonZ": -0.7019203734612584
+     },
+     "cond": {
+      "events": 63,
+      "pairs": 351,
+      "v": 0.1794871794871795,
+      "nullMean": 0.1827520730499036,
+      "nullSd": 0.0195290428566269,
+      "z": -0.1671814428742581,
+      "nullEventsMean": 66.57,
+      "poissonP": 0.685583319272812,
+      "poissonZ": null
+     }
+    }
+   }
+  },
+  "sfx-ud-kor": {
+   "id": "sfx-ud-kor",
+   "tokens": 49012,
+   "halves": {
+    "discover": {
+     "base": {
+      "events": 0,
+      "pairs": 1918,
+      "v": 0,
+      "nullMean": 0.00031803419077432675,
+      "nullSd": 0.0004314270180093572,
+      "z": -0.7371679971313918,
+      "nullEventsMean": 0.61,
+      "poissonP": 1,
+      "poissonZ": null
+     },
+     "noDup": {
+      "events": 0,
+      "pairs": 1918,
+      "v": 0,
+      "nullMean": 0.00031282042643647484,
+      "nullSd": 0.00043209470131830194,
+      "z": -0.7239626532842766,
+      "nullEventsMean": 0.6,
+      "poissonP": 1,
+      "poissonZ": null
+     },
+     "long6": {
+      "events": 0,
+      "pairs": 1087,
+      "v": 0,
+      "nullMean": 0.00046182363911855895,
+      "nullSd": 0.00063729514601425,
+      "z": -0.7246621004520133,
+      "nullEventsMean": 0.5,
+      "poissonP": 1,
+      "poissonZ": null
+     },
+     "last1": {
+      "events": 15,
+      "pairs": 1918,
+      "v": 0.007820646506777894,
+      "nullMean": 0.006480559641497328,
+      "nullSd": 0.001437515156500413,
+      "z": 0.9322245120134716,
+      "nullEventsMean": 12.43,
+      "poissonP": 0.26819335002545774,
+      "poissonZ": 0.6179448064724609
+     },
+     "cond": {
+      "events": 0,
+      "pairs": 15,
+      "v": null,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 0.61,
+      "poissonP": 1,
+      "poissonZ": null
+     }
+    },
+    "confirm": {
+     "base": {
+      "events": 1,
+      "pairs": 2302,
+      "v": 0.0004344048653344917,
+      "nullMean": 0.0002562932117779361,
+      "nullSd": 0.0003154033412306614,
+      "z": 0.5647107378811774,
+      "nullEventsMean": 0.59,
+      "poissonP": 0.44567271526549296,
+      "poissonZ": 0.13630497603660352
+     },
+     "noDup": {
+      "events": 0,
+      "pairs": 2301,
+      "v": 0,
+      "nullMean": 0.0002562932117779361,
+      "nullSd": 0.0003154033412306614,
+      "z": -0.8125887657940289,
+      "nullEventsMean": 0.59,
+      "poissonP": 1,
+      "poissonZ": null
+     },
+     "long6": {
+      "events": 0,
+      "pairs": 1238,
+      "v": 0,
+      "nullMean": 0.00028907553599554723,
+      "nullSd": 0.00046361430063743936,
+      "z": -0.6235259257492429,
+      "nullEventsMean": 0.36,
+      "poissonP": 1,
+      "poissonZ": null
+     },
+     "last1": {
+      "events": 16,
+      "pairs": 2302,
+      "v": 0.0069504778453518675,
+      "nullMean": 0.006845943397970311,
+      "nullSd": 0.0017454002545289904,
+      "z": 0.05989139001802517,
+      "nullEventsMean": 15.76,
+      "poissonP": 0.5092770547269816,
+      "poissonZ": -0.023190491021225945
+     },
+     "cond": {
+      "events": 1,
+      "pairs": 16,
+      "v": null,
+      "nullMean": null,
+      "nullSd": null,
+      "z": null,
+      "nullEventsMean": 0.59,
+      "poissonP": 0.44567271526549296,
+      "poissonZ": null
+     }
+    }
+   }
+  }
+ }
+}

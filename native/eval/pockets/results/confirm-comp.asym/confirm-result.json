@@ -1,0 +1,2151 @@
+{
+ "prereg": {
+  "file": "confirm.mjs",
+  "sha256": "fd6244ca8b1253c6e6f28a1d05a911910a71a318f03fe24698122c085c6e2801",
+  "protocolSha256": "3b7363c5b01642c06ad5df8d059e5909f237516481e0ed8af3379aa39c4330fc"
+ },
+ "verdict": "PARTIAL",
+ "verdictBasis": {
+  "headlineScored": 5,
+  "headlineMatch": 5,
+  "scoredA": 5,
+  "matchA": 5,
+  "scoredB": 0,
+  "matchB": 0,
+  "reversedA": 0,
+  "unscoredHeadline": [
+   "asym-oc-irc-ho-0809:AMBIGUOUS",
+   "asym-en-dolls-house:AMBIGUOUS",
+   "asym-en-early-plays:AMBIGUOUS"
+  ]
+ },
+ "blindScore": {
+  "scoredPredictions": 10,
+  "hold": 10,
+  "rows": [
+   {
+    "id": "asym-en-about-london",
+    "role": "headline-A",
+    "blindExpect": "PRESENT+",
+    "status": "PRESENT+",
+    "holds": true
+   },
+   {
+    "id": "asym-en-among-forces",
+    "role": "headline-A",
+    "blindExpect": "PRESENT+",
+    "status": "PRESENT+",
+    "holds": true
+   },
+   {
+    "id": "asym-oc-irc-ho-0607",
+    "role": "headline-A",
+    "blindExpect": "PRESENT+",
+    "status": "PRESENT+",
+    "holds": true
+   },
+   {
+    "id": "asym-cd-js",
+    "role": "headline-A",
+    "blindExpect": "PRESENT+",
+    "status": "PRESENT+",
+    "holds": true
+   },
+   {
+    "id": "asym-cd-ts",
+    "role": "headline-A",
+    "blindExpect": "PRESENT+",
+    "status": "PRESENT+",
+    "holds": true
+   },
+   {
+    "id": "asym-en-dolls-house",
+    "role": "headline-B",
+    "blindExpect": "ABSENT-or-AMBIGUOUS",
+    "status": "AMBIGUOUS",
+    "holds": true
+   },
+   {
+    "id": "asym-en-early-plays",
+    "role": "headline-B",
+    "blindExpect": "ABSENT-or-AMBIGUOUS",
+    "status": "AMBIGUOUS",
+    "holds": true
+   },
+   {
+    "id": "asym-en-plays-pooled",
+    "role": "power-check",
+    "blindExpect": "ABSENT-or-AMBIGUOUS",
+    "status": "AMBIGUOUS",
+    "holds": true
+   },
+   {
+    "id": "asym-ctl-about-london",
+    "role": "control",
+    "blindExpect": "ABSENT",
+    "status": "ABSENT",
+    "holds": true
+   },
+   {
+    "id": "asym-ctl-cd-js",
+    "role": "control",
+    "blindExpect": "ABSENT",
+    "status": "ABSENT",
+    "holds": true
+   }
+  ]
+ },
+ "groups": {
+  "code": {
+   "plusOfThree": 2,
+   "ruleHolds": true,
+   "rows": [
+    "asym-cd-js:PRESENT+",
+    "asym-cd-ts:PRESENT+",
+    "asym-cd-py:AMBIGUOUS"
+   ]
+  },
+  "narrative": {
+   "plus": 0,
+   "minus": 2,
+   "ruleHolds": true,
+   "rows": [
+    "asym-en-mouret:PRESENT-",
+    "asym-en-poe2:AMBIGUOUS",
+    "asym-en-awakening:AMBIGUOUS",
+    "asym-en-waikna:PRESENT-"
+   ]
+  },
+  "treebank": {
+   "presentPlus": 2,
+   "presentMinus": 4,
+   "informative": true,
+   "ruleHolds": true,
+   "absent": 2,
+   "ambiguous": 6,
+   "n": 14
+  }
+ },
+ "instrument": {
+  "controls": [
+   {
+    "id": "asym-ctl-about-london",
+    "status": "ABSENT",
+    "zD": -0.30150025598158103,
+    "zC": 0.5995314191377814
+   },
+   {
+    "id": "asym-ctl-cd-js",
+    "status": "ABSENT",
+    "zD": -0.5913330482138239,
+    "zC": 1.2614140966340783
+   }
+  ],
+  "anyControlPresent": false,
+  "variantSelfCheckMaxDiff": 0
+ },
+ "constants": {
+  "scored": 7,
+  "bothHalvesInRange": 5,
+  "rows": [
+   {
+    "id": "asym-en-about-london",
+    "vD": 0.00934670124886163,
+    "vC": 0.018194943309074816,
+    "vRange": [
+     0.004,
+     0.03
+    ],
+    "in": true
+   },
+   {
+    "id": "asym-en-among-forces",
+    "vD": 0.014963017038312024,
+    "vC": 0.019177538487733924,
+    "vRange": [
+     0.004,
+     0.03
+    ],
+    "in": true
+   },
+   {
+    "id": "asym-oc-irc-ho-0607",
+    "vD": 0.01714039951971032,
+    "vC": 0.007434942359706609,
+    "vRange": [
+     0.007,
+     0.035
+    ],
+    "in": true
+   },
+   {
+    "id": "asym-cd-js",
+    "vD": 0.04571554254652743,
+    "vC": 0.033902688008602064,
+    "vRange": [
+     0.01,
+     0.06
+    ],
+    "in": true
+   },
+   {
+    "id": "asym-cd-ts",
+    "vD": 0.025020090654788593,
+    "vC": 0.008689595272309378,
+    "vRange": [
+     0.01,
+     0.06
+    ],
+    "in": false
+   },
+   {
+    "id": "asym-en-mouret",
+    "vD": -0.007696461245425422,
+    "vC": -0.008751344642166637,
+    "vRange": [
+     -0.012,
+     0.012
+    ],
+    "in": true
+   },
+   {
+    "id": "asym-en-waikna",
+    "vD": -0.013494329233156004,
+    "vC": -0.0065552848045913135,
+    "vRange": [
+     -0.012,
+     0.012
+    ],
+    "in": false
+   }
+  ]
+ },
+ "rows": [
+  {
+   "id": "asym-en-about-london",
+   "role": "headline-A",
+   "kind": "english expository/reportage prose",
+   "register": "reportage",
+   "language": "en",
+   "tokens": 53609,
+   "halfTokens": {
+    "discover": 28704,
+    "confirm": 24905
+   },
+   "thin": false,
+   "claimExpect": "PRESENT+",
+   "blindExpect": "PRESENT+",
+   "vRange": [
+    0.004,
+    0.03
+   ],
+   "computed": true,
+   "status": "PRESENT+",
+   "vD": 0.00934670124886163,
+   "vC": 0.018194943309074816,
+   "zD": 10.775385554870102,
+   "zC": 14.97600827035837,
+   "nullMeanD": 0.000166453820734361,
+   "nullMeanC": 0.00004931874170529892,
+   "nullSdD": 0.000851964635639243,
+   "nullSdC": 0.0012116462704741349,
+   "plug": {
+    "status": "PRESENT+",
+    "zD": 10.656467215394706,
+    "zC": 14.775536209429017,
+    "vD": 0.009350857644160384,
+    "vC": 0.01820731572046979
+   },
+   "deep": {
+    "status": "PRESENT+",
+    "zD": 5.261490204060711,
+    "zC": 14.388304679245774,
+    "vD": 0.006103888515610321,
+    "vC": 0.0172634586246993
+   },
+   "deepPlug": {
+    "status": "PRESENT+",
+    "zD": 5.167184088577557,
+    "zC": 14.173013284992223
+   },
+   "fnBefore": {
+    "status": "AMBIGUOUS",
+    "zD": 2.978479013018848,
+    "zC": 3.456906778837924,
+    "vD": 0.01781348236115962,
+    "vC": 0.017557251908396947
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": true
+  },
+  {
+   "id": "asym-en-among-forces",
+   "role": "headline-A",
+   "kind": "english expository/reportage prose",
+   "register": "essay",
+   "language": "en",
+   "tokens": 35707,
+   "halfTokens": {
+    "discover": 14334,
+    "confirm": 21373
+   },
+   "thin": false,
+   "claimExpect": "PRESENT+",
+   "blindExpect": "PRESENT+",
+   "vRange": [
+    0.004,
+    0.03
+   ],
+   "computed": true,
+   "status": "PRESENT+",
+   "vD": 0.014963017038312024,
+   "vC": 0.019177538487733924,
+   "zD": 7.444100125011482,
+   "zC": 19.494337575830002,
+   "nullMeanD": 0.00011382191452362941,
+   "nullMeanC": -0.0005740265702728702,
+   "nullSdD": 0.0019947602630835774,
+   "nullSdC": 0.001013194984501331,
+   "plug": {
+    "status": "PRESENT+",
+    "zD": 7.3346489596334274,
+    "zC": 19.17785629523734,
+    "vD": 0.01480881883465843,
+    "vC": 0.019207896363541983
+   },
+   "deep": {
+    "status": "AMBIGUOUS",
+    "zD": 3.1172030362741276,
+    "zC": 14.686723234151598,
+    "vD": 0.007846553757315657,
+    "vC": 0.01555255250530948
+   },
+   "deepPlug": {
+    "status": "AMBIGUOUS",
+    "zD": 3.0027762733903165,
+    "zC": 14.45171637013013
+   },
+   "fnBefore": {
+    "status": "ABSENT",
+    "zD": 0.959017969269156,
+    "zC": 1.6158931191731616,
+    "vD": 0.01184990125082291,
+    "vC": 0.01729478575116159
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": true
+  },
+  {
+   "id": "asym-oc-irc-ho-0607",
+   "role": "headline-A",
+   "kind": "english chat (IRC)",
+   "register": "chat",
+   "language": "en",
+   "tokens": 44326,
+   "halfTokens": {
+    "discover": 17344,
+    "confirm": 26982
+   },
+   "thin": false,
+   "claimExpect": "PRESENT+",
+   "blindExpect": "PRESENT+",
+   "vRange": [
+    0.007,
+    0.035
+   ],
+   "computed": true,
+   "status": "PRESENT+",
+   "vD": 0.01714039951971032,
+   "vC": 0.007434942359706609,
+   "zD": 13.894398398958563,
+   "zC": 6.931790721853457,
+   "nullMeanD": -0.00033599241955483024,
+   "nullMeanC": 0.0000378657697387808,
+   "nullSdD": 0.0012578012690765417,
+   "nullSdC": 0.0010671234731088304,
+   "plug": {
+    "status": "PRESENT+",
+    "zD": 13.669013413558664,
+    "zC": 6.697581464035526,
+    "vD": 0.016962574938586633,
+    "vC": 0.007266109085430033
+   },
+   "deep": {
+    "status": "PRESENT+",
+    "zD": 12.302605094405662,
+    "zC": 8.859879864875174,
+    "vD": 0.021647169663447444,
+    "vC": 0.009135967634444978
+   },
+   "deepPlug": {
+    "status": "PRESENT+",
+    "zD": 12.15649151636347,
+    "zC": 8.604352373618616
+   },
+   "fnBefore": {
+    "status": "AMBIGUOUS",
+    "zD": 2.10840706874569,
+    "zC": 0.3728222649879263,
+    "vD": 0.021339220014716703,
+    "vC": -0.0002538715410002539
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": true
+  },
+  {
+   "id": "asym-oc-irc-ho-0809",
+   "role": "headline-A",
+   "kind": "english chat (IRC)",
+   "register": "chat",
+   "language": "en",
+   "tokens": 44366,
+   "halfTokens": {
+    "discover": 16330,
+    "confirm": 28036
+   },
+   "thin": false,
+   "claimExpect": "PRESENT+",
+   "blindExpect": "PRESENT+",
+   "vRange": [
+    0.007,
+    0.035
+   ],
+   "computed": true,
+   "status": "AMBIGUOUS",
+   "vD": 0.0061006112797008846,
+   "vC": 0.01938991563576823,
+   "zD": 3.8106246283138696,
+   "zC": 18.77919053426326,
+   "nullMeanD": 0.00012392458571516775,
+   "nullMeanC": -0.0004806101337317052,
+   "nullSdD": 0.001568427036758614,
+   "nullSdC": 0.001058114072235728,
+   "plug": {
+    "status": "AMBIGUOUS",
+    "zD": 3.6351222176671625,
+    "zC": 18.7067899085728,
+    "vD": 0.005959310457100888,
+    "vC": 0.019437425547367427
+   },
+   "deep": {
+    "status": "PRESENT+",
+    "zD": 5.602328390066801,
+    "zC": 23.99524961029597,
+    "vD": 0.008883648309191305,
+    "vC": 0.023134251334167966
+   },
+   "deepPlug": {
+    "status": "PRESENT+",
+    "zD": 5.341361645722513,
+    "zC": 23.935348205518203
+   },
+   "fnBefore": {
+    "status": "AMBIGUOUS",
+    "zD": 2.5388426082424984,
+    "zC": 0.1549218366773485,
+    "vD": 0.015554787417905289,
+    "vC": 0.0019985011241568824
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": false
+  },
+  {
+   "id": "asym-cd-js",
+   "role": "headline-A",
+   "kind": "code (JavaScript)",
+   "register": "code",
+   "language": "x-javascript",
+   "tokens": 295254,
+   "halfTokens": {
+    "discover": 154955,
+    "confirm": 140299
+   },
+   "thin": false,
+   "claimExpect": "PRESENT+",
+   "blindExpect": "PRESENT+",
+   "vRange": [
+    0.01,
+    0.06
+   ],
+   "computed": true,
+   "status": "PRESENT+",
+   "vD": 0.04571554254652743,
+   "vC": 0.033902688008602064,
+   "zD": 80.09951131447568,
+   "zC": 28.593655849649004,
+   "nullMeanD": -0.0004085576328094526,
+   "nullMeanC": -0.00006244077450937027,
+   "nullSdD": 0.0005758349760493643,
+   "nullSdC": 0.0011878554096652306,
+   "plug": {
+    "status": "PRESENT+",
+    "zD": 80.58069190589893,
+    "zC": 28.735229168406327,
+    "vD": 0.046205968735954964,
+    "vC": 0.03412505784784184
+   },
+   "deep": {
+    "status": "PRESENT+",
+    "zD": 17.38425403262736,
+    "zC": 4.045014171932052,
+    "vD": 0.014783839288580021,
+    "vC": 0.004528435763602067
+   },
+   "deepPlug": {
+    "status": "AMBIGUOUS",
+    "zD": 17.263864408278067,
+    "zC": 3.858795329399317
+   },
+   "fnBefore": {
+    "status": "AMBIGUOUS",
+    "zD": 3.847091864838913,
+    "zC": 6.184029256582486,
+    "vD": 0.018837849587016373,
+    "vC": 0.030470581164733456
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": true
+  },
+  {
+   "id": "asym-cd-ts",
+   "role": "headline-A",
+   "kind": "code (TypeScript)",
+   "register": "code",
+   "language": "x-typescript",
+   "tokens": 291346,
+   "halfTokens": {
+    "discover": 110470,
+    "confirm": 180876
+   },
+   "thin": false,
+   "claimExpect": "PRESENT+",
+   "blindExpect": "PRESENT+",
+   "vRange": [
+    0.01,
+    0.06
+   ],
+   "computed": true,
+   "status": "PRESENT+",
+   "vD": 0.025020090654788593,
+   "vC": 0.008689595272309378,
+   "zD": 18.92898134161035,
+   "zC": 7.552506709794829,
+   "nullMeanD": 0.0003492029916107186,
+   "nullMeanC": 0.00008341791995545459,
+   "nullSdD": 0.001303339425294137,
+   "nullSdC": 0.001139512705257526,
+   "plug": {
+    "status": "PRESENT+",
+    "zD": 18.926831418027714,
+    "zC": 7.461883223233344,
+    "vD": 0.025145140646113152,
+    "vC": 0.008609759183451042
+   },
+   "deep": {
+    "status": "AMBIGUOUS",
+    "zD": 3.1295484923281816,
+    "zC": 16.821702944603153,
+    "vD": 0.007355125152603326,
+    "vC": 0.02498267181312754
+   },
+   "deepPlug": {
+    "status": "AMBIGUOUS",
+    "zD": 2.9904804262323066,
+    "zC": 16.82005163076818
+   },
+   "fnBefore": {
+    "status": "PRESENT+",
+    "zD": 7.680667726911952,
+    "zC": 9.508777611735027,
+    "vD": 0.057093980541002884,
+    "vC": 0.04703415218693829
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": false
+  },
+  {
+   "id": "asym-en-dolls-house",
+   "role": "headline-B",
+   "kind": "english drama",
+   "register": "drama",
+   "language": "en",
+   "tokens": 22597,
+   "halfTokens": {
+    "discover": 12209,
+    "confirm": 10388
+   },
+   "thin": false,
+   "claimExpect": "PRESENT-",
+   "blindExpect": "ABSENT-or-AMBIGUOUS",
+   "vRange": [
+    -0.006,
+    0.01
+   ],
+   "computed": true,
+   "status": "AMBIGUOUS",
+   "vD": 0.016911305482752825,
+   "vC": -0.011903255387839217,
+   "zD": 8.162872425351514,
+   "zC": -3.1967557055904607,
+   "nullMeanD": 0.00018876036828043233,
+   "nullMeanC": -0.0013037831699409085,
+   "nullSdD": 0.002048610371826591,
+   "nullSdC": 0.0033156966606369192,
+   "plug": {
+    "status": "AMBIGUOUS",
+    "zD": 8.145891038268175,
+    "zC": -3.127551285569121,
+    "vD": 0.017174731893462115,
+    "vC": -0.011487311650631077
+   },
+   "deep": {
+    "status": "AMBIGUOUS",
+    "zD": -0.9409034540288547,
+    "zC": -3.7603919138452646,
+    "vD": -0.0017568747656678833,
+    "vC": -0.015351748150596053
+   },
+   "deepPlug": {
+    "status": "AMBIGUOUS",
+    "zD": -0.8370461723752614,
+    "zC": -3.803996635752587
+   },
+   "fnBefore": {
+    "status": "AMBIGUOUS",
+    "zD": 2.8482000906990503,
+    "zC": 4.70452787007004,
+    "vD": 0.030878859857482184,
+    "vC": 0.05505761843790013
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": false
+  },
+  {
+   "id": "asym-en-early-plays",
+   "role": "headline-B",
+   "kind": "english drama",
+   "register": "drama",
+   "language": "en",
+   "tokens": 31927,
+   "halfTokens": {
+    "discover": 15028,
+    "confirm": 16899
+   },
+   "thin": false,
+   "claimExpect": "PRESENT-",
+   "blindExpect": "ABSENT-or-AMBIGUOUS",
+   "vRange": [
+    -0.006,
+    0.01
+   ],
+   "computed": true,
+   "status": "AMBIGUOUS",
+   "vD": 0.0043873021173030675,
+   "vC": -0.008031731122828577,
+   "zD": 2.8154212027360943,
+   "zC": -7.783042057887101,
+   "nullMeanD": -0.00016581429981843448,
+   "nullMeanC": 0.0004951663328961415,
+   "nullSdD": 0.0016172061262793194,
+   "nullSdC": 0.0010955738633178548,
+   "plug": {
+    "status": "AMBIGUOUS",
+    "zD": 2.7589712299922415,
+    "zC": -7.559906719721249,
+    "vD": 0.004328499896505842,
+    "vC": -0.007918223492856124
+   },
+   "deep": {
+    "status": "AMBIGUOUS",
+    "zD": 3.304643626035858,
+    "zC": -7.74681117919295,
+    "vD": 0.003933314780611769,
+    "vC": -0.00918175804489988
+   },
+   "deepPlug": {
+    "status": "AMBIGUOUS",
+    "zD": 3.2256585477627207,
+    "zC": -7.513960962875753
+   },
+   "fnBefore": {
+    "status": "AMBIGUOUS",
+    "zD": 5.977770593704343,
+    "zC": 3.913337385231353,
+    "vD": 0.03206997084548105,
+    "vC": 0.026989809969705316
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": false
+  },
+  {
+   "id": "asym-en-plays-pooled",
+   "role": "power-check",
+   "kind": "english drama (pool)",
+   "register": "drama",
+   "language": "en",
+   "tokens": 54524,
+   "halfTokens": {
+    "discover": 32942,
+    "confirm": 21582
+   },
+   "thin": false,
+   "claimExpect": "PRESENT-",
+   "blindExpect": "ABSENT-or-AMBIGUOUS",
+   "vRange": [
+    -0.006,
+    0.01
+   ],
+   "computed": true,
+   "status": "AMBIGUOUS",
+   "vD": -0.0027770430657400474,
+   "vC": 0.00022447039248786604,
+   "zD": -3.4576905801863247,
+   "zC": 0.4156235515739902,
+   "nullMeanD": -0.00016612171639851509,
+   "nullMeanC": -0.0003734534324954362,
+   "nullSdD": 0.0007551055505958076,
+   "nullSdC": 0.0014386187277379504,
+   "plug": {
+    "status": "AMBIGUOUS",
+    "zD": -3.2260647430659923,
+    "zC": 0.4679604218659651,
+    "vD": -0.0026230875718958324,
+    "vC": 0.0003058945516898795
+   },
+   "deep": {
+    "status": "AMBIGUOUS",
+    "zD": -3.302639435221231,
+    "zC": -4.133154448515104,
+    "vD": -0.003469001612277485,
+    "vC": -0.006931708468346778
+   },
+   "deepPlug": {
+    "status": "AMBIGUOUS",
+    "zD": -3.1956860693433584,
+    "zC": -3.9530194747455303
+   },
+   "fnBefore": {
+    "status": "AMBIGUOUS",
+    "zD": 4.647307897306069,
+    "zC": 2.4117810691505928,
+    "vD": 0.023409236007661205,
+    "vC": 0.02474566950783613
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": true
+  },
+  {
+   "id": "asym-cd-py",
+   "role": "secondary-code",
+   "kind": "code (Python)",
+   "register": "code",
+   "language": "x-python",
+   "tokens": 90463,
+   "halfTokens": {
+    "discover": 55036,
+    "confirm": 35427
+   },
+   "thin": false,
+   "claimExpect": "PRESENT+",
+   "blindExpect": "PRESENT+",
+   "vRange": [
+    -0.015,
+    0.03
+   ],
+   "computed": true,
+   "status": "AMBIGUOUS",
+   "vD": 0.019811129704149187,
+   "vC": 0.0030002322702854076,
+   "zD": 10.601794918433715,
+   "zC": 1.0621223546829315,
+   "nullMeanD": -0.00038827235389866097,
+   "nullMeanC": -0.00006023817585658346,
+   "nullSdD": 0.0019052813427777628,
+   "nullSdC": 0.002881466935187155,
+   "plug": {
+    "status": "AMBIGUOUS",
+    "zD": 10.735200302446982,
+    "zC": 0.9193363221344125,
+    "vD": 0.019842326781686973,
+    "vC": 0.002555027953688803
+   },
+   "deep": {
+    "status": "PRESENT+",
+    "zD": 14.172298666574612,
+    "zC": 7.865763025500131,
+    "vD": 0.0236157708189183,
+    "vC": 0.01868618660626118
+   },
+   "deepPlug": {
+    "status": "PRESENT+",
+    "zD": 14.249702605826576,
+    "zC": 7.8618112878217055
+   },
+   "fnBefore": {
+    "status": "PRESENT+",
+    "zD": 8.179286480029717,
+    "zC": 5.48494388898859,
+    "vD": 0.038040712468193384,
+    "vC": 0.05271931652427589
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": true
+  },
+  {
+   "id": "asym-en-mouret",
+   "role": "secondary-narrative",
+   "kind": "english novel",
+   "register": "novel",
+   "language": "en",
+   "tokens": 126434,
+   "halfTokens": {
+    "discover": 54814,
+    "confirm": 71620
+   },
+   "thin": false,
+   "claimExpect": "PRESENT-",
+   "blindExpect": "no-consistent-sign",
+   "vRange": [
+    -0.012,
+    0.012
+   ],
+   "computed": true,
+   "status": "PRESENT-",
+   "vD": -0.007696461245425422,
+   "vC": -0.008751344642166637,
+   "zD": -8.705032087051205,
+   "zC": -13.756395544468775,
+   "nullMeanD": -0.000049566884596378244,
+   "nullMeanC": 0.00007026775744665512,
+   "nullSdD": 0.0008784452813452408,
+   "nullSdC": 0.0006412735349966234,
+   "plug": {
+    "status": "PRESENT-",
+    "zD": -8.785148007060727,
+    "zC": -13.755776431142543,
+    "vD": -0.0078079204165338685,
+    "vC": -0.00878020564610214
+   },
+   "deep": {
+    "status": "PRESENT-",
+    "zD": -15.959278511996452,
+    "zC": -24.55852307386701,
+    "vD": -0.010598576494753535,
+    "vC": -0.012840279715830974
+   },
+   "deepPlug": {
+    "status": "PRESENT-",
+    "zD": -16.08485050671542,
+    "zC": -24.54567784045655
+   },
+   "fnBefore": {
+    "status": "AMBIGUOUS",
+    "zD": 3.1266821342850353,
+    "zC": 5.235536645907925,
+    "vD": 0.01764386536373507,
+    "vC": 0.017595002602811036
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": true
+  },
+  {
+   "id": "asym-en-poe2",
+   "role": "secondary-narrative",
+   "kind": "english novel (tales)",
+   "register": "novel",
+   "language": "en",
+   "tokens": 94473,
+   "halfTokens": {
+    "discover": 48404,
+    "confirm": 46069
+   },
+   "thin": false,
+   "claimExpect": "PRESENT-",
+   "blindExpect": "no-consistent-sign",
+   "vRange": [
+    -0.012,
+    0.012
+   ],
+   "computed": true,
+   "status": "AMBIGUOUS",
+   "vD": 0.00017542908176616315,
+   "vC": 0.005446828267189639,
+   "zD": 0.1638405023644214,
+   "zC": 7.629965375483661,
+   "nullMeanD": 0.00007113359073337179,
+   "nullMeanC": 0.00010429472958308314,
+   "nullSdD": 0.0006365672073002598,
+   "nullSdC": 0.0007002041653783907,
+   "plug": {
+    "status": "AMBIGUOUS",
+    "zD": 0.04681587221490088,
+    "zC": 7.477336170682693,
+    "vD": 0.00010150220871507215,
+    "vC": 0.005380063367843649
+   },
+   "deep": {
+    "status": "AMBIGUOUS",
+    "zD": -4.061923841858287,
+    "zC": 5.371441438536249,
+    "vD": -0.002270176422957748,
+    "vC": 0.0028977465753328444
+   },
+   "deepPlug": {
+    "status": "AMBIGUOUS",
+    "zD": -4.186789318583177,
+    "zC": 5.137908569596234
+   },
+   "fnBefore": {
+    "status": "ABSENT",
+    "zD": 1.6814758777511636,
+    "zC": 0.9752564686446187,
+    "vD": 0.008867950672024387,
+    "vC": 0.005933984423290889
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": true
+  },
+  {
+   "id": "asym-en-awakening",
+   "role": "secondary-narrative",
+   "kind": "english novel",
+   "register": "novel",
+   "language": "en",
+   "tokens": 64499,
+   "halfTokens": {
+    "discover": 27027,
+    "confirm": 37472
+   },
+   "thin": false,
+   "claimExpect": "PRESENT-",
+   "blindExpect": "no-consistent-sign",
+   "vRange": [
+    -0.012,
+    0.012
+   ],
+   "computed": true,
+   "status": "AMBIGUOUS",
+   "vD": -0.0038682705678008827,
+   "vC": -0.0037341690196555782,
+   "zD": -3.2606059962464875,
+   "zC": -4.091156032936325,
+   "nullMeanD": -0.00008428124861598556,
+   "nullMeanC": 0.000006003216307677811,
+   "nullSdD": 0.0011605171932888895,
+   "nullSdC": 0.0009142091393856816,
+   "plug": {
+    "status": "AMBIGUOUS",
+    "zD": -3.191609123255173,
+    "zC": -4.08408662501726,
+    "vD": -0.0038350814266846353,
+    "vC": -0.0037561536723501724
+   },
+   "deep": {
+    "status": "PRESENT-",
+    "zD": -6.107700018203521,
+    "zC": -6.955282553010472,
+    "vD": -0.008643580528198618,
+    "vC": -0.00738430290620076
+   },
+   "deepPlug": {
+    "status": "PRESENT-",
+    "zD": -6.04166741864338,
+    "zC": -6.862614165576706
+   },
+   "fnBefore": {
+    "status": "AMBIGUOUS",
+    "zD": 3.54265117417516,
+    "zC": 5.289904374396596,
+    "vD": 0.025634824667472793,
+    "vC": 0.031297839768668144
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": true
+  },
+  {
+   "id": "asym-en-waikna",
+   "role": "secondary-narrative",
+   "kind": "english memoir/travel",
+   "register": "memoir",
+   "language": "en",
+   "tokens": 74854,
+   "halfTokens": {
+    "discover": 43981,
+    "confirm": 30873
+   },
+   "thin": false,
+   "claimExpect": "no claim (memoir: not listed)",
+   "blindExpect": "no-consistent-sign",
+   "vRange": [
+    -0.012,
+    0.012
+   ],
+   "computed": true,
+   "status": "PRESENT-",
+   "vD": -0.013494329233156004,
+   "vC": -0.0065552848045913135,
+   "zD": -18.592238382639255,
+   "zC": -8.735921946288075,
+   "nullMeanD": 0.0001510783702172997,
+   "nullMeanC": 0.0001226164622975158,
+   "nullSdD": 0.0007339303274055953,
+   "nullSdC": 0.0007644186049219789,
+   "plug": {
+    "status": "PRESENT-",
+    "zD": -18.483256721259014,
+    "zC": -9.023582271588847,
+    "vD": -0.013503820547875484,
+    "vC": -0.006842602027248667
+   },
+   "deep": {
+    "status": "PRESENT-",
+    "zD": -23.938841830871112,
+    "zC": -10.53660333168498,
+    "vD": -0.017861502220540393,
+    "vC": -0.009883963110712633
+   },
+   "deepPlug": {
+    "status": "PRESENT-",
+    "zD": -23.76944778569351,
+    "zC": -10.739201321905497
+   },
+   "fnBefore": {
+    "status": "ABSENT",
+    "zD": 1.5564596831636581,
+    "zC": 0.15946571339249613,
+    "vD": 0.005883121976728984,
+    "vC": -0.0020209443321697594
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": false
+  },
+  {
+   "id": "asym-en-evolution-plain",
+   "loader": "loaders/_sibling-asym-prose.mjs",
+   "kind": "english expository (thin)",
+   "role": "thin",
+   "claimExpect": "PRESENT+",
+   "blindExpect": "PRESENT+",
+   "probBlindHolds": null,
+   "vRange": [
+    0.004,
+    0.03
+   ],
+   "register": "essay",
+   "language": "en",
+   "tokens": 13728,
+   "units": 545,
+   "docs": 27,
+   "meanUnitLength": 25.19,
+   "types": 2814,
+   "halfTokens": {
+    "discover": 4899,
+    "confirm": 8829
+   },
+   "halfDocs": {
+    "discover": 10,
+    "confirm": 17
+   },
+   "thin": true,
+   "scored": false,
+   "contentSha256": "9a8ad790ce21dcdb537958ba001d87d167aab39961d441c1bd288d582bbd536f",
+   "why": "13.7k tokens: under the 20,000-token floor, reported thin and NEVER scored (listed in the sibling plan)",
+   "computed": false
+  },
+  {
+   "id": "asym-ud-ita",
+   "role": "secondary-treebank",
+   "kind": "UD treebank train split, language with no atlas pocket",
+   "register": "treebank",
+   "language": "ita",
+   "tokens": 240871,
+   "halfTokens": {
+    "discover": 128140,
+    "confirm": 112731
+   },
+   "thin": false,
+   "claimExpect": "mixed-sign (group rule)",
+   "blindExpect": "mixed-sign (group rule)",
+   "vRange": [
+    -0.03,
+    0.04
+   ],
+   "computed": true,
+   "status": "ABSENT",
+   "vD": 0.0003019083352154381,
+   "vC": 0.0016477271122673173,
+   "zD": -0.19423143121895378,
+   "zC": 1.1985732044473372,
+   "nullMeanD": 0.00042783661634749703,
+   "nullMeanC": 0.0002617912520591332,
+   "nullSdD": 0.000648341415916882,
+   "nullSdC": 0.0011563214120469511,
+   "plug": {
+    "status": "ABSENT",
+    "zD": -0.1731283004458712,
+    "zC": 1.180582735903037,
+    "vD": 0.0003162014463496121,
+    "vC": 0.0016317808960954034
+   },
+   "deep": {
+    "status": "AMBIGUOUS",
+    "zD": 4.896249966996795,
+    "zC": 3.86777399695109,
+    "vD": 0.004350008254803344,
+    "vC": 0.004818353340518115
+   },
+   "deepPlug": {
+    "status": "AMBIGUOUS",
+    "zD": 4.906696191157359,
+    "zC": 3.8367127536823427
+   },
+   "fnBefore": {
+    "status": "AMBIGUOUS",
+    "zD": -0.8429392078152901,
+    "zC": -4.2658120459652356,
+    "vD": -0.002551963902655522,
+    "vC": -0.011478007623452824
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": true
+  },
+  {
+   "id": "asym-ud-nld",
+   "role": "secondary-treebank",
+   "kind": "UD treebank train split, language with no atlas pocket",
+   "register": "treebank",
+   "language": "nld",
+   "tokens": 163958,
+   "halfTokens": {
+    "discover": 84298,
+    "confirm": 79660
+   },
+   "thin": false,
+   "claimExpect": "mixed-sign (group rule)",
+   "blindExpect": "mixed-sign (group rule)",
+   "vRange": [
+    -0.03,
+    0.04
+   ],
+   "computed": true,
+   "status": "PRESENT+",
+   "vD": 0.014552324838236628,
+   "vC": 0.013671058478862389,
+   "zD": 12.055620461799586,
+   "zC": 10.496749784206424,
+   "nullMeanD": 0.0006181624916041164,
+   "nullMeanC": 0.00017648629894084577,
+   "nullSdD": 0.001155822911876284,
+   "nullSdC": 0.0012855952992445042,
+   "plug": {
+    "status": "PRESENT+",
+    "zD": 12.023580575744864,
+    "zC": 10.43191702157623,
+    "vD": 0.014579292591197644,
+    "vC": 0.013651057158430296
+   },
+   "deep": {
+    "status": "PRESENT+",
+    "zD": 14.786159683985883,
+    "zC": 16.44248217328895,
+    "vD": 0.022313026237400033,
+    "vC": 0.019647380583497624
+   },
+   "deepPlug": {
+    "status": "PRESENT+",
+    "zD": 14.753266031615576,
+    "zC": 16.363327777798307
+   },
+   "fnBefore": {
+    "status": "PRESENT+",
+    "zD": 18.385019782766474,
+    "zC": 15.978490757956843,
+    "vD": 0.05018060572381217,
+    "vC": 0.05166029973552748
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": true
+  },
+  {
+   "id": "asym-ud-rus",
+   "role": "secondary-treebank",
+   "kind": "UD treebank train split, language with no atlas pocket",
+   "register": "treebank",
+   "language": "rus",
+   "tokens": 58306,
+   "halfTokens": {
+    "discover": 33875,
+    "confirm": 24431
+   },
+   "thin": false,
+   "claimExpect": "mixed-sign (group rule)",
+   "blindExpect": "mixed-sign (group rule)",
+   "vRange": [
+    -0.03,
+    0.04
+   ],
+   "computed": true,
+   "status": "AMBIGUOUS",
+   "vD": 0.029130927529572293,
+   "vC": 0.031607569671952634,
+   "zD": 3.6000054920951867,
+   "zC": 4.290737405036551,
+   "nullMeanD": 0.000768431355154867,
+   "nullMeanC": -0.0012990407971124073,
+   "nullSdD": 0.007878459140324973,
+   "nullSdC": 0.007669220314074365,
+   "plug": {
+    "status": "AMBIGUOUS",
+    "zD": 3.61631043904238,
+    "zC": 4.251089178089592,
+    "vD": 0.029729458523636832,
+    "vC": 0.03206240566732298
+   },
+   "deep": {
+    "status": "AMBIGUOUS",
+    "zD": 3.027246956046052,
+    "zC": 3.8698084577953646,
+    "vD": 0.027202490499020897,
+    "vC": 0.028672282475059697
+   },
+   "deepPlug": {
+    "status": "AMBIGUOUS",
+    "zD": 3.0605783956530623,
+    "zC": 3.876523450718796
+   },
+   "fnBefore": {
+    "status": "PRESENT+",
+    "zD": 6.0422568844155995,
+    "zC": 5.351320210908063,
+    "vD": 0.02419532223770071,
+    "vC": 0.023284546664132294
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": true
+  },
+  {
+   "id": "asym-ud-ces",
+   "role": "secondary-treebank",
+   "kind": "UD treebank train split, language with no atlas pocket",
+   "register": "treebank",
+   "language": "ces",
+   "tokens": 299982,
+   "halfTokens": {
+    "discover": 155303,
+    "confirm": 144679
+   },
+   "thin": false,
+   "claimExpect": "mixed-sign (group rule)",
+   "blindExpect": "mixed-sign (group rule)",
+   "vRange": [
+    -0.03,
+    0.04
+   ],
+   "computed": true,
+   "status": "PRESENT-",
+   "vD": -0.011359810729995702,
+   "vC": -0.03144118638189017,
+   "zD": -6.658321708826331,
+   "zC": -14.18202047252317,
+   "nullMeanD": -0.0002256472821084184,
+   "nullMeanC": -0.0004274910524076733,
+   "nullSdD": 0.0016722177051204565,
+   "nullSdC": 0.0021868319390435024,
+   "plug": {
+    "status": "PRESENT-",
+    "zD": -6.607532834182609,
+    "zC": -14.076268305232652,
+    "vD": -0.011310006945763996,
+    "vC": -0.03135079709465161
+   },
+   "deep": {
+    "status": "PRESENT-",
+    "zD": -7.436189595343373,
+    "zC": -14.505734259528259,
+    "vD": -0.00976028043014223,
+    "vC": -0.03071167491686767
+   },
+   "deepPlug": {
+    "status": "PRESENT-",
+    "zD": -7.366767811150901,
+    "zC": -14.384352016270618
+   },
+   "fnBefore": {
+    "status": "PRESENT+",
+    "zD": 13.84521214899618,
+    "zC": 11.35999877495037,
+    "vD": 0.02999549721173496,
+    "vC": 0.03150800336983993
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": false
+  },
+  {
+   "id": "asym-ud-dan",
+   "role": "secondary-treebank",
+   "kind": "UD treebank train split, language with no atlas pocket",
+   "register": "treebank",
+   "language": "dan",
+   "tokens": 68296,
+   "halfTokens": {
+    "discover": 30971,
+    "confirm": 37325
+   },
+   "thin": false,
+   "claimExpect": "mixed-sign (group rule)",
+   "blindExpect": "mixed-sign (group rule)",
+   "vRange": [
+    -0.03,
+    0.04
+   ],
+   "computed": true,
+   "status": "PRESENT+",
+   "vD": 0.010650399322725951,
+   "vC": 0.005928894992834591,
+   "zD": 5.365957157658485,
+   "zC": 4.2087254914639125,
+   "nullMeanD": 0.0003038908099514021,
+   "nullMeanC": -0.0001991373455528662,
+   "nullSdD": 0.0019281757585424704,
+   "nullSdC": 0.0014560304184286336,
+   "plug": {
+    "status": "PRESENT+",
+    "zD": 5.3701906352063045,
+    "zC": 4.160679614580766,
+    "vD": 0.010739200098231087,
+    "vC": 0.0059018741206756506
+   },
+   "deep": {
+    "status": "PRESENT+",
+    "zD": 7.033256769831144,
+    "zC": 6.367806553542885,
+    "vD": 0.015060903089053012,
+    "vC": 0.008539500765594146
+   },
+   "deepPlug": {
+    "status": "PRESENT+",
+    "zD": 7.035514371929103,
+    "zC": 6.295206130412397
+   },
+   "fnBefore": {
+    "status": "PRESENT+",
+    "zD": 4.281960731846846,
+    "zC": 7.2277172829805005,
+    "vD": 0.018067106395182105,
+    "vC": 0.023074993729621268
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": true
+  },
+  {
+   "id": "asym-ud-lit",
+   "role": "secondary-treebank",
+   "kind": "UD treebank train split, language with no atlas pocket",
+   "register": "treebank",
+   "language": "lit",
+   "tokens": 37825,
+   "halfTokens": {
+    "discover": 19596,
+    "confirm": 18229
+   },
+   "thin": false,
+   "claimExpect": "mixed-sign (group rule)",
+   "blindExpect": "mixed-sign (group rule)",
+   "vRange": [
+    -0.03,
+    0.04
+   ],
+   "computed": true,
+   "status": "AMBIGUOUS",
+   "vD": 0.010592450059837043,
+   "vC": 0.032218651620096274,
+   "zD": 1.8457923493323407,
+   "zC": 6.771721630463719,
+   "nullMeanD": 0.0005218643938318893,
+   "nullMeanC": -0.0008057212306240019,
+   "nullSdD": 0.005455968906604192,
+   "nullSdC": 0.0048768060255393,
+   "plug": {
+    "status": "AMBIGUOUS",
+    "zD": 1.9202631540037984,
+    "zC": 6.982930753923346,
+    "vD": 0.011296524402955374,
+    "vC": 0.03313099627446389
+   },
+   "deep": {
+    "status": "AMBIGUOUS",
+    "zD": 2.900415487079335,
+    "zC": 6.8517371407998,
+    "vD": 0.021303030068837724,
+    "vC": 0.03366896524365891
+   },
+   "deepPlug": {
+    "status": "AMBIGUOUS",
+    "zD": 2.9382177350684358,
+    "zC": 7.244888185743305
+   },
+   "fnBefore": {
+    "status": "AMBIGUOUS",
+    "zD": 4.340956021137178,
+    "zC": -0.5449629859030508,
+    "vD": 0.016505576208178437,
+    "vC": -0.0006975933031042902
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": true
+  },
+  {
+   "id": "asym-ud-ell",
+   "role": "secondary-treebank",
+   "kind": "UD treebank train split, language with no atlas pocket",
+   "register": "treebank",
+   "language": "ell",
+   "tokens": 37783,
+   "halfTokens": {
+    "discover": 19830,
+    "confirm": 17953
+   },
+   "thin": false,
+   "claimExpect": "mixed-sign (group rule)",
+   "blindExpect": "mixed-sign (group rule)",
+   "vRange": [
+    -0.03,
+    0.04
+   ],
+   "computed": true,
+   "status": "PRESENT-",
+   "vD": -0.042206873790124236,
+   "vC": -0.032217837626339556,
+   "zD": -26.19541852206527,
+   "zC": -17.292895583731703,
+   "nullMeanD": -0.000034379319392773545,
+   "nullMeanC": 0.00044169110060329894,
+   "nullSdD": 0.0016099187128927974,
+   "nullSdC": 0.0018886096066911616,
+   "plug": {
+    "status": "PRESENT-",
+    "zD": -25.852595284861525,
+    "zC": -16.993186248266785,
+    "vD": -0.04209424841225161,
+    "vC": -0.03200410043336576
+   },
+   "deep": {
+    "status": "PRESENT-",
+    "zD": -25.112122029693037,
+    "zC": -17.122288314786132,
+    "vD": -0.04500837898721246,
+    "vC": -0.03467424389927021
+   },
+   "deepPlug": {
+    "status": "PRESENT-",
+    "zD": -24.827225720923725,
+    "zC": -16.79123753466385
+   },
+   "fnBefore": {
+    "status": "PRESENT+",
+    "zD": 5.4750893854591975,
+    "zC": 7.111390219425174,
+    "vD": 0.04315317239906003,
+    "vC": 0.05655172413793103
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": false
+  },
+  {
+   "id": "asym-ud-tur",
+   "role": "secondary-treebank",
+   "kind": "UD treebank train split, language with no atlas pocket",
+   "register": "treebank",
+   "language": "tur",
+   "tokens": 30973,
+   "halfTokens": {
+    "discover": 15889,
+    "confirm": 15084
+   },
+   "thin": false,
+   "claimExpect": "mixed-sign (group rule)",
+   "blindExpect": "mixed-sign (group rule)",
+   "vRange": [
+    -0.03,
+    0.04
+   ],
+   "computed": true,
+   "status": "AMBIGUOUS",
+   "vD": 0.015288702820349838,
+   "vC": 0.0235185314318251,
+   "zD": 3.645940530636106,
+   "zC": 2.3017989182460097,
+   "nullMeanD": -0.0019139582384659413,
+   "nullMeanC": 0.002685364970767024,
+   "nullSdD": 0.004718305445265844,
+   "nullSdC": 0.00905081946816324,
+   "plug": {
+    "status": "AMBIGUOUS",
+    "zD": 3.5968706526389114,
+    "zC": 2.061985194961683,
+    "vD": 0.01476433407482481,
+    "vC": 0.021983014683944247
+   },
+   "deep": {
+    "status": "nodata",
+    "zD": 5.260782849482696,
+    "zC": null,
+    "vD": 0.037373139099226876,
+    "vC": null
+   },
+   "deepPlug": {
+    "status": "nodata",
+    "zD": 5.286211420278481,
+    "zC": null
+   },
+   "fnBefore": {
+    "status": "AMBIGUOUS",
+    "zD": 4.8816827371664955,
+    "zC": 1.6901480665876178,
+    "vD": 0.024763940851594512,
+    "vC": 0.012121212121212121
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": true
+  },
+  {
+   "id": "asym-ud-hye",
+   "role": "secondary-treebank",
+   "kind": "UD treebank train split, language with no atlas pocket",
+   "register": "treebank",
+   "language": "hye",
+   "tokens": 65187,
+   "halfTokens": {
+    "discover": 34739,
+    "confirm": 30448
+   },
+   "thin": false,
+   "claimExpect": "mixed-sign (group rule)",
+   "blindExpect": "mixed-sign (group rule)",
+   "vRange": [
+    -0.03,
+    0.04
+   ],
+   "computed": true,
+   "status": "ABSENT",
+   "vD": -0.012980644937261055,
+   "vC": 0.005530619086164746,
+   "zD": -1.8289030568322986,
+   "zC": 0.7729907874001037,
+   "nullMeanD": -0.002006992002016983,
+   "nullMeanC": 0.0017424009580116362,
+   "nullSdD": 0.006000128270467592,
+   "nullSdC": 0.004900728689011283,
+   "plug": {
+    "status": "ABSENT",
+    "zD": -1.7610066271268245,
+    "zC": 0.8277991680193065,
+    "vD": -0.012841003067072854,
+    "vC": 0.005912327716208721
+   },
+   "deep": {
+    "status": "ABSENT",
+    "zD": -1.076684973198087,
+    "zC": 1.4829957436814842,
+    "vD": -0.008684968595669886,
+    "vC": 0.009553567831661941
+   },
+   "deepPlug": {
+    "status": "ABSENT",
+    "zD": -1.0320458792772955,
+    "zC": 1.5677594013002052
+   },
+   "fnBefore": {
+    "status": "ABSENT",
+    "zD": -0.7692710649767557,
+    "zC": -0.9343919875519051,
+    "vD": -0.0024572106422640233,
+    "vC": -0.003158274679660711
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": true
+  },
+  {
+   "id": "asym-ud-kat",
+   "role": "secondary-treebank",
+   "kind": "UD treebank train split, language with no atlas pocket",
+   "register": "treebank",
+   "language": "kat",
+   "tokens": 33092,
+   "halfTokens": {
+    "discover": 12974,
+    "confirm": 20118
+   },
+   "thin": false,
+   "claimExpect": "mixed-sign (group rule)",
+   "blindExpect": "mixed-sign (group rule)",
+   "vRange": [
+    -0.03,
+    0.04
+   ],
+   "computed": true,
+   "status": "AMBIGUOUS",
+   "vD": 0.04699618162640261,
+   "vC": 0.018575855393494423,
+   "zD": 5.7196491946608345,
+   "zC": 2.804441979540579,
+   "nullMeanD": 0.0021912387906943475,
+   "nullMeanC": 0.0029853927948956796,
+   "nullSdD": 0.007833512390503368,
+   "nullSdC": 0.005559203118601426,
+   "plug": {
+    "status": "AMBIGUOUS",
+    "zD": 5.7774047093997165,
+    "zC": 2.9503866201752382,
+    "vD": 0.04643496229184659,
+    "vC": 0.019877515289001533
+   },
+   "deep": {
+    "status": "nodata",
+    "zD": null,
+    "zC": 1.8029138372755231,
+    "vD": null,
+    "vC": 0.02121215085673478
+   },
+   "deepPlug": {
+    "status": "nodata",
+    "zD": null,
+    "zC": 1.9783070202002329
+   },
+   "fnBefore": {
+    "status": "ABSENT",
+    "zD": -0.4685422349419799,
+    "zC": 0.34058154236982086,
+    "vD": 0,
+    "vC": 0.0036452004860267314
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": false
+  },
+  {
+   "id": "asym-ud-gle",
+   "role": "secondary-treebank",
+   "kind": "UD treebank train split, language with no atlas pocket",
+   "register": "treebank",
+   "language": "gle",
+   "tokens": 85922,
+   "halfTokens": {
+    "discover": 38741,
+    "confirm": 47181
+   },
+   "thin": false,
+   "claimExpect": "mixed-sign (group rule)",
+   "blindExpect": "mixed-sign (group rule)",
+   "vRange": [
+    -0.03,
+    0.04
+   ],
+   "computed": true,
+   "status": "PRESENT-",
+   "vD": -0.025165757736666444,
+   "vC": -0.030541871857045072,
+   "zD": -20.779169942702705,
+   "zC": -32.728765340043296,
+   "nullMeanD": 0.00021990689922240202,
+   "nullMeanC": 0.000009982958501992732,
+   "nullSdD": 0.001221688099471166,
+   "nullSdC": 0.0009334863230592812,
+   "plug": {
+    "status": "PRESENT-",
+    "zD": -20.848564168995548,
+    "zC": -32.842138434764856,
+    "vD": -0.02548954488882511,
+    "vC": -0.030868015498094842
+   },
+   "deep": {
+    "status": "PRESENT-",
+    "zD": -17.254747940755514,
+    "zC": -31.01789616386129,
+    "vD": -0.024001695497259577,
+    "vC": -0.03282937474360757
+   },
+   "deepPlug": {
+    "status": "PRESENT-",
+    "zD": -17.333482467403563,
+    "zC": -31.11065591589341
+   },
+   "fnBefore": {
+    "status": "ABSENT",
+    "zD": 0.7192554099538258,
+    "zC": 0.05770040497970239,
+    "vD": 0.003619302949061662,
+    "vC": 0.0029652473016249553
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": false
+  },
+  {
+   "id": "asym-ud-afr",
+   "role": "secondary-treebank",
+   "kind": "UD treebank train split, language with no atlas pocket",
+   "register": "treebank",
+   "language": "afr",
+   "tokens": 30498,
+   "halfTokens": {
+    "discover": 16916,
+    "confirm": 13582
+   },
+   "thin": false,
+   "claimExpect": "mixed-sign (group rule)",
+   "blindExpect": "mixed-sign (group rule)",
+   "vRange": [
+    -0.03,
+    0.04
+   ],
+   "computed": true,
+   "status": "AMBIGUOUS",
+   "vD": 0.0006691229182300008,
+   "vC": -0.004853979984296414,
+   "zD": 0.6611718777388109,
+   "zC": -3.044071033725511,
+   "nullMeanD": -0.000390357147424731,
+   "nullMeanC": 0.000241129835887215,
+   "nullSdD": 0.001602427600638617,
+   "nullSdC": 0.0016737815128932576,
+   "plug": {
+    "status": "AMBIGUOUS",
+    "zD": 0.6621970007868272,
+    "zC": -3.195703155524759,
+    "vD": 0.0006789375608730643,
+    "vC": -0.0051804279598952965
+   },
+   "deep": {
+    "status": "AMBIGUOUS",
+    "zD": 2.207025275201319,
+    "zC": -1.5445712222554235,
+    "vD": 0.0028224103748905687,
+    "vC": -0.002412017822049203
+   },
+   "deepPlug": {
+    "status": "AMBIGUOUS",
+    "zD": 2.251533702730253,
+    "zC": -1.690253208688873
+   },
+   "fnBefore": {
+    "status": "ABSENT",
+    "zD": 1.4751584681871452,
+    "zC": 0.258306573744667,
+    "vD": 0.007624633431085044,
+    "vC": -0.0025261638397690365
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": true
+  },
+  {
+   "id": "asym-ud-mlt",
+   "role": "secondary-treebank",
+   "kind": "UD treebank train split, language with no atlas pocket",
+   "register": "treebank",
+   "language": "mlt",
+   "tokens": 20056,
+   "halfTokens": {
+    "discover": 7996,
+    "confirm": 12060
+   },
+   "thin": false,
+   "claimExpect": "mixed-sign (group rule)",
+   "blindExpect": "mixed-sign (group rule)",
+   "vRange": [
+    -0.03,
+    0.04
+   ],
+   "computed": true,
+   "status": "PRESENT-",
+   "vD": -0.026213686232391373,
+   "vC": -0.02846485905396246,
+   "zD": -5.579887801188346,
+   "zC": -5.638979399403829,
+   "nullMeanD": 0.0007825546086729452,
+   "nullMeanC": 0.0005377031791169423,
+   "nullSdD": 0.004838133274886807,
+   "nullSdC": 0.00514322897440371,
+   "plug": {
+    "status": "PRESENT-",
+    "zD": -5.471167523662557,
+    "zC": -5.542428297493897,
+    "vD": -0.025367197493688227,
+    "vC": -0.027835729727726678
+   },
+   "deep": {
+    "status": "PRESENT-",
+    "zD": -9.159847792342582,
+    "zC": -4.412116639521269,
+    "vD": -0.03555472214919562,
+    "vC": -0.02182794502384781
+   },
+   "deepPlug": {
+    "status": "PRESENT-",
+    "zD": -8.728271315976459,
+    "zC": -4.177630253110294
+   },
+   "fnBefore": {
+    "status": "AMBIGUOUS",
+    "zD": -2.4753351993151056,
+    "zC": -1.2519429159767732,
+    "vD": -0.01987353206865402,
+    "vC": -0.012474713418745786
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": true
+  },
+  {
+   "id": "asym-ud-wol",
+   "role": "secondary-treebank",
+   "kind": "UD treebank train split, language with no atlas pocket",
+   "register": "treebank",
+   "language": "wol",
+   "tokens": 20635,
+   "halfTokens": {
+    "discover": 10833,
+    "confirm": 9802
+   },
+   "thin": false,
+   "claimExpect": "mixed-sign (group rule)",
+   "blindExpect": "mixed-sign (group rule)",
+   "vRange": [
+    -0.03,
+    0.04
+   ],
+   "computed": true,
+   "status": "AMBIGUOUS",
+   "vD": 0.0031082309777876573,
+   "vC": 0.022637196465800005,
+   "zD": 1.2498704931849618,
+   "zC": 9.271905194815888,
+   "nullMeanD": 0.00018592697628095448,
+   "nullMeanC": -0.0006563704123103982,
+   "nullSdD": 0.0023380854396042186,
+   "nullSdC": 0.0025122740568070422,
+   "plug": {
+    "status": "AMBIGUOUS",
+    "zD": 1.0719860064279274,
+    "zC": 9.17488718635028,
+    "vD": 0.0026441403053227295,
+    "vC": 0.022475380254143855
+   },
+   "deep": {
+    "status": "AMBIGUOUS",
+    "zD": 1.3874837443744577,
+    "zC": 8.351789647208115,
+    "vD": 0.004899976262118777,
+    "vC": 0.024755094059190703
+   },
+   "deepPlug": {
+    "status": "AMBIGUOUS",
+    "zD": 1.194952474495734,
+    "zC": 8.246321730735351
+   },
+   "fnBefore": {
+    "status": "AMBIGUOUS",
+    "zD": 1.4215276593400585,
+    "zC": 2.615078260846848,
+    "vD": 0.018630647414997672,
+    "vC": 0.026595744680851064
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": true
+  },
+  {
+   "id": "asym-ctl-about-london",
+   "role": "control",
+   "kind": "law-free control (token-global shuffle of asym-en-about-london)",
+   "register": "control",
+   "language": "en",
+   "tokens": 53609,
+   "halfTokens": {
+    "discover": 19258,
+    "confirm": 34351
+   },
+   "thin": false,
+   "claimExpect": "ABSENT",
+   "blindExpect": "ABSENT",
+   "vRange": [
+    -0.006,
+    0.006
+   ],
+   "computed": true,
+   "status": "ABSENT",
+   "vD": 0.0005905540761700059,
+   "vC": 0.00032254221191711124,
+   "zD": -0.30150025598158103,
+   "zC": 0.5995314191377814,
+   "nullMeanD": 0.000948128924107049,
+   "nullMeanC": -0.0005047324978367386,
+   "nullSdD": 0.0011859852217136681,
+   "nullSdC": 0.0013798688164560222,
+   "plug": {
+    "status": "ABSENT",
+    "zD": -0.2942912892397409,
+    "zC": 0.600439284827384,
+    "vD": 0.0006105577173737961,
+    "vC": 0.00032625980410820105
+   },
+   "deep": {
+    "status": "ABSENT",
+    "zD": -0.1452397660140819,
+    "zC": 0.509219459905501,
+    "vD": 0.0007202320454606542,
+    "vC": 0.00017020633877174417
+   },
+   "deepPlug": {
+    "status": "ABSENT",
+    "zD": -0.1356593479847854,
+    "zC": 0.5094674834171339
+   },
+   "fnBefore": {
+    "status": "ABSENT",
+    "zD": -1.9481170363031342,
+    "zC": -0.2724285798738875,
+    "vD": -0.014006342494714588,
+    "vC": -0.00045351473922902497
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": true
+  },
+  {
+   "id": "asym-ctl-cd-js",
+   "role": "control",
+   "kind": "law-free control (token-global shuffle of asym-cd-js)",
+   "register": "control",
+   "language": "x-javascript",
+   "tokens": 295254,
+   "halfTokens": {
+    "discover": 135454,
+    "confirm": 159800
+   },
+   "thin": false,
+   "claimExpect": "ABSENT",
+   "blindExpect": "ABSENT",
+   "vRange": [
+    -0.006,
+    0.006
+   ],
+   "computed": true,
+   "status": "ABSENT",
+   "vD": -0.0009151757610296272,
+   "vC": 0.0011274747477778033,
+   "zD": -0.5913330482138239,
+   "zC": 1.2614140966340783,
+   "nullMeanD": -0.00023945347814948646,
+   "nullMeanC": -0.000056365013974013685,
+   "nullSdD": 0.0011427101612555264,
+   "nullSdC": 0.0009385020865953071,
+   "plug": {
+    "status": "ABSENT",
+    "zD": -0.5917485141205036,
+    "zC": 1.2604874219947415,
+    "vD": -0.0009194020854796561,
+    "vC": 0.0011308688945292345
+   },
+   "deep": {
+    "status": "ABSENT",
+    "zD": 0.4311035559807577,
+    "zC": 0.9011637243561227,
+    "vD": 0.0004593998313966283,
+    "vC": 0.000868650104716422
+   },
+   "deepPlug": {
+    "status": "ABSENT",
+    "zD": 0.4293187689300406,
+    "zC": 0.9006897341999451
+   },
+   "fnBefore": {
+    "status": "ABSENT",
+    "zD": 0.32673723057052245,
+    "zC": 0.9796731633982944,
+    "vD": 0.00016477179106936892,
+    "vC": 0.0023857588548357495
+   },
+   "selfCheckMaxDiff": 0,
+   "vInRange": true
+  }
+ ],
+ "adversaries": {
+  "ADV-1 estimator": {
+   "presentCells": 13,
+   "unchanged": 13,
+   "changed": [],
+   "fractionChanged": 0,
+   "estimatorFragile": false
+  },
+  "ADV-2 unit edge": {
+   "presentCells": 13,
+   "unchanged": 11,
+   "undefined": [],
+   "changed": [
+    "asym-en-among-forces: PRESENT+ -> AMBIGUOUS (z 3.1, 14.7)",
+    "asym-cd-ts: PRESENT+ -> AMBIGUOUS (z 3.1, 16.8)"
+   ],
+   "fractionUnchangedWhereDefined": 0.8461538461538461,
+   "survives": true
+  },
+  "ADV-3 rival order.fnBefore": {
+   "siblingsBothPresent": 5,
+   "signAgreement": 0.6,
+   "disagree": [
+    "asym-ud-ces: asym PRESENT-, fnBefore PRESENT+",
+    "asym-ud-ell: asym PRESENT-, fnBefore PRESENT+"
+   ],
+   "siblingSpearmanOfMeanZ": 0.2148962148962149,
+   "siblingsInSpearman": 27,
+   "atlas": {
+    "realPockets": 377,
+    "spearmanV": 0.027271416119545245,
+    "spearmanMeanZ": 0.008746104307366229,
+    "bothPresent": 89,
+    "bothPresentSameSign": 41
+   },
+   "notIndependent": false
+  },
+  "ADV-4 language vs register (atlas only)": {
+   "presentCells": 214,
+   "etaSquaredSignOnRegister": {
+    "eta2": 0.30194746823195606,
+    "levels": 31,
+    "n": 214
+   },
+   "etaSquaredSignOnEnglishFlag": {
+    "eta2": 0.11465138850096195,
+    "levels": 2,
+    "n": 214
+   },
+   "etaSquaredSignOnRegisterWithinEnglish": {
+    "eta2": 0.46024682306940445,
+    "levels": 24,
+    "n": 82
+   },
+   "etaSquaredSignOnRegisterXEnglish": {
+    "eta2": 0.47606450014525314,
+    "levels": 42,
+    "n": 214
+   },
+   "tableByEnglish": {
+    "en": {
+     "P+": 62,
+     "P-": 20
+    },
+    "non-en": {
+     "P+": 54,
+     "P-": 78
+    }
+   },
+   "dramaByEnglish": {
+    "non-en": {
+     "P+": 0,
+     "P-": 9
+    }
+   },
+   "shareOfPresentMinusThatIsNonEnglish": 0.7959183673469388,
+   "englishFlagExplainsAtLeastAsMuchAsRegister": false
+  },
+  "ADV-5 multiplicity": {
+   "siblingsTested": 27,
+   "cellsTested": 54,
+   "pFalsePresentPerSibling": 0.00008488153720463878,
+   "expectedFalsePresentSiblings": 0.002291801504525247,
+   "probAtLeastOneFalse": 0.0022892743811797622,
+   "observedPresentSiblings": 13,
+   "controlsPresent": 0
+  },
+  "ADV-6 leakage": {
+   "irc": {
+    "asym-oc-irc-ho-0607": {
+     "messagesGe6": 2792,
+     "verbatimInKin": 72,
+     "verbatimInAnyUbuntu": 76,
+     "shareInKin": 0.025787965616045846,
+     "shareInAnyUbuntu": 0.027220630372492838,
+     "kin": "oc-irc-ubuntu-0607"
+    },
+    "asym-oc-irc-ho-0809": {
+     "messagesGe6": 2706,
+     "verbatimInKin": 78,
+     "verbatimInAnyUbuntu": 83,
+     "shareInKin": 0.028824833702882482,
+     "shareInAnyUbuntu": 0.03067257945306726,
+     "kin": "oc-irc-ubuntu-0809"
+    }
+   },
+   "code": {
+    "asym-cd-js": "the user's JavaScript: chat server and scripts, a project-manager web app, tests, teaching tools; 408 unique candidate files (663 found; dropped {\"atlasCopy\":57,\"repeated\":198}), 175 in the pocket; token-drop counters: {\"lines\":51607,\"emptyLines\":11549,\"overlongLines\":0,\"tokens\":295254,\"droppedNumeric\":9941,\"droppedUnspaced\":32,\"droppedLong\":0,\"droppedPunct\":72}",
+    "asym-cd-ts": "TypeScript of a coding-agent CLI/app monorepo (opencode fork), node_modules/i18n/generated trees dropped; 3010 unique candidate files (3020 found; dropped {\"atlasCopy\":0,\"repeated\":10}), 467 in the pocket; token-drop counters: {\"lines\":89867,\"emptyLines\":23697,\"overlongLines\":17,\"tokens\":291346,\"droppedNumeric\":15245,\"droppedUnspaced\":13,\"droppedLong\":0,\"droppedPunct\":83}",
+    "asym-cd-py": "Python of a red-team harness and the open-source evaluation toolkits it vendors; 127 unique candidate files (127 found; dropped {\"atlasCopy\":0,\"repeated\":0}), 127 in the pocket; token-drop counters: {\"lines\":20048,\"emptyLines\":4315,\"overlongLines\":77,\"tokens\":90463,\"droppedNumeric\":3654,\"droppedUnspaced\":90,\"droppedLong\":0,\"droppedPunct\":229}"
+   },
+   "ud": {
+    "asym-ud-ita": {
+     "devTestSentences": 1046,
+     "trainSentencesAlsoInDevTest": 6
+    },
+    "asym-ud-nld": {
+     "devTestSentences": 1314,
+     "trainSentencesAlsoInDevTest": 0
+    },
+    "asym-ud-rus": {
+     "devTestSentences": 1177,
+     "trainSentencesAlsoInDevTest": 65
+    },
+    "asym-ud-ces": {
+     "devTestSentences": 1224,
+     "trainSentencesAlsoInDevTest": 6
+    },
+    "asym-ud-dan": {
+     "devTestSentences": 1126,
+     "trainSentencesAlsoInDevTest": 5
+    },
+    "asym-ud-lit": {
+     "devTestSentences": 1291,
+     "trainSentencesAlsoInDevTest": 7
+    },
+    "asym-ud-ell": {
+     "devTestSentences": 836,
+     "trainSentencesAlsoInDevTest": 8
+    },
+    "asym-ud-tur": {
+     "devTestSentences": 2163,
+     "trainSentencesAlsoInDevTest": 1
+    },
+    "asym-ud-hye": {
+     "devTestSentences": 1165,
+     "trainSentencesAlsoInDevTest": 23
+    },
+    "asym-ud-kat": {
+     "devTestSentences": 935,
+     "trainSentencesAlsoInDevTest": 12
+    },
+    "asym-ud-gle": {
+     "devTestSentences": 901,
+     "trainSentencesAlsoInDevTest": 4
+    },
+    "asym-ud-afr": {
+     "devTestSentences": 619,
+     "trainSentencesAlsoInDevTest": 1
+    },
+    "asym-ud-mlt": {
+     "devTestSentences": 950,
+     "trainSentencesAlsoInDevTest": 2
+    },
+    "asym-ud-wol": {
+     "devTestSentences": 919,
+     "trainSentencesAlsoInDevTest": 0
+    }
+   },
+   "prose": {
+    "pg32773": [],
+    "pg15807": [],
+    "pg2542": [],
+    "pg43668": [],
+    "pg14200": [],
+    "pg2148": [],
+    "pg160_": [],
+    "pg74987": [],
+    "pg76749": [],
+    "doctor-faustus-1604": []
+   }
+  }
+ }
+}

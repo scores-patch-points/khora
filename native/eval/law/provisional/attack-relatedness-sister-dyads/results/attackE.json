@@ -1,0 +1,646 @@
+{
+ "headerSha256": "022ad11bd1acb1be42e855a2247ce23396b1dace9418e54cb051a06b41bd4593",
+ "codeSha256": "9344a193bb33af80c1632c2af3d067fa45ea5d07907bc362784f50883a68b332",
+ "variants": {
+  "LEFT": {
+   "arm": "LEFT",
+   "eligibleDonors": 45,
+   "eligibleTargets": 46,
+   "IWR+NGm": {
+    "n": 36,
+    "nPass": 31,
+    "frac": 0.8611,
+    "meanAuc": 0.614,
+    "meanCtrl": 0.5025,
+    "diff": {
+     "mean": 0.11,
+     "lo": 0.1037,
+     "hi": 0.1149,
+     "n": 9
+    },
+    "pos": 0.5006,
+    "sham": 0.5007,
+    "perCluster": {
+     "IWR": {
+      "n": 30,
+      "nPass": 26,
+      "auc": 0.6145,
+      "ctrl": 0.5014,
+      "diff": 0.113
+     },
+     "NGm": {
+      "n": 6,
+      "nPass": 5,
+      "auc": 0.6119,
+      "ctrl": 0.5079,
+      "diff": 0.104
+     }
+    },
+    "perTarget": {
+     "fra": 0.121,
+     "glg": 0.1083,
+     "ita": 0.1167,
+     "por": 0.1059,
+     "spa": 0.109,
+     "nob": 0.1098,
+     "swe": 0.1127,
+     "cat": 0.1173,
+     "dan": 0.0895
+    },
+    "verdict": "SURVIVES",
+    "failing": [
+     "fra>por:0.5803",
+     "glg>por:0.5761",
+     "glg>spa:0.591",
+     "por>glg:0.5792",
+     "swe>dan:0.5895"
+    ]
+   },
+   "IWR": {
+    "n": 30,
+    "nPass": 26,
+    "frac": 0.8667,
+    "meanAuc": 0.6145,
+    "meanCtrl": 0.5014,
+    "diff": {
+     "mean": 0.113,
+     "lo": 0.1087,
+     "hi": 0.1177,
+     "n": 6
+    },
+    "pos": 0.4994,
+    "sham": 0.5003,
+    "perCluster": {
+     "IWR": {
+      "n": 30,
+      "nPass": 26,
+      "auc": 0.6145,
+      "ctrl": 0.5014,
+      "diff": 0.113
+     }
+    },
+    "perTarget": {
+     "fra": 0.121,
+     "glg": 0.1083,
+     "ita": 0.1167,
+     "por": 0.1059,
+     "spa": 0.109,
+     "cat": 0.1173
+    },
+    "verdict": "SURVIVES",
+    "failing": [
+     "fra>por:0.5803",
+     "glg>por:0.5761",
+     "glg>spa:0.591",
+     "por>glg:0.5792"
+    ]
+   },
+   "NGm": {
+    "n": 6,
+    "nPass": 5,
+    "frac": 0.8333,
+    "meanAuc": 0.6119,
+    "meanCtrl": 0.5079,
+    "diff": {
+     "mean": 0.104,
+     "lo": 0.0895,
+     "hi": 0.1127,
+     "n": 3
+    },
+    "pos": 0.5062,
+    "sham": 0.5028,
+    "perCluster": {
+     "NGm": {
+      "n": 6,
+      "nPass": 5,
+      "auc": 0.6119,
+      "ctrl": 0.5079,
+      "diff": 0.104
+     }
+    },
+    "perTarget": {
+     "nob": 0.1098,
+     "swe": 0.1127,
+     "dan": 0.0895
+    },
+    "verdict": "SURVIVES",
+    "failing": [
+     "swe>dan:0.5895"
+    ]
+   },
+   "CWGm": {
+    "n": 4,
+    "nPass": 0,
+    "frac": 0,
+    "meanAuc": 0.5279,
+    "meanCtrl": 0.5047,
+    "diff": {
+     "mean": 0.0239,
+     "lo": 0.0209,
+     "hi": 0.0296,
+     "n": 3
+    },
+    "pos": 0.4992,
+    "sham": 0.4758,
+    "perCluster": {
+     "CWGm": {
+      "n": 4,
+      "nPass": 0,
+      "auc": 0.5279,
+      "ctrl": 0.5047,
+      "diff": 0.0232
+     }
+    },
+    "perTarget": {
+     "afr": 0.0212,
+     "nld": 0.0296,
+     "deu": 0.0209
+    },
+    "verdict": "FAILS",
+    "failing": [
+     "deu>afr:0.472",
+     "deu>nld:0.5393",
+     "nld>afr:0.5713",
+     "nld>deu:0.5289"
+    ]
+   },
+   "Hind": {
+    "n": 2,
+    "nPass": 0,
+    "frac": 0,
+    "meanAuc": 0.5305,
+    "meanCtrl": 0.5003,
+    "diff": {
+     "mean": 0.0302,
+     "lo": 0.0188,
+     "hi": 0.0417,
+     "n": 2
+    },
+    "pos": 0.513,
+    "sham": 0.4955,
+    "perCluster": {
+     "Hind": {
+      "n": 2,
+      "nPass": 0,
+      "auc": 0.5305,
+      "ctrl": 0.5003,
+      "diff": 0.0302
+     }
+    },
+    "perTarget": {
+     "urd": 0.0417,
+     "hin": 0.0188
+    },
+    "verdict": "ATTENUATED",
+    "failing": [
+     "hin>urd:0.5405",
+     "urd>hin:0.5206"
+    ]
+   },
+   "outOfScope": {
+    "n": 28,
+    "nPass": 0,
+    "frac": 0,
+    "meanAuc": 0.5191,
+    "meanCtrl": 0.5043,
+    "diff": {
+     "mean": 0.0135,
+     "lo": 0.007,
+     "hi": 0.0203,
+     "n": 17
+    },
+    "pos": 0.5002,
+    "sham": 0.5,
+    "perCluster": {
+     "SSl": {
+      "n": 12,
+      "nPass": 0,
+      "auc": 0.5222,
+      "ctrl": 0.5064,
+      "diff": 0.0158
+     },
+     "WSl": {
+      "n": 6,
+      "nPass": 0,
+      "auc": 0.5268,
+      "ctrl": 0.5069,
+      "diff": 0.0199
+     },
+     "Sinitic": {
+      "n": 2,
+      "nPass": 0,
+      "auc": 0.525,
+      "ctrl": 0.4905,
+      "diff": 0.0345
+     },
+     "Celtic": {
+      "n": 2,
+      "nPass": 0,
+      "auc": 0.5058,
+      "ctrl": 0.4959,
+      "diff": 0.01
+     },
+     "Finnic": {
+      "n": 2,
+      "nPass": 0,
+      "auc": 0.5149,
+      "ctrl": 0.5038,
+      "diff": 0.0111
+     },
+     "Baltic": {
+      "n": 2,
+      "nPass": 0,
+      "auc": 0.5002,
+      "ctrl": 0.505,
+      "diff": -0.0047
+     },
+     "ESl": {
+      "n": 2,
+      "nPass": 0,
+      "auc": 0.5084,
+      "ctrl": 0.506,
+      "diff": 0.0023
+     }
+    },
+    "perTarget": {
+     "hrv": 0.033,
+     "slv": 0.0177,
+     "srp": 0.0187,
+     "pol": 0.0241,
+     "slk": 0.0198,
+     "lzh": 0.0434,
+     "gle": 0.0139,
+     "fin": 0.0081,
+     "est": 0.014,
+     "cym": 0.006,
+     "bul": -0.006,
+     "lit": -0.0146,
+     "lav": 0.0051,
+     "cmn": 0.0256,
+     "ces": 0.0158,
+     "ukr": 0.0156,
+     "rus": -0.0109
+    }
+   }
+  },
+  "RIVALS": {
+   "arm": "RIVALS",
+   "eligibleDonors": 45,
+   "eligibleTargets": 46,
+   "IWR+NGm": {
+    "n": 36,
+    "nPass": 0,
+    "frac": 0,
+    "meanAuc": 0.5003,
+    "meanCtrl": 0.5001,
+    "diff": {
+     "mean": 0.0012,
+     "lo": -0.0005,
+     "hi": 0.0031,
+     "n": 9
+    },
+    "pos": 0.5006,
+    "sham": 0.5002,
+    "perCluster": {
+     "IWR": {
+      "n": 30,
+      "nPass": 0,
+      "auc": 0.4994,
+      "ctrl": 0.5001,
+      "diff": -0.0006
+     },
+     "NGm": {
+      "n": 6,
+      "nPass": 0,
+      "auc": 0.5049,
+      "ctrl": 0.5,
+      "diff": 0.0049
+     }
+    },
+    "perTarget": {
+     "fra": 0.0011,
+     "glg": -0.0014,
+     "ita": 0.0001,
+     "por": -0.0021,
+     "spa": -0.0011,
+     "nob": 0.0069,
+     "swe": 0.0035,
+     "cat": -0.0005,
+     "dan": 0.0043
+    },
+    "verdict": "FAILS",
+    "failing": [
+     "cat>fra:0.5024",
+     "cat>glg:0.5099",
+     "cat>ita:0.4989",
+     "cat>por:0.4903",
+     "cat>spa:0.4959",
+     "dan>nob:0.5078",
+     "dan>swe:0.5054",
+     "fra>cat:0.5011",
+     "fra>glg:0.4985",
+     "fra>ita:0.5002",
+     "fra>por:0.4989",
+     "fra>spa:0.4991",
+     "glg>cat:0.5061",
+     "glg>fra:0.5",
+     "glg>ita:0.4947",
+     "glg>por:0.4925",
+     "glg>spa:0.4966",
+     "ita>cat:0.4972",
+     "ita>fra:0.5006",
+     "ita>glg:0.4952",
+     "ita>por:0.5058",
+     "ita>spa:0.5016",
+     "nob>dan:0.5049",
+     "nob>swe:0.5016",
+     "por>cat:0.5006",
+     "por>fra:0.4994",
+     "por>glg:0.4979",
+     "por>ita:0.4992",
+     "por>spa:0.5011",
+     "spa>cat:0.4966",
+     "spa>fra:0.4991",
+     "spa>glg:0.4961",
+     "spa>ita:0.5023",
+     "spa>por:0.5047",
+     "swe>dan:0.5046",
+     "swe>nob:0.5052"
+    ]
+   },
+   "IWR": {
+    "n": 30,
+    "nPass": 0,
+    "frac": 0,
+    "meanAuc": 0.4994,
+    "meanCtrl": 0.5001,
+    "diff": {
+     "mean": -0.0007,
+     "lo": -0.0014,
+     "hi": 0.0002,
+     "n": 6
+    },
+    "pos": 0.4994,
+    "sham": 0.4999,
+    "perCluster": {
+     "IWR": {
+      "n": 30,
+      "nPass": 0,
+      "auc": 0.4994,
+      "ctrl": 0.5001,
+      "diff": -0.0006
+     }
+    },
+    "perTarget": {
+     "fra": 0.0011,
+     "glg": -0.0014,
+     "ita": 0.0001,
+     "por": -0.0021,
+     "spa": -0.0011,
+     "cat": -0.0005
+    },
+    "verdict": "FAILS",
+    "failing": [
+     "cat>fra:0.5024",
+     "cat>glg:0.5099",
+     "cat>ita:0.4989",
+     "cat>por:0.4903",
+     "cat>spa:0.4959",
+     "fra>cat:0.5011",
+     "fra>glg:0.4985",
+     "fra>ita:0.5002",
+     "fra>por:0.4989",
+     "fra>spa:0.4991",
+     "glg>cat:0.5061",
+     "glg>fra:0.5",
+     "glg>ita:0.4947",
+     "glg>por:0.4925",
+     "glg>spa:0.4966",
+     "ita>cat:0.4972",
+     "ita>fra:0.5006",
+     "ita>glg:0.4952",
+     "ita>por:0.5058",
+     "ita>spa:0.5016",
+     "por>cat:0.5006",
+     "por>fra:0.4994",
+     "por>glg:0.4979",
+     "por>ita:0.4992",
+     "por>spa:0.5011",
+     "spa>cat:0.4966",
+     "spa>fra:0.4991",
+     "spa>glg:0.4961",
+     "spa>ita:0.5023",
+     "spa>por:0.5047"
+    ]
+   },
+   "NGm": {
+    "n": 6,
+    "nPass": 0,
+    "frac": 0,
+    "meanAuc": 0.5049,
+    "meanCtrl": 0.5,
+    "diff": {
+     "mean": 0.0049,
+     "lo": 0.0035,
+     "hi": 0.0069,
+     "n": 3
+    },
+    "pos": 0.5062,
+    "sham": 0.5016,
+    "perCluster": {
+     "NGm": {
+      "n": 6,
+      "nPass": 0,
+      "auc": 0.5049,
+      "ctrl": 0.5,
+      "diff": 0.0049
+     }
+    },
+    "perTarget": {
+     "nob": 0.0069,
+     "swe": 0.0035,
+     "dan": 0.0043
+    },
+    "verdict": "FAILS",
+    "failing": [
+     "dan>nob:0.5078",
+     "dan>swe:0.5054",
+     "nob>dan:0.5049",
+     "nob>swe:0.5016",
+     "swe>dan:0.5046",
+     "swe>nob:0.5052"
+    ]
+   },
+   "CWGm": {
+    "n": 4,
+    "nPass": 0,
+    "frac": 0,
+    "meanAuc": 0.4976,
+    "meanCtrl": 0.501,
+    "diff": {
+     "mean": -0.0026,
+     "lo": -0.0058,
+     "hi": -0.001,
+     "n": 3
+    },
+    "pos": 0.4992,
+    "sham": 0.4992,
+    "perCluster": {
+     "CWGm": {
+      "n": 4,
+      "nPass": 0,
+      "auc": 0.4976,
+      "ctrl": 0.501,
+      "diff": -0.0034
+     }
+    },
+    "perTarget": {
+     "afr": -0.0057,
+     "nld": -0.001,
+     "deu": -0.0011
+    },
+    "verdict": "FAILS",
+    "failing": [
+     "deu>afr:0.4975",
+     "deu>nld:0.4987",
+     "nld>afr:0.4946",
+     "nld>deu:0.4995"
+    ]
+   },
+   "Hind": {
+    "n": 2,
+    "nPass": 0,
+    "frac": 0,
+    "meanAuc": 0.5129,
+    "meanCtrl": 0.5011,
+    "diff": {
+     "mean": 0.0117,
+     "lo": 0.0105,
+     "hi": 0.0129,
+     "n": 2
+    },
+    "pos": 0.513,
+    "sham": 0.4994,
+    "perCluster": {
+     "Hind": {
+      "n": 2,
+      "nPass": 0,
+      "auc": 0.5129,
+      "ctrl": 0.5011,
+      "diff": 0.0117
+     }
+    },
+    "perTarget": {
+     "urd": 0.0129,
+     "hin": 0.0105
+    },
+    "verdict": "FAILS",
+    "failing": [
+     "hin>urd:0.5137",
+     "urd>hin:0.512"
+    ]
+   },
+   "outOfScope": {
+    "n": 28,
+    "nPass": 0,
+    "frac": 0,
+    "meanAuc": 0.5006,
+    "meanCtrl": 0.5003,
+    "diff": {
+     "mean": 0,
+     "lo": -0.0006,
+     "hi": 0.0007,
+     "n": 17
+    },
+    "pos": 0.5002,
+    "sham": 0.5001,
+    "perCluster": {
+     "SSl": {
+      "n": 12,
+      "nPass": 0,
+      "auc": 0.5012,
+      "ctrl": 0.5003,
+      "diff": 0.0009
+     },
+     "WSl": {
+      "n": 6,
+      "nPass": 0,
+      "auc": 0.5004,
+      "ctrl": 0.5002,
+      "diff": 0.0003
+     },
+     "Sinitic": {
+      "n": 2,
+      "nPass": 0,
+      "auc": 0.5014,
+      "ctrl": 0.501,
+      "diff": 0.0004
+     },
+     "Celtic": {
+      "n": 2,
+      "nPass": 0,
+      "auc": 0.4998,
+      "ctrl": 0.5003,
+      "diff": -0.0005
+     },
+     "Finnic": {
+      "n": 2,
+      "nPass": 0,
+      "auc": 0.4996,
+      "ctrl": 0.5,
+      "diff": -0.0003
+     },
+     "Baltic": {
+      "n": 2,
+      "nPass": 0,
+      "auc": 0.4998,
+      "ctrl": 0.5007,
+      "diff": -0.0008
+     },
+     "ESl": {
+      "n": 2,
+      "nPass": 0,
+      "auc": 0.4994,
+      "ctrl": 0.4999,
+      "diff": -0.0005
+     }
+    },
+    "perTarget": {
+     "hrv": 0.0027,
+     "slv": -0.0004,
+     "srp": 0.0023,
+     "pol": -0.0006,
+     "slk": -0.0001,
+     "lzh": 0.0021,
+     "gle": -0.0011,
+     "fin": 0.0002,
+     "est": -0.0009,
+     "cym": 0.0001,
+     "bul": -0.0012,
+     "lit": -0.0012,
+     "lav": -0.0005,
+     "cmn": -0.0013,
+     "ces": 0.0014,
+     "ukr": 0.0008,
+     "rus": -0.0018
+    }
+   }
+  }
+ },
+ "pairs": {
+  "afr": 93,
+  "cat": 574,
+  "dan": 600,
+  "deu": 600,
+  "fra": 600,
+  "glg": 185,
+  "hin": 491,
+  "ita": 600,
+  "nld": 600,
+  "nob": 594,
+  "por": 600,
+  "spa": 600,
+  "swe": 214,
+  "urd": 499
+ }
+}

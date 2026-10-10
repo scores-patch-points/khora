@@ -1,0 +1,85 @@
+{
+ "verdict": "PARTIAL",
+ "narrowed": [
+  "IWR",
+  "NGm"
+ ],
+ "n": 24,
+ "nPass": 22,
+ "meanAuc": 0.6473,
+ "ctrl": 0.5726,
+ "diff": {
+  "mean": 0.0683,
+  "lo": 0.0507,
+  "hi": 0.0828,
+  "n": 9
+ },
+ "pos": 0.501,
+ "sham": 0.5035,
+ "shuf": 0.5328,
+ "perCluster": {
+  "IWR": {
+   "n": 20,
+   "nPass": 20,
+   "meanAuc": 0.6529,
+   "meanCtrl": 0.5743
+  },
+  "CWGm": {
+   "n": 2,
+   "nPass": 0,
+   "meanAuc": 0.5852,
+   "meanCtrl": 0.5606
+  },
+  "Hind": {
+   "n": 2,
+   "nPass": 2,
+   "meanAuc": 0.654,
+   "meanCtrl": 0.5675
+  }
+ },
+ "tests": {
+  "T1_eligible_ge6": true,
+  "T2_pass_ge70": true,
+  "T3_clusters_ge50": false,
+  "T4_diffLo_gt_0p03": true,
+  "T5_position_sham_in_band": true,
+  "T6_shuffled_le_0p55_and_5below": true,
+  "T7_noTwin_pass_ge60": true
+ },
+ "rungs": [
+  [
+   "IWR+NGm+CWGm+Hind",
+   24,
+   22,
+   false
+  ],
+  [
+   "IWR+NGm+CWGm",
+   22,
+   20,
+   false
+  ],
+  [
+   "IWR+NGm",
+   20,
+   20,
+   true
+  ],
+  [
+   "IWR",
+   20,
+   20,
+   true
+  ]
+ ],
+ "agreement": {
+  "n": 24,
+  "passFailAgree": 23,
+  "aucCorrelation": 0.7203
+ },
+ "oos": {
+  "n": 8,
+  "nPass": 0,
+  "dyads": []
+ }
+}

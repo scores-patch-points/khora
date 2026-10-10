@@ -1,0 +1,1438 @@
+{
+ "module": "eval/law/provisional/attack-ablscope-1-slot-ircB-c4plus/attack-a-analyse.mjs",
+ "rule": "ablscope-1-slot-ircB-c4plus",
+ "B": 1000,
+ "data": {
+  "confTokensLoaded": 37572,
+  "confMissing": 0,
+  "a2TokensLoaded": 3426,
+  "a2Missing": 0,
+  "designA2Sha256": "a15cc40d0db4d118afe7cbfd9ed7130a0fe9faf609948b7a62a94caf9cf30454"
+ },
+ "controlsRun": {
+  "fresh": 1812,
+  "gaps": 0,
+  "K1_sham": [
+   121,
+   121
+  ],
+  "K6": [
+   121,
+   121
+  ],
+  "K7": [
+   162,
+   162
+  ]
+ },
+ "runValid": true,
+ "L0": {
+  "E_CORE": {
+   "pairs": 75,
+   "days": 13,
+   "auc": 0.8467,
+   "ci": [
+    0.8098,
+    0.9375
+   ],
+   "perStratum": {
+    "c4_6": {
+     "n": 27,
+     "auc": 0.7778
+    },
+    "c7_15": {
+     "n": 41,
+     "auc": 0.9146
+    },
+    "c16p": {
+     "n": 7,
+     "auc": 0.7143
+    }
+   },
+   "sens": 0.7067,
+   "spec": 0.9867,
+   "controls": {
+    "R_LOGC": 0.518,
+    "R_POS": 0.4806,
+    "R_IPOS": 0.5069,
+    "R_FB": 0.4836,
+    "R_LEN": 0.5326,
+    "R_SL": 0.4783,
+    "R_BURST": 0.5888,
+    "R_LAST16": 0.5656,
+    "R_DOCCOUNT": 0.4252,
+    "R_RINIT": 0.946,
+    "R_CINIT": 0.9449
+   },
+   "positionControlsInBand": true,
+   "sixControlsInBand": true,
+   "permQ95": 0.58,
+   "perStratumSens": {
+    "c4_6": {
+     "n": 27,
+     "sens": 0.5556,
+     "spec": 1
+    },
+    "c7_15": {
+     "n": 41,
+     "sens": 0.8537,
+     "spec": 0.9756
+    },
+    "c16p": {
+     "n": 7,
+     "sens": 0.4286,
+     "spec": 1
+    }
+   }
+  },
+  "E_SRV": {
+   "pairs": 15,
+   "days": 7,
+   "auc": 0.9,
+   "ci": [
+    0.85,
+    1
+   ],
+   "perStratum": {
+    "c4_6": {
+     "n": 9,
+     "auc": 0.8889
+    },
+    "c7_15": {
+     "n": 6,
+     "auc": 0.9167
+    }
+   },
+   "sens": 0.8667,
+   "spec": 0.9333,
+   "controls": {
+    "R_LOGC": 0.4722,
+    "R_POS": 0.5222,
+    "R_IPOS": 0.5111,
+    "R_FB": 0.4037,
+    "R_LEN": 0.5074,
+    "R_SL": 0.5296,
+    "R_BURST": 0.6889,
+    "R_LAST16": 0.587,
+    "R_DOCCOUNT": 0.3741,
+    "R_RINIT": 1,
+    "R_CINIT": 0.9556
+   },
+   "positionControlsInBand": true,
+   "sixControlsInBand": false,
+   "perStratumSens": {
+    "c4_6": {
+     "n": 9,
+     "sens": 0.7778,
+     "spec": 1
+    },
+    "c7_15": {
+     "n": 6,
+     "sens": 1,
+     "spec": 0.8333
+    }
+   }
+  },
+  "E_REUSE": {
+   "pairs": 407,
+   "days": 14,
+   "auc": 0.817,
+   "ci": [
+    0.7778,
+    0.85
+   ],
+   "perStratum": {
+    "c4_6": {
+     "n": 160,
+     "auc": 0.725
+    },
+    "c7_15": {
+     "n": 157,
+     "auc": 0.8631
+    },
+    "c16p": {
+     "n": 90,
+     "auc": 0.9
+    }
+   },
+   "sens": 0.6413,
+   "spec": 0.9926,
+   "controls": {
+    "R_LOGC": 0.5158,
+    "R_POS": 0.5015,
+    "R_IPOS": 0.4955,
+    "R_FB": 0.4641,
+    "R_LEN": 0.509,
+    "R_SL": 0.489,
+    "R_BURST": 0.5193,
+    "R_LAST16": 0.4984,
+    "R_DOCCOUNT": 0.4421,
+    "R_RINIT": 0.9113,
+    "R_CINIT": 0.9088
+   },
+   "positionControlsInBand": true,
+   "sixControlsInBand": true,
+   "permQ95": 0.5319,
+   "perStratumSens": {
+    "c4_6": {
+     "n": 160,
+     "sens": 0.4562,
+     "spec": 0.9938
+    },
+    "c7_15": {
+     "n": 157,
+     "sens": 0.7325,
+     "spec": 0.9936
+    },
+    "c16p": {
+     "n": 90,
+     "sens": 0.8111,
+     "spec": 0.9889
+    }
+   }
+  },
+  "ALL_ENGLISH": {
+   "pairs": 497,
+   "days": 34,
+   "auc": 0.8239,
+   "ci": [
+    0.7932,
+    0.8528
+   ],
+   "perStratum": {
+    "c4_6": {
+     "n": 196,
+     "auc": 0.7398
+    },
+    "c7_15": {
+     "n": 204,
+     "auc": 0.875
+    },
+    "c16p": {
+     "n": 97,
+     "auc": 0.8866
+    }
+   },
+   "sens": 0.6579,
+   "spec": 0.9899,
+   "controls": {
+    "R_LOGC": 0.5145,
+    "R_POS": 0.4998,
+    "R_IPOS": 0.4977,
+    "R_FB": 0.4663,
+    "R_LEN": 0.5123,
+    "R_SL": 0.4888,
+    "R_BURST": 0.5313,
+    "R_LAST16": 0.5105,
+    "R_DOCCOUNT": 0.4424,
+    "R_RINIT": 0.9193,
+    "R_CINIT": 0.9168
+   },
+   "positionControlsInBand": true,
+   "sixControlsInBand": true,
+   "permQ95": 0.5302,
+   "perStratumSens": {
+    "c4_6": {
+     "n": 196,
+     "sens": 0.4847,
+     "spec": 0.9949
+    },
+    "c7_15": {
+     "n": 204,
+     "sens": 0.7647,
+     "spec": 0.9853
+    },
+    "c16p": {
+     "n": 97,
+     "sens": 0.7835,
+     "spec": 0.9897
+    }
+   }
+  }
+ },
+ "levels": {
+  "S1": {
+   "ALL": {
+    "pairs": 952,
+    "days": 27,
+    "auc": 0.7048,
+    "ci": [
+     0.6662,
+     0.754
+    ],
+    "perStratum": {
+     "c4_6": {
+      "n": 462,
+      "auc": 0.6656
+     },
+     "c7_15": {
+      "n": 441,
+      "auc": 0.729
+     },
+     "c16p": {
+      "n": 49,
+      "auc": 0.8571
+     }
+    },
+    "sens": 0.4223,
+    "spec": 0.9874,
+    "controls": {
+     "R_LOGC": 0.5225,
+     "R_POS": 0.5021,
+     "R_IPOS": 0.4986,
+     "R_FB": 0.5,
+     "R_LEN": 0.5128,
+     "R_SL": 0.4964,
+     "R_BURST": 0.5342,
+     "R_LAST16": 0.5281,
+     "R_DOCCOUNT": 0.4867,
+     "R_RINIT": 0.7716,
+     "R_CINIT": 0.7712
+    },
+    "positionControlsInBand": true,
+    "sixControlsInBand": true,
+    "permQ95": 0.5168,
+    "perStratumSens": {
+     "c4_6": {
+      "n": 462,
+      "sens": 0.342,
+      "spec": 0.9892
+     },
+     "c7_15": {
+      "n": 441,
+      "sens": 0.4739,
+      "spec": 0.9841
+     },
+     "c16p": {
+      "n": 49,
+      "sens": 0.7143,
+      "spec": 1
+     }
+    }
+   },
+   "U_untouched": {
+    "pairs": 76,
+    "days": 13,
+    "auc": 0.7961,
+    "ci": [
+     0.7256,
+     0.9189
+    ],
+    "perStratum": {
+     "c4_6": {
+      "n": 37,
+      "auc": 0.7432
+     },
+     "c7_15": {
+      "n": 36,
+      "auc": 0.875
+     },
+     "c16p": {
+      "n": 3,
+      "auc": 0.5
+     }
+    },
+    "sens": 0.6053,
+    "spec": 0.9868,
+    "controls": {
+     "R_LOGC": 0.5263,
+     "R_POS": 0.4819,
+     "R_IPOS": 0.5083,
+     "R_FB": 0.5,
+     "R_LEN": 0.5099,
+     "R_SL": 0.4891,
+     "R_BURST": 0.5963,
+     "R_LAST16": 0.5725,
+     "R_DOCCOUNT": 0.4329,
+     "R_RINIT": 0.8851,
+     "R_CINIT": 0.8873
+    },
+    "positionControlsInBand": true,
+    "sixControlsInBand": true,
+    "permQ95": 0.5724,
+    "perStratumSens": {
+     "c4_6": {
+      "n": 37,
+      "sens": 0.4865,
+      "spec": 1
+     },
+     "c7_15": {
+      "n": 36,
+      "sens": 0.7778,
+      "spec": 0.9722
+     },
+     "c16p": {
+      "n": 3,
+      "sens": 0,
+      "spec": 1
+     }
+    }
+   },
+   "R_reuse": {
+    "pairs": 876,
+    "days": 14,
+    "auc": 0.6969,
+    "ci": [
+     0.6542,
+     0.7479
+    ],
+    "perStratum": {
+     "c4_6": {
+      "n": 425,
+      "auc": 0.6588
+     },
+     "c7_15": {
+      "n": 405,
+      "auc": 0.716
+     },
+     "c16p": {
+      "n": 46,
+      "auc": 0.8804
+     }
+    },
+    "sens": 0.4064,
+    "spec": 0.9874,
+    "controls": {
+     "R_LOGC": 0.5227,
+     "R_POS": 0.5027,
+     "R_IPOS": 0.4977,
+     "R_FB": 0.5,
+     "R_LEN": 0.5134,
+     "R_SL": 0.4968,
+     "R_BURST": 0.5308,
+     "R_LAST16": 0.525,
+     "R_DOCCOUNT": 0.4877,
+     "R_RINIT": 0.7614,
+     "R_CINIT": 0.761
+    },
+    "positionControlsInBand": true,
+    "sixControlsInBand": true,
+    "permQ95": 0.5188,
+    "perStratumSens": {
+     "c4_6": {
+      "n": 425,
+      "sens": 0.3294,
+      "spec": 0.9882
+     },
+     "c7_15": {
+      "n": 405,
+      "sens": 0.4469,
+      "spec": 0.9852
+     },
+     "c16p": {
+      "n": 46,
+      "sens": 0.7609,
+      "spec": 1
+     }
+    }
+   },
+   "E_CORE": {
+    "pairs": 66,
+    "days": 8,
+    "auc": 0.7803,
+    "ci": [
+     0.7,
+     0.9167
+    ],
+    "perStratum": {
+     "c4_6": {
+      "n": 30,
+      "auc": 0.7167
+     },
+     "c7_15": {
+      "n": 33,
+      "auc": 0.8636
+     },
+     "c16p": {
+      "n": 3,
+      "auc": 0.5
+     }
+    },
+    "sens": 0.5758,
+    "spec": 0.9848,
+    "controls": {
+     "R_LOGC": 0.5218,
+     "R_POS": 0.4773,
+     "R_IPOS": 0.5134,
+     "R_FB": 0.5,
+     "R_LEN": 0.5121,
+     "R_SL": 0.4917,
+     "R_BURST": 0.6094,
+     "R_LAST16": 0.5817,
+     "R_DOCCOUNT": 0.4221,
+     "R_RINIT": 0.8728,
+     "R_CINIT": 0.8756
+    },
+    "positionControlsInBand": true,
+    "sixControlsInBand": true,
+    "perStratumSens": {
+     "c4_6": {
+      "n": 30,
+      "sens": 0.4333,
+      "spec": 1
+     },
+     "c7_15": {
+      "n": 33,
+      "sens": 0.7576,
+      "spec": 0.9697
+     },
+     "c16p": {
+      "n": 3,
+      "sens": 0,
+      "spec": 1
+     }
+    }
+   },
+   "confOnlyPositives": {
+    "pairs": 324,
+    "days": 27,
+    "auc": 0.8025,
+    "ci": [
+     0.7652,
+     0.8364
+    ],
+    "perStratum": {
+     "c4_6": {
+      "n": 164,
+      "auc": 0.7348
+     },
+     "c7_15": {
+      "n": 123,
+      "auc": 0.8699
+     },
+     "c16p": {
+      "n": 37,
+      "auc": 0.8784
+     }
+    },
+    "sens": 0.6142,
+    "spec": 0.9907,
+    "controls": {
+     "R_LOGC": 0.5253,
+     "R_POS": 0.5007,
+     "R_IPOS": 0.4964,
+     "R_FB": 0.5,
+     "R_LEN": 0.5042,
+     "R_SL": 0.4869,
+     "R_BURST": 0.5183,
+     "R_LAST16": 0.5067,
+     "R_DOCCOUNT": 0.4725,
+     "R_RINIT": 0.9116,
+     "R_CINIT": 0.9129
+    },
+    "positionControlsInBand": true,
+    "sixControlsInBand": true,
+    "perStratumSens": {
+     "c4_6": {
+      "n": 164,
+      "sens": 0.4756,
+      "spec": 0.9939
+     },
+     "c7_15": {
+      "n": 123,
+      "sens": 0.7561,
+      "spec": 0.9837
+     },
+     "c16p": {
+      "n": 37,
+      "sens": 0.7568,
+      "spec": 1
+     }
+    }
+   }
+  },
+  "S2": {
+   "ALL": {
+    "pairs": 330,
+    "days": 17,
+    "auc": 0.5879,
+    "ci": [
+     0.5562,
+     0.6304
+    ],
+    "perStratum": {
+     "c4_6": {
+      "n": 193,
+      "auc": 0.6036
+     },
+     "c7_15": {
+      "n": 135,
+      "auc": 0.563
+     },
+     "c16p": {
+      "n": 2,
+      "auc": 0.75
+     }
+    },
+    "sens": 0.197,
+    "spec": 0.9788,
+    "controls": {
+     "R_LOGC": 0.523,
+     "R_POS": 0.5013,
+     "R_IPOS": 0.4985,
+     "R_FB": 0.5,
+     "R_LEN": 0.5,
+     "R_SL": 0.5012,
+     "R_BURST": 0.5129,
+     "R_LAST16": 0.5076,
+     "R_DOCCOUNT": 0.4994,
+     "R_RINIT": 0.6151,
+     "R_CINIT": 0.6153
+    },
+    "positionControlsInBand": true,
+    "sixControlsInBand": true,
+    "permQ95": 0.5212,
+    "perStratumSens": {
+     "c4_6": {
+      "n": 193,
+      "sens": 0.228,
+      "spec": 0.9793
+     },
+     "c7_15": {
+      "n": 135,
+      "sens": 0.1481,
+      "spec": 0.9778
+     },
+     "c16p": {
+      "n": 2,
+      "sens": 0.5,
+      "spec": 1
+     }
+    }
+   },
+   "U_untouched": {
+    "pairs": 15,
+    "days": 4,
+    "auc": 0.7,
+    "ci": [
+     0.5,
+     0.8846
+    ],
+    "perStratum": {
+     "c4_6": {
+      "n": 10,
+      "auc": 0.65
+     },
+     "c7_15": {
+      "n": 5,
+      "auc": 0.8
+     }
+    },
+    "sens": 0.4,
+    "spec": 1,
+    "controls": {
+     "R_LOGC": 0.4433,
+     "R_POS": 0.4333,
+     "R_IPOS": 0.52,
+     "R_FB": 0.5,
+     "R_LEN": 0.5,
+     "R_SL": 0.49,
+     "R_BURST": 0.5133,
+     "R_LAST16": 0.5033,
+     "R_DOCCOUNT": 0.4467,
+     "R_RINIT": 0.88,
+     "R_CINIT": 0.8667
+    },
+    "positionControlsInBand": false,
+    "sixControlsInBand": false,
+    "permQ95": 0.6333,
+    "perStratumSens": {
+     "c4_6": {
+      "n": 10,
+      "sens": 0.3,
+      "spec": 1
+     },
+     "c7_15": {
+      "n": 5,
+      "sens": 0.6,
+      "spec": 1
+     }
+    }
+   },
+   "R_reuse": {
+    "pairs": 315,
+    "days": 13,
+    "auc": 0.5825,
+    "ci": [
+     0.551,
+     0.6256
+    ],
+    "perStratum": {
+     "c4_6": {
+      "n": 183,
+      "auc": 0.6011
+     },
+     "c7_15": {
+      "n": 130,
+      "auc": 0.5538
+     },
+     "c16p": {
+      "n": 2,
+      "auc": 0.75
+     }
+    },
+    "sens": 0.1873,
+    "spec": 0.9778,
+    "controls": {
+     "R_LOGC": 0.5268,
+     "R_POS": 0.5018,
+     "R_IPOS": 0.4981,
+     "R_FB": 0.5,
+     "R_LEN": 0.5,
+     "R_SL": 0.501,
+     "R_BURST": 0.5158,
+     "R_LAST16": 0.5096,
+     "R_DOCCOUNT": 0.5008,
+     "R_RINIT": 0.6023,
+     "R_CINIT": 0.6027
+    },
+    "positionControlsInBand": true,
+    "sixControlsInBand": true,
+    "permQ95": 0.5222,
+    "perStratumSens": {
+     "c4_6": {
+      "n": 183,
+      "sens": 0.224,
+      "spec": 0.9781
+     },
+     "c7_15": {
+      "n": 130,
+      "sens": 0.1308,
+      "spec": 0.9769
+     },
+     "c16p": {
+      "n": 2,
+      "sens": 0.5,
+      "spec": 1
+     }
+    }
+   },
+   "E_CORE": {
+    "pairs": 15,
+    "days": 4,
+    "auc": 0.7,
+    "ci": [
+     0.5,
+     0.8846
+    ],
+    "perStratum": {
+     "c4_6": {
+      "n": 10,
+      "auc": 0.65
+     },
+     "c7_15": {
+      "n": 5,
+      "auc": 0.8
+     }
+    },
+    "sens": 0.4,
+    "spec": 1,
+    "controls": {
+     "R_LOGC": 0.4433,
+     "R_POS": 0.4333,
+     "R_IPOS": 0.52,
+     "R_FB": 0.5,
+     "R_LEN": 0.5,
+     "R_SL": 0.49,
+     "R_BURST": 0.5133,
+     "R_LAST16": 0.5033,
+     "R_DOCCOUNT": 0.4467,
+     "R_RINIT": 0.88,
+     "R_CINIT": 0.8667
+    },
+    "positionControlsInBand": false,
+    "sixControlsInBand": false,
+    "perStratumSens": {
+     "c4_6": {
+      "n": 10,
+      "sens": 0.3,
+      "spec": 1
+     },
+     "c7_15": {
+      "n": 5,
+      "sens": 0.6,
+      "spec": 1
+     }
+    }
+   },
+   "confOnlyPositives": {
+    "pairs": 71,
+    "days": 17,
+    "auc": 0.6761,
+    "ci": [
+     0.6129,
+     0.7397
+    ],
+    "perStratum": {
+     "c4_6": {
+      "n": 55,
+      "auc": 0.6636
+     },
+     "c7_15": {
+      "n": 16,
+      "auc": 0.7188
+     }
+    },
+    "sens": 0.3944,
+    "spec": 0.9577,
+    "controls": {
+     "R_LOGC": 0.5082,
+     "R_POS": 0.4951,
+     "R_IPOS": 0.4896,
+     "R_FB": 0.5,
+     "R_LEN": 0.5,
+     "R_SL": 0.4929,
+     "R_BURST": 0.566,
+     "R_LAST16": 0.5566,
+     "R_DOCCOUNT": 0.483,
+     "R_RINIT": 0.8169,
+     "R_CINIT": 0.8169
+    },
+    "positionControlsInBand": true,
+    "sixControlsInBand": true,
+    "perStratumSens": {
+     "c4_6": {
+      "n": 55,
+      "sens": 0.3636,
+      "spec": 0.9636
+     },
+     "c7_15": {
+      "n": 16,
+      "sens": 0.5,
+      "spec": 0.9375
+     }
+    }
+   }
+  },
+  "S3": {
+   "ALL": {
+    "pairs": 431,
+    "days": 14,
+    "auc": 0.5,
+    "ci": [
+     0.4907,
+     0.5079
+    ],
+    "perStratum": {
+     "c4_6": {
+      "n": 222,
+      "auc": 0.4932
+     },
+     "c7_15": {
+      "n": 205,
+      "auc": 0.5073
+     },
+     "c16p": {
+      "n": 4,
+      "auc": 0.5
+     }
+    },
+    "sens": 0.0278,
+    "spec": 0.9722,
+    "controls": {
+     "R_LOGC": 0.5172,
+     "R_POS": 0.4951,
+     "R_IPOS": 0.5085,
+     "R_FB": 0.5,
+     "R_LEN": 0.5373,
+     "R_SL": 0.5057,
+     "R_BURST": 0.5623,
+     "R_LAST16": 0.5609,
+     "R_DOCCOUNT": 0.4894,
+     "R_RINIT": 0.5014,
+     "R_CINIT": 0.5015
+    },
+    "positionControlsInBand": true,
+    "sixControlsInBand": true,
+    "permQ95": 0.507,
+    "perStratumSens": {
+     "c4_6": {
+      "n": 222,
+      "sens": 0.0315,
+      "spec": 0.955
+     },
+     "c7_15": {
+      "n": 205,
+      "sens": 0.0244,
+      "spec": 0.9902
+     },
+     "c16p": {
+      "n": 4,
+      "sens": 0,
+      "spec": 1
+     }
+    }
+   },
+   "U_untouched": {
+    "pairs": 20,
+    "days": 1,
+    "auc": 0.5,
+    "ci": [
+     0.5,
+     0.5
+    ],
+    "perStratum": {
+     "c4_6": {
+      "n": 13,
+      "auc": 0.4615
+     },
+     "c7_15": {
+      "n": 7,
+      "auc": 0.5714
+     }
+    },
+    "sens": 0.05,
+    "spec": 0.95,
+    "controls": {
+     "R_LOGC": 0.5316,
+     "R_POS": 0.4841,
+     "R_IPOS": 0.5209,
+     "R_FB": 0.5,
+     "R_LEN": 0.4538,
+     "R_SL": 0.4951,
+     "R_BURST": 0.6555,
+     "R_LAST16": 0.6728,
+     "R_DOCCOUNT": 0.5154,
+     "R_RINIT": 0.4964,
+     "R_CINIT": 0.5
+    },
+    "positionControlsInBand": true,
+    "sixControlsInBand": true,
+    "permQ95": 0.55,
+    "perStratumSens": {
+     "c4_6": {
+      "n": 13,
+      "sens": 0,
+      "spec": 0.9231
+     },
+     "c7_15": {
+      "n": 7,
+      "sens": 0.1429,
+      "spec": 1
+     }
+    }
+   },
+   "R_reuse": {
+    "pairs": 411,
+    "days": 13,
+    "auc": 0.5,
+    "ci": [
+     0.4908,
+     0.5089
+    ],
+    "perStratum": {
+     "c4_6": {
+      "n": 209,
+      "auc": 0.4952
+     },
+     "c7_15": {
+      "n": 198,
+      "auc": 0.5051
+     },
+     "c16p": {
+      "n": 4,
+      "auc": 0.5
+     }
+    },
+    "sens": 0.0268,
+    "spec": 0.9732,
+    "controls": {
+     "R_LOGC": 0.5167,
+     "R_POS": 0.4951,
+     "R_IPOS": 0.5077,
+     "R_FB": 0.5,
+     "R_LEN": 0.5406,
+     "R_SL": 0.5058,
+     "R_BURST": 0.5575,
+     "R_LAST16": 0.5546,
+     "R_DOCCOUNT": 0.4886,
+     "R_RINIT": 0.5014,
+     "R_CINIT": 0.5016
+    },
+    "positionControlsInBand": true,
+    "sixControlsInBand": true,
+    "permQ95": 0.5073,
+    "perStratumSens": {
+     "c4_6": {
+      "n": 209,
+      "sens": 0.0335,
+      "spec": 0.9569
+     },
+     "c7_15": {
+      "n": 198,
+      "sens": 0.0202,
+      "spec": 0.9899
+     },
+     "c16p": {
+      "n": 4,
+      "sens": 0,
+      "spec": 1
+     }
+    }
+   },
+   "E_CORE": {
+    "pairs": 20,
+    "days": 1,
+    "auc": 0.5,
+    "ci": [
+     0.5,
+     0.5
+    ],
+    "perStratum": {
+     "c4_6": {
+      "n": 13,
+      "auc": 0.4615
+     },
+     "c7_15": {
+      "n": 7,
+      "auc": 0.5714
+     }
+    },
+    "sens": 0.05,
+    "spec": 0.95,
+    "controls": {
+     "R_LOGC": 0.5316,
+     "R_POS": 0.4841,
+     "R_IPOS": 0.5209,
+     "R_FB": 0.5,
+     "R_LEN": 0.4538,
+     "R_SL": 0.4951,
+     "R_BURST": 0.6555,
+     "R_LAST16": 0.6728,
+     "R_DOCCOUNT": 0.5154,
+     "R_RINIT": 0.4964,
+     "R_CINIT": 0.5
+    },
+    "positionControlsInBand": true,
+    "sixControlsInBand": true,
+    "perStratumSens": {
+     "c4_6": {
+      "n": 13,
+      "sens": 0,
+      "spec": 0.9231
+     },
+     "c7_15": {
+      "n": 7,
+      "sens": 0.1429,
+      "spec": 1
+     }
+    }
+   },
+   "confOnlyPositives": {
+    "pairs": 68,
+    "days": 14,
+    "auc": 0.4779,
+    "ci": [
+     0.4474,
+     0.5
+    ],
+    "perStratum": {
+     "c4_6": {
+      "n": 48,
+      "auc": 0.4688
+     },
+     "c7_15": {
+      "n": 16,
+      "auc": 0.5
+     },
+     "c16p": {
+      "n": 4,
+      "auc": 0.5
+     }
+    },
+    "sens": 0.0294,
+    "spec": 0.9265,
+    "controls": {
+     "R_LOGC": 0.5064,
+     "R_POS": 0.4853,
+     "R_IPOS": 0.5169,
+     "R_FB": 0.5,
+     "R_LEN": 0.4877,
+     "R_SL": 0.4897,
+     "R_BURST": 0.6703,
+     "R_LAST16": 0.6726,
+     "R_DOCCOUNT": 0.4586,
+     "R_RINIT": 0.5055,
+     "R_CINIT": 0.506
+    },
+    "positionControlsInBand": true,
+    "sixControlsInBand": true,
+    "perStratumSens": {
+     "c4_6": {
+      "n": 48,
+      "sens": 0.0417,
+      "spec": 0.8958
+     },
+     "c7_15": {
+      "n": 16,
+      "sens": 0,
+      "spec": 1
+     },
+     "c16p": {
+      "n": 4,
+      "sens": 0,
+      "spec": 1
+     }
+    }
+   },
+   "S3r_dlast16le2": {
+    "pairs": 393,
+    "days": 14,
+    "auc": 0.4987,
+    "ci": [
+     0.4897,
+     0.506
+    ],
+    "perStratum": {
+     "c4_6": {
+      "n": 205,
+      "auc": 0.4927
+     },
+     "c7_15": {
+      "n": 184,
+      "auc": 0.5054
+     },
+     "c16p": {
+      "n": 4,
+      "auc": 0.5
+     }
+    },
+    "sens": 0.0254,
+    "spec": 0.972,
+    "controls": {
+     "R_LOGC": 0.5153,
+     "R_POS": 0.4946,
+     "R_IPOS": 0.511,
+     "R_FB": 0.5,
+     "R_LEN": 0.5378,
+     "R_SL": 0.5055,
+     "R_BURST": 0.5419,
+     "R_LAST16": 0.5376,
+     "R_DOCCOUNT": 0.4885,
+     "R_RINIT": 0.5009,
+     "R_CINIT": 0.5009
+    },
+    "positionControlsInBand": true,
+    "sixControlsInBand": true,
+    "permQ95": 0.5064,
+    "perStratumSens": {
+     "c4_6": {
+      "n": 205,
+      "sens": 0.0293,
+      "spec": 0.9561
+     },
+     "c7_15": {
+      "n": 184,
+      "sens": 0.0217,
+      "spec": 0.9891
+     },
+     "c16p": {
+      "n": 4,
+      "sens": 0,
+      "spec": 1
+     }
+    }
+   }
+  }
+ },
+ "A1": {
+  "verdict_pooled": "SURVIVES",
+  "verdict_U": "SURVIVES",
+  "verdict_R": "NARROWED"
+ },
+ "A2": {
+  "verdict_pooled": "NARROWED",
+  "verdict_U": "FALLS",
+  "verdict_R": "NARROWED"
+ },
+ "A3": {
+  "verdict_pooled": "ECHO",
+  "verdict_r": "ECHO",
+  "verdict_U": "ECHO",
+  "verdict_R": "ECHO"
+ },
+ "A4": {
+  "alignedPositives": 324,
+  "aucL0": 0.8009,
+  "aucS1": 0.8025,
+  "drop": {
+   "point": -0.0015,
+   "lo": -0.0071,
+   "hi": 0.003,
+   "B": 500
+  }
+ },
+ "A5": {
+  "pairs": 497,
+  "absDc": {
+   "exact": 0.6016,
+   "within1": 0.8773,
+   "median": 0,
+   "p90": 2
+  },
+  "absLnC": {
+   "le0p15": 0.8592,
+   "le0p10": 0.7324,
+   "median": 0,
+   "p90": 0.2231
+  },
+  "absDfbin": 0.5755,
+  "absDlen": 0.5292,
+  "absDlnSl": {
+   "median": 0.2412,
+   "le0p25": 0.5091
+  },
+  "absDlast16": {
+   "exact": 0.2817,
+   "within1": 0.5614,
+   "mean": 1.6519
+  },
+  "absDrinit": {
+   "median": 0.7143,
+   "mean": 0.6033,
+   "le0p10": 0.0926
+  },
+  "controls": {
+   "R_LOGC": 0.5145,
+   "R_POS": 0.4998,
+   "R_IPOS": 0.4977,
+   "R_FB": 0.4663,
+   "R_LEN": 0.5123,
+   "R_SL": 0.4888,
+   "R_BURST": 0.5313,
+   "R_LAST16": 0.5105,
+   "R_DOCCOUNT": 0.4424,
+   "R_RINIT": 0.9193,
+   "R_CINIT": 0.9168
+  },
+  "pairedLogit": {
+   "ALL": {
+    "unadjusted": {
+     "betaFirst": 5.7719,
+     "ci": [
+      4.5527,
+      10.4475
+     ],
+     "OR": 321.15,
+     "orCi": [
+      94.89,
+      34458.12
+     ]
+    },
+    "adjustedSix": {
+     "betaFirst": 5.8282,
+     "ci": [
+      4.7141,
+      10.9233
+     ],
+     "OR": 339.75,
+     "orCi": [
+      111.51,
+      55453.49
+     ]
+    },
+    "adjustedSixPlusRinit": {
+     "betaFirst": 2.1934,
+     "ci": [
+      0.9875,
+      7.7783
+     ],
+     "OR": 8.97,
+     "orCi": [
+      2.68,
+      2388.21
+     ]
+    },
+    "rinitOnly": {
+     "betaFirst": 6.8609,
+     "ci": [
+      5.6854,
+      9.3957
+     ],
+     "OR": 954.23,
+     "orCi": [
+      294.54,
+      12036.51
+     ]
+    },
+    "rinitPlusS": {
+     "betaFirst": 2.2195,
+     "ci": [
+      0.9318,
+      7.5339
+     ],
+     "OR": 9.2,
+     "orCi": [
+      2.54,
+      1870.39
+     ]
+    }
+   },
+   "U": {
+    "unadjusted": {
+     "betaFirst": 8.8824,
+     "ci": [
+      8.3416,
+      9.3371
+     ],
+     "OR": 7204.06,
+     "orCi": [
+      4194.8,
+      11351.44
+     ]
+    },
+    "adjustedSix": {
+     "betaFirst": 10.5461,
+     "ci": [
+      9.6371,
+      24.1669
+     ],
+     "OR": 38028.84,
+     "orCi": [
+      15322.84,
+      31300502854.42
+     ]
+    },
+    "adjustedSixPlusRinit": {
+     "betaFirst": 12.2299,
+     "ci": [
+      3.972,
+      14.6464
+     ],
+     "OR": 204822.7,
+     "orCi": [
+      53.09,
+      2295359.42
+     ]
+    },
+    "rinitOnly": {
+     "betaFirst": 8.7155,
+     "ci": [
+      7.1461,
+      29.1931
+     ],
+     "OR": 6096.68,
+     "orCi": [
+      1269.15,
+      4768724573192.09
+     ]
+    },
+    "rinitPlusS": {
+     "betaFirst": 5.554,
+     "ci": [
+      0.1845,
+      6.3292
+     ],
+     "OR": 258.27,
+     "orCi": [
+      1.2,
+      560.71
+     ]
+    }
+   },
+   "R": {
+    "unadjusted": {
+     "betaFirst": 5.5513,
+     "ci": [
+      4.2894,
+      10.2312
+     ],
+     "OR": 257.57,
+     "orCi": [
+      72.92,
+      27755.8
+     ]
+    },
+    "adjustedSix": {
+     "betaFirst": 5.5901,
+     "ci": [
+      4.5191,
+      10.6733
+     ],
+     "OR": 267.76,
+     "orCi": [
+      91.75,
+      43187.22
+     ]
+    },
+    "adjustedSixPlusRinit": {
+     "betaFirst": 1.9499,
+     "ci": [
+      0.693,
+      7.6541
+     ],
+     "OR": 7.03,
+     "orCi": [
+      2,
+      2109.28
+     ]
+    },
+    "rinitOnly": {
+     "betaFirst": 6.5779,
+     "ci": [
+      5.3505,
+      8.6632
+     ],
+     "OR": 719.03,
+     "orCi": [
+      210.71,
+      5786.02
+     ]
+    },
+    "rinitPlusS": {
+     "betaFirst": 2.0125,
+     "ci": [
+      0.5841,
+      7.3095
+     ],
+     "OR": 7.48,
+     "orCi": [
+      1.79,
+      1494.43
+     ]
+    }
+   }
+  }
+ },
+ "A6": {
+  "scan": {
+   "confirm/read-pairs.mjs": {
+    "speakerField": 0,
+    "nick": 0,
+    "goldPos": 0,
+    "upperCase": 0,
+    "wordList": 0,
+    "posPriorNonNull": 0
+   },
+   "attack/attack-read.mjs": {
+    "speakerField": 0,
+    "nick": 0,
+    "goldPos": 0,
+    "upperCase": 0,
+    "wordList": 0,
+    "posPriorNonNull": 0
+   },
+   "law/impact.mjs": {
+    "speakerField": 0,
+    "nick": 0,
+    "goldPos": 0,
+    "upperCase": 0,
+    "wordList": 0,
+    "posPriorNonNull": [
+     332,
+     333,
+     512
+    ]
+   }
+  },
+  "readerCallPassesOnlyStream": true,
+  "streamIsLowercasedTokens": true
+ },
+ "verdictAttackA": "NARROWING",
+ "verdictParts": {
+  "a1": "SURVIVES",
+  "a2": "NARROWED",
+  "a3": "ECHO"
+ },
+ "headerSha256": "51cc58302c643ab2c09a0f316580fd558d1a1dabbb917a20afc0f63dd2769566"
+}

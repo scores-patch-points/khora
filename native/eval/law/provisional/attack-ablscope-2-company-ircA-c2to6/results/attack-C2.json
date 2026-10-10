@@ -1,0 +1,93 @@
+{
+ "ruleId": "ablscope-2-company-ircA-c2to6",
+ "attack": "C2 recency",
+ "headerSha256": "f980b03ef73ba06f5a2c26a57a091489feab1b26e0e8fa7d046f9dbf199e64da",
+ "B": 1000,
+ "subsets": {
+  "T1_nearTied": {
+   "pairs": 53,
+   "aucRInit": 0.8662,
+   "ciRInit": [
+    0.805,
+    0.9171
+   ],
+   "aucNegDSelf": 0.8056,
+   "ciNegDSelf": [
+    0.703,
+    0.8822
+   ],
+   "aucGapPrev": 0.503,
+   "ciGap": [
+    0.42,
+    0.5731
+   ]
+  },
+  "T2_bothNonBurst": {
+   "pairs": 43,
+   "aucRInit": 0.8404,
+   "ciRInit": [
+    0.7183,
+    0.9352
+   ],
+   "aucNegDSelf": 0.7908,
+   "ciNegDSelf": [
+    0.6781,
+    0.8906
+   ],
+   "aucGapPrev": 0.7256,
+   "ciGap": [
+    0.5914,
+    0.8431
+   ]
+  },
+  "T3_nameLessRecent": {
+   "pairs": 84,
+   "aucRInit": 0.8676,
+   "ciRInit": [
+    0.8083,
+    0.9151
+   ],
+   "aucNegDSelf": 0.8317,
+   "ciNegDSelf": [
+    0.7779,
+    0.8811
+   ],
+   "aucGapPrev": 0.1883,
+   "ciGap": [
+    0.1355,
+    0.2263
+   ]
+  }
+ },
+ "recencyIndependent": true,
+ "probeCoefficients": {
+  "R_INIT": {
+   "coef": 2.5701,
+   "ci": [
+    2.1234,
+    3.5053
+   ]
+  },
+  "negDSelf": {
+   "coef": 0.5296,
+   "ci": [
+    -0.2404,
+    1.3299
+   ]
+  },
+  "negLogGap": {
+   "coef": 0.7827,
+   "ci": [
+    -0.0595,
+    1.6848
+   ]
+  },
+  "R_BURST": {
+   "coef": 0.5262,
+   "ci": [
+    -0.3933,
+    1.4426
+   ]
+  }
+ }
+}

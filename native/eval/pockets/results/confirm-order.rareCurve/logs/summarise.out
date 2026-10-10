@@ -1,0 +1,27 @@
+VERDICT PARTIAL: 15/23 siblings HOLD; plus 10/13, minus 5/5, absent 0/5; both signs observed: true
+sib-rc-en-mouret         plus    pred PRESENT+  -> AMBIGUOUS fails weak n | v +0.011/+0.006 z +3.0/+1.9 z200 +3.0/+1.4 | inRange false
+sib-rc-en-poe-chopin     plus    pred PRESENT+  -> AMBIGUOUS fails weak y | v +0.018/+0.019 z +4.0/+9.5 z200 +5.1/+5.7 | inRange true
+sib-rc-en-halfcentury    plus    pred PRESENT+  -> PRESENT+  HOLDS weak y | v +0.027/+0.027 z +7.2/+6.7 z200 +5.2/+5.9 | inRange true
+sib-rc-en-travel         plus    pred PRESENT+  -> PRESENT+  HOLDS weak y | v +0.017/+0.024 z +6.3/+5.2 z200 +4.2/+6.2 | inRange true
+sib-rc-en-shake-trag     plus    pred PRESENT+  -> PRESENT+  HOLDS weak y | v +0.041/+0.041 z +8.5/+14.1 z200 +13.1/+14.7 | inRange false
+sib-rc-en-shake-com      plus    pred PRESENT+  -> PRESENT+  HOLDS weak y | v +0.036/+0.042 z +11.3/+14.8 z200 +14.4/+16.3 | inRange false
+sib-rc-ud-ces-train      plus    pred PRESENT+  -> PRESENT+  HOLDS weak y | v +0.047/+0.050 z +19.3/+14.9 z200 +19.4/+18.2 | inRange true
+sib-rc-ud-ita-train      plus    pred PRESENT+  -> PRESENT+  HOLDS weak y | v +0.044/+0.049 z +13.7/+33.9 z200 +15.3/+16.8 | inRange true
+sib-rc-ud-nld-train      plus    pred PRESENT+  -> PRESENT+  HOLDS weak y | v +0.054/+0.052 z +13.5/+18.2 z200 +14.6/+14.8 | inRange true
+sib-rc-ud-rus-train      plus    pred PRESENT+  -> ABSENT    fails weak n | v +0.013/+0.009 z +1.9/+1.7 z200 +2.2/+1.3 | inRange false
+sib-rc-ud-dan-train      plus    pred PRESENT+  -> PRESENT+  HOLDS weak y | v +0.073/+0.067 z +23.4/+11.4 z200 +14.6/+11.2 | inRange true
+sib-rc-ud-gle-train      plus    pred PRESENT+  -> PRESENT+  HOLDS weak y | v +0.053/+0.052 z +12.7/+7.5 z200 +11.6/+8.9 | inRange true
+sib-rc-ud-hye-train      plus    pred PRESENT+  -> PRESENT+  HOLDS weak y | v +0.044/+0.039 z +9.3/+8.7 z200 +7.9/+7.4 | inRange true
+sib-rc-js-holodeck       minus   pred PRESENT-  -> PRESENT-  HOLDS weak y | v -0.080/-0.109 z -35.1/-21.9 z200 -23.7/-29.6 | inRange true
+sib-rc-js-eochat         minus   pred PRESENT-  -> PRESENT-  HOLDS weak y | v -0.093/-0.104 z -29.9/-40.4 z200 -33.1/-33.1 | inRange true
+sib-rc-js-eopm           minus   pred PRESENT-  -> PRESENT-  HOLDS weak y | v -0.105/-0.115 z -25.6/-31.0 z200 -27.6/-27.9 | inRange true
+sib-rc-ts-opencode       minus   pred PRESENT-  -> PRESENT-  HOLDS weak y | v -0.165/-0.166 z -47.2/-88.1 z200 -49.9/-55.8 | inRange true
+sib-rc-tsx-opencode      minus   pred PRESENT-  -> PRESENT-  HOLDS weak y | v -0.151/-0.185 z -47.8/-94.3 z200 -46.8/-56.8 | inRange true
+sib-rc-py-authored       absent  pred ABSENT    -> AMBIGUOUS fails weak n | v +0.018/+0.017 z +3.2/+7.2 z200 +4.2/+6.0 | inRange true
+sib-rc-py-sitepkg        absent  pred ABSENT    -> AMBIGUOUS fails weak n | v +0.009/+0.003 z +2.4/+0.9 z200 +2.8/+1.0 | inRange true
+sib-rc-ud-cmn-train      absent  pred ABSENT    -> AMBIGUOUS fails weak n | v +0.017/+0.024 z +3.3/+7.1 z200 +3.1/+5.0 | inRange false
+sib-rc-ud-jpn-train      absent  pred ABSENT    -> AMBIGUOUS fails weak n | v -0.003/-0.004 z -0.6/-3.2 z200 -0.7/-0.9 | inRange true
+sib-rc-ud-urd-train      absent  pred ABSENT    -> AMBIGUOUS fails weak n | v -0.012/-0.015 z -3.7/-3.2 z200 -2.7/-3.3 | inRange true
+ctl-rc-en-mouret         control pred NOT PRESENT in eithe -> ABSENT    ctrl ok weak n | v -0.008/-0.002 z -1.7/-0.2 z200 -2.0/-0.5 | inRange null
+ctl-rc-ud-ces-train      control pred NOT PRESENT in eithe -> ABSENT    ctrl ok weak n | v +0.000/+0.001 z -0.3/+0.4 z200 +0.1/+0.5 | inRange null
+ctl-rc-ts-opencode       control pred NOT PRESENT in eithe -> AMBIGUOUS ctrl ok weak n | v +0.004/-0.006 z +1.3/-2.0 z200 +1.4/-2.0 | inRange null

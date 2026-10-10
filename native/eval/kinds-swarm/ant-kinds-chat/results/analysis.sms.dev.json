@@ -1,0 +1,257 @@
+{
+ "module": "ant-kinds-chat/analyse.mjs",
+ "corpus": "sms",
+ "stages": [
+  "dev"
+ ],
+ "preregSha256": "0b7ebeba45da9ec1a28d91472b1f4437f7ede987aa2eca565e12541ae8fb2878",
+ "rows": 96,
+ "jointRows": 112,
+ "joint": {
+  "windows": 2,
+  "nullDraws": 6,
+  "J1": {
+   "windowsUsed": 2,
+   "meanReal": 0.0627,
+   "meanNull": 0.0475,
+   "meanDiff": 0.0152,
+   "windowsRealAboveNullMean": 2,
+   "windowsRealAboveNullMax": 2,
+   "bootDiff": {
+    "lo": 0.0152,
+    "hi": 0.0152,
+    "n": 300
+   },
+   "perWindow": [
+    {
+     "win": "dev:Tao Chen|0",
+     "real": 0.0732,
+     "nullMean": 0.0488,
+     "classes": 8
+    },
+    {
+     "win": "dev:Tao Chen|1",
+     "real": 0.0521,
+     "nullMean": 0.0462,
+     "classes": 8
+    }
+   ]
+  },
+  "J2": {
+   "real": 0.0131,
+   "nulls": [
+    0.0197,
+    0.0186,
+    0.0276,
+    0.0069,
+    0.0212,
+    0.0171
+   ],
+   "nullMean": 0.0185,
+   "realAboveAllNulls": false
+  },
+  "perKind": [
+   {
+    "kind": 0,
+    "windows": 2,
+    "meanTokens": 640.5,
+    "changedPerToken": 1.2833,
+    "amplification": null,
+    "noSlotShare": 0.3775
+   },
+   {
+    "kind": 1,
+    "windows": 2,
+    "meanTokens": 280,
+    "changedPerToken": 1.3876,
+    "amplification": null,
+    "noSlotShare": 0.5897
+   },
+   {
+    "kind": 2,
+    "windows": 2,
+    "meanTokens": 145,
+    "changedPerToken": 2.6835,
+    "amplification": null,
+    "noSlotShare": 0.3007
+   },
+   {
+    "kind": 3,
+    "windows": 2,
+    "meanTokens": 163,
+    "changedPerToken": 2.3693,
+    "amplification": null,
+    "noSlotShare": 0.3823
+   },
+   {
+    "kind": 4,
+    "windows": 2,
+    "meanTokens": 95,
+    "changedPerToken": 1.9353,
+    "amplification": null,
+    "noSlotShare": 0.4115
+   },
+   {
+    "kind": 5,
+    "windows": 2,
+    "meanTokens": 106,
+    "changedPerToken": 2.4049,
+    "amplification": null,
+    "noSlotShare": 0.4664
+   },
+   {
+    "kind": 6,
+    "windows": 2,
+    "meanTokens": 70,
+    "changedPerToken": 2.1924,
+    "amplification": null,
+    "noSlotShare": 0.5302
+   },
+   {
+    "kind": 7,
+    "windows": 2,
+    "meanTokens": 70.5,
+    "changedPerToken": 2.3459,
+    "amplification": null,
+    "noSlotShare": 0.4168
+   }
+  ],
+  "meanShapeCos": [
+   [
+    1,
+    0.891,
+    0.922,
+    0.935,
+    0.943,
+    0.854,
+    0.883,
+    0.893
+   ],
+   [
+    0.891,
+    1,
+    0.991,
+    0.983,
+    0.963,
+    0.99,
+    0.991,
+    0.994
+   ],
+   [
+    0.922,
+    0.991,
+    1,
+    0.997,
+    0.97,
+    0.988,
+    0.994,
+    0.994
+   ],
+   [
+    0.935,
+    0.983,
+    0.997,
+    1,
+    0.973,
+    0.98,
+    0.988,
+    0.984
+   ],
+   [
+    0.943,
+    0.963,
+    0.97,
+    0.973,
+    1,
+    0.946,
+    0.946,
+    0.968
+   ],
+   [
+    0.854,
+    0.99,
+    0.988,
+    0.98,
+    0.946,
+    1,
+    0.993,
+    0.992
+   ],
+   [
+    0.883,
+    0.991,
+    0.994,
+    0.988,
+    0.946,
+    0.993,
+    1,
+    0.991
+   ],
+   [
+    0.893,
+    0.994,
+    0.994,
+    0.984,
+    0.968,
+    0.992,
+    0.991,
+    1
+   ]
+  ],
+  "meanShapeKinds": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7
+  ]
+ },
+ "S": {
+  "n": 96,
+  "kinds": 8,
+  "blocks": 3,
+  "S1": {
+   "RECORD": {
+    "balancedAccuracy": 0.1875,
+    "nullMean": 0.122,
+    "nullQ95": 0.1771,
+    "chance": 0.125
+   },
+   "FREQ": {
+    "balancedAccuracy": 0.25,
+    "nullMean": 0.2421,
+    "nullQ95": 0.3021,
+    "chance": 0.125
+   },
+   "RECORD+FREQ": {
+    "balancedAccuracy": 0.2083,
+    "nullMean": 0.1717,
+    "nullQ95": 0.2292,
+    "chance": 0.125
+   },
+   "recordMinusFreq": -0.0625,
+   "recordAboveNullQ95": true
+  },
+  "S2": {
+   "pooledSlope": -0.1766,
+   "pooledLo": -0.2791,
+   "pooledHi": 0.0869,
+   "perKind": [],
+   "signReversal": [],
+   "kindsPositiveCI": 0,
+   "kindsNegativeCI": 0,
+   "kindsWithCIcrossing0": 0
+  },
+  "S3": {
+   "nonNullShare": 0.5417
+  }
+ },
+ "verdicts": {
+  "K2_J1": "J1 holds (real dispersion > random frequency-stratified partitions, lower bound > 0)",
+  "K2_S1": "S1 record accuracy 0.1875 vs null q95 0.1771; record - freq-only = -0.0625 (SESOI 0.03)",
+  "K3": "no data"
+ }
+}

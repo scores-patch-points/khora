@@ -1,0 +1,226 @@
+{
+ "R1": {
+  "irc": {
+   "valid": [
+    "irc-de",
+    "irc-en",
+    "irc-es",
+    "irc-it"
+   ],
+   "full": [
+    [
+     "irc-de",
+     0.9258
+    ],
+    [
+     "irc-en",
+     0.8642
+    ],
+    [
+     "irc-es",
+     0.9281
+    ],
+    [
+     "irc-it",
+     0.9529
+    ]
+   ],
+   "a": true,
+   "delta": 0.3617
+  },
+  "code": {
+   "full": [
+    [
+     "code-js",
+     0.5528,
+     0.5109
+    ],
+    [
+     "code-py",
+     0.6446,
+     0.5931
+    ]
+   ],
+   "b": true,
+   "delta": 0.0378
+  },
+  "ud": {
+   "validFull": 35,
+   "medFull": 0.5867,
+   "medCausal": 0.5698,
+   "POS": 18,
+   "NEG": 2,
+   "delta": 0.1,
+   "c": true
+  },
+  "book": {
+   "full": [
+    [
+     "book-frankenstein",
+     0.5969,
+     0.4884
+    ],
+    [
+     "book-middlemarch",
+     0.6912,
+     0.6224
+    ],
+    [
+     "book-tom-sawyer",
+     0.6328,
+     0.5424
+    ]
+   ],
+   "d": true,
+   "delta": 0.2171
+  },
+  "famPass": {
+   "irc": true,
+   "code": false,
+   "ud": true,
+   "book": true
+  },
+  "verdict": "HOLDS-IN-SCOPE(irc,ud,book); FAILS-ELSEWHERE(code)"
+ },
+ "R2": {
+  "a": {
+   "all": {
+    "rho": 0.4714,
+    "p": 0.001,
+    "n": 45
+   },
+   "nl": {
+    "rho": 0.4017,
+    "p": 0.006,
+    "n": 43
+   },
+   "ud": {
+    "rho": 0.1668,
+    "p": 0.1679,
+    "n": 36
+   },
+   "pass": true
+  },
+  "irc": {
+   "dlx": [
+    [
+     "irc-de",
+     0.6806
+    ],
+    [
+     "irc-en",
+     0.7042
+    ],
+    [
+     "irc-es",
+     0.6312
+    ],
+    [
+     "irc-it",
+     0.639
+    ]
+   ],
+   "ok": true,
+   "delta": 0.2032
+  },
+  "code": {
+   "dlx": [
+    [
+     "code-js",
+     0.7004
+    ],
+    [
+     "code-py",
+     0.602
+    ]
+   ],
+   "ok": true,
+   "delta": 0.1171
+  },
+  "book": {
+   "dlx": [
+    [
+     "book-frankenstein",
+     0.3876
+    ],
+    [
+     "book-middlemarch",
+     0.4666
+    ],
+    [
+     "book-tom-sawyer",
+     0.4181
+    ]
+   ],
+   "ok": true,
+   "delta": -0.0593
+  },
+  "ud": {
+   "valid": 36,
+   "med": 0.4567,
+   "POS": 1,
+   "NEG": 10,
+   "delta": -0.0606,
+   "ok": true
+  },
+  "famPass": {
+   "irc": true,
+   "code": true,
+   "book": true,
+   "ud": true
+  },
+  "verdict": "HOLDS"
+ },
+ "controls": {
+  "ud-PN|shuf": {
+   "n": 35,
+   "pInitX_medDev": 0.0433,
+   "DLx_medDev": 0.0292
+  },
+  "ud-PN|sham": {
+   "n": 0,
+   "pInitX_medDev": null,
+   "DLx_medDev": null
+  },
+  "ud-PO|shuf": {
+   "n": 36,
+   "pInitX_medDev": 0.0407,
+   "DLx_medDev": 0.0133
+  },
+  "ud-PO|sham": {
+   "n": 49,
+   "pInitX_medDev": 0.0227,
+   "DLx_medDev": 0.0208
+  },
+  "irc-NK|shuf": {
+   "n": 4,
+   "pInitX_medDev": 0.0062,
+   "DLx_medDev": 0.0594
+  },
+  "irc-NK|sham": {
+   "n": 4,
+   "pInitX_medDev": 0.01,
+   "DLx_medDev": 0.0125
+  },
+  "book-NAMES|shuf": {
+   "n": 3,
+   "pInitX_medDev": 0.0819,
+   "DLx_medDev": 0.0226
+  },
+  "book-NAMES|sham": {
+   "n": 3,
+   "pInitX_medDev": 0.0117,
+   "DLx_medDev": 0.0175
+  },
+  "code-PE|shuf": {
+   "n": 2,
+   "pInitX_medDev": 0.0142,
+   "DLx_medDev": 0.0151
+  },
+  "code-PE|sham": {
+   "n": 2,
+   "pInitX_medDev": 0.0424,
+   "DLx_medDev": 0.0121
+  }
+ }
+}

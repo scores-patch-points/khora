@@ -1,0 +1,399 @@
+{
+ "hdr": "872c6935489826989e45ddc4f9ed8b2c84b2c73d0e3ba5fc4f129009a3dc6f9f",
+ "B0": {
+  "headerShaNow": "eab108add7c44bf45e0e28f933624a7396c82f29ffefd52a6aa9d2085fa58fce",
+  "recorded": "eab108add7c44bf45e0e28f933624a7396c82f29ffefd52a6aa9d2085fa58fce",
+  "match": true,
+  "rowHdrs": [
+   "eab108add7c44bf45e0e28f933624a7396c82f29ffefd52a6aa9d2085fa58fce"
+  ],
+  "allRowsMatch": true,
+  "manifestShaMatches": true,
+  "confirmMtime": "2026-10-07T06:51:29.181Z",
+  "resultBirths": {
+   "book.jsonl": "2026-10-07T06:52:03.178Z",
+   "code.jsonl": "2026-10-07T06:52:05.973Z",
+   "irc.jsonl": "2026-10-07T06:51:58.946Z",
+   "prospective-sov.jsonl": "2026-10-07T06:58:59.750Z",
+   "repl-book.jsonl": "2026-10-07T06:52:11.100Z",
+   "repl-code.jsonl": "2026-10-07T06:52:15.075Z",
+   "repl-irc.jsonl": "2026-10-07T06:52:08.400Z",
+   "repl-ud.jsonl": "2026-10-07T06:51:58.463Z",
+   "ud.jsonl": "2026-10-07T06:51:58.475Z"
+  },
+  "confirmPrecedesAllResults": true
+ },
+ "B1": {
+  "FULL": {
+   "nCells": 52,
+   "nFamilies": 19,
+   "medLower": 0.5661,
+   "famBootCI": [
+    0.5414,
+    0.6488
+   ],
+   "pMedianGE055_family": 0.9073,
+   "cellBootCI": [
+    0.5405,
+    0.591
+   ],
+   "pMedianGE055_cell": 0.831,
+   "lofoMin": [
+    "Uralic",
+    0.5645
+   ],
+   "lofoMax": [
+    "Slavic",
+    0.5817
+   ],
+   "verdict": "MARGINAL",
+   "familySizes": {
+    "Slavic": 11,
+    "Romance": 8,
+    "Afroasiatic": 3,
+    "Celtic": 2,
+    "Germanic": 9,
+    "Uralic": 3,
+    "Basque": 1,
+    "Hellenic": 1,
+    "IndoIranian": 2,
+    "Armenian": 1,
+    "Austronesian": 1,
+    "Japonic": 1,
+    "Kartvelian": 1,
+    "Baltic": 2,
+    "SinoTibetan": 2,
+    "Dravidian": 1,
+    "Turkic": 1,
+    "Austroasiatic": 1,
+    "NigerCongo": 1
+   }
+  },
+  "CAUSAL4": {
+   "nCells": 44,
+   "nFamilies": 16,
+   "medLower": 0.5546,
+   "famBootCI": [
+    0.515,
+    0.6073
+   ],
+   "pMedianGE055_family": 0.6847,
+   "cellBootCI": [
+    0.515,
+    0.5842
+   ],
+   "pMedianGE055_cell": 0.6803,
+   "lofoMin": [
+    "Uralic",
+    0.554
+   ],
+   "lofoMax": [
+    "Slavic",
+    0.5625
+   ],
+   "verdict": "FRAGILE",
+   "familySizes": {
+    "Slavic": 10,
+    "Romance": 6,
+    "Celtic": 2,
+    "Germanic": 9,
+    "Uralic": 3,
+    "Basque": 1,
+    "Hellenic": 1,
+    "Afroasiatic": 2,
+    "IndoIranian": 2,
+    "Armenian": 1,
+    "Austronesian": 1,
+    "Baltic": 1,
+    "SinoTibetan": 2,
+    "Turkic": 1,
+    "Austroasiatic": 1,
+    "NigerCongo": 1
+   }
+  }
+ },
+ "B2": {
+  "nValid": 52,
+  "nPOS": 27,
+  "bh05": 27,
+  "bh10": 29,
+  "bhShare05": 0.5192,
+  "pMin": 0.001,
+  "nullRows": 110,
+  "nullPOS": 4,
+  "p0": 0.05,
+  "binomialTail": 1.035446014684902e-21,
+  "verdict": "ROBUST"
+ },
+ "B3": {
+  "FULL": {
+   "nA": 50,
+   "nB": 48,
+   "nBoth": 48,
+   "rho": 0.6699,
+   "rhoP": 0.0002,
+   "scopeAtoB": {
+    "nPOS": 33,
+    "nNon": 15,
+    "medYofPOS": 0.6182,
+    "medYofNon": 0.5358,
+    "diff": 0.0824,
+    "posRateInYofPOS": 0.8182,
+    "posRateInYofNon": 0.2
+   },
+   "scopeBtoA": {
+    "nPOS": 30,
+    "nNon": 18,
+    "medYofPOS": 0.6025,
+    "medYofNon": 0.5633,
+    "diff": 0.0392,
+    "posRateInYofPOS": 0.9,
+    "posRateInYofNon": 0.3333
+   },
+   "sovA": {
+    "n": 50,
+    "nSOV": 8,
+    "diff": 0.0945,
+    "p": 0.0004,
+    "medSOV": 0.6659,
+    "medRest": 0.5714
+   },
+   "sovB": {
+    "n": 48,
+    "nSOV": 7,
+    "diff": 0.1036,
+    "p": 0.0002,
+    "medSOV": 0.6786,
+    "medRest": 0.575
+   },
+   "medA": 0.5871,
+   "medB": 0.5808,
+   "notLucky": true
+  },
+  "CAUSAL4": {
+   "nA": 40,
+   "nB": 38,
+   "nBoth": 37,
+   "rho": 0.6668,
+   "rhoP": 0.0002,
+   "scopeAtoB": {
+    "nPOS": 21,
+    "nNon": 16,
+    "medYofPOS": 0.6006,
+    "medYofNon": 0.5471,
+    "diff": 0.0535,
+    "posRateInYofPOS": 0.7619,
+    "posRateInYofNon": 0.25
+   },
+   "scopeBtoA": {
+    "nPOS": 20,
+    "nNon": 17,
+    "medYofPOS": 0.5896,
+    "medYofNon": 0.5421,
+    "diff": 0.0475,
+    "posRateInYofPOS": 0.8,
+    "posRateInYofNon": 0.2941
+   },
+   "sovA": {
+    "n": 40,
+    "nSOV": 5,
+    "diff": 0.0386,
+    "p": 0.116,
+    "medSOV": 0.6033,
+    "medRest": 0.5647
+   },
+   "sovB": {
+    "n": 38,
+    "nSOV": 6,
+    "diff": 0.044,
+    "p": 0.0512,
+    "medSOV": 0.608,
+    "medRest": 0.564
+   },
+   "medA": 0.5714,
+   "medB": 0.5763,
+   "notLucky": false
+  }
+ },
+ "B4": {
+  "FULL": {
+   "A": {
+    "n": 50,
+    "diffs": {
+     "SOV": 0.0945,
+     "CASE": 0.0285,
+     "ARTICLE": -0.0397,
+     "INDOEUROPEAN": -0.0651
+    },
+    "maxAdjustedP_forSOV": 0.0027
+   },
+   "B": {
+    "n": 48,
+    "diffs": {
+     "SOV": 0.1036,
+     "CASE": 0.0043,
+     "ARTICLE": -0.0167,
+     "INDOEUROPEAN": -0.0517
+    },
+    "maxAdjustedP_forSOV": 0.0013
+   },
+   "window": {
+    "n": 52,
+    "diffs": {
+     "SOV": 0.1248,
+     "CASE": -0.0047,
+     "ARTICLE": -0.0228,
+     "INDOEUROPEAN": -0.1248
+    },
+    "maxAdjustedP_forSOV": 0.0027
+   }
+  },
+  "CAUSAL4": {}
+ },
+ "B5": {
+  "hdr": "872c6935489826989e45ddc4f9ed8b2c84b2c73d0e3ba5fc4f129009a3dc6f9f",
+  "byDay": {
+   "auc": 0.9108,
+   "lo": 0.8766,
+   "hi": 0.9271,
+   "nClusters": 41
+  },
+  "byForm": {
+   "auc": 0.9108,
+   "lo": 0.8864,
+   "hi": 0.9337,
+   "nClusters": 331
+  },
+  "nPairs": 600,
+  "loco": {
+   "kubuntu": {
+    "nDays": 37,
+    "pairs": 600,
+    "auc": 0.9217,
+    "lo": 0.8953,
+    "hi": 0.943,
+    "nClusters": 312,
+    "posCtl": 0.5,
+    "lenCtl": 0.5825,
+    "slenCtl": 0.5742,
+    "logn": 0.4833,
+    "mP": 0.7374,
+    "mN": 0.1662
+   },
+   "ubuntu": {
+    "nDays": 48,
+    "pairs": 600,
+    "auc": 0.9217,
+    "lo": 0.8978,
+    "hi": 0.9429,
+    "nClusters": 274,
+    "posCtl": 0.5,
+    "lenCtl": 0.5775,
+    "slenCtl": 0.5942,
+    "logn": 0.4825,
+    "mP": 0.7484,
+    "mN": 0.1805
+   },
+   "ubuntu-server": {
+    "nDays": 33,
+    "pairs": 600,
+    "auc": 0.925,
+    "lo": 0.9034,
+    "hi": 0.9457,
+    "nClusters": 320,
+    "posCtl": 0.5,
+    "lenCtl": 0.6042,
+    "slenCtl": 0.5733,
+    "logn": 0.455,
+    "mP": 0.7341,
+    "mN": 0.1609
+   },
+   "xubuntu": {
+    "nDays": 32,
+    "pairs": 600,
+    "auc": 0.9125,
+    "lo": 0.8842,
+    "hi": 0.938,
+    "nClusters": 315,
+    "posCtl": 0.5,
+    "lenCtl": 0.5717,
+    "slenCtl": 0.5658,
+    "logn": 0.4433,
+    "mP": 0.7531,
+    "mN": 0.164
+   }
+  },
+  "halves": [
+   0.9367,
+   0.931,
+   0.9333,
+   0.93,
+   0.9333,
+   0.9217,
+   0.9283,
+   0.9383,
+   0.9358,
+   0.9025,
+   0.9088,
+   0.92,
+   0.9255,
+   0.9253,
+   0.9252,
+   0.9231,
+   0.935,
+   0.8847,
+   0.9333,
+   0.915
+  ],
+  "halfRange": [
+   0.8847,
+   0.9383
+  ],
+  "verdict": "ROBUST"
+ },
+ "B6": {
+  "default": {
+   "udValid": 52,
+   "udMedLower": 0.5783,
+   "udPOS": 30,
+   "ircAuc": 0.9125
+  },
+  "cap1": {
+   "udValid": 49,
+   "udMedLower": 0.5636,
+   "udPOS": 21,
+   "ircAuc": 0.9319
+  },
+  "cap10": {
+   "udValid": 53,
+   "udMedLower": 0.587,
+   "udPOS": 29,
+   "ircAuc": 0.9217
+  },
+  "max300": {
+   "udValid": 52,
+   "udMedLower": 0.575,
+   "udPOS": 26,
+   "ircAuc": 0.9233
+  },
+  "max1200": {
+   "udValid": 52,
+   "udMedLower": 0.5639,
+   "udPOS": 29,
+   "ircAuc": 0.907
+  },
+  "min5": {
+   "udValid": 50,
+   "udMedLower": 0.596,
+   "udPOS": 27,
+   "ircAuc": 0.9308
+  },
+  "classPO": {
+   "udValid": 52,
+   "udMedLower": 0.5717,
+   "udPOS": 27,
+   "ircAuc": null
+  }
+ },
+ "B6verdict": "ROBUST"
+}

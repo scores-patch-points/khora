@@ -1,0 +1,782 @@
+{
+ "oc-irc-ubuntu-0406": {
+  "meta": {
+   "tokens": 282163,
+   "units": 32382,
+   "docs": 324,
+   "tokenisation": "word: lowercase NFC maximal runs of letters/marks/digits with inner apostrophes; every token holds a letter (pure numbers dropped); URLs ('://' or leading 'www.') dropped as chunks; no punctuation tokens."
+  },
+  "discover": {
+   "tokens": 59686,
+   "units": 7090,
+   "docs": 71,
+   "cells": {
+    "massAdd": {
+     "v": 0.8943,
+     "nullMean": 0.92733,
+     "nullSd": 0.00139,
+     "z": -23.69
+    },
+    "massExp": {
+     "v": 0.90926,
+     "nullMean": 0.93801,
+     "nullSd": 0.00103,
+     "z": -27.97
+    },
+    "attrPMI": {
+     "v": 0.71302,
+     "nullMean": 0.39936,
+     "nullSd": 0.00298,
+     "z": 105.25
+    },
+    "attrDecay": {
+     "v": 0.49934,
+     "nullMean": 0.11018,
+     "nullSd": 0.00438,
+     "z": 88.86
+    },
+    "voidShare": {
+     "v": 0.28614,
+     "nullMean": 0.40833,
+     "nullSd": 0.00121,
+     "z": -100.72
+    },
+    "voidRescue": {
+     "v": 0.08647,
+     "nullMean": 0.00981,
+     "nullSd": 0.00074,
+     "z": 102.92
+    },
+    "gravAlpha": {
+     "v": 0.51047,
+     "nullMean": -0.00191,
+     "nullSd": 0.03149,
+     "z": 16.27
+    },
+    "gravBeta": {
+     "v": -0.06025,
+     "nullMean": 0.01973,
+     "nullSd": 0.0218,
+     "z": -3.67
+    },
+    "gravAlphaSd": {
+     "v": 0.02937,
+     "nullMean": 0.05083,
+     "nullSd": 0.01576,
+     "z": -1.36
+    },
+    "affect": {
+     "v": 0.0702,
+     "nullMean": 0.04178,
+     "nullSd": 0.00276,
+     "z": 10.29
+    },
+    "affectAsym": {
+     "v": 0.12446,
+     "nullMean": 0.01446,
+     "nullSd": 0.07758,
+     "z": 1.42
+    }
+   },
+   "cpuMs": 193
+  },
+  "confirm": {
+   "tokens": 59240,
+   "units": 6887,
+   "docs": 69,
+   "cells": {
+    "massAdd": {
+     "v": 0.89786,
+     "nullMean": 0.93011,
+     "nullSd": 0.00127,
+     "z": -25.4
+    },
+    "massExp": {
+     "v": 0.90464,
+     "nullMean": 0.93826,
+     "nullSd": 0.00113,
+     "z": -29.85
+    },
+    "attrPMI": {
+     "v": 0.73027,
+     "nullMean": 0.40088,
+     "nullSd": 0.00292,
+     "z": 112.73
+    },
+    "attrDecay": {
+     "v": 0.49895,
+     "nullMean": 0.11621,
+     "nullSd": 0.00556,
+     "z": 68.84
+    },
+    "voidShare": {
+     "v": 0.28277,
+     "nullMean": 0.41207,
+     "nullSd": 0.00081,
+     "z": -158.83
+    },
+    "voidRescue": {
+     "v": 0.09113,
+     "nullMean": 0.01134,
+     "nullSd": 0.00124,
+     "z": 64.48
+    },
+    "gravAlpha": {
+     "v": 0.51673,
+     "nullMean": -0.01283,
+     "nullSd": 0.01977,
+     "z": 26.78
+    },
+    "gravBeta": {
+     "v": -0.06398,
+     "nullMean": 0.01054,
+     "nullSd": 0.02028,
+     "z": -3.67
+    },
+    "gravAlphaSd": {
+     "v": 0.05253,
+     "nullMean": 0.04385,
+     "nullSd": 0.00967,
+     "z": 0.9
+    },
+    "affect": {
+     "v": 0.05793,
+     "nullMean": 0.0357,
+     "nullSd": 0.00214,
+     "z": 10.36
+    },
+    "affectAsym": {
+     "v": 0.22349,
+     "nullMean": 0.04589,
+     "nullSd": 0.07607,
+     "z": 2.33
+    }
+   },
+   "cpuMs": 66
+  }
+ },
+ "oc-irc-kubuntu-0506": {
+  "meta": {
+   "tokens": 75407,
+   "units": 9489,
+   "docs": 94,
+   "tokenisation": "word: lowercase NFC maximal runs of letters/marks/digits with inner apostrophes; every token holds a letter (pure numbers dropped); URLs ('://' or leading 'www.') dropped as chunks; no punctuation tokens."
+  },
+  "discover": {
+   "tokens": 29939,
+   "units": 3838,
+   "docs": 38,
+   "cells": {
+    "massAdd": {
+     "v": 0.8977,
+     "nullMean": 0.92701,
+     "nullSd": 0.00227,
+     "z": -12.91
+    },
+    "massExp": {
+     "v": 0.90339,
+     "nullMean": 0.92756,
+     "nullSd": 0.00278,
+     "z": -8.7
+    },
+    "attrPMI": {
+     "v": 0.74869,
+     "nullMean": 0.43978,
+     "nullSd": 0.00301,
+     "z": 102.69
+    },
+    "attrDecay": {
+     "v": 0.44549,
+     "nullMean": 0.09715,
+     "nullSd": 0.00841,
+     "z": 41.42
+    },
+    "voidShare": {
+     "v": 0.28162,
+     "nullMean": 0.39359,
+     "nullSd": 0.00277,
+     "z": -40.42
+    },
+    "voidRescue": {
+     "v": 0.08816,
+     "nullMean": 0.01004,
+     "nullSd": 0.00128,
+     "z": 61.18
+    },
+    "gravAlpha": {
+     "v": 0.5351,
+     "nullMean": -0.0055,
+     "nullSd": 0.01766,
+     "z": 30.61
+    },
+    "gravBeta": {
+     "v": -0.0362,
+     "nullMean": 0.0356,
+     "nullSd": 0.03515,
+     "z": -2.04
+    },
+    "gravAlphaSd": {
+     "v": 0.04609,
+     "nullMean": 0.06548,
+     "nullSd": 0.01714,
+     "z": -1.13
+    },
+    "affect": {
+     "v": 0.07097,
+     "nullMean": 0.04837,
+     "nullSd": 0.00447,
+     "z": 5.06
+    },
+    "affectAsym": {
+     "v": 0.35385,
+     "nullMean": 0.01484,
+     "nullSd": 0.09737,
+     "z": 3.48
+    }
+   },
+   "cpuMs": 34
+  },
+  "confirm": {
+   "tokens": 45468,
+   "units": 5651,
+   "docs": 56,
+   "cells": {
+    "massAdd": {
+     "v": 0.89865,
+     "nullMean": 0.92833,
+     "nullSd": 0.00167,
+     "z": -17.81
+    },
+    "massExp": {
+     "v": 0.91945,
+     "nullMean": 0.94128,
+     "nullSd": 0.00112,
+     "z": -19.48
+    },
+    "attrPMI": {
+     "v": 0.7349,
+     "nullMean": 0.40367,
+     "nullSd": 0.00181,
+     "z": 183.41
+    },
+    "attrDecay": {
+     "v": 0.48822,
+     "nullMean": 0.11152,
+     "nullSd": 0.00449,
+     "z": 83.86
+    },
+    "voidShare": {
+     "v": 0.29197,
+     "nullMean": 0.41429,
+     "nullSd": 0.00178,
+     "z": -68.55
+    },
+    "voidRescue": {
+     "v": 0.09181,
+     "nullMean": 0.01042,
+     "nullSd": 0.00067,
+     "z": 122.1
+    },
+    "gravAlpha": {
+     "v": 0.49553,
+     "nullMean": -0.00766,
+     "nullSd": 0.02295,
+     "z": 21.93
+    },
+    "gravBeta": {
+     "v": -0.04602,
+     "nullMean": 0.01692,
+     "nullSd": 0.01638,
+     "z": -3.84
+    },
+    "gravAlphaSd": {
+     "v": 0.02618,
+     "nullMean": 0.05381,
+     "nullSd": 0.01873,
+     "z": -1.48
+    },
+    "affect": {
+     "v": 0.06892,
+     "nullMean": 0.04869,
+     "nullSd": 0.0034,
+     "z": 5.95
+    },
+    "affectAsym": {
+     "v": 0.10681,
+     "nullMean": -0.01043,
+     "nullSd": 0.07277,
+     "z": 1.61
+    }
+   },
+   "cpuMs": 52
+  }
+ },
+ "cd-e09-python": {
+  "meta": {
+   "tokens": 39342,
+   "units": 7462,
+   "docs": 26,
+   "tokenisation": "code tokens: maximal runs of letters/marks/digits/underscore, lowercased NFC, NOT split on camelCase or snake_case; numeric literals (token starting with a digit), unspaced-script characters and tokens > 64 characters dropped; operators and punctuation dropped; comment and string words kept; unit = physical source line with >= 1 token"
+  },
+  "discover": {
+   "tokens": 20778,
+   "units": 3900,
+   "docs": 13,
+   "cells": {
+    "massAdd": {
+     "v": 0.86861,
+     "nullMean": 0.88879,
+     "nullSd": 0.00382,
+     "z": -5.28
+    },
+    "massExp": {
+     "v": 0.73829,
+     "nullMean": 0.84301,
+     "nullSd": 0.00293,
+     "z": -35.71
+    },
+    "attrPMI": {
+     "v": 1.87978,
+     "nullMean": 0.98437,
+     "nullSd": 0.00467,
+     "z": 191.63
+    },
+    "attrDecay": {
+     "v": 0.24709,
+     "nullMean": 0.17733,
+     "nullSd": 0.00314,
+     "z": 22.25
+    },
+    "voidShare": {
+     "v": 0.15012,
+     "nullMean": 0.3116,
+     "nullSd": 0.004,
+     "z": -40.34
+    },
+    "voidRescue": {
+     "v": 0.22677,
+     "nullMean": 0.04307,
+     "nullSd": 0.00545,
+     "z": 33.69
+    },
+    "gravAlpha": {
+     "v": 0.53769,
+     "nullMean": -0.00055,
+     "nullSd": 0.03178,
+     "z": 16.93
+    },
+    "gravBeta": {
+     "v": -0.13875,
+     "nullMean": 0.05521,
+     "nullSd": 0.03332,
+     "z": -5.82
+    },
+    "gravAlphaSd": {
+     "v": 0.20479,
+     "nullMean": 0.0669,
+     "nullSd": 0.01941,
+     "z": 7.1
+    },
+    "affect": {
+     "v": 0.07397,
+     "nullMean": 0.08129,
+     "nullSd": 0.00415,
+     "z": -1.76
+    },
+    "affectAsym": {
+     "v": 0.24031,
+     "nullMean": -0.0089,
+     "nullSd": 0.04766,
+     "z": 5.23
+    }
+   },
+   "cpuMs": 27
+  },
+  "confirm": {
+   "tokens": 18564,
+   "units": 3562,
+   "docs": 13,
+   "cells": {
+    "massAdd": {
+     "v": 0.80108,
+     "nullMean": 0.8429,
+     "nullSd": 0.00199,
+     "z": -21.02
+    },
+    "massExp": {
+     "v": 0.6104,
+     "nullMean": 0.79014,
+     "nullSd": 0.00302,
+     "z": -59.54
+    },
+    "attrPMI": {
+     "v": 2.20818,
+     "nullMean": 1.09743,
+     "nullSd": 0.00534,
+     "z": 207.93
+    },
+    "attrDecay": {
+     "v": 0.21942,
+     "nullMean": 0.17851,
+     "nullSd": 0.0031,
+     "z": 13.2
+    },
+    "voidShare": {
+     "v": 0.12957,
+     "nullMean": 0.26914,
+     "nullSd": 0.00269,
+     "z": -51.85
+    },
+    "voidRescue": {
+     "v": 0.25488,
+     "nullMean": 0.05446,
+     "nullSd": 0.00439,
+     "z": 45.7
+    },
+    "gravAlpha": {
+     "v": 0.59835,
+     "nullMean": -0.01761,
+     "nullSd": 0.01851,
+     "z": 33.28
+    },
+    "gravBeta": {
+     "v": -0.13705,
+     "nullMean": 0.03405,
+     "nullSd": 0.02905,
+     "z": -5.89
+    },
+    "gravAlphaSd": {
+     "v": 0.25618,
+     "nullMean": 0.06031,
+     "nullSd": 0.01449,
+     "z": 13.52
+    },
+    "affect": {
+     "v": 0.12113,
+     "nullMean": 0.12446,
+     "nullSd": 0.0048,
+     "z": -0.69
+    },
+    "affectAsym": {
+     "v": 0.19626,
+     "nullMean": 0.00633,
+     "nullSd": 0.06307,
+     "z": 3.01
+    }
+   },
+   "cpuMs": 22
+  }
+ },
+ "ud-deu": {
+  "meta": {
+   "tokens": 24568,
+   "units": 1776,
+   "docs": 72,
+   "tokenisation": "ud-syntactic-words: CoNLL-U word lines (multiword-token ranges split into their words), UPOS PUNCT dropped, tokens without a letter dropped, lowercase NFC, spaces inside a form joined by _"
+  },
+  "discover": {
+   "tokens": 10871,
+   "units": 799,
+   "docs": 32,
+   "cells": {
+    "massAdd": {
+     "v": 0.94396,
+     "nullMean": 0.94649,
+     "nullSd": 0.00308,
+     "z": -0.82
+    },
+    "massExp": {
+     "v": 0.93844,
+     "nullMean": 0.95645,
+     "nullSd": 0.00235,
+     "z": -7.67
+    },
+    "attrPMI": {
+     "v": null,
+     "nullMean": null,
+     "nullSd": null,
+     "z": null
+    },
+    "attrDecay": {
+     "v": null,
+     "nullMean": null,
+     "nullSd": null,
+     "z": null
+    },
+    "voidShare": {
+     "v": 0.47534,
+     "nullMean": 0.52064,
+     "nullSd": 0.00319,
+     "z": -14.19
+    },
+    "voidRescue": {
+     "v": 0.03001,
+     "nullMean": 0.00231,
+     "nullSd": 0.00079,
+     "z": 34.99
+    },
+    "gravAlpha": {
+     "v": 0.32026,
+     "nullMean": -0.03317,
+     "nullSd": 0.04739,
+     "z": 7.46
+    },
+    "gravBeta": {
+     "v": -0.0596,
+     "nullMean": -0.00795,
+     "nullSd": 0.05894,
+     "z": -0.88
+    },
+    "gravAlphaSd": {
+     "v": 0.10664,
+     "nullMean": 0.11364,
+     "nullSd": 0.02716,
+     "z": -0.26
+    },
+    "affect": {
+     "v": 0.0676,
+     "nullMean": 0.03598,
+     "nullSd": 0.00616,
+     "z": 5.13
+    },
+    "affectAsym": {
+     "v": -0.41496,
+     "nullMean": -0.13011,
+     "nullSd": 0.28819,
+     "z": -0.99
+    }
+   },
+   "cpuMs": 11
+  },
+  "confirm": {
+   "tokens": 13697,
+   "units": 977,
+   "docs": 40,
+   "cells": {
+    "massAdd": {
+     "v": 0.94479,
+     "nullMean": 0.93965,
+     "nullSd": 0.00354,
+     "z": 1.45
+    },
+    "massExp": {
+     "v": 0.93005,
+     "nullMean": 0.95054,
+     "nullSd": 0.00285,
+     "z": -7.2
+    },
+    "attrPMI": {
+     "v": null,
+     "nullMean": 0.40143,
+     "nullSd": 0.00599,
+     "z": null
+    },
+    "attrDecay": {
+     "v": null,
+     "nullMean": 0.05268,
+     "nullSd": 0.01443,
+     "z": null
+    },
+    "voidShare": {
+     "v": 0.50048,
+     "nullMean": 0.53099,
+     "nullSd": 0.00125,
+     "z": -24.32
+    },
+    "voidRescue": {
+     "v": 0.02776,
+     "nullMean": 0.00372,
+     "nullSd": 0.00136,
+     "z": 17.63
+    },
+    "gravAlpha": {
+     "v": 0.3287,
+     "nullMean": -0.01522,
+     "nullSd": 0.03916,
+     "z": 8.78
+    },
+    "gravBeta": {
+     "v": 0.02084,
+     "nullMean": 0.0176,
+     "nullSd": 0.06852,
+     "z": 0.05
+    },
+    "gravAlphaSd": {
+     "v": 0.10305,
+     "nullMean": 0.0956,
+     "nullSd": 0.02301,
+     "z": 0.32
+    },
+    "affect": {
+     "v": 0.05778,
+     "nullMean": 0.02603,
+     "nullSd": 0.00594,
+     "z": 5.35
+    },
+    "affectAsym": {
+     "v": -0.53246,
+     "nullMean": -0.07863,
+     "nullSd": 0.39367,
+     "z": -1.15
+    }
+   },
+   "cpuMs": 12
+  }
+ },
+ "ud-eng": {
+  "meta": {
+   "tokens": 43098,
+   "units": 4015,
+   "docs": 162,
+   "tokenisation": "ud-syntactic-words: CoNLL-U word lines (multiword-token ranges split into their words), UPOS PUNCT dropped, tokens without a letter dropped, lowercase NFC, spaces inside a form joined by _"
+  },
+  "discover": {
+   "tokens": 19492,
+   "units": 1815,
+   "docs": 74,
+   "cells": {
+    "massAdd": {
+     "v": 0.92852,
+     "nullMean": 0.93032,
+     "nullSd": 0.00325,
+     "z": -0.56
+    },
+    "massExp": {
+     "v": 0.93531,
+     "nullMean": 0.94618,
+     "nullSd": 0.0015,
+     "z": -7.23
+    },
+    "attrPMI": {
+     "v": 0.70002,
+     "nullMean": 0.41271,
+     "nullSd": 0.004,
+     "z": 71.82
+    },
+    "attrDecay": {
+     "v": 0.46735,
+     "nullMean": 0.07771,
+     "nullSd": 0.01088,
+     "z": 35.81
+    },
+    "voidShare": {
+     "v": 0.35089,
+     "nullMean": 0.45453,
+     "nullSd": 0.00302,
+     "z": -34.28
+    },
+    "voidRescue": {
+     "v": 0.09386,
+     "nullMean": 0.01121,
+     "nullSd": 0.00213,
+     "z": 38.89
+    },
+    "gravAlpha": {
+     "v": 0.53323,
+     "nullMean": 0.00739,
+     "nullSd": 0.02504,
+     "z": 21
+    },
+    "gravBeta": {
+     "v": -0.04171,
+     "nullMean": 0.02536,
+     "nullSd": 0.0418,
+     "z": -1.6
+    },
+    "gravAlphaSd": {
+     "v": 0.10113,
+     "nullMean": 0.08989,
+     "nullSd": 0.01403,
+     "z": 0.8
+    },
+    "affect": {
+     "v": 0.07439,
+     "nullMean": 0.05176,
+     "nullSd": 0.0051,
+     "z": 4.44
+    },
+    "affectAsym": {
+     "v": 0.26769,
+     "nullMean": -0.04632,
+     "nullSd": 0.11134,
+     "z": 2.82
+    }
+   },
+   "cpuMs": 22
+  },
+  "confirm": {
+   "tokens": 23606,
+   "units": 2200,
+   "docs": 88,
+   "cells": {
+    "massAdd": {
+     "v": 0.92553,
+     "nullMean": 0.93119,
+     "nullSd": 0.00312,
+     "z": -1.81
+    },
+    "massExp": {
+     "v": 0.9328,
+     "nullMean": 0.94536,
+     "nullSd": 0.00179,
+     "z": -7.03
+    },
+    "attrPMI": {
+     "v": 0.71741,
+     "nullMean": 0.41857,
+     "nullSd": 0.00688,
+     "z": 43.45
+    },
+    "attrDecay": {
+     "v": 0.46759,
+     "nullMean": 0.08863,
+     "nullSd": 0.01246,
+     "z": 30.42
+    },
+    "voidShare": {
+     "v": 0.35736,
+     "nullMean": 0.46531,
+     "nullSd": 0.00195,
+     "z": -55.4
+    },
+    "voidRescue": {
+     "v": 0.09546,
+     "nullMean": 0.01026,
+     "nullSd": 0.00224,
+     "z": 38.09
+    },
+    "gravAlpha": {
+     "v": 0.47202,
+     "nullMean": 0.0065,
+     "nullSd": 0.03007,
+     "z": 15.48
+    },
+    "gravBeta": {
+     "v": -0.08747,
+     "nullMean": 0.05338,
+     "nullSd": 0.04848,
+     "z": -2.91
+    },
+    "gravAlphaSd": {
+     "v": 0.05028,
+     "nullMean": 0.08179,
+     "nullSd": 0.01412,
+     "z": -2.23
+    },
+    "affect": {
+     "v": 0.08031,
+     "nullMean": 0.05003,
+     "nullSd": 0.00328,
+     "z": 9.23
+    },
+    "affectAsym": {
+     "v": 0.17542,
+     "nullMean": 0.06739,
+     "nullSd": 0.1017,
+     "z": 1.06
+    }
+   },
+   "cpuMs": 25
+  }
+ }
+}

@@ -1,0 +1,225 @@
+// bridge-floor.test.mjs — rung 4 (the floor) must be a guarantee: bounded, cancellable, steppable-down,
+// honest about errors, and correct about WHICH thing is on 11434 (khora's channel, not Ollama).
+// All upstreams are fake loopback servers; nothing touches ~/.heimdall or a real Ollama.
+import test from "node:test";
+import assert from "node:assert/strict";
+import { serve, ollamaUp, startBridge, post, sleep } from "./bridge-testkit.mjs";
+import { normalizeOllamaHost, probeFloor } from "./floor.js";
+
+const chat = (base, over = {}, headers = {}) => post(base, "/api/chat", { model: "nomatch:1b", stream: true, messages: [{ role: "user", content: "hi" }], ...over }, headers);
+
+/* ---- 1. pipeUpstream: bounded, cancellable, headers forwarded, errors are errors ---- */
+
+test("floor: a hung upstream is cut at the first-byte bound and the upstream connection is closed", async (t) => {
+  let upClosed = false;
+  const up = await serve((req) => { req.on("close", () => { upClosed = true; }); /* never answers */ });
+  t.after(up.close);
+  const b = await startBridge({ upstream: up.base, upstreamFirstByteMs: 300 });
+  t.after(b.close);
+  const t0 = Date.now();
+  const r = await chat(b.base);
+  assert.equal(r.status, 502);
+  assert.ok(Date.now() - t0 < 3000, "bounded, not forever");
+  await sleep(100);
+  assert.equal(upClosed, true, "the abandoned upstream connection was released");
+});
+
+test("floor: client disconnect aborts the upstream call", async (t) => {
+  let upClosed = false;
+  const up = await serve((req, res) => { req.on("close", () => { upClosed = true; }); res.writeHead(200, { "content-type": "application/x-ndjson" }); res.write('{"message":{"content":"a"},"done":false}\n'); });
+  t.after(up.close);
+  const b = await startBridge({ upstream: up.base });
+  t.after(b.close);
+  const ac = new AbortController();
+  const resp = await fetch(b.base + "/api/chat", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ model: "nomatch:1b", stream: true, messages: [{ role: "user", content: "hi" }] }), signal: ac.signal });
+  const reader = resp.body.getReader();
+  await reader.read();
+  ac.abort();
+  await sleep(300);
+  assert.equal(upClosed, true, "upstream saw the cancellation");
+});
+
+test("floor: retry-after, x-queue-position and x-heimdall-* upstream headers are forwarded", async (t) => {
+  const up = await serve((req, res) => { res.writeHead(429, { "content-type": "application/json", "retry-after": "7", "x-queue-position": "3", "x-heimdall-channel": "khora", "x-secret-other": "no" }); res.end('{"error":"busy"}'); });
+  t.after(up.close);
+  const b = await startBridge({ upstream: up.base });
+  t.after(b.close);
+  const r = await chat(b.base, { stream: false });
+  assert.equal(r.status, 429, "the only upstream's answer is relayed");
+  assert.equal(r.headers.get("retry-after"), "7");
+  assert.equal(r.headers.get("x-queue-position"), "3");
+  assert.equal(r.headers.get("x-heimdall-channel"), "khora");
+  assert.equal(r.headers.get("x-secret-other"), null, "only the named headers ride through");
+});
+
+test("floor: an upstream that dies mid-stream ends the response as an ERROR, never a clean EOF", async (t) => {
+  const up = await serve((req, res) => { res.writeHead(200, { "content-type": "application/x-ndjson" }); res.write('{"message":{"content":"par"},"done":false}\n'); setTimeout(() => res.socket.destroy(), 50); });
+  t.after(up.close);
+  const b = await startBridge({ upstream: up.base });
+  t.after(b.close);
+  let text = null, threw = false;
+  try { const r = await chat(b.base); text = await r.text(); } catch { threw = true; }
+  assert.ok(threw || /"error"/.test(text), "the caller can tell the answer was truncated: " + JSON.stringify(text));
+});
+
+test("floor: a dead upstream answers in the caller's own error shape (/api, /v1 OpenAI, /v1/messages Anthropic)", async (t) => {
+  const b = await startBridge({ upstream: "http://127.0.0.1:1" });
+  t.after(b.close);
+  const plain = await (await post(b.base, "/api/chat", { model: "nomatch:1b", messages: [{ role: "user", content: "hi" }] })).json();
+  assert.equal(typeof plain.error, "string");
+  const oa = await post(b.base, "/v1/embeddings", { model: "nomatch:1b", input: "x" });
+  assert.equal(oa.status, 502);
+  const oaj = await oa.json();
+  assert.equal(typeof oaj.error.message, "string");
+  assert.ok(oaj.error.type);
+  const an = await post(b.base, "/v1/messages", { model: "nomatch:1b", max_tokens: 5, messages: [{ role: "user", content: "hi" }] });
+  assert.equal(an.status, 502);
+  const anj = await an.json();
+  assert.equal(anj.type, "error");
+  assert.equal(typeof anj.error.message, "string");
+  assert.ok(anj.error.type);
+});
+
+/* ---- 2. step-down from rung 4 ---- */
+
+for (const status of [502, 429, 403, 508]) {
+  test(`floor: upstream answering ${status} before any byte steps down to the next upstream, counted + ledgered`, async (t) => {
+    const bad = await serve((req, res) => { res.writeHead(status, { "content-type": "application/json" }); res.end('{"error":"no"}'); });
+    const good = await ollamaUp("second-ok");
+    t.after(bad.close); t.after(good.close);
+    const b = await startBridge({ upstream: bad.base, upstreams: [bad.base, good.base] });
+    t.after(b.close);
+    const r = await chat(b.base, { stream: false });
+    assert.equal(r.status, 200);
+    assert.match(await r.text(), /second-ok/);
+    assert.equal(b.bridge.stats.fellThrough, 1);
+    const led = (await (await fetch(b.base + "/api/ledger")).json()).entries;
+    assert.ok(led.some((e) => e.reason === "upstream-stepdown"), JSON.stringify(led));
+  });
+}
+
+test("floor: an upstream that times out before any byte steps down; a refused connection does too", async (t) => {
+  const hang = await serve(() => {});
+  const good = await ollamaUp("third-ok");
+  t.after(hang.close); t.after(good.close);
+  const b = await startBridge({ upstream: hang.base, upstreams: [hang.base, "http://127.0.0.1:1", good.base], upstreamFirstByteMs: 250 });
+  t.after(b.close);
+  const r = await chat(b.base);
+  assert.equal(r.status, 200);
+  assert.match(await r.text(), /third-ok/);
+  assert.equal(b.bridge.stats.fellThrough, 1, "one drop for the request, however many upstreams were skipped");
+});
+
+test("floor: after bytes were written the request is never retried on another upstream", async (t) => {
+  const first = await serve((req, res) => { res.writeHead(200, { "content-type": "application/x-ndjson" }); res.write('{"message":{"content":"par"},"done":false}\n'); setTimeout(() => res.socket.destroy(), 30); });
+  const second = await ollamaUp("must-not-be-called");
+  t.after(first.close); t.after(second.close);
+  const b = await startBridge({ upstream: first.base, upstreams: [first.base, second.base] });
+  t.after(b.close);
+  try { await (await chat(b.base)).text(); } catch {}
+  await sleep(100);
+  assert.equal(second.hits.filter((h) => h.url === "/api/chat").length, 0);
+});
+
+/* ---- 3. which port is the floor ---- */
+
+test("floor: OLLAMA_HOST spellings normalise to a base URL", () => {
+  assert.equal(normalizeOllamaHost(":11435"), "http://127.0.0.1:11435");
+  assert.equal(normalizeOllamaHost("11435"), "http://127.0.0.1:11435");
+  assert.equal(normalizeOllamaHost("0.0.0.0:11435"), "http://127.0.0.1:11435");
+  assert.equal(normalizeOllamaHost("localhost:11435"), "http://localhost:11435");
+  assert.equal(normalizeOllamaHost("gpu-box:9000"), "http://gpu-box:9000");
+  assert.equal(normalizeOllamaHost("gpu-box"), "http://gpu-box:11434");
+  assert.equal(normalizeOllamaHost("http://10.0.0.5:11434/"), "http://10.0.0.5:11434");
+  assert.equal(normalizeOllamaHost("https://x.example"), "https://x.example");
+  assert.equal(normalizeOllamaHost(""), null);
+  assert.equal(normalizeOllamaHost(undefined), null);
+});
+
+test("floor: probeFloor tells khora's channel (x-heimdall-channel) from Ollama and warns when the channel is the only floor", async () => {
+  const mk = (map) => async (url) => {
+    const hit = Object.entries(map).find(([k]) => url.startsWith(k));
+    if (!hit) throw new Error("refused");
+    return { ok: true, status: 200, headers: { get: (h) => hit[1][h.toLowerCase()] ?? null } };
+  };
+  const only = await probeFloor({ primary: "http://127.0.0.1:11434", direct: "http://127.0.0.1:11435", fetchImpl: mk({ "http://127.0.0.1:11434": { "x-heimdall-channel": "khora" } }) });
+  assert.equal(only.primaryIsChannel, true);
+  assert.equal(only.directUp, false);
+  assert.deepEqual(only.upstreams, ["http://127.0.0.1:11434", "http://127.0.0.1:11435"], "a floor that missed the boot probe stays on the step-down list: the request decides, not one 2s probe");
+  assert.match(only.warnings.join("\n"), /only floor/i);
+  const both = await probeFloor({ primary: "http://127.0.0.1:11434", direct: "http://127.0.0.1:11435", fetchImpl: mk({ "http://127.0.0.1:11434": { "x-heimdall-channel": "khora" }, "http://127.0.0.1:11435": {} }) });
+  assert.deepEqual(both.upstreams, ["http://127.0.0.1:11434", "http://127.0.0.1:11435"]);
+  assert.deepEqual(both.warnings, []);
+  const plain = await probeFloor({ primary: "http://127.0.0.1:11434", direct: "http://127.0.0.1:11435", fetchImpl: mk({ "http://127.0.0.1:11434": {} }) });
+  assert.equal(plain.primaryIsChannel, false);
+  assert.deepEqual(plain.warnings, []);
+});
+
+test("floor: a boot probe that finds NOTHING up still keeps both configured floors (the possibility layer is never dropped by a transient miss)", async () => {
+  const none = await probeFloor({ primary: "http://127.0.0.1:11434", direct: "http://127.0.0.1:11435", fetchImpl: async () => { throw new Error("busy"); } });
+  assert.deepEqual(none.upstreams, ["http://127.0.0.1:11434", "http://127.0.0.1:11435"]);
+  assert.match(none.warnings.join("\n"), /no floor answered/i, "still warns, loudly");
+  const solo = await probeFloor({ primary: "http://127.0.0.1:11434", fetchImpl: async () => { throw new Error("busy"); } });
+  assert.deepEqual(solo.upstreams, ["http://127.0.0.1:11434"], "no direct configured: just the primary");
+});
+
+/* ---- 4. /v1/messages through a channel ---- */
+
+const channelUp = (onChat) => serve((req, res, body) => {
+  const H = { "x-heimdall-channel": "khora" };
+  if (req.url === "/api/version") { res.writeHead(200, { "content-type": "application/json", ...H }); return res.end('{"version":"x"}'); }
+  if (req.url === "/v1/chat/completions") return onChat(JSON.parse(body), res, H);
+  res.writeHead(404, { "content-type": "application/json", ...H }); res.end('{"error":"404 page not found"}');
+});
+
+test("floor: /v1/messages through a channel is translated to /v1/chat/completions and back (non-stream)", async (t) => {
+  let seen = null;
+  const up = await channelUp((body, res, H) => { seen = body; res.writeHead(200, { "content-type": "application/json", ...H }); res.end(JSON.stringify({ id: "c1", model: body.model, choices: [{ index: 0, message: { role: "assistant", content: "hello there" }, finish_reason: "stop" }], usage: { prompt_tokens: 11, completion_tokens: 3 } })); });
+  t.after(up.close);
+  const b = await startBridge({ upstream: up.base });
+  t.after(b.close);
+  const r = await post(b.base, "/v1/messages", { model: "llama3.2:3b", system: "be brief", max_tokens: 50, temperature: 0.2, messages: [{ role: "user", content: [{ type: "text", text: "hi" }] }] });
+  assert.equal(r.status, 200);
+  const j = await r.json();
+  assert.equal(j.type, "message");
+  assert.equal(j.role, "assistant");
+  assert.equal(j.content[0].text, "hello there");
+  assert.equal(j.stop_reason, "end_turn");
+  assert.equal(j.usage.input_tokens, 11);
+  assert.equal(j.usage.output_tokens, 3);
+  assert.equal(seen.messages[0].role, "system");
+  assert.equal(seen.messages[0].content, "be brief");
+  assert.equal(seen.messages[1].content, "hi");
+  assert.equal(seen.max_tokens, 50);
+  assert.equal(seen.stream, false);
+});
+
+test("floor: /v1/messages through a channel streams Anthropic events from OpenAI SSE", async (t) => {
+  const up = await channelUp((body, res, H) => {
+    assert.equal(body.stream, true);
+    res.writeHead(200, { "content-type": "text/event-stream", ...H });
+    for (const w of ["He", "llo"]) res.write(`data: ${JSON.stringify({ choices: [{ delta: { content: w } }] })}\n\n`);
+    res.write(`data: ${JSON.stringify({ choices: [{ delta: {}, finish_reason: "length" }], usage: { prompt_tokens: 5, completion_tokens: 2 } })}\n\n`);
+    res.end("data: [DONE]\n\n");
+  });
+  t.after(up.close);
+  const b = await startBridge({ upstream: up.base });
+  t.after(b.close);
+  const r = await post(b.base, "/v1/messages", { model: "llama3.2:3b", stream: true, max_tokens: 9, messages: [{ role: "user", content: "hi" }] });
+  assert.equal(r.status, 200);
+  const text = await r.text();
+  const events = [...text.matchAll(/^event: (\w+)\ndata: (.*)$/gm)].map((m) => ({ e: m[1], d: JSON.parse(m[2]) }));
+  assert.deepEqual(events.map((x) => x.e).filter((e, i, a) => a.indexOf(e) === i), ["message_start", "content_block_start", "content_block_delta", "content_block_stop", "message_delta", "message_stop"]);
+  assert.equal(events.filter((x) => x.e === "content_block_delta").map((x) => x.d.delta.text).join(""), "Hello");
+  assert.equal(events.find((x) => x.e === "message_delta").d.delta.stop_reason, "max_tokens");
+});
+
+test("floor: /v1/messages to a NON-channel upstream is piped raw (it may speak the Anthropic wire itself)", async (t) => {
+  const up = await serve((req, res) => { res.writeHead(200, { "content-type": "application/json" }); res.end('{"type":"message","content":[{"type":"text","text":"native"}]}'); });
+  t.after(up.close);
+  const b = await startBridge({ upstream: up.base });
+  t.after(b.close);
+  const j = await (await post(b.base, "/v1/messages", { model: "x:1b", max_tokens: 5, messages: [{ role: "user", content: "hi" }] })).json();
+  assert.equal(j.content[0].text, "native");
+  assert.ok(up.hits.some((h) => h.url === "/v1/messages"));
+});

@@ -1,0 +1,226 @@
+@@@@ task fibonacci
+def fibonacci(n):
+    if n < 2:
+        return n
+    return fibonacci(n - 1) + fibonacci(n - 2)
+
+
+print(" ".join(str(fibonacci(i)) for i in range(11)))
+@@@@ task gcd
+def gcd(a, b):
+    if b == 0:
+        return a
+    return gcd(b, a % b)
+
+
+pairs = [(48, 18), (17, 5), (0, 9), (100, 75)]
+print(" ".join(str(gcd(a, b)) for a, b in pairs))
+@@@@ task binary_search
+def search_range(items, target, low, high):
+    if low > high:
+        return -1
+    mid = (low + high) // 2
+    if items[mid] == target:
+        return mid
+    if items[mid] < target:
+        return search_range(items, target, mid + 1, high)
+    return search_range(items, target, low, mid - 1)
+
+
+def binary_search(items, target):
+    return search_range(items, target, 0, len(items) - 1)
+
+
+data = [1, 3, 5, 7, 9, 11, 13]
+print(" ".join(str(binary_search(data, t)) for t in [7, 1, 13, 4]))
+@@@@ task quicksort
+def partition(items, low, high):
+    pivot = items[high]
+    i = low - 1
+    for j in range(low, high):
+        if items[j] <= pivot:
+            i += 1
+            items[i], items[j] = items[j], items[i]
+    items[i + 1], items[high] = items[high], items[i + 1]
+    return i + 1
+
+
+def quicksort(items, low, high):
+    if low < high:
+        p = partition(items, low, high)
+        quicksort(items, low, p - 1)
+        quicksort(items, p + 1, high)
+
+
+data = [5, 2, 9, 1, 5, 6, 0, 3]
+quicksort(data, 0, len(data) - 1)
+print(" ".join(str(x) for x in data))
+@@@@ task merge_sort
+def merge(left, right):
+    result = []
+    i = 0
+    j = 0
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    result.extend(left[i:])
+    result.extend(right[j:])
+    return result
+
+
+def merge_sort(items):
+    if len(items) <= 1:
+        return items
+    mid = len(items) // 2
+    return merge(merge_sort(items[:mid]), merge_sort(items[mid:]))
+
+
+print(" ".join(str(x) for x in merge_sort([38, 27, 43, 3, 9, 82, 10])))
+@@@@ task factorial
+def factorial(n):
+    if n <= 1:
+        return 1
+    return n * factorial(n - 1)
+
+
+print(" ".join(str(factorial(i)) for i in range(11)))
+@@@@ task palindrome
+def normalize(text):
+    return "".join(ch.lower() for ch in text if ch.isalnum())
+
+
+def reverse_text(text):
+    out = ""
+    for ch in text:
+        out = ch + out
+    return out
+
+
+def is_palindrome(text):
+    cleaned = normalize(text)
+    return cleaned == reverse_text(cleaned)
+
+
+samples = ["A man, a plan, a canal: Panama", "hello", "Was it a car or a cat I saw?"]
+print(" ".join(str(is_palindrome(s)).lower() for s in samples))
+@@@@ task word_count
+def split_words(text):
+    return text.split(" ")
+
+
+def count_words(text):
+    counts = {}
+    for word in split_words(text):
+        counts[word] = counts.get(word, 0) + 1
+    return counts
+
+
+counts = count_words("the quick brown fox jumps over the lazy dog the end")
+print(" ".join(w + "=" + str(counts[w]) for w in sorted(counts)))
+@@@@ task fizzbuzz
+def is_divisible(n, d):
+    return n % d == 0
+
+
+def fizz_buzz(n):
+    if is_divisible(n, 15):
+        return "FizzBuzz"
+    if is_divisible(n, 3):
+        return "Fizz"
+    if is_divisible(n, 5):
+        return "Buzz"
+    return str(n)
+
+
+print(" ".join(fizz_buzz(i) for i in range(1, 16)))
+@@@@ task linked_list
+class Node:
+    def __init__(self, value, next_node=None):
+        self.value = value
+        self.next = next_node
+
+
+def reverse_list(node, previous=None):
+    if node is None:
+        return previous
+    following = node.next
+    node.next = previous
+    return reverse_list(following, node)
+
+
+def to_array(node):
+    values = []
+    while node is not None:
+        values.append(node.value)
+        node = node.next
+    return values
+
+
+head = None
+for v in [5, 4, 3, 2, 1]:
+    head = Node(v, head)
+print(" ".join(str(v) for v in to_array(reverse_list(head))))
+@@@@ task stack
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def push(self, value):
+        self.items.append(value)
+
+    def is_empty(self):
+        return len(self.items) == 0
+
+    def pop(self):
+        if self.is_empty():
+            raise IndexError("pop from empty stack")
+        value = self.items[-1]
+        del self.items[-1]
+        return value
+
+    def peek(self):
+        if self.is_empty():
+            raise IndexError("peek at empty stack")
+        return self.items[-1]
+
+
+stack = Stack()
+for v in [1, 2, 3]:
+    stack.push(v)
+out = [stack.peek(), stack.pop(), stack.pop(), str(stack.is_empty()).lower(), stack.pop(), str(stack.is_empty()).lower()]
+print(" ".join(str(x) for x in out))
+@@@@ task tree_traversal
+class TreeNode:
+    def __init__(self, value, left=None, right=None):
+        self.value = value
+        self.left = left
+        self.right = right
+
+
+def inorder(node, out):
+    if node is None:
+        return
+    inorder(node.left, out)
+    out.append(node.value)
+    inorder(node.right, out)
+
+
+def preorder(node, out):
+    if node is None:
+        return
+    out.append(node.value)
+    preorder(node.left, out)
+    preorder(node.right, out)
+
+
+root = TreeNode(4, TreeNode(2, TreeNode(1), TreeNode(3)), TreeNode(6, TreeNode(5), TreeNode(7)))
+visited = []
+inorder(root, visited)
+print(" ".join(str(v) for v in visited))
+visited = []
+preorder(root, visited)
+print(" ".join(str(v) for v in visited))

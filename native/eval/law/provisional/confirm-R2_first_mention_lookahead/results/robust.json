@@ -1,0 +1,184 @@
+{
+ "note": "post-hoc robustness; see header",
+ "n": 485,
+ "registeredAuc": 0.6845,
+ "ctlRegistered": {
+  "i": 0.4979,
+  "len": 0.4928,
+  "cl": 0.499,
+  "lc": 0.5103
+ },
+ "RA": {
+  "relControl": 0.6041,
+  "remControl": 0.3959,
+  "subsets": {
+   "equalRemBin": {
+    "n": 146,
+    "auc": 0.7226,
+    "ci": [
+     0.6815,
+     0.7637
+    ],
+    "dayCi": [
+     0.6786,
+     0.7583
+    ],
+    "relCtl": 0.5822
+   },
+   "relWithin05": {
+    "n": 62,
+    "auc": 0.7258,
+    "ci": [
+     0.6613,
+     0.7903
+    ],
+    "dayCi": [
+     0.6623,
+     0.8095
+    ],
+    "relCtl": 0.5645
+   },
+   "relWithin02": {
+    "n": 24,
+    "auc": 0.7292,
+    "ci": [
+     0.625,
+     0.8333
+    ],
+    "dayCi": [
+     0.6071,
+     0.875
+    ],
+    "relCtl": 0.5417
+   }
+  }
+ },
+ "RB": {
+  "INIT_F8": {
+   "auc": 0.5907,
+   "ci": [
+    0.5691,
+    0.6124
+   ],
+   "tpr_ge2": 0.066,
+   "fpr_ge2": 0.0206,
+   "tpr_ge1": 0.2907,
+   "fpr_ge1": 0.1093
+  },
+  "INIT_F32": {
+   "auc": 0.6443,
+   "ci": [
+    0.6206,
+    0.6711
+   ],
+   "tpr_ge2": 0.1814,
+   "fpr_ge2": 0.0392,
+   "tpr_ge1": 0.4186,
+   "fpr_ge1": 0.1443
+  },
+  "INIT_F128": {
+   "auc": 0.6639,
+   "ci": [
+    0.6402,
+    0.6866
+   ],
+   "tpr_ge2": 0.2268,
+   "fpr_ge2": 0.0598,
+   "tpr_ge1": 0.4763,
+   "fpr_ge1": 0.1649
+  },
+  "INIT_F512": {
+   "auc": 0.6711,
+   "ci": [
+    0.6464,
+    0.6938
+   ],
+   "tpr_ge2": 0.2433,
+   "fpr_ge2": 0.0722,
+   "tpr_ge1": 0.499,
+   "fpr_ge1": 0.1938
+  },
+  "INIT_Tinf": {
+   "auc": 0.6845,
+   "ci": [
+    0.6639,
+    0.7093
+   ],
+   "tpr_ge2": 0.2928,
+   "fpr_ge2": 0.1093,
+   "tpr_ge1": 0.5546,
+   "fpr_ge1": 0.2722
+  }
+ },
+ "RC": {
+  "firingNegatives": 53,
+  "negFormSpokeAtAll": 8,
+  "share": 0.1509,
+  "forms": [
+   "aaronmt:2:2",
+   "also:0:10",
+   "andrew:0:2",
+   "ard:0:2",
+   "banisterfiend:1:2",
+   "bcowan:2:3",
+   "because:0:3",
+   "because:0:4",
+   "btw:0:2",
+   "cbcclp:0:6",
+   "clouder:0:4",
+   "codecaine:1:2",
+   "cypher:0:4",
+   "damn:0:5",
+   "dextor:2:2",
+   "digikam:0:2",
+   "dontzap:0:4",
+   "dude:0:3",
+   "ejabberd:0:2",
+   "errr:0:2",
+   "evening:0:3",
+   "flash:0:3",
+   "g'night:0:2",
+   "grrr:0:2",
+   "haza:0:8",
+   "hwkiller:0:2",
+   "johnt:2:2",
+   "labthug:0:4",
+   "lastly:0:2",
+   "mac:0:3",
+   "mkay:0:2",
+   "mrstein:2:2",
+   "omg:0:3",
+   "paavi2:0:3",
+   "paranoid:0:2",
+   "pclcomp:0:2",
+   "poopiepants:0:2",
+   "result6:0:2",
+   "ryan:0:8",
+   "seven:0:2",
+   "sigh:0:3",
+   "spad:0:5",
+   "sweet:0:2",
+   "theres:0:5",
+   "totem:0:5",
+   "ummm:0:2",
+   "whats:0:5",
+   "whenever:0:2",
+   "whoever's:0:2",
+   "yay:0:6",
+   "yup:0:4",
+   "zacktu:2:2",
+   "zaphar:0:7"
+  ],
+  "cleanNegPairs": {
+   "n": 430,
+   "auc": 0.7058,
+   "ci": [
+    0.6814,
+    0.7302
+   ],
+   "tpr": 0.3093,
+   "fpr": 0.1047
+  },
+  "allNegSpokeShare": 0.1134
+ }
+}

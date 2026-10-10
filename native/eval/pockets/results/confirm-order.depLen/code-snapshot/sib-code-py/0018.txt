@@ -1,0 +1,213 @@
+"""CaseLink client logic, ported from case_link_scraper_DER_5.py's Playwright
+calls onto pyodide_transport.py's plain HTTP calls.
+
+Three different confidence levels live in this file, and they're kept visibly
+separate because they were established very differently:
+
+  CONFIRMED   — read live off caselink.nashville.gov this session (login page
+                HTML + login.js, fetched with no credentials needed).
+  PLAUSIBLE   — inferred from how the existing Playwright bot drives the site
+                (e.g. "click the first visible text input"), not yet confirmed
+                against the real authenticated HTML. Marked TODO-CONFIRM.
+  UNKNOWN     — the existing bot itself only gets there by DOM heuristics /
+                clicking popups (case-detail tabs, the defendant "MORE INFO"
+                popup); OBSERVATIONS.md and DEEP_SCRAPE_STATUS.md record that
+                even that mature Playwright code hasn't fully solved the tab
+                data yet. Do not guess these — use discover_tabs.js /
+                discover_postback.js against a real logged-in session first.
+
+Nothing in this file stores a username or password; they're passed in per
+call by the page and live only in memory for the duration of the session.
+"""
+from __future__ import annotations
+
+import json
+import re
+import time
+from pathlib import Path
+from bs4 import BeautifulSoup
+
+from pyodide_transport import CaseLinkTransport
+
+LOGIN_PATH = "/cgi-bin/webshell.asp"
+SEARCH_FRAME_PLACEHOLDER = "Enter Case Number or Name of Party"
+
+
+class LoginError(Exception):
+    pass
+
+
+def _browser_field(popup_blocked: bool = False) -> str:
+    """Mirrors login.js's `MainForm.BROWSER.value = code+'*'+name+'*'+version+'*'+os` then
+    `+= '*'+PopBlock` in xSubmit(). CONFIRMED against the live login.js source.
+    """
+    pop = "NO" if not popup_blocked else "YES"
+    return f"C*Chrome*128.0*Windows*{pop}"
+
+
+def build_login_fields(username: str, password: str) -> dict:
+    """CONFIRMED: transcribed directly from the live <form action="/cgi-bin/webshell.asp">
+    on caselink.nashville.gov's davlvplogin.html, plus what xSubmit() sets at submit time.
+    """
+    now_ms = int(time.time() * 1000)
+    today = time.strftime("%d")
+    return {
+        "GATEWAY": "GATEWAY",
+        "CGISCRIPT": "webshell.asp",
+        "FINDDEFKEY": "",
+        "XEVENT": "VERIFY",
+        "WEBIOHANDLE": f"{now_ms}{today}",  # x.getTime()+x.getDate(), not server-validated
+        "BROWSER": _browser_field(),
+        "MYPARENT": "px",
+        "APPID": "davlvp",
+        "WEBWORDSKEY": "SAMPLE",
+        "DEVPATH": "/INNOVISION/DEVELOPMENT/LVP.DEV",
+        "OPERCODE": username,
+        "PASSWD": password,
+    }
+
+
+async def login(transport: CaseLinkTransport, username: str, password: str) -> str:
+    """POST the login form. Returns the response HTML on success.
+
+    Success check follows the lesson paid for in README.md/project memory the
+    hard way: a failed login redirects to the public homepage and looks fine
+    by URL alone. The one reliable signal is the dedicated search frame's
+    placeholder text, so that's what's checked here — never just "did the
+    page change".
+    """
+    fields = build_login_fields(username, password)
+    resp = await transport.post(LOGIN_PATH, fields)
+    if SEARCH_FRAME_PLACEHOLDER not in resp.text:
+        # Show what actually came back rather than just "it didn't work" —
+        # a session-collision bounce, a bad-credential message, and a
+        # malformed-request error from our own form construction all look
+        # different here, and only one of those three is fixable by retyping
+        # a password.
+        snippet = re.sub(r"\s+", " ", resp.text).strip()[:300]
+        raise LoginError(
+            f"Login did not reach the search frame (HTTP {resp.status}). "
+            f"Response snippet: {snippet!r}"
+        )
+    return resp.text
+
+
+def _parse_form_fields(html: str, form_index: int = 0) -> tuple[str, dict]:
+    """Generic postback helper: read every current field's value out of a
+    <form> exactly as a real browser submit would send it (respecting
+    selected <option>s and checked boxes), so a caller only has to override
+    the one or two fields it actually wants to change. This is the safest
+    way to drive an unfamiliar postback form without knowing every hidden
+    bookkeeping field's purpose.
+
+    Returns (form_action_path, fields_dict).
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    forms = soup.find_all("form")
+    if not forms:
+        raise ValueError("no <form> found in response")
+    form = forms[form_index]
+    action = form.get("action") or LOGIN_PATH
+
+    fields: dict = {}
+    for inp in form.find_all("input"):
+        name = inp.get("name")
+        if not name:
+            continue
+        itype = (inp.get("type") or "text").lower()
+        if itype in ("checkbox", "radio"):
+            if inp.has_attr("checked"):
+                fields[name] = inp.get("value", "on")
+        elif itype == "submit":
+            continue  # only include if we explicitly click it
+        else:
+            fields[name] = inp.get("value", "")
+    for select in form.find_all("select"):
+        name = select.get("name")
+        if not name:
+            continue
+        chosen = select.find("option", selected=True) or select.find("option")
+        fields[name] = chosen.get("value", chosen.text) if chosen else ""
+    for ta in form.find_all("textarea"):
+        name = ta.get("name")
+        if name:
+            fields[name] = ta.text or ""
+    return action, fields
+
+
+def _first_visible_text_input_name(html: str) -> str | None:
+    """PLAUSIBLE / TODO-CONFIRM: the existing bot finds the search box by
+    grabbing "the first visible text input in the search frame" rather than a
+    known field name (case_link_scraper_DER_5.py's search_case()) — so there
+    may not be a stable name to hardcode. This mirrors that heuristic against
+    raw HTML: crude visibility check (not hidden, no display:none), first
+    match wins. Confirm the real name against a live page with
+    discover_postback.js before trusting this for anything unattended.
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    for inp in soup.find_all("input", {"type": "text"}):
+        style = (inp.get("style") or "").replace(" ", "").lower()
+        if "display:none" in style:
+            continue
+        name = inp.get("name")
+        if name:
+            return name
+    return None
+
+
+async def search_by_docket(transport: CaseLinkTransport, docket: str, last_html: str) -> str:
+    """PLAUSIBLE / TODO-CONFIRM. Fills the heuristically-located search box
+    and resubmits the current form. The real site may drive search through
+    PostBack() rather than a plain form submit (click_into_case() calls
+    PostBack('', 'WTKROW_'+row, ...) for row selection, so the search
+    button may work the same way) — if this returns the same page unchanged,
+    that's the likely cause. Use discover_postback.js to capture what
+    PostBack() actually sends and correct this function once you can see it.
+    """
+    field_name = _first_visible_text_input_name(last_html)
+    if not field_name:
+        raise ValueError("could not locate a search text field in the current page")
+    action, fields = _parse_form_fields(last_html)
+    fields[field_name] = docket
+    resp = await transport.post(action, fields)
+    return resp.text
+
+
+TAB_FIELD_MAP_PATH = Path(__file__).parent / "tab_field_map.json"
+
+
+def load_tab_field_map() -> dict:
+    return json.loads(TAB_FIELD_MAP_PATH.read_text())
+
+
+def slice_case_tabs(detail_html: str, tab_field_map: dict | None = None) -> dict:
+    """UNKNOWN / not yet safe to trust. Per OBSERVATIONS.md, clicking a tab
+    causes no new network request — page.evaluate showed all ten tabs' Gvals
+    arrays present at first load — so in principle one GET of the case-detail
+    page should carry everything needed to slice out all ten tabs by their
+    P_<n> field band, with no clicking. But only one band is actually
+    confirmed (Judgments: P_61/63/64/66, from a comment in
+    case_link_scraper_DER_5.py's parse_judgments) and the mature Playwright
+    bot's own deep_scrape.py still returns the *union* of every tab's fields
+    rather than each tab's own — meaning the remaining bands are still
+    unmapped even there. Fill out tab_field_map.json using discover_tabs.js
+    against a real case before trusting this function's output for anything
+    but the confirmed Judgments band.
+    """
+    tab_field_map = tab_field_map or load_tab_field_map()
+    soup = BeautifulSoup(detail_html, "html.parser")
+    all_p_fields = {}
+    for inp in soup.find_all("input"):
+        name = inp.get("name") or inp.get("id") or ""
+        if name.startswith("P_"):
+            all_p_fields[name] = inp.get("value", "")
+
+    result = {}
+    for tab_name, band in tab_field_map.items():
+        indices = band.get("p_indices") or []
+        if not indices:
+            result[tab_name] = {"status": "unmapped", "fields": {}}
+            continue
+        fields = {f"P_{i}": all_p_fields.get(f"P_{i}", "") for i in indices}
+        result[tab_name] = {"status": "confirmed" if band.get("confirmed") else "guessed", "fields": fields}
+    return result

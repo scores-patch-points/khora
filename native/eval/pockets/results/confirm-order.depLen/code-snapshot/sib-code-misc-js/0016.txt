@@ -1,0 +1,114 @@
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import { fileURLToPath } from "node:url";
+import { collect, probeStage, survey, gateProbe, fileProbe, httpProbe } from "../server/agenda-probes.mjs";
+import { createTrace, append, audit } from "../server/think.mjs";
+
+const fake = (id, op, result) => ({ id, op, kind: "gate", about: id, run: async () => result });
+
+test("a clear probe is a closed row; a void probe is open", async () => {
+  const r = await collect([
+    fake("a", "NUL", { ok: true, evidence: "a → clear" }),
+    fake("b", "SEG", { ok: false, detail: "b broke", evidence: "b → broke" }),
+  ]);
+  assert.deepEqual(r.observations.map((o) => [o.id, o.ok]), [["a", true], ["b", false]]);
+  assert.equal(r.observations[1].detail, "b broke");
+  assert.deepEqual(r.errors, []);
+});
+
+test("FALSIFY: a throwing probe is a named void (probe-error), never a crash or a silent skip", async () => {
+  const r = await collect([fake("boom", "CON", null), { id: "boom", op: "CON", about: "boom", run: async () => { throw new Error("instrument down"); } }]);
+  // the first fake (null result) is treated as not-ok, the second throws
+  const errRow = r.observations.find((o) => o.kind === "probe-error");
+  assert.ok(errRow, "the thrower is a probe-error void");
+  assert.match(errRow.detail, /instrument down/);
+  assert.equal(errRow.ok, false);
+  assert.deepEqual(r.errors, ["boom: instrument down"]);
+});
+
+test("FALSIFY: a null probe entry is a named error, never a crash", async () => {
+  const r = await collect([null, fake("a", "NUL", { ok: true })]);
+  assert.ok(r.errors.some((e) => /null or has no run/.test(e)));
+  assert.equal(r.observations.filter((o) => o.kind === "probe-error").length, 1);
+});
+
+test("FALSIFY: a probe with no run is a probe-error void, not passed as ok", async () => {
+  const r = await collect([{ id: "naked", op: "NUL" }]);
+  const row = r.observations.find((o) => o.id === "naked");
+  assert.equal(row.ok, false);
+  assert.equal(row.kind, "probe-error");
+});
+
+test("httpProbe releases the body so the socket is handed back", async () => {
+  let cancelled = 0;
+  const body = { cancel: async () => { cancelled += 1; } };
+  const okFetch = async () => ({ ok: true, status: 200, body });
+  const r = await httpProbe({ id: "up", url: "http://x", fetchImpl: okFetch }).run();
+  assert.equal(r.ok, true);
+  assert.equal(cancelled, 1);
+});
+
+test("observations stay in input order however fast the probes answer", async () => {
+  const slow = { id: "slow", op: "NUL", about: "slow", run: () => new Promise((res) => setTimeout(() => res({ ok: false, detail: "x" }), 25)) };
+  const fast = { id: "fast", op: "NUL", about: "fast", run: async () => ({ ok: true }) };
+  const r = await collect([slow, fast]);
+  assert.deepEqual(r.observations.map((o) => o.id), ["slow", "fast"]);
+});
+
+test("the SIG stage is grounded and passes the spine audit", async () => {
+  const r = await collect([fake("a", "NUL", { ok: true, evidence: "a → clear" }), fake("b", "SEG", { ok: false, detail: "b broke", evidence: "b → broke" })]);
+  const s = probeStage(r);
+  assert.equal(s.layer, "SIG");
+  assert.equal(s.survivor, "b");
+  assert.deepEqual(s.dissent, ["a: clear"]);
+  assert.ok(s.grounded.ethos.includes("a: a → clear"));
+  assert.equal(s.decision, "2 probes: 1 open, 1 clear");
+  const t = createTrace({ id: "sig" });
+  append(t, s);
+  assert.deepEqual(audit(t), []);
+});
+
+test("an all-clear survey still names what ran and audits clean", async () => {
+  const r = await collect([fake("a", "NUL", { ok: true, evidence: "a → clear" })]);
+  const s = probeStage(r);
+  assert.equal(s.survivor, null);
+  assert.deepEqual(s.dissent, ["a: clear"]);
+  const t = createTrace({ id: "sig" });
+  append(t, s);
+  assert.deepEqual(audit(t), []);
+});
+
+test("survey ties the look to the stage", async () => {
+  const r = await survey([fake("a", "NUL", { ok: false, detail: "nope" })]);
+  assert.equal(r.stage.layer, "SIG");
+  assert.equal(r.observations[0].id, "a");
+});
+
+test("fileProbe: absent is a void, present is clear, below the byte floor is a void", async () => {
+  const here = fileURLToPath(import.meta.url);
+  const absent = await fileProbe({ id: "gone", path: here + ".nope", op: "INS" }).run();
+  assert.equal(absent.ok, false);
+  assert.match(absent.detail, /absent/);
+  const present = await fileProbe({ id: "there", path: here, op: "INS", minBytes: 10 }).run();
+  assert.equal(present.ok, true);
+  const tooSmall = await fileProbe({ id: "floor", path: here, op: "INS", minBytes: 10_000_000 }).run();
+  assert.equal(tooSmall.ok, false);
+  assert.match(tooSmall.detail, /below the/);
+});
+
+test("gateProbe: exit 0 is clear, a non-zero exit is a void carrying what it said", async () => {
+  const good = await gateProbe({ id: "good", command: process.execPath, args: ["-e", "process.exit(0)"], op: "DEF" }).run();
+  assert.equal(good.ok, true);
+  const bad = await gateProbe({ id: "bad", command: process.execPath, args: ["-e", "console.error('boom'); process.exit(3)"], op: "DEF" }).run();
+  assert.equal(bad.ok, false);
+  assert.match(bad.detail, /boom/);
+});
+
+test("httpProbe answers against an injected fetch, never the network", async () => {
+  const okFetch = async () => ({ ok: true, status: 200 });
+  const down = async () => { throw new Error("ECONNREFUSED"); };
+  assert.equal((await httpProbe({ id: "up", url: "http://x", fetchImpl: okFetch }).run()).ok, true);
+  const r = await httpProbe({ id: "dn", url: "http://x", fetchImpl: down }).run();
+  assert.equal(r.ok, false);
+  assert.match(r.detail, /unreachable/);
+});

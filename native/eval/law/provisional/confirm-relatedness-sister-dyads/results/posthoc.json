@@ -1,0 +1,452 @@
+{
+ "headerSha256": "743e918e5202bde907fa0ab15f4eb7b818d12955251a5dc22df0982deaeb9226",
+ "cells": {
+  "FIRST-LEFT": {
+   "perCluster": {
+    "IWR": {
+     "n": 30,
+     "meanAuc": 0.6317,
+     "meanContrast": 0.0777,
+     "meanShufContrast": 0.0136,
+     "meanShufAuc": 0.5289,
+     "aucAtLeast60": 30,
+     "contrastAtLeast05": 29,
+     "dyads": [
+      "cat>fra auc 0.6549 contrast 0.0946 shufContrast 0.018",
+      "cat>glg auc 0.6475 contrast 0.0687 shufContrast 0.022",
+      "cat>ita auc 0.6213 contrast 0.0866 shufContrast 0.023",
+      "cat>por auc 0.6018 contrast 0.0519 shufContrast -0.002",
+      "cat>spa auc 0.641 contrast 0.0929 shufContrast 0.0182",
+      "fra>cat auc 0.6407 contrast 0.0888 shufContrast 0.0237",
+      "fra>glg auc 0.6456 contrast 0.0668 shufContrast 0.0108",
+      "fra>ita auc 0.6432 contrast 0.1085 shufContrast 0.0194",
+      "fra>por auc 0.6259 contrast 0.076 shufContrast 0.0077",
+      "fra>spa auc 0.6537 contrast 0.1056 shufContrast 0.0004",
+      "glg>cat auc 0.6202 contrast 0.0683 shufContrast 0.0115",
+      "glg>fra auc 0.6449 contrast 0.0846 shufContrast 0.0099",
+      "glg>ita auc 0.6044 contrast 0.0697 shufContrast 0.0259",
+      "glg>por auc 0.602 contrast 0.0521 shufContrast 0.0036",
+      "glg>spa auc 0.633 contrast 0.0849 shufContrast 0.0204",
+      "ita>cat auc 0.6189 contrast 0.067 shufContrast 0.0209",
+      "ita>fra auc 0.6486 contrast 0.0883 shufContrast 0.0089",
+      "ita>glg auc 0.6077 contrast 0.0289 shufContrast 0.0165",
+      "ita>por auc 0.6036 contrast 0.0537 shufContrast -0.0102",
+      "ita>spa auc 0.6268 contrast 0.0787 shufContrast 0",
+      "por>cat auc 0.626 contrast 0.0741 shufContrast 0.0203",
+      "por>fra auc 0.6468 contrast 0.0865 shufContrast 0.0171",
+      "por>glg auc 0.6334 contrast 0.0546 shufContrast 0.0253",
+      "por>ita auc 0.6169 contrast 0.0822 shufContrast 0.0186",
+      "por>spa auc 0.6294 contrast 0.0813 shufContrast 0.0113",
+      "spa>cat auc 0.6381 contrast 0.0862 shufContrast 0.0188",
+      "spa>fra auc 0.664 contrast 0.1037 shufContrast 0.0151",
+      "spa>glg auc 0.6532 contrast 0.0744 shufContrast 0.0118",
+      "spa>ita auc 0.6391 contrast 0.1044 shufContrast 0.024",
+      "spa>por auc 0.6181 contrast 0.0682 shufContrast -0.0032"
+     ]
+    },
+    "NGm": {
+     "n": 6,
+     "meanAuc": 0.6584,
+     "meanContrast": 0.078,
+     "meanShufContrast": 0.0179,
+     "meanShufAuc": 0.5487,
+     "aucAtLeast60": 6,
+     "contrastAtLeast05": 6,
+     "dyads": [
+      "dan>nob auc 0.6639 contrast 0.0782 shufContrast 0.0258",
+      "dan>swe auc 0.644 contrast 0.0644 shufContrast 0.0178",
+      "nob>dan auc 0.6399 contrast 0.0639 shufContrast 0.0213",
+      "nob>swe auc 0.6759 contrast 0.0963 shufContrast 0.015",
+      "swe>dan auc 0.6376 contrast 0.0616 shufContrast 0.0106",
+      "swe>nob auc 0.6892 contrast 0.1035 shufContrast 0.0167"
+     ]
+    },
+    "CWGm": {
+     "n": 6,
+     "meanAuc": 0.6093,
+     "meanContrast": 0.0388,
+     "meanShufContrast": 0.0039,
+     "meanShufAuc": 0.5224,
+     "aucAtLeast60": 3,
+     "contrastAtLeast05": 2,
+     "dyads": [
+      "afr>deu auc 0.5792 contrast 0.0338 shufContrast -0.0171",
+      "afr>nld auc 0.6006 contrast 0.0566 shufContrast 0.0099",
+      "deu>afr auc 0.6445 contrast 0.0223 shufContrast -0.0174",
+      "deu>nld auc 0.5682 contrast 0.0242 shufContrast 0.0207",
+      "nld>afr auc 0.6922 contrast 0.07 shufContrast 0.027",
+      "nld>deu auc 0.5713 contrast 0.0259 shufContrast 0.0005"
+     ]
+    },
+    "Hind": {
+     "n": 2,
+     "meanAuc": 0.63,
+     "meanContrast": 0.0682,
+     "meanShufContrast": 0.0198,
+     "meanShufAuc": 0.5419,
+     "aucAtLeast60": 2,
+     "contrastAtLeast05": 1,
+     "dyads": [
+      "hin>urd auc 0.6084 contrast 0.0499 shufContrast 0.0238",
+      "urd>hin auc 0.6516 contrast 0.0866 shufContrast 0.0158"
+     ]
+    }
+   },
+   "shuffled": {
+    "real": {
+     "mean": 0.0681,
+     "lo": 0.0568,
+     "hi": 0.0783,
+     "n": 14
+    },
+    "shuffledContrast": {
+     "mean": 0.0133,
+     "lo": 0.0084,
+     "hi": 0.0177,
+     "n": 14
+    },
+    "shuffledAucMean": 0.5313
+   },
+   "boundary": {
+    "ron": {
+     "donors": 6,
+     "meanAuc": 0.5656,
+     "ctrl": 0.5595,
+     "contrast": 0.0061,
+     "shufContrast": 0.002,
+     "pairs": 600
+    },
+    "eng": {
+     "donors": 6,
+     "meanAuc": 0.6043,
+     "ctrl": 0.5543,
+     "contrast": 0.05,
+     "shufContrast": 0.0165,
+     "pairs": 600
+    },
+    "isl": {
+     "donors": 3,
+     "meanAuc": 0.528,
+     "ctrl": 0.5285,
+     "contrast": -0.0005,
+     "shufContrast": 0.0126,
+     "pairs": 401
+    },
+    "fao": {
+     "donors": 3,
+     "meanAuc": 0.5069,
+     "ctrl": 0.5093,
+     "contrast": -0.0024,
+     "shufContrast": 0.0249,
+     "pairs": 135
+    },
+    "bel": {
+     "donors": 2,
+     "meanAuc": 0.5381,
+     "ctrl": 0.5277,
+     "contrast": 0.0104,
+     "shufContrast": -0.0064,
+     "pairs": 600
+    }
+   }
+  },
+  "FIRST-BOTH": {
+   "perCluster": {
+    "IWR": {
+     "n": 30,
+     "meanAuc": 0.6376,
+     "meanContrast": 0.0753,
+     "meanShufContrast": 0.0104,
+     "meanShufAuc": 0.5294,
+     "aucAtLeast60": 29,
+     "contrastAtLeast05": 29,
+     "dyads": [
+      "cat>fra auc 0.6407 contrast 0.0785 shufContrast 0.0235",
+      "cat>glg auc 0.6462 contrast 0.0626 shufContrast 0.0237",
+      "cat>ita auc 0.6197 contrast 0.0751 shufContrast 0.0171",
+      "cat>por auc 0.6293 contrast 0.0645 shufContrast -0.0038",
+      "cat>spa auc 0.6456 contrast 0.0872 shufContrast 0.0121",
+      "fra>cat auc 0.6228 contrast 0.0629 shufContrast 0.0134",
+      "fra>glg auc 0.6555 contrast 0.0719 shufContrast 0.0205",
+      "fra>ita auc 0.6411 contrast 0.0965 shufContrast 0.0081",
+      "fra>por auc 0.6415 contrast 0.0767 shufContrast 0.0123",
+      "fra>spa auc 0.6452 contrast 0.0868 shufContrast 0.0044",
+      "glg>cat auc 0.6549 contrast 0.095 shufContrast 0.0155",
+      "glg>fra auc 0.6554 contrast 0.0932 shufContrast 0.0059",
+      "glg>ita auc 0.6222 contrast 0.0776 shufContrast 0.0253",
+      "glg>por auc 0.6517 contrast 0.0869 shufContrast 0.0227",
+      "glg>spa auc 0.6581 contrast 0.0997 shufContrast 0.0201",
+      "ita>cat auc 0.6265 contrast 0.0666 shufContrast 0.0066",
+      "ita>fra auc 0.6511 contrast 0.0889 shufContrast 0.0074",
+      "ita>glg auc 0.6268 contrast 0.0432 shufContrast 0.0177",
+      "ita>por auc 0.6314 contrast 0.0666 shufContrast -0.0053",
+      "ita>spa auc 0.6423 contrast 0.0839 shufContrast -0.0158",
+      "por>cat auc 0.6201 contrast 0.0602 shufContrast 0.022",
+      "por>fra auc 0.6291 contrast 0.0669 shufContrast 0.009",
+      "por>glg auc 0.6455 contrast 0.0619 shufContrast 0.0203",
+      "por>ita auc 0.5952 contrast 0.0506 shufContrast 0.0161",
+      "por>spa auc 0.6474 contrast 0.089 shufContrast 0.0076",
+      "spa>cat auc 0.6319 contrast 0.072 shufContrast 0.008",
+      "spa>fra auc 0.6193 contrast 0.0571 shufContrast 0.0071",
+      "spa>glg auc 0.6572 contrast 0.0736 shufContrast -0.0094",
+      "spa>ita auc 0.6275 contrast 0.0829 shufContrast 0.0058",
+      "spa>por auc 0.6461 contrast 0.0813 shufContrast -0.0052"
+     ]
+    },
+    "NGm": {
+     "n": 6,
+     "meanAuc": 0.6627,
+     "meanContrast": 0.0884,
+     "meanShufContrast": 0.0264,
+     "meanShufAuc": 0.557,
+     "aucAtLeast60": 6,
+     "contrastAtLeast05": 6,
+     "dyads": [
+      "dan>nob auc 0.6602 contrast 0.085 shufContrast 0.0267",
+      "dan>swe auc 0.659 contrast 0.0869 shufContrast 0.0354",
+      "nob>dan auc 0.6497 contrast 0.074 shufContrast 0.0233",
+      "nob>swe auc 0.6684 contrast 0.0963 shufContrast 0.0311",
+      "swe>dan auc 0.6525 contrast 0.0768 shufContrast 0.0215",
+      "swe>nob auc 0.6866 contrast 0.1114 shufContrast 0.0207"
+     ]
+    },
+    "CWGm": {
+     "n": 6,
+     "meanAuc": 0.6228,
+     "meanContrast": 0.0493,
+     "meanShufContrast": 0.0073,
+     "meanShufAuc": 0.5291,
+     "aucAtLeast60": 3,
+     "contrastAtLeast05": 3,
+     "dyads": [
+      "afr>deu auc 0.5932 contrast 0.0514 shufContrast 0",
+      "afr>nld auc 0.6415 contrast 0.0935 shufContrast 0.0266",
+      "deu>afr auc 0.6746 contrast 0.0441 shufContrast 0.0004",
+      "deu>nld auc 0.5762 contrast 0.0282 shufContrast 0.0139",
+      "nld>afr auc 0.6912 contrast 0.0607 shufContrast 0.0027",
+      "nld>deu auc 0.56 contrast 0.0182 shufContrast 0.0005"
+     ]
+    },
+    "Hind": {
+     "n": 2,
+     "meanAuc": 0.6594,
+     "meanContrast": 0.1012,
+     "meanShufContrast": 0.0097,
+     "meanShufAuc": 0.5309,
+     "aucAtLeast60": 2,
+     "contrastAtLeast05": 2,
+     "dyads": [
+      "hin>urd auc 0.6611 contrast 0.1016 shufContrast 0.0136",
+      "urd>hin auc 0.6577 contrast 0.1008 shufContrast 0.0058"
+     ]
+    }
+   },
+   "shuffled": {
+    "real": {
+     "mean": 0.0763,
+     "lo": 0.0661,
+     "hi": 0.086,
+     "n": 14
+    },
+    "shuffledContrast": {
+     "mean": 0.0131,
+     "lo": 0.0085,
+     "hi": 0.0179,
+     "n": 14
+    },
+    "shuffledAucMean": 0.5332
+   },
+   "boundary": {
+    "ron": {
+     "donors": 6,
+     "meanAuc": 0.5541,
+     "ctrl": 0.5442,
+     "contrast": 0.0099,
+     "shufContrast": 0.0085,
+     "pairs": 600
+    },
+    "eng": {
+     "donors": 6,
+     "meanAuc": 0.5924,
+     "ctrl": 0.546,
+     "contrast": 0.0465,
+     "shufContrast": 0.015,
+     "pairs": 600
+    },
+    "isl": {
+     "donors": 3,
+     "meanAuc": 0.543,
+     "ctrl": 0.5279,
+     "contrast": 0.0151,
+     "shufContrast": 0.0231,
+     "pairs": 401
+    },
+    "fao": {
+     "donors": 3,
+     "meanAuc": 0.507,
+     "ctrl": 0.5161,
+     "contrast": -0.0091,
+     "shufContrast": 0.0078,
+     "pairs": 135
+    },
+    "bel": {
+     "donors": 2,
+     "meanAuc": 0.5373,
+     "ctrl": 0.5186,
+     "contrast": 0.0187,
+     "shufContrast": -0.0134,
+     "pairs": 600
+    }
+   }
+  },
+  "LATER-BOTH": {
+   "perCluster": {
+    "IWR": {
+     "n": 30,
+     "meanAuc": 0.5948,
+     "meanContrast": 0.0721,
+     "meanShufContrast": 0.0073,
+     "meanShufAuc": 0.5087,
+     "aucAtLeast60": 13,
+     "contrastAtLeast05": 24,
+     "dyads": [
+      "cat>fra auc 0.5917 contrast 0.0632 shufContrast -0.0009",
+      "cat>glg auc 0.6126 contrast 0.0766 shufContrast 0.0207",
+      "cat>ita auc 0.5645 contrast 0.0468 shufContrast 0.0145",
+      "cat>por auc 0.5719 contrast 0.0581 shufContrast 0.0178",
+      "cat>spa auc 0.6026 contrast 0.0794 shufContrast 0.0164",
+      "fra>cat auc 0.5799 contrast 0.0633 shufContrast 0.019",
+      "fra>glg auc 0.6101 contrast 0.0741 shufContrast 0.0048",
+      "fra>ita auc 0.577 contrast 0.0593 shufContrast -0.0001",
+      "fra>por auc 0.5331 contrast 0.0193 shufContrast -0.001",
+      "fra>spa auc 0.593 contrast 0.0698 shufContrast 0.0041",
+      "glg>cat auc 0.619 contrast 0.1024 shufContrast 0.0062",
+      "glg>fra auc 0.6245 contrast 0.096 shufContrast -0.0103",
+      "glg>ita auc 0.6395 contrast 0.1218 shufContrast 0.0224",
+      "glg>por auc 0.5917 contrast 0.0779 shufContrast 0.0068",
+      "glg>spa auc 0.6277 contrast 0.1045 shufContrast 0.0237",
+      "ita>cat auc 0.5753 contrast 0.0587 shufContrast 0.0188",
+      "ita>fra auc 0.5917 contrast 0.0632 shufContrast -0.0104",
+      "ita>glg auc 0.638 contrast 0.102 shufContrast -0.0035",
+      "ita>por auc 0.5502 contrast 0.0364 shufContrast 0.0157",
+      "ita>spa auc 0.6083 contrast 0.0851 shufContrast 0.0152",
+      "por>cat auc 0.562 contrast 0.0454 shufContrast -0.0004",
+      "por>fra auc 0.5593 contrast 0.0308 shufContrast -0.0093",
+      "por>glg auc 0.5937 contrast 0.0577 shufContrast -0.0117",
+      "por>ita auc 0.5544 contrast 0.0367 shufContrast 0.0159",
+      "por>spa auc 0.5876 contrast 0.0644 shufContrast 0.005",
+      "spa>cat auc 0.629 contrast 0.1124 shufContrast 0.0019",
+      "spa>fra auc 0.6102 contrast 0.0817 shufContrast -0.006",
+      "spa>glg auc 0.6516 contrast 0.1156 shufContrast 0.0191",
+      "spa>ita auc 0.6105 contrast 0.0928 shufContrast 0.0036",
+      "spa>por auc 0.582 contrast 0.0682 shufContrast 0.0212"
+     ]
+    },
+    "NGm": {
+     "n": 6,
+     "meanAuc": 0.6144,
+     "meanContrast": 0.0911,
+     "meanShufContrast": 0.0053,
+     "meanShufAuc": 0.5148,
+     "aucAtLeast60": 6,
+     "contrastAtLeast05": 6,
+     "dyads": [
+      "dan>nob auc 0.6011 contrast 0.081 shufContrast 0.0141",
+      "dan>swe auc 0.6126 contrast 0.0951 shufContrast 0.007",
+      "nob>dan auc 0.6233 contrast 0.0908 shufContrast 0.0143",
+      "nob>swe auc 0.6238 contrast 0.1063 shufContrast -0.003",
+      "swe>dan auc 0.6167 contrast 0.0842 shufContrast -0.0046",
+      "swe>nob auc 0.6092 contrast 0.0891 shufContrast 0.0039"
+     ]
+    },
+    "CWGm": {
+     "n": 6,
+     "meanAuc": 0.5939,
+     "meanContrast": 0.0592,
+     "meanShufContrast": 0.0036,
+     "meanShufAuc": 0.5088,
+     "aucAtLeast60": 1,
+     "contrastAtLeast05": 3,
+     "dyads": [
+      "afr>deu auc 0.5841 contrast 0.0562 shufContrast -0.0109",
+      "afr>nld auc 0.5991 contrast 0.0694 shufContrast 0.0207",
+      "deu>afr auc 0.593 contrast 0.0463 shufContrast 0.018",
+      "deu>nld auc 0.5791 contrast 0.0494 shufContrast -0.004",
+      "nld>afr auc 0.6353 contrast 0.0886 shufContrast -0.0008",
+      "nld>deu auc 0.5731 contrast 0.0452 shufContrast -0.0015"
+     ]
+    },
+    "Hind": {
+     "n": 2,
+     "meanAuc": 0.6049,
+     "meanContrast": 0.0916,
+     "meanShufContrast": -0.0047,
+     "meanShufAuc": 0.5024,
+     "aucAtLeast60": 1,
+     "contrastAtLeast05": 2,
+     "dyads": [
+      "hin>urd auc 0.6118 contrast 0.0909 shufContrast -0.009",
+      "urd>hin auc 0.598 contrast 0.0924 shufContrast -0.0005"
+     ]
+    }
+   },
+   "shuffled": {
+    "real": {
+     "mean": 0.0762,
+     "lo": 0.0682,
+     "hi": 0.084,
+     "n": 14
+    },
+    "shuffledContrast": {
+     "mean": 0.0044,
+     "lo": 0.0002,
+     "hi": 0.008,
+     "n": 14
+    },
+    "shuffledAucMean": 0.5093
+   },
+   "boundary": {
+    "ron": {
+     "donors": 6,
+     "meanAuc": 0.4987,
+     "ctrl": 0.5113,
+     "contrast": -0.0126,
+     "shufContrast": 0.0122,
+     "pairs": 277
+    },
+    "eng": {
+     "donors": 6,
+     "meanAuc": 0.5725,
+     "ctrl": 0.5197,
+     "contrast": 0.0528,
+     "shufContrast": 0.0193,
+     "pairs": 600
+    },
+    "isl": {
+     "donors": 3,
+     "meanAuc": 0.4836,
+     "ctrl": 0.5023,
+     "contrast": -0.0187,
+     "shufContrast": -0.007,
+     "pairs": 600
+    },
+    "fao": {
+     "donors": 3,
+     "meanAuc": 0.4929,
+     "ctrl": 0.5134,
+     "contrast": -0.0205,
+     "shufContrast": 0.0094,
+     "pairs": 577
+    },
+    "bel": {
+     "donors": 2,
+     "meanAuc": 0.5326,
+     "ctrl": 0.5192,
+     "contrast": 0.0134,
+     "shufContrast": -0.003,
+     "pairs": 600
+    }
+   }
+  }
+ }
+}

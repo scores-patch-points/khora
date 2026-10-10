@@ -1,0 +1,37 @@
+{
+ "status": "PASS (byte-identical except the wall-clock field `seconds`)",
+ "rows": [
+  {
+   "id": "ud-eng",
+   "bytesOriginal": 22292,
+   "bytesRerun": 22292,
+   "sha256OriginalWithoutSeconds": "5b5802dd20d2ffdea39a9c0e4febbc9649589e09704507852a563b90f663d0d6",
+   "sha256RerunWithoutSeconds": "5b5802dd20d2ffdea39a9c0e4febbc9649589e09704507852a563b90f663d0d6",
+   "identicalExceptSeconds": true,
+   "identicalIncludingSeconds": false
+  },
+  {
+   "id": "pl-frames",
+   "bytesOriginal": 22318,
+   "bytesRerun": 22319,
+   "sha256OriginalWithoutSeconds": "7cc2964aec8e0f3c22132a567014722c3b293522bbd7cb3fa1acf34e0fb643e3",
+   "sha256RerunWithoutSeconds": "7cc2964aec8e0f3c22132a567014722c3b293522bbd7cb3fa1acf34e0fb643e3",
+   "identicalExceptSeconds": true,
+   "identicalIncludingSeconds": false
+  },
+  {
+   "id": "oc-irc-kubuntu-0506",
+   "bytesOriginal": 24399,
+   "bytesRerun": 24400,
+   "sha256OriginalWithoutSeconds": "1d06c68894f3146427ff4029592784c3f4746428f68ba7f7e6f7542000b2a78e",
+   "sha256RerunWithoutSeconds": "1d06c68894f3146427ff4029592784c3f4746428f68ba7f7e6f7542000b2a78e",
+   "identicalExceptSeconds": true,
+   "identicalIncludingSeconds": false
+  }
+ ],
+ "runStderrTail": [
+  "oc-irc-kubuntu-0506: 75407 tokens, 10.8 s, 0 errors",
+  "pl-frames: 100182 tokens, 10.1 s, 0 errors",
+  "ud-eng: 43098 tokens, 4.8 s, 0 errors"
+ ]
+}

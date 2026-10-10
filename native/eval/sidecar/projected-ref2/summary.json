@@ -1,0 +1,36 @@
+{
+ "slice": {
+  "docs": 40,
+  "chromeDf": 0.5,
+  "in": "pilot-results-ref/sidecar.jsonl"
+ },
+ "before": {
+  "cast": 1285,
+  "capitalShare": 0.304,
+  "relations": 964,
+  "relBothEndsShare": 0.147
+ },
+ "after": {
+  "cast": 228,
+  "relations": 126,
+  "docsWith2Names": 32,
+  "chromeSurvivors": 0
+ },
+ "chromeExamples": [
+  "gutenberg ebook (3/3 01-literature-books)",
+  "project gutenberg (3/3 01-literature-books)",
+  "children (2/3 01-literature-books)",
+  "gutenberg (2/3 01-literature-books)",
+  "project gutenberg ebook (3/3 01-literature-books)",
+  "mechanics (2/3 02-encyclopedic)",
+  "description (2/3 02-encyclopedic)",
+  "law (3/3 02-encyclopedic)",
+  "matter (2/3 02-encyclopedic)",
+  "theory (2/3 02-encyclopedic)",
+  "related methods (2/3 05-academic-papers)",
+  "radau collocation (2/3 05-academic-papers)",
+  "discontinuous galerkin (2/3 05-academic-papers)",
+  "radau quadrature (2/3 05-academic-papers)"
+ ],
+ "verdict": "PASSING"
+}

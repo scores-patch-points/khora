@@ -1,0 +1,45 @@
+{
+ "variant": "FP3",
+ "rho": {
+  "FIRST-LEFT": {
+   "FP1": -0.1921,
+   "FP3": -0.1983
+  },
+  "FIRST-BOTH": {
+   "FP1": -0.1738,
+   "FP3": -0.1713
+  },
+  "LATER-BOTH": {
+   "FP1": -0.1952,
+   "FP3": -0.1934
+  }
+ },
+ "distCoef": {
+  "FIRST-LEFT": {
+   "est": -0.005,
+   "ci": [
+    -0.0098,
+    -0.0002
+   ]
+  },
+  "FIRST-BOTH": {
+   "est": -0.0028,
+   "ci": [
+    -0.011,
+    0.0045
+   ]
+  },
+  "LATER-BOTH": {
+   "est": -0.0072,
+   "ci": [
+    -0.0149,
+    -0.0008
+   ]
+  }
+ },
+ "sameGenusShrink": {
+  "FIRST-LEFT": 0.0891,
+  "FIRST-BOTH": 0.0466,
+  "LATER-BOTH": 0.1297
+ }
+}

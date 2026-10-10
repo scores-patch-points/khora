@@ -1,0 +1,1071 @@
+{
+ "n": 390,
+ "controls": [
+  "rank log10 tokens",
+  "rank mean unit length"
+ ],
+ "costClassNote": "C1 = one pass over x/ranks and positions or counts only; C2 = needs bigram/pair table; C3 = lag kernels/document structure. Assigned from the statistic statements, not timed (timing would put a clock in the output).",
+ "subsets": {
+  "all": {
+   "n": 390,
+   "top": [
+    {
+     "stat": "order.surprGrow",
+     "cost": "C2",
+     "n": 390,
+     "rawRho": -0.6201,
+     "partialRho": -0.5646,
+     "partialRho2": 0.3188
+    },
+    {
+     "stat": "order.entCurv",
+     "cost": "C1",
+     "n": 390,
+     "rawRho": 0.5809,
+     "partialRho": 0.5438,
+     "partialRho2": 0.2957
+    },
+    {
+     "stat": "burst.burstB",
+     "cost": "C3",
+     "n": 390,
+     "rawRho": -0.4876,
+     "partialRho": -0.4295,
+     "partialRho2": 0.1844
+    },
+    {
+     "stat": "phys.massExp",
+     "cost": "C3",
+     "n": 390,
+     "rawRho": 0.4709,
+     "partialRho": 0.4219,
+     "partialRho2": 0.178
+    },
+    {
+     "stat": "phys.attrPMI",
+     "cost": "C3",
+     "n": 355,
+     "rawRho": -0.4444,
+     "partialRho": -0.4098,
+     "partialRho2": 0.168
+    },
+    {
+     "stat": "order.initDev",
+     "cost": "C1",
+     "n": 390,
+     "rawRho": 0.3898,
+     "partialRho": 0.406,
+     "partialRho2": 0.1648
+    },
+    {
+     "stat": "para.tmplReuse",
+     "cost": "C2",
+     "n": 390,
+     "rawRho": -0.4754,
+     "partialRho": -0.3875,
+     "partialRho2": 0.1501
+    },
+    {
+     "stat": "freq.recurLen",
+     "cost": "C1",
+     "n": 389,
+     "rawRho": -0.4097,
+     "partialRho": -0.3852,
+     "partialRho2": 0.1483
+    },
+    {
+     "stat": "para.posPar",
+     "cost": "C2",
+     "n": 390,
+     "rawRho": -0.4663,
+     "partialRho": -0.3809,
+     "partialRho2": 0.145
+    },
+    {
+     "stat": "burst.burstBmid",
+     "cost": "C3",
+     "n": 355,
+     "rawRho": -0.4455,
+     "partialRho": -0.3749,
+     "partialRho2": 0.1406
+    },
+    {
+     "stat": "comp.sameR",
+     "cost": "C2",
+     "n": 390,
+     "rawRho": -0.4385,
+     "partialRho": -0.374,
+     "partialRho2": 0.1399
+    },
+    {
+     "stat": "para.prefixCopy",
+     "cost": "C2",
+     "n": 390,
+     "rawRho": -0.4459,
+     "partialRho": -0.3698,
+     "partialRho2": 0.1368
+    }
+   ],
+   "cheapestC1Top": [
+    {
+     "stat": "order.entCurv",
+     "cost": "C1",
+     "n": 390,
+     "rawRho": 0.5809,
+     "partialRho": 0.5438,
+     "partialRho2": 0.2957
+    },
+    {
+     "stat": "order.initDev",
+     "cost": "C1",
+     "n": 390,
+     "rawRho": 0.3898,
+     "partialRho": 0.406,
+     "partialRho2": 0.1648
+    },
+    {
+     "stat": "freq.recurLen",
+     "cost": "C1",
+     "n": 389,
+     "rawRho": -0.4097,
+     "partialRho": -0.3852,
+     "partialRho2": 0.1483
+    },
+    {
+     "stat": "freq.rankBinEnt",
+     "cost": "C1",
+     "n": 390,
+     "rawRho": 0.4042,
+     "partialRho": 0.3583,
+     "partialRho2": 0.1284
+    },
+    {
+     "stat": "order.finalDev",
+     "cost": "C1",
+     "n": 390,
+     "rawRho": 0.338,
+     "partialRho": 0.3463,
+     "partialRho2": 0.1199
+    },
+    {
+     "stat": "order.depLen",
+     "cost": "C1",
+     "n": 390,
+     "rawRho": 0.3437,
+     "partialRho": 0.3117,
+     "partialRho2": 0.0971
+    }
+   ]
+  },
+  "wordgrain": {
+   "n": 296,
+   "top": [
+    {
+     "stat": "order.depLen",
+     "cost": "C1",
+     "n": 296,
+     "rawRho": 0.4115,
+     "partialRho": 0.4448,
+     "partialRho2": 0.1978
+    },
+    {
+     "stat": "order.entCurv",
+     "cost": "C1",
+     "n": 296,
+     "rawRho": 0.5015,
+     "partialRho": 0.4198,
+     "partialRho2": 0.1762
+    },
+    {
+     "stat": "burst.burstB",
+     "cost": "C3",
+     "n": 296,
+     "rawRho": -0.3755,
+     "partialRho": -0.4068,
+     "partialRho2": 0.1655
+    },
+    {
+     "stat": "para.lcsLift",
+     "cost": "C2",
+     "n": 296,
+     "rawRho": -0.1654,
+     "partialRho": -0.3849,
+     "partialRho2": 0.1481
+    },
+    {
+     "stat": "phys.attrPMI",
+     "cost": "C3",
+     "n": 265,
+     "rawRho": -0.2801,
+     "partialRho": -0.3796,
+     "partialRho2": 0.1441
+    },
+    {
+     "stat": "para.suffixCopy",
+     "cost": "C2",
+     "n": 296,
+     "rawRho": -0.3429,
+     "partialRho": -0.3788,
+     "partialRho2": 0.1435
+    },
+    {
+     "stat": "para.posPar",
+     "cost": "C2",
+     "n": 296,
+     "rawRho": -0.4398,
+     "partialRho": -0.3687,
+     "partialRho2": 0.136
+    },
+    {
+     "stat": "burst.kerFar",
+     "cost": "C3",
+     "n": 296,
+     "rawRho": -0.1912,
+     "partialRho": -0.3685,
+     "partialRho2": 0.1358
+    },
+    {
+     "stat": "fig.fano",
+     "cost": "C2",
+     "n": 261,
+     "rawRho": -0.3865,
+     "partialRho": -0.3605,
+     "partialRho2": 0.13
+    },
+    {
+     "stat": "phys.massExp",
+     "cost": "C3",
+     "n": 296,
+     "rawRho": 0.2964,
+     "partialRho": 0.356,
+     "partialRho2": 0.1267
+    },
+    {
+     "stat": "para.tmplReuse",
+     "cost": "C2",
+     "n": 296,
+     "rawRho": -0.2935,
+     "partialRho": -0.3445,
+     "partialRho2": 0.1187
+    },
+    {
+     "stat": "comp.sameR",
+     "cost": "C2",
+     "n": 296,
+     "rawRho": -0.3256,
+     "partialRho": -0.3364,
+     "partialRho2": 0.1132
+    }
+   ],
+   "cheapestC1Top": [
+    {
+     "stat": "order.depLen",
+     "cost": "C1",
+     "n": 296,
+     "rawRho": 0.4115,
+     "partialRho": 0.4448,
+     "partialRho2": 0.1978
+    },
+    {
+     "stat": "order.entCurv",
+     "cost": "C1",
+     "n": 296,
+     "rawRho": 0.5015,
+     "partialRho": 0.4198,
+     "partialRho2": 0.1762
+    },
+    {
+     "stat": "order.finalDev",
+     "cost": "C1",
+     "n": 296,
+     "rawRho": 0.0627,
+     "partialRho": 0.3004,
+     "partialRho2": 0.0903
+    },
+    {
+     "stat": "freq.lenLogSkew",
+     "cost": "C1",
+     "n": 296,
+     "rawRho": -0.1099,
+     "partialRho": -0.2949,
+     "partialRho2": 0.0869
+    },
+    {
+     "stat": "order.initDev",
+     "cost": "C1",
+     "n": 296,
+     "rawRho": 0.3732,
+     "partialRho": 0.2737,
+     "partialRho2": 0.0749
+    },
+    {
+     "stat": "freq.recurLen",
+     "cost": "C1",
+     "n": 296,
+     "rawRho": -0.1024,
+     "partialRho": -0.2377,
+     "partialRho2": 0.0565
+    }
+   ]
+  },
+  "present": {
+   "n": 255,
+   "top": [
+    {
+     "stat": "order.surprGrow",
+     "cost": "C2",
+     "n": 255,
+     "rawRho": -0.7578,
+     "partialRho": -0.702,
+     "partialRho2": 0.4928
+    },
+    {
+     "stat": "order.entCurv",
+     "cost": "C1",
+     "n": 255,
+     "rawRho": 0.6257,
+     "partialRho": 0.5597,
+     "partialRho2": 0.3133
+    },
+    {
+     "stat": "order.initDev",
+     "cost": "C1",
+     "n": 255,
+     "rawRho": 0.5448,
+     "partialRho": 0.5483,
+     "partialRho2": 0.3006
+    },
+    {
+     "stat": "phys.massExp",
+     "cost": "C3",
+     "n": 255,
+     "rawRho": 0.5344,
+     "partialRho": 0.4837,
+     "partialRho2": 0.234
+    },
+    {
+     "stat": "burst.burstB",
+     "cost": "C3",
+     "n": 255,
+     "rawRho": -0.5344,
+     "partialRho": -0.4497,
+     "partialRho2": 0.2023
+    },
+    {
+     "stat": "phys.attrPMI",
+     "cost": "C3",
+     "n": 234,
+     "rawRho": -0.5111,
+     "partialRho": -0.4495,
+     "partialRho2": 0.202
+    },
+    {
+     "stat": "freq.recurLen",
+     "cost": "C1",
+     "n": 255,
+     "rawRho": -0.4691,
+     "partialRho": -0.4252,
+     "partialRho2": 0.1808
+    },
+    {
+     "stat": "para.tmplReuse",
+     "cost": "C2",
+     "n": 255,
+     "rawRho": -0.5413,
+     "partialRho": -0.4226,
+     "partialRho2": 0.1786
+    },
+    {
+     "stat": "para.prefixCopy",
+     "cost": "C2",
+     "n": 255,
+     "rawRho": -0.5128,
+     "partialRho": -0.4106,
+     "partialRho2": 0.1686
+    },
+    {
+     "stat": "comp.sameR",
+     "cost": "C2",
+     "n": 255,
+     "rawRho": -0.486,
+     "partialRho": -0.3969,
+     "partialRho2": 0.1575
+    },
+    {
+     "stat": "fig.introLeft",
+     "cost": "C2",
+     "n": 252,
+     "rawRho": 0.4675,
+     "partialRho": 0.3921,
+     "partialRho2": 0.1538
+    },
+    {
+     "stat": "para.posPar",
+     "cost": "C2",
+     "n": 255,
+     "rawRho": -0.5122,
+     "partialRho": -0.3915,
+     "partialRho2": 0.1533
+    }
+   ],
+   "cheapestC1Top": [
+    {
+     "stat": "order.entCurv",
+     "cost": "C1",
+     "n": 255,
+     "rawRho": 0.6257,
+     "partialRho": 0.5597,
+     "partialRho2": 0.3133
+    },
+    {
+     "stat": "order.initDev",
+     "cost": "C1",
+     "n": 255,
+     "rawRho": 0.5448,
+     "partialRho": 0.5483,
+     "partialRho2": 0.3006
+    },
+    {
+     "stat": "freq.recurLen",
+     "cost": "C1",
+     "n": 255,
+     "rawRho": -0.4691,
+     "partialRho": -0.4252,
+     "partialRho2": 0.1808
+    },
+    {
+     "stat": "freq.rankBinEnt",
+     "cost": "C1",
+     "n": 255,
+     "rawRho": 0.4294,
+     "partialRho": 0.3688,
+     "partialRho2": 0.136
+    },
+    {
+     "stat": "order.finalDev",
+     "cost": "C1",
+     "n": 255,
+     "rawRho": 0.3586,
+     "partialRho": 0.3173,
+     "partialRho2": 0.1007
+    },
+    {
+     "stat": "order.depLen",
+     "cost": "C1",
+     "n": 255,
+     "rawRho": 0.3356,
+     "partialRho": 0.2784,
+     "partialRho2": 0.0775
+    }
+   ]
+  },
+  "presentWord": {
+   "n": 180,
+   "top": [
+    {
+     "stat": "burst.burstB",
+     "cost": "C3",
+     "n": 180,
+     "rawRho": -0.3858,
+     "partialRho": -0.4177,
+     "partialRho2": 0.1745
+    },
+    {
+     "stat": "order.initDev",
+     "cost": "C1",
+     "n": 180,
+     "rawRho": 0.5376,
+     "partialRho": 0.4125,
+     "partialRho2": 0.1702
+    },
+    {
+     "stat": "phys.massExp",
+     "cost": "C3",
+     "n": 180,
+     "rawRho": 0.2946,
+     "partialRho": 0.4085,
+     "partialRho2": 0.1669
+    },
+    {
+     "stat": "phys.affect",
+     "cost": "C3",
+     "n": 180,
+     "rawRho": -0.4813,
+     "partialRho": -0.4048,
+     "partialRho2": 0.1639
+    },
+    {
+     "stat": "phys.attrPMI",
+     "cost": "C3",
+     "n": 163,
+     "rawRho": -0.2582,
+     "partialRho": -0.4032,
+     "partialRho2": 0.1625
+    },
+    {
+     "stat": "order.surprGrow",
+     "cost": "C2",
+     "n": 180,
+     "rawRho": -0.5932,
+     "partialRho": -0.4012,
+     "partialRho2": 0.1609
+    },
+    {
+     "stat": "para.suffixCopy",
+     "cost": "C2",
+     "n": 180,
+     "rawRho": -0.357,
+     "partialRho": -0.3849,
+     "partialRho2": 0.1481
+    },
+    {
+     "stat": "fig.introLeft",
+     "cost": "C2",
+     "n": 180,
+     "rawRho": 0.4716,
+     "partialRho": 0.3711,
+     "partialRho2": 0.1377
+    },
+    {
+     "stat": "para.posPar",
+     "cost": "C2",
+     "n": 180,
+     "rawRho": -0.4636,
+     "partialRho": -0.3647,
+     "partialRho2": 0.133
+    },
+    {
+     "stat": "para.lcsLift",
+     "cost": "C2",
+     "n": 180,
+     "rawRho": -0.0493,
+     "partialRho": -0.36,
+     "partialRho2": 0.1296
+    },
+    {
+     "stat": "order.depLen",
+     "cost": "C1",
+     "n": 180,
+     "rawRho": 0.3308,
+     "partialRho": 0.3592,
+     "partialRho2": 0.129
+    },
+    {
+     "stat": "fig.fano",
+     "cost": "C2",
+     "n": 171,
+     "rawRho": -0.4311,
+     "partialRho": -0.3582,
+     "partialRho2": 0.1283
+    }
+   ],
+   "cheapestC1Top": [
+    {
+     "stat": "order.initDev",
+     "cost": "C1",
+     "n": 180,
+     "rawRho": 0.5376,
+     "partialRho": 0.4125,
+     "partialRho2": 0.1702
+    },
+    {
+     "stat": "order.depLen",
+     "cost": "C1",
+     "n": 180,
+     "rawRho": 0.3308,
+     "partialRho": 0.3592,
+     "partialRho2": 0.129
+    },
+    {
+     "stat": "order.entCurv",
+     "cost": "C1",
+     "n": 180,
+     "rawRho": 0.51,
+     "partialRho": 0.3231,
+     "partialRho2": 0.1044
+    },
+    {
+     "stat": "order.finalDev",
+     "cost": "C1",
+     "n": 180,
+     "rawRho": -0.0523,
+     "partialRho": 0.2413,
+     "partialRho2": 0.0582
+    },
+    {
+     "stat": "freq.recurLen",
+     "cost": "C1",
+     "n": 180,
+     "rawRho": -0.0363,
+     "partialRho": -0.2354,
+     "partialRho2": 0.0554
+    },
+    {
+     "stat": "freq.menzerath",
+     "cost": "C1",
+     "n": 180,
+     "rawRho": -0.3153,
+     "partialRho": -0.2281,
+     "partialRho2": 0.052
+    }
+   ]
+  }
+ },
+ "forward": [
+  {
+   "label": "all stats, all pockets",
+   "nPool": 73,
+   "nComplete": 361,
+   "controlsOnlyR2": 0.1544,
+   "trace": [
+    {
+     "k": 1,
+     "add": "order.surprGrow",
+     "cost": "C2",
+     "R2": 0.4197
+    },
+    {
+     "k": 2,
+     "add": "order.entCurv",
+     "cost": "C1",
+     "R2": 0.5091
+    },
+    {
+     "k": 3,
+     "add": "order.initDev",
+     "cost": "C1",
+     "R2": 0.5784
+    },
+    {
+     "k": 4,
+     "add": "order.finalDev",
+     "cost": "C1",
+     "R2": 0.6813
+    },
+    {
+     "k": 5,
+     "add": "fig.initFollow",
+     "cost": "C2",
+     "R2": 0.7077
+    }
+   ],
+   "cv": [
+    {
+     "k": 1,
+     "nestedCvR2": 0.3429
+    },
+    {
+     "k": 2,
+     "nestedCvR2": 0.4383
+    },
+    {
+     "k": 3,
+     "nestedCvR2": 0.5202
+    },
+    {
+     "k": 4,
+     "nestedCvR2": 0.6349
+    },
+    {
+     "k": 5,
+     "nestedCvR2": 0.6625
+    }
+   ]
+  },
+  {
+   "label": "C1 (cheap) stats only, all pockets",
+   "nPool": 18,
+   "nComplete": 382,
+   "controlsOnlyR2": 0.1237,
+   "trace": [
+    {
+     "k": 1,
+     "add": "order.entCurv",
+     "cost": "C1",
+     "R2": 0.4014
+    },
+    {
+     "k": 2,
+     "add": "order.initDev",
+     "cost": "C1",
+     "R2": 0.5258
+    },
+    {
+     "k": 3,
+     "add": "order.finalDev",
+     "cost": "C1",
+     "R2": 0.6799
+    },
+    {
+     "k": 4,
+     "add": "freq.recurLen",
+     "cost": "C1",
+     "R2": 0.6967
+    },
+    {
+     "k": 5,
+     "add": "order.depLen",
+     "cost": "C1",
+     "R2": 0.7071
+    }
+   ],
+   "cv": [
+    {
+     "k": 1,
+     "nestedCvR2": 0.3918
+    },
+    {
+     "k": 2,
+     "nestedCvR2": 0.5148
+    },
+    {
+     "k": 3,
+     "nestedCvR2": 0.6691
+    },
+    {
+     "k": 4,
+     "nestedCvR2": 0.6683
+    },
+    {
+     "k": 5,
+     "nestedCvR2": 0.6718
+    }
+   ]
+  },
+  {
+   "label": "all stats, word-grain pockets",
+   "nPool": 73,
+   "nComplete": 284,
+   "controlsOnlyR2": 0.1555,
+   "trace": [
+    {
+     "k": 1,
+     "add": "order.depLen",
+     "cost": "C1",
+     "R2": 0.3112
+    },
+    {
+     "k": 2,
+     "add": "order.initDev",
+     "cost": "C1",
+     "R2": 0.416
+    },
+    {
+     "k": 3,
+     "add": "order.entCurv",
+     "cost": "C1",
+     "R2": 0.5354
+    },
+    {
+     "k": 4,
+     "add": "comp.edgeGap",
+     "cost": "C2",
+     "R2": 0.6077
+    },
+    {
+     "k": 5,
+     "add": "fig.initFollow",
+     "cost": "C2",
+     "R2": 0.6454
+    }
+   ],
+   "cv": [
+    {
+     "k": 1,
+     "nestedCvR2": 0.2374
+    },
+    {
+     "k": 2,
+     "nestedCvR2": 0.302
+    },
+    {
+     "k": 3,
+     "nestedCvR2": 0.4248
+    },
+    {
+     "k": 4,
+     "nestedCvR2": 0.4996
+    },
+    {
+     "k": 5,
+     "nestedCvR2": 0.5463
+    }
+   ]
+  },
+  {
+   "label": "all stats, PRESENT pockets",
+   "nPool": 70,
+   "nComplete": 242,
+   "controlsOnlyR2": 0.238,
+   "trace": [
+    {
+     "k": 1,
+     "add": "order.surprGrow",
+     "cost": "C2",
+     "R2": 0.6419
+    },
+    {
+     "k": 2,
+     "add": "order.initDev",
+     "cost": "C1",
+     "R2": 0.7021
+    },
+    {
+     "k": 3,
+     "add": "order.finalDev",
+     "cost": "C1",
+     "R2": 0.8007
+    },
+    {
+     "k": 4,
+     "add": "order.entCurv",
+     "cost": "C1",
+     "R2": 0.8206
+    },
+    {
+     "k": 5,
+     "add": "comp.finEnt",
+     "cost": "C2",
+     "R2": 0.8355
+    }
+   ],
+   "cv": [
+    {
+     "k": 1,
+     "nestedCvR2": 0.6334
+    },
+    {
+     "k": 2,
+     "nestedCvR2": 0.6925
+    },
+    {
+     "k": 3,
+     "nestedCvR2": 0.7867
+    },
+    {
+     "k": 4,
+     "nestedCvR2": 0.8034
+    },
+    {
+     "k": 5,
+     "nestedCvR2": 0.8139
+    }
+   ]
+  }
+ ],
+ "signSplit": {
+  "nPos": 174,
+  "nNeg": 81,
+  "top": [
+   {
+    "stat": "para.tmplReuse",
+    "cost": "C2",
+    "nPos": 174,
+    "nNeg": 81,
+    "auc": 0.9044,
+    "sign": "- with P+"
+   },
+   {
+    "stat": "freq.recurLen",
+    "cost": "C1",
+    "nPos": 174,
+    "nNeg": 81,
+    "auc": 0.8968,
+    "sign": "- with P+"
+   },
+   {
+    "stat": "freq.rankBinEnt",
+    "cost": "C1",
+    "nPos": 174,
+    "nNeg": 81,
+    "auc": 0.8942,
+    "sign": "+ with P+"
+   },
+   {
+    "stat": "phys.attrPMI",
+    "cost": "C3",
+    "nPos": 159,
+    "nNeg": 75,
+    "auc": 0.8934,
+    "sign": "- with P+"
+   },
+   {
+    "stat": "phys.massExp",
+    "cost": "C3",
+    "nPos": 174,
+    "nNeg": 81,
+    "auc": 0.8912,
+    "sign": "+ with P+"
+   },
+   {
+    "stat": "order.finalDev",
+    "cost": "C1",
+    "nPos": 174,
+    "nNeg": 81,
+    "auc": 0.8883,
+    "sign": "+ with P+"
+   },
+   {
+    "stat": "burst.repAdj",
+    "cost": "C3",
+    "nPos": 174,
+    "nNeg": 81,
+    "auc": 0.8831,
+    "sign": "- with P+"
+   },
+   {
+    "stat": "burst.kerFar",
+    "cost": "C3",
+    "nPos": 174,
+    "nNeg": 81,
+    "auc": 0.877,
+    "sign": "- with P+"
+   },
+   {
+    "stat": "order.surprGrow",
+    "cost": "C2",
+    "nPos": 174,
+    "nNeg": 81,
+    "auc": 0.8721,
+    "sign": "- with P+"
+   },
+   {
+    "stat": "burst.kerSlope",
+    "cost": "C3",
+    "nPos": 174,
+    "nNeg": 81,
+    "auc": 0.859,
+    "sign": "+ with P+"
+   }
+  ],
+  "nAbove90": 1,
+  "nAbove95": 0
+ },
+ "labels": {
+  "all": [
+   {
+    "attrs": [
+     "grain"
+    ],
+    "nParams": 3,
+    "R2": 0.2493,
+    "adjR2": 0.2435,
+    "cvR2": 0.2277
+   },
+   {
+    "attrs": [
+     "group"
+    ],
+    "nParams": 5,
+    "R2": 0.2644,
+    "adjR2": 0.2549,
+    "cvR2": 0.2321
+   },
+   {
+    "attrs": [
+     "script"
+    ],
+    "nParams": 9,
+    "R2": 0.0812,
+    "adjR2": 0.0595,
+    "cvR2": 0.0404
+   },
+   {
+    "attrs": [
+     "register"
+    ],
+    "nParams": 35,
+    "R2": 0.5209,
+    "adjR2": 0.4735,
+    "cvR2": 0.414
+   },
+   {
+    "attrs": [
+     "language"
+    ],
+    "nParams": 142,
+    "R2": 0.6653,
+    "adjR2": 0.4729,
+    "cvR2": -0.3081
+   },
+   {
+    "attrs": [
+     "grain",
+     "register"
+    ],
+    "nParams": 38,
+    "R2": 0.5705,
+    "adjR2": 0.524,
+    "cvR2": 0.4481
+   },
+   {
+    "attrs": [
+     "group",
+     "register"
+    ],
+    "nParams": 40,
+    "R2": 0.5246,
+    "adjR2": 0.4701,
+    "cvR2": 0.4065
+   }
+  ],
+  "wordgrain": [
+   {
+    "attrs": [
+     "group"
+    ],
+    "nParams": 5,
+    "R2": 0.2442,
+    "adjR2": 0.2312,
+    "cvR2": 0.2115
+   },
+   {
+    "attrs": [
+     "script"
+    ],
+    "nParams": 9,
+    "R2": 0.1204,
+    "adjR2": 0.0927,
+    "cvR2": 0.0567
+   },
+   {
+    "attrs": [
+     "register"
+    ],
+    "nParams": 28,
+    "R2": 0.4707,
+    "adjR2": 0.4152,
+    "cvR2": 0.3789
+   },
+   {
+    "attrs": [
+     "language"
+    ],
+    "nParams": 78,
+    "R2": 0.486,
+    "adjR2": 0.3012,
+    "cvR2": -0.0372
+   },
+   {
+    "attrs": [
+     "grain",
+     "register"
+    ],
+    "nParams": 28,
+    "R2": 0.4707,
+    "adjR2": 0.4152,
+    "cvR2": 0.3789
+   },
+   {
+    "attrs": [
+     "group",
+     "register"
+    ],
+    "nParams": 33,
+    "R2": 0.48,
+    "adjR2": 0.4146,
+    "cvR2": 0.3713
+   }
+  ]
+ }
+}

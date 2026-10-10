@@ -1,0 +1,55 @@
+
+import fs from "node:fs";
+import path from "node:path";
+import { createHash } from "node:crypto";
+import { fileURLToPath } from "node:url";
+import { fitPCA, projectPCA } from "../../impact.mjs";
+import { fitLogit, predict, standardise } from "../../name-war-and-peace.mjs";
+import { aucPairs, aucPN, stratAuc, bootStrat, permStrat, round, median } from "./stats.mjs";
+import { loadRows, buildPairs, cellPairs, CONTROLS } from "./features.mjs";
+import { vec, indexOfName } from "./components.mjs";
+
+const args = process.argv.slice(2), opt = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : d; };
+const RULES_F = opt("--rules", "results/frozen-rules.json"), DATA = opt("--data", "data/confirmation"), TRAIN = opt("--train", "data/discovery2"), OUTF = opt("--out", "results/confirmation.json"), B = Number(opt("--B", 1000));
+const SEED = 20261008, MINP = 15;
+const frozen = JSON.parse(fs.readFileSync(RULES_F, "utf8"));
+const kindC = (k) => (k === "wp" ? "mm" : k);
+
+function withVectors(pairs) { for (const x of pairs) { x.p.v = vec(x.p.raw.rec); x.n.v = vec(x.n.raw.rec); } return pairs; }
+const scoreFn = (r) => (r.scoreKind === "ablation" ? (m) => m[r.score] : (m) => r.sign * m.v[r.j]);
+const passOp = (r, T) => (r.op === ">=" ? (s) => s >= T : (s) => s > T);
+
+/** Evaluate one frozen scope: strata of (kind, group), frozen oriented score, frozen threshold. */
+function evalScope(pairs, spec, tag) {
+  const f = scoreFn(spec), by = cellPairs(pairs, kindC(spec.kind), spec.group, spec.strata);
+  let sd = SEED + tag.length * 13;
+  const cells = {};
+  for (const st of spec.strata) {
+    const ps = by[st] ?? [];
+    if (ps.length < MINP) { cells[st] = { n: ps.length, skipped: "too few pairs" }; continue; }
+    const one = { [st]: ps }, b = bootStrat(one, f, { B, seed: sd++ }), pm = permStrat(one, f, { B, seed: sd++ });
+    const ctl = {}, ci99 = {};
+    for (const c of CONTROLS) { const bb = bootStrat(one, (m) => m[c], { B: Math.min(B, 500), seed: sd++, qLo: 0.005, qHi: 0.995 }); ctl[c] = bb.point; ci99[c] = [bb.lo, bb.hi]; }
+    const voidCell = CONTROLS.some((c) => ci99[c][0] > 0.5 || ci99[c][1] < 0.5);
+    const T = spec.threshold, ok = passOp(spec, T);
+    cells[st] = { n: ps.length, auc: b.point, ci: [b.lo, b.hi], permQ95: pm.q95, controls: ctl, voidCell, tpr: round(ps.filter((x) => ok(f(x.p))).length / ps.length), tnr: round(ps.filter((x) => !ok(f(x.n))).length / ps.length) };
+  }
+  const live = spec.strata.filter((st) => cells[st].n >= MINP && !cells[st].voidCell);
+  const poolBy = Object.fromEntries(live.map((st) => [st, by[st]]));
+  const out = { spec: { id: spec.id, kind: spec.kind, group: spec.group, strata: spec.strata, score: spec.score, sign: spec.sign ?? null, op: spec.op, threshold: spec.threshold }, cells, liveStrata: live };
+  if (live.length === 0) { out.verdict = "VOID"; return out; }
+  const b = bootStrat(poolBy, f, { B, seed: sd++ }), pm = permStrat(poolBy, f, { B, seed: sd++ });
+  const ctl = {}; for (const c of CONTROLS) ctl[c] = round(stratAuc(poolBy, (m) => m[c]));
+  const burst = bootStrat(poolBy, f, { B, seed: sd++, g: (m) => m.R_BURST });
+  const all = Object.values(poolBy).flat(), T = spec.threshold, ok = passOp(spec, T);
+  const groups = new Map(); for (const x of all) { const g = x.kind === "irc" ? x.doc : `fifth${Math.floor(Number(x.block.split("|q")[1]) / 5)}`; (groups.get(g) ?? groups.set(g, []).get(g)).push(x); }
+  const per = [...groups].filter(([, ps]) => ps.length >= 5).map(([g, ps]) => [g, round(aucPairs(ps, f)), ps.length]);
+  const above = per.filter(([, a]) => a > 0.5).length, goodStrata = live.filter((st) => cells[st].n >= MINP && cells[st].auc >= 0.58).length;
+  Object.assign(out, { pairs: all.length, auc: b.point, ci: [b.lo, b.hi], permQ95: pm.q95, permP: pm.p, controlsPooled: ctl, controlsInBand: Object.values(ctl).every((v) => v >= 0.45 && v <= 0.55),
+    tpr: round(all.filter((x) => ok(f(x.p))).length / all.length), tnr: round(all.filter((x) => !ok(f(x.n))).length / all.length), diffToBurst: burst, perBlock: per, consistency: { above, of: per.length }, strataAtLeast058: `${goodStrata}/${live.length}`,
+    nonNullNames: round(all.filter((x) => !x.p.isNull).length / all.length), nonNullUnlabelled: round(all.filter((x) => !x.n.isNull).length / all.length) });
+  const voidAll = live.length * 2 < spec.strata.length || !out.controlsInBand;
+  out.pass = !voidAll && out.auc >= 0.62 && out.ci[0] > 0.55 && out.auc > out.permQ95 && above >= 3 && above / Math.max(1, per.length) >= 0.75 && goodStrata * 3 >= live.length * 2 && out.pairs >= 60;
+  out.verdict = voidAll ? "VOID" : out.pass ? "PASS" : "FAIL";
+  return out;
+}

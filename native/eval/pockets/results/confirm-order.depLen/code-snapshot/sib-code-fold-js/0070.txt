@@ -1,0 +1,10 @@
+// label -> acceptable UDHR classes (declared; giver: study author)
+export const ACCEPT = {
+  en: ["en"], fr: ["fr"], de: ["de-1901", "de-1996"], es: ["es"], it: ["it"], nl: ["nl"], fi: ["fi"], sv: ["sv"], la: ["la"], ja: ["ja"], ko: ["ko"],
+  el: ["el-monoton", "el-polyton"], fa: ["fa", "fa-AF"], he: ["he"], tr: ["tr"], ru: ["ru"], ar: ["ar"], hi: ["hi"], hu: ["hu"], cs: ["cs"], pl: ["pl"], sk: ["sk"],
+  pt: ["pt-PT", "pt-BR"], ro: ["ro"], lv: ["lv"], ca: ["ca", "cat"], no: ["nb", "nn"], zh: ["zh", "zh-Hant"], vi: ["vi"], sw: ["sw"], ti: ["ti"],
+  uk: ["uk"], th: ["th"],
+};
+
+export const FAMILIES = [
+  ["es","ast","gl","ca","cat"],["pt-BR","pt-PT"],["nb","nn","da","sv"],["hr","sr-Latn","bs-Latn","cnr"],["zlm-Latn","id","min"],["de-1901","de-1996"],["el-monoton","el-polyton"],["zh","zh-Hant"],["fa","fa-AF"]];

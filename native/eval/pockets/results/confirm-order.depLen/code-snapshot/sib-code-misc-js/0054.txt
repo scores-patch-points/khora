@@ -1,0 +1,70 @@
+// route-stats.test.mjs — the accept-rate the router divides by.
+import test from "node:test";
+import assert from "node:assert/strict";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import { createRouteStats, betaSample, formatStats } from "./route-stats.js";
+import { rng32 } from "./route-sim.js";
+
+test("an unmeasured route reads 0.5 (uniform Beta(1,1) prior), measured:false", () => {
+  const s = createRouteStats({});
+  const r = s.acceptRate("remote", "formal.check");
+  assert.equal(r.p, 0.5); assert.equal(r.measured, false); assert.equal(r.n, 0);
+});
+
+test("Laplace smoothing: P = (accepted+1)/(attempts+2); errors count against the route", () => {
+  const s = createRouteStats({});
+  for (let i = 0; i < 3; i++) s.record("r", "t", "accepted");
+  s.record("r", "t", "rejected"); s.record("r", "t", "error");
+  assert.equal(s.acceptRate("r", "t").p, (3 + 1) / (5 + 2));
+  s.record("r", "t", "unverified");
+  assert.equal(s.acceptRate("r", "t").n, 5, "an unverified gate is evidence neither way");
+  assert.equal(s.acceptRate("r", "t").unverified, 1);
+});
+
+test("counts are per route × taskClass", () => {
+  const s = createRouteStats({});
+  s.record("r", "a", "rejected"); s.record("r", "a", "rejected");
+  assert.ok(s.acceptRate("r", "a").p < 0.5);
+  assert.equal(s.acceptRate("r", "b").p, 0.5);
+  assert.equal(s.acceptRate("q", "a").p, 0.5);
+});
+
+test("an unknown outcome is refused, not silently counted", () => {
+  assert.throws(() => createRouteStats({}).record("r", "t", "confident"));
+});
+
+test("persistence round-trips through a file (atomic write) and a corrupt file starts empty", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "rs-"));
+  const file = path.join(dir, "route-stats.json");
+  const a = createRouteStats({ file });
+  a.record("remote", "formal.check", "accepted"); a.record("remote", "formal.check", "rejected");
+  assert.equal(a.save(), true);
+  const b = createRouteStats({ file });
+  assert.deepEqual(b.acceptRate("remote", "formal.check"), a.acceptRate("remote", "formal.check"));
+  assert.equal(fs.readdirSync(dir).filter((f) => f.endsWith(".tmp")).length, 0, "no temp litter");
+  fs.writeFileSync(file, "{not json");
+  assert.equal(createRouteStats({ file }).snapshot().cells.length, 0);
+  fs.rmSync(dir, { recursive: true, force: true });
+});
+
+test("halfLife decay fades old evidence toward the prior", () => {
+  const plain = createRouteStats({}), decayed = createRouteStats({ halfLife: 5 });
+  for (const s of [plain, decayed]) { for (let i = 0; i < 40; i++) s.record("r", "t", "accepted"); for (let i = 0; i < 10; i++) s.record("r", "t", "rejected"); }
+  assert.ok(decayed.acceptRate("r", "t").p < plain.acceptRate("r", "t").p, "recent rejections weigh more when old successes decay");
+});
+
+test("Thompson samples are in (0,1) and concentrate on the posterior mean", () => {
+  const rng = rng32(7);
+  let sum = 0; const n = 4000;
+  for (let i = 0; i < n; i++) { const x = betaSample(31, 11, rng); assert.ok(x > 0 && x < 1); sum += x; }
+  assert.ok(Math.abs(sum / n - 31 / 42) < 0.01, `mean ${sum / n}`);
+});
+
+test("snapshot and formatStats list cells; empty says so", () => {
+  const s = createRouteStats({});
+  assert.match(formatStats(s.snapshot()), /no route has been measured/);
+  s.record("remote", "formal.check", "accepted");
+  assert.match(formatStats(s.snapshot()), /remote\s+formal\.check\s+P=0\.667/);
+});

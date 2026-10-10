@@ -1,0 +1,310 @@
+"""A readable handle for ANY Metro matter, not just a procurement.
+
+slots.py was built against one title family — "accepting the terms of a
+cooperative purchasing master agreement with VENDOR for GOODS for
+DEPARTMENT" — because that is what the surveillance corpus is made of, and
+it reads those beautifully. Turned loose on the other 8,000 matters it
+produces things like "Proposal No. 2024M-114ES-001)" and "Which Is
+Described Herein", because a zoning ordinance, an appointment, and an
+easement abandonment are not that sentence at all.
+
+Metro writes each of those in its own fixed shape, though, so each gets
+its own reader here, and anything unrecognized falls back to slots.py.
+Every reader returns only spans of the real title — nothing is invented,
+and a reader that can't find its parts returns nothing rather than a
+confident-looking fragment.
+"""
+from __future__ import annotations
+
+import re
+
+from slots import extract_slots, headline as procurement_headline, title_case
+
+# The boilerplate every Metro title opens with, which carries no
+# information at all — it is the same on all 8,440 of them.
+PREAMBLE = re.compile(
+    r"^(an?|the)\s+(ordinance|resolution)\s+(to\s+)?", re.IGNORECASE)
+# _grant()'s own preamble: checked live, "A resolution accepting a grant
+# from X" was matching "grant from" with .search() and — since nothing
+# stopped it — capturing "A resolution accepting a" itself as the grant's
+# own NAME (`name` group), producing "Resolution Accepting A Grant from
+# X" as the headline: the ceremonial lead-in, kept as if it were content.
+# Stripped here, before _grant() ever searches, rather than patched after
+# the fact — the same "amendment N to a" phrasing gets consumed too, so
+# the amendment check below doesn't compete with leftover preamble text
+# for the name slot.
+GRANT_LEAD = re.compile(
+    r"^an?\s+(?:ordinance|resolution)\s+(?:accepting|approving|authorizing|requesting|declaring)\s+"
+    r"(?:an?\s+)?(?:application\s+for\s+)?"
+    # "amendment one to a" as before, but Metro just as often numbers several
+    # at once — "amendments four, five, and six to a" — checked live: the
+    # singular-only version left the whole list in place, so _grant()'s own
+    # unanchored name search grabbed "and six to a" as if THAT were the
+    # grant's name.
+    r"(?:amendments?\s+(?:number\s+)?\w+(?:,\s*\w+)*(?:,?\s+and\s+\w+)?\s+to\s+)?"
+    r"(?:an?\s+)?",
+    re.IGNORECASE)
+METRO_GOV = re.compile(
+    r"\bthe\s+metropolitan\s+government\s+of\s+nashville\s+and\s+davidson\s+county\b",
+    re.IGNORECASE)
+PROPOSAL_NO = re.compile(r"\(?\s*proposal\s+no\.?\s*[\w\-]+\s*\)?", re.IGNORECASE)
+TRAILING_JUNK = re.compile(
+    r"[\s,;:.\-–—]*(?:all\s+of\s+which\s+is\s+described\s+herein|which\s+is\s+described\s+herein"
+    r"|and\s+any\s+other\s+matters?\s+related\s+thereto)[\s,;:.]*$", re.IGNORECASE)
+
+
+def _tidy(s: str, cap: int = 90) -> str:
+    s = PROPOSAL_NO.sub("", s or "")
+    s = TRAILING_JUNK.sub("", s)
+    s = METRO_GOV.sub("Metro", s)
+    s = re.sub(r"\s+", " ", s).strip(" ,;:.-–—")
+    # Strip a bracket only when it has no partner — "(PSN)" should survive
+    # intact, while a dangling "(" left by a cut should not.
+    if s.startswith("(") and ")" not in s:
+        s = s[1:]
+    if s.endswith(")") and "(" not in s:
+        s = s[:-1]
+    # An unbalanced "(" can land mid-string too, not just at the very end —
+    # PROPOSAL_NO stripping a trailing "Proposal No. X)" out of a longer
+    # "(MWS Project No. Y, Proposal No. X)" parenthetical takes that closing
+    # paren with it, orphaning the "(" several words earlier. Checked live on
+    # a real title: without this, the cut mid-parenthetical read as if the
+    # sentence had simply broken off there.
+    if s.count("(") > s.count(")"):
+        s = s[: s.rfind("(")].rstrip(" ,;:.-–—")
+    s = s.strip(" ,;:.-–—")
+    if len(s) > cap:
+        cut = s.rfind(" ", 0, cap)
+        s = s[: cut if cut > cap * 0.6 else cap].rstrip(" ,;:.-")
+        if s.count("(") > s.count(")"):
+            s = s[: s.rfind("(")].rstrip(" ,;:.-")
+        s += "…"
+    return s
+
+
+def _location(text: str) -> str:
+    """The address or place a property matter is about."""
+    m = re.search(
+        r"\bfor\s+propert(?:y|ies)\s+located\s+(?:at\s+)?(.+?)(?:,\s*(?:zoned|within|approximately)|"
+        r"\s*\(|\.\s|$)", text, re.IGNORECASE)
+    if m:
+        return _tidy(m.group(1), 60)
+    m = re.search(r"\blocated\s+(?:at\s+)?(.+?)(?:,\s*(?:zoned|within)|\s*\(|\.\s|$)",
+                  text, re.IGNORECASE)
+    return _tidy(m.group(1), 60) if m else ""
+
+
+def _zoning(title: str) -> str:
+    """Zoning ordinances: what's being done to the zoning, and where."""
+    if not re.search(r"\bTitle\s*17\b|\bZoning\s+Ordinance\b|\bZoning\s+Regulations\b",
+                     title, re.IGNORECASE):
+        return ""
+    where = _location(title)
+    act = ""
+    m = re.search(r"\bby\s+(applying|amending|cancelling|canceling)\s+(?:a|an|the)?\s*(.+?)"
+                  r"(?:\s+for\s+propert|\s+on\s+propert|,|\(|$)", title, re.IGNORECASE)
+    if m:
+        act = _tidy(f"{m.group(2)}", 55)
+        verb = {"applying": "Apply", "amending": "Amend",
+                "cancelling": "Cancel", "canceling": "Cancel"}[m.group(1).lower()]
+        act = f"{verb} {act}"
+    else:
+        m = re.search(r"\bto\s+amend\s+(?:the\s+)?(definitions?\s+of\s+.+?|requirements?\s+.+?|"
+                      r"provisions?\s+.+?)(?:;|,|\.|$)", title, re.IGNORECASE)
+        if m:
+            act = _tidy(f"Zoning text — {m.group(1)}", 80)
+    if act and where:
+        return _tidy(f"{act} — {where}", 100)
+    return act or (f"Zoning — {where}" if where else "")
+
+
+# Case-SENSITIVE on purpose: a person's name is capitalised and the words
+# around it ("for a term expiring") are not, which is the only thing
+# separating them. Under re.IGNORECASE this same pattern happily swallowed
+# "Alvin Haney for a term" as the name.
+APPOINTEE = re.compile(
+    r"[Aa]ppointment\s+of\s+(?:Mr\.|Ms\.|Mrs\.|Dr\.|Rev\.|Hon\.)?\s*"
+    r"([A-Z][\w.'\-]*(?:\s+[A-Z][\w.'\-]*){0,3})")
+
+
+def _appointment(title: str, body: str = "") -> str:
+    """Appointments: who, to what. The board is the title's first line;
+    Metro puts it there on its own, above the sentence."""
+    first_line = (title.split("\n", 1)[0] or "").strip(" .,")
+    to = first_line if first_line and not re.search(
+        r"appointment|nomination", first_line, re.IGNORECASE) else (body or "")
+    to = _tidy(to, 55)
+    m = APPOINTEE.search(title)
+    if m:
+        who = m.group(1).strip()
+        return _tidy(f"{who} appointed to {to}" if to else f"{who} appointed", 95)
+    # Nominations and vacancy notices carry no name at all — say what the
+    # thing actually is rather than letting a generic reader invent a
+    # headline out of the meeting date.
+    if re.search(r"\bnomination|\bvacanc", title, re.IGNORECASE) and to:
+        return _tidy(f"Nomination — {to}", 95)
+    return ""
+
+
+def _grant(title: str) -> str:
+    """Grants: what grant, from whom, for which department. Metro writes
+    these both ways — "accepting a Broadband Ready Communities grant from
+    X" and, just as often, "accepting a grant from X" with no name at all
+    — so the name is optional rather than assumed."""
+    # Trigger on "grant from" itself rather than on the opening verb: Metro
+    # writes "accepting a X grant from", "approving an application for a X
+    # grant from", and "approving amendment one to a grant from" — keying
+    # off the verb missed the third entirely. Search the LEAD-STRIPPED
+    # title, not the raw one — .search()'s own name group has nothing to
+    # stop it from swallowing "A resolution accepting a" whole as if it
+    # were the grant's own name otherwise (see GRANT_LEAD's own note).
+    search_title = GRANT_LEAD.sub("", title, count=1)
+    # "U.S." (and Metro's own "U. S." spacing) carries an internal period
+    # immediately followed by whitespace — indistinguishable from a real
+    # sentence boundary to the `\.\s` lookahead below, and it happens twice
+    # in "U. S.", so a lookbehind guard on the STOPPING period alone missed
+    # the first one. Spelled out before the funder is ever searched for,
+    # the whole problem disappears rather than needing a matching exception
+    # per period. Checked against the real corpus: this exact abbreviation,
+    # spaced or not, is the only one that appears here.
+    search_title = re.sub(r"\bU\.\s?S\.(?=\s)", "United States", search_title)
+    m = re.search(
+        r"(?:(?P<name>(?!grant\b)[^,;]{3,60}?)\s+)?\bgrant\s+from\s+"
+        r"(?P<funder>[^,;]{3,70}?)"
+        r"(?=\s+in\s+partnership|\s*,|\s+to\s+the\s+Metropolitan|\.\s|\.$|$)",
+        search_title, re.IGNORECASE)
+    if not m:
+        return ""
+    what = _tidy(m.group("name") or "", 55)
+    # Strip the lead-in that isn't part of the grant's name.
+    what = re.sub(r"^(?:a|an|the|to\s+a|to\s+an|for\s+a|for\s+an|application\s+for\s+a)\s+",
+                  "", what, flags=re.IGNORECASE).strip()
+    # Checked against the ORIGINAL title, not search_title — GRANT_LEAD may
+    # have already consumed "amendment one to a" itself.
+    if re.search(r"\bamendment\b", title[:80], re.IGNORECASE):
+        what = (what + " grant amendment").strip()
+    funder = _tidy(m.group("funder"), 60)
+    dept = ""
+    d = re.search(r"acting\s+by\s+and\s+through\s+(?:the\s+)?"
+                  r"([^,;]{3,60}?)(?=\s*,|\s+for\s+the\b|\.|$)", title, re.IGNORECASE)
+    if d:
+        dept = _tidy(d.group(1), 50)
+    if what.lower().endswith("grant amendment"):
+        head = what
+    elif what:
+        head = f"{what} grant"
+    else:
+        head = "Grant"
+    out = f"{head} from {funder}"
+    if dept:
+        out += f" for {dept}"
+    return _tidy(out, 110)
+
+
+def _abandonment(title: str) -> str:
+    """Easement / right-of-way abandonments: what's given up, and where."""
+    m = re.search(r"\babandon(?:ment\s+of|ing)?\s+(?:an?\s+|the\s+)?(.+?)"
+                  r"(?:\s+for\s+propert|\s+located|,|\(|$)", title, re.IGNORECASE)
+    if not m:
+        return ""
+    what = _tidy(m.group(1), 60)
+    where = _location(title)
+    return _tidy(f"Abandon {what}" + (f" — {where}" if where else ""), 100)
+
+
+# Metro opens nearly every title with 10–30 words of ceremony that say
+# nothing about the matter. Stripping it leaves Metro's OWN words, just
+# without the throat-clearing — which is the right thing to show whenever
+# we don't have a summary we actually trust.
+BOILERPLATE_LEADS = [
+    re.compile(r"^an?\s+ordinance\s+to\s+amend\s+title\s+17\s+of\s+the\s+metropolitan\s+code\s+"
+               r"of\s+laws,?\s*(the\s+zoning\s+ordinance\s+of\s+the\s+metropolitan\s+government\s+"
+               r"of\s+nashville\s+and\s+davidson\s+county,?)?\s*(by\s+)?", re.IGNORECASE),
+    re.compile(r"^an?\s+ordinance\s+(?:to\s+)?authoriz\w*\s+the\s+metropolitan\s+government\s+of\s+"
+               r"nashville\s+and\s+davidson\s+county\s+(?:to\s+)?", re.IGNORECASE),
+    re.compile(r"^an?\s+(?:ordinance|resolution)\s+(?:to\s+)?(?:approving|approve|authorizing|"
+               r"authorize|accepting|accept|amending|amend|ratifying|ratify|declaring|declare|"
+               r"recognizing|recognize|establishing|establish|requesting|request)\s+",
+               re.IGNORECASE),
+    re.compile(r"^an?\s+(?:ordinance|resolution)\s+", re.IGNORECASE),
+]
+
+# Shapes that mean the reader produced debris rather than a summary.
+GARBAGE = re.compile(
+    r"^(?:proposal\s+(?:no|number)|\d{4}[A-Z]{1,3}-)|which\s+is\s+described\s+herein"
+    r"|^(?:ion|tion|ance|ment|nce)\b", re.IGNORECASE)
+
+
+def clean_title(title: str) -> str:
+    """Metro's own words with the ceremonial preamble removed — the
+    fallback when no reader is confident. Never invents anything; it only
+    deletes phrases that are identical across thousands of matters."""
+    t = (title or "").split("\n")[0].strip()
+    if not t:
+        t = re.sub(r"\s+", " ", (title or "")).strip()
+    for pat in BOILERPLATE_LEADS:
+        new = pat.sub("", t, count=1)
+        if new != t and len(new) > 15:
+            t = new
+            break
+    t = TRAILING_JUNK.sub("", t)
+    t = METRO_GOV.sub("Metro", t)
+    t = re.sub(r"\s+", " ", t).strip(" ,;:.")
+    return (t[:1].upper() + t[1:]) if t else (title or "")
+
+
+def _confident(out: str) -> bool:
+    """A summary is only worth showing instead of the real title if it
+    reads like one. Too short, mostly punctuation or digits, a bare
+    proposal number, a shard of a word Metro's own sentence started with —
+    all of those are worse than just showing what Metro wrote."""
+    if not out or len(out) < 14:
+        return False
+    if GARBAGE.search(out):
+        return False
+    words = [w for w in re.findall(r"[A-Za-z]{2,}", out)]
+    if len(words) < 2:
+        return False
+    # A run of SHOUTED boilerplate ("THE PROPOSED ORDINANCE REQUIRES…")
+    if sum(1 for w in words if w.isupper() and len(w) > 3) >= 3:
+        return False
+    return True
+
+
+def summarize(title: str, type_name: str = "", body_name: str = "") -> str:
+    """The handle to show instead of Metro's own sentence. Returns "" when
+    no reader is confident, so a caller can fall back to the raw title
+    rather than print a fragment that only looks like a summary."""
+    title = (title or "").strip()
+    if not title:
+        return ""
+    if (type_name or "").lower() == "appointment" or re.search(
+            r"\bappointment\s+of\b", title, re.IGNORECASE):
+        out = _appointment(title, body_name)
+        if out:
+            return title_case(out)
+    for reader in (_zoning, _grant, _abandonment):
+        out = reader(title)
+        if out and _confident(out):
+            return title_case(out)
+    # Procurement and everything else: slots.py's frame, which is built for
+    # exactly that shape and already carries its own receipts. It will
+    # answer for ANY title though, including ones it has no business
+    # reading, so its answer only counts when the frame actually filled —
+    # a subject plus someone it involves — not merely when it returned
+    # some text.
+    slots = extract_slots(title)
+    subject = (slots.get("subject") or {}).get("value") or ""
+    partner = ((slots.get("counterparty") or {}).get("value")
+               or (slots.get("beneficiary") or {}).get("value") or "")
+    if len(subject) < 4 or not partner:
+        return ""
+    # Metro's legal furniture reads like a subject to a frame-filler but
+    # names nothing — "an ordinance amending the Metropolitan Code" is
+    # about whatever it amends, not about the Code.
+    if re.fullmatch(r"(?:the\s+)?(?:metropolitan\s+code|metro\s+code|code\s+of\s+laws|terms?|"
+                    r"agreement|contract|amendment|ordinance|resolution|control|provisions?|"
+                    r"conditions?)", subject.strip(), re.IGNORECASE):
+        return ""
+    out = _tidy(procurement_headline(slots), 110)
+    return out if _confident(out) else ""

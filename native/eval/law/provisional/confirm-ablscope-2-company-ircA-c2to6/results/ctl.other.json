@@ -1,0 +1,241 @@
+{
+ "K6_same": 41,
+ "K6_n": 41,
+ "K1_zero": 318,
+ "K1_n": 318,
+ "docs": [
+  [
+   "ubuntu-de/2010-11-15",
+   23
+  ],
+  [
+   "ubuntu-de/2011-03-15",
+   14
+  ],
+  [
+   "ubuntu-de/2012-03-15",
+   14
+  ],
+  [
+   "ubuntu-de/2012-07-15",
+   9
+  ],
+  [
+   "ubuntu-de/2013-03-15",
+   8
+  ],
+  [
+   "ubuntu-es/2011-07-15",
+   20
+  ],
+  [
+   "ubuntu-es/2013-03-15",
+   3
+  ],
+  [
+   "ubuntu-es/2013-07-15",
+   7
+  ],
+  [
+   "ubuntu-it/2011-07-15",
+   30
+  ],
+  [
+   "ubuntu-it/2012-07-15",
+   10
+  ],
+  [
+   "ubuntu-it/2014-07-15",
+   8
+  ],
+  [
+   "ubuntu-it/2015-03-15",
+   13
+  ]
+ ],
+ "design": {
+  "ubuntu-de/2010-11-15|A:c2": {
+   "got": 9,
+   "nPos": 21,
+   "dropped": 12
+  },
+  "ubuntu-de/2010-11-15|A:c3": {
+   "got": 4,
+   "nPos": 16,
+   "dropped": 12
+  },
+  "ubuntu-de/2010-11-15|A:c4_6": {
+   "got": 10,
+   "nPos": 35,
+   "dropped": 25
+  },
+  "ubuntu-de/2011-03-15|A:c2": {
+   "got": 3,
+   "nPos": 7,
+   "dropped": 4
+  },
+  "ubuntu-de/2011-03-15|A:c3": {
+   "got": 3,
+   "nPos": 10,
+   "dropped": 7
+  },
+  "ubuntu-de/2011-03-15|A:c4_6": {
+   "got": 8,
+   "nPos": 20,
+   "dropped": 12
+  },
+  "ubuntu-de/2012-03-15|A:c2": {
+   "got": 3,
+   "nPos": 4,
+   "dropped": 1
+  },
+  "ubuntu-de/2012-03-15|A:c3": {
+   "got": 4,
+   "nPos": 5,
+   "dropped": 1
+  },
+  "ubuntu-de/2012-03-15|A:c4_6": {
+   "got": 7,
+   "nPos": 9,
+   "dropped": 2
+  },
+  "ubuntu-de/2012-07-15|A:c2": {
+   "got": 0,
+   "nPos": 2,
+   "dropped": 2
+  },
+  "ubuntu-de/2012-07-15|A:c3": {
+   "got": 2,
+   "nPos": 5,
+   "dropped": 3
+  },
+  "ubuntu-de/2012-07-15|A:c4_6": {
+   "got": 7,
+   "nPos": 14,
+   "dropped": 7
+  },
+  "ubuntu-de/2013-03-15|A:c2": {
+   "got": 3,
+   "nPos": 8,
+   "dropped": 5
+  },
+  "ubuntu-de/2013-03-15|A:c3": {
+   "got": 3,
+   "nPos": 7,
+   "dropped": 4
+  },
+  "ubuntu-de/2013-03-15|A:c4_6": {
+   "got": 2,
+   "nPos": 11,
+   "dropped": 9
+  },
+  "ubuntu-es/2011-07-15|A:c2": {
+   "got": 4,
+   "nPos": 9,
+   "dropped": 5
+  },
+  "ubuntu-es/2011-07-15|A:c3": {
+   "got": 5,
+   "nPos": 10,
+   "dropped": 5
+  },
+  "ubuntu-es/2011-07-15|A:c4_6": {
+   "got": 11,
+   "nPos": 22,
+   "dropped": 11
+  },
+  "ubuntu-es/2013-03-15|A:c2": {
+   "got": 2,
+   "nPos": 2,
+   "dropped": 0
+  },
+  "ubuntu-es/2013-03-15|A:c3": {
+   "got": 1,
+   "nPos": 2,
+   "dropped": 1
+  },
+  "ubuntu-es/2013-03-15|A:c4_6": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-es/2013-07-15|A:c2": {
+   "got": 2,
+   "nPos": 2,
+   "dropped": 0
+  },
+  "ubuntu-es/2013-07-15|A:c3": {
+   "got": 3,
+   "nPos": 3,
+   "dropped": 0
+  },
+  "ubuntu-es/2013-07-15|A:c4_6": {
+   "got": 2,
+   "nPos": 6,
+   "dropped": 4
+  },
+  "ubuntu-it/2011-07-15|A:c2": {
+   "got": 8,
+   "nPos": 9,
+   "dropped": 1
+  },
+  "ubuntu-it/2011-07-15|A:c3": {
+   "got": 8,
+   "nPos": 10,
+   "dropped": 2
+  },
+  "ubuntu-it/2011-07-15|A:c4_6": {
+   "got": 14,
+   "nPos": 20,
+   "dropped": 6
+  },
+  "ubuntu-it/2012-07-15|A:c2": {
+   "got": 5,
+   "nPos": 6,
+   "dropped": 1
+  },
+  "ubuntu-it/2012-07-15|A:c3": {
+   "got": 3,
+   "nPos": 6,
+   "dropped": 3
+  },
+  "ubuntu-it/2012-07-15|A:c4_6": {
+   "got": 2,
+   "nPos": 11,
+   "dropped": 9
+  },
+  "ubuntu-it/2014-07-15|A:c2": {
+   "got": 2,
+   "nPos": 3,
+   "dropped": 1
+  },
+  "ubuntu-it/2014-07-15|A:c3": {
+   "got": 1,
+   "nPos": 2,
+   "dropped": 1
+  },
+  "ubuntu-it/2014-07-15|A:c4_6": {
+   "got": 5,
+   "nPos": 6,
+   "dropped": 1
+  },
+  "ubuntu-it/2015-03-15|A:c2": {
+   "got": 6,
+   "nPos": 6,
+   "dropped": 0
+  },
+  "ubuntu-it/2015-03-15|A:c3": {
+   "got": 3,
+   "nPos": 5,
+   "dropped": 2
+  },
+  "ubuntu-it/2015-03-15|A:c4_6": {
+   "got": 4,
+   "nPos": 5,
+   "dropped": 1
+  }
+ },
+ "seconds": 14.8,
+ "headerSha256": "1bb2872ed0b491d0daaa6f6f9076359939d77c192c56199263befce7984a5f9a",
+ "daysSha256": "97ff0d9c40899ad31db4a1960e90cbd1496553d59b5b7bf57c2961d3cd0902f5"
+}

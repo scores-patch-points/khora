@@ -1,0 +1,102 @@
+{
+ "slice": {
+  "docsRequested": 8,
+  "docsRead": 8,
+  "charsCap": 3000,
+  "candidates": [
+   "eng",
+   "spa",
+   "fra",
+   "deu",
+   "ita",
+   "por"
+  ],
+  "perCat": 1
+ },
+ "totals": {
+  "usable": 7,
+  "usableShare": 0.875,
+  "meanCast": 23,
+  "meanRelations": 13.8,
+  "errors": 0
+ },
+ "K3_earAgreesOnEnglish": {
+  "englishDocs": 4,
+  "agreed": 4
+ },
+ "verdict": "PASSING",
+ "rows": [
+  {
+   "address": "01-literature-books/gitenberg/pg236_The-Jungle-Book.txt",
+   "cast": 18,
+   "relations": 16,
+   "signal": 16,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "02-encyclopedic/wikipedia/Thermodynamics.txt",
+   "cast": 18,
+   "relations": 21,
+   "signal": 21,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "05-academic-papers/ntrs-white-papers/20220008600_discontinuous-galerkin-and-related-methods-for-ode.txt",
+   "cast": 37,
+   "relations": 10,
+   "signal": 10,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "06-government-legal/world-factbook/africa_ke.txt",
+   "cast": 35,
+   "relations": 26,
+   "signal": 26,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "07-images-media/met-museum-catalog.txt",
+   "cast": 26,
+   "relations": 15,
+   "signal": 15,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "08-news-current/eu-commission/Wikinews_Shorts__November_13__2008.txt",
+   "cast": 3,
+   "relations": 2,
+   "signal": 2,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "09-source-code/ziglang_zig/doc_langref.html.in.txt",
+   "cast": 26,
+   "relations": 12,
+   "signal": 12,
+   "language": "deu",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "10-audio-music/global-music-catalog.txt",
+   "cast": 21,
+   "relations": 8,
+   "signal": 8,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  }
+ ]
+}

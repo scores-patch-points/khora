@@ -1,0 +1,128 @@
+@@@@ task delegate_same_name
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Backend {
+    int items[16];
+    int size;
+} Backend;
+
+typedef struct Stack {
+    Backend *backend;
+    int (*pop)(Backend *);
+} Stack;
+
+static int backend_pop(Backend *b) {
+    b->size -= 1;
+    return b->items[b->size];
+}
+
+int is_empty(const Stack *s) {
+    return s->backend->size == 0;
+}
+
+void push(Stack *s, int value) {
+    s->backend->items[s->backend->size] = value;
+    s->backend->size += 1;
+}
+
+int pop(Stack *s) {
+    if (is_empty(s)) {
+        fprintf(stderr, "pop from empty stack\n");
+        exit(1);
+    }
+    return s->pop(s->backend);
+}
+
+int peek(const Stack *s) {
+    if (is_empty(s)) {
+        fprintf(stderr, "peek at empty stack\n");
+        exit(1);
+    }
+    return s->backend->items[s->backend->size - 1];
+}
+
+int main(void) {
+    Backend backend;
+    backend.size = 0;
+    Stack stack;
+    stack.backend = &backend;
+    stack.pop = backend_pop;
+    for (int v = 1; v <= 3; v++) {
+        push(&stack, v);
+    }
+    int a = peek(&stack);
+    int b = pop(&stack);
+    int c = pop(&stack);
+    const char *d = is_empty(&stack) ? "true" : "false";
+    int e = pop(&stack);
+    const char *f = is_empty(&stack) ? "true" : "false";
+    printf("%d %d %d %s %d %s\n", a, b, c, d, e, f);
+    return 0;
+}
+@@@@ task forward_reference
+#include <stdio.h>
+
+int apply_tax(int amount);
+int sum_prices(const int *prices, int count);
+
+int total_cost(const int *prices, int count) {
+    return apply_tax(sum_prices(prices, count));
+}
+
+int apply_tax(int amount) {
+    return amount + amount / 10;
+}
+
+int sum_prices(const int *prices, int count) {
+    int total = 0;
+    for (int i = 0; i < count; i++) {
+        total += prices[i];
+    }
+    return total;
+}
+
+int main(void) {
+    int prices[] = {100, 250, 50};
+    printf("%d\n", total_cost(prices, 3));
+    return 0;
+}
+@@@@ task method_chain
+#include <stdio.h>
+
+int add(int a, int b) {
+    return a + b;
+}
+
+int clamp(int value) {
+    return value > 10 ? 10 : value;
+}
+
+int clamp_sum(int a, int b, int c) {
+    return clamp(add(add(a, b), c));
+}
+
+int main(void) {
+    printf("%d\n", clamp_sum(3, 4, 5));
+    return 0;
+}
+@@@@ task call_through_variable
+#include <stdio.h>
+
+int triple(int value) {
+    return value * 3;
+}
+
+int apply_twice(int (*fn)(int), int value) {
+    return fn(fn(value));
+}
+
+int run(void) {
+    int (*handler)(int) = triple;
+    return apply_twice(handler, 5);
+}
+
+int main(void) {
+    printf("%d\n", run());
+    return 0;
+}

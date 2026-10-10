@@ -1,0 +1,168 @@
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import { existsSync, mkdirSync, readFileSync, writeFileSync, lstatSync } from "node:fs";
+import { join } from "node:path";
+import { createFold } from "../server/fold.mjs";
+import { buildOrgans, locateOrgan, parseOrganSpec } from "../server/organs.mjs";
+import { loadConfig } from "../server/config.mjs";
+import { listenEphemeral, request, tmp } from "./helpers.mjs";
+
+const cfgFor = (t, extra = {}) => ({ ...loadConfig({ FOLD_HOME: join(t.dir, "home") }), organsDir: join(t.dir, "organs"), uiDir: null, ...extra });
+// root points at an empty dir so the sibling fallback (../<name>) never reaches the real repos beside this one
+const emptyRoot = (t) => { mkdirSync(join(t.dir, "root", "fold"), { recursive: true }); return join(t.dir, "root", "fold"); };
+
+test("parseOrganSpec: modes, defaults, and loud errors", () => {
+  assert.deepEqual(parseOrganSpec("khora=proxy:http://127.0.0.1:11436, penelope=proxy:http://127.0.0.1:11439,heimdall=inproc,janus=off"), {
+    khora: { mode: "proxy", target: "http://127.0.0.1:11436" },
+    penelope: { mode: "proxy", target: "http://127.0.0.1:11439" },
+    heimdall: { mode: "inproc" },
+    janus: { mode: "off" },
+  });
+  assert.deepEqual(parseOrganSpec(""), {});
+  assert.throws(() => parseOrganSpec("nobody=inproc"), /unknown organ/);
+  assert.throws(() => parseOrganSpec("khora=maybe"), /must be inproc, inproc:<dir>, off or proxy/);
+  assert.throws(() => parseOrganSpec("khora=proxy:notaurl"), /bad proxy target/);
+  assert.throws(() => parseOrganSpec("khora=proxy:ftp://x"), /http\(s\)/);
+  assert.throws(() => parseOrganSpec("khora"), /name=mode/);
+});
+
+test("a missing in-proc module is mode off with a clear reason, never a crash", async () => {
+  const t = tmp();
+  try {
+    const organs = buildOrgans({ cfg: cfgFor(t), root: emptyRoot(t) });
+    assert.deepEqual(organs.map((o) => [o.name, o.mode]), [["heimdall", "off"], ["janus", "off"], ["penelope", "off"], ["khora", "off"]]);
+    assert.match(organs[0].reason, /no in-proc module found; looked: /);
+    const fold = createFold({ port: 0, organs });
+    const { port } = await fold.listen();
+    try {
+      const h = (await request(port, { path: "/health" })).json;
+      assert.equal(h.ok, true);
+      assert.ok(h.organs.every((o) => o.mode === "off" && o.up === false && /no in-proc module/.test(o.reason)));
+      assert.equal((await request(port, { path: "/v1/ask" })).status, 404);
+    } finally { await fold.close(); }
+  } finally { t.cleanup(); }
+});
+
+function writeOrgan(dir, name, body) {
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(join(dir, "organ.mjs"), body);
+}
+
+test("an installed in-proc organ is loaded from organs/<name>/organ.mjs and gets state linked into FOLD_HOME", async () => {
+  const t = tmp();
+  try {
+    const cfg = cfgFor(t);
+    writeOrgan(join(cfg.organsDir, "khora"), "khora", `
+      export function createKhoraHandlers(opts) {
+        return {
+          name: "khora",
+          async start() { this.started = opts.fold.port(); },
+          async handle(req, res) {
+            if (req.url !== "/v1/ask") return false;
+            res.writeHead(200, { "content-type": "application/json" });
+            res.end(JSON.stringify({ answer: "ok", dataDir: opts.dataDir, port: this.started }));
+            return true;
+          },
+          async handleChannel(req, res) { res.end("chan"); },
+          close() {},
+        };
+      }`);
+    mkdirSync(join(cfg.organsDir, "khora", "state"), { recursive: true });
+    writeFileSync(join(cfg.organsDir, "khora", "state", "s.json"), "S");
+    const organs = buildOrgans({ cfg, env: {}, root: emptyRoot(t) });
+    const khora = organs.find((o) => o.name === "khora");
+    assert.equal(khora.mode, "inproc");
+    assert.equal(khora.handleChannel, undefined); // nothing loaded before start()
+    const fold = createFold({ port: 0, compatPort: 0, organs, home: cfg.home });
+    const { port, compatPort } = await fold.listen();
+    try {
+      const r = await request(port, { path: "/v1/ask" });
+      assert.equal(r.json.answer, "ok");
+      assert.equal(r.json.port, port);
+      assert.equal(r.json.dataDir, join(cfg.home, "data", "khora"));
+      assert.equal((await request(compatPort, { path: "/api/tags" })).text, "chan");
+      // state relocated, not deleted
+      assert.ok(lstatSync(join(cfg.organsDir, "khora", "state")).isSymbolicLink());
+      assert.equal(readFileSync(join(cfg.home, "data", "khora", "state", "s.json"), "utf8"), "S");
+    } finally { await fold.close(); }
+  } finally { t.cleanup(); }
+});
+
+test("an in-proc module that fails to import or lacks its factory is DOWN with a reason; the rest still serve", async () => {
+  const t = tmp();
+  try {
+    const cfg = cfgFor(t);
+    writeOrgan(join(cfg.organsDir, "janus"), "janus", "export const nothing = 1;\n");
+    writeOrgan(join(cfg.organsDir, "penelope"), "penelope", "this is not javascript {{{");
+    writeOrgan(join(cfg.organsDir, "khora"), "khora", `export const createKhoraHandlers = () => ({ name: "khora", handle: async (q, r) => (q.url === "/v1/ping" ? (r.end("pong"), true) : false), close() {} });`);
+    const organs = buildOrgans({ cfg, env: { FOLD_LINK_STATE: "0" }, root: emptyRoot(t) });
+    const fold = createFold({ port: 0, organs, home: cfg.home });
+    const { port } = await fold.listen();
+    try {
+      const h = (await request(port, { path: "/health" })).json;
+      assert.equal(h.ok, false);
+      assert.match(h.organs.find((o) => o.name === "janus").reason, /does not export createJanusHandlers/);
+      assert.equal(h.organs.find((o) => o.name === "penelope").up, false);
+      assert.equal(h.organs.find((o) => o.name === "khora").up, true);
+      assert.equal((await request(port, { path: "/v1/ping" })).text, "pong");
+      assert.equal((await request(port, { method: "POST", path: "/v1/reason" })).status, 503); // janus is down, khora declines
+    } finally { await fold.close(); }
+  } finally { t.cleanup(); }
+});
+
+test("proxy and off modes from FOLD_ORGANS, with the route table's prefixes", async () => {
+  const t = tmp();
+  const up = await listenEphemeral((req, res) => res.end("khora-up"));
+  try {
+    const cfg = cfgFor(t, { organsSpec: `khora=proxy:http://127.0.0.1:${up.port},janus=off,penelope=off,heimdall=off` });
+    const organs = buildOrgans({ cfg, root: emptyRoot(t) });
+    assert.deepEqual(organs.map((o) => o.mode), ["off", "off", "off", "proxy"]);
+    const fold = createFold({ port: 0, organs });
+    const { port } = await fold.listen();
+    try {
+      assert.equal((await request(port, { path: "/v1/anything" })).text, "khora-up");
+      assert.equal((await request(port, { method: "POST", path: "/v1/reason" })).text, "khora-up"); // janus off -> khora catch-all
+      assert.equal((await request(port, { path: "/health" })).json.organs.find((o) => o.name === "khora").up, true);
+    } finally { await fold.close(); }
+  } finally { await up.close(); t.cleanup(); }
+});
+
+test("locateOrgan prefers the installed copy over a sibling", () => {
+  const t = tmp();
+  try {
+    const root = join(t.dir, "w", "fold");
+    mkdirSync(root, { recursive: true });
+    writeOrgan(join(t.dir, "w", "khora"), "khora", "");
+    assert.equal(locateOrgan("khora", { root }).kind, "sibling");
+    writeOrgan(join(root, "organs", "khora"), "khora", "");
+    assert.equal(locateOrgan("khora", { root }).kind, "installed");
+    assert.equal(locateOrgan("janus", { root }).dir, null);
+  } finally { t.cleanup(); }
+});
+
+// real heimdall, when the sibling checkout is present (read-only: floors point at a dead port, no tick, HOME is a temp dir)
+const heimdallEntry = new URL("../../heimdall/src/embed.js", import.meta.url);
+test("heimdall mounts in-process from its embed hook and answers /heimdall/status", { skip: !existsSync(heimdallEntry) }, async () => {
+  const t = tmp();
+  const realHome = process.env.HOME;
+  process.env.HOME = join(t.dir, "home-dir"); // anything heimdall defaults under ~ lands in the temp dir
+  try {
+    const cfg = cfgFor(t, { organsDir: join(t.dir, "none"), ollama: "http://127.0.0.1:1" });
+    const root = join(new URL("../..", import.meta.url).pathname, "fold"); // sibling resolution: ../heimdall
+    const organs = buildOrgans({
+      cfg, root, env: { HEIMDALL_PEER_TOKEN_FILE: join(t.dir, "peers.token") },
+      heimdall: { floors: ["http://127.0.0.1:1"], autoTick: false },
+    }).filter((o) => o.name === "heimdall");
+    assert.equal(organs[0].mode, "inproc");
+    const fold = createFold({ port: 0, organs, home: cfg.home });
+    const { port } = await fold.listen();
+    try {
+      const h = (await request(port, { path: "/health" })).json;
+      assert.equal(h.organs[0].up, true, JSON.stringify(h));
+      const s = await request(port, { path: "/heimdall/status" });
+      assert.equal(s.status, 200);
+      assert.equal(s.json.schema, "HeimdallEmbed@1");
+      assert.equal((await request(port, { path: "/not-heimdall" })).status, 404);
+    } finally { await fold.close(); }
+  } finally { process.env.HOME = realHome; t.cleanup(); }
+});

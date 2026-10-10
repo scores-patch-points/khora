@@ -1,0 +1,250 @@
+[
+ {
+  "id": "pl-null2",
+  "slice": 0,
+  "tokens": 25269,
+  "z": {
+   "persist": 0.12,
+   "driftSlope": -0.06,
+   "driftTail": 0.92,
+   "hurst": -0.11,
+   "burstB": -0.38,
+   "burstBmid": -0.9,
+   "burstM": -0.77,
+   "repAdj": -0.88,
+   "kerSlope": 0.79,
+   "kerCurv": -0.79,
+   "kerFar": 0.5
+  },
+  "pct": {
+   "persist": 0.525,
+   "driftSlope": 0.475,
+   "driftTail": 0.775,
+   "hurst": 0.525,
+   "burstB": 0.35,
+   "burstBmid": 0.25,
+   "burstM": 0.35,
+   "repAdj": 0.175,
+   "kerSlope": 0.85,
+   "kerCurv": 0.225,
+   "kerFar": 0.675
+  }
+ },
+ {
+  "id": "pl-null2",
+  "slice": 1,
+  "tokens": 25382,
+  "z": {
+   "persist": 0.93,
+   "driftSlope": -0.32,
+   "driftTail": 0.29,
+   "hurst": 0.53,
+   "burstB": -0.21,
+   "burstBmid": -2.84,
+   "burstM": -1.35,
+   "repAdj": -0.26,
+   "kerSlope": -0.57,
+   "kerCurv": 0.03,
+   "kerFar": 0.24
+  },
+  "pct": {
+   "persist": 0.825,
+   "driftSlope": 0.325,
+   "driftTail": 0.725,
+   "hurst": 0.5,
+   "burstB": 0.4,
+   "burstBmid": 0,
+   "burstM": 0.175,
+   "repAdj": 0.3,
+   "kerSlope": 0.45,
+   "kerCurv": 0.325,
+   "kerFar": 0.575
+  }
+ },
+ {
+  "id": "pl-null2",
+  "slice": 2,
+  "tokens": 25330,
+  "z": {
+   "persist": -0.22,
+   "driftSlope": -1.26,
+   "driftTail": -0.2,
+   "hurst": -2.39,
+   "burstB": 0.38,
+   "burstBmid": 1.1,
+   "burstM": -0.23,
+   "repAdj": -0.09,
+   "kerSlope": -0.11,
+   "kerCurv": -0.04,
+   "kerFar": 0.94
+  },
+  "pct": {
+   "persist": 0.475,
+   "driftSlope": 0.4,
+   "driftTail": 0.6,
+   "hurst": 0.075,
+   "burstB": 0.45,
+   "burstBmid": 0.675,
+   "burstM": 0.45,
+   "repAdj": 0.225,
+   "kerSlope": 0.625,
+   "kerCurv": 0.25,
+   "kerFar": 0.675
+  }
+ },
+ {
+  "id": "pl-null2",
+  "slice": 3,
+  "tokens": 25303,
+  "z": {
+   "persist": 2.07,
+   "driftSlope": 0.23,
+   "driftTail": 1.02,
+   "hurst": -0.88,
+   "burstB": -0.64,
+   "burstBmid": -0.32,
+   "burstM": -0.41,
+   "repAdj": 1.05,
+   "kerSlope": -1.28,
+   "kerCurv": 0.18,
+   "kerFar": -1.59
+  },
+  "pct": {
+   "persist": 0.925,
+   "driftSlope": 0.65,
+   "driftTail": 0.825,
+   "hurst": 0.25,
+   "burstB": 0.4,
+   "burstBmid": 0.575,
+   "burstM": 0.25,
+   "repAdj": 0.875,
+   "kerSlope": 0.125,
+   "kerCurv": 0.6,
+   "kerFar": 0.175
+  }
+ },
+ {
+  "id": "pl-length",
+  "slice": 0,
+  "tokens": 25157,
+  "z": {
+   "persist": -0.5,
+   "driftSlope": -0.19,
+   "driftTail": 0.14,
+   "hurst": 0.22,
+   "burstB": -0.37,
+   "burstBmid": 0.57,
+   "burstM": -0.35,
+   "repAdj": 0.63,
+   "kerSlope": -0.6,
+   "kerCurv": 0.86,
+   "kerFar": 0.32
+  },
+  "pct": {
+   "persist": 0.35,
+   "driftSlope": 0.5,
+   "driftTail": 0.525,
+   "hurst": 0.475,
+   "burstB": 0.425,
+   "burstBmid": 0.875,
+   "burstM": 0.175,
+   "repAdj": 0.825,
+   "kerSlope": 0.175,
+   "kerCurv": 0.825,
+   "kerFar": 0.55
+  }
+ },
+ {
+  "id": "pl-length",
+  "slice": 1,
+  "tokens": 25146,
+  "z": {
+   "persist": 1.85,
+   "driftSlope": -0.92,
+   "driftTail": -0.59,
+   "hurst": 1.06,
+   "burstB": 1.43,
+   "burstBmid": -1.07,
+   "burstM": -0.08,
+   "repAdj": 1.65,
+   "kerSlope": -1.88,
+   "kerCurv": 0.86,
+   "kerFar": 1.94
+  },
+  "pct": {
+   "persist": 0.875,
+   "driftSlope": 0.45,
+   "driftTail": 0.325,
+   "hurst": 0.85,
+   "burstB": 0.9,
+   "burstBmid": 0.25,
+   "burstM": 0.7,
+   "repAdj": 0.95,
+   "kerSlope": 0.075,
+   "kerCurv": 0.775,
+   "kerFar": 1
+  }
+ },
+ {
+  "id": "pl-length",
+  "slice": 2,
+  "tokens": 25199,
+  "z": {
+   "persist": -1.03,
+   "driftSlope": -0.09,
+   "driftTail": -1.45,
+   "hurst": 1.03,
+   "burstB": -2.35,
+   "burstBmid": 0.94,
+   "burstM": -0.16,
+   "repAdj": 0.42,
+   "kerSlope": -0.87,
+   "kerCurv": 0.62,
+   "kerFar": -0.2
+  },
+  "pct": {
+   "persist": 0.1,
+   "driftSlope": 0.575,
+   "driftTail": 0.15,
+   "hurst": 0.65,
+   "burstB": 0.125,
+   "burstBmid": 0.875,
+   "burstM": 0.475,
+   "repAdj": 0.7,
+   "kerSlope": 0.15,
+   "kerCurv": 0.8,
+   "kerFar": 0.425
+  }
+ },
+ {
+  "id": "pl-length",
+  "slice": 3,
+  "tokens": 25131,
+  "z": {
+   "persist": -0.74,
+   "driftSlope": 1.53,
+   "driftTail": 0.24,
+   "hurst": 0.17,
+   "burstB": 0.39,
+   "burstBmid": 1.01,
+   "burstM": 0.51,
+   "repAdj": 3.02,
+   "kerSlope": -3.37,
+   "kerCurv": 2.16,
+   "kerFar": -0.4
+  },
+  "pct": {
+   "persist": 0.425,
+   "driftSlope": 0.85,
+   "driftTail": 0.6,
+   "hurst": 0.675,
+   "burstB": 0.7,
+   "burstBmid": 0.9,
+   "burstM": 0.6,
+   "repAdj": 0.975,
+   "kerSlope": 0.025,
+   "kerCurv": 0.95,
+   "kerFar": 0.425
+  }
+ }
+]

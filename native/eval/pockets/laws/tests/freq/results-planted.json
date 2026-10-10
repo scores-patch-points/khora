@@ -1,0 +1,1022 @@
+{
+ "part": "planted",
+ "statIds": [
+  "zipfAlpha",
+  "heapsBeta",
+  "ttr",
+  "hapaxShare",
+  "rankBinEnt",
+  "abbrev",
+  "menzerath",
+  "recurLen",
+  "lenAcf1",
+  "lenDocEps",
+  "lenCV",
+  "lenLogSkew"
+ ],
+ "nulls": {
+  "zipfAlpha": "token-global",
+  "heapsBeta": "token-global",
+  "ttr": "token-global",
+  "hapaxShare": "token-global",
+  "rankBinEnt": "token-global",
+  "abbrev": "token-global",
+  "menzerath": "token-global",
+  "recurLen": "token-global",
+  "lenAcf1": "unit-order",
+  "lenDocEps": "unit-order",
+  "lenCV": "token-global",
+  "lenLogSkew": "token-global"
+ },
+ "inert": [
+  "abbrev",
+  "lenCV",
+  "lenLogSkew"
+ ],
+ "rows": [
+  {
+   "id": "pl-null",
+   "which": "discover",
+   "tokens": 46232,
+   "units": 4500,
+   "docs": 46,
+   "world": "iid Zipf(1.0) over 5000 types; unit lengths iid lognormal D1; NO structure of any kind; string lengths iid per type, independent of rank",
+   "cells": {
+    "zipfAlpha": {
+     "v": 0.9701,
+     "nullMean": 0.9704,
+     "nullSd": 0.00425,
+     "z": -0.08
+    },
+    "heapsBeta": {
+     "v": 0.7615,
+     "nullMean": 0.76,
+     "nullSd": 0.00667,
+     "z": 0.22
+    },
+    "ttr": {
+     "v": 0.2947,
+     "nullMean": 0.2949,
+     "nullSd": 0.00072,
+     "z": -0.23
+    },
+    "hapaxShare": {
+     "v": 0.6501,
+     "nullMean": 0.6483,
+     "nullSd": 0.00304,
+     "z": 0.6
+    },
+    "rankBinEnt": {
+     "v": 3.4499,
+     "nullMean": 3.4495,
+     "nullSd": 0.00033,
+     "z": 1.36
+    },
+    "abbrev": {
+     "v": 0.0313,
+     "nullMean": 0.0313,
+     "nullSd": 0,
+     "z": null
+    },
+    "menzerath": {
+     "v": 0.0367,
+     "nullMean": -0.0034,
+     "nullSd": 0.01134,
+     "z": 3.54
+    },
+    "recurLen": {
+     "v": -0.2603,
+     "nullMean": -0.2697,
+     "nullSd": 0.00633,
+     "z": 1.47
+    },
+    "lenAcf1": {
+     "v": -0.006,
+     "nullMean": -0.0064,
+     "nullSd": 0.01751,
+     "z": 0.02
+    },
+    "lenDocEps": {
+     "v": -0.0027,
+     "nullMean": 0.0004,
+     "nullSd": 0.00275,
+     "z": -1.13
+    },
+    "lenCV": {
+     "v": 0.5609,
+     "nullMean": 0.5609,
+     "nullSd": 0,
+     "z": null
+    },
+    "lenLogSkew": {
+     "v": -0.044,
+     "nullMean": -0.044,
+     "nullSd": 0,
+     "z": null
+    }
+   }
+  },
+  {
+   "id": "pl-burst",
+   "which": "discover",
+   "tokens": 41200,
+   "units": 4011,
+   "docs": 41,
+   "world": "self-exciting repetition: each token copies a token of the document history with prob 0.35 by exponential lag kernel tau=10 (lags 1..60), else fresh Zipf(1.0); unit lengths D1",
+   "cells": {
+    "zipfAlpha": {
+     "v": 0.9093,
+     "nullMean": 0.9584,
+     "nullSd": 0.00455,
+     "z": -10.8
+    },
+    "heapsBeta": {
+     "v": 0.7827,
+     "nullMean": 0.7524,
+     "nullSd": 0.00687,
+     "z": 4.41
+    },
+    "ttr": {
+     "v": 0.2211,
+     "nullMean": 0.279,
+     "nullSd": 0.00099,
+     "z": -58.48
+    },
+    "hapaxShare": {
+     "v": 0.4913,
+     "nullMean": 0.6092,
+     "nullSd": 0.00415,
+     "z": -28.37
+    },
+    "rankBinEnt": {
+     "v": 3.37,
+     "nullMean": 3.4434,
+     "nullSd": 0.00058,
+     "z": -126
+    },
+    "abbrev": {
+     "v": 0.0217,
+     "nullMean": 0.0217,
+     "nullSd": 0,
+     "z": null
+    },
+    "menzerath": {
+     "v": -0.014,
+     "nullMean": -0.0061,
+     "nullSd": 0.01926,
+     "z": -0.41
+    },
+    "recurLen": {
+     "v": -0.1471,
+     "nullMean": -0.3115,
+     "nullSd": 0.00424,
+     "z": 38.82
+    },
+    "lenAcf1": {
+     "v": 0.0059,
+     "nullMean": -0.0019,
+     "nullSd": 0.01314,
+     "z": 0.6
+    },
+    "lenDocEps": {
+     "v": 0.0003,
+     "nullMean": 0.0011,
+     "nullSd": 0.00221,
+     "z": -0.36
+    },
+    "lenCV": {
+     "v": 0.5743,
+     "nullMean": 0.5743,
+     "nullSd": 0,
+     "z": null
+    },
+    "lenLogSkew": {
+     "v": 0.0658,
+     "nullMean": 0.0658,
+     "nullSd": 0,
+     "z": null
+    }
+   }
+  },
+  {
+   "id": "pl-markov",
+   "which": "discover",
+   "tokens": 48318,
+   "units": 4703,
+   "docs": 48,
+   "world": "first-order Markov on 8 rank bins, strong one-way flow (8-cycle), stationary law = Zipf mass of each bin so the unigram law is exactly Zipf(1.0); chain restarts at each unit; unit lengths D1",
+   "cells": {
+    "zipfAlpha": {
+     "v": 0.9691,
+     "nullMean": 0.9695,
+     "nullSd": 0.00271,
+     "z": -0.16
+    },
+    "heapsBeta": {
+     "v": 0.7638,
+     "nullMean": 0.7646,
+     "nullSd": 0.00373,
+     "z": -0.2
+    },
+    "ttr": {
+     "v": 0.2958,
+     "nullMean": 0.2957,
+     "nullSd": 0.00073,
+     "z": 0.2
+    },
+    "hapaxShare": {
+     "v": 0.6507,
+     "nullMean": 0.6491,
+     "nullSd": 0.00193,
+     "z": 0.83
+    },
+    "rankBinEnt": {
+     "v": 3.4495,
+     "nullMean": 3.4493,
+     "nullSd": 0.00029,
+     "z": 0.67
+    },
+    "abbrev": {
+     "v": 0.0444,
+     "nullMean": 0.0444,
+     "nullSd": 0,
+     "z": null
+    },
+    "menzerath": {
+     "v": 0.0053,
+     "nullMean": 0.0006,
+     "nullSd": 0.0206,
+     "z": 0.23
+    },
+    "recurLen": {
+     "v": -0.2779,
+     "nullMean": -0.2674,
+     "nullSd": 0.00324,
+     "z": -3.26
+    },
+    "lenAcf1": {
+     "v": 0.0207,
+     "nullMean": -0.0106,
+     "nullSd": 0.01441,
+     "z": 2.17
+    },
+    "lenDocEps": {
+     "v": -0.0008,
+     "nullMean": -0.0005,
+     "nullSd": 0.00105,
+     "z": -0.26
+    },
+    "lenCV": {
+     "v": 0.5612,
+     "nullMean": 0.5612,
+     "nullSd": 0,
+     "z": null
+    },
+    "lenLogSkew": {
+     "v": -0.1193,
+     "nullMean": -0.1193,
+     "nullSd": 0,
+     "z": null
+    }
+   }
+  },
+  {
+   "id": "pl-frames",
+   "which": "discover",
+   "tokens": 49077,
+   "units": 11569,
+   "docs": 49,
+   "world": "7 rigid frames over 8 function words and two open classes (Zipf within class) plus a unit-initial vocative slot (prob 0.35) filled from a per-document cast of 4 of 24 recurring names",
+   "cells": {
+    "zipfAlpha": {
+     "v": 1.2344,
+     "nullMean": 1.1856,
+     "nullSd": 0.00432,
+     "z": 11.28
+    },
+    "heapsBeta": {
+     "v": 0.7491,
+     "nullMean": 0.7317,
+     "nullSd": 0.00686,
+     "z": 2.54
+    },
+    "ttr": {
+     "v": 0.2234,
+     "nullMean": 0.2253,
+     "nullSd": 0.0006,
+     "z": -3.24
+    },
+    "hapaxShare": {
+     "v": 0.6722,
+     "nullMean": 0.6686,
+     "nullSd": 0.00329,
+     "z": 1.1
+    },
+    "rankBinEnt": {
+     "v": 3.3556,
+     "nullMean": 3.3681,
+     "nullSd": 0.00131,
+     "z": -9.61
+    },
+    "abbrev": {
+     "v": 0.0383,
+     "nullMean": 0.0383,
+     "nullSd": 0,
+     "z": null
+    },
+    "menzerath": {
+     "v": 0.1295,
+     "nullMean": -0.0029,
+     "nullSd": 0.00919,
+     "z": 14.39
+    },
+    "recurLen": {
+     "v": 0.0134,
+     "nullMean": 0.0159,
+     "nullSd": 0.00554,
+     "z": -0.44
+    },
+    "lenAcf1": {
+     "v": 0.0089,
+     "nullMean": -0.0047,
+     "nullSd": 0.00646,
+     "z": 2.11
+    },
+    "lenDocEps": {
+     "v": 0.0011,
+     "nullMean": -0.0005,
+     "nullSd": 0.00038,
+     "z": 4.2
+    },
+    "lenCV": {
+     "v": 0.2112,
+     "nullMean": 0.2112,
+     "nullSd": 0,
+     "z": null
+    },
+    "lenLogSkew": {
+     "v": -0.1497,
+     "nullMean": -0.1497,
+     "nullSd": 0,
+     "z": null
+    }
+   }
+  },
+  {
+   "id": "pl-parallel",
+   "which": "discover",
+   "tokens": 49407,
+   "units": 4722,
+   "docs": 49,
+   "world": "iid Zipf(1.0) units D1 except with prob 0.35 a unit copies a prefix (1/2) or suffix (1/2) of the previous unit, 30-70% of its length",
+   "cells": {
+    "zipfAlpha": {
+     "v": 0.9641,
+     "nullMean": 0.9696,
+     "nullSd": 0.00312,
+     "z": -1.75
+    },
+    "heapsBeta": {
+     "v": 0.7625,
+     "nullMean": 0.7638,
+     "nullSd": 0.00511,
+     "z": -0.25
+    },
+    "ttr": {
+     "v": 0.2741,
+     "nullMean": 0.2941,
+     "nullSd": 0.00091,
+     "z": -22.04
+    },
+    "hapaxShare": {
+     "v": 0.5859,
+     "nullMean": 0.6392,
+     "nullSd": 0.00259,
+     "z": -20.58
+    },
+    "rankBinEnt": {
+     "v": 3.442,
+     "nullMean": 3.4495,
+     "nullSd": 0.00029,
+     "z": -25.98
+    },
+    "abbrev": {
+     "v": 0.0431,
+     "nullMean": 0.0431,
+     "nullSd": 0,
+     "z": null
+    },
+    "menzerath": {
+     "v": 0.0216,
+     "nullMean": -0.0017,
+     "nullSd": 0.01215,
+     "z": 1.92
+    },
+    "recurLen": {
+     "v": -0.197,
+     "nullMean": -0.273,
+     "nullSd": 0.00436,
+     "z": 17.44
+    },
+    "lenAcf1": {
+     "v": 0.007,
+     "nullMean": -0.0074,
+     "nullSd": 0.02365,
+     "z": 0.61
+    },
+    "lenDocEps": {
+     "v": 0.0005,
+     "nullMean": -0.0007,
+     "nullSd": 0.00118,
+     "z": 1.04
+    },
+    "lenCV": {
+     "v": 0.5863,
+     "nullMean": 0.5863,
+     "nullSd": 0,
+     "z": null
+    },
+    "lenLogSkew": {
+     "v": -0.0085,
+     "nullMean": -0.0085,
+     "nullSd": 0,
+     "z": null
+    }
+   }
+  },
+  {
+   "id": "pl-length",
+   "which": "discover",
+   "tokens": 46295,
+   "units": 4455,
+   "docs": 46,
+   "world": "Zipf(1.0) with iid-given-unit-length tokens; string length = round(2 + 2.4*log10(rank) + noise 0.7) (Zipf abbreviation); long units tilted to short strings (Menzerath, beta 0.1); no order structure",
+   "cells": {
+    "zipfAlpha": {
+     "v": 1.0198,
+     "nullMean": 1.0271,
+     "nullSd": 0.00278,
+     "z": -2.64
+    },
+    "heapsBeta": {
+     "v": 0.7558,
+     "nullMean": 0.7613,
+     "nullSd": 0.00584,
+     "z": -0.95
+    },
+    "ttr": {
+     "v": 0.2679,
+     "nullMean": 0.2685,
+     "nullSd": 0.00057,
+     "z": -1.03
+    },
+    "hapaxShare": {
+     "v": 0.6484,
+     "nullMean": 0.6519,
+     "nullSd": 0.003,
+     "z": -1.19
+    },
+    "rankBinEnt": {
+     "v": 3.4362,
+     "nullMean": 3.4365,
+     "nullSd": 0.0005,
+     "z": -0.64
+    },
+    "abbrev": {
+     "v": -0.7048,
+     "nullMean": -0.7048,
+     "nullSd": 0,
+     "z": null
+    },
+    "menzerath": {
+     "v": -0.5536,
+     "nullMean": -0.0028,
+     "nullSd": 0.01686,
+     "z": -32.66
+    },
+    "recurLen": {
+     "v": -1.2199,
+     "nullMean": -1.2227,
+     "nullSd": 0.00343,
+     "z": 0.82
+    },
+    "lenAcf1": {
+     "v": 0.0131,
+     "nullMean": 0.0067,
+     "nullSd": 0.01649,
+     "z": 0.39
+    },
+    "lenDocEps": {
+     "v": -0.001,
+     "nullMean": 0.0012,
+     "nullSd": 0.00174,
+     "z": -1.24
+    },
+    "lenCV": {
+     "v": 0.575,
+     "nullMean": 0.575,
+     "nullSd": 0,
+     "z": null
+    },
+    "lenLogSkew": {
+     "v": -0.0214,
+     "nullMean": -0.0214,
+     "nullSd": 0,
+     "z": null
+    }
+   }
+  },
+  {
+   "id": "pl-null2",
+   "which": "discover",
+   "tokens": 46578,
+   "units": 3084,
+   "docs": 46,
+   "world": "second iid world: Zipf(1.3) over 5000 types; unit lengths iid shifted-exponential D2 (mode 2, mean ~16); NO structure; other lexicon seed",
+   "cells": {
+    "zipfAlpha": {
+     "v": 1.2537,
+     "nullMean": 1.257,
+     "nullSd": 0.00415,
+     "z": -0.8
+    },
+    "heapsBeta": {
+     "v": 0.683,
+     "nullMean": 0.6983,
+     "nullSd": 0.00862,
+     "z": -1.77
+    },
+    "ttr": {
+     "v": 0.1333,
+     "nullMean": 0.1327,
+     "nullSd": 0.00039,
+     "z": 1.57
+    },
+    "hapaxShare": {
+     "v": 0.6531,
+     "nullMean": 0.6496,
+     "nullSd": 0.00382,
+     "z": 0.9
+    },
+    "rankBinEnt": {
+     "v": 3.0106,
+     "nullMean": 3.0096,
+     "nullSd": 0.00088,
+     "z": 1.17
+    },
+    "abbrev": {
+     "v": -0.05,
+     "nullMean": -0.05,
+     "nullSd": 0,
+     "z": null
+    },
+    "menzerath": {
+     "v": -0.0296,
+     "nullMean": 0.0122,
+     "nullSd": 0.03094,
+     "z": -1.35
+    },
+    "recurLen": {
+     "v": 0.3883,
+     "nullMean": 0.3859,
+     "nullSd": 0.0047,
+     "z": 0.5
+    },
+    "lenAcf1": {
+     "v": 0.0089,
+     "nullMean": 0.001,
+     "nullSd": 0.02056,
+     "z": 0.38
+    },
+    "lenDocEps": {
+     "v": 0.0069,
+     "nullMean": 0.0009,
+     "nullSd": 0.00393,
+     "z": 1.52
+    },
+    "lenCV": {
+     "v": 0.8552,
+     "nullMean": 0.8552,
+     "nullSd": 0,
+     "z": null
+    },
+    "lenLogSkew": {
+     "v": -0.1313,
+     "nullMean": -0.1313,
+     "nullSd": 0,
+     "z": null
+    }
+   }
+  },
+  {
+   "id": "pl-null",
+   "which": "confirm",
+   "tokens": 49313,
+   "units": 4690,
+   "docs": 49,
+   "world": "iid Zipf(1.0) over 5000 types; unit lengths iid lognormal D1; NO structure of any kind; string lengths iid per type, independent of rank",
+   "cells": {
+    "zipfAlpha": {
+     "v": 0.9644,
+     "nullMean": 0.9661,
+     "nullSd": 0.00552,
+     "z": -0.3
+    },
+    "heapsBeta": {
+     "v": 0.7614,
+     "nullMean": 0.7623,
+     "nullSd": 0.00489,
+     "z": -0.17
+    },
+    "ttr": {
+     "v": 0.2964,
+     "nullMean": 0.2983,
+     "nullSd": 0.00081,
+     "z": -2.38
+    },
+    "hapaxShare": {
+     "v": 0.6455,
+     "nullMean": 0.6512,
+     "nullSd": 0.00296,
+     "z": -1.94
+    },
+    "rankBinEnt": {
+     "v": 3.4479,
+     "nullMean": 3.4477,
+     "nullSd": 0.00048,
+     "z": 0.43
+    },
+    "abbrev": {
+     "v": 0.0488,
+     "nullMean": 0.0488,
+     "nullSd": 0,
+     "z": null
+    },
+    "menzerath": {
+     "v": 0.0037,
+     "nullMean": -0.0038,
+     "nullSd": 0.01391,
+     "z": 0.54
+    },
+    "recurLen": {
+     "v": -0.2791,
+     "nullMean": -0.2855,
+     "nullSd": 0.00581,
+     "z": 1.1
+    },
+    "lenAcf1": {
+     "v": 0.0044,
+     "nullMean": -0.0103,
+     "nullSd": 0.01972,
+     "z": 0.74
+    },
+    "lenDocEps": {
+     "v": 0.0012,
+     "nullMean": 0.0002,
+     "nullSd": 0.0029,
+     "z": 0.36
+    },
+    "lenCV": {
+     "v": 0.5811,
+     "nullMean": 0.5811,
+     "nullSd": 0,
+     "z": null
+    },
+    "lenLogSkew": {
+     "v": 0.0199,
+     "nullMean": 0.0199,
+     "nullSd": 0,
+     "z": null
+    }
+   }
+  },
+  {
+   "id": "pl-burst",
+   "which": "confirm",
+   "tokens": 49353,
+   "units": 4741,
+   "docs": 49,
+   "world": "self-exciting repetition: each token copies a token of the document history with prob 0.35 by exponential lag kernel tau=10 (lags 1..60), else fresh Zipf(1.0); unit lengths D1",
+   "cells": {
+    "zipfAlpha": {
+     "v": 0.9125,
+     "nullMean": 0.96,
+     "nullSd": 0.00438,
+     "z": -10.84
+    },
+    "heapsBeta": {
+     "v": 0.7707,
+     "nullMean": 0.7505,
+     "nullSd": 0.006,
+     "z": 3.37
+    },
+    "ttr": {
+     "v": 0.2224,
+     "nullMean": 0.2827,
+     "nullSd": 0.00073,
+     "z": -82.46
+    },
+    "hapaxShare": {
+     "v": 0.4857,
+     "nullMean": 0.6189,
+     "nullSd": 0.00225,
+     "z": -59.07
+    },
+    "rankBinEnt": {
+     "v": 3.3726,
+     "nullMean": 3.4449,
+     "nullSd": 0.00038,
+     "z": -190.59
+    },
+    "abbrev": {
+     "v": 0.0556,
+     "nullMean": 0.0556,
+     "nullSd": 0,
+     "z": null
+    },
+    "menzerath": {
+     "v": -0.0011,
+     "nullMean": -0.0095,
+     "nullSd": 0.01429,
+     "z": 0.59
+    },
+    "recurLen": {
+     "v": -0.1441,
+     "nullMean": -0.3134,
+     "nullSd": 0.00487,
+     "z": 34.78
+    },
+    "lenAcf1": {
+     "v": -0.016,
+     "nullMean": -0.0031,
+     "nullSd": 0.01375,
+     "z": -0.93
+    },
+    "lenDocEps": {
+     "v": 0.0007,
+     "nullMean": 0,
+     "nullSd": 0.00128,
+     "z": 0.58
+    },
+    "lenCV": {
+     "v": 0.5723,
+     "nullMean": 0.5723,
+     "nullSd": 0,
+     "z": null
+    },
+    "lenLogSkew": {
+     "v": -0.0528,
+     "nullMean": -0.0528,
+     "nullSd": 0,
+     "z": null
+    }
+   }
+  },
+  {
+   "id": "pl-length",
+   "which": "confirm",
+   "tokens": 49333,
+   "units": 4763,
+   "docs": 49,
+   "world": "Zipf(1.0) with iid-given-unit-length tokens; string length = round(2 + 2.4*log10(rank) + noise 0.7) (Zipf abbreviation); long units tilted to short strings (Menzerath, beta 0.1); no order structure",
+   "cells": {
+    "zipfAlpha": {
+     "v": 1.0113,
+     "nullMean": 1.0144,
+     "nullSd": 0.00289,
+     "z": -1.08
+    },
+    "heapsBeta": {
+     "v": 0.76,
+     "nullMean": 0.7586,
+     "nullSd": 0.00856,
+     "z": 0.16
+    },
+    "ttr": {
+     "v": 0.2688,
+     "nullMean": 0.2692,
+     "nullSd": 0.00078,
+     "z": -0.49
+    },
+    "hapaxShare": {
+     "v": 0.6527,
+     "nullMean": 0.6514,
+     "nullSd": 0.00264,
+     "z": 0.49
+    },
+    "rankBinEnt": {
+     "v": 3.4374,
+     "nullMean": 3.4372,
+     "nullSd": 0.00049,
+     "z": 0.41
+    },
+    "abbrev": {
+     "v": -0.7218,
+     "nullMean": -0.7218,
+     "nullSd": 0,
+     "z": null
+    },
+    "menzerath": {
+     "v": -0.5652,
+     "nullMean": -0.0062,
+     "nullSd": 0.01861,
+     "z": -30.03
+    },
+    "recurLen": {
+     "v": -1.2294,
+     "nullMean": -1.2278,
+     "nullSd": 0.00262,
+     "z": -0.61
+    },
+    "lenAcf1": {
+     "v": 0.0322,
+     "nullMean": 0.0026,
+     "nullSd": 0.01367,
+     "z": 2.17
+    },
+    "lenDocEps": {
+     "v": 0.0005,
+     "nullMean": 0.0005,
+     "nullSd": 0.00179,
+     "z": 0
+    },
+    "lenCV": {
+     "v": 0.5674,
+     "nullMean": 0.5674,
+     "nullSd": 0,
+     "z": null
+    },
+    "lenLogSkew": {
+     "v": -0.0123,
+     "nullMean": -0.0123,
+     "nullSd": 0,
+     "z": null
+    }
+   }
+  },
+  {
+   "id": "inline-topical",
+   "which": "discover",
+   "tokens": 50269,
+   "units": 4827,
+   "docs": 50,
+   "world": "inline-topical",
+   "cells": {
+    "zipfAlpha": {
+     "v": 0.8806,
+     "nullMean": 0.8463,
+     "nullSd": 0.00297,
+     "z": 11.58
+    },
+    "heapsBeta": {
+     "v": 0.7626,
+     "nullMean": 0.7487,
+     "nullSd": 0.00351,
+     "z": 3.95
+    },
+    "ttr": {
+     "v": 0.3015,
+     "nullMean": 0.3393,
+     "nullSd": 0.00073,
+     "z": -51.57
+    },
+    "hapaxShare": {
+     "v": 0.5671,
+     "nullMean": 0.584,
+     "nullSd": 0.00397,
+     "z": -4.25
+    },
+    "rankBinEnt": {
+     "v": 3.4025,
+     "nullMean": 3.3632,
+     "nullSd": 0.0003,
+     "z": 132.79
+    },
+    "abbrev": {
+     "v": 0.0306,
+     "nullMean": 0.0306,
+     "nullSd": 0,
+     "z": null
+    },
+    "menzerath": {
+     "v": 0.0376,
+     "nullMean": -0.0003,
+     "nullSd": 0.0112,
+     "z": 3.39
+    },
+    "recurLen": {
+     "v": -0.1423,
+     "nullMean": -0.2394,
+     "nullSd": 0.0119,
+     "z": 8.16
+    },
+    "lenAcf1": {
+     "v": 0.0084,
+     "nullMean": -0.0021,
+     "nullSd": 0.01343,
+     "z": 0.78
+    },
+    "lenDocEps": {
+     "v": 0.0022,
+     "nullMean": 0.0001,
+     "nullSd": 0.0021,
+     "z": 1.01
+    },
+    "lenCV": {
+     "v": 0.5699,
+     "nullMean": 0.5699,
+     "nullSd": 0,
+     "z": null
+    },
+    "lenLogSkew": {
+     "v": -0.0674,
+     "nullMean": -0.0674,
+     "nullSd": 0,
+     "z": null
+    }
+   }
+  },
+  {
+   "id": "inline-rhythm",
+   "which": "discover",
+   "tokens": 50308,
+   "units": 5362,
+   "docs": 50,
+   "world": "inline-rhythm",
+   "cells": {
+    "zipfAlpha": {
+     "v": 0.9687,
+     "nullMean": 0.9741,
+     "nullSd": 0.003,
+     "z": -1.79
+    },
+    "heapsBeta": {
+     "v": 0.7531,
+     "nullMean": 0.7644,
+     "nullSd": 0.00312,
+     "z": -3.62
+    },
+    "ttr": {
+     "v": 0.297,
+     "nullMean": 0.2964,
+     "nullSd": 0.001,
+     "z": 0.64
+    },
+    "hapaxShare": {
+     "v": 0.6483,
+     "nullMean": 0.6436,
+     "nullSd": 0.00331,
+     "z": 1.42
+    },
+    "rankBinEnt": {
+     "v": 3.4482,
+     "nullMean": 3.4478,
+     "nullSd": 0.00017,
+     "z": 2.11
+    },
+    "abbrev": {
+     "v": 0.0771,
+     "nullMean": 0.0771,
+     "nullSd": 0,
+     "z": null
+    },
+    "menzerath": {
+     "v": -0.0045,
+     "nullMean": 0.0057,
+     "nullSd": 0.01742,
+     "z": -0.58
+    },
+    "recurLen": {
+     "v": -0.2878,
+     "nullMean": -0.2934,
+     "nullSd": 0.00544,
+     "z": 1.03
+    },
+    "lenAcf1": {
+     "v": 0.6184,
+     "nullMean": 0.0011,
+     "nullSd": 0.01143,
+     "z": 54.03
+    },
+    "lenDocEps": {
+     "v": 0.3798,
+     "nullMean": 0.0015,
+     "nullSd": 0.00197,
+     "z": 191.67
+    },
+    "lenCV": {
+     "v": 0.6991,
+     "nullMean": 0.6991,
+     "nullSd": 0,
+     "z": null
+    },
+    "lenLogSkew": {
+     "v": -0.0321,
+     "nullMean": -0.0321,
+     "nullSd": 0,
+     "z": null
+    }
+   }
+  }
+ ]
+}

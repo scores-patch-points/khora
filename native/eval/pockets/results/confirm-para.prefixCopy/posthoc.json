@@ -1,0 +1,234 @@
+{
+ "label": "POST HOC (after the verdict; not part of the pre-registered rule)",
+ "verdictFromPreregistration": "PARTIAL",
+ "holding": [
+  "code",
+  "ud",
+  "notation"
+ ],
+ "failing": [
+  "prose",
+  "children"
+ ],
+ "proseExpectedUnderAtlasSizeBinRates": {
+  "rates": [
+   {
+    "id": "sp-en-poe-works2",
+    "tokens": 96647,
+    "bin": [
+     70000,
+     120000
+    ],
+    "n": 13,
+    "rate": 0.6923076923076923
+   },
+   {
+    "id": "sp-en-chopin-awakening",
+    "tokens": 64408,
+    "bin": [
+     45000,
+     70000
+    ],
+    "n": 9,
+    "rate": 0.7777777777777778
+   },
+   {
+    "id": "sp-en-hesse-siddhartha",
+    "tokens": 39270,
+    "bin": [
+     30000,
+     45000
+    ],
+    "n": 6,
+    "rate": 0.8333333333333334
+   },
+   {
+    "id": "sp-en-zola-mouret",
+    "tokens": 128496,
+    "bin": [
+     120000,
+     1000000000000
+    ],
+    "n": 20,
+    "rate": 1
+   },
+   {
+    "id": "sp-en-waikna",
+    "tokens": 85322,
+    "bin": [
+     70000,
+     120000
+    ],
+    "n": 13,
+    "rate": 0.6923076923076923
+   },
+   {
+    "id": "sp-en-about-london",
+    "tokens": 55661,
+    "bin": [
+     45000,
+     70000
+    ],
+    "n": 9,
+    "rate": 0.7777777777777778
+   },
+   {
+    "id": "sp-en-warren-forces",
+    "tokens": 35736,
+    "bin": [
+     30000,
+     45000
+    ],
+    "n": 6,
+    "rate": 0.8333333333333334
+   },
+   {
+    "id": "sp-en-kafka-metamorphosis",
+    "tokens": 22048,
+    "bin": [
+     0,
+     30000
+    ],
+    "n": 2,
+    "rate": 0.5
+   }
+  ],
+  "expectedPresent": 6.1068376068376065,
+  "observedPresent": 5,
+  "pAtMost5": 0.2820076541586513,
+  "pAtLeast6": 0.7179923458413486,
+  "pmf": [
+   0,
+   0.00006493453786901078,
+   0.001461027102052743,
+   0.013656544995576335,
+   0.0685059374518064,
+   0.1983192100713468,
+   0.329359136695319,
+   0.2879593103952078,
+   0.10067389875082182
+  ],
+  "note": "rates = atlas PRESENT+ share of English novel/memoir/reportage/treatise/essay pockets in the same token-size bin (bin 0-30k has n=2); the threshold >= 6 of 8 (0.65) was fixed before the siblings were computed"
+ },
+ "atlasChildrenUnder30k": {
+  "n": 6,
+  "ids": [
+   "bk-alice:AMBIGUOUS",
+   "ml-pc-alice-de:AMBIGUOUS",
+   "ml-pc-alice-en:AMBIGUOUS",
+   "ml-pc-alice-fr:AMBIGUOUS",
+   "ml-pc-alice-it:AMBIGUOUS",
+   "ml-pc-perrault-de:AMBIGUOUS"
+  ],
+  "nAliceTexts": 5,
+  "note": "the atlas basis of the 'children weaker' prediction (0 PRESENT of 6 under 30k tokens) is five translations/copies of one book plus one fairy-tale collection: not six independent pockets"
+ },
+ "overallPresentRate": {
+  "allDefined": "21/29",
+  "excludingNotation": "21/27 = 0.778",
+  "atlasLawRate": 0.7844,
+  "atlasPositive": "299 PRESENT+ of 385 = 0.777"
+ },
+ "withinDocumentNull": {
+  "presentUnderAtlasNull": 21,
+  "stillPresentUnderWithinDocNull": 14,
+  "lostStatus": [
+   "sp-ud-afr:AMBIGUOUS",
+   "sp-ud-ell:AMBIGUOUS",
+   "sp-ud-hye:AMBIGUOUS",
+   "sp-ud-lit:AMBIGUOUS",
+   "sp-ud-mlt:ABSENT",
+   "sp-ud-wol:AMBIGUOUS",
+   "sp-en-aesop-stickney:AMBIGUOUS"
+  ],
+  "byClass": {
+   "code": "5/5",
+   "prose": "5/5",
+   "ud": "3/9",
+   "children": "1/2"
+  },
+  "medianZRatio": 0.33872026891418866,
+  "note": "UD documents are arbitrary 25-sentence blocks, so the within-document null of a treebank re-deals sentences inside one block; code files and book blocks are real documents or ~100-sentence blocks"
+ },
+ "undefinedCells": [
+  {
+   "id": "sp-ud-kat",
+   "discover": {
+    "v": 0.0019379844961804338,
+    "nullMean": 0,
+    "nullSd": 0,
+    "z": null,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.005489478499839606,
+    "nullMean": 0.0005489478498930112,
+    "nullSd": 0.0007715224544417282,
+    "z": 6.403612262356708,
+    "n": 10
+   }
+  },
+  {
+   "id": "sp-ud-tur",
+   "discover": {
+    "v": 0.006853582554867899,
+    "nullMean": 0.00006265664160309825,
+    "nullSd": 0.00019813769800265432,
+    "z": 34.27377011907056,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.0049875311724463245,
+    "nullMean": 0,
+    "nullSd": 0,
+    "z": null,
+    "n": 10
+   }
+  }
+ ],
+ "shortHalves": [
+  {
+   "id": "sp-en-waikna",
+   "tokens": 85322,
+   "units": 3386,
+   "zD": 6.5857896133572895,
+   "zC": 1.7610267618333466,
+   "vD": 0.008791208791080862,
+   "vC": 0.003434065934015962,
+   "nullSdD": 0.0010666845428634088,
+   "nullSdC": 0.0011688410620923563
+  },
+  {
+   "id": "sp-en-warren-forces",
+   "tokens": 35736,
+   "units": 2020,
+   "zD": 14.321665684233164,
+   "zC": 3.2091276405472926,
+   "vD": 0.022185702547176334,
+   "vC": 0.00831024930721469,
+   "nullSdD": 0.0013135788165711778,
+   "nullSdC": 0.0018549580558499922
+  },
+  {
+   "id": "sp-en-kafka-metamorphosis",
+   "tokens": 22048,
+   "units": 783,
+   "zD": 1.1586970811030821,
+   "zC": 4.883869387005733,
+   "vD": 0.0032786885249151965,
+   "vC": 0.011627906977082603,
+   "nullSdD": 0.0016959126471520999,
+   "nullSdC": 0.0019032589728255952
+  }
+ ],
+ "rivalPosPar": {
+  "presentPosPar": "23/29",
+  "presentPrefixCopy": "21/29",
+  "posParPresentWherePrefixCopyAmbiguous": [
+   "sp-en-waikna",
+   "sp-en-warren-forces"
+  ],
+  "spearmanZ": 0.9669950738916256,
+  "atlasRho": 0.9
+ }
+}

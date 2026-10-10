@@ -1,0 +1,13 @@
+{
+ "cell": "FIRST-BOTH",
+ "regression": {
+  "sameGenus": 0.0542,
+  "sameFamilyOnly": 0.0175,
+  "sameOrder": 0.0165,
+  "sameScript": 0.0047,
+  "sameMorph": -0.0085,
+  "sameTeam": 0.0291
+ },
+ "GENUS": 0.0525,
+ "ORDER": 0.0318
+}

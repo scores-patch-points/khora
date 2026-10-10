@@ -1,0 +1,24 @@
+kind 0 [r0000] forms=164 tok=0.0269 cap=0.0058 cap90=0.0123 cast=0
+  top: much little man great happy morning something married woman possible look certain agreeable right
+  before: a:0.16 very:0.05 so:0.04 the:0.04 was:0.04 as:0.03 | lift too:x18.2 young:x13.2 very:x13 a:x10.1 so:x9.5 how:x8.1
+  after: $:0.12 and:0.07 to:0.07 as:0.03 in:0.03 of:0.03 | lift as:x3.3 but:x3.1 at:x2.7 and:x2.7 $:x2.2 for:x2.1
+kind 1 [r0001] forms=244 tok=0.057 cap=0.2305 cap90=0.107 cast=6
+  top: him mr them mrs out us away last enough myself done love longbourn anything
+  before: of:0.07 to:0.06 at:0.03 in:0.03 with:0.02 the:0.02 | lift de:x15.8 few:x12.9 sir:x10.2 went:x7.9 saw:x5.3 at:x5.1
+  after: $:0.27 and:0.08 to:0.06 of:0.03 with:0.03 in:0.03 | lift $:x4.9 again:x3.9 with:x3.5 before:x3.4 other:x2.8 and:x2.7
+kind 2 [r001] forms=263 tok=0.0552 cap=0.0094 cap90=0.0115 cast=0
+  top: time good own sister dear family father letter mother way friend manner feelings aunt
+  before: her:0.15 his:0.11 my:0.07 the:0.07 a:0.05 your:0.04 | lift my:x12.6 his:x10.6 your:x10.5 whose:x9.5 her:x8.7 same:x8.5
+  after: $:0.12 and:0.09 to:0.05 of:0.04 was:0.03 in:0.03 | lift bourgh:x18.1 which:x3.7 and:x3.2 or:x3.2 were:x2.8 who:x2.5
+kind 3 [r010] forms=236 tok=0.0445 cap=0.0212 cap90=0.0342 cast=1
+  top: more other most room first day two young house better subject whole ladies place
+  before: the:0.37 a:0.07 this:0.02 his:0.02 of:0.02 no:0.02 | lift each:x12.1 the:x10.5 every:x7.4 young:x6.7 two:x5.8 any:x5.5
+  after: $:0.11 and:0.06 of:0.05 to:0.03 in:0.02 was:0.02 | lift ladies:x9.7 than:x6.6 man:x6.1 room:x5.6 or:x3.9 time:x3.4
+kind 4 [r011] forms=275 tok=0.0329 cap=0.002 cap90=0.0036 cast=0
+  top: pleasure ill kind part means idea object course want honour power rest account doubt
+  before: the:0.19 a:0.04 his:0.04 her:0.04 of:0.03 in:0.03 | lift great:x14.1 every:x7.3 an:x7.1 no:x6.3 any:x5.8 good:x5.5
+  after: of:0.37 $:0.08 to:0.06 and:0.05 in:0.03 was:0.02 | lift of:x12.4 which:x3.5 from:x2.1 for:x2.1 in:x1.9 as:x1.8
+kind 5 [r1] forms=884 tok=0.7223 cap=0.0627 cap90=0.0391 cast=23
+  top: the to of and her i a in was she that it not you
+  before: ^:0.07 to:0.04 and:0.03 of:0.03 i:0.02 she:0.02 | lift account:x1.4 word:x1.4 sorry:x1.4 rest:x1.4 doubt:x1.4 feeling:x1.4
+  after: the:0.04 to:0.03 $:0.02 her:0.02 a:0.02 not:0.02 | lift glad:x1.4 rest:x1.4 ask:x1.4 going:x1.4 length:x1.4 usual:x1.4

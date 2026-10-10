@@ -1,0 +1,89 @@
+{
+ "hdr": "96f5895ac8713248fb7c1cdd11c041f2fbb07bca39856368dea2eb1442f61791",
+ "n": 52,
+ "feats": {
+  "pInitX": {
+   "med": 0.5667,
+   "shareGT50": 0.8846,
+   "shareGT55": 0.5962,
+   "sovMed": 0.6662,
+   "restMed": 0.5517,
+   "sovDiff": 0.1145,
+   "p": 0.0002
+  },
+  "span": {
+   "med": 0.6318,
+   "shareGT50": 0.9038,
+   "shareGT55": 0.8077,
+   "sovMed": 0.5733,
+   "restMed": 0.6333,
+   "sovDiff": -0.06,
+   "p": 0.886
+  },
+  "loc": {
+   "med": 0.5905,
+   "shareGT50": 0.9615,
+   "shareGT55": 0.7308,
+   "sovMed": 0.5787,
+   "restMed": 0.5925,
+   "sovDiff": -0.0138,
+   "p": 0.6177
+  },
+  "burst": {
+   "med": 0.5867,
+   "shareGT50": 0.9038,
+   "shareGT55": 0.7115,
+   "sovMed": 0.6055,
+   "restMed": 0.5814,
+   "sovDiff": 0.0241,
+   "p": 0.1772
+  },
+  "rec": {
+   "med": 0.5756,
+   "shareGT50": 0.8846,
+   "shareGT55": 0.6731,
+   "sovMed": 0.555,
+   "restMed": 0.5771,
+   "sovDiff": -0.0221,
+   "p": 0.6685
+  },
+  "relPos": {
+   "med": 0.5677,
+   "shareGT50": 0.8269,
+   "shareGT55": 0.5962,
+   "sovMed": 0.6409,
+   "restMed": 0.5516,
+   "sovDiff": 0.0893,
+   "p": 0.0002
+  },
+  "meanIdx": {
+   "med": 0.5583,
+   "shareGT50": 0.8077,
+   "shareGT55": 0.5769,
+   "sovMed": 0.6108,
+   "restMed": 0.5516,
+   "sovDiff": 0.0592,
+   "p": 0.0406
+  },
+  "pInit": {
+   "med": 0.5761,
+   "shareGT50": 0.9038,
+   "shareGT55": 0.7115,
+   "sovMed": 0.6294,
+   "restMed": 0.5677,
+   "sovDiff": 0.0617,
+   "p": 0.001
+  },
+  "invLen": {
+   "med": 0.5059,
+   "shareGT50": 0.5577,
+   "shareGT55": 0.3462,
+   "sovMed": 0.4467,
+   "restMed": 0.5097,
+   "sovDiff": -0.063,
+   "p": 0.9986
+  }
+ },
+ "rhoPInitX_span": 0.1363,
+ "cellsSpanBeatsPInitX": 36
+}

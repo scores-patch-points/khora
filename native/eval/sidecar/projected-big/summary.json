@@ -1,0 +1,21 @@
+{
+ "slice": {
+  "docs": 40,
+  "chromeDf": 0.5,
+  "in": "pilot-results-big/sidecar.jsonl"
+ },
+ "before": {
+  "cast": 1285,
+  "capitalShare": 0.304,
+  "relations": 967,
+  "relBothEndsShare": 0.147
+ },
+ "after": {
+  "cast": 391,
+  "relations": 13,
+  "docsWith2Names": 37,
+  "chromeSurvivors": 0
+ },
+ "chromeExamples": [],
+ "verdict": "PASSING"
+}

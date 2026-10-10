@@ -1,0 +1,628 @@
+{
+ "headerSha256": "76e9a0acf54704c0f8f0b4415bf86a2733c8dabf750a32c6e4c2b16fd733d350",
+ "groupsSha256": "b2cad7b4a50c77400c1dfc82a91d53092b9327aaa138dbdf1a1ea07e300650d7",
+ "libSha256": "eaa1d06de53f4ab04a861b646e8d0e0e79bdf71bac2cdb6fbaac4486d024bfe4",
+ "analysisSha256": "cc19ee5bfc496a877c429d0380cf21e30be0e51c3d5b51ac27ec2d7ff9311868",
+ "cacheSha256": "14aa17a147dce6824d460696c6d78f0bc928849705d43338b844a8eba5cd2d56",
+ "candidates": [
+  {
+   "cell": "LATER-BOTH",
+   "group": "genus:Romance",
+   "kind": "genus",
+   "tier": "STRICT",
+   "n": 7,
+   "nPass": 5,
+   "frac": 0.7143,
+   "meanSame": 0.6203,
+   "meanCtrl": 0.5157,
+   "diff": {
+    "mean": 0.1046,
+    "lo": 0.0746,
+    "hi": 0.1345,
+    "n": 7,
+    "pos": 7
+   },
+   "positionControl": 0.5029,
+   "shuffledControl": 0.4992,
+   "scope": [
+    "spa",
+    "cat",
+    "fra",
+    "ita",
+    "glg",
+    "ron",
+    "por"
+   ],
+   "passing": [
+    "spa",
+    "cat",
+    "fra",
+    "ita",
+    "glg"
+   ],
+   "failing": [
+    "ron",
+    "por"
+   ]
+  },
+  {
+   "cell": "LATER-BOTH",
+   "group": "genus:Slavic",
+   "kind": "genus",
+   "tier": "NONE",
+   "n": 9,
+   "nPass": 0,
+   "frac": 0,
+   "meanSame": 0.5511,
+   "meanCtrl": 0.5121,
+   "diff": {
+    "mean": 0.0389,
+    "lo": 0.0237,
+    "hi": 0.0528,
+    "n": 9,
+    "pos": 9
+   },
+   "positionControl": 0.5072,
+   "shuffledControl": 0.5117,
+   "scope": [],
+   "passing": [],
+   "failing": [
+    "bul",
+    "ukr",
+    "rus",
+    "srp",
+    "ces",
+    "hrv",
+    "pol",
+    "slk",
+    "slv"
+   ]
+  },
+  {
+   "cell": "LATER-BOTH",
+   "group": "genus:Germanic",
+   "kind": "genus",
+   "tier": "NONE",
+   "n": 5,
+   "nPass": 0,
+   "frac": 0,
+   "meanSame": 0.5862,
+   "meanCtrl": 0.54,
+   "diff": {
+    "mean": 0.0463,
+    "lo": 0.0377,
+    "hi": 0.0549,
+    "n": 5,
+    "pos": 5
+   },
+   "positionControl": 0.5007,
+   "shuffledControl": 0.532,
+   "scope": [],
+   "passing": [],
+   "failing": [
+    "eng",
+    "nld",
+    "dan",
+    "nob",
+    "deu"
+   ]
+  },
+  {
+   "cell": "LATER-BOTH",
+   "group": "order:SOV",
+   "kind": "order",
+   "tier": "NONE",
+   "n": 7,
+   "nPass": 0,
+   "frac": 0,
+   "meanSame": 0.5381,
+   "meanCtrl": 0.5197,
+   "diff": {
+    "mean": 0.0184,
+    "lo": -0.0024,
+    "hi": 0.0369,
+    "n": 7,
+    "pos": 4
+   },
+   "positionControl": 0.5107,
+   "shuffledControl": 0.5098,
+   "scope": [],
+   "passing": [],
+   "failing": [
+    "hin",
+    "urd",
+    "eus",
+    "tam",
+    "fas",
+    "jpn",
+    "tur"
+   ]
+  },
+  {
+   "cell": "LATER-BOTH",
+   "group": "order:SVO",
+   "kind": "order",
+   "tier": "NONE",
+   "n": 29,
+   "nPass": 1,
+   "frac": 0.0345,
+   "meanSame": 0.5214,
+   "meanCtrl": 0.4962,
+   "diff": {
+    "mean": 0.0253,
+    "lo": 0.0072,
+    "hi": 0.0426,
+    "n": 29,
+    "pos": 21
+   },
+   "positionControl": 0.5013,
+   "shuffledControl": 0.504,
+   "scope": [
+    "bul"
+   ],
+   "passing": [
+    "bul"
+   ],
+   "failing": [
+    "eng",
+    "fin",
+    "heb",
+    "lav",
+    "ron",
+    "spa",
+    "ukr",
+    "cat",
+    "dan",
+    "fra",
+    "ind",
+    "lit",
+    "nob",
+    "rus",
+    "srp",
+    "ces",
+    "hrv",
+    "ita",
+    "lzh",
+    "pol",
+    "slk",
+    "vie",
+    "cmn",
+    "ell",
+    "glg",
+    "mlt",
+    "por",
+    "wol"
+   ]
+  },
+  {
+   "cell": "FIRST-LEFT",
+   "group": "genus:Romance",
+   "kind": "genus",
+   "tier": "STRICT",
+   "n": 7,
+   "nPass": 6,
+   "frac": 0.8571,
+   "meanSame": 0.6477,
+   "meanCtrl": 0.5685,
+   "diff": {
+    "mean": 0.0792,
+    "lo": 0.06,
+    "hi": 0.0984,
+    "n": 7,
+    "pos": 7
+   },
+   "positionControl": 0.4991,
+   "shuffledControl": 0.5258,
+   "scope": [
+    "cat",
+    "fra",
+    "por",
+    "ita",
+    "spa",
+    "glg",
+    "ron"
+   ],
+   "passing": [
+    "cat",
+    "fra",
+    "por",
+    "ita",
+    "spa",
+    "glg"
+   ],
+   "failing": [
+    "ron"
+   ]
+  },
+  {
+   "cell": "FIRST-LEFT",
+   "group": "genus:Slavic",
+   "kind": "genus",
+   "tier": "NONE",
+   "n": 9,
+   "nPass": 0,
+   "frac": 0,
+   "meanSame": 0.563,
+   "meanCtrl": 0.556,
+   "diff": {
+    "mean": 0.007,
+    "lo": -0.0045,
+    "hi": 0.0206,
+    "n": 9,
+    "pos": 5
+   },
+   "positionControl": 0.5017,
+   "shuffledControl": 0.5174,
+   "scope": [],
+   "passing": [],
+   "failing": [
+    "bul",
+    "pol",
+    "slk",
+    "slv",
+    "ces",
+    "hrv",
+    "ukr",
+    "rus",
+    "srp"
+   ]
+  },
+  {
+   "cell": "FIRST-LEFT",
+   "group": "genus:Germanic",
+   "kind": "genus",
+   "tier": "NONE",
+   "n": 5,
+   "nPass": 1,
+   "frac": 0.2,
+   "meanSame": 0.6328,
+   "meanCtrl": 0.5944,
+   "diff": {
+    "mean": 0.0384,
+    "lo": 0.027,
+    "hi": 0.0519,
+    "n": 5,
+    "pos": 5
+   },
+   "positionControl": 0.4987,
+   "shuffledControl": 0.5377,
+   "scope": [
+    "nld"
+   ],
+   "passing": [
+    "nld"
+   ],
+   "failing": [
+    "eng",
+    "dan",
+    "deu",
+    "nob"
+   ]
+  },
+  {
+   "cell": "FIRST-LEFT",
+   "group": "order:SOV",
+   "kind": "order",
+   "tier": "NONE",
+   "n": 8,
+   "nPass": 0,
+   "frac": 0,
+   "meanSame": 0.5137,
+   "meanCtrl": 0.5282,
+   "diff": {
+    "mean": -0.0145,
+    "lo": -0.0198,
+    "hi": -0.01,
+    "n": 8,
+    "pos": 0
+   },
+   "positionControl": 0.507,
+   "shuffledControl": 0.5055,
+   "scope": [],
+   "passing": [],
+   "failing": [
+    "tam",
+    "hin",
+    "kor",
+    "tur",
+    "eus",
+    "fas",
+    "jpn",
+    "urd"
+   ]
+  },
+  {
+   "cell": "FIRST-LEFT",
+   "group": "order:SVO",
+   "kind": "order",
+   "tier": "NONE",
+   "n": 29,
+   "nPass": 1,
+   "frac": 0.0345,
+   "meanSame": 0.5553,
+   "meanCtrl": 0.5406,
+   "diff": {
+    "mean": 0.0147,
+    "lo": 0.0056,
+    "hi": 0.0242,
+    "n": 29,
+    "pos": 21
+   },
+   "positionControl": 0.4998,
+   "shuffledControl": 0.5152,
+   "scope": [
+    "bul"
+   ],
+   "passing": [
+    "bul"
+   ],
+   "failing": [
+    "eng",
+    "fin",
+    "heb",
+    "lzh",
+    "pol",
+    "slk",
+    "vie",
+    "cat",
+    "dan",
+    "fra",
+    "ind",
+    "mlt",
+    "por",
+    "wol",
+    "ces",
+    "hrv",
+    "ita",
+    "lav",
+    "ron",
+    "spa",
+    "ukr",
+    "cmn",
+    "ell",
+    "glg",
+    "lit",
+    "nob",
+    "rus",
+    "srp"
+   ]
+  },
+  {
+   "cell": "FIRST-BOTH",
+   "group": "genus:Romance",
+   "kind": "genus",
+   "tier": "STRICT",
+   "n": 7,
+   "nPass": 6,
+   "frac": 0.8571,
+   "meanSame": 0.6642,
+   "meanCtrl": 0.5781,
+   "diff": {
+    "mean": 0.0861,
+    "lo": 0.0688,
+    "hi": 0.1039,
+    "n": 7,
+    "pos": 7
+   },
+   "positionControl": 0.4988,
+   "shuffledControl": 0.5271,
+   "scope": [
+    "cat",
+    "fra",
+    "por",
+    "ita",
+    "spa",
+    "glg",
+    "ron"
+   ],
+   "passing": [
+    "cat",
+    "fra",
+    "por",
+    "ita",
+    "spa",
+    "glg"
+   ],
+   "failing": [
+    "ron"
+   ]
+  },
+  {
+   "cell": "FIRST-BOTH",
+   "group": "genus:Slavic",
+   "kind": "genus",
+   "tier": "NONE",
+   "n": 9,
+   "nPass": 0,
+   "frac": 0,
+   "meanSame": 0.5687,
+   "meanCtrl": 0.5503,
+   "diff": {
+    "mean": 0.0184,
+    "lo": 0.0042,
+    "hi": 0.0309,
+    "n": 9,
+    "pos": 8
+   },
+   "positionControl": 0.5017,
+   "shuffledControl": 0.5215,
+   "scope": [],
+   "passing": [],
+   "failing": [
+    "bul",
+    "pol",
+    "slk",
+    "slv",
+    "ces",
+    "hrv",
+    "ukr",
+    "rus",
+    "srp"
+   ]
+  },
+  {
+   "cell": "FIRST-BOTH",
+   "group": "genus:Germanic",
+   "kind": "genus",
+   "tier": "NONE",
+   "n": 5,
+   "nPass": 2,
+   "frac": 0.4,
+   "meanSame": 0.6435,
+   "meanCtrl": 0.5978,
+   "diff": {
+    "mean": 0.0457,
+    "lo": 0.0295,
+    "hi": 0.062,
+    "n": 5,
+    "pos": 5
+   },
+   "positionControl": 0.4974,
+   "shuffledControl": 0.5437,
+   "scope": [
+    "deu",
+    "nld"
+   ],
+   "passing": [
+    "deu",
+    "nld"
+   ],
+   "failing": [
+    "eng",
+    "dan",
+    "nob"
+   ]
+  },
+  {
+   "cell": "FIRST-BOTH",
+   "group": "order:SOV",
+   "kind": "order",
+   "tier": "NONE",
+   "n": 8,
+   "nPass": 0,
+   "frac": 0,
+   "meanSame": 0.5309,
+   "meanCtrl": 0.5404,
+   "diff": {
+    "mean": -0.0095,
+    "lo": -0.0256,
+    "hi": 0.0056,
+    "n": 8,
+    "pos": 3
+   },
+   "positionControl": 0.5073,
+   "shuffledControl": 0.5103,
+   "scope": [],
+   "passing": [],
+   "failing": [
+    "tam",
+    "hin",
+    "kor",
+    "tur",
+    "eus",
+    "fas",
+    "jpn",
+    "urd"
+   ]
+  },
+  {
+   "cell": "FIRST-BOTH",
+   "group": "order:SVO",
+   "kind": "order",
+   "tier": "NONE",
+   "n": 29,
+   "nPass": 2,
+   "frac": 0.069,
+   "meanSame": 0.564,
+   "meanCtrl": 0.5372,
+   "diff": {
+    "mean": 0.0268,
+    "lo": 0.0167,
+    "hi": 0.0371,
+    "n": 29,
+    "pos": 26
+   },
+   "positionControl": 0.4998,
+   "shuffledControl": 0.5176,
+   "scope": [
+    "bul",
+    "nob"
+   ],
+   "passing": [
+    "bul",
+    "nob"
+   ],
+   "failing": [
+    "eng",
+    "fin",
+    "heb",
+    "lzh",
+    "pol",
+    "slk",
+    "vie",
+    "cat",
+    "dan",
+    "fra",
+    "ind",
+    "mlt",
+    "por",
+    "wol",
+    "ces",
+    "hrv",
+    "ita",
+    "lav",
+    "ron",
+    "spa",
+    "ukr",
+    "cmn",
+    "ell",
+    "glg",
+    "lit",
+    "rus",
+    "srp"
+   ]
+  }
+ ],
+ "chosen": [
+  {
+   "cell": "FIRST-BOTH",
+   "group": "genus:Romance",
+   "kind": "genus",
+   "tier": "STRICT",
+   "n": 7,
+   "nPass": 6,
+   "frac": 0.8571,
+   "meanSame": 0.6642,
+   "meanCtrl": 0.5781,
+   "diff": {
+    "mean": 0.0861,
+    "lo": 0.0688,
+    "hi": 0.1039,
+    "n": 7,
+    "pos": 7
+   },
+   "positionControl": 0.4988,
+   "shuffledControl": 0.5271,
+   "scope": [
+    "cat",
+    "fra",
+    "por",
+    "ita",
+    "spa",
+    "glg",
+    "ron"
+   ],
+   "passing": [
+    "cat",
+    "fra",
+    "por",
+    "ita",
+    "spa",
+    "glg"
+   ],
+   "failing": [
+    "ron"
+   ]
+  }
+ ]
+}

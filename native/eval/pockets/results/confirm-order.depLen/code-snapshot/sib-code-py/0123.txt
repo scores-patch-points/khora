@@ -1,0 +1,448 @@
+"""Turn a plain-language description into a working alert, without asking
+anyone to learn eoreader7's vocabulary.
+
+The idea: eoreader7 runs once, on the description itself — a few sentences,
+not a 1MB contract, so this is fast (well under a second) — to pull out the
+noun phrases a person actually meant, the same way it pulls the subject out
+of a matter's title in slots.py. That is the ONLY place eoreader7 appears;
+nothing downstream of this module knows it exists.
+
+Signal from noise is then a factual question, not a modeling one: does a
+candidate phrase actually occur in real, already-read filings? A phrase
+nobody ever wrote gets a real, honest zero. One that recurs across several
+distinct matters earns its place with the count as its own evidence — no
+score is asserted, just where it was actually found.
+"""
+from __future__ import annotations
+
+import bisect
+import json
+import random
+import re
+import subprocess
+import tempfile
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+EO_SCRIPT = str(ROOT / "scripts" / "eo_read.mjs")
+TEXT_CACHE = ROOT / "data" / "cache" / "text"
+
+# Same idea as slots.py's JOINTS: eoreader7's surfaces are long run-on spans
+# ("cameras_at_intersections_that_automatically_issue_citations"), and the
+# words joining two real noun phrases are where they split cleanly.
+JOINTS = re.compile(
+    r"_(?:or|and|that|which|because|rather_than|specifically|at|for|of|with|"
+    r"by|from|to|in|on|is|are|the|a|an|this|these|those)_")
+
+STOP_PHRASES = {"this", "that", "these", "those", "it", "them", "metro",
+                "resolution", "resolutions", "ordinance", "ordinances",
+                # words from the readability-padding frame itself (see
+                # _extract_phrases) — never real candidates, just scaffolding
+                "watch", "legislation", "describes", "describe", "metro legislation"}
+
+# Words too generic to test against the corpus alone — kept out of the
+# fallback path (used only when eoreader7 can't read the description at
+# all), not the eoreader7 path, whose surfaces are already noun phrases.
+FALLBACK_STOP = STOP_PHRASES | {
+    "about", "with", "that", "which", "watch", "involve", "involves",
+    "contract", "contracts", "sometimes", "install", "provide", "provides",
+    "different", "because", "rather", "than", "specifically", "general",
+    "targets", "kind", "would", "should", "could", "when", "where", "their",
+    # generic filler nouns/pronouns — meaningless alone, no matter what
+    # corpus they're tested against, so they never earn a place by count
+    "stuff", "things", "thing", "something", "anything", "everything",
+    "someone", "anyone", "everyone", "way", "ways", "lot", "lots", "bunch",
+    "item", "items", "some", "any", "want", "wants", "wanted", "looking",
+    "find", "finding", "know", "please", "just", "really", "also",
+}
+
+
+def _extract_phrases(description: str) -> list[str]:
+    """The candidate phrases a description names — eoreader7's own reading
+    of it when it can, a plain word-list when the description is too short
+    or too plain for eoreader7 to find structure in (it requires something
+    that reads as prose, not a bare label)."""
+    with tempfile.TemporaryDirectory() as td:
+        work = Path(td)
+        src = work / "description.txt"
+        # eoreader7's readability gate (native/adapters/text/spans.js,
+        # looksLikeMaterial) is a flat 200-CHARACTER minimum — nothing about
+        # sentence count or structure, confirmed by reading the gate itself
+        # rather than guessing at it from failures. A chat message clears
+        # that far less often than a bill's title does, so pad with a
+        # neutral repeated frame (no topical content of its own) until the
+        # gate is cleared, rather than guessing at a word count.
+        padded = description.rstrip(". ")
+        frame = ". This describes what to watch for in Metro legislation"
+        frame_lower = frame.lower()
+        while len(padded) < 210:
+            padded += frame
+        padded += "."
+        src.write_text(padded)
+        surfaces: list[str] = []
+        try:
+            proc = subprocess.run(
+                ["node", EO_SCRIPT, str(src), "--out", str(work)],
+                capture_output=True, text=True, timeout=30,
+            )
+            if proc.returncode == 0:
+                out_path = work / "description.eo_read.json"
+                surfaces = json.loads(out_path.read_text()).get("surfaces") or []
+        except Exception:
+            surfaces = []
+
+    if not surfaces:
+        return _fallback_phrases(description)
+
+    phrases: list[str] = []
+    seen: set[str] = set()
+    for s in surfaces:
+        for frag in JOINTS.split(f"_{s}_"):
+            frag = frag.strip("_").replace("_", " ").strip()
+            # Anything that's just a piece of the padding frame itself —
+            # whatever chunk the splitter happened to cut it into — isn't a
+            # candidate; checking substring-of-the-frame catches every cut,
+            # not just the exact fragments a stoplist happened to name.
+            if len(frag) < 4 or frag.lower() in STOP_PHRASES or frag.lower() in frame_lower:
+                continue
+            if frag.lower() in seen:
+                continue
+            seen.add(frag.lower())
+            phrases.append(frag)
+    return phrases or _fallback_phrases(description)
+
+
+def _fallback_phrases(description: str) -> list[str]:
+    """eoreader7's surfaces are built from clause structure — a bare noun
+    phrase with no verb ("body worn cameras," typed alone with nothing
+    around it) doesn't cohere into its own surface the way it does inside
+    a real sentence (checked live: it does surface once given "red light
+    cameras OR automated traffic enforcement AT intersections," which has
+    the conjunctions to bind it). Rather than only ever offering single
+    words when that happens, this also offers every contiguous run of
+    words up to length 3 — "body worn cameras," "body worn," "worn
+    cameras," alongside the bare words — and lets corpus_signal's real
+    counts decide which granularity actually carries the signal, instead
+    of silently only ever testing the least specific one."""
+    # Keep the ORIGINAL word sequence — including "of," "and," "the" — for
+    # forming multi-word candidates: real filings write "Office of Homeless
+    # Services" WITH the "of" in it, so a phrase built by deleting stopwords
+    # first ("office homeless services") matches nothing that was actually
+    # written and silently loses to the bare word "office" (which then
+    # stands alone with no longer phrase to lose to and looks like the
+    # answer at 200+ noise matters). Longest first, and never START or END
+    # a candidate ON a stopword — "of homeless" reads worse than "homeless
+    # services" or the whole phrase, and both those are already generated.
+    all_words = re.findall(r"[A-Za-z][A-Za-z\-]{2,}", description)
+    out, seen = [], set()
+    max_n = min(6, len(all_words))
+    for n in range(max_n, 0, -1):
+        for i in range(len(all_words) - n + 1):
+            window = all_words[i:i + n]
+            edges_ok = (window[0].lower() not in FALLBACK_STOP
+                       and window[-1].lower() not in FALLBACK_STOP)
+            has_content = any(w.lower() not in FALLBACK_STOP for w in window)
+            if not (edges_ok and has_content):
+                continue
+            gram = " ".join(window)
+            if gram.lower() in seen:
+                continue
+            seen.add(gram.lower())
+            out.append(gram)
+    return out
+
+
+def _matter_id_from_path(p: Path) -> int | None:
+    try:
+        return int(p.stem)
+    except ValueError:
+        return None
+
+
+def _bounded(phrase: str) -> re.Pattern:
+    edge_l = r"\b" if phrase[0].isalnum() else ""
+    edge_r = r"\b" if phrase[-1].isalnum() else ""
+    return re.compile(edge_l + re.escape(phrase) + edge_r, re.IGNORECASE)
+
+
+GRAM_STOP = {
+    "that", "this", "with", "from", "have", "will", "shall", "which", "with the",
+    "of the", "to the", "in the", "for the", "and the", "the metropolitan",
+    "metropolitan government", "davidson county", "nashville and", "and davidson",
+    "government of", "council of", "resolution", "ordinance", "metropolitan",
+    "nashville", "davidson", "council", "government", "hereby", "section",
+    "whereas", "therefore", "approve", "approved", "approving",
+}
+DOC_TEXT_CAP = 40_000       # per-document read for candidate/rate work
+MAX_CANDIDATES = 3_000      # a hard performance cap, not a decision boundary
+
+
+def _grams(text: str) -> set[str]:
+    """Unigrams and bigrams worth testing — the vocabulary a golden
+    document might be discriminating on, before contrast decides which of
+    it actually is."""
+    words = re.findall(r"[A-Za-z][A-Za-z\-]{2,}", text[:DOC_TEXT_CAP].lower())
+    grams: set[str] = set()
+    for i, w in enumerate(words):
+        if len(w) >= 4 and w not in GRAM_STOP:
+            grams.add(w)
+        if i + 1 < len(words):
+            bg = f"{w} {words[i + 1]}"
+            if bg not in GRAM_STOP:
+                grams.add(bg)
+    return grams
+
+
+def golden_shadow(golden_ids: list[int], top_n: int = 15) -> dict:
+    """The vocabulary that actually sets a handful of CONFIRMED examples
+    apart from an ordinary background sample of already-read matters — the
+    shape they share that the user's own words, or a plain keyword search,
+    might never mention. Every candidate comes from the goldens themselves;
+    the background sample only gets to VETO one, by showing it occurs just
+    as often outside the goldens as inside them. Nothing here is a
+    hand-set cutoff — each term is scored against its own measured rate in
+    real matters that were not picked as examples.
+
+    Rates are read off pre-tokenized gram SETS, not a regex re-scanned per
+    candidate per document — that combination (a few thousand candidates
+    times a few hundred background documents) is what made the first
+    version of this take minutes: tokenize each document once, then a
+    rate is a set-membership count, not a new text scan."""
+    files = list(TEXT_CACHE.glob("*.txt"))
+    golden_set = set(golden_ids)
+    golden_grams, background_grams = [], []
+    for path in files:
+        mid = _matter_id_from_path(path)
+        if mid is None:
+            continue
+        try:
+            text = path.read_text(errors="ignore")[:DOC_TEXT_CAP]
+        except Exception:
+            continue
+        (golden_grams if mid in golden_set else background_grams).append(_grams(text))
+
+    if not golden_grams or not background_grams:
+        return {"terms": [], "goldenCount": len(golden_grams),
+                "backgroundCount": len(background_grams)}
+
+    candidates: set[str] = set()
+    for g in golden_grams:
+        candidates |= g
+    if len(candidates) > MAX_CANDIDATES:
+        candidates = set(sorted(candidates)[:MAX_CANDIDATES])
+
+    scored = []
+    for g in candidates:
+        g_rate = sum(1 for gs in golden_grams if g in gs) / len(golden_grams)
+        b_rate = sum(1 for bs in background_grams if g in bs) / len(background_grams)
+        margin = g_rate - b_rate
+        if margin > 0:
+            scored.append({"term": g, "goldenRate": round(g_rate, 2),
+                           "backgroundRate": round(b_rate, 2), "margin": round(margin, 2)})
+    scored.sort(key=lambda x: -x["margin"])
+    return {"terms": scored[:top_n], "goldenCount": len(golden_grams),
+            "backgroundCount": len(background_grams)}
+
+
+def _dominant(kept: dict[str, set[int]]) -> dict[str, set[int]]:
+    """Prefer the longest phrase that actually has real hits over its own
+    shorter fragments. Without this, a specific request like "body worn
+    cameras" (2 real matters) gets buried under the single word "cameras"
+    it's built from (34 matters, most of them nothing to do with body-worn
+    anything) — the fragment isn't wrong, exactly, it's just not what was
+    asked, and showing it as if it were is the same false-signal problem
+    a bare word search always has. A short fragment only survives here if
+    NO longer phrase containing it had any hits at all."""
+    ordered = sorted(kept.keys(), key=lambda p: -len(p.split()))
+    dominated: set[str] = set()
+    for long_p in ordered:
+        if long_p in dominated:
+            continue
+        long_words = long_p.lower().split()
+        for short_p in ordered:
+            if short_p == long_p or short_p in dominated:
+                continue
+            short_words = short_p.lower().split()
+            n = len(short_words)
+            if n >= len(long_words):
+                continue
+            if any(long_words[i:i + n] == short_words for i in range(len(long_words) - n + 1)):
+                dominated.add(short_p)
+    return {p: ids for p, ids in kept.items() if p not in dominated}
+
+
+def corpus_signal(phrases: list[str]) -> dict:
+    """For each candidate phrase, which already-read matters actually
+    contain it. Only covers matters we've deep-read for SOME reason
+    already (whatever cached their text) — a brand-new topic nobody has
+    scanned for yet has a smaller denominator than the full 8,000+ matter
+    corpus, and callers should say so rather than imply full coverage."""
+    if not phrases:
+        return {"terms": [], "droppedTerms": [], "matchedMatterIds": [],
+                "corpusSize": 0}
+    patterns = {p: _bounded(p) for p in phrases}
+    per_term: dict[str, set[int]] = {p: set() for p in phrases}
+    files = list(TEXT_CACHE.glob("*.txt"))
+    for path in files:
+        mid = _matter_id_from_path(path)
+        if mid is None:
+            continue
+        try:
+            text = path.read_text(errors="ignore")
+        except Exception:
+            continue
+        for p, pattern in patterns.items():
+            if pattern.search(text):
+                per_term[p].add(mid)
+
+    kept = _dominant({p: ids for p, ids in per_term.items() if ids})
+    all_ids: set[int] = set()
+    for ids in kept.values():
+        all_ids |= ids
+    ranked = sorted(kept.items(), key=lambda kv: -len(kv[1]))
+    return {
+        "terms": [{"term": p, "matterIds": sorted(ids), "count": len(ids)}
+                  for p, ids in ranked],
+        "droppedTerms": [p for p in phrases if p not in kept],
+        "matchedMatterIds": sorted(all_ids),
+        "corpusSize": len(files),
+    }
+
+
+NULL_POOL_SIZE = 150  # how many random corpus terms build each null distribution
+
+# The null distribution depends only on the CORPUS, never on what a caller
+# is testing — recomputing it (reading every cached document, building the
+# vocabulary, sampling and rate-testing 300 terms) on every chat turn was
+# measured at ~45s, unusable for an interactive reply. It only changes
+# when the scan pipeline adds/removes cached documents, so it's cached
+# in-process keyed on the cache's own file count + mtime — cheap to check,
+# and a real pipeline run is exactly what should invalidate it.
+_NULL_CACHE: dict = {}
+
+
+def _corpus_fingerprint() -> tuple[int, float]:
+    files = list(TEXT_CACHE.glob("*.txt"))
+    mtime = max((f.stat().st_mtime for f in files), default=0.0)
+    return len(files), mtime
+
+
+def _cached_docs() -> tuple[list[str], tuple[int, float]]:
+    fp = _corpus_fingerprint()
+    if _NULL_CACHE.get("fp") == fp and "docs" in _NULL_CACHE:
+        return _NULL_CACHE["docs"], fp
+    files = list(TEXT_CACHE.glob("*.txt"))
+    docs = []
+    for path in files:
+        if _matter_id_from_path(path) is None:
+            continue
+        try:
+            docs.append(path.read_text(errors="ignore")[:DOC_TEXT_CAP])
+        except Exception:
+            continue
+    return docs, fp
+
+
+def _null_distributions() -> tuple[list[float], list[float], int]:
+    docs, fp = _cached_docs()
+    if _NULL_CACHE.get("fp") == fp and "uni" in _NULL_CACHE:
+        return _NULL_CACHE["uni"], _NULL_CACHE["bi"], _NULL_CACHE["total"]
+
+    total = len(docs)
+    if not total:
+        _NULL_CACHE.clear()
+        _NULL_CACHE.update(fp=fp, docs=docs, uni=[], bi=[], total=0)
+        return [], [], 0
+
+    def rate(term: str) -> float:
+        pat = _bounded(term)
+        return sum(1 for d in docs if pat.search(d)) / total
+
+    all_grams: set[str] = set()
+    for d in docs:
+        all_grams |= _grams(d)
+    uni_pool = [g for g in all_grams if " " not in g]
+    bi_pool = [g for g in all_grams if " " in g]
+
+    rng = random.Random(0)  # deterministic — the same null pool every run over the same corpus
+
+    def null_dist(pool: list[str]) -> list[float]:
+        sample = rng.sample(pool, min(NULL_POOL_SIZE, len(pool))) if pool else []
+        return sorted(rate(t) for t in sample)
+
+    uni_null, bi_null = null_dist(uni_pool), null_dist(bi_pool)
+    _NULL_CACHE.clear()
+    _NULL_CACHE.update(fp=fp, docs=docs, uni=uni_null, bi=bi_null, total=total,
+                       poolUni=len(uni_pool), poolBi=len(bi_pool))
+    return uni_null, bi_null, total
+
+
+def null_signal(phrases: list[str]) -> dict:
+    """Is a candidate phrase's own match rate actually unusual for this
+    corpus, or is it just an ordinary word this corpus happens to use a
+    lot? "safety," "police," and "technology" are real English words that
+    occur constantly in government contracts for reasons that have nothing
+    to do with what a tag built from them is trying to find — the same
+    false-signal shape _dominant() already guards against for fragments of
+    a phrase, but for a term with no larger phrase to be dominated BY.
+
+    The null isn't hand-set: it's built from a random sample of the
+    corpus's OWN vocabulary (same order — unigrams compared to unigrams,
+    bigrams to bigrams, since a two-word phrase is rarer than a single
+    word for reasons that have nothing to do with meaning), matched the
+    identical way a real term would be. "distinguishing" means the rate
+    clears Tukey's fence (1.5x the null's own interquartile range above
+    its own 75th percentile) — a standard outlier rule applied to a
+    MEASURED distribution, not a number picked in advance. In short:
+    Bateson's "a difference that makes a difference" — DMD, in the
+    response fields below — not just any difference from zero."""
+    uni_null, bi_null, total = _null_distributions()
+    if not total or not phrases:
+        return {"corpusSize": total, "terms": []}
+
+    docs, _ = _cached_docs()
+
+    def rate(term: str) -> float:
+        pat = _bounded(term)
+        return sum(1 for d in docs if pat.search(d)) / total
+
+    out = []
+    for term in phrases:
+        r = rate(term)
+        dist = bi_null if " " in term else uni_null
+        if dist:
+            pct = round(100 * bisect.bisect_left(dist, r) / len(dist), 1)
+            q1 = dist[len(dist) // 4]
+            q3 = dist[3 * len(dist) // 4]
+            fence = q3 + 1.5 * (q3 - q1)
+            distinguishing = r > fence
+        else:
+            pct, distinguishing = None, None
+        out.append({"term": term, "matchRate": round(r, 3),
+                     "nullPercentile": pct, "distinguishing": distinguishing})
+    return {"corpusSize": total, "nullPoolUnigrams": _NULL_CACHE.get("poolUni", 0),
+            "nullPoolBigrams": _NULL_CACHE.get("poolBi", 0), "terms": out}
+
+
+def build_alert_preview(description: str, extra_phrases: list[str] | None = None) -> dict:
+    """The whole pipeline behind "find signal from noise" for one typed
+    description — no eoreader vocabulary anywhere in the return value.
+    `extra_phrases` is where an optional on-device model's guesses enter:
+    they get merged in as ordinary CANDIDATES, nothing more — the same
+    corpus_signal / _dominant grounding that decides whether eoreader7's
+    own reading survives decides whether a model's guess does too. A
+    model proposing something is never the same as it being true."""
+    phrases = _extract_phrases(description)
+    seen = {p.lower() for p in phrases}
+    for p in (extra_phrases or []):
+        if p.lower() not in seen:
+            seen.add(p.lower())
+            phrases.append(p)
+    signal = corpus_signal(phrases)
+    return {"description": description, **signal}
+
+
+def matches_for_terms(terms: list[str]) -> list[int]:
+    """Re-run the corpus check for a caller-approved, possibly-edited term
+    list (the preview may have suggested terms the user then removed)."""
+    return corpus_signal(terms)["matchedMatterIds"]

@@ -1,0 +1,2044 @@
+{
+ "stat": "fig.introRight",
+ "verdictRule": "see header",
+ "verdict": "PARTIAL",
+ "classes": {
+  "CODE": false,
+  "DIAGRAM": true,
+  "NL": true
+ },
+ "missing": [],
+ "preregHeaderSha256": "6ce35cdb30328b0f65c0925718f4066954a5b0f6f760dd901ca460bc8bf90b43",
+ "counts": {
+  "code": {
+   "AMBIGUOUS": 3,
+   "ABSENT": 1
+  },
+  "diagram": {
+   "PRESENT-": 3
+  },
+  "nl": {
+   "AMBIGUOUS": 11,
+   "ABSENT": 13
+  },
+  "ud": {
+   "AMBIGUOUS": 8,
+   "ABSENT": 6
+  },
+  "en": {
+   "ABSENT": 7,
+   "AMBIGUOUS": 3
+  }
+ },
+ "codeSummary": {
+  "n": 4,
+  "zBothPositive": 3,
+  "presentPlus": 0,
+  "dInRange": 3,
+  "atlasReference": "30/47 z>0 both, 11/47 PRESENT+; P(all n z>0 both | 0.64 each) = 0.168"
+ },
+ "diagramSummary": {
+  "n": 3,
+  "presentMinus": 3,
+  "dInRange": 3
+ },
+ "nlSummary": {
+  "n": 24,
+  "presentAny": 0,
+  "presentPlus": 0,
+  "absent": 13,
+  "absentUd": 0.42857142857142855,
+  "absentEn": 0.7,
+  "dInRange": 24,
+  "binomialReference": {
+   "pPresentWordGrain": 0.016891891891891893,
+   "pPresentPlusWordGrain": 0.006756756756756757,
+   "P_ge1_present": 0.336,
+   "P_ge3_present": 0.0075,
+   "P_ge1_presentPlus": 0.15
+  }
+ },
+ "adversary": {
+  "rhoZ_introRight_vs_introLeft_allCells": -0.428,
+  "rhoZ_codeAndDiagram": -0.929,
+  "atlasRho": 0.485,
+  "rhoZ_vs_log10tokens": -0.197,
+  "rhoZ_vs_meanUnitLength": -0.081,
+  "rhoZ_vs_hapaxShareOfTypes": 0.064,
+  "rhoZ_vs_hapaxShareOfTypes_codeAndDiagram": -0.464,
+  "rhoZ_vs_meanUnitLength_codeAndDiagram": 0.071,
+  "expectedFalsePresent": {
+   "cells": 31,
+   "atInstrumentNullRate": 0.0026
+  },
+  "status50Changes": [
+   "sib-js-fold: AMBIGUOUS -> ABSENT",
+   "sib-en-waikna: AMBIGUOUS -> ABSENT",
+   "sib-en-warren-forces: AMBIGUOUS -> ABSENT"
+  ]
+ },
+ "notScoredThin": [
+  "sib-ud-hun-train",
+  "sib-ud-mar-train",
+  "sib-ud-tam-train",
+  "sib-ud-tel-train",
+  "sib-ud-uig-train",
+  "sib-en-evolution-plain"
+ ],
+ "deviations": [],
+ "rows": [
+  {
+   "id": "sib-js-fold",
+   "class": "code",
+   "tokens": 291340,
+   "status": "AMBIGUOUS",
+   "zDiscover": -2.35,
+   "zConfirm": 0.56,
+   "vDiscover": -0.3115,
+   "vConfirm": -0.3645,
+   "d": -0.0139,
+   "predictionHolds": false,
+   "dInRange": false,
+   "z50": [
+    -1.82,
+    0.69
+   ],
+   "status50": "ABSENT",
+   "nullSd": [
+    0.0179,
+    0.0257
+   ],
+   "introLeft": {
+    "status": "AMBIGUOUS",
+    "z": [
+     -6.62,
+     -2.36
+    ],
+    "v": [
+     -0.4277,
+     -0.4549
+    ],
+    "d": -0.0962
+   },
+   "introLeftFq": {
+    "status": "PRESENT-",
+    "z": [
+     -9.05,
+     -9.09
+    ]
+   },
+   "profile": {
+    "tokens": 291340,
+    "units": 25025,
+    "docs": 151,
+    "meanUnitLength": 11.642,
+    "types": 14269,
+    "hapaxShareOfTypes": 0.3253,
+    "hapaxShareOfTokens": 0.0159
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 114252,
+     "units": 10822,
+     "docs": 80
+    },
+    "confirm": {
+     "tokens": 177088,
+     "units": 14203,
+     "docs": 71
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-js-heimdall",
+   "class": "code",
+   "tokens": 160415,
+   "status": "AMBIGUOUS",
+   "zDiscover": 4.2,
+   "zConfirm": 2.08,
+   "vDiscover": 0.0305,
+   "vConfirm": -0.0727,
+   "d": 0.0901,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    2.69,
+    2.47
+   ],
+   "status50": "AMBIGUOUS",
+   "nullSd": [
+    0.0276,
+    0.0308
+   ],
+   "introLeft": {
+    "status": "PRESENT-",
+    "z": [
+     -5.64,
+     -5.73
+    ],
+    "v": [
+     -0.1572,
+     -0.2972
+    ],
+    "d": -0.1249
+   },
+   "introLeftFq": {
+    "status": "PRESENT-",
+    "z": [
+     -5.8,
+     -8.95
+    ]
+   },
+   "profile": {
+    "tokens": 160415,
+    "units": 18614,
+    "docs": 99,
+    "meanUnitLength": 8.618,
+    "types": 6471,
+    "hapaxShareOfTypes": 0.2187,
+    "hapaxShareOfTokens": 0.0088
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 73169,
+     "units": 8110,
+     "docs": 47
+    },
+    "confirm": {
+     "tokens": 87246,
+     "units": 10504,
+     "docs": 52
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-js-eoreader7",
+   "class": "code",
+   "tokens": 294591,
+   "status": "ABSENT",
+   "zDiscover": 0.09,
+   "zConfirm": 0.71,
+   "vDiscover": -0.1793,
+   "vConfirm": -0.1017,
+   "d": 0.0096,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    0.25,
+    0.75
+   ],
+   "status50": "ABSENT",
+   "nullSd": [
+    0.0132,
+    0.0252
+   ],
+   "introLeft": {
+    "status": "PRESENT-",
+    "z": [
+     -5.27,
+     -6.87
+    ],
+    "v": [
+     -0.3431,
+     -0.2865
+    ],
+    "d": -0.1456
+   },
+   "introLeftFq": {
+    "status": "PRESENT-",
+    "z": [
+     -32.1,
+     -9.9
+    ]
+   },
+   "profile": {
+    "tokens": 294591,
+    "units": 31951,
+    "docs": 174,
+    "meanUnitLength": 9.22,
+    "types": 14075,
+    "hapaxShareOfTypes": 0.2867,
+    "hapaxShareOfTokens": 0.0137
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 159369,
+     "units": 17071,
+     "docs": 84
+    },
+    "confirm": {
+     "tokens": 135222,
+     "units": 14880,
+     "docs": 90
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-py-foldvenv",
+   "class": "code",
+   "tokens": 292993,
+   "status": "AMBIGUOUS",
+   "zDiscover": 2.06,
+   "zConfirm": 18.18,
+   "vDiscover": -0.0415,
+   "vConfirm": 0.1597,
+   "d": 0.1865,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    1.72,
+    17.34
+   ],
+   "status50": "AMBIGUOUS",
+   "nullSd": [
+    0.0155,
+    0.0188
+   ],
+   "introLeft": {
+    "status": "PRESENT-",
+    "z": [
+     -6.6,
+     -7.43
+    ],
+    "v": [
+     -0.2466,
+     -0.4076
+    ],
+    "d": -0.1619
+   },
+   "introLeftFq": {
+    "status": "PRESENT-",
+    "z": [
+     -4.23,
+     -6.41
+    ]
+   },
+   "profile": {
+    "tokens": 292993,
+    "units": 68874,
+    "docs": 275,
+    "meanUnitLength": 4.254,
+    "types": 23171,
+    "hapaxShareOfTypes": 0.4336,
+    "hapaxShareOfTokens": 0.0343
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 159471,
+     "units": 39594,
+     "docs": 135
+    },
+    "confirm": {
+     "tokens": 133522,
+     "units": 29280,
+     "docs": 140
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-bpmn-miwg-heldout",
+   "class": "diagram",
+   "tokens": 292035,
+   "status": "PRESENT-",
+   "zDiscover": -35.47,
+   "zConfirm": -31.48,
+   "vDiscover": -0.7133,
+   "vConfirm": -0.5598,
+   "d": -0.7525,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    -39.86,
+    -27.1
+   ],
+   "status50": "PRESENT-",
+   "nullSd": [
+    0.0243,
+    0.0204
+   ],
+   "introLeft": {
+    "status": "PRESENT+",
+    "z": [
+     6.65,
+     12.03
+    ],
+    "v": [
+     0.2832,
+     0.3602
+    ],
+    "d": 0.2165
+   },
+   "introLeftFq": {
+    "status": "PRESENT-",
+    "z": [
+     -10.84,
+     -8.58
+    ]
+   },
+   "profile": {
+    "tokens": 292035,
+    "units": 59607,
+    "docs": 100,
+    "meanUnitLength": 4.899,
+    "types": 14061,
+    "hapaxShareOfTypes": 0.4405,
+    "hapaxShareOfTokens": 0.0212
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 129779,
+     "units": 27978,
+     "docs": 50
+    },
+    "confirm": {
+     "tokens": 162256,
+     "units": 31629,
+     "docs": 50
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-bpmn-kogito-heldout",
+   "class": "diagram",
+   "tokens": 161917,
+   "status": "PRESENT-",
+   "zDiscover": -10.46,
+   "zConfirm": -9.52,
+   "vDiscover": -0.3476,
+   "vConfirm": -0.3992,
+   "d": -0.3301,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    -12.82,
+    -9.42
+   ],
+   "status50": "PRESENT-",
+   "nullSd": [
+    0.0322,
+    0.034
+   ],
+   "introLeft": {
+    "status": "AMBIGUOUS",
+    "z": [
+     6.31,
+     3.65
+    ],
+    "v": [
+     0.1985,
+     0.0385
+    ],
+    "d": 0.1841
+   },
+   "introLeftFq": {
+    "status": "PRESENT-",
+    "z": [
+     -5.91,
+     -4.41
+    ]
+   },
+   "profile": {
+    "tokens": 161917,
+    "units": 29894,
+    "docs": 190,
+    "meanUnitLength": 5.416,
+    "types": 7502,
+    "hapaxShareOfTypes": 0.4106,
+    "hapaxShareOfTokens": 0.019
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 87201,
+     "units": 16187,
+     "docs": 95
+    },
+    "confirm": {
+     "tokens": 74716,
+     "units": 13707,
+     "docs": 95
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-bpmn-activiti-heldout",
+   "class": "diagram",
+   "tokens": 68568,
+   "status": "PRESENT-",
+   "zDiscover": -11.39,
+   "zConfirm": -13.33,
+   "vDiscover": -0.2454,
+   "vConfirm": -0.2202,
+   "d": -0.3217,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    -8.41,
+    -9.01
+   ],
+   "status50": "PRESENT-",
+   "nullSd": [
+    0.0283,
+    0.0241
+   ],
+   "introLeft": {
+    "status": "AMBIGUOUS",
+    "z": [
+     -3.75,
+     1.86
+    ],
+    "v": [
+     -0.1244,
+     0.1353
+    ],
+    "d": -0.0413
+   },
+   "introLeftFq": {
+    "status": "AMBIGUOUS",
+    "z": [
+     -3.44,
+     -1.71
+    ]
+   },
+   "profile": {
+    "tokens": 68568,
+    "units": 14092,
+    "docs": 233,
+    "meanUnitLength": 4.866,
+    "types": 4686,
+    "hapaxShareOfTypes": 0.4153,
+    "hapaxShareOfTokens": 0.0284
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 33539,
+     "units": 6650,
+     "docs": 119
+    },
+    "confirm": {
+     "tokens": 35029,
+     "units": 7442,
+     "docs": 114
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-ud-afr-train",
+   "class": "nl",
+   "tokens": 30498,
+   "status": "AMBIGUOUS",
+   "zDiscover": -2.43,
+   "zConfirm": -1.98,
+   "vDiscover": -0.0967,
+   "vConfirm": -0.1322,
+   "d": -0.0879,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    -2.52,
+    -1.79
+   ],
+   "status50": "AMBIGUOUS",
+   "nullSd": [
+    0.0366,
+    0.0438
+   ],
+   "introLeft": {
+    "status": "AMBIGUOUS",
+    "z": [
+     -2.5,
+     -2.53
+    ],
+    "v": [
+     -0.1004,
+     -0.1354
+    ],
+    "d": -0.0846
+   },
+   "introLeftFq": {
+    "status": "AMBIGUOUS",
+    "z": [
+     -2.45,
+     -0.85
+    ]
+   },
+   "profile": {
+    "tokens": 30498,
+    "units": 1315,
+    "docs": 53,
+    "meanUnitLength": 23.192,
+    "types": 4553,
+    "hapaxShareOfTypes": 0.5216,
+    "hapaxShareOfTokens": 0.0779
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 18662,
+     "units": 765,
+     "docs": 31
+    },
+    "confirm": {
+     "tokens": 11836,
+     "units": 550,
+     "docs": 22
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-ud-ces-train",
+   "class": "nl",
+   "tokens": 299945,
+   "status": "AMBIGUOUS",
+   "zDiscover": -1.93,
+   "zConfirm": -3.15,
+   "vDiscover": -0.0693,
+   "vConfirm": -0.0885,
+   "d": -0.0353,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    -1.76,
+    -3.86
+   ],
+   "status50": "AMBIGUOUS",
+   "nullSd": [
+    0.0122,
+    0.0149
+   ],
+   "introLeft": {
+    "status": "AMBIGUOUS",
+    "z": [
+     -2.47,
+     -2.43
+    ],
+    "v": [
+     -0.0779,
+     -0.0681
+    ],
+    "d": -0.0251
+   },
+   "introLeftFq": {
+    "status": "PRESENT+",
+    "z": [
+     4.75,
+     6.42
+    ]
+   },
+   "profile": {
+    "tokens": 299945,
+    "units": 17253,
+    "docs": 691,
+    "meanUnitLength": 17.385,
+    "types": 50246,
+    "hapaxShareOfTypes": 0.5582,
+    "hapaxShareOfTokens": 0.0935
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 143833,
+     "units": 8325,
+     "docs": 333
+    },
+    "confirm": {
+     "tokens": 156112,
+     "units": 8928,
+     "docs": 358
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-ud-dan-train",
+   "class": "nl",
+   "tokens": 68296,
+   "status": "ABSENT",
+   "zDiscover": -1.1,
+   "zConfirm": -0.23,
+   "vDiscover": -0.0596,
+   "vConfirm": -0.0603,
+   "d": -0.017,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    -1.53,
+    -0.3
+   ],
+   "status50": "ABSENT",
+   "nullSd": [
+    0.0264,
+    0.0218
+   ],
+   "introLeft": {
+    "status": "AMBIGUOUS",
+    "z": [
+     -2.04,
+     -0.76
+    ],
+    "v": [
+     -0.0778,
+     -0.0812
+    ],
+    "d": -0.0316
+   },
+   "introLeftFq": {
+    "status": "ABSENT",
+    "z": [
+     -1.64,
+     0.81
+    ]
+   },
+   "profile": {
+    "tokens": 68296,
+    "units": 4369,
+    "docs": 175,
+    "meanUnitLength": 15.632,
+    "types": 14910,
+    "hapaxShareOfTypes": 0.6509,
+    "hapaxShareOfTokens": 0.1421
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 34858,
+     "units": 2225,
+     "docs": 89
+    },
+    "confirm": {
+     "tokens": 33438,
+     "units": 2144,
+     "docs": 86
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-ud-ell-train",
+   "class": "nl",
+   "tokens": 37783,
+   "status": "ABSENT",
+   "zDiscover": -0.96,
+   "zConfirm": -0.62,
+   "vDiscover": -0.0677,
+   "vConfirm": -0.0554,
+   "d": -0.0248,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    -0.87,
+    -0.78
+   ],
+   "status50": "ABSENT",
+   "nullSd": [
+    0.0358,
+    0.0247
+   ],
+   "introLeft": {
+    "status": "ABSENT",
+    "z": [
+     -0.27,
+     -0.4
+    ],
+    "v": [
+     -0.0571,
+     -0.0402
+    ],
+    "d": -0.0092
+   },
+   "introLeftFq": {
+    "status": "ABSENT",
+    "z": [
+     -0.19,
+     0.65
+    ]
+   },
+   "profile": {
+    "tokens": 37783,
+    "units": 1632,
+    "docs": 66,
+    "meanUnitLength": 23.151,
+    "types": 8275,
+    "hapaxShareOfTypes": 0.5955,
+    "hapaxShareOfTokens": 0.1304
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 17205,
+     "units": 725,
+     "docs": 29
+    },
+    "confirm": {
+     "tokens": 20578,
+     "units": 907,
+     "docs": 37
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-ud-gle-train",
+   "class": "nl",
+   "tokens": 85922,
+   "status": "ABSENT",
+   "zDiscover": -1.74,
+   "zConfirm": -1.09,
+   "vDiscover": -0.0859,
+   "vConfirm": -0.0623,
+   "d": -0.0296,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    -1.47,
+    -0.87
+   ],
+   "status50": "ABSENT",
+   "nullSd": [
+    0.0196,
+    0.0229
+   ],
+   "introLeft": {
+    "status": "ABSENT",
+    "z": [
+     -1.86,
+     0.59
+    ],
+    "v": [
+     -0.1194,
+     -0.0508
+    ],
+    "d": -0.0171
+   },
+   "introLeftFq": {
+    "status": "ABSENT",
+    "z": [
+     1.93,
+     0.38
+    ]
+   },
+   "profile": {
+    "tokens": 85922,
+    "units": 3997,
+    "docs": 160,
+    "meanUnitLength": 21.497,
+    "types": 12364,
+    "hapaxShareOfTypes": 0.5758,
+    "hapaxShareOfTokens": 0.0829
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 42836,
+     "units": 1997,
+     "docs": 80
+    },
+    "confirm": {
+     "tokens": 43086,
+     "units": 2000,
+     "docs": 80
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-ud-hye-train",
+   "class": "nl",
+   "tokens": 65187,
+   "status": "AMBIGUOUS",
+   "zDiscover": 0.43,
+   "zConfirm": 2,
+   "vDiscover": -0.0365,
+   "vConfirm": 0.0011,
+   "d": 0.0269,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    0.88,
+    2.13
+   ],
+   "status50": "AMBIGUOUS",
+   "nullSd": [
+    0.0177,
+    0.0231
+   ],
+   "introLeft": {
+    "status": "PRESENT-",
+    "z": [
+     -4.4,
+     -7.19
+    ],
+    "v": [
+     -0.1405,
+     -0.1474
+    ],
+    "d": -0.0907
+   },
+   "introLeftFq": {
+    "status": "ABSENT",
+    "z": [
+     0.8,
+     0.58
+    ]
+   },
+   "profile": {
+    "tokens": 65187,
+    "units": 4352,
+    "docs": 175,
+    "meanUnitLength": 14.979,
+    "types": 18538,
+    "hapaxShareOfTypes": 0.6143,
+    "hapaxShareOfTokens": 0.1747
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 30177,
+     "units": 2075,
+     "docs": 83
+    },
+    "confirm": {
+     "tokens": 35010,
+     "units": 2277,
+     "docs": 92
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-ud-ita-train",
+   "class": "nl",
+   "tokens": 240871,
+   "status": "AMBIGUOUS",
+   "zDiscover": 1.03,
+   "zConfirm": 3.38,
+   "vDiscover": -0.0243,
+   "vConfirm": -0.0085,
+   "d": 0.0265,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    0.58,
+    2.22
+   ],
+   "status50": "AMBIGUOUS",
+   "nullSd": [
+    0.0196,
+    0.0097
+   ],
+   "introLeft": {
+    "status": "PRESENT-",
+    "z": [
+     -20.4,
+     -11.99
+    ],
+    "v": [
+     -0.1704,
+     -0.1617
+    ],
+    "d": -0.1317
+   },
+   "introLeftFq": {
+    "status": "AMBIGUOUS",
+    "z": [
+     -1.88,
+     -3.09
+    ]
+   },
+   "profile": {
+    "tokens": 240871,
+    "units": 13060,
+    "docs": 523,
+    "meanUnitLength": 18.443,
+    "types": 25225,
+    "hapaxShareOfTypes": 0.5091,
+    "hapaxShareOfTokens": 0.0533
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 118190,
+     "units": 6500,
+     "docs": 260
+    },
+    "confirm": {
+     "tokens": 122681,
+     "units": 6560,
+     "docs": 263
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-ud-kat-train",
+   "class": "nl",
+   "tokens": 33092,
+   "status": "AMBIGUOUS",
+   "zDiscover": 4.28,
+   "zConfirm": -2.55,
+   "vDiscover": 0.0174,
+   "vConfirm": -0.1084,
+   "d": 0.0133,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    3.68,
+    -1.21
+   ],
+   "status50": "AMBIGUOUS",
+   "nullSd": [
+    0.0154,
+    0.0153
+   ],
+   "introLeft": {
+    "status": "AMBIGUOUS",
+    "z": [
+     0.06,
+     -4.04
+    ],
+    "v": [
+     -0.0479,
+     -0.1983
+    ],
+    "d": -0.0628
+   },
+   "introLeftFq": {
+    "status": "ABSENT",
+    "z": [
+     0.61,
+     -0.52
+    ]
+   },
+   "profile": {
+    "tokens": 33092,
+    "units": 2214,
+    "docs": 89,
+    "meanUnitLength": 14.947,
+    "types": 11034,
+    "hapaxShareOfTypes": 0.6483,
+    "hapaxShareOfTokens": 0.2162
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 18480,
+     "units": 1264,
+     "docs": 51
+    },
+    "confirm": {
+     "tokens": 14612,
+     "units": 950,
+     "docs": 38
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-ud-lit-train",
+   "class": "nl",
+   "tokens": 37825,
+   "status": "ABSENT",
+   "zDiscover": 0.76,
+   "zConfirm": 0.21,
+   "vDiscover": -0.0593,
+   "vConfirm": -0.1118,
+   "d": 0.013,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    0.36,
+    -0.03
+   ],
+   "status50": "ABSENT",
+   "nullSd": [
+    0.0286,
+    0.0209
+   ],
+   "introLeft": {
+    "status": "ABSENT",
+    "z": [
+     -1.75,
+     0.04
+    ],
+    "v": [
+     -0.1135,
+     -0.1168
+    ],
+    "d": -0.0189
+   },
+   "introLeftFq": {
+    "status": "AMBIGUOUS",
+    "z": [
+     -2.02,
+     -0.5
+    ]
+   },
+   "profile": {
+    "tokens": 37825,
+    "units": 2340,
+    "docs": 94,
+    "meanUnitLength": 16.165,
+    "types": 12276,
+    "hapaxShareOfTypes": 0.6524,
+    "hapaxShareOfTokens": 0.2117
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 17469,
+     "units": 1040,
+     "docs": 42
+    },
+    "confirm": {
+     "tokens": 20356,
+     "units": 1300,
+     "docs": 52
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-ud-mlt-train",
+   "class": "nl",
+   "tokens": 20056,
+   "status": "ABSENT",
+   "zDiscover": -1.22,
+   "zConfirm": 0.99,
+   "vDiscover": -0.0314,
+   "vConfirm": 0.0417,
+   "d": 0.0063,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    -0.74,
+    1.63
+   ],
+   "status50": "ABSENT",
+   "nullSd": [
+    0.0245,
+    0.0431
+   ],
+   "introLeft": {
+    "status": "ABSENT",
+    "z": [
+     -0.21,
+     0.11
+    ],
+    "v": [
+     0.0146,
+     -0.022
+    ],
+    "d": -0.0024
+   },
+   "introLeftFq": {
+    "status": "ABSENT",
+    "z": [
+     0.11,
+     0.4
+    ]
+   },
+   "profile": {
+    "tokens": 20056,
+    "units": 1120,
+    "docs": 45,
+    "meanUnitLength": 17.907,
+    "types": 4810,
+    "hapaxShareOfTypes": 0.5979,
+    "hapaxShareOfTokens": 0.1434
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 10870,
+     "units": 625,
+     "docs": 25
+    },
+    "confirm": {
+     "tokens": 9186,
+     "units": 495,
+     "docs": 20
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-ud-nld-train",
+   "class": "nl",
+   "tokens": 163958,
+   "status": "AMBIGUOUS",
+   "zDiscover": -2.74,
+   "zConfirm": -0.49,
+   "vDiscover": -0.0708,
+   "vConfirm": -0.0451,
+   "d": -0.0298,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    -2.46,
+    -0.65
+   ],
+   "status50": "AMBIGUOUS",
+   "nullSd": [
+    0.0174,
+    0.0246
+   ],
+   "introLeft": {
+    "status": "AMBIGUOUS",
+    "z": [
+     2.07,
+     1.29
+    ],
+    "v": [
+     0.003,
+     -0.0015
+    ],
+    "d": 0.0346
+   },
+   "introLeftFq": {
+    "status": "AMBIGUOUS",
+    "z": [
+     -2.09,
+     -1.59
+    ]
+   },
+   "profile": {
+    "tokens": 163958,
+    "units": 12277,
+    "docs": 492,
+    "meanUnitLength": 13.355,
+    "types": 24377,
+    "hapaxShareOfTypes": 0.6157,
+    "hapaxShareOfTokens": 0.0915
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 80388,
+     "units": 6050,
+     "docs": 242
+    },
+    "confirm": {
+     "tokens": 83570,
+     "units": 6227,
+     "docs": 250
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-ud-rus-train",
+   "class": "nl",
+   "tokens": 58306,
+   "status": "ABSENT",
+   "zDiscover": -0.78,
+   "zConfirm": -1.18,
+   "vDiscover": -0.06,
+   "vConfirm": -0.0648,
+   "d": -0.0192,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    -0.84,
+    -0.79
+   ],
+   "status50": "ABSENT",
+   "nullSd": [
+    0.0227,
+    0.0176
+   ],
+   "introLeft": {
+    "status": "AMBIGUOUS",
+    "z": [
+     -2.15,
+     -4.4
+    ],
+    "v": [
+     -0.092,
+     -0.1169
+    ],
+    "d": -0.0558
+   },
+   "introLeftFq": {
+    "status": "ABSENT",
+    "z": [
+     1.39,
+     1.65
+    ]
+   },
+   "profile": {
+    "tokens": 58306,
+    "units": 3850,
+    "docs": 154,
+    "meanUnitLength": 15.144,
+    "types": 23666,
+    "hapaxShareOfTypes": 0.7407,
+    "hapaxShareOfTokens": 0.3007
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 24817,
+     "units": 1625,
+     "docs": 65
+    },
+    "confirm": {
+     "tokens": 33489,
+     "units": 2225,
+     "docs": 89
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-ud-tur-train",
+   "class": "nl",
+   "tokens": 30973,
+   "status": "AMBIGUOUS",
+   "zDiscover": 4.41,
+   "zConfirm": 0.56,
+   "vDiscover": 0.0318,
+   "vConfirm": -0.0231,
+   "d": 0.0407,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    2.08,
+    0.97
+   ],
+   "status50": "AMBIGUOUS",
+   "nullSd": [
+    0.0129,
+    0.0437
+   ],
+   "introLeft": {
+    "status": "AMBIGUOUS",
+    "z": [
+     -1.58,
+     -3.06
+    ],
+    "v": [
+     -0.068,
+     -0.1172
+    ],
+    "d": -0.0592
+   },
+   "introLeftFq": {
+    "status": "AMBIGUOUS",
+    "z": [
+     -2.11,
+     -0.17
+    ]
+   },
+   "profile": {
+    "tokens": 30973,
+    "units": 3430,
+    "docs": 138,
+    "meanUnitLength": 9.03,
+    "types": 12381,
+    "hapaxShareOfTypes": 0.6907,
+    "hapaxShareOfTokens": 0.2761
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 16339,
+     "units": 1755,
+     "docs": 71
+    },
+    "confirm": {
+     "tokens": 14634,
+     "units": 1675,
+     "docs": 67
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-ud-wol-train",
+   "class": "nl",
+   "tokens": 20635,
+   "status": "AMBIGUOUS",
+   "zDiscover": -2.88,
+   "zConfirm": -1.34,
+   "vDiscover": -0.1424,
+   "vConfirm": -0.1022,
+   "d": -0.0778,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    -2.92,
+    -1.39
+   ],
+   "status50": "AMBIGUOUS",
+   "nullSd": [
+    0.0383,
+    0.0337
+   ],
+   "introLeft": {
+    "status": "ABSENT",
+    "z": [
+     -1.27,
+     -0.98
+    ],
+    "v": [
+     -0.0797,
+     -0.068
+    ],
+    "d": -0.0337
+   },
+   "introLeftFq": {
+    "status": "ABSENT",
+    "z": [
+     0.66,
+     -1.18
+    ]
+   },
+   "profile": {
+    "tokens": 20635,
+    "units": 1188,
+    "docs": 48,
+    "meanUnitLength": 17.37,
+    "types": 3405,
+    "hapaxShareOfTypes": 0.5539,
+    "hapaxShareOfTokens": 0.0914
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 12418,
+     "units": 725,
+     "docs": 29
+    },
+    "confirm": {
+     "tokens": 8217,
+     "units": 463,
+     "docs": 19
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-en-poe-works2",
+   "class": "nl",
+   "tokens": 96647,
+   "status": "ABSENT",
+   "zDiscover": -1.2,
+   "zConfirm": -1.44,
+   "vDiscover": -0.049,
+   "vConfirm": -0.0774,
+   "d": -0.0277,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    -0.66,
+    -1.54
+   ],
+   "status50": "ABSENT",
+   "nullSd": [
+    0.0142,
+    0.0267
+   ],
+   "introLeft": {
+    "status": "ABSENT",
+    "z": [
+     -1.75,
+     -1.97
+    ],
+    "v": [
+     -0.0872,
+     -0.0881
+    ],
+    "d": -0.0471
+   },
+   "introLeftFq": {
+    "status": "AMBIGUOUS",
+    "z": [
+     -4.38,
+     -2.56
+    ]
+   },
+   "profile": {
+    "tokens": 96647,
+    "units": 4199,
+    "docs": 42,
+    "meanUnitLength": 23.017,
+    "types": 10270,
+    "hapaxShareOfTypes": 0.4648,
+    "hapaxShareOfTokens": 0.0494
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 45023,
+     "units": 1800,
+     "docs": 18
+    },
+    "confirm": {
+     "tokens": 51624,
+     "units": 2399,
+     "docs": 24
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-en-chopin-awakening",
+   "class": "nl",
+   "tokens": 64408,
+   "status": "AMBIGUOUS",
+   "zDiscover": 0.25,
+   "zConfirm": 2.06,
+   "vDiscover": -0.0357,
+   "vConfirm": 0.0747,
+   "d": 0.0484,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    0.23,
+    2.77
+   ],
+   "status50": "AMBIGUOUS",
+   "nullSd": [
+    0.0308,
+    0.0434
+   ],
+   "introLeft": {
+    "status": "AMBIGUOUS",
+    "z": [
+     -2.17,
+     0.92
+    ],
+    "v": [
+     -0.1057,
+     -0.0042
+    ],
+    "d": -0.0224
+   },
+   "introLeftFq": {
+    "status": "ABSENT",
+    "z": [
+     1.11,
+     0.68
+    ]
+   },
+   "profile": {
+    "tokens": 64408,
+    "units": 4440,
+    "docs": 44,
+    "meanUnitLength": 14.506,
+    "types": 6863,
+    "hapaxShareOfTypes": 0.4585,
+    "hapaxShareOfTokens": 0.0489
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 32685,
+     "units": 2200,
+     "docs": 22
+    },
+    "confirm": {
+     "tokens": 31723,
+     "units": 2240,
+     "docs": 22
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-en-hesse-siddhartha",
+   "class": "nl",
+   "tokens": 39270,
+   "status": "ABSENT",
+   "zDiscover": -0.31,
+   "zConfirm": 0.99,
+   "vDiscover": -0.0567,
+   "vConfirm": 0.0263,
+   "d": 0.0066,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    -0.54,
+    0.35
+   ],
+   "status50": "ABSENT",
+   "nullSd": [
+    0.0495,
+    0.0287
+   ],
+   "introLeft": {
+    "status": "AMBIGUOUS",
+    "z": [
+     -2.04,
+     -0.15
+    ],
+    "v": [
+     -0.0917,
+     -0.0198
+    ],
+    "d": -0.0328
+   },
+   "introLeftFq": {
+    "status": "ABSENT",
+    "z": [
+     -0.38,
+     1.98
+    ]
+   },
+   "profile": {
+    "tokens": 39270,
+    "units": 1871,
+    "docs": 30,
+    "meanUnitLength": 20.989,
+    "types": 3592,
+    "hapaxShareOfTypes": 0.4379,
+    "hapaxShareOfTokens": 0.0401
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 22883,
+     "units": 1115,
+     "docs": 18
+    },
+    "confirm": {
+     "tokens": 16387,
+     "units": 756,
+     "docs": 12
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-en-zola-mouret",
+   "class": "nl",
+   "tokens": 128496,
+   "status": "ABSENT",
+   "zDiscover": 0.58,
+   "zConfirm": -0.87,
+   "vDiscover": -0.0045,
+   "vConfirm": -0.0404,
+   "d": -0.0042,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    0.69,
+    -0.59
+   ],
+   "status50": "ABSENT",
+   "nullSd": [
+    0.0176,
+    0.0213
+   ],
+   "introLeft": {
+    "status": "AMBIGUOUS",
+    "z": [
+     -2.44,
+     -1.64
+    ],
+    "v": [
+     -0.0618,
+     -0.0596
+    ],
+    "d": -0.0378
+   },
+   "introLeftFq": {
+    "status": "ABSENT",
+    "z": [
+     -1.01,
+     -0.95
+    ]
+   },
+   "profile": {
+    "tokens": 128496,
+    "units": 8046,
+    "docs": 80,
+    "meanUnitLength": 15.97,
+    "types": 9965,
+    "hapaxShareOfTypes": 0.4296,
+    "hapaxShareOfTokens": 0.0333
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 50664,
+     "units": 3100,
+     "docs": 31
+    },
+    "confirm": {
+     "tokens": 77832,
+     "units": 4946,
+     "docs": 49
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-en-waikna",
+   "class": "nl",
+   "tokens": 85322,
+   "status": "AMBIGUOUS",
+   "zDiscover": -0.9,
+   "zConfirm": -3.57,
+   "vDiscover": -0.04,
+   "vConfirm": -0.0596,
+   "d": -0.0479,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    -0.9,
+    -1.89
+   ],
+   "status50": "ABSENT",
+   "nullSd": [
+    0.0244,
+    0.0207
+   ],
+   "introLeft": {
+    "status": "AMBIGUOUS",
+    "z": [
+     -0.56,
+     -3.41
+    ],
+    "v": [
+     -0.0373,
+     -0.0589
+    ],
+    "d": -0.0377
+   },
+   "introLeftFq": {
+    "status": "ABSENT",
+    "z": [
+     -1.58,
+     -1.15
+    ]
+   },
+   "profile": {
+    "tokens": 85322,
+    "units": 3386,
+    "docs": 34,
+    "meanUnitLength": 25.198,
+    "types": 9140,
+    "hapaxShareOfTypes": 0.449,
+    "hapaxShareOfTokens": 0.0481
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 52625,
+     "units": 2086,
+     "docs": 21
+    },
+    "confirm": {
+     "tokens": 32697,
+     "units": 1300,
+     "docs": 13
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-en-aesop-stickney",
+   "class": "nl",
+   "tokens": 29256,
+   "status": "ABSENT",
+   "zDiscover": 0.65,
+   "zConfirm": 1.21,
+   "vDiscover": -0.0227,
+   "vConfirm": -0.0662,
+   "d": 0.0332,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    0.76,
+    0.35
+   ],
+   "status50": "ABSENT",
+   "nullSd": [
+    0.0515,
+    0.0273
+   ],
+   "introLeft": {
+    "status": "ABSENT",
+    "z": [
+     -1.53,
+     -0.8
+    ],
+    "v": [
+     -0.1443,
+     -0.1396
+    ],
+    "d": -0.0428
+   },
+   "introLeftFq": {
+    "status": "ABSENT",
+    "z": [
+     -1.33,
+     -0.69
+    ]
+   },
+   "profile": {
+    "tokens": 29256,
+    "units": 1879,
+    "docs": 30,
+    "meanUnitLength": 15.57,
+    "types": 3619,
+    "hapaxShareOfTypes": 0.5012,
+    "hapaxShareOfTokens": 0.062
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 17871,
+     "units": 1197,
+     "docs": 19
+    },
+    "confirm": {
+     "tokens": 11385,
+     "units": 682,
+     "docs": 11
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-en-warren-forces",
+   "class": "nl",
+   "tokens": 35736,
+   "status": "AMBIGUOUS",
+   "zDiscover": -0.74,
+   "zConfirm": 2.57,
+   "vDiscover": -0.0769,
+   "vConfirm": 0.0506,
+   "d": 0.0213,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    -1.17,
+    1.21
+   ],
+   "status50": "ABSENT",
+   "nullSd": [
+    0.0396,
+    0.028
+   ],
+   "introLeft": {
+    "status": "AMBIGUOUS",
+    "z": [
+     -3.74,
+     -1.22
+    ],
+    "v": [
+     -0.1386,
+     -0.063
+    ],
+    "d": -0.085
+   },
+   "introLeftFq": {
+    "status": "ABSENT",
+    "z": [
+     -1.69,
+     1.66
+    ]
+   },
+   "profile": {
+    "tokens": 35736,
+    "units": 2020,
+    "docs": 30,
+    "meanUnitLength": 17.691,
+    "types": 5338,
+    "hapaxShareOfTypes": 0.5328,
+    "hapaxShareOfTokens": 0.0796
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 23687,
+     "units": 1340,
+     "docs": 20
+    },
+    "confirm": {
+     "tokens": 12049,
+     "units": 680,
+     "docs": 10
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-en-about-london",
+   "class": "nl",
+   "tokens": 55661,
+   "status": "ABSENT",
+   "zDiscover": 1.4,
+   "zConfirm": -1.32,
+   "vDiscover": -0.0091,
+   "vConfirm": -0.0848,
+   "d": -0.0102,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    1.18,
+    -1.68
+   ],
+   "status50": "ABSENT",
+   "nullSd": [
+    0.0188,
+    0.0356
+   ],
+   "introLeft": {
+    "status": "AMBIGUOUS",
+    "z": [
+     -2.97,
+     -3.09
+    ],
+    "v": [
+     -0.1081,
+     -0.1304
+    ],
+    "d": -0.0692
+   },
+   "introLeftFq": {
+    "status": "ABSENT",
+    "z": [
+     -1.87,
+     0.31
+    ]
+   },
+   "profile": {
+    "tokens": 55661,
+    "units": 2229,
+    "docs": 30,
+    "meanUnitLength": 24.971,
+    "types": 8148,
+    "hapaxShareOfTypes": 0.5227,
+    "hapaxShareOfTokens": 0.0765
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 21876,
+     "units": 879,
+     "docs": 12
+    },
+    "confirm": {
+     "tokens": 33785,
+     "units": 1350,
+     "docs": 18
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-en-kafka-metamorphosis",
+   "class": "nl",
+   "tokens": 22048,
+   "status": "ABSENT",
+   "zDiscover": 1.67,
+   "zConfirm": 0.67,
+   "vDiscover": 0.0659,
+   "vConfirm": 0.0408,
+   "d": 0.0592,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    1,
+    0.88
+   ],
+   "status50": "ABSENT",
+   "nullSd": [
+    0.0481,
+    0.0572
+   ],
+   "introLeft": {
+    "status": "ABSENT",
+    "z": [
+     0.18,
+     0.56
+    ],
+    "v": [
+     0.0121,
+     0.0363
+    ],
+    "d": 0.0191
+   },
+   "introLeftFq": {
+    "status": "AMBIGUOUS",
+    "z": [
+     -2.39,
+     0.89
+    ]
+   },
+   "profile": {
+    "tokens": 22048,
+    "units": 783,
+    "docs": 29,
+    "meanUnitLength": 28.158,
+    "types": 2614,
+    "hapaxShareOfTypes": 0.4985,
+    "hapaxShareOfTokens": 0.0591
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 8641,
+     "units": 324,
+     "docs": 12
+    },
+    "confirm": {
+     "tokens": 13407,
+     "units": 459,
+     "docs": 17
+    }
+   },
+   "thin": false
+  },
+  {
+   "id": "sib-en-cary-dante",
+   "class": "nl",
+   "tokens": 108709,
+   "status": "ABSENT",
+   "zDiscover": -0.86,
+   "zConfirm": 0.52,
+   "vDiscover": -0.0374,
+   "vConfirm": -0.0084,
+   "d": -0.0032,
+   "predictionHolds": true,
+   "dInRange": true,
+   "z50": [
+    -0.43,
+    0.73
+   ],
+   "status50": "ABSENT",
+   "nullSd": [
+    0.0246,
+    0.0282
+   ],
+   "introLeft": {
+    "status": "ABSENT",
+    "z": [
+     -0.68,
+     -0.12
+    ],
+    "v": [
+     -0.0413,
+     -0.0207
+    ],
+    "d": -0.0115
+   },
+   "introLeftFq": {
+    "status": "ABSENT",
+    "z": [
+     -1.91,
+     -0.36
+    ]
+   },
+   "profile": {
+    "tokens": 108709,
+    "units": 4430,
+    "docs": 44,
+    "meanUnitLength": 24.539,
+    "types": 11065,
+    "hapaxShareOfTypes": 0.4975,
+    "hapaxShareOfTokens": 0.0506
+   },
+   "halfProfile": {
+    "discover": {
+     "tokens": 62344,
+     "units": 2500,
+     "docs": 25
+    },
+    "confirm": {
+     "tokens": 46365,
+     "units": 1930,
+     "docs": 19
+    }
+   },
+   "thin": false
+  }
+ ]
+}

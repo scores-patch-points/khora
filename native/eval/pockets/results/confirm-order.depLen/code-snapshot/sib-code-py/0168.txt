@@ -1,0 +1,42 @@
+# Ground truth by actually resolving: parse each snippet, import the stdlib modules it names, getattr every Name.attr call chain and check bare call names.
+import ast, builtins, importlib, json, sys
+sys.path.insert(0, '.')
+exec(open('snippets.py').read())
+def check(code):
+    tree = ast.parse(code)
+    mods = {}; frm = {}; defined = set(dir(builtins)); problems = []
+    for n in ast.walk(tree):
+        if isinstance(n, ast.Import):
+            for a in n.names:
+                try: mods[a.asname or a.name.split('.')[0]] = importlib.import_module(a.name.split('.')[0])
+                except Exception as e: problems.append(('missing-module', a.name)); mods[a.asname or a.name.split('.')[0]] = None
+        elif isinstance(n, ast.ImportFrom):
+            try: m = importlib.import_module(n.module)
+            except Exception: problems.append(('missing-module', n.module)); m = None
+            for a in n.names:
+                nm = a.asname or a.name
+                if m is not None and not hasattr(m, a.name): problems.append(('missing-name', n.module + '.' + a.name))
+                defined.add(nm)
+        elif isinstance(n, (ast.FunctionDef, ast.ClassDef)): defined.add(n.name); 
+        if isinstance(n, ast.FunctionDef): [defined.add(a.arg) for a in n.args.args]
+        if isinstance(n, ast.Lambda): [defined.add(a.arg) for a in n.args.args]
+        if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Store): defined.add(n.id)
+        if isinstance(n, ast.arg): defined.add(n.arg)
+    for n in ast.walk(tree):
+        if isinstance(n, ast.Call):
+            f = n.func
+            if isinstance(f, ast.Name) and f.id not in defined and f.id not in mods: problems.append(('undefined-name', f.id))
+            if isinstance(f, ast.Attribute) and isinstance(f.value, ast.Name) and f.value.id in mods and mods[f.value.id] is not None:
+                if not hasattr(mods[f.value.id], f.attr): problems.append(('missing-attr', f.value.id + '.' + f.attr))
+    return problems
+out = []
+for id, label, kind, code in S:
+    p = check(code)
+    # instance-method fakes cannot be found statically: verify them by running
+    ran_err = None
+    if kind == 'method' or label == 'clean':
+        try: exec(compile(code, id, 'exec'), {}) 
+        except Exception as e: ran_err = type(e).__name__ + ': ' + str(e)[:80]
+    out.append({'id': id, 'label': label, 'kind': kind, 'code': code, 'static_problems': p, 'run_error': ran_err})
+json.dump(out, open('../data/e7-snippets.json', 'w'), ensure_ascii=False, indent=1)
+for o in out: print(o['id'], o['label'], o['kind'], o['static_problems'], o['run_error'])

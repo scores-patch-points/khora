@@ -1,0 +1,340 @@
+{
+ "part": "real",
+ "statIds": [
+  "zipfAlpha",
+  "heapsBeta",
+  "ttr",
+  "hapaxShare",
+  "rankBinEnt",
+  "abbrev",
+  "menzerath",
+  "recurLen",
+  "lenAcf1",
+  "lenDocEps",
+  "lenCV",
+  "lenLogSkew"
+ ],
+ "nulls": {
+  "zipfAlpha": "token-global",
+  "heapsBeta": "token-global",
+  "ttr": "token-global",
+  "hapaxShare": "token-global",
+  "rankBinEnt": "token-global",
+  "abbrev": "token-global",
+  "menzerath": "token-global",
+  "recurLen": "token-global",
+  "lenAcf1": "unit-order",
+  "lenDocEps": "unit-order",
+  "lenCV": "token-global",
+  "lenLogSkew": "token-global"
+ },
+ "inert": [
+  "abbrev",
+  "lenCV",
+  "lenLogSkew"
+ ],
+ "real": {
+  "id": "real-pride",
+  "which": "discover",
+  "tokens": 50013,
+  "units": 2501,
+  "docs": 26,
+  "cells": {
+   "zipfAlpha": {
+    "v": 1.0265,
+    "nullMean": 1.0363,
+    "nullSd": 0.0024,
+    "z": -4.08
+   },
+   "heapsBeta": {
+    "v": 0.7252,
+    "nullMean": 0.7175,
+    "nullSd": 0.00438,
+    "z": 1.75
+   },
+   "ttr": {
+    "v": 0.2529,
+    "nullMean": 0.2682,
+    "nullSd": 0.00064,
+    "z": -23.96
+   },
+   "hapaxShare": {
+    "v": 0.5992,
+    "nullMean": 0.6277,
+    "nullSd": 0.00296,
+    "z": -9.64
+   },
+   "rankBinEnt": {
+    "v": 3.3801,
+    "nullMean": 3.401,
+    "nullSd": 0.00065,
+    "z": -32.33
+   },
+   "abbrev": {
+    "v": -0.4525,
+    "nullMean": -0.4525,
+    "nullSd": 0,
+    "z": null
+   },
+   "menzerath": {
+    "v": -0.4141,
+    "nullMean": -0.0006,
+    "nullSd": 0.03375,
+    "z": -12.25
+   },
+   "recurLen": {
+    "v": -0.7819,
+    "nullMean": -0.825,
+    "nullSd": 0.0067,
+    "z": 6.45
+   },
+   "lenAcf1": {
+    "v": 0.3788,
+    "nullMean": -0.0013,
+    "nullSd": 0.01109,
+    "z": 34.27
+   },
+   "lenDocEps": {
+    "v": 0.0498,
+    "nullMean": 0,
+    "nullSd": 0.00332,
+    "z": 15.02
+   },
+   "lenCV": {
+    "v": 0.8559,
+    "nullMean": 0.8559,
+    "nullSd": 0,
+    "z": null
+   },
+   "lenLogSkew": {
+    "v": -0.5667,
+    "nullMean": -0.5667,
+    "nullSd": 0,
+    "z": null
+   }
+  }
+ },
+ "sizeControl": [
+  {
+   "tokens": 14530,
+   "v": {
+    "zipfAlpha": 0.9952,
+    "heapsBeta": 0.7411,
+    "ttr": 0.262,
+    "hapaxShare": 0.6149,
+    "rankBinEnt": 3.3796,
+    "abbrev": -0.4581,
+    "menzerath": -0.4218,
+    "recurLen": -0.7417,
+    "lenAcf1": 0.5199,
+    "lenDocEps": 0.0739,
+    "lenCV": 0.9115,
+    "lenLogSkew": -0.3601
+   }
+  },
+  {
+   "tokens": 28289,
+   "v": {
+    "zipfAlpha": 1.0125,
+    "heapsBeta": 0.7216,
+    "ttr": 0.254,
+    "hapaxShare": 0.5986,
+    "rankBinEnt": 3.3741,
+    "abbrev": -0.4343,
+    "menzerath": -0.4319,
+    "recurLen": -0.7675,
+    "lenAcf1": 0.4266,
+    "lenDocEps": 0.0576,
+    "lenCV": 0.8923,
+    "lenLogSkew": -0.4941
+   }
+  },
+  {
+   "tokens": 49991,
+   "v": {
+    "zipfAlpha": 1.0247,
+    "heapsBeta": 0.7266,
+    "ttr": 0.2543,
+    "hapaxShare": 0.6004,
+    "rankBinEnt": 3.3812,
+    "abbrev": -0.4528,
+    "menzerath": -0.4142,
+    "recurLen": -0.7821,
+    "lenAcf1": 0.3788,
+    "lenDocEps": 0.0501,
+    "lenCV": 0.8561,
+    "lenLogSkew": -0.5661
+   }
+  }
+ ],
+ "unitControl": [
+  {
+   "unitLen": 5,
+   "v": {
+    "zipfAlpha": 1.0265,
+    "heapsBeta": 0.7252,
+    "ttr": 0.2529,
+    "hapaxShare": 0.5992,
+    "rankBinEnt": 3.3801,
+    "abbrev": -0.4525,
+    "menzerath": null,
+    "recurLen": -0.7816,
+    "lenAcf1": null,
+    "lenDocEps": null,
+    "lenCV": 0,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "unitLen": 10,
+   "v": {
+    "zipfAlpha": 1.0265,
+    "heapsBeta": 0.7252,
+    "ttr": 0.2529,
+    "hapaxShare": 0.5992,
+    "rankBinEnt": 3.3801,
+    "abbrev": -0.4525,
+    "menzerath": null,
+    "recurLen": -0.7816,
+    "lenAcf1": null,
+    "lenDocEps": null,
+    "lenCV": 0,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "unitLen": 20,
+   "v": {
+    "zipfAlpha": 1.0265,
+    "heapsBeta": 0.7252,
+    "ttr": 0.2529,
+    "hapaxShare": 0.5992,
+    "rankBinEnt": 3.3801,
+    "abbrev": -0.4525,
+    "menzerath": null,
+    "recurLen": -0.7816,
+    "lenAcf1": null,
+    "lenDocEps": null,
+    "lenCV": 0,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "unitLen": 40,
+   "v": {
+    "zipfAlpha": 1.0265,
+    "heapsBeta": 0.7252,
+    "ttr": 0.2529,
+    "hapaxShare": 0.5992,
+    "rankBinEnt": 3.3801,
+    "abbrev": -0.4525,
+    "menzerath": null,
+    "recurLen": -0.7816,
+    "lenAcf1": null,
+    "lenDocEps": null,
+    "lenCV": 0,
+    "lenLogSkew": null
+   }
+  }
+ ],
+ "randomCutControl": {
+  "id": "real-pride",
+  "which": "discover",
+  "tokens": 50013,
+  "units": 4768,
+  "docs": 50,
+  "world": "same tokens, units cut at iid lognormal lengths unrelated to the text",
+  "cells": {
+   "zipfAlpha": {
+    "v": 1.0265,
+    "nullMean": 1.0363,
+    "nullSd": 0.0024,
+    "z": -4.08
+   },
+   "heapsBeta": {
+    "v": 0.7252,
+    "nullMean": 0.7175,
+    "nullSd": 0.00438,
+    "z": 1.75
+   },
+   "ttr": {
+    "v": 0.2529,
+    "nullMean": 0.2682,
+    "nullSd": 0.00064,
+    "z": -23.96
+   },
+   "hapaxShare": {
+    "v": 0.5992,
+    "nullMean": 0.6277,
+    "nullSd": 0.00296,
+    "z": -9.64
+   },
+   "rankBinEnt": {
+    "v": 3.3801,
+    "nullMean": 3.401,
+    "nullSd": 0.00065,
+    "z": -32.33
+   },
+   "abbrev": {
+    "v": -0.4525,
+    "nullMean": -0.4525,
+    "nullSd": 0,
+    "z": null
+   },
+   "menzerath": {
+    "v": 0.0087,
+    "nullMean": -0.0053,
+    "nullSd": 0.0186,
+    "z": 0.75
+   },
+   "recurLen": {
+    "v": -0.7802,
+    "nullMean": -0.8244,
+    "nullSd": 0.00689,
+    "z": 6.43
+   },
+   "lenAcf1": {
+    "v": -0.0005,
+    "nullMean": 0.003,
+    "nullSd": 0.01837,
+    "z": -0.19
+   },
+   "lenDocEps": {
+    "v": -0.002,
+    "nullMean": 0.0011,
+    "nullSd": 0.00262,
+    "z": -1.17
+   },
+   "lenCV": {
+    "v": 0.5671,
+    "nullMean": 0.5671,
+    "nullSd": 0,
+    "z": null
+   },
+   "lenLogSkew": {
+    "v": -0.0799,
+    "nullMean": -0.0799,
+    "nullSd": 0,
+    "z": null
+   }
+  }
+ },
+ "timing": {
+  "tokens": 150014,
+  "units": 7354,
+  "cpuMsEachCall": [
+   38,
+   28,
+   43,
+   31,
+   26
+  ],
+  "cpuMsMedian": 31,
+  "wallMsMedian": 663,
+  "budgetMs": 700,
+  "machineLoadNote": "wall time inflated by the shared machine; CPU time is the budget evidence"
+ },
+ "determinism": {
+  "identical": true
+ }
+}

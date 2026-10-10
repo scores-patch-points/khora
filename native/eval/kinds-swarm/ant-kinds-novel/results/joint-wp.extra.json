@@ -1,0 +1,143 @@
+{
+ "perKind": [
+  {
+   "c": 0,
+   "tokens": 211,
+   "cosObsVsRandMean": 0.9904,
+   "randLooMin": 0.9942,
+   "randLooMedian": 0.9973,
+   "outsideRandomRange": true,
+   "changedPerToken": 2.787,
+   "randChangedPerToken": 3.681
+  },
+  {
+   "c": 1,
+   "tokens": 138,
+   "cosObsVsRandMean": 0.9716,
+   "randLooMin": 0.9791,
+   "randLooMedian": 0.998,
+   "outsideRandomRange": true,
+   "changedPerToken": 2.594,
+   "randChangedPerToken": 4.496
+  },
+  {
+   "c": 2,
+   "tokens": 1167,
+   "cosObsVsRandMean": 0.9866,
+   "randLooMin": 0.9985,
+   "randLooMedian": 0.9991,
+   "outsideRandomRange": true,
+   "changedPerToken": 2.063,
+   "randChangedPerToken": 2.873
+  },
+  {
+   "c": 3,
+   "tokens": 600,
+   "cosObsVsRandMean": 0.9843,
+   "randLooMin": 0.9978,
+   "randLooMedian": 0.9982,
+   "outsideRandomRange": true,
+   "changedPerToken": 3.095,
+   "randChangedPerToken": 3.731
+  },
+  {
+   "c": 4,
+   "tokens": 298,
+   "cosObsVsRandMean": 0.9905,
+   "randLooMin": 0.9923,
+   "randLooMedian": 0.9937,
+   "outsideRandomRange": true,
+   "changedPerToken": 2.443,
+   "randChangedPerToken": 3.457
+  },
+  {
+   "c": 5,
+   "tokens": 234,
+   "cosObsVsRandMean": 0.9899,
+   "randLooMin": 0.9952,
+   "randLooMedian": 0.9975,
+   "outsideRandomRange": true,
+   "changedPerToken": 3.132,
+   "randChangedPerToken": 3.699
+  },
+  {
+   "c": 6,
+   "tokens": 1083,
+   "cosObsVsRandMean": 0.9907,
+   "randLooMin": 0.9978,
+   "randLooMedian": 0.9989,
+   "outsideRandomRange": true,
+   "changedPerToken": 2.039,
+   "randChangedPerToken": 2.654
+  },
+  {
+   "c": 7,
+   "tokens": 2504,
+   "cosObsVsRandMean": 0.9633,
+   "randLooMin": 0.9987,
+   "randLooMedian": 0.9991,
+   "outsideRandomRange": true,
+   "changedPerToken": 2.351,
+   "randChangedPerToken": 2.232
+  },
+  {
+   "c": 8,
+   "tokens": 518,
+   "cosObsVsRandMean": 0.962,
+   "randLooMin": 0.9929,
+   "randLooMedian": 0.9984,
+   "outsideRandomRange": true,
+   "changedPerToken": 2.29,
+   "randChangedPerToken": 3.027
+  },
+  {
+   "c": 9,
+   "tokens": 196,
+   "cosObsVsRandMean": 0.9771,
+   "randLooMin": 0.9942,
+   "randLooMedian": 0.9976,
+   "outsideRandomRange": true,
+   "changedPerToken": 2.668,
+   "randChangedPerToken": 3.763
+  },
+  {
+   "c": 10,
+   "tokens": 7185,
+   "cosObsVsRandMean": 0.9643,
+   "randLooMin": 0.9996,
+   "randLooMedian": 0.9998,
+   "outsideRandomRange": true,
+   "changedPerToken": 1.286,
+   "randChangedPerToken": 1.662
+  },
+  {
+   "c": 11,
+   "tokens": 3846,
+   "cosObsVsRandMean": 0.9975,
+   "randLooMin": 0.9997,
+   "randLooMedian": 0.9999,
+   "outsideRandomRange": true,
+   "changedPerToken": 1.528,
+   "randChangedPerToken": 2.027
+  }
+ ],
+ "magnitudeHeterogeneity": {
+  "realVarChangedPerToken": 0.31976,
+  "partitionDraws": [
+   0.339,
+   0.24367,
+   0.38612,
+   0.40198,
+   0.38745,
+   0.31706,
+   0.28785,
+   0.24655,
+   0.41274,
+   0.27628,
+   0.45187,
+   0.20168
+  ],
+  "partitionMax": 0.45187,
+  "exceedsAll": false
+ }
+}

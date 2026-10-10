@@ -1,0 +1,1779 @@
+{
+ "calibration": {
+  "reps": 20,
+  "perStat": {
+   "massAdd": {
+    "n": 20,
+    "undefinedCells": 0,
+    "absZ4": 0,
+    "absZ2": 2,
+    "meanZ": -0.407,
+    "meanV": 0.89557,
+    "meanDiffInNullSd": -0.407,
+    "sdOfZ": 1.169
+   },
+   "massExp": {
+    "n": 20,
+    "undefinedCells": 0,
+    "absZ4": 0,
+    "absZ2": 0,
+    "meanZ": 0.134,
+    "meanV": 0.90157,
+    "meanDiffInNullSd": 0.133,
+    "sdOfZ": 0.909
+   },
+   "attrPMI": {
+    "n": 20,
+    "undefinedCells": 0,
+    "absZ4": 0,
+    "absZ2": 3,
+    "meanZ": -0.123,
+    "meanV": 0.2559,
+    "meanDiffInNullSd": -0.124,
+    "sdOfZ": 1.242
+   },
+   "attrDecay": {
+    "n": 20,
+    "undefinedCells": 0,
+    "absZ4": 0,
+    "absZ2": 2,
+    "meanZ": 0.076,
+    "meanV": -0.00006,
+    "meanDiffInNullSd": 0.076,
+    "sdOfZ": 1.133
+   },
+   "voidShare": {
+    "n": 20,
+    "undefinedCells": 0,
+    "absZ4": 0,
+    "absZ2": 1,
+    "meanZ": -0.125,
+    "meanV": 0.38585,
+    "meanDiffInNullSd": -0.126,
+    "sdOfZ": 1.043
+   },
+   "voidRescue": {
+    "n": 20,
+    "undefinedCells": 0,
+    "absZ4": 0,
+    "absZ2": 3,
+    "meanZ": -0.199,
+    "meanV": 0.00859,
+    "meanDiffInNullSd": -0.199,
+    "sdOfZ": 1.198
+   },
+   "gravAlpha": {
+    "n": 20,
+    "undefinedCells": 0,
+    "absZ4": 0,
+    "absZ2": 2,
+    "meanZ": -0.298,
+    "meanV": -0.00389,
+    "meanDiffInNullSd": -0.298,
+    "sdOfZ": 1.207
+   },
+   "gravBeta": {
+    "n": 20,
+    "undefinedCells": 0,
+    "absZ4": 0,
+    "absZ2": 1,
+    "meanZ": 0.093,
+    "meanV": 0.02036,
+    "meanDiffInNullSd": 0.092,
+    "sdOfZ": 1.222
+   },
+   "gravAlphaSd": {
+    "n": 20,
+    "undefinedCells": 0,
+    "absZ4": 0,
+    "absZ2": 2,
+    "meanZ": 0.243,
+    "meanV": 0.0579,
+    "meanDiffInNullSd": 0.243,
+    "sdOfZ": 1.119
+   },
+   "affect": {
+    "n": 20,
+    "undefinedCells": 0,
+    "absZ4": 1,
+    "absZ2": 6,
+    "meanZ": 0.193,
+    "meanV": 0.00842,
+    "meanDiffInNullSd": 0.193,
+    "sdOfZ": 1.744
+   },
+   "affectAsym": {
+    "n": 20,
+    "undefinedCells": 0,
+    "absZ4": 0,
+    "absZ2": 1,
+    "meanZ": -0.02,
+    "meanV": 0.00807,
+    "meanDiffInNullSd": -0.02,
+    "sdOfZ": 1.029
+   }
+  },
+  "cells": 220,
+  "absZ4": 1,
+  "absZ2": 23,
+  "undefined": 0
+ },
+ "calibrationFresh100": {
+  "reps": 100,
+  "perStat": {
+   "massAdd": {
+    "n": 100,
+    "meanZ": 0.128,
+    "sdZ": 1.184,
+    "absZ4": 1,
+    "absZ2": 10
+   },
+   "massExp": {
+    "n": 100,
+    "meanZ": -0.032,
+    "sdZ": 1.062,
+    "absZ4": 0,
+    "absZ2": 7
+   },
+   "attrPMI": {
+    "n": 100,
+    "meanZ": 0.204,
+    "sdZ": 1.143,
+    "absZ4": 0,
+    "absZ2": 10
+   },
+   "attrDecay": {
+    "n": 100,
+    "meanZ": 0.263,
+    "sdZ": 1.189,
+    "absZ4": 0,
+    "absZ2": 8
+   },
+   "voidShare": {
+    "n": 100,
+    "meanZ": 0.235,
+    "sdZ": 1.156,
+    "absZ4": 2,
+    "absZ2": 7
+   },
+   "voidRescue": {
+    "n": 100,
+    "meanZ": -0.028,
+    "sdZ": 1.459,
+    "absZ4": 1,
+    "absZ2": 11
+   },
+   "gravAlpha": {
+    "n": 100,
+    "meanZ": -0.092,
+    "sdZ": 1.201,
+    "absZ4": 0,
+    "absZ2": 13
+   },
+   "gravBeta": {
+    "n": 100,
+    "meanZ": 0.358,
+    "sdZ": 1.186,
+    "absZ4": 0,
+    "absZ2": 12
+   },
+   "gravAlphaSd": {
+    "n": 100,
+    "meanZ": -0.033,
+    "sdZ": 1.123,
+    "absZ4": 0,
+    "absZ2": 8
+   },
+   "affect": {
+    "n": 100,
+    "meanZ": -0.047,
+    "sdZ": 0.997,
+    "absZ4": 0,
+    "absZ2": 5
+   },
+   "affectAsym": {
+    "n": 100,
+    "meanZ": 0.006,
+    "sdZ": 1.173,
+    "absZ4": 0,
+    "absZ2": 4
+   }
+  },
+  "cells": 1100,
+  "absZ4": 4,
+  "absZ2": 95
+ },
+ "planted": {
+  "iidCellsAbsZ4": 0,
+  "iidCells": 44,
+  "recovery": {
+   "pl-burst": {
+    "attrPMI": "+",
+    "voidShare": "-",
+    "gravAlpha": "+"
+   },
+   "pl-markov": {
+    "massAdd": "-",
+    "massExp": "-",
+    "attrPMI": "+",
+    "attrDecay": "+",
+    "gravAlpha": "+",
+    "affect": "+"
+   },
+   "pl-frames": {
+    "massExp": "-",
+    "attrPMI": "+",
+    "attrDecay": "+",
+    "voidShare": "-",
+    "voidRescue": "+",
+    "gravAlpha": "+",
+    "affect": "+"
+   },
+   "pl-parallel": {
+    "massExp": "+",
+    "attrPMI": "+",
+    "attrDecay": "+",
+    "voidShare": "-",
+    "voidRescue": "+"
+   },
+   "pl-mix": {
+    "massExp": "-",
+    "attrPMI": "+",
+    "attrDecay": "+",
+    "voidShare": "-",
+    "gravAlpha": "+",
+    "gravBeta": "-",
+    "affect": "+"
+   }
+  }
+ },
+ "real": {
+  "real-pride": {
+   "massAdd": {
+    "v": 0.9111,
+    "z": -6.9
+   },
+   "massExp": {
+    "v": 0.91378,
+    "z": -27.08
+   },
+   "attrPMI": {
+    "v": 0.72462,
+    "z": 134.11
+   },
+   "attrDecay": {
+    "v": 0.53989,
+    "z": 112.89
+   },
+   "voidShare": {
+    "v": 0.29782,
+    "z": -41.67
+   },
+   "voidRescue": {
+    "v": 0.07841,
+    "z": 62.53
+   },
+   "gravAlpha": {
+    "v": 0.52544,
+    "z": 30.6
+   },
+   "gravBeta": {
+    "v": -0.0941,
+    "z": -7.79
+   },
+   "gravAlphaSd": {
+    "v": 0.03481,
+    "z": -0.32
+   },
+   "affect": {
+    "v": 0.09494,
+    "z": 13.81
+   },
+   "affectAsym": {
+    "v": 0.13914,
+    "z": 1.01
+   }
+  },
+  "real-middlemarch": {
+   "massAdd": {
+    "v": 0.91598,
+    "z": -11.91
+   },
+   "massExp": {
+    "v": 0.91328,
+    "z": -55.34
+   },
+   "attrPMI": {
+    "v": 0.70646,
+    "z": 174.94
+   },
+   "attrDecay": {
+    "v": 0.51088,
+    "z": 82.06
+   },
+   "voidShare": {
+    "v": 0.33003,
+    "z": -91.76
+   },
+   "voidRescue": {
+    "v": 0.06358,
+    "z": 102.6
+   },
+   "gravAlpha": {
+    "v": 0.51841,
+    "z": 23.7
+   },
+   "gravBeta": {
+    "v": -0.0783,
+    "z": -6.08
+   },
+   "gravAlphaSd": {
+    "v": 0.04821,
+    "z": 0.08
+   },
+   "affect": {
+    "v": 0.09872,
+    "z": 40.15
+   },
+   "affectAsym": {
+    "v": -0.03302,
+    "z": -0.62
+   }
+  }
+ },
+ "pockets": {
+  "oc-irc-ubuntu-0406": {
+   "massAdd": {
+    "v": [
+     0.8943,
+     0.89786
+    ],
+    "z": [
+     -23.69,
+     -25.4
+    ]
+   },
+   "massExp": {
+    "v": [
+     0.90926,
+     0.90464
+    ],
+    "z": [
+     -27.97,
+     -29.85
+    ]
+   },
+   "attrPMI": {
+    "v": [
+     0.71302,
+     0.73027
+    ],
+    "z": [
+     105.25,
+     112.73
+    ]
+   },
+   "attrDecay": {
+    "v": [
+     0.49934,
+     0.49895
+    ],
+    "z": [
+     88.86,
+     68.84
+    ]
+   },
+   "voidShare": {
+    "v": [
+     0.28614,
+     0.28277
+    ],
+    "z": [
+     -100.72,
+     -158.83
+    ]
+   },
+   "voidRescue": {
+    "v": [
+     0.08647,
+     0.09113
+    ],
+    "z": [
+     102.92,
+     64.48
+    ]
+   },
+   "gravAlpha": {
+    "v": [
+     0.51047,
+     0.51673
+    ],
+    "z": [
+     16.27,
+     26.78
+    ]
+   },
+   "gravBeta": {
+    "v": [
+     -0.06025,
+     -0.06398
+    ],
+    "z": [
+     -3.67,
+     -3.67
+    ]
+   },
+   "gravAlphaSd": {
+    "v": [
+     0.02937,
+     0.05253
+    ],
+    "z": [
+     -1.36,
+     0.9
+    ]
+   },
+   "affect": {
+    "v": [
+     0.0702,
+     0.05793
+    ],
+    "z": [
+     10.29,
+     10.36
+    ]
+   },
+   "affectAsym": {
+    "v": [
+     0.12446,
+     0.22349
+    ],
+    "z": [
+     1.42,
+     2.33
+    ]
+   }
+  },
+  "oc-irc-kubuntu-0506": {
+   "massAdd": {
+    "v": [
+     0.8977,
+     0.89865
+    ],
+    "z": [
+     -12.91,
+     -17.81
+    ]
+   },
+   "massExp": {
+    "v": [
+     0.90339,
+     0.91945
+    ],
+    "z": [
+     -8.7,
+     -19.48
+    ]
+   },
+   "attrPMI": {
+    "v": [
+     0.74869,
+     0.7349
+    ],
+    "z": [
+     102.69,
+     183.41
+    ]
+   },
+   "attrDecay": {
+    "v": [
+     0.44549,
+     0.48822
+    ],
+    "z": [
+     41.42,
+     83.86
+    ]
+   },
+   "voidShare": {
+    "v": [
+     0.28162,
+     0.29197
+    ],
+    "z": [
+     -40.42,
+     -68.55
+    ]
+   },
+   "voidRescue": {
+    "v": [
+     0.08816,
+     0.09181
+    ],
+    "z": [
+     61.18,
+     122.1
+    ]
+   },
+   "gravAlpha": {
+    "v": [
+     0.5351,
+     0.49553
+    ],
+    "z": [
+     30.61,
+     21.93
+    ]
+   },
+   "gravBeta": {
+    "v": [
+     -0.0362,
+     -0.04602
+    ],
+    "z": [
+     -2.04,
+     -3.84
+    ]
+   },
+   "gravAlphaSd": {
+    "v": [
+     0.04609,
+     0.02618
+    ],
+    "z": [
+     -1.13,
+     -1.48
+    ]
+   },
+   "affect": {
+    "v": [
+     0.07097,
+     0.06892
+    ],
+    "z": [
+     5.06,
+     5.95
+    ]
+   },
+   "affectAsym": {
+    "v": [
+     0.35385,
+     0.10681
+    ],
+    "z": [
+     3.48,
+     1.61
+    ]
+   }
+  },
+  "cd-e09-python": {
+   "massAdd": {
+    "v": [
+     0.86861,
+     0.80108
+    ],
+    "z": [
+     -5.28,
+     -21.02
+    ]
+   },
+   "massExp": {
+    "v": [
+     0.73829,
+     0.6104
+    ],
+    "z": [
+     -35.71,
+     -59.54
+    ]
+   },
+   "attrPMI": {
+    "v": [
+     1.87978,
+     2.20818
+    ],
+    "z": [
+     191.63,
+     207.93
+    ]
+   },
+   "attrDecay": {
+    "v": [
+     0.24709,
+     0.21942
+    ],
+    "z": [
+     22.25,
+     13.2
+    ]
+   },
+   "voidShare": {
+    "v": [
+     0.15012,
+     0.12957
+    ],
+    "z": [
+     -40.34,
+     -51.85
+    ]
+   },
+   "voidRescue": {
+    "v": [
+     0.22677,
+     0.25488
+    ],
+    "z": [
+     33.69,
+     45.7
+    ]
+   },
+   "gravAlpha": {
+    "v": [
+     0.53769,
+     0.59835
+    ],
+    "z": [
+     16.93,
+     33.28
+    ]
+   },
+   "gravBeta": {
+    "v": [
+     -0.13875,
+     -0.13705
+    ],
+    "z": [
+     -5.82,
+     -5.89
+    ]
+   },
+   "gravAlphaSd": {
+    "v": [
+     0.20479,
+     0.25618
+    ],
+    "z": [
+     7.1,
+     13.52
+    ]
+   },
+   "affect": {
+    "v": [
+     0.07397,
+     0.12113
+    ],
+    "z": [
+     -1.76,
+     -0.69
+    ]
+   },
+   "affectAsym": {
+    "v": [
+     0.24031,
+     0.19626
+    ],
+    "z": [
+     5.23,
+     3.01
+    ]
+   }
+  },
+  "ud-deu": {
+   "massAdd": {
+    "v": [
+     0.94396,
+     0.94479
+    ],
+    "z": [
+     -0.82,
+     1.45
+    ]
+   },
+   "massExp": {
+    "v": [
+     0.93844,
+     0.93005
+    ],
+    "z": [
+     -7.67,
+     -7.2
+    ]
+   },
+   "attrPMI": {
+    "v": [
+     null,
+     null
+    ],
+    "z": [
+     null,
+     null
+    ]
+   },
+   "attrDecay": {
+    "v": [
+     null,
+     null
+    ],
+    "z": [
+     null,
+     null
+    ]
+   },
+   "voidShare": {
+    "v": [
+     0.47534,
+     0.50048
+    ],
+    "z": [
+     -14.19,
+     -24.32
+    ]
+   },
+   "voidRescue": {
+    "v": [
+     0.03001,
+     0.02776
+    ],
+    "z": [
+     34.99,
+     17.63
+    ]
+   },
+   "gravAlpha": {
+    "v": [
+     0.32026,
+     0.3287
+    ],
+    "z": [
+     7.46,
+     8.78
+    ]
+   },
+   "gravBeta": {
+    "v": [
+     -0.0596,
+     0.02084
+    ],
+    "z": [
+     -0.88,
+     0.05
+    ]
+   },
+   "gravAlphaSd": {
+    "v": [
+     0.10664,
+     0.10305
+    ],
+    "z": [
+     -0.26,
+     0.32
+    ]
+   },
+   "affect": {
+    "v": [
+     0.0676,
+     0.05778
+    ],
+    "z": [
+     5.13,
+     5.35
+    ]
+   },
+   "affectAsym": {
+    "v": [
+     -0.41496,
+     -0.53246
+    ],
+    "z": [
+     -0.99,
+     -1.15
+    ]
+   }
+  },
+  "ud-eng": {
+   "massAdd": {
+    "v": [
+     0.92852,
+     0.92553
+    ],
+    "z": [
+     -0.56,
+     -1.81
+    ]
+   },
+   "massExp": {
+    "v": [
+     0.93531,
+     0.9328
+    ],
+    "z": [
+     -7.23,
+     -7.03
+    ]
+   },
+   "attrPMI": {
+    "v": [
+     0.70002,
+     0.71741
+    ],
+    "z": [
+     71.82,
+     43.45
+    ]
+   },
+   "attrDecay": {
+    "v": [
+     0.46735,
+     0.46759
+    ],
+    "z": [
+     35.81,
+     30.42
+    ]
+   },
+   "voidShare": {
+    "v": [
+     0.35089,
+     0.35736
+    ],
+    "z": [
+     -34.28,
+     -55.4
+    ]
+   },
+   "voidRescue": {
+    "v": [
+     0.09386,
+     0.09546
+    ],
+    "z": [
+     38.89,
+     38.09
+    ]
+   },
+   "gravAlpha": {
+    "v": [
+     0.53323,
+     0.47202
+    ],
+    "z": [
+     21,
+     15.48
+    ]
+   },
+   "gravBeta": {
+    "v": [
+     -0.04171,
+     -0.08747
+    ],
+    "z": [
+     -1.6,
+     -2.91
+    ]
+   },
+   "gravAlphaSd": {
+    "v": [
+     0.10113,
+     0.05028
+    ],
+    "z": [
+     0.8,
+     -2.23
+    ]
+   },
+   "affect": {
+    "v": [
+     0.07439,
+     0.08031
+    ],
+    "z": [
+     4.44,
+     9.23
+    ]
+   },
+   "affectAsym": {
+    "v": [
+     0.26769,
+     0.17542
+    ],
+    "z": [
+     2.82,
+     1.06
+    ]
+   }
+  }
+ },
+ "firstLook": {
+  "massAdd": {
+   "predicted": "specific",
+   "+": 0,
+   "-": 5,
+   "absent": 2,
+   "ambiguous": 0,
+   "undefined": 0
+  },
+  "massExp": {
+   "predicted": "specific",
+   "+": 0,
+   "-": 7,
+   "absent": 0,
+   "ambiguous": 0,
+   "undefined": 0
+  },
+  "attrPMI": {
+   "predicted": "universal+",
+   "+": 6,
+   "-": 0,
+   "absent": 0,
+   "ambiguous": 0,
+   "undefined": 1
+  },
+  "attrDecay": {
+   "predicted": "universal+",
+   "+": 6,
+   "-": 0,
+   "absent": 0,
+   "ambiguous": 0,
+   "undefined": 1
+  },
+  "voidShare": {
+   "predicted": "universal-",
+   "+": 0,
+   "-": 7,
+   "absent": 0,
+   "ambiguous": 0,
+   "undefined": 0
+  },
+  "voidRescue": {
+   "predicted": "universal+",
+   "+": 7,
+   "-": 0,
+   "absent": 0,
+   "ambiguous": 0,
+   "undefined": 0
+  },
+  "gravAlpha": {
+   "predicted": "universal+",
+   "+": 7,
+   "-": 0,
+   "absent": 0,
+   "ambiguous": 0,
+   "undefined": 0
+  },
+  "gravBeta": {
+   "predicted": "universal-",
+   "+": 0,
+   "-": 3,
+   "absent": 1,
+   "ambiguous": 3,
+   "undefined": 0
+  },
+  "gravAlphaSd": {
+   "predicted": "universal+",
+   "+": 1,
+   "-": 0,
+   "absent": 5,
+   "ambiguous": 1,
+   "undefined": 0
+  },
+  "affect": {
+   "predicted": "universal+",
+   "+": 6,
+   "-": 0,
+   "absent": 1,
+   "ambiguous": 0,
+   "undefined": 0
+  },
+  "affectAsym": {
+   "predicted": "specific",
+   "+": 0,
+   "-": 0,
+   "absent": 3,
+   "ambiguous": 4,
+   "undefined": 0
+  }
+ },
+ "size": {
+  "massAdd": {
+   "v": [
+    0.9154,
+    0.9162,
+    0.9174,
+    0.916
+   ],
+   "spearmanWithLogN": 0.4,
+   "relRange": 0.002
+  },
+  "massExp": {
+   "v": [
+    0.9038,
+    0.9074,
+    0.9129,
+    0.9133
+   ],
+   "spearmanWithLogN": 1,
+   "relRange": 0.01
+  },
+  "attrPMI": {
+   "v": [
+    0.7398,
+    0.7167,
+    0.6953,
+    0.7063
+   ],
+   "spearmanWithLogN": -0.8,
+   "relRange": 0.062
+  },
+  "attrDecay": {
+   "v": [
+    0.46,
+    0.4994,
+    0.5043,
+    0.5072
+   ],
+   "spearmanWithLogN": 1,
+   "relRange": 0.096
+  },
+  "voidShare": {
+   "v": [
+    0.341,
+    0.3359,
+    0.3358,
+    0.3303
+   ],
+   "spearmanWithLogN": -1,
+   "relRange": 0.032
+  },
+  "voidRescue": {
+   "v": [
+    0.0649,
+    0.0624,
+    0.0618,
+    0.0637
+   ],
+   "spearmanWithLogN": -0.4,
+   "relRange": 0.049
+  },
+  "gravAlpha": {
+   "v": [
+    0.4479,
+    0.518,
+    0.4963,
+    0.5088
+   ],
+   "spearmanWithLogN": 0.4,
+   "relRange": 0.142
+  },
+  "gravBeta": {
+   "v": [
+    -0.0539,
+    -0.082,
+    -0.1075,
+    -0.087
+   ],
+   "spearmanWithLogN": -0.8,
+   "relRange": 0.648
+  },
+  "gravAlphaSd": {
+   "v": [
+    0.0564,
+    0.0202,
+    0.0469,
+    0.0456
+   ],
+   "spearmanWithLogN": -0.4,
+   "relRange": 0.857
+  },
+  "affect": {
+   "v": [
+    0.0956,
+    0.1002,
+    0.0995,
+    0.0985
+   ],
+   "spearmanWithLogN": 0.2,
+   "relRange": 0.047
+  },
+  "affectAsym": {
+   "v": [
+    0.0184,
+    0.0422,
+    -0.0755,
+    -0.0316
+   ],
+   "spearmanWithLogN": -0.6,
+   "relRange": 10.123
+  }
+ },
+ "unitLengthIid": {
+  "massAdd": {
+   "v": [
+    0.89332,
+    0.89474,
+    0.89908,
+    0.89852
+   ],
+   "zByL": [
+    -0.61,
+    -0.72,
+    2.01,
+    0.21
+   ],
+   "spearmanWithL": 0.8,
+   "relRange": 0.006
+  },
+  "massExp": {
+   "v": [
+    0.83702,
+    0.88262,
+    0.90643,
+    0.91399
+   ],
+   "zByL": [
+    -2.78,
+    0.03,
+    0.71,
+    -1.07
+   ],
+   "spearmanWithL": 1,
+   "relRange": 0.087
+  },
+  "attrPMI": {
+   "v": [
+    0.25404,
+    0.25743,
+    0.25604,
+    0.25405
+   ],
+   "zByL": [
+    -0.62,
+    0.1,
+    -0.26,
+    -1.06
+   ],
+   "spearmanWithL": 0.2,
+   "relRange": 0.013
+  },
+  "attrDecay": {
+   "v": [
+    0.00694,
+    0.00029,
+    -0.00262,
+    0.00313
+   ],
+   "zByL": [
+    2,
+    0.37,
+    -0.42,
+    0.1
+   ],
+   "spearmanWithL": -0.4,
+   "relRange": 4.941
+  },
+  "voidShare": {
+   "v": [
+    0.38797,
+    0.38731,
+    0.38611,
+    0.38627
+   ],
+   "zByL": [
+    1,
+    -0.12,
+    0.16,
+    -1.46
+   ],
+   "spearmanWithL": -0.8,
+   "relRange": 0.005
+  },
+  "voidRescue": {
+   "v": [
+    0.00419,
+    0.00634,
+    0.00827,
+    0.00879
+   ],
+   "zByL": [
+    -0.63,
+    -1.51,
+    -0.93,
+    -2.52
+   ],
+   "spearmanWithL": 1,
+   "relRange": 0.667
+  },
+  "gravAlpha": {
+   "v": [
+    -0.01177,
+    -0.04007,
+    0.04556,
+    -0.03572
+   ],
+   "zByL": [
+    -0.45,
+    -1.23,
+    1.45,
+    -0.68
+   ],
+   "spearmanWithL": 0,
+   "relRange": 8.155
+  },
+  "gravBeta": {
+   "v": [
+    0.01225,
+    -0.00798,
+    0.01231,
+    0.02009
+   ],
+   "zByL": [
+    0.01,
+    -1.65,
+    -0.93,
+    -0.06
+   ],
+   "spearmanWithL": 0.8,
+   "relRange": 3.062
+  },
+  "gravAlphaSd": {
+   "v": [
+    0.05896,
+    0.07334,
+    0.06647,
+    0.07874
+   ],
+   "zByL": [
+    -0.04,
+    0.93,
+    1.06,
+    0.77
+   ],
+   "spearmanWithL": 0.8,
+   "relRange": 0.285
+  },
+  "affect": {
+   "v": [
+    0.01471,
+    0.00571,
+    0.00642,
+    0.00808
+   ],
+   "zByL": [
+    -0.31,
+    -0.91,
+    -0.86,
+    -0.63
+   ],
+   "spearmanWithL": -0.2,
+   "relRange": 1.031
+  },
+  "affectAsym": {
+   "v": [
+    0.09979,
+    -0.0266,
+    -0.45232,
+    0.37138
+   ],
+   "zByL": [
+    0.13,
+    -0.34,
+    -1.04,
+    0.91
+   ],
+   "spearmanWithL": 0.2,
+   "relRange": 425.135
+  }
+ },
+ "recutRealText": {
+  "massAdd": [
+   {
+    "L": "L4",
+    "v": 0.9011,
+    "z": -17.58
+   },
+   {
+    "L": "L8",
+    "v": 0.9054,
+    "z": -10.64
+   },
+   {
+    "L": "L16",
+    "v": 0.9092,
+    "z": -8.96
+   },
+   {
+    "L": "L32",
+    "v": 0.9129,
+    "z": -14.68
+   }
+  ],
+  "massExp": [
+   {
+    "L": "L4",
+    "v": 0.8524,
+    "z": -22.16
+   },
+   {
+    "L": "L8",
+    "v": 0.8948,
+    "z": -28.96
+   },
+   {
+    "L": "L16",
+    "v": 0.9141,
+    "z": -22.57
+   },
+   {
+    "L": "L32",
+    "v": 0.9228,
+    "z": -28
+   }
+  ],
+  "attrPMI": [
+   {
+    "L": "L4",
+    "v": 0.724,
+    "z": 97.77
+   },
+   {
+    "L": "L8",
+    "v": 0.724,
+    "z": 154.21
+   },
+   {
+    "L": "L16",
+    "v": 0.7237,
+    "z": 178.98
+   },
+   {
+    "L": "L32",
+    "v": 0.7238,
+    "z": 224.89
+   }
+  ],
+  "attrDecay": [
+   {
+    "L": "L4",
+    "v": 0.5367,
+    "z": 73.52
+   },
+   {
+    "L": "L8",
+    "v": 0.5365,
+    "z": 75.62
+   },
+   {
+    "L": "L16",
+    "v": 0.5373,
+    "z": 120.36
+   },
+   {
+    "L": "L32",
+    "v": 0.5373,
+    "z": 119.93
+   }
+  ],
+  "voidShare": [
+   {
+    "L": "L4",
+    "v": 0.3086,
+    "z": -33.21
+   },
+   {
+    "L": "L8",
+    "v": 0.3048,
+    "z": -27.47
+   },
+   {
+    "L": "L16",
+    "v": 0.302,
+    "z": -33.53
+   },
+   {
+    "L": "L32",
+    "v": 0.2993,
+    "z": -28.94
+   }
+  ],
+  "voidRescue": [
+   {
+    "L": "L4",
+    "v": 0.0487,
+    "z": 43.52
+   },
+   {
+    "L": "L8",
+    "v": 0.0604,
+    "z": 78.79
+   },
+   {
+    "L": "L16",
+    "v": 0.0691,
+    "z": 90.03
+   },
+   {
+    "L": "L32",
+    "v": 0.0742,
+    "z": 82.31
+   }
+  ],
+  "gravAlpha": [
+   {
+    "L": "L4",
+    "v": 0.5264,
+    "z": 28.85
+   },
+   {
+    "L": "L8",
+    "v": 0.5258,
+    "z": 57.06
+   },
+   {
+    "L": "L16",
+    "v": 0.5252,
+    "z": 52.64
+   },
+   {
+    "L": "L32",
+    "v": 0.5272,
+    "z": 30.1
+   }
+  ],
+  "gravBeta": [
+   {
+    "L": "L4",
+    "v": -0.0929,
+    "z": -5.9
+   },
+   {
+    "L": "L8",
+    "v": -0.093,
+    "z": -7.66
+   },
+   {
+    "L": "L16",
+    "v": -0.0949,
+    "z": -6.98
+   },
+   {
+    "L": "L32",
+    "v": -0.0935,
+    "z": -7.06
+   }
+  ],
+  "gravAlphaSd": [
+   {
+    "L": "L4",
+    "v": 0.0375,
+    "z": 0.32
+   },
+   {
+    "L": "L8",
+    "v": 0.0374,
+    "z": 0.12
+   },
+   {
+    "L": "L16",
+    "v": 0.0367,
+    "z": -0.26
+   },
+   {
+    "L": "L32",
+    "v": 0.0369,
+    "z": -0.56
+   }
+  ],
+  "affect": [
+   {
+    "L": "L4",
+    "v": 0.0938,
+    "z": 8.69
+   },
+   {
+    "L": "L8",
+    "v": 0.0887,
+    "z": 16.29
+   },
+   {
+    "L": "L16",
+    "v": 0.0857,
+    "z": 14.9
+   },
+   {
+    "L": "L32",
+    "v": 0.0849,
+    "z": 12.73
+   }
+  ],
+  "affectAsym": [
+   {
+    "L": "L4",
+    "v": 0.149,
+    "z": 1.99
+   },
+   {
+    "L": "L8",
+    "v": 0.0606,
+    "z": 0.71
+   },
+   {
+    "L": "L16",
+    "v": 0.0523,
+    "z": 0.73
+   },
+   {
+    "L": "L32",
+    "v": 0.0477,
+    "z": -0.23
+   }
+  ]
+ },
+ "timing": {
+  "middlemarch": {
+   "tokens": 150014,
+   "types": 11612,
+   "cpuMsRuns": [
+    281,
+    160,
+    234,
+    180,
+    130
+   ],
+   "steadyCpuMs": 130,
+   "firstCallCpuMs": 281
+  },
+  "bigV-100k-types": {
+   "tokens": 150000,
+   "types": 73275,
+   "cpuMsRuns": [
+    157,
+    118,
+    128,
+    97,
+    117
+   ],
+   "steadyCpuMs": 97,
+   "firstCallCpuMs": 157
+  },
+  "units5": {
+   "tokens": 150010,
+   "types": 11612,
+   "cpuMsRuns": [
+    108,
+    97,
+    97,
+    102,
+    100
+   ],
+   "steadyCpuMs": 97,
+   "firstCallCpuMs": 108
+  },
+  "units100": {
+   "tokens": 150000,
+   "types": 11612,
+   "cpuMsRuns": [
+    101,
+    101,
+    101,
+    102,
+    96
+   ],
+   "steadyCpuMs": 96,
+   "firstCallCpuMs": 101
+  }
+ },
+ "collinear": {
+  "views": 32,
+  "top": [
+   {
+    "phys": "voidShare",
+    "freq": "ttr",
+    "n": 32,
+    "rho": 0.927
+   },
+   {
+    "phys": "voidShare",
+    "freq": "rankBinEnt",
+    "n": 32,
+    "rho": 0.816
+   },
+   {
+    "phys": "attrDecay",
+    "freq": "lenLogSkew",
+    "n": 30,
+    "rho": -0.766
+   },
+   {
+    "phys": "gravBeta",
+    "freq": "lenAcf1",
+    "n": 32,
+    "rho": -0.73
+   },
+   {
+    "phys": "massExp",
+    "freq": "ttr",
+    "n": 32,
+    "rho": 0.702
+   },
+   {
+    "phys": "gravBeta",
+    "freq": "lenDocEps",
+    "n": 32,
+    "rho": -0.699
+   },
+   {
+    "phys": "voidShare",
+    "freq": "heapsBeta",
+    "n": 32,
+    "rho": 0.685
+   },
+   {
+    "phys": "massAdd",
+    "freq": "ttr",
+    "n": 32,
+    "rho": 0.683
+   },
+   {
+    "phys": "gravAlpha",
+    "freq": "lenLogSkew",
+    "n": 32,
+    "rho": -0.665
+   },
+   {
+    "phys": "gravAlpha",
+    "freq": "lenAcf1",
+    "n": 32,
+    "rho": 0.646
+   },
+   {
+    "phys": "massExp",
+    "freq": "recurLen",
+    "n": 32,
+    "rho": -0.603
+   },
+   {
+    "phys": "voidShare",
+    "freq": "hapaxShare",
+    "n": 32,
+    "rho": 0.602
+   },
+   {
+    "phys": "gravAlpha",
+    "freq": "lenDocEps",
+    "n": 32,
+    "rho": 0.596
+   },
+   {
+    "phys": "massAdd",
+    "freq": "recurLen",
+    "n": 32,
+    "rho": -0.589
+   },
+   {
+    "phys": "voidShare",
+    "freq": "recurLen",
+    "n": 32,
+    "rho": -0.586
+   }
+  ],
+  "withinFamilyTop": [
+   [
+    "attrPMI~gravAlpha",
+    0.886
+   ],
+   [
+    "massAdd~massExp",
+    0.881
+   ],
+   [
+    "gravAlpha~gravBeta",
+    -0.701
+   ],
+   [
+    "affect~gravAlpha",
+    0.685
+   ],
+   [
+    "attrDecay~gravAlpha",
+    0.682
+   ],
+   [
+    "attrDecay~attrPMI",
+    0.657
+   ],
+   [
+    "affect~attrDecay",
+    0.656
+   ],
+   [
+    "attrPMI~voidRescue",
+    0.655
+   ],
+   [
+    "attrPMI~gravBeta",
+    -0.653
+   ],
+   [
+    "affect~attrPMI",
+    0.56
+   ],
+   [
+    "gravAlpha~voidRescue",
+    0.549
+   ],
+   [
+    "gravBeta~voidRescue",
+    -0.514
+   ]
+  ]
+ },
+ "determinism": {
+  "computeIdentical": true,
+  "atlasCellsIdentical": true
+ },
+ "scriptInvariance": {
+  "cyrillic": true,
+  "cjk": true
+ },
+ "edge": {
+  "empty": {
+   "tokens": 0,
+   "allFiniteOrNull": true,
+   "error": null
+  },
+  "oneUnit": {
+   "tokens": 50,
+   "allFiniteOrNull": true,
+   "error": null
+  },
+  "hundred": {
+   "tokens": 100,
+   "allFiniteOrNull": true,
+   "error": null
+  },
+  "oneToken": {
+   "tokens": 20000,
+   "allFiniteOrNull": true,
+   "error": null
+  },
+  "twoTypes": {
+   "tokens": 20000,
+   "allFiniteOrNull": true,
+   "error": null
+  },
+  "tenTypes": {
+   "tokens": 24000,
+   "allFiniteOrNull": true,
+   "error": null
+  },
+  "singleDoc": {
+   "tokens": 24000,
+   "allFiniteOrNull": true,
+   "error": null
+  }
+ },
+ "predictFrozen": {
+  "frozenSha256": "0227988e28f8caf88b091eaaa1821ee7c5873c244b8ecd8c525f9b7921eb3655",
+  "currentSha256": "0227988e28f8caf88b091eaaa1821ee7c5873c244b8ecd8c525f9b7921eb3655",
+  "unchanged": true
+ }
+}

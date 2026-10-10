@@ -1,0 +1,41 @@
+{
+ "mode": "dry",
+ "seconds": 30.9,
+ "sha": "48953d24ecb1dcd589fd4052e956a4df4524e09cec0a60de6f45b4376fb386f3",
+ "verdict_R1": {
+  "cellHolds": true,
+  "auc": 0.8772,
+  "ci": [
+   0.8658,
+   0.8884
+  ],
+  "wordshufAuc": 0.6302,
+  "shufDrop": 0.247,
+  "shufOk": true,
+  "beyond": {
+   "kept": 706,
+   "share": 0.2551,
+   "auc": 0.8286
+  },
+  "beyondOk": true,
+  "HOLDS": true
+ },
+ "verdict_R2": {
+  "cellHolds": true,
+  "auc": 0.6919,
+  "ci": [
+   0.6713,
+   0.7135
+  ],
+  "wordshufAuc": 0.5332,
+  "shufDrop": 0.1587,
+  "shufOk": true,
+  "beyond": {
+   "kept": 518,
+   "share": 0.97,
+   "auc": 0.6824
+  },
+  "beyondOk": true,
+  "HOLDS": true
+ }
+}

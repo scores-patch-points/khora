@@ -1,0 +1,16 @@
+tokens 60013 units 3290 cpu ms 57.9
+divSlope  v 0.8434   null 0.8632   sd 0.00271  z -7.3
+condR     v 0.9692   null 0.9991   sd 0.00008  z -383.64
+condL     v 0.9692   null 0.9991   sd 0.00008  z -384.48
+rigidL    v 0.0517   null 0        sd 0        z 152409.67
+rigidR    v 0.0234   null 0        sd 0        z 37181.54
+sameL     v 0.1193   null 0.0953   sd 0.00101  z 23.81
+sameR     v 0.0997   null 0.0728   sd 0.00093  z 28.92
+asym      v 0.0011   null 0        sd 0.00035  z 3.17
+miDecay   v 1.0713   null 0.0453   sd 0.08869  z 11.57
+initEnt   v 3.2201   null 3.5248   sd 0.00758  z -40.18
+finEnt    v 3.2306   null 3.5169   sd 0.00941  z -30.41
+edgeGap   v 2.7496   null -0.0079  sd 0.04614  z 59.77
+MI real 0.1092 0.0222 0.0068 0.0045 0.0033 0.0035 0.0028 0.0041 
+MI null 0.0032 0.003 0.0033 0.0039 0.0026 0.0032 0.0027 0.0034 
+N 56723 53568 50613 47828 45197 42686 40315 38069

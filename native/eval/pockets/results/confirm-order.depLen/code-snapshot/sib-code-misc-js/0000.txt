@@ -1,0 +1,120 @@
+import { writeFileSync, mkdirSync } from "node:fs";
+import path from "node:path";
+import { fixCode } from "/Users/mlacy/Documents/3.0/penelope/organs/code-fix.mjs";
+import { emptyExecutor } from "/Users/mlacy/Documents/3.0/heimdall/src/executors.js";
+import { inferOn } from "/Users/mlacy/Documents/3.0/heimdall/src/remote.js";
+
+const OUT = path.dirname(new URL(import.meta.url).pathname);
+const SRC = path.join(OUT, "src");
+const ollamaExec = emptyExecutor({ executor: "ollama:qwen2.5-coder:1.5b", endpoint: "http://127.0.0.1:11434", model: "qwen2.5-coder:1.5b", provider: "ollama", location: "local/LAN", authClass: "local_open", privacyClass: "local-raw" });
+async function infer(prompt, { maxTokens } = {}) {
+  const r = await inferOn(ollamaExec, { messages: [{ role: "user", content: String(prompt) }], temperature: 0, maxTokens: maxTokens ?? 900 });
+  return r.text;
+}
+
+async function gateFor(checks) {
+  const { mkdtempSync, rmSync } = await import("node:fs");
+  const { tmpdir } = await import("node:os");
+  const { pathToFileURL } = await import("node:url");
+  return async function gate(code) {
+    const dir = mkdtempSync(path.join(tmpdir(), "ember-gate-"));
+    try {
+      const file = path.join(dir, "m.mjs");
+      writeFileSync(file, String(code ?? ""), "utf8");
+      let mod;
+      try { mod = await import(pathToFileURL(file).href); } catch (e) { return { ok: false, why: "does not import: " + String(e?.message ?? e).slice(0, 140) }; }
+      const bad = [];
+      for (const c of checks) {
+        const fn = typeof c === "function" ? c : c.run;
+        const r = await fn(mod);
+        if (!r.ok) bad.push(`${r.name}: ${JSON.stringify(r.got)}, want ${JSON.stringify(r.want)}`);
+      }
+      return { ok: bad.length === 0, why: bad.join("; ") };
+    } finally { rmSync(dir, { recursive: true, force: true }); }
+  };
+}
+
+const RUNS = [
+  {
+    file: "store.js",
+    brief: `Write a JavaScript module for an Instagram clone's data store. Export EXACTLY one function:
+
+export function addPost(posts, { author, imageUrl, caption }) — returns a NEW array (never mutating the input) with one post appended: { id: "p" + Date.now(), author, imageUrl, caption, likes: [], comments: [], createdAt: Date.now() }.`,
+    goals: [{ end1: "addPost", label: "returns", end2: "a new array with the post appended" }],
+    checks: [
+      { name: "addPost appends with empty likes", async run(m) {
+        const p = m.addPost([], { author: "a", imageUrl: "http://x/1.jpg", caption: "hi" });
+        return { name: "addPost appends with empty likes", ok: p.length === 1 && p[0].author === "a" && p[0].likes.length === 0 && p[0].comments.length === 0, got: JSON.stringify(p[0]), want: "author a, likes [], comments []" };
+      } },
+      { name: "addPost never mutates", async run(m) {
+        const base = [];
+        m.addPost(base, { author: "a", imageUrl: "http://x/1.jpg", caption: "" });
+        return { name: "addPost never mutates", ok: base.length === 0, got: base.length, want: 0 };
+      } },
+    ],
+  },
+  {
+    file: "likes.js",
+    brief: `Write a JavaScript module for an Instagram clone's likes. Export EXACTLY one function:
+
+export function toggleLike(posts, id, user) — returns a NEW array where the post with the given id has "user" added to its likes if absent, or removed if present; all other posts are returned unchanged. Also return { posts, liked } where liked is true when the like was ADDED.`,
+    goals: [{ end1: "toggleLike", label: "returns", end2: "{ posts, liked }" }],
+    checks: [
+      { name: "toggle adds then removes", async run(m) {
+        const base = [{ id: "p1", likes: [] }];
+        const r1 = m.toggleLike(base, "p1", "u");
+        const r2 = m.toggleLike(r1.posts, "p1", "u");
+        return { name: "toggle adds then removes", ok: r1.liked === true && r1.posts[0].likes.includes("u") && r2.liked === false && !r2.posts[0].likes.includes("u"), got: `${r1.liked}/${r2.liked}`, want: "true/false" };
+      } },
+      { name: "leaves others unchanged", async run(m) {
+        const base = [{ id: "p1", likes: [] }, { id: "p2", likes: [] }];
+        const r = m.toggleLike(base, "p2", "u");
+        return { name: "leaves others unchanged", ok: r.posts[0].likes.length === 0 && r.posts[1].likes.length === 1, got: `${r.posts[0].likes.length}/${r.posts[1].likes.length}`, want: "0/1" };
+      } },
+    ],
+  },
+  {
+    file: "comments.js",
+    brief: `Write a JavaScript module for an Instagram clone's comments. Export EXACTLY one function:
+
+export function addComment(posts, id, { author, text }) — returns a NEW array with the comment { author, text } appended to the matching post's comments array; all other posts unchanged. If no post has the id, return the original array.`,
+    goals: [{ end1: "addComment", label: "returns", end2: "a new array with the comment appended" }],
+    checks: [
+      { name: "appends the comment", async run(m) {
+        const base = [{ id: "p1", comments: [] }];
+        const n = m.addComment(base, "p1", { author: "u", text: "nice" });
+        return { name: "appends the comment", ok: n[0].comments.length === 1 && n[0].comments[0].text === "nice", got: n[0].comments.length, want: "1" };
+      } },
+      { name: "unknown id leaves posts unchanged", async run(m) {
+        const base = [{ id: "p1", comments: [] }];
+        const n = m.addComment(base, "nope", { author: "u", text: "x" });
+        return { name: "unknown id leaves posts unchanged", ok: n[0].comments.length === 0, got: n[0].comments.length, want: "0" };
+      } },
+    ],
+  },
+  {
+    file: "suggest.js",
+    brief: `Write a JavaScript module for an Instagram clone's account suggestions. Export EXACTLY one function:
+
+export function suggestAccounts(posts, me) — returns an array of { username, posts } for the unique authors among the given posts, EXCLUDING the "me" username, sorted by number of posts descending. Returns [] when no other authors exist.`,
+    goals: [{ end1: "suggestAccounts", label: "returns", end2: "other authors by post count" }],
+    checks: [
+      { name: "suggests others by count", async run(m) {
+        const s = m.suggestAccounts([{ author: "me" }, { author: "b" }, { author: "b" }, { author: "a" }], "me");
+        const ok = s.length === 2 && s[0].username === "b" && s[0].posts === 2 && s[1].username === "a";
+        return { name: "suggests others by count", ok, got: JSON.stringify(s), want: "b:2,a:1" };
+      } },
+      { name: "[] when alone", async run(m) {
+        const s = m.suggestAccounts([{ author: "me" }], "me");
+        return { name: "[] when alone", ok: s.length === 0, got: s.length, want: 0 };
+      } },
+    ],
+  },
+];
+
+mkdirSync(SRC, { recursive: true });
+for (const run of RUNS) {
+  const res = await fixCode({ brief: run.brief, goals: run.goals, gate: await gateFor(run.checks), infer, maxAttempts: 4, maxTokens: 700 });
+  if (res.ok) writeFileSync(path.join(SRC, run.file), res.code, "utf8");
+  console.log(`${res.ok ? "LANDED" : "FAILED"} ${run.file}${res.ok ? "" : ` — ${res.attempts?.at(-1)?.why?.slice(0, 120) ?? res.reason}`}`);
+}

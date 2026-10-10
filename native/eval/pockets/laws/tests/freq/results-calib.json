@@ -1,0 +1,1468 @@
+{
+ "part": "calib",
+ "statIds": [
+  "zipfAlpha",
+  "heapsBeta",
+  "ttr",
+  "hapaxShare",
+  "rankBinEnt",
+  "abbrev",
+  "menzerath",
+  "recurLen",
+  "lenAcf1",
+  "lenDocEps",
+  "lenCV",
+  "lenLogSkew"
+ ],
+ "nulls": {
+  "zipfAlpha": "token-global",
+  "heapsBeta": "token-global",
+  "ttr": "token-global",
+  "hapaxShare": "token-global",
+  "rankBinEnt": "token-global",
+  "abbrev": "token-global",
+  "menzerath": "token-global",
+  "recurLen": "token-global",
+  "lenAcf1": "unit-order",
+  "lenDocEps": "unit-order",
+  "lenCV": "token-global",
+  "lenLogSkew": "token-global"
+ },
+ "inert": [
+  "abbrev",
+  "lenCV",
+  "lenLogSkew"
+ ],
+ "rows": [
+  {
+   "id": "iid-r0",
+   "which": "discover",
+   "tokens": 50337,
+   "units": 4806,
+   "docs": 50,
+   "cells": {
+    "zipfAlpha": {
+     "v": 0.9743,
+     "nullMean": 0.9781,
+     "nullSd": 0.00303,
+     "z": -1.24
+    },
+    "heapsBeta": {
+     "v": 0.7535,
+     "nullMean": 0.7622,
+     "nullSd": 0.00384,
+     "z": -2.25
+    },
+    "ttr": {
+     "v": 0.2926,
+     "nullMean": 0.2936,
+     "nullSd": 0.00056,
+     "z": -1.66
+    },
+    "hapaxShare": {
+     "v": 0.6442,
+     "nullMean": 0.6469,
+     "nullSd": 0.00265,
+     "z": -1.01
+    },
+    "rankBinEnt": {
+     "v": 3.4495,
+     "nullMean": 3.4496,
+     "nullSd": 0.00026,
+     "z": -0.21
+    },
+    "abbrev": {
+     "v": 0.0675,
+     "nullMean": 0.0675,
+     "nullSd": 0,
+     "z": null
+    },
+    "menzerath": {
+     "v": -0.0431,
+     "nullMean": -0.009,
+     "nullSd": 0.01948,
+     "z": -1.75
+    },
+    "recurLen": {
+     "v": -0.2776,
+     "nullMean": -0.2788,
+     "nullSd": 0.00428,
+     "z": 0.27
+    },
+    "lenAcf1": {
+     "v": 0.0061,
+     "nullMean": 0.0083,
+     "nullSd": 0.02071,
+     "z": -0.1
+    },
+    "lenDocEps": {
+     "v": 0.0012,
+     "nullMean": -0.0018,
+     "nullSd": 0.00163,
+     "z": 1.8
+    },
+    "lenCV": {
+     "v": 0.5797,
+     "nullMean": 0.5797,
+     "nullSd": 0,
+     "z": null
+    },
+    "lenLogSkew": {
+     "v": 0.0267,
+     "nullMean": 0.0267,
+     "nullSd": 0,
+     "z": null
+    }
+   }
+  },
+  {
+   "id": "iid-r1",
+   "which": "discover",
+   "tokens": 50321,
+   "units": 4808,
+   "docs": 50,
+   "cells": {
+    "zipfAlpha": {
+     "v": 0.964,
+     "nullMean": 0.9672,
+     "nullSd": 0.00206,
+     "z": -1.54
+    },
+    "heapsBeta": {
+     "v": 0.7547,
+     "nullMean": 0.7594,
+     "nullSd": 0.00629,
+     "z": -0.75
+    },
+    "ttr": {
+     "v": 0.2919,
+     "nullMean": 0.2927,
+     "nullSd": 0.0006,
+     "z": -1.27
+    },
+    "hapaxShare": {
+     "v": 0.6415,
+     "nullMean": 0.6435,
+     "nullSd": 0.00336,
+     "z": -0.59
+    },
+    "rankBinEnt": {
+     "v": 3.4488,
+     "nullMean": 3.4485,
+     "nullSd": 0.00029,
+     "z": 0.77
+    },
+    "abbrev": {
+     "v": 0.0636,
+     "nullMean": 0.0636,
+     "nullSd": 0,
+     "z": null
+    },
+    "menzerath": {
+     "v": 0.0209,
+     "nullMean": 0.0026,
+     "nullSd": 0.01405,
+     "z": 1.3
+    },
+    "recurLen": {
+     "v": -0.284,
+     "nullMean": -0.2875,
+     "nullSd": 0.00468,
+     "z": 0.74
+    },
+    "lenAcf1": {
+     "v": -0.0179,
+     "nullMean": -0.0003,
+     "nullSd": 0.01528,
+     "z": -1.15
+    },
+    "lenDocEps": {
+     "v": -0.0008,
+     "nullMean": -0.0011,
+     "nullSd": 0.00232,
+     "z": 0.15
+    },
+    "lenCV": {
+     "v": 0.5715,
+     "nullMean": 0.5715,
+     "nullSd": 0,
+     "z": null
+    },
+    "lenLogSkew": {
+     "v": -0.0618,
+     "nullMean": -0.0618,
+     "nullSd": 0,
+     "z": null
+    }
+   }
+  },
+  {
+   "id": "iid-r2",
+   "which": "discover",
+   "tokens": 50262,
+   "units": 4859,
+   "docs": 50,
+   "cells": {
+    "zipfAlpha": {
+     "v": 0.9684,
+     "nullMean": 0.9671,
+     "nullSd": 0.00235,
+     "z": 0.58
+    },
+    "heapsBeta": {
+     "v": 0.7579,
+     "nullMean": 0.7615,
+     "nullSd": 0.00498,
+     "z": -0.74
+    },
+    "ttr": {
+     "v": 0.2943,
+     "nullMean": 0.294,
+     "nullSd": 0.00069,
+     "z": 0.36
+    },
+    "hapaxShare": {
+     "v": 0.6464,
+     "nullMean": 0.6447,
+     "nullSd": 0.00192,
+     "z": 0.89
+    },
+    "rankBinEnt": {
+     "v": 3.4491,
+     "nullMean": 3.4493,
+     "nullSd": 0.00021,
+     "z": -0.93
+    },
+    "abbrev": {
+     "v": 0.0672,
+     "nullMean": 0.0672,
+     "nullSd": 0,
+     "z": null
+    },
+    "menzerath": {
+     "v": 0.0075,
+     "nullMean": -0.0086,
+     "nullSd": 0.01196,
+     "z": 1.34
+    },
+    "recurLen": {
+     "v": -0.284,
+     "nullMean": -0.2737,
+     "nullSd": 0.00454,
+     "z": -2.27
+    },
+    "lenAcf1": {
+     "v": -0.0024,
+     "nullMean": 0.0032,
+     "nullSd": 0.01285,
+     "z": -0.43
+    },
+    "lenDocEps": {
+     "v": 0.0008,
+     "nullMean": 0.001,
+     "nullSd": 0.00249,
+     "z": -0.09
+    },
+    "lenCV": {
+     "v": 0.5704,
+     "nullMean": 0.5704,
+     "nullSd": 0,
+     "z": null
+    },
+    "lenLogSkew": {
+     "v": -0.0589,
+     "nullMean": -0.0589,
+     "nullSd": 0,
+     "z": null
+    }
+   }
+  },
+  {
+   "id": "iid-r3",
+   "which": "discover",
+   "tokens": 50295,
+   "units": 4883,
+   "docs": 50,
+   "cells": {
+    "zipfAlpha": {
+     "v": 0.9715,
+     "nullMean": 0.9704,
+     "nullSd": 0.00346,
+     "z": 0.31
+    },
+    "heapsBeta": {
+     "v": 0.7575,
+     "nullMean": 0.7627,
+     "nullSd": 0.00305,
+     "z": -1.7
+    },
+    "ttr": {
+     "v": 0.2944,
+     "nullMean": 0.294,
+     "nullSd": 0.00083,
+     "z": 0.45
+    },
+    "hapaxShare": {
+     "v": 0.6459,
+     "nullMean": 0.6475,
+     "nullSd": 0.00314,
+     "z": -0.52
+    },
+    "rankBinEnt": {
+     "v": 3.4494,
+     "nullMean": 3.4494,
+     "nullSd": 0.00028,
+     "z": -0.02
+    },
+    "abbrev": {
+     "v": 0.0751,
+     "nullMean": 0.0751,
+     "nullSd": 0,
+     "z": null
+    },
+    "menzerath": {
+     "v": 0.0217,
+     "nullMean": -0.0067,
+     "nullSd": 0.01699,
+     "z": 1.67
+    },
+    "recurLen": {
+     "v": -0.2813,
+     "nullMean": -0.2842,
+     "nullSd": 0.00525,
+     "z": 0.56
+    },
+    "lenAcf1": {
+     "v": -0.0139,
+     "nullMean": 0.0057,
+     "nullSd": 0.01628,
+     "z": -1.2
+    },
+    "lenDocEps": {
+     "v": -0.0003,
+     "nullMean": -0.0004,
+     "nullSd": 0.00184,
+     "z": 0.06
+    },
+    "lenCV": {
+     "v": 0.584,
+     "nullMean": 0.584,
+     "nullSd": 0,
+     "z": null
+    },
+    "lenLogSkew": {
+     "v": 0.0126,
+     "nullMean": 0.0126,
+     "nullSd": 0,
+     "z": null
+    }
+   }
+  },
+  {
+   "id": "iid-r4",
+   "which": "discover",
+   "tokens": 50235,
+   "units": 4893,
+   "docs": 50,
+   "cells": {
+    "zipfAlpha": {
+     "v": 0.9715,
+     "nullMean": 0.9718,
+     "nullSd": 0.00261,
+     "z": -0.12
+    },
+    "heapsBeta": {
+     "v": 0.7641,
+     "nullMean": 0.7613,
+     "nullSd": 0.00325,
+     "z": 0.86
+    },
+    "ttr": {
+     "v": 0.2934,
+     "nullMean": 0.2939,
+     "nullSd": 0.00092,
+     "z": -0.55
+    },
+    "hapaxShare": {
+     "v": 0.6498,
+     "nullMean": 0.6503,
+     "nullSd": 0.00362,
+     "z": -0.14
+    },
+    "rankBinEnt": {
+     "v": 3.4499,
+     "nullMean": 3.4499,
+     "nullSd": 0.00036,
+     "z": 0.11
+    },
+    "abbrev": {
+     "v": 0.031,
+     "nullMean": 0.031,
+     "nullSd": 0,
+     "z": null
+    },
+    "menzerath": {
+     "v": -0.0194,
+     "nullMean": 0.0093,
+     "nullSd": 0.01007,
+     "z": -2.85
+    },
+    "recurLen": {
+     "v": -0.2788,
+     "nullMean": -0.2811,
+     "nullSd": 0.00651,
+     "z": 0.37
+    },
+    "lenAcf1": {
+     "v": 0.0201,
+     "nullMean": -0.0006,
+     "nullSd": 0.01639,
+     "z": 1.26
+    },
+    "lenDocEps": {
+     "v": -0.0013,
+     "nullMean": 0.0015,
+     "nullSd": 0.00332,
+     "z": -0.84
+    },
+    "lenCV": {
+     "v": 0.5684,
+     "nullMean": 0.5684,
+     "nullSd": 0,
+     "z": null
+    },
+    "lenLogSkew": {
+     "v": -0.0308,
+     "nullMean": -0.0308,
+     "nullSd": 0,
+     "z": null
+    }
+   }
+  },
+  {
+   "id": "iid-r5",
+   "which": "discover",
+   "tokens": 50296,
+   "units": 4763,
+   "docs": 50,
+   "cells": {
+    "zipfAlpha": {
+     "v": 0.9661,
+     "nullMean": 0.9723,
+     "nullSd": 0.00334,
+     "z": -1.85
+    },
+    "heapsBeta": {
+     "v": 0.7748,
+     "nullMean": 0.7634,
+     "nullSd": 0.00415,
+     "z": 2.75
+    },
+    "ttr": {
+     "v": 0.2983,
+     "nullMean": 0.2972,
+     "nullSd": 0.00086,
+     "z": 1.23
+    },
+    "hapaxShare": {
+     "v": 0.6503,
+     "nullMean": 0.6481,
+     "nullSd": 0.00367,
+     "z": 0.61
+    },
+    "rankBinEnt": {
+     "v": 3.4491,
+     "nullMean": 3.4492,
+     "nullSd": 0.00039,
+     "z": -0.39
+    },
+    "abbrev": {
+     "v": 0.017,
+     "nullMean": 0.017,
+     "nullSd": 0,
+     "z": null
+    },
+    "menzerath": {
+     "v": 0.0165,
+     "nullMean": 0.0054,
+     "nullSd": 0.01139,
+     "z": 0.98
+    },
+    "recurLen": {
+     "v": -0.272,
+     "nullMean": -0.2704,
+     "nullSd": 0.00604,
+     "z": -0.27
+    },
+    "lenAcf1": {
+     "v": 0.0087,
+     "nullMean": -0.0014,
+     "nullSd": 0.01395,
+     "z": 0.72
+    },
+    "lenDocEps": {
+     "v": 0.0006,
+     "nullMean": 0.0003,
+     "nullSd": 0.00256,
+     "z": 0.1
+    },
+    "lenCV": {
+     "v": 0.5698,
+     "nullMean": 0.5698,
+     "nullSd": 0,
+     "z": null
+    },
+    "lenLogSkew": {
+     "v": 0.0134,
+     "nullMean": 0.0134,
+     "nullSd": 0,
+     "z": null
+    }
+   }
+  },
+  {
+   "id": "iid-r6",
+   "which": "discover",
+   "tokens": 50342,
+   "units": 4858,
+   "docs": 50,
+   "cells": {
+    "zipfAlpha": {
+     "v": 0.9783,
+     "nullMean": 0.97,
+     "nullSd": 0.00275,
+     "z": 3.03
+    },
+    "heapsBeta": {
+     "v": 0.7653,
+     "nullMean": 0.7607,
+     "nullSd": 0.00636,
+     "z": 0.71
+    },
+    "ttr": {
+     "v": 0.2929,
+     "nullMean": 0.2932,
+     "nullSd": 0.00068,
+     "z": -0.43
+    },
+    "hapaxShare": {
+     "v": 0.6481,
+     "nullMean": 0.6482,
+     "nullSd": 0.00268,
+     "z": -0.05
+    },
+    "rankBinEnt": {
+     "v": 3.449,
+     "nullMean": 3.4489,
+     "nullSd": 0.00027,
+     "z": 0.14
+    },
+    "abbrev": {
+     "v": 0.0602,
+     "nullMean": 0.0602,
+     "nullSd": 0,
+     "z": null
+    },
+    "menzerath": {
+     "v": -0.0052,
+     "nullMean": 0.0011,
+     "nullSd": 0.02265,
+     "z": -0.28
+    },
+    "recurLen": {
+     "v": -0.2942,
+     "nullMean": -0.2909,
+     "nullSd": 0.00705,
+     "z": -0.46
+    },
+    "lenAcf1": {
+     "v": -0.0053,
+     "nullMean": 0.0051,
+     "nullSd": 0.01445,
+     "z": -0.72
+    },
+    "lenDocEps": {
+     "v": 0.0015,
+     "nullMean": 0.0006,
+     "nullSd": 0.00254,
+     "z": 0.39
+    },
+    "lenCV": {
+     "v": 0.5706,
+     "nullMean": 0.5706,
+     "nullSd": 0,
+     "z": null
+    },
+    "lenLogSkew": {
+     "v": -0.0589,
+     "nullMean": -0.0589,
+     "nullSd": 0,
+     "z": null
+    }
+   }
+  },
+  {
+   "id": "iid-r7",
+   "which": "discover",
+   "tokens": 50253,
+   "units": 4790,
+   "docs": 50,
+   "cells": {
+    "zipfAlpha": {
+     "v": 0.9607,
+     "nullMean": 0.9598,
+     "nullSd": 0.00197,
+     "z": 0.42
+    },
+    "heapsBeta": {
+     "v": 0.7629,
+     "nullMean": 0.7607,
+     "nullSd": 0.00596,
+     "z": 0.36
+    },
+    "ttr": {
+     "v": 0.2957,
+     "nullMean": 0.2953,
+     "nullSd": 0.00074,
+     "z": 0.59
+    },
+    "hapaxShare": {
+     "v": 0.647,
+     "nullMean": 0.6459,
+     "nullSd": 0.00252,
+     "z": 0.42
+    },
+    "rankBinEnt": {
+     "v": 3.4491,
+     "nullMean": 3.4491,
+     "nullSd": 0.00018,
+     "z": -0.02
+    },
+    "abbrev": {
+     "v": 0.0726,
+     "nullMean": 0.0726,
+     "nullSd": 0,
+     "z": null
+    },
+    "menzerath": {
+     "v": 0.0073,
+     "nullMean": -0.0013,
+     "nullSd": 0.02346,
+     "z": 0.37
+    },
+    "recurLen": {
+     "v": -0.2906,
+     "nullMean": -0.2923,
+     "nullSd": 0.00523,
+     "z": 0.32
+    },
+    "lenAcf1": {
+     "v": 0.0143,
+     "nullMean": -0.0013,
+     "nullSd": 0.01549,
+     "z": 1
+    },
+    "lenDocEps": {
+     "v": -0.0037,
+     "nullMean": 0.0004,
+     "nullSd": 0.00185,
+     "z": -2.2
+    },
+    "lenCV": {
+     "v": 0.5745,
+     "nullMean": 0.5745,
+     "nullSd": 0,
+     "z": null
+    },
+    "lenLogSkew": {
+     "v": -0.0096,
+     "nullMean": -0.0096,
+     "nullSd": 0,
+     "z": null
+    }
+   }
+  },
+  {
+   "id": "iid-r8",
+   "which": "discover",
+   "tokens": 50337,
+   "units": 4737,
+   "docs": 50,
+   "cells": {
+    "zipfAlpha": {
+     "v": 0.9728,
+     "nullMean": 0.9731,
+     "nullSd": 0.00276,
+     "z": -0.08
+    },
+    "heapsBeta": {
+     "v": 0.7536,
+     "nullMean": 0.7614,
+     "nullSd": 0.00669,
+     "z": -1.16
+    },
+    "ttr": {
+     "v": 0.2946,
+     "nullMean": 0.2952,
+     "nullSd": 0.00081,
+     "z": -0.76
+    },
+    "hapaxShare": {
+     "v": 0.6479,
+     "nullMean": 0.6473,
+     "nullSd": 0.00296,
+     "z": 0.2
+    },
+    "rankBinEnt": {
+     "v": 3.4484,
+     "nullMean": 3.4482,
+     "nullSd": 0.00017,
+     "z": 0.71
+    },
+    "abbrev": {
+     "v": 0.1226,
+     "nullMean": 0.1226,
+     "nullSd": 0,
+     "z": null
+    },
+    "menzerath": {
+     "v": -0.0234,
+     "nullMean": 0.0054,
+     "nullSd": 0.01891,
+     "z": -1.53
+    },
+    "recurLen": {
+     "v": -0.2932,
+     "nullMean": -0.3002,
+     "nullSd": 0.00573,
+     "z": 1.22
+    },
+    "lenAcf1": {
+     "v": -0.0132,
+     "nullMean": 0.0032,
+     "nullSd": 0.01216,
+     "z": -1.35
+    },
+    "lenDocEps": {
+     "v": -0.0041,
+     "nullMean": 0.0015,
+     "nullSd": 0.00227,
+     "z": -2.49
+    },
+    "lenCV": {
+     "v": 0.5685,
+     "nullMean": 0.5685,
+     "nullSd": 0,
+     "z": null
+    },
+    "lenLogSkew": {
+     "v": -0.0293,
+     "nullMean": -0.0293,
+     "nullSd": 0,
+     "z": null
+    }
+   }
+  },
+  {
+   "id": "iid-r9",
+   "which": "discover",
+   "tokens": 50306,
+   "units": 4766,
+   "docs": 50,
+   "cells": {
+    "zipfAlpha": {
+     "v": 0.9611,
+     "nullMean": 0.9623,
+     "nullSd": 0.00262,
+     "z": -0.46
+    },
+    "heapsBeta": {
+     "v": 0.7623,
+     "nullMean": 0.7609,
+     "nullSd": 0.00509,
+     "z": 0.28
+    },
+    "ttr": {
+     "v": 0.2969,
+     "nullMean": 0.2954,
+     "nullSd": 0.00103,
+     "z": 1.48
+    },
+    "hapaxShare": {
+     "v": 0.647,
+     "nullMean": 0.6469,
+     "nullSd": 0.00302,
+     "z": 0.02
+    },
+    "rankBinEnt": {
+     "v": 3.4496,
+     "nullMean": 3.4493,
+     "nullSd": 0.0002,
+     "z": 1.41
+    },
+    "abbrev": {
+     "v": 0.0318,
+     "nullMean": 0.0318,
+     "nullSd": 0,
+     "z": null
+    },
+    "menzerath": {
+     "v": -0.0123,
+     "nullMean": 0.0072,
+     "nullSd": 0.00956,
+     "z": -2.04
+    },
+    "recurLen": {
+     "v": -0.2803,
+     "nullMean": -0.2832,
+     "nullSd": 0.00731,
+     "z": 0.39
+    },
+    "lenAcf1": {
+     "v": 0.0225,
+     "nullMean": 0.0046,
+     "nullSd": 0.01664,
+     "z": 1.08
+    },
+    "lenDocEps": {
+     "v": -0.001,
+     "nullMean": 0.0008,
+     "nullSd": 0.00165,
+     "z": -1.1
+    },
+    "lenCV": {
+     "v": 0.5791,
+     "nullMean": 0.5791,
+     "nullSd": 0,
+     "z": null
+    },
+    "lenLogSkew": {
+     "v": -0.0373,
+     "nullMean": -0.0373,
+     "nullSd": 0,
+     "z": null
+    }
+   }
+  },
+  {
+   "id": "iid-r10",
+   "which": "discover",
+   "tokens": 50337,
+   "units": 4795,
+   "docs": 50,
+   "cells": {
+    "zipfAlpha": {
+     "v": 0.9741,
+     "nullMean": 0.9723,
+     "nullSd": 0.00232,
+     "z": 0.79
+    },
+    "heapsBeta": {
+     "v": 0.7706,
+     "nullMean": 0.7663,
+     "nullSd": 0.00295,
+     "z": 1.45
+    },
+    "ttr": {
+     "v": 0.294,
+     "nullMean": 0.2939,
+     "nullSd": 0.00057,
+     "z": 0.2
+    },
+    "hapaxShare": {
+     "v": 0.6484,
+     "nullMean": 0.6489,
+     "nullSd": 0.00229,
+     "z": -0.24
+    },
+    "rankBinEnt": {
+     "v": 3.4484,
+     "nullMean": 3.4486,
+     "nullSd": 0.00022,
+     "z": -0.78
+    },
+    "abbrev": {
+     "v": 0.0172,
+     "nullMean": 0.0172,
+     "nullSd": 0,
+     "z": null
+    },
+    "menzerath": {
+     "v": -0.0014,
+     "nullMean": -0.0051,
+     "nullSd": 0.01662,
+     "z": 0.22
+    },
+    "recurLen": {
+     "v": -0.2906,
+     "nullMean": -0.2867,
+     "nullSd": 0.00413,
+     "z": -0.92
+    },
+    "lenAcf1": {
+     "v": 0.0065,
+     "nullMean": 0.0063,
+     "nullSd": 0.01494,
+     "z": 0.01
+    },
+    "lenDocEps": {
+     "v": -0.0003,
+     "nullMean": 0.0001,
+     "nullSd": 0.00243,
+     "z": -0.16
+    },
+    "lenCV": {
+     "v": 0.5693,
+     "nullMean": 0.5693,
+     "nullSd": 0,
+     "z": null
+    },
+    "lenLogSkew": {
+     "v": -0.0508,
+     "nullMean": -0.0508,
+     "nullSd": 0,
+     "z": null
+    }
+   }
+  },
+  {
+   "id": "iid-r11",
+   "which": "discover",
+   "tokens": 50297,
+   "units": 4855,
+   "docs": 50,
+   "cells": {
+    "zipfAlpha": {
+     "v": 0.9659,
+     "nullMean": 0.9654,
+     "nullSd": 0.00241,
+     "z": 0.19
+    },
+    "heapsBeta": {
+     "v": 0.7576,
+     "nullMean": 0.7635,
+     "nullSd": 0.00368,
+     "z": -1.61
+    },
+    "ttr": {
+     "v": 0.2954,
+     "nullMean": 0.2958,
+     "nullSd": 0.00074,
+     "z": -0.62
+    },
+    "hapaxShare": {
+     "v": 0.649,
+     "nullMean": 0.6471,
+     "nullSd": 0.00292,
+     "z": 0.65
+    },
+    "rankBinEnt": {
+     "v": 3.4493,
+     "nullMean": 3.4492,
+     "nullSd": 0.0002,
+     "z": 0.66
+    },
+    "abbrev": {
+     "v": 0.0243,
+     "nullMean": 0.0243,
+     "nullSd": 0,
+     "z": null
+    },
+    "menzerath": {
+     "v": -0.0173,
+     "nullMean": -0.007,
+     "nullSd": 0.01362,
+     "z": -0.75
+    },
+    "recurLen": {
+     "v": -0.276,
+     "nullMean": -0.2826,
+     "nullSd": 0.00514,
+     "z": 1.28
+    },
+    "lenAcf1": {
+     "v": 0.0027,
+     "nullMean": 0.0029,
+     "nullSd": 0.01227,
+     "z": -0.02
+    },
+    "lenDocEps": {
+     "v": -0.0032,
+     "nullMean": -0.0004,
+     "nullSd": 0.00209,
+     "z": -1.33
+    },
+    "lenCV": {
+     "v": 0.5661,
+     "nullMean": 0.5661,
+     "nullSd": 0,
+     "z": null
+    },
+    "lenLogSkew": {
+     "v": -0.0276,
+     "nullMean": -0.0276,
+     "nullSd": 0,
+     "z": null
+    }
+   }
+  },
+  {
+   "id": "iid-r12",
+   "which": "discover",
+   "tokens": 50248,
+   "units": 4819,
+   "docs": 50,
+   "cells": {
+    "zipfAlpha": {
+     "v": 0.9724,
+     "nullMean": 0.9731,
+     "nullSd": 0.00369,
+     "z": -0.18
+    },
+    "heapsBeta": {
+     "v": 0.7642,
+     "nullMean": 0.765,
+     "nullSd": 0.00616,
+     "z": -0.12
+    },
+    "ttr": {
+     "v": 0.2985,
+     "nullMean": 0.2985,
+     "nullSd": 0.00107,
+     "z": -0.01
+    },
+    "hapaxShare": {
+     "v": 0.6513,
+     "nullMean": 0.6516,
+     "nullSd": 0.00378,
+     "z": -0.08
+    },
+    "rankBinEnt": {
+     "v": 3.449,
+     "nullMean": 3.449,
+     "nullSd": 0.00021,
+     "z": 0.26
+    },
+    "abbrev": {
+     "v": 0.0896,
+     "nullMean": 0.0896,
+     "nullSd": 0,
+     "z": null
+    },
+    "menzerath": {
+     "v": 0.0034,
+     "nullMean": 0.0001,
+     "nullSd": 0.01162,
+     "z": 0.29
+    },
+    "recurLen": {
+     "v": -0.2833,
+     "nullMean": -0.2803,
+     "nullSd": 0.00402,
+     "z": -0.74
+    },
+    "lenAcf1": {
+     "v": 0.0195,
+     "nullMean": 0.0014,
+     "nullSd": 0.01658,
+     "z": 1.09
+    },
+    "lenDocEps": {
+     "v": -0.0021,
+     "nullMean": 0.0002,
+     "nullSd": 0.00258,
+     "z": -0.91
+    },
+    "lenCV": {
+     "v": 0.5642,
+     "nullMean": 0.5642,
+     "nullSd": 0,
+     "z": null
+    },
+    "lenLogSkew": {
+     "v": -0.0524,
+     "nullMean": -0.0524,
+     "nullSd": 0,
+     "z": null
+    }
+   }
+  },
+  {
+   "id": "iid-r13",
+   "which": "discover",
+   "tokens": 50351,
+   "units": 4861,
+   "docs": 50,
+   "cells": {
+    "zipfAlpha": {
+     "v": 0.9687,
+     "nullMean": 0.9694,
+     "nullSd": 0.00267,
+     "z": -0.27
+    },
+    "heapsBeta": {
+     "v": 0.7483,
+     "nullMean": 0.7628,
+     "nullSd": 0.00744,
+     "z": -1.95
+    },
+    "ttr": {
+     "v": 0.2947,
+     "nullMean": 0.2959,
+     "nullSd": 0.00061,
+     "z": -1.97
+    },
+    "hapaxShare": {
+     "v": 0.6465,
+     "nullMean": 0.6461,
+     "nullSd": 0.0022,
+     "z": 0.19
+    },
+    "rankBinEnt": {
+     "v": 3.4496,
+     "nullMean": 3.4494,
+     "nullSd": 0.00022,
+     "z": 0.97
+    },
+    "abbrev": {
+     "v": 0.0575,
+     "nullMean": 0.0575,
+     "nullSd": 0,
+     "z": null
+    },
+    "menzerath": {
+     "v": 0.0098,
+     "nullMean": -0.0023,
+     "nullSd": 0.01516,
+     "z": 0.8
+    },
+    "recurLen": {
+     "v": -0.2804,
+     "nullMean": -0.2782,
+     "nullSd": 0.00371,
+     "z": -0.59
+    },
+    "lenAcf1": {
+     "v": -0.0126,
+     "nullMean": -0.0023,
+     "nullSd": 0.00909,
+     "z": -1.13
+    },
+    "lenDocEps": {
+     "v": 0.0002,
+     "nullMean": -0.0006,
+     "nullSd": 0.00192,
+     "z": 0.41
+    },
+    "lenCV": {
+     "v": 0.552,
+     "nullMean": 0.552,
+     "nullSd": 0,
+     "z": null
+    },
+    "lenLogSkew": {
+     "v": -0.0909,
+     "nullMean": -0.0909,
+     "nullSd": 0,
+     "z": null
+    }
+   }
+  },
+  {
+   "id": "iid-r14",
+   "which": "discover",
+   "tokens": 50308,
+   "units": 4867,
+   "docs": 50,
+   "cells": {
+    "zipfAlpha": {
+     "v": 0.9671,
+     "nullMean": 0.9659,
+     "nullSd": 0.00285,
+     "z": 0.44
+    },
+    "heapsBeta": {
+     "v": 0.7545,
+     "nullMean": 0.76,
+     "nullSd": 0.00532,
+     "z": -1.03
+    },
+    "ttr": {
+     "v": 0.2938,
+     "nullMean": 0.2943,
+     "nullSd": 0.00066,
+     "z": -0.69
+    },
+    "hapaxShare": {
+     "v": 0.647,
+     "nullMean": 0.646,
+     "nullSd": 0.00221,
+     "z": 0.43
+    },
+    "rankBinEnt": {
+     "v": 3.4484,
+     "nullMean": 3.4483,
+     "nullSd": 0.00027,
+     "z": 0.28
+    },
+    "abbrev": {
+     "v": 0.0573,
+     "nullMean": 0.0573,
+     "nullSd": 0,
+     "z": null
+    },
+    "menzerath": {
+     "v": -0.0071,
+     "nullMean": -0.005,
+     "nullSd": 0.01676,
+     "z": -0.12
+    },
+    "recurLen": {
+     "v": -0.2872,
+     "nullMean": -0.2899,
+     "nullSd": 0.00648,
+     "z": 0.41
+    },
+    "lenAcf1": {
+     "v": 0.0211,
+     "nullMean": 0.0029,
+     "nullSd": 0.01417,
+     "z": 1.29
+    },
+    "lenDocEps": {
+     "v": -0.0005,
+     "nullMean": -0.0003,
+     "nullSd": 0.00188,
+     "z": -0.14
+    },
+    "lenCV": {
+     "v": 0.5674,
+     "nullMean": 0.5674,
+     "nullSd": 0,
+     "z": null
+    },
+    "lenLogSkew": {
+     "v": -0.0219,
+     "nullMean": -0.0219,
+     "nullSd": 0,
+     "z": null
+    }
+   }
+  },
+  {
+   "id": "iid-r15",
+   "which": "discover",
+   "tokens": 50265,
+   "units": 4895,
+   "docs": 50,
+   "cells": {
+    "zipfAlpha": {
+     "v": 0.9751,
+     "nullMean": 0.9723,
+     "nullSd": 0.00423,
+     "z": 0.67
+    },
+    "heapsBeta": {
+     "v": 0.7629,
+     "nullMean": 0.7627,
+     "nullSd": 0.00608,
+     "z": 0.03
+    },
+    "ttr": {
+     "v": 0.2929,
+     "nullMean": 0.2941,
+     "nullSd": 0.00077,
+     "z": -1.53
+    },
+    "hapaxShare": {
+     "v": 0.6464,
+     "nullMean": 0.6494,
+     "nullSd": 0.00272,
+     "z": -1.1
+    },
+    "rankBinEnt": {
+     "v": 3.4492,
+     "nullMean": 3.4492,
+     "nullSd": 0.00023,
+     "z": -0.34
+    },
+    "abbrev": {
+     "v": 0.1496,
+     "nullMean": 0.1496,
+     "nullSd": 0,
+     "z": null
+    },
+    "menzerath": {
+     "v": -0.0349,
+     "nullMean": 0.0081,
+     "nullSd": 0.0112,
+     "z": -3.84
+    },
+    "recurLen": {
+     "v": -0.3118,
+     "nullMean": -0.2901,
+     "nullSd": 0.00569,
+     "z": -3.81
+    },
+    "lenAcf1": {
+     "v": -0.0057,
+     "nullMean": -0.0104,
+     "nullSd": 0.01162,
+     "z": 0.41
+    },
+    "lenDocEps": {
+     "v": -0.0011,
+     "nullMean": -0.0004,
+     "nullSd": 0.0023,
+     "z": -0.33
+    },
+    "lenCV": {
+     "v": 0.5635,
+     "nullMean": 0.5635,
+     "nullSd": 0,
+     "z": null
+    },
+    "lenLogSkew": {
+     "v": -0.0158,
+     "nullMean": -0.0158,
+     "nullSd": 0,
+     "z": null
+    }
+   }
+  }
+ ],
+ "summary": {
+  "zipfAlpha": {
+   "n": 16,
+   "rateGe2": 0.063,
+   "rateGe4": 0,
+   "meanZ": 0.04,
+   "sdZ": 1.12,
+   "vRange": [
+    0.9607,
+    0.9783
+   ]
+  },
+  "heapsBeta": {
+   "n": 16,
+   "rateGe2": 0.125,
+   "rateGe4": 0,
+   "meanZ": -0.3,
+   "sdZ": 1.35,
+   "vRange": [
+    0.7483,
+    0.7748
+   ]
+  },
+  "ttr": {
+   "n": 16,
+   "rateGe2": 0,
+   "rateGe4": 0,
+   "meanZ": -0.32,
+   "sdZ": 1.01,
+   "vRange": [
+    0.2919,
+    0.2985
+   ]
+  },
+  "hapaxShare": {
+   "n": 16,
+   "rateGe2": 0,
+   "rateGe4": 0,
+   "meanZ": -0.02,
+   "sdZ": 0.57,
+   "vRange": [
+    0.6415,
+    0.6513
+   ]
+  },
+  "rankBinEnt": {
+   "n": 16,
+   "rateGe2": 0,
+   "rateGe4": 0,
+   "meanZ": 0.16,
+   "sdZ": 0.63,
+   "vRange": [
+    3.4484,
+    3.4499
+   ]
+  },
+  "abbrev": {
+   "n": 0,
+   "rateGe2": null,
+   "rateGe4": null,
+   "meanZ": null,
+   "sdZ": null,
+   "vRange": [
+    0.017,
+    0.1496
+   ]
+  },
+  "menzerath": {
+   "n": 16,
+   "rateGe2": 0.188,
+   "rateGe4": 0,
+   "meanZ": -0.39,
+   "sdZ": 1.61,
+   "vRange": [
+    -0.0431,
+    0.0217
+   ]
+  },
+  "recurLen": {
+   "n": 16,
+   "rateGe2": 0.125,
+   "rateGe4": 0,
+   "meanZ": -0.22,
+   "sdZ": 1.31,
+   "vRange": [
+    -0.3118,
+    -0.272
+   ]
+  },
+  "lenAcf1": {
+   "n": 16,
+   "rateGe2": 0,
+   "rateGe4": 0,
+   "meanZ": 0.05,
+   "sdZ": 0.96,
+   "vRange": [
+    -0.0179,
+    0.0225
+   ]
+  },
+  "lenDocEps": {
+   "n": 16,
+   "rateGe2": 0.125,
+   "rateGe4": 0,
+   "meanZ": -0.42,
+   "sdZ": 1.05,
+   "vRange": [
+    -0.0041,
+    0.0015
+   ]
+  },
+  "lenCV": {
+   "n": 0,
+   "rateGe2": null,
+   "rateGe4": null,
+   "meanZ": null,
+   "sdZ": null,
+   "vRange": [
+    0.552,
+    0.584
+   ]
+  },
+  "lenLogSkew": {
+   "n": 0,
+   "rateGe2": null,
+   "rateGe4": null,
+   "meanZ": null,
+   "sdZ": null,
+   "vRange": [
+    -0.0909,
+    0.0267
+   ]
+  }
+ }
+}

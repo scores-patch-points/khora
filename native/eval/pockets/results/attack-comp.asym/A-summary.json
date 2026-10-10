@@ -1,0 +1,1307 @@
+{
+ "nPocketsA": 214,
+ "nPocketsA2": 214,
+ "eqTok10k": {
+  "eqTok10k#0": {
+   "P+": {
+    "nAtlas": 116,
+    "nEvaluated": 110,
+    "status": {
+     "P+": 46,
+     "M": 44,
+     "A": 6,
+     "undef": 14
+    },
+    "retained": 46,
+    "flippedPresent": 0,
+    "bothHalvesSameSignAsAtlas": 80,
+    "halfSignAgree": 178,
+    "halvesN": 220,
+    "halfSignBinomP": 1.912676216630266e-15
+   },
+   "P-": {
+    "nAtlas": 98,
+    "nEvaluated": 96,
+    "status": {
+     "M": 40,
+     "P-": 46,
+     "undef": 6,
+     "A": 4
+    },
+    "retained": 46,
+    "flippedPresent": 0,
+    "bothHalvesSameSignAsAtlas": 77,
+    "halfSignAgree": 169,
+    "halvesN": 192,
+    "halfSignBinomP": 1.943554162547821e-15
+   }
+  },
+  "eqTok10k#1": {
+   "P+": {
+    "nAtlas": 116,
+    "nEvaluated": 110,
+    "status": {
+     "P+": 43,
+     "M": 46,
+     "P-": 1,
+     "undef": 14,
+     "A": 6
+    },
+    "retained": 43,
+    "flippedPresent": 1,
+    "bothHalvesSameSignAsAtlas": 82,
+    "halfSignAgree": 181,
+    "halvesN": 220,
+    "halfSignBinomP": 1.912676216630266e-15
+   },
+   "P-": {
+    "nAtlas": 98,
+    "nEvaluated": 96,
+    "status": {
+     "M": 40,
+     "P-": 46,
+     "A": 4,
+     "undef": 6
+    },
+    "retained": 46,
+    "flippedPresent": 0,
+    "bothHalvesSameSignAsAtlas": 78,
+    "halfSignAgree": 168,
+    "halvesN": 192,
+    "halfSignBinomP": 1.943554162547821e-15
+   }
+  },
+  "eqTok10k#2": {
+   "P+": {
+    "nAtlas": 116,
+    "nEvaluated": 110,
+    "status": {
+     "P+": 38,
+     "M": 52,
+     "A": 5,
+     "undef": 15
+    },
+    "retained": 38,
+    "flippedPresent": 0,
+    "bothHalvesSameSignAsAtlas": 73,
+    "halfSignAgree": 166,
+    "halvesN": 220,
+    "halfSignBinomP": 1.917255163539245e-14
+   },
+   "P-": {
+    "nAtlas": 98,
+    "nEvaluated": 96,
+    "status": {
+     "M": 39,
+     "A": 7,
+     "P-": 46,
+     "undef": 4
+    },
+    "retained": 46,
+    "flippedPresent": 0,
+    "bothHalvesSameSignAsAtlas": 74,
+    "halfSignAgree": 161,
+    "halvesN": 192,
+    "halfSignBinomP": 1.943554162547821e-15
+   }
+  }
+ },
+ "eqTok10k_pooledSign": {
+  "P+": {
+   "pockets": 102,
+   "bothHalvesSameSign": 89,
+   "halfSignAgree": 189,
+   "halvesN": 204,
+   "binomP": 1.416941529522353e-15
+  },
+  "P-": {
+   "pockets": 92,
+   "bothHalvesSameSign": 84,
+   "halfSignAgree": 174,
+   "halvesN": 184,
+   "binomP": 1.5045525941542067e-15
+  }
+ },
+ "eqLen10k": {
+  "eqLen10k#0": {
+   "P+": {
+    "nAtlas": 116,
+    "nEvaluated": 78,
+    "status": {
+     "P+": 32,
+     "M": 38,
+     "A": 5,
+     "undef": 3
+    },
+    "retained": 32,
+    "flippedPresent": 0,
+    "bothHalvesSameSignAsAtlas": 62,
+    "halfSignAgree": 136,
+    "halvesN": 156,
+    "halfSignBinomP": 7.912444002627414e-16
+   },
+   "P-": {
+    "nAtlas": 98,
+    "nEvaluated": 56,
+    "status": {
+     "P-": 21,
+     "M": 29,
+     "A": 4,
+     "undef": 2
+    },
+    "retained": 21,
+    "flippedPresent": 0,
+    "bothHalvesSameSignAsAtlas": 37,
+    "halfSignAgree": 88,
+    "halvesN": 112,
+    "halfSignBinomP": 8.98832291674751e-10
+   }
+  },
+  "eqLen10k#1": {
+   "P+": {
+    "nAtlas": 116,
+    "nEvaluated": 78,
+    "status": {
+     "P+": 33,
+     "M": 39,
+     "P-": 1,
+     "A": 2,
+     "undef": 3
+    },
+    "retained": 33,
+    "flippedPresent": 1,
+    "bothHalvesSameSignAsAtlas": 58,
+    "halfSignAgree": 131,
+    "halvesN": 156,
+    "halfSignBinomP": 7.912444002627414e-16
+   },
+   "P-": {
+    "nAtlas": 98,
+    "nEvaluated": 56,
+    "status": {
+     "P-": 23,
+     "M": 29,
+     "A": 2,
+     "undef": 2
+    },
+    "retained": 23,
+    "flippedPresent": 0,
+    "bothHalvesSameSignAsAtlas": 40,
+    "halfSignAgree": 88,
+    "halvesN": 112,
+    "halfSignBinomP": 8.98832291674751e-10
+   }
+  },
+  "eqLen10k#2": {
+   "P+": {
+    "nAtlas": 116,
+    "nEvaluated": 78,
+    "status": {
+     "P+": 34,
+     "M": 33,
+     "A": 8,
+     "P-": 1,
+     "undef": 2
+    },
+    "retained": 34,
+    "flippedPresent": 1,
+    "bothHalvesSameSignAsAtlas": 55,
+    "halfSignAgree": 126,
+    "halvesN": 156,
+    "halfSignBinomP": 3.390964479785077e-15
+   },
+   "P-": {
+    "nAtlas": 98,
+    "nEvaluated": 56,
+    "status": {
+     "P-": 22,
+     "M": 30,
+     "P+": 1,
+     "A": 1,
+     "undef": 2
+    },
+    "retained": 22,
+    "flippedPresent": 1,
+    "bothHalvesSameSignAsAtlas": 36,
+    "halfSignAgree": 86,
+    "halvesN": 112,
+    "halfSignBinomP": 1.1009223084560129e-08
+   }
+  }
+ },
+ "eqLen10k_pooledSign": {
+  "P+": {
+   "pockets": 76,
+   "bothHalvesSameSign": 60,
+   "halfSignAgree": 133,
+   "halvesN": 152,
+   "binomP": 1.2847051542008163e-15
+  },
+  "P-": {
+   "pockets": 54,
+   "bothHalvesSameSign": 39,
+   "halfSignAgree": 88,
+   "halvesN": 108,
+   "binomP": 2.3222098297326024e-11
+  }
+ },
+ "band8-16": {
+  "P+": {
+   "nAtlas": 116,
+   "nEvaluated": 75,
+   "status": {
+    "P+": 29,
+    "M": 37,
+    "A": 2,
+    "P-": 1,
+    "undef": 6
+   },
+   "retained": 29,
+   "flippedPresent": 1,
+   "bothHalvesSameSignAsAtlas": 54,
+   "halfSignAgree": 121,
+   "halvesN": 150,
+   "halfSignBinomP": 1.461721181369396e-14
+  },
+  "P-": {
+   "nAtlas": 98,
+   "nEvaluated": 57,
+   "status": {
+    "M": 21,
+    "A": 8,
+    "P-": 21,
+    "undef": 7
+   },
+   "retained": 21,
+   "flippedPresent": 0,
+   "bothHalvesSameSignAsAtlas": 40,
+   "halfSignAgree": 88,
+   "halvesN": 114,
+   "halfSignBinomP": 4.589572293502378e-09
+  }
+ },
+ "chunk12": {
+  "P+": {
+   "nAtlas": 116,
+   "nEvaluated": 112,
+   "status": {
+    "P+": 29,
+    "M": 71,
+    "A": 4,
+    "P-": 4,
+    "undef": 4
+   },
+   "retained": 29,
+   "flippedPresent": 4,
+   "bothHalvesSameSignAsAtlas": 77,
+   "halfSignAgree": 176,
+   "halvesN": 224,
+   "halfSignBinomP": 1.1259550075106543e-15
+  },
+  "P-": {
+   "nAtlas": 98,
+   "nEvaluated": 97,
+   "status": {
+    "M": 41,
+    "P-": 46,
+    "A": 5,
+    "P+": 1,
+    "undef": 4
+   },
+   "retained": 46,
+   "flippedPresent": 1,
+   "bothHalvesSameSignAsAtlas": 79,
+   "halfSignAgree": 172,
+   "halvesN": 194,
+   "halfSignBinomP": 7.887937362218732e-16
+  }
+ },
+ "drop1pct": {
+  "P+": {
+   "nAtlas": 116,
+   "nEvaluated": 116,
+   "status": {
+    "P+": 111,
+    "M": 5
+   },
+   "retained": 111,
+   "flippedPresent": 0,
+   "bothHalvesSameSignAsAtlas": 116,
+   "halfSignAgree": 232,
+   "halvesN": 232,
+   "halfSignBinomP": 1.246595574356328e-15
+  },
+  "P-": {
+   "nAtlas": 98,
+   "nEvaluated": 98,
+   "status": {
+    "P-": 90,
+    "M": 8
+   },
+   "retained": 90,
+   "flippedPresent": 0,
+   "bothHalvesSameSignAsAtlas": 98,
+   "halfSignAgree": 196,
+   "halvesN": 196,
+   "halfSignBinomP": 1.1529604065351715e-15
+  }
+ },
+ "dropHapax": {
+  "P+": {
+   "nAtlas": 116,
+   "nEvaluated": 116,
+   "status": {
+    "P+": 98,
+    "M": 17,
+    "P-": 1
+   },
+   "retained": 98,
+   "flippedPresent": 1,
+   "bothHalvesSameSignAsAtlas": 112,
+   "halfSignAgree": 225,
+   "halvesN": 232,
+   "halfSignBinomP": 1.246595574356328e-15
+  },
+  "P-": {
+   "nAtlas": 98,
+   "nEvaluated": 98,
+   "status": {
+    "P-": 82,
+    "M": 15,
+    "A": 1
+   },
+   "retained": 82,
+   "flippedPresent": 0,
+   "bothHalvesSameSignAsAtlas": 97,
+   "halfSignAgree": 194,
+   "halvesN": 196,
+   "halfSignBinomP": 1.1529604065351715e-15
+  }
+ },
+ "alt": {
+  "P+": {
+   "nAtlas": 116,
+   "nEvaluated": 108,
+   "status": {
+    "P+": 81,
+    "M": 25,
+    "P-": 1,
+    "A": 1
+   },
+   "retained": 81,
+   "flippedPresent": 1,
+   "bothHalvesSameSignAsAtlas": 98,
+   "halfSignAgree": 204,
+   "halvesN": 216,
+   "halfSignBinomP": 9.87411356872572e-16
+  },
+  "P-": {
+   "nAtlas": 98,
+   "nEvaluated": 95,
+   "status": {
+    "M": 28,
+    "P-": 64,
+    "A": 2,
+    "P+": 1
+   },
+   "retained": 64,
+   "flippedPresent": 1,
+   "bothHalvesSameSignAsAtlas": 83,
+   "halfSignAgree": 176,
+   "halvesN": 190,
+   "halfSignBinomP": 1.3268681860238e-15
+  }
+ },
+ "A2": {
+  "plug": {
+   "P+": {
+    "nAtlas": 116,
+    "nEvaluated": 116,
+    "status": {
+     "P+": 116
+    },
+    "retained": 116,
+    "flippedPresent": 0,
+    "bothHalvesSameSignAsAtlas": 116,
+    "halfSignAgree": 232,
+    "halvesN": 232,
+    "halfSignBinomP": 1.246595574356328e-15
+   },
+   "P-": {
+    "nAtlas": 98,
+    "nEvaluated": 98,
+    "status": {
+     "P-": 97,
+     "M": 1
+    },
+    "retained": 97,
+    "flippedPresent": 0,
+    "bothHalvesSameSignAsAtlas": 98,
+    "halfSignAgree": 196,
+    "halvesN": 196,
+    "halfSignBinomP": 1.1529604065351715e-15
+   }
+  },
+  "deep2": {
+   "P+": {
+    "nAtlas": 116,
+    "nEvaluated": 116,
+    "status": {
+     "P+": 90,
+     "M": 22,
+     "P-": 1,
+     "A": 2,
+     "undef": 1
+    },
+    "retained": 90,
+    "flippedPresent": 1,
+    "bothHalvesSameSignAsAtlas": 106,
+    "halfSignAgree": 217,
+    "halvesN": 232,
+    "halfSignBinomP": 1.246595574356328e-15
+   },
+   "P-": {
+    "nAtlas": 98,
+    "nEvaluated": 98,
+    "status": {
+     "P-": 77,
+     "M": 15,
+     "undef": 4,
+     "P+": 1,
+     "A": 1
+    },
+    "retained": 77,
+    "flippedPresent": 1,
+    "bothHalvesSameSignAsAtlas": 88,
+    "halfSignAgree": 183,
+    "halvesN": 196,
+    "halfSignBinomP": 1.1529604065351715e-15
+   }
+  },
+  "deep3": {
+   "P+": {
+    "nAtlas": 116,
+    "nEvaluated": 116,
+    "status": {
+     "P+": 79,
+     "M": 27,
+     "undef": 6,
+     "A": 4
+    },
+    "retained": 79,
+    "flippedPresent": 0,
+    "bothHalvesSameSignAsAtlas": 97,
+    "halfSignAgree": 207,
+    "halvesN": 232,
+    "halfSignBinomP": 1.246595574356328e-15
+   },
+   "P-": {
+    "nAtlas": 98,
+    "nEvaluated": 98,
+    "status": {
+     "P-": 67,
+     "M": 22,
+     "undef": 7,
+     "A": 2
+    },
+    "retained": 67,
+    "flippedPresent": 0,
+    "bothHalvesSameSignAsAtlas": 84,
+    "halfSignAgree": 174,
+    "halvesN": 196,
+    "halfSignBinomP": 1.1529604065351715e-15
+   }
+  },
+  "k10": {
+   "P+": {
+    "nAtlas": 116,
+    "nEvaluated": 116,
+    "status": {
+     "P+": 45,
+     "M": 35,
+     "P-": 12,
+     "undef": 21,
+     "A": 3
+    },
+    "retained": 45,
+    "flippedPresent": 12,
+    "bothHalvesSameSignAsAtlas": 58,
+    "halfSignAgree": 139,
+    "halvesN": 232,
+    "halfSignBinomP": 0.0030494641163516995
+   },
+   "P-": {
+    "nAtlas": 98,
+    "nEvaluated": 98,
+    "status": {
+     "M": 25,
+     "P-": 59,
+     "undef": 14
+    },
+    "retained": 59,
+    "flippedPresent": 0,
+    "bothHalvesSameSignAsAtlas": 67,
+    "halfSignAgree": 151,
+    "halvesN": 196,
+    "halfSignBinomP": 1.3857689706214201e-14
+   }
+  },
+  "k40": {
+   "P+": {
+    "nAtlas": 116,
+    "nEvaluated": 116,
+    "status": {
+     "M": 28,
+     "P+": 79,
+     "A": 5,
+     "P-": 4
+    },
+    "retained": 79,
+    "flippedPresent": 4,
+    "bothHalvesSameSignAsAtlas": 90,
+    "halfSignAgree": 196,
+    "halvesN": 232,
+    "halfSignBinomP": 1.246595574356328e-15
+   },
+   "P-": {
+    "nAtlas": 98,
+    "nEvaluated": 98,
+    "status": {
+     "M": 30,
+     "P-": 59,
+     "P+": 8,
+     "A": 1
+    },
+    "retained": 59,
+    "flippedPresent": 8,
+    "bothHalvesSameSignAsAtlas": 74,
+    "halfSignAgree": 161,
+    "halvesN": 196,
+    "halfSignBinomP": 1.1529604065351715e-15
+   }
+  }
+ },
+ "spearmanWithAtlasV": {
+  "eqTok10k#0": {
+   "n": 188,
+   "spearmanWithAtlasV": 0.9083703113740661
+  },
+  "eqLen10k#0": {
+   "n": 205,
+   "spearmanWithAtlasV": 0.87117048097951
+  },
+  "eqTok10k#1": {
+   "n": 186,
+   "spearmanWithAtlasV": 0.8997114071117867
+  },
+  "eqLen10k#1": {
+   "n": 205,
+   "spearmanWithAtlasV": 0.8661977128052263
+  },
+  "eqTok10k#2": {
+   "n": 187,
+   "spearmanWithAtlasV": 0.8559856712386084
+  },
+  "eqLen10k#2": {
+   "n": 206,
+   "spearmanWithAtlasV": 0.8442085611231799
+  },
+  "band8-16": {
+   "n": 119,
+   "spearmanWithAtlasV": 0.7257726819541376
+  },
+  "chunk12": {
+   "n": 201,
+   "spearmanWithAtlasV": 0.7789507906014482
+  },
+  "drop1pct": {
+   "n": 214,
+   "spearmanWithAtlasV": 0.9994991903168632
+  },
+  "dropHapax": {
+   "n": 214,
+   "spearmanWithAtlasV": 0.9510100376219499
+  },
+  "alt": {
+   "n": 203,
+   "spearmanWithAtlasV": 0.891614139681137
+  }
+ },
+ "spearmanWithAtlasV_A2": {
+  "plug": {
+   "n": 214,
+   "spearmanWithAtlasV": 0.9999424497430136
+  },
+  "deep2": {
+   "n": 209,
+   "spearmanWithAtlasV": 0.8903846153846153
+  },
+  "deep3": {
+   "n": 201,
+   "spearmanWithAtlasV": 0.8595152948130634
+  },
+  "k10": {
+   "n": 179,
+   "spearmanWithAtlasV": 0.8506036448852342
+  },
+  "k40": {
+   "n": 214,
+   "spearmanWithAtlasV": 0.8111800557747704
+  }
+ },
+ "registerSigns(pos,neg counts of PRESENT-in-atlas pockets by sign of variant mean v)": {
+  "atlas": null,
+  "variants": {
+   "eqTok10k#0": {
+    "essay": [
+     3,
+     0
+    ],
+    "children": [
+     1,
+     7
+    ],
+    "treatise": [
+     5,
+     11
+    ],
+    "novel": [
+     4,
+     7
+    ],
+    "drama": [
+     0,
+     9
+    ],
+    "academic": [
+     10,
+     1
+    ],
+    "reportage": [
+     3,
+     1
+    ],
+    "code": [
+     10,
+     5
+    ],
+    "encyclopedia": [
+     3,
+     0
+    ],
+    "scripture": [
+     3,
+     11
+    ],
+    "book": [
+     3,
+     7
+    ],
+    "chat": [
+     12,
+     5
+    ]
+   },
+   "eqLen10k#0": {
+    "essay": [
+     3,
+     0
+    ],
+    "children": [
+     2,
+     8
+    ],
+    "treatise": [
+     6,
+     10
+    ],
+    "novel": [
+     4,
+     7
+    ],
+    "drama": [
+     0,
+     9
+    ],
+    "academic": [
+     10,
+     1
+    ],
+    "reportage": [
+     4,
+     0
+    ],
+    "code": [
+     19,
+     5
+    ],
+    "encyclopedia": [
+     3,
+     0
+    ],
+    "scripture": [
+     6,
+     9
+    ],
+    "book": [
+     2,
+     7
+    ],
+    "chat": [
+     13,
+     4
+    ]
+   },
+   "band8-16": {
+    "essay": [
+     1,
+     0
+    ],
+    "children": [
+     1,
+     0
+    ],
+    "novel": [
+     4,
+     2
+    ],
+    "academic": [
+     8,
+     2
+    ],
+    "reportage": [
+     3,
+     0
+    ],
+    "treatise": [
+     1,
+     8
+    ],
+    "code": [
+     18,
+     6
+    ],
+    "scripture": [
+     2,
+     8
+    ],
+    "encyclopedia": [
+     1,
+     0
+    ],
+    "book": [
+     0,
+     2
+    ],
+    "drama": [
+     0,
+     4
+    ],
+    "chat": [
+     10,
+     3
+    ]
+   },
+   "chunk12": {
+    "essay": [
+     3,
+     0
+    ],
+    "children": [
+     1,
+     8
+    ],
+    "treatise": [
+     6,
+     10
+    ],
+    "novel": [
+     2,
+     9
+    ],
+    "drama": [
+     0,
+     9
+    ],
+    "academic": [
+     10,
+     1
+    ],
+    "reportage": [
+     3,
+     1
+    ],
+    "code": [
+     12,
+     12
+    ],
+    "encyclopedia": [
+     2,
+     1
+    ],
+    "scripture": [
+     3,
+     11
+    ],
+    "book": [
+     3,
+     7
+    ],
+    "chat": [
+     12,
+     5
+    ]
+   },
+   "drop1pct": {
+    "essay": [
+     3,
+     0
+    ],
+    "children": [
+     1,
+     9
+    ],
+    "treatise": [
+     7,
+     11
+    ],
+    "novel": [
+     4,
+     7
+    ],
+    "drama": [
+     0,
+     9
+    ],
+    "academic": [
+     10,
+     1
+    ],
+    "reportage": [
+     3,
+     1
+    ],
+    "code": [
+     19,
+     5
+    ],
+    "encyclopedia": [
+     3,
+     0
+    ],
+    "scripture": [
+     3,
+     13
+    ],
+    "book": [
+     4,
+     7
+    ],
+    "chat": [
+     12,
+     5
+    ]
+   },
+   "dropHapax": {
+    "essay": [
+     3,
+     0
+    ],
+    "children": [
+     1,
+     9
+    ],
+    "treatise": [
+     7,
+     11
+    ],
+    "novel": [
+     4,
+     7
+    ],
+    "drama": [
+     0,
+     9
+    ],
+    "academic": [
+     10,
+     1
+    ],
+    "reportage": [
+     3,
+     1
+    ],
+    "code": [
+     19,
+     5
+    ],
+    "encyclopedia": [
+     3,
+     0
+    ],
+    "scripture": [
+     4,
+     12
+    ],
+    "book": [
+     3,
+     8
+    ],
+    "chat": [
+     12,
+     5
+    ]
+   },
+   "alt": {
+    "essay": [
+     3,
+     0
+    ],
+    "children": [
+     1,
+     9
+    ],
+    "treatise": [
+     7,
+     9
+    ],
+    "novel": [
+     4,
+     7
+    ],
+    "drama": [
+     0,
+     9
+    ],
+    "academic": [
+     10,
+     1
+    ],
+    "reportage": [
+     3,
+     1
+    ],
+    "code": [
+     20,
+     4
+    ],
+    "encyclopedia": [
+     3,
+     0
+    ],
+    "scripture": [
+     3,
+     13
+    ],
+    "book": [
+     2,
+     7
+    ],
+    "chat": [
+     12,
+     5
+    ]
+   },
+   "plug": {
+    "essay": [
+     3,
+     0
+    ],
+    "children": [
+     1,
+     9
+    ],
+    "treatise": [
+     7,
+     11
+    ],
+    "novel": [
+     4,
+     7
+    ],
+    "drama": [
+     0,
+     9
+    ],
+    "academic": [
+     10,
+     1
+    ],
+    "reportage": [
+     3,
+     1
+    ],
+    "code": [
+     19,
+     5
+    ],
+    "encyclopedia": [
+     3,
+     0
+    ],
+    "scripture": [
+     3,
+     13
+    ],
+    "book": [
+     4,
+     7
+    ],
+    "chat": [
+     12,
+     5
+    ]
+   },
+   "deep2": {
+    "essay": [
+     3,
+     0
+    ],
+    "children": [
+     1,
+     9
+    ],
+    "treatise": [
+     8,
+     10
+    ],
+    "novel": [
+     4,
+     7
+    ],
+    "drama": [
+     0,
+     8
+    ],
+    "academic": [
+     10,
+     1
+    ],
+    "reportage": [
+     3,
+     1
+    ],
+    "code": [
+     15,
+     9
+    ],
+    "encyclopedia": [
+     3,
+     0
+    ],
+    "scripture": [
+     6,
+     10
+    ],
+    "book": [
+     4,
+     7
+    ],
+    "chat": [
+     12,
+     5
+    ]
+   },
+   "deep3": {
+    "essay": [
+     3,
+     0
+    ],
+    "children": [
+     1,
+     9
+    ],
+    "treatise": [
+     8,
+     10
+    ],
+    "novel": [
+     4,
+     7
+    ],
+    "drama": [
+     0,
+     7
+    ],
+    "academic": [
+     10,
+     1
+    ],
+    "reportage": [
+     3,
+     1
+    ],
+    "code": [
+     11,
+     9
+    ],
+    "encyclopedia": [
+     3,
+     0
+    ],
+    "scripture": [
+     7,
+     8
+    ],
+    "book": [
+     4,
+     7
+    ],
+    "chat": [
+     12,
+     5
+    ]
+   },
+   "k10": {
+    "essay": [
+     2,
+     1
+    ],
+    "children": [
+     1,
+     9
+    ],
+    "treatise": [
+     5,
+     10
+    ],
+    "novel": [
+     3,
+     8
+    ],
+    "drama": [
+     0,
+     7
+    ],
+    "academic": [
+     9,
+     2
+    ],
+    "reportage": [
+     3,
+     1
+    ],
+    "code": [
+     8,
+     2
+    ],
+    "encyclopedia": [
+     3,
+     0
+    ],
+    "scripture": [
+     3,
+     13
+    ],
+    "book": [
+     2,
+     8
+    ],
+    "chat": [
+     4,
+     13
+    ]
+   },
+   "k40": {
+    "essay": [
+     2,
+     1
+    ],
+    "children": [
+     2,
+     8
+    ],
+    "treatise": [
+     6,
+     12
+    ],
+    "novel": [
+     7,
+     4
+    ],
+    "drama": [
+     0,
+     9
+    ],
+    "academic": [
+     8,
+     3
+    ],
+    "reportage": [
+     2,
+     2
+    ],
+    "code": [
+     19,
+     5
+    ],
+    "encyclopedia": [
+     1,
+     2
+    ],
+    "scripture": [
+     6,
+     10
+    ],
+    "book": [
+     3,
+     8
+    ],
+    "chat": [
+     13,
+     4
+    ]
+   }
+  },
+  "atlasPresent": {
+   "essay": [
+    3,
+    0
+   ],
+   "children": [
+    1,
+    9
+   ],
+   "treatise": [
+    7,
+    11
+   ],
+   "novel": [
+    4,
+    7
+   ],
+   "drama": [
+    0,
+    9
+   ],
+   "academic": [
+    10,
+    1
+   ],
+   "reportage": [
+    3,
+    1
+   ],
+   "code": [
+    19,
+    5
+   ],
+   "encyclopedia": [
+    3,
+    0
+   ],
+   "scripture": [
+    3,
+    13
+   ],
+   "book": [
+    4,
+    7
+   ],
+   "chat": [
+    12,
+    5
+   ]
+  }
+ }
+}

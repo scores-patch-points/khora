@@ -1,0 +1,634 @@
+{
+ "note": "post hoc; not part of the pre-registered verdict",
+ "controlsAndPlanted": [
+  {
+   "id": "ct-bk-cryptic",
+   "register": "control",
+   "tokens": 299791,
+   "vD": 0,
+   "vC": 0,
+   "zD": null,
+   "zC": -0.316227766016838,
+   "nullMeanD": 0,
+   "nullMeanC": 0.000008377314225072041
+  },
+  {
+   "id": "ct-bk-moby-dick",
+   "register": "control",
+   "tokens": 216603,
+   "vD": 0.000387772721296642,
+   "vC": 0.0007544911741206306,
+   "zD": 0.09887520340724769,
+   "zC": 5.5502853332991196,
+   "nullMeanD": 0.0003650916753031197,
+   "nullMeanC": 0.00013788976639261818
+  },
+  {
+   "id": "ct-bk-pride-prej",
+   "register": "control",
+   "tokens": 127163,
+   "vD": 0,
+   "vC": 0,
+   "zD": null,
+   "zC": null,
+   "nullMeanD": 0,
+   "nullMeanC": 0
+  },
+  {
+   "id": "ct-cd-cc-json",
+   "register": "control",
+   "tokens": 294773,
+   "vD": 0,
+   "vC": 0,
+   "zD": null,
+   "zC": null,
+   "nullMeanD": 0,
+   "nullMeanC": 0
+  },
+  {
+   "id": "ct-cd-cc-python",
+   "register": "control",
+   "tokens": 291072,
+   "vD": 0,
+   "vC": 0,
+   "zD": null,
+   "zC": null,
+   "nullMeanD": 0,
+   "nullMeanC": 0
+  },
+  {
+   "id": "ct-cd-chess-lichess",
+   "register": "control",
+   "tokens": 291221,
+   "vD": 0,
+   "vC": 0,
+   "zD": null,
+   "zC": null,
+   "nullMeanD": 0,
+   "nullMeanC": 0
+  },
+  {
+   "id": "ct-cd-ipa-latn",
+   "register": "control",
+   "tokens": 291424,
+   "vD": 0.019777561237788177,
+   "vC": 0.01687776498420135,
+   "zD": -1.8794836579998906,
+   "zC": -0.8852618359793563,
+   "nullMeanD": 0.02124122173318028,
+   "nullMeanC": 0.01786558390404025
+  },
+  {
+   "id": "ct-cd-smiles-chembl",
+   "register": "control",
+   "tokens": 125450,
+   "vD": 0.9757641247297215,
+   "vC": 0.9840831918509139,
+   "zD": -0.9643512283876158,
+   "zC": 0.0936439797971268,
+   "nullMeanD": 0.9770740528381794,
+   "nullMeanC": 0.9840519824228977
+  },
+  {
+   "id": "ct-fm-law-de",
+   "register": "control",
+   "tokens": 238360,
+   "vD": 0,
+   "vC": 0.00019089282159256982,
+   "zD": -1.2562885295843536,
+   "zC": 0.534522483182112,
+   "nullMeanD": 0.00012052593147018342,
+   "nullMeanC": 0.00012726188115266268
+  },
+  {
+   "id": "ct-fm-pali-dn",
+   "register": "control",
+   "tokens": 142107,
+   "vD": 0,
+   "vC": 0,
+   "zD": null,
+   "zC": null,
+   "nullMeanD": 0,
+   "nullMeanC": 0
+  },
+  {
+   "id": "ct-fm-wlc-torah",
+   "register": "control",
+   "tokens": 80052,
+   "vD": 0,
+   "vC": 0,
+   "zD": null,
+   "zC": null,
+   "nullMeanD": 0,
+   "nullMeanC": 0
+  },
+  {
+   "id": "ct-ml-arb-hadith",
+   "register": "control",
+   "tokens": 299431,
+   "vD": 0,
+   "vC": 0.00008548957066523144,
+   "zD": -0.5872801368884132,
+   "zC": 1.8973665961010275,
+   "nullMeanD": 0.000033173208794323725,
+   "nullMeanC": 0.000017097914133046287
+  },
+  {
+   "id": "ct-ml-grc-homer",
+   "register": "control",
+   "tokens": 188755,
+   "vD": 0,
+   "vC": 0,
+   "zD": null,
+   "zC": null,
+   "nullMeanD": 0,
+   "nullMeanC": 0
+  },
+  {
+   "id": "ct-ml-lat-livy",
+   "register": "control",
+   "tokens": 299894,
+   "vD": 0,
+   "vC": 0,
+   "zD": null,
+   "zC": null,
+   "nullMeanD": 0,
+   "nullMeanC": 0
+  },
+  {
+   "id": "ct-ml-lzh-shiji",
+   "register": "control",
+   "tokens": 291823,
+   "vD": 0,
+   "vC": 0,
+   "zD": null,
+   "zC": null,
+   "nullMeanD": 0,
+   "nullMeanC": 0
+  },
+  {
+   "id": "ct-oc-cosem",
+   "register": "control",
+   "tokens": 55649,
+   "vD": 0,
+   "vC": 0,
+   "zD": null,
+   "zC": null,
+   "nullMeanD": 0,
+   "nullMeanC": 0
+  },
+  {
+   "id": "ct-oc-irc-ubuntu-0406",
+   "register": "control",
+   "tokens": 282163,
+   "vD": 0,
+   "vC": 0,
+   "zD": null,
+   "zC": -0.3162277660168379,
+   "nullMeanD": 0,
+   "nullMeanC": 0.000008341095144714927
+  },
+  {
+   "id": "ct-ud-eng",
+   "register": "control",
+   "tokens": 43098,
+   "vD": 0,
+   "vC": 0,
+   "zD": null,
+   "zC": null,
+   "nullMeanD": 0,
+   "nullMeanC": 0
+  },
+  {
+   "id": "ct-ud-fin",
+   "register": "control",
+   "tokens": 32885,
+   "vD": 0,
+   "vC": 0,
+   "zD": null,
+   "zC": null,
+   "nullMeanD": 0,
+   "nullMeanC": 0
+  },
+  {
+   "id": "ct-ud-spa",
+   "register": "control",
+   "tokens": 93017,
+   "vD": 0.0011982947344222339,
+   "vC": 0.0004855940433117212,
+   "zD": -0.33846708467793724,
+   "zC": -2.5107257995838106,
+   "nullMeanD": 0.0013895610092731659,
+   "nullMeanC": 0.0015680640985920036
+  },
+  {
+   "id": "pl-burst",
+   "register": "planted",
+   "tokens": 100616,
+   "vD": 0.011498479944748397,
+   "vC": 0.011959646824834635,
+   "zD": 2.14069407155116,
+   "zC": 4.273592128535401,
+   "nullMeanD": 0.00861037560071054,
+   "nullMeanC": 0.009026726323190815
+  },
+  {
+   "id": "pl-frames",
+   "register": "planted",
+   "tokens": 100182,
+   "vD": 0.0741148251654522,
+   "vC": 0.06059277220356307,
+   "zD": 116.36754279397105,
+   "zC": 91.00707221623064,
+   "nullMeanD": 0.0015249873468746954,
+   "nullMeanC": 0.000907988753351674
+  },
+  {
+   "id": "pl-length",
+   "register": "planted",
+   "tokens": 100633,
+   "vD": 0.011341535368956102,
+   "vC": 0.01315936418086494,
+   "zD": -0.05006419714873642,
+   "zC": -0.6535950887700978,
+   "nullMeanD": 0.011431131312656361,
+   "nullMeanC": 0.013931802106981195
+  },
+  {
+   "id": "pl-markov",
+   "register": "planted",
+   "tokens": 100623,
+   "vD": 0.017644223717070417,
+   "vC": 0.01906087494444364,
+   "zD": 18.79569113535381,
+   "zC": 32.046530741756,
+   "nullMeanD": 0.001879675614509324,
+   "nullMeanC": 0.002549826982885861
+  },
+  {
+   "id": "pl-mix",
+   "register": "planted",
+   "tokens": 120587,
+   "vD": 0.01611196614067012,
+   "vC": 0.009356453826512734,
+   "zD": 21.029097004672025,
+   "zC": 13.596369612128006,
+   "nullMeanD": 0.003058868795596936,
+   "nullMeanC": 0.0026039552282782095
+  },
+  {
+   "id": "pl-null",
+   "register": "planted",
+   "tokens": 100561,
+   "vD": 0.0010062342771561816,
+   "vC": 0.0030485537954518804,
+   "zD": -2.7220502731801406,
+   "zC": -0.25595303751682935,
+   "nullMeanD": 0.0029180794051171686,
+   "nullMeanC": 0.003225146851127647
+  },
+  {
+   "id": "pl-null2",
+   "register": "planted",
+   "tokens": 101284,
+   "vD": 0.2775500361703962,
+   "vC": 0.2851020828265973,
+   "zD": 1.2752507890585199,
+   "zC": 0.17931230144082244,
+   "nullMeanD": 0.2719271324287547,
+   "nullMeanC": 0.2845818440406219
+  },
+  {
+   "id": "pl-parallel",
+   "register": "planted",
+   "tokens": 100738,
+   "vD": 0.022432859399486915,
+   "vC": 0.02151147569566092,
+   "zD": 30.56935868287527,
+   "zC": 39.86395550763396,
+   "nullMeanD": 0.002297184276540065,
+   "nullMeanC": 0.0018653460162568081
+  }
+ ],
+ "templatedFactbook": {
+  "id": "fm-factbook",
+  "register": "reference",
+  "tokens": 297368,
+  "vD": 0.41622042475864873,
+  "vC": 0.4143980052876941,
+  "zD": 175.57138840596681,
+  "zC": 249.20242992623827,
+  "nullMeanD": 0.09139236126120523,
+  "nullMeanC": 0.0928390171443425
+ },
+ "pairedUd": [
+  {
+   "sibling": "sf-ud-eng",
+   "siblingTokens": 176883,
+   "siblingStatus": "PRESENT+",
+   "siblingV": 0.0391570975916693,
+   "siblingZ": [
+    289.72087128762934,
+    424.52618033992576
+   ],
+   "atlas": {
+    "id": "ud-eng",
+    "register": "treebank",
+    "tokens": 43098,
+    "vD": 0.010654733365299762,
+    "vC": 0.019987618289633247,
+    "zD": null,
+    "zC": null,
+    "nullMeanD": 0,
+    "nullMeanC": 0
+   }
+  },
+  {
+   "sibling": "sf-ud-deu",
+   "siblingTokens": 222711,
+   "siblingStatus": "PRESENT+",
+   "siblingV": 0.016427827696588793,
+   "siblingZ": [
+    245.10206726997254,
+    541.7508659646162
+   ],
+   "atlas": {
+    "id": "ud-deu",
+    "register": "treebank",
+    "tokens": 24568,
+    "vD": 0.0011142061284772353,
+    "vC": 0.0017636684306125971,
+    "zD": null,
+    "zC": null,
+    "nullMeanD": 0,
+    "nullMeanC": 0
+   }
+  },
+  {
+   "sibling": "sf-ud-fra",
+   "siblingTokens": 299897,
+   "siblingStatus": "PRESENT+",
+   "siblingV": 0.07679794384603156,
+   "siblingZ": [
+    91.13349582966006,
+    187.59206283906468
+   ],
+   "atlas": {
+    "id": "ud-fra",
+    "register": "treebank",
+    "tokens": 39700,
+    "vD": 0.01917613636396709,
+    "vC": 0.018114585283910856,
+    "zD": 41.26109355357118,
+    "zC": 101.66722670656846,
+    "nullMeanD": 0.0002622377622174099,
+    "nullMeanC": 0.00005616925673166406
+   }
+  },
+  {
+   "sibling": "sf-ud-spa",
+   "siblingTokens": 299978,
+   "siblingStatus": "PRESENT+",
+   "siblingV": 0.07318444274324065,
+   "siblingZ": [
+    149.2666783184083,
+    129.0316139565441
+   ],
+   "atlas": {
+    "id": "ud-spa",
+    "register": "treebank",
+    "tokens": 93017,
+    "vD": 0.03896807535238622,
+    "vC": 0.03624723963366705,
+    "zD": 54.76836690293609,
+    "zC": 50.162251887483954,
+    "nullMeanD": 0.00204842877401461,
+    "nullMeanC": 0.0015056545695188105
+   }
+  },
+  {
+   "sibling": "sf-ud-por",
+   "siblingTokens": 216033,
+   "siblingStatus": "PRESENT+",
+   "siblingV": 0.08408121155707704,
+   "siblingZ": [
+    100.14376580042438,
+    48.57063700831095
+   ],
+   "atlas": {
+    "id": "ud-por",
+    "register": "treebank",
+    "tokens": 53894,
+    "vD": 0.027149990753059683,
+    "vC": 0.033513715245135245,
+    "zD": 22.71839098826161,
+    "zC": 20.041319268601757,
+    "nullMeanD": 0.0024523765490812367,
+    "nullMeanC": 0.00317596566528664
+   }
+  },
+  {
+   "sibling": "sf-ud-cat",
+   "siblingTokens": 299927,
+   "siblingStatus": "PRESENT+",
+   "siblingV": 0.13014540753511028,
+   "siblingZ": [
+    183.18093551522153,
+    165.67676783997868
+   ],
+   "atlas": {
+    "id": "ud-cat",
+    "register": "treebank",
+    "tokens": 103648,
+    "vD": 0.07093435664864955,
+    "vC": 0.06681544469847722,
+    "zD": 61.42050244793163,
+    "zC": 116.41235417322306,
+    "nullMeanD": 0.003046688761060068,
+    "nullMeanC": 0.001569864753037109
+   }
+  },
+  {
+   "sibling": "sf-ud-pol",
+   "siblingTokens": 232578,
+   "siblingStatus": "UNDEFINED",
+   "siblingV": 0.006908430987095926,
+   "siblingZ": [
+    null,
+    null
+   ],
+   "atlas": {
+    "id": "ud-pol",
+    "register": "treebank",
+    "tokens": 56265,
+    "vD": 0.0004660013200918911,
+    "vC": 0.0014367336025316035,
+    "zD": 6.00832755431992,
+    "zC": null,
+    "nullMeanD": 0.000023300066004594555,
+    "nullMeanC": 0
+   }
+  },
+  {
+   "sibling": "sf-ud-nob",
+   "siblingTokens": 212469,
+   "siblingStatus": "PRESENT+",
+   "siblingV": 0.021717621182233415,
+   "siblingZ": [
+    262.64692397218533,
+    376.42962693892713
+   ],
+   "atlas": {
+    "id": "ud-nob",
+    "register": "treebank",
+    "tokens": 57790,
+    "vD": 0.006012777151227056,
+    "vC": 0.010770396232146595,
+    "zD": null,
+    "zC": null,
+    "nullMeanD": 0,
+    "nullMeanC": 0
+   }
+  }
+ ],
+ "excessCoverageByClass": {
+  "code": [
+   {
+    "id": "sf-js-misc",
+    "excessD": 0.11774158169973817,
+    "excessC": 0.12526151328020205
+   },
+   {
+    "id": "sf-c-sdk",
+    "excessD": 0.4141560548022426,
+    "excessC": 0.45435358916984114
+   },
+   {
+    "id": "sf-py-myenv",
+    "excessD": 0.3268220458482574,
+    "excessC": 0.3017785279417694
+   },
+   {
+    "id": "sf-py-nbvenv",
+    "excessD": 0.23387705160812403,
+    "excessC": 0.21781436230667167
+   }
+  ],
+  "docs": [
+   {
+    "id": "sf-md-docs",
+    "excessD": 0.09927243930833356,
+    "excessC": 0.19614153842603627
+   }
+  ],
+  "books": [
+   {
+    "id": "sf-en-poe2",
+    "excessD": 0.01716584531832268,
+    "excessC": 0.0209777414213022
+   },
+   {
+    "id": "sf-en-mouret",
+    "excessD": 0.020559420243262138,
+    "excessC": 0.02617137257275317
+   },
+   {
+    "id": "sf-en-waikna",
+    "excessD": 0.01761488970587379,
+    "excessC": 0.022352286743625882
+   },
+   {
+    "id": "sf-en-chopin",
+    "excessD": 0.008804638208857796,
+    "excessC": 0.013088452607007639
+   }
+  ],
+  "drama": [
+   {
+    "id": "sf-en-shakespeare",
+    "excessD": 0.016835344000901385,
+    "excessC": 0.017809910860887613
+   }
+  ],
+  "treebank": [
+   {
+    "id": "sf-ud-eng",
+    "excessD": 0.03986233315345089,
+    "excessC": 0.038266947125157456
+   },
+   {
+    "id": "sf-ud-deu",
+    "excessD": 0.014807347256191861,
+    "excessC": 0.018000805561950984
+   },
+   {
+    "id": "sf-ud-fra",
+    "excessD": 0.06935010865490768,
+    "excessC": 0.07687465096187225
+   },
+   {
+    "id": "sf-ud-spa",
+    "excessD": 0.06609651257676888,
+    "excessC": 0.06556812111548424
+   },
+   {
+    "id": "sf-ud-por",
+    "excessD": 0.0755067175471595,
+    "excessC": 0.06723585813697355
+   },
+   {
+    "id": "sf-ud-cat",
+    "excessD": 0.1279322684469662,
+    "excessC": 0.12120563915023012
+   },
+   {
+    "id": "sf-ud-pol",
+    "excessD": 0.007003084390817094,
+    "excessC": 0.006813777583374758
+   },
+   {
+    "id": "sf-ud-nob",
+    "excessD": 0.023680037064241332,
+    "excessC": 0.019666274291375886
+   }
+  ]
+ },
+ "highDraw": [
+  {
+   "id": "sf-ud-pol",
+   "which": "discover",
+   "observed": 0.007003084390817094,
+   "nullMean": 2.528189315853524e-7,
+   "nullSd": 0.0000035753996187268273,
+   "nullMax": 0.00005056378631707048,
+   "nullDistinctValues": 2,
+   "drawsAtOrAboveObserved": 0,
+   "draws": 200,
+   "zHigh": 1958.6150692657857
+  },
+  {
+   "id": "sf-ud-pol",
+   "which": "confirm",
+   "observed": 0.006813777583374758,
+   "nullMean": 0,
+   "nullSd": 0,
+   "nullMax": 0,
+   "nullDistinctValues": 1,
+   "drawsAtOrAboveObserved": 0,
+   "draws": 200,
+   "zHigh": null
+  },
+  {
+   "id": "sf-en-chopin",
+   "which": "confirm",
+   "observed": 0.013088452607007639,
+   "nullMean": 0.000031665611163589344,
+   "nullSd": 0.00011148503354565056,
+   "nullMax": 0.00042220814884785796,
+   "nullDistinctValues": 2,
+   "drawsAtOrAboveObserved": 0,
+   "draws": 200,
+   "zHigh": 117.11694907009735
+  }
+ ]
+}

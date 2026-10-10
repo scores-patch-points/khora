@@ -1,0 +1,167 @@
+{
+ "headerSha256": "83809b75168fcd981d51b2da75e8129d4d3385134acb90b82abbad4c5805398a",
+ "status": "POST-HOC robustness, dev only",
+ "strata": {
+  "LATER": {
+   "n": 22,
+   "dropCmnHans": {
+    "M1": {
+     "skill": 0.2762,
+     "full": 0.245
+    },
+    "M1+M3": {
+     "skill": 0.4853,
+     "full": 0.4625
+    },
+    "M3": {
+     "skill": 0.191,
+     "full": 0.1923
+    }
+   },
+   "leaveOneCladeOut": {
+    "M1": {
+     "skill": 0.2719,
+     "rmseModel": 0.0484,
+     "rmseBase": 0.0665,
+     "groups": 12
+    },
+    "M1+M3": {
+     "skill": 0.4715,
+     "rmseModel": 0.0351,
+     "rmseBase": 0.0665,
+     "groups": 12
+    },
+    "M3": {
+     "skill": 0.2033,
+     "rmseModel": 0.053,
+     "rmseBase": 0.0665,
+     "groups": 12
+    }
+   },
+   "kSweepSpearman": {
+    "8": 0.756,
+    "16": 0.703,
+    "32": 0.695,
+    "64": 0.674,
+    "128": 0.684,
+    "256": 0.649
+   },
+   "fwc32Subsample8000": {
+    "rhoWithAuc": 0.642,
+    "rhoWithFullFwc32": 0.992
+   },
+   "sizeConfound": {
+    "fwc32_vs_log2tokens": 0.331,
+    "ttr_vs_log2tokens": -0.618
+   }
+  },
+  "FIRST": {
+   "n": 23,
+   "dropCmnHans": {
+    "M1": {
+     "skill": 0.2204,
+     "full": 0.2306
+    },
+    "M1+M2": {
+     "skill": 0.2109,
+     "full": 0.2253
+    },
+    "M2": {
+     "skill": 0.1252,
+     "full": 0.1283
+    },
+    "M3": {
+     "skill": -0.0004,
+     "full": -0.0054
+    }
+   },
+   "leaveOneCladeOut": {
+    "M1": {
+     "skill": 0.2545,
+     "rmseModel": 0.0457,
+     "rmseBase": 0.0614,
+     "groups": 13
+    },
+    "M1+M2": {
+     "skill": 0.2554,
+     "rmseModel": 0.0457,
+     "rmseBase": 0.0614,
+     "groups": 13
+    },
+    "M2": {
+     "skill": 0.1373,
+     "rmseModel": 0.0529,
+     "rmseBase": 0.0614,
+     "groups": 13
+    },
+    "M3": {
+     "skill": -0.0114,
+     "rmseModel": 0.0621,
+     "rmseBase": 0.0614,
+     "groups": 13
+    }
+   },
+   "kSweepSpearman": {
+    "8": 0.648,
+    "16": 0.607,
+    "32": 0.646,
+    "64": 0.61,
+    "128": 0.628,
+    "256": 0.623
+   },
+   "fwc32Subsample8000": {
+    "rhoWithAuc": 0.631,
+    "rhoWithFullFwc32": 0.993
+   },
+   "sizeConfound": {
+    "fwc32_vs_log2tokens": 0.36,
+    "ttr_vs_log2tokens": -0.624
+   }
+  }
+ },
+ "irc": {
+  "days": [
+   "kubuntu/2005-07-15.txt",
+   "kubuntu/2005-11-15.txt",
+   "kubuntu/2007-07-15.txt",
+   "kubuntu/2008-07-15.txt",
+   "ubuntu/2004-11-15.txt",
+   "ubuntu/2005-03-15.txt",
+   "ubuntu/2012-07-15.txt",
+   "ubuntu/2015-03-15.txt"
+  ],
+  "fwc32PerDay": [
+   0.3177,
+   0.3246,
+   0.3136,
+   0.3262,
+   0.326,
+   0.3325,
+   0.3383,
+   0.3247
+  ],
+  "fwc32Mean": 0.3255,
+  "reportedC3": {
+   "LATER_BOTH": {
+    "arm": "BOTH",
+    "udPooledToIrc": 0.4573,
+    "udEngToIrc": 0.4674,
+    "udSvoToIrc": 0.4542,
+    "udSovToIrc": 0.5293,
+    "udPooledToIrcPositionArm": 0.4739,
+    "ircLeaveOneDayOut": 0.6067,
+    "ircToUdEng": 0.5048
+   },
+   "FIRST_LEFT": {
+    "arm": "LEFT",
+    "udPooledToIrc": 0.5153,
+    "udEngToIrc": 0.5126,
+    "udSvoToIrc": 0.5086,
+    "udSovToIrc": 0.5273,
+    "udPooledToIrcPositionArm": 0.4747,
+    "ircLeaveOneDayOut": 0.5259,
+    "ircToUdEng": 0.5461
+   }
+  }
+ }
+}

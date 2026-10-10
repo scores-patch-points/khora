@@ -1,0 +1,210 @@
+{
+ "slice": {
+  "docsRequested": 20,
+  "docsRead": 20,
+  "charsCap": 3000,
+  "candidates": [
+   "eng",
+   "spa",
+   "fra",
+   "deu",
+   "ita",
+   "por"
+  ],
+  "perCat": 1
+ },
+ "totals": {
+  "usable": 20,
+  "usableShare": 1,
+  "meanCast": 15.7,
+  "meanRelations": 16.3,
+  "errors": 0
+ },
+ "K3_earAgreesOnEnglish": {
+  "englishDocs": 0,
+  "agreed": 0
+ },
+ "verdict": "PASSING",
+ "rows": [
+  {
+   "address": "01-literature-books/gitenberg/pg120_Treasure-Island.txt",
+   "cast": 16,
+   "relations": 7,
+   "signal": 7,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "01-literature-books/gitenberg/pg1232_The-Prince.txt",
+   "cast": 20,
+   "relations": 19,
+   "signal": 19,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "01-literature-books/gitenberg/pg1400_Great-Expectations.txt",
+   "cast": 13,
+   "relations": 12,
+   "signal": 12,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "01-literature-books/gitenberg/pg1404_The-Federalist-Papers.txt",
+   "cast": 13,
+   "relations": 17,
+   "signal": 17,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "01-literature-books/gitenberg/pg147_Common-Sense.txt",
+   "cast": 17,
+   "relations": 15,
+   "signal": 15,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "01-literature-books/gitenberg/pg158_Emma.txt",
+   "cast": 13,
+   "relations": 19,
+   "signal": 19,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "01-literature-books/gitenberg/pg161_Sense-and-Sensibility.txt",
+   "cast": 25,
+   "relations": 16,
+   "signal": 16,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "01-literature-books/gitenberg/pg215_The-Call-of-the-Wild.txt",
+   "cast": 15,
+   "relations": 23,
+   "signal": 23,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "01-literature-books/gitenberg/pg219_Heart-of-Darkness.txt",
+   "cast": 17,
+   "relations": 19,
+   "signal": 19,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "01-literature-books/gitenberg/pg236_The-Jungle-Book.txt",
+   "cast": 18,
+   "relations": 16,
+   "signal": 16,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "01-literature-books/gitenberg/pg2554_Crime-and-Punishment.txt",
+   "cast": 15,
+   "relations": 15,
+   "signal": 15,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "01-literature-books/gitenberg/pg345_Dracula.txt",
+   "cast": 13,
+   "relations": 3,
+   "signal": 3,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "01-literature-books/gitenberg/pg35_The-Time-Machine.txt",
+   "cast": 16,
+   "relations": 25,
+   "signal": 22,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "01-literature-books/gitenberg/pg36_The-War-of-the-Worlds.txt",
+   "cast": 17,
+   "relations": 16,
+   "signal": 16,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "01-literature-books/gitenberg/pg45_Anne-of-Green-Gables.txt",
+   "cast": 10,
+   "relations": 8,
+   "signal": 8,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "01-literature-books/gitenberg/pg514_Little-Women.txt",
+   "cast": 15,
+   "relations": 15,
+   "signal": 15,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "01-literature-books/gitenberg/pg521_The-Life-and-Adventures-of-Robinson-Crusoe.txt",
+   "cast": 18,
+   "relations": 26,
+   "signal": 26,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "01-literature-books/gitenberg/pg55_The-Wonderful-Wizard-of-Oz.txt",
+   "cast": 17,
+   "relations": 13,
+   "signal": 13,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "01-literature-books/gitenberg/pg768_Wuthering-Heights.txt",
+   "cast": 11,
+   "relations": 22,
+   "signal": 22,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "01-literature-books/gitenberg/pg829_Gulliver-s-Travels.txt",
+   "cast": 15,
+   "relations": 19,
+   "signal": 19,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  }
+ ]
+}

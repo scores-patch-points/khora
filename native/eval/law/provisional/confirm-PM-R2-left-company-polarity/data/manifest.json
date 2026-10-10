@@ -1,0 +1,547 @@
+{
+ "made": "2026-10-07",
+ "uses": {},
+ "ud": {
+  "rule": "one register per treebank with a *-ud-train*.conllu (first part in name order); window of consecutive sentences from a seeded random start to >= 40000 non-PUNCT word units (whole file if smaller), drawn in confirm.mjs from seedFor('pm-r2-confirm', treebank, 'window')",
+  "files": {
+   "af_afribooms": "/Users/mlacy/Documents/data/ud/af_afribooms/af_afribooms-ud-train.conllu",
+   "ar_padt": "/Users/mlacy/Documents/data/ud/ar_padt/ar_padt-ud-train.conllu",
+   "be_hse": "/Users/mlacy/Documents/data/ud/be_hse/be_hse-ud-train.conllu",
+   "bg_btb": "/Users/mlacy/Documents/data/ud/bg_btb/bg_btb-ud-train.conllu",
+   "ca_ancora": "/Users/mlacy/Documents/data/ud/ca_ancora/ca_ancora-ud-train.conllu",
+   "cop_scriptorium": "/Users/mlacy/Documents/data/ud/cop_scriptorium/cop_scriptorium-ud-train.conllu",
+   "cs_pdt": "/Users/mlacy/Documents/data/ud/cs_pdt/cs_pdtc-ud-train-ca.conllu",
+   "cu_proiel": "/Users/mlacy/Documents/data/ud/cu_proiel/cu_proiel-ud-train.conllu",
+   "cy_ccg": "/Users/mlacy/Documents/data/ud/cy_ccg/cy_ccg-ud-train.conllu",
+   "da_ddt": "/Users/mlacy/Documents/data/ud/da_ddt/da_ddt-ud-train.conllu",
+   "de_gsd": "/Users/mlacy/Documents/data/ud/de_gsd/de_gsd-ud-train.conllu",
+   "en_ewt": "/Users/mlacy/Documents/data/ud/en_ewt/en_ewt-ud-train.conllu",
+   "es_gsd": "/Users/mlacy/Documents/data/ud/es_gsd/es_gsd-ud-train.conllu",
+   "et_edt": "/Users/mlacy/Documents/data/ud/et_edt/et_edt-ud-train.conllu",
+   "eu_bdt": "/Users/mlacy/Documents/data/ud/eu_bdt/eu_bdt-ud-train.conllu",
+   "fa_seraji": "/Users/mlacy/Documents/data/ud/fa_seraji/fa_seraji-ud-train.conllu",
+   "fi_tdt": "/Users/mlacy/Documents/data/ud/fi_tdt/fi_tdt-ud-train.conllu",
+   "fo_farpahc": "/Users/mlacy/Documents/data/ud/fo_farpahc/fo_farpahc-ud-train.conllu",
+   "fr_gsd": "/Users/mlacy/Documents/data/ud/fr_gsd/fr_gsd-ud-train.conllu",
+   "ga_idt": "/Users/mlacy/Documents/data/ud/ga_idt/ga_idt-ud-train.conllu",
+   "gl_treegal": "/Users/mlacy/Documents/data/ud/gl_treegal/gl_treegal-ud-train.conllu",
+   "got_proiel": "/Users/mlacy/Documents/data/ud/got_proiel/got_proiel-ud-train.conllu",
+   "grc_proiel": "/Users/mlacy/Documents/data/ud/grc_proiel/grc_proiel-ud-train.conllu",
+   "he_htb": "/Users/mlacy/Documents/data/ud/he_htb/he_htb-ud-train.conllu",
+   "hi_hdtb": "/Users/mlacy/Documents/data/ud/hi_hdtb/hi_hdtb-ud-train.conllu",
+   "hr_set": "/Users/mlacy/Documents/data/ud/hr_set/hr_set-ud-train.conllu",
+   "hu_szeged": "/Users/mlacy/Documents/data/ud/hu_szeged/hu_szeged-ud-train.conllu",
+   "hy_armtdp": "/Users/mlacy/Documents/data/ud/hy_armtdp/hy_armtdp-ud-train.conllu",
+   "id_gsd": "/Users/mlacy/Documents/data/ud/id_gsd/id_gsd-ud-train.conllu",
+   "is_icepahc": "/Users/mlacy/Documents/data/ud/is_icepahc/is_icepahc-ud-train.conllu",
+   "it_isdt": "/Users/mlacy/Documents/data/ud/it_isdt/it_isdt-ud-train.conllu",
+   "ja_gsd": "/Users/mlacy/Documents/data/ud/ja_gsd/ja_gsd-ud-train.conllu",
+   "ka_glc": "/Users/mlacy/Documents/data/ud/ka_glc/ka_glc-ud-train.conllu",
+   "kk_ktb": "/Users/mlacy/Documents/data/ud/kk_ktb/kk_ktb-ud-train.conllu",
+   "ko_gsd": "/Users/mlacy/Documents/data/ud/ko_gsd/ko_gsd-ud-train.conllu",
+   "la_proiel": "/Users/mlacy/Documents/data/ud/la_proiel/la_proiel-ud-train.conllu",
+   "lt_alksnis": "/Users/mlacy/Documents/data/ud/lt_alksnis/lt_alksnis-ud-train.conllu",
+   "lv_lvtb": "/Users/mlacy/Documents/data/ud/lv_lvtb/lv_lvtb-ud-train.conllu",
+   "lzh_kyoto": "/Users/mlacy/Documents/data/ud/lzh_kyoto/lzh_kyoto-ud-train.conllu",
+   "mt_mudt": "/Users/mlacy/Documents/data/ud/mt_mudt/mt_mudt-ud-train.conllu",
+   "nl_alpino": "/Users/mlacy/Documents/data/ud/nl_alpino/nl_alpino-ud-train.conllu",
+   "no_bokmaal": "/Users/mlacy/Documents/data/ud/no_bokmaal/no_bokmaal-ud-train.conllu",
+   "pl_pdb": "/Users/mlacy/Documents/data/ud/pl_pdb/pl_pdb-ud-train.conllu",
+   "pt_bosque": "/Users/mlacy/Documents/data/ud/pt_bosque/pt_bosque-ud-train.conllu",
+   "ro_rrt": "/Users/mlacy/Documents/data/ud/ro_rrt/ro_rrt-ud-train.conllu",
+   "ru_syntagrus": "/Users/mlacy/Documents/data/ud/ru_syntagrus/ru_syntagrus-ud-train-a.conllu",
+   "sa_vedic": "/Users/mlacy/Documents/data/ud/sa_vedic/sa_vedic-ud-train.conllu",
+   "sk_snk": "/Users/mlacy/Documents/data/ud/sk_snk/sk_snk-ud-train.conllu",
+   "sl_ssj": "/Users/mlacy/Documents/data/ud/sl_ssj/sl_ssj-ud-train.conllu",
+   "sr_set": "/Users/mlacy/Documents/data/ud/sr_set/sr_set-ud-train.conllu",
+   "sv_talbanken": "/Users/mlacy/Documents/data/ud/sv_talbanken/sv_talbanken-ud-train.conllu",
+   "ta_ttb": "/Users/mlacy/Documents/data/ud/ta_ttb/ta_ttb-ud-train.conllu",
+   "tr_imst": "/Users/mlacy/Documents/data/ud/tr_imst/tr_imst-ud-train.conllu",
+   "ug_udt": "/Users/mlacy/Documents/data/ud/ug_udt/ug_udt-ud-train.conllu",
+   "uk_iu": "/Users/mlacy/Documents/data/ud/uk_iu/uk_iu-ud-train.conllu",
+   "ur_udtb": "/Users/mlacy/Documents/data/ud/ur_udtb/ur_udtb-ud-train.conllu",
+   "vi_vtb": "/Users/mlacy/Documents/data/ud/vi_vtb/vi_vtb-ud-train.conllu",
+   "wo_wtb": "/Users/mlacy/Documents/data/ud/wo_wtb/wo_wtb-ud-train.conllu",
+   "zh_gsd": "/Users/mlacy/Documents/data/ud/zh_gsd/zh_gsd-ud-train.conllu"
+  },
+  "n": 59,
+  "windowTokens": 40000,
+  "filesOutsideConfirmDirsThatMentionTheUdDir": []
+ },
+ "irc": {
+  "rule": "English days of the 7 ubuntu-irc channels. T0_never = day id mentioned nowhere in the eval tree (outside my dir and the concurrent PM-R1 sibling's dir): PRIMARY chat register (pooled, bins from the pooled stream). T3_lens = mentioned only by other provisional scoping lenses (read for company/first-mention statistics, never for DLx or rareL_edge): SECONDARY registers, one per channel. TX_excluded = mentioned by the polarity-map scoper (disc/conf 48 days), an earlier name test (name-rule-informal, name-company, name-floor1), kinds-swarm or any non-provisional law file: EXCLUDED. Non-English days: all 32 were read by the scoper -> none fresh.",
+  "nEnDays": 80,
+  "nNonEnDays": 32,
+  "tierCounts": {
+   "T0_never": 0,
+   "T3_lens": 37,
+   "TX_excluded": 43
+  },
+  "T0_never": [],
+  "T3_lensByChannel": {
+   "kubuntu": [
+    {
+     "id": "kubuntu/2010-07-15.txt",
+     "n": 517
+    },
+    {
+     "id": "kubuntu/2011-07-15.txt",
+     "n": 541
+    },
+    {
+     "id": "kubuntu/2012-03-15.txt",
+     "n": 364
+    },
+    {
+     "id": "kubuntu/2012-07-15.txt",
+     "n": 516
+    },
+    {
+     "id": "kubuntu/2013-03-15.txt",
+     "n": 427
+    },
+    {
+     "id": "kubuntu/2013-07-15.txt",
+     "n": 107
+    },
+    {
+     "id": "kubuntu/2014-03-15.txt",
+     "n": 66
+    },
+    {
+     "id": "kubuntu/2014-07-15.txt",
+     "n": 397
+    },
+    {
+     "id": "kubuntu/2015-03-15.txt",
+     "n": 110
+    },
+    {
+     "id": "kubuntu/2015-07-15.txt",
+     "n": 412
+    }
+   ],
+   "ubuntu-server": [
+    {
+     "id": "ubuntu-server/2007-11-15.txt",
+     "n": 400
+    },
+    {
+     "id": "ubuntu-server/2009-03-15.txt",
+     "n": 112
+    },
+    {
+     "id": "ubuntu-server/2009-07-15.txt",
+     "n": 486
+    },
+    {
+     "id": "ubuntu-server/2011-07-15.txt",
+     "n": 451
+    },
+    {
+     "id": "ubuntu-server/2012-03-15.txt",
+     "n": 374
+    },
+    {
+     "id": "ubuntu-server/2012-07-15.txt",
+     "n": 292
+    },
+    {
+     "id": "ubuntu-server/2013-03-15.txt",
+     "n": 512
+    },
+    {
+     "id": "ubuntu-server/2014-03-15.txt",
+     "n": 106
+    },
+    {
+     "id": "ubuntu-server/2014-07-15.txt",
+     "n": 416
+    },
+    {
+     "id": "ubuntu-server/2015-03-15.txt",
+     "n": 62
+    },
+    {
+     "id": "ubuntu-server/2015-07-15.txt",
+     "n": 78
+    }
+   ],
+   "xubuntu": [
+    {
+     "id": "xubuntu/2007-07-15.txt",
+     "n": 462
+    },
+    {
+     "id": "xubuntu/2008-03-15.txt",
+     "n": 300
+    },
+    {
+     "id": "xubuntu/2009-03-15.txt",
+     "n": 476
+    },
+    {
+     "id": "xubuntu/2009-07-15.txt",
+     "n": 295
+    },
+    {
+     "id": "xubuntu/2010-03-15.txt",
+     "n": 119
+    },
+    {
+     "id": "xubuntu/2010-07-15.txt",
+     "n": 195
+    },
+    {
+     "id": "xubuntu/2011-03-15.txt",
+     "n": 369
+    },
+    {
+     "id": "xubuntu/2011-07-15.txt",
+     "n": 346
+    },
+    {
+     "id": "xubuntu/2012-03-15.txt",
+     "n": 204
+    },
+    {
+     "id": "xubuntu/2012-07-15.txt",
+     "n": 138
+    },
+    {
+     "id": "xubuntu/2013-03-15.txt",
+     "n": 306
+    },
+    {
+     "id": "xubuntu/2013-07-15.txt",
+     "n": 246
+    },
+    {
+     "id": "xubuntu/2014-03-15.txt",
+     "n": 254
+    },
+    {
+     "id": "xubuntu/2014-07-15.txt",
+     "n": 79
+    },
+    {
+     "id": "xubuntu/2015-03-15.txt",
+     "n": 56
+    },
+    {
+     "id": "xubuntu/2015-07-15.txt",
+     "n": 132
+    }
+   ]
+  },
+  "TX_excluded": [
+   "kubuntu/2005-07-15.txt",
+   "kubuntu/2005-11-15.txt",
+   "kubuntu/2006-03-15.txt",
+   "kubuntu/2006-07-15.txt",
+   "kubuntu/2007-03-15.txt",
+   "kubuntu/2007-07-15.txt",
+   "kubuntu/2008-03-15.txt",
+   "kubuntu/2008-07-15.txt",
+   "kubuntu/2009-03-15.txt",
+   "kubuntu/2009-07-15.txt",
+   "kubuntu/2010-03-15.txt",
+   "kubuntu/2011-03-15.txt",
+   "ubuntu/2004-11-15.txt",
+   "ubuntu/2005-03-15.txt",
+   "ubuntu/2005-07-15.txt",
+   "ubuntu/2006-03-15.txt",
+   "ubuntu/2006-07-15.txt",
+   "ubuntu/2007-03-15.txt",
+   "ubuntu/2007-07-15.txt",
+   "ubuntu/2008-03-15.txt",
+   "ubuntu/2008-07-15.txt",
+   "ubuntu/2009-03-15.txt",
+   "ubuntu/2009-07-15.txt",
+   "ubuntu/2010-03-15.txt",
+   "ubuntu/2010-07-15.txt",
+   "ubuntu/2011-03-15.txt",
+   "ubuntu/2011-07-15.txt",
+   "ubuntu/2012-03-15.txt",
+   "ubuntu/2012-07-15.txt",
+   "ubuntu/2013-03-15.txt",
+   "ubuntu/2013-07-15.txt",
+   "ubuntu/2014-03-15.txt",
+   "ubuntu/2014-07-15.txt",
+   "ubuntu/2015-03-15.txt",
+   "ubuntu/2015-07-15.txt",
+   "ubuntu-server/2008-03-15.txt",
+   "ubuntu-server/2008-07-15.txt",
+   "ubuntu-server/2010-03-15.txt",
+   "ubuntu-server/2010-07-15.txt",
+   "ubuntu-server/2011-03-15.txt",
+   "ubuntu-server/2013-07-15.txt",
+   "xubuntu/2007-03-15.txt",
+   "xubuntu/2008-07-15.txt"
+  ],
+  "sibling_neverReadByAnyone_for_crosscheck": [
+   "kubuntu/2013-07-15.txt",
+   "kubuntu/2014-03-15.txt",
+   "kubuntu/2015-03-15.txt",
+   "ubuntu-server/2009-03-15.txt",
+   "ubuntu-server/2014-03-15.txt",
+   "ubuntu-server/2015-03-15.txt",
+   "ubuntu-server/2015-07-15.txt",
+   "xubuntu/2010-03-15.txt",
+   "xubuntu/2012-07-15.txt",
+   "xubuntu/2014-07-15.txt",
+   "xubuntu/2015-03-15.txt",
+   "xubuntu/2015-07-15.txt"
+  ],
+  "allNonEnDaysExcluded": [
+   "ubuntu-de/2010-11-15.txt",
+   "ubuntu-de/2011-03-15.txt",
+   "ubuntu-de/2011-07-15.txt",
+   "ubuntu-de/2012-03-15.txt",
+   "ubuntu-de/2012-07-15.txt",
+   "ubuntu-de/2013-03-15.txt",
+   "ubuntu-de/2013-11-15.txt",
+   "ubuntu-de/2014-03-15.txt",
+   "ubuntu-de/2014-07-15.txt",
+   "ubuntu-de/2015-03-15.txt",
+   "ubuntu-de/2015-07-15.txt",
+   "ubuntu-es/2010-11-15.txt",
+   "ubuntu-es/2011-03-15.txt",
+   "ubuntu-es/2011-07-15.txt",
+   "ubuntu-es/2012-03-15.txt",
+   "ubuntu-es/2012-07-15.txt",
+   "ubuntu-es/2013-03-15.txt",
+   "ubuntu-es/2013-07-15.txt",
+   "ubuntu-es/2014-03-15.txt",
+   "ubuntu-es/2015-07-15.txt",
+   "ubuntu-es/2015-11-15.txt",
+   "ubuntu-it/2010-11-15.txt",
+   "ubuntu-it/2011-03-15.txt",
+   "ubuntu-it/2011-07-15.txt",
+   "ubuntu-it/2012-03-15.txt",
+   "ubuntu-it/2012-07-15.txt",
+   "ubuntu-it/2013-03-15.txt",
+   "ubuntu-it/2013-07-15.txt",
+   "ubuntu-it/2014-03-15.txt",
+   "ubuntu-it/2014-07-15.txt",
+   "ubuntu-it/2015-03-15.txt",
+   "ubuntu-it/2015-07-15.txt"
+  ]
+ },
+ "books": {
+  "rule": "gitenberg NOVELS list (fixed in this file) with >= 60000 word tokens, hash order sha256('pm-r2-confirm-books|'+file), first 6",
+  "candidates": [
+   "pg36_The-War-of-the-Worlds.txt",
+   "pg1400_Great-Expectations.txt",
+   "pg120_Treasure-Island.txt",
+   "pg45_Anne-of-Green-Gables.txt",
+   "pg768_Wuthering-Heights.txt",
+   "pg2554_Crime-and-Punishment.txt",
+   "pg158_Emma.txt",
+   "pg521_The-Life-and-Adventures-of-Robinson-Crusoe.txt",
+   "pg829_Gulliver-s-Travels.txt",
+   "pg514_Little-Women.txt",
+   "pg161_Sense-and-Sensibility.txt"
+  ],
+  "picked": [
+   {
+    "name": "book-the-war-of-the-worlds",
+    "file": "/Users/mlacy/Documents/3.0/ethos/01-literature-books/gitenberg/pg36_The-War-of-the-Worlds.txt",
+    "tokens": 60538,
+    "sha": "734b8a1d51077e36767c46578517fd4826c024a1cbd05ebf1aca92aadbb7ad56"
+   },
+   {
+    "name": "book-great-expectations",
+    "file": "/Users/mlacy/Documents/3.0/ethos/01-literature-books/gitenberg/pg1400_Great-Expectations.txt",
+    "tokens": 186692,
+    "sha": "64cd8797f6439d21be03154b8e3e97c4fe8c0df6f032a98871a5554c0621c500"
+   },
+   {
+    "name": "book-treasure-island",
+    "file": "/Users/mlacy/Documents/3.0/ethos/01-literature-books/gitenberg/pg120_Treasure-Island.txt",
+    "tokens": 69173,
+    "sha": "6c37a18a886b4c12eaf4e5ff301813186616c7ee899c268db94eddd433027da7"
+   },
+   {
+    "name": "book-anne-of-green-gables",
+    "file": "/Users/mlacy/Documents/3.0/ethos/01-literature-books/gitenberg/pg45_Anne-of-Green-Gables.txt",
+    "tokens": 103639,
+    "sha": "de84735904a9023e2a2447dec5e30e9ea4e5d92d6e23f38c6e07f3df9ce0191a"
+   },
+   {
+    "name": "book-wuthering-heights",
+    "file": "/Users/mlacy/Documents/3.0/ethos/01-literature-books/gitenberg/pg768_Wuthering-Heights.txt",
+    "tokens": 122541,
+    "sha": "2ff1cd2fa12ecff82da679e889ca7645e132e7bcfd55768ea42a955abe12c1e1"
+   },
+   {
+    "name": "book-crime-and-punishment",
+    "file": "/Users/mlacy/Documents/3.0/ethos/01-literature-books/gitenberg/pg2554_Crime-and-Punishment.txt",
+    "tokens": 205301,
+    "sha": "678b3d46a1f1dbef9d702744611362c8b3a8d5413b3b410605730b9ea5f75a95"
+   }
+  ]
+ },
+ "code": {
+  "rule": "ant-code select_files hash order with salt 'pm-r2-confirm-fresh' minus ant-code's files, the scoper's 24 and the PM-R1 sibling's 32",
+  "counts": {
+   "A": 89,
+   "B": 167,
+   "P": 78,
+   "R": 24,
+   "excluded": 88
+  },
+  "js": [
+   {
+    "file": "/Users/mlacy/Documents/3.0/khora/native/eval/competence/r4-claims.mjs",
+    "pool": "khora",
+    "units": 1411
+   },
+   {
+    "file": "/Users/mlacy/Documents/3.0/khora/native/organs/reasoning-lint.js",
+    "pool": "khora",
+    "units": 1153
+   },
+   {
+    "file": "/Users/mlacy/Documents/3.0/khora/native/eval/name-candidates.mjs",
+    "pool": "khora",
+    "units": 677
+   },
+   {
+    "file": "/Users/mlacy/Documents/3.0/khora/native/the-fold/answer-record.js",
+    "pool": "khora",
+    "units": 670
+   },
+   {
+    "file": "/Users/mlacy/Documents/3.0/khora/native/eval/notation-competence/uml_bpmn.mjs",
+    "pool": "khora",
+    "units": 2260
+   },
+   {
+    "file": "/Users/mlacy/Documents/3.0/khora/native/eval/coding-competence/c0-identify.mjs",
+    "pool": "khora",
+    "units": 1745
+   },
+   {
+    "file": "/Users/mlacy/Documents/jupyter/node_modules/json5/dist/index.js",
+    "pool": "node_modules",
+    "units": 1534
+   },
+   {
+    "file": "/Users/mlacy/Documents/jupyter/node_modules/@webassemblyjs/wasm-parser/lib/decoder.js",
+    "pool": "node_modules",
+    "units": 1443
+   },
+   {
+    "file": "/Users/mlacy/Documents/jupyter/node_modules/@eslint/eslintrc/lib/config-array-factory.js",
+    "pool": "node_modules",
+    "units": 810
+   },
+   {
+    "file": "/Users/mlacy/Documents/jupyter/node_modules/@xtuc/long/src/long.js",
+    "pool": "node_modules",
+    "units": 605
+   },
+   {
+    "file": "/Users/mlacy/Documents/jupyter/node_modules/functional-red-black-tree/rbtree.js",
+    "pool": "node_modules",
+    "units": 938
+   },
+   {
+    "file": "/Users/mlacy/Documents/jupyter/node_modules/@jridgewell/source-map/dist/source-map.umd.js",
+    "pool": "node_modules",
+    "units": 838
+   }
+  ],
+  "py": [
+   {
+    "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/zipfile/__init__.py",
+    "units": 1664
+   },
+   {
+    "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/calendar.py",
+    "units": 565
+   },
+   {
+    "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/urllib/parse.py",
+    "units": 711
+   },
+   {
+    "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/mailbox.py",
+    "units": 1846
+   },
+   {
+    "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/selector_events.py",
+    "units": 965
+   },
+   {
+    "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/asyncio/base_events.py",
+    "units": 1257
+   },
+   {
+    "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/unittest/mock.py",
+    "units": 1818
+   },
+   {
+    "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/traceback.py",
+    "units": 990
+   },
+   {
+    "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pickle.py",
+    "units": 1316
+   },
+   {
+    "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/_pyio.py",
+    "units": 1655
+   },
+   {
+    "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/logging/__init__.py",
+    "units": 1125
+   },
+   {
+    "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/ntpath.py",
+    "units": 556
+   }
+  ],
+  "rb": [
+   {
+    "file": "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/csv/parser.rb",
+    "units": 850
+   },
+   {
+    "file": "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/optparse.rb",
+    "units": 860
+   },
+   {
+    "file": "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/net/ftp.rb",
+    "units": 799
+   },
+   {
+    "file": "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/matrix/eigenvalue_decomposition.rb",
+    "units": 552
+   },
+   {
+    "file": "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/rss/maker/base.rb",
+    "units": 587
+   },
+   {
+    "file": "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/debug.rb",
+    "units": 667
+   },
+   {
+    "file": "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/net/http.rb",
+    "units": 545
+   },
+   {
+    "file": "/System/Library/Frameworks/Ruby.framework/Versions/2.6/usr/lib/ruby/2.6.0/drb/drb.rb",
+    "units": 758
+   }
+  ],
+  "skipped": {
+   "ja": 3,
+   "jb": 0,
+   "py": 11,
+   "rb": 15
+  }
+ }
+}

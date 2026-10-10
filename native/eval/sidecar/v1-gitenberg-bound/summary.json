@@ -1,0 +1,224 @@
+{
+ "docs": 20,
+ "relations": 325,
+ "bothBound": 30,
+ "boundShare": 0.0923,
+ "byBasis": {
+  "witness": 30,
+  "probe": 0,
+  "mixed": 0
+ },
+ "ambiguous": 0,
+ "unbound": 295,
+ "self": 2,
+ "sample": [
+  {
+   "schema": "EORelationAssertion@1",
+   "id": "rel-assert:01-literature-books/gitenberg/pg1232_The-Prince.txt:10",
+   "relation": "THE",
+   "end1": {
+    "referent": "ref:auto:ebook",
+    "surface": "gutenberg ebook",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "end2": {
+    "referent": "ref:auto:the_prince",
+    "surface": "The Prince",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "doc": "01-literature-books/gitenberg/pg1232_The-Prince.txt",
+   "language": "eng",
+   "standing": "witnessed",
+   "witness": {
+    "doc": "01-literature-books/gitenberg/pg1232_The-Prince.txt",
+    "basis": "sidecar-projection"
+   }
+  },
+  {
+   "schema": "EORelationAssertion@1",
+   "id": "rel-assert:01-literature-books/gitenberg/pg1232_The-Prince.txt:12",
+   "relation": "was born at",
+   "end1": {
+    "referent": "ref:auto:nicolo_machiavelli",
+    "surface": "Nicolo Machiavelli",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "end2": {
+    "referent": "ref:auto:florence",
+    "surface": "Florence",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "doc": "01-literature-books/gitenberg/pg1232_The-Prince.txt",
+   "language": "eng",
+   "standing": "witnessed",
+   "witness": {
+    "doc": "01-literature-books/gitenberg/pg1232_The-Prince.txt",
+    "basis": "sidecar-projection"
+   }
+  },
+  {
+   "schema": "EORelationAssertion@1",
+   "id": "rel-assert:01-literature-books/gitenberg/pg1232_The-Prince.txt:25",
+   "relation": "of",
+   "end1": {
+    "referent": "ref:auto:life",
+    "surface": "life",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "end2": {
+    "referent": "ref:auto:lorenzo",
+    "surface": "Lorenzo",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "doc": "01-literature-books/gitenberg/pg1232_The-Prince.txt",
+   "language": "eng",
+   "standing": "witnessed",
+   "witness": {
+    "doc": "01-literature-books/gitenberg/pg1232_The-Prince.txt",
+    "basis": "sidecar-projection"
+   }
+  },
+  {
+   "schema": "EORelationAssertion@1",
+   "id": "rel-assert:01-literature-books/gitenberg/pg1404_The-Federalist-Papers.txt:42",
+   "relation": "THE",
+   "end1": {
+    "referent": "ref:auto:ebook",
+    "surface": "gutenberg ebook",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "end2": {
+    "referent": "ref:auto:the_federalist_papers",
+    "surface": "The Federalist Papers",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "doc": "01-literature-books/gitenberg/pg1404_The-Federalist-Papers.txt",
+   "language": "eng",
+   "standing": "witnessed",
+   "witness": {
+    "doc": "01-literature-books/gitenberg/pg1404_The-Federalist-Papers.txt",
+    "basis": "sidecar-projection"
+   }
+  },
+  {
+   "schema": "EORelationAssertion@1",
+   "id": "rel-assert:01-literature-books/gitenberg/pg1404_The-Federalist-Papers.txt:43",
+   "relation": ",",
+   "end1": {
+    "referent": "ref:auto:alexander_hamilton",
+    "surface": "Alexander Hamilton",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "end2": {
+    "referent": "ref:auto:john_jay",
+    "surface": "John Jay",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "doc": "01-literature-books/gitenberg/pg1404_The-Federalist-Papers.txt",
+   "language": "eng",
+   "standing": "witnessed",
+   "witness": {
+    "doc": "01-literature-books/gitenberg/pg1404_The-Federalist-Papers.txt",
+    "basis": "sidecar-projection"
+   }
+  },
+  {
+   "schema": "EORelationAssertion@1",
+   "id": "rel-assert:01-literature-books/gitenberg/pg1404_The-Federalist-Papers.txt:44",
+   "relation": ", and",
+   "end1": {
+    "referent": "ref:auto:john_jay",
+    "surface": "John Jay",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "end2": {
+    "referent": "ref:auto:james_madison",
+    "surface": "James Madison",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "doc": "01-literature-books/gitenberg/pg1404_The-Federalist-Papers.txt",
+   "language": "eng",
+   "standing": "witnessed",
+   "witness": {
+    "doc": "01-literature-books/gitenberg/pg1404_The-Federalist-Papers.txt",
+    "basis": "sidecar-projection"
+   }
+  },
+  {
+   "schema": "EORelationAssertion@1",
+   "id": "rel-assert:01-literature-books/gitenberg/pg161_Sense-and-Sensibility.txt:92",
+   "relation": "AND",
+   "end1": {
+    "referent": "ref:auto:sense",
+    "surface": "Sense",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "end2": {
+    "referent": "ref:auto:sensibility",
+    "surface": "Sensibility",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "doc": "01-literature-books/gitenberg/pg161_Sense-and-Sensibility.txt",
+   "language": "eng",
+   "standing": "witnessed",
+   "witness": {
+    "doc": "01-literature-books/gitenberg/pg161_Sense-and-Sensibility.txt",
+    "basis": "sidecar-projection"
+   }
+  },
+  {
+   "schema": "EORelationAssertion@1",
+   "id": "rel-assert:01-literature-books/gitenberg/pg215_The-Call-of-the-Wild.txt:110",
+   "relation": "THE",
+   "end1": {
+    "referent": "ref:auto:ebook",
+    "surface": "gutenberg ebook",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "end2": {
+    "referent": "ref:auto:the_call",
+    "surface": "The Call",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "doc": "01-literature-books/gitenberg/pg215_The-Call-of-the-Wild.txt",
+   "language": "eng",
+   "standing": "witnessed",
+   "witness": {
+    "doc": "01-literature-books/gitenberg/pg215_The-Call-of-the-Wild.txt",
+    "basis": "sidecar-projection"
+   }
+  }
+ ]
+}

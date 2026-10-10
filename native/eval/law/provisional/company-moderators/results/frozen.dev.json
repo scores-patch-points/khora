@@ -1,0 +1,417 @@
+{
+ "headerSha256": "bdd60db614f58d4ffd4789b8f07b97116aca67cc3fd24e52b45e6bff72d36171",
+ "devMeanAuc": {
+  "LATER": 0.61537,
+  "FIRST": 0.62359
+ },
+ "models": {
+  "LATER_M1": {
+   "w": [
+    0.6153727272727273,
+    0.0433672509712746
+   ],
+   "mu": [
+    0.3139318181818182
+   ],
+   "s": [
+    0.09705019018829596
+   ],
+   "T60": 0.2795,
+   "n": 22,
+   "devClassAtT": [
+    {
+     "l": "eng",
+     "fwc": 0.3387,
+     "auc": 0.6332,
+     "pairs": 600,
+     "inScope": true,
+     "audible": true
+    },
+    {
+     "l": "spa",
+     "fwc": 0.4388,
+     "auc": 0.693,
+     "pairs": 600,
+     "inScope": true,
+     "audible": true
+    },
+    {
+     "l": "rus",
+     "fwc": 0.2012,
+     "auc": 0.5767,
+     "pairs": 110,
+     "inScope": false,
+     "audible": false
+    },
+    {
+     "l": "cmn",
+     "fwc": 0.2216,
+     "auc": 0.6136,
+     "pairs": 365,
+     "inScope": false,
+     "audible": true
+    },
+    {
+     "l": "cmn-hans",
+     "fwc": 0.222,
+     "auc": 0.6303,
+     "pairs": 369,
+     "inScope": false,
+     "audible": true
+    },
+    {
+     "l": "heb",
+     "fwc": 0.3929,
+     "auc": 0.6848,
+     "pairs": 251,
+     "inScope": true,
+     "audible": true
+    },
+    {
+     "l": "fas",
+     "fwc": 0.3293,
+     "auc": 0.6884,
+     "pairs": 508,
+     "inScope": true,
+     "audible": true
+    },
+    {
+     "l": "jpn",
+     "fwc": 0.4293,
+     "auc": 0.6173,
+     "pairs": 84,
+     "inScope": true,
+     "audible": true
+    },
+    {
+     "l": "fra",
+     "fwc": 0.4212,
+     "auc": 0.7259,
+     "pairs": 570,
+     "inScope": true,
+     "audible": true
+    },
+    {
+     "l": "deu",
+     "fwc": 0.3258,
+     "auc": 0.5516,
+     "pairs": 116,
+     "inScope": true,
+     "audible": false
+    },
+    {
+     "l": "ita",
+     "fwc": 0.4203,
+     "auc": 0.5833,
+     "pairs": 129,
+     "inScope": true,
+     "audible": false
+    },
+    {
+     "l": "por",
+     "fwc": 0.4329,
+     "auc": 0.6548,
+     "pairs": 600,
+     "inScope": true,
+     "audible": true
+    },
+    {
+     "l": "nld",
+     "fwc": 0.3706,
+     "auc": 0.6438,
+     "pairs": 414,
+     "inScope": true,
+     "audible": true
+    },
+    {
+     "l": "pol",
+     "fwc": 0.2328,
+     "auc": 0.5497,
+     "pairs": 198,
+     "inScope": false,
+     "audible": false
+    },
+    {
+     "l": "ukr",
+     "fwc": 0.21,
+     "auc": 0.5258,
+     "pairs": 79,
+     "inScope": false,
+     "audible": false
+    },
+    {
+     "l": "hin",
+     "fwc": 0.3588,
+     "auc": 0.6567,
+     "pairs": 600,
+     "inScope": true,
+     "audible": true
+    },
+    {
+     "l": "vie",
+     "fwc": 0.236,
+     "auc": 0.5725,
+     "pairs": 600,
+     "inScope": false,
+     "audible": false
+    },
+    {
+     "l": "ind",
+     "fwc": 0.2439,
+     "auc": 0.6142,
+     "pairs": 600,
+     "inScope": false,
+     "audible": true
+    },
+    {
+     "l": "urd",
+     "fwc": 0.3643,
+     "auc": 0.6881,
+     "pairs": 600,
+     "inScope": true,
+     "audible": true
+    },
+    {
+     "l": "tur",
+     "fwc": 0.1493,
+     "auc": 0.4811,
+     "pairs": 140,
+     "inScope": false,
+     "audible": false
+    },
+    {
+     "l": "ell",
+     "fwc": 0.4057,
+     "auc": 0.6022,
+     "pairs": 147,
+     "inScope": true,
+     "audible": true
+    },
+    {
+     "l": "fin",
+     "fwc": 0.1611,
+     "auc": 0.5512,
+     "pairs": 374,
+     "inScope": false,
+     "audible": false
+    }
+   ]
+  },
+  "LATER_M1M3": {
+   "w": [
+    0.6153727272727272,
+    0.03770665322189877,
+    0.03328419497607684
+   ],
+   "mu": [
+    0.3139318181818182,
+    8.195516653516053
+   ],
+   "s": [
+    0.09705019018829596,
+    1.071844125899094
+   ],
+   "n": 22
+  },
+  "FIRST_M1": {
+   "w": [
+    0.623591304347826,
+    0.03871529587209654
+   ],
+   "mu": [
+    0.3033347826086957
+   ],
+   "s": [
+    0.10757996860135617
+   ],
+   "T60": 0.2378,
+   "n": 23,
+   "devClassAtT": [
+    {
+     "l": "eng",
+     "fwc": 0.3387,
+     "auc": 0.6468,
+     "pairs": 600,
+     "inScope": true,
+     "audible": true
+    },
+    {
+     "l": "spa",
+     "fwc": 0.4388,
+     "auc": 0.721,
+     "pairs": 600,
+     "inScope": true,
+     "audible": true
+    },
+    {
+     "l": "rus",
+     "fwc": 0.2012,
+     "auc": 0.5072,
+     "pairs": 600,
+     "inScope": false,
+     "audible": false
+    },
+    {
+     "l": "cmn",
+     "fwc": 0.2216,
+     "auc": 0.5666,
+     "pairs": 534,
+     "inScope": false,
+     "audible": false
+    },
+    {
+     "l": "cmn-hans",
+     "fwc": 0.222,
+     "auc": 0.5583,
+     "pairs": 530,
+     "inScope": false,
+     "audible": false
+    },
+    {
+     "l": "heb",
+     "fwc": 0.3929,
+     "auc": 0.7048,
+     "pairs": 251,
+     "inScope": true,
+     "audible": true
+    },
+    {
+     "l": "fas",
+     "fwc": 0.3293,
+     "auc": 0.6307,
+     "pairs": 584,
+     "inScope": true,
+     "audible": true
+    },
+    {
+     "l": "kor",
+     "fwc": 0.0702,
+     "auc": 0.5796,
+     "pairs": 67,
+     "inScope": false,
+     "audible": false
+    },
+    {
+     "l": "jpn",
+     "fwc": 0.4293,
+     "auc": 0.5669,
+     "pairs": 383,
+     "inScope": true,
+     "audible": false
+    },
+    {
+     "l": "fra",
+     "fwc": 0.4212,
+     "auc": 0.6814,
+     "pairs": 600,
+     "inScope": true,
+     "audible": true
+    },
+    {
+     "l": "deu",
+     "fwc": 0.3258,
+     "auc": 0.6771,
+     "pairs": 447,
+     "inScope": true,
+     "audible": true
+    },
+    {
+     "l": "ita",
+     "fwc": 0.4203,
+     "auc": 0.6609,
+     "pairs": 454,
+     "inScope": true,
+     "audible": true
+    },
+    {
+     "l": "por",
+     "fwc": 0.4329,
+     "auc": 0.6532,
+     "pairs": 600,
+     "inScope": true,
+     "audible": true
+    },
+    {
+     "l": "nld",
+     "fwc": 0.3706,
+     "auc": 0.6692,
+     "pairs": 533,
+     "inScope": true,
+     "audible": true
+    },
+    {
+     "l": "pol",
+     "fwc": 0.2328,
+     "auc": 0.5695,
+     "pairs": 600,
+     "inScope": false,
+     "audible": false
+    },
+    {
+     "l": "ukr",
+     "fwc": 0.21,
+     "auc": 0.5878,
+     "pairs": 296,
+     "inScope": false,
+     "audible": false
+    },
+    {
+     "l": "hin",
+     "fwc": 0.3588,
+     "auc": 0.7037,
+     "pairs": 600,
+     "inScope": true,
+     "audible": true
+    },
+    {
+     "l": "vie",
+     "fwc": 0.236,
+     "auc": 0.608,
+     "pairs": 449,
+     "inScope": false,
+     "audible": true
+    },
+    {
+     "l": "ind",
+     "fwc": 0.2439,
+     "auc": 0.6116,
+     "pairs": 600,
+     "inScope": true,
+     "audible": true
+    },
+    {
+     "l": "urd",
+     "fwc": 0.3643,
+     "auc": 0.6661,
+     "pairs": 516,
+     "inScope": true,
+     "audible": true
+    },
+    {
+     "l": "tur",
+     "fwc": 0.1493,
+     "auc": 0.5751,
+     "pairs": 260,
+     "inScope": false,
+     "audible": false
+    },
+    {
+     "l": "ell",
+     "fwc": 0.4057,
+     "auc": 0.6046,
+     "pairs": 222,
+     "inScope": true,
+     "audible": true
+    },
+    {
+     "l": "fin",
+     "fwc": 0.1611,
+     "auc": 0.5925,
+     "pairs": 600,
+     "inScope": false,
+     "audible": false
+    }
+   ]
+  }
+ }
+}

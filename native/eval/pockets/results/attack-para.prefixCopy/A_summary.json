@@ -1,0 +1,836 @@
+{
+ "P+": {
+  "nBase": 299,
+  "variants": {
+   "full": {
+    "nEval": 299,
+    "status": {
+     "P+": 299
+    },
+    "sameSignBothHalves": 299,
+    "medianExcessRatio": 1.0,
+    "nExcessRatio": 598
+   },
+   "eqTok10k": {
+    "nEval": 296,
+    "status": {
+     "M": 67,
+     "P+": 210,
+     "undef": 13,
+     "A": 6
+    },
+    "sameSignBothHalves": 270,
+    "medianExcessRatio": 1.0002172962863614,
+    "nExcessRatio": 592,
+    "expectedStatusIfEffectUnchanged": {
+     "P+": 246,
+     "M": 49,
+     "A": 1
+    }
+   },
+   "eqTok20k": {
+    "nEval": 248,
+    "status": {
+     "P+": 211,
+     "M": 29,
+     "A": 1,
+     "undef": 7
+    },
+    "sameSignBothHalves": 241,
+    "medianExcessRatio": 0.9853070848477822,
+    "nExcessRatio": 496,
+    "expectedStatusIfEffectUnchanged": {
+     "P+": 226,
+     "M": 22
+    }
+   },
+   "eqLen6": {
+    "nEval": 96,
+    "status": {
+     "P+": 81,
+     "M": 10,
+     "A": 2,
+     "undef": 3
+    },
+    "sameSignBothHalves": 91,
+    "medianExcessRatio": 1.017616388318611,
+    "nExcessRatio": 192,
+    "expectedStatusIfEffectUnchanged": {
+     "P+": 94,
+     "M": 2
+    }
+   },
+   "eqLen10": {
+    "nEval": 83,
+    "status": {
+     "P+": 60,
+     "M": 18,
+     "undef": 5
+    },
+    "sameSignBothHalves": 78,
+    "medianExcessRatio": 0.9666728082517748,
+    "nExcessRatio": 166,
+    "expectedStatusIfEffectUnchanged": {
+     "P+": 75,
+     "M": 8
+    }
+   },
+   "eqLen14": {
+    "nEval": 113,
+    "status": {
+     "P+": 78,
+     "M": 30,
+     "undef": 4,
+     "A": 1
+    },
+    "sameSignBothHalves": 103,
+    "medianExcessRatio": 0.9754206230686437,
+    "nExcessRatio": 226,
+    "expectedStatusIfEffectUnchanged": {
+     "P+": 95,
+     "M": 18
+    }
+   },
+   "eqLen22": {
+    "nEval": 78,
+    "status": {
+     "P+": 50,
+     "A": 5,
+     "M": 20,
+     "undef": 3
+    },
+    "sameSignBothHalves": 70,
+    "medianExcessRatio": 0.9762047178183131,
+    "nExcessRatio": 156,
+    "expectedStatusIfEffectUnchanged": {
+     "P+": 57,
+     "M": 21
+    }
+   },
+   "drop1pct": {
+    "nEval": 299,
+    "status": {
+     "P+": 297,
+     "undef": 1,
+     "M": 1
+    },
+    "sameSignBothHalves": 298,
+    "medianExcessRatio": 1.0,
+    "nExcessRatio": 598
+   },
+   "dropHapax": {
+    "nEval": 299,
+    "status": {
+     "P+": 290,
+     "M": 9
+    },
+    "sameSignBothHalves": 299,
+    "medianExcessRatio": 1.0445677800734883,
+    "nExcessRatio": 598
+   },
+   "dropTop20": {
+    "nEval": 299,
+    "status": {
+     "P+": 263,
+     "M": 13,
+     "undef": 23
+    },
+    "sameSignBothHalves": 275,
+    "medianExcessRatio": 0.7188175786190217,
+    "nExcessRatio": 598
+   },
+   "alt": {
+    "nEval": 291,
+    "status": {
+     "P+": 283,
+     "M": 4,
+     "undef": 4
+    },
+    "sameSignBothHalves": 287,
+    "medianExcessRatio": 1.0267942550031295,
+    "nExcessRatio": 582
+   },
+   "dedupAdj": {
+    "nEval": 299,
+    "status": {
+     "P+": 288,
+     "M": 11
+    },
+    "sameSignBothHalves": 299,
+    "medianExcessRatio": 0.9579183196734437,
+    "nExcessRatio": 598
+   },
+   "dedupAll": {
+    "nEval": 299,
+    "status": {
+     "P+": 283,
+     "M": 12,
+     "undef": 4
+    },
+    "sameSignBothHalves": 295,
+    "medianExcessRatio": 0.9871964657471755,
+    "nExcessRatio": 598
+   }
+  }
+ },
+ "P-": {
+  "nBase": 3,
+  "variants": {
+   "full": {
+    "nEval": 3,
+    "status": {
+     "P-": 3
+    },
+    "sameSignBothHalves": 3,
+    "medianExcessRatio": 1.0,
+    "nExcessRatio": 6
+   },
+   "eqTok10k": {
+    "nEval": 3,
+    "status": {
+     "M": 2,
+     "P-": 1
+    },
+    "sameSignBothHalves": 3,
+    "medianExcessRatio": 1.162777627809275,
+    "nExcessRatio": 6,
+    "expectedStatusIfEffectUnchanged": {
+     "M": 2,
+     "P-": 1
+    }
+   },
+   "eqTok20k": {
+    "nEval": 2,
+    "status": {
+     "M": 2
+    },
+    "sameSignBothHalves": 2,
+    "medianExcessRatio": 0.8879275913288047,
+    "nExcessRatio": 4,
+    "expectedStatusIfEffectUnchanged": {
+     "P-": 1,
+     "M": 1
+    }
+   },
+   "eqLen6": {
+    "nEval": 1,
+    "status": {
+     "M": 1
+    },
+    "sameSignBothHalves": 1,
+    "medianExcessRatio": 1.2248646752519317,
+    "nExcessRatio": 2,
+    "expectedStatusIfEffectUnchanged": {
+     "M": 1
+    }
+   },
+   "eqLen10": {
+    "nEval": 1,
+    "status": {
+     "M": 1
+    },
+    "sameSignBothHalves": 1,
+    "medianExcessRatio": 1.0260743353718738,
+    "nExcessRatio": 2,
+    "expectedStatusIfEffectUnchanged": {
+     "M": 1
+    }
+   },
+   "eqLen14": {
+    "nEval": 1,
+    "status": {
+     "M": 1
+    },
+    "sameSignBothHalves": 1,
+    "medianExcessRatio": 1.26976336429631,
+    "nExcessRatio": 2,
+    "expectedStatusIfEffectUnchanged": {
+     "A": 1
+    }
+   },
+   "eqLen22": {
+    "nEval": 0,
+    "status": {},
+    "sameSignBothHalves": 0,
+    "medianExcessRatio": null,
+    "nExcessRatio": 0,
+    "expectedStatusIfEffectUnchanged": {}
+   },
+   "drop1pct": {
+    "nEval": 3,
+    "status": {
+     "P-": 3
+    },
+    "sameSignBothHalves": 3,
+    "medianExcessRatio": 1.0,
+    "nExcessRatio": 6
+   },
+   "dropHapax": {
+    "nEval": 3,
+    "status": {
+     "P-": 3
+    },
+    "sameSignBothHalves": 3,
+    "medianExcessRatio": 1.019555231453705,
+    "nExcessRatio": 6
+   },
+   "dropTop20": {
+    "nEval": 3,
+    "status": {
+     "P+": 3
+    },
+    "sameSignBothHalves": 0,
+    "medianExcessRatio": -0.6245041089494796,
+    "nExcessRatio": 6
+   },
+   "alt": {
+    "nEval": 3,
+    "status": {
+     "P-": 3
+    },
+    "sameSignBothHalves": 3,
+    "medianExcessRatio": 1.0,
+    "nExcessRatio": 6
+   },
+   "dedupAdj": {
+    "nEval": 3,
+    "status": {
+     "P-": 3
+    },
+    "sameSignBothHalves": 3,
+    "medianExcessRatio": 1.5665799661966968,
+    "nExcessRatio": 6
+   },
+   "dedupAll": {
+    "nEval": 3,
+    "status": {
+     "P+": 2,
+     "M": 1
+    },
+    "sameSignBothHalves": 0,
+    "medianExcessRatio": -4.067597561749837,
+    "nExcessRatio": 6
+   }
+  }
+ },
+ "byGroup": {
+  "eqTok10k": {
+   "bk": {
+    "n": 64,
+    "P+": 33
+   },
+   "cd": {
+    "n": 74,
+    "P+": 73
+   },
+   "fm": {
+    "n": 59,
+    "P+": 48
+   },
+   "ml": {
+    "n": 61,
+    "P+": 32
+   },
+   "oc": {
+    "n": 20,
+    "P+": 15
+   },
+   "ud": {
+    "n": 18,
+    "P+": 9
+   }
+  },
+  "eqTok20k": {
+   "bk": {
+    "n": 53,
+    "P+": 38
+   },
+   "cd": {
+    "n": 71,
+    "P+": 71
+   },
+   "fm": {
+    "n": 57,
+    "P+": 54
+   },
+   "ml": {
+    "n": 47,
+    "P+": 30
+   },
+   "oc": {
+    "n": 12,
+    "P+": 12
+   },
+   "ud": {
+    "n": 8,
+    "P+": 6
+   }
+  },
+  "eqLen6": {
+   "bk": {
+    "n": 1,
+    "P+": 1
+   },
+   "cd": {
+    "n": 66,
+    "P+": 62
+   },
+   "fm": {
+    "n": 13,
+    "P+": 9
+   },
+   "ml": {
+    "n": 13,
+    "P+": 7
+   },
+   "oc": {
+    "n": 2,
+    "P+": 1
+   },
+   "ud": {
+    "n": 1,
+    "P+": 1
+   }
+  },
+  "eqLen10": {
+   "bk": {
+    "n": 10,
+    "P+": 8
+   },
+   "cd": {
+    "n": 13,
+    "P+": 11
+   },
+   "fm": {
+    "n": 24,
+    "P+": 19
+   },
+   "ml": {
+    "n": 18,
+    "P+": 7
+   },
+   "oc": {
+    "n": 14,
+    "P+": 13
+   },
+   "ud": {
+    "n": 4,
+    "P+": 2
+   }
+  },
+  "eqLen14": {
+   "bk": {
+    "n": 40,
+    "P+": 30
+   },
+   "cd": {
+    "n": 7,
+    "P+": 7
+   },
+   "fm": {
+    "n": 37,
+    "P+": 32
+   },
+   "ml": {
+    "n": 20,
+    "P+": 5
+   },
+   "oc": {
+    "n": 5,
+    "P+": 3
+   },
+   "ud": {
+    "n": 4,
+    "P+": 1
+   }
+  },
+  "eqLen22": {
+   "bk": {
+    "n": 34,
+    "P+": 18
+   },
+   "cd": {
+    "n": 5,
+    "P+": 5
+   },
+   "fm": {
+    "n": 17,
+    "P+": 17
+   },
+   "ml": {
+    "n": 19,
+    "P+": 9
+   },
+   "ud": {
+    "n": 3,
+    "P+": 1
+   }
+  },
+  "drop1pct": {
+   "bk": {
+    "n": 64,
+    "P+": 64
+   },
+   "cd": {
+    "n": 74,
+    "P+": 74
+   },
+   "fm": {
+    "n": 59,
+    "P+": 59
+   },
+   "ml": {
+    "n": 61,
+    "P+": 60
+   },
+   "oc": {
+    "n": 20,
+    "P+": 19
+   },
+   "ud": {
+    "n": 21,
+    "P+": 21
+   }
+  },
+  "dropHapax": {
+   "bk": {
+    "n": 64,
+    "P+": 61
+   },
+   "cd": {
+    "n": 74,
+    "P+": 74
+   },
+   "fm": {
+    "n": 59,
+    "P+": 59
+   },
+   "ml": {
+    "n": 61,
+    "P+": 60
+   },
+   "oc": {
+    "n": 20,
+    "P+": 20
+   },
+   "ud": {
+    "n": 21,
+    "P+": 16
+   }
+  },
+  "dropTop20": {
+   "bk": {
+    "n": 64,
+    "P+": 56
+   },
+   "cd": {
+    "n": 74,
+    "P+": 74
+   },
+   "fm": {
+    "n": 59,
+    "P+": 55
+   },
+   "ml": {
+    "n": 61,
+    "P+": 48
+   },
+   "oc": {
+    "n": 20,
+    "P+": 18
+   },
+   "ud": {
+    "n": 21,
+    "P+": 12
+   }
+  },
+  "alt": {
+   "bk": {
+    "n": 64,
+    "P+": 63
+   },
+   "cd": {
+    "n": 66,
+    "P+": 66
+   },
+   "fm": {
+    "n": 59,
+    "P+": 59
+   },
+   "ml": {
+    "n": 61,
+    "P+": 56
+   },
+   "oc": {
+    "n": 20,
+    "P+": 19
+   },
+   "ud": {
+    "n": 21,
+    "P+": 20
+   }
+  },
+  "dedupAdj": {
+   "bk": {
+    "n": 64,
+    "P+": 61
+   },
+   "cd": {
+    "n": 74,
+    "P+": 74
+   },
+   "fm": {
+    "n": 59,
+    "P+": 56
+   },
+   "ml": {
+    "n": 61,
+    "P+": 57
+   },
+   "oc": {
+    "n": 20,
+    "P+": 19
+   },
+   "ud": {
+    "n": 21,
+    "P+": 21
+   }
+  },
+  "dedupAll": {
+   "bk": {
+    "n": 64,
+    "P+": 60
+   },
+   "cd": {
+    "n": 74,
+    "P+": 74
+   },
+   "fm": {
+    "n": 59,
+    "P+": 59
+   },
+   "ml": {
+    "n": 61,
+    "P+": 54
+   },
+   "oc": {
+    "n": 20,
+    "P+": 20
+   },
+   "ud": {
+    "n": 21,
+    "P+": 16
+   }
+  }
+ },
+ "byGrain": {
+  "eqTok10k": {
+   "charbigram": {
+    "n": 7,
+    "P+": 3
+   },
+   "code": {
+    "n": 63,
+    "P+": 63
+   },
+   "notation": {
+    "n": 8,
+    "P+": 7
+   },
+   "word": {
+    "n": 218,
+    "P+": 137
+   }
+  },
+  "eqTok20k": {
+   "charbigram": {
+    "n": 4,
+    "P+": 4
+   },
+   "code": {
+    "n": 61,
+    "P+": 61
+   },
+   "notation": {
+    "n": 8,
+    "P+": 8
+   },
+   "word": {
+    "n": 175,
+    "P+": 138
+   }
+  },
+  "eqLen6": {
+   "charbigram": {
+    "n": 2,
+    "P+": 2
+   },
+   "code": {
+    "n": 60,
+    "P+": 59
+   },
+   "notation": {
+    "n": 5,
+    "P+": 2
+   },
+   "word": {
+    "n": 29,
+    "P+": 18
+   }
+  },
+  "eqLen10": {
+   "charbigram": {
+    "n": 3,
+    "P+": 1
+   },
+   "code": {
+    "n": 12,
+    "P+": 10
+   },
+   "word": {
+    "n": 68,
+    "P+": 49
+   }
+  },
+  "eqLen14": {
+   "charbigram": {
+    "n": 1,
+    "P+": 0
+   },
+   "code": {
+    "n": 2,
+    "P+": 2
+   },
+   "notation": {
+    "n": 3,
+    "P+": 3
+   },
+   "word": {
+    "n": 107,
+    "P+": 73
+   }
+  },
+  "eqLen22": {
+   "charbigram": {
+    "n": 2,
+    "P+": 1
+   },
+   "code": {
+    "n": 2,
+    "P+": 2
+   },
+   "notation": {
+    "n": 2,
+    "P+": 2
+   },
+   "word": {
+    "n": 72,
+    "P+": 45
+   }
+  },
+  "drop1pct": {
+   "charbigram": {
+    "n": 7,
+    "P+": 7
+   },
+   "code": {
+    "n": 63,
+    "P+": 63
+   },
+   "notation": {
+    "n": 8,
+    "P+": 8
+   },
+   "word": {
+    "n": 221,
+    "P+": 219
+   }
+  },
+  "dropHapax": {
+   "charbigram": {
+    "n": 7,
+    "P+": 7
+   },
+   "code": {
+    "n": 63,
+    "P+": 63
+   },
+   "notation": {
+    "n": 8,
+    "P+": 8
+   },
+   "word": {
+    "n": 221,
+    "P+": 212
+   }
+  },
+  "dropTop20": {
+   "charbigram": {
+    "n": 7,
+    "P+": 6
+   },
+   "code": {
+    "n": 63,
+    "P+": 63
+   },
+   "notation": {
+    "n": 8,
+    "P+": 8
+   },
+   "word": {
+    "n": 221,
+    "P+": 186
+   }
+  },
+  "alt": {
+   "charbigram": {
+    "n": 7,
+    "P+": 2
+   },
+   "code": {
+    "n": 63,
+    "P+": 63
+   },
+   "word": {
+    "n": 221,
+    "P+": 218
+   }
+  },
+  "dedupAdj": {
+   "charbigram": {
+    "n": 7,
+    "P+": 7
+   },
+   "code": {
+    "n": 63,
+    "P+": 63
+   },
+   "notation": {
+    "n": 8,
+    "P+": 8
+   },
+   "word": {
+    "n": 221,
+    "P+": 210
+   }
+  },
+  "dedupAll": {
+   "charbigram": {
+    "n": 7,
+    "P+": 7
+   },
+   "code": {
+    "n": 63,
+    "P+": 63
+   },
+   "notation": {
+    "n": 8,
+    "P+": 8
+   },
+   "word": {
+    "n": 221,
+    "P+": 205
+   }
+  }
+ }
+}

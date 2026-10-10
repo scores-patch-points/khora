@@ -1,0 +1,385 @@
+#!/usr/bin/env python3
+"""
+Read all ten CaseLink case tabs as OBSERVATIONS.
+
+Design notes in OBSERVATIONS.md. The three things this file exists to get
+right, each of which produced a wrong answer during probing:
+
+1. TABS ARE ADDRESSED BY ID, AND THE SWITCH MUST BE PROVEN.
+   Clicking an element whose text matches the tab name does nothing; the page
+   keeps showing Pleadings, so a naive loop silently returns ten copies of one
+   grid. Tabs are `#L_TAB_<n>_ACT` / `_INACT`, and the suffix tells you which
+   one is live -- so after clicking tab n we assert `L_TAB_<n>_ACT` exists
+   before reading anything. No assertion, no record.
+
+2. THE CLICK IS A SERVER ROUND-TRIP, NOT A DOM TOGGLE.
+   It POSTs to cgi-bin/webshell.asp and the response redirects a frame to a
+   generated /gsapdfs/<id>.<EVENT>.html document. The old frame blanks in the
+   meantime, so a fixed sleep plus "first frame with inputs" reads the
+   plumbing frame or stale content.
+
+3. READ THE RENDERED GRID, NOT Gvals INDICES.
+   Gvals carries buffers that do not correspond to the visible table: on
+   26GT877 the Judgments tab displays an empty grid while Gvals[63/65/66/68]
+   hold a date, a party, an amount and "HOLT". Reading those as a judgment
+   invents one, against a named party. Rendered inputs carry clean row names.
+"""
+import re, json, hashlib, asyncio, logging
+from datetime import datetime
+
+logger = logging.getLogger("deep")
+
+# index -> canonical key. Labels come off the page; these are our field names.
+TABS = {
+    1:  "pleadings",
+    2:  "general",
+    3:  "payments",
+    4:  "unpaid_costs",
+    5:  "services",
+    6:  "court_dates",
+    7:  "judgments",
+    8:  "executions",
+    9:  "witnesses",
+    10: "bankruptcy",
+}
+
+# Grid cells are inputs named <GROUP>_<col>_<row>, e.g. TRN_1_4, NFO_8_1.
+CELL_RE = re.compile(r"^([A-Za-z]+)_(\d+)_(\d+)$")
+
+# Which input columns belong to which tab.
+#
+# The DOM carries EVERY tab's fields at once, all reporting as visible, so
+# neither "what is on the page" nor "what is visible" attributes a column to a
+# tab. Each tab owns a contiguous P_<n> band instead. This map is observed, not
+# assumed:
+#   * judgments P_61-P_66 has been documented in parse_judgments for years
+#     (P_61 date, P_63 names, P_64 judgment, P_66 judge)
+#   * P_71-P_78 populate ONLY on a case that has an execution (25GT7460) and
+#     are absent on one that does not (26GT877) -- that is the executions band
+#   * P_324-P_331 hold receipt date / receipt no / amounts: payments
+#   * P_41-P_47 match the service block (party, process, issued, return,
+#     result, server); P_51-P_56 the court-date block (date, time, room)
+#   * TRN_* is the docket event grid: pleadings
+# Anything outside these bands is kept under "unattributed" rather than being
+# pinned to whichever tab happened to be active -- misattribution is the one
+# failure that cannot be corrected later, because it looks like data.
+BANDS = {
+    "pleadings":    lambda g, n: g == "TRN",
+    "general":      lambda g, n: g == "NFO" or (g == "P" and n in (9, 12)),
+    "unpaid_costs": lambda g, n: g == "P" and n in (22, 24, 25, 26),
+    "payments":     lambda g, n: g == "P" and 324 <= n <= 331,
+    "services":     lambda g, n: g == "P" and 41 <= n <= 47,
+    "court_dates":  lambda g, n: g == "P" and 51 <= n <= 56,
+    "judgments":    lambda g, n: g == "P" and 61 <= n <= 66,
+    "executions":   lambda g, n: g == "P" and (71 <= n <= 78 or 190 <= n <= 237),
+    # witnesses / bankruptcy: no case seen yet with rows on either, so no band
+    # is claimed for them. They read as empty until one is observed.
+    "witnesses":    lambda g, n: False,
+    "bankruptcy":   lambda g, n: False,
+}
+
+
+def band_for(tab, key):
+    """Does column `key` (e.g. 'P_63') belong to `tab`?"""
+    m = re.match(r"^([A-Za-z]+)_(\d+)$", key)
+    if not m:
+        return False
+    g, n = m.group(1), int(m.group(2))
+    fn = BANDS.get(tab)
+    return bool(fn and fn(g, n))
+
+
+# Page plumbing that is not case data and must never be recorded.
+PLUMBING = {
+    "APPID", "CURRPROCESS", "DEVPATH", "FINDDEFKEY", "GATEWAY", "LINENBR",
+    "OPERCODE", "PARENT", "STDURL", "WEBIOHANDLE", "XEVENT", "SEARCHCASE",
+    "Help_Btn",
+}
+
+# BOTH L_TAB_<n>_ACT and L_TAB_<n>_INACT exist for every tab, always -- they
+# are pre-rendered pairs the page toggles by visibility, and the hidden one
+# carries no text. So "the ACT element exists" is true for all ten tabs at all
+# times and proves nothing; an assertion built on it can never resolve. What
+# actually distinguishes the live tab is which half of the pair is VISIBLE.
+_TAB_STATE = """
+() => {
+  const seen = {};
+  document.querySelectorAll('[id^="L_TAB_"]').forEach(el => {
+    const m = el.id.match(/^L_TAB_(\\d+)_(ACT|INACT)$/);
+    if (!m) return;
+    const idx = m[1], half = m[2];
+    const txt = (el.innerText || '').trim();
+    const visible = el.offsetParent !== null && txt !== '';
+    const rec = seen[idx] || (seen[idx] = { state: 'INACT', label: '' });
+    if (visible) {
+      rec.state = half;
+      rec.label = txt.slice(0, 24);
+    } else if (!rec.label && txt) {
+      rec.label = txt.slice(0, 24);
+    }
+  });
+  return seen;
+}"""
+
+_CLICK_TAB = """
+(idx) => {
+  for (const suffix of ['INACT', 'ACT']) {
+    const el = document.getElementById('L_TAB_' + idx + '_' + suffix);
+    if (el) { el.click(); return true; }
+  }
+  return false;
+}"""
+
+_READ_GRID = """
+() => {
+  const cells = [];
+  document.querySelectorAll('input').forEach(i => {
+    const name = i.getAttribute('pfx') || i.name || i.id || '';
+    if (!name) return;
+    const v = (i.value == null ? '' : String(i.value)).trim();
+    cells.push({ name, v, vis: i.offsetParent !== null });
+  });
+  const txt = document.body.innerText || '';
+  const m = txt.match(/of\\s+(\\d+)\\s+Lines/);
+  return { cells, lines: m ? parseInt(m[1], 10) : null };
+}"""
+
+
+async def _tab_states(page):
+    """Merged tab state across EVERY frame.
+
+    Not "the first frame that has tab ids": the case page keeps several frames
+    alive, and a stale one holds a full tab bar with everything INACT. Reading
+    that frame made even Pleadings -- which is ACT the moment the case opens --
+    look inactive, and every tab then timed out waiting for a state change that
+    had already happened somewhere else.
+
+    So scan them all and let ACT win: if any live frame reports tab n active,
+    it is active.
+    """
+    merged, owner = {}, None
+    for f in page.frames:
+        try:
+            st = await f.evaluate(_TAB_STATE)
+        except Exception:
+            continue
+        if not st:
+            continue
+        owner = owner or f
+        for idx, info in st.items():
+            prev = merged.get(idx)
+            if prev is None or (prev.get("state") != "ACT" and info.get("state") == "ACT"):
+                merged[idx] = info
+                if info.get("state") == "ACT":
+                    owner = f
+    return owner, merged
+
+
+async def open_tab(page, idx, timeout_ms=9000):
+    """Click tab `idx` and wait until the page reports it ACTIVE.
+
+    Returns True only when `L_TAB_<idx>_ACT` exists afterwards. Anything else
+    is a failed switch and the caller must not record a grid for this tab.
+    """
+    frame, states = await _tab_states(page)
+    if not states:
+        return False
+    if states.get(str(idx), {}).get("state") == "ACT":
+        return True
+
+    clicked = False
+    for f in page.frames:
+        try:
+            if await f.evaluate(_CLICK_TAB, idx):
+                clicked = True
+                break
+        except Exception:
+            continue
+    if not clicked:
+        return False
+
+    waited = 0
+    while waited < timeout_ms:
+        await page.wait_for_timeout(400)
+        waited += 400
+        _, st = await _tab_states(page)
+        if st.get(str(idx), {}).get("state") == "ACT":
+            # The tab bar flips before the grid document finishes arriving.
+            await page.wait_for_timeout(700)
+            return True
+    return False
+
+
+async def read_grid(page, tab=None):
+    """Rows from whichever frame currently holds the most grid cells.
+
+    Picking the frame by cell count rather than "first frame with inputs":
+    the case page nests a container frame (tab bar, cost summary, ~270 static
+    inputs) around the frame holding the actual grid, and the container
+    answers first.
+    """
+    best, best_score = None, -1
+    for f in page.frames:
+        try:
+            r = await f.evaluate(_READ_GRID)
+        except Exception:
+            continue
+        if not r:
+            continue
+        score = sum(1 for c in r["cells"] if CELL_RE.match(c["name"]) and c["v"])
+        if score > best_score:
+            best, best_score = r, score
+    if not best:
+        return {"rows": [], "lines": None, "columns": []}
+
+    # The page keeps the case header and the previous tab's rows in the DOM,
+    # so harvesting every row-shaped input returns the same ~12 rows on all ten
+    # tabs -- the silent-duplicate failure again, one layer down. The page's own
+    # "of N Lines" counter is the authority on how many rows the ACTIVE grid
+    # has, and it does change per tab. Trust it.
+    lines = best.get("lines")
+
+    # The DOM holds EVERY tab's fields at once -- which is why grouping by name
+    # prefix returned the same union on each tab. The page switches tabs by
+    # toggling visibility, so the active grid is, literally, the visible one.
+    # Hidden cells are other tabs' data and must not be attributed to this tab.
+    by_row, cols = {}, set()
+    for c in best["cells"]:
+        if c["name"] in PLUMBING or not c["v"]:
+            continue
+        m = CELL_RE.match(c["name"])
+        if not m:
+            continue
+        group, col, row = m.group(1), m.group(2), int(m.group(3))
+        key = f"{group}_{col}"
+        by_row.setdefault(row, {})[key] = c["v"]
+        if key not in _HEADER_KEYS:
+            cols.add(key)
+
+    if lines == 0:
+        # The tab is genuinely empty. Anything still in the DOM belongs to the
+        # case header or a previous tab, and recording it here would invent
+        # executions on a case that has none.
+        return {"rows": [], "lines": 0, "columns": [], "header": _header(by_row)}
+
+    # Strip the case-level fields out of the rows. Left in, they dominate every
+    # row on every tab and make ten different grids hash identical -- the same
+    # silent-duplicate failure, one layer further down.
+    hdr = _header(by_row)
+    ordered, unattributed = [], {}
+    for k in sorted(by_row):
+        row, rest = {}, {}
+        for kk, vv in by_row[k].items():
+            if kk in _HEADER_KEYS:
+                continue
+            if tab is None or band_for(tab, kk):
+                row[kk] = vv
+            elif not any(band_for(t, kk) for t in BANDS):
+                rest[kk] = vv          # belongs to no known band at all
+        if row:
+            ordered.append(row)
+        if rest:
+            unattributed[k] = rest
+    if lines is not None:
+        ordered = ordered[:lines]
+    return {"rows": ordered, "lines": lines,
+            "columns": sorted(c for c in cols if tab is None or band_for(tab, c)),
+            "header": hdr, "unattributed": unattributed}
+
+
+# Case-level fields repeat on every tab (cost summary, party names). They are
+# not grid rows; keeping them separate stops them padding every tab's rows and
+# making ten different grids look identical.
+_HEADER_KEYS = {"P_16", "P_17", "P_18", "P_19", "NFO_3", "NFO_8", "P_1", "P_2", "P_21"}
+
+
+def _header(by_row):
+    out = {}
+    for row in by_row.values():
+        for k, v in row.items():
+            if k in _HEADER_KEYS and k not in out:
+                out[k] = v
+    return out
+
+
+def digest(rows):
+    """Stable fingerprint of a grid. Equal digests mean NUL -- we looked and
+    nothing changed -- which is a different fact from never having looked."""
+    return "sha256:" + hashlib.sha256(
+        json.dumps(rows, sort_keys=True, separators=(",", ":")).encode()
+    ).hexdigest()[:32]
+
+
+async def scrape_all_tabs(page, docket, alias="?", only=None, now_iso=None):
+    """Observe every tab for one case.
+
+    Returns {tab_key: {rows, lines, columns, digest, observed_at, src,
+                       switched}}. A tab whose switch could not be proven is
+    recorded with switched=False and NO rows, so a failed read can never be
+    mistaken for an empty tab -- "the county holds nothing here" and "we could
+    not look" are different answers.
+    """
+    now_iso = now_iso or datetime.utcnow().isoformat()
+    want = {i: k for i, k in TABS.items() if not only or k in only}
+    out = {}
+    for idx, key in sorted(want.items()):
+        try:
+            ok = await open_tab(page, idx)
+            if not ok:
+                out[key] = {"switched": False, "rows": [], "lines": None,
+                            "columns": [], "digest": None,
+                            "observed_at": now_iso, "src": alias}
+                logger.warning(f"    {docket} {key}: tab did not activate")
+                continue
+            g = await read_grid(page, key)
+            out[key] = {
+                "switched": True,
+                "rows": g["rows"],
+                "lines": g["lines"],
+                "columns": g["columns"],
+                "unattributed": g.get("unattributed") or {},
+                "digest": digest(g["rows"]),
+                "observed_at": now_iso,
+                "src": alias,
+            }
+            logger.info(f"    {docket} {key}: {len(g['rows'])} rows "
+                        f"(lines={g['lines']}, cols={len(g['columns'])})")
+        except Exception as e:
+            out[key] = {"switched": False, "rows": [], "lines": None,
+                        "columns": [], "digest": None,
+                        "observed_at": now_iso, "src": alias,
+                        "error": f"{type(e).__name__}: {str(e)[:100]}"}
+            logger.warning(f"    {docket} {key}: {type(e).__name__}: {str(e)[:80]}")
+    return out
+
+
+# ---------------------------------------------------------------------------
+# Signals derived from observations, never stored as conclusions.
+# ---------------------------------------------------------------------------
+
+GARNISH_RE = re.compile(r"GARNISH", re.I)
+EXEC_RE    = re.compile(r"\bEXECUT|WRIT|LEVY", re.I)
+MONEY_RE   = re.compile(r"\$?\s*([0-9][0-9,]*\.\d{2})")
+
+
+def garnishment_signal(obs):
+    """Is there wage garnishment activity on this case?
+
+    Derived here rather than stored as a boolean so the definition can be
+    corrected once and re-run over history. Reads the executions grid when we
+    have it and falls back to the docket text otherwise.
+    """
+    hits, amounts = [], []
+    for key in ("executions", "pleadings", "judgments"):
+        tab = obs.get(key) or {}
+        for row in tab.get("rows") or []:
+            blob = " ".join(str(v) for v in row.values())
+            if GARNISH_RE.search(blob) or EXEC_RE.search(blob):
+                hits.append({"tab": key, "text": blob[:160]})
+                amounts += [float(m.replace(",", "")) for m in MONEY_RE.findall(blob)]
+    return {
+        "garnishment": any(GARNISH_RE.search(h["text"]) for h in hits),
+        "execution": bool(hits),
+        "events": hits[:20],
+        "amounts": sorted(set(amounts))[:10],
+    }

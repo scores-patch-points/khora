@@ -1,0 +1,847 @@
+{
+ "reproduce": {
+  "register": {
+   "eta2": 0.25157135716712625,
+   "p": 0.0004997501249375312,
+   "levels": 35
+  },
+  "group": {
+   "eta2": 0.12124981941532337,
+   "p": 0.0004997501249375312,
+   "levels": 6
+  },
+  "script": {
+   "eta2": 0.046158313940222295,
+   "p": 0.09795102448775612,
+   "levels": 10
+  }
+ },
+ "nullEta2Register": {
+  "mean": 0.08779813564455993,
+  "sd": 0.029143460469386095
+ },
+ "leaveOnePocketOut": [
+  {
+   "dropped": "cd-abc-lieder",
+   "eta2": 0.25526920694003286,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "cd-bpmn-activiti",
+   "eta2": 0.2320821359059363,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "cd-bpmn-camunda",
+   "eta2": 0.2320821359059363,
+   "p": 0.0033277870216306157
+  },
+  {
+   "dropped": "cd-bpmn-kogito",
+   "eta2": 0.2320821359059363,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "cd-bpmn-miwg",
+   "eta2": 0.2320821359059363,
+   "p": 0.004991680532445923
+  },
+  {
+   "dropped": "cd-cc-cpp",
+   "eta2": 0.24797544265730387,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "cd-cc-csharp",
+   "eta2": 0.24797544265730387,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "cd-cc-css",
+   "eta2": 0.25757069204605054,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "cd-cc-dart",
+   "eta2": 0.24797544265730387,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "cd-cc-fortran",
+   "eta2": 0.24797544265730387,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "cd-cc-java",
+   "eta2": 0.24797544265730387,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "cd-cc-kotlin",
+   "eta2": 0.24797544265730387,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "cd-cc-ocaml",
+   "eta2": 0.24797544265730387,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "cd-cc-perl",
+   "eta2": 0.24797544265730387,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "cd-cc-php",
+   "eta2": 0.24797544265730387,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "cd-cc-python",
+   "eta2": 0.24797544265730387,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "cd-cc-scala",
+   "eta2": 0.24797544265730387,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "cd-cc-verilog",
+   "eta2": 0.24797544265730387,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "cd-dot",
+   "eta2": 0.2320821359059363,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "cd-e09-c",
+   "eta2": 0.24797544265730387,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "cd-musicxml",
+   "eta2": 0.25526920694003286,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "fm-udhr-bigram",
+   "eta2": 0.2613428650231947,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "fm-udhr-cyrl",
+   "eta2": 0.2613428650231947,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "ml-arb-fihrist",
+   "eta2": 0.25188743290670074,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "ml-en-hippocrates",
+   "eta2": 0.26078546489255144,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "ml-grc-hellenistic-hist",
+   "eta2": 0.25188743290670074,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "ml-grc-plato",
+   "eta2": 0.26083698368816843,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "ml-jpn-soseki",
+   "eta2": 0.26290044702840726,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "ml-lzh-jiuzhang",
+   "eta2": 0.26083698368816843,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "ml-lzh-shuowen",
+   "eta2": 0.24672083368911002,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "oc-nussms-zh",
+   "eta2": 0.24672083368911002,
+   "p": 0.0016638935108153079
+  }
+ ],
+ "leaveOneRegisterOut": {
+  "book": {
+   "n": 365,
+   "present": 30,
+   "eta2": 0.2597982003614446,
+   "p": 0.000999000999000999
+  },
+  "code": {
+   "n": 337,
+   "present": 18,
+   "eta2": 0.3001755427656319,
+   "p": 0.001998001998001998
+  },
+  "diagram": {
+   "n": 377,
+   "present": 26,
+   "eta2": 0.1779327921395991,
+   "p": 0.017982017982017984
+  },
+  "history": {
+   "n": 376,
+   "present": 29,
+   "eta2": 0.25912466459131134,
+   "p": 0.000999000999000999
+  },
+  "legal": {
+   "n": 353,
+   "present": 29,
+   "eta2": 0.26900524268894077,
+   "p": 0.000999000999000999
+  },
+  "lexicon": {
+   "n": 382,
+   "present": 30,
+   "eta2": 0.24655320985373944,
+   "p": 0.000999000999000999
+  },
+  "markup": {
+   "n": 379,
+   "present": 30,
+   "eta2": 0.25690417363122514,
+   "p": 0.000999000999000999
+  },
+  "notation": {
+   "n": 373,
+   "present": 29,
+   "eta2": 0.26372493364168414,
+   "p": 0.001998001998001998
+  },
+  "sms": {
+   "n": 382,
+   "present": 30,
+   "eta2": 0.24655320985373944,
+   "p": 0.000999000999000999
+  },
+  "translation": {
+   "n": 375,
+   "present": 30,
+   "eta2": 0.25944281163318955,
+   "p": 0.000999000999000999
+  },
+  "treatise": {
+   "n": 357,
+   "present": 29,
+   "eta2": 0.269020152371943,
+   "p": 0.000999000999000999
+  },
+  "code+diagram": {
+   "n": 330,
+   "present": 13,
+   "eta2": 0.15954977475600038,
+   "p": 0.1068931068931069
+  },
+  "code+diagram+markup+notation+config": {
+   "n": 311,
+   "present": 10,
+   "eta2": 0.16731796775426103,
+   "p": 0.1008991008991009
+  }
+ },
+ "registerWithinGroup": {
+  "eta2": 0.25157135716712625,
+  "p": 0.04097951024487756
+ },
+ "registerWithinCdOnly": {
+  "n": 82,
+  "present": 21,
+  "eta2": 0.15060608001960335,
+  "p": 0.17341329335332334
+ },
+ "registerOutsideCd": {
+  "n": 302,
+  "present": 10,
+  "eta2": 0.16649273118968677,
+  "p": 0.06896551724137931
+ },
+ "signSplit": {
+  "n": 31,
+  "pos": 14,
+  "eta2": 0.6493212669683258,
+  "p": 0.001999000499750125,
+  "levels": 11
+ },
+ "signSplitLOO": [
+  {
+   "dropped": "cd-abc-lieder",
+   "eta2": 0.6394230769230769,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "cd-bpmn-activiti",
+   "eta2": 0.6394230769230769,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "cd-bpmn-camunda",
+   "eta2": 0.6394230769230769,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "cd-bpmn-kogito",
+   "eta2": 0.6394230769230769,
+   "p": 0.0033277870216306157
+  },
+  {
+   "dropped": "cd-bpmn-miwg",
+   "eta2": 0.6394230769230769,
+   "p": 0.004991680532445923
+  },
+  {
+   "dropped": "cd-cc-cpp",
+   "eta2": 0.6380090497737557,
+   "p": 0.0033277870216306157
+  },
+  {
+   "dropped": "cd-cc-csharp",
+   "eta2": 0.7433035714285714,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "cd-cc-css",
+   "eta2": 0.6394230769230769,
+   "p": 0.0033277870216306157
+  },
+  {
+   "dropped": "cd-cc-dart",
+   "eta2": 0.6380090497737557,
+   "p": 0.0033277870216306157
+  },
+  {
+   "dropped": "cd-cc-fortran",
+   "eta2": 0.6380090497737557,
+   "p": 0.008319467554076539
+  },
+  {
+   "dropped": "cd-cc-java",
+   "eta2": 0.6380090497737557,
+   "p": 0.008319467554076539
+  },
+  {
+   "dropped": "cd-cc-kotlin",
+   "eta2": 0.6380090497737557,
+   "p": 0.0033277870216306157
+  },
+  {
+   "dropped": "cd-cc-ocaml",
+   "eta2": 0.6380090497737557,
+   "p": 0.004991680532445923
+  },
+  {
+   "dropped": "cd-cc-perl",
+   "eta2": 0.6380090497737557,
+   "p": 0.008319467554076539
+  },
+  {
+   "dropped": "cd-cc-php",
+   "eta2": 0.7433035714285714,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "cd-cc-python",
+   "eta2": 0.6380090497737557,
+   "p": 0.0033277870216306157
+  },
+  {
+   "dropped": "cd-cc-scala",
+   "eta2": 0.6380090497737557,
+   "p": 0.0033277870216306157
+  },
+  {
+   "dropped": "cd-cc-verilog",
+   "eta2": 0.6380090497737557,
+   "p": 0.004991680532445923
+  },
+  {
+   "dropped": "cd-dot",
+   "eta2": 0.6394230769230769,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "cd-e09-c",
+   "eta2": 0.6380090497737557,
+   "p": 0.0033277870216306157
+  },
+  {
+   "dropped": "cd-musicxml",
+   "eta2": 0.6394230769230769,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "fm-udhr-bigram",
+   "eta2": 0.6394230769230769,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "fm-udhr-cyrl",
+   "eta2": 0.6394230769230769,
+   "p": 0.0033277870216306157
+  },
+  {
+   "dropped": "ml-arb-fihrist",
+   "eta2": 0.7063873626373626,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "ml-en-hippocrates",
+   "eta2": 0.6394230769230769,
+   "p": 0.0033277870216306157
+  },
+  {
+   "dropped": "ml-grc-hellenistic-hist",
+   "eta2": 0.7024016707274625,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "ml-grc-plato",
+   "eta2": 0.7024016707274625,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "ml-jpn-soseki",
+   "eta2": 0.6394230769230769,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "ml-lzh-jiuzhang",
+   "eta2": 0.7063873626373626,
+   "p": 0.0016638935108153079
+  },
+  {
+   "dropped": "ml-lzh-shuowen",
+   "eta2": 0.6345283675600417,
+   "p": 0.0033277870216306157
+  },
+  {
+   "dropped": "oc-nussms-zh",
+   "eta2": 0.6394230769230769,
+   "p": 0.0033277870216306157
+  }
+ ],
+ "heterogeneity": [
+  {
+   "stat": "fig.introRight",
+   "het": 2.376582664792385,
+   "hetAbs": 1.7779377719540497,
+   "nPresent": 31,
+   "pos": 9,
+   "neg": 22,
+   "atlasHet": 2.377,
+   "rank": 1,
+   "rankAbs": 3
+  },
+  {
+   "stat": "order.entSlope",
+   "het": 2.1781493246169013,
+   "hetAbs": 1.5567833623760339,
+   "nPresent": 245,
+   "pos": 109,
+   "neg": 136,
+   "atlasHet": 2.178,
+   "rank": 2,
+   "rankAbs": 4
+  },
+  {
+   "stat": "order.depLen",
+   "het": 2.1352808676146138,
+   "hetAbs": 1.32298978801278,
+   "nPresent": 140,
+   "pos": 91,
+   "neg": 49,
+   "atlasHet": 2.135,
+   "rank": 3,
+   "rankAbs": 6
+  },
+  {
+   "stat": "para.prefixCopy",
+   "het": 2.015744512532621,
+   "hetAbs": 2.015744512532621,
+   "nPresent": 302,
+   "pos": 302,
+   "neg": 0,
+   "atlasHet": 2.016,
+   "rank": 4,
+   "rankAbs": 1
+  },
+  {
+   "stat": "para.suffixCopy",
+   "het": 1.9299190167114029,
+   "hetAbs": 1.9299190167114029,
+   "nPresent": 279,
+   "pos": 279,
+   "neg": 0,
+   "atlasHet": 1.93,
+   "rank": 5,
+   "rankAbs": 2
+  },
+  {
+   "stat": "comp.asym",
+   "het": 1.9288116443960575,
+   "hetAbs": 0.9916099345603604,
+   "nPresent": 214,
+   "pos": 116,
+   "neg": 98,
+   "atlasHet": 1.929,
+   "rank": 6,
+   "rankAbs": 9
+  },
+  {
+   "stat": "order.entCurv",
+   "het": 1.8717587751866358,
+   "hetAbs": 1.330320516396687,
+   "nPresent": 179,
+   "pos": 126,
+   "neg": 53,
+   "atlasHet": 1.872,
+   "rank": 7,
+   "rankAbs": 5
+  },
+  {
+   "stat": "order.rareCurve",
+   "het": 1.8057897946528128,
+   "hetAbs": 1.1215070220876306,
+   "nPresent": 255,
+   "pos": 174,
+   "neg": 81,
+   "atlasHet": 1.806,
+   "rank": 8,
+   "rankAbs": 7
+  },
+  {
+   "stat": "freq.menzerath",
+   "het": 1.4936989990324305,
+   "hetAbs": 0.7772550673016007,
+   "nPresent": 214,
+   "pos": 55,
+   "neg": 159,
+   "atlasHet": 1.494,
+   "rank": 9,
+   "rankAbs": 15
+  },
+  {
+   "stat": "burst.repAdj",
+   "het": 1.169824219085032,
+   "hetAbs": 0.714540147761229,
+   "nPresent": 346,
+   "pos": 81,
+   "neg": 265,
+   "atlasHet": 1.17,
+   "rank": 10,
+   "rankAbs": 16
+  },
+  {
+   "stat": "order.surprGrow",
+   "het": 1.057251047368828,
+   "hetAbs": 1.0251877664591524,
+   "nPresent": 274,
+   "pos": 50,
+   "neg": 224,
+   "atlasHet": 1.057,
+   "rank": 11,
+   "rankAbs": 8
+  },
+  {
+   "stat": "order.fnBefore",
+   "het": 1.02244667586786,
+   "hetAbs": 0.9565187628057225,
+   "nPresent": 154,
+   "pos": 124,
+   "neg": 30,
+   "atlasHet": 1.022,
+   "rank": 12,
+   "rankAbs": 10
+  },
+  {
+   "stat": "burst.kerSlope",
+   "het": 0.9900130629903731,
+   "hetAbs": 0.7989096039426873,
+   "nPresent": 360,
+   "pos": 287,
+   "neg": 73,
+   "atlasHet": 0.99,
+   "rank": 13,
+   "rankAbs": 14
+  },
+  {
+   "stat": "phys.affectAsym",
+   "het": 0.9228646078992455,
+   "hetAbs": 0.6730552172637326,
+   "nPresent": 68,
+   "pos": 57,
+   "neg": 11,
+   "atlasHet": 0.9229,
+   "rank": 14,
+   "rankAbs": 19
+  },
+  {
+   "stat": "fig.introLeft",
+   "het": 0.8677089346424074,
+   "hetAbs": 0.8655145851350264,
+   "nPresent": 56,
+   "pos": 3,
+   "neg": 53,
+   "atlasHet": 0.8677,
+   "rank": 15,
+   "rankAbs": 12
+  },
+  {
+   "stat": "fig.introLeftFq",
+   "het": 0.8605193727649977,
+   "hetAbs": 0.7118949369459743,
+   "nPresent": 31,
+   "pos": 5,
+   "neg": 26,
+   "atlasHet": 0.8605,
+   "rank": 16,
+   "rankAbs": 17
+  },
+  {
+   "stat": "fig.initEnrich",
+   "het": 0.8552694648456486,
+   "hetAbs": 0.8673037212338981,
+   "nPresent": 311,
+   "pos": 293,
+   "neg": 18,
+   "atlasHet": 0.8553,
+   "rank": 17,
+   "rankAbs": 11
+  },
+  {
+   "stat": "order.initDev",
+   "het": 0.7681076194197227,
+   "hetAbs": 0.6764987262629025,
+   "nPresent": 335,
+   "pos": 38,
+   "neg": 297,
+   "atlasHet": 0.7681,
+   "rank": 18,
+   "rankAbs": 18
+  },
+  {
+   "stat": "order.rareSlope",
+   "het": 0.7536227769455188,
+   "hetAbs": 0.8087164593542052,
+   "nPresent": 356,
+   "pos": 329,
+   "neg": 27,
+   "atlasHet": 0.7536,
+   "rank": 19,
+   "rankAbs": 13
+  },
+  {
+   "stat": "freq.recurLen",
+   "het": 0.5735944741166151,
+   "hetAbs": 0.5735944741166151,
+   "nPresent": 357,
+   "pos": 3,
+   "neg": 354,
+   "atlasHet": 0.5736,
+   "rank": 20,
+   "rankAbs": 20
+  },
+  {
+   "stat": "freq.lenAcf1",
+   "het": 0.5368130305507613,
+   "hetAbs": 0.5295685266626456,
+   "nPresent": 318,
+   "pos": 307,
+   "neg": 11,
+   "atlasHet": 0.5368,
+   "rank": 21,
+   "rankAbs": 21
+  },
+  {
+   "stat": "fig.persist",
+   "het": 0.3902197587784797,
+   "hetAbs": 0.3902197587784797,
+   "nPresent": 327,
+   "pos": 327,
+   "neg": 0,
+   "atlasHet": 0.3902,
+   "rank": 22,
+   "rankAbs": 22
+  },
+  {
+   "stat": "fig.arrival",
+   "het": 0.29596510025673717,
+   "hetAbs": 0.29596510025673717,
+   "nPresent": 255,
+   "pos": 255,
+   "neg": 0,
+   "atlasHet": 0.296,
+   "rank": 23,
+   "rankAbs": 23
+  },
+  {
+   "stat": "phys.gravAlphaSd",
+   "het": 0.25060756775286225,
+   "hetAbs": 0.25060756775286225,
+   "nPresent": 20,
+   "pos": 20,
+   "neg": 0,
+   "atlasHet": 0.2506,
+   "rank": 24,
+   "rankAbs": 24
+  },
+  {
+   "stat": "fig.initFollow",
+   "het": 0.2166273519296903,
+   "hetAbs": 0.2166273519296903,
+   "nPresent": 250,
+   "pos": 250,
+   "neg": 0,
+   "atlasHet": 0.2166,
+   "rank": 25,
+   "rankAbs": 25
+  },
+  {
+   "stat": "fig.crpTheta",
+   "het": 0.2123596201808534,
+   "hetAbs": 0.2123596201808534,
+   "nPresent": 194,
+   "pos": 194,
+   "neg": 0,
+   "atlasHet": 0.2124,
+   "rank": 26,
+   "rankAbs": 26
+  },
+  {
+   "stat": "phys.massExp",
+   "het": 0.20969744991470712,
+   "hetAbs": 0.20969744991470712,
+   "nPresent": 323,
+   "pos": 323,
+   "neg": 0,
+   "atlasHet": 0.2097,
+   "rank": 27,
+   "rankAbs": 27
+  },
+  {
+   "stat": "burst.hurst",
+   "het": 0.1966858575616296,
+   "hetAbs": 0.1966858575616296,
+   "nPresent": 223,
+   "pos": 223,
+   "neg": 0,
+   "atlasHet": 0.1967,
+   "rank": 28,
+   "rankAbs": 28
+  },
+  {
+   "stat": "freq.zipfAlpha",
+   "het": 0.17109473550336032,
+   "hetAbs": 0.17109473550336032,
+   "nPresent": 136,
+   "pos": 136,
+   "neg": 0,
+   "atlasHet": 0.1711,
+   "rank": 29,
+   "rankAbs": 29
+  },
+  {
+   "stat": "comp.finEnt",
+   "het": 0.09709001194588576,
+   "hetAbs": 0.09709001194588576,
+   "nPresent": 376,
+   "pos": 376,
+   "neg": 0,
+   "atlasHet": 0.09709,
+   "rank": 30,
+   "rankAbs": 30
+  },
+  {
+   "stat": "freq.heapsBeta",
+   "het": 0.0811303305452918,
+   "hetAbs": 0.0811303305452918,
+   "nPresent": 110,
+   "pos": 110,
+   "neg": 0,
+   "atlasHet": 0.08113,
+   "rank": 31,
+   "rankAbs": 31
+  },
+  {
+   "stat": "freq.rankBinEnt",
+   "het": 0.05362319117593391,
+   "hetAbs": 0.05362319117593391,
+   "nPresent": 314,
+   "pos": 314,
+   "neg": 0,
+   "atlasHet": 0.05362,
+   "rank": 32,
+   "rankAbs": 32
+  },
+  {
+   "stat": "phys.massAdd",
+   "het": 0.04861253736562926,
+   "hetAbs": 0.04861253736562926,
+   "nPresent": 232,
+   "pos": 232,
+   "neg": 0,
+   "atlasHet": 0.04861,
+   "rank": 33,
+   "rankAbs": 33
+  }
+ ],
+ "hetVsSignBalanceRho": 0.607620320855615,
+ "cells": {
+  "definedRealCells": 29680,
+  "observedPresentRealCells": 22017,
+  "plantedIid": {
+   "halfCells": 307,
+   "definedCells": 153,
+   "absZge4": 4,
+   "rate4": 0.01303,
+   "presentCellsObserved": 0,
+   "pPresentDirect": 0,
+   "pPresentFromRate4": 8.488153720463878e-05,
+   "ruleOfThreeUpper": 0.0196078431372549,
+   "expectedFalseFromRate4": 2.519,
+   "expectedFalseDirect": 0,
+   "expectedFalseUpper": 582
+  },
+  "controls": {
+   "halfCells": 2913,
+   "definedCells": 1447,
+   "absZge4": 13,
+   "rate4": 0.004463,
+   "presentCellsObserved": 0,
+   "pPresentDirect": 0,
+   "pPresentFromRate4": 9.958082952363007e-06,
+   "ruleOfThreeUpper": 0.002073255010366275,
+   "expectedFalseFromRate4": 0.2956,
+   "expectedFalseDirect": 0,
+   "expectedFalseUpper": 61.53
+  },
+  "binomial": {
+   "p": 8.488153720463878e-05,
+   "mean": 2.519,
+   "sd": 1.587
+  }
+ },
+ "controlsIntroRight": {
+  "n": 38,
+  "sdZ": 1.294722320155632,
+  "absGe2": 5,
+  "absGe4": 0
+ }
+}

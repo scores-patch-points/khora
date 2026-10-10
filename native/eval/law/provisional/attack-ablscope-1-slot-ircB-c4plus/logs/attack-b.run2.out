@@ -1,0 +1,396 @@
+{
+ "headerSha256": "db4777400514e4abf3fed8abc8257b28cd8d4635445987fab386169d6e79b324",
+ "verdictAttackB": "FAILED",
+ "verdictAttackB_registeredMechanical": "SUCCESSFUL",
+ "verdictSoftFlags": {
+  "b16pLt60": false,
+  "scopeBandFails": false,
+  "udInsideNullBand_extensionUnsupported": false,
+  "p05Lt070": false,
+  "groupAFlags": false,
+  "floorCellsFlag": false
+ },
+ "B1": {
+  "headerRecomputedEqualsLogged": true,
+  "headerRecomputedEqualsJson": true,
+  "headerSha256": "9ea935088986f8ee3ef09cee89f8d109f1cf72b168ae6113209afebe3a991c7d",
+  "headerLogPredatesFirstReadFile": true,
+  "headerLogTime": "2026-10-07T07:25:09.268Z",
+  "firstReadFileBirth": "2026-10-07T07:25:58.471Z",
+  "analyseMjsLastModified": "2026-10-07T07:28:36.495Z",
+  "analyseBodyEditedAfterFirstRead": true,
+  "passListCode": {
+   "auc062": true,
+   "lb055": true,
+   "permQ95": true,
+   "controlsInBand": true,
+   "probe058": true,
+   "consistency75": true,
+   "spec095": true
+  },
+  "perDayT1": {
+   "days": 13,
+   "aucStrictlyAbove05": 11,
+   "aucEqual05": 2,
+   "aucBelow05": 0,
+   "daysAllZero": 2
+  },
+  "floor": {
+   "E_CORE_E_SRV": {
+    "pairs": 49,
+    "namesFlagged": 0,
+    "controlsFlagged": 0
+   },
+   "E_REUSE": {
+    "pairs": 225,
+    "namesFlagged": 0.0222,
+    "controlsFlagged": 0
+   }
+  },
+  "floorTestHasNoPower": true
+ },
+ "B2": {
+  "days": 46,
+  "splits": 400,
+  "selectionFrequency": {
+   "A:c4_6": 0,
+   "A:c7_15": 0,
+   "A:c16p": 0.015,
+   "B:c2": 0,
+   "B:c3": 0,
+   "B:c4_6": 1,
+   "B:c7_15": 1,
+   "B:c16p": 0.998
+  },
+  "exactRegisteredScopeFrequency": 0.983,
+  "noCellSelected": 0,
+  "registeredHeldOut": {
+   "median": 0.823,
+   "p05": 0.7937,
+   "p95": 0.8548,
+   "min": 0.7764,
+   "specMedian": 0.99,
+   "specP05": 0.9836
+  },
+  "selectedScopeHeldOut": {
+   "n": 400,
+   "median": 0.8226,
+   "p05": 0.7932,
+   "p95": 0.8548
+  },
+  "stable": {
+   "b46_b715_ge90": true,
+   "b16p_ge60": true,
+   "floorCellsLe5": true,
+   "groupALe10": true,
+   "p05HeldOutGe070": true,
+   "p05HeldOutGe062": true,
+   "lowSelection70": false
+  },
+  "bySource": {
+   "reuseToCore": {
+    "sel": [
+     "B:c4_6",
+     "B:c7_15",
+     "B:c16p"
+    ],
+    "selectedHeld": {
+     "auc": 0.8555555555555555,
+     "spec": 0.9777777777777777,
+     "n": 90
+    },
+    "registeredHeld": {
+     "auc": 0.8555555555555555,
+     "spec": 0.9777777777777777,
+     "n": 90
+    }
+   },
+   "coreToReuse": {
+    "sel": [
+     "B:c4_6",
+     "B:c7_15"
+    ],
+    "selectedHeld": {
+     "auc": 0.7933753943217665,
+     "spec": 0.9936908517350158,
+     "n": 317
+    },
+    "registeredHeld": {
+     "auc": 0.816953316953317,
+     "spec": 0.9926289926289926,
+     "n": 407
+    }
+   }
+  }
+ },
+ "B3a": {
+  "cells": {
+   "A:c4_6": 0.7541,
+   "A:c7_15": 0.822,
+   "A:c16p": 0.8034,
+   "B:c2": 0.5,
+   "B:c3": 0.5194,
+   "B:c4_6": 0.7398,
+   "B:c7_15": 0.875,
+   "B:c16p": 0.8866
+  },
+  "observedMax": 0.8866,
+  "nullMaxQ95": 0.5812,
+  "nullMaxMean": 0.5411,
+  "p": 0.001,
+  "minCellAucOfRegistered": 0.7398
+ },
+ "B3": {
+  "multiplicityDoesNotExplainEnglishExact": true,
+  "multiplicityDoesNotExplainEnglish": false,
+  "udCountInsideNullBand": false
+ },
+ "B3b": {
+  "sets": {
+   "T1_E_CORE": {
+    "aucRaw": 0.8466666666666667,
+    "signTest": {
+     "nameOnly": 52,
+     "controlOnly": 0,
+     "pExactOneSided": 2.2204460492503185e-16,
+     "holmExact": 7.993605777301146e-15
+    },
+    "pairs": 75,
+    "auc": 0.8467,
+    "p": 0.001,
+    "nullExceed062": 0.009,
+    "nullQ95": 0.58,
+    "holm": 0.038
+   },
+   "T2_E_REUSE": {
+    "aucRaw": 0.816953316953317,
+    "signTest": {
+     "nameOnly": 259,
+     "controlOnly": 1,
+     "pExactOneSided": 1.4087749955497975e-76,
+     "holmExact": 5.353344983089231e-75
+    },
+    "pairs": 407,
+    "auc": 0.817,
+    "p": 0.001,
+    "nullExceed062": 0,
+    "nullQ95": 0.5319,
+    "holm": 0.038
+   },
+   "T3_E_SRV": {
+    "aucRaw": 0.9,
+    "signTest": {
+     "nameOnly": 12,
+     "controlOnly": 0,
+     "pExactOneSided": 0.00024414062500000016,
+     "holmExact": 0.007812500000000005
+    },
+    "pairs": 15,
+    "auc": 0.9,
+    "p": 0.001,
+    "nullExceed062": 0.207,
+    "nullQ95": 0.7,
+    "holm": 0.038
+   },
+   "X_DE": {
+    "aucRaw": 0.86,
+    "signTest": {
+     "nameOnly": 18,
+     "controlOnly": 0,
+     "pExactOneSided": 0.000003814697265625001,
+     "holmExact": 0.00012588500976562503
+    },
+    "pairs": 25,
+    "auc": 0.86,
+    "p": 0.001,
+    "nullExceed062": 0.132,
+    "nullQ95": 0.62,
+    "holm": 0.038
+   },
+   "X_ES": {
+    "aucRaw": 0.8452380952380952,
+    "signTest": {
+     "nameOnly": 29,
+     "controlOnly": 0,
+     "pExactOneSided": 1.8626451492309556e-9,
+     "holmExact": 6.519258022308344e-8
+    },
+    "pairs": 42,
+    "auc": 0.8452,
+    "p": 0.001,
+    "nullExceed062": 0.031,
+    "nullQ95": 0.6071,
+    "holm": 0.038
+   },
+   "X_IT": {
+    "aucRaw": 0.6956521739130435,
+    "signTest": {
+     "nameOnly": 27,
+     "controlOnly": 0,
+     "pExactOneSided": 7.450580596923824e-9,
+     "holmExact": 2.5331974029541e-7
+    },
+    "pairs": 69,
+    "auc": 0.6957,
+    "p": 0.001,
+    "nullExceed062": 0.001,
+    "nullQ95": 0.5652,
+    "holm": 0.038
+   },
+   "X_ALL": {
+    "aucRaw": 0.7720588235294118,
+    "signTest": {
+     "nameOnly": 74,
+     "controlOnly": 0,
+     "pExactOneSided": 5.2939559203394e-23,
+     "holmExact": 1.9587636905255778e-21
+    },
+    "pairs": 136,
+    "auc": 0.7721,
+    "p": 0.001,
+    "nullExceed062": 0,
+    "nullQ95": 0.5515,
+    "holm": 0.038
+   }
+  },
+  "numberOfSets": 38,
+  "udLanguages": 31,
+  "udObservedCountGe062": 1,
+  "udExpectedCountGe062Null": 0.01,
+  "udNullCountQ95": 0,
+  "udNullCountMean": 0.01,
+  "udObservedMax": 0.6207,
+  "udNullMaxQ95": 0.5862,
+  "udMaxP": 0.009,
+  "udCountP": 0.009,
+  "udLanguagesGe062": [
+   [
+    "UD:tur",
+    0.6207,
+    29,
+    0.009,
+    0.27
+   ]
+  ],
+  "englishHolm": {
+   "T1": 0.038,
+   "T2": 0.038
+  },
+  "englishHolmExact": {
+   "T1": 7.993605777301146e-15,
+   "T2": 5.353344983089231e-75,
+   "T3": 0.007812500000000005
+  },
+  "udHolmExact": {
+   "UD:fin": 0.02838134765625002,
+   "UD:tur": 0.23437500000000006
+  },
+  "extensionLanguagesHolm": {
+   "DE": 0.038,
+   "ES": 0.038,
+   "IT": 0.038,
+   "ALL": 0.038
+  }
+ },
+ "B4": {
+  "all": {
+   "pairs": 497,
+   "auc": 0.8239
+  },
+  "byChannel": {
+   "ubuntu": {
+    "pairs": 302,
+    "days": 9,
+    "auc": 0.8212,
+    "sens": 0.6523,
+    "spec": 0.9901
+   },
+   "kubuntu": {
+    "pairs": 175,
+    "days": 14,
+    "auc": 0.82,
+    "sens": 0.6457,
+    "spec": 0.9943
+   },
+   "xubuntu": {
+    "pairs": 5,
+    "days": 4,
+    "auc": null,
+    "sens": 0.8,
+    "spec": 1
+   },
+   "ubuntu-server": {
+    "pairs": 15,
+    "days": 7,
+    "auc": 0.9,
+    "sens": 0.8667,
+    "spec": 0.9333
+   }
+  },
+  "byYearBand": {
+   ">=2012": {
+    "pairs": 102,
+    "days": 11,
+    "auc": 0.8137,
+    "sens": 0.6373,
+    "spec": 0.9902
+   },
+   "<=2008": {
+    "pairs": 334,
+    "days": 15,
+    "auc": 0.8278,
+    "sens": 0.6647,
+    "spec": 0.991
+   },
+   "2009-2011": {
+    "pairs": 61,
+    "days": 8,
+    "auc": 0.8197,
+    "sens": 0.6557,
+    "spec": 0.9836
+   }
+  },
+  "byArm": {
+   "E_CORE": {
+    "pairs": 75,
+    "days": 13,
+    "auc": 0.8467,
+    "sens": 0.7067,
+    "spec": 0.9867
+   },
+   "E_SRV": {
+    "pairs": 15,
+    "days": 7,
+    "auc": 0.9,
+    "sens": 0.8667,
+    "spec": 0.9333
+   },
+   "E_REUSE": {
+    "pairs": 407,
+    "days": 14,
+    "auc": 0.817,
+    "sens": 0.6413,
+    "spec": 0.9926
+   }
+  },
+  "leaveOneDayOut": {
+   "days": 34,
+   "min": 0.8165,
+   "max": 0.8354
+  },
+  "flaggedNamesTotal": 327,
+  "positiveFormsFlagged": 206,
+  "top3FormsShareOfFlagged": 0.0642,
+  "aucWithoutTop3Forms": 0.8162,
+  "failingGroups": [],
+  "scopeHolds": true
+ },
+ "B5": {
+  "ge1": 0.8239,
+  "ge2": 0.5,
+  "ge3": 0.5,
+  "SALL": 0.7182,
+  "S_raw": 0.8239,
+  "ge1WithinOf002OfBest": true
+ }
+}

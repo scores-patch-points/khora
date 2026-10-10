@@ -1,0 +1,50 @@
+
+// ── analysis helpers (all scores HIGHER = name; the rule's score is -c.dSelf) ──────────────────────────────────────────────────────────────────────────────────────────────
+const NEG = (m) => -m.dSelf;
+/** Attach leave-one-block-out ridge-logistic probe scores (an existence test) to the members under `name`; returns the stratified AUC of the probe. */
+function probeScore(pairs, name, feat) {
+  const mem = pairs.flatMap((x) => [{ m: x.p, y: 1, b: x.block }, { m: x.n, y: 0, b: x.block }]);
+  const sc = cvScores(mem.map((r) => feat(r.m)), mem.map((r) => r.y), mem.map((r) => r.b));
+  mem.forEach((r, k) => { r.m[name] = sc[k] ?? 0; });
+  return round(strat(pairs, (m) => m[name]));
+}
+/** The registered core: stratified AUC, cluster bootstrap, permutation, pooled controls, control probe, per-stratum AUC, strict-caliper subset. */
+function evalCore(pairs, f, { seed = 1, probe = true } = {}) {
+  const sf = (ps) => strat(ps, f), bt = boot(pairs, sf, { B, seed }), pm = perm(pairs, sf, { B, seed: seed + 1 }), ctl = controlAucs(pairs);
+  const out = { pairs: pairs.length, auc: round(sf(pairs)), ci: [bt.lo, bt.hi], permQ95: pm.q95, permMean: pm.mean, permP: pm.p, perStratum: perStratum(pairs, f), controls: ctl, controlsInBand: inBand(ctl) };
+  if (probe) out.probeAuc = probeScore(pairs, `PROBE_${seed}`, (m) => m.cv);
+  const cal = caliperOf(pairs); out.caliper = { pairs: cal.length };
+  if (cal.length >= 20) { const c = boot(cal, sf, { B, seed: seed + 2 }), cc = controlAucs(cal); out.caliper = { pairs: cal.length, auc: c.point, ci: [c.lo, c.hi], controls: cc, controlsInBand: inBand(cc) }; }
+  return out;
+}
+const groupBy = (xs, key) => { const m = new Map(); for (const x of xs) { const k = key(x); (m.get(k) ?? m.set(k, []).get(k)).push(x); } return m; };
+/** Per-group stratified AUC (days, channels, years, books, languages). */
+function perGroup(pairs, key, f, minPairs = 10) {
+  const out = {}; for (const [k, ps] of [...groupBy(pairs, key)].sort()) out[k] = { pairs: ps.length, auc: ps.length >= minPairs ? round(strat(ps, f)) : null };
+  return out;
+}
+function leaveOneDayOut(pairs, f) {
+  const vals = []; for (const d of new Set(pairs.map((x) => x.doc))) { const ps = pairs.filter((x) => x.doc !== d); vals.push(strat(ps, f)); }
+  return { min: round(Math.min(...vals)), max: round(Math.max(...vals)) };
+}
+/** The reduction: is -dSelf more than the plain initial-share count? */
+function reduction(prim) {
+  const aN = strat(prim, NEG), aI = strat(prim, (m) => m.R_INIT), aAll = strat(prim, (m) => m.ALLINIT);
+  const diff = boot(prim, (ps) => strat(ps, NEG) - strat(ps, (m) => m.R_INIT), { B, seed: 7 });
+  const pI = probeScore(prim, "PR_I", (m) => [...m.cv, m.R_INIT]), pID = probeScore(prim, "PR_ID", (m) => [...m.cv, m.R_INIT, -m.dSelf]), pD = probeScore(prim, "PR_D", (m) => [...m.cv, -m.dSelf]);
+  const ties = prim.filter((x) => x.p.R_INIT === x.n.R_INIT);
+  return { aucNegDSelf: round(aN), aucRInit: round(aI), aucAllInit: round(aAll), diffNegDSelfMinusRInit: diff, probeControlsPlusRInit: pI, probeControlsPlusRInitPlusDSelf: pID, probeControlsPlusDSelf: pD, incrementalOverRInit: round(pID - pI),
+    tiesOnRInit: { pairs: ties.length, aucNegDSelf: ties.length >= 8 ? round(strat(ties, NEG)) : null },
+    perDimension: Object.fromEntries(DESC.map((d, k) => [d, round(strat(prim, (m) => -m.dd[k]))])),
+    medianDSelf: Object.fromEntries(PRIM.map((st) => { const ps = prim.filter((x) => x.stratum === st); return [st, { pos: round(quantile(ps.map((x) => x.p.dSelf), 0.5)), neg: round(quantile(ps.map((x) => x.n.dSelf), 0.5)), n: ps.length }]; })) };
+}
+/** K0: the closed form reproduces the scoper's stored company components on scoper tokens (no data of this confirmation). */
+function k0() {
+  const f = path.join(HERE, "..", "ablation-scope", "data", "confirmation", "ubuntu_2011-03-15.cf.c2-c3-c4_6.jsonl");
+  const rows = fs.readFileSync(f, "utf8").split("\n").filter(Boolean).map((l) => JSON.parse(l)).slice(0, 60), doc = loadIrcDay(path.join(IRC_ROOT, "ubuntu/2011-03-15.txt"), "ubuntu/2011-03-15");
+  let mx = 0, n = 0;
+  for (const r of rows) { if (doc.stream[r.s][r.i] !== r.w) continue; const o = companyAt(doc.stream, r.s, r.i, 256); n += 1; for (let k = 0; k < 8; k++) mx = Math.max(mx, Math.abs(o.c8[k] - r.rec.c[k])); }
+  return { tokens: n, maxAbsDiff: mx, pass: n >= 40 && mx <= 1e-5 };
+}
+const dayStats = (prim) => { const by = groupBy(prim, (x) => x.doc), days = [...by].map(([d, ps]) => ({ d, n: ps.length, auc: ps.length >= 10 ? strat(ps, NEG) : null })), ev = days.filter((x) => x.auc != null);
+  return { daysWithPairs: days.length, daysEvaluable: ev.length, daysAbove05: ev.filter((x) => x.auc > 0.5).length, share: ev.length ? round(ev.filter((x) => x.auc > 0.5).length / ev.length) : null, perDay: Object.fromEntries(days.map((x) => [x.d, [x.n, x.auc == null ? null : round(x.auc)]])) }; };

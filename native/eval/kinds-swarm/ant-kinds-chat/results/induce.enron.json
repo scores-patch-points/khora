@@ -1,0 +1,292 @@
+{
+ "module": "ant-kinds-chat/induce.mjs",
+ "corpus": "enron",
+ "preregSha256": "0b7ebeba45da9ec1a28d91472b1f4437f7ede987aa2eca565e12541ae8fb2878",
+ "MINC": 10,
+ "F_MAX": 1000,
+ "D": 48,
+ "LADDER": [
+  2,
+  3,
+  4,
+  6,
+  8,
+  12,
+  16,
+  24
+ ],
+ "MIN_HALF": 8,
+ "NULL_DRAWS": 4,
+ "SESOI": 0.1,
+ "devDocs": 60,
+ "conformance": {
+  "formsChecked": 25,
+  "featuresChecked": 133,
+  "mismatches": 0
+ },
+ "curve": [
+  {
+   "K": 2,
+   "real": 0.5777,
+   "realBySplit": [
+    0.6308,
+    0.5245
+   ],
+   "nullMean": 0.6277,
+   "nullMax": 0.6481,
+   "gap": -0.0704
+  },
+  {
+   "K": 3,
+   "real": 0.4256,
+   "realBySplit": [
+    0.4782,
+    0.373
+   ],
+   "nullMean": 0.3947,
+   "nullMax": 0.4266,
+   "gap": -0.001
+  },
+  {
+   "K": 4,
+   "real": 0.3006,
+   "realBySplit": [
+    0.3717,
+    0.2296
+   ],
+   "nullMean": 0.2567,
+   "nullMax": 0.2903,
+   "gap": 0.0103
+  },
+  {
+   "K": 6,
+   "real": 0.3378,
+   "realBySplit": [
+    0.3363,
+    0.3393
+   ],
+   "nullMean": 0.2115,
+   "nullMax": 0.236,
+   "gap": 0.1018
+  },
+  {
+   "K": 8,
+   "real": 0.2717,
+   "realBySplit": [
+    0.2764,
+    0.2669
+   ],
+   "nullMean": 0.2,
+   "nullMax": 0.2072,
+   "gap": 0.0645
+  },
+  {
+   "K": 12,
+   "real": 0.2804,
+   "realBySplit": [
+    0.2932,
+    0.2675
+   ],
+   "nullMean": 0.1784,
+   "nullMax": 0.1912,
+   "gap": 0.0892
+  },
+  {
+   "K": 16,
+   "real": 0.2684,
+   "realBySplit": [
+    0.298,
+    0.2388
+   ],
+   "nullMean": 0.1773,
+   "nullMax": 0.1993,
+   "gap": 0.0691
+  },
+  {
+   "K": 24,
+   "real": 0.1894,
+   "realBySplit": [
+    0.2137,
+    0.1651
+   ],
+   "nullMean": 0.1538,
+   "nullMax": 0.1632,
+   "gap": 0.0262
+  }
+ ],
+ "vocabHalves": [
+  563,
+  535
+ ],
+ "Kstar": 6,
+ "gapKstar": 0.1018,
+ "K1_curve_holds": true,
+ "final": {
+  "V": 1110,
+  "K": 6,
+  "tokenShare": [
+   0.5182,
+   0.1667,
+   0.1137,
+   0.0829,
+   0.0593,
+   0.0591
+  ],
+  "types": [
+   131,
+   157,
+   153,
+   298,
+   177,
+   194
+  ]
+ },
+ "frequency": {
+  "NMI_decile": 0.1369,
+  "ARI_bands": 0.085,
+  "NMI_bands": 0.1447
+ },
+ "signatures": [
+  [
+   "after=the",
+   "before=you",
+   "after=you",
+   "after=a",
+   "after=be",
+   "before=to",
+   "before=we",
+   "before=i",
+   "before=will",
+   "before=up"
+  ],
+  [
+   "before=^",
+   "after=$",
+   "after=have",
+   "after=will",
+   "after=am",
+   "after=are",
+   "after=can",
+   "after=is",
+   "before=from",
+   "after=north"
+  ],
+  [
+   "before=the",
+   "after=$",
+   "before=a",
+   "before=this",
+   "after=for",
+   "after=and",
+   "before=your",
+   "after=of",
+   "before=our",
+   "after=is"
+  ],
+  [
+   "after=to",
+   "before=enron",
+   "after=america",
+   "before=north",
+   "before=a",
+   "after=corp",
+   "before=be",
+   "before=to",
+   "after=on",
+   "before=not"
+  ],
+  [
+   "after=$",
+   "before=america",
+   "before=p",
+   "before=for",
+   "after=and",
+   "before=as",
+   "after=for",
+   "after=in",
+   "after=as",
+   "before=on"
+  ],
+  [
+   "before=the",
+   "after=of",
+   "after=e",
+   "after=l",
+   "after=and",
+   "before=a",
+   "before=an",
+   "before=final",
+   "after=m",
+   "after=s"
+  ]
+ ],
+ "K1_holds": true,
+ "characterise": {
+  "dev": {
+   "rows": [
+    {
+     "kind": 0,
+     "types": 131,
+     "tokenShare": 0.4201,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 1,
+     "types": 157,
+     "tokenShare": 0.1352,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 2,
+     "types": 153,
+     "tokenShare": 0.0922,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 3,
+     "types": 298,
+     "tokenShare": 0.0672,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 4,
+     "types": 177,
+     "tokenShare": 0.0481,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 5,
+     "types": 194,
+     "tokenShare": 0.0479,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    }
+   ],
+   "thin": {
+    "tokenShare": 0.1893,
+    "goldShare": null
+   },
+   "goldTokens": 0,
+   "landing": null,
+   "nickTypeCount": 0
+  }
+ },
+ "seconds": 32
+}

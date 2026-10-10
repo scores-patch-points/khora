@@ -1,0 +1,1046 @@
+[
+ {
+  "register": "code",
+  "nDefined": 47,
+  "atlasPplus": 47,
+  "eqTok10k": [
+   47,
+   47
+  ],
+  "eqLen6": [
+   45,
+   46
+  ],
+  "eqLen14": [
+   0,
+   0
+  ],
+  "dropTop20": [
+   47,
+   47
+  ],
+  "dedupAll": [
+   47,
+   47
+  ],
+  "withinDocNull": [
+   46,
+   47
+  ]
+ },
+ {
+  "register": "legal",
+  "nDefined": 31,
+  "atlasPplus": 30,
+  "eqTok10k": [
+   25,
+   30
+  ],
+  "eqLen6": [
+   1,
+   3
+  ],
+  "eqLen14": [
+   18,
+   20
+  ],
+  "dropTop20": [
+   27,
+   30
+  ],
+  "dedupAll": [
+   30,
+   30
+  ],
+  "withinDocNull": [
+   19,
+   30
+  ]
+ },
+ {
+  "register": "treebank",
+  "nDefined": 30,
+  "atlasPplus": 21,
+  "eqTok10k": [
+   9,
+   18
+  ],
+  "eqLen6": [
+   1,
+   1
+  ],
+  "eqLen14": [
+   1,
+   4
+  ],
+  "dropTop20": [
+   12,
+   21
+  ],
+  "dedupAll": [
+   16,
+   21
+  ],
+  "withinDocNull": [
+   4,
+   21
+  ]
+ },
+ {
+  "register": "treatise",
+  "nDefined": 26,
+  "atlasPplus": 18,
+  "eqTok10k": [
+   12,
+   18
+  ],
+  "eqLen6": [
+   1,
+   2
+  ],
+  "eqLen14": [
+   4,
+   7
+  ],
+  "dropTop20": [
+   15,
+   18
+  ],
+  "dedupAll": [
+   18,
+   18
+  ],
+  "withinDocNull": [
+   12,
+   18
+  ]
+ },
+ {
+  "register": "scripture",
+  "nDefined": 26,
+  "atlasPplus": 26,
+  "eqTok10k": [
+   19,
+   26
+  ],
+  "eqLen6": [
+   6,
+   8
+  ],
+  "eqLen14": [
+   7,
+   9
+  ],
+  "dropTop20": [
+   25,
+   26
+  ],
+  "dedupAll": [
+   26,
+   26
+  ],
+  "withinDocNull": [
+   16,
+   26
+  ]
+ },
+ {
+  "register": "novel",
+  "nDefined": 25,
+  "atlasPplus": 21,
+  "eqTok10k": [
+   9,
+   21
+  ],
+  "eqLen6": [
+   1,
+   1
+  ],
+  "eqLen14": [
+   12,
+   18
+  ],
+  "dropTop20": [
+   20,
+   21
+  ],
+  "dedupAll": [
+   19,
+   21
+  ],
+  "withinDocNull": [
+   20,
+   21
+  ]
+ },
+ {
+  "register": "chat",
+  "nDefined": 20,
+  "atlasPplus": 19,
+  "eqTok10k": [
+   15,
+   19
+  ],
+  "eqLen6": [
+   2,
+   3
+  ],
+  "eqLen14": [
+   3,
+   5
+  ],
+  "dropTop20": [
+   18,
+   19
+  ],
+  "dedupAll": [
+   19,
+   19
+  ],
+  "withinDocNull": [
+   12,
+   19
+  ]
+ },
+ {
+  "register": "book",
+  "nDefined": 19,
+  "atlasPplus": 13,
+  "eqTok10k": [
+   2,
+   13
+  ],
+  "eqLen6": [
+   0,
+   1
+  ],
+  "eqLen14": [
+   0,
+   6
+  ],
+  "dropTop20": [
+   9,
+   13
+  ],
+  "dedupAll": [
+   11,
+   13
+  ],
+  "withinDocNull": [
+   6,
+   13
+  ]
+ },
+ {
+  "register": "children",
+  "nDefined": 17,
+  "atlasPplus": 6,
+  "eqTok10k": [
+   4,
+   6
+  ],
+  "eqLen6": [
+   0,
+   0
+  ],
+  "eqLen14": [
+   2,
+   4
+  ],
+  "dropTop20": [
+   6,
+   6
+  ],
+  "dedupAll": [
+   5,
+   6
+  ],
+  "withinDocNull": [
+   5,
+   6
+  ]
+ },
+ {
+  "register": "notation",
+  "nDefined": 16,
+  "atlasPplus": 8,
+  "eqTok10k": [
+   7,
+   8
+  ],
+  "eqLen6": [
+   3,
+   6
+  ],
+  "eqLen14": [
+   2,
+   2
+  ],
+  "dropTop20": [
+   8,
+   8
+  ],
+  "dedupAll": [
+   8,
+   8
+  ],
+  "withinDocNull": [
+   3,
+   8
+  ]
+ },
+ {
+  "register": "memoir",
+  "nDefined": 13,
+  "atlasPplus": 11,
+  "eqTok10k": [
+   5,
+   11
+  ],
+  "eqLen6": [
+   0,
+   0
+  ],
+  "eqLen14": [
+   3,
+   4
+  ],
+  "dropTop20": [
+   8,
+   11
+  ],
+  "dedupAll": [
+   9,
+   11
+  ],
+  "withinDocNull": [
+   5,
+   11
+  ]
+ },
+ {
+  "register": "dialect",
+  "nDefined": 13,
+  "atlasPplus": 11,
+  "eqTok10k": [
+   9,
+   11
+  ],
+  "eqLen6": [
+   0,
+   0
+  ],
+  "eqLen14": [
+   7,
+   8
+  ],
+  "dropTop20": [
+   10,
+   11
+  ],
+  "dedupAll": [
+   11,
+   11
+  ],
+  "withinDocNull": [
+   11,
+   11
+  ]
+ },
+ {
+  "register": "poetry",
+  "nDefined": 12,
+  "atlasPplus": 7,
+  "eqTok10k": [
+   2,
+   7
+  ],
+  "eqLen6": [
+   0,
+   3
+  ],
+  "eqLen14": [
+   0,
+   0
+  ],
+  "dropTop20": [
+   5,
+   7
+  ],
+  "dedupAll": [
+   6,
+   7
+  ],
+  "withinDocNull": [
+   3,
+   7
+  ]
+ },
+ {
+  "register": "academic",
+  "nDefined": 12,
+  "atlasPplus": 12,
+  "eqTok10k": [
+   9,
+   12
+  ],
+  "eqLen6": [
+   3,
+   3
+  ],
+  "eqLen14": [
+   9,
+   11
+  ],
+  "dropTop20": [
+   12,
+   12
+  ],
+  "dedupAll": [
+   12,
+   12
+  ],
+  "withinDocNull": [
+   9,
+   12
+  ]
+ },
+ {
+  "register": "drama",
+  "nDefined": 12,
+  "atlasPplus": 7,
+  "eqTok10k": [
+   5,
+   7
+  ],
+  "eqLen6": [
+   2,
+   2
+  ],
+  "eqLen14": [
+   1,
+   1
+  ],
+  "dropTop20": [
+   2,
+   7
+  ],
+  "dedupAll": [
+   7,
+   7
+  ],
+  "withinDocNull": [
+   4,
+   7
+  ]
+ },
+ {
+  "register": "translation",
+  "nDefined": 9,
+  "atlasPplus": 7,
+  "eqTok10k": [
+   2,
+   7
+  ],
+  "eqLen6": [
+   1,
+   2
+  ],
+  "eqLen14": [
+   0,
+   3
+  ],
+  "dropTop20": [
+   6,
+   7
+  ],
+  "dedupAll": [
+   5,
+   7
+  ],
+  "withinDocNull": [
+   2,
+   7
+  ]
+ },
+ {
+  "register": "history",
+  "nDefined": 8,
+  "atlasPplus": 3,
+  "eqTok10k": [
+   1,
+   3
+  ],
+  "eqLen6": [
+   1,
+   1
+  ],
+  "eqLen14": [
+   0,
+   1
+  ],
+  "dropTop20": [
+   2,
+   3
+  ],
+  "dedupAll": [
+   2,
+   3
+  ],
+  "withinDocNull": [
+   2,
+   3
+  ]
+ },
+ {
+  "register": "diagram",
+  "nDefined": 7,
+  "atlasPplus": 6,
+  "eqTok10k": [
+   6,
+   6
+  ],
+  "eqLen6": [
+   5,
+   5
+  ],
+  "eqLen14": [
+   0,
+   0
+  ],
+  "dropTop20": [
+   6,
+   6
+  ],
+  "dedupAll": [
+   6,
+   6
+  ],
+  "withinDocNull": [
+   5,
+   6
+  ]
+ },
+ {
+  "register": "markup",
+  "nDefined": 5,
+  "atlasPplus": 5,
+  "eqTok10k": [
+   5,
+   5
+  ],
+  "eqLen6": [
+   4,
+   4
+  ],
+  "eqLen14": [
+   1,
+   1
+  ],
+  "dropTop20": [
+   5,
+   5
+  ],
+  "dedupAll": [
+   5,
+   5
+  ],
+  "withinDocNull": [
+   5,
+   5
+  ]
+ },
+ {
+  "register": "reportage",
+  "nDefined": 4,
+  "atlasPplus": 3,
+  "eqTok10k": [
+   2,
+   3
+  ],
+  "eqLen6": [
+   0,
+   0
+  ],
+  "eqLen14": [
+   2,
+   2
+  ],
+  "dropTop20": [
+   3,
+   3
+  ],
+  "dedupAll": [
+   3,
+   3
+  ],
+  "withinDocNull": [
+   3,
+   3
+  ]
+ },
+ {
+  "register": "encyclopedia",
+  "nDefined": 4,
+  "atlasPplus": 2,
+  "eqTok10k": [
+   2,
+   2
+  ],
+  "eqLen6": [
+   0,
+   0
+  ],
+  "eqLen14": [
+   1,
+   1
+  ],
+  "dropTop20": [
+   2,
+   2
+  ],
+  "dedupAll": [
+   2,
+   2
+  ],
+  "withinDocNull": [
+   2,
+   2
+  ]
+ },
+ {
+  "register": "nomenclature",
+  "nDefined": 4,
+  "atlasPplus": 1,
+  "eqTok10k": [
+   1,
+   1
+  ],
+  "eqLen6": [
+   0,
+   0
+  ],
+  "eqLen14": [
+   0,
+   0
+  ],
+  "dropTop20": [
+   1,
+   1
+  ],
+  "dedupAll": [
+   1,
+   1
+  ],
+  "withinDocNull": [
+   1,
+   1
+  ]
+ },
+ {
+  "register": "essay",
+  "nDefined": 3,
+  "atlasPplus": 3,
+  "eqTok10k": [
+   1,
+   3
+  ],
+  "eqLen6": [
+   0,
+   0
+  ],
+  "eqLen14": [
+   1,
+   1
+  ],
+  "dropTop20": [
+   3,
+   3
+  ],
+  "dedupAll": [
+   3,
+   3
+  ],
+  "withinDocNull": [
+   3,
+   3
+  ]
+ },
+ {
+  "register": "config",
+  "nDefined": 3,
+  "atlasPplus": 3,
+  "eqTok10k": [
+   3,
+   3
+  ],
+  "eqLen6": [
+   3,
+   3
+  ],
+  "eqLen14": [
+   0,
+   0
+  ],
+  "dropTop20": [
+   3,
+   3
+  ],
+  "dedupAll": [
+   3,
+   3
+  ],
+  "withinDocNull": [
+   2,
+   3
+  ]
+ },
+ {
+  "register": "speech",
+  "nDefined": 3,
+  "atlasPplus": 1,
+  "eqTok10k": [
+   1,
+   1
+  ],
+  "eqLen6": [
+   0,
+   0
+  ],
+  "eqLen14": [
+   0,
+   0
+  ],
+  "dropTop20": [
+   1,
+   1
+  ],
+  "dedupAll": [
+   1,
+   1
+  ],
+  "withinDocNull": [
+   1,
+   1
+  ]
+ },
+ {
+  "register": "docs",
+  "nDefined": 2,
+  "atlasPplus": 2,
+  "eqTok10k": [
+   2,
+   2
+  ],
+  "eqLen6": [
+   1,
+   1
+  ],
+  "eqLen14": [
+   2,
+   2
+  ],
+  "dropTop20": [
+   2,
+   2
+  ],
+  "dedupAll": [
+   2,
+   2
+  ],
+  "withinDocNull": [
+   2,
+   2
+  ]
+ },
+ {
+  "register": "sequence",
+  "nDefined": 2,
+  "atlasPplus": 0,
+  "eqTok10k": [
+   0,
+   0
+  ],
+  "eqLen6": [
+   0,
+   0
+  ],
+  "eqLen14": [
+   0,
+   0
+  ],
+  "dropTop20": [
+   0,
+   0
+  ],
+  "dedupAll": [
+   0,
+   0
+  ],
+  "withinDocNull": [
+   0,
+   0
+  ]
+ },
+ {
+  "register": "lexicon",
+  "nDefined": 2,
+  "atlasPplus": 1,
+  "eqTok10k": [
+   1,
+   1
+  ],
+  "eqLen6": [
+   0,
+   0
+  ],
+  "eqLen14": [
+   1,
+   1
+  ],
+  "dropTop20": [
+   1,
+   1
+  ],
+  "dedupAll": [
+   1,
+   1
+  ],
+  "withinDocNull": [
+   1,
+   1
+  ]
+ },
+ {
+  "register": "religion",
+  "nDefined": 2,
+  "atlasPplus": 0,
+  "eqTok10k": [
+   0,
+   0
+  ],
+  "eqLen6": [
+   0,
+   0
+  ],
+  "eqLen14": [
+   0,
+   0
+  ],
+  "dropTop20": [
+   0,
+   0
+  ],
+  "dedupAll": [
+   0,
+   0
+  ],
+  "withinDocNull": [
+   0,
+   0
+  ]
+ },
+ {
+  "register": "sms",
+  "nDefined": 2,
+  "atlasPplus": 2,
+  "eqTok10k": [
+   1,
+   2
+  ],
+  "eqLen6": [
+   0,
+   0
+  ],
+  "eqLen14": [
+   0,
+   0
+  ],
+  "dropTop20": [
+   1,
+   2
+  ],
+  "dedupAll": [
+   2,
+   2
+  ],
+  "withinDocNull": [
+   2,
+   2
+  ]
+ },
+ {
+  "register": "wordplay",
+  "nDefined": 1,
+  "atlasPplus": 0,
+  "eqTok10k": [
+   0,
+   0
+  ],
+  "eqLen6": [
+   0,
+   0
+  ],
+  "eqLen14": [
+   0,
+   0
+  ],
+  "dropTop20": [
+   0,
+   0
+  ],
+  "dedupAll": [
+   0,
+   0
+  ],
+  "withinDocNull": [
+   0,
+   0
+  ]
+ },
+ {
+  "register": "biography",
+  "nDefined": 1,
+  "atlasPplus": 0,
+  "eqTok10k": [
+   0,
+   0
+  ],
+  "eqLen6": [
+   0,
+   0
+  ],
+  "eqLen14": [
+   0,
+   0
+  ],
+  "dropTop20": [
+   0,
+   0
+  ],
+  "dedupAll": [
+   0,
+   0
+  ],
+  "withinDocNull": [
+   0,
+   0
+  ]
+ },
+ {
+  "register": "lyrics",
+  "nDefined": 1,
+  "atlasPplus": 1,
+  "eqTok10k": [
+   1,
+   1
+  ],
+  "eqLen6": [
+   0,
+   0
+  ],
+  "eqLen14": [
+   1,
+   1
+  ],
+  "dropTop20": [
+   1,
+   1
+  ],
+  "dedupAll": [
+   1,
+   1
+  ],
+  "withinDocNull": [
+   1,
+   1
+  ]
+ },
+ {
+  "register": "reference",
+  "nDefined": 1,
+  "atlasPplus": 1,
+  "eqTok10k": [
+   1,
+   1
+  ],
+  "eqLen6": [
+   1,
+   1
+  ],
+  "eqLen14": [
+   0,
+   1
+  ],
+  "dropTop20": [
+   1,
+   1
+  ],
+  "dedupAll": [
+   1,
+   1
+  ],
+  "withinDocNull": [
+   1,
+   1
+  ]
+ },
+ {
+  "register": "news",
+  "nDefined": 1,
+  "atlasPplus": 1,
+  "eqTok10k": [
+   1,
+   1
+  ],
+  "eqLen6": [
+   0,
+   0
+  ],
+  "eqLen14": [
+   0,
+   0
+  ],
+  "dropTop20": [
+   1,
+   1
+  ],
+  "dedupAll": [
+   1,
+   1
+  ],
+  "withinDocNull": [
+   1,
+   1
+  ]
+ },
+ {
+  "register": "email",
+  "nDefined": 1,
+  "atlasPplus": 0,
+  "eqTok10k": [
+   0,
+   0
+  ],
+  "eqLen6": [
+   0,
+   0
+  ],
+  "eqLen14": [
+   0,
+   0
+  ],
+  "dropTop20": [
+   0,
+   0
+  ],
+  "dedupAll": [
+   0,
+   0
+  ],
+  "withinDocNull": [
+   0,
+   0
+  ]
+ }
+]

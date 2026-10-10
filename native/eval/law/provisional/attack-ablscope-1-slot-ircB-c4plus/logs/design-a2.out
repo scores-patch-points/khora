@@ -1,0 +1,48 @@
+{
+ "designSha256": "a15cc40d0db4d118afe7cbfd9ed7130a0fe9faf609948b7a62a94caf9cf30454",
+ "tokens": 3426,
+ "levels": {
+  "S1": {
+   "positives": 1627,
+   "pairs": 952,
+   "designControls": {
+    "R_LOGC": 0.51,
+    "R_POS": 0.503,
+    "R_IPOS": 0.499,
+    "R_FB": 0.5,
+    "R_LEN": 0.513,
+    "R_SL": 0.497,
+    "R_LAST16": 0.529,
+    "R_RINIT": 0.771
+   }
+  },
+  "S2": {
+   "positives": 1627,
+   "pairs": 330,
+   "designControls": {
+    "R_LOGC": 0.51,
+    "R_POS": 0.502,
+    "R_IPOS": 0.498,
+    "R_FB": 0.5,
+    "R_LEN": 0.5,
+    "R_SL": 0.501,
+    "R_LAST16": 0.507,
+    "R_RINIT": 0.618
+   }
+  },
+  "S3": {
+   "positives": 1627,
+   "pairs": 431,
+   "designControls": {
+    "R_LOGC": 0.508,
+    "R_POS": 0.498,
+    "R_IPOS": 0.508,
+    "R_FB": 0.5,
+    "R_LEN": 0.536,
+    "R_SL": 0.505,
+    "R_LAST16": 0.56,
+    "R_RINIT": 0.501
+   }
+  }
+ }
+}

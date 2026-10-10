@@ -1,0 +1,44 @@
+// atrest.mjs — the at-rest key. With FOLD_PASSPHRASE the store is encrypted;
+// with none it is left UNENCRYPTED and that is disclosed (fold muninn shows it).
+import fs from "node:fs";
+import path from "node:path";
+import { randomKey, importAesKey, sealAes, openAes, pbkdf2 } from "./crypto.mjs";
+
+const b64 = (u8) => Buffer.from(u8).toString("base64");
+const unb64 = (s) => new Uint8Array(Buffer.from(s, "base64"));
+const ROUNDS = 600_000;
+
+function wrap(raw, passphrase) {
+  return (async () => {
+    const salt = crypto.getRandomValues(new Uint8Array(16));
+    const dek = await importAesKey(await pbkdf2(passphrase, salt, ROUNDS));
+    return { v: 1, kdf: "pbkdf2", rounds: ROUNDS, salt: b64(salt), blob: b64(await sealAes(dek, raw)) };
+  })();
+}
+
+export async function openAtRest(home, { passphrase = process.env.FOLD_PASSPHRASE || null } = {}) {
+  const file = path.join(home, "atrest.json");
+  if (fs.existsSync(file)) {
+    const cfg = JSON.parse(fs.readFileSync(file, "utf8"));
+    if (cfg.kdf === "pbkdf2") {
+      if (!passphrase) throw new Error("this store is passphrase-protected — set FOLD_PASSPHRASE");
+      const dek = await importAesKey(await pbkdf2(passphrase, unb64(cfg.salt), cfg.rounds));
+      let raw;
+      try { raw = await openAes(dek, unb64(cfg.blob)); } catch { throw new Error("the passphrase does not open this store"); }
+      return { key: await importAesKey(raw), mode: "pbkdf2" };
+    }
+    if (passphrase) {
+      const raw = randomKey();
+      fs.writeFileSync(file, JSON.stringify(await wrap(raw, passphrase)), { mode: 0o600 });
+      return { key: await importAesKey(raw), mode: "pbkdf2" };
+    }
+    return { key: null, mode: "none" };
+  }
+  if (passphrase) {
+    const raw = randomKey();
+    fs.writeFileSync(file, JSON.stringify(await wrap(raw, passphrase)), { mode: 0o600 });
+    return { key: await importAesKey(raw), mode: "pbkdf2" };
+  }
+  fs.writeFileSync(file, JSON.stringify({ v: 1, kdf: "none" }), { mode: 0o600 });
+  return { key: null, mode: "none" };
+}

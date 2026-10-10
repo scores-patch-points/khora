@@ -1,0 +1,133 @@
+@@@@ task delegate_same_name
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+type Journal struct {
+	buf strings.Builder
+}
+
+func (j *Journal) WriteString(text string) {
+	j.buf.WriteString(text)
+}
+
+func (j *Journal) Len() int {
+	return j.buf.Len()
+}
+
+func (j *Journal) Record(text string) {
+	if j.Len() > 0 {
+		j.WriteString("|")
+	}
+	j.WriteString(text)
+}
+
+func main() {
+	journal := &Journal{}
+	for _, word := range []string{"a", "b", "c"} {
+		journal.Record(word)
+	}
+	fmt.Println(journal.buf.String())
+}
+@@@@ task forward_reference
+package main
+
+import "fmt"
+
+func totalCost(prices []int) int {
+	return applyTax(sumPrices(prices))
+}
+
+func applyTax(amount int) int {
+	return amount + amount/10
+}
+
+func sumPrices(prices []int) int {
+	total := 0
+	for _, price := range prices {
+		total += price
+	}
+	return total
+}
+
+func main() {
+	fmt.Println(totalCost([]int{100, 250, 50}))
+}
+@@@@ task nested_definitions
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func countDown(n int) []int {
+	var step func(k int) []int
+	step = func(k int) []int {
+		if k == 0 {
+			return []int{0}
+		}
+		return append([]int{k}, step(k-1)...)
+	}
+	return step(n)
+}
+
+func main() {
+	parts := []string{}
+	for _, v := range countDown(5) {
+		parts = append(parts, fmt.Sprint(v))
+	}
+	fmt.Println(strings.Join(parts, " "))
+}
+@@@@ task method_chain
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+type Builder struct {
+	parts []string
+}
+
+func (b *Builder) Add(text string) *Builder {
+	b.parts = append(b.parts, text)
+	return b
+}
+
+func (b *Builder) Build() string {
+	return strings.Join(b.parts, "-")
+}
+
+func makeLabel(b *Builder, first string, second string) string {
+	return b.Add(first).Add(second).Build()
+}
+
+func main() {
+	fmt.Println(makeLabel(&Builder{}, "alpha", "beta"))
+}
+@@@@ task call_through_variable
+package main
+
+import "fmt"
+
+func triple(value int) int {
+	return value * 3
+}
+
+func applyTwice(fn func(int) int, value int) int {
+	return fn(fn(value))
+}
+
+func run() int {
+	handler := triple
+	return applyTwice(handler, 5)
+}
+
+func main() {
+	fmt.Println(run())
+}

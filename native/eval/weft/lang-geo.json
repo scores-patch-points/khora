@@ -1,0 +1,566 @@
+{
+  "schema": "LangGeo@1",
+  "giver": "standard linguistic geography (rough)",
+  "places": {
+    "afr": {
+      "name": "Cape Town / Western Cape",
+      "country": "South Africa",
+      "lat": -33.9,
+      "lon": 18.4,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Cape Dutch colonial cradle; Kaapse Afrikaans around Cape Town."
+    },
+    "ar": {
+      "name": "Mecca-Medina (Hejaz)",
+      "country": "Saudi Arabia",
+      "lat": 21.4,
+      "lon": 39.8,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Macro-code for Arabic; classical literary origin in the Hejaz."
+    },
+    "arb": {
+      "name": "Mecca-Medina (Hejaz)",
+      "country": "Saudi Arabia",
+      "lat": 21.4,
+      "lon": 39.8,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Standard/Classical Arabic; Arabian Peninsula literary origin."
+    },
+    "bul": {
+      "name": "Preslav / Pliska",
+      "country": "Bulgaria",
+      "lat": 43.2,
+      "lon": 26.9,
+      "giver": "standard linguistic geography (rough)",
+      "note": "First Bulgarian Empire literary centre (Old Church Slavonic tradition)."
+    },
+    "cat": {
+      "name": "Barcelona / Catalonia",
+      "country": "Spain",
+      "lat": 41.4,
+      "lon": 2.2,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Pyrenean origin; Barcelona as literary standard centre."
+    },
+    "ces": {
+      "name": "Prague / Bohemia",
+      "country": "Czechia",
+      "lat": 50.1,
+      "lon": 14.4,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Bohemian literary tradition centred on Prague."
+    },
+    "cmn": {
+      "name": "Beijing / North China Plain",
+      "country": "China",
+      "lat": 39.9,
+      "lon": 116.4,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Standard Mandarin based on northern/Beijing speech."
+    },
+    "cmn-hans": {
+      "name": "Beijing / North China Plain",
+      "country": "China",
+      "lat": 39.9,
+      "lon": 116.4,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Simplified-script Mandarin; same spoken origin, script variant."
+    },
+    "cym": {
+      "name": "Gwynedd / Wales",
+      "country": "United Kingdom",
+      "lat": 52.3,
+      "lon": -3.8,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Broad Wales centroid; medieval literary tradition strongest in Gwynedd."
+    },
+    "dan": {
+      "name": "Copenhagen / Zealand",
+      "country": "Denmark",
+      "lat": 55.7,
+      "lon": 12.6,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Standard Danish based on Copenhagen/Zealand speech."
+    },
+    "deu": {
+      "name": "Wittenberg / Central Germany",
+      "country": "Germany",
+      "lat": 51.9,
+      "lon": 12.6,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Standard German shaped by Luther and the Meissen-Saxon chancery; broad central-German origin."
+    },
+    "ell": {
+      "name": "Athens / Attica",
+      "country": "Greece",
+      "lat": 38.0,
+      "lon": 23.7,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Classical literary Greek centred on Athens."
+    },
+    "en": {
+      "name": "London / England",
+      "country": "United Kingdom",
+      "lat": 51.5,
+      "lon": -0.1,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Standard English based on the East Midlands/London dialect."
+    },
+    "en-AAVE": {
+      "name": "American South (broad)",
+      "country": "United States",
+      "lat": 33.0,
+      "lon": -86.0,
+      "giver": "standard linguistic geography (rough)",
+      "note": "No single defensible origin; emerged among enslaved Africans across the US South, placed at a broad regional centroid."
+    },
+    "en-pud": {
+      "name": "London / England",
+      "country": "United Kingdom",
+      "lat": 51.5,
+      "lon": -0.1,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Treebank variant code for English; no distinct origin, inherits English."
+    },
+    "eng": {
+      "name": "London / England",
+      "country": "United Kingdom",
+      "lat": 51.5,
+      "lon": -0.1,
+      "giver": "standard linguistic geography (rough)",
+      "note": "ISO 639-3 English; same origin as 'en'."
+    },
+    "est": {
+      "name": "Tallinn / Northern Estonia",
+      "country": "Estonia",
+      "lat": 59.4,
+      "lon": 24.8,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Standard Estonian based on the northern dialect; Tallinn as centre."
+    },
+    "eu": {
+      "name": "Basque Country / Pyrenees",
+      "country": "Spain",
+      "lat": 43.0,
+      "lon": -2.0,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Broad Basque-speaking area centroid; pre-Indo-European, no single city origin."
+    },
+    "eus": {
+      "name": "Basque Country / Pyrenees",
+      "country": "Spain",
+      "lat": 43.0,
+      "lon": -2.0,
+      "giver": "standard linguistic geography (rough)",
+      "note": "ISO 639-3 Basque; same broad origin as 'eu'."
+    },
+    "fas": {
+      "name": "Fars / Shiraz",
+      "country": "Iran",
+      "lat": 29.6,
+      "lon": 52.5,
+      "giver": "standard linguistic geography (rough)",
+      "note": "New Persian literary tradition rooted in southwestern Iran (Fars)."
+    },
+    "fas-unimorph": {
+      "name": "Fars / Shiraz",
+      "country": "Iran",
+      "lat": 29.6,
+      "lon": 52.5,
+      "giver": "standard linguistic geography (rough)",
+      "note": "UniMorph variant of Persian; no distinct origin, inherits Persian."
+    },
+    "fin": {
+      "name": "Turku / Southwestern Finland",
+      "country": "Finland",
+      "lat": 60.5,
+      "lon": 22.3,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Literary Finnish based on western dialects; Turku as historic centre."
+    },
+    "fra": {
+      "name": "Paris / Ile-de-France",
+      "country": "France",
+      "lat": 48.9,
+      "lon": 2.3,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Standard French based on the Francien dialect of the Paris region."
+    },
+    "gle": {
+      "name": "Dublin / Leinster",
+      "country": "Ireland",
+      "lat": 53.3,
+      "lon": -6.3,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Modern Irish revival centred on Dublin; traditional dialects span Munster/Connacht/Ulster."
+    },
+    "glg": {
+      "name": "Santiago de Compostela / Galicia",
+      "country": "Spain",
+      "lat": 42.9,
+      "lon": -8.5,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Galician-Portuguese literary cradle in Galicia."
+    },
+    "grc": {
+      "name": "Athens / Attica",
+      "country": "Greece",
+      "lat": 38.0,
+      "lon": 23.7,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Ancient Greek literary tradition centred on Classical Athens."
+    },
+    "grc-unimorph": {
+      "name": "Athens / Attica",
+      "country": "Greece",
+      "lat": 38.0,
+      "lon": 23.7,
+      "giver": "standard linguistic geography (rough)",
+      "note": "UniMorph variant of Ancient Greek; no distinct origin."
+    },
+    "he": {
+      "name": "Jerusalem / Judea",
+      "country": "Israel",
+      "lat": 31.8,
+      "lon": 35.2,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Classical/Biblical Hebrew literary tradition centred on Jerusalem."
+    },
+    "heb": {
+      "name": "Jerusalem / Judea",
+      "country": "Israel",
+      "lat": 31.8,
+      "lon": 35.2,
+      "giver": "standard linguistic geography (rough)",
+      "note": "ISO 639-3 Hebrew; same origin as 'he'."
+    },
+    "hin": {
+      "name": "Delhi / North India",
+      "country": "India",
+      "lat": 28.6,
+      "lon": 77.2,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Standard Hindi based on the Khari Boli of the Delhi-Meerut region."
+    },
+    "hrv": {
+      "name": "Zagreb / Croatia",
+      "country": "Croatia",
+      "lat": 45.8,
+      "lon": 16.0,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Standard Croatian centred on Zagreb; historic literary Dubrovnik/Illyrian movement."
+    },
+    "hun": {
+      "name": "Budapest / Carpathian Basin",
+      "country": "Hungary",
+      "lat": 47.5,
+      "lon": 19.1,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Hungarian literary tradition centred in the Carpathian Basin."
+    },
+    "hye": {
+      "name": "Armenian Highlands / Yerevan",
+      "country": "Armenia",
+      "lat": 40.2,
+      "lon": 44.5,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Indo-European homeland-in-region; Classical Armenian rooted in the highlands, Yerevan as modern centre."
+    },
+    "ind": {
+      "name": "Riau / Malay heartland",
+      "country": "Indonesia",
+      "lat": 0.5,
+      "lon": 101.4,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Standard Indonesian based on Riau Malay; broad Malay-world origin."
+    },
+    "ita": {
+      "name": "Florence / Tuscany",
+      "country": "Italy",
+      "lat": 43.8,
+      "lon": 11.3,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Standard Italian based on Tuscan, especially Florentine."
+    },
+    "jpn": {
+      "name": "Nara / Kinai",
+      "country": "Japan",
+      "lat": 34.7,
+      "lon": 135.8,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Earliest literary Japanese centred on Nara; Kyoto/Tokyo later standards."
+    },
+    "jpn-unimorph": {
+      "name": "Nara / Kinai",
+      "country": "Japan",
+      "lat": 34.7,
+      "lon": 135.8,
+      "giver": "standard linguistic geography (rough)",
+      "note": "UniMorph variant of Japanese; no distinct origin."
+    },
+    "kat": {
+      "name": "Tbilisi / Kartli",
+      "country": "Georgia",
+      "lat": 41.7,
+      "lon": 44.8,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Kartvelian literary tradition centred on Kartli/Tbilisi."
+    },
+    "kor": {
+      "name": "Seoul / Hanseong",
+      "country": "South Korea",
+      "lat": 37.6,
+      "lon": 127.0,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Standard Korean based on the Seoul dialect; Kaesong/Pyongyang as northern counterpart."
+    },
+    "la": {
+      "name": "Rome / Latium",
+      "country": "Italy",
+      "lat": 41.9,
+      "lon": 12.5,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Latin literary tradition centred on Rome."
+    },
+    "lat": {
+      "name": "Rome / Latium",
+      "country": "Italy",
+      "lat": 41.9,
+      "lon": 12.5,
+      "giver": "standard linguistic geography (rough)",
+      "note": "ISO 639-3 Latin; same origin as 'la'."
+    },
+    "lav": {
+      "name": "Riga / Latvia",
+      "country": "Latvia",
+      "lat": 56.9,
+      "lon": 24.1,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Standard Latvian centred on Riga."
+    },
+    "lit": {
+      "name": "Vilnius / Lithuania",
+      "country": "Lithuania",
+      "lat": 54.7,
+      "lon": 25.3,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Standard Lithuanian centred on Vilnius; historic literary roots in Prussian Lithuania/Samogitia."
+    },
+    "lzh": {
+      "name": "Luoyang / Central Plain",
+      "country": "China",
+      "lat": 34.6,
+      "lon": 112.4,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Literary/Classical Chinese rooted in the Central Plain; Luoyang as classical centre."
+    },
+    "mar": {
+      "name": "Pune / Maharashtra",
+      "country": "India",
+      "lat": 18.5,
+      "lon": 73.9,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Marathi literary tradition centred on the Desh region around Pune."
+    },
+    "mlt": {
+      "name": "Valletta / Malta",
+      "country": "Malta",
+      "lat": 35.9,
+      "lon": 14.5,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Maltese as a distinct language originated on the Maltese islands."
+    },
+    "nld": {
+      "name": "Amsterdam / Holland",
+      "country": "Netherlands",
+      "lat": 52.4,
+      "lon": 4.9,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Standard Dutch based on the Hollandic dialect."
+    },
+    "nob": {
+      "name": "Oslo / Eastern Norway",
+      "country": "Norway",
+      "lat": 59.9,
+      "lon": 10.8,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Bokmal standard based on Danish-influenced urban southeastern Norwegian."
+    },
+    "pcm": {
+      "name": "Lagos / Niger Delta (broad)",
+      "country": "Nigeria",
+      "lat": 6.5,
+      "lon": 3.4,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Creole/pidgin with no single origin; placed at a broad Nigerian coastal centroid."
+    },
+    "pol": {
+      "name": "Poznan / Greater Poland",
+      "country": "Poland",
+      "lat": 52.4,
+      "lon": 16.9,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Cradle of the Polish state and language in Wielkopolska; Krakow/Warsaw later literary centres."
+    },
+    "por": {
+      "name": "Lisbon / Portugal",
+      "country": "Portugal",
+      "lat": 38.7,
+      "lon": -9.1,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Standard Portuguese centred on Lisbon; earliest Galician-Portuguese roots in Galicia."
+    },
+    "ron": {
+      "name": "Bucharest / Wallachia",
+      "country": "Romania",
+      "lat": 44.4,
+      "lon": 26.1,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Standard Romanian based on Wallachian speech; broader Daco-Romance Balkans origin."
+    },
+    "rus": {
+      "name": "Moscow / Central Russia",
+      "country": "Russia",
+      "lat": 55.8,
+      "lon": 37.6,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Standard Russian based on the Moscow dialect; East Slavic roots in Kievan Rus."
+    },
+    "sa-ufal": {
+      "name": "Varanasi / Ganges Plain",
+      "country": "India",
+      "lat": 25.3,
+      "lon": 82.9,
+      "giver": "standard linguistic geography (rough)",
+      "note": "UFAL treebank variant of Sanskrit; classical literary centre Varanasi."
+    },
+    "sa-vedic": {
+      "name": "Kuru-Panchala / Upper Ganges",
+      "country": "India",
+      "lat": 30.0,
+      "lon": 76.0,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Vedic Sanskrit rooted in the Sapta Sindhu/Kuru region of northwest India."
+    },
+    "san": {
+      "name": "Varanasi / Ganges Plain",
+      "country": "India",
+      "lat": 25.3,
+      "lon": 82.9,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Classical Sanskrit literary tradition centred on Varanasi."
+    },
+    "san-unimorph": {
+      "name": "Varanasi / Ganges Plain",
+      "country": "India",
+      "lat": 25.3,
+      "lon": 82.9,
+      "giver": "standard linguistic geography (rough)",
+      "note": "UniMorph variant of Sanskrit; no distinct origin."
+    },
+    "slk": {
+      "name": "Martin / Central Slovakia",
+      "country": "Slovakia",
+      "lat": 49.1,
+      "lon": 18.9,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Standard Slovak based on central Slovak dialects; Martin as codification centre."
+    },
+    "slv": {
+      "name": "Ljubljana / Carniola",
+      "country": "Slovenia",
+      "lat": 46.1,
+      "lon": 14.5,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Standard Slovene based on central Carniolan dialects."
+    },
+    "spa": {
+      "name": "Madrid / Castile",
+      "country": "Spain",
+      "lat": 40.4,
+      "lon": -3.7,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Standard Spanish based on Castilian; Madrid as standard centre, originary Castile to the north."
+    },
+    "srp": {
+      "name": "Belgrade / Serbia",
+      "country": "Serbia",
+      "lat": 44.8,
+      "lon": 20.5,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Standard Serbian based on Eastern Herzegovinian; Belgrade as centre after Vuk's reform."
+    },
+    "swe": {
+      "name": "Stockholm / Svealand",
+      "country": "Sweden",
+      "lat": 59.3,
+      "lon": 18.1,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Standard Swedish based on the Svealand/Stockholm dialects."
+    },
+    "tam": {
+      "name": "Madurai / Tamil Nadu",
+      "country": "India",
+      "lat": 9.9,
+      "lon": 78.1,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Tamil literary tradition centred on Madurai; Sangam literature."
+    },
+    "tel": {
+      "name": "Rajahmundry / Andhra",
+      "country": "India",
+      "lat": 17.0,
+      "lon": 81.8,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Historic Telugu literary centre on the Godavari; broader Andhra region."
+    },
+    "tur": {
+      "name": "Istanbul / Anatolia",
+      "country": "Turkey",
+      "lat": 41.0,
+      "lon": 29.0,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Standard Turkish based on the Istanbul dialect; Oghuz roots in Anatolia."
+    },
+    "uig": {
+      "name": "Kashgar / Tarim Basin",
+      "country": "China",
+      "lat": 39.5,
+      "lon": 76.0,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Uyghur literary tradition centred on the Tarim Basin (Kashgar)."
+    },
+    "ukr": {
+      "name": "Kyiv / Central Ukraine",
+      "country": "Ukraine",
+      "lat": 50.5,
+      "lon": 30.5,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Standard Ukrainian based on southeastern dialects; Kyiv as centre."
+    },
+    "urd": {
+      "name": "Delhi / North India",
+      "country": "India",
+      "lat": 28.6,
+      "lon": 77.2,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Standard Urdu based on the Delhi-Meerut Khari Boli; Lucknow as a major literary centre."
+    },
+    "vie": {
+      "name": "Hanoi / Red River Delta",
+      "country": "Vietnam",
+      "lat": 21.0,
+      "lon": 105.8,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Standard Vietnamese based on the northern (Hanoi) dialect."
+    },
+    "wol": {
+      "name": "Dakar / Senegambia",
+      "country": "Senegal",
+      "lat": 14.7,
+      "lon": -17.4,
+      "giver": "standard linguistic geography (rough)",
+      "note": "Wolof heartland in coastal Senegal/Senegambia, centred on Dakar."
+    }
+  }
+}

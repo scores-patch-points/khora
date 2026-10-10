@@ -1,0 +1,1157 @@
+{
+ "part": "calib2",
+ "statIds": [
+  "zipfAlpha",
+  "heapsBeta",
+  "ttr",
+  "hapaxShare",
+  "rankBinEnt",
+  "abbrev",
+  "menzerath",
+  "recurLen",
+  "lenAcf1",
+  "lenDocEps",
+  "lenCV",
+  "lenLogSkew"
+ ],
+ "nulls": {
+  "zipfAlpha": "token-global",
+  "heapsBeta": "token-global",
+  "ttr": "token-global",
+  "hapaxShare": "token-global",
+  "rankBinEnt": "token-global",
+  "abbrev": "token-global",
+  "menzerath": "token-global",
+  "recurLen": "token-global",
+  "lenAcf1": "unit-order",
+  "lenDocEps": "unit-order",
+  "lenCV": "token-global",
+  "lenLogSkew": "token-global"
+ },
+ "inert": [
+  "abbrev",
+  "lenCV",
+  "lenLogSkew"
+ ],
+ "rows": [
+  {
+   "id": "iid2-r0",
+   "z": {
+    "zipfAlpha": 0.29,
+    "heapsBeta": -1.79,
+    "ttr": 0.06,
+    "hapaxShare": -0.2,
+    "rankBinEnt": -0.03,
+    "abbrev": null,
+    "menzerath": -0.77,
+    "recurLen": 0.72,
+    "lenAcf1": -1.33,
+    "lenDocEps": 0.02,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r1",
+   "z": {
+    "zipfAlpha": 0.06,
+    "heapsBeta": 1.39,
+    "ttr": 0.33,
+    "hapaxShare": -0.13,
+    "rankBinEnt": 1.39,
+    "abbrev": null,
+    "menzerath": -0.39,
+    "recurLen": -0.99,
+    "lenAcf1": 1.5,
+    "lenDocEps": 0.28,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r2",
+   "z": {
+    "zipfAlpha": -0.49,
+    "heapsBeta": -1.07,
+    "ttr": -1.34,
+    "hapaxShare": -1.42,
+    "rankBinEnt": -2.28,
+    "abbrev": null,
+    "menzerath": 1.47,
+    "recurLen": 4.04,
+    "lenAcf1": -0.68,
+    "lenDocEps": -1.4,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r3",
+   "z": {
+    "zipfAlpha": 1.65,
+    "heapsBeta": 0.31,
+    "ttr": 0.65,
+    "hapaxShare": 0.54,
+    "rankBinEnt": 1.51,
+    "abbrev": null,
+    "menzerath": -0.05,
+    "recurLen": 0,
+    "lenAcf1": 0,
+    "lenDocEps": -1.23,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r4",
+   "z": {
+    "zipfAlpha": -0.32,
+    "heapsBeta": 1.6,
+    "ttr": 0.37,
+    "hapaxShare": -0.24,
+    "rankBinEnt": -0.13,
+    "abbrev": null,
+    "menzerath": -0.04,
+    "recurLen": 0.59,
+    "lenAcf1": -0.82,
+    "lenDocEps": 0.26,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r5",
+   "z": {
+    "zipfAlpha": 0.35,
+    "heapsBeta": 0.08,
+    "ttr": 1.43,
+    "hapaxShare": 1.29,
+    "rankBinEnt": 2.03,
+    "abbrev": null,
+    "menzerath": 1.05,
+    "recurLen": -1.85,
+    "lenAcf1": -1.08,
+    "lenDocEps": 0.92,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r6",
+   "z": {
+    "zipfAlpha": 0.62,
+    "heapsBeta": -1.99,
+    "ttr": -1.37,
+    "hapaxShare": -1.61,
+    "rankBinEnt": 1.07,
+    "abbrev": null,
+    "menzerath": -0.27,
+    "recurLen": -2.63,
+    "lenAcf1": 1.51,
+    "lenDocEps": 2.84,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r7",
+   "z": {
+    "zipfAlpha": 1.71,
+    "heapsBeta": -0.29,
+    "ttr": -1.03,
+    "hapaxShare": -1.78,
+    "rankBinEnt": -1.27,
+    "abbrev": null,
+    "menzerath": 0.71,
+    "recurLen": 0.51,
+    "lenAcf1": 1.18,
+    "lenDocEps": -0.04,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r8",
+   "z": {
+    "zipfAlpha": 1.51,
+    "heapsBeta": -1.59,
+    "ttr": -0.91,
+    "hapaxShare": -1.14,
+    "rankBinEnt": -0.77,
+    "abbrev": null,
+    "menzerath": 1.07,
+    "recurLen": -0.98,
+    "lenAcf1": -1.29,
+    "lenDocEps": -2.17,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r9",
+   "z": {
+    "zipfAlpha": -1,
+    "heapsBeta": -0.2,
+    "ttr": 0.04,
+    "hapaxShare": 0.02,
+    "rankBinEnt": -0.34,
+    "abbrev": null,
+    "menzerath": 1.95,
+    "recurLen": 0.24,
+    "lenAcf1": 0.34,
+    "lenDocEps": -0.41,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r10",
+   "z": {
+    "zipfAlpha": -0.46,
+    "heapsBeta": 1.75,
+    "ttr": -0.99,
+    "hapaxShare": 0.27,
+    "rankBinEnt": 2.04,
+    "abbrev": null,
+    "menzerath": 0.82,
+    "recurLen": -1.57,
+    "lenAcf1": 0.41,
+    "lenDocEps": -0.62,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r11",
+   "z": {
+    "zipfAlpha": -0.66,
+    "heapsBeta": 0.5,
+    "ttr": 0.25,
+    "hapaxShare": 0.73,
+    "rankBinEnt": -0.15,
+    "abbrev": null,
+    "menzerath": -0.17,
+    "recurLen": 1.13,
+    "lenAcf1": -0.21,
+    "lenDocEps": -1.35,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r12",
+   "z": {
+    "zipfAlpha": -0.51,
+    "heapsBeta": 0.07,
+    "ttr": 1.25,
+    "hapaxShare": 1.51,
+    "rankBinEnt": -0.54,
+    "abbrev": null,
+    "menzerath": 1.36,
+    "recurLen": 0.34,
+    "lenAcf1": 4.13,
+    "lenDocEps": 1.35,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r13",
+   "z": {
+    "zipfAlpha": -1.09,
+    "heapsBeta": 0.1,
+    "ttr": -1.87,
+    "hapaxShare": -0.56,
+    "rankBinEnt": -1.73,
+    "abbrev": null,
+    "menzerath": -1.98,
+    "recurLen": -1.81,
+    "lenAcf1": -0.37,
+    "lenDocEps": -0.93,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r14",
+   "z": {
+    "zipfAlpha": 0.65,
+    "heapsBeta": 0,
+    "ttr": -2.98,
+    "hapaxShare": -0.89,
+    "rankBinEnt": -0.37,
+    "abbrev": null,
+    "menzerath": 0.89,
+    "recurLen": 1.75,
+    "lenAcf1": 0.56,
+    "lenDocEps": -1.8,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r15",
+   "z": {
+    "zipfAlpha": -3.2,
+    "heapsBeta": 0.09,
+    "ttr": 0.78,
+    "hapaxShare": -0.21,
+    "rankBinEnt": -1.06,
+    "abbrev": null,
+    "menzerath": 0.47,
+    "recurLen": 0.99,
+    "lenAcf1": -0.99,
+    "lenDocEps": -0.62,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r16",
+   "z": {
+    "zipfAlpha": 0.03,
+    "heapsBeta": 0.25,
+    "ttr": -0.89,
+    "hapaxShare": -0.02,
+    "rankBinEnt": 0.16,
+    "abbrev": null,
+    "menzerath": 0.88,
+    "recurLen": 0.51,
+    "lenAcf1": 2.72,
+    "lenDocEps": -0.8,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r17",
+   "z": {
+    "zipfAlpha": -5.71,
+    "heapsBeta": -1.94,
+    "ttr": -0.4,
+    "hapaxShare": -0.88,
+    "rankBinEnt": -2.61,
+    "abbrev": null,
+    "menzerath": 0.96,
+    "recurLen": -1.4,
+    "lenAcf1": 0.84,
+    "lenDocEps": -1.03,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r18",
+   "z": {
+    "zipfAlpha": 0.09,
+    "heapsBeta": -1.14,
+    "ttr": 3.53,
+    "hapaxShare": 4.05,
+    "rankBinEnt": 1.93,
+    "abbrev": null,
+    "menzerath": 0.43,
+    "recurLen": -0.5,
+    "lenAcf1": 0.62,
+    "lenDocEps": -1.34,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r19",
+   "z": {
+    "zipfAlpha": 0.17,
+    "heapsBeta": -1.82,
+    "ttr": -1.33,
+    "hapaxShare": -0.18,
+    "rankBinEnt": 0.45,
+    "abbrev": null,
+    "menzerath": 1.17,
+    "recurLen": -0.49,
+    "lenAcf1": -0.99,
+    "lenDocEps": 0.32,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r20",
+   "z": {
+    "zipfAlpha": 3.45,
+    "heapsBeta": 0.16,
+    "ttr": -0.77,
+    "hapaxShare": -1.36,
+    "rankBinEnt": 0.22,
+    "abbrev": null,
+    "menzerath": -0.43,
+    "recurLen": -0.7,
+    "lenAcf1": -0.14,
+    "lenDocEps": -0.64,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r21",
+   "z": {
+    "zipfAlpha": -1.14,
+    "heapsBeta": -0.91,
+    "ttr": -2.5,
+    "hapaxShare": -1.36,
+    "rankBinEnt": -0.19,
+    "abbrev": null,
+    "menzerath": -0.11,
+    "recurLen": 1.67,
+    "lenAcf1": -0.54,
+    "lenDocEps": -1.08,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r22",
+   "z": {
+    "zipfAlpha": -0.47,
+    "heapsBeta": 1.54,
+    "ttr": 1.12,
+    "hapaxShare": 1.21,
+    "rankBinEnt": 1.16,
+    "abbrev": null,
+    "menzerath": 0.84,
+    "recurLen": 0.46,
+    "lenAcf1": -0.99,
+    "lenDocEps": 1.38,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r23",
+   "z": {
+    "zipfAlpha": 2.84,
+    "heapsBeta": 2.09,
+    "ttr": 0.34,
+    "hapaxShare": -0.08,
+    "rankBinEnt": 0.95,
+    "abbrev": null,
+    "menzerath": 1.79,
+    "recurLen": 0.31,
+    "lenAcf1": 1.08,
+    "lenDocEps": -0.43,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r24",
+   "z": {
+    "zipfAlpha": 0.15,
+    "heapsBeta": -0.61,
+    "ttr": -1.66,
+    "hapaxShare": 0.5,
+    "rankBinEnt": -1.21,
+    "abbrev": null,
+    "menzerath": 2.93,
+    "recurLen": 2,
+    "lenAcf1": -1.25,
+    "lenDocEps": 0.97,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r25",
+   "z": {
+    "zipfAlpha": -1.47,
+    "heapsBeta": 0.32,
+    "ttr": -4.01,
+    "hapaxShare": -1.74,
+    "rankBinEnt": -0.28,
+    "abbrev": null,
+    "menzerath": -0.2,
+    "recurLen": 1.91,
+    "lenAcf1": 0.2,
+    "lenDocEps": -0.5,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r26",
+   "z": {
+    "zipfAlpha": 0.63,
+    "heapsBeta": -0.68,
+    "ttr": 0.87,
+    "hapaxShare": 0.4,
+    "rankBinEnt": -0.54,
+    "abbrev": null,
+    "menzerath": 1.04,
+    "recurLen": 0.94,
+    "lenAcf1": 0.82,
+    "lenDocEps": 0.7,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r27",
+   "z": {
+    "zipfAlpha": 0.16,
+    "heapsBeta": 0.68,
+    "ttr": 0.14,
+    "hapaxShare": 0.71,
+    "rankBinEnt": 0.05,
+    "abbrev": null,
+    "menzerath": 1.98,
+    "recurLen": 1.22,
+    "lenAcf1": 1.54,
+    "lenDocEps": -0.23,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r28",
+   "z": {
+    "zipfAlpha": -0.59,
+    "heapsBeta": -0.97,
+    "ttr": -0.02,
+    "hapaxShare": 0.66,
+    "rankBinEnt": 1.5,
+    "abbrev": null,
+    "menzerath": 1.48,
+    "recurLen": -1.2,
+    "lenAcf1": 0.45,
+    "lenDocEps": 1.09,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r29",
+   "z": {
+    "zipfAlpha": -1.17,
+    "heapsBeta": 2.18,
+    "ttr": 0.12,
+    "hapaxShare": 0.91,
+    "rankBinEnt": 1.83,
+    "abbrev": null,
+    "menzerath": -0.53,
+    "recurLen": 0.49,
+    "lenAcf1": 0.69,
+    "lenDocEps": -1.09,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r30",
+   "z": {
+    "zipfAlpha": -1.06,
+    "heapsBeta": -0.6,
+    "ttr": -0.37,
+    "hapaxShare": 0.43,
+    "rankBinEnt": -0.3,
+    "abbrev": null,
+    "menzerath": 2.01,
+    "recurLen": -0.63,
+    "lenAcf1": 0.54,
+    "lenDocEps": 0.14,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r31",
+   "z": {
+    "zipfAlpha": -0.31,
+    "heapsBeta": 0.35,
+    "ttr": 0.87,
+    "hapaxShare": 2.17,
+    "rankBinEnt": 1.16,
+    "abbrev": null,
+    "menzerath": -0.34,
+    "recurLen": 2.36,
+    "lenAcf1": -0.16,
+    "lenDocEps": -0.45,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r32",
+   "z": {
+    "zipfAlpha": -0.88,
+    "heapsBeta": 0.06,
+    "ttr": -0.66,
+    "hapaxShare": -0.6,
+    "rankBinEnt": -0.72,
+    "abbrev": null,
+    "menzerath": 0.9,
+    "recurLen": -1.06,
+    "lenAcf1": 0.03,
+    "lenDocEps": 1.45,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r33",
+   "z": {
+    "zipfAlpha": -0.28,
+    "heapsBeta": 2.28,
+    "ttr": 1.62,
+    "hapaxShare": 2.22,
+    "rankBinEnt": 0.23,
+    "abbrev": null,
+    "menzerath": 0.14,
+    "recurLen": 2.84,
+    "lenAcf1": 1.01,
+    "lenDocEps": 0.6,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r34",
+   "z": {
+    "zipfAlpha": -0.51,
+    "heapsBeta": 0.71,
+    "ttr": 1.13,
+    "hapaxShare": 1.78,
+    "rankBinEnt": 1.04,
+    "abbrev": null,
+    "menzerath": -1.61,
+    "recurLen": 1.38,
+    "lenAcf1": -0.09,
+    "lenDocEps": -0.41,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r35",
+   "z": {
+    "zipfAlpha": -3.32,
+    "heapsBeta": -0.48,
+    "ttr": -1.53,
+    "hapaxShare": -1.63,
+    "rankBinEnt": -0.88,
+    "abbrev": null,
+    "menzerath": 0.04,
+    "recurLen": -1.17,
+    "lenAcf1": 0.46,
+    "lenDocEps": 0.49,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r36",
+   "z": {
+    "zipfAlpha": -0.54,
+    "heapsBeta": -0.75,
+    "ttr": 0.57,
+    "hapaxShare": 0.43,
+    "rankBinEnt": -0.83,
+    "abbrev": null,
+    "menzerath": 2.48,
+    "recurLen": -1.01,
+    "lenAcf1": 0.78,
+    "lenDocEps": -1.51,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r37",
+   "z": {
+    "zipfAlpha": -0.37,
+    "heapsBeta": -0.19,
+    "ttr": 1.92,
+    "hapaxShare": 1.96,
+    "rankBinEnt": -0.61,
+    "abbrev": null,
+    "menzerath": 0.33,
+    "recurLen": -1.4,
+    "lenAcf1": 0.64,
+    "lenDocEps": 0.58,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r38",
+   "z": {
+    "zipfAlpha": 1.35,
+    "heapsBeta": 1.54,
+    "ttr": 0.4,
+    "hapaxShare": -0.04,
+    "rankBinEnt": 0.32,
+    "abbrev": null,
+    "menzerath": -1.6,
+    "recurLen": -2.01,
+    "lenAcf1": 1.05,
+    "lenDocEps": -1.66,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r39",
+   "z": {
+    "zipfAlpha": 1.34,
+    "heapsBeta": 0.44,
+    "ttr": -0.78,
+    "hapaxShare": -1.51,
+    "rankBinEnt": -2.28,
+    "abbrev": null,
+    "menzerath": -0.96,
+    "recurLen": -0.84,
+    "lenAcf1": -0.18,
+    "lenDocEps": 0.86,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r40",
+   "z": {
+    "zipfAlpha": -0.96,
+    "heapsBeta": -0.88,
+    "ttr": 1.4,
+    "hapaxShare": 2.39,
+    "rankBinEnt": 1.53,
+    "abbrev": null,
+    "menzerath": -0.85,
+    "recurLen": 0.28,
+    "lenAcf1": 1.28,
+    "lenDocEps": 1.79,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r41",
+   "z": {
+    "zipfAlpha": 0.17,
+    "heapsBeta": 0.09,
+    "ttr": 0.23,
+    "hapaxShare": 2.01,
+    "rankBinEnt": 0.56,
+    "abbrev": null,
+    "menzerath": 0.29,
+    "recurLen": 0.63,
+    "lenAcf1": 0.49,
+    "lenDocEps": 1.43,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r42",
+   "z": {
+    "zipfAlpha": 1.32,
+    "heapsBeta": -1.34,
+    "ttr": -1.07,
+    "hapaxShare": -1.14,
+    "rankBinEnt": -1.33,
+    "abbrev": null,
+    "menzerath": 1.57,
+    "recurLen": -1.12,
+    "lenAcf1": -0.46,
+    "lenDocEps": 0.07,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r43",
+   "z": {
+    "zipfAlpha": -1.76,
+    "heapsBeta": -0.08,
+    "ttr": 1.14,
+    "hapaxShare": 1.11,
+    "rankBinEnt": 0.76,
+    "abbrev": null,
+    "menzerath": -0.19,
+    "recurLen": 4.4,
+    "lenAcf1": -0.74,
+    "lenDocEps": -1.5,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r44",
+   "z": {
+    "zipfAlpha": 0.31,
+    "heapsBeta": 0.26,
+    "ttr": 0.21,
+    "hapaxShare": -1.05,
+    "rankBinEnt": -0.62,
+    "abbrev": null,
+    "menzerath": -1.29,
+    "recurLen": -0.22,
+    "lenAcf1": -0.69,
+    "lenDocEps": -0.24,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r45",
+   "z": {
+    "zipfAlpha": 1.45,
+    "heapsBeta": 1.52,
+    "ttr": -0.11,
+    "hapaxShare": 0.6,
+    "rankBinEnt": 2.08,
+    "abbrev": null,
+    "menzerath": -0.89,
+    "recurLen": 0.03,
+    "lenAcf1": -1.5,
+    "lenDocEps": 0.19,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r46",
+   "z": {
+    "zipfAlpha": -1.57,
+    "heapsBeta": 1.92,
+    "ttr": 1.02,
+    "hapaxShare": 1.45,
+    "rankBinEnt": 1.38,
+    "abbrev": null,
+    "menzerath": -1.17,
+    "recurLen": -1.05,
+    "lenAcf1": -0.57,
+    "lenDocEps": -0.2,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r47",
+   "z": {
+    "zipfAlpha": 1.11,
+    "heapsBeta": 0.03,
+    "ttr": -0.2,
+    "hapaxShare": -0.16,
+    "rankBinEnt": 0.18,
+    "abbrev": null,
+    "menzerath": -0.23,
+    "recurLen": -0.98,
+    "lenAcf1": 1.45,
+    "lenDocEps": -1.11,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r48",
+   "z": {
+    "zipfAlpha": -0.06,
+    "heapsBeta": -0.76,
+    "ttr": 0.48,
+    "hapaxShare": 0.98,
+    "rankBinEnt": 0.95,
+    "abbrev": null,
+    "menzerath": 0.93,
+    "recurLen": 0.35,
+    "lenAcf1": -1.27,
+    "lenDocEps": 0.52,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r49",
+   "z": {
+    "zipfAlpha": 0.25,
+    "heapsBeta": -0.96,
+    "ttr": -2.29,
+    "hapaxShare": -2.79,
+    "rankBinEnt": -0.72,
+    "abbrev": null,
+    "menzerath": 1.19,
+    "recurLen": -1.28,
+    "lenAcf1": 0.57,
+    "lenDocEps": -0.57,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r50",
+   "z": {
+    "zipfAlpha": -0.93,
+    "heapsBeta": -0.87,
+    "ttr": 0.36,
+    "hapaxShare": -0.51,
+    "rankBinEnt": -1.22,
+    "abbrev": null,
+    "menzerath": -0.43,
+    "recurLen": -5.76,
+    "lenAcf1": 0.52,
+    "lenDocEps": 0.94,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r51",
+   "z": {
+    "zipfAlpha": 1.46,
+    "heapsBeta": 0.43,
+    "ttr": -1.2,
+    "hapaxShare": -0.93,
+    "rankBinEnt": -1.8,
+    "abbrev": null,
+    "menzerath": -1.54,
+    "recurLen": 0.47,
+    "lenAcf1": 1.15,
+    "lenDocEps": 0.14,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r52",
+   "z": {
+    "zipfAlpha": 0.03,
+    "heapsBeta": -1.96,
+    "ttr": 0.41,
+    "hapaxShare": 0.33,
+    "rankBinEnt": 1.65,
+    "abbrev": null,
+    "menzerath": -0.64,
+    "recurLen": -0.97,
+    "lenAcf1": 1.27,
+    "lenDocEps": 0.59,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r53",
+   "z": {
+    "zipfAlpha": -0.42,
+    "heapsBeta": -0.97,
+    "ttr": 0.45,
+    "hapaxShare": 1.06,
+    "rankBinEnt": 1.67,
+    "abbrev": null,
+    "menzerath": 0.1,
+    "recurLen": 0.39,
+    "lenAcf1": -1.42,
+    "lenDocEps": -0.73,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r54",
+   "z": {
+    "zipfAlpha": -0.59,
+    "heapsBeta": 0.73,
+    "ttr": 1.34,
+    "hapaxShare": 1.66,
+    "rankBinEnt": 2.5,
+    "abbrev": null,
+    "menzerath": -0.87,
+    "recurLen": -0.74,
+    "lenAcf1": -0.95,
+    "lenDocEps": 0.9,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r55",
+   "z": {
+    "zipfAlpha": -0.66,
+    "heapsBeta": 2.95,
+    "ttr": -0.97,
+    "hapaxShare": -0.34,
+    "rankBinEnt": -0.83,
+    "abbrev": null,
+    "menzerath": -0.95,
+    "recurLen": 0.86,
+    "lenAcf1": 0.23,
+    "lenDocEps": 0.88,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r56",
+   "z": {
+    "zipfAlpha": -1.04,
+    "heapsBeta": 0.3,
+    "ttr": -1.29,
+    "hapaxShare": -0.01,
+    "rankBinEnt": -0.8,
+    "abbrev": null,
+    "menzerath": 1.16,
+    "recurLen": -1.89,
+    "lenAcf1": -1.04,
+    "lenDocEps": 1.6,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r57",
+   "z": {
+    "zipfAlpha": -0.77,
+    "heapsBeta": -0.26,
+    "ttr": -0.63,
+    "hapaxShare": -0.5,
+    "rankBinEnt": -0.08,
+    "abbrev": null,
+    "menzerath": -0.06,
+    "recurLen": 0.31,
+    "lenAcf1": 3.19,
+    "lenDocEps": 0.95,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r58",
+   "z": {
+    "zipfAlpha": 1.34,
+    "heapsBeta": 0.45,
+    "ttr": -3.2,
+    "hapaxShare": -2.34,
+    "rankBinEnt": -0.44,
+    "abbrev": null,
+    "menzerath": -1.52,
+    "recurLen": -0.16,
+    "lenAcf1": 0.78,
+    "lenDocEps": 0.38,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  },
+  {
+   "id": "iid2-r59",
+   "z": {
+    "zipfAlpha": -1.56,
+    "heapsBeta": 0.99,
+    "ttr": -0.69,
+    "hapaxShare": -0.02,
+    "rankBinEnt": -1.28,
+    "abbrev": null,
+    "menzerath": 0.87,
+    "recurLen": 1.09,
+    "lenAcf1": 1.21,
+    "lenDocEps": 1.86,
+    "lenCV": null,
+    "lenLogSkew": null
+   }
+  }
+ ],
+ "summary": {
+  "zipfAlpha": {
+   "n": 60,
+   "rateGe2": 0.083,
+   "rateGe3": 0.067,
+   "rateGe4": 0.017,
+   "meanZ": -0.19,
+   "sdZ": 1.41
+  },
+  "heapsBeta": {
+   "n": 60,
+   "rateGe2": 0.067,
+   "rateGe3": 0,
+   "rateGe4": 0,
+   "meanZ": 0.05,
+   "sdZ": 1.15
+  },
+  "ttr": {
+   "n": 60,
+   "rateGe2": 0.1,
+   "rateGe3": 0.05,
+   "rateGe4": 0.017,
+   "meanZ": -0.2,
+   "sdZ": 1.34
+  },
+  "hapaxShare": {
+   "n": 60,
+   "rateGe2": 0.117,
+   "rateGe3": 0.017,
+   "rateGe4": 0.017,
+   "meanZ": 0.1,
+   "sdZ": 1.3
+  },
+  "rankBinEnt": {
+   "n": 60,
+   "rateGe2": 0.117,
+   "rateGe3": 0,
+   "rateGe4": 0,
+   "meanZ": 0.07,
+   "sdZ": 1.23
+  },
+  "abbrev": {
+   "n": 0,
+   "rateGe2": null,
+   "rateGe3": null,
+   "rateGe4": null,
+   "meanZ": null,
+   "sdZ": null
+  },
+  "menzerath": {
+   "n": 60,
+   "rateGe2": 0.05,
+   "rateGe3": 0,
+   "rateGe4": 0,
+   "meanZ": 0.25,
+   "sdZ": 1.11
+  },
+  "recurLen": {
+   "n": 60,
+   "rateGe2": 0.133,
+   "rateGe3": 0.05,
+   "rateGe4": 0.05,
+   "meanZ": -0.02,
+   "sdZ": 1.6
+  },
+  "lenAcf1": {
+   "n": 60,
+   "rateGe2": 0.05,
+   "rateGe3": 0.033,
+   "rateGe4": 0.017,
+   "meanZ": 0.26,
+   "sdZ": 1.14
+  },
+  "lenDocEps": {
+   "n": 60,
+   "rateGe2": 0.033,
+   "rateGe3": 0,
+   "rateGe4": 0,
+   "meanZ": 0.01,
+   "sdZ": 1.06
+  },
+  "lenCV": {
+   "n": 0,
+   "rateGe2": null,
+   "rateGe3": null,
+   "rateGe4": null,
+   "meanZ": null,
+   "sdZ": null
+  },
+  "lenLogSkew": {
+   "n": 0,
+   "rateGe2": null,
+   "rateGe3": null,
+   "rateGe4": null,
+   "meanZ": null,
+   "sdZ": null
+  }
+ },
+ "reference": "Student t with 9 df (10 null draws): sd 1.134, P(|z|>=2) 0.077, P(|z|>=3) 0.015, P(|z|>=4) 0.0031"
+}

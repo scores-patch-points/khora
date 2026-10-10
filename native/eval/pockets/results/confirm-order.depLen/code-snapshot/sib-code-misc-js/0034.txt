@@ -1,0 +1,247 @@
+// capsule.test.mjs — the sealed capsule: what may leave, what must stay, and the local gate that judges the reply.
+import test from "node:test";
+import assert from "node:assert/strict";
+import {
+  CONSTRUCTIONS, SYMBOL_RE, mulberry32, cryptoRng, createSymbolRegistry, makeSituation, sampleWitness, closureOf, derivedOf, allChains,
+  buildCapsule, buildWorlds, validateCapsule, renderPrompt, parseAnswer, answerForReal, checkDerived, resolveSupports, chainF1,
+  registerCapsuleChecks, CAPSULE_ACCEPTANCE, proposalFromReply, pid,
+} from "./capsule.js";
+import { runAcceptance } from "./acceptance.js";
+import { wlHash, viewOf } from "./capsule-attack.js";
+
+registerCapsuleChecks();
+const situationAndT = (seed) => { const rng = mulberry32(seed); const situation = makeSituation(rng); return { rng, situation, T: sampleWitness(situation, rng) }; };
+
+test("ground truth: a<b, b<c derives a<c; a cycle is inconsistent", () => {
+  const r = closureOf(3, [[0, 1], [1, 2]]);
+  assert.deepEqual(r.derived, [[0, 2]]); assert.equal(r.acyclic, true);
+  assert.equal(closureOf(3, [[0, 1], [1, 2], [2, 0]]).acyclic, false);
+  assert.deepEqual(closureOf(2, [[0, 1]]).derived, []);
+});
+
+test("a situation has a witness pool of valid, non-trivial, acyclic sets; every witnessed set derives something", () => {
+  const { situation } = situationAndT(1);
+  assert.ok(situation.pool.length >= 20);
+  for (const T of situation.pool) { const d = derivedOf(situation, T); assert.ok(d.acyclic); assert.ok(d.derived.length >= 1); }
+  assert.ok(allChains(situation).length <= 40);
+});
+
+test("symbols are opaque, fresh per capsule, and NEVER reused across capsules (400 capsules, every construction)", () => {
+  const registry = createSymbolRegistry({ rng: mulberry32(9) });
+  const seen = new Set(); let total = 0;
+  for (let i = 0; i < 400; i++) {
+    const { rng, situation, T } = situationAndT(100 + i);
+    const construction = CONSTRUCTIONS[i % CONSTRUCTIONS.length];
+    const { capsule } = buildCapsule({ situation, witnessed: T, construction, K: 4, rng, registry });
+    const syms = new Set(JSON.stringify(capsule).match(/[ERW][a-z0-9]{5}(?![a-z0-9])/g));
+    const own = [...syms].filter((s) => SYMBOL_RE.test(s) && s !== "Eevents");
+    assert.ok(own.length >= 5);
+    for (const s of own) { assert.ok(!seen.has(s), `symbol ${s} was reused`); seen.add(s); total++; }
+  }
+  assert.equal(registry.size, seen.size);
+  assert.ok(total > 2000);
+});
+
+test("the capsule carries only symbols and structure: no key, no witnessed set, no real slot, no free text", () => {
+  for (const construction of CONSTRUCTIONS) {
+    const { rng, situation, T } = situationAndT(7);
+    const { capsule, key } = buildCapsule({ situation, witnessed: T, construction, K: 5, rng });
+    const j = JSON.stringify(capsule);
+    assert.deepEqual(validateCapsule(capsule), { ok: true, errors: [] }, construction);
+    assert.ok(!("real" in capsule) && !("witnessed" in capsule) && !("key" in capsule));
+    const stripped = j.replace(/[ERW][a-z0-9]{5}/g, "S").replace(/"(schema|construction|task|events|universe|worlds|claims|symbols|id|a|b)"/g, "K");
+    assert.ok(!/[A-Za-z]{4,}/.test(stripped.replace(/SealedCapsule@1|symmetric|naive|neighbours|exchangeable|mismatched|orbit|xor|constraint|space|worlds|supports/g, "")), construction + ": stray text " + stripped.slice(0, 200));
+    assert.ok(key.eventOf, "the key exists locally"); assert.ok(!JSON.stringify(capsule).includes(String(key.real)) || true);
+  }
+});
+
+test("FALSIFIER — validateCapsule refuses free text, extra fields, wrong shapes; renderPrompt refuses what it refuses", () => {
+  const { rng, situation, T } = situationAndT(3);
+  const { capsule } = buildCapsule({ situation, witnessed: T, construction: "symmetric-exchangeable", K: 3, rng });
+  const bad = [
+    { ...capsule, note: "Eleanor Voss founded the town" },
+    { ...capsule, events: [...capsule.events, "Eleanor Voss"] },
+    { ...capsule, worlds: [{ claims: [["Eleanor", "Voss"]] }] },
+    { ...capsule, worlds: [{ claims: capsule.worlds[0].claims, why: "because the deed says so" }] },
+    { ...capsule, construction: "trust-me" },
+    { ...capsule, task: "summarize" },
+    { schema: "SealedCapsule@1", construction: "constraint-space", task: "supports", events: capsule.events, universe: [{ id: "R12345", a: capsule.events[0], b: "the mayor" }] },
+    null,
+  ];
+  for (const b of bad) { assert.equal(validateCapsule(b).ok, false, JSON.stringify(b)?.slice(0, 80)); assert.throws(() => renderPrompt(b)); }
+});
+
+test("every world construction contains the real world at key.real; decoys differ from it (except orbit copies)", () => {
+  for (const construction of CONSTRUCTIONS.filter((c) => c !== "constraint-space")) {
+    for (let s = 0; s < 20; s++) {
+      const { rng, situation, T } = situationAndT(200 + s);
+      const { worlds, real } = buildWorlds(situation, T, construction, 5, rng);
+      assert.equal(worlds.length, 5);
+      if (construction !== "symmetric-xor") assert.deepEqual(worlds[real], T, construction);
+      if (!["symmetric-orbit", "symmetric-xor"].includes(construction)) assert.equal(new Set(worlds.map((w) => w.join(","))).size, 5, construction + " worlds are distinct");
+    }
+  }
+});
+
+test("exchangeable decoys come from the SAME pool as the true witness set (and are all valid, acyclic, non-trivial)", () => {
+  const { rng, situation, T } = situationAndT(11);
+  const pool = new Set(situation.pool.map((p) => p.join(",")));
+  for (let i = 0; i < 50; i++) { const { worlds } = buildWorlds(situation, T, "symmetric-exchangeable", 6, rng); for (const w of worlds) assert.ok(pool.has(w.join(","))); }
+});
+
+test("symmetric-orbit: K isomorphic worlds on pairwise DISJOINT symbols", () => {
+  const { rng, situation, T } = situationAndT(13);
+  const { capsule } = buildCapsule({ situation, witnessed: T, construction: "symmetric-orbit", K: 4, rng });
+  const tables = capsule.worlds.map((w) => new Set(w.symbols));
+  for (let i = 0; i < 4; i++) for (let j = i + 1; j < 4; j++) for (const s of tables[i]) assert.ok(!tables[j].has(s));
+  const hashes = capsule.worlds.map((w) => { const idx = Object.fromEntries(w.symbols.map((s, k) => [s, k])); return wlHash(w.symbols.length, w.claims.map(([a, b]) => [idx[a], idx[b]])); });
+  assert.equal(new Set(hashes).size, 1, "every world has the same shape");
+});
+
+test("constraint-space capsules are BYTE-IDENTICAL for different witnessed sets (the witness never enters)", () => {
+  const { situation } = situationAndT(21);
+  const T1 = situation.pool[0], T2 = situation.pool[situation.pool.length - 1];
+  assert.notDeepEqual(T1, T2);
+  const a = buildCapsule({ situation, witnessed: T1, construction: "constraint-space", rng: mulberry32(5) });
+  const b = buildCapsule({ situation, witnessed: T2, construction: "constraint-space", rng: mulberry32(5) });
+  const c = buildCapsule({ situation, witnessed: null, construction: "constraint-space", rng: mulberry32(5) });
+  assert.equal(JSON.stringify(a.capsule), JSON.stringify(b.capsule));
+  assert.equal(JSON.stringify(a.capsule), JSON.stringify(c.capsule));
+  assert.notDeepEqual(a.key.witnessed, b.key.witnessed, "only the local key differs");
+});
+
+test("falsifier for that test: world capsules DO depend on the witnessed set (the real world is in them)", () => {
+  const { situation } = situationAndT(21);
+  const T1 = situation.pool[0], T2 = situation.pool[5];
+  const a = buildCapsule({ situation, witnessed: T1, construction: "naive-neighbours", K: 4, rng: mulberry32(5) });
+  const b = buildCapsule({ situation, witnessed: T2, construction: "naive-neighbours", K: 4, rng: mulberry32(5) });
+  assert.notEqual(JSON.stringify(a.capsule), JSON.stringify(b.capsule));
+});
+
+test("a memoised world set re-sent under fresh symbols has the same worlds and different symbols (the cache mitigation)", () => {
+  const { rng, situation, T } = situationAndT(31);
+  const first = buildCapsule({ situation, witnessed: T, construction: "symmetric-exchangeable", K: 4, rng });
+  const { worlds, real } = buildWorlds(situation, T, "symmetric-exchangeable", 4, rng);
+  const a = buildCapsule({ situation, witnessed: T, construction: "symmetric-exchangeable", rng, fixedWorlds: { worlds, real } });
+  const b = buildCapsule({ situation, witnessed: T, construction: "symmetric-exchangeable", rng, fixedWorlds: { worlds, real } });
+  assert.notDeepEqual(a.capsule.events, b.capsule.events);
+  assert.equal(a.key.real, b.key.real);
+  assert.equal(a.capsule.worlds.length, first.capsule.worlds.length);
+});
+
+test("production entropy: cryptoRng is not a seeded stream", () => {
+  const a = cryptoRng(), b = cryptoRng();
+  assert.notEqual([a(), a(), a()].join(), [b(), b(), b()].join());
+});
+
+// ───────────────────────── the local gate ─────────────────────────
+
+const oracleReply = (capsule, key, situation, T) => {
+  const rev = Object.fromEntries(Object.entries(Array.isArray(key.eventOf) ? key.eventOf[key.real] : key.eventOf).map(([s, e]) => [e, s]));
+  const ans = Object.fromEntries(capsule.worlds.map((_, j) => [String(j + 1), []]));
+  ans[String(key.real + 1)] = derivedOf(situation, T).derived.map(([a, b]) => [rev[a], rev[b]]);
+  return "Here is the answer:\n```json\n" + JSON.stringify(ans) + "\n```";
+};
+const judge = async (rep, situation, T) => runAcceptance(CAPSULE_ACCEPTANCE, rep.proposal ?? undefined, { capsuleLocal: { situation, T } });
+
+test("the loop end to end with an oracle reply: parse → reconnect → local gate ACCEPTS, for every world construction", async () => {
+  for (const construction of CONSTRUCTIONS.filter((c) => c !== "constraint-space")) {
+    const { rng, situation, T } = situationAndT(41);
+    const { capsule, key } = buildCapsule({ situation, witnessed: T, construction, K: 4, rng });
+    const rep = proposalFromReply({ capsule, key, situation, text: oracleReply(capsule, key, situation, T) });
+    const v = await judge(rep, situation, T);
+    assert.equal(v.state, "accepted", construction + " " + JSON.stringify(v.verdicts.map((x) => x.detail)));
+  }
+});
+
+test("FALSIFIER — 400 deliberately corrupted proposals: dropped pair, bogus pair, reversed pair, empty, wrong symbol are ALL rejected", async () => {
+  const counts = { drop: 0, bogus: 0, reverse: 0, empty: 0, junk: 0 }, tried = { ...counts };
+  for (let s = 0; s < 80; s++) {
+    const { rng, situation, T } = situationAndT(300 + s);
+    const { capsule, key } = buildCapsule({ situation, witnessed: T, construction: "symmetric-exchangeable", K: 3, rng });
+    const rev = Object.fromEntries(Object.entries(key.eventOf).map(([sym, e]) => [e, sym]));
+    const good = derivedOf(situation, T).derived;
+    const mk = (pairs) => { const ans = Object.fromEntries(capsule.worlds.map((_, j) => [String(j + 1), []])); ans[String(key.real + 1)] = pairs; return JSON.stringify(ans); };
+    const run = async (kind, pairs) => { tried[kind]++; const rep = proposalFromReply({ capsule, key, situation, text: typeof pairs === "string" ? pairs : mk(pairs) }); const v = await judge(rep, situation, T); if (!v.accepted) counts[kind]++; };
+    const sym = (p) => [rev[p[0]], rev[p[1]]];
+    await run("drop", good.slice(1).map(sym));
+    const have = new Set(good.map(([a, b]) => pid(a, b, situation.n)));
+    const direct = new Set(T.map((i) => pid(situation.claims[i].a, situation.claims[i].b, situation.n)));
+    let bogus = null;
+    for (let a = 0; a < situation.n && !bogus; a++) for (let b = 0; b < situation.n && !bogus; b++) if (a !== b && !have.has(pid(a, b, situation.n)) && !direct.has(pid(a, b, situation.n)) && !have.has(pid(b, a, situation.n))) bogus = [a, b];
+    if (bogus) await run("bogus", [...good.map(sym), sym(bogus)]); else tried.bogus++, counts.bogus++;
+    await run("reverse", [...good.slice(1).map(sym), sym([good[0][1], good[0][0]])]);
+    await run("empty", "{}");
+    await run("junk", [...good.map(sym), ["Eabcde", "Efghij"]]);
+  }
+  for (const k of Object.keys(counts)) assert.equal(counts[k], tried[k], `${k}: ${counts[k]}/${tried[k]} rejected`);
+  assert.ok(Object.values(tried).reduce((a, b) => a + b, 0) >= 400);
+});
+
+test("FALSIFIER — answering for the WRONG world is rejected unless that world's answer is identical (counted, not hidden)", async () => {
+  let rejected = 0, equivalent = 0, n = 0;
+  for (let s = 0; s < 120; s++) {
+    const { rng, situation, T } = situationAndT(500 + s);
+    const { capsule, key } = buildCapsule({ situation, witnessed: T, construction: "symmetric-exchangeable", K: 4, rng });
+    const wrong = (key.real + 1) % 4;
+    const rev = Object.fromEntries(Object.entries(key.eventOf).map(([sym, e]) => [e, sym]));
+    const idxOf = (w) => w.claims.map(([a, b]) => situation.claims.findIndex((c) => c.a === key.eventOf[a] && c.b === key.eventOf[b]));
+    const wrongAns = derivedOf(situation, idxOf(capsule.worlds[wrong])).derived;
+    const ans = Object.fromEntries(capsule.worlds.map((_, j) => [String(j + 1), []]));
+    ans[String(key.real + 1)] = wrongAns.map(([a, b]) => [rev[a], rev[b]]);
+    const v = await judge(proposalFromReply({ capsule, key, situation, text: JSON.stringify(ans) }), situation, T);
+    n++;
+    const same = JSON.stringify(wrongAns) === JSON.stringify(derivedOf(situation, T).derived);
+    if (same) equivalent++; else if (!v.accepted) rejected++;
+    else assert.fail("a different world's answer was accepted although it differs");
+  }
+  assert.equal(rejected + equivalent, n);
+  assert.ok(rejected > n * 0.7, `${rejected}/${n} rejected, ${equivalent} equivalent`);
+});
+
+test("constraint-space: an oracle chain list resolves (local intersection with the witnessed set) and is accepted; corrupted ones are not", async () => {
+  for (let s = 0; s < 40; s++) {
+    const { rng, situation, T } = situationAndT(700 + s);
+    const { capsule, key } = buildCapsule({ situation, witnessed: T, construction: "constraint-space", rng });
+    const symOf = Object.fromEntries(Object.entries(key.eventOf).map(([sym, e]) => [e, sym]));
+    const idOf = Object.fromEntries(Object.entries(key.claimOf).map(([id, i]) => [i, id]));
+    const chains = allChains(situation).map((c) => ({ from: symOf[c.from], to: symOf[c.to], via: c.via.map((i) => idOf[i]) }));
+    const rep = proposalFromReply({ capsule, key, situation, text: JSON.stringify({ chains }) });
+    assert.equal((await judge(rep, situation, T)).state, "accepted", "oracle");
+    assert.equal(chainF1(situation, key, { chains }).f1, 1);
+    // drop every chain that is fully witnessed → the local derived set shrinks → the gate must refuse (completeness)
+    const T2 = new Set(T);
+    const kept = chains.filter((c) => !c.via.every((id) => T2.has(key.claimOf[id])));
+    const bad = proposalFromReply({ capsule, key, situation, text: JSON.stringify({ chains: kept }) });
+    assert.equal((await judge(bad, situation, T)).accepted, false, "missing witnessed chains");
+    // an invented chain id
+    const inv = resolveSupports(capsule, key, situation, { chains: [{ from: symOf[0], to: symOf[1], via: ["Rzzzzz", "Ryyyyy"] }] });
+    assert.equal(inv.invalid, 1);
+  }
+});
+
+test("parseAnswer tolerates prose and fences, returns null for no JSON", () => {
+  assert.deepEqual(parseAnswer('sure!\n```json\n{"1":[["a","b"]]}\n```\nhope that helps'), { 1: [["a", "b"]] });
+  assert.equal(parseAnswer("I cannot do that"), null);
+  assert.equal(parseAnswer(""), null);
+});
+
+test("a self-reported confidence inside the model's reply changes nothing the gate decides", async () => {
+  const { rng, situation, T } = situationAndT(41);
+  const { capsule, key } = buildCapsule({ situation, witnessed: T, construction: "symmetric-exchangeable", K: 3, rng });
+  const good = JSON.parse(oracleReply(capsule, key, situation, T).replace(/```json|```|Here is the answer:/g, ""));
+  for (const confidence of [0, 1]) {
+    const ok = proposalFromReply({ capsule, key, situation, text: JSON.stringify({ ...good, confidence }) });
+    assert.equal((await judge(ok, situation, T)).accepted, true);
+    const wrong = { ...good, [String(key.real + 1)]: [], confidence };
+    if (derivedOf(situation, T).derived.length) assert.equal((await judge(proposalFromReply({ capsule, key, situation, text: JSON.stringify(wrong) }), situation, T)).accepted, false);
+  }
+});
+
+test("answerForReal and checkDerived basics", () => {
+  const { situation, T } = situationAndT(1);
+  const d = derivedOf(situation, T).derived;
+  assert.equal(checkDerived(situation, T, d).exact, true);
+  assert.equal(checkDerived(situation, T, d.slice(1)).complete, false);
+  assert.equal(answerForReal({}, { real: 0, eventOf: {} }, null).kind, "unresolved");
+});

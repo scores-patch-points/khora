@@ -1,0 +1,24 @@
+manifest sha256 0d45c42c643ef58ce4b5764add3a928d53ea54ee93b11104800b21124c247c4d
+{
+ "udTrainTreebanks": 59,
+ "udReplicateStems": 52,
+ "freshEnDays": 50,
+ "neverRead": 12,
+ "siblingRead": 38,
+ "byChannel": {
+  "kubuntu": 13,
+  "ubuntu": 2,
+  "ubuntu-server": 17,
+  "xubuntu": 18
+ },
+ "freshEnMsgs": 27082,
+ "nonEnFresh": 0,
+ "books": 4,
+ "js": 16,
+ "py": 16,
+ "counts": {
+  "A": 97,
+  "B": 175,
+  "P": 94
+ }
+}

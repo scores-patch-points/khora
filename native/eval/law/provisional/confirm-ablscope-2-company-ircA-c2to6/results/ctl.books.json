@@ -1,0 +1,100 @@
+{
+ "K6_same": 50,
+ "K6_n": 50,
+ "K1_zero": 786,
+ "K1_n": 786,
+ "docs": [
+  [
+   "pg158_Emma.txt",
+   160
+  ],
+  [
+   "pg161_Sense-and-Sensibility.txt",
+   113
+  ],
+  [
+   "pg345_Dracula.txt",
+   120
+  ]
+ ],
+ "design": {
+  "pg158_Emma.txt|A:c2": {
+   "got": 37,
+   "nPos": 84,
+   "dropped": 26
+  },
+  "pg158_Emma.txt|A:c3": {
+   "got": 33,
+   "nPos": 90,
+   "dropped": 35
+  },
+  "pg158_Emma.txt|A:c4_6": {
+   "got": 45,
+   "nPos": 298,
+   "dropped": 138
+  },
+  "pg158_Emma.txt|A:c7_15": {
+   "got": 33,
+   "nPos": 606,
+   "dropped": 175
+  },
+  "pg158_Emma.txt|A:c16p": {
+   "got": 12,
+   "nPos": 108,
+   "dropped": 35
+  },
+  "pg161_Sense-and-Sensibility.txt|A:c2": {
+   "got": 16,
+   "nPos": 19,
+   "dropped": 3
+  },
+  "pg161_Sense-and-Sensibility.txt|A:c3": {
+   "got": 15,
+   "nPos": 17,
+   "dropped": 1
+  },
+  "pg161_Sense-and-Sensibility.txt|A:c4_6": {
+   "got": 31,
+   "nPos": 81,
+   "dropped": 4
+  },
+  "pg161_Sense-and-Sensibility.txt|A:c7_15": {
+   "got": 35,
+   "nPos": 236,
+   "dropped": 49
+  },
+  "pg161_Sense-and-Sensibility.txt|A:c16p": {
+   "got": 16,
+   "nPos": 209,
+   "dropped": 58
+  },
+  "pg345_Dracula.txt|A:c2": {
+   "got": 25,
+   "nPos": 35,
+   "dropped": 2
+  },
+  "pg345_Dracula.txt|A:c3": {
+   "got": 29,
+   "nPos": 41,
+   "dropped": 6
+  },
+  "pg345_Dracula.txt|A:c4_6": {
+   "got": 36,
+   "nPos": 105,
+   "dropped": 9
+  },
+  "pg345_Dracula.txt|A:c7_15": {
+   "got": 26,
+   "nPos": 137,
+   "dropped": 13
+  },
+  "pg345_Dracula.txt|A:c16p": {
+   "got": 4,
+   "nPos": 15,
+   "dropped": 4
+  }
+ },
+ "seconds": 36.1,
+ "headerSha256": "1bb2872ed0b491d0daaa6f6f9076359939d77c192c56199263befce7984a5f9a",
+ "daysSha256": "97ff0d9c40899ad31db4a1960e90cbd1496553d59b5b7bf57c2961d3cd0902f5"
+}

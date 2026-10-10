@@ -1,0 +1,457 @@
+{
+ "reproAllOk": true,
+ "sets": {
+  "IN23": {
+   "n": 23,
+   "meanAuc": {
+    "BOTH": 0.6568,
+    "LEFT": 0.6282,
+    "RIGHT": 0.5933,
+    "POSITION": 0.5027,
+    "CHARLEN": 0.4783,
+    "FREQ": 0.5037,
+    "RIVALS": 0.5067,
+    "K": 0.4464,
+    "REC": 0.576,
+    "DEND": 0.5227,
+    "RIVALSX": 0.5525,
+    "NBR": 0.5792,
+    "NBRMAX": 0.5274,
+    "SENT": 0.541,
+    "NBR+SENT": 0.5799,
+    "BOTH+RIVALS": 0.6566,
+    "BOTH+RIVALSX": 0.6568
+   },
+   "delta": {
+    "LEFT": {
+     "mean": 0.0285,
+     "shareLe003": 0.478,
+     "reproduces": false,
+     "kind": "other"
+    },
+    "RIGHT": {
+     "mean": 0.0635,
+     "shareLe003": 0.087,
+     "reproduces": false,
+     "kind": "other"
+    },
+    "POSITION": {
+     "mean": 0.1541,
+     "shareLe003": 0,
+     "reproduces": false,
+     "kind": "pure"
+    },
+    "CHARLEN": {
+     "mean": 0.1785,
+     "shareLe003": 0,
+     "reproduces": false,
+     "kind": "pure"
+    },
+    "FREQ": {
+     "mean": 0.1531,
+     "shareLe003": 0.043,
+     "reproduces": false,
+     "kind": "pure"
+    },
+    "RIVALS": {
+     "mean": 0.1501,
+     "shareLe003": 0,
+     "reproduces": false,
+     "kind": "pure"
+    },
+    "K": {
+     "mean": 0.2103,
+     "shareLe003": 0,
+     "reproduces": false,
+     "kind": "pure"
+    },
+    "REC": {
+     "mean": 0.0808,
+     "shareLe003": 0.217,
+     "reproduces": false,
+     "kind": "pure"
+    },
+    "DEND": {
+     "mean": 0.1341,
+     "shareLe003": 0,
+     "reproduces": false,
+     "kind": "pure"
+    },
+    "RIVALSX": {
+     "mean": 0.1043,
+     "shareLe003": 0.217,
+     "reproduces": false,
+     "kind": "pure"
+    },
+    "NBR": {
+     "mean": 0.0776,
+     "shareLe003": 0.174,
+     "reproduces": false,
+     "kind": "collapsed"
+    },
+    "NBRMAX": {
+     "mean": 0.1294,
+     "shareLe003": 0.043,
+     "reproduces": false,
+     "kind": "collapsed"
+    },
+    "SENT": {
+     "mean": 0.1157,
+     "shareLe003": 0,
+     "reproduces": false,
+     "kind": "collapsed"
+    },
+    "NBR+SENT": {
+     "mean": 0.0769,
+     "shareLe003": 0.217,
+     "reproduces": false,
+     "kind": "collapsed"
+    },
+    "BOTH+RIVALS": {
+     "mean": 0.0001,
+     "shareLe003": 1,
+     "reproduces": true,
+     "kind": "other"
+    },
+    "BOTH+RIVALSX": {
+     "mean": 0,
+     "shareLe003": 0.739,
+     "reproduces": true,
+     "kind": "other"
+    }
+   },
+   "c5": {
+    "mean": 0.1043,
+    "ci95": [
+     0.0763,
+     0.1381
+    ],
+    "pass": true
+   },
+   "shuffle": {
+    "meanShuffledBoth": 0.5142,
+    "meanShuffledPosition": 0.504,
+    "audible": 20,
+    "shuffledLe55": 18,
+    "share": 0.9,
+    "meanBothMinusShuffle": 0.1426,
+    "pass": true
+   },
+   "verdict": {
+    "pureReproduce": [],
+    "collapsedReproduce": [],
+    "verdict": "STANDS"
+   },
+   "audibleShare": {
+    "BOTH": 0.87,
+    "NBR": 0.348,
+    "NBRMAX": 0,
+    "SENT": 0.174,
+    "REC": 0.435,
+    "RIVALSX": 0.261
+   }
+  },
+  "IN12": {
+   "n": 12,
+   "meanAuc": {
+    "BOTH": 0.6368,
+    "LEFT": 0.6256,
+    "RIGHT": 0.5758,
+    "POSITION": 0.504,
+    "CHARLEN": 0.4583,
+    "FREQ": 0.5083,
+    "RIVALS": 0.5114,
+    "K": 0.4505,
+    "REC": 0.5717,
+    "DEND": 0.5228,
+    "RIVALSX": 0.5423,
+    "NBR": 0.5676,
+    "NBRMAX": 0.5329,
+    "SENT": 0.5394,
+    "NBR+SENT": 0.5696,
+    "BOTH+RIVALS": 0.6365,
+    "BOTH+RIVALSX": 0.6375
+   },
+   "delta": {
+    "LEFT": {
+     "mean": 0.0111,
+     "shareLe003": 0.75,
+     "reproduces": true,
+     "kind": "other"
+    },
+    "RIGHT": {
+     "mean": 0.061,
+     "shareLe003": 0.167,
+     "reproduces": false,
+     "kind": "other"
+    },
+    "POSITION": {
+     "mean": 0.1327,
+     "shareLe003": 0,
+     "reproduces": false,
+     "kind": "pure"
+    },
+    "CHARLEN": {
+     "mean": 0.1784,
+     "shareLe003": 0,
+     "reproduces": false,
+     "kind": "pure"
+    },
+    "FREQ": {
+     "mean": 0.1284,
+     "shareLe003": 0.083,
+     "reproduces": false,
+     "kind": "pure"
+    },
+    "RIVALS": {
+     "mean": 0.1254,
+     "shareLe003": 0,
+     "reproduces": false,
+     "kind": "pure"
+    },
+    "K": {
+     "mean": 0.1863,
+     "shareLe003": 0,
+     "reproduces": false,
+     "kind": "pure"
+    },
+    "REC": {
+     "mean": 0.065,
+     "shareLe003": 0.333,
+     "reproduces": false,
+     "kind": "pure"
+    },
+    "DEND": {
+     "mean": 0.114,
+     "shareLe003": 0,
+     "reproduces": false,
+     "kind": "pure"
+    },
+    "RIVALSX": {
+     "mean": 0.0945,
+     "shareLe003": 0.333,
+     "reproduces": false,
+     "kind": "pure"
+    },
+    "NBR": {
+     "mean": 0.0692,
+     "shareLe003": 0.333,
+     "reproduces": false,
+     "kind": "collapsed"
+    },
+    "NBRMAX": {
+     "mean": 0.1039,
+     "shareLe003": 0.083,
+     "reproduces": false,
+     "kind": "collapsed"
+    },
+    "SENT": {
+     "mean": 0.0974,
+     "shareLe003": 0,
+     "reproduces": false,
+     "kind": "collapsed"
+    },
+    "NBR+SENT": {
+     "mean": 0.0672,
+     "shareLe003": 0.417,
+     "reproduces": false,
+     "kind": "collapsed"
+    },
+    "BOTH+RIVALS": {
+     "mean": 0.0002,
+     "shareLe003": 1,
+     "reproduces": true,
+     "kind": "other"
+    },
+    "BOTH+RIVALSX": {
+     "mean": -0.0008,
+     "shareLe003": 0.667,
+     "reproduces": true,
+     "kind": "other"
+    }
+   },
+   "c5": {
+    "mean": 0.0953,
+    "ci95": [
+     0.0516,
+     0.1552
+    ],
+    "pass": true
+   },
+   "shuffle": {
+    "meanShuffledBoth": 0.5129,
+    "meanShuffledPosition": 0.5046,
+    "audible": 9,
+    "shuffledLe55": 7,
+    "share": 0.778,
+    "meanBothMinusShuffle": 0.1238,
+    "pass": false
+   },
+   "verdict": {
+    "pureReproduce": [],
+    "collapsedReproduce": [],
+    "verdict": "FALLS"
+   },
+   "audibleShare": {
+    "BOTH": 0.75,
+    "NBR": 0.333,
+    "NBRMAX": 0,
+    "SENT": 0.167,
+    "REC": 0.417,
+    "RIVALSX": 0.25
+   }
+  },
+  "OUT": {
+   "n": 12,
+   "meanAuc": {
+    "BOTH": 0.5999,
+    "LEFT": 0.5647,
+    "RIGHT": 0.5704,
+    "POSITION": 0.5037,
+    "CHARLEN": 0.5,
+    "FREQ": 0.5068,
+    "RIVALS": 0.5067,
+    "K": 0.466,
+    "REC": 0.591,
+    "DEND": 0.525,
+    "RIVALSX": 0.5834,
+    "NBR": 0.541,
+    "NBRMAX": 0.5073,
+    "SENT": 0.5185,
+    "NBR+SENT": 0.5417,
+    "BOTH+RIVALS": 0.6008,
+    "BOTH+RIVALSX": 0.6333
+   },
+   "delta": {
+    "LEFT": {
+     "mean": 0.0352,
+     "shareLe003": 0.333,
+     "reproduces": false,
+     "kind": "other"
+    },
+    "RIGHT": {
+     "mean": 0.0295,
+     "shareLe003": 0.417,
+     "reproduces": false,
+     "kind": "other"
+    },
+    "POSITION": {
+     "mean": 0.0963,
+     "shareLe003": 0,
+     "reproduces": false,
+     "kind": "pure"
+    },
+    "CHARLEN": {
+     "mean": 0.0999,
+     "shareLe003": 0,
+     "reproduces": false,
+     "kind": "pure"
+    },
+    "FREQ": {
+     "mean": 0.0931,
+     "shareLe003": 0,
+     "reproduces": false,
+     "kind": "pure"
+    },
+    "RIVALS": {
+     "mean": 0.0932,
+     "shareLe003": 0,
+     "reproduces": false,
+     "kind": "pure"
+    },
+    "K": {
+     "mean": 0.1339,
+     "shareLe003": 0,
+     "reproduces": false,
+     "kind": "pure"
+    },
+    "REC": {
+     "mean": 0.009,
+     "shareLe003": 0.583,
+     "reproduces": true,
+     "kind": "pure"
+    },
+    "DEND": {
+     "mean": 0.0749,
+     "shareLe003": 0.333,
+     "reproduces": false,
+     "kind": "pure"
+    },
+    "RIVALSX": {
+     "mean": 0.0165,
+     "shareLe003": 0.417,
+     "reproduces": false,
+     "kind": "pure"
+    },
+    "NBR": {
+     "mean": 0.059,
+     "shareLe003": 0.25,
+     "reproduces": false,
+     "kind": "collapsed"
+    },
+    "NBRMAX": {
+     "mean": 0.0927,
+     "shareLe003": 0.083,
+     "reproduces": false,
+     "kind": "collapsed"
+    },
+    "SENT": {
+     "mean": 0.0814,
+     "shareLe003": 0.25,
+     "reproduces": false,
+     "kind": "collapsed"
+    },
+    "NBR+SENT": {
+     "mean": 0.0583,
+     "shareLe003": 0.417,
+     "reproduces": false,
+     "kind": "collapsed"
+    },
+    "BOTH+RIVALS": {
+     "mean": -0.0008,
+     "shareLe003": 1,
+     "reproduces": true,
+     "kind": "other"
+    },
+    "BOTH+RIVALSX": {
+     "mean": -0.0334,
+     "shareLe003": 0.833,
+     "reproduces": true,
+     "kind": "other"
+    }
+   },
+   "c5": {
+    "mean": 0.0499,
+    "ci95": [
+     0.0134,
+     0.0896
+    ],
+    "pass": true
+   },
+   "shuffle": {
+    "meanShuffledBoth": 0.5148,
+    "meanShuffledPosition": 0.5001,
+    "audible": 5,
+    "shuffledLe55": 5,
+    "share": 1,
+    "meanBothMinusShuffle": 0.0851,
+    "pass": true
+   },
+   "verdict": {
+    "pureReproduce": [
+     "REC"
+    ],
+    "collapsedReproduce": [],
+    "verdict": "FALLS"
+   },
+   "audibleShare": {
+    "BOTH": 0.417,
+    "NBR": 0.167,
+    "NBRMAX": 0,
+    "SENT": 0.083,
+    "REC": 0.417,
+    "RIVALSX": 0.333
+   }
+  }
+ }
+}

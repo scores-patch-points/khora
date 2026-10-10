@@ -1,0 +1,9803 @@
+{
+ "rows": [
+  {
+   "id": "bk-alice",
+   "group": "bk",
+   "register": "children",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    1.3885646163812475,
+    10.302756358495163
+   ],
+   "zW": [
+    0.11778602217108736,
+    3.6411265043901118
+   ],
+   "adjShare": [
+    0.11915865156613582,
+    0.7249244119817876
+   ],
+   "docs": 30,
+   "meanUnitLength": 15.7686,
+   "tokens": 26775
+  },
+  {
+   "id": "bk-ambedkar",
+   "group": "bk",
+   "register": "essay",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    39.08524347913026,
+    35.732393463508174
+   ],
+   "zW": [
+    20.48502280735575,
+    21.18372999495718
+   ],
+   "adjShare": [
+    0.8606074256321223,
+    0.8948559347010168
+   ],
+   "docs": 116,
+   "meanUnitLength": 16.9815,
+   "tokens": 197597
+  },
+  {
+   "id": "bk-anne-gg",
+   "group": "bk",
+   "register": "children",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    8.093103981589115,
+    9.58641936106878
+   ],
+   "zW": [
+    4.307818626830101,
+    7.51237419292487
+   ],
+   "adjShare": [
+    0.735980589144306,
+    0.8743824144363254
+   ],
+   "docs": 70,
+   "meanUnitLength": 14.8934,
+   "tokens": 103554
+  },
+  {
+   "id": "bk-antin",
+   "group": "bk",
+   "register": "memoir",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    15.210678163825156,
+    21.848306828211854
+   ],
+   "zW": [
+    14.432470479008218,
+    15.044594816887578
+   ],
+   "adjShare": [
+    0.9102685687034497,
+    0.896930704418259
+   ],
+   "docs": 56,
+   "meanUnitLength": 20.4455,
+   "tokens": 113677
+  },
+  {
+   "id": "bk-beers",
+   "group": "bk",
+   "register": "memoir",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "A",
+   "zG": [
+    1.6074546154698546,
+    2.563637427940069
+   ],
+   "zW": [
+    0.6982910876966969,
+    1.2587965387304385
+   ],
+   "adjShare": [
+    0.567315527640976,
+    0.7357234920123029
+   ],
+   "docs": 31,
+   "meanUnitLength": 21.0711,
+   "tokens": 65173
+  },
+  {
+   "id": "bk-bge",
+   "group": "bk",
+   "register": "treatise",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    11.319561551900835,
+    5.822207021804079
+   ],
+   "zW": [
+    8.775587406377884,
+    7.597452943930599
+   ],
+   "adjShare": [
+    0.901345513791583,
+    1.0277365409668384
+   ],
+   "docs": 30,
+   "meanUnitLength": 37.9041,
+   "tokens": 64058
+  },
+  {
+   "id": "bk-botanic-garden",
+   "group": "bk",
+   "register": "poetry",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    1.3618848215254504,
+    7.991730951839252
+   ],
+   "zW": [
+    0.4506089658059582,
+    4.302895466663623
+   ],
+   "adjShare": [
+    0.362008633820043,
+    0.7757544178649882
+   ],
+   "docs": 30,
+   "meanUnitLength": 24.3339,
+   "tokens": 52829
+  },
+  {
+   "id": "bk-call-wild",
+   "group": "bk",
+   "register": "novel",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    3.329121893028032,
+    4.3442235830140365
+   ],
+   "zW": [
+    2.988089740929061,
+    3.379772537136763
+   ],
+   "adjShare": [
+    0.9376425925268201,
+    0.836000950149072
+   ],
+   "docs": 30,
+   "meanUnitLength": 18.7082,
+   "tokens": 32122
+  },
+  {
+   "id": "bk-common-sense",
+   "group": "bk",
+   "register": "treatise",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "A",
+   "zG": [
+    2.802046394649171,
+    1.6235180386138497
+   ],
+   "zW": [
+    1.706441056325506,
+    1.6703215773459563
+   ],
+   "adjShare": [
+    0.7065230811447214,
+    1.0299546083852544
+   ],
+   "docs": 29,
+   "meanUnitLength": 30.85,
+   "tokens": 21595
+  },
+  {
+   "id": "bk-crime-pun",
+   "group": "bk",
+   "register": "novel",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    22.515013778802395,
+    35.28914214167408
+   ],
+   "zW": [
+    11.897238990654964,
+    19.18426695637422
+   ],
+   "adjShare": [
+    0.7870154743919371,
+    0.8617473687296531
+   ],
+   "docs": 161,
+   "meanUnitLength": 12.7394,
+   "tokens": 205053
+  },
+  {
+   "id": "bk-crusoe",
+   "group": "bk",
+   "register": "novel",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    9.256532527794432,
+    6.740977782818447
+   ],
+   "zW": [
+    6.562899309646945,
+    4.898323907963467
+   ],
+   "adjShare": [
+    0.7864362526263808,
+    0.8924008101971286
+   ],
+   "docs": 30,
+   "meanUnitLength": 50.9438,
+   "tokens": 121450
+  },
+  {
+   "id": "bk-cryptic",
+   "group": "bk",
+   "register": "wordplay",
+   "grain": "word",
+   "atlas": "A",
+   "statGlobal50": "A",
+   "statWithin": "A",
+   "zG": [
+    -1.191713051029641,
+    -0.7952956259771855
+   ],
+   "zW": [
+    -1.1068061412793644,
+    -0.6800527932150312
+   ],
+   "adjShare": [
+    0.8928560530066371,
+    0.7419217179210034
+   ],
+   "docs": 453,
+   "meanUnitLength": 6.6179,
+   "tokens": 299791
+  },
+  {
+   "id": "bk-dante",
+   "group": "bk",
+   "register": "poetry",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    4.2642219501602465,
+    7.487836257931177
+   ],
+   "zW": [
+    2.6228165263325773,
+    3.8963994427853716
+   ],
+   "adjShare": [
+    0.7625133381774585,
+    0.7630832084976276
+   ],
+   "docs": 41,
+   "meanUnitLength": 27.9828,
+   "tokens": 113750
+  },
+  {
+   "id": "bk-dorian-gray",
+   "group": "bk",
+   "register": "novel",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    15.309826262014617,
+    13.888845598291484
+   ],
+   "zW": [
+    11.316011267328976,
+    9.329056133563572
+   ],
+   "adjShare": [
+    0.9035924410464923,
+    0.8817226617494685
+   ],
+   "docs": 66,
+   "meanUnitLength": 12.1196,
+   "tokens": 79747
+  },
+  {
+   "id": "bk-douglass-bond",
+   "group": "bk",
+   "register": "memoir",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "A",
+   "zG": [
+    4.306906153081389,
+    3.015367126321149
+   ],
+   "zW": [
+    1.9929414944782315,
+    1.0164911126272054
+   ],
+   "adjShare": [
+    0.7334230207314876,
+    0.5452907967481985
+   ],
+   "docs": 30,
+   "meanUnitLength": 19.6484,
+   "tokens": 45604
+  },
+  {
+   "id": "bk-douglass-narr",
+   "group": "bk",
+   "register": "memoir",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    13.73610734910108,
+    16.31341912513662
+   ],
+   "zW": [
+    8.751825752127454,
+    7.63222228695313
+   ],
+   "adjShare": [
+    0.8582464910948123,
+    0.8103647867896695
+   ],
+   "docs": 30,
+   "meanUnitLength": 20.845,
+   "tokens": 41148
+  },
+  {
+   "id": "bk-dracula",
+   "group": "bk",
+   "register": "novel",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    10.29303665373877,
+    15.565464397088503
+   ],
+   "zW": [
+    5.88976125170012,
+    8.591478573513088
+   ],
+   "adjShare": [
+    0.7607178692424005,
+    0.8543437221372389
+   ],
+   "docs": 93,
+   "meanUnitLength": 17.507,
+   "tokens": 161957
+  },
+  {
+   "id": "bk-dubois",
+   "group": "bk",
+   "register": "essay",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    16.844363366165577,
+    7.350596360636718
+   ],
+   "zW": [
+    9.289799666829168,
+    5.082390295134523
+   ],
+   "adjShare": [
+    0.9002515296009944,
+    0.8397695060268342
+   ],
+   "docs": 30,
+   "meanUnitLength": 25.6924,
+   "tokens": 69832
+  },
+  {
+   "id": "bk-eastman",
+   "group": "bk",
+   "register": "memoir",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    4.908364748000183,
+    5.933157352837163
+   ],
+   "zW": [
+    3.709952241863126,
+    4.107117526793558
+   ],
+   "adjShare": [
+    0.8378265287525409,
+    0.7720988718106406
+   ],
+   "docs": 32,
+   "meanUnitLength": 17.4185,
+   "tokens": 55234
+  },
+  {
+   "id": "bk-einstein",
+   "group": "bk",
+   "register": "academic",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    9.821334755476899,
+    10.340298726962155
+   ],
+   "zW": [
+    5.98158370292755,
+    4.946136286307112
+   ],
+   "adjShare": [
+    0.7929429391823833,
+    0.6430984898714903
+   ],
+   "docs": 35,
+   "meanUnitLength": 17.8266,
+   "tokens": 63106
+  },
+  {
+   "id": "bk-emma",
+   "group": "bk",
+   "register": "novel",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    15.911793577413023,
+    15.592177359223777
+   ],
+   "zW": [
+    8.449613029471763,
+    10.076982430121454
+   ],
+   "adjShare": [
+    0.8461222874668651,
+    0.8544849040311485
+   ],
+   "docs": 76,
+   "meanUnitLength": 21.2141,
+   "tokens": 160994
+  },
+  {
+   "id": "bk-equiano",
+   "group": "bk",
+   "register": "memoir",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    5.785724099167665,
+    5.88775826543103
+   ],
+   "zW": [
+    2.5382276170743663,
+    2.5134736620549174
+   ],
+   "adjShare": [
+    0.708424233027251,
+    0.6641005430263438
+   ],
+   "docs": 30,
+   "meanUnitLength": 30.4161,
+   "tokens": 82884
+  },
+  {
+   "id": "bk-faust-de",
+   "group": "bk",
+   "register": "drama",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    9.56666368967081,
+    21.588336324319766
+   ],
+   "zW": [
+    7.1507387552757296,
+    13.659345018554207
+   ],
+   "adjShare": [
+    0.928108388325204,
+    0.9475423829701743
+   ],
+   "docs": 30,
+   "meanUnitLength": 9.9195,
+   "tokens": 29451
+  },
+  {
+   "id": "bk-federalist",
+   "group": "bk",
+   "register": "treatise",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    18.450052852208835,
+    17.968522980605826
+   ],
+   "zW": [
+    19.48438297604509,
+    13.729189405503956
+   ],
+   "adjShare": [
+    0.9523790204312563,
+    0.9477211173839822
+   ],
+   "docs": 63,
+   "meanUnitLength": 30.4856,
+   "tokens": 192303
+  },
+  {
+   "id": "bk-frankenstein",
+   "group": "bk",
+   "register": "novel",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    5.246837147891168,
+    8.54449851880976
+   ],
+   "zW": [
+    2.917152049844951,
+    7.175547879425694
+   ],
+   "adjShare": [
+    0.7908939069113918,
+    0.9245066470039178
+   ],
+   "docs": 34,
+   "meanUnitLength": 22.1179,
+   "tokens": 75201
+  },
+  {
+   "id": "bk-godwin-memoirs",
+   "group": "bk",
+   "register": "biography",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    1.8332050144685657,
+    4.3958019367888
+   ],
+   "zW": [
+    0.8519173967791248,
+    2.3841140910820453
+   ],
+   "adjShare": [
+    0.6609129729119982,
+    0.7213930348094943
+   ],
+   "docs": 30,
+   "meanUnitLength": 24.672,
+   "tokens": 24820
+  },
+  {
+   "id": "bk-great-expect",
+   "group": "bk",
+   "register": "novel",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    38.58945372117005,
+    22.61326749316683
+   ],
+   "zW": [
+    17.15511616131897,
+    14.16085777324419
+   ],
+   "adjShare": [
+    0.8830586540371045,
+    0.8497007226035602
+   ],
+   "docs": 100,
+   "meanUnitLength": 18.735,
+   "tokens": 186582
+  },
+  {
+   "id": "bk-gulliver",
+   "group": "bk",
+   "register": "novel",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    4.262932037936124,
+    10.68294710468531
+   ],
+   "zW": [
+    2.2500024416711217,
+    5.953334614395136
+   ],
+   "adjShare": [
+    0.7430426898930197,
+    0.8369907599780537
+   ],
+   "docs": 30,
+   "meanUnitLength": 36.5209,
+   "tokens": 104596
+  },
+  {
+   "id": "bk-heart-dark",
+   "group": "bk",
+   "register": "novel",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    8.863219941539997,
+    7.254974399657044
+   ],
+   "zW": [
+    7.331345571624317,
+    5.3635417765562385
+   ],
+   "adjShare": [
+    0.8828148397345222,
+    0.8914152349874703
+   ],
+   "docs": 30,
+   "meanUnitLength": 15.7194,
+   "tokens": 38764
+  },
+  {
+   "id": "bk-hen4-de",
+   "group": "bk",
+   "register": "drama",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    1.9304566243197805,
+    7.9296952142593495
+   ],
+   "zW": [
+    0.738360565873865,
+    4.271042756017036
+   ],
+   "adjShare": [
+    0.5330847653963122,
+    0.8586290304591386
+   ],
+   "docs": 30,
+   "meanUnitLength": 17.7493,
+   "tokens": 20181
+  },
+  {
+   "id": "bk-hen4-folio",
+   "group": "bk",
+   "register": "drama",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    8.050113121863891,
+    9.753039555597889
+   ],
+   "zW": [
+    2.951071823056337,
+    6.696259721243597
+   ],
+   "adjShare": [
+    0.7669001809792113,
+    0.898477287324468
+   ],
+   "docs": 30,
+   "meanUnitLength": 15.7195,
+   "tokens": 24711
+  },
+  {
+   "id": "bk-hen4-fr",
+   "group": "bk",
+   "register": "drama",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    3.8608510136650356,
+    4.349037180161252
+   ],
+   "zW": [
+    2.003157584975457,
+    1.7451986785088165
+   ],
+   "adjShare": [
+    0.8238841048701671,
+    0.5839347691642437
+   ],
+   "docs": 30,
+   "meanUnitLength": 15.7026,
+   "tokens": 28830
+  },
+  {
+   "id": "bk-hen4-modern",
+   "group": "bk",
+   "register": "drama",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    8.573572231437883,
+    6.899373113959351
+   ],
+   "zW": [
+    4.695550208332503,
+    4.122137656062274
+   ],
+   "adjShare": [
+    0.8542960984760002,
+    0.837731232393343
+   ],
+   "docs": 30,
+   "meanUnitLength": 13.1523,
+   "tokens": 24608
+  },
+  {
+   "id": "bk-hirschfeld-de",
+   "group": "bk",
+   "register": "academic",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    8.463879626672659,
+    8.68234575587357
+   ],
+   "zW": [
+    3.631024265375365,
+    2.1423520754184255
+   ],
+   "adjShare": [
+    0.7208178833975639,
+    0.5981090309936328
+   ],
+   "docs": 96,
+   "meanUnitLength": 18.5017,
+   "tokens": 177006
+  },
+  {
+   "id": "bk-jacobs",
+   "group": "bk",
+   "register": "memoir",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    8.71238560729746,
+    10.269246769558771
+   ],
+   "zW": [
+    5.58701721815089,
+    7.333975821079904
+   ],
+   "adjShare": [
+    0.8383720451100176,
+    0.8462879927086938
+   ],
+   "docs": 52,
+   "meanUnitLength": 16.2002,
+   "tokens": 83577
+  },
+  {
+   "id": "bk-jungle-book",
+   "group": "bk",
+   "register": "children",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    8.202606484182194,
+    23.5746677853757
+   ],
+   "zW": [
+    4.279286486096465,
+    8.176936303440346
+   ],
+   "adjShare": [
+    0.7382270388224256,
+    0.793995409177015
+   ],
+   "docs": 33,
+   "meanUnitLength": 15.9004,
+   "tokens": 51740
+  },
+  {
+   "id": "bk-lesmis",
+   "group": "bk",
+   "register": "novel",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    35.55054333827646,
+    34.086099915093676
+   ],
+   "zW": [
+    12.82832679390013,
+    13.285105747196205
+   ],
+   "adjShare": [
+    0.7441375121070293,
+    0.7230076529484294
+   ],
+   "docs": 194,
+   "meanUnitLength": 15.4497,
+   "tokens": 299847
+  },
+  {
+   "id": "bk-little-women",
+   "group": "bk",
+   "register": "novel",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    13.351853619402572,
+    10.525639870961541
+   ],
+   "zW": [
+    7.777508700632831,
+    8.613920856046205
+   ],
+   "adjShare": [
+    0.8769744416101152,
+    0.8677366871310895
+   ],
+   "docs": 98,
+   "meanUnitLength": 19.0823,
+   "tokens": 186816
+  },
+  {
+   "id": "bk-looking-glass",
+   "group": "bk",
+   "register": "children",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "A",
+   "zG": [
+    4.664857267924324,
+    4.727993857631957
+   ],
+   "zW": [
+    1.7409222264338189,
+    1.5339839563000677
+   ],
+   "adjShare": [
+    0.6486175622514976,
+    0.5040388214176263
+   ],
+   "docs": 30,
+   "meanUnitLength": 13.3703,
+   "tokens": 30150
+  },
+  {
+   "id": "bk-mayhew1",
+   "group": "bk",
+   "register": "reportage",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    24.05269940055942,
+    19.051129366282094
+   ],
+   "zW": [
+    6.667342985098376,
+    8.232211068618842
+   ],
+   "adjShare": [
+    0.5739972584965575,
+    0.702494633663838
+   ],
+   "docs": 123,
+   "meanUnitLength": 24.3789,
+   "tokens": 299860
+  },
+  {
+   "id": "bk-mayhew2",
+   "group": "bk",
+   "register": "reportage",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    26.212914166224593,
+    29.75439495745279
+   ],
+   "zW": [
+    14.983695346618083,
+    8.702838243420679
+   ],
+   "adjShare": [
+    0.7841791517267749,
+    0.5796529416050978
+   ],
+   "docs": 118,
+   "meanUnitLength": 25.4253,
+   "tokens": 299739
+  },
+  {
+   "id": "bk-mayhew3",
+   "group": "bk",
+   "register": "reportage",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    32.4551676945379,
+    23.26948473339248
+   ],
+   "zW": [
+    15.469764820811543,
+    13.464812898536936
+   ],
+   "adjShare": [
+    0.8034204135770753,
+    0.7541768737828763
+   ],
+   "docs": 146,
+   "meanUnitLength": 20.5729,
+   "tokens": 299583
+  },
+  {
+   "id": "bk-meditations",
+   "group": "bk",
+   "register": "treatise",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    15.293461052389063,
+    27.08500859648764
+   ],
+   "zW": [
+    7.163617996081477,
+    12.234247886555723
+   ],
+   "adjShare": [
+    0.8811961105616775,
+    0.8894257949595861
+   ],
+   "docs": 30,
+   "meanUnitLength": 25.0918,
+   "tokens": 70282
+  },
+  {
+   "id": "bk-middlemarch",
+   "group": "bk",
+   "register": "novel",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    8.947489587968152,
+    8.542752780795373
+   ],
+   "zW": [
+    6.076128892568566,
+    5.293443908957949
+   ],
+   "adjShare": [
+    0.7448181174384018,
+    0.743518371954205
+   ],
+   "docs": 142,
+   "meanUnitLength": 21.0591,
+   "tokens": 299860
+  },
+  {
+   "id": "bk-moby-dick",
+   "group": "bk",
+   "register": "novel",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    36.94744567046709,
+    26.113387695509466
+   ],
+   "zW": [
+    14.363336226864396,
+    12.929099124570666
+   ],
+   "adjShare": [
+    0.8730950061992215,
+    0.867301590818223
+   ],
+   "docs": 102,
+   "meanUnitLength": 21.1402,
+   "tokens": 216603
+  },
+  {
+   "id": "bk-mother-jones",
+   "group": "bk",
+   "register": "memoir",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    26.034986067685534,
+    16.185896964277628
+   ],
+   "zW": [
+    14.95695298333659,
+    12.78061398628568
+   ],
+   "adjShare": [
+    0.9305118448696486,
+    0.9076600254369168
+   ],
+   "docs": 40,
+   "meanUnitLength": 12.9017,
+   "tokens": 51465
+  },
+  {
+   "id": "bk-origin-species",
+   "group": "bk",
+   "register": "academic",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    9.489076323096683,
+    17.145812003803584
+   ],
+   "zW": [
+    6.028410237440783,
+    14.185369845080329
+   ],
+   "adjShare": [
+    0.812301646868493,
+    0.9061600743318267
+   ],
+   "docs": 41,
+   "meanUnitLength": 37.2095,
+   "tokens": 150959
+  },
+  {
+   "id": "bk-oz",
+   "group": "bk",
+   "register": "children",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    3.376973766370083,
+    6.356020636151525
+   ],
+   "zW": [
+    2.565293139631472,
+    3.987045617560579
+   ],
+   "adjShare": [
+    0.8144541033329485,
+    0.8281726045400263
+   ],
+   "docs": 30,
+   "meanUnitLength": 16.9453,
+   "tokens": 39652
+  },
+  {
+   "id": "bk-poor-relief",
+   "group": "bk",
+   "register": "academic",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    34.81867784196353,
+    35.0856077106793
+   ],
+   "zW": [
+    17.995936375019625,
+    12.643439399344517
+   ],
+   "adjShare": [
+    0.8474023183301845,
+    0.6227974152945974
+   ],
+   "docs": 80,
+   "meanUnitLength": 17.6637,
+   "tokens": 140515
+  },
+  {
+   "id": "bk-pride-prej",
+   "group": "bk",
+   "register": "novel",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    10.821679643400769,
+    10.104597902369699
+   ],
+   "zW": [
+    6.198727533468438,
+    6.129209446802703
+   ],
+   "adjShare": [
+    0.865608797992939,
+    0.6939445930994809
+   ],
+   "docs": 63,
+   "meanUnitLength": 20.1271,
+   "tokens": 127163
+  },
+  {
+   "id": "bk-prince",
+   "group": "bk",
+   "register": "treatise",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "M",
+   "statWithin": "A",
+   "zG": [
+    3.128207316947352,
+    4.6403738223019575
+   ],
+   "zW": [
+    1.7219733157836115,
+    1.2728002448978348
+   ],
+   "adjShare": [
+    0.7106381722413184,
+    0.5376910526823843
+   ],
+   "docs": 30,
+   "meanUnitLength": 37.1419,
+   "tokens": 49473
+  },
+  {
+   "id": "bk-quixote-es",
+   "group": "bk",
+   "register": "novel",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    19.6742479373855,
+    7.972030418322503
+   ],
+   "zW": [
+    5.846088813284814,
+    5.271421757165973
+   ],
+   "adjShare": [
+    0.5670793452838517,
+    0.8004959030358949
+   ],
+   "docs": 85,
+   "meanUnitLength": 35.0663,
+   "tokens": 299677
+  },
+  {
+   "id": "bk-republic",
+   "group": "bk",
+   "register": "treatise",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    7.298984632520146,
+    6.5079972791776015
+   ],
+   "zW": [
+    2.8449845283273154,
+    3.837599966140886
+   ],
+   "adjShare": [
+    0.5802586167415388,
+    0.6483738505680464
+   ],
+   "docs": 100,
+   "meanUnitLength": 22.9877,
+   "tokens": 229923
+  },
+  {
+   "id": "bk-riis",
+   "group": "bk",
+   "register": "reportage",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    9.28592730085115,
+    1.3842010056575311
+   ],
+   "zW": [
+    7.089916850526127,
+    0.9203728746352291
+   ],
+   "adjShare": [
+    0.9243674458388322,
+    0.7474272589807476
+   ],
+   "docs": 36,
+   "meanUnitLength": 22.9688,
+   "tokens": 81746
+  },
+  {
+   "id": "bk-sense-sens",
+   "group": "bk",
+   "register": "novel",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    3.748706691775167,
+    8.874658461547561
+   ],
+   "zW": [
+    2.4364134629317826,
+    4.460043237357397
+   ],
+   "adjShare": [
+    0.6252935706097779,
+    0.8215910012837544
+   ],
+   "docs": 49,
+   "meanUnitLength": 24.2463,
+   "tokens": 119922
+  },
+  {
+   "id": "bk-sherlock",
+   "group": "bk",
+   "register": "novel",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    7.204247025183314,
+    9.799441402190391
+   ],
+   "zW": [
+    4.641797762982795,
+    7.147622661266548
+   ],
+   "adjShare": [
+    0.8026293478012115,
+    0.8388671499744601
+   ],
+   "docs": 69,
+   "meanUnitLength": 15.2764,
+   "tokens": 105285
+  },
+  {
+   "id": "bk-somerville",
+   "group": "bk",
+   "register": "memoir",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    3.7782853769861955,
+    2.722745842649696
+   ],
+   "zW": [
+    2.811769651026262,
+    0.8383876356058736
+   ],
+   "adjShare": [
+    0.6650965737778605,
+    0.4827955888162141
+   ],
+   "docs": 35,
+   "meanUnitLength": 25.2319,
+   "tokens": 89018
+  },
+  {
+   "id": "bk-stanton",
+   "group": "bk",
+   "register": "memoir",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    6.02901440019106,
+    5.496154737104462
+   ],
+   "zW": [
+    3.382914746054592,
+    4.410476971552821
+   ],
+   "adjShare": [
+    0.7716603738005466,
+    0.8746453883359424
+   ],
+   "docs": 54,
+   "meanUnitLength": 24.6092,
+   "tokens": 133308
+  },
+  {
+   "id": "bk-time-machine",
+   "group": "bk",
+   "register": "novel",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    6.123449596954356,
+    3.6719765921257865
+   ],
+   "zW": [
+    3.4566488624737888,
+    2.877265355767412
+   ],
+   "adjShare": [
+    0.8731026026193481,
+    0.8117576766865566
+   ],
+   "docs": 30,
+   "meanUnitLength": 16.7108,
+   "tokens": 32653
+  },
+  {
+   "id": "bk-tom-sawyer",
+   "group": "bk",
+   "register": "novel",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    11.831707436872884,
+    14.53131449281859
+   ],
+   "zW": [
+    7.03636123770606,
+    6.869779827566801
+   ],
+   "adjShare": [
+    0.7924572979113358,
+    0.7973594480972678
+   ],
+   "docs": 54,
+   "meanUnitLength": 13.2843,
+   "tokens": 72187
+  },
+  {
+   "id": "bk-treasure-island",
+   "group": "bk",
+   "register": "novel",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    7.8137541180521985,
+    8.23451854630888
+   ],
+   "zW": [
+    5.3173622167188235,
+    4.554203304181749
+   ],
+   "adjShare": [
+    0.8848696887134524,
+    0.8078804312951107
+   ],
+   "docs": 39,
+   "meanUnitLength": 17.9081,
+   "tokens": 69018
+  },
+  {
+   "id": "bk-two-cities",
+   "group": "bk",
+   "register": "novel",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    41.33801520171786,
+    41.64983477047551
+   ],
+   "zW": [
+    16.92217197375091,
+    22.19850002116994
+   ],
+   "adjShare": [
+    0.8914304030588551,
+    0.9002904906820399
+   ],
+   "docs": 80,
+   "meanUnitLength": 17.2845,
+   "tokens": 137429
+  },
+  {
+   "id": "bk-ulysses",
+   "group": "bk",
+   "register": "novel",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    36.713186372589945,
+    59.23561702391486
+   ],
+   "zW": [
+    8.625668741673545,
+    15.468896745408626
+   ],
+   "adjShare": [
+    0.6955800046480806,
+    0.7488121689621677
+   ],
+   "docs": 239,
+   "meanUnitLength": 11.0789,
+   "tokens": 264486
+  },
+  {
+   "id": "bk-war-worlds",
+   "group": "bk",
+   "register": "novel",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    8.57681285425129,
+    6.536520801034111
+   ],
+   "zW": [
+    4.53397074145092,
+    5.256245946366934
+   ],
+   "adjShare": [
+    0.7719727084219832,
+    0.8726489750233107
+   ],
+   "docs": 34,
+   "meanUnitLength": 17.986,
+   "tokens": 60505
+  },
+  {
+   "id": "bk-whitman",
+   "group": "bk",
+   "register": "poetry",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    82.80821111503859,
+    82.0889985656102
+   ],
+   "zW": [
+    43.1145909701086,
+    27.311094957970493
+   ],
+   "adjShare": [
+    0.927130129385841,
+    0.8871108778877267
+   ],
+   "docs": 38,
+   "meanUnitLength": 32.3184,
+   "tokens": 124038
+  },
+  {
+   "id": "bk-wilson-memoirs",
+   "group": "bk",
+   "register": "memoir",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    8.507476692567225,
+    8.340171810929688
+   ],
+   "zW": [
+    4.8110847241311845,
+    4.079383352954303
+   ],
+   "adjShare": [
+    0.8243937227174498,
+    0.708318753975606
+   ],
+   "docs": 109,
+   "meanUnitLength": 20.2977,
+   "tokens": 221752
+  },
+  {
+   "id": "bk-winslow",
+   "group": "bk",
+   "register": "memoir",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    8.596701732545235,
+    6.531067219141495
+   ],
+   "zW": [
+    5.80077077975093,
+    3.9040376060536186
+   ],
+   "adjShare": [
+    0.8601916466007029,
+    0.7053224818504685
+   ],
+   "docs": 30,
+   "meanUnitLength": 16.8412,
+   "tokens": 28950
+  },
+  {
+   "id": "bk-woolf",
+   "group": "bk",
+   "register": "essay",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    14.677015915803155,
+    26.63781025438289
+   ],
+   "zW": [
+    8.392486522415078,
+    12.900659876151273
+   ],
+   "adjShare": [
+    0.9112016553010975,
+    0.9151365134770653
+   ],
+   "docs": 30,
+   "meanUnitLength": 21.8489,
+   "tokens": 38891
+  },
+  {
+   "id": "bk-wpa-al",
+   "group": "bk",
+   "register": "dialect",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    19.72639954403665,
+    16.204514071090397
+   ],
+   "zW": [
+    8.81865955191198,
+    9.384881188930272
+   ],
+   "adjShare": [
+    0.8258290593438671,
+    0.8307216884365143
+   ],
+   "docs": 77,
+   "meanUnitLength": 16.5538,
+   "tokens": 127795
+  },
+  {
+   "id": "bk-wpa-ar",
+   "group": "bk",
+   "register": "dialect",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    43.652692438402525,
+    42.89599344758457
+   ],
+   "zW": [
+    31.26540629214427,
+    33.557972804009026
+   ],
+   "adjShare": [
+    0.8591100615600863,
+    0.865610411635076
+   ],
+   "docs": 274,
+   "meanUnitLength": 10.9337,
+   "tokens": 299507
+  },
+  {
+   "id": "bk-wpa-fl",
+   "group": "bk",
+   "register": "dialect",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    15.588410633627586,
+    23.99663017921366
+   ],
+   "zW": [
+    6.703327913529793,
+    17.7761551689803
+   ],
+   "adjShare": [
+    0.8268886720024454,
+    0.8856638443355074
+   ],
+   "docs": 46,
+   "meanUnitLength": 17.7294,
+   "tokens": 82176
+  },
+  {
+   "id": "bk-wpa-ga",
+   "group": "bk",
+   "register": "dialect",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    34.912179823434386,
+    30.848588432303234
+   ],
+   "zW": [
+    12.259226080434377,
+    6.380163299260904
+   ],
+   "adjShare": [
+    0.719217091324165,
+    0.626904820874666
+   ],
+   "docs": 178,
+   "meanUnitLength": 16.8528,
+   "tokens": 299979
+  },
+  {
+   "id": "bk-wpa-in",
+   "group": "bk",
+   "register": "dialect",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    11.80968742372328,
+    11.098488556422284
+   ],
+   "zW": [
+    5.486301203798003,
+    6.156469586152148
+   ],
+   "adjShare": [
+    0.7527027080910776,
+    0.7803361345385711
+   ],
+   "docs": 32,
+   "meanUnitLength": 17.5733,
+   "tokens": 55391
+  },
+  {
+   "id": "bk-wpa-mo",
+   "group": "bk",
+   "register": "dialect",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    21.86810004540914,
+    14.998906562003183
+   ],
+   "zW": [
+    12.585176064919159,
+    11.617973816733063
+   ],
+   "adjShare": [
+    0.8711273765515507,
+    0.8749283165986893
+   ],
+   "docs": 68,
+   "meanUnitLength": 14.6702,
+   "tokens": 99317
+  },
+  {
+   "id": "bk-wpa-nc",
+   "group": "bk",
+   "register": "dialect",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    31.895147197510312,
+    39.71454447704011
+   ],
+   "zW": [
+    17.92284700882443,
+    19.847946634031352
+   ],
+   "adjShare": [
+    0.8453671085325213,
+    0.861302476357217
+   ],
+   "docs": 123,
+   "meanUnitLength": 13.9556,
+   "tokens": 171054
+  },
+  {
+   "id": "bk-wpa-ok",
+   "group": "bk",
+   "register": "dialect",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    10.502182631964502,
+    15.794867088218666
+   ],
+   "zW": [
+    5.816514271965932,
+    11.142319402847582
+   ],
+   "adjShare": [
+    0.7658964831096243,
+    0.8341614493203712
+   ],
+   "docs": 68,
+   "meanUnitLength": 17.1484,
+   "tokens": 116935
+  },
+  {
+   "id": "bk-wpa-sc",
+   "group": "bk",
+   "register": "dialect",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    47.9839966046684,
+    44.27821688549153
+   ],
+   "zW": [
+    18.800448068878186,
+    19.13089011579373
+   ],
+   "adjShare": [
+    0.7858029784257251,
+    0.8051326469529081
+   ],
+   "docs": 220,
+   "meanUnitLength": 13.6037,
+   "tokens": 299595
+  },
+  {
+   "id": "bk-wpa-tx",
+   "group": "bk",
+   "register": "dialect",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    47.45456588921915,
+    48.1704332861568
+   ],
+   "zW": [
+    31.56826018683638,
+    25.590827026757662
+   ],
+   "adjShare": [
+    0.8871758170786024,
+    0.8664360814866475
+   ],
+   "docs": 201,
+   "meanUnitLength": 14.883,
+   "tokens": 299341
+  },
+  {
+   "id": "bk-wuthering",
+   "group": "bk",
+   "register": "novel",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    9.294811254455395,
+    10.971026052374482
+   ],
+   "zW": [
+    10.085176923249215,
+    8.530219235460672
+   ],
+   "adjShare": [
+    0.9477881034459673,
+    0.9507289849346754
+   ],
+   "docs": 69,
+   "meanUnitLength": 17.0811,
+   "tokens": 117108
+  },
+  {
+   "id": "bk-zitkala",
+   "group": "bk",
+   "register": "memoir",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    4.241374897435204,
+    6.429011882258488
+   ],
+   "zW": [
+    2.837391802689669,
+    5.233043160110059
+   ],
+   "adjShare": [
+    0.7453826356475196,
+    0.9122625762976827
+   ],
+   "docs": 30,
+   "meanUnitLength": 14.7089,
+   "tokens": 32536
+  },
+  {
+   "id": "cd-abc-lieder",
+   "group": "cd",
+   "register": "notation",
+   "grain": "notation",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    69.64821050953027,
+    76.60335902807266
+   ],
+   "zW": [
+    11.580765165456574,
+    22.560530406991607
+   ],
+   "adjShare": [
+    0.5468427835308751,
+    0.7030936444951952
+   ],
+   "docs": 297,
+   "meanUnitLength": 21.4799,
+   "tokens": 236107
+  },
+  {
+   "id": "cd-abc-lyrics",
+   "group": "cd",
+   "register": "lyrics",
+   "grain": "notation",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    182.2681273368856,
+    154.91780644454056
+   ],
+   "zW": [
+    21.352749551816164,
+    21.962721382810052
+   ],
+   "adjShare": [
+    0.7716714805054955,
+    0.7249011790193305
+   ],
+   "docs": 294,
+   "meanUnitLength": 12.3697,
+   "tokens": 46176
+  },
+  {
+   "id": "cd-abc-quartets",
+   "group": "cd",
+   "register": "notation",
+   "grain": "notation",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    108.47436047900474,
+    120.36457580174938
+   ],
+   "zW": [
+    59.763467634760396,
+    71.67845607757663
+   ],
+   "adjShare": [
+    0.9515556847914969,
+    0.9504352203215273
+   ],
+   "docs": 36,
+   "meanUnitLength": 20.2281,
+   "tokens": 294279
+  },
+  {
+   "id": "cd-bpmn-activiti",
+   "group": "cd",
+   "register": "diagram",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    194.56590742181604,
+    197.0404280049677
+   ],
+   "zW": [
+    46.41065221767711,
+    54.189090800988374
+   ],
+   "adjShare": [
+    0.49016164411567115,
+    0.559688155388405
+   ],
+   "docs": 959,
+   "meanUnitLength": 4.91138,
+   "tokens": 292129
+  },
+  {
+   "id": "cd-bpmn-camunda",
+   "group": "cd",
+   "register": "diagram",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    119.91684654005658,
+    99.84890641821853
+   ],
+   "zW": [
+    6.333871806803152,
+    29.912360146029172
+   ],
+   "adjShare": [
+    0.13264126719369607,
+    0.5533443484008963
+   ],
+   "docs": 501,
+   "meanUnitLength": 4.55621,
+   "tokens": 171145
+  },
+  {
+   "id": "cd-bpmn-kogito",
+   "group": "cd",
+   "register": "diagram",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    192.49502661346907,
+    179.85962923580783
+   ],
+   "zW": [
+    139.17073902089294,
+    95.90322099745806
+   ],
+   "adjShare": [
+    0.8708246600465499,
+    0.8599165589270978
+   ],
+   "docs": 304,
+   "meanUnitLength": 5.32565,
+   "tokens": 291441
+  },
+  {
+   "id": "cd-bpmn-miwg",
+   "group": "cd",
+   "register": "diagram",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    99.95232394690713,
+    169.3217626087876
+   ],
+   "zW": [
+    63.734791801178716,
+    88.69139550904796
+   ],
+   "adjShare": [
+    0.7810656741457739,
+    0.7249806776187014
+   ],
+   "docs": 87,
+   "meanUnitLength": 5.36433,
+   "tokens": 299759
+  },
+  {
+   "id": "cd-cc-bash",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    101.37868726583002,
+    170.8027986180008
+   ],
+   "zW": [
+    23.686643774511907,
+    28.592962154434897
+   ],
+   "adjShare": [
+    0.7105068077969828,
+    0.7019029451938855
+   ],
+   "docs": 346,
+   "meanUnitLength": 4.39552,
+   "tokens": 120169
+  },
+  {
+   "id": "cd-cc-c",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    198.35148728321312,
+    346.9638411496082
+   ],
+   "zW": [
+    34.0578417798602,
+    67.72968361730773
+   ],
+   "adjShare": [
+    0.5785645791648429,
+    0.7777654408569717
+   ],
+   "docs": 252,
+   "meanUnitLength": 4.25529,
+   "tokens": 294794
+  },
+  {
+   "id": "cd-cc-clojure",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    395.8167885161719,
+    359.5280955978009
+   ],
+   "zW": [
+    55.19100737686906,
+    46.77459041039859
+   ],
+   "adjShare": [
+    0.7345225558392784,
+    0.7304466072788358
+   ],
+   "docs": 385,
+   "meanUnitLength": 5.54192,
+   "tokens": 291732
+  },
+  {
+   "id": "cd-cc-cobol",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    168.46212060517752,
+    167.7390179438538
+   ],
+   "zW": [
+    48.34228690213913,
+    58.93289748416278
+   ],
+   "adjShare": [
+    0.7536452491315121,
+    0.7073795844657328
+   ],
+   "docs": 206,
+   "meanUnitLength": 4.93486,
+   "tokens": 291502
+  },
+  {
+   "id": "cd-cc-commonlisp",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    274.34868326040487,
+    188.0585762292752
+   ],
+   "zW": [
+    48.50400273596517,
+    29.074677431350498
+   ],
+   "adjShare": [
+    0.7118264771558767,
+    0.617429740610088
+   ],
+   "docs": 228,
+   "meanUnitLength": 5.56944,
+   "tokens": 291432
+  },
+  {
+   "id": "cd-cc-cpp",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    399.93191687193683,
+    315.4301822426176
+   ],
+   "zW": [
+    91.0981511239369,
+    46.22994848183448
+   ],
+   "adjShare": [
+    0.7945120880885006,
+    0.7103142015431482
+   ],
+   "docs": 373,
+   "meanUnitLength": 4.67801,
+   "tokens": 292591
+  },
+  {
+   "id": "cd-cc-csharp",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    351.5674280483866,
+    324.07397573534763
+   ],
+   "zW": [
+    73.85266551020256,
+    59.78876642307397
+   ],
+   "adjShare": [
+    0.7268371998083978,
+    0.6435336288910475
+   ],
+   "docs": 466,
+   "meanUnitLength": 4.61266,
+   "tokens": 291797
+  },
+  {
+   "id": "cd-cc-css",
+   "group": "cd",
+   "register": "markup",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    206.33386332461626,
+    181.49671660828506
+   ],
+   "zW": [
+    46.07413210333464,
+    44.57220101749404
+   ],
+   "adjShare": [
+    0.5104699884443474,
+    0.6453025377800378
+   ],
+   "docs": 342,
+   "meanUnitLength": 3.31768,
+   "tokens": 191825
+  },
+  {
+   "id": "cd-cc-dart",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    236.53015589486375,
+    264.6130661792747
+   ],
+   "zW": [
+    43.749255244696556,
+    52.618567148277016
+   ],
+   "adjShare": [
+    0.5774888387034248,
+    0.682577484260619
+   ],
+   "docs": 589,
+   "meanUnitLength": 3.86692,
+   "tokens": 243616
+  },
+  {
+   "id": "cd-cc-elixir",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    415.26134371265164,
+    542.202545825902
+   ],
+   "zW": [
+    58.258395449367335,
+    79.35060391381106
+   ],
+   "adjShare": [
+    0.6735400450937752,
+    0.7374419825328109
+   ],
+   "docs": 410,
+   "meanUnitLength": 4.23139,
+   "tokens": 291217
+  },
+  {
+   "id": "cd-cc-elm",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    518.7345369077244,
+    482.19104927622107
+   ],
+   "zW": [
+    91.04527938859718,
+    87.28125392043842
+   ],
+   "adjShare": [
+    0.8571093246117676,
+    0.8422598431753047
+   ],
+   "docs": 554,
+   "meanUnitLength": 3.95932,
+   "tokens": 253226
+  },
+  {
+   "id": "cd-cc-erlang",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    335.5833915357841,
+    441.2663686045445
+   ],
+   "zW": [
+    48.75846606447137,
+    76.73432980228625
+   ],
+   "adjShare": [
+    0.803615294110375,
+    0.7944828953584928
+   ],
+   "docs": 316,
+   "meanUnitLength": 4.03632,
+   "tokens": 296839
+  },
+  {
+   "id": "cd-cc-fortran",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    227.79636776759546,
+    196.2300687833551
+   ],
+   "zW": [
+    76.75094636238629,
+    54.878377340783715
+   ],
+   "adjShare": [
+    0.7898910403238454,
+    0.7035940726065364
+   ],
+   "docs": 230,
+   "meanUnitLength": 4.807,
+   "tokens": 293929
+  },
+  {
+   "id": "cd-cc-go",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    78.90768925989234,
+    108.50435846996419
+   ],
+   "zW": [
+    12.124457559650617,
+    29.98666961887962
+   ],
+   "adjShare": [
+    0.37665654435991125,
+    0.5261630161759581
+   ],
+   "docs": 330,
+   "meanUnitLength": 5.28756,
+   "tokens": 292048
+  },
+  {
+   "id": "cd-cc-groovy",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    184.65282707810803,
+    117.82921882246731
+   ],
+   "zW": [
+    61.22033896201408,
+    20.19618349783418
+   ],
+   "adjShare": [
+    0.7455927376057407,
+    0.43321124192216925
+   ],
+   "docs": 466,
+   "meanUnitLength": 4.5248,
+   "tokens": 137676
+  },
+  {
+   "id": "cd-cc-haskell",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    429.56575990521264,
+    423.1632993213691
+   ],
+   "zW": [
+    79.49063284924074,
+    93.1473557788718
+   ],
+   "adjShare": [
+    0.8395553035642956,
+    0.8604560893281528
+   ],
+   "docs": 307,
+   "meanUnitLength": 4.76012,
+   "tokens": 291410
+  },
+  {
+   "id": "cd-cc-html",
+   "group": "cd",
+   "register": "markup",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    51.882854032062475,
+    46.60661281645054
+   ],
+   "zW": [
+    18.042087282133807,
+    19.237930993072908
+   ],
+   "adjShare": [
+    0.49203484533164404,
+    0.48281129547774665
+   ],
+   "docs": 244,
+   "meanUnitLength": 6.24483,
+   "tokens": 291265
+  },
+  {
+   "id": "cd-cc-java",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    249.26593908686436,
+    368.22176152686484
+   ],
+   "zW": [
+    125.98221786989272,
+    122.05304736597513
+   ],
+   "adjShare": [
+    0.8552741232139826,
+    0.8340854288666815
+   ],
+   "docs": 564,
+   "meanUnitLength": 4.76902,
+   "tokens": 238179
+  },
+  {
+   "id": "cd-cc-javascript",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    194.7248125667864,
+    307.97949455244344
+   ],
+   "zW": [
+    17.95192318469261,
+    31.31444292016032
+   ],
+   "adjShare": [
+    0.45208776111829996,
+    0.5943823376472315
+   ],
+   "docs": 519,
+   "meanUnitLength": 3.40534,
+   "tokens": 164505
+  },
+  {
+   "id": "cd-cc-json",
+   "group": "cd",
+   "register": "config",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    187.1999426582706,
+    141.42571654878586
+   ],
+   "zW": [
+    23.40003030447249,
+    22.21555288216378
+   ],
+   "adjShare": [
+    0.6068689242599126,
+    0.6427575911674941
+   ],
+   "docs": 272,
+   "meanUnitLength": 4.46754,
+   "tokens": 294773
+  },
+  {
+   "id": "cd-cc-julia",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    318.85272183056986,
+    424.70720126876023
+   ],
+   "zW": [
+    47.45279267997595,
+    63.24863361068782
+   ],
+   "adjShare": [
+    0.7110992309727155,
+    0.737405352235058
+   ],
+   "docs": 456,
+   "meanUnitLength": 4.53746,
+   "tokens": 291532
+  },
+  {
+   "id": "cd-cc-kotlin",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    346.8653050664569,
+    321.83087928877245
+   ],
+   "zW": [
+    140.69686078503366,
+    129.55277935358484
+   ],
+   "adjShare": [
+    0.8634163819754884,
+    0.8433616890770588
+   ],
+   "docs": 463,
+   "meanUnitLength": 4.47496,
+   "tokens": 201494
+  },
+  {
+   "id": "cd-cc-latex",
+   "group": "cd",
+   "register": "markup",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    257.61708627238687,
+    236.53360513991268
+   ],
+   "zW": [
+    48.753947534137076,
+    57.75854376011802
+   ],
+   "adjShare": [
+    0.7134682684417835,
+    0.7409695923155626
+   ],
+   "docs": 215,
+   "meanUnitLength": 6.40101,
+   "tokens": 292046
+  },
+  {
+   "id": "cd-cc-lean",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    242.32201787284026,
+    144.4069485277829
+   ],
+   "zW": [
+    38.286084910168334,
+    28.66578357268484
+   ],
+   "adjShare": [
+    0.5835467643707787,
+    0.740529789769995
+   ],
+   "docs": 191,
+   "meanUnitLength": 6.70597,
+   "tokens": 294982
+  },
+  {
+   "id": "cd-cc-lua",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    143.6714967672512,
+    246.78148246367485
+   ],
+   "zW": [
+    22.471166726249646,
+    45.9624760534394
+   ],
+   "adjShare": [
+    0.5673781816206103,
+    0.6745619144261376
+   ],
+   "docs": 438,
+   "meanUnitLength": 4.29013,
+   "tokens": 291832
+  },
+  {
+   "id": "cd-cc-markdown",
+   "group": "cd",
+   "register": "docs",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    304.7120072947113,
+    314.70058602422654
+   ],
+   "zW": [
+    35.50047891247525,
+    34.363159966198054
+   ],
+   "adjShare": [
+    0.6370226737608725,
+    0.5901186636148628
+   ],
+   "docs": 364,
+   "meanUnitLength": 7.54062,
+   "tokens": 291362
+  },
+  {
+   "id": "cd-cc-matlab",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    207.38264035108986,
+    194.34329916233852
+   ],
+   "zW": [
+    35.07463864841501,
+    29.692941033648562
+   ],
+   "adjShare": [
+    0.7405516522989793,
+    0.6873429301997817
+   ],
+   "docs": 576,
+   "meanUnitLength": 4.54343,
+   "tokens": 199261
+  },
+  {
+   "id": "cd-cc-nim",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    261.9738715650062,
+    455.7262912458162
+   ],
+   "zW": [
+    31.752528063572434,
+    45.856551460331865
+   ],
+   "adjShare": [
+    0.6763559891448321,
+    0.706571308448655
+   ],
+   "docs": 276,
+   "meanUnitLength": 4.47077,
+   "tokens": 291074
+  },
+  {
+   "id": "cd-cc-objc",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    356.6848809111265,
+    352.43417667639136
+   ],
+   "zW": [
+    54.37411775101469,
+    82.26957997799906
+   ],
+   "adjShare": [
+    0.678707662564308,
+    0.7762034532565316
+   ],
+   "docs": 463,
+   "meanUnitLength": 4.9559,
+   "tokens": 291179
+  },
+  {
+   "id": "cd-cc-ocaml",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    229.98460481372834,
+    164.2951561548353
+   ],
+   "zW": [
+    26.4714476875271,
+    21.37826285031936
+   ],
+   "adjShare": [
+    0.6375007396317331,
+    0.5279986798350759
+   ],
+   "docs": 279,
+   "meanUnitLength": 4.73446,
+   "tokens": 299104
+  },
+  {
+   "id": "cd-cc-perl",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    161.75241448865083,
+    156.2350286198654
+   ],
+   "zW": [
+    59.13581451705942,
+    56.91375396476931
+   ],
+   "adjShare": [
+    0.8311540198402779,
+    0.8084875300076184
+   ],
+   "docs": 282,
+   "meanUnitLength": 5.03935,
+   "tokens": 295029
+  },
+  {
+   "id": "cd-cc-php",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    96.248323413875,
+    172.1393463917249
+   ],
+   "zW": [
+    43.90833585981131,
+    61.37747822075415
+   ],
+   "adjShare": [
+    0.6523572767059005,
+    0.7006531819389898
+   ],
+   "docs": 600,
+   "meanUnitLength": 4.40546,
+   "tokens": 247979
+  },
+  {
+   "id": "cd-cc-powershell",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    259.19124277366916,
+    284.3127786512926
+   ],
+   "zW": [
+    34.04423951872103,
+    45.134659380606934
+   ],
+   "adjShare": [
+    0.5925911275842954,
+    0.6897001452538555
+   ],
+   "docs": 552,
+   "meanUnitLength": 5.50108,
+   "tokens": 287404
+  },
+  {
+   "id": "cd-cc-python",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    325.6243950269679,
+    361.23610274749024
+   ],
+   "zW": [
+    49.274311633064954,
+    63.7398543823007
+   ],
+   "adjShare": [
+    0.7731513524705562,
+    0.7948527159138901
+   ],
+   "docs": 443,
+   "meanUnitLength": 4.29481,
+   "tokens": 291072
+  },
+  {
+   "id": "cd-cc-r",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    236.93335960569533,
+    204.75668843697497
+   ],
+   "zW": [
+    33.67962080826266,
+    24.845434743029067
+   ],
+   "adjShare": [
+    0.6859954303896189,
+    0.6022426686746565
+   ],
+   "docs": 568,
+   "meanUnitLength": 4.63967,
+   "tokens": 291000
+  },
+  {
+   "id": "cd-cc-racket",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    411.740642341081,
+    389.9981483066689
+   ],
+   "zW": [
+    57.281746320071136,
+    67.1328261425477
+   ],
+   "adjShare": [
+    0.6485682451940443,
+    0.604326096409515
+   ],
+   "docs": 503,
+   "meanUnitLength": 4.93871,
+   "tokens": 291399
+  },
+  {
+   "id": "cd-cc-ruby",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    310.58721252791713,
+    261.1496177374228
+   ],
+   "zW": [
+    23.68537277018322,
+    17.395755421584436
+   ],
+   "adjShare": [
+    0.44637875607904115,
+    0.4643681366762966
+   ],
+   "docs": 518,
+   "meanUnitLength": 4.31648,
+   "tokens": 238598
+  },
+  {
+   "id": "cd-cc-rust",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    240.20250989893765,
+    290.5059879738784
+   ],
+   "zW": [
+    75.07755408506246,
+    59.67378902133043
+   ],
+   "adjShare": [
+    0.8448443294926661,
+    0.8143787260536408
+   ],
+   "docs": 245,
+   "meanUnitLength": 4.36525,
+   "tokens": 292681
+  },
+  {
+   "id": "cd-cc-scala",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    337.32955608029084,
+    357.9073874478692
+   ],
+   "zW": [
+    82.90057301382906,
+    82.91573291681688
+   ],
+   "adjShare": [
+    0.7576293449075444,
+    0.7828565613000429
+   ],
+   "docs": 501,
+   "meanUnitLength": 4.77175,
+   "tokens": 291177
+  },
+  {
+   "id": "cd-cc-scheme",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    458.9846753484451,
+    618.5627587743169
+   ],
+   "zW": [
+    60.723342668756956,
+    91.5210433564236
+   ],
+   "adjShare": [
+    0.7063503999987059,
+    0.7731856883416042
+   ],
+   "docs": 320,
+   "meanUnitLength": 4.51539,
+   "tokens": 291116
+  },
+  {
+   "id": "cd-cc-solidity",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    197.9117996574622,
+    361.4595416478459
+   ],
+   "zW": [
+    35.49010058771201,
+    49.88169613425802
+   ],
+   "adjShare": [
+    0.629685866845026,
+    0.6590317308775648
+   ],
+   "docs": 400,
+   "meanUnitLength": 4.52484,
+   "tokens": 293223
+  },
+  {
+   "id": "cd-cc-sql",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    148.33037792527085,
+    116.41887382335574
+   ],
+   "zW": [
+    37.48742877929981,
+    21.90539373813735
+   ],
+   "adjShare": [
+    0.5183108047040033,
+    0.35270005290215994
+   ],
+   "docs": 381,
+   "meanUnitLength": 5.44121,
+   "tokens": 142489
+  },
+  {
+   "id": "cd-cc-svelte",
+   "group": "cd",
+   "register": "markup",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    128.51705562246696,
+    141.2957313565498
+   ],
+   "zW": [
+    45.83303656496406,
+    70.38095249217292
+   ],
+   "adjShare": [
+    0.7797221894392682,
+    0.8065374521501556
+   ],
+   "docs": 595,
+   "meanUnitLength": 3.70277,
+   "tokens": 187375
+  },
+  {
+   "id": "cd-cc-swift",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    472.3995298846632,
+    512.2739778422355
+   ],
+   "zW": [
+    104.18754739628443,
+    97.09218002754184
+   ],
+   "adjShare": [
+    0.7046753237574761,
+    0.7317347496905143
+   ],
+   "docs": 320,
+   "meanUnitLength": 4.73547,
+   "tokens": 291402
+  },
+  {
+   "id": "cd-cc-toml",
+   "group": "cd",
+   "register": "config",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    34.66574289712924,
+    47.305707916909896
+   ],
+   "zW": [
+    -2.0273468455441845,
+    2.204124547578276
+   ],
+   "adjShare": [
+    -0.17508719088932712,
+    0.1388264652543967
+   ],
+   "docs": 473,
+   "meanUnitLength": 4.6445,
+   "tokens": 108723
+  },
+  {
+   "id": "cd-cc-tsx",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    183.6075859536611,
+    156.91104949156278
+   ],
+   "zW": [
+    20.060034077557987,
+    14.873421146959185
+   ],
+   "adjShare": [
+    0.5115881130581504,
+    0.4468673833992461
+   ],
+   "docs": 550,
+   "meanUnitLength": 3.47127,
+   "tokens": 249980
+  },
+  {
+   "id": "cd-cc-typescript",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    269.862142396108,
+    198.84828915355183
+   ],
+   "zW": [
+    28.088692334646453,
+    20.30751240078221
+   ],
+   "adjShare": [
+    0.5341762347393483,
+    0.3999330007702833
+   ],
+   "docs": 500,
+   "meanUnitLength": 4.44657,
+   "tokens": 291762
+  },
+  {
+   "id": "cd-cc-verilog",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    545.9413561376164,
+    353.8008145508292
+   ],
+   "zW": [
+    163.05471162404024,
+    122.93431772366091
+   ],
+   "adjShare": [
+    0.8501557614020889,
+    0.8447409278567224
+   ],
+   "docs": 515,
+   "meanUnitLength": 3.16429,
+   "tokens": 292032
+  },
+  {
+   "id": "cd-cc-vue",
+   "group": "cd",
+   "register": "markup",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    135.07424691749222,
+    139.18473996938263
+   ],
+   "zW": [
+    36.0061712756934,
+    50.81041200828972
+   ],
+   "adjShare": [
+    0.7435410618879694,
+    0.7064151800849234
+   ],
+   "docs": 459,
+   "meanUnitLength": 3.37282,
+   "tokens": 193829
+  },
+  {
+   "id": "cd-cc-yaml",
+   "group": "cd",
+   "register": "config",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    139.83239196213484,
+    85.75516468638813
+   ],
+   "zW": [
+    14.428997820776328,
+    12.808779517040469
+   ],
+   "adjShare": [
+    0.47211012845952993,
+    0.4002623922119758
+   ],
+   "docs": 581,
+   "meanUnitLength": 3.32207,
+   "tokens": 231990
+  },
+  {
+   "id": "cd-cc-zig",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    185.59738773432446,
+    203.5730953970896
+   ],
+   "zW": [
+    66.16446495352777,
+    75.41447377188146
+   ],
+   "adjShare": [
+    0.7193946931373022,
+    0.6521984590445135
+   ],
+   "docs": 140,
+   "meanUnitLength": 5.27298,
+   "tokens": 292682
+  },
+  {
+   "id": "cd-chebi-defs",
+   "group": "cd",
+   "register": "encyclopedia",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "A",
+   "zG": [
+    -2.110178412241647,
+    -1.018181818024246
+   ],
+   "zW": [
+    -1.748443564641092,
+    -0.7678047681036977
+   ],
+   "adjShare": [
+    0.9656862745017916,
+    0.7124999999407768
+   ],
+   "docs": 70,
+   "meanUnitLength": 21.786,
+   "tokens": 76251
+  },
+  {
+   "id": "cd-chess-broadcast",
+   "group": "cd",
+   "register": "notation",
+   "grain": "notation",
+   "atlas": "A",
+   "statGlobal50": "A",
+   "statWithin": "A",
+   "zG": [
+    1.206007096572121,
+    1.162162841436597
+   ],
+   "zW": [
+    0.32836695469892685,
+    1.3442722041275983
+   ],
+   "adjShare": [
+    0.3157024793072256,
+    1.1220850480092073
+   ],
+   "docs": 138,
+   "meanUnitLength": 84.9492,
+   "tokens": 292650
+  },
+  {
+   "id": "cd-chess-lichess",
+   "group": "cd",
+   "register": "notation",
+   "grain": "notation",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "A",
+   "zG": [
+    1.127100577974107,
+    2.0585346441802588
+   ],
+   "zW": [
+    0.6012658922557107,
+    0.5451315711998586
+   ],
+   "adjShare": [
+    0.5538221528637255,
+    0.2900641025636414
+   ],
+   "docs": 173,
+   "meanUnitLength": 67.3343,
+   "tokens": 291221
+  },
+  {
+   "id": "cd-codons",
+   "group": "cd",
+   "register": "sequence",
+   "grain": "notation",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "A",
+   "zG": [
+    3.142011824242985,
+    1.906814628812776
+   ],
+   "zW": [
+    0.006939712842945984,
+    -0.12504798386764596
+   ],
+   "adjShare": [
+    0.0028901733990382436,
+    -0.08333333337657063
+   ],
+   "docs": 92,
+   "meanUnitLength": 327.575,
+   "tokens": 292852
+  },
+  {
+   "id": "cd-dot",
+   "group": "cd",
+   "register": "diagram",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    260.3199862580107,
+    312.84993571281814
+   ],
+   "zW": [
+    22.00524612565314,
+    27.534518100595992
+   ],
+   "adjShare": [
+    0.3078854684221668,
+    0.43018093205670305
+   ],
+   "docs": 654,
+   "meanUnitLength": 4.17709,
+   "tokens": 141361
+  },
+  {
+   "id": "cd-e09-c",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    125.50105169096933,
+    84.45469645495578
+   ],
+   "zW": [
+    32.33439666498258,
+    12.877120630549156
+   ],
+   "adjShare": [
+    0.6491706202807991,
+    0.5373552204666169
+   ],
+   "docs": 157,
+   "meanUnitLength": 4.52656,
+   "tokens": 205103
+  },
+  {
+   "id": "cd-e09-cpp",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    76.56791795179608,
+    95.85933384117644
+   ],
+   "zW": [
+    30.522288532184742,
+    25.14209511760977
+   ],
+   "adjShare": [
+    0.7886276192627529,
+    0.7873463209287822
+   ],
+   "docs": 35,
+   "meanUnitLength": 5.69046,
+   "tokens": 58202
+  },
+  {
+   "id": "cd-e09-docs",
+   "group": "cd",
+   "register": "docs",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    31.08229314469268,
+    95.40709325770918
+   ],
+   "zW": [
+    17.449241657040073,
+    32.476987347932614
+   ],
+   "adjShare": [
+    0.8348109780579586,
+    0.7643248874571716
+   ],
+   "docs": 40,
+   "meanUnitLength": 14.6326,
+   "tokens": 185922
+  },
+  {
+   "id": "cd-e09-eoapp-js",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    179.6455706151007,
+    47.99695286413461
+   ],
+   "zW": [
+    81.47504167134774,
+    19.68633725171784
+   ],
+   "adjShare": [
+    0.8837836001341794,
+    0.7797716034824701
+   ],
+   "docs": 47,
+   "meanUnitLength": 5.65919,
+   "tokens": 239961
+  },
+  {
+   "id": "cd-e09-go",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    35.16214177230617,
+    37.70467394532413
+   ],
+   "zW": [
+    7.160551180974053,
+    11.889013152690826
+   ],
+   "adjShare": [
+    0.5947339805486123,
+    0.7264423854323611
+   ],
+   "docs": 35,
+   "meanUnitLength": 5.80023,
+   "tokens": 56384
+  },
+  {
+   "id": "cd-e09-python",
+   "group": "cd",
+   "register": "code",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    13.297468467955458,
+    10.166961604379914
+   ],
+   "zW": [
+    4.814246590311378,
+    3.6896992442161394
+   ],
+   "adjShare": [
+    0.6092859331675201,
+    0.5753208490507504
+   ],
+   "docs": 26,
+   "meanUnitLength": 5.27231,
+   "tokens": 39342
+  },
+  {
+   "id": "cd-gene-products",
+   "group": "cd",
+   "register": "nomenclature",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    85.92267935285031,
+    63.252294778303074
+   ],
+   "zW": [
+    38.9880735663569,
+    32.875841216127704
+   ],
+   "adjShare": [
+    0.545102940045016,
+    0.5911661819471563
+   ],
+   "docs": 281,
+   "meanUnitLength": 3.62789,
+   "tokens": 42595
+  },
+  {
+   "id": "cd-ipa-arab",
+   "group": "cd",
+   "register": "notation",
+   "grain": "notation",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "A",
+   "zG": [
+    10.95265964199865,
+    10.882196988513353
+   ],
+   "zW": [
+    0.47737569642581446,
+    -0.24968430596547908
+   ],
+   "adjShare": [
+    0.05933777331410161,
+    -0.03094005530397965
+   ],
+   "docs": 384,
+   "meanUnitLength": 5.55249,
+   "tokens": 105986
+  },
+  {
+   "id": "cd-ipa-cyrl",
+   "group": "cd",
+   "register": "notation",
+   "grain": "notation",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "A",
+   "zG": [
+    33.838154724157775,
+    29.64659329701436
+   ],
+   "zW": [
+    0.16124287191284944,
+    -0.3492802454859393
+   ],
+   "adjShare": [
+    0.009117703341205865,
+    -0.025929251101769444
+   ],
+   "docs": 595,
+   "meanUnitLength": 6.80103,
+   "tokens": 201596
+  },
+  {
+   "id": "cd-ipa-hani",
+   "group": "cd",
+   "register": "notation",
+   "grain": "notation",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "A",
+   "zG": [
+    18.44322885157952,
+    13.584996715119267
+   ],
+   "zW": [
+    0.8000955950409506,
+    -0.42363678369114577
+   ],
+   "adjShare": [
+    0.06735070682815537,
+    -0.04771336651729604
+   ],
+   "docs": 643,
+   "meanUnitLength": 5.16404,
+   "tokens": 165554
+  },
+  {
+   "id": "cd-ipa-latn",
+   "group": "cd",
+   "register": "notation",
+   "grain": "notation",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "A",
+   "zG": [
+    38.84265871118401,
+    44.33737920542802
+   ],
+   "zW": [
+    0.03173263964691929,
+    0.8604177928240783
+   ],
+   "adjShare": [
+    0.002154270061610368,
+    0.055513683047761955
+   ],
+   "docs": 903,
+   "meanUnitLength": 6.47034,
+   "tokens": 291424
+  },
+  {
+   "id": "cd-ipa-other",
+   "group": "cd",
+   "register": "notation",
+   "grain": "notation",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "A",
+   "zG": [
+    35.88450289990223,
+    34.57495977474864
+   ],
+   "zW": [
+    0.3405075798488969,
+    -0.3110745831465335
+   ],
+   "adjShare": [
+    0.020463031165541143,
+    -0.022576084391762757
+   ],
+   "docs": 917,
+   "meanUnitLength": 6.38388,
+   "tokens": 291207
+  },
+  {
+   "id": "cd-iupac-ccd",
+   "group": "cd",
+   "register": "nomenclature",
+   "grain": "notation",
+   "atlas": "A",
+   "statGlobal50": "A",
+   "statWithin": "A",
+   "zG": [
+    -0.38640506015598414,
+    0.3883889167917925
+   ],
+   "zW": [
+    -0.16112716426368653,
+    0.07118652062095682
+   ],
+   "adjShare": [
+    0.3749426142114768,
+    0.21075018488421685
+   ],
+   "docs": 60,
+   "meanUnitLength": 9.1825,
+   "tokens": 55095
+  },
+  {
+   "id": "cd-iupac-chebi",
+   "group": "cd",
+   "register": "nomenclature",
+   "grain": "notation",
+   "atlas": "A",
+   "statGlobal50": "A",
+   "statWithin": "A",
+   "zG": [
+    0.7901615326631932,
+    -0.8163782932709926
+   ],
+   "zW": [
+    0.9896313482485352,
+    -0.9704759297493102
+   ],
+   "adjShare": [
+    1.1548278036395458,
+    0.9238329311674682
+   ],
+   "docs": 29,
+   "meanUnitLength": 9.02872,
+   "tokens": 25461
+  },
+  {
+   "id": "cd-iupac-pubchem",
+   "group": "cd",
+   "register": "nomenclature",
+   "grain": "notation",
+   "atlas": "A",
+   "statGlobal50": "A",
+   "statWithin": "A",
+   "zG": [
+    0.9238812663174768,
+    1.0833827679379946
+   ],
+   "zW": [
+    0.23054487317389896,
+    1.580268363994084
+   ],
+   "adjShare": [
+    0.3222409276596533,
+    1.1830985916592247
+   ],
+   "docs": 60,
+   "meanUnitLength": 8.4984,
+   "tokens": 50438
+  },
+  {
+   "id": "cd-lilypond",
+   "group": "cd",
+   "register": "notation",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    350.1365628243689,
+    358.13812908547646
+   ],
+   "zW": [
+    98.85397707633126,
+    105.46697114810091
+   ],
+   "adjShare": [
+    0.893870706977251,
+    0.8848347289975016
+   ],
+   "docs": 160,
+   "meanUnitLength": 5.44935,
+   "tokens": 244714
+  },
+  {
+   "id": "cd-mermaid",
+   "group": "cd",
+   "register": "diagram",
+   "grain": "code",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    30.988988712792715,
+    56.45778794993848
+   ],
+   "zW": [
+    -0.26717817835660435,
+    8.61288509492096
+   ],
+   "adjShare": [
+    -0.023815668540920702,
+    0.3810358969139687
+   ],
+   "docs": 647,
+   "meanUnitLength": 3.14941,
+   "tokens": 26011
+  },
+  {
+   "id": "cd-mscx",
+   "group": "cd",
+   "register": "notation",
+   "grain": "code",
+   "atlas": "P-",
+   "statGlobal50": "P-",
+   "statWithin": "P-",
+   "zG": [
+    -9.374367320767506,
+    -5.764647050649722
+   ],
+   "zW": [
+    -14.596971535651923,
+    -10.411583928332265
+   ],
+   "adjShare": [
+    1.7818037527973132,
+    2.661780036151468
+   ],
+   "docs": 24,
+   "meanUnitLength": 1.77582,
+   "tokens": 86930
+  },
+  {
+   "id": "cd-musicxml",
+   "group": "cd",
+   "register": "notation",
+   "grain": "code",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "P-",
+   "zG": [
+    6.596584578573895,
+    2.2163544175821714
+   ],
+   "zW": [
+    -17.737255711681556,
+    -17.807735377308823
+   ],
+   "adjShare": [
+    -3.331317161491241,
+    -10.036950914319629
+   ],
+   "docs": 88,
+   "meanUnitLength": 2.84302,
+   "tokens": 291378
+  },
+  {
+   "id": "cd-protein-aa",
+   "group": "cd",
+   "register": "sequence",
+   "grain": "notation",
+   "atlas": "A",
+   "statGlobal50": "A",
+   "statWithin": "A",
+   "zG": [
+    0.2378286163056534,
+    1.5974481049025608
+   ],
+   "zW": [
+    -0.9543027048552446,
+    0.33085704436305613
+   ],
+   "adjShare": [
+    -4.086956522461065,
+    0.24262295081397706
+   ],
+   "docs": 91,
+   "meanUnitLength": 328.829,
+   "tokens": 293973
+  },
+  {
+   "id": "cd-sbgn",
+   "group": "cd",
+   "register": "diagram",
+   "grain": "code",
+   "atlas": "P-",
+   "statGlobal50": "P-",
+   "statWithin": "P-",
+   "zG": [
+    -6.950612798698178,
+    -18.961954149837013
+   ],
+   "zW": [
+    -11.561512391998445,
+    -22.350461767888497
+   ],
+   "adjShare": [
+    2.0903639421323486,
+    1.3132083006601667
+   ],
+   "docs": 76,
+   "meanUnitLength": 3.89523,
+   "tokens": 79677
+  },
+  {
+   "id": "cd-smiles-ccd",
+   "group": "cd",
+   "register": "notation",
+   "grain": "notation",
+   "atlas": "M",
+   "statGlobal50": "A",
+   "statWithin": "A",
+   "zG": [
+    -0.2989784675734089,
+    1.7618899285542242
+   ],
+   "zW": [
+    -0.5049191150303609,
+    1.5447293908705497
+   ],
+   "adjShare": [
+    1.6208053689407054,
+    0.8793103448217157
+   ],
+   "docs": 60,
+   "meanUnitLength": 26.6251,
+   "tokens": 159351
+  },
+  {
+   "id": "cd-smiles-chebi",
+   "group": "cd",
+   "register": "notation",
+   "grain": "notation",
+   "atlas": "A",
+   "statGlobal50": "A",
+   "statWithin": "A",
+   "zG": [
+    1.6104393040159135,
+    -0.4507955947953933
+   ],
+   "zW": [
+    1.668286539344772,
+    -0.09384046846871852
+   ],
+   "adjShare": [
+    1.0758354755767856,
+    0.2100456620160552
+   ],
+   "docs": 30,
+   "meanUnitLength": 31.8497,
+   "tokens": 94307
+  },
+  {
+   "id": "cd-smiles-chembl",
+   "group": "cd",
+   "register": "notation",
+   "grain": "notation",
+   "atlas": "A",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    0.31283772646597163,
+    2.1362296072546343
+   ],
+   "zW": [
+    0.1376455728014884,
+    2.0122206982313857
+   ],
+   "adjShare": [
+    0.4053030303539096,
+    0.8057901085572098
+   ],
+   "docs": 39,
+   "meanUnitLength": 32.1997,
+   "tokens": 125450
+  },
+  {
+   "id": "cd-smiles-pubchem",
+   "group": "cd",
+   "register": "notation",
+   "grain": "notation",
+   "atlas": "A",
+   "statGlobal50": "A",
+   "statWithin": "A",
+   "zG": [
+    1.8559038856187828,
+    0.09405314924592008
+   ],
+   "zW": [
+    1.816354552697331,
+    0.28774756567061804
+   ],
+   "adjShare": [
+    0.9778420038535114,
+    3.1774193559244246
+   ],
+   "docs": 60,
+   "meanUnitLength": 27.6938,
+   "tokens": 166163
+  },
+  {
+   "id": "cd-taxon-en",
+   "group": "cd",
+   "register": "academic",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    125.68728484371395,
+    133.41419601938523
+   ],
+   "zW": [
+    4.4874077408506805,
+    7.519709489837206
+   ],
+   "adjShare": [
+    0.22901223514862526,
+    0.34329013363094163
+   ],
+   "docs": 785,
+   "meanUnitLength": 9.84998,
+   "tokens": 291333
+  },
+  {
+   "id": "fm-ashby",
+   "group": "fm",
+   "register": "academic",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    8.57343760446409,
+    12.6223089184068
+   ],
+   "zW": [
+    5.201479368898048,
+    7.627052968194623
+   ],
+   "adjShare": [
+    0.7936862590134418,
+    0.8213127675884169
+   ],
+   "docs": 71,
+   "meanUnitLength": 17.0558,
+   "tokens": 101704
+  },
+  {
+   "id": "fm-d2l",
+   "group": "fm",
+   "register": "academic",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    18.518757540626783,
+    8.013373631952804
+   ],
+   "zW": [
+    10.532547365652388,
+    3.456916611670444
+   ],
+   "adjShare": [
+    0.8097271247026377,
+    0.6684526647355057
+   ],
+   "docs": 77,
+   "meanUnitLength": 15.5642,
+   "tokens": 113401
+  },
+  {
+   "id": "fm-eb1911",
+   "group": "fm",
+   "register": "encyclopedia",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    1.930678039762571,
+    6.577503211816856
+   ],
+   "zW": [
+    1.0828853147206217,
+    3.0868489099493717
+   ],
+   "adjShare": [
+    0.6221824886790132,
+    0.7007618848221517
+   ],
+   "docs": 33,
+   "meanUnitLength": 27.6467,
+   "tokens": 43350
+  },
+  {
+   "id": "fm-factbook",
+   "group": "fm",
+   "register": "reference",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    65.9937513401336,
+    64.58085845779021
+   ],
+   "zW": [
+    59.87191655195473,
+    59.83625943150588
+   ],
+   "adjShare": [
+    1.0105856142652785,
+    1.008599937884986
+   ],
+   "docs": 88,
+   "meanUnitLength": 5.06969,
+   "tokens": 297368
+  },
+  {
+   "id": "fm-law-ad",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    108.9628782426825,
+    95.5315802961743
+   ],
+   "zW": [
+    36.18871756158028,
+    56.12529563509787
+   ],
+   "adjShare": [
+    0.8134802580984738,
+    0.8859211196176815
+   ],
+   "docs": 50,
+   "meanUnitLength": 14.1361,
+   "tokens": 143778
+  },
+  {
+   "id": "fm-law-ar",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    20.4691902310361,
+    9.174344466384342
+   ],
+   "zW": [
+    8.628392337606387,
+    -1.3790323731562923
+   ],
+   "adjShare": [
+    0.7370066093081749,
+    -0.428820110683337
+   ],
+   "docs": 54,
+   "meanUnitLength": 8.31354,
+   "tokens": 138728
+  },
+  {
+   "id": "fm-law-at",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    11.506211721021142,
+    26.201919666424985
+   ],
+   "zW": [
+    3.0978424681395333,
+    6.89195242764134
+   ],
+   "adjShare": [
+    0.5957783950146992,
+    0.6326293518949777
+   ],
+   "docs": 43,
+   "meanUnitLength": 13.1411,
+   "tokens": 36703
+  },
+  {
+   "id": "fm-law-be",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    51.64659456345311,
+    68.22387389165554
+   ],
+   "zW": [
+    20.228422843765927,
+    19.78134827692146
+   ],
+   "adjShare": [
+    0.7935336737737729,
+    0.7926098542530337
+   ],
+   "docs": 46,
+   "meanUnitLength": 23.4504,
+   "tokens": 77058
+  },
+  {
+   "id": "fm-law-ch",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    12.511194739198983,
+    5.572177281728101
+   ],
+   "zW": [
+    -3.024623164327733,
+    -5.410489401598903
+   ],
+   "adjShare": [
+    -0.41698051981292683,
+    -2.1732893365941357
+   ],
+   "docs": 52,
+   "meanUnitLength": 7.28372,
+   "tokens": 59457
+  },
+  {
+   "id": "fm-law-cl",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    18.09454204837293,
+    21.58675396143367
+   ],
+   "zW": [
+    7.147872965243227,
+    9.969806109914634
+   ],
+   "adjShare": [
+    0.7532488068091547,
+    0.736581264944674
+   ],
+   "docs": 42,
+   "meanUnitLength": 33.0293,
+   "tokens": 128715
+  },
+  {
+   "id": "fm-law-co",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    60.232989590782886,
+    76.96761024335828
+   ],
+   "zW": [
+    13.839792201884,
+    17.72454681980038
+   ],
+   "adjShare": [
+    0.6553950025760696,
+    0.7678187854033282
+   ],
+   "docs": 50,
+   "meanUnitLength": 18.6202,
+   "tokens": 83977
+  },
+  {
+   "id": "fm-law-cz",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    30.141129336821525,
+    59.04170027922107
+   ],
+   "zW": [
+    2.2554549313442345,
+    14.620219647452496
+   ],
+   "adjShare": [
+    0.14704742855818873,
+    0.5408132645505422
+   ],
+   "docs": 49,
+   "meanUnitLength": 11.907,
+   "tokens": 114069
+  },
+  {
+   "id": "fm-law-de",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    78.7991980395771,
+    99.37767341463667
+   ],
+   "zW": [
+    40.097055844661185,
+    39.77331207286837
+   ],
+   "adjShare": [
+    0.8704495622090832,
+    0.8783624547198176
+   ],
+   "docs": 48,
+   "meanUnitLength": 17.5924,
+   "tokens": 238360
+  },
+  {
+   "id": "fm-law-es",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    23.04468358977575,
+    23.802689181270864
+   ],
+   "zW": [
+    7.659405645326616,
+    12.51863414608609
+   ],
+   "adjShare": [
+    0.5223287067959849,
+    0.698277802760905
+   ],
+   "docs": 57,
+   "meanUnitLength": 26.016,
+   "tokens": 299991
+  },
+  {
+   "id": "fm-law-eu",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    93.26609276555345,
+    69.9827773388642
+   ],
+   "zW": [
+    24.21505592708769,
+    23.36874216802572
+   ],
+   "adjShare": [
+    0.5745781025828536,
+    0.7522894489972586
+   ],
+   "docs": 60,
+   "meanUnitLength": 27.4091,
+   "tokens": 288645
+  },
+  {
+   "id": "fm-law-fi",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    84.27376157715656,
+    53.53315684491101
+   ],
+   "zW": [
+    19.54901355394008,
+    14.05628696210702
+   ],
+   "adjShare": [
+    0.7724475119211978,
+    0.8157786256566606
+   ],
+   "docs": 49,
+   "meanUnitLength": 12.7652,
+   "tokens": 51865
+  },
+  {
+   "id": "fm-law-fr",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    82.8460319220706,
+    79.24291199712421
+   ],
+   "zW": [
+    37.661233070390246,
+    31.69606431086192
+   ],
+   "adjShare": [
+    0.8576601860988011,
+    0.8181161419826478
+   ],
+   "docs": 50,
+   "meanUnitLength": 23.2122,
+   "tokens": 297534
+  },
+  {
+   "id": "fm-law-gr",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    6.745075966039363,
+    9.808352088988382
+   ],
+   "zW": [
+    1.7406431973465466,
+    3.8223396605110094
+   ],
+   "adjShare": [
+    0.4770290788560277,
+    0.5751111826951525
+   ],
+   "docs": 29,
+   "meanUnitLength": 13.9277,
+   "tokens": 28134
+  },
+  {
+   "id": "fm-law-it",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    33.68952226374929,
+    22.066981407607482
+   ],
+   "zW": [
+    14.02748778576878,
+    8.504920778080715
+   ],
+   "adjShare": [
+    0.7502696597957091,
+    0.5616231946499619
+   ],
+   "docs": 51,
+   "meanUnitLength": 25.787,
+   "tokens": 179890
+  },
+  {
+   "id": "fm-law-li",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "A",
+   "zG": [
+    7.921455741410542,
+    17.980761294260077
+   ],
+   "zW": [
+    -1.0622902360573243,
+    0.47906510457898777
+   ],
+   "adjShare": [
+    -0.2928766139366931,
+    0.07545499498770544
+   ],
+   "docs": 51,
+   "meanUnitLength": 11.2264,
+   "tokens": 74813
+  },
+  {
+   "id": "fm-law-lv",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    133.2089834179605,
+    103.35049994755887
+   ],
+   "zW": [
+    26.68734241334128,
+    23.860041239447522
+   ],
+   "adjShare": [
+    0.8059441792127443,
+    0.7479950044318642
+   ],
+   "docs": 52,
+   "meanUnitLength": 15.2042,
+   "tokens": 50843
+  },
+  {
+   "id": "fm-law-nl",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    49.38663929040681,
+    45.730359798913334
+   ],
+   "zW": [
+    12.256521570976492,
+    16.531097590268477
+   ],
+   "adjShare": [
+    0.6599698356255214,
+    0.7635417449584366
+   ],
+   "docs": 53,
+   "meanUnitLength": 15.4526,
+   "tokens": 96007
+  },
+  {
+   "id": "fm-law-no",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    30.57222937836005,
+    44.06583636279207
+   ],
+   "zW": [
+    9.352468619233504,
+    13.931786430973558
+   ],
+   "adjShare": [
+    0.6408986912135846,
+    0.7519583042695549
+   ],
+   "docs": 41,
+   "meanUnitLength": 19.2876,
+   "tokens": 59155
+  },
+  {
+   "id": "fm-law-pl",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    31.101232698933536,
+    28.752257847460168
+   ],
+   "zW": [
+    11.899648185716927,
+    8.981935720379333
+   ],
+   "adjShare": [
+    0.7227311461815517,
+    0.6407647190782984
+   ],
+   "docs": 49,
+   "meanUnitLength": 13.0726,
+   "tokens": 60526
+  },
+  {
+   "id": "fm-law-pt",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    17.929698195761954,
+    15.216566898334433
+   ],
+   "zW": [
+    5.438159016257275,
+    5.205276895390906
+   ],
+   "adjShare": [
+    0.6879843332811652,
+    0.617570485677306
+   ],
+   "docs": 52,
+   "meanUnitLength": 22.011,
+   "tokens": 72218
+  },
+  {
+   "id": "fm-law-ro",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    26.519319256036727,
+    31.53064224656698
+   ],
+   "zW": [
+    19.22745209949959,
+    19.78442718547744
+   ],
+   "adjShare": [
+    0.8050026425481722,
+    0.7210226040375096
+   ],
+   "docs": 40,
+   "meanUnitLength": 12.1848,
+   "tokens": 94761
+  },
+  {
+   "id": "fm-law-se",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    65.5732168448888,
+    41.459822546742835
+   ],
+   "zW": [
+    26.024120153875376,
+    10.00118658006298
+   ],
+   "adjShare": [
+    0.8002357680502135,
+    0.5885436146085674
+   ],
+   "docs": 49,
+   "meanUnitLength": 13.8353,
+   "tokens": 101565
+  },
+  {
+   "id": "fm-law-sk",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P-",
+   "zG": [
+    6.254160436610291,
+    11.934214732227494
+   ],
+   "zW": [
+    -11.307871457437779,
+    -5.069012917165304
+   ],
+   "adjShare": [
+    -3.9230555437801744,
+    -1.0228054197727972
+   ],
+   "docs": 50,
+   "meanUnitLength": 9.07332,
+   "tokens": 53460
+  },
+  {
+   "id": "fm-law-uk",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    40.1463331136982,
+    23.173499797689605
+   ],
+   "zW": [
+    2.5370717486843115,
+    4.473816155130164
+   ],
+   "adjShare": [
+    0.17358101286047772,
+    0.32098261834586533
+   ],
+   "docs": 51,
+   "meanUnitLength": 12.5763,
+   "tokens": 243829
+  },
+  {
+   "id": "fm-law-us",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    4.320830669623107,
+    3.6321502962480627
+   ],
+   "zW": [
+    -1.6286112845127876,
+    -2.388474996326835
+   ],
+   "adjShare": [
+    -0.4429682692730619,
+    -0.6815770614137384
+   ],
+   "docs": 52,
+   "meanUnitLength": 11.4719,
+   "tokens": 90880
+  },
+  {
+   "id": "fm-law-uy",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    38.42013507348501,
+    59.12509985480318
+   ],
+   "zW": [
+    14.659727925793153,
+    25.549691591188722
+   ],
+   "adjShare": [
+    0.8347405278488786,
+    0.8754088671626774
+   ],
+   "docs": 52,
+   "meanUnitLength": 9.81458,
+   "tokens": 148740
+  },
+  {
+   "id": "fm-nestle1904",
+   "group": "fm",
+   "register": "scripture",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    18.38837163796231,
+    23.82953221640576
+   ],
+   "zW": [
+    3.4112276193702495,
+    6.422572881882672
+   ],
+   "adjShare": [
+    0.3876092136564939,
+    0.5760129659595741
+   ],
+   "docs": 257,
+   "meanUnitLength": 17.3583,
+   "tokens": 136523
+  },
+  {
+   "id": "fm-ntrs-1965-71",
+   "group": "fm",
+   "register": "academic",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    31.10616325555069,
+    33.744110609763645
+   ],
+   "zW": [
+    10.742492092288616,
+    7.867490687666852
+   ],
+   "adjShare": [
+    0.7390104287188989,
+    0.6488187014764963
+   ],
+   "docs": 71,
+   "meanUnitLength": 8.68092,
+   "tokens": 293554
+  },
+  {
+   "id": "fm-ntrs-1972-99",
+   "group": "fm",
+   "register": "academic",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    53.87872503107292,
+    63.66771460086873
+   ],
+   "zW": [
+    28.49169391329488,
+    28.31569313782309
+   ],
+   "adjShare": [
+    0.8837531278256221,
+    0.8975941142736523
+   ],
+   "docs": 41,
+   "meanUnitLength": 11.6764,
+   "tokens": 289866
+  },
+  {
+   "id": "fm-ntrs-2004-26",
+   "group": "fm",
+   "register": "academic",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    52.37809462847867,
+    24.009417028753212
+   ],
+   "zW": [
+    18.59488919762193,
+    6.716058120804826
+   ],
+   "adjShare": [
+    0.8047996453446349,
+    0.7126107330203192
+   ],
+   "docs": 49,
+   "meanUnitLength": 16.3987,
+   "tokens": 175827
+  },
+  {
+   "id": "fm-paip",
+   "group": "fm",
+   "register": "academic",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    24.64576101170327,
+    20.3268782411358
+   ],
+   "zW": [
+    12.666287543140331,
+    16.25334130401248
+   ],
+   "adjShare": [
+    0.9007658655030437,
+    0.9329986125488086
+   ],
+   "docs": 52,
+   "meanUnitLength": 16.113,
+   "tokens": 186315
+  },
+  {
+   "id": "fm-pali-dn",
+   "group": "fm",
+   "register": "scripture",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    45.0518221456568,
+    53.58767034206312
+   ],
+   "zW": [
+    11.389210063132026,
+    10.27349537097332
+   ],
+   "adjShare": [
+    0.6107504414153219,
+    0.4878490467865506
+   ],
+   "docs": 58,
+   "meanUnitLength": 8.70434,
+   "tokens": 142107
+  },
+  {
+   "id": "fm-pali-en-dn",
+   "group": "fm",
+   "register": "scripture",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    58.850647401179664,
+    43.394999765779986
+   ],
+   "zW": [
+    13.816068000553665,
+    11.83441135668627
+   ],
+   "adjShare": [
+    0.5960754421806951,
+    0.5514978566712734
+   ],
+   "docs": 59,
+   "meanUnitLength": 13.1491,
+   "tokens": 188689
+  },
+  {
+   "id": "fm-pali-en-mn",
+   "group": "fm",
+   "register": "scripture",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    94.03742117353697,
+    97.01164369125333
+   ],
+   "zW": [
+    17.67405900188016,
+    11.334746835970428
+   ],
+   "adjShare": [
+    0.5432366076283897,
+    0.40040721718654293
+   ],
+   "docs": 146,
+   "meanUnitLength": 13.8382,
+   "tokens": 298379
+  },
+  {
+   "id": "fm-pali-mn",
+   "group": "fm",
+   "register": "scripture",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    73.8733959243807,
+    67.75134583790062
+   ],
+   "zW": [
+    3.014044945545461,
+    4.3080859600816055
+   ],
+   "adjShare": [
+    0.1642258087435988,
+    0.22709597111257154
+   ],
+   "docs": 152,
+   "meanUnitLength": 9.05348,
+   "tokens": 243448
+  },
+  {
+   "id": "fm-quran-ar",
+   "group": "fm",
+   "register": "scripture",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    17.416154448748674,
+    25.10939188816847
+   ],
+   "zW": [
+    5.711869114884436,
+    4.6404463671899885
+   ],
+   "adjShare": [
+    0.6623876602367301,
+    0.4363775377743713
+   ],
+   "docs": 91,
+   "meanUnitLength": 12.9515,
+   "tokens": 75883
+  },
+  {
+   "id": "fm-quran-en-pickthall",
+   "group": "fm",
+   "register": "scripture",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    19.9741532744472,
+    12.817586862229792
+   ],
+   "zW": [
+    4.963858776586681,
+    5.089469523421826
+   ],
+   "adjShare": [
+    0.475563869851058,
+    0.5913276606808903
+   ],
+   "docs": 123,
+   "meanUnitLength": 14.3508,
+   "tokens": 155391
+  },
+  {
+   "id": "fm-quran-en-sahih",
+   "group": "fm",
+   "register": "scripture",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    32.76042178543753,
+    28.706777584581427
+   ],
+   "zW": [
+    14.467040058585598,
+    10.255204646179683
+   ],
+   "adjShare": [
+    0.8031451839386785,
+    0.643476721543636
+   ],
+   "docs": 90,
+   "meanUnitLength": 26.4095,
+   "tokens": 154733
+  },
+  {
+   "id": "fm-quran-en-yusufali",
+   "group": "fm",
+   "register": "scripture",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    15.695858103680449,
+    15.935830645506893
+   ],
+   "zW": [
+    4.8461959696532855,
+    6.154759060050641
+   ],
+   "adjShare": [
+    0.6511847025018445,
+    0.6462289798386448
+   ],
+   "docs": 122,
+   "meanUnitLength": 25.2041,
+   "tokens": 167859
+  },
+  {
+   "id": "fm-sanskrit",
+   "group": "fm",
+   "register": "scripture",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    28.043223769719248,
+    63.30323887298891
+   ],
+   "zW": [
+    9.847772534522111,
+    25.564440076514998
+   ],
+   "adjShare": [
+    0.7871480276517246,
+    0.8722950865303802
+   ],
+   "docs": 62,
+   "meanUnitLength": 6.65063,
+   "tokens": 170203
+  },
+  {
+   "id": "fm-sblgnt-epis",
+   "group": "fm",
+   "register": "scripture",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    17.922091037327615,
+    13.78780378932986
+   ],
+   "zW": [
+    5.91661836370228,
+    1.5389111346774627
+   ],
+   "adjShare": [
+    0.6769527483124396,
+    0.27883742050544774
+   ],
+   "docs": 139,
+   "meanUnitLength": 17.2714,
+   "tokens": 53386
+  },
+  {
+   "id": "fm-sblgnt-narr",
+   "group": "fm",
+   "register": "scripture",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    9.990075884314319,
+    14.31796320695233
+   ],
+   "zW": [
+    5.257422323496005,
+    5.525491234826288
+   ],
+   "adjShare": [
+    0.5971830985982785,
+    0.5895522388027779
+   ],
+   "docs": 117,
+   "meanUnitLength": 17.4256,
+   "tokens": 82911
+  },
+  {
+   "id": "fm-talmud-kodashim",
+   "group": "fm",
+   "register": "scripture",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    27.417387863631422,
+    20.201751441556425
+   ],
+   "zW": [
+    9.063685049479085,
+    5.830324493652905
+   ],
+   "adjShare": [
+    0.6024358094297715,
+    0.5188178466844932
+   ],
+   "docs": 231,
+   "meanUnitLength": 6.91553,
+   "tokens": 298398
+  },
+  {
+   "id": "fm-talmud-moed",
+   "group": "fm",
+   "register": "scripture",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    28.35969375706259,
+    18.545672827685138
+   ],
+   "zW": [
+    13.967889460843608,
+    11.314134680875597
+   ],
+   "adjShare": [
+    0.7336208264734575,
+    0.619888596165526
+   ],
+   "docs": 199,
+   "meanUnitLength": 6.48517,
+   "tokens": 299174
+  },
+  {
+   "id": "fm-talmud-nashim",
+   "group": "fm",
+   "register": "scripture",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    33.06650396881051,
+    32.92077597616925
+   ],
+   "zW": [
+    11.1224923305928,
+    16.43065015825477
+   ],
+   "adjShare": [
+    0.6306675164060973,
+    0.714311561643167
+   ],
+   "docs": 231,
+   "meanUnitLength": 6.56707,
+   "tokens": 298900
+  },
+  {
+   "id": "fm-talmud-nezikin",
+   "group": "fm",
+   "register": "scripture",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    26.510402484613593,
+    19.99305384259052
+   ],
+   "zW": [
+    9.388206480727966,
+    8.143225518515942
+   ],
+   "adjShare": [
+    0.6039284717722953,
+    0.5412869638789641
+   ],
+   "docs": 213,
+   "meanUnitLength": 6.58192,
+   "tokens": 299280
+  },
+  {
+   "id": "fm-udhr-bigram",
+   "group": "fm",
+   "register": "legal",
+   "grain": "charbigram",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    10.267733911284493,
+    10.107952002574388
+   ],
+   "zW": [
+    -4.850659548766654,
+    -2.722354906732111
+   ],
+   "adjShare": [
+    -0.6399620611656344,
+    -0.4377058366051988
+   ],
+   "docs": 49,
+   "meanUnitLength": 34.7532,
+   "tokens": 76179
+  },
+  {
+   "id": "fm-udhr-cyrl",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    55.64409405267083,
+    59.347418811117016
+   ],
+   "zW": [
+    0.6501795129406752,
+    3.7167369041648977
+   ],
+   "adjShare": [
+    0.0382671209704644,
+    0.18582722762990975
+   ],
+   "docs": 59,
+   "meanUnitLength": 13.5421,
+   "tokens": 47736
+  },
+  {
+   "id": "fm-udhr-latn",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    341.9373116030235,
+    248.6180966076575
+   ],
+   "zW": [
+    8.93859099489236,
+    5.983788534613752
+   ],
+   "adjShare": [
+    0.23996374229223097,
+    0.19125622794859054
+   ],
+   "docs": 170,
+   "meanUnitLength": 16.2737,
+   "tokens": 299257
+  },
+  {
+   "id": "fm-udhr-other",
+   "group": "fm",
+   "register": "legal",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    98.6738945446726,
+    37.8599572647867
+   ],
+   "zW": [
+    4.711323374302139,
+    1.4588376877505898
+   ],
+   "adjShare": [
+    0.24822168136738992,
+    0.10638592035584889
+   ],
+   "docs": 55,
+   "meanUnitLength": 14.7304,
+   "tokens": 75552
+  },
+  {
+   "id": "fm-wikipedia",
+   "group": "fm",
+   "register": "encyclopedia",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    49.85450264328752,
+    28.43411387632557
+   ],
+   "zW": [
+    20.575017706362154,
+    16.088332782554204
+   ],
+   "adjShare": [
+    0.8802444862314903,
+    0.8567455830091347
+   ],
+   "docs": 66,
+   "meanUnitLength": 19.9084,
+   "tokens": 295461
+  },
+  {
+   "id": "fm-wlc-former",
+   "group": "fm",
+   "register": "scripture",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    20.6006856524391,
+    16.852906936976755
+   ],
+   "zW": [
+    4.138103870513911,
+    1.8360049379591805
+   ],
+   "adjShare": [
+    0.5285605483679479,
+    0.33032490972604023
+   ],
+   "docs": 147,
+   "meanUnitLength": 16.2096,
+   "tokens": 69993
+  },
+  {
+   "id": "fm-wlc-late",
+   "group": "fm",
+   "register": "scripture",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    23.15712939511496,
+    28.821339425372038
+   ],
+   "zW": [
+    5.055292126007127,
+    5.871194957578164
+   ],
+   "adjShare": [
+    0.6688061617340777,
+    0.5926724137835238
+   ],
+   "docs": 114,
+   "meanUnitLength": 14.2756,
+   "tokens": 43669
+  },
+  {
+   "id": "fm-wlc-latter",
+   "group": "fm",
+   "register": "scripture",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    16.45803811526396,
+    9.674042014068943
+   ],
+   "zW": [
+    2.279034883423686,
+    1.7104437370919239
+   ],
+   "adjShare": [
+    0.3523936170249473,
+    0.34344528712519573
+   ],
+   "docs": 232,
+   "meanUnitLength": 14.509,
+   "tokens": 71921
+  },
+  {
+   "id": "fm-wlc-poetry",
+   "group": "fm",
+   "register": "scripture",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    20.92132876687996,
+    20.4589164914169
+   ],
+   "zW": [
+    4.057216228897373,
+    3.1377669439071445
+   ],
+   "adjShare": [
+    0.7101200686106346,
+    0.4914675767643893
+   ],
+   "docs": 248,
+   "meanUnitLength": 8.16344,
+   "tokens": 40858
+  },
+  {
+   "id": "fm-wlc-torah",
+   "group": "fm",
+   "register": "scripture",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    45.264261113935916,
+    28.40688111152992
+   ],
+   "zW": [
+    5.022828028819863,
+    1.4802895844232686
+   ],
+   "adjShare": [
+    0.43214285714217204,
+    0.20190023754228456
+   ],
+   "docs": 187,
+   "meanUnitLength": 13.6771,
+   "tokens": 80052
+  },
+  {
+   "id": "ml-apics-prose",
+   "group": "ml",
+   "register": "academic",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    22.806579420779293,
+    24.896383442846517
+   ],
+   "zW": [
+    3.1563199081856057,
+    4.063765108061633
+   ],
+   "adjShare": [
+    0.3745209715965865,
+    0.43953798653776904
+   ],
+   "docs": 211,
+   "meanUnitLength": 17.7465,
+   "tokens": 299952
+  },
+  {
+   "id": "ml-arb-fihrist",
+   "group": "ml",
+   "register": "history",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    4.2390667333513905,
+    11.438800170086822
+   ],
+   "zW": [
+    -0.6341959498813732,
+    4.450097757794163
+   ],
+   "adjShare": [
+    -0.28313244940141,
+    0.5588612786466548
+   ],
+   "docs": 34,
+   "meanUnitLength": 35.0541,
+   "tokens": 118027
+  },
+  {
+   "id": "ml-arb-fiqh",
+   "group": "ml",
+   "register": "treatise",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    20.729743566555346,
+    17.720291348515765
+   ],
+   "zW": [
+    12.33328423286974,
+    8.327925775353883
+   ],
+   "adjShare": [
+    0.765549270841693,
+    0.6981373931922131
+   ],
+   "docs": 91,
+   "meanUnitLength": 32.8912,
+   "tokens": 296975
+  },
+  {
+   "id": "ml-arb-hadith",
+   "group": "ml",
+   "register": "scripture",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    11.026942676913054,
+    5.637568976319455
+   ],
+   "zW": [
+    2.3424318796721697,
+    0.9410296589083494
+   ],
+   "adjShare": [
+    0.36091417016049737,
+    0.21222879547889364
+   ],
+   "docs": 125,
+   "meanUnitLength": 24.2101,
+   "tokens": 299431
+  },
+  {
+   "id": "ml-arb-kalam",
+   "group": "ml",
+   "register": "treatise",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    15.957363909848045,
+    12.047124534845178
+   ],
+   "zW": [
+    6.926674083395984,
+    8.868930177728778
+   ],
+   "adjShare": [
+    0.8894184469457377,
+    0.9424123929641863
+   ],
+   "docs": 26,
+   "meanUnitLength": 25.0835,
+   "tokens": 51095
+  },
+  {
+   "id": "ml-arb-muqaddimah",
+   "group": "ml",
+   "register": "history",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    16.53939427589155,
+    13.196312349138129
+   ],
+   "zW": [
+    6.669592827514883,
+    4.8550928539079905
+   ],
+   "adjShare": [
+    0.594961062183438,
+    0.6061826779973196
+   ],
+   "docs": 25,
+   "meanUnitLength": 101.922,
+   "tokens": 131581
+  },
+  {
+   "id": "ml-arb-nights",
+   "group": "ml",
+   "register": "book",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "A",
+   "zG": [
+    2.4302191123328822,
+    5.1498028817726915
+   ],
+   "zW": [
+    -1.0693710099294884,
+    1.4009376457317242
+   ],
+   "adjShare": [
+    -0.6670171663721318,
+    0.33286857166961237
+   ],
+   "docs": 42,
+   "meanUnitLength": 41.9595,
+   "tokens": 175223
+  },
+  {
+   "id": "ml-arb-optics",
+   "group": "ml",
+   "register": "treatise",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    13.387053576306318,
+    7.244714496592576
+   ],
+   "zW": [
+    7.969463671193052,
+    4.281085412377196
+   ],
+   "adjShare": [
+    0.810988717765625,
+    0.8028169014102827
+   ],
+   "docs": 25,
+   "meanUnitLength": 34.5989,
+   "tokens": 45290
+  },
+  {
+   "id": "ml-concepticon-defs",
+   "group": "ml",
+   "register": "lexicon",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    63.74749085075546,
+    63.16483409356551
+   ],
+   "zW": [
+    30.702851637237988,
+    19.000304830051935
+   ],
+   "adjShare": [
+    0.8804649987376231,
+    0.6402052900998156
+   ],
+   "docs": 42,
+   "meanUnitLength": 12.3753,
+   "tokens": 51543
+  },
+  {
+   "id": "ml-coraal-dcb",
+   "group": "ml",
+   "register": "speech",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    18.622290288099766,
+    17.349095632957347
+   ],
+   "zW": [
+    9.399157217401008,
+    7.564379661588706
+   ],
+   "adjShare": [
+    0.7727257440482792,
+    0.7452559600396893
+   ],
+   "docs": 79,
+   "meanUnitLength": 22.2647,
+   "tokens": 137440
+  },
+  {
+   "id": "ml-coraal-prv",
+   "group": "ml",
+   "register": "speech",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    4.067190582523457,
+    3.8920553084627563
+   ],
+   "zW": [
+    2.058993893112217,
+    2.540795534387323
+   ],
+   "adjShare": [
+    0.6022727272635428,
+    0.6995073891704168
+   ],
+   "docs": 28,
+   "meanUnitLength": 24.3941,
+   "tokens": 29151
+  },
+  {
+   "id": "ml-coraal-roc",
+   "group": "ml",
+   "register": "speech",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    3.3722669746522356,
+    10.279869976727893
+   ],
+   "zW": [
+    1.050621509784008,
+    4.6437907215791965
+   ],
+   "adjShare": [
+    0.3815220941631778,
+    0.7129572451453847
+   ],
+   "docs": 32,
+   "meanUnitLength": 23.6008,
+   "tokens": 42623
+  },
+  {
+   "id": "ml-deu-nietzsche",
+   "group": "ml",
+   "register": "treatise",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    43.004321195256004,
+    52.72052607951576
+   ],
+   "zW": [
+    23.040110164321938,
+    32.80348414934586
+   ],
+   "adjShare": [
+    0.9041993485314984,
+    0.9184594885428672
+   ],
+   "docs": 147,
+   "meanUnitLength": 24.2967,
+   "tokens": 299797
+  },
+  {
+   "id": "ml-deu-ranke",
+   "group": "ml",
+   "register": "history",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    8.840223275788702,
+    6.0184734939062015
+   ],
+   "zW": [
+    3.353139611339882,
+    2.5158543450291293
+   ],
+   "adjShare": [
+    0.8119924759564918,
+    0.7928936664948812
+   ],
+   "docs": 84,
+   "meanUnitLength": 15.736,
+   "tokens": 118665
+  },
+  {
+   "id": "ml-djk-ndyuka",
+   "group": "ml",
+   "register": "scripture",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    21.663131004327894,
+    14.126351641564106
+   ],
+   "zW": [
+    6.215970379716886,
+    2.5634787284324663
+   ],
+   "adjShare": [
+    0.5173112913330866,
+    0.33884297520740236
+   ],
+   "docs": 77,
+   "meanUnitLength": 38.9206,
+   "tokens": 298404
+  },
+  {
+   "id": "ml-en-hippocrates",
+   "group": "ml",
+   "register": "translation",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    11.187165760726625,
+    12.979382402392242
+   ],
+   "zW": [
+    2.948971278334709,
+    5.686820868589362
+   ],
+   "adjShare": [
+    0.4875929645853089,
+    0.6309910558445896
+   ],
+   "docs": 103,
+   "meanUnitLength": 18.8672,
+   "tokens": 173201
+  },
+  {
+   "id": "ml-en-livy",
+   "group": "ml",
+   "register": "translation",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    7.039461940526984,
+    5.397281536390267
+   ],
+   "zW": [
+    5.370058483832826,
+    2.8829809782491504
+   ],
+   "adjShare": [
+    0.8135742843686551,
+    0.7610350474330746
+   ],
+   "docs": 75,
+   "meanUnitLength": 33.3311,
+   "tokens": 232218
+  },
+  {
+   "id": "ml-en-nirvana",
+   "group": "ml",
+   "register": "translation",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    13.462014691286614,
+    17.406356533330495
+   ],
+   "zW": [
+    7.303984204117267,
+    7.633122983411725
+   ],
+   "adjShare": [
+    0.7861436658249712,
+    0.7411234463858817
+   ],
+   "docs": 118,
+   "meanUnitLength": 9.54136,
+   "tokens": 94240
+  },
+  {
+   "id": "ml-en-pindar",
+   "group": "ml",
+   "register": "translation",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    1.8579529448438543,
+    10.425634778639719
+   ],
+   "zW": [
+    1.387984085635038,
+    7.930911069658771
+   ],
+   "adjShare": [
+    0.8312746505230902,
+    0.9335575708689098
+   ],
+   "docs": 25,
+   "meanUnitLength": 26.1488,
+   "tokens": 51853
+  },
+  {
+   "id": "ml-en-plato-sophist",
+   "group": "ml",
+   "register": "translation",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    -3.2860472474494666,
+    -0.7961618649089132
+   ],
+   "zW": [
+    -3.9898966595947627,
+    -3.007811233245353
+   ],
+   "adjShare": [
+    1.8596718237460241,
+    4.52434202740356
+   ],
+   "docs": 25,
+   "meanUnitLength": 20.3115,
+   "tokens": 45640
+  },
+  {
+   "id": "ml-en-plutarch",
+   "group": "ml",
+   "register": "translation",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    8.921935959121546,
+    4.08285327708701
+   ],
+   "zW": [
+    2.9794722584593707,
+    2.687310371552787
+   ],
+   "adjShare": [
+    0.6111677724863893,
+    0.8910625608588385
+   ],
+   "docs": 59,
+   "meanUnitLength": 31.5935,
+   "tokens": 184822
+  },
+  {
+   "id": "ml-en-poetic-edda",
+   "group": "ml",
+   "register": "translation",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    36.224729100313404,
+    41.315973454626864
+   ],
+   "zW": [
+    8.92410975358618,
+    5.887195415108966
+   ],
+   "adjShare": [
+    0.6010777289926986,
+    0.5165974237033594
+   ],
+   "docs": 170,
+   "meanUnitLength": 8.58439,
+   "tokens": 142724
+  },
+  {
+   "id": "ml-en-ranke",
+   "group": "ml",
+   "register": "translation",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    9.429609141121723,
+    4.47868574821308
+   ],
+   "zW": [
+    3.275227134984175,
+    0.39759990508314086
+   ],
+   "adjShare": [
+    0.5770289586987231,
+    0.1316490936719698
+   ],
+   "docs": 137,
+   "meanUnitLength": 12.8142,
+   "tokens": 157358
+  },
+  {
+   "id": "ml-en-younger-edda",
+   "group": "ml",
+   "register": "translation",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    5.442746819484878,
+    12.869836783358192
+   ],
+   "zW": [
+    0.6231247080839055,
+    4.118905989770272
+   ],
+   "adjShare": [
+    0.13353637881513997,
+    0.5567997090161559
+   ],
+   "docs": 57,
+   "meanUnitLength": 11.7577,
+   "tokens": 64985
+  },
+  {
+   "id": "ml-eng-bible-opus",
+   "group": "ml",
+   "register": "scripture",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    39.47279724879071,
+    26.404423050926578
+   ],
+   "zW": [
+    12.78490609515488,
+    7.854789375739247
+   ],
+   "adjShare": [
+    0.5927654609084665,
+    0.5117463446694639
+   ],
+   "docs": 135,
+   "meanUnitLength": 22.294,
+   "tokens": 299698
+  },
+  {
+   "id": "ml-ewave-examples",
+   "group": "ml",
+   "register": "dialect",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    29.106881690784697,
+    40.64377173459054
+   ],
+   "zW": [
+    10.731221116148719,
+    18.524782537364647
+   ],
+   "adjShare": [
+    0.8848973841248895,
+    0.907279616902757
+   ],
+   "docs": 42,
+   "meanUnitLength": 7.83576,
+   "tokens": 32824
+  },
+  {
+   "id": "ml-fas-masnavi",
+   "group": "ml",
+   "register": "poetry",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    112.4964258550024,
+    113.7092835118514
+   ],
+   "zW": [
+    53.549426574659115,
+    43.130504927923134
+   ],
+   "adjShare": [
+    0.9381337703604291,
+    0.9350733390864833
+   ],
+   "docs": 250,
+   "meanUnitLength": 12.2314,
+   "tokens": 299951
+  },
+  {
+   "id": "ml-fra-brillat",
+   "group": "ml",
+   "register": "book",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    15.661231144083628,
+    11.326968172049115
+   ],
+   "zW": [
+    6.591165345022806,
+    2.208135920749949
+   ],
+   "adjShare": [
+    0.8314374476194543,
+    0.5458829491726138
+   ],
+   "docs": 100,
+   "meanUnitLength": 11.4726,
+   "tokens": 109460
+  },
+  {
+   "id": "ml-fra-hugo-miserables",
+   "group": "ml",
+   "register": "book",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    26.16766994130999,
+    12.81796896792844
+   ],
+   "zW": [
+    11.899673854531937,
+    5.326229849087239
+   ],
+   "adjShare": [
+    0.8174673045478026,
+    0.7116137116682882
+   ],
+   "docs": 85,
+   "meanUnitLength": 13.1818,
+   "tokens": 111887
+  },
+  {
+   "id": "ml-fra-pascal",
+   "group": "ml",
+   "register": "treatise",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    48.872810984574826,
+    41.64240502976777
+   ],
+   "zW": [
+    24.35486266622877,
+    21.301107754492755
+   ],
+   "adjShare": [
+    0.902281442495712,
+    0.9143555442991275
+   ],
+   "docs": 86,
+   "meanUnitLength": 18.5,
+   "tokens": 153180
+  },
+  {
+   "id": "ml-grc-aristotle",
+   "group": "ml",
+   "register": "treatise",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    3.1289079674741207,
+    11.119228400629686
+   ],
+   "zW": [
+    0.10983538870796218,
+    4.6445849549899965
+   ],
+   "adjShare": [
+    0.046057285197642996,
+    0.6298406116368439
+   ],
+   "docs": 120,
+   "meanUnitLength": 19.806,
+   "tokens": 224798
+  },
+  {
+   "id": "ml-grc-comedy",
+   "group": "ml",
+   "register": "drama",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    3.9188985854003633,
+    0.04942469942008777
+   ],
+   "zW": [
+    -1.9678493343956416,
+    -3.0449534792445987
+   ],
+   "adjShare": [
+    -1.5912749780928142,
+    -215.29110904751568
+   ],
+   "docs": 62,
+   "meanUnitLength": 5.14404,
+   "tokens": 31070
+  },
+  {
+   "id": "ml-grc-hellenistic-hist",
+   "group": "ml",
+   "register": "history",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "A",
+   "zG": [
+    1.5756444367483111,
+    2.136475998758997
+   ],
+   "zW": [
+    -0.7213253451460413,
+    0.07580836246708478
+   ],
+   "adjShare": [
+    -0.5412072426881313,
+    0.0377220549524804
+   ],
+   "docs": 132,
+   "meanUnitLength": 23.0151,
+   "tokens": 299657
+  },
+  {
+   "id": "ml-grc-homer",
+   "group": "ml",
+   "register": "poetry",
+   "grain": "word",
+   "atlas": "A",
+   "statGlobal50": "M",
+   "statWithin": "A",
+   "zG": [
+    1.6356717082770096,
+    2.387843302721011
+   ],
+   "zW": [
+    -1.3529703163025626,
+    -1.1743308590727908
+   ],
+   "adjShare": [
+    -1.1266375535966535,
+    -0.6744754465227073
+   ],
+   "docs": 266,
+   "meanUnitLength": 7.15008,
+   "tokens": 188755
+  },
+  {
+   "id": "ml-grc-lyric",
+   "group": "ml",
+   "register": "poetry",
+   "grain": "word",
+   "atlas": "A",
+   "statGlobal50": "A",
+   "statWithin": "P-",
+   "zG": [
+    0.9409037373154311,
+    -1.1114658218434266
+   ],
+   "zW": [
+    -5.657630776427055,
+    -6.784189434594051
+   ],
+   "adjShare": [
+    -11.747545971842648,
+    12.719967924385676
+   ],
+   "docs": 46,
+   "meanUnitLength": 5.45642,
+   "tokens": 23790
+  },
+  {
+   "id": "ml-grc-minor",
+   "group": "ml",
+   "register": "treatise",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    40.16797197775873,
+    20.34284697760463
+   ],
+   "zW": [
+    12.955666383560535,
+    7.7662719065904415
+   ],
+   "adjShare": [
+    0.7167021775696722,
+    0.8067183682717405
+   ],
+   "docs": 28,
+   "meanUnitLength": 15.1854,
+   "tokens": 23097
+  },
+  {
+   "id": "ml-grc-plato",
+   "group": "ml",
+   "register": "treatise",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "A",
+   "zG": [
+    0.9338625043976354,
+    5.065319844386246
+   ],
+   "zW": [
+    -1.0299664847279584,
+    0.8585482074534352
+   ],
+   "adjShare": [
+    -1.4353740532889927,
+    0.2976662511830655
+   ],
+   "docs": 227,
+   "meanUnitLength": 11.7743,
+   "tokens": 261107
+  },
+  {
+   "id": "ml-grc-plotinus",
+   "group": "ml",
+   "register": "treatise",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    12.222678218552558,
+    12.417115332504752
+   ],
+   "zW": [
+    6.98540519744553,
+    7.8567336585581655
+   ],
+   "adjShare": [
+    0.8436064460293813,
+    0.8341163783226263
+   ],
+   "docs": 119,
+   "meanUnitLength": 17.1589,
+   "tokens": 201085
+  },
+  {
+   "id": "ml-grc-stoic",
+   "group": "ml",
+   "register": "treatise",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    11.327872899719141,
+    26.249925079440978
+   ],
+   "zW": [
+    9.25304980511172,
+    12.690381913729926
+   ],
+   "adjShare": [
+    0.8899908970981351,
+    0.8756201457161589
+   ],
+   "docs": 90,
+   "meanUnitLength": 13.4917,
+   "tokens": 120117
+  },
+  {
+   "id": "ml-grc-thucydides",
+   "group": "ml",
+   "register": "history",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "A",
+   "zG": [
+    -0.7636226961670735,
+    2.4662269419795364
+   ],
+   "zW": [
+    -1.351551044253393,
+    1.277625042550533
+   ],
+   "adjShare": [
+    2.285406616336547,
+    0.5208292667796676
+   ],
+   "docs": 53,
+   "meanUnitLength": 24.4276,
+   "tokens": 128636
+  },
+  {
+   "id": "ml-grc-tragedy",
+   "group": "ml",
+   "register": "drama",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "A",
+   "zG": [
+    10.360558346777252,
+    0.2665338517506213
+   ],
+   "zW": [
+    0.4836408220543057,
+    -1.5908097367557608
+   ],
+   "adjShare": [
+    0.1716946145943225,
+    -12.337159074346529
+   ],
+   "docs": 156,
+   "meanUnitLength": 6.50858,
+   "tokens": 96763
+  },
+  {
+   "id": "ml-hat",
+   "group": "ml",
+   "register": "dialect",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    14.09283336374901,
+    2.2374831232063452
+   ],
+   "zW": [
+    3.6404108024435478,
+    -1.1071590114928733
+   ],
+   "adjShare": [
+    0.5525764956190077,
+    -0.8541567823751277
+   ],
+   "docs": 65,
+   "meanUnitLength": 14.5372,
+   "tokens": 90596
+  },
+  {
+   "id": "ml-ita-dante",
+   "group": "ml",
+   "register": "poetry",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    5.51502147112807,
+    3.5045117269439023
+   ],
+   "zW": [
+    3.740970204984035,
+    1.9628486981228825
+   ],
+   "adjShare": [
+    0.7909102312402383,
+    0.6420358989554412
+   ],
+   "docs": 146,
+   "meanUnitLength": 6.71971,
+   "tokens": 97718
+  },
+  {
+   "id": "ml-jpn-genji",
+   "group": "ml",
+   "register": "book",
+   "grain": "charbigram",
+   "atlas": "A",
+   "statGlobal50": "A",
+   "statWithin": "M",
+   "zG": [
+    -1.2066932566374697,
+    -1.8506618163326711
+   ],
+   "zW": [
+    -2.869588306062977,
+    -2.4093283344111227
+   ],
+   "adjShare": [
+    2.536048761754452,
+    1.800067242946004
+   ],
+   "docs": 175,
+   "meanUnitLength": 17.1392,
+   "tokens": 299353
+  },
+  {
+   "id": "ml-jpn-soseki",
+   "group": "ml",
+   "register": "book",
+   "grain": "charbigram",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    29.165112119633015,
+    25.307988098898825
+   ],
+   "zW": [
+    11.275989451614024,
+    10.463594299887273
+   ],
+   "adjShare": [
+    0.8655009344696565,
+    0.8505118004073631
+   ],
+   "docs": 92,
+   "meanUnitLength": 16.7016,
+   "tokens": 152636
+  },
+  {
+   "id": "ml-jpn-zuihitsu",
+   "group": "ml",
+   "register": "book",
+   "grain": "charbigram",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    18.51520426496384,
+    22.181442030524014
+   ],
+   "zW": [
+    8.18961798551062,
+    8.039195692282112
+   ],
+   "adjShare": [
+    0.8557766899734286,
+    0.8473461424673435
+   ],
+   "docs": 27,
+   "meanUnitLength": 18.8276,
+   "tokens": 47954
+  },
+  {
+   "id": "ml-lat-bacon",
+   "group": "ml",
+   "register": "treatise",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    4.943975316061705,
+    3.3721417587235925
+   ],
+   "zW": [
+    2.2470239170119433,
+    1.8915945956003029
+   ],
+   "adjShare": [
+    0.5938209072614394,
+    0.6723591211779787
+   ],
+   "docs": 30,
+   "meanUnitLength": 23.3142,
+   "tokens": 64184
+  },
+  {
+   "id": "ml-lat-copernicus",
+   "group": "ml",
+   "register": "treatise",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    -0.5155788064028646,
+    2.5899308508907475
+   ],
+   "zW": [
+    -2.0503715304773436,
+    -2.3496030564020645
+   ],
+   "adjShare": [
+    6.654760197053466,
+    -2.037205934685125
+   ],
+   "docs": 113,
+   "meanUnitLength": 12.149,
+   "tokens": 81848
+  },
+  {
+   "id": "ml-lat-livy",
+   "group": "ml",
+   "register": "history",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "A",
+   "zG": [
+    2.7107468067781775,
+    3.4422190488640974
+   ],
+   "zW": [
+    -0.77548605375494,
+    0.24137892578440984
+   ],
+   "adjShare": [
+    -0.5331550292117581,
+    0.1383129999420084
+   ],
+   "docs": 167,
+   "meanUnitLength": 18.0735,
+   "tokens": 299894
+  },
+  {
+   "id": "ml-lat-martial",
+   "group": "ml",
+   "register": "poetry",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    13.71847416343348,
+    29.048134873640024
+   ],
+   "zW": [
+    5.241803619743597,
+    12.769394865514267
+   ],
+   "adjShare": [
+    0.8547227577053751,
+    0.9598348575652158
+   ],
+   "docs": 113,
+   "meanUnitLength": 5.33321,
+   "tokens": 59796
+  },
+  {
+   "id": "ml-lat-newton",
+   "group": "ml",
+   "register": "treatise",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "A",
+   "zG": [
+    7.315118130513326,
+    9.800890604054953
+   ],
+   "zW": [
+    1.1003383926899293,
+    1.7303516023150154
+   ],
+   "adjShare": [
+    0.3131074842912844,
+    0.37305913863952106
+   ],
+   "docs": 90,
+   "meanUnitLength": 14.0522,
+   "tokens": 110703
+  },
+  {
+   "id": "ml-lat-patristic",
+   "group": "ml",
+   "register": "treatise",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    18.702055326116298,
+    26.943315630673826
+   ],
+   "zW": [
+    9.828635916941687,
+    15.443604193870817
+   ],
+   "adjShare": [
+    0.8966400552102353,
+    0.9107343037008919
+   ],
+   "docs": 79,
+   "meanUnitLength": 15.829,
+   "tokens": 115314
+  },
+  {
+   "id": "ml-lat-spinoza",
+   "group": "ml",
+   "register": "treatise",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    -0.1984429580960047,
+    4.7154659324230295
+   ],
+   "zW": [
+    -1.425586008885771,
+    2.310016761320716
+   ],
+   "adjShare": [
+    13.044560987757484,
+    0.72376313570059
+   ],
+   "docs": 65,
+   "meanUnitLength": 10.1979,
+   "tokens": 65746
+  },
+  {
+   "id": "ml-lat-summa",
+   "group": "ml",
+   "register": "treatise",
+   "grain": "word",
+   "atlas": "P-",
+   "statGlobal50": "P-",
+   "statWithin": "P-",
+   "zG": [
+    -7.4400485191055665,
+    -8.138786493139035
+   ],
+   "zW": [
+    -16.56908424039342,
+    -15.425062310927286
+   ],
+   "adjShare": [
+    2.9481314521263093,
+    3.3031858757791577
+   ],
+   "docs": 302,
+   "meanUnitLength": 9.93523,
+   "tokens": 299885
+  },
+  {
+   "id": "ml-lat-tacitus",
+   "group": "ml",
+   "register": "history",
+   "grain": "word",
+   "atlas": "A",
+   "statGlobal50": "A",
+   "statWithin": "A",
+   "zG": [
+    -0.6241411439216458,
+    -0.7090024334335828
+   ],
+   "zW": [
+    -0.6544454996926976,
+    -0.6599368299622006
+   ],
+   "adjShare": [
+    1.3123990552593028,
+    0.7406591543985432
+   ],
+   "docs": 56,
+   "meanUnitLength": 20.1086,
+   "tokens": 111703
+  },
+  {
+   "id": "ml-lzh-bencao",
+   "group": "ml",
+   "register": "treatise",
+   "grain": "charbigram",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "P-",
+   "zG": [
+    -3.7100197589147585,
+    -5.243259217029583
+   ],
+   "zW": [
+    -4.464374813023756,
+    -7.758192829412606
+   ],
+   "adjShare": [
+    2.2168663932223476,
+    1.8071293617463675
+   ],
+   "docs": 477,
+   "meanUnitLength": 6.31663,
+   "tokens": 299964
+  },
+  {
+   "id": "ml-lzh-jiuzhang",
+   "group": "ml",
+   "register": "treatise",
+   "grain": "charbigram",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    12.68887472262523,
+    18.681071202641608
+   ],
+   "zW": [
+    0.7105264943213822,
+    9.716393897234095
+   ],
+   "adjShare": [
+    0.20195027242872568,
+    0.8676800593845259
+   ],
+   "docs": 36,
+   "meanUnitLength": 10.2177,
+   "tokens": 36191
+  },
+  {
+   "id": "ml-lzh-philosophy",
+   "group": "ml",
+   "register": "treatise",
+   "grain": "charbigram",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    46.01137074438638,
+    29.716350859937247
+   ],
+   "zW": [
+    6.809682347657749,
+    2.7910118017691588
+   ],
+   "adjShare": [
+    0.5836246247615728,
+    0.2779254085504341
+   ],
+   "docs": 197,
+   "meanUnitLength": 8.34817,
+   "tokens": 162639
+  },
+  {
+   "id": "ml-lzh-shiji",
+   "group": "ml",
+   "register": "history",
+   "grain": "charbigram",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    65.35827723012916,
+    64.68308942982509
+   ],
+   "zW": [
+    9.27291619108141,
+    7.670574695855223
+   ],
+   "adjShare": [
+    0.6340096137003737,
+    0.5807434593313037
+   ],
+   "docs": 380,
+   "meanUnitLength": 7.71957,
+   "tokens": 291823
+  },
+  {
+   "id": "ml-lzh-shuowen",
+   "group": "ml",
+   "register": "lexicon",
+   "grain": "charbigram",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    -2.0930867474259114,
+    -2.3518745315277747
+   ],
+   "zW": [
+    -3.6762659193939213,
+    -3.688817783565928
+   ],
+   "adjShare": [
+    4.2241128652417155,
+    3.5486962828790873
+   ],
+   "docs": 249,
+   "meanUnitLength": 2.6163,
+   "tokens": 64913
+  },
+  {
+   "id": "ml-mfe",
+   "group": "ml",
+   "register": "dialect",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    1.8016336891161322,
+    3.298266876285096
+   ],
+   "zW": [
+    2.3140673433193064,
+    2.257091455152913
+   ],
+   "adjShare": [
+    1.1369289997943075,
+    0.7574794974758889
+   ],
+   "docs": 27,
+   "meanUnitLength": 13.898,
+   "tokens": 27796
+  },
+  {
+   "id": "ml-non-edda-poetic",
+   "group": "ml",
+   "register": "poetry",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "A",
+   "zG": [
+    16.743742883846597,
+    25.911107969677015
+   ],
+   "zW": [
+    -0.5218037434958029,
+    1.307239603453938
+   ],
+   "adjShare": [
+    -0.10623186226158982,
+    0.20258487708522055
+   ],
+   "docs": 170,
+   "meanUnitLength": 3.52149,
+   "tokens": 53104
+  },
+  {
+   "id": "ml-non-edda-prose",
+   "group": "ml",
+   "register": "book",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    9.640297238898466,
+    19.674010525416346
+   ],
+   "zW": [
+    1.3335053969466808,
+    5.143712246092624
+   ],
+   "adjShare": [
+    0.294056088861034,
+    0.592133918574512
+   ],
+   "docs": 78,
+   "meanUnitLength": 7.44441,
+   "tokens": 51694
+  },
+  {
+   "id": "ml-pc-alice-de",
+   "group": "ml",
+   "register": "children",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    0.9468654836285604,
+    8.249680653772298
+   ],
+   "zW": [
+    0.5768501801926413,
+    4.64458665392786
+   ],
+   "adjShare": [
+    0.6858972881703906,
+    0.8435206995085391
+   ],
+   "docs": 25,
+   "meanUnitLength": 17.7613,
+   "tokens": 25452
+  },
+  {
+   "id": "ml-pc-alice-en",
+   "group": "ml",
+   "register": "children",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    -0.057215256980330406,
+    6.386194960329483
+   ],
+   "zW": [
+    -0.7520836728400111,
+    4.064738102099335
+   ],
+   "adjShare": [
+    18.61920589282207,
+    0.7812269858102617
+   ],
+   "docs": 25,
+   "meanUnitLength": 15.7686,
+   "tokens": 26775
+  },
+  {
+   "id": "ml-pc-alice-fr",
+   "group": "ml",
+   "register": "children",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    5.428688089415377,
+    0.18028758109782902
+   ],
+   "zW": [
+    2.547750076685987,
+    -0.16758217277370274
+   ],
+   "adjShare": [
+    0.7702163000495809,
+    -1.0847670784287984
+   ],
+   "docs": 25,
+   "meanUnitLength": 14.7142,
+   "tokens": 26824
+  },
+  {
+   "id": "ml-pc-alice-it",
+   "group": "ml",
+   "register": "children",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    5.650142165581904,
+    1.4280223273241237
+   ],
+   "zW": [
+    3.367873656190161,
+    1.1032413165268349
+   ],
+   "adjShare": [
+    0.8430478315353654,
+    0.7544067869035262
+   ],
+   "docs": 25,
+   "meanUnitLength": 13.9085,
+   "tokens": 24020
+  },
+  {
+   "id": "ml-pc-faust-de",
+   "group": "ml",
+   "register": "drama",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    15.818162605825494,
+    13.090067479676243
+   ],
+   "zW": [
+    5.138453977977911,
+    4.855325261984544
+   ],
+   "adjShare": [
+    0.8093094445225746,
+    0.7721998479037875
+   ],
+   "docs": 60,
+   "meanUnitLength": 5.15329,
+   "tokens": 30693
+  },
+  {
+   "id": "ml-pc-faust-en",
+   "group": "ml",
+   "register": "drama",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    9.161646818007366,
+    13.49958292109064
+   ],
+   "zW": [
+    2.095476140656645,
+    2.870490180810132
+   ],
+   "adjShare": [
+    0.5910555325306153,
+    0.6706857101565609
+   ],
+   "docs": 62,
+   "meanUnitLength": 5.88661,
+   "tokens": 36132
+  },
+  {
+   "id": "ml-pc-faust-es",
+   "group": "ml",
+   "register": "drama",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    15.737852496020443,
+    18.609021687492202
+   ],
+   "zW": [
+    5.7677440526311585,
+    8.320106730660777
+   ],
+   "adjShare": [
+    0.8003712233319474,
+    0.8249132712419873
+   ],
+   "docs": 88,
+   "meanUnitLength": 5.32759,
+   "tokens": 46675
+  },
+  {
+   "id": "ml-pc-faust-fr",
+   "group": "ml",
+   "register": "drama",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    8.574702173621702,
+    17.646691689060454
+   ],
+   "zW": [
+    0.3740357361531841,
+    3.1933658432444045
+   ],
+   "adjShare": [
+    0.17801238253540067,
+    0.6657159507924681
+   ],
+   "docs": 56,
+   "meanUnitLength": 7.63553,
+   "tokens": 42255
+  },
+  {
+   "id": "ml-pc-faust-nl",
+   "group": "ml",
+   "register": "drama",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    4.538977991408012,
+    13.590807461427502
+   ],
+   "zW": [
+    1.5601559635104045,
+    5.183588771813365
+   ],
+   "adjShare": [
+    0.5369206236928007,
+    0.810266638956044
+   ],
+   "docs": 64,
+   "meanUnitLength": 6.25205,
+   "tokens": 39563
+  },
+  {
+   "id": "ml-pc-grimm-de",
+   "group": "ml",
+   "register": "children",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "P+",
+   "statWithin": "A",
+   "zG": [
+    5.172904975459238,
+    4.362708406067647
+   ],
+   "zW": [
+    1.3216984431655845,
+    1.766388779247801
+   ],
+   "adjShare": [
+    0.4713138611189531,
+    0.5111832932715062
+   ],
+   "docs": 31,
+   "meanUnitLength": 29.5146,
+   "tokens": 88780
+  },
+  {
+   "id": "ml-pc-grimm-en",
+   "group": "ml",
+   "register": "children",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "A",
+   "zG": [
+    3.0057756882136997,
+    4.104391447002278
+   ],
+   "zW": [
+    0.2162796382997556,
+    -0.5298558893594986
+   ],
+   "adjShare": [
+    0.08816949226425416,
+    -0.2047652934591335
+   ],
+   "docs": 48,
+   "meanUnitLength": 21.5823,
+   "tokens": 101631
+  },
+  {
+   "id": "ml-pc-grimm-fi",
+   "group": "ml",
+   "register": "children",
+   "grain": "word",
+   "atlas": "A",
+   "statGlobal50": "A",
+   "statWithin": "M",
+   "zG": [
+    -1.4511416361145693,
+    0.5533364377492478
+   ],
+   "zW": [
+    -2.7378771091677345,
+    -0.6645892503496699
+   ],
+   "adjShare": [
+    2.527721165299126,
+    -1.8451841320675533
+   ],
+   "docs": 42,
+   "meanUnitLength": 16.2776,
+   "tokens": 65729
+  },
+  {
+   "id": "ml-pc-grimm-hu",
+   "group": "ml",
+   "register": "children",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "A",
+   "zG": [
+    3.321433035738231,
+    -1.5371818506118273
+   ],
+   "zW": [
+    0.8593833250968098,
+    -1.6438844887322825
+   ],
+   "adjShare": [
+    0.37307461727761637,
+    2.1579215249392854
+   ],
+   "docs": 51,
+   "meanUnitLength": 11.9439,
+   "tokens": 60651
+  },
+  {
+   "id": "ml-pc-gulliver-en",
+   "group": "ml",
+   "register": "book",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    6.775285306875667,
+    10.239187758484842
+   ],
+   "zW": [
+    4.670871675836768,
+    6.469869840709418
+   ],
+   "adjShare": [
+    0.7474994381778045,
+    0.8543666477289297
+   ],
+   "docs": 30,
+   "meanUnitLength": 36.086,
+   "tokens": 105371
+  },
+  {
+   "id": "ml-pc-gulliver-fi",
+   "group": "ml",
+   "register": "book",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    2.64420859453984,
+    3.553882190420088
+   ],
+   "zW": [
+    2.5211578092516604,
+    1.4717108442912528
+   ],
+   "adjShare": [
+    0.8797090493826479,
+    0.8089133733541941
+   ],
+   "docs": 25,
+   "meanUnitLength": 15.3802,
+   "tokens": 27792
+  },
+  {
+   "id": "ml-pc-gulliver-fr",
+   "group": "ml",
+   "register": "book",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    6.254994089498896,
+    2.079675868165312
+   ],
+   "zW": [
+    3.222455837040812,
+    0.11061278325881084
+   ],
+   "adjShare": [
+    0.6814433974966789,
+    0.09169106665571809
+   ],
+   "docs": 25,
+   "meanUnitLength": 34.8583,
+   "tokens": 81673
+  },
+  {
+   "id": "ml-pc-gulliver-hu",
+   "group": "ml",
+   "register": "book",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    9.06366140197166,
+    5.566971998345051
+   ],
+   "zW": [
+    2.2391975279087575,
+    2.5239870708742416
+   ],
+   "adjShare": [
+    0.6304351779260926,
+    0.64980755699678
+   ],
+   "docs": 37,
+   "meanUnitLength": 20.0206,
+   "tokens": 71934
+  },
+  {
+   "id": "ml-pc-gulliver-it",
+   "group": "ml",
+   "register": "book",
+   "grain": "word",
+   "atlas": "A",
+   "statGlobal50": "A",
+   "statWithin": "A",
+   "zG": [
+    -0.5257465110127505,
+    -0.00025977536463443296
+   ],
+   "zW": [
+    -0.7938826284617715,
+    -1.0032803996143669
+   ],
+   "adjShare": [
+    2.7271038263777028,
+    7946.957607842873
+   ],
+   "docs": 29,
+   "meanUnitLength": 33.1968,
+   "tokens": 93781
+  },
+  {
+   "id": "ml-pc-gulliver-nl",
+   "group": "ml",
+   "register": "book",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    10.666107462949595,
+    4.2742309334121265
+   ],
+   "zW": [
+    6.386071632695164,
+    1.7229870766863704
+   ],
+   "adjShare": [
+    0.791536002455434,
+    0.6378534364697449
+   ],
+   "docs": 25,
+   "meanUnitLength": 38.0446,
+   "tokens": 50371
+  },
+  {
+   "id": "ml-pc-perrault-de",
+   "group": "ml",
+   "register": "children",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "A",
+   "zG": [
+    2.678495726401475,
+    2.272232136080505
+   ],
+   "zW": [
+    0.26458708107709533,
+    0.62116184600446
+   ],
+   "adjShare": [
+    0.19109861045163656,
+    0.5054646356187547
+   ],
+   "docs": 25,
+   "meanUnitLength": 18.4214,
+   "tokens": 21682
+  },
+  {
+   "id": "ml-pc-pinocchio-en",
+   "group": "ml",
+   "register": "children",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    11.768676475696955,
+    10.824237172716511
+   ],
+   "zW": [
+    6.557100713844672,
+    8.32101014571777
+   ],
+   "adjShare": [
+    0.8244754286916596,
+    0.9019376462147563
+   ],
+   "docs": 36,
+   "meanUnitLength": 11.4754,
+   "tokens": 40072
+  },
+  {
+   "id": "ml-pc-pinocchio-fi",
+   "group": "ml",
+   "register": "children",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    12.444233380844247,
+    6.442066820595801
+   ],
+   "zW": [
+    7.404537110625216,
+    4.212375664352369
+   ],
+   "adjShare": [
+    0.9364438093145784,
+    0.828403585867825
+   ],
+   "docs": 33,
+   "meanUnitLength": 9.50774,
+   "tokens": 31328
+  },
+  {
+   "id": "ml-pc-pinocchio-it",
+   "group": "ml",
+   "register": "children",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    13.873716389553477,
+    16.262355215851578
+   ],
+   "zW": [
+    7.274021176489586,
+    6.331805636672017
+   ],
+   "adjShare": [
+    0.8593282084865462,
+    0.8367052911888188
+   ],
+   "docs": 35,
+   "meanUnitLength": 12.7489,
+   "tokens": 41536
+  },
+  {
+   "id": "ml-pc-robinson-de",
+   "group": "ml",
+   "register": "book",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    1.8873133246503508,
+    6.640934625590873
+   ],
+   "zW": [
+    0.5347881814783206,
+    3.512034518166251
+   ],
+   "adjShare": [
+    0.39683307834518783,
+    0.8495325581588877
+   ],
+   "docs": 33,
+   "meanUnitLength": 19.1925,
+   "tokens": 62030
+  },
+  {
+   "id": "ml-pc-robinson-en",
+   "group": "ml",
+   "register": "book",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    6.006111215604244,
+    8.52770770169144
+   ],
+   "zW": [
+    4.41300979166382,
+    6.921771484314383
+   ],
+   "adjShare": [
+    0.8364874506044456,
+    0.8850968732169242
+   ],
+   "docs": 25,
+   "meanUnitLength": 49.5391,
+   "tokens": 121569
+  },
+  {
+   "id": "ml-pc-robinson-fi",
+   "group": "ml",
+   "register": "book",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    7.337742938228406,
+    5.37180366520983
+   ],
+   "zW": [
+    3.3686986531751657,
+    3.409587053267057
+   ],
+   "adjShare": [
+    0.8139645614523792,
+    0.8894752090667941
+   ],
+   "docs": 33,
+   "meanUnitLength": 12.0426,
+   "tokens": 39307
+  },
+  {
+   "id": "ml-pc-robinson-fr",
+   "group": "ml",
+   "register": "book",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    3.631189840734946,
+    8.382742035081725
+   ],
+   "zW": [
+    0.9241004518082288,
+    3.2694004010813793
+   ],
+   "adjShare": [
+    0.3717009210439594,
+    0.6575462752994207
+   ],
+   "docs": 33,
+   "meanUnitLength": 33.2615,
+   "tokens": 107335
+  },
+  {
+   "id": "ml-pc-robinson-nl",
+   "group": "ml",
+   "register": "book",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    5.357979325458108,
+    6.910216230145385
+   ],
+   "zW": [
+    2.0000487622877943,
+    6.746548660975567
+   ],
+   "adjShare": [
+    0.6913988505431693,
+    0.9002184214666031
+   ],
+   "docs": 32,
+   "meanUnitLength": 33.3041,
+   "tokens": 101511
+  },
+  {
+   "id": "ml-pcm-news",
+   "group": "ml",
+   "register": "news",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    16.97277366644034,
+    14.743927968065865
+   ],
+   "zW": [
+    12.143811931894607,
+    11.580917411867357
+   ],
+   "adjShare": [
+    0.9284916201147411,
+    0.945667705819185
+   ],
+   "docs": 26,
+   "meanUnitLength": 23.5626,
+   "tokens": 56998
+  },
+  {
+   "id": "ml-pcm-tweets",
+   "group": "ml",
+   "register": "chat",
+   "grain": "word",
+   "atlas": "A",
+   "statGlobal50": "A",
+   "statWithin": "A",
+   "zG": [
+    -0.012624401080659107,
+    1.9736155729944977
+   ],
+   "zW": [
+    -0.4479323880588413,
+    1.733569153685467
+   ],
+   "adjShare": [
+    39.0000006722986,
+    0.9464285714408887
+   ],
+   "docs": 60,
+   "meanUnitLength": 20.8391,
+   "tokens": 123659
+  },
+  {
+   "id": "ml-sag",
+   "group": "ml",
+   "register": "religion",
+   "grain": "word",
+   "atlas": "A",
+   "statGlobal50": "A",
+   "statWithin": "A",
+   "zG": [
+    0.07088727703773245,
+    -0.3218937786148468
+   ],
+   "zW": [
+    -0.22489638705410653,
+    0.07749409800725396
+   ],
+   "adjShare": [
+    -4.192737413981591,
+    -0.19632249545276592
+   ],
+   "docs": 25,
+   "meanUnitLength": 22.3661,
+   "tokens": 22299
+  },
+  {
+   "id": "ml-san-kavya",
+   "group": "ml",
+   "register": "poetry",
+   "grain": "word",
+   "atlas": "A",
+   "statGlobal50": "M",
+   "statWithin": "A",
+   "zG": [
+    2.97052569777176,
+    -0.31133830931428075
+   ],
+   "zW": [
+    -0.21120100562366878,
+    -1.6563365546236668
+   ],
+   "adjShare": [
+    -0.2662806750729316,
+    13.831081832283063
+   ],
+   "docs": 64,
+   "meanUnitLength": 6.51793,
+   "tokens": 40535
+  },
+  {
+   "id": "ml-san-lotus",
+   "group": "ml",
+   "register": "scripture",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    9.531664322433363,
+    12.6973780155907
+   ],
+   "zW": [
+    4.141843644275954,
+    7.118369213464547
+   ],
+   "adjShare": [
+    0.5895889141740517,
+    0.683884828402232
+   ],
+   "docs": 62,
+   "meanUnitLength": 9.03238,
+   "tokens": 44638
+  },
+  {
+   "id": "ml-san-mahabharata",
+   "group": "ml",
+   "register": "poetry",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    18.395733451122307,
+    64.72257046099975
+   ],
+   "zW": [
+    -1.1681759536481557,
+    12.581559410219992
+   ],
+   "adjShare": [
+    -0.18587876602871836,
+    0.6874797837070049
+   ],
+   "docs": 534,
+   "meanUnitLength": 5.64127,
+   "tokens": 299935
+  },
+  {
+   "id": "ml-san-ramayana",
+   "group": "ml",
+   "register": "poetry",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    16.423079814322577,
+    11.145810519411189
+   ],
+   "zW": [
+    2.790626336769399,
+    2.7360903103715724
+   ],
+   "adjShare": [
+    0.46064572159609474,
+    0.5718847444596046
+   ],
+   "docs": 381,
+   "meanUnitLength": 5.62035,
+   "tokens": 213815
+  },
+  {
+   "id": "ml-san-rigveda",
+   "group": "ml",
+   "register": "scripture",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    30.88252099222333,
+    16.413187804701103
+   ],
+   "zW": [
+    2.9157290790568644,
+    0.45301397741866833
+   ],
+   "adjShare": [
+    0.4100902473246138,
+    0.09966974503358596
+   ],
+   "docs": 211,
+   "meanUnitLength": 7.57564,
+   "tokens": 159437
+  },
+  {
+   "id": "ml-san-sutra",
+   "group": "ml",
+   "register": "treatise",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    14.559334639994045,
+    44.105576641254515
+   ],
+   "zW": [
+    2.8756891254730705,
+    7.7643107575237815
+   ],
+   "adjShare": [
+    0.5932942252826575,
+    0.784965558881951
+   ],
+   "docs": 204,
+   "meanUnitLength": 4.706,
+   "tokens": 52039
+  },
+  {
+   "id": "ml-tpi",
+   "group": "ml",
+   "register": "religion",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "A",
+   "statWithin": "A",
+   "zG": [
+    -1.4175578978097416,
+    1.1495790064559999
+   ],
+   "zW": [
+    -1.7073045507872886,
+    1.949880301732832
+   ],
+   "adjShare": [
+    1.4944139419033282,
+    1.2368612478633658
+   ],
+   "docs": 25,
+   "meanUnitLength": 20.1996,
+   "tokens": 20139
+  },
+  {
+   "id": "ml-tunizi",
+   "group": "ml",
+   "register": "chat",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    66.13113877472247,
+    77.38584435116474
+   ],
+   "zW": [
+    14.530284258726317,
+    33.5764106593104
+   ],
+   "adjShare": [
+    0.8850478556315611,
+    0.9219570770884192
+   ],
+   "docs": 93,
+   "meanUnitLength": 8.58827,
+   "tokens": 79098
+  },
+  {
+   "id": "ml-wap-en",
+   "group": "ml",
+   "register": "book",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    30.060877553197628,
+    24.599897650889165
+   ],
+   "zW": [
+    11.640363002486088,
+    10.695989634131339
+   ],
+   "adjShare": [
+    0.6985151116059211,
+    0.741995681591367
+   ],
+   "docs": 184,
+   "meanUnitLength": 16.334,
+   "tokens": 299468
+  },
+  {
+   "id": "ml-wiki-fr",
+   "group": "ml",
+   "register": "encyclopedia",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    14.366340258605039,
+    37.51220459233951
+   ],
+   "zW": [
+    5.3444724116370645,
+    13.509394815200729
+   ],
+   "adjShare": [
+    0.8261609836820173,
+    0.8281143336380328
+   ],
+   "docs": 26,
+   "meanUnitLength": 18.8772,
+   "tokens": 26277
+  },
+  {
+   "id": "oc-cosem",
+   "group": "oc",
+   "register": "chat",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    41.374165177136916,
+    58.36565183601652
+   ],
+   "zW": [
+    25.128561914904406,
+    33.99814123091474
+   ],
+   "adjShare": [
+    0.9523052879237113,
+    0.9488993930567805
+   ],
+   "docs": 40,
+   "meanUnitLength": 3.8189,
+   "tokens": 55649
+  },
+  {
+   "id": "oc-enron",
+   "group": "oc",
+   "register": "email",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    2.8328715160109907,
+    11.514564859389104
+   ],
+   "zW": [
+    0.37176928105991347,
+    2.139000635801071
+   ],
+   "adjShare": [
+    0.21396448570509544,
+    0.40561346357005335
+   ],
+   "docs": 1266,
+   "meanUnitLength": 10.4213,
+   "tokens": 33619
+  },
+  {
+   "id": "oc-irc-kubuntu-0506",
+   "group": "oc",
+   "register": "chat",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    16.862978690306665,
+    24.33268755096666
+   ],
+   "zW": [
+    4.006131770346419,
+    7.546797808167042
+   ],
+   "adjShare": [
+    0.5873023738711604,
+    0.7289111526449811
+   ],
+   "docs": 94,
+   "meanUnitLength": 7.94678,
+   "tokens": 75407
+  },
+  {
+   "id": "oc-irc-kubuntu-0708",
+   "group": "oc",
+   "register": "chat",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    18.60126436765239,
+    23.755027849794605
+   ],
+   "zW": [
+    4.659248192649152,
+    6.039473030038795
+   ],
+   "adjShare": [
+    0.634069059784305,
+    0.48865559132851166
+   ],
+   "docs": 143,
+   "meanUnitLength": 8.74902,
+   "tokens": 124621
+  },
+  {
+   "id": "oc-irc-kubuntu-0915",
+   "group": "oc",
+   "register": "chat",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    17.138661217238766,
+    18.5823246004591
+   ],
+   "zW": [
+    5.418312682084111,
+    7.825399024679082
+   ],
+   "adjShare": [
+    0.6796881359601515,
+    0.69753888231773
+   ],
+   "docs": 91,
+   "meanUnitLength": 9.36875,
+   "tokens": 85621
+  },
+  {
+   "id": "oc-irc-ubuntu-0406",
+   "group": "oc",
+   "register": "chat",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    56.7981864817743,
+    60.76656838384338
+   ],
+   "zW": [
+    11.025412168410098,
+    8.910285937563515
+   ],
+   "adjShare": [
+    0.6171392057504468,
+    0.5329097301735519
+   ],
+   "docs": 324,
+   "meanUnitLength": 8.71358,
+   "tokens": 282163
+  },
+  {
+   "id": "oc-irc-ubuntu-0607",
+   "group": "oc",
+   "register": "chat",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    41.66512392810572,
+    27.680329571911724
+   ],
+   "zW": [
+    6.850472009750805,
+    4.497805916281359
+   ],
+   "adjShare": [
+    0.4835372258630885,
+    0.4197279237390598
+   ],
+   "docs": 284,
+   "meanUnitLength": 10.5345,
+   "tokens": 299434
+  },
+  {
+   "id": "oc-irc-ubuntu-0809",
+   "group": "oc",
+   "register": "chat",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    44.10951215801982,
+    20.104772312303293
+   ],
+   "zW": [
+    4.423385168011553,
+    2.4048190669532254
+   ],
+   "adjShare": [
+    0.3706127224074319,
+    0.2756261569801644
+   ],
+   "docs": 272,
+   "meanUnitLength": 11.0374,
+   "tokens": 299611
+  },
+  {
+   "id": "oc-irc-ubuntu-0910",
+   "group": "oc",
+   "register": "chat",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    22.757405010481023,
+    33.21098460794894
+   ],
+   "zW": [
+    3.52725839659468,
+    4.85764626489655
+   ],
+   "adjShare": [
+    0.3255876218731492,
+    0.4302740443769384
+   ],
+   "docs": 250,
+   "meanUnitLength": 11.4833,
+   "tokens": 287599
+  },
+  {
+   "id": "oc-irc-ubuntu-1112",
+   "group": "oc",
+   "register": "chat",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    38.49359330232131,
+    37.23105460586872
+   ],
+   "zW": [
+    7.310105648415639,
+    7.0020240685018935
+   ],
+   "adjShare": [
+    0.5263603604870309,
+    0.5373643546101867
+   ],
+   "docs": 214,
+   "meanUnitLength": 11.1253,
+   "tokens": 238581
+  },
+  {
+   "id": "oc-irc-ubuntu-1315",
+   "group": "oc",
+   "register": "chat",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    65.59660337586543,
+    48.15599695189044
+   ],
+   "zW": [
+    16.47679238278914,
+    8.162790217966878
+   ],
+   "adjShare": [
+    0.7792779316001514,
+    0.6038498428636957
+   ],
+   "docs": 171,
+   "meanUnitLength": 11.3294,
+   "tokens": 193337
+  },
+  {
+   "id": "oc-irc-ubuntu-de",
+   "group": "oc",
+   "register": "chat",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    17.45210951117171,
+    27.878851689255885
+   ],
+   "zW": [
+    7.281980487882574,
+    8.782793859882723
+   ],
+   "adjShare": [
+    0.790058316682533,
+    0.8492602106572801
+   ],
+   "docs": 40,
+   "meanUnitLength": 10.4818,
+   "tokens": 43510
+  },
+  {
+   "id": "oc-irc-ubuntu-es",
+   "group": "oc",
+   "register": "chat",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    11.87596862110316,
+    5.067549662884445
+   ],
+   "zW": [
+    5.304346565864211,
+    2.313161315672038
+   ],
+   "adjShare": [
+    0.7655431156650069,
+    0.6623853122773297
+   ],
+   "docs": 61,
+   "meanUnitLength": 7.3685,
+   "tokens": 44491
+  },
+  {
+   "id": "oc-irc-ubuntu-it-1012",
+   "group": "oc",
+   "register": "chat",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    19.10509097883137,
+    12.27267310552917
+   ],
+   "zW": [
+    6.502881282519889,
+    0.6451409654718194
+   ],
+   "adjShare": [
+    0.7812284996473694,
+    0.15736035812726826
+   ],
+   "docs": 49,
+   "meanUnitLength": 8.0461,
+   "tokens": 38919
+  },
+  {
+   "id": "oc-irc-ubuntu-it-1315",
+   "group": "oc",
+   "register": "chat",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    16.947862503079083,
+    14.949459266228535
+   ],
+   "zW": [
+    4.235704378842445,
+    0.06707538570868053
+   ],
+   "adjShare": [
+    0.6168881532333986,
+    0.008820025599241247
+   ],
+   "docs": 62,
+   "meanUnitLength": 7.19537,
+   "tokens": 43496
+  },
+  {
+   "id": "oc-irc-ubuntu-server-0710",
+   "group": "oc",
+   "register": "chat",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    5.915443770128329,
+    7.365341389135856
+   ],
+   "zW": [
+    2.350318412096514,
+    2.1512991562900727
+   ],
+   "adjShare": [
+    0.6950661433325319,
+    0.5945495151158195
+   ],
+   "docs": 38,
+   "meanUnitLength": 10.2765,
+   "tokens": 38537
+  },
+  {
+   "id": "oc-irc-ubuntu-server-1115",
+   "group": "oc",
+   "register": "chat",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    11.46670404609431,
+    10.187016567050748
+   ],
+   "zW": [
+    3.972231645588646,
+    3.741476326339927
+   ],
+   "adjShare": [
+    0.6742896487286727,
+    0.6422912230112677
+   ],
+   "docs": 36,
+   "meanUnitLength": 10.5848,
+   "tokens": 37449
+  },
+  {
+   "id": "oc-irc-xubuntu",
+   "group": "oc",
+   "register": "chat",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    17.459511903563733,
+    18.365896678525793
+   ],
+   "zW": [
+    5.2109412200340826,
+    8.751470971025393
+   ],
+   "adjShare": [
+    0.7257930843180985,
+    0.8221626474637216
+   ],
+   "docs": 56,
+   "meanUnitLength": 9.33593,
+   "tokens": 51581
+  },
+  {
+   "id": "oc-lccc",
+   "group": "oc",
+   "register": "chat",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    10.20594502715533,
+    16.115457342132164
+   ],
+   "zW": [
+    9.236873700059252,
+    15.185202717386643
+   ],
+   "adjShare": [
+    1.0165775756448145,
+    0.9859780447085589
+   ],
+   "docs": 40,
+   "meanUnitLength": 7.24745,
+   "tokens": 51899
+  },
+  {
+   "id": "oc-nussms-en",
+   "group": "oc",
+   "register": "sms",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    25.105274392161434,
+    19.197725003997668
+   ],
+   "zW": [
+    10.169773896908445,
+    4.621048809734691
+   ],
+   "adjShare": [
+    0.9009003953728157,
+    0.6195463366622505
+   ],
+   "docs": 25,
+   "meanUnitLength": 10.5079,
+   "tokens": 37051
+  },
+  {
+   "id": "oc-nussms-zh",
+   "group": "oc",
+   "register": "sms",
+   "grain": "charbigram",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    25.041399164823662,
+    21.703746559407193
+   ],
+   "zW": [
+    13.08158559404337,
+    10.582514872321484
+   ],
+   "adjShare": [
+    0.9758402629654497,
+    0.9122906453096669
+   ],
+   "docs": 20,
+   "meanUnitLength": 11.6653,
+   "tokens": 32208
+  },
+  {
+   "id": "ud-arb",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    5.501898207884517,
+    4.10067210113697
+   ],
+   "zW": [
+    2.0379694540793953,
+    0.9972434085712141
+   ],
+   "adjShare": [
+    0.5768091671437269,
+    0.3100189035876207
+   ],
+   "docs": 65,
+   "meanUnitLength": 32.8836,
+   "tokens": 52252
+  },
+  {
+   "id": "ud-bul",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    4.86354815085701,
+    3.8161141174155015
+   ],
+   "zW": [
+    1.0831418948562266,
+    2.1063916429845913
+   ],
+   "adjShare": [
+    0.4927387590970478,
+    0.762873255926912
+   ],
+   "docs": 90,
+   "meanUnitLength": 12.0309,
+   "tokens": 26841
+  },
+  {
+   "id": "ud-cat",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    18.357930403789517,
+    16.032388519597173
+   ],
+   "zW": [
+    4.0364340620858865,
+    3.833501322794257
+   ],
+   "adjShare": [
+    0.6279063967470543,
+    0.5487553381255628
+   ],
+   "docs": 143,
+   "meanUnitLength": 29.2048,
+   "tokens": 103648
+  },
+  {
+   "id": "ud-cmn-hans",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "A",
+   "zG": [
+    1.50378148673517,
+    3.8415683073534925
+   ],
+   "zW": [
+    1.559292276763884,
+    1.9138050517108023
+   ],
+   "adjShare": [
+    0.9545454545338191,
+    0.7437500000032604
+   ],
+   "docs": 40,
+   "meanUnitLength": 20.45,
+   "tokens": 20450
+  },
+  {
+   "id": "ud-cmn",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    1.7013525910221072,
+    3.823566804779537
+   ],
+   "zW": [
+    1.2708326311218114,
+    2.078668117091289
+   ],
+   "adjShare": [
+    0.8023255813953488,
+    0.7852760736196319
+   ],
+   "docs": 40,
+   "meanUnitLength": 20.45,
+   "tokens": 20450
+  },
+  {
+   "id": "ud-cym",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    14.24177339728561,
+    17.00519786207004
+   ],
+   "zW": [
+    6.895728770042596,
+    9.632874469007511
+   ],
+   "adjShare": [
+    0.7503949447107282,
+    0.8658008658035303
+   ],
+   "docs": 56,
+   "meanUnitLength": 17.2048,
+   "tokens": 23433
+  },
+  {
+   "id": "ud-deu",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    20.51089789348606,
+    18.478776752880282
+   ],
+   "zW": [
+    10.757514075349926,
+    7.319189127078152
+   ],
+   "adjShare": [
+    0.8548805577815013,
+    0.8748127320631448
+   ],
+   "docs": 72,
+   "meanUnitLength": 13.8333,
+   "tokens": 24568
+  },
+  {
+   "id": "ud-eng",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    12.9919568398552,
+    14.782424685993051
+   ],
+   "zW": [
+    5.678215653792828,
+    4.248813366613988
+   ],
+   "adjShare": [
+    0.700022780500652,
+    0.6652772116476268
+   ],
+   "docs": 162,
+   "meanUnitLength": 10.7342,
+   "tokens": 43098
+  },
+  {
+   "id": "ud-est",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    6.210090620467831,
+    13.905513753010334
+   ],
+   "zW": [
+    1.3170523193413755,
+    3.060532929884678
+   ],
+   "adjShare": [
+    0.486206617302005,
+    0.5750258748812443
+   ],
+   "docs": 253,
+   "meanUnitLength": 12.0843,
+   "tokens": 76385
+  },
+  {
+   "id": "ud-fas",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "A",
+   "statGlobal50": "A",
+   "statWithin": "A",
+   "zG": [
+    0.2967303655618701,
+    -0.5939696961966997
+   ],
+   "zW": [
+    0.29673036561133537,
+    -0.5514870180108347
+   ],
+   "adjShare": [
+    1.0000000001161353,
+    1.0
+   ],
+   "docs": 118,
+   "meanUnitLength": 15.3013,
+   "tokens": 44542
+  },
+  {
+   "id": "ud-fin",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "P+",
+   "zG": [
+    23.554626445697043,
+    24.5575783333542
+   ],
+   "zW": [
+    5.424018552957196,
+    5.825377378944382
+   ],
+   "adjShare": [
+    0.7240138369609027,
+    0.7247251878107672
+   ],
+   "docs": 118,
+   "meanUnitLength": 11.2658,
+   "tokens": 32885
+  },
+  {
+   "id": "ud-fra",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    5.989402405618396,
+    2.788035479233191
+   ],
+   "zW": [
+    3.8756492399232263,
+    2.159032021720626
+   ],
+   "adjShare": [
+    0.818181818182599,
+    0.7607140538352044
+   ],
+   "docs": 77,
+   "meanUnitLength": 20.9831,
+   "tokens": 39700
+  },
+  {
+   "id": "ud-glg",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "A",
+   "statGlobal50": "A",
+   "statWithin": "A",
+   "zG": [
+    0.36791169173933963,
+    0.4231051131757889
+   ],
+   "zW": [
+    0.47323292756189345,
+    -0.02840053938477387
+   ],
+   "adjShare": [
+    1.2001063335310502,
+    -0.07943654473923144
+   ],
+   "docs": 70,
+   "meanUnitLength": 30.6636,
+   "tokens": 52772
+  },
+  {
+   "id": "ud-heb",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    2.978508212094402,
+    8.178675365626114
+   ],
+   "zW": [
+    0.9565707628342988,
+    2.2771818003478437
+   ],
+   "adjShare": [
+    0.6265060240963856,
+    0.6493365309726723
+   ],
+   "docs": 40,
+   "meanUnitLength": 21.2144,
+   "tokens": 20684
+  },
+  {
+   "id": "ud-hin",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    9.904941926772326,
+    14.24348741142747
+   ],
+   "zW": [
+    2.0221776515858085,
+    2.665065172268894
+   ],
+   "adjShare": [
+    0.4296388543202533,
+    0.429772918426828
+   ],
+   "docs": 135,
+   "meanUnitLength": 19.4385,
+   "tokens": 64983
+  },
+  {
+   "id": "ud-hrv",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    10.369185119810252,
+    12.313407322845066
+   ],
+   "zW": [
+    1.380054142989436,
+    4.001753594604562
+   ],
+   "adjShare": [
+    0.5260416666380081,
+    0.7789473684341154
+   ],
+   "docs": 85,
+   "meanUnitLength": 19.1073,
+   "tokens": 40049
+  },
+  {
+   "id": "ud-ind",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "A",
+   "statGlobal50": "A",
+   "statWithin": "A",
+   "zG": [
+    -0.5223234581428186,
+    -0.5223417550712454
+   ],
+   "zW": [
+    -1.0140669915128564,
+    -0.773020682523926
+   ],
+   "adjShare": [
+    2.285380548388408,
+    1.7857142857142856
+   ],
+   "docs": 46,
+   "meanUnitLength": 18.1989,
+   "tokens": 20310
+  },
+  {
+   "id": "ud-jpn",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "A",
+   "statGlobal50": "A",
+   "statWithin": "A",
+   "zG": [
+    -0.49497464878816616,
+    -0.5037823575237527
+   ],
+   "zW": [
+    -0.4320492808354503,
+    -0.6543337132209947
+   ],
+   "adjShare": [
+    0.7999624695060018,
+    1.749423656652865
+   ],
+   "docs": 43,
+   "meanUnitLength": 21.1667,
+   "tokens": 22225
+  },
+  {
+   "id": "ud-lav",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    23.103497020962855,
+    16.12508938275743
+   ],
+   "zW": [
+    3.7440127157229988,
+    2.296044844720565
+   ],
+   "adjShare": [
+    0.6158232996815843,
+    0.6042131599295276
+   ],
+   "docs": 182,
+   "meanUnitLength": 12.8294,
+   "tokens": 57899
+  },
+  {
+   "id": "ud-lzh",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    48.8450175838223,
+    44.53525979485959
+   ],
+   "zW": [
+    2.798535243909748,
+    4.57897776664526
+   ],
+   "adjShare": [
+    0.2889651111152589,
+    0.38116131563988115
+   ],
+   "docs": 458,
+   "meanUnitLength": 5.11771,
+   "tokens": 58388
+  },
+  {
+   "id": "ud-nob",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    12.408123729094449,
+    13.945201059113934
+   ],
+   "zW": [
+    2.5587490880549333,
+    2.9679033223950064
+   ],
+   "adjShare": [
+    0.40038399854368845,
+    0.4148634973333565
+   ],
+   "docs": 175,
+   "meanUnitLength": 13.2912,
+   "tokens": 57790
+  },
+  {
+   "id": "ud-por",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "A",
+   "statGlobal50": "A",
+   "statWithin": "A",
+   "zG": [
+    0.20929220435635024,
+    -0.030053868269438032
+   ],
+   "zW": [
+    -0.12027029800479681,
+    -0.10098073464031075
+   ],
+   "adjShare": [
+    -0.6153846129293832,
+    3.515283820182788
+   ],
+   "docs": 97,
+   "meanUnitLength": 22.4185,
+   "tokens": 53894
+  },
+  {
+   "id": "ud-ron",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    6.802132171064254,
+    1.9798989873223332
+   ],
+   "zW": [
+    2.063703716327907,
+    0.5351650123627819
+   ],
+   "adjShare": [
+    0.5514087953839012,
+    0.5249999999999999
+   ],
+   "docs": 61,
+   "meanUnitLength": 19.208,
+   "tokens": 28447
+  },
+  {
+   "id": "ud-slk",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    8.630401119149797,
+    17.759087892468028
+   ],
+   "zW": [
+    3.443365751161472,
+    4.993447112652568
+   ],
+   "adjShare": [
+    0.7312679895705183,
+    0.7639339705334398
+   ],
+   "docs": 85,
+   "meanUnitLength": 10.0578,
+   "tokens": 21212
+  },
+  {
+   "id": "ud-slv",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "M",
+   "statGlobal50": "M",
+   "statWithin": "A",
+   "zG": [
+    4.156143890018271,
+    3.6952912218679645
+   ],
+   "zW": [
+    1.063394683329292,
+    0.6925486721216924
+   ],
+   "adjShare": [
+    0.5601878017085951,
+    0.4320723240172245
+   ],
+   "docs": 102,
+   "meanUnitLength": 17.329,
+   "tokens": 43877
+  },
+  {
+   "id": "ud-spa",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    6.815754135652142,
+    15.62495720666008
+   ],
+   "zW": [
+    0.28652695710567616,
+    2.6529674419082934
+   ],
+   "adjShare": [
+    0.10342772369707408,
+    0.5141718838226284
+   ],
+   "docs": 136,
+   "meanUnitLength": 27.5606,
+   "tokens": 93017
+  },
+  {
+   "id": "ud-srp",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    3.0025031016839754,
+    6.84882206169445
+   ],
+   "zW": [
+    0.6425396041156864,
+    2.5039493067949405
+   ],
+   "adjShare": [
+    0.3953488372093023,
+    0.7008547008417886
+   ],
+   "docs": 43,
+   "meanUnitLength": 19.0095,
+   "tokens": 20074
+  },
+  {
+   "id": "ud-swe",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    7.987332884643473,
+    4.335056730959453
+   ],
+   "zW": [
+    2.789166509373142,
+    0.9059941018384247
+   ],
+   "adjShare": [
+    0.6366904091227484,
+    0.4381937241073704
+   ],
+   "docs": 70,
+   "meanUnitLength": 15.534,
+   "tokens": 26765
+  },
+  {
+   "id": "ud-urd",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "P+",
+   "statWithin": "M",
+   "zG": [
+    8.469562158148063,
+    13.169758565067704
+   ],
+   "zW": [
+    4.008747860283591,
+    3.96563813443719
+   ],
+   "adjShare": [
+    0.7533112582861692,
+    0.6359832635959662
+   ],
+   "docs": 45,
+   "meanUnitLength": 25.4554,
+   "tokens": 27670
+  },
+  {
+   "id": "ud-vie",
+   "group": "ud",
+   "register": "treebank",
+   "grain": "word",
+   "atlas": "P+",
+   "statGlobal50": "M",
+   "statWithin": "M",
+   "zG": [
+    13.694301328979472,
+    3.401291003906075
+   ],
+   "zW": [
+    3.6476301479457223,
+    0.7269393768673645
+   ],
+   "adjShare": [
+    0.7891566265060241,
+    0.40912737007795136
+   ],
+   "docs": 77,
+   "meanUnitLength": 16.6615,
+   "tokens": 32040
+  }
+ ],
+ "P+": {
+  "label": "atlas P+",
+  "n": 299,
+  "within": {
+   "P+": 209,
+   "M": 79,
+   "A": 10,
+   "P-": 1
+  },
+  "global50": {
+   "P+": 289,
+   "M": 10
+  },
+  "medianAdjShare": 0.7201062882674331
+ },
+ "P-": {
+  "label": "atlas P-",
+  "n": 3,
+  "within": {
+   "P-": 3
+  },
+  "global50": {
+   "P-": 3
+  },
+  "medianAdjShare": 2.3760719891419084
+ },
+ "all": {
+  "label": "all defined",
+  "n": 385,
+  "within": {
+   "M": 120,
+   "P+": 209,
+   "A": 49,
+   "P-": 7
+  },
+  "global50": {
+   "M": 65,
+   "P+": 295,
+   "A": 22,
+   "P-": 3
+  },
+  "medianAdjShare": 0.7228693995649905
+ },
+ "by_group": {
+  "bk": {
+   "label": "bk",
+   "n": 64,
+   "within": {
+    "P+": 52,
+    "M": 10,
+    "A": 2
+   },
+   "global50": {
+    "P+": 61,
+    "M": 3
+   },
+   "medianAdjShare": 0.8380992869312793
+  },
+  "cd": {
+   "label": "cd",
+   "n": 74,
+   "within": {
+    "P+": 66,
+    "M": 3,
+    "A": 5
+   },
+   "global50": {
+    "P+": 74
+   },
+   "medianAdjShare": 0.684286457325119
+  },
+  "fm": {
+   "label": "fm",
+   "n": 59,
+   "within": {
+    "P+": 40,
+    "M": 17,
+    "A": 1,
+    "P-": 1
+   },
+   "global50": {
+    "P+": 59
+   },
+   "medianAdjShare": 0.6408317051459415
+  },
+  "ml": {
+   "label": "ml",
+   "n": 61,
+   "within": {
+    "M": 25,
+    "P+": 34,
+    "A": 2
+   },
+   "global50": {
+    "P+": 59,
+    "M": 2
+   },
+   "medianAdjShare": 0.7632921591373838
+  },
+  "oc": {
+   "label": "oc",
+   "n": 20,
+   "within": {
+    "P+": 13,
+    "M": 7
+   },
+   "global50": {
+    "P+": 20
+   },
+   "medianAdjShare": 0.6523382676442987
+  },
+  "ud": {
+   "label": "ud",
+   "n": 21,
+   "within": {
+    "M": 17,
+    "P+": 4
+   },
+   "global50": {
+    "P+": 16,
+    "M": 5
+   },
+   "medianAdjShare": 0.62720621042172
+  }
+ },
+ "by_grain": {
+  "charbigram": {
+   "label": "charbigram",
+   "n": 7,
+   "within": {
+    "M": 3,
+    "P+": 4
+   },
+   "global50": {
+    "P+": 7
+   },
+   "medianAdjShare": 0.7406778780838585
+  },
+  "code": {
+   "label": "code",
+   "n": 63,
+   "within": {
+    "P+": 60,
+    "M": 3
+   },
+   "global50": {
+    "P+": 63
+   },
+   "medianAdjShare": 0.7012780635664377
+  },
+  "notation": {
+   "label": "notation",
+   "n": 8,
+   "within": {
+    "P+": 3,
+    "A": 5
+   },
+   "global50": {
+    "P+": 8
+   },
+   "medianAdjShare": 0.05742572818093178
+  },
+  "word": {
+   "label": "word",
+   "n": 221,
+   "within": {
+    "P+": 142,
+    "M": 73,
+    "A": 5,
+    "P-": 1
+   },
+   "global50": {
+    "P+": 211,
+    "M": 10
+   },
+   "medianAdjShare": 0.742757026772786
+  }
+ },
+ "by_register": {
+  "academic": {
+   "label": "academic",
+   "n": 12,
+   "within": {
+    "P+": 9,
+    "M": 3
+   },
+   "global50": {
+    "P+": 12
+   },
+   "medianAdjShare": 0.7659766839506411
+  },
+  "book": {
+   "label": "book",
+   "n": 13,
+   "within": {
+    "M": 7,
+    "P+": 6
+   },
+   "global50": {
+    "P+": 12,
+    "M": 1
+   },
+   "medianAdjShare": 0.7695177203166192
+  },
+  "chat": {
+   "label": "chat",
+   "n": 19,
+   "within": {
+    "P+": 12,
+    "M": 7
+   },
+   "global50": {
+    "P+": 19
+   },
+   "medianAdjShare": 0.6523382676442987
+  },
+  "children": {
+   "label": "children",
+   "n": 6,
+   "within": {
+    "P+": 5,
+    "A": 1
+   },
+   "global50": {
+    "P+": 6
+   },
+   "medianAdjShare": 0.8264395072797424
+  },
+  "code": {
+   "label": "code",
+   "n": 47,
+   "within": {
+    "P+": 46,
+    "M": 1
+   },
+   "global50": {
+    "P+": 47
+   },
+   "medianAdjShare": 0.7064608542236804
+  },
+  "config": {
+   "label": "config",
+   "n": 3,
+   "within": {
+    "P+": 2,
+    "M": 1
+   },
+   "global50": {
+    "P+": 3
+   },
+   "medianAdjShare": 0.43618626033575286
+  },
+  "diagram": {
+   "label": "diagram",
+   "n": 6,
+   "within": {
+    "P+": 5,
+    "M": 1
+   },
+   "global50": {
+    "P+": 6
+   },
+   "medianAdjShare": 0.5217529962582838
+  },
+  "dialect": {
+   "label": "dialect",
+   "n": 11,
+   "within": {
+    "P+": 11
+   },
+   "global50": {
+    "P+": 11
+   },
+   "medianAdjShare": 0.8397642789264462
+  },
+  "docs": {
+   "label": "docs",
+   "n": 2,
+   "within": {
+    "P+": 2
+   },
+   "global50": {
+    "P+": 2
+   },
+   "medianAdjShare": 0.7006737806090221
+  },
+  "drama": {
+   "label": "drama",
+   "n": 7,
+   "within": {
+    "P+": 4,
+    "M": 3
+   },
+   "global50": {
+    "P+": 7
+   },
+   "medianAdjShare": 0.804840333927261
+  },
+  "encyclopedia": {
+   "label": "encyclopedia",
+   "n": 2,
+   "within": {
+    "P+": 2
+   },
+   "global50": {
+    "P+": 2
+   },
+   "medianAdjShare": 0.8424299583235837
+  },
+  "essay": {
+   "label": "essay",
+   "n": 3,
+   "within": {
+    "P+": 3
+   },
+   "global50": {
+    "P+": 3
+   },
+   "medianAdjShare": 0.8975537321510056
+  },
+  "history": {
+   "label": "history",
+   "n": 3,
+   "within": {
+    "P+": 2,
+    "M": 1
+   },
+   "global50": {
+    "P+": 3
+   },
+   "medianAdjShare": 0.6200961458488466
+  },
+  "legal": {
+   "label": "legal",
+   "n": 30,
+   "within": {
+    "P+": 19,
+    "M": 9,
+    "A": 1,
+    "P-": 1
+   },
+   "global50": {
+    "P+": 30
+   },
+   "medianAdjShare": 0.648146846894827
+  },
+  "lexicon": {
+   "label": "lexicon",
+   "n": 1,
+   "within": {
+    "P+": 1
+   },
+   "global50": {
+    "P+": 1
+   },
+   "medianAdjShare": 0.7603351444187194
+  },
+  "lyrics": {
+   "label": "lyrics",
+   "n": 1,
+   "within": {
+    "P+": 1
+   },
+   "global50": {
+    "P+": 1
+   },
+   "medianAdjShare": 0.7482863297624129
+  },
+  "markup": {
+   "label": "markup",
+   "n": 5,
+   "within": {
+    "P+": 5
+   },
+   "global50": {
+    "P+": 5
+   },
+   "medianAdjShare": 0.7099417242633534
+  },
+  "memoir": {
+   "label": "memoir",
+   "n": 11,
+   "within": {
+    "P+": 5,
+    "M": 6
+   },
+   "global50": {
+    "P+": 10,
+    "M": 1
+   },
+   "medianAdjShare": 0.8311101257349953
+  },
+  "news": {
+   "label": "news",
+   "n": 1,
+   "within": {
+    "P+": 1
+   },
+   "global50": {
+    "P+": 1
+   },
+   "medianAdjShare": 0.9370796629669631
+  },
+  "nomenclature": {
+   "label": "nomenclature",
+   "n": 1,
+   "within": {
+    "P+": 1
+   },
+   "global50": {
+    "P+": 1
+   },
+   "medianAdjShare": 0.5681345609960862
+  },
+  "notation": {
+   "label": "notation",
+   "n": 8,
+   "within": {
+    "P+": 3,
+    "A": 5
+   },
+   "global50": {
+    "P+": 8
+   },
+   "medianAdjShare": 0.05742572818093178
+  },
+  "novel": {
+   "label": "novel",
+   "n": 21,
+   "within": {
+    "M": 1,
+    "P+": 20
+   },
+   "global50": {
+    "M": 1,
+    "P+": 20
+   },
+   "medianAdjShare": 0.8520222223703995
+  },
+  "poetry": {
+   "label": "poetry",
+   "n": 7,
+   "within": {
+    "P+": 3,
+    "M": 3,
+    "A": 1
+   },
+   "global50": {
+    "P+": 6,
+    "M": 1
+   },
+   "medianAdjShare": 0.7391950074736215
+  },
+  "reference": {
+   "label": "reference",
+   "n": 1,
+   "within": {
+    "P+": 1
+   },
+   "global50": {
+    "P+": 1
+   },
+   "medianAdjShare": 1.0095927760751322
+  },
+  "reportage": {
+   "label": "reportage",
+   "n": 3,
+   "within": {
+    "P+": 3
+   },
+   "global50": {
+    "P+": 3
+   },
+   "medianAdjShare": 0.7283357537233572
+  },
+  "scripture": {
+   "label": "scripture",
+   "n": 26,
+   "within": {
+    "M": 10,
+    "P+": 16
+   },
+   "global50": {
+    "P+": 26
+   },
+   "medianAdjShare": 0.5637554113154237
+  },
+  "sms": {
+   "label": "sms",
+   "n": 2,
+   "within": {
+    "P+": 2
+   },
+   "global50": {
+    "P+": 2
+   },
+   "medianAdjShare": 0.9065955203412412
+  },
+  "speech": {
+   "label": "speech",
+   "n": 1,
+   "within": {
+    "P+": 1
+   },
+   "global50": {
+    "P+": 1
+   },
+   "medianAdjShare": 0.7589908520439843
+  },
+  "translation": {
+   "label": "translation",
+   "n": 7,
+   "within": {
+    "M": 5,
+    "P+": 2
+   },
+   "global50": {
+    "P+": 7
+   },
+   "medianAdjShare": 0.6061227507395439
+  },
+  "treatise": {
+   "label": "treatise",
+   "n": 18,
+   "within": {
+    "P+": 12,
+    "A": 2,
+    "M": 4
+   },
+   "global50": {
+    "P+": 17,
+    "M": 1
+   },
+   "medianAdjShare": 0.8388614121760039
+  },
+  "treebank": {
+   "label": "treebank",
+   "n": 21,
+   "within": {
+    "M": 17,
+    "P+": 4
+   },
+   "global50": {
+    "P+": 16,
+    "M": 5
+   },
+   "medianAdjShare": 0.62720621042172
+  }
+ },
+ "newNegWithin": [
+  "cd-mscx",
+  "cd-musicxml",
+  "cd-sbgn",
+  "fm-law-sk",
+  "ml-grc-lyric",
+  "ml-lat-summa",
+  "ml-lzh-bencao"
+ ],
+ "newPosFromNonP": []
+}

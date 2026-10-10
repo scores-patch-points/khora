@@ -1,0 +1,16 @@
+{
+ "family": "order",
+ "finalFileSha256": {
+  "order.mjs": "c3125a15e2822fabdcaeae74df38ef66f9a3f5f3133c5bec4c164067c8b34424",
+  "_order_prep.mjs": "52f29a6dcd58db930e036f52d3cfdf22c53299a8c84ea56b92cc20858a23ef78",
+  "_order_pos.mjs": "5da80e765a244656c7fe3c3b8e22de714121170907ba4ecf35b8e60bab2d9f60",
+  "_order_pair.mjs": "779fff8880c9c771f50108f4a163d9fd160c048d3e04d17c42316a13cface991",
+  "_order_surp.mjs": "b306ec4eba8d6a7478926ae706a014e3995c521a40037d1816852a3bbfca5c23"
+ },
+ "predictSha256Frozen": "017f4c99aa321495aa8026f283bcd61ecc483b54cb6fd5c4485ca3872a0c656e",
+ "predictSha256Now": "017f4c99aa321495aa8026f283bcd61ecc483b54cb6fd5c4485ca3872a0c656e",
+ "predictUnchangedSinceFreeze": true,
+ "orderMjsUnchangedSinceFreeze": true,
+ "protocolSha256": "3b7363c5b01642c06ad5df8d059e5909f237516481e0ed8af3379aa39c4330fc",
+ "note": "order.mjs was written and PREDICT frozen (freeze-predict.mjs) before the helper modules _order_*.mjs existed and before any order statistic was computed. After the first runs only the helpers were edited (floating-point residue guards for constant x, two-pass sd); no definition and no PREDICT entry was changed after seeing any result."
+}

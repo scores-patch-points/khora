@@ -1,0 +1,38 @@
+{
+ "headerSha256": "10b51ec4fa9061aa19d504eaed25066a339e27af9380843cda81e44b58947b5f",
+ "n": 84,
+ "V0t": {
+  "rho": 0.623,
+  "p": 0.0005,
+  "nClean": 47,
+  "cleanMean": 0.6443,
+  "cleanAudible": 0.766,
+  "nDeaf": 26,
+  "deafMean": 0.5575,
+  "cleanS2": 0.6085,
+  "meanAll": 0.6109
+ },
+ "V7": {
+  "rho": 0.633,
+  "p": 0.0005,
+  "nClean": 47,
+  "cleanMean": 0.63,
+  "cleanAudible": 0.6809,
+  "nDeaf": 26,
+  "deafMean": 0.543,
+  "cleanS2": 0.6081,
+  "meanAll": 0.5973
+ },
+ "delta": {
+  "clean": -0.0143,
+  "deaf": -0.0145,
+  "pairedClean": -0.0143,
+  "cleanS2": -0.0004
+ },
+ "prefixFwc": {
+  "rhoPrefixVsWindow": 0.94,
+  "gradientPrefix": 0.611,
+  "gradientWindow": 0.633
+ },
+ "verdict": "CAUSAL_SURVIVES"
+}

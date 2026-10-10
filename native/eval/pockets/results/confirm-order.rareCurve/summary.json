@@ -1,0 +1,3374 @@
+{
+ "law": "order.rareCurve",
+ "preregHeaderSha256": "5a5d8500817dc675f73744e03c0b05855ec6d30274cc21702bd27310b98e410d",
+ "verdict": "PARTIAL",
+ "scored": 23,
+ "hold": 15,
+ "missing": [],
+ "bySide": {
+  "plus": {
+   "n": 13,
+   "holds": 10,
+   "share": 0.7692307692307693,
+   "weakHolds": 11,
+   "statusCounts": {
+    "AMBIGUOUS": 2,
+    "PRESENT+": 10,
+    "ABSENT": 1
+   },
+   "holdIds": [
+    "sib-rc-en-halfcentury",
+    "sib-rc-en-travel",
+    "sib-rc-en-shake-trag",
+    "sib-rc-en-shake-com",
+    "sib-rc-ud-ces-train",
+    "sib-rc-ud-ita-train",
+    "sib-rc-ud-nld-train",
+    "sib-rc-ud-dan-train",
+    "sib-rc-ud-gle-train",
+    "sib-rc-ud-hye-train"
+   ],
+   "failIds": [
+    "sib-rc-en-mouret (AMBIGUOUS)",
+    "sib-rc-en-poe-chopin (AMBIGUOUS)",
+    "sib-rc-ud-rus-train (ABSENT)"
+   ],
+   "constantInRange": 9,
+   "constantRangeChecked": 10
+  },
+  "minus": {
+   "n": 5,
+   "holds": 5,
+   "share": 1,
+   "weakHolds": 5,
+   "statusCounts": {
+    "PRESENT-": 5
+   },
+   "holdIds": [
+    "sib-rc-js-holodeck",
+    "sib-rc-js-eochat",
+    "sib-rc-js-eopm",
+    "sib-rc-ts-opencode",
+    "sib-rc-tsx-opencode"
+   ],
+   "failIds": [],
+   "constantInRange": 5,
+   "constantRangeChecked": 5
+  },
+  "absent": {
+   "n": 5,
+   "holds": 0,
+   "share": 0,
+   "weakHolds": 0,
+   "statusCounts": {
+    "AMBIGUOUS": 5
+   },
+   "holdIds": [],
+   "failIds": [
+    "sib-rc-py-authored (AMBIGUOUS)",
+    "sib-rc-py-sitepkg (AMBIGUOUS)",
+    "sib-rc-ud-cmn-train (AMBIGUOUS)",
+    "sib-rc-ud-jpn-train (AMBIGUOUS)",
+    "sib-rc-ud-urd-train (AMBIGUOUS)"
+   ],
+   "constantInRange": 4,
+   "constantRangeChecked": 0
+  }
+ },
+ "bothSignsObserved": true,
+ "planShares": {
+  "plusPresentPlus": 0.7692307692307693,
+  "plusTarget": 0.6,
+  "minusPresentMinus": 1,
+  "minusTarget": 0.75
+ },
+ "diagnostics": {
+  "selfCheck": true,
+  "rho": {
+   "rareCurve_vs_surprGrow": -0.7984189723320159,
+   "atlas_surprGrow": -0.62,
+   "rareCurve_vs_entCurv": 0.591897233201581,
+   "atlas_entCurv": 0.58,
+   "rareCurve_vs_rareSlope": -0.34980237154150196,
+   "v_vs_logTokens": -0.2608695652173913,
+   "atlas_v_vs_logTokens": -0.348
+  },
+  "collinearity": [
+   {
+    "id": "sib-rc-en-halfcentury",
+    "status": "PRESENT+",
+    "surprGrow": "PRESENT-",
+    "entCurv": "PRESENT+",
+    "rareSlope": "PRESENT+"
+   },
+   {
+    "id": "sib-rc-en-travel",
+    "status": "PRESENT+",
+    "surprGrow": "PRESENT-",
+    "entCurv": "AMBIGUOUS",
+    "rareSlope": "PRESENT+"
+   },
+   {
+    "id": "sib-rc-en-shake-trag",
+    "status": "PRESENT+",
+    "surprGrow": "PRESENT-",
+    "entCurv": "PRESENT+",
+    "rareSlope": "PRESENT+"
+   },
+   {
+    "id": "sib-rc-en-shake-com",
+    "status": "PRESENT+",
+    "surprGrow": "PRESENT-",
+    "entCurv": "PRESENT+",
+    "rareSlope": "PRESENT+"
+   },
+   {
+    "id": "sib-rc-ud-ces-train",
+    "status": "PRESENT+",
+    "surprGrow": "PRESENT-",
+    "entCurv": "PRESENT+",
+    "rareSlope": "PRESENT+"
+   },
+   {
+    "id": "sib-rc-ud-ita-train",
+    "status": "PRESENT+",
+    "surprGrow": "PRESENT-",
+    "entCurv": "ABSENT",
+    "rareSlope": "PRESENT+"
+   },
+   {
+    "id": "sib-rc-ud-nld-train",
+    "status": "PRESENT+",
+    "surprGrow": "PRESENT-",
+    "entCurv": "PRESENT+",
+    "rareSlope": "PRESENT+"
+   },
+   {
+    "id": "sib-rc-ud-dan-train",
+    "status": "PRESENT+",
+    "surprGrow": "PRESENT-",
+    "entCurv": "AMBIGUOUS",
+    "rareSlope": "PRESENT+"
+   },
+   {
+    "id": "sib-rc-ud-gle-train",
+    "status": "PRESENT+",
+    "surprGrow": "PRESENT-",
+    "entCurv": "AMBIGUOUS",
+    "rareSlope": "PRESENT+"
+   },
+   {
+    "id": "sib-rc-ud-hye-train",
+    "status": "PRESENT+",
+    "surprGrow": "PRESENT-",
+    "entCurv": "AMBIGUOUS",
+    "rareSlope": "PRESENT+"
+   },
+   {
+    "id": "sib-rc-js-holodeck",
+    "status": "PRESENT-",
+    "surprGrow": "PRESENT+",
+    "entCurv": "PRESENT-",
+    "rareSlope": "PRESENT+"
+   },
+   {
+    "id": "sib-rc-js-eochat",
+    "status": "PRESENT-",
+    "surprGrow": "PRESENT+",
+    "entCurv": "PRESENT-",
+    "rareSlope": "PRESENT+"
+   },
+   {
+    "id": "sib-rc-js-eopm",
+    "status": "PRESENT-",
+    "surprGrow": "PRESENT+",
+    "entCurv": "PRESENT-",
+    "rareSlope": "PRESENT+"
+   },
+   {
+    "id": "sib-rc-ts-opencode",
+    "status": "PRESENT-",
+    "surprGrow": "PRESENT+",
+    "entCurv": "PRESENT-",
+    "rareSlope": "PRESENT+"
+   },
+   {
+    "id": "sib-rc-tsx-opencode",
+    "status": "PRESENT-",
+    "surprGrow": "PRESENT+",
+    "entCurv": "PRESENT-",
+    "rareSlope": "PRESENT+"
+   }
+  ],
+  "xDefinition": [
+   {
+    "id": "sib-rc-en-mouret",
+    "status": "AMBIGUOUS",
+    "logcount": "ABSENT",
+    "hapax": "ABSENT",
+    "content": "ABSENT",
+    "logcountFlag": false
+   },
+   {
+    "id": "sib-rc-en-poe-chopin",
+    "status": "AMBIGUOUS",
+    "logcount": "AMBIGUOUS",
+    "hapax": "ABSENT",
+    "content": "ABSENT",
+    "logcountFlag": false
+   },
+   {
+    "id": "sib-rc-en-halfcentury",
+    "status": "PRESENT+",
+    "logcount": "PRESENT+",
+    "hapax": "ABSENT",
+    "content": "ABSENT",
+    "logcountFlag": false
+   },
+   {
+    "id": "sib-rc-en-travel",
+    "status": "PRESENT+",
+    "logcount": "PRESENT+",
+    "hapax": "ABSENT",
+    "content": "ABSENT",
+    "logcountFlag": false
+   },
+   {
+    "id": "sib-rc-en-shake-trag",
+    "status": "PRESENT+",
+    "logcount": "PRESENT+",
+    "hapax": "AMBIGUOUS",
+    "content": "ABSENT",
+    "logcountFlag": false
+   },
+   {
+    "id": "sib-rc-en-shake-com",
+    "status": "PRESENT+",
+    "logcount": "PRESENT+",
+    "hapax": "AMBIGUOUS",
+    "content": "AMBIGUOUS",
+    "logcountFlag": false
+   },
+   {
+    "id": "sib-rc-ud-ces-train",
+    "status": "PRESENT+",
+    "logcount": "PRESENT+",
+    "hapax": "AMBIGUOUS",
+    "content": "PRESENT+",
+    "logcountFlag": false
+   },
+   {
+    "id": "sib-rc-ud-ita-train",
+    "status": "PRESENT+",
+    "logcount": "PRESENT+",
+    "hapax": "AMBIGUOUS",
+    "content": "PRESENT+",
+    "logcountFlag": false
+   },
+   {
+    "id": "sib-rc-ud-nld-train",
+    "status": "PRESENT+",
+    "logcount": "PRESENT+",
+    "hapax": "PRESENT+",
+    "content": "PRESENT+",
+    "logcountFlag": false
+   },
+   {
+    "id": "sib-rc-ud-rus-train",
+    "status": "ABSENT",
+    "logcount": "ABSENT",
+    "hapax": "ABSENT",
+    "content": "AMBIGUOUS",
+    "logcountFlag": false
+   },
+   {
+    "id": "sib-rc-ud-dan-train",
+    "status": "PRESENT+",
+    "logcount": "PRESENT+",
+    "hapax": "PRESENT+",
+    "content": "PRESENT+",
+    "logcountFlag": false
+   },
+   {
+    "id": "sib-rc-ud-gle-train",
+    "status": "PRESENT+",
+    "logcount": "PRESENT+",
+    "hapax": "AMBIGUOUS",
+    "content": "AMBIGUOUS",
+    "logcountFlag": false
+   },
+   {
+    "id": "sib-rc-ud-hye-train",
+    "status": "PRESENT+",
+    "logcount": "PRESENT+",
+    "hapax": "ABSENT",
+    "content": "AMBIGUOUS",
+    "logcountFlag": false
+   },
+   {
+    "id": "sib-rc-js-holodeck",
+    "status": "PRESENT-",
+    "logcount": "PRESENT-",
+    "hapax": "ABSENT",
+    "content": "PRESENT-",
+    "logcountFlag": false
+   },
+   {
+    "id": "sib-rc-js-eochat",
+    "status": "PRESENT-",
+    "logcount": "PRESENT-",
+    "hapax": "AMBIGUOUS",
+    "content": "PRESENT-",
+    "logcountFlag": false
+   },
+   {
+    "id": "sib-rc-js-eopm",
+    "status": "PRESENT-",
+    "logcount": "PRESENT-",
+    "hapax": "AMBIGUOUS",
+    "content": "PRESENT-",
+    "logcountFlag": false
+   },
+   {
+    "id": "sib-rc-ts-opencode",
+    "status": "PRESENT-",
+    "logcount": "PRESENT-",
+    "hapax": "ABSENT",
+    "content": "PRESENT-",
+    "logcountFlag": false
+   },
+   {
+    "id": "sib-rc-tsx-opencode",
+    "status": "PRESENT-",
+    "logcount": "PRESENT-",
+    "hapax": "AMBIGUOUS",
+    "content": "PRESENT-",
+    "logcountFlag": false
+   },
+   {
+    "id": "sib-rc-py-authored",
+    "status": "AMBIGUOUS",
+    "logcount": "AMBIGUOUS",
+    "hapax": "AMBIGUOUS",
+    "content": "PRESENT+",
+    "logcountFlag": false
+   },
+   {
+    "id": "sib-rc-py-sitepkg",
+    "status": "AMBIGUOUS",
+    "logcount": "AMBIGUOUS",
+    "hapax": "AMBIGUOUS",
+    "content": "AMBIGUOUS",
+    "logcountFlag": false
+   },
+   {
+    "id": "sib-rc-ud-cmn-train",
+    "status": "AMBIGUOUS",
+    "logcount": "AMBIGUOUS",
+    "hapax": "AMBIGUOUS",
+    "content": "AMBIGUOUS",
+    "logcountFlag": false
+   },
+   {
+    "id": "sib-rc-ud-jpn-train",
+    "status": "AMBIGUOUS",
+    "logcount": "ABSENT",
+    "hapax": "PRESENT-",
+    "content": "PRESENT-",
+    "logcountFlag": false
+   },
+   {
+    "id": "sib-rc-ud-urd-train",
+    "status": "AMBIGUOUS",
+    "logcount": "AMBIGUOUS",
+    "hapax": "PRESENT-",
+    "content": "PRESENT-",
+    "logcountFlag": false
+   }
+  ],
+  "status200vs10": [
+   {
+    "id": "sib-rc-en-mouret",
+    "status10": "AMBIGUOUS",
+    "status200": "AMBIGUOUS"
+   },
+   {
+    "id": "sib-rc-en-poe-chopin",
+    "status10": "AMBIGUOUS",
+    "status200": "PRESENT+"
+   },
+   {
+    "id": "sib-rc-en-halfcentury",
+    "status10": "PRESENT+",
+    "status200": "PRESENT+"
+   },
+   {
+    "id": "sib-rc-en-travel",
+    "status10": "PRESENT+",
+    "status200": "PRESENT+"
+   },
+   {
+    "id": "sib-rc-en-shake-trag",
+    "status10": "PRESENT+",
+    "status200": "PRESENT+"
+   },
+   {
+    "id": "sib-rc-en-shake-com",
+    "status10": "PRESENT+",
+    "status200": "PRESENT+"
+   },
+   {
+    "id": "sib-rc-ud-ces-train",
+    "status10": "PRESENT+",
+    "status200": "PRESENT+"
+   },
+   {
+    "id": "sib-rc-ud-ita-train",
+    "status10": "PRESENT+",
+    "status200": "PRESENT+"
+   },
+   {
+    "id": "sib-rc-ud-nld-train",
+    "status10": "PRESENT+",
+    "status200": "PRESENT+"
+   },
+   {
+    "id": "sib-rc-ud-rus-train",
+    "status10": "ABSENT",
+    "status200": "AMBIGUOUS"
+   },
+   {
+    "id": "sib-rc-ud-dan-train",
+    "status10": "PRESENT+",
+    "status200": "PRESENT+"
+   },
+   {
+    "id": "sib-rc-ud-gle-train",
+    "status10": "PRESENT+",
+    "status200": "PRESENT+"
+   },
+   {
+    "id": "sib-rc-ud-hye-train",
+    "status10": "PRESENT+",
+    "status200": "PRESENT+"
+   },
+   {
+    "id": "sib-rc-js-holodeck",
+    "status10": "PRESENT-",
+    "status200": "PRESENT-"
+   },
+   {
+    "id": "sib-rc-js-eochat",
+    "status10": "PRESENT-",
+    "status200": "PRESENT-"
+   },
+   {
+    "id": "sib-rc-js-eopm",
+    "status10": "PRESENT-",
+    "status200": "PRESENT-"
+   },
+   {
+    "id": "sib-rc-ts-opencode",
+    "status10": "PRESENT-",
+    "status200": "PRESENT-"
+   },
+   {
+    "id": "sib-rc-tsx-opencode",
+    "status10": "PRESENT-",
+    "status200": "PRESENT-"
+   },
+   {
+    "id": "sib-rc-py-authored",
+    "status10": "AMBIGUOUS",
+    "status200": "PRESENT+"
+   },
+   {
+    "id": "sib-rc-py-sitepkg",
+    "status10": "AMBIGUOUS",
+    "status200": "AMBIGUOUS"
+   },
+   {
+    "id": "sib-rc-ud-cmn-train",
+    "status10": "AMBIGUOUS",
+    "status200": "AMBIGUOUS"
+   },
+   {
+    "id": "sib-rc-ud-jpn-train",
+    "status10": "AMBIGUOUS",
+    "status200": "ABSENT"
+   },
+   {
+    "id": "sib-rc-ud-urd-train",
+    "status10": "AMBIGUOUS",
+    "status200": "AMBIGUOUS"
+   }
+  ],
+  "multiplicity": {
+   "pPresentWhenTrueVZero": 0.00000852294052754689,
+   "expectedChancePresentOver23": 0.00019602763213357846,
+   "pOneHalfAbove4": 0.0020643328858915766,
+   "pAbsentWhenTrueVZero": 0.8301069774737208,
+   "atlasNote": "the atlas has 390 cells for this statistic; expected chance PRESENT cells there = 390 x the same probability"
+  },
+  "controls": [
+   {
+    "id": "ctl-rc-en-mouret",
+    "status": "ABSENT",
+    "notPresent": true,
+    "zA": -1.7277505582046682,
+    "zB": -0.2466906619624741,
+    "vA": -0.008170499041295926,
+    "vB": -0.0020113788193628877
+   },
+   {
+    "id": "ctl-rc-ud-ces-train",
+    "status": "ABSENT",
+    "notPresent": true,
+    "zA": -0.29117654251099084,
+    "zB": 0.3688241267903954,
+    "vA": 0.000006414041318539158,
+    "vB": 0.001430772778315175
+   },
+   {
+    "id": "ctl-rc-ts-opencode",
+    "status": "AMBIGUOUS",
+    "notPresent": true,
+    "zA": 1.3003213228011086,
+    "zB": -2.021309486193481,
+    "vA": 0.004170459253049582,
+    "vB": -0.006184695687510977
+   }
+  ],
+  "leak": {
+   "duplicateUnitsBetweenEnglishSiblings": {},
+   "fingerprints": {
+    "sib-rc-en-mouret": {
+     "fp": "846375da60e0e624e6f39eed8096ed6f42a35f7d8119871a85a74c4341cef016",
+     "ok": true
+    },
+    "sib-rc-en-poe-chopin": {
+     "fp": "6cdeec6dab4d3b08b158290316cf456f3572487fccefc0423c75b8f248b7b1de",
+     "ok": true
+    },
+    "sib-rc-en-halfcentury": {
+     "fp": "cd348acf8c6a437feb520e02a9e4e2c7cfdc83a9342a2df6e5391007bc32acfe",
+     "ok": true
+    },
+    "sib-rc-en-travel": {
+     "fp": "db36b55b74622abb7c90893323eb150992d20bffb030e9cd6d12988e9ccee9c9",
+     "ok": true
+    },
+    "sib-rc-en-shake-trag": {
+     "fp": "d9f6e55f7c82d1db0403877c36b5bafdc0e2836baaaad2f71eb20f47c5a26dea",
+     "ok": true
+    },
+    "sib-rc-en-shake-com": {
+     "fp": "6f49047e130d528e986b4f91731a1de808f26cad93d72a8ce743f952c43f6691",
+     "ok": true
+    },
+    "sib-rc-ud-ces-train": {
+     "fp": "c27bd3ad7c6c5748f8ff9549c6ee51799614c60869b70d0fe086c8e9edad88b4",
+     "ok": true
+    },
+    "sib-rc-ud-ita-train": {
+     "fp": "c102b1a56c6719dfcf428cd97deaa030bdd86a25734af9d899998d54819572bc",
+     "ok": true
+    },
+    "sib-rc-ud-nld-train": {
+     "fp": "6162c97d7c0a4f0649e6dc8162ce12b8ffab5f6abe544b9dcb9945805cee5c4a",
+     "ok": true
+    },
+    "sib-rc-ud-rus-train": {
+     "fp": "369cbb6dc027e8683c14e013017fb51c42e496d74944b09fbf502f6eeac6ec75",
+     "ok": true
+    },
+    "sib-rc-ud-dan-train": {
+     "fp": "dcd7a22cf7fe9ff8352e2d50e33422ca807cc01f7f3f324be44b1fef64cfefb3",
+     "ok": true
+    },
+    "sib-rc-ud-gle-train": {
+     "fp": "0869476cc1a5c010f3fd9dfc6a7d40b5624c80138e0421d0f5abd423356c1528",
+     "ok": true
+    },
+    "sib-rc-ud-hye-train": {
+     "fp": "63e8dd39305dda77464c21253659e43ca2ab1f504d644550f309f119fbb2cde2",
+     "ok": true
+    },
+    "sib-rc-js-holodeck": {
+     "fp": "68fd254c200396fd8269cc97e754433eb37c85d77cca58ca260e81c04b9502c6",
+     "ok": true
+    },
+    "sib-rc-js-eochat": {
+     "fp": "ea033797eafbcdc909b1a4cd1395f3c4395fbaa59eae05d7193277f8f3301fc7",
+     "ok": true
+    },
+    "sib-rc-js-eopm": {
+     "fp": "40e87ba1fc9ed85551f3a04b3b7dbeea9078ee70a139cb887d6c7ae3916035a7",
+     "ok": true
+    },
+    "sib-rc-ts-opencode": {
+     "fp": "31e2d4f925fe75b039d7e0e158e8966091dedfe9ce2e10f07d7ec16cf710fa5a",
+     "ok": true
+    },
+    "sib-rc-tsx-opencode": {
+     "fp": "cd9c1849288fc22adf3bce9f7e1bae005178ec5327c017cac6926481d25e3194",
+     "ok": true
+    },
+    "sib-rc-py-authored": {
+     "fp": "b92fed0f178734e5985d14da753c79bfceba5dfef0c113b427c4bcdd26d7e1f0",
+     "ok": true
+    },
+    "sib-rc-py-sitepkg": {
+     "fp": "4260678ac4291569e1cfe7cea9905cc358cd6ee27144e6d19288e30d01aa7d85",
+     "ok": true
+    },
+    "sib-rc-ud-cmn-train": {
+     "fp": "e983a55160f1dce65ad7860c9b616984eaf6e72ac4fcc7eaba02256ed88536cb",
+     "ok": true
+    },
+    "sib-rc-ud-jpn-train": {
+     "fp": "11cab7f027760a65483116e72df2ec011918832a9bb5e896c87a913805994b4d",
+     "ok": true
+    },
+    "sib-rc-ud-urd-train": {
+     "fp": "99b262f2ead8ffe3e038df477de0893e91adf05eaf110a634092f18e60854300",
+     "ok": true
+    }
+   }
+  }
+ },
+ "rows": [
+  {
+   "id": "sib-rc-en-mouret",
+   "side": "plus",
+   "kind": "English novel",
+   "prediction": "PRESENT+",
+   "confidence": "moderate (halves 66k/62k tokens: atlas English prose 60-100k tokens is PRESENT+ in 4 of 14, >= 100k in 23 of 28)",
+   "tokens": 128496,
+   "thin": false,
+   "halfTokens": [
+    66453,
+    62043
+   ],
+   "discover": {
+    "v": 0.011292698637658697,
+    "nullMean": -0.000635720897026113,
+    "nullSd": 0.004012003383320186,
+    "z": 2.9731828204026316,
+    "z200": 3.0290914226228787,
+    "boot": [
+     0.006927974383543617,
+     0.01727247818624584
+    ]
+   },
+   "confirm": {
+    "v": 0.005710447306063057,
+    "nullMean": -0.0016527336756559786,
+    "nullSd": 0.0038508025968413597,
+    "z": 1.9121159281856521,
+    "z200": 1.3776213955177492,
+    "boot": [
+     0.0002652598288888091,
+     0.011671461252382217
+    ]
+   },
+   "pocketV": 0.008501572971860877,
+   "status": "AMBIGUOUS",
+   "status200": "AMBIGUOUS",
+   "holds": false,
+   "weakHold": false,
+   "constantInRange": false,
+   "vRange": [
+    0.015,
+    0.045
+   ],
+   "absVMax": null,
+   "rivals": {
+    "surprGrow": {
+     "vA": -0.02401606243596511,
+     "zA": -7.025111590795992,
+     "vB": -0.02132353529554069,
+     "zB": -5.007723260277609,
+     "status": "PRESENT-"
+    },
+    "entCurv": {
+     "vA": 0.005825515550431002,
+     "zA": 10.774985376152785,
+     "vB": 0.006121044686535624,
+     "zB": 9.121548472538999,
+     "status": "PRESENT+"
+    },
+    "rareSlope": {
+     "vA": 0.08882107530135473,
+     "zA": 23.809523433139184,
+     "vB": 0.09684144161460782,
+     "zB": 24.910347393725313,
+     "status": "PRESENT+"
+    },
+    "initDev": {
+     "vA": -0.4653686514752259,
+     "zA": -46.86635898550142,
+     "vB": -0.4885831441037114,
+     "zB": -30.33473925341947,
+     "status": "PRESENT-"
+    },
+    "finalDev": {
+     "vA": 0.6338888163509966,
+     "zA": 48.03222916026766,
+     "vB": 0.6086848641888765,
+     "zB": 36.256180314023446,
+     "status": "PRESENT+"
+    }
+   },
+   "variants": {
+    "logcount": {
+     "vA": 0.007446908163420823,
+     "zA": 1.9375693288419666,
+     "vB": 0.003029649913389758,
+     "zB": 1.158982432093852,
+     "status": "ABSENT"
+    },
+    "hapax": {
+     "vA": -0.0025899461242594292,
+     "zA": -0.4748602967497469,
+     "vB": -0.0029266342499485415,
+     "zB": -1.0932379896666877,
+     "status": "ABSENT"
+    },
+    "content": {
+     "vA": -0.006448700257651108,
+     "zA": -1.975687763890331,
+     "vB": -0.005149083986170372,
+     "zB": -1.6942516500148301,
+     "status": "ABSENT"
+    }
+   }
+  },
+  {
+   "id": "sib-rc-en-poe-chopin",
+   "side": "plus",
+   "kind": "English novel / tales",
+   "prediction": "PRESENT+",
+   "confidence": "moderate-high (halves 74k/87k tokens)",
+   "tokens": 161055,
+   "thin": false,
+   "halfTokens": [
+    74244,
+    86811
+   ],
+   "discover": {
+    "v": 0.01798372655526361,
+    "nullMean": 0.000668601776740391,
+    "nullSd": 0.004350379683212204,
+    "z": 3.980141054202927,
+    "z200": 5.069757995202335,
+    "boot": [
+     0.01086814103504427,
+     0.023959409478246117
+    ]
+   },
+   "confirm": {
+    "v": 0.018830912084418353,
+    "nullMean": 0.00006996622816600835,
+    "nullSd": 0.001973728720332822,
+    "z": 9.50533153973093,
+    "z200": 5.717095791726086,
+    "boot": [
+     0.013024260832960842,
+     0.023354238098124175
+    ]
+   },
+   "pocketV": 0.018407319319840982,
+   "status": "AMBIGUOUS",
+   "status200": "PRESENT+",
+   "holds": false,
+   "weakHold": true,
+   "constantInRange": true,
+   "vRange": [
+    0.015,
+    0.045
+   ],
+   "absVMax": null,
+   "rivals": {
+    "surprGrow": {
+     "vA": -0.023583790284319835,
+     "zA": -7.8722549817290925,
+     "vB": -0.028947723605060288,
+     "zB": -11.14341750057273,
+     "status": "PRESENT-"
+    },
+    "entCurv": {
+     "vA": 0.004043807989906408,
+     "zA": 15.359821031766582,
+     "vB": 0.0024332578338245414,
+     "zB": 8.888297273570533,
+     "status": "PRESENT+"
+    },
+    "rareSlope": {
+     "vA": 0.08205135360943674,
+     "zA": 36.90093679729963,
+     "vB": 0.08198985214728914,
+     "zB": 28.643820282186898,
+     "status": "PRESENT+"
+    },
+    "initDev": {
+     "vA": -0.49471621184704906,
+     "zA": -32.34289568785466,
+     "vB": -0.46883678831604614,
+     "zB": -48.611333661626595,
+     "status": "PRESENT-"
+    },
+    "finalDev": {
+     "vA": 0.7378286264753326,
+     "zA": 75.5674628499848,
+     "vB": 0.7345032802219872,
+     "zB": 215.17420964532684,
+     "status": "PRESENT+"
+    }
+   },
+   "variants": {
+    "logcount": {
+     "vA": 0.017122762512363145,
+     "zA": 3.7632161546340646,
+     "vB": 0.018110034299412464,
+     "zB": 9.417494413870788,
+     "status": "AMBIGUOUS"
+    },
+    "hapax": {
+     "vA": -0.002479187961370988,
+     "zA": -0.6091975554678056,
+     "vB": 0.0007024243086644427,
+     "zB": 0.45001777277982286,
+     "status": "ABSENT"
+    },
+    "content": {
+     "vA": 0.002027252274279573,
+     "zA": 0.22959287387446195,
+     "vB": 0.004608844601501513,
+     "zB": 1.2546047883512472,
+     "status": "ABSENT"
+    }
+   }
+  },
+  {
+   "id": "sib-rc-en-halfcentury",
+   "side": "plus",
+   "kind": "English memoir",
+   "prediction": "PRESENT+",
+   "confidence": "moderate (smaller half 40k tokens: power-limited)",
+   "tokens": 99108,
+   "thin": false,
+   "halfTokens": [
+    39732,
+    59376
+   ],
+   "discover": {
+    "v": 0.026807648227000602,
+    "nullMean": -0.0010409126378134626,
+    "nullSd": 0.0038608209930877436,
+    "z": 7.213118897424406,
+    "z200": 5.212714832813704,
+    "boot": [
+     0.01815637259551859,
+     0.03500037654260744
+    ]
+   },
+   "confirm": {
+    "v": 0.026659979472198274,
+    "nullMean": 0.0021572689254627775,
+    "nullSd": 0.0036341035093461504,
+    "z": 6.742436059875476,
+    "z200": 5.910051133587797,
+    "boot": [
+     0.019709246635533022,
+     0.03282830293878896
+    ]
+   },
+   "pocketV": 0.026733813849599438,
+   "status": "PRESENT+",
+   "status200": "PRESENT+",
+   "holds": true,
+   "weakHold": true,
+   "constantInRange": true,
+   "vRange": [
+    0.015,
+    0.045
+   ],
+   "absVMax": null,
+   "rivals": {
+    "surprGrow": {
+     "vA": -0.01312550537152605,
+     "zA": -4.067187181264743,
+     "vB": -0.01617295658555224,
+     "zB": -4.764812366614196,
+     "status": "PRESENT-"
+    },
+    "entCurv": {
+     "vA": 0.002154719191091963,
+     "zA": 4.898188297319521,
+     "vB": 0.003768031246802824,
+     "zB": 7.0979433768683,
+     "status": "PRESENT+"
+    },
+    "rareSlope": {
+     "vA": 0.06084391200095953,
+     "zA": 18.896235126988618,
+     "vB": 0.06394053451255022,
+     "zB": 14.788444663183627,
+     "status": "PRESENT+"
+    },
+    "initDev": {
+     "vA": -0.42392423417573455,
+     "zA": -28.095753259051186,
+     "vB": -0.4031800872876964,
+     "zB": -32.8272498151674,
+     "status": "PRESENT-"
+    },
+    "finalDev": {
+     "vA": 0.720900414497385,
+     "zA": 27.816652692281636,
+     "vB": 0.7084344666769606,
+     "zB": 51.32289694203301,
+     "status": "PRESENT+"
+    }
+   },
+   "variants": {
+    "logcount": {
+     "vA": 0.024830818085255068,
+     "zA": 7.262807980257756,
+     "vB": 0.024066454269338698,
+     "zB": 5.8467732671937345,
+     "status": "PRESENT+"
+    },
+    "hapax": {
+     "vA": 0.005698353729943755,
+     "zA": 1.7505824361843207,
+     "vB": -0.0010383182176986168,
+     "zB": -0.4959522051891737,
+     "status": "ABSENT"
+    },
+    "content": {
+     "vA": 0.004387039632919781,
+     "zA": 1.3273301139450966,
+     "vB": 0.004565984981132303,
+     "zB": 0.6186541943442574,
+     "status": "ABSENT"
+    }
+   }
+  },
+  {
+   "id": "sib-rc-en-travel",
+   "side": "plus",
+   "kind": "English reportage",
+   "prediction": "PRESENT+",
+   "confidence": "moderate (halves 71k/69k tokens; atlas reportage 3 of 4 PRESENT+ but small v 0.017-0.023)",
+   "tokens": 139095,
+   "thin": false,
+   "halfTokens": [
+    70532,
+    68563
+   ],
+   "discover": {
+    "v": 0.01732881157018209,
+    "nullMean": -0.00015739032883521569,
+    "nullSd": 0.0027538548568129258,
+    "z": 6.349718052771426,
+    "z200": 4.179889862737861,
+    "boot": [
+     0.012318731527274246,
+     0.022771692900702623
+    ]
+   },
+   "confirm": {
+    "v": 0.024118686113821324,
+    "nullMean": 0.0025379893977722067,
+    "nullSd": 0.004121625656940653,
+    "z": 5.235967191660913,
+    "z200": 6.238634823751457,
+    "boot": [
+     0.01987720904172574,
+     0.02865430621517441
+    ]
+   },
+   "pocketV": 0.020723748842001705,
+   "status": "PRESENT+",
+   "status200": "PRESENT+",
+   "holds": true,
+   "weakHold": true,
+   "constantInRange": true,
+   "vRange": [
+    0.015,
+    0.045
+   ],
+   "absVMax": null,
+   "rivals": {
+    "surprGrow": {
+     "vA": -0.021844690888459077,
+     "zA": -7.3605890432051,
+     "vB": -0.024485886799637036,
+     "zB": -7.391932350218135,
+     "status": "PRESENT-"
+    },
+    "entCurv": {
+     "vA": 0.001956733919702149,
+     "zA": 3.6615499556045705,
+     "vB": 0.0012573982326213845,
+     "zB": 4.519814823812746,
+     "status": "AMBIGUOUS"
+    },
+    "rareSlope": {
+     "vA": 0.06587130434568672,
+     "zA": 16.22692518417166,
+     "vB": 0.060591574732454745,
+     "zB": 16.796046964094565,
+     "status": "PRESENT+"
+    },
+    "initDev": {
+     "vA": -0.502318305941889,
+     "zA": -19.362636872024694,
+     "vB": -0.44998527756662365,
+     "zB": -38.076680738886154,
+     "status": "PRESENT-"
+    },
+    "finalDev": {
+     "vA": 0.804681278045447,
+     "zA": 35.595773620152094,
+     "vB": 0.7650980425142248,
+     "zB": 38.2431531142806,
+     "status": "PRESENT+"
+    }
+   },
+   "variants": {
+    "logcount": {
+     "vA": 0.018766675472196424,
+     "zA": 6.632926571416209,
+     "vB": 0.02524296691676135,
+     "zB": 5.583930378284699,
+     "status": "PRESENT+"
+    },
+    "hapax": {
+     "vA": -0.0026761811629598628,
+     "zA": -1.1312854135190435,
+     "vB": 0.00005174591031163458,
+     "zB": -0.08754284920224563,
+     "status": "ABSENT"
+    },
+    "content": {
+     "vA": -0.0009372749621333597,
+     "zA": -0.6231330263626702,
+     "vB": 0.004482552188033003,
+     "zB": 1.0903813651042313,
+     "status": "ABSENT"
+    }
+   }
+  },
+  {
+   "id": "sib-rc-en-shake-trag",
+   "side": "plus",
+   "kind": "English verse drama",
+   "prediction": "PRESENT+",
+   "confidence": "high (halves 102k/127k tokens; atlas drama v 0.05-0.13 and 9 of 12 PRESENT+, the 3 failures being 25k-token English Henry IV pockets)",
+   "tokens": 229365,
+   "thin": false,
+   "halfTokens": [
+    102380,
+    126985
+   ],
+   "discover": {
+    "v": 0.04147015977616754,
+    "nullMean": 0.000291572127588406,
+    "nullSd": 0.004855260704124691,
+    "z": 8.48123101064309,
+    "z200": 13.056039916626615,
+    "boot": [
+     0.03638143376217953,
+     0.0477769442337938
+    ]
+   },
+   "confirm": {
+    "v": 0.04057901820605283,
+    "nullMean": -0.001206788122708332,
+    "nullSd": 0.002958405038323587,
+    "z": 14.124437251648121,
+    "z200": 14.693259477284338,
+    "boot": [
+     0.03649624871230448,
+     0.04632987786915151
+    ]
+   },
+   "pocketV": 0.04102458899111018,
+   "status": "PRESENT+",
+   "status200": "PRESENT+",
+   "holds": true,
+   "weakHold": true,
+   "constantInRange": false,
+   "vRange": [
+    0.045,
+    0.13
+   ],
+   "absVMax": null,
+   "rivals": {
+    "surprGrow": {
+     "vA": -0.046384000989903175,
+     "zA": -11.582267450511212,
+     "vB": -0.044651033273946775,
+     "zB": -22.13991479865728,
+     "status": "PRESENT-"
+    },
+    "entCurv": {
+     "vA": 0.00927891268957607,
+     "zA": 15.453334053573329,
+     "vB": 0.008684185383573533,
+     "zB": 20.118202667859116,
+     "status": "PRESENT+"
+    },
+    "rareSlope": {
+     "vA": 0.10452939681041595,
+     "zA": 33.418351086083035,
+     "vB": 0.10821307376367971,
+     "zB": 40.12670693054459,
+     "status": "PRESENT+"
+    },
+    "initDev": {
+     "vA": -0.24182048587984353,
+     "zA": -18.815901911552075,
+     "vB": -0.2606503635800935,
+     "zB": -26.56355985341364,
+     "status": "PRESENT-"
+    },
+    "finalDev": {
+     "vA": 0.5579139317921861,
+     "zA": 63.88933940043305,
+     "vB": 0.569884920354374,
+     "zB": 103.41695067599454,
+     "status": "PRESENT+"
+    }
+   },
+   "variants": {
+    "logcount": {
+     "vA": 0.03376564815317889,
+     "zA": 7.128607737668329,
+     "vB": 0.033474221719642434,
+     "zB": 12.440239561788381,
+     "status": "PRESENT+"
+    },
+    "hapax": {
+     "vA": -0.013373908939437953,
+     "zA": -4.260971917377499,
+     "vB": -0.009053012203241726,
+     "zB": -3.507430684037017,
+     "status": "AMBIGUOUS"
+    },
+    "content": {
+     "vA": -0.005778192767289261,
+     "zA": -1.4372929723870937,
+     "vB": -0.005035337692736636,
+     "zB": -1.6368067403574105,
+     "status": "ABSENT"
+    }
+   }
+  },
+  {
+   "id": "sib-rc-en-shake-com",
+   "side": "plus",
+   "kind": "English verse drama",
+   "prediction": "PRESENT+",
+   "confidence": "high (halves 150k/150k tokens)",
+   "tokens": 299793,
+   "thin": false,
+   "halfTokens": [
+    149990,
+    149803
+   ],
+   "discover": {
+    "v": 0.035510580362568614,
+    "nullMean": 0.00042400151929528946,
+    "nullSd": 0.003101090022809516,
+    "z": 11.314272912169669,
+    "z200": 14.434938443186248,
+    "boot": [
+     0.031680414395032594,
+     0.04566728892584087
+    ]
+   },
+   "confirm": {
+    "v": 0.04162977099734056,
+    "nullMean": -0.00026386158592928057,
+    "nullSd": 0.002831533221473225,
+    "z": 14.79538797763881,
+    "z200": 16.320962106151722,
+    "boot": [
+     0.03717145277977727,
+     0.0456376444661514
+    ]
+   },
+   "pocketV": 0.03857017567995459,
+   "status": "PRESENT+",
+   "status200": "PRESENT+",
+   "holds": true,
+   "weakHold": true,
+   "constantInRange": false,
+   "vRange": [
+    0.045,
+    0.13
+   ],
+   "absVMax": null,
+   "rivals": {
+    "surprGrow": {
+     "vA": -0.041062483833718695,
+     "zA": -20.002949125803603,
+     "vB": -0.03612968207080471,
+     "zB": -15.799158599659377,
+     "status": "PRESENT-"
+    },
+    "entCurv": {
+     "vA": 0.006326652837034708,
+     "zA": 4.736034771244551,
+     "vB": 0.009054730180030748,
+     "zB": 29.9897316933212,
+     "status": "PRESENT+"
+    },
+    "rareSlope": {
+     "vA": 0.12192688642391175,
+     "zA": 53.29755477637879,
+     "vB": 0.11085363434176165,
+     "zB": 45.78662022781352,
+     "status": "PRESENT+"
+    },
+    "initDev": {
+     "vA": -0.31685693401070747,
+     "zA": -36.416596024530094,
+     "vB": -0.2897457743813715,
+     "zB": -36.71249174774581,
+     "status": "PRESENT-"
+    },
+    "finalDev": {
+     "vA": 0.6078180699450713,
+     "zA": 70.38200871061075,
+     "vB": 0.5977349464991728,
+     "zB": 90.62819878261745,
+     "status": "PRESENT+"
+    }
+   },
+   "variants": {
+    "logcount": {
+     "vA": 0.0356170873551033,
+     "zA": 10.254838366690619,
+     "vB": 0.035486925191522176,
+     "zB": 12.264618951438607,
+     "status": "PRESENT+"
+    },
+    "hapax": {
+     "vA": -0.005301683742472671,
+     "zA": -3.584966021043319,
+     "vB": -0.00618529236677215,
+     "zB": -3.2869740290099694,
+     "status": "AMBIGUOUS"
+    },
+    "content": {
+     "vA": 0.005908255780026521,
+     "zA": 2.0735476798539807,
+     "vB": 0.003376401097165215,
+     "zB": 1.2966894666348259,
+     "status": "AMBIGUOUS"
+    }
+   }
+  },
+  {
+   "id": "sib-rc-ud-ces-train",
+   "side": "plus",
+   "kind": "UD treebank train split (new language)",
+   "prediction": "PRESENT+",
+   "confidence": "high (halves 153k/147k)",
+   "tokens": 299987,
+   "thin": false,
+   "halfTokens": [
+    152790,
+    147197
+   ],
+   "discover": {
+    "v": 0.04733559338420518,
+    "nullMean": -0.0010300459367197606,
+    "nullSd": 0.002506111475227989,
+    "z": 19.29907739500094,
+    "z200": 19.38260869374082,
+    "boot": [
+     0.04367306823063769,
+     0.05288675589827204
+    ]
+   },
+   "confirm": {
+    "v": 0.050339481390979074,
+    "nullMean": 0.0009276944209256639,
+    "nullSd": 0.0033174795271033743,
+    "z": 14.89437585563545,
+    "z200": 18.16161646666045,
+    "boot": [
+     0.04496919938921029,
+     0.05651893643675334
+    ]
+   },
+   "pocketV": 0.048837537387592125,
+   "status": "PRESENT+",
+   "status200": "PRESENT+",
+   "holds": true,
+   "weakHold": true,
+   "constantInRange": true,
+   "vRange": [
+    0.04,
+    0.085
+   ],
+   "absVMax": null,
+   "rivals": {
+    "surprGrow": {
+     "vA": -0.056292078512582146,
+     "zA": -29.0590224356023,
+     "vB": -0.05790092418153898,
+     "zB": -35.254527544868004,
+     "status": "PRESENT-"
+    },
+    "entCurv": {
+     "vA": 0.005775710333370609,
+     "zA": 8.024499927152991,
+     "vB": 0.0070266116919255085,
+     "zB": 6.6201184776531985,
+     "status": "PRESENT+"
+    },
+    "rareSlope": {
+     "vA": 0.08253131943135437,
+     "zA": 31.769400995824693,
+     "vB": 0.08373619920683004,
+     "zB": 46.89664007406697,
+     "status": "PRESENT+"
+    },
+    "initDev": {
+     "vA": -0.16768588893349734,
+     "zA": -16.93644005641703,
+     "vB": -0.16325950063995806,
+     "zB": -16.287178942621644,
+     "status": "PRESENT-"
+    },
+    "finalDev": {
+     "vA": 0.5661115955302696,
+     "zA": 72.93349317555752,
+     "vB": 0.5642979262509533,
+     "zB": 43.06042608346512,
+     "status": "PRESENT+"
+    }
+   },
+   "variants": {
+    "logcount": {
+     "vA": 0.04678158041987031,
+     "zA": 19.180881588198094,
+     "vB": 0.049773167800584994,
+     "zB": 14.52046516078096,
+     "status": "PRESENT+"
+    },
+    "hapax": {
+     "vA": 0.0076488538721680675,
+     "zA": 5.523287601645416,
+     "vB": 0.011790196193532264,
+     "zB": 2.348056121102646,
+     "status": "AMBIGUOUS"
+    },
+    "content": {
+     "vA": 0.02682479615752234,
+     "zA": 15.265062322836448,
+     "vB": 0.02534990409206079,
+     "zB": 8.316147665885,
+     "status": "PRESENT+"
+    }
+   }
+  },
+  {
+   "id": "sib-rc-ud-ita-train",
+   "side": "plus",
+   "kind": "UD treebank train split (new language)",
+   "prediction": "PRESENT+",
+   "confidence": "high (halves 125k/116k)",
+   "tokens": 240871,
+   "thin": false,
+   "halfTokens": [
+    124945,
+    115926
+   ],
+   "discover": {
+    "v": 0.04438528191540494,
+    "nullMean": -0.0004598912234071927,
+    "nullSd": 0.00326649842518961,
+    "z": 13.728821294689284,
+    "z200": 15.345980558962868,
+    "boot": [
+     0.039222715344798015,
+     0.05059149808119632
+    ]
+   },
+   "confirm": {
+    "v": 0.049305130778141415,
+    "nullMean": 0.0005894719706360166,
+    "nullSd": 0.001435960832083409,
+    "z": 33.92547882857275,
+    "z200": 16.82951357004278,
+    "boot": [
+     0.043527149995377726,
+     0.05497655368694519
+    ]
+   },
+   "pocketV": 0.04684520634677318,
+   "status": "PRESENT+",
+   "status200": "PRESENT+",
+   "holds": true,
+   "weakHold": true,
+   "constantInRange": true,
+   "vRange": [
+    0.04,
+    0.085
+   ],
+   "absVMax": null,
+   "rivals": {
+    "surprGrow": {
+     "vA": -0.043030650556950024,
+     "zA": -21.31790969065714,
+     "vB": -0.03884643307458323,
+     "zB": -13.17342459977232,
+     "status": "PRESENT-"
+    },
+    "entCurv": {
+     "vA": -0.0006894372233897252,
+     "zA": -1.4877820174256038,
+     "vB": -0.000944346288021423,
+     "zB": -1.1570472833153318,
+     "status": "ABSENT"
+    },
+    "rareSlope": {
+     "vA": 0.07019861601423664,
+     "zA": 20.33144039725425,
+     "vB": 0.0694021209571978,
+     "zB": 16.98148890482116,
+     "status": "PRESENT+"
+    },
+    "initDev": {
+     "vA": -0.32064306792084046,
+     "zA": -39.869676841339796,
+     "vB": -0.32080489047525734,
+     "zB": -17.17658525970195,
+     "status": "PRESENT-"
+    },
+    "finalDev": {
+     "vA": 0.8666994007047475,
+     "zA": 107.6443101548495,
+     "vB": 0.8707671365062056,
+     "zB": 97.69153844188946,
+     "status": "PRESENT+"
+    }
+   },
+   "variants": {
+    "logcount": {
+     "vA": 0.046223579174090486,
+     "zA": 13.781343903036255,
+     "vB": 0.05130829004908548,
+     "zB": 31.05898395425168,
+     "status": "PRESENT+"
+    },
+    "hapax": {
+     "vA": 0.010402681483513709,
+     "zA": 3.8921440300208636,
+     "vB": 0.015057089593745372,
+     "zB": 7.190412497534297,
+     "status": "AMBIGUOUS"
+    },
+    "content": {
+     "vA": 0.015712814853181843,
+     "zA": 5.565335220265828,
+     "vB": 0.0204047134335764,
+     "zB": 8.87005001392045,
+     "status": "PRESENT+"
+    }
+   }
+  },
+  {
+   "id": "sib-rc-ud-nld-train",
+   "side": "plus",
+   "kind": "UD treebank train split (new language)",
+   "prediction": "PRESENT+",
+   "confidence": "high (halves 79k/85k)",
+   "tokens": 163958,
+   "thin": false,
+   "halfTokens": [
+    78936,
+    85022
+   ],
+   "discover": {
+    "v": 0.05418469004151995,
+    "nullMean": 0.0011823185104962663,
+    "nullSd": 0.003929444829267498,
+    "z": 13.488513984532528,
+    "z200": 14.566776579219049,
+    "boot": [
+     0.04808138312435808,
+     0.05973684531598154
+    ]
+   },
+   "confirm": {
+    "v": 0.05227795673512058,
+    "nullMean": 0.0007214964287962691,
+    "nullSd": 0.002837318811242328,
+    "z": 18.17083794110193,
+    "z200": 14.797702679521144,
+    "boot": [
+     0.04607739640268078,
+     0.056522596152448756
+    ]
+   },
+   "pocketV": 0.05323132338832026,
+   "status": "PRESENT+",
+   "status200": "PRESENT+",
+   "holds": true,
+   "weakHold": true,
+   "constantInRange": true,
+   "vRange": [
+    0.04,
+    0.085
+   ],
+   "absVMax": null,
+   "rivals": {
+    "surprGrow": {
+     "vA": -0.059129671777561725,
+     "zA": -19.65939206709203,
+     "vB": -0.05487183526973394,
+     "zB": -17.28706658733361,
+     "status": "PRESENT-"
+    },
+    "entCurv": {
+     "vA": 0.005073729856458838,
+     "zA": 6.367824307571209,
+     "vB": 0.005094843034648531,
+     "zB": 9.957455629089685,
+     "status": "PRESENT+"
+    },
+    "rareSlope": {
+     "vA": 0.1470357195884765,
+     "zA": 37.93102545897713,
+     "vB": 0.14219126288533215,
+     "zB": 32.31327975065551,
+     "status": "PRESENT+"
+    },
+    "initDev": {
+     "vA": -0.49043411241409224,
+     "zA": -36.764951679079395,
+     "vB": -0.49727193081010324,
+     "zB": -31.452318312302175,
+     "status": "PRESENT-"
+    },
+    "finalDev": {
+     "vA": 0.7268256687615693,
+     "zA": 88.02004035568119,
+     "vB": 0.7358664145815976,
+     "zB": 62.80373290955929,
+     "status": "PRESENT+"
+    }
+   },
+   "variants": {
+    "logcount": {
+     "vA": 0.05361608305596016,
+     "zA": 13.290944061242122,
+     "vB": 0.05158322701628135,
+     "zB": 18.104757459141748,
+     "status": "PRESENT+"
+    },
+    "hapax": {
+     "vA": 0.021240018081277366,
+     "zA": 7.458968237610301,
+     "vB": 0.030016488796792543,
+     "zB": 8.451226461893471,
+     "status": "PRESENT+"
+    },
+    "content": {
+     "vA": 0.03593016062448922,
+     "zA": 8.383040830508941,
+     "vB": 0.03566031324983411,
+     "zB": 11.213876633171651,
+     "status": "PRESENT+"
+    }
+   }
+  },
+  {
+   "id": "sib-rc-ud-rus-train",
+   "side": "plus",
+   "kind": "UD treebank train split (new language)",
+   "prediction": "PRESENT+",
+   "confidence": "moderate (halves 33k/25k tokens: power-limited)",
+   "tokens": 58306,
+   "thin": false,
+   "halfTokens": [
+    33392,
+    24914
+   ],
+   "discover": {
+    "v": 0.012775144285897646,
+    "nullMean": -0.001979098466476024,
+    "nullSd": 0.007845781122336653,
+    "z": 1.880532036557696,
+    "z200": 2.2431671316519415,
+    "boot": [
+     0.00512519927880732,
+     0.02248368758995353
+    ]
+   },
+   "confirm": {
+    "v": 0.00856901547594395,
+    "nullMean": -0.0017092135049876916,
+    "nullSd": 0.00601398353315113,
+    "z": 1.7090550588099445,
+    "z200": 1.3291635070381416,
+    "boot": [
+     -0.0021274597998786997,
+     0.019260904547857272
+    ]
+   },
+   "pocketV": 0.010672079880920799,
+   "status": "ABSENT",
+   "status200": "AMBIGUOUS",
+   "holds": false,
+   "weakHold": false,
+   "constantInRange": false,
+   "vRange": [
+    0.04,
+    0.085
+   ],
+   "absVMax": null,
+   "rivals": {
+    "surprGrow": {
+     "vA": -0.021685213974973867,
+     "zA": -5.706781989318585,
+     "vB": -0.015747973873168706,
+     "zB": -1.9075565915367365,
+     "status": "AMBIGUOUS"
+    },
+    "entCurv": {
+     "vA": 0.0051344345413208425,
+     "zA": 1.461096781807758,
+     "vB": 0.0034821557411913776,
+     "zB": 0.49680723153463907,
+     "status": "ABSENT"
+    },
+    "rareSlope": {
+     "vA": 0.08702489803693908,
+     "zA": 18.6943320788971,
+     "vB": 0.0809704500066589,
+     "zB": 11.311947538091585,
+     "status": "PRESENT+"
+    },
+    "initDev": {
+     "vA": -0.3232038936880782,
+     "zA": -15.460447709219906,
+     "vB": -0.3332703990215979,
+     "zB": -10.086503846857518,
+     "status": "PRESENT-"
+    },
+    "finalDev": {
+     "vA": 0.44966023053576376,
+     "zA": 16.863148967798537,
+     "vB": 0.4466351525719597,
+     "zB": 26.23776663312534,
+     "status": "PRESENT+"
+    }
+   },
+   "variants": {
+    "logcount": {
+     "vA": 0.013236118721892532,
+     "zA": 1.8844582815631845,
+     "vB": 0.00838638599844612,
+     "zB": 1.7288817172606745,
+     "status": "ABSENT"
+    },
+    "hapax": {
+     "vA": 0.009158782763567679,
+     "zA": 1.9513693081803705,
+     "vB": 0.010455240703046334,
+     "zB": 1.6866116305485384,
+     "status": "ABSENT"
+    },
+    "content": {
+     "vA": 0.010248712202879885,
+     "zA": 2.080018960961721,
+     "vB": 0.008093104589111166,
+     "zB": 1.4397055886833776,
+     "status": "AMBIGUOUS"
+    }
+   }
+  },
+  {
+   "id": "sib-rc-ud-dan-train",
+   "side": "plus",
+   "kind": "UD treebank train split (new language)",
+   "prediction": "PRESENT+",
+   "confidence": "moderate (halves 34k/34k tokens)",
+   "tokens": 68296,
+   "thin": false,
+   "halfTokens": [
+    34052,
+    34244
+   ],
+   "discover": {
+    "v": 0.07275894151271373,
+    "nullMean": 0.0004102101410234699,
+    "nullSd": 0.003097265001705267,
+    "z": 23.358909015488532,
+    "z200": 14.563848779362429,
+    "boot": [
+     0.06450699577311557,
+     0.0792918658772514
+    ]
+   },
+   "confirm": {
+    "v": 0.0672734256268985,
+    "nullMean": 0.0002207643939217979,
+    "nullSd": 0.005877542568372379,
+    "z": 11.408281684558698,
+    "z200": 11.179481868680988,
+    "boot": [
+     0.06021362973269532,
+     0.07683546654824272
+    ]
+   },
+   "pocketV": 0.07001618356980611,
+   "status": "PRESENT+",
+   "status200": "PRESENT+",
+   "holds": true,
+   "weakHold": true,
+   "constantInRange": true,
+   "vRange": [
+    0.04,
+    0.085
+   ],
+   "absVMax": null,
+   "rivals": {
+    "surprGrow": {
+     "vA": -0.05995163321336199,
+     "zA": -11.617726132388542,
+     "vB": -0.0611214801663751,
+     "zB": -11.050936199930867,
+     "status": "PRESENT-"
+    },
+    "entCurv": {
+     "vA": 0.007915253840178639,
+     "zA": 3.1249459229299874,
+     "vB": 0.008715560023576268,
+     "zB": 3.4925803586511925,
+     "status": "AMBIGUOUS"
+    },
+    "rareSlope": {
+     "vA": 0.0911910179806214,
+     "zA": 18.07339168936075,
+     "vB": 0.09503478696993796,
+     "zB": 19.69569048250416,
+     "status": "PRESENT+"
+    },
+    "initDev": {
+     "vA": -0.21168234563809996,
+     "zA": -13.682431633101688,
+     "vB": -0.20999102747976747,
+     "zB": -8.990445675930328,
+     "status": "PRESENT-"
+    },
+    "finalDev": {
+     "vA": 0.7521154834568426,
+     "zA": 37.814791436373724,
+     "vB": 0.6898136223913263,
+     "zB": 26.649952857629316,
+     "status": "PRESENT+"
+    }
+   },
+   "variants": {
+    "logcount": {
+     "vA": 0.07264010858694009,
+     "zA": 20.9961302508892,
+     "vB": 0.06770670317678465,
+     "zB": 12.311893576895715,
+     "status": "PRESENT+"
+    },
+    "hapax": {
+     "vA": 0.050817480224406394,
+     "zA": 15.731105942272897,
+     "vB": 0.04359532990013758,
+     "zB": 5.455640966823425,
+     "status": "PRESENT+"
+    },
+    "content": {
+     "vA": 0.06038944942799742,
+     "zA": 16.289543693942875,
+     "vB": 0.053663348358350044,
+     "zB": 7.312507044470244,
+     "status": "PRESENT+"
+    }
+   }
+  },
+  {
+   "id": "sib-rc-ud-gle-train",
+   "side": "plus",
+   "kind": "UD treebank train split (new language)",
+   "prediction": "PRESENT+",
+   "confidence": "moderate (halves 53k/33k; VSO language)",
+   "tokens": 85922,
+   "thin": false,
+   "halfTokens": [
+    53025,
+    32897
+   ],
+   "discover": {
+    "v": 0.05278792777367852,
+    "nullMean": 0.003036985126103732,
+    "nullSd": 0.0039120554469573125,
+    "z": 12.717340876717298,
+    "z200": 11.563860640992536,
+    "boot": [
+     0.046170267019936345,
+     0.06270140182778079
+    ]
+   },
+   "confirm": {
+    "v": 0.051887288668671074,
+    "nullMean": 0.0028855961362435627,
+    "nullSd": 0.0065377418345555485,
+    "z": 7.4952015194951125,
+    "z200": 8.886994939739543,
+    "boot": [
+     0.043699404107215345,
+     0.06054455817139373
+    ]
+   },
+   "pocketV": 0.052337608221174794,
+   "status": "PRESENT+",
+   "status200": "PRESENT+",
+   "holds": true,
+   "weakHold": true,
+   "constantInRange": true,
+   "vRange": [
+    0.04,
+    0.085
+   ],
+   "absVMax": null,
+   "rivals": {
+    "surprGrow": {
+     "vA": -0.02481738684174965,
+     "zA": -5.60090664075738,
+     "vB": -0.021950226597660567,
+     "zB": -5.552077400866796,
+     "status": "PRESENT-"
+    },
+    "entCurv": {
+     "vA": 0.002791401852498705,
+     "zA": 7.684924532792085,
+     "vB": 0.002795118291276293,
+     "zB": 2.055700626609938,
+     "status": "AMBIGUOUS"
+    },
+    "rareSlope": {
+     "vA": 0.03163061999823934,
+     "zA": 8.086400459105231,
+     "vB": 0.02962810452216261,
+     "zB": 7.728363758540156,
+     "status": "PRESENT+"
+    },
+    "initDev": {
+     "vA": -0.06960239496047889,
+     "zA": -2.7655403503791076,
+     "vB": -0.07078583844594362,
+     "zB": -3.200145113545311,
+     "status": "AMBIGUOUS"
+    },
+    "finalDev": {
+     "vA": 0.5927388107949976,
+     "zA": 33.45475329855838,
+     "vB": 0.5941391688224414,
+     "zB": 24.376120294893497,
+     "status": "PRESENT+"
+    }
+   },
+   "variants": {
+    "logcount": {
+     "vA": 0.05175349405232512,
+     "zA": 11.955970288630299,
+     "vB": 0.051150037939091564,
+     "zB": 7.470531933070191,
+     "status": "PRESENT+"
+    },
+    "hapax": {
+     "vA": 0.012798938698523488,
+     "zA": 2.6015388316507964,
+     "vB": 0.01386283571941973,
+     "zB": 2.2203703879634795,
+     "status": "AMBIGUOUS"
+    },
+    "content": {
+     "vA": 0.020504772386634954,
+     "zA": 4.7916837021074965,
+     "vB": 0.01424916589825971,
+     "zB": 2.610197934864998,
+     "status": "AMBIGUOUS"
+    }
+   }
+  },
+  {
+   "id": "sib-rc-ud-hye-train",
+   "side": "plus",
+   "kind": "UD treebank train split (new language)",
+   "prediction": "PRESENT+",
+   "confidence": "moderate-low (halves 29k/36k; head-final language: the atlas head-final treebanks are mixed, hin and kor PRESENT-, jpn and urd ABSENT, eus fas fin est lav PRESENT+)",
+   "tokens": 65187,
+   "thin": false,
+   "halfTokens": [
+    29206,
+    35981
+   ],
+   "discover": {
+    "v": 0.04351993718848911,
+    "nullMean": -0.00118051670090283,
+    "nullSd": 0.004787559263076903,
+    "z": 9.336793851124785,
+    "z200": 7.935814681335724,
+    "boot": [
+     0.03401930285324943,
+     0.052302428417197185
+    ]
+   },
+   "confirm": {
+    "v": 0.0391807170691583,
+    "nullMean": -0.0010771544757432606,
+    "nullSd": 0.004648514711853484,
+    "z": 8.660373052546435,
+    "z200": 7.393365445079094,
+    "boot": [
+     0.030371625931795605,
+     0.050693306920271776
+    ]
+   },
+   "pocketV": 0.04135032712882371,
+   "status": "PRESENT+",
+   "status200": "PRESENT+",
+   "holds": true,
+   "weakHold": true,
+   "constantInRange": true,
+   "vRange": [
+    0.04,
+    0.085
+   ],
+   "absVMax": null,
+   "rivals": {
+    "surprGrow": {
+     "vA": -0.042581280878498926,
+     "zA": -14.146161621031665,
+     "vB": -0.037461214792846476,
+     "zB": -9.662492354562373,
+     "status": "PRESENT-"
+    },
+    "entCurv": {
+     "vA": 0.011075693212592115,
+     "zA": 4.273041245926407,
+     "vB": 0.009176280166583695,
+     "zB": 3.0503958648445453,
+     "status": "AMBIGUOUS"
+    },
+    "rareSlope": {
+     "vA": 0.05849348488754147,
+     "zA": 14.797752225231934,
+     "vB": 0.05395332424556837,
+     "zB": 13.097870869618374,
+     "status": "PRESENT+"
+    },
+    "initDev": {
+     "vA": -0.06479434947997191,
+     "zA": -2.2665582096405212,
+     "vB": -0.05993014016399053,
+     "zB": -2.2559080555017994,
+     "status": "AMBIGUOUS"
+    },
+    "finalDev": {
+     "vA": 0.31469623902806637,
+     "zA": 13.983517223420185,
+     "vB": 0.27130486631114675,
+     "zB": 19.29282087983977,
+     "status": "PRESENT+"
+    }
+   },
+   "variants": {
+    "logcount": {
+     "vA": 0.04445004069958414,
+     "zA": 9.499636970468815,
+     "vB": 0.040298842674738954,
+     "zB": 8.808169386151617,
+     "status": "PRESENT+"
+    },
+    "hapax": {
+     "vA": 0.00792982548757629,
+     "zA": 1.4649342697224568,
+     "vB": 0.00611400221327128,
+     "zB": 0.5087023700899233,
+     "status": "ABSENT"
+    },
+    "content": {
+     "vA": 0.01939671749287216,
+     "zA": 4.787585363377549,
+     "vB": 0.009138652622965602,
+     "zB": 1.460392372813148,
+     "status": "AMBIGUOUS"
+    }
+   }
+  },
+  {
+   "id": "sib-rc-js-holodeck",
+   "side": "minus",
+   "kind": "repository code",
+   "prediction": "PRESENT-",
+   "confidence": "high (atlas JS/TS/TSX: 4 of 4 PRESENT-, v -0.14 to -0.21; all code 38 of 47)",
+   "tokens": 182508,
+   "thin": false,
+   "halfTokens": [
+    103539,
+    78969
+   ],
+   "discover": {
+    "v": -0.08010109499929545,
+    "nullMean": 0.00017901183642672893,
+    "nullSd": 0.0022890519331184526,
+    "z": -35.07133485012456,
+    "z200": -23.72592521645581,
+    "boot": [
+     -0.11108399840099545,
+     -0.06424128308209405
+    ]
+   },
+   "confirm": {
+    "v": -0.10923728258724234,
+    "nullMean": -0.001821674780160188,
+    "nullSd": 0.00490631309120968,
+    "z": -21.893345534660572,
+    "z200": -29.591048723579334,
+    "boot": [
+     -0.14172611564651189,
+     -0.07205534891101575
+    ]
+   },
+   "pocketV": -0.0946691887932689,
+   "status": "PRESENT-",
+   "status200": "PRESENT-",
+   "holds": true,
+   "weakHold": true,
+   "constantInRange": true,
+   "vRange": [
+    -0.175,
+    -0.035
+   ],
+   "absVMax": null,
+   "rivals": {
+    "surprGrow": {
+     "vA": 0.024199303471584294,
+     "zA": 11.273390735665123,
+     "vB": 0.022615886179199688,
+     "zB": 7.272635536070668,
+     "status": "PRESENT+"
+    },
+    "entCurv": {
+     "vA": -0.003866602643163098,
+     "zA": -5.937225246870557,
+     "vB": -0.013278098001290794,
+     "zB": -14.593216129530838,
+     "status": "PRESENT-"
+    },
+    "rareSlope": {
+     "vA": 0.09141136860475811,
+     "zA": 30.045155173801042,
+     "vB": 0.13793084602117817,
+     "zB": 50.902031855929835,
+     "status": "PRESENT+"
+    },
+    "initDev": {
+     "vA": -0.4870550769714712,
+     "zA": -42.42969064278086,
+     "vB": -0.6976750933360261,
+     "zB": -102.02299090972605,
+     "status": "PRESENT-"
+    },
+    "finalDev": {
+     "vA": 0.11509951965039848,
+     "zA": 12.97619099060501,
+     "vB": 0.17166954707304735,
+     "zB": 14.287439933910003,
+     "status": "PRESENT+"
+    }
+   },
+   "variants": {
+    "logcount": {
+     "vA": -0.0724743067684029,
+     "zA": -30.74715543179798,
+     "vB": -0.09050587506168088,
+     "zB": -17.347994271907922,
+     "status": "PRESENT-"
+    },
+    "hapax": {
+     "vA": -0.0037097775176648013,
+     "zA": -1.1186667792141163,
+     "vB": -0.0010935142039486447,
+     "zB": -0.23671791344985674,
+     "status": "ABSENT"
+    },
+    "content": {
+     "vA": -0.02398657488983059,
+     "zA": -6.72222312316081,
+     "vB": -0.024717309250430777,
+     "zB": -5.825230950939734,
+     "status": "PRESENT-"
+    }
+   }
+  },
+  {
+   "id": "sib-rc-js-eochat",
+   "side": "minus",
+   "kind": "repository code",
+   "prediction": "PRESENT-",
+   "confidence": "high (atlas JS/TS/TSX: 4 of 4 PRESENT-, v -0.14 to -0.21; all code 38 of 47)",
+   "tokens": 293254,
+   "thin": false,
+   "halfTokens": [
+    164570,
+    128684
+   ],
+   "discover": {
+    "v": -0.09305766732782454,
+    "nullMean": -0.0003152058858551831,
+    "nullSd": 0.003100446649237746,
+    "z": -29.912613224539882,
+    "z200": -33.14509276312193,
+    "boot": [
+     -0.1158190667090036,
+     -0.07821389062594869
+    ]
+   },
+   "confirm": {
+    "v": -0.10373963667769043,
+    "nullMean": -0.00045018731669592345,
+    "nullSd": 0.0025564685621039156,
+    "z": -40.40317604218439,
+    "z200": -33.065504333736726,
+    "boot": [
+     -0.14319371179269935,
+     -0.08134163003932034
+    ]
+   },
+   "pocketV": -0.09839865200275749,
+   "status": "PRESENT-",
+   "status200": "PRESENT-",
+   "holds": true,
+   "weakHold": true,
+   "constantInRange": true,
+   "vRange": [
+    -0.175,
+    -0.035
+   ],
+   "absVMax": null,
+   "rivals": {
+    "surprGrow": {
+     "vA": 0.042039201429773895,
+     "zA": 14.80722581212978,
+     "vB": 0.04441015005497966,
+     "zB": 13.134381499069017,
+     "status": "PRESENT+"
+    },
+    "entCurv": {
+     "vA": -0.007179185840433523,
+     "zA": -10.674304401904879,
+     "vB": -0.007992548487029565,
+     "zB": -12.82210414153473,
+     "status": "PRESENT-"
+    },
+    "rareSlope": {
+     "vA": 0.1252540054162118,
+     "zA": 46.040451767723496,
+     "vB": 0.14215826955580255,
+     "zB": 28.62025821862269,
+     "status": "PRESENT+"
+    },
+    "initDev": {
+     "vA": -0.5104559369715358,
+     "zA": -70.06198296910713,
+     "vB": -0.5646199161245705,
+     "zB": -83.9864557432969,
+     "status": "PRESENT-"
+    },
+    "finalDev": {
+     "vA": 0.16780462179866648,
+     "zA": 21.2095405169579,
+     "vB": 0.18210001174506046,
+     "zB": 18.331158489625267,
+     "status": "PRESENT+"
+    }
+   },
+   "variants": {
+    "logcount": {
+     "vA": -0.08188881231712489,
+     "zA": -26.021681674503633,
+     "vB": -0.09575286681080321,
+     "zB": -34.657088864040965,
+     "status": "PRESENT-"
+    },
+    "hapax": {
+     "vA": 0.004845008437594669,
+     "zA": 2.557928608223427,
+     "vB": 0.0034125892496206602,
+     "zB": 0.7211679492310991,
+     "status": "AMBIGUOUS"
+    },
+    "content": {
+     "vA": -0.02646215161726189,
+     "zA": -8.223346604371397,
+     "vB": -0.0316736528487328,
+     "zB": -8.516869678915988,
+     "status": "PRESENT-"
+    }
+   }
+  },
+  {
+   "id": "sib-rc-js-eopm",
+   "side": "minus",
+   "kind": "repository code",
+   "prediction": "PRESENT-",
+   "confidence": "high (atlas JS/TS/TSX: 4 of 4 PRESENT-, v -0.14 to -0.21; all code 38 of 47)",
+   "tokens": 164318,
+   "thin": false,
+   "halfTokens": [
+    85274,
+    79044
+   ],
+   "discover": {
+    "v": -0.10531621889907948,
+    "nullMean": 0.00021102157663559825,
+    "nullSd": 0.0041175080264701965,
+    "z": -25.628909475661686,
+    "z200": -27.586229716382054,
+    "boot": [
+     -0.11737967159000735,
+     -0.09214902161579709
+    ]
+   },
+   "confirm": {
+    "v": -0.11451552548935334,
+    "nullMean": 0.0017113030290860493,
+    "nullSd": 0.0037540460889698393,
+    "z": -30.96041597889215,
+    "z200": -27.88423259176633,
+    "boot": [
+     -0.14611315228181848,
+     -0.10092277716212772
+    ]
+   },
+   "pocketV": -0.10991587219421642,
+   "status": "PRESENT-",
+   "status200": "PRESENT-",
+   "holds": true,
+   "weakHold": true,
+   "constantInRange": true,
+   "vRange": [
+    -0.175,
+    -0.035
+   ],
+   "absVMax": null,
+   "rivals": {
+    "surprGrow": {
+     "vA": 0.013312627481073005,
+     "zA": 5.0762386395028,
+     "vB": 0.023682840677516834,
+     "zB": 5.588449048460635,
+     "status": "PRESENT+"
+    },
+    "entCurv": {
+     "vA": -0.013331185671633354,
+     "zA": -14.178891807345591,
+     "vB": -0.012063495023926778,
+     "zB": -13.074643091526026,
+     "status": "PRESENT-"
+    },
+    "rareSlope": {
+     "vA": 0.1528762431916986,
+     "zA": 31.51876407901833,
+     "vB": 0.15788488841767945,
+     "zB": 45.089646547279635,
+     "status": "PRESENT+"
+    },
+    "initDev": {
+     "vA": -0.5903467774728621,
+     "zA": -50.07187706000178,
+     "vB": -0.608354979793656,
+     "zB": -69.45547698594083,
+     "status": "PRESENT-"
+    },
+    "finalDev": {
+     "vA": 0.18747761014271372,
+     "zA": 20.943401441966515,
+     "vB": 0.1778531814767426,
+     "zB": 16.307980524232445,
+     "status": "PRESENT+"
+    }
+   },
+   "variants": {
+    "logcount": {
+     "vA": -0.09499376802756494,
+     "zA": -23.471319026483375,
+     "vB": -0.10808258972198631,
+     "zB": -28.405805126839336,
+     "status": "PRESENT-"
+    },
+    "hapax": {
+     "vA": 0.005570016945089975,
+     "zA": 2.275540260886533,
+     "vB": 0.005154007399013117,
+     "zB": 1.4411388166965189,
+     "status": "AMBIGUOUS"
+    },
+    "content": {
+     "vA": -0.023199266735219687,
+     "zA": -7.391230265470661,
+     "vB": -0.032641778856843745,
+     "zB": -7.9248232045900355,
+     "status": "PRESENT-"
+    }
+   }
+  },
+  {
+   "id": "sib-rc-ts-opencode",
+   "side": "minus",
+   "kind": "repository code",
+   "prediction": "PRESENT-",
+   "confidence": "high (atlas JS/TS/TSX: 4 of 4 PRESENT-, v -0.14 to -0.21; all code 38 of 47)",
+   "tokens": 291318,
+   "thin": false,
+   "halfTokens": [
+    144852,
+    146466
+   ],
+   "discover": {
+    "v": -0.1651712962440985,
+    "nullMean": -0.00196905593034866,
+    "nullSd": 0.003455181007762681,
+    "z": -47.23406384414792,
+    "z200": -49.86171817923387,
+    "boot": [
+     -0.1818395656845198,
+     -0.13984205988561907
+    ]
+   },
+   "confirm": {
+    "v": -0.1662990414878392,
+    "nullMean": 0.0005406373511736234,
+    "nullSd": 0.0018931550921379096,
+    "z": -88.12784516803822,
+    "z200": -55.81638283972322,
+    "boot": [
+     -0.18334845749843665,
+     -0.145296450566893
+    ]
+   },
+   "pocketV": -0.16573516886596884,
+   "status": "PRESENT-",
+   "status200": "PRESENT-",
+   "holds": true,
+   "weakHold": true,
+   "constantInRange": true,
+   "vRange": [
+    -0.175,
+    -0.035
+   ],
+   "absVMax": null,
+   "rivals": {
+    "surprGrow": {
+     "vA": 0.03105939178048074,
+     "zA": 16.797267136347493,
+     "vB": 0.043894225814725546,
+     "zB": 11.856695946392746,
+     "status": "PRESENT+"
+    },
+    "entCurv": {
+     "vA": -0.018625297180671165,
+     "zA": -16.10614614017996,
+     "vB": -0.011640832678369814,
+     "zB": -16.387425101071525,
+     "status": "PRESENT-"
+    },
+    "rareSlope": {
+     "vA": 0.25838322856788165,
+     "zA": 96.09497279290997,
+     "vB": 0.28811858659381456,
+     "zB": 86.87252917553822,
+     "status": "PRESENT+"
+    },
+    "initDev": {
+     "vA": -0.7159436637924271,
+     "zA": -130.60707878650297,
+     "vB": -0.7313253263574283,
+     "zB": -152.2622795102452,
+     "status": "PRESENT-"
+    },
+    "finalDev": {
+     "vA": 0.2509894463523873,
+     "zA": 49.529748254376365,
+     "vB": 0.27783828047970666,
+     "zB": 74.09662980240499,
+     "status": "PRESENT+"
+    }
+   },
+   "variants": {
+    "logcount": {
+     "vA": -0.13526748251508555,
+     "zA": -39.350789734696676,
+     "vB": -0.1359962527581905,
+     "zB": -74.11094135885547,
+     "status": "PRESENT-"
+    },
+    "hapax": {
+     "vA": 0.0064322376199802515,
+     "zA": 1.4556681243368133,
+     "vB": 0.007087611345056725,
+     "zB": 1.7337913741923112,
+     "status": "ABSENT"
+    },
+    "content": {
+     "vA": -0.03028750148947167,
+     "zA": -10.417796253091035,
+     "vB": -0.02399695312826762,
+     "zB": -9.820911735955937,
+     "status": "PRESENT-"
+    }
+   }
+  },
+  {
+   "id": "sib-rc-tsx-opencode",
+   "side": "minus",
+   "kind": "repository code",
+   "prediction": "PRESENT-",
+   "confidence": "high (atlas JS/TS/TSX: 4 of 4 PRESENT-, v -0.14 to -0.21; all code 38 of 47)",
+   "tokens": 291571,
+   "thin": false,
+   "halfTokens": [
+    139270,
+    152301
+   ],
+   "discover": {
+    "v": -0.1506952881194627,
+    "nullMean": -0.000807371423757285,
+    "nullSd": 0.0031384392222650204,
+    "z": -47.75874442058843,
+    "z200": -46.809492583133256,
+    "boot": [
+     -0.17760725057822563,
+     -0.11407725363124825
+    ]
+   },
+   "confirm": {
+    "v": -0.1849037156174915,
+    "nullMean": 0.0006411034989645726,
+    "nullSd": 0.0019682204326568276,
+    "z": -94.27034494606684,
+    "z200": -56.849871474767305,
+    "boot": [
+     -0.22309605479655115,
+     -0.15320340158219678
+    ]
+   },
+   "pocketV": -0.16779950186847709,
+   "status": "PRESENT-",
+   "status200": "PRESENT-",
+   "holds": true,
+   "weakHold": true,
+   "constantInRange": true,
+   "vRange": [
+    -0.175,
+    -0.035
+   ],
+   "absVMax": null,
+   "rivals": {
+    "surprGrow": {
+     "vA": 0.05816950721651754,
+     "zA": 27.336410936326605,
+     "vB": 0.05315503662409211,
+     "zB": 23.541264128392093,
+     "status": "PRESENT+"
+    },
+    "entCurv": {
+     "vA": -0.016261705026339033,
+     "zA": -13.361950165351892,
+     "vB": -0.02167291615738984,
+     "zB": -21.35914571965492,
+     "status": "PRESENT-"
+    },
+    "rareSlope": {
+     "vA": 0.23073287329277958,
+     "zA": 80.70067409975967,
+     "vB": 0.2664607459066363,
+     "zB": 102.29418685710962,
+     "status": "PRESENT+"
+    },
+    "initDev": {
+     "vA": -0.6326999435116277,
+     "zA": -136.59303153757767,
+     "vB": -0.6836714437894413,
+     "zB": -183.82010651658538,
+     "status": "PRESENT-"
+    },
+    "finalDev": {
+     "vA": 0.21303453464392452,
+     "zA": 29.55114517083873,
+     "vB": 0.2182495319670094,
+     "zB": 34.11090918116119,
+     "status": "PRESENT+"
+    }
+   },
+   "variants": {
+    "logcount": {
+     "vA": -0.11692999054648734,
+     "zA": -36.93792694007055,
+     "vB": -0.14454081396523627,
+     "zB": -61.14604750255223,
+     "status": "PRESENT-"
+    },
+    "hapax": {
+     "vA": 0.016401147815428653,
+     "zA": 7.698234059704418,
+     "vB": -0.010778366217250127,
+     "zB": -3.547349057015081,
+     "status": "AMBIGUOUS"
+    },
+    "content": {
+     "vA": -0.020753819282331862,
+     "zA": -9.266997720336743,
+     "vB": -0.026267668282348836,
+     "zB": -7.387345096268331,
+     "status": "PRESENT-"
+    }
+   }
+  },
+  {
+   "id": "sib-rc-py-authored",
+   "side": "absent",
+   "kind": "Python code",
+   "prediction": "ABSENT",
+   "confidence": "low (a coin flip against the atlas base rate of the code class, which is PRESENT-; basis: cd-cc-python ABSENT and cd-e09-python v about 0)",
+   "tokens": 210433,
+   "thin": false,
+   "halfTokens": [
+    61380,
+    149053
+   ],
+   "discover": {
+    "v": 0.01827944846508198,
+    "nullMean": 0.003053993408371375,
+    "nullSd": 0.00469288072220249,
+    "z": 3.2443729039771774,
+    "z200": 4.156423720703598,
+    "boot": [
+     0.0018129527019555116,
+     0.032163969620221174
+    ]
+   },
+   "confirm": {
+    "v": 0.017336723907944673,
+    "nullMean": 0.0016057593947443646,
+    "nullSd": 0.002174980661857004,
+    "z": 7.232691668977494,
+    "z200": 5.981372964704666,
+    "boot": [
+     -0.0014081313992342869,
+     0.03485409264429363
+    ]
+   },
+   "pocketV": 0.017808086186513326,
+   "status": "AMBIGUOUS",
+   "status200": "PRESENT+",
+   "holds": false,
+   "weakHold": false,
+   "constantInRange": true,
+   "vRange": null,
+   "absVMax": 0.02,
+   "rivals": {
+    "surprGrow": {
+     "vA": -0.03300669139111799,
+     "zA": -9.025227636772584,
+     "vB": -0.016369548521404972,
+     "zB": -8.240621015487946,
+     "status": "PRESENT-"
+    },
+    "entCurv": {
+     "vA": 0.001954084762529173,
+     "zA": 0.518144081652962,
+     "vB": 0.003973065382402952,
+     "zB": 4.708305108285133,
+     "status": "AMBIGUOUS"
+    },
+    "rareSlope": {
+     "vA": 0.09621440987816145,
+     "zA": 21.39798198689045,
+     "vB": 0.09196249076335072,
+     "zB": 73.37199652930697,
+     "status": "PRESENT+"
+    },
+    "initDev": {
+     "vA": -0.17625371677427604,
+     "zA": -17.96573374342781,
+     "vB": -0.19952300534868142,
+     "zB": -35.75833687088997,
+     "status": "PRESENT-"
+    },
+    "finalDev": {
+     "vA": 0.2739674490255922,
+     "zA": 39.57128444488924,
+     "vB": 0.2544594317737231,
+     "zB": 61.35956054665657,
+     "status": "PRESENT+"
+    }
+   },
+   "variants": {
+    "logcount": {
+     "vA": 0.01882627075468431,
+     "zA": 3.709268582024726,
+     "vB": 0.018912819822911365,
+     "zB": 7.3554146450346165,
+     "status": "AMBIGUOUS"
+    },
+    "hapax": {
+     "vA": -0.00951661266749484,
+     "zA": -1.7954376957588525,
+     "vB": -0.006229106075501249,
+     "zB": -2.1871300606394897,
+     "status": "AMBIGUOUS"
+    },
+    "content": {
+     "vA": 0.027643644520454775,
+     "zA": 6.634502587852829,
+     "vB": 0.017458605383678504,
+     "zB": 6.521689542468627,
+     "status": "PRESENT+"
+    }
+   }
+  },
+  {
+   "id": "sib-rc-py-sitepkg",
+   "side": "absent",
+   "kind": "Python code",
+   "prediction": "ABSENT",
+   "confidence": "low (same basis; docstring-rich library code may behave like prose, which would give PRESENT+)",
+   "tokens": 292177,
+   "thin": false,
+   "halfTokens": [
+    153247,
+    138930
+   ],
+   "discover": {
+    "v": 0.008507173018776761,
+    "nullMean": -0.000736683181338686,
+    "nullSd": 0.0038236408925914254,
+    "z": 2.41755344180623,
+    "z200": 2.8081814198589843,
+    "boot": [
+     -0.015531567614928557,
+     0.04194522315706489
+    ]
+   },
+   "confirm": {
+    "v": 0.0030081527434821097,
+    "nullMean": -0.00025640406747737303,
+    "nullSd": 0.0038336656418058225,
+    "z": 0.851549695768913,
+    "z200": 0.9515060270050133,
+    "boot": [
+     -0.019338986205267552,
+     0.026553791797807997
+    ]
+   },
+   "pocketV": 0.005757662881129435,
+   "status": "AMBIGUOUS",
+   "status200": "AMBIGUOUS",
+   "holds": false,
+   "weakHold": false,
+   "constantInRange": true,
+   "vRange": null,
+   "absVMax": 0.02,
+   "rivals": {
+    "surprGrow": {
+     "vA": -0.03602460653656431,
+     "zA": -11.481849631027433,
+     "vB": -0.04736060352862491,
+     "zB": -13.284053235104968,
+     "status": "PRESENT-"
+    },
+    "entCurv": {
+     "vA": -0.0014606191801809281,
+     "zA": -2.2461149050247915,
+     "vB": 0.0024861233532834197,
+     "zB": 4.533734979309167,
+     "status": "AMBIGUOUS"
+    },
+    "rareSlope": {
+     "vA": 0.08897124765178334,
+     "zA": 41.454199025244485,
+     "vB": 0.09758949837574848,
+     "zB": 33.97593994022778,
+     "status": "PRESENT+"
+    },
+    "initDev": {
+     "vA": -0.1779600744544819,
+     "zA": -32.48101869344943,
+     "vB": -0.21293050428457921,
+     "zB": -30.936359580651747,
+     "status": "PRESENT-"
+    },
+    "finalDev": {
+     "vA": 0.19114017415920304,
+     "zA": 45.46535811698606,
+     "vB": 0.22806354978278798,
+     "zB": 32.429470144633626,
+     "status": "PRESENT+"
+    }
+   },
+   "variants": {
+    "logcount": {
+     "vA": 0.014624248950477823,
+     "zA": 3.9714516739817602,
+     "vB": 0.006177339592098509,
+     "zB": 1.618562156716194,
+     "status": "AMBIGUOUS"
+    },
+    "hapax": {
+     "vA": -0.005443749897963097,
+     "zA": -2.2783364513108526,
+     "vB": -0.014811259282651576,
+     "zB": -5.69316550534537,
+     "status": "AMBIGUOUS"
+    },
+    "content": {
+     "vA": 0.031219661300896102,
+     "zA": 8.947787312504389,
+     "vB": 0.010937721857758076,
+     "zB": 2.1515799055705727,
+     "status": "AMBIGUOUS"
+    }
+   }
+  },
+  {
+   "id": "sib-rc-ud-cmn-train",
+   "side": "absent",
+   "kind": "UD treebank train split (atlas dev+test ABSENT)",
+   "prediction": "ABSENT",
+   "confidence": "low (power question: atlas v about +0.015, null sd 0.006-0.013 on 20-28k tokens; with 4-7 times more tokens a real +0.015 would give z about 3 to 5: AMBIGUOUS or PRESENT+ would then say the atlas ABSENT was low power)",
+   "tokens": 82060,
+   "thin": false,
+   "halfTokens": [
+    38984,
+    43076
+   ],
+   "discover": {
+    "v": 0.016662158409687388,
+    "nullMean": -0.0006843495223564828,
+    "nullSd": 0.005203435938284923,
+    "z": 3.3336641668661264,
+    "z200": 3.0988315039394094,
+    "boot": [
+     0.005287263451880301,
+     0.025937422855469575
+    ]
+   },
+   "confirm": {
+    "v": 0.023861998726486623,
+    "nullMean": -0.0008123402010125483,
+    "nullSd": 0.003494946948638124,
+    "z": 7.06000385416838,
+    "z200": 5.0197556631222895,
+    "boot": [
+     0.013322167693991383,
+     0.028881503456220557
+    ]
+   },
+   "pocketV": 0.020262078568087004,
+   "status": "AMBIGUOUS",
+   "status200": "AMBIGUOUS",
+   "holds": false,
+   "weakHold": false,
+   "constantInRange": false,
+   "vRange": null,
+   "absVMax": 0.02,
+   "rivals": {
+    "surprGrow": {
+     "vA": -0.023888054238439208,
+     "zA": -4.147568109296815,
+     "vB": -0.026570411616159008,
+     "zB": -4.826124879544211,
+     "status": "PRESENT-"
+    },
+    "entCurv": {
+     "vA": -0.0001320044882973249,
+     "zA": 0.3032782152427538,
+     "vB": 0.0022154836620570453,
+     "zB": 1.1678105504102538,
+     "status": "ABSENT"
+    },
+    "rareSlope": {
+     "vA": 0.05508532583928696,
+     "zA": 8.908395677969644,
+     "vB": 0.04578375951464709,
+     "zB": 7.78379018975879,
+     "status": "PRESENT+"
+    },
+    "initDev": {
+     "vA": -0.07016875864974055,
+     "zA": -4.019723758266928,
+     "vB": -0.01706764866076366,
+     "zB": -0.6524250105962672,
+     "status": "AMBIGUOUS"
+    },
+    "finalDev": {
+     "vA": 0.4588272787715649,
+     "zA": 17.44775202841867,
+     "vB": 0.4331835252593448,
+     "zB": 24.98457368196636,
+     "status": "PRESENT+"
+    }
+   },
+   "variants": {
+    "logcount": {
+     "vA": 0.01792357662163705,
+     "zA": 3.5579285794549693,
+     "vB": 0.0250215028601082,
+     "zB": 7.063192188556921,
+     "status": "AMBIGUOUS"
+    },
+    "hapax": {
+     "vA": 0.014431394106162702,
+     "zA": 2.2009982645108406,
+     "vB": 0.02712707556922759,
+     "zB": 7.0578029552557116,
+     "status": "AMBIGUOUS"
+    },
+    "content": {
+     "vA": 0.016964505950833673,
+     "zA": 3.267806968006024,
+     "vB": 0.02734857970597875,
+     "zB": 6.890623227530852,
+     "status": "AMBIGUOUS"
+    }
+   }
+  },
+  {
+   "id": "sib-rc-ud-jpn-train",
+   "side": "absent",
+   "kind": "UD treebank train split (atlas dev+test ABSENT)",
+   "prediction": "ABSENT",
+   "confidence": "low (power question: atlas v about +0.015, null sd 0.006-0.013 on 20-28k tokens; with 4-7 times more tokens a real +0.015 would give z about 3 to 5: AMBIGUOUS or PRESENT+ would then say the atlas ABSENT was low power)",
+   "tokens": 146279,
+   "thin": false,
+   "halfTokens": [
+    76491,
+    69788
+   ],
+   "discover": {
+    "v": -0.002800122752448157,
+    "nullMean": -0.0009664688534239563,
+    "nullSd": 0.003094523749280191,
+    "z": -0.5925480130668644,
+    "z200": -0.741272084108403,
+    "boot": [
+     -0.004872125015598073,
+     0.004611605432718516
+    ]
+   },
+   "confirm": {
+    "v": -0.003798564601878308,
+    "nullMean": 0.0007515643292593699,
+    "nullSd": 0.0014320713863358973,
+    "z": -3.1773059461649136,
+    "z200": -0.926528709551477,
+    "boot": [
+     -0.008124272766714987,
+     0.0028086340941422916
+    ]
+   },
+   "pocketV": -0.0032993436771632323,
+   "status": "AMBIGUOUS",
+   "status200": "ABSENT",
+   "holds": false,
+   "weakHold": false,
+   "constantInRange": true,
+   "vRange": null,
+   "absVMax": 0.02,
+   "rivals": {
+    "surprGrow": {
+     "vA": -0.0333211203594337,
+     "zA": -11.143614806163585,
+     "vB": -0.030518562958548993,
+     "zB": -10.220705272047956,
+     "status": "PRESENT-"
+    },
+    "entCurv": {
+     "vA": 0.007799904070073471,
+     "zA": 11.007076130064274,
+     "vB": 0.009110396387247286,
+     "zB": 6.878942293383661,
+     "status": "PRESENT+"
+    },
+    "rareSlope": {
+     "vA": -0.10354191257204307,
+     "zA": -27.992242513747453,
+     "vB": -0.11645584676734153,
+     "zB": -30.546255195674032,
+     "status": "PRESENT-"
+    },
+    "initDev": {
+     "vA": 0.643039316628216,
+     "zA": 34.32685691755445,
+     "vB": 0.6599466643957302,
+     "zB": 42.20080186335512,
+     "status": "PRESENT+"
+    },
+    "finalDev": {
+     "vA": -0.3012528994795055,
+     "zA": -15.090484246182909,
+     "vB": -0.33011759907274474,
+     "zB": -19.601130883587494,
+     "status": "PRESENT-"
+    }
+   },
+   "variants": {
+    "logcount": {
+     "vA": -0.0022962503750923765,
+     "zA": -0.3678920533080348,
+     "vB": -0.0015245726322047069,
+     "zB": -1.0985199878115708,
+     "status": "ABSENT"
+    },
+    "hapax": {
+     "vA": -0.020456253624615915,
+     "zA": -6.70407645539165,
+     "vB": -0.018132577330772677,
+     "zB": -6.356451723397286,
+     "status": "PRESENT-"
+    },
+    "content": {
+     "vA": -0.02596838659551876,
+     "zA": -11.285581204246075,
+     "vB": -0.025503182956160435,
+     "zB": -10.21328578125442,
+     "status": "PRESENT-"
+    }
+   }
+  },
+  {
+   "id": "sib-rc-ud-urd-train",
+   "side": "absent",
+   "kind": "UD treebank train split (atlas dev+test ABSENT)",
+   "prediction": "ABSENT",
+   "confidence": "low (power question: atlas v about +0.015, null sd 0.006-0.013 on 20-28k tokens; with 4-7 times more tokens a real +0.015 would give z about 3 to 5: AMBIGUOUS or PRESENT+ would then say the atlas ABSENT was low power)",
+   "tokens": 102096,
+   "thin": false,
+   "halfTokens": [
+    54315,
+    47781
+   ],
+   "discover": {
+    "v": -0.012154185976943404,
+    "nullMean": 0.0018798288929663086,
+    "nullSd": 0.00375934420951043,
+    "z": -3.7331018623956567,
+    "z200": -2.7341257184506857,
+    "boot": [
+     -0.01802947530423447,
+     0.000651940331804774
+    ]
+   },
+   "confirm": {
+    "v": -0.015236034533183427,
+    "nullMean": 0.0003133512067758189,
+    "nullSd": 0.004869063924288571,
+    "z": -3.193506181422993,
+    "z200": -3.3237797082628435,
+    "boot": [
+     -0.02131499021658371,
+     -0.0007105850608732372
+    ]
+   },
+   "pocketV": -0.013695110255063415,
+   "status": "AMBIGUOUS",
+   "status200": "AMBIGUOUS",
+   "holds": false,
+   "weakHold": false,
+   "constantInRange": true,
+   "vRange": null,
+   "absVMax": 0.02,
+   "rivals": {
+    "surprGrow": {
+     "vA": 0.022175721103110547,
+     "zA": 9.847260376623751,
+     "vB": 0.027994246706712436,
+     "zB": 7.545954575542127,
+     "status": "PRESENT+"
+    },
+    "entCurv": {
+     "vA": 0.005003987982219981,
+     "zA": 8.210841607345055,
+     "vB": 0.004902536531906426,
+     "zB": 4.668501619730786,
+     "status": "PRESENT+"
+    },
+    "rareSlope": {
+     "vA": -0.03698562474077177,
+     "zA": -17.591253467842407,
+     "vB": -0.032719756873491865,
+     "zB": -6.527167294106989,
+     "status": "PRESENT-"
+    },
+    "initDev": {
+     "vA": 0.2976220523373984,
+     "zA": 13.58900193452787,
+     "vB": 0.26330107972894734,
+     "zB": 10.353057289304536,
+     "status": "PRESENT+"
+    },
+    "finalDev": {
+     "vA": -0.4954919100571793,
+     "zA": -31.207438142787755,
+     "vB": -0.5225667363841278,
+     "zB": -23.962838003982377,
+     "status": "PRESENT-"
+    }
+   },
+   "variants": {
+    "logcount": {
+     "vA": -0.011404170944630558,
+     "zA": -3.4914783518132855,
+     "vB": -0.015114429099059822,
+     "zB": -3.0469587598778065,
+     "status": "AMBIGUOUS"
+    },
+    "hapax": {
+     "vA": -0.028489739345908895,
+     "zA": -6.4855150495007035,
+     "vB": -0.031565957711473476,
+     "zB": -4.838431473841203,
+     "status": "PRESENT-"
+    },
+    "content": {
+     "vA": -0.03495121678817674,
+     "zA": -8.089770428792738,
+     "vB": -0.041884019709481884,
+     "zB": -6.8953007980115215,
+     "status": "PRESENT-"
+    }
+   }
+  },
+  {
+   "id": "ctl-rc-en-mouret",
+   "side": "control",
+   "kind": "shuffled control",
+   "prediction": "NOT PRESENT in either sign (law-free by construction: global token shuffle + re-assigned unit lengths, as the atlas ct-* group); instrument check only, not part of the verdict",
+   "confidence": null,
+   "tokens": 128496,
+   "thin": false,
+   "halfTokens": [
+    65633,
+    62863
+   ],
+   "discover": {
+    "v": -0.008170499041295926,
+    "nullMean": -0.00036085241526049455,
+    "nullSd": 0.004520123920058549,
+    "z": -1.7277505582046682,
+    "z200": -1.950436133641389,
+    "boot": [
+     -0.0153046804647944,
+     -0.0008601674192372119
+    ]
+   },
+   "confirm": {
+    "v": -0.0020113788193628877,
+    "nullMean": -0.0009890895790278158,
+    "nullSd": 0.0041440127169895865,
+    "z": -0.2466906619624741,
+    "z200": -0.45602821157771434,
+    "boot": [
+     -0.008724214767903802,
+     0.004930107937075994
+    ]
+   },
+   "pocketV": -0.005090938930329407,
+   "status": "ABSENT",
+   "status200": "ABSENT",
+   "holds": false,
+   "weakHold": false,
+   "constantInRange": null,
+   "vRange": null,
+   "absVMax": null,
+   "rivals": {
+    "surprGrow": {
+     "vA": 0.0056404449875731635,
+     "zA": 0.7941796848353642,
+     "vB": 0.0015466576385464229,
+     "zB": -0.6017028618686475,
+     "status": "ABSENT"
+    },
+    "entCurv": {
+     "vA": -0.00014389609491039372,
+     "zA": -0.06918104559544322,
+     "vB": 0.00012965404034212283,
+     "zB": -0.7110012036404735,
+     "status": "ABSENT"
+    },
+    "rareSlope": {
+     "vA": -0.002141122850793422,
+     "zA": 0.06177783240333106,
+     "vB": -0.0011706384402264713,
+     "zB": 0.9587187841805739,
+     "status": "ABSENT"
+    },
+    "initDev": {
+     "vA": -0.021299929080773626,
+     "zA": -1.5686131683104692,
+     "vB": 0.00923594510154087,
+     "zB": 0.5935530459399113,
+     "status": "ABSENT"
+    },
+    "finalDev": {
+     "vA": -0.00521679966331402,
+     "zA": -0.21847440216288286,
+     "vB": -0.017184802378982362,
+     "zB": -0.8371943760039984,
+     "status": "ABSENT"
+    }
+   },
+   "variants": {
+    "logcount": {
+     "vA": -0.00798039828094502,
+     "zA": -1.6892585990031979,
+     "vB": -0.002320095054189795,
+     "zB": -0.3204246313304029,
+     "status": "ABSENT"
+    },
+    "hapax": {
+     "vA": -0.0027649762425181073,
+     "zA": -0.5568708177103985,
+     "vB": -0.00504568491506779,
+     "zB": -1.298386024063572,
+     "status": "ABSENT"
+    },
+    "content": {
+     "vA": -0.0033592802937821038,
+     "zA": -0.9539944686063223,
+     "vB": -0.001825112118692755,
+     "zB": 0.08349510761391157,
+     "status": "ABSENT"
+    }
+   }
+  },
+  {
+   "id": "ctl-rc-ud-ces-train",
+   "side": "control",
+   "kind": "shuffled control",
+   "prediction": "NOT PRESENT in either sign (law-free by construction: global token shuffle + re-assigned unit lengths, as the atlas ct-* group); instrument check only, not part of the verdict",
+   "confidence": null,
+   "tokens": 299987,
+   "thin": false,
+   "halfTokens": [
+    149242,
+    150745
+   ],
+   "discover": {
+    "v": 0.000006414041318539158,
+    "nullMean": 0.0005836518991467334,
+    "nullSd": 0.0019824325574111304,
+    "z": -0.29117654251099084,
+    "z200": 0.08092131456136299,
+    "boot": [
+     -0.005139449306030989,
+     0.005969637398348556
+    ]
+   },
+   "confirm": {
+    "v": 0.001430772778315175,
+    "nullMean": 0.000609470538404811,
+    "nullSd": 0.002226812673719456,
+    "z": 0.3688241267903954,
+    "z200": 0.5134104130510888,
+    "boot": [
+     -0.003876971867806846,
+     0.005744054750893938
+    ]
+   },
+   "pocketV": 0.0007185934098168571,
+   "status": "ABSENT",
+   "status200": "ABSENT",
+   "holds": false,
+   "weakHold": false,
+   "constantInRange": null,
+   "vRange": null,
+   "absVMax": null,
+   "rivals": {
+    "surprGrow": {
+     "vA": 0.001199363897452602,
+     "zA": 1.460823042540938,
+     "vB": -0.001179727058721628,
+     "zB": -0.28347418894578424,
+     "status": "ABSENT"
+    },
+    "entCurv": {
+     "vA": -0.00007035477201748427,
+     "zA": -0.14679297860425086,
+     "vB": -0.00035946151457072305,
+     "zB": -0.5757715035533842,
+     "status": "ABSENT"
+    },
+    "rareSlope": {
+     "vA": -0.0011083760735182422,
+     "zA": -1.1926848996323307,
+     "vB": 0.0004307996094678269,
+     "zB": 0.059115730723247904,
+     "status": "ABSENT"
+    },
+    "initDev": {
+     "vA": -0.0011727786187516848,
+     "zA": -0.5407453502336383,
+     "vB": 0.007656502650274016,
+     "zB": 1.0219926716231211,
+     "status": "ABSENT"
+    },
+    "finalDev": {
+     "vA": 0.0015447456575368673,
+     "zA": -0.39601939605204706,
+     "vB": 0.009908517121505298,
+     "zB": 0.43397029807029175,
+     "status": "ABSENT"
+    }
+   },
+   "variants": {
+    "logcount": {
+     "vA": 0.00005620885872394549,
+     "zA": -0.2548552820980352,
+     "vB": 0.0013542941685728495,
+     "zB": 0.3491294976386238,
+     "status": "ABSENT"
+    },
+    "hapax": {
+     "vA": 0.0004095070555357369,
+     "zA": 0.34798002562228586,
+     "vB": 0.002650417542970824,
+     "zB": 0.7008711239928958,
+     "status": "ABSENT"
+    },
+    "content": {
+     "vA": -0.000985388927482909,
+     "zA": -0.3545047806093009,
+     "vB": 0.00111688541715824,
+     "zB": 0.3377392022882632,
+     "status": "ABSENT"
+    }
+   }
+  },
+  {
+   "id": "ctl-rc-ts-opencode",
+   "side": "control",
+   "kind": "shuffled control",
+   "prediction": "NOT PRESENT in either sign (law-free by construction: global token shuffle + re-assigned unit lengths, as the atlas ct-* group); instrument check only, not part of the verdict",
+   "confidence": null,
+   "tokens": 291318,
+   "thin": false,
+   "halfTokens": [
+    146255,
+    145063
+   ],
+   "discover": {
+    "v": 0.004170459253049582,
+    "nullMean": -0.0003698896509950891,
+    "nullSd": 0.003491713028487454,
+    "z": 1.3003213228011086,
+    "z200": 1.3532345505950232,
+    "boot": [
+     -0.0017995191426173878,
+     0.011673872116700746
+    ]
+   },
+   "confirm": {
+    "v": -0.006184695687510977,
+    "nullMean": 0.0009813210650224389,
+    "nullSd": 0.0035452348101469703,
+    "z": -2.021309486193481,
+    "z200": -1.995097024828598,
+    "boot": [
+     -0.01239184202819676,
+     -0.0004987356246883329
+    ]
+   },
+   "pocketV": -0.0010071182172306974,
+   "status": "AMBIGUOUS",
+   "status200": "ABSENT",
+   "holds": false,
+   "weakHold": false,
+   "constantInRange": null,
+   "vRange": null,
+   "absVMax": null,
+   "rivals": {
+    "surprGrow": {
+     "vA": -0.003690119794859267,
+     "zA": -1.6727578991428853,
+     "vB": 0.0015549996304848055,
+     "zB": 0.5388070687376261,
+     "status": "ABSENT"
+    },
+    "entCurv": {
+     "vA": 0.0010525195198336369,
+     "zA": 2.168688104844598,
+     "vB": 0.000002218759275113599,
+     "zB": 0.046757859005078305,
+     "status": "AMBIGUOUS"
+    },
+    "rareSlope": {
+     "vA": 0.0015911158512916582,
+     "zA": 0.7327190654241867,
+     "vB": -0.0028382358027737756,
+     "zB": -0.8666283937342172,
+     "status": "ABSENT"
+    },
+    "initDev": {
+     "vA": -0.0014683653799470466,
+     "zA": -0.26895544490690754,
+     "vB": 0.0007378843320150696,
+     "zB": 0.22187830536449285,
+     "status": "ABSENT"
+    },
+    "finalDev": {
+     "vA": 0.005810740312789839,
+     "zA": 1.167182305328417,
+     "vB": -0.01042853680282675,
+     "zB": -1.3117864854893668,
+     "status": "ABSENT"
+    }
+   },
+   "variants": {
+    "logcount": {
+     "vA": 0.0034262636833936547,
+     "zA": 0.9484072621722941,
+     "vB": -0.005824841744688717,
+     "zB": -1.888466008710037,
+     "status": "ABSENT"
+    },
+    "hapax": {
+     "vA": 0.0035080029893329256,
+     "zA": 0.41697759806178275,
+     "vB": -0.004284504291792054,
+     "zB": -2.516226488398153,
+     "status": "AMBIGUOUS"
+    },
+    "content": {
+     "vA": -0.0017164313475353853,
+     "zA": -0.5793771299067686,
+     "vB": -0.0009024818176184649,
+     "zB": -0.7010293278641582,
+     "status": "ABSENT"
+    }
+   }
+  }
+ ]
+}

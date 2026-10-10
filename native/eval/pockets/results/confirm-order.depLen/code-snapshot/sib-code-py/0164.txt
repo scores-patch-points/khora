@@ -1,0 +1,20 @@
+"""Append-only subscription and playback state. Stdlib only."""
+
+
+def fold_events(events):
+    """Fold an append-only list of event dicts into the current state.
+
+    Start with subscriptions = [] (a list), positions = {} (a dict), and
+    played = [] (a list). For each event in events, read event["op"]:
+
+    - "subscribe": append event["url"] to subscriptions, but only if it is not
+      already in the list.
+    - "unsubscribe": remove event["url"] from subscriptions if it is present.
+    - "position": set positions[event["guid"]] = event["seconds"].
+    - "played": append event["guid"] to played, but only if it is not already
+      in the list.
+
+    Ignore any other op. Return the dict
+    {"subscriptions": subscriptions, "positions": positions, "played": played}.
+    """
+    raise NotImplementedError

@@ -1,0 +1,83 @@
+{
+ "n": 245,
+ "nPos": 109,
+ "strata": {
+  "0": {
+   "n": 12,
+   "pos": 10
+  },
+  "+": {
+   "n": 74,
+   "pos": 71
+  },
+  "-": {
+   "n": 159,
+   "pos": 28
+  }
+ },
+ "signSplitBySigmaSign": {
+  "sigmaSign_eta2": 0.5436126739361439,
+  "register_eta2_plain": 0.5564944340950474,
+  "registerWithinSigmaSign": {
+   "eta2": 0.5564944340950474,
+   "nullMean": 0.3557085043905749,
+   "p": 0.0004997501249375312
+  },
+  "groupWithinSigmaSign": {
+   "eta2": 0.2727254790665804,
+   "nullMean": 0.15709928866751882,
+   "p": 0.0004997501249375312
+  },
+  "englishWithinSigmaSign": {
+   "eta2": 0.22940909585331443,
+   "nullMean": 0.1389892354168404,
+   "p": 0.0034982508745627187
+  },
+  "sigmaSignWithinRegister": {
+   "eta2": 0.5436126739361439,
+   "nullMean": 0.2647147170104284,
+   "p": 0.0004997501249375312
+  }
+ },
+ "looAccuracy": {
+  "sigmaSignOnly": 0.8653061224489796,
+  "registerThenGroup": 0.8285714285714286,
+  "sigmaSignThenRegisterInStratum": 0.8244897959183674,
+  "sigmaSignThenEnglishInStratum": 0.8653061224489796,
+  "sigmaSignRegisterEnglish": 0.8530612244897959,
+  "globalMajority": 0.5551020408163265
+ },
+ "exceptions": [
+  "bk-cryptic(wordplay,en,sigma -0.050,P+)",
+  "bk-jungle-book(children,en,sigma -0.005,P+)",
+  "cd-cc-erlang(code,x-erlang,sigma -0.049,P+)",
+  "cd-cc-sql(code,x-sql,sigma -0.018,P+)",
+  "cd-cc-toml(config,x-toml,sigma -0.048,P+)",
+  "cd-gene-products(nomenclature,en,sigma 0.022,P-)",
+  "cd-taxon-en(academic,en,sigma -0.050,P+)",
+  "fm-law-ar(legal,es,sigma 0.038,P-)",
+  "fm-law-pl(legal,pl,sigma -0.075,P+)",
+  "ml-fra-hugo-miserables(book,fra,sigma -0.011,P+)",
+  "ml-lat-spinoza(treatise,lat,sigma -0.071,P+)",
+  "ml-pc-alice-en(children,eng,sigma -0.017,P+)",
+  "ml-san-natyasastra(treatise,san,sigma -0.258,P+)",
+  "ml-san-sutra(treatise,san,sigma -0.235,P+)",
+  "bk-alice(children,en,sigma -0.021,P+)",
+  "bk-eastman(memoir,en,sigma -0.008,P+)",
+  "bk-wpa-in(dialect,en,sigma -0.013,P+)",
+  "cd-cc-cobol(code,x-cobol,sigma 0.021,P-)",
+  "cd-ipa-arab(notation,mul,sigma -0.010,P+)",
+  "ml-en-younger-edda(translation,eng-tr,sigma -0.004,P+)",
+  "ml-jpn-soseki(book,jpn,sigma -0.123,P+)",
+  "ml-lzh-shuowen(lexicon,lzh,sigma -0.191,P+)",
+  "fm-d2l(academic,en,sigma -0.015,P+)",
+  "fm-law-no(legal,no,sigma -0.010,P+)",
+  "ml-apics-prose(academic,eng-ling,sigma -0.022,P+)",
+  "ml-grc-plato(treatise,grc,sigma -0.025,P+)",
+  "ml-jpn-zuihitsu(book,jpn-cls,sigma -0.190,P+)",
+  "ml-lzh-philosophy(treatise,lzh,sigma -0.172,P+)",
+  "ml-pc-grimm-de(children,deu,sigma -0.006,P+)",
+  "ud-eus(treebank,eus,sigma -0.196,P+)",
+  "ud-lzh(treebank,lzh,sigma -0.055,P+)"
+ ]
+}

@@ -1,0 +1,70 @@
+{
+ "family": "fig",
+ "stats": [
+  {
+   "id": "figShare",
+   "null": "unit-order"
+  },
+  {
+   "id": "arrival",
+   "null": "unit-order"
+  },
+  {
+   "id": "persist",
+   "null": "unit-order"
+  },
+  {
+   "id": "crpTheta",
+   "null": "unit-order"
+  },
+  {
+   "id": "fano",
+   "null": "unit-order"
+  },
+  {
+   "id": "introLeft",
+   "null": "within-unit"
+  },
+  {
+   "id": "introRight",
+   "null": "within-unit"
+  },
+  {
+   "id": "introLeftFq",
+   "null": "within-unit"
+  },
+  {
+   "id": "initEnrich",
+   "null": "within-unit"
+  },
+  {
+   "id": "initSplit",
+   "null": "within-unit"
+  },
+  {
+   "id": "initFollow",
+   "null": "within-unit"
+  },
+  {
+   "id": "converge",
+   "null": "within-unit"
+  }
+ ],
+ "predict": {
+  "figShare": "universal+",
+  "arrival": "universal+",
+  "persist": "universal-",
+  "crpTheta": "specific",
+  "fano": "specific",
+  "introLeft": "specific",
+  "introRight": "specific",
+  "introLeftFq": "specific",
+  "initEnrich": "universal+",
+  "initSplit": "universal+",
+  "initFollow": "specific",
+  "converge": "specific"
+ },
+ "note": "written before any statistic of the family was computed on any data; written 2026-10-07",
+ "sha256": "42a984dc7da1fcb79e30cd6244e552c521c24d04e39b9baf6b7944b1a696f6bf",
+ "figMjsSha256AtFreeze": "a467b3c00f56a46c53aa53c2eb00e9c870973f18db6a69f2b46a47b015946e47"
+}

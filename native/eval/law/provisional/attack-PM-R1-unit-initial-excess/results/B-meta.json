@@ -1,0 +1,128 @@
+{
+ "hdr": "872c6935489826989e45ddc4f9ed8b2c84b2c73d0e3ba5fc4f129009a3dc6f9f",
+ "B0": {
+  "headerShaNow": "eab108add7c44bf45e0e28f933624a7396c82f29ffefd52a6aa9d2085fa58fce",
+  "recorded": "eab108add7c44bf45e0e28f933624a7396c82f29ffefd52a6aa9d2085fa58fce",
+  "match": true,
+  "rowHdrs": [
+   "eab108add7c44bf45e0e28f933624a7396c82f29ffefd52a6aa9d2085fa58fce"
+  ],
+  "allRowsMatch": true,
+  "manifestShaMatches": true,
+  "confirmMtime": "2026-10-07T06:51:29.181Z",
+  "resultBirths": {
+   "book.jsonl": "2026-10-07T06:52:03.178Z",
+   "code.jsonl": "2026-10-07T06:52:05.973Z",
+   "irc.jsonl": "2026-10-07T06:51:58.946Z",
+   "prospective-sov.jsonl": "2026-10-07T06:58:59.750Z",
+   "repl-book.jsonl": "2026-10-07T06:52:11.100Z",
+   "repl-code.jsonl": "2026-10-07T06:52:15.075Z",
+   "repl-irc.jsonl": "2026-10-07T06:52:08.400Z",
+   "repl-ud.jsonl": "2026-10-07T06:51:58.463Z",
+   "ud.jsonl": "2026-10-07T06:51:58.475Z"
+  },
+  "confirmPrecedesAllResults": true
+ },
+ "B1": {
+  "FULL": {
+   "nCells": 52,
+   "nFamilies": 19,
+   "medLower": 0.5661,
+   "famBootCI": [
+    0.5414,
+    0.6488
+   ],
+   "pMedianGE055_family": 0.9073,
+   "cellBootCI": [
+    0.5405,
+    0.591
+   ],
+   "pMedianGE055_cell": 0.831,
+   "lofoMin": [
+    "Uralic",
+    0.5645
+   ],
+   "lofoMax": [
+    "Slavic",
+    0.5817
+   ],
+   "verdict": "MARGINAL",
+   "familySizes": {
+    "Slavic": 11,
+    "Romance": 8,
+    "Afroasiatic": 3,
+    "Celtic": 2,
+    "Germanic": 9,
+    "Uralic": 3,
+    "Basque": 1,
+    "Hellenic": 1,
+    "IndoIranian": 2,
+    "Armenian": 1,
+    "Austronesian": 1,
+    "Japonic": 1,
+    "Kartvelian": 1,
+    "Baltic": 2,
+    "SinoTibetan": 2,
+    "Dravidian": 1,
+    "Turkic": 1,
+    "Austroasiatic": 1,
+    "NigerCongo": 1
+   }
+  },
+  "CAUSAL4": {
+   "nCells": 44,
+   "nFamilies": 16,
+   "medLower": 0.5546,
+   "famBootCI": [
+    0.515,
+    0.6073
+   ],
+   "pMedianGE055_family": 0.6847,
+   "cellBootCI": [
+    0.515,
+    0.5842
+   ],
+   "pMedianGE055_cell": 0.6803,
+   "lofoMin": [
+    "Uralic",
+    0.554
+   ],
+   "lofoMax": [
+    "Slavic",
+    0.5625
+   ],
+   "verdict": "FRAGILE",
+   "familySizes": {
+    "Slavic": 10,
+    "Romance": 6,
+    "Celtic": 2,
+    "Germanic": 9,
+    "Uralic": 3,
+    "Basque": 1,
+    "Hellenic": 1,
+    "Afroasiatic": 2,
+    "IndoIranian": 2,
+    "Armenian": 1,
+    "Austronesian": 1,
+    "Baltic": 1,
+    "SinoTibetan": 2,
+    "Turkic": 1,
+    "Austroasiatic": 1,
+    "NigerCongo": 1
+   }
+  }
+ },
+ "B2": {
+  "nValid": 52,
+  "nPOS": 27,
+  "bh05": 27,
+  "bh10": 29,
+  "bhShare05": 0.5192,
+  "pMin": 0.001,
+  "nullRows": 110,
+  "nullPOS": 4,
+  "p0": 0.05,
+  "binomialTail": 1.035446014684902e-21,
+  "verdict": "ROBUST"
+ }
+}

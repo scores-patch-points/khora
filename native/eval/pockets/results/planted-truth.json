@@ -1,0 +1,1428 @@
+{
+ "version": 1,
+ "date": "2026-10-07",
+ "group": "pl",
+ "protocol": "eval/pockets/PROTOCOL.md sha256 3b7363c5b01642c06ad5df8d059e5909f237516481e0ed8af3379aa39c4330fc",
+ "generator": {
+  "loader": "loaders/planted.mjs (+ _planted-core.mjs, _planted-worlds1.mjs, _planted-worlds2.mjs)",
+  "seedNamespace": "planted-v1",
+  "designedVocabulary": 5000,
+  "documentTokens": 1000,
+  "unitLengthLaws": {
+   "D1": {
+    "kind": "lognormal",
+    "mu": 2.1972245773362196,
+    "sigma": 0.55,
+    "min": 2,
+    "max": 45
+   },
+   "D2": {
+    "kind": "shifted-exponential",
+    "mean": 14,
+    "min": 2,
+    "max": 70
+   }
+  },
+  "lengthLaw": {
+   "a": 2,
+   "b": 2.4,
+   "noise": 0.7,
+   "beta": 0.1,
+   "zRef": 7,
+   "lnLRef": 2.1972245773362196,
+   "lnLScale": 0.55
+  },
+  "determinism": "every document has its own rngOf(seedOf(TAG, worldId, 'doc', d)); no Math.random, no Date"
+ },
+ "gate": "G0 (protocol): iid worlds = pl-null, pl-null2 (fewer than 2% of cells at |z| >= 4 in both halves); planted phenomena = every entry of worlds.*.phenomena with zDetectable != false (needs one statistic with |z| >= 4 in both halves and the stated sign against the stated null); entries with zDetectable false are to be checked on raw v (zipf-abbreviation) or are negative controls (sign-cancellation).",
+ "instrumentNotes": [
+  {
+   "id": "lexicon-level-laws-are-invisible-to-z",
+   "text": "All three atlas nulls (within-unit, unit-order, token-global) keep every token's type and the unigram counts. A statistic that depends only on the lexicon or the unigram law (Zipf exponent, collision probability, word length versus frequency, mean unit length) has v equal to every null draw, so nullSd is exactly 0 (the atlas stores z = null) or float noise (the reference run shows z of exactly +/-0.95 or +/-0.9 on such statistics). Such a statistic is NEVER PRESENT or ABSENT by the protocol's z rule; it can only be read from raw v across pockets: Zipf slope -1.00 (pl-null), -1.30 (pl-null2), -1.19 (pl-frames); Spearman(string length, rarity) 0.60 in pl-length versus 0.00-0.03 elsewhere. Any z of exactly +/-0.9..1.0 on such a statistic is a degenerate-null artefact and must not be read as ABSENT. The G0 requirement that every planted phenomenon is recovered by z cannot be met for pl-length / Zipf abbreviation; it is marked zDetectable: false and has to be checked on raw v (pl-length vs pl-null)."
+  },
+  {
+   "id": "zero-variance-null",
+   "text": "A statistic that is exactly 0 (or any constant) in every one of the 10 null draws has nullSd 0, so the atlas stores z = null although the observed value may be huge. Reference example: the number of types with >= 80% of >= 50 tokens at unit start is 24 / 23 in pl-frames and 0 in every shuffle of every world (z null, never PRESENT by the z rule). Statistics should be smooth (shares, correlations, entropies) rather than counts that are structurally 0 under the null; otherwise the cell status cannot be PRESENT."
+  },
+  {
+   "id": "null-draw-tails",
+   "text": "z uses 10 null draws, so it is a t-like variable with 9 degrees of freedom, not a normal one. Calibration on 20 replicate iid worlds of each kind (results/planted-calibration.json, 7 reference statistics with a defined z, both halves, 560 cells): |z| >= 4 in 1 cell (0.18%), |z| >= 2 in 54 cells (9.6%). The pre-registered iid-world gate (< 2% of cells at |z| >= 4) is therefore expected to hold, but with k statistics per half the gate tolerates one false cell only when 2 * k > 100; in the instrument-check reference run pl-null had 1 of its 14 non-degenerate cells (7 statistics x 2 halves) at |z| >= 4 (first-token equality of adjacent units, confirm half, z +4.73), pl-null2 had none of 14. The seed was not changed to hide it."
+  },
+  {
+   "id": "unit-order-null-relocates-units-across-documents",
+   "text": "nullView(unit-order) shuffles units over the whole view while docOf stays in place, so units move between documents. Document-level structure (a name present in 1/6 of documents, burst clustering inside a document) is destroyed by it; within-unit order structure is kept. A statistic whose phenomenon lives in unit order inside units (rank-bin flow) is NOT moved by this null."
+  },
+  {
+   "id": "sign-reversal-pairs-are-planted",
+   "text": "pl-burst and pl-markov plant opposite signs on the same adjacency statistics (adjacent identical tokens: + in pl-burst, - in pl-markov and pl-frames; window repeats the same), so a statistic that is a pure repetition rate must show REVERSAL across the planted worlds; pl-mix (40% burst) is built so that the net effect cancels. Planted pockets are excluded from law counts by protocol, so this is an instrument check only."
+  },
+  {
+   "id": "design-tuning-disclosed",
+   "text": "Parameters were chosen before any reference run except one: the Menzerath tilt of pl-length was reduced from beta 0.2 to 0.1 after the first reference run showed a window-repeat statistic reaching z +4.4 / +5.6 in pl-length as a by-product (any dependence of the drawn type on unit length makes tokens of one unit more alike than the shuffled null). At 0.1 the Menzerath correlation is -0.557 and the by-product is within noise. No other parameter or seed was changed after seeing results."
+  },
+  {
+   "id": "by-products-are-real-structure",
+   "text": "Each world's byProducts list effects that follow logically from the planted mechanism (document-boundary copying in pl-burst, the document cast in pl-frames, the unit-length dependence in pl-length). They are not instrument failures: a statistic firing on a by-product with the stated sign is correct, firing with another sign or in another world is a finding."
+  },
+  {
+   "id": "shared-lexicons",
+   "text": "pl-null, pl-burst, pl-markov, pl-frames, pl-parallel and pl-mix share lexicon A (type index -> string), pl-null2 uses lexicon B, pl-length lexicon L. String lengths of lexicon A and B are iid per type and unrelated to frequency; in lexicon L they follow the Zipf-abbreviation law. No statistic may use string content other than length; the strings carry no capitalisation, punctuation or word-class cue."
+  }
+ ],
+ "calibration": {
+  "file": "results/planted-calibration.json",
+  "reps": 20,
+  "statistics": [
+   "adjRepeat",
+   "repeat10",
+   "binAsym",
+   "firstMatch",
+   "lastMatch",
+   "docCover",
+   "menzerath"
+  ],
+  "worlds": {
+   "pl-null": {
+    "cells": 280,
+    "absZge4": 1,
+    "absZge2": 22,
+    "hits": [
+     {
+      "id": "pl-null-rep5",
+      "which": "discover",
+      "stat": "firstMatch",
+      "z": -4.03
+     }
+    ]
+   },
+   "pl-null2": {
+    "cells": 280,
+    "absZge4": 0,
+    "absZge2": 32,
+    "hits": []
+   }
+  }
+ },
+ "referenceRunFile": "results/planted-selfcheck.json",
+ "worlds": {
+  "pl-null": {
+   "id": "pl-null",
+   "summary": "NO structure. Tokens iid from Zipf(1.0) over 5000 types; unit lengths iid from D1 (discretised lognormal, median 9, mean 10.4, range 2-45); string length of a type iid, independent of its rank; documents are arbitrary 1000-token cuts.",
+   "design": {
+    "zipfExponent": 1,
+    "types": 5000,
+    "unitLength": "D1 lognormal(ln 9, 0.55) on 2..45",
+    "stringLength": "iid per type, 3-9 letters (.10 .20 .25 .20 .13 .08 .04)",
+    "documents": "100, each closed at the first unit boundary at or after 1000 tokens"
+   },
+   "phenomena": [],
+   "byProducts": [],
+   "mustNotFire": [
+    "every order, position, recurrence, neighbour, document-level and length statistic: z should be a null-distribution draw (|z| >= 4 in about 0.2-0.4% of cells with a 10-draw z, see instrumentNotes)"
+   ],
+   "latentConstants": "Zipf slope about -1.00 over ranks 1-300; chance collision probability of two tokens about 0.020; mean unit length 10.39; Spearman(string length, rarity) about 0.015. These are lexicon-level values: compare raw v across pockets, never z.",
+   "realised": {
+    "common": {
+     "tokens": 100561,
+     "units": 9682,
+     "docs": 100,
+     "types": 4872,
+     "meanUnitLen": 10.3864,
+     "zipfSlope300": -0.9976,
+     "collisionProb": 0.02,
+     "top3tokenShare": 0.2026
+    }
+   },
+   "referenceRun": {
+    "statisticsFiredInBothHalvesSameSign": [],
+    "definedCells": 14,
+    "cellsAbsZge4": 1,
+    "note": "reference statistics of tools/selfcheck-stats.mjs, not the atlas laws; definedCells = cells with a z that is not null, excluding the three lexicon-level reference statistics lenFreq, zipfSlope, meanUnitLen (their z is null or float noise); nInitBound has a null z when the null draws are all 0"
+   }
+  },
+  "pl-burst": {
+   "id": "pl-burst",
+   "summary": "Self-exciting repetition (Hawkes-like copy process) and nothing else. Every token, with probability q = 0.35, copies a token of its own document's history (units concatenated, history = the document so far) chosen by lag with weight exp(-(lag-1)/10) over lags 1-60; otherwise a fresh Zipf(1.0) draw. Unit lengths iid D1; the unigram law stays Zipf(1.0).",
+   "design": {
+    "q": 0.35,
+    "tau": 10,
+    "maxLag": 60,
+    "kernelWeights": "w(lag) = exp(-(lag-1)/10), lag 1..60 (normalised over the available history, so a very short history concentrates the copy)",
+    "freshLaw": "Zipf(1.0)",
+    "documents": "history resets at every document start"
+   },
+   "phenomena": [
+    {
+     "zDetectable": true,
+     "id": "local-repetition",
+     "words": "A token's type recurs inside the preceding ~60 tokens of the same document far more often than chance, and the excess decays roughly exponentially with distance (time constant about 10 tokens, chains of copies stretch it).",
+     "sign": "+ for any repetition rate (adjacent identical tokens, same type within the last k tokens, local repeat-probability at lag 1..20, local-frequency over global-frequency); the lag profile is monotone decreasing toward the chance level; - for evenness/spread (document coverage of a type, type-token ratio inside windows, mean gap between occurrences relative to chance).",
+     "nullEffect": {
+      "token-global": "destroys it (strong)",
+      "within-unit": "destroys the ADJACENCY/lag-profile part (shuffled positions) but keeps unit-level repeat counts, so bag-per-unit repeat statistics stay near 0",
+      "unit-order": "destroys only the cross-unit-boundary part; repeats inside one unit survive"
+     },
+     "strength": "strong (reference repeat-within-10 rate 0.34 vs 0.14 chance; adjacent-identical 0.065 vs 0.020)"
+    },
+    {
+     "zDetectable": true,
+     "id": "self-excitation",
+     "words": "Repetition feeds repetition: a type that has just been copied is likelier to be copied again (rich-get-richer), so occurrences come in clusters whose sizes are heavier-tailed than iid.",
+     "sign": "+ for burstiness / dispersion of counts per window or per document (variance over mean > chance), cluster-size tails, Fano factor; - for the share of documents in which a mid-frequency type occurs.",
+     "nullEffect": {
+      "token-global": "destroys it (strong)",
+      "within-unit": "keeps document-level dispersion (z near 0 for document-level counts)",
+      "unit-order": "destroys it too (whole units are relocated to other documents, so document-level clustering is lost; only repeats inside a single unit survive)"
+     },
+     "strength": "strong at document-coverage level (reference z of mean document coverage of types with >= 100 tokens: -15 and -38 in the two halves)"
+    }
+   ],
+   "byProducts": [
+    "first and last token of ADJACENT units are equal more often than chance (copies cross unit boundaries): + sign against the unit-order null (reference first-token equality 0.046 vs 0.018, z +14.5 / +10.1)",
+    "the first tokens of a document repeat heavily (short history, normalised kernel)"
+   ],
+   "mustNotFire": [
+    "frequency-rank-bin transition asymmetry (reference z 1.8 and 0.8)",
+    "unit-initial specialisation, any length-versus-frequency or unit-length-versus-word-length statistic",
+    "unigram statistics (Zipf slope -1.00 is unchanged)"
+   ],
+   "latentConstants": null,
+   "realised": {
+    "common": {
+     "tokens": 100616,
+     "units": 9714,
+     "docs": 100,
+     "types": 4629,
+     "meanUnitLen": 10.3578,
+     "zipfSlope300": -0.9994,
+     "collisionProb": 0.0207,
+     "top3tokenShare": 0.2059
+    },
+    "burst": {
+     "sameTypeAtLag": {
+      "lag1": {
+       "measured": 0.063,
+       "firstOrderKernelExcess": 0.0334
+      },
+      "lag2": {
+       "measured": 0.0602,
+       "firstOrderKernelExcess": 0.0302
+      },
+      "lag3": {
+       "measured": 0.0579,
+       "firstOrderKernelExcess": 0.0273
+      },
+      "lag5": {
+       "measured": 0.0531,
+       "firstOrderKernelExcess": 0.0224
+      },
+      "lag10": {
+       "measured": 0.0438,
+       "firstOrderKernelExcess": 0.0136
+      },
+      "lag20": {
+       "measured": 0.0323,
+       "firstOrderKernelExcess": 0.005
+      },
+      "lag40": {
+       "measured": 0.0247,
+       "firstOrderKernelExcess": 0.0007
+      },
+      "lag60": {
+       "measured": 0.0219,
+       "firstOrderKernelExcess": 0.0001
+      }
+     },
+     "note": "measured = P(x_t == x_{t-lag}) inside a document stream (units concatenated); firstOrderKernelExcess = q*w(lag)/sum(w) is the direct-copy part only, chains of copies add to it; iid baseline = collisionProb"
+    }
+   },
+   "referenceRun": {
+    "statisticsFiredInBothHalvesSameSign": [
+     {
+      "stat": "adjRepeat",
+      "sign": "+",
+      "null": "within-unit",
+      "z": [
+       11.2,
+       9.6
+      ],
+      "v": [
+       0.0646,
+       0.0622
+      ],
+      "nullMean": [
+       0.0551,
+       0.0537
+      ]
+     },
+     {
+      "stat": "repeat10",
+      "sign": "+",
+      "null": "token-global",
+      "z": [
+       201.2,
+       263.2
+      ],
+      "v": [
+       0.3447,
+       0.3406
+      ],
+      "nullMean": [
+       0.148,
+       0.145
+      ]
+     },
+     {
+      "stat": "firstMatch",
+      "sign": "+",
+      "null": "unit-order",
+      "z": [
+       14.5,
+       10.1
+      ],
+      "v": [
+       0.0463,
+       0.0416
+      ],
+      "nullMean": [
+       0.0211,
+       0.0198
+      ]
+     },
+     {
+      "stat": "lastMatch",
+      "sign": "+",
+      "null": "unit-order",
+      "z": [
+       13.3,
+       9.5
+      ],
+      "v": [
+       0.0433,
+       0.0434
+      ],
+      "nullMean": [
+       0.0219,
+       0.0222
+      ]
+     },
+     {
+      "stat": "docCover",
+      "sign": "-",
+      "null": "token-global",
+      "z": [
+       -15,
+       -38.2
+      ],
+      "v": [
+       0.9305,
+       0.8519
+      ],
+      "nullMean": [
+       0.9773,
+       0.9351
+      ]
+     }
+    ],
+    "definedCells": 14,
+    "cellsAbsZge4": 10,
+    "note": "reference statistics of tools/selfcheck-stats.mjs, not the atlas laws; definedCells = cells with a z that is not null, excluding the three lexicon-level reference statistics lenFreq, zipfSlope, meanUnitLen (their z is null or float noise); nInitBound has a null z when the null draws are all 0"
+   }
+  },
+  "pl-markov": {
+   "id": "pl-markov",
+   "summary": "First-order Markov chain over 8 frequency-rank bins with a strong ONE-WAY flow, and nothing else. The chain restarts at every unit (first bin drawn from the stationary law); within a bin the type is Zipf(1.0) restricted to the bin. The stationary law is set equal to the Zipf mass of each bin, so the UNIGRAM law is exactly Zipf(1.0): no unigram statistic can see it.",
+   "design": {
+    "bins": "type-index ranges [0,2) [2,7) [7,23) [23,69) [69,204) [204,594) [594,1724) [1724,5000) = ranks 1-2, 3-7, 8-23, 24-69, 70-204, 205-594, 595-1724, 1725-5000",
+    "flow": "bin b goes preferentially to FLOW[b]; FLOW = [1,3,0,5,2,7,4,6] (a single 8-cycle 0>1>3>5>7>6>4>2>0), pattern 1 + 11*[j = FLOW[i]] made doubly consistent with the Zipf bin masses by iterative proportional fitting",
+    "transitionMatrix": "designM in realised.markov (0.54-0.73 on the flow target, 0.03-0.09 elsewhere)",
+    "stationary": "Zipf mass of the bin (0.165, 0.120, 0.126, 0.119, 0.119, 0.117, 0.117, 0.117)",
+    "restart": "every unit"
+   },
+   "phenomena": [
+    {
+     "zDetectable": true,
+     "id": "rank-bin-flow",
+     "words": "The frequency-rank class of a token strongly predicts the class of the next token, and the dependence is directional: bin b is followed by bin FLOW[b] with probability 0.54-0.73, so the left-to-right transition matrix differs from its transpose (right-to-left).",
+     "sign": "+ for transition asymmetry / directionality of rank-bin pairs, + for mutual information between the rank class of adjacent tokens, + for predictability of the next token's rank class from the previous one (entropy of the next bin below the unigram entropy).",
+     "nullEffect": {
+      "within-unit": "destroys it (strong; reference asymmetry 0.49 and 0.51 vs 0.02, z +121 / +210)",
+      "token-global": "destroys it (strong)",
+      "unit-order": "KEEPS it (the structure lives inside units): z near 0 for a within-unit statistic referenced to unit-order"
+     },
+     "strength": "very strong"
+    },
+    {
+     "zDetectable": true,
+     "id": "no-self-repetition",
+     "words": "Because the flow leaves the current bin, the same rank class repeats immediately only 4-9% of the time (iid: 12-17% for the head bins), so ADJACENT identical tokens and short-window repeats are RARER than chance.",
+     "sign": "- for adjacent-identical-token rate and for the same-type-within-10 rate (reference z -9.6 / -12.7 and -4.1 / -6.0).",
+     "nullEffect": {
+      "within-unit": "destroys it (positions shuffled)",
+      "token-global": "destroys it",
+      "unit-order": "keeps it"
+     },
+     "strength": "moderate; this is the sign-REVERSED partner of pl-burst"
+    }
+   ],
+   "byProducts": [
+    "recovered by REALISED rank bins the matrix is attenuated in the sparse tail (counts of 1-3 reshuffle ranks across bin edges): flow probabilities 0.43-0.54 for bins 3, 5-7 instead of 0.61-0.62 (see realised.markov)"
+   ],
+   "mustNotFire": [
+    "unigram statistics (Zipf slope -0.99)",
+    "any statistic referenced to the unit-order null",
+    "unit-initial specialisation, first/last-token equality of adjacent units (reference z -0.4..1.6)",
+    "document-level dispersion, length laws"
+   ],
+   "latentConstants": null,
+   "realised": {
+    "common": {
+     "tokens": 100623,
+     "units": 9786,
+     "docs": 100,
+     "types": 4868,
+     "meanUnitLen": 10.2823,
+     "zipfSlope300": -0.9923,
+     "collisionProb": 0.0198,
+     "top3tokenShare": 0.201
+    },
+    "markov": {
+     "designM": [
+      [
+       0.0945,
+       0.5409,
+       0.0654,
+       0.06,
+       0.0609,
+       0.059,
+       0.0597,
+       0.0596
+      ],
+      [
+       0.0811,
+       0.0387,
+       0.0562,
+       0.6185,
+       0.0523,
+       0.0507,
+       0.0513,
+       0.0512
+      ],
+      [
+       0.7345,
+       0.0292,
+       0.0424,
+       0.0389,
+       0.0395,
+       0.0382,
+       0.0387,
+       0.0386
+      ],
+      [
+       0.0819,
+       0.0391,
+       0.0567,
+       0.052,
+       0.0528,
+       0.614,
+       0.0518,
+       0.0517
+      ],
+      [
+       0.0772,
+       0.0368,
+       0.6415,
+       0.049,
+       0.0498,
+       0.0482,
+       0.0488,
+       0.0487
+      ],
+      [
+       0.0815,
+       0.0389,
+       0.0564,
+       0.0517,
+       0.0525,
+       0.0509,
+       0.0515,
+       0.6166
+      ],
+      [
+       0.0805,
+       0.0384,
+       0.0557,
+       0.0511,
+       0.6224,
+       0.0503,
+       0.0509,
+       0.0508
+      ],
+      [
+       0.0813,
+       0.0388,
+       0.0563,
+       0.0517,
+       0.0524,
+       0.0508,
+       0.6173,
+       0.0513
+      ]
+     ],
+     "realisedMByDesignBin": [
+      [
+       0.0904,
+       0.5445,
+       0.0667,
+       0.0601,
+       0.0596,
+       0.0581,
+       0.0591,
+       0.0615
+      ],
+      [
+       0.0816,
+       0.039,
+       0.0573,
+       0.6143,
+       0.0544,
+       0.0566,
+       0.0483,
+       0.0485
+      ],
+      [
+       0.7341,
+       0.0309,
+       0.0443,
+       0.037,
+       0.0386,
+       0.0378,
+       0.038,
+       0.0393
+      ],
+      [
+       0.0862,
+       0.0372,
+       0.054,
+       0.0477,
+       0.0551,
+       0.6184,
+       0.0479,
+       0.0535
+      ],
+      [
+       0.0782,
+       0.0337,
+       0.6494,
+       0.0468,
+       0.049,
+       0.0489,
+       0.0439,
+       0.0502
+      ],
+      [
+       0.084,
+       0.0409,
+       0.0551,
+       0.0498,
+       0.0556,
+       0.0552,
+       0.0551,
+       0.6044
+      ],
+      [
+       0.0817,
+       0.0384,
+       0.0548,
+       0.0501,
+       0.6252,
+       0.0502,
+       0.0514,
+       0.0482
+      ],
+      [
+       0.0843,
+       0.0379,
+       0.0556,
+       0.0529,
+       0.0524,
+       0.0499,
+       0.6183,
+       0.0486
+      ]
+     ],
+     "maxAbsDiffByDesignBin": 0.0122,
+     "realisedMByRealisedRankBin": [
+      [
+       0.0904,
+       0.5445,
+       0.0667,
+       0.0605,
+       0.0595,
+       0.0592,
+       0.0617,
+       0.0576
+      ],
+      [
+       0.0816,
+       0.039,
+       0.0573,
+       0.6066,
+       0.0625,
+       0.0562,
+       0.0524,
+       0.0443
+      ],
+      [
+       0.7341,
+       0.0309,
+       0.0443,
+       0.0376,
+       0.0383,
+       0.0391,
+       0.0388,
+       0.0367
+      ],
+      [
+       0.0857,
+       0.0374,
+       0.0627,
+       0.0474,
+       0.0887,
+       0.5367,
+       0.0898,
+       0.0516
+      ],
+      [
+       0.0779,
+       0.0336,
+       0.6069,
+       0.0469,
+       0.0493,
+       0.0558,
+       0.0581,
+       0.0715
+      ],
+      [
+       0.085,
+       0.0408,
+       0.085,
+       0.0515,
+       0.1066,
+       0.0581,
+       0.1406,
+       0.4324
+      ],
+      [
+       0.0811,
+       0.0383,
+       0.0531,
+       0.0565,
+       0.4577,
+       0.0851,
+       0.1398,
+       0.0884
+      ],
+      [
+       0.0849,
+       0.0379,
+       0.0572,
+       0.0531,
+       0.1139,
+       0.1034,
+       0.445,
+       0.1045
+      ]
+     ],
+     "maxAbsDiffByRealisedRankBin": 0.1842,
+     "flowBin": [
+      1,
+      3,
+      0,
+      5,
+      2,
+      7,
+      4,
+      6
+     ],
+     "designFlowProb": [
+      0.5409,
+      0.6185,
+      0.7345,
+      0.614,
+      0.6415,
+      0.6166,
+      0.6224,
+      0.6173
+     ],
+     "realisedFlowProbByDesignBin": [
+      0.5445,
+      0.6143,
+      0.7341,
+      0.6184,
+      0.6494,
+      0.6044,
+      0.6252,
+      0.6183
+     ],
+     "realisedFlowProbByRealisedRankBin": [
+      0.5445,
+      0.6066,
+      0.7341,
+      0.5367,
+      0.6069,
+      0.4324,
+      0.4577,
+      0.445
+     ],
+     "designDiagonal": [
+      0.0945,
+      0.0387,
+      0.0424,
+      0.052,
+      0.0498,
+      0.0509,
+      0.0509,
+      0.0513
+     ],
+     "stationaryZipfMass": [
+      0.1649,
+      0.1202,
+      0.1255,
+      0.1192,
+      0.1187,
+      0.1173,
+      0.1171,
+      0.1171
+     ],
+     "note": "design bins = the generator's frequency-rank bins (type index ranges, ranks 1-2, 3-7, 8-23, 24-69, 70-204, 205-594, 595-1724, 1725-5000). A reader only sees REALISED frequency ranks: in the sparse tail (counts of 1-3) sampling noise reshuffles ranks across bin edges, which attenuates the matrix recovered by realised-rank bins (see the second matrix)."
+    }
+   },
+   "referenceRun": {
+    "statisticsFiredInBothHalvesSameSign": [
+     {
+      "stat": "adjRepeat",
+      "sign": "-",
+      "null": "within-unit",
+      "z": [
+       -9.6,
+       -12.7
+      ],
+      "v": [
+       0.0101,
+       0.01
+      ],
+      "nullMean": [
+       0.0161,
+       0.0166
+      ]
+     },
+     {
+      "stat": "repeat10",
+      "sign": "-",
+      "null": "token-global",
+      "z": [
+       -4.1,
+       -6
+      ],
+      "v": [
+       0.138,
+       0.1357
+      ],
+      "nullMean": [
+       0.1424,
+       0.1411
+      ]
+     },
+     {
+      "stat": "binAsym",
+      "sign": "+",
+      "null": "within-unit",
+      "z": [
+       120.6,
+       210.1
+      ],
+      "v": [
+       0.4913,
+       0.5073
+      ],
+      "nullMean": [
+       0.0164,
+       0.0153
+      ]
+     }
+    ],
+    "definedCells": 14,
+    "cellsAbsZge4": 6,
+    "note": "reference statistics of tools/selfcheck-stats.mjs, not the atlas laws; definedCells = cells with a z that is not null, excluding the three lexicon-level reference statistics lenFreq, zipfSlope, meanUnitLen (their z is null or float noise); nInitBound has a null z when the null draws are all 0"
+   }
+  },
+  "pl-frames": {
+   "id": "pl-frames",
+   "summary": "Rigid frames over 3 role classes plus a unit-initial vocative slot. A unit is [vocative name] + one of 7 frames; slots are filled from 8 function words (fixed per frame position), two open classes A and B (2484 types each, Zipf(1.0) inside the class) and, in the vocative slot only, a per-document cast of 4 names out of 24 recurring names.",
+   "design": {
+    "frames": "A fw0 B (.22) | A fw1 B fw2 A (.14) | fw3 A B (.12) | B fw0 A A (.14) | A fw4 B fw5 B (.10) | fw6 A fw7 B (.12) | A B fw1 A (.16)",
+    "vocativeProb": 0.35,
+    "castPerDocument": 4,
+    "namesTotal": 24,
+    "functionWords": 8,
+    "openClassTypes": "2 x 2484",
+    "meanUnitLength": "4.24 (3-6 tokens, +1 with a vocative)",
+    "documents": "100 x about 1000 tokens, about 236 units each"
+   },
+   "phenomena": [
+    {
+     "zDetectable": true,
+     "id": "rigid-frames",
+     "words": "The 8 function words sit in fixed slots; their neighbours are always open-class types (a function word is never next to another function word, never unit-final, and only two of them (fw3, fw6) ever start a frame), so the left and right neighbour of a frequent type is far more predictable than for an iid token and the frequent types are position-bound (never last, and only two of them ever first).",
+     "sign": "+ for predictability of neighbours of the most frequent types (low neighbour entropy), + for context determinism of high-frequency types, - for the share of unit-final tokens that are top-frequency types (0 of 23,622 units end in a function word), + for left/right positional asymmetry of frequent types.",
+     "nullEffect": {
+      "within-unit": "destroys it (strong)",
+      "token-global": "destroys it (strong)",
+      "unit-order": "keeps it"
+     },
+     "strength": "very strong (reference rank-bin asymmetry 0.12-0.14 vs 0.02, z +53 / +45)"
+    },
+    {
+     "zDetectable": true,
+     "id": "company-classes",
+     "words": "The 4968 open-class types fall into two distributional classes A and B that occupy different slots: types of one class share their left and right neighbour sets (fw-neighbour profile) and differ from the other class, so a reader that only counts neighbours can cluster open-class types into two groups ('you know a word by the company it keeps').",
+     "sign": "+ for second-order / context-vector similarity of same-class pairs above cross-class pairs (above a within-unit shuffle), + for clusterability of types by neighbour profile.",
+     "nullEffect": {
+      "within-unit": "destroys it (strong)",
+      "token-global": "destroys it",
+      "unit-order": "keeps it"
+     },
+     "strength": "moderate; needs enough tokens per type, so only the commonest few hundred open-class types are informative. Measured (realised.frames.classContext): mean cosine of neighbour profiles 0.94 for same-class pairs vs 0.57 for cross-class pairs, versus 0.86 vs 0.78 after a within-unit shuffle (the shuffle keeps unit bags, so part of the gap survives it)"
+    },
+    {
+     "zDetectable": true,
+     "id": "vocative-names",
+     "words": "24 'name' types occur ONLY in the first slot of a unit (100% of their 8,220 tokens), in 35% of units; each document has a cast of 4 of the 24 names, so a given name occurs in about 1/6 of the documents (17 of 100) and, where present, about 20 times; the names are the types at realised frequency ranks 22-66; after a name comes the first token of a frame (open-class type or function word, never another name).",
+     "sign": "+ for unit-initial concentration of a small recurring set of types, + for position-boundness of a type (share of its tokens at unit start near 1, versus 0-0.5 for all others), + for recurrence/standing inside documents and - for document coverage of exactly these types (bursty across documents), + for dependence of a unit's next token on a unit-initial recurrent type.",
+     "nullEffect": {
+      "within-unit": "destroys position-boundness (strong), keeps document clustering",
+      "token-global": "destroys both",
+      "unit-order": "destroys document clustering (units are relocated to other documents), keeps position-boundness"
+     },
+     "strength": "very strong (reference count of types with >= 80% of >= 50 tokens at unit start: 24 and 23 versus 0; mean document coverage of types with >= 100 tokens 0.72 / 0.69 versus 0.98, z -121 / -117)"
+    }
+   ],
+   "byProducts": [
+    "a unit-length versus mean-string-length correlation of +0.125 (reference z +18 / +9): the frame fixes both the unit length and which function words occur, and the string lengths of those words are arbitrary lexicon draws, so its SIGN is an accident of the lexicon seed and is opposite to a Menzerath law",
+    "first-token equality between adjacent units 0.049 vs 0.018 (z +27 / +12) from the document cast",
+    "fewer immediate repeats than a within-unit shuffle (z -3.9 / -3.6)",
+    "Zipf slope -1.19 not -1.0 (open classes are Zipf inside the class, 2484 types each), top-8 types: 6 function words + 2 commonest open-class fillers"
+   ],
+   "mustNotFire": [
+    "window repeat rate (reference z 0.5 / 1.1)",
+    "last-token equality of adjacent units (z -0.3 / -0.3)",
+    "Zipf-abbreviation (string length vs frequency; lexicon-level in any case)"
+   ],
+   "latentConstants": null,
+   "realised": {
+    "common": {
+     "tokens": 100182,
+     "units": 23622,
+     "docs": 100,
+     "types": 4614,
+     "meanUnitLen": 4.241,
+     "zipfSlope300": -1.1896,
+     "collisionProb": 0.0214,
+     "top3tokenShare": 0.1969
+    },
+    "frames": {
+     "vocativeUnitRate": 0.348,
+     "designVocativeProb": 0.35,
+     "nameTokens": 8220,
+     "nameTokensAtUnitStart": 1,
+     "nameTypesSeen": 24,
+     "meanDocShareOfAName": 0.1667,
+     "designDocShareOfAName": 0.1667,
+     "functionWordTokenShare": 0.3197,
+     "commonest8TypesAreFunctionWords": 6,
+     "nameFrequencyRanks": {
+      "min": 22,
+      "max": 66
+     },
+     "unitFinalIsFunctionWord": 0,
+     "unitInitialFunctionWordRate": 0.1589,
+     "unitInitialOpenClassRate": 0.4931,
+     "meanUnitLen": 4.241,
+     "classContext": {
+      "observedSameClassMeanCosine": 0.9356,
+      "observedCrossClassMeanCosine": 0.5683,
+      "shuffledSameClassMeanCosine": 0.8602,
+      "shuffledCrossClassMeanCosine": 0.78,
+      "note": "profiles = counts of the 30 commonest types immediately left and right of a type, 120 commonest open-class types; classes known from the generator, not given to any statistic"
+     }
+    }
+   },
+   "referenceRun": {
+    "statisticsFiredInBothHalvesSameSign": [
+     {
+      "stat": "binAsym",
+      "sign": "+",
+      "null": "within-unit",
+      "z": [
+       52.6,
+       45.1
+      ],
+      "v": [
+       0.125,
+       0.1355
+      ],
+      "nullMean": [
+       0.0169,
+       0.0176
+      ]
+     },
+     {
+      "stat": "firstMatch",
+      "sign": "+",
+      "null": "unit-order",
+      "z": [
+       27,
+       12.1
+      ],
+      "v": [
+       0.0494,
+       0.0464
+      ],
+      "nullMean": [
+       0.0216,
+       0.0228
+      ]
+     },
+     {
+      "stat": "docCover",
+      "sign": "-",
+      "null": "token-global",
+      "z": [
+       -120.9,
+       -117.3
+      ],
+      "v": [
+       0.7191,
+       0.6911
+      ],
+      "nullMean": [
+       0.9584,
+       0.9721
+      ]
+     },
+     {
+      "stat": "menzerath",
+      "sign": "+",
+      "null": "token-global",
+      "z": [
+       17.9,
+       8.9
+      ],
+      "v": [
+       0.1249,
+       0.1209
+      ],
+      "nullMean": [
+       0.0046,
+       0.0033
+      ]
+     }
+    ],
+    "definedCells": 14,
+    "cellsAbsZge4": 8,
+    "note": "reference statistics of tools/selfcheck-stats.mjs, not the atlas laws; definedCells = cells with a z that is not null, excluding the three lexicon-level reference statistics lenFreq, zipfSlope, meanUnitLen (their z is null or float noise); nInitBound has a null z when the null draws are all 0"
+   }
+  },
+  "pl-parallel": {
+   "id": "pl-parallel",
+   "summary": "Refrain / parallelism: iid Zipf(1.0) units (lengths D1), except that with probability 0.35 (and length >= 3) a unit repeats a prefix (anaphora, prob 1/2) or a suffix (epiphora, prob 1/2) of the PREVIOUS unit of the same document, m = round(f * min(L, previous length)) tokens, f ~ U(0.3, 0.7), the rest of the unit fresh iid.",
+   "design": {
+    "copyProb": 0.35,
+    "minLengthToCopy": 3,
+    "prefixShare": 0.5,
+    "suffixShare": 0.5,
+    "copiedFraction": "U(0.3,0.7) of min(L, previous length), at least 1 and at most L-1",
+    "firstUnitOfDocument": "always fresh",
+    "effectiveRates": "prefix copy about 0.173 and suffix copy about 0.173 of adjacent unit pairs (measured 0.173 / 0.178)"
+   },
+   "phenomena": [
+    {
+     "zDetectable": true,
+     "id": "anaphora",
+     "words": "A unit begins with the first tokens of the previous unit (about 17% of adjacent pairs; 3-7 tokens copied).",
+     "sign": "+ for first-token identity of adjacent units (0.19 vs 0.02 chance), + for shared-prefix length and for same-position-identity at the start of adjacent units.",
+     "nullEffect": {
+      "unit-order": "destroys it (strong; reference z +74 / +98)",
+      "token-global": "destroys it",
+      "within-unit": "destroys position alignment (the prefix moves)"
+     },
+     "strength": "very strong"
+    },
+    {
+     "zDetectable": true,
+     "id": "epiphora",
+     "words": "A unit ends with the last tokens of the previous unit (about 17% of adjacent pairs).",
+     "sign": "+ for last-token identity of adjacent units (0.19 vs 0.02), + for shared-suffix length.",
+     "nullEffect": {
+      "unit-order": "destroys it (strong; reference z +103 / +191)",
+      "token-global": "destroys it",
+      "within-unit": "destroys position alignment"
+     },
+     "strength": "very strong"
+    },
+    {
+     "zDetectable": true,
+     "id": "adjacent-unit-overlap",
+     "words": "Adjacent units share tokens beyond chance (bag overlap, about 35% of pairs share a run of 1-7 tokens).",
+     "sign": "+ for token overlap (Jaccard / shared types) of adjacent units over non-adjacent units.",
+     "nullEffect": {
+      "unit-order": "destroys it (strong)",
+      "token-global": "destroys it",
+      "within-unit": "KEEPS it (bags per unit unchanged): a bag-overlap statistic referenced to the within-unit null must stay near 0"
+     },
+     "strength": "strong"
+    }
+   ],
+   "byProducts": [
+    "same-type-within-10-tokens rate +, z +56 / +44 (copies sit about one unit-length apart)",
+    "document coverage of types with >= 100 tokens slightly lower (z -4.2 / -5.7)"
+   ],
+   "mustNotFire": [
+    "adjacent identical tokens inside a unit (z -0.0 / -0.1)",
+    "rank-bin transition asymmetry (z -1.4 / -0.5)",
+    "unit-length versus word-length, lexicon-level laws"
+   ],
+   "latentConstants": null,
+   "realised": {
+    "common": {
+     "tokens": 100738,
+     "units": 9674,
+     "docs": 100,
+     "types": 4809,
+     "meanUnitLen": 10.4133,
+     "zipfSlope300": -0.9943,
+     "collisionProb": 0.0195,
+     "top3tokenShare": 0.1993
+    },
+    "parallel": {
+     "pairs": 9574,
+     "firstTokenEqual": 0.1891,
+     "lastTokenEqual": 0.1936,
+     "designedPrefixCopyRate": 0.1735,
+     "impliedPrefixCopyRate": 0.1729,
+     "impliedSuffixCopyRate": 0.1776,
+     "note": "implied = (measured - chance collision)/(1 - chance); a unit that copies a prefix always matches its first token, chance collisions add the rest (first unit of a document is never a copy, so the implied rate is slightly below the design)"
+    }
+   },
+   "referenceRun": {
+    "statisticsFiredInBothHalvesSameSign": [
+     {
+      "stat": "repeat10",
+      "sign": "+",
+      "null": "token-global",
+      "z": [
+       55.9,
+       43.8
+      ],
+      "v": [
+       0.1899,
+       0.1951
+      ],
+      "nullMean": [
+       0.1393,
+       0.1419
+      ]
+     },
+     {
+      "stat": "firstMatch",
+      "sign": "+",
+      "null": "unit-order",
+      "z": [
+       74.4,
+       98.3
+      ],
+      "v": [
+       0.1877,
+       0.1906
+      ],
+      "nullMean": [
+       0.018,
+       0.0204
+      ]
+     },
+     {
+      "stat": "lastMatch",
+      "sign": "+",
+      "null": "unit-order",
+      "z": [
+       102.8,
+       191.3
+      ],
+      "v": [
+       0.1912,
+       0.1965
+      ],
+      "nullMean": [
+       0.0211,
+       0.0211
+      ]
+     },
+     {
+      "stat": "docCover",
+      "sign": "-",
+      "null": "token-global",
+      "z": [
+       -4.2,
+       -5.7
+      ],
+      "v": [
+       0.9377,
+       0.9497
+      ],
+      "nullMean": [
+       0.9556,
+       0.9669
+      ]
+     }
+    ],
+    "definedCells": 14,
+    "cellsAbsZge4": 8,
+    "note": "reference statistics of tools/selfcheck-stats.mjs, not the atlas laws; definedCells = cells with a z that is not null, excluding the three lexicon-level reference statistics lenFreq, zipfSlope, meanUnitLen (their z is null or float noise); nInitBound has a null z when the null draws are all 0"
+   }
+  },
+  "pl-length": {
+   "id": "pl-length",
+   "summary": "Two length laws and no order structure at all. (a) Zipf abbreviation: the string length of the type with 0-based frequency index i is round(2 + 2.4*log10(i+1) + 0.7*N(0,1)), clamped to 2-14 letters, so frequent types are short. (b) Menzerath: the type drawn for a unit of length L is tilted toward SHORT strings when L is long: weight = zipf(r) * exp(-0.1 * z_L * (len_r - 7)), z_L = (ln L - ln 9)/0.55; tokens are iid given L.",
+   "design": {
+    "zipfAbbreviation": {
+     "lettersPerDecadeOfRank": 2.4,
+     "intercept": 2,
+     "noiseSd": 0.7,
+     "clamp": "2..14"
+    },
+    "menzerath": {
+     "beta": 0.1,
+     "refLength": 7,
+     "zL": "(ln L - ln 9)/0.55"
+    },
+    "unitLength": "D1",
+    "documents": "100 x about 1000 tokens"
+   },
+   "phenomena": [
+    {
+     "zDetectable": false,
+     "id": "zipf-abbreviation",
+     "words": "Word length is tied to frequency: the commoner the type, the shorter the string (realised 2.37 letters per decade of frequency rank; Spearman between string length and rarity +0.60 versus 0.015 in pl-null).",
+     "sign": "- slope of word length on log frequency (+ correlation between length and rarity), - mean string length of the commonest types versus the rarer.",
+     "nullEffect": {
+      "token-global": "KEEPS it (unigram counts and type identity unchanged)",
+      "within-unit": "keeps it",
+      "unit-order": "keeps it"
+     },
+     "strength": "strong in raw v; invisible to z by construction (every atlas null leaves the lexicon intact, so v equals the null mean, sd is 0 or float noise)"
+    },
+    {
+     "zDetectable": true,
+     "id": "menzerath",
+     "words": "The longer the unit (in tokens), the shorter its words (in letters): Pearson of ln unit length with mean letters per word is -0.557 (about -1.10 letters per unit of ln L, i.e. -0.76 letters when the unit length doubles); in pl-null it is about 0.00-0.04 (no relation).",
+     "sign": "- for the correlation between unit length and mean token length (and for the slope of mean word length on ln unit length).",
+     "nullEffect": {
+      "token-global": "destroys it (strong; reference z -31 / -36)",
+      "within-unit": "keeps it (the unit's bag is unchanged): z near 0",
+      "unit-order": "keeps it (units keep their own tokens and length): z near 0"
+     },
+     "strength": "strong"
+    }
+   ],
+   "byProducts": [
+    "Zipf slope -1.05 (the tilt flattens the head a little), chance collision probability 0.0255 versus 0.020 in pl-null: unigram level only; reference window-repeat and adjacent-repeat statistics are within noise (z 0.5-2.2, 0.3-1.6)"
+   ],
+   "mustNotFire": [
+    "every order, position, neighbour, recurrence statistic",
+    "rank-bin asymmetry, first/last-token equality"
+   ],
+   "latentConstants": null,
+   "realised": {
+    "common": {
+     "tokens": 100633,
+     "units": 9720,
+     "docs": 100,
+     "types": 4776,
+     "meanUnitLen": 10.3532,
+     "zipfSlope300": -1.0461,
+     "collisionProb": 0.0255,
+     "top3tokenShare": 0.2302
+    },
+    "length": {
+     "pearsonLnUnitLenVsMeanStringLen": -0.5567,
+     "lettersPerUnitLnLen": -1.0973,
+     "stringLenPerDecadeOfRank": 2.3654,
+     "designStringLenPerDecade": 2.4,
+     "meanStringLen": 6.4012,
+     "lexiconBumps": 0
+    }
+   },
+   "referenceRun": {
+    "statisticsFiredInBothHalvesSameSign": [
+     {
+      "stat": "menzerath",
+      "sign": "-",
+      "null": "token-global",
+      "z": [
+       -31.2,
+       -35.9
+      ],
+      "v": [
+       -0.5536,
+       -0.5595
+      ],
+      "nullMean": [
+       0.0117,
+       0.0035
+      ]
+     }
+    ],
+    "definedCells": 14,
+    "cellsAbsZge4": 2,
+    "note": "reference statistics of tools/selfcheck-stats.mjs, not the atlas laws; definedCells = cells with a z that is not null, excluding the three lexicon-level reference statistics lenFreq, zipfSlope, meanUnitLen (their z is null or float noise); nInitBound has a null z when the null draws are all 0"
+   }
+  },
+  "pl-mix": {
+   "id": "pl-mix",
+   "summary": "Union of worlds 2, 3 and 4 by documents: 120 documents, 48 generated wholly by the pl-burst process, 36 by pl-markov and 36 by pl-frames (token shares 0.4005 / 0.3004 / 0.2991), order of components shuffled by seed; they share lexicon A, so function words (index 0-7) and names (last 24 indices) are ordinary types in the burst and markov documents too. Tests whether a law that lives in 30-40% of the documents is found, scoped and given the right sign.",
+   "design": {
+    "documents": {
+     "burst": 48,
+     "markov": 36,
+     "frames": 36
+    },
+    "assignment": "exact counts, seeded shuffle (componentOfDocument in realised.mix)",
+    "lexicon": "A shared"
+   },
+   "phenomena": [
+    {
+     "zDetectable": true,
+     "id": "mix-local-repetition",
+     "words": "pl-burst's local repetition, diluted to 40% of documents.",
+     "sign": "+ same-type-within-k rate (reference 0.22 vs ~0.14, z +76 / +95); the per-world rates are 0.345 (pl-burst), 0.138 (pl-markov), 0.167 (pl-frames), so per-document repeat rates should be multi-modal.",
+     "nullEffect": {
+      "token-global": "destroys it",
+      "within-unit": "partly",
+      "unit-order": "destroys the cross-unit part"
+     },
+     "strength": "strong"
+    },
+    {
+     "zDetectable": true,
+     "id": "mix-rank-bin-flow",
+     "words": "Rank-class directionality from pl-markov (30%) and from the frame order of pl-frames (30%).",
+     "sign": "+ transition asymmetry between frequency-rank classes (reference 0.16 vs ~0.02, z +63 / +62).",
+     "nullEffect": {
+      "within-unit": "destroys it (strong)",
+      "token-global": "destroys it",
+      "unit-order": "keeps it"
+     },
+     "strength": "strong"
+    },
+    {
+     "zDetectable": true,
+     "id": "mix-names",
+     "words": "pl-frames' vocative names exist in 30% of documents only (about 19 and 11 types with >= 80% of >= 50 tokens at unit start in the two halves versus 24 in pl-frames); the names are rare outside frames documents.",
+     "sign": "+ unit-initial recurring-type structure, - document coverage of those types (reference docCover z -34 / -22, first-token equality of adjacent units +22 / +25).",
+     "nullEffect": {
+      "within-unit": "destroys position-boundness",
+      "unit-order": "destroys document clustering",
+      "token-global": "destroys both"
+     },
+     "strength": "strong"
+    },
+    {
+     "zDetectable": false,
+     "id": "sign-cancellation",
+     "words": "Opposite-sign components cancel: adjacent-identical-token rate is + in burst documents (0.065 vs 0.020), - in markov and frames documents, and nets out to 0 in the mix (reference z +1.0 / +1.1). A statistic with component-dependent sign must be reported as AMBIGUOUS, not ABSENT-because-flat.",
+     "sign": "z near 0 for adjacent-identical-token rate even though 2 of 3 components have it significantly at +/-.",
+     "nullEffect": {
+      "within-unit": "net effect near 0"
+     },
+     "strength": "design feature (negative control for 'absent' calls)"
+    },
+    {
+     "zDetectable": true,
+     "id": "document-heterogeneity",
+     "words": "Documents are of three kinds with different unit-length laws (burst/markov units 10.4 tokens, frames units 4.2; mix mean 7.29) and different recurrence laws; any per-document statistic is multi-modal.",
+     "sign": "scope statistics (variance of a per-document statistic across documents above a within-kind expectation) should flag the pocket as heterogeneous.",
+     "nullEffect": {
+      "unit-order": "relocates units across documents and so equalises documents: destroys it"
+     },
+     "strength": "strong"
+    }
+   ],
+   "byProducts": [
+    "Zipf slope -1.01 (mixture), type count 4800"
+   ],
+   "mustNotFire": [
+    "length-frequency and unit-length versus word-length (no pl-length component; reference menzerath z -2.3 / 0.0)"
+   ],
+   "latentConstants": null,
+   "realised": {
+    "common": {
+     "tokens": 120587,
+     "units": 16541,
+     "docs": 120,
+     "types": 4800,
+     "meanUnitLen": 7.2902,
+     "zipfSlope300": -1.0101,
+     "collisionProb": 0.0196,
+     "top3tokenShare": 0.1969
+    },
+    "mix": {
+     "documentsPerComponent": {
+      "burst": 48,
+      "markov": 36,
+      "frames": 36
+     },
+     "designDocuments": {
+      "burst": 48,
+      "markov": 36,
+      "frames": 36
+     },
+     "tokenShare": {
+      "burst": 0.4005,
+      "markov": 0.3004,
+      "frames": 0.2991
+     },
+     "componentOfDocument": "b f b b f m b b f b m m f b f m m f m b f m b m m b m b m f b m f b f f m b b m m b f b b b b f m b m m f b f m b f f f f m m m f f b f b f m m b m m b f b b b m b m f f b b f m b m b b b m b b m b b b b f m f m f f f f b b b m f f f m b b",
+     "note": "componentOfDocument lists the generator of document 0,1,2,... (b = burst, m = markov, f = frames)"
+    }
+   },
+   "referenceRun": {
+    "statisticsFiredInBothHalvesSameSign": [
+     {
+      "stat": "repeat10",
+      "sign": "+",
+      "null": "token-global",
+      "z": [
+       76.5,
+       95.2
+      ],
+      "v": [
+       0.2208,
+       0.2388
+      ],
+      "nullMean": [
+       0.1472,
+       0.1437
+      ]
+     },
+     {
+      "stat": "binAsym",
+      "sign": "+",
+      "null": "within-unit",
+      "z": [
+       62.9,
+       62
+      ],
+      "v": [
+       0.162,
+       0.1571
+      ],
+      "nullMean": [
+       0.0141,
+       0.0146
+      ]
+     },
+     {
+      "stat": "firstMatch",
+      "sign": "+",
+      "null": "unit-order",
+      "z": [
+       22.1,
+       24.9
+      ],
+      "v": [
+       0.0415,
+       0.0385
+      ],
+      "nullMean": [
+       0.0138,
+       0.0137
+      ]
+     },
+     {
+      "stat": "lastMatch",
+      "sign": "+",
+      "null": "unit-order",
+      "z": [
+       11.9,
+       15.5
+      ],
+      "v": [
+       0.0219,
+       0.022
+      ],
+      "nullMean": [
+       0.0098,
+       0.0104
+      ]
+     },
+     {
+      "stat": "docCover",
+      "sign": "-",
+      "null": "token-global",
+      "z": [
+       -34,
+       -22
+      ],
+      "v": [
+       0.8308,
+       0.8889
+      ],
+      "nullMean": [
+       0.9227,
+       0.9506
+      ]
+     }
+    ],
+    "definedCells": 14,
+    "cellsAbsZge4": 10,
+    "note": "reference statistics of tools/selfcheck-stats.mjs, not the atlas laws; definedCells = cells with a z that is not null, excluding the three lexicon-level reference statistics lenFreq, zipfSlope, meanUnitLen (their z is null or float noise); nInitBound has a null z when the null draws are all 0"
+   }
+  },
+  "pl-null2": {
+   "id": "pl-null2",
+   "summary": "Second iid world, NO structure, to prove the atlas does not mistake an exponent or a unit-length difference for structure. Zipf(1.3) over 5000 types (heavy head: top-3 types carry 45% of tokens); unit lengths iid from D2 (shifted exponential, mode 2, mean 15.2, range 2-70); other lexicon seed.",
+   "design": {
+    "zipfExponent": 1.3,
+    "types": 5000,
+    "unitLength": "D2 = 2 + geometric-like (exp mean 14) on 2..70",
+    "stringLength": "iid per type as in pl-null",
+    "documents": "100 x about 1000 tokens"
+   },
+   "phenomena": [],
+   "byProducts": [],
+   "mustNotFire": [
+    "everything, exactly as pl-null. Any statistic that is large in pl-null2 but not in pl-null has mistaken the exponent (1.3 vs 1.0), the heavy head (collision probability 0.098 vs 0.020) or the unit-length law (15.2 vs 10.4) for structure."
+   ],
+   "latentConstants": "Zipf slope about -1.30; chance collision probability about 0.098 (so unnormalised repeat rates are 5x pl-null: raw v differs, z must not); mean unit length 15.2.",
+   "realised": {
+    "common": {
+     "tokens": 101284,
+     "units": 6660,
+     "docs": 100,
+     "types": 3391,
+     "meanUnitLen": 15.2078,
+     "zipfSlope300": -1.3001,
+     "collisionProb": 0.098,
+     "top3tokenShare": 0.4505
+    }
+   },
+   "referenceRun": {
+    "statisticsFiredInBothHalvesSameSign": [],
+    "definedCells": 14,
+    "cellsAbsZge4": 0,
+    "note": "reference statistics of tools/selfcheck-stats.mjs, not the atlas laws; definedCells = cells with a z that is not null, excluding the three lexicon-level reference statistics lenFreq, zipfSlope, meanUnitLen (their z is null or float noise); nInitBound has a null z when the null draws are all 0"
+   }
+  }
+ }
+}

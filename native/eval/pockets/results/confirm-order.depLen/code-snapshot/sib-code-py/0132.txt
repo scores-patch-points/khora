@@ -1,0 +1,262 @@
+"""Layered scoring for the surveillance detector.
+
+Three independent layers over the SAME evidence, fused into one verdict:
+
+  Layer 1 — EVIDENCE KEYWORDS: lexical matches against the raw extracted text
+            (the contracts, MOUs, resolutions). Fast, transparent, easy to
+            audit. Uses the same lexicons as classify.py.
+  Layer 2 — SHAPE SURFACES: eoreader7's referent surfaces (the noun-phrase
+            chunks the reader surfaces as grammatical subjects/objects) plus
+            guardrail grammar and graph density. This is the structural signal
+            the keyword layer cannot see (a term must be a referent, not an
+            incidental mention).
+  Layer 3 — EMBEDDINGS: dense semantic similarity of the document to a set of
+            known surveillance prototype texts (max cosine over prototypes),
+            and to known background prototypes (for a margin). Benchmark layer:
+            the point is to test whether semantic similarity beats the
+            structural system.
+  Fusion  — anchored keyword/shape evidence OR a strong embedding margin.
+"""
+
+from __future__ import annotations
+
+import json
+import re
+from pathlib import Path
+from typing import Optional
+
+import numpy as np
+
+from classify import (
+    CODE_ANCHOR_RE,
+    CORE_TERMS,
+    GUARDRAIL_TERMS,
+    NEGATIVE_LEXICON,
+    SENSOR_TERMS,
+    VENDOR_TERMS,
+    surface_matches,
+    _norm,
+)
+from snippets import declared_use as _declared_use
+
+# -- Layer 1: evidence keywords --------------------------------------------
+EVIDENCE_WEIGHTS = {
+    "core": 3.0,
+    "vendor": 2.0,
+    "code": 2.5,
+    "guard": 1.2,
+    "sensor": 1.0,
+}
+
+# Nashville's standard procurement certification asks, verbatim, on EVERY
+# cooperative-purchasing contract: "Does the contract contain any good/
+# service relative to surveillance, as described in MCL 13.08.080?" The
+# answer cell lands mid-sentence in extracted text because of the form's
+# two-column layout (question | Yes/No) — confirmed identically across four
+# real documents, including RS2026-2264 (Motorola). A "No" is uninformative:
+# it's the answer on every contract regardless of content, honest or not —
+# that's the whole reason RS2026-2264 needed a deeper read in the first
+# place. A "Yes" is the city self-certifying under its own ordinance —
+# about as strong a signal as exists, and enough to anchor by itself.
+CERTIFICATION_RE = re.compile(
+    r"does\s+the\s+contract\s+contain\s+any\s+(\S+)\s+good\s*/?\s*service\s+relative\s+to\s+surveillance",
+    re.IGNORECASE,
+)
+
+
+def certification_answer(text: str) -> Optional[str]:
+    """Returns 'yes', 'no', or None if the certification form wasn't found."""
+    m = CERTIFICATION_RE.search(text)
+    if not m:
+        return None
+    word = re.sub(r"[^a-z]", "", m.group(1).lower())
+    if word in ("yes", "ves", "y"):  # "ves" — an observed OCR misread of "Yes"
+        return "yes"
+    if word in ("no", "n"):
+        return "no"
+    return None
+
+
+# Standard Sourcewell cooperative-purchasing boilerplate clause ("S." in a
+# lettered list of terms) — confirmed byte-identical (same wording, same
+# "2 C.F.R. § 200.216" citation) across every cached document that carries
+# it (42 of 276 checked live, ~15% of the corpus), regardless of what's
+# actually being purchased: fire trucks, fleet-maintenance tools, whatever
+# the specific contract is for. It is the SUPPLIER CERTIFYING IT WILL NOT
+# use banned telecom/video-surveillance equipment — the opposite of
+# evidence the matter involves surveillance technology — yet its own title
+# contains the words "VIDEO SURVEILLANCE," which was enough to anchor
+# Layer 1's flat substring scan on pure boilerplate (caught live: a garage/
+# fleet-maintenance-equipment purchase outscored a genuine Motorola
+# public-safety-software purchase because of this clause alone, plus a
+# "CAMERA BEAM ASSEMBLY" line item in an unrelated pricing table — the
+# second, harder pricing-table problem is real too but needs a different
+# fix and isn't addressed here). Stripped before either scoring layer
+# reads the text: it is never real evidence, for or against.
+NDAA_TELECOM_CLAUSE_RE = re.compile(
+    r"PROHIBITION\s+ON\s+CERTAIN\s+TELECOMMUNICATIONS\s+AND\s+VIDEO\s+SURVEILLANCE"
+    r"\s+SERVICES\s+OR\s+EQUIPMENT.{0,400}?200\.216\.?",
+    re.IGNORECASE | re.DOTALL,
+)
+
+
+def strip_known_boilerplate(text: str) -> str:
+    """Remove fixed, content-independent boilerplate verified against the
+    real cached corpus first (see NDAA_TELECOM_CLAUSE_RE) — not a guess at
+    what might be boilerplate, applied before any layer scores the text."""
+    return NDAA_TELECOM_CLAUSE_RE.sub(" ", text)
+
+
+def evidence_keywords(text: str, title: str = "") -> dict:
+    """Score raw evidence text by lexical match. Returns {score, evidence, anchored}."""
+    if not text:
+        text = title
+    t = text.lower().replace("-", " ")
+    evidence: list[str] = []
+    score = 0.0
+    core = vendor = 0
+
+    for term in CORE_TERMS:
+        if _norm(term).replace("_", " ") in t:
+            score += EVIDENCE_WEIGHTS["core"]
+            core += 1
+            evidence.append(f"core:{term}")
+    for term in VENDOR_TERMS:
+        if _norm(term).replace("_", " ") in t:
+            score += EVIDENCE_WEIGHTS["vendor"]
+            vendor += 1
+            evidence.append(f"vendor:{term}")
+    for term in GUARDRAIL_TERMS:
+        if _norm(term).replace("_", " ") in t:
+            score += EVIDENCE_WEIGHTS["guard"]
+            evidence.append(f"guard:{term}")
+    for term in SENSOR_TERMS:
+        if _norm(term).replace("_", " ") in t:
+            score += EVIDENCE_WEIGHTS["sensor"]
+            evidence.append(f"sensor:{term}")
+
+    code_hit = bool(CODE_ANCHOR_RE.search(text))
+    if code_hit:
+        score += EVIDENCE_WEIGHTS["code"]
+        evidence.append("code:13.08.080")
+
+    cert = certification_answer(text)
+    cert_yes = cert == "yes"
+    if cert_yes:
+        score += 10.0
+        evidence.append("CERTIFICATION:self-declared-yes")
+    elif cert == "no":
+        evidence.append("certification:self-declared-no")
+
+    # Metro's own answer to the intake form's "what is the good/service
+    # this cooperative will be used to purchase?" (see snippets.declared_use)
+    # is a department describing its OWN purchase in its OWN words — not a
+    # lexicon guessing at incidental text somewhere in a 1MB+ attached PDF.
+    # When that answer itself names a concrete, ordinance-defined
+    # technology (a CORE term — the same §13.08.080 technology list every
+    # other layer anchors on), there's no "maybe it's a red herring" the
+    # way there is for a term found anywhere else in the document: this is
+    # the single strongest fact these filings contain about intended use,
+    # scored at full confidence, same as a "Yes" self-certification.
+    du = _declared_use(text)
+    du_norm = du.lower().replace("-", " ") if du else ""
+    du_hits = [term for term in CORE_TERMS if _norm(term).replace("_", " ") in du_norm] if du_norm else []
+    if du_hits:
+        score += 10.0
+        for term in du_hits:
+            evidence.append(f"DECLARED_USE:{term}")
+
+    neg_hits = [x for x in NEGATIVE_LEXICON if x in t]
+    if neg_hits and score < 6:
+        for x in neg_hits:
+            evidence.append(f"negative:{x}")
+        score *= 0.5
+
+    # code_hit alone can't anchor: the 13.08.080 citation appears in a
+    # standard certification question on EVERY Nashville cooperative-
+    # purchasing contract regardless of content (see classify.py). It's
+    # supporting evidence, not proof. A "Yes" self-certification is the one
+    # exception — the city admitting it itself is enough on its own.
+    anchored = core > 0 or vendor > 0 or cert_yes or bool(du_hits)
+    return {"score": round(score, 2), "evidence": evidence, "anchored": anchored,
+            "label": "surveillance" if anchored and score >= 5.0 else "background"}
+
+
+# -- Layer 2: shape surfaces (delegates to classify.py) --------------------
+def shape_surfaces(surfaces: list[str], *, text: str = "", title: str = "",
+                   relation_edges: int = 0, n_entries: int = 0) -> dict:
+    from classify import classify_surfaces
+    v = classify_surfaces(surfaces, text=text, title=title,
+                          relation_edges=relation_edges, n_entries=n_entries)
+    return {"score": v.score, "evidence": v.evidence, "label": v.label}
+
+
+# -- Layer 3: embeddings ---------------------------------------------------
+def _embed(text: str, model) -> np.ndarray:
+    return model.encode(text, convert_to_numpy=True, normalize_embeddings=True)
+
+
+class EmbeddingScorer:
+    """Benchmark layer. Prototypes must be embedded on the SAME model. For an
+    honest held-out test, fit() on one set of surveillance/background texts and
+    score() a disjoint set of documents."""
+
+    def __init__(self, model_name: str = "sentence-transformers/all-MiniLM-L6-v2"):
+        from sentence_transformers import SentenceTransformer
+        self.model = SentenceTransformer(model_name)
+        self.surv_protos: list[np.ndarray] = []
+        self.bg_protos: list[np.ndarray] = []
+
+    def fit(self, surv_texts: list[str], bg_texts: list[str]) -> "EmbeddingScorer":
+        self.surv_protos = [_embed(t, self.model) for t in surv_texts]
+        self.bg_protos = [_embed(t, self.model) for t in bg_texts]
+        return self
+
+    def score(self, text: str) -> dict:
+        v = _embed(text, self.model)
+        surv_sim = float(max(v @ p for p in self.surv_protos)) if self.surv_protos else 0.0
+        bg_sim = float(max(v @ p for p in self.bg_protos)) if self.bg_protos else 0.0
+        margin = surv_sim - bg_sim
+        return {"surv_sim": round(surv_sim, 4), "bg_sim": round(bg_sim, 4),
+                "margin": round(margin, 4)}
+
+    def score_batch(self, texts: list[str]) -> list[dict]:
+        return [self.score(t) for t in texts]
+
+    def save(self, path: Path) -> None:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps({
+            "surv_protos": [p.tolist() for p in self.surv_protos],
+            "bg_protos": [p.tolist() for p in self.bg_protos],
+        }))
+
+    @classmethod
+    def load(cls, path: Path, model_name: str = "sentence-transformers/all-MiniLM-L6-v2"):
+        obj = cls(model_name)
+        d = json.loads(path.read_text())
+        obj.surv_protos = [np.array(p) for p in d["surv_protos"]]
+        obj.bg_protos = [np.array(p) for p in d["bg_protos"]]
+        return obj
+
+
+# -- Fusion ----------------------------------------------------------------
+def fuse(l1: dict, l2: dict, l3: dict, *, margin_threshold: float = 0.25) -> dict:
+    """Combine layers. Verdict is surveillance if:
+      - layer 1 (evidence keywords) OR layer 2 (shape) says surveillance; OR
+      - the embedding margin is strong (> margin_threshold) with non-trivial
+        surveillance similarity.
+    Reports each layer's own label for comparison."""
+    l1_label = l1.get("label", "background")
+    l2_label = l2.get("label", "background")
+    l3_margin = l3.get("margin", 0.0)
+    l3_surv = l3.get("surv_sim", 0.0)
+    l3_label = "surveillance" if l3_margin > margin_threshold and l3_surv > 0.55 else "background"
+
+    structural = l1_label == "surveillance" or l2_label == "surveillance"
+    final = "surveillance" if (structural or l3_label == "surveillance") else "background"
+    return {
+        "label": final,
+        "layer1": l1_label, "layer2": l2_label, "layer3": l3_label,
+        "l1_score": l1.get("score", 0), "l2_score": l2.get("score", 0),
+        "l3_margin": l3_margin, "l3_surv_sim": l3_surv,
+    }

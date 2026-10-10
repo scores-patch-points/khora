@@ -1,0 +1,107 @@
+#!/usr/bin/env python3
+"""Fill the `participation` table: sponsors and roll-call votes per matter.
+
+Kept separate from the scan because it answers a different question. The
+scan asks "is this surveillance"; this asks "who put it forward and who
+voted for it", which is true of every matter whether or not it flagged, and
+which changes on its own schedule as a bill moves through committee. Run it
+after a scan, or on its own.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import sqlite3
+import sys
+import datetime
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "src"))
+
+from legistar import Legistar  # noqa: E402
+import council  # noqa: E402
+
+DB_PATH = ROOT / "webapp" / "watch.db"
+
+SCHEMA = """
+CREATE TABLE IF NOT EXISTS participation (
+  matter_id INTEGER PRIMARY KEY,
+  sponsors_json TEXT,
+  actions_json TEXT,
+  voters_json TEXT,
+  fetched_at TEXT
+);
+CREATE TABLE IF NOT EXISTS sponsorships (
+  matter_id INTEGER NOT NULL,
+  name TEXT NOT NULL,
+  sequence INTEGER,
+  PRIMARY KEY (matter_id, name)
+);
+CREATE INDEX IF NOT EXISTS idx_sponsorships_name ON sponsorships(name);
+"""
+
+
+def targets(con: sqlite3.Connection, args) -> list[int]:
+    if args.matter:
+        return [int(x) for x in args.matter]
+    q = ("SELECT s.matter_id FROM scan_results s "
+         "WHERE s.label = 'surveillance' ORDER BY s.score DESC")
+    ids = [r[0] for r in con.execute(q).fetchall()]
+    if args.stale_only:
+        have = {r[0] for r in con.execute(
+            "SELECT matter_id FROM participation").fetchall()}
+        ids = [i for i in ids if i not in have]
+    return ids[: args.limit] if args.limit else ids
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--matter", nargs="*")
+    ap.add_argument("--stale-only", action="store_true",
+                    help="skip matters already fetched")
+    args = ap.parse_args()
+
+    con = sqlite3.connect(DB_PATH)
+    con.executescript(SCHEMA)
+    api = Legistar()
+    ei_cache: dict = {}   # event_id -> items, shared across every matter
+    now = datetime.datetime.utcnow().isoformat()
+
+    ids = targets(con, args)
+    print(f"participation: {len(ids)} matters")
+    n_votes = 0
+    for i, mid in enumerate(ids, 1):
+        p = council.participation(api, mid, ei_cache)
+        con.execute(
+            """INSERT INTO participation
+               (matter_id, sponsors_json, actions_json, voters_json, fetched_at)
+               VALUES (?,?,?,?,?)
+               ON CONFLICT(matter_id) DO UPDATE SET
+                 sponsors_json=excluded.sponsors_json,
+                 actions_json=excluded.actions_json,
+                 voters_json=excluded.voters_json,
+                 fetched_at=excluded.fetched_at""",
+            (mid, json.dumps(p["sponsors"]), json.dumps(p["actions"]),
+             json.dumps(p["voters"]), now))
+        # Flat rows so "show me everything Council Member X sponsored" is an
+        # index lookup rather than a JSON scan over every matter.
+        con.execute("DELETE FROM sponsorships WHERE matter_id = ?", (mid,))
+        for s in p["sponsors"]:
+            con.execute(
+                "INSERT OR REPLACE INTO sponsorships (matter_id, name, sequence)"
+                " VALUES (?,?,?)", (mid, s["name"], s.get("sequence")))
+        if p["voters"]:
+            n_votes += 1
+        if i % 20 == 0:
+            con.commit()
+            print(f"  {i}/{len(ids)} ({len(ei_cache)} meetings cached)")
+    con.commit()
+    print(f"done: {len(ids)} matters, {n_votes} with roll calls, "
+          f"{len(ei_cache)} meetings fetched")
+    con.close()
+
+
+if __name__ == "__main__":
+    main()

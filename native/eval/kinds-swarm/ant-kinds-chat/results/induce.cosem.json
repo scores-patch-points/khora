@@ -1,0 +1,522 @@
+{
+ "module": "ant-kinds-chat/induce.mjs",
+ "corpus": "cosem",
+ "preregSha256": "0b7ebeba45da9ec1a28d91472b1f4437f7ede987aa2eca565e12541ae8fb2878",
+ "MINC": 10,
+ "F_MAX": 1000,
+ "D": 48,
+ "LADDER": [
+  2,
+  3,
+  4,
+  6,
+  8,
+  12,
+  16,
+  24
+ ],
+ "MIN_HALF": 8,
+ "NULL_DRAWS": 4,
+ "SESOI": 0.1,
+ "devDocs": 40,
+ "conformance": {
+  "formsChecked": 25,
+  "featuresChecked": 426,
+  "mismatches": 0
+ },
+ "curve": [
+  {
+   "K": 2,
+   "real": 0.6767,
+   "realBySplit": [
+    0.6829,
+    0.6705
+   ],
+   "nullMean": 0.7465,
+   "nullMax": 0.7898,
+   "gap": -0.113
+  },
+  {
+   "K": 3,
+   "real": 0.5776,
+   "realBySplit": [
+    0.5761,
+    0.5791
+   ],
+   "nullMean": 0.6068,
+   "nullMax": 0.6958,
+   "gap": -0.1182
+  },
+  {
+   "K": 4,
+   "real": 0.4209,
+   "realBySplit": [
+    0.4769,
+    0.3648
+   ],
+   "nullMean": 0.3695,
+   "nullMax": 0.4024,
+   "gap": 0.0185
+  },
+  {
+   "K": 6,
+   "real": 0.4094,
+   "realBySplit": [
+    0.424,
+    0.3948
+   ],
+   "nullMean": 0.3585,
+   "nullMax": 0.3941,
+   "gap": 0.0153
+  },
+  {
+   "K": 8,
+   "real": 0.3683,
+   "realBySplit": [
+    0.3673,
+    0.3693
+   ],
+   "nullMean": 0.2813,
+   "nullMax": 0.3009,
+   "gap": 0.0673
+  },
+  {
+   "K": 12,
+   "real": 0.31,
+   "realBySplit": [
+    0.3256,
+    0.2943
+   ],
+   "nullMean": 0.2403,
+   "nullMax": 0.2618,
+   "gap": 0.0482
+  },
+  {
+   "K": 16,
+   "real": 0.324,
+   "realBySplit": [
+    0.3114,
+    0.3367
+   ],
+   "nullMean": 0.2179,
+   "nullMax": 0.253,
+   "gap": 0.0711
+  },
+  {
+   "K": 24,
+   "real": 0.2276,
+   "realBySplit": [
+    0.2243,
+    0.2309
+   ],
+   "nullMean": 0.1938,
+   "nullMax": 0.2073,
+   "gap": 0.0203
+  }
+ ],
+ "vocabHalves": [
+  409,
+  415
+ ],
+ "Kstar": 16,
+ "gapKstar": 0.0711,
+ "K1_curve_holds": false,
+ "final": {
+  "V": 754,
+  "K": 16,
+  "tokenShare": [
+   0.1942,
+   0.1651,
+   0.1511,
+   0.1238,
+   0.0799,
+   0.0374,
+   0.0366,
+   0.0334,
+   0.0327,
+   0.0287,
+   0.0254,
+   0.0243,
+   0.0193,
+   0.017,
+   0.016,
+   0.0152
+  ],
+  "types": [
+   31,
+   61,
+   21,
+   33,
+   50,
+   26,
+   59,
+   90,
+   88,
+   57,
+   66,
+   65,
+   20,
+   33,
+   33,
+   21
+  ]
+ },
+ "frequency": {
+  "NMI_decile": 0.2401,
+  "ARI_bands": 0.0592,
+  "NMI_bands": 0.2322
+ },
+ "signatures": [
+  [
+   "before=^",
+   "after=think",
+   "after=can",
+   "after=got",
+   "after=all",
+   "before=if",
+   "after=not",
+   "before=but",
+   "after=just",
+   "after=have"
+  ],
+  [
+   "before=^",
+   "after=$",
+   "after=i",
+   "before=oh",
+   "after=ya",
+   "after=guys",
+   "before=üò",
+   "after=üò",
+   "after=thanks",
+   "before=haha"
+  ],
+  [
+   "after=the",
+   "before=is",
+   "before=in",
+   "before=need",
+   "before=want",
+   "before=all",
+   "before=it",
+   "after=my",
+   "before=frisbee",
+   "after=a"
+  ],
+  [
+   "before=i",
+   "before=you",
+   "before=we",
+   "after=to",
+   "after=be",
+   "before=u",
+   "before=don't",
+   "before=they",
+   "after=you",
+   "before=dont"
+  ],
+  [
+   "after=$",
+   "before=m",
+   "before=f",
+   "before=media",
+   "before=next",
+   "before=town",
+   "before=no",
+   "before=at",
+   "before=this",
+   "before=the"
+  ],
+  [
+   "before=to",
+   "before=will",
+   "before=can",
+   "before=i'll",
+   "after=at",
+   "after=it",
+   "before=wanna",
+   "after=in",
+   "before=gonna",
+   "after=to"
+  ],
+  [
+   "before=i",
+   "after=ch",
+   "after=be",
+   "before=you",
+   "before=et",
+   "before=ca",
+   "before=rd",
+   "after=ic",
+   "after=even",
+   "before=cw"
+  ],
+  [
+   "after=$",
+   "before=a",
+   "before=ù",
+   "before=ice",
+   "before=lai",
+   "after=ù",
+   "before=ô",
+   "before=at",
+   "before=wed",
+   "before=t"
+  ],
+  [
+   "after=m",
+   "after=ch",
+   "after=to",
+   "before=a",
+   "before=happy",
+   "before=belated",
+   "after=cw",
+   "before=k",
+   "before=birthday",
+   "after=birthday"
+  ],
+  [
+   "before=^",
+   "after=omitted",
+   "after=m",
+   "after=week",
+   "after=like",
+   "after=that",
+   "after=afternoon",
+   "before=on",
+   "after=f",
+   "after=a"
+  ],
+  [
+   "before=the",
+   "after=$",
+   "after=year",
+   "after=of",
+   "before=happy",
+   "after=pack",
+   "before=my",
+   "before=tuesday",
+   "after=than",
+   "before=some"
+  ],
+  [
+   "before=^",
+   "after=$",
+   "after=frisbee",
+   "before=on",
+   "after=zi",
+   "after=shake",
+   "after=i",
+   "before=haha",
+   "before=wed",
+   "before=üåö"
+  ],
+  [
+   "before=for",
+   "before=with",
+   "after=$",
+   "before=of",
+   "before=join",
+   "before=have",
+   "before=m",
+   "before=many",
+   "before=see",
+   "after=comes"
+  ],
+  [
+   "before=my",
+   "before=your",
+   "after=$",
+   "after=is",
+   "before=the",
+   "before=ur",
+   "before=got",
+   "before=twitter",
+   "before=his",
+   "before=o"
+  ],
+  [
+   "after=me",
+   "before=to",
+   "after=green",
+   "before=can",
+   "before=at",
+   "before=i",
+   "before=just",
+   "after=you",
+   "before=pls",
+   "after=him"
+  ],
+  [
+   "before=so",
+   "after=$",
+   "before=too",
+   "before=damn",
+   "before=not",
+   "before=super",
+   "before=a",
+   "before=very",
+   "before=how",
+   "before=as"
+  ]
+ ],
+ "K1_holds": false,
+ "characterise": {
+  "dev": {
+   "rows": [
+    {
+     "kind": 0,
+     "types": 31,
+     "tokenShare": 0.1517,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 1,
+     "types": 61,
+     "tokenShare": 0.129,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 2,
+     "types": 21,
+     "tokenShare": 0.118,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 3,
+     "types": 33,
+     "tokenShare": 0.0968,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 4,
+     "types": 50,
+     "tokenShare": 0.0624,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 5,
+     "types": 26,
+     "tokenShare": 0.0292,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 6,
+     "types": 59,
+     "tokenShare": 0.0286,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 7,
+     "types": 90,
+     "tokenShare": 0.0261,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 8,
+     "types": 88,
+     "tokenShare": 0.0255,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 9,
+     "types": 57,
+     "tokenShare": 0.0224,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 10,
+     "types": 66,
+     "tokenShare": 0.0198,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 11,
+     "types": 65,
+     "tokenShare": 0.019,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 12,
+     "types": 20,
+     "tokenShare": 0.0151,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 13,
+     "types": 33,
+     "tokenShare": 0.0133,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 14,
+     "types": 33,
+     "tokenShare": 0.0125,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 15,
+     "types": 21,
+     "tokenShare": 0.0119,
+     "goldShare": null,
+     "enrichment": null,
+     "nickTypes": 0,
+     "purity": 0
+    }
+   ],
+   "thin": {
+    "tokenShare": 0.2187,
+    "goldShare": null
+   },
+   "goldTokens": 0,
+   "landing": null,
+   "nickTypeCount": 0
+  }
+ },
+ "seconds": 24.3
+}

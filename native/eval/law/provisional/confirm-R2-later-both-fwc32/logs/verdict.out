@@ -1,0 +1,746 @@
+{
+ "headerSha256": "dfa55584ce533cd890c2cf9060d30688af5f446a68580a928b31785f296edd35",
+ "tier": {
+  "eligiblePrimary": 34,
+  "FULL": false,
+  "SC": true,
+  "scPrimary": true,
+  "scPooled": true,
+  "controlsPrimary": true,
+  "controlsPooled": true,
+  "scFalsified": false,
+  "verdict": "PARTIAL"
+ },
+ "PRIMARY": {
+  "eligible": 34,
+  "thin": 3,
+  "voided": [
+   "afr:0.5507"
+  ],
+  "clauses": {
+   "a": {
+    "rho": -0.043,
+    "p": 0.5849,
+    "pass": false
+   },
+   "b": {
+    "skill": -0.1627,
+    "rmseModel": 0.0725,
+    "rmseBaseline": 0.0623,
+    "meanShift": 0.0042,
+    "pass": false
+   },
+   "c": {
+    "inScopeN": 12,
+    "inScopeAudibleShare": 0.75,
+    "inScopeWilson95": [
+     0.468,
+     0.911
+    ],
+    "outScopeN": 8,
+    "outScopeAudibleShare": 0.375,
+    "pass": true
+   },
+   "d": {
+    "nIn": 19,
+    "nOut": 15,
+    "meanIn": 0.62,
+    "meanOut": 0.6133,
+    "diff": 0.0067,
+    "pass": false
+   },
+   "e": {
+    "e2_nullMean": 0.4996,
+    "e2_nullShareGe60": 0.0059,
+    "e2_nullDraws": 170,
+    "e2_pass": true,
+    "e3_audibleLanguages": 21,
+    "e3_shuffledLe55": 18,
+    "e3_pass": true,
+    "e3_shuffleMeanAllEligible": 0.5089,
+    "e3_shufflePositionMean": 0.5063
+   }
+  },
+  "meanAuc": 0.617,
+  "shareAudible": 0.618,
+  "skillFwcOnly": -0.2684,
+  "skillPairsOnly": -0.0069,
+  "adds": -0.1558,
+  "partial": -0.033,
+  "eq250": {
+   "n": 20,
+   "rho": 0.235,
+   "p": 0.1515,
+   "meanIn": 0.6221,
+   "meanOut": 0.5933,
+   "audibleShareIn": 0.75,
+   "audibleShareOut": 0.375,
+   "nIn": 12,
+   "nOut": 8
+  },
+  "zones": {
+   "all": {
+    "<0.20": {
+     "n": 4,
+     "audibleShare": 0.75,
+     "meanAuc": 0.6554
+    },
+    "0.20-0.2795": {
+     "n": 11,
+     "audibleShare": 0.455,
+     "meanAuc": 0.598
+    },
+    ">=0.2795": {
+     "n": 19,
+     "audibleShare": 0.684,
+     "meanAuc": 0.62
+    }
+   },
+   "pairs>=250": {
+    "<0.20": {
+     "n": 1,
+     "audibleShare": 0,
+     "meanAuc": 0.5663
+    },
+    "0.20-0.2795": {
+     "n": 7,
+     "audibleShare": 0.429,
+     "meanAuc": 0.6097
+    },
+    ">=0.2795": {
+     "n": 12,
+     "audibleShare": 0.75,
+     "meanAuc": 0.6368
+    }
+   }
+  }
+ },
+ "SECONDARY": {
+  "eligible": 21,
+  "thin": 3,
+  "voided": [],
+  "clauses": {
+   "a": {
+    "rho": 0.591,
+    "p": 0.0045,
+    "pass": true
+   },
+   "b": {
+    "skill": 0.4867,
+    "rmseModel": 0.0361,
+    "rmseBaseline": 0.0703,
+    "meanShift": 0.0037,
+    "pass": true
+   },
+   "c": {
+    "inScopeN": 11,
+    "inScopeAudibleShare": 1,
+    "inScopeWilson95": [
+     0.741,
+     1
+    ],
+    "outScopeN": 4,
+    "outScopeAudibleShare": 0.5,
+    "pass": true
+   },
+   "d": {
+    "nIn": 14,
+    "nOut": 7,
+    "meanIn": 0.6705,
+    "meanOut": 0.5655,
+    "diff": 0.105,
+    "pass": true
+   },
+   "e": {
+    "e2_nullMean": 0.4944,
+    "e2_nullShareGe60": 0,
+    "e2_nullDraws": 105,
+    "e2_pass": true,
+    "e3_audibleLanguages": 15,
+    "e3_shuffledLe55": 14,
+    "e3_pass": true,
+    "e3_shuffleMeanAllEligible": 0.51,
+    "e3_shufflePositionMean": 0.5019
+   }
+  },
+  "meanAuc": 0.6355,
+  "shareAudible": 0.714,
+  "skillFwcOnly": 0.3156,
+  "skillPairsOnly": 0.2313,
+  "adds": 0.2554,
+  "partial": 0.522,
+  "eq250": {
+   "n": 15,
+   "rho": 0.604,
+   "p": 0.0097,
+   "meanIn": 0.6459,
+   "meanOut": 0.5779,
+   "audibleShareIn": 0.909,
+   "audibleShareOut": 0.25,
+   "nIn": 11,
+   "nOut": 4
+  },
+  "zones": {
+   "all": {
+    "<0.20": {
+     "n": 2,
+     "audibleShare": 0,
+     "meanAuc": 0.5158
+    },
+    "0.20-0.2795": {
+     "n": 5,
+     "audibleShare": 0.4,
+     "meanAuc": 0.5853
+    },
+    ">=0.2795": {
+     "n": 14,
+     "audibleShare": 0.929,
+     "meanAuc": 0.6705
+    }
+   },
+   "pairs>=250": {
+    "<0.20": {
+     "n": 1,
+     "audibleShare": 0,
+     "meanAuc": 0.5436
+    },
+    "0.20-0.2795": {
+     "n": 3,
+     "audibleShare": 0.667,
+     "meanAuc": 0.6072
+    },
+    ">=0.2795": {
+     "n": 11,
+     "audibleShare": 1,
+     "meanAuc": 0.6786
+    }
+   }
+  }
+ },
+ "POOLED": {
+  "eligible": 55,
+  "thin": 6,
+  "voided": [
+   "afr:0.5507"
+  ],
+  "clauses": {
+   "a": {
+    "rho": 0.285,
+    "p": 0.0177,
+    "pass": false
+   },
+   "b": {
+    "skill": 0.0658,
+    "rmseModel": 0.0612,
+    "rmseBaseline": 0.0655,
+    "meanShift": 0.004,
+    "pass": false
+   },
+   "c": {
+    "inScopeN": 23,
+    "inScopeAudibleShare": 0.8696,
+    "inScopeWilson95": [
+     0.679,
+     0.955
+    ],
+    "outScopeN": 12,
+    "outScopeAudibleShare": 0.4167,
+    "pass": true
+   },
+   "d": {
+    "nIn": 33,
+    "nOut": 22,
+    "meanIn": 0.6414,
+    "meanOut": 0.5981,
+    "diff": 0.0433,
+    "pass": true
+   },
+   "e": {
+    "e2_nullMean": 0.4976,
+    "e2_nullShareGe60": 0.0036,
+    "e2_nullDraws": 275,
+    "e2_pass": true,
+    "e3_audibleLanguages": 36,
+    "e3_shuffledLe55": 32,
+    "e3_pass": true,
+    "e3_shuffleMeanAllEligible": 0.5093,
+    "e3_shufflePositionMean": 0.5046
+   }
+  },
+  "meanAuc": 0.6241,
+  "shareAudible": 0.655,
+  "skillFwcOnly": -0.0521,
+  "skillPairsOnly": 0.0902,
+  "adds": -0.0244,
+  "partial": 0.261,
+  "eq250": {
+   "n": 35,
+   "rho": 0.456,
+   "p": 0.003,
+   "meanIn": 0.6334,
+   "meanOut": 0.5882,
+   "audibleShareIn": 0.826,
+   "audibleShareOut": 0.333,
+   "nIn": 23,
+   "nOut": 12
+  },
+  "zones": {
+   "all": {
+    "<0.20": {
+     "n": 6,
+     "audibleShare": 0.5,
+     "meanAuc": 0.6089
+    },
+    "0.20-0.2795": {
+     "n": 16,
+     "audibleShare": 0.438,
+     "meanAuc": 0.594
+    },
+    ">=0.2795": {
+     "n": 33,
+     "audibleShare": 0.788,
+     "meanAuc": 0.6414
+    }
+   },
+   "pairs>=250": {
+    "<0.20": {
+     "n": 2,
+     "audibleShare": 0,
+     "meanAuc": 0.555
+    },
+    "0.20-0.2795": {
+     "n": 10,
+     "audibleShare": 0.5,
+     "meanAuc": 0.6089
+    },
+    ">=0.2795": {
+     "n": 23,
+     "audibleShare": 0.87,
+     "meanAuc": 0.6568
+    }
+   }
+  }
+ },
+ "A": {
+  "eligible": 10,
+  "thin": 0,
+  "voided": [],
+  "clauses": {
+   "a": {
+    "rho": -0.382,
+    "p": 0.8678,
+    "pass": false
+   },
+   "b": {
+    "skill": -0.4498,
+    "rmseModel": 0.0612,
+    "rmseBaseline": 0.0422,
+    "meanShift": -0.0156,
+    "pass": false
+   },
+   "c": {
+    "inScopeN": 3,
+    "inScopeAudibleShare": null,
+    "inScopeWilson95": [
+     0.208,
+     0.939
+    ],
+    "outScopeN": 2,
+    "outScopeAudibleShare": null,
+    "pass": false
+   },
+   "d": {
+    "nIn": 7,
+    "nOut": 3,
+    "meanIn": 0.5914,
+    "meanOut": 0.6223,
+    "diff": -0.0309,
+    "pass": false
+   },
+   "e": {
+    "e2_nullMean": 0.5022,
+    "e2_nullShareGe60": 0.02,
+    "e2_nullDraws": 50,
+    "e2_pass": true,
+    "e3_audibleLanguages": 6,
+    "e3_shuffledLe55": 6,
+    "e3_pass": true,
+    "e3_shuffleMeanAllEligible": 0.4894,
+    "e3_shufflePositionMean": 0.5061
+   }
+  },
+  "meanAuc": 0.6006,
+  "shareAudible": 0.6,
+  "skillFwcOnly": -0.922,
+  "skillPairsOnly": 0.1932,
+  "adds": -0.643,
+  "partial": -0.311,
+  "eq250": {
+   "n": 5,
+   "rho": 0.2,
+   "p": 0.3837,
+   "meanIn": 0.6023,
+   "meanOut": 0.5929,
+   "audibleShareIn": 0.667,
+   "audibleShareOut": 0.5,
+   "nIn": 3,
+   "nOut": 2
+  },
+  "zones": {
+   "all": {
+    "<0.20": {
+     "n": 1,
+     "audibleShare": 1,
+     "meanAuc": 0.654
+    },
+    "0.20-0.2795": {
+     "n": 2,
+     "audibleShare": 0.5,
+     "meanAuc": 0.6064
+    },
+    ">=0.2795": {
+     "n": 7,
+     "audibleShare": 0.571,
+     "meanAuc": 0.5914
+    }
+   },
+   "pairs>=250": {
+    "<0.20": {
+     "n": 0,
+     "audibleShare": null,
+     "meanAuc": null
+    },
+    "0.20-0.2795": {
+     "n": 2,
+     "audibleShare": 0.5,
+     "meanAuc": 0.6064
+    },
+    ">=0.2795": {
+     "n": 3,
+     "audibleShare": 0.667,
+     "meanAuc": 0.6084
+    }
+   }
+  }
+ },
+ "B": {
+  "eligible": 24,
+  "thin": 3,
+  "voided": [
+   "afr:0.5507"
+  ],
+  "clauses": {
+   "a": {
+    "rho": 0.15,
+    "p": 0.2392,
+    "pass": false
+   },
+   "b": {
+    "skill": -0.1112,
+    "rmseModel": 0.0766,
+    "rmseBaseline": 0.069,
+    "meanShift": 0.0124,
+    "pass": false
+   },
+   "c": {
+    "inScopeN": 9,
+    "inScopeAudibleShare": 0.7778,
+    "inScopeWilson95": [
+     0.453,
+     0.937
+    ],
+    "outScopeN": 6,
+    "outScopeAudibleShare": 0.3333,
+    "pass": true
+   },
+   "d": {
+    "nIn": 12,
+    "nOut": 12,
+    "meanIn": 0.6367,
+    "meanOut": 0.611,
+    "diff": 0.0256,
+    "pass": false
+   },
+   "e": {
+    "e2_nullMean": 0.4985,
+    "e2_nullShareGe60": 0,
+    "e2_nullDraws": 120,
+    "e2_pass": true,
+    "e3_audibleLanguages": 15,
+    "e3_shuffledLe55": 12,
+    "e3_pass": true,
+    "e3_shuffleMeanAllEligible": 0.517,
+    "e3_shufflePositionMean": 0.5064
+   }
+  },
+  "meanAuc": 0.6238,
+  "shareAudible": 0.625,
+  "skillFwcOnly": -0.1327,
+  "skillPairsOnly": -0.0347,
+  "adds": -0.0765,
+  "partial": 0.15,
+  "eq250": {
+   "n": 15,
+   "rho": 0.257,
+   "p": 0.174,
+   "meanIn": 0.6286,
+   "meanOut": 0.5935,
+   "audibleShareIn": 0.778,
+   "audibleShareOut": 0.333,
+   "nIn": 9,
+   "nOut": 6
+  },
+  "zones": {
+   "all": {
+    "<0.20": {
+     "n": 3,
+     "audibleShare": 0.667,
+     "meanAuc": 0.6558
+    },
+    "0.20-0.2795": {
+     "n": 9,
+     "audibleShare": 0.444,
+     "meanAuc": 0.5961
+    },
+    ">=0.2795": {
+     "n": 12,
+     "audibleShare": 0.75,
+     "meanAuc": 0.6367
+    }
+   },
+   "pairs>=250": {
+    "<0.20": {
+     "n": 1,
+     "audibleShare": 0,
+     "meanAuc": 0.5663
+    },
+    "0.20-0.2795": {
+     "n": 5,
+     "audibleShare": 0.4,
+     "meanAuc": 0.611
+    },
+    ">=0.2795": {
+     "n": 9,
+     "audibleShare": 0.778,
+     "meanAuc": 0.6462
+    }
+   }
+  }
+ },
+ "C": {
+  "eligible": 21,
+  "thin": 3,
+  "voided": [],
+  "clauses": {
+   "a": {
+    "rho": 0.591,
+    "p": 0.0045,
+    "pass": true
+   },
+   "b": {
+    "skill": 0.4867,
+    "rmseModel": 0.0361,
+    "rmseBaseline": 0.0703,
+    "meanShift": 0.0037,
+    "pass": true
+   },
+   "c": {
+    "inScopeN": 11,
+    "inScopeAudibleShare": 1,
+    "inScopeWilson95": [
+     0.741,
+     1
+    ],
+    "outScopeN": 4,
+    "outScopeAudibleShare": 0.5,
+    "pass": true
+   },
+   "d": {
+    "nIn": 14,
+    "nOut": 7,
+    "meanIn": 0.6705,
+    "meanOut": 0.5655,
+    "diff": 0.105,
+    "pass": true
+   },
+   "e": {
+    "e2_nullMean": 0.4944,
+    "e2_nullShareGe60": 0,
+    "e2_nullDraws": 105,
+    "e2_pass": true,
+    "e3_audibleLanguages": 15,
+    "e3_shuffledLe55": 14,
+    "e3_pass": true,
+    "e3_shuffleMeanAllEligible": 0.51,
+    "e3_shufflePositionMean": 0.5019
+   }
+  },
+  "meanAuc": 0.6355,
+  "shareAudible": 0.714,
+  "skillFwcOnly": 0.3156,
+  "skillPairsOnly": 0.2313,
+  "adds": 0.2554,
+  "partial": 0.522,
+  "eq250": {
+   "n": 15,
+   "rho": 0.604,
+   "p": 0.0097,
+   "meanIn": 0.6459,
+   "meanOut": 0.5779,
+   "audibleShareIn": 0.909,
+   "audibleShareOut": 0.25,
+   "nIn": 11,
+   "nOut": 4
+  },
+  "zones": {
+   "all": {
+    "<0.20": {
+     "n": 2,
+     "audibleShare": 0,
+     "meanAuc": 0.5158
+    },
+    "0.20-0.2795": {
+     "n": 5,
+     "audibleShare": 0.4,
+     "meanAuc": 0.5853
+    },
+    ">=0.2795": {
+     "n": 14,
+     "audibleShare": 0.929,
+     "meanAuc": 0.6705
+    }
+   },
+   "pairs>=250": {
+    "<0.20": {
+     "n": 1,
+     "audibleShare": 0,
+     "meanAuc": 0.5436
+    },
+    "0.20-0.2795": {
+     "n": 3,
+     "audibleShare": 0.667,
+     "meanAuc": 0.6072
+    },
+    ">=0.2795": {
+     "n": 11,
+     "audibleShare": 1,
+     "meanAuc": 0.6786
+    }
+   }
+  }
+ },
+ "sub": {
+  "ISO": {
+   "rows": [
+    "cmn:0.2217/600/0.6294",
+    "ind:0.2478/600/0.6518"
+   ],
+   "pass": true
+  },
+  "LOW_PRIMARY": {
+   "n": 4,
+   "audibleShare": 0.75,
+   "pass": false,
+   "rows": [
+    "kat:0.1956/177/0.6126",
+    "kaz:0.1257/231/0.654",
+    "lit:0.1889/145/0.7886",
+    "tam:0.1699/258/0.5663"
+   ]
+  },
+  "GRADED_PRIMARY": {
+   "intercept": 0.6181,
+   "slopeFwcPerDevSD": -0.0034,
+   "slopePairsPerDevSD": 0.0182,
+   "ciFwc": [
+    -0.0273,
+    0.0231
+   ],
+   "ciPairs": [
+    -0.0202,
+    0.0489
+   ],
+   "devSlopeFwc": 0.0377,
+   "devSlopePairs": 0.0333,
+   "pass": false
+  },
+  "EQ250_PRIMARY": {
+   "n": 20,
+   "rho": 0.235,
+   "p": 0.1515,
+   "meanIn": 0.6221,
+   "meanOut": 0.5933,
+   "audibleShareIn": 0.75,
+   "audibleShareOut": 0.375,
+   "nIn": 12,
+   "nOut": 8,
+   "pass": false
+  },
+  "ADDS_PRIMARY": {
+   "addsBeyondPairs": -0.1558,
+   "pass": false,
+   "partialSpearman": -0.033
+  },
+  "LOW_POOLED": {
+   "n": 6,
+   "audibleShare": 0.5,
+   "pass": false,
+   "rows": [
+    "fin:0.1903/169/0.488",
+    "kat:0.1956/177/0.6126",
+    "kaz:0.1257/231/0.654",
+    "lit:0.1889/145/0.7886",
+    "tam:0.1699/258/0.5663",
+    "tur:0.1529/327/0.5436"
+   ]
+  },
+  "GRADED_POOLED": {
+   "intercept": 0.6204,
+   "slopeFwcPerDevSD": 0.0157,
+   "slopePairsPerDevSD": 0.0339,
+   "ciFwc": [
+    -0.0017,
+    0.0353
+   ],
+   "ciPairs": [
+    0.0083,
+    0.0546
+   ],
+   "devSlopeFwc": 0.0377,
+   "devSlopePairs": 0.0333,
+   "pass": false
+  },
+  "EQ250_POOLED": {
+   "n": 35,
+   "rho": 0.456,
+   "p": 0.003,
+   "meanIn": 0.6334,
+   "meanOut": 0.5882,
+   "audibleShareIn": 0.826,
+   "audibleShareOut": 0.333,
+   "nIn": 23,
+   "nOut": 12,
+   "pass": true
+  },
+  "ADDS_POOLED": {
+   "addsBeyondPairs": -0.0244,
+   "pass": false,
+   "partialSpearman": 0.261
+  }
+ },
+ "descriptive": {
+  "rel": {
+   "n": 42,
+   "spearman": 0.442,
+   "p": 0.0025,
+   "meanTrain": 0.6295,
+   "meanTest": 0.6072
+  },
+  "relDev": {
+   "n": 20,
+   "spearman": 0.672,
+   "p": 0.001
+  },
+  "combinedRho": 0.314
+ }
+}

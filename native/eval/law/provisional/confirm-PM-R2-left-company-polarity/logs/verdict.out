@@ -1,0 +1,257 @@
+{
+ "verdict": "PARTIAL: holds(code) fails(irc,book,ud) P1=false",
+ "famPass": {
+  "irc": false,
+  "code": true,
+  "book": false,
+  "ud": false
+ },
+ "P": {
+  "P1": {
+   "rho": 0.2623,
+   "p": 0.0445,
+   "n": 40,
+   "pass": false,
+   "byFamily": {
+    "irc": 0,
+    "code": 3,
+    "book": 4,
+    "ud": 33
+   }
+  },
+  "P2": {
+   "valid": 0,
+   "cells": [],
+   "pass": false
+  },
+  "P3": {
+   "valid": 3,
+   "cells": [
+    [
+     "code-js",
+     0.6754,
+     0.6292
+    ],
+    [
+     "code-py",
+     0.6175,
+     0.5726
+    ],
+    [
+     "code-rb",
+     0.6149,
+     0.5654
+    ]
+   ],
+   "pass": true
+  },
+  "P4": {
+   "valid": 4,
+   "cells": [
+    [
+     "book-anne-of-green-gables",
+     0.4055
+    ],
+    [
+     "book-crime-and-punishment",
+     0.5078
+    ],
+    [
+     "book-great-expectations",
+     0.4073
+    ],
+    [
+     "book-treasure-island",
+     0.4929
+    ]
+   ],
+   "nLow": 2,
+   "pass": false
+  },
+  "P5": {
+   "valid": 33,
+   "median": 0.4779,
+   "POS": 3,
+   "NEG": 8,
+   "FLAT": 22,
+   "pass": false
+  },
+  "P6": {
+   "irc": null,
+   "code": 0.1077,
+   "book": -0.0429,
+   "ud": -0.0301,
+   "pass": {
+    "irc": false,
+    "code": true,
+    "book": false
+   }
+  }
+ },
+ "controls": {
+  "sham-irc": {
+   "n": 3,
+   "medDev": 0.0067,
+   "ok": true
+  },
+  "sham-code": {
+   "n": 3,
+   "medDev": 0.0172,
+   "ok": true
+  },
+  "sham-book": {
+   "n": 6,
+   "medDev": 0.0142,
+   "ok": true
+  },
+  "sham-ud": {
+   "n": 58,
+   "medDev": 0.015,
+   "ok": true
+  },
+  "impl": {
+   "n": 40,
+   "shareWithin003": 0.975,
+   "ok": true
+  }
+ },
+ "report": {
+  "rho": {
+   "noCode": {
+    "rho": 0.073,
+    "p": 0.3243,
+    "n": 37
+   },
+   "noIrc": {
+    "rho": 0.2623,
+    "p": 0.0545,
+    "n": 40
+   },
+   "noUd": {
+    "rho": 0.8571,
+    "p": 0.0125,
+    "n": 7
+   },
+   "udOnly": {
+    "rho": 0.0575,
+    "p": 0.3733,
+    "n": 33
+   },
+   "nonUd": {
+    "rho": 0.8571,
+    "p": 0.0125,
+    "n": 7
+   }
+  },
+  "validity": {
+   "irc": {
+    "total": 3,
+    "pairsGe60": 3,
+    "posOk": 3,
+    "valid": 0
+   },
+   "code": {
+    "total": 3,
+    "pairsGe60": 3,
+    "posOk": 3,
+    "valid": 3
+   },
+   "book": {
+    "total": 6,
+    "pairsGe60": 6,
+    "posOk": 6,
+    "valid": 4
+   },
+   "ud": {
+    "total": 59,
+    "pairsGe60": 52,
+    "posOk": 52,
+    "valid": 33
+   }
+  },
+  "signAccuracy": {
+   "n": 21,
+   "hit": 15,
+   "acc": 0.7143,
+   "pOneSidedBinom": 0.0392,
+   "byFamily": {
+    "irc": {
+     "n": 0,
+     "hit": 0
+    },
+    "code": {
+     "n": 3,
+     "hit": 3
+    },
+    "book": {
+     "n": 4,
+     "hit": 3
+    },
+    "ud": {
+     "n": 14,
+     "hit": 9
+    }
+   }
+  },
+  "udSignedAbove": [
+   [
+    "ud-lzh_kyoto",
+    0.2044,
+    0.5127
+   ],
+   [
+    "ud-sk_snk",
+    0.1331,
+    0.4882
+   ]
+  ]
+ },
+ "posthoc": {
+  "note": "position-only validity (scoper convention); NOT the registered verdict",
+  "P1": {
+   "rho": 0.2449,
+   "p": 0.0235,
+   "n": 64
+  },
+  "irc": {
+   "valid": 3,
+   "cells": [
+    [
+     "irc-kubuntu",
+     0.6621,
+     0.5866,
+     0.4478
+    ],
+    [
+     "irc-ubuntu-server",
+     0.6006,
+     0.5255,
+     0.3774
+    ],
+    [
+     "irc-xubuntu",
+     0.6333,
+     0.5468,
+     0.43
+    ]
+   ],
+   "delta": 0.1985
+  },
+  "code": {
+   "valid": 3,
+   "delta": 0.1077
+  },
+  "book": {
+   "valid": 6,
+   "nLow": 3,
+   "delta": -0.0429
+  },
+  "ud": {
+   "valid": 52,
+   "median": 0.4658,
+   "POS": 3,
+   "NEG": 17,
+   "delta": -0.0458
+  }
+ }
+}

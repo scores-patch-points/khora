@@ -27,7 +27,7 @@ import { engineRelationsFor } from "./native/the-fold/reader-bundle.js";
 import { splitSentences } from "./native/adapters/text/spans.js";
 import { extractSurfaces, discoverReferents, namesCorefer, diaNorm } from "./native/adapters/text/surfaces.js";
 import { elenchusBar, RERUN_NULL } from "./native/eval/lavar/elenchus-bar.mjs";
-import { detectSwarmIntent, pointCapacities, swarmCapacities } from "./native/eval/lavar/capacity-swarm.mjs";
+import { detectSwarmIntent, pointCapacities, swarmCapacities, yieldOf } from "./native/eval/lavar/capacity-swarm.mjs";
 import { detectHardMeaning, signalControl } from "./native/eval/lavar/hard-meaning.mjs";
 import { contentRuleFor, preserveContentRule } from "./content-rules.mjs";
 import { TERRAINS } from "./native/kernel/terrain-state.js";
@@ -69,8 +69,7 @@ export function antTerrain(a) {
 export function measuredBar(runCapacity, seeds, text, name) {
   const yields = seeds.map((s) => {
     try {
-      const r = runCapacity(s.capacity, { text, name });
-      return r?.gap ? 0 : (r?.referents?.length ?? r?.edges?.length ?? r?.fillers?.length ?? r?.count ?? 0);
+      return yieldOf(runCapacity(s.capacity, { text, name }));
     } catch { return 0; }
   });
   const best = Math.max(0, ...yields);
@@ -299,7 +298,8 @@ export function renderSwarmAnswer(out, bar, { meaning = null, standing = null, r
     const gap = rep?.result?.gap ?? null;
     if (sd.f > 0) lines.push(`· ${name}: signal ${sd.f}`);
     else if (gap === "no_material") lines.push(`· ${name}: no signal — empty ground`);
-    else if (gap) lines.push(`· ${name}: no signal — reference-only (${gap}, not wired to run)`);
+    else if (gap === "not_yet_executable") lines.push(`· ${name}: no signal — reference-only (${gap}, not wired to run)`);
+    else if (gap) lines.push(`· ${name}: no signal — ${gap}`);
     else lines.push(`· ${name}: measured nothing on this ground (executable, zero yield)`);
   }
   const bred = out.swarm.ants.filter((a) => (a.kind === "bred" || a.kind === "differentiated") && a.admitted);

@@ -1,0 +1,70 @@
+{
+ "part": "abbrev",
+ "statIds": [
+  "zipfAlpha",
+  "heapsBeta",
+  "ttr",
+  "hapaxShare",
+  "rankBinEnt",
+  "abbrev",
+  "menzerath",
+  "recurLen",
+  "lenAcf1",
+  "lenDocEps",
+  "lenCV",
+  "lenLogSkew"
+ ],
+ "nulls": {
+  "zipfAlpha": "token-global",
+  "heapsBeta": "token-global",
+  "ttr": "token-global",
+  "hapaxShare": "token-global",
+  "rankBinEnt": "token-global",
+  "abbrev": "token-global",
+  "menzerath": "token-global",
+  "recurLen": "token-global",
+  "lenAcf1": "unit-order",
+  "lenDocEps": "unit-order",
+  "lenCV": "token-global",
+  "lenLogSkew": "token-global"
+ },
+ "inert": [
+  "abbrev",
+  "lenCV",
+  "lenLogSkew"
+ ],
+ "rows": [
+  {
+   "id": "pl-null",
+   "rhoObserved": 0.0313,
+   "permNullMean": -0.0019,
+   "permNullSd": 0.0442,
+   "zPermutation": 0.75,
+   "computeValue": 0.0313
+  },
+  {
+   "id": "pl-length",
+   "rhoObserved": -0.7048,
+   "permNullMean": -0.0039,
+   "permNullSd": 0.0444,
+   "zPermutation": -15.8,
+   "computeValue": -0.7048
+  },
+  {
+   "id": "real-pride",
+   "rhoObserved": -0.4525,
+   "permNullMean": -0.0043,
+   "permNullSd": 0.0454,
+   "zPermutation": -9.87,
+   "computeValue": -0.4525
+  },
+  {
+   "id": "inline-topical",
+   "rhoObserved": 0.0306,
+   "permNullMean": -0.0025,
+   "permNullSd": 0.0419,
+   "zPermutation": 0.79,
+   "computeValue": 0.0306
+  }
+ ]
+}

@@ -1,0 +1,3123 @@
+{
+ "module": "eval/law/provisional/confirm-ablscope-1-slot-ircB-c4plus/analyse.mjs",
+ "rule": "ablscope-1-slot-ircB-c4plus",
+ "B": 2000,
+ "designSha256": "7b70f89881c224311aa04f5dd56a06870e4e85ff29cc3310bf90edf403a9b675",
+ "tokensDesigned": 37572,
+ "tokensMissing": 0,
+ "pairsBuilt": 8687,
+ "controlsRun": {
+  "K1_sham": {
+   "nullShare": 1,
+   "n": 1012
+  },
+  "K6_determinism": {
+   "same": 1012,
+   "n": 1012
+  },
+  "gaps": 0,
+  "K7": {
+   "files": [
+    {
+     "f": "ubuntu_2011-03-15.cf.c7_15-c16p.jsonl",
+     "doc": "ubuntu/2011-03-15",
+     "n": 12,
+     "hashSame": 12,
+     "sEntrySame": 12,
+     "theirNonZero": 7
+    },
+    {
+     "f": "ubuntu_2012-03-15.cf.c2-c3-c4_6.jsonl",
+     "doc": "ubuntu/2012-03-15",
+     "n": 12,
+     "hashSame": 12,
+     "sEntrySame": 12,
+     "theirNonZero": 3
+    }
+   ],
+   "same": 24,
+   "total": 24,
+   "sEntrySame": 24,
+   "sEntryNonZero": 10
+  }
+ },
+ "runValid": true,
+ "T1": {
+  "strata": [
+   "c4_6",
+   "c7_15",
+   "c16p"
+  ],
+  "liveStrata": [
+   "c4_6",
+   "c7_15",
+   "c16p"
+  ],
+  "pairs": 75,
+  "days": 13,
+  "auc": 0.8467,
+  "ci": [
+   0.8102,
+   0.9355
+  ],
+  "permQ95": 0.58,
+  "permP": 0,
+  "perStratum": {
+   "c4_6": {
+    "n": 27,
+    "auc": 0.7778,
+    "ci": [
+     0.6774,
+     0.9118
+    ],
+    "sens": 0.5556,
+    "spec": 1
+   },
+   "c7_15": {
+    "n": 41,
+    "auc": 0.9146,
+    "ci": [
+     0.8714,
+     1
+    ],
+    "sens": 0.8537,
+    "spec": 0.9756
+   },
+   "c16p": {
+    "n": 7,
+    "auc": 0.7143,
+    "ci": [
+     0.5,
+     1
+    ],
+    "sens": 0.4286,
+    "spec": 1
+   }
+  },
+  "sens": 0.7067,
+  "spec": 0.9867,
+  "nonNullNames": 0.84,
+  "nonNullUnlabelled": 0.5067,
+  "controls": {
+   "R_LOGC": 0.518,
+   "R_POS": 0.4806,
+   "R_IPOS": 0.5069,
+   "R_FB": 0.4836,
+   "R_LEN": 0.5326,
+   "R_SL": 0.4783
+  },
+  "controlsInBand": true,
+  "positionControlsInBand": true,
+  "controlProbeAuc": 0.5296,
+  "caliper": {
+   "pairs": 8
+  },
+  "consistency": {
+   "groups": 7,
+   "evaluable": 7,
+   "above": 7,
+   "geq": 7,
+   "per": [
+    [
+     "kubuntu/2007-03-15+",
+     12,
+     0.7917
+    ],
+    [
+     "kubuntu/2007-03-15+",
+     12,
+     0.8333
+    ],
+    [
+     "kubuntu/2007-03-15+",
+     12,
+     0.9167
+    ],
+    [
+     "kubuntu/2007-03-15+",
+     13,
+     0.7308
+    ],
+    [
+     "xubuntu/2007-03-15+",
+     11,
+     0.9545
+    ],
+    [
+     "kubuntu/2010-03-15+",
+     8,
+     0.875
+    ],
+    [
+     "xubuntu/2011-07-15+",
+     7,
+     0.8571
+    ]
+   ]
+  },
+  "rivals": {
+   "R_INIT": {
+    "auc": 0.946,
+    "ci": [
+     0.9257,
+     1
+    ],
+    "diffSEntryMinus": [
+     -0.0994,
+     -0.1377,
+     -0.0615
+    ],
+    "sens025": 0.92,
+    "spec025": 0.88
+   },
+   "R_BURST": {
+    "auc": 0.5888,
+    "ci": [
+     0.5424,
+     0.7164
+    ],
+    "diffSEntryMinus": [
+     0.2579,
+     0.1512,
+     0.3364
+    ]
+   }
+  },
+  "exploratory": {
+   "S_ALL": 0.6695,
+   "S_OWN": 0.6925,
+   "EXTENT": 0.8623
+  },
+  "passList": {
+   "a_pairs": true,
+   "b_auc": true,
+   "c_lb": true,
+   "d_perm": true,
+   "e_controls": true,
+   "f_probe": true,
+   "g_consistency": true,
+   "h_spec": true,
+   "i_caliper": true,
+   "void": false,
+   "pass": true
+  },
+  "floor": {
+   "strata": [
+    "c2",
+    "c3"
+   ],
+   "liveStrata": [
+    "c2",
+    "c3"
+   ],
+   "pairs": 49,
+   "days": 15,
+   "auc": 0.5,
+   "ci": [
+    0.5,
+    0.5
+   ],
+   "permQ95": 0.5,
+   "permP": 1,
+   "perStratum": {
+    "c2": {
+     "n": 26,
+     "auc": 0.5,
+     "ci": [
+      0.5,
+      0.5
+     ],
+     "sens": 0,
+     "spec": 1
+    },
+    "c3": {
+     "n": 23,
+     "auc": 0.5,
+     "ci": [
+      0.5,
+      0.5
+     ],
+     "sens": 0,
+     "spec": 1
+    }
+   },
+   "sens": 0,
+   "spec": 1,
+   "nonNullNames": 0.6327,
+   "nonNullUnlabelled": 0.5918,
+   "controls": {
+    "R_LOGC": 0.5,
+    "R_POS": 0.4857,
+    "R_IPOS": 0.4788,
+    "R_FB": 0.5025,
+    "R_LEN": 0.5181,
+    "R_SL": 0.4699
+   },
+   "controlsInBand": true,
+   "positionControlsInBand": true,
+   "verdict": "PASS"
+  },
+  "floorE_COREonly": {
+   "strata": [
+    "c2",
+    "c3"
+   ],
+   "liveStrata": [
+    "c2",
+    "c3"
+   ],
+   "pairs": 43,
+   "days": 10,
+   "auc": 0.5,
+   "ci": [
+    0.5,
+    0.5
+   ],
+   "permQ95": 0.5,
+   "permP": 1,
+   "perStratum": {
+    "c2": {
+     "n": 24,
+     "auc": 0.5,
+     "ci": [
+      0.5,
+      0.5
+     ],
+     "sens": 0,
+     "spec": 1
+    },
+    "c3": {
+     "n": 19,
+     "auc": 0.5,
+     "ci": [
+      0.5,
+      0.5
+     ],
+     "sens": 0,
+     "spec": 1
+    }
+   },
+   "sens": 0,
+   "spec": 1,
+   "nonNullNames": 0.6279,
+   "nonNullUnlabelled": 0.5581,
+   "controls": {
+    "R_LOGC": 0.5,
+    "R_POS": 0.4953,
+    "R_IPOS": 0.4705,
+    "R_FB": 0.5024,
+    "R_LEN": 0.509,
+    "R_SL": 0.4619
+   },
+   "controlsInBand": true,
+   "positionControlsInBand": true
+  },
+  "cGradient": {
+   "sensC4_6": 0.5556,
+   "sensC7_15": 0.8537,
+   "sensC16p": 0.4286
+  },
+  "sensitivityAnalysis": {
+   "withSrv": {
+    "strata": [
+     "c4_6",
+     "c7_15",
+     "c16p"
+    ],
+    "liveStrata": [
+     "c4_6",
+     "c7_15",
+     "c16p"
+    ],
+    "pairs": 90,
+    "days": 20,
+    "auc": 0.8556,
+    "ci": [
+     0.8217,
+     0.9255
+    ],
+    "permQ95": 0.5778,
+    "permP": 0,
+    "perStratum": {
+     "c4_6": {
+      "n": 36,
+      "auc": 0.8056,
+      "ci": [
+       0.7222,
+       0.913
+      ],
+      "sens": 0.6111,
+      "spec": 1
+     },
+     "c7_15": {
+      "n": 47,
+      "auc": 0.9149,
+      "ci": [
+       0.875,
+       0.9783
+      ],
+      "sens": 0.8723,
+      "spec": 0.9574
+     },
+     "c16p": {
+      "n": 7,
+      "auc": 0.7143,
+      "ci": [
+       0.5,
+       1
+      ],
+      "sens": 0.4286,
+      "spec": 1
+     }
+    },
+    "sens": 0.7333,
+    "spec": 0.9778,
+    "nonNullNames": 0.8667,
+    "nonNullUnlabelled": 0.4778,
+    "controls": {
+     "R_LOGC": 0.5101,
+     "R_POS": 0.4848,
+     "R_IPOS": 0.5066,
+     "R_FB": 0.4763,
+     "R_LEN": 0.5291,
+     "R_SL": 0.4845
+    },
+    "controlsInBand": true,
+    "positionControlsInBand": true,
+    "controlProbeAuc": 0.5267,
+    "caliper": {
+     "pairs": 10
+    }
+   }
+  },
+  "perDay": {
+   "ubuntu/2014-03-15": {
+    "n": 2,
+    "auc": 1,
+    "sens": 1,
+    "spec": 1
+   },
+   "kubuntu/2007-03-15": {
+    "n": 49,
+    "auc": 0.8163,
+    "sens": 0.6531,
+    "spec": 0.9796
+   },
+   "kubuntu/2009-07-15": {
+    "n": 8,
+    "auc": 1,
+    "sens": 1,
+    "spec": 1
+   },
+   "kubuntu/2010-03-15": {
+    "n": 3,
+    "auc": 0.8333,
+    "sens": 0.6667,
+    "spec": 1
+   },
+   "kubuntu/2010-07-15": {
+    "n": 1,
+    "auc": 1,
+    "sens": 1,
+    "spec": 1
+   },
+   "kubuntu/2011-03-15": {
+    "n": 4,
+    "auc": 0.875,
+    "sens": 0.75,
+    "spec": 1
+   },
+   "kubuntu/2012-07-15": {
+    "n": 1,
+    "auc": 1,
+    "sens": 1,
+    "spec": 1
+   },
+   "kubuntu/2013-03-15": {
+    "n": 1,
+    "auc": 0.5,
+    "sens": 0,
+    "spec": 1
+   },
+   "kubuntu/2014-07-15": {
+    "n": 1,
+    "auc": 0.5,
+    "sens": 0,
+    "spec": 1
+   },
+   "xubuntu/2007-03-15": {
+    "n": 2,
+    "auc": 0.75,
+    "sens": 0.5,
+    "spec": 1
+   },
+   "xubuntu/2008-07-15": {
+    "n": 1,
+    "auc": 1,
+    "sens": 1,
+    "spec": 1
+   },
+   "xubuntu/2011-07-15": {
+    "n": 1,
+    "auc": 1,
+    "sens": 1,
+    "spec": 1
+   },
+   "xubuntu/2013-03-15": {
+    "n": 1,
+    "auc": 1,
+    "sens": 1,
+    "spec": 1
+   }
+  },
+  "excludingBigDay": {
+   "strata": [
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "liveStrata": [
+    "c4_6",
+    "c7_15"
+   ],
+   "pairs": 26,
+   "days": 12,
+   "auc": 0.9038,
+   "ci": [
+    0.8,
+    0.9655
+   ],
+   "permQ95": 0.6346,
+   "permP": 0,
+   "perStratum": {
+    "c4_6": {
+     "n": 11,
+     "auc": 0.8636,
+     "ci": [
+      0.7083,
+      0.9688
+     ],
+     "sens": 0.7273,
+     "spec": 1
+    },
+    "c7_15": {
+     "n": 15,
+     "auc": 0.9333,
+     "ci": [
+      0.85,
+      1
+     ],
+     "sens": 0.8667,
+     "spec": 1
+    }
+   },
+   "sens": 0.8077,
+   "spec": 1,
+   "nonNullNames": 0.8462,
+   "nonNullUnlabelled": 0.3846,
+   "controls": {
+    "R_LOGC": 0.5321,
+    "R_POS": 0.4622,
+    "R_IPOS": 0.5016,
+    "R_FB": 0.4855,
+    "R_LEN": 0.5614,
+    "R_SL": 0.4805
+   },
+   "controlsInBand": false,
+   "positionControlsInBand": true
+  }
+ },
+ "T2": {
+  "strata": [
+   "c4_6",
+   "c7_15",
+   "c16p"
+  ],
+  "liveStrata": [
+   "c4_6",
+   "c7_15",
+   "c16p"
+  ],
+  "pairs": 407,
+  "days": 14,
+  "auc": 0.817,
+  "ci": [
+   0.782,
+   0.8501
+  ],
+  "permQ95": 0.5344,
+  "permP": 0,
+  "perStratum": {
+   "c4_6": {
+    "n": 160,
+    "auc": 0.725,
+    "ci": [
+     0.6835,
+     0.7647
+    ],
+    "sens": 0.4562,
+    "spec": 0.9938
+   },
+   "c7_15": {
+    "n": 157,
+    "auc": 0.8631,
+    "ci": [
+     0.8086,
+     0.9136
+    ],
+    "sens": 0.7325,
+    "spec": 0.9936
+   },
+   "c16p": {
+    "n": 90,
+    "auc": 0.9,
+    "ci": [
+     0.8526,
+     0.9437
+    ],
+    "sens": 0.8111,
+    "spec": 0.9889
+   }
+  },
+  "sens": 0.6413,
+  "spec": 0.9926,
+  "nonNullNames": 0.8477,
+  "nonNullUnlabelled": 0.4152,
+  "controls": {
+   "R_LOGC": 0.5158,
+   "R_POS": 0.5015,
+   "R_IPOS": 0.4955,
+   "R_FB": 0.4641,
+   "R_LEN": 0.509,
+   "R_SL": 0.489
+  },
+  "controlsInBand": true,
+  "positionControlsInBand": true,
+  "controlProbeAuc": 0.5341,
+  "caliper": {
+   "pairs": 82,
+   "auc": 0.7378,
+   "ci": [
+    0.6686,
+    0.8148
+   ]
+  },
+  "consistency": {
+   "groups": 41,
+   "evaluable": 41,
+   "above": 40,
+   "geq": 41,
+   "per": [
+    [
+     "ubuntu/2004-11-15+",
+     10,
+     0.65
+    ],
+    [
+     "ubuntu/2004-11-15+",
+     11,
+     0.8182
+    ],
+    [
+     "ubuntu/2004-11-15+",
+     10,
+     0.8
+    ],
+    [
+     "ubuntu/2004-11-15+",
+     11,
+     0.9091
+    ],
+    [
+     "ubuntu/2005-03-15+",
+     10,
+     0.75
+    ],
+    [
+     "ubuntu/2005-03-15+",
+     11,
+     0.8636
+    ],
+    [
+     "ubuntu/2005-03-15+",
+     10,
+     0.75
+    ],
+    [
+     "ubuntu/2005-03-15+",
+     11,
+     0.7273
+    ],
+    [
+     "kubuntu/2005-07-15+",
+     15,
+     0.9333
+    ],
+    [
+     "kubuntu/2005-11-15+",
+     6,
+     0.75
+    ],
+    [
+     "kubuntu/2006-07-15+",
+     6,
+     0.75
+    ],
+    [
+     "kubuntu/2006-07-15+",
+     6,
+     0.8333
+    ],
+    [
+     "kubuntu/2006-07-15+",
+     6,
+     0.9167
+    ],
+    [
+     "kubuntu/2006-07-15+",
+     6,
+     0.8333
+    ],
+    [
+     "ubuntu/2006-07-15+",
+     10,
+     0.85
+    ],
+    [
+     "ubuntu/2006-07-15+",
+     11,
+     0.9091
+    ],
+    [
+     "ubuntu/2006-07-15+",
+     10,
+     0.9
+    ],
+    [
+     "ubuntu/2006-07-15+",
+     11,
+     0.9545
+    ],
+    [
+     "ubuntu/2007-03-15+",
+     10,
+     0.95
+    ],
+    [
+     "ubuntu/2007-03-15+",
+     10,
+     0.9
+    ],
+    [
+     "ubuntu/2007-03-15+",
+     10,
+     0.9
+    ],
+    [
+     "ubuntu/2007-03-15+",
+     10,
+     0.8
+    ],
+    [
+     "kubuntu/2007-07-15+",
+     7,
+     0.8571
+    ],
+    [
+     "kubuntu/2007-07-15+",
+     7,
+     0.9286
+    ],
+    [
+     "kubuntu/2007-07-15+",
+     7,
+     0.8571
+    ],
+    [
+     "kubuntu/2007-07-15+",
+     7,
+     0.8571
+    ],
+    [
+     "kubuntu/2008-03-15+",
+     17,
+     0.5
+    ],
+    [
+     "kubuntu/2008-07-15+",
+     17,
+     0.8824
+    ],
+    [
+     "ubuntu/2009-07-15+",
+     10,
+     0.8
+    ],
+    [
+     "ubuntu/2009-07-15+",
+     11,
+     0.6818
+    ],
+    [
+     "ubuntu/2009-07-15+",
+     10,
+     0.8
+    ],
+    [
+     "ubuntu/2009-07-15+",
+     11,
+     0.7727
+    ],
+    [
+     "ubuntu/2012-07-15+",
+     9,
+     0.7222
+    ],
+    [
+     "ubuntu/2012-07-15+",
+     9,
+     0.8889
+    ],
+    [
+     "ubuntu/2012-07-15+",
+     9,
+     0.7778
+    ],
+    [
+     "ubuntu/2012-07-15+",
+     10,
+     0.65
+    ],
+    [
+     "ubuntu/2014-07-15+",
+     22,
+     0.8409
+    ],
+    [
+     "ubuntu/2015-03-15+",
+     8,
+     0.75
+    ],
+    [
+     "ubuntu/2015-03-15+",
+     8,
+     0.8125
+    ],
+    [
+     "ubuntu/2015-03-15+",
+     8,
+     1
+    ],
+    [
+     "ubuntu/2015-03-15+",
+     9,
+     0.8333
+    ]
+   ]
+  },
+  "rivals": {
+   "R_INIT": {
+    "auc": 0.9113,
+    "ci": [
+     0.8791,
+     0.9435
+    ],
+    "diffSEntryMinus": [
+     -0.0944,
+     -0.1263,
+     -0.0669
+    ],
+    "sens025": 0.828,
+    "spec025": 0.9165
+   },
+   "R_BURST": {
+    "auc": 0.5193,
+    "ci": [
+     0.4773,
+     0.5664
+    ],
+    "diffSEntryMinus": [
+     0.2976,
+     0.2313,
+     0.3601
+    ]
+   }
+  },
+  "exploratory": {
+   "S_ALL": 0.7216,
+   "S_OWN": 0.7269,
+   "EXTENT": 0.8415
+  },
+  "passList": {
+   "a_pairs": true,
+   "b_auc": true,
+   "c_lb": true,
+   "d_perm": true,
+   "e_controls": true,
+   "f_probe": true,
+   "g_consistency": true,
+   "h_spec": true,
+   "i_caliper": true,
+   "void": false,
+   "pass": true,
+   "days8": true
+  }
+ },
+ "T3": {
+  "strata": [
+   "c4_6",
+   "c7_15",
+   "c16p"
+  ],
+  "liveStrata": [
+   "c4_6",
+   "c7_15"
+  ],
+  "pairs": 15,
+  "days": 7,
+  "auc": 0.9,
+  "ci": [
+   0.85,
+   1
+  ],
+  "permQ95": 0.7,
+  "permP": 0,
+  "perStratum": {
+   "c4_6": {
+    "n": 9,
+    "auc": 0.8889,
+    "ci": [
+     0.8182,
+     1
+    ],
+    "sens": 0.7778,
+    "spec": 1
+   },
+   "c7_15": {
+    "n": 6,
+    "auc": 0.9167,
+    "ci": [
+     0.9167,
+     0.9167
+    ],
+    "sens": 1,
+    "spec": 0.8333
+   }
+  },
+  "sens": 0.8667,
+  "spec": 0.9333,
+  "nonNullNames": 1,
+  "nonNullUnlabelled": 0.3333,
+  "controls": {
+   "R_LOGC": 0.4722,
+   "R_POS": 0.5222,
+   "R_IPOS": 0.5111,
+   "R_FB": 0.4037,
+   "R_LEN": 0.5074,
+   "R_SL": 0.5296
+  },
+  "controlsInBand": false,
+  "positionControlsInBand": true,
+  "rivals": {
+   "R_INIT": {
+    "auc": 1,
+    "ci": [
+     1,
+     1
+    ],
+    "diffSEntryMinus": [
+     -0.1,
+     -0.15,
+     0
+    ],
+    "sens025": 1,
+    "spec025": 0.9333
+   },
+   "R_BURST": {
+    "auc": 0.6889,
+    "ci": [
+     0.565,
+     0.8776
+    ],
+    "diffSEntryMinus": [
+     0.2111,
+     0.0923,
+     0.3163
+    ]
+   }
+  },
+  "exploratory": {
+   "S_ALL": 0.8944,
+   "S_OWN": 0.8444,
+   "EXTENT": 0.9444
+  }
+ },
+ "T4": {
+  "strata": [
+   "c2",
+   "c3"
+  ],
+  "liveStrata": [
+   "c2",
+   "c3"
+  ],
+  "pairs": 225,
+  "days": 14,
+  "auc": 0.5111,
+  "ci": [
+   0.5023,
+   0.5199
+  ],
+  "permQ95": 0.5067,
+  "permP": 0.029,
+  "perStratum": {
+   "c2": {
+    "n": 119,
+    "auc": 0.5,
+    "ci": [
+     0.5,
+     0.5
+    ],
+    "sens": 0,
+    "spec": 1
+   },
+   "c3": {
+    "n": 106,
+    "auc": 0.5236,
+    "ci": [
+     0.506,
+     0.5441
+    ],
+    "sens": 0.0472,
+    "spec": 1
+   }
+  },
+  "sens": 0.0222,
+  "spec": 1,
+  "nonNullNames": 0.52,
+  "nonNullUnlabelled": 0.5867,
+  "controls": {
+   "R_LOGC": 0.5,
+   "R_POS": 0.4981,
+   "R_IPOS": 0.5003,
+   "R_FB": 0.5004,
+   "R_LEN": 0.5036,
+   "R_SL": 0.4858
+  },
+  "controlsInBand": true,
+  "positionControlsInBand": true,
+  "verdict": "PASS"
+ },
+ "T5": {
+  "E_CORE": {
+   "strata": [
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "liveStrata": [
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "pairs": 363,
+   "days": 17,
+   "auc": 0.8209,
+   "ci": [
+    0.8018,
+    0.854
+   ],
+   "permQ95": 0.5372,
+   "permP": 0,
+   "perStratum": {
+    "c4_6": {
+     "n": 214,
+     "auc": 0.7804,
+     "ci": [
+      0.745,
+      0.8344
+     ],
+     "sens": 0.8084,
+     "spec": 0.7523
+    },
+    "c7_15": {
+     "n": 128,
+     "auc": 0.8828,
+     "ci": [
+      0.8436,
+      0.9291
+     ],
+     "sens": 0.9688,
+     "spec": 0.7969
+    },
+    "c16p": {
+     "n": 21,
+     "auc": 0.8571,
+     "ci": [
+      0.6667,
+      1
+     ],
+     "sens": 1,
+     "spec": 0.7143
+    }
+   },
+   "sens": 0.876,
+   "spec": 0.7658,
+   "nonNullNames": 0.9366,
+   "nonNullUnlabelled": 0.5482,
+   "controls": {
+    "R_LOGC": 0.511,
+    "R_POS": 0.5039,
+    "R_IPOS": 0.5,
+    "R_FB": 0.4232,
+    "R_LEN": 0.5523,
+    "R_SL": 0.531
+   },
+   "controlsInBand": false,
+   "positionControlsInBand": true
+  },
+  "E_REUSE": {
+   "strata": [
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "liveStrata": [
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "pairs": 371,
+   "days": 14,
+   "auc": 0.7507,
+   "ci": [
+    0.709,
+    0.7907
+   ],
+   "permQ95": 0.5323,
+   "permP": 0,
+   "perStratum": {
+    "c4_6": {
+     "n": 140,
+     "auc": 0.6929,
+     "ci": [
+      0.6408,
+      0.7423
+     ],
+     "sens": 0.7429,
+     "spec": 0.6429
+    },
+    "c7_15": {
+     "n": 137,
+     "auc": 0.7774,
+     "ci": [
+      0.7183,
+      0.8369
+     ],
+     "sens": 0.8978,
+     "spec": 0.6569
+    },
+    "c16p": {
+     "n": 94,
+     "auc": 0.7979,
+     "ci": [
+      0.6852,
+      0.9
+     ],
+     "sens": 0.8723,
+     "spec": 0.7234
+    }
+   },
+   "sens": 0.8329,
+   "spec": 0.6685,
+   "nonNullNames": 0.9164,
+   "nonNullUnlabelled": 0.5364,
+   "controls": {
+    "R_LOGC": 0.5117,
+    "R_POS": 0.5004,
+    "R_IPOS": 0.5,
+    "R_FB": 0.4389,
+    "R_LEN": 0.5356,
+    "R_SL": 0.5141
+   },
+   "controlsInBand": false,
+   "positionControlsInBand": true
+  },
+  "pooled": {
+   "strata": [
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "liveStrata": [
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "pairs": 734,
+   "days": 31,
+   "auc": 0.7854,
+   "ci": [
+    0.7569,
+    0.8091
+   ],
+   "permQ95": 0.5238,
+   "permP": 0,
+   "perStratum": {
+    "c4_6": {
+     "n": 354,
+     "auc": 0.7458,
+     "ci": [
+      0.7071,
+      0.7744
+     ],
+     "sens": 0.7825,
+     "spec": 0.709
+    },
+    "c7_15": {
+     "n": 265,
+     "auc": 0.8283,
+     "ci": [
+      0.7807,
+      0.8692
+     ],
+     "sens": 0.9321,
+     "spec": 0.7245
+    },
+    "c16p": {
+     "n": 115,
+     "auc": 0.8087,
+     "ci": [
+      0.7188,
+      0.8932
+     ],
+     "sens": 0.8957,
+     "spec": 0.7217
+    }
+   },
+   "sens": 0.8542,
+   "spec": 0.7166,
+   "nonNullNames": 0.9264,
+   "nonNullUnlabelled": 0.5422,
+   "controls": {
+    "R_LOGC": 0.5113,
+    "R_POS": 0.5016,
+    "R_IPOS": 0.5,
+    "R_FB": 0.4346,
+    "R_LEN": 0.5433,
+    "R_SL": 0.5238
+   },
+   "controlsInBand": false,
+   "positionControlsInBand": true,
+   "rivals": {
+    "R_INIT": {
+     "auc": 0.8717,
+     "ci": [
+      0.8314,
+      0.9069
+     ],
+     "diffSEntryMinus": [
+      -0.0863,
+      -0.118,
+      -0.0591
+     ],
+     "sens025": 0.9986,
+     "spec025": 0.3515
+    },
+    "R_BURST": {
+     "auc": 0.6778,
+     "ci": [
+      0.6442,
+      0.7112
+     ],
+     "diffSEntryMinus": [
+      0.1076,
+      0.0746,
+      0.1373
+     ]
+    }
+   },
+   "exploratory": {
+    "S_ALL": 0.6365,
+    "S_OWN": 0.7076,
+    "EXTENT": 0.7552
+   }
+  }
+ },
+ "T6": {
+  "X_DE": {
+   "strata": [
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "liveStrata": [
+    "c4_6",
+    "c7_15"
+   ],
+   "pairs": 25,
+   "days": 6,
+   "auc": 0.86,
+   "ci": [
+    0.7778,
+    1
+   ],
+   "permQ95": 0.66,
+   "permP": 0,
+   "perStratum": {
+    "c4_6": {
+     "n": 16,
+     "auc": 0.8125,
+     "ci": [
+      0.7273,
+      1
+     ],
+     "sens": 0.625,
+     "spec": 1
+    },
+    "c7_15": {
+     "n": 9,
+     "auc": 0.9444,
+     "ci": [
+      0.8333,
+      1
+     ],
+     "sens": 0.8889,
+     "spec": 1
+    }
+   },
+   "sens": 0.72,
+   "spec": 1,
+   "nonNullNames": 0.8,
+   "nonNullUnlabelled": 0.28,
+   "controls": {
+    "R_LOGC": 0.5665,
+    "R_POS": 0.5321,
+    "R_IPOS": 0.5069,
+    "R_FB": 0.4844,
+    "R_LEN": 0.5025,
+    "R_SL": 0.4939
+   },
+   "controlsInBand": false,
+   "positionControlsInBand": true,
+   "controlProbeAuc": 0.5086,
+   "caliper": {
+    "pairs": 2
+   },
+   "consistency": {
+    "groups": 2,
+    "evaluable": 2,
+    "above": 2,
+    "geq": 2,
+    "per": [
+     [
+      "ubuntu-de/2010-11-15+",
+      9,
+      0.8333
+     ],
+     [
+      "ubuntu-de/2011-03-15+",
+      16,
+      0.875
+     ]
+    ]
+   },
+   "rivals": {
+    "R_INIT": {
+     "auc": 0.9762,
+     "ci": [
+      0.9381,
+      1
+     ],
+     "diffSEntryMinus": [
+      -0.1162,
+      -0.1696,
+      0
+     ],
+     "sens025": 1,
+     "spec025": 0.8
+    },
+    "R_BURST": {
+     "auc": 0.5996,
+     "ci": [
+      0.4794,
+      0.7242
+     ],
+     "diffSEntryMinus": [
+      0.2604,
+      0.1006,
+      0.3892
+     ]
+    }
+   },
+   "exploratory": {
+    "S_ALL": 0.7392,
+    "S_OWN": 0.7497,
+    "EXTENT": 0.8778
+   },
+   "passList": {
+    "a_pairs": true,
+    "b_auc": true,
+    "c_lb": true,
+    "d_perm": true,
+    "e_controls": false,
+    "f_probe": true,
+    "g_consistency": false,
+    "h_spec": true,
+    "i_caliper": true,
+    "void": false,
+    "pass": false
+   },
+   "floor": {
+    "strata": [
+     "c2",
+     "c3"
+    ],
+    "liveStrata": [
+     "c2",
+     "c3"
+    ],
+    "pairs": 12,
+    "days": 4,
+    "auc": 0.5,
+    "ci": [
+     0.5,
+     0.5
+    ],
+    "permQ95": 0.5,
+    "permP": 1,
+    "perStratum": {
+     "c2": {
+      "n": 5,
+      "auc": 0.5,
+      "ci": [
+       0.5,
+       0.5
+      ],
+      "sens": 0,
+      "spec": 1
+     },
+     "c3": {
+      "n": 7,
+      "auc": 0.5,
+      "ci": [
+       0.5,
+       0.5
+      ],
+      "sens": 0,
+      "spec": 1
+     }
+    },
+    "sens": 0,
+    "spec": 1,
+    "nonNullNames": 0.3333,
+    "nonNullUnlabelled": 0.6667,
+    "controls": {
+     "R_LOGC": 0.5,
+     "R_POS": 0.5762,
+     "R_IPOS": 0.4988,
+     "R_FB": 0.481,
+     "R_LEN": 0.4976,
+     "R_SL": 0.5
+    },
+    "controlsInBand": false,
+    "positionControlsInBand": false
+   }
+  },
+  "X_ES": {
+   "strata": [
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "liveStrata": [
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "pairs": 42,
+   "days": 5,
+   "auc": 0.8452,
+   "ci": [
+    0.8026,
+    1
+   ],
+   "permQ95": 0.6071,
+   "permP": 0,
+   "perStratum": {
+    "c4_6": {
+     "n": 24,
+     "auc": 0.8333,
+     "ci": [
+      0.7727,
+      1
+     ],
+     "sens": 0.7083,
+     "spec": 0.9583
+    },
+    "c7_15": {
+     "n": 14,
+     "auc": 0.8214,
+     "ci": [
+      0.7727,
+      1
+     ],
+     "sens": 0.6429,
+     "spec": 1
+    },
+    "c16p": {
+     "n": 4,
+     "auc": 1,
+     "ci": [
+      1,
+      1
+     ],
+     "sens": 1,
+     "spec": 1
+    }
+   },
+   "sens": 0.7143,
+   "spec": 0.9762,
+   "nonNullNames": 0.8095,
+   "nonNullUnlabelled": 0.5,
+   "controls": {
+    "R_LOGC": 0.5601,
+    "R_POS": 0.5412,
+    "R_IPOS": 0.4892,
+    "R_FB": 0.4833,
+    "R_LEN": 0.5039,
+    "R_SL": 0.4773
+   },
+   "controlsInBand": false,
+   "positionControlsInBand": true,
+   "controlProbeAuc": 0.5584,
+   "caliper": {
+    "pairs": 6
+   },
+   "consistency": {
+    "groups": 5,
+    "evaluable": 5,
+    "above": 5,
+    "geq": 5,
+    "per": [
+     [
+      "ubuntu-es/2010-11-15+",
+      5,
+      1
+     ],
+     [
+      "ubuntu-es/2011-03-15+",
+      8,
+      0.9375
+     ],
+     [
+      "ubuntu-es/2011-03-15+",
+      8,
+      0.75
+     ],
+     [
+      "ubuntu-es/2011-03-15+",
+      8,
+      0.75
+     ],
+     [
+      "ubuntu-es/2011-03-15+",
+      13,
+      0.8462
+     ]
+    ]
+   },
+   "rivals": {
+    "R_INIT": {
+     "auc": 0.9638,
+     "ci": [
+      0.9472,
+      1
+     ],
+     "diffSEntryMinus": [
+      -0.1186,
+      -0.1667,
+      0
+     ],
+     "sens025": 0.9286,
+     "spec025": 0.9286
+    },
+    "R_BURST": {
+     "auc": 0.4332,
+     "ci": [
+      0.4103,
+      0.5
+     ],
+     "diffSEntryMinus": [
+      0.412,
+      0.3808,
+      0.5233
+     ]
+    }
+   },
+   "exploratory": {
+    "S_ALL": 0.61,
+    "S_OWN": 0.667,
+    "EXTENT": 0.8273
+   },
+   "passList": {
+    "a_pairs": true,
+    "b_auc": true,
+    "c_lb": true,
+    "d_perm": true,
+    "e_controls": false,
+    "f_probe": true,
+    "g_consistency": true,
+    "h_spec": true,
+    "i_caliper": true,
+    "void": false,
+    "pass": false
+   },
+   "floor": {
+    "strata": [
+     "c2",
+     "c3"
+    ],
+    "liveStrata": [
+     "c2",
+     "c3"
+    ],
+    "pairs": 20,
+    "days": 4,
+    "auc": 0.5,
+    "ci": [
+     0.5,
+     0.5
+    ],
+    "permQ95": 0.5,
+    "permP": 1,
+    "perStratum": {
+     "c2": {
+      "n": 8,
+      "auc": 0.5,
+      "ci": [
+       0.5,
+       0.5
+      ],
+      "sens": 0,
+      "spec": 1
+     },
+     "c3": {
+      "n": 12,
+      "auc": 0.5,
+      "ci": [
+       0.5,
+       0.5
+      ],
+      "sens": 0,
+      "spec": 1
+     }
+    },
+    "sens": 0,
+    "spec": 1,
+    "nonNullNames": 0.5,
+    "nonNullUnlabelled": 0.6,
+    "controls": {
+     "R_LOGC": 0.5,
+     "R_POS": 0.4875,
+     "R_IPOS": 0.474,
+     "R_FB": 0.4865,
+     "R_LEN": 0.5083,
+     "R_SL": 0.5094
+    },
+    "controlsInBand": true,
+    "positionControlsInBand": true
+   }
+  },
+  "X_IT": {
+   "strata": [
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "liveStrata": [
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "pairs": 69,
+   "days": 9,
+   "auc": 0.6957,
+   "ci": [
+    0.5696,
+    0.8507
+   ],
+   "permQ95": 0.5652,
+   "permP": 0,
+   "perStratum": {
+    "c4_6": {
+     "n": 28,
+     "auc": 0.5714,
+     "ci": [
+      0.5132,
+      0.6739
+     ],
+     "sens": 0.1429,
+     "spec": 1
+    },
+    "c7_15": {
+     "n": 33,
+     "auc": 0.7576,
+     "ci": [
+      0.5641,
+      0.9531
+     ],
+     "sens": 0.5152,
+     "spec": 1
+    },
+    "c16p": {
+     "n": 8,
+     "auc": 0.875,
+     "ci": [
+      0.7273,
+      1
+     ],
+     "sens": 0.75,
+     "spec": 1
+    }
+   },
+   "sens": 0.3913,
+   "spec": 1,
+   "nonNullNames": 0.7391,
+   "nonNullUnlabelled": 0.3333,
+   "controls": {
+    "R_LOGC": 0.5244,
+    "R_POS": 0.4852,
+    "R_IPOS": 0.4898,
+    "R_FB": 0.4242,
+    "R_LEN": 0.5383,
+    "R_SL": 0.454
+   },
+   "controlsInBand": false,
+   "positionControlsInBand": true,
+   "controlProbeAuc": 0.5747,
+   "caliper": {
+    "pairs": 3
+   },
+   "consistency": {
+    "groups": 6,
+    "evaluable": 6,
+    "above": 5,
+    "geq": 6,
+    "per": [
+     [
+      "ubuntu-it/2010-11-15+",
+      15,
+      0.9333
+     ],
+     [
+      "ubuntu-it/2011-03-15+",
+      12,
+      0.7083
+     ],
+     [
+      "ubuntu-it/2012-03-15+",
+      17,
+      0.5588
+     ],
+     [
+      "ubuntu-it/2012-07-15+",
+      7,
+      0.9286
+     ],
+     [
+      "ubuntu-it/2013-07-15+",
+      11,
+      0.5
+     ],
+     [
+      "ubuntu-it/2014-03-15+",
+      7,
+      0.5714
+     ]
+    ]
+   },
+   "rivals": {
+    "R_INIT": {
+     "auc": 0.9236,
+     "ci": [
+      0.8291,
+      0.9945
+     ],
+     "diffSEntryMinus": [
+      -0.228,
+      -0.339,
+      -0.1398
+     ],
+     "sens025": 0.8406,
+     "spec025": 0.8986
+    },
+    "R_BURST": {
+     "auc": 0.6808,
+     "ci": [
+      0.6026,
+      0.7913
+     ],
+     "diffSEntryMinus": [
+      0.0149,
+      -0.1225,
+      0.1111
+     ]
+    }
+   },
+   "exploratory": {
+    "S_ALL": 0.6951,
+    "S_OWN": 0.6793,
+    "EXTENT": 0.7678
+   },
+   "passList": {
+    "a_pairs": true,
+    "b_auc": true,
+    "c_lb": true,
+    "d_perm": true,
+    "e_controls": false,
+    "f_probe": true,
+    "g_consistency": true,
+    "h_spec": true,
+    "i_caliper": true,
+    "void": false,
+    "pass": false
+   },
+   "floor": {
+    "strata": [
+     "c2",
+     "c3"
+    ],
+    "liveStrata": [
+     "c2",
+     "c3"
+    ],
+    "pairs": 24,
+    "days": 10,
+    "auc": 0.5,
+    "ci": [
+     0.5,
+     0.5
+    ],
+    "permQ95": 0.5,
+    "permP": 1,
+    "perStratum": {
+     "c2": {
+      "n": 13,
+      "auc": 0.5,
+      "ci": [
+       0.5,
+       0.5
+      ],
+      "sens": 0,
+      "spec": 1
+     },
+     "c3": {
+      "n": 11,
+      "auc": 0.5,
+      "ci": [
+       0.5,
+       0.5
+      ],
+      "sens": 0,
+      "spec": 1
+     }
+    },
+    "sens": 0,
+    "spec": 1,
+    "nonNullNames": 0.2917,
+    "nonNullUnlabelled": 0.625,
+    "controls": {
+     "R_LOGC": 0.5,
+     "R_POS": 0.4907,
+     "R_IPOS": 0.53,
+     "R_FB": 0.5154,
+     "R_LEN": 0.5236,
+     "R_SL": 0.3816
+    },
+    "controlsInBand": false,
+    "positionControlsInBand": true
+   }
+  },
+  "X_ALL": {
+   "strata": [
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "liveStrata": [
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "pairs": 136,
+   "days": 20,
+   "auc": 0.7721,
+   "ci": [
+    0.6765,
+    0.8611
+   ],
+   "permQ95": 0.5515,
+   "permP": 0,
+   "perStratum": {
+    "c4_6": {
+     "n": 68,
+     "auc": 0.7206,
+     "ci": [
+      0.623,
+      0.8016
+     ],
+     "sens": 0.4559,
+     "spec": 0.9853
+    },
+    "c7_15": {
+     "n": 56,
+     "auc": 0.8036,
+     "ci": [
+      0.6827,
+      0.9302
+     ],
+     "sens": 0.6071,
+     "spec": 1
+    },
+    "c16p": {
+     "n": 12,
+     "auc": 0.9167,
+     "ci": [
+      0.7778,
+      1
+     ],
+     "sens": 0.8333,
+     "spec": 1
+    }
+   },
+   "sens": 0.5515,
+   "spec": 0.9926,
+   "nonNullNames": 0.7721,
+   "nonNullUnlabelled": 0.375,
+   "controls": {
+    "R_LOGC": 0.5423,
+    "R_POS": 0.5009,
+    "R_IPOS": 0.4906,
+    "R_FB": 0.4558,
+    "R_LEN": 0.518,
+    "R_SL": 0.4701
+   },
+   "controlsInBand": true,
+   "positionControlsInBand": true,
+   "controlProbeAuc": 0.552,
+   "caliper": {
+    "pairs": 11
+   },
+   "consistency": {
+    "groups": 12,
+    "evaluable": 12,
+    "above": 12,
+    "geq": 12,
+    "per": [
+     [
+      "ubuntu-de/2010-11-15+",
+      9,
+      0.8333
+     ],
+     [
+      "ubuntu-es/2010-11-15+",
+      24,
+      0.9583
+     ],
+     [
+      "ubuntu-es/2011-03-15+",
+      8,
+      0.9375
+     ],
+     [
+      "ubuntu-es/2011-03-15+",
+      8,
+      0.75
+     ],
+     [
+      "ubuntu-es/2011-03-15+",
+      8,
+      0.75
+     ],
+     [
+      "ubuntu-es/2011-03-15+",
+      8,
+      0.8125
+     ],
+     [
+      "ubuntu-it/2011-03-15+",
+      12,
+      0.7083
+     ],
+     [
+      "ubuntu-es/2011-07-15+",
+      10,
+      0.8
+     ],
+     [
+      "ubuntu-de/2012-03-15+",
+      19,
+      0.6053
+     ],
+     [
+      "ubuntu-de/2012-07-15+",
+      11,
+      0.9091
+     ],
+     [
+      "ubuntu-es/2013-07-15+",
+      12,
+      0.5417
+     ],
+     [
+      "ubuntu-it/2014-03-15+",
+      7,
+      0.5714
+     ]
+    ]
+   },
+   "rivals": {
+    "R_INIT": {
+     "auc": 0.9456,
+     "ci": [
+      0.8906,
+      0.9882
+     ],
+     "diffSEntryMinus": [
+      -0.1736,
+      -0.243,
+      -0.1163
+     ],
+     "sens025": 0.8971,
+     "spec025": 0.8897
+    },
+    "R_BURST": {
+     "auc": 0.5903,
+     "ci": [
+      0.5065,
+      0.7038
+     ],
+     "diffSEntryMinus": [
+      0.1818,
+      0.0461,
+      0.3076
+     ]
+    }
+   },
+   "exploratory": {
+    "S_ALL": 0.6767,
+    "S_OWN": 0.6856,
+    "EXTENT": 0.8027
+   },
+   "passList": {
+    "a_pairs": true,
+    "b_auc": true,
+    "c_lb": true,
+    "d_perm": true,
+    "e_controls": true,
+    "f_probe": true,
+    "g_consistency": true,
+    "h_spec": true,
+    "i_caliper": true,
+    "void": false,
+    "pass": true
+   },
+   "floor": {
+    "strata": [
+     "c2",
+     "c3"
+    ],
+    "liveStrata": [
+     "c2",
+     "c3"
+    ],
+    "pairs": 56,
+    "days": 18,
+    "auc": 0.5,
+    "ci": [
+     0.5,
+     0.5
+    ],
+    "permQ95": 0.5,
+    "permP": 1,
+    "perStratum": {
+     "c2": {
+      "n": 26,
+      "auc": 0.5,
+      "ci": [
+       0.5,
+       0.5
+      ],
+      "sens": 0,
+      "spec": 1
+     },
+     "c3": {
+      "n": 30,
+      "auc": 0.5,
+      "ci": [
+       0.5,
+       0.5
+      ],
+      "sens": 0,
+      "spec": 1
+     }
+    },
+    "sens": 0,
+    "spec": 1,
+    "nonNullNames": 0.375,
+    "nonNullUnlabelled": 0.625,
+    "controls": {
+     "R_LOGC": 0.5,
+     "R_POS": 0.4948,
+     "R_IPOS": 0.5075,
+     "R_FB": 0.4973,
+     "R_LEN": 0.5112,
+     "R_SL": 0.4404
+    },
+    "controlsInBand": false,
+    "positionControlsInBand": true
+   }
+  }
+ },
+ "T7": {
+  "ENGLISH_UNTOUCHED": {
+   "c4_6": {
+    "drawn": 3159,
+    "flagged": 30,
+    "fpr": 0.0095,
+    "fprCi": [
+     0.0067,
+     0.0135
+    ],
+    "tprMatched": 0.6111,
+    "tprN": 36,
+    "candidatesP": 53,
+    "candidatesN": 15336,
+    "pi": 0.00344,
+    "ppv": 0.1819,
+    "matchedUnlabelledFpr": 0
+   },
+   "c7_15": {
+    "drawn": 3160,
+    "flagged": 28,
+    "fpr": 0.0089,
+    "fprCi": [
+     0.0061,
+     0.0128
+    ],
+    "tprMatched": 0.8723,
+    "tprN": 47,
+    "candidatesP": 72,
+    "candidatesN": 17787,
+    "pi": 0.00403,
+    "ppv": 0.285,
+    "matchedUnlabelledFpr": 0.0426
+   },
+   "c16p": {
+    "drawn": 3137,
+    "flagged": 3,
+    "fpr": 0.001,
+    "fprCi": [
+     0.0003,
+     0.0028
+    ],
+    "tprMatched": 0.4286,
+    "tprN": 7,
+    "candidatesP": 16,
+    "candidatesN": 17558,
+    "pi": 0.00091,
+    "ppv": 0.29,
+    "matchedUnlabelledFpr": 0
+   },
+   "pooledPpv": 0.2409,
+   "pooledFlaggedNames": 102.1,
+   "pooledFlaggedUnlabelled": 321.6
+  },
+  "E_REUSE": {
+   "c4_6": {
+    "drawn": 420,
+    "flagged": 0,
+    "fpr": 0,
+    "fprCi": [
+     0,
+     0.0091
+    ],
+    "tprMatched": 0.4562,
+    "tprN": 160,
+    "candidatesP": 583,
+    "candidatesN": 75691,
+    "pi": 0.00764,
+    "ppv": 1,
+    "matchedUnlabelledFpr": 0.0063
+   },
+   "c7_15": {
+    "drawn": 420,
+    "flagged": 6,
+    "fpr": 0.0143,
+    "fprCi": [
+     0.0066,
+     0.0308
+    ],
+    "tprMatched": 0.7325,
+    "tprN": 157,
+    "candidatesP": 769,
+    "candidatesN": 84256,
+    "pi": 0.00904,
+    "ppv": 0.3188,
+    "matchedUnlabelledFpr": 0.0064
+   },
+   "c16p": {
+    "drawn": 420,
+    "flagged": 0,
+    "fpr": 0,
+    "fprCi": [
+     0,
+     0.0091
+    ],
+    "tprMatched": 0.8111,
+    "tprN": 90,
+    "candidatesP": 331,
+    "candidatesN": 87942,
+    "pi": 0.00375,
+    "ppv": 1,
+    "matchedUnlabelledFpr": 0.0111
+   },
+   "pooledPpv": 0.4767,
+   "pooledFlaggedNames": 1097.7,
+   "pooledFlaggedUnlabelled": 1204.9
+  },
+  "X": {
+   "c4_6": {
+    "drawn": 2270,
+    "flagged": 30,
+    "fpr": 0.0132,
+    "fprCi": [
+     0.0093,
+     0.0188
+    ],
+    "tprMatched": 0.4559,
+    "tprN": 68,
+    "candidatesP": 81,
+    "candidatesN": 10528,
+    "pi": 0.00764,
+    "ppv": 0.2097,
+    "matchedUnlabelledFpr": 0.0147
+   },
+   "c7_15": {
+    "drawn": 2219,
+    "flagged": 33,
+    "fpr": 0.0149,
+    "fprCi": [
+     0.0106,
+     0.0208
+    ],
+    "tprMatched": 0.6071,
+    "tprN": 56,
+    "candidatesP": 102,
+    "candidatesN": 9865,
+    "pi": 0.01023,
+    "ppv": 0.2968,
+    "matchedUnlabelledFpr": 0
+   },
+   "c16p": {
+    "drawn": 2275,
+    "flagged": 13,
+    "fpr": 0.0057,
+    "fprCi": [
+     0.0033,
+     0.0098
+    ],
+    "tprMatched": 0.8333,
+    "tprN": 12,
+    "candidatesP": 28,
+    "candidatesN": 10815,
+    "pi": 0.00258,
+    "ppv": 0.2741,
+    "matchedUnlabelledFpr": 0
+   },
+   "pooledPpv": 0.2601,
+   "pooledFlaggedNames": 122.2,
+   "pooledFlaggedUnlabelled": 347.6
+  },
+  "UD": {
+   "c4_6": {
+    "drawn": 943,
+    "flagged": 16,
+    "fpr": 0.017,
+    "fprCi": [
+     0.0105,
+     0.0274
+    ],
+    "tprMatched": 0.0175,
+    "tprN": 2798,
+    "candidatesP": 3453,
+    "candidatesN": 38046,
+    "pi": 0.08321,
+    "ppv": 0.0857,
+    "matchedUnlabelledFpr": 0.0068
+   },
+   "c7_15": {
+    "drawn": 913,
+    "flagged": 10,
+    "fpr": 0.011,
+    "fprCi": [
+     0.006,
+     0.02
+    ],
+    "tprMatched": 0.0195,
+    "tprN": 976,
+    "candidatesP": 1918,
+    "candidatesN": 31595,
+    "pi": 0.05723,
+    "ppv": 0.0974,
+    "matchedUnlabelledFpr": 0.0113
+   },
+   "c16p": {
+    "drawn": 862,
+    "flagged": 10,
+    "fpr": 0.0116,
+    "fprCi": [
+     0.0063,
+     0.0212
+    ],
+    "tprMatched": 0.0101,
+    "tprN": 99,
+    "candidatesP": 524,
+    "candidatesN": 38034,
+    "pi": 0.01359,
+    "ppv": 0.0119,
+    "matchedUnlabelledFpr": 0.0303
+   },
+   "pooledPpv": 0.067,
+   "pooledFlaggedNames": 103.1,
+   "pooledFlaggedUnlabelled": 1435.5
+  }
+ },
+ "__partial": {
+  "seconds": 5.775
+ },
+ "T8": {
+  "real": {
+   "strata": [
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "liveStrata": [
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "pairs": 175,
+   "days": 3,
+   "auc": 0.8429,
+   "ci": [
+    0.8218,
+    0.8698
+   ],
+   "permQ95": 0.5514,
+   "permP": 0,
+   "perStratum": {
+    "c4_6": {
+     "n": 66,
+     "auc": 0.7727,
+     "ci": [
+      0.7154,
+      0.8226
+     ],
+     "sens": 0.5455,
+     "spec": 1
+    },
+    "c7_15": {
+     "n": 86,
+     "auc": 0.8953,
+     "ci": [
+      0.8393,
+      0.9444
+     ],
+     "sens": 0.8023,
+     "spec": 0.9884
+    },
+    "c16p": {
+     "n": 23,
+     "auc": 0.8478,
+     "ci": [
+      0.6579,
+      0.95
+     ],
+     "sens": 0.6957,
+     "spec": 1
+    }
+   },
+   "sens": 0.6914,
+   "spec": 0.9943,
+   "nonNullNames": 0.8686,
+   "nonNullUnlabelled": 0.3943,
+   "controls": {
+    "R_LOGC": 0.5106,
+    "R_POS": 0.4947,
+    "R_IPOS": 0.4991,
+    "R_FB": 0.4903,
+    "R_LEN": 0.506,
+    "R_SL": 0.4902
+   },
+   "controlsInBand": true,
+   "positionControlsInBand": true,
+   "rivals": {
+    "R_INIT": {
+     "auc": 0.9347,
+     "ci": [
+      0.9036,
+      0.9734
+     ],
+     "diffSEntryMinus": [
+      -0.0918,
+      -0.1087,
+      -0.0684
+     ],
+     "sens025": 0.8857,
+     "spec025": 0.8971
+    },
+    "R_BURST": {
+     "auc": 0.4952,
+     "ci": [
+      0.4161,
+      0.5498
+     ],
+     "diffSEntryMinus": [
+      0.3477,
+      0.2903,
+      0.413
+     ]
+    }
+   },
+   "exploratory": {
+    "S_ALL": 0.7525,
+    "S_OWN": 0.7414,
+    "EXTENT": 0.8841
+   }
+  },
+  "shufW": {
+   "strata": [
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "liveStrata": [
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "pairs": 267,
+   "days": 3,
+   "auc": 0.5075,
+   "ci": [
+    0.5035,
+    0.5119
+   ],
+   "permQ95": 0.5075,
+   "permP": 0.067,
+   "perStratum": {
+    "c4_6": {
+     "n": 90,
+     "auc": 0.5111,
+     "ci": [
+      0.5,
+      0.5215
+     ],
+     "sens": 0.0222,
+     "spec": 1
+    },
+    "c7_15": {
+     "n": 90,
+     "auc": 0.5111,
+     "ci": [
+      0.5,
+      0.5256
+     ],
+     "sens": 0.0222,
+     "spec": 1
+    },
+    "c16p": {
+     "n": 87,
+     "auc": 0.5,
+     "ci": [
+      0.5,
+      0.5
+     ],
+     "sens": 0,
+     "spec": 1
+    }
+   },
+   "sens": 0.015,
+   "spec": 1,
+   "nonNullNames": 0.5543,
+   "nonNullUnlabelled": 0.5056,
+   "controls": {
+    "R_LOGC": 0.5124,
+    "R_POS": 0.491,
+    "R_IPOS": 0.5028,
+    "R_FB": 0.4567,
+    "R_LEN": 0.5155,
+    "R_SL": 0.4995
+   },
+   "controlsInBand": true,
+   "positionControlsInBand": true,
+   "rivals": {
+    "R_INIT": {
+     "auc": 0.6909,
+     "ci": [
+      0.63,
+      0.7422
+     ],
+     "diffSEntryMinus": [
+      -0.1834,
+      -0.233,
+      -0.1287
+     ],
+     "sens025": 0.221,
+     "spec025": 0.9213
+    },
+    "R_BURST": {
+     "auc": 0.6052,
+     "ci": [
+      0.5048,
+      0.6963
+     ],
+     "diffSEntryMinus": [
+      -0.0977,
+      -0.1909,
+      -0.0102
+     ]
+    }
+   },
+   "exploratory": {
+    "S_ALL": 0.5145,
+    "S_OWN": 0.5137,
+    "EXTENT": 0.4999
+   }
+  },
+  "shufG": {
+   "strata": [
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "liveStrata": [
+    "c4_6",
+    "c7_15"
+   ],
+   "pairs": 140,
+   "days": 3,
+   "auc": 0.5036,
+   "ci": [
+    0.5,
+    0.5112
+   ],
+   "permQ95": 0.5036,
+   "permP": 0.51,
+   "perStratum": {
+    "c4_6": {
+     "n": 90,
+     "auc": 0.5056,
+     "ci": [
+      0.5,
+      0.5179
+     ],
+     "sens": 0.0111,
+     "spec": 1
+    },
+    "c7_15": {
+     "n": 50,
+     "auc": 0.5,
+     "ci": [
+      0.5,
+      0.5
+     ],
+     "sens": 0,
+     "spec": 1
+    }
+   },
+   "sens": 0.0071,
+   "spec": 1,
+   "nonNullNames": 0.5786,
+   "nonNullUnlabelled": 0.5571,
+   "controls": {
+    "R_LOGC": 0.4953,
+    "R_POS": 0.5,
+    "R_IPOS": 0.508,
+    "R_FB": 0.4827,
+    "R_LEN": 0.5041,
+    "R_SL": 0.5017
+   },
+   "controlsInBand": true,
+   "positionControlsInBand": true,
+   "rivals": {
+    "R_INIT": {
+     "auc": 0.4407,
+     "ci": [
+      0.3754,
+      0.5094
+     ],
+     "diffSEntryMinus": [
+      0.0629,
+      -0.0044,
+      0.1281
+     ],
+     "sens025": 0.1571,
+     "spec025": 0.8
+    },
+    "R_BURST": {
+     "auc": 0.5631,
+     "ci": [
+      0.5272,
+      0.5933
+     ],
+     "diffSEntryMinus": [
+      -0.0595,
+      -0.0937,
+      -0.02
+     ]
+    }
+   },
+   "exploratory": {
+    "S_ALL": 0.4945,
+    "S_OWN": 0.5198,
+    "EXTENT": 0.4705
+   }
+  }
+ },
+ "T9": {
+  "pooled": {
+   "strata": [
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "liveStrata": [
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "pairs": 3873,
+   "days": 45,
+   "auc": 0.5046,
+   "ci": [
+    0.4999,
+    0.5118
+   ],
+   "permQ95": 0.5021,
+   "permP": 0.001,
+   "perStratum": {
+    "c4_6": {
+     "n": 2798,
+     "auc": 0.5054,
+     "ci": [
+      0.5014,
+      0.5128
+     ],
+     "sens": 0.0175,
+     "spec": 0.9932
+    },
+    "c7_15": {
+     "n": 976,
+     "auc": 0.5041,
+     "ci": [
+      0.4939,
+      0.5172
+     ],
+     "sens": 0.0195,
+     "spec": 0.9887
+    },
+    "c16p": {
+     "n": 99,
+     "auc": 0.4899,
+     "ci": [
+      0.4764,
+      0.5
+     ],
+     "sens": 0.0101,
+     "spec": 0.9697
+    }
+   },
+   "sens": 0.0178,
+   "spec": 0.9915,
+   "nonNullNames": 0.621,
+   "nonNullUnlabelled": 0.6261,
+   "controls": {
+    "R_LOGC": 0.5029,
+    "R_POS": 0.5015,
+    "R_IPOS": 0.4978,
+    "R_FB": 0.4846,
+    "R_LEN": 0.502,
+    "R_SL": 0.5022
+   },
+   "controlsInBand": true,
+   "positionControlsInBand": true
+  },
+  "floorC2C3": {
+   "strata": [
+    "c2",
+    "c3"
+   ],
+   "liveStrata": [
+    "c2",
+    "c3"
+   ],
+   "pairs": 2006,
+   "days": 47,
+   "auc": 0.502,
+   "ci": [
+    0.5007,
+    0.5033
+   ],
+   "permQ95": 0.5015,
+   "permP": 0.016,
+   "perStratum": {
+    "c2": {
+     "n": 1056,
+     "auc": 0.5,
+     "ci": [
+      0.5,
+      0.5
+     ],
+     "sens": 0,
+     "spec": 1
+    },
+    "c3": {
+     "n": 950,
+     "auc": 0.5042,
+     "ci": [
+      0.5014,
+      0.5072
+     ],
+     "sens": 0.0105,
+     "spec": 0.9979
+    }
+   },
+   "sens": 0.005,
+   "spec": 0.999,
+   "nonNullNames": 0.7876,
+   "nonNullUnlabelled": 0.7976,
+   "controls": {
+    "R_LOGC": 0.5,
+    "R_POS": 0.4988,
+    "R_IPOS": 0.5036,
+    "R_FB": 0.4964,
+    "R_LEN": 0.4997,
+    "R_SL": 0.5005
+   },
+   "controlsInBand": true,
+   "positionControlsInBand": true
+  },
+  "languages": {
+   "ud:afr": {
+    "pairs": 12,
+    "shareNamesGe1": 0,
+    "shareUnlabelledGe1": 0
+   },
+   "ud:arb": {
+    "pairs": 1,
+    "shareNamesGe1": 0,
+    "shareUnlabelledGe1": 0
+   },
+   "ud:bul": {
+    "pairs": 18,
+    "shareNamesGe1": 0,
+    "shareUnlabelledGe1": 0,
+    "auc": 0.5,
+    "ciBonferroni": [
+     0.5,
+     0.5
+    ]
+   },
+   "ud:cat": {
+    "pairs": 654,
+    "shareNamesGe1": 0.0031,
+    "shareUnlabelledGe1": 0,
+    "auc": 0.5015,
+    "ciBonferroni": [
+     0.5015,
+     0.5015
+    ]
+   },
+   "ud:ces": {
+    "pairs": 7,
+    "shareNamesGe1": 0,
+    "shareUnlabelledGe1": 0
+   },
+   "ud:cym": {
+    "pairs": 34,
+    "shareNamesGe1": 0,
+    "shareUnlabelledGe1": 0.0294,
+    "auc": 0.4853,
+    "ciBonferroni": [
+     0.4853,
+     0.4853
+    ]
+   },
+   "ud:dan": {
+    "pairs": 15,
+    "shareNamesGe1": 0,
+    "shareUnlabelledGe1": 0.0667,
+    "auc": 0.4667,
+    "ciBonferroni": [
+     0.4667,
+     0.4667
+    ]
+   },
+   "ud:deu": {
+    "pairs": 23,
+    "shareNamesGe1": 0,
+    "shareUnlabelledGe1": 0,
+    "auc": 0.5,
+    "ciBonferroni": [
+     0.5,
+     0.5
+    ]
+   },
+   "ud:ell": {
+    "pairs": 25,
+    "shareNamesGe1": 0,
+    "shareUnlabelledGe1": 0,
+    "auc": 0.5,
+    "ciBonferroni": [
+     0.5,
+     0.5
+    ]
+   },
+   "ud:eng": {
+    "pairs": 143,
+    "shareNamesGe1": 0.035,
+    "shareUnlabelledGe1": 0.014,
+    "auc": 0.5105,
+    "ciBonferroni": [
+     0.48,
+     0.5169
+    ]
+   },
+   "ud:est": {
+    "pairs": 242,
+    "shareNamesGe1": 0.0413,
+    "shareUnlabelledGe1": 0.0165,
+    "auc": 0.5124,
+    "ciBonferroni": [
+     0.504,
+     0.5212
+    ]
+   },
+   "ud:eus": {
+    "pairs": 8,
+    "shareNamesGe1": 0,
+    "shareUnlabelledGe1": 0
+   },
+   "ud:fas": {
+    "pairs": 37,
+    "shareNamesGe1": 0.0541,
+    "shareUnlabelledGe1": 0,
+    "auc": 0.527,
+    "ciBonferroni": [
+     0.527,
+     0.527
+    ]
+   },
+   "ud:fin": {
+    "pairs": 96,
+    "shareNamesGe1": 0.1354,
+    "shareUnlabelledGe1": 0.0104,
+    "auc": 0.5625,
+    "ciBonferroni": [
+     0.5625,
+     0.5625
+    ]
+   },
+   "ud:fra": {
+    "pairs": 4,
+    "shareNamesGe1": 0,
+    "shareUnlabelledGe1": 0
+   },
+   "ud:gle": {
+    "pairs": 18,
+    "shareNamesGe1": 0,
+    "shareUnlabelledGe1": 0.0556,
+    "auc": 0.4722,
+    "ciBonferroni": [
+     0.4722,
+     0.4722
+    ]
+   },
+   "ud:glg": {
+    "pairs": 12,
+    "shareNamesGe1": 0,
+    "shareUnlabelledGe1": 0
+   },
+   "ud:heb": {
+    "pairs": 41,
+    "shareNamesGe1": 0,
+    "shareUnlabelledGe1": 0,
+    "auc": 0.5,
+    "ciBonferroni": [
+     0.5,
+     0.5
+    ]
+   },
+   "ud:hin": {
+    "pairs": 538,
+    "shareNamesGe1": 0,
+    "shareUnlabelledGe1": 0,
+    "auc": 0.5,
+    "ciBonferroni": [
+     0.5,
+     0.5
+    ]
+   },
+   "ud:hrv": {
+    "pairs": 102,
+    "shareNamesGe1": 0.0098,
+    "shareUnlabelledGe1": 0,
+    "auc": 0.5049,
+    "ciBonferroni": [
+     0.5049,
+     0.5049
+    ]
+   },
+   "ud:hun": {
+    "pairs": 58,
+    "shareNamesGe1": 0,
+    "shareUnlabelledGe1": 0,
+    "auc": 0.5,
+    "ciBonferroni": [
+     0.5,
+     0.5
+    ]
+   },
+   "ud:hye": {
+    "pairs": 30,
+    "shareNamesGe1": 0.0333,
+    "shareUnlabelledGe1": 0,
+    "auc": 0.5167,
+    "ciBonferroni": [
+     0.5167,
+     0.5167
+    ]
+   },
+   "ud:ind": {
+    "pairs": 123,
+    "shareNamesGe1": 0,
+    "shareUnlabelledGe1": 0.0163,
+    "auc": 0.4919,
+    "ciBonferroni": [
+     0.4919,
+     0.4919
+    ]
+   },
+   "ud:ita": {
+    "pairs": 13,
+    "shareNamesGe1": 0,
+    "shareUnlabelledGe1": 0
+   },
+   "ud:kat": {
+    "pairs": 12,
+    "shareNamesGe1": 0.25,
+    "shareUnlabelledGe1": 0
+   },
+   "ud:lav": {
+    "pairs": 85,
+    "shareNamesGe1": 0.0706,
+    "shareUnlabelledGe1": 0.0235,
+    "auc": 0.5235,
+    "ciBonferroni": [
+     0.4929,
+     0.6667
+    ]
+   },
+   "ud:lit": {
+    "pairs": 11,
+    "shareNamesGe1": 0,
+    "shareUnlabelledGe1": 0
+   },
+   "ud:mlt": {
+    "pairs": 22,
+    "shareNamesGe1": 0,
+    "shareUnlabelledGe1": 0,
+    "auc": 0.5,
+    "ciBonferroni": [
+     0.5,
+     0.5
+    ]
+   },
+   "ud:nld": {
+    "pairs": 51,
+    "shareNamesGe1": 0,
+    "shareUnlabelledGe1": 0.0196,
+    "auc": 0.4902,
+    "ciBonferroni": [
+     0.4902,
+     0.4902
+    ]
+   },
+   "ud:nob": {
+    "pairs": 284,
+    "shareNamesGe1": 0.0106,
+    "shareUnlabelledGe1": 0.0141,
+    "auc": 0.4982,
+    "ciBonferroni": [
+     0.4982,
+     0.4982
+    ]
+   },
+   "ud:pol": {
+    "pairs": 2,
+    "shareNamesGe1": 0,
+    "shareUnlabelledGe1": 0.5
+   },
+   "ud:por": {
+    "pairs": 89,
+    "shareNamesGe1": 0,
+    "shareUnlabelledGe1": 0.0112,
+    "auc": 0.4943,
+    "ciBonferroni": [
+     0.4943,
+     0.4943
+    ]
+   },
+   "ud:ron": {
+    "pairs": 13,
+    "shareNamesGe1": 0,
+    "shareUnlabelledGe1": 0
+   },
+   "ud:rus": {
+    "pairs": 4,
+    "shareNamesGe1": 0,
+    "shareUnlabelledGe1": 0
+   },
+   "ud:slk": {
+    "pairs": 14,
+    "shareNamesGe1": 0.2857,
+    "shareUnlabelledGe1": 0
+   },
+   "ud:slv": {
+    "pairs": 20,
+    "shareNamesGe1": 0,
+    "shareUnlabelledGe1": 0,
+    "auc": 0.5,
+    "ciBonferroni": [
+     0.5,
+     0.5
+    ]
+   },
+   "ud:spa": {
+    "pairs": 394,
+    "shareNamesGe1": 0.0025,
+    "shareUnlabelledGe1": 0.0076,
+    "auc": 0.4975,
+    "ciBonferroni": [
+     0.4975,
+     0.4975
+    ]
+   },
+   "ud:srp": {
+    "pairs": 72,
+    "shareNamesGe1": 0,
+    "shareUnlabelledGe1": 0,
+    "auc": 0.5,
+    "ciBonferroni": [
+     0.5,
+     0.5
+    ]
+   },
+   "ud:swe": {
+    "pairs": 21,
+    "shareNamesGe1": 0.0476,
+    "shareUnlabelledGe1": 0,
+    "auc": 0.525,
+    "ciBonferroni": [
+     0.525,
+     0.525
+    ]
+   },
+   "ud:tur": {
+    "pairs": 29,
+    "shareNamesGe1": 0.2414,
+    "shareUnlabelledGe1": 0,
+    "auc": 0.6207,
+    "ciBonferroni": [
+     0.6207,
+     0.6207
+    ]
+   },
+   "ud:uig": {
+    "pairs": 10,
+    "shareNamesGe1": 0,
+    "shareUnlabelledGe1": 0
+   },
+   "ud:ukr": {
+    "pairs": 21,
+    "shareNamesGe1": 0,
+    "shareUnlabelledGe1": 0.1429,
+    "auc": 0.4286,
+    "ciBonferroni": [
+     0.4286,
+     0.4286
+    ]
+   },
+   "ud:urd": {
+    "pairs": 300,
+    "shareNamesGe1": 0.0067,
+    "shareUnlabelledGe1": 0.0067,
+    "auc": 0.5,
+    "ciBonferroni": [
+     0.5,
+     0.5
+    ]
+   },
+   "ud:vie": {
+    "pairs": 90,
+    "shareNamesGe1": 0.0778,
+    "shareUnlabelledGe1": 0.0111,
+    "auc": 0.5333,
+    "ciBonferroni": [
+     0.5333,
+     0.5333
+    ]
+   },
+   "ud:wol": {
+    "pairs": 75,
+    "shareNamesGe1": 0.0133,
+    "shareUnlabelledGe1": 0.04,
+    "auc": 0.4867,
+    "ciBonferroni": [
+     0.4867,
+     0.4867
+    ]
+   }
+  },
+  "candidates": [
+   "ud:tur"
+  ],
+  "languagesEvaluated": 31
+ },
+ "verdictRule": "CONFIRMED",
+ "scopeAsConfirmed": {
+  "strataT1": [
+   "c4_6",
+   "c7_15"
+  ],
+  "strataT1Under15": [
+   "c16p"
+  ],
+  "reusePass": true,
+  "extensionPass": {
+   "X_DE": false,
+   "X_ES": false,
+   "X_IT": false,
+   "X_ALL": true
+  },
+  "floorT1": "PASS",
+  "floorReuse": "PASS",
+  "groupAspecificity": 0.7166
+ },
+ "headerSha256": "9ea935088986f8ee3ef09cee89f8d109f1cf72b168ae6113209afebe3a991c7d",
+ "seconds": 10.2
+}

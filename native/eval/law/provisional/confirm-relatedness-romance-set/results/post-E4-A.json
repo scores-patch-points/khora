@@ -1,0 +1,103 @@
+{
+ "cell": "E4-A",
+ "set": "A",
+ "headerSha256": "1b522926774b4b460c272a53695926466f45fa51bc5e835a89e83763a1591cbc",
+ "scoperHashes": {
+  "groupsSha256": "b2cad7b4a50c77400c1dfc82a91d53092b9327aaa138dbdf1a1ea07e300650d7",
+  "libSha256": "eaa1d06de53f4ab04a861b646e8d0e0e79bdf71bac2cdb6fbaac4486d024bfe4",
+  "analysisSha256": "cc19ee5bfc496a877c429d0380cf21e30be0e51c3d5b51ac27ec2d7ff9311868"
+ },
+ "romance": {
+  "cat": {
+   "pairs": 600,
+   "a": 0.6897,
+   "ger": 0.6659,
+   "sla": 0.591,
+   "e": 0.5841
+  },
+  "fra": {
+   "pairs": 600,
+   "a": 0.6372,
+   "ger": 0.6298,
+   "sla": 0.5802,
+   "e": 0.5524
+  },
+  "por": {
+   "pairs": 600,
+   "a": 0.642,
+   "ger": 0.6291,
+   "sla": 0.5542,
+   "e": 0.5762
+  },
+  "spa": {
+   "pairs": 600,
+   "a": 0.7064,
+   "ger": 0.692,
+   "sla": 0.5976,
+   "e": 0.6086
+  }
+ },
+ "germanic": {
+  "afr": {
+   "pairs": 164,
+   "ger": 0.7563,
+   "rom": 0.7073,
+   "e": 0.6479
+  },
+  "dan": {
+   "pairs": 600,
+   "ger": 0.6604,
+   "rom": 0.6502,
+   "e": 0.6114
+  },
+  "deu": {
+   "pairs": 600,
+   "ger": 0.6024,
+   "rom": 0.6164,
+   "e": 0.563
+  },
+  "eng": {
+   "pairs": 600,
+   "ger": 0.62,
+   "rom": 0.6142,
+   "e": 0.5604
+  },
+  "nld": {
+   "pairs": 600,
+   "ger": 0.6138,
+   "rom": 0.6007,
+   "e": 0.5598
+  },
+  "nob": {
+   "pairs": 600,
+   "ger": 0.7148,
+   "rom": 0.6864,
+   "e": 0.6083
+  },
+  "swe": {
+   "pairs": 320,
+   "ger": 0.7029,
+   "rom": 0.683,
+   "e": 0.5886
+  }
+ },
+ "means": {
+  "romance": {
+   "a": 0.6688,
+   "ger": 0.6542,
+   "sla": 0.5807,
+   "e": 0.5803,
+   "aMinusGer": 0.0146,
+   "gerMinusE": 0.0739,
+   "n": 4
+  },
+  "germanic": {
+   "ger": 0.6672,
+   "rom": 0.6512,
+   "e": 0.5913,
+   "gerMinusRom": 0.0161,
+   "gerMinusE": 0.0759,
+   "n": 7
+  }
+ }
+}

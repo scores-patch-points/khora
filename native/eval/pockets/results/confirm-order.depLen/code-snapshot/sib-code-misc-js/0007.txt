@@ -1,0 +1,9 @@
+export function validatePost({ imageUrl, caption }) {
+  if (!imageUrl || !imageUrl.startsWith("http")) {
+    return { ok: false, errors: ["image required"] };
+  }
+  if (caption.length > 2200) {
+    return { ok: false, errors: ["caption too long"] };
+  }
+  return { ok: true, errors: [] };
+}

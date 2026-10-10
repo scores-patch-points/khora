@@ -1,0 +1,51 @@
+{
+ "note": "blind PREDICT table of laws/order.mjs frozen BEFORE any order statistic was computed on any data (the compute helpers _order_*.mjs did not yet exist)",
+ "sha256": "017f4c99aa321495aa8026f283bcd61ecc483b54cb6fd5c4485ca3872a0c656e",
+ "canon": [
+  [
+   "asym",
+   "universal+"
+  ],
+  [
+   "branch",
+   "universal-"
+  ],
+  [
+   "depLen",
+   "universal+"
+  ],
+  [
+   "entCurv",
+   "universal+"
+  ],
+  [
+   "entSlope",
+   "specific"
+  ],
+  [
+   "finalDev",
+   "specific"
+  ],
+  [
+   "fnBefore",
+   "specific"
+  ],
+  [
+   "initDev",
+   "universal-"
+  ],
+  [
+   "rareCurve",
+   "universal-"
+  ],
+  [
+   "rareSlope",
+   "specific"
+  ],
+  [
+   "surprGrow",
+   "specific"
+  ]
+ ],
+ "orderMjsSha256AtFreeze": "c3125a15e2822fabdcaeae74df38ef66f9a3f5f3133c5bec4c164067c8b34424"
+}

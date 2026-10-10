@@ -1,0 +1,22 @@
+{
+ "pop": "all",
+ "n": 390,
+ "K": 3,
+ "candidates": 54,
+ "inSample": {
+  "chosen": [
+   "freq.ttr",
+   "comp.initEnt",
+   "freq.rankBinEnt"
+  ],
+  "r2": 0.4291151419547923
+ },
+ "controlsOnlyR2": 0.11222849368901244,
+ "permNullR2": {
+  "n": 40,
+  "mean": 0.03796687395965559,
+  "max": 0.07280688868717622,
+  "q95": 0.059813563600866204
+ },
+ "nestedLooR2": 0.33556409066071846
+}

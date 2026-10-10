@@ -1,0 +1,464 @@
+{
+ "N": 384,
+ "nPresent": 214,
+ "nPos": 116,
+ "nNeg": 98,
+ "C1": {
+  "indicator": {
+   "n": 384,
+   "nPresent": 214,
+   "best": {
+    "attr": "register",
+    "eta2": 0.14868361263663057,
+    "p": 0.004497751124437781
+   },
+   "pMax": 0.0034982508745627187,
+   "rows": [
+    {
+     "attr": "group",
+     "eta2": 0.06257,
+     "p": 0.0009995,
+     "levels": 6
+    },
+    {
+     "attr": "register",
+     "eta2": 0.1487,
+     "p": 0.004498,
+     "levels": 36
+    },
+    {
+     "attr": "script",
+     "eta2": 0.04476,
+     "p": 0.01399,
+     "levels": 9
+    },
+    {
+     "attr": "tokens",
+     "eta2": 0.01147,
+     "p": 0.04498
+    },
+    {
+     "attr": "meanUnitLength",
+     "eta2": 1.172e-7,
+     "p": 0.9945
+    },
+    {
+     "attr": "docs",
+     "eta2": 0.00001309,
+     "p": 0.9415
+    }
+   ]
+  },
+  "signSplit": {
+   "n": 214,
+   "nPresent": 116,
+   "best": {
+    "attr": "register",
+    "eta2": 0.30194746823195606,
+    "p": 0.0004997501249375312
+   },
+   "pMax": 0.0004997501249375312,
+   "rows": [
+    {
+     "attr": "group",
+     "eta2": 0.09923,
+     "p": 0.0004998,
+     "levels": 6
+    },
+    {
+     "attr": "register",
+     "eta2": 0.3019,
+     "p": 0.0004998,
+     "levels": 31
+    },
+    {
+     "attr": "script",
+     "eta2": 0.1357,
+     "p": 0.0004998,
+     "levels": 6
+    },
+    {
+     "attr": "tokens",
+     "eta2": 0.03691,
+     "p": 0.007496
+    },
+    {
+     "attr": "meanUnitLength",
+     "eta2": 0.001227,
+     "p": 0.6067
+    },
+    {
+     "attr": "docs",
+     "eta2": 0.01733,
+     "p": 0.05997
+    }
+   ]
+  }
+ },
+ "C2": {
+  "base": {
+   "n": 214,
+   "k": 31,
+   "eta2": 0.3019,
+   "adjEta2": 0.1875,
+   "p": 0.0004998
+  },
+  "leaveOnePocket": {
+   "minEta2": 0.298,
+   "maxEta2": 0.3162,
+   "maxP": 0.003322,
+   "worst": [
+    {
+     "id": "bk-faust-de",
+     "n": 213,
+     "k": 31,
+     "eta2": 0.298,
+     "adjEta2": 0.1823,
+     "p": 0.003322
+    },
+    {
+     "id": "bk-hen4-de",
+     "n": 213,
+     "k": 31,
+     "eta2": 0.298,
+     "adjEta2": 0.1823,
+     "p": 0.003322
+    },
+    {
+     "id": "bk-hen4-fr",
+     "n": 213,
+     "k": 31,
+     "eta2": 0.298,
+     "adjEta2": 0.1823,
+     "p": 0.003322
+    }
+   ]
+  },
+  "leaveOneRegister": [
+   {
+    "level": "drama",
+    "nRemoved": 9,
+    "n": 205,
+    "k": 30,
+    "eta2": 0.2637,
+    "adjEta2": 0.1417,
+    "p": 0.000999
+   },
+   {
+    "level": "children",
+    "nRemoved": 10,
+    "n": 204,
+    "k": 30,
+    "eta2": 0.2788,
+    "adjEta2": 0.1586,
+    "p": 0.000999
+   },
+   {
+    "level": "academic",
+    "nRemoved": 11,
+    "n": 203,
+    "k": 30,
+    "eta2": 0.2858,
+    "adjEta2": 0.1661,
+    "p": 0.000999
+   },
+   {
+    "level": "scripture",
+    "nRemoved": 16,
+    "n": 198,
+    "k": 30,
+    "eta2": 0.2858,
+    "adjEta2": 0.1626,
+    "p": 0.000999
+   },
+   {
+    "level": "code",
+    "nRemoved": 24,
+    "n": 190,
+    "k": 30,
+    "eta2": 0.3024,
+    "adjEta2": 0.1759,
+    "p": 0.000999
+   },
+   {
+    "level": "notation",
+    "nRemoved": 7,
+    "n": 207,
+    "k": 30,
+    "eta2": 0.3074,
+    "adjEta2": 0.1939,
+    "p": 0.000999
+   },
+   {
+    "level": "memoir",
+    "nRemoved": 5,
+    "n": 209,
+    "k": 30,
+    "eta2": 0.3075,
+    "adjEta2": 0.1954,
+    "p": 0.000999
+   },
+   {
+    "level": "poetry",
+    "nRemoved": 5,
+    "n": 209,
+    "k": 30,
+    "eta2": 0.3075,
+    "adjEta2": 0.1954,
+    "p": 0.000999
+   },
+   {
+    "level": "history",
+    "nRemoved": 5,
+    "n": 209,
+    "k": 30,
+    "eta2": 0.3075,
+    "adjEta2": 0.1954,
+    "p": 0.000999
+   },
+   {
+    "level": "translation",
+    "nRemoved": 6,
+    "n": 208,
+    "k": 30,
+    "eta2": 0.3084,
+    "adjEta2": 0.1958,
+    "p": 0.000999
+   },
+   {
+    "level": "dialect",
+    "nRemoved": 5,
+    "n": 209,
+    "k": 30,
+    "eta2": 0.3087,
+    "adjEta2": 0.1967,
+    "p": 0.000999
+   },
+   {
+    "level": "novel",
+    "nRemoved": 11,
+    "n": 203,
+    "k": 30,
+    "eta2": 0.3121,
+    "adjEta2": 0.1968,
+    "p": 0.000999
+   },
+   {
+    "level": "book",
+    "nRemoved": 11,
+    "n": 203,
+    "k": 30,
+    "eta2": 0.3121,
+    "adjEta2": 0.1968,
+    "p": 0.000999
+   },
+   {
+    "level": "treebank",
+    "nRemoved": 10,
+    "n": 204,
+    "k": 30,
+    "eta2": 0.3158,
+    "adjEta2": 0.2017,
+    "p": 0.000999
+   },
+   {
+    "level": "chat",
+    "nRemoved": 17,
+    "n": 197,
+    "k": 30,
+    "eta2": 0.3166,
+    "adjEta2": 0.1979,
+    "p": 0.000999
+   },
+   {
+    "level": "treatise",
+    "nRemoved": 18,
+    "n": 196,
+    "k": 30,
+    "eta2": 0.322,
+    "adjEta2": 0.2035,
+    "p": 0.000999
+   },
+   {
+    "level": "legal",
+    "nRemoved": 15,
+    "n": 199,
+    "k": 30,
+    "eta2": 0.3232,
+    "adjEta2": 0.207,
+    "p": 0.000999
+   }
+  ],
+  "leaveOneLanguage": [
+   {
+    "level": "grc",
+    "nRemoved": 12,
+    "n": 202,
+    "k": 31,
+    "eta2": 0.2838,
+    "adjEta2": 0.1581,
+    "p": 0.000999
+   },
+   {
+    "level": "deu",
+    "nRemoved": 6,
+    "n": 208,
+    "k": 31,
+    "eta2": 0.2841,
+    "adjEta2": 0.1627,
+    "p": 0.000999
+   },
+   {
+    "level": "fra",
+    "nRemoved": 7,
+    "n": 207,
+    "k": 31,
+    "eta2": 0.2925,
+    "adjEta2": 0.1719,
+    "p": 0.000999
+   },
+   {
+    "level": "eng-tr",
+    "nRemoved": 6,
+    "n": 208,
+    "k": 30,
+    "eta2": 0.3084,
+    "adjEta2": 0.1958,
+    "p": 0.000999
+   },
+   {
+    "level": "es",
+    "nRemoved": 5,
+    "n": 209,
+    "k": 31,
+    "eta2": 0.3136,
+    "adjEta2": 0.1979,
+    "p": 0.000999
+   },
+   {
+    "level": "de",
+    "nRemoved": 5,
+    "n": 209,
+    "k": 31,
+    "eta2": 0.3169,
+    "adjEta2": 0.2018,
+    "p": 0.000999
+   },
+   {
+    "level": "lat",
+    "nRemoved": 6,
+    "n": 208,
+    "k": 31,
+    "eta2": 0.3264,
+    "adjEta2": 0.2123,
+    "p": 0.000999
+   },
+   {
+    "level": "en",
+    "nRemoved": 68,
+    "n": 146,
+    "k": 20,
+    "eta2": 0.3843,
+    "adjEta2": 0.2914,
+    "p": 0.000999
+   }
+  ],
+  "leaveOneGroup": [
+   {
+    "level": "fm",
+    "nRemoved": 36,
+    "n": 178,
+    "k": 29,
+    "eta2": 0.2835,
+    "adjEta2": 0.1489,
+    "p": 0.001998
+   },
+   {
+    "level": "ml",
+    "nRemoved": 66,
+    "n": 148,
+    "k": 26,
+    "eta2": 0.292,
+    "adjEta2": 0.1469,
+    "p": 0.001998
+   },
+   {
+    "level": "cd",
+    "nRemoved": 43,
+    "n": 171,
+    "k": 25,
+    "eta2": 0.2976,
+    "adjEta2": 0.1821,
+    "p": 0.000999
+   },
+   {
+    "level": "oc",
+    "nRemoved": 18,
+    "n": 196,
+    "k": 29,
+    "eta2": 0.3135,
+    "adjEta2": 0.1984,
+    "p": 0.000999
+   },
+   {
+    "level": "ud",
+    "nRemoved": 10,
+    "n": 204,
+    "k": 30,
+    "eta2": 0.3158,
+    "adjEta2": 0.2017,
+    "p": 0.000999
+   },
+   {
+    "level": "bk",
+    "nRemoved": 41,
+    "n": 173,
+    "k": 25,
+    "eta2": 0.3674,
+    "adjEta2": 0.2648,
+    "p": 0.000999
+   }
+  ]
+ },
+ "C3": {
+  "registerPlain": {
+   "n": 214,
+   "k": 31,
+   "eta2": 0.3019,
+   "adjEta2": 0.1875,
+   "p": 0.0004998
+  },
+  "registerWithinLanguageStrata": {
+   "n": 214,
+   "k": 31,
+   "eta2": 0.3019,
+   "adjEta2": 0.1875,
+   "p": 0.3248
+  },
+  "registerWithinGroupStrata": {
+   "n": 214,
+   "k": 31,
+   "eta2": 0.3019,
+   "adjEta2": 0.1875,
+   "p": 0.0009995
+  },
+  "languageAlone": {
+   "n": 214,
+   "k": 84,
+   "eta2": 0.6354,
+   "adjEta2": 0.4026,
+   "p": 0.0004998
+  },
+  "englishOnlyRegister": {
+   "n": 68,
+   "k": 20,
+   "eta2": 0.5372,
+   "adjEta2": 0.3541,
+   "p": 0.0009995
+  },
+  "nEnglishPresent": 68,
+  "englishPos": 52,
+  "nonEnglishPos": 64,
+  "nonEnglishNeg": 82
+ }
+}

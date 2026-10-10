@@ -1,0 +1,4223 @@
+{
+ "module": "eval/law/provisional/ablation-scope/confirm-rules.mjs",
+ "rulesFile": "results/frozen-rules.json",
+ "rulesFileSha256": "ec1346ba7800f360413db4424119ab3c67c3428ae9abac681bc892b394a603ba",
+ "data": "data/confirmation",
+ "B": 1000,
+ "rows": 4834,
+ "pairs": 2417,
+ "K1_sham": {
+  "nullShare": 1,
+  "n": 168
+ },
+ "K6_determinism": {
+  "same": 168,
+  "n": 168
+ },
+ "candidates": {
+  "slot.irc.A:S_ENTRY:c4_6..c7_15": {
+   "spec": {
+    "id": "irc.A:c4_6..c7_15",
+    "kind": "irc",
+    "group": "A",
+    "strata": [
+     "c4_6",
+     "c7_15"
+    ],
+    "score": "S_ENTRY",
+    "sign": null,
+    "op": ">=",
+    "threshold": 1
+   },
+   "cells": {
+    "c4_6": {
+     "n": 240,
+     "auc": 0.7333,
+     "ci": [
+      0.6915,
+      0.7733
+     ],
+     "permQ95": 0.5417,
+     "controls": {
+      "R_LOGC": 0.5552,
+      "R_POS": 0.4839,
+      "R_IPOS": 0.5,
+      "R_FB": 0.4666,
+      "R_LEN": 0.5235,
+      "R_SL": 0.5012
+     },
+     "voidCell": true,
+     "tpr": 0.8042,
+     "tnr": 0.6625
+    },
+    "c7_15": {
+     "n": 240,
+     "auc": 0.7312,
+     "ci": [
+      0.6851,
+      0.7831
+     ],
+     "permQ95": 0.5354,
+     "controls": {
+      "R_LOGC": 0.5071,
+      "R_POS": 0.4944,
+      "R_IPOS": 0.5,
+      "R_FB": 0.4397,
+      "R_LEN": 0.5498,
+      "R_SL": 0.5136
+     },
+     "voidCell": true,
+     "tpr": 0.9208,
+     "tnr": 0.5417
+    }
+   },
+   "liveStrata": [
+    "c4_6",
+    "c7_15"
+   ],
+   "pairs": 480,
+   "auc": 0.7323,
+   "ci": [
+    0.6949,
+    0.7708
+   ],
+   "permQ95": 0.526,
+   "permP": 0,
+   "controlsPooled": {
+    "R_LOGC": 0.5311,
+    "R_POS": 0.4891,
+    "R_IPOS": 0.5,
+    "R_FB": 0.4532,
+    "R_LEN": 0.5366,
+    "R_SL": 0.5074
+   },
+   "controlsInBand": true,
+   "tpr": 0.8625,
+   "tnr": 0.6021,
+   "diffToBurst": {
+    "point": 0.099,
+    "lo": 0.041,
+    "hi": 0.1559
+   },
+   "perBlock": [
+    [
+     "kubuntu/2006-03-15",
+     0.875,
+     60
+    ],
+    [
+     "ubuntu/2006-03-15",
+     0.6917,
+     60
+    ],
+    [
+     "ubuntu/2007-07-15",
+     0.7333,
+     60
+    ],
+    [
+     "ubuntu/2009-03-15",
+     0.725,
+     60
+    ],
+    [
+     "ubuntu/2011-03-15",
+     0.65,
+     60
+    ],
+    [
+     "ubuntu/2011-07-15",
+     0.7833,
+     60
+    ],
+    [
+     "ubuntu/2012-03-15",
+     0.7083,
+     60
+    ],
+    [
+     "ubuntu/2013-07-15",
+     0.6917,
+     60
+    ]
+   ],
+   "consistency": {
+    "above": 8,
+    "of": 8
+   },
+   "strataAtLeast058": "2/2",
+   "nonNullNames": 0.9167,
+   "nonNullUnlabelled": 0.6042,
+   "controlProbeAuc": 0.5674,
+   "caliper": {
+    "pairs": 40,
+    "auc": 0.7125,
+    "ci": [
+     0.6341,
+     0.7857
+    ],
+    "controls": {
+     "R_LOGC": 0.4846,
+     "R_POS": 0.4657,
+     "R_IPOS": 0.5,
+     "R_FB": 0.5,
+     "R_LEN": 0.5,
+     "R_SL": 0.5206
+    },
+    "gate": true
+   },
+   "pass": true,
+   "verdict": "PASS"
+  },
+  "slot.irc.B:EXTENT:c4_6..c4_6": {
+   "spec": {
+    "id": "irc.B:c4_6..c4_6",
+    "kind": "irc",
+    "group": "B",
+    "strata": [
+     "c4_6"
+    ],
+    "score": "EXTENT",
+    "sign": null,
+    "op": ">=",
+    "threshold": 3
+   },
+   "cells": {
+    "c4_6": {
+     "n": 238,
+     "auc": 0.8035,
+     "ci": [
+      0.7564,
+      0.845
+     ],
+     "permQ95": 0.5458,
+     "controls": {
+      "R_LOGC": 0.5142,
+      "R_POS": 0.5003,
+      "R_IPOS": 0.4918,
+      "R_FB": 0.4716,
+      "R_LEN": 0.5051,
+      "R_SL": 0.4722
+     },
+     "voidCell": true,
+     "tpr": 0.6387,
+     "tnr": 0.9286
+    }
+   },
+   "liveStrata": [
+    "c4_6"
+   ],
+   "pairs": 238,
+   "auc": 0.8035,
+   "ci": [
+    0.7559,
+    0.8454
+   ],
+   "permQ95": 0.5416,
+   "permP": 0,
+   "controlsPooled": {
+    "R_LOGC": 0.5142,
+    "R_POS": 0.5003,
+    "R_IPOS": 0.4918,
+    "R_FB": 0.4716,
+    "R_LEN": 0.5051,
+    "R_SL": 0.4722
+   },
+   "controlsInBand": true,
+   "tpr": 0.6387,
+   "tnr": 0.9286,
+   "diffToBurst": {
+    "point": 0.2327,
+    "lo": 0.1843,
+    "hi": 0.2856
+   },
+   "perBlock": [
+    [
+     "kubuntu/2006-03-15",
+     0.9286,
+     7
+    ],
+    [
+     "ubuntu/2006-03-15",
+     0.8163,
+     40
+    ],
+    [
+     "ubuntu/2007-07-15",
+     0.6456,
+     40
+    ],
+    [
+     "ubuntu/2009-03-15",
+     0.7688,
+     40
+    ],
+    [
+     "ubuntu/2011-03-15",
+     0.8547,
+     40
+    ],
+    [
+     "ubuntu/2011-07-15",
+     0.8532,
+     27
+    ],
+    [
+     "ubuntu/2012-03-15",
+     0.8878,
+     19
+    ],
+    [
+     "ubuntu/2013-07-15",
+     0.8384,
+     25
+    ]
+   ],
+   "consistency": {
+    "above": 8,
+    "of": 8
+   },
+   "strataAtLeast058": "1/1",
+   "nonNullNames": 0.7521,
+   "nonNullUnlabelled": 0.3487,
+   "controlProbeAuc": 0.5187,
+   "caliper": {
+    "pairs": 97,
+    "auc": 0.7678,
+    "ci": [
+     0.6693,
+     0.845
+    ],
+    "controls": {
+     "R_LOGC": 0.5,
+     "R_POS": 0.5142,
+     "R_IPOS": 0.4952,
+     "R_FB": 0.5,
+     "R_LEN": 0.5,
+     "R_SL": 0.4989
+    },
+    "gate": true
+   },
+   "pass": true,
+   "verdict": "PASS"
+  },
+  "slot.irc.B:EXTENT:c16p..c16p": {
+   "spec": {
+    "id": "irc.B:c16p..c16p",
+    "kind": "irc",
+    "group": "B",
+    "strata": [
+     "c16p"
+    ],
+    "score": "EXTENT",
+    "sign": null,
+    "op": ">=",
+    "threshold": 6
+   },
+   "cells": {
+    "c16p": {
+     "n": 80,
+     "auc": 0.8797,
+     "ci": [
+      0.803,
+      0.9544
+     ],
+     "permQ95": 0.5812,
+     "controls": {
+      "R_LOGC": 0.4971,
+      "R_POS": 0.4867,
+      "R_IPOS": 0.4926,
+      "R_FB": 0.4237,
+      "R_LEN": 0.5205,
+      "R_SL": 0.452
+     },
+     "voidCell": true,
+     "tpr": 0.8125,
+     "tnr": 0.9
+    }
+   },
+   "liveStrata": [
+    "c16p"
+   ],
+   "pairs": 80,
+   "auc": 0.8797,
+   "ci": [
+    0.798,
+    0.9547
+   ],
+   "permQ95": 0.5833,
+   "permP": 0,
+   "controlsPooled": {
+    "R_LOGC": 0.4971,
+    "R_POS": 0.4867,
+    "R_IPOS": 0.4926,
+    "R_FB": 0.4237,
+    "R_LEN": 0.5205,
+    "R_SL": 0.452
+   },
+   "controlsInBand": false,
+   "tpr": 0.8125,
+   "tnr": 0.9,
+   "diffToBurst": {
+    "point": 0.3946,
+    "lo": 0.2982,
+    "hi": 0.5096
+   },
+   "perBlock": [
+    [
+     "kubuntu/2006-03-15",
+     1,
+     6
+    ],
+    [
+     "ubuntu/2006-03-15",
+     0.8056,
+     6
+    ],
+    [
+     "ubuntu/2007-07-15",
+     0.8399,
+     22
+    ],
+    [
+     "ubuntu/2009-03-15",
+     0.932,
+     13
+    ],
+    [
+     "ubuntu/2011-03-15",
+     0.7891,
+     16
+    ],
+    [
+     "ubuntu/2011-07-15",
+     1,
+     11
+    ],
+    [
+     "ubuntu/2012-03-15",
+     0.9,
+     5
+    ]
+   ],
+   "consistency": {
+    "above": 7,
+    "of": 7
+   },
+   "strataAtLeast058": "1/1",
+   "nonNullNames": 0.9125,
+   "nonNullUnlabelled": 0.525,
+   "controlProbeAuc": 0.5669,
+   "caliper": {
+    "pairs": 11,
+    "gate": null
+   },
+   "pass": false,
+   "verdict": "VOID"
+  },
+  "slot.irc.B:S_ENTRY:c4_6..c16p(E1)": {
+   "spec": {
+    "id": "E1",
+    "kind": "irc",
+    "group": "B",
+    "strata": [
+     "c4_6",
+     "c7_15",
+     "c16p"
+    ],
+    "score": "S_ENTRY",
+    "sign": null,
+    "op": ">=",
+    "threshold": 1
+   },
+   "cells": {
+    "c4_6": {
+     "n": 238,
+     "auc": 0.7458,
+     "ci": [
+      0.7134,
+      0.7809
+     ],
+     "permQ95": 0.5399,
+     "controls": {
+      "R_LOGC": 0.5142,
+      "R_POS": 0.5003,
+      "R_IPOS": 0.4918,
+      "R_FB": 0.4716,
+      "R_LEN": 0.5051,
+      "R_SL": 0.4722
+     },
+     "voidCell": true,
+     "tpr": 0.4916,
+     "tnr": 1
+    },
+    "c7_15": {
+     "n": 208,
+     "auc": 0.8822,
+     "ci": [
+      0.8401,
+      0.9253
+     ],
+     "permQ95": 0.5505,
+     "controls": {
+      "R_LOGC": 0.5173,
+      "R_POS": 0.4987,
+      "R_IPOS": 0.4975,
+      "R_FB": 0.4517,
+      "R_LEN": 0.524,
+      "R_SL": 0.4672
+     },
+     "voidCell": true,
+     "tpr": 0.7692,
+     "tnr": 0.9952
+    },
+    "c16p": {
+     "n": 80,
+     "auc": 0.8875,
+     "ci": [
+      0.8276,
+      0.9444
+     ],
+     "permQ95": 0.575,
+     "controls": {
+      "R_LOGC": 0.4971,
+      "R_POS": 0.4867,
+      "R_IPOS": 0.4926,
+      "R_FB": 0.4237,
+      "R_LEN": 0.5205,
+      "R_SL": 0.452
+     },
+     "voidCell": true,
+     "tpr": 0.8125,
+     "tnr": 0.9625
+    }
+   },
+   "liveStrata": [
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "pairs": 526,
+   "auc": 0.8213,
+   "ci": [
+    0.7934,
+    0.8537
+   ],
+   "permQ95": 0.5266,
+   "permP": 0,
+   "controlsPooled": {
+    "R_LOGC": 0.5128,
+    "R_POS": 0.4976,
+    "R_IPOS": 0.4942,
+    "R_FB": 0.4564,
+    "R_LEN": 0.5149,
+    "R_SL": 0.4671
+   },
+   "controlsInBand": true,
+   "tpr": 0.6502,
+   "tnr": 0.9924,
+   "diffToBurst": {
+    "point": 0.2759,
+    "lo": 0.2419,
+    "hi": 0.3149
+   },
+   "perBlock": [
+    [
+     "kubuntu/2006-03-15",
+     0.96,
+     25
+    ],
+    [
+     "ubuntu/2006-03-15",
+     0.8354,
+     82
+    ],
+    [
+     "ubuntu/2007-07-15",
+     0.7696,
+     102
+    ],
+    [
+     "ubuntu/2009-03-15",
+     0.8312,
+     77
+    ],
+    [
+     "ubuntu/2011-03-15",
+     0.7448,
+     96
+    ],
+    [
+     "ubuntu/2011-07-15",
+     0.879,
+     62
+    ],
+    [
+     "ubuntu/2012-03-15",
+     0.859,
+     39
+    ],
+    [
+     "ubuntu/2013-07-15",
+     0.8721,
+     43
+    ]
+   ],
+   "consistency": {
+    "above": 8,
+    "of": 8
+   },
+   "strataAtLeast058": "3/3",
+   "nonNullNames": 0.827,
+   "nonNullUnlabelled": 0.3935,
+   "controlProbeAuc": 0.5575,
+   "caliper": {
+    "pairs": 155,
+    "auc": 0.7484,
+    "ci": [
+     0.7021,
+     0.7961
+    ],
+    "controls": {
+     "R_LOGC": 0.5091,
+     "R_POS": 0.5106,
+     "R_IPOS": 0.4892,
+     "R_FB": 0.5,
+     "R_LEN": 0.5,
+     "R_SL": 0.5007
+    },
+    "gate": true
+   },
+   "pass": true,
+   "verdict": "PASS"
+  },
+  "company.irc.A:c.surprisalDestroyed:c2+c3+c4_6+c7_15+c16p": {
+   "spec": {
+    "id": "irc.A:c.surprisalDestroyed",
+    "kind": "irc",
+    "group": "A",
+    "strata": [
+     "c2",
+     "c3",
+     "c4_6",
+     "c7_15",
+     "c16p"
+    ],
+    "score": "c.surprisalDestroyed",
+    "sign": 1,
+    "op": ">",
+    "threshold": 3.200811
+   },
+   "cells": {
+    "c2": {
+     "n": 240,
+     "auc": 0.6431,
+     "ci": [
+      0.6057,
+      0.6787
+     ],
+     "permQ95": 0.5401,
+     "controls": {
+      "R_LOGC": 0.5,
+      "R_POS": 0.5,
+      "R_IPOS": 0.5,
+      "R_FB": 0.4865,
+      "R_LEN": 0.5227,
+      "R_SL": 0.5351
+     },
+     "voidCell": true,
+     "tpr": 0.975,
+     "tnr": 0.175
+    },
+    "c3": {
+     "n": 238,
+     "auc": 0.6627,
+     "ci": [
+      0.613,
+      0.7057
+     ],
+     "permQ95": 0.5434,
+     "controls": {
+      "R_LOGC": 0.5,
+      "R_POS": 0.5155,
+      "R_IPOS": 0.5,
+      "R_FB": 0.49,
+      "R_LEN": 0.5276,
+      "R_SL": 0.5178
+     },
+     "voidCell": true,
+     "tpr": 0.9412,
+     "tnr": 0.3151
+    },
+    "c4_6": {
+     "n": 240,
+     "auc": 0.7096,
+     "ci": [
+      0.6613,
+      0.7538
+     ],
+     "permQ95": 0.5436,
+     "controls": {
+      "R_LOGC": 0.5552,
+      "R_POS": 0.4839,
+      "R_IPOS": 0.5,
+      "R_FB": 0.4666,
+      "R_LEN": 0.5235,
+      "R_SL": 0.5012
+     },
+     "voidCell": true,
+     "tpr": 0.925,
+     "tnr": 0.3875
+    },
+    "c7_15": {
+     "n": 240,
+     "auc": 0.7547,
+     "ci": [
+      0.7038,
+      0.8062
+     ],
+     "permQ95": 0.5441,
+     "controls": {
+      "R_LOGC": 0.5071,
+      "R_POS": 0.4944,
+      "R_IPOS": 0.5,
+      "R_FB": 0.4397,
+      "R_LEN": 0.5498,
+      "R_SL": 0.5136
+     },
+     "voidCell": true,
+     "tpr": 0.8458,
+     "tnr": 0.5958
+    },
+    "c16p": {
+     "n": 114,
+     "auc": 0.765,
+     "ci": [
+      0.6819,
+      0.8305
+     ],
+     "permQ95": 0.5687,
+     "controls": {
+      "R_LOGC": 0.5479,
+      "R_POS": 0.4932,
+      "R_IPOS": 0.5,
+      "R_FB": 0.4197,
+      "R_LEN": 0.5167,
+      "R_SL": 0.4787
+     },
+     "voidCell": true,
+     "tpr": 0.7544,
+     "tnr": 0.6228
+    }
+   },
+   "liveStrata": [
+    "c2",
+    "c3",
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "pairs": 1072,
+   "auc": 0.7003,
+   "ci": [
+    0.6738,
+    0.7262
+   ],
+   "permQ95": 0.5207,
+   "permP": 0,
+   "controlsPooled": {
+    "R_LOGC": 0.519,
+    "R_POS": 0.4979,
+    "R_IPOS": 0.5,
+    "R_FB": 0.4653,
+    "R_LEN": 0.5294,
+    "R_SL": 0.5129
+   },
+   "controlsInBand": true,
+   "tpr": 0.9039,
+   "tnr": 0.3955,
+   "diffToBurst": {
+    "point": 0.0616,
+    "lo": 0.0158,
+    "hi": 0.1049
+   },
+   "perBlock": [
+    [
+     "kubuntu/2006-03-15",
+     0.5805,
+     127
+    ],
+    [
+     "ubuntu/2006-03-15",
+     0.709,
+     134
+    ],
+    [
+     "ubuntu/2007-07-15",
+     0.6939,
+     137
+    ],
+    [
+     "ubuntu/2009-03-15",
+     0.687,
+     130
+    ],
+    [
+     "ubuntu/2011-03-15",
+     0.7435,
+     142
+    ],
+    [
+     "ubuntu/2011-07-15",
+     0.6357,
+     139
+    ],
+    [
+     "ubuntu/2012-03-15",
+     0.7034,
+     129
+    ],
+    [
+     "ubuntu/2013-07-15",
+     0.6905,
+     134
+    ]
+   ],
+   "consistency": {
+    "above": 8,
+    "of": 8
+   },
+   "strataAtLeast058": "5/5",
+   "nonNullNames": 0.7771,
+   "nonNullUnlabelled": 0.6119,
+   "controlProbeAuc": 0.5513,
+   "caliper": {
+    "pairs": 129,
+    "auc": 0.6904,
+    "ci": [
+     0.6067,
+     0.7568
+    ],
+    "controls": {
+     "R_LOGC": 0.4996,
+     "R_POS": 0.487,
+     "R_IPOS": 0.5,
+     "R_FB": 0.5,
+     "R_LEN": 0.5,
+     "R_SL": 0.5204
+    },
+    "gate": true
+   },
+   "pass": true,
+   "verdict": "PASS"
+  },
+  "company.irc.A:c.dSelf:c2+c3+c4_6": {
+   "spec": {
+    "id": "irc.A:c.dSelf",
+    "kind": "irc",
+    "group": "A",
+    "strata": [
+     "c2",
+     "c3",
+     "c4_6"
+    ],
+    "score": "c.dSelf",
+    "sign": -1,
+    "op": ">",
+    "threshold": -0.456185
+   },
+   "cells": {
+    "c2": {
+     "n": 240,
+     "auc": 0.8662,
+     "ci": [
+      0.8315,
+      0.8958
+     ],
+     "permQ95": 0.5505,
+     "controls": {
+      "R_LOGC": 0.5,
+      "R_POS": 0.5,
+      "R_IPOS": 0.5,
+      "R_FB": 0.4865,
+      "R_LEN": 0.5227,
+      "R_SL": 0.5351
+     },
+     "voidCell": true,
+     "tpr": 0,
+     "tnr": 1
+    },
+    "c3": {
+     "n": 238,
+     "auc": 0.7976,
+     "ci": [
+      0.751,
+      0.8339
+     ],
+     "permQ95": 0.5489,
+     "controls": {
+      "R_LOGC": 0.5,
+      "R_POS": 0.5155,
+      "R_IPOS": 0.5,
+      "R_FB": 0.49,
+      "R_LEN": 0.5276,
+      "R_SL": 0.5178
+     },
+     "voidCell": true,
+     "tpr": 0.6975,
+     "tnr": 0.937
+    },
+    "c4_6": {
+     "n": 240,
+     "auc": 0.7758,
+     "ci": [
+      0.7384,
+      0.8096
+     ],
+     "permQ95": 0.5415,
+     "controls": {
+      "R_LOGC": 0.5552,
+      "R_POS": 0.4839,
+      "R_IPOS": 0.5,
+      "R_FB": 0.4666,
+      "R_LEN": 0.5235,
+      "R_SL": 0.5012
+     },
+     "voidCell": true,
+     "tpr": 0.975,
+     "tnr": 0.2083
+    }
+   },
+   "liveStrata": [
+    "c2",
+    "c3",
+    "c4_6"
+   ],
+   "pairs": 718,
+   "auc": 0.8132,
+   "ci": [
+    0.7919,
+    0.8343
+   ],
+   "permQ95": 0.528,
+   "permP": 0,
+   "controlsPooled": {
+    "R_LOGC": 0.5184,
+    "R_POS": 0.4998,
+    "R_IPOS": 0.5,
+    "R_FB": 0.481,
+    "R_LEN": 0.5246,
+    "R_SL": 0.5181
+   },
+   "controlsInBand": true,
+   "tpr": 0.5571,
+   "tnr": 0.7145,
+   "diffToBurst": {
+    "point": 0.1681,
+    "lo": 0.1256,
+    "hi": 0.2074
+   },
+   "perBlock": [
+    [
+     "kubuntu/2006-03-15",
+     0.6239,
+     88
+    ],
+    [
+     "ubuntu/2006-03-15",
+     0.6567,
+     90
+    ],
+    [
+     "ubuntu/2007-07-15",
+     0.6431,
+     90
+    ],
+    [
+     "ubuntu/2009-03-15",
+     0.6238,
+     90
+    ],
+    [
+     "ubuntu/2011-03-15",
+     0.632,
+     90
+    ],
+    [
+     "ubuntu/2011-07-15",
+     0.6583,
+     90
+    ],
+    [
+     "ubuntu/2012-03-15",
+     0.6319,
+     90
+    ],
+    [
+     "ubuntu/2013-07-15",
+     0.607,
+     90
+    ]
+   ],
+   "consistency": {
+    "above": 8,
+    "of": 8
+   },
+   "strataAtLeast058": "3/3",
+   "nonNullNames": 0.6936,
+   "nonNullUnlabelled": 0.5919,
+   "controlProbeAuc": 0.542,
+   "caliper": {
+    "pairs": 108,
+    "auc": 0.8719,
+    "ci": [
+     0.8297,
+     0.906
+    ],
+    "controls": {
+     "R_LOGC": 0.5,
+     "R_POS": 0.4964,
+     "R_IPOS": 0.5,
+     "R_FB": 0.5,
+     "R_LEN": 0.5,
+     "R_SL": 0.521
+    },
+    "gate": true
+   },
+   "pass": true,
+   "verdict": "PASS"
+  },
+  "company.irc.B:c.dSelf:c2+c3+c4_6+c7_15+c16p": {
+   "spec": {
+    "id": "irc.B:c.dSelf",
+    "kind": "irc",
+    "group": "B",
+    "strata": [
+     "c2",
+     "c3",
+     "c4_6",
+     "c7_15",
+     "c16p"
+    ],
+    "score": "c.dSelf",
+    "sign": 1,
+    "op": ">",
+    "threshold": 0.530492
+   },
+   "cells": {
+    "c2": {
+     "n": 214,
+     "auc": 0.7535,
+     "ci": [
+      0.6979,
+      0.8047
+     ],
+     "permQ95": 0.545,
+     "controls": {
+      "R_LOGC": 0.5,
+      "R_POS": 0.4873,
+      "R_IPOS": 0.5108,
+      "R_FB": 0.4985,
+      "R_LEN": 0.5013,
+      "R_SL": 0.4725
+     },
+     "voidCell": true,
+     "tpr": 0.8692,
+     "tnr": 0.3692
+    },
+    "c3": {
+     "n": 202,
+     "auc": 0.7432,
+     "ci": [
+      0.6947,
+      0.7856
+     ],
+     "permQ95": 0.547,
+     "controls": {
+      "R_LOGC": 0.5,
+      "R_POS": 0.5012,
+      "R_IPOS": 0.4908,
+      "R_FB": 0.4854,
+      "R_LEN": 0.5162,
+      "R_SL": 0.4543
+     },
+     "voidCell": true,
+     "tpr": 0.7376,
+     "tnr": 0.5743
+    },
+    "c4_6": {
+     "n": 238,
+     "auc": 0.7292,
+     "ci": [
+      0.697,
+      0.7634
+     ],
+     "permQ95": 0.5431,
+     "controls": {
+      "R_LOGC": 0.5142,
+      "R_POS": 0.5003,
+      "R_IPOS": 0.4918,
+      "R_FB": 0.4716,
+      "R_LEN": 0.5051,
+      "R_SL": 0.4722
+     },
+     "voidCell": true,
+     "tpr": 0.1218,
+     "tnr": 0.9874
+    },
+    "c7_15": {
+     "n": 208,
+     "auc": 0.7613,
+     "ci": [
+      0.7286,
+      0.799
+     ],
+     "permQ95": 0.538,
+     "controls": {
+      "R_LOGC": 0.5173,
+      "R_POS": 0.4987,
+      "R_IPOS": 0.4975,
+      "R_FB": 0.4517,
+      "R_LEN": 0.524,
+      "R_SL": 0.4672
+     },
+     "voidCell": true,
+     "tpr": 0,
+     "tnr": 1
+    },
+    "c16p": {
+     "n": 80,
+     "auc": 0.8081,
+     "ci": [
+      0.7552,
+      0.8716
+     ],
+     "permQ95": 0.5747,
+     "controls": {
+      "R_LOGC": 0.4971,
+      "R_POS": 0.4867,
+      "R_IPOS": 0.4926,
+      "R_FB": 0.4237,
+      "R_LEN": 0.5205,
+      "R_SL": 0.452
+     },
+     "voidCell": true,
+     "tpr": 0,
+     "tnr": 1
+    }
+   },
+   "liveStrata": [
+    "c2",
+    "c3",
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "pairs": 942,
+   "auc": 0.7515,
+   "ci": [
+    0.7258,
+    0.7787
+   ],
+   "permQ95": 0.5218,
+   "permP": 0,
+   "controlsPooled": {
+    "R_LOGC": 0.5072,
+    "R_POS": 0.496,
+    "R_IPOS": 0.4972,
+    "R_FB": 0.4722,
+    "R_LEN": 0.5121,
+    "R_SL": 0.4656
+   },
+   "controlsInBand": true,
+   "tpr": 0.3864,
+   "tnr": 0.7622,
+   "diffToBurst": {
+    "point": 0.1714,
+    "lo": 0.1412,
+    "hi": 0.2022
+   },
+   "perBlock": [
+    [
+     "kubuntu/2006-03-15",
+     0.6172,
+     34
+    ],
+    [
+     "ubuntu/2006-03-15",
+     0.611,
+     161
+    ],
+    [
+     "ubuntu/2007-07-15",
+     0.5631,
+     182
+    ],
+    [
+     "ubuntu/2009-03-15",
+     0.5984,
+     157
+    ],
+    [
+     "ubuntu/2011-03-15",
+     0.5624,
+     163
+    ],
+    [
+     "ubuntu/2011-07-15",
+     0.6075,
+     102
+    ],
+    [
+     "ubuntu/2012-03-15",
+     0.6118,
+     79
+    ],
+    [
+     "ubuntu/2013-07-15",
+     0.6423,
+     64
+    ]
+   ],
+   "consistency": {
+    "above": 8,
+    "of": 8
+   },
+   "strataAtLeast058": "5/5",
+   "nonNullNames": 0.6709,
+   "nonNullUnlabelled": 0.4894,
+   "controlProbeAuc": 0.5446,
+   "caliper": {
+    "pairs": 367,
+    "auc": 0.6694,
+    "ci": [
+     0.6253,
+     0.7121
+    ],
+    "controls": {
+     "R_LOGC": 0.5038,
+     "R_POS": 0.4998,
+     "R_IPOS": 0.4941,
+     "R_FB": 0.5,
+     "R_LEN": 0.5,
+     "R_SL": 0.4989
+    },
+    "gate": true
+   },
+   "pass": true,
+   "verdict": "PASS"
+  },
+  "company.irc.B:span.mentionShift:c4_6+c7_15+c16p": {
+   "spec": {
+    "id": "irc.B:span.mentionShift",
+    "kind": "irc",
+    "group": "B",
+    "strata": [
+     "c4_6",
+     "c7_15",
+     "c16p"
+    ],
+    "score": "span.mentionShift",
+    "sign": 1,
+    "op": ">",
+    "threshold": 0
+   },
+   "cells": {
+    "c4_6": {
+     "n": 238,
+     "auc": 0.7731,
+     "ci": [
+      0.7403,
+      0.8043
+     ],
+     "permQ95": 0.542,
+     "controls": {
+      "R_LOGC": 0.5142,
+      "R_POS": 0.5003,
+      "R_IPOS": 0.4918,
+      "R_FB": 0.4716,
+      "R_LEN": 0.5051,
+      "R_SL": 0.4722
+     },
+     "voidCell": true,
+     "tpr": 0.5504,
+     "tnr": 0.9958
+    },
+    "c7_15": {
+     "n": 208,
+     "auc": 0.8822,
+     "ci": [
+      0.8444,
+      0.9256
+     ],
+     "permQ95": 0.5457,
+     "controls": {
+      "R_LOGC": 0.5173,
+      "R_POS": 0.4987,
+      "R_IPOS": 0.4975,
+      "R_FB": 0.4517,
+      "R_LEN": 0.524,
+      "R_SL": 0.4672
+     },
+     "voidCell": true,
+     "tpr": 0.7692,
+     "tnr": 0.9952
+    },
+    "c16p": {
+     "n": 80,
+     "auc": 0.8875,
+     "ci": [
+      0.8269,
+      0.9437
+     ],
+     "permQ95": 0.575,
+     "controls": {
+      "R_LOGC": 0.4971,
+      "R_POS": 0.4867,
+      "R_IPOS": 0.4926,
+      "R_FB": 0.4237,
+      "R_LEN": 0.5205,
+      "R_SL": 0.452
+     },
+     "voidCell": true,
+     "tpr": 0.8125,
+     "tnr": 0.9625
+    }
+   },
+   "liveStrata": [
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "pairs": 526,
+   "auc": 0.8337,
+   "ci": [
+    0.8053,
+    0.8635
+   ],
+   "permQ95": 0.5295,
+   "permP": 0,
+   "controlsPooled": {
+    "R_LOGC": 0.5128,
+    "R_POS": 0.4976,
+    "R_IPOS": 0.4942,
+    "R_FB": 0.4564,
+    "R_LEN": 0.5149,
+    "R_SL": 0.4671
+   },
+   "controlsInBand": true,
+   "tpr": 0.6768,
+   "tnr": 0.9905,
+   "diffToBurst": {
+    "point": 0.2882,
+    "lo": 0.2554,
+    "hi": 0.3257
+   },
+   "perBlock": [
+    [
+     "kubuntu/2006-03-15",
+     0.96,
+     25
+    ],
+    [
+     "ubuntu/2006-03-15",
+     0.8476,
+     82
+    ],
+    [
+     "ubuntu/2007-07-15",
+     0.7745,
+     102
+    ],
+    [
+     "ubuntu/2009-03-15",
+     0.8506,
+     77
+    ],
+    [
+     "ubuntu/2011-03-15",
+     0.7552,
+     96
+    ],
+    [
+     "ubuntu/2011-07-15",
+     0.8871,
+     62
+    ],
+    [
+     "ubuntu/2012-03-15",
+     0.8846,
+     39
+    ],
+    [
+     "ubuntu/2013-07-15",
+     0.8953,
+     43
+    ]
+   ],
+   "consistency": {
+    "above": 8,
+    "of": 8
+   },
+   "strataAtLeast058": "3/3",
+   "nonNullNames": 0.827,
+   "nonNullUnlabelled": 0.3935,
+   "controlProbeAuc": 0.5575,
+   "caliper": {
+    "pairs": 155,
+    "auc": 0.7645,
+    "ci": [
+     0.7138,
+     0.8252
+    ],
+    "controls": {
+     "R_LOGC": 0.5091,
+     "R_POS": 0.5106,
+     "R_IPOS": 0.4892,
+     "R_FB": 0.5,
+     "R_LEN": 0.5,
+     "R_SL": 0.5007
+    },
+    "gate": true
+   },
+   "pass": true,
+   "verdict": "PASS"
+  },
+  "company.wp.A:atm.activation.self:c2+c3+c4_6+c7_15": {
+   "spec": {
+    "id": "wp.A:atm.activation.self",
+    "kind": "wp",
+    "group": "A",
+    "strata": [
+     "c2",
+     "c3",
+     "c4_6",
+     "c7_15"
+    ],
+    "score": "atm.activation.self",
+    "sign": -1,
+    "op": ">",
+    "threshold": 6.199602
+   },
+   "cells": {
+    "c2": {
+     "n": 30,
+     "auc": 0.7,
+     "ci": [
+      0.6154,
+      0.7778
+     ],
+     "permQ95": 0.5983,
+     "controls": {
+      "R_LOGC": 0.5,
+      "R_POS": 0.5133,
+      "R_IPOS": 0.5,
+      "R_FB": 0.5689,
+      "R_LEN": 0.5272,
+      "R_SL": 0.535
+     },
+     "voidCell": true,
+     "tpr": 0,
+     "tnr": 1
+    },
+    "c3": {
+     "n": 30,
+     "auc": 0.6789,
+     "ci": [
+      0.5244,
+      0.8252
+     ],
+     "permQ95": 0.6333,
+     "controls": {
+      "R_LOGC": 0.5,
+      "R_POS": 0.5211,
+      "R_IPOS": 0.5,
+      "R_FB": 0.5044,
+      "R_LEN": 0.5078,
+      "R_SL": 0.4956
+     },
+     "voidCell": false,
+     "tpr": 0.0667,
+     "tnr": 1
+    },
+    "c4_6": {
+     "n": 30,
+     "auc": 0.6361,
+     "ci": [
+      0.5045,
+      0.7686
+     ],
+     "permQ95": 0.6167,
+     "controls": {
+      "R_LOGC": 0.5122,
+      "R_POS": 0.5133,
+      "R_IPOS": 0.5,
+      "R_FB": 0.5011,
+      "R_LEN": 0.5222,
+      "R_SL": 0.53
+     },
+     "voidCell": false,
+     "tpr": 0.5,
+     "tnr": 0.7
+    },
+    "c7_15": {
+     "n": 30,
+     "auc": 0.6911,
+     "ci": [
+      0.5579,
+      0.8264
+     ],
+     "permQ95": 0.6272,
+     "controls": {
+      "R_LOGC": 0.4817,
+      "R_POS": 0.4956,
+      "R_IPOS": 0.5,
+      "R_FB": 0.4167,
+      "R_LEN": 0.5711,
+      "R_SL": 0.4906
+     },
+     "voidCell": false,
+     "tpr": 0.8,
+     "tnr": 0.3333
+    }
+   },
+   "liveStrata": [
+    "c2",
+    "c3",
+    "c4_6",
+    "c7_15"
+   ],
+   "pairs": 120,
+   "auc": 0.6765,
+   "ci": [
+    0.6018,
+    0.7463
+   ],
+   "permQ95": 0.5657,
+   "permP": 0,
+   "controlsPooled": {
+    "R_LOGC": 0.4985,
+    "R_POS": 0.5108,
+    "R_IPOS": 0.5,
+    "R_FB": 0.4978,
+    "R_LEN": 0.5321,
+    "R_SL": 0.5128
+   },
+   "controlsInBand": true,
+   "tpr": 0.3417,
+   "tnr": 0.7583,
+   "diffToBurst": {
+    "point": 0.0747,
+    "lo": -0.0112,
+    "hi": 0.1566
+   },
+   "perBlock": [
+    [
+     "fifth0",
+     0.6095,
+     26
+    ],
+    [
+     "fifth3",
+     0.5789,
+     30
+    ],
+    [
+     "fifth1",
+     0.6453,
+     34
+    ],
+    [
+     "fifth2",
+     0.5933,
+     30
+    ]
+   ],
+   "consistency": {
+    "above": 4,
+    "of": 4
+   },
+   "strataAtLeast058": "4/4",
+   "nonNullNames": 0.7083,
+   "nonNullUnlabelled": 0.6,
+   "controlProbeAuc": 0.4958,
+   "caliper": {
+    "pairs": 21,
+    "auc": 0.7667,
+    "ci": [
+     0.6161,
+     0.8929
+    ],
+    "controls": {
+     "R_LOGC": 0.5,
+     "R_POS": 0.5045,
+     "R_IPOS": 0.5,
+     "R_FB": 0.5,
+     "R_LEN": 0.5,
+     "R_SL": 0.4852
+    },
+    "gate": true
+   },
+   "pass": true,
+   "verdict": "PASS"
+  },
+  "company.wp.A:c.dRight:c3+c4_6+c7_15": {
+   "spec": {
+    "id": "wp.A:c.dRight",
+    "kind": "wp",
+    "group": "A",
+    "strata": [
+     "c3",
+     "c4_6",
+     "c7_15"
+    ],
+    "score": "c.dRight",
+    "sign": 1,
+    "op": ">",
+    "threshold": 0.119101
+   },
+   "cells": {
+    "c3": {
+     "n": 30,
+     "auc": 0.54,
+     "ci": [
+      0.3734,
+      0.6583
+     ],
+     "permQ95": 0.6133,
+     "controls": {
+      "R_LOGC": 0.5,
+      "R_POS": 0.5211,
+      "R_IPOS": 0.5,
+      "R_FB": 0.5044,
+      "R_LEN": 0.5078,
+      "R_SL": 0.4956
+     },
+     "voidCell": false,
+     "tpr": 0.5,
+     "tnr": 0.5667
+    },
+    "c4_6": {
+     "n": 30,
+     "auc": 0.5422,
+     "ci": [
+      0.4506,
+      0.6396
+     ],
+     "permQ95": 0.61,
+     "controls": {
+      "R_LOGC": 0.5122,
+      "R_POS": 0.5133,
+      "R_IPOS": 0.5,
+      "R_FB": 0.5011,
+      "R_LEN": 0.5222,
+      "R_SL": 0.53
+     },
+     "voidCell": false,
+     "tpr": 0.6333,
+     "tnr": 0.4333
+    },
+    "c7_15": {
+     "n": 30,
+     "auc": 0.5522,
+     "ci": [
+      0.4286,
+      0.6875
+     ],
+     "permQ95": 0.605,
+     "controls": {
+      "R_LOGC": 0.4817,
+      "R_POS": 0.4956,
+      "R_IPOS": 0.5,
+      "R_FB": 0.4167,
+      "R_LEN": 0.5711,
+      "R_SL": 0.4906
+     },
+     "voidCell": false,
+     "tpr": 0.6,
+     "tnr": 0.4333
+    }
+   },
+   "liveStrata": [
+    "c3",
+    "c4_6",
+    "c7_15"
+   ],
+   "pairs": 90,
+   "auc": 0.5448,
+   "ci": [
+    0.474,
+    0.6096
+   ],
+   "permQ95": 0.5667,
+   "permP": 0.135,
+   "controlsPooled": {
+    "R_LOGC": 0.498,
+    "R_POS": 0.51,
+    "R_IPOS": 0.5,
+    "R_FB": 0.4741,
+    "R_LEN": 0.5337,
+    "R_SL": 0.5054
+   },
+   "controlsInBand": true,
+   "tpr": 0.5778,
+   "tnr": 0.4778,
+   "diffToBurst": {
+    "point": -0.078,
+    "lo": -0.2111,
+    "hi": 0.0233
+   },
+   "perBlock": [
+    [
+     "fifth2",
+     0.6111,
+     24
+    ],
+    [
+     "fifth0",
+     0.4986,
+     19
+    ],
+    [
+     "fifth1",
+     0.5264,
+     25
+    ],
+    [
+     "fifth3",
+     0.4783,
+     22
+    ]
+   ],
+   "consistency": {
+    "above": 2,
+    "of": 4
+   },
+   "strataAtLeast058": "0/3",
+   "nonNullNames": 0.7111,
+   "nonNullUnlabelled": 0.5444,
+   "controlProbeAuc": 0.4959,
+   "caliper": {
+    "pairs": 10,
+    "gate": null
+   },
+   "pass": false,
+   "verdict": "FAIL"
+  }
+ },
+ "limits": {
+  "L1_entry_ircB_floor_c2c3": {
+   "spec": {
+    "id": "L1_entry_ircB_floor_c2c3",
+    "kind": "irc",
+    "group": "B",
+    "strata": [
+     "c2",
+     "c3"
+    ],
+    "score": "S_ENTRY",
+    "sign": null,
+    "op": ">=",
+    "threshold": 1
+   },
+   "cells": {
+    "c2": {
+     "n": 214,
+     "auc": 0.5,
+     "ci": [
+      0.5,
+      0.5
+     ],
+     "permQ95": 0.5,
+     "controls": {
+      "R_LOGC": 0.5,
+      "R_POS": 0.4873,
+      "R_IPOS": 0.5108,
+      "R_FB": 0.4985,
+      "R_LEN": 0.5013,
+      "R_SL": 0.4725
+     },
+     "voidCell": true,
+     "tpr": 0,
+     "tnr": 1
+    },
+    "c3": {
+     "n": 202,
+     "auc": 0.5223,
+     "ci": [
+      0.5052,
+      0.5405
+     ],
+     "permQ95": 0.5124,
+     "controls": {
+      "R_LOGC": 0.5,
+      "R_POS": 0.5012,
+      "R_IPOS": 0.4908,
+      "R_FB": 0.4854,
+      "R_LEN": 0.5162,
+      "R_SL": 0.4543
+     },
+     "voidCell": true,
+     "tpr": 0.0495,
+     "tnr": 0.995
+    }
+   },
+   "liveStrata": [
+    "c2",
+    "c3"
+   ],
+   "pairs": 416,
+   "auc": 0.5108,
+   "ci": [
+    0.5035,
+    0.5201
+   ],
+   "permQ95": 0.506,
+   "permP": 0.008,
+   "controlsPooled": {
+    "R_LOGC": 0.5,
+    "R_POS": 0.494,
+    "R_IPOS": 0.5011,
+    "R_FB": 0.4921,
+    "R_LEN": 0.5086,
+    "R_SL": 0.4637
+   },
+   "controlsInBand": true,
+   "tpr": 0.024,
+   "tnr": 0.9976,
+   "diffToBurst": {
+    "point": -0.1132,
+    "lo": -0.1441,
+    "hi": -0.084
+   },
+   "perBlock": [
+    [
+     "kubuntu/2006-03-15",
+     0.5556,
+     9
+    ],
+    [
+     "ubuntu/2006-03-15",
+     0.5253,
+     79
+    ],
+    [
+     "ubuntu/2007-07-15",
+     0.5062,
+     80
+    ],
+    [
+     "ubuntu/2009-03-15",
+     0.5062,
+     80
+    ],
+    [
+     "ubuntu/2011-03-15",
+     0.5149,
+     67
+    ],
+    [
+     "ubuntu/2011-07-15",
+     0.5125,
+     40
+    ],
+    [
+     "ubuntu/2012-03-15",
+     0.4875,
+     40
+    ],
+    [
+     "ubuntu/2013-07-15",
+     0.5,
+     21
+    ]
+   ],
+   "consistency": {
+    "above": 6,
+    "of": 8
+   },
+   "strataAtLeast058": "0/2",
+   "nonNullNames": 0.4736,
+   "nonNullUnlabelled": 0.6106,
+   "controlProbeAuc": 0.5441,
+   "caliper": {
+    "pairs": 212,
+    "auc": 0.5071,
+    "ci": [
+     0.5,
+     0.516
+    ],
+    "controls": {
+     "R_LOGC": 0.5,
+     "R_POS": 0.4919,
+     "R_IPOS": 0.4977,
+     "R_FB": 0.5,
+     "R_LEN": 0.5,
+     "R_SL": 0.4975
+    },
+    "gate": false
+   },
+   "pass": false,
+   "verdict": "FAIL"
+  },
+  "L2_entry_book_A": {
+   "spec": {
+    "id": "L2_entry_book_A",
+    "kind": "wp",
+    "group": "A",
+    "strata": [
+     "c2",
+     "c3",
+     "c4_6",
+     "c7_15",
+     "c16p"
+    ],
+    "score": "S_ENTRY",
+    "sign": null,
+    "op": ">=",
+    "threshold": 1
+   },
+   "cells": {
+    "c2": {
+     "n": 30,
+     "auc": 0.5667,
+     "ci": [
+      0.5156,
+      0.629
+     ],
+     "permQ95": 0.5333,
+     "controls": {
+      "R_LOGC": 0.5,
+      "R_POS": 0.5133,
+      "R_IPOS": 0.5,
+      "R_FB": 0.5689,
+      "R_LEN": 0.5272,
+      "R_SL": 0.535
+     },
+     "voidCell": true,
+     "tpr": 0.1333,
+     "tnr": 1
+    },
+    "c3": {
+     "n": 30,
+     "auc": 0.6,
+     "ci": [
+      0.5263,
+      0.697
+     ],
+     "permQ95": 0.5667,
+     "controls": {
+      "R_LOGC": 0.5,
+      "R_POS": 0.5211,
+      "R_IPOS": 0.5,
+      "R_FB": 0.5044,
+      "R_LEN": 0.5078,
+      "R_SL": 0.4956
+     },
+     "voidCell": false,
+     "tpr": 0.2667,
+     "tnr": 0.9333
+    },
+    "c4_6": {
+     "n": 30,
+     "auc": 0.8,
+     "ci": [
+      0.6852,
+      0.8947
+     ],
+     "permQ95": 0.6333,
+     "controls": {
+      "R_LOGC": 0.5122,
+      "R_POS": 0.5133,
+      "R_IPOS": 0.5,
+      "R_FB": 0.5011,
+      "R_LEN": 0.5222,
+      "R_SL": 0.53
+     },
+     "voidCell": false,
+     "tpr": 0.6333,
+     "tnr": 0.9667
+    },
+    "c7_15": {
+     "n": 30,
+     "auc": 0.7333,
+     "ci": [
+      0.6304,
+      0.8286
+     ],
+     "permQ95": 0.6,
+     "controls": {
+      "R_LOGC": 0.4817,
+      "R_POS": 0.4956,
+      "R_IPOS": 0.5,
+      "R_FB": 0.4167,
+      "R_LEN": 0.5711,
+      "R_SL": 0.4906
+     },
+     "voidCell": false,
+     "tpr": 0.5667,
+     "tnr": 0.9
+    },
+    "c16p": {
+     "n": 10,
+     "skipped": "too few pairs"
+    }
+   },
+   "liveStrata": [
+    "c2",
+    "c3",
+    "c4_6",
+    "c7_15"
+   ],
+   "pairs": 120,
+   "auc": 0.675,
+   "ci": [
+    0.6393,
+    0.709
+   ],
+   "permQ95": 0.55,
+   "permP": 0,
+   "controlsPooled": {
+    "R_LOGC": 0.4985,
+    "R_POS": 0.5108,
+    "R_IPOS": 0.5,
+    "R_FB": 0.4978,
+    "R_LEN": 0.5321,
+    "R_SL": 0.5128
+   },
+   "controlsInBand": true,
+   "tpr": 0.4,
+   "tnr": 0.95,
+   "diffToBurst": {
+    "point": 0.0732,
+    "lo": -0.0064,
+    "hi": 0.151
+   },
+   "perBlock": [
+    [
+     "fifth0",
+     0.6346,
+     26
+    ],
+    [
+     "fifth3",
+     0.6667,
+     30
+    ],
+    [
+     "fifth1",
+     0.6912,
+     34
+    ],
+    [
+     "fifth2",
+     0.7,
+     30
+    ]
+   ],
+   "consistency": {
+    "above": 4,
+    "of": 4
+   },
+   "strataAtLeast058": "3/4",
+   "nonNullNames": 0.7083,
+   "nonNullUnlabelled": 0.6,
+   "controlProbeAuc": 0.4958,
+   "caliper": {
+    "pairs": 21,
+    "auc": 0.625,
+    "ci": [
+     0.5588,
+     0.6842
+    ],
+    "controls": {
+     "R_LOGC": 0.5,
+     "R_POS": 0.5045,
+     "R_IPOS": 0.5,
+     "R_FB": 0.5,
+     "R_LEN": 0.5,
+     "R_SL": 0.4852
+    },
+    "gate": true
+   },
+   "pass": true,
+   "verdict": "PASS"
+  },
+  "L3_entry_book_B": {
+   "spec": {
+    "id": "L3_entry_book_B",
+    "kind": "wp",
+    "group": "B",
+    "strata": [
+     "c2",
+     "c3",
+     "c4_6",
+     "c7_15",
+     "c16p"
+    ],
+    "score": "S_ENTRY",
+    "sign": null,
+    "op": ">=",
+    "threshold": 1
+   },
+   "cells": {
+    "c2": {
+     "n": 60,
+     "auc": 0.5,
+     "ci": [
+      0.5,
+      0.5
+     ],
+     "permQ95": 0.5,
+     "controls": {
+      "R_LOGC": 0.5,
+      "R_POS": 0.5046,
+      "R_IPOS": 0.4476,
+      "R_FB": 0.5108,
+      "R_LEN": 0.5074,
+      "R_SL": 0.5064
+     },
+     "voidCell": false,
+     "tpr": 0,
+     "tnr": 1
+    },
+    "c3": {
+     "n": 60,
+     "auc": 0.5,
+     "ci": [
+      0.5,
+      0.5
+     ],
+     "permQ95": 0.5,
+     "controls": {
+      "R_LOGC": 0.5,
+      "R_POS": 0.499,
+      "R_IPOS": 0.4832,
+      "R_FB": 0.5103,
+      "R_LEN": 0.5026,
+      "R_SL": 0.5064
+     },
+     "voidCell": true,
+     "tpr": 0,
+     "tnr": 1
+    },
+    "c4_6": {
+     "n": 60,
+     "auc": 0.5583,
+     "ci": [
+      0.5242,
+      0.5943
+     ],
+     "permQ95": 0.5417,
+     "controls": {
+      "R_LOGC": 0.5053,
+      "R_POS": 0.4939,
+      "R_IPOS": 0.4532,
+      "R_FB": 0.5093,
+      "R_LEN": 0.5132,
+      "R_SL": 0.4996
+     },
+     "voidCell": true,
+     "tpr": 0.1333,
+     "tnr": 0.9833
+    },
+    "c7_15": {
+     "n": 60,
+     "auc": 0.55,
+     "ci": [
+      0.5222,
+      0.5738
+     ],
+     "permQ95": 0.5333,
+     "controls": {
+      "R_LOGC": 0.5081,
+      "R_POS": 0.4958,
+      "R_IPOS": 0.5086,
+      "R_FB": 0.4886,
+      "R_LEN": 0.5379,
+      "R_SL": 0.5203
+     },
+     "voidCell": true,
+     "tpr": 0.1,
+     "tnr": 1
+    },
+    "c16p": {
+     "n": 33,
+     "auc": 0.5909,
+     "ci": [
+      0.5,
+      0.7273
+     ],
+     "permQ95": 0.5606,
+     "controls": {
+      "R_LOGC": 0.562,
+      "R_POS": 0.5317,
+      "R_IPOS": 0.5051,
+      "R_FB": 0.3774,
+      "R_LEN": 0.5937,
+      "R_SL": 0.472
+     },
+     "voidCell": true,
+     "tpr": 0.1818,
+     "tnr": 1
+    }
+   },
+   "liveStrata": [
+    "c2",
+    "c3",
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "pairs": 273,
+   "auc": 0.5348,
+   "ci": [
+    0.518,
+    0.5563
+   ],
+   "permQ95": 0.5128,
+   "permP": 0,
+   "controlsPooled": {
+    "R_LOGC": 0.5104,
+    "R_POS": 0.5024,
+    "R_IPOS": 0.477,
+    "R_FB": 0.4894,
+    "R_LEN": 0.5248,
+    "R_SL": 0.5038
+   },
+   "controlsInBand": true,
+   "tpr": 0.0733,
+   "tnr": 0.9963,
+   "diffToBurst": {
+    "point": -0.0528,
+    "lo": -0.0886,
+    "hi": -0.0167
+   },
+   "perBlock": [
+    [
+     "fifth0",
+     0.5351,
+     57
+    ],
+    [
+     "fifth2",
+     0.5147,
+     68
+    ],
+    [
+     "fifth3",
+     0.5323,
+     62
+    ],
+    [
+     "fifth1",
+     0.5523,
+     86
+    ]
+   ],
+   "consistency": {
+    "above": 4,
+    "of": 4
+   },
+   "strataAtLeast058": "1/5",
+   "nonNullNames": 0.6374,
+   "nonNullUnlabelled": 0.6117,
+   "controlProbeAuc": 0.5225,
+   "caliper": {
+    "pairs": 158,
+    "auc": 0.5096,
+    "ci": [
+     0.4969,
+     0.5223
+    ],
+    "controls": {
+     "R_LOGC": 0.4967,
+     "R_POS": 0.4963,
+     "R_IPOS": 0.4487,
+     "R_FB": 0.5,
+     "R_LEN": 0.5,
+     "R_SL": 0.5044
+    },
+    "gate": false
+   },
+   "pass": false,
+   "verdict": "FAIL"
+  },
+  "L4_entry_ircA_outside_scope": {
+   "spec": {
+    "id": "L4_entry_ircA_outside_scope",
+    "kind": "irc",
+    "group": "A",
+    "strata": [
+     "c2",
+     "c3",
+     "c16p"
+    ],
+    "score": "S_ENTRY",
+    "sign": null,
+    "op": ">=",
+    "threshold": 1
+   },
+   "cells": {
+    "c2": {
+     "n": 240,
+     "auc": 0.5,
+     "ci": [
+      0.5,
+      0.5
+     ],
+     "permQ95": 0.5,
+     "controls": {
+      "R_LOGC": 0.5,
+      "R_POS": 0.5,
+      "R_IPOS": 0.5,
+      "R_FB": 0.4865,
+      "R_LEN": 0.5227,
+      "R_SL": 0.5351
+     },
+     "voidCell": true,
+     "tpr": 0,
+     "tnr": 1
+    },
+    "c3": {
+     "n": 238,
+     "auc": 0.5609,
+     "ci": [
+      0.5291,
+      0.5932
+     ],
+     "permQ95": 0.5231,
+     "controls": {
+      "R_LOGC": 0.5,
+      "R_POS": 0.5155,
+      "R_IPOS": 0.5,
+      "R_FB": 0.49,
+      "R_LEN": 0.5276,
+      "R_SL": 0.5178
+     },
+     "voidCell": true,
+     "tpr": 0.2143,
+     "tnr": 0.9076
+    },
+    "c16p": {
+     "n": 114,
+     "auc": 0.7018,
+     "ci": [
+      0.615,
+      0.7845
+     ],
+     "permQ95": 0.5526,
+     "controls": {
+      "R_LOGC": 0.5479,
+      "R_POS": 0.4932,
+      "R_IPOS": 0.5,
+      "R_FB": 0.4197,
+      "R_LEN": 0.5167,
+      "R_SL": 0.4787
+     },
+     "voidCell": true,
+     "tpr": 0.9386,
+     "tnr": 0.4649
+    }
+   },
+   "liveStrata": [
+    "c2",
+    "c3",
+    "c16p"
+   ],
+   "pairs": 592,
+   "auc": 0.5633,
+   "ci": [
+    0.5453,
+    0.5843
+   ],
+   "permQ95": 0.5144,
+   "permP": 0,
+   "controlsPooled": {
+    "R_LOGC": 0.5092,
+    "R_POS": 0.5049,
+    "R_IPOS": 0.5,
+    "R_FB": 0.4751,
+    "R_LEN": 0.5235,
+    "R_SL": 0.5173
+   },
+   "controlsInBand": true,
+   "tpr": 0.2669,
+   "tnr": 0.8598,
+   "diffToBurst": {
+    "point": -0.0797,
+    "lo": -0.1149,
+    "hi": -0.0446
+   },
+   "perBlock": [
+    [
+     "kubuntu/2006-03-15",
+     0.5522,
+     67
+    ],
+    [
+     "ubuntu/2006-03-15",
+     0.5608,
+     74
+    ],
+    [
+     "ubuntu/2007-07-15",
+     0.5519,
+     77
+    ],
+    [
+     "ubuntu/2009-03-15",
+     0.5714,
+     70
+    ],
+    [
+     "ubuntu/2011-03-15",
+     0.5671,
+     82
+    ],
+    [
+     "ubuntu/2011-07-15",
+     0.5949,
+     79
+    ],
+    [
+     "ubuntu/2012-03-15",
+     0.558,
+     69
+    ],
+    [
+     "ubuntu/2013-07-15",
+     0.5473,
+     74
+    ]
+   ],
+   "consistency": {
+    "above": 8,
+    "of": 8
+   },
+   "strataAtLeast058": "1/3",
+   "nonNullNames": 0.6639,
+   "nonNullUnlabelled": 0.6182,
+   "controlProbeAuc": 0.5455,
+   "caliper": {
+    "pairs": 89,
+    "auc": 0.5225,
+    "ci": [
+     0.4943,
+     0.5545
+    ],
+    "controls": {
+     "R_LOGC": 0.5063,
+     "R_POS": 0.4965,
+     "R_IPOS": 0.5,
+     "R_FB": 0.5,
+     "R_LEN": 0.5,
+     "R_SL": 0.5202
+    },
+    "gate": false
+   },
+   "pass": false,
+   "verdict": "FAIL"
+  },
+  "L5_entry_ircA_all": {
+   "spec": {
+    "id": "L5_entry_ircA_all",
+    "kind": "irc",
+    "group": "A",
+    "strata": [
+     "c2",
+     "c3",
+     "c4_6",
+     "c7_15",
+     "c16p"
+    ],
+    "score": "S_ENTRY",
+    "sign": null,
+    "op": ">=",
+    "threshold": 1
+   },
+   "cells": {
+    "c2": {
+     "n": 240,
+     "auc": 0.5,
+     "ci": [
+      0.5,
+      0.5
+     ],
+     "permQ95": 0.5,
+     "controls": {
+      "R_LOGC": 0.5,
+      "R_POS": 0.5,
+      "R_IPOS": 0.5,
+      "R_FB": 0.4865,
+      "R_LEN": 0.5227,
+      "R_SL": 0.5351
+     },
+     "voidCell": true,
+     "tpr": 0,
+     "tnr": 1
+    },
+    "c3": {
+     "n": 238,
+     "auc": 0.5609,
+     "ci": [
+      0.5293,
+      0.5923
+     ],
+     "permQ95": 0.5273,
+     "controls": {
+      "R_LOGC": 0.5,
+      "R_POS": 0.5155,
+      "R_IPOS": 0.5,
+      "R_FB": 0.49,
+      "R_LEN": 0.5276,
+      "R_SL": 0.5178
+     },
+     "voidCell": true,
+     "tpr": 0.2143,
+     "tnr": 0.9076
+    },
+    "c4_6": {
+     "n": 240,
+     "auc": 0.7333,
+     "ci": [
+      0.6917,
+      0.7727
+     ],
+     "permQ95": 0.5417,
+     "controls": {
+      "R_LOGC": 0.5552,
+      "R_POS": 0.4839,
+      "R_IPOS": 0.5,
+      "R_FB": 0.4666,
+      "R_LEN": 0.5235,
+      "R_SL": 0.5012
+     },
+     "voidCell": true,
+     "tpr": 0.8042,
+     "tnr": 0.6625
+    },
+    "c7_15": {
+     "n": 240,
+     "auc": 0.7312,
+     "ci": [
+      0.6813,
+      0.7783
+     ],
+     "permQ95": 0.5354,
+     "controls": {
+      "R_LOGC": 0.5071,
+      "R_POS": 0.4944,
+      "R_IPOS": 0.5,
+      "R_FB": 0.4397,
+      "R_LEN": 0.5498,
+      "R_SL": 0.5136
+     },
+     "voidCell": true,
+     "tpr": 0.9208,
+     "tnr": 0.5417
+    },
+    "c16p": {
+     "n": 114,
+     "auc": 0.7018,
+     "ci": [
+      0.6174,
+      0.7844
+     ],
+     "permQ95": 0.5526,
+     "controls": {
+      "R_LOGC": 0.5479,
+      "R_POS": 0.4932,
+      "R_IPOS": 0.5,
+      "R_FB": 0.4197,
+      "R_LEN": 0.5167,
+      "R_SL": 0.4787
+     },
+     "voidCell": true,
+     "tpr": 0.9386,
+     "tnr": 0.4649
+    }
+   },
+   "liveStrata": [
+    "c2",
+    "c3",
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "pairs": 1072,
+   "auc": 0.639,
+   "ci": [
+    0.6182,
+    0.6598
+   ],
+   "permQ95": 0.5149,
+   "permP": 0,
+   "controlsPooled": {
+    "R_LOGC": 0.519,
+    "R_POS": 0.4979,
+    "R_IPOS": 0.5,
+    "R_FB": 0.4653,
+    "R_LEN": 0.5294,
+    "R_SL": 0.5129
+   },
+   "controlsInBand": true,
+   "tpr": 0.5336,
+   "tnr": 0.7444,
+   "diffToBurst": {
+    "point": 0.0003,
+    "lo": -0.0333,
+    "hi": 0.0351
+   },
+   "perBlock": [
+    [
+     "kubuntu/2006-03-15",
+     0.7047,
+     127
+    ],
+    [
+     "ubuntu/2006-03-15",
+     0.6194,
+     134
+    ],
+    [
+     "ubuntu/2007-07-15",
+     0.6314,
+     137
+    ],
+    [
+     "ubuntu/2009-03-15",
+     0.6423,
+     130
+    ],
+    [
+     "ubuntu/2011-03-15",
+     0.6021,
+     142
+    ],
+    [
+     "ubuntu/2011-07-15",
+     0.6763,
+     139
+    ],
+    [
+     "ubuntu/2012-03-15",
+     0.6279,
+     129
+    ],
+    [
+     "ubuntu/2013-07-15",
+     0.6119,
+     134
+    ]
+   ],
+   "consistency": {
+    "above": 8,
+    "of": 8
+   },
+   "strataAtLeast058": "3/5",
+   "nonNullNames": 0.7771,
+   "nonNullUnlabelled": 0.6119,
+   "controlProbeAuc": 0.5513,
+   "caliper": {
+    "pairs": 129,
+    "auc": 0.5814,
+    "ci": [
+     0.5478,
+     0.619
+    ],
+    "controls": {
+     "R_LOGC": 0.4996,
+     "R_POS": 0.487,
+     "R_IPOS": 0.5,
+     "R_FB": 0.5,
+     "R_LEN": 0.5,
+     "R_SL": 0.5204
+    },
+    "gate": true
+   },
+   "pass": false,
+   "verdict": "FAIL"
+  },
+  "L6_entry_ircB_all": {
+   "spec": {
+    "id": "L6_entry_ircB_all",
+    "kind": "irc",
+    "group": "B",
+    "strata": [
+     "c2",
+     "c3",
+     "c4_6",
+     "c7_15",
+     "c16p"
+    ],
+    "score": "S_ENTRY",
+    "sign": null,
+    "op": ">=",
+    "threshold": 1
+   },
+   "cells": {
+    "c2": {
+     "n": 214,
+     "auc": 0.5,
+     "ci": [
+      0.5,
+      0.5
+     ],
+     "permQ95": 0.5,
+     "controls": {
+      "R_LOGC": 0.5,
+      "R_POS": 0.4873,
+      "R_IPOS": 0.5108,
+      "R_FB": 0.4985,
+      "R_LEN": 0.5013,
+      "R_SL": 0.4725
+     },
+     "voidCell": true,
+     "tpr": 0,
+     "tnr": 1
+    },
+    "c3": {
+     "n": 202,
+     "auc": 0.5223,
+     "ci": [
+      0.5055,
+      0.5405
+     ],
+     "permQ95": 0.5124,
+     "controls": {
+      "R_LOGC": 0.5,
+      "R_POS": 0.5012,
+      "R_IPOS": 0.4908,
+      "R_FB": 0.4854,
+      "R_LEN": 0.5162,
+      "R_SL": 0.4543
+     },
+     "voidCell": true,
+     "tpr": 0.0495,
+     "tnr": 0.995
+    },
+    "c4_6": {
+     "n": 238,
+     "auc": 0.7458,
+     "ci": [
+      0.7174,
+      0.7798
+     ],
+     "permQ95": 0.5357,
+     "controls": {
+      "R_LOGC": 0.5142,
+      "R_POS": 0.5003,
+      "R_IPOS": 0.4918,
+      "R_FB": 0.4716,
+      "R_LEN": 0.5051,
+      "R_SL": 0.4722
+     },
+     "voidCell": true,
+     "tpr": 0.4916,
+     "tnr": 1
+    },
+    "c7_15": {
+     "n": 208,
+     "auc": 0.8822,
+     "ci": [
+      0.8416,
+      0.927
+     ],
+     "permQ95": 0.5505,
+     "controls": {
+      "R_LOGC": 0.5173,
+      "R_POS": 0.4987,
+      "R_IPOS": 0.4975,
+      "R_FB": 0.4517,
+      "R_LEN": 0.524,
+      "R_SL": 0.4672
+     },
+     "voidCell": true,
+     "tpr": 0.7692,
+     "tnr": 0.9952
+    },
+    "c16p": {
+     "n": 80,
+     "auc": 0.8875,
+     "ci": [
+      0.8279,
+      0.9467
+     ],
+     "permQ95": 0.5875,
+     "controls": {
+      "R_LOGC": 0.4971,
+      "R_POS": 0.4867,
+      "R_IPOS": 0.4926,
+      "R_FB": 0.4237,
+      "R_LEN": 0.5205,
+      "R_SL": 0.452
+     },
+     "voidCell": true,
+     "tpr": 0.8125,
+     "tnr": 0.9625
+    }
+   },
+   "liveStrata": [
+    "c2",
+    "c3",
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "pairs": 942,
+   "auc": 0.6842,
+   "ci": [
+    0.6634,
+    0.7067
+   ],
+   "permQ95": 0.5154,
+   "permP": 0,
+   "controlsPooled": {
+    "R_LOGC": 0.5072,
+    "R_POS": 0.496,
+    "R_IPOS": 0.4972,
+    "R_FB": 0.4722,
+    "R_LEN": 0.5121,
+    "R_SL": 0.4656
+   },
+   "controlsInBand": true,
+   "tpr": 0.3737,
+   "tnr": 0.9947,
+   "diffToBurst": {
+    "point": 0.104,
+    "lo": 0.0727,
+    "hi": 0.1341
+   },
+   "perBlock": [
+    [
+     "kubuntu/2006-03-15",
+     0.8529,
+     34
+    ],
+    [
+     "ubuntu/2006-03-15",
+     0.6832,
+     161
+    ],
+    [
+     "ubuntu/2007-07-15",
+     0.6538,
+     182
+    ],
+    [
+     "ubuntu/2009-03-15",
+     0.6656,
+     157
+    ],
+    [
+     "ubuntu/2011-03-15",
+     0.6503,
+     163
+    ],
+    [
+     "ubuntu/2011-07-15",
+     0.7353,
+     102
+    ],
+    [
+     "ubuntu/2012-03-15",
+     0.6709,
+     79
+    ],
+    [
+     "ubuntu/2013-07-15",
+     0.75,
+     64
+    ]
+   ],
+   "consistency": {
+    "above": 8,
+    "of": 8
+   },
+   "strataAtLeast058": "3/5",
+   "nonNullNames": 0.6709,
+   "nonNullUnlabelled": 0.4894,
+   "controlProbeAuc": 0.5446,
+   "caliper": {
+    "pairs": 367,
+    "auc": 0.609,
+    "ci": [
+     0.5853,
+     0.6377
+    ],
+    "controls": {
+     "R_LOGC": 0.5038,
+     "R_POS": 0.4998,
+     "R_IPOS": 0.4941,
+     "R_FB": 0.5,
+     "R_LEN": 0.5,
+     "R_SL": 0.4989
+    },
+    "gate": true
+   },
+   "pass": false,
+   "verdict": "FAIL"
+  },
+  "X_slot.irc.A:S_ENTRY:c4_6..c7_15__on_book": {
+   "spec": {
+    "id": "X_irc.A:c4_6..c7_15",
+    "kind": "wp",
+    "group": "A",
+    "strata": [
+     "c4_6",
+     "c7_15"
+    ],
+    "score": "S_ENTRY",
+    "sign": null,
+    "op": ">=",
+    "threshold": 1
+   },
+   "cells": {
+    "c4_6": {
+     "n": 30,
+     "auc": 0.8,
+     "ci": [
+      0.6875,
+      0.8889
+     ],
+     "permQ95": 0.6333,
+     "controls": {
+      "R_LOGC": 0.5122,
+      "R_POS": 0.5133,
+      "R_IPOS": 0.5,
+      "R_FB": 0.5011,
+      "R_LEN": 0.5222,
+      "R_SL": 0.53
+     },
+     "voidCell": false,
+     "tpr": 0.6333,
+     "tnr": 0.9667
+    },
+    "c7_15": {
+     "n": 30,
+     "auc": 0.7333,
+     "ci": [
+      0.625,
+      0.8333
+     ],
+     "permQ95": 0.6,
+     "controls": {
+      "R_LOGC": 0.4817,
+      "R_POS": 0.4956,
+      "R_IPOS": 0.5,
+      "R_FB": 0.4167,
+      "R_LEN": 0.5711,
+      "R_SL": 0.4906
+     },
+     "voidCell": false,
+     "tpr": 0.5667,
+     "tnr": 0.9
+    }
+   },
+   "liveStrata": [
+    "c4_6",
+    "c7_15"
+   ],
+   "pairs": 60,
+   "auc": 0.7667,
+   "ci": [
+    0.6984,
+    0.8305
+   ],
+   "permQ95": 0.5833,
+   "permP": 0,
+   "controlsPooled": {
+    "R_LOGC": 0.4969,
+    "R_POS": 0.5044,
+    "R_IPOS": 0.5,
+    "R_FB": 0.4589,
+    "R_LEN": 0.5467,
+    "R_SL": 0.5103
+   },
+   "controlsInBand": true,
+   "tpr": 0.6,
+   "tnr": 0.9333,
+   "diffToBurst": {
+    "point": 0.1356,
+    "lo": 0.0124,
+    "hi": 0.2522
+   },
+   "perBlock": [
+    [
+     "fifth1",
+     0.8,
+     20
+    ],
+    [
+     "fifth2",
+     0.8333,
+     15
+    ],
+    [
+     "fifth3",
+     0.75,
+     14
+    ],
+    [
+     "fifth0",
+     0.6364,
+     11
+    ]
+   ],
+   "consistency": {
+    "above": 4,
+    "of": 4
+   },
+   "strataAtLeast058": "2/2",
+   "nonNullNames": 0.75,
+   "nonNullUnlabelled": 0.55,
+   "controlProbeAuc": 0.4944,
+   "caliper": {
+    "pairs": 7,
+    "gate": null
+   },
+   "pass": true,
+   "verdict": "PASS"
+  },
+  "X_slot.irc.B:EXTENT:c4_6..c4_6__on_book": {
+   "spec": {
+    "id": "X_irc.B:c4_6..c4_6",
+    "kind": "wp",
+    "group": "B",
+    "strata": [
+     "c4_6"
+    ],
+    "score": "EXTENT",
+    "sign": null,
+    "op": ">=",
+    "threshold": 3
+   },
+   "cells": {
+    "c4_6": {
+     "n": 60,
+     "auc": 0.5785,
+     "ci": [
+      0.519,
+      0.6343
+     ],
+     "permQ95": 0.5763,
+     "controls": {
+      "R_LOGC": 0.5053,
+      "R_POS": 0.4939,
+      "R_IPOS": 0.4532,
+      "R_FB": 0.5093,
+      "R_LEN": 0.5132,
+      "R_SL": 0.4996
+     },
+     "voidCell": true,
+     "tpr": 0.2333,
+     "tnr": 0.8333
+    }
+   },
+   "liveStrata": [
+    "c4_6"
+   ],
+   "pairs": 60,
+   "auc": 0.5785,
+   "ci": [
+    0.5165,
+    0.636
+   ],
+   "permQ95": 0.5679,
+   "permP": 0.027,
+   "controlsPooled": {
+    "R_LOGC": 0.5053,
+    "R_POS": 0.4939,
+    "R_IPOS": 0.4532,
+    "R_FB": 0.5093,
+    "R_LEN": 0.5132,
+    "R_SL": 0.4996
+   },
+   "controlsInBand": true,
+   "tpr": 0.2333,
+   "tnr": 0.8333,
+   "diffToBurst": {
+    "point": -0.0168,
+    "lo": -0.1516,
+    "hi": 0.1301
+   },
+   "perBlock": [
+    [
+     "fifth3",
+     0.642,
+     18
+    ],
+    [
+     "fifth1",
+     0.571,
+     13
+    ],
+    [
+     "fifth2",
+     0.5408,
+     14
+    ],
+    [
+     "fifth0",
+     0.5733,
+     15
+    ]
+   ],
+   "consistency": {
+    "above": 4,
+    "of": 4
+   },
+   "strataAtLeast058": "0/1",
+   "nonNullNames": 0.5833,
+   "nonNullUnlabelled": 0.5,
+   "controlProbeAuc": 0.3756,
+   "caliper": {
+    "pairs": 37,
+    "auc": 0.5296,
+    "ci": [
+     0.4444,
+     0.6124
+    ],
+    "controls": {
+     "R_LOGC": 0.5,
+     "R_POS": 0.4828,
+     "R_IPOS": 0.4357,
+     "R_FB": 0.5,
+     "R_LEN": 0.5,
+     "R_SL": 0.4956
+    },
+    "gate": false
+   },
+   "pass": false,
+   "verdict": "FAIL"
+  },
+  "X_slot.irc.B:EXTENT:c16p..c16p__on_book": {
+   "spec": {
+    "id": "X_irc.B:c16p..c16p",
+    "kind": "wp",
+    "group": "B",
+    "strata": [
+     "c16p"
+    ],
+    "score": "EXTENT",
+    "sign": null,
+    "op": ">=",
+    "threshold": 6
+   },
+   "cells": {
+    "c16p": {
+     "n": 33,
+     "auc": 0.5725,
+     "ci": [
+      0.401,
+      0.7472
+     ],
+     "permQ95": 0.6028,
+     "controls": {
+      "R_LOGC": 0.562,
+      "R_POS": 0.5317,
+      "R_IPOS": 0.5051,
+      "R_FB": 0.3774,
+      "R_LEN": 0.5937,
+      "R_SL": 0.472
+     },
+     "voidCell": true,
+     "tpr": 0.2424,
+     "tnr": 0.8485
+    }
+   },
+   "liveStrata": [
+    "c16p"
+   ],
+   "pairs": 33,
+   "auc": 0.5725,
+   "ci": [
+    0.4105,
+    0.7384
+   ],
+   "permQ95": 0.5996,
+   "permP": 0.117,
+   "controlsPooled": {
+    "R_LOGC": 0.562,
+    "R_POS": 0.5317,
+    "R_IPOS": 0.5051,
+    "R_FB": 0.3774,
+    "R_LEN": 0.5937,
+    "R_SL": 0.472
+   },
+   "controlsInBand": false,
+   "tpr": 0.2424,
+   "tnr": 0.8485,
+   "diffToBurst": {
+    "point": -0.0399,
+    "lo": -0.201,
+    "hi": 0.1113
+   },
+   "perBlock": [
+    [
+     "fifth1",
+     0.6489,
+     15
+    ],
+    [
+     "fifth3",
+     0.3333,
+     6
+    ],
+    [
+     "fifth0",
+     0.5972,
+     6
+    ],
+    [
+     "fifth2",
+     0.6667,
+     6
+    ]
+   ],
+   "consistency": {
+    "above": 3,
+    "of": 4
+   },
+   "strataAtLeast058": "0/1",
+   "nonNullNames": 0.5152,
+   "nonNullUnlabelled": 0.6061,
+   "controlProbeAuc": 0.5078,
+   "caliper": {
+    "pairs": 1,
+    "gate": null
+   },
+   "pass": false,
+   "verdict": "VOID"
+  },
+  "X_slot.irc.B:S_ENTRY:c4_6..c16p(E1)__on_book": {
+   "spec": {
+    "id": "X_E1",
+    "kind": "wp",
+    "group": "B",
+    "strata": [
+     "c4_6",
+     "c7_15",
+     "c16p"
+    ],
+    "score": "S_ENTRY",
+    "sign": null,
+    "op": ">=",
+    "threshold": 1
+   },
+   "cells": {
+    "c4_6": {
+     "n": 60,
+     "auc": 0.5583,
+     "ci": [
+      0.5192,
+      0.5938
+     ],
+     "permQ95": 0.5417,
+     "controls": {
+      "R_LOGC": 0.5053,
+      "R_POS": 0.4939,
+      "R_IPOS": 0.4532,
+      "R_FB": 0.5093,
+      "R_LEN": 0.5132,
+      "R_SL": 0.4996
+     },
+     "voidCell": true,
+     "tpr": 0.1333,
+     "tnr": 0.9833
+    },
+    "c7_15": {
+     "n": 60,
+     "auc": 0.55,
+     "ci": [
+      0.5238,
+      0.5753
+     ],
+     "permQ95": 0.5333,
+     "controls": {
+      "R_LOGC": 0.5081,
+      "R_POS": 0.4958,
+      "R_IPOS": 0.5086,
+      "R_FB": 0.4886,
+      "R_LEN": 0.5379,
+      "R_SL": 0.5203
+     },
+     "voidCell": true,
+     "tpr": 0.1,
+     "tnr": 1
+    },
+    "c16p": {
+     "n": 33,
+     "auc": 0.5909,
+     "ci": [
+      0.5,
+      0.7222
+     ],
+     "permQ95": 0.5606,
+     "controls": {
+      "R_LOGC": 0.562,
+      "R_POS": 0.5317,
+      "R_IPOS": 0.5051,
+      "R_FB": 0.3774,
+      "R_LEN": 0.5937,
+      "R_SL": 0.472
+     },
+     "voidCell": true,
+     "tpr": 0.1818,
+     "tnr": 1
+    }
+   },
+   "liveStrata": [
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "pairs": 153,
+   "auc": 0.5621,
+   "ci": [
+    0.5315,
+    0.6022
+   ],
+   "permQ95": 0.5229,
+   "permP": 0,
+   "controlsPooled": {
+    "R_LOGC": 0.5186,
+    "R_POS": 0.5028,
+    "R_IPOS": 0.4861,
+    "R_FB": 0.4727,
+    "R_LEN": 0.5402,
+    "R_SL": 0.5017
+   },
+   "controlsInBand": true,
+   "tpr": 0.1307,
+   "tnr": 0.9935,
+   "diffToBurst": {
+    "point": -0.0059,
+    "lo": -0.0668,
+    "hi": 0.0522
+   },
+   "perBlock": [
+    [
+     "fifth3",
+     0.55,
+     40
+    ],
+    [
+     "fifth1",
+     0.6047,
+     43
+    ],
+    [
+     "fifth2",
+     0.5286,
+     35
+    ],
+    [
+     "fifth0",
+     0.5571,
+     35
+    ]
+   ],
+   "consistency": {
+    "above": 4,
+    "of": 4
+   },
+   "strataAtLeast058": "1/3",
+   "nonNullNames": 0.5948,
+   "nonNullUnlabelled": 0.5229,
+   "controlProbeAuc": 0.5074,
+   "caliper": {
+    "pairs": 61,
+    "auc": 0.525,
+    "ci": [
+     0.4919,
+     0.558
+    ],
+    "controls": {
+     "R_LOGC": 0.4913,
+     "R_POS": 0.4782,
+     "R_IPOS": 0.4672,
+     "R_FB": 0.5,
+     "R_LEN": 0.5,
+     "R_SL": 0.5024
+    },
+    "gate": false
+   },
+   "pass": false,
+   "verdict": "FAIL"
+  },
+  "X_company.irc.A:c.surprisalDestroyed:c2+c3+c4_6+c7_15+c16p__on_book": {
+   "spec": {
+    "id": "X_irc.A:c.surprisalDestroyed",
+    "kind": "wp",
+    "group": "A",
+    "strata": [
+     "c2",
+     "c3",
+     "c4_6",
+     "c7_15",
+     "c16p"
+    ],
+    "score": "c.surprisalDestroyed",
+    "sign": 1,
+    "op": ">",
+    "threshold": 3.200811
+   },
+   "cells": {
+    "c2": {
+     "n": 30,
+     "auc": 0.5306,
+     "ci": [
+      0.3876,
+      0.6778
+     ],
+     "permQ95": 0.6444,
+     "controls": {
+      "R_LOGC": 0.5,
+      "R_POS": 0.5133,
+      "R_IPOS": 0.5,
+      "R_FB": 0.5689,
+      "R_LEN": 0.5272,
+      "R_SL": 0.535
+     },
+     "voidCell": true,
+     "tpr": 1,
+     "tnr": 0.0333
+    },
+    "c3": {
+     "n": 30,
+     "auc": 0.5156,
+     "ci": [
+      0.3469,
+      0.688
+     ],
+     "permQ95": 0.6244,
+     "controls": {
+      "R_LOGC": 0.5,
+      "R_POS": 0.5211,
+      "R_IPOS": 0.5,
+      "R_FB": 0.5044,
+      "R_LEN": 0.5078,
+      "R_SL": 0.4956
+     },
+     "voidCell": false,
+     "tpr": 0.9,
+     "tnr": 0.1
+    },
+    "c4_6": {
+     "n": 30,
+     "auc": 0.4528,
+     "ci": [
+      0.2928,
+      0.6373
+     ],
+     "permQ95": 0.6356,
+     "controls": {
+      "R_LOGC": 0.5122,
+      "R_POS": 0.5133,
+      "R_IPOS": 0.5,
+      "R_FB": 0.5011,
+      "R_LEN": 0.5222,
+      "R_SL": 0.53
+     },
+     "voidCell": false,
+     "tpr": 0.8667,
+     "tnr": 0.0333
+    },
+    "c7_15": {
+     "n": 30,
+     "auc": 0.5511,
+     "ci": [
+      0.4132,
+      0.691
+     ],
+     "permQ95": 0.62,
+     "controls": {
+      "R_LOGC": 0.4817,
+      "R_POS": 0.4956,
+      "R_IPOS": 0.5,
+      "R_FB": 0.4167,
+      "R_LEN": 0.5711,
+      "R_SL": 0.4906
+     },
+     "voidCell": false,
+     "tpr": 0.8667,
+     "tnr": 0.2
+    },
+    "c16p": {
+     "n": 10,
+     "skipped": "too few pairs"
+    }
+   },
+   "liveStrata": [
+    "c2",
+    "c3",
+    "c4_6",
+    "c7_15"
+   ],
+   "pairs": 120,
+   "auc": 0.5125,
+   "ci": [
+    0.4281,
+    0.6021
+   ],
+   "permQ95": 0.5633,
+   "permP": 0.38,
+   "controlsPooled": {
+    "R_LOGC": 0.4985,
+    "R_POS": 0.5108,
+    "R_IPOS": 0.5,
+    "R_FB": 0.4978,
+    "R_LEN": 0.5321,
+    "R_SL": 0.5128
+   },
+   "controlsInBand": true,
+   "tpr": 0.9083,
+   "tnr": 0.0917,
+   "diffToBurst": {
+    "point": -0.0893,
+    "lo": -0.1655,
+    "hi": 0.0004
+   },
+   "perBlock": [
+    [
+     "fifth0",
+     0.4349,
+     26
+    ],
+    [
+     "fifth3",
+     0.5794,
+     30
+    ],
+    [
+     "fifth1",
+     0.5389,
+     34
+    ],
+    [
+     "fifth2",
+     0.4661,
+     30
+    ]
+   ],
+   "consistency": {
+    "above": 2,
+    "of": 4
+   },
+   "strataAtLeast058": "0/4",
+   "nonNullNames": 0.7083,
+   "nonNullUnlabelled": 0.6,
+   "controlProbeAuc": 0.4958,
+   "caliper": {
+    "pairs": 21,
+    "auc": 0.5667,
+    "ci": [
+     0.2833,
+     0.7608
+    ],
+    "controls": {
+     "R_LOGC": 0.5,
+     "R_POS": 0.5045,
+     "R_IPOS": 0.5,
+     "R_FB": 0.5,
+     "R_LEN": 0.5,
+     "R_SL": 0.4852
+    },
+    "gate": false
+   },
+   "pass": false,
+   "verdict": "FAIL"
+  },
+  "X_company.irc.A:c.dSelf:c2+c3+c4_6__on_book": {
+   "spec": {
+    "id": "X_irc.A:c.dSelf",
+    "kind": "wp",
+    "group": "A",
+    "strata": [
+     "c2",
+     "c3",
+     "c4_6"
+    ],
+    "score": "c.dSelf",
+    "sign": -1,
+    "op": ">",
+    "threshold": -0.456185
+   },
+   "cells": {
+    "c2": {
+     "n": 30,
+     "auc": 0.7878,
+     "ci": [
+      0.6767,
+      0.8864
+     ],
+     "permQ95": 0.6456,
+     "controls": {
+      "R_LOGC": 0.5,
+      "R_POS": 0.5133,
+      "R_IPOS": 0.5,
+      "R_FB": 0.5689,
+      "R_LEN": 0.5272,
+      "R_SL": 0.535
+     },
+     "voidCell": true,
+     "tpr": 0,
+     "tnr": 1
+    },
+    "c3": {
+     "n": 30,
+     "auc": 0.6533,
+     "ci": [
+      0.4645,
+      0.8098
+     ],
+     "permQ95": 0.6233,
+     "controls": {
+      "R_LOGC": 0.5,
+      "R_POS": 0.5211,
+      "R_IPOS": 0.5,
+      "R_FB": 0.5044,
+      "R_LEN": 0.5078,
+      "R_SL": 0.4956
+     },
+     "voidCell": false,
+     "tpr": 0.4,
+     "tnr": 0.9667
+    },
+    "c4_6": {
+     "n": 30,
+     "auc": 0.7556,
+     "ci": [
+      0.6146,
+      0.8669
+     ],
+     "permQ95": 0.6156,
+     "controls": {
+      "R_LOGC": 0.5122,
+      "R_POS": 0.5133,
+      "R_IPOS": 0.5,
+      "R_FB": 0.5011,
+      "R_LEN": 0.5222,
+      "R_SL": 0.53
+     },
+     "voidCell": false,
+     "tpr": 0.9,
+     "tnr": 0.1
+    }
+   },
+   "liveStrata": [
+    "c2",
+    "c3",
+    "c4_6"
+   ],
+   "pairs": 90,
+   "auc": 0.7322,
+   "ci": [
+    0.6489,
+    0.8033
+   ],
+   "permQ95": 0.573,
+   "permP": 0,
+   "controlsPooled": {
+    "R_LOGC": 0.5041,
+    "R_POS": 0.5159,
+    "R_IPOS": 0.5,
+    "R_FB": 0.5248,
+    "R_LEN": 0.5191,
+    "R_SL": 0.5202
+   },
+   "controlsInBand": true,
+   "tpr": 0.4333,
+   "tnr": 0.6889,
+   "diffToBurst": {
+    "point": 0.1187,
+    "lo": 0.0288,
+    "hi": 0.2209
+   },
+   "perBlock": [
+    [
+     "fifth0",
+     0.5723,
+     16
+    ],
+    [
+     "fifth3",
+     0.6458,
+     24
+    ],
+    [
+     "fifth1",
+     0.5868,
+     24
+    ],
+    [
+     "fifth2",
+     0.6109,
+     26
+    ]
+   ],
+   "consistency": {
+    "above": 4,
+    "of": 4
+   },
+   "strataAtLeast058": "3/3",
+   "nonNullNames": 0.7222,
+   "nonNullUnlabelled": 0.6222,
+   "controlProbeAuc": 0.5063,
+   "caliper": {
+    "pairs": 20,
+    "auc": 0.7432,
+    "ci": [
+     0.5429,
+     0.9263
+    ],
+    "controls": {
+     "R_LOGC": 0.5,
+     "R_POS": 0.5045,
+     "R_IPOS": 0.5,
+     "R_FB": 0.5,
+     "R_LEN": 0.5,
+     "R_SL": 0.4852
+    },
+    "gate": true
+   },
+   "pass": true,
+   "verdict": "PASS"
+  },
+  "X_company.irc.B:c.dSelf:c2+c3+c4_6+c7_15+c16p__on_book": {
+   "spec": {
+    "id": "X_irc.B:c.dSelf",
+    "kind": "wp",
+    "group": "B",
+    "strata": [
+     "c2",
+     "c3",
+     "c4_6",
+     "c7_15",
+     "c16p"
+    ],
+    "score": "c.dSelf",
+    "sign": 1,
+    "op": ">",
+    "threshold": 0.530492
+   },
+   "cells": {
+    "c2": {
+     "n": 60,
+     "auc": 0.5596,
+     "ci": [
+      0.4412,
+      0.6669
+     ],
+     "permQ95": 0.5843,
+     "controls": {
+      "R_LOGC": 0.5,
+      "R_POS": 0.5046,
+      "R_IPOS": 0.4476,
+      "R_FB": 0.5108,
+      "R_LEN": 0.5074,
+      "R_SL": 0.5064
+     },
+     "voidCell": false,
+     "tpr": 0.3833,
+     "tnr": 0.65
+    },
+    "c3": {
+     "n": 60,
+     "auc": 0.5392,
+     "ci": [
+      0.4158,
+      0.6653
+     ],
+     "permQ95": 0.5928,
+     "controls": {
+      "R_LOGC": 0.5,
+      "R_POS": 0.499,
+      "R_IPOS": 0.4832,
+      "R_FB": 0.5103,
+      "R_LEN": 0.5026,
+      "R_SL": 0.5064
+     },
+     "voidCell": true,
+     "tpr": 0.2833,
+     "tnr": 0.7
+    },
+    "c4_6": {
+     "n": 60,
+     "auc": 0.5317,
+     "ci": [
+      0.4576,
+      0.5981
+     ],
+     "permQ95": 0.5703,
+     "controls": {
+      "R_LOGC": 0.5053,
+      "R_POS": 0.4939,
+      "R_IPOS": 0.4532,
+      "R_FB": 0.5093,
+      "R_LEN": 0.5132,
+      "R_SL": 0.4996
+     },
+     "voidCell": true,
+     "tpr": 0,
+     "tnr": 1
+    },
+    "c7_15": {
+     "n": 60,
+     "auc": 0.5131,
+     "ci": [
+      0.4658,
+      0.558
+     ],
+     "permQ95": 0.5406,
+     "controls": {
+      "R_LOGC": 0.5081,
+      "R_POS": 0.4958,
+      "R_IPOS": 0.5086,
+      "R_FB": 0.4886,
+      "R_LEN": 0.5379,
+      "R_SL": 0.5203
+     },
+     "voidCell": true,
+     "tpr": 0,
+     "tnr": 1
+    },
+    "c16p": {
+     "n": 33,
+     "auc": 0.4545,
+     "ci": [
+      0.3309,
+      0.5661
+     ],
+     "permQ95": 0.5904,
+     "controls": {
+      "R_LOGC": 0.562,
+      "R_POS": 0.5317,
+      "R_IPOS": 0.5051,
+      "R_FB": 0.3774,
+      "R_LEN": 0.5937,
+      "R_SL": 0.472
+     },
+     "voidCell": true,
+     "tpr": 0,
+     "tnr": 1
+    }
+   },
+   "liveStrata": [
+    "c2",
+    "c3",
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "pairs": 273,
+   "auc": 0.526,
+   "ci": [
+    0.4819,
+    0.564
+   ],
+   "permQ95": 0.5345,
+   "permP": 0.102,
+   "controlsPooled": {
+    "R_LOGC": 0.5104,
+    "R_POS": 0.5024,
+    "R_IPOS": 0.477,
+    "R_FB": 0.4894,
+    "R_LEN": 0.5248,
+    "R_SL": 0.5038
+   },
+   "controlsInBand": true,
+   "tpr": 0.1465,
+   "tnr": 0.8571,
+   "diffToBurst": {
+    "point": -0.0616,
+    "lo": -0.1236,
+    "hi": -0.0102
+   },
+   "perBlock": [
+    [
+     "fifth0",
+     0.5042,
+     57
+    ],
+    [
+     "fifth2",
+     0.5056,
+     68
+    ],
+    [
+     "fifth3",
+     0.5091,
+     62
+    ],
+    [
+     "fifth1",
+     0.5041,
+     86
+    ]
+   ],
+   "consistency": {
+    "above": 4,
+    "of": 4
+   },
+   "strataAtLeast058": "0/5",
+   "nonNullNames": 0.6374,
+   "nonNullUnlabelled": 0.6117,
+   "controlProbeAuc": 0.5225,
+   "caliper": {
+    "pairs": 158,
+    "auc": 0.5393,
+    "ci": [
+     0.4787,
+     0.5981
+    ],
+    "controls": {
+     "R_LOGC": 0.4967,
+     "R_POS": 0.4963,
+     "R_IPOS": 0.4487,
+     "R_FB": 0.5,
+     "R_LEN": 0.5,
+     "R_SL": 0.5044
+    },
+    "gate": false
+   },
+   "pass": false,
+   "verdict": "FAIL"
+  },
+  "X_company.irc.B:span.mentionShift:c4_6+c7_15+c16p__on_book": {
+   "spec": {
+    "id": "X_irc.B:span.mentionShift",
+    "kind": "wp",
+    "group": "B",
+    "strata": [
+     "c4_6",
+     "c7_15",
+     "c16p"
+    ],
+    "score": "span.mentionShift",
+    "sign": 1,
+    "op": ">",
+    "threshold": 0
+   },
+   "cells": {
+    "c4_6": {
+     "n": 60,
+     "auc": 0.5667,
+     "ci": [
+      0.5254,
+      0.6096
+     ],
+     "permQ95": 0.55,
+     "controls": {
+      "R_LOGC": 0.5053,
+      "R_POS": 0.4939,
+      "R_IPOS": 0.4532,
+      "R_FB": 0.5093,
+      "R_LEN": 0.5132,
+      "R_SL": 0.4996
+     },
+     "voidCell": true,
+     "tpr": 0.15,
+     "tnr": 0.9833
+    },
+    "c7_15": {
+     "n": 60,
+     "auc": 0.55,
+     "ci": [
+      0.5213,
+      0.5769
+     ],
+     "permQ95": 0.5333,
+     "controls": {
+      "R_LOGC": 0.5081,
+      "R_POS": 0.4958,
+      "R_IPOS": 0.5086,
+      "R_FB": 0.4886,
+      "R_LEN": 0.5379,
+      "R_SL": 0.5203
+     },
+     "voidCell": true,
+     "tpr": 0.1,
+     "tnr": 1
+    },
+    "c16p": {
+     "n": 33,
+     "auc": 0.5909,
+     "ci": [
+      0.5,
+      0.7283
+     ],
+     "permQ95": 0.5606,
+     "controls": {
+      "R_LOGC": 0.562,
+      "R_POS": 0.5317,
+      "R_IPOS": 0.5051,
+      "R_FB": 0.3774,
+      "R_LEN": 0.5937,
+      "R_SL": 0.472
+     },
+     "voidCell": true,
+     "tpr": 0.1818,
+     "tnr": 1
+    }
+   },
+   "liveStrata": [
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "pairs": 153,
+   "auc": 0.5654,
+   "ci": [
+    0.5327,
+    0.6027
+   ],
+   "permQ95": 0.5261,
+   "permP": 0,
+   "controlsPooled": {
+    "R_LOGC": 0.5186,
+    "R_POS": 0.5028,
+    "R_IPOS": 0.4861,
+    "R_FB": 0.4727,
+    "R_LEN": 0.5402,
+    "R_SL": 0.5017
+   },
+   "controlsInBand": true,
+   "tpr": 0.1373,
+   "tnr": 0.9935,
+   "diffToBurst": {
+    "point": -0.0026,
+    "lo": -0.0631,
+    "hi": 0.0534
+   },
+   "perBlock": [
+    [
+     "fifth3",
+     0.55,
+     40
+    ],
+    [
+     "fifth1",
+     0.6163,
+     43
+    ],
+    [
+     "fifth2",
+     0.5286,
+     35
+    ],
+    [
+     "fifth0",
+     0.5571,
+     35
+    ]
+   ],
+   "consistency": {
+    "above": 4,
+    "of": 4
+   },
+   "strataAtLeast058": "1/3",
+   "nonNullNames": 0.5948,
+   "nonNullUnlabelled": 0.5229,
+   "controlProbeAuc": 0.5074,
+   "caliper": {
+    "pairs": 61,
+    "auc": 0.5333,
+    "ci": [
+     0.5,
+     0.5726
+    ],
+    "controls": {
+     "R_LOGC": 0.4913,
+     "R_POS": 0.4782,
+     "R_IPOS": 0.4672,
+     "R_FB": 0.5,
+     "R_LEN": 0.5,
+     "R_SL": 0.5024
+    },
+    "gate": false
+   },
+   "pass": false,
+   "verdict": "FAIL"
+  }
+ },
+ "probes": {
+  "irc.A": {
+   "record": {
+    "trainPairs": 529,
+    "testPairs": 1072,
+    "auc": 0.8143,
+    "ci": [
+     0.7863,
+     0.8426
+    ],
+    "perStratum": {
+     "c2": 0.815,
+     "c3": 0.749,
+     "c4_6": 0.7951,
+     "c7_15": 0.8635,
+     "c16p": 0.8863
+    }
+   },
+   "controlVector": {
+    "trainPairs": 529,
+    "testPairs": 1072,
+    "auc": 0.5547,
+    "ci": [
+     0.5431,
+     0.5687
+    ],
+    "perStratum": {
+     "c2": 0.5394,
+     "c3": 0.5375,
+     "c4_6": 0.5466,
+     "c7_15": 0.5882,
+     "c16p": 0.5697
+    }
+   }
+  },
+  "irc.B": {
+   "record": {
+    "trainPairs": 433,
+    "testPairs": 942,
+    "auc": 0.8043,
+    "ci": [
+     0.7775,
+     0.8343
+    ],
+    "perStratum": {
+     "c2": 0.6355,
+     "c3": 0.7709,
+     "c4_6": 0.8566,
+     "c7_15": 0.9189,
+     "c16p": 0.8867
+    }
+   },
+   "controlVector": {
+    "trainPairs": 433,
+    "testPairs": 942,
+    "auc": 0.5473,
+    "ci": [
+     0.5275,
+     0.568
+    ],
+    "perStratum": {
+     "c2": 0.5565,
+     "c3": 0.5524,
+     "c4_6": 0.5225,
+     "c7_15": 0.552,
+     "c16p": 0.5717
+    }
+   }
+  },
+  "mm.A": {
+   "record": {
+    "trainPairs": 144,
+    "testPairs": 130,
+    "auc": 0.7267,
+    "ci": [
+     0.6715,
+     0.7794
+    ],
+    "perStratum": {
+     "c2": 0.7178,
+     "c3": 0.6667,
+     "c4_6": 0.8311,
+     "c7_15": 0.74,
+     "c16p": 0.58
+    }
+   },
+   "controlVector": {
+    "trainPairs": 144,
+    "testPairs": 130,
+    "auc": 0.5192,
+    "ci": [
+     0.4895,
+     0.5515
+    ],
+    "perStratum": {
+     "c2": 0.52,
+     "c3": 0.5022,
+     "c4_6": 0.5289,
+     "c7_15": 0.5256,
+     "c16p": 0.52
+    }
+   }
+  },
+  "mm.B": {
+   "record": {
+    "trainPairs": 300,
+    "testPairs": 273,
+    "auc": 0.6484,
+    "ci": [
+     0.5945,
+     0.7035
+    ],
+    "perStratum": {
+     "c2": 0.6342,
+     "c3": 0.5764,
+     "c4_6": 0.6114,
+     "c7_15": 0.6781,
+     "c16p": 0.8182
+    }
+   },
+   "controlVector": {
+    "trainPairs": 300,
+    "testPairs": 273,
+    "auc": 0.5349,
+    "ci": [
+     0.4987,
+     0.5726
+    ],
+    "perStratum": {
+     "c2": 0.5744,
+     "c3": 0.5358,
+     "c4_6": 0.5481,
+     "c7_15": 0.5175,
+     "c16p": 0.4692
+    }
+   }
+  }
+ },
+ "finalRules": [
+  {
+   "id": "irc.B:span.mentionShift",
+   "tag": "company.irc.B:span.mentionShift:c4_6+c7_15+c16p",
+   "confirmedAuc": 0.8337,
+   "ci": [
+    0.8053,
+    0.8635
+   ],
+   "scope": [
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "threshold": 0,
+   "tpr": 0.6768,
+   "tnr": 0.9905
+  },
+  {
+   "id": "E1",
+   "tag": "slot.irc.B:S_ENTRY:c4_6..c16p(E1)",
+   "confirmedAuc": 0.8213,
+   "ci": [
+    0.7934,
+    0.8537
+   ],
+   "scope": [
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "threshold": 1,
+   "tpr": 0.6502,
+   "tnr": 0.9924
+  }
+ ],
+ "runValid": true,
+ "headerSha256": "9be647ab9be236fbb7cee32f4d5d15a7de5ad509b0ddf326f5eb5e9074234690",
+ "seconds": 29.1
+}

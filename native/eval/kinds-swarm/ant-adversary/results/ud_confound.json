@@ -1,0 +1,972 @@
+{
+ "languages": {
+  "arb": {
+   "NOUN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.682,
+     "CONF": 0.557,
+     "SIGCONF": 0.692,
+     "inc": 0.136,
+     "initPos": 0.017,
+     "initNeg": 0.042,
+     "lenPos": 42.7,
+     "lenNeg": 41.1
+    },
+    "posMatched": {
+     "n": 57,
+     "SIG": 0.685,
+     "CONF": 0.466,
+     "SIGCONF": 0.657,
+     "inc": 0.191,
+     "initPos": 0,
+     "initNeg": 0,
+     "lenPos": 44,
+     "lenNeg": 48.3
+    }
+   }
+  },
+  "cmn-hans": {
+   "PROPN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.564,
+     "CONF": 0.458,
+     "SIGCONF": 0.57,
+     "inc": 0.112,
+     "initPos": 0.092,
+     "initNeg": 0.058,
+     "lenPos": 25.5,
+     "lenNeg": 26.7
+    },
+    "posMatched": {
+     "n": 45,
+     "SIG": 0.379,
+     "CONF": 0.505,
+     "SIGCONF": 0.358,
+     "inc": -0.147,
+     "initPos": 0.022,
+     "initNeg": 0.022,
+     "lenPos": 28.2,
+     "lenNeg": 28.7
+    }
+   },
+   "NOUN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.572,
+     "CONF": 0.585,
+     "SIGCONF": 0.602,
+     "inc": 0.017,
+     "initPos": 0.05,
+     "initNeg": 0.067,
+     "lenPos": 28.5,
+     "lenNeg": 25.6
+    },
+    "posMatched": {
+     "n": 46,
+     "SIG": 0.639,
+     "CONF": 0.569,
+     "SIGCONF": 0.684,
+     "inc": 0.114,
+     "initPos": 0,
+     "initNeg": 0,
+     "lenPos": 29.2,
+     "lenNeg": 26.8
+    }
+   }
+  },
+  "deu": {
+   "PROPN": {
+    "all": {
+     "n": 84,
+     "SIG": 0.504,
+     "CONF": 0.546,
+     "SIGCONF": 0.525,
+     "inc": -0.021,
+     "initPos": 0,
+     "initNeg": 0.036,
+     "lenPos": 18.9,
+     "lenNeg": 19.6
+    },
+    "posMatched": {
+     "n": 29,
+     "SIG": 0.583,
+     "CONF": 0.334,
+     "SIGCONF": 0.553,
+     "inc": 0.219,
+     "initPos": 0,
+     "initNeg": 0,
+     "lenPos": 21.7,
+     "lenNeg": 20.8
+    }
+   },
+   "NOUN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.576,
+     "CONF": 0.524,
+     "SIGCONF": 0.606,
+     "inc": 0.082,
+     "initPos": 0.025,
+     "initNeg": 0.058,
+     "lenPos": 17.4,
+     "lenNeg": 17.4
+    },
+    "posMatched": {
+     "n": 31,
+     "SIG": 0.389,
+     "CONF": 0.37,
+     "SIGCONF": 0.451,
+     "inc": 0.08,
+     "initPos": 0,
+     "initNeg": 0,
+     "lenPos": 17.6,
+     "lenNeg": 17.9
+    }
+   }
+  },
+  "eng": {
+   "PROPN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.604,
+     "CONF": 0.527,
+     "SIGCONF": 0.597,
+     "inc": 0.07,
+     "initPos": 0.192,
+     "initNeg": 0.075,
+     "lenPos": 16.8,
+     "lenNeg": 18
+    },
+    "posMatched": {
+     "n": 31,
+     "SIG": 0.494,
+     "CONF": 0.509,
+     "SIGCONF": 0.535,
+     "inc": 0.026,
+     "initPos": 0.097,
+     "initNeg": 0.097,
+     "lenPos": 22,
+     "lenNeg": 18.5
+    }
+   },
+   "NOUN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.494,
+     "CONF": 0.445,
+     "SIGCONF": 0.502,
+     "inc": 0.057,
+     "initPos": 0.05,
+     "initNeg": 0.133,
+     "lenPos": 16.4,
+     "lenNeg": 16.1
+    },
+    "posMatched": null
+   }
+  },
+  "fas": {
+   "PROPN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.632,
+     "CONF": 0.626,
+     "SIGCONF": 0.652,
+     "inc": 0.026,
+     "initPos": 0.092,
+     "initNeg": 0.042,
+     "lenPos": 19.5,
+     "lenNeg": 24.4
+    },
+    "posMatched": {
+     "n": 29,
+     "SIG": 0.534,
+     "CONF": 0.476,
+     "SIGCONF": 0.453,
+     "inc": -0.023,
+     "initPos": 0.034,
+     "initNeg": 0.034,
+     "lenPos": 23.1,
+     "lenNeg": 26.3
+    }
+   },
+   "NOUN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.558,
+     "CONF": 0.586,
+     "SIGCONF": 0.58,
+     "inc": -0.006,
+     "initPos": 0.1,
+     "initNeg": 0.092,
+     "lenPos": 25.5,
+     "lenNeg": 21.5
+    },
+    "posMatched": {
+     "n": 39,
+     "SIG": 0.558,
+     "CONF": 0.546,
+     "SIGCONF": 0.584,
+     "inc": 0.038,
+     "initPos": 0.077,
+     "initNeg": 0.077,
+     "lenPos": 32.6,
+     "lenNeg": 27.6
+    }
+   }
+  },
+  "fin": {
+   "PROPN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.675,
+     "CONF": 0.662,
+     "SIGCONF": 0.669,
+     "inc": 0.006,
+     "initPos": 0.333,
+     "initNeg": 0.125,
+     "lenPos": 16.7,
+     "lenNeg": 16.8
+    },
+    "posMatched": null
+   },
+   "NOUN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.581,
+     "CONF": 0.593,
+     "SIGCONF": 0.596,
+     "inc": 0.003,
+     "initPos": 0.1,
+     "initNeg": 0.15,
+     "lenPos": 26.3,
+     "lenNeg": 19.9
+    },
+    "posMatched": {
+     "n": 21,
+     "SIG": 0.703,
+     "CONF": 0.549,
+     "SIGCONF": 0.653,
+     "inc": 0.104,
+     "initPos": 0,
+     "initNeg": 0,
+     "lenPos": 53,
+     "lenNeg": 27
+    }
+   }
+  },
+  "fra": {
+   "PROPN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.576,
+     "CONF": 0.472,
+     "SIGCONF": 0.575,
+     "inc": 0.104,
+     "initPos": 0.017,
+     "initNeg": 0.033,
+     "lenPos": 29.3,
+     "lenNeg": 28.5
+    },
+    "posMatched": {
+     "n": 68,
+     "SIG": 0.499,
+     "CONF": 0.401,
+     "SIGCONF": 0.483,
+     "inc": 0.083,
+     "initPos": 0,
+     "initNeg": 0,
+     "lenPos": 31.9,
+     "lenNeg": 30.9
+    }
+   },
+   "NOUN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.524,
+     "CONF": 0.492,
+     "SIGCONF": 0.527,
+     "inc": 0.035,
+     "initPos": 0,
+     "initNeg": 0.033,
+     "lenPos": 28.7,
+     "lenNeg": 27
+    },
+    "posMatched": {
+     "n": 50,
+     "SIG": 0.51,
+     "CONF": 0.324,
+     "SIGCONF": 0.482,
+     "inc": 0.158,
+     "initPos": 0,
+     "initNeg": 0,
+     "lenPos": 32.7,
+     "lenNeg": 29.5
+    }
+   }
+  },
+  "heb": {
+   "PROPN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.603,
+     "CONF": 0.578,
+     "SIGCONF": 0.603,
+     "inc": 0.025,
+     "initPos": 0.15,
+     "initNeg": 0.017,
+     "lenPos": 26.9,
+     "lenNeg": 27.7
+    },
+    "posMatched": {
+     "n": 40,
+     "SIG": 0.494,
+     "CONF": 0.455,
+     "SIGCONF": 0.521,
+     "inc": 0.066,
+     "initPos": 0,
+     "initNeg": 0,
+     "lenPos": 29.6,
+     "lenNeg": 27.6
+    }
+   },
+   "NOUN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.611,
+     "CONF": 0.523,
+     "SIGCONF": 0.586,
+     "inc": 0.063,
+     "initPos": 0.042,
+     "initNeg": 0.092,
+     "lenPos": 27.1,
+     "lenNeg": 27.2
+    },
+    "posMatched": {
+     "n": 41,
+     "SIG": 0.785,
+     "CONF": 0.299,
+     "SIGCONF": 0.733,
+     "inc": 0.434,
+     "initPos": 0.024,
+     "initNeg": 0.024,
+     "lenPos": 31.5,
+     "lenNeg": 33.1
+    }
+   }
+  },
+  "hin": {
+   "PROPN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.537,
+     "CONF": 0.645,
+     "SIGCONF": 0.666,
+     "inc": 0.021,
+     "initPos": 0.117,
+     "initNeg": 0.1,
+     "lenPos": 25.8,
+     "lenNeg": 23.2
+    },
+    "posMatched": {
+     "n": 33,
+     "SIG": 0.51,
+     "CONF": 0.605,
+     "SIGCONF": 0.638,
+     "inc": 0.033,
+     "initPos": 0.061,
+     "initNeg": 0.061,
+     "lenPos": 30,
+     "lenNeg": 25
+    }
+   },
+   "NOUN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.502,
+     "CONF": 0.561,
+     "SIGCONF": 0.55,
+     "inc": -0.011,
+     "initPos": 0.05,
+     "initNeg": 0.058,
+     "lenPos": 24,
+     "lenNeg": 23.2
+    },
+    "posMatched": {
+     "n": 50,
+     "SIG": 0.477,
+     "CONF": 0.554,
+     "SIGCONF": 0.508,
+     "inc": -0.045,
+     "initPos": 0.02,
+     "initNeg": 0.02,
+     "lenPos": 25.7,
+     "lenNeg": 25.4
+    }
+   }
+  },
+  "ita": {
+   "PROPN": {
+    "all": {
+     "n": 90,
+     "SIG": 0.562,
+     "CONF": 0.295,
+     "SIGCONF": 0.536,
+     "inc": 0.241,
+     "initPos": 0.033,
+     "initNeg": 0.022,
+     "lenPos": 26.1,
+     "lenNeg": 26.1
+    },
+    "posMatched": {
+     "n": 23,
+     "SIG": 0.31,
+     "CONF": 0.276,
+     "SIGCONF": 0.301,
+     "inc": 0.025,
+     "initPos": 0,
+     "initNeg": 0,
+     "lenPos": 25.7,
+     "lenNeg": 27.8
+    }
+   },
+   "NOUN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.527,
+     "CONF": 0.454,
+     "SIGCONF": 0.547,
+     "inc": 0.093,
+     "initPos": 0,
+     "initNeg": 0.083,
+     "lenPos": 28,
+     "lenNeg": 22.1
+    },
+    "posMatched": {
+     "n": 38,
+     "SIG": 0.534,
+     "CONF": 0.294,
+     "SIGCONF": 0.537,
+     "inc": 0.243,
+     "initPos": 0,
+     "initNeg": 0,
+     "lenPos": 30.9,
+     "lenNeg": 26.4
+    }
+   }
+  },
+  "jpn": {
+   "PROPN": {
+    "all": {
+     "n": 58,
+     "SIG": 0.623,
+     "CONF": 0.68,
+     "SIGCONF": 0.713,
+     "inc": 0.033,
+     "initPos": 0.172,
+     "initNeg": 0.017,
+     "lenPos": 36.3,
+     "lenNeg": 33.7
+    },
+    "posMatched": {
+     "n": 21,
+     "SIG": 0.381,
+     "CONF": 0.608,
+     "SIGCONF": 0.54,
+     "inc": -0.068,
+     "initPos": 0,
+     "initNeg": 0,
+     "lenPos": 40.3,
+     "lenNeg": 38.4
+    }
+   },
+   "NOUN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.624,
+     "CONF": 0.588,
+     "SIGCONF": 0.622,
+     "inc": 0.035,
+     "initPos": 0.05,
+     "initNeg": 0.083,
+     "lenPos": 35.6,
+     "lenNeg": 30.4
+    },
+    "posMatched": {
+     "n": 63,
+     "SIG": 0.609,
+     "CONF": 0.617,
+     "SIGCONF": 0.654,
+     "inc": 0.037,
+     "initPos": 0.016,
+     "initNeg": 0.016,
+     "lenPos": 38.8,
+     "lenNeg": 33.3
+    }
+   }
+  },
+  "kor": {
+   "NOUN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.57,
+     "CONF": 0.497,
+     "SIGCONF": 0.58,
+     "inc": 0.083,
+     "initPos": 0.075,
+     "initNeg": 0.092,
+     "lenPos": 15.8,
+     "lenNeg": 17.2
+    },
+    "posMatched": {
+     "n": 31,
+     "SIG": 0.578,
+     "CONF": 0.444,
+     "SIGCONF": 0.604,
+     "inc": 0.159,
+     "initPos": 0.032,
+     "initNeg": 0.032,
+     "lenPos": 18.4,
+     "lenNeg": 21.8
+    }
+   }
+  },
+  "nld": {
+   "PROPN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.515,
+     "CONF": 0.576,
+     "SIGCONF": 0.55,
+     "inc": -0.026,
+     "initPos": 0.192,
+     "initNeg": 0.075,
+     "lenPos": 19.1,
+     "lenNeg": 17.9
+    },
+    "posMatched": {
+     "n": 27,
+     "SIG": 0.649,
+     "CONF": 0.394,
+     "SIGCONF": 0.656,
+     "inc": 0.262,
+     "initPos": 0.074,
+     "initNeg": 0.074,
+     "lenPos": 20.8,
+     "lenNeg": 19.4
+    }
+   },
+   "NOUN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.6,
+     "CONF": 0.529,
+     "SIGCONF": 0.62,
+     "inc": 0.091,
+     "initPos": 0.008,
+     "initNeg": 0.108,
+     "lenPos": 18.4,
+     "lenNeg": 18.2
+    },
+    "posMatched": {
+     "n": 33,
+     "SIG": 0.583,
+     "CONF": 0.495,
+     "SIGCONF": 0.547,
+     "inc": 0.052,
+     "initPos": 0,
+     "initNeg": 0,
+     "lenPos": 19.3,
+     "lenNeg": 20
+    }
+   }
+  },
+  "pol": {
+   "PROPN": {
+    "all": {
+     "n": 84,
+     "SIG": 0.498,
+     "CONF": 0.467,
+     "SIGCONF": 0.467,
+     "inc": 0,
+     "initPos": 0.107,
+     "initNeg": 0.048,
+     "lenPos": 21.4,
+     "lenNeg": 18.8
+    },
+    "posMatched": null
+   },
+   "NOUN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.548,
+     "CONF": 0.437,
+     "SIGCONF": 0.503,
+     "inc": 0.066,
+     "initPos": 0.117,
+     "initNeg": 0.117,
+     "lenPos": 18.4,
+     "lenNeg": 18.3
+    },
+    "posMatched": {
+     "n": 42,
+     "SIG": 0.37,
+     "CONF": 0.317,
+     "SIGCONF": 0.356,
+     "inc": 0.039,
+     "initPos": 0.024,
+     "initNeg": 0.024,
+     "lenPos": 20.3,
+     "lenNeg": 19.8
+    }
+   }
+  },
+  "por": {
+   "PROPN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.556,
+     "CONF": 0.503,
+     "SIGCONF": 0.567,
+     "inc": 0.064,
+     "initPos": 0.008,
+     "initNeg": 0.05,
+     "lenPos": 33.5,
+     "lenNeg": 33.1
+    },
+    "posMatched": {
+     "n": 59,
+     "SIG": 0.542,
+     "CONF": 0.36,
+     "SIGCONF": 0.536,
+     "inc": 0.176,
+     "initPos": 0,
+     "initNeg": 0,
+     "lenPos": 35.1,
+     "lenNeg": 36.5
+    }
+   },
+   "NOUN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.664,
+     "CONF": 0.519,
+     "SIGCONF": 0.681,
+     "inc": 0.162,
+     "initPos": 0,
+     "initNeg": 0.033,
+     "lenPos": 30.8,
+     "lenNeg": 32.3
+    },
+    "posMatched": {
+     "n": 51,
+     "SIG": 0.608,
+     "CONF": 0.419,
+     "SIGCONF": 0.569,
+     "inc": 0.15,
+     "initPos": 0,
+     "initNeg": 0,
+     "lenPos": 32.1,
+     "lenNeg": 35.3
+    }
+   }
+  },
+  "rus": {
+   "PROPN": {
+    "all": {
+     "n": 53,
+     "SIG": 0.438,
+     "CONF": 0.487,
+     "SIGCONF": 0.453,
+     "inc": -0.035,
+     "initPos": 0,
+     "initNeg": 0.019,
+     "lenPos": 30.9,
+     "lenNeg": 25
+    },
+    "posMatched": {
+     "n": 25,
+     "SIG": 0.298,
+     "CONF": 0.333,
+     "SIGCONF": 0.205,
+     "inc": -0.128,
+     "initPos": 0,
+     "initNeg": 0,
+     "lenPos": 33.3,
+     "lenNeg": 30
+    }
+   },
+   "NOUN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.576,
+     "CONF": 0.495,
+     "SIGCONF": 0.566,
+     "inc": 0.072,
+     "initPos": 0.033,
+     "initNeg": 0.058,
+     "lenPos": 21.1,
+     "lenNeg": 21.8
+    },
+    "posMatched": {
+     "n": 40,
+     "SIG": 0.579,
+     "CONF": 0.544,
+     "SIGCONF": 0.561,
+     "inc": 0.017,
+     "initPos": 0,
+     "initNeg": 0,
+     "lenPos": 23.9,
+     "lenNeg": 25.8
+    }
+   }
+  },
+  "spa": {
+   "PROPN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.509,
+     "CONF": 0.628,
+     "SIGCONF": 0.533,
+     "inc": -0.095,
+     "initPos": 0.117,
+     "initNeg": 0.025,
+     "lenPos": 35.8,
+     "lenNeg": 33.2
+    },
+    "posMatched": {
+     "n": 50,
+     "SIG": 0.558,
+     "CONF": 0.521,
+     "SIGCONF": 0.563,
+     "inc": 0.042,
+     "initPos": 0,
+     "initNeg": 0,
+     "lenPos": 38.6,
+     "lenNeg": 36.6
+    }
+   },
+   "NOUN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.586,
+     "CONF": 0.433,
+     "SIGCONF": 0.637,
+     "inc": 0.204,
+     "initPos": 0,
+     "initNeg": 0.042,
+     "lenPos": 37.4,
+     "lenNeg": 38.6
+    },
+    "posMatched": {
+     "n": 64,
+     "SIG": 0.495,
+     "CONF": 0.269,
+     "SIGCONF": 0.476,
+     "inc": 0.207,
+     "initPos": 0,
+     "initNeg": 0,
+     "lenPos": 39.3,
+     "lenNeg": 40.5
+    }
+   }
+  },
+  "swe": {
+   "NOUN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.63,
+     "CONF": 0.472,
+     "SIGCONF": 0.614,
+     "inc": 0.142,
+     "initPos": 0.058,
+     "initNeg": 0.058,
+     "lenPos": 23.6,
+     "lenNeg": 25.1
+    },
+    "posMatched": {
+     "n": 46,
+     "SIG": 0.545,
+     "CONF": 0.338,
+     "SIGCONF": 0.507,
+     "inc": 0.169,
+     "initPos": 0.022,
+     "initNeg": 0.022,
+     "lenPos": 28.1,
+     "lenNeg": 24.7
+    }
+   }
+  },
+  "tur": {
+   "PROPN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.715,
+     "CONF": 0.584,
+     "SIGCONF": 0.706,
+     "inc": 0.122,
+     "initPos": 0.267,
+     "initNeg": 0.083,
+     "lenPos": 14.6,
+     "lenNeg": 15.7
+    },
+    "posMatched": {
+     "n": 20,
+     "SIG": 0,
+     "CONF": 0.542,
+     "SIGCONF": 0.083,
+     "inc": -0.458,
+     "initPos": 0.15,
+     "initNeg": 0.15,
+     "lenPos": 20.4,
+     "lenNeg": 18.1
+    }
+   },
+   "NOUN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.468,
+     "CONF": 0.509,
+     "SIGCONF": 0.466,
+     "inc": -0.043,
+     "initPos": 0.142,
+     "initNeg": 0.142,
+     "lenPos": 15.8,
+     "lenNeg": 14.4
+    },
+    "posMatched": {
+     "n": 20,
+     "SIG": 0.755,
+     "CONF": 0.657,
+     "SIGCONF": 0.757,
+     "inc": 0.1,
+     "initPos": 0.1,
+     "initNeg": 0.1,
+     "lenPos": 20,
+     "lenNeg": 18.1
+    }
+   }
+  },
+  "urd": {
+   "PROPN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.635,
+     "CONF": 0.676,
+     "SIGCONF": 0.645,
+     "inc": -0.031,
+     "initPos": 0.058,
+     "initNeg": 0.042,
+     "lenPos": 35,
+     "lenNeg": 31.9
+    },
+    "posMatched": {
+     "n": 43,
+     "SIG": 0.584,
+     "CONF": 0.608,
+     "SIGCONF": 0.589,
+     "inc": -0.019,
+     "initPos": 0,
+     "initNeg": 0,
+     "lenPos": 36.9,
+     "lenNeg": 33.9
+    }
+   },
+   "NOUN": {
+    "all": {
+     "n": 120,
+     "SIG": 0.647,
+     "CONF": 0.558,
+     "SIGCONF": 0.673,
+     "inc": 0.116,
+     "initPos": 0.033,
+     "initNeg": 0.075,
+     "lenPos": 31.1,
+     "lenNeg": 33.7
+    },
+    "posMatched": {
+     "n": 53,
+     "SIG": 0.607,
+     "CONF": 0.507,
+     "SIGCONF": 0.589,
+     "inc": 0.082,
+     "initPos": 0,
+     "initNeg": 0,
+     "lenPos": 33.7,
+     "lenNeg": 35.2
+    }
+   }
+  }
+ },
+ "aggregate": {
+  "PROPN:all": {
+   "languages": 17,
+   "SIG": 0.573,
+   "CONF": 0.554,
+   "SIGCONF": 0.59,
+   "incMean": 0.036,
+   "incCI": [
+    0,
+    0.075
+   ],
+   "nSigBeatsConf": 10,
+   "incPositive": 11,
+   "initPos": 0.115,
+   "initNeg": 0.051,
+   "lenPos": 25.418,
+   "lenNeg": 24.724
+  },
+  "PROPN:posMatched": {
+   "languages": 15,
+   "SIG": 0.454,
+   "CONF": 0.462,
+   "SIGCONF": 0.468,
+   "incMean": 0.006,
+   "incCI": [
+    -0.083,
+    0.085
+   ],
+   "nSigBeatsConf": 8,
+   "incPositive": 9,
+   "initPos": 0.029,
+   "initNeg": 0.029,
+   "lenPos": 29.173,
+   "lenNeg": 27.9
+  },
+  "NOUN:all": {
+   "languages": 20,
+   "SIG": 0.577,
+   "CONF": 0.518,
+   "SIGCONF": 0.588,
+   "incMean": 0.07,
+   "incCI": [
+    0.043,
+    0.098
+   ],
+   "nSigBeatsConf": 15,
+   "incPositive": 17,
+   "initPos": 0.048,
+   "initNeg": 0.081,
+   "lenPos": 25.63,
+   "lenNeg": 24.555
+  },
+  "NOUN:posMatched": {
+   "languages": 19,
+   "SIG": 0.579,
+   "CONF": 0.451,
+   "SIGCONF": 0.574,
+   "incMean": 0.123,
+   "incCI": [
+    0.081,
+    0.171
+   ],
+   "nSigBeatsConf": 17,
+   "incPositive": 18,
+   "initPos": 0.017,
+   "initNeg": 0.017,
+   "lenPos": 30.058,
+   "lenNeg": 28.237
+  }
+ }
+}

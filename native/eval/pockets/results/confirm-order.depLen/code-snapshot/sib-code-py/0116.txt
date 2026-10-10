@@ -1,0 +1,114 @@
+"""Run eoreader7 over a corpus of text files and collect a feature matrix.
+
+Usage:
+  python scripts/eo_corpus.py --in corpus/golden corpus/background \
+      --out reports/eo_matrix.json
+
+For each .txt file it runs the eoreader7 CLI, parses the EOReader7CLIRead@1 JSON,
+and extracts a fixed feature vector:
+
+  - count of relation edges
+  - set of participant surface keys (the noun-phrase chunks the reader surfaces
+    as grammatical subjects/objects) — these are the referents the document is
+    actually about
+  - set of hyperlexicon given/candidate bigrams (when the corpus is large enough
+    for the composition pass to fire)
+
+Output is a JSONL/JSON matrix keyed by file with label (golden|background) and
+tech type (from the golden manifest where available).
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+
+EOREADER7 = "eoreader7"
+
+
+def run_eoreader7(txt_path: Path, workdir: Path) -> dict:
+    """Returns parsed EOReader7CLIRead@1 output dict."""
+    proc = subprocess.run(
+        [EOREADER7, str(txt_path), "--out", str(workdir)],
+        capture_output=True,
+        text=True,
+        timeout=600,
+    )
+    if proc.returncode != 0:
+        raise RuntimeError(f"eoreader7 failed on {txt_path}: {proc.stderr[:500]}")
+    slug = txt_path.stem.lower().replace("-", "_")
+    read_path = workdir / f"{slug}.eoreader7.json"
+    if not read_path.exists():
+        # eoreader7 slug rule: basename minus ext, lowercased, [^a-z0-9]+ -> '-'
+        alt = workdir / f"{txt_path.stem.lower().replace('_','-')}.eoreader7.json"
+        read_path = alt
+    return json.loads(read_path.read_text())
+
+
+def surfaces_from_graph(entries: list) -> list[str]:
+    out = set()
+    for e in entries:
+        participants = e.get("participants") or []
+        for p in participants:
+            sk = p.get("surfaceKey")
+            if sk:
+                # strip the "surface:" prefix
+                out.add(sk[8:] if sk.startswith("surface:") else sk)
+    return sorted(out)
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--in", dest="inputs", nargs="+", required=True)
+    ap.add_argument("--out", default="reports/eo_matrix.json")
+    ap.add_argument("--workdir", default="/tmp/eo_work")
+    args = ap.parse_args()
+
+    workdir = Path(args.workdir)
+    workdir.mkdir(parents=True, exist_ok=True)
+
+    # label rule: dir name "background" => background; else golden
+    manifest = None
+    mp = Path(__file__).resolve().parent.parent / "goldens" / "manifest.json"
+    if mp.exists():
+        manifest = json.loads(mp.read_text())
+    tech_by_file = {}
+    for g in (manifest or {}).get("goldens", []):
+        tech_by_file[Path(g["path"]).name] = g["tech"]
+
+    rows = []
+    for inp in args.inputs:
+        root = Path(inp)
+        label = "background" if "background" in root.parts else "golden"
+        for txt in sorted(root.glob("*.txt")):
+            print(f"  reading {txt.name} ({label})...", file=sys.stderr)
+            try:
+                d = run_eoreader7(txt, workdir)
+            except Exception as exc:
+                print(f"  !! {txt.name}: {exc}", file=sys.stderr)
+                continue
+            geo = d["holograph"]["graphEntries"]
+            rows.append({
+                "file": txt.name,
+                "label": label,
+                "tech": tech_by_file.get(txt.name, None),
+                "relationEdges": d["holograph"]["relationEdges"],
+                "referentBindings": d["holograph"]["referentBindings"],
+                "chainSites": d["holograph"]["chainSites"],
+                "surfaces": surfaces_from_graph(geo),
+                "nGraphEntries": len(geo),
+            })
+
+    out_path = Path(args.out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(rows, indent=2))
+    print(f"wrote {len(rows)} rows -> {out_path}")
+
+
+if __name__ == "__main__":
+    main()

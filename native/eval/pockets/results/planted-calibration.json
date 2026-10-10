@@ -1,0 +1,38 @@
+{
+ "note": "replicate iid worlds, reference statistics, 10 null draws per cell",
+ "reps": 20,
+ "stats": [
+  "adjRepeat",
+  "repeat10",
+  "binAsym",
+  "firstMatch",
+  "lastMatch",
+  "docCover",
+  "menzerath"
+ ],
+ "worlds": {
+  "pl-null": {
+   "cells": 280,
+   "ge4": 1,
+   "ge2": 22,
+   "rateGe4": 0.0035714285714285713,
+   "rateGe2": 0.07857142857142857,
+   "hits": [
+    {
+     "id": "pl-null-rep5",
+     "which": "discover",
+     "stat": "firstMatch",
+     "z": -4.03
+    }
+   ]
+  },
+  "pl-null2": {
+   "cells": 280,
+   "ge4": 0,
+   "ge2": 32,
+   "rateGe4": 0,
+   "rateGe2": 0.11428571428571428,
+   "hits": []
+  }
+ }
+}

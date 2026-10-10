@@ -1,0 +1,26 @@
+// discovery-keyless.test.mjs — a keyless external provider is reachable only on a one-token chat probe that
+// proves the call got through; a models LISTING alone (or a 401/429/5xx probe) never marks it reachable.
+import test from "node:test";
+import assert from "node:assert/strict";
+import { discoverKeylessExternal } from "./discovery.js";
+
+const world = (probeStatus) => async (url, opts = {}) => {
+  if (/\/models$/.test(url)) return { ok: true, status: 200, json: async () => ({ data: [{ id: "m1" }], models: [{ name: "m1" }] }), headers: { get: () => null } };
+  return { ok: probeStatus === 200, status: probeStatus, json: async () => ({}), headers: { get: () => null } };
+};
+
+test("keyless: a models listing that answers while the chat probe returns 401 yields no executors", async () => {
+  assert.deepEqual(await discoverKeylessExternal({ fetchImpl: world(401), only: ["llm7"] }), []);
+});
+
+for (const status of [429, 500, 502]) {
+  test(`keyless: a chat probe that answered ${status} (nothing proved the call goes through) is not reachable`, async () => {
+    const out = await discoverKeylessExternal({ fetchImpl: world(status), only: ["llm7"] });
+    assert.equal(out.filter((e) => e.live.reachable).length, 0);
+  });
+}
+
+test("keyless: a chat probe that answered 200 is reachable", async () => {
+  const out = await discoverKeylessExternal({ fetchImpl: world(200), only: ["llm7"] });
+  assert.ok(out.length > 0 && out.every((e) => e.live.reachable));
+});

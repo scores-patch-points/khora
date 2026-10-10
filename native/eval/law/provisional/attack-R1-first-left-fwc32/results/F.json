@@ -1,0 +1,109 @@
+{
+ "headerSha256": "2d9f1dd7886129b5572fe568ef452b5fe12a9195fcef2153a9e624114b228214",
+ "nUnits": 89,
+ "nSurfaceUnits": 32,
+ "WORD": {
+  "n": 88,
+  "rho": 0.638,
+  "p": 0.0002,
+  "nClean": 48,
+  "cleanMean": 0.6469,
+  "cleanAudible": 0.7917,
+  "nDeaf": 29,
+  "deafMean": 0.5516,
+  "deafAudible": 0.2069,
+  "contrast": 0.0953,
+  "nonIE": {
+   "n": 30,
+   "rho": 0.601,
+   "p": 0.0003,
+   "meanAuc": 0.5606,
+   "cleanAudibleLangs": "heb,mlt,wol",
+   "cleanLangs": "heb,jpn,lzh,mlt,wol"
+  },
+  "IE": {
+   "n": 58,
+   "rho": 0.501,
+   "p": 0.0003
+  }
+ },
+ "RAW": {
+  "n": 88,
+  "rho": 0.695,
+  "p": 0.0002,
+  "nClean": 46,
+  "cleanMean": 0.6437,
+  "cleanAudible": 0.7609,
+  "nDeaf": 31,
+  "deafMean": 0.5525,
+  "deafAudible": 0.1935,
+  "contrast": 0.0912,
+  "nonIE": {
+   "n": 30,
+   "rho": 0.592,
+   "p": 0.0007,
+   "meanAuc": 0.5517,
+   "cleanAudibleLangs": "mlt",
+   "cleanLangs": "jpn,lzh,mlt,wol"
+  },
+  "IE": {
+   "n": 58,
+   "rho": 0.593,
+   "p": 0.0003
+  }
+ },
+ "RAWSTRICT": {
+  "n": 82,
+  "rho": 0.736,
+  "p": 0.0002,
+  "nClean": 43,
+  "cleanMean": 0.6493,
+  "cleanAudible": 0.814,
+  "nDeaf": 28,
+  "deafMean": 0.5503,
+  "deafAudible": 0.1786,
+  "contrast": 0.099,
+  "nonIE": {
+   "n": 24,
+   "rho": 0.61,
+   "p": 0.0017,
+   "meanAuc": 0.5474,
+   "cleanAudibleLangs": "mlt",
+   "cleanLangs": "mlt,wol"
+  },
+  "IE": {
+   "n": 58,
+   "rho": 0.593,
+   "p": 0.0003
+  }
+ },
+ "WORDSTRICT": {
+  "n": 82,
+  "rho": 0.67,
+  "p": 0.0002,
+  "nClean": 45,
+  "cleanMean": 0.6524,
+  "cleanAudible": 0.8444,
+  "nDeaf": 26,
+  "deafMean": 0.5491,
+  "deafAudible": 0.1923,
+  "contrast": 0.1033,
+  "nonIE": {
+   "n": 24,
+   "rho": 0.661,
+   "p": 0.0007,
+   "meanAuc": 0.5585,
+   "cleanAudibleLangs": "heb,mlt,wol",
+   "cleanLangs": "heb,mlt,wol"
+  },
+  "IE": {
+   "n": 58,
+   "rho": 0.501,
+   "p": 0.0003
+  }
+ },
+ "decision": {
+  "headline": true,
+  "nonIEgradient": true
+ }
+}

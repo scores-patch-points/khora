@@ -1,0 +1,73 @@
+{
+ "headerSha256": "3600bb43e84bc27fc29a34e302cb4706bc58024dcafabc2aacfb7651a6e1f5ff",
+ "zones": {
+  "clean": {
+   "n": 48,
+   "NEW1": 0.573,
+   "NEW12": 0.5939,
+   "CHAIN2": 0.5406,
+   "PREVNEW": 0.5911,
+   "S2": 0.6065,
+   "new1Propn": 0.629
+  },
+  "mid": {
+   "n": 11,
+   "NEW1": 0.5448,
+   "NEW12": 0.5641,
+   "CHAIN2": 0.536,
+   "PREVNEW": 0.5633,
+   "S2": 0.5754,
+   "new1Propn": 0.4948
+  },
+  "deaf": {
+   "n": 29,
+   "NEW1": 0.5262,
+   "NEW12": 0.5407,
+   "CHAIN2": 0.5282,
+   "PREVNEW": 0.5424,
+   "S2": 0.5504,
+   "new1Propn": 0.4718
+  }
+ },
+ "n": 88,
+ "gradient": {
+  "NEW1": {
+   "rho": 0.489,
+   "p": 0.0005
+  },
+  "NEW12": {
+   "rho": 0.445,
+   "p": 0.0005
+  },
+  "CHAIN2": {
+   "rho": 0.098,
+   "p": 0.1884
+  },
+  "PREVNEW": {
+   "rho": 0.385,
+   "p": 0.002
+  },
+  "S2": {
+   "rho": 0.334,
+   "p": 0.002
+  }
+ },
+ "decision": {
+  "NEW1": {
+   "audibleFree": false,
+   "beatsS2Deaf": false
+  },
+  "NEW12": {
+   "audibleFree": false,
+   "beatsS2Deaf": false
+  },
+  "CHAIN2": {
+   "audibleFree": false,
+   "beatsS2Deaf": false
+  },
+  "PREVNEW": {
+   "audibleFree": false,
+   "beatsS2Deaf": false
+  }
+ }
+}

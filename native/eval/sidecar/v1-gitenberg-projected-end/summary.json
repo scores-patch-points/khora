@@ -1,0 +1,30 @@
+{
+ "slice": {
+  "docs": 20,
+  "chromeDf": 0.5,
+  "asOf": "end",
+  "revisionsApplied": 3,
+  "in": "v1-gitenberg/sidecar.jsonl"
+ },
+ "before": {
+  "cast": 301,
+  "capitalShare": 0.429,
+  "relations": 325,
+  "relBothEndsShare": 0.018
+ },
+ "after": {
+  "cast": 96,
+  "relations": 12,
+  "docsWith2Names": 20,
+  "chromeSurvivors": 0
+ },
+ "chromeExamples": [
+  "project gutenberg (19/20 corpus)",
+  "gutenberg ebook (19/20 corpus)",
+  "project gutenberg ebook (16/20 corpus)",
+  "project gutenberg (19/20 gitenberg)",
+  "gutenberg ebook (19/20 gitenberg)",
+  "project gutenberg ebook (16/20 gitenberg)"
+ ],
+ "verdict": "PASSING"
+}

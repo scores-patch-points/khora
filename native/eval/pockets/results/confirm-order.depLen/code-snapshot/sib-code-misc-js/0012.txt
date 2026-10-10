@@ -1,0 +1,53 @@
+// penelope binding: mounts penelope's mouth (mouth/server.mjs -> createPenelopeHandlers). Penelope owns /v1/draw,
+// /v1/mouth/* and /api/weave.
+//
+//   channel      where the mouth sends its draws: the Fold's own heimdall (<fold>/heimdall, the embedded bridge) when heimdall
+//                is mounted, else FOLD_PENELOPE_CHANNEL, else the Fold's floor (FOLD_OLLAMA). Never :11434.
+//   drawViaMouth true: the weave's draws reach the mouth in-process (no self-HTTP hop).
+//   wire         the mouth's bridge-wire aliases (/api/generate, /api/chat, /api/embed*, /v1/chat/completions,
+//                /v1/embeddings) would collide with heimdall/khora at their bare paths, so the Fold exposes them ONLY under
+//                /v1/mouth/wire/<path> (inside penelope's own /v1/mouth claim). khora's draws are pointed there by the khora
+//                binding (ER7_MOUTH_URL), so khora -> mouth (admission) -> heimdall -> floor is one in-process chain.
+//   code-agent   /api/weave artifact 'code-agent' needs organs/code-pipeline.mjs; when the penelope dir lacks it, status
+//                says so and the door answers its own typed gap.
+import { existsSync } from "node:fs";
+import { join } from "node:path";
+
+export const name = "penelope";
+export const entries = ["mouth/server.mjs"];
+export const WIRE_PREFIX = "/v1/mouth/wire";
+const OWNED = new Set(["/v1/draw", "/v1/mouth/status", "/v1/mouth/admit", "/api/weave"]);
+
+export default {
+  name,
+  entries,
+  async create(ctx) {
+    const { env, log, options, dir, ollama, fold } = ctx;
+    const mod = await ctx.load();
+    if (typeof mod.createPenelopeHandlers !== "function") throw new Error("penelope entry does not export createPenelopeHandlers");
+    const heimdallOn = ctx.organMode("heimdall") !== "off";
+    const channel = options.channel || env.FOLD_PENELOPE_CHANNEL || (heimdallOn ? `http://127.0.0.1:${fold.port()}/heimdall` : ollama);
+    const inner = mod.createPenelopeHandlers({
+      channel, wireRoutes: true, drawViaMouth: true, port: fold.port(), ...options,
+    });
+    const pipeline = existsSync(join(dir, "organs", "code-pipeline.mjs"));
+    return {
+      async handle(req, res) {
+        const raw = req.url || "/";
+        const q = raw.indexOf("?");
+        const pathname = q === -1 ? raw : raw.slice(0, q);
+        if (pathname.startsWith(WIRE_PREFIX + "/")) {
+          req.url = raw.slice(WIRE_PREFIX.length); // /v1/mouth/wire/api/generate -> /api/generate
+          return inner.handle(req, res);
+        }
+        if (!OWNED.has(pathname)) return false; // wireRoutes is on inside penelope: never let it answer a bare /api/chat
+        return inner.handle(req, res);
+      },
+      close: () => inner.close?.(),
+      status: () => ({
+        channel: inner.channel ?? channel, wirePrefix: WIRE_PREFIX,
+        codeAgent: pipeline ? { present: true } : { present: false, gap: "organs/code-pipeline.mjs is absent from this penelope directory: POST /api/weave with artifact 'code-agent' answers a typed gap (no generation adapter registered)" },
+      }),
+    };
+  },
+};

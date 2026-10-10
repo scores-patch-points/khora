@@ -1,0 +1,135 @@
+// acceptance.test.mjs — the Fold's local gate. Every gate here is shown to REJECT something (II.10),
+// and a check that could not run is a typed gap, never a pass (IV.3).
+import test from "node:test";
+import assert from "node:assert/strict";
+import http from "node:http";
+import { runCheck, runAcceptance, validateSchema, getPath, fillTemplate, selfTest, PROBES, registerCheck, asProposal, VERDICT } from "./acceptance.js";
+import { CHECK_TYPES } from "./job.js";
+
+test("validateSchema: type, required, bounds, additionalProperties", () => {
+  const s = { type: "object", required: ["a"], properties: { a: { type: "integer", minimum: 1 }, b: { type: "array", items: { type: "string" }, maxItems: 2 } }, additionalProperties: false };
+  assert.deepEqual(validateSchema(s, { a: 2, b: ["x"] }), []);
+  assert.ok(validateSchema(s, { a: 0 }).length, "below minimum");
+  assert.ok(validateSchema(s, {}).some((e) => /required/.test(e)));
+  assert.ok(validateSchema(s, { a: 1, c: 1 }).some((e) => /not allowed/.test(e)));
+  assert.ok(validateSchema(s, { a: 1, b: [1] }).length, "wrong item type");
+  assert.ok(validateSchema(s, { a: 1.5 }).length, "not an integer");
+});
+
+test("getPath and fillTemplate read dotted paths; a missing value is null, not 0", () => {
+  assert.equal(getPath({ a: { b: [10, 20] } }, "a.b[1]"), 20);
+  assert.equal(fillTemplate("{{x}} + {{y.z}}", { x: 1, y: { z: 2 } }), "1 + 2");
+  assert.equal(fillTemplate("{{x}} + {{nope}}", { x: 1 }), null);
+});
+
+test("every built-in check type has a falsifier and rejects its known-bad input (equation via an injected oracle)", async () => {
+  const fakeKhora = async (_url, init) => {
+    const eqs = JSON.parse(init.body).equations;
+    const bad = eqs.filter((e) => { const m = e.statement.match(/^(\d+) \+ (\d+) == (\d+)$/); return !m || +m[1] + +m[2] !== +m[3]; });
+    return { ok: true, status: 200, json: async () => ({ ok: !bad.length, errors: bad.length, findings: bad.map((e) => ({ kind: "claim_fails_oracle", severity: "error", detail: e.statement + " refuted", at: e.ref })) }) };
+  };
+  const out = await selfTest({ fetchImpl: fakeKhora });
+  for (const t of CHECK_TYPES.filter((t) => t !== "custom")) {
+    assert.ok(out[t], `${t} has probes`);
+    assert.ok(out[t].of_reject >= 1 && out[t].rejects === out[t].of_reject, `${t}: every known-bad input rejected`);
+    assert.equal(out[t].accepts, out[t].of_accept, `${t}: every known-good input accepted`);
+    assert.equal(out[t].falsified, true, t);
+  }
+});
+
+test("equation: a khora that is down is a typed GAP, not a pass, and the job is 'unverified'", async () => {
+  const dead = async () => { throw new Error("ECONNREFUSED"); };
+  const v = await runCheck(PROBES.equation.check, { a: 2, b: 3, sum: 5 }, { fetchImpl: dead });
+  assert.equal(v.verdict, VERDICT.gap);
+  assert.equal(v.gap.kind, "not-computed");
+  const r = await runAcceptance([PROBES.equation.check], { a: 2, b: 3, sum: 5 }, { fetchImpl: dead });
+  assert.equal(r.accepted, false);
+  assert.equal(r.state, "unverified");
+});
+
+test("equation: an unfilled placeholder is 'unresolved', not guessed", async () => {
+  const v = await runCheck(PROBES.equation.check, { a: 2 }, { fetchImpl: async () => { throw new Error("must not be called"); } });
+  assert.equal(v.verdict, VERDICT.fail);
+  assert.equal(v.kind, "unresolved");
+});
+
+test("equation against a real HTTP khora stand-in: right sum passes, wrong sum fails", async (t) => {
+  const srv = http.createServer((req, res) => {
+    let b = ""; req.on("data", (c) => (b += c));
+    req.on("end", () => { const eq = JSON.parse(b).equations[0]; const ok = eq.statement === "2 + 3 == 5"; res.writeHead(200, { "content-type": "application/json" }); res.end(JSON.stringify({ ok, errors: ok ? 0 : 1, findings: ok ? [] : [{ severity: "error", kind: "claim_fails_oracle", detail: "refuted" }] })); });
+  });
+  await new Promise((r) => srv.listen(0, "127.0.0.1", r)); t.after(() => srv.close());
+  const khoraUrl = "http://127.0.0.1:" + srv.address().port;
+  assert.equal((await runCheck(PROBES.equation.check, { a: 2, b: 3, sum: 5 }, { khoraUrl })).verdict, "pass");
+  assert.equal((await runCheck(PROBES.equation.check, { a: 2, b: 3, sum: 6 }, { khoraUrl })).verdict, "fail");
+});
+
+test("equation against the REAL khora when :11436 is up (skipped otherwise)", async (t) => {
+  let up = false;
+  try { up = (await fetch("http://127.0.0.1:11436/health", { signal: AbortSignal.timeout(800) })).ok; } catch {}
+  if (!up) return t.skip("khora not running on :11436");
+  const good = await runCheck(PROBES.equation.check, { a: 2, b: 3, sum: 5 }, { timeoutMs: 5000 });
+  if (good.verdict === "gap") return t.skip("khora is up but did not answer /v1/reason in 5s (busy) — typed gap, nothing asserted");
+  assert.equal(good.verdict, "pass");
+  assert.equal((await runCheck(PROBES.equation.check, { a: 2, b: 3, sum: 6 }, { timeoutMs: 5000 })).verdict, "fail");
+});
+
+test("contradiction-free: functional clash, order cycle, and clash with a witnessed claim", async () => {
+  const check = { type: "contradiction-free", functional: ["founded-in"] };
+  assert.equal((await runCheck(check, { claims: [{ subject: "X", relation: "founded-in", value: 1 }, { subject: "X", relation: "founded-in", value: 2 }] })).kind, "contradiction");
+  assert.equal((await runCheck(check, { order: [["a", "b"], ["b", "a"]] })).kind, "contradiction");
+  const ctx = { witnessed: { claims: [{ subject: "X", relation: "founded-in", value: 1779 }] } };
+  assert.equal((await runCheck(check, { claims: [{ subject: "X", relation: "founded-in", value: 1784 }] }, ctx)).verdict, "fail");
+  assert.equal((await runCheck(check, { claims: [{ subject: "X", relation: "founded-in", value: 1779 }] }, ctx)).verdict, "pass");
+});
+
+test("passed on 0 is a gap: no claims, no citations, no constraints are never a pass", async () => {
+  assert.equal((await runCheck({ type: "contradiction-free" }, {})).verdict, "gap");
+  assert.equal((await runCheck({ type: "citation-resolves" }, { citations: [] }, { sources: {} })).verdict, "gap");
+  assert.equal((await runCheck({ type: "constraint", constraints: [] }, { a: 1 })).verdict, "gap");
+});
+
+test("citation-resolves: byte range is UTF-8 bytes, not characters; a paraphrase does not resolve", async () => {
+  const src = "Zürich was founded in 1779.";            // 'ü' is 2 bytes
+  const start = Buffer.from("Zürich was ", "utf8").length;
+  const quote = "founded in 1779";
+  const ctx = { sources: { S1: src } };
+  const c = { type: "citation-resolves" };
+  assert.equal((await runCheck(c, { citations: [{ quote, source: "S1", bytes: [start, start + quote.length] }] }, ctx)).verdict, "pass");
+  assert.equal((await runCheck(c, { citations: [{ quote, source: "S1", bytes: [start - 1, start - 1 + quote.length] }] }, ctx)).verdict, "fail", "off by one byte");
+  assert.equal((await runCheck(c, { citations: [{ quote: "established in 1779", source: "S1" }] }, ctx)).verdict, "fail");
+});
+
+test("custom checks resolve by id, from ctx.fns or the registry; an unknown id is a gap; a throwing fn is a gap", async () => {
+  registerCheck("is-even", (p) => p.n % 2 === 0);
+  assert.equal((await runCheck({ type: "custom", fn: "is-even" }, { n: 4 })).verdict, "pass");
+  assert.equal((await runCheck({ type: "custom", fn: "is-even" }, { n: 3 })).verdict, "fail");
+  assert.equal((await runCheck({ type: "custom", fn: "nope" }, {})).verdict, "gap");
+  assert.equal((await runCheck({ type: "custom", fn: "boom" }, {}, { fns: { boom: () => { throw new Error("x"); } } })).verdict, "gap");
+  const v = await runCheck({ type: "custom", fn: "k" }, {}, { fns: { k: () => ({ ok: false, kind: "contradiction", detail: "d" }) } });
+  assert.equal(v.kind, "contradiction");
+});
+
+test("runAcceptance: accepted only when every check passes; one failure rejects; no checks is unverified; empty output is unresolved", async () => {
+  const checks = [{ type: "schema", schema: { type: "object", required: ["v"] } }, { type: "constraint", constraints: [{ path: "v", op: "eq", value: 7 }] }];
+  assert.equal((await runAcceptance(checks, { v: 7 })).state, "accepted");
+  const bad = await runAcceptance(checks, { v: 8 });
+  assert.equal(bad.state, "rejected"); assert.deepEqual(bad.failures, ["check_failed"]);
+  assert.equal((await runAcceptance([], { v: 7 })).state, "unverified");
+  assert.equal((await runAcceptance(checks, null)).state, "unresolved");
+  assert.equal((await runAcceptance(checks, {})).state, "unresolved");
+});
+
+test("falsifier: a self-reported confidence field changes no verdict", async () => {
+  const checks = [{ type: "constraint", constraints: [{ path: "v", op: "eq", value: 7 }] }];
+  for (const confidence of [0, 0.01, 0.99, 1, "certain"]) {
+    assert.equal((await runAcceptance(checks, { v: 8, confidence })).accepted, false);
+    assert.equal((await runAcceptance(checks, { v: 7, confidence })).accepted, true);
+  }
+});
+
+test("asProposal shapes a remote result as { proposal, route, checksToRun }", () => {
+  const p = asProposal({ proposal: { v: 1 }, route: "remote", checks: [{ type: "schema" }, { type: "custom", fn: "f", id: "mine" }] });
+  assert.deepEqual(Object.keys(p).sort(), ["checksToRun", "proposal", "route"]);
+  assert.deepEqual(p.checksToRun, [{ id: "a1", type: "schema" }, { id: "mine", type: "custom" }]);
+});

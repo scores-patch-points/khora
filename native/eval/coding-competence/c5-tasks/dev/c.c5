@@ -1,0 +1,484 @@
+@@@@ task fibonacci
+#include <stdio.h>
+
+int fibonacci(int n) {
+    if (n < 2) {
+        return n;
+    }
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+int main(void) {
+    for (int i = 0; i <= 10; i++) {
+        if (i > 0) {
+            printf(" ");
+        }
+        printf("%d", fibonacci(i));
+    }
+    printf("\n");
+    return 0;
+}
+@@@@ task gcd
+#include <stdio.h>
+
+int gcd(int a, int b) {
+    if (b == 0) {
+        return a;
+    }
+    return gcd(b, a % b);
+}
+
+int main(void) {
+    int pairs[4][2] = {{48, 18}, {17, 5}, {0, 9}, {100, 75}};
+    for (int i = 0; i < 4; i++) {
+        if (i > 0) {
+            printf(" ");
+        }
+        printf("%d", gcd(pairs[i][0], pairs[i][1]));
+    }
+    printf("\n");
+    return 0;
+}
+@@@@ task binary_search
+#include <stdio.h>
+
+int search_range(const int *items, int target, int low, int high) {
+    if (low > high) {
+        return -1;
+    }
+    int mid = (low + high) / 2;
+    if (items[mid] == target) {
+        return mid;
+    }
+    if (items[mid] < target) {
+        return search_range(items, target, mid + 1, high);
+    }
+    return search_range(items, target, low, mid - 1);
+}
+
+int binary_search(const int *items, int count, int target) {
+    return search_range(items, target, 0, count - 1);
+}
+
+int main(void) {
+    int data[7] = {1, 3, 5, 7, 9, 11, 13};
+    int targets[4] = {7, 1, 13, 4};
+    for (int i = 0; i < 4; i++) {
+        if (i > 0) {
+            printf(" ");
+        }
+        printf("%d", binary_search(data, 7, targets[i]));
+    }
+    printf("\n");
+    return 0;
+}
+@@@@ task quicksort
+#include <stdio.h>
+
+int partition(int *items, int low, int high) {
+    int pivot = items[high];
+    int i = low - 1;
+    for (int j = low; j < high; j++) {
+        if (items[j] <= pivot) {
+            i += 1;
+            int tmp = items[i];
+            items[i] = items[j];
+            items[j] = tmp;
+        }
+    }
+    int tmp = items[i + 1];
+    items[i + 1] = items[high];
+    items[high] = tmp;
+    return i + 1;
+}
+
+void quicksort(int *items, int low, int high) {
+    if (low < high) {
+        int p = partition(items, low, high);
+        quicksort(items, low, p - 1);
+        quicksort(items, p + 1, high);
+    }
+}
+
+int main(void) {
+    int data[8] = {5, 2, 9, 1, 5, 6, 0, 3};
+    quicksort(data, 0, 7);
+    for (int i = 0; i < 8; i++) {
+        if (i > 0) {
+            printf(" ");
+        }
+        printf("%d", data[i]);
+    }
+    printf("\n");
+    return 0;
+}
+@@@@ task merge_sort
+#include <stdio.h>
+
+void merge(int *items, int *scratch, int low, int mid, int high) {
+    int i = low;
+    int j = mid + 1;
+    int k = low;
+    while (i <= mid && j <= high) {
+        if (items[i] <= items[j]) {
+            scratch[k++] = items[i++];
+        } else {
+            scratch[k++] = items[j++];
+        }
+    }
+    while (i <= mid) {
+        scratch[k++] = items[i++];
+    }
+    while (j <= high) {
+        scratch[k++] = items[j++];
+    }
+    for (k = low; k <= high; k++) {
+        items[k] = scratch[k];
+    }
+}
+
+void merge_sort(int *items, int *scratch, int low, int high) {
+    if (low >= high) {
+        return;
+    }
+    int mid = (low + high) / 2;
+    merge_sort(items, scratch, low, mid);
+    merge_sort(items, scratch, mid + 1, high);
+    merge(items, scratch, low, mid, high);
+}
+
+int main(void) {
+    int data[7] = {38, 27, 43, 3, 9, 82, 10};
+    int scratch[7];
+    merge_sort(data, scratch, 0, 6);
+    for (int i = 0; i < 7; i++) {
+        if (i > 0) {
+            printf(" ");
+        }
+        printf("%d", data[i]);
+    }
+    printf("\n");
+    return 0;
+}
+@@@@ task factorial
+#include <stdio.h>
+
+long long factorial(int n) {
+    if (n <= 1) {
+        return 1;
+    }
+    return n * factorial(n - 1);
+}
+
+int main(void) {
+    for (int i = 0; i <= 10; i++) {
+        if (i > 0) {
+            printf(" ");
+        }
+        printf("%lld", factorial(i));
+    }
+    printf("\n");
+    return 0;
+}
+@@@@ task palindrome
+#include <ctype.h>
+#include <stdio.h>
+#include <string.h>
+
+void normalize(const char *text, char *out) {
+    int n = 0;
+    for (const char *p = text; *p != '\0'; p++) {
+        if (isalnum((unsigned char)*p)) {
+            out[n] = (char)tolower((unsigned char)*p);
+            n += 1;
+        }
+    }
+    out[n] = '\0';
+}
+
+void reverse_text(const char *text, char *out) {
+    int len = (int)strlen(text);
+    for (int i = 0; i < len; i++) {
+        out[i] = text[len - 1 - i];
+    }
+    out[len] = '\0';
+}
+
+int is_palindrome(const char *text) {
+    char cleaned[128];
+    char reversed[128];
+    normalize(text, cleaned);
+    reverse_text(cleaned, reversed);
+    return strcmp(cleaned, reversed) == 0;
+}
+
+int main(void) {
+    const char *samples[3] = {"A man, a plan, a canal: Panama", "hello", "Was it a car or a cat I saw?"};
+    for (int i = 0; i < 3; i++) {
+        if (i > 0) {
+            printf(" ");
+        }
+        printf("%s", is_palindrome(samples[i]) ? "true" : "false");
+    }
+    printf("\n");
+    return 0;
+}
+@@@@ task word_count
+#include <stdio.h>
+#include <string.h>
+
+int split_words(const char *text, char words[][16], int max) {
+    int count = 0;
+    int len = 0;
+    for (const char *p = text;; p++) {
+        if (*p == ' ' || *p == '\0') {
+            if (len > 0 && count < max) {
+                words[count][len] = '\0';
+                count += 1;
+            }
+            len = 0;
+            if (*p == '\0') {
+                break;
+            }
+        } else if (len < 15 && count < max) {
+            words[count][len] = *p;
+            len += 1;
+        }
+    }
+    return count;
+}
+
+int count_words(const char *text, char names[][16], int counts[], int max) {
+    char words[32][16];
+    int total = split_words(text, words, 32);
+    int distinct = 0;
+    for (int i = 0; i < total; i++) {
+        int found = -1;
+        for (int j = 0; j < distinct; j++) {
+            if (strcmp(names[j], words[i]) == 0) {
+                found = j;
+                break;
+            }
+        }
+        if (found >= 0) {
+            counts[found] += 1;
+        } else if (distinct < max) {
+            strcpy(names[distinct], words[i]);
+            counts[distinct] = 1;
+            distinct += 1;
+        }
+    }
+    return distinct;
+}
+
+int main(void) {
+    char names[32][16];
+    int counts[32];
+    int n = count_words("the quick brown fox jumps over the lazy dog the end", names, counts, 32);
+    for (int i = 1; i < n; i++) {
+        for (int j = i; j > 0 && strcmp(names[j - 1], names[j]) > 0; j--) {
+            char tmp[16];
+            strcpy(tmp, names[j - 1]);
+            strcpy(names[j - 1], names[j]);
+            strcpy(names[j], tmp);
+            int tc = counts[j - 1];
+            counts[j - 1] = counts[j];
+            counts[j] = tc;
+        }
+    }
+    for (int i = 0; i < n; i++) {
+        if (i > 0) {
+            printf(" ");
+        }
+        printf("%s=%d", names[i], counts[i]);
+    }
+    printf("\n");
+    return 0;
+}
+@@@@ task fizzbuzz
+#include <stdio.h>
+
+int is_divisible(int n, int d) {
+    return n % d == 0;
+}
+
+void fizz_buzz(int n, char *out) {
+    if (is_divisible(n, 15)) {
+        snprintf(out, 16, "FizzBuzz");
+    } else if (is_divisible(n, 3)) {
+        snprintf(out, 16, "Fizz");
+    } else if (is_divisible(n, 5)) {
+        snprintf(out, 16, "Buzz");
+    } else {
+        snprintf(out, 16, "%d", n);
+    }
+}
+
+int main(void) {
+    char buffer[16];
+    for (int i = 1; i <= 15; i++) {
+        fizz_buzz(i, buffer);
+        if (i > 1) {
+            printf(" ");
+        }
+        printf("%s", buffer);
+    }
+    printf("\n");
+    return 0;
+}
+@@@@ task linked_list
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+    int value;
+    struct Node *next;
+} Node;
+
+Node *reverse_list(Node *node, Node *previous) {
+    if (node == NULL) {
+        return previous;
+    }
+    Node *following = node->next;
+    node->next = previous;
+    return reverse_list(following, node);
+}
+
+int to_array(const Node *node, int *out) {
+    int count = 0;
+    while (node != NULL) {
+        out[count] = node->value;
+        count += 1;
+        node = node->next;
+    }
+    return count;
+}
+
+int main(void) {
+    int input[5] = {5, 4, 3, 2, 1};
+    Node *head = NULL;
+    for (int i = 0; i < 5; i++) {
+        Node *created = malloc(sizeof(Node));
+        created->value = input[i];
+        created->next = head;
+        head = created;
+    }
+    int values[16];
+    int count = to_array(reverse_list(head, NULL), values);
+    for (int i = 0; i < count; i++) {
+        if (i > 0) {
+            printf(" ");
+        }
+        printf("%d", values[i]);
+    }
+    printf("\n");
+    return 0;
+}
+@@@@ task stack
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Stack {
+    int items[16];
+    int size;
+} Stack;
+
+void push(Stack *s, int value) {
+    s->items[s->size] = value;
+    s->size += 1;
+}
+
+int is_empty(const Stack *s) {
+    return s->size == 0;
+}
+
+int pop(Stack *s) {
+    if (is_empty(s)) {
+        fprintf(stderr, "pop from empty stack\n");
+        exit(1);
+    }
+    s->size -= 1;
+    return s->items[s->size];
+}
+
+int peek(const Stack *s) {
+    if (is_empty(s)) {
+        fprintf(stderr, "peek at empty stack\n");
+        exit(1);
+    }
+    return s->items[s->size - 1];
+}
+
+int main(void) {
+    Stack stack;
+    stack.size = 0;
+    for (int v = 1; v <= 3; v++) {
+        push(&stack, v);
+    }
+    int a = peek(&stack);
+    int b = pop(&stack);
+    int c = pop(&stack);
+    const char *d = is_empty(&stack) ? "true" : "false";
+    int e = pop(&stack);
+    const char *f = is_empty(&stack) ? "true" : "false";
+    printf("%d %d %d %s %d %s\n", a, b, c, d, e, f);
+    return 0;
+}
+@@@@ task tree_traversal
+#include <stdio.h>
+
+typedef struct TreeNode {
+    int value;
+    struct TreeNode *left;
+    struct TreeNode *right;
+} TreeNode;
+
+void inorder(const TreeNode *node, int *out, int *count) {
+    if (node == NULL) {
+        return;
+    }
+    inorder(node->left, out, count);
+    out[*count] = node->value;
+    *count += 1;
+    inorder(node->right, out, count);
+}
+
+void preorder(const TreeNode *node, int *out, int *count) {
+    if (node == NULL) {
+        return;
+    }
+    out[*count] = node->value;
+    *count += 1;
+    preorder(node->left, out, count);
+    preorder(node->right, out, count);
+}
+
+int main(void) {
+    TreeNode n1 = {1, NULL, NULL};
+    TreeNode n3 = {3, NULL, NULL};
+    TreeNode n5 = {5, NULL, NULL};
+    TreeNode n7 = {7, NULL, NULL};
+    TreeNode n2 = {2, &n1, &n3};
+    TreeNode n6 = {6, &n5, &n7};
+    TreeNode root = {4, &n2, &n6};
+    int visited[16];
+    int count = 0;
+    inorder(&root, visited, &count);
+    for (int i = 0; i < count; i++) {
+        if (i > 0) {
+            printf(" ");
+        }
+        printf("%d", visited[i]);
+    }
+    printf("\n");
+    count = 0;
+    preorder(&root, visited, &count);
+    for (int i = 0; i < count; i++) {
+        if (i > 0) {
+            printf(" ");
+        }
+        printf("%d", visited[i]);
+    }
+    printf("\n");
+    return 0;
+}

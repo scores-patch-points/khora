@@ -1,0 +1,617 @@
+{
+ "script": "verify-physics.mjs",
+ "headerSha256": "7fec9824d8e97cbc22667820bca81a3d537ff457803bd5d9839eeb7047d15072",
+ "note": "verification-only; no reader run",
+ "physics": {
+  "wave1": {
+   "massAdd": {
+    "farN": 1312,
+    "farSlope": 1,
+    "farExact": 0.9992,
+    "nearSlope": 0.9829,
+    "nearExact": 0.837,
+    "mentionN2": {
+     "wholeMean": 4.5134,
+     "partsMean": 9.4611
+    },
+    "mentionN3exact": 0.9135,
+    "informativenessGain": 0.4596
+   },
+   "floorCliff": {
+    "meanS_n1": 0.9077,
+    "meanS_n2": 4.1747,
+    "meanS_n3to4": 1.9939,
+    "ratio_n2_over_n3to4": 2.0937,
+    "medianS_n1": 1,
+    "medianS_n2": 3,
+    "n1": 3966,
+    "n2": 2525
+   },
+   "inertiaRho": {
+    "point": -0.0094,
+    "lo": -0.029,
+    "hi": 0.0091,
+    "n": 10714,
+    "blocks": 1350
+   },
+   "logLogSlope": {
+    "slope": 0.8394,
+    "se": 0.0148,
+    "Q": 64.5233,
+    "p": 0
+   },
+   "conservation": {
+    "median": 0,
+    "mean": -0.2741,
+    "meanBorn": 0.0244,
+    "meanEmptied": 1.1803,
+    "n": 10714
+   },
+   "affect": {
+    "collateral": 0.5388,
+    "ci": {
+     "point": 0.5388,
+     "lo": 0.5327,
+     "hi": 0.5451,
+     "n": 10714,
+     "blocks": 1350
+    },
+    "radius1": 0.9358,
+    "entryShare": 0.0194
+   },
+   "forceLaw": {
+    "alpha": 1.5167138305121124,
+    "alphaCI": [
+     1.3788,
+     1.6853
+    ],
+    "powerWins": "9/9",
+    "shuffledFarOK": "6/9"
+   },
+   "nicknameWithinN": {
+    "irc": {
+     "point": 0.8125,
+     "lo": 0.74,
+     "hi": 0.9048,
+     "n": 1190,
+     "blocks": 150
+    },
+    "ud": [
+     "ud-deu-A 0.475 [0.461, 0.487]",
+     "ud-eng-A 0.563 [0.51, 0.651]",
+     "ud-fas-A 0.483 [0.473, 0.492]",
+     "ud-fra-A 0.495 [0.486, 0.5]",
+     "ud-jpn-A 0.549 [0.46, 0.642]",
+     "ud-spa-A 0.496 [0.488, 0.506]",
+     "ud-tur-A 0.574 [0.531, 0.623]"
+    ],
+    "wp": {
+     "point": 0.5306,
+     "lo": 0.4957,
+     "hi": 0.5913,
+     "n": 1268,
+     "blocks": 150
+    }
+   }
+  },
+  "wave2": {
+   "massAdd": {
+    "farN": 717,
+    "farSlope": 1,
+    "farExact": 1,
+    "nearSlope": 0.9717,
+    "nearExact": 0.8422,
+    "mentionN2": {
+     "wholeMean": 4.1757,
+     "partsMean": 8.8168
+    },
+    "mentionN3exact": 0.9337,
+    "informativenessGain": 0.531
+   },
+   "floorCliff": {
+    "meanS_n1": 0.9765,
+    "meanS_n2": 3.6838,
+    "meanS_n3to4": 1.7473,
+    "ratio_n2_over_n3to4": 2.1083,
+    "medianS_n1": 1,
+    "medianS_n2": 3,
+    "n1": 2130,
+    "n2": 1382
+   },
+   "inertiaRho": {
+    "point": -0.0253,
+    "lo": -0.0489,
+    "hi": 0.0014,
+    "n": 5815,
+    "blocks": 744
+   },
+   "logLogSlope": {
+    "slope": 0.7499,
+    "se": 0.0209,
+    "Q": 26.6994,
+    "p": 0.00038
+   },
+   "conservation": {
+    "median": 0,
+    "mean": -0.2257,
+    "meanBorn": 0.0285,
+    "meanEmptied": 0.9715,
+    "n": 5815
+   },
+   "affect": {
+    "collateral": 0.5261,
+    "ci": {
+     "point": 0.5261,
+     "lo": 0.5162,
+     "hi": 0.5358,
+     "n": 5815,
+     "blocks": 744
+    },
+    "radius1": 0.9201,
+    "entryShare": 0.0362
+   },
+   "forceLaw": {
+    "alpha": 1.4496293228850192,
+    "alphaCI": [
+     1.319,
+     1.9198
+    ],
+    "powerWins": "7/8",
+    "shuffledFarOK": "3/7"
+   },
+   "nicknameWithinN": {
+    "irc": {
+     "point": 0.8058,
+     "lo": 0.7527,
+     "hi": 0.8649,
+     "n": 1260,
+     "blocks": 150
+    },
+    "ud": [
+     "ud-deu-B 0.495 [0.483, 0.5]",
+     "ud-eng-B 0.497 [0.486, 0.5]",
+     "ud-fas-B 0.477 [0.464, 0.489]"
+    ],
+    "wp": {
+     "point": 0.5643,
+     "lo": 0.4907,
+     "hi": 0.6707,
+     "n": 1246,
+     "blocks": 150
+    }
+   }
+  }
+ },
+ "gravity": {
+  "PG1": {
+   "n": 33,
+   "k": 24,
+   "share": 0.7273,
+   "rule": ">= 6 of 8 bins above the band, in >= 90% of powered corpora",
+   "pass": false,
+   "falsified": false
+  },
+  "PG2": {
+   "fitted": 31,
+   "powerWins": 20,
+   "share": 0.6452,
+   "medianAlpha": 1.14,
+   "alphaQuartiles": [
+    0.9,
+    1.42
+   ],
+   "pass": false,
+   "falsified": false,
+   "alphaInPredictedRange": false
+  },
+  "PG3": {
+   "languages": 13,
+   "spearman": -0.1107,
+   "medianAbsDiff": 0.22,
+   "pass": false,
+   "allLanguagesRegardlessOfPower": {
+    "languages": 21,
+    "spearman": 0.1253
+   }
+  },
+  "informalVsFormal": {
+   "irc": {
+    "alpha": 0.8,
+    "CI": [
+     0.78,
+     0.84
+    ],
+    "dAIC": 345.2,
+    "mentions": 203435,
+    "underpowered": false,
+    "aboveBand": 8
+   },
+   "sms-en": {
+    "alpha": 0.66,
+    "CI": [
+     0.62,
+     0.7
+    ],
+    "dAIC": 410.65,
+    "mentions": 25143,
+    "underpowered": false,
+    "aboveBand": 8
+   },
+   "cosem": {
+    "alpha": 0.8200000000000001,
+    "CI": [
+     0.74,
+     0.98
+    ],
+    "dAIC": 62.35,
+    "mentions": 43088,
+    "underpowered": false,
+    "aboveBand": 8
+   },
+   "wp": {
+    "alpha": 1.12,
+    "CI": [
+     0.36,
+     1.18
+    ],
+    "dAIC": 366.75,
+    "mentions": 238712,
+    "underpowered": false,
+    "aboveBand": 8
+   },
+   "eng:A": {
+    "alpha": 1.42,
+    "CI": [
+     1.36,
+     1.48
+    ],
+    "dAIC": -5.31,
+    "mentions": 28953,
+    "underpowered": false,
+    "aboveBand": 4
+   },
+   "eng:B": {
+    "alpha": 0.86,
+    "CI": [
+     0.78,
+     0.94
+    ],
+    "dAIC": 251.02,
+    "mentions": 26218,
+    "underpowered": false,
+    "aboveBand": 8
+   }
+  }
+ },
+ "novelFragility": {
+  "cliff": {
+   "cliff_m2_minus_m3": 1.7793,
+   "ci": [
+    1.3999,
+    2.173
+   ],
+   "n1minus": 0.4344,
+   "pass": true
+  },
+  "slopeAboveFloor": {
+   "slopePerDoubling": 0.093,
+   "ci": [
+    -0.0125,
+    0.2385
+   ],
+   "flat": true
+  },
+  "pooledCurveD1": [
+   1.422,
+   2.767,
+   0.988,
+   1.188,
+   0.956,
+   1.151,
+   1.029,
+   1.386
+  ],
+  "curveBins": [
+   "1-1",
+   "2-2",
+   "3-3",
+   "4-5",
+   "6-9",
+   "10-17",
+   "18-33",
+   "34-1000000000"
+  ],
+  "mechanism": {
+   "m1": {
+    "n": 360,
+    "meanD1": 1.4324,
+    "shareNull": 0.2111,
+    "shareFigure": 0.0083,
+    "shareBeing": 0,
+    "meanDirect": 0.79,
+    "meanCollateral": 3.04
+   },
+   "m2": {
+    "n": 360,
+    "meanD1": 2.7894,
+    "shareNull": 0.05,
+    "shareFigure": 0.9722,
+    "shareBeing": 0.0083,
+    "meanDirect": 0.78,
+    "meanCollateral": 8.72
+   },
+   "m3+": {
+    "n": 1805,
+    "meanD1": 1.0079,
+    "shareNull": 0.4432,
+    "shareFigure": 0.9956,
+    "shareBeing": 0.01,
+    "meanDirect": 0.66,
+    "meanCollateral": 2
+   }
+  },
+  "determinism": {
+   "same": 40,
+   "total": 40
+  },
+  "sham": {
+   "n": 100,
+   "nonzero": 0
+  }
+ },
+ "checks": [
+  {
+   "id": "P.w1.farN",
+   "reported": 1312,
+   "recomputed": 1312,
+   "tol": 0,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "P.w1.farExact",
+   "reported": 0.9992,
+   "recomputed": 0.9992,
+   "tol": 0.0005,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "P.w1.nearSlope",
+   "reported": 0.9829,
+   "recomputed": 0.9829,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "P.w1.cliff",
+   "reported": 2.094,
+   "recomputed": 2.0937,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "P.w1.slopeLogLog",
+   "reported": 0.839,
+   "recomputed": 0.8394,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "P.w1.inertiaRho",
+   "reported": -0.0094,
+   "recomputed": -0.0094,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "P.w1.emptied",
+   "reported": 1.18,
+   "recomputed": 1.1803,
+   "tol": 0.005,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "P.w1.born",
+   "reported": 0.0244,
+   "recomputed": 0.0244,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "P.w1.collateral",
+   "reported": 0.539,
+   "recomputed": 0.5388,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "P.w1.radius1",
+   "reported": 0.936,
+   "recomputed": 0.9358,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "P.w1.alpha",
+   "reported": 1.517,
+   "recomputed": 1.5167,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "P.w1.powerWins",
+   "reported": 9,
+   "recomputed": 9,
+   "tol": 0,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "P.w1.ircNick",
+   "reported": 0.8125,
+   "recomputed": 0.8125,
+   "tol": 0.0005,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "P.w2.farN",
+   "reported": 717,
+   "recomputed": 717,
+   "tol": 0,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "P.w2.farExact",
+   "reported": 1,
+   "recomputed": 1,
+   "tol": 0.0005,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "P.w2.nearSlope",
+   "reported": 0.9717,
+   "recomputed": 0.9717,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "P.w2.cliff",
+   "reported": 2.108,
+   "recomputed": 2.1083,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "P.w2.slopeLogLog",
+   "reported": 0.75,
+   "recomputed": 0.7499,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "P.w2.inertiaRho",
+   "reported": -0.0253,
+   "recomputed": -0.0253,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "P.w2.emptied",
+   "reported": 0.9715,
+   "recomputed": 0.9715,
+   "tol": 0.005,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "P.w2.born",
+   "reported": 0.0285,
+   "recomputed": 0.0285,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "P.w2.collateral",
+   "reported": 0.526,
+   "recomputed": 0.5261,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "P.w2.radius1",
+   "reported": 0.92,
+   "recomputed": 0.9201,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "P.w2.alpha",
+   "reported": 1.45,
+   "recomputed": 1.4496,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "P.w2.powerWins",
+   "reported": 7,
+   "recomputed": 7,
+   "tol": 0,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "P.w2.ircNick",
+   "reported": 0.8058,
+   "recomputed": 0.8058,
+   "tol": 0.0005,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "P.PG1.k",
+   "reported": 24,
+   "recomputed": 24,
+   "tol": 0,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "P.PG3.rho",
+   "reported": -0.11,
+   "recomputed": -0.1107,
+   "tol": 0.005,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "P.PG2.medianAlpha",
+   "reported": 1.14,
+   "recomputed": 1.14,
+   "tol": 0.005,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "N.cliff",
+   "reported": 1.779,
+   "recomputed": 1.7793,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "id": "N.slope",
+   "reported": 0.093,
+   "recomputed": 0.093,
+   "tol": 0.002,
+   "ok": true,
+   "note": ""
+  }
+ ],
+ "summary": {
+  "n": 31,
+  "reproduced": 31,
+  "notReproduced": []
+ }
+}

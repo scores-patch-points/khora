@@ -1,0 +1,35 @@
+{
+ "dev": {
+  "rows": 1729,
+  "observedSD": 0.5507,
+  "kinds": 24,
+  "slopeRange": [
+   -2.148,
+   0.045
+  ],
+  "nullSD_mean": 0.4033,
+  "nullSD_q95": 0.4707
+ },
+ "conf": {
+  "rows": 1728,
+  "observedSD": 0.5833,
+  "kinds": 24,
+  "slopeRange": [
+   -2.3053,
+   0.2484
+  ],
+  "nullSD_mean": 0.4213,
+  "nullSD_q95": 0.498
+ },
+ "both": {
+  "rows": 3457,
+  "observedSD": 0.5339,
+  "kinds": 24,
+  "slopeRange": [
+   -2.1912,
+   0.0265
+  ],
+  "nullSD_mean": 0.3889,
+  "nullSD_q95": 0.4408
+ }
+}

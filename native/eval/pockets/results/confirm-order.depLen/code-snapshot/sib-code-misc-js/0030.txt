@@ -1,0 +1,258 @@
+// bridge-gate.test.mjs — admission to the bridge: Host check (DNS rebinding), per-boot token, origin wall,
+// escaped link page, body caps, 400s not 500s, caps on every unbounded table — and the bridge as an embeddable handler.
+import test from "node:test";
+import assert from "node:assert/strict";
+import http from "node:http";
+import fs from "node:fs";
+import path from "node:path";
+import { serve, startBridge, post, raw, sleep, mkdir } from "./bridge-testkit.mjs";
+import { createBridge } from "./bridge-server.mjs";
+
+const distWith = (files) => { const d = mkdir(); const dist = path.join(d, "dist"); fs.mkdirSync(dist); for (const [k, v] of Object.entries(files)) fs.writeFileSync(path.join(dist, k), v); return { d, dist }; };
+
+/* 9. Host check */
+
+test("host: a Host that is not loopback-with-this-port is refused (DNS rebinding), loopback names pass", async (t) => {
+  const b = await startBridge();
+  t.after(b.close);
+  const get = (host) => raw(b.base, { path: "/api/version", headers: { host } });
+  assert.equal((await get("evil.example")).status, 403);
+  assert.equal((await get(`evil.example:${b.port}`)).status, 403);
+  assert.equal((await get(`127.0.0.1:${b.port + 1}`)).status, 403, "wrong port");
+  assert.equal((await get("127.0.0.1")).status, 403, "no port");
+  assert.equal((await get(`127.0.0.1:${b.port}`)).status, 200);
+  assert.equal((await get(`localhost:${b.port}`)).status, 200);
+  assert.equal((await get(`[::1]:${b.port}`)).status, 200);
+  const rebind = await raw(b.base, { path: "/api/audit", headers: { host: `attacker.test:${b.port}` } });
+  assert.equal(rebind.status, 403, "the audit (prompts) is not readable through a rebound name");
+});
+
+/* 10. token */
+
+test("token: written 0600 to the injectable file, and bridge-only routes refuse a caller without it", async (t) => {
+  const d = mkdir();
+  const tokenFile = path.join(d, "bridge.token");
+  const b = await startBridge({ tokenFile });
+  t.after(b.close);
+  assert.equal(fs.readFileSync(tokenFile, "utf8").trim(), b.bridge.token);
+  assert.equal(fs.statSync(tokenFile).mode & 0o777, 0o600);
+  assert.ok(b.bridge.token.length >= 32);
+  const denied = [
+    ["POST", "/bridge/state", { workers: [] }], ["POST", "/bridge/reply", []], ["GET", "/bridge/events"], ["GET", "/bridge/upstream/tags"],
+    ["POST", "/link/probe", { url: "x" }], ["POST", "/link/host", { url: "x" }], ["POST", "/link/remove", { url: "x" }], ["GET", "/link/hosts"],
+    ["POST", "/api/code", { prompt: "x" }], ["GET", "/api/providers/keys"], ["POST", "/api/providers/keys", { provider: "groq", key: "k" }], ["POST", "/api/providers/refresh", {}], ["POST", "/api/providers/check", { provider: "groq" }],
+    ["POST", "/api/dispatch/observe", { model: "m", ok: true }],
+  ];
+  for (const [method, p, body] of denied) {
+    const r = await fetch(b.base + p, { method, headers: { "content-type": "application/json" }, body: method === "POST" ? JSON.stringify(body) : undefined });
+    assert.equal(r.status, 401, `${method} ${p} without the token`);
+  }
+  const allowed = await post(b.base, "/bridge/state", { workers: [] }, b.hdr);
+  assert.equal(allowed.status, 200);
+  assert.equal((await post(b.base, "/bridge/state", { workers: [] }, { "x-heimdall-token": "wrong" })).status, 401);
+  // open on purpose: the Ollama/OpenAI/Anthropic doors, accounting, and the hello probe khora's client uses
+  for (const p of ["/api/tags", "/api/version", "/status", "/api/frontier", "/api/ledger", "/bridge/hello"]) assert.equal((await fetch(b.base + p)).status, 200, p);
+});
+
+test("token: the bridge's own page hands the cookie; the cookie alone is enough from the own origin, never for a foreign Origin", async (t) => {
+  const { dist } = distWith({ "index.html": "<!doctype html><title>x</title>" });
+  const b = await startBridge({ dist });
+  t.after(b.close);
+  const page = await fetch(b.base + "/");
+  const sc = page.headers.get("set-cookie");
+  assert.match(sc, /heimdall_token=/);
+  assert.match(sc, /HttpOnly/i);
+  assert.match(sc, /SameSite=Strict/i);
+  const cookie = sc.split(";")[0];
+  assert.equal((await post(b.base, "/bridge/state", { workers: [] }, { cookie })).status, 200);
+  assert.equal((await post(b.base, "/bridge/state", { workers: [] }, { cookie, origin: "https://evil.example" })).status, 403);
+  assert.equal((await fetch(b.base + "/api/tags")).headers.get("set-cookie"), null, "only the page sets it");
+});
+
+test("token: a second /bridge/events without the token cannot displace the live controller", async (t) => {
+  const b = await startBridge();
+  t.after(b.close);
+  const u = new URL(b.base);
+  const events = (headers) => new Promise((resolve) => { const req = http.get({ host: u.hostname, port: u.port, path: "/bridge/events", headers }, (res) => resolve({ req, res })); });
+  const first = await events(b.hdr);
+  let ended = false; first.res.on("end", () => { ended = true; }); first.res.on("close", () => { ended = true; });
+  const intruder = await events({});
+  assert.equal(intruder.res.statusCode, 401);
+  await sleep(100);
+  assert.equal(ended, false, "the first controller is still connected");
+  first.req.destroy(); intruder.req.destroy();
+});
+
+test("token: /api/code passes on an allowlisted Origin without a token, but not on a bare call or a foreign origin", async (t) => {
+  const pages = "https://scores-patch-points.github.io";
+  const b = await startBridge({ allowedOrigins: [pages] });
+  t.after(b.close);
+  const bare = await post(b.base, "/api/code", { prompt: "x" });
+  assert.equal(bare.status, 401);
+  const viaOrigin = await post(b.base, "/api/code", { prompt: "x" }, { origin: pages });
+  assert.equal(viaOrigin.status, 501, "passed the gate (no coding machine is attached in this test)");
+  assert.equal(viaOrigin.headers.get("access-control-allow-credentials"), "true", "an allowlisted page may send the cookie");
+  assert.equal((await post(b.base, "/api/code", { prompt: "x" }, { origin: "https://evil.example" })).status, 403);
+  assert.equal((await post(b.base, "/api/providers/keys", {}, { origin: pages })).status, 401, "only /api/code has the origin exception");
+});
+
+test("code: a caller-supplied toolCapable is ignored — a small local model never gets tools", async (t) => {
+  const weave = await serve((req, res) => { res.writeHead(200, { "content-type": "application/json" }); res.end(JSON.stringify({ artifact: { value: "def f(): pass" }, evidence: { outcomes: [] } })); });
+  const oc = await serve((req, res) => { res.writeHead(200, { "content-type": "application/json" }); res.end("{}"); });
+  t.after(weave.close); t.after(oc.close);
+  const b = await startBridge({ weaveUrl: weave.base + "/api/weave", opencodeUrl: oc.base });
+  t.after(b.close);
+  const r = await post(b.base, "/api/code", { prompt: "write f", model: "qwen2.5-coder:1.5b", toolCapable: true }, b.hdr);
+  const j = await r.json();
+  assert.equal(j.lane, "penelope-code-agent");
+  assert.equal(oc.hits.length, 0, "opencode (the machine door) was not touched");
+  assert.equal(weave.hits.length, 1);
+});
+
+/* 11. origin wall */
+
+test("origin: the bridge's own origin and the explicit allowlist pass; another loopback port does not", async (t) => {
+  const pages = "https://scores-patch-points.github.io";
+  const b = await startBridge({ allowedOrigins: [pages] });
+  t.after(b.close);
+  const o = (origin) => fetch(b.base + "/api/tags", { headers: { origin } });
+  assert.equal((await o(`http://localhost:${b.port}`)).status, 200);
+  assert.equal((await o(`http://127.0.0.1:${b.port}`)).status, 200);
+  const ok = await o(pages);
+  assert.equal(ok.status, 200);
+  assert.equal(ok.headers.get("access-control-allow-origin"), pages);
+  assert.equal((await o("http://localhost:9999")).status, 403, "any-loopback-port is no longer allowed");
+  assert.equal((await o("http://127.0.0.1:3000")).status, 403);
+  assert.equal((await o("https://evil.example")).status, 403);
+});
+
+/* 12. link page, validation, caps */
+
+test("links: the link page escapes stored names/urls, GET /link/hosts and /status redact keys, and /link/host validates input", async (t) => {
+  const native = await serve((req, res) => { res.writeHead(200, { "content-type": "application/json" }); res.end(JSON.stringify({ models: [{ name: "gemma2:2b" }] })); });
+  t.after(native.close);
+  const b = await startBridge();
+  t.after(b.close);
+  const evil = `<img src=x onerror=alert(1)>"'`;
+  const add = await post(b.base, "/link/host", { url: native.base, name: evil, tag: "gemma2:2b", key: "SECRET-KEY" }, b.hdr);
+  assert.equal(add.status, 200);
+  const html = await (await fetch(b.base + "/link")).text();
+  assert.ok(!html.includes("<img src=x onerror"), "no raw markup from a stored name");
+  assert.ok(html.includes("&lt;img"), "it is shown escaped");
+  const hosts = await (await fetch(b.base + "/link/hosts", { headers: b.hdr })).text();
+  assert.ok(!hosts.includes("SECRET-KEY"));
+  assert.ok(!(await (await fetch(b.base + "/status")).text()).includes("SECRET-KEY"), "/status no longer leaks native-host keys");
+  assert.match(html, /textContent|createTextNode/, "the page's own script builds rows without innerHTML concatenation");
+  assert.equal((await post(b.base, "/link/host", { url: "javascript:alert(1)" }, b.hdr)).status, 400);
+  assert.equal((await post(b.base, "/link/host", { url: native.base, name: { a: 1 } }, b.hdr)).status, 400);
+  assert.equal((await post(b.base, "/link/host", { url: native.base, name: "x".repeat(300) }, b.hdr)).status, 400);
+  assert.equal((await post(b.base, "/link/host", { url: "http://169.254.169.254/" }, b.hdr)).status, 400, "cloud metadata address");
+});
+
+test("body cap: an oversized body is 413 and is never buffered whole", async (t) => {
+  const b = await startBridge({ maxBodyBytes: 1024 });
+  t.after(b.close);
+  const r = await post(b.base, "/api/chat", { model: "m", messages: [{ role: "user", content: "x".repeat(5000) }] });
+  assert.equal(r.status, 413);
+  assert.equal((await post(b.base, "/api/dispatch/plan", { taskClass: "x" })).status, 200, "small bodies are fine");
+});
+
+test("json: malformed JSON is 400, never 500, on every JSON route", async (t) => {
+  const b = await startBridge();
+  t.after(b.close);
+  const routes = ["/api/dispatch/plan", "/api/dispatch/observe", "/bridge/state", "/bridge/reply", "/link/probe", "/link/host", "/link/remove", "/api/code", "/api/weave", "/api/read", "/api/reason", "/api/agent", "/api/job", "/api/providers/keys", "/api/providers/check", "/api/chat", "/api/generate", "/v1/chat/completions", "/v1/messages"];
+  for (const p of routes) {
+    const r = await post(b.base, p, "{not json", b.hdr);
+    assert.equal(r.status, 400, `${p} answered ${r.status}`);
+  }
+});
+
+test("static: a malformed %-escape is 400, and a sibling directory sharing dist's prefix is not reachable", async (t) => {
+  const { d, dist } = distWith({ "index.html": "<!doctype html>" });
+  fs.mkdirSync(path.join(d, "dist-secret")); fs.writeFileSync(path.join(d, "dist-secret", "s.txt"), "TOP-SECRET");
+  const b = await startBridge({ dist });
+  t.after(b.close);
+  assert.equal((await raw(b.base, { path: "/%E0%A4%A" })).status, 400);
+  const esc = await raw(b.base, { path: "/..%2Fdist-secret%2Fs.txt" });
+  assert.equal(esc.status, 403);
+  assert.ok(!esc.text.includes("TOP-SECRET"));
+});
+
+test("caps: controller tabs are bounded (the oldest is dropped)", async (t) => {
+  const b = await startBridge({ maxTabs: 2 });
+  t.after(b.close);
+  const u = new URL(b.base);
+  const open = () => new Promise((resolve) => { const req = http.get({ host: u.hostname, port: u.port, path: "/bridge/events", headers: b.hdr }, (res) => { const o = { req, res, ended: false }; res.resume(); res.on("close", () => { o.ended = true; }); res.on("end", () => { o.ended = true; }); resolve(o); }); });
+  const [a, c, d] = [await open(), await open(), await open()];
+  await sleep(150);
+  assert.equal(a.ended, true, "the oldest was dropped");
+  assert.equal(c.ended, false); assert.equal(d.ended, false);
+  c.req.destroy(); d.req.destroy();
+});
+
+test("caps: concurrent fleet jobs are bounded — the excess steps down to the floor at once", async (t) => {
+  const up = await serve((req, res) => { res.writeHead(200, { "content-type": "application/x-ndjson" }); res.end(JSON.stringify({ message: { content: "floor" }, done: true }) + "\n"); });
+  t.after(up.close);
+  const b = await startBridge({ upstream: up.base, maxJobs: 1 });
+  t.after(b.close);
+  const u = new URL(b.base);
+  const tab = await new Promise((resolve) => { const req = http.get({ host: u.hostname, port: u.port, path: "/bridge/events", headers: b.hdr }, (res) => { res.on("data", () => {}); resolve(req); }); });
+  t.after(() => tab.destroy());
+  await post(b.base, "/bridge/state", { workers: [{ ready: true, model: "gemma-2-2b-it-q4f16_1-MLC" }] }, b.hdr);
+  const body = { model: "gemma2:2b", stream: false, messages: [{ role: "user", content: "hi" }] };
+  const first = post(b.base, "/api/chat", body); // occupies the one slot; the tab never answers
+  await sleep(150);
+  const second = await post(b.base, "/api/chat", body);
+  assert.match(await second.text(), /floor/);
+  first.catch(() => {});
+});
+
+test("caps: remembered code artifacts are bounded (oldest session forgotten)", async (t) => {
+  const priors = [];
+  const weave = await serve((req, res, body) => { priors.push(JSON.parse(body).context?.prior ?? null); res.writeHead(200, { "content-type": "application/json" }); res.end(JSON.stringify({ artifact: { value: "code" }, evidence: { outcomes: [] } })); });
+  t.after(weave.close);
+  const b = await startBridge({ weaveUrl: weave.base + "/api/weave", opencodeUrl: "http://127.0.0.1:1", maxCodeArtifacts: 2 });
+  t.after(b.close);
+  for (const s of ["ses_a", "ses_b", "ses_c"]) await post(b.base, "/api/code", { prompt: "p", sessionId: s, model: "qwen2.5-coder:1.5b" }, b.hdr);
+  priors.length = 0;
+  await post(b.base, "/api/code", { prompt: "again", sessionId: "ses_c", model: "qwen2.5-coder:1.5b" }, b.hdr);
+  await post(b.base, "/api/code", { prompt: "again", sessionId: "ses_a", model: "qwen2.5-coder:1.5b" }, b.hdr);
+  assert.ok(priors[0], "a recent session still iterates");
+  assert.equal(priors[1], null, "the oldest was forgotten");
+});
+
+test("caps: the competence table is bounded; updating an existing cell still works", async (t) => {
+  const b = await startBridge({ maxCompetenceCells: 2 });
+  t.after(b.close);
+  const obs = (model) => post(b.base, "/api/dispatch/observe", { model, ok: true, taskClass: "code.edit", ctxTokens: 10 }, b.hdr);
+  assert.equal((await obs("m1")).status, 200);
+  assert.equal((await obs("m2")).status, 200);
+  assert.equal((await obs("m3")).status, 429);
+  assert.equal((await obs("m1")).status, 200);
+});
+
+/* embeddable */
+
+test("embed: createBridge exposes a mountable handler + route table; listen() is optional; the Host check follows the host server's own port", async (t) => {
+  const dir = mkdir();
+  const bridge = createBridge({ prefix: "/heimdall", dist: null, upstream: "http://127.0.0.1:1", autoOpen: false, tokenFile: null, linksFile: path.join(dir, "h.json"), stateFile: path.join(dir, "s.json"), routeStatsFile: null, auditFile: path.join(dir, "a.ndjson"), competenceFile: path.join(dir, "c.json"), listLocalModels: () => [] });
+  assert.equal(typeof bridge.handler, "function");
+  assert.ok(Array.isArray(bridge.routes) && bridge.routes.includes("POST /api/chat") && bridge.routes.includes("GET /bridge/hello"));
+  const host = http.createServer((req, res) => { if (req.url.startsWith("/heimdall/")) return bridge.handler(req, res); res.writeHead(200); res.end("host-app"); });
+  await new Promise((r) => host.listen(0, "127.0.0.1", r));
+  t.after(() => { host.close(); return bridge.close(); });
+  const base = `http://127.0.0.1:${host.address().port}`;
+  assert.equal(await (await fetch(base + "/other")).text(), "host-app", "the host server's own routes are untouched");
+  const v = await fetch(base + "/heimdall/api/version");
+  assert.equal(v.status, 200);
+  assert.equal((await raw(base, { path: "/heimdall/api/version", headers: { host: "evil.example" } })).status, 403);
+  assert.equal((await post(base, "/heimdall/bridge/state", { workers: [] })).status, 401);
+  assert.equal((await post(base, "/heimdall/bridge/state", { workers: [] }, { "x-heimdall-token": bridge.token })).status, 200);
+});
+
+test("embed: the module has no process.exit, no console output and no pidfile/lock of its own", () => {
+  const src = fs.readFileSync(new URL("./bridge-server.mjs", import.meta.url), "utf8").split("\n").filter((l) => !/^\s*\/\//.test(l)).join("\n");
+  assert.ok(!/process\.exit\(/.test(src));
+  assert.ok(!/console\.(log|error|warn|info)\(/.test(src));
+  assert.ok(!/bridge\.pid|PIDFILE|acquireLock/.test(src));
+});

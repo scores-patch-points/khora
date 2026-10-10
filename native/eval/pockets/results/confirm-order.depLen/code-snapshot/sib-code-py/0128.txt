@@ -1,0 +1,319 @@
+"""Text extraction for legislative documents.
+
+Strategy per file type:
+  - PDF: pull the embedded text layer with PyMuPDF first; any page that yields
+    under a threshold of text gets OCR'd (tesseract) at a rendered resolution.
+  - DOCX/DOC: python-docx if available, else strings fallback.
+  - HTML/HTM: strip tags via a small regex/HTMLParser.
+  - TXT/CSV: read as-is.
+
+Everything returns plain normalized text so the downstream eoreader7 pass and
+the classifier see one shape regardless of source.
+"""
+
+from __future__ import annotations
+
+import io
+import re
+import subprocess
+import sys
+from pathlib import Path
+
+try:
+    import fitz  # PyMuPDF
+except ImportError:  # pragma: no cover
+    fitz = None
+
+try:
+    from PIL import Image
+except ImportError:
+    Image = None
+
+try:
+    import pytesseract
+except ImportError:
+    pytesseract = None
+
+# Below this many characters a page is treated as scanned / image-only.
+MIN_PAGE_TEXT_CHARS = 60
+# Render scans at this DPI for OCR. 200 = ~2.2x fewer pixels than 300 for the
+# bulk; the FRONT of the document (resolution + certification forms) is OCR'd
+# at high DPI because that is where the dispositive evidence (a "No" checkbox,
+# an "MCL 13.08.080" citation) sits — a 200-DPI read misses checkbox forms.
+OCR_DPI = 200
+OCR_DPI_HIGH = 300
+# first N pages of a document get the high-DPI OCR (resolution + certification)
+FRONT_OCR_PAGES = 12
+# Over this many chars a page is clearly image-only and worth OCR at all —
+# below it, the page is effectively blank (headers, signature stubs).
+OCR_MIN_CHARS = 0
+OCR_TESSERACT = "tesseract"
+# Cache OCR results keyed by a page-content hash so re-scans never re-OCR.
+OCR_CACHE_DIR = None  # set via set_ocr_cache(dir)
+
+
+def set_ocr_cache(directory):
+    global OCR_CACHE_DIR
+    OCR_CACHE_DIR = Path(directory)
+
+
+def _ocr_cache_path(page_hash: str) -> Path:
+    return Path(OCR_CACHE_DIR) / f"{page_hash}.txt"
+
+
+def _page_hash(page) -> str:
+    import hashlib
+    pix = page.get_pixmap(matrix=fitz.Matrix(1, 1), alpha=False)
+    return hashlib.sha256(pix.tobytes("png")).hexdigest()[:24]
+
+
+class ExtractionError(RuntimeError):
+    pass
+
+
+def _ocr_image(img: Image.Image) -> str:
+    if pytesseract is None:
+        raise ExtractionError("pytesseract not installed; cannot OCR image")
+    return pytesseract.image_to_string(img)
+
+
+def _ocr_image_cli(png_path: Path) -> str:
+    """Tesseract via CLI, used when the pytesseract shim is unavailable."""
+    out = subprocess.run(
+        [OCR_TESSERACT, str(png_path), "stdout", "--psm", "6"],
+        capture_output=True,
+        text=True,
+    )
+    if out.returncode != 0:
+        raise ExtractionError(f"tesseract failed: {out.stderr[:300]}")
+    return out.stdout
+
+
+def _render_page_bytes(page) -> tuple[int, bytes, str]:
+    """Render a page to PNG bytes in the PARENT (fitz.Page cannot cross a
+    process boundary — pickling it fails). Returns (dpi, png_bytes, cache_key)."""
+    dpi = OCR_DPI_HIGH if page.number < FRONT_OCR_PAGES else OCR_DPI
+    pix = page.get_pixmap(matrix=fitz.Matrix(dpi / 72.0, dpi / 72.0), alpha=False)
+    png = pix.tobytes("png")
+    key = None
+    if OCR_CACHE_DIR:
+        import hashlib
+
+        thumb = page.get_pixmap(matrix=fitz.Matrix(1, 1), alpha=False)
+        h = hashlib.sha256(thumb.tobytes("png")).hexdigest()[:24]
+        key = f"{dpi}_{h}"
+    return dpi, png, key
+
+
+def _ocr_bytes(png_bytes: bytes) -> str:
+    if pytesseract is None:
+        raise ExtractionError("pytesseract not installed; cannot OCR image")
+    return pytesseract.image_to_string(Image.open(io.BytesIO(png_bytes)))
+
+
+def _ocr_bytes_cached(png_bytes: bytes, key: str) -> str:
+    if key and OCR_CACHE_DIR:
+        cached = _ocr_cache_path(key)
+        if cached.exists():
+            return cached.read_text()
+    text = _ocr_bytes(png_bytes)
+    if key and OCR_CACHE_DIR:
+        try:
+            _ocr_cache_path(key).write_text(text)
+        except Exception:
+            pass
+    return text
+
+
+def _ocr_launch(png_bytes: bytes) -> tuple:
+    """Write a page's PNG to a temp file and start `tesseract` on it,
+    non-blocking. Returns (Popen, tmp_path) to be waited on later.
+
+    OMP_THREAD_LIMIT=1 is load-bearing, not cosmetic: tesseract's own
+    internal OpenMP threading hangs — confirmed at the plain shell level,
+    no Python involved — the instant a second tesseract process runs
+    concurrently on this box. Capping each instance to one thread internally
+    is tesseract's own documented workaround; parallelism instead comes from
+    running many single-threaded tesseract processes side by side."""
+    import os
+    import tempfile
+
+    fd, tmp_path = tempfile.mkstemp(suffix=".png")
+    with os.fdopen(fd, "wb") as f:
+        f.write(png_bytes)
+    env = dict(os.environ, OMP_THREAD_LIMIT="1", OMP_NUM_THREADS="1")
+    proc = subprocess.Popen(
+        [OCR_TESSERACT, tmp_path, "stdout", "--psm", "6"],
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, env=env,
+    )
+    return proc, tmp_path
+
+
+def extract_pdf(data: bytes, *, ocr: bool = True, workers: int | None = None) -> str:
+    """Extract text from a PDF: text layer first, OCR only the genuinely
+    scanned pages, each as its own tesseract subprocess launched from a
+    single thread (see below for why), results cached by page hash + DPI.
+    Returns page-separated text. `workers` is accepted for API compatibility
+    but unused — concurrency here comes from the OS scheduling the already-
+    launched subprocesses, not from a worker pool."""
+    if fitz is None:
+        raise ExtractionError("PyMuPDF (fitz) not installed")
+    doc = fitz.open(stream=data, filetype="pdf")
+    pages_out: list[str] = [""] * len(doc)
+    scanned: list[tuple[int, bytes, str]] = []
+    for i, page in enumerate(doc):
+        txt = page.get_text("text") or ""
+        if len(txt.strip()) < MIN_PAGE_TEXT_CHARS and ocr:
+            scanned.append((i, *_render_page_bytes(page)[1:]))
+        pages_out[i] = txt
+    doc.close()
+    if scanned:
+        import os
+
+        # No Executor here — neither ProcessPoolExecutor nor
+        # ThreadPoolExecutor. Both reliably hang on this box: forking (or
+        # spawning tesseract from multiple threads at once) races against
+        # glibc's per-thread malloc-arena locks, and a child/thread can
+        # inherit a lock held by another thread at that exact instant, with
+        # nothing left alive to release it — classic fork-while-multithreaded
+        # deadlock, confirmed by isolation (1 worker: fine; >1 concurrent:
+        # hangs, process or thread, every time). The fix: only ONE thread
+        # ever calls subprocess.Popen — launch every tesseract process
+        # back-to-back (fast, not concurrent), THEN wait on all of them.
+        # The OS still runs them in parallel; we just never race the launch.
+        pending = []
+        for i, png, key in scanned:
+            if key and OCR_CACHE_DIR:
+                cached = _ocr_cache_path(key)
+                if cached.exists():
+                    pages_out[i] = cached.read_text()
+                    continue
+            proc, tmp_path = _ocr_launch(png)
+            pending.append((i, key, proc, tmp_path))
+        for i, key, proc, tmp_path in pending:
+            try:
+                out, err = proc.communicate(timeout=120)
+                pages_out[i] = out if proc.returncode == 0 else f"[OCR FAILED p{i + 1}: {err[:200]}]\n"
+                if key and OCR_CACHE_DIR and proc.returncode == 0:
+                    try:
+                        _ocr_cache_path(key).write_text(out)
+                    except Exception:
+                        pass
+            except subprocess.TimeoutExpired:
+                proc.kill()
+                pages_out[i] = f"[OCR TIMED OUT p{i + 1}]\n"
+            finally:
+                try:
+                    os.unlink(tmp_path)
+                except OSError:
+                    pass
+    return "\n\n".join(pages_out)
+
+
+def _ocr_page(page) -> str:
+    if Image is None:
+        raise ExtractionError("Pillow not installed")
+    dpi = OCR_DPI_HIGH if page.number < FRONT_OCR_PAGES else OCR_DPI
+    zoom = dpi / 72.0
+    mat = fitz.Matrix(zoom, zoom)
+    pix = page.get_pixmap(matrix=mat, alpha=False)
+    img = Image.open(io.BytesIO(pix.tobytes("png")))
+    if pytesseract is not None:
+        return _ocr_image(img)
+    # fall back to tesseract CLI via a temp png
+    import tempfile
+
+    with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as fh:
+        img.save(fh.name)
+        tmp = Path(fh.name)
+    try:
+        return _ocr_image_cli(tmp)
+    finally:
+        tmp.unlink(missing_ok=True)
+
+
+def _ocr_page_cached(page) -> str:
+    """OCR a scanned page, cached by content hash + DPI — a re-scan of the same
+    PDF at the same DPI is free; a DPI change is a fresh key."""
+    dpi = OCR_DPI_HIGH if page.number < FRONT_OCR_PAGES else OCR_DPI
+    if OCR_CACHE_DIR:
+        h = _page_hash(page)
+        cached = _ocr_cache_path(f"{dpi}_{h}")
+        if cached.exists():
+            return cached.read_text()
+    text = _ocr_page(page)
+    if OCR_CACHE_DIR:
+        h = _page_hash(page)
+        try:
+            _ocr_cache_path(f"{dpi}_{h}").write_text(text)
+        except Exception:
+            pass
+    return text
+
+
+def extract_docx(data: bytes) -> str:
+    try:
+        import docx  # python-docx
+
+        return "\n".join(p.text for p in docx.Document(io.BytesIO(data)).paragraphs)
+    except ImportError:
+        return _extract_plain(data)
+
+
+def extract_html(text: str) -> str:
+    text = re.sub(r"(?is)<(script|style)[^>]*>.*?</\1>", " ", text)
+    text = re.sub(r"(?s)<[^>]+>", " ", text)
+    text = re.sub(r"&nbsp;?", " ", text)
+    text = re.sub(r"&amp;", "&", text)
+    text = re.sub(r"&lt;", "<", text)
+    text = re.sub(r"&gt;", ">", text)
+    return re.sub(r"[ \t]+", " ", text)
+
+
+def _extract_plain(data: bytes) -> str:
+    for enc in ("utf-8", "latin-1", "cp1252"):
+        try:
+            return data.decode(enc)
+        except UnicodeDecodeError:
+            continue
+    return data.decode("utf-8", errors="replace")
+
+
+def extract_bytes(name: str, data: bytes, *, ocr: bool = True) -> str:
+    """Dispatch by file extension."""
+    ext = Path(name).suffix.lower()
+    if ext == ".pdf":
+        return extract_pdf(data, ocr=ocr)
+    if ext in (".docx",):
+        return extract_docx(data)
+    if ext == ".doc":
+        # .doc is OLE; try antiword/strings fallback
+        try:
+            import olefile
+
+            return olefile.OleFileIO(io.BytesIO(data)).openstream("WordDocument").read().decode("latin-1", "replace")
+        except Exception:
+            return _extract_plain(data)
+    if ext in (".html", ".htm"):
+        return extract_html(_extract_plain(data))
+    return _extract_plain(data)
+
+
+def normalize_whitespace(text: str) -> str:
+    text = text.replace("\x0c", "\n")
+    text = re.sub(r"[ \t]+", " ", text)
+    text = re.sub(r"\n{3,}", "\n\n", text)
+    return text.strip()
+
+
+def extract_file(path: Path, *, ocr: bool = True) -> str:
+    data = path.read_bytes()
+    text = extract_bytes(path.name, data, ocr=ocr)
+    return normalize_whitespace(text)
+
+
+if __name__ == "__main__":
+    for p in sys.argv[1:]:
+        out = extract_file(Path(p))
+        print(f"### {p}: {len(out)} chars")
+        print(out[:4000])

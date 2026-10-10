@@ -1,0 +1,214 @@
+{
+ "n": 390,
+ "baseMatchesAtlas": 390,
+ "byStatusPplus": {
+  "all": {
+   "cL P- / cR P+": 127,
+   "cL P+ / cR P+": 9,
+   "cL M / cR P+": 22,
+   "cL P+ / cR M": 8,
+   "cL P+ / cR P-": 4,
+   "cL A / cR P+": 1,
+   "cL M / cR M": 3
+  },
+  "word": {
+   "cL P- / cR P+": 120,
+   "cL P+ / cR P+": 9,
+   "cL M / cR P+": 20,
+   "cL P+ / cR P-": 3,
+   "cL A / cR P+": 1,
+   "cL M / cR M": 2,
+   "cL P+ / cR M": 4
+  },
+  "code": {
+   "cL P- / cR P+": 4,
+   "cL P+ / cR M": 3,
+   "cL M / cR P+": 2,
+   "cL M / cR M": 1
+  }
+ },
+ "byStatusPminus": {
+  "all": {
+   "cL P- / cR P+": 55,
+   "cL M / cR P-": 3,
+   "cL M / cR M": 2,
+   "cL P- / cR M": 5,
+   "cL P- / cR P-": 5,
+   "cL P+ / cR P-": 9,
+   "cL P- / cR A": 1,
+   "cL A / cR P-": 1
+  },
+  "word": {
+   "cL P- / cR M": 3,
+   "cL P+ / cR P-": 2,
+   "cL P- / cR P+": 14,
+   "cL M / cR P-": 1,
+   "cL M / cR M": 1
+  },
+  "code": {
+   "cL P- / cR P+": 38,
+   "cL M / cR P-": 2,
+   "cL M / cR M": 1,
+   "cL P- / cR M": 1,
+   "cL P- / cR P-": 3
+  }
+ },
+ "bySignPplus": {
+  "all": {
+   "left - right +": 144,
+   "left + right +": 18,
+   "left + right -": 7,
+   "left + right mixed": 2,
+   "left mixed right +": 2,
+   "left mixed right mixed": 1
+  },
+  "word": {
+   "left - right +": 135,
+   "left + right +": 17,
+   "left + right -": 5,
+   "left mixed right +": 2
+  },
+  "code": {
+   "left - right +": 6,
+   "left + right -": 1,
+   "left + right mixed": 2,
+   "left mixed right mixed": 1
+  }
+ },
+ "bySignPminus": {
+  "all": {
+   "left - right +": 57,
+   "left mixed right -": 1,
+   "left - right mixed": 2,
+   "left - right -": 10,
+   "left + right -": 11
+  },
+  "word": {
+   "left - right +": 16,
+   "left + right -": 3,
+   "left - right mixed": 1,
+   "left - right -": 1
+  },
+  "code": {
+   "left - right +": 38,
+   "left mixed right -": 1,
+   "left - right mixed": 1,
+   "left - right -": 5
+  }
+ },
+ "medianSides": {
+  "P+ all": {
+   "cL": -0.046,
+   "cR": 0.0864,
+   "v": 0.0442
+  },
+  "P+ word": {
+   "cL": -0.0477,
+   "cR": 0.0907,
+   "v": 0.0443
+  },
+  "P- all": {
+   "cL": -0.1401,
+   "cR": 0.052,
+   "v": -0.0816
+  },
+  "P- code": {
+   "cL": -0.2261,
+   "cR": 0.0951,
+   "v": -0.1213
+  },
+  "P- word": {
+   "cL": -0.0847,
+   "cR": 0.0476,
+   "v": -0.0368
+  }
+ },
+ "docBootstrap": {
+  "P+": {
+   "n": 174,
+   "ciExcludesZeroSameSign": 174,
+   "ciExcludesZeroOppositeSign": 0,
+   "ciCoversZero": 0,
+   "medianDocsPerHalf": 35
+  },
+  "P-": {
+   "n": 81,
+   "ciExcludesZeroSameSign": 81,
+   "ciExcludesZeroOppositeSign": 0,
+   "ciCoversZero": 0,
+   "medianDocsPerHalf": 118
+  }
+ },
+ "docBootstrapByGrain": {
+  "word": {
+   "P+": {
+    "n": 159,
+    "ok": 159
+   },
+   "P-": {
+    "n": 21,
+    "ok": 21
+   }
+  },
+  "code": {
+   "P+": {
+    "n": 10,
+    "ok": 10
+   },
+   "P-": {
+    "n": 45,
+    "ok": 45
+   }
+  },
+  "notation": {
+   "P+": {
+    "n": 5,
+    "ok": 5
+   },
+   "P-": {
+    "n": 5,
+    "ok": 5
+   }
+  },
+  "charbigram": {
+   "P+": {
+    "n": 0,
+    "ok": 0
+   },
+   "P-": {
+    "n": 10,
+    "ok": 10
+   }
+  }
+ },
+ "pPlusCiCoversZero": [],
+ "pMinusCiCoversZero": [],
+ "trueU": {
+  "nPplus": 174,
+  "bothSidesPositiveBothHalves": 18,
+  "byGrain": {
+   "word": 17,
+   "notation": 1
+  },
+  "ids": [
+   "bk-cryptic",
+   "fm-law-ar",
+   "fm-law-lv",
+   "oc-irc-ubuntu-0809",
+   "oc-irc-ubuntu-1315",
+   "ud-bul",
+   "ud-fas",
+   "cd-smiles-chembl",
+   "fm-law-uy",
+   "ml-tpi",
+   "oc-irc-ubuntu-0406",
+   "oc-irc-ubuntu-0910",
+   "ud-ind",
+   "ml-en-poetic-edda",
+   "ml-sag",
+   "ml-san-mahabharata",
+   "oc-irc-ubuntu-0607",
+   "oc-irc-ubuntu-1112"
+  ]
+ }
+}

@@ -1,0 +1,60 @@
+{
+ "ruleId": "ablscope-2-company-ircA-c2to6",
+ "attack": "A2 strict rematch S_FBL1",
+ "headerSha256": "9fe3fecbd215ea40d7579c769569709528ebe851250cb0e40f112e2e1bf253d9",
+ "B": 1000,
+ "conf": {
+  "pairs": 136,
+  "days": 20,
+  "aucNegDSelf": 0.85,
+  "ci": [
+   0.7938,
+   0.9033
+  ],
+  "aucRInit": 0.9114,
+  "ciRInit": [
+   0.8696,
+   0.9498
+  ],
+  "permQ95": 0.5631,
+  "perStratum": {
+   "c2": {
+    "n": 36,
+    "auc": 0.9012
+   },
+   "c3": {
+    "n": 51,
+    "auc": 0.8497
+   },
+   "c4_6": {
+    "n": 49,
+    "auc": 0.8126
+   },
+   "c7_15": {
+    "n": 0,
+    "auc": null
+   },
+   "c16p": {
+    "n": 0,
+    "auc": null
+   }
+  },
+  "controls": {
+   "R_LOGC": 0.5,
+   "R_POS": 0.4863,
+   "R_IPOS": 0.5,
+   "R_FB": 0.5,
+   "R_LEN": 0.4994,
+   "R_SL": 0.507
+  },
+  "controlsInBand": true,
+  "tiesOnRInit": {
+   "pairs": 21,
+   "aucNegDSelf": 0.6673
+  }
+ },
+ "fresh": {
+  "pairs": 6
+ },
+ "verdict": "SURVIVES"
+}

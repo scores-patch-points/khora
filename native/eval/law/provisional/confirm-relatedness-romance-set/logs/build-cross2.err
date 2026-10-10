@@ -1,0 +1,9 @@
+spaGSD A: 30007 tok 1233 sent range 11235,12468 dupRemoved 0 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.5s
+spaGSD B: 30013 tok 1278 sent range 6837,8115 dupRemoved 0 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.5s
+spaGSD C: 30213 tok 1251 sent range 1067,1204,2530,2664,3633,3772,5255,5378,6317,6435,7951,8083,9308,9420,10111,10229,11510,11628,13696,13816 dupRemoved 0 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.6s
+porBOS A: 30016 tok 1468 sent range 2324,3792 dupRemoved 0 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.3s
+porBOS B: 30002 tok 1197 sent range 3893,5090 dupRemoved 0 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.3s
+porBOS C: 30146 tok 1388 sent range 226,393,1115,1272,2106,2274,2655,2816,3516,3647,4442,4558,4775,4896,5541,5678,5914,6025,6735,6854 dupRemoved 0 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.4s
+glgTG A: 13829 tok 600 sent range 0,600 dupRemoved 0 pairs {"LATER":291,"FIRST":364,"LATERs":295,"FIRSTs":365} 0.1s
+glgTG set B: no disjoint window
+glgTG C: 13829 tok 600 sent range 0,600 dupRemoved 0 pairs {"LATER":291,"FIRST":364,"LATERs":295,"FIRSTs":365} 0.1s

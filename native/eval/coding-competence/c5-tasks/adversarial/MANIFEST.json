@@ -1,0 +1,333 @@
+{
+ "schema": "C5AdversarialManifest@1",
+ "label": "authored: model-written ADVERSARIAL programs, written with knowledge of the reader's weak cases; never held-out natural data",
+ "author": "model (claude), human review pending",
+ "validated_at": "2026-10-06T08:15:59.004Z",
+ "task_ids": [
+  "delegate_same_name",
+  "forward_reference",
+  "nested_definitions",
+  "method_chain",
+  "call_through_variable"
+ ],
+ "toolchains": {
+  "executed_with": {
+   "python": {
+    "available": true,
+    "command": "python3",
+    "version": "Python 3.14.7"
+   },
+   "javascript": {
+    "available": true,
+    "command": "node",
+    "version": "v24.10.0"
+   },
+   "c": {
+    "available": true,
+    "command": "gcc -std=c11",
+    "version": "Apple clang version 15.0.0 (clang-1500.3.9.4)"
+   }
+  },
+  "no_toolchain": {
+   "go": "no go toolchain on this machine (go not on PATH, not in /opt/homebrew)"
+  }
+ },
+ "gold": {
+  "grammar_pack": {
+   "tree-sitter": "0.26.0",
+   "tree-sitter-language-pack": "1.21.0",
+   "tree-sitter-groovy": "0.1.2"
+  },
+  "gold_version": "gold-1"
+ },
+ "summary": {
+  "python": {
+   "authored": 5,
+   "not_applicable": [],
+   "missing": [],
+   "executed": 5,
+   "output_ok": 5,
+   "output_bad": [],
+   "parse_ok": 5,
+   "parse_bad": [],
+   "kept": 5,
+   "toolchain": "python3"
+  },
+  "javascript": {
+   "authored": 5,
+   "not_applicable": [],
+   "missing": [],
+   "executed": 5,
+   "output_ok": 5,
+   "output_bad": [],
+   "parse_ok": 5,
+   "parse_bad": [],
+   "kept": 5,
+   "toolchain": "node"
+  },
+  "c": {
+   "authored": 4,
+   "not_applicable": [
+    "nested_definitions"
+   ],
+   "missing": [],
+   "executed": 4,
+   "output_ok": 4,
+   "output_bad": [],
+   "parse_ok": 4,
+   "parse_bad": [],
+   "kept": 4,
+   "toolchain": "gcc -std=c11"
+  },
+  "go": {
+   "authored": 5,
+   "not_applicable": [],
+   "missing": [],
+   "executed": 0,
+   "output_ok": 0,
+   "output_bad": [],
+   "parse_ok": 5,
+   "parse_bad": [],
+   "kept": 5,
+   "toolchain": "no go toolchain on this machine (go not on PATH, not in /opt/homebrew)"
+  }
+ },
+ "programs": {
+  "python": {
+   "delegate_same_name": {
+    "sha256": "23e660a42d23992e4e1eab7e27b4671c218c706d8415e60f4cf1221ace59fe7c",
+    "bytes": 662,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "forward_reference": {
+    "sha256": "c3f346ae0f5cdc663a7ecbea03cd896b7a21f822a4d9712496b1ec340e51e26d",
+    "bytes": 264,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "nested_definitions": {
+    "sha256": "dcfed63168e2d70dd4cacf701e3ae31be2c6c73d58dd64c1ebfe25bf4aff1bd1",
+    "bytes": 180,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "method_chain": {
+    "sha256": "c242bcde7ba6f62228ca6dc4cc729bacc9a35dbf6fcbf6aaed351fbc6fce393e",
+    "bytes": 348,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "call_through_variable": {
+    "sha256": "c763c9ef6ba2291afd6796a6d894dd2457315454acb5b48227352ede8b69cfcd",
+    "bytes": 179,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   }
+  },
+  "javascript": {
+   "delegate_same_name": {
+    "sha256": "572aea37ac4ec199d06492349e68cfe0f707f82c4ae439c88d35e644f0fc7056",
+    "bytes": 647,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "forward_reference": {
+    "sha256": "0c49b0b0b8bf73c4e6a86ec743f9a7bdd005ab72744e5ebceef9ac9bb6197228",
+    "bytes": 305,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "nested_definitions": {
+    "sha256": "5554f3fa2182644ef8003df0babc7c430775d8ea9dde38b96a2b25048626f62d",
+    "bytes": 186,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "method_chain": {
+    "sha256": "556386a6f2d655e134e64856af09fe52e426cdd024505b7608113b4c3aa232e2",
+    "bytes": 345,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "call_through_variable": {
+    "sha256": "9cb402a93b6a3e90440286b80e3b6285fe02726adfededd528b48cbe53d1ceed",
+    "bytes": 207,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   }
+  },
+  "c": {
+   "delegate_same_name": {
+    "sha256": "c22a492d8b257e540fcd1456b0dd64c6b3249e7740c41c86f14098ca4f6a5c7c",
+    "bytes": 1275,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "forward_reference": {
+    "sha256": "794e8832261b53e3f5ee5d8357b5c5c6dce18021913fb8b6d7def8237964d63a",
+    "bytes": 527,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "method_chain": {
+    "sha256": "7b00fc23ed508ac1db8f7f8fc196dcab2f83531fc732c858f500d3b81a60c4f7",
+    "bytes": 277,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "call_through_variable": {
+    "sha256": "09ae36d16d2ae6fb17e4abbd3ed6bd73beebfb61cb3c1720d6891a15bbadf249",
+    "bytes": 292,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   }
+  },
+  "go": {
+   "delegate_same_name": {
+    "sha256": "4db0484270d0f4c07218cd1e9a42d4c7b2b21b0c6bbbc7104eef1db570410ab8",
+    "bytes": 470,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "forward_reference": {
+    "sha256": "79943fc7cdadada969f798c47512772b45dcdcb83c6dc9e5900764a5d1a4ef2e",
+    "bytes": 341,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "nested_definitions": {
+    "sha256": "60c18745c23290a4409fb6469480d9e313d169f408fd12729f6585dbb84b60f2",
+    "bytes": 381,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "method_chain": {
+    "sha256": "327a0973abd6f102a4e63bb5258eecd31d0004cf84200be6f02bff04bc3b9ec0",
+    "bytes": 428,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "call_through_variable": {
+    "sha256": "e216567ca8a28056d5ea4c5068554fb3fc84267ea17cace76b44e5216a665e7c",
+    "bytes": 260,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   }
+  }
+ }
+}

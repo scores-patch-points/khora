@@ -1,0 +1,277 @@
+{
+ "irc": {
+  "cells": 3,
+  "valid": 0,
+  "medAll": 0.5,
+  "medValid": null,
+  "pooledAll": {
+   "auc": 0.5,
+   "lo": 0.5,
+   "hi": 0.5,
+   "pairs": 21
+  },
+  "pooledValid": null,
+  "NEG": 0,
+  "POS": 0,
+  "perReg": {
+   "irc-kubuntu": {
+    "pairs": 1,
+    "auc": 0.5,
+    "lo": 0.5,
+    "hi": 0.5,
+    "valid": false,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5,
+     "es": 0.5,
+     "fs": 0.5,
+     "sp": 0.5,
+     "ch": 0.5,
+     "ml": 0.5
+    },
+    "Dobs": 0.5
+   },
+   "irc-ubuntu-server": {
+    "pairs": 13,
+    "auc": 0.5,
+    "lo": 0.5,
+    "hi": 0.5,
+    "valid": false,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5,
+     "es": 0.5,
+     "fs": 0.5,
+     "sp": 0.8077,
+     "ch": 0.8077,
+     "ml": 0.5
+    },
+    "Dobs": 0.5
+   },
+   "irc-xubuntu": {
+    "pairs": 7,
+    "auc": 0.5,
+    "lo": 0.5,
+    "hi": 0.5,
+    "valid": false,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4286,
+     "es": 0.4286,
+     "fs": 0.5714,
+     "sp": 0.2857,
+     "ch": 0.5714,
+     "ml": 0.4286
+    },
+    "Dobs": 0.5714
+   }
+  }
+ },
+ "code": {
+  "cells": 3,
+  "valid": 0,
+  "medAll": 0.6154,
+  "medValid": null,
+  "pooledAll": {
+   "auc": 0.6873,
+   "lo": 0.6093,
+   "hi": 0.7692,
+   "pairs": 259
+  },
+  "pooledValid": null,
+  "NEG": 0,
+  "POS": 0,
+  "perReg": {
+   "code-js": {
+    "pairs": 158,
+    "auc": 0.7405,
+    "lo": 0.6582,
+    "hi": 0.8301,
+    "valid": false,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5411,
+     "es": 0.4968,
+     "fs": 0.4937,
+     "sp": 0.3576,
+     "ch": 0.5063,
+     "ml": 0.5032
+    },
+    "Dobs": 0.7247
+   },
+   "code-py": {
+    "pairs": 75,
+    "auc": 0.6,
+    "lo": 0.4375,
+    "hi": 0.7568,
+    "valid": false,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.4933,
+     "es": 0.56,
+     "fs": 0.44,
+     "sp": 0.4667,
+     "ch": 0.4733,
+     "ml": 0.5933
+    },
+    "Dobs": 0.62
+   },
+   "code-rb": {
+    "pairs": 26,
+    "auc": 0.6154,
+    "lo": 0.4091,
+    "hi": 0.84,
+    "valid": false,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5192,
+     "es": 0.5,
+     "fs": 0.5,
+     "sp": 0.3654,
+     "ch": 0.5385,
+     "ml": 0.7308
+    },
+    "Dobs": 0.5192
+   }
+  }
+ },
+ "book": {
+  "cells": 6,
+  "valid": 0,
+  "medAll": 0.3585,
+  "medValid": null,
+  "pooledAll": {
+   "auc": 0.3454,
+   "lo": 0.284,
+   "hi": 0.4107,
+   "pairs": 592
+  },
+  "pooledValid": null,
+  "NEG": 0,
+  "POS": 0,
+  "perReg": {
+   "book-the-war-of-the-worlds": {
+    "pairs": 89,
+    "auc": 0.3596,
+    "lo": 0.2111,
+    "hi": 0.5227,
+    "valid": false,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5169,
+     "es": 0.5506,
+     "fs": 0.4494,
+     "sp": 0.3708,
+     "ch": 0.4663,
+     "ml": 0.6404
+    },
+    "Dobs": 0.3708
+   },
+   "book-great-expectations": {
+    "pairs": 117,
+    "auc": 0.2821,
+    "lo": 0.1475,
+    "hi": 0.4118,
+    "valid": false,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.547,
+     "es": 0.4786,
+     "fs": 0.5214,
+     "sp": 0.4274,
+     "ch": 0.5855,
+     "ml": 0.5812
+    },
+    "Dobs": 0.2821
+   },
+   "book-treasure-island": {
+    "pairs": 53,
+    "auc": 0.3585,
+    "lo": 0.1667,
+    "hi": 0.5741,
+    "valid": false,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.6415,
+     "es": 0.6509,
+     "fs": 0.3491,
+     "sp": 0.4906,
+     "ch": 0.566,
+     "ml": 0.434
+    },
+    "Dobs": 0.3396
+   },
+   "book-anne-of-green-gables": {
+    "pairs": 154,
+    "auc": 0.4026,
+    "lo": 0.271,
+    "hi": 0.5385,
+    "valid": false,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5357,
+     "es": 0.5487,
+     "fs": 0.4513,
+     "sp": 0.4351,
+     "ch": 0.4675,
+     "ml": 0.5617
+    },
+    "Dobs": 0.3831
+   },
+   "book-wuthering-heights": {
+    "pairs": 56,
+    "auc": 0.5,
+    "lo": 0.2982,
+    "hi": 0.6754,
+    "valid": false,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.5893,
+     "es": 0.5446,
+     "fs": 0.4554,
+     "sp": 0.4107,
+     "ch": 0.5625,
+     "ml": 0.6161
+    },
+    "Dobs": 0.5
+   },
+   "book-crime-and-punishment": {
+    "pairs": 123,
+    "auc": 0.248,
+    "lo": 0.1231,
+    "hi": 0.3811,
+    "valid": false,
+    "ctrl": {
+     "pos": 0.5,
+     "logn": 0.6057,
+     "es": 0.5894,
+     "fs": 0.4106,
+     "sp": 0.4228,
+     "ch": 0.6463,
+     "ml": 0.4878
+    },
+    "Dobs": 0.2276
+   }
+  }
+ },
+ "ud": {
+  "cells": 56,
+  "valid": 24,
+  "medAll": 0.4457,
+  "medValid": 0.4691,
+  "pooledAll": {
+   "auc": 0.4501,
+   "lo": 0.4412,
+   "hi": 0.4591,
+   "pairs": 15675
+  },
+  "pooledValid": {
+   "auc": 0.4667,
+   "lo": 0.4536,
+   "hi": 0.479,
+   "pairs": 8711
+  },
+  "NEG": 9,
+  "POS": 0
+ }
+}

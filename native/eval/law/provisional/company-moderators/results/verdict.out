@@ -1,0 +1,166 @@
+{
+ "primary": {
+  "FIRST": {
+   "verdict": "PASS",
+   "eligible": 25,
+   "thin": 3,
+   "voided": 0,
+   "clauses": {
+    "a_direction": {
+     "rho": 0.741,
+     "p": 0.0005,
+     "pass": true
+    },
+    "b_frozenSkill": {
+     "skill": 0.2476,
+     "rmseModel": 0.0552,
+     "rmseBaseline": 0.0733,
+     "meanShift": -0.0171,
+     "skillRecentredDiagnostic": 0.2576,
+     "pass": true
+    },
+    "c_scopeHit": {
+     "inScopeN": 14,
+     "inScopeShareAbove60": 0.8571,
+     "outScopeN": 5,
+     "outScopeShareAbove60": 0.2,
+     "pass": true
+    },
+    "d_separation": {
+     "nIn": 16,
+     "nOut": 9,
+     "diff": 0.0972,
+     "pass": true
+    }
+   },
+   "fixed": {
+    "R1_S2": "PASS",
+    "R1_S3": "PASS"
+   }
+  },
+  "LATER": {
+   "verdict": "PASS",
+   "eligible": 22,
+   "thin": 6,
+   "voided": 0,
+   "clauses": {
+    "a_direction": {
+     "rho": 0.518,
+     "p": 0.0095,
+     "pass": true
+    },
+    "b_frozenSkill": {
+     "skill": 0.2176,
+     "rmseModel": 0.0517,
+     "rmseBaseline": 0.0661,
+     "meanShift": -0.005,
+     "skillRecentredDiagnostic": 0.196,
+     "pass": true
+    },
+    "c_scopeHit": {
+     "inScopeN": 6,
+     "inScopeShareAbove60": 0.8333,
+     "outScopeN": 5,
+     "outScopeShareAbove60": 0.4,
+     "pass": true
+    },
+    "d_separation": {
+     "nIn": 13,
+     "nOut": 9,
+     "diff": 0.0485,
+     "pass": true
+    }
+   },
+   "fixed": {}
+  }
+ },
+ "secondary": {
+  "FIRST": {
+   "verdict": "PARTIAL",
+   "eligible": 23,
+   "thin": 2,
+   "voided": 0,
+   "clauses": {
+    "a_direction": {
+     "rho": 0.518,
+     "p": 0.0095,
+     "pass": true
+    },
+    "b_frozenSkill": {
+     "skill": 0.0481,
+     "rmseModel": 0.0678,
+     "rmseBaseline": 0.0712,
+     "meanShift": -0.022,
+     "skillRecentredDiagnostic": 0.0762,
+     "pass": false
+    },
+    "c_scopeHit": {
+     "inScopeN": 13,
+     "inScopeShareAbove60": 0.9231,
+     "outScopeN": 6,
+     "outScopeShareAbove60": 0,
+     "pass": true
+    },
+    "d_separation": {
+     "nIn": 16,
+     "nOut": 7,
+     "diff": 0.0622,
+     "pass": true
+    }
+   },
+   "fixed": {
+    "R1_S2": "PASS",
+    "R1_S3": "PASS"
+   }
+  },
+  "LATER": {
+   "verdict": "FAIL",
+   "eligible": 22,
+   "thin": 3,
+   "voided": 0,
+   "clauses": {
+    "a_direction": {
+     "rho": 0.275,
+     "p": 0.0995,
+     "pass": false
+    },
+    "b_frozenSkill": {
+     "skill": 0.1945,
+     "rmseModel": 0.051,
+     "rmseBaseline": 0.0634,
+     "meanShift": 0.0087,
+     "skillRecentredDiagnostic": 0.2039,
+     "pass": true
+    },
+    "c_scopeHit": {
+     "inScopeN": 8,
+     "inScopeShareAbove60": 0.875,
+     "outScopeN": 5,
+     "outScopeShareAbove60": 0.8,
+     "pass": false
+    },
+    "d_separation": {
+     "nIn": 13,
+     "nOut": 9,
+     "diff": 0.0482,
+     "pass": true
+    }
+   },
+   "fixed": {}
+  },
+  "reliability": {
+   "FIRST": {
+    "n": 22,
+    "spearmanDevTest": 0.818,
+    "meanDev": 0.6256,
+    "meanTest": 0.6071
+   },
+   "LATER": {
+    "n": 21,
+    "spearmanDevTest": 0.477,
+    "meanDev": 0.6153,
+    "meanTest": 0.615
+   }
+  }
+ }
+}

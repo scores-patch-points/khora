@@ -1,0 +1,10 @@
+sister mean 0.6406 ctrl mean 0.5628
+C1 f1 0.5548 (free 0.5558) | f2 0.4141 (free 0.5859) | f3 0.5005 (free 0.5237) | f4 0.5602 (free 0.5602) | f5 0.4156 (free 0.5844) | f6 0.5753 (free 0.5753)
+C2 LEFT {"mean":0.0778,"lo":0.069,"hi":0.0861,"n":9} 0.6361 35/36
+C2 L1ONLY {"mean":0.0672,"lo":0.0587,"hi":0.0761,"n":9} 0.6251 26/36
+C2 L2ONLY {"mean":0.0385,"lo":0.0253,"hi":0.0515,"n":9} 0.566 5/36
+C2 LEFTCOARSE {"mean":0.058,"lo":0.0484,"hi":0.0681,"n":9} 0.6437 23/36
+C3 {"shuffledDonorOnRealTarget":{"n":36,"meanAuc":0.5432,"meanCtrl":0.5315,"contrast":{"mean":0.0152,"lo":0.0063,"hi":0.0233,"n":9}},"realDonorOnShuffledTarget":{"n":36,"meanAuc":0.5322,"meanCtrl":0.5179,"contrast":{"mean":0.015,"lo":0.0104,"hi":0.0188,"n":9}},"valid":false}
+C4 cheapNonGenus 0.5885 | fpNonGenus 0.5602 | fpAllDonors 0.5943 | fpAllDonorsSisterShare 0.4889 | fpTop1NonGenus 0.5317 | randomNonGenus 0.5628
+C5 A1toA2 n=9 top1 -0.0312 (5/9) top3 -0.0411 (3/9) rand -0.0725 | A2toA1 n=9 top1 -0.0507 (2/9) top3 -0.062 (1/9) rand -0.0821 | WindowAtoB n=5 top1 -0.0251 (3/5) top3 -0.0323 (1/5) rand -0.0733 | WindowBtoA n=6 top1 -0.0356 (3/6) top3 -0.0433 (1/6) rand -0.0744
+C6 0.6582 0.6406 0.889

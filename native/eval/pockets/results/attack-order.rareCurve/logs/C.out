@@ -1,0 +1,400 @@
+{
+ "nPockets": 390,
+ "C1": {
+  "statistics": 81,
+  "realNonThinPockets": 391,
+  "statisticTimesPocketCells": 31671,
+  "definedRealCells": 29680,
+  "presentRealCells": 22017,
+  "rareCurveCells": 390,
+  "rareCurvePresent": 255,
+  "plantedIid": {
+   "halfCells": 307,
+   "absZge4": 4,
+   "rate4": 0.01303,
+   "presentObserved": 0
+  },
+  "controls": {
+   "halfCells": 2913,
+   "absZge4": 13,
+   "presentObserved": 0
+  },
+  "pFalsePresentPerCell": 0.00008488153720463878,
+  "expectedFalsePresentAllCells": 2.519,
+  "expectedFalsePresentRareCurve": 0.0331,
+  "log10BinomialTailP255of390": -930.3,
+  "upperBound95FalsePresentRate": {
+   "fromPlanted0of153": 0.0196078431372549,
+   "fromControls0of1447": 0.002073255010366275,
+   "pooled0of1600": 0.001875
+  },
+  "expectedFalsePresentRareCurveUpper": 0.73,
+  "rareCurveInShuffledControls": {
+   "cells": 20,
+   "status": {
+    "A": 16,
+    "M": 4
+   }
+  },
+  "expectedPresentIfPerHalfRateIs": {
+   "rate4": 0.0000849,
+   "t9": 0.0000048,
+   "note": "P(|t9|>=4)=0.0031 per half; both halves with one sign = rate^2/2"
+  }
+ },
+ "C2": {
+  "nPresent": 255,
+  "n": 390,
+  "perm2000": [
+   {
+    "attr": "group",
+    "effect": 0.0407,
+    "nullMean": 0.0129,
+    "nullSd": 0.008,
+    "zApprox": 3.5,
+    "p": 0.0065,
+    "levels": 6
+   },
+   {
+    "attr": "register",
+    "effect": 0.1624,
+    "nullMean": 0.0895,
+    "nullSd": 0.0175,
+    "zApprox": 4.2,
+    "p": 0.0005,
+    "levels": 36
+   },
+   {
+    "attr": "script",
+    "effect": 0.035,
+    "nullMean": 0.0232,
+    "nullSd": 0.0093,
+    "zApprox": 1.3,
+    "p": 0.12194,
+    "levels": 10
+   },
+   {
+    "attr": "grain",
+    "effect": 0.0466,
+    "nullMean": 0.0077,
+    "nullSd": 0.0063,
+    "zApprox": 6.2,
+    "p": 0.0005,
+    "levels": 4
+   },
+   {
+    "attr": "tokens",
+    "effect": 0.0941,
+    "nullMean": 0.0026,
+    "nullSd": 0.0037,
+    "zApprox": 25,
+    "p": 0.0005
+   },
+   {
+    "attr": "meanUnitLength",
+    "effect": 0.0771,
+    "nullMean": 0.0026,
+    "nullSd": 0.0037,
+    "zApprox": 20.1,
+    "p": 0.0005
+   },
+   {
+    "attr": "docs",
+    "effect": 0.1036,
+    "nullMean": 0.0027,
+    "nullSd": 0.0038,
+    "zApprox": 26.5,
+    "p": 0.0005
+   }
+  ],
+  "groupStratified": [
+   {
+    "attr": "register",
+    "effect": 0.1624,
+    "nullMean": 0.113,
+    "nullSd": 0.0172,
+    "zApprox": 2.9,
+    "p": 0.0045,
+    "levels": 36
+   }
+  ],
+  "leaveOnePocketOut": {
+   "n": 390,
+   "eta2Register": {
+    "min": 0.1583,
+    "max": 0.1688
+   },
+   "pEvery10thDeletion": {
+    "n": 39,
+    "max": 0.002
+   }
+  },
+  "leaveOneRegisterOut": {
+   "minEta2": 0.1395,
+   "maxP": 0.02299,
+   "worst": [
+    {
+     "left": "code",
+     "eta2": 0.1395,
+     "p": 0.02299
+    },
+    {
+     "left": "chat",
+     "eta2": 0.1532,
+     "p": 0.005
+    },
+    {
+     "left": "academic",
+     "eta2": 0.148,
+     "p": 0.0035
+    }
+   ]
+  },
+  "leaveOneGroupOut": [
+   {
+    "left": "bk",
+    "n": 309,
+    "nPresent": 209,
+    "registerEta2": 0.1886,
+    "registerP": 0.001
+   },
+   {
+    "left": "cd",
+    "n": 302,
+    "nPresent": 186,
+    "registerEta2": 0.141,
+    "registerP": 0.008
+   },
+   {
+    "left": "fm",
+    "n": 329,
+    "nPresent": 221,
+    "registerEta2": 0.1661,
+    "registerP": 0.0035
+   },
+   {
+    "left": "ml",
+    "n": 285,
+    "nPresent": 189,
+    "registerEta2": 0.1675,
+    "registerP": 0.0055
+   },
+   {
+    "left": "oc",
+    "n": 369,
+    "nPresent": 237,
+    "registerEta2": 0.155,
+    "registerP": 0.0025
+   },
+   {
+    "left": "ud",
+    "n": 356,
+    "nPresent": 233,
+    "registerEta2": 0.178,
+    "registerP": 0.001
+   }
+  ]
+ },
+ "C3": {
+  "nPos": 174,
+  "nNeg": 81,
+  "all": [
+   {
+    "attr": "group",
+    "effect": 0.37,
+    "nullMean": 0.0197,
+    "nullSd": 0.0121,
+    "zApprox": 29,
+    "p": 0.0005,
+    "levels": 6
+   },
+   {
+    "attr": "register",
+    "effect": 0.6172,
+    "nullMean": 0.1181,
+    "nullSd": 0.0265,
+    "zApprox": 18.9,
+    "p": 0.0005,
+    "levels": 31
+   },
+   {
+    "attr": "script",
+    "effect": 0.1471,
+    "nullMean": 0.0354,
+    "nullSd": 0.0136,
+    "zApprox": 8.2,
+    "p": 0.0005,
+    "levels": 10
+   },
+   {
+    "attr": "grain",
+    "effect": 0.4711,
+    "nullMean": 0.0119,
+    "nullSd": 0.0096,
+    "zApprox": 48,
+    "p": 0.0005,
+    "levels": 4
+   },
+   {
+    "attr": "tokens",
+    "effect": 0.1473,
+    "nullMean": 0.004,
+    "nullSd": 0.0054,
+    "zApprox": 26.4,
+    "p": 0.0005
+   },
+   {
+    "attr": "meanUnitLength",
+    "effect": 0.1991,
+    "nullMean": 0.0039,
+    "nullSd": 0.0052,
+    "zApprox": 37.6,
+    "p": 0.0005
+   },
+   {
+    "attr": "docs",
+    "effect": 0.1433,
+    "nullMean": 0.0041,
+    "nullSd": 0.0056,
+    "zApprox": 24.9,
+    "p": 0.0005
+   }
+  ],
+  "allGroupStratified": [
+   {
+    "attr": "register",
+    "effect": 0.6172,
+    "nullMean": 0.4075,
+    "nullSd": 0.0216,
+    "zApprox": 9.7,
+    "p": 0.0005,
+    "levels": 31
+   }
+  ],
+  "wordGrainOnly": {
+   "nPos": 159,
+   "nNeg": 21,
+   "perm": [
+    {
+     "attr": "group",
+     "effect": 0.2602,
+     "nullMean": 0.0289,
+     "nullSd": 0.0182,
+     "zApprox": 12.7,
+     "p": 0.0005,
+     "levels": 6
+    },
+    {
+     "attr": "register",
+     "effect": 0.5029,
+     "nullMean": 0.1284,
+     "nullSd": 0.0434,
+     "zApprox": 8.6,
+     "p": 0.0005,
+     "levels": 24
+    },
+    {
+     "attr": "script",
+     "effect": 0.3678,
+     "nullMean": 0.0459,
+     "nullSd": 0.032,
+     "zApprox": 10.1,
+     "p": 0.0005,
+     "levels": 9
+    },
+    {
+     "attr": "grain",
+     "effect": 0,
+     "nullMean": 0,
+     "nullSd": 0,
+     "zApprox": null,
+     "p": 1,
+     "levels": 1
+    },
+    {
+     "attr": "tokens",
+     "effect": 0.0253,
+     "nullMean": 0.0056,
+     "nullSd": 0.0079,
+     "zApprox": 2.5,
+     "p": 0.03648
+    },
+    {
+     "attr": "meanUnitLength",
+     "effect": 0.013,
+     "nullMean": 0.0056,
+     "nullSd": 0.0079,
+     "zApprox": 0.9,
+     "p": 0.12594
+    },
+    {
+     "attr": "docs",
+     "effect": 0.0052,
+     "nullMean": 0.0057,
+     "nullSd": 0.0079,
+     "zApprox": -0.1,
+     "p": 0.34983
+    }
+   ]
+  },
+  "leaveOneRegisterOut": {
+   "minEta2": 0.4889,
+   "argmin": "code"
+  },
+  "negativesWordGrain": {
+   "legal": 7,
+   "scripture": 10,
+   "book": 1,
+   "treatise": 1,
+   "treebank": 2
+  }
+ },
+ "C4": {
+  "statistics": 81,
+  "nReversal": 38,
+  "nPocketSpecific": 6,
+  "nEither": 39,
+  "nEitherWithSharedPmaxLt05": 39,
+  "reversalStats": [
+   "burst.repAdj",
+   "burst.kerSlope",
+   "burst.kerCurv",
+   "burst.hurst",
+   "comp.asym",
+   "comp.initEnt",
+   "comp.finEnt",
+   "comp.edgeGap",
+   "fig.arrival",
+   "fig.persist",
+   "fig.crpTheta",
+   "fig.introLeft",
+   "fig.introRight",
+   "fig.introLeftFq",
+   "fig.initEnrich",
+   "fig.initFollow",
+   "fig.converge",
+   "freq.zipfAlpha",
+   "freq.heapsBeta",
+   "freq.rankBinEnt",
+   "freq.menzerath",
+   "freq.recurLen",
+   "freq.lenAcf1",
+   "order.rareSlope",
+   "order.rareCurve",
+   "order.fnBefore",
+   "order.depLen",
+   "order.initDev",
+   "order.finalDev",
+   "order.surprGrow",
+   "order.entSlope",
+   "order.entCurv",
+   "order.branch",
+   "para.prefixCopy",
+   "para.suffixCopy",
+   "phys.massAdd",
+   "phys.massExp",
+   "phys.affectAsym"
+  ],
+  "bonferroniNote": "p resolution with 2000 draws is 1/2001 = 0.0005; times 81 statistics = 0.04; times 81 x 6 attributes = 0.24 (not resolvable with 2000 draws, see zApprox in C2)"
+ }
+}

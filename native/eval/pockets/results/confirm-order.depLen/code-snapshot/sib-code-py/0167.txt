@@ -1,0 +1,178 @@
+# E7 snippets: authored by the study author before the detector was run.
+# Each entry: (id, label, fake_kind, code). label "clean" = every called stdlib API exists; "fake" = contains one injected non-existent API.
+# fake_kind: modattr (non-existent attribute of a core stdlib module), bare (non-existent bare function), module (non-existent module), method (non-existent method on an instance: not statically resolvable)
+S = []
+def add(id, label, kind, code): S.append((id, label, kind, code.strip("\n")))
+
+add("c01","clean",None,"""
+import os
+def count_py(d):
+    n = 0
+    for name in os.listdir(d):
+        if name.endswith('.py'):
+            n += 1
+    return n
+print(count_py(os.getcwd()))
+""")
+add("c02","clean",None,"""
+import json
+data = {'a': 1, 'b': [1, 2, 3]}
+text = json.dumps(data, indent=2)
+back = json.loads(text)
+print(back['b'])
+""")
+add("c03","clean",None,"""
+import re
+pat = re.compile(r'(\\d+)-(\\d+)')
+m = pat.match('12-34')
+print(m.group(1), re.sub(r'\\s+', ' ', 'a   b'))
+""")
+add("c04","clean",None,"""
+from collections import Counter, defaultdict
+words = 'a b a c b a'.split()
+c = Counter(words)
+d = defaultdict(list)
+for w in words:
+    d[w].append(len(w))
+print(c.most_common(2), dict(d))
+""")
+add("c05","clean",None,"""
+import math
+def hyp(a, b):
+    return math.sqrt(a * a + b * b)
+print(hyp(3, 4), math.floor(2.7), math.ceil(2.1), math.gcd(12, 18))
+""")
+add("c06","clean",None,"""
+import random
+random.seed(1)
+xs = [random.randint(1, 6) for _ in range(5)]
+print(random.choice(xs), random.sample(xs, 2))
+""")
+add("c07","clean",None,"""
+from datetime import datetime, timedelta
+now = datetime(2026, 1, 1)
+later = now + timedelta(days=30)
+print(later.strftime('%Y-%m-%d'), datetime.fromisoformat('2026-02-03').year)
+""")
+add("c08","clean",None,"""
+import itertools
+pairs = list(itertools.combinations([1, 2, 3], 2))
+flat = list(itertools.chain([1], [2, 3]))
+print(pairs, flat, list(itertools.islice(itertools.count(5), 3)))
+""")
+add("c09","clean",None,"""
+import argparse
+p = argparse.ArgumentParser(description='demo')
+p.add_argument('--n', type=int, default=3)
+args = p.parse_args([])
+print(args.n)
+""")
+add("c10","clean",None,"""
+from pathlib import Path
+p = Path('.')
+files = sorted(x.name for x in p.glob('*.py'))
+print(len(files), p.resolve().name)
+""")
+add("c11","clean",None,"""
+import functools
+@functools.lru_cache(maxsize=None)
+def fib(n):
+    return n if n < 2 else fib(n - 1) + fib(n - 2)
+print(fib(20), functools.reduce(lambda a, b: a + b, [1, 2, 3]))
+""")
+add("c12","clean",None,"""
+import statistics
+vals = [2, 4, 4, 4, 5, 5, 7, 9]
+print(statistics.mean(vals), statistics.median(vals), statistics.pstdev(vals))
+""")
+add("c13","clean",None,"""
+import hashlib, base64
+h = hashlib.sha256(b'abc').hexdigest()
+print(h[:8], base64.b64encode(b'abc'))
+""")
+add("c14","clean",None,"""
+import textwrap, string
+s = textwrap.fill('the quick brown fox jumps over the lazy dog', width=20)
+print(s, string.ascii_lowercase[:3], string.capwords('hello world'))
+""")
+add("c15","clean",None,"""
+import csv, io
+buf = io.StringIO('a,b\\n1,2\\n')
+rows = list(csv.DictReader(buf))
+out = io.StringIO()
+w = csv.writer(out)
+w.writerow(['x', 'y'])
+print(rows, out.getvalue())
+""")
+add("f01","fake","modattr","""
+import math
+def volume(r):
+    return math.cube(r) * 4 / 3 * math.pi
+print(volume(2))
+""")
+add("f02","fake","modattr","""
+import os
+def files_in(d):
+    return os.listfiles(d)
+print(files_in('.'))
+""")
+add("f03","fake","modattr","""
+import json
+doc = json.parse('{"a": 1}')
+print(doc['a'])
+""")
+add("f04","fake","modattr","""
+import re
+if re.matches(r'\\d+', '123'):
+    print('digits')
+""")
+add("f05","fake","modattr","""
+import random
+winner = random.pick(['a', 'b', 'c'])
+print(winner)
+""")
+add("f06","fake","modattr","""
+import datetime
+today = datetime.now()
+print(today.year)
+""")
+add("f07","fake","modattr","""
+import itertools
+flat = list(itertools.flatten([[1], [2, 3]]))
+print(flat)
+""")
+add("f08","fake","modattr","""
+import statistics
+print(statistics.average([1, 2, 3]))
+""")
+add("f09","fake","modattr","""
+import time
+time.sleep_ms(100)
+print('done')
+""")
+add("f10","fake","modattr","""
+from collections import OrderedList
+q = OrderedList()
+q.append(1)
+""")
+add("f11","fake","bare","""
+nums = [3, 1, 2]
+print(sum_list(nums))
+""")
+add("f12","fake","bare","""
+def avg(xs):
+    return total(xs) / len(xs)
+print(avg([1, 2, 3]))
+""")
+add("f13","fake","bare","""
+name = 'world'
+print_line('hello ' + name)
+""")
+add("f14","fake","module","""
+import jsonparser
+print(jsonparser.load('{}'))
+""")
+add("f15","fake","method","""
+s = 'hello'
+print(s.reverse())
+""")

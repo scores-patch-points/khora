@@ -1,0 +1,1171 @@
+{
+ "nPockets": 391,
+ "full_dedupe": {
+  "applicable": 390,
+  "allReal": {
+   "n": 390,
+   "ext30": {
+    "P+strict": 256,
+    "P+shifted": 122,
+    "AMBIG": 7,
+    "ABSENT": 5
+   },
+   "atlasStyle10": {
+    "UNDEF": 173,
+    "P+": 216,
+    "M": 1
+   },
+   "survive_strict_or_shifted": 378,
+   "survive_strict": 256
+  },
+  "atlasPresent": {
+   "n": 241,
+   "ext30": {
+    "P+strict": 223,
+    "P+shifted": 18
+   },
+   "atlasStyle10": {
+    "UNDEF": 35,
+    "P+": 206
+   },
+   "survive_strict_or_shifted": 241,
+   "survive_strict": 223
+  },
+  "atlasNotPresent": {
+   "n": 149,
+   "ext30": {
+    "P+shifted": 104,
+    "AMBIG": 7,
+    "P+strict": 33,
+    "ABSENT": 5
+   },
+   "atlasStyle10": {
+    "UNDEF": 138,
+    "P+": 10,
+    "M": 1
+   },
+   "survive_strict_or_shifted": 137,
+   "survive_strict": 33
+  },
+  "medianV_atlasPresent": 0.11632067658911183,
+  "medianNull_atlasPresent": 0.0005463116686617772,
+  "medianMinZ30_defined": 289.1842079112974,
+  "failures": []
+ },
+ "size30": {
+  "applicable": 324,
+  "allReal": {
+   "n": 324,
+   "ext30": {
+    "P+shifted": 153,
+    "P+strict": 151,
+    "AMBIG": 16,
+    "ABSENT": 4
+   },
+   "atlasStyle10": {
+    "UNDEF": 201,
+    "P+": 120,
+    "M": 3
+   },
+   "survive_strict_or_shifted": 304,
+   "survive_strict": 151
+  },
+  "atlasPresent": {
+   "n": 213,
+   "ext30": {
+    "P+shifted": 63,
+    "P+strict": 145,
+    "AMBIG": 5
+   },
+   "atlasStyle10": {
+    "UNDEF": 93,
+    "P+": 118,
+    "M": 2
+   },
+   "survive_strict_or_shifted": 208,
+   "survive_strict": 145
+  },
+  "atlasNotPresent": {
+   "n": 111,
+   "ext30": {
+    "P+shifted": 90,
+    "AMBIG": 11,
+    "ABSENT": 4,
+    "P+strict": 6
+   },
+   "atlasStyle10": {
+    "UNDEF": 108,
+    "M": 1,
+    "P+": 2
+   },
+   "survive_strict_or_shifted": 96,
+   "survive_strict": 6
+  },
+  "medianV_atlasPresent": 0.08513067494595816,
+  "medianNull_atlasPresent": 0.0005049724070734858,
+  "medianMinZ30_defined": 118.60497866764209,
+  "failures": [
+   [
+    "ml-lat-livy",
+    "AMBIG"
+   ],
+   [
+    "cd-smiles-pubchem",
+    "AMBIG"
+   ],
+   [
+    "oc-lccc",
+    "AMBIG"
+   ],
+   [
+    "bk-wpa-tx",
+    "AMBIG"
+   ],
+   [
+    "ml-grc-plotinus",
+    "AMBIG"
+   ]
+  ]
+ },
+ "size30_L16": {
+  "applicable": 324,
+  "allReal": {
+   "n": 324,
+   "ext30": {
+    "P+shifted": 172,
+    "P+strict": 130,
+    "AMBIG": 17,
+    "ABSENT": 5
+   },
+   "atlasStyle10": {
+    "UNDEF": 223,
+    "P+": 100,
+    "M": 1
+   },
+   "survive_strict_or_shifted": 302,
+   "survive_strict": 130
+  },
+  "atlasPresent": {
+   "n": 213,
+   "ext30": {
+    "P+shifted": 84,
+    "P+strict": 124,
+    "AMBIG": 5
+   },
+   "atlasStyle10": {
+    "UNDEF": 113,
+    "P+": 99,
+    "M": 1
+   },
+   "survive_strict_or_shifted": 208,
+   "survive_strict": 124
+  },
+  "atlasNotPresent": {
+   "n": 111,
+   "ext30": {
+    "P+shifted": 88,
+    "P+strict": 6,
+    "AMBIG": 12,
+    "ABSENT": 5
+   },
+   "atlasStyle10": {
+    "UNDEF": 110,
+    "P+": 1
+   },
+   "survive_strict_or_shifted": 94,
+   "survive_strict": 6
+  },
+  "medianV_atlasPresent": 0.07499379960336228,
+  "medianNull_atlasPresent": 0.00011585342440412205,
+  "medianMinZ30_defined": 179.20385422502312,
+  "failures": [
+   [
+    "ml-lat-livy",
+    "AMBIG"
+   ],
+   [
+    "bk-dante",
+    "AMBIG"
+   ],
+   [
+    "bk-war-worlds",
+    "AMBIG"
+   ],
+   [
+    "bk-wpa-tx",
+    "AMBIG"
+   ],
+   [
+    "ml-grc-plotinus",
+    "AMBIG"
+   ]
+  ]
+ },
+ "size60": {
+  "applicable": 262,
+  "allReal": {
+   "n": 262,
+   "ext30": {
+    "P+shifted": 73,
+    "P+strict": 183,
+    "AMBIG": 5,
+    "ABSENT": 1
+   },
+   "atlasStyle10": {
+    "UNDEF": 109,
+    "P+": 151,
+    "M": 2
+   },
+   "survive_strict_or_shifted": 256,
+   "survive_strict": 183
+  },
+  "atlasPresent": {
+   "n": 209,
+   "ext30": {
+    "P+shifted": 36,
+    "P+strict": 170,
+    "AMBIG": 3
+   },
+   "atlasStyle10": {
+    "UNDEF": 60,
+    "P+": 147,
+    "M": 2
+   },
+   "survive_strict_or_shifted": 206,
+   "survive_strict": 170
+  },
+  "atlasNotPresent": {
+   "n": 53,
+   "ext30": {
+    "P+strict": 13,
+    "P+shifted": 37,
+    "AMBIG": 2,
+    "ABSENT": 1
+   },
+   "atlasStyle10": {
+    "UNDEF": 49,
+    "P+": 4
+   },
+   "survive_strict_or_shifted": 50,
+   "survive_strict": 13
+  },
+  "medianV_atlasPresent": 0.1195496850600648,
+  "medianNull_atlasPresent": 0.0007079080565442078,
+  "medianMinZ30_defined": 172.78925823993927,
+  "failures": [
+   [
+    "cd-protein-aa",
+    "AMBIG"
+   ],
+   [
+    "cd-smiles-pubchem",
+    "AMBIG"
+   ],
+   [
+    "ml-lzh-shiji",
+    "AMBIG"
+   ]
+  ]
+ },
+ "size60_L16": {
+  "applicable": 262,
+  "allReal": {
+   "n": 262,
+   "ext30": {
+    "P+shifted": 97,
+    "P+strict": 160,
+    "ABSENT": 1,
+    "AMBIG": 4
+   },
+   "atlasStyle10": {
+    "UNDEF": 126,
+    "P+": 135,
+    "A": 1
+   },
+   "survive_strict_or_shifted": 257,
+   "survive_strict": 160
+  },
+  "atlasPresent": {
+   "n": 209,
+   "ext30": {
+    "P+shifted": 56,
+    "P+strict": 151,
+    "ABSENT": 1,
+    "AMBIG": 1
+   },
+   "atlasStyle10": {
+    "UNDEF": 75,
+    "P+": 133,
+    "A": 1
+   },
+   "survive_strict_or_shifted": 207,
+   "survive_strict": 151
+  },
+  "atlasNotPresent": {
+   "n": 53,
+   "ext30": {
+    "P+strict": 9,
+    "P+shifted": 41,
+    "AMBIG": 3
+   },
+   "atlasStyle10": {
+    "UNDEF": 51,
+    "P+": 2
+   },
+   "survive_strict_or_shifted": 50,
+   "survive_strict": 9
+  },
+  "medianV_atlasPresent": 0.11152289278379612,
+  "medianNull_atlasPresent": 0.00023761393808854336,
+  "medianMinZ30_defined": 219.24296299508782,
+  "failures": [
+   [
+    "cd-protein-aa",
+    "ABSENT"
+   ],
+   [
+    "ml-lzh-shiji",
+    "AMBIG"
+   ]
+  ]
+ },
+ "size60_L32": {
+  "applicable": 262,
+  "allReal": {
+   "n": 262,
+   "ext30": {
+    "P+shifted": 100,
+    "P+strict": 157,
+    "AMBIG": 5
+   },
+   "atlasStyle10": {
+    "UNDEF": 132,
+    "P+": 128,
+    "M": 2
+   },
+   "survive_strict_or_shifted": 257,
+   "survive_strict": 157
+  },
+  "atlasPresent": {
+   "n": 209,
+   "ext30": {
+    "P+shifted": 56,
+    "P+strict": 150,
+    "AMBIG": 3
+   },
+   "atlasStyle10": {
+    "UNDEF": 82,
+    "P+": 125,
+    "M": 2
+   },
+   "survive_strict_or_shifted": 206,
+   "survive_strict": 150
+  },
+  "atlasNotPresent": {
+   "n": 53,
+   "ext30": {
+    "P+strict": 7,
+    "P+shifted": 44,
+    "AMBIG": 2
+   },
+   "atlasStyle10": {
+    "P+": 3,
+    "UNDEF": 50
+   },
+   "survive_strict_or_shifted": 51,
+   "survive_strict": 7
+  },
+  "medianV_atlasPresent": 0.1326522846561602,
+  "medianNull_atlasPresent": 0.00023681786434887425,
+  "medianMinZ30_defined": 227.4762219822897,
+  "failures": [
+   [
+    "cd-protein-aa",
+    "AMBIG"
+   ],
+   [
+    "cd-smiles-pubchem",
+    "AMBIG"
+   ],
+   [
+    "ml-lzh-shiji",
+    "AMBIG"
+   ]
+  ]
+ },
+ "size60_L8": {
+  "applicable": 262,
+  "allReal": {
+   "n": 262,
+   "ext30": {
+    "P+shifted": 107,
+    "AMBIG": 9,
+    "P+strict": 145,
+    "ABSENT": 1
+   },
+   "atlasStyle10": {
+    "UNDEF": 133,
+    "M": 1,
+    "P+": 127,
+    "A": 1
+   },
+   "survive_strict_or_shifted": 252,
+   "survive_strict": 145
+  },
+  "atlasPresent": {
+   "n": 209,
+   "ext30": {
+    "P+shifted": 61,
+    "AMBIG": 3,
+    "P+strict": 144,
+    "ABSENT": 1
+   },
+   "atlasStyle10": {
+    "UNDEF": 80,
+    "M": 1,
+    "P+": 127,
+    "A": 1
+   },
+   "survive_strict_or_shifted": 205,
+   "survive_strict": 144
+  },
+  "atlasNotPresent": {
+   "n": 53,
+   "ext30": {
+    "P+shifted": 46,
+    "AMBIG": 6,
+    "P+strict": 1
+   },
+   "atlasStyle10": {
+    "UNDEF": 53
+   },
+   "survive_strict_or_shifted": 47,
+   "survive_strict": 1
+  },
+  "medianV_atlasPresent": 0.0805166212903714,
+  "medianNull_atlasPresent": 0.00022397505028190305,
+  "medianMinZ30_defined": 192.75054501258896,
+  "failures": [
+   [
+    "cd-codons",
+    "AMBIG"
+   ],
+   [
+    "ml-deu-nietzsche",
+    "AMBIG"
+   ],
+   [
+    "cd-protein-aa",
+    "ABSENT"
+   ],
+   [
+    "ml-lzh-shiji",
+    "AMBIG"
+   ]
+  ]
+ },
+ "size60_hapax": {
+  "applicable": 262,
+  "allReal": {
+   "n": 262,
+   "ext30": {
+    "P+shifted": 57,
+    "P+strict": 201,
+    "AMBIG": 3,
+    "ABSENT": 1
+   },
+   "atlasStyle10": {
+    "UNDEF": 90,
+    "P+": 170,
+    "M": 2
+   },
+   "survive_strict_or_shifted": 258,
+   "survive_strict": 201
+  },
+  "atlasPresent": {
+   "n": 209,
+   "ext30": {
+    "P+shifted": 28,
+    "P+strict": 179,
+    "AMBIG": 2
+   },
+   "atlasStyle10": {
+    "UNDEF": 48,
+    "P+": 159,
+    "M": 2
+   },
+   "survive_strict_or_shifted": 207,
+   "survive_strict": 179
+  },
+  "atlasNotPresent": {
+   "n": 53,
+   "ext30": {
+    "P+strict": 22,
+    "P+shifted": 29,
+    "AMBIG": 1,
+    "ABSENT": 1
+   },
+   "atlasStyle10": {
+    "UNDEF": 42,
+    "P+": 11
+   },
+   "survive_strict_or_shifted": 51,
+   "survive_strict": 22
+  },
+  "medianV_atlasPresent": 0.13541121562275293,
+  "medianNull_atlasPresent": 0.0009356606878706468,
+  "medianMinZ30_defined": 160.7819580697032,
+  "failures": [
+   [
+    "cd-protein-aa",
+    "AMBIG"
+   ],
+   [
+    "cd-smiles-pubchem",
+    "AMBIG"
+   ]
+  ]
+ },
+ "size60_rare1": {
+  "applicable": 262,
+  "allReal": {
+   "n": 262,
+   "ext30": {
+    "P+shifted": 77,
+    "P+strict": 179,
+    "AMBIG": 5,
+    "ABSENT": 1
+   },
+   "atlasStyle10": {
+    "UNDEF": 109,
+    "P+": 151,
+    "M": 2
+   },
+   "survive_strict_or_shifted": 256,
+   "survive_strict": 179
+  },
+  "atlasPresent": {
+   "n": 209,
+   "ext30": {
+    "P+shifted": 38,
+    "P+strict": 168,
+    "AMBIG": 3
+   },
+   "atlasStyle10": {
+    "UNDEF": 62,
+    "P+": 145,
+    "M": 2
+   },
+   "survive_strict_or_shifted": 206,
+   "survive_strict": 168
+  },
+  "atlasNotPresent": {
+   "n": 53,
+   "ext30": {
+    "P+shifted": 39,
+    "P+strict": 11,
+    "AMBIG": 2,
+    "ABSENT": 1
+   },
+   "atlasStyle10": {
+    "UNDEF": 47,
+    "P+": 6
+   },
+   "survive_strict_or_shifted": 50,
+   "survive_strict": 11
+  },
+  "medianV_atlasPresent": 0.11963343941533822,
+  "medianNull_atlasPresent": 0.0007063112142077444,
+  "medianMinZ30_defined": 167.17022503096632,
+  "failures": [
+   [
+    "cd-protein-aa",
+    "AMBIG"
+   ],
+   [
+    "cd-smiles-pubchem",
+    "AMBIG"
+   ],
+   [
+    "ml-lzh-shiji",
+    "AMBIG"
+   ]
+  ]
+ },
+ "size60_stem5": {
+  "applicable": 262,
+  "allReal": {
+   "n": 262,
+   "ext30": {
+    "P+shifted": 69,
+    "P+strict": 188,
+    "AMBIG": 4,
+    "ABSENT": 1
+   },
+   "atlasStyle10": {
+    "UNDEF": 97,
+    "P+": 163,
+    "M": 2
+   },
+   "survive_strict_or_shifted": 257,
+   "survive_strict": 188
+  },
+  "atlasPresent": {
+   "n": 209,
+   "ext30": {
+    "P+shifted": 32,
+    "P+strict": 174,
+    "AMBIG": 3
+   },
+   "atlasStyle10": {
+    "UNDEF": 53,
+    "P+": 154,
+    "M": 2
+   },
+   "survive_strict_or_shifted": 206,
+   "survive_strict": 174
+  },
+  "atlasNotPresent": {
+   "n": 53,
+   "ext30": {
+    "P+strict": 14,
+    "P+shifted": 37,
+    "AMBIG": 1,
+    "ABSENT": 1
+   },
+   "atlasStyle10": {
+    "UNDEF": 44,
+    "P+": 9
+   },
+   "survive_strict_or_shifted": 51,
+   "survive_strict": 14
+  },
+  "medianV_atlasPresent": 0.12447798885341399,
+  "medianNull_atlasPresent": 0.0007689976187975845,
+  "medianMinZ30_defined": 166.93037453197368,
+  "failures": [
+   [
+    "cd-protein-aa",
+    "AMBIG"
+   ],
+   [
+    "cd-smiles-pubchem",
+    "AMBIG"
+   ],
+   [
+    "ml-lzh-shiji",
+    "AMBIG"
+   ]
+  ]
+ },
+ "classPattern": {
+  "size60": {
+   "n": 209,
+   "eta2_v_group": {
+    "eta2": 0.4760036710765545,
+    "p": 0.0004997501249375312,
+    "levels": 6
+   },
+   "eta2_excess_group": {
+    "eta2": 0.5000302438776718,
+    "p": 0.0004997501249375312,
+    "levels": 6
+   },
+   "eta2_v_register": {
+    "eta2": 0.6278065896858684,
+    "p": 0.0004997501249375312,
+    "levels": 26
+   },
+   "eta2_excess_register": {
+    "eta2": 0.6327829744448187,
+    "p": 0.0004997501249375312,
+    "levels": 26
+   },
+   "medianV_byRegister": {
+    "code": {
+     "n": 44,
+     "medV": 0.3000546840817151
+    },
+    "legal": {
+     "n": 22,
+     "medV": 0.3038440172454102
+    },
+    "scripture": {
+     "n": 18,
+     "medV": 0.1311579806742884
+    },
+    "treatise": {
+     "n": 14,
+     "medV": 0.02185094352944361
+    },
+    "novel": {
+     "n": 14,
+     "medV": 0.017143984820449987
+    },
+    "notation": {
+     "n": 13,
+     "medV": 0.5524074074073724
+    },
+    "academic": {
+     "n": 11,
+     "medV": 0.0920005004104496
+    },
+    "chat": {
+     "n": 8,
+     "medV": 0.05705574902458466
+    },
+    "dialect": {
+     "n": 8,
+     "medV": 0.029614102614687
+    },
+    "translation": {
+     "n": 7,
+     "medV": 0.04888450281760015
+    },
+    "book": {
+     "n": 6,
+     "medV": 0.023124762004499644
+    },
+    "diagram": {
+     "n": 6,
+     "medV": 0.5686412173927238
+    },
+    "history": {
+     "n": 5,
+     "medV": 0.01642046557208232
+    },
+    "poetry": {
+     "n": 5,
+     "medV": 0.007628170166753989
+    },
+    "markup": {
+     "n": 5,
+     "medV": 0.25672042127689565
+    }
+   },
+   "spearman_atlasV_vs_variantV": 0.9727272727272728
+  },
+  "size60_L8": {
+   "n": 209,
+   "eta2_v_group": {
+    "eta2": 0.39617742470202194,
+    "p": 0.0004997501249375312,
+    "levels": 6
+   },
+   "eta2_excess_group": {
+    "eta2": 0.4373839314109158,
+    "p": 0.0004997501249375312,
+    "levels": 6
+   },
+   "eta2_v_register": {
+    "eta2": 0.6087011479764862,
+    "p": 0.0004997501249375312,
+    "levels": 26
+   },
+   "eta2_excess_register": {
+    "eta2": 0.6197319000706689,
+    "p": 0.0004997501249375312,
+    "levels": 26
+   },
+   "medianV_byRegister": {
+    "code": {
+     "n": 44,
+     "medV": 0.22097951138903227
+    },
+    "legal": {
+     "n": 22,
+     "medV": 0.19549446849077867
+    },
+    "scripture": {
+     "n": 18,
+     "medV": 0.06507602666306411
+    },
+    "treatise": {
+     "n": 14,
+     "medV": 0.01158308669255348
+    },
+    "novel": {
+     "n": 14,
+     "medV": 0.007175656208801229
+    },
+    "notation": {
+     "n": 13,
+     "medV": 0.4312082506526167
+    },
+    "academic": {
+     "n": 11,
+     "medV": 0.05021564492972175
+    },
+    "chat": {
+     "n": 8,
+     "medV": 0.02878845837449262
+    },
+    "dialect": {
+     "n": 8,
+     "medV": 0.014669620013592066
+    },
+    "translation": {
+     "n": 7,
+     "medV": 0.020271422704809083
+    },
+    "book": {
+     "n": 6,
+     "medV": 0.009033848560648039
+    },
+    "diagram": {
+     "n": 6,
+     "medV": 0.6659527080423686
+    },
+    "history": {
+     "n": 5,
+     "medV": 0.007187390298440732
+    },
+    "poetry": {
+     "n": 5,
+     "medV": 0.003399940766939835
+    },
+    "markup": {
+     "n": 5,
+     "medV": 0.17914871448419944
+    }
+   },
+   "spearman_atlasV_vs_variantV": 0.9597284294652716
+  },
+  "size60_L16": {
+   "n": 209,
+   "eta2_v_group": {
+    "eta2": 0.4491311732310369,
+    "p": 0.0004997501249375312,
+    "levels": 6
+   },
+   "eta2_excess_group": {
+    "eta2": 0.4508327787481938,
+    "p": 0.0004997501249375312,
+    "levels": 6
+   },
+   "eta2_v_register": {
+    "eta2": 0.6463464404251625,
+    "p": 0.0004997501249375312,
+    "levels": 26
+   },
+   "eta2_excess_register": {
+    "eta2": 0.6287033845381711,
+    "p": 0.0004997501249375312,
+    "levels": 26
+   },
+   "medianV_byRegister": {
+    "code": {
+     "n": 44,
+     "medV": 0.2700048372726087
+    },
+    "legal": {
+     "n": 22,
+     "medV": 0.2492172482116075
+    },
+    "scripture": {
+     "n": 18,
+     "medV": 0.09451422452457336
+    },
+    "treatise": {
+     "n": 14,
+     "medV": 0.01586509717071749
+    },
+    "novel": {
+     "n": 14,
+     "medV": 0.011449166248439724
+    },
+    "notation": {
+     "n": 13,
+     "medV": 0.5081786051523522
+    },
+    "academic": {
+     "n": 11,
+     "medV": 0.07299048150889575
+    },
+    "chat": {
+     "n": 8,
+     "medV": 0.042443323436145874
+    },
+    "dialect": {
+     "n": 8,
+     "medV": 0.022834047271317104
+    },
+    "translation": {
+     "n": 7,
+     "medV": 0.03222372622076364
+    },
+    "book": {
+     "n": 6,
+     "medV": 0.015422841745476035
+    },
+    "diagram": {
+     "n": 6,
+     "medV": 0.717793310824618
+    },
+    "history": {
+     "n": 5,
+     "medV": 0.011678708428462414
+    },
+    "poetry": {
+     "n": 5,
+     "medV": 0.006403357763247186
+    },
+    "markup": {
+     "n": 5,
+     "medV": 0.23556207755927971
+    }
+   },
+   "spearman_atlasV_vs_variantV": 0.9653386087596614
+  },
+  "size60_L32": {
+   "n": 209,
+   "eta2_v_group": {
+    "eta2": 0.4725304842501802,
+    "p": 0.0004997501249375312,
+    "levels": 6
+   },
+   "eta2_excess_group": {
+    "eta2": 0.4614863083674307,
+    "p": 0.0004997501249375312,
+    "levels": 6
+   },
+   "eta2_v_register": {
+    "eta2": 0.662029442555129,
+    "p": 0.0004997501249375312,
+    "levels": 26
+   },
+   "eta2_excess_register": {
+    "eta2": 0.6331054237998173,
+    "p": 0.0004997501249375312,
+    "levels": 26
+   },
+   "medianV_byRegister": {
+    "code": {
+     "n": 44,
+     "medV": 0.2972931486106063
+    },
+    "legal": {
+     "n": 22,
+     "medV": 0.2772051067522625
+    },
+    "scripture": {
+     "n": 18,
+     "medV": 0.11083377603063127
+    },
+    "treatise": {
+     "n": 14,
+     "medV": 0.017371568146700156
+    },
+    "novel": {
+     "n": 14,
+     "medV": 0.013958630791876203
+    },
+    "notation": {
+     "n": 13,
+     "medV": 0.543625384277675
+    },
+    "academic": {
+     "n": 11,
+     "medV": 0.08581970052318866
+    },
+    "chat": {
+     "n": 8,
+     "medV": 0.04779548483384133
+    },
+    "dialect": {
+     "n": 8,
+     "medV": 0.02768197176328613
+    },
+    "translation": {
+     "n": 7,
+     "medV": 0.04108815762310769
+    },
+    "book": {
+     "n": 6,
+     "medV": 0.018442011489696597
+    },
+    "diagram": {
+     "n": 6,
+     "medV": 0.7412840089027668
+    },
+    "history": {
+     "n": 5,
+     "medV": 0.013746536456437752
+    },
+    "poetry": {
+     "n": 5,
+     "medV": 0.007020035496225319
+    },
+    "markup": {
+     "n": 5,
+     "medV": 0.26177829821335763
+    }
+   },
+   "spearman_atlasV_vs_variantV": 0.9681384405068616
+  },
+  "size30": {
+   "n": 213,
+   "eta2_v_group": {
+    "eta2": 0.4658903810702424,
+    "p": 0.0004997501249375312,
+    "levels": 6
+   },
+   "eta2_excess_group": {
+    "eta2": 0.5277294958070695,
+    "p": 0.0004997501249375312,
+    "levels": 6
+   },
+   "eta2_v_register": {
+    "eta2": 0.6000790572916472,
+    "p": 0.0004997501249375312,
+    "levels": 28
+   },
+   "eta2_excess_register": {
+    "eta2": 0.6115512109288116,
+    "p": 0.0004997501249375312,
+    "levels": 28
+   },
+   "medianV_byRegister": {
+    "code": {
+     "n": 45,
+     "medV": 0.2674336711320393
+    },
+    "legal": {
+     "n": 19,
+     "medV": 0.2909569280159303
+    },
+    "scripture": {
+     "n": 19,
+     "medV": 0.09636360652075382
+    },
+    "treatise": {
+     "n": 14,
+     "medV": 0.017512974540295545
+    },
+    "notation": {
+     "n": 13,
+     "medV": 0.4384394271128258
+    },
+    "novel": {
+     "n": 12,
+     "medV": 0.007960072380228667
+    },
+    "chat": {
+     "n": 10,
+     "medV": 0.04024658677553816
+    },
+    "translation": {
+     "n": 9,
+     "medV": 0.027304860841923073
+    },
+    "dialect": {
+     "n": 8,
+     "medV": 0.019426480067977536
+    },
+    "academic": {
+     "n": 7,
+     "medV": 0.0687484469640367
+    },
+    "treebank": {
+     "n": 7,
+     "medV": 0.01964454414883221
+    },
+    "poetry": {
+     "n": 6,
+     "medV": 0.01880368465435822
+    },
+    "diagram": {
+     "n": 6,
+     "medV": 0.5668109468278999
+    },
+    "markup": {
+     "n": 5,
+     "medV": 0.2331389916794251
+    }
+   },
+   "spearman_atlasV_vs_variantV": 0.9580445111153608
+  },
+  "size30_L16": {
+   "n": 213,
+   "eta2_v_group": {
+    "eta2": 0.43582574607757013,
+    "p": 0.0004997501249375312,
+    "levels": 6
+   },
+   "eta2_excess_group": {
+    "eta2": 0.46707116569984536,
+    "p": 0.0004997501249375312,
+    "levels": 6
+   },
+   "eta2_v_register": {
+    "eta2": 0.6116000628633103,
+    "p": 0.0004997501249375312,
+    "levels": 28
+   },
+   "eta2_excess_register": {
+    "eta2": 0.6057889931270892,
+    "p": 0.0004997501249375312,
+    "levels": 28
+   },
+   "medianV_byRegister": {
+    "code": {
+     "n": 45,
+     "medV": 0.23658259614512644
+    },
+    "legal": {
+     "n": 19,
+     "medV": 0.2635147572423193
+    },
+    "scripture": {
+     "n": 19,
+     "medV": 0.0716647537847166
+    },
+    "treatise": {
+     "n": 14,
+     "medV": 0.014666000296074344
+    },
+    "notation": {
+     "n": 13,
+     "medV": 0.39891714821578717
+    },
+    "novel": {
+     "n": 12,
+     "medV": 0.005221581493060512
+    },
+    "chat": {
+     "n": 10,
+     "medV": 0.028351494395792542
+    },
+    "translation": {
+     "n": 9,
+     "medV": 0.020660674401824508
+    },
+    "dialect": {
+     "n": 8,
+     "medV": 0.013275736510422576
+    },
+    "academic": {
+     "n": 7,
+     "medV": 0.053266525801063835
+    },
+    "treebank": {
+     "n": 7,
+     "medV": 0.01278711605391436
+    },
+    "poetry": {
+     "n": 6,
+     "medV": 0.012804721789507312
+    },
+    "diagram": {
+     "n": 6,
+     "medV": 0.6635586331308332
+    },
+    "markup": {
+     "n": 5,
+     "medV": 0.22240468053405493
+    }
+   },
+   "spearman_atlasV_vs_variantV": 0.9502596605909482
+  }
+ }
+}

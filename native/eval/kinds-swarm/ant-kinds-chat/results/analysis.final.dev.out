@@ -1,0 +1,10 @@
+{
+ "file": "/Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-kinds-chat/results/analysis.irc.dev.json",
+ "rows": 2571,
+ "jointRows": 1600,
+ "verdicts": {
+  "K2_J1": "J1 holds (real dispersion > random frequency-stratified partitions, lower bound > 0)",
+  "K2_S1": "S1 record accuracy 0.0937 vs null q95 0.0666; record - freq-only = -0.0423 (SESOI 0.03)",
+  "K3": "K arm: AUC REC_cond 0.8119 (block CI 0.793,0.8319); COUNT 0.6317; REC_cond - COUNT {\"point\":0.1549,\"blockCI\":[0.0507,0.269],\"pairCI\":[0.0878,0.2173]}; RECCOUNT_cond - COUNT {\"point\":0.1427,\"blockCI\":[0.058,0.2421],\"pairCI\":[0.081,0.2016]}"
+ }
+}

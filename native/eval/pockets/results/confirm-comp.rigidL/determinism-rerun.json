@@ -1,0 +1,8 @@
+{
+ "note": "3 pockets re-run with node confirm.mjs pockets --ids ... and compared byte for byte (cmp) against the first run, 2026-10-07; plus selfcheck determinism (asym-en-dolls-house twice in one process) and fidelity (bk-alice: all 24 comp cells v, nullMean, nullSd, z equal to results/atlas/bk-alice.json, worst relative diff 0)",
+ "identical": {
+  "rl-law-fr-heldout": true,
+  "sp-protein-aa": true,
+  "rl-smiles-pubchem-heldout": true
+ }
+}

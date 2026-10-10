@@ -1,0 +1,14749 @@
+{
+"authored": true,
+"note": "model-authored toy fixture; labelled authored; never natural held-out data",
+"games": [
+{
+"id": "toy:1",
+"source": "authored",
+"text": "[Event \"Toy 1\"]\n[Site \"authored\"]\n[Date \"2026.10.06\"]\n[Round \"-\"]\n[White \"Ada\"]\n[Black \"Babbage\"]\n[Result \"1-0\"]\n\n1. e4 e5 2. Nf3 d6 3. Bc4 Bg4 4. Nc3 g6 5. Nxe5 Bxd1 6. Bxf7+ Ke7 7. Nd5# 1-0",
+"tags": {
+"Event": "Toy 1",
+"Site": "authored",
+"Date": "2026.10.06",
+"Round": "-",
+"White": "Ada",
+"Black": "Babbage",
+"Result": "1-0"
+},
+"tokens": [
+{
+"s": 1,
+"e": 6,
+"cls": "tag_name"
+},
+{
+"s": 8,
+"e": 13,
+"cls": "tag_value",
+"tag": "Event"
+},
+{
+"s": 17,
+"e": 21,
+"cls": "tag_name"
+},
+{
+"s": 23,
+"e": 31,
+"cls": "tag_value",
+"tag": "Site"
+},
+{
+"s": 35,
+"e": 39,
+"cls": "tag_name"
+},
+{
+"s": 41,
+"e": 51,
+"cls": "tag_value",
+"tag": "Date"
+},
+{
+"s": 55,
+"e": 60,
+"cls": "tag_name"
+},
+{
+"s": 62,
+"e": 63,
+"cls": "tag_value",
+"tag": "Round"
+},
+{
+"s": 67,
+"e": 72,
+"cls": "tag_name"
+},
+{
+"s": 74,
+"e": 77,
+"cls": "tag_value",
+"tag": "White"
+},
+{
+"s": 81,
+"e": 86,
+"cls": "tag_name"
+},
+{
+"s": 88,
+"e": 95,
+"cls": "tag_value",
+"tag": "Black"
+},
+{
+"s": 99,
+"e": 105,
+"cls": "tag_name"
+},
+{
+"s": 107,
+"e": 110,
+"cls": "tag_value",
+"tag": "Result"
+},
+{
+"s": 114,
+"e": 116,
+"cls": "move_number"
+},
+{
+"s": 117,
+"e": 119,
+"cls": "san",
+"piece": "P",
+"ply": 1
+},
+{
+"s": 120,
+"e": 122,
+"cls": "san",
+"piece": "P",
+"ply": 2
+},
+{
+"s": 123,
+"e": 125,
+"cls": "move_number"
+},
+{
+"s": 126,
+"e": 129,
+"cls": "san",
+"piece": "N",
+"ply": 3
+},
+{
+"s": 130,
+"e": 132,
+"cls": "san",
+"piece": "P",
+"ply": 4
+},
+{
+"s": 133,
+"e": 135,
+"cls": "move_number"
+},
+{
+"s": 136,
+"e": 139,
+"cls": "san",
+"piece": "B",
+"ply": 5
+},
+{
+"s": 140,
+"e": 143,
+"cls": "san",
+"piece": "B",
+"ply": 6
+},
+{
+"s": 144,
+"e": 146,
+"cls": "move_number"
+},
+{
+"s": 147,
+"e": 150,
+"cls": "san",
+"piece": "N",
+"ply": 7
+},
+{
+"s": 151,
+"e": 153,
+"cls": "san",
+"piece": "P",
+"ply": 8
+},
+{
+"s": 154,
+"e": 156,
+"cls": "move_number"
+},
+{
+"s": 157,
+"e": 161,
+"cls": "san",
+"piece": "N",
+"ply": 9
+},
+{
+"s": 162,
+"e": 166,
+"cls": "san",
+"piece": "B",
+"ply": 10
+},
+{
+"s": 167,
+"e": 169,
+"cls": "move_number"
+},
+{
+"s": 170,
+"e": 175,
+"cls": "san",
+"piece": "B",
+"ply": 11
+},
+{
+"s": 176,
+"e": 179,
+"cls": "san",
+"piece": "K",
+"ply": 12
+},
+{
+"s": 180,
+"e": 182,
+"cls": "move_number"
+},
+{
+"s": 183,
+"e": 187,
+"cls": "san",
+"piece": "N",
+"ply": 13
+},
+{
+"s": 188,
+"e": 191,
+"cls": "result"
+}
+],
+"n_san": 13,
+"valid": true,
+"first_unresolved_ply": null,
+"error": null,
+"plies": [
+{
+"ply": 1,
+"color": "w",
+"piece": "P",
+"pid": "wP-e2",
+"from": "e2",
+"to": "e4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "e4",
+"uci": "e2e4",
+"long": "e2-e4",
+"span": [
+117,
+119
+],
+"text": "e4"
+},
+{
+"ply": 2,
+"color": "b",
+"piece": "P",
+"pid": "bP-e7",
+"from": "e7",
+"to": "e5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "e5",
+"uci": "e7e5",
+"long": "e7-e5",
+"span": [
+120,
+122
+],
+"text": "e5"
+},
+{
+"ply": 3,
+"color": "w",
+"piece": "N",
+"pid": "wN-g1",
+"from": "g1",
+"to": "f3",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Nf3",
+"uci": "g1f3",
+"long": "Ng1-f3",
+"span": [
+126,
+129
+],
+"text": "Nf3"
+},
+{
+"ply": 4,
+"color": "b",
+"piece": "P",
+"pid": "bP-d7",
+"from": "d7",
+"to": "d6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "d6",
+"uci": "d7d6",
+"long": "d7-d6",
+"span": [
+130,
+132
+],
+"text": "d6"
+},
+{
+"ply": 5,
+"color": "w",
+"piece": "B",
+"pid": "wB-f1",
+"from": "f1",
+"to": "c4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Bc4",
+"uci": "f1c4",
+"long": "Bf1-c4",
+"span": [
+136,
+139
+],
+"text": "Bc4"
+},
+{
+"ply": 6,
+"color": "b",
+"piece": "B",
+"pid": "bB-c8",
+"from": "c8",
+"to": "g4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Bg4",
+"uci": "c8g4",
+"long": "Bc8-g4",
+"span": [
+140,
+143
+],
+"text": "Bg4"
+},
+{
+"ply": 7,
+"color": "w",
+"piece": "N",
+"pid": "wN-b1",
+"from": "b1",
+"to": "c3",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Nc3",
+"uci": "b1c3",
+"long": "Nb1-c3",
+"span": [
+147,
+150
+],
+"text": "Nc3"
+},
+{
+"ply": 8,
+"color": "b",
+"piece": "P",
+"pid": "bP-g7",
+"from": "g7",
+"to": "g6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "g6",
+"uci": "g7g6",
+"long": "g7-g6",
+"span": [
+151,
+153
+],
+"text": "g6"
+},
+{
+"ply": 9,
+"color": "w",
+"piece": "N",
+"pid": "wN-g1",
+"from": "f3",
+"to": "e5",
+"capture": true,
+"captured_pid": "bP-e7",
+"captured_type": "P",
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Nxe5",
+"uci": "f3e5",
+"long": "Nf3xe5",
+"span": [
+157,
+161
+],
+"text": "Nxe5"
+},
+{
+"ply": 10,
+"color": "b",
+"piece": "B",
+"pid": "bB-c8",
+"from": "g4",
+"to": "d1",
+"capture": true,
+"captured_pid": "wQ-d1",
+"captured_type": "Q",
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Bxd1",
+"uci": "g4d1",
+"long": "Bg4xd1",
+"span": [
+162,
+166
+],
+"text": "Bxd1"
+},
+{
+"ply": 11,
+"color": "w",
+"piece": "B",
+"pid": "wB-f1",
+"from": "c4",
+"to": "f7",
+"capture": true,
+"captured_pid": "bP-f7",
+"captured_type": "P",
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": true,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Bxf7+",
+"uci": "c4f7",
+"long": "Bc4xf7+",
+"span": [
+170,
+175
+],
+"text": "Bxf7+"
+},
+{
+"ply": 12,
+"color": "b",
+"piece": "K",
+"pid": "bK-e8",
+"from": "e8",
+"to": "e7",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Ke7",
+"uci": "e8e7",
+"long": "Ke8-e7",
+"span": [
+176,
+179
+],
+"text": "Ke7"
+},
+{
+"ply": 13,
+"color": "w",
+"piece": "N",
+"pid": "wN-b1",
+"from": "c3",
+"to": "d5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": true,
+"mate": true,
+"enemy_king": "bK-e8",
+"san_canon": "Nd5#",
+"uci": "c3d5",
+"long": "Nc3-d5#",
+"span": [
+183,
+187
+],
+"text": "Nd5#"
+}
+],
+"final_placement": "rn1q1bnr/ppp1kB1p/3p2p1/3NN3/4P3/8/PPPP1PPP/R1BbK2R",
+"comment_unterminated": false
+},
+{
+"id": "toy:2",
+"source": "authored",
+"text": "[Event \"Toy 2 round robin\"]\n[Site \"the Analytical Engine\"]\n[Date \"2026.10.06\"]\n[Round \"-\"]\n[White \"Lovelace\"]\n[Black \"Turing\"]\n[Result \"1/2-1/2\"]\n\n1. e4 d5 { Re8 was best. [%clk 0:01:00] } 2. exd5 c5 3. dxc6 Nf6 4. Nf3 e5 5. Bc4 Be7 6. O-O O-O 7. d4 Nc6 8. Nbd2 Nd7 9. Qe2 Bf6 1/2-1/2",
+"tags": {
+"Event": "Toy 2 round robin",
+"Site": "the Analytical Engine",
+"Date": "2026.10.06",
+"Round": "-",
+"White": "Lovelace",
+"Black": "Turing",
+"Result": "1/2-1/2"
+},
+"tokens": [
+{
+"s": 1,
+"e": 6,
+"cls": "tag_name"
+},
+{
+"s": 8,
+"e": 25,
+"cls": "tag_value",
+"tag": "Event"
+},
+{
+"s": 29,
+"e": 33,
+"cls": "tag_name"
+},
+{
+"s": 35,
+"e": 56,
+"cls": "tag_value",
+"tag": "Site"
+},
+{
+"s": 60,
+"e": 64,
+"cls": "tag_name"
+},
+{
+"s": 66,
+"e": 76,
+"cls": "tag_value",
+"tag": "Date"
+},
+{
+"s": 80,
+"e": 85,
+"cls": "tag_name"
+},
+{
+"s": 87,
+"e": 88,
+"cls": "tag_value",
+"tag": "Round"
+},
+{
+"s": 92,
+"e": 97,
+"cls": "tag_name"
+},
+{
+"s": 99,
+"e": 107,
+"cls": "tag_value",
+"tag": "White"
+},
+{
+"s": 111,
+"e": 116,
+"cls": "tag_name"
+},
+{
+"s": 118,
+"e": 124,
+"cls": "tag_value",
+"tag": "Black"
+},
+{
+"s": 128,
+"e": 134,
+"cls": "tag_name"
+},
+{
+"s": 136,
+"e": 143,
+"cls": "tag_value",
+"tag": "Result"
+},
+{
+"s": 147,
+"e": 149,
+"cls": "move_number"
+},
+{
+"s": 150,
+"e": 152,
+"cls": "san",
+"piece": "P",
+"ply": 1
+},
+{
+"s": 153,
+"e": 155,
+"cls": "san",
+"piece": "P",
+"ply": 2
+},
+{
+"s": 156,
+"e": 188,
+"cls": "comment"
+},
+{
+"s": 189,
+"e": 191,
+"cls": "move_number"
+},
+{
+"s": 192,
+"e": 196,
+"cls": "san",
+"piece": "P",
+"ply": 3
+},
+{
+"s": 197,
+"e": 199,
+"cls": "san",
+"piece": "P",
+"ply": 4
+},
+{
+"s": 200,
+"e": 202,
+"cls": "move_number"
+},
+{
+"s": 203,
+"e": 207,
+"cls": "san",
+"piece": "P",
+"ply": 5
+},
+{
+"s": 208,
+"e": 211,
+"cls": "san",
+"piece": "N",
+"ply": 6
+},
+{
+"s": 212,
+"e": 214,
+"cls": "move_number"
+},
+{
+"s": 215,
+"e": 218,
+"cls": "san",
+"piece": "N",
+"ply": 7
+},
+{
+"s": 219,
+"e": 221,
+"cls": "san",
+"piece": "P",
+"ply": 8
+},
+{
+"s": 222,
+"e": 224,
+"cls": "move_number"
+},
+{
+"s": 225,
+"e": 228,
+"cls": "san",
+"piece": "B",
+"ply": 9
+},
+{
+"s": 229,
+"e": 232,
+"cls": "san",
+"piece": "B",
+"ply": 10
+},
+{
+"s": 233,
+"e": 235,
+"cls": "move_number"
+},
+{
+"s": 236,
+"e": 239,
+"cls": "san",
+"piece": "K",
+"ply": 11
+},
+{
+"s": 240,
+"e": 243,
+"cls": "san",
+"piece": "K",
+"ply": 12
+},
+{
+"s": 244,
+"e": 246,
+"cls": "move_number"
+},
+{
+"s": 247,
+"e": 249,
+"cls": "san",
+"piece": "P",
+"ply": 13
+},
+{
+"s": 250,
+"e": 253,
+"cls": "san",
+"piece": "N",
+"ply": 14
+},
+{
+"s": 254,
+"e": 256,
+"cls": "move_number"
+},
+{
+"s": 257,
+"e": 261,
+"cls": "san",
+"piece": "N",
+"ply": 15
+},
+{
+"s": 262,
+"e": 265,
+"cls": "san",
+"piece": "N",
+"ply": 16
+},
+{
+"s": 266,
+"e": 268,
+"cls": "move_number"
+},
+{
+"s": 269,
+"e": 272,
+"cls": "san",
+"piece": "Q",
+"ply": 17
+},
+{
+"s": 273,
+"e": 276,
+"cls": "san",
+"piece": "B",
+"ply": 18
+},
+{
+"s": 277,
+"e": 284,
+"cls": "result"
+}
+],
+"n_san": 18,
+"valid": true,
+"first_unresolved_ply": null,
+"error": null,
+"plies": [
+{
+"ply": 1,
+"color": "w",
+"piece": "P",
+"pid": "wP-e2",
+"from": "e2",
+"to": "e4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "e4",
+"uci": "e2e4",
+"long": "e2-e4",
+"span": [
+150,
+152
+],
+"text": "e4"
+},
+{
+"ply": 2,
+"color": "b",
+"piece": "P",
+"pid": "bP-d7",
+"from": "d7",
+"to": "d5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "d5",
+"uci": "d7d5",
+"long": "d7-d5",
+"span": [
+153,
+155
+],
+"text": "d5"
+},
+{
+"ply": 3,
+"color": "w",
+"piece": "P",
+"pid": "wP-e2",
+"from": "e4",
+"to": "d5",
+"capture": true,
+"captured_pid": "bP-d7",
+"captured_type": "P",
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "exd5",
+"uci": "e4d5",
+"long": "e4xd5",
+"span": [
+192,
+196
+],
+"text": "exd5"
+},
+{
+"ply": 4,
+"color": "b",
+"piece": "P",
+"pid": "bP-c7",
+"from": "c7",
+"to": "c5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "c5",
+"uci": "c7c5",
+"long": "c7-c5",
+"span": [
+197,
+199
+],
+"text": "c5"
+},
+{
+"ply": 5,
+"color": "w",
+"piece": "P",
+"pid": "wP-e2",
+"from": "d5",
+"to": "c6",
+"capture": true,
+"captured_pid": "bP-c7",
+"captured_type": "P",
+"ep": true,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "dxc6",
+"uci": "d5c6",
+"long": "d5xc6",
+"span": [
+203,
+207
+],
+"text": "dxc6"
+},
+{
+"ply": 6,
+"color": "b",
+"piece": "N",
+"pid": "bN-g8",
+"from": "g8",
+"to": "f6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Nf6",
+"uci": "g8f6",
+"long": "Ng8-f6",
+"span": [
+208,
+211
+],
+"text": "Nf6"
+},
+{
+"ply": 7,
+"color": "w",
+"piece": "N",
+"pid": "wN-g1",
+"from": "g1",
+"to": "f3",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Nf3",
+"uci": "g1f3",
+"long": "Ng1-f3",
+"span": [
+215,
+218
+],
+"text": "Nf3"
+},
+{
+"ply": 8,
+"color": "b",
+"piece": "P",
+"pid": "bP-e7",
+"from": "e7",
+"to": "e5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "e5",
+"uci": "e7e5",
+"long": "e7-e5",
+"span": [
+219,
+221
+],
+"text": "e5"
+},
+{
+"ply": 9,
+"color": "w",
+"piece": "B",
+"pid": "wB-f1",
+"from": "f1",
+"to": "c4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Bc4",
+"uci": "f1c4",
+"long": "Bf1-c4",
+"span": [
+225,
+228
+],
+"text": "Bc4"
+},
+{
+"ply": 10,
+"color": "b",
+"piece": "B",
+"pid": "bB-f8",
+"from": "f8",
+"to": "e7",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Be7",
+"uci": "f8e7",
+"long": "Bf8-e7",
+"span": [
+229,
+232
+],
+"text": "Be7"
+},
+{
+"ply": 11,
+"color": "w",
+"piece": "K",
+"pid": "wK-e1",
+"from": "e1",
+"to": "g1",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": "K",
+"rook_pid": "wR-h1",
+"rook_to": "f1",
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "O-O",
+"uci": "e1g1",
+"long": "O-O",
+"span": [
+236,
+239
+],
+"text": "O-O"
+},
+{
+"ply": 12,
+"color": "b",
+"piece": "K",
+"pid": "bK-e8",
+"from": "e8",
+"to": "g8",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": "K",
+"rook_pid": "bR-h8",
+"rook_to": "f8",
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "O-O",
+"uci": "e8g8",
+"long": "O-O",
+"span": [
+240,
+243
+],
+"text": "O-O"
+},
+{
+"ply": 13,
+"color": "w",
+"piece": "P",
+"pid": "wP-d2",
+"from": "d2",
+"to": "d4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "d4",
+"uci": "d2d4",
+"long": "d2-d4",
+"span": [
+247,
+249
+],
+"text": "d4"
+},
+{
+"ply": 14,
+"color": "b",
+"piece": "N",
+"pid": "bN-b8",
+"from": "b8",
+"to": "c6",
+"capture": true,
+"captured_pid": "wP-e2",
+"captured_type": "P",
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Nxc6",
+"uci": "b8c6",
+"long": "Nb8xc6",
+"span": [
+250,
+253
+],
+"text": "Nc6"
+},
+{
+"ply": 15,
+"color": "w",
+"piece": "N",
+"pid": "wN-b1",
+"from": "b1",
+"to": "d2",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Nbd2",
+"uci": "b1d2",
+"long": "Nb1-d2",
+"span": [
+257,
+261
+],
+"text": "Nbd2"
+},
+{
+"ply": 16,
+"color": "b",
+"piece": "N",
+"pid": "bN-g8",
+"from": "f6",
+"to": "d7",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Nd7",
+"uci": "f6d7",
+"long": "Nf6-d7",
+"span": [
+262,
+265
+],
+"text": "Nd7"
+},
+{
+"ply": 17,
+"color": "w",
+"piece": "Q",
+"pid": "wQ-d1",
+"from": "d1",
+"to": "e2",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Qe2",
+"uci": "d1e2",
+"long": "Qd1-e2",
+"span": [
+269,
+272
+],
+"text": "Qe2"
+},
+{
+"ply": 18,
+"color": "b",
+"piece": "B",
+"pid": "bB-f8",
+"from": "e7",
+"to": "f6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Bf6",
+"uci": "e7f6",
+"long": "Be7-f6",
+"span": [
+273,
+276
+],
+"text": "Bf6"
+}
+],
+"final_placement": "r1bq1rk1/pp1n1ppp/2n2b2/4p3/2BP4/5N2/PPPNQPPP/R1B2RK1",
+"comment_unterminated": false
+},
+{
+"id": "toy:3",
+"source": "authored",
+"text": "[Event \"Toy 3 blitz\"]\n[Site \"Mem\"]\n[Date \"2026.10.06\"]\n[Round \"-\"]\n[White \"Hopper\"]\n[Black \"Knuth\"]\n[Result \"0-1\"]\n\n1. d4 Nf6 2. Nc3 d5 3. Bf4 e6 4. Qd2 Be7 5. O-O-O O-O 6. e3 c5 7. Nf3 Nc6 8. Kb1 b5 9. dxc5 Bxc5 0-1",
+"tags": {
+"Event": "Toy 3 blitz",
+"Site": "Mem",
+"Date": "2026.10.06",
+"Round": "-",
+"White": "Hopper",
+"Black": "Knuth",
+"Result": "0-1"
+},
+"tokens": [
+{
+"s": 1,
+"e": 6,
+"cls": "tag_name"
+},
+{
+"s": 8,
+"e": 19,
+"cls": "tag_value",
+"tag": "Event"
+},
+{
+"s": 23,
+"e": 27,
+"cls": "tag_name"
+},
+{
+"s": 29,
+"e": 32,
+"cls": "tag_value",
+"tag": "Site"
+},
+{
+"s": 36,
+"e": 40,
+"cls": "tag_name"
+},
+{
+"s": 42,
+"e": 52,
+"cls": "tag_value",
+"tag": "Date"
+},
+{
+"s": 56,
+"e": 61,
+"cls": "tag_name"
+},
+{
+"s": 63,
+"e": 64,
+"cls": "tag_value",
+"tag": "Round"
+},
+{
+"s": 68,
+"e": 73,
+"cls": "tag_name"
+},
+{
+"s": 75,
+"e": 81,
+"cls": "tag_value",
+"tag": "White"
+},
+{
+"s": 85,
+"e": 90,
+"cls": "tag_name"
+},
+{
+"s": 92,
+"e": 97,
+"cls": "tag_value",
+"tag": "Black"
+},
+{
+"s": 101,
+"e": 107,
+"cls": "tag_name"
+},
+{
+"s": 109,
+"e": 112,
+"cls": "tag_value",
+"tag": "Result"
+},
+{
+"s": 116,
+"e": 118,
+"cls": "move_number"
+},
+{
+"s": 119,
+"e": 121,
+"cls": "san",
+"piece": "P",
+"ply": 1
+},
+{
+"s": 122,
+"e": 125,
+"cls": "san",
+"piece": "N",
+"ply": 2
+},
+{
+"s": 126,
+"e": 128,
+"cls": "move_number"
+},
+{
+"s": 129,
+"e": 132,
+"cls": "san",
+"piece": "N",
+"ply": 3
+},
+{
+"s": 133,
+"e": 135,
+"cls": "san",
+"piece": "P",
+"ply": 4
+},
+{
+"s": 136,
+"e": 138,
+"cls": "move_number"
+},
+{
+"s": 139,
+"e": 142,
+"cls": "san",
+"piece": "B",
+"ply": 5
+},
+{
+"s": 143,
+"e": 145,
+"cls": "san",
+"piece": "P",
+"ply": 6
+},
+{
+"s": 146,
+"e": 148,
+"cls": "move_number"
+},
+{
+"s": 149,
+"e": 152,
+"cls": "san",
+"piece": "Q",
+"ply": 7
+},
+{
+"s": 153,
+"e": 156,
+"cls": "san",
+"piece": "B",
+"ply": 8
+},
+{
+"s": 157,
+"e": 159,
+"cls": "move_number"
+},
+{
+"s": 160,
+"e": 165,
+"cls": "san",
+"piece": "K",
+"ply": 9
+},
+{
+"s": 166,
+"e": 169,
+"cls": "san",
+"piece": "K",
+"ply": 10
+},
+{
+"s": 170,
+"e": 172,
+"cls": "move_number"
+},
+{
+"s": 173,
+"e": 175,
+"cls": "san",
+"piece": "P",
+"ply": 11
+},
+{
+"s": 176,
+"e": 178,
+"cls": "san",
+"piece": "P",
+"ply": 12
+},
+{
+"s": 179,
+"e": 181,
+"cls": "move_number"
+},
+{
+"s": 182,
+"e": 185,
+"cls": "san",
+"piece": "N",
+"ply": 13
+},
+{
+"s": 186,
+"e": 189,
+"cls": "san",
+"piece": "N",
+"ply": 14
+},
+{
+"s": 190,
+"e": 192,
+"cls": "move_number"
+},
+{
+"s": 193,
+"e": 196,
+"cls": "san",
+"piece": "K",
+"ply": 15
+},
+{
+"s": 197,
+"e": 199,
+"cls": "san",
+"piece": "P",
+"ply": 16
+},
+{
+"s": 200,
+"e": 202,
+"cls": "move_number"
+},
+{
+"s": 203,
+"e": 207,
+"cls": "san",
+"piece": "P",
+"ply": 17
+},
+{
+"s": 208,
+"e": 212,
+"cls": "san",
+"piece": "B",
+"ply": 18
+},
+{
+"s": 213,
+"e": 216,
+"cls": "result"
+}
+],
+"n_san": 18,
+"valid": true,
+"first_unresolved_ply": null,
+"error": null,
+"plies": [
+{
+"ply": 1,
+"color": "w",
+"piece": "P",
+"pid": "wP-d2",
+"from": "d2",
+"to": "d4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "d4",
+"uci": "d2d4",
+"long": "d2-d4",
+"span": [
+119,
+121
+],
+"text": "d4"
+},
+{
+"ply": 2,
+"color": "b",
+"piece": "N",
+"pid": "bN-g8",
+"from": "g8",
+"to": "f6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Nf6",
+"uci": "g8f6",
+"long": "Ng8-f6",
+"span": [
+122,
+125
+],
+"text": "Nf6"
+},
+{
+"ply": 3,
+"color": "w",
+"piece": "N",
+"pid": "wN-b1",
+"from": "b1",
+"to": "c3",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Nc3",
+"uci": "b1c3",
+"long": "Nb1-c3",
+"span": [
+129,
+132
+],
+"text": "Nc3"
+},
+{
+"ply": 4,
+"color": "b",
+"piece": "P",
+"pid": "bP-d7",
+"from": "d7",
+"to": "d5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "d5",
+"uci": "d7d5",
+"long": "d7-d5",
+"span": [
+133,
+135
+],
+"text": "d5"
+},
+{
+"ply": 5,
+"color": "w",
+"piece": "B",
+"pid": "wB-c1",
+"from": "c1",
+"to": "f4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Bf4",
+"uci": "c1f4",
+"long": "Bc1-f4",
+"span": [
+139,
+142
+],
+"text": "Bf4"
+},
+{
+"ply": 6,
+"color": "b",
+"piece": "P",
+"pid": "bP-e7",
+"from": "e7",
+"to": "e6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "e6",
+"uci": "e7e6",
+"long": "e7-e6",
+"span": [
+143,
+145
+],
+"text": "e6"
+},
+{
+"ply": 7,
+"color": "w",
+"piece": "Q",
+"pid": "wQ-d1",
+"from": "d1",
+"to": "d2",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Qd2",
+"uci": "d1d2",
+"long": "Qd1-d2",
+"span": [
+149,
+152
+],
+"text": "Qd2"
+},
+{
+"ply": 8,
+"color": "b",
+"piece": "B",
+"pid": "bB-f8",
+"from": "f8",
+"to": "e7",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Be7",
+"uci": "f8e7",
+"long": "Bf8-e7",
+"span": [
+153,
+156
+],
+"text": "Be7"
+},
+{
+"ply": 9,
+"color": "w",
+"piece": "K",
+"pid": "wK-e1",
+"from": "e1",
+"to": "c1",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": "Q",
+"rook_pid": "wR-a1",
+"rook_to": "d1",
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "O-O-O",
+"uci": "e1c1",
+"long": "O-O-O",
+"span": [
+160,
+165
+],
+"text": "O-O-O"
+},
+{
+"ply": 10,
+"color": "b",
+"piece": "K",
+"pid": "bK-e8",
+"from": "e8",
+"to": "g8",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": "K",
+"rook_pid": "bR-h8",
+"rook_to": "f8",
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "O-O",
+"uci": "e8g8",
+"long": "O-O",
+"span": [
+166,
+169
+],
+"text": "O-O"
+},
+{
+"ply": 11,
+"color": "w",
+"piece": "P",
+"pid": "wP-e2",
+"from": "e2",
+"to": "e3",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "e3",
+"uci": "e2e3",
+"long": "e2-e3",
+"span": [
+173,
+175
+],
+"text": "e3"
+},
+{
+"ply": 12,
+"color": "b",
+"piece": "P",
+"pid": "bP-c7",
+"from": "c7",
+"to": "c5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "c5",
+"uci": "c7c5",
+"long": "c7-c5",
+"span": [
+176,
+178
+],
+"text": "c5"
+},
+{
+"ply": 13,
+"color": "w",
+"piece": "N",
+"pid": "wN-g1",
+"from": "g1",
+"to": "f3",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Nf3",
+"uci": "g1f3",
+"long": "Ng1-f3",
+"span": [
+182,
+185
+],
+"text": "Nf3"
+},
+{
+"ply": 14,
+"color": "b",
+"piece": "N",
+"pid": "bN-b8",
+"from": "b8",
+"to": "c6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Nc6",
+"uci": "b8c6",
+"long": "Nb8-c6",
+"span": [
+186,
+189
+],
+"text": "Nc6"
+},
+{
+"ply": 15,
+"color": "w",
+"piece": "K",
+"pid": "wK-e1",
+"from": "c1",
+"to": "b1",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Kb1",
+"uci": "c1b1",
+"long": "Kc1-b1",
+"span": [
+193,
+196
+],
+"text": "Kb1"
+},
+{
+"ply": 16,
+"color": "b",
+"piece": "P",
+"pid": "bP-b7",
+"from": "b7",
+"to": "b5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "b5",
+"uci": "b7b5",
+"long": "b7-b5",
+"span": [
+197,
+199
+],
+"text": "b5"
+},
+{
+"ply": 17,
+"color": "w",
+"piece": "P",
+"pid": "wP-d2",
+"from": "d4",
+"to": "c5",
+"capture": true,
+"captured_pid": "bP-c7",
+"captured_type": "P",
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "dxc5",
+"uci": "d4c5",
+"long": "d4xc5",
+"span": [
+203,
+207
+],
+"text": "dxc5"
+},
+{
+"ply": 18,
+"color": "b",
+"piece": "B",
+"pid": "bB-f8",
+"from": "e7",
+"to": "c5",
+"capture": true,
+"captured_pid": "wP-d2",
+"captured_type": "P",
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Bxc5",
+"uci": "e7c5",
+"long": "Be7xc5",
+"span": [
+208,
+212
+],
+"text": "Bxc5"
+}
+],
+"final_placement": "r1bq1rk1/p4ppp/2n1pn2/1pbp4/5B2/2N1PN2/PPPQ1PPP/1K1R1B1R",
+"comment_unterminated": false
+},
+{
+"id": "toy:4",
+"source": "authored",
+"text": "[Event \"Toy 4\"]\n[Site \"ETH Zurich lab\"]\n[Date \"2026.10.06\"]\n[Round \"-\"]\n[White \"Dijkstra\"]\n[Black \"Wirth\"]\n[Result \"*\"]\n\n1. a4 b5 2. axb5 a6 3. bxa6 Bb7 4. a7 Nf6 5. axb8=Q Rxb8 6. h4 h5 7. g4 hxg4 *",
+"tags": {
+"Event": "Toy 4",
+"Site": "ETH Zurich lab",
+"Date": "2026.10.06",
+"Round": "-",
+"White": "Dijkstra",
+"Black": "Wirth",
+"Result": "*"
+},
+"tokens": [
+{
+"s": 1,
+"e": 6,
+"cls": "tag_name"
+},
+{
+"s": 8,
+"e": 13,
+"cls": "tag_value",
+"tag": "Event"
+},
+{
+"s": 17,
+"e": 21,
+"cls": "tag_name"
+},
+{
+"s": 23,
+"e": 37,
+"cls": "tag_value",
+"tag": "Site"
+},
+{
+"s": 41,
+"e": 45,
+"cls": "tag_name"
+},
+{
+"s": 47,
+"e": 57,
+"cls": "tag_value",
+"tag": "Date"
+},
+{
+"s": 61,
+"e": 66,
+"cls": "tag_name"
+},
+{
+"s": 68,
+"e": 69,
+"cls": "tag_value",
+"tag": "Round"
+},
+{
+"s": 73,
+"e": 78,
+"cls": "tag_name"
+},
+{
+"s": 80,
+"e": 88,
+"cls": "tag_value",
+"tag": "White"
+},
+{
+"s": 92,
+"e": 97,
+"cls": "tag_name"
+},
+{
+"s": 99,
+"e": 104,
+"cls": "tag_value",
+"tag": "Black"
+},
+{
+"s": 108,
+"e": 114,
+"cls": "tag_name"
+},
+{
+"s": 116,
+"e": 117,
+"cls": "tag_value",
+"tag": "Result"
+},
+{
+"s": 121,
+"e": 123,
+"cls": "move_number"
+},
+{
+"s": 124,
+"e": 126,
+"cls": "san",
+"piece": "P",
+"ply": 1
+},
+{
+"s": 127,
+"e": 129,
+"cls": "san",
+"piece": "P",
+"ply": 2
+},
+{
+"s": 130,
+"e": 132,
+"cls": "move_number"
+},
+{
+"s": 133,
+"e": 137,
+"cls": "san",
+"piece": "P",
+"ply": 3
+},
+{
+"s": 138,
+"e": 140,
+"cls": "san",
+"piece": "P",
+"ply": 4
+},
+{
+"s": 141,
+"e": 143,
+"cls": "move_number"
+},
+{
+"s": 144,
+"e": 148,
+"cls": "san",
+"piece": "P",
+"ply": 5
+},
+{
+"s": 149,
+"e": 152,
+"cls": "san",
+"piece": "B",
+"ply": 6
+},
+{
+"s": 153,
+"e": 155,
+"cls": "move_number"
+},
+{
+"s": 156,
+"e": 158,
+"cls": "san",
+"piece": "P",
+"ply": 7
+},
+{
+"s": 159,
+"e": 162,
+"cls": "san",
+"piece": "N",
+"ply": 8
+},
+{
+"s": 163,
+"e": 165,
+"cls": "move_number"
+},
+{
+"s": 166,
+"e": 172,
+"cls": "san",
+"piece": "P",
+"ply": 9
+},
+{
+"s": 173,
+"e": 177,
+"cls": "san",
+"piece": "R",
+"ply": 10
+},
+{
+"s": 178,
+"e": 180,
+"cls": "move_number"
+},
+{
+"s": 181,
+"e": 183,
+"cls": "san",
+"piece": "P",
+"ply": 11
+},
+{
+"s": 184,
+"e": 186,
+"cls": "san",
+"piece": "P",
+"ply": 12
+},
+{
+"s": 187,
+"e": 189,
+"cls": "move_number"
+},
+{
+"s": 190,
+"e": 192,
+"cls": "san",
+"piece": "P",
+"ply": 13
+},
+{
+"s": 193,
+"e": 197,
+"cls": "san",
+"piece": "P",
+"ply": 14
+},
+{
+"s": 198,
+"e": 199,
+"cls": "result"
+}
+],
+"n_san": 14,
+"valid": true,
+"first_unresolved_ply": null,
+"error": null,
+"plies": [
+{
+"ply": 1,
+"color": "w",
+"piece": "P",
+"pid": "wP-a2",
+"from": "a2",
+"to": "a4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "a4",
+"uci": "a2a4",
+"long": "a2-a4",
+"span": [
+124,
+126
+],
+"text": "a4"
+},
+{
+"ply": 2,
+"color": "b",
+"piece": "P",
+"pid": "bP-b7",
+"from": "b7",
+"to": "b5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "b5",
+"uci": "b7b5",
+"long": "b7-b5",
+"span": [
+127,
+129
+],
+"text": "b5"
+},
+{
+"ply": 3,
+"color": "w",
+"piece": "P",
+"pid": "wP-a2",
+"from": "a4",
+"to": "b5",
+"capture": true,
+"captured_pid": "bP-b7",
+"captured_type": "P",
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "axb5",
+"uci": "a4b5",
+"long": "a4xb5",
+"span": [
+133,
+137
+],
+"text": "axb5"
+},
+{
+"ply": 4,
+"color": "b",
+"piece": "P",
+"pid": "bP-a7",
+"from": "a7",
+"to": "a6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "a6",
+"uci": "a7a6",
+"long": "a7-a6",
+"span": [
+138,
+140
+],
+"text": "a6"
+},
+{
+"ply": 5,
+"color": "w",
+"piece": "P",
+"pid": "wP-a2",
+"from": "b5",
+"to": "a6",
+"capture": true,
+"captured_pid": "bP-a7",
+"captured_type": "P",
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "bxa6",
+"uci": "b5a6",
+"long": "b5xa6",
+"span": [
+144,
+148
+],
+"text": "bxa6"
+},
+{
+"ply": 6,
+"color": "b",
+"piece": "B",
+"pid": "bB-c8",
+"from": "c8",
+"to": "b7",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Bb7",
+"uci": "c8b7",
+"long": "Bc8-b7",
+"span": [
+149,
+152
+],
+"text": "Bb7"
+},
+{
+"ply": 7,
+"color": "w",
+"piece": "P",
+"pid": "wP-a2",
+"from": "a6",
+"to": "a7",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "a7",
+"uci": "a6a7",
+"long": "a6-a7",
+"span": [
+156,
+158
+],
+"text": "a7"
+},
+{
+"ply": 8,
+"color": "b",
+"piece": "N",
+"pid": "bN-g8",
+"from": "g8",
+"to": "f6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Nf6",
+"uci": "g8f6",
+"long": "Ng8-f6",
+"span": [
+159,
+162
+],
+"text": "Nf6"
+},
+{
+"ply": 9,
+"color": "w",
+"piece": "P",
+"pid": "wP-a2",
+"from": "a7",
+"to": "b8",
+"capture": true,
+"captured_pid": "bN-b8",
+"captured_type": "N",
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": "Q",
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "axb8=Q",
+"uci": "a7b8q",
+"long": "a7xb8=Q",
+"span": [
+166,
+172
+],
+"text": "axb8=Q"
+},
+{
+"ply": 10,
+"color": "b",
+"piece": "R",
+"pid": "bR-a8",
+"from": "a8",
+"to": "b8",
+"capture": true,
+"captured_pid": "wP-a2",
+"captured_type": "Q",
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Rxb8",
+"uci": "a8b8",
+"long": "Ra8xb8",
+"span": [
+173,
+177
+],
+"text": "Rxb8"
+},
+{
+"ply": 11,
+"color": "w",
+"piece": "P",
+"pid": "wP-h2",
+"from": "h2",
+"to": "h4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "h4",
+"uci": "h2h4",
+"long": "h2-h4",
+"span": [
+181,
+183
+],
+"text": "h4"
+},
+{
+"ply": 12,
+"color": "b",
+"piece": "P",
+"pid": "bP-h7",
+"from": "h7",
+"to": "h5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "h5",
+"uci": "h7h5",
+"long": "h7-h5",
+"span": [
+184,
+186
+],
+"text": "h5"
+},
+{
+"ply": 13,
+"color": "w",
+"piece": "P",
+"pid": "wP-g2",
+"from": "g2",
+"to": "g4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "g4",
+"uci": "g2g4",
+"long": "g2-g4",
+"span": [
+190,
+192
+],
+"text": "g4"
+},
+{
+"ply": 14,
+"color": "b",
+"piece": "P",
+"pid": "bP-h7",
+"from": "h5",
+"to": "g4",
+"capture": true,
+"captured_pid": "wP-g2",
+"captured_type": "P",
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "hxg4",
+"uci": "h5g4",
+"long": "h5xg4",
+"span": [
+193,
+197
+],
+"text": "hxg4"
+}
+],
+"final_placement": "1r1qkb1r/1bppppp1/5n2/8/6pP/8/1PPPPP2/RNBQKBNR",
+"comment_unterminated": false
+},
+{
+"id": "toy:5",
+"source": "authored",
+"text": "[Event \"Toy 5 finals\"]\n[Site \"IAS\"]\n[Date \"2026.10.06\"]\n[Round \"-\"]\n[White \"Church\"]\n[Black \"Goedel\"]\n[Result \"*\"]\n\n1. e4 e5 2. Ke3 Nc6 3. Ke4 *",
+"tags": {
+"Event": "Toy 5 finals",
+"Site": "IAS",
+"Date": "2026.10.06",
+"Round": "-",
+"White": "Church",
+"Black": "Goedel",
+"Result": "*"
+},
+"tokens": [
+{
+"s": 1,
+"e": 6,
+"cls": "tag_name"
+},
+{
+"s": 8,
+"e": 20,
+"cls": "tag_value",
+"tag": "Event"
+},
+{
+"s": 24,
+"e": 28,
+"cls": "tag_name"
+},
+{
+"s": 30,
+"e": 33,
+"cls": "tag_value",
+"tag": "Site"
+},
+{
+"s": 37,
+"e": 41,
+"cls": "tag_name"
+},
+{
+"s": 43,
+"e": 53,
+"cls": "tag_value",
+"tag": "Date"
+},
+{
+"s": 57,
+"e": 62,
+"cls": "tag_name"
+},
+{
+"s": 64,
+"e": 65,
+"cls": "tag_value",
+"tag": "Round"
+},
+{
+"s": 69,
+"e": 74,
+"cls": "tag_name"
+},
+{
+"s": 76,
+"e": 82,
+"cls": "tag_value",
+"tag": "White"
+},
+{
+"s": 86,
+"e": 91,
+"cls": "tag_name"
+},
+{
+"s": 93,
+"e": 99,
+"cls": "tag_value",
+"tag": "Black"
+},
+{
+"s": 103,
+"e": 109,
+"cls": "tag_name"
+},
+{
+"s": 111,
+"e": 112,
+"cls": "tag_value",
+"tag": "Result"
+},
+{
+"s": 116,
+"e": 118,
+"cls": "move_number"
+},
+{
+"s": 119,
+"e": 121,
+"cls": "san",
+"piece": "P",
+"ply": 1
+},
+{
+"s": 122,
+"e": 124,
+"cls": "san",
+"piece": "P",
+"ply": 2
+},
+{
+"s": 125,
+"e": 127,
+"cls": "move_number"
+},
+{
+"s": 128,
+"e": 131,
+"cls": "san",
+"ply": 3
+},
+{
+"s": 132,
+"e": 135,
+"cls": "san",
+"ply": 4
+},
+{
+"s": 136,
+"e": 138,
+"cls": "move_number"
+},
+{
+"s": 139,
+"e": 142,
+"cls": "san",
+"ply": 5
+},
+{
+"s": 143,
+"e": 144,
+"cls": "result"
+}
+],
+"n_san": 5,
+"valid": false,
+"first_unresolved_ply": 3,
+"error": "IllegalMoveError",
+"plies": [
+{
+"ply": 1,
+"color": "w",
+"piece": "P",
+"pid": "wP-e2",
+"from": "e2",
+"to": "e4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "e4",
+"uci": "e2e4",
+"long": "e2-e4",
+"span": [
+119,
+121
+],
+"text": "e4"
+},
+{
+"ply": 2,
+"color": "b",
+"piece": "P",
+"pid": "bP-e7",
+"from": "e7",
+"to": "e5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "e5",
+"uci": "e7e5",
+"long": "e7-e5",
+"span": [
+122,
+124
+],
+"text": "e5"
+}
+],
+"final_placement": null,
+"comment_unterminated": false
+},
+{
+"id": "toy:6",
+"source": "authored",
+"text": "[Event \"Toy 6 open\"]\n[Site \"Cork\"]\n[Date \"2026.10.06\"]\n[Round \"-\"]\n[White \"Boole\"]\n[Black \"De Morgan\"]\n[Result \"1-0\"]\n\n1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. Re1 b5 7. Bb3 d6 8. c3 O-O 9. h3 Nb8?! 10. d4 Nbd7 1-0",
+"tags": {
+"Event": "Toy 6 open",
+"Site": "Cork",
+"Date": "2026.10.06",
+"Round": "-",
+"White": "Boole",
+"Black": "De Morgan",
+"Result": "1-0"
+},
+"tokens": [
+{
+"s": 1,
+"e": 6,
+"cls": "tag_name"
+},
+{
+"s": 8,
+"e": 18,
+"cls": "tag_value",
+"tag": "Event"
+},
+{
+"s": 22,
+"e": 26,
+"cls": "tag_name"
+},
+{
+"s": 28,
+"e": 32,
+"cls": "tag_value",
+"tag": "Site"
+},
+{
+"s": 36,
+"e": 40,
+"cls": "tag_name"
+},
+{
+"s": 42,
+"e": 52,
+"cls": "tag_value",
+"tag": "Date"
+},
+{
+"s": 56,
+"e": 61,
+"cls": "tag_name"
+},
+{
+"s": 63,
+"e": 64,
+"cls": "tag_value",
+"tag": "Round"
+},
+{
+"s": 68,
+"e": 73,
+"cls": "tag_name"
+},
+{
+"s": 75,
+"e": 80,
+"cls": "tag_value",
+"tag": "White"
+},
+{
+"s": 84,
+"e": 89,
+"cls": "tag_name"
+},
+{
+"s": 91,
+"e": 100,
+"cls": "tag_value",
+"tag": "Black"
+},
+{
+"s": 104,
+"e": 110,
+"cls": "tag_name"
+},
+{
+"s": 112,
+"e": 115,
+"cls": "tag_value",
+"tag": "Result"
+},
+{
+"s": 119,
+"e": 121,
+"cls": "move_number"
+},
+{
+"s": 122,
+"e": 124,
+"cls": "san",
+"piece": "P",
+"ply": 1
+},
+{
+"s": 125,
+"e": 127,
+"cls": "san",
+"piece": "P",
+"ply": 2
+},
+{
+"s": 128,
+"e": 130,
+"cls": "move_number"
+},
+{
+"s": 131,
+"e": 134,
+"cls": "san",
+"piece": "N",
+"ply": 3
+},
+{
+"s": 135,
+"e": 138,
+"cls": "san",
+"piece": "N",
+"ply": 4
+},
+{
+"s": 139,
+"e": 141,
+"cls": "move_number"
+},
+{
+"s": 142,
+"e": 145,
+"cls": "san",
+"piece": "B",
+"ply": 5
+},
+{
+"s": 146,
+"e": 148,
+"cls": "san",
+"piece": "P",
+"ply": 6
+},
+{
+"s": 149,
+"e": 151,
+"cls": "move_number"
+},
+{
+"s": 152,
+"e": 155,
+"cls": "san",
+"piece": "B",
+"ply": 7
+},
+{
+"s": 156,
+"e": 159,
+"cls": "san",
+"piece": "N",
+"ply": 8
+},
+{
+"s": 160,
+"e": 162,
+"cls": "move_number"
+},
+{
+"s": 163,
+"e": 166,
+"cls": "san",
+"piece": "K",
+"ply": 9
+},
+{
+"s": 167,
+"e": 170,
+"cls": "san",
+"piece": "B",
+"ply": 10
+},
+{
+"s": 171,
+"e": 173,
+"cls": "move_number"
+},
+{
+"s": 174,
+"e": 177,
+"cls": "san",
+"piece": "R",
+"ply": 11
+},
+{
+"s": 178,
+"e": 180,
+"cls": "san",
+"piece": "P",
+"ply": 12
+},
+{
+"s": 181,
+"e": 183,
+"cls": "move_number"
+},
+{
+"s": 184,
+"e": 187,
+"cls": "san",
+"piece": "B",
+"ply": 13
+},
+{
+"s": 188,
+"e": 190,
+"cls": "san",
+"piece": "P",
+"ply": 14
+},
+{
+"s": 191,
+"e": 193,
+"cls": "move_number"
+},
+{
+"s": 194,
+"e": 196,
+"cls": "san",
+"piece": "P",
+"ply": 15
+},
+{
+"s": 197,
+"e": 200,
+"cls": "san",
+"piece": "K",
+"ply": 16
+},
+{
+"s": 201,
+"e": 203,
+"cls": "move_number"
+},
+{
+"s": 204,
+"e": 206,
+"cls": "san",
+"piece": "P",
+"ply": 17
+},
+{
+"s": 207,
+"e": 210,
+"cls": "san",
+"piece": "N",
+"ply": 18
+},
+{
+"s": 210,
+"e": 212,
+"cls": "glyph"
+},
+{
+"s": 213,
+"e": 216,
+"cls": "move_number"
+},
+{
+"s": 217,
+"e": 219,
+"cls": "san",
+"piece": "P",
+"ply": 19
+},
+{
+"s": 220,
+"e": 224,
+"cls": "san",
+"piece": "N",
+"ply": 20
+},
+{
+"s": 225,
+"e": 228,
+"cls": "result"
+}
+],
+"n_san": 20,
+"valid": true,
+"first_unresolved_ply": null,
+"error": null,
+"plies": [
+{
+"ply": 1,
+"color": "w",
+"piece": "P",
+"pid": "wP-e2",
+"from": "e2",
+"to": "e4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "e4",
+"uci": "e2e4",
+"long": "e2-e4",
+"span": [
+122,
+124
+],
+"text": "e4"
+},
+{
+"ply": 2,
+"color": "b",
+"piece": "P",
+"pid": "bP-e7",
+"from": "e7",
+"to": "e5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "e5",
+"uci": "e7e5",
+"long": "e7-e5",
+"span": [
+125,
+127
+],
+"text": "e5"
+},
+{
+"ply": 3,
+"color": "w",
+"piece": "N",
+"pid": "wN-g1",
+"from": "g1",
+"to": "f3",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Nf3",
+"uci": "g1f3",
+"long": "Ng1-f3",
+"span": [
+131,
+134
+],
+"text": "Nf3"
+},
+{
+"ply": 4,
+"color": "b",
+"piece": "N",
+"pid": "bN-b8",
+"from": "b8",
+"to": "c6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Nc6",
+"uci": "b8c6",
+"long": "Nb8-c6",
+"span": [
+135,
+138
+],
+"text": "Nc6"
+},
+{
+"ply": 5,
+"color": "w",
+"piece": "B",
+"pid": "wB-f1",
+"from": "f1",
+"to": "b5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Bb5",
+"uci": "f1b5",
+"long": "Bf1-b5",
+"span": [
+142,
+145
+],
+"text": "Bb5"
+},
+{
+"ply": 6,
+"color": "b",
+"piece": "P",
+"pid": "bP-a7",
+"from": "a7",
+"to": "a6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "a6",
+"uci": "a7a6",
+"long": "a7-a6",
+"span": [
+146,
+148
+],
+"text": "a6"
+},
+{
+"ply": 7,
+"color": "w",
+"piece": "B",
+"pid": "wB-f1",
+"from": "b5",
+"to": "a4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Ba4",
+"uci": "b5a4",
+"long": "Bb5-a4",
+"span": [
+152,
+155
+],
+"text": "Ba4"
+},
+{
+"ply": 8,
+"color": "b",
+"piece": "N",
+"pid": "bN-g8",
+"from": "g8",
+"to": "f6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Nf6",
+"uci": "g8f6",
+"long": "Ng8-f6",
+"span": [
+156,
+159
+],
+"text": "Nf6"
+},
+{
+"ply": 9,
+"color": "w",
+"piece": "K",
+"pid": "wK-e1",
+"from": "e1",
+"to": "g1",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": "K",
+"rook_pid": "wR-h1",
+"rook_to": "f1",
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "O-O",
+"uci": "e1g1",
+"long": "O-O",
+"span": [
+163,
+166
+],
+"text": "O-O"
+},
+{
+"ply": 10,
+"color": "b",
+"piece": "B",
+"pid": "bB-f8",
+"from": "f8",
+"to": "e7",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Be7",
+"uci": "f8e7",
+"long": "Bf8-e7",
+"span": [
+167,
+170
+],
+"text": "Be7"
+},
+{
+"ply": 11,
+"color": "w",
+"piece": "R",
+"pid": "wR-h1",
+"from": "f1",
+"to": "e1",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Re1",
+"uci": "f1e1",
+"long": "Rf1-e1",
+"span": [
+174,
+177
+],
+"text": "Re1"
+},
+{
+"ply": 12,
+"color": "b",
+"piece": "P",
+"pid": "bP-b7",
+"from": "b7",
+"to": "b5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "b5",
+"uci": "b7b5",
+"long": "b7-b5",
+"span": [
+178,
+180
+],
+"text": "b5"
+},
+{
+"ply": 13,
+"color": "w",
+"piece": "B",
+"pid": "wB-f1",
+"from": "a4",
+"to": "b3",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Bb3",
+"uci": "a4b3",
+"long": "Ba4-b3",
+"span": [
+184,
+187
+],
+"text": "Bb3"
+},
+{
+"ply": 14,
+"color": "b",
+"piece": "P",
+"pid": "bP-d7",
+"from": "d7",
+"to": "d6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "d6",
+"uci": "d7d6",
+"long": "d7-d6",
+"span": [
+188,
+190
+],
+"text": "d6"
+},
+{
+"ply": 15,
+"color": "w",
+"piece": "P",
+"pid": "wP-c2",
+"from": "c2",
+"to": "c3",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "c3",
+"uci": "c2c3",
+"long": "c2-c3",
+"span": [
+194,
+196
+],
+"text": "c3"
+},
+{
+"ply": 16,
+"color": "b",
+"piece": "K",
+"pid": "bK-e8",
+"from": "e8",
+"to": "g8",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": "K",
+"rook_pid": "bR-h8",
+"rook_to": "f8",
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "O-O",
+"uci": "e8g8",
+"long": "O-O",
+"span": [
+197,
+200
+],
+"text": "O-O"
+},
+{
+"ply": 17,
+"color": "w",
+"piece": "P",
+"pid": "wP-h2",
+"from": "h2",
+"to": "h3",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "h3",
+"uci": "h2h3",
+"long": "h2-h3",
+"span": [
+204,
+206
+],
+"text": "h3"
+},
+{
+"ply": 18,
+"color": "b",
+"piece": "N",
+"pid": "bN-b8",
+"from": "c6",
+"to": "b8",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Nb8",
+"uci": "c6b8",
+"long": "Nc6-b8",
+"span": [
+207,
+210
+],
+"text": "Nb8"
+},
+{
+"ply": 19,
+"color": "w",
+"piece": "P",
+"pid": "wP-d2",
+"from": "d2",
+"to": "d4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "d4",
+"uci": "d2d4",
+"long": "d2-d4",
+"span": [
+217,
+219
+],
+"text": "d4"
+},
+{
+"ply": 20,
+"color": "b",
+"piece": "N",
+"pid": "bN-b8",
+"from": "b8",
+"to": "d7",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Nbd7",
+"uci": "b8d7",
+"long": "Nb8-d7",
+"span": [
+220,
+224
+],
+"text": "Nbd7"
+}
+],
+"final_placement": "r1bq1rk1/2pnbppp/p2p1n2/1p2p3/3PP3/1BP2N1P/PP3PP1/RNBQR1K1",
+"comment_unterminated": false
+},
+{
+"id": "toy:7",
+"source": "authored",
+"text": "[Event \"Toy 7 ♔ cup\"]\n[Site \"Zürich\"]\n[Date \"2026.10.06\"]\n[Round \"-\"]\n[White \"Ada 🙂 Løvelace\"]\n[Black \"Évariste\"]\n[Result \"*\"]\n\n1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. e3 O-O 6. Nf3 h6 7. Bh4 b6 *",
+"tags": {
+"Event": "Toy 7 ♔ cup",
+"Site": "Zürich",
+"Date": "2026.10.06",
+"Round": "-",
+"White": "Ada 🙂 Løvelace",
+"Black": "Évariste",
+"Result": "*"
+},
+"tokens": [
+{
+"s": 1,
+"e": 6,
+"cls": "tag_name"
+},
+{
+"s": 8,
+"e": 19,
+"cls": "tag_value",
+"tag": "Event"
+},
+{
+"s": 23,
+"e": 27,
+"cls": "tag_name"
+},
+{
+"s": 29,
+"e": 35,
+"cls": "tag_value",
+"tag": "Site"
+},
+{
+"s": 39,
+"e": 43,
+"cls": "tag_name"
+},
+{
+"s": 45,
+"e": 55,
+"cls": "tag_value",
+"tag": "Date"
+},
+{
+"s": 59,
+"e": 64,
+"cls": "tag_name"
+},
+{
+"s": 66,
+"e": 67,
+"cls": "tag_value",
+"tag": "Round"
+},
+{
+"s": 71,
+"e": 76,
+"cls": "tag_name"
+},
+{
+"s": 78,
+"e": 93,
+"cls": "tag_value",
+"tag": "White"
+},
+{
+"s": 97,
+"e": 102,
+"cls": "tag_name"
+},
+{
+"s": 104,
+"e": 112,
+"cls": "tag_value",
+"tag": "Black"
+},
+{
+"s": 116,
+"e": 122,
+"cls": "tag_name"
+},
+{
+"s": 124,
+"e": 125,
+"cls": "tag_value",
+"tag": "Result"
+},
+{
+"s": 129,
+"e": 131,
+"cls": "move_number"
+},
+{
+"s": 132,
+"e": 134,
+"cls": "san",
+"piece": "P",
+"ply": 1
+},
+{
+"s": 135,
+"e": 137,
+"cls": "san",
+"piece": "P",
+"ply": 2
+},
+{
+"s": 138,
+"e": 140,
+"cls": "move_number"
+},
+{
+"s": 141,
+"e": 143,
+"cls": "san",
+"piece": "P",
+"ply": 3
+},
+{
+"s": 144,
+"e": 146,
+"cls": "san",
+"piece": "P",
+"ply": 4
+},
+{
+"s": 147,
+"e": 149,
+"cls": "move_number"
+},
+{
+"s": 150,
+"e": 153,
+"cls": "san",
+"piece": "N",
+"ply": 5
+},
+{
+"s": 154,
+"e": 157,
+"cls": "san",
+"piece": "N",
+"ply": 6
+},
+{
+"s": 158,
+"e": 160,
+"cls": "move_number"
+},
+{
+"s": 161,
+"e": 164,
+"cls": "san",
+"piece": "B",
+"ply": 7
+},
+{
+"s": 165,
+"e": 168,
+"cls": "san",
+"piece": "B",
+"ply": 8
+},
+{
+"s": 169,
+"e": 171,
+"cls": "move_number"
+},
+{
+"s": 172,
+"e": 174,
+"cls": "san",
+"piece": "P",
+"ply": 9
+},
+{
+"s": 175,
+"e": 178,
+"cls": "san",
+"piece": "K",
+"ply": 10
+},
+{
+"s": 179,
+"e": 181,
+"cls": "move_number"
+},
+{
+"s": 182,
+"e": 185,
+"cls": "san",
+"piece": "N",
+"ply": 11
+},
+{
+"s": 186,
+"e": 188,
+"cls": "san",
+"piece": "P",
+"ply": 12
+},
+{
+"s": 189,
+"e": 191,
+"cls": "move_number"
+},
+{
+"s": 192,
+"e": 195,
+"cls": "san",
+"piece": "B",
+"ply": 13
+},
+{
+"s": 196,
+"e": 198,
+"cls": "san",
+"piece": "P",
+"ply": 14
+},
+{
+"s": 199,
+"e": 200,
+"cls": "result"
+}
+],
+"n_san": 14,
+"valid": true,
+"first_unresolved_ply": null,
+"error": null,
+"plies": [
+{
+"ply": 1,
+"color": "w",
+"piece": "P",
+"pid": "wP-d2",
+"from": "d2",
+"to": "d4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "d4",
+"uci": "d2d4",
+"long": "d2-d4",
+"span": [
+132,
+134
+],
+"text": "d4"
+},
+{
+"ply": 2,
+"color": "b",
+"piece": "P",
+"pid": "bP-d7",
+"from": "d7",
+"to": "d5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "d5",
+"uci": "d7d5",
+"long": "d7-d5",
+"span": [
+135,
+137
+],
+"text": "d5"
+},
+{
+"ply": 3,
+"color": "w",
+"piece": "P",
+"pid": "wP-c2",
+"from": "c2",
+"to": "c4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "c4",
+"uci": "c2c4",
+"long": "c2-c4",
+"span": [
+141,
+143
+],
+"text": "c4"
+},
+{
+"ply": 4,
+"color": "b",
+"piece": "P",
+"pid": "bP-e7",
+"from": "e7",
+"to": "e6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "e6",
+"uci": "e7e6",
+"long": "e7-e6",
+"span": [
+144,
+146
+],
+"text": "e6"
+},
+{
+"ply": 5,
+"color": "w",
+"piece": "N",
+"pid": "wN-b1",
+"from": "b1",
+"to": "c3",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Nc3",
+"uci": "b1c3",
+"long": "Nb1-c3",
+"span": [
+150,
+153
+],
+"text": "Nc3"
+},
+{
+"ply": 6,
+"color": "b",
+"piece": "N",
+"pid": "bN-g8",
+"from": "g8",
+"to": "f6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Nf6",
+"uci": "g8f6",
+"long": "Ng8-f6",
+"span": [
+154,
+157
+],
+"text": "Nf6"
+},
+{
+"ply": 7,
+"color": "w",
+"piece": "B",
+"pid": "wB-c1",
+"from": "c1",
+"to": "g5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Bg5",
+"uci": "c1g5",
+"long": "Bc1-g5",
+"span": [
+161,
+164
+],
+"text": "Bg5"
+},
+{
+"ply": 8,
+"color": "b",
+"piece": "B",
+"pid": "bB-f8",
+"from": "f8",
+"to": "e7",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Be7",
+"uci": "f8e7",
+"long": "Bf8-e7",
+"span": [
+165,
+168
+],
+"text": "Be7"
+},
+{
+"ply": 9,
+"color": "w",
+"piece": "P",
+"pid": "wP-e2",
+"from": "e2",
+"to": "e3",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "e3",
+"uci": "e2e3",
+"long": "e2-e3",
+"span": [
+172,
+174
+],
+"text": "e3"
+},
+{
+"ply": 10,
+"color": "b",
+"piece": "K",
+"pid": "bK-e8",
+"from": "e8",
+"to": "g8",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": "K",
+"rook_pid": "bR-h8",
+"rook_to": "f8",
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "O-O",
+"uci": "e8g8",
+"long": "O-O",
+"span": [
+175,
+178
+],
+"text": "O-O"
+},
+{
+"ply": 11,
+"color": "w",
+"piece": "N",
+"pid": "wN-g1",
+"from": "g1",
+"to": "f3",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Nf3",
+"uci": "g1f3",
+"long": "Ng1-f3",
+"span": [
+182,
+185
+],
+"text": "Nf3"
+},
+{
+"ply": 12,
+"color": "b",
+"piece": "P",
+"pid": "bP-h7",
+"from": "h7",
+"to": "h6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "h6",
+"uci": "h7h6",
+"long": "h7-h6",
+"span": [
+186,
+188
+],
+"text": "h6"
+},
+{
+"ply": 13,
+"color": "w",
+"piece": "B",
+"pid": "wB-c1",
+"from": "g5",
+"to": "h4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Bh4",
+"uci": "g5h4",
+"long": "Bg5-h4",
+"span": [
+192,
+195
+],
+"text": "Bh4"
+},
+{
+"ply": 14,
+"color": "b",
+"piece": "P",
+"pid": "bP-b7",
+"from": "b7",
+"to": "b6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "b6",
+"uci": "b7b6",
+"long": "b7-b6",
+"span": [
+196,
+198
+],
+"text": "b6"
+}
+],
+"final_placement": "rnbq1rk1/p1p1bpp1/1p2pn1p/3p4/2PP3B/2N1PN2/PP3PPP/R2QKB1R",
+"comment_unterminated": false
+}
+],
+"reps": [
+{
+"id": "toy:1",
+"plies": [
+{
+"ply": 1,
+"color": "w",
+"piece": "P",
+"pid": "wP-e2",
+"from": "e2",
+"to": "e4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "e4",
+"uci": "e2e4",
+"long": "e2-e4",
+"span": [
+117,
+119
+],
+"text": "e4"
+},
+{
+"ply": 2,
+"color": "b",
+"piece": "P",
+"pid": "bP-e7",
+"from": "e7",
+"to": "e5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "e5",
+"uci": "e7e5",
+"long": "e7-e5",
+"span": [
+120,
+122
+],
+"text": "e5"
+},
+{
+"ply": 3,
+"color": "w",
+"piece": "N",
+"pid": "wN-g1",
+"from": "g1",
+"to": "f3",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Nf3",
+"uci": "g1f3",
+"long": "Ng1-f3",
+"span": [
+126,
+129
+],
+"text": "Nf3"
+},
+{
+"ply": 4,
+"color": "b",
+"piece": "P",
+"pid": "bP-d7",
+"from": "d7",
+"to": "d6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "d6",
+"uci": "d7d6",
+"long": "d7-d6",
+"span": [
+130,
+132
+],
+"text": "d6"
+},
+{
+"ply": 5,
+"color": "w",
+"piece": "B",
+"pid": "wB-f1",
+"from": "f1",
+"to": "c4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Bc4",
+"uci": "f1c4",
+"long": "Bf1-c4",
+"span": [
+136,
+139
+],
+"text": "Bc4"
+},
+{
+"ply": 6,
+"color": "b",
+"piece": "B",
+"pid": "bB-c8",
+"from": "c8",
+"to": "g4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Bg4",
+"uci": "c8g4",
+"long": "Bc8-g4",
+"span": [
+140,
+143
+],
+"text": "Bg4"
+},
+{
+"ply": 7,
+"color": "w",
+"piece": "N",
+"pid": "wN-b1",
+"from": "b1",
+"to": "c3",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Nc3",
+"uci": "b1c3",
+"long": "Nb1-c3",
+"span": [
+147,
+150
+],
+"text": "Nc3"
+},
+{
+"ply": 8,
+"color": "b",
+"piece": "P",
+"pid": "bP-g7",
+"from": "g7",
+"to": "g6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "g6",
+"uci": "g7g6",
+"long": "g7-g6",
+"span": [
+151,
+153
+],
+"text": "g6"
+},
+{
+"ply": 9,
+"color": "w",
+"piece": "N",
+"pid": "wN-g1",
+"from": "f3",
+"to": "e5",
+"capture": true,
+"captured_pid": "bP-e7",
+"captured_type": "P",
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Nxe5",
+"uci": "f3e5",
+"long": "Nf3xe5",
+"span": [
+157,
+161
+],
+"text": "Nxe5"
+},
+{
+"ply": 10,
+"color": "b",
+"piece": "B",
+"pid": "bB-c8",
+"from": "g4",
+"to": "d1",
+"capture": true,
+"captured_pid": "wQ-d1",
+"captured_type": "Q",
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Bxd1",
+"uci": "g4d1",
+"long": "Bg4xd1",
+"span": [
+162,
+166
+],
+"text": "Bxd1"
+},
+{
+"ply": 11,
+"color": "w",
+"piece": "B",
+"pid": "wB-f1",
+"from": "c4",
+"to": "f7",
+"capture": true,
+"captured_pid": "bP-f7",
+"captured_type": "P",
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": true,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Bxf7+",
+"uci": "c4f7",
+"long": "Bc4xf7+",
+"span": [
+170,
+175
+],
+"text": "Bxf7+"
+},
+{
+"ply": 12,
+"color": "b",
+"piece": "K",
+"pid": "bK-e8",
+"from": "e8",
+"to": "e7",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Ke7",
+"uci": "e8e7",
+"long": "Ke8-e7",
+"span": [
+176,
+179
+],
+"text": "Ke7"
+},
+{
+"ply": 13,
+"color": "w",
+"piece": "N",
+"pid": "wN-b1",
+"from": "c3",
+"to": "d5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": true,
+"mate": true,
+"enemy_king": "bK-e8",
+"san_canon": "Nd5#",
+"uci": "c3d5",
+"long": "Nc3-d5#",
+"span": [
+183,
+187
+],
+"text": "Nd5#"
+}
+],
+"final_placement": "rn1q1bnr/ppp1kB1p/3p2p1/3NN3/4P3/8/PPPP1PPP/R1BbK2R",
+"reps": {
+"en": {
+"text": "1. e4 e5 2. Nf3 d6 3. Bc4 Bg4 4. Nc3 g6 5. Nxe5 Bxd1 6. Bxf7+ Ke7 7. Nd5# 1-0",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 15,
+"cls": "san"
+},
+{
+"s": 16,
+"e": 18,
+"cls": "san"
+},
+{
+"s": 19,
+"e": 21,
+"cls": "move_number"
+},
+{
+"s": 22,
+"e": 25,
+"cls": "san"
+},
+{
+"s": 26,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 32,
+"cls": "move_number"
+},
+{
+"s": 33,
+"e": 36,
+"cls": "san"
+},
+{
+"s": 37,
+"e": 39,
+"cls": "san"
+},
+{
+"s": 40,
+"e": 42,
+"cls": "move_number"
+},
+{
+"s": 43,
+"e": 47,
+"cls": "san"
+},
+{
+"s": 48,
+"e": 52,
+"cls": "san"
+},
+{
+"s": 53,
+"e": 55,
+"cls": "move_number"
+},
+{
+"s": 56,
+"e": 61,
+"cls": "san"
+},
+{
+"s": 62,
+"e": 65,
+"cls": "san"
+},
+{
+"s": 66,
+"e": 68,
+"cls": "move_number"
+},
+{
+"s": 69,
+"e": 73,
+"cls": "san"
+},
+{
+"s": 74,
+"e": 77,
+"cls": "result"
+}
+]
+},
+"uci": {
+"text": "e2e4 e7e5 g1f3 d7d6 f1c4 c8g4 b1c3 g7g6 f3e5 g4d1 c4f7 e8e7 c3d5 1-0",
+"spans": [
+{
+"s": 0,
+"e": 4,
+"cls": "san"
+},
+{
+"s": 5,
+"e": 9,
+"cls": "san"
+},
+{
+"s": 10,
+"e": 14,
+"cls": "san"
+},
+{
+"s": 15,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 24,
+"cls": "san"
+},
+{
+"s": 25,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 34,
+"cls": "san"
+},
+{
+"s": 35,
+"e": 39,
+"cls": "san"
+},
+{
+"s": 40,
+"e": 44,
+"cls": "san"
+},
+{
+"s": 45,
+"e": 49,
+"cls": "san"
+},
+{
+"s": 50,
+"e": 54,
+"cls": "san"
+},
+{
+"s": 55,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 64,
+"cls": "san"
+},
+{
+"s": 65,
+"e": 68,
+"cls": "result"
+}
+]
+},
+"long": {
+"text": "1. e2-e4 e7-e5 2. Ng1-f3 d7-d6 3. Bf1-c4 Bc8-g4 4. Nb1-c3 g7-g6 5. Nf3xe5 Bg4xd1 6. Bc4xf7+ Ke8-e7 7. Nc3-d5# 1-0",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 14,
+"cls": "san"
+},
+{
+"s": 15,
+"e": 17,
+"cls": "move_number"
+},
+{
+"s": 18,
+"e": 24,
+"cls": "san"
+},
+{
+"s": 25,
+"e": 30,
+"cls": "san"
+},
+{
+"s": 31,
+"e": 33,
+"cls": "move_number"
+},
+{
+"s": 34,
+"e": 40,
+"cls": "san"
+},
+{
+"s": 41,
+"e": 47,
+"cls": "san"
+},
+{
+"s": 48,
+"e": 50,
+"cls": "move_number"
+},
+{
+"s": 51,
+"e": 57,
+"cls": "san"
+},
+{
+"s": 58,
+"e": 63,
+"cls": "san"
+},
+{
+"s": 64,
+"e": 66,
+"cls": "move_number"
+},
+{
+"s": 67,
+"e": 73,
+"cls": "san"
+},
+{
+"s": 74,
+"e": 80,
+"cls": "san"
+},
+{
+"s": 81,
+"e": 83,
+"cls": "move_number"
+},
+{
+"s": 84,
+"e": 91,
+"cls": "san"
+},
+{
+"s": 92,
+"e": 98,
+"cls": "san"
+},
+{
+"s": 99,
+"e": 101,
+"cls": "move_number"
+},
+{
+"s": 102,
+"e": 109,
+"cls": "san"
+},
+{
+"s": 110,
+"e": 113,
+"cls": "result"
+}
+]
+},
+"fan": {
+"text": "1. e4 e5 2. ♘f3 d6 3. ♗c4 ♝g4 4. ♘c3 g6 5. ♘xe5 ♝xd1 6. ♗xf7+ ♚e7 7. ♘d5# 1-0",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 15,
+"cls": "san"
+},
+{
+"s": 16,
+"e": 18,
+"cls": "san"
+},
+{
+"s": 19,
+"e": 21,
+"cls": "move_number"
+},
+{
+"s": 22,
+"e": 25,
+"cls": "san"
+},
+{
+"s": 26,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 32,
+"cls": "move_number"
+},
+{
+"s": 33,
+"e": 36,
+"cls": "san"
+},
+{
+"s": 37,
+"e": 39,
+"cls": "san"
+},
+{
+"s": 40,
+"e": 42,
+"cls": "move_number"
+},
+{
+"s": 43,
+"e": 47,
+"cls": "san"
+},
+{
+"s": 48,
+"e": 52,
+"cls": "san"
+},
+{
+"s": 53,
+"e": 55,
+"cls": "move_number"
+},
+{
+"s": 56,
+"e": 61,
+"cls": "san"
+},
+{
+"s": 62,
+"e": 65,
+"cls": "san"
+},
+{
+"s": 66,
+"e": 68,
+"cls": "move_number"
+},
+{
+"s": 69,
+"e": 73,
+"cls": "san"
+},
+{
+"s": 74,
+"e": 77,
+"cls": "result"
+}
+]
+},
+"tight": {
+"text": "1.e4 e5 2.Nf3 d6 3.Bc4 Bg4 4.Nc3 g6 5.Nxe5 Bxd1 6.Bxf7+ Ke7 7.Nd5# 1-0",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 2,
+"e": 4,
+"cls": "san"
+},
+{
+"s": 5,
+"e": 7,
+"cls": "san"
+},
+{
+"s": 8,
+"e": 10,
+"cls": "move_number"
+},
+{
+"s": 10,
+"e": 13,
+"cls": "san"
+},
+{
+"s": 14,
+"e": 16,
+"cls": "san"
+},
+{
+"s": 17,
+"e": 19,
+"cls": "move_number"
+},
+{
+"s": 19,
+"e": 22,
+"cls": "san"
+},
+{
+"s": 23,
+"e": 26,
+"cls": "san"
+},
+{
+"s": 27,
+"e": 29,
+"cls": "move_number"
+},
+{
+"s": 29,
+"e": 32,
+"cls": "san"
+},
+{
+"s": 33,
+"e": 35,
+"cls": "san"
+},
+{
+"s": 36,
+"e": 38,
+"cls": "move_number"
+},
+{
+"s": 38,
+"e": 42,
+"cls": "san"
+},
+{
+"s": 43,
+"e": 47,
+"cls": "san"
+},
+{
+"s": 48,
+"e": 50,
+"cls": "move_number"
+},
+{
+"s": 50,
+"e": 55,
+"cls": "san"
+},
+{
+"s": 56,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 62,
+"cls": "move_number"
+},
+{
+"s": 62,
+"e": 66,
+"cls": "san"
+},
+{
+"s": 67,
+"e": 70,
+"cls": "result"
+}
+]
+},
+"de": {
+"text": "1. e4 e5 2. Sf3 d6 3. Lc4 Lg4 4. Sc3 g6 5. Sxe5 Lxd1 6. Lxf7+ Ke7 7. Sd5# 1-0",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 15,
+"cls": "san"
+},
+{
+"s": 16,
+"e": 18,
+"cls": "san"
+},
+{
+"s": 19,
+"e": 21,
+"cls": "move_number"
+},
+{
+"s": 22,
+"e": 25,
+"cls": "san"
+},
+{
+"s": 26,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 32,
+"cls": "move_number"
+},
+{
+"s": 33,
+"e": 36,
+"cls": "san"
+},
+{
+"s": 37,
+"e": 39,
+"cls": "san"
+},
+{
+"s": 40,
+"e": 42,
+"cls": "move_number"
+},
+{
+"s": 43,
+"e": 47,
+"cls": "san"
+},
+{
+"s": 48,
+"e": 52,
+"cls": "san"
+},
+{
+"s": 53,
+"e": 55,
+"cls": "move_number"
+},
+{
+"s": 56,
+"e": 61,
+"cls": "san"
+},
+{
+"s": 62,
+"e": 65,
+"cls": "san"
+},
+{
+"s": 66,
+"e": 68,
+"cls": "move_number"
+},
+{
+"s": 69,
+"e": 73,
+"cls": "san"
+},
+{
+"s": 74,
+"e": 77,
+"cls": "result"
+}
+]
+},
+"fr": {
+"text": "1. e4 e5 2. Cf3 d6 3. Fc4 Fg4 4. Cc3 g6 5. Cxe5 Fxd1 6. Fxf7+ Re7 7. Cd5# 1-0",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 15,
+"cls": "san"
+},
+{
+"s": 16,
+"e": 18,
+"cls": "san"
+},
+{
+"s": 19,
+"e": 21,
+"cls": "move_number"
+},
+{
+"s": 22,
+"e": 25,
+"cls": "san"
+},
+{
+"s": 26,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 32,
+"cls": "move_number"
+},
+{
+"s": 33,
+"e": 36,
+"cls": "san"
+},
+{
+"s": 37,
+"e": 39,
+"cls": "san"
+},
+{
+"s": 40,
+"e": 42,
+"cls": "move_number"
+},
+{
+"s": 43,
+"e": 47,
+"cls": "san"
+},
+{
+"s": 48,
+"e": 52,
+"cls": "san"
+},
+{
+"s": 53,
+"e": 55,
+"cls": "move_number"
+},
+{
+"s": 56,
+"e": 61,
+"cls": "san"
+},
+{
+"s": 62,
+"e": 65,
+"cls": "san"
+},
+{
+"s": 66,
+"e": 68,
+"cls": "move_number"
+},
+{
+"s": 69,
+"e": 73,
+"cls": "san"
+},
+{
+"s": 74,
+"e": 77,
+"cls": "result"
+}
+]
+},
+"es": {
+"text": "1. e4 e5 2. Cf3 d6 3. Ac4 Ag4 4. Cc3 g6 5. Cxe5 Axd1 6. Axf7+ Re7 7. Cd5# 1-0",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 15,
+"cls": "san"
+},
+{
+"s": 16,
+"e": 18,
+"cls": "san"
+},
+{
+"s": 19,
+"e": 21,
+"cls": "move_number"
+},
+{
+"s": 22,
+"e": 25,
+"cls": "san"
+},
+{
+"s": 26,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 32,
+"cls": "move_number"
+},
+{
+"s": 33,
+"e": 36,
+"cls": "san"
+},
+{
+"s": 37,
+"e": 39,
+"cls": "san"
+},
+{
+"s": 40,
+"e": 42,
+"cls": "move_number"
+},
+{
+"s": 43,
+"e": 47,
+"cls": "san"
+},
+{
+"s": 48,
+"e": 52,
+"cls": "san"
+},
+{
+"s": 53,
+"e": 55,
+"cls": "move_number"
+},
+{
+"s": 56,
+"e": 61,
+"cls": "san"
+},
+{
+"s": 62,
+"e": 65,
+"cls": "san"
+},
+{
+"s": 66,
+"e": 68,
+"cls": "move_number"
+},
+{
+"s": 69,
+"e": 73,
+"cls": "san"
+},
+{
+"s": 74,
+"e": 77,
+"cls": "result"
+}
+]
+},
+"hu": {
+"text": "1. e4 e5 2. Hf3 d6 3. Fc4 Fg4 4. Hc3 g6 5. Hxe5 Fxd1 6. Fxf7+ Ke7 7. Hd5# 1-0",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 15,
+"cls": "san"
+},
+{
+"s": 16,
+"e": 18,
+"cls": "san"
+},
+{
+"s": 19,
+"e": 21,
+"cls": "move_number"
+},
+{
+"s": 22,
+"e": 25,
+"cls": "san"
+},
+{
+"s": 26,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 32,
+"cls": "move_number"
+},
+{
+"s": 33,
+"e": 36,
+"cls": "san"
+},
+{
+"s": 37,
+"e": 39,
+"cls": "san"
+},
+{
+"s": 40,
+"e": 42,
+"cls": "move_number"
+},
+{
+"s": 43,
+"e": 47,
+"cls": "san"
+},
+{
+"s": 48,
+"e": 52,
+"cls": "san"
+},
+{
+"s": 53,
+"e": 55,
+"cls": "move_number"
+},
+{
+"s": 56,
+"e": 61,
+"cls": "san"
+},
+{
+"s": 62,
+"e": 65,
+"cls": "san"
+},
+{
+"s": 66,
+"e": 68,
+"cls": "move_number"
+},
+{
+"s": 69,
+"e": 73,
+"cls": "san"
+},
+{
+"s": 74,
+"e": 77,
+"cls": "result"
+}
+]
+},
+"pl": {
+"text": "1. e4 e5 2. Sf3 d6 3. Gc4 Gg4 4. Sc3 g6 5. Sxe5 Gxd1 6. Gxf7+ Ke7 7. Sd5# 1-0",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 15,
+"cls": "san"
+},
+{
+"s": 16,
+"e": 18,
+"cls": "san"
+},
+{
+"s": 19,
+"e": 21,
+"cls": "move_number"
+},
+{
+"s": 22,
+"e": 25,
+"cls": "san"
+},
+{
+"s": 26,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 32,
+"cls": "move_number"
+},
+{
+"s": 33,
+"e": 36,
+"cls": "san"
+},
+{
+"s": 37,
+"e": 39,
+"cls": "san"
+},
+{
+"s": 40,
+"e": 42,
+"cls": "move_number"
+},
+{
+"s": 43,
+"e": 47,
+"cls": "san"
+},
+{
+"s": 48,
+"e": 52,
+"cls": "san"
+},
+{
+"s": 53,
+"e": 55,
+"cls": "move_number"
+},
+{
+"s": 56,
+"e": 61,
+"cls": "san"
+},
+{
+"s": 62,
+"e": 65,
+"cls": "san"
+},
+{
+"s": 66,
+"e": 68,
+"cls": "move_number"
+},
+{
+"s": 69,
+"e": 73,
+"cls": "san"
+},
+{
+"s": 74,
+"e": 77,
+"cls": "result"
+}
+]
+}
+}
+},
+{
+"id": "toy:2",
+"plies": [
+{
+"ply": 1,
+"color": "w",
+"piece": "P",
+"pid": "wP-e2",
+"from": "e2",
+"to": "e4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "e4",
+"uci": "e2e4",
+"long": "e2-e4",
+"span": [
+150,
+152
+],
+"text": "e4"
+},
+{
+"ply": 2,
+"color": "b",
+"piece": "P",
+"pid": "bP-d7",
+"from": "d7",
+"to": "d5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "d5",
+"uci": "d7d5",
+"long": "d7-d5",
+"span": [
+153,
+155
+],
+"text": "d5"
+},
+{
+"ply": 3,
+"color": "w",
+"piece": "P",
+"pid": "wP-e2",
+"from": "e4",
+"to": "d5",
+"capture": true,
+"captured_pid": "bP-d7",
+"captured_type": "P",
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "exd5",
+"uci": "e4d5",
+"long": "e4xd5",
+"span": [
+192,
+196
+],
+"text": "exd5"
+},
+{
+"ply": 4,
+"color": "b",
+"piece": "P",
+"pid": "bP-c7",
+"from": "c7",
+"to": "c5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "c5",
+"uci": "c7c5",
+"long": "c7-c5",
+"span": [
+197,
+199
+],
+"text": "c5"
+},
+{
+"ply": 5,
+"color": "w",
+"piece": "P",
+"pid": "wP-e2",
+"from": "d5",
+"to": "c6",
+"capture": true,
+"captured_pid": "bP-c7",
+"captured_type": "P",
+"ep": true,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "dxc6",
+"uci": "d5c6",
+"long": "d5xc6",
+"span": [
+203,
+207
+],
+"text": "dxc6"
+},
+{
+"ply": 6,
+"color": "b",
+"piece": "N",
+"pid": "bN-g8",
+"from": "g8",
+"to": "f6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Nf6",
+"uci": "g8f6",
+"long": "Ng8-f6",
+"span": [
+208,
+211
+],
+"text": "Nf6"
+},
+{
+"ply": 7,
+"color": "w",
+"piece": "N",
+"pid": "wN-g1",
+"from": "g1",
+"to": "f3",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Nf3",
+"uci": "g1f3",
+"long": "Ng1-f3",
+"span": [
+215,
+218
+],
+"text": "Nf3"
+},
+{
+"ply": 8,
+"color": "b",
+"piece": "P",
+"pid": "bP-e7",
+"from": "e7",
+"to": "e5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "e5",
+"uci": "e7e5",
+"long": "e7-e5",
+"span": [
+219,
+221
+],
+"text": "e5"
+},
+{
+"ply": 9,
+"color": "w",
+"piece": "B",
+"pid": "wB-f1",
+"from": "f1",
+"to": "c4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Bc4",
+"uci": "f1c4",
+"long": "Bf1-c4",
+"span": [
+225,
+228
+],
+"text": "Bc4"
+},
+{
+"ply": 10,
+"color": "b",
+"piece": "B",
+"pid": "bB-f8",
+"from": "f8",
+"to": "e7",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Be7",
+"uci": "f8e7",
+"long": "Bf8-e7",
+"span": [
+229,
+232
+],
+"text": "Be7"
+},
+{
+"ply": 11,
+"color": "w",
+"piece": "K",
+"pid": "wK-e1",
+"from": "e1",
+"to": "g1",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": "K",
+"rook_pid": "wR-h1",
+"rook_to": "f1",
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "O-O",
+"uci": "e1g1",
+"long": "O-O",
+"span": [
+236,
+239
+],
+"text": "O-O"
+},
+{
+"ply": 12,
+"color": "b",
+"piece": "K",
+"pid": "bK-e8",
+"from": "e8",
+"to": "g8",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": "K",
+"rook_pid": "bR-h8",
+"rook_to": "f8",
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "O-O",
+"uci": "e8g8",
+"long": "O-O",
+"span": [
+240,
+243
+],
+"text": "O-O"
+},
+{
+"ply": 13,
+"color": "w",
+"piece": "P",
+"pid": "wP-d2",
+"from": "d2",
+"to": "d4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "d4",
+"uci": "d2d4",
+"long": "d2-d4",
+"span": [
+247,
+249
+],
+"text": "d4"
+},
+{
+"ply": 14,
+"color": "b",
+"piece": "N",
+"pid": "bN-b8",
+"from": "b8",
+"to": "c6",
+"capture": true,
+"captured_pid": "wP-e2",
+"captured_type": "P",
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Nxc6",
+"uci": "b8c6",
+"long": "Nb8xc6",
+"span": [
+250,
+253
+],
+"text": "Nc6"
+},
+{
+"ply": 15,
+"color": "w",
+"piece": "N",
+"pid": "wN-b1",
+"from": "b1",
+"to": "d2",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Nbd2",
+"uci": "b1d2",
+"long": "Nb1-d2",
+"span": [
+257,
+261
+],
+"text": "Nbd2"
+},
+{
+"ply": 16,
+"color": "b",
+"piece": "N",
+"pid": "bN-g8",
+"from": "f6",
+"to": "d7",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Nd7",
+"uci": "f6d7",
+"long": "Nf6-d7",
+"span": [
+262,
+265
+],
+"text": "Nd7"
+},
+{
+"ply": 17,
+"color": "w",
+"piece": "Q",
+"pid": "wQ-d1",
+"from": "d1",
+"to": "e2",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Qe2",
+"uci": "d1e2",
+"long": "Qd1-e2",
+"span": [
+269,
+272
+],
+"text": "Qe2"
+},
+{
+"ply": 18,
+"color": "b",
+"piece": "B",
+"pid": "bB-f8",
+"from": "e7",
+"to": "f6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Bf6",
+"uci": "e7f6",
+"long": "Be7-f6",
+"span": [
+273,
+276
+],
+"text": "Bf6"
+}
+],
+"final_placement": "r1bq1rk1/pp1n1ppp/2n2b2/4p3/2BP4/5N2/PPPNQPPP/R1B2RK1",
+"reps": {
+"en": {
+"text": "1. e4 d5 2. exd5 c5 3. dxc6 Nf6 4. Nf3 e5 5. Bc4 Be7 6. O-O O-O 7. d4 Nxc6 8. Nbd2 Nd7 9. Qe2 Bf6 1/2-1/2",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 16,
+"cls": "san"
+},
+{
+"s": 17,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 22,
+"cls": "move_number"
+},
+{
+"s": 23,
+"e": 27,
+"cls": "san"
+},
+{
+"s": 28,
+"e": 31,
+"cls": "san"
+},
+{
+"s": 32,
+"e": 34,
+"cls": "move_number"
+},
+{
+"s": 35,
+"e": 38,
+"cls": "san"
+},
+{
+"s": 39,
+"e": 41,
+"cls": "san"
+},
+{
+"s": 42,
+"e": 44,
+"cls": "move_number"
+},
+{
+"s": 45,
+"e": 48,
+"cls": "san"
+},
+{
+"s": 49,
+"e": 52,
+"cls": "san"
+},
+{
+"s": 53,
+"e": 55,
+"cls": "move_number"
+},
+{
+"s": 56,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 63,
+"cls": "san"
+},
+{
+"s": 64,
+"e": 66,
+"cls": "move_number"
+},
+{
+"s": 67,
+"e": 69,
+"cls": "san"
+},
+{
+"s": 70,
+"e": 74,
+"cls": "san"
+},
+{
+"s": 75,
+"e": 77,
+"cls": "move_number"
+},
+{
+"s": 78,
+"e": 82,
+"cls": "san"
+},
+{
+"s": 83,
+"e": 86,
+"cls": "san"
+},
+{
+"s": 87,
+"e": 89,
+"cls": "move_number"
+},
+{
+"s": 90,
+"e": 93,
+"cls": "san"
+},
+{
+"s": 94,
+"e": 97,
+"cls": "san"
+},
+{
+"s": 98,
+"e": 105,
+"cls": "result"
+}
+]
+},
+"uci": {
+"text": "e2e4 d7d5 e4d5 c7c5 d5c6 g8f6 g1f3 e7e5 f1c4 f8e7 e1g1 e8g8 d2d4 b8c6 b1d2 f6d7 d1e2 e7f6 1/2-1/2",
+"spans": [
+{
+"s": 0,
+"e": 4,
+"cls": "san"
+},
+{
+"s": 5,
+"e": 9,
+"cls": "san"
+},
+{
+"s": 10,
+"e": 14,
+"cls": "san"
+},
+{
+"s": 15,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 24,
+"cls": "san"
+},
+{
+"s": 25,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 34,
+"cls": "san"
+},
+{
+"s": 35,
+"e": 39,
+"cls": "san"
+},
+{
+"s": 40,
+"e": 44,
+"cls": "san"
+},
+{
+"s": 45,
+"e": 49,
+"cls": "san"
+},
+{
+"s": 50,
+"e": 54,
+"cls": "san"
+},
+{
+"s": 55,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 64,
+"cls": "san"
+},
+{
+"s": 65,
+"e": 69,
+"cls": "san"
+},
+{
+"s": 70,
+"e": 74,
+"cls": "san"
+},
+{
+"s": 75,
+"e": 79,
+"cls": "san"
+},
+{
+"s": 80,
+"e": 84,
+"cls": "san"
+},
+{
+"s": 85,
+"e": 89,
+"cls": "san"
+},
+{
+"s": 90,
+"e": 97,
+"cls": "result"
+}
+]
+},
+"long": {
+"text": "1. e2-e4 d7-d5 2. e4xd5 c7-c5 3. d5xc6 Ng8-f6 4. Ng1-f3 e7-e5 5. Bf1-c4 Bf8-e7 6. O-O O-O 7. d2-d4 Nb8xc6 8. Nb1-d2 Nf6-d7 9. Qd1-e2 Be7-f6 1/2-1/2",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 14,
+"cls": "san"
+},
+{
+"s": 15,
+"e": 17,
+"cls": "move_number"
+},
+{
+"s": 18,
+"e": 23,
+"cls": "san"
+},
+{
+"s": 24,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 32,
+"cls": "move_number"
+},
+{
+"s": 33,
+"e": 38,
+"cls": "san"
+},
+{
+"s": 39,
+"e": 45,
+"cls": "san"
+},
+{
+"s": 46,
+"e": 48,
+"cls": "move_number"
+},
+{
+"s": 49,
+"e": 55,
+"cls": "san"
+},
+{
+"s": 56,
+"e": 61,
+"cls": "san"
+},
+{
+"s": 62,
+"e": 64,
+"cls": "move_number"
+},
+{
+"s": 65,
+"e": 71,
+"cls": "san"
+},
+{
+"s": 72,
+"e": 78,
+"cls": "san"
+},
+{
+"s": 79,
+"e": 81,
+"cls": "move_number"
+},
+{
+"s": 82,
+"e": 85,
+"cls": "san"
+},
+{
+"s": 86,
+"e": 89,
+"cls": "san"
+},
+{
+"s": 90,
+"e": 92,
+"cls": "move_number"
+},
+{
+"s": 93,
+"e": 98,
+"cls": "san"
+},
+{
+"s": 99,
+"e": 105,
+"cls": "san"
+},
+{
+"s": 106,
+"e": 108,
+"cls": "move_number"
+},
+{
+"s": 109,
+"e": 115,
+"cls": "san"
+},
+{
+"s": 116,
+"e": 122,
+"cls": "san"
+},
+{
+"s": 123,
+"e": 125,
+"cls": "move_number"
+},
+{
+"s": 126,
+"e": 132,
+"cls": "san"
+},
+{
+"s": 133,
+"e": 139,
+"cls": "san"
+},
+{
+"s": 140,
+"e": 147,
+"cls": "result"
+}
+]
+},
+"fan": {
+"text": "1. e4 d5 2. exd5 c5 3. dxc6 ♞f6 4. ♘f3 e5 5. ♗c4 ♝e7 6. O-O O-O 7. d4 ♞xc6 8. ♘bd2 ♞d7 9. ♕e2 ♝f6 1/2-1/2",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 16,
+"cls": "san"
+},
+{
+"s": 17,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 22,
+"cls": "move_number"
+},
+{
+"s": 23,
+"e": 27,
+"cls": "san"
+},
+{
+"s": 28,
+"e": 31,
+"cls": "san"
+},
+{
+"s": 32,
+"e": 34,
+"cls": "move_number"
+},
+{
+"s": 35,
+"e": 38,
+"cls": "san"
+},
+{
+"s": 39,
+"e": 41,
+"cls": "san"
+},
+{
+"s": 42,
+"e": 44,
+"cls": "move_number"
+},
+{
+"s": 45,
+"e": 48,
+"cls": "san"
+},
+{
+"s": 49,
+"e": 52,
+"cls": "san"
+},
+{
+"s": 53,
+"e": 55,
+"cls": "move_number"
+},
+{
+"s": 56,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 63,
+"cls": "san"
+},
+{
+"s": 64,
+"e": 66,
+"cls": "move_number"
+},
+{
+"s": 67,
+"e": 69,
+"cls": "san"
+},
+{
+"s": 70,
+"e": 74,
+"cls": "san"
+},
+{
+"s": 75,
+"e": 77,
+"cls": "move_number"
+},
+{
+"s": 78,
+"e": 82,
+"cls": "san"
+},
+{
+"s": 83,
+"e": 86,
+"cls": "san"
+},
+{
+"s": 87,
+"e": 89,
+"cls": "move_number"
+},
+{
+"s": 90,
+"e": 93,
+"cls": "san"
+},
+{
+"s": 94,
+"e": 97,
+"cls": "san"
+},
+{
+"s": 98,
+"e": 105,
+"cls": "result"
+}
+]
+},
+"tight": {
+"text": "1.e4 d5 2.exd5 c5 3.dxc6 Nf6 4.Nf3 e5 5.Bc4 Be7 6.O-O O-O 7.d4 Nxc6 8.Nbd2 Nd7 9.Qe2 Bf6 1/2-1/2",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 2,
+"e": 4,
+"cls": "san"
+},
+{
+"s": 5,
+"e": 7,
+"cls": "san"
+},
+{
+"s": 8,
+"e": 10,
+"cls": "move_number"
+},
+{
+"s": 10,
+"e": 14,
+"cls": "san"
+},
+{
+"s": 15,
+"e": 17,
+"cls": "san"
+},
+{
+"s": 18,
+"e": 20,
+"cls": "move_number"
+},
+{
+"s": 20,
+"e": 24,
+"cls": "san"
+},
+{
+"s": 25,
+"e": 28,
+"cls": "san"
+},
+{
+"s": 29,
+"e": 31,
+"cls": "move_number"
+},
+{
+"s": 31,
+"e": 34,
+"cls": "san"
+},
+{
+"s": 35,
+"e": 37,
+"cls": "san"
+},
+{
+"s": 38,
+"e": 40,
+"cls": "move_number"
+},
+{
+"s": 40,
+"e": 43,
+"cls": "san"
+},
+{
+"s": 44,
+"e": 47,
+"cls": "san"
+},
+{
+"s": 48,
+"e": 50,
+"cls": "move_number"
+},
+{
+"s": 50,
+"e": 53,
+"cls": "san"
+},
+{
+"s": 54,
+"e": 57,
+"cls": "san"
+},
+{
+"s": 58,
+"e": 60,
+"cls": "move_number"
+},
+{
+"s": 60,
+"e": 62,
+"cls": "san"
+},
+{
+"s": 63,
+"e": 67,
+"cls": "san"
+},
+{
+"s": 68,
+"e": 70,
+"cls": "move_number"
+},
+{
+"s": 70,
+"e": 74,
+"cls": "san"
+},
+{
+"s": 75,
+"e": 78,
+"cls": "san"
+},
+{
+"s": 79,
+"e": 81,
+"cls": "move_number"
+},
+{
+"s": 81,
+"e": 84,
+"cls": "san"
+},
+{
+"s": 85,
+"e": 88,
+"cls": "san"
+},
+{
+"s": 89,
+"e": 96,
+"cls": "result"
+}
+]
+},
+"de": {
+"text": "1. e4 d5 2. exd5 c5 3. dxc6 Sf6 4. Sf3 e5 5. Lc4 Le7 6. O-O O-O 7. d4 Sxc6 8. Sbd2 Sd7 9. De2 Lf6 1/2-1/2",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 16,
+"cls": "san"
+},
+{
+"s": 17,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 22,
+"cls": "move_number"
+},
+{
+"s": 23,
+"e": 27,
+"cls": "san"
+},
+{
+"s": 28,
+"e": 31,
+"cls": "san"
+},
+{
+"s": 32,
+"e": 34,
+"cls": "move_number"
+},
+{
+"s": 35,
+"e": 38,
+"cls": "san"
+},
+{
+"s": 39,
+"e": 41,
+"cls": "san"
+},
+{
+"s": 42,
+"e": 44,
+"cls": "move_number"
+},
+{
+"s": 45,
+"e": 48,
+"cls": "san"
+},
+{
+"s": 49,
+"e": 52,
+"cls": "san"
+},
+{
+"s": 53,
+"e": 55,
+"cls": "move_number"
+},
+{
+"s": 56,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 63,
+"cls": "san"
+},
+{
+"s": 64,
+"e": 66,
+"cls": "move_number"
+},
+{
+"s": 67,
+"e": 69,
+"cls": "san"
+},
+{
+"s": 70,
+"e": 74,
+"cls": "san"
+},
+{
+"s": 75,
+"e": 77,
+"cls": "move_number"
+},
+{
+"s": 78,
+"e": 82,
+"cls": "san"
+},
+{
+"s": 83,
+"e": 86,
+"cls": "san"
+},
+{
+"s": 87,
+"e": 89,
+"cls": "move_number"
+},
+{
+"s": 90,
+"e": 93,
+"cls": "san"
+},
+{
+"s": 94,
+"e": 97,
+"cls": "san"
+},
+{
+"s": 98,
+"e": 105,
+"cls": "result"
+}
+]
+},
+"fr": {
+"text": "1. e4 d5 2. exd5 c5 3. dxc6 Cf6 4. Cf3 e5 5. Fc4 Fe7 6. O-O O-O 7. d4 Cxc6 8. Cbd2 Cd7 9. De2 Ff6 1/2-1/2",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 16,
+"cls": "san"
+},
+{
+"s": 17,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 22,
+"cls": "move_number"
+},
+{
+"s": 23,
+"e": 27,
+"cls": "san"
+},
+{
+"s": 28,
+"e": 31,
+"cls": "san"
+},
+{
+"s": 32,
+"e": 34,
+"cls": "move_number"
+},
+{
+"s": 35,
+"e": 38,
+"cls": "san"
+},
+{
+"s": 39,
+"e": 41,
+"cls": "san"
+},
+{
+"s": 42,
+"e": 44,
+"cls": "move_number"
+},
+{
+"s": 45,
+"e": 48,
+"cls": "san"
+},
+{
+"s": 49,
+"e": 52,
+"cls": "san"
+},
+{
+"s": 53,
+"e": 55,
+"cls": "move_number"
+},
+{
+"s": 56,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 63,
+"cls": "san"
+},
+{
+"s": 64,
+"e": 66,
+"cls": "move_number"
+},
+{
+"s": 67,
+"e": 69,
+"cls": "san"
+},
+{
+"s": 70,
+"e": 74,
+"cls": "san"
+},
+{
+"s": 75,
+"e": 77,
+"cls": "move_number"
+},
+{
+"s": 78,
+"e": 82,
+"cls": "san"
+},
+{
+"s": 83,
+"e": 86,
+"cls": "san"
+},
+{
+"s": 87,
+"e": 89,
+"cls": "move_number"
+},
+{
+"s": 90,
+"e": 93,
+"cls": "san"
+},
+{
+"s": 94,
+"e": 97,
+"cls": "san"
+},
+{
+"s": 98,
+"e": 105,
+"cls": "result"
+}
+]
+},
+"es": {
+"text": "1. e4 d5 2. exd5 c5 3. dxc6 Cf6 4. Cf3 e5 5. Ac4 Ae7 6. O-O O-O 7. d4 Cxc6 8. Cbd2 Cd7 9. De2 Af6 1/2-1/2",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 16,
+"cls": "san"
+},
+{
+"s": 17,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 22,
+"cls": "move_number"
+},
+{
+"s": 23,
+"e": 27,
+"cls": "san"
+},
+{
+"s": 28,
+"e": 31,
+"cls": "san"
+},
+{
+"s": 32,
+"e": 34,
+"cls": "move_number"
+},
+{
+"s": 35,
+"e": 38,
+"cls": "san"
+},
+{
+"s": 39,
+"e": 41,
+"cls": "san"
+},
+{
+"s": 42,
+"e": 44,
+"cls": "move_number"
+},
+{
+"s": 45,
+"e": 48,
+"cls": "san"
+},
+{
+"s": 49,
+"e": 52,
+"cls": "san"
+},
+{
+"s": 53,
+"e": 55,
+"cls": "move_number"
+},
+{
+"s": 56,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 63,
+"cls": "san"
+},
+{
+"s": 64,
+"e": 66,
+"cls": "move_number"
+},
+{
+"s": 67,
+"e": 69,
+"cls": "san"
+},
+{
+"s": 70,
+"e": 74,
+"cls": "san"
+},
+{
+"s": 75,
+"e": 77,
+"cls": "move_number"
+},
+{
+"s": 78,
+"e": 82,
+"cls": "san"
+},
+{
+"s": 83,
+"e": 86,
+"cls": "san"
+},
+{
+"s": 87,
+"e": 89,
+"cls": "move_number"
+},
+{
+"s": 90,
+"e": 93,
+"cls": "san"
+},
+{
+"s": 94,
+"e": 97,
+"cls": "san"
+},
+{
+"s": 98,
+"e": 105,
+"cls": "result"
+}
+]
+},
+"hu": {
+"text": "1. e4 d5 2. exd5 c5 3. dxc6 Hf6 4. Hf3 e5 5. Fc4 Fe7 6. O-O O-O 7. d4 Hxc6 8. Hbd2 Hd7 9. Ve2 Ff6 1/2-1/2",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 16,
+"cls": "san"
+},
+{
+"s": 17,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 22,
+"cls": "move_number"
+},
+{
+"s": 23,
+"e": 27,
+"cls": "san"
+},
+{
+"s": 28,
+"e": 31,
+"cls": "san"
+},
+{
+"s": 32,
+"e": 34,
+"cls": "move_number"
+},
+{
+"s": 35,
+"e": 38,
+"cls": "san"
+},
+{
+"s": 39,
+"e": 41,
+"cls": "san"
+},
+{
+"s": 42,
+"e": 44,
+"cls": "move_number"
+},
+{
+"s": 45,
+"e": 48,
+"cls": "san"
+},
+{
+"s": 49,
+"e": 52,
+"cls": "san"
+},
+{
+"s": 53,
+"e": 55,
+"cls": "move_number"
+},
+{
+"s": 56,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 63,
+"cls": "san"
+},
+{
+"s": 64,
+"e": 66,
+"cls": "move_number"
+},
+{
+"s": 67,
+"e": 69,
+"cls": "san"
+},
+{
+"s": 70,
+"e": 74,
+"cls": "san"
+},
+{
+"s": 75,
+"e": 77,
+"cls": "move_number"
+},
+{
+"s": 78,
+"e": 82,
+"cls": "san"
+},
+{
+"s": 83,
+"e": 86,
+"cls": "san"
+},
+{
+"s": 87,
+"e": 89,
+"cls": "move_number"
+},
+{
+"s": 90,
+"e": 93,
+"cls": "san"
+},
+{
+"s": 94,
+"e": 97,
+"cls": "san"
+},
+{
+"s": 98,
+"e": 105,
+"cls": "result"
+}
+]
+},
+"pl": {
+"text": "1. e4 d5 2. exd5 c5 3. dxc6 Sf6 4. Sf3 e5 5. Gc4 Ge7 6. O-O O-O 7. d4 Sxc6 8. Sbd2 Sd7 9. He2 Gf6 1/2-1/2",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 16,
+"cls": "san"
+},
+{
+"s": 17,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 22,
+"cls": "move_number"
+},
+{
+"s": 23,
+"e": 27,
+"cls": "san"
+},
+{
+"s": 28,
+"e": 31,
+"cls": "san"
+},
+{
+"s": 32,
+"e": 34,
+"cls": "move_number"
+},
+{
+"s": 35,
+"e": 38,
+"cls": "san"
+},
+{
+"s": 39,
+"e": 41,
+"cls": "san"
+},
+{
+"s": 42,
+"e": 44,
+"cls": "move_number"
+},
+{
+"s": 45,
+"e": 48,
+"cls": "san"
+},
+{
+"s": 49,
+"e": 52,
+"cls": "san"
+},
+{
+"s": 53,
+"e": 55,
+"cls": "move_number"
+},
+{
+"s": 56,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 63,
+"cls": "san"
+},
+{
+"s": 64,
+"e": 66,
+"cls": "move_number"
+},
+{
+"s": 67,
+"e": 69,
+"cls": "san"
+},
+{
+"s": 70,
+"e": 74,
+"cls": "san"
+},
+{
+"s": 75,
+"e": 77,
+"cls": "move_number"
+},
+{
+"s": 78,
+"e": 82,
+"cls": "san"
+},
+{
+"s": 83,
+"e": 86,
+"cls": "san"
+},
+{
+"s": 87,
+"e": 89,
+"cls": "move_number"
+},
+{
+"s": 90,
+"e": 93,
+"cls": "san"
+},
+{
+"s": 94,
+"e": 97,
+"cls": "san"
+},
+{
+"s": 98,
+"e": 105,
+"cls": "result"
+}
+]
+}
+}
+},
+{
+"id": "toy:3",
+"plies": [
+{
+"ply": 1,
+"color": "w",
+"piece": "P",
+"pid": "wP-d2",
+"from": "d2",
+"to": "d4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "d4",
+"uci": "d2d4",
+"long": "d2-d4",
+"span": [
+119,
+121
+],
+"text": "d4"
+},
+{
+"ply": 2,
+"color": "b",
+"piece": "N",
+"pid": "bN-g8",
+"from": "g8",
+"to": "f6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Nf6",
+"uci": "g8f6",
+"long": "Ng8-f6",
+"span": [
+122,
+125
+],
+"text": "Nf6"
+},
+{
+"ply": 3,
+"color": "w",
+"piece": "N",
+"pid": "wN-b1",
+"from": "b1",
+"to": "c3",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Nc3",
+"uci": "b1c3",
+"long": "Nb1-c3",
+"span": [
+129,
+132
+],
+"text": "Nc3"
+},
+{
+"ply": 4,
+"color": "b",
+"piece": "P",
+"pid": "bP-d7",
+"from": "d7",
+"to": "d5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "d5",
+"uci": "d7d5",
+"long": "d7-d5",
+"span": [
+133,
+135
+],
+"text": "d5"
+},
+{
+"ply": 5,
+"color": "w",
+"piece": "B",
+"pid": "wB-c1",
+"from": "c1",
+"to": "f4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Bf4",
+"uci": "c1f4",
+"long": "Bc1-f4",
+"span": [
+139,
+142
+],
+"text": "Bf4"
+},
+{
+"ply": 6,
+"color": "b",
+"piece": "P",
+"pid": "bP-e7",
+"from": "e7",
+"to": "e6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "e6",
+"uci": "e7e6",
+"long": "e7-e6",
+"span": [
+143,
+145
+],
+"text": "e6"
+},
+{
+"ply": 7,
+"color": "w",
+"piece": "Q",
+"pid": "wQ-d1",
+"from": "d1",
+"to": "d2",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Qd2",
+"uci": "d1d2",
+"long": "Qd1-d2",
+"span": [
+149,
+152
+],
+"text": "Qd2"
+},
+{
+"ply": 8,
+"color": "b",
+"piece": "B",
+"pid": "bB-f8",
+"from": "f8",
+"to": "e7",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Be7",
+"uci": "f8e7",
+"long": "Bf8-e7",
+"span": [
+153,
+156
+],
+"text": "Be7"
+},
+{
+"ply": 9,
+"color": "w",
+"piece": "K",
+"pid": "wK-e1",
+"from": "e1",
+"to": "c1",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": "Q",
+"rook_pid": "wR-a1",
+"rook_to": "d1",
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "O-O-O",
+"uci": "e1c1",
+"long": "O-O-O",
+"span": [
+160,
+165
+],
+"text": "O-O-O"
+},
+{
+"ply": 10,
+"color": "b",
+"piece": "K",
+"pid": "bK-e8",
+"from": "e8",
+"to": "g8",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": "K",
+"rook_pid": "bR-h8",
+"rook_to": "f8",
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "O-O",
+"uci": "e8g8",
+"long": "O-O",
+"span": [
+166,
+169
+],
+"text": "O-O"
+},
+{
+"ply": 11,
+"color": "w",
+"piece": "P",
+"pid": "wP-e2",
+"from": "e2",
+"to": "e3",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "e3",
+"uci": "e2e3",
+"long": "e2-e3",
+"span": [
+173,
+175
+],
+"text": "e3"
+},
+{
+"ply": 12,
+"color": "b",
+"piece": "P",
+"pid": "bP-c7",
+"from": "c7",
+"to": "c5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "c5",
+"uci": "c7c5",
+"long": "c7-c5",
+"span": [
+176,
+178
+],
+"text": "c5"
+},
+{
+"ply": 13,
+"color": "w",
+"piece": "N",
+"pid": "wN-g1",
+"from": "g1",
+"to": "f3",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Nf3",
+"uci": "g1f3",
+"long": "Ng1-f3",
+"span": [
+182,
+185
+],
+"text": "Nf3"
+},
+{
+"ply": 14,
+"color": "b",
+"piece": "N",
+"pid": "bN-b8",
+"from": "b8",
+"to": "c6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Nc6",
+"uci": "b8c6",
+"long": "Nb8-c6",
+"span": [
+186,
+189
+],
+"text": "Nc6"
+},
+{
+"ply": 15,
+"color": "w",
+"piece": "K",
+"pid": "wK-e1",
+"from": "c1",
+"to": "b1",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Kb1",
+"uci": "c1b1",
+"long": "Kc1-b1",
+"span": [
+193,
+196
+],
+"text": "Kb1"
+},
+{
+"ply": 16,
+"color": "b",
+"piece": "P",
+"pid": "bP-b7",
+"from": "b7",
+"to": "b5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "b5",
+"uci": "b7b5",
+"long": "b7-b5",
+"span": [
+197,
+199
+],
+"text": "b5"
+},
+{
+"ply": 17,
+"color": "w",
+"piece": "P",
+"pid": "wP-d2",
+"from": "d4",
+"to": "c5",
+"capture": true,
+"captured_pid": "bP-c7",
+"captured_type": "P",
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "dxc5",
+"uci": "d4c5",
+"long": "d4xc5",
+"span": [
+203,
+207
+],
+"text": "dxc5"
+},
+{
+"ply": 18,
+"color": "b",
+"piece": "B",
+"pid": "bB-f8",
+"from": "e7",
+"to": "c5",
+"capture": true,
+"captured_pid": "wP-d2",
+"captured_type": "P",
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Bxc5",
+"uci": "e7c5",
+"long": "Be7xc5",
+"span": [
+208,
+212
+],
+"text": "Bxc5"
+}
+],
+"final_placement": "r1bq1rk1/p4ppp/2n1pn2/1pbp4/5B2/2N1PN2/PPPQ1PPP/1K1R1B1R",
+"reps": {
+"en": {
+"text": "1. d4 Nf6 2. Nc3 d5 3. Bf4 e6 4. Qd2 Be7 5. O-O-O O-O 6. e3 c5 7. Nf3 Nc6 8. Kb1 b5 9. dxc5 Bxc5 0-1",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 9,
+"cls": "san"
+},
+{
+"s": 10,
+"e": 12,
+"cls": "move_number"
+},
+{
+"s": 13,
+"e": 16,
+"cls": "san"
+},
+{
+"s": 17,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 22,
+"cls": "move_number"
+},
+{
+"s": 23,
+"e": 26,
+"cls": "san"
+},
+{
+"s": 27,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 32,
+"cls": "move_number"
+},
+{
+"s": 33,
+"e": 36,
+"cls": "san"
+},
+{
+"s": 37,
+"e": 40,
+"cls": "san"
+},
+{
+"s": 41,
+"e": 43,
+"cls": "move_number"
+},
+{
+"s": 44,
+"e": 49,
+"cls": "san"
+},
+{
+"s": 50,
+"e": 53,
+"cls": "san"
+},
+{
+"s": 54,
+"e": 56,
+"cls": "move_number"
+},
+{
+"s": 57,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 62,
+"cls": "san"
+},
+{
+"s": 63,
+"e": 65,
+"cls": "move_number"
+},
+{
+"s": 66,
+"e": 69,
+"cls": "san"
+},
+{
+"s": 70,
+"e": 73,
+"cls": "san"
+},
+{
+"s": 74,
+"e": 76,
+"cls": "move_number"
+},
+{
+"s": 77,
+"e": 80,
+"cls": "san"
+},
+{
+"s": 81,
+"e": 83,
+"cls": "san"
+},
+{
+"s": 84,
+"e": 86,
+"cls": "move_number"
+},
+{
+"s": 87,
+"e": 91,
+"cls": "san"
+},
+{
+"s": 92,
+"e": 96,
+"cls": "san"
+},
+{
+"s": 97,
+"e": 100,
+"cls": "result"
+}
+]
+},
+"uci": {
+"text": "d2d4 g8f6 b1c3 d7d5 c1f4 e7e6 d1d2 f8e7 e1c1 e8g8 e2e3 c7c5 g1f3 b8c6 c1b1 b7b5 d4c5 e7c5 0-1",
+"spans": [
+{
+"s": 0,
+"e": 4,
+"cls": "san"
+},
+{
+"s": 5,
+"e": 9,
+"cls": "san"
+},
+{
+"s": 10,
+"e": 14,
+"cls": "san"
+},
+{
+"s": 15,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 24,
+"cls": "san"
+},
+{
+"s": 25,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 34,
+"cls": "san"
+},
+{
+"s": 35,
+"e": 39,
+"cls": "san"
+},
+{
+"s": 40,
+"e": 44,
+"cls": "san"
+},
+{
+"s": 45,
+"e": 49,
+"cls": "san"
+},
+{
+"s": 50,
+"e": 54,
+"cls": "san"
+},
+{
+"s": 55,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 64,
+"cls": "san"
+},
+{
+"s": 65,
+"e": 69,
+"cls": "san"
+},
+{
+"s": 70,
+"e": 74,
+"cls": "san"
+},
+{
+"s": 75,
+"e": 79,
+"cls": "san"
+},
+{
+"s": 80,
+"e": 84,
+"cls": "san"
+},
+{
+"s": 85,
+"e": 89,
+"cls": "san"
+},
+{
+"s": 90,
+"e": 93,
+"cls": "result"
+}
+]
+},
+"long": {
+"text": "1. d2-d4 Ng8-f6 2. Nb1-c3 d7-d5 3. Bc1-f4 e7-e6 4. Qd1-d2 Bf8-e7 5. O-O-O O-O 6. e2-e3 c7-c5 7. Ng1-f3 Nb8-c6 8. Kc1-b1 b7-b5 9. d4xc5 Be7xc5 0-1",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 15,
+"cls": "san"
+},
+{
+"s": 16,
+"e": 18,
+"cls": "move_number"
+},
+{
+"s": 19,
+"e": 25,
+"cls": "san"
+},
+{
+"s": 26,
+"e": 31,
+"cls": "san"
+},
+{
+"s": 32,
+"e": 34,
+"cls": "move_number"
+},
+{
+"s": 35,
+"e": 41,
+"cls": "san"
+},
+{
+"s": 42,
+"e": 47,
+"cls": "san"
+},
+{
+"s": 48,
+"e": 50,
+"cls": "move_number"
+},
+{
+"s": 51,
+"e": 57,
+"cls": "san"
+},
+{
+"s": 58,
+"e": 64,
+"cls": "san"
+},
+{
+"s": 65,
+"e": 67,
+"cls": "move_number"
+},
+{
+"s": 68,
+"e": 73,
+"cls": "san"
+},
+{
+"s": 74,
+"e": 77,
+"cls": "san"
+},
+{
+"s": 78,
+"e": 80,
+"cls": "move_number"
+},
+{
+"s": 81,
+"e": 86,
+"cls": "san"
+},
+{
+"s": 87,
+"e": 92,
+"cls": "san"
+},
+{
+"s": 93,
+"e": 95,
+"cls": "move_number"
+},
+{
+"s": 96,
+"e": 102,
+"cls": "san"
+},
+{
+"s": 103,
+"e": 109,
+"cls": "san"
+},
+{
+"s": 110,
+"e": 112,
+"cls": "move_number"
+},
+{
+"s": 113,
+"e": 119,
+"cls": "san"
+},
+{
+"s": 120,
+"e": 125,
+"cls": "san"
+},
+{
+"s": 126,
+"e": 128,
+"cls": "move_number"
+},
+{
+"s": 129,
+"e": 134,
+"cls": "san"
+},
+{
+"s": 135,
+"e": 141,
+"cls": "san"
+},
+{
+"s": 142,
+"e": 145,
+"cls": "result"
+}
+]
+},
+"fan": {
+"text": "1. d4 ♞f6 2. ♘c3 d5 3. ♗f4 e6 4. ♕d2 ♝e7 5. O-O-O O-O 6. e3 c5 7. ♘f3 ♞c6 8. ♔b1 b5 9. dxc5 ♝xc5 0-1",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 9,
+"cls": "san"
+},
+{
+"s": 10,
+"e": 12,
+"cls": "move_number"
+},
+{
+"s": 13,
+"e": 16,
+"cls": "san"
+},
+{
+"s": 17,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 22,
+"cls": "move_number"
+},
+{
+"s": 23,
+"e": 26,
+"cls": "san"
+},
+{
+"s": 27,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 32,
+"cls": "move_number"
+},
+{
+"s": 33,
+"e": 36,
+"cls": "san"
+},
+{
+"s": 37,
+"e": 40,
+"cls": "san"
+},
+{
+"s": 41,
+"e": 43,
+"cls": "move_number"
+},
+{
+"s": 44,
+"e": 49,
+"cls": "san"
+},
+{
+"s": 50,
+"e": 53,
+"cls": "san"
+},
+{
+"s": 54,
+"e": 56,
+"cls": "move_number"
+},
+{
+"s": 57,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 62,
+"cls": "san"
+},
+{
+"s": 63,
+"e": 65,
+"cls": "move_number"
+},
+{
+"s": 66,
+"e": 69,
+"cls": "san"
+},
+{
+"s": 70,
+"e": 73,
+"cls": "san"
+},
+{
+"s": 74,
+"e": 76,
+"cls": "move_number"
+},
+{
+"s": 77,
+"e": 80,
+"cls": "san"
+},
+{
+"s": 81,
+"e": 83,
+"cls": "san"
+},
+{
+"s": 84,
+"e": 86,
+"cls": "move_number"
+},
+{
+"s": 87,
+"e": 91,
+"cls": "san"
+},
+{
+"s": 92,
+"e": 96,
+"cls": "san"
+},
+{
+"s": 97,
+"e": 100,
+"cls": "result"
+}
+]
+},
+"tight": {
+"text": "1.d4 Nf6 2.Nc3 d5 3.Bf4 e6 4.Qd2 Be7 5.O-O-O O-O 6.e3 c5 7.Nf3 Nc6 8.Kb1 b5 9.dxc5 Bxc5 0-1",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 2,
+"e": 4,
+"cls": "san"
+},
+{
+"s": 5,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 11,
+"e": 14,
+"cls": "san"
+},
+{
+"s": 15,
+"e": 17,
+"cls": "san"
+},
+{
+"s": 18,
+"e": 20,
+"cls": "move_number"
+},
+{
+"s": 20,
+"e": 23,
+"cls": "san"
+},
+{
+"s": 24,
+"e": 26,
+"cls": "san"
+},
+{
+"s": 27,
+"e": 29,
+"cls": "move_number"
+},
+{
+"s": 29,
+"e": 32,
+"cls": "san"
+},
+{
+"s": 33,
+"e": 36,
+"cls": "san"
+},
+{
+"s": 37,
+"e": 39,
+"cls": "move_number"
+},
+{
+"s": 39,
+"e": 44,
+"cls": "san"
+},
+{
+"s": 45,
+"e": 48,
+"cls": "san"
+},
+{
+"s": 49,
+"e": 51,
+"cls": "move_number"
+},
+{
+"s": 51,
+"e": 53,
+"cls": "san"
+},
+{
+"s": 54,
+"e": 56,
+"cls": "san"
+},
+{
+"s": 57,
+"e": 59,
+"cls": "move_number"
+},
+{
+"s": 59,
+"e": 62,
+"cls": "san"
+},
+{
+"s": 63,
+"e": 66,
+"cls": "san"
+},
+{
+"s": 67,
+"e": 69,
+"cls": "move_number"
+},
+{
+"s": 69,
+"e": 72,
+"cls": "san"
+},
+{
+"s": 73,
+"e": 75,
+"cls": "san"
+},
+{
+"s": 76,
+"e": 78,
+"cls": "move_number"
+},
+{
+"s": 78,
+"e": 82,
+"cls": "san"
+},
+{
+"s": 83,
+"e": 87,
+"cls": "san"
+},
+{
+"s": 88,
+"e": 91,
+"cls": "result"
+}
+]
+},
+"de": {
+"text": "1. d4 Sf6 2. Sc3 d5 3. Lf4 e6 4. Dd2 Le7 5. O-O-O O-O 6. e3 c5 7. Sf3 Sc6 8. Kb1 b5 9. dxc5 Lxc5 0-1",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 9,
+"cls": "san"
+},
+{
+"s": 10,
+"e": 12,
+"cls": "move_number"
+},
+{
+"s": 13,
+"e": 16,
+"cls": "san"
+},
+{
+"s": 17,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 22,
+"cls": "move_number"
+},
+{
+"s": 23,
+"e": 26,
+"cls": "san"
+},
+{
+"s": 27,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 32,
+"cls": "move_number"
+},
+{
+"s": 33,
+"e": 36,
+"cls": "san"
+},
+{
+"s": 37,
+"e": 40,
+"cls": "san"
+},
+{
+"s": 41,
+"e": 43,
+"cls": "move_number"
+},
+{
+"s": 44,
+"e": 49,
+"cls": "san"
+},
+{
+"s": 50,
+"e": 53,
+"cls": "san"
+},
+{
+"s": 54,
+"e": 56,
+"cls": "move_number"
+},
+{
+"s": 57,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 62,
+"cls": "san"
+},
+{
+"s": 63,
+"e": 65,
+"cls": "move_number"
+},
+{
+"s": 66,
+"e": 69,
+"cls": "san"
+},
+{
+"s": 70,
+"e": 73,
+"cls": "san"
+},
+{
+"s": 74,
+"e": 76,
+"cls": "move_number"
+},
+{
+"s": 77,
+"e": 80,
+"cls": "san"
+},
+{
+"s": 81,
+"e": 83,
+"cls": "san"
+},
+{
+"s": 84,
+"e": 86,
+"cls": "move_number"
+},
+{
+"s": 87,
+"e": 91,
+"cls": "san"
+},
+{
+"s": 92,
+"e": 96,
+"cls": "san"
+},
+{
+"s": 97,
+"e": 100,
+"cls": "result"
+}
+]
+},
+"fr": {
+"text": "1. d4 Cf6 2. Cc3 d5 3. Ff4 e6 4. Dd2 Fe7 5. O-O-O O-O 6. e3 c5 7. Cf3 Cc6 8. Rb1 b5 9. dxc5 Fxc5 0-1",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 9,
+"cls": "san"
+},
+{
+"s": 10,
+"e": 12,
+"cls": "move_number"
+},
+{
+"s": 13,
+"e": 16,
+"cls": "san"
+},
+{
+"s": 17,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 22,
+"cls": "move_number"
+},
+{
+"s": 23,
+"e": 26,
+"cls": "san"
+},
+{
+"s": 27,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 32,
+"cls": "move_number"
+},
+{
+"s": 33,
+"e": 36,
+"cls": "san"
+},
+{
+"s": 37,
+"e": 40,
+"cls": "san"
+},
+{
+"s": 41,
+"e": 43,
+"cls": "move_number"
+},
+{
+"s": 44,
+"e": 49,
+"cls": "san"
+},
+{
+"s": 50,
+"e": 53,
+"cls": "san"
+},
+{
+"s": 54,
+"e": 56,
+"cls": "move_number"
+},
+{
+"s": 57,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 62,
+"cls": "san"
+},
+{
+"s": 63,
+"e": 65,
+"cls": "move_number"
+},
+{
+"s": 66,
+"e": 69,
+"cls": "san"
+},
+{
+"s": 70,
+"e": 73,
+"cls": "san"
+},
+{
+"s": 74,
+"e": 76,
+"cls": "move_number"
+},
+{
+"s": 77,
+"e": 80,
+"cls": "san"
+},
+{
+"s": 81,
+"e": 83,
+"cls": "san"
+},
+{
+"s": 84,
+"e": 86,
+"cls": "move_number"
+},
+{
+"s": 87,
+"e": 91,
+"cls": "san"
+},
+{
+"s": 92,
+"e": 96,
+"cls": "san"
+},
+{
+"s": 97,
+"e": 100,
+"cls": "result"
+}
+]
+},
+"es": {
+"text": "1. d4 Cf6 2. Cc3 d5 3. Af4 e6 4. Dd2 Ae7 5. O-O-O O-O 6. e3 c5 7. Cf3 Cc6 8. Rb1 b5 9. dxc5 Axc5 0-1",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 9,
+"cls": "san"
+},
+{
+"s": 10,
+"e": 12,
+"cls": "move_number"
+},
+{
+"s": 13,
+"e": 16,
+"cls": "san"
+},
+{
+"s": 17,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 22,
+"cls": "move_number"
+},
+{
+"s": 23,
+"e": 26,
+"cls": "san"
+},
+{
+"s": 27,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 32,
+"cls": "move_number"
+},
+{
+"s": 33,
+"e": 36,
+"cls": "san"
+},
+{
+"s": 37,
+"e": 40,
+"cls": "san"
+},
+{
+"s": 41,
+"e": 43,
+"cls": "move_number"
+},
+{
+"s": 44,
+"e": 49,
+"cls": "san"
+},
+{
+"s": 50,
+"e": 53,
+"cls": "san"
+},
+{
+"s": 54,
+"e": 56,
+"cls": "move_number"
+},
+{
+"s": 57,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 62,
+"cls": "san"
+},
+{
+"s": 63,
+"e": 65,
+"cls": "move_number"
+},
+{
+"s": 66,
+"e": 69,
+"cls": "san"
+},
+{
+"s": 70,
+"e": 73,
+"cls": "san"
+},
+{
+"s": 74,
+"e": 76,
+"cls": "move_number"
+},
+{
+"s": 77,
+"e": 80,
+"cls": "san"
+},
+{
+"s": 81,
+"e": 83,
+"cls": "san"
+},
+{
+"s": 84,
+"e": 86,
+"cls": "move_number"
+},
+{
+"s": 87,
+"e": 91,
+"cls": "san"
+},
+{
+"s": 92,
+"e": 96,
+"cls": "san"
+},
+{
+"s": 97,
+"e": 100,
+"cls": "result"
+}
+]
+},
+"hu": {
+"text": "1. d4 Hf6 2. Hc3 d5 3. Ff4 e6 4. Vd2 Fe7 5. O-O-O O-O 6. e3 c5 7. Hf3 Hc6 8. Kb1 b5 9. dxc5 Fxc5 0-1",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 9,
+"cls": "san"
+},
+{
+"s": 10,
+"e": 12,
+"cls": "move_number"
+},
+{
+"s": 13,
+"e": 16,
+"cls": "san"
+},
+{
+"s": 17,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 22,
+"cls": "move_number"
+},
+{
+"s": 23,
+"e": 26,
+"cls": "san"
+},
+{
+"s": 27,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 32,
+"cls": "move_number"
+},
+{
+"s": 33,
+"e": 36,
+"cls": "san"
+},
+{
+"s": 37,
+"e": 40,
+"cls": "san"
+},
+{
+"s": 41,
+"e": 43,
+"cls": "move_number"
+},
+{
+"s": 44,
+"e": 49,
+"cls": "san"
+},
+{
+"s": 50,
+"e": 53,
+"cls": "san"
+},
+{
+"s": 54,
+"e": 56,
+"cls": "move_number"
+},
+{
+"s": 57,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 62,
+"cls": "san"
+},
+{
+"s": 63,
+"e": 65,
+"cls": "move_number"
+},
+{
+"s": 66,
+"e": 69,
+"cls": "san"
+},
+{
+"s": 70,
+"e": 73,
+"cls": "san"
+},
+{
+"s": 74,
+"e": 76,
+"cls": "move_number"
+},
+{
+"s": 77,
+"e": 80,
+"cls": "san"
+},
+{
+"s": 81,
+"e": 83,
+"cls": "san"
+},
+{
+"s": 84,
+"e": 86,
+"cls": "move_number"
+},
+{
+"s": 87,
+"e": 91,
+"cls": "san"
+},
+{
+"s": 92,
+"e": 96,
+"cls": "san"
+},
+{
+"s": 97,
+"e": 100,
+"cls": "result"
+}
+]
+},
+"pl": {
+"text": "1. d4 Sf6 2. Sc3 d5 3. Gf4 e6 4. Hd2 Ge7 5. O-O-O O-O 6. e3 c5 7. Sf3 Sc6 8. Kb1 b5 9. dxc5 Gxc5 0-1",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 9,
+"cls": "san"
+},
+{
+"s": 10,
+"e": 12,
+"cls": "move_number"
+},
+{
+"s": 13,
+"e": 16,
+"cls": "san"
+},
+{
+"s": 17,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 22,
+"cls": "move_number"
+},
+{
+"s": 23,
+"e": 26,
+"cls": "san"
+},
+{
+"s": 27,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 32,
+"cls": "move_number"
+},
+{
+"s": 33,
+"e": 36,
+"cls": "san"
+},
+{
+"s": 37,
+"e": 40,
+"cls": "san"
+},
+{
+"s": 41,
+"e": 43,
+"cls": "move_number"
+},
+{
+"s": 44,
+"e": 49,
+"cls": "san"
+},
+{
+"s": 50,
+"e": 53,
+"cls": "san"
+},
+{
+"s": 54,
+"e": 56,
+"cls": "move_number"
+},
+{
+"s": 57,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 62,
+"cls": "san"
+},
+{
+"s": 63,
+"e": 65,
+"cls": "move_number"
+},
+{
+"s": 66,
+"e": 69,
+"cls": "san"
+},
+{
+"s": 70,
+"e": 73,
+"cls": "san"
+},
+{
+"s": 74,
+"e": 76,
+"cls": "move_number"
+},
+{
+"s": 77,
+"e": 80,
+"cls": "san"
+},
+{
+"s": 81,
+"e": 83,
+"cls": "san"
+},
+{
+"s": 84,
+"e": 86,
+"cls": "move_number"
+},
+{
+"s": 87,
+"e": 91,
+"cls": "san"
+},
+{
+"s": 92,
+"e": 96,
+"cls": "san"
+},
+{
+"s": 97,
+"e": 100,
+"cls": "result"
+}
+]
+}
+}
+},
+{
+"id": "toy:4",
+"plies": [
+{
+"ply": 1,
+"color": "w",
+"piece": "P",
+"pid": "wP-a2",
+"from": "a2",
+"to": "a4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "a4",
+"uci": "a2a4",
+"long": "a2-a4",
+"span": [
+124,
+126
+],
+"text": "a4"
+},
+{
+"ply": 2,
+"color": "b",
+"piece": "P",
+"pid": "bP-b7",
+"from": "b7",
+"to": "b5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "b5",
+"uci": "b7b5",
+"long": "b7-b5",
+"span": [
+127,
+129
+],
+"text": "b5"
+},
+{
+"ply": 3,
+"color": "w",
+"piece": "P",
+"pid": "wP-a2",
+"from": "a4",
+"to": "b5",
+"capture": true,
+"captured_pid": "bP-b7",
+"captured_type": "P",
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "axb5",
+"uci": "a4b5",
+"long": "a4xb5",
+"span": [
+133,
+137
+],
+"text": "axb5"
+},
+{
+"ply": 4,
+"color": "b",
+"piece": "P",
+"pid": "bP-a7",
+"from": "a7",
+"to": "a6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "a6",
+"uci": "a7a6",
+"long": "a7-a6",
+"span": [
+138,
+140
+],
+"text": "a6"
+},
+{
+"ply": 5,
+"color": "w",
+"piece": "P",
+"pid": "wP-a2",
+"from": "b5",
+"to": "a6",
+"capture": true,
+"captured_pid": "bP-a7",
+"captured_type": "P",
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "bxa6",
+"uci": "b5a6",
+"long": "b5xa6",
+"span": [
+144,
+148
+],
+"text": "bxa6"
+},
+{
+"ply": 6,
+"color": "b",
+"piece": "B",
+"pid": "bB-c8",
+"from": "c8",
+"to": "b7",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Bb7",
+"uci": "c8b7",
+"long": "Bc8-b7",
+"span": [
+149,
+152
+],
+"text": "Bb7"
+},
+{
+"ply": 7,
+"color": "w",
+"piece": "P",
+"pid": "wP-a2",
+"from": "a6",
+"to": "a7",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "a7",
+"uci": "a6a7",
+"long": "a6-a7",
+"span": [
+156,
+158
+],
+"text": "a7"
+},
+{
+"ply": 8,
+"color": "b",
+"piece": "N",
+"pid": "bN-g8",
+"from": "g8",
+"to": "f6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Nf6",
+"uci": "g8f6",
+"long": "Ng8-f6",
+"span": [
+159,
+162
+],
+"text": "Nf6"
+},
+{
+"ply": 9,
+"color": "w",
+"piece": "P",
+"pid": "wP-a2",
+"from": "a7",
+"to": "b8",
+"capture": true,
+"captured_pid": "bN-b8",
+"captured_type": "N",
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": "Q",
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "axb8=Q",
+"uci": "a7b8q",
+"long": "a7xb8=Q",
+"span": [
+166,
+172
+],
+"text": "axb8=Q"
+},
+{
+"ply": 10,
+"color": "b",
+"piece": "R",
+"pid": "bR-a8",
+"from": "a8",
+"to": "b8",
+"capture": true,
+"captured_pid": "wP-a2",
+"captured_type": "Q",
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Rxb8",
+"uci": "a8b8",
+"long": "Ra8xb8",
+"span": [
+173,
+177
+],
+"text": "Rxb8"
+},
+{
+"ply": 11,
+"color": "w",
+"piece": "P",
+"pid": "wP-h2",
+"from": "h2",
+"to": "h4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "h4",
+"uci": "h2h4",
+"long": "h2-h4",
+"span": [
+181,
+183
+],
+"text": "h4"
+},
+{
+"ply": 12,
+"color": "b",
+"piece": "P",
+"pid": "bP-h7",
+"from": "h7",
+"to": "h5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "h5",
+"uci": "h7h5",
+"long": "h7-h5",
+"span": [
+184,
+186
+],
+"text": "h5"
+},
+{
+"ply": 13,
+"color": "w",
+"piece": "P",
+"pid": "wP-g2",
+"from": "g2",
+"to": "g4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "g4",
+"uci": "g2g4",
+"long": "g2-g4",
+"span": [
+190,
+192
+],
+"text": "g4"
+},
+{
+"ply": 14,
+"color": "b",
+"piece": "P",
+"pid": "bP-h7",
+"from": "h5",
+"to": "g4",
+"capture": true,
+"captured_pid": "wP-g2",
+"captured_type": "P",
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "hxg4",
+"uci": "h5g4",
+"long": "h5xg4",
+"span": [
+193,
+197
+],
+"text": "hxg4"
+}
+],
+"final_placement": "1r1qkb1r/1bppppp1/5n2/8/6pP/8/1PPPPP2/RNBQKBNR",
+"reps": {
+"en": {
+"text": "1. a4 b5 2. axb5 a6 3. bxa6 Bb7 4. a7 Nf6 5. axb8=Q Rxb8 6. h4 h5 7. g4 hxg4 *",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 16,
+"cls": "san"
+},
+{
+"s": 17,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 22,
+"cls": "move_number"
+},
+{
+"s": 23,
+"e": 27,
+"cls": "san"
+},
+{
+"s": 28,
+"e": 31,
+"cls": "san"
+},
+{
+"s": 32,
+"e": 34,
+"cls": "move_number"
+},
+{
+"s": 35,
+"e": 37,
+"cls": "san"
+},
+{
+"s": 38,
+"e": 41,
+"cls": "san"
+},
+{
+"s": 42,
+"e": 44,
+"cls": "move_number"
+},
+{
+"s": 45,
+"e": 51,
+"cls": "san"
+},
+{
+"s": 52,
+"e": 56,
+"cls": "san"
+},
+{
+"s": 57,
+"e": 59,
+"cls": "move_number"
+},
+{
+"s": 60,
+"e": 62,
+"cls": "san"
+},
+{
+"s": 63,
+"e": 65,
+"cls": "san"
+},
+{
+"s": 66,
+"e": 68,
+"cls": "move_number"
+},
+{
+"s": 69,
+"e": 71,
+"cls": "san"
+},
+{
+"s": 72,
+"e": 76,
+"cls": "san"
+},
+{
+"s": 77,
+"e": 78,
+"cls": "result"
+}
+]
+},
+"uci": {
+"text": "a2a4 b7b5 a4b5 a7a6 b5a6 c8b7 a6a7 g8f6 a7b8q a8b8 h2h4 h7h5 g2g4 h5g4 *",
+"spans": [
+{
+"s": 0,
+"e": 4,
+"cls": "san"
+},
+{
+"s": 5,
+"e": 9,
+"cls": "san"
+},
+{
+"s": 10,
+"e": 14,
+"cls": "san"
+},
+{
+"s": 15,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 24,
+"cls": "san"
+},
+{
+"s": 25,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 34,
+"cls": "san"
+},
+{
+"s": 35,
+"e": 39,
+"cls": "san"
+},
+{
+"s": 40,
+"e": 45,
+"cls": "san"
+},
+{
+"s": 46,
+"e": 50,
+"cls": "san"
+},
+{
+"s": 51,
+"e": 55,
+"cls": "san"
+},
+{
+"s": 56,
+"e": 60,
+"cls": "san"
+},
+{
+"s": 61,
+"e": 65,
+"cls": "san"
+},
+{
+"s": 66,
+"e": 70,
+"cls": "san"
+},
+{
+"s": 71,
+"e": 72,
+"cls": "result"
+}
+]
+},
+"long": {
+"text": "1. a2-a4 b7-b5 2. a4xb5 a7-a6 3. b5xa6 Bc8-b7 4. a6-a7 Ng8-f6 5. a7xb8=Q Ra8xb8 6. h2-h4 h7-h5 7. g2-g4 h5xg4 *",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 14,
+"cls": "san"
+},
+{
+"s": 15,
+"e": 17,
+"cls": "move_number"
+},
+{
+"s": 18,
+"e": 23,
+"cls": "san"
+},
+{
+"s": 24,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 32,
+"cls": "move_number"
+},
+{
+"s": 33,
+"e": 38,
+"cls": "san"
+},
+{
+"s": 39,
+"e": 45,
+"cls": "san"
+},
+{
+"s": 46,
+"e": 48,
+"cls": "move_number"
+},
+{
+"s": 49,
+"e": 54,
+"cls": "san"
+},
+{
+"s": 55,
+"e": 61,
+"cls": "san"
+},
+{
+"s": 62,
+"e": 64,
+"cls": "move_number"
+},
+{
+"s": 65,
+"e": 72,
+"cls": "san"
+},
+{
+"s": 73,
+"e": 79,
+"cls": "san"
+},
+{
+"s": 80,
+"e": 82,
+"cls": "move_number"
+},
+{
+"s": 83,
+"e": 88,
+"cls": "san"
+},
+{
+"s": 89,
+"e": 94,
+"cls": "san"
+},
+{
+"s": 95,
+"e": 97,
+"cls": "move_number"
+},
+{
+"s": 98,
+"e": 103,
+"cls": "san"
+},
+{
+"s": 104,
+"e": 109,
+"cls": "san"
+},
+{
+"s": 110,
+"e": 111,
+"cls": "result"
+}
+]
+},
+"fan": {
+"text": "1. a4 b5 2. axb5 a6 3. bxa6 ♝b7 4. a7 ♞f6 5. axb8=♕ ♜xb8 6. h4 h5 7. g4 hxg4 *",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 16,
+"cls": "san"
+},
+{
+"s": 17,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 22,
+"cls": "move_number"
+},
+{
+"s": 23,
+"e": 27,
+"cls": "san"
+},
+{
+"s": 28,
+"e": 31,
+"cls": "san"
+},
+{
+"s": 32,
+"e": 34,
+"cls": "move_number"
+},
+{
+"s": 35,
+"e": 37,
+"cls": "san"
+},
+{
+"s": 38,
+"e": 41,
+"cls": "san"
+},
+{
+"s": 42,
+"e": 44,
+"cls": "move_number"
+},
+{
+"s": 45,
+"e": 51,
+"cls": "san"
+},
+{
+"s": 52,
+"e": 56,
+"cls": "san"
+},
+{
+"s": 57,
+"e": 59,
+"cls": "move_number"
+},
+{
+"s": 60,
+"e": 62,
+"cls": "san"
+},
+{
+"s": 63,
+"e": 65,
+"cls": "san"
+},
+{
+"s": 66,
+"e": 68,
+"cls": "move_number"
+},
+{
+"s": 69,
+"e": 71,
+"cls": "san"
+},
+{
+"s": 72,
+"e": 76,
+"cls": "san"
+},
+{
+"s": 77,
+"e": 78,
+"cls": "result"
+}
+]
+},
+"tight": {
+"text": "1.a4 b5 2.axb5 a6 3.bxa6 Bb7 4.a7 Nf6 5.axb8=Q Rxb8 6.h4 h5 7.g4 hxg4 *",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 2,
+"e": 4,
+"cls": "san"
+},
+{
+"s": 5,
+"e": 7,
+"cls": "san"
+},
+{
+"s": 8,
+"e": 10,
+"cls": "move_number"
+},
+{
+"s": 10,
+"e": 14,
+"cls": "san"
+},
+{
+"s": 15,
+"e": 17,
+"cls": "san"
+},
+{
+"s": 18,
+"e": 20,
+"cls": "move_number"
+},
+{
+"s": 20,
+"e": 24,
+"cls": "san"
+},
+{
+"s": 25,
+"e": 28,
+"cls": "san"
+},
+{
+"s": 29,
+"e": 31,
+"cls": "move_number"
+},
+{
+"s": 31,
+"e": 33,
+"cls": "san"
+},
+{
+"s": 34,
+"e": 37,
+"cls": "san"
+},
+{
+"s": 38,
+"e": 40,
+"cls": "move_number"
+},
+{
+"s": 40,
+"e": 46,
+"cls": "san"
+},
+{
+"s": 47,
+"e": 51,
+"cls": "san"
+},
+{
+"s": 52,
+"e": 54,
+"cls": "move_number"
+},
+{
+"s": 54,
+"e": 56,
+"cls": "san"
+},
+{
+"s": 57,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 62,
+"cls": "move_number"
+},
+{
+"s": 62,
+"e": 64,
+"cls": "san"
+},
+{
+"s": 65,
+"e": 69,
+"cls": "san"
+},
+{
+"s": 70,
+"e": 71,
+"cls": "result"
+}
+]
+},
+"de": {
+"text": "1. a4 b5 2. axb5 a6 3. bxa6 Lb7 4. a7 Sf6 5. axb8=D Txb8 6. h4 h5 7. g4 hxg4 *",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 16,
+"cls": "san"
+},
+{
+"s": 17,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 22,
+"cls": "move_number"
+},
+{
+"s": 23,
+"e": 27,
+"cls": "san"
+},
+{
+"s": 28,
+"e": 31,
+"cls": "san"
+},
+{
+"s": 32,
+"e": 34,
+"cls": "move_number"
+},
+{
+"s": 35,
+"e": 37,
+"cls": "san"
+},
+{
+"s": 38,
+"e": 41,
+"cls": "san"
+},
+{
+"s": 42,
+"e": 44,
+"cls": "move_number"
+},
+{
+"s": 45,
+"e": 51,
+"cls": "san"
+},
+{
+"s": 52,
+"e": 56,
+"cls": "san"
+},
+{
+"s": 57,
+"e": 59,
+"cls": "move_number"
+},
+{
+"s": 60,
+"e": 62,
+"cls": "san"
+},
+{
+"s": 63,
+"e": 65,
+"cls": "san"
+},
+{
+"s": 66,
+"e": 68,
+"cls": "move_number"
+},
+{
+"s": 69,
+"e": 71,
+"cls": "san"
+},
+{
+"s": 72,
+"e": 76,
+"cls": "san"
+},
+{
+"s": 77,
+"e": 78,
+"cls": "result"
+}
+]
+},
+"fr": {
+"text": "1. a4 b5 2. axb5 a6 3. bxa6 Fb7 4. a7 Cf6 5. axb8=D Txb8 6. h4 h5 7. g4 hxg4 *",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 16,
+"cls": "san"
+},
+{
+"s": 17,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 22,
+"cls": "move_number"
+},
+{
+"s": 23,
+"e": 27,
+"cls": "san"
+},
+{
+"s": 28,
+"e": 31,
+"cls": "san"
+},
+{
+"s": 32,
+"e": 34,
+"cls": "move_number"
+},
+{
+"s": 35,
+"e": 37,
+"cls": "san"
+},
+{
+"s": 38,
+"e": 41,
+"cls": "san"
+},
+{
+"s": 42,
+"e": 44,
+"cls": "move_number"
+},
+{
+"s": 45,
+"e": 51,
+"cls": "san"
+},
+{
+"s": 52,
+"e": 56,
+"cls": "san"
+},
+{
+"s": 57,
+"e": 59,
+"cls": "move_number"
+},
+{
+"s": 60,
+"e": 62,
+"cls": "san"
+},
+{
+"s": 63,
+"e": 65,
+"cls": "san"
+},
+{
+"s": 66,
+"e": 68,
+"cls": "move_number"
+},
+{
+"s": 69,
+"e": 71,
+"cls": "san"
+},
+{
+"s": 72,
+"e": 76,
+"cls": "san"
+},
+{
+"s": 77,
+"e": 78,
+"cls": "result"
+}
+]
+},
+"es": {
+"text": "1. a4 b5 2. axb5 a6 3. bxa6 Ab7 4. a7 Cf6 5. axb8=D Txb8 6. h4 h5 7. g4 hxg4 *",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 16,
+"cls": "san"
+},
+{
+"s": 17,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 22,
+"cls": "move_number"
+},
+{
+"s": 23,
+"e": 27,
+"cls": "san"
+},
+{
+"s": 28,
+"e": 31,
+"cls": "san"
+},
+{
+"s": 32,
+"e": 34,
+"cls": "move_number"
+},
+{
+"s": 35,
+"e": 37,
+"cls": "san"
+},
+{
+"s": 38,
+"e": 41,
+"cls": "san"
+},
+{
+"s": 42,
+"e": 44,
+"cls": "move_number"
+},
+{
+"s": 45,
+"e": 51,
+"cls": "san"
+},
+{
+"s": 52,
+"e": 56,
+"cls": "san"
+},
+{
+"s": 57,
+"e": 59,
+"cls": "move_number"
+},
+{
+"s": 60,
+"e": 62,
+"cls": "san"
+},
+{
+"s": 63,
+"e": 65,
+"cls": "san"
+},
+{
+"s": 66,
+"e": 68,
+"cls": "move_number"
+},
+{
+"s": 69,
+"e": 71,
+"cls": "san"
+},
+{
+"s": 72,
+"e": 76,
+"cls": "san"
+},
+{
+"s": 77,
+"e": 78,
+"cls": "result"
+}
+]
+},
+"hu": {
+"text": "1. a4 b5 2. axb5 a6 3. bxa6 Fb7 4. a7 Hf6 5. axb8=V Bxb8 6. h4 h5 7. g4 hxg4 *",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 16,
+"cls": "san"
+},
+{
+"s": 17,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 22,
+"cls": "move_number"
+},
+{
+"s": 23,
+"e": 27,
+"cls": "san"
+},
+{
+"s": 28,
+"e": 31,
+"cls": "san"
+},
+{
+"s": 32,
+"e": 34,
+"cls": "move_number"
+},
+{
+"s": 35,
+"e": 37,
+"cls": "san"
+},
+{
+"s": 38,
+"e": 41,
+"cls": "san"
+},
+{
+"s": 42,
+"e": 44,
+"cls": "move_number"
+},
+{
+"s": 45,
+"e": 51,
+"cls": "san"
+},
+{
+"s": 52,
+"e": 56,
+"cls": "san"
+},
+{
+"s": 57,
+"e": 59,
+"cls": "move_number"
+},
+{
+"s": 60,
+"e": 62,
+"cls": "san"
+},
+{
+"s": 63,
+"e": 65,
+"cls": "san"
+},
+{
+"s": 66,
+"e": 68,
+"cls": "move_number"
+},
+{
+"s": 69,
+"e": 71,
+"cls": "san"
+},
+{
+"s": 72,
+"e": 76,
+"cls": "san"
+},
+{
+"s": 77,
+"e": 78,
+"cls": "result"
+}
+]
+},
+"pl": {
+"text": "1. a4 b5 2. axb5 a6 3. bxa6 Gb7 4. a7 Sf6 5. axb8=H Wxb8 6. h4 h5 7. g4 hxg4 *",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 16,
+"cls": "san"
+},
+{
+"s": 17,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 22,
+"cls": "move_number"
+},
+{
+"s": 23,
+"e": 27,
+"cls": "san"
+},
+{
+"s": 28,
+"e": 31,
+"cls": "san"
+},
+{
+"s": 32,
+"e": 34,
+"cls": "move_number"
+},
+{
+"s": 35,
+"e": 37,
+"cls": "san"
+},
+{
+"s": 38,
+"e": 41,
+"cls": "san"
+},
+{
+"s": 42,
+"e": 44,
+"cls": "move_number"
+},
+{
+"s": 45,
+"e": 51,
+"cls": "san"
+},
+{
+"s": 52,
+"e": 56,
+"cls": "san"
+},
+{
+"s": 57,
+"e": 59,
+"cls": "move_number"
+},
+{
+"s": 60,
+"e": 62,
+"cls": "san"
+},
+{
+"s": 63,
+"e": 65,
+"cls": "san"
+},
+{
+"s": 66,
+"e": 68,
+"cls": "move_number"
+},
+{
+"s": 69,
+"e": 71,
+"cls": "san"
+},
+{
+"s": 72,
+"e": 76,
+"cls": "san"
+},
+{
+"s": 77,
+"e": 78,
+"cls": "result"
+}
+]
+}
+}
+},
+{
+"id": "toy:6",
+"plies": [
+{
+"ply": 1,
+"color": "w",
+"piece": "P",
+"pid": "wP-e2",
+"from": "e2",
+"to": "e4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "e4",
+"uci": "e2e4",
+"long": "e2-e4",
+"span": [
+122,
+124
+],
+"text": "e4"
+},
+{
+"ply": 2,
+"color": "b",
+"piece": "P",
+"pid": "bP-e7",
+"from": "e7",
+"to": "e5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "e5",
+"uci": "e7e5",
+"long": "e7-e5",
+"span": [
+125,
+127
+],
+"text": "e5"
+},
+{
+"ply": 3,
+"color": "w",
+"piece": "N",
+"pid": "wN-g1",
+"from": "g1",
+"to": "f3",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Nf3",
+"uci": "g1f3",
+"long": "Ng1-f3",
+"span": [
+131,
+134
+],
+"text": "Nf3"
+},
+{
+"ply": 4,
+"color": "b",
+"piece": "N",
+"pid": "bN-b8",
+"from": "b8",
+"to": "c6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Nc6",
+"uci": "b8c6",
+"long": "Nb8-c6",
+"span": [
+135,
+138
+],
+"text": "Nc6"
+},
+{
+"ply": 5,
+"color": "w",
+"piece": "B",
+"pid": "wB-f1",
+"from": "f1",
+"to": "b5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Bb5",
+"uci": "f1b5",
+"long": "Bf1-b5",
+"span": [
+142,
+145
+],
+"text": "Bb5"
+},
+{
+"ply": 6,
+"color": "b",
+"piece": "P",
+"pid": "bP-a7",
+"from": "a7",
+"to": "a6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "a6",
+"uci": "a7a6",
+"long": "a7-a6",
+"span": [
+146,
+148
+],
+"text": "a6"
+},
+{
+"ply": 7,
+"color": "w",
+"piece": "B",
+"pid": "wB-f1",
+"from": "b5",
+"to": "a4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Ba4",
+"uci": "b5a4",
+"long": "Bb5-a4",
+"span": [
+152,
+155
+],
+"text": "Ba4"
+},
+{
+"ply": 8,
+"color": "b",
+"piece": "N",
+"pid": "bN-g8",
+"from": "g8",
+"to": "f6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Nf6",
+"uci": "g8f6",
+"long": "Ng8-f6",
+"span": [
+156,
+159
+],
+"text": "Nf6"
+},
+{
+"ply": 9,
+"color": "w",
+"piece": "K",
+"pid": "wK-e1",
+"from": "e1",
+"to": "g1",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": "K",
+"rook_pid": "wR-h1",
+"rook_to": "f1",
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "O-O",
+"uci": "e1g1",
+"long": "O-O",
+"span": [
+163,
+166
+],
+"text": "O-O"
+},
+{
+"ply": 10,
+"color": "b",
+"piece": "B",
+"pid": "bB-f8",
+"from": "f8",
+"to": "e7",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Be7",
+"uci": "f8e7",
+"long": "Bf8-e7",
+"span": [
+167,
+170
+],
+"text": "Be7"
+},
+{
+"ply": 11,
+"color": "w",
+"piece": "R",
+"pid": "wR-h1",
+"from": "f1",
+"to": "e1",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Re1",
+"uci": "f1e1",
+"long": "Rf1-e1",
+"span": [
+174,
+177
+],
+"text": "Re1"
+},
+{
+"ply": 12,
+"color": "b",
+"piece": "P",
+"pid": "bP-b7",
+"from": "b7",
+"to": "b5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "b5",
+"uci": "b7b5",
+"long": "b7-b5",
+"span": [
+178,
+180
+],
+"text": "b5"
+},
+{
+"ply": 13,
+"color": "w",
+"piece": "B",
+"pid": "wB-f1",
+"from": "a4",
+"to": "b3",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Bb3",
+"uci": "a4b3",
+"long": "Ba4-b3",
+"span": [
+184,
+187
+],
+"text": "Bb3"
+},
+{
+"ply": 14,
+"color": "b",
+"piece": "P",
+"pid": "bP-d7",
+"from": "d7",
+"to": "d6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "d6",
+"uci": "d7d6",
+"long": "d7-d6",
+"span": [
+188,
+190
+],
+"text": "d6"
+},
+{
+"ply": 15,
+"color": "w",
+"piece": "P",
+"pid": "wP-c2",
+"from": "c2",
+"to": "c3",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "c3",
+"uci": "c2c3",
+"long": "c2-c3",
+"span": [
+194,
+196
+],
+"text": "c3"
+},
+{
+"ply": 16,
+"color": "b",
+"piece": "K",
+"pid": "bK-e8",
+"from": "e8",
+"to": "g8",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": "K",
+"rook_pid": "bR-h8",
+"rook_to": "f8",
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "O-O",
+"uci": "e8g8",
+"long": "O-O",
+"span": [
+197,
+200
+],
+"text": "O-O"
+},
+{
+"ply": 17,
+"color": "w",
+"piece": "P",
+"pid": "wP-h2",
+"from": "h2",
+"to": "h3",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "h3",
+"uci": "h2h3",
+"long": "h2-h3",
+"span": [
+204,
+206
+],
+"text": "h3"
+},
+{
+"ply": 18,
+"color": "b",
+"piece": "N",
+"pid": "bN-b8",
+"from": "c6",
+"to": "b8",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Nb8",
+"uci": "c6b8",
+"long": "Nc6-b8",
+"span": [
+207,
+210
+],
+"text": "Nb8"
+},
+{
+"ply": 19,
+"color": "w",
+"piece": "P",
+"pid": "wP-d2",
+"from": "d2",
+"to": "d4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "d4",
+"uci": "d2d4",
+"long": "d2-d4",
+"span": [
+217,
+219
+],
+"text": "d4"
+},
+{
+"ply": 20,
+"color": "b",
+"piece": "N",
+"pid": "bN-b8",
+"from": "b8",
+"to": "d7",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Nbd7",
+"uci": "b8d7",
+"long": "Nb8-d7",
+"span": [
+220,
+224
+],
+"text": "Nbd7"
+}
+],
+"final_placement": "r1bq1rk1/2pnbppp/p2p1n2/1p2p3/3PP3/1BP2N1P/PP3PP1/RNBQR1K1",
+"reps": {
+"en": {
+"text": "1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7 6. Re1 b5 7. Bb3 d6 8. c3 O-O 9. h3 Nb8 10. d4 Nbd7 1-0",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 15,
+"cls": "san"
+},
+{
+"s": 16,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 22,
+"cls": "move_number"
+},
+{
+"s": 23,
+"e": 26,
+"cls": "san"
+},
+{
+"s": 27,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 32,
+"cls": "move_number"
+},
+{
+"s": 33,
+"e": 36,
+"cls": "san"
+},
+{
+"s": 37,
+"e": 40,
+"cls": "san"
+},
+{
+"s": 41,
+"e": 43,
+"cls": "move_number"
+},
+{
+"s": 44,
+"e": 47,
+"cls": "san"
+},
+{
+"s": 48,
+"e": 51,
+"cls": "san"
+},
+{
+"s": 52,
+"e": 54,
+"cls": "move_number"
+},
+{
+"s": 55,
+"e": 58,
+"cls": "san"
+},
+{
+"s": 59,
+"e": 61,
+"cls": "san"
+},
+{
+"s": 62,
+"e": 64,
+"cls": "move_number"
+},
+{
+"s": 65,
+"e": 68,
+"cls": "san"
+},
+{
+"s": 69,
+"e": 71,
+"cls": "san"
+},
+{
+"s": 72,
+"e": 74,
+"cls": "move_number"
+},
+{
+"s": 75,
+"e": 77,
+"cls": "san"
+},
+{
+"s": 78,
+"e": 81,
+"cls": "san"
+},
+{
+"s": 82,
+"e": 84,
+"cls": "move_number"
+},
+{
+"s": 85,
+"e": 87,
+"cls": "san"
+},
+{
+"s": 88,
+"e": 91,
+"cls": "san"
+},
+{
+"s": 92,
+"e": 95,
+"cls": "move_number"
+},
+{
+"s": 96,
+"e": 98,
+"cls": "san"
+},
+{
+"s": 99,
+"e": 103,
+"cls": "san"
+},
+{
+"s": 104,
+"e": 107,
+"cls": "result"
+}
+]
+},
+"uci": {
+"text": "e2e4 e7e5 g1f3 b8c6 f1b5 a7a6 b5a4 g8f6 e1g1 f8e7 f1e1 b7b5 a4b3 d7d6 c2c3 e8g8 h2h3 c6b8 d2d4 b8d7 1-0",
+"spans": [
+{
+"s": 0,
+"e": 4,
+"cls": "san"
+},
+{
+"s": 5,
+"e": 9,
+"cls": "san"
+},
+{
+"s": 10,
+"e": 14,
+"cls": "san"
+},
+{
+"s": 15,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 24,
+"cls": "san"
+},
+{
+"s": 25,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 34,
+"cls": "san"
+},
+{
+"s": 35,
+"e": 39,
+"cls": "san"
+},
+{
+"s": 40,
+"e": 44,
+"cls": "san"
+},
+{
+"s": 45,
+"e": 49,
+"cls": "san"
+},
+{
+"s": 50,
+"e": 54,
+"cls": "san"
+},
+{
+"s": 55,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 64,
+"cls": "san"
+},
+{
+"s": 65,
+"e": 69,
+"cls": "san"
+},
+{
+"s": 70,
+"e": 74,
+"cls": "san"
+},
+{
+"s": 75,
+"e": 79,
+"cls": "san"
+},
+{
+"s": 80,
+"e": 84,
+"cls": "san"
+},
+{
+"s": 85,
+"e": 89,
+"cls": "san"
+},
+{
+"s": 90,
+"e": 94,
+"cls": "san"
+},
+{
+"s": 95,
+"e": 99,
+"cls": "san"
+},
+{
+"s": 100,
+"e": 103,
+"cls": "result"
+}
+]
+},
+"long": {
+"text": "1. e2-e4 e7-e5 2. Ng1-f3 Nb8-c6 3. Bf1-b5 a7-a6 4. Bb5-a4 Ng8-f6 5. O-O Bf8-e7 6. Rf1-e1 b7-b5 7. Ba4-b3 d7-d6 8. c2-c3 O-O 9. h2-h3 Nc6-b8 10. d2-d4 Nb8-d7 1-0",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 14,
+"cls": "san"
+},
+{
+"s": 15,
+"e": 17,
+"cls": "move_number"
+},
+{
+"s": 18,
+"e": 24,
+"cls": "san"
+},
+{
+"s": 25,
+"e": 31,
+"cls": "san"
+},
+{
+"s": 32,
+"e": 34,
+"cls": "move_number"
+},
+{
+"s": 35,
+"e": 41,
+"cls": "san"
+},
+{
+"s": 42,
+"e": 47,
+"cls": "san"
+},
+{
+"s": 48,
+"e": 50,
+"cls": "move_number"
+},
+{
+"s": 51,
+"e": 57,
+"cls": "san"
+},
+{
+"s": 58,
+"e": 64,
+"cls": "san"
+},
+{
+"s": 65,
+"e": 67,
+"cls": "move_number"
+},
+{
+"s": 68,
+"e": 71,
+"cls": "san"
+},
+{
+"s": 72,
+"e": 78,
+"cls": "san"
+},
+{
+"s": 79,
+"e": 81,
+"cls": "move_number"
+},
+{
+"s": 82,
+"e": 88,
+"cls": "san"
+},
+{
+"s": 89,
+"e": 94,
+"cls": "san"
+},
+{
+"s": 95,
+"e": 97,
+"cls": "move_number"
+},
+{
+"s": 98,
+"e": 104,
+"cls": "san"
+},
+{
+"s": 105,
+"e": 110,
+"cls": "san"
+},
+{
+"s": 111,
+"e": 113,
+"cls": "move_number"
+},
+{
+"s": 114,
+"e": 119,
+"cls": "san"
+},
+{
+"s": 120,
+"e": 123,
+"cls": "san"
+},
+{
+"s": 124,
+"e": 126,
+"cls": "move_number"
+},
+{
+"s": 127,
+"e": 132,
+"cls": "san"
+},
+{
+"s": 133,
+"e": 139,
+"cls": "san"
+},
+{
+"s": 140,
+"e": 143,
+"cls": "move_number"
+},
+{
+"s": 144,
+"e": 149,
+"cls": "san"
+},
+{
+"s": 150,
+"e": 156,
+"cls": "san"
+},
+{
+"s": 157,
+"e": 160,
+"cls": "result"
+}
+]
+},
+"fan": {
+"text": "1. e4 e5 2. ♘f3 ♞c6 3. ♗b5 a6 4. ♗a4 ♞f6 5. O-O ♝e7 6. ♖e1 b5 7. ♗b3 d6 8. c3 O-O 9. h3 ♞b8 10. d4 ♞bd7 1-0",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 15,
+"cls": "san"
+},
+{
+"s": 16,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 22,
+"cls": "move_number"
+},
+{
+"s": 23,
+"e": 26,
+"cls": "san"
+},
+{
+"s": 27,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 32,
+"cls": "move_number"
+},
+{
+"s": 33,
+"e": 36,
+"cls": "san"
+},
+{
+"s": 37,
+"e": 40,
+"cls": "san"
+},
+{
+"s": 41,
+"e": 43,
+"cls": "move_number"
+},
+{
+"s": 44,
+"e": 47,
+"cls": "san"
+},
+{
+"s": 48,
+"e": 51,
+"cls": "san"
+},
+{
+"s": 52,
+"e": 54,
+"cls": "move_number"
+},
+{
+"s": 55,
+"e": 58,
+"cls": "san"
+},
+{
+"s": 59,
+"e": 61,
+"cls": "san"
+},
+{
+"s": 62,
+"e": 64,
+"cls": "move_number"
+},
+{
+"s": 65,
+"e": 68,
+"cls": "san"
+},
+{
+"s": 69,
+"e": 71,
+"cls": "san"
+},
+{
+"s": 72,
+"e": 74,
+"cls": "move_number"
+},
+{
+"s": 75,
+"e": 77,
+"cls": "san"
+},
+{
+"s": 78,
+"e": 81,
+"cls": "san"
+},
+{
+"s": 82,
+"e": 84,
+"cls": "move_number"
+},
+{
+"s": 85,
+"e": 87,
+"cls": "san"
+},
+{
+"s": 88,
+"e": 91,
+"cls": "san"
+},
+{
+"s": 92,
+"e": 95,
+"cls": "move_number"
+},
+{
+"s": 96,
+"e": 98,
+"cls": "san"
+},
+{
+"s": 99,
+"e": 103,
+"cls": "san"
+},
+{
+"s": 104,
+"e": 107,
+"cls": "result"
+}
+]
+},
+"tight": {
+"text": "1.e4 e5 2.Nf3 Nc6 3.Bb5 a6 4.Ba4 Nf6 5.O-O Be7 6.Re1 b5 7.Bb3 d6 8.c3 O-O 9.h3 Nb8 10.d4 Nbd7 1-0",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 2,
+"e": 4,
+"cls": "san"
+},
+{
+"s": 5,
+"e": 7,
+"cls": "san"
+},
+{
+"s": 8,
+"e": 10,
+"cls": "move_number"
+},
+{
+"s": 10,
+"e": 13,
+"cls": "san"
+},
+{
+"s": 14,
+"e": 17,
+"cls": "san"
+},
+{
+"s": 18,
+"e": 20,
+"cls": "move_number"
+},
+{
+"s": 20,
+"e": 23,
+"cls": "san"
+},
+{
+"s": 24,
+"e": 26,
+"cls": "san"
+},
+{
+"s": 27,
+"e": 29,
+"cls": "move_number"
+},
+{
+"s": 29,
+"e": 32,
+"cls": "san"
+},
+{
+"s": 33,
+"e": 36,
+"cls": "san"
+},
+{
+"s": 37,
+"e": 39,
+"cls": "move_number"
+},
+{
+"s": 39,
+"e": 42,
+"cls": "san"
+},
+{
+"s": 43,
+"e": 46,
+"cls": "san"
+},
+{
+"s": 47,
+"e": 49,
+"cls": "move_number"
+},
+{
+"s": 49,
+"e": 52,
+"cls": "san"
+},
+{
+"s": 53,
+"e": 55,
+"cls": "san"
+},
+{
+"s": 56,
+"e": 58,
+"cls": "move_number"
+},
+{
+"s": 58,
+"e": 61,
+"cls": "san"
+},
+{
+"s": 62,
+"e": 64,
+"cls": "san"
+},
+{
+"s": 65,
+"e": 67,
+"cls": "move_number"
+},
+{
+"s": 67,
+"e": 69,
+"cls": "san"
+},
+{
+"s": 70,
+"e": 73,
+"cls": "san"
+},
+{
+"s": 74,
+"e": 76,
+"cls": "move_number"
+},
+{
+"s": 76,
+"e": 78,
+"cls": "san"
+},
+{
+"s": 79,
+"e": 82,
+"cls": "san"
+},
+{
+"s": 83,
+"e": 86,
+"cls": "move_number"
+},
+{
+"s": 86,
+"e": 88,
+"cls": "san"
+},
+{
+"s": 89,
+"e": 93,
+"cls": "san"
+},
+{
+"s": 94,
+"e": 97,
+"cls": "result"
+}
+]
+},
+"de": {
+"text": "1. e4 e5 2. Sf3 Sc6 3. Lb5 a6 4. La4 Sf6 5. O-O Le7 6. Te1 b5 7. Lb3 d6 8. c3 O-O 9. h3 Sb8 10. d4 Sbd7 1-0",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 15,
+"cls": "san"
+},
+{
+"s": 16,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 22,
+"cls": "move_number"
+},
+{
+"s": 23,
+"e": 26,
+"cls": "san"
+},
+{
+"s": 27,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 32,
+"cls": "move_number"
+},
+{
+"s": 33,
+"e": 36,
+"cls": "san"
+},
+{
+"s": 37,
+"e": 40,
+"cls": "san"
+},
+{
+"s": 41,
+"e": 43,
+"cls": "move_number"
+},
+{
+"s": 44,
+"e": 47,
+"cls": "san"
+},
+{
+"s": 48,
+"e": 51,
+"cls": "san"
+},
+{
+"s": 52,
+"e": 54,
+"cls": "move_number"
+},
+{
+"s": 55,
+"e": 58,
+"cls": "san"
+},
+{
+"s": 59,
+"e": 61,
+"cls": "san"
+},
+{
+"s": 62,
+"e": 64,
+"cls": "move_number"
+},
+{
+"s": 65,
+"e": 68,
+"cls": "san"
+},
+{
+"s": 69,
+"e": 71,
+"cls": "san"
+},
+{
+"s": 72,
+"e": 74,
+"cls": "move_number"
+},
+{
+"s": 75,
+"e": 77,
+"cls": "san"
+},
+{
+"s": 78,
+"e": 81,
+"cls": "san"
+},
+{
+"s": 82,
+"e": 84,
+"cls": "move_number"
+},
+{
+"s": 85,
+"e": 87,
+"cls": "san"
+},
+{
+"s": 88,
+"e": 91,
+"cls": "san"
+},
+{
+"s": 92,
+"e": 95,
+"cls": "move_number"
+},
+{
+"s": 96,
+"e": 98,
+"cls": "san"
+},
+{
+"s": 99,
+"e": 103,
+"cls": "san"
+},
+{
+"s": 104,
+"e": 107,
+"cls": "result"
+}
+]
+},
+"fr": {
+"text": "1. e4 e5 2. Cf3 Cc6 3. Fb5 a6 4. Fa4 Cf6 5. O-O Fe7 6. Te1 b5 7. Fb3 d6 8. c3 O-O 9. h3 Cb8 10. d4 Cbd7 1-0",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 15,
+"cls": "san"
+},
+{
+"s": 16,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 22,
+"cls": "move_number"
+},
+{
+"s": 23,
+"e": 26,
+"cls": "san"
+},
+{
+"s": 27,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 32,
+"cls": "move_number"
+},
+{
+"s": 33,
+"e": 36,
+"cls": "san"
+},
+{
+"s": 37,
+"e": 40,
+"cls": "san"
+},
+{
+"s": 41,
+"e": 43,
+"cls": "move_number"
+},
+{
+"s": 44,
+"e": 47,
+"cls": "san"
+},
+{
+"s": 48,
+"e": 51,
+"cls": "san"
+},
+{
+"s": 52,
+"e": 54,
+"cls": "move_number"
+},
+{
+"s": 55,
+"e": 58,
+"cls": "san"
+},
+{
+"s": 59,
+"e": 61,
+"cls": "san"
+},
+{
+"s": 62,
+"e": 64,
+"cls": "move_number"
+},
+{
+"s": 65,
+"e": 68,
+"cls": "san"
+},
+{
+"s": 69,
+"e": 71,
+"cls": "san"
+},
+{
+"s": 72,
+"e": 74,
+"cls": "move_number"
+},
+{
+"s": 75,
+"e": 77,
+"cls": "san"
+},
+{
+"s": 78,
+"e": 81,
+"cls": "san"
+},
+{
+"s": 82,
+"e": 84,
+"cls": "move_number"
+},
+{
+"s": 85,
+"e": 87,
+"cls": "san"
+},
+{
+"s": 88,
+"e": 91,
+"cls": "san"
+},
+{
+"s": 92,
+"e": 95,
+"cls": "move_number"
+},
+{
+"s": 96,
+"e": 98,
+"cls": "san"
+},
+{
+"s": 99,
+"e": 103,
+"cls": "san"
+},
+{
+"s": 104,
+"e": 107,
+"cls": "result"
+}
+]
+},
+"es": {
+"text": "1. e4 e5 2. Cf3 Cc6 3. Ab5 a6 4. Aa4 Cf6 5. O-O Ae7 6. Te1 b5 7. Ab3 d6 8. c3 O-O 9. h3 Cb8 10. d4 Cbd7 1-0",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 15,
+"cls": "san"
+},
+{
+"s": 16,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 22,
+"cls": "move_number"
+},
+{
+"s": 23,
+"e": 26,
+"cls": "san"
+},
+{
+"s": 27,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 32,
+"cls": "move_number"
+},
+{
+"s": 33,
+"e": 36,
+"cls": "san"
+},
+{
+"s": 37,
+"e": 40,
+"cls": "san"
+},
+{
+"s": 41,
+"e": 43,
+"cls": "move_number"
+},
+{
+"s": 44,
+"e": 47,
+"cls": "san"
+},
+{
+"s": 48,
+"e": 51,
+"cls": "san"
+},
+{
+"s": 52,
+"e": 54,
+"cls": "move_number"
+},
+{
+"s": 55,
+"e": 58,
+"cls": "san"
+},
+{
+"s": 59,
+"e": 61,
+"cls": "san"
+},
+{
+"s": 62,
+"e": 64,
+"cls": "move_number"
+},
+{
+"s": 65,
+"e": 68,
+"cls": "san"
+},
+{
+"s": 69,
+"e": 71,
+"cls": "san"
+},
+{
+"s": 72,
+"e": 74,
+"cls": "move_number"
+},
+{
+"s": 75,
+"e": 77,
+"cls": "san"
+},
+{
+"s": 78,
+"e": 81,
+"cls": "san"
+},
+{
+"s": 82,
+"e": 84,
+"cls": "move_number"
+},
+{
+"s": 85,
+"e": 87,
+"cls": "san"
+},
+{
+"s": 88,
+"e": 91,
+"cls": "san"
+},
+{
+"s": 92,
+"e": 95,
+"cls": "move_number"
+},
+{
+"s": 96,
+"e": 98,
+"cls": "san"
+},
+{
+"s": 99,
+"e": 103,
+"cls": "san"
+},
+{
+"s": 104,
+"e": 107,
+"cls": "result"
+}
+]
+},
+"hu": {
+"text": "1. e4 e5 2. Hf3 Hc6 3. Fb5 a6 4. Fa4 Hf6 5. O-O Fe7 6. Be1 b5 7. Fb3 d6 8. c3 O-O 9. h3 Hb8 10. d4 Hbd7 1-0",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 15,
+"cls": "san"
+},
+{
+"s": 16,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 22,
+"cls": "move_number"
+},
+{
+"s": 23,
+"e": 26,
+"cls": "san"
+},
+{
+"s": 27,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 32,
+"cls": "move_number"
+},
+{
+"s": 33,
+"e": 36,
+"cls": "san"
+},
+{
+"s": 37,
+"e": 40,
+"cls": "san"
+},
+{
+"s": 41,
+"e": 43,
+"cls": "move_number"
+},
+{
+"s": 44,
+"e": 47,
+"cls": "san"
+},
+{
+"s": 48,
+"e": 51,
+"cls": "san"
+},
+{
+"s": 52,
+"e": 54,
+"cls": "move_number"
+},
+{
+"s": 55,
+"e": 58,
+"cls": "san"
+},
+{
+"s": 59,
+"e": 61,
+"cls": "san"
+},
+{
+"s": 62,
+"e": 64,
+"cls": "move_number"
+},
+{
+"s": 65,
+"e": 68,
+"cls": "san"
+},
+{
+"s": 69,
+"e": 71,
+"cls": "san"
+},
+{
+"s": 72,
+"e": 74,
+"cls": "move_number"
+},
+{
+"s": 75,
+"e": 77,
+"cls": "san"
+},
+{
+"s": 78,
+"e": 81,
+"cls": "san"
+},
+{
+"s": 82,
+"e": 84,
+"cls": "move_number"
+},
+{
+"s": 85,
+"e": 87,
+"cls": "san"
+},
+{
+"s": 88,
+"e": 91,
+"cls": "san"
+},
+{
+"s": 92,
+"e": 95,
+"cls": "move_number"
+},
+{
+"s": 96,
+"e": 98,
+"cls": "san"
+},
+{
+"s": 99,
+"e": 103,
+"cls": "san"
+},
+{
+"s": 104,
+"e": 107,
+"cls": "result"
+}
+]
+},
+"pl": {
+"text": "1. e4 e5 2. Sf3 Sc6 3. Gb5 a6 4. Ga4 Sf6 5. O-O Ge7 6. We1 b5 7. Gb3 d6 8. c3 O-O 9. h3 Sb8 10. d4 Sbd7 1-0",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 15,
+"cls": "san"
+},
+{
+"s": 16,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 22,
+"cls": "move_number"
+},
+{
+"s": 23,
+"e": 26,
+"cls": "san"
+},
+{
+"s": 27,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 32,
+"cls": "move_number"
+},
+{
+"s": 33,
+"e": 36,
+"cls": "san"
+},
+{
+"s": 37,
+"e": 40,
+"cls": "san"
+},
+{
+"s": 41,
+"e": 43,
+"cls": "move_number"
+},
+{
+"s": 44,
+"e": 47,
+"cls": "san"
+},
+{
+"s": 48,
+"e": 51,
+"cls": "san"
+},
+{
+"s": 52,
+"e": 54,
+"cls": "move_number"
+},
+{
+"s": 55,
+"e": 58,
+"cls": "san"
+},
+{
+"s": 59,
+"e": 61,
+"cls": "san"
+},
+{
+"s": 62,
+"e": 64,
+"cls": "move_number"
+},
+{
+"s": 65,
+"e": 68,
+"cls": "san"
+},
+{
+"s": 69,
+"e": 71,
+"cls": "san"
+},
+{
+"s": 72,
+"e": 74,
+"cls": "move_number"
+},
+{
+"s": 75,
+"e": 77,
+"cls": "san"
+},
+{
+"s": 78,
+"e": 81,
+"cls": "san"
+},
+{
+"s": 82,
+"e": 84,
+"cls": "move_number"
+},
+{
+"s": 85,
+"e": 87,
+"cls": "san"
+},
+{
+"s": 88,
+"e": 91,
+"cls": "san"
+},
+{
+"s": 92,
+"e": 95,
+"cls": "move_number"
+},
+{
+"s": 96,
+"e": 98,
+"cls": "san"
+},
+{
+"s": 99,
+"e": 103,
+"cls": "san"
+},
+{
+"s": 104,
+"e": 107,
+"cls": "result"
+}
+]
+}
+}
+},
+{
+"id": "toy:7",
+"plies": [
+{
+"ply": 1,
+"color": "w",
+"piece": "P",
+"pid": "wP-d2",
+"from": "d2",
+"to": "d4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "d4",
+"uci": "d2d4",
+"long": "d2-d4",
+"span": [
+132,
+134
+],
+"text": "d4"
+},
+{
+"ply": 2,
+"color": "b",
+"piece": "P",
+"pid": "bP-d7",
+"from": "d7",
+"to": "d5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "d5",
+"uci": "d7d5",
+"long": "d7-d5",
+"span": [
+135,
+137
+],
+"text": "d5"
+},
+{
+"ply": 3,
+"color": "w",
+"piece": "P",
+"pid": "wP-c2",
+"from": "c2",
+"to": "c4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "c4",
+"uci": "c2c4",
+"long": "c2-c4",
+"span": [
+141,
+143
+],
+"text": "c4"
+},
+{
+"ply": 4,
+"color": "b",
+"piece": "P",
+"pid": "bP-e7",
+"from": "e7",
+"to": "e6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "e6",
+"uci": "e7e6",
+"long": "e7-e6",
+"span": [
+144,
+146
+],
+"text": "e6"
+},
+{
+"ply": 5,
+"color": "w",
+"piece": "N",
+"pid": "wN-b1",
+"from": "b1",
+"to": "c3",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Nc3",
+"uci": "b1c3",
+"long": "Nb1-c3",
+"span": [
+150,
+153
+],
+"text": "Nc3"
+},
+{
+"ply": 6,
+"color": "b",
+"piece": "N",
+"pid": "bN-g8",
+"from": "g8",
+"to": "f6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Nf6",
+"uci": "g8f6",
+"long": "Ng8-f6",
+"span": [
+154,
+157
+],
+"text": "Nf6"
+},
+{
+"ply": 7,
+"color": "w",
+"piece": "B",
+"pid": "wB-c1",
+"from": "c1",
+"to": "g5",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Bg5",
+"uci": "c1g5",
+"long": "Bc1-g5",
+"span": [
+161,
+164
+],
+"text": "Bg5"
+},
+{
+"ply": 8,
+"color": "b",
+"piece": "B",
+"pid": "bB-f8",
+"from": "f8",
+"to": "e7",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "Be7",
+"uci": "f8e7",
+"long": "Bf8-e7",
+"span": [
+165,
+168
+],
+"text": "Be7"
+},
+{
+"ply": 9,
+"color": "w",
+"piece": "P",
+"pid": "wP-e2",
+"from": "e2",
+"to": "e3",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "e3",
+"uci": "e2e3",
+"long": "e2-e3",
+"span": [
+172,
+174
+],
+"text": "e3"
+},
+{
+"ply": 10,
+"color": "b",
+"piece": "K",
+"pid": "bK-e8",
+"from": "e8",
+"to": "g8",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": "K",
+"rook_pid": "bR-h8",
+"rook_to": "f8",
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "O-O",
+"uci": "e8g8",
+"long": "O-O",
+"span": [
+175,
+178
+],
+"text": "O-O"
+},
+{
+"ply": 11,
+"color": "w",
+"piece": "N",
+"pid": "wN-g1",
+"from": "g1",
+"to": "f3",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Nf3",
+"uci": "g1f3",
+"long": "Ng1-f3",
+"span": [
+182,
+185
+],
+"text": "Nf3"
+},
+{
+"ply": 12,
+"color": "b",
+"piece": "P",
+"pid": "bP-h7",
+"from": "h7",
+"to": "h6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "h6",
+"uci": "h7h6",
+"long": "h7-h6",
+"span": [
+186,
+188
+],
+"text": "h6"
+},
+{
+"ply": 13,
+"color": "w",
+"piece": "B",
+"pid": "wB-c1",
+"from": "g5",
+"to": "h4",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "bK-e8",
+"san_canon": "Bh4",
+"uci": "g5h4",
+"long": "Bg5-h4",
+"span": [
+192,
+195
+],
+"text": "Bh4"
+},
+{
+"ply": 14,
+"color": "b",
+"piece": "P",
+"pid": "bP-b7",
+"from": "b7",
+"to": "b6",
+"capture": false,
+"captured_pid": null,
+"captured_type": null,
+"ep": false,
+"castle": null,
+"rook_pid": null,
+"rook_to": null,
+"promotion": null,
+"check": false,
+"mate": false,
+"enemy_king": "wK-e1",
+"san_canon": "b6",
+"uci": "b7b6",
+"long": "b7-b6",
+"span": [
+196,
+198
+],
+"text": "b6"
+}
+],
+"final_placement": "rnbq1rk1/p1p1bpp1/1p2pn1p/3p4/2PP3B/2N1PN2/PP3PPP/R2QKB1R",
+"reps": {
+"en": {
+"text": "1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. e3 O-O 6. Nf3 h6 7. Bh4 b6 *",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 14,
+"cls": "san"
+},
+{
+"s": 15,
+"e": 17,
+"cls": "san"
+},
+{
+"s": 18,
+"e": 20,
+"cls": "move_number"
+},
+{
+"s": 21,
+"e": 24,
+"cls": "san"
+},
+{
+"s": 25,
+"e": 28,
+"cls": "san"
+},
+{
+"s": 29,
+"e": 31,
+"cls": "move_number"
+},
+{
+"s": 32,
+"e": 35,
+"cls": "san"
+},
+{
+"s": 36,
+"e": 39,
+"cls": "san"
+},
+{
+"s": 40,
+"e": 42,
+"cls": "move_number"
+},
+{
+"s": 43,
+"e": 45,
+"cls": "san"
+},
+{
+"s": 46,
+"e": 49,
+"cls": "san"
+},
+{
+"s": 50,
+"e": 52,
+"cls": "move_number"
+},
+{
+"s": 53,
+"e": 56,
+"cls": "san"
+},
+{
+"s": 57,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 62,
+"cls": "move_number"
+},
+{
+"s": 63,
+"e": 66,
+"cls": "san"
+},
+{
+"s": 67,
+"e": 69,
+"cls": "san"
+},
+{
+"s": 70,
+"e": 71,
+"cls": "result"
+}
+]
+},
+"uci": {
+"text": "d2d4 d7d5 c2c4 e7e6 b1c3 g8f6 c1g5 f8e7 e2e3 e8g8 g1f3 h7h6 g5h4 b7b6 *",
+"spans": [
+{
+"s": 0,
+"e": 4,
+"cls": "san"
+},
+{
+"s": 5,
+"e": 9,
+"cls": "san"
+},
+{
+"s": 10,
+"e": 14,
+"cls": "san"
+},
+{
+"s": 15,
+"e": 19,
+"cls": "san"
+},
+{
+"s": 20,
+"e": 24,
+"cls": "san"
+},
+{
+"s": 25,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 34,
+"cls": "san"
+},
+{
+"s": 35,
+"e": 39,
+"cls": "san"
+},
+{
+"s": 40,
+"e": 44,
+"cls": "san"
+},
+{
+"s": 45,
+"e": 49,
+"cls": "san"
+},
+{
+"s": 50,
+"e": 54,
+"cls": "san"
+},
+{
+"s": 55,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 64,
+"cls": "san"
+},
+{
+"s": 65,
+"e": 69,
+"cls": "san"
+},
+{
+"s": 70,
+"e": 71,
+"cls": "result"
+}
+]
+},
+"long": {
+"text": "1. d2-d4 d7-d5 2. c2-c4 e7-e6 3. Nb1-c3 Ng8-f6 4. Bc1-g5 Bf8-e7 5. e2-e3 O-O 6. Ng1-f3 h7-h6 7. Bg5-h4 b7-b6 *",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 14,
+"cls": "san"
+},
+{
+"s": 15,
+"e": 17,
+"cls": "move_number"
+},
+{
+"s": 18,
+"e": 23,
+"cls": "san"
+},
+{
+"s": 24,
+"e": 29,
+"cls": "san"
+},
+{
+"s": 30,
+"e": 32,
+"cls": "move_number"
+},
+{
+"s": 33,
+"e": 39,
+"cls": "san"
+},
+{
+"s": 40,
+"e": 46,
+"cls": "san"
+},
+{
+"s": 47,
+"e": 49,
+"cls": "move_number"
+},
+{
+"s": 50,
+"e": 56,
+"cls": "san"
+},
+{
+"s": 57,
+"e": 63,
+"cls": "san"
+},
+{
+"s": 64,
+"e": 66,
+"cls": "move_number"
+},
+{
+"s": 67,
+"e": 72,
+"cls": "san"
+},
+{
+"s": 73,
+"e": 76,
+"cls": "san"
+},
+{
+"s": 77,
+"e": 79,
+"cls": "move_number"
+},
+{
+"s": 80,
+"e": 86,
+"cls": "san"
+},
+{
+"s": 87,
+"e": 92,
+"cls": "san"
+},
+{
+"s": 93,
+"e": 95,
+"cls": "move_number"
+},
+{
+"s": 96,
+"e": 102,
+"cls": "san"
+},
+{
+"s": 103,
+"e": 108,
+"cls": "san"
+},
+{
+"s": 109,
+"e": 110,
+"cls": "result"
+}
+]
+},
+"fan": {
+"text": "1. d4 d5 2. c4 e6 3. ♘c3 ♞f6 4. ♗g5 ♝e7 5. e3 O-O 6. ♘f3 h6 7. ♗h4 b6 *",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 14,
+"cls": "san"
+},
+{
+"s": 15,
+"e": 17,
+"cls": "san"
+},
+{
+"s": 18,
+"e": 20,
+"cls": "move_number"
+},
+{
+"s": 21,
+"e": 24,
+"cls": "san"
+},
+{
+"s": 25,
+"e": 28,
+"cls": "san"
+},
+{
+"s": 29,
+"e": 31,
+"cls": "move_number"
+},
+{
+"s": 32,
+"e": 35,
+"cls": "san"
+},
+{
+"s": 36,
+"e": 39,
+"cls": "san"
+},
+{
+"s": 40,
+"e": 42,
+"cls": "move_number"
+},
+{
+"s": 43,
+"e": 45,
+"cls": "san"
+},
+{
+"s": 46,
+"e": 49,
+"cls": "san"
+},
+{
+"s": 50,
+"e": 52,
+"cls": "move_number"
+},
+{
+"s": 53,
+"e": 56,
+"cls": "san"
+},
+{
+"s": 57,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 62,
+"cls": "move_number"
+},
+{
+"s": 63,
+"e": 66,
+"cls": "san"
+},
+{
+"s": 67,
+"e": 69,
+"cls": "san"
+},
+{
+"s": 70,
+"e": 71,
+"cls": "result"
+}
+]
+},
+"tight": {
+"text": "1.d4 d5 2.c4 e6 3.Nc3 Nf6 4.Bg5 Be7 5.e3 O-O 6.Nf3 h6 7.Bh4 b6 *",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 2,
+"e": 4,
+"cls": "san"
+},
+{
+"s": 5,
+"e": 7,
+"cls": "san"
+},
+{
+"s": 8,
+"e": 10,
+"cls": "move_number"
+},
+{
+"s": 10,
+"e": 12,
+"cls": "san"
+},
+{
+"s": 13,
+"e": 15,
+"cls": "san"
+},
+{
+"s": 16,
+"e": 18,
+"cls": "move_number"
+},
+{
+"s": 18,
+"e": 21,
+"cls": "san"
+},
+{
+"s": 22,
+"e": 25,
+"cls": "san"
+},
+{
+"s": 26,
+"e": 28,
+"cls": "move_number"
+},
+{
+"s": 28,
+"e": 31,
+"cls": "san"
+},
+{
+"s": 32,
+"e": 35,
+"cls": "san"
+},
+{
+"s": 36,
+"e": 38,
+"cls": "move_number"
+},
+{
+"s": 38,
+"e": 40,
+"cls": "san"
+},
+{
+"s": 41,
+"e": 44,
+"cls": "san"
+},
+{
+"s": 45,
+"e": 47,
+"cls": "move_number"
+},
+{
+"s": 47,
+"e": 50,
+"cls": "san"
+},
+{
+"s": 51,
+"e": 53,
+"cls": "san"
+},
+{
+"s": 54,
+"e": 56,
+"cls": "move_number"
+},
+{
+"s": 56,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 62,
+"cls": "san"
+},
+{
+"s": 63,
+"e": 64,
+"cls": "result"
+}
+]
+},
+"de": {
+"text": "1. d4 d5 2. c4 e6 3. Sc3 Sf6 4. Lg5 Le7 5. e3 O-O 6. Sf3 h6 7. Lh4 b6 *",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 14,
+"cls": "san"
+},
+{
+"s": 15,
+"e": 17,
+"cls": "san"
+},
+{
+"s": 18,
+"e": 20,
+"cls": "move_number"
+},
+{
+"s": 21,
+"e": 24,
+"cls": "san"
+},
+{
+"s": 25,
+"e": 28,
+"cls": "san"
+},
+{
+"s": 29,
+"e": 31,
+"cls": "move_number"
+},
+{
+"s": 32,
+"e": 35,
+"cls": "san"
+},
+{
+"s": 36,
+"e": 39,
+"cls": "san"
+},
+{
+"s": 40,
+"e": 42,
+"cls": "move_number"
+},
+{
+"s": 43,
+"e": 45,
+"cls": "san"
+},
+{
+"s": 46,
+"e": 49,
+"cls": "san"
+},
+{
+"s": 50,
+"e": 52,
+"cls": "move_number"
+},
+{
+"s": 53,
+"e": 56,
+"cls": "san"
+},
+{
+"s": 57,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 62,
+"cls": "move_number"
+},
+{
+"s": 63,
+"e": 66,
+"cls": "san"
+},
+{
+"s": 67,
+"e": 69,
+"cls": "san"
+},
+{
+"s": 70,
+"e": 71,
+"cls": "result"
+}
+]
+},
+"fr": {
+"text": "1. d4 d5 2. c4 e6 3. Cc3 Cf6 4. Fg5 Fe7 5. e3 O-O 6. Cf3 h6 7. Fh4 b6 *",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 14,
+"cls": "san"
+},
+{
+"s": 15,
+"e": 17,
+"cls": "san"
+},
+{
+"s": 18,
+"e": 20,
+"cls": "move_number"
+},
+{
+"s": 21,
+"e": 24,
+"cls": "san"
+},
+{
+"s": 25,
+"e": 28,
+"cls": "san"
+},
+{
+"s": 29,
+"e": 31,
+"cls": "move_number"
+},
+{
+"s": 32,
+"e": 35,
+"cls": "san"
+},
+{
+"s": 36,
+"e": 39,
+"cls": "san"
+},
+{
+"s": 40,
+"e": 42,
+"cls": "move_number"
+},
+{
+"s": 43,
+"e": 45,
+"cls": "san"
+},
+{
+"s": 46,
+"e": 49,
+"cls": "san"
+},
+{
+"s": 50,
+"e": 52,
+"cls": "move_number"
+},
+{
+"s": 53,
+"e": 56,
+"cls": "san"
+},
+{
+"s": 57,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 62,
+"cls": "move_number"
+},
+{
+"s": 63,
+"e": 66,
+"cls": "san"
+},
+{
+"s": 67,
+"e": 69,
+"cls": "san"
+},
+{
+"s": 70,
+"e": 71,
+"cls": "result"
+}
+]
+},
+"es": {
+"text": "1. d4 d5 2. c4 e6 3. Cc3 Cf6 4. Ag5 Ae7 5. e3 O-O 6. Cf3 h6 7. Ah4 b6 *",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 14,
+"cls": "san"
+},
+{
+"s": 15,
+"e": 17,
+"cls": "san"
+},
+{
+"s": 18,
+"e": 20,
+"cls": "move_number"
+},
+{
+"s": 21,
+"e": 24,
+"cls": "san"
+},
+{
+"s": 25,
+"e": 28,
+"cls": "san"
+},
+{
+"s": 29,
+"e": 31,
+"cls": "move_number"
+},
+{
+"s": 32,
+"e": 35,
+"cls": "san"
+},
+{
+"s": 36,
+"e": 39,
+"cls": "san"
+},
+{
+"s": 40,
+"e": 42,
+"cls": "move_number"
+},
+{
+"s": 43,
+"e": 45,
+"cls": "san"
+},
+{
+"s": 46,
+"e": 49,
+"cls": "san"
+},
+{
+"s": 50,
+"e": 52,
+"cls": "move_number"
+},
+{
+"s": 53,
+"e": 56,
+"cls": "san"
+},
+{
+"s": 57,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 62,
+"cls": "move_number"
+},
+{
+"s": 63,
+"e": 66,
+"cls": "san"
+},
+{
+"s": 67,
+"e": 69,
+"cls": "san"
+},
+{
+"s": 70,
+"e": 71,
+"cls": "result"
+}
+]
+},
+"hu": {
+"text": "1. d4 d5 2. c4 e6 3. Hc3 Hf6 4. Fg5 Fe7 5. e3 O-O 6. Hf3 h6 7. Fh4 b6 *",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 14,
+"cls": "san"
+},
+{
+"s": 15,
+"e": 17,
+"cls": "san"
+},
+{
+"s": 18,
+"e": 20,
+"cls": "move_number"
+},
+{
+"s": 21,
+"e": 24,
+"cls": "san"
+},
+{
+"s": 25,
+"e": 28,
+"cls": "san"
+},
+{
+"s": 29,
+"e": 31,
+"cls": "move_number"
+},
+{
+"s": 32,
+"e": 35,
+"cls": "san"
+},
+{
+"s": 36,
+"e": 39,
+"cls": "san"
+},
+{
+"s": 40,
+"e": 42,
+"cls": "move_number"
+},
+{
+"s": 43,
+"e": 45,
+"cls": "san"
+},
+{
+"s": 46,
+"e": 49,
+"cls": "san"
+},
+{
+"s": 50,
+"e": 52,
+"cls": "move_number"
+},
+{
+"s": 53,
+"e": 56,
+"cls": "san"
+},
+{
+"s": 57,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 62,
+"cls": "move_number"
+},
+{
+"s": 63,
+"e": 66,
+"cls": "san"
+},
+{
+"s": 67,
+"e": 69,
+"cls": "san"
+},
+{
+"s": 70,
+"e": 71,
+"cls": "result"
+}
+]
+},
+"pl": {
+"text": "1. d4 d5 2. c4 e6 3. Sc3 Sf6 4. Gg5 Ge7 5. e3 O-O 6. Sf3 h6 7. Gh4 b6 *",
+"spans": [
+{
+"s": 0,
+"e": 2,
+"cls": "move_number"
+},
+{
+"s": 3,
+"e": 5,
+"cls": "san"
+},
+{
+"s": 6,
+"e": 8,
+"cls": "san"
+},
+{
+"s": 9,
+"e": 11,
+"cls": "move_number"
+},
+{
+"s": 12,
+"e": 14,
+"cls": "san"
+},
+{
+"s": 15,
+"e": 17,
+"cls": "san"
+},
+{
+"s": 18,
+"e": 20,
+"cls": "move_number"
+},
+{
+"s": 21,
+"e": 24,
+"cls": "san"
+},
+{
+"s": 25,
+"e": 28,
+"cls": "san"
+},
+{
+"s": 29,
+"e": 31,
+"cls": "move_number"
+},
+{
+"s": 32,
+"e": 35,
+"cls": "san"
+},
+{
+"s": 36,
+"e": 39,
+"cls": "san"
+},
+{
+"s": 40,
+"e": 42,
+"cls": "move_number"
+},
+{
+"s": 43,
+"e": 45,
+"cls": "san"
+},
+{
+"s": 46,
+"e": 49,
+"cls": "san"
+},
+{
+"s": 50,
+"e": 52,
+"cls": "move_number"
+},
+{
+"s": 53,
+"e": 56,
+"cls": "san"
+},
+{
+"s": 57,
+"e": 59,
+"cls": "san"
+},
+{
+"s": 60,
+"e": 62,
+"cls": "move_number"
+},
+{
+"s": 63,
+"e": 66,
+"cls": "san"
+},
+{
+"s": 67,
+"e": 69,
+"cls": "san"
+},
+{
+"s": 70,
+"e": 71,
+"cls": "result"
+}
+]
+}
+}
+}
+],
+"perturb": [
+{
+"id": "toy:1#swap",
+"kind": "swap",
+"text": "[Event \"Toy 1\"]\n[Site \"authored\"]\n[Date \"2026.10.06\"]\n[Round \"-\"]\n[White \"Ada\"]\n[Black \"Babbage\"]\n[Result \"1-0\"]\n\n1. e4 e5 2. Nf3 Bc4 3. d6 Bg4 4. Nc3 g6 5. Nxe5 Bxd1 6. Bxf7+ Ke7 7. Nd5# 1-0",
+"first_unresolved_ply": 4,
+"error": "IllegalMoveError"
+},
+{
+"id": "toy:1#drop",
+"kind": "drop",
+"text": "[Event \"Toy 1\"]\n[Site \"authored\"]\n[Date \"2026.10.06\"]\n[Round \"-\"]\n[White \"Ada\"]\n[Black \"Babbage\"]\n[Result \"1-0\"]\n\n1. e4 e5 2. Nf3 d6 3. Bc4  4. Nc3 g6 5. Nxe5 Bxd1 6. Bxf7+ Ke7 7. Nd5# 1-0",
+"first_unresolved_ply": 6,
+"error": "IllegalMoveError"
+},
+{
+"id": "toy:1#replace",
+"kind": "replace",
+"text": "[Event \"Toy 1\"]\n[Site \"authored\"]\n[Date \"2026.10.06\"]\n[Round \"-\"]\n[White \"Ada\"]\n[Black \"Babbage\"]\n[Result \"1-0\"]\n\n1. e4 e5 2. Nf3 d6 3. Bc4 Bg4 4. Qh5 g6 5. Nxe5 Bxd1 6. Bxf7+ Ke7 7. Nd5# 1-0",
+"first_unresolved_ply": 7,
+"error": "IllegalMoveError"
+}
+]
+}

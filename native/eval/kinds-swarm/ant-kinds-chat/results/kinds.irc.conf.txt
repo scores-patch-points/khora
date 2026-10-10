@@ -1,0 +1,97 @@
+# irc conf: K=24; "*" marks a NICK TYPE (gold, used only to describe). signature = the company features that carry the kind.
+
+## kind 0  types 74  tokenShare 0.2358  goldShare 0  nickTypes 0  signature: after=the, after=a, after=you, after=not, before=it, after=i, after=do, after=my, after=it, after=there
+top: to you is and that in for on of but with not what if how or so there no are from as all then i'm like when at it's was does about using its did only has which by where
+random: since after without into means until basically w isn't cause there's also however i've im maybe than
+
+## kind 1  types 103  tokenShare 0.1544  goldShare 0.0169  nickTypes 0  signature: before=in, before=on, before=for, before=of, before=with, before=is, before=have, after=com, before=use, before=from
+top: the it a ubuntu my this your http an one linux any sudo windows apt some etc something other x more gnome grub root them nvidia someone kubuntu xorg kde dev support update usb pastebin sound wireless firefox home another
+random: setting gdm c amarok others unity old xubuntu us php most many java feisty ssh google every usr vmware mplayer breezy everything xp beryl apache these both synaptic people compiz media totem
+
+## kind 2  types 119  tokenShare 0.0936  goldShare 0.0004  nickTypes 0  signature: before=to, before=i, before=you, after=to, after=a, after=it, after=the, before=don't, before=can, before=apt
+top: have do get be install use know try see need want think run boot make find got go tried paste set had check change look tell mean open type read start ask give add mount fix remove say upgrade put
+random: understand control configure reboot stick access restart show load backup manually build ping test switch close log restore save re compile delete follow enable stop view replace kill leave take happen download edit click record pm explain create post disable
+
+## kind 3  types 54  tokenShare 0.0793  goldShare 0.0038  nickTypes 0  signature: after=have, before=i, after=be, before=you, after=know, after=am, after=think, after=need, before=can, before=when
+top: i can just don't will anyone should would could they can't https still dont doesn't really u even might i'll probably didn't may already cant we never actually always he won't doesnt i'd were cannot anybody must wont didnt you'll
+random: ever normally gotta simply possibly wouldnt shouldn't
+
+## kind 4  types 187  tokenShare 0.0799  goldShare 0.0086  nickTypes 0  signature: before=the, after=$, before=a, before=my, after=and, before=your, after=is, after=of, after=to, after=for
+top: file problem system command way cd package error server files desktop time version card same question kernel driver terminal first user channel partition drivers drive line thing screen list default network packages computer conf video stuff laptop idea source bit
+random: plugin menu apps correct monitor project game pc startup keyboard link player bios software theme shell text issue livecd script service os browser login memory deb net image cable configuration process vm code installer folder directory best dir display disc
+
+## kind 5  types 69  tokenShare 0.0592  goldShare 0.0019  nickTypes 0  signature: after=$, before=ubuntu, before=^, after=community, before=https, before=help, after=i, after=with, after=me, after=but
+top: me help com ok up now work thanks yes out well here why right please sure sorry org anything yeah works too lol p d again though manager before o fine nothing things guys info s wrong else while instead
+random: course t r once anymore away html cool later automatically properly correctly true anyway yet
+
+## kind 6  types 145  tokenShare 0.0225  goldShare 0.2247  nickTypes 89  signature: before=^, after=$, after=i, after=willis, before=dr, after=guys, after=ok, after=all, after=thanks, after=sparrow
+top: hi oh hey hello hmm okay ikonia* ah thank k who actionparsnip* nalioth* dr xavura* jrib* heh ubotu* willis nope bazhang* thx es g gnomefreak* nickrud* yep flannel* yea newbie indus* jordan soundray* ryan ic56* woodworker* np tiglionabbit* edbian* wow
+random: seveas* cables* kikkoman* hola fccf* nigels* bbrazil* mdel* intelikey* pici* jhutchins* exit bye hm um jetscreamer* l3top err ithicine* holstein* b wtf indeed kbrooks* polpak* c0nv1ct* conorkirkpatrick* damn h keviv* petrvs* ronqbc* happyfool* kratix cafuego* btw randal* pooltable* paradizelost* rewbycraft*
+
+## kind 7  types 61  tokenShare 0.022  goldShare 0  nickTypes 0  signature: after=to, before=be, before=i'm, before=not, before=am, before=is, before=im, after=for, before=was, before=i've
+top: installed trying running working back used found been installing having getting going able done doing looking possible down being available seem around searching made called failed enough asking supported changed mounted left saying quite seen talking booting connected started asked
+random: listed created configured checking added meant easier fixed thinking loaded needed
+
+## kind 8  types 358  tokenShare 0.0154  goldShare 0.0009  nickTypes 0  signature: after=org, before=en, after=php, before=org, before=abhi, before=http, before=jack, after=en, before=ubuntu, after=net
+top: palestine turkish en ubuntulinux ubuntuforums factoids showthread you've multiple ishere lots index texts proc unknown rid our you'd news uname favor ur la por ie invalid om ubuntu's management sparrow ms rw tasks canales per aik edubuntu family named her
+random: opt 2gb honestly daily rsync kdebase automatic depending mod pal sftp attitude capture gstreamer0 hotmail recoveringubuntuafterinstallingwindows suse runtime adsl kaffeine nameserver especially un alone ath breaks attached she along excellent i686 german heavy arent routers lo we'll according networkmanager br
+
+## kind 9  types 382  tokenShare 0.0171  goldShare 0.2601  nickTypes 290  signature: before=^, after=yes, after=i, after=ok, after=u, after=nav, after=no, after=what, after=yeah, after=you
+top: fazlamesai ive samus aran rudd theres somebody although db nobody mikeymike* jack dark ghost otherwise agent doc note whenever joe* celestianpower* xibalba* crimsun* catnode* costaricanquaker jigp* newuser* prashant fusionxtc* fuxy* kjellviz* mecheese* chriswr* he's kenthomson* mikebot* arvind iseeisee* richardcavell* acebo*
+random: mysqlchange* epicreviews* gonfi* linus* theory rolfen* cypher1* mmm fatejudger erisol* thanatosdrive* pricechild* fnf* dadgumit* johnny* razzorz* logrusmage* god piratehead* dollar* mefisto* poningru* lordlandon* rvgate* jemidon* mr m0r0n* morrolan* gm78* waylandbill* drakonik* ancalgon* mazda01* ademan* seoke* besides razor mecha25* rean don64*
+
+## kind 10  types 105  tokenShare 0.0146  goldShare 0.0035  nickTypes 0  signature: before=the, before=my, before=a, after=cd, before=your, before=https, after=list, after=card, after=thing, after=version
+top: wiki live last next local main own graphics cache web top current init wifi latest second security full restricted non power real tar xserver volume whole cpu archive admin auto private virtual external host dell dns recovery generic standard ethernet
+random: previous background actual difference input older alternate remote fact basic mail touchpad username exact 3d win official lan regular bottom model 64bit future webcam original graphical gtk internal floppy gateway ppa shortcut entire
+
+## kind 11  types 253  tokenShare 0.0118  goldShare 0.0004  nickTypes 0  signature: before=the, before=com, after=of, after=$, after=and, before=my, before=a, before=an, after=is, before=dev
+top: kind bots core rc administration status sys controller guy filename advanced side forum base state fs database table usage color formats front font contents archives center rest content headers splash person result level reply adapter gconf places defaults exe extension
+random: isp locale libs essid history attention initrd properties mountpoint src extended bookmarks numbers mini mic languages clock quality efi ips existing items soundcard rate layer ui explanation school string runlevel screens gpu statement filesystems battery upgrades menus nonfree story sudoers
+
+## kind 12  types 101  tokenShare 0.0108  goldShare 0  nickTypes 0  signature: after=$, before=any, before=the, after=kb, after=with, after=and, after=are, after=on, after=in, after=for
+top: size ideas issues questions luck least times trouble drives modules cards games preferences tools lines days environment editor ones effects devices experience icons minutes messages directly systems codecs fonts keys permission folders themes servers bar suggestions versions documentation hours links
+random: channels docs seconds alternative profile prob date forums connections processor steps job computers applet sense clients advice directories monitors speakers details features effect resources dependencies longer words disks entry cds bugs
+
+## kind 13  types 100  tokenShare 0.0097  goldShare 0  nickTypes 0  signature: before=i, after=to, before=just, before=you, after=it, before=i've, before=never, after=a, after=that, after=trying
+top: am thought believe told wanted haven't gave m went heard lost checked recommend love hope removed suggest dunno feel press plug wish ran looked updated upgraded forgot kinda wanna saw wonder assume hate care somehow prefer doubt messed sent booted
+random: missed finally expected uninstalled turned forget deleted clicked decided imagine moved suppose knew solved bet managed opened bought replaced personally generally burned havent typed searched expect wasnt edited followed formatted
+
+## kind 14  types 141  tokenShare 0.0093  goldShare 0.0006  nickTypes 0  signature: before=a, after=of, before=the, after=$, after=screen, before=my, after=boot, after=install, before=any, before=having
+top: community few lib dual large black clue common pci fresh certain couple small single random radeon complete shot particular dist direct v multimedia special newer warning hand static bunch friend known daemon pdf ide screenshot hp light shared separate smb
+random: gig dsl sata seperate white 1gb zip primary movie protocol toshiba custom month storage compatibility higher third tty pain dependency cron symlink wav rescue valid bootable reference gaming unix tutorial huge book secure logitech max public redhat picture vpn wide
+
+## kind 15  types 39  tokenShare 0.012  goldShare 0.0011  nickTypes 0  signature: before=a, before=very, after=as, before=so, before=too, after=drive, before=as, before=is, before=pretty, after=$
+top: good new free much very better different bad hard lot pretty long easy nice great little normal far slow specific weird simple big broken matter sec blank clean quick similar stupid safe stable fun fast strange crap odd soon
+random: 
+
+## kind 16  types 131  tokenShare 0.007  goldShare 0.0003  nickTypes 0  signature: before=to, after=it, after=the, before=can, before=don't, before=dpkg, after=out, before=i, after=your, after=my
+top: figure flood reconfigure sort watch hold mess touch break solve talk ignore detect report specify browse email launch resize block double hang clear drop quit sleep include pick repeat speak suspend apply handle buy patch recover avoid execute mark comment
+random: reload finish hack fit lose listen rip return chose request pay cut shut export perform pipe assign generate import bring become map extract pop ensure upload crash resolve define blacklist offer dump freeze confirm contact repair identify sync skip drag
+
+## kind 17  types 106  tokenShare 0.0069  goldShare 0.0011  nickTypes 0  signature: after=$, before=size, before=alt, before=as, before=dev, before=likely, before=compiz, after=installed, before=tar, before=menu
+top: team kb cgi ago welcome lst him mnt none punctuation f1 tho yesterday night above eh restrictedformats afaik fr mate plz morning releases friendly huh atm hda1 anyways anywhere png f2 fusion sda backspace denied wlan0 ayuda players folks essential
+random: sda1 spam rofl iirc sir edition cheers months twice rev crazy hda espaol au sry 3g em pls hah specifically rootsudo exists utils matic shit instance jpg ppl pro blah txt ahead htm
+
+## kind 18  types 71  tokenShare 0.0071  goldShare 0  nickTypes 0  signature: before=it, before=that, after=like, after=to, after=me, after=up, after=on, before=nothing, after=fine, before=just
+top: looks shows uses sounds goes gives comes needs depends isnt makes happens runs gets came they're fails wasn't except starts happened wants takes lists tells yourself easily supports appear keeps sucks lets took appears aren't installs helps boots crashes se
+random: loads provides causes creates stopped returns fixes connects seemed freezes requires tries showed thinks downloads crashed
+
+## kind 19  types 89  tokenShare 0.007  goldShare 0.0004  nickTypes 0  signature: after=$, before=showthread, after=t, before=with, before=install, after=and, before=use, after=is, before=in, before=using
+top: n f x11 vlc python adept less mozilla irssi sun glx gb xfce acpi xmms medibuntu opera gnu gcc k3b gaim konqueror opengl rpm virtualbox openoffice oss perl apache2 fglrx vga skype xine envy pastebinit purge vnc rhythmbox wpa vim
+random: audacity cedega checkinstall qemu gstreamer gmail mythtv chromium realplayer grub2 esd kde4 automatix fluxbox microsoft evolution lubuntu kdm adobe yahoo gimp thunderbird gentoo alsamixer lvm
+
+## kind 20  types 45  tokenShare 0.006  goldShare 0.0005  nickTypes 0  signature: before=http, before=in, after=$, before=for, after=lib, after=log, before=ubuntu, after=bin, after=share, before=an
+top: www nl var de each offtopic universe hardy years lts his i386 english multiverse jaunty launchpad amd64 several xgl hoary general amd backports order fedora cli earlier component youtube fat32 smp x86 bashrc gutsy ppc freenode uefi eth1 konsole fat
+random: osx natty vbox
+
+## kind 21  types 85  tokenShare 0.006  goldShare 0  nickTypes 0  signature: after=the, before=was, before=i'm, after=a, before=try, before=anyone, after=it, before=am, before=not, before=difference
+top: knows between making wondering during playing following downloading loading changing upgrading almost showing compiling worth adding telling typing whether taking within connecting given editing seeing assuming mounting giving burning half onto including behind removing writing here's testing helping learning logging
+random: moving guessing across finding fixing copying building turning hoping putting caused deleting taken watching printing glad sharing outside switching restarting reinstalling causing form
+
+## kind 22  types 84  tokenShare 0.0053  goldShare 0  nickTypes 0  signature: before=is, after=to, before=be, before=most, after=$, before=it's, after=by, after=in, before=not, before=was
+top: based related useful likely supposed gone faster completely optional unable empty alot logged often familiar awesome totally annoying interesting due important confused compatible released definitely perfectly required detected ready coming plugged active busy screwed happy encrypted included necessary recommended interested
+random: assigned eol fully written located funny worried limited ignored difficult confusing slower willing happening wanting stored dead waiting selected failing present obvious
+
+## kind 23  types 44  tokenShare 0.0041  goldShare 0.0001  nickTypes 0  signature: before=sudo, after=l, before=etc, after=d, after=reconfigure, before=ctrl, after=alt, before=with, after=r, before=use
+top: alt grep ctrl ls cat gedit lspci chmod su msg sh ifconfig rm gksudo modprobe passwd cp echo fdisk iptables dd shutdown nano chown fsck ps umount nm killall du iwconfig easyubuntu alien route kdesu locate startx mv lsusb sed
+random: xrandr cfdisk

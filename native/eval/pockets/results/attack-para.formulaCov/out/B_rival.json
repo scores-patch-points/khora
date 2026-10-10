@@ -1,0 +1,536 @@
+{
+ "all_v": {
+  "label": "all 391 real pockets",
+  "kind": "v",
+  "base": {
+   "n": 391,
+   "R2_size_length_only": 0.3207039082279195,
+   "rho_logTokens": 0.5362976112787726,
+   "rho_unitLength": -0.26679263017139915
+  },
+  "top": [
+   {
+    "stat": "phys.voidRescue",
+    "n": 384,
+    "rho": 0.9138725129450271,
+    "partial": 0.9015425534674647,
+    "partialR2": 0.8127789757126365,
+    "R2withCovariates": 0.8757634513487422
+   },
+   {
+    "stat": "comp.sameR",
+    "n": 391,
+    "rho": 0.8926014348557109,
+    "partial": 0.8954835210428335,
+    "partialR2": 0.8018907364592708,
+    "R2withCovariates": 0.8654251515329376
+   },
+   {
+    "stat": "comp.sameL",
+    "n": 391,
+    "rho": 0.8913429375143842,
+    "partial": 0.8940639699169752,
+    "partialR2": 0.799350382303702,
+    "R2withCovariates": 0.8636994988833429
+   },
+   {
+    "stat": "comp.rigidR",
+    "n": 391,
+    "rho": 0.8648792618449447,
+    "partial": 0.8501514206275085,
+    "partialR2": 0.7227574379949708,
+    "R2withCovariates": 0.811670211157105
+   },
+   {
+    "stat": "para.adjNg2",
+    "n": 391,
+    "rho": 0.8278963230257975,
+    "partial": 0.8334798965813219,
+    "partialR2": 0.6946887380052111,
+    "R2withCovariates": 0.7926032529529381
+   },
+   {
+    "stat": "para.adjNg3",
+    "n": 391,
+    "rho": 0.7976970942893707,
+    "partial": 0.8158252698796785,
+    "partialR2": 0.6655708709742503,
+    "R2withCovariates": 0.7728235996780675
+   },
+   {
+    "stat": "comp.rigidL",
+    "n": 391,
+    "rho": 0.8073929943515182,
+    "partial": 0.8046924810261883,
+    "partialR2": 0.6475299890200824,
+    "R2withCovariates": 0.7605684990744797
+   },
+   {
+    "stat": "phys.voidShare",
+    "n": 391,
+    "rho": -0.8396407591335713,
+    "partial": -0.7946379918632654,
+    "partialR2": 0.6314495381124832,
+    "R2withCovariates": 0.7496451116190146
+   },
+   {
+    "stat": "para.adjNg4",
+    "n": 391,
+    "rho": 0.7736006440573026,
+    "partial": 0.7858520443716054,
+    "partialR2": 0.6175634356430316,
+    "R2withCovariates": 0.7402123364815698
+   },
+   {
+    "stat": "freq.hapaxShare",
+    "n": 391,
+    "rho": -0.834792864366352,
+    "partial": -0.779638910255373,
+    "partialR2": 0.6078368303841856,
+    "R2withCovariates": 0.7336050915430258
+   },
+   {
+    "stat": "phys.massExp",
+    "n": 391,
+    "rho": -0.8080082909460574,
+    "partial": -0.7725138127411356,
+    "partialR2": 0.5967775908758464,
+    "R2withCovariates": 0.7260925933670396
+   },
+   {
+    "stat": "para.posPar",
+    "n": 391,
+    "rho": 0.8159386911648752,
+    "partial": 0.7683639050483321,
+    "partialR2": 0.5903830905811223,
+    "R2withCovariates": 0.7217488343079981
+   }
+  ],
+  "nRivalsOver07": 4,
+  "nRivalsScanned": 80
+ },
+ "forward_v": {
+  "chosen": [
+   "comp.sameR",
+   "phys.voidShare",
+   "para.tmplReuse"
+  ],
+  "history": [
+   {
+    "added": "comp.sameR",
+    "R2": 0.8654251515329376
+   },
+   {
+    "added": "phys.voidShare",
+    "R2": 0.919742439802741
+   },
+   {
+    "added": "para.tmplReuse",
+    "R2": 0.9279314619196196
+   }
+  ],
+  "leaveGroupOut": {
+   "bk": {
+    "n": 81,
+    "spearman_pred_vs_obs": 0.9282068654019874
+   },
+   "cd": {
+    "n": 89,
+    "spearman_pred_vs_obs": 0.7907728975144706
+   },
+   "fm": {
+    "n": 61,
+    "spearman_pred_vs_obs": 0.9140137493389741
+   },
+   "ml": {
+    "n": 105,
+    "spearman_pred_vs_obs": 0.8763033285933656
+   },
+   "oc": {
+    "n": 21,
+    "spearman_pred_vs_obs": 0.8792207792207792
+   },
+   "ud": {
+    "n": 34,
+    "spearman_pred_vs_obs": 0.8996867625004239
+   }
+  }
+ },
+ "all_excess": {
+  "label": "all 391 real pockets",
+  "kind": "excess",
+  "base": {
+   "n": 391,
+   "R2_size_length_only": 0.32259988414368734,
+   "rho_logTokens": 0.5193198391978137,
+   "rho_unitLength": -0.3114979974252143
+  },
+  "top": [
+   {
+    "stat": "phys.voidRescue",
+    "n": 384,
+    "rho": 0.9012556273820117,
+    "partial": 0.8886119362077171,
+    "partialR2": 0.7896311731708278,
+    "R2withCovariates": 0.8587398090164038
+   },
+   {
+    "stat": "para.tmplReuse",
+    "n": 391,
+    "rho": 0.8853019896765788,
+    "partial": 0.8294569911583142,
+    "partialR2": 0.6879989001814036,
+    "R2withCovariates": 0.788650418835586
+   },
+   {
+    "stat": "comp.rigidR",
+    "n": 391,
+    "rho": 0.8531961546473281,
+    "partial": 0.8260109620969066,
+    "partialR2": 0.6822941095042573,
+    "R2withCovariates": 0.7847859929699508
+   },
+   {
+    "stat": "comp.rigidL",
+    "n": 391,
+    "rho": 0.7883441947068421,
+    "partial": 0.7849737896525578,
+    "partialR2": 0.616183850441498,
+    "R2withCovariates": 0.740002895821547
+   },
+   {
+    "stat": "phys.attrPMI",
+    "n": 356,
+    "rho": 0.82195007453844,
+    "partial": 0.7801776878198672,
+    "partialR2": 0.6086772245719542,
+    "R2withCovariates": 0.7203608588875889
+   },
+   {
+    "stat": "comp.sameR",
+    "n": 391,
+    "rho": 0.7921101511392264,
+    "partial": 0.7333702758044086,
+    "partialR2": 0.5378319614334344,
+    "R2withCovariates": 0.6869273171299237
+   },
+   {
+    "stat": "comp.sameL",
+    "n": 391,
+    "rho": 0.7885751567727531,
+    "partial": 0.7282626253995109,
+    "partialR2": 0.5303664515537884,
+    "R2withCovariates": 0.6818701798725251
+   },
+   {
+    "stat": "para.adjNg3",
+    "n": 391,
+    "rho": 0.7251195085658128,
+    "partial": 0.6803589047005739,
+    "partialR2": 0.46288823920536465,
+    "R2withCovariates": 0.636160431009926
+   },
+   {
+    "stat": "para.adjNg2",
+    "n": 391,
+    "rho": 0.7284284592241455,
+    "partial": 0.6766409720304021,
+    "partialR2": 0.4578430050302474,
+    "R2withCovariates": 0.6327427887951792
+   },
+   {
+    "stat": "para.adjNg4",
+    "n": 390,
+    "rho": 0.7167639044265676,
+    "partial": 0.675887873699932,
+    "partialR2": 0.4568244178146152,
+    "R2withCovariates": 0.6319700307312233
+   },
+   {
+    "stat": "para.refrain",
+    "n": 391,
+    "rho": 0.7345865726807613,
+    "partial": 0.667888915865471,
+    "partialR2": 0.44607560393595413,
+    "R2withCovariates": 0.6247715499305773
+   },
+   {
+    "stat": "phys.massExp",
+    "n": 391,
+    "rho": -0.7410593038517195,
+    "partial": -0.6598301096845197,
+    "partialR2": 0.4353757736462853,
+    "R2withCovariates": 0.6175234836527128
+   }
+  ],
+  "nRivalsOver07": 1,
+  "nRivalsScanned": 77
+ },
+ "forward_excess": {
+  "chosen": [
+   "para.tmplReuse",
+   "comp.rigidR",
+   "comp.sameR"
+  ],
+  "history": [
+   {
+    "added": "para.tmplReuse",
+    "R2": 0.788650418835586
+   },
+   {
+    "added": "comp.rigidR",
+    "R2": 0.8486950727713635
+   },
+   {
+    "added": "comp.sameR",
+    "R2": 0.8815356942358672
+   }
+  ],
+  "leaveGroupOut": {
+   "bk": {
+    "n": 81,
+    "spearman_pred_vs_obs": 0.9339430894308943
+   },
+   "cd": {
+    "n": 89,
+    "spearman_pred_vs_obs": 0.7130915900578821
+   },
+   "fm": {
+    "n": 61,
+    "spearman_pred_vs_obs": 0.8990481226864093
+   },
+   "ml": {
+    "n": 105,
+    "spearman_pred_vs_obs": 0.8080105950954857
+   },
+   "oc": {
+    "n": 21,
+    "spearman_pred_vs_obs": 0.912987012987013
+   },
+   "ud": {
+    "n": 34,
+    "spearman_pred_vs_obs": 0.8781419538196223
+   }
+  }
+ },
+ "present_v": {
+  "label": "the 242 PRESENT pockets",
+  "kind": "v",
+  "base": {
+   "n": 242,
+   "R2_size_length_only": 0.1790478969403574,
+   "rho_logTokens": 0.18197909815687313,
+   "rho_unitLength": -0.4098425895232132
+  },
+  "top": [
+   {
+    "stat": "comp.sameR",
+    "n": 242,
+    "rho": 0.9058331332944687,
+    "partial": 0.9055473813959419,
+    "partialR2": 0.8200160599530475,
+    "R2withCovariates": 0.8522418059014936
+   },
+   {
+    "stat": "phys.voidRescue",
+    "n": 235,
+    "rho": 0.9157831470128621,
+    "partial": 0.891679194570399,
+    "partialR2": 0.7950917860297155,
+    "R2withCovariates": 0.8452902720224493
+   },
+   {
+    "stat": "comp.sameL",
+    "n": 242,
+    "rho": 0.8851281582326471,
+    "partial": 0.8764146836475057,
+    "partialR2": 0.7681026977129576,
+    "R2withCovariates": 0.8096234219935947
+   },
+   {
+    "stat": "comp.rigidR",
+    "n": 242,
+    "rho": 0.8695788938464658,
+    "partial": 0.8635228950291829,
+    "partialR2": 0.7456717902395812,
+    "R2withCovariates": 0.79120872132979
+   },
+   {
+    "stat": "para.tmplReuse",
+    "n": 242,
+    "rho": 0.8695678864168742,
+    "partial": 0.8509062296328762,
+    "partialR2": 0.724041411628037,
+    "R2withCovariates": 0.7734512165186668
+   },
+   {
+    "stat": "phys.massExp",
+    "n": 242,
+    "rho": -0.847119503852812,
+    "partial": -0.8314867025841388,
+    "partialR2": 0.6913701365742441,
+    "R2withCovariates": 0.7466296645536152
+   },
+   {
+    "stat": "para.adjNg2",
+    "n": 242,
+    "rho": 0.8293552059426572,
+    "partial": 0.8232493882785631,
+    "partialR2": 0.6777395553010284,
+    "R2withCovariates": 0.7354396101914435
+   },
+   {
+    "stat": "para.adjNg3",
+    "n": 242,
+    "rho": 0.8248658681199861,
+    "partial": 0.8228006119392411,
+    "partialR2": 0.6770008470075897,
+    "R2withCovariates": 0.7348331660643974
+   },
+   {
+    "stat": "para.adjNg4",
+    "n": 242,
+    "rho": 0.8083371136100516,
+    "partial": 0.7969906550705825,
+    "partialR2": 0.6351941042698362,
+    "R2withCovariates": 0.7005118326917654
+   },
+   {
+    "stat": "phys.voidShare",
+    "n": 242,
+    "rho": -0.829876788760229,
+    "partial": -0.7931677733717117,
+    "partialR2": 0.6291151167154391,
+    "R2withCovariates": 0.6955212750745094
+   },
+   {
+    "stat": "comp.rigidL",
+    "n": 242,
+    "rho": 0.7825583891219501,
+    "partial": 0.7826687643340632,
+    "partialR2": 0.6125703946642094,
+    "R2withCovariates": 0.6819388507120153
+   },
+   {
+    "stat": "freq.hapaxShare",
+    "n": 242,
+    "rho": -0.8073801428510343,
+    "partial": -0.759602994574526,
+    "partialR2": 0.5769967093665873,
+    "R2withCovariates": 0.6527345589533505
+   }
+  ],
+  "nRivalsOver07": 5,
+  "nRivalsScanned": 80
+ },
+ "present_excess": {
+  "label": "the 242 PRESENT pockets",
+  "kind": "excess",
+  "base": {
+   "n": 242,
+   "R2_size_length_only": 0.24831295415900834,
+   "rho_logTokens": 0.1781497819364272,
+   "rho_unitLength": -0.4909233158950247
+  },
+  "top": [
+   {
+    "stat": "phys.voidRescue",
+    "n": 235,
+    "rho": 0.8899368452199321,
+    "partial": 0.8712310654653337,
+    "partialR2": 0.7590435694318606,
+    "R2withCovariates": 0.8125444048238063
+   },
+   {
+    "stat": "para.tmplReuse",
+    "n": 242,
+    "rho": 0.8617661590124811,
+    "partial": 0.8309878764205646,
+    "partialR2": 0.6905408507579596,
+    "R2withCovariates": 0.767383566297784
+   },
+   {
+    "stat": "comp.rigidR",
+    "n": 242,
+    "rho": 0.8275863966798206,
+    "partial": 0.7991992634104925,
+    "partialR2": 0.6387194626358738,
+    "R2withCovariates": 0.728430100148914
+   },
+   {
+    "stat": "phys.attrPMI",
+    "n": 242,
+    "rho": 0.7906082070548309,
+    "partial": 0.7354928778032283,
+    "partialR2": 0.5409497732992744,
+    "R2withCovariates": 0.6549378911986942
+   },
+   {
+    "stat": "comp.rigidL",
+    "n": 242,
+    "rho": 0.7317489408524238,
+    "partial": 0.7260439230592366,
+    "partialR2": 0.5271397782112467,
+    "R2withCovariates": 0.6445570967878957
+   },
+   {
+    "stat": "para.refrain",
+    "n": 242,
+    "rho": 0.7943748231342735,
+    "partial": 0.7189310294559318,
+    "partialR2": 0.5168618251145659,
+    "R2withCovariates": 0.6368312925873597
+   },
+   {
+    "stat": "comp.sameL",
+    "n": 242,
+    "rho": 0.7816422322897867,
+    "partial": 0.713203767227543,
+    "partialR2": 0.5086596135875593,
+    "R2withCovariates": 0.6306657964352611
+   },
+   {
+    "stat": "comp.sameR",
+    "n": 242,
+    "rho": 0.781913184402811,
+    "partial": 0.7097569571155494,
+    "partialR2": 0.5037549381739239,
+    "R2withCovariates": 0.6269790154627766
+   },
+   {
+    "stat": "para.dupShare",
+    "n": 242,
+    "rho": 0.7801151210244588,
+    "partial": 0.6936668614280893,
+    "partialR2": 0.48117371464349606,
+    "R2withCovariates": 0.6100050022557142
+   },
+   {
+    "stat": "phys.massExp",
+    "n": 242,
+    "rho": -0.7640108702600844,
+    "partial": -0.6701427597711666,
+    "partialR2": 0.4490913184737154,
+    "R2withCovariates": 0.5858890806553516
+   },
+   {
+    "stat": "para.adjNg4",
+    "n": 241,
+    "rho": 0.7600819587805631,
+    "partial": 0.6694931856327773,
+    "partialR2": 0.44822112560872435,
+    "R2withCovariates": 0.5825476773389784
+   },
+   {
+    "stat": "para.adjNg3",
+    "n": 242,
+    "rho": 0.7510348042222806,
+    "partial": 0.6511347709739661,
+    "partialR2": 0.4239764899713193,
+    "R2withCovariates": 0.5670105894115821
+   }
+  ],
+  "nRivalsOver07": 1,
+  "nRivalsScanned": 77
+ }
+}

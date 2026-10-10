@@ -1,0 +1,143 @@
+#!/usr/bin/env python3
+"""Exercise search_server.do_directed_search's non-Playwright guard paths
+against a fake, credential-free account registry: killswitch (global +
+per-account), out-of-hours, cooldown, and lease mutual exclusion. None of
+these touch the network or launch a browser -- they all return before
+async_playwright() is ever entered, so this is safe to run anywhere, anytime,
+without an ALPHA login.
+
+Run with the repo's own interpreter (needs aiohttp/playwright/cryptography
+installed, same as search_server.py itself):
+
+    python3 test_search_server.py
+"""
+import asyncio
+import datetime
+import json
+import os
+import sys
+import tempfile
+import zoneinfo
+
+REPO = os.path.dirname(os.path.abspath(__file__))
+SCRATCH = tempfile.mkdtemp(prefix="caselink-ondemand-test-")
+
+os.environ["CASELINK_ACCOUNTS"] = os.path.join(SCRATCH, ".accounts.json")
+os.environ["CASELINK_ACCOUNT_STATE"] = os.path.join(SCRATCH, "account_state.json")
+os.environ["CASELINK_ACCOUNT_LEASES"] = os.path.join(SCRATCH, "leases")
+os.environ["CASELINK_KILLSWITCH"] = os.path.join(SCRATCH, "KILLSWITCH")
+# Read once at caselink_accounts import time, so it must be set before that
+# import happens below.
+os.environ["CASELINK_KILLSWITCH_DIR"] = SCRATCH
+
+os.makedirs(os.environ["CASELINK_ACCOUNT_LEASES"], exist_ok=True)
+with open(os.environ["CASELINK_ACCOUNT_STATE"], "w") as f:
+    json.dump({}, f)
+
+sys.path.insert(0, REPO)
+import search_server as srv
+import caselink_accounts as accounts_mod
+
+
+def reset_state():
+    with open(os.environ["CASELINK_ACCOUNT_STATE"], "w") as f:
+        json.dump({}, f)
+    for name in os.listdir(os.environ["CASELINK_ACCOUNT_LEASES"]):
+        os.unlink(os.path.join(os.environ["CASELINK_ACCOUNT_LEASES"], name))
+    if os.path.exists(os.environ["CASELINK_KILLSWITCH"]):
+        os.unlink(os.environ["CASELINK_KILLSWITCH"])
+    per_acct_ks = os.path.join(SCRATCH, "KILLSWITCH.ALPHA")
+    if os.path.exists(per_acct_ks):
+        os.unlink(per_acct_ks)
+
+
+def write_accounts(hours_ct=None):
+    acct = {"alias": "ALPHA", "user": "test_user", "pass": "test_pass",
+            "roles": ["ondemand"], "cooldown_minutes": 5, "shared": True}
+    if hours_ct:
+        acct["hours_ct"] = hours_ct
+    with open(os.environ["CASELINK_ACCOUNTS"], "w") as f:
+        json.dump({"accounts": [acct]}, f)
+
+
+async def main():
+    checks = []
+
+    def check(name, cond, detail=""):
+        status = "PASS" if cond else "FAIL"
+        checks.append(status)
+        print(f"[{status}] {name}" + (f" -- {detail}" if detail else ""))
+
+    # Global KILLSWITCH file present -> unavailable, no lease taken.
+    reset_state()
+    write_accounts()
+    open(os.environ["CASELINK_KILLSWITCH"], "w").close()
+    result = await srv.do_directed_search("26GT0001")
+    check("global KILLSWITCH blocks the request",
+          result == {"available": False, "reason": "KILLSWITCH engaged"}, result)
+    os.unlink(os.environ["CASELINK_KILLSWITCH"])
+
+    # Per-account KILLSWITCH.<ALIAS> -> unavailable via acquire_account.
+    reset_state()
+    write_accounts()
+    ks_path = os.path.join(SCRATCH, "KILLSWITCH.ALPHA")
+    open(ks_path, "w").write("testing per-account switch")
+    result = await srv.do_directed_search("26GT0001")
+    check("per-account KILLSWITCH.ALPHA blocks leasing",
+          result.get("available") is False and "no allowed account" in result.get("reason", ""),
+          result)
+    os.unlink(ks_path)
+
+    # Out-of-hours account -> unavailable.
+    reset_state()
+    now_ct = datetime.datetime.now(zoneinfo.ZoneInfo("America/Chicago"))
+    blocked_start = (now_ct.hour + 2) % 24
+    blocked_end = (now_ct.hour + 3) % 24
+    write_accounts(hours_ct=[blocked_start, blocked_end])
+    result = await srv.do_directed_search("26GT0001")
+    check("out-of-hours account is skipped",
+          result.get("available") is False and "no allowed account" in result.get("reason", ""),
+          result)
+
+    # In-hours + no cooldown + no lease held -> account WOULD be leased.
+    # Verified via acquire_account directly, not do_directed_search, since
+    # that would try to launch a real browser and log in to the live site.
+    reset_state()
+    write_accounts()  # no hours_ct => always allowed
+    accts = accounts_mod.load_accounts()
+    account, lease = accounts_mod.acquire_account(srv.ONDEMAND_ROLE, accts)
+    check("in-hours, uncontended account acquires a lease",
+          account is not None and account["alias"] == "ALPHA")
+
+    # While that lease is held, a second acquire attempt must be refused --
+    # the mutual-exclusion property the lock/lease combo exists to guarantee
+    # (no two processes ever authenticate as one account).
+    account2, lease2 = accounts_mod.acquire_account(srv.ONDEMAND_ROLE, accts)
+    check("a concurrently-held lease is not double-acquired",
+          account2 is None and lease2 is None)
+    lease.release()
+
+    # After release, the account is leaseable again.
+    account3, lease3 = accounts_mod.acquire_account(srv.ONDEMAND_ROLE, accts)
+    check("the account is leaseable again after release", account3 is not None)
+    if lease3:
+        lease3.release()
+
+    # Cooldown set (as start_cooldown does on a real Displaced failure) makes
+    # the account unleaseable until it expires.
+    reset_state()
+    write_accounts()
+    accounts_mod.start_cooldown("ALPHA", 5, "simulated Displaced failure")
+    result = await srv.do_directed_search("26GT0001")
+    check("an account in cooldown is skipped by do_directed_search",
+          result.get("available") is False and "no allowed account" in result.get("reason", ""),
+          result)
+
+    reset_state()
+
+    failed = [c for c in checks if c == "FAIL"]
+    print(f"\n{len(checks) - len(failed)}/{len(checks)} checks passed")
+    sys.exit(1 if failed else 0)
+
+
+asyncio.run(main())

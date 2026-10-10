@@ -1,0 +1,393 @@
+{
+ "n": 245,
+ "nPos": 109,
+ "leaveOnePocketOut": {
+  "eta2Full": 0.5564944340950481,
+  "min": 0.5542148892362746,
+  "max": 0.5688509430129605
+ },
+ "leaveOneRegisterOut": [
+  {
+   "dropped": "novel",
+   "nDropped": 18,
+   "n": 227,
+   "eta2": 0.5077973439252618,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "code",
+   "nDropped": 37,
+   "n": 208,
+   "eta2": 0.5367893612001465,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "dialect",
+   "nDropped": 8,
+   "n": 237,
+   "eta2": 0.5369941691645714,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "chat",
+   "nDropped": 11,
+   "n": 234,
+   "eta2": 0.5391307386331644,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "memoir",
+   "nDropped": 6,
+   "n": 239,
+   "eta2": 0.5421532198379264,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "poetry",
+   "nDropped": 9,
+   "n": 236,
+   "eta2": 0.5425115010996151,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "drama",
+   "nDropped": 8,
+   "n": 237,
+   "eta2": 0.5441622640226909,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "diagram",
+   "nDropped": 5,
+   "n": 240,
+   "eta2": 0.5446583357898928,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "history",
+   "nDropped": 7,
+   "n": 238,
+   "eta2": 0.5457874337221452,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "reportage",
+   "nDropped": 3,
+   "n": 242,
+   "eta2": 0.5495267686776699,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "sms",
+   "nDropped": 2,
+   "n": 243,
+   "eta2": 0.5535494382568713,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "essay",
+   "nDropped": 1,
+   "n": 244,
+   "eta2": 0.5542148892362746,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "wordplay",
+   "nDropped": 1,
+   "n": 244,
+   "eta2": 0.5542148892362746,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "speech",
+   "nDropped": 1,
+   "n": 244,
+   "eta2": 0.5542148892362746,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "docs",
+   "nDropped": 1,
+   "n": 244,
+   "eta2": 0.5550328435679498,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "encyclopedia",
+   "nDropped": 1,
+   "n": 244,
+   "eta2": 0.5550328435679499,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "notation",
+   "nDropped": 13,
+   "n": 232,
+   "eta2": 0.5558133797324984,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "translation",
+   "nDropped": 6,
+   "n": 239,
+   "eta2": 0.5573824052817926,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "treebank",
+   "nDropped": 17,
+   "n": 228,
+   "eta2": 0.5585091579144232,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "nomenclature",
+   "nDropped": 4,
+   "n": 241,
+   "eta2": 0.5606962054042457,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "config",
+   "nDropped": 2,
+   "n": 243,
+   "eta2": 0.561086632042514,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "lexicon",
+   "nDropped": 2,
+   "n": 243,
+   "eta2": 0.561086632042514,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "markup",
+   "nDropped": 3,
+   "n": 242,
+   "eta2": 0.5624178572823834,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "academic",
+   "nDropped": 7,
+   "n": 238,
+   "eta2": 0.5661105844982158,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "treatise",
+   "nDropped": 15,
+   "n": 230,
+   "eta2": 0.5750357288847676,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "children",
+   "nDropped": 10,
+   "n": 235,
+   "eta2": 0.5776567749190515,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "book",
+   "nDropped": 9,
+   "n": 236,
+   "eta2": 0.5777121885980686,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "legal",
+   "nDropped": 14,
+   "n": 231,
+   "eta2": 0.589893865299546,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "scripture",
+   "nDropped": 24,
+   "n": 221,
+   "eta2": 0.6016889444348655,
+   "p": 0.000999000999000999
+  }
+ ],
+ "leaveOneGroupOut": [
+  {
+   "dropped": "bk",
+   "nDropped": 47,
+   "eta2": 0.40938551302413373,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "cd",
+   "nDropped": 66,
+   "eta2": 0.542992972042618,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "fm",
+   "nDropped": 39,
+   "eta2": 0.6484866351594306,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "ml",
+   "nDropped": 64,
+   "eta2": 0.6303063502015275,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "oc",
+   "nDropped": 12,
+   "eta2": 0.5373994610797811,
+   "p": 0.000999000999000999
+  },
+  {
+   "dropped": "ud",
+   "nDropped": 17,
+   "eta2": 0.5585091579144232,
+   "p": 0.000999000999000999
+  }
+ ],
+ "looPrediction": [
+  {
+   "label": "global majority",
+   "acc": 0.5551020408163265,
+   "coveredByFirstKey": 245,
+   "accWhereCovered": 0.5551020408163265
+  },
+  {
+   "label": "register -> group -> global",
+   "acc": 0.8285714285714286,
+   "coveredByFirstKey": 233,
+   "accWhereCovered": 0.8240343347639485
+  },
+  {
+   "label": "group -> global",
+   "acc": 0.7224489795918367,
+   "coveredByFirstKey": 245,
+   "accWhereCovered": 0.7224489795918367
+  },
+  {
+   "label": "English/non-English -> global",
+   "acc": 0.7428571428571429,
+   "coveredByFirstKey": 245,
+   "accWhereCovered": 0.7428571428571429
+  },
+  {
+   "label": "register x English -> register -> global",
+   "acc": 0.8653061224489796,
+   "coveredByFirstKey": 230,
+   "accWhereCovered": 0.8869565217391304
+  },
+  {
+   "label": "group x register -> register -> group -> global",
+   "acc": 0.8,
+   "coveredByFirstKey": 224,
+   "accWhereCovered": 0.8035714285714286
+  },
+  {
+   "label": "grain x script -> global",
+   "acc": 0.6326530612244898,
+   "coveredByFirstKey": 243,
+   "accWhereCovered": 0.6296296296296297
+  },
+  {
+   "label": "nearest-9 by mean unit length",
+   "acc": 0.636734693877551
+  },
+  {
+   "label": "nearest-25 by mean unit length",
+   "acc": 0.6653061224489796
+  }
+ ],
+ "englishVsOtherWithinRegister": {
+  "mhOddsRatioPositiveSign": 6.998730158730159,
+  "pocketsInInformativeStrata": 117,
+  "excessPositiveEnglish": 7.498412698412698,
+  "permP": 0.0004997501249375312,
+  "perStratum": [
+   {
+    "register": "children",
+    "enPos": 5,
+    "enN": 5,
+    "otherPos": 1,
+    "otherN": 5
+   },
+   {
+    "register": "novel",
+    "enPos": 17,
+    "enN": 17,
+    "otherPos": 1,
+    "otherN": 1
+   },
+   {
+    "register": "drama",
+    "enPos": 0,
+    "enN": 1,
+    "otherPos": 0,
+    "otherN": 7
+   },
+   {
+    "register": "treatise",
+    "enPos": 3,
+    "enN": 3,
+    "otherPos": 8,
+    "otherN": 12
+   },
+   {
+    "register": "nomenclature",
+    "enPos": 0,
+    "enN": 1,
+    "otherPos": 3,
+    "otherN": 3
+   },
+   {
+    "register": "legal",
+    "enPos": 2,
+    "enN": 2,
+    "otherPos": 4,
+    "otherN": 12
+   },
+   {
+    "register": "scripture",
+    "enPos": 6,
+    "enN": 6,
+    "otherPos": 1,
+    "otherN": 18
+   },
+   {
+    "register": "book",
+    "enPos": 1,
+    "enN": 1,
+    "otherPos": 3,
+    "otherN": 8
+   },
+   {
+    "register": "lexicon",
+    "enPos": 0,
+    "enN": 1,
+    "otherPos": 1,
+    "otherN": 1
+   },
+   {
+    "register": "chat",
+    "enPos": 0,
+    "enN": 9,
+    "otherPos": 0,
+    "otherN": 2
+   },
+   {
+    "register": "sms",
+    "enPos": 0,
+    "enN": 1,
+    "otherPos": 0,
+    "otherN": 1
+   }
+  ]
+ },
+ "presenceRegister": {
+  "eta2": 0.14360943151354752,
+  "p": 0.004997501249375313
+ }
+}

@@ -1,0 +1,355 @@
+{
+ "K6_same": 50,
+ "K6_n": 50,
+ "K1_zero": 1596,
+ "K1_n": 1596,
+ "docs": [
+  [
+   "cat.test",
+   31
+  ],
+  [
+   "eng.test",
+   52
+  ],
+  [
+   "est.test",
+   108
+  ],
+  [
+   "eus.test",
+   30
+  ],
+  [
+   "fas.test",
+   36
+  ],
+  [
+   "fin.test",
+   58
+  ],
+  [
+   "hin.test",
+   120
+  ],
+  [
+   "hrv.test",
+   30
+  ],
+  [
+   "ind.test",
+   13
+  ],
+  [
+   "lav.test",
+   36
+  ],
+  [
+   "nob.test",
+   64
+  ],
+  [
+   "slk.test",
+   38
+  ],
+  [
+   "spa.test",
+   58
+  ],
+  [
+   "srp.test",
+   19
+  ],
+  [
+   "tur.test",
+   40
+  ],
+  [
+   "urd.test",
+   41
+  ],
+  [
+   "vie.test",
+   12
+  ],
+  [
+   "wol.test",
+   12
+  ]
+ ],
+ "design": {
+  "cat.test|A:c2": {
+   "got": 16,
+   "nPos": 38,
+   "dropped": 22
+  },
+  "cat.test|A:c3": {
+   "got": 6,
+   "nPos": 22,
+   "dropped": 16
+  },
+  "cat.test|A:c4_6": {
+   "got": 9,
+   "nPos": 29,
+   "dropped": 20
+  },
+  "eng.test|A:c2": {
+   "got": 29,
+   "nPos": 36,
+   "dropped": 7
+  },
+  "eng.test|A:c3": {
+   "got": 11,
+   "nPos": 21,
+   "dropped": 10
+  },
+  "eng.test|A:c4_6": {
+   "got": 12,
+   "nPos": 25,
+   "dropped": 13
+  },
+  "est.test|A:c2": {
+   "got": 40,
+   "nPos": 43,
+   "dropped": 0
+  },
+  "est.test|A:c3": {
+   "got": 33,
+   "nPos": 40,
+   "dropped": 7
+  },
+  "est.test|A:c4_6": {
+   "got": 35,
+   "nPos": 53,
+   "dropped": 14
+  },
+  "eus.test|A:c2": {
+   "got": 24,
+   "nPos": 26,
+   "dropped": 1
+  },
+  "eus.test|A:c3": {
+   "got": 4,
+   "nPos": 4,
+   "dropped": 0
+  },
+  "eus.test|A:c4_6": {
+   "got": 2,
+   "nPos": 2,
+   "dropped": 0
+  },
+  "fas.test|A:c2": {
+   "got": 19,
+   "nPos": 19,
+   "dropped": 0
+  },
+  "fas.test|A:c3": {
+   "got": 7,
+   "nPos": 7,
+   "dropped": 0
+  },
+  "fas.test|A:c4_6": {
+   "got": 10,
+   "nPos": 12,
+   "dropped": 2
+  },
+  "fin.test|A:c2": {
+   "got": 18,
+   "nPos": 19,
+   "dropped": 1
+  },
+  "fin.test|A:c3": {
+   "got": 20,
+   "nPos": 26,
+   "dropped": 6
+  },
+  "fin.test|A:c4_6": {
+   "got": 20,
+   "nPos": 30,
+   "dropped": 10
+  },
+  "hin.test|A:c2": {
+   "got": 40,
+   "nPos": 93,
+   "dropped": 0
+  },
+  "hin.test|A:c3": {
+   "got": 40,
+   "nPos": 73,
+   "dropped": 1
+  },
+  "hin.test|A:c4_6": {
+   "got": 40,
+   "nPos": 81,
+   "dropped": 10
+  },
+  "hrv.test|A:c2": {
+   "got": 14,
+   "nPos": 14,
+   "dropped": 0
+  },
+  "hrv.test|A:c3": {
+   "got": 8,
+   "nPos": 8,
+   "dropped": 0
+  },
+  "hrv.test|A:c4_6": {
+   "got": 8,
+   "nPos": 9,
+   "dropped": 1
+  },
+  "ind.test|A:c2": {
+   "got": 3,
+   "nPos": 5,
+   "dropped": 2
+  },
+  "ind.test|A:c3": {
+   "got": 5,
+   "nPos": 6,
+   "dropped": 1
+  },
+  "ind.test|A:c4_6": {
+   "got": 5,
+   "nPos": 6,
+   "dropped": 1
+  },
+  "lav.test|A:c2": {
+   "got": 18,
+   "nPos": 18,
+   "dropped": 0
+  },
+  "lav.test|A:c3": {
+   "got": 9,
+   "nPos": 11,
+   "dropped": 2
+  },
+  "lav.test|A:c4_6": {
+   "got": 9,
+   "nPos": 13,
+   "dropped": 4
+  },
+  "nob.test|A:c2": {
+   "got": 21,
+   "nPos": 24,
+   "dropped": 3
+  },
+  "nob.test|A:c3": {
+   "got": 20,
+   "nPos": 27,
+   "dropped": 7
+  },
+  "nob.test|A:c4_6": {
+   "got": 23,
+   "nPos": 38,
+   "dropped": 15
+  },
+  "slk.test|A:c2": {
+   "got": 17,
+   "nPos": 21,
+   "dropped": 4
+  },
+  "slk.test|A:c3": {
+   "got": 12,
+   "nPos": 16,
+   "dropped": 4
+  },
+  "slk.test|A:c4_6": {
+   "got": 9,
+   "nPos": 15,
+   "dropped": 6
+  },
+  "spa.test|A:c2": {
+   "got": 21,
+   "nPos": 32,
+   "dropped": 11
+  },
+  "spa.test|A:c3": {
+   "got": 20,
+   "nPos": 39,
+   "dropped": 19
+  },
+  "spa.test|A:c4_6": {
+   "got": 17,
+   "nPos": 30,
+   "dropped": 13
+  },
+  "srp.test|A:c2": {
+   "got": 7,
+   "nPos": 7,
+   "dropped": 0
+  },
+  "srp.test|A:c3": {
+   "got": 7,
+   "nPos": 7,
+   "dropped": 0
+  },
+  "srp.test|A:c4_6": {
+   "got": 5,
+   "nPos": 6,
+   "dropped": 1
+  },
+  "tur.test|A:c2": {
+   "got": 11,
+   "nPos": 12,
+   "dropped": 1
+  },
+  "tur.test|A:c3": {
+   "got": 12,
+   "nPos": 14,
+   "dropped": 2
+  },
+  "tur.test|A:c4_6": {
+   "got": 17,
+   "nPos": 27,
+   "dropped": 10
+  },
+  "urd.test|A:c2": {
+   "got": 18,
+   "nPos": 21,
+   "dropped": 3
+  },
+  "urd.test|A:c3": {
+   "got": 7,
+   "nPos": 14,
+   "dropped": 7
+  },
+  "urd.test|A:c4_6": {
+   "got": 16,
+   "nPos": 21,
+   "dropped": 5
+  },
+  "vie.test|A:c2": {
+   "got": 4,
+   "nPos": 4,
+   "dropped": 0
+  },
+  "vie.test|A:c3": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "vie.test|A:c4_6": {
+   "got": 8,
+   "nPos": 8,
+   "dropped": 0
+  },
+  "wol.test|A:c2": {
+   "got": 4,
+   "nPos": 5,
+   "dropped": 1
+  },
+  "wol.test|A:c3": {
+   "got": 5,
+   "nPos": 6,
+   "dropped": 1
+  },
+  "wol.test|A:c4_6": {
+   "got": 3,
+   "nPos": 5,
+   "dropped": 2
+  }
+ },
+ "seconds": 51.9,
+ "headerSha256": "1bb2872ed0b491d0daaa6f6f9076359939d77c192c56199263befce7984a5f9a",
+ "daysSha256": "97ff0d9c40899ad31db4a1960e90cbd1496553d59b5b7bf57c2961d3cd0902f5"
+}

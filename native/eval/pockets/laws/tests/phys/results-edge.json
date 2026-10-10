@@ -1,0 +1,123 @@
+{
+ "cases": {
+  "empty": {
+   "tokens": 0,
+   "values": {
+    "massAdd": null,
+    "massExp": null,
+    "voidShare": null,
+    "voidRescue": null,
+    "attrPMI": null,
+    "attrDecay": null,
+    "gravAlpha": null,
+    "gravBeta": null,
+    "gravAlphaSd": null,
+    "affect": null,
+    "affectAsym": null
+   },
+   "allFiniteOrNull": true
+  },
+  "oneUnit": {
+   "tokens": 50,
+   "values": {
+    "massAdd": null,
+    "massExp": null,
+    "voidShare": null,
+    "voidRescue": null,
+    "attrPMI": null,
+    "attrDecay": null,
+    "gravAlpha": null,
+    "gravBeta": null,
+    "gravAlphaSd": null,
+    "affect": null,
+    "affectAsym": null
+   },
+   "allFiniteOrNull": true
+  },
+  "hundred": {
+   "tokens": 100,
+   "values": {
+    "massAdd": null,
+    "massExp": null,
+    "voidShare": null,
+    "voidRescue": null,
+    "attrPMI": null,
+    "attrDecay": null,
+    "gravAlpha": null,
+    "gravBeta": null,
+    "gravAlphaSd": null,
+    "affect": null,
+    "affectAsym": null
+   },
+   "allFiniteOrNull": true
+  },
+  "oneToken": {
+   "tokens": 20000,
+   "values": {
+    "massAdd": null,
+    "massExp": null,
+    "voidShare": 0,
+    "voidRescue": null,
+    "attrPMI": null,
+    "attrDecay": null,
+    "gravAlpha": null,
+    "gravBeta": null,
+    "gravAlphaSd": null,
+    "affect": null,
+    "affectAsym": null
+   },
+   "allFiniteOrNull": true
+  },
+  "twoTypes": {
+   "tokens": 20000,
+   "values": {
+    "massAdd": null,
+    "massExp": null,
+    "voidShare": 0,
+    "voidRescue": null,
+    "attrPMI": null,
+    "attrDecay": null,
+    "gravAlpha": null,
+    "gravBeta": null,
+    "gravAlphaSd": null,
+    "affect": null,
+    "affectAsym": null
+   },
+   "allFiniteOrNull": true
+  },
+  "tenTypes": {
+   "tokens": 24000,
+   "values": {
+    "massAdd": 0.5,
+    "massExp": -2.40546162764371e-11,
+    "voidShare": 0,
+    "voidRescue": null,
+    "attrPMI": 1.602047807990708,
+    "attrDecay": 0.06549113611853531,
+    "gravAlpha": null,
+    "gravBeta": null,
+    "gravAlphaSd": null,
+    "affect": 0.41578264800406894,
+    "affectAsym": -0.1092630393483536
+   },
+   "allFiniteOrNull": true
+  },
+  "singleDoc": {
+   "tokens": 24000,
+   "values": {
+    "massAdd": 0.8937395376336871,
+    "massExp": 0.8795850409256294,
+    "voidShare": 0.013881328252585735,
+    "voidRescue": null,
+    "attrPMI": 2.2353616912885417,
+    "attrDecay": -0.08381499429578264,
+    "gravAlpha": null,
+    "gravBeta": null,
+    "gravAlphaSd": null,
+    "affect": 0.03337397570614524,
+    "affectAsym": -0.01556906375783435
+   },
+   "allFiniteOrNull": true
+  }
+ }
+}

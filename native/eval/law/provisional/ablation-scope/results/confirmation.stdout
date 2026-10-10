@@ -1,0 +1,19 @@
+{
+ "runValid": true,
+ "verdicts": {
+  "slot.irc.A:S_ENTRY:c4_6..c7_15": "VOID",
+  "slot.irc.B:EXTENT:c4_6..c4_6": "VOID",
+  "slot.irc.B:EXTENT:c16p..c16p": "VOID",
+  "slot.irc.B:S_ENTRY:c4_6..c16p(E1)": "VOID",
+  "company.irc.A:c.surprisalDestroyed:c2+c3+c4_6+c7_15+c16p": "VOID",
+  "company.irc.A:c.dSelf:c2+c3+c4_6": "VOID",
+  "company.irc.B:c.dSelf:c2+c3+c4_6+c7_15+c16p": "VOID",
+  "company.irc.B:span.mentionShift:c4_6+c7_15+c16p": "VOID",
+  "company.wp.A:atm.activation.self:c2+c3+c4_6+c7_15": "PASS",
+  "company.wp.A:c.dRight:c3+c4_6+c7_15": "FAIL"
+ },
+ "finalRules": [
+  "wp.A:atm.activation.self"
+ ],
+ "headerSha256": "60766acda759d3f5d1d0442beca971f818fc5e479106f552a54ed97f791ba121"
+}

@@ -1,0 +1,171 @@
+{
+ "note": "PRESENT = |z|>=4 in both halves with the same sign (protocol rule); z from 10 within-unit null draws as run-atlas.mjs; planted-test.mjs",
+ "cells": {
+  "pl-null": {
+   "rareSlope": "0",
+   "rareCurve": "0",
+   "fnBefore": "0",
+   "depLen": "0",
+   "initDev": "0",
+   "finalDev": "0",
+   "surprGrow": "0",
+   "entSlope": "0",
+   "entCurv": "0",
+   "branch": "0",
+   "asym": "0"
+  },
+  "pl-burst": {
+   "rareSlope": "0",
+   "rareCurve": "0",
+   "fnBefore": "0",
+   "depLen": "-",
+   "initDev": "0",
+   "finalDev": "0",
+   "surprGrow": "0",
+   "entSlope": "0",
+   "entCurv": "0",
+   "branch": "0",
+   "asym": "0"
+  },
+  "pl-markov": {
+   "rareSlope": "0",
+   "rareCurve": "0",
+   "fnBefore": "-",
+   "depLen": "+",
+   "initDev": "0",
+   "finalDev": "0",
+   "surprGrow": "0",
+   "entSlope": "0",
+   "entCurv": "0",
+   "branch": "+",
+   "asym": "+"
+  },
+  "pl-frames": {
+   "rareSlope": "+",
+   "rareCurve": "+",
+   "fnBefore": "+",
+   "depLen": "+",
+   "initDev": "+",
+   "finalDev": "+",
+   "surprGrow": "-",
+   "entSlope": "+",
+   "entCurv": "-",
+   "branch": "-",
+   "asym": "+"
+  },
+  "pl-parallel": {
+   "rareSlope": "0",
+   "rareCurve": "0",
+   "fnBefore": "0",
+   "depLen": "0",
+   "initDev": "0",
+   "finalDev": "0",
+   "surprGrow": "0",
+   "entSlope": "0",
+   "entCurv": "0",
+   "branch": "0",
+   "asym": "0"
+  },
+  "pl-length": {
+   "rareSlope": "0",
+   "rareCurve": "0",
+   "fnBefore": "0",
+   "depLen": "0",
+   "initDev": "0",
+   "finalDev": "0",
+   "surprGrow": "0",
+   "entSlope": "0",
+   "entCurv": "0",
+   "branch": "0",
+   "asym": "0"
+  },
+  "pl-mix": {
+   "rareSlope": "+",
+   "rareCurve": "+",
+   "fnBefore": "-",
+   "depLen": "0",
+   "initDev": "+",
+   "finalDev": "+",
+   "surprGrow": "-",
+   "entSlope": "0",
+   "entCurv": "-",
+   "branch": "0",
+   "asym": "+"
+  },
+  "pl-null2": {
+   "rareSlope": "0",
+   "rareCurve": "0",
+   "fnBefore": "0",
+   "depLen": "0",
+   "initDev": "0",
+   "finalDev": "0",
+   "surprGrow": "0",
+   "entSlope": "0",
+   "entCurv": "0",
+   "branch": "0",
+   "asym": "0"
+  }
+ },
+ "iidWorlds": {
+  "cells": 44,
+  "cellsAbsZge4": 0,
+  "statisticsPresentInBothHalves": 0
+ },
+ "expected": {
+  "pl-markov": {
+   "asym": "+",
+   "fnBefore": "-",
+   "depLen": "+",
+   "branch": "+"
+  },
+  "pl-frames": {
+   "finalDev": "+",
+   "rareCurve": "+",
+   "branch": "-",
+   "surprGrow": "-",
+   "entSlope": "+",
+   "initDev": "+"
+  },
+  "pl-burst": {
+   "depLen": "-"
+  },
+  "pl-parallel": {},
+  "pl-length": {}
+ },
+ "verdict": {
+  "pl-markov": {
+   "asym": true,
+   "fnBefore": true,
+   "depLen": true,
+   "branch": true,
+   "_firedButNotListed": []
+  },
+  "pl-frames": {
+   "finalDev": true,
+   "rareCurve": true,
+   "branch": true,
+   "surprGrow": true,
+   "entSlope": true,
+   "initDev": true,
+   "_firedButNotListed": [
+    "rareSlope",
+    "fnBefore",
+    "depLen",
+    "entCurv",
+    "asym"
+   ]
+  },
+  "pl-burst": {
+   "depLen": true,
+   "_firedButNotListed": []
+  },
+  "pl-parallel": {
+   "_firedButNotListed": []
+  },
+  "pl-length": {
+   "_firedButNotListed": []
+  }
+ },
+ "expectationsWrittenAfterFirstPlantedRun": true,
+ "honestyNote": "The per-statistic expectations in \"expected\" were derived from the planted mechanisms in results/planted-truth.json AFTER the first planted run of this family (explanations, not pre-registered); the pre-existing mustNotFire entries of planted-truth.json (rank-bin asymmetry silent in pl-burst, pl-parallel, pl-length; no within-unit effect in pl-parallel) are satisfied by asym and by every other statistic."
+}

@@ -1,0 +1,35 @@
+{
+ "K1b": {
+  "shuffledLeaves": 1,
+  "pass": true,
+  "nodes": [
+   {
+    "path": "r",
+    "size": 712,
+    "sizes": [
+     363,
+     349
+    ],
+    "ariObsMedian": 0.1225,
+    "ariNullMax": 0.5526,
+    "ariNullQ95": 0.5235,
+    "ariObsMin": -0.0129,
+    "leaf": "unstable"
+   }
+  ]
+ },
+ "K1d": {
+  "nmiRealKindVsFreqBin": 0.0624,
+  "nmiShuffledKindVsFreqBin": 0.0004,
+  "pass": true
+ },
+ "K1c": {
+  "leavesA": 10,
+  "leavesB": 5,
+  "commonForms": 636,
+  "ariObs": 0.1499,
+  "nullMax": 0.0101,
+  "nullQ99": 0.0043,
+  "pass": false
+ }
+}

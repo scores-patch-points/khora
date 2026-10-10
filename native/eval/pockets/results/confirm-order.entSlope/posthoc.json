@@ -1,0 +1,406 @@
+{
+ "ent-en-waikna": {
+  "discover": {
+   "docs": 13,
+   "vFull": -0.008474309531333917,
+   "looMin": -0.004047462052751177,
+   "looMax": -0.002397098972568075,
+   "docsWhoseRemovalFlipsSign": [],
+   "loo": [
+    {
+     "doc": 0,
+     "v": -0.00254
+    },
+    {
+     "doc": 1,
+     "v": -0.00299
+    },
+    {
+     "doc": 2,
+     "v": -0.00325
+    },
+    {
+     "doc": 3,
+     "v": -0.00274
+    },
+    {
+     "doc": 4,
+     "v": -0.0031
+    },
+    {
+     "doc": 5,
+     "v": -0.00357
+    },
+    {
+     "doc": 6,
+     "v": -0.00301
+    },
+    {
+     "doc": 7,
+     "v": -0.00344
+    },
+    {
+     "doc": 8,
+     "v": -0.00296
+    },
+    {
+     "doc": 9,
+     "v": -0.00253
+    },
+    {
+     "doc": 10,
+     "v": -0.00333
+    },
+    {
+     "doc": 11,
+     "v": -0.00405
+    },
+    {
+     "doc": 12,
+     "v": -0.0024
+    }
+   ]
+  },
+  "confirm": {
+   "docs": 17,
+   "vFull": 0.0025186912360479295,
+   "looMin": 0.0033841632085941428,
+   "looMax": 0.004884677406536429,
+   "docsWhoseRemovalFlipsSign": [],
+   "loo": [
+    {
+     "doc": 0,
+     "v": 0.00451
+    },
+    {
+     "doc": 1,
+     "v": 0.00387
+    },
+    {
+     "doc": 2,
+     "v": 0.00406
+    },
+    {
+     "doc": 3,
+     "v": 0.00386
+    },
+    {
+     "doc": 4,
+     "v": 0.00454
+    },
+    {
+     "doc": 5,
+     "v": 0.00414
+    },
+    {
+     "doc": 6,
+     "v": 0.00404
+    },
+    {
+     "doc": 7,
+     "v": 0.00384
+    },
+    {
+     "doc": 8,
+     "v": 0.00338
+    },
+    {
+     "doc": 9,
+     "v": 0.00364
+    },
+    {
+     "doc": 10,
+     "v": 0.00353
+    },
+    {
+     "doc": 11,
+     "v": 0.00406
+    },
+    {
+     "doc": 12,
+     "v": 0.00442
+    },
+    {
+     "doc": 13,
+     "v": 0.00427
+    },
+    {
+     "doc": 14,
+     "v": 0.00381
+    },
+    {
+     "doc": 15,
+     "v": 0.00411
+    },
+    {
+     "doc": 16,
+     "v": 0.00488
+    }
+   ]
+  }
+ },
+ "ent-en-dolls-house": {
+  "discover": {
+   "docs": 14,
+   "vFull": 0.017611880945637662,
+   "looMin": -0.0037650417583407034,
+   "looMax": 0.020930270970622094,
+   "docsWhoseRemovalFlipsSign": [
+    7
+   ],
+   "loo": [
+    {
+     "doc": 0,
+     "v": 0.01514
+    },
+    {
+     "doc": 1,
+     "v": 0.01493
+    },
+    {
+     "doc": 2,
+     "v": 0.02022
+    },
+    {
+     "doc": 3,
+     "v": 0.01376
+    },
+    {
+     "doc": 4,
+     "v": 0.01688
+    },
+    {
+     "doc": 5,
+     "v": 0.02093
+    },
+    {
+     "doc": 6,
+     "v": 0.01565
+    },
+    {
+     "doc": 7,
+     "v": -0.00377
+    },
+    {
+     "doc": 8,
+     "v": 0.01662
+    },
+    {
+     "doc": 9,
+     "v": 0.01904
+    },
+    {
+     "doc": 10,
+     "v": 0.01647
+    },
+    {
+     "doc": 11,
+     "v": 0.01681
+    },
+    {
+     "doc": 12,
+     "v": 0.0159
+    },
+    {
+     "doc": 13,
+     "v": 0.01512
+    }
+   ]
+  },
+  "confirm": {
+   "docs": 16,
+   "vFull": 0.015756194567717062,
+   "looMin": 0.007731790966376411,
+   "looMax": 0.01720800768263962,
+   "docsWhoseRemovalFlipsSign": [],
+   "loo": [
+    {
+     "doc": 0,
+     "v": 0.01721
+    },
+    {
+     "doc": 1,
+     "v": 0.01657
+    },
+    {
+     "doc": 2,
+     "v": 0.01604
+    },
+    {
+     "doc": 3,
+     "v": 0.01169
+    },
+    {
+     "doc": 4,
+     "v": 0.01324
+    },
+    {
+     "doc": 5,
+     "v": 0.01581
+    },
+    {
+     "doc": 6,
+     "v": 0.0082
+    },
+    {
+     "doc": 7,
+     "v": 0.01466
+    },
+    {
+     "doc": 8,
+     "v": 0.01003
+    },
+    {
+     "doc": 9,
+     "v": 0.01596
+    },
+    {
+     "doc": 10,
+     "v": 0.01556
+    },
+    {
+     "doc": 11,
+     "v": 0.00773
+    },
+    {
+     "doc": 12,
+     "v": 0.01605
+    },
+    {
+     "doc": 13,
+     "v": 0.01618
+    },
+    {
+     "doc": 14,
+     "v": 0.01671
+    },
+    {
+     "doc": 15,
+     "v": 0.01424
+    }
+   ]
+  }
+ },
+ "atlasDrama": [
+  {
+   "id": "bk-faust-de",
+   "language": "de",
+   "tokens": 29451,
+   "meanUnitLength": 9.9,
+   "zDiscover": -10.1,
+   "zConfirm": -9,
+   "vMean": -0.0344,
+   "unitDef": "sentences: text split after . ! ? … (and CJK equivalents) when followed by whitespace; full stops after data-detected sh"
+  },
+  {
+   "id": "bk-hen4-de",
+   "language": "de",
+   "tokens": 20181,
+   "meanUnitLength": 17.7,
+   "zDiscover": -4.4,
+   "zConfirm": -8.1,
+   "vMean": -0.0267,
+   "unitDef": "sentences: text split after . ! ? … (and CJK equivalents) when followed by whitespace; full stops after data-detected sh"
+  },
+  {
+   "id": "bk-hen4-folio",
+   "language": "en",
+   "tokens": 24711,
+   "meanUnitLength": 15.7,
+   "zDiscover": -2.2,
+   "zConfirm": 0.2,
+   "vMean": -0.0017,
+   "unitDef": "sentences: text split after . ! ? … (and CJK equivalents) when followed by whitespace; full stops after data-detected sh"
+  },
+  {
+   "id": "bk-hen4-fr",
+   "language": "fr",
+   "tokens": 28830,
+   "meanUnitLength": 15.7,
+   "zDiscover": -2.5,
+   "zConfirm": -5.6,
+   "vMean": -0.0077,
+   "unitDef": "sentences: text split after . ! ? … (and CJK equivalents) when followed by whitespace; full stops after data-detected sh"
+  },
+  {
+   "id": "bk-hen4-modern",
+   "language": "en",
+   "tokens": 24608,
+   "meanUnitLength": 13.2,
+   "zDiscover": -2.9,
+   "zConfirm": -0.2,
+   "vMean": -0.0023,
+   "unitDef": "sentences: text split after . ! ? … (and CJK equivalents) when followed by whitespace; full stops after data-detected sh"
+  },
+  {
+   "id": "ml-grc-comedy",
+   "language": "grc",
+   "tokens": 31070,
+   "meanUnitLength": 5.1,
+   "zDiscover": -27,
+   "zConfirm": -16.8,
+   "vMean": -0.1489,
+   "unitDef": ""
+  },
+  {
+   "id": "ml-grc-tragedy",
+   "language": "grc",
+   "tokens": 96763,
+   "meanUnitLength": 6.5,
+   "zDiscover": -67.1,
+   "zConfirm": -33.1,
+   "vMean": -0.1095,
+   "unitDef": ""
+  },
+  {
+   "id": "ml-pc-faust-de",
+   "language": "deu",
+   "tokens": 30693,
+   "meanUnitLength": 5.2,
+   "zDiscover": -35.5,
+   "zConfirm": -19.9,
+   "vMean": -0.0881,
+   "unitDef": ""
+  },
+  {
+   "id": "ml-pc-faust-en",
+   "language": "eng",
+   "tokens": 36132,
+   "meanUnitLength": 5.9,
+   "zDiscover": -10.8,
+   "zConfirm": -14.8,
+   "vMean": -0.0238,
+   "unitDef": ""
+  },
+  {
+   "id": "ml-pc-faust-es",
+   "language": "spa",
+   "tokens": 46675,
+   "meanUnitLength": 5.3,
+   "zDiscover": -21.3,
+   "zConfirm": -17.3,
+   "vMean": -0.0333,
+   "unitDef": ""
+  },
+  {
+   "id": "ml-pc-faust-fr",
+   "language": "fra",
+   "tokens": 42255,
+   "meanUnitLength": 7.6,
+   "zDiscover": -0.1,
+   "zConfirm": -1.1,
+   "vMean": -0.0008,
+   "unitDef": ""
+  },
+  {
+   "id": "ml-pc-faust-nl",
+   "language": "nld",
+   "tokens": 39563,
+   "meanUnitLength": 6.3,
+   "zDiscover": -5.1,
+   "zConfirm": -8,
+   "vMean": -0.0173,
+   "unitDef": ""
+  }
+ ]
+}

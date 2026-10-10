@@ -1,0 +1,277 @@
+{
+ "module": "eval/law/provisional/attack-ablscope-1-slot-ircB-c4plus/attack-ac-followup.mjs",
+ "rule": "ablscope-1-slot-ircB-c4plus",
+ "B": 500,
+ "rows": {
+  "names": 1147,
+  "natural": 10716
+ },
+ "F1": {
+  "auc": {
+   "S_ENTRY": {
+    "aucDirFree": 0.7256,
+    "ci": [
+     0.687,
+     0.7751
+    ],
+    "direction": "higher=name"
+   },
+   "rinit": {
+    "aucDirFree": 0.793,
+    "ci": [
+     0.7393,
+     0.8693
+    ],
+    "direction": "higher=name"
+   },
+   "cInit": {
+    "aucDirFree": 0.7911,
+    "ci": [
+     0.7384,
+     0.8682
+    ],
+    "direction": "higher=name"
+   },
+   "docfreq": {
+    "aucDirFree": 0.7362,
+    "ci": [
+     0.6646,
+     0.8078
+    ],
+    "direction": "lower=name"
+   },
+   "logc": {
+    "aucDirFree": 0.5389,
+    "ci": [
+     0.5115,
+     0.5668
+    ],
+    "direction": "lower=name"
+   },
+   "pos": {
+    "aucDirFree": 0.502,
+    "ci": [
+     0.4644,
+     0.5363
+    ],
+    "direction": "higher=name"
+   },
+   "idx": {
+    "aucDirFree": 0.6238,
+    "ci": [
+     0.5989,
+     0.6623
+    ],
+    "direction": "lower=name"
+   },
+   "len": {
+    "aucDirFree": 0.6475,
+    "ci": [
+     0.6125,
+     0.6944
+    ],
+    "direction": "higher=name"
+   },
+   "logsl": {
+    "aucDirFree": 0.6389,
+    "ci": [
+     0.6082,
+     0.6792
+    ],
+    "direction": "lower=name"
+   },
+   "burst": {
+    "aucDirFree": 0.6786,
+    "ci": [
+     0.6319,
+     0.731
+    ],
+    "direction": "higher=name"
+   },
+   "fbin": {
+    "aucDirFree": 0.7249,
+    "ci": [
+     0.654,
+     0.7904
+    ],
+    "direction": "lower=name"
+   }
+  },
+  "positionVoidCheck": {
+   "pos": 0.502,
+   "idx": 0.6238,
+   "inBand": false
+  },
+  "equalFalseAlarmWeighted": {
+   "rinit": {
+    "perStratum": {
+     "c4_6": {
+      "names": 500,
+      "naturalWeightedRows": 1952,
+      "fprS": 0.0014,
+      "sensS": 0.35,
+      "tau": 0.6,
+      "fprRival": 0.0012,
+      "sensRival": 0.454
+     },
+     "c7_15": {
+      "names": 537,
+      "naturalWeightedRows": 1270,
+      "fprS": 0.0134,
+      "sensS": 0.5084,
+      "tau": 0.556,
+      "fprRival": 0.0109,
+      "sensRival": 0.5047
+     },
+     "c16p": {
+      "names": 110,
+      "naturalWeightedRows": 400,
+      "fprS": 0,
+      "sensS": 0.7636,
+      "tau": 0.389,
+      "fprRival": 0,
+      "sensRival": 0.9364
+     }
+    },
+    "pooledSensRival": 0.524,
+    "pooledSensS": 0.4638,
+    "rivalAtLeastSMinus002": true
+   },
+   "cInit": {
+    "perStratum": {
+     "c4_6": {
+      "names": 500,
+      "naturalWeightedRows": 1952,
+      "fprS": 0.0014,
+      "sensS": 0.35,
+      "tau": 3,
+      "fprRival": 0.0014,
+      "sensRival": 0.47
+     },
+     "c7_15": {
+      "names": 537,
+      "naturalWeightedRows": 1270,
+      "fprS": 0.0134,
+      "sensS": 0.5084,
+      "tau": 7,
+      "fprRival": 0.009,
+      "sensRival": 0.3557
+     },
+     "c16p": {
+      "names": 110,
+      "naturalWeightedRows": 400,
+      "fprS": 0,
+      "sensS": 0.7636,
+      "tau": 16,
+      "fprRival": 0,
+      "sensRival": 0.6545
+     }
+    },
+    "pooledSensRival": 0.4342,
+    "pooledSensS": 0.4638,
+    "rivalAtLeastSMinus002": false
+   }
+  }
+ },
+ "F2": {
+  "bins": {
+   "l0": {
+    "names": 486,
+    "natural": 4529,
+    "sensS": 0.4115,
+    "fprS": 0.0093,
+    "aucDayStratumCells": 0.694,
+    "ci": [
+     0.6484,
+     0.7788
+    ],
+    "sensRinit50": 0.5021,
+    "fprRinit50": 0.017
+   },
+   "l1": {
+    "names": 269,
+    "natural": 2648,
+    "sensS": 0.4201,
+    "fprS": 0.0087,
+    "aucDayStratumCells": 0.7015,
+    "ci": [
+     0.6502,
+     0.7668
+    ],
+    "sensRinit50": 0.5279,
+    "fprRinit50": 0.0125
+   },
+   "l2_3": {
+    "names": 312,
+    "natural": 2107,
+    "sensS": 0.5513,
+    "fprS": 0.0009,
+    "aucDayStratumCells": 0.7729,
+    "ci": [
+     0.7368,
+     0.8292
+    ],
+    "sensRinit50": 0.6763,
+    "fprRinit50": 0.0057
+   },
+   "l4p": {
+    "names": 80,
+    "natural": 1432,
+    "sensS": 0.5875,
+    "fprS": 0,
+    "aucDayStratumCells": 0.8077,
+    "ci": [
+     0.7195,
+     0.9306
+    ],
+    "sensRinit50": 0.7125,
+    "fprRinit50": 0.0007
+   }
+  },
+  "verdict": {
+   "recencyBorne": false,
+   "recencyFree": true,
+   "sensL0": 0.4115,
+   "sensL4p": 0.5875
+  }
+ },
+ "F3": {
+  "c4_6|rinit<0.5": {
+   "names": 237,
+   "namesFlagged": 0,
+   "natural": 3501,
+   "naturalFlagged": 0
+  },
+  "c4_6|rinit>=0.5": {
+   "names": 263,
+   "namesFlagged": 0.6654,
+   "natural": 78,
+   "naturalFlagged": 0.3846
+  },
+  "c7_15|rinit<0.5": {
+   "names": 244,
+   "namesFlagged": 0,
+   "natural": 3538,
+   "naturalFlagged": 0.0003
+  },
+  "c7_15|rinit>=0.5": {
+   "names": 293,
+   "namesFlagged": 0.9317,
+   "natural": 42,
+   "naturalFlagged": 0.7857
+  },
+  "c16p|rinit<0.5": {
+   "names": 12,
+   "namesFlagged": 0,
+   "natural": 3554,
+   "naturalFlagged": 0
+  },
+  "c16p|rinit>=0.5": {
+   "names": 98,
+   "namesFlagged": 0.8571,
+   "natural": 3,
+   "naturalFlagged": 1
+  }
+ },
+ "headerSha256": "f869df5a39351b1762e7191b04994c5c4b69d0b9c99ba00768194022226f5f3a"
+}

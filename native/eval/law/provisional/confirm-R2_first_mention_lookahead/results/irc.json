@@ -1,0 +1,2537 @@
+{
+ "mode": "irc",
+ "headerSha256": "3377f5b2020b273959ab433ffc535df916d34f04148759056d3fc771430c61ad",
+ "code": {
+  "lib.mjs": "36faf1085b0c9600",
+  "ix.mjs": "d132940676488a63",
+  "stats.mjs": "df418312e03ee5af",
+  "cells.mjs": "c7bb966c2e45b320",
+  "days.json": "abfe96613771fe98"
+ },
+ "rule": {
+  "column": "INIT_Tinf",
+  "theta": 2,
+  "minN": 60,
+  "auc": 0.62,
+  "lower": 0.55,
+  "dayLower": 0.55,
+  "shufDrop": 0.05,
+  "beyondAuc": 0.6
+ },
+ "preregFile": "prereg.sha256.txt",
+ "days": {
+  "EN": [
+   "kubuntu/2005-07-15.txt",
+   "kubuntu/2005-11-15.txt",
+   "kubuntu/2006-07-15.txt",
+   "kubuntu/2007-07-15.txt",
+   "kubuntu/2008-03-15.txt",
+   "kubuntu/2008-07-15.txt",
+   "kubuntu/2013-07-15.txt",
+   "kubuntu/2014-03-15.txt",
+   "kubuntu/2015-03-15.txt",
+   "ubuntu-server/2009-03-15.txt",
+   "ubuntu-server/2014-03-15.txt",
+   "ubuntu-server/2015-03-15.txt",
+   "ubuntu-server/2015-07-15.txt",
+   "ubuntu/2004-11-15.txt",
+   "ubuntu/2005-03-15.txt",
+   "ubuntu/2006-07-15.txt",
+   "ubuntu/2007-03-15.txt",
+   "ubuntu/2009-07-15.txt",
+   "ubuntu/2012-07-15.txt",
+   "ubuntu/2014-07-15.txt",
+   "ubuntu/2015-03-15.txt",
+   "xubuntu/2010-03-15.txt",
+   "xubuntu/2012-07-15.txt",
+   "xubuntu/2014-07-15.txt",
+   "xubuntu/2015-03-15.txt",
+   "xubuntu/2015-07-15.txt"
+  ],
+  "NONEN": [
+   "ubuntu-de/2014-03-15.txt",
+   "ubuntu-de/2014-07-15.txt",
+   "ubuntu-de/2015-03-15.txt",
+   "ubuntu-es/2012-03-15.txt",
+   "ubuntu-es/2013-03-15.txt",
+   "ubuntu-es/2014-03-15.txt",
+   "ubuntu-es/2015-07-15.txt",
+   "ubuntu-es/2015-11-15.txt"
+  ]
+ },
+ "coverage": [
+  {
+   "day": "kubuntu/2005-07-15.txt",
+   "Q": 4,
+   "nMsg": 1798,
+   "pairs": 10,
+   "dropped": 30,
+   "nPos": 40,
+   "nNeg": 2381
+  },
+  {
+   "day": "kubuntu/2005-07-15.txt",
+   "Q": 8,
+   "nMsg": 1798,
+   "pairs": 10,
+   "dropped": 30,
+   "nPos": 40,
+   "nNeg": 2381
+  },
+  {
+   "day": "kubuntu/2005-11-15.txt",
+   "Q": 4,
+   "nMsg": 2240,
+   "pairs": 15,
+   "dropped": 37,
+   "nPos": 52,
+   "nNeg": 2561
+  },
+  {
+   "day": "kubuntu/2005-11-15.txt",
+   "Q": 8,
+   "nMsg": 2240,
+   "pairs": 15,
+   "dropped": 37,
+   "nPos": 52,
+   "nNeg": 2561
+  },
+  {
+   "day": "kubuntu/2006-07-15.txt",
+   "Q": 4,
+   "nMsg": 2861,
+   "pairs": 13,
+   "dropped": 80,
+   "nPos": 93,
+   "nNeg": 3267
+  },
+  {
+   "day": "kubuntu/2006-07-15.txt",
+   "Q": 8,
+   "nMsg": 2861,
+   "pairs": 12,
+   "dropped": 81,
+   "nPos": 93,
+   "nNeg": 3267
+  },
+  {
+   "day": "kubuntu/2007-07-15.txt",
+   "Q": 4,
+   "nMsg": 5499,
+   "pairs": 23,
+   "dropped": 93,
+   "nPos": 116,
+   "nNeg": 4638
+  },
+  {
+   "day": "kubuntu/2007-07-15.txt",
+   "Q": 8,
+   "nMsg": 5499,
+   "pairs": 23,
+   "dropped": 93,
+   "nPos": 116,
+   "nNeg": 4638
+  },
+  {
+   "day": "kubuntu/2008-03-15.txt",
+   "Q": 4,
+   "nMsg": 2525,
+   "pairs": 17,
+   "dropped": 68,
+   "nPos": 85,
+   "nNeg": 2914
+  },
+  {
+   "day": "kubuntu/2008-03-15.txt",
+   "Q": 8,
+   "nMsg": 2525,
+   "pairs": 16,
+   "dropped": 69,
+   "nPos": 85,
+   "nNeg": 2914
+  },
+  {
+   "day": "kubuntu/2008-07-15.txt",
+   "Q": 4,
+   "nMsg": 2190,
+   "pairs": 14,
+   "dropped": 55,
+   "nPos": 69,
+   "nNeg": 2814
+  },
+  {
+   "day": "kubuntu/2008-07-15.txt",
+   "Q": 8,
+   "nMsg": 2190,
+   "pairs": 14,
+   "dropped": 55,
+   "nPos": 69,
+   "nNeg": 2814
+  },
+  {
+   "day": "kubuntu/2013-07-15.txt",
+   "Q": 4,
+   "nMsg": 106,
+   "pairs": 0,
+   "dropped": 4,
+   "nPos": 4,
+   "nNeg": 380
+  },
+  {
+   "day": "kubuntu/2013-07-15.txt",
+   "Q": 8,
+   "nMsg": 106,
+   "pairs": 0,
+   "dropped": 4,
+   "nPos": 4,
+   "nNeg": 380
+  },
+  {
+   "day": "kubuntu/2014-03-15.txt",
+   "Q": 4,
+   "nMsg": 66,
+   "pairs": 0,
+   "dropped": 1,
+   "nPos": 1,
+   "nNeg": 301
+  },
+  {
+   "day": "kubuntu/2014-03-15.txt",
+   "Q": 8,
+   "nMsg": 66,
+   "pairs": 0,
+   "dropped": 1,
+   "nPos": 1,
+   "nNeg": 301
+  },
+  {
+   "day": "kubuntu/2015-03-15.txt",
+   "Q": 4,
+   "nMsg": 110,
+   "pairs": 0,
+   "dropped": 4,
+   "nPos": 4,
+   "nNeg": 383
+  },
+  {
+   "day": "kubuntu/2015-03-15.txt",
+   "Q": 8,
+   "nMsg": 110,
+   "pairs": 0,
+   "dropped": 4,
+   "nPos": 4,
+   "nNeg": 383
+  },
+  {
+   "day": "ubuntu-server/2009-03-15.txt",
+   "Q": 4,
+   "nMsg": 112,
+   "pairs": 1,
+   "dropped": 5,
+   "nPos": 6,
+   "nNeg": 476
+  },
+  {
+   "day": "ubuntu-server/2009-03-15.txt",
+   "Q": 8,
+   "nMsg": 112,
+   "pairs": 1,
+   "dropped": 5,
+   "nPos": 6,
+   "nNeg": 476
+  },
+  {
+   "day": "ubuntu-server/2014-03-15.txt",
+   "Q": 4,
+   "nMsg": 106,
+   "pairs": 0,
+   "dropped": 6,
+   "nPos": 6,
+   "nNeg": 522
+  },
+  {
+   "day": "ubuntu-server/2014-03-15.txt",
+   "Q": 8,
+   "nMsg": 106,
+   "pairs": 0,
+   "dropped": 6,
+   "nPos": 6,
+   "nNeg": 522
+  },
+  {
+   "day": "ubuntu-server/2015-03-15.txt",
+   "Q": 4,
+   "nMsg": 61,
+   "pairs": 0,
+   "dropped": 4,
+   "nPos": 4,
+   "nNeg": 291
+  },
+  {
+   "day": "ubuntu-server/2015-03-15.txt",
+   "Q": 8,
+   "nMsg": 61,
+   "pairs": 0,
+   "dropped": 4,
+   "nPos": 4,
+   "nNeg": 291
+  },
+  {
+   "day": "ubuntu-server/2015-07-15.txt",
+   "Q": 4,
+   "nMsg": 77,
+   "pairs": 0,
+   "dropped": 5,
+   "nPos": 5,
+   "nNeg": 441
+  },
+  {
+   "day": "ubuntu-server/2015-07-15.txt",
+   "Q": 8,
+   "nMsg": 77,
+   "pairs": 0,
+   "dropped": 5,
+   "nPos": 5,
+   "nNeg": 441
+  },
+  {
+   "day": "ubuntu/2004-11-15.txt",
+   "Q": 4,
+   "nMsg": 5106,
+   "pairs": 26,
+   "dropped": 131,
+   "nPos": 157,
+   "nNeg": 4581
+  },
+  {
+   "day": "ubuntu/2004-11-15.txt",
+   "Q": 8,
+   "nMsg": 5106,
+   "pairs": 24,
+   "dropped": 133,
+   "nPos": 157,
+   "nNeg": 4581
+  },
+  {
+   "day": "ubuntu/2005-03-15.txt",
+   "Q": 4,
+   "nMsg": 7532,
+   "pairs": 51,
+   "dropped": 171,
+   "nPos": 222,
+   "nNeg": 5525
+  },
+  {
+   "day": "ubuntu/2005-03-15.txt",
+   "Q": 8,
+   "nMsg": 7532,
+   "pairs": 51,
+   "dropped": 171,
+   "nPos": 222,
+   "nNeg": 5525
+  },
+  {
+   "day": "ubuntu/2006-07-15.txt",
+   "Q": 4,
+   "nMsg": 11216,
+   "pairs": 71,
+   "dropped": 306,
+   "nPos": 377,
+   "nNeg": 7557
+  },
+  {
+   "day": "ubuntu/2006-07-15.txt",
+   "Q": 8,
+   "nMsg": 11216,
+   "pairs": 67,
+   "dropped": 310,
+   "nPos": 377,
+   "nNeg": 7557
+  },
+  {
+   "day": "ubuntu/2007-03-15.txt",
+   "Q": 4,
+   "nMsg": 10657,
+   "pairs": 97,
+   "dropped": 324,
+   "nPos": 421,
+   "nNeg": 7240
+  },
+  {
+   "day": "ubuntu/2007-03-15.txt",
+   "Q": 8,
+   "nMsg": 10657,
+   "pairs": 90,
+   "dropped": 331,
+   "nPos": 421,
+   "nNeg": 7240
+  },
+  {
+   "day": "ubuntu/2009-07-15.txt",
+   "Q": 4,
+   "nMsg": 9765,
+   "pairs": 66,
+   "dropped": 333,
+   "nPos": 399,
+   "nNeg": 7244
+  },
+  {
+   "day": "ubuntu/2009-07-15.txt",
+   "Q": 8,
+   "nMsg": 9765,
+   "pairs": 64,
+   "dropped": 335,
+   "nPos": 399,
+   "nNeg": 7244
+  },
+  {
+   "day": "ubuntu/2012-07-15.txt",
+   "Q": 4,
+   "nMsg": 4216,
+   "pairs": 40,
+   "dropped": 171,
+   "nPos": 211,
+   "nNeg": 4801
+  },
+  {
+   "day": "ubuntu/2012-07-15.txt",
+   "Q": 8,
+   "nMsg": 4216,
+   "pairs": 38,
+   "dropped": 173,
+   "nPos": 211,
+   "nNeg": 4801
+  },
+  {
+   "day": "ubuntu/2014-07-15.txt",
+   "Q": 4,
+   "nMsg": 2915,
+   "pairs": 22,
+   "dropped": 122,
+   "nPos": 144,
+   "nNeg": 3975
+  },
+  {
+   "day": "ubuntu/2014-07-15.txt",
+   "Q": 8,
+   "nMsg": 2915,
+   "pairs": 20,
+   "dropped": 124,
+   "nPos": 144,
+   "nNeg": 3975
+  },
+  {
+   "day": "ubuntu/2015-03-15.txt",
+   "Q": 4,
+   "nMsg": 3245,
+   "pairs": 18,
+   "dropped": 112,
+   "nPos": 130,
+   "nNeg": 3841
+  },
+  {
+   "day": "ubuntu/2015-03-15.txt",
+   "Q": 8,
+   "nMsg": 3245,
+   "pairs": 15,
+   "dropped": 115,
+   "nPos": 130,
+   "nNeg": 3841
+  },
+  {
+   "day": "xubuntu/2010-03-15.txt",
+   "Q": 4,
+   "nMsg": 118,
+   "pairs": 0,
+   "dropped": 2,
+   "nPos": 2,
+   "nNeg": 370
+  },
+  {
+   "day": "xubuntu/2010-03-15.txt",
+   "Q": 8,
+   "nMsg": 118,
+   "pairs": 0,
+   "dropped": 2,
+   "nPos": 2,
+   "nNeg": 370
+  },
+  {
+   "day": "xubuntu/2012-07-15.txt",
+   "Q": 4,
+   "nMsg": 136,
+   "pairs": 0,
+   "dropped": 6,
+   "nPos": 6,
+   "nNeg": 530
+  },
+  {
+   "day": "xubuntu/2012-07-15.txt",
+   "Q": 8,
+   "nMsg": 136,
+   "pairs": 0,
+   "dropped": 6,
+   "nPos": 6,
+   "nNeg": 530
+  },
+  {
+   "day": "xubuntu/2014-07-15.txt",
+   "Q": 4,
+   "nMsg": 79,
+   "pairs": 0,
+   "dropped": 6,
+   "nPos": 6,
+   "nNeg": 393
+  },
+  {
+   "day": "xubuntu/2014-07-15.txt",
+   "Q": 8,
+   "nMsg": 79,
+   "pairs": 0,
+   "dropped": 6,
+   "nPos": 6,
+   "nNeg": 393
+  },
+  {
+   "day": "xubuntu/2015-03-15.txt",
+   "Q": 4,
+   "nMsg": 56,
+   "pairs": 0,
+   "dropped": 3,
+   "nPos": 3,
+   "nNeg": 350
+  },
+  {
+   "day": "xubuntu/2015-03-15.txt",
+   "Q": 8,
+   "nMsg": 56,
+   "pairs": 0,
+   "dropped": 3,
+   "nPos": 3,
+   "nNeg": 350
+  },
+  {
+   "day": "xubuntu/2015-07-15.txt",
+   "Q": 4,
+   "nMsg": 132,
+   "pairs": 1,
+   "dropped": 6,
+   "nPos": 7,
+   "nNeg": 545
+  },
+  {
+   "day": "xubuntu/2015-07-15.txt",
+   "Q": 8,
+   "nMsg": 132,
+   "pairs": 1,
+   "dropped": 6,
+   "nPos": 7,
+   "nNeg": 545
+  },
+  {
+   "day": "ubuntu-de/2014-03-15.txt",
+   "Q": 4,
+   "nMsg": 122,
+   "pairs": 0,
+   "dropped": 2,
+   "nPos": 2,
+   "nNeg": 429
+  },
+  {
+   "day": "ubuntu-de/2014-03-15.txt",
+   "Q": 8,
+   "nMsg": 122,
+   "pairs": 0,
+   "dropped": 2,
+   "nPos": 2,
+   "nNeg": 429
+  },
+  {
+   "day": "ubuntu-de/2014-07-15.txt",
+   "Q": 4,
+   "nMsg": 90,
+   "pairs": 1,
+   "dropped": 3,
+   "nPos": 4,
+   "nNeg": 446
+  },
+  {
+   "day": "ubuntu-de/2014-07-15.txt",
+   "Q": 8,
+   "nMsg": 90,
+   "pairs": 1,
+   "dropped": 3,
+   "nPos": 4,
+   "nNeg": 446
+  },
+  {
+   "day": "ubuntu-de/2015-03-15.txt",
+   "Q": 4,
+   "nMsg": 70,
+   "pairs": 1,
+   "dropped": 4,
+   "nPos": 5,
+   "nNeg": 289
+  },
+  {
+   "day": "ubuntu-de/2015-03-15.txt",
+   "Q": 8,
+   "nMsg": 70,
+   "pairs": 1,
+   "dropped": 4,
+   "nPos": 5,
+   "nNeg": 289
+  },
+  {
+   "day": "ubuntu-es/2012-03-15.txt",
+   "Q": 4,
+   "nMsg": 131,
+   "pairs": 1,
+   "dropped": 4,
+   "nPos": 5,
+   "nNeg": 417
+  },
+  {
+   "day": "ubuntu-es/2012-03-15.txt",
+   "Q": 8,
+   "nMsg": 131,
+   "pairs": 1,
+   "dropped": 4,
+   "nPos": 5,
+   "nNeg": 417
+  },
+  {
+   "day": "ubuntu-es/2013-03-15.txt",
+   "Q": 4,
+   "nMsg": 473,
+   "pairs": 1,
+   "dropped": 6,
+   "nPos": 7,
+   "nNeg": 919
+  },
+  {
+   "day": "ubuntu-es/2013-03-15.txt",
+   "Q": 8,
+   "nMsg": 473,
+   "pairs": 1,
+   "dropped": 6,
+   "nPos": 7,
+   "nNeg": 919
+  },
+  {
+   "day": "ubuntu-es/2014-03-15.txt",
+   "Q": 4,
+   "nMsg": 150,
+   "pairs": 0,
+   "dropped": 2,
+   "nPos": 2,
+   "nNeg": 407
+  },
+  {
+   "day": "ubuntu-es/2014-03-15.txt",
+   "Q": 8,
+   "nMsg": 150,
+   "pairs": 0,
+   "dropped": 2,
+   "nPos": 2,
+   "nNeg": 407
+  },
+  {
+   "day": "ubuntu-es/2015-07-15.txt",
+   "Q": 4,
+   "nMsg": 91,
+   "pairs": 0,
+   "dropped": 2,
+   "nPos": 2,
+   "nNeg": 341
+  },
+  {
+   "day": "ubuntu-es/2015-07-15.txt",
+   "Q": 8,
+   "nMsg": 91,
+   "pairs": 0,
+   "dropped": 2,
+   "nPos": 2,
+   "nNeg": 341
+  },
+  {
+   "day": "ubuntu-es/2015-11-15.txt",
+   "Q": 4,
+   "nMsg": 194,
+   "pairs": 0,
+   "dropped": 2,
+   "nPos": 2,
+   "nNeg": 410
+  },
+  {
+   "day": "ubuntu-es/2015-11-15.txt",
+   "Q": 8,
+   "nMsg": 194,
+   "pairs": 0,
+   "dropped": 2,
+   "nPos": 2,
+   "nNeg": 410
+  }
+ ],
+ "cells": {
+  "PRIMARY_EN_ALL": {
+   "variant": "M4",
+   "n": 485,
+   "days": 16,
+   "ctl": {
+    "i": 0.4979,
+    "len": 0.4928,
+    "cl": 0.499,
+    "lc": 0.5103
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 485,
+     "ctl": {
+      "i": 0.4979,
+      "len": 0.4928,
+      "cl": 0.499,
+      "lc": 0.5103
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.6845,
+   "ci": [
+    0.6629,
+    0.7062
+   ],
+   "dayCi": [
+    0.6575,
+    0.7053
+   ],
+   "nullQ95Analytic": 0.5373,
+   "nullQ95Flip": 0.5237,
+   "thr": {
+    "n": 485,
+    "tpr": 0.2928,
+    "fpr": 0.1093,
+    "balPrec": 0.7282
+   },
+   "tieShare": 0.6103,
+   "bothZero": 0.4412,
+   "beyondCNT_Tinf": {
+    "kept": 471,
+    "share": 0.9711,
+    "auc": 0.6752,
+    "ci": [
+     0.6529,
+     0.6985
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 330,
+    "share": 0.6804,
+    "auc": 0.5924,
+    "ci": [
+     0.5697,
+     0.6167
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.5247,
+    "CNT_T128": 0.6155,
+    "INIT_T128": 0.6639
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.466,
+    "LAST_Tinf": 0.4526
+   },
+   "FNEXT": 0.5495,
+   "wordshuf": {
+    "n": 925,
+    "auc": 0.5573,
+    "ctl": {
+     "i": 0.4989,
+     "len": 0.4946,
+     "cl": 0.5065,
+     "lc": 0.5097
+    },
+    "drop": 0.1272
+   },
+   "msgshuf": {
+    "n": 467,
+    "auc": 0.6563,
+    "ctl": {
+     "i": 0.4968,
+     "len": 0.5128,
+     "cl": 0.5021,
+     "lc": 0.4968
+    },
+    "drop": 0.0282
+   },
+   "perDay": [
+    {
+     "day": "kubuntu/2005-07-15.txt",
+     "n": 10,
+     "auc": 0.65
+    },
+    {
+     "day": "kubuntu/2005-11-15.txt",
+     "n": 15,
+     "auc": 0.7333
+    },
+    {
+     "day": "kubuntu/2006-07-15.txt",
+     "n": 13,
+     "auc": 0.6538
+    },
+    {
+     "day": "kubuntu/2007-07-15.txt",
+     "n": 23,
+     "auc": 0.7609
+    },
+    {
+     "day": "kubuntu/2008-03-15.txt",
+     "n": 17,
+     "auc": 0.5882
+    },
+    {
+     "day": "kubuntu/2008-07-15.txt",
+     "n": 14,
+     "auc": 0.75
+    },
+    {
+     "day": "ubuntu-server/2009-03-15.txt",
+     "n": 1,
+     "auc": 0.5
+    },
+    {
+     "day": "ubuntu/2004-11-15.txt",
+     "n": 26,
+     "auc": 0.6154
+    },
+    {
+     "day": "ubuntu/2005-03-15.txt",
+     "n": 51,
+     "auc": 0.7157
+    },
+    {
+     "day": "ubuntu/2006-07-15.txt",
+     "n": 71,
+     "auc": 0.669
+    },
+    {
+     "day": "ubuntu/2007-03-15.txt",
+     "n": 97,
+     "auc": 0.6907
+    },
+    {
+     "day": "ubuntu/2009-07-15.txt",
+     "n": 66,
+     "auc": 0.7121
+    },
+    {
+     "day": "ubuntu/2012-07-15.txt",
+     "n": 40,
+     "auc": 0.725
+    },
+    {
+     "day": "ubuntu/2014-07-15.txt",
+     "n": 22,
+     "auc": 0.6136
+    },
+    {
+     "day": "ubuntu/2015-03-15.txt",
+     "n": 18,
+     "auc": 0.5833
+    },
+    {
+     "day": "xubuntu/2015-07-15.txt",
+     "n": 1,
+     "auc": 0.5
+    }
+   ],
+   "perDaySummary": {
+    "daysWithN10": 14,
+    "above05": 14,
+    "binomP": 0.0001
+   },
+   "core": true,
+   "companions": {
+    "dayCi": true,
+    "wordshuf": true,
+    "beyondCNT_Tinf": true
+   },
+   "holds": true
+  },
+  "EN_INIT": {
+   "variant": "M4",
+   "n": 356,
+   "days": 16,
+   "ctl": {
+    "i": 0.5,
+    "len": 0.493,
+    "cl": 0.4972,
+    "lc": 0.5084
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 356,
+     "ctl": {
+      "i": 0.5,
+      "len": 0.493,
+      "cl": 0.4972,
+      "lc": 0.5084
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.6531,
+   "ci": [
+    0.6278,
+    0.6784
+   ],
+   "dayCi": [
+    0.6215,
+    0.6748
+   ],
+   "nullQ95Analytic": 0.5436,
+   "nullQ95Flip": 0.5239,
+   "thr": {
+    "n": 356,
+    "tpr": 0.2893,
+    "fpr": 0.132,
+    "balPrec": 0.6867
+   },
+   "tieShare": 0.6713,
+   "bothZero": 0.4775,
+   "beyondCNT_Tinf": {
+    "kept": 346,
+    "share": 0.9719,
+    "auc": 0.6431,
+    "ci": [
+     0.6171,
+     0.672
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 248,
+    "share": 0.6966,
+    "auc": 0.5625,
+    "ci": [
+     0.5423,
+     0.5867
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.5309,
+    "CNT_T128": 0.6236,
+    "INIT_T128": 0.6559
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.4593,
+    "LAST_Tinf": 0.448
+   },
+   "FNEXT": 0.5674,
+   "wordshuf": {
+    "n": 151,
+    "auc": 0.5033,
+    "ctl": {
+     "i": 0.5,
+     "len": 0.5166,
+     "cl": 0.5066,
+     "lc": 0.5166
+    },
+    "drop": 0.1498
+   },
+   "msgshuf": {
+    "n": 358,
+    "auc": 0.6229,
+    "ctl": {
+     "i": 0.5,
+     "len": 0.5084,
+     "cl": 0.4972,
+     "lc": 0.5014
+    },
+    "drop": 0.0302
+   },
+   "perDay": [
+    {
+     "day": "kubuntu/2005-07-15.txt",
+     "n": 7,
+     "auc": 0.7143
+    },
+    {
+     "day": "kubuntu/2005-11-15.txt",
+     "n": 10,
+     "auc": 0.7
+    },
+    {
+     "day": "kubuntu/2006-07-15.txt",
+     "n": 10,
+     "auc": 0.6
+    },
+    {
+     "day": "kubuntu/2007-07-15.txt",
+     "n": 13,
+     "auc": 0.7308
+    },
+    {
+     "day": "kubuntu/2008-03-15.txt",
+     "n": 14,
+     "auc": 0.5714
+    },
+    {
+     "day": "kubuntu/2008-07-15.txt",
+     "n": 10,
+     "auc": 0.7
+    },
+    {
+     "day": "ubuntu-server/2009-03-15.txt",
+     "n": 1,
+     "auc": 0.5
+    },
+    {
+     "day": "ubuntu/2004-11-15.txt",
+     "n": 23,
+     "auc": 0.587
+    },
+    {
+     "day": "ubuntu/2005-03-15.txt",
+     "n": 39,
+     "auc": 0.7051
+    },
+    {
+     "day": "ubuntu/2006-07-15.txt",
+     "n": 52,
+     "auc": 0.6538
+    },
+    {
+     "day": "ubuntu/2007-03-15.txt",
+     "n": 75,
+     "auc": 0.6733
+    },
+    {
+     "day": "ubuntu/2009-07-15.txt",
+     "n": 37,
+     "auc": 0.6216
+    },
+    {
+     "day": "ubuntu/2012-07-15.txt",
+     "n": 33,
+     "auc": 0.697
+    },
+    {
+     "day": "ubuntu/2014-07-15.txt",
+     "n": 17,
+     "auc": 0.5882
+    },
+    {
+     "day": "ubuntu/2015-03-15.txt",
+     "n": 14,
+     "auc": 0.5357
+    },
+    {
+     "day": "xubuntu/2015-07-15.txt",
+     "n": 1,
+     "auc": 0.5
+    }
+   ],
+   "perDaySummary": {
+    "daysWithN10": 13,
+    "above05": 13,
+    "binomP": 0.0001
+   },
+   "core": true,
+   "companions": {
+    "dayCi": true,
+    "wordshuf": true,
+    "beyondCNT_Tinf": true
+   },
+   "holds": true
+  },
+  "EN_NONINIT": {
+   "variant": "M4",
+   "n": 129,
+   "days": 14,
+   "ctl": {
+    "i": 0.4922,
+    "len": 0.4922,
+    "cl": 0.5039,
+    "lc": 0.5155
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 129,
+     "ctl": {
+      "i": 0.4922,
+      "len": 0.4922,
+      "cl": 0.5039,
+      "lc": 0.5155
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.7713,
+   "ci": [
+    0.7248,
+    0.8178
+   ],
+   "dayCi": [
+    0.7353,
+    0.805
+   ],
+   "nullQ95Analytic": 0.5724,
+   "nullQ95Flip": 0.5543,
+   "thr": {
+    "n": 129,
+    "tpr": 0.3023,
+    "fpr": 0.0465,
+    "balPrec": 0.8667
+   },
+   "tieShare": 0.4419,
+   "bothZero": 0.3411,
+   "beyondCNT_Tinf": {
+    "kept": 125,
+    "share": 0.969,
+    "auc": 0.764,
+    "ci": [
+     0.72,
+     0.812
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 82,
+    "share": 0.6357,
+    "auc": 0.6829,
+    "ci": [
+     0.628,
+     0.7317
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.5078,
+    "CNT_T128": 0.593,
+    "INIT_T128": 0.686
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.4845,
+    "LAST_Tinf": 0.4651
+   },
+   "FNEXT": 0.5,
+   "wordshuf": {
+    "n": 774,
+    "auc": 0.5678,
+    "ctl": {
+     "i": 0.4987,
+     "len": 0.4903,
+     "cl": 0.5065,
+     "lc": 0.5084
+    },
+    "drop": 0.2035
+   },
+   "msgshuf": {
+    "n": 109,
+    "auc": 0.7661,
+    "ctl": {
+     "i": 0.4862,
+     "len": 0.5275,
+     "cl": 0.5183,
+     "lc": 0.4817
+    },
+    "drop": 0.0052
+   },
+   "perDay": [
+    {
+     "day": "kubuntu/2005-07-15.txt",
+     "n": 3,
+     "auc": 0.5
+    },
+    {
+     "day": "kubuntu/2005-11-15.txt",
+     "n": 5,
+     "auc": 0.8
+    },
+    {
+     "day": "kubuntu/2006-07-15.txt",
+     "n": 3,
+     "auc": 0.8333
+    },
+    {
+     "day": "kubuntu/2007-07-15.txt",
+     "n": 10,
+     "auc": 0.8
+    },
+    {
+     "day": "kubuntu/2008-03-15.txt",
+     "n": 3,
+     "auc": 0.6667
+    },
+    {
+     "day": "kubuntu/2008-07-15.txt",
+     "n": 4,
+     "auc": 0.875
+    },
+    {
+     "day": "ubuntu/2004-11-15.txt",
+     "n": 3,
+     "auc": 0.8333
+    },
+    {
+     "day": "ubuntu/2005-03-15.txt",
+     "n": 12,
+     "auc": 0.75
+    },
+    {
+     "day": "ubuntu/2006-07-15.txt",
+     "n": 19,
+     "auc": 0.7105
+    },
+    {
+     "day": "ubuntu/2007-03-15.txt",
+     "n": 22,
+     "auc": 0.75
+    },
+    {
+     "day": "ubuntu/2009-07-15.txt",
+     "n": 29,
+     "auc": 0.8276
+    },
+    {
+     "day": "ubuntu/2012-07-15.txt",
+     "n": 7,
+     "auc": 0.8571
+    },
+    {
+     "day": "ubuntu/2014-07-15.txt",
+     "n": 5,
+     "auc": 0.7
+    },
+    {
+     "day": "ubuntu/2015-03-15.txt",
+     "n": 4,
+     "auc": 0.75
+    }
+   ],
+   "perDaySummary": {
+    "daysWithN10": 5,
+    "above05": 5,
+    "binomP": 0.0313
+   },
+   "core": true,
+   "companions": {
+    "dayCi": true,
+    "wordshuf": true,
+    "beyondCNT_Tinf": true
+   },
+   "holds": true
+  },
+  "EN_ubuntu": {
+   "variant": "M4",
+   "n": 391,
+   "days": 8,
+   "ctl": {
+    "i": 0.4974,
+    "len": 0.5013,
+    "cl": 0.5,
+    "lc": 0.5102
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 391,
+     "ctl": {
+      "i": 0.4974,
+      "len": 0.5013,
+      "cl": 0.5,
+      "lc": 0.5102
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.6829,
+   "ci": [
+    0.656,
+    0.7084
+   ],
+   "dayCi": [
+    0.6553,
+    0.7029
+   ],
+   "nullQ95Analytic": 0.5416,
+   "nullQ95Flip": 0.5269,
+   "thr": {
+    "n": 391,
+    "tpr": 0.3223,
+    "fpr": 0.1228,
+    "balPrec": 0.7241
+   },
+   "tieShare": 0.6087,
+   "bothZero": 0.4194,
+   "beyondCNT_Tinf": {
+    "kept": 378,
+    "share": 0.9668,
+    "auc": 0.672,
+    "ci": [
+     0.6468,
+     0.6971
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 264,
+    "share": 0.6752,
+    "auc": 0.5966,
+    "ci": [
+     0.5682,
+     0.6231
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.5269,
+    "CNT_T128": 0.6138,
+    "INIT_T128": 0.6611
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.4655,
+    "LAST_Tinf": 0.4552
+   },
+   "FNEXT": 0.5473,
+   "wordshuf": {
+    "n": 758,
+    "auc": 0.566,
+    "ctl": {
+     "i": 0.504,
+     "len": 0.4941,
+     "cl": 0.5073,
+     "lc": 0.5086
+    },
+    "drop": 0.1169
+   },
+   "msgshuf": {
+    "n": 369,
+    "auc": 0.6545,
+    "ctl": {
+     "i": 0.5,
+     "len": 0.5217,
+     "cl": 0.5041,
+     "lc": 0.4959
+    },
+    "drop": 0.0284
+   },
+   "perDay": [
+    {
+     "day": "ubuntu/2004-11-15.txt",
+     "n": 26,
+     "auc": 0.6154
+    },
+    {
+     "day": "ubuntu/2005-03-15.txt",
+     "n": 51,
+     "auc": 0.7157
+    },
+    {
+     "day": "ubuntu/2006-07-15.txt",
+     "n": 71,
+     "auc": 0.669
+    },
+    {
+     "day": "ubuntu/2007-03-15.txt",
+     "n": 97,
+     "auc": 0.6907
+    },
+    {
+     "day": "ubuntu/2009-07-15.txt",
+     "n": 66,
+     "auc": 0.7121
+    },
+    {
+     "day": "ubuntu/2012-07-15.txt",
+     "n": 40,
+     "auc": 0.725
+    },
+    {
+     "day": "ubuntu/2014-07-15.txt",
+     "n": 22,
+     "auc": 0.6136
+    },
+    {
+     "day": "ubuntu/2015-03-15.txt",
+     "n": 18,
+     "auc": 0.5833
+    }
+   ],
+   "perDaySummary": {
+    "daysWithN10": 8,
+    "above05": 8,
+    "binomP": 0.0039
+   },
+   "core": true,
+   "companions": {
+    "dayCi": true,
+    "wordshuf": true,
+    "beyondCNT_Tinf": true
+   },
+   "holds": true
+  },
+  "EN_kubuntu": {
+   "variant": "M4",
+   "n": 92,
+   "days": 6,
+   "ctl": {
+    "i": 0.5,
+    "len": 0.4565,
+    "cl": 0.4946,
+    "lc": 0.5109
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 92,
+     "ctl": {
+      "i": 0.5,
+      "len": 0.4565,
+      "cl": 0.4946,
+      "lc": 0.5109
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.6957,
+   "ci": [
+    0.6467,
+    0.7446
+   ],
+   "dayCi": [
+    0.6307,
+    0.7424
+   ],
+   "nullQ95Analytic": 0.5858,
+   "nullQ95Flip": 0.5543,
+   "thr": {
+    "n": 92,
+    "tpr": 0.1739,
+    "fpr": 0.0543,
+    "balPrec": 0.7619
+   },
+   "tieShare": 0.6087,
+   "bothZero": 0.5217,
+   "beyondCNT_Tinf": {
+    "kept": 91,
+    "share": 0.9891,
+    "auc": 0.6923,
+    "ci": [
+     0.6429,
+     0.7418
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 64,
+    "share": 0.6957,
+    "auc": 0.5781,
+    "ci": [
+     0.5313,
+     0.625
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.5163,
+    "CNT_T128": 0.625,
+    "INIT_T128": 0.6793
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.4674,
+    "LAST_Tinf": 0.4402
+   },
+   "FNEXT": 0.5598,
+   "wordshuf": {
+    "n": 157,
+    "auc": 0.5191,
+    "ctl": {
+     "i": 0.4841,
+     "len": 0.5032,
+     "cl": 0.5032,
+     "lc": 0.5159
+    },
+    "drop": 0.1766
+   },
+   "msgshuf": {
+    "n": 96,
+    "auc": 0.6667,
+    "ctl": {
+     "i": 0.4844,
+     "len": 0.4792,
+     "cl": 0.4948,
+     "lc": 0.5
+    },
+    "drop": 0.029
+   },
+   "perDay": [
+    {
+     "day": "kubuntu/2005-07-15.txt",
+     "n": 10,
+     "auc": 0.65
+    },
+    {
+     "day": "kubuntu/2005-11-15.txt",
+     "n": 15,
+     "auc": 0.7333
+    },
+    {
+     "day": "kubuntu/2006-07-15.txt",
+     "n": 13,
+     "auc": 0.6538
+    },
+    {
+     "day": "kubuntu/2007-07-15.txt",
+     "n": 23,
+     "auc": 0.7609
+    },
+    {
+     "day": "kubuntu/2008-03-15.txt",
+     "n": 17,
+     "auc": 0.5882
+    },
+    {
+     "day": "kubuntu/2008-07-15.txt",
+     "n": 14,
+     "auc": 0.75
+    }
+   ],
+   "perDaySummary": {
+    "daysWithN10": 6,
+    "above05": 6,
+    "binomP": 0.0156
+   },
+   "core": true,
+   "companions": {
+    "dayCi": true,
+    "wordshuf": true,
+    "beyondCNT_Tinf": true
+   },
+   "holds": true
+  },
+  "EN_2004-07": {
+   "variant": "M4",
+   "n": 306,
+   "days": 8,
+   "ctl": {
+    "i": 0.4967,
+    "len": 0.5016,
+    "cl": 0.4951,
+    "lc": 0.5131
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 306,
+     "ctl": {
+      "i": 0.4967,
+      "len": 0.5016,
+      "cl": 0.4951,
+      "lc": 0.5131
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.6879,
+   "ci": [
+    0.6601,
+    0.719
+   ],
+   "dayCi": [
+    0.6635,
+    0.7135
+   ],
+   "nullQ95Analytic": 0.547,
+   "nullQ95Flip": 0.531,
+   "thr": {
+    "n": 306,
+    "tpr": 0.2745,
+    "fpr": 0.1013,
+    "balPrec": 0.7304
+   },
+   "tieShare": 0.6111,
+   "bothZero": 0.4575,
+   "beyondCNT_Tinf": {
+    "kept": 299,
+    "share": 0.9771,
+    "auc": 0.6806,
+    "ci": [
+     0.6522,
+     0.709
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 208,
+    "share": 0.6797,
+    "auc": 0.5986,
+    "ci": [
+     0.5721,
+     0.6274
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.5245,
+    "CNT_T128": 0.6144,
+    "INIT_T128": 0.6716
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.4575,
+    "LAST_Tinf": 0.4444
+   },
+   "FNEXT": 0.5392,
+   "wordshuf": {
+    "n": 565,
+    "auc": 0.5593,
+    "ctl": {
+     "i": 0.5071,
+     "len": 0.5018,
+     "cl": 0.5035,
+     "lc": 0.523
+    },
+    "drop": 0.1286
+   },
+   "msgshuf": {
+    "n": 299,
+    "auc": 0.6622,
+    "ctl": {
+     "i": 0.5,
+     "len": 0.5067,
+     "cl": 0.4983,
+     "lc": 0.4983
+    },
+    "drop": 0.0257
+   },
+   "perDay": [
+    {
+     "day": "kubuntu/2005-07-15.txt",
+     "n": 10,
+     "auc": 0.65
+    },
+    {
+     "day": "kubuntu/2005-11-15.txt",
+     "n": 15,
+     "auc": 0.7333
+    },
+    {
+     "day": "kubuntu/2006-07-15.txt",
+     "n": 13,
+     "auc": 0.6538
+    },
+    {
+     "day": "kubuntu/2007-07-15.txt",
+     "n": 23,
+     "auc": 0.7609
+    },
+    {
+     "day": "ubuntu/2004-11-15.txt",
+     "n": 26,
+     "auc": 0.6154
+    },
+    {
+     "day": "ubuntu/2005-03-15.txt",
+     "n": 51,
+     "auc": 0.7157
+    },
+    {
+     "day": "ubuntu/2006-07-15.txt",
+     "n": 71,
+     "auc": 0.669
+    },
+    {
+     "day": "ubuntu/2007-03-15.txt",
+     "n": 97,
+     "auc": 0.6907
+    }
+   ],
+   "perDaySummary": {
+    "daysWithN10": 8,
+    "above05": 8,
+    "binomP": 0.0039
+   },
+   "core": true,
+   "companions": {
+    "dayCi": true,
+    "wordshuf": true,
+    "beyondCNT_Tinf": true
+   },
+   "holds": true
+  },
+  "EN_2008-11": {
+   "variant": "M4",
+   "n": 98,
+   "days": 4,
+   "ctl": {
+    "i": 0.4949,
+    "len": 0.5102,
+    "cl": 0.5051,
+    "lc": 0.5153
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 98,
+     "ctl": {
+      "i": 0.4949,
+      "len": 0.5102,
+      "cl": 0.5051,
+      "lc": 0.5153
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.6939,
+   "ci": [
+    0.6429,
+    0.7398
+   ],
+   "dayCi": [
+    0.575,
+    0.7333
+   ],
+   "nullQ95Analytic": 0.5831,
+   "nullQ95Flip": 0.551,
+   "thr": {
+    "n": 98,
+    "tpr": 0.3163,
+    "fpr": 0.0918,
+    "balPrec": 0.775
+   },
+   "tieShare": 0.6122,
+   "bothZero": 0.4082,
+   "beyondCNT_Tinf": {
+    "kept": 94,
+    "share": 0.9592,
+    "auc": 0.6809,
+    "ci": [
+     0.633,
+     0.7234
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 67,
+    "share": 0.6837,
+    "auc": 0.6045,
+    "ci": [
+     0.5522,
+     0.6642
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.5357,
+    "CNT_T128": 0.6071,
+    "INIT_T128": 0.648
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.4745,
+    "LAST_Tinf": 0.4439
+   },
+   "FNEXT": 0.6122,
+   "wordshuf": {
+    "n": 198,
+    "auc": 0.548,
+    "ctl": {
+     "i": 0.4899,
+     "len": 0.4899,
+     "cl": 0.5101,
+     "lc": 0.4899
+    },
+    "drop": 0.1459
+   },
+   "msgshuf": {
+    "n": 92,
+    "auc": 0.663,
+    "ctl": {
+     "i": 0.4891,
+     "len": 0.5054,
+     "cl": 0.5109,
+     "lc": 0.4891
+    },
+    "drop": 0.0309
+   },
+   "perDay": [
+    {
+     "day": "kubuntu/2008-03-15.txt",
+     "n": 17,
+     "auc": 0.5882
+    },
+    {
+     "day": "kubuntu/2008-07-15.txt",
+     "n": 14,
+     "auc": 0.75
+    },
+    {
+     "day": "ubuntu-server/2009-03-15.txt",
+     "n": 1,
+     "auc": 0.5
+    },
+    {
+     "day": "ubuntu/2009-07-15.txt",
+     "n": 66,
+     "auc": 0.7121
+    }
+   ],
+   "perDaySummary": {
+    "daysWithN10": 3,
+    "above05": 3,
+    "binomP": 0.125
+   },
+   "core": true,
+   "companions": {
+    "dayCi": true,
+    "wordshuf": true,
+    "beyondCNT_Tinf": true
+   },
+   "holds": true
+  },
+  "EN_2012-15": {
+   "variant": "M8",
+   "n": 74,
+   "days": 4,
+   "ctl": {
+    "i": 0.4932,
+    "len": 0.473,
+    "cl": 0.5068,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 81,
+     "ctl": {
+      "i": 0.5062,
+      "len": 0.4383,
+      "cl": 0.5062,
+      "lc": 0.4938
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M8",
+     "n": 74,
+     "ctl": {
+      "i": 0.4932,
+      "len": 0.473,
+      "cl": 0.5068,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.6419,
+   "ci": [
+    0.5811,
+    0.6959
+   ],
+   "dayCi": [
+    0.5,
+    0.7051
+   ],
+   "nullQ95Analytic": 0.5956,
+   "nullQ95Flip": 0.5608,
+   "thr": {
+    "n": 74,
+    "tpr": 0.2703,
+    "fpr": 0.1622,
+    "balPrec": 0.625
+   },
+   "tieShare": 0.6622,
+   "bothZero": 0.4595,
+   "beyondCNT_Tinf": {
+    "kept": 73,
+    "share": 0.9865,
+    "auc": 0.637,
+    "ci": [
+     0.5822,
+     0.6986
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 53,
+    "share": 0.7162,
+    "auc": 0.5472,
+    "ci": [
+     0.4906,
+     0.6038
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.5068,
+    "CNT_T128": 0.6081,
+    "INIT_T128": 0.6351
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.473,
+    "LAST_Tinf": 0.473
+   },
+   "FNEXT": 0.5405,
+   "wordshuf": {
+    "n": 155,
+    "auc": 0.5387,
+    "ctl": {
+     "i": 0.4613,
+     "len": 0.471,
+     "cl": 0.5129,
+     "lc": 0.4968
+    },
+    "drop": 0.1032
+   },
+   "msgshuf": {
+    "n": 75,
+    "auc": 0.62,
+    "ctl": {
+     "i": 0.5067,
+     "len": 0.5333,
+     "cl": 0.5,
+     "lc": 0.4933
+    },
+    "drop": 0.0219
+   },
+   "perDay": [
+    {
+     "day": "ubuntu/2012-07-15.txt",
+     "n": 38,
+     "auc": 0.7105
+    },
+    {
+     "day": "ubuntu/2014-07-15.txt",
+     "n": 20,
+     "auc": 0.625
+    },
+    {
+     "day": "ubuntu/2015-03-15.txt",
+     "n": 15,
+     "auc": 0.5
+    },
+    {
+     "day": "xubuntu/2015-07-15.txt",
+     "n": 1,
+     "auc": 0.5
+    }
+   ],
+   "perDaySummary": {
+    "daysWithN10": 3,
+    "above05": 2,
+    "binomP": 0.5
+   },
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": true,
+    "beyondCNT_Tinf": true
+   },
+   "holds": false
+  },
+  "EN_big": {
+   "variant": "M4",
+   "n": 334,
+   "days": 6,
+   "ctl": {
+    "i": 0.4955,
+    "len": 0.5135,
+    "cl": 0.497,
+    "lc": 0.5135
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 334,
+     "ctl": {
+      "i": 0.4955,
+      "len": 0.5135,
+      "cl": 0.497,
+      "lc": 0.5135
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.6931,
+   "ci": [
+    0.6647,
+    0.7201
+   ],
+   "dayCi": [
+    0.6713,
+    0.7138
+   ],
+   "nullQ95Analytic": 0.545,
+   "nullQ95Flip": 0.5284,
+   "thr": {
+    "n": 334,
+    "tpr": 0.3114,
+    "fpr": 0.1078,
+    "balPrec": 0.7429
+   },
+   "tieShare": 0.6018,
+   "bothZero": 0.4222,
+   "beyondCNT_Tinf": {
+    "kept": 324,
+    "share": 0.9701,
+    "auc": 0.6836,
+    "ci": [
+     0.6559,
+     0.713
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 221,
+    "share": 0.6617,
+    "auc": 0.6041,
+    "ci": [
+     0.5747,
+     0.6312
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.5269,
+    "CNT_T128": 0.6138,
+    "INIT_T128": 0.6662
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.4596,
+    "LAST_Tinf": 0.4416
+   },
+   "FNEXT": 0.5554,
+   "wordshuf": {
+    "n": 645,
+    "auc": 0.5667,
+    "ctl": {
+     "i": 0.507,
+     "len": 0.493,
+     "cl": 0.5054,
+     "lc": 0.5155
+    },
+    "drop": 0.1264
+   },
+   "msgshuf": {
+    "n": 318,
+    "auc": 0.6667,
+    "ctl": {
+     "i": 0.4984,
+     "len": 0.5157,
+     "cl": 0.5016,
+     "lc": 0.4937
+    },
+    "drop": 0.0264
+   },
+   "perDay": [
+    {
+     "day": "kubuntu/2007-07-15.txt",
+     "n": 23,
+     "auc": 0.7609
+    },
+    {
+     "day": "ubuntu/2004-11-15.txt",
+     "n": 26,
+     "auc": 0.6154
+    },
+    {
+     "day": "ubuntu/2005-03-15.txt",
+     "n": 51,
+     "auc": 0.7157
+    },
+    {
+     "day": "ubuntu/2006-07-15.txt",
+     "n": 71,
+     "auc": 0.669
+    },
+    {
+     "day": "ubuntu/2007-03-15.txt",
+     "n": 97,
+     "auc": 0.6907
+    },
+    {
+     "day": "ubuntu/2009-07-15.txt",
+     "n": 66,
+     "auc": 0.7121
+    }
+   ],
+   "perDaySummary": {
+    "daysWithN10": 6,
+    "above05": 6,
+    "binomP": 0.0156
+   },
+   "core": true,
+   "companions": {
+    "dayCi": true,
+    "wordshuf": true,
+    "beyondCNT_Tinf": true
+   },
+   "holds": true
+  },
+  "EN_small": {
+   "variant": "M8",
+   "n": 142,
+   "days": 10,
+   "ctl": {
+    "i": 0.493,
+    "len": 0.4648,
+    "cl": 0.5035,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "tried": [
+    {
+     "variant": "M4",
+     "n": 151,
+     "ctl": {
+      "i": 0.5033,
+      "len": 0.447,
+      "cl": 0.5033,
+      "lc": 0.5033
+     },
+     "ctlOk": false
+    },
+    {
+     "variant": "M8",
+     "n": 142,
+     "ctl": {
+      "i": 0.493,
+      "len": 0.4648,
+      "cl": 0.5035,
+      "lc": 0.5
+     },
+     "ctlOk": true
+    }
+   ],
+   "auc": 0.6479,
+   "ci": [
+    0.6092,
+    0.6901
+   ],
+   "dayCi": [
+    0.5833,
+    0.6939
+   ],
+   "nullQ95Analytic": 0.569,
+   "nullQ95Flip": 0.5423,
+   "thr": {
+    "n": 142,
+    "tpr": 0.2042,
+    "fpr": 0.1056,
+    "balPrec": 0.6591
+   },
+   "tieShare": 0.6761,
+   "bothZero": 0.5141,
+   "beyondCNT_Tinf": {
+    "kept": 140,
+    "share": 0.9859,
+    "auc": 0.6429,
+    "ci": [
+     0.6071,
+     0.6821
+    ]
+   },
+   "beyondCNT_T128": {
+    "kept": 105,
+    "share": 0.7394,
+    "auc": 0.5571,
+    "ci": [
+     0.5286,
+     0.5952
+    ]
+   },
+   "rivalAuc": {
+    "CNT_Tinf": 0.5106,
+    "CNT_T128": 0.6092,
+    "INIT_T128": 0.6408
+   },
+   "slotSham": {
+    "SEC_Tinf": 0.4754,
+    "LAST_Tinf": 0.4613
+   },
+   "FNEXT": 0.5563,
+   "wordshuf": {
+    "n": 271,
+    "auc": 0.5185,
+    "ctl": {
+     "i": 0.4852,
+     "len": 0.4871,
+     "cl": 0.5092,
+     "lc": 0.5
+    },
+    "drop": 0.1294
+   },
+   "msgshuf": {
+    "n": 143,
+    "auc": 0.6154,
+    "ctl": {
+     "i": 0.5035,
+     "len": 0.493,
+     "cl": 0.5,
+     "lc": 0.4965
+    },
+    "drop": 0.0325
+   },
+   "perDay": [
+    {
+     "day": "kubuntu/2005-07-15.txt",
+     "n": 10,
+     "auc": 0.65
+    },
+    {
+     "day": "kubuntu/2005-11-15.txt",
+     "n": 15,
+     "auc": 0.7
+    },
+    {
+     "day": "kubuntu/2006-07-15.txt",
+     "n": 12,
+     "auc": 0.625
+    },
+    {
+     "day": "kubuntu/2008-03-15.txt",
+     "n": 16,
+     "auc": 0.5625
+    },
+    {
+     "day": "kubuntu/2008-07-15.txt",
+     "n": 14,
+     "auc": 0.75
+    },
+    {
+     "day": "ubuntu-server/2009-03-15.txt",
+     "n": 1,
+     "auc": 0.5
+    },
+    {
+     "day": "ubuntu/2012-07-15.txt",
+     "n": 38,
+     "auc": 0.7105
+    },
+    {
+     "day": "ubuntu/2014-07-15.txt",
+     "n": 20,
+     "auc": 0.625
+    },
+    {
+     "day": "ubuntu/2015-03-15.txt",
+     "n": 15,
+     "auc": 0.5
+    },
+    {
+     "day": "xubuntu/2015-07-15.txt",
+     "n": 1,
+     "auc": 0.5
+    }
+   ],
+   "perDaySummary": {
+    "daysWithN10": 8,
+    "above05": 7,
+    "binomP": 0.0352
+   },
+   "core": true,
+   "companions": {
+    "dayCi": true,
+    "wordshuf": true,
+    "beyondCNT_Tinf": true
+   },
+   "holds": true
+  }
+ },
+ "reportOnly": {
+  "EN_xubuntu": {
+   "M4": {
+    "n": 1,
+    "days": 1,
+    "ctl": {
+     "i": 0.5,
+     "len": 0.5,
+     "cl": 0.5,
+     "lc": 0.5
+    },
+    "ctlOk": true,
+    "auc": 0.5,
+    "thr": null
+   },
+   "M8": {
+    "n": 1,
+    "days": 1,
+    "ctl": {
+     "i": 0.5,
+     "len": 0.5,
+     "cl": 0.5,
+     "lc": 0.5
+    },
+    "ctlOk": true,
+    "auc": 0.5,
+    "thr": null
+   }
+  },
+  "EN_ubuntu-server": {
+   "M4": {
+    "n": 1,
+    "days": 1,
+    "ctl": {
+     "i": 0.5,
+     "len": 0.5,
+     "cl": 0.5,
+     "lc": 0.5
+    },
+    "ctlOk": true,
+    "auc": 0.5,
+    "thr": null
+   },
+   "M8": {
+    "n": 1,
+    "days": 1,
+    "ctl": {
+     "i": 0.5,
+     "len": 0.5,
+     "cl": 0.5,
+     "lc": 0.5
+    },
+    "ctlOk": true,
+    "auc": 0.5,
+    "thr": null
+   }
+  },
+  "NONEN_ALL": {
+   "M4": {
+    "n": 4,
+    "days": 4,
+    "ctl": {
+     "i": 0.625,
+     "len": 0.375,
+     "cl": 0.5,
+     "lc": 0.5
+    },
+    "ctlOk": false,
+    "auc": 0.5,
+    "thr": null
+   },
+   "M8": {
+    "n": 4,
+    "days": 4,
+    "ctl": {
+     "i": 0.375,
+     "len": 0.25,
+     "cl": 0.5,
+     "lc": 0.5
+    },
+    "ctlOk": false,
+    "auc": 0.5,
+    "thr": null
+   }
+  },
+  "NONEN_de": {
+   "M4": {
+    "n": 2,
+    "days": 2,
+    "ctl": {
+     "i": 0.75,
+     "len": 0.5,
+     "cl": 0.5,
+     "lc": 0.5
+    },
+    "ctlOk": false,
+    "auc": 0.5,
+    "thr": null
+   },
+   "M8": {
+    "n": 2,
+    "days": 2,
+    "ctl": {
+     "i": 0.25,
+     "len": 0.25,
+     "cl": 0.5,
+     "lc": 0.5
+    },
+    "ctlOk": false,
+    "auc": 0.5,
+    "thr": null
+   }
+  },
+  "NONEN_es": {
+   "M4": {
+    "n": 2,
+    "days": 2,
+    "ctl": {
+     "i": 0.5,
+     "len": 0.25,
+     "cl": 0.5,
+     "lc": 0.5
+    },
+    "ctlOk": false,
+    "auc": 0.5,
+    "thr": null
+   },
+   "M8": {
+    "n": 2,
+    "days": 2,
+    "ctl": {
+     "i": 0.5,
+     "len": 0.25,
+     "cl": 0.5,
+     "lc": 0.5
+    },
+    "ctlOk": false,
+    "auc": 0.5,
+    "thr": null
+   }
+  },
+  "NONEN_wordshuf": {
+   "n": 4,
+   "days": 3,
+   "ctl": {
+    "i": 0.5,
+    "len": 0.625,
+    "cl": 0.5,
+    "lc": 0.5
+   },
+   "ctlOk": false,
+   "auc": 0.5,
+   "thr": null
+  }
+ },
+ "natural": {
+  "ALL": {
+   "n": 70891,
+   "nPos": 2570,
+   "rule": {
+    "tp": 1818,
+    "fp": 3064,
+    "fn": 752,
+    "tn": 65257,
+    "precision": 0.3724,
+    "recall": 0.7074,
+    "fpr": 0.0448,
+    "prevalence": 0.0363,
+    "flagRate": 0.0689
+   },
+   "popAuc": {
+    "INIT_Tinf": 0.8992,
+    "CNT_Tinf": 0.7386,
+    "CNT_T128": 0.8277
+   },
+   "rivalAtSameFlagRate": {
+    "col": "CNT_Tinf",
+    "thetaCNT": 19,
+    "tp": 401,
+    "fp": 4272,
+    "fn": 2169,
+    "tn": 64049,
+    "precision": 0.0858,
+    "recall": 0.156,
+    "fpr": 0.0625,
+    "prevalence": 0.0363,
+    "flagRate": 0.0659
+   }
+  },
+  "INIT": {
+   "n": 6757,
+   "nPos": 2188,
+   "rule": {
+    "tp": 1564,
+    "fp": 714,
+    "fn": 624,
+    "tn": 3855,
+    "precision": 0.6866,
+    "recall": 0.7148,
+    "fpr": 0.1563,
+    "prevalence": 0.3238,
+    "flagRate": 0.3371
+   },
+   "popAuc": {
+    "INIT_Tinf": 0.8351,
+    "CNT_Tinf": 0.7564,
+    "CNT_T128": 0.8209
+   },
+   "rivalAtSameFlagRate": {
+    "col": "CNT_Tinf",
+    "thetaCNT": 4,
+    "tp": 1212,
+    "fp": 841,
+    "fn": 976,
+    "tn": 3728,
+    "precision": 0.5904,
+    "recall": 0.5539,
+    "fpr": 0.1841,
+    "prevalence": 0.3238,
+    "flagRate": 0.3038
+   }
+  },
+  "NONINIT": {
+   "n": 64134,
+   "nPos": 382,
+   "rule": {
+    "tp": 254,
+    "fp": 2350,
+    "fn": 128,
+    "tn": 61402,
+    "precision": 0.0975,
+    "recall": 0.6649,
+    "fpr": 0.0369,
+    "prevalence": 0.006,
+    "flagRate": 0.0406
+   },
+   "popAuc": {
+    "INIT_Tinf": 0.9011,
+    "CNT_Tinf": 0.7382,
+    "CNT_T128": 0.7864
+   },
+   "rivalAtSameFlagRate": {
+    "col": "CNT_Tinf",
+    "thetaCNT": 31,
+    "tp": 35,
+    "fp": 2496,
+    "fn": 347,
+    "tn": 61256,
+    "precision": 0.0138,
+    "recall": 0.0916,
+    "fpr": 0.0392,
+    "prevalence": 0.006,
+    "flagRate": 0.0395
+   }
+  }
+ },
+ "verdict": {
+  "verdict": "CONFIRMED",
+  "why": "primary cell holds (a-e)",
+  "primaryHolds": true,
+  "subScopeHolding": [
+   "EN_INIT",
+   "EN_NONINIT",
+   "EN_ubuntu",
+   "EN_kubuntu",
+   "EN_2004-07",
+   "EN_2008-11",
+   "EN_big",
+   "EN_small"
+  ],
+  "subScopeFailing": [
+   "EN_2012-15"
+  ],
+  "mode": "irc"
+ },
+ "predictions": {
+  "primaryAuc_0_62_0_74": true,
+  "tpr_0_22_0_42": true,
+  "fpr_0_04_0_16": true,
+  "initLtNoninit": true,
+  "init_0_58_0_70": true,
+  "noninit_0_66_0_84": true,
+  "wordshuf_le_0_58": true,
+  "wordshufDrop_ge_0_08": true,
+  "msgshufWithin_0_05": true,
+  "beyondCNT_Tinf_0_60_0_74": true,
+  "beyondCNT_T128_0_52_0_66": true,
+  "controlsInBandM4": true,
+  "lastSham_0_48_0_60": false,
+  "secSham_0_48_0_60": false,
+  "fnext_0_46_0_56": true,
+  "daysAbove05_ge_0_65": true,
+  "ubuntuGeKubuntu": false,
+  "naturalPrecision_0_10_0_60": true,
+  "naturalRecall_0_20_0_45": false
+ },
+ "seconds": 12.4
+}

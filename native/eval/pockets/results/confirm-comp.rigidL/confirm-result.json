@@ -1,0 +1,4680 @@
+{
+ "stat": "comp.rigidL",
+ "preregHeaderSha256": "c1c382a6550f256c6956092c57bafead1c9f1e9c4a196c9d1710831f3b918d52",
+ "verdict": "PARTIAL",
+ "scored": {
+  "A": 51,
+  "B": 2,
+  "K": 2,
+  "expectedA": 51,
+  "expectedB": 2
+ },
+ "notScored": {
+  "fromPrereg": [
+   "asym-ud-hun (17,043 tokens)",
+   "asym-ud-tam",
+   "asym-ud-tel",
+   "asym-ud-uig",
+   "ent-ud-eng-pud (18,385)",
+   "ent-ud-san-vedic (16,802)",
+   "rl-sql-repos (3,010)",
+   "rl-sh-repos (14,380)",
+   "asym-en-evolution-plain (13,728)"
+  ],
+  "thinOrError": [],
+  "missing": []
+ },
+ "existence": {
+  "hitsA": 51,
+  "nA": 51,
+  "hitsB": 1,
+  "nB": 2,
+  "shareA": 1,
+  "presentPlusA": 51,
+  "presentMinusA": 0,
+  "universalThreshold": 0.85,
+  "planThreshold": 0.95,
+  "pAtLeastObsIfRate85": 0.0002513999641557943,
+  "pAtLeastObsIfRate95": 0.0730977265128775,
+  "misses": [
+   {
+    "id": "rl-smiles-pubchem-heldout",
+    "kind": "absent-smiles",
+    "prediction": "ABSENT",
+    "status": "AMBIGUOUS",
+    "z": [
+     -1.2063497113172197,
+     -2.491359742816368
+    ],
+    "v": [
+     0.42413938733028816,
+     0.4081142834546417
+    ],
+    "nullMean": [
+     0.459941848658053,
+     0.48796490829695455
+    ]
+   }
+  ],
+  "controlsNotAbsent": []
+ },
+ "constant": {
+  "C1": {
+   "rho": 0.7282065850517644,
+   "n": 51,
+   "dropped": [],
+   "pass": true
+  },
+  "C1ordinary": {
+   "rho": 0.6275558232692543,
+   "n": 46
+  },
+  "C2": {
+   "inRange": 49,
+   "of": 53,
+   "share": 0.9245283018867925,
+   "pass": true
+  },
+  "kinds": {
+   "code": {
+    "n": 14,
+    "hits": 14,
+    "vbarMin": 0.0748,
+    "vbarMedian": 0.1163,
+    "vbarMax": 0.2287,
+    "poolMedian": 0.1838,
+    "inRange": 10
+   },
+   "markup": {
+    "n": 1,
+    "hits": 1,
+    "vbarMin": 0.4413,
+    "vbarMedian": 0.4413,
+    "vbarMax": 0.4413,
+    "poolMedian": 0.1881,
+    "inRange": 1
+   },
+   "config": {
+    "n": 1,
+    "hits": 1,
+    "vbarMin": 0.2092,
+    "vbarMedian": 0.2092,
+    "vbarMax": 0.2092,
+    "poolMedian": 0.2384,
+    "inRange": 1
+   },
+   "reportage": {
+    "n": 1,
+    "hits": 1,
+    "vbarMin": 0.062,
+    "vbarMedian": 0.062,
+    "vbarMax": 0.062,
+    "poolMedian": 0.086,
+    "inRange": 1
+   },
+   "essay": {
+    "n": 1,
+    "hits": 1,
+    "vbarMin": 0.0587,
+    "vbarMedian": 0.0587,
+    "vbarMax": 0.0587,
+    "poolMedian": 0.0666,
+    "inRange": 1
+   },
+   "novel": {
+    "n": 4,
+    "hits": 4,
+    "vbarMin": 0.072,
+    "vbarMedian": 0.0904,
+    "vbarMax": 0.0963,
+    "poolMedian": 0.0887,
+    "inRange": 4
+   },
+   "memoir": {
+    "n": 2,
+    "hits": 2,
+    "vbarMin": 0.0628,
+    "vbarMedian": 0.0881,
+    "vbarMax": 0.1135,
+    "poolMedian": 0.0876,
+    "inRange": 2
+   },
+   "children": {
+    "n": 1,
+    "hits": 1,
+    "vbarMin": 0.0945,
+    "vbarMedian": 0.0945,
+    "vbarMax": 0.0945,
+    "poolMedian": 0.1092,
+    "inRange": 1
+   },
+   "drama": {
+    "n": 3,
+    "hits": 3,
+    "vbarMin": 0.0449,
+    "vbarMedian": 0.0449,
+    "vbarMax": 0.0688,
+    "poolMedian": 0.0401,
+    "inRange": 3
+   },
+   "chat": {
+    "n": 2,
+    "hits": 2,
+    "vbarMin": 0.0555,
+    "vbarMedian": 0.0576,
+    "vbarMax": 0.0597,
+    "poolMedian": 0.0741,
+    "inRange": 2
+   },
+   "treebank": {
+    "n": 15,
+    "hits": 15,
+    "vbarMin": 0.019,
+    "vbarMedian": 0.0829,
+    "vbarMax": 0.2201,
+    "poolMedian": 0.054,
+    "inRange": 15
+   },
+   "diagram": {
+    "n": 3,
+    "hits": 3,
+    "vbarMin": 0.3885,
+    "vbarMedian": 0.5369,
+    "vbarMax": 0.5676,
+    "poolMedian": 0.4224,
+    "inRange": 3
+   },
+   "legal": {
+    "n": 1,
+    "hits": 1,
+    "vbarMin": 0.2401,
+    "vbarMedian": 0.2401,
+    "vbarMax": 0.2401,
+    "poolMedian": 0.2449,
+    "inRange": 1
+   },
+   "smiles": {
+    "n": 1,
+    "hits": 1,
+    "vbarMin": 0.4702,
+    "vbarMedian": 0.4702,
+    "vbarMax": 0.4702,
+    "poolMedian": 0.4409,
+    "inRange": 1
+   },
+   "codons": {
+    "n": 1,
+    "hits": 1,
+    "vbarMin": 0.0074,
+    "vbarMedian": 0.0074,
+    "vbarMax": 0.0074,
+    "poolMedian": 0.0072,
+    "inRange": 1
+   },
+   "pubchem": {
+    "n": 1,
+    "hits": 0,
+    "vbarMin": 0.4161,
+    "vbarMedian": 0.4161,
+    "vbarMax": 0.4161,
+    "poolMedian": 0.415,
+    "inRange": 1
+   },
+   "protein": {
+    "n": 1,
+    "hits": 1,
+    "vbarMin": 0.0099,
+    "vbarMedian": 0.0099,
+    "vbarMax": 0.0099,
+    "poolMedian": 0.01,
+    "inRange": 1
+   },
+   "control": {
+    "n": 2,
+    "hits": 2,
+    "vbarMin": 0.0082,
+    "vbarMedian": 0.009,
+    "vbarMax": 0.0098,
+    "poolMedian": null,
+    "inRange": 0
+   }
+  }
+ },
+ "adversary": {
+  "D1_hardShare": {
+   "states": {
+    "ABOVE-ALL-DRAWS": 35,
+    "PRESENT+": 13,
+    "UNDEF": 3
+   }
+  },
+  "D2_softWidth": {
+   "soft10": {
+    "PRESENT+": 51
+   },
+   "soft25": {
+    "PRESENT+": 51
+   },
+   "rhoSoft10": {
+    "rho": 0.9966,
+    "n": 55
+   },
+   "rhoSoft25": {
+    "rho": 0.9952,
+    "n": 55
+   }
+  },
+  "D3_bigramRival": {
+   "status": {
+    "PRESENT+": 51
+   },
+   "rhoZ": {
+    "rho": 0.5911,
+    "n": 54
+   },
+   "rhoV": {
+    "rho": 0.6188,
+    "n": 55
+   }
+  },
+  "D4_sizeUnitLength": {
+   "rhoRatioLogTokens": {
+    "rho": -0.1251,
+    "n": 51
+   },
+   "rhoRatioUnitLength": {
+    "rho": 0.3492,
+    "n": 51
+   },
+   "rhoVbarLogTokens": {
+    "rho": 0.3421,
+    "n": 51
+   },
+   "rhoVbarUnitLength": {
+    "rho": -0.334,
+    "n": 51
+   }
+  },
+  "D5_collinearity": {
+   "sameLStatus": {
+    "PRESENT+": 47,
+    "ABSENT": 2,
+    "AMBIGUOUS": 2
+   },
+   "rigidRStatus": {
+    "PRESENT+": 51
+   },
+   "rhoSameL": {
+    "rho": 0.9106,
+    "n": 55
+   },
+   "rhoRigidR": {
+    "rho": 0.9095,
+    "n": 55
+   }
+  },
+  "D6_constantByClass": {
+   "raw": {
+    "eta2": 0.8313865310789231,
+    "p": 0.0004997501249375312,
+    "n": 43,
+    "levels": 7
+   },
+   "log": {
+    "eta2": 0.5836113409861838,
+    "p": 0.0004997501249375312
+   }
+  },
+  "dupcheck": {
+   "pairsAbove2pct": [
+    {
+     "smaller": "ent-cd-js",
+     "larger": "asym-cd-js",
+     "shared": 736,
+     "share": 0.053667784745515534
+    }
+   ]
+  }
+ },
+ "siblings": [
+  {
+   "id": "sib-js-fold",
+   "kind": "code-js",
+   "prediction": "PRESENT+",
+   "pool": "code",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 291340,
+   "units": 25025,
+   "docs": 151,
+   "meanUnit": 11.641958041958041,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.07853537686262206,
+    "nullMean": 0.011293360191246249,
+    "nullSd": 0.00008269801256462848,
+    "z": 813.1031760748324
+   },
+   "confirm": {
+    "v": 0.08807601883008208,
+    "nullMean": 0.011258802278472781,
+    "nullSd": 0.00011909477669651497,
+    "z": 645.0091152810161
+   },
+   "vbar": 0.08330569784635207,
+   "poolMedian": 0.1838,
+   "range": [
+    0.0997,
+    0.3468
+   ],
+   "inRange": false,
+   "ratio": 0.4532410111335804,
+   "eligL": [
+    1395,
+    1993
+   ],
+   "zbar": 729.0561456779242,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.18865202265493397,
+    "z": [
+     83.4897491950601,
+     159.15327929935734
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.06247457703209372,
+    "z": [
+     331.6095386986049,
+     557.3515078059041
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.03247189536136334,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.05481951533994319
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.166873921168528
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.5214330233140791,
+    "zbar": 308.62843520046454
+   }
+  },
+  {
+   "id": "sib-js-heimdall",
+   "kind": "code-js",
+   "prediction": "PRESENT+",
+   "pool": "code",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 160415,
+   "units": 18614,
+   "docs": 99,
+   "meanUnit": 8.617975717202105,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.11871357106261074,
+    "nullMean": 0.011921721631583757,
+    "nullSd": 0.0002233344282823626,
+    "z": 478.17011578711737
+   },
+   "confirm": {
+    "v": 0.09957169706640803,
+    "nullMean": 0.012127621492946316,
+    "nullSd": 0.00019348913543991086,
+    "z": 451.9327422423569
+   },
+   "vbar": 0.10914263406450939,
+   "poolMedian": 0.1838,
+   "range": [
+    0.0997,
+    0.3468
+   ],
+   "inRange": true,
+   "ratio": 0.5938119372388977,
+   "eligL": [
+    984,
+    1168
+   ],
+   "zbar": 465.0514290147371,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.21314559406826028,
+    "z": [
+     165.41713440442842,
+     142.90805003827646
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.07722736150198578,
+    "z": [
+     342.15630005132493,
+     384.5247478363578
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.050287476333667445,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.07914773889832302
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.1928624414954293
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.5062974640265034,
+    "zbar": 178.1601532923113
+   }
+  },
+  {
+   "id": "sib-js-eoreader7",
+   "kind": "code-js",
+   "prediction": "PRESENT+",
+   "pool": "code",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 294591,
+   "units": 31951,
+   "docs": 174,
+   "meanUnit": 9.220087008231355,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.07476841116651649,
+    "nullMean": 0.011154397041057524,
+    "nullSd": 0.00006008067968451372,
+    "z": 1058.8098280428737
+   },
+   "confirm": {
+    "v": 0.07487500077727932,
+    "nullMean": 0.011698436680730112,
+    "nullSd": 0.00019176135403383652,
+    "z": 329.45409889732855
+   },
+   "vbar": 0.07482170597189791,
+   "poolMedian": 0.1838,
+   "range": [
+    0.0997,
+    0.3468
+   ],
+   "inRange": false,
+   "ratio": 0.40708218700706156,
+   "eligL": [
+    1898,
+    1706
+   ],
+   "zbar": 694.1319634701011,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.16631783681156911,
+    "z": [
+     129.0283800896642,
+     140.79443820776407
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.057912235612396015,
+    "z": [
+     567.7344253938705,
+     235.38578427985092
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.027269403098467322,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.048539108461072546
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.15522567980464108
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.4641067087436953,
+    "zbar": 221.29195828224073
+   }
+  },
+  {
+   "id": "asym-cd-js",
+   "kind": "code-js",
+   "prediction": "PRESENT+",
+   "pool": "code",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 295254,
+   "units": 40058,
+   "docs": 175,
+   "meanUnit": 7.370662539317989,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.09468936788740426,
+    "nullMean": 0.016017316030572763,
+    "nullSd": 0.0007490799489186552,
+    "z": 105.02490684792674
+   },
+   "confirm": {
+    "v": 0.09844521953632816,
+    "nullMean": 0.0126162485231648,
+    "nullSd": 0.00013603147232238034,
+    "z": 630.9493644952815
+   },
+   "vbar": 0.0965672937118662,
+   "poolMedian": 0.1838,
+   "range": [
+    0.0997,
+    0.3468
+   ],
+   "inRange": false,
+   "ratio": 0.5253933281385539,
+   "eligL": [
+    1899,
+    1704
+   ],
+   "zbar": 367.98713567160416,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.18740494924798068,
+    "z": [
+     147.08203404142853,
+     108.81108337624784
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.07834647914140369,
+    "z": [
+     78.57884671821571,
+     279.2321830773054
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.0428899754503853,
+    "z": [
+     47.288798784287984,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.0678423288306848
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.17934435789103093
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.48787161730844153,
+    "zbar": 280.5139199959069
+   }
+  },
+  {
+   "id": "ent-cd-js",
+   "kind": "code-js",
+   "prediction": "PRESENT+",
+   "pool": "code",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 249034,
+   "units": 30016,
+   "docs": 201,
+   "meanUnit": 8.29670842217484,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.08272953446257966,
+    "nullMean": 0.011856383151200451,
+    "nullSd": 0.00023121092195897136,
+    "z": 306.53029152297455
+   },
+   "confirm": {
+    "v": 0.08697808205527395,
+    "nullMean": 0.011747516336860367,
+    "nullSd": 0.00013890129188746058,
+    "z": 541.6117063861886
+   },
+   "vbar": 0.0848538082589268,
+   "poolMedian": 0.1838,
+   "range": [
+    0.0997,
+    0.3468
+   ],
+   "inRange": false,
+   "ratio": 0.4616638098962285,
+   "eligL": [
+    1547,
+    1652
+   ],
+   "zbar": 424.07099895458157,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.19119839573788364,
+    "z": [
+     108.70528218368945,
+     120.83501672668103
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.06568208732206715,
+    "z": [
+     258.34622660183317,
+     235.28710544402037
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.03561294139559344,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.05736644342448037
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.16706105207934957
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.47190883967754454,
+    "zbar": 348.7424008387777
+   }
+  },
+  {
+   "id": "sfx-cd-npmjs",
+   "kind": "code-js",
+   "prediction": "PRESENT+",
+   "pool": "code",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 291137,
+   "units": 63363,
+   "docs": 568,
+   "meanUnit": 4.594747723434812,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.13404960732497684,
+    "nullMean": 0.018697943675419264,
+    "nullSd": 0.0005236148209608134,
+    "z": 220.2986986462523
+   },
+   "confirm": {
+    "v": 0.13199407822638334,
+    "nullMean": 0.019488010499339598,
+    "nullSd": 0.0005387354245651473,
+    "z": 208.8336177593215
+   },
+   "vbar": 0.13302184277568008,
+   "poolMedian": 0.1838,
+   "range": [
+    0.0997,
+    0.3468
+   ],
+   "inRange": true,
+   "ratio": 0.7237314623268775,
+   "eligL": [
+    1507,
+    1586
+   ],
+   "zbar": 214.56615820278688,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.2360262482720239,
+    "z": [
+     180.60410559935696,
+     135.26049935108233
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.10928516484563564,
+    "z": [
+     152.42108639729145,
+     162.24554173317497
+    ]
+   },
+   "d1_hard": {
+    "state": "PRESENT+",
+    "vbar": 0.06991375263482479,
+    "z": [
+     241.28162789435572,
+     183.7995680157005
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.10047149620617297
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.21987916803180318
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.5587864154300464,
+    "zbar": 169.44823163925136
+   }
+  },
+  {
+   "id": "asym-cd-ts",
+   "kind": "code-ts",
+   "prediction": "PRESENT+",
+   "pool": "code",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 291346,
+   "units": 66170,
+   "docs": 467,
+   "meanUnit": 4.402992292579719,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.15514110097354714,
+    "nullMean": 0.020763121501565035,
+    "nullSd": 0.000741431154396209,
+    "z": 181.24134476304005
+   },
+   "confirm": {
+    "v": 0.1640187410612182,
+    "nullMean": 0.02117351738465444,
+    "nullSd": 0.0006586270859855128,
+    "z": 216.883311840755
+   },
+   "vbar": 0.15957992101738266,
+   "poolMedian": 0.1838,
+   "range": [
+    0.0997,
+    0.3468
+   ],
+   "inRange": true,
+   "ratio": 0.8682259032501778,
+   "eligL": [
+    1229,
+    1712
+   ],
+   "zbar": 199.06232830189754,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.30320735258172815,
+    "z": [
+     162.0706739640243,
+     181.20469800397282
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.11105726916189017,
+    "z": [
+     91.73321753282954,
+     116.12686607394997
+    ]
+   },
+   "d1_hard": {
+    "state": "PRESENT+",
+    "vbar": 0.08903979376896344,
+    "z": [
+     132.82109692055514,
+     154.9853582434069
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.12560638620701606
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.24661868356819905
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.5704839214851498,
+    "zbar": 170.88969889372
+   }
+  },
+  {
+   "id": "ent-cd-ts",
+   "kind": "code-ts",
+   "prediction": "PRESENT+",
+   "pool": "code",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 68340,
+   "units": 16684,
+   "docs": 119,
+   "meanUnit": 4.09614001438504,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.12509139511317877,
+    "nullMean": 0.019066115151803717,
+    "nullSd": 0.001310106395740808,
+    "z": 80.92875533320512
+   },
+   "confirm": {
+    "v": 0.11052892914150869,
+    "nullMean": 0.016116681736156,
+    "nullSd": 0.0008057014501851997,
+    "z": 117.18018800096606
+   },
+   "vbar": 0.11781016212734373,
+   "poolMedian": 0.1838,
+   "range": [
+    0.0997,
+    0.3468
+   ],
+   "inRange": true,
+   "ratio": 0.6409693260464838,
+   "eligL": [
+    361,
+    605
+   ],
+   "zbar": 99.05447166708558,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.21486535203393575,
+    "z": [
+     28.671248155082957,
+     41.300748248566194
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.09813416280962123,
+    "z": [
+     37.25138275717268,
+     152.67416608224943
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.05332066573567455,
+    "z": [
+     45.24616801252636,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.08555415398146175
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.20380080148809465
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.34660601512252465,
+    "zbar": 114.18029203994007
+   }
+  },
+  {
+   "id": "sib-py-foldvenv",
+   "kind": "code-py",
+   "prediction": "PRESENT+",
+   "pool": "code",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 292993,
+   "units": 68874,
+   "docs": 275,
+   "meanUnit": 4.25404361587827,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.16161791337037884,
+    "nullMean": 0.02228707717287661,
+    "nullSd": 0.0007188717422414858,
+    "z": 193.81876906589792
+   },
+   "confirm": {
+    "v": 0.14630539992318858,
+    "nullMean": 0.020416925163731038,
+    "nullSd": 0.0005849256602376112,
+    "z": 215.22132352394755
+   },
+   "vbar": 0.1539616566467837,
+   "poolMedian": 0.1838,
+   "range": [
+    0.0997,
+    0.3468
+   ],
+   "inRange": true,
+   "ratio": 0.8376586324634587,
+   "eligL": [
+    1589,
+    1451
+   ],
+   "zbar": 204.52004629492274,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.2969306163869982,
+    "z": [
+     195.1539779448044,
+     213.18034245828366
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.1136910468789789,
+    "z": [
+     128.702725952661,
+     138.31953210313318
+    ]
+   },
+   "d1_hard": {
+    "state": "PRESENT+",
+    "vbar": 0.08607830627431268,
+    "z": [
+     201.09837143500073,
+     156.23815853720978
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.11903320096574023
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.24328604760239175
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.5503395926047814,
+    "zbar": 240.4993027120427
+   }
+  },
+  {
+   "id": "asym-cd-py",
+   "kind": "code-py",
+   "prediction": "PRESENT+",
+   "pool": "code",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 90463,
+   "units": 15733,
+   "docs": 127,
+   "meanUnit": 5.749888768829848,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.15967806013772412,
+    "nullMean": 0.019326179366552954,
+    "nullSd": 0.000565404422590909,
+    "z": 248.2327253968456
+   },
+   "confirm": {
+    "v": 0.15101279296849932,
+    "nullMean": 0.017774485094415645,
+    "nullSd": 0.0011230047700668652,
+    "z": 118.6444718895989
+   },
+   "vbar": 0.15534542655311173,
+   "poolMedian": 0.1838,
+   "range": [
+    0.0997,
+    0.3468
+   ],
+   "inRange": true,
+   "ratio": 0.8451873044238941,
+   "eligL": [
+    794,
+    547
+   ],
+   "zbar": 183.43859864322226,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.25370289995381834,
+    "z": [
+     38.50294335175434,
+     42.48821695044732
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.11736941004658055,
+    "z": [
+     220.40539123890068,
+     78.75860737135625
+    ]
+   },
+   "d1_hard": {
+    "state": "PRESENT+",
+    "vbar": 0.08064367583199407,
+    "z": [
+     216.8613551168317,
+     80.87211907646419
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.11765039933885046
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.24917664210177903
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.5167986008117442,
+    "zbar": 181.03327535153193
+   }
+  },
+  {
+   "id": "ent-cd-py",
+   "kind": "code-py",
+   "prediction": "PRESENT+",
+   "pool": "code",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 118706,
+   "units": 19855,
+   "docs": 72,
+   "meanUnit": 5.978645177537144,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.10629671664062317,
+    "nullMean": 0.015174630579199539,
+    "nullSd": 0.0009570840194610466,
+    "z": 95.20803211481508
+   },
+   "confirm": {
+    "v": 0.12327653388201683,
+    "nullMean": 0.016214832830487757,
+    "nullSd": 0.0007281330226285289,
+    "z": 147.0359092697663
+   },
+   "vbar": 0.11478662526132,
+   "poolMedian": 0.1838,
+   "range": [
+    0.0997,
+    0.3468
+   ],
+   "inRange": true,
+   "ratio": 0.624519179876605,
+   "eligL": [
+    606,
+    1106
+   ],
+   "zbar": 121.12197069229069,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.20004741942447588,
+    "z": [
+     56.226773544381196,
+     92.40363104107347
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.09094131154247431,
+    "z": [
+     62.196851729160215,
+     175.00088413888378
+    ]
+   },
+   "d1_hard": {
+    "state": "PRESENT+",
+    "vbar": 0.06142761654103927,
+    "z": [
+     107.98917295476652,
+     104.45760176513382
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.0873773817344265
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.1946394264704517
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.4235635813276808,
+    "zbar": 201.28129190782187
+   }
+  },
+  {
+   "id": "sfx-cd-py314",
+   "kind": "code-py",
+   "prediction": "PRESENT+",
+   "pool": "code",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 291020,
+   "units": 62494,
+   "docs": 153,
+   "meanUnit": 4.656767049636765,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.16130599896766737,
+    "nullMean": 0.022062263214529084,
+    "nullSd": 0.0006023989940834408,
+    "z": 231.14868570622323
+   },
+   "confirm": {
+    "v": 0.14690502813054193,
+    "nullMean": 0.020165791149902485,
+    "nullSd": 0.0007180223350645619,
+    "z": 176.51155234501655
+   },
+   "vbar": 0.15410551354910465,
+   "poolMedian": 0.1838,
+   "range": [
+    0.0997,
+    0.3468
+   ],
+   "inRange": true,
+   "ratio": 0.8384413141953463,
+   "eligL": [
+    1281,
+    1755
+   ],
+   "zbar": 203.8301190256199,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.2481419096984591,
+    "z": [
+     151.84443499310473,
+     307.11802377058586
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.09473906739227314,
+    "z": [
+     93.60565059769324,
+     103.21640945193239
+    ]
+   },
+   "d1_hard": {
+    "state": "PRESENT+",
+    "vbar": 0.08437118437118438,
+    "z": [
+     109.08875854337887,
+     129.46739163511018
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.12080686563688317
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.24067484343963638
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.5442393867163664,
+    "zbar": 234.0889742762874
+   }
+  },
+  {
+   "id": "sfx-cd-rb26",
+   "kind": "code-rb",
+   "prediction": "PRESENT+",
+   "pool": "code",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 291169,
+   "units": 82941,
+   "docs": 354,
+   "meanUnit": 3.5105556962177933,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.089265976412083,
+    "nullMean": 0.017236881500243335,
+    "nullSd": 0.0005640901079984897,
+    "z": 127.69076055492987
+   },
+   "confirm": {
+    "v": 0.133208269732308,
+    "nullMean": 0.027885614338718175,
+    "nullSd": 0.0007277848640085857,
+    "z": 144.7167433703971
+   },
+   "vbar": 0.1112371230721955,
+   "poolMedian": 0.1838,
+   "range": [
+    0.0997,
+    0.3468
+   ],
+   "inRange": true,
+   "ratio": 0.6052074160619996,
+   "eligL": [
+    1291,
+    1374
+   ],
+   "zbar": 136.2037519626635,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.2590181619850833,
+    "z": [
+     112.45625622812338,
+     158.5750854514908
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.09075258024308762,
+    "z": [
+     143.04145993356394,
+     59.2098632181708
+    ]
+   },
+   "d1_hard": {
+    "state": "PRESENT+",
+    "vbar": 0.057140352479431555,
+    "z": [
+     62.80112316794511,
+     118.29998342789548
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.08227462946494113
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.19415839827186104
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.517662913802717,
+    "zbar": 169.20283350145334
+   }
+  },
+  {
+   "id": "sfx-cd-chdr",
+   "kind": "code-c",
+   "prediction": "PRESENT+",
+   "pool": "code",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 291492,
+   "units": 55463,
+   "docs": 276,
+   "meanUnit": 5.255611849341002,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.2020953908781918,
+    "nullMean": 0.027777533939032473,
+    "nullSd": 0.0013995691128639884,
+    "z": 124.55108885794604
+   },
+   "confirm": {
+    "v": 0.2552295026430314,
+    "nullMean": 0.031676656792955074,
+    "nullSd": 0.0009784881133499672,
+    "z": 228.46761529347282
+   },
+   "vbar": 0.2286624467606116,
+   "poolMedian": 0.1838,
+   "range": [
+    0.0997,
+    0.3468
+   ],
+   "inRange": true,
+   "ratio": 1.2440829529957105,
+   "eligL": [
+    1534,
+    1225
+   ],
+   "zbar": 176.50935207570944,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.32188132516098883,
+    "z": [
+     160.70772542381016,
+     156.4109287425905
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.23541212370057202,
+    "z": [
+     421.4316608338796,
+     205.3048988600433
+    ]
+   },
+   "d1_hard": {
+    "state": "PRESENT+",
+    "vbar": 0.14470452066093714,
+    "z": [
+     96.25207774988962,
+     198.15760853070086
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.1909126736394362
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.3171769774582944
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.6065898386855357,
+    "zbar": 314.1295441654002
+   }
+  },
+  {
+   "id": "rl-css-repos",
+   "kind": "markup-css",
+   "prediction": "PRESENT+",
+   "pool": "markup",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 218349,
+   "units": 55155,
+   "docs": 226,
+   "meanUnit": 3.958825129181398,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.430554395782674,
+    "nullMean": 0.05409888752202989,
+    "nullSd": 0.0010452588053662091,
+    "z": 360.15530921909044
+   },
+   "confirm": {
+    "v": 0.45207259629611685,
+    "nullMean": 0.05257129704938568,
+    "nullSd": 0.0019513492090366443,
+    "z": 204.73080748266466
+   },
+   "vbar": 0.4413134960393954,
+   "poolMedian": 0.1881,
+   "range": [
+    0.1195,
+    0.5704
+   ],
+   "inRange": true,
+   "ratio": 2.3461642532663234,
+   "eligL": [
+    781,
+    783
+   ],
+   "zbar": 282.44305835087755,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.5796495891440132,
+    "z": [
+     191.4428904289229,
+     225.35847587541116
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.2780976005696229,
+    "z": [
+     127.04632337366728,
+     144.17909828417675
+    ]
+   },
+   "d1_hard": {
+    "state": "PRESENT+",
+    "vbar": 0.33374051343939637,
+    "z": [
+     198.72267371757346,
+     194.10323396649892
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.3976304508083449
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.5246207076088945
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.8506916720767462,
+    "zbar": 257.2934469477072
+   }
+  },
+  {
+   "id": "rl-yaml-repos",
+   "kind": "config-yaml",
+   "prediction": "PRESENT+",
+   "pool": "config",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 20847,
+   "units": 5536,
+   "docs": 89,
+   "meanUnit": 3.765715317919075,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.21599143367831547,
+    "nullMean": 0.057948505414499515,
+    "nullSd": 0.0036751651254931374,
+    "z": 43.00294622615347
+   },
+   "confirm": {
+    "v": 0.2024955866625984,
+    "nullMean": 0.04241877022435394,
+    "nullSd": 0.0034684053590462722,
+    "z": 46.15285696659796
+   },
+   "vbar": 0.20924351017045695,
+   "poolMedian": 0.2384,
+   "range": [
+    0.1349,
+    0.3254
+   ],
+   "inRange": true,
+   "ratio": 0.8776992876277556,
+   "eligL": [
+    205,
+    150
+   ],
+   "zbar": 44.57790159637571,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.37796606863780624,
+    "z": [
+     22.078044020188255,
+     10.40822689089136
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.21305730370214476,
+    "z": [
+     54.46764357645372,
+     44.08395293933484
+    ]
+   },
+   "d1_hard": {
+    "state": "PRESENT+",
+    "vbar": 0.11276422764227642,
+    "z": [
+     28.87221515821159,
+     26.807365151035036
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.16462479921799092
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.30808120717021653
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.525992374985774,
+    "zbar": 98.16683254555979
+   }
+  },
+  {
+   "id": "asym-en-about-london",
+   "kind": "reportage",
+   "prediction": "PRESENT+",
+   "pool": "reportage",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 53609,
+   "units": 2104,
+   "docs": 30,
+   "meanUnit": 25.479562737642585,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.06102310545960366,
+    "nullMean": 0.011220612642691223,
+    "nullSd": 0.0003203815894079165,
+    "z": 155.44742414490887
+   },
+   "confirm": {
+    "v": 0.06296171386627317,
+    "nullMean": 0.010829461625882017,
+    "nullSd": 0.0002014024395885265,
+    "z": 258.84618054726394
+   },
+   "vbar": 0.06199240966293841,
+   "poolMedian": 0.086,
+   "range": [
+    0.0606,
+    0.1148
+   ],
+   "inRange": true,
+   "ratio": 0.7208419728248653,
+   "eligL": [
+    317,
+    279
+   ],
+   "zbar": 207.14680234608642,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.08828177085553113,
+    "z": [
+     6.945549028037938,
+     17.654746745411796
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.03321013561408824,
+    "z": [
+     99.90579501440821,
+     68.1507674550553
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.016417353549743906,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.03508427669903008
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.14426590054001004
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.28741742874517207,
+    "zbar": 56.85745174462163
+   }
+  },
+  {
+   "id": "asym-en-among-forces",
+   "kind": "essay",
+   "prediction": "PRESENT+",
+   "pool": "essay",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 35707,
+   "units": 2018,
+   "docs": 30,
+   "meanUnit": 17.694251734390484,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.04816891146777091,
+    "nullMean": 0.010668513357477743,
+    "nullSd": 0.0004944897510279395,
+    "z": 75.8365527947501
+   },
+   "confirm": {
+    "v": 0.0691783877858166,
+    "nullMean": 0.010866165400555492,
+    "nullSd": 0.00032251776746105215,
+    "z": 180.80313169817228
+   },
+   "vbar": 0.05867364962679375,
+   "poolMedian": 0.0666,
+   "range": [
+    0.0421,
+    0.1497
+   ],
+   "inRange": true,
+   "ratio": 0.8809857301320382,
+   "eligL": [
+    180,
+    283
+   ],
+   "zbar": 128.31984224646118,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.09313884342179904,
+    "z": [
+     10.794863412549743,
+     11.666078747411266
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.03566072674735825,
+    "z": [
+     78.44548277358611,
+     106.44999865284763
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.013378484491558698,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.0325666037263217
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.13935790749890536
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.2837264047373504,
+    "zbar": 55.38933185815969
+   }
+  },
+  {
+   "id": "asym-en-mouret",
+   "kind": "novel",
+   "prediction": "PRESENT+",
+   "pool": "novel",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 126434,
+   "units": 7974,
+   "docs": 80,
+   "meanUnit": 15.855781289189867,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.09198541745232156,
+    "nullMean": 0.010539705672438403,
+    "nullSd": 0.00018944057965088857,
+    "z": 429.92748401623214
+   },
+   "confirm": {
+    "v": 0.10070657733061021,
+    "nullMean": 0.010785242531610924,
+    "nullSd": 0.00020228777578284004,
+    "z": 444.5218424643298
+   },
+   "vbar": 0.09634599739146588,
+   "poolMedian": 0.0887,
+   "range": [
+    0.0505,
+    0.141
+   ],
+   "inRange": true,
+   "ratio": 1.0862006470289276,
+   "eligL": [
+    639,
+    823
+   ],
+   "zbar": 437.22466324028096,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.09921059680215173,
+    "z": [
+     15.827503140016931,
+     11.372637324837132
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.062044757332075755,
+    "z": [
+     240.6427495896541,
+     279.8262521421709
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.04125807905350287,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.06522400208802061
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.1837505365409728
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.4161186914418291,
+    "zbar": 128.16087036841196
+   }
+  },
+  {
+   "id": "asym-en-poe2",
+   "kind": "novel",
+   "prediction": "PRESENT+",
+   "pool": "novel",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 94473,
+   "units": 4101,
+   "docs": 41,
+   "meanUnit": 23.03657644476957,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.0900140013368302,
+    "nullMean": 0.011260370253018893,
+    "nullSd": 0.0002611350370886291,
+    "z": 301.5820165759004
+   },
+   "confirm": {
+    "v": 0.09125846244524431,
+    "nullMean": 0.011643611264911424,
+    "nullSd": 0.00023307880103920787,
+    "z": 341.57911755750064
+   },
+   "vbar": 0.09063623189103726,
+   "poolMedian": 0.0887,
+   "range": [
+    0.0505,
+    0.141
+   ],
+   "inRange": true,
+   "ratio": 1.0218289953893716,
+   "eligL": [
+    529,
+    520
+   ],
+   "zbar": 321.5805670667005,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.10313678623145442,
+    "z": [
+     22.66325654823165,
+     31.114102669671276
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.043253048585246895,
+    "z": [
+     106.32107151315698,
+     163.23001564116038
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.032430565653628035,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.05856604178632738
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.17921250802196456
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.36398109191257644,
+    "zbar": 93.87090312281113
+   }
+  },
+  {
+   "id": "asym-en-awakening",
+   "kind": "novel",
+   "prediction": "PRESENT+",
+   "pool": "novel",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 64499,
+   "units": 4448,
+   "docs": 44,
+   "meanUnit": 14.500674460431656,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.0979570754333287,
+    "nullMean": 0.0111331877346321,
+    "nullSd": 0.0003139140729188836,
+    "z": 276.58488481060283
+   },
+   "confirm": {
+    "v": 0.0824365866734752,
+    "nullMean": 0.010468293089105712,
+    "nullSd": 0.00022333999004242675,
+    "z": 322.2364860439818
+   },
+   "vbar": 0.09019683105340195,
+   "poolMedian": 0.0887,
+   "range": [
+    0.0505,
+    0.141
+   ],
+   "inRange": true,
+   "ratio": 1.0168752091702589,
+   "eligL": [
+    334,
+    435
+   ],
+   "zbar": 299.4106854272923,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.10552919358694293,
+    "z": [
+     14.440429635731611,
+     29.676204669427104
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.0459090799089666,
+    "z": [
+     126.87340178397115,
+     209.41809174571384
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.030607750017206965,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.05812685385616839
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.17794513115647018
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.36682543527579925,
+    "zbar": 100.61156541201142
+   }
+  },
+  {
+   "id": "ec-en-yonge",
+   "kind": "novel",
+   "prediction": "PRESENT+",
+   "pool": "novel",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 104137,
+   "units": 5271,
+   "docs": 53,
+   "meanUnit": 19.756592676911403,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.07018563671416653,
+    "nullMean": 0.009596664241785935,
+    "nullSd": 0.00011708182982328035,
+    "z": 517.4925311966143
+   },
+   "confirm": {
+    "v": 0.0737145237617048,
+    "nullMean": 0.009838329767896883,
+    "nullSd": 0.0001321048515340752,
+    "z": 483.5264810644116
+   },
+   "vbar": 0.07195008023793567,
+   "poolMedian": 0.0887,
+   "range": [
+    0.0505,
+    0.141
+   ],
+   "inRange": true,
+   "ratio": 0.8111621221864225,
+   "eligL": [
+    502,
+    609
+   ],
+   "zbar": 500.50950613051293,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.08103211921539369,
+    "z": [
+     13.016852086227342,
+     12.871586427543548
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.0337777402192701,
+    "z": [
+     141.25845465227934,
+     233.50119798214806
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.021454412236113017,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.04345156956280659
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.1562637155555039
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.3957311193323574,
+    "zbar": 96.13427038523255
+   }
+  },
+  {
+   "id": "asym-en-waikna",
+   "kind": "memoir",
+   "prediction": "PRESENT+",
+   "pool": "memoir",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 74854,
+   "units": 2855,
+   "docs": 30,
+   "meanUnit": 26.218563922942206,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.11806607896371714,
+    "nullMean": 0.011365624240884439,
+    "nullSd": 0.00012495411311065976,
+    "z": 853.9171065808648
+   },
+   "confirm": {
+    "v": 0.1089191086602249,
+    "nullMean": 0.011410099182007935,
+    "nullSd": 0.00029221005594569995,
+    "z": 333.69491396400343
+   },
+   "vbar": 0.11349259381197102,
+   "poolMedian": 0.0876,
+   "range": [
+    0.0536,
+    0.1295
+   ],
+   "inRange": true,
+   "ratio": 1.295577554931176,
+   "eligL": [
+    531,
+    356
+   ],
+   "zbar": 593.8060102724342,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.0967853734034825,
+    "z": [
+     10.578846076939671,
+     10.973438276127956
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.0555305316842765,
+    "z": [
+     233.57481916120872,
+     226.2100160035212
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.03804830825874436,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.0786088997502571
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.20169183384876815
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.3525004911127544,
+    "zbar": 110.89906376066476
+   }
+  },
+  {
+   "id": "ec-en-swisshelm",
+   "kind": "memoir",
+   "prediction": "PRESENT+",
+   "pool": "memoir",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 99108,
+   "units": 4515,
+   "docs": 45,
+   "meanUnit": 21.950830564784052,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.06226074267686658,
+    "nullMean": 0.01049901951090371,
+    "nullSd": 0.00013770665407560599,
+    "z": 375.8839651825669
+   },
+   "confirm": {
+    "v": 0.06324672388660021,
+    "nullMean": 0.010175569275010595,
+    "nullSd": 0.00010784018709084706,
+    "z": 492.127805443079
+   },
+   "vbar": 0.06275373328173339,
+   "poolMedian": 0.0876,
+   "range": [
+    0.0536,
+    0.1295
+   ],
+   "inRange": true,
+   "ratio": 0.7163668182846278,
+   "eligL": [
+    563,
+    556
+   ],
+   "zbar": 434.00588531282295,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.08399302543636075,
+    "z": [
+     14.84177406571027,
+     16.537740766628353
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.04332700543413068,
+    "z": [
+     114.38094646602458,
+     220.16432530462535
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.009847361897338258,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.032745231451060834
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.1504734213460022
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.3922181850334071,
+    "zbar": 114.70042948485434
+   }
+  },
+  {
+   "id": "ec-en-children",
+   "kind": "children",
+   "prediction": "PRESENT+",
+   "pool": "children",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 45786,
+   "units": 3656,
+   "docs": 37,
+   "meanUnit": 12.523522975929978,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.08722489982414734,
+    "nullMean": 0.010586546561210946,
+    "nullSd": 0.00023026410033477788,
+    "z": 332.8280576586317
+   },
+   "confirm": {
+    "v": 0.1018437366284553,
+    "nullMean": 0.011301129955699915,
+    "nullSd": 0.00024186414633812676,
+    "z": 374.35315669390934
+   },
+   "vbar": 0.09453431822630132,
+   "poolMedian": 0.1092,
+   "range": [
+    0.0267,
+    0.1914
+   ],
+   "inRange": true,
+   "ratio": 0.8656988848562391,
+   "eligL": [
+    221,
+    387
+   ],
+   "zbar": 353.5906071762705,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.13439578264498414,
+    "z": [
+     32.25841587660614,
+     25.679734692543843
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.05460203842733216,
+    "z": [
+     123.36192681690508,
+     193.13809596454786
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.029400072491727755,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.060206008218108564
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.1844129635179097
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.41455464106119544,
+    "zbar": 111.46369329430419
+   }
+  },
+  {
+   "id": "asym-en-dolls-house",
+   "kind": "drama",
+   "prediction": "PRESENT+",
+   "pool": "drama",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 22597,
+   "units": 2497,
+   "docs": 30,
+   "meanUnit": 9.049659591509812,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.06778275709833204,
+    "nullMean": 0.010807577941700553,
+    "nullSd": 0.00031305582096611124,
+    "z": 181.9968687399016
+   },
+   "confirm": {
+    "v": 0.06979813355901014,
+    "nullMean": 0.010938346164725431,
+    "nullSd": 0.0002785054675104084,
+    "z": 211.34158664976653
+   },
+   "vbar": 0.0687904453286711,
+   "poolMedian": 0.0401,
+   "range": [
+    0.0187,
+    0.0958
+   ],
+   "inRange": true,
+   "ratio": 1.7154724520865612,
+   "eligL": [
+    180,
+    161
+   ],
+   "zbar": 196.66922769483406,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.12758667986512398,
+    "z": [
+     11.938134176622727,
+     11.468719136182624
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.04395487548496327,
+    "z": [
+     85.0803511133857,
+     79.61790815024035
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.02696687370600414,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.04112209110261665
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.15349493962860788
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.39126715688542213,
+    "zbar": 64.54342770763127
+   }
+  },
+  {
+   "id": "asym-en-early-plays",
+   "kind": "drama",
+   "prediction": "PRESENT+",
+   "pool": "drama",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 31927,
+   "units": 1848,
+   "docs": 30,
+   "meanUnit": 17.276515151515152,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.05267922474395948,
+    "nullMean": 0.009339441663648923,
+    "nullSd": 0.0002702134868600209,
+    "z": 160.3908953025795
+   },
+   "confirm": {
+    "v": 0.03713219467992404,
+    "nullMean": 0.008959348392504396,
+    "nullSd": 0.00014773763613847444,
+    "z": 190.69512024013466
+   },
+   "vbar": 0.04490570971194176,
+   "poolMedian": 0.0401,
+   "range": [
+    0.0187,
+    0.0958
+   ],
+   "inRange": true,
+   "ratio": 1.119843134961141,
+   "eligL": [
+    185,
+    202
+   ],
+   "zbar": 175.54300777135708,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.0762837746462024,
+    "z": [
+     20.750757419038855,
+     12.947649636539026
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.021178837051849787,
+    "z": [
+     37.61855848085226,
+     71.54975441483933
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.010583355632860584,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.024638605857944994
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.11634816688825134
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.21795370582507145,
+    "zbar": 52.509954800978015
+   }
+  },
+  {
+   "id": "ec-en-shakespeare",
+   "kind": "drama",
+   "prediction": "PRESENT+",
+   "pool": "drama",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 299964,
+   "units": 23608,
+   "docs": 236,
+   "meanUnit": 12.706031853608946,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.04398600165187425,
+    "nullMean": 0.009602841669314174,
+    "nullSd": 0.00010189569796317143,
+    "z": 337.4348541681055
+   },
+   "confirm": {
+    "v": 0.04580972239031595,
+    "nullMean": 0.009624082826643156,
+    "nullSd": 0.00008093685238447961,
+    "z": 447.0848383351726
+   },
+   "vbar": 0.0448978620210951,
+   "poolMedian": 0.0401,
+   "range": [
+    0.0187,
+    0.0958
+   ],
+   "inRange": true,
+   "ratio": 1.119647431947509,
+   "eligL": [
+    1240,
+    1583
+   ],
+   "zbar": 392.25984625163903,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.07425972971189052,
+    "z": [
+     37.86098742473027,
+     44.90743512050677
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.023183561107265833,
+    "z": [
+     141.3787510817274,
+     168.62012123967827
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.009576549222586758,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.022414354759676458
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.12164462389206224
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.4462066922794109,
+    "zbar": 166.88200095129656
+   }
+  },
+  {
+   "id": "asym-oc-irc-ho-0607",
+   "kind": "chat",
+   "prediction": "PRESENT+",
+   "pool": "chat",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 44326,
+   "units": 4304,
+   "docs": 43,
+   "meanUnit": 10.298791821561338,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.054373923976293856,
+    "nullMean": 0.010162189385510027,
+    "nullSd": 0.00017750983672211936,
+    "z": 249.06639207828553
+   },
+   "confirm": {
+    "v": 0.05667156350567724,
+    "nullMean": 0.009855635388614782,
+    "nullSd": 0.0001693419785125734,
+    "z": 276.4579021000776
+   },
+   "vbar": 0.05552274374098555,
+   "poolMedian": 0.0741,
+   "range": [
+    0.0327,
+    0.1201
+   ],
+   "inRange": true,
+   "ratio": 0.7492947873277402,
+   "eligL": [
+    269,
+    375
+   ],
+   "zbar": 262.76214708918155,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.1050459949547795,
+    "z": [
+     16.17812037745325,
+     16.953893306255218
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.05337801072248557,
+    "z": [
+     232.28062022368488,
+     169.1236336126006
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.012768277571251548,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.029306516127374213
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.13781120246253475
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.34010571336791917,
+    "zbar": 105.68718052582315
+   }
+  },
+  {
+   "id": "asym-oc-irc-ho-0809",
+   "kind": "chat",
+   "prediction": "PRESENT+",
+   "pool": "chat",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 44366,
+   "units": 4094,
+   "docs": 41,
+   "meanUnit": 10.836834391792868,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.055479458484160235,
+    "nullMean": 0.010117900561398501,
+    "nullSd": 0.0002587398445526606,
+    "z": 175.31724965355855
+   },
+   "confirm": {
+    "v": 0.063932361935139,
+    "nullMean": 0.00997808382310089,
+    "nullSd": 0.00022126567992016341,
+    "z": 243.84386286886323
+   },
+   "vbar": 0.05970591020964962,
+   "poolMedian": 0.0741,
+   "range": [
+    0.0327,
+    0.1201
+   ],
+   "inRange": true,
+   "ratio": 0.8057477761086318,
+   "eligL": [
+    246,
+    403
+   ],
+   "zbar": 209.5805562612109,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.10876653823722233,
+    "z": [
+     32.92358378362583,
+     18.496135542158584
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.05582630048054201,
+    "z": [
+     112.73894781256016,
+     294.6533830725842
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.018055639613468094,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.03468345788358521
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.13970993560707368
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.3412183891358541,
+    "zbar": 143.69042381384392
+   }
+  },
+  {
+   "id": "asym-ud-ita",
+   "kind": "treebank",
+   "prediction": "PRESENT+",
+   "pool": "treebank",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 240871,
+   "units": 13060,
+   "docs": 523,
+   "meanUnit": 18.443415007656967,
+   "mwtShare": 0.15269168974264233,
+   "discover": {
+    "v": 0.2238612080809168,
+    "nullMean": 0.012248552739541983,
+    "nullSd": 0.0001122960848890999,
+    "z": 1884.4170351117482
+   },
+   "confirm": {
+    "v": 0.21629077557998694,
+    "nullMean": 0.012060398476591521,
+    "nullSd": 0.00010449005468602764,
+    "z": 1954.543690469568
+   },
+   "vbar": 0.22007599183045187,
+   "poolMedian": 0.054,
+   "range": [
+    0.0178,
+    0.241
+   ],
+   "inRange": true,
+   "ratio": 4.075481330193553,
+   "eligL": [
+    1402,
+    1218
+   ],
+   "zbar": 1919.480362790658,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.17984097991363313,
+    "z": [
+     47.93217528528432,
+     51.8212274632975
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.08257362289801813,
+    "z": [
+     613.5232447493021,
+     716.2955812780714
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.08873202485775658,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.1673696024682216
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.3246510117086585
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.45204734084680337,
+    "zbar": 259.4539625809693
+   }
+  },
+  {
+   "id": "asym-ud-nld",
+   "kind": "treebank",
+   "prediction": "PRESENT+",
+   "pool": "treebank",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 163958,
+   "units": 12277,
+   "docs": 492,
+   "meanUnit": 13.354891260079825,
+   "mwtShare": 0.000012198245892240696,
+   "discover": {
+    "v": 0.08781878932301293,
+    "nullMean": 0.011454279442565274,
+    "nullSd": 0.00018620792303675746,
+    "z": 410.1034404716135
+   },
+   "confirm": {
+    "v": 0.08384356247092863,
+    "nullMean": 0.012560734685464852,
+    "nullSd": 0.00034501637951426265,
+    "z": 206.6070830776804
+   },
+   "vbar": 0.08583117589697078,
+   "poolMedian": 0.054,
+   "range": [
+    0.0178,
+    0.241
+   ],
+   "inRange": true,
+   "ratio": 1.5894662203142738,
+   "eligL": [
+    821,
+    807
+   ],
+   "zbar": 308.3552617746469,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.10727417951225611,
+    "z": [
+     48.31569164790919,
+     58.32022678517555
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.03953733151345693,
+    "z": [
+     144.83724963891402,
+     111.2842444125168
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.022114657526183048,
+    "z": [
+     null,
+     35.14632576455706
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.05224697466898603
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.17409118741653168
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.33033446058664095,
+    "zbar": 84.49224566397326
+   }
+  },
+  {
+   "id": "asym-ud-rus",
+   "kind": "treebank",
+   "prediction": "PRESENT+",
+   "pool": "treebank",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 58306,
+   "units": 3850,
+   "docs": 154,
+   "meanUnit": 15.144415584415585,
+   "mwtShare": 0,
+   "discover": {
+    "v": 0.08791165302706877,
+    "nullMean": 0.010406672095602996,
+    "nullSd": 0.000435463348499086,
+    "z": 177.98278821536329
+   },
+   "confirm": {
+    "v": 0.08507537913669196,
+    "nullMean": 0.010234989737314116,
+    "nullSd": 0.0006111336403884906,
+    "z": 122.46157706488333
+   },
+   "vbar": 0.08649351608188036,
+   "poolMedian": 0.054,
+   "range": [
+    0.0178,
+    0.241
+   ],
+   "inRange": true,
+   "ratio": 1.6017317792940806,
+   "eligL": [
+    261,
+    165
+   ],
+   "zbar": 150.22218264012332,
+   "sameL": {
+    "status": "ABSENT",
+    "vbar": 0.0852192068788214,
+    "z": [
+     -1.5100506569807144,
+     -0.1369274051125874
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.0602316072386318,
+    "z": [
+     105.30364261823127,
+     151.89258850148124
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.050261233019853704,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.06580328952990602
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.15557702019256991
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.10348480076063282,
+    "zbar": 78.63490471881317
+   }
+  },
+  {
+   "id": "asym-ud-ces",
+   "kind": "treebank",
+   "prediction": "PRESENT+",
+   "pool": "treebank",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 299982,
+   "units": 17228,
+   "docs": 690,
+   "meanUnit": 17.412468075226375,
+   "mwtShare": 0.006767072691028129,
+   "discover": {
+    "v": 0.04694293498666,
+    "nullMean": 0.008996284962656692,
+    "nullSd": 0.000027736007880092686,
+    "z": 1368.1366903287924
+   },
+   "confirm": {
+    "v": 0.04753780449410496,
+    "nullMean": 0.009258756521845818,
+    "nullSd": 0.00014884486680457744,
+    "z": 257.1741222525112
+   },
+   "vbar": 0.04724036974038248,
+   "poolMedian": 0.054,
+   "range": [
+    0.0178,
+    0.241
+   ],
+   "inRange": true,
+   "ratio": 0.8748216618589348,
+   "eligL": [
+    2014,
+    1882
+   ],
+   "zbar": 812.6554062906519,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.08197289714970038,
+    "z": [
+     82.4942542398776,
+     63.151640942686825
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.037654423768927484,
+    "z": [
+     405.2051154295012,
+     316.0574561705212
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.013275298204808637,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.02663287574747443
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.11937882872235206
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.21076919267082758,
+    "zbar": 164.48999418907113
+   }
+  },
+  {
+   "id": "asym-ud-dan",
+   "kind": "treebank",
+   "prediction": "PRESENT+",
+   "pool": "treebank",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 68296,
+   "units": 4369,
+   "docs": 175,
+   "meanUnit": 15.631952391851682,
+   "mwtShare": 0,
+   "discover": {
+    "v": 0.04633935953267026,
+    "nullMean": 0.009280827209391485,
+    "nullSd": 0.0001648520349780662,
+    "z": 224.79875561262838
+   },
+   "confirm": {
+    "v": 0.05180033765392567,
+    "nullMean": 0.009210583869823173,
+    "nullSd": 0.00011028373297451702,
+    "z": 386.18346183424535
+   },
+   "vbar": 0.049069848593297966,
+   "poolMedian": 0.054,
+   "range": [
+    0.0178,
+    0.241
+   ],
+   "inRange": true,
+   "ratio": 0.9087008998758883,
+   "eligL": [
+    279,
+    317
+   ],
+   "zbar": 305.49110872343687,
+   "sameL": {
+    "status": "ABSENT",
+    "vbar": 0.05474302610070621,
+    "z": [
+     -0.541940272296063,
+     0.13087732572242988
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.03253883373811601,
+    "z": [
+     140.36578794619825,
+     118.39868790306244
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.00989337765566523,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.026204401495242474
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.12371640616257004
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.23092300671792235,
+    "zbar": 69.97827109975955
+   }
+  },
+  {
+   "id": "asym-ud-lit",
+   "kind": "treebank",
+   "prediction": "PRESENT+",
+   "pool": "treebank",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 37825,
+   "units": 2340,
+   "docs": 94,
+   "meanUnit": 16.164529914529915,
+   "mwtShare": 0,
+   "discover": {
+    "v": 0.07584188956994138,
+    "nullMean": 0.008751159834448807,
+    "nullSd": 0.00021295193102126934,
+    "z": 315.0510512571574
+   },
+   "confirm": {
+    "v": 0.10700399526293278,
+    "nullMean": 0.009903953194476182,
+    "nullSd": 0.0003790051970398416,
+    "z": 256.19712559838405
+   },
+   "vbar": 0.09142294241643709,
+   "poolMedian": 0.054,
+   "range": [
+    0.0178,
+    0.241
+   ],
+   "inRange": true,
+   "ratio": 1.6930174521562424,
+   "eligL": [
+    196,
+    214
+   ],
+   "zbar": 285.62408842777074,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.13787201795272183,
+    "z": [
+     18.83794631589264,
+     21.916436598569273
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.04226454172060331,
+    "z": [
+     180.03898976062376,
+     105.53870477536232
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.05290387182910547,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.07056944652394506
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.16120410006391028
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.13460220046040905,
+    "zbar": 84.86771277808545
+   }
+  },
+  {
+   "id": "asym-ud-ell",
+   "kind": "treebank",
+   "prediction": "PRESENT+",
+   "pool": "treebank",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 37783,
+   "units": 1632,
+   "docs": 66,
+   "meanUnit": 23.151348039215687,
+   "mwtShare": 0.058968319085302916,
+   "discover": {
+    "v": 0.15582679491075146,
+    "nullMean": 0.009944968623398161,
+    "nullSd": 0.00030789712861025424,
+    "z": 473.80054158288385
+   },
+   "confirm": {
+    "v": 0.1627113800044826,
+    "nullMean": 0.009968344494206142,
+    "nullSd": 0.0004482762288533937,
+    "z": 340.73418503801645
+   },
+   "vbar": 0.15926908745761703,
+   "poolMedian": 0.054,
+   "range": [
+    0.0178,
+    0.241
+   ],
+   "inRange": true,
+   "ratio": 2.9494275455114267,
+   "eligL": [
+    172,
+    159
+   ],
+   "zbar": 407.26736331045015,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.15656683344741582,
+    "z": [
+     17.99507638140499,
+     10.846915774220129
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.11376701089230076,
+    "z": [
+     454.7939461529287,
+     304.50071495110564
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.09391911657159574,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.126521277023485
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.2409325296704507
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.28039007619337386,
+    "zbar": 91.59200068829635
+   }
+  },
+  {
+   "id": "asym-ud-tur",
+   "kind": "treebank",
+   "prediction": "PRESENT+",
+   "pool": "treebank",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 30973,
+   "units": 3430,
+   "docs": 138,
+   "meanUnit": 9.030029154518951,
+   "mwtShare": 0.06954444193329674,
+   "discover": {
+    "v": 0.0401164668671629,
+    "nullMean": 0.00882055980025748,
+    "nullSd": 0.0002061367950295625,
+    "z": 151.82106165188614
+   },
+   "confirm": {
+    "v": 0.026856998626748726,
+    "nullMean": 0.008524194201052928,
+    "nullSd": 0.00014244563930570063,
+    "z": 128.70035555354573
+   },
+   "vbar": 0.033486732746955815,
+   "poolMedian": 0.054,
+   "range": [
+    0.0178,
+    0.241
+   ],
+   "inRange": true,
+   "ratio": 0.6201246804991818,
+   "eligL": [
+    131,
+    118
+   ],
+   "zbar": 140.26070860271594,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.07054741737301312,
+    "z": [
+     10.151535465947218,
+     11.436270228779815
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.03581695937543759,
+    "z": [
+     82.41608954571839,
+     106.30962428924454
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.011870875921852762,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.018516565549879425
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.09545688353537286
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.07220618528835274,
+    "zbar": 61.074596394643066
+   }
+  },
+  {
+   "id": "asym-ud-hye",
+   "kind": "treebank",
+   "prediction": "PRESENT+",
+   "pool": "treebank",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 65187,
+   "units": 4352,
+   "docs": 175,
+   "meanUnit": 14.978630514705882,
+   "mwtShare": 0.0050470185773237,
+   "discover": {
+    "v": 0.045840546117007046,
+    "nullMean": 0.00888251672386085,
+    "nullSd": 0.00008031810901945914,
+    "z": 460.1456613500719
+   },
+   "confirm": {
+    "v": 0.030964696294720033,
+    "nullMean": 0.008997050152538804,
+    "nullSd": 0.00013829758028492797,
+    "z": 158.84331524038473
+   },
+   "vbar": 0.03840262120586354,
+   "poolMedian": 0.054,
+   "range": [
+    0.0178,
+    0.241
+   ],
+   "inRange": true,
+   "ratio": 0.711159651960436,
+   "eligL": [
+    377,
+    319
+   ],
+   "zbar": 309.49448829522834,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.0814954496212367,
+    "z": [
+     24.979028349591207,
+     26.505276494705765
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.03286284031508182,
+    "z": [
+     199.52777402845402,
+     150.13861075763754
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.009766095972992526,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.02061949179189083
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.10568800169752735
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.12023994761398663,
+    "zbar": 76.51520717897569
+   }
+  },
+  {
+   "id": "asym-ud-kat",
+   "kind": "treebank",
+   "prediction": "PRESENT+",
+   "pool": "treebank",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 33092,
+   "units": 2214,
+   "docs": 89,
+   "meanUnit": 14.946702800361336,
+   "mwtShare": 0.15967605463556148,
+   "discover": {
+    "v": 0.027382169254276577,
+    "nullMean": 0.009254073497345644,
+    "nullSd": 0.0003024542233942658,
+    "z": 59.936659351256466
+   },
+   "confirm": {
+    "v": 0.03701764448332479,
+    "nullMean": 0.009638271147868433,
+    "nullSd": 0.0002558853450458553,
+    "z": 106.9985986518685
+   },
+   "vbar": 0.032199906868800685,
+   "poolMedian": 0.054,
+   "range": [
+    0.0178,
+    0.241
+   ],
+   "inRange": true,
+   "ratio": 0.5962945716444571,
+   "eligL": [
+    125,
+    216
+   ],
+   "zbar": 83.46762900156249,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.06764791319994176,
+    "z": [
+     6.9762776725755415,
+     9.586565003939743
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.06430730508524757,
+    "z": [
+     94.29335336605216,
+     147.08900718582976
+    ]
+   },
+   "d1_hard": {
+    "state": "UNDEF",
+    "vbar": 0.004629629629629629,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     10,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.013531318396639121
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.10222643131760023
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.10661044158030593,
+    "zbar": 52.61907204308947
+   }
+  },
+  {
+   "id": "asym-ud-gle",
+   "kind": "treebank",
+   "prediction": "PRESENT+",
+   "pool": "treebank",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 85922,
+   "units": 3997,
+   "docs": 160,
+   "meanUnit": 21.496622466850138,
+   "mwtShare": 0,
+   "discover": {
+    "v": 0.20814871698198786,
+    "nullMean": 0.010476673024617439,
+    "nullSd": 0.00017614469586441997,
+    "z": 1122.2140013203702
+   },
+   "confirm": {
+    "v": 0.1950765207159783,
+    "nullMean": 0.01034554608519676,
+    "nullSd": 0.00018920121506784654,
+    "z": 976.373088114355
+   },
+   "vbar": 0.20161261884898307,
+   "poolMedian": 0.054,
+   "range": [
+    0.0178,
+    0.241
+   ],
+   "inRange": true,
+   "ratio": 3.733567015721909,
+   "eligL": [
+    445,
+    557
+   ],
+   "zbar": 1049.2935447173627,
+   "sameL": {
+    "status": "AMBIGUOUS",
+    "vbar": 0.14746772436699518,
+    "z": [
+     2.6539728707986825,
+     3.4426655833347426
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.06421442164960804,
+    "z": [
+     449.1430727346875,
+     215.35483002641726
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.11902245173784116,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.16556347964321658
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.2865425723160183
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.3447355920154864,
+    "zbar": 177.1682868200084
+   }
+  },
+  {
+   "id": "asym-ud-afr",
+   "kind": "treebank",
+   "prediction": "PRESENT+",
+   "pool": "treebank",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 30498,
+   "units": 1315,
+   "docs": 53,
+   "meanUnit": 23.19239543726236,
+   "mwtShare": 0,
+   "discover": {
+    "v": 0.10477444848003138,
+    "nullMean": 0.01198934441940618,
+    "nullSd": 0.000278458987958594,
+    "z": 333.2092267548644
+   },
+   "confirm": {
+    "v": 0.09381253555077565,
+    "nullMean": 0.01202077841145045,
+    "nullSd": 0.000245035662551596,
+    "z": 333.79531896546973
+   },
+   "vbar": 0.09929349201540352,
+   "poolMedian": 0.054,
+   "range": [
+    0.0178,
+    0.241
+   ],
+   "inRange": true,
+   "ratio": 1.8387683706556208,
+   "eligL": [
+    183,
+    149
+   ],
+   "zbar": 333.50227286016707,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.13972795527249415,
+    "z": [
+     22.311004904351787,
+     23.314151008630926
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.08294213463559832,
+    "z": [
+     253.98830212969483,
+     201.0207104670928
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.04199215168518722,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.06843924998719893
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.18355667002688844
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.3537633406522923,
+    "zbar": 83.50440569086356
+   }
+  },
+  {
+   "id": "asym-ud-mlt",
+   "kind": "treebank",
+   "prediction": "PRESENT+",
+   "pool": "treebank",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 20056,
+   "units": 1120,
+   "docs": 45,
+   "meanUnit": 17.90714285714286,
+   "mwtShare": 0,
+   "discover": {
+    "v": 0.08723526910639648,
+    "nullMean": 0.016683782298490824,
+    "nullSd": 0.0022877532770668174,
+    "z": 30.838765488891084
+   },
+   "confirm": {
+    "v": 0.07860025537389363,
+    "nullMean": 0.010277759404172845,
+    "nullSd": 0.0005017536412833998,
+    "z": 136.16741434095735
+   },
+   "vbar": 0.08291776224014505,
+   "poolMedian": 0.054,
+   "range": [
+    0.0178,
+    0.241
+   ],
+   "inRange": true,
+   "ratio": 1.5355141155582417,
+   "eligL": [
+    117,
+    165
+   ],
+   "zbar": 83.50308991492422,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.1345160902117759,
+    "z": [
+     10.14873844682966,
+     13.118237469800246
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.055661336056067115,
+    "z": [
+     11.49347041614772,
+     120.66783506969787
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.02494172494172494,
+    "z": [
+     9.657109469898819,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.055069152597121626
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.16237819261368192
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.2058614917182225,
+    "zbar": 58.740787185394524
+   }
+  },
+  {
+   "id": "asym-ud-wol",
+   "kind": "treebank",
+   "prediction": "PRESENT+",
+   "pool": "treebank",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 20635,
+   "units": 1188,
+   "docs": 48,
+   "meanUnit": 17.36952861952862,
+   "mwtShare": 0.06837896777320088,
+   "discover": {
+    "v": 0.05109908970059873,
+    "nullMean": 0.009823840484322461,
+    "nullSd": 0.0002759666502158922,
+    "z": 149.5660768574251
+   },
+   "confirm": {
+    "v": 0.04610025044289301,
+    "nullMean": 0.009959796290473735,
+    "nullSd": 0.00015087398405285035,
+    "z": 239.54066288697902
+   },
+   "vbar": 0.04859967007174587,
+   "poolMedian": 0.054,
+   "range": [
+    0.0178,
+    0.241
+   ],
+   "inRange": true,
+   "ratio": 0.8999938902175161,
+   "eligL": [
+    154,
+    134
+   ],
+   "zbar": 194.55336987220204,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.11157275805695427,
+    "z": [
+     22.338527033783166,
+     24.12563514466928
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.05633352885039917,
+    "z": [
+     261.92677685059715,
+     112.993069351501
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.013956193060670672,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.02612507783835487
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.12455961138992533
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.2736073554447462,
+    "zbar": 57.63035467952609
+   }
+  },
+  {
+   "id": "ent-ud-lat-perseus",
+   "kind": "treebank",
+   "prediction": "PRESENT+",
+   "pool": "treebank",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 21484,
+   "units": 1987,
+   "docs": 81,
+   "meanUnit": 10.812279818822345,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.022912190571571844,
+    "nullMean": 0.008149617663585417,
+    "nullSd": 0.0002520302358982951,
+    "z": 58.5746105238887
+   },
+   "confirm": {
+    "v": 0.01512661840832461,
+    "nullMean": 0.008360432264654202,
+    "nullSd": 0.0002881393069067804,
+    "z": 23.48234337170604
+   },
+   "vbar": 0.019019404489948228,
+   "poolMedian": 0.054,
+   "range": [
+    0.0178,
+    0.241
+   ],
+   "inRange": true,
+   "ratio": 0.3522111942583005,
+   "eligL": [
+    84,
+    83
+   ],
+   "zbar": 41.02847694779737,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.03380117599987389,
+    "z": [
+     5.04216734764654,
+     10.11297830004036
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.017205468935726567,
+    "z": [
+     57.53590546038277,
+     30.837925645882198
+    ]
+   },
+   "d1_hard": {
+    "state": "UNDEF",
+    "vbar": 0.005952380952380952,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     10
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.00848676312022966
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.07337209867515314
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.036005460346456825,
+    "zbar": 26.197212942601986
+   }
+  },
+  {
+   "id": "sib-bpmn-miwg-heldout",
+   "kind": "diagram",
+   "prediction": "PRESENT+",
+   "pool": "diagram",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 292035,
+   "units": 59607,
+   "docs": 100,
+   "meanUnit": 4.8993406814635865,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.552227123449885,
+    "nullMean": 0.06059428181632705,
+    "nullSd": 0.001550675075262825,
+    "z": 317.0443953580867
+   },
+   "confirm": {
+    "v": 0.5829016412449436,
+    "nullMean": 0.04322481956244065,
+    "nullSd": 0.0020118115367036143,
+    "z": 268.25416388991
+   },
+   "vbar": 0.5675643823474144,
+   "poolMedian": 0.4224,
+   "range": [
+    0.1921,
+    0.6826
+   ],
+   "inRange": true,
+   "ratio": 1.3436656779058105,
+   "eligL": [
+    520,
+    677
+   ],
+   "zbar": 292.6492796239984,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.6650680569888037,
+    "z": [
+     155.1477137786806,
+     267.98235658141834
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.5449041399234182,
+    "z": [
+     277.8626539981827,
+     300.05879655259827
+    ]
+   },
+   "d1_hard": {
+    "state": "PRESENT+",
+    "vbar": 0.4760382342915578,
+    "z": [
+     398.4033797894944,
+     311.00732156587054
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.5326036553725737
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.6330444742069034
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.8157347957929635,
+    "zbar": 215.3353267906722
+   }
+  },
+  {
+   "id": "sib-bpmn-kogito-heldout",
+   "kind": "diagram",
+   "prediction": "PRESENT+",
+   "pool": "diagram",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 161917,
+   "units": 29894,
+   "docs": 190,
+   "meanUnit": 5.416371178162842,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.5281214255666354,
+    "nullMean": 0.06475367045300225,
+    "nullSd": 0.001071807423098661,
+    "z": 432.32370398593486
+   },
+   "confirm": {
+    "v": 0.5456744864849505,
+    "nullMean": 0.07450091551095372,
+    "nullSd": 0.002297504368665737,
+    "z": 205.0805984963712
+   },
+   "vbar": 0.5368979560257929,
+   "poolMedian": 0.4224,
+   "range": [
+    0.1921,
+    0.6826
+   ],
+   "inRange": true,
+   "ratio": 1.2710652368034872,
+   "eligL": [
+    587,
+    472
+   ],
+   "zbar": 318.70215124115305,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.5863579748438567,
+    "z": [
+     96.12824607373324,
+     42.85650541408318
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.5289122247866567,
+    "z": [
+     441.39273459644835,
+     160.00528384916916
+    ]
+   },
+   "d1_hard": {
+    "state": "PRESENT+",
+    "vbar": 0.44261253717552623,
+    "z": [
+     162.78599348042093,
+     157.53478581026812
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.5004202357616108
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.6067306572834463
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.8268595512596781,
+    "zbar": 165.88270522928966
+   }
+  },
+  {
+   "id": "sib-bpmn-activiti-heldout",
+   "kind": "diagram",
+   "prediction": "PRESENT+",
+   "pool": "diagram",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 68568,
+   "units": 14092,
+   "docs": 233,
+   "meanUnit": 4.865739426625035,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.4102319827759279,
+    "nullMean": 0.03802750862794272,
+    "nullSd": 0.0024748590627011744,
+    "z": 150.3942102229224
+   },
+   "confirm": {
+    "v": 0.36685774441450175,
+    "nullMean": 0.04940509610092823,
+    "nullSd": 0.0035007666405036096,
+    "z": 90.68089390497212
+   },
+   "vbar": 0.3885448635952148,
+   "poolMedian": 0.4224,
+   "range": [
+    0.1921,
+    0.6826
+   ],
+   "inRange": true,
+   "ratio": 0.919850529344732,
+   "eligL": [
+    274,
+    326
+   ],
+   "zbar": 120.53755206394726,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.5001118893040218,
+    "z": [
+     55.888509397289965,
+     118.29900079220477
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.4146753101513786,
+    "z": [
+     284.76450220415904,
+     82.12149401193663
+    ]
+   },
+   "d1_hard": {
+    "state": "PRESENT+",
+    "vbar": 0.29219470690967714,
+    "z": [
+     250.71731641253268,
+     68.52875151559337
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.3493271037667951
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.4706776991466382
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.7149824804859743,
+    "zbar": 93.40516076757487
+   }
+  },
+  {
+   "id": "rl-law-fr-heldout",
+   "kind": "legal",
+   "prediction": "PRESENT+",
+   "pool": "legal",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 295270,
+   "units": 12782,
+   "docs": 49,
+   "meanUnit": 23.100453763104365,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.247288178043663,
+    "nullMean": 0.011151808891959079,
+    "nullSd": 0.00011693473424433149,
+    "z": 2019.3860333945286
+   },
+   "confirm": {
+    "v": 0.23295476546015698,
+    "nullMean": 0.01128109253286925,
+    "nullSd": 0.00012082857831142855,
+    "z": 1834.6129369819853
+   },
+   "vbar": 0.24012147175190998,
+   "poolMedian": 0.2449,
+   "range": [
+    0.1464,
+    0.4079
+   ],
+   "inRange": true,
+   "ratio": 0.9804878389216414,
+   "eligL": [
+    1776,
+    1508
+   ],
+   "zbar": 1926.999485188257,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.2925454876426181,
+    "z": [
+     116.70689793373435,
+     146.3149027657959
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.14195694269746617,
+    "z": [
+     2254.2359114961764,
+     954.7083796213151
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.11245355103113724,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.18481547850609586
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.35072702547513507
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.705091860086126,
+    "zbar": 519.0308065824534
+   }
+  },
+  {
+   "id": "sp-smiles-ccd",
+   "kind": "smiles",
+   "prediction": "PRESENT+",
+   "pool": "smiles",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 156499,
+   "units": 6000,
+   "docs": 60,
+   "meanUnit": 26.083166666666667,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.46616376887630584,
+    "nullMean": 0.07749793061653222,
+    "nullSd": 0.009570717769728718,
+    "z": 40.60989443122931
+   },
+   "confirm": {
+    "v": 0.47425593954347606,
+    "nullMean": 0.12047894379502308,
+    "nullSd": 0.012608175045704285,
+    "z": 28.05933408015206
+   },
+   "vbar": 0.4702098542098909,
+   "poolMedian": 0.4409,
+   "range": [
+    0.3017,
+    0.6224
+   ],
+   "inRange": true,
+   "ratio": 1.0664773286683848,
+   "eligL": [
+    36,
+    39
+   ],
+   "zbar": 34.33461425569068,
+   "sameL": {
+    "status": "AMBIGUOUS",
+    "vbar": 0.46120471832611554,
+    "z": [
+     -0.5009147124927685,
+     -2.491196621317043
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.41929111458556567,
+    "z": [
+     67.66350781543038,
+     31.486327249071675
+    ]
+   },
+   "d1_hard": {
+    "state": "ABOVE-ALL-DRAWS",
+    "vbar": 0.2799145299145299,
+    "z": [
+     null,
+     15.71331647895384
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.4159045494286326
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.5646408644503558
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.9934538167232675,
+    "zbar": 29.028624812505868
+   }
+  },
+  {
+   "id": "rl-codons-heldout",
+   "kind": "codons",
+   "prediction": "PRESENT+",
+   "pool": "codons",
+   "status": "PRESENT+",
+   "hit": true,
+   "tokens": 291239,
+   "units": 887,
+   "docs": 91,
+   "meanUnit": 328.3416009019166,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.0074680040403775575,
+    "nullMean": 0.007231025216060073,
+    "nullSd": 0.00002571402131478807,
+    "z": 9.215937928043898
+   },
+   "confirm": {
+    "v": 0.007403413164563176,
+    "nullMean": 0.007080804695348897,
+    "nullSd": 0.000018103707269648842,
+    "z": 17.820022408069818
+   },
+   "vbar": 0.007435708602470366,
+   "poolMedian": 0.0072,
+   "range": [
+    0.0055,
+    0.0095
+   ],
+   "inRange": true,
+   "ratio": 1.032737305898662,
+   "eligL": [
+    64,
+    64
+   ],
+   "zbar": 13.517980168056859,
+   "sameL": {
+    "status": "PRESENT+",
+    "vbar": 0.043088921077483265,
+    "z": [
+     25.83514752587969,
+     11.686799233647013
+    ]
+   },
+   "rigidR": {
+    "status": "PRESENT+",
+    "vbar": 0.007534092787177371,
+    "z": [
+     8.503602907395656,
+     38.034852479147666
+    ]
+   },
+   "d1_hard": {
+    "state": "UNDEF",
+    "vbar": 0,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     10,
+     10
+    ]
+   },
+   "d2_soft10": {
+    "status": "PRESENT+",
+    "vbar": 0.0006439585370590744
+   },
+   "d2_soft25": {
+    "status": "PRESENT+",
+    "vbar": 0.05274821984049945
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.9712013243490774,
+    "zbar": 13.615350344914603
+   }
+  },
+  {
+   "id": "rl-smiles-pubchem-heldout",
+   "kind": "absent-smiles",
+   "prediction": "ABSENT",
+   "pool": "pubchem",
+   "status": "AMBIGUOUS",
+   "hit": false,
+   "tokens": 82245,
+   "units": 2997,
+   "docs": 30,
+   "meanUnit": 27.44244244244244,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.42413938733028816,
+    "nullMean": 0.459941848658053,
+    "nullSd": 0.029678343677532713,
+    "z": -1.2063497113172197
+   },
+   "confirm": {
+    "v": 0.4081142834546417,
+    "nullMean": 0.48796490829695455,
+    "nullSd": 0.03205102156465184,
+    "z": -2.491359742816368
+   },
+   "vbar": 0.4161268353924649,
+   "poolMedian": 0.415,
+   "range": [
+    0.33,
+    0.5
+   ],
+   "inRange": true,
+   "ratio": 1.0027152660059395,
+   "eligL": [
+    21,
+    21
+   ],
+   "zbar": -1.8488547270667939,
+   "sameL": {
+    "status": "ABSENT",
+    "vbar": 0.5964939993213063,
+    "z": [
+     -1.1825724531404511,
+     -0.6942090685584753
+    ]
+   },
+   "rigidR": {
+    "status": "AMBIGUOUS",
+    "vbar": 0.36929375874196685,
+    "z": [
+     -5.221873051389892,
+     -1.9955617844481528
+    ]
+   },
+   "d1_hard": {
+    "state": "AMBIGUOUS",
+    "vbar": 0.14285714285714285,
+    "z": [
+     2.846049894151541,
+     2.1699529147366112
+    ],
+    "drawsGeV": [
+     0,
+     0
+    ]
+   },
+   "d2_soft10": {
+    "status": "ABSENT",
+    "vbar": 0.3232097418538267
+   },
+   "d2_soft25": {
+    "status": "AMBIGUOUS",
+    "vbar": 0.5515049717098055
+   },
+   "d3_bigramRep": {
+    "status": "PRESENT+",
+    "vbar": 0.9931045142100909,
+    "zbar": 11.135055209899093
+   }
+  },
+  {
+   "id": "sp-protein-aa",
+   "kind": "absent-protein",
+   "prediction": "ABSENT",
+   "pool": "protein",
+   "status": "ABSENT",
+   "hit": true,
+   "tokens": 292094,
+   "units": 888,
+   "docs": 92,
+   "meanUnit": 328.93468468468467,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.009927354507075496,
+    "nullMean": 0.009965098593826698,
+    "nullSd": 0.00005208442396608409,
+    "z": -0.7246712908984193
+   },
+   "confirm": {
+    "v": 0.009799024571449797,
+    "nullMean": 0.009864276512663289,
+    "nullSd": 0.00004446190646730528,
+    "z": -1.4675920669635227
+   },
+   "vbar": 0.009863189539262646,
+   "poolMedian": 0.01,
+   "range": [
+    0.008,
+    0.0125
+   ],
+   "inRange": true,
+   "ratio": 0.9863189539262646,
+   "eligL": [
+    20,
+    20
+   ],
+   "zbar": -1.096131678930971,
+   "sameL": {
+    "status": "AMBIGUOUS",
+    "vbar": 0.07575338413825661,
+    "z": [
+     3.8529790423734216,
+     1.281291747695868
+    ]
+   },
+   "rigidR": {
+    "status": "AMBIGUOUS",
+    "vbar": 0.009979102959739448,
+    "z": [
+     0.7229930222066676,
+     2.0301936212737988
+    ]
+   },
+   "d1_hard": {
+    "state": "UNDEF",
+    "vbar": 0,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     10,
+     10
+    ]
+   },
+   "d2_soft10": {
+    "status": "ABSENT",
+    "vbar": 0.0009806054212360012
+   },
+   "d2_soft25": {
+    "status": "ABSENT",
+    "vbar": 0.06255472446426508
+   },
+   "d3_bigramRep": {
+    "status": "UNDEF",
+    "vbar": 0.9972527995174416,
+    "zbar": null
+   }
+  },
+  {
+   "id": "rl-ctl-en-mouret",
+   "kind": "control",
+   "prediction": "NOT-PRESENT",
+   "pool": null,
+   "status": "ABSENT",
+   "hit": true,
+   "tokens": 126434,
+   "units": 7974,
+   "docs": 80,
+   "meanUnit": 15.855781289189867,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.009712120891375117,
+    "nullMean": 0.009763187972987829,
+    "nullSd": 0.00010247363068313822,
+    "z": -0.4983436350627368
+   },
+   "confirm": {
+    "v": 0.009830267849719477,
+    "nullMean": 0.009828959373987822,
+    "nullSd": 0.00012534132964423978,
+    "z": 0.010439299913041912
+   },
+   "vbar": 0.009771194370547298,
+   "poolMedian": null,
+   "range": null,
+   "inRange": null,
+   "ratio": null,
+   "eligL": [
+    665,
+    732
+   ],
+   "zbar": -0.24395216757484744,
+   "sameL": {
+    "status": "ABSENT",
+    "vbar": 0.00930429018131538,
+    "z": [
+     1.25734580650714,
+     -0.45883146774112127
+    ]
+   },
+   "rigidR": {
+    "status": "ABSENT",
+    "vbar": 0.009809607384149965,
+    "z": [
+     -0.8775008003184506,
+     -0.3312329117172301
+    ]
+   },
+   "d1_hard": {
+    "state": "UNDEF",
+    "vbar": 0,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     10,
+     10
+    ]
+   },
+   "d2_soft10": {
+    "status": "ABSENT",
+    "vbar": 0.0010106872982035553
+   },
+   "d2_soft25": {
+    "status": "ABSENT",
+    "vbar": 0.06142152518370869
+   },
+   "d3_bigramRep": {
+    "status": "ABSENT",
+    "vbar": 0.254836394558817,
+    "zbar": -0.8437071425230436
+   }
+  },
+  {
+   "id": "rl-ctl-js-fold",
+   "kind": "control",
+   "prediction": "NOT-PRESENT",
+   "pool": null,
+   "status": "ABSENT",
+   "hit": true,
+   "tokens": 291340,
+   "units": 25025,
+   "docs": 151,
+   "meanUnit": 11.641958041958041,
+   "mwtShare": null,
+   "discover": {
+    "v": 0.008181603685840087,
+    "nullMean": 0.008195346064927448,
+    "nullSd": 0.00005945345781553024,
+    "z": -0.23114516114437564
+   },
+   "confirm": {
+    "v": 0.008260827517655665,
+    "nullMean": 0.008129184996822051,
+    "nullSd": 0.00006649401264003021,
+    "z": 1.979765028563838
+   },
+   "vbar": 0.008221215601747876,
+   "poolMedian": null,
+   "range": null,
+   "inRange": null,
+   "ratio": null,
+   "eligL": [
+    1707,
+    1505
+   ],
+   "zbar": 0.8743099337097312,
+   "sameL": {
+    "status": "ABSENT",
+    "vbar": 0.004121360809088481,
+    "z": [
+     1.4784771409439625,
+     -0.8984557793155745
+    ]
+   },
+   "rigidR": {
+    "status": "ABSENT",
+    "vbar": 0.008192001452587108,
+    "z": [
+     1.6803691651047856,
+     -0.6010019623186267
+    ]
+   },
+   "d1_hard": {
+    "state": "UNDEF",
+    "vbar": 0,
+    "z": [
+     null,
+     null
+    ],
+    "drawsGeV": [
+     10,
+     10
+    ]
+   },
+   "d2_soft10": {
+    "status": "AMBIGUOUS",
+    "vbar": 0.0007724598610766352
+   },
+   "d2_soft25": {
+    "status": "ABSENT",
+    "vbar": 0.055544173785217726
+   },
+   "d3_bigramRep": {
+    "status": "ABSENT",
+    "vbar": 0.21081330326788844,
+    "zbar": 0.4125107912501514
+   }
+  }
+ ]
+}

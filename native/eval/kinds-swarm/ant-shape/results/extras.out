@@ -1,0 +1,83 @@
+{
+ "X1summary": {
+  "logChanged": {
+   "mean": 0.4926,
+   "nBelow045": 7,
+   "nAbove055": 3,
+   "irc": 0.5973
+  },
+  "logExtentTokens": {
+   "mean": 0.4534,
+   "nBelow045": 10,
+   "nAbove055": 1,
+   "irc": 0.7711
+  },
+  "logExtentFrames": {
+   "mean": 0.439,
+   "nBelow045": 14,
+   "nAbove055": 0,
+   "irc": 0.7718
+  },
+  "isNull": {
+   "mean": 0.5088,
+   "nBelow045": 0,
+   "nAbove055": 1,
+   "irc": 0.42
+  }
+ },
+ "X2": {
+  "nInitial": 281,
+  "nonInitial": 319,
+  "initialPosShare": 0.9466,
+  "nonInitialPosShare": 0.1066,
+  "lofo": {
+   "FULL": 0.724,
+   "RIVALS": 0.8064,
+   "SPAN": 0.7934,
+   "SLOT": 0.7759,
+   "C": 0.7557,
+   "SHAPE24": 0.7421,
+   "MAGNITUDE": 0.6551
+  },
+  "transfer": {
+   "FULL": {
+    "engToIrcNonInitial": 0.5792,
+    "allUdToIrcNonInitial": 0.6673
+   },
+   "RIVALS": {
+    "engToIrcNonInitial": 0.468,
+    "allUdToIrcNonInitial": 0.6325
+   },
+   "C": {
+    "engToIrcNonInitial": 0.6269,
+    "allUdToIrcNonInitial": 0.7209
+   },
+   "SPAN": {
+    "engToIrcNonInitial": 0.6691,
+    "allUdToIrcNonInitial": 0.6621
+   },
+   "MAGNITUDE": {
+    "engToIrcNonInitial": 0.3179,
+    "allUdToIrcNonInitial": 0.3105
+   }
+  }
+ },
+ "X3": {
+  "logWinBefore": 0.8529,
+  "logPrefix": 0.5128,
+  "logGap": 0.241,
+  "logWinSents": 0.8688,
+  "burst": 0.7543,
+  "logLast16": 0.7596,
+  "logLeftWinFreq": 0.0713,
+  "logRightWinFreq": 0.5505,
+  "leftDiv": 0.4159,
+  "rightDiv": 0.6864,
+  "sameLeft": 0.8588,
+  "sameRight": 0.4458,
+  "sentInitial": 0.9183,
+  "sentFinal": 0.475,
+  "logSentLen": 0.29,
+  "logWordLen": 0.7112
+ }
+}

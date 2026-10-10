@@ -1,0 +1,216 @@
+{
+ "reps": 60,
+ "configs": [
+  "a10",
+  "rho07",
+  "a13",
+  "m4"
+ ],
+ "out": {
+  "adjNg2": {
+   "cells": 240,
+   "definedZ": 240,
+   "nullZ": 0,
+   "ge4": 0,
+   "ge3": 6,
+   "ge2": 29,
+   "meanZ": -0.01,
+   "sdZ": 1.21,
+   "maxAbsZ": 3.7
+  },
+  "adjNg3": {
+   "cells": 240,
+   "definedZ": 239,
+   "nullZ": 1,
+   "ge4": 2,
+   "ge3": 5,
+   "ge2": 17,
+   "meanZ": 0.08,
+   "sdZ": 1.14,
+   "maxAbsZ": 4.3
+  },
+  "adjNg4": {
+   "cells": 240,
+   "definedZ": 105,
+   "nullZ": 135,
+   "ge4": 0,
+   "ge3": 0,
+   "ge2": 7,
+   "meanZ": 0.06,
+   "sdZ": 1.02,
+   "maxAbsZ": 3
+  },
+  "prefixCopy": {
+   "cells": 240,
+   "definedZ": 240,
+   "nullZ": 0,
+   "ge4": 1,
+   "ge3": 1,
+   "ge2": 15,
+   "meanZ": 0.11,
+   "sdZ": 1.15,
+   "maxAbsZ": 7.3
+  },
+  "suffixCopy": {
+   "cells": 240,
+   "definedZ": 240,
+   "nullZ": 0,
+   "ge4": 1,
+   "ge3": 10,
+   "ge2": 23,
+   "meanZ": 0.06,
+   "sdZ": 1.25,
+   "maxAbsZ": 6
+  },
+  "posPar": {
+   "cells": 240,
+   "definedZ": 240,
+   "nullZ": 0,
+   "ge4": 3,
+   "ge3": 6,
+   "ge2": 22,
+   "meanZ": 0.09,
+   "sdZ": 1.24,
+   "maxAbsZ": 4.9
+  },
+  "lcsLift": {
+   "cells": 240,
+   "definedZ": 240,
+   "nullZ": 0,
+   "ge4": 1,
+   "ge3": 5,
+   "ge2": 23,
+   "meanZ": -0.05,
+   "sdZ": 1.25,
+   "maxAbsZ": 5.3
+  },
+  "lagDecay": {
+   "cells": 240,
+   "definedZ": 240,
+   "nullZ": 0,
+   "ge4": 1,
+   "ge3": 7,
+   "ge2": 20,
+   "meanZ": 0.1,
+   "sdZ": 1.16,
+   "maxAbsZ": 4.1
+  },
+  "refrain": {
+   "cells": 240,
+   "definedZ": 149,
+   "nullZ": 91,
+   "ge4": 0,
+   "ge3": 3,
+   "ge2": 12,
+   "meanZ": -0.05,
+   "sdZ": 1.15,
+   "maxAbsZ": 3.7
+  },
+  "dupShare": {
+   "cells": 240,
+   "definedZ": 187,
+   "nullZ": 53,
+   "ge4": 1,
+   "ge3": 1,
+   "ge2": 16,
+   "meanZ": 0.04,
+   "sdZ": 1.15,
+   "maxAbsZ": 4.3
+  },
+  "formulaCov": {
+   "cells": 240,
+   "definedZ": 240,
+   "nullZ": 0,
+   "ge4": 2,
+   "ge3": 5,
+   "ge2": 27,
+   "meanZ": -0.1,
+   "sdZ": 1.23,
+   "maxAbsZ": 4.1
+  },
+  "tmplReuse": {
+   "cells": 240,
+   "definedZ": 240,
+   "nullZ": 0,
+   "ge4": 1,
+   "ge3": 4,
+   "ge2": 19,
+   "meanZ": 0.06,
+   "sdZ": 1.18,
+   "maxAbsZ": 7
+  }
+ },
+ "meanZPerConfig": {
+  "adjNg2": {
+   "a10": 0.08,
+   "rho07": -0.12,
+   "a13": -0.04,
+   "m4": 0.06
+  },
+  "adjNg3": {
+   "a10": 0.08,
+   "rho07": 0.07,
+   "a13": 0.15,
+   "m4": 0.02
+  },
+  "prefixCopy": {
+   "a10": -0.06,
+   "rho07": 0.07,
+   "a13": 0.22,
+   "m4": 0.19
+  },
+  "suffixCopy": {
+   "a10": 0.32,
+   "rho07": 0.2,
+   "a13": -0.13,
+   "m4": -0.13
+  },
+  "posPar": {
+   "a10": 0.18,
+   "rho07": 0.14,
+   "a13": 0.01,
+   "m4": 0.02
+  },
+  "lcsLift": {
+   "a10": -0.21,
+   "rho07": -0.07,
+   "a13": 0.19,
+   "m4": -0.09
+  },
+  "lagDecay": {
+   "a10": -0.05,
+   "rho07": 0.08,
+   "a13": 0.35,
+   "m4": 0.04
+  },
+  "formulaCov": {
+   "a10": -0.14,
+   "rho07": -0.09,
+   "a13": -0.04,
+   "m4": -0.11
+  },
+  "tmplReuse": {
+   "a10": 0.04,
+   "rho07": -0.09,
+   "a13": 0.19,
+   "m4": 0.12
+  },
+  "adjNg4": {
+   "a10": -0.11,
+   "rho07": 0.01,
+   "a13": 0.14
+  },
+  "refrain": {
+   "a10": -0.42,
+   "rho07": 0.24,
+   "a13": -0.1,
+   "m4": -0.02
+  },
+  "dupShare": {
+   "a10": 0.23,
+   "rho07": 0.35,
+   "a13": -0.16,
+   "m4": -0.04
+  }
+ }
+}

@@ -1,0 +1,338 @@
+{
+ "headerSha256": "6e75e4f0c779833af21e79af05219fbcbd89532cf425e2ed7ea4dc374bac9fc4",
+ "mwt": {
+  "nMwtLanguageWindows": 16,
+  "rows": [
+   {
+    "name": "heb",
+    "win": "w1",
+    "mwtShare": 0.3612,
+    "fwcWord": 0.3978,
+    "fwcSurf": 0.1452,
+    "aucWord": 0.7052,
+    "aucSurf": 0.5275,
+    "pairsWord": 415,
+    "pairsSurf": 361,
+    "S2Word": 0.681,
+    "S2Surf": 0.5094,
+    "posSurf": 0.4943
+   },
+   {
+    "name": "heb",
+    "win": "w2",
+    "mwtShare": 0.3512,
+    "fwcWord": 0.3891,
+    "fwcSurf": 0.1461,
+    "aucWord": 0.6087,
+    "aucSurf": 0.4924,
+    "pairsWord": 552,
+    "pairsSurf": 500,
+    "S2Word": 0.6739,
+    "S2Surf": 0.4908,
+    "posSurf": 0.5391
+   },
+   {
+    "name": "arb",
+    "win": "w2",
+    "mwtShare": 0.187,
+    "fwcWord": 0.3302,
+    "fwcSurf": 0.1937,
+    "aucWord": null,
+    "aucSurf": null,
+    "pairsWord": 0,
+    "pairsSurf": 0,
+    "S2Word": null,
+    "S2Surf": null,
+    "posSurf": null
+   },
+   {
+    "name": "arb",
+    "win": "w1",
+    "mwtShare": 0.1835,
+    "fwcWord": 0.318,
+    "fwcSurf": 0.1818,
+    "aucWord": null,
+    "aucSurf": null,
+    "pairsWord": 0,
+    "pairsSurf": 0,
+    "S2Word": null,
+    "S2Surf": null,
+    "posSurf": null
+   },
+   {
+    "name": "mar",
+    "win": "w1",
+    "mwtShare": 0.1418,
+    "fwcWord": 0.3892,
+    "fwcSurf": 0.3418,
+    "aucWord": null,
+    "aucSurf": null,
+    "pairsWord": 0,
+    "pairsSurf": 0,
+    "S2Word": null,
+    "S2Surf": null,
+    "posSurf": null
+   },
+   {
+    "name": "tam",
+    "win": "w2",
+    "mwtShare": 0.1228,
+    "fwcWord": 0.2329,
+    "fwcSurf": 0.1904,
+    "aucWord": 0.4422,
+    "aucSurf": 0.5016,
+    "pairsWord": 98,
+    "pairsSurf": 86,
+    "S2Word": 0.5133,
+    "S2Surf": 0.5174,
+    "posSurf": 0.5203
+   },
+   {
+    "name": "glg",
+    "win": "w2",
+    "mwtShare": 0.1175,
+    "fwcWord": 0.465,
+    "fwcSurf": 0.3634,
+    "aucWord": 0.6009,
+    "aucSurf": 0.6085,
+    "pairsWord": 268,
+    "pairsSurf": 268,
+    "S2Word": 0.5743,
+    "S2Surf": 0.5403,
+    "posSurf": 0.5049
+   },
+   {
+    "name": "glg",
+    "win": "w1",
+    "mwtShare": 0.1166,
+    "fwcWord": 0.4644,
+    "fwcSurf": 0.3613,
+    "aucWord": 0.599,
+    "aucSurf": 0.5856,
+    "pairsWord": 249,
+    "pairsSurf": 250,
+    "S2Word": 0.5988,
+    "S2Surf": 0.6188,
+    "posSurf": 0.5
+   },
+   {
+    "name": "ita",
+    "win": "w1",
+    "mwtShare": 0.1069,
+    "fwcWord": 0.4945,
+    "fwcSurf": 0.387,
+    "aucWord": null,
+    "aucSurf": null,
+    "pairsWord": 0,
+    "pairsSurf": 0,
+    "S2Word": null,
+    "S2Surf": null,
+    "posSurf": null
+   },
+   {
+    "name": "ita",
+    "win": "w2",
+    "mwtShare": 0.1035,
+    "fwcWord": 0.4877,
+    "fwcSurf": 0.3777,
+    "aucWord": null,
+    "aucSurf": null,
+    "pairsWord": 0,
+    "pairsSurf": 0,
+    "S2Word": null,
+    "S2Surf": null,
+    "posSurf": null
+   },
+   {
+    "name": "mar",
+    "win": "w2",
+    "mwtShare": 0.0988,
+    "fwcWord": 0.3731,
+    "fwcSurf": 0.3704,
+    "aucWord": null,
+    "aucSurf": null,
+    "pairsWord": 0,
+    "pairsSurf": 0,
+    "S2Word": null,
+    "S2Surf": null,
+    "posSurf": null
+   },
+   {
+    "name": "por",
+    "win": "w1",
+    "mwtShare": 0.0885,
+    "fwcWord": 0.43,
+    "fwcSurf": 0.3498,
+    "aucWord": 0.6444,
+    "aucSurf": 0.6346,
+    "pairsWord": 600,
+    "pairsSurf": 600,
+    "S2Word": 0.5393,
+    "S2Surf": 0.5517,
+    "posSurf": 0.5112
+   },
+   {
+    "name": "por",
+    "win": "w2",
+    "mwtShare": 0.0861,
+    "fwcWord": 0.4236,
+    "fwcSurf": 0.3454,
+    "aucWord": 0.6482,
+    "aucSurf": 0.6237,
+    "pairsWord": 600,
+    "pairsSurf": 600,
+    "S2Word": 0.5277,
+    "S2Surf": 0.5472,
+    "posSurf": 0.5038
+   },
+   {
+    "name": "kat",
+    "win": "w1",
+    "mwtShare": 0.084,
+    "fwcWord": 0.1906,
+    "fwcSurf": 0.1394,
+    "aucWord": 0.5055,
+    "aucSurf": 0.5067,
+    "pairsWord": 157,
+    "pairsSurf": 142,
+    "S2Word": 0.5401,
+    "S2Surf": 0.543,
+    "posSurf": 0.5
+   },
+   {
+    "name": "kat",
+    "win": "w2",
+    "mwtShare": 0.0792,
+    "fwcWord": 0.2002,
+    "fwcSurf": 0.1519,
+    "aucWord": 0.526,
+    "aucSurf": 0.5737,
+    "pairsWord": 204,
+    "pairsSurf": 183,
+    "S2Word": 0.5412,
+    "S2Surf": 0.5683,
+    "posSurf": 0.5013
+   },
+   {
+    "name": "tam",
+    "win": "w1",
+    "mwtShare": 0.0769,
+    "fwcWord": 0.2175,
+    "fwcSurf": 0.1918,
+    "aucWord": 0.5534,
+    "aucSurf": 0.5542,
+    "pairsWord": 105,
+    "pairsSurf": 103,
+    "S2Word": 0.5171,
+    "S2Surf": 0.5117,
+    "posSurf": 0.5142
+   }
+  ],
+  "changedSide": [
+   "heb:w1 0.3978->0.1452",
+   "heb:w2 0.3891->0.1461",
+   "arb:w2 0.3302->0.1937",
+   "arb:w1 0.318->0.1818"
+  ],
+  "inScopeByWordN": 6,
+  "meanAucChangeInScope": -0.0557,
+  "meanFwcChange": -0.0979,
+  "nLanguagesChanged": 2,
+  "dependent": true,
+  "ruleHits": {
+   "n": 10,
+   "byWordFwc": 9,
+   "bySurfaceFwc": 9
+  },
+  "gradientAmongStemsWithMwtLines": {
+   "n": 31,
+   "wordRho": 0.669,
+   "surfRho": 0.839,
+   "surfP": 0.0005
+  }
+ },
+ "punct": {
+  "n": 89,
+  "meanChange": -0.002,
+  "maxAbs": 0.0835,
+  "gradBase": 0.637,
+  "gradCC": 0.641,
+  "notPureShare": 0.0022,
+  "nonPunctPureShare": 0.0014,
+  "worstNotPure": [
+   {
+    "n": "rus",
+    "v": 0.06
+   },
+   {
+    "n": "tam",
+    "v": 0.011
+   },
+   {
+    "n": "kor",
+    "v": 0.01
+   },
+   {
+    "n": "uig",
+    "v": 0.01
+   },
+   {
+    "n": "arb",
+    "v": 0.009
+   }
+  ],
+  "worstNonPunctPure": [
+   {
+    "n": "ces",
+    "v": 0.0173
+   },
+   {
+    "n": "jpn",
+    "v": 0.0074
+   },
+   {
+    "n": "mlt",
+    "v": 0.0045
+   },
+   {
+    "n": "eng",
+    "v": 0.0044
+   },
+   {
+    "n": "por",
+    "v": 0.0034
+   }
+  ],
+  "noDependence": true
+ },
+ "equaln": {
+  "100": {
+   "nUnits": 81,
+   "rho": 0.726,
+   "p": 0.0005,
+   "cleanMean": 0.6064,
+   "nClean": 45,
+   "deafMean": 0.5257,
+   "nDeaf": 25,
+   "cleanShareAudible": 0.4889,
+   "fullMeanSameUnits": 0.6107,
+   "fullRhoSameUnits": 0.677,
+   "cleanFullSameUnits": 0.6482,
+   "survives": true
+  },
+  "200": {
+   "nUnits": 67,
+   "rho": 0.71,
+   "p": 0.0005,
+   "cleanMean": 0.6356,
+   "nClean": 38,
+   "deafMean": 0.5456,
+   "nDeaf": 20,
+   "cleanShareAudible": 0.6842,
+   "fullMeanSameUnits": 0.6195,
+   "fullRhoSameUnits": 0.679,
+   "cleanFullSameUnits": 0.6553,
+   "survives": true
+  }
+ }
+}

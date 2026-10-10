@@ -1,0 +1,101 @@
+@@@@ task delegate_same_name
+class Stack {
+  constructor() {
+    this.items = [];
+  }
+
+  isEmpty() {
+    return this.items.length === 0;
+  }
+
+  push(value) {
+    this.items.push(value);
+  }
+
+  pop() {
+    if (this.isEmpty()) {
+      throw new Error("pop from empty stack");
+    }
+    return this.items.pop();
+  }
+
+  peek() {
+    if (this.isEmpty()) {
+      throw new Error("peek at empty stack");
+    }
+    return this.items[this.items.length - 1];
+  }
+}
+
+const stack = new Stack();
+for (const v of [1, 2, 3]) {
+  stack.push(v);
+}
+const out = [stack.peek(), stack.pop(), stack.pop(), String(stack.isEmpty()), stack.pop(), String(stack.isEmpty())];
+console.log(out.join(" "));
+@@@@ task forward_reference
+function totalCost(prices) {
+  return applyTax(sumPrices(prices));
+}
+
+function applyTax(amount) {
+  return amount + Math.floor(amount / 10);
+}
+
+function sumPrices(prices) {
+  let total = 0;
+  for (const price of prices) {
+    total += price;
+  }
+  return total;
+}
+
+console.log(totalCost([100, 250, 50]));
+@@@@ task nested_definitions
+function countDown(n) {
+  function step(k) {
+    if (k === 0) {
+      return [0];
+    }
+    return [k].concat(step(k - 1));
+  }
+  return step(n);
+}
+
+console.log(countDown(5).join(" "));
+@@@@ task method_chain
+class Builder {
+  constructor() {
+    this.parts = [];
+  }
+
+  add(text) {
+    this.parts = this.parts.concat([text]);
+    return this;
+  }
+
+  build() {
+    return this.parts.join("-");
+  }
+}
+
+function makeLabel(builder, first, second) {
+  return builder.add(first).add(second).build();
+}
+
+console.log(makeLabel(new Builder(), "alpha", "beta"));
+@@@@ task call_through_variable
+function triple(value) {
+  return value * 3;
+}
+
+function applyTwice(fn, value) {
+  return fn(fn(value));
+}
+
+function run() {
+  const handler = triple;
+  return applyTwice(handler, 5);
+}
+
+console.log(run());

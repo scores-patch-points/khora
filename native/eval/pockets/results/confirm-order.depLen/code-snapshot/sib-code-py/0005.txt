@@ -1,0 +1,406 @@
+#!/usr/bin/env python3
+"""snip.py — mechanical snipping: cut the VERBATIM passage for every cited quote
+straight out of the source itself. No model, no guessing.
+
+For each (source key, quote) pair — a packet's `snippets` and every claim's
+`q[key]` in the published logs — this:
+
+  1. resolves the source text: repo-local upload, archive.org capture (through the
+     Cloudflare edge when NPJ_EDGE is set, else direct), else the live page;
+  2. extracts real text — pdftotext for PDFs, a public API for JS-only hosts,
+     tag-stripping for HTML;
+  3. finds the quote's exact words (whitespace/case tolerant) and returns the
+     verbatim slice with byte offsets;
+  4. if the quote isn't verbatim, scores every window of the text by overlap with
+     the quote's distinctive words and PROPOSES the best verbatim window;
+  5. otherwise reports a reason: shell/paywall, binary, unreachable.
+
+    python3 tools/archive/snip.py                 # full sweep, writes snips.json
+    python3 tools/archive/snip.py --key web-byt20 # one source
+    NPJ_EDGE=https://npj-edge.example.workers.dev python3 tools/archive/snip.py
+
+Writes tools/archive/snips.json + snips_report.md. Caches text per source.
+"""
+import argparse, glob, gzip, hashlib, html, json, os, re, subprocess, sys, tempfile, time, zlib
+import urllib.parse, urllib.request
+
+try:
+    import brotli
+except ImportError:
+    brotli = None
+
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+D = os.path.dirname(os.path.abspath(__file__))
+TEXTDIR = os.path.join(D, "text")
+UA = "Mozilla/5.0 (compatible; npj-snip/1.0)"
+EDGE = os.environ.get("NPJ_EDGE", "").rstrip("/")
+
+STOP = set("""a an the and or but if then than that this these those of in on at to for from by with
+as is are was were be been being it its it's he she they them his her their we you i our your not no
+do does did done have has had will would can could should may might must about into over under after
+before said says say according also more most other some such only own same so too very s t don now""".split())
+
+
+# ────────────────────────────── text extraction ──────────────────────────────
+def clean_html(doc):
+    doc = re.sub(r"(?is)<(script|style|noscript|template|svg|iframe)[^>]*>.*?</\1>", " ", doc)
+    doc = re.sub(r"(?is)<!--.*?-->", " ", doc)
+    doc = re.sub(r"(?is)<(br|hr)\s*/?>", "\n", doc)
+    doc = re.sub(r"(?is)</(p|div|li|h[1-6]|tr|section|article|blockquote|figcaption)>", "\n", doc)
+    doc = re.sub(r"(?is)<li[^>]*>", "\n- ", doc)
+    doc = re.sub(r"(?s)<[^>]+>", " ", doc)
+    doc = html.unescape(doc).replace("\u00a0", " ")
+    doc = re.sub(r"[ \t\r\f\v]+", " ", doc)
+    doc = re.sub(r" *\n *", "\n", doc)
+    return re.sub(r"\n{3,}", "\n\n", doc).strip()
+
+
+def extract(data, url):
+    """-> (text, kind)"""
+    head = data[:8]
+    if head[:4] == b"%PDF" or url.lower().split("?")[0].endswith(".pdf"):
+        try:
+            with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as f:
+                f.write(data); p = f.name
+            out = subprocess.run(["pdftotext", "-layout", p, "-"], capture_output=True, timeout=90).stdout.decode("utf-8", "ignore")
+            os.unlink(p)
+            if out.strip():
+                return re.sub(r"\n{3,}", "\n\n", re.sub(r"[ \t]+", " ", out)).strip(), "pdf"
+        except Exception:
+            pass
+        return "", "pdf-unreadable"
+    s = data.decode("utf-8", "ignore")
+    if re.match(r"\s*[\[{]", s):
+        return s, "json"
+    if re.search(r"<[a-z!/][^>]*>", s[:4000], re.I):
+        return clean_html(s), "html"
+    return s.strip(), "text"
+
+
+# ────────────────────────────── host resolvers ──────────────────────────────
+def resolve(url):
+    """JS-only / API-friendly hosts: yield (fetch_url, renderer_name)."""
+    u = url or ""
+    m = re.match(r"https?://bsky\.app/profile/([^/?#]+)", u)
+    if m:
+        h = m.group(1)
+        api = ("https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor="
+               + urllib.parse.quote(h) + "&limit=50&filter=posts_with_replies")
+        return [(api, "bsky")]
+    m = re.match(r"(https?://(?:www\.)?reddit\.com/(?!r/[^/]+/comments)[^?#]*)", u)
+    if m and "/comments/" not in u:
+        return [(m.group(1).rstrip("/") + ".json?limit=100", "reddit")]
+    m = re.match(r"https?://(?:www\.)?youtube\.com/watch\?(.*)", u)
+    if m:
+        q = urllib.parse.parse_qs(m.group(1)).get("v", [""])[0]
+        if q:
+            return [("https://www.youtube.com/oembed?url=" + urllib.parse.quote(u, safe="") + "&format=json", "oembed")]
+    return [(u, None)]
+
+
+def render(name, s):
+    if name == "bsky":
+        try:
+            feed = json.loads(s).get("feed", [])
+            return "\n\n".join(p.get("record", {}).get("text", "") for p in feed if p.get("record"))
+        except Exception:
+            return ""
+    if name == "reddit":
+        out = []
+        try:
+            d = json.loads(s)
+            def walk(children):
+                for c in children:
+                    dd = c.get("data", {})
+                    if dd.get("title"): out.append(dd["title"])
+                    if dd.get("selftext"): out.append(dd["selftext"])
+                    if dd.get("body"): out.append(dd["body"])
+                    rep = dd.get("replies")
+                    if isinstance(rep, dict): walk(rep.get("data", {}).get("children", []))
+            for ch in d.get("data", {}).get("children", []): walk([ch])
+        except Exception:
+            pass
+        return "\n\n".join(out)
+    if name == "oembed":
+        try:
+            return json.loads(s).get("title", "")
+        except Exception:
+            return ""
+    return s
+
+
+# ────────────────────────────── the finder ──────────────────────────────
+def norm_with_map(s):
+    norm, m, prev = [], [], False
+    for i, ch in enumerate(s):
+        if ch.isspace():
+            if not prev:
+                norm.append(" "); m.append(i); prev = True
+        else:
+            norm.append(ch.lower()); m.append(i); prev = False
+    return "".join(norm), m
+
+
+def find_quote(hay, quote):
+    hay, quote = str(hay or ""), str(quote or "")
+    if len(hay) < 3 or len(quote.strip()) < 3:
+        return None
+    norm, m = norm_with_map(hay)
+    nd = re.sub(r"\s+", " ", quote).strip().lower()
+    at = norm.find(nd); kind = "exact"
+    if at < 0 and len(nd) > 24:
+        at = norm.find(" ".join(nd.split(" ")[:6])); kind = "prefix"
+    if at < 0:
+        return None
+    end_i = min(at + len(nd) - 1, len(m) - 1)
+    return {"start": m[at], "end": m[end_i] + 1, "verbatim": hay[m[at]:m[end_i] + 1], "kind": kind}
+
+
+def words(s):
+    return [(mo.start(), mo.group(0).lower()) for mo in re.finditer(r"[A-Za-z0-9][A-Za-z0-9'’\-\.]{2,}", s or "")]
+
+
+def distinctive(q):
+    return {w for _, w in words(q) if len(w) >= 4 and w not in STOP}
+
+
+def fuzzy_snip(text, quote, radius=700):
+    """Best verbatim window by overlap with the quote's distinctive words."""
+    qt = distinctive(quote)
+    if not qt or len(text) < 60:
+        return None
+    tw = words(text)
+    if not tw:
+        return None
+    hits = [i for i, (_, w) in enumerate(tw) if w in qt]
+    if not hits:
+        return None
+    best, best_score = None, 0
+    span = max(12, int(len(tw) * 0.10))
+    for i in hits:
+        lo, hi = max(0, i - span), min(len(tw), i + span)
+        got = {w for _, w in tw[lo:hi] if w in qt}
+        score = len(got) / float(len(qt))
+        if score > best_score:
+            best_score, best = score, (lo, hi)
+    if not best or best_score < 0.25:
+        return None
+    lo, hi = best
+    a, b = tw[lo][0], (tw[min(hi, len(tw) - 1)][0] + len(tw[min(hi, len(tw) - 1)][1]))
+    a = max(0, text.rfind("\n", 0, a) + 1)
+    nl = text.find("\n", b)
+    b = b if nl < 0 else min(len(text), nl)
+    verbatim = re.sub(r"[ \t]+", " ", text[a:b]).strip()
+    if not verbatim:
+        return None
+    return {"start": a, "end": a + len(verbatim), "verbatim": verbatim,
+            "score": round(best_score, 2), "kind": "proposed"}
+
+
+# ────────────────────────────── fetching ──────────────────────────────
+def raw_page_url(archive_url):
+    m = re.match(r"^(https?://web\.archive\.org/web/\d{14})(?:[a-z]{2}_)?(/.+)$", archive_url or "", re.I)
+    return (m.group(1).replace("http:", "https:") + "id_" + m.group(2)) if m else None
+
+
+REAL = {}
+for _f in ("cdx.json", "spn.json"):
+    _p = os.path.join(D, _f)
+    if os.path.exists(_p):
+        try:
+            for _u, _a in json.load(open(_p)).items():
+                if _a and re.search(r"web/\d{14}", _a): REAL.setdefault(_u, _a)
+        except Exception:
+            pass
+
+
+def fetch(url, timeout=45, tries=2):
+    target = EDGE + "/raw?url=" + urllib.parse.quote(url, safe="") if EDGE else url
+    for a in range(tries):
+        try:
+            req = urllib.request.Request(target, headers={
+                "User-Agent": UA,
+                "Accept": "text/html,application/pdf,*/*",
+                "Accept-Encoding": "identity",
+            })
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                data = r.read()
+                enc = (r.headers.get("Content-Encoding") or "").lower().strip()
+            # archive.org serves gzip even when asked for identity, and urllib does
+            # NOT decompress — pick the decoder by name, don't probe a list.
+            dec = {"gzip": gzip.decompress, "x-gzip": gzip.decompress,
+                   "deflate": zlib.decompress,
+                   "br": brotli.decompress if brotli else None}.get(enc)
+            if dec is None and enc in ("deflate",):
+                dec = lambda b: zlib.decompress(b, -zlib.MAX_WBITS)  # noqa: E731
+            if dec:
+                try:
+                    data = dec(data)
+                except Exception:
+                    # some servers mislabel; if it sniffs as gzip, try anyway
+                    if data[:2] == b"\x1f\x8b":
+                        data = gzip.decompress(data)
+                    else:
+                        raise
+            return data
+        except Exception:
+            if a + 1 < tries:
+                time.sleep(2)
+    return None
+
+
+def thin(t):
+    """JS shell / paywall / consent wall detector."""
+    if not t: return True
+    alnum = sum(c.isalnum() for c in t)
+    return len(t) < 400 or alnum / float(len(t)) < 0.35
+
+
+def get_text(key, url, archive_url):
+    os.makedirs(TEXTDIR, exist_ok=True)
+    tag = hashlib.sha1((key + "|" + (archive_url or url or "")).encode()).hexdigest()[:16]
+    cache = os.path.join(TEXTDIR, tag + ".txt")
+    meta = os.path.join(TEXTDIR, tag + ".kind")
+    if os.path.exists(cache):
+        return open(cache, encoding="utf-8").read(), (open(meta).read().strip() if os.path.exists(meta) else "?")
+    real = archive_url if re.search(r"web/\d{14}", archive_url or "") else REAL.get(url, "")
+    target = real or url or ""
+    if not target:
+        return "", "no-url"
+    plan = [(u, r) for u, r in resolve(target)]
+    # try the archive capture raw-first, then the bare capture, then the live page
+    order = []
+    raw = raw_page_url(real)
+    if raw: order.append(raw)
+    if real: order.append(real)
+    for u, r in plan:
+        if u not in order: order.append(u)
+    for u in order:
+        rname = next((r for p, r in plan if p == u), None)
+        data = fetch(u)
+        if not data: continue
+        t, kind = extract(data, u)
+        if rname: t = render(rname, t) or t
+        if t and t.strip():
+            open(cache, "w", encoding="utf-8").write(t)
+            open(meta, "w").write(kind)
+            return t, kind
+    return "", "unreachable"
+
+
+# ────────────────────────────── collect ──────────────────────────────
+def collect():
+    srcs = {}
+    def blank(k):
+        return srcs.setdefault(k, {"key": k, "original_url": "", "archive_url": "", "title": "",
+                                  "outlet": "", "mime": "", "local": "", "inline_text": "",
+                                  "binary": False, "quotes": set()})
+    def rec(k, r):
+        e = blank(k)
+        e["original_url"] = e["original_url"] or (r.get("original_url") or "")
+        e["archive_url"] = e["archive_url"] or (r.get("archive_url") or "")
+        e["title"] = e["title"] or (r.get("title") or "")
+        e["outlet"] = e["outlet"] or (r.get("outlet") or "")
+        e["mime"] = e["mime"] or (r.get("mime") or "")
+        e["local"] = e["local"] or (r.get("file_url") or "")
+        # sources with no URL of their own carry their own extracted text inline;
+        # that text IS the verbatim source, so snip from it instead of the web.
+        if not (e["original_url"] or e["archive_url"] or e["local"]) and r.get("text"):
+            if len(r["text"]) > len(e["inline_text"]):
+                e["inline_text"] = r["text"]
+        e["binary"] = e["binary"] or bool(r.get("binary"))
+        for q in (r.get("snippets") or []):
+            if isinstance(q, str) and q.strip(): e["quotes"].add(q.strip())
+    for p in glob.glob(os.path.join(ROOT, "**", "*.sources.json"), recursive=True):
+        try: d = json.load(open(p))
+        except Exception: continue
+        for s in (d.get("sources") or []):
+            if isinstance(s, dict) and (s.get("key") or s.get("id")): rec(s.get("key") or s.get("id"), s)
+    def walk(tokens):
+        for t in tokens or []:
+            if isinstance(t, dict) and isinstance(t.get("q"), dict):
+                for k, q in t["q"].items():
+                    if isinstance(q, str) and q.strip(): blank(k)["quotes"].add(q.strip())
+    for p in glob.glob(os.path.join(ROOT, "articles", "**", "*.jsonl"), recursive=True):
+        for line in open(p):
+            line = line.strip()
+            if not line: continue
+            try: ev = json.loads(line)
+            except Exception: continue
+            op = ev.get("operand", ev)
+            if not isinstance(op, dict): continue
+            for k, v in (op.get("sources") or {}).items():
+                if isinstance(v, dict): rec(k, v)
+            for b in (op.get("body") or []):
+                walk(b.get("tokens"))
+                for it in (b.get("items") or []): walk(it)
+    return srcs
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--key", help="only this source key")
+    ap.add_argument("--redo", action="store_true", help="ignore the text cache")
+    args = ap.parse_args()
+    if args.redo:
+        for f in glob.glob(os.path.join(TEXTDIR, "*")): os.remove(f)
+
+    srcs = collect()
+    if args.key:
+        srcs = {k: v for k, v in srcs.items() if k == args.key}
+    withq = {k: v for k, v in srcs.items() if v["quotes"]}
+    sys.stderr.write("sources %d · with quotes %d · quotes %d\n" %
+                     (len(srcs), len(withq), sum(len(v["quotes"]) for v in withq.values())))
+
+    results, stats, lines = {}, {}, ["# Mechanical snipping report", ""]
+    for k, v in sorted(withq.items()):
+        # a source with no URL of its own carries its own text inline — that IS the source
+        if v["inline_text"].strip() and not (v["original_url"] or v["archive_url"]):
+            text, kind = v["inline_text"], "inline"
+        else:
+            text, kind = get_text(k, v["original_url"], v["archive_url"])
+        row = {"title": v["title"], "outlet": v["outlet"], "archive_url": v["archive_url"],
+               "original_url": v["original_url"], "kind": kind, "results": []}
+        if kind == "inline" and v["binary"]:
+            # OCR of a redacted scan — quoteable only if it really is in the text
+            pass
+        if v["local"] and not text:
+            row["status"] = "local-upload"
+            lines.append("- **%s** `%s` — LOCAL UPLOAD (%s) — needs the Matrix fetch + OCR, not the web" %
+                         (k, v["outlet"], v["mime"] or "binary"))
+            results[k] = row; stats["local-upload"] = stats.get("local-upload", 0) + 1
+            continue
+        if not text:
+            row["status"] = kind if kind in ("unreachable", "no-url", "pdf-unreadable") else "no-text"
+            lines.append("- **%s** `%s` — %s" % (k, v["outlet"], row["status"].upper()))
+            results[k] = row; stats[row["status"]] = stats.get(row["status"], 0) + 1
+            continue
+        if thin(text):
+            row["status"] = "shell"
+            lines.append("- **%s** `%s` — SHELL/PAYWALL (%d chars of text) — blocked, not a quote problem" %
+                         (k, v["outlet"], len(text)))
+            results[k] = row; stats["shell"] = stats.get("shell", 0) + 1
+            continue
+        marks = []
+        for q in v["quotes"]:
+            hit = find_quote(text, q) or fuzzy_snip(text, q)
+            if hit:
+                stats[hit["kind"]] = stats.get(hit["kind"], 0) + 1
+                hit["quote"] = q
+                row["results"].append(hit); marks.append(hit["kind"])
+            else:
+                stats["miss"] = stats.get("miss", 0) + 1
+                row["results"].append({"quote": q, "verbatim": None, "kind": "miss"}); marks.append("MISS")
+        row["status"] = "ok"
+        lines.append("- **%s** `%s` — %s" % (k, v["outlet"], " ".join(marks)))
+        for r in row["results"]:
+            if r["kind"] != "exact":
+                lines.append("    - %s: %s" % (r["kind"], r["quote"][:120]))
+        results[k] = row
+    json.dump(results, open(os.path.join(D, "snips.json"), "w"), indent=1)
+    open(os.path.join(D, "snips_report.md"), "w").write("\n".join(lines) + "\n")
+    sys.stderr.write(" · ".join("%s %d" % (a, b) for a, b in sorted(stats.items())) + "\n")
+
+
+if __name__ == "__main__":
+    main()

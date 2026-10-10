@@ -1,0 +1,435 @@
+@@@@ task fibonacci
+class Main {
+    static int fibonacci(int n) {
+        if (n < 2) {
+            return n;
+        }
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+
+    public static void main(String[] args) {
+        StringBuilder out = new StringBuilder();
+        for (int i = 0; i <= 10; i++) {
+            if (i > 0) {
+                out.append(" ");
+            }
+            out.append(fibonacci(i));
+        }
+        System.out.println(out);
+    }
+}
+@@@@ task gcd
+class Main {
+    static int gcd(int a, int b) {
+        if (b == 0) {
+            return a;
+        }
+        return gcd(b, a % b);
+    }
+
+    public static void main(String[] args) {
+        int[][] pairs = {{48, 18}, {17, 5}, {0, 9}, {100, 75}};
+        StringBuilder out = new StringBuilder();
+        for (int[] p : pairs) {
+            if (out.length() > 0) {
+                out.append(" ");
+            }
+            out.append(gcd(p[0], p[1]));
+        }
+        System.out.println(out);
+    }
+}
+@@@@ task binary_search
+class Main {
+    static int searchRange(int[] items, int target, int low, int high) {
+        if (low > high) {
+            return -1;
+        }
+        int mid = (low + high) / 2;
+        if (items[mid] == target) {
+            return mid;
+        }
+        if (items[mid] < target) {
+            return searchRange(items, target, mid + 1, high);
+        }
+        return searchRange(items, target, low, mid - 1);
+    }
+
+    static int binarySearch(int[] items, int target) {
+        return searchRange(items, target, 0, items.length - 1);
+    }
+
+    public static void main(String[] args) {
+        int[] data = {1, 3, 5, 7, 9, 11, 13};
+        int[] targets = {7, 1, 13, 4};
+        StringBuilder out = new StringBuilder();
+        for (int t : targets) {
+            if (out.length() > 0) {
+                out.append(" ");
+            }
+            out.append(binarySearch(data, t));
+        }
+        System.out.println(out);
+    }
+}
+@@@@ task quicksort
+class Main {
+    static int partition(int[] items, int low, int high) {
+        int pivot = items[high];
+        int i = low - 1;
+        for (int j = low; j < high; j++) {
+            if (items[j] <= pivot) {
+                i += 1;
+                int tmp = items[i];
+                items[i] = items[j];
+                items[j] = tmp;
+            }
+        }
+        int tmp = items[i + 1];
+        items[i + 1] = items[high];
+        items[high] = tmp;
+        return i + 1;
+    }
+
+    static void quicksort(int[] items, int low, int high) {
+        if (low < high) {
+            int p = partition(items, low, high);
+            quicksort(items, low, p - 1);
+            quicksort(items, p + 1, high);
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] data = {5, 2, 9, 1, 5, 6, 0, 3};
+        quicksort(data, 0, data.length - 1);
+        StringBuilder out = new StringBuilder();
+        for (int x : data) {
+            if (out.length() > 0) {
+                out.append(" ");
+            }
+            out.append(x);
+        }
+        System.out.println(out);
+    }
+}
+@@@@ task merge_sort
+import java.util.Arrays;
+
+class Main {
+    static int[] merge(int[] left, int[] right) {
+        int[] result = new int[left.length + right.length];
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        while (i < left.length && j < right.length) {
+            if (left[i] <= right[j]) {
+                result[k++] = left[i++];
+            } else {
+                result[k++] = right[j++];
+            }
+        }
+        while (i < left.length) {
+            result[k++] = left[i++];
+        }
+        while (j < right.length) {
+            result[k++] = right[j++];
+        }
+        return result;
+    }
+
+    static int[] mergeSort(int[] items) {
+        if (items.length <= 1) {
+            return items;
+        }
+        int mid = items.length / 2;
+        return merge(mergeSort(Arrays.copyOfRange(items, 0, mid)), mergeSort(Arrays.copyOfRange(items, mid, items.length)));
+    }
+
+    public static void main(String[] args) {
+        int[] sorted = mergeSort(new int[] {38, 27, 43, 3, 9, 82, 10});
+        StringBuilder out = new StringBuilder();
+        for (int x : sorted) {
+            if (out.length() > 0) {
+                out.append(" ");
+            }
+            out.append(x);
+        }
+        System.out.println(out);
+    }
+}
+@@@@ task factorial
+class Main {
+    static long factorial(int n) {
+        if (n <= 1) {
+            return 1;
+        }
+        return n * factorial(n - 1);
+    }
+
+    public static void main(String[] args) {
+        StringBuilder out = new StringBuilder();
+        for (int i = 0; i <= 10; i++) {
+            if (i > 0) {
+                out.append(" ");
+            }
+            out.append(factorial(i));
+        }
+        System.out.println(out);
+    }
+}
+@@@@ task palindrome
+class Main {
+    static String normalize(String text) {
+        StringBuilder out = new StringBuilder();
+        for (char ch : text.toCharArray()) {
+            if (Character.isLetterOrDigit(ch)) {
+                out.append(Character.toLowerCase(ch));
+            }
+        }
+        return out.toString();
+    }
+
+    static String reverseText(String text) {
+        StringBuilder out = new StringBuilder();
+        for (char ch : text.toCharArray()) {
+            out.insert(0, ch);
+        }
+        return out.toString();
+    }
+
+    static boolean isPalindrome(String text) {
+        String cleaned = normalize(text);
+        return cleaned.equals(reverseText(cleaned));
+    }
+
+    public static void main(String[] args) {
+        String[] samples = {"A man, a plan, a canal: Panama", "hello", "Was it a car or a cat I saw?"};
+        StringBuilder out = new StringBuilder();
+        for (String s : samples) {
+            if (out.length() > 0) {
+                out.append(" ");
+            }
+            out.append(isPalindrome(s));
+        }
+        System.out.println(out);
+    }
+}
+@@@@ task word_count
+import java.util.Map;
+import java.util.TreeMap;
+
+class Main {
+    static String[] splitWords(String text) {
+        return text.split(" ");
+    }
+
+    static Map<String, Integer> countWords(String text) {
+        Map<String, Integer> counts = new TreeMap<>();
+        for (String word : splitWords(text)) {
+            counts.put(word, counts.getOrDefault(word, 0) + 1);
+        }
+        return counts;
+    }
+
+    public static void main(String[] args) {
+        Map<String, Integer> counts = countWords("the quick brown fox jumps over the lazy dog the end");
+        StringBuilder out = new StringBuilder();
+        for (Map.Entry<String, Integer> e : counts.entrySet()) {
+            if (out.length() > 0) {
+                out.append(" ");
+            }
+            out.append(e.getKey()).append("=").append(e.getValue());
+        }
+        System.out.println(out);
+    }
+}
+@@@@ task fizzbuzz
+class Main {
+    static boolean isDivisible(int n, int d) {
+        return n % d == 0;
+    }
+
+    static String fizzBuzz(int n) {
+        if (isDivisible(n, 15)) {
+            return "FizzBuzz";
+        }
+        if (isDivisible(n, 3)) {
+            return "Fizz";
+        }
+        if (isDivisible(n, 5)) {
+            return "Buzz";
+        }
+        return String.valueOf(n);
+    }
+
+    public static void main(String[] args) {
+        StringBuilder out = new StringBuilder();
+        for (int i = 1; i <= 15; i++) {
+            if (i > 1) {
+                out.append(" ");
+            }
+            out.append(fizzBuzz(i));
+        }
+        System.out.println(out);
+    }
+}
+@@@@ task linked_list
+import java.util.ArrayList;
+import java.util.List;
+
+class Node {
+    int value;
+    Node next;
+
+    Node(int value, Node next) {
+        this.value = value;
+        this.next = next;
+    }
+}
+
+class Main {
+    static Node reverseList(Node node, Node previous) {
+        if (node == null) {
+            return previous;
+        }
+        Node following = node.next;
+        node.next = previous;
+        return reverseList(following, node);
+    }
+
+    static List<Integer> toArray(Node node) {
+        List<Integer> values = new ArrayList<>();
+        while (node != null) {
+            values.add(node.value);
+            node = node.next;
+        }
+        return values;
+    }
+
+    public static void main(String[] args) {
+        Node head = null;
+        for (int v : new int[] {5, 4, 3, 2, 1}) {
+            head = new Node(v, head);
+        }
+        StringBuilder out = new StringBuilder();
+        for (int v : toArray(reverseList(head, null))) {
+            if (out.length() > 0) {
+                out.append(" ");
+            }
+            out.append(v);
+        }
+        System.out.println(out);
+    }
+}
+@@@@ task stack
+class Stack {
+    private int[] items;
+    private int size;
+
+    Stack() {
+        items = new int[16];
+        size = 0;
+    }
+
+    void push(int value) {
+        items[size] = value;
+        size += 1;
+    }
+
+    boolean isEmpty() {
+        return size == 0;
+    }
+
+    int pop() {
+        if (isEmpty()) {
+            throw new IllegalStateException("pop from empty stack");
+        }
+        size -= 1;
+        return items[size];
+    }
+
+    int peek() {
+        if (isEmpty()) {
+            throw new IllegalStateException("peek at empty stack");
+        }
+        return items[size - 1];
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Stack stack = new Stack();
+        for (int v : new int[] {1, 2, 3}) {
+            stack.push(v);
+        }
+        StringBuilder out = new StringBuilder();
+        out.append(stack.peek());
+        out.append(" ").append(stack.pop());
+        out.append(" ").append(stack.pop());
+        out.append(" ").append(stack.isEmpty());
+        out.append(" ").append(stack.pop());
+        out.append(" ").append(stack.isEmpty());
+        System.out.println(out);
+    }
+}
+@@@@ task tree_traversal
+import java.util.ArrayList;
+import java.util.List;
+
+class TreeNode {
+    int value;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode(int value, TreeNode left, TreeNode right) {
+        this.value = value;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+class Main {
+    static void inorder(TreeNode node, List<Integer> out) {
+        if (node == null) {
+            return;
+        }
+        inorder(node.left, out);
+        out.add(node.value);
+        inorder(node.right, out);
+    }
+
+    static void preorder(TreeNode node, List<Integer> out) {
+        if (node == null) {
+            return;
+        }
+        out.add(node.value);
+        preorder(node.left, out);
+        preorder(node.right, out);
+    }
+
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode(4,
+            new TreeNode(2, new TreeNode(1, null, null), new TreeNode(3, null, null)),
+            new TreeNode(6, new TreeNode(5, null, null), new TreeNode(7, null, null)));
+        List<Integer> visited = new ArrayList<>();
+        inorder(root, visited);
+        StringBuilder first = new StringBuilder();
+        for (int v : visited) {
+            if (first.length() > 0) {
+                first.append(" ");
+            }
+            first.append(v);
+        }
+        System.out.println(first);
+        visited = new ArrayList<>();
+        preorder(root, visited);
+        StringBuilder second = new StringBuilder();
+        for (int v : visited) {
+            if (second.length() > 0) {
+                second.append(" ");
+            }
+            second.append(v);
+        }
+        System.out.println(second);
+    }
+}

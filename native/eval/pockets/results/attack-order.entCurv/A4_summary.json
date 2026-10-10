@@ -1,0 +1,665 @@
+{
+ "n": 391,
+ "variants": {
+  "fixTok7500_r0": {
+   "word-grain": {
+    "n": 296,
+    "evaluated": 235,
+    "skipped": 61,
+    "P+": 22,
+    "P-": 1,
+    "M": 138,
+    "A": 74,
+    "medianV": 0.00494,
+    "sharePos": 0.809,
+    "medianMeanUnitLength": 14.2
+   },
+   "code-grain": {
+    "n": 66,
+    "evaluated": 66,
+    "skipped": 0,
+    "P+": 7,
+    "P-": 15,
+    "M": 33,
+    "A": 11,
+    "medianV": -0.00517,
+    "sharePos": 0.364,
+    "medianMeanUnitLength": 4.6
+   },
+   "notation": {
+    "n": 19,
+    "evaluated": 11,
+    "skipped": 8,
+    "P+": 2,
+    "P-": 0,
+    "M": 3,
+    "A": 6,
+    "medianV": 0.00125,
+    "sharePos": 0.636,
+    "medianMeanUnitLength": 8.5
+   },
+   "charbigram": {
+    "n": 10,
+    "evaluated": 9,
+    "skipped": 1,
+    "P+": 0,
+    "P-": 3,
+    "M": 4,
+    "A": 2,
+    "medianV": -0.0255,
+    "sharePos": 0.111,
+    "medianMeanUnitLength": 9.9
+   },
+   "atlasPlus": {
+    "n": 126,
+    "evaluated": 117,
+    "skipped": 9,
+    "P+": 29,
+    "P-": 0,
+    "M": 79,
+    "A": 9,
+    "medianV": 0.00859,
+    "sharePos": 1,
+    "medianMeanUnitLength": 11.9
+   },
+   "atlasMinus": {
+    "n": 53,
+    "evaluated": 51,
+    "skipped": 2,
+    "P+": 0,
+    "P-": 19,
+    "M": 28,
+    "A": 4,
+    "medianV": -0.01639,
+    "sharePos": 0,
+    "medianMeanUnitLength": 4.9
+   },
+   "atlasMinus_wordGrain": {
+    "n": 13,
+    "evaluated": 13,
+    "skipped": 0,
+    "P+": 0,
+    "P-": 1,
+    "M": 9,
+    "A": 3,
+    "medianV": -0.01011,
+    "sharePos": 0,
+    "medianMeanUnitLength": 8.1
+   },
+   "atlasMinus_code": {
+    "n": 32,
+    "evaluated": 32,
+    "skipped": 0,
+    "P+": 0,
+    "P-": 15,
+    "M": 16,
+    "A": 1,
+    "medianV": -0.01646,
+    "sharePos": 0,
+    "medianMeanUnitLength": 4.6
+   }
+  },
+  "fixTok7500_r1": {
+   "word-grain": {
+    "n": 296,
+    "evaluated": 235,
+    "skipped": 61,
+    "P+": 25,
+    "P-": 0,
+    "M": 129,
+    "A": 81,
+    "medianV": 0.00479,
+    "sharePos": 0.817,
+    "medianMeanUnitLength": 14.2
+   },
+   "code-grain": {
+    "n": 66,
+    "evaluated": 66,
+    "skipped": 0,
+    "P+": 9,
+    "P-": 12,
+    "M": 34,
+    "A": 11,
+    "medianV": -0.00529,
+    "sharePos": 0.394,
+    "medianMeanUnitLength": 4.6
+   },
+   "notation": {
+    "n": 19,
+    "evaluated": 11,
+    "skipped": 8,
+    "P+": 3,
+    "P-": 0,
+    "M": 7,
+    "A": 1,
+    "medianV": 0.00622,
+    "sharePos": 0.727,
+    "medianMeanUnitLength": 8.5
+   },
+   "charbigram": {
+    "n": 10,
+    "evaluated": 9,
+    "skipped": 1,
+    "P+": 0,
+    "P-": 2,
+    "M": 7,
+    "A": 0,
+    "medianV": -0.03075,
+    "sharePos": 0.111,
+    "medianMeanUnitLength": 10
+   },
+   "atlasPlus": {
+    "n": 126,
+    "evaluated": 116,
+    "skipped": 10,
+    "P+": 36,
+    "P-": 0,
+    "M": 70,
+    "A": 10,
+    "medianV": 0.00928,
+    "sharePos": 0.991,
+    "medianMeanUnitLength": 11.6
+   },
+   "atlasMinus": {
+    "n": 53,
+    "evaluated": 51,
+    "skipped": 2,
+    "P+": 0,
+    "P-": 14,
+    "M": 32,
+    "A": 5,
+    "medianV": -0.01453,
+    "sharePos": 0.02,
+    "medianMeanUnitLength": 5
+   },
+   "atlasMinus_wordGrain": {
+    "n": 13,
+    "evaluated": 13,
+    "skipped": 0,
+    "P+": 0,
+    "P-": 0,
+    "M": 9,
+    "A": 4,
+    "medianV": -0.00797,
+    "sharePos": 0.077,
+    "medianMeanUnitLength": 8.1
+   },
+   "atlasMinus_code": {
+    "n": 32,
+    "evaluated": 32,
+    "skipped": 0,
+    "P+": 0,
+    "P-": 12,
+    "M": 19,
+    "A": 1,
+    "medianV": -0.01476,
+    "sharePos": 0,
+    "medianMeanUnitLength": 4.6
+   }
+  },
+  "fixLen10": {
+   "word-grain": {
+    "n": 296,
+    "evaluated": 133,
+    "skipped": 163,
+    "P+": 43,
+    "P-": 9,
+    "M": 60,
+    "A": 21,
+    "medianV": 0.00646,
+    "sharePos": 0.812,
+    "medianMeanUnitLength": 10
+   },
+   "code-grain": {
+    "n": 66,
+    "evaluated": 52,
+    "skipped": 14,
+    "P+": 6,
+    "P-": 22,
+    "M": 18,
+    "A": 6,
+    "medianV": -0.00432,
+    "sharePos": 0.288,
+    "medianMeanUnitLength": 10
+   },
+   "notation": {
+    "n": 19,
+    "evaluated": 7,
+    "skipped": 12,
+    "P+": 3,
+    "P-": 0,
+    "M": 2,
+    "A": 2,
+    "medianV": 0.01936,
+    "sharePos": 1,
+    "medianMeanUnitLength": 10
+   },
+   "charbigram": {
+    "n": 10,
+    "evaluated": 6,
+    "skipped": 4,
+    "P+": 0,
+    "P-": 3,
+    "M": 2,
+    "A": 1,
+    "medianV": -0.02993,
+    "sharePos": 0.167,
+    "medianMeanUnitLength": 10
+   },
+   "atlasPlus": {
+    "n": 126,
+    "evaluated": 72,
+    "skipped": 54,
+    "P+": 48,
+    "P-": 0,
+    "M": 23,
+    "A": 1,
+    "medianV": 0.0102,
+    "sharePos": 0.986,
+    "medianMeanUnitLength": 10
+   },
+   "atlasMinus": {
+    "n": 53,
+    "evaluated": 42,
+    "skipped": 11,
+    "P+": 0,
+    "P-": 32,
+    "M": 9,
+    "A": 1,
+    "medianV": -0.01479,
+    "sharePos": 0,
+    "medianMeanUnitLength": 10
+   },
+   "atlasMinus_wordGrain": {
+    "n": 13,
+    "evaluated": 12,
+    "skipped": 1,
+    "P+": 0,
+    "P-": 9,
+    "M": 3,
+    "A": 0,
+    "medianV": -0.00899,
+    "sharePos": 0,
+    "medianMeanUnitLength": 10
+   },
+   "atlasMinus_code": {
+    "n": 32,
+    "evaluated": 26,
+    "skipped": 6,
+    "P+": 0,
+    "P-": 20,
+    "M": 5,
+    "A": 1,
+    "medianV": -0.01479,
+    "sharePos": 0,
+    "medianMeanUnitLength": 10
+   }
+  },
+  "fixLen10Tok7500_r0": {
+   "word-grain": {
+    "n": 296,
+    "evaluated": 204,
+    "skipped": 92,
+    "P+": 31,
+    "P-": 0,
+    "M": 116,
+    "A": 57,
+    "medianV": 0.00636,
+    "sharePos": 0.828,
+    "medianMeanUnitLength": 10
+   },
+   "code-grain": {
+    "n": 66,
+    "evaluated": 63,
+    "skipped": 3,
+    "P+": 0,
+    "P-": 11,
+    "M": 35,
+    "A": 17,
+    "medianV": -0.0067,
+    "sharePos": 0.27,
+    "medianMeanUnitLength": 10
+   },
+   "notation": {
+    "n": 19,
+    "evaluated": 10,
+    "skipped": 9,
+    "P+": 2,
+    "P-": 0,
+    "M": 5,
+    "A": 3,
+    "medianV": 0.00621,
+    "sharePos": 0.7,
+    "medianMeanUnitLength": 10
+   },
+   "charbigram": {
+    "n": 10,
+    "evaluated": 7,
+    "skipped": 3,
+    "P+": 0,
+    "P-": 3,
+    "M": 3,
+    "A": 1,
+    "medianV": -0.02955,
+    "sharePos": 0.143,
+    "medianMeanUnitLength": 10.1
+   },
+   "atlasPlus": {
+    "n": 126,
+    "evaluated": 111,
+    "skipped": 15,
+    "P+": 25,
+    "P-": 0,
+    "M": 69,
+    "A": 17,
+    "medianV": 0.00925,
+    "sharePos": 0.964,
+    "medianMeanUnitLength": 10
+   },
+   "atlasMinus": {
+    "n": 53,
+    "evaluated": 50,
+    "skipped": 3,
+    "P+": 0,
+    "P-": 14,
+    "M": 26,
+    "A": 10,
+    "medianV": -0.01487,
+    "sharePos": 0.02,
+    "medianMeanUnitLength": 10
+   },
+   "atlasMinus_wordGrain": {
+    "n": 13,
+    "evaluated": 13,
+    "skipped": 0,
+    "P+": 0,
+    "P-": 0,
+    "M": 8,
+    "A": 5,
+    "medianV": -0.00949,
+    "sharePos": 0,
+    "medianMeanUnitLength": 10
+   },
+   "atlasMinus_code": {
+    "n": 32,
+    "evaluated": 32,
+    "skipped": 0,
+    "P+": 0,
+    "P-": 11,
+    "M": 16,
+    "A": 5,
+    "medianV": -0.01487,
+    "sharePos": 0.031,
+    "medianMeanUnitLength": 10
+   }
+  },
+  "fixLen10Tok7500_r1": {
+   "word-grain": {
+    "n": 296,
+    "evaluated": 205,
+    "skipped": 91,
+    "P+": 30,
+    "P-": 2,
+    "M": 129,
+    "A": 44,
+    "medianV": 0.00636,
+    "sharePos": 0.834,
+    "medianMeanUnitLength": 10
+   },
+   "code-grain": {
+    "n": 66,
+    "evaluated": 63,
+    "skipped": 3,
+    "P+": 1,
+    "P-": 14,
+    "M": 32,
+    "A": 16,
+    "medianV": -0.00686,
+    "sharePos": 0.302,
+    "medianMeanUnitLength": 10
+   },
+   "notation": {
+    "n": 19,
+    "evaluated": 10,
+    "skipped": 9,
+    "P+": 2,
+    "P-": 0,
+    "M": 3,
+    "A": 5,
+    "medianV": 0.0057,
+    "sharePos": 0.8,
+    "medianMeanUnitLength": 10
+   },
+   "charbigram": {
+    "n": 10,
+    "evaluated": 7,
+    "skipped": 3,
+    "P+": 0,
+    "P-": 4,
+    "M": 2,
+    "A": 1,
+    "medianV": -0.02814,
+    "sharePos": 0.143,
+    "medianMeanUnitLength": 10
+   },
+   "atlasPlus": {
+    "n": 126,
+    "evaluated": 111,
+    "skipped": 15,
+    "P+": 26,
+    "P-": 0,
+    "M": 72,
+    "A": 13,
+    "medianV": 0.00916,
+    "sharePos": 0.973,
+    "medianMeanUnitLength": 10
+   },
+   "atlasMinus": {
+    "n": 53,
+    "evaluated": 50,
+    "skipped": 3,
+    "P+": 0,
+    "P-": 18,
+    "M": 26,
+    "A": 6,
+    "medianV": -0.01475,
+    "sharePos": 0.04,
+    "medianMeanUnitLength": 10
+   },
+   "atlasMinus_wordGrain": {
+    "n": 13,
+    "evaluated": 13,
+    "skipped": 0,
+    "P+": 0,
+    "P-": 1,
+    "M": 9,
+    "A": 3,
+    "medianV": -0.00633,
+    "sharePos": 0.077,
+    "medianMeanUnitLength": 10
+   },
+   "atlasMinus_code": {
+    "n": 32,
+    "evaluated": 32,
+    "skipped": 0,
+    "P+": 0,
+    "P-": 13,
+    "M": 16,
+    "A": 3,
+    "medianV": -0.01467,
+    "sharePos": 0.031,
+    "medianMeanUnitLength": 10
+   }
+  }
+ },
+ "vsReRanked": {
+  "len10": {
+   "fixedRanks": {
+    "word-grain P+": {
+     "n": 103,
+     "medianRetention": 1.244,
+     "signKeptShare": 0.99
+    },
+    "code-grain P-": {
+     "n": 32,
+     "medianRetention": 0.897,
+     "signKeptShare": 0.969
+    },
+    "word-grain P-": {
+     "n": 30,
+     "medianRetention": 0.837,
+     "signKeptShare": 0.8
+    },
+    "charbigram P-": {
+     "n": 5,
+     "medianRetention": 0.964,
+     "signKeptShare": 1
+    },
+    "code-grain P+": {
+     "n": 20,
+     "medianRetention": 0.41,
+     "signKeptShare": 0.7
+    }
+   },
+   "reRanked": {
+    "word-grain P+": {
+     "n": 57,
+     "medianRetention": 1.161,
+     "signKeptShare": 0.982
+    },
+    "code-grain P-": {
+     "n": 26,
+     "medianRetention": 0.111,
+     "signKeptShare": 0.692
+    },
+    "word-grain P-": {
+     "n": 12,
+     "medianRetention": 1.411,
+     "signKeptShare": 1
+    },
+    "charbigram P-": {
+     "n": 4,
+     "medianRetention": 1.292,
+     "signKeptShare": 1
+    },
+    "code-grain P+": {
+     "n": 10,
+     "medianRetention": 0.633,
+     "signKeptShare": 0.9
+    }
+   }
+  },
+  "tok7500len10": {
+   "fixedRanks": {
+    "word-grain P+": {
+     "n": 165,
+     "medianRetention": 1.394,
+     "signKeptShare": 0.964
+    },
+    "code-grain P-": {
+     "n": 40,
+     "medianRetention": 0.896,
+     "signKeptShare": 0.975
+    },
+    "word-grain P-": {
+     "n": 40,
+     "medianRetention": 0.883,
+     "signKeptShare": 0.8
+    },
+    "charbigram P-": {
+     "n": 6,
+     "medianRetention": 1.232,
+     "signKeptShare": 1
+    },
+    "code-grain P+": {
+     "n": 23,
+     "medianRetention": 0.219,
+     "signKeptShare": 0.739
+    }
+   },
+   "reRanked": {
+    "word-grain P+": {
+     "n": 94,
+     "medianRetention": 1.309,
+     "signKeptShare": 0.947
+    },
+    "code-grain P-": {
+     "n": 32,
+     "medianRetention": 0.032,
+     "signKeptShare": 0.531
+    },
+    "word-grain P-": {
+     "n": 13,
+     "medianRetention": 1.676,
+     "signKeptShare": 1
+    },
+    "charbigram P-": {
+     "n": 5,
+     "medianRetention": 2.227,
+     "signKeptShare": 1
+    },
+    "code-grain P+": {
+     "n": 12,
+     "medianRetention": 0.436,
+     "signKeptShare": 0.75
+    }
+   }
+  },
+  "tok7500": {
+   "fixedRanks": {
+    "word-grain P+": {
+     "n": 194,
+     "medianRetention": 1.009,
+     "signKeptShare": 0.964
+    },
+    "code-grain P-": {
+     "n": 40,
+     "medianRetention": 1.032,
+     "signKeptShare": 1
+    },
+    "word-grain P-": {
+     "n": 45,
+     "medianRetention": 0.944,
+     "signKeptShare": 0.867
+    },
+    "charbigram P-": {
+     "n": 8,
+     "medianRetention": 0.99,
+     "signKeptShare": 1
+    },
+    "code-grain P+": {
+     "n": 26,
+     "medianRetention": 0.993,
+     "signKeptShare": 0.962
+    }
+   },
+   "reRanked": {
+    "word-grain P+": {
+     "n": 99,
+     "medianRetention": 1.041,
+     "signKeptShare": 0.939
+    },
+    "code-grain P-": {
+     "n": 32,
+     "medianRetention": 1.432,
+     "signKeptShare": 0.969
+    },
+    "word-grain P-": {
+     "n": 13,
+     "medianRetention": 2.286,
+     "signKeptShare": 1
+    },
+    "charbigram P-": {
+     "n": 6,
+     "medianRetention": 1.912,
+     "signKeptShare": 1
+    },
+    "code-grain P+": {
+     "n": 14,
+     "medianRetention": 0.629,
+     "signKeptShare": 0.929
+    }
+   }
+  }
+ }
+}

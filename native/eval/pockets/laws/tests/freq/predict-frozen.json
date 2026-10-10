@@ -1,0 +1,55 @@
+{
+ "note": "blind PREDICT table of laws/freq.mjs frozen BEFORE any freq statistic was computed on any data",
+ "sha256": "09303aacc306b0139fc24e9fa926698e4013271e1b047a82d6f7953da90b5a05",
+ "canon": [
+  [
+   "abbrev",
+   "absent"
+  ],
+  [
+   "hapaxShare",
+   "universal-"
+  ],
+  [
+   "heapsBeta",
+   "specific"
+  ],
+  [
+   "lenAcf1",
+   "specific"
+  ],
+  [
+   "lenCV",
+   "absent"
+  ],
+  [
+   "lenDocEps",
+   "universal+"
+  ],
+  [
+   "lenLogSkew",
+   "absent"
+  ],
+  [
+   "menzerath",
+   "specific"
+  ],
+  [
+   "rankBinEnt",
+   "specific"
+  ],
+  [
+   "recurLen",
+   "universal+"
+  ],
+  [
+   "ttr",
+   "universal-"
+  ],
+  [
+   "zipfAlpha",
+   "universal-"
+  ]
+ ],
+ "freqMjsHeaderSha256": "7a130a7c78bd13221d3099fce161a67468010455a6781301acb67538aaa9e469"
+}

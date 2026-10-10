@@ -1,0 +1,116 @@
+// results/confirm-comp.rigidL/confirm.mjs — SIBLING REPLICATION of the atlas law comp.rigidL ("a larger share of types have one fixed commonest left-hand neighbour than a within-unit shuffle gives").
+// ===== PRE-REGISTRATION HEADER (written 2026-10-07 before ANY law statistic of ANY family was computed on ANY sibling pocket; the sha256 of every byte of this file from the first byte through the END marker line inclusive is in prereg.sha256) =====
+//
+// WHAT IS REPLICATED. Atlas entry comp.rigidL (results/law-table.json): UNIVERSAL(+), 387 of 391 real non-thin pockets PRESENT+ (|z| >= 4 in both halves, same sign), 1 PRESENT- (ml-grc-lyric), 1 ABSENT (cd-smiles-pubchem), 2 AMBIGUOUS
+//  (cd-protein-aa, ml-grc-comedy); median min-half |z| 225; not sizeConfounded; validated by planted world pl-frames; rho 0.90 with comp.sameL. The statistic (laws/comp.mjs, laws/_comp_neigh.mjs neighbourTypeStats): of the types with count >= 8 and
+//  >= 10 left-neighbour occurrences inside their unit (>= 20 such types needed), the SOFT share of types whose single commonest left neighbour type holds m >= 0.8 of those occurrences (counts 1) or exp(-(0.8 - m)/0.15) below that. Null: WITHIN-UNIT shuffle.
+//  The claim has two parts, and both are tested: (E) EXISTENCE: PRESENT+ in the pockets of the kinds where it was PRESENT+ in the atlas, ABSENT where the atlas had it ABSENT; (C) CONSTANT: the size of v is a property of REGISTER
+//  (atlas eta2 0.56 on register, permutation p < 0.001): diagram 0.42, legal 0.24, markup 0.19, code 0.18, ..., novel 0.09, ..., treebank 0.05, poetry 0.04, drama 0.04.
+//
+// DISCLOSURE (what I have seen before writing this header)
+//  SEEN: PROTOCOL.md (sha256 3b7363c5b01642c06ad5df8d059e5909f237516481e0ed8af3379aa39c4330fc, unchanged), lib/pocket.mjs, run-atlas.mjs, laws/comp.mjs, laws/_comp_core.mjs, _comp_prep.mjs, _comp_neigh.mjs (the definition and code of the statistic),
+//   the whole comp.rigidL entry of results/law-table.json (counts by group, register, script and grain; g0 and g1; constantVaries; mostSimilar), and from results/atlas/*.json the comp.rigidL cells (v, nullMean, nullSd, z, both halves) of EVERY atlas
+//   pocket: I printed the per-register medians of the mean of the two halves, every bk, ud, cd, oc and fm-law pocket with its two v, the 25 lowest min-half z pockets, and the full cells of cd-smiles-{pubchem,ccd,chebi,chembl}, ml-grc-lyric,
+//   bk-pride-prej, cd-cc-python, cd-bpmn-miwg, ud-eng. ATLAS-SIDE PROBES I RAN (they shaped the predictions below): (i) the atom-token shares of the four atlas SMILES pockets: in cd-smiles-pubchem the single token 'C' (aliphatic carbon, written
+//   U+00B7 c) is 72.3% of all tokens (Kekule SMILES, no aromatic lowercase), versus 29.6-37.5% in ccd/chembl/chebi; with 36 types of count >= 10 the shuffled commonest left neighbour of every type is almost always 'C', so the null sits at 0.46 with
+//   sd 0.037 and v (0.42 / 0.41) falls BELOW it: the pocket is ABSENT by NULL SATURATION (a ceiling), not by absence of structure. I read this as the mechanism of the atlas ABSENT cell and predict it recurs on new PubChem compounds.
+//   (ii) the atlas ud pockets: v against the share of multiword-token words (r = 0.37 over 34 pockets, slope 0.20); not a usable predictor, so the treebank range below is the wide atlas range. (iii) cd-protein-aa and cd-codons: soft share at the floor
+//   (20-letter / 64-word alphabet, commonest neighbour share ~0.1: soft value ~0.0094), atlas v 0.0100 (null 0.0100, z -1.0 / -2.4) and 0.0072 (z +11.6 / +9.3). My expectation for the protein sibling is therefore a coin flip between ABSENT and AMBIGUOUS.
+//   I also read the header of results/confirm-comp.asym/confirm.mjs (lines 1-38) as a template, the headers of the earlier agents' sibling loaders (loaders/_sibling-*.mjs), and I printed the DESCRIPTIVE meta of every sibling pocket (tokens, units, documents,
+//   vocabulary size, unit length, thin flag) and of pockets that I then dropped (asym-ud-hun/tam/tel/uig and ent-ud-eng-pud, ent-ud-san-vedic, rl-sql-repos, rl-sh-repos are thin: not scored, listed in the result file).
+//  NOT SEEN: any comp-family (or any other law-family) statistic, any half, any null draw, of any sibling pocket in the list below. No sibling value of comp.rigidL is stored anywhere under results/ (I searched every file that contains the string 'rigid'
+//   for the sibling ids: none). One thing I cannot rule out: the earlier agent of results/confirm-comp.asym ran comp.compute on its own asym-* pockets (all twelve comp statistics, including rigidL) and stored only comp.asym; nobody here has seen those
+//   rigidL values, and they are not on disk. The 27 sibling pockets of this file whose ids start with asym- (asym-cd-*, asym-en-*, asym-oc-irc-ho-*, asym-ud-*) are therefore pockets on which rigidL was computed once by another agent and never read
+//   (the other siblings were used by confirmations of order, para or fig statistics, which do not store comp values); I state it so the reader can discount.
+//
+// SIBLINGS (53 scored + 2 controls; every pocket is built whole by loaders/_sibling-rigidl-all.mjs, from material that no atlas pocket reads). Loaders of earlier agents are imported unchanged (their headers document material and cuts); loaders written
+//  for this file: _sibling-rigidl-chem.mjs (PubChem leftover; codon leftover), _sibling-rigidl-law.mjs (French statute pieces), _sibling-rigidl-repos.mjs (CSS, YAML of the user's repositories), _sibling-rigidl-ctl.mjs (controls), _sibling-rigidl-all.mjs.
+//  Kinds and NEWNESS (honest scale: NEW CORPUS = documents of a corpus no atlas pocket reads; HELD-OUT = documents of an atlas corpus that the atlas pocket's 300k whole-document cap or seeded sample left out, so same sources and weaker independence):
+//   code (14): JavaScript sib-js-fold / sib-js-heimdall / sib-js-eoreader7 / asym-cd-js / ent-cd-js (user repositories) and sfx-cd-npmjs (npm CLI), TypeScript asym-cd-ts / ent-cd-ts, Python sib-py-foldvenv / asym-cd-py / ent-cd-py / sfx-cd-py314,
+//     Ruby sfx-cd-rb26 (Ruby 2.6 stdlib), C sfx-cd-chdr (macOS SDK headers). NEW CORPUS (exact-bytes dedupe against the atlas code files in each loader).  markup rl-css-repos and config rl-yaml-repos: NEW CORPUS (user repositories; dedupe against ALL languages
+//     of the atlas code-corpus manifest and ethos 09-source-code).
+//   English prose (14): reportage asym-en-about-london; essay asym-en-among-forces; novels asym-en-mouret, asym-en-poe2, asym-en-awakening, ec-en-yonge; memoirs asym-en-waikna, ec-en-swisshelm; children ec-en-children; drama asym-en-dolls-house,
+//     asym-en-early-plays, ec-en-shakespeare; chat asym-oc-irc-ho-0607, asym-oc-irc-ho-0809. The books are NEW CORPUS (misfiled English books of ethos 11-multi-language/gutenberg-non-en that the atlas skipped, Gutenberg files of the eochat priors, Shakespeare
+//     Complete Works); the two IRC pockets are HELD-OUT documents of the same channels as oc-irc-ubuntu-0607/-0809 (the atlas cap dropped them).
+//   treebanks (15): UD TRAIN splits of languages with no atlas pocket (asym-ud-ita, nld, rus, ces, dan, lit, ell, tur, hye, kat, gle, afr, mlt, wol) and Latin-Perseus (ent-ud-lat-perseus): NEW CORPUS (atlas ud reads dev+test of 53 other stems only).
+//   diagram (3): sib-bpmn-{miwg,kogito,activiti}-heldout: HELD-OUT BPMN files of the same exporter families as the atlas pockets (not new worlds).
+//   legal (1): rl-law-fr-heldout: HELD-OUT pieces of the French statutes (the 96 of 146 pieces that the atlas pocket fm-law-fr left out; same codes, different pieces).
+//   notation / sequence (4): sp-smiles-ccd (6,000 wwPDB CCD ligands not in the atlas pocket), rl-codons-heldout (gene blocks the atlas pocket did not take) = PRESENT-predicted; rl-smiles-pubchem-heldout (the 3,000 PubChem compounds of the raw
+//     fetch that no corpus record contains) and sp-protein-aa (protein blocks the atlas pocket did not take) = ABSENT-predicted. The CCD and PubChem siblings are NEW MOLECULES of the same registries, protein and codons are HELD-OUT BLOCKS of the same 66 genomes.
+//   controls (2): rl-ctl-en-mouret, rl-ctl-js-fold = token-global shuffles of a sibling (law-free by construction; instrument check).
+//  LIMITS OF THE SET (stated now): no sibling is a new language of running prose (all non-English running text of the ethos tree is inside atlas pockets); no sibling is a verse pocket, so the one atlas PRESENT- cell (ml-grc-lyric: short verse lines, free
+//   word order) and the AMBIGUOUS Greek comedy cell have NO sibling (there is no unused Greek or Latin verse on this machine); the law's reversal arm is therefore untested here. English drama has three siblings, the atlas has three English drama pockets.
+//   Many siblings are user-authored (AI-assisted) code and English books whose material other confirmations also used; the pockets are distinct from each other (a cross-sibling duplicate check is run and reported) but share the machine and the repository.
+//
+// HOW THE STATISTIC AND ITS NULL ARE COMPUTED (identical to run-atlas.mjs): per pocket, halves(p) by sha256(id:doc) parity; per half the 'comp' family compute(view) is called once on the real view and, for each null kind the family names
+//  (within-unit and unit-order), on 10 nullView(view, kind, seedOf(p.id, half, 'comp', kind, k)) draws, k = 0..9; v = observed value, nullMean / nullSd over the finite draws (>= 3 needed), z = (v - nullMean) / nullSd when nullSd > 0, else z is
+//  undefined. All twelve comp statistics are stored; the headline statistic is comp.rigidL (null within-unit). Cell status per PROTOCOL: PRESENT(+/-) = |z| >= 4 in BOTH halves with the same sign; ABSENT = |z| < 2 in both halves; AMBIGUOUS =
+//  anything else, and a cell with an undefined z in either half is AMBIGUOUS (UNDEF). A sibling's number v-bar is the mean of its two half values of v.
+//
+// BLIND PREDICTIONS (written before any sibling statistic existed; every number comes from the ATLAS only: pool = the atlas real non-thin pockets of the sibling's register, median of the mean of their two halves of v, and a range
+//  [0.8 x P05, 1.25 x P95] of the pool's v-bars (min and max instead of P05 and P95 when the pool has fewer than 10 pockets). The pools and ranges are frozen in PREREG.pools below; they were computed by a script that reads results/atlas/*.json only.)
+//  PRESENT-predicted siblings (51): status PRESENT with sign +, and v-bar inside its pool range. Expected size order (claim C), from the atlas pool medians: smiles (non-PubChem) 0.44 > diagram 0.42 > legal (statute) 0.245 > config 0.238 >
+//   markup 0.188 > code 0.184 > children 0.109 > novel 0.089 > memoir 0.088 > reportage 0.086 > chat 0.074 > essay 0.067 > treebank 0.054 > drama 0.040 > codons 0.007. NOTE a discrepancy with the sibling plan I was handed ('code > legal-like prose >
+//   novel > drama'): in the atlas the statute pockets (0.245) are ABOVE code (0.184); I register the ATLAS order, not the plan's.
+//  ABSENT-predicted siblings (2): rl-smiles-pubchem-heldout (reason: null saturation, see PROBE (i); range for v-bar 0.33-0.50, about the atlas 0.415 and the null 0.46-0.48) and sp-protein-aa (soft share at its floor; atlas v 0.0100 equals its null;
+//   range 0.0080-0.0125). Status required: ABSENT (|z| < 2 in both halves). AMBIGUOUS or PRESENT counts as a MISS for this prediction. My subjective chance that each of these two is strictly ABSENT: about 0.5 (the atlas twin of the protein pocket
+//   was AMBIGUOUS, z -2.4 in one half; the atlas PubChem z were -1.0 and -1.7).
+//  CONTROLS (2): not PRESENT in either sign. A control that is PRESENT = INSTRUMENT FAILURE and caps the verdict at PARTIAL.
+//
+// PASS RULE (fixed now). Let A = the 51 PRESENT-predicted siblings, B = the 2 ABSENT-predicted siblings.
+//  (E) EXISTENCE HITS: a sibling hits when its status equals its prediction. (C1) ORDER: Spearman rho (average ranks) between the v-bar of the 51 A siblings and their pool medians must exceed 0.5. (C2) RANGE: at least 75% of the 53 siblings must have
+//  v-bar inside their registered range.
+//  REPLICATES = every one of the 53 siblings hits (the task's rule: the prediction holds in every sibling with PRESENT/ABSENT status per PROTOCOL) AND C1 AND C2 AND no control PRESENT.
+//  FAILS = fewer than half of the A siblings are PRESENT+ (the law does not generalise to new pockets) or at least 3 A siblings are PRESENT- (a reversal).
+//  PARTIAL = everything else: the law holds in some siblings, and the report lists exactly which siblings missed and which of E, C1, C2 failed (existence versus constant are reported separately: 'E holds, C fails' = a presence law without a
+//   transportable constant). Also reported, never changing the class: the share of A siblings PRESENT+ against the PROTOCOL's UNIVERSAL threshold (0.85) and against the blind plan's 0.95; the binomial chance of at least that many PRESENT+ if
+//   the true rate were 0.85; z of each cell by half.
+//
+// ADVERSARY READOUTS (computed on the same draws as the headline; diagnostics, they do not change the class):
+//  D1 hard share: the hard version of the statistic (share of eligible types with m >= 0.8, neighbourTypeStats().hardL) with its own within-unit null (z undefined where the null is constant 0; then the count of draws >= v is reported).
+//  D2 soft width: the same statistic with soft width 0.10 and 0.25 instead of 0.15: status of each and Spearman of its v-bar against the v-bar of the 0.15 version over the siblings.
+//  D3 cheaper rival: bigramRep = (adjacent pairs inside units - distinct adjacent type pairs) / adjacent pairs, within-unit null: status and Spearman of its z against the z of rigidL, over the siblings.
+//  D4 size and unit length: Spearman over the A siblings of ratio = v-bar / pool median against log10(tokens) and against mean unit length (|rho| >= 0.7 would mean the constant is a size effect).
+//  D5 collinearity: status of comp.sameL (null unit-order) and comp.rigidR for every sibling; Spearman of v-bar(rigidL) with v-bar(sameL) and with v-bar(rigidR) over the siblings (atlas rho 0.90 and 0.93).
+//  D6 constant by class: eta-squared of v-bar on kind (the groups of PREREG.siblings, kinds with >= 2 pockets) and a permutation p over kind labels (2000 draws, rngOf(seedOf('rigidl-eta2'))); the atlas value was eta2 0.56 on register, p < 0.001.
+//  D7 tokenisation: the multiword-token artefact (UD words that are expanded clitics, e.g. 'de el') cannot be separated here; reported for the UD siblings as their v-bar next to meta.mwtTokens / tokens.
+//  D8 duplicates: share of distinct units of >= 8 tokens that occur in two siblings (pairs above 2% are listed; a pair above 10% counts as one pocket for C1).
+//
+// FORECAST (subjective, written for calibration): P(all 51 A siblings PRESENT+) about 0.65 (the atlas misses were short-verse, protein and Kekule-SMILES pockets, none of which is in A except the codon sibling); P(sp-protein-aa ABSENT) 0.5; P(PubChem sibling ABSENT) 0.5;
+//  P(C1) 0.95 (rho expected near 0.8); P(C2) 0.9; P(REPLICATES) about 0.25; P(PARTIAL) about 0.7; P(FAILS) < 0.05.
+//
+// ===== PREREG DATA (the single source of truth that the code below the END marker reads) =====
+export const PREREG = {
+  stat: "comp.rigidL", family: "comp", statId: "rigidL", nullKind: "within-unit", draws: 10, written: "2026-10-07",
+  thresholds: { presentZ: 4, absentZ: 2, rho: 0.5, rangeShare: 0.75, failShare: 0.5, reversalCount: 3, universal: 0.85, plan: 0.95, dupPair: 0.02, dupMerge: 0.1, permutations: 2000 },
+  // pools: atlas-only (register median of the mean of the two halves of v; range [0.8 x P05, 1.25 x P95], min/max when n < 10)
+  pools: {
+    code: { n: 47, median: 0.1838, lo: 0.0997, hi: 0.3468 }, markup: { n: 5, median: 0.1881, lo: 0.1195, hi: 0.5704 }, config: { n: 3, median: 0.2384, lo: 0.1349, hi: 0.3254 },
+    novel: { n: 25, median: 0.0887, lo: 0.0505, hi: 0.141 }, memoir: { n: 13, median: 0.0876, lo: 0.0536, hi: 0.1295 }, reportage: { n: 4, median: 0.086, lo: 0.0606, hi: 0.1148 },
+    essay: { n: 3, median: 0.0666, lo: 0.0421, hi: 0.1497 }, children: { n: 17, median: 0.1092, lo: 0.0267, hi: 0.1914 }, drama: { n: 12, median: 0.0401, lo: 0.0187, hi: 0.0958 },
+    chat: { n: 20, median: 0.0741, lo: 0.0327, hi: 0.1201 }, treebank: { n: 34, median: 0.054, lo: 0.0178, hi: 0.241 }, diagram: { n: 7, median: 0.4224, lo: 0.1921, hi: 0.6826 },
+    legal: { n: 27, median: 0.2449, lo: 0.1464, hi: 0.4079 }, smiles: { n: 3, median: 0.4409, lo: 0.3017, hi: 0.6224 },
+    codons: { n: 1, median: 0.0072, lo: 0.0055, hi: 0.0095 }, pubchem: { n: 1, median: 0.415, lo: 0.33, hi: 0.5 }, protein: { n: 1, median: 0.01, lo: 0.008, hi: 0.0125 },
+  },
+  // [id, kind, prediction, pool]; prediction PRESENT+ | ABSENT | NOT-PRESENT (controls)
+  siblings: [
+    ["sib-js-fold", "code-js", "PRESENT+", "code"], ["sib-js-heimdall", "code-js", "PRESENT+", "code"], ["sib-js-eoreader7", "code-js", "PRESENT+", "code"], ["asym-cd-js", "code-js", "PRESENT+", "code"],
+    ["ent-cd-js", "code-js", "PRESENT+", "code"], ["sfx-cd-npmjs", "code-js", "PRESENT+", "code"], ["asym-cd-ts", "code-ts", "PRESENT+", "code"], ["ent-cd-ts", "code-ts", "PRESENT+", "code"],
+    ["sib-py-foldvenv", "code-py", "PRESENT+", "code"], ["asym-cd-py", "code-py", "PRESENT+", "code"], ["ent-cd-py", "code-py", "PRESENT+", "code"], ["sfx-cd-py314", "code-py", "PRESENT+", "code"],
+    ["sfx-cd-rb26", "code-rb", "PRESENT+", "code"], ["sfx-cd-chdr", "code-c", "PRESENT+", "code"], ["rl-css-repos", "markup-css", "PRESENT+", "markup"], ["rl-yaml-repos", "config-yaml", "PRESENT+", "config"],
+    ["asym-en-about-london", "reportage", "PRESENT+", "reportage"], ["asym-en-among-forces", "essay", "PRESENT+", "essay"], ["asym-en-mouret", "novel", "PRESENT+", "novel"], ["asym-en-poe2", "novel", "PRESENT+", "novel"],
+    ["asym-en-awakening", "novel", "PRESENT+", "novel"], ["ec-en-yonge", "novel", "PRESENT+", "novel"], ["asym-en-waikna", "memoir", "PRESENT+", "memoir"], ["ec-en-swisshelm", "memoir", "PRESENT+", "memoir"],
+    ["ec-en-children", "children", "PRESENT+", "children"], ["asym-en-dolls-house", "drama", "PRESENT+", "drama"], ["asym-en-early-plays", "drama", "PRESENT+", "drama"], ["ec-en-shakespeare", "drama", "PRESENT+", "drama"],
+    ["asym-oc-irc-ho-0607", "chat", "PRESENT+", "chat"], ["asym-oc-irc-ho-0809", "chat", "PRESENT+", "chat"],
+    ["asym-ud-ita", "treebank", "PRESENT+", "treebank"], ["asym-ud-nld", "treebank", "PRESENT+", "treebank"], ["asym-ud-rus", "treebank", "PRESENT+", "treebank"], ["asym-ud-ces", "treebank", "PRESENT+", "treebank"],
+    ["asym-ud-dan", "treebank", "PRESENT+", "treebank"], ["asym-ud-lit", "treebank", "PRESENT+", "treebank"], ["asym-ud-ell", "treebank", "PRESENT+", "treebank"], ["asym-ud-tur", "treebank", "PRESENT+", "treebank"],
+    ["asym-ud-hye", "treebank", "PRESENT+", "treebank"], ["asym-ud-kat", "treebank", "PRESENT+", "treebank"], ["asym-ud-gle", "treebank", "PRESENT+", "treebank"], ["asym-ud-afr", "treebank", "PRESENT+", "treebank"],
+    ["asym-ud-mlt", "treebank", "PRESENT+", "treebank"], ["asym-ud-wol", "treebank", "PRESENT+", "treebank"], ["ent-ud-lat-perseus", "treebank", "PRESENT+", "treebank"],
+    ["sib-bpmn-miwg-heldout", "diagram", "PRESENT+", "diagram"], ["sib-bpmn-kogito-heldout", "diagram", "PRESENT+", "diagram"], ["sib-bpmn-activiti-heldout", "diagram", "PRESENT+", "diagram"],
+    ["rl-law-fr-heldout", "legal", "PRESENT+", "legal"], ["sp-smiles-ccd", "smiles", "PRESENT+", "smiles"], ["rl-codons-heldout", "codons", "PRESENT+", "codons"],
+    ["rl-smiles-pubchem-heldout", "absent-smiles", "ABSENT", "pubchem"], ["sp-protein-aa", "absent-protein", "ABSENT", "protein"],
+    ["rl-ctl-en-mouret", "control", "NOT-PRESENT", null], ["rl-ctl-js-fold", "control", "NOT-PRESENT", null],
+  ],
+  notScored: ["asym-ud-hun (17,043 tokens)", "asym-ud-tam", "asym-ud-tel", "asym-ud-uig", "ent-ud-eng-pud (18,385)", "ent-ud-san-vedic (16,802)", "rl-sql-repos (3,010)", "rl-sh-repos (14,380)", "asym-en-evolution-plain (13,728)"],
+};
+// ===== END OF PRE-REGISTRATION HEADER =====

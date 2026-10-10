@@ -1,0 +1,33 @@
+{
+ "mode": "ud",
+ "headerSha256": "3377f5b2020b273959ab433ffc535df916d34f04148759056d3fc771430c61ad",
+ "pooled": {
+  "variant": "M4",
+  "n": 13773,
+  "auc": 0.5074,
+  "ci": [
+   0.506,
+   0.5088
+  ],
+  "ctl": {
+   "i": 0.4937,
+   "len": 0.5041,
+   "cl": 0.4979,
+   "lc": 0.4997
+  }
+ },
+ "summary": {
+  "languages": 53,
+  "testable": 36,
+  "void": 17,
+  "core": [],
+  "holdsAll": [],
+  "coreShare": 0,
+  "aucAbove05": 23
+ },
+ "predictions": {
+  "pooledAuc_0_46_0_60": true,
+  "coreShare_le_0_25": true,
+  "engAuc_0_45_0_62": true
+ }
+}

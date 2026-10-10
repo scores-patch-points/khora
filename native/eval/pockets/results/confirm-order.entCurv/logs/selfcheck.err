@@ -1,0 +1,3 @@
+selfcheck bk-alice: 88 cells compared with results/atlas/bk-alice.json, max relative difference 0.00e+0, 0 mismatches; entVariants.mm vs compute().entCurv max abs diff 0.00e+0
+selfcheck conllu reader: 2104 sentences, identical to loaders/_conllu.mjs readConllu: true
+SELFCHECK PASS

@@ -1,0 +1,166 @@
+"""Daily digest email: new flagged matters (general subscribers) plus
+per-follow updates — status/content changes, and a once-only heads-up 5
+days before a committee or vote. One email per person per day, sections
+included only where relevant, never one email per event."""
+from __future__ import annotations
+
+import datetime
+import json
+import sqlite3
+
+from mailer import send_email
+from seed import DB_PATH, matter_url
+
+SITE_URL = "https://watch.hyphae.social"
+
+
+def collect_general(con) -> tuple[dict, list]:
+    subscribers = con.execute("SELECT * FROM subscribers WHERE active = 1").fetchall()
+    if not subscribers:
+        return {}, []
+    lowest = min(s["min_score"] or 0 for s in subscribers)
+    new_items = con.execute(
+        """SELECT s.matter_id, s.file, s.title, s.score, m.matter_guid
+           FROM scan_results s LEFT JOIN matters m ON m.matter_id = s.matter_id
+           WHERE s.label = 'surveillance' AND s.notified = 0 AND s.score >= ?
+           ORDER BY s.score DESC""",
+        (lowest,),
+    ).fetchall()
+    by_email = {}
+    for sub in subscribers:
+        relevant = [r for r in new_items if (r["score"] or 0) >= (sub["min_score"] or 0)]
+        if relevant:
+            by_email[sub["email"]] = {"general": relevant, "unsub_token": sub["unsubscribe_token"],
+                                      "account_id": sub["account_id"]}
+    return by_email, [r["matter_id"] for r in new_items]
+
+
+def collect_follows(con) -> dict:
+    follows = con.execute(
+        """SELECT f.*, m.status_name, m.last_modified, m.agenda_date, m.title, m.file, m.matter_guid
+           FROM follows f JOIN matters m ON m.matter_id = f.matter_id
+           WHERE f.active = 1"""
+    ).fetchall()
+    out: dict = {}
+    now = datetime.datetime.utcnow()
+    for f in follows:
+        changed = (f["last_seen_status"] != f["status_name"]) or (f["last_seen_modified"] != f["last_modified"])
+        upcoming = False
+        if f["agenda_date"]:
+            try:
+                days_out = (datetime.datetime.fromisoformat(f["agenda_date"]) - now).days
+                if 0 <= days_out <= 5 and f["agenda_alert_sent_for"] != f["agenda_date"]:
+                    upcoming = True
+            except ValueError:
+                pass
+        if changed or upcoming:
+            entry = {
+                "file": f["file"], "title": f["title"], "matter_id": f["matter_id"],
+                "matter_guid": f["matter_guid"], "unfollow_token": f["unfollow_token"],
+                "agenda_date": f["agenda_date"],
+            }
+            bucket = out.setdefault(f["email"], {"changed": [], "upcoming": []})
+            if changed:
+                bucket["changed"].append(entry)
+            if upcoming:
+                bucket["upcoming"].append(entry)
+        con.execute(
+            """UPDATE follows SET last_seen_status=?, last_seen_modified=?, last_seen_agenda_date=?,
+                 agenda_alert_sent_for = CASE WHEN ? THEN ? ELSE agenda_alert_sent_for END
+               WHERE id=?""",
+            (f["status_name"], f["last_modified"], f["agenda_date"], upcoming, f["agenda_date"], f["id"]),
+        )
+    return out
+
+
+def _list(items, line_fn) -> str:
+    return "<ul>" + "".join(f"<li>{line_fn(e)}</li>" for e in items) + "</ul>"
+
+
+def render_email(general: list, follow_data: dict) -> str:
+    parts = []
+    if general:
+        parts.append(
+            f"<p><b>{len(general)} newly flagged matter(s):</b></p>"
+            + _list(general, lambda r:
+                f'<a href="{matter_url(r["matter_id"], r["matter_guid"])}">{r["file"]} — {r["title"]}</a> '
+                f'<span style="color:#888">(score {r["score"]:.1f})</span>')
+        )
+    if follow_data.get("changed"):
+        parts.append(
+            "<p><b>Matters you follow that changed:</b></p>"
+            + _list(follow_data["changed"], lambda e:
+                f'<a href="{matter_url(e["matter_id"], e["matter_guid"])}">{e["file"]} — {e["title"]}</a> — '
+                f'status or content changed '
+                f'(<a href="{SITE_URL}/api/unfollow?token={e["unfollow_token"]}">stop following</a>)')
+        )
+    if follow_data.get("upcoming"):
+        parts.append(
+            "<p><b>Coming up for a vote or committee in the next 5 days:</b></p>"
+            + _list(follow_data["upcoming"], lambda e:
+                f'<a href="{matter_url(e["matter_id"], e["matter_guid"])}">{e["file"]} — {e["title"]}</a> — '
+                f'{(e["agenda_date"] or "")[:10]} '
+                f'(<a href="{SITE_URL}/api/unfollow?token={e["unfollow_token"]}">stop following</a>)')
+        )
+    return "".join(parts)
+
+
+def main() -> None:
+    con = sqlite3.connect(DB_PATH)
+    con.row_factory = sqlite3.Row
+
+    general_by_email, notified_ids = collect_general(con)
+    follow_by_email = collect_follows(con)
+    all_emails = set(general_by_email) | set(follow_by_email)
+
+    if not all_emails:
+        con.commit()
+        con.close()
+        print("nothing to send today")
+        return
+
+    sent = 0
+    for email in all_emails:
+        general = general_by_email.get(email, {}).get("general", [])
+        follow_data = follow_by_email.get(email, {})
+        body = render_email(general, follow_data)
+        if not body:
+            continue
+        unsub_token = general_by_email.get(email, {}).get("unsub_token")
+        if unsub_token:
+            body += (f'<p style="color:#888;font-size:0.85em">Unsubscribe from the general digest: '
+                     f"{SITE_URL}/api/unsubscribe?token={unsub_token}</p>")
+        try:
+            send_email(email, "Legislation Watch — today's update", body)
+            sent += 1
+            # Real send history lives in the PERSON's own encrypted account
+            # blob, not a plaintext table here — this row is just staging
+            # until their browser next loads, folds it into that blob, and
+            # tells us to delete it (see /api/account/{id}/pending-digest-
+            # events in webapp/main.py). A subscriber with no account_id
+            # never subscribed while signed in, so there's nowhere to fold
+            # this into and nothing is written for them.
+            account_id = general_by_email.get(email, {}).get("account_id")
+            if account_id:
+                matter_ids = [r["matter_id"] for r in general]
+                con.execute(
+                    """INSERT INTO pending_digest_events (account_id, ts, kind, matter_ids_json, created_at)
+                       VALUES (?,?,?,?,?)""",
+                    (account_id, datetime.datetime.utcnow().isoformat(), "sent",
+                     json.dumps(matter_ids), datetime.datetime.utcnow().isoformat()),
+                )
+        except Exception as exc:
+            print(f"alert to {email} failed: {exc}")
+
+    if notified_ids:
+        con.execute(
+            f"UPDATE scan_results SET notified = 1 WHERE matter_id IN ({','.join('?' * len(notified_ids))})",
+            notified_ids,
+        )
+    con.commit()
+    con.close()
+    print(f"sent {sent}/{len(all_emails)} digest emails")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,23 @@
+// eval/pockets/tools/selfcheck-stats.mjs — a handful of SIMPLE reference statistics used ONLY to verify that the planted worlds really contain what planted-truth.json says.
+// They are NOT the atlas laws (other agents write those in laws/). Observables only: frequency ranks, positions, recurrence, neighbours, unit lengths, string lengths. No capitals, no word lists, no labels.
+// Each stat: { id, null: "within-unit"|"unit-order"|"token-global", fn(view) -> number|null }.
+const EDGES = [0, 2, 7, 23, 69, 204, 594, 1724, 5000];
+const counts = (view) => { const c = new Map(); for (const u of view.units) for (const w of u) c.set(w, (c.get(w) || 0) + 1); return c; };
+const ranked = (c) => [...c.entries()].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1));
+const binOfRank0 = (i) => { let b = 0; while (b < EDGES.length - 2 && i >= EDGES[b + 1]) b++; return b; };
+const pearson = (x, y) => { const n = x.length; let mx = 0, my = 0; for (let i = 0; i < n; i++) { mx += x[i]; my += y[i]; } mx /= n; my /= n; let sxy = 0, sxx = 0, syy = 0; for (let i = 0; i < n; i++) { sxy += (x[i] - mx) * (y[i] - my); sxx += (x[i] - mx) ** 2; syy += (y[i] - my) ** 2; } return sxx > 0 && syy > 0 ? sxy / Math.sqrt(sxx * syy) : null; };
+const avgRanks = (v) => { const ix = v.map((_, i) => i).sort((a, b) => v[a] - v[b] || a - b), r = new Array(v.length); for (let i = 0; i < ix.length;) { let j = i; while (j + 1 < ix.length && v[ix[j + 1]] === v[ix[i]]) j++; for (let k = i; k <= j; k++) r[ix[k]] = (i + j) / 2; i = j + 1; } return r; };
+const docsOf = (view) => { const d = []; view.units.forEach((u, k) => { (d[view.docOf[k]] ||= []).push(u); }); return d; };
+export const STATS = [
+  { id: "adjRepeat", null: "within-unit", fn: (v) => { let n = 0, s = 0; for (const u of v.units) for (let k = 1; k < u.length; k++) { n++; if (u[k] === u[k - 1]) s++; } return n ? s / n : null; } },
+  { id: "repeat10", null: "token-global", fn: (v) => { let n = 0, s = 0; for (const d of docsOf(v)) { const f = d.flat(); for (let t = 0; t < f.length; t++) { n++; for (let l = 1; l <= 10 && t - l >= 0; l++) if (f[t - l] === f[t]) { s++; break; } } } return n ? s / n : null; } },
+  { id: "binAsym", null: "within-unit", fn: (v) => { const r = new Map(ranked(counts(v)).map(([w], i) => [w, binOfRank0(i)])), T = Array.from({ length: 8 }, () => new Array(8).fill(0)); let n = 0; for (const u of v.units) for (let k = 1; k < u.length; k++) { T[r.get(u[k - 1])][r.get(u[k])]++; n++; } let a = 0; for (let i = 0; i < 8; i++) for (let j = i + 1; j < 8; j++) a += Math.abs(T[i][j] - T[j][i]); return n ? a / n : null; } },
+  { id: "firstMatch", null: "unit-order", fn: (v) => { let n = 0, s = 0; for (let k = 1; k < v.units.length; k++) if (v.docOf[k] === v.docOf[k - 1]) { n++; if (v.units[k][0] === v.units[k - 1][0]) s++; } return n ? s / n : null; } },
+  { id: "lastMatch", null: "unit-order", fn: (v) => { let n = 0, s = 0; for (let k = 1; k < v.units.length; k++) if (v.docOf[k] === v.docOf[k - 1]) { n++; const a = v.units[k], b = v.units[k - 1]; if (a[a.length - 1] === b[b.length - 1]) s++; } return n ? s / n : null; } },
+  { id: "nInitBound", null: "token-global", fn: (v) => { const c = counts(v), ini = new Map(); for (const u of v.units) ini.set(u[0], (ini.get(u[0]) || 0) + 1); let n = 0; for (const [w, k] of ini) if (c.get(w) >= 50 && k / c.get(w) >= 0.8) n++; return n; } },
+  { id: "docCover", null: "token-global", fn: (v) => { const c = counts(v), seen = new Map(); v.units.forEach((u, k) => { for (const w of u) { if (c.get(w) < 100) continue; let s = seen.get(w); if (!s) seen.set(w, (s = new Set())); s.add(v.docOf[k]); } }); const nd = new Set(v.docOf).size; let t = 0; for (const s of seen.values()) t += s.size / nd; return seen.size ? t / seen.size : null; } },
+  { id: "menzerath", null: "token-global", fn: (v) => { const x = [], y = []; for (const u of v.units) { x.push(Math.log(u.length)); y.push(u.reduce((a, w) => a + w.length, 0) / u.length); } return pearson(x, y); } },
+  { id: "lenFreq", null: "token-global", fn: (v) => { const c = ranked(counts(v)); return pearson(avgRanks(c.map(([w]) => w.length)), avgRanks(c.map(([, k]) => -Math.log(k)))); } },
+  { id: "zipfSlope", null: "token-global", fn: (v) => { const c = ranked(counts(v)).slice(0, 300), x = c.map((_, i) => Math.log(i + 1)), y = c.map(([, k]) => Math.log(k)); const mx = x.reduce((a, b) => a + b) / x.length, my = y.reduce((a, b) => a + b) / y.length; let sxy = 0, sxx = 0; for (let i = 0; i < x.length; i++) { sxy += (x[i] - mx) * (y[i] - my); sxx += (x[i] - mx) ** 2; } return sxy / sxx; } },
+  { id: "meanUnitLen", null: "token-global", fn: (v) => v.units.reduce((a, u) => a + u.length, 0) / v.units.length },
+];

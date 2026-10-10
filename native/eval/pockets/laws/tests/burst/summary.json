@@ -1,0 +1,1683 @@
+{
+ "cells": {
+  "pl-null": {
+   "burstB": {
+    "v": [
+     -0.0098,
+     -0.0007
+    ],
+    "z": [
+     -1.07,
+     0.95
+    ],
+    "status": "ABSENT"
+   },
+   "burstBmid": {
+    "v": [
+     -0.0138,
+     -0.0284
+    ],
+    "z": [
+     1.7,
+     -1.04
+    ],
+    "status": "ABSENT"
+   },
+   "burstM": {
+    "v": [
+     -0.0039,
+     0.0086
+    ],
+    "z": [
+     0.05,
+     0.99
+    ],
+    "status": "ABSENT"
+   },
+   "repAdj": {
+    "v": [
+     -0.0287,
+     0.05
+    ],
+    "z": [
+     -1.53,
+     1.38
+    ],
+    "status": "ABSENT"
+   },
+   "kerSlope": {
+    "v": [
+     0.0039,
+     -0.0067
+    ],
+    "z": [
+     1.14,
+     -1.15
+    ],
+    "status": "ABSENT"
+   },
+   "kerCurv": {
+    "v": [
+     -0.0026,
+     0.0041
+    ],
+    "z": [
+     -1.25,
+     1.43
+    ],
+    "status": "ABSENT"
+   },
+   "kerFar": {
+    "v": [
+     -0.0025,
+     0.0049
+    ],
+    "z": [
+     -1.06,
+     1.89
+    ],
+    "status": "ABSENT"
+   },
+   "persist": {
+    "v": [
+     -0.0248,
+     -0.2265
+    ],
+    "z": [
+     -0.51,
+     -0.77
+    ],
+    "status": "ABSENT"
+   },
+   "driftSlope": {
+    "v": [
+     0.1191,
+     -0.0107
+    ],
+    "z": [
+     1.39,
+     -0.21
+    ],
+    "status": "ABSENT"
+   },
+   "driftTail": {
+    "v": [
+     0.3821,
+     -0.3581
+    ],
+    "z": [
+     2.13,
+     -1.43
+    ],
+    "status": "AMBIGUOUS"
+   },
+   "hurst": {
+    "v": [
+     0.4853,
+     0.5114
+    ],
+    "z": [
+     -2.22,
+     1.53
+    ],
+    "status": "AMBIGUOUS"
+   }
+  },
+  "pl-null2": {
+   "burstB": {
+    "v": [
+     -0.0104,
+     -0.0123
+    ],
+    "z": [
+     -1.05,
+     -1
+    ],
+    "status": "ABSENT"
+   },
+   "burstBmid": {
+    "v": [
+     -0.0448,
+     -0.0167
+    ],
+    "z": [
+     -2.55,
+     0.57
+    ],
+    "status": "AMBIGUOUS"
+   },
+   "burstM": {
+    "v": [
+     -0.0195,
+     -0.007
+    ],
+    "z": [
+     -1.89,
+     -1.1
+    ],
+    "status": "ABSENT"
+   },
+   "repAdj": {
+    "v": [
+     -0.0154,
+     0.0023
+    ],
+    "z": [
+     -1.06,
+     0.52
+    ],
+    "status": "ABSENT"
+   },
+   "kerSlope": {
+    "v": [
+     0.002,
+     -0.0007
+    ],
+    "z": [
+     0.7,
+     -0.82
+    ],
+    "status": "ABSENT"
+   },
+   "kerCurv": {
+    "v": [
+     -0.0011,
+     -0.0005
+    ],
+    "z": [
+     -0.55,
+     -0.21
+    ],
+    "status": "ABSENT"
+   },
+   "kerFar": {
+    "v": [
+     0.0003,
+     -0.0003
+    ],
+    "z": [
+     0.2,
+     -0.49
+    ],
+    "status": "ABSENT"
+   },
+   "persist": {
+    "v": [
+     0.612,
+     0.2278
+    ],
+    "z": [
+     1.49,
+     0.44
+    ],
+    "status": "ABSENT"
+   },
+   "driftSlope": {
+    "v": [
+     -0.0843,
+     -0.2045
+    ],
+    "z": [
+     -0.24,
+     -0.99
+    ],
+    "status": "ABSENT"
+   },
+   "driftTail": {
+    "v": [
+     -0.0068,
+     -0.0499
+    ],
+    "z": [
+     0.15,
+     0.24
+    ],
+    "status": "ABSENT"
+   },
+   "hurst": {
+    "v": [
+     0.5031,
+     0.4998
+    ],
+    "z": [
+     0.41,
+     -0.69
+    ],
+    "status": "ABSENT"
+   }
+  },
+  "pl-burst": {
+   "burstB": {
+    "v": [
+     0.2031,
+     0.1882
+    ],
+    "z": [
+     45.83,
+     46.56
+    ],
+    "status": "PRESENT+"
+   },
+   "burstBmid": {
+    "v": [
+     0.2968,
+     0.2762
+    ],
+    "z": [
+     47.9,
+     39.46
+    ],
+    "status": "PRESENT+"
+   },
+   "burstM": {
+    "v": [
+     0.0384,
+     0.0434
+    ],
+    "z": [
+     3.06,
+     7.16
+    ],
+    "status": "AMBIGUOUS"
+   },
+   "repAdj": {
+    "v": [
+     1.0901,
+     1.1332
+    ],
+    "z": [
+     40.35,
+     39.08
+    ],
+    "status": "PRESENT+"
+   },
+   "kerSlope": {
+    "v": [
+     -0.1593,
+     -0.1692
+    ],
+    "z": [
+     -35.73,
+     -35.6
+    ],
+    "status": "PRESENT-"
+   },
+   "kerCurv": {
+    "v": [
+     -0.0164,
+     -0.014
+    ],
+    "z": [
+     -7.25,
+     -7.06
+    ],
+    "status": "PRESENT-"
+   },
+   "kerFar": {
+    "v": [
+     0.3591,
+     0.3565
+    ],
+    "z": [
+     201.48,
+     160.67
+    ],
+    "status": "PRESENT+"
+   },
+   "persist": {
+    "v": [
+     4.3618,
+     3.9651
+    ],
+    "z": [
+     14.92,
+     36.97
+    ],
+    "status": "PRESENT+"
+   },
+   "driftSlope": {
+    "v": [
+     -1.4759,
+     -1.3137
+    ],
+    "z": [
+     -24.48,
+     -13.94
+    ],
+    "status": "PRESENT-"
+   },
+   "driftTail": {
+    "v": [
+     -0.0913,
+     0.0315
+    ],
+    "z": [
+     -0.41,
+     0.12
+    ],
+    "status": "ABSENT"
+   },
+   "hurst": {
+    "v": [
+     0.5854,
+     0.6005
+    ],
+    "z": [
+     5.62,
+     4.22
+    ],
+    "status": "PRESENT+"
+   }
+  },
+  "pl-markov": {
+   "burstB": {
+    "v": [
+     0.0004,
+     -0.0069
+    ],
+    "z": [
+     1.34,
+     -0.72
+    ],
+    "status": "ABSENT"
+   },
+   "burstBmid": {
+    "v": [
+     -0.0222,
+     -0.0263
+    ],
+    "z": [
+     0.33,
+     -0.75
+    ],
+    "status": "ABSENT"
+   },
+   "burstM": {
+    "v": [
+     -0.0065,
+     -0.007
+    ],
+    "z": [
+     -1.03,
+     -0.87
+    ],
+    "status": "ABSENT"
+   },
+   "repAdj": {
+    "v": [
+     -0.6432,
+     -0.5693
+    ],
+    "z": [
+     -18.76,
+     -20.21
+    ],
+    "status": "PRESENT-"
+   },
+   "kerSlope": {
+    "v": [
+     0.1238,
+     0.1125
+    ],
+    "z": [
+     20.66,
+     25.07
+    ],
+    "status": "PRESENT+"
+   },
+   "kerCurv": {
+    "v": [
+     -0.0511,
+     -0.0447
+    ],
+    "z": [
+     -15.09,
+     -14.35
+    ],
+    "status": "PRESENT-"
+   },
+   "kerFar": {
+    "v": [
+     -0.0016,
+     -0.0012
+    ],
+    "z": [
+     -0.35,
+     -0.86
+    ],
+    "status": "ABSENT"
+   },
+   "persist": {
+    "v": [
+     0.0469,
+     0.2473
+    ],
+    "z": [
+     0.18,
+     0.77
+    ],
+    "status": "ABSENT"
+   },
+   "driftSlope": {
+    "v": [
+     -0.01,
+     -0.0303
+    ],
+    "z": [
+     -0.26,
+     -0.24
+    ],
+    "status": "ABSENT"
+   },
+   "driftTail": {
+    "v": [
+     -0.2587,
+     -0.1016
+    ],
+    "z": [
+     -1.87,
+     -0.4
+    ],
+    "status": "ABSENT"
+   },
+   "hurst": {
+    "v": [
+     0.4949,
+     0.465
+    ],
+    "z": [
+     0.4,
+     -5.61
+    ],
+    "status": "AMBIGUOUS"
+   }
+  },
+  "pl-frames": {
+   "burstB": {
+    "v": [
+     0.177,
+     0.174
+    ],
+    "z": [
+     60,
+     57.28
+    ],
+    "status": "PRESENT+"
+   },
+   "burstBmid": {
+    "v": [
+     -0.0285,
+     -0.0082
+    ],
+    "z": [
+     -1.31,
+     3.13
+    ],
+    "status": "AMBIGUOUS"
+   },
+   "burstM": {
+    "v": [
+     0.0144,
+     -0.0083
+    ],
+    "z": [
+     1.53,
+     -1.14
+    ],
+    "status": "ABSENT"
+   },
+   "repAdj": {
+    "v": [
+     -2.3597,
+     -2.3426
+    ],
+    "z": [
+     -101.06,
+     -79.16
+    ],
+    "status": "PRESENT-"
+   },
+   "kerSlope": {
+    "v": [
+     0.5191,
+     0.5002
+    ],
+    "z": [
+     138.48,
+     92.35
+    ],
+    "status": "PRESENT+"
+   },
+   "kerCurv": {
+    "v": [
+     -0.2164,
+     -0.2139
+    ],
+    "z": [
+     -93.79,
+     -85.38
+    ],
+    "status": "PRESENT-"
+   },
+   "kerFar": {
+    "v": [
+     0.0824,
+     0.0847
+    ],
+    "z": [
+     41.31,
+     57.67
+    ],
+    "status": "PRESENT+"
+   },
+   "persist": {
+    "v": [
+     -0.2169,
+     -0.1496
+    ],
+    "z": [
+     -1.88,
+     0.05
+    ],
+    "status": "ABSENT"
+   },
+   "driftSlope": {
+    "v": [
+     -0.0311,
+     0.034
+    ],
+    "z": [
+     -0.41,
+     -0.21
+    ],
+    "status": "ABSENT"
+   },
+   "driftTail": {
+    "v": [
+     -0.0873,
+     0.2966
+    ],
+    "z": [
+     -0.73,
+     0.26
+    ],
+    "status": "ABSENT"
+   },
+   "hurst": {
+    "v": [
+     0.4698,
+     0.4533
+    ],
+    "z": [
+     0.19,
+     -1.48
+    ],
+    "status": "ABSENT"
+   }
+  },
+  "pl-parallel": {
+   "burstB": {
+    "v": [
+     0.0619,
+     0.0575
+    ],
+    "z": [
+     11.9,
+     14.59
+    ],
+    "status": "PRESENT+"
+   },
+   "burstBmid": {
+    "v": [
+     0.0806,
+     0.0501
+    ],
+    "z": [
+     17.13,
+     10.53
+    ],
+    "status": "PRESENT+"
+   },
+   "burstM": {
+    "v": [
+     0.0087,
+     0.0201
+    ],
+    "z": [
+     1.87,
+     2.15
+    ],
+    "status": "AMBIGUOUS"
+   },
+   "repAdj": {
+    "v": [
+     0.0037,
+     0.0034
+    ],
+    "z": [
+     -0.28,
+     -0.38
+    ],
+    "status": "ABSENT"
+   },
+   "kerSlope": {
+    "v": [
+     0.0447,
+     0.0409
+    ],
+    "z": [
+     11.54,
+     7.7
+    ],
+    "status": "PRESENT+"
+   },
+   "kerCurv": {
+    "v": [
+     -0.0362,
+     -0.0364
+    ],
+    "z": [
+     -22.6,
+     -10.98
+    ],
+    "status": "PRESENT-"
+   },
+   "kerFar": {
+    "v": [
+     0.143,
+     0.1355
+    ],
+    "z": [
+     60.08,
+     64.56
+    ],
+    "status": "PRESENT+"
+   },
+   "persist": {
+    "v": [
+     4.2233,
+     3.9039
+    ],
+    "z": [
+     21.97,
+     14.72
+    ],
+    "status": "PRESENT+"
+   },
+   "driftSlope": {
+    "v": [
+     -1.116,
+     -1.1578
+    ],
+    "z": [
+     -15.53,
+     -12.71
+    ],
+    "status": "PRESENT-"
+   },
+   "driftTail": {
+    "v": [
+     0.2405,
+     -0.2467
+    ],
+    "z": [
+     1.41,
+     -0.78
+    ],
+    "status": "ABSENT"
+   },
+   "hurst": {
+    "v": [
+     0.5289,
+     0.5362
+    ],
+    "z": [
+     3.71,
+     3.91
+    ],
+    "status": "AMBIGUOUS"
+   }
+  },
+  "pl-length": {
+   "burstB": {
+    "v": [
+     -0.0044,
+     -0.0019
+    ],
+    "z": [
+     -0.24,
+     1.04
+    ],
+    "status": "ABSENT"
+   },
+   "burstBmid": {
+    "v": [
+     -0.0164,
+     -0.0155
+    ],
+    "z": [
+     1.63,
+     1.48
+    ],
+    "status": "ABSENT"
+   },
+   "burstM": {
+    "v": [
+     -0.0092,
+     0.0113
+    ],
+    "z": [
+     -0.68,
+     1.46
+    ],
+    "status": "ABSENT"
+   },
+   "repAdj": {
+    "v": [
+     0.0395,
+     0.0536
+    ],
+    "z": [
+     1.45,
+     3.86
+    ],
+    "status": "AMBIGUOUS"
+   },
+   "kerSlope": {
+    "v": [
+     -0.0073,
+     -0.0116
+    ],
+    "z": [
+     -1.77,
+     -3.62
+    ],
+    "status": "AMBIGUOUS"
+   },
+   "kerCurv": {
+    "v": [
+     0.0024,
+     0.0034
+    ],
+    "z": [
+     0.99,
+     2.94
+    ],
+    "status": "AMBIGUOUS"
+   },
+   "kerFar": {
+    "v": [
+     0.0028,
+     -0.0009
+    ],
+    "z": [
+     1.98,
+     -0.31
+    ],
+    "status": "ABSENT"
+   },
+   "persist": {
+    "v": [
+     -0.0759,
+     -0.3813
+    ],
+    "z": [
+     0.06,
+     -1.68
+    ],
+    "status": "ABSENT"
+   },
+   "driftSlope": {
+    "v": [
+     0.0097,
+     0.0694
+    ],
+    "z": [
+     0.05,
+     0.78
+    ],
+    "status": "ABSENT"
+   },
+   "driftTail": {
+    "v": [
+     -0.036,
+     -0.0585
+    ],
+    "z": [
+     0.02,
+     -0.31
+    ],
+    "status": "ABSENT"
+   },
+   "hurst": {
+    "v": [
+     0.5551,
+     0.5591
+    ],
+    "z": [
+     -0.3,
+     0.03
+    ],
+    "status": "ABSENT"
+   }
+  },
+  "pl-mix": {
+   "burstB": {
+    "v": [
+     0.1617,
+     0.1744
+    ],
+    "z": [
+     40.87,
+     51.48
+    ],
+    "status": "PRESENT+"
+   },
+   "burstBmid": {
+    "v": [
+     0.1289,
+     0.1279
+    ],
+    "z": [
+     25.14,
+     22.74
+    ],
+    "status": "PRESENT+"
+   },
+   "burstM": {
+    "v": [
+     0.038,
+     0.0507
+    ],
+    "z": [
+     9.73,
+     5.48
+    ],
+    "status": "PRESENT+"
+   },
+   "repAdj": {
+    "v": [
+     0.349,
+     0.4228
+    ],
+    "z": [
+     13.49,
+     14.25
+    ],
+    "status": "PRESENT+"
+   },
+   "kerSlope": {
+    "v": [
+     -0.0399,
+     -0.0499
+    ],
+    "z": [
+     -9.31,
+     -9.7
+    ],
+    "status": "PRESENT-"
+   },
+   "kerCurv": {
+    "v": [
+     -0.0321,
+     -0.0229
+    ],
+    "z": [
+     -11.33,
+     -7.79
+    ],
+    "status": "PRESENT-"
+   },
+   "kerFar": {
+    "v": [
+     0.1993,
+     0.1927
+    ],
+    "z": [
+     108.83,
+     142.93
+    ],
+    "status": "PRESENT+"
+   },
+   "persist": {
+    "v": [
+     3.2296,
+     3.0275
+    ],
+    "z": [
+     12.86,
+     6.84
+    ],
+    "status": "PRESENT+"
+   },
+   "driftSlope": {
+    "v": [
+     -0.7387,
+     -0.6309
+    ],
+    "z": [
+     -4.23,
+     -4.8
+    ],
+    "status": "PRESENT-"
+   },
+   "driftTail": {
+    "v": [
+     0.9116,
+     1.0762
+    ],
+    "z": [
+     3.02,
+     3.05
+    ],
+    "status": "AMBIGUOUS"
+   },
+   "hurst": {
+    "v": [
+     0.5785,
+     0.5478
+    ],
+    "z": [
+     6.33,
+     4.09
+    ],
+    "status": "PRESENT+"
+   }
+  },
+  "bk-great-expect": {
+   "burstB": {
+    "v": [
+     0.1214,
+     0.1296
+    ],
+    "z": [
+     27.63,
+     18.25
+    ],
+    "status": "PRESENT+"
+   },
+   "burstBmid": {
+    "v": [
+     0.1345,
+     0.1364
+    ],
+    "z": [
+     30.51,
+     27.18
+    ],
+    "status": "PRESENT+"
+   },
+   "burstM": {
+    "v": [
+     0.0526,
+     0.0584
+    ],
+    "z": [
+     4.82,
+     7.04
+    ],
+    "status": "PRESENT+"
+   },
+   "repAdj": {
+    "v": [
+     -2.2047,
+     -1.9561
+    ],
+    "z": [
+     -37.4,
+     -60.97
+    ],
+    "status": "PRESENT-"
+   },
+   "kerSlope": {
+    "v": [
+     0.3821,
+     0.3468
+    ],
+    "z": [
+     37.04,
+     69
+    ],
+    "status": "PRESENT+"
+   },
+   "kerCurv": {
+    "v": [
+     -0.2311,
+     -0.2036
+    ],
+    "z": [
+     -44.35,
+     -61.95
+    ],
+    "status": "PRESENT-"
+   },
+   "kerFar": {
+    "v": [
+     0.1548,
+     0.1502
+    ],
+    "z": [
+     53.06,
+     44.69
+    ],
+    "status": "PRESENT+"
+   },
+   "persist": {
+    "v": [
+     2.3299,
+     1.6947
+    ],
+    "z": [
+     13.21,
+     10.33
+    ],
+    "status": "PRESENT+"
+   },
+   "driftSlope": {
+    "v": [
+     -0.5427,
+     -0.4372
+    ],
+    "z": [
+     -8.03,
+     -8.34
+    ],
+    "status": "PRESENT-"
+   },
+   "driftTail": {
+    "v": [
+     0.3177,
+     0.4624
+    ],
+    "z": [
+     1.61,
+     1.64
+    ],
+    "status": "ABSENT"
+   },
+   "hurst": {
+    "v": [
+     0.5526,
+     0.5389
+    ],
+    "z": [
+     6.01,
+     3.36
+    ],
+    "status": "AMBIGUOUS"
+   }
+  },
+  "bk-dracula": {
+   "burstB": {
+    "v": [
+     0.1278,
+     0.1627
+    ],
+    "z": [
+     24.5,
+     70.25
+    ],
+    "status": "PRESENT+"
+   },
+   "burstBmid": {
+    "v": [
+     0.1365,
+     0.1628
+    ],
+    "z": [
+     28.09,
+     32.89
+    ],
+    "status": "PRESENT+"
+   },
+   "burstM": {
+    "v": [
+     0.0633,
+     0.0699
+    ],
+    "z": [
+     12.8,
+     13.79
+    ],
+    "status": "PRESENT+"
+   },
+   "repAdj": {
+    "v": [
+     -2.2236,
+     -2.1788
+    ],
+    "z": [
+     -39.68,
+     -75.91
+    ],
+    "status": "PRESENT-"
+   },
+   "kerSlope": {
+    "v": [
+     0.3759,
+     0.3737
+    ],
+    "z": [
+     33.76,
+     68.82
+    ],
+    "status": "PRESENT+"
+   },
+   "kerCurv": {
+    "v": [
+     -0.2232,
+     -0.2247
+    ],
+    "z": [
+     -49.83,
+     -64.95
+    ],
+    "status": "PRESENT-"
+   },
+   "kerFar": {
+    "v": [
+     0.1417,
+     0.1506
+    ],
+    "z": [
+     51.48,
+     39.05
+    ],
+    "status": "PRESENT+"
+   },
+   "persist": {
+    "v": [
+     1.6488,
+     1.6727
+    ],
+    "z": [
+     14.62,
+     8.9
+    ],
+    "status": "PRESENT+"
+   },
+   "driftSlope": {
+    "v": [
+     -0.3947,
+     -0.2483
+    ],
+    "z": [
+     -7.51,
+     -5.13
+    ],
+    "status": "PRESENT-"
+   },
+   "driftTail": {
+    "v": [
+     0.228,
+     0.8695
+    ],
+    "z": [
+     2.75,
+     4.1
+    ],
+    "status": "AMBIGUOUS"
+   },
+   "hurst": {
+    "v": [
+     0.5875,
+     0.6038
+    ],
+    "z": [
+     7.3,
+     10.89
+    ],
+    "status": "PRESENT+"
+   }
+  }
+ },
+ "iid": {
+  "pl-null": {
+   "cellsWithZ": 22,
+   "absZge4": 0,
+   "absZge3": 0
+  },
+  "pl-null2": {
+   "cellsWithZ": 22,
+   "absZge4": 0,
+   "absZge3": 0
+  }
+ },
+ "calibration": {
+  "burstB": {
+   "slices": 12,
+   "absZge3": 0,
+   "absZge4": 0,
+   "sdOfZ": 1.07,
+   "meanZ": 0.08
+  },
+  "burstBmid": {
+   "slices": 12,
+   "absZge3": 0,
+   "absZge4": 0,
+   "sdOfZ": 1.18,
+   "meanZ": -0.01
+  },
+  "burstM": {
+   "slices": 12,
+   "absZge3": 0,
+   "absZge4": 0,
+   "sdOfZ": 0.53,
+   "meanZ": -0.35
+  },
+  "repAdj": {
+   "slices": 12,
+   "absZge3": 1,
+   "absZge4": 0,
+   "sdOfZ": 1.26,
+   "meanZ": 0.58
+  },
+  "kerSlope": {
+   "slices": 12,
+   "absZge3": 1,
+   "absZge4": 0,
+   "sdOfZ": 1.22,
+   "meanZ": -0.74
+  },
+  "kerCurv": {
+   "slices": 12,
+   "absZge3": 0,
+   "absZge4": 0,
+   "sdOfZ": 1.01,
+   "meanZ": 0.38
+  },
+  "kerFar": {
+   "slices": 12,
+   "absZge3": 0,
+   "absZge4": 0,
+   "sdOfZ": 1.11,
+   "meanZ": 0.3
+  },
+  "persist": {
+   "slices": 12,
+   "absZge3": 0,
+   "absZge4": 0,
+   "sdOfZ": 1.21,
+   "meanZ": 0.12
+  },
+  "driftSlope": {
+   "slices": 12,
+   "absZge3": 0,
+   "absZge4": 0,
+   "sdOfZ": 0.89,
+   "meanZ": 0.1
+  },
+  "driftTail": {
+   "slices": 12,
+   "absZge3": 0,
+   "absZge4": 0,
+   "sdOfZ": 0.78,
+   "meanZ": 0.19
+  },
+  "hurst": {
+   "slices": 12,
+   "absZge3": 0,
+   "absZge4": 0,
+   "sdOfZ": 1.18,
+   "meanZ": -0.13
+  },
+  "_note": "calib-*.json: 12-slice set of exchangeable-unit worlds (pl-null, pl-null2, pl-length) + pl-markov (excluded here: its within-unit flow is a planted law for the kernel statistics); z uses the first 10 of 40 null draws, as the atlas does"
+ },
+ "timing": {
+  "bk-great-expect/discover(full half)": {
+   "tokens": 99856,
+   "types": 8031,
+   "cpuSecCallsInOrder": [
+    0.087,
+    0.044,
+    0.043,
+    0.029
+   ]
+  },
+  "bk-great-expect/confirm(full half)": {
+   "tokens": 86726,
+   "types": 7626,
+   "cpuSecCallsInOrder": [
+    0.034,
+    0.031,
+    0.024,
+    0.023
+   ]
+  },
+  "pl-burst(all)": {
+   "tokens": 100616,
+   "types": 4629,
+   "cpuSecCallsInOrder": [
+    0.041,
+    0.029,
+    0.035,
+    0.019
+   ]
+  },
+  "bk-great-expect/discover with ~20k extra types": {
+   "tokens": 99856,
+   "types": 39503,
+   "cpuSecCallsInOrder": [
+    0.047,
+    0.052,
+    0.056,
+    0.101
+   ]
+  }
+ },
+ "determinism": {
+  "sameInputSameOutput": true,
+  "sameNullSeedSameOutput": true,
+  "sample": {
+   "burstB": 0.12137820755382603,
+   "burstBmid": 0.13453956472386117,
+   "burstM": 0.0525925863338393,
+   "repAdj": -2.2047131210564532,
+   "kerSlope": 0.3820516798059991,
+   "kerCurv": -0.23112323160627526,
+   "kerFar": 0.1548109633015013,
+   "persist": 2.3298950306124886,
+   "driftSlope": -0.5427352054330877,
+   "driftTail": 0.3176526313653175,
+   "hurst": 0.5526268939951606
+  }
+ },
+ "size": {
+  "bk-great-expect/discover": {
+   "10000": {
+    "tokens": 10952,
+    "v": {
+     "burstB": 0.1198,
+     "burstBmid": 0.0888,
+     "burstM": 0.0533,
+     "repAdj": -2.6664,
+     "kerSlope": 0.4461,
+     "kerCurv": -0.2724,
+     "kerFar": 0.1251,
+     "persist": 2.2631,
+     "driftSlope": -0.7221,
+     "driftTail": -0.0486,
+     "hurst": 0.5429
+    }
+   },
+   "20000": {
+    "tokens": 21238,
+    "v": {
+     "burstB": 0.1162,
+     "burstBmid": 0.1404,
+     "burstM": 0.0565,
+     "repAdj": -2.4143,
+     "kerSlope": 0.4125,
+     "kerCurv": -0.2512,
+     "kerFar": 0.144,
+     "persist": 2.1279,
+     "driftSlope": -0.5713,
+     "driftTail": 0.1777,
+     "hurst": 0.5389
+    }
+   },
+   "40000": {
+    "tokens": 40824,
+    "v": {
+     "burstB": 0.1297,
+     "burstBmid": 0.1303,
+     "burstM": 0.0613,
+     "repAdj": -2.0855,
+     "kerSlope": 0.3621,
+     "kerCurv": -0.2219,
+     "kerFar": 0.1514,
+     "persist": 2.3856,
+     "driftSlope": -0.5748,
+     "driftTail": 0.2571,
+     "hurst": 0.5458
+    }
+   },
+   "80000": {
+    "tokens": 81670,
+    "v": {
+     "burstB": 0.132,
+     "burstBmid": 0.1365,
+     "burstM": 0.0561,
+     "repAdj": -1.9872,
+     "kerSlope": 0.3494,
+     "kerCurv": -0.2144,
+     "kerFar": 0.1588,
+     "persist": 2.0421,
+     "driftSlope": -0.4244,
+     "driftTail": 0.6899,
+     "hurst": 0.5489
+    }
+   }
+  },
+  "pl-null": {
+   "10000": {
+    "tokens": 10044,
+    "v": {
+     "burstB": -0.0283,
+     "burstBmid": null,
+     "burstM": -0.0244,
+     "repAdj": 0.0537,
+     "kerSlope": -0.0118,
+     "kerCurv": 0.003,
+     "kerFar": -0.0053,
+     "persist": -0.51,
+     "driftSlope": 0.1099,
+     "driftTail": -0.1907,
+     "hurst": 0.4976
+    }
+   },
+   "20000": {
+    "tokens": 20113,
+    "v": {
+     "burstB": -0.0134,
+     "burstBmid": -0.0267,
+     "burstM": -0.0142,
+     "repAdj": 0.0005,
+     "kerSlope": -0.0015,
+     "kerCurv": -0.0005,
+     "kerFar": -0.0006,
+     "persist": -1.37,
+     "driftSlope": 0.395,
+     "driftTail": 0.5667,
+     "hurst": 0.4875
+    }
+   },
+   "40000": {
+    "tokens": 40244,
+    "v": {
+     "burstB": -0.0102,
+     "burstBmid": -0.0199,
+     "burstM": 0.0067,
+     "repAdj": -0.0534,
+     "kerSlope": 0.0082,
+     "kerCurv": -0.0039,
+     "kerFar": -0.0004,
+     "persist": -0.1332,
+     "driftSlope": 0.1088,
+     "driftTail": 0.0133,
+     "hurst": 0.4836
+    }
+   },
+   "80000": {
+    "tokens": 80434,
+    "v": {
+     "burstB": -0.0051,
+     "burstBmid": -0.0237,
+     "burstM": -0.0024,
+     "repAdj": -0.0022,
+     "kerSlope": 0.0005,
+     "kerCurv": -0.0006,
+     "kerFar": 0.0013,
+     "persist": 0.0309,
+     "driftSlope": 0.0542,
+     "driftTail": 0.0758,
+     "hurst": 0.4885
+    }
+   }
+  },
+  "pl-burst": {
+   "10000": {
+    "tokens": 10044,
+    "v": {
+     "burstB": 0.2503,
+     "burstBmid": null,
+     "burstM": 0.03,
+     "repAdj": 1.1298,
+     "kerSlope": -0.1726,
+     "kerCurv": -0.0173,
+     "kerFar": 0.349,
+     "persist": 4.627,
+     "driftSlope": -1.1784,
+     "driftTail": 2.4231,
+     "hurst": 0.6006
+    }
+   },
+   "20000": {
+    "tokens": 20111,
+    "v": {
+     "burstB": 0.2279,
+     "burstBmid": 0.2947,
+     "burstM": 0.0365,
+     "repAdj": 1.1334,
+     "kerSlope": -0.1696,
+     "kerCurv": -0.0155,
+     "kerFar": 0.3582,
+     "persist": 4.6433,
+     "driftSlope": -1.6446,
+     "driftTail": -0.4136,
+     "hurst": 0.5841
+    }
+   },
+   "40000": {
+    "tokens": 40223,
+    "v": {
+     "burstB": 0.2079,
+     "burstBmid": 0.3074,
+     "burstM": 0.0297,
+     "repAdj": 1.0817,
+     "kerSlope": -0.1585,
+     "kerCurv": -0.0171,
+     "kerFar": 0.3593,
+     "persist": 4.2528,
+     "driftSlope": -1.4945,
+     "driftTail": -0.3244,
+     "hurst": 0.5863
+    }
+   },
+   "80000": {
+    "tokens": 80495,
+    "v": {
+     "burstB": 0.1964,
+     "burstBmid": 0.2708,
+     "burstM": 0.0482,
+     "repAdj": 1.101,
+     "kerSlope": -0.1611,
+     "kerCurv": -0.0152,
+     "kerFar": 0.3589,
+     "persist": 4.4983,
+     "driftSlope": -1.4194,
+     "driftTail": 0.0634,
+     "hurst": 0.5892
+    }
+   }
+  }
+ },
+ "edge": {
+  "tiny": {
+   "nonFinite": 0,
+   "nullStats": [
+    "burstB",
+    "burstBmid",
+    "burstM",
+    "repAdj",
+    "kerSlope",
+    "kerCurv",
+    "kerFar",
+    "persist",
+    "driftSlope",
+    "driftTail",
+    "hurst"
+   ]
+  },
+  "oneType": {
+   "nonFinite": 0,
+   "nullStats": [
+    "burstB",
+    "burstBmid",
+    "burstM",
+    "repAdj",
+    "kerSlope",
+    "kerCurv",
+    "kerFar",
+    "persist",
+    "driftSlope",
+    "driftTail",
+    "hurst"
+   ]
+  },
+  "twoTypes": {
+   "nonFinite": 0,
+   "nullStats": [
+    "burstB",
+    "burstBmid",
+    "burstM",
+    "repAdj",
+    "kerSlope",
+    "kerCurv",
+    "kerFar",
+    "persist",
+    "driftSlope",
+    "driftTail",
+    "hurst"
+   ]
+  },
+  "unitsOfOne": {
+   "nonFinite": 0,
+   "nullStats": [
+    "burstM",
+    "persist",
+    "driftSlope",
+    "driftTail",
+    "hurst"
+   ]
+  },
+  "singleDocument": {
+   "nonFinite": 0,
+   "nullStats": [
+    "burstBmid",
+    "burstM",
+    "persist",
+    "driftSlope",
+    "driftTail"
+   ]
+  },
+  "fewUnitsLongLines": {
+   "nonFinite": 0,
+   "nullStats": [
+    "burstBmid",
+    "burstM",
+    "persist",
+    "driftSlope",
+    "driftTail"
+   ]
+  },
+  "cyrillicLike": {
+   "nonFinite": 0,
+   "nullStats": [
+    "burstM",
+    "persist",
+    "driftSlope",
+    "driftTail"
+   ]
+  },
+  "cjkChars": {
+   "nonFinite": 0,
+   "nullStats": [
+    "burstM",
+    "persist",
+    "driftSlope",
+    "driftTail"
+   ]
+  }
+ }
+}

@@ -1,0 +1,355 @@
+{
+ "cells": {
+  "statistics": 81,
+  "realPockets": 391,
+  "cellsTested": 31671,
+  "definedRealCells": 29680,
+  "observedPresentRealCells": 22017,
+  "iid_rate4": 0.01303,
+  "pPresentFromRate4": 8.488153720463878e-05,
+  "expectedFalsePresent_wholeAtlas": 2.519,
+  "binomialSd": 1.587,
+  "expectedFalsePresent_formulaCov_391cells": 0.033188681047013766,
+  "log10_P(>=242 of 243 | p0)": -982.8416274704574,
+  "log10_P(>=242 of 243 | p=0.013 (rate4, one half))": -454.0457853154775
+ },
+ "nPresent": 242,
+ "perm_v": {
+  "group": {
+   "plain": {
+    "eta2": 0.5066234096269784,
+    "levels": 6,
+    "p": 0.0004997501249375312
+   },
+   "stratifiedBySizeXlength": {
+    "eta2": 0.5066234096269784,
+    "levels": 6,
+    "p": 0.0004997501249375312
+   },
+   "residual_after_size_length": {
+    "eta2": 0.41157407057684053,
+    "levels": 6,
+    "p": 0.0004997501249375312
+   },
+   "stratified_residual": {
+    "eta2": 0.41157407057684053,
+    "levels": 6,
+    "p": 0.0004997501249375312
+   }
+  },
+  "register": {
+   "plain": {
+    "eta2": 0.671101112244581,
+    "levels": 30,
+    "p": 0.0004997501249375312
+   },
+   "stratifiedBySizeXlength": {
+    "eta2": 0.671101112244581,
+    "levels": 30,
+    "p": 0.0004997501249375312
+   },
+   "residual_after_size_length": {
+    "eta2": 0.6004085399559543,
+    "levels": 30,
+    "p": 0.0004997501249375312
+   },
+   "stratified_residual": {
+    "eta2": 0.6004085399559543,
+    "levels": 30,
+    "p": 0.0004997501249375312
+   }
+  }
+ },
+ "perm_ex": {
+  "group": {
+   "plain": {
+    "eta2": 0.5066702436302828,
+    "levels": 6,
+    "p": 0.0004997501249375312
+   },
+   "stratifiedBySizeXlength": {
+    "eta2": 0.5066702436302828,
+    "levels": 6,
+    "p": 0.0004997501249375312
+   },
+   "residual_after_size_length": {
+    "eta2": 0.34541100488319815,
+    "levels": 6,
+    "p": 0.0004997501249375312
+   },
+   "stratified_residual": {
+    "eta2": 0.34541100488319815,
+    "levels": 6,
+    "p": 0.0004997501249375312
+   }
+  },
+  "register": {
+   "plain": {
+    "eta2": 0.6230807720280551,
+    "levels": 30,
+    "p": 0.0004997501249375312
+   },
+   "stratifiedBySizeXlength": {
+    "eta2": 0.6230807720280551,
+    "levels": 30,
+    "p": 0.0004997501249375312
+   },
+   "residual_after_size_length": {
+    "eta2": 0.5078666172485774,
+    "levels": 30,
+    "p": 0.0004997501249375312
+   },
+   "stratified_residual": {
+    "eta2": 0.5078666172485774,
+    "levels": 30,
+    "p": 0.0004997501249375312
+   }
+  }
+ },
+ "loo_group": {
+  "min": [
+   0.5040450070884813,
+   "cd-cc-groovy"
+  ],
+  "max": [
+   0.5165282646440295,
+   "cd-codons"
+  ],
+  "full": 0.5066234096269784
+ },
+ "loo_register": {
+  "min": [
+   0.6653535241322015,
+   "cd-musicxml"
+  ],
+  "max": [
+   0.6975205396146283,
+   "cd-codons"
+  ],
+  "full": 0.671101112244581
+ },
+ "looClass_group": {
+  "bk": {
+   "n": 201,
+   "eta2_group": 0.43272048907263266,
+   "eta2_register": 0.6206664602524097
+  },
+  "cd": {
+   "n": 155,
+   "eta2_group": 0.4874929489332666,
+   "eta2_register": 0.6410399316920785
+  },
+  "fm": {
+   "n": 192,
+   "eta2_group": 0.574170181713388,
+   "eta2_register": 0.7370785341921959
+  },
+  "ml": {
+   "n": 194,
+   "eta2_group": 0.4355914206215674,
+   "eta2_register": 0.6238608608174389
+  },
+  "oc": {
+   "n": 233,
+   "eta2_group": 0.4990117406188394,
+   "eta2_register": 0.6670256538763202
+  },
+  "ud": {
+   "n": 235,
+   "eta2_group": 0.4942801161955197,
+   "eta2_register": 0.6629233230161065
+  }
+ },
+ "looClass_group_summary": {
+  "eta2_group": [
+   0.43272048907263266,
+   0.574170181713388
+  ],
+  "eta2_register": [
+   0.6206664602524097,
+   0.7370785341921959
+  ]
+ },
+ "looClass_register": {
+  "academic": {
+   "n": 231,
+   "eta2_group": 0.5293923596036333,
+   "eta2_register": 0.6684270226956477
+  },
+  "book": {
+   "n": 236,
+   "eta2_group": 0.49747120457547284,
+   "eta2_register": 0.6648090385803235
+  },
+  "chat": {
+   "n": 232,
+   "eta2_group": 0.4969805985272618,
+   "eta2_register": 0.6654637551200178
+  },
+  "children": {
+   "n": 240,
+   "eta2_group": 0.5038182249370227,
+   "eta2_register": 0.669292730164882
+  },
+  "code": {
+   "n": 195,
+   "eta2_group": 0.5502021290946214,
+   "eta2_register": 0.6869553085985479
+  },
+  "config": {
+   "n": 239,
+   "eta2_group": 0.5072405888658733,
+   "eta2_register": 0.67219792366812
+  },
+  "diagram": {
+   "n": 235,
+   "eta2_group": 0.49227681124748207,
+   "eta2_register": 0.6524688115660501
+  },
+  "dialect": {
+   "n": 234,
+   "eta2_group": 0.4965732636241443,
+   "eta2_register": 0.664512025422605
+  },
+  "docs": {
+   "n": 240,
+   "eta2_group": 0.5174859495993884,
+   "eta2_register": 0.6710751758184612
+  },
+  "encyclopedia": {
+   "n": 239,
+   "eta2_group": 0.5118171722450733,
+   "eta2_register": 0.6775988004151787
+  },
+  "essay": {
+   "n": 240,
+   "eta2_group": 0.5047145802152417,
+   "eta2_register": 0.6699661163736039
+  },
+  "history": {
+   "n": 237,
+   "eta2_group": 0.49959463567030993,
+   "eta2_register": 0.666503175063478
+  },
+  "legal": {
+   "n": 216,
+   "eta2_group": 0.5268325112265891,
+   "eta2_register": 0.6822193255011818
+  },
+  "lexicon": {
+   "n": 241,
+   "eta2_group": 0.5053235626270374,
+   "eta2_register": 0.6702290554238328
+  },
+  "lyrics": {
+   "n": 241,
+   "eta2_group": 0.5086020029963294,
+   "eta2_register": 0.6710857943329481
+  },
+  "markup": {
+   "n": 237,
+   "eta2_group": 0.5074380802237047,
+   "eta2_register": 0.6781500170280244
+  },
+  "memoir": {
+   "n": 238,
+   "eta2_group": 0.49954882331236083,
+   "eta2_register": 0.6662172716198429
+  },
+  "nomenclature": {
+   "n": 238,
+   "eta2_group": 0.514870702783784,
+   "eta2_register": 0.6758089962280776
+  },
+  "notation": {
+   "n": 228,
+   "eta2_group": 0.5350980771058966,
+   "eta2_register": 0.658500107122209
+  },
+  "novel": {
+   "n": 228,
+   "eta2_group": 0.48217481411472507,
+   "eta2_register": 0.6546275472649608
+  },
+  "poetry": {
+   "n": 235,
+   "eta2_group": 0.4947196887796708,
+   "eta2_register": 0.6629913154567189
+  },
+  "reference": {
+   "n": 241,
+   "eta2_group": 0.506628266274303,
+   "eta2_register": 0.6701742207481434
+  },
+  "religion": {
+   "n": 240,
+   "eta2_group": 0.5046284736485555,
+   "eta2_register": 0.6697542751964597
+  },
+  "reportage": {
+   "n": 238,
+   "eta2_group": 0.5011869924430904,
+   "eta2_register": 0.6675309638646608
+  },
+  "scripture": {
+   "n": 222,
+   "eta2_group": 0.5507114303028394,
+   "eta2_register": 0.7194227883306917
+  },
+  "sequence": {
+   "n": 240,
+   "eta2_group": 0.5172320661620112,
+   "eta2_register": 0.6874454651261933
+  },
+  "speech": {
+   "n": 241,
+   "eta2_group": 0.5058507221045568,
+   "eta2_register": 0.6705471632741745
+  },
+  "translation": {
+   "n": 233,
+   "eta2_group": 0.49530390502724986,
+   "eta2_register": 0.6637897283445834
+  },
+  "treatise": {
+   "n": 228,
+   "eta2_group": 0.48622202378929663,
+   "eta2_register": 0.6576896879997332
+  },
+  "treebank": {
+   "n": 235,
+   "eta2_group": 0.4942801161955197,
+   "eta2_register": 0.6629233230161065
+  }
+ },
+ "looClass_register_summary": {
+  "eta2_group": [
+   0.48217481411472507,
+   0.5507114303028394
+  ],
+  "eta2_register": [
+   0.6524688115660501,
+   0.7194227883306917
+  ]
+ },
+ "baseRate": {
+  "statsWith>=60PRESENT": 73,
+  "groupEta2>=0.5&p<0.01": 20,
+  "registerEta2>=0.5&p<0.01": 48,
+  "eitherClassSpecific": 48,
+  "medianGroupEta2": 0.31026947526054993,
+  "medianRegisterEta2": 0.5516196210466291,
+  "formulaCov": {
+   "stat": "para.formulaCov",
+   "n": 242,
+   "group": {
+    "eta2": 0.506623425831693,
+    "p": 0.0033222591362126247
+   },
+   "register": {
+    "eta2": 0.671101171792105,
+    "p": 0.0033222591362126247
+   }
+  }
+ }
+}

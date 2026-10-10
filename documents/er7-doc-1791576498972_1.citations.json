@@ -1,0 +1,65 @@
+{
+  "docId": "er7-doc-1791576498972:1",
+  "citations": [
+    {
+      "essaySentence": "This contract's scope of services doesn't simply define what DSA will provide; it delineates a specific pathway to Metro's ultimate goal.",
+      "source": {
+        "url": "L-245.txt",
+        "host": "L-245.txt"
+      },
+      "giver": "L-245.txt",
+      "priors": [
+        "eoreader7:shape-prior:essay-v1",
+        "pos:en-ud-ewt + born anchoring"
+      ],
+      "groundingText": "Whereas, DSA, having represented to Metro and the State that it has the required professional skills, personnel, and technical resources, has agreed to provide the Services on the terms and conditions set forth in this Contract.",
+      "verbatimSpan": "Whereas, DSA, having represented to Metro and the State that it has the required professional skills, personnel, and technical resources, has agreed to provide the Services on the terms and conditions set forth in this Contract.",
+      "kind": "verbatim",
+      "at": [
+        2612,
+        2840
+      ],
+      "atoms": [
+        {
+          "kind": "name",
+          "value": "Metro",
+          "at": [
+            19,
+            24
+          ],
+          "supported": true,
+          "company": [
+            "contract"
+          ]
+        }
+      ],
+      "retrievedAt": "2026-10-09T20:20:13.871Z"
+    },
+    {
+      "essaySentence": "This means that the focus of the contract is not only on services but on achieving a concrete, measurable outcome—namely, the development and operation of additional correctional capacity. \"\"\" The scope of services is defined within the contract. \"\"\"",
+      "source": {
+        "url": "L-245.txt",
+        "host": "L-245.txt"
+      },
+      "giver": "L-245.txt",
+      "priors": [
+        "eoreader7:shape-prior:essay-v1",
+        "pos:en-ud-ewt + born anchoring"
+      ],
+      "groundingText": "Whereas, DSA, having represented to Metro and the State that it has the required professional skills, personnel, and technical resources, has agreed to provide the Services on the terms and conditions set forth in this Contract.",
+      "verbatimSpan": "Whereas, DSA, having represented to Metro and the State that it has the required professional skills, personnel, and technical resources, has agreed to provide the Services on the terms and conditions set forth in this Contract.",
+      "kind": "verbatim",
+      "at": [
+        2612,
+        2840
+      ],
+      "atoms": [],
+      "retrievedAt": "2026-10-09T20:20:13.877Z"
+    }
+  ],
+  "of": 2,
+  "verbatim": 2,
+  "company": 0,
+  "unsupported": 0,
+  "basis": "mechanically attributed against 1 retained source(s): 2 verbatim, 0 company-supported (paraphrase, atoms byte-addressed), 0 unsupported (disclosed)"
+}

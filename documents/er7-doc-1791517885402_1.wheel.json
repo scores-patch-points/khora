@@ -1,0 +1,218 @@
+{
+  "schema": "EOWheel@1",
+  "task": "Go to https://www.nashville.gov/departments/council/districts and extract every council member: Full Name — Title (At-Large or District N). One per line.",
+  "turns": [
+    {
+      "seq": 1,
+      "phase": "plan",
+      "operator": "SEG",
+      "grain": "Field",
+      "face": "Murch",
+      "def": {
+        "phase": "plan",
+        "satisfaction": "the void's staged phases, ordered toward a climbing arc, each phase a question in the register's form",
+        "basis": null
+      },
+      "eva": {
+        "phase": "plan",
+        "measure": {
+          "sections": 6,
+          "first": "What is Go to https://www, marked off from everything adjacent to it — what spac",
+          "arc": "climbing"
+        },
+        "basis": "the predicted fortune arc must match the genre's accumulated shape; the read below is its EVA",
+        "verdict": null
+      },
+      "rec": {
+        "sections": [
+          "What is Go to https://www, marked off from everything adjacent to it — what space is this essay, and what is it NOT? What baseline account of Go to https://www must be built before any judgment can land on it?",
+          "Does Go to https://www name ONE being that clears its ground, or several that must be kept apart? Which Go to https://www is this — the names and the referent, so one being is meant, not a byte string?",
+          "What KIND is Go to https://www — and do its kinds hold as kinds against the material, or are they unresolved? How many distinct Go to https://www keep recurring as the same kind across the sources — each candidate signed as a proposal?",
+          "What extent must the essay cover, and in what units — Go to https://www's range, scale, span — so a hole is a visible uncovered stretch? What connective field do Go to https://www's relations live in — the ambient of possible relations before any single one is confirmed?",
+          "Where do the parts of Go to https://www's story part at natural seams — what separates into distinct chapters at the material's own bridges? What recurring relation runs through Go to https://www's story — the same cause → consequence cycle found at a real recurrence floor?",
+          "What binds each named thing to Go to https://www — the material's own edges, each span-verified against the bytes? Where do two sources about Go to https://www agree into one claim with two witnesses — which re-sightings fold into the same note?"
+        ],
+        "register": null
+      },
+      "basis": null
+    },
+    {
+      "seq": 2,
+      "phase": "declare",
+      "operator": "DEF",
+      "grain": "Atmosphere",
+      "face": "the void declares",
+      "def": {
+        "phase": "declare",
+        "satisfaction": "the piece is declared in the staged register: no felt target — the register's own shape stands",
+        "basis": null
+      },
+      "eva": {
+        "phase": "declare",
+        "measure": {
+          "feltTarget": null,
+          "genre": null
+        },
+        "basis": "the frame is declared before the write; EVA measures the write against it",
+        "verdict": null
+      },
+      "rec": {
+        "feltTarget": null,
+        "register": null
+      },
+      "basis": null
+    },
+    {
+      "seq": 3,
+      "phase": "read",
+      "operator": "CON",
+      "grain": "Link",
+      "face": "Gore",
+      "def": {
+        "phase": "read",
+        "satisfaction": "each phase's sub-satisfaction: what would satisfy THIS phase, from THIS material",
+        "basis": null
+      },
+      "eva": {
+        "phase": "read",
+        "measure": {
+          "propositions": 6,
+          "referents": 0,
+          "surprise": 0
+        },
+        "basis": "the reader's own surprise on the material is the EVA — the felt dimension of the read",
+        "verdict": null
+      },
+      "rec": {
+        "relations": 6,
+        "referents": 0,
+        "surprise": 0,
+        "ground": true
+      },
+      "basis": null
+    },
+    {
+      "seq": 4,
+      "phase": "write",
+      "operator": "SYN",
+      "grain": "Field",
+      "face": "Wolfe",
+      "def": {
+        "phase": "write",
+        "satisfaction": "the parts compose into one carried ground — the artifact itself, Wolfe's work",
+        "basis": null
+      },
+      "eva": {
+        "phase": "write",
+        "measure": {
+          "parts": 0,
+          "chars": 0,
+          "grounded": true,
+          "seed": null,
+          "cast": []
+        },
+        "basis": "the write is the SYNthesis of the read's ground into one piece — measured against the declare; every cast member keeps its provenance",
+        "verdict": null
+      },
+      "rec": {
+        "parts": 0,
+        "chars": 0,
+        "voice": "register",
+        "seed": null,
+        "cast": []
+      },
+      "basis": null
+    },
+    {
+      "seq": 5,
+      "phase": "verdict",
+      "operator": "EVA",
+      "grain": "Lens",
+      "face": "LaVar",
+      "def": {
+        "phase": "verdict",
+        "satisfaction": "satisfaction = climbing arc, felt releases, grounded claims — DEF'd before the plan",
+        "basis": null
+      },
+      "eva": {
+        "phase": "verdict",
+        "measure": {
+          "ok": false,
+          "filled": 0,
+          "of": 0,
+          "failures": 0,
+          "strain": 1,
+          "feltTarget": null,
+          "feltRead": 0,
+          "feltGap": null,
+          "ranke": null,
+          "unsupported": null,
+          "dmca": null,
+          "categorized": null
+        },
+        "basis": "the artifact is measured against the declare — a real difference, never a softmax",
+        "verdict": null
+      },
+      "rec": {
+        "ok": false,
+        "filled": 0,
+        "of": 0,
+        "failures": [],
+        "totalStrain": 1,
+        "recall": 0,
+        "covered": 0,
+        "ofPropositions": 6,
+        "basis": "LaVar: the essay re-states 0 of the material's 6 EOT propositions (0% recall) — total (incl. prompted echo) 0, 0 of 6 propositions were handed to the mouth and cannot score unprompted",
+        "perSection": [],
+        "total": {
+          "ok": false,
+          "filled": 0,
+          "of": 0,
+          "failures": [],
+          "totalStrain": 1,
+          "recall": 0,
+          "covered": 0,
+          "ofPropositions": 6,
+          "basis": "LaVar: the essay re-states 0 of the material's 6 EOT propositions (0% recall)",
+          "perSection": []
+        },
+        "handed": 0,
+        "ofTotal": 6,
+        "ranke": null,
+        "dmca": null,
+        "categorized": null,
+        "paraphraseChased": null
+      },
+      "basis": null
+    },
+    {
+      "seq": 6,
+      "phase": "fold",
+      "operator": "REC",
+      "grain": "Atmosphere",
+      "face": "Murch",
+      "def": {
+        "phase": "fold",
+        "satisfaction": "the superseding satisfaction — corrected against what this run's material actually allowed",
+        "basis": null
+      },
+      "eva": {
+        "phase": "fold",
+        "measure": {
+          "ok": false,
+          "noGround": false,
+          "felt": 0
+        },
+        "basis": "a failed criterion supersedes the DEF by appending, never editing — the ledger's law",
+        "verdict": null
+      },
+      "rec": {
+        "ok": false,
+        "genre": null,
+        "ground": true,
+        "sidecar": "append-only: this run's shape+felt fold back into the genre's impression"
+      },
+      "basis": null
+    }
+  ]
+}

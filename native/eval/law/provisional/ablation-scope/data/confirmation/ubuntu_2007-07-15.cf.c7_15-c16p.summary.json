@@ -1,0 +1,59 @@
+{
+ "corpus": "irc",
+ "doc": "ubuntu/2007-07-15",
+ "M": 256,
+ "tag": "cf",
+ "match": "v3",
+ "strata": [
+  "c7_15",
+  "c16p"
+ ],
+ "sizes": {
+  "nA": 30,
+  "nB": 40,
+  "n1": 0
+ },
+ "design": {
+  "A:c7_15": {
+   "requested": 30,
+   "got": 30,
+   "dropped": 39,
+   "nPos": 1552,
+   "nNegPool": 925
+  },
+  "B:c7_15": {
+   "requested": 40,
+   "got": 40,
+   "dropped": 16,
+   "nPos": 250,
+   "nNegPool": 14738
+  },
+  "A:c16p": {
+   "requested": 30,
+   "got": 17,
+   "dropped": 761,
+   "nPos": 778,
+   "nNegPool": 742
+  },
+  "B:c16p": {
+   "requested": 40,
+   "got": 22,
+   "dropped": 20,
+   "nPos": 69,
+   "nNegPool": 14686
+  }
+ },
+ "tokensRead": 218,
+ "gaps": 0,
+ "seconds": 283.122,
+ "K1_sham": {
+  "nullShare": 1,
+  "n": 8
+ },
+ "K6_determinism": {
+  "same": 8,
+  "n": 8
+ },
+ "headerSha256": "6c0cd12e3d866e11b3da0b284d424e806fb867092872cfdfe4406c7fae58692c",
+ "file": "data/confirmation/ubuntu_2007-07-15.cf.c7_15-c16p.jsonl"
+}

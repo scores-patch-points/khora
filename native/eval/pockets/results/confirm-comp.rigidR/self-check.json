@@ -1,0 +1,64 @@
+{
+ "pocket": "bk-alice",
+ "rule": "v, nullMean, nullSd and z of comp.rigidR must equal the atlas results/atlas/bk-alice.json to 12 significant digits in both halves",
+ "pass": true,
+ "tokens": 26775,
+ "rows": [
+  {
+   "which": "discover",
+   "key": "v",
+   "harness": 0.055319866988792106,
+   "atlas": 0.055319866988792106,
+   "same": true
+  },
+  {
+   "which": "discover",
+   "key": "nullMean",
+   "harness": 0.010532079078032771,
+   "atlas": 0.010532079078032771,
+   "same": true
+  },
+  {
+   "which": "discover",
+   "key": "nullSd",
+   "harness": 0.0001672525143435996,
+   "atlas": 0.0001672525143435996,
+   "same": true
+  },
+  {
+   "which": "discover",
+   "key": "z",
+   "harness": 267.785438601828,
+   "atlas": 267.785438601828,
+   "same": true
+  },
+  {
+   "which": "confirm",
+   "key": "v",
+   "harness": 0.04720547679148528,
+   "atlas": 0.04720547679148528,
+   "same": true
+  },
+  {
+   "which": "confirm",
+   "key": "nullMean",
+   "harness": 0.011064640062046355,
+   "atlas": 0.011064640062046355,
+   "same": true
+  },
+  {
+   "which": "confirm",
+   "key": "nullSd",
+   "harness": 0.0005164370940750172,
+   "atlas": 0.0005164370940750172,
+   "same": true
+  },
+  {
+   "which": "confirm",
+   "key": "z",
+   "harness": 69.98110155927169,
+   "atlas": 69.98110155927169,
+   "same": true
+  }
+ ]
+}

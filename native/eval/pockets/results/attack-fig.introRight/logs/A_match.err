@@ -1,0 +1,32 @@
+target mean unit length 3.924 units 8155
+cd-abc-lieder INFEASIBLE scale 0.040
+cd-bpmn-activiti d0 -0.361 scale 1.00 tok 31957 ul 3.92 d -0.37/-0.34/-0.35/-0.31/-0.34/-0.31 st P-,P-,P-,P-,P-,P-
+cd-bpmn-camunda d0 -0.468 scale 1.00 tok 31957 ul 3.92 d -0.33/-0.30/-0.26/-0.29/-0.27/-0.34 st P-,P-,P-,P-,P-,P-
+cd-bpmn-kogito d0 -0.401 scale 1.00 tok 31957 ul 3.92 d -0.14/-0.14/-0.17/-0.21/-0.22/-0.15 st M,M,M,M,M,M
+cd-bpmn-miwg d0 -0.667 scale 0.90 tok 28900 ul 3.92 d -0.37/-0.44/-0.37/-0.45/-0.35/-0.45 st P-,P-,P-,P-,P-,P-
+cd-cc-cpp d0 0.187 scale 1.00 tok 31957 ul 3.92 d -0.03/0.04/-0.00/0.03/0.04/-0.02 st A,M,A,M,A,A
+cd-cc-csharp d0 -0.144 scale 1.00 tok 31957 ul 3.92 d -0.11/-0.08/-0.07/-0.06/-0.09/-0.12 st M,M,M,M,M,M
+cd-cc-css d0 -0.223 scale 1.00 tok 31957 ul 3.92 d -0.13/-0.30/-0.24/-0.23/-0.22/-0.19 st M,M,M,M,M,M
+cd-cc-dart d0 0.205 scale 1.00 tok 31957 ul 3.92 d 0.01/0.01/-0.01/-0.04/0.03/0.01 st A,M,M,M,M,M
+cd-cc-fortran d0 0.076 scale 1.00 tok 31957 ul 3.92 d -0.10/-0.06/-0.05/-0.04/-0.01/-0.06 st M,M,M,M,A,M
+cd-cc-java d0 0.130 scale 1.00 tok 31957 ul 3.92 d -0.04/-0.04/-0.09/-0.05/-0.07/-0.10 st M,M,M,M,M,M
+cd-cc-kotlin d0 0.191 scale 1.00 tok 31957 ul 3.92 d -0.01/0.01/-0.01/0.01/-0.06/0.02 st A,A,A,A,M,A
+cd-cc-ocaml d0 0.167 scale 1.00 tok 31957 ul 3.92 d -0.01/0.01/-0.04/-0.01/-0.01/0.01 st A,A,A,A,A,A
+cd-cc-perl d0 0.139 scale 1.00 tok 31957 ul 3.92 d -0.06/-0.04/-0.03/-0.06/-0.01/0.01 st M,M,M,M,M,A
+cd-cc-php d0 -0.135 scale 1.00 tok 31957 ul 3.92 d -0.07/-0.07/-0.05/-0.04/-0.03/-0.00 st M,M,A,A,A,A
+cd-cc-python d0 0.141 scale 1.00 tok 31957 ul 3.92 d 0.02/-0.00/-0.01/0.01/0.01/-0.05 st A,A,M,A,A,M
+cd-cc-scala d0 0.126 scale 1.00 tok 31957 ul 3.92 d -0.03/-0.05/-0.04/-0.01/-0.01/-0.05 st M,M,M,A,M,M
+cd-cc-verilog d0 0.449 scale 1.00 tok 31957 ul 3.92 d -0.08/-0.07/-0.09/-0.05/-0.04/-0.07 st M,M,M,A,M,M
+cd-dot d0 -0.327 scale 1.00 tok 31957 ul 3.92 d -0.14/-0.11/-0.09/-0.10/-0.15/-0.11 st P-,M,M,M,M,M
+cd-e09-c d0 0.107 scale 1.00 tok 31957 ul 3.92 d 0.07/0.10/0.10/0.07/0.12/0.05 st M,M,M,M,M,M
+cd-musicxml INFEASIBLE scale 0.590
+fm-udhr-bigram INFEASIBLE scale 0.006
+fm-udhr-cyrl INFEASIBLE scale 0.056
+ml-arb-fihrist INFEASIBLE scale 0.157
+ml-en-hippocrates INFEASIBLE scale 0.285
+ml-grc-hellenistic-hist INFEASIBLE scale 0.100
+ml-grc-plato d0 0.070 scale 0.82 tok 26164 ul 3.92 d 0.01/-0.03/-0.06/-0.04/-0.02/-0.01 st A,A,M,A,A,A
+ml-jpn-soseki INFEASIBLE scale 0.051
+ml-lzh-jiuzhang INFEASIBLE scale 0.058
+ml-lzh-shuowen INFEASIBLE scale 0.082
+oc-nussms-zh INFEASIBLE scale 0.091

@@ -1,0 +1,634 @@
+{
+ "eng": {
+  "stem": "eng",
+  "n": 400,
+  "nLeaves": 7,
+  "unknownShare": 0.415,
+  "auc": {
+   "FULL": 0.6012,
+   "KIND": 0.5528,
+   "FULL+KIND": 0.6203,
+   "FULL+KIND+RIVALS": 0.6889,
+   "RIVALS+KIND": 0.7007,
+   "FULL conditioned on kind": 0.5624
+  },
+  "perKind": [
+   {
+    "leaf": -1,
+    "n": 166,
+    "propnShare": 0.488,
+    "aucFull": 0.6447
+   },
+   {
+    "leaf": 0,
+    "n": 86,
+    "propnShare": 0.6163,
+    "aucFull": 0.6695
+   },
+   {
+    "leaf": 1,
+    "n": 25,
+    "propnShare": 0.28,
+    "aucFull": null
+   },
+   {
+    "leaf": 2,
+    "n": 25,
+    "propnShare": 0.32,
+    "aucFull": 0.6029
+   },
+   {
+    "leaf": 3,
+    "n": 18,
+    "propnShare": 0.3333,
+    "aucFull": null
+   },
+   {
+    "leaf": 4,
+    "n": 31,
+    "propnShare": 0.3871,
+    "aucFull": 0.4956
+   },
+   {
+    "leaf": 5,
+    "n": 49,
+    "propnShare": 0.6735,
+    "aucFull": 0.4242
+   }
+  ]
+ },
+ "spa": {
+  "stem": "spa",
+  "n": 400,
+  "nLeaves": 7,
+  "unknownShare": 0.37,
+  "auc": {
+   "FULL": 0.6355,
+   "KIND": 0.5745,
+   "FULL+KIND": 0.6617,
+   "FULL+KIND+RIVALS": 0.6826,
+   "RIVALS+KIND": 0.6611,
+   "FULL conditioned on kind": 0.6475
+  },
+  "perKind": [
+   {
+    "leaf": -1,
+    "n": 148,
+    "propnShare": 0.5135,
+    "aucFull": 0.6539
+   },
+   {
+    "leaf": 0,
+    "n": 20,
+    "propnShare": 0.25,
+    "aucFull": null
+   },
+   {
+    "leaf": 1,
+    "n": 46,
+    "propnShare": 0.4348,
+    "aucFull": 0.5077
+   },
+   {
+    "leaf": 2,
+    "n": 59,
+    "propnShare": 0.3898,
+    "aucFull": 0.744
+   },
+   {
+    "leaf": 3,
+    "n": 53,
+    "propnShare": 0.717,
+    "aucFull": 0.5053
+   },
+   {
+    "leaf": 4,
+    "n": 42,
+    "propnShare": 0.619,
+    "aucFull": 0.5865
+   },
+   {
+    "leaf": 5,
+    "n": 32,
+    "propnShare": 0.375,
+    "aucFull": 0.7
+   }
+  ]
+ },
+ "rus": {
+  "stem": "rus",
+  "n": 122,
+  "nLeaves": 8,
+  "unknownShare": 0.6475,
+  "auc": {
+   "FULL": 0.4553,
+   "KIND": 0.597,
+   "FULL+KIND": 0.5958,
+   "FULL+KIND+RIVALS": 0.6388,
+   "RIVALS+KIND": 0.7114,
+   "FULL conditioned on kind": 0.4743
+  },
+  "perKind": [
+   {
+    "leaf": -1,
+    "n": 79,
+    "propnShare": 0.5316,
+    "aucFull": 0.4762
+   },
+   {
+    "leaf": 0,
+    "n": 7,
+    "propnShare": 0,
+    "aucFull": null
+   },
+   {
+    "leaf": 2,
+    "n": 3,
+    "propnShare": 0,
+    "aucFull": null
+   },
+   {
+    "leaf": 4,
+    "n": 2,
+    "propnShare": 0,
+    "aucFull": null
+   },
+   {
+    "leaf": 5,
+    "n": 2,
+    "propnShare": 0,
+    "aucFull": null
+   },
+   {
+    "leaf": 6,
+    "n": 12,
+    "propnShare": 0.4167,
+    "aucFull": null
+   },
+   {
+    "leaf": 8,
+    "n": 5,
+    "propnShare": 1,
+    "aucFull": null
+   },
+   {
+    "leaf": 10,
+    "n": 12,
+    "propnShare": 0.75,
+    "aucFull": null
+   }
+  ]
+ },
+ "cmn-hans": {
+  "stem": "cmn-hans",
+  "n": 400,
+  "nLeaves": 6,
+  "unknownShare": 0.54,
+  "auc": {
+   "FULL": 0.6396,
+   "KIND": 0.5406,
+   "FULL+KIND": 0.6776,
+   "FULL+KIND+RIVALS": 0.7177,
+   "RIVALS+KIND": 0.7006,
+   "FULL conditioned on kind": 0.622
+  },
+  "perKind": [
+   {
+    "leaf": -1,
+    "n": 216,
+    "propnShare": 0.4954,
+    "aucFull": 0.6664
+   },
+   {
+    "leaf": 1,
+    "n": 82,
+    "propnShare": 0.6951,
+    "aucFull": 0.5677
+   },
+   {
+    "leaf": 2,
+    "n": 9,
+    "propnShare": 0.2222,
+    "aucFull": null
+   },
+   {
+    "leaf": 3,
+    "n": 28,
+    "propnShare": 0.3214,
+    "aucFull": 0.6725
+   },
+   {
+    "leaf": 4,
+    "n": 22,
+    "propnShare": 0.1818,
+    "aucFull": null
+   },
+   {
+    "leaf": 5,
+    "n": 43,
+    "propnShare": 0.4884,
+    "aucFull": 0.6753
+   }
+  ]
+ },
+ "fas": {
+  "stem": "fas",
+  "n": 350,
+  "nLeaves": 6,
+  "unknownShare": 0.3971,
+  "auc": {
+   "FULL": 0.6164,
+   "KIND": 0.5003,
+   "FULL+KIND": 0.6511,
+   "FULL+KIND+RIVALS": 0.671,
+   "RIVALS+KIND": 0.6235,
+   "FULL conditioned on kind": 0.5705
+  },
+  "perKind": [
+   {
+    "leaf": -1,
+    "n": 139,
+    "propnShare": 0.5468,
+    "aucFull": 0.6399
+   },
+   {
+    "leaf": 0,
+    "n": 52,
+    "propnShare": 0.5962,
+    "aucFull": 0.5131
+   },
+   {
+    "leaf": 1,
+    "n": 71,
+    "propnShare": 0.5493,
+    "aucFull": 0.625
+   },
+   {
+    "leaf": 2,
+    "n": 56,
+    "propnShare": 0.5,
+    "aucFull": 0.523
+   },
+   {
+    "leaf": 3,
+    "n": 9,
+    "propnShare": 0.1111,
+    "aucFull": null
+   },
+   {
+    "leaf": 4,
+    "n": 23,
+    "propnShare": 0,
+    "aucFull": null
+   }
+  ]
+ },
+ "jpn": {
+  "stem": "jpn",
+  "n": 134,
+  "nLeaves": 6,
+  "unknownShare": 0.791,
+  "auc": {
+   "FULL": 0.6714,
+   "KIND": 0.5695,
+   "FULL+KIND": 0.7075,
+   "FULL+KIND+RIVALS": 0.7501,
+   "RIVALS+KIND": 0.8289,
+   "FULL conditioned on kind": 0.6389
+  },
+  "perKind": [
+   {
+    "leaf": -1,
+    "n": 106,
+    "propnShare": 0.4811,
+    "aucFull": 0.6121
+   },
+   {
+    "leaf": 0,
+    "n": 4,
+    "propnShare": 0,
+    "aucFull": null
+   },
+   {
+    "leaf": 2,
+    "n": 3,
+    "propnShare": 0,
+    "aucFull": null
+   },
+   {
+    "leaf": 4,
+    "n": 17,
+    "propnShare": 0.9412,
+    "aucFull": null
+   },
+   {
+    "leaf": 5,
+    "n": 3,
+    "propnShare": 0,
+    "aucFull": null
+   },
+   {
+    "leaf": 7,
+    "n": 1,
+    "propnShare": 0,
+    "aucFull": null
+   }
+  ]
+ },
+ "nld": {
+  "stem": "nld",
+  "n": 400,
+  "nLeaves": 6,
+  "unknownShare": 0.5025,
+  "auc": {
+   "FULL": 0.6116,
+   "KIND": 0.662,
+   "FULL+KIND": 0.7176,
+   "FULL+KIND+RIVALS": 0.8149,
+   "RIVALS+KIND": 0.8347,
+   "FULL conditioned on kind": 0.6016
+  },
+  "perKind": [
+   {
+    "leaf": -1,
+    "n": 201,
+    "propnShare": 0.4776,
+    "aucFull": 0.6032
+   },
+   {
+    "leaf": 0,
+    "n": 67,
+    "propnShare": 0.9552,
+    "aucFull": null
+   },
+   {
+    "leaf": 1,
+    "n": 30,
+    "propnShare": 0.1667,
+    "aucFull": null
+   },
+   {
+    "leaf": 2,
+    "n": 30,
+    "propnShare": 0.4333,
+    "aucFull": 0.6787
+   },
+   {
+    "leaf": 3,
+    "n": 9,
+    "propnShare": 0,
+    "aucFull": null
+   },
+   {
+    "leaf": 4,
+    "n": 63,
+    "propnShare": 0.3492,
+    "aucFull": 0.3714
+   }
+  ]
+ },
+ "hin": {
+  "stem": "hin",
+  "n": 400,
+  "nLeaves": 8,
+  "unknownShare": 0.205,
+  "auc": {
+   "FULL": 0.6215,
+   "KIND": 0.6469,
+   "FULL+KIND": 0.6859,
+   "FULL+KIND+RIVALS": 0.6942,
+   "RIVALS+KIND": 0.7027,
+   "FULL conditioned on kind": 0.639
+  },
+  "perKind": [
+   {
+    "leaf": -1,
+    "n": 82,
+    "propnShare": 0.5366,
+    "aucFull": 0.6286
+   },
+   {
+    "leaf": 0,
+    "n": 46,
+    "propnShare": 0.7174,
+    "aucFull": 0.5315
+   },
+   {
+    "leaf": 1,
+    "n": 25,
+    "propnShare": 0.2,
+    "aucFull": null
+   },
+   {
+    "leaf": 2,
+    "n": 16,
+    "propnShare": 0.5,
+    "aucFull": 0.5469
+   },
+   {
+    "leaf": 3,
+    "n": 56,
+    "propnShare": 0.3393,
+    "aucFull": 0.4851
+   },
+   {
+    "leaf": 4,
+    "n": 16,
+    "propnShare": 0,
+    "aucFull": null
+   },
+   {
+    "leaf": 5,
+    "n": 107,
+    "propnShare": 0.6262,
+    "aucFull": 0.6369
+   },
+   {
+    "leaf": 6,
+    "n": 52,
+    "propnShare": 0.4615,
+    "aucFull": 0.7128
+   }
+  ]
+ },
+ "urd": {
+  "stem": "urd",
+  "n": 400,
+  "nLeaves": 10,
+  "unknownShare": 0.2125,
+  "auc": {
+   "FULL": 0.6842,
+   "KIND": 0.64,
+   "FULL+KIND": 0.7178,
+   "FULL+KIND+RIVALS": 0.7302,
+   "RIVALS+KIND": 0.7174,
+   "FULL conditioned on kind": 0.6191
+  },
+  "perKind": [
+   {
+    "leaf": -1,
+    "n": 85,
+    "propnShare": 0.5412,
+    "aucFull": 0.5741
+   },
+   {
+    "leaf": 0,
+    "n": 16,
+    "propnShare": 0,
+    "aucFull": null
+   },
+   {
+    "leaf": 1,
+    "n": 109,
+    "propnShare": 0.6147,
+    "aucFull": 0.7562
+   },
+   {
+    "leaf": 2,
+    "n": 12,
+    "propnShare": 0,
+    "aucFull": null
+   },
+   {
+    "leaf": 3,
+    "n": 69,
+    "propnShare": 0.4638,
+    "aucFull": 0.6715
+   },
+   {
+    "leaf": 4,
+    "n": 32,
+    "propnShare": 0.375,
+    "aucFull": 0.825
+   },
+   {
+    "leaf": 6,
+    "n": 6,
+    "propnShare": 0,
+    "aucFull": null
+   },
+   {
+    "leaf": 7,
+    "n": 5,
+    "propnShare": 0,
+    "aucFull": null
+   },
+   {
+    "leaf": 8,
+    "n": 10,
+    "propnShare": 0.2,
+    "aucFull": null
+   },
+   {
+    "leaf": 9,
+    "n": 56,
+    "propnShare": 0.7321,
+    "aucFull": 0.4943
+   }
+  ]
+ },
+ "tur": {
+  "stem": "tur",
+  "n": 232,
+  "nLeaves": 8,
+  "unknownShare": 0.7284,
+  "auc": {
+   "FULL": 0.5896,
+   "KIND": 0.4573,
+   "FULL+KIND": 0.6384,
+   "FULL+KIND+RIVALS": 0.6524,
+   "RIVALS+KIND": 0.5814,
+   "FULL conditioned on kind": 0.607
+  },
+  "perKind": [
+   {
+    "leaf": -1,
+    "n": 169,
+    "propnShare": 0.5503,
+    "aucFull": 0.6177
+   },
+   {
+    "leaf": 0,
+    "n": 24,
+    "propnShare": 0.625,
+    "aucFull": 0.5481
+   },
+   {
+    "leaf": 1,
+    "n": 8,
+    "propnShare": 0.625,
+    "aucFull": null
+   },
+   {
+    "leaf": 2,
+    "n": 1,
+    "propnShare": 0,
+    "aucFull": null
+   },
+   {
+    "leaf": 3,
+    "n": 7,
+    "propnShare": 0,
+    "aucFull": null
+   },
+   {
+    "leaf": 4,
+    "n": 19,
+    "propnShare": 0.1579,
+    "aucFull": null
+   },
+   {
+    "leaf": 7,
+    "n": 3,
+    "propnShare": 0,
+    "aucFull": null
+   },
+   {
+    "leaf": 11,
+    "n": 1,
+    "propnShare": 0,
+    "aucFull": null
+   }
+  ]
+ },
+ "fin": {
+  "stem": "fin",
+  "n": 400,
+  "nLeaves": 4,
+  "unknownShare": 0.6125,
+  "auc": {
+   "FULL": 0.5903,
+   "KIND": 0.5706,
+   "FULL+KIND": 0.65,
+   "FULL+KIND+RIVALS": 0.6744,
+   "RIVALS+KIND": 0.6969,
+   "FULL conditioned on kind": 0.5811
+  },
+  "perKind": [
+   {
+    "leaf": -1,
+    "n": 245,
+    "propnShare": 0.498,
+    "aucFull": 0.582
+   },
+   {
+    "leaf": 0,
+    "n": 22,
+    "propnShare": 0.0455,
+    "aucFull": null
+   },
+   {
+    "leaf": 1,
+    "n": 34,
+    "propnShare": 0.2059,
+    "aucFull": null
+   },
+   {
+    "leaf": 2,
+    "n": 99,
+    "propnShare": 0.7071,
+    "aucFull": 0.5429
+   }
+  ]
+ }
+}

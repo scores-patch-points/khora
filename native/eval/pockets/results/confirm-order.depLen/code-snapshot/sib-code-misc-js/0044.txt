@@ -1,0 +1,75 @@
+// invite.test.mjs — defect 2: a failed registry read must never fail open or
+// be written back. A fake fetch stands in for the homeserver; no network.
+import test from "node:test";
+import assert from "node:assert/strict";
+import { revokedList, revokeDevice, unrevokeDevice, recordPairedKey, forgetPairedKey, issueCode, consumeCode, REVOKED_TYPE, KEYS_TYPE, CODE_TYPE } from "./invite.js";
+
+const creds = { baseUrl: "https://hs.test", accessToken: "t", userId: "@c:hs.test" };
+const realFetch = globalThis.fetch;
+
+/** store: type -> content | undefined (404). mode: "ok" | "500" | "throw". */
+function fakeServer(store, mode = "ok") {
+  const puts = [];
+  globalThis.fetch = async (url, init = {}) => {
+    const type = decodeURIComponent(String(url).split("/account_data/")[1]);
+    if (init.method === "PUT") { puts.push({ type, body: JSON.parse(init.body) }); store[type] = JSON.parse(init.body); return new Response("{}", { status: 200 }); }
+    if (mode === "throw") throw new TypeError("network down");
+    if (mode === "500") return new Response("boom", { status: 500 });
+    if (store[type] === undefined) return new Response("{}", { status: 404 });
+    return new Response(JSON.stringify(store[type]), { status: 200 });
+  };
+  return puts;
+}
+test.after(() => { globalThis.fetch = realFetch; });
+
+test("revokedList: 404 is an empty list, but a failed read THROWS (never fails open)", async () => {
+  fakeServer({});
+  assert.deepEqual(await revokedList({ creds }), []);
+  fakeServer({}, "500");
+  await assert.rejects(revokedList({ creds }), /account data read failed/);
+  fakeServer({}, "throw");
+  await assert.rejects(revokedList({ creds }), /network down/);
+});
+
+test("revokedList returns what the account holds", async () => {
+  const entry = { userId: "@a:hs", deviceId: "D1", reason: "x", at: 1 };
+  fakeServer({ [REVOKED_TYPE]: { revoked: [entry] } });
+  assert.deepEqual(await revokedList({ creds }), [entry]);
+});
+
+test("revokeDevice / unrevokeDevice never write back from a failed read", async () => {
+  const existing = { [REVOKED_TYPE]: { revoked: [{ userId: "@old:hs", deviceId: null, reason: "", at: 1 }] } };
+  for (const mode of ["500", "throw"]) {
+    const puts = fakeServer({ ...existing }, mode);
+    await assert.rejects(revokeDevice({ creds, userId: "@a:hs", deviceId: "D1" }));
+    await assert.rejects(unrevokeDevice({ creds, userId: "@old:hs" }));
+    assert.equal(puts.length, 0, `no PUT on ${mode}: the registry is not clobbered`);
+  }
+  const puts = fakeServer({ ...existing });
+  const next = await revokeDevice({ creds, userId: "@a:hs", deviceId: "D1" });
+  assert.equal(next.length, 2, "a good read keeps the old entry and adds the new");
+  assert.equal(puts.length, 1);
+});
+
+test("the paired-keys registry is not overwritten from a failed read", async () => {
+  for (const mode of ["500", "throw"]) {
+    const puts = fakeServer({ [KEYS_TYPE]: { paired: [{ userId: "@p:hs", deviceId: "D", pubKey: "k" }] } }, mode);
+    await assert.rejects(recordPairedKey({ creds, userId: "@a:hs", deviceId: "D1", pubKey: "k2" }));
+    await assert.rejects(forgetPairedKey({ creds, userId: "@p:hs" }));
+    assert.equal(puts.length, 0, mode);
+  }
+  const store = { [KEYS_TYPE]: { paired: [{ userId: "@p:hs", deviceId: "D", pubKey: "k" }] } };
+  fakeServer(store);
+  await recordPairedKey({ creds, userId: "@a:hs", deviceId: "D1", pubKey: "k2" });
+  assert.equal(store[KEYS_TYPE].paired.length, 2);
+  await forgetPairedKey({ creds, userId: "@p:hs" });
+  assert.deepEqual(store[KEYS_TYPE].paired.map((k) => k.userId), ["@a:hs"]);
+});
+
+test("the code registry is not wiped by a failed read either", async () => {
+  const live = { hash: "h", exp: Date.now() + 1e6 };
+  const puts = fakeServer({ [CODE_TYPE]: { active: [live] } }, "500");
+  await assert.rejects(issueCode({ creds, code: "123456", exp: Date.now() + 1e6 }));
+  await assert.rejects(consumeCode({ creds, codeHash: "h" }));
+  assert.equal(puts.length, 0);
+});

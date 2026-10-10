@@ -1,0 +1,4371 @@
+{
+  "schema": "PeopleGeo@1",
+  "giver": "standard bibliographic record (rough)",
+  "works": {
+    "01-literature-books/gitenberg/pg120_Treasure-Island.txt": {
+      "title": "Treasure Island",
+      "author": {
+        "name": "Robert Louis Stevenson",
+        "place": "Edinburgh",
+        "country": "Scotland",
+        "lat": 55.9,
+        "lon": -3.2
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born and trained Edinburgh (main city of work)."
+    },
+    "01-literature-books/gitenberg/pg1232_The-Prince.txt": {
+      "title": "The Prince",
+      "author": {
+        "name": "Niccolo Machiavelli",
+        "place": "Florence",
+        "country": "Italy",
+        "lat": 43.8,
+        "lon": 11.3
+      },
+      "translator": {
+        "name": "W. K. Marriott",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; place is translator W. K. Marriott (English). Machiavelli original: Florence."
+    },
+    "01-literature-books/gitenberg/pg1400_Great-Expectations.txt": {
+      "title": "Great Expectations",
+      "author": {
+        "name": "Charles Dickens",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author."
+    },
+    "01-literature-books/gitenberg/pg1404_The-Federalist-Papers.txt": {
+      "title": "The Federalist Papers",
+      "author": {
+        "name": "Alexander Hamilton, John Jay, James Madison",
+        "place": "New York City",
+        "country": "United States",
+        "lat": 40.7,
+        "lon": -74.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Multiple authors; place is Hamilton's New York. Also Jay (NY) and Madison (Virginia)."
+    },
+    "01-literature-books/gitenberg/pg147_Common-Sense.txt": {
+      "title": "Common Sense",
+      "author": {
+        "name": "Thomas Paine",
+        "place": "Philadelphia",
+        "country": "United States",
+        "lat": 39.9,
+        "lon": -75.2
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Thetford, England, emigrated; Common Sense first published Philadelphia."
+    },
+    "01-literature-books/gitenberg/pg158_Emma.txt": {
+      "title": "Emma",
+      "author": {
+        "name": "Jane Austen",
+        "place": "Chawton",
+        "country": "England",
+        "lat": 51.1,
+        "lon": -1.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; late-life home Chawton, Hampshire (born Steventon)."
+    },
+    "01-literature-books/gitenberg/pg161_Sense-and-Sensibility.txt": {
+      "title": "Sense and Sensibility",
+      "author": {
+        "name": "Jane Austen",
+        "place": "Chawton",
+        "country": "England",
+        "lat": 51.1,
+        "lon": -1.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; conventional Hampshire residence."
+    },
+    "01-literature-books/gitenberg/pg215_The-Call-of-the-Wild.txt": {
+      "title": "The Call of the Wild",
+      "author": {
+        "name": "Jack London",
+        "place": "San Francisco",
+        "country": "United States",
+        "lat": 37.8,
+        "lon": -122.4
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; birth city."
+    },
+    "01-literature-books/gitenberg/pg219_Heart-of-Darkness.txt": {
+      "title": "Heart of Darkness",
+      "author": {
+        "name": "Joseph Conrad",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Berdychiv (Russian Empire, now Ukraine), Polish; wrote in English, settled in England (contested/dual)."
+    },
+    "01-literature-books/gitenberg/pg236_The-Jungle-Book.txt": {
+      "title": "The Jungle Book",
+      "author": {
+        "name": "Rudyard Kipling",
+        "place": "Mumbai (Bombay)",
+        "country": "India",
+        "lat": 19.1,
+        "lon": 72.9
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Bombay, later lived England (dual, contested)."
+    },
+    "01-literature-books/gitenberg/pg2554_Crime-and-Punishment.txt": {
+      "title": "Crime and Punishment",
+      "author": {
+        "name": "Fyodor Dostoevsky",
+        "place": "St Petersburg",
+        "country": "Russia",
+        "lat": 59.9,
+        "lon": 30.3
+      },
+      "translator": {
+        "name": "Constance Garnett",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; place is translator Constance Garnett (English, born Brighton). Dostoevsky original: St Petersburg."
+    },
+    "01-literature-books/gitenberg/pg345_Dracula.txt": {
+      "title": "Dracula",
+      "author": {
+        "name": "Bram Stoker",
+        "place": "Dublin",
+        "country": "Ireland",
+        "lat": 53.3,
+        "lon": -6.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Dublin."
+    },
+    "01-literature-books/gitenberg/pg35_The-Time-Machine.txt": {
+      "title": "The Time Machine",
+      "author": {
+        "name": "H. G. Wells",
+        "place": "Bromley",
+        "country": "England",
+        "lat": 51.4,
+        "lon": 0.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Bromley, Kent."
+    },
+    "01-literature-books/gitenberg/pg36_The-War-of-the-Worlds.txt": {
+      "title": "The War of the Worlds",
+      "author": {
+        "name": "H. G. Wells",
+        "place": "Bromley",
+        "country": "England",
+        "lat": 51.4,
+        "lon": 0.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Bromley, Kent."
+    },
+    "01-literature-books/gitenberg/pg45_Anne-of-Green-Gables.txt": {
+      "title": "Anne of Green Gables",
+      "author": {
+        "name": "Lucy Maud Montgomery",
+        "place": "New London (Clifton)",
+        "country": "Canada",
+        "lat": 46.4,
+        "lon": -63.6
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Clifton, Prince Edward Island."
+    },
+    "01-literature-books/gitenberg/pg514_Little-Women.txt": {
+      "title": "Little Women",
+      "author": {
+        "name": "Louisa May Alcott",
+        "place": "Germantown, Philadelphia",
+        "country": "United States",
+        "lat": 40.0,
+        "lon": -75.2
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Germantown, Pennsylvania."
+    },
+    "01-literature-books/gitenberg/pg521_The-Life-and-Adventures-of-Robinson-Crusoe.txt": {
+      "title": "The Life and Adventures of Robinson Crusoe",
+      "author": {
+        "name": "Daniel Defoe",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author."
+    },
+    "01-literature-books/gitenberg/pg55_The-Wonderful-Wizard-of-Oz.txt": {
+      "title": "The Wonderful Wizard of Oz",
+      "author": {
+        "name": "L. Frank Baum",
+        "place": "Chittenango, New York",
+        "country": "United States",
+        "lat": 43.0,
+        "lon": -75.9
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Chittenango, New York."
+    },
+    "01-literature-books/gitenberg/pg768_Wuthering-Heights.txt": {
+      "title": "Wuthering Heights",
+      "author": {
+        "name": "Emily Bronte",
+        "place": "Haworth",
+        "country": "England",
+        "lat": 53.8,
+        "lon": -1.9
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; parsonage at Haworth, Yorkshire (born Thornton)."
+    },
+    "01-literature-books/gitenberg/pg829_Gulliver-s-Travels.txt": {
+      "title": "Gulliver s Travels",
+      "author": {
+        "name": "Jonathan Swift",
+        "place": "Dublin",
+        "country": "Ireland",
+        "lat": 53.3,
+        "lon": -6.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born and dean in Dublin."
+    },
+    "01-literature-books/gutenberg/aesop-11339_The-Fox-and-the-Grapes.txt": {
+      "title": "aesop 11339 The Fox and the Grapes",
+      "author": {
+        "name": "Aesop (legendary)",
+        "place": "Phrygia (conventional)",
+        "country": "Turkey (Anatolia)",
+        "lat": 38.5,
+        "lon": 31.5
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Legendary author; birthplace/historicity contested. Conventional Phrygia."
+    },
+    "01-literature-books/gutenberg/pg10671_The_Iliad__Greek_.txt": {
+      "title": "The Iliad Greek",
+      "author": {
+        "name": "Erasmus Darwin",
+        "place": "Lichfield",
+        "country": "England",
+        "lat": 52.7,
+        "lon": -1.8
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "CONTENT vs FILENAME MISMATCH: file holds 'The Botanic Garden' by Erasmus Darwin, not the Greek Iliad. Place is Darwin's Lichfield/Derby."
+    },
+    "01-literature-books/gutenberg/pg11-alice-ch1.txt": {
+      "title": "alice ch1",
+      "author": {
+        "name": "Lewis Carroll",
+        "place": "Oxford",
+        "country": "England",
+        "lat": 51.8,
+        "lon": -1.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Christ Church, Oxford (born Daresbury)."
+    },
+    "01-literature-books/gutenberg/pg11_Alice_s_Adventures_in_Wonderland.txt": {
+      "title": "Alice s Adventures in Wonderland",
+      "author": {
+        "name": "Lewis Carroll",
+        "place": "Oxford",
+        "country": "England",
+        "lat": 51.8,
+        "lon": -1.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author."
+    },
+    "01-literature-books/gutenberg/pg12_Through_the_Looking_Glass.txt": {
+      "title": "Through the Looking Glass",
+      "author": {
+        "name": "Lewis Carroll",
+        "place": "Oxford",
+        "country": "England",
+        "lat": 51.8,
+        "lon": -1.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author."
+    },
+    "01-literature-books/gutenberg/pg1342_Pride_and_Prejudice.txt": {
+      "title": "Pride and Prejudice",
+      "author": {
+        "name": "Jane Austen",
+        "place": "Chawton",
+        "country": "England",
+        "lat": 51.1,
+        "lon": -1.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author."
+    },
+    "01-literature-books/gutenberg/pg13453_The_Divine_Comedy_by_Dante.txt": {
+      "title": "The Divine Comedy by Dante",
+      "author": {
+        "name": "Dante Alighieri",
+        "place": "Florence",
+        "country": "Italy",
+        "lat": 43.8,
+        "lon": 11.3
+      },
+      "translator": {
+        "name": "Henry Wadsworth Longfellow",
+        "place": "Cambridge, Massachusetts",
+        "country": "United States",
+        "lat": 42.4,
+        "lon": -71.1
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; place is translator Longfellow (American). Dante original: Florence."
+    },
+    "01-literature-books/gutenberg/pg135_Les_Mis_rables__French_.txt": {
+      "title": "Les Mis rables French",
+      "author": {
+        "name": "Victor Hugo",
+        "place": "Paris",
+        "country": "France",
+        "lat": 48.9,
+        "lon": 2.4
+      },
+      "translator": {
+        "name": "Isabel F. Hapgood",
+        "place": "Boston",
+        "country": "United States",
+        "lat": 42.4,
+        "lon": -71.1
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; place is translator Hapgood (American). FILENAME says French but content is the English Hapgood translation."
+    },
+    "01-literature-books/gutenberg/pg145_Middlemarch-George-Eliot.txt": {
+      "title": "Middlemarch George Eliot",
+      "author": {
+        "name": "George Eliot (Mary Ann Evans)",
+        "place": "Nuneaton",
+        "country": "England",
+        "lat": 52.5,
+        "lon": -1.5
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Nuneaton, later London."
+    },
+    "01-literature-books/gutenberg/pg1661_The_Adventures_of_Tom_Sawyer.txt": {
+      "title": "The Adventures of Tom Sawyer",
+      "author": {
+        "name": "Mark Twain (Samuel Clemens)",
+        "place": "Hartford, Connecticut",
+        "country": "United States",
+        "lat": 41.8,
+        "lon": -72.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; conventional residence (born Florida, Missouri)."
+    },
+    "01-literature-books/gutenberg/pg17270_The_Aeneid__Latin_.txt": {
+      "title": "The Aeneid Latin",
+      "author": {
+        "name": "Virgil (Publius Vergilius Maro)",
+        "place": "Rome",
+        "country": "Italy",
+        "lat": 41.9,
+        "lon": 12.5
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; main city of work (born near Mantua)."
+    },
+    "01-literature-books/gutenberg/pg174_The_Picture_of_Dorian_Gray.txt": {
+      "title": "The Picture of Dorian Gray",
+      "author": {
+        "name": "Oscar Wilde",
+        "place": "Dublin",
+        "country": "Ireland",
+        "lat": 53.3,
+        "lon": -6.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Dublin, worked London."
+    },
+    "01-literature-books/gutenberg/pg2397_Leaves_of_Grass_by_Whitman.txt": {
+      "title": "Leaves of Grass by Whitman",
+      "author": {
+        "name": "Walt Whitman",
+        "place": "New York City",
+        "country": "United States",
+        "lat": 40.7,
+        "lon": -74.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; main city of work (born West Hills, Long Island)."
+    },
+    "01-literature-books/gutenberg/pg2636_Faust__German_.txt": {
+      "title": "Faust German",
+      "author": {
+        "name": "Johann Wolfgang von Goethe",
+        "place": "Weimar",
+        "country": "Germany",
+        "lat": 51.0,
+        "lon": 11.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; main city of work (born Frankfurt am Main)."
+    },
+    "01-literature-books/gutenberg/pg2701_Moby_Dick.txt": {
+      "title": "Moby Dick",
+      "author": {
+        "name": "Herman Melville",
+        "place": "New York City",
+        "country": "United States",
+        "lat": 40.7,
+        "lon": -74.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born and worked New York."
+    },
+    "01-literature-books/gutenberg/pg345_Dracula.txt": {
+      "title": "Dracula",
+      "author": {
+        "name": "Bram Stoker",
+        "place": "Dublin",
+        "country": "Ireland",
+        "lat": 53.3,
+        "lon": -6.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Dublin (duplicate of the gitenberg Dracula file)."
+    },
+    "01-literature-books/gutenberg/pg32063_On_the_Electrodynamics_of_Moving_Bodies__Einstein_.txt": {
+      "title": "On the Electrodynamics of Moving Bodies Einstein",
+      "author": {
+        "name": "Albert Einstein",
+        "place": "Bern",
+        "country": "Switzerland",
+        "lat": 46.9,
+        "lon": 7.4
+      },
+      "translator": {
+        "name": "M. N. Saha and S. N. Bose",
+        "place": "Kolkata (Calcutta)",
+        "country": "India",
+        "lat": 22.6,
+        "lon": 88.4
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; place is the translators Saha & Bose, Calcutta University. Einstein original: Bern/Zurich/Berlin."
+    },
+    "01-literature-books/gutenberg/pg37134_The_Elements_of_Style.txt": {
+      "title": "The Elements of Style",
+      "author": {
+        "name": "William Strunk Jr.",
+        "place": "Ithaca, New York",
+        "country": "United States",
+        "lat": 42.4,
+        "lon": -76.5
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Cornell, Ithaca (born Cincinnati, Ohio)."
+    },
+    "01-literature-books/gutenberg/pg4300_Ulysses.txt": {
+      "title": "Ulysses",
+      "author": {
+        "name": "James Joyce",
+        "place": "Dublin",
+        "country": "Ireland",
+        "lat": 53.3,
+        "lon": -6.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Dublin (long exile Paris/Zurich)."
+    },
+    "01-literature-books/gutenberg/pg5196_Don_Quixote__Spanish_.txt": {
+      "title": "Don Quixote Spanish",
+      "author": {
+        "name": "Miguel de Cervantes",
+        "place": "Alcala de Henares",
+        "country": "Spain",
+        "lat": 40.5,
+        "lon": -3.4
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; birth city (main later Madrid; contested conventional)."
+    },
+    "01-literature-books/gutenberg/pg55201_The_Republic_by_Plato.txt": {
+      "title": "The Republic by Plato",
+      "author": {
+        "name": "Plato",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": {
+        "name": "Benjamin Jowett",
+        "place": "Oxford",
+        "country": "England",
+        "lat": 51.8,
+        "lon": -1.3
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; place is translator Jowett. Plato original: Athens."
+    },
+    "01-literature-books/gutenberg/pg5827_Meditations_by_Marcus_Aurelius.txt": {
+      "title": "Meditations by Marcus Aurelius",
+      "author": {
+        "name": "Marcus Aurelius",
+        "place": "Rome",
+        "country": "Italy",
+        "lat": 41.9,
+        "lon": 12.5
+      },
+      "translator": {
+        "name": "George Long",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator George Long (English). Marcus Aurelius original: Rome. Translator not credited in file; standard PG attribution."
+    },
+    "01-literature-books/gutenberg/pg59129_Leviathan_by_Hobbes.txt": {
+      "title": "Leviathan by Hobbes",
+      "author": {
+        "name": "E. M. Leonard",
+        "place": "Cambridge",
+        "country": "England",
+        "lat": 52.2,
+        "lon": 0.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "CONTENT vs FILENAME MISMATCH: file holds 'The Early History of English Poor Relief' by E. M. Leonard, not Hobbes's Leviathan."
+    },
+    "01-literature-books/gutenberg/pg62168_The_Origin_of_Species_by_Darwin.txt": {
+      "title": "The Origin of Species by Darwin",
+      "author": {
+        "name": "Charles Darwin",
+        "place": "Downe, Kent",
+        "country": "England",
+        "lat": 51.3,
+        "lon": 0.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Down House, Kent (born Shrewsbury)."
+    },
+    "01-literature-books/gutenberg/pg768_The_Adventures_of_Sherlock_Holmes.txt": {
+      "title": "The Adventures of Sherlock Holmes",
+      "author": {
+        "name": "Arthur Conan Doyle",
+        "place": "Edinburgh",
+        "country": "Scotland",
+        "lat": 55.9,
+        "lon": -3.2
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Edinburgh."
+    },
+    "01-literature-books/gutenberg/pg8394_Beyond_Good_and_Evil_by_Nietzsche.txt": {
+      "title": "Beyond Good and Evil by Nietzsche",
+      "author": {
+        "name": "Friedrich Nietzsche",
+        "place": "Rocken, Saxony-Anhalt",
+        "country": "Germany",
+        "lat": 51.2,
+        "lon": 12.1
+      },
+      "translator": {
+        "name": "Helen Zimmern",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; place is translator Helen Zimmern (German-born British, born Hamburg). Nietzsche original: German."
+    },
+    "01-literature-books/gutenberg/pg84_Frankenstein.txt": {
+      "title": "Frankenstein",
+      "author": {
+        "name": "Mary Wollstonecraft Shelley",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born London."
+    },
+    "01-literature-books/gutenberg/pg98_A_Tale_of_Two_Cities.txt": {
+      "title": "A Tale of Two Cities",
+      "author": {
+        "name": "Charles Dickens",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author."
+    },
+    "01-literature-books/renaissance-poetry/wyatt-whoso-list-to-hunt.txt": {
+      "title": "wyatt whoso list to hunt",
+      "author": {
+        "name": "Sir Thomas Wyatt",
+        "place": "Allington, Kent",
+        "country": "England",
+        "lat": 51.3,
+        "lon": 0.5
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Allington Castle, Kent."
+    },
+    "01-literature-books/wikisource/Abraham_Lincoln_s_Second_Inaugural_Address.txt": {
+      "title": "Abraham Lincoln s Second Inaugural Address",
+      "author": {
+        "name": "Abraham Lincoln",
+        "place": "Springfield, Illinois",
+        "country": "United States",
+        "lat": 39.8,
+        "lon": -89.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; political home Springfield (born Kentucky)."
+    },
+    "01-literature-books/wikisource/Constitution_of_the_United_States_of_America.txt": {
+      "title": "Constitution of the United States of America",
+      "author": {
+        "name": "U.S. Constitutional Convention (framers)",
+        "place": "Philadelphia",
+        "country": "United States",
+        "lat": 39.9,
+        "lon": -75.2
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Multiple authors; drafted at Philadelphia Convention."
+    },
+    "11-multi-language/arabic-originals/al-ghazali-deliverance-from-error.txt": {
+      "title": "al ghazali deliverance from error",
+      "author": {
+        "name": "Abu Hamid al-Ghazali",
+        "place": "Baghdad",
+        "country": "Iraq",
+        "lat": 33.3,
+        "lon": 44.4
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; main city of work Baghdad (born Tus, Iran)."
+    },
+    "11-multi-language/arabic-originals/al-ghazali-incoherence.txt": {
+      "title": "al ghazali incoherence",
+      "author": {
+        "name": "Abu Hamid al-Ghazali",
+        "place": "Baghdad",
+        "country": "Iraq",
+        "lat": 33.3,
+        "lon": 44.4
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Baghdad (born Tus, Iran)."
+    },
+    "11-multi-language/arabic-originals/alf-layla-wa-layla.txt": {
+      "title": "alf layla wa layla",
+      "author": {
+        "name": "Anonymous (One Thousand and One Nights)",
+        "place": "Baghdad/Cairo (composite)",
+        "country": "Iraq/Egypt",
+        "lat": 33.3,
+        "lon": 44.4
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Anonymous composite; origins contested (Persian/Indian/Arab, Baghdad and Cairo layers)."
+    },
+    "11-multi-language/arabic-originals/ibn-al-haytham-manazir.txt": {
+      "title": "ibn al haytham manazir",
+      "author": {
+        "name": "Ibn al-Haytham (Alhazen)",
+        "place": "Cairo",
+        "country": "Egypt",
+        "lat": 30.0,
+        "lon": 31.2
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; main city of work Cairo (born Basra)."
+    },
+    "11-multi-language/arabic-originals/ibn-al-nadim-fihrist.txt": {
+      "title": "ibn al nadim fihrist",
+      "author": {
+        "name": "Ibn al-Nadim",
+        "place": "Baghdad",
+        "country": "Iraq",
+        "lat": 33.3,
+        "lon": 44.4
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author."
+    },
+    "11-multi-language/arabic-originals/ibn-khaldun-muqaddimah.txt": {
+      "title": "ibn khaldun muqaddimah",
+      "author": {
+        "name": "Ibn Khaldun",
+        "place": "Tunis",
+        "country": "Tunisia",
+        "lat": 36.8,
+        "lon": 10.2
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Tunis, later Cairo (dual)."
+    },
+    "11-multi-language/arabic-originals/ibn-rushd-bidayat-al-mujtahid.txt": {
+      "title": "ibn rushd bidayat al mujtahid",
+      "author": {
+        "name": "Ibn Rushd (Averroes)",
+        "place": "Cordoba",
+        "country": "Spain",
+        "lat": 37.9,
+        "lon": -4.8
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born and worked Cordoba, al-Andalus."
+    },
+    "11-multi-language/arabic-originals/ibn-rushd-decisive-treatise.txt": {
+      "title": "ibn rushd decisive treatise",
+      "author": {
+        "name": "Ibn Rushd (Averroes)",
+        "place": "Cordoba",
+        "country": "Spain",
+        "lat": 37.9,
+        "lon": -4.8
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Cordoba, al-Andalus."
+    },
+    "11-multi-language/arabic-originals/sahih-al-bukhari.txt": {
+      "title": "sahih al bukhari",
+      "author": {
+        "name": "al-Bukhari",
+        "place": "Bukhara",
+        "country": "Uzbekistan",
+        "lat": 39.8,
+        "lon": 64.4
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Bukhara (worked Nishapur/Baghdad)."
+    },
+    "11-multi-language/chinese-originals/bencao-gangmu.txt": {
+      "title": "bencao gangmu",
+      "author": {
+        "name": "Li Shizhen",
+        "place": "Qichun, Hubei",
+        "country": "China",
+        "lat": 30.2,
+        "lon": 115.4
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Qichun, Hubei."
+    },
+    "11-multi-language/chinese-originals/dai-zhen.txt": {
+      "title": "dai zhen",
+      "author": {
+        "name": "Dai Zhen",
+        "place": "Xiuning, Anhui",
+        "country": "China",
+        "lat": 29.7,
+        "lon": 118.2
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Xiuning, Anhui."
+    },
+    "11-multi-language/chinese-originals/jiuzhang-suanshu.txt": {
+      "title": "jiuzhang suanshu",
+      "author": {
+        "name": "Anonymous (Nine Chapters)",
+        "place": "Chang'an (Xi'an)",
+        "country": "China",
+        "lat": 34.3,
+        "lon": 108.9
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Anonymous Han-era composite; place is the Han capital region (conventional)."
+    },
+    "11-multi-language/chinese-originals/mozi.txt": {
+      "title": "mozi",
+      "author": {
+        "name": "Mozi",
+        "place": "Tengzhou, Shandong",
+        "country": "China",
+        "lat": 35.1,
+        "lon": 117.2
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; state of Lu/Song region (contested)."
+    },
+    "11-multi-language/chinese-originals/shiji.txt": {
+      "title": "shiji",
+      "author": {
+        "name": "Sima Qian",
+        "place": "Hancheng, Shaanxi",
+        "country": "China",
+        "lat": 35.5,
+        "lon": 110.4
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Longmen, near Hancheng."
+    },
+    "11-multi-language/chinese-originals/shuowen-jiezi.txt": {
+      "title": "shuowen jiezi",
+      "author": {
+        "name": "Xu Shen",
+        "place": "Luohe, Henan",
+        "country": "China",
+        "lat": 33.6,
+        "lon": 114.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Zhaoling (modern Luohe), Henan."
+    },
+    "11-multi-language/chinese-originals/xunzi.txt": {
+      "title": "xunzi",
+      "author": {
+        "name": "Xunzi",
+        "place": "State of Zhao (Shanxi/Hebei)",
+        "country": "China",
+        "lat": 36.5,
+        "lon": 113.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born in the state of Zhao (exact town contested)."
+    },
+    "11-multi-language/french-originals/brillat-savarin-physiologie-du-gout.txt": {
+      "title": "brillat savarin physiologie du gout",
+      "author": {
+        "name": "Jean Anthelme Brillat-Savarin",
+        "place": "Paris",
+        "country": "France",
+        "lat": 48.9,
+        "lon": 2.4
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; main city of work Paris (born Belley)."
+    },
+    "11-multi-language/french-originals/pascal-pensees.txt": {
+      "title": "pascal pensees",
+      "author": {
+        "name": "Blaise Pascal",
+        "place": "Paris",
+        "country": "France",
+        "lat": 48.9,
+        "lon": 2.4
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; main city of work Paris (born Clermont-Ferrand)."
+    },
+    "11-multi-language/german-originals/frege-ueber-begriff-und-gegenstand.txt": {
+      "title": "frege ueber begriff und gegenstand",
+      "author": {
+        "name": "Gottlob Frege",
+        "place": "Jena",
+        "country": "Germany",
+        "lat": 50.9,
+        "lon": 11.6
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; professor at Jena (born Wismar)."
+    },
+    "11-multi-language/german-originals/ranke-geschichten-der-romanischen-und-germanischen-voelker-1824.txt": {
+      "title": "ranke geschichten der romanischen und germanischen voelker 1824",
+      "author": {
+        "name": "Leopold von Ranke",
+        "place": "Berlin",
+        "country": "Germany",
+        "lat": 52.5,
+        "lon": 13.4
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; professor at Berlin (born Wiehe, Thuringia)."
+    },
+    "11-multi-language/greek-originals/aeschylus-agamemnon.txt": {
+      "title": "aeschylus agamemnon",
+      "author": {
+        "name": "Aeschylus",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; worked Athens (born Eleusis)."
+    },
+    "11-multi-language/greek-originals/aeschylus-choephori.txt": {
+      "title": "aeschylus choephori",
+      "author": {
+        "name": "Aeschylus",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; worked Athens (born Eleusis)."
+    },
+    "11-multi-language/greek-originals/aeschylus-eumenides.txt": {
+      "title": "aeschylus eumenides",
+      "author": {
+        "name": "Aeschylus",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; worked Athens (born Eleusis)."
+    },
+    "11-multi-language/greek-originals/aeschylus-prometheus-bound.txt": {
+      "title": "aeschylus prometheus bound",
+      "author": {
+        "name": "Aeschylus",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; worked Athens (born Eleusis)."
+    },
+    "11-multi-language/greek-originals/aristophanes-birds.txt": {
+      "title": "aristophanes birds",
+      "author": {
+        "name": "Aristophanes",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author."
+    },
+    "11-multi-language/greek-originals/aristophanes-clouds.txt": {
+      "title": "aristophanes clouds",
+      "author": {
+        "name": "Aristophanes",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author."
+    },
+    "11-multi-language/greek-originals/aristophanes-frogs.txt": {
+      "title": "aristophanes frogs",
+      "author": {
+        "name": "Aristophanes",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author."
+    },
+    "11-multi-language/greek-originals/aristotle-categories.txt": {
+      "title": "aristotle categories",
+      "author": {
+        "name": "Aristotle",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; main city of work Athens (born Stagira)."
+    },
+    "11-multi-language/greek-originals/aristotle-de-anima.txt": {
+      "title": "aristotle de anima",
+      "author": {
+        "name": "Aristotle",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; main city of work Athens (born Stagira)."
+    },
+    "11-multi-language/greek-originals/aristotle-metaphysics.txt": {
+      "title": "aristotle metaphysics",
+      "author": {
+        "name": "Aristotle",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; main city of work Athens (born Stagira)."
+    },
+    "11-multi-language/greek-originals/aristotle-nicomachean-ethics.txt": {
+      "title": "aristotle nicomachean ethics",
+      "author": {
+        "name": "Aristotle",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; main city of work Athens (born Stagira)."
+    },
+    "11-multi-language/greek-originals/aristotle-poetics.txt": {
+      "title": "aristotle poetics",
+      "author": {
+        "name": "Aristotle",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; main city of work Athens (born Stagira)."
+    },
+    "11-multi-language/greek-originals/aristotle-politics.txt": {
+      "title": "aristotle politics",
+      "author": {
+        "name": "Aristotle",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; main city of work Athens (born Stagira)."
+    },
+    "11-multi-language/greek-originals/corpus-hermeticum-krater.txt": {
+      "title": "corpus hermeticum krater",
+      "author": {
+        "name": "Anonymous (Corpus Hermeticum)",
+        "place": "Alexandria",
+        "country": "Egypt",
+        "lat": 31.2,
+        "lon": 29.9
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Anonymous Hellenistic-era texts; conventional origin Alexandria."
+    },
+    "11-multi-language/greek-originals/corpus-hermeticum-poimandres.txt": {
+      "title": "corpus hermeticum poimandres",
+      "author": {
+        "name": "Anonymous (Corpus Hermeticum)",
+        "place": "Alexandria",
+        "country": "Egypt",
+        "lat": 31.2,
+        "lon": 29.9
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Anonymous Hellenistic-era texts; conventional origin Alexandria."
+    },
+    "11-multi-language/greek-originals/corpus-hermeticum-tat.txt": {
+      "title": "corpus hermeticum tat",
+      "author": {
+        "name": "Anonymous (Corpus Hermeticum)",
+        "place": "Alexandria",
+        "country": "Egypt",
+        "lat": 31.2,
+        "lon": 29.9
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Anonymous Hellenistic-era texts; conventional origin Alexandria."
+    },
+    "11-multi-language/greek-originals/epictetus-discourses.txt": {
+      "title": "epictetus discourses",
+      "author": {
+        "name": "Epictetus",
+        "place": "Rome",
+        "country": "Italy",
+        "lat": 41.9,
+        "lon": 12.5
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; slave/teacher in Rome then Nicopolis (born Hierapolis, Phrygia)."
+    },
+    "11-multi-language/greek-originals/epictetus-enchiridion.txt": {
+      "title": "epictetus enchiridion",
+      "author": {
+        "name": "Epictetus",
+        "place": "Rome",
+        "country": "Italy",
+        "lat": 41.9,
+        "lon": 12.5
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Rome/Nicopolis (born Hierapolis, Phrygia)."
+    },
+    "11-multi-language/greek-originals/euripides-bacchae.txt": {
+      "title": "euripides bacchae",
+      "author": {
+        "name": "Euripides",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; worked Athens (born Salamis)."
+    },
+    "11-multi-language/greek-originals/euripides-hippolytus.txt": {
+      "title": "euripides hippolytus",
+      "author": {
+        "name": "Euripides",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; worked Athens (born Salamis)."
+    },
+    "11-multi-language/greek-originals/euripides-medea.txt": {
+      "title": "euripides medea",
+      "author": {
+        "name": "Euripides",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; worked Athens (born Salamis)."
+    },
+    "11-multi-language/greek-originals/herodotus-histories.txt": {
+      "title": "herodotus histories",
+      "author": {
+        "name": "Herodotus",
+        "place": "Halicarnassus",
+        "country": "Turkey (Anatolia)",
+        "lat": 37.0,
+        "lon": 27.4
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Halicarnassus."
+    },
+    "11-multi-language/greek-originals/hippocrates-aphorisms.txt": {
+      "title": "hippocrates aphorisms",
+      "author": {
+        "name": "Hippocrates (corpus)",
+        "place": "Kos",
+        "country": "Greece",
+        "lat": 36.9,
+        "lon": 27.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Attributed; born Kos. Corpus is multiple hands (contested)."
+    },
+    "11-multi-language/greek-originals/homer-iliad.txt": {
+      "title": "homer iliad",
+      "author": {
+        "name": "Homer (legendary)",
+        "place": "Ionia (disputed)",
+        "country": "Turkey (Anatolia)",
+        "lat": 38.4,
+        "lon": 27.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Legendary; birthplace contested (Smyrna, Chios, Ios). Conventional Ionia."
+    },
+    "11-multi-language/greek-originals/homer-odyssey.txt": {
+      "title": "homer odyssey",
+      "author": {
+        "name": "Homer (legendary)",
+        "place": "Ionia (disputed)",
+        "country": "Turkey (Anatolia)",
+        "lat": 38.4,
+        "lon": 27.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Legendary; birthplace contested. Conventional Ionia."
+    },
+    "11-multi-language/greek-originals/marcus-aurelius-meditations.txt": {
+      "title": "marcus aurelius meditations",
+      "author": {
+        "name": "Marcus Aurelius",
+        "place": "Rome",
+        "country": "Italy",
+        "lat": 41.9,
+        "lon": 12.5
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Roman emperor, wrote in Greek."
+    },
+    "11-multi-language/greek-originals/pindar-isthmian-odes.txt": {
+      "title": "pindar isthmian odes",
+      "author": {
+        "name": "Pindar",
+        "place": "Thebes",
+        "country": "Greece",
+        "lat": 38.3,
+        "lon": 23.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born near Thebes."
+    },
+    "11-multi-language/greek-originals/pindar-nemean-odes.txt": {
+      "title": "pindar nemean odes",
+      "author": {
+        "name": "Pindar",
+        "place": "Thebes",
+        "country": "Greece",
+        "lat": 38.3,
+        "lon": 23.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Thebes."
+    },
+    "11-multi-language/greek-originals/pindar-olympian-odes.txt": {
+      "title": "pindar olympian odes",
+      "author": {
+        "name": "Pindar",
+        "place": "Thebes",
+        "country": "Greece",
+        "lat": 38.3,
+        "lon": 23.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Thebes."
+    },
+    "11-multi-language/greek-originals/pindar-pythian-odes.txt": {
+      "title": "pindar pythian odes",
+      "author": {
+        "name": "Pindar",
+        "place": "Thebes",
+        "country": "Greece",
+        "lat": 38.3,
+        "lon": 23.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Thebes."
+    },
+    "11-multi-language/greek-originals/plato-apology.txt": {
+      "title": "plato apology",
+      "author": {
+        "name": "Plato",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Athens."
+    },
+    "11-multi-language/greek-originals/plato-crito.txt": {
+      "title": "plato crito",
+      "author": {
+        "name": "Plato",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Athens."
+    },
+    "11-multi-language/greek-originals/plato-gorgias.txt": {
+      "title": "plato gorgias",
+      "author": {
+        "name": "Plato",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Athens."
+    },
+    "11-multi-language/greek-originals/plato-meno.txt": {
+      "title": "plato meno",
+      "author": {
+        "name": "Plato",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Athens."
+    },
+    "11-multi-language/greek-originals/plato-parmenides.txt": {
+      "title": "plato parmenides",
+      "author": {
+        "name": "Plato",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Athens."
+    },
+    "11-multi-language/greek-originals/plato-phaedo.txt": {
+      "title": "plato phaedo",
+      "author": {
+        "name": "Plato",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Athens."
+    },
+    "11-multi-language/greek-originals/plato-phaedrus.txt": {
+      "title": "plato phaedrus",
+      "author": {
+        "name": "Plato",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Athens."
+    },
+    "11-multi-language/greek-originals/plato-republic.txt": {
+      "title": "plato republic",
+      "author": {
+        "name": "Plato",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Athens."
+    },
+    "11-multi-language/greek-originals/plato-sophist.txt": {
+      "title": "plato sophist",
+      "author": {
+        "name": "Plato",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Athens."
+    },
+    "11-multi-language/greek-originals/plato-symposium.txt": {
+      "title": "plato symposium",
+      "author": {
+        "name": "Plato",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Athens."
+    },
+    "11-multi-language/greek-originals/plato-theaetetus.txt": {
+      "title": "plato theaetetus",
+      "author": {
+        "name": "Plato",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Athens."
+    },
+    "11-multi-language/greek-originals/plato-timaeus.txt": {
+      "title": "plato timaeus",
+      "author": {
+        "name": "Plato",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Athens."
+    },
+    "11-multi-language/greek-originals/plotinus-enneads.txt": {
+      "title": "plotinus enneads",
+      "author": {
+        "name": "Plotinus",
+        "place": "Rome",
+        "country": "Italy",
+        "lat": 41.9,
+        "lon": 12.5
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; taught in Rome (born Lycopolis, Egypt)."
+    },
+    "11-multi-language/greek-originals/plutarch-life-of-solon.txt": {
+      "title": "plutarch life of solon",
+      "author": {
+        "name": "Plutarch",
+        "place": "Chaeronea",
+        "country": "Greece",
+        "lat": 38.5,
+        "lon": 22.8
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Chaeronea, Boeotia."
+    },
+    "11-multi-language/greek-originals/sappho-poems.txt": {
+      "title": "sappho poems",
+      "author": {
+        "name": "Sappho",
+        "place": "Lesbos",
+        "country": "Greece",
+        "lat": 39.1,
+        "lon": 26.6
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Lesbos (Eresos/Mytilene)."
+    },
+    "11-multi-language/greek-originals/sophocles-ajax.txt": {
+      "title": "sophocles ajax",
+      "author": {
+        "name": "Sophocles",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; worked Athens (born Colonus)."
+    },
+    "11-multi-language/greek-originals/sophocles-antigone.txt": {
+      "title": "sophocles antigone",
+      "author": {
+        "name": "Sophocles",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; worked Athens (born Colonus)."
+    },
+    "11-multi-language/greek-originals/sophocles-oedipus-colonus.txt": {
+      "title": "sophocles oedipus colonus",
+      "author": {
+        "name": "Sophocles",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; worked Athens (born Colonus)."
+    },
+    "11-multi-language/greek-originals/sophocles-oedipus-rex.txt": {
+      "title": "sophocles oedipus rex",
+      "author": {
+        "name": "Sophocles",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; worked Athens (born Colonus)."
+    },
+    "11-multi-language/greek-originals/sophocles-philoctetes.txt": {
+      "title": "sophocles philoctetes",
+      "author": {
+        "name": "Sophocles",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; worked Athens (born Colonus)."
+    },
+    "11-multi-language/greek-originals/thrax-tekhne-grammatike.txt": {
+      "title": "thrax tekhne grammatike",
+      "author": {
+        "name": "Dionysius Thrax",
+        "place": "Alexandria",
+        "country": "Egypt",
+        "lat": 31.2,
+        "lon": 29.9
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Alexandria, taught Rhodes/Rome."
+    },
+    "11-multi-language/greek-originals/thucydides-history.txt": {
+      "title": "thucydides history",
+      "author": {
+        "name": "Thucydides",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Athenian (born Halimous)."
+    },
+    "11-multi-language/gutenberg-non-en/de/pg2148_Die_Leiden_des_jungen_Werther__Goethe_.txt": {
+      "title": "Die Leiden des jungen Werther Goethe",
+      "author": {
+        "name": "Edgar Allan Poe",
+        "place": "Boston",
+        "country": "United States",
+        "lat": 42.4,
+        "lon": -71.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "CONTENT vs FILENAME MISMATCH: file holds 'The Works of Edgar Allan Poe' Vol II, not Goethe's Werther."
+    },
+    "11-multi-language/gutenberg-non-en/de/pg42671_Also_sprach_Zarathustra__Nietzsche_.txt": {
+      "title": "Also sprach Zarathustra Nietzsche",
+      "author": {
+        "name": "Jane Austen",
+        "place": "Chawton",
+        "country": "England",
+        "lat": 51.1,
+        "lon": -1.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "CONTENT vs FILENAME MISMATCH: file holds 'Pride and Prejudice', not Zarathustra."
+    },
+    "11-multi-language/gutenberg-non-en/de/pg60360_Der-Wille-zur-Macht-Nietzsche.txt": {
+      "title": "Der Wille zur Macht Nietzsche",
+      "author": {
+        "name": "Friedrich Nietzsche",
+        "place": "Rocken, Saxony-Anhalt",
+        "country": "Germany",
+        "lat": 51.2,
+        "lon": 12.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Rocken; lived Basel and Weimar. German original."
+    },
+    "11-multi-language/gutenberg-non-en/de/pg67098_Die_Verwandlung__Kafka_.txt": {
+      "title": "Die Verwandlung Kafka",
+      "author": {
+        "name": "A. A. Milne",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "CONTENT vs FILENAME MISMATCH: file holds 'Winnie-the-Pooh', not Kafka's Verwandlung."
+    },
+    "11-multi-language/gutenberg-non-en/de/pg7202_Ecce-Homo-Nietzsche.txt": {
+      "title": "Ecce Homo Nietzsche",
+      "author": {
+        "name": "Friedrich Nietzsche",
+        "place": "Rocken, Saxony-Anhalt",
+        "country": "Germany",
+        "lat": 51.2,
+        "lon": 12.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; German original; born Rocken, lived Basel/Weimar."
+    },
+    "11-multi-language/gutenberg-non-en/de/pg7203_Gotzen-Dammerung-Nietzsche.txt": {
+      "title": "Gotzen Dammerung Nietzsche",
+      "author": {
+        "name": "Friedrich Nietzsche",
+        "place": "Rocken, Saxony-Anhalt",
+        "country": "Germany",
+        "lat": 51.2,
+        "lon": 12.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; German original; born Rocken, lived Basel/Weimar."
+    },
+    "11-multi-language/gutenberg-non-en/de/pg7204_Jenseits-von-Gut-und-Bose-Nietzsche.txt": {
+      "title": "Jenseits von Gut und Bose Nietzsche",
+      "author": {
+        "name": "Friedrich Nietzsche",
+        "place": "Rocken, Saxony-Anhalt",
+        "country": "Germany",
+        "lat": 51.2,
+        "lon": 12.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; German original; born Rocken, lived Basel/Weimar."
+    },
+    "11-multi-language/gutenberg-non-en/de/pg7206_Die-Geburt-der-Tragodie-Nietzsche.txt": {
+      "title": "Die Geburt der Tragodie Nietzsche",
+      "author": {
+        "name": "Friedrich Nietzsche",
+        "place": "Rocken, Saxony-Anhalt",
+        "country": "Germany",
+        "lat": 51.2,
+        "lon": 12.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; German original; born Rocken, lived Basel/Weimar."
+    },
+    "11-multi-language/gutenberg-non-en/de/pg7207_Menschliches-Allzumenschliches-Nietzsche.txt": {
+      "title": "Menschliches Allzumenschliches Nietzsche",
+      "author": {
+        "name": "Friedrich Nietzsche",
+        "place": "Rocken, Saxony-Anhalt",
+        "country": "Germany",
+        "lat": 51.2,
+        "lon": 12.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; German original; born Rocken, lived Basel/Weimar."
+    },
+    "11-multi-language/gutenberg-non-en/en/pg160_Crime_and_Punishment__Dostoyevsky_.txt": {
+      "title": "Crime and Punishment Dostoyevsky",
+      "author": {
+        "name": "Kate Chopin",
+        "place": "St. Louis, Missouri",
+        "country": "United States",
+        "lat": 38.6,
+        "lon": -90.2
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "CONTENT vs FILENAME MISMATCH: file holds 'The Awakening and Selected Short Stories' by Kate Chopin, not Crime and Punishment."
+    },
+    "11-multi-language/gutenberg-non-en/en/pg2500_The_Brothers_Karamazov.txt": {
+      "title": "The Brothers Karamazov",
+      "author": {
+        "name": "Hermann Hesse",
+        "place": "Calw",
+        "country": "Germany",
+        "lat": 48.7,
+        "lon": 8.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "CONTENT vs FILENAME MISMATCH: file holds 'Siddhartha' (Eng.) by Hesse, not The Brothers Karamazov. Born Calw; later Montagnola, Switzerland; German original. Hesse's 'Siddhartha' in English; English translator not credited in the file."
+    },
+    "11-multi-language/gutenberg-non-en/en/pg2542_War_and_Peace.txt": {
+      "title": "War and Peace",
+      "author": {
+        "name": "Henrik Ibsen",
+        "place": "Oslo (Christiana)",
+        "country": "Norway",
+        "lat": 59.9,
+        "lon": 10.8
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "CONTENT vs FILENAME MISMATCH: file holds 'A Doll's House' (Eng.) by Ibsen, not War and Peace. Born Skien; worked Oslo. English translator uncredited. Ibsen's 'A Doll's House' in English; English translator not credited in the file."
+    },
+    "11-multi-language/gutenberg-non-en/es/pg14200_La_Divina_Comedia__Dante_.txt": {
+      "title": "La Divina Comedia Dante",
+      "author": {
+        "name": "Emile Zola",
+        "place": "Paris",
+        "country": "France",
+        "lat": 48.9,
+        "lon": 2.4
+      },
+      "translator": {
+        "name": "Ernest Alfred Vizetelly",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "CONTENT vs FILENAME MISMATCH: file holds 'Abbe Mouret's Transgression' by Zola (Eng.), not the Divina Comedia. Place is translator/editor Vizetelly. Zola original: Paris."
+    },
+    "11-multi-language/gutenberg-non-en/es/pg74987_La_Metamorfosis__Kafka_.txt": {
+      "title": "La Metamorfosis Kafka",
+      "author": {
+        "name": "Ephraim George Squier (as 'Samuel A. Bard')",
+        "place": "Bethlehem, New York",
+        "country": "United States",
+        "lat": 42.6,
+        "lon": -73.8
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "CONTENT vs FILENAME MISMATCH: file holds 'Waikna; or, Adventures on the Mosquito Shore', not Kafka."
+    },
+    "11-multi-language/gutenberg-non-en/fi/pg49010_Runeberg_runoelmat__Finnish_.txt": {
+      "title": "Runeberg runoelmat Finnish",
+      "author": {
+        "name": "Jenny H. Stickney",
+        "place": "Boston",
+        "country": "United States",
+        "lat": 42.4,
+        "lon": -71.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "CONTENT vs FILENAME MISMATCH: file holds 'Aesop's Fables: A Version for Young Readers' by J. H. Stickney, not Runeberg."
+    },
+    "11-multi-language/gutenberg-non-en/fi/pg76749_Sota_satulavy___Finnish_.txt": {
+      "title": "Sota satulavy Finnish",
+      "author": {
+        "name": "John Mason",
+        "place": "Girard, Kansas",
+        "country": "United States",
+        "lat": 37.5,
+        "lon": -94.8
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "CONTENT vs FILENAME MISMATCH: file holds 'Evolution Made Plain' (Haldeman-Julius), not a Finnish War and Peace. Author possibly pseudonymous."
+    },
+    "11-multi-language/gutenberg-non-en/fr/pg15807_Nana.txt": {
+      "title": "Nana",
+      "author": {
+        "name": "Henry White Warren",
+        "place": "Williamsburg, Massachusetts",
+        "country": "United States",
+        "lat": 42.4,
+        "lon": -72.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "CONTENT vs FILENAME MISMATCH: file holds 'Among the Forces' by H. W. Warren, not Zola's Nana. Later bishop in Colorado."
+    },
+    "11-multi-language/gutenberg-non-en/fr/pg17489_Madame_Bovary.txt": {
+      "title": "Madame Bovary",
+      "author": {
+        "name": "Victor Hugo",
+        "place": "Paris",
+        "country": "France",
+        "lat": 48.9,
+        "lon": 2.4
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "CONTENT vs FILENAME MISMATCH: file holds 'Les Miserables' (French) by Hugo, not Madame Bovary."
+    },
+    "11-multi-language/gutenberg-non-en/fr/pg42108_Le_Comte_de_Monte_Cristo.txt": {
+      "title": "Le Comte de Monte Cristo",
+      "author": {
+        "name": "John Camden Hotten",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "CONTENT vs FILENAME MISMATCH: file holds 'The Slang Dictionary' (1913 impression, after Hotten), not Monte Cristo."
+    },
+    "11-multi-language/gutenberg-non-en/fr/pg7700_De_la_d_mocratie_en_Am_rique__Tocqueville_.txt": {
+      "title": "De la d mocratie en Am rique Tocqueville",
+      "author": {
+        "name": "Aristophanes",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "CONTENT vs FILENAME MISMATCH: file holds 'Lysistrata' (Eng.) by Aristophanes, not Tocqueville. English translator uncredited. Aristophanes' 'Lysistrata' in English ('Translated from the Greek'); translator not credited in the file."
+    },
+    "11-multi-language/gutenberg-non-en/it/pg174_Il_ritratto_di_Dorian_Gray.txt": {
+      "title": "Il ritratto di Dorian Gray",
+      "author": {
+        "name": "Oscar Wilde",
+        "place": "Dublin",
+        "country": "Ireland",
+        "lat": 53.3,
+        "lon": -6.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "CONTENT vs FILENAME MISMATCH in language: file holds the English 'Picture of Dorian Gray', not an Italian translation."
+    },
+    "11-multi-language/gutenberg-non-en/it/pg32773_Il_Principe__Machiavelli_.txt": {
+      "title": "Il Principe Machiavelli",
+      "author": {
+        "name": "J. Ewing Ritchie",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "CONTENT vs FILENAME MISMATCH: file holds 'About London' by J. Ewing Ritchie, not Il Principe."
+    },
+    "11-multi-language/gutenberg-non-en/ja/aozora789_Wagahaiwa_Nekodearu__Natsume_Soseki_.txt": {
+      "title": "Wagahaiwa Nekodearu Natsume Soseki",
+      "author": {
+        "name": "Natsume Soseki",
+        "place": "Tokyo",
+        "country": "Japan",
+        "lat": 35.7,
+        "lon": 139.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born and worked Tokyo."
+    },
+    "11-multi-language/gutenberg-non-en/la/pg5200_Metamorphoses__Ovid__Latin_.txt": {
+      "title": "Metamorphoses Ovid Latin",
+      "author": {
+        "name": "Franz Kafka",
+        "place": "Prague",
+        "country": "Czechia",
+        "lat": 50.1,
+        "lon": 14.4
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "CONTENT vs FILENAME MISMATCH: file holds Kafka's 'The Metamorphosis' (Eng.), not Ovid. Kafka wrote in German, lived Prague; English translator uncredited. Kafka's 'The Metamorphosis' in English; English translator not credited in the file."
+    },
+    "11-multi-language/gutenberg-non-en/la/pg8800_De_Rerum_Natura__Lucretius_.txt": {
+      "title": "De Rerum Natura Lucretius",
+      "author": {
+        "name": "Dante Alighieri",
+        "place": "Florence",
+        "country": "Italy",
+        "lat": 43.8,
+        "lon": 11.3
+      },
+      "translator": {
+        "name": "Henry Francis Cary (attributed)",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "CONTENT vs FILENAME MISMATCH: file holds Dante's 'Divine Comedy' in the Cary English translation, not Lucretius. Translator attribution disclosed, not credited in file."
+    },
+    "11-multi-language/gutenberg-non-en/nl/pg1232_Othello__Dutch_.txt": {
+      "title": "Othello Dutch",
+      "author": {
+        "name": "Niccolo Machiavelli",
+        "place": "Florence",
+        "country": "Italy",
+        "lat": 43.8,
+        "lon": 11.3
+      },
+      "translator": {
+        "name": "W. K. Marriott",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "CONTENT vs FILENAME MISMATCH: file holds 'The Prince' in English (Marriott trans.), not a Dutch Othello. Place is translator Marriott."
+    },
+    "11-multi-language/gutenberg-non-en/sv/pg43668_F_ders_brott__Swedish_.txt": {
+      "title": "F ders brott Swedish",
+      "author": {
+        "name": "Robert Greene",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "CONTENT vs FILENAME MISMATCH: file holds 'The Scottish History of James the Fourth' by Robert Greene (Malone Society, Eng.), not a Swedish work. Born Norwich."
+    },
+    "11-multi-language/italian-originals/pg1000_La-Divina-Commedia-di-Dante-Italian.txt": {
+      "title": "La Divina Commedia di Dante Italian",
+      "author": {
+        "name": "Dante Alighieri",
+        "place": "Florence",
+        "country": "Italy",
+        "lat": 43.8,
+        "lon": 11.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Florence, exiled (died Ravenna)."
+    },
+    "11-multi-language/japanese-originals/basho-oku-no-hosomichi.txt": {
+      "title": "basho oku no hosomichi",
+      "author": {
+        "name": "Matsuo Basho",
+        "place": "Iga (Ueno), Mie",
+        "country": "Japan",
+        "lat": 34.8,
+        "lon": 136.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Iga province, later Edo."
+    },
+    "11-multi-language/japanese-originals/kamono-chomei-hojoki.txt": {
+      "title": "kamono chomei hojoki",
+      "author": {
+        "name": "Kamo no Chomei",
+        "place": "Kyoto",
+        "country": "Japan",
+        "lat": 35.0,
+        "lon": 135.8
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Kyoto."
+    },
+    "11-multi-language/japanese-originals/kenko-tsurezuregusa.txt": {
+      "title": "kenko tsurezuregusa",
+      "author": {
+        "name": "Yoshida Kenko",
+        "place": "Kyoto",
+        "country": "Japan",
+        "lat": 35.0,
+        "lon": 135.8
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Kyoto."
+    },
+    "11-multi-language/japanese-originals/murasaki-tale-of-genji.txt": {
+      "title": "murasaki tale of genji",
+      "author": {
+        "name": "Murasaki Shikibu",
+        "place": "Kyoto",
+        "country": "Japan",
+        "lat": 35.0,
+        "lon": 135.8
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Heian court, Kyoto."
+    },
+    "11-multi-language/japanese-originals/seishonagon-pillow-book.txt": {
+      "title": "seishonagon pillow book",
+      "author": {
+        "name": "Sei Shonagon",
+        "place": "Kyoto",
+        "country": "Japan",
+        "lat": 35.0,
+        "lon": 135.8
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Heian court, Kyoto."
+    },
+    "11-multi-language/latin-originals/anselm-proslogion.txt": {
+      "title": "anselm proslogion",
+      "author": {
+        "name": "Anselm of Canterbury",
+        "place": "Canterbury",
+        "country": "England",
+        "lat": 51.3,
+        "lon": 1.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; archbishop of Canterbury (born Aosta, Italy)."
+    },
+    "11-multi-language/latin-originals/aquinas-summa-prima.txt": {
+      "title": "aquinas summa prima",
+      "author": {
+        "name": "Thomas Aquinas",
+        "place": "Naples",
+        "country": "Italy",
+        "lat": 40.9,
+        "lon": 14.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; main teaching/writing Naples-Paris (born Roccasecca)."
+    },
+    "11-multi-language/latin-originals/augustine-confessions.txt": {
+      "title": "augustine confessions",
+      "author": {
+        "name": "Augustine of Hippo",
+        "place": "Hippo Regius (Annaba)",
+        "country": "Algeria",
+        "lat": 36.9,
+        "lon": 7.8
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; bishop of Hippo (born Thagaste)."
+    },
+    "11-multi-language/latin-originals/bacon-novum-organum.txt": {
+      "title": "bacon novum organum",
+      "author": {
+        "name": "Francis Bacon",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author."
+    },
+    "11-multi-language/latin-originals/boethius-consolation.txt": {
+      "title": "boethius consolation",
+      "author": {
+        "name": "Boethius",
+        "place": "Rome",
+        "country": "Italy",
+        "lat": 41.9,
+        "lon": 12.5
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Rome, wrote in captivity at Ravenna."
+    },
+    "11-multi-language/latin-originals/copernicus-revolutionibus.txt": {
+      "title": "copernicus revolutionibus",
+      "author": {
+        "name": "Nicolaus Copernicus",
+        "place": "Torun",
+        "country": "Poland",
+        "lat": 53.0,
+        "lon": 18.6
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Torun; worked Frombork."
+    },
+    "11-multi-language/latin-originals/livy-history.txt": {
+      "title": "livy history",
+      "author": {
+        "name": "Livy (Titus Livius)",
+        "place": "Padua (Patavium)",
+        "country": "Italy",
+        "lat": 45.4,
+        "lon": 11.9
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Patavium."
+    },
+    "11-multi-language/latin-originals/martial-epigrammata.txt": {
+      "title": "martial epigrammata",
+      "author": {
+        "name": "Martial (M. Valerius Martialis)",
+        "place": "Bilbilis (Calatayud)",
+        "country": "Spain",
+        "lat": 41.4,
+        "lon": -1.6
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Bilbilis, Hispania; worked Rome."
+    },
+    "11-multi-language/latin-originals/martial-liber-spectaculorum.txt": {
+      "title": "martial liber spectaculorum",
+      "author": {
+        "name": "Martial (M. Valerius Martialis)",
+        "place": "Bilbilis (Calatayud)",
+        "country": "Spain",
+        "lat": 41.4,
+        "lon": -1.6
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Bilbilis; worked Rome."
+    },
+    "11-multi-language/latin-originals/newton-principia.txt": {
+      "title": "newton principia",
+      "author": {
+        "name": "Isaac Newton",
+        "place": "Cambridge",
+        "country": "England",
+        "lat": 52.2,
+        "lon": 0.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Cambridge/London (born Woolsthorpe)."
+    },
+    "11-multi-language/latin-originals/spinoza-ethica.txt": {
+      "title": "spinoza ethica",
+      "author": {
+        "name": "Baruch Spinoza",
+        "place": "Amsterdam",
+        "country": "Netherlands",
+        "lat": 52.4,
+        "lon": 4.9
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Amsterdam, later The Hague."
+    },
+    "11-multi-language/latin-originals/summa-theologiae-prima-pars.txt": {
+      "title": "summa theologiae prima pars",
+      "author": {
+        "name": "Thomas Aquinas",
+        "place": "Naples",
+        "country": "Italy",
+        "lat": 40.9,
+        "lon": 14.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Naples-Paris (born Roccasecca)."
+    },
+    "11-multi-language/latin-originals/summa-theologiae-prima-secundae.txt": {
+      "title": "summa theologiae prima secundae",
+      "author": {
+        "name": "Thomas Aquinas",
+        "place": "Naples",
+        "country": "Italy",
+        "lat": 40.9,
+        "lon": 14.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Naples-Paris (born Roccasecca)."
+    },
+    "11-multi-language/latin-originals/summa-theologiae-secunda-secundae.txt": {
+      "title": "summa theologiae secunda secundae",
+      "author": {
+        "name": "Thomas Aquinas",
+        "place": "Naples",
+        "country": "Italy",
+        "lat": 40.9,
+        "lon": 14.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Naples-Paris (born Roccasecca)."
+    },
+    "11-multi-language/latin-originals/summa-theologiae-tertia-pars.txt": {
+      "title": "summa theologiae tertia pars",
+      "author": {
+        "name": "Thomas Aquinas",
+        "place": "Naples",
+        "country": "Italy",
+        "lat": 40.9,
+        "lon": 14.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Naples-Paris (born Roccasecca)."
+    },
+    "11-multi-language/latin-originals/tacitus-annals.txt": {
+      "title": "tacitus annals",
+      "author": {
+        "name": "Tacitus",
+        "place": "Rome",
+        "country": "Italy",
+        "lat": 41.9,
+        "lon": 12.5
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Roman senator/historian; birthplace contested (Narbonese Gaul / Interamna)."
+    },
+    "11-multi-language/latin-originals/tacitus-histories.txt": {
+      "title": "tacitus histories",
+      "author": {
+        "name": "Tacitus",
+        "place": "Rome",
+        "country": "Italy",
+        "lat": 41.9,
+        "lon": 12.5
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Rome; birthplace contested."
+    },
+    "11-multi-language/old-norse-originals/eddukvaedi.txt": {
+      "title": "eddukvaedi",
+      "author": {
+        "name": "Anonymous (Poetic Edda)",
+        "place": "Iceland (conventional)",
+        "country": "Iceland",
+        "lat": 64.9,
+        "lon": -19.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Anonymous collection; conventional origin Iceland."
+    },
+    "11-multi-language/old-norse-originals/snorra-edda.txt": {
+      "title": "snorra edda",
+      "author": {
+        "name": "Snorri Sturluson",
+        "place": "Reykholt",
+        "country": "Iceland",
+        "lat": 64.6,
+        "lon": -21.4
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; lived Reykholt (born Hvammur)."
+    },
+    "11-multi-language/parallel-classics/alice-in-wonderland/de/pg19778_Alice-s-Abenteuer-im-Wunderland.txt": {
+      "title": "Alice s Abenteuer im Wunderland",
+      "author": {
+        "name": "Lewis Carroll",
+        "place": "Oxford",
+        "country": "England",
+        "lat": 51.8,
+        "lon": -1.3
+      },
+      "translator": {
+        "name": "Antonie Zimmermann",
+        "place": "Germany (city uncertain)",
+        "country": "Germany",
+        "lat": 52.5,
+        "lon": 13.4
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; place is German translator Antonie Zimmermann (city not documented). Carroll original: Oxford."
+    },
+    "11-multi-language/parallel-classics/alice-in-wonderland/en/pg11_Alice-s-Adventures-in-Wonderland.txt": {
+      "title": "Alice s Adventures in Wonderland",
+      "author": {
+        "name": "Lewis Carroll",
+        "place": "Oxford",
+        "country": "England",
+        "lat": 51.8,
+        "lon": -1.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; original English."
+    },
+    "11-multi-language/parallel-classics/alice-in-wonderland/fr/pg55456_Aventures-d-Alice-au-pays-des-merveilles.txt": {
+      "title": "Aventures d Alice au pays des merveilles",
+      "author": {
+        "name": "Lewis Carroll",
+        "place": "Oxford",
+        "country": "England",
+        "lat": 51.8,
+        "lon": -1.3
+      },
+      "translator": {
+        "name": "Henri Bue",
+        "place": "Paris",
+        "country": "France",
+        "lat": 48.9,
+        "lon": 2.4
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator Henri Bue (French). Carroll original: Oxford."
+    },
+    "11-multi-language/parallel-classics/alice-in-wonderland/it/pg28371_Le-avventure-d-Alice-nel-paese-delle-meraviglie.txt": {
+      "title": "Le avventure d Alice nel paese delle meraviglie",
+      "author": {
+        "name": "Lewis Carroll",
+        "place": "Oxford",
+        "country": "England",
+        "lat": 51.8,
+        "lon": -1.3
+      },
+      "translator": {
+        "name": "T. Pietrocola-Rossetti",
+        "place": "Naples",
+        "country": "Italy",
+        "lat": 40.9,
+        "lon": 14.3
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator T. Pietrocola-Rossetti (Italian, born Naples; city attribution rough)."
+    },
+    "11-multi-language/parallel-classics/faust-part-1/de/pg2229_Faust-Der-Tragodie-erster-Teil.txt": {
+      "title": "Faust Der Tragodie erster Teil",
+      "author": {
+        "name": "Johann Wolfgang von Goethe",
+        "place": "Weimar",
+        "country": "Germany",
+        "lat": 51.0,
+        "lon": 11.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; original German (born Frankfurt am Main)."
+    },
+    "11-multi-language/parallel-classics/faust-part-1/en/pg3023_Faust-Part-1.txt": {
+      "title": "Faust Part 1",
+      "author": {
+        "name": "Johann Wolfgang von Goethe",
+        "place": "Weimar",
+        "country": "Germany",
+        "lat": 51.0,
+        "lon": 11.3
+      },
+      "translator": {
+        "name": "Bayard Taylor (attributed)",
+        "place": "Kennett Square, Pennsylvania",
+        "country": "United States",
+        "lat": 39.8,
+        "lon": -75.7
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; PG edition credits no translator; commonly attributed to Bayard Taylor (American). Disclosed, not certain."
+    },
+    "11-multi-language/parallel-classics/faust-part-1/es/pg68566_Fausto-Primera-parte.txt": {
+      "title": "Fausto Primera parte",
+      "author": {
+        "name": "Johann Wolfgang von Goethe",
+        "place": "Weimar",
+        "country": "Germany",
+        "lat": 51.0,
+        "lon": 11.3
+      },
+      "translator": {
+        "name": "Teodoro Llorente",
+        "place": "Valencia",
+        "country": "Spain",
+        "lat": 39.5,
+        "lon": -0.4
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator Teodoro Llorente (Spanish, born Valencia)."
+    },
+    "11-multi-language/parallel-classics/faust-part-1/fr/pg54202_Faust-premiere-partie.txt": {
+      "title": "Faust premiere partie",
+      "author": {
+        "name": "Johann Wolfgang von Goethe",
+        "place": "Weimar",
+        "country": "Germany",
+        "lat": 51.0,
+        "lon": 11.3
+      },
+      "translator": {
+        "name": "Albert Stapfer",
+        "place": "Paris",
+        "country": "France",
+        "lat": 48.9,
+        "lon": 2.4
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator Albert Stapfer (French/Swiss)."
+    },
+    "11-multi-language/parallel-classics/faust-part-1/nl/pg67276_Faust-Dramatisch-dichtstuk-van-Goethe-deel-1.txt": {
+      "title": "Faust Dramatisch dichtstuk van Goethe deel 1",
+      "author": {
+        "name": "Johann Wolfgang von Goethe",
+        "place": "Weimar",
+        "country": "Germany",
+        "lat": 51.0,
+        "lon": 11.3
+      },
+      "translator": {
+        "name": "H. Frijlink",
+        "place": "Amsterdam",
+        "country": "Netherlands",
+        "lat": 52.4,
+        "lon": 4.9
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator/publisher H. Frijlink (Dutch)."
+    },
+    "11-multi-language/parallel-classics/grimms-fairy-tales/de/pg77905_Deutsche-Marchen-gesammelt-durch-die-Bruder-Grimm.txt": {
+      "title": "Deutsche Marchen gesammelt durch die Bruder Grimm",
+      "author": {
+        "name": "Jacob and Wilhelm Grimm",
+        "place": "Kassel",
+        "country": "Germany",
+        "lat": 51.3,
+        "lon": 9.5
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Authors; main city of work Kassel (born Hanau)."
+    },
+    "11-multi-language/parallel-classics/grimms-fairy-tales/en/pg2591_Grimms-Fairy-Tales.txt": {
+      "title": "Grimms Fairy Tales",
+      "author": {
+        "name": "Jacob and Wilhelm Grimm",
+        "place": "Kassel",
+        "country": "Germany",
+        "lat": 51.3,
+        "lon": 9.5
+      },
+      "translator": {
+        "name": "Edgar Taylor and Marian Edwardes",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translators Edgar Taylor and Marian Edwardes (English)."
+    },
+    "11-multi-language/parallel-classics/grimms-fairy-tales/fi/pg45046_Koti-satuja-Lapsille-ja-Nuorisolle.txt": {
+      "title": "Koti satuja Lapsille ja Nuorisolle",
+      "author": {
+        "name": "Jacob and Wilhelm Grimm",
+        "place": "Kassel",
+        "country": "Germany",
+        "lat": 51.3,
+        "lon": 9.5
+      },
+      "translator": {
+        "name": "J. A. Hahnsson",
+        "place": "Helsinki",
+        "country": "Finland",
+        "lat": 60.2,
+        "lon": 24.9
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator J. A. Hahnsson (Finnish)."
+    },
+    "11-multi-language/parallel-classics/grimms-fairy-tales/fr/pg12250_Contes-choisis-de-la-famille.txt": {
+      "title": "Contes choisis de la famille",
+      "author": {
+        "name": "Jacob and Wilhelm Grimm",
+        "place": "Kassel",
+        "country": "Germany",
+        "lat": 51.3,
+        "lon": 9.5
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation into French; translator/anonymity not credited. Place is conventional French publication. French edn. of selected Grimm tales; translator not credited in the file."
+    },
+    "11-multi-language/parallel-classics/grimms-fairy-tales/hu/pg40088_Grimm-testverek-osszegyujtott-mesei.txt": {
+      "title": "Grimm testverek osszegyujtott mesei",
+      "author": {
+        "name": "Jacob and Wilhelm Grimm",
+        "place": "Kassel",
+        "country": "Germany",
+        "lat": 51.3,
+        "lon": 9.5
+      },
+      "translator": {
+        "name": "Benedek Elek",
+        "place": "Budapest",
+        "country": "Hungary",
+        "lat": 47.5,
+        "lon": 19.1
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator Benedek Elek (Hungarian, born Kisbacon, Transylvania)."
+    },
+    "11-multi-language/parallel-classics/gullivers-travels/en/pg829_Gulliver-s-Travels-into-Several-Remote-Nations-of-.txt": {
+      "title": "Gulliver s Travels into Several Remote Nations of",
+      "author": {
+        "name": "Jonathan Swift",
+        "place": "Dublin",
+        "country": "Ireland",
+        "lat": 53.3,
+        "lon": -6.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; original English."
+    },
+    "11-multi-language/parallel-classics/gullivers-travels/fi/pg44892_Gulliverin-matkat-kaukaisilla-mailla.txt": {
+      "title": "Gulliverin matkat kaukaisilla mailla",
+      "author": {
+        "name": "Jonathan Swift",
+        "place": "Dublin",
+        "country": "Ireland",
+        "lat": 53.3,
+        "lon": -6.3
+      },
+      "translator": {
+        "name": "Samuli S. (pseud.)",
+        "place": "Helsinki",
+        "country": "Finland",
+        "lat": 60.2,
+        "lon": 24.9
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator 'Samuli S.' (Finnish pseudonym). Swift original: Dublin."
+    },
+    "11-multi-language/parallel-classics/gullivers-travels/fr/pg17640_Les-Voyages-de-Gulliver.txt": {
+      "title": "Les Voyages de Gulliver",
+      "author": {
+        "name": "Jonathan Swift",
+        "place": "Dublin",
+        "country": "Ireland",
+        "lat": 53.3,
+        "lon": -6.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation into French; translator not credited in this edition. Place is conventional French publication. French edn. of Gulliver; translator not credited in the file."
+    },
+    "11-multi-language/parallel-classics/gullivers-travels/hu/pg76042_Gulliver-utazasai.txt": {
+      "title": "Gulliver utazasai",
+      "author": {
+        "name": "Jonathan Swift",
+        "place": "Dublin",
+        "country": "Ireland",
+        "lat": 53.3,
+        "lon": -6.3
+      },
+      "translator": {
+        "name": "Karinthy Frigyes",
+        "place": "Budapest",
+        "country": "Hungary",
+        "lat": 47.5,
+        "lon": 19.1
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator Karinthy Frigyes (Hungarian, born Budapest)."
+    },
+    "11-multi-language/parallel-classics/gullivers-travels/it/pg61179_Viaggi-di-Gulliver-nelle-lontane-regioni.txt": {
+      "title": "Viaggi di Gulliver nelle lontane regioni",
+      "author": {
+        "name": "Jonathan Swift",
+        "place": "Dublin",
+        "country": "Ireland",
+        "lat": 53.3,
+        "lon": -6.3
+      },
+      "translator": {
+        "name": "Gaetano Barbieri",
+        "place": "Milan",
+        "country": "Italy",
+        "lat": 45.5,
+        "lon": 9.2
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator Gaetano Barbieri (Italian); published Milan."
+    },
+    "11-multi-language/parallel-classics/gullivers-travels/nl/pg37442_Gulliver-s-Reizen-naar-Lilliput-en-Brobdingnag.txt": {
+      "title": "Gulliver s Reizen naar Lilliput en Brobdingnag",
+      "author": {
+        "name": "Jonathan Swift",
+        "place": "Dublin",
+        "country": "Ireland",
+        "lat": 53.3,
+        "lon": -6.3
+      },
+      "translator": {
+        "name": "Albert Verwey",
+        "place": "Amsterdam",
+        "country": "Netherlands",
+        "lat": 52.4,
+        "lon": 4.9
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator Albert Verwey (Dutch, born Amsterdam)."
+    },
+    "11-multi-language/parallel-classics/perraults-fairy-tales/de/pg42900_Gansemutterchens-Marchen.txt": {
+      "title": "Gansemutterchens Marchen",
+      "author": {
+        "name": "Charles Perrault",
+        "place": "Paris",
+        "country": "France",
+        "lat": 48.9,
+        "lon": 2.4
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation into German based on the 1697 edition; translator not credited. Place conventional German publication. German edn. of Perrault tales; translator not credited in the file."
+    },
+    "11-multi-language/parallel-classics/perraults-fairy-tales/en/pg17208_The-Tales-of-Mother-Goose.txt": {
+      "title": "The Tales of Mother Goose",
+      "author": {
+        "name": "Charles Perrault",
+        "place": "Paris",
+        "country": "France",
+        "lat": 48.9,
+        "lon": 2.4
+      },
+      "translator": {
+        "name": "Charles Welsh",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator Charles Welsh (Anglo-American)."
+    },
+    "11-multi-language/parallel-classics/perraults-fairy-tales/fi/pg48713_Hanhiemon-satuja.txt": {
+      "title": "Hanhiemon satuja",
+      "author": {
+        "name": "Charles Perrault",
+        "place": "Paris",
+        "country": "France",
+        "lat": 48.9,
+        "lon": 2.4
+      },
+      "translator": {
+        "name": "Tyyni Haapanen-Tallgren",
+        "place": "Helsinki",
+        "country": "Finland",
+        "lat": 60.2,
+        "lon": 24.9
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator Tyyni Haapanen-Tallgren (Finnish)."
+    },
+    "11-multi-language/parallel-classics/pinocchio/en/pg500_The-Adventures-of-Pinocchio.txt": {
+      "title": "The Adventures of Pinocchio",
+      "author": {
+        "name": "Carlo Collodi (Carlo Lorenzini)",
+        "place": "Florence",
+        "country": "Italy",
+        "lat": 43.8,
+        "lon": 11.3
+      },
+      "translator": {
+        "name": "Carol Della Chiesa",
+        "place": "New York City",
+        "country": "United States",
+        "lat": 40.7,
+        "lon": -74.0
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator Carol Della Chiesa (American; city attribution rough)."
+    },
+    "11-multi-language/parallel-classics/pinocchio/fi/pg53077_Pinocchion-seikkailut-Kertomus-marioneteista.txt": {
+      "title": "Pinocchion seikkailut Kertomus marioneteista",
+      "author": {
+        "name": "Carlo Collodi (Carlo Lorenzini)",
+        "place": "Florence",
+        "country": "Italy",
+        "lat": 43.8,
+        "lon": 11.3
+      },
+      "translator": {
+        "name": "Maija Halonen",
+        "place": "Helsinki",
+        "country": "Finland",
+        "lat": 60.2,
+        "lon": 24.9
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator Maija Halonen (Finnish)."
+    },
+    "11-multi-language/parallel-classics/pinocchio/it/pg52484_Le-avventure-di-Pinocchio-Storia-di-un-burattino.txt": {
+      "title": "Le avventure di Pinocchio Storia di un burattino",
+      "author": {
+        "name": "Carlo Collodi (Carlo Lorenzini)",
+        "place": "Florence",
+        "country": "Italy",
+        "lat": 43.8,
+        "lon": 11.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; original Italian (born Florence)."
+    },
+    "11-multi-language/parallel-classics/robinson-crusoe/de/pg60344_Robinson-Crusoe-s-Reisen-wunderbare-Abenteuer-und-.txt": {
+      "title": "Robinson Crusoe s Reisen wunderbare Abenteuer und",
+      "author": {
+        "name": "Daniel Defoe",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "German adaptation ('Fuers Deutsche bearbeitet'); adapter not credited. Publisher Otto Spamer, Leipzig. German adaptation ('fuer s Deutsche bearbeitet'); adapter not credited in the file."
+    },
+    "11-multi-language/parallel-classics/robinson-crusoe/en/pg521_The-Life-and-Adventures-of-Robinson-Crusoe.txt": {
+      "title": "The Life and Adventures of Robinson Crusoe",
+      "author": {
+        "name": "Daniel Defoe",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; original English."
+    },
+    "11-multi-language/parallel-classics/robinson-crusoe/fi/pg48387_Robinson-Crusoe.txt": {
+      "title": "Robinson Crusoe",
+      "author": {
+        "name": "Daniel Defoe",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "translator": {
+        "name": "Samuli S. (pseud.)",
+        "place": "Helsinki",
+        "country": "Finland",
+        "lat": 60.2,
+        "lon": 24.9
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator 'Samuli S.' (Finnish pseudonym)."
+    },
+    "11-multi-language/parallel-classics/robinson-crusoe/fr/pg38705_Robinson-Crusoe-I-II.txt": {
+      "title": "Robinson Crusoe I II",
+      "author": {
+        "name": "Daniel Defoe",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "translator": {
+        "name": "Petrus Borel",
+        "place": "Paris",
+        "country": "France",
+        "lat": 48.9,
+        "lon": 2.4
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator Petrus Borel (French, born Lyon)."
+    },
+    "11-multi-language/parallel-classics/robinson-crusoe/nl/pg41427_Het-leven-en-de-lotgevallen-van-Robinson-Crusoe-t-.txt": {
+      "title": "Het leven en de lotgevallen van Robinson Crusoe t",
+      "author": {
+        "name": "Daniel Defoe",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation into Dutch; translator not credited. Place conventional Dutch publication. Dutch edn. ('op nieuw uit het Engelsch vertaald'); translator not credited in the file."
+    },
+    "11-multi-language/persian-originals/masnavi-maanavi-daftar-1.txt": {
+      "title": "masnavi maanavi daftar 1",
+      "author": {
+        "name": "Jalal al-Din Rumi",
+        "place": "Konya",
+        "country": "Turkey",
+        "lat": 37.9,
+        "lon": 32.5
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; main city of work Konya (born Balkh, now Afghanistan)."
+    },
+    "11-multi-language/persian-originals/masnavi-maanavi-daftar-2.txt": {
+      "title": "masnavi maanavi daftar 2",
+      "author": {
+        "name": "Jalal al-Din Rumi",
+        "place": "Konya",
+        "country": "Turkey",
+        "lat": 37.9,
+        "lon": 32.5
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; main city of work Konya (born Balkh, now Afghanistan)."
+    },
+    "11-multi-language/persian-originals/masnavi-maanavi-daftar-3.txt": {
+      "title": "masnavi maanavi daftar 3",
+      "author": {
+        "name": "Jalal al-Din Rumi",
+        "place": "Konya",
+        "country": "Turkey",
+        "lat": 37.9,
+        "lon": 32.5
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; main city of work Konya (born Balkh, now Afghanistan)."
+    },
+    "11-multi-language/persian-originals/masnavi-maanavi-daftar-4.txt": {
+      "title": "masnavi maanavi daftar 4",
+      "author": {
+        "name": "Jalal al-Din Rumi",
+        "place": "Konya",
+        "country": "Turkey",
+        "lat": 37.9,
+        "lon": 32.5
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; main city of work Konya (born Balkh, now Afghanistan)."
+    },
+    "11-multi-language/persian-originals/masnavi-maanavi-daftar-5.txt": {
+      "title": "masnavi maanavi daftar 5",
+      "author": {
+        "name": "Jalal al-Din Rumi",
+        "place": "Konya",
+        "country": "Turkey",
+        "lat": 37.9,
+        "lon": 32.5
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; main city of work Konya (born Balkh, now Afghanistan)."
+    },
+    "11-multi-language/persian-originals/masnavi-maanavi-daftar-6.txt": {
+      "title": "masnavi maanavi daftar 6",
+      "author": {
+        "name": "Jalal al-Din Rumi",
+        "place": "Konya",
+        "country": "Turkey",
+        "lat": 37.9,
+        "lon": 32.5
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; main city of work Konya (born Balkh, now Afghanistan)."
+    },
+    "11-multi-language/sanskrit-originals/bharata-natyasastra.txt": {
+      "title": "bharata natyasastra",
+      "author": {
+        "name": "Bharata (legendary)",
+        "place": "India (conventional)",
+        "country": "India",
+        "lat": 23.0,
+        "lon": 79.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Attributed to the legendary sage Bharata; place conventional, contested."
+    },
+    "11-multi-language/sanskrit-originals/brahmagupta-brahmasphutasiddhanta.txt": {
+      "title": "brahmagupta brahmasphutasiddhanta",
+      "author": {
+        "name": "Brahmagupta",
+        "place": "Bhinmal, Rajasthan",
+        "country": "India",
+        "lat": 25.0,
+        "lon": 72.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Bhinmal."
+    },
+    "11-multi-language/sanskrit-originals/jaimini-mimamsa-sutra.txt": {
+      "title": "jaimini mimamsa sutra",
+      "author": {
+        "name": "Jaimini",
+        "place": "India (conventional)",
+        "country": "India",
+        "lat": 23.0,
+        "lon": 79.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Attributed; place conventional/contested."
+    },
+    "11-multi-language/sanskrit-originals/kumarasambhava.txt": {
+      "title": "kumarasambhava",
+      "author": {
+        "name": "Kalidasa",
+        "place": "Ujjain",
+        "country": "India",
+        "lat": 23.2,
+        "lon": 75.8
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; conventional association Ujjain (contested)."
+    },
+    "11-multi-language/sanskrit-originals/lotus-sutra.txt": {
+      "title": "lotus sutra",
+      "author": {
+        "name": "Anonymous (Saddharmapundarika Sutra)",
+        "place": "India (conventional)",
+        "country": "India",
+        "lat": 23.0,
+        "lon": 79.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Anonymous composite scripture; conventional Indian origin."
+    },
+    "11-multi-language/sanskrit-originals/mahabharata-book1.txt": {
+      "title": "mahabharata book1",
+      "author": {
+        "name": "Vyasa (attributed)",
+        "place": "India (conventional)",
+        "country": "India",
+        "lat": 25.0,
+        "lon": 79.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Attributed to Vyasa; anonymous composite epic; place conventional."
+    },
+    "11-multi-language/sanskrit-originals/mahabharata-book2.txt": {
+      "title": "mahabharata book2",
+      "author": {
+        "name": "Vyasa (attributed)",
+        "place": "India (conventional)",
+        "country": "India",
+        "lat": 25.0,
+        "lon": 79.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Attributed to Vyasa; anonymous composite epic; place conventional."
+    },
+    "11-multi-language/sanskrit-originals/mahabharata-book3.txt": {
+      "title": "mahabharata book3",
+      "author": {
+        "name": "Vyasa (attributed)",
+        "place": "India (conventional)",
+        "country": "India",
+        "lat": 25.0,
+        "lon": 79.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Attributed to Vyasa; anonymous composite epic; place conventional."
+    },
+    "11-multi-language/sanskrit-originals/mahabharata-book4.txt": {
+      "title": "mahabharata book4",
+      "author": {
+        "name": "Vyasa (attributed)",
+        "place": "India (conventional)",
+        "country": "India",
+        "lat": 25.0,
+        "lon": 79.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Attributed to Vyasa; anonymous composite epic; place conventional."
+    },
+    "11-multi-language/sanskrit-originals/mahabharata-book5.txt": {
+      "title": "mahabharata book5",
+      "author": {
+        "name": "Vyasa (attributed)",
+        "place": "India (conventional)",
+        "country": "India",
+        "lat": 25.0,
+        "lon": 79.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Attributed to Vyasa; anonymous composite epic; place conventional."
+    },
+    "11-multi-language/sanskrit-originals/mahabharata-book6.txt": {
+      "title": "mahabharata book6",
+      "author": {
+        "name": "Vyasa (attributed)",
+        "place": "India (conventional)",
+        "country": "India",
+        "lat": 25.0,
+        "lon": 79.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Attributed to Vyasa; anonymous composite epic; place conventional."
+    },
+    "11-multi-language/sanskrit-originals/mahabharata-book7.txt": {
+      "title": "mahabharata book7",
+      "author": {
+        "name": "Vyasa (attributed)",
+        "place": "India (conventional)",
+        "country": "India",
+        "lat": 25.0,
+        "lon": 79.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Attributed to Vyasa; anonymous composite epic; place conventional."
+    },
+    "11-multi-language/sanskrit-originals/mahabharata-book8.txt": {
+      "title": "mahabharata book8",
+      "author": {
+        "name": "Vyasa (attributed)",
+        "place": "India (conventional)",
+        "country": "India",
+        "lat": 25.0,
+        "lon": 79.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Attributed to Vyasa; anonymous composite epic; place conventional."
+    },
+    "11-multi-language/sanskrit-originals/mahabharata-book9.txt": {
+      "title": "mahabharata book9",
+      "author": {
+        "name": "Vyasa (attributed)",
+        "place": "India (conventional)",
+        "country": "India",
+        "lat": 25.0,
+        "lon": 79.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Attributed to Vyasa; anonymous composite epic; place conventional."
+    },
+    "11-multi-language/sanskrit-originals/mahabharata-book10.txt": {
+      "title": "mahabharata book10",
+      "author": {
+        "name": "Vyasa (attributed)",
+        "place": "India (conventional)",
+        "country": "India",
+        "lat": 25.0,
+        "lon": 79.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Attributed to Vyasa; anonymous composite epic; place conventional."
+    },
+    "11-multi-language/sanskrit-originals/mahabharata-book11.txt": {
+      "title": "mahabharata book11",
+      "author": {
+        "name": "Vyasa (attributed)",
+        "place": "India (conventional)",
+        "country": "India",
+        "lat": 25.0,
+        "lon": 79.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Attributed to Vyasa; anonymous composite epic; place conventional."
+    },
+    "11-multi-language/sanskrit-originals/mahabharata-book12.txt": {
+      "title": "mahabharata book12",
+      "author": {
+        "name": "Vyasa (attributed)",
+        "place": "India (conventional)",
+        "country": "India",
+        "lat": 25.0,
+        "lon": 79.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Attributed to Vyasa; anonymous composite epic; place conventional."
+    },
+    "11-multi-language/sanskrit-originals/mahabharata-book13.txt": {
+      "title": "mahabharata book13",
+      "author": {
+        "name": "Vyasa (attributed)",
+        "place": "India (conventional)",
+        "country": "India",
+        "lat": 25.0,
+        "lon": 79.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Attributed to Vyasa; anonymous composite epic; place conventional."
+    },
+    "11-multi-language/sanskrit-originals/mahabharata-book14.txt": {
+      "title": "mahabharata book14",
+      "author": {
+        "name": "Vyasa (attributed)",
+        "place": "India (conventional)",
+        "country": "India",
+        "lat": 25.0,
+        "lon": 79.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Attributed to Vyasa; anonymous composite epic; place conventional."
+    },
+    "11-multi-language/sanskrit-originals/mahabharata-book15.txt": {
+      "title": "mahabharata book15",
+      "author": {
+        "name": "Vyasa (attributed)",
+        "place": "India (conventional)",
+        "country": "India",
+        "lat": 25.0,
+        "lon": 79.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Attributed to Vyasa; anonymous composite epic; place conventional."
+    },
+    "11-multi-language/sanskrit-originals/mahabharata-book16.txt": {
+      "title": "mahabharata book16",
+      "author": {
+        "name": "Vyasa (attributed)",
+        "place": "India (conventional)",
+        "country": "India",
+        "lat": 25.0,
+        "lon": 79.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Attributed to Vyasa; anonymous composite epic; place conventional."
+    },
+    "11-multi-language/sanskrit-originals/mahabharata-book17.txt": {
+      "title": "mahabharata book17",
+      "author": {
+        "name": "Vyasa (attributed)",
+        "place": "India (conventional)",
+        "country": "India",
+        "lat": 25.0,
+        "lon": 79.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Attributed to Vyasa; anonymous composite epic; place conventional."
+    },
+    "11-multi-language/sanskrit-originals/mahabharata-book18.txt": {
+      "title": "mahabharata book18",
+      "author": {
+        "name": "Vyasa (attributed)",
+        "place": "India (conventional)",
+        "country": "India",
+        "lat": 25.0,
+        "lon": 79.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Attributed to Vyasa; anonymous composite epic; place conventional."
+    },
+    "11-multi-language/sanskrit-originals/meghaduta.txt": {
+      "title": "meghaduta",
+      "author": {
+        "name": "Kalidasa",
+        "place": "Ujjain",
+        "country": "India",
+        "lat": 23.2,
+        "lon": 75.8
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; conventional Ujjain (contested)."
+    },
+    "11-multi-language/sanskrit-originals/nagarjuna-mulamadhyamakakarika.txt": {
+      "title": "nagarjuna mulamadhyamakakarika",
+      "author": {
+        "name": "Nagarjuna",
+        "place": "Nalanda",
+        "country": "India",
+        "lat": 25.1,
+        "lon": 85.4
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; worked Nalanda (born possibly Andhra, South India)."
+    },
+    "11-multi-language/sanskrit-originals/nyaya-sutras.txt": {
+      "title": "nyaya sutras",
+      "author": {
+        "name": "Gautama (Aksapada)",
+        "place": "India (conventional)",
+        "country": "India",
+        "lat": 23.0,
+        "lon": 79.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Attributed; place conventional/contested."
+    },
+    "11-multi-language/sanskrit-originals/panini-ashtadhyayi.txt": {
+      "title": "panini ashtadhyayi",
+      "author": {
+        "name": "Panini",
+        "place": "Salatura (Charsadda)",
+        "country": "Pakistan",
+        "lat": 34.2,
+        "lon": 71.8
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Salatura near Peshawar (contested, Gandhara)."
+    },
+    "11-multi-language/sanskrit-originals/raghuvamsha.txt": {
+      "title": "raghuvamsha",
+      "author": {
+        "name": "Kalidasa",
+        "place": "Ujjain",
+        "country": "India",
+        "lat": 23.2,
+        "lon": 75.8
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; conventional Ujjain (contested)."
+    },
+    "11-multi-language/sanskrit-originals/ramayana.txt": {
+      "title": "ramayana",
+      "author": {
+        "name": "Valmiki (attributed)",
+        "place": "India (conventional)",
+        "country": "India",
+        "lat": 25.0,
+        "lon": 79.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Attributed; anonymous composite epic; place conventional."
+    },
+    "11-multi-language/sanskrit-originals/rigveda.txt": {
+      "title": "rigveda",
+      "author": {
+        "name": "Anonymous (Rigveda)",
+        "place": "Sapta Sindhu (Punjab)",
+        "country": "India",
+        "lat": 30.0,
+        "lon": 75.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Anonymous composite Vedic hymns; place conventional (Punjab/Indus)."
+    },
+    "11-multi-language/sanskrit-originals/samkhya-karika.txt": {
+      "title": "samkhya karika",
+      "author": {
+        "name": "Ishvarakrishna",
+        "place": "India (conventional)",
+        "country": "India",
+        "lat": 23.0,
+        "lon": 79.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; place conventional/contested."
+    },
+    "11-multi-language/sanskrit-originals/shakuntala.txt": {
+      "title": "shakuntala",
+      "author": {
+        "name": "Kalidasa",
+        "place": "Ujjain",
+        "country": "India",
+        "lat": 23.2,
+        "lon": 75.8
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; conventional Ujjain (contested)."
+    },
+    "11-multi-language/sanskrit-originals/vaisheshika-sutras.txt": {
+      "title": "vaisheshika sutras",
+      "author": {
+        "name": "Kanada",
+        "place": "India (conventional)",
+        "country": "India",
+        "lat": 23.0,
+        "lon": 79.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Attributed; place conventional/contested."
+    },
+    "11-multi-language/sanskrit-originals/yoga-sutras-bhasya.txt": {
+      "title": "yoga sutras bhasya",
+      "author": {
+        "name": "Patanjali (with Vyasa bhasya)",
+        "place": "India (conventional)",
+        "country": "India",
+        "lat": 23.0,
+        "lon": 79.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Attributed; place conventional/contested."
+    },
+    "11-multi-language/sanskrit-originals/yoga-sutras.txt": {
+      "title": "yoga sutras",
+      "author": {
+        "name": "Patanjali",
+        "place": "India (conventional)",
+        "country": "India",
+        "lat": 23.0,
+        "lon": 79.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Attributed; place conventional/contested."
+    },
+    "11-multi-language/translations-en/adams-1849-the-genuine-works-of-hippocrates-volume-2.txt": {
+      "title": "adams 1849 the genuine works of hippocrates volume 2",
+      "author": {
+        "name": "Hippocrates (corpus)",
+        "place": "Kos",
+        "country": "Greece",
+        "lat": 36.9,
+        "lon": 27.3
+      },
+      "translator": {
+        "name": "Francis Adams",
+        "place": "Banff",
+        "country": "Scotland",
+        "lat": 57.7,
+        "lon": -2.5
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator Francis Adams (Scottish, born Aberdeen/Banff)."
+    },
+    "11-multi-language/translations-en/anderson-1880-the-younger-edda.txt": {
+      "title": "anderson 1880 the younger edda",
+      "author": {
+        "name": "Snorri Sturluson",
+        "place": "Reykholt",
+        "country": "Iceland",
+        "lat": 64.6,
+        "lon": -21.4
+      },
+      "translator": {
+        "name": "Rasmus B. Anderson",
+        "place": "Madison, Wisconsin",
+        "country": "United States",
+        "lat": 43.1,
+        "lon": -89.4
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator Rasmus B. Anderson (American, born Albion, Wisconsin)."
+    },
+    "11-multi-language/translations-en/ashworth-1887-ranke-history-of-the-latin-and-teutonic-nations.txt": {
+      "title": "ashworth 1887 ranke history of the latin and teutonic nations",
+      "author": {
+        "name": "Leopold von Ranke",
+        "place": "Berlin",
+        "country": "Germany",
+        "lat": 52.5,
+        "lon": 13.4
+      },
+      "translator": {
+        "name": "Philip A. Ashworth",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator Philip A. Ashworth (English). Ranke original: Berlin."
+    },
+    "11-multi-language/translations-en/bellows-1923-the-poetic-edda.txt": {
+      "title": "bellows 1923 the poetic edda",
+      "author": {
+        "name": "Anonymous (Poetic Edda)",
+        "place": "Iceland (conventional)",
+        "country": "Iceland",
+        "lat": 64.9,
+        "lon": -19.0
+      },
+      "translator": {
+        "name": "Henry Adams Bellows",
+        "place": "New York City",
+        "country": "United States",
+        "lat": 40.7,
+        "lon": -74.0
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator H. A. Bellows (American; city attribution rough/uncertain)."
+    },
+    "11-multi-language/translations-en/jowett-plato-sophist.txt": {
+      "title": "jowett plato sophist",
+      "author": {
+        "name": "Plato",
+        "place": "Athens",
+        "country": "Greece",
+        "lat": 38.0,
+        "lon": 23.7
+      },
+      "translator": {
+        "name": "Benjamin Jowett",
+        "place": "Oxford",
+        "country": "England",
+        "lat": 51.8,
+        "lon": -1.3
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator Jowett (English). Plato original: Athens."
+    },
+    "11-multi-language/translations-en/myers-1874-the-extant-odes-of-pindar.txt": {
+      "title": "myers 1874 the extant odes of pindar",
+      "author": {
+        "name": "Pindar",
+        "place": "Thebes",
+        "country": "Greece",
+        "lat": 38.3,
+        "lon": 23.3
+      },
+      "translator": {
+        "name": "Ernest Myers",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator Ernest Myers (English). Pindar original: Thebes."
+    },
+    "11-multi-language/translations-en/spillan-livy-history-of-rome-books-1-8.txt": {
+      "title": "spillan livy history of rome books 1 8",
+      "author": {
+        "name": "Livy (Titus Livius)",
+        "place": "Padua (Patavium)",
+        "country": "Italy",
+        "lat": 45.4,
+        "lon": 11.9
+      },
+      "translator": {
+        "name": "D. Spillan",
+        "place": "Dublin",
+        "country": "Ireland",
+        "lat": 53.3,
+        "lon": -6.3
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator D. Spillan (Irish). Livy original: Padua/Rome."
+    },
+    "11-multi-language/translations-en/stcherbatsky-1927-the-conception-of-buddhist-nirvana.txt": {
+      "title": "stcherbatsky 1927 the conception of buddhist nirvana",
+      "author": {
+        "name": "Th. Stcherbatsky (Fyodor Shcherbatskoy)",
+        "place": "St. Petersburg",
+        "country": "Russia",
+        "lat": 59.9,
+        "lon": 30.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author-translator; Russian scholar and translator of Nagarjuna; worked St. Petersburg (born Kielce, Poland)."
+    },
+    "11-multi-language/translations-en/stewart-long-1880-plutarchs-lives-volume-1.txt": {
+      "title": "stewart long 1880 plutarchs lives volume 1",
+      "author": {
+        "name": "Plutarch",
+        "place": "Chaeronea",
+        "country": "Greece",
+        "lat": 38.5,
+        "lon": 22.8
+      },
+      "translator": {
+        "name": "Aubrey Stewart and George Long",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translators Stewart and Long (English). Plutarch original: Chaeronea."
+    },
+    "11-multi-language/war-and-peace/aligned/en/pg2600-ch1-3-aligned.txt": {
+      "title": "ch1 3",
+      "author": {
+        "name": "Leo Tolstoy",
+        "place": "Yasnaya Polyana, Tula",
+        "country": "Russia",
+        "lat": 54.1,
+        "lon": 37.5
+      },
+      "translator": {
+        "name": "Louise and Aylmer Maude",
+        "place": "Ipswich",
+        "country": "England",
+        "lat": 52.1,
+        "lon": 1.2
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translators the Maudes (English). Aylmer born Ipswich; Louise Russian-born. Tolstoy original: Yasnaya Polyana."
+    },
+    "11-multi-language/war-and-peace/aligned/fr/guerre-et-paix-ch1-3-aligned.txt": {
+      "title": "guerre et paix ch1 3",
+      "author": {
+        "name": "Leo Tolstoy",
+        "place": "Yasnaya Polyana, Tula",
+        "country": "Russia",
+        "lat": 54.1,
+        "lon": 37.5
+      },
+      "translator": {
+        "name": "J.-W. Bienstock",
+        "place": "Paris",
+        "country": "France",
+        "lat": 48.9,
+        "lon": 2.4
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator J.-W. Bienstock (French, Polish-born). Tolstoy original: Yasnaya Polyana."
+    },
+    "11-multi-language/war-and-peace/aligned/ru/voyna-i-mir-ch1-3-aligned.txt": {
+      "title": "voyna i mir ch1 3",
+      "author": {
+        "name": "Leo Tolstoy",
+        "place": "Yasnaya Polyana, Tula",
+        "country": "Russia",
+        "lat": 54.1,
+        "lon": 37.5
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; original Russian; estate at Yasnaya Polyana."
+    },
+    "11-multi-language/war-and-peace/en/pg2600_War_and_Peace_Tolstoy_Maude.txt": {
+      "title": "War and Peace Tolstoy Maude",
+      "author": {
+        "name": "Leo Tolstoy",
+        "place": "Yasnaya Polyana, Tula",
+        "country": "Russia",
+        "lat": 54.1,
+        "lon": 37.5
+      },
+      "translator": {
+        "name": "Louise and Aylmer Maude",
+        "place": "Ipswich",
+        "country": "England",
+        "lat": 52.1,
+        "lon": 1.2
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; the Maudes (English). Tolstoy original: Yasnaya Polyana."
+    },
+    "11-multi-language/war-and-peace/fr/guerre-et-paix_Tolstoy_Bienstock_wikisource.txt": {
+      "title": "guerre et paix Tolstoy Bienstock wikisource",
+      "author": {
+        "name": "Leo Tolstoy",
+        "place": "Yasnaya Polyana, Tula",
+        "country": "Russia",
+        "lat": 54.1,
+        "lon": 37.5
+      },
+      "translator": {
+        "name": "J.-W. Bienstock",
+        "place": "Paris",
+        "country": "France",
+        "lat": 48.9,
+        "lon": 2.4
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator J.-W. Bienstock (French). Tolstoy original: Yasnaya Polyana."
+    },
+    "11-multi-language/war-and-peace/ru/voyna-i-mir_Tolstoy_wikisource.txt": {
+      "title": "voyna i mir Tolstoy wikisource",
+      "author": {
+        "name": "Leo Tolstoy",
+        "place": "Yasnaya Polyana, Tula",
+        "country": "Russia",
+        "lat": 54.1,
+        "lon": 37.5
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; original Russian."
+    },
+    "15-western-canon/first-folio/henry-iv-part-1-french-guizot.txt": {
+      "title": "henry iv part 1 french guizot",
+      "author": {
+        "name": "William Shakespeare",
+        "place": "Stratford-upon-Avon",
+        "country": "England",
+        "lat": 52.2,
+        "lon": -1.7
+      },
+      "translator": {
+        "name": "Francois Guizot",
+        "place": "Paris",
+        "country": "France",
+        "lat": 48.9,
+        "lon": 2.4
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator Francois Guizot (French). Shakespeare original: Stratford/London."
+    },
+    "15-western-canon/first-folio/henry-iv-part-1-german-wieland.txt": {
+      "title": "henry iv part 1 german wieland",
+      "author": {
+        "name": "William Shakespeare",
+        "place": "Stratford-upon-Avon",
+        "country": "England",
+        "lat": 52.2,
+        "lon": -1.7
+      },
+      "translator": {
+        "name": "Christoph Martin Wieland",
+        "place": "Weimar",
+        "country": "Germany",
+        "lat": 51.0,
+        "lon": 11.3
+      },
+      "giver": "standard bibliographic record (rough)",
+      "note": "Translation; translator C. M. Wieland (German, worked Weimar)."
+    },
+    "15-western-canon/first-folio/henry-iv-part-1-modern.txt": {
+      "title": "henry iv part 1 modern",
+      "author": {
+        "name": "William Shakespeare",
+        "place": "Stratford-upon-Avon",
+        "country": "England",
+        "lat": 52.2,
+        "lon": -1.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Stratford, worked London (modernized spelling)."
+    },
+    "15-western-canon/first-folio/henry-iv-part-1.txt": {
+      "title": "henry iv part 1",
+      "author": {
+        "name": "William Shakespeare",
+        "place": "Stratford-upon-Avon",
+        "country": "England",
+        "lat": 52.2,
+        "lon": -1.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; 1623 First Folio original spelling."
+    },
+    "15-western-canon/marlowe/doctor-faustus-1604-quarto.txt": {
+      "title": "doctor faustus 1604 quarto",
+      "author": {
+        "name": "Christopher Marlowe",
+        "place": "Canterbury",
+        "country": "England",
+        "lat": 51.3,
+        "lon": 1.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Canterbury, worked London."
+    },
+    "20-first-person-voices/douglass-my-bondage.txt": {
+      "title": "douglass my bondage",
+      "author": {
+        "name": "Frederick Douglass",
+        "place": "Talbot County, Maryland",
+        "country": "United States",
+        "lat": 38.8,
+        "lon": -76.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born enslaved in Talbot County, Maryland."
+    },
+    "20-first-person-voices/douglass-narrative.txt": {
+      "title": "douglass narrative",
+      "author": {
+        "name": "Frederick Douglass",
+        "place": "Talbot County, Maryland",
+        "country": "United States",
+        "lat": 38.8,
+        "lon": -76.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Talbot County, Maryland."
+    },
+    "20-first-person-voices/eastman-indian-boyhood.txt": {
+      "title": "eastman indian boyhood",
+      "author": {
+        "name": "Charles Eastman (Ohiyesa)",
+        "place": "Redwood Falls, Minnesota",
+        "country": "United States",
+        "lat": 44.5,
+        "lon": -95.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Santee Sioux, born near Redwood Falls, Minnesota."
+    },
+    "20-first-person-voices/equiano-narrative.txt": {
+      "title": "equiano narrative",
+      "author": {
+        "name": "Olaudah Equiano",
+        "place": "Essaka, Igboland",
+        "country": "Nigeria",
+        "lat": 6.3,
+        "lon": 7.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; claimed birthplace Essaka (Igboland); contested (some scholars argue South Carolina)."
+    },
+    "20-first-person-voices/hirschfeld-transvestites.txt": {
+      "title": "hirschfeld transvestites",
+      "author": {
+        "name": "Magnus Hirschfeld",
+        "place": "Berlin",
+        "country": "Germany",
+        "lat": 52.5,
+        "lon": 13.4
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; worked Berlin (born Kolberg, now Kolobrzeg, Poland)."
+    },
+    "20-first-person-voices/hurston-how-it-feels-to-be-colored-me.txt": {
+      "title": "hurston how it feels to be colored me",
+      "author": {
+        "name": "Zora Neale Hurston",
+        "place": "Eatonville, Florida",
+        "country": "United States",
+        "lat": 28.6,
+        "lon": -81.4
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; raised Eatonville (born Notasulga, Alabama)."
+    },
+    "20-first-person-voices/jacobs-incidents.txt": {
+      "title": "jacobs incidents",
+      "author": {
+        "name": "Harriet Jacobs",
+        "place": "Edenton, North Carolina",
+        "country": "United States",
+        "lat": 36.1,
+        "lon": -76.6
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born enslaved in Edenton, North Carolina."
+    },
+    "20-first-person-voices/slave-narratives-wpa/wpa-vol-ii-arkansas-narratives-part-1-11255.txt": {
+      "title": "vol ii arkansas narratives part 1 11255",
+      "author": {
+        "name": "Federal Writers' Project (U.S. WPA)",
+        "place": "Little Rock, Arkansas",
+        "country": "United States",
+        "lat": 34.8,
+        "lon": -92.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Compilation by the Federal Writers' Project; place is the state of the interviews recorded in this file."
+    },
+    "20-first-person-voices/slave-narratives-wpa/wpa-vol-ii-arkansas-narratives-part-2-11422.txt": {
+      "title": "vol ii arkansas narratives part 2 11422",
+      "author": {
+        "name": "Federal Writers' Project (U.S. WPA)",
+        "place": "Little Rock, Arkansas",
+        "country": "United States",
+        "lat": 34.8,
+        "lon": -92.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Compilation by the Federal Writers' Project; place is the state of the interviews recorded in this file."
+    },
+    "20-first-person-voices/slave-narratives-wpa/wpa-vol-ii-arkansas-narratives-part-3-11544.txt": {
+      "title": "vol ii arkansas narratives part 3 11544",
+      "author": {
+        "name": "Federal Writers' Project (U.S. WPA)",
+        "place": "Little Rock, Arkansas",
+        "country": "United States",
+        "lat": 34.8,
+        "lon": -92.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Compilation by the Federal Writers' Project; place is the state of the interviews recorded in this file."
+    },
+    "20-first-person-voices/slave-narratives-wpa/wpa-vol-ii-arkansas-narratives-part-4-25154.txt": {
+      "title": "vol ii arkansas narratives part 4 25154",
+      "author": {
+        "name": "Federal Writers' Project (U.S. WPA)",
+        "place": "Little Rock, Arkansas",
+        "country": "United States",
+        "lat": 34.8,
+        "lon": -92.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Compilation by the Federal Writers' Project; place is the state of the interviews recorded in this file."
+    },
+    "20-first-person-voices/slave-narratives-wpa/wpa-vol-ii-arkansas-narratives-part-5-11709.txt": {
+      "title": "vol ii arkansas narratives part 5 11709",
+      "author": {
+        "name": "Federal Writers' Project (U.S. WPA)",
+        "place": "Little Rock, Arkansas",
+        "country": "United States",
+        "lat": 34.8,
+        "lon": -92.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Compilation by the Federal Writers' Project; place is the state of the interviews recorded in this file."
+    },
+    "20-first-person-voices/slave-narratives-wpa/wpa-vol-ii-arkansas-narratives-part-6-13579.txt": {
+      "title": "vol ii arkansas narratives part 6 13579",
+      "author": {
+        "name": "Federal Writers' Project (U.S. WPA)",
+        "place": "Little Rock, Arkansas",
+        "country": "United States",
+        "lat": 34.8,
+        "lon": -92.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Compilation by the Federal Writers' Project; place is the state of the interviews recorded in this file."
+    },
+    "20-first-person-voices/slave-narratives-wpa/wpa-vol-iii-florida-narratives-12297.txt": {
+      "title": "vol iii florida narratives 12297",
+      "author": {
+        "name": "Federal Writers' Project (U.S. WPA)",
+        "place": "Tallahassee, Florida",
+        "country": "United States",
+        "lat": 30.4,
+        "lon": -84.3
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Compilation by the Federal Writers' Project; place is the state of the interviews recorded in this file."
+    },
+    "20-first-person-voices/slave-narratives-wpa/wpa-vol-iv-georgia-narratives-part-1-13602.txt": {
+      "title": "vol iv georgia narratives part 1 13602",
+      "author": {
+        "name": "Federal Writers' Project (U.S. WPA)",
+        "place": "Atlanta, Georgia",
+        "country": "United States",
+        "lat": 33.8,
+        "lon": -84.4
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Compilation by the Federal Writers' Project; place is the state of the interviews recorded in this file."
+    },
+    "20-first-person-voices/slave-narratives-wpa/wpa-vol-iv-georgia-narratives-part-2-22166.txt": {
+      "title": "vol iv georgia narratives part 2 22166",
+      "author": {
+        "name": "Federal Writers' Project (U.S. WPA)",
+        "place": "Atlanta, Georgia",
+        "country": "United States",
+        "lat": 33.8,
+        "lon": -84.4
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Compilation by the Federal Writers' Project; place is the state of the interviews recorded in this file."
+    },
+    "20-first-person-voices/slave-narratives-wpa/wpa-vol-v-iowa-narratives-18485.txt": {
+      "title": "vol v iowa narratives 18485",
+      "author": {
+        "name": "Federal Writers' Project (U.S. WPA)",
+        "place": "Des Moines, Iowa",
+        "country": "United States",
+        "lat": 41.6,
+        "lon": -93.6
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Compilation by the Federal Writers' Project; place is the state of the interviews recorded in this file."
+    },
+    "20-first-person-voices/slave-narratives-wpa/wpa-vol-vi-indiana-narratives-18484.txt": {
+      "title": "vol vi indiana narratives 18484",
+      "author": {
+        "name": "Federal Writers' Project (U.S. WPA)",
+        "place": "Indianapolis, Indiana",
+        "country": "United States",
+        "lat": 39.8,
+        "lon": -86.2
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Compilation by the Federal Writers' Project; place is the state of the interviews recorded in this file."
+    },
+    "20-first-person-voices/slave-narratives-wpa/wpa-vol-x-missouri-narratives-35379.txt": {
+      "title": "vol x missouri narratives 35379",
+      "author": {
+        "name": "Federal Writers' Project (U.S. WPA)",
+        "place": "Jefferson City, Missouri",
+        "country": "United States",
+        "lat": 38.6,
+        "lon": -92.2
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Compilation by the Federal Writers' Project; place is the state of the interviews recorded in this file."
+    },
+    "20-first-person-voices/slave-narratives-wpa/wpa-vol-xi-north-carolina-narratives-part-1-22976.txt": {
+      "title": "vol xi north carolina narratives part 1 22976",
+      "author": {
+        "name": "Federal Writers' Project (U.S. WPA)",
+        "place": "Raleigh, North Carolina",
+        "country": "United States",
+        "lat": 35.8,
+        "lon": -78.6
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Compilation by the Federal Writers' Project; place is the state of the interviews recorded in this file."
+    },
+    "20-first-person-voices/slave-narratives-wpa/wpa-vol-xi-north-carolina-narratives-part-2-31219.txt": {
+      "title": "vol xi north carolina narratives part 2 31219",
+      "author": {
+        "name": "Federal Writers' Project (U.S. WPA)",
+        "place": "Raleigh, North Carolina",
+        "country": "United States",
+        "lat": 35.8,
+        "lon": -78.6
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Compilation by the Federal Writers' Project; place is the state of the interviews recorded in this file."
+    },
+    "20-first-person-voices/slave-narratives-wpa/wpa-vol-xiii-oklahoma-narratives-20785.txt": {
+      "title": "vol xiii oklahoma narratives 20785",
+      "author": {
+        "name": "Federal Writers' Project (U.S. WPA)",
+        "place": "Oklahoma City, Oklahoma",
+        "country": "United States",
+        "lat": 35.5,
+        "lon": -97.5
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Compilation by the Federal Writers' Project; place is the state of the interviews recorded in this file."
+    },
+    "20-first-person-voices/slave-narratives-wpa/wpa-vol-xiv-south-carolina-narratives-part-1-18912.txt": {
+      "title": "vol xiv south carolina narratives part 1 18912",
+      "author": {
+        "name": "Federal Writers' Project (U.S. WPA)",
+        "place": "Columbia, South Carolina",
+        "country": "United States",
+        "lat": 34.0,
+        "lon": -81.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Compilation by the Federal Writers' Project; place is the state of the interviews recorded in this file."
+    },
+    "20-first-person-voices/slave-narratives-wpa/wpa-vol-xiv-south-carolina-narratives-part-2-21508.txt": {
+      "title": "vol xiv south carolina narratives part 2 21508",
+      "author": {
+        "name": "Federal Writers' Project (U.S. WPA)",
+        "place": "Columbia, South Carolina",
+        "country": "United States",
+        "lat": 34.0,
+        "lon": -81.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Compilation by the Federal Writers' Project; place is the state of the interviews recorded in this file."
+    },
+    "20-first-person-voices/slave-narratives-wpa/wpa-vol-xiv-south-carolina-narratives-part-3-36022.txt": {
+      "title": "vol xiv south carolina narratives part 3 36022",
+      "author": {
+        "name": "Federal Writers' Project (U.S. WPA)",
+        "place": "Columbia, South Carolina",
+        "country": "United States",
+        "lat": 34.0,
+        "lon": -81.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Compilation by the Federal Writers' Project; place is the state of the interviews recorded in this file."
+    },
+    "20-first-person-voices/slave-narratives-wpa/wpa-vol-xiv-south-carolina-narratives-part-4-28170.txt": {
+      "title": "vol xiv south carolina narratives part 4 28170",
+      "author": {
+        "name": "Federal Writers' Project (U.S. WPA)",
+        "place": "Columbia, South Carolina",
+        "country": "United States",
+        "lat": 34.0,
+        "lon": -81.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Compilation by the Federal Writers' Project; place is the state of the interviews recorded in this file."
+    },
+    "20-first-person-voices/slave-narratives-wpa/wpa-vol-xiv-south-carolina-narratives-part-5-19446.txt": {
+      "title": "vol xiv south carolina narratives part 5 19446",
+      "author": {
+        "name": "Federal Writers' Project (U.S. WPA)",
+        "place": "Columbia, South Carolina",
+        "country": "United States",
+        "lat": 34.0,
+        "lon": -81.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Compilation by the Federal Writers' Project; place is the state of the interviews recorded in this file."
+    },
+    "20-first-person-voices/slave-narratives-wpa/wpa-vol-xiv-south-carolina-narratives-part-6-30967.txt": {
+      "title": "vol xiv south carolina narratives part 6 30967",
+      "author": {
+        "name": "Federal Writers' Project (U.S. WPA)",
+        "place": "Columbia, South Carolina",
+        "country": "United States",
+        "lat": 34.0,
+        "lon": -81.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Compilation by the Federal Writers' Project; place is the state of the interviews recorded in this file."
+    },
+    "20-first-person-voices/slave-narratives-wpa/wpa-vol-xvi-texas-narratives-part-1-30576.txt": {
+      "title": "vol xvi texas narratives part 1 30576",
+      "author": {
+        "name": "Federal Writers' Project (U.S. WPA)",
+        "place": "Austin, Texas",
+        "country": "United States",
+        "lat": 30.3,
+        "lon": -97.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Compilation by the Federal Writers' Project; place is the state of the interviews recorded in this file."
+    },
+    "20-first-person-voices/slave-narratives-wpa/wpa-vol-xvi-texas-narratives-part-3-35380.txt": {
+      "title": "vol xvi texas narratives part 3 35380",
+      "author": {
+        "name": "Federal Writers' Project (U.S. WPA)",
+        "place": "Austin, Texas",
+        "country": "United States",
+        "lat": 30.3,
+        "lon": -97.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Compilation by the Federal Writers' Project; place is the state of the interviews recorded in this file."
+    },
+    "20-first-person-voices/slave-narratives-wpa/wpa-vol-xvi-texas-narratives-part-4-35381.txt": {
+      "title": "vol xvi texas narratives part 4 35381",
+      "author": {
+        "name": "Federal Writers' Project (U.S. WPA)",
+        "place": "Austin, Texas",
+        "country": "United States",
+        "lat": 30.3,
+        "lon": -97.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Compilation by the Federal Writers' Project; place is the state of the interviews recorded in this file."
+    },
+    "20-first-person-voices/slave-narratives-wpa/wpa-vol-xvi-texas-narratives-part-5-36020.txt": {
+      "title": "vol xvi texas narratives part 5 36020",
+      "author": {
+        "name": "Federal Writers' Project (U.S. WPA)",
+        "place": "Austin, Texas",
+        "country": "United States",
+        "lat": 30.3,
+        "lon": -97.7
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Compilation by the Federal Writers' Project; place is the state of the interviews recorded in this file."
+    },
+    "20-first-person-voices/wollstonecraft-vindication.txt": {
+      "title": "wollstonecraft vindication",
+      "author": {
+        "name": "Mary Wollstonecraft",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Spitalfields, London."
+    },
+    "20-first-person-voices/woolf-room-of-ones-own.txt": {
+      "title": "woolf room of ones own",
+      "author": {
+        "name": "Virginia Woolf",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born London."
+    },
+    "20-first-person-voices/written-oral-histories/ambedkar-writings-speeches-vol1.txt": {
+      "title": "Writings and Speeches Vol. 1",
+      "author": {
+        "name": "B. R. Ambedkar",
+        "place": "Mumbai (Bombay)",
+        "country": "India",
+        "lat": 19.1,
+        "lon": 72.9
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; main city of work Bombay (born Mhow, Madhya Pradesh)."
+    },
+    "20-first-person-voices/written-oral-histories/antin-promised-land.txt": {
+      "title": "antin promised land",
+      "author": {
+        "name": "Mary Antin",
+        "place": "Boston",
+        "country": "United States",
+        "lat": 42.4,
+        "lon": -71.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; emigrated to Boston (born Polotsk, Russian Empire, now Belarus)."
+    },
+    "20-first-person-voices/written-oral-histories/beers-a-mind-that-found-itself.txt": {
+      "title": "beers a mind that found itself",
+      "author": {
+        "name": "Clifford Whittingham Beers",
+        "place": "New Haven, Connecticut",
+        "country": "United States",
+        "lat": 41.3,
+        "lon": -72.9
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born New Haven, Connecticut."
+    },
+    "20-first-person-voices/written-oral-histories/dubois-souls-of-black-folk.txt": {
+      "title": "dubois souls of black folk",
+      "author": {
+        "name": "W. E. B. Du Bois",
+        "place": "Great Barrington, Massachusetts",
+        "country": "United States",
+        "lat": 42.2,
+        "lon": -73.4
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Great Barrington, Massachusetts."
+    },
+    "20-first-person-voices/written-oral-histories/harriette-wilson-memoirs.txt": {
+      "title": "harriette wilson memoirs",
+      "author": {
+        "name": "Harriette Wilson",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; London courtesan-memoirist."
+    },
+    "20-first-person-voices/written-oral-histories/mayhew-london-labour-vol1.txt": {
+      "title": "mayhew london labour vol1",
+      "author": {
+        "name": "Henry Mayhew",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; London journalist."
+    },
+    "20-first-person-voices/written-oral-histories/mayhew-london-labour-vol2.txt": {
+      "title": "mayhew london labour vol2",
+      "author": {
+        "name": "Henry Mayhew",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; London journalist."
+    },
+    "20-first-person-voices/written-oral-histories/mayhew-london-labour-vol3.txt": {
+      "title": "mayhew london labour vol3",
+      "author": {
+        "name": "Henry Mayhew",
+        "place": "London",
+        "country": "England",
+        "lat": 51.5,
+        "lon": -0.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; London journalist."
+    },
+    "20-first-person-voices/written-oral-histories/mother-jones-autobiography.txt": {
+      "title": "mother jones autobiography",
+      "author": {
+        "name": "Mother Jones (Mary Harris Jones)",
+        "place": "Cork",
+        "country": "Ireland",
+        "lat": 51.9,
+        "lon": -8.5
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Cork, Ireland; labour activist in the U.S."
+    },
+    "20-first-person-voices/written-oral-histories/riis-how-the-other-half-lives.txt": {
+      "title": "riis how the other half lives",
+      "author": {
+        "name": "Jacob Riis",
+        "place": "New York City",
+        "country": "United States",
+        "lat": 40.7,
+        "lon": -74.0
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; worked New York (born Ribe, Denmark)."
+    },
+    "20-first-person-voices/written-oral-histories/somerville-recollections-to-old-age.txt": {
+      "title": "somerville recollections to old age",
+      "author": {
+        "name": "Mary Somerville",
+        "place": "Jedburgh",
+        "country": "Scotland",
+        "lat": 55.5,
+        "lon": -2.6
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Jedburgh, Scotland (later London)."
+    },
+    "20-first-person-voices/written-oral-histories/stanton-eighty-years-and-more.txt": {
+      "title": "stanton eighty years and more",
+      "author": {
+        "name": "Elizabeth Cady Stanton",
+        "place": "Johnstown, New York",
+        "country": "United States",
+        "lat": 43.0,
+        "lon": -74.4
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; born Johnstown, New York."
+    },
+    "20-first-person-voices/written-oral-histories/winslow-diary-1771.txt": {
+      "title": "winslow diary 1771",
+      "author": {
+        "name": "Anna Green Winslow",
+        "place": "Boston",
+        "country": "United States",
+        "lat": 42.4,
+        "lon": -71.1
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Boston schoolgirl diarist."
+    },
+    "20-first-person-voices/zitkala-american-indian-stories.txt": {
+      "title": "zitkala american indian stories",
+      "author": {
+        "name": "Zitkala-Sa (Gertrude Bonnin)",
+        "place": "Yankton Reservation, South Dakota",
+        "country": "United States",
+        "lat": 42.9,
+        "lon": -97.4
+      },
+      "translator": null,
+      "giver": "standard bibliographic record (rough)",
+      "note": "Author; Yankton Dakota, born on the Yankton Reservation."
+    }
+  }
+}

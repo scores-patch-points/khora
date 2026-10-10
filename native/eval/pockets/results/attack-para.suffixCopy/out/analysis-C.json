@@ -1,0 +1,662 @@
+{
+ "multiplicity": {
+  "statistics": 81,
+  "realPockets": 391,
+  "cellsTested": 31671,
+  "definedRealCells": 29680,
+  "halfCells": 59360,
+  "observedPresentRealCells": 22017,
+  "sharePresent": 0.7418,
+  "plantedIid": {
+   "halfCells": 307,
+   "absZge4": 4,
+   "rate4": 0.01303,
+   "presentCellsObserved": 0
+  },
+  "controls": {
+   "halfCells": 2913,
+   "absZge4": 13,
+   "rate4": 0.004463,
+   "presentCellsObserved": 0
+  },
+  "binomialReference": {
+   "p": 0.00008488153720463878,
+   "mean": 2.519,
+   "sd": 1.587
+  },
+  "expectedFalsePresentAllCells": 2.52,
+  "expectedFalsePresentSuffixCopy": 0.03,
+  "expectedFalsePresentSuffixCopyUsingControlsRate": 0.0035,
+  "suffixCopyPresentCells": 279,
+  "suffixCopyDefined": 353,
+  "presentRateRankOfSuffixCopy": 49,
+  "medianPresentRateOver81Stats": 0.832,
+  "statsWithPresentRateAbove50pct": 65,
+  "paraFamilyRates": [
+   "para.formulaCov:1.00",
+   "para.refrain:0.95",
+   "para.adjNg2:0.92",
+   "para.lcsLift:0.90",
+   "para.dupShare:0.87",
+   "para.adjNg3:0.87",
+   "para.tmplReuse:0.84",
+   "para.posPar:0.84",
+   "para.adjNg4:0.83",
+   "para.suffixCopy:0.79",
+   "para.prefixCopy:0.78",
+   "para.lagDecay:0.56"
+  ]
+ },
+ "shared": {
+  "reproduction": {
+   "n": 353,
+   "nPresent": 279,
+   "eta2": {
+    "group": 0.1014,
+    "register": 0.2727,
+    "script": 0.0383,
+    "tokens": 0.1418,
+    "meanUnitLength": 0.0797,
+    "docs": 0.127
+   },
+   "atlasLawTable": {
+    "group": 0.1014,
+    "register": 0.2727,
+    "script": 0.0383,
+    "tokens": 0.1418,
+    "meanUnitLength": 0.0797,
+    "docs": 0.127
+   }
+  },
+  "perm": {
+   "group": {
+    "eta2": 0.1014,
+    "p": 0.0005,
+    "nullMean": 0.0142,
+    "nullMax": 0.0574
+   },
+   "register": {
+    "eta2": 0.2727,
+    "p": 0.0005,
+    "nullMean": 0.0966,
+    "nullMax": 0.1971
+   },
+   "script": {
+    "eta2": 0.0383,
+    "p": 0.15092,
+    "nullMean": 0.0259,
+    "nullMax": 0.0919
+   },
+   "tokens": {
+    "eta2": 0.1418,
+    "p": 0.0005,
+    "nullMean": 0.0027,
+    "nullMax": 0.033
+   },
+   "meanUnitLength": {
+    "eta2": 0.0797,
+    "p": 0.0005,
+    "nullMean": 0.0028,
+    "nullMax": 0.0627
+   },
+   "docs": {
+    "eta2": 0.127,
+    "p": 0.0005,
+    "nullMean": 0.0028,
+    "nullMax": 0.0336
+   }
+  },
+  "westfallYoungMinP": {
+   "minObservedP": 0.0005,
+   "adjustedP": 0.0005,
+   "note": "permutation p floor is 1/2001 = 0.0005; adjusted p counts permutations whose smallest attribute-wise p is at most the observed smallest"
+  },
+  "registerWithinGroupStratified": {
+   "eta2": 0.2727,
+   "nullMean": 0.1696,
+   "p": 0.0015
+  },
+  "leaveOnePocketOut": {
+   "registerEta2": {
+    "min": 0.2648,
+    "max": 0.2849
+   },
+   "groupEta2": {
+    "min": 0.0978,
+    "max": 0.1075
+   }
+  },
+  "leaveOneRegisterOut": {
+   "lowest5": [
+    {
+     "dropped": "code",
+     "nDropped": 47,
+     "eta2": 0.2418
+    },
+    {
+     "dropped": "sequence",
+     "nDropped": 2,
+     "eta2": 0.2567
+    },
+    {
+     "dropped": "religion",
+     "nDropped": 2,
+     "eta2": 0.2567
+    },
+    {
+     "dropped": "scripture",
+     "nDropped": 25,
+     "eta2": 0.2577
+    },
+    {
+     "dropped": "nomenclature",
+     "nDropped": 4,
+     "eta2": 0.2611
+    }
+   ],
+   "highest3": [
+    {
+     "dropped": "notation",
+     "nDropped": 14,
+     "eta2": 0.2856
+    },
+    {
+     "dropped": "treatise",
+     "nDropped": 25,
+     "eta2": 0.2884
+    },
+    {
+     "dropped": "novel",
+     "nDropped": 25,
+     "eta2": 0.2966
+    }
+   ]
+  },
+  "afterDroppingAllHundredPercentRegisters": {
+   "dropped": [
+    "dialect",
+    "diagram",
+    "code",
+    "markup",
+    "config",
+    "scripture"
+   ],
+   "nRemaining": 253,
+   "presentRemaining": 179,
+   "eta2": 0.1875,
+   "nullMean": 0.11,
+   "p": 0.007
+  },
+  "panel81": {
+   "nTestable": 66,
+   "nSignificantP05": 58,
+   "nSignificantP001": 54,
+   "medianEta2": 0.254,
+   "suffixCopyRank": 27,
+   "rows": [
+    {
+     "stat": "burst.burstB",
+     "n": 390,
+     "nPresent": 378,
+     "registerEta2": 0.352,
+     "p": 0.002
+    },
+    {
+     "stat": "burst.burstBmid",
+     "n": 355,
+     "nPresent": 344,
+     "registerEta2": 0.419,
+     "p": 0.002
+    },
+    {
+     "stat": "burst.burstM",
+     "n": 390,
+     "nPresent": 292,
+     "registerEta2": 0.383,
+     "p": 0.002
+    },
+    {
+     "stat": "burst.repAdj",
+     "n": 390,
+     "nPresent": 346,
+     "registerEta2": 0.207,
+     "p": 0.002
+    },
+    {
+     "stat": "burst.kerSlope",
+     "n": 390,
+     "nPresent": 360,
+     "registerEta2": 0.268,
+     "p": 0.002
+    },
+    {
+     "stat": "burst.kerCurv",
+     "n": 390,
+     "nPresent": 377,
+     "registerEta2": 0.154,
+     "p": 0.0639
+    },
+    {
+     "stat": "burst.persist",
+     "n": 383,
+     "nPresent": 328,
+     "registerEta2": 0.254,
+     "p": 0.002
+    },
+    {
+     "stat": "burst.driftSlope",
+     "n": 382,
+     "nPresent": 210,
+     "registerEta2": 0.214,
+     "p": 0.002
+    },
+    {
+     "stat": "burst.driftTail",
+     "n": 384,
+     "nPresent": 156,
+     "registerEta2": 0.443,
+     "p": 0.002
+    },
+    {
+     "stat": "burst.hurst",
+     "n": 390,
+     "nPresent": 223,
+     "registerEta2": 0.316,
+     "p": 0.002
+    },
+    {
+     "stat": "comp.divSlope",
+     "n": 387,
+     "nPresent": 328,
+     "registerEta2": 0.263,
+     "p": 0.002
+    },
+    {
+     "stat": "comp.sameL",
+     "n": 391,
+     "nPresent": 351,
+     "registerEta2": 0.315,
+     "p": 0.002
+    },
+    {
+     "stat": "comp.sameR",
+     "n": 391,
+     "nPresent": 353,
+     "registerEta2": 0.332,
+     "p": 0.002
+    },
+    {
+     "stat": "comp.asym",
+     "n": 384,
+     "nPresent": 214,
+     "registerEta2": 0.149,
+     "p": 0.008
+    },
+    {
+     "stat": "comp.miDecay",
+     "n": 373,
+     "nPresent": 306,
+     "registerEta2": 0.574,
+     "p": 0.002
+    },
+    {
+     "stat": "comp.initEnt",
+     "n": 391,
+     "nPresent": 320,
+     "registerEta2": 0.12,
+     "p": 0.0878
+    },
+    {
+     "stat": "comp.finEnt",
+     "n": 391,
+     "nPresent": 376,
+     "registerEta2": 0.165,
+     "p": 0.0519
+    },
+    {
+     "stat": "comp.edgeGap",
+     "n": 391,
+     "nPresent": 371,
+     "registerEta2": 0.098,
+     "p": 0.3433
+    },
+    {
+     "stat": "fig.figShare",
+     "n": 389,
+     "nPresent": 359,
+     "registerEta2": 0.363,
+     "p": 0.002
+    },
+    {
+     "stat": "fig.arrival",
+     "n": 387,
+     "nPresent": 255,
+     "registerEta2": 0.146,
+     "p": 0.006
+    },
+    {
+     "stat": "fig.persist",
+     "n": 386,
+     "nPresent": 327,
+     "registerEta2": 0.26,
+     "p": 0.002
+    },
+    {
+     "stat": "fig.crpTheta",
+     "n": 354,
+     "nPresent": 194,
+     "registerEta2": 0.4,
+     "p": 0.002
+    },
+    {
+     "stat": "fig.fano",
+     "n": 354,
+     "nPresent": 256,
+     "registerEta2": 0.343,
+     "p": 0.002
+    },
+    {
+     "stat": "fig.introLeft",
+     "n": 384,
+     "nPresent": 56,
+     "registerEta2": 0.243,
+     "p": 0.002
+    },
+    {
+     "stat": "fig.introRight",
+     "n": 384,
+     "nPresent": 31,
+     "registerEta2": 0.252,
+     "p": 0.002
+    },
+    {
+     "stat": "fig.introLeftFq",
+     "n": 387,
+     "nPresent": 31,
+     "registerEta2": 0.329,
+     "p": 0.002
+    },
+    {
+     "stat": "fig.initEnrich",
+     "n": 390,
+     "nPresent": 311,
+     "registerEta2": 0.205,
+     "p": 0.002
+    },
+    {
+     "stat": "fig.initFollow",
+     "n": 391,
+     "nPresent": 250,
+     "registerEta2": 0.245,
+     "p": 0.002
+    },
+    {
+     "stat": "fig.converge",
+     "n": 391,
+     "nPresent": 15,
+     "registerEta2": 0.092,
+     "p": 0.4311
+    },
+    {
+     "stat": "freq.zipfAlpha",
+     "n": 367,
+     "nPresent": 136,
+     "registerEta2": 0.2,
+     "p": 0.002
+    },
+    {
+     "stat": "freq.heapsBeta",
+     "n": 391,
+     "nPresent": 110,
+     "registerEta2": 0.403,
+     "p": 0.002
+    },
+    {
+     "stat": "freq.ttr",
+     "n": 390,
+     "nPresent": 366,
+     "registerEta2": 0.378,
+     "p": 0.002
+    },
+    {
+     "stat": "freq.hapaxShare",
+     "n": 389,
+     "nPresent": 344,
+     "registerEta2": 0.383,
+     "p": 0.002
+    },
+    {
+     "stat": "freq.rankBinEnt",
+     "n": 391,
+     "nPresent": 314,
+     "registerEta2": 0.253,
+     "p": 0.002
+    },
+    {
+     "stat": "freq.menzerath",
+     "n": 389,
+     "nPresent": 214,
+     "registerEta2": 0.306,
+     "p": 0.002
+    },
+    {
+     "stat": "freq.recurLen",
+     "n": 389,
+     "nPresent": 357,
+     "registerEta2": 0.312,
+     "p": 0.002
+    },
+    {
+     "stat": "freq.lenAcf1",
+     "n": 391,
+     "nPresent": 318,
+     "registerEta2": 0.272,
+     "p": 0.002
+    },
+    {
+     "stat": "freq.lenDocEps",
+     "n": 391,
+     "nPresent": 325,
+     "registerEta2": 0.222,
+     "p": 0.002
+    },
+    {
+     "stat": "order.rareSlope",
+     "n": 390,
+     "nPresent": 356,
+     "registerEta2": 0.247,
+     "p": 0.002
+    },
+    {
+     "stat": "order.rareCurve",
+     "n": 390,
+     "nPresent": 255,
+     "registerEta2": 0.162,
+     "p": 0.002
+    },
+    {
+     "stat": "order.fnBefore",
+     "n": 383,
+     "nPresent": 154,
+     "registerEta2": 0.208,
+     "p": 0.002
+    },
+    {
+     "stat": "order.depLen",
+     "n": 390,
+     "nPresent": 140,
+     "registerEta2": 0.246,
+     "p": 0.002
+    },
+    {
+     "stat": "order.initDev",
+     "n": 390,
+     "nPresent": 335,
+     "registerEta2": 0.235,
+     "p": 0.002
+    },
+    {
+     "stat": "order.finalDev",
+     "n": 390,
+     "nPresent": 370,
+     "registerEta2": 0.132,
+     "p": 0.1118
+    },
+    {
+     "stat": "order.surprGrow",
+     "n": 390,
+     "nPresent": 274,
+     "registerEta2": 0.138,
+     "p": 0.018
+    },
+    {
+     "stat": "order.entSlope",
+     "n": 390,
+     "nPresent": 245,
+     "registerEta2": 0.144,
+     "p": 0.002
+    },
+    {
+     "stat": "order.entCurv",
+     "n": 390,
+     "nPresent": 179,
+     "registerEta2": 0.192,
+     "p": 0.002
+    },
+    {
+     "stat": "order.branch",
+     "n": 390,
+     "nPresent": 331,
+     "registerEta2": 0.105,
+     "p": 0.2056
+    },
+    {
+     "stat": "para.adjNg2",
+     "n": 391,
+     "nPresent": 359,
+     "registerEta2": 0.339,
+     "p": 0.002
+    },
+    {
+     "stat": "para.adjNg3",
+     "n": 379,
+     "nPresent": 330,
+     "registerEta2": 0.284,
+     "p": 0.002
+    },
+    {
+     "stat": "para.adjNg4",
+     "n": 333,
+     "nPresent": 277,
+     "registerEta2": 0.328,
+     "p": 0.002
+    },
+    {
+     "stat": "para.prefixCopy",
+     "n": 385,
+     "nPresent": 302,
+     "registerEta2": 0.31,
+     "p": 0.002
+    },
+    {
+     "stat": "para.suffixCopy",
+     "n": 353,
+     "nPresent": 279,
+     "registerEta2": 0.273,
+     "p": 0.002
+    },
+    {
+     "stat": "para.posPar",
+     "n": 391,
+     "nPresent": 328,
+     "registerEta2": 0.264,
+     "p": 0.002
+    },
+    {
+     "stat": "para.lcsLift",
+     "n": 391,
+     "nPresent": 351,
+     "registerEta2": 0.312,
+     "p": 0.002
+    },
+    {
+     "stat": "para.lagDecay",
+     "n": 368,
+     "nPresent": 205,
+     "registerEta2": 0.223,
+     "p": 0.002
+    },
+    {
+     "stat": "para.refrain",
+     "n": 286,
+     "nPresent": 271,
+     "registerEta2": 0.369,
+     "p": 0.002
+    },
+    {
+     "stat": "para.dupShare",
+     "n": 326,
+     "nPresent": 284,
+     "registerEta2": 0.4,
+     "p": 0.002
+    },
+    {
+     "stat": "para.tmplReuse",
+     "n": 391,
+     "nPresent": 329,
+     "registerEta2": 0.322,
+     "p": 0.002
+    },
+    {
+     "stat": "phys.massAdd",
+     "n": 391,
+     "nPresent": 232,
+     "registerEta2": 0.246,
+     "p": 0.002
+    },
+    {
+     "stat": "phys.massExp",
+     "n": 391,
+     "nPresent": 323,
+     "registerEta2": 0.226,
+     "p": 0.002
+    },
+    {
+     "stat": "phys.gravAlpha",
+     "n": 379,
+     "nPresent": 365,
+     "registerEta2": 0.111,
+     "p": 0.3054
+    },
+    {
+     "stat": "phys.gravBeta",
+     "n": 379,
+     "nPresent": 139,
+     "registerEta2": 0.242,
+     "p": 0.002
+    },
+    {
+     "stat": "phys.gravAlphaSd",
+     "n": 379,
+     "nPresent": 20,
+     "registerEta2": 0.213,
+     "p": 0.008
+    },
+    {
+     "stat": "phys.affect",
+     "n": 391,
+     "nPresent": 280,
+     "registerEta2": 0.306,
+     "p": 0.002
+    },
+    {
+     "stat": "phys.affectAsym",
+     "n": 391,
+     "nPresent": 68,
+     "registerEta2": 0.245,
+     "p": 0.002
+    }
+   ]
+  }
+ }
+}

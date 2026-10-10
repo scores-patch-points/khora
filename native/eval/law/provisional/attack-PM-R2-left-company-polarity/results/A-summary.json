@@ -1,0 +1,2426 @@
+{
+ "families": {
+  "irc": {
+   "M0": {
+    "cells": 3,
+    "pairsTotal": 491,
+    "valid": 0,
+    "medAll": 0.57,
+    "medValid": null,
+    "POS": 0,
+    "NEG": 0,
+    "nLowValid": 0,
+    "pooledAll": {
+     "auc": 0.5703,
+     "lo": 0.5279,
+     "hi": 0.6137,
+     "pairs": 491,
+     "clusters": 189
+    },
+    "pooledValid": null,
+    "medDLxF": 0.8,
+    "medEsP": 0.8886,
+    "medEsN": 0.3516,
+    "perReg": {
+     "irc-kubuntu": {
+      "pairs": 182,
+      "auc": 0.5934,
+      "lo": 0.5311,
+      "hi": 0.6622,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.4478,
+       "es": 0.9368,
+       "fs": 0.0604,
+       "ch": 0.6538,
+       "slen": 0.6264
+      },
+      "DLxF": 0.9615,
+      "Dobs": 0.0852,
+      "nDnull": 0.9368,
+      "esP": 0.8886,
+      "esN": 0.3516
+     },
+     "irc-ubuntu-server": {
+      "pairs": 159,
+      "auc": 0.544,
+      "lo": 0.4618,
+      "hi": 0.6227,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.3774,
+       "es": 0.9245,
+       "fs": 0.0629,
+       "ch": 0.5377,
+       "slen": 0.5314
+      },
+      "DLxF": 0.7778,
+      "Dobs": 0.0786,
+      "nDnull": 0.9214,
+      "esP": 0.9046,
+      "esN": 0.3413
+     },
+     "irc-xubuntu": {
+      "pairs": 150,
+      "auc": 0.57,
+      "lo": 0.5139,
+      "hi": 0.6242,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.43,
+       "es": 0.86,
+       "fs": 0.14,
+       "ch": 0.6067,
+       "slen": 0.5367
+      },
+      "DLxF": 0.8,
+      "Dobs": 0.1733,
+      "nDnull": 0.85,
+      "esP": 0.8745,
+      "esN": 0.4232
+     }
+    }
+   },
+   "M1": {
+    "cells": 3,
+    "pairsTotal": 431,
+    "valid": 0,
+    "medAll": 0.5426,
+    "medValid": null,
+    "POS": 0,
+    "NEG": 0,
+    "nLowValid": 0,
+    "pooledAll": {
+     "auc": 0.5348,
+     "lo": 0.4943,
+     "hi": 0.5735,
+     "pairs": 431,
+     "clusters": 186
+    },
+    "pooledValid": null,
+    "medDLxF": 0.6818,
+    "medEsP": 0.8803,
+    "medEsN": 0.4183,
+    "perReg": {
+     "irc-kubuntu": {
+      "pairs": 156,
+      "auc": 0.5577,
+      "lo": 0.4901,
+      "hi": 0.6293,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5321,
+       "es": 0.9006,
+       "fs": 0.0769,
+       "ch": 0.6571,
+       "slen": 0.5417
+      },
+      "DLxF": 0.7727,
+      "Dobs": 0.1154,
+      "nDnull": 0.9006,
+      "esP": 0.8798,
+      "esN": 0.4183
+     },
+     "irc-ubuntu-server": {
+      "pairs": 134,
+      "auc": 0.5,
+      "lo": 0.412,
+      "hi": 0.5815,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.4963,
+       "es": 0.903,
+       "fs": 0.1119,
+       "ch": 0.5933,
+       "slen": 0.5522
+      },
+      "DLxF": 0.6429,
+      "Dobs": 0.097,
+      "nDnull": 0.8993,
+      "esP": 0.8963,
+      "esN": 0.4146
+     },
+     "irc-xubuntu": {
+      "pairs": 141,
+      "auc": 0.5426,
+      "lo": 0.4891,
+      "hi": 0.5978,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.4929,
+       "es": 0.8617,
+       "fs": 0.156,
+       "ch": 0.6418,
+       "slen": 0.5106
+      },
+      "DLxF": 0.6818,
+      "Dobs": 0.1489,
+      "nDnull": 0.8617,
+      "esP": 0.8803,
+      "esN": 0.5053
+     }
+    }
+   },
+   "M2": {
+    "cells": 3,
+    "pairsTotal": 94,
+    "valid": 0,
+    "medAll": 0.5132,
+    "medValid": null,
+    "POS": 0,
+    "NEG": 0,
+    "nLowValid": 0,
+    "pooledAll": {
+     "auc": 0.5319,
+     "lo": 0.4895,
+     "hi": 0.5734,
+     "pairs": 94,
+     "clusters": 59
+    },
+    "pooledValid": null,
+    "medDLxF": 0.5,
+    "medEsP": 0.797,
+    "medEsN": 0.8024,
+    "perReg": {
+     "irc-kubuntu": {
+      "pairs": 27,
+      "auc": 0.4815,
+      "lo": 0.4423,
+      "hi": 0.5,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.6667,
+       "es": 0.6296,
+       "fs": 0.4074,
+       "ch": 0.7963,
+       "slen": 0.6481
+      },
+      "DLxF": 0.25,
+      "Dobs": 0.3704,
+      "nDnull": 0.6111,
+      "esP": 0.8397,
+      "esN": 0.8272
+     },
+     "irc-ubuntu-server": {
+      "pairs": 29,
+      "auc": 0.6034,
+      "lo": 0.5,
+      "hi": 0.7419,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5345,
+       "es": 0.431,
+       "fs": 0.5345,
+       "ch": 0.5862,
+       "slen": 0.6034
+      },
+      "DLxF": 0.9286,
+      "Dobs": 0.5517,
+      "nDnull": 0.4483,
+      "esP": 0.797,
+      "esN": 0.8024
+     },
+     "irc-xubuntu": {
+      "pairs": 38,
+      "auc": 0.5132,
+      "lo": 0.5,
+      "hi": 0.5429,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5132,
+       "es": 0.5526,
+       "fs": 0.4605,
+       "ch": 0.6316,
+       "slen": 0.4737
+      },
+      "DLxF": 0.5,
+      "Dobs": 0.4605,
+      "nDnull": 0.5526,
+      "esP": 0.7751,
+      "esN": 0.7666
+     }
+    }
+   },
+   "M3": {
+    "cells": 3,
+    "pairsTotal": 12,
+    "valid": 0,
+    "medAll": 0.5,
+    "medValid": null,
+    "POS": 0,
+    "NEG": 0,
+    "nLowValid": 0,
+    "pooledAll": {
+     "auc": 0.7083,
+     "lo": 0.3571,
+     "hi": 0.9091,
+     "pairs": 12,
+     "clusters": 5
+    },
+    "pooledValid": null,
+    "medDLxF": 0.5,
+    "medEsP": 0.2143,
+    "medEsN": 0.2143,
+    "perReg": {
+     "irc-kubuntu": {
+      "pairs": 2,
+      "auc": 0.25,
+      "lo": 0.25,
+      "hi": 0.25,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.25,
+       "es": 0.5,
+       "fs": 0.25,
+       "ch": 1,
+       "slen": 0.75
+      },
+      "DLxF": 0.25,
+      "Dobs": 0.5,
+      "nDnull": 0.25,
+      "esP": 0,
+      "esN": 0
+     },
+     "irc-ubuntu-server": {
+      "pairs": 7,
+      "auc": 0.9286,
+      "lo": 0.5,
+      "hi": 1,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5,
+       "es": 0.5,
+       "fs": 0.5,
+       "ch": 0.7143,
+       "slen": 0.5
+      },
+      "DLxF": 0.9286,
+      "Dobs": 0.5,
+      "nDnull": 0.5,
+      "esP": 0.7082,
+      "esN": 0.6992
+     },
+     "irc-xubuntu": {
+      "pairs": 3,
+      "auc": 0.5,
+      "lo": 0.5,
+      "hi": 0.5,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5,
+       "es": 0.5,
+       "fs": 0.5,
+       "ch": 0.5,
+       "slen": 0.6667
+      },
+      "DLxF": 0.5,
+      "Dobs": 0.5,
+      "nDnull": 0.5,
+      "esP": 0.2143,
+      "esN": 0.2143
+     }
+    }
+   },
+   "M4": {
+    "cells": 2,
+    "pairsTotal": 4,
+    "valid": 0,
+    "medAll": 0.25,
+    "medValid": null,
+    "POS": 0,
+    "NEG": 0,
+    "nLowValid": 0,
+    "pooledAll": {
+     "auc": 0.375,
+     "lo": 0.25,
+     "hi": 0.5,
+     "pairs": 4,
+     "clusters": 2
+    },
+    "pooledValid": null,
+    "medDLxF": 0.25,
+    "medEsP": 0,
+    "medEsN": 0,
+    "perReg": {
+     "irc-kubuntu": {
+      "pairs": 2,
+      "auc": 0.25,
+      "lo": 0.25,
+      "hi": 0.25,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.25,
+       "es": 0.5,
+       "fs": 0.25,
+       "ch": 1,
+       "slen": 0.75
+      },
+      "DLxF": 0.25,
+      "Dobs": 0.5,
+      "nDnull": 0.25,
+      "esP": 0,
+      "esN": 0
+     },
+     "irc-ubuntu-server": {
+      "pairs": 2,
+      "auc": 0.5,
+      "lo": 0.5,
+      "hi": 0.5,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5,
+       "es": 0.5,
+       "fs": 0.5,
+       "ch": 0.5,
+       "slen": 0.75
+      },
+      "DLxF": null,
+      "Dobs": 0,
+      "nDnull": 1,
+      "esP": 0,
+      "esN": 0
+     }
+    }
+   },
+   "R0": [
+    {
+     "reg": "irc-kubuntu",
+     "pairs": 182,
+     "aucExact": 0.6621,
+     "aucTieTol": 0.6071,
+     "pShareZero": 0.9945,
+     "pShareFloatNoise": 0.2088,
+     "tieShareExact": 0.1813,
+     "tieShareTol": 0.456
+    },
+    {
+     "reg": "irc-ubuntu-server",
+     "pairs": 159,
+     "aucExact": 0.6006,
+     "aucTieTol": 0.6006,
+     "pShareZero": 0.9371,
+     "pShareFloatNoise": 0.1572,
+     "tieShareExact": 0.283,
+     "tieShareTol": 0.4717
+    },
+    {
+     "reg": "irc-xubuntu",
+     "pairs": 150,
+     "aucExact": 0.6333,
+     "aucTieTol": 0.6133,
+     "pShareZero": 0.96,
+     "pShareFloatNoise": 0.18,
+     "tieShareExact": 0.2533,
+     "tieShareTol": 0.6
+    }
+   ],
+   "R0med": {
+    "aucExact": 0.6333,
+    "aucTieTol": 0.6071,
+    "n": 3
+   }
+  },
+  "code": {
+   "M0": {
+    "cells": 3,
+    "pairsTotal": 1562,
+    "valid": 0,
+    "medAll": 0.6117,
+    "medValid": null,
+    "POS": 0,
+    "NEG": 0,
+    "nLowValid": 0,
+    "pooledAll": {
+     "auc": 0.63,
+     "lo": 0.6037,
+     "hi": 0.6577,
+     "pairs": 1562,
+     "clusters": 1205
+    },
+    "pooledValid": null,
+    "medDLxF": 0.6082,
+    "medEsP": 0.1571,
+    "medEsN": 0.0571,
+    "perReg": {
+     "code-js": {
+      "pairs": 479,
+      "auc": 0.6764,
+      "lo": 0.6282,
+      "hi": 0.7237,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.501,
+       "es": 0.6795,
+       "fs": 0.285,
+       "ch": 0.4812,
+       "slen": 0.453
+      },
+      "DLxF": 0.6372,
+      "Dobs": 0.642,
+      "nDnull": 0.5376,
+      "esP": 0.1346,
+      "esN": 0.0393
+     },
+     "code-py": {
+      "pairs": 600,
+      "auc": 0.6117,
+      "lo": 0.5686,
+      "hi": 0.6554,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5242,
+       "es": 0.7033,
+       "fs": 0.3483,
+       "ch": 0.5817,
+       "slen": 0.4933
+      },
+      "DLxF": 0.5737,
+      "Dobs": 0.5792,
+      "nDnull": 0.535,
+      "esP": 0.1571,
+      "esN": 0.0571
+     },
+     "code-rb": {
+      "pairs": 483,
+      "auc": 0.6066,
+      "lo": 0.5611,
+      "hi": 0.6582,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5362,
+       "es": 0.6097,
+       "fs": 0.3602,
+       "ch": 0.5507,
+       "slen": 0.4793
+      },
+      "DLxF": 0.6082,
+      "Dobs": 0.6398,
+      "nDnull": 0.4638,
+      "esP": 0.2073,
+      "esN": 0.1757
+     }
+    }
+   },
+   "M1": {
+    "cells": 3,
+    "pairsTotal": 1485,
+    "valid": 0,
+    "medAll": 0.623,
+    "medValid": null,
+    "POS": 0,
+    "NEG": 0,
+    "nLowValid": 0,
+    "pooledAll": {
+     "auc": 0.6343,
+     "lo": 0.6053,
+     "hi": 0.6635,
+     "pairs": 1485,
+     "clusters": 1156
+    },
+    "pooledValid": null,
+    "medDLxF": 0.5882,
+    "medEsP": 0.1795,
+    "medEsN": 0.0553,
+    "perReg": {
+     "code-js": {
+      "pairs": 454,
+      "auc": 0.674,
+      "lo": 0.6277,
+      "hi": 0.7246,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5198,
+       "es": 0.6388,
+       "fs": 0.3227,
+       "ch": 0.5099,
+       "slen": 0.4273
+      },
+      "DLxF": 0.639,
+      "Dobs": 0.6399,
+      "nDnull": 0.4879,
+      "esP": 0.1153,
+      "esN": 0.0488
+     },
+     "code-py": {
+      "pairs": 600,
+      "auc": 0.6125,
+      "lo": 0.572,
+      "hi": 0.668,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5108,
+       "es": 0.7075,
+       "fs": 0.3575,
+       "ch": 0.5775,
+       "slen": 0.4567
+      },
+      "DLxF": 0.5736,
+      "Dobs": 0.5858,
+      "nDnull": 0.54,
+      "esP": 0.1795,
+      "esN": 0.0553
+     },
+     "code-rb": {
+      "pairs": 431,
+      "auc": 0.623,
+      "lo": 0.5694,
+      "hi": 0.6733,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5244,
+       "es": 0.6148,
+       "fs": 0.355,
+       "ch": 0.5708,
+       "slen": 0.4698
+      },
+      "DLxF": 0.5882,
+      "Dobs": 0.6381,
+      "nDnull": 0.4188,
+      "esP": 0.2078,
+      "esN": 0.1701
+     }
+    }
+   },
+   "M2": {
+    "cells": 3,
+    "pairsTotal": 1198,
+    "valid": 3,
+    "medAll": 0.599,
+    "medValid": 0.599,
+    "POS": 3,
+    "NEG": 0,
+    "nLowValid": 0,
+    "pooledAll": {
+     "auc": 0.6206,
+     "lo": 0.5886,
+     "hi": 0.6514,
+     "pairs": 1198,
+     "clusters": 819
+    },
+    "pooledValid": {
+     "auc": 0.6206,
+     "lo": 0.5843,
+     "hi": 0.6543,
+     "pairs": 1198,
+     "clusters": 819
+    },
+    "medDLxF": 0.6014,
+    "medEsP": 0.0256,
+    "medEsN": 0.0216,
+    "perReg": {
+     "code-js": {
+      "pairs": 410,
+      "auc": 0.6659,
+      "lo": 0.6108,
+      "hi": 0.7233,
+      "valid": true,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5061,
+       "es": 0.5293,
+       "fs": 0.4573,
+       "ch": 0.4768,
+       "slen": 0.4646
+      },
+      "DLxF": 0.6705,
+      "Dobs": 0.6561,
+      "nDnull": 0.4354,
+      "esP": 0.0256,
+      "esN": 0.0216
+     },
+     "code-py": {
+      "pairs": 525,
+      "auc": 0.599,
+      "lo": 0.5434,
+      "hi": 0.65,
+      "valid": true,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5276,
+       "es": 0.541,
+       "fs": 0.4895,
+       "ch": 0.6343,
+       "slen": 0.4381
+      },
+      "DLxF": 0.6014,
+      "Dobs": 0.5705,
+      "nDnull": 0.5581,
+      "esP": 0.0208,
+      "esN": 0.0146
+     },
+     "code-rb": {
+      "pairs": 263,
+      "auc": 0.5932,
+      "lo": 0.5074,
+      "hi": 0.6686,
+      "valid": true,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.4734,
+       "es": 0.5019,
+       "fs": 0.4981,
+       "ch": 0.557,
+       "slen": 0.4867
+      },
+      "DLxF": 0.5872,
+      "Dobs": 0.5646,
+      "nDnull": 0.4886,
+      "esP": 0.0465,
+      "esN": 0.0457
+     }
+    }
+   },
+   "M3": {
+    "cells": 3,
+    "pairsTotal": 1155,
+    "valid": 2,
+    "medAll": 0.5806,
+    "medValid": 0.5567,
+    "POS": 1,
+    "NEG": 0,
+    "nLowValid": 0,
+    "pooledAll": {
+     "auc": 0.6009,
+     "lo": 0.5638,
+     "hi": 0.6357,
+     "pairs": 1155,
+     "clusters": 778
+    },
+    "pooledValid": {
+     "auc": 0.573,
+     "lo": 0.5266,
+     "hi": 0.6204,
+     "pairs": 753,
+     "clusters": 479
+    },
+    "medDLxF": 0.5825,
+    "medEsP": 0.0175,
+    "medEsN": 0.0119,
+    "perReg": {
+     "code-js": {
+      "pairs": 402,
+      "auc": 0.653,
+      "lo": 0.5951,
+      "hi": 0.7091,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.4888,
+       "es": 0.541,
+       "fs": 0.444,
+       "ch": 0.5062,
+       "slen": 0.4813
+      },
+      "DLxF": 0.658,
+      "Dobs": 0.6468,
+      "nDnull": 0.4776,
+      "esP": 0.0175,
+      "esN": 0.0119
+     },
+     "code-py": {
+      "pairs": 515,
+      "auc": 0.5806,
+      "lo": 0.5255,
+      "hi": 0.6395,
+      "valid": true,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.534,
+       "es": 0.5427,
+       "fs": 0.4835,
+       "ch": 0.6155,
+       "slen": 0.4233
+      },
+      "DLxF": 0.5825,
+      "Dobs": 0.5223,
+      "nDnull": 0.5854,
+      "esP": 0.0114,
+      "esN": 0.0049
+     },
+     "code-rb": {
+      "pairs": 238,
+      "auc": 0.5567,
+      "lo": 0.4708,
+      "hi": 0.6385,
+      "valid": true,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.4895,
+       "es": 0.5105,
+       "fs": 0.4958,
+       "ch": 0.5651,
+       "slen": 0.5105
+      },
+      "DLxF": 0.5651,
+      "Dobs": 0.521,
+      "nDnull": 0.5084,
+      "esP": 0.0193,
+      "esN": 0.0172
+     }
+    }
+   },
+   "M4": {
+    "cells": 3,
+    "pairsTotal": 1153,
+    "valid": 3,
+    "medAll": 0.5725,
+    "medValid": 0.5725,
+    "POS": 2,
+    "NEG": 0,
+    "nLowValid": 0,
+    "pooledAll": {
+     "auc": 0.5993,
+     "lo": 0.5675,
+     "hi": 0.6357,
+     "pairs": 1153,
+     "clusters": 780
+    },
+    "pooledValid": {
+     "auc": 0.5993,
+     "lo": 0.5641,
+     "hi": 0.6323,
+     "pairs": 1153,
+     "clusters": 780
+    },
+    "medDLxF": 0.5663,
+    "medEsP": 0.0062,
+    "medEsN": 0.0025,
+    "perReg": {
+     "code-js": {
+      "pairs": 397,
+      "auc": 0.6511,
+      "lo": 0.5966,
+      "hi": 0.7079,
+      "valid": true,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.4861,
+       "es": 0.5239,
+       "fs": 0.471,
+       "ch": 0.4861,
+       "slen": 0.4597
+      },
+      "DLxF": 0.6637,
+      "Dobs": 0.6612,
+      "nDnull": 0.4861,
+      "esP": 0.007,
+      "esN": 0.0032
+     },
+     "code-py": {
+      "pairs": 517,
+      "auc": 0.5725,
+      "lo": 0.518,
+      "hi": 0.6201,
+      "valid": true,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5184,
+       "es": 0.5377,
+       "fs": 0.4845,
+       "ch": 0.6306,
+       "slen": 0.4381
+      },
+      "DLxF": 0.5663,
+      "Dobs": 0.5368,
+      "nDnull": 0.5551,
+      "esP": 0.0062,
+      "esN": 0.0001
+     },
+     "code-rb": {
+      "pairs": 239,
+      "auc": 0.5711,
+      "lo": 0.4796,
+      "hi": 0.65,
+      "valid": true,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.4603,
+       "es": 0.5105,
+       "fs": 0.4749,
+       "ch": 0.5502,
+       "slen": 0.4665
+      },
+      "DLxF": 0.5608,
+      "Dobs": 0.546,
+      "nDnull": 0.4498,
+      "esP": 0.0047,
+      "esN": 0.0025
+     }
+    }
+   },
+   "R0": [
+    {
+     "reg": "code-js",
+     "pairs": 479,
+     "aucExact": 0.6754,
+     "aucTieTol": 0.6754,
+     "pShareZero": 0.1002,
+     "pShareFloatNoise": 0.0271,
+     "tieShareExact": 0.0188,
+     "tieShareTol": 0.023
+    },
+    {
+     "reg": "code-py",
+     "pairs": 600,
+     "aucExact": 0.6175,
+     "aucTieTol": 0.6192,
+     "pShareZero": 0.1217,
+     "pShareFloatNoise": 0.055,
+     "tieShareExact": 0.015,
+     "tieShareTol": 0.0317
+    },
+    {
+     "reg": "code-rb",
+     "pairs": 483,
+     "aucExact": 0.6149,
+     "aucTieTol": 0.6159,
+     "pShareZero": 0.1822,
+     "pShareFloatNoise": 0.0621,
+     "tieShareExact": 0.0455,
+     "tieShareTol": 0.0766
+    }
+   ],
+   "R0med": {
+    "aucExact": 0.6175,
+    "aucTieTol": 0.6192,
+    "n": 3
+   }
+  },
+  "book": {
+   "M0": {
+    "cells": 6,
+    "pairsTotal": 1417,
+    "valid": 0,
+    "medAll": 0.4131,
+    "medValid": null,
+    "POS": 0,
+    "NEG": 0,
+    "nLowValid": 0,
+    "pooledAll": {
+     "auc": 0.4492,
+     "lo": 0.4149,
+     "hi": 0.484,
+     "pairs": 1417,
+     "clusters": 481
+    },
+    "pooledValid": null,
+    "medDLxF": 0.366,
+    "medEsP": 0.1061,
+    "medEsN": 0.024,
+    "perReg": {
+     "book-the-war-of-the-worlds": {
+      "pairs": 153,
+      "auc": 0.3758,
+      "lo": 0.2843,
+      "hi": 0.4837,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.3497,
+       "es": 0.585,
+       "fs": 0.415,
+       "ch": 0.5654,
+       "slen": 0.4575
+      },
+      "DLxF": 0.366,
+      "Dobs": 0.3595,
+      "nDnull": 0.5686,
+      "esP": 0.0494,
+      "esN": 0.017
+     },
+     "book-great-expectations": {
+      "pairs": 313,
+      "auc": 0.4058,
+      "lo": 0.3376,
+      "hi": 0.4792,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.4633,
+       "es": 0.6965,
+       "fs": 0.3035,
+       "ch": 0.4872,
+       "slen": 0.4329
+      },
+      "DLxF": 0.345,
+      "Dobs": 0.3403,
+      "nDnull": 0.6502,
+      "esP": 0.1061,
+      "esN": 0.0202
+     },
+     "book-treasure-island": {
+      "pairs": 141,
+      "auc": 0.461,
+      "lo": 0.3525,
+      "hi": 0.5833,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5035,
+       "es": 0.7163,
+       "fs": 0.2837,
+       "ch": 0.4397,
+       "slen": 0.4858
+      },
+      "DLxF": 0.4681,
+      "Dobs": 0.4291,
+      "nDnull": 0.6099,
+      "esP": 0.1089,
+      "esN": 0.044
+     },
+     "book-anne-of-green-gables": {
+      "pairs": 328,
+      "auc": 0.4131,
+      "lo": 0.3318,
+      "hi": 0.4908,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5137,
+       "es": 0.6509,
+       "fs": 0.3491,
+       "ch": 0.5107,
+       "slen": 0.4817
+      },
+      "DLxF": 0.3567,
+      "Dobs": 0.3186,
+      "nDnull": 0.7012,
+      "esP": 0.1122,
+      "esN": 0.0255
+     },
+     "book-wuthering-heights": {
+      "pairs": 162,
+      "auc": 0.5586,
+      "lo": 0.4417,
+      "hi": 0.6687,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5617,
+       "es": 0.6667,
+       "fs": 0.3333,
+       "ch": 0.5278,
+       "slen": 0.4877
+      },
+      "DLxF": 0.5216,
+      "Dobs": 0.466,
+      "nDnull": 0.6698,
+      "esP": 0.0984,
+      "esN": 0.0328
+     },
+     "book-crime-and-punishment": {
+      "pairs": 320,
+      "auc": 0.5031,
+      "lo": 0.4258,
+      "hi": 0.5781,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5125,
+       "es": 0.7422,
+       "fs": 0.2578,
+       "ch": 0.6422,
+       "slen": 0.4813
+      },
+      "DLxF": 0.4734,
+      "Dobs": 0.3531,
+      "nDnull": 0.7609,
+      "esP": 0.1159,
+      "esN": 0.024
+     }
+    }
+   },
+   "M1": {
+    "cells": 6,
+    "pairsTotal": 1267,
+    "valid": 0,
+    "medAll": 0.4333,
+    "medValid": null,
+    "POS": 0,
+    "NEG": 0,
+    "nLowValid": 0,
+    "pooledAll": {
+     "auc": 0.4179,
+     "lo": 0.3755,
+     "hi": 0.4562,
+     "pairs": 1267,
+     "clusters": 423
+    },
+    "pooledValid": null,
+    "medDLxF": 0.414,
+    "medEsP": 0.089,
+    "medEsN": 0.0307,
+    "perReg": {
+     "book-the-war-of-the-worlds": {
+      "pairs": 147,
+      "auc": 0.449,
+      "lo": 0.3333,
+      "hi": 0.585,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.483,
+       "es": 0.6054,
+       "fs": 0.3946,
+       "ch": 0.5646,
+       "slen": 0.4932
+      },
+      "DLxF": 0.4422,
+      "Dobs": 0.4116,
+      "nDnull": 0.6327,
+      "esP": 0.0514,
+      "esN": 0.0263
+     },
+     "book-great-expectations": {
+      "pairs": 288,
+      "auc": 0.3976,
+      "lo": 0.2986,
+      "hi": 0.4757,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.4757,
+       "es": 0.6424,
+       "fs": 0.3576,
+       "ch": 0.4444,
+       "slen": 0.4583
+      },
+      "DLxF": 0.3594,
+      "Dobs": 0.316,
+      "nDnull": 0.6597,
+      "esP": 0.0969,
+      "esN": 0.0355
+     },
+     "book-treasure-island": {
+      "pairs": 132,
+      "auc": 0.4697,
+      "lo": 0.3333,
+      "hi": 0.6136,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.4886,
+       "es": 0.6667,
+       "fs": 0.3333,
+       "ch": 0.4621,
+       "slen": 0.4962
+      },
+      "DLxF": 0.4773,
+      "Dobs": 0.4356,
+      "nDnull": 0.6212,
+      "esP": 0.1062,
+      "esN": 0.0674
+     },
+     "book-anne-of-green-gables": {
+      "pairs": 292,
+      "auc": 0.375,
+      "lo": 0.2908,
+      "hi": 0.4692,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.4983,
+       "es": 0.5959,
+       "fs": 0.4041,
+       "ch": 0.5462,
+       "slen": 0.4983
+      },
+      "DLxF": 0.2979,
+      "Dobs": 0.274,
+      "nDnull": 0.7329,
+      "esP": 0.089,
+      "esN": 0.0307
+     },
+     "book-wuthering-heights": {
+      "pairs": 123,
+      "auc": 0.439,
+      "lo": 0.3008,
+      "hi": 0.5772,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5285,
+       "es": 0.5732,
+       "fs": 0.4268,
+       "ch": 0.5407,
+       "slen": 0.5407
+      },
+      "DLxF": 0.439,
+      "Dobs": 0.3943,
+      "nDnull": 0.6138,
+      "esP": 0.0717,
+      "esN": 0.0304
+     },
+     "book-crime-and-punishment": {
+      "pairs": 285,
+      "auc": 0.4333,
+      "lo": 0.3421,
+      "hi": 0.514,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5105,
+       "es": 0.6789,
+       "fs": 0.3211,
+       "ch": 0.6175,
+       "slen": 0.4947
+      },
+      "DLxF": 0.414,
+      "Dobs": 0.3719,
+      "nDnull": 0.7281,
+      "esP": 0.0972,
+      "esN": 0.0421
+     }
+    }
+   },
+   "M2": {
+    "cells": 6,
+    "pairsTotal": 1067,
+    "valid": 2,
+    "medAll": 0.3559,
+    "medValid": 0.3095,
+    "POS": 0,
+    "NEG": 1,
+    "nLowValid": 2,
+    "pooledAll": {
+     "auc": 0.3613,
+     "lo": 0.3126,
+     "hi": 0.4067,
+     "pairs": 1067,
+     "clusters": 360
+    },
+    "pooledValid": {
+     "auc": 0.3389,
+     "lo": 0.2611,
+     "hi": 0.4073,
+     "pairs": 357,
+     "clusters": 120
+    },
+    "medDLxF": 0.3537,
+    "medEsP": 0.033,
+    "medEsN": 0.0252,
+    "perReg": {
+     "book-the-war-of-the-worlds": {
+      "pairs": 129,
+      "auc": 0.4535,
+      "lo": 0.3465,
+      "hi": 0.6031,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.4961,
+       "es": 0.5504,
+       "fs": 0.4496,
+       "ch": 0.5194,
+       "slen": 0.5078
+      },
+      "DLxF": 0.4535,
+      "Dobs": 0.4225,
+      "nDnull": 0.5814,
+      "esP": 0.0288,
+      "esN": 0.0239
+     },
+     "book-great-expectations": {
+      "pairs": 238,
+      "auc": 0.3256,
+      "lo": 0.2406,
+      "hi": 0.416,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.4874,
+       "es": 0.5672,
+       "fs": 0.4328,
+       "ch": 0.4937,
+       "slen": 0.5
+      },
+      "DLxF": 0.3256,
+      "Dobs": 0.3193,
+      "nDnull": 0.5966,
+      "esP": 0.0464,
+      "esN": 0.0401
+     },
+     "book-treasure-island": {
+      "pairs": 114,
+      "auc": 0.4123,
+      "lo": 0.2609,
+      "hi": 0.5702,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.4912,
+       "es": 0.6272,
+       "fs": 0.3728,
+       "ch": 0.4737,
+       "slen": 0.4298
+      },
+      "DLxF": 0.4123,
+      "Dobs": 0.4254,
+      "nDnull": 0.557,
+      "esP": 0.0822,
+      "esN": 0.0681
+     },
+     "book-anne-of-green-gables": {
+      "pairs": 252,
+      "auc": 0.3095,
+      "lo": 0.2302,
+      "hi": 0.3854,
+      "valid": true,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5099,
+       "es": 0.5298,
+       "fs": 0.4702,
+       "ch": 0.5456,
+       "slen": 0.5397
+      },
+      "DLxF": 0.3095,
+      "Dobs": 0.3135,
+      "nDnull": 0.6706,
+      "esP": 0.0308,
+      "esN": 0.025
+     },
+     "book-wuthering-heights": {
+      "pairs": 105,
+      "auc": 0.4095,
+      "lo": 0.2857,
+      "hi": 0.5429,
+      "valid": true,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.519,
+       "es": 0.5286,
+       "fs": 0.4714,
+       "ch": 0.5381,
+       "slen": 0.4667
+      },
+      "DLxF": 0.4095,
+      "Dobs": 0.419,
+      "nDnull": 0.5857,
+      "esP": 0.033,
+      "esN": 0.0252
+     },
+     "book-crime-and-punishment": {
+      "pairs": 229,
+      "auc": 0.3559,
+      "lo": 0.2687,
+      "hi": 0.4632,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5066,
+       "es": 0.6004,
+       "fs": 0.3996,
+       "ch": 0.6114,
+       "slen": 0.4651
+      },
+      "DLxF": 0.3537,
+      "Dobs": 0.3275,
+      "nDnull": 0.6485,
+      "esP": 0.0593,
+      "esN": 0.048
+     }
+    }
+   },
+   "M3": {
+    "cells": 6,
+    "pairsTotal": 1068,
+    "valid": 3,
+    "medAll": 0.337,
+    "medValid": 0.3249,
+    "POS": 0,
+    "NEG": 2,
+    "nLowValid": 3,
+    "pooledAll": {
+     "auc": 0.3511,
+     "lo": 0.3147,
+     "hi": 0.395,
+     "pairs": 1068,
+     "clusters": 359
+    },
+    "pooledValid": {
+     "auc": 0.3328,
+     "lo": 0.2786,
+     "hi": 0.3887,
+     "pairs": 595,
+     "clusters": 200
+    },
+    "medDLxF": 0.337,
+    "medEsP": 0.033,
+    "medEsN": 0.0249,
+    "perReg": {
+     "book-the-war-of-the-worlds": {
+      "pairs": 129,
+      "auc": 0.4457,
+      "lo": 0.3256,
+      "hi": 0.5775,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.4884,
+       "es": 0.5543,
+       "fs": 0.4457,
+       "ch": 0.5426,
+       "slen": 0.4884
+      },
+      "DLxF": 0.4457,
+      "Dobs": 0.4496,
+      "nDnull": 0.5504,
+      "esP": 0.0288,
+      "esN": 0.0236
+     },
+     "book-great-expectations": {
+      "pairs": 237,
+      "auc": 0.3249,
+      "lo": 0.2321,
+      "hi": 0.4255,
+      "valid": true,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.4831,
+       "es": 0.5485,
+       "fs": 0.4515,
+       "ch": 0.4789,
+       "slen": 0.4494
+      },
+      "DLxF": 0.3291,
+      "Dobs": 0.3038,
+      "nDnull": 0.6181,
+      "esP": 0.0454,
+      "esN": 0.0393
+     },
+     "book-treasure-island": {
+      "pairs": 114,
+      "auc": 0.3684,
+      "lo": 0.2393,
+      "hi": 0.5,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.4737,
+       "es": 0.614,
+       "fs": 0.386,
+       "ch": 0.4474,
+       "slen": 0.5439
+      },
+      "DLxF": 0.3772,
+      "Dobs": 0.4035,
+      "nDnull": 0.5614,
+      "esP": 0.082,
+      "esN": 0.0694
+     },
+     "book-anne-of-green-gables": {
+      "pairs": 253,
+      "auc": 0.2945,
+      "lo": 0.2157,
+      "hi": 0.376,
+      "valid": true,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5158,
+       "es": 0.5356,
+       "fs": 0.4644,
+       "ch": 0.5198,
+       "slen": 0.4881
+      },
+      "DLxF": 0.2905,
+      "Dobs": 0.2984,
+      "nDnull": 0.6344,
+      "esP": 0.0307,
+      "esN": 0.0248
+     },
+     "book-wuthering-heights": {
+      "pairs": 105,
+      "auc": 0.4429,
+      "lo": 0.3095,
+      "hi": 0.5762,
+      "valid": true,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5095,
+       "es": 0.5429,
+       "fs": 0.4571,
+       "ch": 0.5429,
+       "slen": 0.5381
+      },
+      "DLxF": 0.4429,
+      "Dobs": 0.4238,
+      "nDnull": 0.5857,
+      "esP": 0.033,
+      "esN": 0.0249
+     },
+     "book-crime-and-punishment": {
+      "pairs": 230,
+      "auc": 0.337,
+      "lo": 0.2468,
+      "hi": 0.4437,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5065,
+       "es": 0.5957,
+       "fs": 0.4043,
+       "ch": 0.6326,
+       "slen": 0.4804
+      },
+      "DLxF": 0.337,
+      "Dobs": 0.2978,
+      "nDnull": 0.7087,
+      "esP": 0.0597,
+      "esN": 0.0482
+     }
+    }
+   },
+   "M4": {
+    "cells": 6,
+    "pairsTotal": 1024,
+    "valid": 3,
+    "medAll": 0.326,
+    "medValid": 0.3578,
+    "POS": 0,
+    "NEG": 2,
+    "nLowValid": 3,
+    "pooledAll": {
+     "auc": 0.3403,
+     "lo": 0.2951,
+     "hi": 0.3855,
+     "pairs": 1024,
+     "clusters": 345
+    },
+    "pooledValid": {
+     "auc": 0.3486,
+     "lo": 0.285,
+     "hi": 0.4121,
+     "pairs": 469,
+     "clusters": 158
+    },
+    "medDLxF": 0.326,
+    "medEsP": 0.0271,
+    "medEsN": 0.0216,
+    "perReg": {
+     "book-the-war-of-the-worlds": {
+      "pairs": 123,
+      "auc": 0.3984,
+      "lo": 0.2941,
+      "hi": 0.5081,
+      "valid": true,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.4756,
+       "es": 0.5447,
+       "fs": 0.4553,
+       "ch": 0.5285,
+       "slen": 0.4593
+      },
+      "DLxF": 0.3984,
+      "Dobs": 0.4106,
+      "nDnull": 0.5569,
+      "esP": 0.015,
+      "esN": 0.0118
+     },
+     "book-great-expectations": {
+      "pairs": 227,
+      "auc": 0.326,
+      "lo": 0.2467,
+      "hi": 0.4009,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.4846,
+       "es": 0.5617,
+       "fs": 0.4383,
+       "ch": 0.4868,
+       "slen": 0.4758
+      },
+      "DLxF": 0.326,
+      "Dobs": 0.326,
+      "nDnull": 0.5859,
+      "esP": 0.0348,
+      "esN": 0.0283
+     },
+     "book-treasure-island": {
+      "pairs": 102,
+      "auc": 0.3922,
+      "lo": 0.2525,
+      "hi": 0.5098,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.5539,
+       "es": 0.6176,
+       "fs": 0.3824,
+       "ch": 0.4902,
+       "slen": 0.5833
+      },
+      "DLxF": 0.3922,
+      "Dobs": 0.402,
+      "nDnull": 0.5686,
+      "esP": 0.0647,
+      "esN": 0.0489
+     },
+     "book-anne-of-green-gables": {
+      "pairs": 244,
+      "auc": 0.3197,
+      "lo": 0.2439,
+      "hi": 0.3943,
+      "valid": true,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.4918,
+       "es": 0.5287,
+       "fs": 0.4713,
+       "ch": 0.5553,
+       "slen": 0.4693
+      },
+      "DLxF": 0.3197,
+      "Dobs": 0.3176,
+      "nDnull": 0.6434,
+      "esP": 0.0244,
+      "esN": 0.0202
+     },
+     "book-wuthering-heights": {
+      "pairs": 102,
+      "auc": 0.3578,
+      "lo": 0.2304,
+      "hi": 0.4951,
+      "valid": true,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.4951,
+       "es": 0.5098,
+       "fs": 0.4902,
+       "ch": 0.5294,
+       "slen": 0.4706
+      },
+      "DLxF": 0.3578,
+      "Dobs": 0.3676,
+      "nDnull": 0.5441,
+      "esP": 0.0271,
+      "esN": 0.0216
+     },
+     "book-crime-and-punishment": {
+      "pairs": 226,
+      "auc": 0.3142,
+      "lo": 0.2111,
+      "hi": 0.4156,
+      "valid": false,
+      "ctrl": {
+       "pos": 0.5,
+       "logn": 0.4978,
+       "es": 0.5951,
+       "fs": 0.4049,
+       "ch": 0.6372,
+       "slen": 0.3982
+      },
+      "DLxF": 0.3142,
+      "Dobs": 0.2832,
+      "nDnull": 0.7301,
+      "esP": 0.0571,
+      "esN": 0.0456
+     }
+    }
+   },
+   "R0": [
+    {
+     "reg": "book-the-war-of-the-worlds",
+     "pairs": 153,
+     "aucExact": 0.3791,
+     "aucTieTol": 0.3791,
+     "pShareZero": 0.0065,
+     "pShareFloatNoise": 0,
+     "tieShareExact": 0,
+     "tieShareTol": 0
+    },
+    {
+     "reg": "book-great-expectations",
+     "pairs": 313,
+     "aucExact": 0.4073,
+     "aucTieTol": 0.4073,
+     "pShareZero": 0.0224,
+     "pShareFloatNoise": 0,
+     "tieShareExact": 0.0032,
+     "tieShareTol": 0.0032
+    },
+    {
+     "reg": "book-treasure-island",
+     "pairs": 141,
+     "aucExact": 0.4929,
+     "aucTieTol": 0.4929,
+     "pShareZero": 0.0284,
+     "pShareFloatNoise": 0,
+     "tieShareExact": 0.0071,
+     "tieShareTol": 0.0071
+    },
+    {
+     "reg": "book-anne-of-green-gables",
+     "pairs": 328,
+     "aucExact": 0.4055,
+     "aucTieTol": 0.4055,
+     "pShareZero": 0.0152,
+     "pShareFloatNoise": 0.003,
+     "tieShareExact": 0,
+     "tieShareTol": 0
+    },
+    {
+     "reg": "book-wuthering-heights",
+     "pairs": 162,
+     "aucExact": 0.5525,
+     "aucTieTol": 0.5525,
+     "pShareZero": 0.0309,
+     "pShareFloatNoise": 0,
+     "tieShareExact": 0.0185,
+     "tieShareTol": 0.0185
+    },
+    {
+     "reg": "book-crime-and-punishment",
+     "pairs": 320,
+     "aucExact": 0.5078,
+     "aucTieTol": 0.5062,
+     "pShareZero": 0.0156,
+     "pShareFloatNoise": 0.0031,
+     "tieShareExact": 0.0031,
+     "tieShareTol": 0.0063
+    }
+   ],
+   "R0med": {
+    "aucExact": 0.4073,
+    "aucTieTol": 0.4073,
+    "n": 6
+   }
+  },
+  "ud": {
+   "M0": {
+    "cells": 57,
+    "pairsTotal": 20454,
+    "valid": 11,
+    "medAll": 0.4779,
+    "medValid": 0.4779,
+    "POS": 0,
+    "NEG": 5,
+    "nLowValid": 5,
+    "pooledAll": {
+     "auc": 0.4585,
+     "lo": 0.4502,
+     "hi": 0.4669,
+     "pairs": 20454,
+     "clusters": 9708
+    },
+    "pooledValid": {
+     "auc": 0.4353,
+     "lo": 0.4173,
+     "hi": 0.4527,
+     "pairs": 4287,
+     "clusters": 2163
+    },
+    "medDLxF": 0.4742,
+    "medEsP": 0.0944,
+    "medEsN": 0.0587
+   },
+   "M1": {
+    "cells": 57,
+    "pairsTotal": 20166,
+    "valid": 26,
+    "medAll": 0.4505,
+    "medValid": 0.4386,
+    "POS": 0,
+    "NEG": 14,
+    "nLowValid": 19,
+    "pooledAll": {
+     "auc": 0.446,
+     "lo": 0.438,
+     "hi": 0.4548,
+     "pairs": 20166,
+     "clusters": 9590
+    },
+    "pooledValid": {
+     "auc": 0.4325,
+     "lo": 0.4215,
+     "hi": 0.4447,
+     "pairs": 10191,
+     "clusters": 4951
+    },
+    "medDLxF": 0.4415,
+    "medEsP": 0.0933,
+    "medEsN": 0.0696
+   },
+   "M2": {
+    "cells": 57,
+    "pairsTotal": 19411,
+    "valid": 52,
+    "medAll": 0.4547,
+    "medValid": 0.4425,
+    "POS": 0,
+    "NEG": 22,
+    "nLowValid": 32,
+    "pooledAll": {
+     "auc": 0.4396,
+     "lo": 0.4308,
+     "hi": 0.4477,
+     "pairs": 19411,
+     "clusters": 9317
+    },
+    "pooledValid": {
+     "auc": 0.4391,
+     "lo": 0.4306,
+     "hi": 0.4475,
+     "pairs": 19276,
+     "clusters": 9246
+    },
+    "medDLxF": 0.4544,
+    "medEsP": 0.0634,
+    "medEsN": 0.0622
+   },
+   "M3": {
+    "cells": 57,
+    "pairsTotal": 18356,
+    "valid": 51,
+    "medAll": 0.4502,
+    "medValid": 0.4425,
+    "POS": 0,
+    "NEG": 22,
+    "nLowValid": 33,
+    "pooledAll": {
+     "auc": 0.4369,
+     "lo": 0.4271,
+     "hi": 0.4455,
+     "pairs": 18356,
+     "clusters": 8511
+    },
+    "pooledValid": {
+     "auc": 0.4342,
+     "lo": 0.4253,
+     "hi": 0.4444,
+     "pairs": 17641,
+     "clusters": 8098
+    },
+    "medDLxF": 0.4508,
+    "medEsP": 0.0498,
+    "medEsN": 0.0467
+   },
+   "M4": {
+    "cells": 57,
+    "pairsTotal": 16845,
+    "valid": 52,
+    "medAll": 0.4388,
+    "medValid": 0.4298,
+    "POS": 0,
+    "NEG": 20,
+    "nLowValid": 36,
+    "pooledAll": {
+     "auc": 0.4319,
+     "lo": 0.4212,
+     "hi": 0.4404,
+     "pairs": 16845,
+     "clusters": 7816
+    },
+    "pooledValid": {
+     "auc": 0.4317,
+     "lo": 0.4239,
+     "hi": 0.4399,
+     "pairs": 16746,
+     "clusters": 7769
+    },
+    "medDLxF": 0.4348,
+    "medEsP": 0.0197,
+    "medEsN": 0.0178
+   },
+   "R0": [
+    {
+     "reg": "ud-af_afribooms",
+     "pairs": 58,
+     "aucExact": 0.3534,
+     "aucTieTol": 0.3534,
+     "pShareZero": 0.1207,
+     "pShareFloatNoise": 0,
+     "tieShareExact": 0.0172,
+     "tieShareTol": 0.0172
+    },
+    {
+     "reg": "ud-ca_ancora",
+     "pairs": 600,
+     "aucExact": 0.49,
+     "aucTieTol": 0.4908,
+     "pShareZero": 0.1167,
+     "pShareFloatNoise": 0.0067,
+     "tieShareExact": 0.0433,
+     "tieShareTol": 0.045
+    },
+    {
+     "reg": "ud-cy_ccg",
+     "pairs": 217,
+     "aucExact": 0.4885,
+     "aucTieTol": 0.4862,
+     "pShareZero": 0.2535,
+     "pShareFloatNoise": 0,
+     "tieShareExact": 0.0829,
+     "tieShareTol": 0.0876
+    },
+    {
+     "reg": "ud-es_gsd",
+     "pairs": 600,
+     "aucExact": 0.495,
+     "aucTieTol": 0.4942,
+     "pShareZero": 0.1433,
+     "pShareFloatNoise": 0,
+     "tieShareExact": 0.0567,
+     "tieShareTol": 0.0583
+    },
+    {
+     "reg": "ud-fi_tdt",
+     "pairs": 600,
+     "aucExact": 0.5067,
+     "aucTieTol": 0.505,
+     "pShareZero": 0.47,
+     "pShareFloatNoise": 0.1617,
+     "tieShareExact": 0.19,
+     "tieShareTol": 0.3
+    },
+    {
+     "reg": "ud-gl_treegal",
+     "pairs": 155,
+     "aucExact": 0.4613,
+     "aucTieTol": 0.4581,
+     "pShareZero": 0.1097,
+     "pShareFloatNoise": 0.0258,
+     "tieShareExact": 0.0581,
+     "tieShareTol": 0.0645
+    },
+    {
+     "reg": "ud-hi_hdtb",
+     "pairs": 600,
+     "aucExact": 0.545,
+     "aucTieTol": 0.5475,
+     "pShareZero": 0.1783,
+     "pShareFloatNoise": 0.0417,
+     "tieShareExact": 0.0567,
+     "tieShareTol": 0.0783
+    },
+    {
+     "reg": "ud-id_gsd",
+     "pairs": 600,
+     "aucExact": 0.4783,
+     "aucTieTol": 0.4767,
+     "pShareZero": 0.215,
+     "pShareFloatNoise": 0.0067,
+     "tieShareExact": 0.12,
+     "tieShareTol": 0.1267
+    },
+    {
+     "reg": "ud-ka_glc",
+     "pairs": 141,
+     "aucExact": 0.5071,
+     "aucTieTol": 0.5106,
+     "pShareZero": 0.4752,
+     "pShareFloatNoise": 0.1489,
+     "tieShareExact": 0.2057,
+     "tieShareTol": 0.2553
+    },
+    {
+     "reg": "ud-lt_alksnis",
+     "pairs": 94,
+     "aucExact": 0.4521,
+     "aucTieTol": 0.4521,
+     "pShareZero": 0.2979,
+     "pShareFloatNoise": 0.0319,
+     "tieShareExact": 0.2021,
+     "tieShareTol": 0.2447
+    },
+    {
+     "reg": "ud-nl_alpino",
+     "pairs": 600,
+     "aucExact": 0.4283,
+     "aucTieTol": 0.4267,
+     "pShareZero": 0.19,
+     "pShareFloatNoise": 0.02,
+     "tieShareExact": 0.1,
+     "tieShareTol": 0.1133
+    },
+    {
+     "reg": "ud-ro_rrt",
+     "pairs": 189,
+     "aucExact": 0.4392,
+     "aucTieTol": 0.4392,
+     "pShareZero": 0.291,
+     "pShareFloatNoise": 0.0159,
+     "tieShareExact": 0.1164,
+     "tieShareTol": 0.127
+    },
+    {
+     "reg": "ud-sl_ssj",
+     "pairs": 232,
+     "aucExact": 0.4978,
+     "aucTieTol": 0.5065,
+     "pShareZero": 0.4655,
+     "pShareFloatNoise": 0.0776,
+     "tieShareExact": 0.2284,
+     "tieShareTol": 0.2802
+    },
+    {
+     "reg": "ud-tr_imst",
+     "pairs": 337,
+     "aucExact": 0.4896,
+     "aucTieTol": 0.4688,
+     "pShareZero": 0.6142,
+     "pShareFloatNoise": 0.2493,
+     "tieShareExact": 0.2077,
+     "tieShareTol": 0.4332
+    },
+    {
+     "reg": "ud-vi_vtb",
+     "pairs": 205,
+     "aucExact": 0.3829,
+     "aucTieTol": 0.3732,
+     "pShareZero": 0.2244,
+     "pShareFloatNoise": 0.0976,
+     "tieShareExact": 0.0439,
+     "tieShareTol": 0.1024
+    },
+    {
+     "reg": "ud-ar_padt",
+     "pairs": 5,
+     "aucExact": 0.8,
+     "aucTieTol": 0.8,
+     "pShareZero": 0.6,
+     "pShareFloatNoise": 0,
+     "tieShareExact": 0.4,
+     "tieShareTol": 0.4
+    },
+    {
+     "reg": "ud-cop_scriptorium",
+     "pairs": 83,
+     "aucExact": 0.5422,
+     "aucTieTol": 0.5422,
+     "pShareZero": 0.1084,
+     "pShareFloatNoise": 0.0361,
+     "tieShareExact": 0.0241,
+     "tieShareTol": 0.0241
+    },
+    {
+     "reg": "ud-da_ddt",
+     "pairs": 487,
+     "aucExact": 0.4867,
+     "aucTieTol": 0.4877,
+     "pShareZero": 0.4086,
+     "pShareFloatNoise": 0.0308,
+     "tieShareExact": 0.1766,
+     "tieShareTol": 0.2033
+    },
+    {
+     "reg": "ud-et_edt",
+     "pairs": 600,
+     "aucExact": 0.5008,
+     "aucTieTol": 0.5025,
+     "pShareZero": 0.465,
+     "pShareFloatNoise": 0.0833,
+     "tieShareExact": 0.235,
+     "tieShareTol": 0.3017
+    },
+    {
+     "reg": "ud-fo_farpahc",
+     "pairs": 164,
+     "aucExact": 0.5579,
+     "aucTieTol": 0.5549,
+     "pShareZero": 0.122,
+     "pShareFloatNoise": 0.0427,
+     "tieShareExact": 0.0305,
+     "tieShareTol": 0.0366
+    },
+    {
+     "reg": "ud-got_proiel",
+     "pairs": 204,
+     "aucExact": 0.4559,
+     "aucTieTol": 0.4559,
+     "pShareZero": 0.1078,
+     "pShareFloatNoise": 0.0049,
+     "tieShareExact": 0.049,
+     "tieShareTol": 0.049
+    },
+    {
+     "reg": "ud-hr_set",
+     "pairs": 600,
+     "aucExact": 0.3225,
+     "aucTieTol": 0.3208,
+     "pShareZero": 0.1583,
+     "pShareFloatNoise": 0.04,
+     "tieShareExact": 0.0683,
+     "tieShareTol": 0.095
+    },
+    {
+     "reg": "ud-is_icepahc",
+     "pairs": 600,
+     "aucExact": 0.3542,
+     "aucTieTol": 0.3542,
+     "pShareZero": 0.155,
+     "pShareFloatNoise": 0.0033,
+     "tieShareExact": 0.0917,
+     "tieShareTol": 0.095
+    },
+    {
+     "reg": "ud-kk_ktb",
+     "pairs": 3,
+     "aucExact": 0.8333,
+     "aucTieTol": 0.8333,
+     "pShareZero": 0.6667,
+     "pShareFloatNoise": 0,
+     "tieShareExact": 0.3333,
+     "tieShareTol": 0.3333
+    },
+    {
+     "reg": "ud-lv_lvtb",
+     "pairs": 411,
+     "aucExact": 0.5158,
+     "aucTieTol": 0.517,
+     "pShareZero": 0.5937,
+     "pShareFloatNoise": 0.0998,
+     "tieShareExact": 0.3309,
+     "tieShareTol": 0.3869
+    },
+    {
+     "reg": "ud-no_bokmaal",
+     "pairs": 600,
+     "aucExact": 0.3475,
+     "aucTieTol": 0.3425,
+     "pShareZero": 0.185,
+     "pShareFloatNoise": 0.0267,
+     "tieShareExact": 0.0817,
+     "tieShareTol": 0.0983
+    },
+    {
+     "reg": "ud-ru_syntagrus",
+     "pairs": 331,
+     "aucExact": 0.4215,
+     "aucTieTol": 0.4215,
+     "pShareZero": 0.3051,
+     "pShareFloatNoise": 0.0393,
+     "tieShareExact": 0.136,
+     "tieShareTol": 0.148
+    },
+    {
+     "reg": "ud-sr_set",
+     "pairs": 600,
+     "aucExact": 0.3483,
+     "aucTieTol": 0.3467,
+     "pShareZero": 0.1983,
+     "pShareFloatNoise": 0.03,
+     "tieShareExact": 0.0933,
+     "tieShareTol": 0.1167
+    },
+    {
+     "reg": "ud-ug_udt",
+     "pairs": 17,
+     "aucExact": 0.6176,
+     "aucTieTol": 0.6765,
+     "pShareZero": 0.5294,
+     "pShareFloatNoise": 0.2941,
+     "tieShareExact": 0.1765,
+     "tieShareTol": 0.2941
+    },
+    {
+     "reg": "ud-wo_wtb",
+     "pairs": 299,
+     "aucExact": 0.4682,
+     "aucTieTol": 0.4799,
+     "pShareZero": 0.2776,
+     "pShareFloatNoise": 0.1104,
+     "tieShareExact": 0.0535,
+     "tieShareTol": 0.097
+    },
+    {
+     "reg": "ud-be_hse",
+     "pairs": 600,
+     "aucExact": 0.4458,
+     "aucTieTol": 0.4483,
+     "pShareZero": 0.3717,
+     "pShareFloatNoise": 0.1,
+     "tieShareExact": 0.1217,
+     "tieShareTol": 0.1967
+    },
+    {
+     "reg": "ud-cs_pdt",
+     "pairs": 288,
+     "aucExact": 0.3559,
+     "aucTieTol": 0.349,
+     "pShareZero": 0.375,
+     "pShareFloatNoise": 0.0729,
+     "tieShareExact": 0.184,
+     "tieShareTol": 0.2465
+    },
+    {
+     "reg": "ud-de_gsd",
+     "pairs": 600,
+     "aucExact": 0.49,
+     "aucTieTol": 0.4925,
+     "pShareZero": 0.3383,
+     "pShareFloatNoise": 0.0183,
+     "tieShareExact": 0.18,
+     "tieShareTol": 0.1883
+    },
+    {
+     "reg": "ud-eu_bdt",
+     "pairs": 600,
+     "aucExact": 0.44,
+     "aucTieTol": 0.4317,
+     "pShareZero": 0.6333,
+     "pShareFloatNoise": 0.195,
+     "tieShareExact": 0.2833,
+     "tieShareTol": 0.4533
+    },
+    {
+     "reg": "ud-fr_gsd",
+     "pairs": 327,
+     "aucExact": 0.5214,
+     "aucTieTol": 0.5306,
+     "pShareZero": 0.2049,
+     "pShareFloatNoise": 0.0367,
+     "tieShareExact": 0.0887,
+     "tieShareTol": 0.1131
+    },
+    {
+     "reg": "ud-grc_proiel",
+     "pairs": 164,
+     "aucExact": 0.3415,
+     "aucTieTol": 0.3476,
+     "pShareZero": 0.1402,
+     "pShareFloatNoise": 0.0183,
+     "tieShareExact": 0.061,
+     "tieShareTol": 0.0976
+    },
+    {
+     "reg": "ud-hu_szeged",
+     "pairs": 237,
+     "aucExact": 0.4346,
+     "aucTieTol": 0.4451,
+     "pShareZero": 0.2489,
+     "pShareFloatNoise": 0.0464,
+     "tieShareExact": 0.1013,
+     "tieShareTol": 0.1224
+    },
+    {
+     "reg": "ud-it_isdt",
+     "pairs": 600,
+     "aucExact": 0.4933,
+     "aucTieTol": 0.4933,
+     "pShareZero": 0.1817,
+     "pShareFloatNoise": 0.025,
+     "tieShareExact": 0.08,
+     "tieShareTol": 0.0867
+    },
+    {
+     "reg": "ud-ko_gsd",
+     "pairs": 30,
+     "aucExact": 0.5833,
+     "aucTieTol": 0.5667,
+     "pShareZero": 0.6333,
+     "pShareFloatNoise": 0.0333,
+     "tieShareExact": 0.4333,
+     "tieShareTol": 0.4667
+    },
+    {
+     "reg": "ud-lzh_kyoto",
+     "pairs": 470,
+     "aucExact": 0.4915,
+     "aucTieTol": 0.4798,
+     "pShareZero": 0.2468,
+     "pShareFloatNoise": 0.1085,
+     "tieShareExact": 0.0468,
+     "tieShareTol": 0.1298
+    },
+    {
+     "reg": "ud-pl_pdb",
+     "pairs": 264,
+     "aucExact": 0.4962,
+     "aucTieTol": 0.4924,
+     "pShareZero": 0.6098,
+     "pShareFloatNoise": 0.1098,
+     "tieShareExact": 0.2803,
+     "tieShareTol": 0.3712
+    },
+    {
+     "reg": "ud-sv_talbanken",
+     "pairs": 165,
+     "aucExact": 0.3273,
+     "aucTieTol": 0.3333,
+     "pShareZero": 0.2364,
+     "pShareFloatNoise": 0.0667,
+     "tieShareExact": 0.097,
+     "tieShareTol": 0.1212
+    },
+    {
+     "reg": "ud-uk_iu",
+     "pairs": 249,
+     "aucExact": 0.4076,
+     "aucTieTol": 0.4096,
+     "pShareZero": 0.4618,
+     "pShareFloatNoise": 0.0442,
+     "tieShareExact": 0.2771,
+     "tieShareTol": 0.3133
+    },
+    {
+     "reg": "ud-zh_gsd",
+     "pairs": 600,
+     "aucExact": 0.5325,
+     "aucTieTol": 0.535,
+     "pShareZero": 0.375,
+     "pShareFloatNoise": 0.0333,
+     "tieShareExact": 0.215,
+     "tieShareTol": 0.2333
+    },
+    {
+     "reg": "ud-bg_btb",
+     "pairs": 540,
+     "aucExact": 0.3787,
+     "aucTieTol": 0.388,
+     "pShareZero": 0.2463,
+     "pShareFloatNoise": 0.0426,
+     "tieShareExact": 0.087,
+     "tieShareTol": 0.1204
+    },
+    {
+     "reg": "ud-cu_proiel",
+     "pairs": 232,
+     "aucExact": 0.4138,
+     "aucTieTol": 0.4116,
+     "pShareZero": 0.4224,
+     "pShareFloatNoise": 0.069,
+     "tieShareExact": 0.1466,
+     "tieShareTol": 0.2543
+    },
+    {
+     "reg": "ud-en_ewt",
+     "pairs": 412,
+     "aucExact": 0.4745,
+     "aucTieTol": 0.4721,
+     "pShareZero": 0.2233,
+     "pShareFloatNoise": 0.017,
+     "tieShareExact": 0.1044,
+     "tieShareTol": 0.1189
+    },
+    {
+     "reg": "ud-ga_idt",
+     "pairs": 348,
+     "aucExact": 0.4296,
+     "aucTieTol": 0.4296,
+     "pShareZero": 0.0833,
+     "pShareFloatNoise": 0,
+     "tieShareExact": 0.0374,
+     "tieShareTol": 0.0374
+    },
+    {
+     "reg": "ud-he_htb",
+     "pairs": 600,
+     "aucExact": 0.5058,
+     "aucTieTol": 0.505,
+     "pShareZero": 0.2217,
+     "pShareFloatNoise": 0.025,
+     "tieShareExact": 0.0817,
+     "tieShareTol": 0.0967
+    },
+    {
+     "reg": "ud-hy_armtdp",
+     "pairs": 409,
+     "aucExact": 0.544,
+     "aucTieTol": 0.5391,
+     "pShareZero": 0.467,
+     "pShareFloatNoise": 0.0587,
+     "tieShareExact": 0.2616,
+     "tieShareTol": 0.3154
+    },
+    {
+     "reg": "ud-ja_gsd",
+     "pairs": 173,
+     "aucExact": 0.6185,
+     "aucTieTol": 0.6272,
+     "pShareZero": 0.4855,
+     "pShareFloatNoise": 0.1156,
+     "tieShareExact": 0.2312,
+     "tieShareTol": 0.2832
+    },
+    {
+     "reg": "ud-la_proiel",
+     "pairs": 332,
+     "aucExact": 0.4488,
+     "aucTieTol": 0.4458,
+     "pShareZero": 0.5,
+     "pShareFloatNoise": 0.0843,
+     "tieShareExact": 0.259,
+     "tieShareTol": 0.3193
+    },
+    {
+     "reg": "ud-mt_mudt",
+     "pairs": 221,
+     "aucExact": 0.3778,
+     "aucTieTol": 0.3778,
+     "pShareZero": 0.1538,
+     "pShareFloatNoise": 0.0045,
+     "tieShareExact": 0.086,
+     "tieShareTol": 0.086
+    },
+    {
+     "reg": "ud-pt_bosque",
+     "pairs": 600,
+     "aucExact": 0.4825,
+     "aucTieTol": 0.4875,
+     "pShareZero": 0.1133,
+     "pShareFloatNoise": 0.0283,
+     "tieShareExact": 0.0317,
+     "tieShareTol": 0.045
+    },
+    {
+     "reg": "ud-sk_snk",
+     "pairs": 339,
+     "aucExact": 0.5103,
+     "aucTieTol": 0.5133,
+     "pShareZero": 0.3835,
+     "pShareFloatNoise": 0.0855,
+     "tieShareExact": 0.1416,
+     "tieShareTol": 0.2065
+    },
+    {
+     "reg": "ud-ta_ttb",
+     "pairs": 222,
+     "aucExact": 0.5608,
+     "aucTieTol": 0.5698,
+     "pShareZero": 0.4865,
+     "pShareFloatNoise": 0.0676,
+     "tieShareExact": 0.2207,
+     "tieShareTol": 0.2748
+    },
+    {
+     "reg": "ud-ur_udtb",
+     "pairs": 600,
+     "aucExact": 0.4792,
+     "aucTieTol": 0.4808,
+     "pShareZero": 0.1133,
+     "pShareFloatNoise": 0.0233,
+     "tieShareExact": 0.0317,
+     "tieShareTol": 0.0417
+    }
+   ],
+   "R0med": {
+    "aucExact": 0.4825,
+    "aucTieTol": 0.4799,
+    "n": 57
+   }
+  }
+ }
+}

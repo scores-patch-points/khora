@@ -1,0 +1,110 @@
+#!/usr/bin/env python3
+"""apply.py — write the real archive.org captures back into the source records.
+
+Merges tools/archive/cdx.json + spn.json into url -> real capture URL, then:
+  • fact-checks/*.sources.json (packets): set every source.archive_url to its real
+    capture (replacing the `web/2026/` placeholders and empty strings); a source
+    that already holds a 14-digit capture is left as-is.
+  • can emit a per-article REC event (--logs) so a published log re-asserts its
+    sources' archive_url — append-only, opt-in, one line per article.
+
+    NPJ_EDGE=… python3 tools/archive/apply.py            # packets only
+    python3 tools/archive/apply.py --logs                # also write REC events
+"""
+import argparse, glob, json, os, re, sys
+
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+D = os.path.dirname(os.path.abspath(__file__))
+REAL_DIGIT = re.compile(r"web\.archive\.org/web/\d{14}")
+
+
+def load_real():
+    real = {}
+    for f in ("cdx.json", "spn.json"):
+        p = os.path.join(D, f)
+        if os.path.exists(p):
+            for u, a in json.load(open(p)).items():
+                if a and REAL_DIGIT.search(a):
+                    real.setdefault(u, a)
+    return real
+
+
+def apply_packet(path, real):
+    d = json.load(open(path, encoding="utf-8"))
+    srcs = d.get("sources") or []
+    changed = kept = 0
+    for s in srcs:
+        if not isinstance(s, dict):
+            continue
+        au = s.get("archive_url") or ""
+        if REAL_DIGIT.search(au):
+            kept += 1
+            continue
+        u = s.get("original_url") or ""
+        cap = real.get(u)
+        if cap:
+            s["archive_url"] = cap
+            changed += 1
+    if changed:
+        # match the packet's exact serialization so the diff is only the captures
+        out = json.dumps(d, indent=2, ensure_ascii=True)
+        if out != open(path, encoding="utf-8").read():
+            open(path, "w", encoding="utf-8").write(out)
+    print("  %-48s  +%d real, %d already real" % (os.path.relpath(path, ROOT), changed, kept))
+    return changed
+
+
+def emit_log_records(real):
+    """For each published article log, write a REC event re-asserting the FULL
+    source records whose archive_url we can now fill. Returns list of (path, line)."""
+    out = []
+    for folder in glob.glob(os.path.join(ROOT, "articles", "*")):
+        if not os.path.isdir(folder):
+            continue
+        lines = []
+        for p in glob.glob(os.path.join(folder, "*.jsonl")):
+            lines += [l for l in open(p) if l.strip()]
+        srcs = {}
+        for l in lines:
+            try:
+                ev = json.loads(l)
+            except Exception:
+                continue
+            op = ev.get("operand", ev)
+            if isinstance(op, dict):
+                for k, v in (op.get("sources") or {}).items():
+                    if isinstance(v, dict):
+                        srcs[k] = dict(v, key=k)
+        updated = {}
+        for k, v in srcs.items():
+            if REAL_DIGIT.search(v.get("archive_url") or ""):
+                continue
+            cap = real.get(v.get("original_url") or "")
+            if cap:
+                v = dict(v); v["archive_url"] = cap
+                updated[k] = v
+        if updated:
+            out.append((folder, updated))
+    return out
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--logs", action="store_true", help="also emit per-article REC events")
+    args = ap.parse_args()
+    real = load_real()
+    print("real captures known: %d" % len(real))
+    total = 0
+    for p in sorted(glob.glob(os.path.join(ROOT, "**", "*.sources.json"), recursive=True)):
+        total += apply_packet(p, real)
+    print("packets updated: %d sources" % total)
+    if args.logs:
+        recs = emit_log_records(real)
+        print("articles needing a REC: %d" % len(recs))
+        outp = os.path.join(D, "log-records.json")
+        json.dump([{os.path.relpath(f, ROOT): u} for f, u in recs], open(outp, "w"), indent=1)
+        print("wrote", os.path.relpath(outp, ROOT), "(review before appending)")
+
+
+if __name__ == "__main__":
+    main()

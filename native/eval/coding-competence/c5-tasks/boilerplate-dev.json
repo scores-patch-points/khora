@@ -1,0 +1,79 @@
+{
+ "schema": "C5Boilerplate@1",
+ "derived_from": "dev",
+ "rule": "names a system declares in >= 0.75 of >= 8 non-empty readings of one language (header, READING -> ALGORITHMIC GRAPH); derived ONCE on DEV, frozen, never re-derived from the programs under evaluation (A5 F4)",
+ "giver": "the language reference's entry-point convention (an entry point main in c, go, java; the wrapper class holding it in java), as DEV shows it",
+ "derived_at": "2026-10-06T08:16:02.850Z",
+ "bundles_sha256": {
+  "c": "f50685a8aaf28d6a5c897d96eee1d4429e3d37920e9190e43a7ee8596dd6c517",
+  "go": "696b0bd264070c1bc7b78607443b51f35982a147632a0327a4fed3f4cfdd1d26",
+  "java": "43b5c88a6ad1b8b4aa16f0be39b4c16c5a293d7a9a65f2016036867329600a96",
+  "javascript": "b7fa735cba56a9af0d55d95b6b885ba38b4d079251f9edfa2cc83f0f754e33f7",
+  "python": "4c4dabcd84e255b0718a3d7c18c61adf46603dbab99535e21ab785be1c3a662f",
+  "ruby": "31a45a813baacd20ac3c1a54f16851fbcaaa81864f6ffb1857d84a94d78c4267",
+  "rust": "ee9df20ce034abe644206d694a3e0098c511f4d4923b213d9ea50efadeb661d7",
+  "typescript": "0400bfbd6d24195a494b7ba190aa8619d9346ccfbf970bf5173125ef2039807d"
+ },
+ "systems": {
+  "edges": {
+   "c": [
+    "main"
+   ],
+   "go": [
+    "main"
+   ],
+   "java": [
+    "Main",
+    "main"
+   ],
+   "javascript": [],
+   "python": [],
+   "ruby": []
+  },
+  "existing": {
+   "c": [
+    "main"
+   ],
+   "go": [
+    "main"
+   ],
+   "javascript": [],
+   "python": [],
+   "typescript": []
+  },
+  "gold": {
+   "c": [
+    "main"
+   ],
+   "go": [
+    "main"
+   ],
+   "java": [
+    "Main",
+    "main"
+   ],
+   "javascript": [],
+   "python": [],
+   "ruby": [],
+   "rust": [
+    "main"
+   ],
+   "typescript": []
+  },
+  "baseline": {
+   "c": [
+    "main"
+   ],
+   "go": [
+    "main"
+   ],
+   "java": [
+    "Main",
+    "main"
+   ],
+   "javascript": [],
+   "python": [],
+   "ruby": []
+  }
+ }
+}

@@ -1,0 +1,280 @@
+{
+ "module": "eval/law/name-rule-informal.mjs",
+ "corpus": "wp",
+ "dry": false,
+ "M": 128,
+ "gold": {
+  "castForms": 75,
+  "positives": 47497
+ },
+ "sample": {
+  "laterPairs": 300,
+  "firstPairs": 73,
+  "firstDropped": 0
+ },
+ "later": {
+  "tag": "LATER matched by frequency, frame-causal",
+  "n": 600,
+  "pairs": 300,
+  "auc": {
+   "S_ENTRY": 0.5133,
+   "S_OWN": 0.4208,
+   "S_ALL": 0.4231,
+   "S_SPAN": 0.3847,
+   "R_BURST": 0.7654,
+   "R_FREQ": 0.7666,
+   "R_POS": 0.3615
+  },
+  "ci": {
+   "S_ENTRY": {
+    "lo": 0.5073,
+    "hi": 0.519
+   },
+   "S_OWN": {
+    "lo": 0.3737,
+    "hi": 0.4707
+   },
+   "S_ALL": {
+    "lo": 0.3607,
+    "hi": 0.4925
+   },
+   "S_SPAN": {
+    "lo": 0.3383,
+    "hi": 0.4335
+   },
+   "R_BURST": {
+    "lo": 0.6999,
+    "hi": 0.8213
+   },
+   "R_FREQ": {
+    "lo": 0.7233,
+    "hi": 0.8025
+   },
+   "R_POS": {
+    "lo": 0.2851,
+    "hi": 0.4725
+   }
+  },
+  "null": {
+   "q95": 0.5133,
+   "mean": 0.5037
+  },
+  "trace": {
+   "NAME": 0.5033,
+   "UNLABELLED": 0.69,
+   "noSlotName": 0.5333,
+   "noSlotUnlabelled": 0.3833
+  },
+  "diffToBurst": {
+   "point": -0.252,
+   "lo": -0.3078,
+   "hi": -0.1861
+  },
+  "diffs": {
+   "S_ENTRY - S_SPAN": {
+    "point": 0.1286,
+    "lo": 0.0815,
+    "hi": 0.1798
+   },
+   "S_ENTRY - S_ALL": {
+    "point": 0.0902,
+    "lo": 0.0266,
+    "hi": 0.153
+   },
+   "S_ENTRY - R_BURST": {
+    "point": -0.252,
+    "lo": -0.3078,
+    "hi": -0.1861
+   }
+  },
+  "medianExtentTokens": {
+   "NAME": 0,
+   "UNLABELLED": 0
+  }
+ },
+ "firstCausal": {
+  "tag": "FIRST matched by position, frame-causal",
+  "n": 146,
+  "pairs": 73,
+  "auc": {
+   "S_ENTRY": 0.5,
+   "S_OWN": 0.3697,
+   "S_ALL": 0.47,
+   "S_SPAN": 0.3767,
+   "R_BURST": 0.2485,
+   "R_FREQ": 0.5,
+   "R_POS": 0.5008
+  },
+  "ci": {
+   "S_ENTRY": {
+    "lo": 0.5,
+    "hi": 0.5
+   },
+   "S_OWN": {
+    "lo": 0.2258,
+    "hi": 0.4058
+   },
+   "S_ALL": {
+    "lo": 0.3841,
+    "hi": 0.5125
+   },
+   "S_SPAN": {
+    "lo": 0.2934,
+    "hi": 0.456
+   },
+   "R_BURST": {
+    "lo": 0.0557,
+    "hi": 0.2905
+   },
+   "R_FREQ": {
+    "lo": 0.5,
+    "hi": 0.5
+   },
+   "R_POS": {
+    "lo": 0.4913,
+    "hi": 0.5035
+   }
+  },
+  "null": {
+   "q95": 0.5,
+   "mean": 0.5
+  },
+  "trace": {
+   "NAME": 0.589,
+   "UNLABELLED": 0.7534,
+   "noSlotName": 0.4932,
+   "noSlotUnlabelled": 0.2466
+  },
+  "diffToBurst": {
+   "point": 0.2515,
+   "lo": 0.2093,
+   "hi": 0.4412
+  },
+  "diffs": {
+   "S_ENTRY - S_SPAN": {
+    "point": 0.1233,
+    "lo": 0.0484,
+    "hi": 0.2037
+   },
+   "S_ENTRY - S_ALL": {
+    "point": 0.03,
+    "lo": -0.0136,
+    "hi": 0.1034
+   },
+   "S_ENTRY - R_BURST": {
+    "point": 0.2515,
+    "lo": 0.2093,
+    "hi": 0.4412
+   }
+  },
+  "medianExtentTokens": {
+   "NAME": 1,
+   "UNLABELLED": 1
+  }
+ },
+ "firstNoncausal": {
+  "tag": "FIRST NON-CAUSAL F=32",
+  "n": 146,
+  "pairs": 73,
+  "auc": {
+   "S_ENTRY": 0.5137,
+   "S_OWN": 0.3572,
+   "S_ALL": 0.4038,
+   "S_SPAN": 0.4169,
+   "R_BURST": 0.2485,
+   "R_FREQ": 0.5,
+   "R_POS": 0.5008
+  },
+  "ci": {
+   "S_ENTRY": {
+    "lo": 0.5,
+    "hi": 0.5278
+   },
+   "S_OWN": {
+    "lo": 0.2245,
+    "hi": 0.3855
+   },
+   "S_ALL": {
+    "lo": 0.2546,
+    "hi": 0.4791
+   },
+   "S_SPAN": {
+    "lo": 0.2637,
+    "hi": 0.4467
+   },
+   "R_BURST": {
+    "lo": 0.0625,
+    "hi": 0.2944
+   },
+   "R_FREQ": {
+    "lo": 0.5,
+    "hi": 0.5
+   },
+   "R_POS": {
+    "lo": 0.4941,
+    "hi": 0.5052
+   }
+  },
+  "null": {
+   "q95": 0.5137,
+   "mean": 0.5
+  },
+  "trace": {
+   "NAME": 0.5753,
+   "UNLABELLED": 0.8082,
+   "noSlotName": 0.5342,
+   "noSlotUnlabelled": 0.2192
+  },
+  "diffToBurst": {
+   "point": 0.2652,
+   "lo": 0.2145,
+   "hi": 0.4375
+  },
+  "diffs": {
+   "S_ENTRY - S_SPAN": {
+    "point": 0.0968,
+    "lo": 0.0709,
+    "hi": 0.2192
+   },
+   "S_ENTRY - S_ALL": {
+    "point": 0.1099,
+    "lo": 0.0346,
+    "hi": 0.2643
+   },
+   "S_ENTRY - R_BURST": {
+    "point": 0.2652,
+    "lo": 0.2145,
+    "hi": 0.4375
+   }
+  },
+  "medianExtentTokens": {
+   "NAME": 0,
+   "UNLABELLED": 1
+  }
+ },
+ "K1_sham": {
+  "nullShare": 1,
+  "n": 600
+ },
+ "K5_licence": {
+  "positivesNonNullShare": 0.5033,
+  "n": 300,
+  "pass": true
+ },
+ "K6_determinism": {
+  "same": 40,
+  "total": 40
+ },
+ "K4_position": {
+  "aucPosition": 0.3615,
+  "inside": false
+ },
+ "verdict": {
+  "V1_discriminates": false,
+  "V2_beyond_burstiness": false,
+  "V3_single_mention_causal": false,
+  "V4_slot_not_span": true,
+  "verdict": "UNDERPOWERED(reader)",
+  "seconds": 2239.7
+ }
+}

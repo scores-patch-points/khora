@@ -1,0 +1,80 @@
+"""The statutory text a matter's profile page argues against. Sourced from
+BL2017-646 (the ordinance that enacted Metro Code §13.08.080) — later
+amendments (e.g. BL2026-1498, drones) extend but don't replace this
+definition. This is the only category with a codified definition today;
+other categories (see /api/categories) don't cite a statute here."""
+
+SURVEILLANCE_TECH_DEFINITION = {
+    "citation": "Metro Code §13.08.080(A)(2)",
+    "term": '"Surveillance technology"',
+    "definition": (
+        'shall mean any electronic surveillance device, hardware, or software that is capable of '
+        "collecting, capturing, recording, retaining, processing, intercepting, analyzing, monitoring, "
+        "or sharing audio, visual, digital, location, thermal, biometric, or similar information or "
+        "communications specifically associated with, or capable of being associated with, any specific "
+        "individual or group; or any system, device, or vehicle that is equipped with an electronic "
+        "surveillance device, hardware, or software."
+    ),
+    "includes": (
+        "IMSI catchers/cell site simulators; automatic license plate readers; closed-circuit television "
+        "cameras; biometric surveillance technology (facial, voice, iris, gait recognition); mobile DNA "
+        "capture technology; x-ray vans; video/audio monitoring or recording technology; "
+        "surveillance-enabled light fixtures; tools for unauthorized computer/network access; social "
+        "media monitoring software; through-the-wall radar; passive radio-network scanners; long-range "
+        "Bluetooth/wireless scanning devices; RFID scanners; drone software and hardware (added by "
+        "BL2026-1498)."
+    ),
+    "excludes": (
+        "routine office hardware not used for surveillance or law enforcement; Parking Ticket Devices; "
+        "manually operated non-wearable handheld cameras/recorders not designed for surreptitious use; "
+        "devices that cannot record/transmit or be remotely accessed (e.g. image-stabilizing binoculars); "
+        "internal-communications devices not designed to surreptitiously collect data (radios, email)."
+    ),
+}
+
+
+# Which clause of §13.08.080 each detected term actually triggers. Showing a
+# passage next to the specific statutory language it matches is the whole
+# argument — "camera" on its own proves nothing; "closed-circuit television
+# cameras" is an enumerated category in the ordinance's own inclusion list.
+TERM_CLAUSE = {
+    "surveillance": "the definition itself — technology capable of collecting, recording, or sharing information associated with an individual",
+    "camera": "included: video and audio monitoring or recording technology, such as surveillance cameras",
+    "cctv": "included: closed-circuit television cameras",
+    "video_surveillance": "included: video and audio monitoring or recording technology",
+    "license_plate": "included: automatic license plate readers",
+    "license_plate_reader": "included: automatic license plate readers",
+    "license_plate_scanner": "included: automatic license plate readers",
+    "plate_reader": "included: automatic license plate readers",
+    "automatic_license": "included: automatic license plate readers",
+    "alpr": "included: automatic license plate readers",
+    "drone": "included: drone software and hardware (added by BL2026-1498)",
+    "unmanned_aircraft": "included: unmanned aircraft systems (added by BL2026-1498)",
+    "unmanned_aerial": "included: unmanned aircraft systems (added by BL2026-1498)",
+    "uas": "included: unmanned aircraft systems (added by BL2026-1498)",
+    "uav": "included: unmanned aircraft systems (added by BL2026-1498)",
+    "facial_recognition": "included: biometric surveillance technology, including facial recognition",
+    "facial": "included: biometric surveillance technology, including facial recognition",
+    "biometric": "included: biometric surveillance technology (facial, voice, iris, gait)",
+    "mobile_dna": "included: mobile DNA capture technology",
+    "body_camera": "included: video and audio recording technology",
+    "body_worn": "included: video and audio recording technology",
+    "shotspotter": "included: gunshot detection and location hardware and services",
+    "gunshot": "included: gunshot detection and location hardware and services",
+    "stingray": "included: IMSI catchers and other cell site simulators",
+    "cell_site_simulator": "included: IMSI catchers and other cell site simulators",
+    "cell_site": "included: IMSI catchers and other cell site simulators",
+    "imsi": "included: IMSI catchers and other cell site simulators",
+    "x-ray_van": "included: x-ray vans",
+    "real-time_crime": "included: software designed to integrate or analyze data from surveillance technology",
+    "video_management": "included: software designed to integrate or analyze surveillance data",
+    "video_integration": "included: software designed to integrate or analyze surveillance data",
+    "live_video": "included: video monitoring technology",
+    "donor_camera": "included: surveillance cameras contributed to a public safety camera network",
+    "public_safety_camera": "included: surveillance cameras in a public safety camera network",
+    "community_safety_camera": "included: surveillance cameras in a public safety camera network",
+}
+
+
+def clause_for(term: str) -> str:
+    return TERM_CLAUSE.get((term or "").strip().lower().replace(" ", "_"), "")

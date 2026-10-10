@@ -1,0 +1,2855 @@
+{
+ "stat": "para.prefixCopy",
+ "headerSha256": "6a6fb4d8d44e563ef533ce3a1f60dcc56ae6753626653f03f99cbc3af6de4def",
+ "harnessPass": true,
+ "verdict": "PARTIAL",
+ "verdictIfScored": "PARTIAL",
+ "holding": [
+  "code",
+  "ud",
+  "notation"
+ ],
+ "failing": [
+  "prose",
+  "children"
+ ],
+ "classes": {
+  "code": {
+   "rule": "every defined code sibling PRESENT+",
+   "defined": 5,
+   "present": 5,
+   "holds": true
+  },
+  "prose": {
+   "rule": "PRESENT+ share >= 0.65, none PRESENT-, none ABSENT",
+   "defined": 8,
+   "present": 5,
+   "share": 0.625,
+   "nPresentMinus": 0,
+   "nAbsent": 0,
+   "nAmbiguous": 3,
+   "holds": false
+  },
+  "ud": {
+   "rule": "PRESENT+ share >= 0.50, none PRESENT-",
+   "defined": 12,
+   "present": 9,
+   "share": 0.75,
+   "nPresentMinus": 0,
+   "nAbsent": 3,
+   "nAmbiguous": 0,
+   "holds": true
+  },
+  "children": {
+   "rule": "every defined sibling z > 0 in both halves, none PRESENT-, PRESENT+ share <= 0.50",
+   "defined": 2,
+   "present": 2,
+   "share": 1,
+   "allZPositive": true,
+   "nPresentMinus": 0,
+   "holds": false
+  },
+  "notation": {
+   "rule": "no sibling PRESENT of either sign, at least one ABSENT",
+   "defined": 2,
+   "nPresent": 0,
+   "nAbsent": 2,
+   "holds": true
+  },
+  "global": {
+   "rule": "no natural-language sibling PRESENT-",
+   "nNaturalLanguageDefined": 22,
+   "nPresentMinus": 0,
+   "holds": true
+  },
+  "weakerKindContrast": {
+   "childrenShare": 1,
+   "proseShare": 0.625,
+   "childrenBelowProse": false
+  }
+ },
+ "constant": {
+  "rangeHits": [
+   {
+    "id": "sp-js-fold",
+    "class": "code",
+    "v": 0.08831000038480852,
+    "range": [
+     0.027,
+     0.135
+    ],
+    "hit": true,
+    "guess": 0.058
+   },
+   {
+    "id": "sp-js-heimdall",
+    "class": "code",
+    "v": 0.06652110326740512,
+    "range": [
+     0.027,
+     0.135
+    ],
+    "hit": true,
+    "guess": 0.058
+   },
+   {
+    "id": "sp-js-eoreader7",
+    "class": "code",
+    "v": 0.0403105976038205,
+    "range": [
+     0.027,
+     0.135
+    ],
+    "hit": true,
+    "guess": 0.058
+   },
+   {
+    "id": "sp-py-foldvenv",
+    "class": "code",
+    "v": 0.04634458958162213,
+    "range": [
+     0.027,
+     0.135
+    ],
+    "hit": true,
+    "guess": 0.058
+   },
+   {
+    "id": "sp-py-first",
+    "class": "code",
+    "v": 0.024281370971038996,
+    "range": [
+     0.027,
+     0.135
+    ],
+    "hit": false,
+    "guess": 0.058
+   },
+   {
+    "id": "sp-en-poe-works2",
+    "class": "prose",
+    "v": 0.01591128735753955,
+    "range": [
+     0.0059,
+     0.0269
+    ],
+    "hit": true,
+    "guess": 0.0112
+   },
+   {
+    "id": "sp-en-chopin-awakening",
+    "class": "prose",
+    "v": 0.01627503491090465,
+    "range": [
+     0.0059,
+     0.0269
+    ],
+    "hit": true,
+    "guess": 0.0112
+   },
+   {
+    "id": "sp-en-hesse-siddhartha",
+    "class": "prose",
+    "v": 0.03647635224797341,
+    "range": [
+     0.0059,
+     0.0269
+    ],
+    "hit": false,
+    "guess": 0.0112
+   },
+   {
+    "id": "sp-en-zola-mouret",
+    "class": "prose",
+    "v": 0.010049902049104276,
+    "range": [
+     0.0059,
+     0.0269
+    ],
+    "hit": true,
+    "guess": 0.0112
+   },
+   {
+    "id": "sp-en-about-london",
+    "class": "prose",
+    "v": 0.018859773554140702,
+    "range": [
+     0.0059,
+     0.0269
+    ],
+    "hit": true,
+    "guess": 0.0112
+   },
+   {
+    "id": "sp-ud-afr",
+    "class": "ud",
+    "v": 0.03039535955122119,
+    "range": [
+     0.0028,
+     0.0342
+    ],
+    "hit": true,
+    "guess": 0.0097
+   },
+   {
+    "id": "sp-ud-ces",
+    "class": "ud",
+    "v": 0.00688608902555643,
+    "range": [
+     0.0028,
+     0.0342
+    ],
+    "hit": true,
+    "guess": 0.0097
+   },
+   {
+    "id": "sp-ud-ell",
+    "class": "ud",
+    "v": 0.017280802414006757,
+    "range": [
+     0.0028,
+     0.0342
+    ],
+    "hit": true,
+    "guess": 0.0097
+   },
+   {
+    "id": "sp-ud-hye",
+    "class": "ud",
+    "v": 0.006955015976927825,
+    "range": [
+     0.0028,
+     0.0342
+    ],
+    "hit": true,
+    "guess": 0.0097
+   },
+   {
+    "id": "sp-ud-ita",
+    "class": "ud",
+    "v": 0.03068679674879604,
+    "range": [
+     0.0028,
+     0.0342
+    ],
+    "hit": true,
+    "guess": 0.0097
+   },
+   {
+    "id": "sp-ud-lit",
+    "class": "ud",
+    "v": 0.012961972819084622,
+    "range": [
+     0.0028,
+     0.0342
+    ],
+    "hit": true,
+    "guess": 0.0097
+   },
+   {
+    "id": "sp-ud-mlt",
+    "class": "ud",
+    "v": 0.014918749950993515,
+    "range": [
+     0.0028,
+     0.0342
+    ],
+    "hit": true,
+    "guess": 0.0097
+   },
+   {
+    "id": "sp-ud-nld",
+    "class": "ud",
+    "v": 0.05156041715599713,
+    "range": [
+     0.0028,
+     0.0342
+    ],
+    "hit": false,
+    "guess": 0.0097
+   },
+   {
+    "id": "sp-ud-wol",
+    "class": "ud",
+    "v": 0.02308411214971784,
+    "range": [
+     0.0028,
+     0.0342
+    ],
+    "hit": true,
+    "guess": 0.0097
+   },
+   {
+    "id": "sp-en-aesop-stickney",
+    "class": "children",
+    "v": 0.01177177177169142,
+    "range": [
+     0.0066,
+     0.0155
+    ],
+    "hit": true,
+    "guess": 0.0093
+   },
+   {
+    "id": "sp-en-pooh",
+    "class": "children",
+    "v": 0.016785603509561042,
+    "range": [
+     0.0066,
+     0.0155
+    ],
+    "hit": false,
+    "guess": 0.0093
+   }
+  ],
+  "d": [
+   {
+    "id": "sp-protein-aa",
+    "d": 0.004623737373549375,
+    "range": [
+     -0.03,
+     0.03
+    ],
+    "hit": true
+   },
+   {
+    "id": "sp-smiles-ccd",
+    "d": -0.0014454307383857667,
+    "range": [
+     -0.02,
+     0.02
+    ],
+    "hit": true
+   }
+  ],
+  "hitRate": 0.8095238095238095,
+  "medianV": {
+   "code": 0.04634458958162213,
+   "prose": 0.01627503491090465,
+   "ud": 0.017280802414006757,
+   "children": 0.01427868764062623
+  },
+  "codeOverProse": 2.8475877216441594,
+  "holds": false
+ },
+ "adversary": {
+  "rivalPosPar": {
+   "n": 29,
+   "spearmanZ": 0.9669950738916256,
+   "spearmanV": null,
+   "statusPosPar": {
+    "sp-js-fold": "PRESENT+",
+    "sp-js-heimdall": "PRESENT+",
+    "sp-js-eoreader7": "PRESENT+",
+    "sp-py-foldvenv": "PRESENT+",
+    "sp-py-first": "PRESENT+",
+    "sp-en-poe-works2": "PRESENT+",
+    "sp-en-chopin-awakening": "PRESENT+",
+    "sp-en-hesse-siddhartha": "PRESENT+",
+    "sp-en-zola-mouret": "PRESENT+",
+    "sp-en-waikna": "PRESENT+",
+    "sp-en-about-london": "PRESENT+",
+    "sp-en-warren-forces": "PRESENT+",
+    "sp-en-kafka-metamorphosis": "AMBIGUOUS",
+    "sp-ud-afr": "PRESENT+",
+    "sp-ud-ces": "PRESENT+",
+    "sp-ud-dan": "ABSENT",
+    "sp-ud-ell": "PRESENT+",
+    "sp-ud-gle": "ABSENT",
+    "sp-ud-hye": "PRESENT+",
+    "sp-ud-ita": "PRESENT+",
+    "sp-ud-lit": "PRESENT+",
+    "sp-ud-mlt": "PRESENT+",
+    "sp-ud-nld": "PRESENT+",
+    "sp-ud-rus": "AMBIGUOUS",
+    "sp-ud-wol": "PRESENT+",
+    "sp-en-aesop-stickney": "PRESENT+",
+    "sp-en-pooh": "PRESENT+",
+    "sp-protein-aa": "AMBIGUOUS",
+    "sp-smiles-ccd": "ABSENT"
+   },
+   "atlasRho": 0.9
+  },
+  "sizeAndLength": {
+   "n": 29,
+   "rhoZLogTokens": 0.4714285714285714,
+   "rhoZUnitLength": -0.645320197044335,
+   "nlOnly": {
+    "n": 22,
+    "rhoZLogTokens": 0.409373235460192,
+    "rhoZUnitLength": -0.2919254658385093
+   },
+   "atlas": {
+    "rhoZLogTokens": 0.495,
+    "rhoZUnitLength": -0.525
+   },
+   "presentRateByTokenBin": [
+    {
+     "tokens": [
+      0,
+      40000
+     ],
+     "n": 10,
+     "present": 8
+    },
+    {
+     "tokens": [
+      40000,
+      100000
+     ],
+     "n": 8,
+     "present": 4
+    },
+    {
+     "tokens": [
+      100000,
+      1000000000
+     ],
+     "n": 4,
+     "present": 4
+    }
+   ]
+  },
+  "leakage": {
+   "dupHitShare": {
+    "sp-js-fold": 0.0099,
+    "sp-js-heimdall": 0.0169,
+    "sp-js-eoreader7": 0.0274,
+    "sp-py-foldvenv": 0.1421,
+    "sp-py-first": 0.0238,
+    "sp-en-poe-works2": 0,
+    "sp-en-chopin-awakening": 0.0149,
+    "sp-en-hesse-siddhartha": 0,
+    "sp-en-zola-mouret": 0.1733,
+    "sp-en-waikna": 0.0476,
+    "sp-en-about-london": 0,
+    "sp-en-warren-forces": 0,
+    "sp-en-kafka-metamorphosis": 0,
+    "sp-ud-afr": 0,
+    "sp-ud-ces": 0.0179,
+    "sp-ud-dan": 0,
+    "sp-ud-ell": 0.0385,
+    "sp-ud-gle": 0,
+    "sp-ud-hye": 0.0357,
+    "sp-ud-ita": 0.0027,
+    "sp-ud-lit": 0.037,
+    "sp-ud-mlt": 0,
+    "sp-ud-nld": 0.0334,
+    "sp-ud-rus": 0.1818,
+    "sp-ud-wol": 0,
+    "sp-en-aesop-stickney": 0.0952,
+    "sp-en-pooh": 0.125,
+    "sp-protein-aa": 0,
+    "sp-smiles-ccd": 0
+   },
+   "dupPairShare": {
+    "sp-js-fold": 0.0009,
+    "sp-js-heimdall": 0.0011,
+    "sp-js-eoreader7": 0.0011,
+    "sp-py-foldvenv": 0.0064,
+    "sp-py-first": 0.0006,
+    "sp-en-poe-works2": 0,
+    "sp-en-chopin-awakening": 0.0002,
+    "sp-en-hesse-siddhartha": 0,
+    "sp-en-zola-mouret": 0.0018,
+    "sp-en-waikna": 0.0003,
+    "sp-en-about-london": 0,
+    "sp-en-warren-forces": 0,
+    "sp-en-kafka-metamorphosis": 0,
+    "sp-ud-afr": 0,
+    "sp-ud-ces": 0.0001,
+    "sp-ud-dan": 0,
+    "sp-ud-ell": 0.0007,
+    "sp-ud-gle": 0,
+    "sp-ud-hye": 0.0002,
+    "sp-ud-ita": 0.0001,
+    "sp-ud-lit": 0.0005,
+    "sp-ud-mlt": 0,
+    "sp-ud-nld": 0.0017,
+    "sp-ud-rus": 0.0005,
+    "sp-ud-wol": 0,
+    "sp-en-aesop-stickney": 0.0011,
+    "sp-en-pooh": 0.0021,
+    "sp-protein-aa": 0,
+    "sp-smiles-ccd": 0
+   },
+   "hitRate": {
+    "sp-js-fold": 0.0883,
+    "sp-js-heimdall": 0.06689,
+    "sp-js-eoreader7": 0.03925,
+    "sp-py-foldvenv": 0.04497,
+    "sp-py-first": 0.02463,
+    "sp-en-poe-works2": 0.0161,
+    "sp-en-chopin-awakening": 0.01623,
+    "sp-en-hesse-siddhartha": 0.03463,
+    "sp-en-zola-mouret": 0.01014,
+    "sp-en-waikna": 0.00641,
+    "sp-en-about-london": 0.01851,
+    "sp-en-warren-forces": 0.01702,
+    "sp-en-kafka-metamorphosis": 0.00816,
+    "sp-ud-afr": 0.02853,
+    "sp-ud-ces": 0.00685,
+    "sp-ud-dan": 0.00151,
+    "sp-ud-ell": 0.01691,
+    "sp-ud-gle": 0.00184,
+    "sp-ud-hye": 0.00699,
+    "sp-ud-ita": 0.03068,
+    "sp-ud-lit": 0.01245,
+    "sp-ud-mlt": 0.01463,
+    "sp-ud-nld": 0.0512,
+    "sp-ud-rus": 0.00298,
+    "sp-ud-wol": 0.02291,
+    "sp-en-aesop-stickney": 0.01174,
+    "sp-en-pooh": 0.01689,
+    "sp-protein-aa": 0.07789,
+    "sp-smiles-ccd": 0.18653
+   }
+  },
+  "topic": {
+   "statusUnitOrder": {
+    "sp-js-fold": "PRESENT+",
+    "sp-js-heimdall": "PRESENT+",
+    "sp-js-eoreader7": "PRESENT+",
+    "sp-py-foldvenv": "PRESENT+",
+    "sp-py-first": "PRESENT+",
+    "sp-en-poe-works2": "PRESENT+",
+    "sp-en-chopin-awakening": "PRESENT+",
+    "sp-en-hesse-siddhartha": "PRESENT+",
+    "sp-en-zola-mouret": "PRESENT+",
+    "sp-en-waikna": "AMBIGUOUS",
+    "sp-en-about-london": "PRESENT+",
+    "sp-en-warren-forces": "AMBIGUOUS",
+    "sp-en-kafka-metamorphosis": "AMBIGUOUS",
+    "sp-ud-afr": "PRESENT+",
+    "sp-ud-ces": "PRESENT+",
+    "sp-ud-dan": "ABSENT",
+    "sp-ud-ell": "PRESENT+",
+    "sp-ud-gle": "ABSENT",
+    "sp-ud-hye": "PRESENT+",
+    "sp-ud-ita": "PRESENT+",
+    "sp-ud-lit": "PRESENT+",
+    "sp-ud-mlt": "PRESENT+",
+    "sp-ud-nld": "PRESENT+",
+    "sp-ud-rus": "ABSENT",
+    "sp-ud-wol": "PRESENT+",
+    "sp-en-aesop-stickney": "PRESENT+",
+    "sp-en-pooh": "PRESENT+",
+    "sp-protein-aa": "ABSENT",
+    "sp-smiles-ccd": "ABSENT"
+   },
+   "statusDocNull": {
+    "sp-js-fold": "PRESENT+",
+    "sp-js-heimdall": "PRESENT+",
+    "sp-js-eoreader7": "PRESENT+",
+    "sp-py-foldvenv": "PRESENT+",
+    "sp-py-first": "PRESENT+",
+    "sp-en-poe-works2": "PRESENT+",
+    "sp-en-chopin-awakening": "PRESENT+",
+    "sp-en-hesse-siddhartha": "PRESENT+",
+    "sp-en-zola-mouret": "PRESENT+",
+    "sp-en-waikna": "AMBIGUOUS",
+    "sp-en-about-london": "PRESENT+",
+    "sp-en-warren-forces": "AMBIGUOUS",
+    "sp-en-kafka-metamorphosis": "ABSENT",
+    "sp-ud-afr": "AMBIGUOUS",
+    "sp-ud-ces": "PRESENT+",
+    "sp-ud-dan": "AMBIGUOUS",
+    "sp-ud-ell": "AMBIGUOUS",
+    "sp-ud-gle": "ABSENT",
+    "sp-ud-hye": "AMBIGUOUS",
+    "sp-ud-ita": "PRESENT+",
+    "sp-ud-lit": "AMBIGUOUS",
+    "sp-ud-mlt": "ABSENT",
+    "sp-ud-nld": "PRESENT+",
+    "sp-ud-rus": "ABSENT",
+    "sp-ud-wol": "AMBIGUOUS",
+    "sp-en-aesop-stickney": "AMBIGUOUS",
+    "sp-en-pooh": "PRESENT+",
+    "sp-protein-aa": "ABSENT",
+    "sp-smiles-ccd": "ABSENT"
+   },
+   "docNullZ": {
+    "sp-js-fold": [
+     54.13,
+     34
+    ],
+    "sp-js-heimdall": [
+     24.22,
+     23.39
+    ],
+    "sp-js-eoreader7": [
+     31.86,
+     22.37
+    ],
+    "sp-py-foldvenv": [
+     51.07,
+     84.76
+    ],
+    "sp-py-first": [
+     50.53,
+     50.4
+    ],
+    "sp-en-poe-works2": [
+     5.53,
+     13.09
+    ],
+    "sp-en-chopin-awakening": [
+     15.02,
+     10.07
+    ],
+    "sp-en-hesse-siddhartha": [
+     17.01,
+     16.8
+    ],
+    "sp-en-zola-mouret": [
+     9.54,
+     8.82
+    ],
+    "sp-en-waikna": [
+     3.87,
+     1.31
+    ],
+    "sp-en-about-london": [
+     4.34,
+     12.49
+    ],
+    "sp-en-warren-forces": [
+     8.22,
+     1.5
+    ],
+    "sp-en-kafka-metamorphosis": [
+     0.36,
+     1.69
+    ],
+    "sp-ud-afr": [
+     8.11,
+     2.47
+    ],
+    "sp-ud-ces": [
+     4.22,
+     11.2
+    ],
+    "sp-ud-dan": [
+     3.67,
+     -1.34
+    ],
+    "sp-ud-ell": [
+     4.99,
+     3.46
+    ],
+    "sp-ud-gle": [
+     0.33,
+     -1.19
+    ],
+    "sp-ud-hye": [
+     4.65,
+     1.27
+    ],
+    "sp-ud-ita": [
+     8.69,
+     9.6
+    ],
+    "sp-ud-lit": [
+     3.3,
+     4.54
+    ],
+    "sp-ud-mlt": [
+     1.5,
+     -0.89
+    ],
+    "sp-ud-nld": [
+     25.52,
+     18.53
+    ],
+    "sp-ud-rus": [
+     1.2,
+     0.76
+    ],
+    "sp-ud-wol": [
+     3.59,
+     3.35
+    ],
+    "sp-en-aesop-stickney": [
+     2.66,
+     2.97
+    ],
+    "sp-en-pooh": [
+     4.71,
+     5.88
+    ],
+    "sp-protein-aa": [
+     -0.02,
+     -0.75
+    ],
+    "sp-smiles-ccd": [
+     0.66,
+     -1.66
+    ]
+   },
+   "presentUnitOrder": 21,
+   "presentAlsoUnderDocNull": 14,
+   "meanZRatioDocNullOverUnitOrder": 0.33872026891418866
+  },
+  "z50": {
+   "status50": {
+    "sp-js-fold": "PRESENT+",
+    "sp-js-heimdall": "PRESENT+",
+    "sp-js-eoreader7": "PRESENT+",
+    "sp-py-foldvenv": "PRESENT+",
+    "sp-py-first": "PRESENT+",
+    "sp-en-poe-works2": "PRESENT+",
+    "sp-en-chopin-awakening": "PRESENT+",
+    "sp-en-hesse-siddhartha": "PRESENT+",
+    "sp-en-zola-mouret": "PRESENT+",
+    "sp-en-waikna": "AMBIGUOUS",
+    "sp-en-about-london": "PRESENT+",
+    "sp-en-warren-forces": "AMBIGUOUS",
+    "sp-en-kafka-metamorphosis": "AMBIGUOUS",
+    "sp-ud-afr": "PRESENT+",
+    "sp-ud-ces": "PRESENT+",
+    "sp-ud-dan": "ABSENT",
+    "sp-ud-ell": "PRESENT+",
+    "sp-ud-gle": "ABSENT",
+    "sp-ud-hye": "PRESENT+",
+    "sp-ud-ita": "PRESENT+",
+    "sp-ud-lit": "PRESENT+",
+    "sp-ud-mlt": "PRESENT+",
+    "sp-ud-nld": "PRESENT+",
+    "sp-ud-rus": "ABSENT",
+    "sp-ud-wol": "PRESENT+",
+    "sp-en-aesop-stickney": "PRESENT+",
+    "sp-en-pooh": "PRESENT+",
+    "sp-protein-aa": "ABSENT",
+    "sp-smiles-ccd": "ABSENT"
+   },
+   "disagreeWithPrimary": []
+  },
+  "multiplicity": {
+   "scoredSiblings": 29,
+   "atlasIidFalsePresentRate": 0.00008488,
+   "expectedFalsePresent": 0.00246152,
+   "pAtLeastOneFalsePresent": 0.002458597159842091,
+   "note": "under no effect P(|z|<2 in both halves) is about 0.83-0.85, so a lone ABSENT is weak evidence"
+  }
+ },
+ "rows": [
+  {
+   "id": "sp-js-fold",
+   "class": "code",
+   "status": "PRESENT+",
+   "tokens": 291042,
+   "units": 23200,
+   "docs": 211,
+   "vocab": 13647,
+   "meanUnitLength": 12.544913793103449,
+   "discover": {
+    "v": 0.08786648624300142,
+    "nullMean": 0.004985825588664739,
+    "nullSd": 0.0006300995455408523,
+    "z": 131.53582039675211,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.08875351452661562,
+    "nullMean": 0.005521775845227239,
+    "nullSd": 0.0006469307265320895,
+    "z": 128.65633872046402,
+    "n": 10
+   },
+   "v": 0.08831000038480852,
+   "d": 0.08305619966786253,
+   "zMean": 130.09607955860807,
+   "zBothPositive": true,
+   "supplementary": {
+    "z50": [
+     121.456607847253,
+     112.96568104158119
+    ],
+    "status50": "PRESENT+",
+    "docNullZ": [
+     54.13315803972201,
+     33.999200065824795
+    ],
+    "statusDocNull": "PRESENT+",
+    "posParZ": [
+     362.19811030433607,
+     311.54280751416724
+    ],
+    "suffixCopyZ": [
+     142.99798542439802,
+     129.74340160567712
+    ],
+    "adjNg2Z": [
+     506.97134241316354,
+     460.63275659185376
+    ],
+    "posParStatus": "PRESENT+",
+    "suffixCopyStatus": "PRESENT+",
+    "dup": {
+     "discover": {
+      "pairs": 11085,
+      "hits": 974,
+      "dupHits": 10,
+      "dupPairs": 10
+     },
+     "confirm": {
+      "pairs": 10670,
+      "hits": 947,
+      "dupHits": 9,
+      "dupPairs": 9
+     },
+     "dupHitShare": 0.00989068193649141,
+     "dupPairShare": 0.0008733624454148472,
+     "hitRate": 0.0883015398758906
+    }
+   }
+  },
+  {
+   "id": "sp-js-heimdall",
+   "class": "code",
+   "status": "PRESENT+",
+   "tokens": 160415,
+   "units": 18614,
+   "docs": 99,
+   "vocab": 6471,
+   "meanUnitLength": 8.617975717202105,
+   "discover": {
+    "v": 0.06108135679642146,
+    "nullMean": 0.006120595422362385,
+    "nullSd": 0.0011357079904519257,
+    "z": 48.3933914669288,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.07196084973838879,
+    "nullMean": 0.006228146709690918,
+    "nullSd": 0.0013939666065151935,
+    "z": 47.15514899817036,
+    "n": 10
+   },
+   "v": 0.06652110326740512,
+   "d": 0.06034673220137847,
+   "zMean": 47.77427023254958,
+   "zBothPositive": true,
+   "supplementary": {
+    "z50": [
+     55.766421193962515,
+     68.52335948402128
+    ],
+    "status50": "PRESENT+",
+    "docNullZ": [
+     24.217351125689348,
+     23.39247594486575
+    ],
+    "statusDocNull": "PRESENT+",
+    "posParZ": [
+     118.26695330672382,
+     168.00616801792856
+    ],
+    "suffixCopyZ": [
+     90.89374559417574,
+     114.4836046942542
+    ],
+    "adjNg2Z": [
+     192.27117197879107,
+     264.1520477628322
+    ],
+    "posParStatus": "PRESENT+",
+    "suffixCopyStatus": "PRESENT+",
+    "dup": {
+     "discover": {
+      "pairs": 7842,
+      "hits": 479,
+      "dupHits": 8,
+      "dupPairs": 8
+     },
+     "confirm": {
+      "pairs": 8991,
+      "hits": 647,
+      "dupHits": 11,
+      "dupPairs": 11
+     },
+     "dupHitShare": 0.016873889875666074,
+     "dupPairShare": 0.001128735222479653,
+     "hitRate": 0.0668924137111626
+    }
+   }
+  },
+  {
+   "id": "sp-js-eoreader7",
+   "class": "code",
+   "status": "PRESENT+",
+   "tokens": 291147,
+   "units": 31511,
+   "docs": 191,
+   "vocab": 15162,
+   "meanUnitLength": 9.23953540033639,
+   "discover": {
+    "v": 0.045664400235182256,
+    "nullMean": 0.0030898645522029256,
+    "nullSd": 0.0004857624369228564,
+    "z": 87.64476716782562,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.03495679497245874,
+    "nullMean": 0.001901721927606559,
+    "nullSd": 0.00022469160442123301,
+    "z": 147.11307585344088,
+    "n": 10
+   },
+   "v": 0.0403105976038205,
+   "d": 0.03781480436391575,
+   "zMean": 117.37892151063325,
+   "zBothPositive": true,
+   "supplementary": {
+    "z50": [
+     86.41500014626897,
+     120.55131564945623
+    ],
+    "status50": "PRESENT+",
+    "docNullZ": [
+     31.857718214811783,
+     22.37205380489471
+    ],
+    "statusDocNull": "PRESENT+",
+    "posParZ": [
+     173.43235296961538,
+     200.18160618615465
+    ],
+    "suffixCopyZ": [
+     134.3642033126701,
+     179.3938977851026
+    ],
+    "adjNg2Z": [
+     495.95627968672267,
+     570.9861062103462
+    ],
+    "posParStatus": "PRESENT+",
+    "suffixCopyStatus": "PRESENT+",
+    "dup": {
+     "discover": {
+      "pairs": 11913,
+      "hits": 544,
+      "dupHits": 11,
+      "dupPairs": 11
+     },
+     "confirm": {
+      "pairs": 17822,
+      "hits": 623,
+      "dupHits": 21,
+      "dupPairs": 21
+     },
+     "dupHitShare": 0.027420736932305057,
+     "dupPairShare": 0.0010761728602656801,
+     "hitRate": 0.039246678997814026
+    }
+   }
+  },
+  {
+   "id": "sp-py-foldvenv",
+   "class": "code",
+   "status": "PRESENT+",
+   "tokens": 293941,
+   "units": 64285,
+   "docs": 227,
+   "vocab": 21927,
+   "meanUnitLength": 4.572466360737342,
+   "discover": {
+    "v": 0.05231506120253471,
+    "nullMean": 0.0005764773073678953,
+    "nullSd": 0.00012946051784214113,
+    "z": 399.6475895319277,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.040374117960709555,
+    "nullMean": 0.0006816894663643324,
+    "nullSd": 0.0001434827177701494,
+    "z": 276.6356053969516,
+    "n": 10
+   },
+   "v": 0.04634458958162213,
+   "d": 0.04571550619475602,
+   "zMean": 338.14159746443966,
+   "zBothPositive": true,
+   "supplementary": {
+    "z50": [
+     257.6781421765874,
+     261.13026083298837
+    ],
+    "status50": "PRESENT+",
+    "docNullZ": [
+     51.07032855595553,
+     84.7578881525923
+    ],
+    "statusDocNull": "PRESENT+",
+    "posParZ": [
+     209.94852671345683,
+     219.66993520665844
+    ],
+    "suffixCopyZ": [
+     318.6903749482948,
+     353.9428304341367
+    ],
+    "adjNg2Z": [
+     395.6361977138687,
+     532.038726843959
+    ],
+    "posParStatus": "PRESENT+",
+    "suffixCopyStatus": "PRESENT+",
+    "dup": {
+     "discover": {
+      "pairs": 18790,
+      "hits": 983,
+      "dupHits": 117,
+      "dupPairs": 117
+     },
+     "confirm": {
+      "pairs": 30044,
+      "hits": 1213,
+      "dupHits": 195,
+      "dupPairs": 195
+     },
+     "dupHitShare": 0.14207650273224043,
+     "dupPairShare": 0.006388991276569603,
+     "hitRate": 0.04496866936970144
+    }
+   }
+  },
+  {
+   "id": "sp-py-first",
+   "class": "code",
+   "status": "PRESENT+",
+   "tokens": 232966,
+   "units": 33095,
+   "docs": 172,
+   "vocab": 13927,
+   "meanUnitLength": 7.0393110741803895,
+   "discover": {
+    "v": 0.027140147799400438,
+    "nullMean": 0.0009366985076667333,
+    "nullSd": 0.00014149891971024627,
+    "z": 185.18480102457102,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.021422594142677553,
+    "nullMean": 0.0007047295733173086,
+    "nullSd": 0.0002856459861858825,
+    "z": 72.52986413706586,
+    "n": 10
+   },
+   "v": 0.024281370971038996,
+   "d": 0.023460656930546976,
+   "zMean": 128.85733258081842,
+   "zBothPositive": true,
+   "supplementary": {
+    "z50": [
+     114.48565004184591,
+     75.33013731375553
+    ],
+    "status50": "PRESENT+",
+    "docNullZ": [
+     50.52880056369114,
+     50.39789508046259
+    ],
+    "statusDocNull": "PRESENT+",
+    "posParZ": [
+     259.21657482674806,
+     193.59392989646145
+    ],
+    "suffixCopyZ": [
+     108.89166821746126,
+     252.54170259500785
+    ],
+    "adjNg2Z": [
+     348.0492284537322,
+     210.07309469709287
+    ],
+    "posParStatus": "PRESENT+",
+    "suffixCopyStatus": "PRESENT+",
+    "dup": {
+     "discover": {
+      "pairs": 15291,
+      "hits": 415,
+      "dupHits": 12,
+      "dupPairs": 12
+     },
+     "confirm": {
+      "pairs": 11950,
+      "hits": 256,
+      "dupHits": 4,
+      "dupPairs": 4
+     },
+     "dupHitShare": 0.02384500745156483,
+     "dupPairShare": 0.0005873499504423479,
+     "hitRate": 0.024631988546675965
+    }
+   }
+  },
+  {
+   "id": "sp-en-poe-works2",
+   "class": "prose",
+   "status": "PRESENT+",
+   "tokens": 96647,
+   "units": 4199,
+   "docs": 42,
+   "vocab": 10270,
+   "meanUnitLength": 23.016670635865683,
+   "discover": {
+    "v": 0.013989927252623602,
+    "nullMean": 0.002188836755067314,
+    "nullSd": 0.0010727415938122458,
+    "z": 11.00086970210437,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.017832647462455498,
+    "nullMean": 0.001604579664672201,
+    "nullSd": 0.0009482549308247663,
+    "z": 17.113612880102366,
+    "n": 10
+   },
+   "v": 0.01591128735753955,
+   "d": 0.014014579147669792,
+   "zMean": 14.057241291103368,
+   "zBothPositive": true,
+   "supplementary": {
+    "z50": [
+     12.177504716638362,
+     16.639965442791798
+    ],
+    "status50": "PRESENT+",
+    "docNullZ": [
+     5.534202667327032,
+     13.087411623875765
+    ],
+    "statusDocNull": "PRESENT+",
+    "posParZ": [
+     11.638021884140585,
+     16.888994337783064
+    ],
+    "suffixCopyZ": [
+     9.70287757229817,
+     14.189981112135271
+    ],
+    "adjNg2Z": [
+     18.266943249611902,
+     20.931079147055684
+    ],
+    "posParStatus": "PRESENT+",
+    "suffixCopyStatus": "PRESENT+",
+    "dup": {
+     "discover": {
+      "pairs": 1787,
+      "hits": 25,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "confirm": {
+      "pairs": 2187,
+      "hits": 39,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "dupHitShare": 0,
+     "dupPairShare": 0,
+     "hitRate": 0.01610468042274786
+    }
+   }
+  },
+  {
+   "id": "sp-en-chopin-awakening",
+   "class": "prose",
+   "status": "PRESENT+",
+   "tokens": 64408,
+   "units": 4440,
+   "docs": 44,
+   "vocab": 6863,
+   "meanUnitLength": 14.506306306306307,
+   "discover": {
+    "v": 0.01659038901561871,
+    "nullMean": 0.0011448529253357265,
+    "nullSd": 0.0009346752767049987,
+    "z": 16.525029039746272,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.01595968080619059,
+    "nullMean": 0.0028614927553462623,
+    "nullSd": 0.0009260903347534946,
+    "z": 14.143531747721765,
+    "n": 10
+   },
+   "v": 0.01627503491090465,
+   "d": 0.014271862070563657,
+   "zMean": 15.33428039373402,
+   "zBothPositive": true,
+   "supplementary": {
+    "z50": [
+     15.85854321139468,
+     13.714140684260471
+    ],
+    "status50": "PRESENT+",
+    "docNullZ": [
+     15.017590134524456,
+     10.066450231733407
+    ],
+    "statusDocNull": "PRESENT+",
+    "posParZ": [
+     15.286619369497704,
+     17.573480719576885
+    ],
+    "suffixCopyZ": [
+     22.125024083689603,
+     20.557057683237517
+    ],
+    "adjNg2Z": [
+     18.45915274627693,
+     26.2142297985913
+    ],
+    "posParStatus": "PRESENT+",
+    "suffixCopyStatus": "PRESENT+",
+    "dup": {
+     "discover": {
+      "pairs": 1748,
+      "hits": 29,
+      "dupHits": 1,
+      "dupPairs": 1
+     },
+     "confirm": {
+      "pairs": 2381,
+      "hits": 38,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "dupHitShare": 0.014925373134328358,
+     "dupPairShare": 0.0002421893921046258,
+     "hitRate": 0.01622668927100993
+    }
+   }
+  },
+  {
+   "id": "sp-en-hesse-siddhartha",
+   "class": "prose",
+   "status": "PRESENT+",
+   "tokens": 39270,
+   "units": 1871,
+   "docs": 30,
+   "vocab": 3592,
+   "meanUnitLength": 20.988776055585248,
+   "discover": {
+    "v": 0.04341317365287978,
+    "nullMean": 0.0014967822204198455,
+    "nullSd": 0.0014113909581472835,
+    "z": 29.69863962249205,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.02953953084306704,
+    "nullMean": 0.0012160322144154634,
+    "nullSd": 0.0008391424658557362,
+    "z": 33.75290821418267,
+    "n": 10
+   },
+   "v": 0.03647635224797341,
+   "d": 0.03511994503055575,
+   "zMean": 31.72577391833736,
+   "zBothPositive": true,
+   "supplementary": {
+    "z50": [
+     26.7381750571061,
+     30.2817060748588
+    ],
+    "status50": "PRESENT+",
+    "docNullZ": [
+     17.00799942009937,
+     16.797274866184047
+    ],
+    "statusDocNull": "PRESENT+",
+    "posParZ": [
+     17.38178710713523,
+     31.509489677678143
+    ],
+    "suffixCopyZ": [
+     10.874330637578833,
+     3.794897237569591
+    ],
+    "adjNg2Z": [
+     25.854524407775394,
+     49.00348131664236
+    ],
+    "posParStatus": "PRESENT+",
+    "suffixCopyStatus": "AMBIGUOUS",
+    "dup": {
+     "discover": {
+      "pairs": 668,
+      "hits": 29,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "confirm": {
+      "pairs": 1151,
+      "hits": 34,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "dupHitShare": 0,
+     "dupPairShare": 0,
+     "hitRate": 0.034634414513468936
+    }
+   }
+  },
+  {
+   "id": "sp-en-zola-mouret",
+   "class": "prose",
+   "status": "PRESENT+",
+   "tokens": 128496,
+   "units": 8046,
+   "docs": 80,
+   "vocab": 9965,
+   "meanUnitLength": 15.970171513795675,
+   "discover": {
+    "v": 0.011363636363967089,
+    "nullMean": 0.0016705275613276172,
+    "nullSd": 0.0005495935955520788,
+    "z": 17.63686637014489,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.008736167734241462,
+    "nullMean": 0.0016950269206972735,
+    "nullSd": 0.0003592706273755921,
+    "z": 19.598431591745943,
+    "n": 10
+   },
+   "v": 0.010049902049104276,
+   "d": 0.00836712480809183,
+   "zMean": 18.617648980945418,
+   "zBothPositive": true,
+   "supplementary": {
+    "z50": [
+     15.462362324831824,
+     10.78334513358916
+    ],
+    "status50": "PRESENT+",
+    "docNullZ": [
+     9.542317225688024,
+     8.824398623521613
+    ],
+    "statusDocNull": "PRESENT+",
+    "posParZ": [
+     16.44492642206572,
+     10.921309683545042
+    ],
+    "suffixCopyZ": [
+     12.19415482511226,
+     10.570519242008956
+    ],
+    "adjNg2Z": [
+     20.738262652375052,
+     25.506067596648446
+    ],
+    "posParStatus": "PRESENT+",
+    "suffixCopyStatus": "PRESENT+",
+    "dup": {
+     "discover": {
+      "pairs": 3960,
+      "hits": 45,
+      "dupHits": 7,
+      "dupPairs": 7
+     },
+     "confirm": {
+      "pairs": 3434,
+      "hits": 30,
+      "dupHits": 6,
+      "dupPairs": 6
+     },
+     "dupHitShare": 0.17333333333333334,
+     "dupPairShare": 0.0017581823099810658,
+     "hitRate": 0.010143359480659994
+    }
+   }
+  },
+  {
+   "id": "sp-en-waikna",
+   "class": "prose",
+   "status": "AMBIGUOUS",
+   "tokens": 85322,
+   "units": 3386,
+   "docs": 34,
+   "vocab": 9140,
+   "meanUnitLength": 25.19846426461902,
+   "discover": {
+    "v": 0.008791208791080862,
+    "nullMean": 0.0017662488079622563,
+    "nullSd": 0.0010666845428634088,
+    "z": 6.5857896133572895,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.003434065934015962,
+    "nullMean": 0.0013757055433416098,
+    "nullSd": 0.0011688410620923563,
+    "z": 1.7610267618333466,
+    "n": 10
+   },
+   "v": 0.006112637362548412,
+   "d": 0.004541660186896479,
+   "zMean": 4.173408187595318,
+   "zBothPositive": true,
+   "supplementary": {
+    "z50": [
+     6.464761108226069,
+     1.7444185138515558
+    ],
+    "status50": "AMBIGUOUS",
+    "docNullZ": [
+     3.874940936942397,
+     1.3114925238041533
+    ],
+    "statusDocNull": "AMBIGUOUS",
+    "posParZ": [
+     7.959900763172848,
+     4.794117882051297
+    ],
+    "suffixCopyZ": [
+     11.328814836905858,
+     6.821689461547693
+    ],
+    "adjNg2Z": [
+     24.342022849094164,
+     16.700228586614667
+    ],
+    "posParStatus": "PRESENT+",
+    "suffixCopyStatus": "PRESENT+",
+    "dup": {
+     "discover": {
+      "pairs": 1820,
+      "hits": 16,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "confirm": {
+      "pairs": 1456,
+      "hits": 5,
+      "dupHits": 1,
+      "dupPairs": 1
+     },
+     "dupHitShare": 0.047619047619047616,
+     "dupPairShare": 0.00030525030525030525,
+     "hitRate": 0.00641025641025641
+    }
+   }
+  },
+  {
+   "id": "sp-en-about-london",
+   "class": "prose",
+   "status": "PRESENT+",
+   "tokens": 55661,
+   "units": 2229,
+   "docs": 30,
+   "vocab": 8148,
+   "meanUnitLength": 24.971287572902646,
+   "discover": {
+    "v": 0.01308900523599732,
+    "nullMean": 0.0017464200522226748,
+    "nullSd": 0.001365477810573905,
+    "z": 8.306678509120117,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.024630541872284084,
+    "nullMean": 0.0012817597963476145,
+    "nullSd": 0.0013186157341390841,
+    "z": 17.707040399590518,
+    "n": 10
+   },
+   "v": 0.018859773554140702,
+   "d": 0.017345683629855557,
+   "zMean": 13.006859454355318,
+   "zBothPositive": true,
+   "supplementary": {
+    "z50": [
+     10.1181737900351,
+     19.30581674086571
+    ],
+    "status50": "PRESENT+",
+    "docNullZ": [
+     4.339682750282633,
+     12.489836615845773
+    ],
+    "statusDocNull": "PRESENT+",
+    "posParZ": [
+     14.165861397772462,
+     18.685258550786767
+    ],
+    "suffixCopyZ": [
+     10.836746395887921,
+     3.0797157302284295
+    ],
+    "adjNg2Z": [
+     25.051323699780234,
+     28.15860221000017
+    ],
+    "posParStatus": "PRESENT+",
+    "suffixCopyStatus": "AMBIGUOUS",
+    "dup": {
+     "discover": {
+      "pairs": 1146,
+      "hits": 15,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "confirm": {
+      "pairs": 1015,
+      "hits": 25,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "dupHitShare": 0,
+     "dupPairShare": 0,
+     "hitRate": 0.01850994909763998
+    }
+   }
+  },
+  {
+   "id": "sp-en-warren-forces",
+   "class": "prose",
+   "status": "AMBIGUOUS",
+   "tokens": 35736,
+   "units": 2020,
+   "docs": 30,
+   "vocab": 5338,
+   "meanUnitLength": 17.69108910891089,
+   "discover": {
+    "v": 0.022185702547176334,
+    "nullMean": 0.0033730658863532883,
+    "nullSd": 0.0013135788165711778,
+    "z": 14.321665684233164,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.00831024930721469,
+    "nullMean": 0.0023574521381306114,
+    "nullSd": 0.0018549580558499922,
+    "z": 3.2091276405472926,
+    "n": 10
+   },
+   "v": 0.015247975927195512,
+   "d": 0.012382716914953563,
+   "zMean": 8.765396662390229,
+   "zBothPositive": true,
+   "supplementary": {
+    "z50": [
+     10.971147711585825,
+     3.1664491758699223
+    ],
+    "status50": "AMBIGUOUS",
+    "docNullZ": [
+     8.224378306848445,
+     1.499860906776244
+    ],
+    "statusDocNull": "AMBIGUOUS",
+    "posParZ": [
+     15.095821063311575,
+     6.890783129506707
+    ],
+    "suffixCopyZ": [
+     10.418676153005048,
+     -0.7745966692414834
+    ],
+    "adjNg2Z": [
+     25.635999374549467,
+     24.056936906571625
+    ],
+    "posParStatus": "PRESENT+",
+    "suffixCopyStatus": "AMBIGUOUS",
+    "dup": {
+     "discover": {
+      "pairs": 1217,
+      "hits": 27,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "confirm": {
+      "pairs": 722,
+      "hits": 6,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "dupHitShare": 0,
+     "dupPairShare": 0,
+     "hitRate": 0.01701908200103146
+    }
+   }
+  },
+  {
+   "id": "sp-en-kafka-metamorphosis",
+   "class": "prose",
+   "status": "AMBIGUOUS",
+   "tokens": 22048,
+   "units": 783,
+   "docs": 29,
+   "vocab": 2614,
+   "meanUnitLength": 28.158365261813536,
+   "discover": {
+    "v": 0.0032786885249151965,
+    "nullMean": 0.001313639490854257,
+    "nullSd": 0.0016959126471520999,
+    "z": 1.1586970811030821,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.011627906977082603,
+    "nullMean": 0.0023326387441557016,
+    "nullSd": 0.0019032589728255952,
+    "z": 4.883869387005733,
+    "n": 10
+   },
+   "v": 0.0074532977509989,
+   "d": 0.00563015863349392,
+   "zMean": 3.0212832340544074,
+   "zBothPositive": true,
+   "supplementary": {
+    "z50": [
+     0.520539509709031,
+     3.214726324739033
+    ],
+    "status50": "AMBIGUOUS",
+    "docNullZ": [
+     0.36087300096247965,
+     1.6891353508480915
+    ],
+    "statusDocNull": "ABSENT",
+    "posParZ": [
+     2.6982601861243385,
+     5.864128022395055
+    ],
+    "suffixCopyZ": [
+     null,
+     -0.5719256805320698
+    ],
+    "adjNg2Z": [
+     8.792154366364153,
+     14.10828841423293
+    ],
+    "posParStatus": "AMBIGUOUS",
+    "suffixCopyStatus": "UNDEFINED",
+    "dup": {
+     "discover": {
+      "pairs": 305,
+      "hits": 1,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "confirm": {
+      "pairs": 430,
+      "hits": 5,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "dupHitShare": 0,
+     "dupPairShare": 0,
+     "hitRate": 0.00816326530612245
+    }
+   }
+  },
+  {
+   "id": "sp-ud-afr",
+   "class": "ud",
+   "status": "PRESENT+",
+   "tokens": 30498,
+   "units": 1315,
+   "docs": 53,
+   "vocab": 4553,
+   "meanUnitLength": 23.19239543726236,
+   "discover": {
+    "v": 0.03968253968287172,
+    "nullMean": 0.003373015872966789,
+    "nullSd": 0.002483463406778489,
+    "z": 14.62051895381261,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.02110817941957066,
+    "nullMean": 0.0022427440634601226,
+    "nullSd": 0.0017645033110934515,
+    "z": 10.691640665961543,
+    "n": 10
+   },
+   "v": 0.03039535955122119,
+   "d": 0.027587479583007734,
+   "zMean": 12.656079809887077,
+   "zBothPositive": true,
+   "supplementary": {
+    "z50": [
+     15.414017054648692,
+     10.880237426380114
+    ],
+    "status50": "PRESENT+",
+    "docNullZ": [
+     8.1063355506987,
+     2.4694714285233825
+    ],
+    "statusDocNull": "AMBIGUOUS",
+    "posParZ": [
+     11.827520827378072,
+     11.40075223102133
+    ],
+    "suffixCopyZ": [
+     8.538149682454623,
+     12.511044300921062
+    ],
+    "adjNg2Z": [
+     27.51183557136152,
+     30.28428553988361
+    ],
+    "posParStatus": "PRESENT+",
+    "suffixCopyStatus": "PRESENT+",
+    "dup": {
+     "discover": {
+      "pairs": 504,
+      "hits": 20,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "confirm": {
+      "pairs": 758,
+      "hits": 16,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "dupHitShare": 0,
+     "dupPairShare": 0,
+     "hitRate": 0.028526148969889066
+    }
+   }
+  },
+  {
+   "id": "sp-ud-ces",
+   "class": "ud",
+   "status": "PRESENT+",
+   "tokens": 299923,
+   "units": 17378,
+   "docs": 696,
+   "vocab": 50747,
+   "meanUnitLength": 17.25877546322937,
+   "discover": {
+    "v": 0.005028735632549797,
+    "nullMean": 0.0001917933735967381,
+    "nullSd": 0.00014069054573270646,
+    "z": 34.3800092164161,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.008743442418563063,
+    "nullMean": 0.0002625125105623738,
+    "nullSd": 0.00013755240623971164,
+    "z": 61.65599090444867,
+    "n": 10
+   },
+   "v": 0.00688608902555643,
+   "d": 0.006658936083476875,
+   "zMean": 48.018000060432385,
+   "zBothPositive": true,
+   "supplementary": {
+    "z50": [
+     40.225197301818966,
+     52.74307656051797
+    ],
+    "status50": "PRESENT+",
+    "docNullZ": [
+     4.221052409790009,
+     11.201435112640311
+    ],
+    "statusDocNull": "PRESENT+",
+    "posParZ": [
+     54.04352232208752,
+     22.745290153000283
+    ],
+    "suffixCopyZ": [
+     97.57353082532445,
+     null
+    ],
+    "adjNg2Z": [
+     116.6197595873583,
+     189.7151180800634
+    ],
+    "posParStatus": "PRESENT+",
+    "suffixCopyStatus": "UNDEFINED",
+    "dup": {
+     "discover": {
+      "pairs": 8352,
+      "hits": 42,
+      "dupHits": 1,
+      "dupPairs": 1
+     },
+     "confirm": {
+      "pairs": 8006,
+      "hits": 70,
+      "dupHits": 1,
+      "dupPairs": 1
+     },
+     "dupHitShare": 0.017857142857142856,
+     "dupPairShare": 0.00012226433549333658,
+     "hitRate": 0.006846802787626849
+    }
+   }
+  },
+  {
+   "id": "sp-ud-dan",
+   "class": "ud",
+   "status": "ABSENT",
+   "tokens": 68296,
+   "units": 4369,
+   "docs": 175,
+   "vocab": 14910,
+   "meanUnitLength": 15.631952391851682,
+   "discover": {
+    "v": 0.0019002375292984652,
+    "nullMean": 0.0009499167766989558,
+    "nullSd": 0.0009502588171489937,
+    "z": 1.000065177454182,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.0010764262651719037,
+    "nullMean": 0.0018277003989169316,
+    "nullSd": 0.000577338314802194,
+    "z": -1.3012719136827553,
+    "n": 10
+   },
+   "v": 0.0014883318972351844,
+   "d": 0.00009952330942724074,
+   "zMean": -0.15060336811428665,
+   "zBothPositive": false,
+   "supplementary": {
+    "z50": [
+     1.250788370481823,
+     -0.7842194850539048
+    ],
+    "status50": "ABSENT",
+    "docNullZ": [
+     3.673526183963411,
+     -1.3415587537687341
+    ],
+    "statusDocNull": "AMBIGUOUS",
+    "posParZ": [
+     1.6150331447399677,
+     1.5499433757213723
+    ],
+    "suffixCopyZ": [
+     null,
+     -0.31622776601683794
+    ],
+    "adjNg2Z": [
+     -0.14951514365553029,
+     -1.8517219141768624
+    ],
+    "posParStatus": "ABSENT",
+    "suffixCopyStatus": "UNDEFINED",
+    "dup": {
+     "discover": {
+      "pairs": 2105,
+      "hits": 4,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "confirm": {
+      "pairs": 1858,
+      "hits": 2,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "dupHitShare": 0,
+     "dupPairShare": 0,
+     "hitRate": 0.001514004542013626
+    }
+   }
+  },
+  {
+   "id": "sp-ud-ell",
+   "class": "ud",
+   "status": "PRESENT+",
+   "tokens": 37783,
+   "units": 1632,
+   "docs": 66,
+   "vocab": 8275,
+   "meanUnitLength": 23.151348039215687,
+   "discover": {
+    "v": 0.022440392706812418,
+    "nullMean": 0.0015445498525878064,
+    "nullSd": 0.0010363866049926708,
+    "z": 20.16220853642969,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.012121212121201097,
+    "nullMean": 0.0008509902352670906,
+    "nullSd": 0.0011528696312489454,
+    "z": 9.775799084693181,
+    "n": 10
+   },
+   "v": 0.017280802414006757,
+   "d": 0.01608303237007931,
+   "zMean": 14.969003810561436,
+   "zBothPositive": true,
+   "supplementary": {
+    "z50": [
+     13.00539169155778,
+     6.307670818234081
+    ],
+    "status50": "PRESENT+",
+    "docNullZ": [
+     4.9944498877308146,
+     3.4583916342138643
+    ],
+    "statusDocNull": "AMBIGUOUS",
+    "posParZ": [
+     9.057840228104306,
+     7.335872883445895
+    ],
+    "suffixCopyZ": [
+     17.984579585998024,
+     14.186082167995739
+    ],
+    "adjNg2Z": [
+     28.254833127979047,
+     41.06308121305748
+    ],
+    "posParStatus": "PRESENT+",
+    "suffixCopyStatus": "PRESENT+",
+    "dup": {
+     "discover": {
+      "pairs": 713,
+      "hits": 16,
+      "dupHits": 1,
+      "dupPairs": 1
+     },
+     "confirm": {
+      "pairs": 825,
+      "hits": 10,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "dupHitShare": 0.038461538461538464,
+     "dupPairShare": 0.0006501950585175553,
+     "hitRate": 0.016905071521456438
+    }
+   }
+  },
+  {
+   "id": "sp-ud-gle",
+   "class": "ud",
+   "status": "ABSENT",
+   "tokens": 85922,
+   "units": 3997,
+   "docs": 160,
+   "vocab": 12364,
+   "meanUnitLength": 21.496622466850138,
+   "discover": {
+    "v": 0.0021929824561084388,
+    "nullMean": 0.0009317173000454205,
+    "nullSd": 0.0006355482710565724,
+    "z": 1.9845308586336297,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.0015136226038521272,
+    "nullMean": 0.0017152863678347786,
+    "nullSd": 0.0010422080769572598,
+    "z": -0.19349664279268627,
+    "n": 10
+   },
+   "v": 0.001853302529980283,
+   "d": 0.0005298006960401835,
+   "zMean": 0.8955171079204717,
+   "zBothPositive": false,
+   "supplementary": {
+    "z50": [
+     0.7463081461733003,
+     -0.011913304482951805
+    ],
+    "status50": "ABSENT",
+    "docNullZ": [
+     0.32678150625386526,
+     -1.1901475921916445
+    ],
+    "statusDocNull": "ABSENT",
+    "posParZ": [
+     1.3580398952991086,
+     -0.5007006572757347
+    ],
+    "suffixCopyZ": [
+     1.4653163098320023,
+     -1.4491373488521937
+    ],
+    "adjNg2Z": [
+     3.862509268618231,
+     0.7637750526879888
+    ],
+    "posParStatus": "ABSENT",
+    "suffixCopyStatus": "ABSENT",
+    "dup": {
+     "discover": {
+      "pairs": 1824,
+      "hits": 4,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "confirm": {
+      "pairs": 1982,
+      "hits": 3,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "dupHitShare": 0,
+     "dupPairShare": 0,
+     "hitRate": 0.0018392012611665792
+    }
+   }
+  },
+  {
+   "id": "sp-ud-hye",
+   "class": "ud",
+   "status": "PRESENT+",
+   "tokens": 65187,
+   "units": 4352,
+   "docs": 175,
+   "vocab": 18538,
+   "meanUnitLength": 14.978630514705882,
+   "discover": {
+    "v": 0.007550731476840156,
+    "nullMean": 0.00004730368964374065,
+    "nullSd": 0.00014958740100393938,
+    "z": 50.160827294531394,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.006359300477015495,
+    "nullMean": 0.00015934851189740583,
+    "nullSd": 0.0002565755604554099,
+    "z": 24.164234325800393,
+    "n": 10
+   },
+   "v": 0.006955015976927825,
+   "d": 0.006851689876157252,
+   "zMean": 37.16253081016589,
+   "zBothPositive": true,
+   "supplementary": {
+    "z50": [
+     66.27705262041215,
+     29.14837621657288
+    ],
+    "status50": "PRESENT+",
+    "docNullZ": [
+     4.64676575816273,
+     1.2680346450582989
+    ],
+    "statusDocNull": "AMBIGUOUS",
+    "posParZ": [
+     30.58258700761677,
+     11.595101518538874
+    ],
+    "suffixCopyZ": [
+     null,
+     null
+    ],
+    "adjNg2Z": [
+     136.16913568025117,
+     59.625840109513334
+    ],
+    "posParStatus": "PRESENT+",
+    "suffixCopyStatus": "UNDEFINED",
+    "dup": {
+     "discover": {
+      "pairs": 2119,
+      "hits": 16,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "confirm": {
+      "pairs": 1887,
+      "hits": 12,
+      "dupHits": 1,
+      "dupPairs": 1
+     },
+     "dupHitShare": 0.03571428571428571,
+     "dupPairShare": 0.00024962556165751375,
+     "hitRate": 0.006989515726410384
+    }
+   }
+  },
+  {
+   "id": "sp-ud-ita",
+   "class": "ud",
+   "status": "PRESENT+",
+   "tokens": 240871,
+   "units": 13060,
+   "docs": 523,
+   "vocab": 25225,
+   "meanUnitLength": 18.443415007656967,
+   "discover": {
+    "v": 0.030060120240705146,
+    "nullMean": 0.0014071567282371688,
+    "nullSd": 0.0004546604278988316,
+    "z": 63.020579215316424,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.03131347325688694,
+    "nullMean": 0.0013737156996285194,
+    "nullSd": 0.00037958839386153945,
+    "z": 78.8742702396201,
+    "n": 10
+   },
+   "v": 0.03068679674879604,
+   "d": 0.029296360534863196,
+   "zMean": 70.94742472746826,
+   "zBothPositive": true,
+   "supplementary": {
+    "z50": [
+     59.233652956516956,
+     78.03824482516447
+    ],
+    "status50": "PRESENT+",
+    "docNullZ": [
+     8.686779412109097,
+     9.595273800715777
+    ],
+    "statusDocNull": "PRESENT+",
+    "posParZ": [
+     37.98056953412891,
+     32.385147749222135
+    ],
+    "suffixCopyZ": [
+     57.303521794039725,
+     69.86508531156723
+    ],
+    "adjNg2Z": [
+     107.72818174472773,
+     104.20604491255999
+    ],
+    "posParStatus": "PRESENT+",
+    "suffixCopyStatus": "PRESENT+",
+    "dup": {
+     "discover": {
+      "pairs": 5988,
+      "hits": 180,
+      "dupHits": 1,
+      "dupPairs": 1
+     },
+     "confirm": {
+      "pairs": 5908,
+      "hits": 185,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "dupHitShare": 0.0027397260273972603,
+     "dupPairShare": 0.00008406186953597848,
+     "hitRate": 0.030682582380632144
+    }
+   }
+  },
+  {
+   "id": "sp-ud-kat",
+   "class": "ud",
+   "status": "UNDEFINED",
+   "tokens": 33092,
+   "units": 2214,
+   "docs": 89,
+   "vocab": 11034,
+   "meanUnitLength": 14.946702800361336,
+   "discover": {
+    "v": 0.0019379844961804338,
+    "nullMean": 0,
+    "nullSd": 0,
+    "z": null,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.005489478499839606,
+    "nullMean": 0.0005489478498930112,
+    "nullSd": 0.0007715224544417282,
+    "z": 6.403612262356708,
+    "n": 10
+   }
+  },
+  {
+   "id": "sp-ud-lit",
+   "class": "ud",
+   "status": "PRESENT+",
+   "tokens": 37825,
+   "units": 2340,
+   "docs": 94,
+   "vocab": 12276,
+   "meanUnitLength": 16.164529914529915,
+   "discover": {
+    "v": 0.010140405615857162,
+    "nullMean": 0.00015606713259330718,
+    "nullSd": 0.00032901843589506786,
+    "z": 30.345832919976885,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.01578354002231208,
+    "nullMean": 0.00045185015651441065,
+    "nullSd": 0.0007895368982994774,
+    "z": 19.41858562762477,
+    "n": 10
+   },
+   "v": 0.012961972819084622,
+   "d": 0.012658014174530764,
+   "zMean": 24.882209273800825,
+   "zBothPositive": true,
+   "supplementary": {
+    "z50": [
+     29.5650123774933,
+     19.156837354694545
+    ],
+    "status50": "PRESENT+",
+    "docNullZ": [
+     3.2975197832295815,
+     4.53665485556842
+    ],
+    "statusDocNull": "AMBIGUOUS",
+    "posParZ": [
+     18.804698387345475,
+     27.79943608519848
+    ],
+    "suffixCopyZ": [
+     15.957735370265366,
+     12.318622316882353
+    ],
+    "adjNg2Z": [
+     120.88644398685871,
+     41.2432483389016
+    ],
+    "posParStatus": "PRESENT+",
+    "suffixCopyStatus": "PRESENT+",
+    "dup": {
+     "discover": {
+      "pairs": 1282,
+      "hits": 13,
+      "dupHits": 1,
+      "dupPairs": 1
+     },
+     "confirm": {
+      "pairs": 887,
+      "hits": 14,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "dupHitShare": 0.037037037037037035,
+     "dupPairShare": 0.0004610419548178884,
+     "hitRate": 0.012448132780082987
+    }
+   }
+  },
+  {
+   "id": "sp-ud-mlt",
+   "class": "ud",
+   "status": "PRESENT+",
+   "tokens": 20056,
+   "units": 1120,
+   "docs": 45,
+   "vocab": 4810,
+   "meanUnitLength": 17.90714285714286,
+   "discover": {
+    "v": 0.016548463357139553,
+    "nullMean": 0.0009433962263756257,
+    "nullSd": 0.0022785183562760696,
+    "z": 6.848778324642643,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.013289036544847477,
+    "nullMean": 0.003008638514984341,
+    "nullSd": 0.0024673560626784835,
+    "z": 4.166564439306365,
+    "n": 10
+   },
+   "v": 0.014918749950993515,
+   "d": 0.012942732580313532,
+   "zMean": 5.507671381974504,
+   "zBothPositive": true,
+   "supplementary": {
+    "z50": [
+     10.237092655182071,
+     5.481390576031609
+    ],
+    "status50": "PRESENT+",
+    "docNullZ": [
+     1.495002477826853,
+     -0.8914313572865686
+    ],
+    "statusDocNull": "ABSENT",
+    "posParZ": [
+     12.226775022448837,
+     7.256955115644634
+    ],
+    "suffixCopyZ": [
+     null,
+     7.6990479097999165
+    ],
+    "adjNg2Z": [
+     36.67333858942974,
+     61.080072253502905
+    ],
+    "posParStatus": "PRESENT+",
+    "suffixCopyStatus": "UNDEFINED",
+    "dup": {
+     "discover": {
+      "pairs": 423,
+      "hits": 7,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "confirm": {
+      "pairs": 602,
+      "hits": 8,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "dupHitShare": 0,
+     "dupPairShare": 0,
+     "hitRate": 0.014634146341463415
+    }
+   }
+  },
+  {
+   "id": "sp-ud-nld",
+   "class": "ud",
+   "status": "PRESENT+",
+   "tokens": 163958,
+   "units": 12277,
+   "docs": 492,
+   "vocab": 24377,
+   "meanUnitLength": 13.354891260079825,
+   "discover": {
+    "v": 0.059414826781903685,
+    "nullMean": 0.0017415689326298889,
+    "nullSd": 0.0005680708236060432,
+    "z": 101.52476672392906,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.043706007530090574,
+    "nullMean": 0.0015384456357423915,
+    "nullSd": 0.00029103404018440053,
+    "z": 144.8887623854262,
+    "n": 10
+   },
+   "v": 0.05156041715599713,
+   "d": 0.04992040987181099,
+   "zMean": 123.20676455467762,
+   "zBothPositive": true,
+   "supplementary": {
+    "z50": [
+     98.61068986341236,
+     92.42438628485465
+    ],
+    "status50": "PRESENT+",
+    "docNullZ": [
+     25.51542219317934,
+     18.534686025451006
+    ],
+    "statusDocNull": "PRESENT+",
+    "posParZ": [
+     50.945350216861144,
+     76.1748907748214
+    ],
+    "suffixCopyZ": [
+     128.04702939955925,
+     152.46551167986863
+    ],
+    "adjNg2Z": [
+     129.0290381863304,
+     79.6933942520052
+    ],
+    "posParStatus": "PRESENT+",
+    "suffixCopyStatus": "PRESENT+",
+    "dup": {
+     "discover": {
+      "pairs": 5571,
+      "hits": 331,
+      "dupHits": 6,
+      "dupPairs": 6
+     },
+     "confirm": {
+      "pairs": 6109,
+      "hits": 267,
+      "dupHits": 14,
+      "dupPairs": 14
+     },
+     "dupHitShare": 0.033444816053511704,
+     "dupPairShare": 0.0017123287671232876,
+     "hitRate": 0.0511986301369863
+    }
+   }
+  },
+  {
+   "id": "sp-ud-rus",
+   "class": "ud",
+   "status": "ABSENT",
+   "tokens": 58306,
+   "units": 3850,
+   "docs": 154,
+   "vocab": 23666,
+   "meanUnitLength": 15.144415584415585,
+   "discover": {
+    "v": 0.003128258602373535,
+    "nullMean": 0.002241918665367848,
+    "nullSd": 0.0006045369178992847,
+    "z": 1.466146914708938,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.0028184892898934777,
+    "nullMean": 0.001972942502652586,
+    "nullSd": 0.0010377077242932147,
+    "z": 0.8148217146757732,
+    "n": 10
+   },
+   "v": 0.0029733739461335063,
+   "d": 0.0008659433621232893,
+   "zMean": 1.1404843146923556,
+   "zBothPositive": true,
+   "supplementary": {
+    "z50": [
+     1.1565033529586932,
+     1.1742284271688008
+    ],
+    "status50": "ABSENT",
+    "docNullZ": [
+     1.1987562609369424,
+     0.7590721157125169
+    ],
+    "statusDocNull": "ABSENT",
+    "posParZ": [
+     2.234779533258536,
+     1.4625971983362982
+    ],
+    "suffixCopyZ": [
+     3.51933435625728,
+     5.5895310340132145
+    ],
+    "adjNg2Z": [
+     5.19629380696025,
+     1.0063938678729856
+    ],
+    "posParStatus": "AMBIGUOUS",
+    "suffixCopyStatus": "AMBIGUOUS",
+    "dup": {
+     "discover": {
+      "pairs": 1918,
+      "hits": 6,
+      "dupHits": 1,
+      "dupPairs": 1
+     },
+     "confirm": {
+      "pairs": 1774,
+      "hits": 5,
+      "dupHits": 1,
+      "dupPairs": 1
+     },
+     "dupHitShare": 0.18181818181818182,
+     "dupPairShare": 0.0005417118093174431,
+     "hitRate": 0.002979414951245937
+    }
+   }
+  },
+  {
+   "id": "sp-ud-tur",
+   "class": "ud",
+   "status": "UNDEFINED",
+   "tokens": 30973,
+   "units": 3430,
+   "docs": 138,
+   "vocab": 12381,
+   "meanUnitLength": 9.030029154518951,
+   "discover": {
+    "v": 0.006853582554867899,
+    "nullMean": 0.00006265664160309825,
+    "nullSd": 0.00019813769800265432,
+    "z": 34.27377011907056,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.0049875311724463245,
+    "nullMean": 0,
+    "nullSd": 0,
+    "z": null,
+    "n": 10
+   }
+  },
+  {
+   "id": "sp-ud-wol",
+   "class": "ud",
+   "status": "PRESENT+",
+   "tokens": 20635,
+   "units": 1188,
+   "docs": 48,
+   "vocab": 3405,
+   "meanUnitLength": 17.36952861952862,
+   "discover": {
+    "v": 0.020000000000436557,
+    "nullMean": 0.0010000000001127774,
+    "nullSd": 0.0016101529718758134,
+    "z": 11.800121064391139,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.02616822429899912,
+    "nullMean": 0.0016850432287355943,
+    "nullSd": 0.0018621876717681085,
+    "z": 13.147536868299238,
+    "n": 10
+   },
+   "v": 0.02308411214971784,
+   "d": 0.021741590535293655,
+   "zMean": 12.473828966345188,
+   "zBothPositive": true,
+   "supplementary": {
+    "z50": [
+     12.850707392602995,
+     14.78349618862675
+    ],
+    "status50": "PRESENT+",
+    "docNullZ": [
+     3.5911074381559014,
+     3.3455575375465347
+    ],
+    "statusDocNull": "AMBIGUOUS",
+    "posParZ": [
+     10.961720700811005,
+     10.73188769716076
+    ],
+    "suffixCopyZ": [
+     10.844353367267292,
+     null
+    ],
+    "adjNg2Z": [
+     20.178555655546283,
+     19.13479027044794
+    ],
+    "posParStatus": "PRESENT+",
+    "suffixCopyStatus": "UNDEFINED",
+    "dup": {
+     "discover": {
+      "pairs": 600,
+      "hits": 12,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "confirm": {
+      "pairs": 535,
+      "hits": 14,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "dupHitShare": 0,
+     "dupPairShare": 0,
+     "hitRate": 0.02290748898678414
+    }
+   }
+  },
+  {
+   "id": "sp-en-aesop-stickney",
+   "class": "children",
+   "status": "PRESENT+",
+   "tokens": 29256,
+   "units": 1879,
+   "docs": 30,
+   "vocab": 3619,
+   "meanUnitLength": 15.56998403406067,
+   "discover": {
+    "v": 0.015765765765536344,
+    "nullMean": 0.002364995247353363,
+    "nullSd": 0.0015420207162482717,
+    "z": 8.690395905177581,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.007777777777846495,
+    "nullMean": 0.0015611321818141733,
+    "nullSd": 0.0011987646580789882,
+    "z": 5.185876605667081,
+    "n": 10
+   },
+   "v": 0.01177177177169142,
+   "d": 0.009808708057107651,
+   "zMean": 6.938136255422331,
+   "zBothPositive": true,
+   "supplementary": {
+    "z50": [
+     9.059762976644842,
+     4.6672205213935305
+    ],
+    "status50": "PRESENT+",
+    "docNullZ": [
+     2.664203740180733,
+     2.970228067394604
+    ],
+    "statusDocNull": "AMBIGUOUS",
+    "posParZ": [
+     8.34715460865168,
+     6.203253742659706
+    ],
+    "suffixCopyZ": [
+     10.862052268862943,
+     4.106044410267153
+    ],
+    "adjNg2Z": [
+     22.546593668049976,
+     21.13958282473532
+    ],
+    "posParStatus": "PRESENT+",
+    "suffixCopyStatus": "PRESENT+",
+    "dup": {
+     "discover": {
+      "pairs": 888,
+      "hits": 14,
+      "dupHits": 2,
+      "dupPairs": 2
+     },
+     "confirm": {
+      "pairs": 900,
+      "hits": 7,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "dupHitShare": 0.09523809523809523,
+     "dupPairShare": 0.0011185682326621924,
+     "hitRate": 0.01174496644295302
+    }
+   }
+  },
+  {
+   "id": "sp-en-pooh",
+   "class": "children",
+   "status": "PRESENT+",
+   "tokens": 22984,
+   "units": 2146,
+   "docs": 30,
+   "vocab": 1868,
+   "meanUnitLength": 10.710158434296366,
+   "discover": {
+    "v": 0.014301430142950267,
+    "nullMean": 0.0015382242652776767,
+    "nullSd": 0.0007681341447520176,
+    "z": 16.61585540087276,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.019269776876171818,
+    "nullMean": 0.0024377884054047174,
+    "nullSd": 0.001453319007223178,
+    "z": 11.58175760938239,
+    "n": 10
+   },
+   "v": 0.016785603509561042,
+   "d": 0.014797597174219846,
+   "zMean": 14.098806505127575,
+   "zBothPositive": true,
+   "supplementary": {
+    "z50": [
+     7.381287550646069,
+     13.420875169254899
+    ],
+    "status50": "PRESENT+",
+    "docNullZ": [
+     4.707662911728008,
+     5.879736247398959
+    ],
+    "statusDocNull": "PRESENT+",
+    "posParZ": [
+     14.215182332655369,
+     10.152158536140089
+    ],
+    "suffixCopyZ": [
+     5.8358920137318915,
+     4.053706508267278
+    ],
+    "adjNg2Z": [
+     26.314029323928796,
+     22.517296222248547
+    ],
+    "posParStatus": "PRESENT+",
+    "suffixCopyStatus": "PRESENT+",
+    "dup": {
+     "discover": {
+      "pairs": 909,
+      "hits": 13,
+      "dupHits": 4,
+      "dupPairs": 4
+     },
+     "confirm": {
+      "pairs": 986,
+      "hits": 19,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "dupHitShare": 0.125,
+     "dupPairShare": 0.0021108179419525065,
+     "hitRate": 0.016886543535620052
+    }
+   }
+  },
+  {
+   "id": "sp-protein-aa",
+   "class": "notation",
+   "status": "ABSENT",
+   "tokens": 292094,
+   "units": 888,
+   "docs": 92,
+   "vocab": 20,
+   "meanUnitLength": 328.93468468468467,
+   "discover": {
+    "v": 0.08500000000003638,
+    "nullMean": 0.07550000000001092,
+    "nullSd": 0.014230249470528615,
+    "z": 0.667591950492528,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.07070707070670323,
+    "nullMean": 0.07095959595962995,
+    "nullSd": 0.009101035636830153,
+    "z": -0.02774687002705377,
+    "n": 10
+   },
+   "v": 0.07785353535336981,
+   "d": 0.004623737373549375,
+   "zMean": 0.3199225402327371,
+   "zBothPositive": false,
+   "supplementary": {
+    "z50": [
+     0.6087495962276666,
+     -0.11003034417284728
+    ],
+    "status50": "ABSENT",
+    "docNullZ": [
+     -0.02350502472351541,
+     -0.7524039950275748
+    ],
+    "statusDocNull": "ABSENT",
+    "posParZ": [
+     2.0925027410556405,
+     3.3531038237192243
+    ],
+    "suffixCopyZ": [
+     0.8705715002674501,
+     1.1618950039058158
+    ],
+    "adjNg2Z": [
+     15.340550438330673,
+     16.54564467379045
+    ],
+    "posParStatus": "AMBIGUOUS",
+    "suffixCopyStatus": "ABSENT",
+    "dup": {
+     "discover": {
+      "pairs": 400,
+      "hits": 34,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "confirm": {
+      "pairs": 396,
+      "hits": 28,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "dupHitShare": 0,
+     "dupPairShare": 0,
+     "hitRate": 0.07788944723618091
+    }
+   }
+  },
+  {
+   "id": "sp-smiles-ccd",
+   "class": "notation",
+   "status": "ABSENT",
+   "tokens": 156499,
+   "units": 6000,
+   "docs": 60,
+   "vocab": 109,
+   "meanUnitLength": 26.083166666666667,
+   "discover": {
+    "v": 0.19865319865311903,
+    "nullMean": 0.19839132061360942,
+    "nullSd": 0.0064679104562154295,
+    "z": 0.0404888164860037,
+    "n": 10
+   },
+   "confirm": {
+    "v": 0.1766146311601915,
+    "nullMean": 0.17976737067647264,
+    "nullSd": 0.009585483692219841,
+    "z": -0.3289077126947802,
+    "n": 10
+   },
+   "v": 0.18763391490665526,
+   "d": -0.0014454307383857667,
+   "zMean": -0.14420944810438824,
+   "zBothPositive": false,
+   "supplementary": {
+    "z50": [
+     0.6349135287776904,
+     -1.0945994765828309
+    ],
+    "status50": "ABSENT",
+    "docNullZ": [
+     0.66423296700252,
+     -1.6641238820829463
+    ],
+    "statusDocNull": "ABSENT",
+    "posParZ": [
+     0.710555463592608,
+     -0.38645229231725947
+    ],
+    "suffixCopyZ": [
+     3.5354270847833873,
+     -2.3268714289818275
+    ],
+    "adjNg2Z": [
+     0.6903481667779802,
+     -1.3293183802923503
+    ],
+    "posParStatus": "ABSENT",
+    "suffixCopyStatus": "AMBIGUOUS",
+    "dup": {
+     "discover": {
+      "pairs": 2673,
+      "hits": 531,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "confirm": {
+      "pairs": 3267,
+      "hits": 577,
+      "dupHits": 0,
+      "dupPairs": 0
+     },
+     "dupHitShare": 0,
+     "dupPairShare": 0,
+     "hitRate": 0.18653198653198652
+    }
+   }
+  }
+ ],
+ "thinNotScored": [
+  "sp-sh-first",
+  "sp-en-evolution-plain",
+  "sp-ud-hun",
+  "sp-ud-mar",
+  "sp-ud-tam",
+  "sp-ud-tel",
+  "sp-ud-uig"
+ ],
+ "missing": [],
+ "deviations": []
+}

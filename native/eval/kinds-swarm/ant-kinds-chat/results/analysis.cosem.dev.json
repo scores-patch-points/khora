@@ -1,0 +1,670 @@
+{
+ "module": "ant-kinds-chat/analyse.mjs",
+ "corpus": "cosem",
+ "stages": [
+  "dev"
+ ],
+ "preregSha256": "0b7ebeba45da9ec1a28d91472b1f4437f7ede987aa2eca565e12541ae8fb2878",
+ "rows": 384,
+ "jointRows": 298,
+ "joint": {
+  "windows": 4,
+  "nullDraws": 6,
+  "J1": {
+   "windowsUsed": 4,
+   "meanReal": 0.1633,
+   "meanNull": 0.1786,
+   "meanDiff": -0.0153,
+   "windowsRealAboveNullMean": 1,
+   "windowsRealAboveNullMax": 0,
+   "bootDiff": {
+    "lo": -0.0178,
+    "hi": -0.0127,
+    "n": 500
+   },
+   "perWindow": [
+    {
+     "win": "dev:17CF03|0",
+     "real": 0.1033,
+     "nullMean": 0.1314,
+     "classes": 7
+    },
+    {
+     "win": "dev:17CF03|1",
+     "real": 0.1588,
+     "nullMean": 0.1664,
+     "classes": 7
+    },
+    {
+     "win": "dev:17CF02|0",
+     "real": 0.143,
+     "nullMean": 0.1846,
+     "classes": 11
+    },
+    {
+     "win": "dev:17CF02|1",
+     "real": 0.2481,
+     "nullMean": 0.2319,
+     "classes": 13
+    }
+   ]
+  },
+  "J2": {
+   "real": 0.0825,
+   "nulls": [
+    0.0306,
+    0.0318,
+    0.0493,
+    0.0156,
+    0.0476,
+    0.0365
+   ],
+   "nullMean": 0.0352,
+   "realAboveAllNulls": true
+  },
+  "perKind": [
+   {
+    "kind": 0,
+    "windows": 4,
+    "meanTokens": 156.8,
+    "changedPerToken": 0.8251,
+    "amplification": null,
+    "noSlotShare": 0.6563
+   },
+   {
+    "kind": 1,
+    "windows": 4,
+    "meanTokens": 123.8,
+    "changedPerToken": 0.7586,
+    "amplification": null,
+    "noSlotShare": 0.714
+   },
+   {
+    "kind": 2,
+    "windows": 4,
+    "meanTokens": 115.8,
+    "changedPerToken": 0.9871,
+    "amplification": null,
+    "noSlotShare": 0.55
+   },
+   {
+    "kind": 3,
+    "windows": 4,
+    "meanTokens": 107.3,
+    "changedPerToken": 1.0282,
+    "amplification": null,
+    "noSlotShare": 0.6083
+   },
+   {
+    "kind": 4,
+    "windows": 4,
+    "meanTokens": 70.8,
+    "changedPerToken": 0.7898,
+    "amplification": null,
+    "noSlotShare": 0.6973
+   },
+   {
+    "kind": 5,
+    "windows": 3,
+    "meanTokens": 43.3,
+    "changedPerToken": 1.1999,
+    "amplification": null,
+    "noSlotShare": 0.4213
+   },
+   {
+    "kind": 6,
+    "windows": 3,
+    "meanTokens": 35.3,
+    "changedPerToken": 0.8448,
+    "amplification": null,
+    "noSlotShare": 0.6282
+   },
+   {
+    "kind": 7,
+    "windows": 3,
+    "meanTokens": 34.3,
+    "changedPerToken": 0.8174,
+    "amplification": null,
+    "noSlotShare": 0.7501
+   },
+   {
+    "kind": 8,
+    "windows": 2,
+    "meanTokens": 58.5,
+    "changedPerToken": 0.4488,
+    "amplification": null,
+    "noSlotShare": 0.6461
+   },
+   {
+    "kind": 9,
+    "windows": 2,
+    "meanTokens": 33,
+    "changedPerToken": 2.2987,
+    "amplification": null,
+    "noSlotShare": 0.6053
+   },
+   {
+    "kind": 10,
+    "windows": 1,
+    "meanTokens": 24,
+    "changedPerToken": 1.0833,
+    "amplification": null,
+    "noSlotShare": 0.5833
+   },
+   {
+    "kind": 11,
+    "windows": 1,
+    "meanTokens": 35,
+    "changedPerToken": 0.7143,
+    "amplification": null,
+    "noSlotShare": 0.7714
+   },
+   {
+    "kind": 12,
+    "windows": 1,
+    "meanTokens": 39,
+    "changedPerToken": 0.7949,
+    "amplification": null,
+    "noSlotShare": 0.7436
+   },
+   {
+    "kind": 13,
+    "windows": 1,
+    "meanTokens": 30,
+    "changedPerToken": 0.6667,
+    "amplification": null,
+    "noSlotShare": 0.6667
+   },
+   {
+    "kind": 14,
+    "windows": 1,
+    "meanTokens": 24,
+    "changedPerToken": 3.0833,
+    "amplification": null,
+    "noSlotShare": 0.1667
+   }
+  ],
+  "meanShapeCos": [
+   [
+    1,
+    0.949,
+    0.957,
+    0.956,
+    0.943,
+    0.933,
+    0.903,
+    0.974,
+    0.524,
+    0.92,
+    0.608,
+    0.884,
+    0.894,
+    0.909,
+    0.842
+   ],
+   [
+    0.949,
+    1,
+    0.931,
+    0.965,
+    0.953,
+    0.869,
+    0.83,
+    0.893,
+    0.332,
+    0.919,
+    0.589,
+    0.951,
+    0.855,
+    0.828,
+    0.903
+   ],
+   [
+    0.957,
+    0.931,
+    1,
+    0.98,
+    0.983,
+    0.965,
+    0.941,
+    0.908,
+    0.512,
+    0.837,
+    0.51,
+    0.814,
+    0.909,
+    0.96,
+    0.764
+   ],
+   [
+    0.956,
+    0.965,
+    0.98,
+    1,
+    0.988,
+    0.92,
+    0.873,
+    0.887,
+    0.375,
+    0.872,
+    0.465,
+    0.852,
+    0.857,
+    0.901,
+    0.806
+   ],
+   [
+    0.943,
+    0.953,
+    0.983,
+    0.988,
+    1,
+    0.915,
+    0.88,
+    0.88,
+    0.417,
+    0.822,
+    0.465,
+    0.831,
+    0.843,
+    0.908,
+    0.768
+   ],
+   [
+    0.933,
+    0.869,
+    0.965,
+    0.92,
+    0.915,
+    1,
+    0.989,
+    0.924,
+    0.678,
+    0.841,
+    0.637,
+    0.789,
+    0.961,
+    0.98,
+    0.772
+   ],
+   [
+    0.903,
+    0.83,
+    0.941,
+    0.873,
+    0.88,
+    0.989,
+    1,
+    0.914,
+    0.744,
+    0.802,
+    0.679,
+    0.764,
+    0.971,
+    0.977,
+    0.741
+   ],
+   [
+    0.974,
+    0.893,
+    0.908,
+    0.887,
+    0.88,
+    0.924,
+    0.914,
+    1,
+    0.648,
+    0.909,
+    0.724,
+    0.874,
+    0.906,
+    0.893,
+    0.844
+   ],
+   [
+    0.524,
+    0.332,
+    0.512,
+    0.375,
+    0.417,
+    0.678,
+    0.744,
+    0.648,
+    1,
+    0.415,
+    0.693,
+    0.339,
+    0.66,
+    0.68,
+    0.359
+   ],
+   [
+    0.92,
+    0.919,
+    0.837,
+    0.872,
+    0.822,
+    0.841,
+    0.802,
+    0.909,
+    0.415,
+    1,
+    0.72,
+    0.926,
+    0.872,
+    0.776,
+    0.958
+   ],
+   [
+    0.608,
+    0.589,
+    0.51,
+    0.465,
+    0.465,
+    0.637,
+    0.679,
+    0.724,
+    0.693,
+    0.72,
+    1,
+    0.743,
+    0.751,
+    0.55,
+    0.804
+   ],
+   [
+    0.884,
+    0.951,
+    0.814,
+    0.852,
+    0.831,
+    0.789,
+    0.764,
+    0.874,
+    0.339,
+    0.926,
+    0.743,
+    1,
+    0.835,
+    0.717,
+    0.963
+   ],
+   [
+    0.894,
+    0.855,
+    0.909,
+    0.857,
+    0.843,
+    0.961,
+    0.971,
+    0.906,
+    0.66,
+    0.872,
+    0.751,
+    0.835,
+    1,
+    0.928,
+    0.834
+   ],
+   [
+    0.909,
+    0.828,
+    0.96,
+    0.901,
+    0.908,
+    0.98,
+    0.977,
+    0.893,
+    0.68,
+    0.776,
+    0.55,
+    0.717,
+    0.928,
+    1,
+    0.681
+   ],
+   [
+    0.842,
+    0.903,
+    0.764,
+    0.806,
+    0.768,
+    0.772,
+    0.741,
+    0.844,
+    0.359,
+    0.958,
+    0.804,
+    0.963,
+    0.834,
+    0.681,
+    1
+   ]
+  ],
+  "meanShapeKinds": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14
+  ]
+ },
+ "S": {
+  "n": 384,
+  "kinds": 16,
+  "blocks": 6,
+  "S1": {
+   "RECORD": {
+    "balancedAccuracy": 0.1224,
+    "nullMean": 0.0715,
+    "nullQ95": 0.0964,
+    "chance": 0.0625
+   },
+   "FREQ": {
+    "balancedAccuracy": 0.1354,
+    "nullMean": 0.1014,
+    "nullQ95": 0.125,
+    "chance": 0.0625
+   },
+   "RECORD+FREQ": {
+    "balancedAccuracy": 0.1536,
+    "nullMean": 0.0885,
+    "nullQ95": 0.1172,
+    "chance": 0.0625
+   },
+   "recordMinusFreq": -0.013,
+   "recordAboveNullQ95": true
+  },
+  "S2": {
+   "pooledSlope": -0.1828,
+   "pooledLo": -0.3031,
+   "pooledHi": -0.0398,
+   "perKind": [
+    {
+     "kind": 0,
+     "n": 24,
+     "slope": 0.0795,
+     "lo": -0.1025,
+     "hi": 0.3121,
+     "meanNonNull": 0.375,
+     "meanChanged": 1.29,
+     "meanLocal": 20.71
+    },
+    {
+     "kind": 1,
+     "n": 24,
+     "slope": 0.6123,
+     "lo": 0.2813,
+     "hi": 1.0278,
+     "meanNonNull": 0.2917,
+     "meanChanged": 1.08,
+     "meanLocal": 9.17
+    },
+    {
+     "kind": 2,
+     "n": 24,
+     "slope": 0.1106,
+     "lo": -0.4355,
+     "hi": 0.6773,
+     "meanNonNull": 0.5417,
+     "meanChanged": 2.13,
+     "meanLocal": 15.17
+    },
+    {
+     "kind": 3,
+     "n": 24,
+     "slope": -0.1602,
+     "lo": -0.5357,
+     "hi": 0.5592,
+     "meanNonNull": 0.5417,
+     "meanChanged": 2.96,
+     "meanLocal": 5.92
+    },
+    {
+     "kind": 4,
+     "n": 24,
+     "slope": -0.2194,
+     "lo": -0.4879,
+     "hi": 0.1244,
+     "meanNonNull": 0.3333,
+     "meanChanged": 0.88,
+     "meanLocal": 7.33
+    },
+    {
+     "kind": 5,
+     "n": 24,
+     "slope": -0.2308,
+     "lo": -1.0328,
+     "hi": 0.1119,
+     "meanNonNull": 0.625,
+     "meanChanged": 2.71,
+     "meanLocal": 6.75
+    },
+    {
+     "kind": 6,
+     "n": 24,
+     "slope": -0.5606,
+     "lo": -0.8287,
+     "hi": -0.1966,
+     "meanNonNull": 0.5417,
+     "meanChanged": 2.13,
+     "meanLocal": 6.83
+    },
+    {
+     "kind": 7,
+     "n": 24,
+     "slope": -0.3562,
+     "lo": -0.6634,
+     "hi": 0.0016,
+     "meanNonNull": 0.4583,
+     "meanChanged": 1.21,
+     "meanLocal": 3.13
+    },
+    {
+     "kind": 8,
+     "n": 24,
+     "slope": -0.7693,
+     "lo": -1.8181,
+     "hi": -0.3453,
+     "meanNonNull": 0.5417,
+     "meanChanged": 2.42,
+     "meanLocal": 2.75
+    },
+    {
+     "kind": 9,
+     "n": 24,
+     "slope": 0.5208,
+     "lo": -0.539,
+     "hi": 0.9523,
+     "meanNonNull": 0.5,
+     "meanChanged": 2.46,
+     "meanLocal": 2.75
+    },
+    {
+     "kind": 10,
+     "n": 24,
+     "slope": -0.8128,
+     "lo": -1.2679,
+     "hi": -0.5342,
+     "meanNonNull": 0.625,
+     "meanChanged": 2.83,
+     "meanLocal": 2.29
+    },
+    {
+     "kind": 11,
+     "n": 24,
+     "slope": 0.507,
+     "lo": -0.4563,
+     "hi": 0.9051,
+     "meanNonNull": 0.375,
+     "meanChanged": 1.58,
+     "meanLocal": 2.17
+    },
+    {
+     "kind": 12,
+     "n": 24,
+     "slope": -0.0509,
+     "lo": -0.5762,
+     "hi": 0.4913,
+     "meanNonNull": 0.5417,
+     "meanChanged": 1.79,
+     "meanLocal": 3.42
+    },
+    {
+     "kind": 13,
+     "n": 24,
+     "slope": -0.5109,
+     "lo": -1.2409,
+     "hi": 0.4662,
+     "meanNonNull": 0.6667,
+     "meanChanged": 2.5,
+     "meanLocal": 2.08
+    },
+    {
+     "kind": 14,
+     "n": 24,
+     "slope": -0.8989,
+     "lo": -2.2826,
+     "hi": -0.1784,
+     "meanNonNull": 0.5417,
+     "meanChanged": 1.96,
+     "meanLocal": 2.38
+    },
+    {
+     "kind": 15,
+     "n": 24,
+     "slope": -1.5585,
+     "lo": -2.4923,
+     "hi": -0.4768,
+     "meanNonNull": 0.5833,
+     "meanChanged": 2.29,
+     "meanLocal": 1.75
+    }
+   ],
+   "signReversal": [
+    1
+   ],
+   "kindsPositiveCI": 1,
+   "kindsNegativeCI": 5,
+   "kindsWithCIcrossing0": 10
+  },
+  "S3": {
+   "nonNullShare": 0.5052
+  }
+ },
+ "verdicts": {
+  "K2_J1": "J1 not shown (lower bound <= 0)",
+  "K2_S1": "S1 record accuracy 0.1224 vs null q95 0.0964; record - freq-only = -0.013 (SESOI 0.03)",
+  "K3": "no data"
+ }
+}

@@ -1,0 +1,703 @@
+{
+ "id": "ec-cd-ts",
+ "files": 359,
+ "byHalf": {
+  "0": 177,
+  "1": 182
+ },
+ "groups": {
+  "package=app|half=discover?": {
+   "files": 32,
+   "tokens": 27282,
+   "v": -0.024285657358775192,
+   "nullMean": 0.0003095487051987597,
+   "z": -12.261776272681944
+  },
+  "package=app|half=confirm?": {
+   "files": 33,
+   "tokens": 68472,
+   "v": 0.02997202762587,
+   "nullMean": 0.00016934889217166304,
+   "z": 25.984153673336433
+  },
+  "package=app|half=all": {
+   "files": 65,
+   "tokens": 95754,
+   "v": 0.015704645704300607,
+   "nullMean": -0.00026575055971821745,
+   "z": 22.969751226273857
+  },
+  "package=cli|half=discover?": {
+   "files": 1,
+   "tokens": 46,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=cli|half=confirm?": {
+   "files": 0,
+   "tokens": 0,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=cli|half=all": {
+   "files": 1,
+   "tokens": 46,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=client|half=discover?": {
+   "files": 1,
+   "tokens": 25,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=client|half=confirm?": {
+   "files": 0,
+   "tokens": 0,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=client|half=all": {
+   "files": 1,
+   "tokens": 25,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=codemode|half=discover?": {
+   "files": 1,
+   "tokens": 497,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=codemode|half=confirm?": {
+   "files": 1,
+   "tokens": 160,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=codemode|half=all": {
+   "files": 2,
+   "tokens": 657,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=console|half=discover?": {
+   "files": 15,
+   "tokens": 16674,
+   "v": -0.02421241047111432,
+   "nullMean": -0.0001703388208589551,
+   "z": -12.886317157183218
+  },
+  "package=console|half=confirm?": {
+   "files": 16,
+   "tokens": 14492,
+   "v": -0.025900236466831112,
+   "nullMean": 0.00038403145025977706,
+   "z": -11.734862075392078
+  },
+  "package=console|half=all": {
+   "files": 31,
+   "tokens": 31166,
+   "v": -0.016252793147694747,
+   "nullMean": -0.00017208037243316901,
+   "z": -9.514034661590214
+  },
+  "package=core|half=discover?": {
+   "files": 30,
+   "tokens": 12442,
+   "v": -0.008750793104535701,
+   "nullMean": 0.00010034723080036553,
+   "z": -2.6949197197400063
+  },
+  "package=core|half=confirm?": {
+   "files": 32,
+   "tokens": 19590,
+   "v": -0.015960837519229127,
+   "nullMean": 0.00058153757603486,
+   "z": -9.6527526939025
+  },
+  "package=core|half=all": {
+   "files": 62,
+   "tokens": 32032,
+   "v": -0.012894674687175705,
+   "nullMean": -0.0007260470079712021,
+   "z": -9.2199869912628
+  },
+  "package=desktop|half=discover?": {
+   "files": 7,
+   "tokens": 2001,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=desktop|half=confirm?": {
+   "files": 5,
+   "tokens": 1226,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=desktop|half=all": {
+   "files": 12,
+   "tokens": 3227,
+   "v": -0.03781123257402098,
+   "nullMean": 0.0006839964064283756,
+   "z": -9.147768418763684
+  },
+  "package=effect-drizzle-sqlite|half=discover?": {
+   "files": 4,
+   "tokens": 2449,
+   "v": 0.05391348846486685,
+   "nullMean": -0.0018438825228482333,
+   "z": 5.648621236694559
+  },
+  "package=effect-drizzle-sqlite|half=confirm?": {
+   "files": 1,
+   "tokens": 230,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=effect-drizzle-sqlite|half=all": {
+   "files": 5,
+   "tokens": 2679,
+   "v": 0.04341372944607237,
+   "nullMean": 0.001803965718430495,
+   "z": 4.414366329563954
+  },
+  "package=enterprise|half=discover?": {
+   "files": 0,
+   "tokens": 0,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=enterprise|half=confirm?": {
+   "files": 1,
+   "tokens": 135,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=enterprise|half=all": {
+   "files": 1,
+   "tokens": 135,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=function|half=discover?": {
+   "files": 2,
+   "tokens": 1491,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=function|half=confirm?": {
+   "files": 0,
+   "tokens": 0,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=function|half=all": {
+   "files": 2,
+   "tokens": 1491,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=http-recorder|half=discover?": {
+   "files": 1,
+   "tokens": 684,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=http-recorder|half=confirm?": {
+   "files": 3,
+   "tokens": 781,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=http-recorder|half=all": {
+   "files": 4,
+   "tokens": 1465,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=httpapi-codegen|half=discover?": {
+   "files": 0,
+   "tokens": 0,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=httpapi-codegen|half=confirm?": {
+   "files": 1,
+   "tokens": 129,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=httpapi-codegen|half=all": {
+   "files": 1,
+   "tokens": 129,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=llm|half=discover?": {
+   "files": 5,
+   "tokens": 4995,
+   "v": 0.012796861259752147,
+   "nullMean": 0.0009018261661602279,
+   "z": 2.0348713665385834
+  },
+  "package=llm|half=confirm?": {
+   "files": 5,
+   "tokens": 2559,
+   "v": 0.014301575488044602,
+   "nullMean": 0.0005527806429708283,
+   "z": 2.306300192790788
+  },
+  "package=llm|half=all": {
+   "files": 10,
+   "tokens": 7554,
+   "v": -0.005159565426179412,
+   "nullMean": -0.0003718430581898073,
+   "z": -1.5838243020391929
+  },
+  "package=opencode|half=discover?": {
+   "files": 37,
+   "tokens": 30747,
+   "v": -0.018282409616432523,
+   "nullMean": 0.0004899652071501598,
+   "z": -8.699342019778074
+  },
+  "package=opencode|half=confirm?": {
+   "files": 33,
+   "tokens": 23365,
+   "v": -0.01521402162307807,
+   "nullMean": -0.0003749435558688591,
+   "z": -8.877521414025626
+  },
+  "package=opencode|half=all": {
+   "files": 70,
+   "tokens": 54112,
+   "v": -0.015268128899472058,
+   "nullMean": 0.00030363221595644757,
+   "z": -15.704648194579699
+  },
+  "package=other|half=discover?": {
+   "files": 2,
+   "tokens": 489,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=other|half=confirm?": {
+   "files": 3,
+   "tokens": 3469,
+   "v": -0.023638422936123688,
+   "nullMean": 0.0018902955719822638,
+   "z": -3.5279884088473894
+  },
+  "package=other|half=all": {
+   "files": 5,
+   "tokens": 3958,
+   "v": -0.03593065914577128,
+   "nullMean": 0.002128241813286207,
+   "z": -5.40143960332691
+  },
+  "package=plugin|half=discover?": {
+   "files": 3,
+   "tokens": 236,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=plugin|half=confirm?": {
+   "files": 0,
+   "tokens": 0,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=plugin|half=all": {
+   "files": 3,
+   "tokens": 236,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=protocol|half=discover?": {
+   "files": 0,
+   "tokens": 0,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=protocol|half=confirm?": {
+   "files": 3,
+   "tokens": 607,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=protocol|half=all": {
+   "files": 3,
+   "tokens": 607,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=schema|half=discover?": {
+   "files": 4,
+   "tokens": 478,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=schema|half=confirm?": {
+   "files": 4,
+   "tokens": 580,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=schema|half=all": {
+   "files": 8,
+   "tokens": 1058,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=sdk-next|half=discover?": {
+   "files": 0,
+   "tokens": 0,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=sdk-next|half=confirm?": {
+   "files": 1,
+   "tokens": 41,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=sdk-next|half=all": {
+   "files": 1,
+   "tokens": 41,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=server|half=discover?": {
+   "files": 4,
+   "tokens": 633,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=server|half=confirm?": {
+   "files": 2,
+   "tokens": 399,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=server|half=all": {
+   "files": 6,
+   "tokens": 1032,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=session-ui|half=discover?": {
+   "files": 4,
+   "tokens": 3252,
+   "v": -0.04281494052985975,
+   "nullMean": 0.0020566322896330824,
+   "z": -9.738802453793241
+  },
+  "package=session-ui|half=confirm?": {
+   "files": 4,
+   "tokens": 2719,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=session-ui|half=all": {
+   "files": 8,
+   "tokens": 5971,
+   "v": -0.04651383931208003,
+   "nullMean": 0.000034119061255700067,
+   "z": -8.208687933188372
+  },
+  "package=slack|half=discover?": {
+   "files": 1,
+   "tokens": 522,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=slack|half=confirm?": {
+   "files": 0,
+   "tokens": 0,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=slack|half=all": {
+   "files": 1,
+   "tokens": 522,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=stats|half=discover?": {
+   "files": 3,
+   "tokens": 3462,
+   "v": -0.003922053396458368,
+   "nullMean": 0.0011511028289024395,
+   "z": -0.7562923566612627
+  },
+  "package=stats|half=confirm?": {
+   "files": 6,
+   "tokens": 9691,
+   "v": -0.0120841089820024,
+   "nullMean": -0.0005233777137520842,
+   "z": -3.5584898709027812
+  },
+  "package=stats|half=all": {
+   "files": 9,
+   "tokens": 13153,
+   "v": -0.013463736439730941,
+   "nullMean": -0.0002086728291190156,
+   "z": -6.072141054641649
+  },
+  "package=storybook|half=discover?": {
+   "files": 3,
+   "tokens": 448,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=storybook|half=confirm?": {
+   "files": 0,
+   "tokens": 0,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=storybook|half=all": {
+   "files": 3,
+   "tokens": 448,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=tui|half=discover?": {
+   "files": 5,
+   "tokens": 10099,
+   "v": -0.029469782142408304,
+   "nullMean": 0.0001876874002543963,
+   "z": -8.925476289309367
+  },
+  "package=tui|half=confirm?": {
+   "files": 10,
+   "tokens": 5867,
+   "v": -0.01981118436617687,
+   "nullMean": 0.0004705143921889828,
+   "z": -3.980492013344185
+  },
+  "package=tui|half=all": {
+   "files": 15,
+   "tokens": 15966,
+   "v": -0.04746079452597568,
+   "nullMean": -0.00042892612949502483,
+   "z": -19.846969360114745
+  },
+  "package=ui|half=discover?": {
+   "files": 9,
+   "tokens": 5285,
+   "v": 0.06149694318233232,
+   "nullMean": 0.00007332920663364385,
+   "z": 15.086488818038312
+  },
+  "package=ui|half=confirm?": {
+   "files": 17,
+   "tokens": 10702,
+   "v": 0.05710278310595302,
+   "nullMean": -0.0007703931191405942,
+   "z": 24.219972165645785
+  },
+  "package=ui|half=all": {
+   "files": 26,
+   "tokens": 15987,
+   "v": 0.0667900146739427,
+   "nullMean": -0.000611152975652899,
+   "z": 21.3843467712332
+  },
+  "package=web|half=discover?": {
+   "files": 3,
+   "tokens": 1957,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=web|half=confirm?": {
+   "files": 1,
+   "tokens": 89,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "package=web|half=all": {
+   "files": 4,
+   "tokens": 2046,
+   "v": null,
+   "nullMean": null,
+   "z": null
+  },
+  "kind=source|half=discover?": {
+   "files": 127,
+   "tokens": 98359,
+   "v": -0.028770687526865454,
+   "nullMean": -0.00041686240110103584,
+   "z": -24.131886454174055
+  },
+  "kind=source|half=confirm?": {
+   "files": 134,
+   "tokens": 132713,
+   "v": 0.0046832553423086015,
+   "nullMean": 0.00003449571812882783,
+   "z": 5.546713436778875
+  },
+  "kind=source|half=all": {
+   "files": 261,
+   "tokens": 231072,
+   "v": -0.013083276414658113,
+   "nullMean": -0.00004919874053839857,
+   "z": -21.41359489577456
+  },
+  "kind=test|half=discover?": {
+   "files": 50,
+   "tokens": 27835,
+   "v": -0.025390047212861686,
+   "nullMean": 0.00010875760692333138,
+   "z": -19.52253938374254
+  },
+  "kind=test|half=confirm?": {
+   "files": 48,
+   "tokens": 32590,
+   "v": -0.01259144992226203,
+   "nullMean": -0.0000022321902445883895,
+   "z": -9.072456982412872
+  },
+  "kind=test|half=all": {
+   "files": 98,
+   "tokens": 60425,
+   "v": -0.011678885957066145,
+   "nullMean": -0.00011567504408077113,
+   "z": -11.377088558717801
+  },
+  "ext=ts|half=discover?": {
+   "files": 142,
+   "tokens": 98107,
+   "v": -0.01285760278525757,
+   "nullMean": 0.00005974065991206424,
+   "z": -14.257283511538546
+  },
+  "ext=ts|half=confirm?": {
+   "files": 150,
+   "tokens": 141156,
+   "v": -0.0013036848324887106,
+   "nullMean": -0.00016550062893355369,
+   "z": -1.3962107173205878
+  },
+  "ext=ts|half=all": {
+   "files": 292,
+   "tokens": 239263,
+   "v": -0.0045055936245067115,
+   "nullMean": -4.3336522088840955e-7,
+   "z": -8.048263412308703
+  },
+  "ext=tsx|half=discover?": {
+   "files": 35,
+   "tokens": 28087,
+   "v": -0.04415080298631044,
+   "nullMean": -0.00007519713252571872,
+   "z": -21.998687865006527
+  },
+  "ext=tsx|half=confirm?": {
+   "files": 32,
+   "tokens": 24147,
+   "v": -0.020351184031346916,
+   "nullMean": 0.0005971316977067654,
+   "z": -10.34413419303956
+  },
+  "ext=tsx|half=all": {
+   "files": 67,
+   "tokens": 52234,
+   "v": -0.014074691110487326,
+   "nullMean": -0.00008501808933129844,
+   "z": -9.008456480845297
+  },
+  "i18n=i18n|half=discover?": {
+   "files": 12,
+   "tokens": 31858,
+   "v": 0.005129631700563592,
+   "nullMean": 0.0003158648950842799,
+   "z": 2.9959615782720435
+  },
+  "i18n=i18n|half=confirm?": {
+   "files": 18,
+   "tokens": 72485,
+   "v": 0.03985624545626859,
+   "nullMean": 0.00013419973573912747,
+   "z": 43.600872071779854
+  },
+  "i18n=i18n|half=all": {
+   "files": 30,
+   "tokens": 104343,
+   "v": 0.035758300066147664,
+   "nullMean": -0.00007642622735287088,
+   "z": 55.37563144078151
+  },
+  "i18n=rest|half=discover?": {
+   "files": 165,
+   "tokens": 94336,
+   "v": -0.03214792983023034,
+   "nullMean": -0.000367017174190174,
+   "z": -27.451532741937218
+  },
+  "i18n=rest|half=confirm?": {
+   "files": 164,
+   "tokens": 92818,
+   "v": -0.013866478271774254,
+   "nullMean": -0.00045388732913203606,
+   "z": -13.462216531901724
+  },
+  "i18n=rest|half=all": {
+   "files": 329,
+   "tokens": 187154,
+   "v": -0.01610608598680047,
+   "nullMean": 0.000038632364522623585,
+   "z": -29.015628492711237
+  }
+ }
+}

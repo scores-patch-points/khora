@@ -1,0 +1,2173 @@
+{
+ "n": 390,
+ "S": "order.entCurv",
+ "controls": [
+  "log10 tokens",
+  "mean unit length"
+ ],
+ "byV": [
+  {
+   "stat": "order.rareCurve",
+   "n": 390,
+   "rawRho": 0.5809,
+   "partialRho": 0.5438,
+   "partialRho2": 0.2957
+  },
+  {
+   "stat": "fig.introLeft",
+   "n": 384,
+   "rawRho": 0.4693,
+   "partialRho": 0.4287,
+   "partialRho2": 0.1838
+  },
+  {
+   "stat": "order.surprGrow",
+   "n": 390,
+   "rawRho": -0.4516,
+   "partialRho": -0.3857,
+   "partialRho2": 0.1488
+  },
+  {
+   "stat": "burst.kerFar",
+   "n": 390,
+   "rawRho": -0.3176,
+   "partialRho": -0.3717,
+   "partialRho2": 0.1381
+  },
+  {
+   "stat": "order.finalDev",
+   "n": 390,
+   "rawRho": 0.2538,
+   "partialRho": 0.3356,
+   "partialRho2": 0.1126
+  },
+  {
+   "stat": "phys.attrPMI",
+   "n": 355,
+   "rawRho": -0.2826,
+   "partialRho": -0.295,
+   "partialRho2": 0.0871
+  },
+  {
+   "stat": "order.entSlope",
+   "n": 390,
+   "rawRho": 0.1936,
+   "partialRho": 0.2933,
+   "partialRho2": 0.086
+  },
+  {
+   "stat": "fig.arrival",
+   "n": 388,
+   "rawRho": -0.2053,
+   "partialRho": -0.289,
+   "partialRho2": 0.0835
+  },
+  {
+   "stat": "burst.burstBmid",
+   "n": 355,
+   "rawRho": -0.3157,
+   "partialRho": -0.2885,
+   "partialRho2": 0.0832
+  },
+  {
+   "stat": "fig.fano",
+   "n": 354,
+   "rawRho": -0.3282,
+   "partialRho": -0.2827,
+   "partialRho2": 0.0799
+  },
+  {
+   "stat": "burst.persist",
+   "n": 383,
+   "rawRho": -0.2338,
+   "partialRho": -0.2776,
+   "partialRho2": 0.0771
+  },
+  {
+   "stat": "burst.burstM",
+   "n": 390,
+   "rawRho": -0.3225,
+   "partialRho": -0.2647,
+   "partialRho2": 0.0701
+  },
+  {
+   "stat": "para.lcsLift",
+   "n": 390,
+   "rawRho": -0.225,
+   "partialRho": -0.2643,
+   "partialRho2": 0.0699
+  },
+  {
+   "stat": "burst.burstB",
+   "n": 390,
+   "rawRho": -0.2872,
+   "partialRho": -0.261,
+   "partialRho2": 0.0681
+  },
+  {
+   "stat": "freq.abbrev",
+   "n": 382,
+   "rawRho": -0.2387,
+   "partialRho": -0.2604,
+   "partialRho2": 0.0678
+  },
+  {
+   "stat": "comp.sameR",
+   "n": 390,
+   "rawRho": -0.2828,
+   "partialRho": -0.2586,
+   "partialRho2": 0.0669
+  },
+  {
+   "stat": "burst.repAdj",
+   "n": 390,
+   "rawRho": -0.2009,
+   "partialRho": -0.253,
+   "partialRho2": 0.064
+  },
+  {
+   "stat": "freq.recurLen",
+   "n": 389,
+   "rawRho": -0.2307,
+   "partialRho": -0.2477,
+   "partialRho2": 0.0613
+  },
+  {
+   "stat": "fig.initFollow",
+   "n": 390,
+   "rawRho": -0.2011,
+   "partialRho": -0.2461,
+   "partialRho2": 0.0606
+  },
+  {
+   "stat": "fig.introLeftFq",
+   "n": 387,
+   "rawRho": 0.2712,
+   "partialRho": 0.2407,
+   "partialRho2": 0.0579
+  },
+  {
+   "stat": "burst.hurst",
+   "n": 390,
+   "rawRho": -0.2395,
+   "partialRho": -0.2391,
+   "partialRho2": 0.0572
+  },
+  {
+   "stat": "comp.sameL",
+   "n": 390,
+   "rawRho": -0.2636,
+   "partialRho": -0.2289,
+   "partialRho2": 0.0524
+  },
+  {
+   "stat": "fig.persist",
+   "n": 386,
+   "rawRho": 0.2157,
+   "partialRho": 0.2286,
+   "partialRho2": 0.0523
+  },
+  {
+   "stat": "phys.massExp",
+   "n": 390,
+   "rawRho": 0.2487,
+   "partialRho": 0.2268,
+   "partialRho2": 0.0514
+  },
+  {
+   "stat": "freq.zipfAlpha",
+   "n": 367,
+   "rawRho": 0.2104,
+   "partialRho": 0.2262,
+   "partialRho2": 0.0512
+  },
+  {
+   "stat": "order.branch",
+   "n": 390,
+   "rawRho": -0.2232,
+   "partialRho": -0.2188,
+   "partialRho2": 0.0479
+  },
+  {
+   "stat": "phys.gravAlphaSd",
+   "n": 379,
+   "rawRho": -0.0549,
+   "partialRho": -0.2068,
+   "partialRho2": 0.0428
+  },
+  {
+   "stat": "para.posPar",
+   "n": 390,
+   "rawRho": -0.2739,
+   "partialRho": -0.2056,
+   "partialRho2": 0.0423
+  },
+  {
+   "stat": "comp.rigidR",
+   "n": 390,
+   "rawRho": -0.2465,
+   "partialRho": -0.2012,
+   "partialRho2": 0.0405
+  },
+  {
+   "stat": "burst.kerSlope",
+   "n": 390,
+   "rawRho": 0.1662,
+   "partialRho": 0.1997,
+   "partialRho2": 0.0399
+  },
+  {
+   "stat": "burst.driftTail",
+   "n": 384,
+   "rawRho": -0.2032,
+   "partialRho": -0.1977,
+   "partialRho2": 0.0391
+  },
+  {
+   "stat": "phys.voidRescue",
+   "n": 384,
+   "rawRho": -0.2492,
+   "partialRho": -0.1951,
+   "partialRho2": 0.0381
+  },
+  {
+   "stat": "comp.divSlope",
+   "n": 386,
+   "rawRho": -0.1675,
+   "partialRho": -0.1885,
+   "partialRho2": 0.0355
+  },
+  {
+   "stat": "para.adjNg4",
+   "n": 390,
+   "rawRho": -0.1844,
+   "partialRho": -0.1864,
+   "partialRho2": 0.0348
+  },
+  {
+   "stat": "para.adjNg3",
+   "n": 390,
+   "rawRho": -0.182,
+   "partialRho": -0.1806,
+   "partialRho2": 0.0326
+  },
+  {
+   "stat": "para.tmplReuse",
+   "n": 390,
+   "rawRho": -0.2483,
+   "partialRho": -0.1767,
+   "partialRho2": 0.0312
+  },
+  {
+   "stat": "para.adjNg2",
+   "n": 390,
+   "rawRho": -0.1881,
+   "partialRho": -0.1714,
+   "partialRho2": 0.0294
+  },
+  {
+   "stat": "order.rareSlope",
+   "n": 390,
+   "rawRho": 0.1859,
+   "partialRho": 0.1704,
+   "partialRho2": 0.0291
+  },
+  {
+   "stat": "comp.finEnt",
+   "n": 390,
+   "rawRho": -0.1902,
+   "partialRho": -0.1677,
+   "partialRho2": 0.0281
+  },
+  {
+   "stat": "comp.rigidL",
+   "n": 390,
+   "rawRho": -0.2197,
+   "partialRho": -0.1675,
+   "partialRho2": 0.0281
+  },
+  {
+   "stat": "para.refrain",
+   "n": 390,
+   "rawRho": -0.1826,
+   "partialRho": -0.1651,
+   "partialRho2": 0.0273
+  },
+  {
+   "stat": "para.suffixCopy",
+   "n": 390,
+   "rawRho": -0.2049,
+   "partialRho": -0.1638,
+   "partialRho2": 0.0268
+  },
+  {
+   "stat": "comp.initEnt",
+   "n": 390,
+   "rawRho": -0.1438,
+   "partialRho": -0.1634,
+   "partialRho2": 0.0267
+  },
+  {
+   "stat": "para.prefixCopy",
+   "n": 390,
+   "rawRho": -0.2277,
+   "partialRho": -0.1613,
+   "partialRho2": 0.026
+  },
+  {
+   "stat": "freq.rankBinEnt",
+   "n": 390,
+   "rawRho": 0.1774,
+   "partialRho": 0.1595,
+   "partialRho2": 0.0255
+  },
+  {
+   "stat": "comp.edgeGap",
+   "n": 390,
+   "rawRho": 0.1203,
+   "partialRho": 0.1575,
+   "partialRho2": 0.0248
+  },
+  {
+   "stat": "para.formulaCov",
+   "n": 390,
+   "rawRho": -0.244,
+   "partialRho": -0.1435,
+   "partialRho2": 0.0206
+  },
+  {
+   "stat": "fig.converge",
+   "n": 390,
+   "rawRho": -0.1468,
+   "partialRho": -0.1412,
+   "partialRho2": 0.0199
+  },
+  {
+   "stat": "comp.miDecay",
+   "n": 372,
+   "rawRho": 0.146,
+   "partialRho": 0.1386,
+   "partialRho2": 0.0192
+  },
+  {
+   "stat": "fig.introRight",
+   "n": 384,
+   "rawRho": 0.1879,
+   "partialRho": 0.1384,
+   "partialRho2": 0.0191
+  },
+  {
+   "stat": "order.fnBefore",
+   "n": 384,
+   "rawRho": 0.1332,
+   "partialRho": 0.1362,
+   "partialRho2": 0.0185
+  },
+  {
+   "stat": "order.depLen",
+   "n": 390,
+   "rawRho": 0.1649,
+   "partialRho": 0.1344,
+   "partialRho2": 0.0181
+  },
+  {
+   "stat": "freq.lenLogSkew",
+   "n": 390,
+   "rawRho": -0.108,
+   "partialRho": -0.1286,
+   "partialRho2": 0.0165
+  },
+  {
+   "stat": "comp.asym",
+   "n": 383,
+   "rawRho": -0.1646,
+   "partialRho": -0.1242,
+   "partialRho2": 0.0154
+  },
+  {
+   "stat": "fig.initSplit",
+   "n": 390,
+   "rawRho": -0.0101,
+   "partialRho": -0.1181,
+   "partialRho2": 0.014
+  },
+  {
+   "stat": "para.dupShare",
+   "n": 390,
+   "rawRho": -0.1383,
+   "partialRho": -0.1171,
+   "partialRho2": 0.0137
+  },
+  {
+   "stat": "fig.initEnrich",
+   "n": 390,
+   "rawRho": 0.1681,
+   "partialRho": 0.116,
+   "partialRho2": 0.0135
+  },
+  {
+   "stat": "phys.affect",
+   "n": 390,
+   "rawRho": -0.1815,
+   "partialRho": -0.1144,
+   "partialRho2": 0.0131
+  },
+  {
+   "stat": "phys.massAdd",
+   "n": 390,
+   "rawRho": 0.185,
+   "partialRho": 0.1042,
+   "partialRho2": 0.0109
+  },
+  {
+   "stat": "fig.crpTheta",
+   "n": 354,
+   "rawRho": 0.1167,
+   "partialRho": 0.1002,
+   "partialRho2": 0.01
+  },
+  {
+   "stat": "phys.gravAlpha",
+   "n": 379,
+   "rawRho": 0.0545,
+   "partialRho": 0.0854,
+   "partialRho2": 0.0073
+  },
+  {
+   "stat": "freq.hapaxShare",
+   "n": 390,
+   "rawRho": 0.1683,
+   "partialRho": 0.08,
+   "partialRho2": 0.0064
+  },
+  {
+   "stat": "freq.heapsBeta",
+   "n": 390,
+   "rawRho": 0.0131,
+   "partialRho": -0.0711,
+   "partialRho2": 0.0051
+  },
+  {
+   "stat": "order.initDev",
+   "n": 390,
+   "rawRho": 0.0998,
+   "partialRho": 0.0686,
+   "partialRho2": 0.0047
+  },
+  {
+   "stat": "freq.lenAcf1",
+   "n": 390,
+   "rawRho": -0.0891,
+   "partialRho": -0.0608,
+   "partialRho2": 0.0037
+  },
+  {
+   "stat": "para.lagDecay",
+   "n": 386,
+   "rawRho": 0.006,
+   "partialRho": 0.0499,
+   "partialRho2": 0.0025
+  },
+  {
+   "stat": "fig.figShare",
+   "n": 390,
+   "rawRho": -0.1571,
+   "partialRho": -0.0423,
+   "partialRho2": 0.0018
+  },
+  {
+   "stat": "phys.affectAsym",
+   "n": 390,
+   "rawRho": 0.051,
+   "partialRho": 0.0391,
+   "partialRho2": 0.0015
+  },
+  {
+   "stat": "phys.attrDecay",
+   "n": 354,
+   "rawRho": 0.0232,
+   "partialRho": 0.0387,
+   "partialRho2": 0.0015
+  },
+  {
+   "stat": "burst.driftSlope",
+   "n": 382,
+   "rawRho": -0.0388,
+   "partialRho": 0.0367,
+   "partialRho2": 0.0013
+  },
+  {
+   "stat": "order.asym",
+   "n": 390,
+   "rawRho": -0.0756,
+   "partialRho": -0.0348,
+   "partialRho2": 0.0012
+  },
+  {
+   "stat": "freq.lenCV",
+   "n": 390,
+   "rawRho": -0.0025,
+   "partialRho": 0.0299,
+   "partialRho2": 0.0009
+  },
+  {
+   "stat": "freq.lenDocEps",
+   "n": 390,
+   "rawRho": -0.0316,
+   "partialRho": -0.0296,
+   "partialRho2": 0.0009
+  },
+  {
+   "stat": "phys.voidShare",
+   "n": 390,
+   "rawRho": 0.1242,
+   "partialRho": 0.0284,
+   "partialRho2": 0.0008
+  },
+  {
+   "stat": "burst.kerCurv",
+   "n": 390,
+   "rawRho": -0.0197,
+   "partialRho": -0.0277,
+   "partialRho2": 0.0008
+  },
+  {
+   "stat": "phys.gravBeta",
+   "n": 379,
+   "rawRho": 0.0229,
+   "partialRho": -0.0216,
+   "partialRho2": 0.0005
+  },
+  {
+   "stat": "comp.condR",
+   "n": 390,
+   "rawRho": 0.0322,
+   "partialRho": 0.0113,
+   "partialRho2": 0.0001
+  },
+  {
+   "stat": "comp.condL",
+   "n": 390,
+   "rawRho": 0.0283,
+   "partialRho": 0.0073,
+   "partialRho2": 0.0001
+  },
+  {
+   "stat": "freq.ttr",
+   "n": 390,
+   "rawRho": 0.0911,
+   "partialRho": -0.0053,
+   "partialRho2": 0
+  },
+  {
+   "stat": "freq.menzerath",
+   "n": 389,
+   "rawRho": -0.0108,
+   "partialRho": 0.005,
+   "partialRho2": 0
+  }
+ ],
+ "byZ": [
+  {
+   "stat": "order.rareCurve",
+   "n": 390,
+   "rawRho": 0.5026,
+   "partialRho": 0.5022,
+   "partialRho2": 0.2522
+  },
+  {
+   "stat": "order.entSlope",
+   "n": 390,
+   "rawRho": 0.383,
+   "partialRho": 0.4112,
+   "partialRho2": 0.1691
+  },
+  {
+   "stat": "order.finalDev",
+   "n": 390,
+   "rawRho": 0.3409,
+   "partialRho": 0.3999,
+   "partialRho2": 0.1599
+  },
+  {
+   "stat": "comp.initEnt",
+   "n": 390,
+   "rawRho": -0.3533,
+   "partialRho": -0.3948,
+   "partialRho2": 0.1559
+  },
+  {
+   "stat": "burst.repAdj",
+   "n": 390,
+   "rawRho": -0.3115,
+   "partialRho": -0.385,
+   "partialRho2": 0.1482
+  },
+  {
+   "stat": "burst.kerSlope",
+   "n": 390,
+   "rawRho": 0.3106,
+   "partialRho": 0.3818,
+   "partialRho2": 0.1458
+  },
+  {
+   "stat": "order.surprGrow",
+   "n": 390,
+   "rawRho": -0.3797,
+   "partialRho": -0.3769,
+   "partialRho2": 0.142
+  },
+  {
+   "stat": "comp.finEnt",
+   "n": 390,
+   "rawRho": -0.3198,
+   "partialRho": -0.3654,
+   "partialRho2": 0.1335
+  },
+  {
+   "stat": "comp.condL",
+   "n": 390,
+   "rawRho": -0.2428,
+   "partialRho": -0.3485,
+   "partialRho2": 0.1215
+  },
+  {
+   "stat": "comp.condR",
+   "n": 390,
+   "rawRho": -0.2384,
+   "partialRho": -0.3427,
+   "partialRho2": 0.1174
+  },
+  {
+   "stat": "order.branch",
+   "n": 390,
+   "rawRho": -0.2958,
+   "partialRho": -0.3257,
+   "partialRho2": 0.1061
+  },
+  {
+   "stat": "fig.introLeft",
+   "n": 384,
+   "rawRho": 0.3137,
+   "partialRho": 0.3194,
+   "partialRho2": 0.102
+  },
+  {
+   "stat": "freq.ttr",
+   "n": 389,
+   "rawRho": 0.1999,
+   "partialRho": 0.2908,
+   "partialRho2": 0.0846
+  },
+  {
+   "stat": "comp.miDecay",
+   "n": 372,
+   "rawRho": 0.2834,
+   "partialRho": 0.2888,
+   "partialRho2": 0.0834
+  },
+  {
+   "stat": "freq.zipfAlpha",
+   "n": 367,
+   "rawRho": -0.266,
+   "partialRho": -0.2813,
+   "partialRho2": 0.0791
+  },
+  {
+   "stat": "phys.attrDecay",
+   "n": 354,
+   "rawRho": 0.2008,
+   "partialRho": 0.2723,
+   "partialRho2": 0.0741
+  },
+  {
+   "stat": "freq.hapaxShare",
+   "n": 389,
+   "rawRho": 0.187,
+   "partialRho": 0.2659,
+   "partialRho2": 0.0707
+  },
+  {
+   "stat": "phys.voidShare",
+   "n": 390,
+   "rawRho": 0.202,
+   "partialRho": 0.2643,
+   "partialRho2": 0.0699
+  },
+  {
+   "stat": "phys.gravAlpha",
+   "n": 379,
+   "rawRho": 0.1972,
+   "partialRho": 0.25,
+   "partialRho2": 0.0625
+  },
+  {
+   "stat": "burst.kerFar",
+   "n": 390,
+   "rawRho": -0.1933,
+   "partialRho": -0.2498,
+   "partialRho2": 0.0624
+  },
+  {
+   "stat": "burst.kerCurv",
+   "n": 390,
+   "rawRho": -0.1885,
+   "partialRho": -0.2436,
+   "partialRho2": 0.0593
+  },
+  {
+   "stat": "burst.burstBmid",
+   "n": 355,
+   "rawRho": -0.2211,
+   "partialRho": -0.241,
+   "partialRho2": 0.0581
+  },
+  {
+   "stat": "phys.gravBeta",
+   "n": 379,
+   "rawRho": -0.1834,
+   "partialRho": -0.2313,
+   "partialRho2": 0.0535
+  },
+  {
+   "stat": "para.posPar",
+   "n": 390,
+   "rawRho": -0.1994,
+   "partialRho": -0.2297,
+   "partialRho2": 0.0528
+  },
+  {
+   "stat": "para.adjNg2",
+   "n": 390,
+   "rawRho": -0.2001,
+   "partialRho": -0.2252,
+   "partialRho2": 0.0507
+  },
+  {
+   "stat": "phys.affect",
+   "n": 390,
+   "rawRho": 0.1661,
+   "partialRho": 0.2134,
+   "partialRho2": 0.0455
+  },
+  {
+   "stat": "fig.introLeftFq",
+   "n": 387,
+   "rawRho": 0.2167,
+   "partialRho": 0.212,
+   "partialRho2": 0.0449
+  },
+  {
+   "stat": "freq.heapsBeta",
+   "n": 390,
+   "rawRho": 0.2082,
+   "partialRho": 0.21,
+   "partialRho2": 0.0441
+  },
+  {
+   "stat": "fig.initFollow",
+   "n": 390,
+   "rawRho": -0.184,
+   "partialRho": -0.2016,
+   "partialRho2": 0.0407
+  },
+  {
+   "stat": "phys.massExp",
+   "n": 390,
+   "rawRho": 0.1831,
+   "partialRho": 0.1915,
+   "partialRho2": 0.0367
+  },
+  {
+   "stat": "para.refrain",
+   "n": 286,
+   "rawRho": -0.2566,
+   "partialRho": -0.1897,
+   "partialRho2": 0.036
+  },
+  {
+   "stat": "para.adjNg3",
+   "n": 378,
+   "rawRho": -0.1807,
+   "partialRho": -0.189,
+   "partialRho2": 0.0357
+  },
+  {
+   "stat": "comp.edgeGap",
+   "n": 390,
+   "rawRho": 0.1427,
+   "partialRho": 0.1841,
+   "partialRho2": 0.0339
+  },
+  {
+   "stat": "freq.recurLen",
+   "n": 389,
+   "rawRho": -0.1795,
+   "partialRho": -0.184,
+   "partialRho2": 0.0339
+  },
+  {
+   "stat": "para.suffixCopy",
+   "n": 352,
+   "rawRho": -0.191,
+   "partialRho": -0.1839,
+   "partialRho2": 0.0338
+  },
+  {
+   "stat": "fig.fano",
+   "n": 354,
+   "rawRho": -0.2093,
+   "partialRho": -0.1789,
+   "partialRho2": 0.032
+  },
+  {
+   "stat": "fig.initEnrich",
+   "n": 390,
+   "rawRho": 0.1467,
+   "partialRho": 0.177,
+   "partialRho2": 0.0313
+  },
+  {
+   "stat": "para.dupShare",
+   "n": 326,
+   "rawRho": -0.2217,
+   "partialRho": -0.1764,
+   "partialRho2": 0.0311
+  },
+  {
+   "stat": "para.prefixCopy",
+   "n": 384,
+   "rawRho": -0.1609,
+   "partialRho": -0.1674,
+   "partialRho2": 0.028
+  },
+  {
+   "stat": "order.depLen",
+   "n": 390,
+   "rawRho": 0.1602,
+   "partialRho": 0.1654,
+   "partialRho2": 0.0274
+  },
+  {
+   "stat": "fig.figShare",
+   "n": 389,
+   "rawRho": -0.1257,
+   "partialRho": -0.1646,
+   "partialRho2": 0.0271
+  },
+  {
+   "stat": "para.lagDecay",
+   "n": 368,
+   "rawRho": -0.1324,
+   "partialRho": -0.1614,
+   "partialRho2": 0.026
+  },
+  {
+   "stat": "order.rareSlope",
+   "n": 390,
+   "rawRho": 0.1237,
+   "partialRho": 0.1613,
+   "partialRho2": 0.026
+  },
+  {
+   "stat": "fig.arrival",
+   "n": 387,
+   "rawRho": 0.1509,
+   "partialRho": 0.1604,
+   "partialRho2": 0.0257
+  },
+  {
+   "stat": "burst.burstB",
+   "n": 390,
+   "rawRho": -0.1427,
+   "partialRho": -0.1589,
+   "partialRho2": 0.0252
+  },
+  {
+   "stat": "comp.rigidL",
+   "n": 390,
+   "rawRho": 0.1146,
+   "partialRho": 0.1527,
+   "partialRho2": 0.0233
+  },
+  {
+   "stat": "burst.burstM",
+   "n": 390,
+   "rawRho": -0.1349,
+   "partialRho": -0.1431,
+   "partialRho2": 0.0205
+  },
+  {
+   "stat": "fig.persist",
+   "n": 386,
+   "rawRho": 0.1446,
+   "partialRho": 0.1426,
+   "partialRho2": 0.0203
+  },
+  {
+   "stat": "order.fnBefore",
+   "n": 383,
+   "rawRho": 0.0991,
+   "partialRho": 0.1407,
+   "partialRho2": 0.0198
+  },
+  {
+   "stat": "comp.asym",
+   "n": 383,
+   "rawRho": -0.148,
+   "partialRho": -0.1397,
+   "partialRho2": 0.0195
+  },
+  {
+   "stat": "burst.persist",
+   "n": 383,
+   "rawRho": -0.128,
+   "partialRho": -0.1383,
+   "partialRho2": 0.0191
+  },
+  {
+   "stat": "fig.initSplit",
+   "n": 390,
+   "rawRho": -0.1264,
+   "partialRho": -0.1356,
+   "partialRho2": 0.0184
+  },
+  {
+   "stat": "comp.sameL",
+   "n": 390,
+   "rawRho": -0.1225,
+   "partialRho": -0.1337,
+   "partialRho2": 0.0179
+  },
+  {
+   "stat": "comp.sameR",
+   "n": 390,
+   "rawRho": -0.1229,
+   "partialRho": -0.1333,
+   "partialRho2": 0.0178
+  },
+  {
+   "stat": "phys.gravAlphaSd",
+   "n": 379,
+   "rawRho": -0.1379,
+   "partialRho": -0.1279,
+   "partialRho2": 0.0164
+  },
+  {
+   "stat": "fig.converge",
+   "n": 390,
+   "rawRho": -0.1266,
+   "partialRho": -0.1192,
+   "partialRho2": 0.0142
+  },
+  {
+   "stat": "burst.driftTail",
+   "n": 384,
+   "rawRho": -0.1117,
+   "partialRho": -0.1166,
+   "partialRho2": 0.0136
+  },
+  {
+   "stat": "para.adjNg4",
+   "n": 332,
+   "rawRho": -0.1355,
+   "partialRho": -0.1116,
+   "partialRho2": 0.0125
+  },
+  {
+   "stat": "para.lcsLift",
+   "n": 390,
+   "rawRho": -0.1173,
+   "partialRho": -0.1067,
+   "partialRho2": 0.0114
+  },
+  {
+   "stat": "phys.voidRescue",
+   "n": 384,
+   "rawRho": -0.0839,
+   "partialRho": -0.0942,
+   "partialRho2": 0.0089
+  },
+  {
+   "stat": "para.tmplReuse",
+   "n": 390,
+   "rawRho": -0.0994,
+   "partialRho": -0.0877,
+   "partialRho2": 0.0077
+  },
+  {
+   "stat": "fig.introRight",
+   "n": 384,
+   "rawRho": -0.0803,
+   "partialRho": -0.0842,
+   "partialRho2": 0.0071
+  },
+  {
+   "stat": "phys.attrPMI",
+   "n": 355,
+   "rawRho": -0.1199,
+   "partialRho": -0.0814,
+   "partialRho2": 0.0066
+  },
+  {
+   "stat": "fig.crpTheta",
+   "n": 354,
+   "rawRho": 0.1303,
+   "partialRho": 0.0721,
+   "partialRho2": 0.0052
+  },
+  {
+   "stat": "para.formulaCov",
+   "n": 242,
+   "rawRho": -0.0806,
+   "partialRho": -0.0659,
+   "partialRho2": 0.0043
+  },
+  {
+   "stat": "order.asym",
+   "n": 390,
+   "rawRho": 0.0035,
+   "partialRho": 0.0566,
+   "partialRho2": 0.0032
+  },
+  {
+   "stat": "burst.driftSlope",
+   "n": 382,
+   "rawRho": -0.0411,
+   "partialRho": -0.0547,
+   "partialRho2": 0.003
+  },
+  {
+   "stat": "burst.hurst",
+   "n": 390,
+   "rawRho": -0.0709,
+   "partialRho": -0.0547,
+   "partialRho2": 0.003
+  },
+  {
+   "stat": "phys.massAdd",
+   "n": 390,
+   "rawRho": 0.0657,
+   "partialRho": 0.0502,
+   "partialRho2": 0.0025
+  },
+  {
+   "stat": "comp.divSlope",
+   "n": 386,
+   "rawRho": 0.0139,
+   "partialRho": 0.0485,
+   "partialRho2": 0.0024
+  },
+  {
+   "stat": "comp.rigidR",
+   "n": 390,
+   "rawRho": 0.02,
+   "partialRho": 0.04,
+   "partialRho2": 0.0016
+  },
+  {
+   "stat": "freq.lenAcf1",
+   "n": 390,
+   "rawRho": -0.0593,
+   "partialRho": -0.0346,
+   "partialRho2": 0.0012
+  },
+  {
+   "stat": "freq.rankBinEnt",
+   "n": 390,
+   "rawRho": 0.05,
+   "partialRho": 0.0282,
+   "partialRho2": 0.0008
+  },
+  {
+   "stat": "order.initDev",
+   "n": 390,
+   "rawRho": 0.0441,
+   "partialRho": 0.0264,
+   "partialRho2": 0.0007
+  },
+  {
+   "stat": "freq.lenDocEps",
+   "n": 390,
+   "rawRho": -0.0498,
+   "partialRho": -0.0227,
+   "partialRho2": 0.0005
+  },
+  {
+   "stat": "phys.affectAsym",
+   "n": 390,
+   "rawRho": -0.023,
+   "partialRho": -0.0119,
+   "partialRho2": 0.0001
+  },
+  {
+   "stat": "freq.menzerath",
+   "n": 389,
+   "rawRho": 0.0199,
+   "partialRho": 0.0018,
+   "partialRho2": 0
+  }
+ ],
+ "bySignAmongPresent": [
+  {
+   "stat": "order.rareCurve",
+   "n": 179,
+   "rawRho": 0.7026,
+   "partialRho": 0.6658,
+   "partialRho2": 0.4433
+  },
+  {
+   "stat": "burst.kerFar",
+   "n": 179,
+   "rawRho": -0.6894,
+   "partialRho": -0.549,
+   "partialRho2": 0.3014
+  },
+  {
+   "stat": "burst.repAdj",
+   "n": 179,
+   "rawRho": -0.6501,
+   "partialRho": -0.4926,
+   "partialRho2": 0.2427
+  },
+  {
+   "stat": "fig.introLeft",
+   "n": 178,
+   "rawRho": 0.5173,
+   "partialRho": 0.4826,
+   "partialRho2": 0.2329
+  },
+  {
+   "stat": "para.lcsLift",
+   "n": 179,
+   "rawRho": -0.6451,
+   "partialRho": -0.4754,
+   "partialRho2": 0.226
+  },
+  {
+   "stat": "order.branch",
+   "n": 179,
+   "rawRho": -0.5222,
+   "partialRho": -0.4363,
+   "partialRho2": 0.1904
+  },
+  {
+   "stat": "order.finalDev",
+   "n": 179,
+   "rawRho": 0.5996,
+   "partialRho": 0.4315,
+   "partialRho2": 0.1862
+  },
+  {
+   "stat": "fig.arrival",
+   "n": 179,
+   "rawRho": -0.5745,
+   "partialRho": -0.4238,
+   "partialRho2": 0.1796
+  },
+  {
+   "stat": "freq.recurLen",
+   "n": 179,
+   "rawRho": -0.5921,
+   "partialRho": -0.4158,
+   "partialRho2": 0.1729
+  },
+  {
+   "stat": "order.surprGrow",
+   "n": 179,
+   "rawRho": -0.5118,
+   "partialRho": -0.4102,
+   "partialRho2": 0.1683
+  },
+  {
+   "stat": "burst.persist",
+   "n": 177,
+   "rawRho": -0.6098,
+   "partialRho": -0.4094,
+   "partialRho2": 0.1676
+  },
+  {
+   "stat": "freq.zipfAlpha",
+   "n": 175,
+   "rawRho": 0.4456,
+   "partialRho": 0.3903,
+   "partialRho2": 0.1523
+  },
+  {
+   "stat": "order.entSlope",
+   "n": 179,
+   "rawRho": 0.4426,
+   "partialRho": 0.3849,
+   "partialRho2": 0.1481
+  },
+  {
+   "stat": "burst.kerSlope",
+   "n": 179,
+   "rawRho": 0.5866,
+   "partialRho": 0.3841,
+   "partialRho2": 0.1476
+  },
+  {
+   "stat": "phys.attrPMI",
+   "n": 169,
+   "rawRho": -0.5878,
+   "partialRho": -0.3774,
+   "partialRho2": 0.1424
+  },
+  {
+   "stat": "freq.rankBinEnt",
+   "n": 179,
+   "rawRho": 0.5535,
+   "partialRho": 0.3441,
+   "partialRho2": 0.1184
+  },
+  {
+   "stat": "fig.initFollow",
+   "n": 179,
+   "rawRho": -0.45,
+   "partialRho": -0.3394,
+   "partialRho2": 0.1152
+  },
+  {
+   "stat": "burst.driftTail",
+   "n": 178,
+   "rawRho": -0.5642,
+   "partialRho": -0.3228,
+   "partialRho2": 0.1042
+  },
+  {
+   "stat": "fig.persist",
+   "n": 179,
+   "rawRho": 0.5182,
+   "partialRho": 0.3116,
+   "partialRho2": 0.0971
+  },
+  {
+   "stat": "comp.miDecay",
+   "n": 165,
+   "rawRho": 0.5694,
+   "partialRho": 0.294,
+   "partialRho2": 0.0865
+  },
+  {
+   "stat": "fig.fano",
+   "n": 178,
+   "rawRho": -0.3915,
+   "partialRho": -0.294,
+   "partialRho2": 0.0864
+  },
+  {
+   "stat": "burst.burstBmid",
+   "n": 174,
+   "rawRho": -0.523,
+   "partialRho": -0.2871,
+   "partialRho2": 0.0824
+  },
+  {
+   "stat": "phys.massExp",
+   "n": 179,
+   "rawRho": 0.5175,
+   "partialRho": 0.282,
+   "partialRho2": 0.0795
+  },
+  {
+   "stat": "burst.burstB",
+   "n": 179,
+   "rawRho": -0.5269,
+   "partialRho": -0.2786,
+   "partialRho2": 0.0776
+  },
+  {
+   "stat": "fig.introLeftFq",
+   "n": 179,
+   "rawRho": 0.4286,
+   "partialRho": 0.273,
+   "partialRho2": 0.0745
+  },
+  {
+   "stat": "order.depLen",
+   "n": 179,
+   "rawRho": 0.2984,
+   "partialRho": 0.2658,
+   "partialRho2": 0.0707
+  },
+  {
+   "stat": "phys.gravAlphaSd",
+   "n": 174,
+   "rawRho": -0.4405,
+   "partialRho": -0.2604,
+   "partialRho2": 0.0678
+  },
+  {
+   "stat": "burst.hurst",
+   "n": 179,
+   "rawRho": -0.5101,
+   "partialRho": -0.2547,
+   "partialRho2": 0.0648
+  },
+  {
+   "stat": "burst.burstM",
+   "n": 179,
+   "rawRho": -0.3801,
+   "partialRho": -0.2457,
+   "partialRho2": 0.0604
+  },
+  {
+   "stat": "para.tmplReuse",
+   "n": 179,
+   "rawRho": -0.4862,
+   "partialRho": -0.2367,
+   "partialRho2": 0.056
+  },
+  {
+   "stat": "comp.sameR",
+   "n": 179,
+   "rawRho": -0.4556,
+   "partialRho": -0.2236,
+   "partialRho2": 0.05
+  },
+  {
+   "stat": "freq.abbrev",
+   "n": 177,
+   "rawRho": -0.442,
+   "partialRho": -0.2176,
+   "partialRho2": 0.0474
+  },
+  {
+   "stat": "comp.divSlope",
+   "n": 178,
+   "rawRho": -0.1596,
+   "partialRho": -0.2131,
+   "partialRho2": 0.0454
+  },
+  {
+   "stat": "comp.edgeGap",
+   "n": 179,
+   "rawRho": 0.3938,
+   "partialRho": 0.2067,
+   "partialRho2": 0.0427
+  },
+  {
+   "stat": "order.initDev",
+   "n": 179,
+   "rawRho": 0.1627,
+   "partialRho": 0.1996,
+   "partialRho2": 0.0398
+  },
+  {
+   "stat": "para.adjNg4",
+   "n": 179,
+   "rawRho": -0.4542,
+   "partialRho": -0.1923,
+   "partialRho2": 0.037
+  },
+  {
+   "stat": "para.prefixCopy",
+   "n": 179,
+   "rawRho": -0.342,
+   "partialRho": -0.1815,
+   "partialRho2": 0.0329
+  },
+  {
+   "stat": "comp.sameL",
+   "n": 179,
+   "rawRho": -0.4028,
+   "partialRho": -0.1803,
+   "partialRho2": 0.0325
+  },
+  {
+   "stat": "para.suffixCopy",
+   "n": 179,
+   "rawRho": -0.3806,
+   "partialRho": -0.18,
+   "partialRho2": 0.0324
+  },
+  {
+   "stat": "para.adjNg3",
+   "n": 179,
+   "rawRho": -0.4455,
+   "partialRho": -0.1777,
+   "partialRho2": 0.0316
+  },
+  {
+   "stat": "fig.converge",
+   "n": 179,
+   "rawRho": -0.2844,
+   "partialRho": -0.161,
+   "partialRho2": 0.0259
+  },
+  {
+   "stat": "fig.initSplit",
+   "n": 179,
+   "rawRho": -0.4277,
+   "partialRho": -0.1604,
+   "partialRho2": 0.0257
+  },
+  {
+   "stat": "comp.rigidR",
+   "n": 179,
+   "rawRho": -0.3761,
+   "partialRho": -0.151,
+   "partialRho2": 0.0228
+  },
+  {
+   "stat": "phys.voidRescue",
+   "n": 178,
+   "rawRho": -0.364,
+   "partialRho": -0.1497,
+   "partialRho2": 0.0224
+  },
+  {
+   "stat": "fig.introRight",
+   "n": 178,
+   "rawRho": 0.1792,
+   "partialRho": 0.1463,
+   "partialRho2": 0.0214
+  },
+  {
+   "stat": "order.asym",
+   "n": 179,
+   "rawRho": 0.0455,
+   "partialRho": 0.1451,
+   "partialRho2": 0.0211
+  },
+  {
+   "stat": "para.adjNg2",
+   "n": 179,
+   "rawRho": -0.4109,
+   "partialRho": -0.1376,
+   "partialRho2": 0.0189
+  },
+  {
+   "stat": "para.refrain",
+   "n": 179,
+   "rawRho": -0.4258,
+   "partialRho": -0.1286,
+   "partialRho2": 0.0165
+  },
+  {
+   "stat": "phys.massAdd",
+   "n": 179,
+   "rawRho": 0.2579,
+   "partialRho": 0.1233,
+   "partialRho2": 0.0152
+  },
+  {
+   "stat": "freq.hapaxShare",
+   "n": 179,
+   "rawRho": 0.3299,
+   "partialRho": 0.1177,
+   "partialRho2": 0.0139
+  },
+  {
+   "stat": "comp.finEnt",
+   "n": 179,
+   "rawRho": -0.2404,
+   "partialRho": -0.1165,
+   "partialRho2": 0.0136
+  },
+  {
+   "stat": "para.posPar",
+   "n": 179,
+   "rawRho": -0.3477,
+   "partialRho": -0.1149,
+   "partialRho2": 0.0132
+  },
+  {
+   "stat": "para.lagDecay",
+   "n": 178,
+   "rawRho": 0.0623,
+   "partialRho": 0.1083,
+   "partialRho2": 0.0117
+  },
+  {
+   "stat": "freq.lenLogSkew",
+   "n": 179,
+   "rawRho": -0.3514,
+   "partialRho": -0.1052,
+   "partialRho2": 0.0111
+  },
+  {
+   "stat": "phys.affect",
+   "n": 179,
+   "rawRho": -0.189,
+   "partialRho": -0.0998,
+   "partialRho2": 0.01
+  },
+  {
+   "stat": "comp.initEnt",
+   "n": 179,
+   "rawRho": -0.207,
+   "partialRho": -0.0966,
+   "partialRho2": 0.0093
+  },
+  {
+   "stat": "comp.rigidL",
+   "n": 179,
+   "rawRho": -0.2842,
+   "partialRho": -0.0959,
+   "partialRho2": 0.0092
+  },
+  {
+   "stat": "para.dupShare",
+   "n": 179,
+   "rawRho": -0.4083,
+   "partialRho": -0.0893,
+   "partialRho2": 0.008
+  },
+  {
+   "stat": "burst.driftSlope",
+   "n": 176,
+   "rawRho": 0.0262,
+   "partialRho": 0.0813,
+   "partialRho2": 0.0066
+  },
+  {
+   "stat": "comp.condL",
+   "n": 179,
+   "rawRho": -0.1305,
+   "partialRho": -0.0773,
+   "partialRho2": 0.006
+  },
+  {
+   "stat": "para.formulaCov",
+   "n": 179,
+   "rawRho": -0.3231,
+   "partialRho": -0.0771,
+   "partialRho2": 0.0059
+  },
+  {
+   "stat": "freq.lenCV",
+   "n": 179,
+   "rawRho": 0.0715,
+   "partialRho": 0.0764,
+   "partialRho2": 0.0058
+  },
+  {
+   "stat": "phys.gravAlpha",
+   "n": 174,
+   "rawRho": 0.2736,
+   "partialRho": 0.0748,
+   "partialRho2": 0.0056
+  },
+  {
+   "stat": "order.fnBefore",
+   "n": 176,
+   "rawRho": -0.131,
+   "partialRho": 0.0737,
+   "partialRho2": 0.0054
+  },
+  {
+   "stat": "freq.menzerath",
+   "n": 179,
+   "rawRho": 0.0663,
+   "partialRho": -0.0731,
+   "partialRho2": 0.0053
+  },
+  {
+   "stat": "comp.condR",
+   "n": 179,
+   "rawRho": -0.1217,
+   "partialRho": -0.0725,
+   "partialRho2": 0.0053
+  },
+  {
+   "stat": "fig.initEnrich",
+   "n": 179,
+   "rawRho": 0.3271,
+   "partialRho": 0.0598,
+   "partialRho2": 0.0036
+  },
+  {
+   "stat": "burst.kerCurv",
+   "n": 179,
+   "rawRho": -0.2726,
+   "partialRho": -0.0594,
+   "partialRho2": 0.0035
+  },
+  {
+   "stat": "freq.heapsBeta",
+   "n": 179,
+   "rawRho": -0.0026,
+   "partialRho": -0.0561,
+   "partialRho2": 0.0031
+  },
+  {
+   "stat": "phys.gravBeta",
+   "n": 174,
+   "rawRho": -0.0518,
+   "partialRho": -0.0531,
+   "partialRho2": 0.0028
+  },
+  {
+   "stat": "freq.ttr",
+   "n": 179,
+   "rawRho": 0.1504,
+   "partialRho": -0.0502,
+   "partialRho2": 0.0025
+  },
+  {
+   "stat": "phys.attrDecay",
+   "n": 169,
+   "rawRho": 0.3652,
+   "partialRho": 0.0493,
+   "partialRho2": 0.0024
+  },
+  {
+   "stat": "comp.asym",
+   "n": 176,
+   "rawRho": -0.1527,
+   "partialRho": -0.0414,
+   "partialRho2": 0.0017
+  },
+  {
+   "stat": "freq.lenAcf1",
+   "n": 179,
+   "rawRho": -0.0549,
+   "partialRho": -0.0347,
+   "partialRho2": 0.0012
+  },
+  {
+   "stat": "order.rareSlope",
+   "n": 179,
+   "rawRho": -0.1203,
+   "partialRho": -0.032,
+   "partialRho2": 0.001
+  },
+  {
+   "stat": "freq.lenDocEps",
+   "n": 179,
+   "rawRho": -0.0478,
+   "partialRho": 0.0314,
+   "partialRho2": 0.001
+  },
+  {
+   "stat": "phys.voidShare",
+   "n": 179,
+   "rawRho": 0.2082,
+   "partialRho": -0.0114,
+   "partialRho2": 0.0001
+  },
+  {
+   "stat": "phys.affectAsym",
+   "n": 179,
+   "rawRho": 0.0187,
+   "partialRho": -0.0089,
+   "partialRho2": 0.0001
+  },
+  {
+   "stat": "fig.figShare",
+   "n": 179,
+   "rawRho": -0.1343,
+   "partialRho": -0.0069,
+   "partialRho2": 0
+  },
+  {
+   "stat": "fig.crpTheta",
+   "n": 178,
+   "rawRho": 0.3933,
+   "partialRho": -0.0021,
+   "partialRho2": 0
+  }
+ ],
+ "byV_wordGrain": [
+  {
+   "stat": "order.rareCurve",
+   "n": 296,
+   "rawRho": 0.5015,
+   "partialRho": 0.4198,
+   "partialRho2": 0.1762
+  },
+  {
+   "stat": "fig.introLeft",
+   "n": 296,
+   "rawRho": 0.4419,
+   "partialRho": 0.4056,
+   "partialRho2": 0.1645
+  },
+  {
+   "stat": "comp.sameR",
+   "n": 296,
+   "rawRho": -0.3269,
+   "partialRho": -0.3372,
+   "partialRho2": 0.1137
+  },
+  {
+   "stat": "fig.introRight",
+   "n": 296,
+   "rawRho": 0.3121,
+   "partialRho": 0.3262,
+   "partialRho2": 0.1064
+  },
+  {
+   "stat": "comp.sameL",
+   "n": 296,
+   "rawRho": -0.3286,
+   "partialRho": -0.3143,
+   "partialRho2": 0.0988
+  },
+  {
+   "stat": "order.finalDev",
+   "n": 296,
+   "rawRho": 0.0788,
+   "partialRho": 0.3135,
+   "partialRho2": 0.0983
+  },
+  {
+   "stat": "order.rareSlope",
+   "n": 296,
+   "rawRho": 0.3936,
+   "partialRho": 0.311,
+   "partialRho2": 0.0967
+  },
+  {
+   "stat": "freq.abbrev",
+   "n": 296,
+   "rawRho": -0.1879,
+   "partialRho": -0.2926,
+   "partialRho2": 0.0856
+  },
+  {
+   "stat": "comp.rigidR",
+   "n": 296,
+   "rawRho": -0.3135,
+   "partialRho": -0.2921,
+   "partialRho2": 0.0853
+  },
+  {
+   "stat": "burst.burstBmid",
+   "n": 269,
+   "rawRho": -0.2674,
+   "partialRho": -0.2847,
+   "partialRho2": 0.0811
+  },
+  {
+   "stat": "para.formulaCov",
+   "n": 296,
+   "rawRho": -0.33,
+   "partialRho": -0.2713,
+   "partialRho2": 0.0736
+  },
+  {
+   "stat": "comp.rigidL",
+   "n": 296,
+   "rawRho": -0.3332,
+   "partialRho": -0.2619,
+   "partialRho2": 0.0686
+  },
+  {
+   "stat": "fig.fano",
+   "n": 261,
+   "rawRho": -0.3028,
+   "partialRho": -0.2583,
+   "partialRho2": 0.0667
+  },
+  {
+   "stat": "para.adjNg2",
+   "n": 296,
+   "rawRho": -0.1828,
+   "partialRho": -0.2564,
+   "partialRho2": 0.0657
+  },
+  {
+   "stat": "para.posPar",
+   "n": 296,
+   "rawRho": -0.3241,
+   "partialRho": -0.2398,
+   "partialRho2": 0.0575
+  }
+ ],
+ "nPresent": 179,
+ "nWord": 296,
+ "top12V": [
+  {
+   "stat": "order.rareCurve",
+   "n": 390,
+   "rawRho": 0.5809,
+   "partialRho": 0.5438,
+   "partialRho2": 0.2957
+  },
+  {
+   "stat": "fig.introLeft",
+   "n": 384,
+   "rawRho": 0.4693,
+   "partialRho": 0.4287,
+   "partialRho2": 0.1838
+  },
+  {
+   "stat": "order.surprGrow",
+   "n": 390,
+   "rawRho": -0.4516,
+   "partialRho": -0.3857,
+   "partialRho2": 0.1488
+  },
+  {
+   "stat": "burst.kerFar",
+   "n": 390,
+   "rawRho": -0.3176,
+   "partialRho": -0.3717,
+   "partialRho2": 0.1381
+  },
+  {
+   "stat": "order.finalDev",
+   "n": 390,
+   "rawRho": 0.2538,
+   "partialRho": 0.3356,
+   "partialRho2": 0.1126
+  },
+  {
+   "stat": "phys.attrPMI",
+   "n": 355,
+   "rawRho": -0.2826,
+   "partialRho": -0.295,
+   "partialRho2": 0.0871
+  },
+  {
+   "stat": "order.entSlope",
+   "n": 390,
+   "rawRho": 0.1936,
+   "partialRho": 0.2933,
+   "partialRho2": 0.086
+  },
+  {
+   "stat": "fig.arrival",
+   "n": 388,
+   "rawRho": -0.2053,
+   "partialRho": -0.289,
+   "partialRho2": 0.0835
+  },
+  {
+   "stat": "burst.burstBmid",
+   "n": 355,
+   "rawRho": -0.3157,
+   "partialRho": -0.2885,
+   "partialRho2": 0.0832
+  },
+  {
+   "stat": "fig.fano",
+   "n": 354,
+   "rawRho": -0.3282,
+   "partialRho": -0.2827,
+   "partialRho2": 0.0799
+  },
+  {
+   "stat": "burst.persist",
+   "n": 383,
+   "rawRho": -0.2338,
+   "partialRho": -0.2776,
+   "partialRho2": 0.0771
+  },
+  {
+   "stat": "burst.burstM",
+   "n": 390,
+   "rawRho": -0.3225,
+   "partialRho": -0.2647,
+   "partialRho2": 0.0701
+  }
+ ],
+ "top12Z": [
+  {
+   "stat": "order.rareCurve",
+   "n": 390,
+   "rawRho": 0.5026,
+   "partialRho": 0.5022,
+   "partialRho2": 0.2522
+  },
+  {
+   "stat": "order.entSlope",
+   "n": 390,
+   "rawRho": 0.383,
+   "partialRho": 0.4112,
+   "partialRho2": 0.1691
+  },
+  {
+   "stat": "order.finalDev",
+   "n": 390,
+   "rawRho": 0.3409,
+   "partialRho": 0.3999,
+   "partialRho2": 0.1599
+  },
+  {
+   "stat": "comp.initEnt",
+   "n": 390,
+   "rawRho": -0.3533,
+   "partialRho": -0.3948,
+   "partialRho2": 0.1559
+  },
+  {
+   "stat": "burst.repAdj",
+   "n": 390,
+   "rawRho": -0.3115,
+   "partialRho": -0.385,
+   "partialRho2": 0.1482
+  },
+  {
+   "stat": "burst.kerSlope",
+   "n": 390,
+   "rawRho": 0.3106,
+   "partialRho": 0.3818,
+   "partialRho2": 0.1458
+  },
+  {
+   "stat": "order.surprGrow",
+   "n": 390,
+   "rawRho": -0.3797,
+   "partialRho": -0.3769,
+   "partialRho2": 0.142
+  },
+  {
+   "stat": "comp.finEnt",
+   "n": 390,
+   "rawRho": -0.3198,
+   "partialRho": -0.3654,
+   "partialRho2": 0.1335
+  },
+  {
+   "stat": "comp.condL",
+   "n": 390,
+   "rawRho": -0.2428,
+   "partialRho": -0.3485,
+   "partialRho2": 0.1215
+  },
+  {
+   "stat": "comp.condR",
+   "n": 390,
+   "rawRho": -0.2384,
+   "partialRho": -0.3427,
+   "partialRho2": 0.1174
+  },
+  {
+   "stat": "order.branch",
+   "n": 390,
+   "rawRho": -0.2958,
+   "partialRho": -0.3257,
+   "partialRho2": 0.1061
+  },
+  {
+   "stat": "fig.introLeft",
+   "n": 384,
+   "rawRho": 0.3137,
+   "partialRho": 0.3194,
+   "partialRho2": 0.102
+  }
+ ],
+ "top12Sign": [
+  {
+   "stat": "order.rareCurve",
+   "n": 179,
+   "rawRho": 0.7026,
+   "partialRho": 0.6658,
+   "partialRho2": 0.4433
+  },
+  {
+   "stat": "burst.kerFar",
+   "n": 179,
+   "rawRho": -0.6894,
+   "partialRho": -0.549,
+   "partialRho2": 0.3014
+  },
+  {
+   "stat": "burst.repAdj",
+   "n": 179,
+   "rawRho": -0.6501,
+   "partialRho": -0.4926,
+   "partialRho2": 0.2427
+  },
+  {
+   "stat": "fig.introLeft",
+   "n": 178,
+   "rawRho": 0.5173,
+   "partialRho": 0.4826,
+   "partialRho2": 0.2329
+  },
+  {
+   "stat": "para.lcsLift",
+   "n": 179,
+   "rawRho": -0.6451,
+   "partialRho": -0.4754,
+   "partialRho2": 0.226
+  },
+  {
+   "stat": "order.branch",
+   "n": 179,
+   "rawRho": -0.5222,
+   "partialRho": -0.4363,
+   "partialRho2": 0.1904
+  },
+  {
+   "stat": "order.finalDev",
+   "n": 179,
+   "rawRho": 0.5996,
+   "partialRho": 0.4315,
+   "partialRho2": 0.1862
+  },
+  {
+   "stat": "fig.arrival",
+   "n": 179,
+   "rawRho": -0.5745,
+   "partialRho": -0.4238,
+   "partialRho2": 0.1796
+  },
+  {
+   "stat": "freq.recurLen",
+   "n": 179,
+   "rawRho": -0.5921,
+   "partialRho": -0.4158,
+   "partialRho2": 0.1729
+  },
+  {
+   "stat": "order.surprGrow",
+   "n": 179,
+   "rawRho": -0.5118,
+   "partialRho": -0.4102,
+   "partialRho2": 0.1683
+  },
+  {
+   "stat": "burst.persist",
+   "n": 177,
+   "rawRho": -0.6098,
+   "partialRho": -0.4094,
+   "partialRho2": 0.1676
+  },
+  {
+   "stat": "freq.zipfAlpha",
+   "n": 175,
+   "rawRho": 0.4456,
+   "partialRho": 0.3903,
+   "partialRho2": 0.1523
+  }
+ ],
+ "maxRho2": {
+  "v": 0.2957,
+  "z": 0.2522,
+  "sign": 0.4433
+ },
+ "rivalReaches07": {
+  "v": [],
+  "z": [],
+  "sign": []
+ },
+ "forward": {
+  "statsComplete": 54,
+  "controlsOnlyCvR2": 0.069,
+  "steps": [
+   {
+    "add": "order.rareCurve",
+    "cvR2": 0.3372
+   },
+   {
+    "add": "fig.initFollow",
+    "cvR2": 0.393
+   },
+   {
+    "add": "order.rareSlope",
+    "cvR2": 0.4293
+   },
+   {
+    "add": "order.entSlope",
+    "cvR2": 0.4908
+   },
+   {
+    "add": "phys.massAdd",
+    "cvR2": 0.5277
+   },
+   {
+    "add": "order.asym",
+    "cvR2": 0.5369
+   }
+  ]
+ },
+ "residualStructure": {
+  "bestRival": "order.rareCurve",
+  "eta2": {
+   "register": {
+    "raw": 0.3648,
+    "afterControls": 0.295,
+    "afterBestRival": 0.2083,
+    "afterForward6": 0.1185,
+    "levels": 36
+   },
+   "group": {
+    "raw": 0.0933,
+    "afterControls": 0.0559,
+    "afterBestRival": 0.0262,
+    "afterForward6": 0.0251,
+    "levels": 6
+   },
+   "grain": {
+    "raw": 0.1193,
+    "afterControls": 0.1032,
+    "afterBestRival": 0.0342,
+    "afterForward6": 0.0093,
+    "levels": 4
+   },
+   "script": {
+    "raw": 0.0958,
+    "afterControls": 0.1216,
+    "afterBestRival": 0.0506,
+    "afterForward6": 0.0339,
+    "levels": 10
+   }
+  }
+ },
+ "signAccuracy": {
+  "baseRateMajority": 0.7039,
+  "top": [
+   {
+    "stat": "order.rareCurve",
+    "accuracy": 0.8939,
+    "n": 179
+   },
+   {
+    "stat": "burst.kerFar",
+    "accuracy": 0.7039,
+    "n": 179
+   },
+   {
+    "stat": "burst.repAdj",
+    "accuracy": 0.1844,
+    "n": 179
+   },
+   {
+    "stat": "fig.introLeft",
+    "accuracy": 0.3596,
+    "n": 178
+   },
+   {
+    "stat": "para.lcsLift",
+    "accuracy": 0.6983,
+    "n": 179
+   },
+   {
+    "stat": "order.branch",
+    "accuracy": 0.2402,
+    "n": 179
+   },
+   {
+    "stat": "order.finalDev",
+    "accuracy": 0.7095,
+    "n": 179
+   },
+   {
+    "stat": "fig.arrival",
+    "accuracy": 0.7039,
+    "n": 179
+   }
+  ],
+  "rareCurve": {
+   "stat": "order.rareCurve",
+   "accuracy": 0.8939,
+   "n": 179
+  },
+  "rareSlope": {
+   "stat": "order.rareSlope",
+   "accuracy": 0.6983,
+   "n": 179
+  },
+  "entSlope": {
+   "stat": "order.entSlope",
+   "accuracy": 0.7151,
+   "n": 179
+  }
+ }
+}

@@ -1,0 +1,739 @@
+{
+ "src": "dev",
+ "stems": [
+  "eng",
+  "spa",
+  "rus",
+  "cmn-hans",
+  "fas",
+  "jpn",
+  "tur",
+  "arb",
+  "hin",
+  "fin"
+ ],
+ "verdict": {
+  "K1": "NOT SUPPORTED (fewer than 80% pass a-c)",
+  "K2": "NOT FALSIFIED by the registered rule, but weak: T2a 5/10, T2b shadow 4/10",
+  "K3": "FALSIFIED (supported in < 40% of languages)",
+  "K4": "NOT SUPPORTED"
+ },
+ "headerSha256": "85a7227147bbdb3820b9b869af708d3860e63641e1d58cc981c55e993c1d353b",
+ "languages": {
+  "eng": {
+   "tokens": 22073,
+   "nForms": 653,
+   "Kstar": 2,
+   "margin": 0.18,
+   "leaves": 6,
+   "curve": "2:0.18 3:0.0493 4:0.017 6:0.0257 8:-0.0092 12:-0.0664 16:-0.0368 24:-0.0784",
+   "chronoMargin": -0.0002,
+   "chronoPass": false,
+   "tercilesPassed": 3,
+   "nmiBands": 0.0103,
+   "nmiUpos": 0.1375,
+   "nmiUposShuffled": 0.0628,
+   "nmiLeavesUpos": 0.2406,
+   "k1pass": false,
+   "ctrlShareK1": 0.8,
+   "ctrlEmpiricalP": 0.091,
+   "obsMargin": 0.18,
+   "nominalKinds": 2,
+   "propnKinds": 0,
+   "maxPropnShare": 0.178,
+   "maxNominalShare": 0.831,
+   "propnForms5": null
+  },
+  "spa": {
+   "tokens": 47173,
+   "nForms": 1199,
+   "Kstar": 3,
+   "margin": 0.4723,
+   "leaves": 6,
+   "curve": "2:0.3896 3:0.4723 4:0.3376 6:0.2915 8:0.2569 12:0.1729 16:0.1565 24:0.1027",
+   "chronoMargin": 0.5112,
+   "chronoPass": true,
+   "tercilesPassed": 3,
+   "nmiBands": 0.0058,
+   "nmiUpos": 0.2283,
+   "nmiUposShuffled": 0.1231,
+   "nmiLeavesUpos": 0.431,
+   "k1pass": true,
+   "ctrlShareK1": 0.8,
+   "ctrlEmpiricalP": 0.091,
+   "obsMargin": 0.4723,
+   "nominalKinds": 4,
+   "propnKinds": 0,
+   "maxPropnShare": 0.23,
+   "maxNominalShare": 0.887,
+   "propnForms5": null
+  },
+  "rus": {
+   "tokens": 9469,
+   "nForms": 170,
+   "Kstar": 12,
+   "margin": 0.1013,
+   "leaves": 12,
+   "curve": "2:-0.0445 3:0.1003 4:0.0572 6:0.0416 8:-0.0112 12:0.1013",
+   "chronoMargin": 0.0164,
+   "chronoPass": true,
+   "tercilesPassed": 1,
+   "nmiBands": 0.184,
+   "nmiUpos": 0.3137,
+   "nmiUposShuffled": 0.1807,
+   "nmiLeavesUpos": 0.3137,
+   "k1pass": false,
+   "ctrlShareK1": 0.7,
+   "ctrlEmpiricalP": 0.091,
+   "obsMargin": 0.1013,
+   "nominalKinds": 3,
+   "propnKinds": 0,
+   "maxPropnShare": 0.183,
+   "maxNominalShare": 0.946,
+   "propnForms5": null
+  },
+  "cmn-hans": {
+   "tokens": 10895,
+   "nForms": 368,
+   "Kstar": 2,
+   "margin": 0.2042,
+   "leaves": 6,
+   "curve": "2:0.2042 3:0.1189 4:0.1088 6:0.1234 8:0.1156 12:0.1578 16:0.1102",
+   "chronoMargin": 0.2258,
+   "chronoPass": true,
+   "tercilesPassed": 3,
+   "nmiBands": 0.0055,
+   "nmiUpos": 0.1017,
+   "nmiUposShuffled": 0.0404,
+   "nmiLeavesUpos": 0.2045,
+   "k1pass": true,
+   "ctrlShareK1": 0.7,
+   "ctrlEmpiricalP": 0.091,
+   "obsMargin": 0.2042,
+   "nominalKinds": 2,
+   "propnKinds": 0,
+   "maxPropnShare": 0.127,
+   "maxNominalShare": 0.573,
+   "propnForms5": null
+  },
+  "fas": {
+   "tokens": 22821,
+   "nForms": 651,
+   "Kstar": 2,
+   "margin": 0.465,
+   "leaves": 5,
+   "curve": "2:0.465 3:0.1383 4:0.149 6:0.1414 8:0.1405 12:0.1022 16:0.054 24:0.0451",
+   "chronoMargin": 0.5111,
+   "chronoPass": true,
+   "tercilesPassed": 2,
+   "nmiBands": 0.0001,
+   "nmiUpos": 0.2749,
+   "nmiUposShuffled": 0.0867,
+   "nmiLeavesUpos": 0.3169,
+   "k1pass": true,
+   "ctrlShareK1": 1,
+   "ctrlEmpiricalP": 0.091,
+   "obsMargin": 0.465,
+   "nominalKinds": 1,
+   "propnKinds": 0,
+   "maxPropnShare": 0.035,
+   "maxNominalShare": 0.654,
+   "propnForms5": null
+  },
+  "jpn": {
+   "tokens": 11121,
+   "nForms": 219,
+   "Kstar": 3,
+   "margin": 0.1616,
+   "leaves": 8,
+   "curve": "2:-0.0097 3:0.1616 4:0.1462 6:0.0794 8:0.0862 12:0.0692",
+   "chronoMargin": 0.1098,
+   "chronoPass": true,
+   "tercilesPassed": 1,
+   "nmiBands": 0.0113,
+   "nmiUpos": 0.2183,
+   "nmiUposShuffled": 0.1428,
+   "nmiLeavesUpos": 0.4125,
+   "k1pass": false,
+   "ctrlShareK1": 1,
+   "ctrlEmpiricalP": 0.091,
+   "obsMargin": 0.1616,
+   "nominalKinds": 2,
+   "propnKinds": 0,
+   "maxPropnShare": 0.115,
+   "maxNominalShare": 0.93,
+   "propnForms5": null
+  },
+  "tur": {
+   "tokens": 8564,
+   "nForms": 231,
+   "Kstar": 12,
+   "margin": 0.1447,
+   "leaves": 12,
+   "curve": "2:-0.0084 3:0.0725 4:0.1 6:0.1371 8:0.1308 12:0.1447",
+   "chronoMargin": 0.0847,
+   "chronoPass": true,
+   "tercilesPassed": 2,
+   "nmiBands": 0.1133,
+   "nmiUpos": 0.2929,
+   "nmiUposShuffled": 0.1517,
+   "nmiLeavesUpos": 0.2929,
+   "k1pass": true,
+   "ctrlShareK1": 0.9,
+   "ctrlEmpiricalP": 0.091,
+   "obsMargin": 0.1447,
+   "nominalKinds": 5,
+   "propnKinds": 0,
+   "maxPropnShare": 0.064,
+   "maxNominalShare": 1,
+   "propnForms5": null
+  },
+  "arb": {
+   "tokens": 27357,
+   "nForms": 936,
+   "Kstar": 12,
+   "margin": 0.0939,
+   "leaves": 12,
+   "curve": "2:0.0761 3:0.0778 4:0.0467 6:0.0773 8:0.0688 12:0.0939 16:0.0628 24:0.0263",
+   "chronoMargin": 0.0709,
+   "chronoPass": true,
+   "tercilesPassed": 1,
+   "nmiBands": 0.0305,
+   "nmiUpos": 0.3397,
+   "nmiUposShuffled": 0.1596,
+   "nmiLeavesUpos": 0.3397,
+   "k1pass": false,
+   "ctrlShareK1": 0.8,
+   "ctrlEmpiricalP": 0.091,
+   "obsMargin": 0.0939,
+   "nominalKinds": 4,
+   "propnKinds": 0,
+   "maxPropnShare": 0.001,
+   "maxNominalShare": 0.836,
+   "propnForms5": null
+  },
+  "hin": {
+   "tokens": 32850,
+   "nForms": 1123,
+   "Kstar": 3,
+   "margin": 0.2501,
+   "leaves": 7,
+   "curve": "2:0.1253 3:0.2501 4:0.1606 6:0.1274 8:0.0939 12:0.0794 16:0.0794 24:0.0344",
+   "chronoMargin": 0.2836,
+   "chronoPass": true,
+   "tercilesPassed": 2,
+   "nmiBands": 0.0019,
+   "nmiUpos": 0.2992,
+   "nmiUposShuffled": 0.085,
+   "nmiLeavesUpos": 0.4052,
+   "k1pass": true,
+   "ctrlShareK1": 0.9,
+   "ctrlEmpiricalP": 0.091,
+   "obsMargin": 0.2501,
+   "nominalKinds": 2,
+   "propnKinds": 0,
+   "maxPropnShare": 0.331,
+   "maxNominalShare": 0.954,
+   "propnForms5": null
+  },
+  "fin": {
+   "tokens": 15688,
+   "nForms": 400,
+   "Kstar": 2,
+   "margin": 0.1252,
+   "leaves": 3,
+   "curve": "2:0.1252 3:0.0652 4:0.105 6:0.0869 8:0.0654 12:0.0752 16:0.0958",
+   "chronoMargin": 0.1435,
+   "chronoPass": true,
+   "tercilesPassed": 2,
+   "nmiBands": 0.0007,
+   "nmiUpos": 0.1082,
+   "nmiUposShuffled": 0.0757,
+   "nmiLeavesUpos": 0.1721,
+   "k1pass": true,
+   "ctrlShareK1": 1,
+   "ctrlEmpiricalP": 0.091,
+   "obsMargin": 0.1252,
+   "nominalKinds": 0,
+   "propnKinds": 0,
+   "maxPropnShare": 0.102,
+   "maxNominalShare": 0.277,
+   "propnForms5": null
+  }
+ },
+ "K1": {
+  "verdictLanguages": 10,
+  "passAll": 6,
+  "passA": 10,
+  "passB": 9,
+  "passC": 7,
+  "ctrlShareMean": 0.86,
+  "ctrlEmpiricalPle0p1": 10,
+  "medianKstar": 3,
+  "nmiBandsMedian": 0.008,
+  "nmiBandsBelow030": 10,
+  "nmiUposVsShuffled": "0.2516 vs 0.1049",
+  "languagesWithNominalKind": 9,
+  "languagesWithPropnKind": 0
+ },
+ "K2": {
+  "verdictLanguages": 10,
+  "T2a_all_pass": 5,
+  "T2a_all_available": 10,
+  "T2a_all_unrestricted_pass": 9,
+  "T2a_nominal_pass": 2,
+  "T2a_nominal_available": 8,
+  "T2b_shadow_pass": 4,
+  "T2b_imprint_pass": 3,
+  "T2b_collateral_pass": 5,
+  "T2b_available": 10,
+  "slopeP_le05": 0,
+  "simpson": {
+   "PROPN": {
+    "reversalAbove": 0,
+    "cancellationAbove": 0,
+    "anyAbove": 0,
+    "available": 10
+   },
+   "NOUN": {
+    "reversalAbove": 0,
+    "cancellationAbove": 0,
+    "anyAbove": 0,
+    "available": 10
+   }
+  },
+  "goldPropnSpecific": 9,
+  "goldPropnCos": {
+   "eng": 0.8851,
+   "spa": 0.9836,
+   "rus": 0.9888,
+   "cmn-hans": 0.9708,
+   "fas": 0.9943,
+   "jpn": 0.8979,
+   "tur": 0.9729,
+   "hin": 0.9852,
+   "fin": 0.9537
+  },
+  "goldNounSpecific": 9,
+  "shamAllNull": true,
+  "determinismAll": true,
+  "P6": {
+   "languagesWithBoth": 0,
+   "higher": 0,
+   "specificKinds": 0,
+   "detail": []
+  },
+  "P6x_exploratory": {
+   "n": 9,
+   "kindFartherThanPooled": 1,
+   "kindSpecific": 4,
+   "pooledSpecific": 9,
+   "detail": [
+    {
+     "stem": "eng",
+     "kind": "5",
+     "propnShare": 0.178,
+     "cosKind": 0.9888,
+     "cosPooled": 0.8851,
+     "specificKind": false,
+     "specificPooled": true,
+     "kindFartherThanPooled": false
+    },
+    {
+     "stem": "spa",
+     "kind": "4",
+     "propnShare": 0.23,
+     "cosKind": 0.9976,
+     "cosPooled": 0.9836,
+     "specificKind": false,
+     "specificPooled": true,
+     "kindFartherThanPooled": false
+    },
+    {
+     "stem": "rus",
+     "kind": "8",
+     "propnShare": 0.183,
+     "cosKind": 0.9948,
+     "cosPooled": 0.9888,
+     "specificKind": false,
+     "specificPooled": true,
+     "kindFartherThanPooled": false
+    },
+    {
+     "stem": "cmn-hans",
+     "kind": "1",
+     "propnShare": 0.127,
+     "cosKind": 0.974,
+     "cosPooled": 0.9708,
+     "specificKind": true,
+     "specificPooled": true,
+     "kindFartherThanPooled": false
+    },
+    {
+     "stem": "fas",
+     "kind": "1",
+     "propnShare": 0.035,
+     "cosKind": 0.9823,
+     "cosPooled": 0.9943,
+     "specificKind": true,
+     "specificPooled": true,
+     "kindFartherThanPooled": true
+    },
+    {
+     "stem": "jpn",
+     "kind": "4",
+     "propnShare": 0.115,
+     "cosKind": 0.952,
+     "cosPooled": 0.8979,
+     "specificKind": true,
+     "specificPooled": true,
+     "kindFartherThanPooled": false
+    },
+    {
+     "stem": "tur",
+     "kind": "1",
+     "propnShare": 0.064,
+     "cosKind": 0.9882,
+     "cosPooled": 0.9729,
+     "specificKind": false,
+     "specificPooled": true,
+     "kindFartherThanPooled": false
+    },
+    {
+     "stem": "hin",
+     "kind": "5",
+     "propnShare": 0.331,
+     "cosKind": 0.9892,
+     "cosPooled": 0.9852,
+     "specificKind": false,
+     "specificPooled": true,
+     "kindFartherThanPooled": false
+    },
+    {
+     "stem": "fin",
+     "kind": "2",
+     "propnShare": 0.102,
+     "cosKind": 0.992,
+     "cosPooled": 0.9537,
+     "specificKind": true,
+     "specificPooled": true,
+     "kindFartherThanPooled": false
+    }
+   ]
+  },
+  "kindsSpecific": {
+   "eng": "2/6",
+   "spa": "1/6",
+   "rus": "1/9",
+   "cmn-hans": "2/6",
+   "fas": "3/5",
+   "jpn": "2/8",
+   "tur": "1/5",
+   "arb": "6/12",
+   "hin": "0/7",
+   "fin": "3/3"
+  },
+  "topCoordinatesByLanguageCount": [
+   [
+    "traceSize.self",
+    3
+   ],
+   [
+    "n(rel-end2/b0)",
+    2
+   ],
+   [
+    "refilled@rel-end2/b0",
+    2
+   ],
+   [
+    "novelty.self",
+    1
+   ],
+   [
+    "recalled.self",
+    1
+   ],
+   [
+    "activation.self",
+    1
+   ],
+   [
+    "emptied@rel-label/b1",
+    1
+   ],
+   [
+    "shifted@rel-end1/b1",
+    1
+   ],
+   [
+    "emptied@rel-end1/b0",
+    1
+   ],
+   [
+    "emptied@rel-end2/b1",
+    1
+   ],
+   [
+    "n(rel-label/b2)",
+    1
+   ],
+   [
+    "n(rel-end1/b2)",
+    1
+   ]
+  ]
+ },
+ "K3": {
+  "languages": 9,
+  "PROPN": {
+   "C-P": {
+    "mean": -0.003,
+    "positiveLoGt0": 1,
+    "atLeast003LoGt0": 1,
+    "negativeHiLt0": 1
+   },
+   "PK-Kd": {
+    "mean": 0.0792,
+    "positiveLoGt0": 4,
+    "atLeast003LoGt0": 4,
+    "negativeHiLt0": 0
+   },
+   "C-PK": {
+    "mean": -0.1096,
+    "positiveLoGt0": 0,
+    "atLeast003LoGt0": 0,
+    "negativeHiLt0": 7
+   },
+   "PK-P": {
+    "mean": 0.1066,
+    "positiveLoGt0": 7,
+    "atLeast003LoGt0": 7,
+    "negativeHiLt0": 0
+   },
+   "C-Kd": {
+    "mean": -0.0304,
+    "positiveLoGt0": 1,
+    "atLeast003LoGt0": 1,
+    "negativeHiLt0": 3
+   }
+  },
+  "PROPN_supported": 0,
+  "meanAuc": {
+   "P": 0.5973,
+   "Kd": 0.6247,
+   "PK": 0.704,
+   "C": 0.5943
+  },
+  "NOUN": {
+   "languages": 10,
+   "supported": 0,
+   "meanAuc": {
+    "P": 0.5673,
+    "Kd": 0.6342,
+    "PK": 0.6613,
+    "C": 0.5809
+   },
+   "PKminusKdLoGt0": 2,
+   "CminusPKLoGt0": 0
+  },
+  "K3b": {
+   "languagesWithDetectableKind": 7,
+   "detectableKinds": {
+    "eng": "1/4",
+    "spa": "1/4",
+    "rus": "2/5",
+    "cmn-hans": "1/5",
+    "fas": "2/3",
+    "jpn": "0/6",
+    "tur": "1/3",
+    "arb": "2/9",
+    "hin": "0/5",
+    "fin": "0/2"
+   }
+  },
+  "withinKindAucP": {
+   "eng": "k0:0.6331 k-1:0.6641",
+   "spa": "k2:0.4174 k3:0.5709 k-1:0.5623",
+   "rus": "k-1:0.4045",
+   "cmn-hans": "k1:0.675 k5:0.627 k-1:0.4969",
+   "fas": "k0:0.59 k1:0.5773 k2:0.576 k-1:0.573",
+   "jpn": "k-1:0.6346",
+   "tur": "k1:0.94 k-1:0.6987",
+   "hin": "k0:0.4493 k5:0.6291 k6:0.4646 k-1:0.5737",
+   "fin": "k2:0.6793 k-1:0.6626"
+  }
+ },
+ "K4": {
+  "languages": [
+   "eng",
+   "spa",
+   "rus",
+   "cmn-hans",
+   "fas",
+   "jpn",
+   "tur",
+   "arb",
+   "hin",
+   "fin"
+  ],
+  "families3": {
+   "eng": "SVOA",
+   "spa": "SVOB",
+   "rus": "SVOB",
+   "cmn-hans": "SVOA",
+   "fas": "SOV",
+   "jpn": "SOV",
+   "tur": "SOV",
+   "arb": "SVOB",
+   "hin": "SOV",
+   "fin": "SVOB"
+  },
+  "alignmentMean": {
+   "kinds": 0.4566,
+   "freqBands": 0.5334,
+   "randomPartitions": 0.3035
+  },
+  "signature3": {
+   "gap": 0.0026,
+   "p": 0.4352,
+   "within": 0.4585,
+   "across": 0.4559
+  },
+  "signature2": {
+   "gap": 0.0235,
+   "p": 0.1535,
+   "within": 0.4691,
+   "across": 0.4457
+  },
+  "freqBand3": {
+   "gap": -0.0279,
+   "p": 0.7871,
+   "within": 0.5136,
+   "across": 0.5415
+  },
+  "freqBand2": {
+   "gap": 0.0209,
+   "p": 0.2702,
+   "within": 0.5446,
+   "across": 0.5236
+  },
+  "randomPartitionGap3_mean": 0.0096,
+  "Kstar3": {
+   "gap": -0.8077,
+   "p": 0.5506,
+   "within": 5.3077,
+   "across": 4.5
+  },
+  "Kstar2": {
+   "gap": -1.0357,
+   "p": 1,
+   "within": 5.2857,
+   "across": 4.25
+  },
+  "leaves3": {
+   "gap": -0.7308,
+   "p": 0.9073,
+   "within": 4.2308,
+   "across": 3.5
+  },
+  "leaves2": {
+   "gap": -0.631,
+   "p": 0.829,
+   "within": 4.0476,
+   "across": 3.4167
+  },
+  "Kstar": {
+   "eng": 2,
+   "spa": 3,
+   "rus": 12,
+   "cmn-hans": 2,
+   "fas": 2,
+   "jpn": 3,
+   "tur": 12,
+   "arb": 12,
+   "hin": 3,
+   "fin": 2
+  },
+  "leaves": {
+   "eng": 6,
+   "spa": 6,
+   "rus": 12,
+   "cmn-hans": 6,
+   "fas": 5,
+   "jpn": 8,
+   "tur": 12,
+   "arb": 12,
+   "hin": 7,
+   "fin": 3
+  },
+  "supported": false
+ },
+ "predictions": {
+  "P1": {
+   "claim": ">= 8/10 pass K1 (a,b,c); median K* in [3,12]",
+   "observed": "6/10 pass all; a:10 b:9 c:7; median K*=3",
+   "held": false
+  },
+  "P2": {
+   "claim": "NMI(kinds, freq bands) < 0.30 in a majority",
+   "observed": "10/10, median 0.008",
+   "held": true
+  },
+  "P3": {
+   "claim": ">=1 noun-like kind in every language; >=1 proper-noun-like (PROPN share >= 0.5) kind in >= 5/10",
+   "observed": "nominal-kind languages 9/10; PROPN-majority-kind languages 0/10",
+   "held": false
+  },
+  "P4": {
+   "claim": "T2a (freq-stratified) in >= 7/10; nominal stratum >= 5/10",
+   "observed": "all 5/10; nominal 2/8",
+   "held": false
+  },
+  "P5": {
+   "claim": "T2b shadow dispersion beats all 20 null draws in >= 6/10",
+   "observed": "4/10 (imprint 3, collateral 5)",
+   "held": false
+  },
+  "P6": {
+   "claim": "a PROPN-like kind has larger shadow z than pooled gold PROPN in >= 6/10 of the languages having both",
+   "observed": "0/0",
+   "held": false
+  },
+  "P7": {
+   "claim": "Simpson reversal or cancellation above chance in >= 3/10 languages (PROPN or NOUN stratum)",
+   "observed": "PROPN 0/10, NOUN 0/10",
+   "held": false
+  },
+  "P8": {
+   "claim": "mention-count slopes differ between kinds (p <= 0.05) in >= 5/10",
+   "observed": "0/10",
+   "held": false
+  },
+  "P9": {
+   "claim": "C - P > 0 (lower bound > 0) in >= 8/10",
+   "observed": "1/9",
+   "held": false
+  },
+  "P10": {
+   "claim": "PK - Kd >= 0.03 (lower > 0) in <= 3/10",
+   "observed": "4/9",
+   "held": false
+  },
+  "P11": {
+   "claim": "C - PK >= 0.03 (lower > 0) in <= 3/10",
+   "observed": "0/9",
+   "held": true
+  },
+  "P12": {
+   "claim": "K3b: >= 1 detectable kind in every language",
+   "observed": "7/10",
+   "held": false
+  },
+  "P13": {
+   "claim": "K4 NOT supported (p > 0.05); alignment of kind signatures above the random-partition baseline",
+   "observed": "signature3 p=0.4352 signature2 p=0.1535 K* p=0.5506; alignment kinds 0.4566 vs random 0.3035 vs freq bands 0.5334",
+   "held": true
+  }
+ }
+}

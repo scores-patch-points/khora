@@ -1,0 +1,10 @@
+// E5: size of a shippable Model-1 table (en<->fr trained on all parallel-classics pairs), pruned to t >= 0.02, as dictionary + uint8 quantised probs.
+import path from "node:path";
+import { RES, wj, gz } from "../lib/common.mjs";
+import { classic, pairs11 } from "./data.mjs";
+import { trainM1, toks } from "./model1.mjs";
+const works = ["alice-in-wonderland", "faust-part-1", "gullivers-travels", "robinson-crusoe"]; const P = [];
+for (const w of works) { try { P.push(...pairs11(classic(w, "en").paras, classic(w, "fr").paras)); } catch (e) { console.log("skip", w, e.message); } }
+const pairs = P.slice(0, 2500).map((p) => ({ src: toks(p.a), tgt: toks(p.b) })); const m = trainM1(pairs); const out = {};
+for (const th of [0.02, 0.05, 0.1]) { const rows = []; for (const [s, mm] of m.t) for (const [w, p] of mm) if (p >= th && s !== "\u0000null") rows.push(`${s}\t${w}\t${Math.round(p * 255)}`); const txt = rows.join("\n"); out["t>=" + th] = { entries: rows.length, raw: Buffer.byteLength(txt), gz: gz(txt) }; }
+out.trainPairs = pairs.length; out.srcVocab = m.srcVocab; wj(path.join(RES, "e5-size.json"), out); console.log(JSON.stringify(out));

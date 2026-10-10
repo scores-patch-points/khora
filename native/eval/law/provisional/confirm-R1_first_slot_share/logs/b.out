@@ -1,0 +1,77 @@
+{
+ "part": "b",
+ "dry": false,
+ "seconds": 6.7,
+ "sha": "077117134b4f27aace61e2d3ea1fa6a4a644b077f521c57ff254dd0f0f5966f9",
+ "headline": {
+  "EN_auc": 0.8564,
+  "EN_ci": [
+   0.8413,
+   0.8673
+  ],
+  "EN_variant": "full",
+  "EN_ctl": {
+   "i": 0.5032,
+   "len": 0.5004,
+   "cl": 0.4989,
+   "lc": 0.491,
+   "mday": 0.4931,
+   "b": 0.5118
+  },
+  "EN_shufDrop": 0.2306,
+  "EN_beyond": {
+   "CNT_C128": {
+    "kept": 623,
+    "share": 0.262,
+    "auc": 0.7793
+   }
+  },
+  "NONEN_auc": 0.8486,
+  "NONEN_n": 142,
+  "checks": {
+   "causal": {
+    "n": 300,
+    "bad": 0
+   },
+   "cross": {
+    "n": 450,
+    "bad": 0
+   },
+   "days": [
+    "ubuntu/2006-03-15.txt",
+    "ubuntu/2008-03-15.txt",
+    "ubuntu/2009-03-15.txt"
+   ]
+  },
+  "wordshuf": {
+   "EN": {
+    "n": 3159,
+    "auc": 0.6258
+   },
+   "NONEN": {
+    "n": 337,
+    "auc": 0.5059
+   }
+  },
+  "msgshuf": {
+   "EN": {
+    "n": 2365,
+    "auc": 0.8552
+   },
+   "NONEN": {
+    "n": 136,
+    "auc": 0.8456
+   }
+  },
+  "nat_EN": {
+   "tp": 17293,
+   "fp": 3397,
+   "fn": 4504,
+   "tn": 394798,
+   "precision": 0.8358,
+   "recall": 0.7934,
+   "fpr": 0.0085,
+   "prevalence": 0.0519
+  }
+ }
+}

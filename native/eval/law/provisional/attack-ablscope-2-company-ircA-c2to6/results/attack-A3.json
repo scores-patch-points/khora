@@ -1,0 +1,151 @@
+{
+ "ruleId": "ablscope-2-company-ircA-c2to6",
+ "attack": "A3 form concentration",
+ "headerSha256": "51f7cc7b255196bd6f8d6a61d4b47b645ff1925a996255ebae21fb3af70dbe98",
+ "B": 1000,
+ "confirmer350": {
+  "concentration": {
+   "pairs": 350,
+   "distinctPositiveForms": 132,
+   "top5Pairs": 33,
+   "top10Pairs": 58,
+   "top10": [
+    "qman:8",
+    "rbasak:7",
+    "ivoks:6",
+    "kgoetz:6",
+    "spamaps:6",
+    "alexc:5",
+    "alonea:5",
+    "blueskaj:5",
+    "cor:5",
+    "drip:5"
+   ]
+  },
+  "leaveTopOut": {
+   "k5": {
+    "pairs": 317,
+    "aucNegDSelf": 0.8358,
+    "ci": [
+     0.795,
+     0.8697
+    ],
+    "aucRInit": 0.8834,
+    "ciRInit": [
+     0.8564,
+     0.9079
+    ]
+   },
+   "k10": {
+    "pairs": 292,
+    "aucNegDSelf": 0.8347,
+    "ci": [
+     0.797,
+     0.8701
+    ],
+    "aucRInit": 0.8828,
+    "ciRInit": [
+     0.855,
+     0.909
+    ]
+   },
+   "k20": {
+    "pairs": 242,
+    "aucNegDSelf": 0.8382,
+    "ci": [
+     0.7977,
+     0.8762
+    ],
+    "aucRInit": 0.8879,
+    "ciRInit": [
+     0.8575,
+     0.919
+    ]
+   }
+  },
+  "onePairPerForm": {
+   "draws": 500,
+   "negDSelf": {
+    "median": 0.8247,
+    "q05": 0.802
+   },
+   "R_INIT": {
+    "median": 0.868,
+    "q05": 0.8474
+   }
+  }
+ },
+ "S_FBL1": {
+  "concentration": {
+   "pairs": 136,
+   "distinctPositiveForms": 85,
+   "top5Pairs": 19,
+   "top10Pairs": 34,
+   "top10": [
+    "ivoks:5",
+    "drip:4",
+    "qman:4",
+    "cs1:3",
+    "felipe:3",
+    "jdcnyc:3",
+    "maco:3",
+    "peabody:3",
+    "ruben:3",
+    "rudi:3"
+   ]
+  },
+  "leaveTopOut": {
+   "k5": {
+    "pairs": 117,
+    "aucNegDSelf": 0.8594,
+    "ci": [
+     0.7899,
+     0.9158
+    ],
+    "aucRInit": 0.9143,
+    "ciRInit": [
+     0.8744,
+     0.9529
+    ]
+   },
+   "k10": {
+    "pairs": 102,
+    "aucNegDSelf": 0.8519,
+    "ci": [
+     0.7715,
+     0.9206
+    ],
+    "aucRInit": 0.9058,
+    "ciRInit": [
+     0.8628,
+     0.9525
+    ]
+   },
+   "k20": {
+    "pairs": 79,
+    "aucNegDSelf": 0.8491,
+    "ci": [
+     0.783,
+     0.9101
+    ],
+    "aucRInit": 0.8957,
+    "ciRInit": [
+     0.8467,
+     0.9461
+    ]
+   }
+  },
+  "onePairPerForm": {
+   "draws": 500,
+   "negDSelf": {
+    "median": 0.8386,
+    "q05": 0.8206
+   },
+   "R_INIT": {
+    "median": 0.9027,
+    "q05": 0.8869
+   }
+  }
+ },
+ "verdict": "SURVIVES"
+}

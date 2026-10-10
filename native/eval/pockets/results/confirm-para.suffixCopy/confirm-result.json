@@ -1,0 +1,1050 @@
+{
+ "headerSha256": "2ba3e8011e188a5e1241c0a2956bc7ced36deda4e1efb7296786738d8ed05436",
+ "dir": "siblings",
+ "rows": [
+  {
+   "id": "sfx-cd-py314",
+   "cls": "code",
+   "tokens": 291020,
+   "units": 62494,
+   "docs": 153,
+   "draws": 10,
+   "status": "PRESENT+",
+   "predicted": "PRESENT+",
+   "sibling": "match",
+   "v": [
+    0.02668379700571677,
+    0.023687752355726843
+   ],
+   "nullMean": [
+    0.00027666142050293275,
+    0.00031875802378635856
+   ],
+   "nullSd": [
+    0.00008619958430735759,
+    0.00013297824105508116
+   ],
+   "z": [
+    306.34875791343984,
+    175.73547481546828
+   ],
+   "pairs": [
+    20237,
+    29720
+   ],
+   "events": [
+    540,
+    704
+   ],
+   "vRecountOk": true,
+   "range": [
+    0.01,
+    0.14
+   ],
+   "rangeOk": true,
+   "excessPositive": true
+  },
+  {
+   "id": "sfx-cd-rb26",
+   "cls": "code",
+   "tokens": 291169,
+   "units": 82941,
+   "docs": 354,
+   "draws": 10,
+   "status": "PRESENT+",
+   "predicted": "PRESENT+",
+   "sibling": "match",
+   "v": [
+    0.027171167124834028,
+    0.031463132158023654
+   ],
+   "nullMean": [
+    0.00012445132324501174,
+    0.004640314393964218
+   ],
+   "nullSd": [
+    0.00007112795801973358,
+    0.0002787058742888383
+   ],
+   "z": [
+    380.2543550327318,
+    96.24058994989632
+   ],
+   "pairs": [
+    17813,
+    31084
+   ],
+   "events": [
+    484,
+    978
+   ],
+   "vRecountOk": true,
+   "range": [
+    0.01,
+    0.14
+   ],
+   "rangeOk": true,
+   "excessPositive": true
+  },
+  {
+   "id": "sfx-cd-chdr",
+   "cls": "code",
+   "tokens": 291492,
+   "units": 55463,
+   "docs": 276,
+   "draws": 10,
+   "status": "PRESENT+",
+   "predicted": "PRESENT+",
+   "sibling": "match",
+   "v": [
+    0.047424939732991334,
+    0.023717119447610457
+   ],
+   "nullMean": [
+    0.0004968730087966833,
+    0.0018812490170603269
+   ],
+   "nullSd": [
+    0.00013752211228430222,
+    0.0002250028664572553
+   ],
+   "z": [
+    341.24015363565184,
+    97.04707666334721
+   ],
+   "pairs": [
+    22815,
+    20871
+   ],
+   "events": [
+    1082,
+    495
+   ],
+   "vRecountOk": true,
+   "range": [
+    0.01,
+    0.14
+   ],
+   "rangeOk": true,
+   "excessPositive": true
+  },
+  {
+   "id": "sfx-cd-npmjs",
+   "cls": "code",
+   "tokens": 291137,
+   "units": 63363,
+   "docs": 568,
+   "draws": 10,
+   "status": "PRESENT+",
+   "predicted": "PRESENT+",
+   "sibling": "match",
+   "v": [
+    0.033269725379796,
+    0.03643616001227201
+   ],
+   "nullMean": [
+    0.00022759661633244832,
+    0.00043783948249256357
+   ],
+   "nullSd": [
+    0.00007846611070027186,
+    0.00016046974350330742
+   ],
+   "z": [
+    421.1006314519559,
+    224.33089094479354
+   ],
+   "pairs": [
+    24106,
+    26073
+   ],
+   "events": [
+    802,
+    950
+   ],
+   "vRecountOk": true,
+   "range": [
+    0.01,
+    0.14
+   ],
+   "rangeOk": true,
+   "excessPositive": true
+  },
+  {
+   "id": "sfx-en-poe-works2",
+   "cls": "prose",
+   "tokens": 96647,
+   "units": 4199,
+   "docs": 42,
+   "draws": 10,
+   "status": "PRESENT+",
+   "predicted": "PRESENT+",
+   "sibling": "match",
+   "v": [
+    0.0024461839529976714,
+    0.0041450777198406286
+   ],
+   "nullMean": [
+    0.000196198754474608,
+    0.0000519210799211578
+   ],
+   "nullSd": [
+    0.0002532916138916714,
+    0.0001641888711264943
+   ],
+   "z": [
+    8.882983388014356,
+    24.929561984539276
+   ],
+   "pairs": [
+    2044,
+    1930
+   ],
+   "events": [
+    5,
+    8
+   ],
+   "vRecountOk": true,
+   "range": [
+    0.0008,
+    0.03
+   ],
+   "rangeOk": true,
+   "excessPositive": true
+  },
+  {
+   "id": "sfx-en-chopin-awakening",
+   "cls": "prose",
+   "tokens": 64408,
+   "units": 4440,
+   "docs": 44,
+   "draws": 10,
+   "status": "PRESENT+",
+   "predicted": "PRESENT+",
+   "sibling": "match",
+   "v": [
+    0.0078028747429925716,
+    0.004132231404582853
+   ],
+   "nullMean": [
+    0.0002050863155091065,
+    0.00035555616950659895
+   ],
+   "nullSd": [
+    0.00029003587698388033,
+    0.0004997197075373047
+   ],
+   "z": [
+    26.196029630864377,
+    7.557587139575281
+   ],
+   "pairs": [
+    2435,
+    1694
+   ],
+   "events": [
+    19,
+    7
+   ],
+   "vRecountOk": true,
+   "range": [
+    0.0008,
+    0.03
+   ],
+   "rangeOk": true,
+   "excessPositive": true
+  },
+  {
+   "id": "sfx-en-zola-mouret",
+   "cls": "prose",
+   "tokens": 128496,
+   "units": 8046,
+   "docs": 80,
+   "draws": 10,
+   "status": "PRESENT+",
+   "predicted": "PRESENT+",
+   "sibling": "match",
+   "v": [
+    0.004179985246992146,
+    0.003306281935692823
+   ],
+   "nullMean": [
+    0.00019735426485567586,
+    0.000271466212325322
+   ],
+   "nullSd": [
+    0.00019461537666707438,
+    0.00029993553196888803
+   ],
+   "z": [
+    20.464112601695895,
+    10.118226751748436
+   ],
+   "pairs": [
+    4067,
+    3327
+   ],
+   "events": [
+    17,
+    11
+   ],
+   "vRecountOk": true,
+   "range": [
+    0.0008,
+    0.03
+   ],
+   "rangeOk": true,
+   "excessPositive": true
+  },
+  {
+   "id": "sfx-en-waikna",
+   "cls": "prose",
+   "tokens": 85322,
+   "units": 3386,
+   "docs": 34,
+   "draws": 10,
+   "status": "AMBIGUOUS",
+   "predicted": "PRESENT+",
+   "sibling": "inconclusive",
+   "v": [
+    0.005482456140271097,
+    0.0020661157022914267
+   ],
+   "nullMean": [
+    0.0004956554594173213,
+    0.0003449703719525132
+   ],
+   "nullSd": [
+    0.00048224076564651515,
+    0.0004879216451388426
+   ],
+   "z": [
+    10.340894084655474,
+    3.52750353973156
+   ],
+   "pairs": [
+    1824,
+    1452
+   ],
+   "events": [
+    10,
+    3
+   ],
+   "vRecountOk": true,
+   "range": [
+    0.0008,
+    0.03
+   ],
+   "rangeOk": true,
+   "excessPositive": true
+  },
+  {
+   "id": "sfx-en-about-london",
+   "cls": "prose",
+   "tokens": 55661,
+   "units": 2229,
+   "docs": 30,
+   "draws": 10,
+   "status": "AMBIGUOUS",
+   "predicted": "PRESENT+",
+   "sibling": "inconclusive",
+   "v": [
+    0.00690448791738163,
+    0.002321981423847319
+   ],
+   "nullMean": [
+    0.00046043207385082496,
+    0.0004646360969672969
+   ],
+   "nullSd": [
+    0.0005944157021604138,
+    0.0006529733424765457
+   ],
+   "z": [
+    10.840991952449734,
+    2.84444280655567
+   ],
+   "pairs": [
+    869,
+    1292
+   ],
+   "events": [
+    6,
+    3
+   ],
+   "vRecountOk": true,
+   "range": [
+    0.0008,
+    0.03
+   ],
+   "rangeOk": true,
+   "excessPositive": true
+  },
+  {
+   "id": "sfx-en-hesse-siddhartha",
+   "cls": "prose-exploratory",
+   "tokens": 39270,
+   "units": 1871,
+   "docs": 30,
+   "draws": 10,
+   "status": "PRESENT+",
+   "predicted": "PRESENT+",
+   "sibling": "match",
+   "v": [
+    0.004918032786918047,
+    0.0082712985940816
+   ],
+   "nullMean": [
+    0.0004918032786008552,
+    0.0008268564279205748
+   ],
+   "nullSd": [
+    0.0007918785105795733,
+    0.000954824322132716
+   ],
+   "z": [
+    5.589531031821598,
+    7.796661640890085
+   ],
+   "pairs": [
+    610,
+    1209
+   ],
+   "events": [
+    3,
+    10
+   ],
+   "vRecountOk": true,
+   "range": null,
+   "rangeOk": null,
+   "excessPositive": true
+  },
+  {
+   "id": "sfx-en-warren-forces",
+   "cls": "prose-exploratory",
+   "tokens": 35736,
+   "units": 2020,
+   "docs": 30,
+   "draws": 10,
+   "status": "PRESENT+",
+   "predicted": "PRESENT+",
+   "sibling": "match",
+   "v": [
+    0.0029585798820335185,
+    0.0032432432435598457
+   ],
+   "nullMean": [
+    0.00019743336615647423,
+    0.00021645021643053043
+   ],
+   "nullSd": [
+    0.0004162260821123081,
+    0.0004563171226379181
+   ],
+   "z": [
+    6.6337662019268135,
+    6.633091060952884
+   ],
+   "pairs": [
+    1014,
+    925
+   ],
+   "events": [
+    3,
+    3
+   ],
+   "vRecountOk": true,
+   "range": null,
+   "rangeOk": null,
+   "excessPositive": true
+  },
+  {
+   "id": "sfx-en-aesop-stickney",
+   "cls": "children-exploratory",
+   "tokens": 29256,
+   "units": 1879,
+   "docs": 30,
+   "draws": 10,
+   "status": "PRESENT+",
+   "predicted": "not required",
+   "sibling": "n/a",
+   "v": [
+    0.006511627906547801,
+    0.008415147264713596
+   ],
+   "nullMean": [
+    0.00046546289586331114,
+    0.0012650370754272444
+   ],
+   "nullSd": [
+    0.0007909989441945953,
+    0.0016826914286995514
+   ],
+   "z": [
+    7.643708066944094,
+    4.249210560733784
+   ],
+   "pairs": [
+    1075,
+    713
+   ],
+   "events": [
+    7,
+    6
+   ],
+   "vRecountOk": true,
+   "range": null,
+   "rangeOk": null,
+   "excessPositive": true
+  },
+  {
+   "id": "sfx-en-pooh",
+   "cls": "children-exploratory",
+   "tokens": 22984,
+   "units": 2146,
+   "docs": 30,
+   "draws": 10,
+   "status": "AMBIGUOUS",
+   "predicted": "not required",
+   "sibling": "n/a",
+   "v": [
+    0.011688311687976238,
+    0.012444444444554392
+   ],
+   "nullMean": [
+    0.0036377295895363205,
+    0.0027569047460019648
+   ],
+   "nullSd": [
+    0.002434281026210452,
+    0.000781559347083428
+   ],
+   "z": [
+    3.307170376697467,
+    12.395142780524287
+   ],
+   "pairs": [
+    770,
+    1125
+   ],
+   "events": [
+    9,
+    14
+   ],
+   "vRecountOk": true,
+   "range": null,
+   "rangeOk": null,
+   "excessPositive": true
+  },
+  {
+   "id": "sfx-ud-eng",
+   "cls": "ud-present",
+   "tokens": 176883,
+   "units": 12470,
+   "docs": 499,
+   "draws": 10,
+   "status": "PRESENT+",
+   "predicted": "PRESENT+",
+   "sibling": "match",
+   "v": [
+    0.01237911025145877,
+    0.012099921936169267
+   ],
+   "nullMean": [
+    0.0000789617966802325,
+    0.00019950179475927143
+   ],
+   "nullSd": [
+    0.0001379738053370409,
+    0.00024918787880171553
+   ],
+   "z": [
+    89.14843237621713,
+    47.7568178622341
+   ],
+   "pairs": [
+    5170,
+    5124
+   ],
+   "events": [
+    64,
+    62
+   ],
+   "vRecountOk": true,
+   "range": [
+    0.003,
+    0.07
+   ],
+   "rangeOk": true,
+   "excessPositive": true
+  },
+  {
+   "id": "sfx-ud-hrv",
+   "cls": "ud-present",
+   "tokens": 132085,
+   "units": 6913,
+   "docs": 277,
+   "draws": 10,
+   "status": "PRESENT+",
+   "predicted": "PRESENT+",
+   "sibling": "match",
+   "v": [
+    0.004472843450457731,
+    0.0068846815838696784
+   ],
+   "nullMean": [
+    0.00003194888176949462,
+    0.00020080321310160797
+   ],
+   "nullSd": [
+    0.00010103123508703362,
+    0.00013856738156670307
+   ],
+   "z": [
+    43.95565950334682,
+    48.23558253895856
+   ],
+   "pairs": [
+    3130,
+    3486
+   ],
+   "events": [
+    14,
+    24
+   ],
+   "vRecountOk": true,
+   "range": [
+    0.0012,
+    0.025
+   ],
+   "rangeOk": true,
+   "excessPositive": true
+  },
+  {
+   "id": "sfx-ud-slv",
+   "cls": "ud-present",
+   "tokens": 179497,
+   "units": 10900,
+   "docs": 436,
+   "draws": 10,
+   "status": "PRESENT+",
+   "predicted": "PRESENT+",
+   "sibling": "match",
+   "v": [
+    0.00103263114397123,
+    0.002600780234388367
+   ],
+   "nullMean": [
+    0.000020644095820898654,
+    0.000018594272933114554
+   ],
+   "nullSd": [
+    0.0000652823630288032,
+    0.00005880025390346171
+   ],
+   "z": [
+    15.501691440057597,
+    43.914537608879826
+   ],
+   "pairs": [
+    4842,
+    5383
+   ],
+   "events": [
+    5,
+    14
+   ],
+   "vRecountOk": true,
+   "range": [
+    0.0006,
+    0.014
+   ],
+   "rangeOk": true,
+   "excessPositive": true
+  },
+  {
+   "id": "sfx-ud-heb",
+   "cls": "ud-present",
+   "tokens": 119348,
+   "units": 5165,
+   "docs": 207,
+   "draws": 10,
+   "status": "PRESENT+",
+   "predicted": "PRESENT+",
+   "sibling": "match",
+   "v": [
+    0.009005145797345904,
+    0.011569610489459592
+   ],
+   "nullMean": [
+    0.0009431573745132482,
+    0.0013509043724297953
+   ],
+   "nullSd": [
+    0.00048682501081806907,
+    0.0004546727655128302
+   ],
+   "z": [
+    16.560341485506573,
+    22.4748586062858
+   ],
+   "pairs": [
+    2332,
+    2593
+   ],
+   "events": [
+    21,
+    30
+   ],
+   "vRecountOk": true,
+   "range": [
+    0.0014,
+    0.031
+   ],
+   "rangeOk": true,
+   "excessPositive": true
+  },
+  {
+   "id": "sfx-ud-urd",
+   "cls": "ud-present",
+   "tokens": 102096,
+   "units": 4043,
+   "docs": 162,
+   "draws": 10,
+   "status": "PRESENT+",
+   "predicted": "PRESENT+",
+   "sibling": "match",
+   "v": [
+    0.02910958904067229,
+    0.03381869422264572
+   ],
+   "nullMean": [
+    0.004109589041036088,
+    0.005307656176501041
+   ],
+   "nullSd": [
+    0.001443962401882357,
+    0.0010158840268113434
+   ],
+   "z": [
+    17.313470189421878,
+    28.06524888046042
+   ],
+   "pairs": [
+    1752,
+    2129
+   ],
+   "events": [
+    51,
+    72
+   ],
+   "vRecountOk": true,
+   "range": [
+    0.005,
+    0.092
+   ],
+   "rangeOk": true,
+   "excessPositive": true
+  },
+  {
+   "id": "sfx-ud-slk",
+   "cls": "ud-present",
+   "tokens": 65159,
+   "units": 8476,
+   "docs": 340,
+   "draws": 10,
+   "status": "PRESENT+",
+   "predicted": "PRESENT+",
+   "sibling": "match",
+   "v": [
+    0.002406417112069903,
+    0.0022618748425884405
+   ],
+   "nullMean": [
+    0.00002678093196664122,
+    0.00007547170762336463
+   ],
+   "nullSd": [
+    0.00008468874287659876,
+    0.00016977756729003867
+   ],
+   "z": [
+    28.098612628725228,
+    12.878044902304113
+   ],
+   "pairs": [
+    3740,
+    3979
+   ],
+   "events": [
+    9,
+    9
+   ],
+   "vRecountOk": true,
+   "range": [
+    0.0005,
+    0.016
+   ],
+   "rangeOk": true,
+   "excessPositive": true
+  },
+  {
+   "id": "sfx-ud-fas",
+   "cls": "ud-absent",
+   "tokens": 299972,
+   "units": 19350,
+   "docs": 774,
+   "draws": 10,
+   "status": "PRESENT+",
+   "predicted": "ABSENT",
+   "sibling": "contradicted",
+   "v": [
+    0.00584795321628917,
+    0.006216505895281443
+   ],
+   "nullMean": [
+    0.0021658616920831263,
+    0.0022722263018295054
+   ],
+   "nullSd": [
+    0.0005402641790001612,
+    0.0005667256156992194
+   ],
+   "z": [
+    6.815353797877733,
+    6.959769391375635
+   ],
+   "pairs": [
+    9234,
+    9330
+   ],
+   "events": [
+    54,
+    58
+   ],
+   "vRecountOk": true,
+   "range": null,
+   "rangeOk": null,
+   "excessPositive": true
+  },
+  {
+   "id": "sfx-ud-ind",
+   "cls": "ud-absent",
+   "tokens": 80944,
+   "units": 4481,
+   "docs": 180,
+   "draws": 10,
+   "status": "ABSENT",
+   "predicted": "ABSENT",
+   "sibling": "match",
+   "v": [
+    0.0008984725964182871,
+    0.00097228974209429
+   ],
+   "nullMean": [
+    0.0003593890387492138,
+    0.00038919973112570003
+   ],
+   "nullSd": [
+    0.0003543623709405275,
+    0.000502403788595524
+   ],
+   "z": [
+    1.5212776577780251,
+    1.1606003461849388
+   ],
+   "pairs": [
+    2226,
+    2057
+   ],
+   "events": [
+    2,
+    2
+   ],
+   "vRecountOk": true,
+   "range": null,
+   "rangeOk": null,
+   "excessPositive": true
+  },
+  {
+   "id": "sfx-ud-jpn",
+   "cls": "ud-absent",
+   "tokens": 146279,
+   "units": 7050,
+   "docs": 282,
+   "draws": 10,
+   "status": "ABSENT",
+   "predicted": "ABSENT",
+   "sibling": "match",
+   "v": [
+    0.017597087378817378,
+    0.018260869564983295
+   ],
+   "nullMean": [
+    0.016814939543473885,
+    0.01904168084029152
+   ],
+   "nullSd": [
+    0.0014255521297833482,
+    0.002150480039680862
+   ],
+   "z": [
+    0.5486630892006464,
+    -0.36308696704950505
+   ],
+   "pairs": [
+    3296,
+    3450
+   ],
+   "events": [
+    58,
+    63
+   ],
+   "vRecountOk": true,
+   "range": null,
+   "rangeOk": null,
+   "excessPositive": false
+  },
+  {
+   "id": "sfx-ud-kor",
+   "cls": "ud-absent",
+   "tokens": 49012,
+   "units": 4400,
+   "docs": 176,
+   "draws": 10,
+   "status": "ABSENT",
+   "predicted": "ABSENT",
+   "sibling": "match",
+   "v": [
+    0,
+    0.0004344048657003441
+   ],
+   "nullMean": [
+    0.0002606882168038283,
+    0.00017372422116750385
+   ],
+   "nullSd": [
+    0.0003686688118405797,
+    0.00022427701395160603
+   ],
+   "z": [
+    -0.7071067810220829,
+    1.1623154773635844
+   ],
+   "pairs": [
+    1918,
+    2302
+   ],
+   "events": [
+    0,
+    1
+   ],
+   "vRecountOk": true,
+   "range": null,
+   "rangeOk": null,
+   "excessPositive": false
+  }
+ ],
+ "H": {
+  "H1": {
+   "rule": "code: PRESENT+ in 4 of 4, v in [0.010, 0.140] in both halves",
+   "n": 4,
+   "presentPlus": 4,
+   "rangesOk": true,
+   "holds": true
+  },
+  "H2": {
+   "rule": "prose (5 confirmatory): >= 4 PRESENT+, none PRESENT- or ABSENT, v in [0.0008, 0.030] where PRESENT+",
+   "n": 5,
+   "presentPlus": 3,
+   "contradicted": [],
+   "rangesOk": true,
+   "holds": false
+  },
+  "H3": {
+   "rule": "UD present-side (6): >= 4 PRESENT+, none PRESENT- or ABSENT, per-stem v range where PRESENT+",
+   "n": 6,
+   "presentPlus": 6,
+   "contradicted": [],
+   "rangesOk": true,
+   "holds": true
+  },
+  "H4": {
+   "rule": "UD absent-side (4): none PRESENT+ or PRESENT-, >= 2 ABSENT",
+   "n": 4,
+   "absent": 3,
+   "presentPlus": [
+    "sfx-ud-fas"
+   ],
+   "presentMinus": [],
+   "holds": false
+  },
+  "H5": {
+   "rule": "no PRESENT- among all 23",
+   "presentMinus": [],
+   "holds": true
+  },
+  "H6": {
+   "rule": "median v: code [0.020, 0.070]; prose [0.002, 0.012]; UD present-side [0.003, 0.025]",
+   "medians": {
+    "code": {
+     "median": 0.02931714964142884,
+     "range": [
+      0.02,
+      0.07
+     ],
+     "ok": true
+    },
+    "prose": {
+     "median": 0.004138654562211741,
+     "range": [
+      0.002,
+      0.012
+     ],
+     "ok": true
+    },
+    "udPresent": {
+     "median": 0.007944913690607791,
+     "range": [
+      0.003,
+      0.025
+     ],
+     "ok": true
+    }
+   },
+   "holds": true
+  }
+ },
+ "E": {
+  "E1_children": {
+   "rule": "PRESENT+ in at most 1 of 2, never PRESENT-, v > 0 both halves",
+   "presentPlus": 1,
+   "presentMinus": 0,
+   "vPositive": true,
+   "holds": true
+  },
+  "E2_smallProse": {
+   "rule": "not PRESENT-",
+   "statuses": [
+    "sfx-en-hesse-siddhartha: PRESENT+",
+    "sfx-en-warren-forces: PRESENT+"
+   ],
+   "holds": true
+  }
+ },
+ "presentSideCount": {
+  "n": 15,
+  "presentPlus": 13
+ },
+ "verdict": "PARTIAL",
+ "heldRules": [
+  "H1",
+  "H3",
+  "H5",
+  "H6"
+ ],
+ "failedRules": [
+  "H2",
+  "H4"
+ ]
+}

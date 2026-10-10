@@ -1,0 +1,13 @@
+[1.3s] loaded 8 days x 3 modes
+[2.1s] matched pairs built (Q=4, Q=8; real / wordshuf / msgshuf)
+[2.1s] PRIMARY_EN_ALL: M4 n=391 auc=0.7059 ci=0.6803,0.7315 holds=true
+[2.1s] EN_INIT: M4 n=251 auc=0.6653 ci=0.6375,0.6972 holds=true
+[2.2s] EN_NONINIT: M4 n=140 auc=0.7786 ci=0.7321,0.8214 holds=true
+[2.2s] EN_ubuntu: M4 n=378 auc=0.7063 ci=0.6799,0.7328 holds=true
+[2.2s] EN_kubuntu: VOID n=undefined auc=undefined ci=undefined holds=false
+[2.2s] EN_2004-07: M4 n=93 auc=0.7204 ci=0.672,0.7742 holds=false
+[2.2s] EN_2008-11: M4 n=244 auc=0.707 ci=0.6762,0.7377 holds=true
+[2.2s] EN_2012-15: VOID n=undefined auc=undefined ci=undefined holds=false
+[2.3s] EN_big: M4 n=324 auc=0.7114 ci=0.6852,0.7392 holds=true
+[2.3s] EN_small: M4 n=67 auc=0.6791 ci=0.6194,0.7388 holds=true
+[2.4s] natural prevalence done

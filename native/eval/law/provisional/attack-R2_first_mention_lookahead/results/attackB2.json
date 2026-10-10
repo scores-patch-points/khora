@@ -1,0 +1,397 @@
+{
+ "headerSha256": "fb3316ff8c9ee43902d21ee949f4b5882683016dcc89f64ac9b777bec9bb6187",
+ "code": {
+  "common.mjs": "5f2b3417bddb872c",
+  "stats.mjs": "545acdde873ebce2",
+  "hdr.mjs": "57412b6ec9d9c475"
+ },
+ "B5": {
+  "CF": {
+   "g1": {
+    "n": 603,
+    "aucMean": 0.6653,
+    "ciDay": [
+     0.6348,
+     0.6872
+    ],
+    "ctlOk": true,
+    "initAuc": 0.6267,
+    "noninitAuc": 0.7572
+   },
+   "g2": {
+    "n": 527,
+    "aucMean": 0.6831,
+    "ciDay": [
+     0.6483,
+     0.7027
+    ],
+    "ctlOk": true,
+    "initAuc": 0.6386,
+    "noninitAuc": 0.7908
+   },
+   "g3": {
+    "n": 485,
+    "aucMean": 0.6794,
+    "ciDay": [
+     0.6505,
+     0.6981
+    ],
+    "ctlOk": true,
+    "initAuc": 0.6489,
+    "noninitAuc": 0.7558
+   },
+   "g3c": {
+    "n": 452,
+    "aucMean": 0.6999,
+    "ciDay": [
+     0.6585,
+     0.722
+    ],
+    "ctlOk": true,
+    "initAuc": 0.661,
+    "noninitAuc": 0.7897
+   },
+   "g3t": {
+    "n": 485,
+    "aucMean": 0.678,
+    "ciDay": [
+     0.6535,
+     0.6942
+    ],
+    "ctlOk": true,
+    "initAuc": 0.6433,
+    "noninitAuc": 0.7636
+   },
+   "g5": {
+    "n": 281,
+    "aucMean": 0.7278,
+    "ciDay": [
+     0.6861,
+     0.7519
+    ],
+    "ctlOk": true,
+    "initAuc": 0.6863,
+    "noninitAuc": 0.8312
+   },
+   "g10": {
+    "n": 110,
+    "aucMean": 0.7848,
+    "ciDay": [
+     0.7193,
+     0.8425
+    ],
+    "ctlOk": true,
+    "initAuc": 0.7778,
+    "noninitAuc": 0.8103
+   },
+   "robust": {
+    "rangeMin3": 0.1068,
+    "allMin3Ge062": true
+   }
+  },
+  "ALL_EN": {
+   "g1": {
+    "n": 1889,
+    "aucMean": 0.6726,
+    "ciDay": [
+     0.6581,
+     0.6826
+    ],
+    "ctlOk": true,
+    "initAuc": 0.6318,
+    "noninitAuc": 0.7536
+   },
+   "g2": {
+    "n": 1628,
+    "aucMean": 0.6907,
+    "ciDay": [
+     0.6762,
+     0.7011
+    ],
+    "ctlOk": true,
+    "initAuc": 0.6468,
+    "noninitAuc": 0.785
+   },
+   "g3": {
+    "n": 1467,
+    "aucMean": 0.6854,
+    "ciDay": [
+     0.6715,
+     0.6945
+    ],
+    "ctlOk": true,
+    "initAuc": 0.6507,
+    "noninitAuc": 0.7604
+   },
+   "g3c": {
+    "n": 1340,
+    "aucMean": 0.7083,
+    "ciDay": [
+     0.6917,
+     0.7169
+    ],
+    "ctlOk": true,
+    "initAuc": 0.6669,
+    "noninitAuc": 0.7894
+   },
+   "g3t": {
+    "n": 1467,
+    "aucMean": 0.6846,
+    "ciDay": [
+     0.674,
+     0.6935
+    ],
+    "ctlOk": true,
+    "initAuc": 0.6492,
+    "noninitAuc": 0.7648
+   },
+   "g5": {
+    "n": 828,
+    "aucMean": 0.755,
+    "ciDay": [
+     0.7326,
+     0.7689
+    ],
+    "ctlOk": true,
+    "initAuc": 0.7118,
+    "noninitAuc": 0.8316
+   },
+   "g10": {
+    "n": 351,
+    "aucMean": 0.8124,
+    "ciDay": [
+     0.7713,
+     0.8448
+    ],
+    "ctlOk": true,
+    "initAuc": 0.787,
+    "noninitAuc": 0.8593
+   },
+   "robust": {
+    "rangeMin3": 0.1278,
+    "allMin3Ge062": true
+   }
+  }
+ },
+ "activity": {
+  "CF": {
+   "1-2": {
+    "n": 184,
+    "aucMean": 0.5842,
+    "ciDay": [
+     0.5369,
+     0.6151
+    ],
+    "tpr2": 0.0543
+   },
+   "3-4": {
+    "n": 185,
+    "aucMean": 0.6414,
+    "ciDay": [
+     0.6011,
+     0.6952
+    ],
+    "tpr2": 0.1405
+   },
+   "5-9": {
+    "n": 177,
+    "aucMean": 0.693,
+    "ciDay": [
+     0.6497,
+     0.7234
+    ],
+    "tpr2": 0.2655
+   },
+   "10-29": {
+    "n": 94,
+    "aucMean": 0.7589,
+    "ciDay": [
+     0.6908,
+     0.8207
+    ],
+    "tpr2": 0.5426
+   },
+   "30+": {
+    "n": 16,
+    "aucMean": 0.9375,
+    "ciDay": [
+     0.8333,
+     1
+    ],
+    "tpr2": 0.875
+   }
+  },
+  "ALL_EN": {
+   "1-2": {
+    "n": 654,
+    "aucMean": 0.5953,
+    "ciDay": [
+     0.5726,
+     0.6142
+    ],
+    "tpr2": 0.0612
+   },
+   "3-4": {
+    "n": 554,
+    "aucMean": 0.6312,
+    "ciDay": [
+     0.6122,
+     0.6518
+    ],
+    "tpr2": 0.1264
+   },
+   "5-9": {
+    "n": 493,
+    "aucMean": 0.7089,
+    "ciDay": [
+     0.6829,
+     0.7367
+    ],
+    "tpr2": 0.3205
+   },
+   "10-29": {
+    "n": 294,
+    "aucMean": 0.7993,
+    "ciDay": [
+     0.7623,
+     0.832
+    ],
+    "tpr2": 0.5816
+   },
+   "30+": {
+    "n": 57,
+    "aucMean": 0.8889,
+    "ciDay": [
+     0.7929,
+     0.9508
+    ],
+    "tpr2": 0.8421
+   }
+  }
+ },
+ "B6": {
+  "matcherShift": {
+   "enDayLocal": 0.6846,
+   "enPooled": 0.7692,
+   "nLocal": 1467,
+   "nPooled": 4588,
+   "shift": 0.0846
+  },
+  "EN": {
+   "days": 80,
+   "n": 4588,
+   "aucMean": 0.7695,
+   "ciDay": [
+    0.7558,
+    0.779
+   ],
+   "ciPair": [
+    0.7607,
+    0.7763
+   ],
+   "ctl": {
+    "i": 0.4985,
+    "L": 0.4967,
+    "cl": 0.5009,
+    "lc": 0.502
+   },
+   "ctlOk": true,
+   "shiftCorrected": 0.6849,
+   "holdsRaw": true,
+   "holdsCorrected": true
+  },
+  "ubuntu": {
+   "days": 23,
+   "n": 3153,
+   "aucMean": 0.7507,
+   "ciDay": [
+    0.742,
+    0.7611
+   ],
+   "ciPair": [
+    0.742,
+    0.761
+   ],
+   "ctl": {
+    "i": 0.5024,
+    "L": 0.5008,
+    "cl": 0.5,
+    "lc": 0.4995
+   },
+   "ctlOk": true,
+   "shiftCorrected": 0.6661,
+   "holdsRaw": true,
+   "holdsCorrected": true
+  },
+  "de": {
+   "days": 11,
+   "n": 83,
+   "aucMean": 0.6747,
+   "ciDay": [
+    0.6048,
+    0.715
+   ],
+   "ciPair": [
+    0.6205,
+    0.7229
+   ],
+   "ctl": {
+    "i": 0.506,
+    "L": 0.5301,
+    "cl": 0.4759,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "shiftCorrected": 0.5901,
+   "holdsRaw": true,
+   "holdsCorrected": false
+  },
+  "es": {
+   "days": 10,
+   "n": 83,
+   "aucMean": 0.6847,
+   "ciDay": [
+    0.6169,
+    0.711
+   ],
+   "ciPair": [
+    0.6145,
+    0.7289
+   ],
+   "ctl": {
+    "i": 0.512,
+    "L": 0.4639,
+    "cl": 0.494,
+    "lc": 0.506
+   },
+   "ctlOk": true,
+   "shiftCorrected": 0.6001,
+   "holdsRaw": true,
+   "holdsCorrected": false
+  },
+  "it": {
+   "days": 11,
+   "n": 93,
+   "aucMean": 0.776,
+   "ciDay": [
+    0.7029,
+    0.8286
+   ],
+   "ciPair": [
+    0.7151,
+    0.828
+   ],
+   "ctl": {
+    "i": 0.5108,
+    "L": 0.4946,
+    "cl": 0.4839,
+    "lc": 0.4946
+   },
+   "ctlOk": true,
+   "shiftCorrected": 0.6914,
+   "holdsRaw": true,
+   "holdsCorrected": true
+  }
+ },
+ "seconds": 9.355
+}

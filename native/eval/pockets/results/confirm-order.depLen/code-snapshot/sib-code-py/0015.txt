@@ -1,0 +1,93 @@
+#!/usr/bin/env python3
+"""End-to-end test of the ten-tab scraper against live cases.
+
+Asserts the things that were wrong in earlier attempts:
+  * every tab reports switched=True (proven via L_TAB_n_ACT)
+  * the tabs do NOT all return the same grid (the silent-duplicate failure)
+  * a case known to have garnishment produces a garnishment signal
+"""
+import sys, json, time, asyncio, logging
+sys.path.insert(0, '/mnt/intelechia/caselink')
+import caselink_accounts as accounts_mod
+import case_link_scraper_DER_5 as scraper
+import deep_scrape
+from playwright.async_api import async_playwright
+
+logging.getLogger("deep").setLevel(logging.INFO)
+DOCKETS = sys.argv[1].split(',') if len(sys.argv) > 1 else ['26GT877']
+ROLE    = sys.argv[2] if len(sys.argv) > 2 else 'primary'
+
+async def main():
+    accts = accounts_mod.load_accounts(); accounts_mod.install_redaction(accts)
+    acct, lease = accounts_mod.acquire_account(ROLE, accts)
+    if not acct:
+        print('NO ACCOUNT'); return 1
+    scraper.USERNAME=acct['user']; scraper.PASSWORD=acct['pass']; scraper.ALIAS=acct['alias']
+    print(f'  worker {acct["alias"]}')
+    fails = []
+    try:
+        async with async_playwright() as pw:
+            b = await pw.chromium.launch(headless=True)
+            page = await (await b.new_context(viewport={'width':1400,'height':1000})).new_page()
+            page.set_default_timeout(60000)
+            for d in DOCKETS:
+                print(f"\n################ {d} ################")
+                t0 = time.time()
+                if not await scraper.do_login(page):
+                    print('  LOGIN FAILED'); fails.append(f'{d}:login'); continue
+                opened = False
+                for attempt in (1, 2, 3):
+                    await scraper.search_case(page, d)
+                    if await scraper.click_into_case(page, d):
+                        opened = True
+                        break
+                    print(f'  open attempt {attempt} failed; resetting')
+                    await scraper.hard_reset(page)
+                if not opened:
+                    print('  COULD NOT OPEN'); fails.append(f'{d}:open'); continue
+                await page.wait_for_timeout(1200)
+                obs = await deep_scrape.scrape_all_tabs(page, d, acct['alias'])
+                dt = time.time() - t0
+
+                sw = [k for k, v in obs.items() if v.get('switched')]
+                nosw = [k for k, v in obs.items() if not v.get('switched')]
+                # Empty tabs SHOULD collide -- a case with no executions, no
+                # witnesses and no bankruptcy legitimately has three identical
+                # empty grids. Only duplicate NON-EMPTY grids indicate the
+                # silent-duplicate bug.
+                digs = {}
+                for k, v in obs.items():
+                    if v.get('digest') and (v.get('rows') or []):
+                        digs.setdefault(v['digest'], []).append(k)
+                dupes = {d2: ks for d2, ks in digs.items() if len(ks) > 1}
+                empties = sorted(k for k, v in obs.items()
+                                 if v.get('switched') and not (v.get('rows') or []))
+
+                print(f"\n  --- {d}: {dt:.1f}s for 10 tabs ---")
+                print(f"    switched  : {len(sw)}/10   {sorted(sw)}")
+                if nosw: print(f"    NOT switched: {sorted(nosw)}")
+                print(f"    distinct non-empty grids: {len(digs)}")
+                print(f"    legitimately empty tabs: {empties}")
+                if dupes:
+                    print(f"    IDENTICAL GRIDS (the silent-duplicate bug): {list(dupes.values())}")
+                for k in deep_scrape.TABS.values():
+                    v = obs.get(k, {})
+                    n = len(v.get('rows') or [])
+                    if n:
+                        print(f"      {k:<14} {n:3d} rows  cols={v.get('columns')}")
+                        print(f"        e.g. {json.dumps(v['rows'][0])[:150]}")
+                sig = deep_scrape.garnishment_signal(obs)
+                print(f"    garnishment={sig['garnishment']} execution={sig['execution']} "
+                      f"amounts={sig['amounts'][:5]}")
+                for e in sig['events'][:3]:
+                    print(f"      [{e['tab']}] {e['text'][:110]}")
+
+                if len(sw) < 10: fails.append(f'{d}: only {len(sw)}/10 switched')
+                if dupes:        fails.append(f'{d}: identical grids {list(dupes.values())}')
+            await b.close()
+    finally:
+        lease.release()
+    print("\n==== RESULT:", "ALL PASS" if not fails else f"FAILURES: {fails}", "====")
+    return 1 if fails else 0
+
+sys.exit(asyncio.run(main()))

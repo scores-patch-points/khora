@@ -1,0 +1,1 @@
+2ba3e8011e188a5e1241c0a2956bc7ced36deda4e1efb7296786738d8ed05436  header of confirm.mjs: lines 1-55 = bytes 0 .. end of the line '// ===== PREREG-END' (inclusive, LF); recompute: head -n 55 confirm.mjs | shasum -a 256; frozen 2026-10-07T03:27:02 local time, before any sibling para statistic was computed

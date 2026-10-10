@@ -1,0 +1,390 @@
+{
+ "slice": {
+  "docsRequested": 40,
+  "docsRead": 40,
+  "charsCap": 4000,
+  "candidates": [
+   "eng",
+   "spa",
+   "fra",
+   "deu",
+   "ita",
+   "por"
+  ],
+  "perCat": 3
+ },
+ "totals": {
+  "usable": 39,
+  "usableShare": 0.975,
+  "meanCast": 32.4,
+  "meanRelations": 24.2,
+  "errors": 0
+ },
+ "K3_earAgreesOnEnglish": {
+  "englishDocs": 21,
+  "agreed": 20
+ },
+ "verdict": "PASSING",
+ "rows": [
+  {
+   "address": "01-literature-books/gitenberg/pg236_The-Jungle-Book.txt",
+   "cast": 29,
+   "relations": 26,
+   "signal": 26,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "01-literature-books/gitenberg/pg2554_Crime-and-Punishment.txt",
+   "cast": 19,
+   "relations": 20,
+   "signal": 20,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "01-literature-books/gitenberg/pg219_Heart-of-Darkness.txt",
+   "cast": 22,
+   "relations": 25,
+   "signal": 25,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "02-encyclopedic/wikipedia/Thermodynamics.txt",
+   "cast": 28,
+   "relations": 34,
+   "signal": 34,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "02-encyclopedic/wikipedia/General_relativity.txt",
+   "cast": 26,
+   "relations": 27,
+   "signal": 27,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "02-encyclopedic/wikipedia/Judaism.txt",
+   "cast": 30,
+   "relations": 23,
+   "signal": 23,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "05-academic-papers/ntrs-white-papers/20220008600_discontinuous-galerkin-and-related-methods-for-ode.txt",
+   "cast": 40,
+   "relations": 19,
+   "signal": 19,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "05-academic-papers/ntrs-white-papers/19820025472_computational-aerodynamics-and-design.txt",
+   "cast": 27,
+   "relations": 13,
+   "signal": 13,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "05-academic-papers/ntrs-white-papers/20220008600_discontinuous-galerkin-and-related-methods-for-ode.cv.md",
+   "cast": 33,
+   "relations": 32,
+   "signal": 32,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 1
+  },
+  {
+   "address": "06-government-legal/world-factbook/africa_ke.txt",
+   "cast": 43,
+   "relations": 30,
+   "signal": 30,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "06-government-legal/world-factbook/europe_ei.txt",
+   "cast": 35,
+   "relations": 24,
+   "signal": 24,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "06-government-legal/world-legislation/sk/ZZ-1993-2.md",
+   "cast": 22,
+   "relations": 26,
+   "signal": 26,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "07-images-media/met-museum-catalog.txt",
+   "cast": 31,
+   "relations": 16,
+   "signal": 16,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "07-images-media/nasa-catalog.txt",
+   "cast": 45,
+   "relations": 21,
+   "signal": 21,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 1
+  },
+  {
+   "address": "08-news-current/eu-commission/Wikinews_Shorts__November_13__2008.txt",
+   "cast": 56,
+   "relations": 13,
+   "signal": 13,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 1
+  },
+  {
+   "address": "09-source-code/ziglang_zig/doc_langref.html.in.txt",
+   "cast": 33,
+   "relations": 16,
+   "signal": 16,
+   "language": "deu",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "09-source-code/golang_go/doc_go_mem.html.txt",
+   "cast": 34,
+   "relations": 34,
+   "signal": 34,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 1
+  },
+  {
+   "address": "09-source-code/pallets_flask/docs_quickstart.rst.txt",
+   "cast": 39,
+   "relations": 39,
+   "signal": 39,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 1
+  },
+  {
+   "address": "10-audio-music/global-music-catalog.txt",
+   "cast": 25,
+   "relations": 9,
+   "signal": 9,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "10-audio-music/folk-world-catalog.txt",
+   "cast": 31,
+   "relations": 40,
+   "signal": 40,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "10-audio-music/classical-music-catalog.txt",
+   "cast": 19,
+   "relations": 30,
+   "signal": 30,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "11-multi-language/greek-originals/aristotle-politics.txt",
+   "cast": 11,
+   "relations": 9,
+   "signal": 9,
+   "language": "cat+ell",
+   "languageSource": "by-ear-mixed",
+   "explored": null
+  },
+  {
+   "address": "11-multi-language/dialects-pidgins-creoles/creoleval/mctest/CreoleTranslations/mc160.dev.kreyol2_localized.txt",
+   "cast": 50,
+   "relations": 81,
+   "signal": 81,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "11-multi-language/dialects-pidgins-creoles/coraal/dcb/DCB_se2_ag3_f_02.txt",
+   "cast": 37,
+   "relations": 44,
+   "signal": 44,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 1
+  },
+  {
+   "address": "14-holy-texts/suttacentral/mn131_en.txt",
+   "cast": 28,
+   "relations": 66,
+   "signal": 64,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "14-holy-texts/tanzil-quran/parallel/surah_051_parallel.txt",
+   "cast": 5,
+   "relations": 17,
+   "signal": 17,
+   "language": "cat+arb+eng",
+   "languageSource": "by-ear-mixed",
+   "explored": null
+  },
+  {
+   "address": "14-holy-texts/pali-suttas/mn84.txt",
+   "cast": 50,
+   "relations": 32,
+   "signal": 32,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "15-western-canon/first-folio/henry-iv-part-1-german-wieland.txt",
+   "cast": 34,
+   "relations": 11,
+   "signal": 11,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "15-western-canon/first-folio/henry-iv-part-1-french-guizot.txt",
+   "cast": 57,
+   "relations": 11,
+   "signal": 11,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 1
+  },
+  {
+   "address": "15-western-canon/first-folio/henry-iv-part-1-modern.txt",
+   "cast": 40,
+   "relations": 14,
+   "signal": 14,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 1
+  },
+  {
+   "address": "16-wordplay/guardian-cryptics/guardian-cryptic-clues-1999-2020.txt",
+   "cast": 37,
+   "relations": 24,
+   "signal": 24,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 1
+  },
+  {
+   "address": "18-childrens-books/global-digital-library/es-ni/7282_El-monstruo-de-la-basura.txt",
+   "cast": 65,
+   "relations": 27,
+   "signal": 27,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 1
+  },
+  {
+   "address": "18-childrens-books/global-digital-library/en/273_I-Love-My-Mom.txt",
+   "cast": 5,
+   "relations": 23,
+   "signal": 23,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "18-childrens-books/global-digital-library/es-ni/7328_Un-hermoso-dia.txt",
+   "cast": 15,
+   "relations": 4,
+   "signal": 4,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "19-organic-community/ubuntu-irc/kubuntu/2013-07-15.txt",
+   "cast": 24,
+   "relations": 35,
+   "signal": 35,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 1
+  },
+  {
+   "address": "19-organic-community/nus-sms/zh/Tao-Chen-2008-003.txt",
+   "cast": 16,
+   "relations": 0,
+   "signal": 0,
+   "language": "cat+cmn",
+   "languageSource": "by-ear-mixed",
+   "explored": null
+  },
+  {
+   "address": "19-organic-community/ubuntu-irc/ubuntu-it/2015-03-15.txt",
+   "cast": 34,
+   "relations": 19,
+   "signal": 19,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 1
+  },
+  {
+   "address": "20-first-person-voices/slave-narratives-wpa/wpa-vol-ii-arkansas-narratives-part-1-11255.txt",
+   "cast": 51,
+   "relations": 17,
+   "signal": 17,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "20-first-person-voices/slave-narratives-wpa/wpa-vol-xiv-south-carolina-narratives-part-1-18912.txt",
+   "cast": 33,
+   "relations": 5,
+   "signal": 5,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "20-first-person-voices/slave-narratives-wpa/wpa-vol-xiv-south-carolina-narratives-part-4-28170.txt",
+   "cast": 36,
+   "relations": 11,
+   "signal": 11,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 1
+  }
+ ]
+}

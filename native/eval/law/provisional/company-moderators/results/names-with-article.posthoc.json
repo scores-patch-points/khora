@@ -1,0 +1,46 @@
+{
+ "headerSha256": "609ef84562d481b936d9c8a469b0dbaef9b5f1aec684f4e2bcd0fb865620a1c8",
+ "n": 22,
+ "rho": {
+  "S1_FIRST": {
+   "withEll": -0.033,
+   "withoutEll": 0.112
+  },
+  "S2_FIRST": {
+   "withEll": -0.037,
+   "withoutEll": 0.108
+  },
+  "S3_FIRST": {
+   "withEll": 0.304,
+   "withoutEll": 0.5
+  },
+  "probeLEFT_FIRST": {
+   "withEll": 0.43,
+   "withoutEll": 0.498
+  }
+ },
+ "detShare": {
+  "eng": 0.0964,
+  "spa": 0.2327,
+  "rus": 0,
+  "cmn": 0.0028,
+  "cmn-hans": 0.0028,
+  "heb": 0.017,
+  "fas": 0.0009,
+  "jpn": 0.0021,
+  "fra": 0.169,
+  "deu": 0.1743,
+  "ita": 0.1882,
+  "por": 0.2899,
+  "nld": 0.0974,
+  "pol": 0.0091,
+  "ukr": 0.0049,
+  "hin": 0.0007,
+  "vie": 0,
+  "ind": 0.0073,
+  "urd": 0,
+  "tur": 0.0048,
+  "ell": 0.6459,
+  "fin": 0
+ }
+}

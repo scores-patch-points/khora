@@ -1,0 +1,636 @@
+{
+ "stat": "para.formulaCov",
+ "headerSha256": "3da1df40e9bf8f53a4d72551e22e9df2913caa9505ad8b44f329cff5c8346e20",
+ "protocolSha256": "3b7363c5b01642c06ad5df8d059e5909f237516481e0ed8af3379aa39c4330fc",
+ "verdict": "REPLICATES",
+ "nSiblings": 18,
+ "nDetermined": 16,
+ "nPresentPlus": 16,
+ "undefinedSiblings": [
+  "sf-en-chopin:ABOVE-NULL",
+  "sf-ud-pol:ABOVE-NULL"
+ ],
+ "R1": {
+  "allDPresent": true,
+  "nD": 16,
+  "nDge6": true,
+  "strongAllD": true,
+  "pass": true
+ },
+ "R2": {
+  "negativeCells": [],
+  "pass": true
+ },
+ "R3": {
+  "medianVcode": 0.28291785016108406,
+  "medianVweakProse": 0.019884278736299166,
+  "ratio": 14.228217875693506,
+  "medianVtreebank": 0.056170770167454975,
+  "ratioCodeOverTreebank": 5.0367450778697895,
+  "medianVdocs": 0.14825222700119411,
+  "pass": true
+ },
+ "R4": {
+  "inRange": 17,
+  "finite": 18,
+  "share": 0.9444444444444444,
+  "outOfRange": [
+   {
+    "id": "sf-ud-cat",
+    "v": 0.13014540753511028,
+    "range": [
+     0.003,
+     0.12
+    ]
+   }
+  ],
+  "pass": true
+ },
+ "adversary": {
+  "present": true,
+  "byTransform": {
+   "A1": {
+    "strongPresent": 5,
+    "strongOf": 5,
+    "allStatuses": {
+     "sf-js-misc": "PRESENT+",
+     "sf-c-sdk": "PRESENT+",
+     "sf-py-myenv": "PRESENT+",
+     "sf-py-nbvenv": "PRESENT+",
+     "sf-md-docs": "PRESENT+",
+     "sf-en-poe2": "PRESENT+",
+     "sf-en-mouret": "PRESENT+",
+     "sf-en-waikna": "PRESENT+",
+     "sf-en-chopin": "PRESENT+",
+     "sf-en-shakespeare": "PRESENT+",
+     "sf-ud-eng": "UNDEFINED/ABOVE-NULL",
+     "sf-ud-deu": "UNDEFINED/ABOVE-NULL",
+     "sf-ud-fra": "PRESENT+",
+     "sf-ud-spa": "PRESENT+",
+     "sf-ud-por": "PRESENT+",
+     "sf-ud-cat": "PRESENT+",
+     "sf-ud-pol": "UNDEFINED/ABOVE-NULL",
+     "sf-ud-nob": "UNDEFINED/ABOVE-NULL"
+    },
+    "vRetained": {
+     "sf-js-misc": 0.997,
+     "sf-c-sdk": 0.86,
+     "sf-py-myenv": 1.014,
+     "sf-py-nbvenv": 0.997,
+     "sf-md-docs": 0.827
+    }
+   },
+   "A2": {
+    "strongPresent": 5,
+    "strongOf": 5,
+    "allStatuses": {
+     "sf-js-misc": "PRESENT+",
+     "sf-c-sdk": "PRESENT+",
+     "sf-py-myenv": "PRESENT+",
+     "sf-py-nbvenv": "PRESENT+",
+     "sf-md-docs": "PRESENT+",
+     "sf-en-poe2": "PRESENT+",
+     "sf-en-mouret": "PRESENT+",
+     "sf-en-waikna": "PRESENT+",
+     "sf-en-chopin": "UNDEFINED/ABOVE-NULL",
+     "sf-en-shakespeare": "PRESENT+",
+     "sf-ud-eng": "PRESENT+",
+     "sf-ud-deu": "PRESENT+",
+     "sf-ud-fra": "PRESENT+",
+     "sf-ud-spa": "PRESENT+",
+     "sf-ud-por": "PRESENT+",
+     "sf-ud-cat": "PRESENT+",
+     "sf-ud-pol": "UNDEFINED/ABOVE-NULL",
+     "sf-ud-nob": "PRESENT+"
+    },
+    "vRetained": {
+     "sf-js-misc": 0.956,
+     "sf-c-sdk": 0.771,
+     "sf-py-myenv": 0.963,
+     "sf-py-nbvenv": 0.966,
+     "sf-md-docs": 0.93
+    }
+   },
+   "A3": {
+    "strongPresent": 5,
+    "strongOf": 5,
+    "allStatuses": {
+     "sf-js-misc": "PRESENT+",
+     "sf-c-sdk": "PRESENT+",
+     "sf-py-myenv": "PRESENT+",
+     "sf-py-nbvenv": "PRESENT+",
+     "sf-md-docs": "PRESENT+",
+     "sf-en-poe2": "PRESENT+",
+     "sf-en-mouret": "PRESENT+",
+     "sf-en-waikna": "PRESENT+",
+     "sf-en-chopin": "UNDEFINED/ABOVE-NULL",
+     "sf-en-shakespeare": "PRESENT+",
+     "sf-ud-eng": "PRESENT+",
+     "sf-ud-deu": "UNDEFINED/ABOVE-NULL",
+     "sf-ud-fra": "PRESENT+",
+     "sf-ud-spa": "PRESENT+",
+     "sf-ud-por": "PRESENT+",
+     "sf-ud-cat": "PRESENT+",
+     "sf-ud-pol": "UNDEFINED/ABOVE-NULL",
+     "sf-ud-nob": "UNDEFINED/ABOVE-NULL"
+    },
+    "vRetained": {
+     "sf-js-misc": 0.737,
+     "sf-c-sdk": 0.451,
+     "sf-py-myenv": 0.379,
+     "sf-py-nbvenv": 0.489,
+     "sf-md-docs": 0.621
+    }
+   },
+   "A4": {
+    "strongPresent": 5,
+    "strongOf": 5,
+    "allStatuses": {
+     "sf-js-misc": "PRESENT+",
+     "sf-c-sdk": "PRESENT+",
+     "sf-py-myenv": "PRESENT+",
+     "sf-py-nbvenv": "PRESENT+",
+     "sf-md-docs": "PRESENT+",
+     "sf-en-poe2": "PRESENT+",
+     "sf-en-mouret": "UNDEFINED/ABOVE-NULL",
+     "sf-en-waikna": "PRESENT+",
+     "sf-en-chopin": "UNDEFINED/ABOVE-NULL",
+     "sf-en-shakespeare": "PRESENT+",
+     "sf-ud-eng": "UNDEFINED/ABOVE-NULL",
+     "sf-ud-deu": "UNDEFINED/ABOVE-NULL",
+     "sf-ud-fra": "PRESENT+",
+     "sf-ud-spa": "PRESENT+",
+     "sf-ud-por": "PRESENT+",
+     "sf-ud-cat": "PRESENT+",
+     "sf-ud-pol": "UNDEFINED/ABOVE-NULL",
+     "sf-ud-nob": "UNDEFINED/ABOVE-NULL"
+    },
+    "vRetained": {
+     "sf-js-misc": 0.905,
+     "sf-c-sdk": 0.936,
+     "sf-py-myenv": 0.944,
+     "sf-py-nbvenv": 0.91,
+     "sf-md-docs": 0.778
+    }
+   }
+  },
+  "downgrade": false
+ },
+ "undefinedShareByClass": {
+  "code": {
+   "siblings": 4,
+   "cells": 8,
+   "undefinedCells": 0,
+   "aboveNullCells": 0
+  },
+  "docs": {
+   "siblings": 1,
+   "cells": 2,
+   "undefinedCells": 0,
+   "aboveNullCells": 0
+  },
+  "books": {
+   "siblings": 4,
+   "cells": 8,
+   "undefinedCells": 1,
+   "aboveNullCells": 1
+  },
+  "drama": {
+   "siblings": 1,
+   "cells": 2,
+   "undefinedCells": 0,
+   "aboveNullCells": 0
+  },
+  "treebank": {
+   "siblings": 8,
+   "cells": 16,
+   "undefinedCells": 2,
+   "aboveNullCells": 2
+  }
+ },
+ "rivalSpearman": {
+  "para.refrain": {
+   "n": 10,
+   "spearmanZ": 0.3212121212121212
+  },
+  "para.dupShare": {
+   "n": 13,
+   "spearmanZ": 0.6318681318681318
+  }
+ },
+ "udLeak": {
+  "sf-ud-eng": {
+   "devTestSentences": 3721,
+   "trainSentencesAlsoInDevTest": 627
+  },
+  "sf-ud-deu": {
+   "devTestSentences": 1764,
+   "trainSentencesAlsoInDevTest": 27
+  },
+  "sf-ud-fra": {
+   "devTestSentences": 1891,
+   "trainSentencesAlsoInDevTest": 9
+  },
+  "sf-ud-spa": {
+   "devTestSentences": 3362,
+   "trainSentencesAlsoInDevTest": 19
+  },
+  "sf-ud-por": {
+   "devTestSentences": 2400,
+   "trainSentencesAlsoInDevTest": 31
+  },
+  "sf-ud-cat": {
+   "devTestSentences": 3546,
+   "trainSentencesAlsoInDevTest": 0
+  },
+  "sf-ud-pol": {
+   "devTestSentences": 4423,
+   "trainSentencesAlsoInDevTest": 71
+  },
+  "sf-ud-nob": {
+   "devTestSentences": 4309,
+   "trainSentencesAlsoInDevTest": 83
+  }
+ },
+ "failures": [],
+ "rows": [
+  {
+   "id": "sf-js-misc",
+   "cls": "code",
+   "tokens": 293206,
+   "status": "PRESENT+",
+   "sub": null,
+   "vDiscover": 0.12049897756332939,
+   "vConfirm": 0.12784019046193862,
+   "v": 0.124169584012634,
+   "zDiscover": 390.9854806502476,
+   "zConfirm": 529.468648319408,
+   "nullMeanDiscover": 0.0027573958635912278,
+   "nullMeanConfirm": 0.002578677181736566,
+   "nullSdDiscover": 0.00030114054747997865,
+   "nullSdConfirm": 0.0002365796609068279,
+   "range": [
+    0.1,
+    0.65
+   ],
+   "inRange": true
+  },
+  {
+   "id": "sf-c-sdk",
+   "cls": "code",
+   "tokens": 292093,
+   "status": "PRESENT+",
+   "sub": null,
+   "vDiscover": 0.42573995467682835,
+   "vConfirm": 0.5015314132760977,
+   "v": 0.46363568397646304,
+   "zDiscover": 396.74885170963336,
+   "zConfirm": 410.57806314889706,
+   "nullMeanDiscover": 0.011583899874585768,
+   "nullMeanConfirm": 0.047177824106256594,
+   "nullSdDiscover": 0.001043874614929822,
+   "nullSdConfirm": 0.0011066192520983976,
+   "range": [
+    0.1,
+    0.65
+   ],
+   "inRange": true
+  },
+  {
+   "id": "sf-py-myenv",
+   "cls": "code",
+   "tokens": 292330,
+   "status": "PRESENT+",
+   "sub": null,
+   "vDiscover": 0.3391785181902378,
+   "vConfirm": 0.31651606055675074,
+   "v": 0.3278472893734943,
+   "zDiscover": 377.52136675615117,
+   "zConfirm": 341.3163423783819,
+   "nullMeanDiscover": 0.012356472341980406,
+   "nullMeanConfirm": 0.014737532614981319,
+   "nullSdDiscover": 0.0008657047643593601,
+   "nullSdConfirm": 0.0008841607930018745,
+   "range": [
+    0.1,
+    0.65
+   ],
+   "inRange": true
+  },
+  {
+   "id": "sf-py-nbvenv",
+   "cls": "code",
+   "tokens": 292516,
+   "status": "PRESENT+",
+   "sub": null,
+   "vDiscover": 0.2417273251558072,
+   "vConfirm": 0.2342494967415405,
+   "v": 0.23798841094867385,
+   "zDiscover": 262.34720998489286,
+   "zConfirm": 240.90554361809822,
+   "nullMeanDiscover": 0.007850273547683173,
+   "nullMeanConfirm": 0.016435134434868815,
+   "nullSdDiscover": 0.0008914790884248082,
+   "nullSdConfirm": 0.000904148402047433,
+   "range": [
+    0.1,
+    0.65
+   ],
+   "inRange": true
+  },
+  {
+   "id": "sf-md-docs",
+   "cls": "docs",
+   "tokens": 296429,
+   "status": "PRESENT+",
+   "sub": null,
+   "vDiscover": 0.09944154355071078,
+   "vConfirm": 0.19706291045167745,
+   "v": 0.14825222700119411,
+   "zDiscover": 877.0584133101262,
+   "zConfirm": 950.194453203314,
+   "nullMeanDiscover": 0.000169104242377216,
+   "nullMeanConfirm": 0.0009213720256411762,
+   "nullSdDiscover": 0.00011318794484128733,
+   "nullSdConfirm": 0.0002064225251629286,
+   "range": [
+    0.04,
+    0.5
+   ],
+   "inRange": true
+  },
+  {
+   "id": "sf-en-poe2",
+   "cls": "books",
+   "tokens": 96647,
+   "status": "PRESENT+",
+   "sub": null,
+   "vDiscover": 0.017660665795119712,
+   "vConfirm": 0.02210789167747862,
+   "v": 0.019884278736299166,
+   "zDiscover": 57.385703691799,
+   "zConfirm": 41.6180302465071,
+   "nullMeanDiscover": 0.000494820476797031,
+   "nullMeanConfirm": 0.001130150256176421,
+   "nullSdDiscover": 0.00029913104160079947,
+   "nullSdConfirm": 0.0005040541634731214,
+   "range": [
+    0.003,
+    0.12
+   ],
+   "inRange": true
+  },
+  {
+   "id": "sf-en-mouret",
+   "cls": "books",
+   "tokens": 128496,
+   "status": "PRESENT+",
+   "sub": null,
+   "vDiscover": 0.020691770098892448,
+   "vConfirm": 0.026505175475904252,
+   "v": 0.02359847278739835,
+   "zDiscover": 129.73666433762264,
+   "zConfirm": 75.37654597818256,
+   "nullMeanDiscover": 0.0001323498556303093,
+   "nullMeanConfirm": 0.0003338029031510814,
+   "nullSdDiscover": 0.00015847039345607766,
+   "nullSdConfirm": 0.0003472084351056411,
+   "range": [
+    0.003,
+    0.12
+   ],
+   "inRange": true
+  },
+  {
+   "id": "sf-en-waikna",
+   "cls": "books",
+   "tokens": 85322,
+   "status": "PRESENT+",
+   "sub": null,
+   "vDiscover": 0.01799172794108017,
+   "vConfirm": 0.022952088422243833,
+   "v": 0.020471908181662002,
+   "zDiscover": 52.72773926744604,
+   "zConfirm": 104.97454067753291,
+   "nullMeanDiscover": 0.00037683823520637814,
+   "nullMeanConfirm": 0.0005998016786179505,
+   "nullSdDiscover": 0.000334072538489227,
+   "nullSdConfirm": 0.00021293055058263104,
+   "range": [
+    0.003,
+    0.12
+   ],
+   "inRange": true
+  },
+  {
+   "id": "sf-en-chopin",
+   "cls": "books",
+   "tokens": 64408,
+   "status": "UNDEFINED",
+   "sub": "ABOVE-NULL",
+   "vDiscover": 0.008838742682200973,
+   "vConfirm": 0.013088452607007639,
+   "v": 0.010963597644604306,
+   "zDiscover": 81.63946832888422,
+   "zConfirm": null,
+   "nullMeanDiscover": 0.00003410447334317723,
+   "nullMeanConfirm": 0,
+   "nullSdDiscover": 0.00010784781416493737,
+   "nullSdConfirm": 0,
+   "range": [
+    0.003,
+    0.12
+   ],
+   "inRange": true
+  },
+  {
+   "id": "sf-en-shakespeare",
+   "cls": "drama",
+   "tokens": 299990,
+   "status": "PRESENT+",
+   "sub": null,
+   "vDiscover": 0.01688455908333708,
+   "vConfirm": 0.017902717590914108,
+   "v": 0.017393638337125594,
+   "zDiscover": 297.57082952963,
+   "zConfirm": 470.30974403584554,
+   "nullMeanDiscover": 0.000049215082435694056,
+   "nullMeanConfirm": 0.00009280673002649564,
+   "nullSdDiscover": 0.000056575921865436214,
+   "nullSdConfirm": 0.000037868470910375606,
+   "range": [
+    0.003,
+    0.12
+   ],
+   "inRange": true
+  },
+  {
+   "id": "sf-ud-eng",
+   "cls": "treebank",
+   "tokens": 176883,
+   "status": "PRESENT+",
+   "sub": null,
+   "vDiscover": 0.04000718261795555,
+   "vConfirm": 0.03830701256538305,
+   "v": 0.0391570975916693,
+   "zDiscover": 289.72087128762934,
+   "zConfirm": 424.52618033992576,
+   "nullMeanDiscover": 0.0001448494645046594,
+   "nullMeanConfirm": 0.000040065440225589553,
+   "nullSdDiscover": 0.00013758875215405633,
+   "nullSdConfirm": 0.00009014037036424096,
+   "range": [
+    0.003,
+    0.12
+   ],
+   "inRange": true
+  },
+  {
+   "id": "sf-ud-deu",
+   "cls": "treebank",
+   "tokens": 222711,
+   "status": "PRESENT+",
+   "sub": null,
+   "vDiscover": 0.0148443425023288,
+   "vConfirm": 0.018011312890848785,
+   "v": 0.016427827696588793,
+   "zDiscover": 245.10206726997254,
+   "zConfirm": 541.7508659646162,
+   "nullMeanDiscover": 0.00003699524613693938,
+   "nullMeanConfirm": 0.000010507328897801927,
+   "nullSdDiscover": 0.00006041298395040469,
+   "nullSdConfirm": 0.000033227091441560675,
+   "range": [
+    0.003,
+    0.12
+   ],
+   "inRange": true
+  },
+  {
+   "id": "sf-ud-fra",
+   "cls": "treebank",
+   "tokens": 299897,
+   "status": "PRESENT+",
+   "sub": null,
+   "vDiscover": 0.07254928161000862,
+   "vConfirm": 0.0810466060820545,
+   "v": 0.07679794384603156,
+   "zDiscover": 91.13349582966006,
+   "zConfirm": 187.59206283906468,
+   "nullMeanDiscover": 0.0031991729551009485,
+   "nullMeanConfirm": 0.004171955120182247,
+   "nullSdDiscover": 0.0007609727688327871,
+   "nullSdConfirm": 0.0004097969274308959,
+   "range": [
+    0.003,
+    0.12
+   ],
+   "inRange": true
+  },
+  {
+   "id": "sf-ud-spa",
+   "cls": "treebank",
+   "tokens": 299978,
+   "status": "PRESENT+",
+   "sub": null,
+   "vDiscover": 0.07363557213102467,
+   "vConfirm": 0.07273331335545663,
+   "v": 0.07318444274324065,
+   "zDiscover": 149.2666783184083,
+   "zConfirm": 129.0316139565441,
+   "nullMeanDiscover": 0.0075390595542558,
+   "nullMeanConfirm": 0.007165192239972385,
+   "nullSdDiscover": 0.00044280822298313,
+   "nullSdConfirm": 0.0005081554752741959,
+   "range": [
+    0.003,
+    0.12
+   ],
+   "inRange": true
+  },
+  {
+   "id": "sf-ud-por",
+   "cls": "treebank",
+   "tokens": 216033,
+   "status": "PRESENT+",
+   "sub": null,
+   "vDiscover": 0.08873476133430813,
+   "vConfirm": 0.07942766177984595,
+   "v": 0.08408121155707704,
+   "zDiscover": 100.14376580042438,
+   "zConfirm": 48.57063700831095,
+   "nullMeanDiscover": 0.013228043787148636,
+   "nullMeanConfirm": 0.0121918036428724,
+   "nullSdDiscover": 0.0007539832054811696,
+   "nullSdConfirm": 0.0013842902271483238,
+   "range": [
+    0.003,
+    0.12
+   ],
+   "inRange": true
+  },
+  {
+   "id": "sf-ud-cat",
+   "cls": "treebank",
+   "tokens": 299927,
+   "status": "PRESENT+",
+   "sub": null,
+   "vDiscover": 0.13363720570669102,
+   "vConfirm": 0.12665360936352954,
+   "v": 0.13014540753511028,
+   "zDiscover": 183.18093551522153,
+   "zConfirm": 165.67676783997868,
+   "nullMeanDiscover": 0.0057049372597248295,
+   "nullMeanConfirm": 0.005447970213299414,
+   "nullSdDiscover": 0.0006983929200227039,
+   "nullSdConfirm": 0.0007315789698848926,
+   "range": [
+    0.003,
+    0.12
+   ],
+   "inRange": false
+  },
+  {
+   "id": "sf-ud-pol",
+   "cls": "treebank",
+   "tokens": 232578,
+   "status": "UNDEFINED",
+   "sub": "ABOVE-NULL",
+   "vDiscover": 0.007003084390817094,
+   "vConfirm": 0.006813777583374758,
+   "v": 0.006908430987095926,
+   "zDiscover": null,
+   "zConfirm": null,
+   "nullMeanDiscover": 0,
+   "nullMeanConfirm": 0,
+   "nullSdDiscover": 0,
+   "nullSdConfirm": 0,
+   "range": [
+    0.003,
+    0.12
+   ],
+   "inRange": true
+  },
+  {
+   "id": "sf-ud-nob",
+   "cls": "treebank",
+   "tokens": 212469,
+   "status": "PRESENT+",
+   "sub": null,
+   "vDiscover": 0.023744186461044592,
+   "vConfirm": 0.01969105590342224,
+   "v": 0.021717621182233415,
+   "zDiscover": 262.64692397218533,
+   "zConfirm": 376.42962693892713,
+   "nullMeanDiscover": 0.00006414939680325915,
+   "nullMeanConfirm": 0.000024781612046353986,
+   "nullSdDiscover": 0.00009015920196632145,
+   "nullSdConfirm": 0.00005224422543809654,
+   "range": [
+    0.003,
+    0.12
+   ],
+   "inRange": true
+  }
+ ]
+}

@@ -1,0 +1,326 @@
+// ember/build.mjs — build an Instagram clone through the mechanism
+// (penelope code-fix over the real mouth door), metering every draw.
+//
+// The mechanism: each module is drafted through runDrawDoor (box → mouth →
+// bridge → local lane), the FALSIFYING GATE decides, a refused draft is
+// reason-linted (janus + khora) into a sharpened atom and re-drawn. The
+// ledger records prompt/eval tokens per draw; frontier tokens used and the
+// frontier-equivalent estimates follow heimdall's dispatch meter conventions
+// (exact external counts; estimates marked as estimates).
+
+import { writeFileSync, mkdirSync, mkdtempSync, rmSync, readFileSync, existsSync } from "node:fs";
+import { tmpdir } from "node:os";
+import path from "node:path";
+import { pathToFileURL } from "node:url";
+
+import { fixCode } from "/Users/mlacy/Documents/3.0/penelope/organs/code-fix.mjs";
+import { createRegistry, emptyExecutor } from "/Users/mlacy/Documents/3.0/heimdall/src/executors.js";
+import { inferOn } from "/Users/mlacy/Documents/3.0/heimdall/src/remote.js";
+
+const ollamaExec = emptyExecutor({ executor: "ollama:qwen2.5-coder:1.5b", endpoint: "http://127.0.0.1:11434", model: "qwen2.5-coder:1.5b", provider: "ollama", location: "local/LAN", authClass: "local_open", privacyClass: "local-raw" });
+async function infer(prompt, { kind, model, maxTokens } = {}) {
+  const r = await inferOn(ollamaExec, { messages: [{ role: "user", content: String(prompt) }], temperature: 0, maxTokens: maxTokens ?? 900 });
+  ledger.push({
+    at: new Date().toISOString(),
+    kind, model: model ?? MODEL, winner: "local",
+    promptTokens: 0, evalTokens: r.tokens ?? 0,
+    ok: r.status === 200, ms: r.ms ?? null, prompt: String(prompt ?? "").slice(0, 70),
+  });
+  return r.text;
+}
+
+const OUT = path.dirname(new URL(import.meta.url).pathname);
+const SRC = path.join(OUT, "src");
+const MODEL = "qwen2.5-coder:1.5b";
+
+// ── the meter: every draw through the heimdall ollama lane, tokens counted ─
+const ledger = [];
+
+// ── a gate that imports the candidate module and runs the checks ───────────
+async function makeGate(checks, label) {
+  return async function gate(code) {
+    const dir = mkdtempSync(path.join(tmpdir(), "ember-gate-"));
+    try {
+      const file = path.join(dir, "m.mjs");
+      writeFileSync(file, String(code ?? ""), "utf8");
+      let mod;
+      try {
+        mod = await import(pathToFileURL(file).href);
+      } catch (e) {
+        return { ok: false, why: `candidate does not import: ${String(e?.message ?? e).slice(0, 160)}` };
+      }
+      const rows = [];
+      for (const c of checks) {
+        const fn = typeof c === "function" ? c : c.run;
+        let got, want, ok;
+        try { ({ got, want, ok } = await fn(mod)); } catch (e) { got = "threw: " + String(e?.message ?? e).slice(0, 80); want = "no throw"; ok = false; }
+        rows.push({ name: c.name, got, want, ok });
+      }
+      const bad = rows.filter((r) => !r.ok);
+      return {
+        ok: bad.length === 0,
+        why: bad.length ? bad.map((r) => `${r.name} = ${JSON.stringify(r.got)}, want ${JSON.stringify(r.want)}`).join("; ") : "exit 0",
+        actual: bad.length ? { end1: bad[0].name, end2: JSON.stringify(bad[0].got) } : null,
+        expected: bad.length ? { end1: bad[0].name, end2: JSON.stringify(bad[0].want) } : null,
+        label,
+      };
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  };
+}
+
+const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+
+// ── the app: five gated core modules ────────────────────────────────────────
+const MODULES = [
+  {
+    file: "store.js",
+    brief:
+`Write a JavaScript module for an Instagram clone's data store. Export these EXACT functions operating on a plain posts array (never mutate it — return a new array):
+
+export function addPost(posts, { author, imageUrl, caption }) — returns a new array with one new post appended. The post is { id, author, imageUrl, caption, likes: [], comments: [], createdAt }. id is "p" + (one more than the largest numeric suffix among existing ids, or "p1" when the array is empty). createdAt is the current time in ms (Date.now()).
+
+export function toggleLike(posts, id, user) — returns a new array where the post with that id has "user" added to its likes if absent, removed if present; every other post is unchanged. Posts whose id does not match are returned unchanged. Also return { posts, liked } where liked is true when the like was added.
+
+export function addComment(posts, id, { author, text }) — returns a new array with the comment { author, text } appended to the matching post's comments array; other posts unchanged. If no post has the id, return the original array.`,
+    goals: [
+      { end1: "addPost([], post)", label: "returns", end2: "a post with id p1 and empty likes" },
+      { end1: "toggleLike(posts, p1, u)", label: "returns", end2: "posts with u in likes" },
+    ],
+    checks: [
+      {
+        name: "addPost assigns p1",
+        async run(m) {
+          const posts = m.addPost([], { author: "a", imageUrl: "http://x/1.jpg", caption: "hi" });
+          return { ok: posts.length === 1 && posts[0].id === "p1" && posts[0].likes.length === 0 && posts[0].comments.length === 0, got: posts[0]?.id, want: "p1" };
+        },
+      },
+      {
+        name: "addPost increments the id",
+        async run(m) {
+          const a = m.addPost([], { author: "a", imageUrl: "http://x/1.jpg", caption: "" });
+          const b = m.addPost(a, { author: "a", imageUrl: "http://x/2.jpg", caption: "" });
+          return { ok: b[1].id === "p2", got: b[1]?.id, want: "p2" };
+        },
+      },
+      {
+        name: "toggleLike adds then removes",
+        async run(m) {
+          let posts = m.addPost([], { author: "a", imageUrl: "http://x/1.jpg", caption: "" });
+          const r1 = m.toggleLike(posts, "p1", "u1");
+          posts = r1.posts;
+          const r2 = m.toggleLike(posts, "p1", "u1");
+          return { ok: r1.liked === true && r1.posts[0].likes.includes("u1") && r2.liked === false && !r2.posts[0].likes.includes("u1"), got: `${r1.liked}/${r2.liked}`, want: "true/false" };
+        },
+      },
+      {
+        name: "addComment appends and leaves others",
+        async run(m) {
+          let posts = m.addPost([], { author: "a", imageUrl: "http://x/1.jpg", caption: "" });
+          const next = m.addComment(posts, "p1", { author: "u", text: "nice" });
+          return { ok: next[0].comments.length === 1 && next[0].comments[0].text === "nice" && posts[0].comments.length === 0, got: next[0]?.comments?.length, want: "1" };
+        },
+      },
+    ],
+  },
+  {
+    file: "feed.js",
+    brief:
+`Write a JavaScript module for an Instagram clone's feed. Export these EXACT pure functions:
+
+export function buildFeed(posts) — returns a NEW array of the same posts sorted by createdAt descending (newest first). Never mutate the input.
+
+export function followingFeed(posts, following) — returns only the posts whose author is in the "following" array of usernames, sorted by createdAt descending.
+
+export function postCount(author, posts) — the number of posts whose author equals the given username.
+
+export function topAuthors(posts) — an array of unique usernames sorted by how many posts they authored, most first; ties broken alphabetically.`,
+    goals: [
+      { end1: "buildFeed", label: "returns", end2: "posts newest-first" },
+      { end1: "followingFeed", label: "returns", end2: "only followed authors" },
+    ],
+    checks: [
+      {
+        name: "buildFeed sorts newest first",
+        async run(m) {
+          const posts = [
+            { id: "p1", author: "a", createdAt: 100 },
+            { id: "p2", author: "b", createdAt: 300 },
+            { id: "p3", author: "c", createdAt: 200 },
+          ];
+          const f = m.buildFeed(posts);
+          return { ok: f.map((p) => p.id).join(",") === "p2,p3,p1", got: f.map((p) => p.id).join(","), want: "p2,p3,p1" };
+        },
+      },
+      {
+        name: "followingFeed filters and sorts",
+        async run(m) {
+          const posts = [
+            { id: "p1", author: "a", createdAt: 100 },
+            { id: "p2", author: "b", createdAt: 300 },
+            { id: "p3", author: "c", createdAt: 200 },
+          ];
+          const f = m.followingFeed(posts, ["b", "c"]);
+          return { ok: f.map((p) => p.id).join(",") === "p2,p3", got: f.map((p) => p.id).join(","), want: "p2,p3" };
+        },
+      },
+      {
+        name: "postCount counts",
+        async run(m) {
+          const posts = [{ author: "a" }, { author: "b" }, { author: "a" }];
+          return { ok: m.postCount("a", posts) === 2, got: m.postCount("a", posts), want: 2 };
+        },
+      },
+      {
+        name: "topAuthors sorts by count then name",
+        async run(m) {
+          const posts = [{ author: "b" }, { author: "a" }, { author: "b" }];
+          return { ok: same(m.topAuthors(posts), ["b", "a"]), got: m.topAuthors(posts).join(","), want: "b,a" };
+        },
+      },
+    ],
+  },
+  {
+    file: "suggest.js",
+    brief:
+`Write a JavaScript module for an Instagram clone's account suggestions. Export EXACTLY one function:
+
+export function suggestAccounts(posts, me) — the unique authors among the given posts, EXCLUDING the "me" username, sorted by number of posts descending (ties alphabetical), each as { username, posts }. Returns [] when there are no other authors. Never mutate the input.`,
+    goals: [
+      { end1: "suggestAccounts", label: "returns", end2: "other authors by post count" },
+    ],
+    checks: [
+      {
+        name: "suggests others sorted by count",
+        async run(m) {
+          const posts = [
+            { author: "me" }, { author: "b" }, { author: "b" }, { author: "a" },
+          ];
+          const s = m.suggestAccounts(posts, "me");
+          return { ok: same(s, [{ username: "b", posts: 2 }, { username: "a", posts: 1 }]), got: JSON.stringify(s), want: "b:2, a:1" };
+        },
+      },
+      {
+        name: "excludes me and returns [] when alone",
+        async run(m) {
+          const s = m.suggestAccounts([{ author: "me" }], "me");
+          return { ok: same(s, []), got: JSON.stringify(s), want: "[]" };
+        },
+      },
+    ],
+  },
+  {
+    file: "validate.js",
+    brief:
+`Write a JavaScript module for an Instagram clone's post validation. Export EXACTLY one function:
+
+export function validatePost({ imageUrl, caption }) — returns { ok: true, errors: [] } when imageUrl is a non-empty string starting with "http" and caption is a string of length at most 2200. Otherwise returns { ok: false, errors } where errors is a list of short strings naming each problem: "image required" when imageUrl is missing/not http, "caption too long" when caption exceeds 2200.`,
+    goals: [
+      { end1: "validatePost", label: "returns", end2: "ok only for http image and short caption" },
+    ],
+    checks: [
+      {
+        name: "valid post passes",
+        async run(m) {
+          const r = m.validatePost({ imageUrl: "https://x/1.jpg", caption: "hi" });
+          return { ok: r.ok === true && r.errors.length === 0, got: JSON.stringify(r), want: "ok" };
+        },
+      },
+      {
+        name: "missing image fails with image required",
+        async run(m) {
+          const r = m.validatePost({ imageUrl: "", caption: "" });
+          return { ok: r.ok === false && r.errors.includes("image required"), got: JSON.stringify(r.errors), want: "image required" };
+        },
+      },
+      {
+        name: "caption too long fails",
+        async run(m) {
+          const r = m.validatePost({ imageUrl: "https://x/1.jpg", caption: "x".repeat(2201) });
+          return { ok: r.ok === false && r.errors.includes("caption too long"), got: JSON.stringify(r.errors), want: "caption too long" };
+        },
+      },
+    ],
+  },
+  {
+    file: "time.js",
+    brief:
+`Write a JavaScript module for an Instagram clone's relative timestamps. Export EXACTLY one function:
+
+export function timeAgo(ts, now) — given a creation timestamp and the current time (both epoch ms), return a short relative string:
+- under 60 seconds: "just now"
+- under 60 minutes: "Nm" where N is the whole minutes
+- under 24 hours: "Nh" where N is the whole hours
+- otherwise: "Nd" where N is the whole days`,
+    goals: [
+      { end1: "timeAgo", label: "returns", end2: "a short relative string" },
+    ],
+    checks: [
+      {
+        name: "seconds, minutes, hours, days",
+        async run(m) {
+          const now = 1000000000000;
+          const cases = [
+            [m.timeAgo(now - 30000, now), "just now"],
+            [m.timeAgo(now - 120000, now), "2m"],
+            [m.timeAgo(now - 3600000 * 3, now), "3h"],
+            [m.timeAgo(now - 86400000 * 4, now), "4d"],
+          ];
+          const bad = cases.filter(([got, want]) => got !== want);
+          return { ok: bad.length === 0, got: JSON.stringify(cases.map((c) => c[0])), want: JSON.stringify(cases.map((c) => c[1])) };
+        },
+      },
+    ],
+  },
+];
+
+async function buildModule(spec) {
+  const result = await fixCode({
+    brief: spec.brief,
+    model: MODEL,
+    goals: spec.goals,
+    gate: await makeGate(spec.checks.map((c) => ({ name: c.name, run: c.run })), spec.file),
+    infer,
+    maxAttempts: 4,
+    maxTokens: 900,
+  });
+  if (result.ok) writeFileSync(path.join(SRC, spec.file), result.code, "utf8");
+  return { file: spec.file, ok: result.ok, attempts: result.attempts, reason: result.reason, why: result.why, scars: result.scars };
+}
+
+mkdirSync(SRC, { recursive: true });
+const results = [];
+for (const spec of MODULES) results.push(await buildModule(spec));
+
+// ── the frontier token monitor ─────────────────────────────────────────────
+const promptTotal = ledger.reduce((a, d) => a + (d.promptTokens || 0), 0);
+const evalTotal = ledger.reduce((a, d) => a + (d.evalTokens || 0), 0);
+const localTotal = promptTotal + evalTotal;
+const frontierModels = (d) => /anthropic|openai|groq|claude|sonnet|opus/i.test(d.model ?? "");
+const frontierUsed = ledger.filter(frontierModels);
+const monitor = {
+  schema: "TokenLedger@1",
+  model: MODEL,
+  draws: ledger.length,
+  modules: results.map((r) => ({ file: r.file, ok: r.ok, attempts: r.attempts?.length ?? 0 })),
+  localTokens: { prompt: promptTotal, eval: evalTotal, total: localTotal, exact: true },
+  frontierTokens: {
+    used: frontierUsed.reduce((a, d) => a + (d.promptTokens || 0) + (d.evalTokens || 0), 0),
+    draws: frontierUsed.length,
+    note: frontierUsed.length ? "frontier lanes served these draws" : "no frontier lane configured — every draw routed to the local lane",
+  },
+  estimated: {
+    frontierEverything: Math.round(localTotal),
+    conventionalRawContext: Math.round(localTotal * 22.7),
+    note: "frontier-everything (1x) and conventional raw-context (22.7x) are estimates per heimdall dispatch meter; localTokens is exact",
+  },
+  perDraw: ledger,
+};
+
+writeFileSync(path.join(OUT, "TOKENS.json"), JSON.stringify(monitor, null, 2), "utf8");
+console.log("\n=== BUILD RESULTS ===");
+for (const r of results) console.log(`${r.ok ? "LANDED" : "FAILED"} ${r.file}${r.ok ? "" : ` — ${r.reason}: ${r.why?.slice(0, 120)}`}`);
+console.log("\n=== FRONTIER TOKEN MONITOR ===");
+console.log(JSON.stringify({ draws: monitor.draws, localTokens: monitor.localTokens, frontierTokens: monitor.frontierTokens, estimated: monitor.estimated, modules: monitor.modules }, null, 2));
+console.log("modules written to", SRC, "· ledger at", path.join(OUT, "TOKENS.json"));

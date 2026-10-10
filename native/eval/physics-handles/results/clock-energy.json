@@ -1,0 +1,281 @@
+{
+ "header": "001970f0823e00ed519b1cfefb0fb68c43de90611a3c8a793f9cb3cadc5ab041",
+ "E1": {
+  "W8": {
+   "identity": false,
+   "steadyStateTotalOverSW": 1,
+   "steady": true,
+   "decayRatioSpread": 2.220446049250313e-16,
+   "decayRatioMean": 0.512909,
+   "gammaPow": 0.512909,
+   "sameForAllKeys": true
+  },
+  "W32": {
+   "identity": false,
+   "steadyStateTotalOverSW": 1,
+   "steady": true,
+   "decayRatioSpread": 4.440892098500626e-16,
+   "decayRatioMean": 0.853215,
+   "gammaPow": 0.853215,
+   "sameForAllKeys": true
+  },
+  "W128": {
+   "identity": false,
+   "steadyStateTotalOverSW": 1,
+   "steady": true,
+   "decayRatioSpread": 4.440892098500626e-16,
+   "decayRatioMean": 0.961543,
+   "gammaPow": 0.961543,
+   "sameForAllKeys": true
+  },
+  "pass": false
+ },
+ "E2": {
+  "cells": [
+   {
+    "corpus": "ud-eng-A",
+    "g": 1,
+    "observations": 1024,
+    "window": null,
+    "gap": "reach_exceeds_candidates",
+    "topCandidate": 512,
+    "ceiling": true,
+    "windowInSentences": null
+   },
+   {
+    "corpus": "ud-eng-A",
+    "g": 2,
+    "observations": 512,
+    "window": null,
+    "gap": "reach_exceeds_candidates",
+    "topCandidate": 256,
+    "ceiling": true,
+    "windowInSentences": null
+   },
+   {
+    "corpus": "ud-eng-A",
+    "g": 4,
+    "observations": 256,
+    "window": null,
+    "gap": "reach_exceeds_candidates",
+    "topCandidate": 128,
+    "ceiling": true,
+    "windowInSentences": null
+   },
+   {
+    "corpus": "ud-spa-A",
+    "g": 1,
+    "observations": 1024,
+    "window": null,
+    "gap": "reach_exceeds_candidates",
+    "topCandidate": 512,
+    "ceiling": true,
+    "windowInSentences": null
+   },
+   {
+    "corpus": "ud-spa-A",
+    "g": 2,
+    "observations": 512,
+    "window": null,
+    "gap": "reach_exceeds_candidates",
+    "topCandidate": 256,
+    "ceiling": true,
+    "windowInSentences": null
+   },
+   {
+    "corpus": "ud-spa-A",
+    "g": 4,
+    "observations": 256,
+    "window": null,
+    "gap": "reach_exceeds_candidates",
+    "topCandidate": 128,
+    "ceiling": true,
+    "windowInSentences": null
+   },
+   {
+    "corpus": "ud-deu-A",
+    "g": 1,
+    "observations": 1024,
+    "window": null,
+    "gap": "reach_exceeds_candidates",
+    "topCandidate": 512,
+    "ceiling": true,
+    "windowInSentences": null
+   },
+   {
+    "corpus": "ud-deu-A",
+    "g": 2,
+    "observations": 512,
+    "window": null,
+    "gap": "reach_exceeds_candidates",
+    "topCandidate": 256,
+    "ceiling": true,
+    "windowInSentences": null
+   },
+   {
+    "corpus": "ud-deu-A",
+    "g": 4,
+    "observations": 256,
+    "window": null,
+    "gap": "reach_exceeds_candidates",
+    "topCandidate": 128,
+    "ceiling": true,
+    "windowInSentences": null
+   },
+   {
+    "corpus": "ud-fas-A",
+    "g": 1,
+    "observations": 1024,
+    "window": null,
+    "gap": "reach_exceeds_candidates",
+    "topCandidate": 512,
+    "ceiling": true,
+    "windowInSentences": null
+   },
+   {
+    "corpus": "ud-fas-A",
+    "g": 2,
+    "observations": 512,
+    "window": null,
+    "gap": "reach_exceeds_candidates",
+    "topCandidate": 256,
+    "ceiling": true,
+    "windowInSentences": null
+   },
+   {
+    "corpus": "ud-fas-A",
+    "g": 4,
+    "observations": 256,
+    "window": null,
+    "gap": "reach_exceeds_candidates",
+    "topCandidate": 128,
+    "ceiling": true,
+    "windowInSentences": null
+   },
+   {
+    "corpus": "ud-jpn-A",
+    "g": 1,
+    "observations": 1024,
+    "window": null,
+    "gap": "reach_exceeds_candidates",
+    "topCandidate": 512,
+    "ceiling": true,
+    "windowInSentences": null
+   },
+   {
+    "corpus": "ud-jpn-A",
+    "g": 2,
+    "observations": 512,
+    "window": null,
+    "gap": "reach_exceeds_candidates",
+    "topCandidate": 256,
+    "ceiling": true,
+    "windowInSentences": null
+   },
+   {
+    "corpus": "ud-jpn-A",
+    "g": 4,
+    "observations": 256,
+    "window": null,
+    "gap": "reach_exceeds_candidates",
+    "topCandidate": 128,
+    "ceiling": true,
+    "windowInSentences": null
+   },
+   {
+    "corpus": "irc",
+    "g": 1,
+    "observations": 1024,
+    "window": null,
+    "gap": "reach_exceeds_candidates",
+    "topCandidate": 512,
+    "ceiling": true,
+    "windowInSentences": null
+   },
+   {
+    "corpus": "irc",
+    "g": 2,
+    "observations": 512,
+    "window": null,
+    "gap": "reach_exceeds_candidates",
+    "topCandidate": 256,
+    "ceiling": true,
+    "windowInSentences": null
+   },
+   {
+    "corpus": "irc",
+    "g": 4,
+    "observations": 256,
+    "window": null,
+    "gap": "reach_exceeds_candidates",
+    "topCandidate": 128,
+    "ceiling": true,
+    "windowInSentences": null
+   },
+   {
+    "corpus": "wp",
+    "g": 1,
+    "observations": 1024,
+    "window": null,
+    "gap": "reach_exceeds_candidates",
+    "topCandidate": 512,
+    "ceiling": true,
+    "windowInSentences": null
+   },
+   {
+    "corpus": "wp",
+    "g": 2,
+    "observations": 512,
+    "window": null,
+    "gap": "reach_exceeds_candidates",
+    "topCandidate": 256,
+    "ceiling": true,
+    "windowInSentences": null
+   },
+   {
+    "corpus": "wp",
+    "g": 4,
+    "observations": 256,
+    "window": null,
+    "gap": "reach_exceeds_candidates",
+    "topCandidate": 128,
+    "ceiling": true,
+    "windowInSentences": null
+   },
+   {
+    "corpus": "sms-en",
+    "g": 1,
+    "observations": 92,
+    "window": null,
+    "gap": "reach_exceeds_candidates",
+    "topCandidate": 64,
+    "ceiling": true,
+    "windowInSentences": null
+   },
+   {
+    "corpus": "sms-en",
+    "g": 2,
+    "observations": 46,
+    "window": null,
+    "gap": "reach_exceeds_candidates",
+    "topCandidate": 32,
+    "ceiling": true,
+    "windowInSentences": null
+   },
+   {
+    "corpus": "sms-en",
+    "g": 4,
+    "observations": 23,
+    "window": null,
+    "gap": "reach_exceeds_candidates",
+    "topCandidate": 16,
+    "ceiling": true,
+    "windowInSentences": null
+   }
+  ],
+  "ceilingShare": 1,
+  "belowTopShare": 0,
+  "isDuration": false,
+  "PE2": true
+ }
+}

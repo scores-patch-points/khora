@@ -1,0 +1,425 @@
+{
+ "cell": "XP-B-FIRST-BOTH",
+ "id": "XP-B-FIRST-BOTH",
+ "form": "XP",
+ "set": "B",
+ "stratum": "FIRST",
+ "arm": "BOTH",
+ "headerSha256": "235e66d12163e9a7eead028c74caca6c0bcb3bd3ca970eaa547fabbad75e113b",
+ "scoperHashes": {
+  "groupsSha256": "b2cad7b4a50c77400c1dfc82a91d53092b9327aaa138dbdf1a1ea07e300650d7",
+  "libSha256": "eaa1d06de53f4ab04a861b646e8d0e0e79bdf71bac2cdb6fbaac4486d024bfe4",
+  "analysisSha256": "cc19ee5bfc496a877c429d0380cf21e30be0e51c3d5b51ac27ec2d7ff9311868"
+ },
+ "libFreshSha256": "47a6316b68a06df31dc9cdb1d1411d4245c1fcbfe7bdb38249459e64de13e16d",
+ "confirmLibSha256": "587d63cb993611e72ff799e29ee1f02e44c3ea5f9876faea91ee26ba30c925f5",
+ "confirmRunSha256": "812b0e6a2e8088a392e79b73ca142b867fa2526fc5ed3a1ba634cedaf41bf93c",
+ "donorLanguages": 29,
+ "targets": {
+  "spaGSD": {
+   "key": "spaGSD",
+   "lang": "spa",
+   "pairs": 600,
+   "shufPairs": 600,
+   "sets": {
+    "a": {
+     "mean": 0.6912,
+     "sd": 0.0246,
+     "pos": 0.5005,
+     "shuf": 0.5146,
+     "q95": 0.5276,
+     "pairs": 600,
+     "k": 3,
+     "draws": 20,
+     "used": {
+      "glg": 13,
+      "por": 9,
+      "ita": 11,
+      "ron": 9,
+      "cat": 10,
+      "fra": 8
+     }
+    },
+    "b": {
+     "mean": 0.5659,
+     "sd": 0.0465,
+     "pos": 0.5005,
+     "shuf": 0.5224,
+     "q95": 0.5262,
+     "pairs": 600,
+     "k": 3,
+     "draws": 20,
+     "used": {
+      "ukr": 3,
+      "hrv": 6,
+      "lav": 7,
+      "fin": 5,
+      "pol": 5,
+      "nob": 3,
+      "bul": 4,
+      "lzh": 3,
+      "ind": 5,
+      "cmn": 5,
+      "ces": 5,
+      "eng": 5,
+      "heb": 4
+     }
+    },
+    "c": {
+     "mean": 0.5624,
+     "sd": 0.0251,
+     "pos": 0.5015,
+     "shuf": 0.542,
+     "q95": 0.526,
+     "pairs": 600,
+     "k": 3,
+     "draws": 20,
+     "used": {
+      "fas": 17,
+      "urd": 10,
+      "jpn": 19,
+      "hin": 14
+     }
+    },
+    "d": {
+     "mean": 0.618,
+     "sd": 0.0539,
+     "pos": 0.5007,
+     "shuf": 0.5185,
+     "q95": 0.5305,
+     "pairs": 600,
+     "k": 3,
+     "draws": 20,
+     "used": {
+      "fin": 1,
+      "ron": 4,
+      "slv": 2,
+      "nob": 3,
+      "ita": 2,
+      "lav": 3,
+      "ukr": 1,
+      "lzh": 4,
+      "nld": 4,
+      "eng": 2,
+      "glg": 5,
+      "ind": 3,
+      "fas": 4,
+      "urd": 3,
+      "bul": 3,
+      "heb": 3,
+      "ces": 2,
+      "est": 3,
+      "deu": 1,
+      "por": 1,
+      "pol": 1,
+      "gle": 2,
+      "cmn": 2,
+      "cat": 1
+     }
+    },
+    "e": {
+     "mean": 0.5907,
+     "sd": 0.0472,
+     "pos": 0.5008,
+     "shuf": 0.5327,
+     "q95": 0.5257,
+     "pairs": 600,
+     "k": 3,
+     "draws": 20,
+     "used": {
+      "deu": 4,
+      "nob": 5,
+      "hin": 6,
+      "urd": 8,
+      "ind": 5,
+      "fas": 4,
+      "jpn": 2,
+      "nld": 2,
+      "slv": 4,
+      "hrv": 5,
+      "est": 2,
+      "ukr": 3,
+      "pol": 2,
+      "lzh": 3,
+      "lav": 1,
+      "cmn": 1,
+      "heb": 1,
+      "bul": 1,
+      "fin": 1
+     }
+    }
+   },
+   "sham": 0.5069,
+   "shufDonor": 0.5549,
+   "own": {
+    "cv": 0.746,
+    "cvPosition": 0.4986
+   }
+  },
+  "porBOS": {
+   "key": "porBOS",
+   "lang": "por",
+   "pairs": 600,
+   "shufPairs": 600,
+   "sets": {
+    "a": {
+     "mean": 0.6571,
+     "sd": 0.0159,
+     "pos": 0.5041,
+     "shuf": 0.5276,
+     "q95": 0.5303,
+     "pairs": 600,
+     "k": 3,
+     "draws": 20,
+     "used": {
+      "ron": 14,
+      "cat": 10,
+      "fra": 11,
+      "spa": 10,
+      "glg": 5,
+      "ita": 10
+     }
+    },
+    "b": {
+     "mean": 0.5528,
+     "sd": 0.0422,
+     "pos": 0.5023,
+     "shuf": 0.5145,
+     "q95": 0.5251,
+     "pairs": 600,
+     "k": 3,
+     "draws": 20,
+     "used": {
+      "fin": 4,
+      "heb": 6,
+      "lzh": 4,
+      "nob": 4,
+      "ukr": 9,
+      "eng": 7,
+      "ind": 5,
+      "cmn": 4,
+      "ces": 4,
+      "lav": 4,
+      "hrv": 3,
+      "pol": 2,
+      "bul": 4
+     }
+    },
+    "c": {
+     "mean": 0.5798,
+     "sd": 0.0244,
+     "pos": 0.5016,
+     "shuf": 0.5217,
+     "q95": 0.5288,
+     "pairs": 600,
+     "k": 3,
+     "draws": 20,
+     "used": {
+      "urd": 15,
+      "fas": 15,
+      "hin": 17,
+      "jpn": 13
+     }
+    },
+    "d": {
+     "mean": 0.5957,
+     "sd": 0.0622,
+     "pos": 0.502,
+     "shuf": 0.5265,
+     "q95": 0.5285,
+     "pairs": 600,
+     "k": 3,
+     "draws": 20,
+     "used": {
+      "hrv": 1,
+      "ind": 5,
+      "slv": 1,
+      "urd": 2,
+      "cmn": 4,
+      "bul": 4,
+      "lzh": 6,
+      "fra": 3,
+      "cat": 2,
+      "est": 3,
+      "fin": 2,
+      "ita": 1,
+      "jpn": 2,
+      "pol": 6,
+      "hin": 2,
+      "nob": 2,
+      "glg": 5,
+      "deu": 1,
+      "ces": 2,
+      "eng": 2,
+      "nld": 1,
+      "ron": 1,
+      "fas": 1,
+      "lav": 1
+     }
+    },
+    "e": {
+     "mean": 0.565,
+     "sd": 0.0435,
+     "pos": 0.5023,
+     "shuf": 0.5282,
+     "q95": 0.5268,
+     "pairs": 600,
+     "k": 3,
+     "draws": 20,
+     "used": {
+      "fas": 2,
+      "urd": 4,
+      "ces": 5,
+      "nld": 5,
+      "hrv": 3,
+      "bul": 1,
+      "pol": 4,
+      "ind": 7,
+      "lzh": 3,
+      "slv": 4,
+      "heb": 3,
+      "deu": 3,
+      "cmn": 1,
+      "est": 2,
+      "fin": 2,
+      "jpn": 2,
+      "lav": 2,
+      "gle": 2,
+      "ukr": 2,
+      "eng": 2,
+      "nob": 1
+     }
+    }
+   },
+   "sham": 0.4841,
+   "shufDonor": 0.5569,
+   "own": {
+    "cv": 0.702,
+    "cvPosition": 0.5028
+   }
+  }
+ },
+ "thin": [
+  {
+   "key": "glgTG",
+   "pairs": 0
+  }
+ ],
+ "primary": {
+  "scope": [
+   "spa",
+   "por",
+   "glg"
+  ],
+  "group": {
+   "kind": "genus",
+   "group": "Romance",
+   "sameSet": "a",
+   "ctrlSet": "e",
+   "n": 2,
+   "nPass": 2,
+   "meanSame": 0.6742,
+   "meanCtrl": 0.5778,
+   "diffBoot": {
+    "mean": 0.0963,
+    "lo": 0.0921,
+    "hi": 0.1005,
+    "n": 2,
+    "pos": 2
+   },
+   "positionControl": 0.5023,
+   "shuffledControl": 0.5211,
+   "passing": [
+    "spa",
+    "por"
+   ],
+   "failing": [],
+   "rows": [
+    {
+     "t": "spa",
+     "same": 0.6912,
+     "ctrl": 0.5907,
+     "diff": 0.1005,
+     "q95": 0.5276,
+     "pass": true,
+     "pos": 0.5005,
+     "shuf": 0.5146
+    },
+    {
+     "t": "por",
+     "same": 0.6571,
+     "ctrl": 0.565,
+     "diff": 0.0921,
+     "q95": 0.5303,
+     "pass": true,
+     "pos": 0.5041,
+     "shuf": 0.5276
+    }
+   ]
+  },
+  "ex": {
+   "sham": 0.4955,
+   "shufDonor": 0.5559
+  },
+  "verdict": "UNDERPOWERED"
+ },
+ "all": {
+  "scope": [
+   "spa",
+   "por",
+   "glg"
+  ],
+  "group": {
+   "kind": "genus",
+   "group": "Romance",
+   "sameSet": "a",
+   "ctrlSet": "e",
+   "n": 2,
+   "nPass": 2,
+   "meanSame": 0.6742,
+   "meanCtrl": 0.5778,
+   "diffBoot": {
+    "mean": 0.0963,
+    "lo": 0.0921,
+    "hi": 0.1005,
+    "n": 2,
+    "pos": 2
+   },
+   "positionControl": 0.5023,
+   "shuffledControl": 0.5211,
+   "passing": [
+    "spa",
+    "por"
+   ],
+   "failing": [],
+   "rows": [
+    {
+     "t": "spa",
+     "same": 0.6912,
+     "ctrl": 0.5907,
+     "diff": 0.1005,
+     "q95": 0.5276,
+     "pass": true,
+     "pos": 0.5005,
+     "shuf": 0.5146
+    },
+    {
+     "t": "por",
+     "same": 0.6571,
+     "ctrl": 0.565,
+     "diff": 0.0921,
+     "q95": 0.5303,
+     "pass": true,
+     "pos": 0.5041,
+     "shuf": 0.5276
+    }
+   ]
+  },
+  "ex": {
+   "sham": 0.4955,
+   "shufDonor": 0.5559
+  },
+  "verdict": "UNDERPOWERED"
+ },
+ "seconds": 4.7
+}

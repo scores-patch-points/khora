@@ -1,0 +1,43 @@
+{
+ "corpus": "wp",
+ "doc": "war-and-peace",
+ "M": 128,
+ "tag": "d2",
+ "strata": [
+  "c4_6"
+ ],
+ "sizes": {
+  "nA": 30,
+  "nB": 60,
+  "n1": 20
+ },
+ "design": {
+  "A:c4_6": {
+   "requested": 30,
+   "got": 30,
+   "dropped": 0,
+   "nPos": 212,
+   "nNegPool": 2619
+  },
+  "B:c4_6": {
+   "requested": 60,
+   "got": 60,
+   "dropped": 0,
+   "nPos": 1509,
+   "nNegPool": 48451
+  }
+ },
+ "tokensRead": 180,
+ "gaps": 0,
+ "seconds": 616.533,
+ "K1_sham": {
+  "nullShare": 1,
+  "n": 8
+ },
+ "K6_determinism": {
+  "same": 8,
+  "n": 8
+ },
+ "headerSha256": "6c0cd12e3d866e11b3da0b284d424e806fb867092872cfdfe4406c7fae58692c",
+ "file": "data/discovery/war-and-peace.d2.c4_6.jsonl"
+}

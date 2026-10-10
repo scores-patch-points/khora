@@ -1,0 +1,5658 @@
+{
+ "sib-code-khora-core": {
+  "tokensAtSnapshot": 292009,
+  "docs": [
+   {
+    "n": 0,
+    "file": "0000.txt",
+    "rel": "khora/native/adapters/audio/fft.js",
+    "sha256": "61f58d21703863861ee575344cb32caf8c038fd155973a035dea2e3c133eedeb",
+    "bytes": 1757
+   },
+   {
+    "n": 1,
+    "file": "0001.txt",
+    "rel": "khora/native/adapters/audio/overtones.js",
+    "sha256": "4dbc86e80c5e2e1a53f30d3d6897ffe7594739e27a15f93fd54ac32a31649253",
+    "bytes": 6500
+   },
+   {
+    "n": 2,
+    "file": "0002.txt",
+    "rel": "khora/native/adapters/code/anchors.js",
+    "sha256": "e783f905731a83ce16a8631a392afa4bc5d6ca7dea92402ee454d8e252926e28",
+    "bytes": 13008
+   },
+   {
+    "n": 3,
+    "file": "0003.txt",
+    "rel": "khora/native/adapters/code/code-time.js",
+    "sha256": "c959336ccb5143557bb651409010dbd8d61f017f8c20b9806ff5a5bdd2a82f62",
+    "bytes": 6352
+   },
+   {
+    "n": 4,
+    "file": "0004.txt",
+    "rel": "khora/native/adapters/code/identify.js",
+    "sha256": "af084e6189c4c582bae5ae2d2f77844e5dfb4a75179c96e4a73df01390d06b61",
+    "bytes": 18540
+   },
+   {
+    "n": 5,
+    "file": "0005.txt",
+    "rel": "khora/native/adapters/code/py-engine.js",
+    "sha256": "37dda61a31311a33737a5c2ce15b33538c6f6455297e4f79ed1406781bedeec9",
+    "bytes": 15305
+   },
+   {
+    "n": 6,
+    "file": "0006.txt",
+    "rel": "khora/native/adapters/code/scan.js",
+    "sha256": "4db5699d404cad88c9224989ca992188c31fbd1fe3d1e8296ad7500df1f38fc0",
+    "bytes": 20785
+   },
+   {
+    "n": 7,
+    "file": "0007.txt",
+    "rel": "khora/native/adapters/image/screen-sidecar.js",
+    "sha256": "6944f3036e93db180cecdc138bfbc5cdef2cdadb5fcc04ea3447c3f603780506",
+    "bytes": 23202
+   },
+   {
+    "n": 8,
+    "file": "0008.txt",
+    "rel": "khora/native/adapters/notation/chem_smiles.js",
+    "sha256": "e87c45d227c9d2c525dab570006f970444261810d01a52dbb425a62543a2d191",
+    "bytes": 38196
+   },
+   {
+    "n": 9,
+    "file": "0009.txt",
+    "rel": "khora/native/adapters/sources/folder-index.js",
+    "sha256": "467293aca345b0dac11142a40bf468eddda81d7a72046debb3fd4c3cac1233cf",
+    "bytes": 2213
+   },
+   {
+    "n": 10,
+    "file": "0010.txt",
+    "rel": "khora/native/adapters/text/case-marked-language.js",
+    "sha256": "2a19535f3cf0d4c4feed5a1bdfff2b68cc7e26fab62aac939f22fe53da31bfb2",
+    "bytes": 4358
+   },
+   {
+    "n": 11,
+    "file": "0011.txt",
+    "rel": "khora/native/adapters/text/code-structure.js",
+    "sha256": "4f123380d2adf36b949bbde8090eb608fff3c2769666c4f77a76e12991f69dbc",
+    "bytes": 23520
+   },
+   {
+    "n": 12,
+    "file": "0012.txt",
+    "rel": "khora/native/adapters/text/contextual-dmd.js",
+    "sha256": "66a72b10329b0f5ce7fd8911d974dea09973fc95a1db7bf7546bbc25cc5d9edc",
+    "bytes": 5207
+   },
+   {
+    "n": 13,
+    "file": "0013.txt",
+    "rel": "khora/native/adapters/text/descriptor-lane.js",
+    "sha256": "da1a083c436c50af5e4e3ff59e9e5bd9c7cc25fe23acf78026b47db27ecef159",
+    "bytes": 2200
+   },
+   {
+    "n": 14,
+    "file": "0014.txt",
+    "rel": "khora/native/adapters/text/english-parser.js",
+    "sha256": "f2614c038e156a227bce2432261a948d28fbc1d6193b39dd996a673fb92abcc9",
+    "bytes": 28050
+   },
+   {
+    "n": 15,
+    "file": "0015.txt",
+    "rel": "khora/native/adapters/text/fact-lenses.js",
+    "sha256": "99f38592a1982b3dd1b962baef93e6c4cc73dd82d2c56c399db032fe36c2bbb8",
+    "bytes": 15095
+   },
+   {
+    "n": 16,
+    "file": "0016.txt",
+    "rel": "khora/native/adapters/text/fragment-relations.js",
+    "sha256": "15f9435ee90ce5c83c977318f23c3c92f50e2ce54f8d4ff34e0453eecad8e7c9",
+    "bytes": 1643
+   },
+   {
+    "n": 17,
+    "file": "0017.txt",
+    "rel": "khora/native/adapters/text/keyness.js",
+    "sha256": "c57120642b233c1f461b2c3e0cb05cd92cdb3457ab5cd4b4416a3abc3ac3df3a",
+    "bytes": 5226
+   },
+   {
+    "n": 18,
+    "file": "0018.txt",
+    "rel": "khora/native/adapters/text/material.js",
+    "sha256": "ea4f4ae9e413ca038beb52a6e114ed38788c58fe4c54847aabceaab3e7d53766",
+    "bytes": 15045
+   },
+   {
+    "n": 19,
+    "file": "0019.txt",
+    "rel": "khora/native/adapters/text/numeral-words.js",
+    "sha256": "ecc5b9e4aadca68e4b4956e81e976e80cc591938836fc527bea868ee40870ecf",
+    "bytes": 6749
+   },
+   {
+    "n": 20,
+    "file": "0020.txt",
+    "rel": "khora/native/adapters/text/phasepost-dmd.js",
+    "sha256": "cd23c8ba1979964fa040b643a6be950e1138342136c5f55a09679c5a75a0453c",
+    "bytes": 9777
+   },
+   {
+    "n": 21,
+    "file": "0021.txt",
+    "rel": "khora/native/adapters/text/pocket-discovery-gap.js",
+    "sha256": "4f7da4f70a9330a10308e7bf7efe0e584b3656fbfe48fbfac174c6331b299f8a",
+    "bytes": 9194
+   },
+   {
+    "n": 22,
+    "file": "0022.txt",
+    "rel": "khora/native/adapters/text/pos-rows.js",
+    "sha256": "42d93b690f98e952e145968cb8f755d882f7f5a8583f82bc43dc9f1850dd0b57",
+    "bytes": 4003
+   },
+   {
+    "n": 23,
+    "file": "0023.txt",
+    "rel": "khora/native/adapters/text/pronouns.js",
+    "sha256": "cff13ff6e3a189500c84007f4f1d2eeac1a9cea0eeaa7914ac4fb3220c381532",
+    "bytes": 51237
+   },
+   {
+    "n": 24,
+    "file": "0024.txt",
+    "rel": "khora/native/adapters/text/relation-priors-i18n.js",
+    "sha256": "f4ac1c4efa17dbbb7decffeddf027f9edbe5f39dfa732e40693811142d7fd4df",
+    "bytes": 10292
+   },
+   {
+    "n": 25,
+    "file": "0025.txt",
+    "rel": "khora/native/adapters/text/relations-positional.js",
+    "sha256": "7bbe3a878f5d239e05acc14b0a3e48b1ffcb55a34e0eb3911150243e6d9dbf6e",
+    "bytes": 20952
+   },
+   {
+    "n": 26,
+    "file": "0026.txt",
+    "rel": "khora/native/adapters/text/seek-object.js",
+    "sha256": "600172c415f62c66de86ed1003997dd32a6c2c2fe6650f334518175043342c45",
+    "bytes": 12087
+   },
+   {
+    "n": 27,
+    "file": "0027.txt",
+    "rel": "khora/native/adapters/text/sha256hex.js",
+    "sha256": "36ac44936f2ddd56875f34fc83b2a17c6ab9edf17e5871707576174522a6de1c",
+    "bytes": 4041
+   },
+   {
+    "n": 28,
+    "file": "0028.txt",
+    "rel": "khora/native/adapters/text/verb-synonym-disclosure.js",
+    "sha256": "66bdef5c99e72014f51fb87d8f8836a86ea7413c99d648187ade0302b113bfe8",
+    "bytes": 13670
+   },
+   {
+    "n": 29,
+    "file": "0029.txt",
+    "rel": "khora/native/adapters/text/vocabulary.js",
+    "sha256": "1400d742252ac86176e044eed7c4444db062ddde5d6c791c00ee27dcb57ad8e8",
+    "bytes": 2925
+   },
+   {
+    "n": 30,
+    "file": "0030.txt",
+    "rel": "khora/native/contracts/response.js",
+    "sha256": "73d40df267eeb1eec17a5b2914c6ebfcaa1acc73f08b7a21111d1ec6d43c9bc3",
+    "bytes": 4309
+   },
+   {
+    "n": 31,
+    "file": "0031.txt",
+    "rel": "khora/native/kernel/affordance-reference.js",
+    "sha256": "9efc78b4cb78a9b8ff1c80a5eccba06d3c411d05201d57006960b43b7ba6a0b8",
+    "bytes": 6828
+   },
+   {
+    "n": 32,
+    "file": "0032.txt",
+    "rel": "khora/native/kernel/atmosphere-math.js",
+    "sha256": "684407433ada45890ad1830fae717ff21428be3e39feb2e23ddbaf8ffaa2500e",
+    "bytes": 8196
+   },
+   {
+    "n": 33,
+    "file": "0033.txt",
+    "rel": "khora/native/kernel/completion.js",
+    "sha256": "004e091d83ff18bc5705a2a176de7d49e15c943878ec4a08349973fb02e4a471",
+    "bytes": 9098
+   },
+   {
+    "n": 34,
+    "file": "0034.txt",
+    "rel": "khora/native/kernel/consequential-surprise.js",
+    "sha256": "b5e637240e5266e7a44347121577728fb785877f76bf7d2b29441710329e02e8",
+    "bytes": 7401
+   },
+   {
+    "n": 35,
+    "file": "0035.txt",
+    "rel": "khora/native/kernel/foreclosing-kinds.js",
+    "sha256": "1f34891df1b164b298c53eab6ce66ec7bde55fec11f4a0d3b20e4d878445d541",
+    "bytes": 15873
+   },
+   {
+    "n": 36,
+    "file": "0036.txt",
+    "rel": "khora/native/kernel/habit.js",
+    "sha256": "4a557fd8e6cc5939d7738b40deeb18657276407bb15dcc93d2096ac257981c65",
+    "bytes": 6673
+   },
+   {
+    "n": 37,
+    "file": "0037.txt",
+    "rel": "khora/native/kernel/hypergraph-projection.js",
+    "sha256": "9494310a4c5a7c31b59857527ceb32080094c30d27a6ad533ed2ceb14e521c62",
+    "bytes": 10031
+   },
+   {
+    "n": 38,
+    "file": "0038.txt",
+    "rel": "khora/native/kernel/identity-induction.js",
+    "sha256": "7e14421bfba295521b25968d4ca6b23cb15bb42d8b92af201c1fbbd82a7e7439",
+    "bytes": 27258
+   },
+   {
+    "n": 39,
+    "file": "0039.txt",
+    "rel": "khora/native/kernel/identity.js",
+    "sha256": "9d06cac8e5ab479771ef6d3b2e55a2994e6f9f5acfa7cf895f16e94e9f0bfe94",
+    "bytes": 16241
+   },
+   {
+    "n": 40,
+    "file": "0040.txt",
+    "rel": "khora/native/kernel/index.js",
+    "sha256": "a07b86f4ecb6196e5b6da0d4e2e07fbff4aec0ea4261b16e966a6bd6251156a2",
+    "bytes": 5250
+   },
+   {
+    "n": 41,
+    "file": "0041.txt",
+    "rel": "khora/native/kernel/interrogation.js",
+    "sha256": "ddb4ed85bbe5d27bb3aa97a7b5211bd27e11ae4f104206f17c3a2e2c97eb9431",
+    "bytes": 2981
+   },
+   {
+    "n": 42,
+    "file": "0042.txt",
+    "rel": "khora/native/kernel/kind-functional-induction.js",
+    "sha256": "a984c7531f13f069b0da0e53a687b302f0bb616e98add1792954c0973156b513",
+    "bytes": 17098
+   },
+   {
+    "n": 43,
+    "file": "0043.txt",
+    "rel": "khora/native/kernel/measured-loop.js",
+    "sha256": "d5a3377415fd93af336f55a019c2fe67d66edbf8f05f051b402f81a76da896e4",
+    "bytes": 6844
+   },
+   {
+    "n": 44,
+    "file": "0044.txt",
+    "rel": "khora/native/kernel/model-server.js",
+    "sha256": "6f796c9db1e934db6f4f6d3b830853a459eb8e500df4513f7b2353989c9b5cd6",
+    "bytes": 1401
+   },
+   {
+    "n": 45,
+    "file": "0045.txt",
+    "rel": "khora/native/kernel/narrative-time.js",
+    "sha256": "f8879216bf0572cc151e4d4a82e81babfa682f4efc3e8af4798017cc42b4cf10",
+    "bytes": 5659
+   },
+   {
+    "n": 46,
+    "file": "0046.txt",
+    "rel": "khora/native/kernel/orientation.js",
+    "sha256": "2871cb8acb5c4b439cf7de7365535bd1d68380e61e92ee63f76733b96aba4b86",
+    "bytes": 2120
+   },
+   {
+    "n": 47,
+    "file": "0047.txt",
+    "rel": "khora/native/kernel/refutation.js",
+    "sha256": "95f1c442b20b2ba6d9be8bfb010e01f275dcf4348f08fda961a68813712606aa",
+    "bytes": 26751
+   },
+   {
+    "n": 48,
+    "file": "0048.txt",
+    "rel": "khora/native/kernel/relation-composition.js",
+    "sha256": "3e63c31c2a6ff758345da2fb0782c54d8108f278fc950268bb288fdc7f520d39",
+    "bytes": 17357
+   },
+   {
+    "n": 49,
+    "file": "0049.txt",
+    "rel": "khora/native/kernel/rng.js",
+    "sha256": "18d6f2fa5202f13836fb3ce04360f004c3df97b46ccc5858db9e3adc4b62fef2",
+    "bytes": 4314
+   },
+   {
+    "n": 50,
+    "file": "0050.txt",
+    "rel": "khora/native/kernel/scoped-kind.js",
+    "sha256": "9039ecd0a62b184f6ea07931b4600ba7d8f789375537e9073fb291d0d667e98e",
+    "bytes": 6139
+   },
+   {
+    "n": 51,
+    "file": "0051.txt",
+    "rel": "khora/native/kernel/settling.js",
+    "sha256": "f1dcbeea89ace4a55e1ccb2b9cb27bcdf8ae1d7ea578bc66cba1524986092e1f",
+    "bytes": 8571
+   },
+   {
+    "n": 52,
+    "file": "0052.txt",
+    "rel": "khora/native/kernel/task-log.js",
+    "sha256": "63847a30f48ba4a8017efc5db5ddc3098a051067ee017a2b8d5eac28fc06eccd",
+    "bytes": 10488
+   },
+   {
+    "n": 53,
+    "file": "0053.txt",
+    "rel": "khora/native/kernel/universal-grammar.js",
+    "sha256": "7f7bf636e9c71ef1600f6db6aaea507513623250fef0dab0664d90e9f6e35562",
+    "bytes": 17763
+   },
+   {
+    "n": 54,
+    "file": "0054.txt",
+    "rel": "khora/native/organs/askshape.js",
+    "sha256": "5d038c86a133abdcbbd6d11c2c3ef54c18936b4c10e5e72573a4e3aaad621c01",
+    "bytes": 12856
+   },
+   {
+    "n": 55,
+    "file": "0055.txt",
+    "rel": "khora/native/organs/blindspot.js",
+    "sha256": "36651bd717f2afff6f025046d9f073bf34b3101939e0859ae6ab417b70050cdb",
+    "bytes": 13042
+   },
+   {
+    "n": 56,
+    "file": "0056.txt",
+    "rel": "khora/native/organs/bridges.js",
+    "sha256": "05b3b5c298e6a07a0ab607da449eff546ddf0847eed18e6d7adc15d2baefda73",
+    "bytes": 8172
+   },
+   {
+    "n": 57,
+    "file": "0057.txt",
+    "rel": "khora/native/organs/build-check.js",
+    "sha256": "8fda09d34e4df98d0fd92126e50b29ab49076c4356d2ea19a059ed43b4f3ebef",
+    "bytes": 7027
+   },
+   {
+    "n": 58,
+    "file": "0058.txt",
+    "rel": "khora/native/organs/capacities.js",
+    "sha256": "a276b3f9085d10a1b53820c5b25eda91264e45474314a4fb8e2a003aa2b7d91e",
+    "bytes": 44004
+   },
+   {
+    "n": 59,
+    "file": "0059.txt",
+    "rel": "khora/native/organs/cast.js",
+    "sha256": "37d213237c9edd204a82be933b6b395791a2931d2b5cedf3b8a51db9cd7a420d",
+    "bytes": 18745
+   },
+   {
+    "n": 60,
+    "file": "0060.txt",
+    "rel": "khora/native/organs/claim-relevance.js",
+    "sha256": "35774e4fca87802110831cd55266ef1b1d1feee777e227b3fc5f4bc5adb4b0f6",
+    "bytes": 10709
+   },
+   {
+    "n": 61,
+    "file": "0061.txt",
+    "rel": "khora/native/organs/code-form.js",
+    "sha256": "a9db4ae3dcd1aeb2e8df0299582b971432528a930a4ac8d1e5215d6d469a64a8",
+    "bytes": 22059
+   },
+   {
+    "n": 62,
+    "file": "0062.txt",
+    "rel": "khora/native/organs/code-goal-lint.js",
+    "sha256": "3d3e050270ab5f62cd24152f554cdd50af12faa10794fdcdb3a9c253cb6410bf",
+    "bytes": 7851
+   },
+   {
+    "n": 63,
+    "file": "0063.txt",
+    "rel": "khora/native/organs/coding-policy.js",
+    "sha256": "d00cda296d226d9f1b4feb15690da07fb2af52bbab168024301ab4f6c6851f9f",
+    "bytes": 6709
+   },
+   {
+    "n": 64,
+    "file": "0064.txt",
+    "rel": "khora/native/organs/company-index.js",
+    "sha256": "439f1b73fd5539ea39c62ceee1ed01a92677db537b09fc0ae6e20b5915039a2e",
+    "bytes": 4998
+   },
+   {
+    "n": 65,
+    "file": "0065.txt",
+    "rel": "khora/native/organs/contrast.js",
+    "sha256": "0094bc44a7e8c06a562eb72a9cd0c6cc0e8585cf6448ba6025ebd229ccfa2d44",
+    "bytes": 3521
+   },
+   {
+    "n": 66,
+    "file": "0066.txt",
+    "rel": "khora/native/organs/distinguishing-plan.js",
+    "sha256": "43ca871eff350779db6b04d0c2aafab6682e81958e684b350699205498b6de6d",
+    "bytes": 6906
+   },
+   {
+    "n": 67,
+    "file": "0067.txt",
+    "rel": "khora/native/organs/embedded-query.js",
+    "sha256": "980784f7c8a7045c47a0046d98b49c3d8d60fc41f9ca6e0ea3e29148b91d2f58",
+    "bytes": 5165
+   },
+   {
+    "n": 68,
+    "file": "0068.txt",
+    "rel": "khora/native/organs/ethos.js",
+    "sha256": "62b0536f868efaf4367f47fb0650d7e31ec7293ff388152906cf559eb652ad48",
+    "bytes": 6345
+   },
+   {
+    "n": 69,
+    "file": "0069.txt",
+    "rel": "khora/native/organs/experiencer.js",
+    "sha256": "a7fc61ec147d6ca4d3512ce89dddea6e7c4ecb8a535d42b7c5410aa97335019a",
+    "bytes": 6379
+   },
+   {
+    "n": 70,
+    "file": "0070.txt",
+    "rel": "khora/native/organs/greenberg.js",
+    "sha256": "78f054465401e28998ed2bd60b2766f5f6d7dffa69b81c0b3180b4605fa0d38c",
+    "bytes": 11285
+   },
+   {
+    "n": 71,
+    "file": "0071.txt",
+    "rel": "khora/native/organs/grounding.js",
+    "sha256": "29cf857fbb0fb81189aa69a1303bec72a36c59225b641658dbaa9b6c059eed56",
+    "bytes": 58824
+   },
+   {
+    "n": 72,
+    "file": "0072.txt",
+    "rel": "khora/native/organs/heard-surfaces.js",
+    "sha256": "955bcc17293989c0a447048d1c87f1033829a5be35fc9f611284794153244a54",
+    "bytes": 14736
+   },
+   {
+    "n": 73,
+    "file": "0073.txt",
+    "rel": "khora/native/organs/hl.js",
+    "sha256": "bd431473cb25cf0c8ef4031b007a46b59422227527820467474e8789520ae415",
+    "bytes": 4301
+   },
+   {
+    "n": 74,
+    "file": "0074.txt",
+    "rel": "khora/native/organs/huginn.js",
+    "sha256": "5f4db8c50f4ec487aef7e8d553fa274770a465c8fabd69cf36d734ffc8537121",
+    "bytes": 13628
+   },
+   {
+    "n": 75,
+    "file": "0075.txt",
+    "rel": "khora/native/organs/index.js",
+    "sha256": "c6475af53cbf3e3dae6630be861f6faf22aa46851325ec34bed0fddd4a76c9a7",
+    "bytes": 20052
+   },
+   {
+    "n": 76,
+    "file": "0076.txt",
+    "rel": "khora/native/organs/judgment-reader.js",
+    "sha256": "97f532f048e725246af42214f438d0d60c0192e193342084d8142eff5a5d9b81",
+    "bytes": 7201
+   },
+   {
+    "n": 77,
+    "file": "0077.txt",
+    "rel": "khora/native/organs/kind-standing.js",
+    "sha256": "752d029ce14c98d6f03d3af7b1b882270709444cf609816b485210e579f13850",
+    "bytes": 18652
+   },
+   {
+    "n": 78,
+    "file": "0078.txt",
+    "rel": "khora/native/organs/kleene-up.js",
+    "sha256": "d1ab2dcd58cc8d5760201e38beab2413c225e3a882053a19cabae7edf29da573",
+    "bytes": 4496
+   },
+   {
+    "n": 79,
+    "file": "0079.txt",
+    "rel": "khora/native/organs/lang-competency.js",
+    "sha256": "4835ef46e33f58fe1740839b6129784619859595f3e368308e56265113fd0e37",
+    "bytes": 13213
+   },
+   {
+    "n": 80,
+    "file": "0080.txt",
+    "rel": "khora/native/organs/lang-levers.js",
+    "sha256": "d83cb41c49f38a965a29c7b474191a770eda0618399751ecf339a4233ce88f97",
+    "bytes": 4479
+   },
+   {
+    "n": 81,
+    "file": "0081.txt",
+    "rel": "khora/native/organs/look.js",
+    "sha256": "0c9dd8bce80110428be18c5e6e8c16e732c3c6869b9d79f99d619e7940b15000",
+    "bytes": 31487
+   },
+   {
+    "n": 82,
+    "file": "0082.txt",
+    "rel": "khora/native/organs/martial.js",
+    "sha256": "6ad0688b2aaaa91f4ce4da62010ce9dd55c11eef2ae290d37b0627ba1b07f570",
+    "bytes": 10410
+   },
+   {
+    "n": 83,
+    "file": "0083.txt",
+    "rel": "khora/native/organs/mnemonic-pipeline-fixtures.js",
+    "sha256": "7ca5a0d5387718bd3615877108b411ae1ada86f189c61a3a186a044cd3cdcac0",
+    "bytes": 2360
+   },
+   {
+    "n": 84,
+    "file": "0084.txt",
+    "rel": "khora/native/organs/mnemonic.js",
+    "sha256": "ced4d9bb4da6b5b4a45b519905566aaed8b26a0296dd2bea1af7d50b7d87017f",
+    "bytes": 45829
+   },
+   {
+    "n": 85,
+    "file": "0085.txt",
+    "rel": "khora/native/organs/narrative-arc.js",
+    "sha256": "8c0a9206d2e818fc17d89820194fc286e658187cd8f39240b112731ae5d384a0",
+    "bytes": 16843
+   },
+   {
+    "n": 86,
+    "file": "0086.txt",
+    "rel": "khora/native/organs/output-voice.js",
+    "sha256": "1b818cf76e1f624cbb1576e6c3f289b7f64dd4c97461c4557fb91ca763bf2711",
+    "bytes": 3892
+   },
+   {
+    "n": 87,
+    "file": "0087.txt",
+    "rel": "khora/native/organs/parmenides-forms.js",
+    "sha256": "eef2056542d03529144f1a31e587148bd699157b11ed4c30c59399a0fa20f540",
+    "bytes": 3493
+   },
+   {
+    "n": 88,
+    "file": "0088.txt",
+    "rel": "khora/native/organs/primary.js",
+    "sha256": "7e58103a3f1a4e1df16fc38e11c9c0c84245ccf668e2938393797b4fb35f78af",
+    "bytes": 21074
+   },
+   {
+    "n": 89,
+    "file": "0089.txt",
+    "rel": "khora/native/organs/provenance.js",
+    "sha256": "19cff6e66ac5af0cca306d3dc4cf8795463d53b0e4b9b9d3a51feaaf4c61d8bf",
+    "bytes": 20862
+   },
+   {
+    "n": 90,
+    "file": "0090.txt",
+    "rel": "khora/native/organs/read-back.js",
+    "sha256": "09bc0aac1df71a936f009416ed6428d4f72df427149341b100d53ab5bb9407ae",
+    "bytes": 11323
+   },
+   {
+    "n": 91,
+    "file": "0091.txt",
+    "rel": "khora/native/organs/readability.js",
+    "sha256": "b7cc7cbc775253321e2c3edb79f869278ca1d1c69148d945c3fb4be3dba4d5f7",
+    "bytes": 5199
+   },
+   {
+    "n": 92,
+    "file": "0092.txt",
+    "rel": "khora/native/organs/received-vocabulary-relations.js",
+    "sha256": "59c13a3ae1aaf292c199917cc24603eeaa29f9ef0a16aaa598e793a70777dc87",
+    "bytes": 11199
+   },
+   {
+    "n": 93,
+    "file": "0093.txt",
+    "rel": "khora/native/organs/regime-dial.js",
+    "sha256": "116d8a6cd8829e0c46d774853dcb544971c9f469894b6dd76dd7249e0afe94b2",
+    "bytes": 1277
+   },
+   {
+    "n": 94,
+    "file": "0094.txt",
+    "rel": "khora/native/organs/run-dmca.js",
+    "sha256": "071148879e7f67eaf55793062d886a6057c3ad72a2b0811d5ff14d36e535685a",
+    "bytes": 26834
+   },
+   {
+    "n": 95,
+    "file": "0095.txt",
+    "rel": "khora/native/organs/screen-style.js",
+    "sha256": "668c706fa06674fb684d8eb95f1f37a3adbca993bc0d053f676b0f16fef390d9",
+    "bytes": 14009
+   },
+   {
+    "n": 96,
+    "file": "0096.txt",
+    "rel": "khora/native/organs/story-shapes.js",
+    "sha256": "528a0d2ff11bd57cf9712b3a0b69baba0c3374de189cdb81f848ef13bbb44418",
+    "bytes": 11142
+   },
+   {
+    "n": 97,
+    "file": "0097.txt",
+    "rel": "khora/native/organs/talk-reason.js",
+    "sha256": "33e3c2aab0eaa6b1ae1e122a6325e48a4d42e8bde124960d7c3e5c38ea3ec8fd",
+    "bytes": 8269
+   },
+   {
+    "n": 98,
+    "file": "0098.txt",
+    "rel": "khora/native/organs/tschichold.js",
+    "sha256": "e4bdc014db41c2a371791b3450cebbeceff6bfaa554b523c0f0bd7b436bc8151",
+    "bytes": 62262
+   },
+   {
+    "n": 99,
+    "file": "0099.txt",
+    "rel": "khora/native/organs/universe.js",
+    "sha256": "eee932397605980448e0a9c42af739af9727f4b53cfdfba6f26c79d426ce7107",
+    "bytes": 5826
+   },
+   {
+    "n": 100,
+    "file": "0100.txt",
+    "rel": "khora/native/organs/variation.js",
+    "sha256": "0fd82e6603ea0b960212db4b81788e205c5e1c7527f99b406ed7e3b46715dedf",
+    "bytes": 12316
+   },
+   {
+    "n": 101,
+    "file": "0101.txt",
+    "rel": "khora/native/organs/visual-pathos.js",
+    "sha256": "7b83cd2e0bac8eb8d97ac311022947cef037fcd183df6d89843250ce63094b1d",
+    "bytes": 6813
+   },
+   {
+    "n": 102,
+    "file": "0102.txt",
+    "rel": "khora/native/organs/voices.js",
+    "sha256": "b0184a210b9e817add0c10e28c82ec5645c7687a023c9fb327c06477e589df35",
+    "bytes": 14000
+   },
+   {
+    "n": 103,
+    "file": "0103.txt",
+    "rel": "khora/native/organs/vonnegut.js",
+    "sha256": "117ddd51ab14cba63c4432776dfcc1c7a486aad5f90fe0a05dad949613cca2f6",
+    "bytes": 7059
+   },
+   {
+    "n": 104,
+    "file": "0104.txt",
+    "rel": "khora/native/scripts/build-enclitic-prior.mjs",
+    "sha256": "8e3f9bb888f38aae54e38521b236567344efa7869e2d40cfa473017311bcd99b",
+    "bytes": 3002
+   },
+   {
+    "n": 105,
+    "file": "0105.txt",
+    "rel": "khora/native/scripts/build-proclitic-prior.mjs",
+    "sha256": "893320f8d377dd951c580109f8f8f54f281bd0d1ce83ca727d78f7114aa0be92",
+    "bytes": 6105
+   },
+   {
+    "n": 106,
+    "file": "0106.txt",
+    "rel": "khora/native/scripts/lib/frame-build.mjs",
+    "sha256": "1d96e0fab7af1956e2472bd500d12b3affe46d9c66afd808955c10adfb9b58da",
+    "bytes": 2730
+   },
+   {
+    "n": 107,
+    "file": "0107.txt",
+    "rel": "khora/native/scripts/train-english-parser.mjs",
+    "sha256": "a606a2094eefb176066e7f1275b5af3a52a972cf6f7f1c9e0a824c9f5e1c419a",
+    "bytes": 6046
+   },
+   {
+    "n": 108,
+    "file": "0108.txt",
+    "rel": "khora/native/tests/barker-organ.test.js",
+    "sha256": "3545e6f50c46402b3ee1d4ace9de05c974085a6d54496894aa6a15a360763293",
+    "bytes": 51196
+   },
+   {
+    "n": 109,
+    "file": "0109.txt",
+    "rel": "khora/native/tests/coding-c4.test.js",
+    "sha256": "23cf99889972ca6e7b58435b187aff3a9a541d23fe492ed5fea0a3d7d97205ba",
+    "bytes": 62550
+   },
+   {
+    "n": 110,
+    "file": "0110.txt",
+    "rel": "khora/native/tests/coding-c5.test.js",
+    "sha256": "55625bc1d07b222f2b84be5f3fbdede5c9b17ce71290cc0fc94f3164d0180414",
+    "bytes": 52348
+   },
+   {
+    "n": 111,
+    "file": "0111.txt",
+    "rel": "khora/native/tests/coding-gold.test.js",
+    "sha256": "6b7d0e0868357368ae3a47fb338faa7f258fe50ab0efd120bb24508b1f733167",
+    "bytes": 17451
+   },
+   {
+    "n": 112,
+    "file": "0112.txt",
+    "rel": "khora/native/tests/coding-javascript-priors.test.js",
+    "sha256": "a17c46bf546f6ad859190b7f6f682f9a5771d7fd86cfc8ef52dba9672184ccce",
+    "bytes": 21505
+   },
+   {
+    "n": 113,
+    "file": "0113.txt",
+    "rel": "khora/native/tests/coding-ruby-priors.test.js",
+    "sha256": "828cea60aeaf507319173f2a0cb1d69ecdf0843bbfb25d0def19a2d0656b051d",
+    "bytes": 15920
+   },
+   {
+    "n": 114,
+    "file": "0114.txt",
+    "rel": "khora/native/tests/competence-r4.test.js",
+    "sha256": "fb2f4c503ad39b0b991ad9067f9ca7f1c9e11a87609eea0f67b33d9357f1e65d",
+    "bytes": 46785
+   },
+   {
+    "n": 115,
+    "file": "0115.txt",
+    "rel": "khora/native/tests/language-reach.test.js",
+    "sha256": "2c0b10831cf6e9c6d0a822004df88dbb8ebd3e93c986a1bbf96e6f32cf46ed07",
+    "bytes": 8288
+   },
+   {
+    "n": 116,
+    "file": "0116.txt",
+    "rel": "khora/native/tests/notation-taxonomy.test.js",
+    "sha256": "4143f059589778a251acc1db6abaf0d0dd3d429eccfffda9fe94ff39a8b06688",
+    "bytes": 30562
+   },
+   {
+    "n": 117,
+    "file": "0117.txt",
+    "rel": "khora/native/tests/notation-uml_bpmn.test.js",
+    "sha256": "cc41d6a393f9a40a98e6d633b25604507aaa7ac2e3398dece10a9384138bd93d",
+    "bytes": 38141
+   },
+   {
+    "n": 118,
+    "file": "0118.txt",
+    "rel": "khora/native/the-fold/anchor-chase.js",
+    "sha256": "b31a53531ebbeacbe185e877d5af155177bccff5a06b7aefe75793e47610feb2",
+    "bytes": 3508
+   },
+   {
+    "n": 119,
+    "file": "0119.txt",
+    "rel": "khora/native/the-fold/aperture.js",
+    "sha256": "45e0f5296aff80e73803d288406f733f7bdcc1bfe6d2c147fc633bb6789158d3",
+    "bytes": 20603
+   },
+   {
+    "n": 120,
+    "file": "0120.txt",
+    "rel": "khora/native/the-fold/builds.js",
+    "sha256": "25a013bc44d3dd13807c4665fee2814530df28505dae8f06c941ef4b3cc0e1b2",
+    "bytes": 7759
+   },
+   {
+    "n": 121,
+    "file": "0121.txt",
+    "rel": "khora/native/the-fold/chains.js",
+    "sha256": "2bdf84a11433a70bf26c14932205e0c0a7908fc343026f22737c87d16110105c",
+    "bytes": 12701
+   },
+   {
+    "n": 122,
+    "file": "0122.txt",
+    "rel": "khora/native/the-fold/code-hunt.js",
+    "sha256": "6c41d34d9a303c6cfa4d6b4f7c96a0f33ef2732aa37c06541542dcf9ba609dca",
+    "bytes": 20418
+   },
+   {
+    "n": 123,
+    "file": "0123.txt",
+    "rel": "khora/native/the-fold/code-loop.js",
+    "sha256": "35607a2583a5ec8b02c7f8672897ecc8cad7558dd1c47cc368a03c01d7ef2c99",
+    "bytes": 101845
+   },
+   {
+    "n": 124,
+    "file": "0124.txt",
+    "rel": "khora/native/the-fold/code-piece.js",
+    "sha256": "21b049d1864790d8771b4d55a06dcd7a601537181080f3cc87a71d77341f8ebe",
+    "bytes": 13224
+   },
+   {
+    "n": 125,
+    "file": "0125.txt",
+    "rel": "khora/native/the-fold/concrescence.js",
+    "sha256": "22d49a8204693b176460cee7724d156b04821866fe902df121648071365b271a",
+    "bytes": 9952
+   },
+   {
+    "n": 126,
+    "file": "0126.txt",
+    "rel": "khora/native/the-fold/corpus-resonance.js",
+    "sha256": "f23ac6eab64285c813ab23ea8c24388af5b005e76825f58112b3cee488aca79f",
+    "bytes": 8153
+   },
+   {
+    "n": 127,
+    "file": "0127.txt",
+    "rel": "khora/native/the-fold/fold-record.js",
+    "sha256": "b0e6b4cd8fe51b05e4057d37e4b65c30be0e58aa6a4b54ae45d01a12e97fe6c0",
+    "bytes": 4369
+   },
+   {
+    "n": 128,
+    "file": "0128.txt",
+    "rel": "khora/native/the-fold/fold-record.test.mjs",
+    "sha256": "757c2b049e92adc09e5c514755fb40c29f90de16f8dea9a82d5d03c6eb2417fc",
+    "bytes": 2922
+   },
+   {
+    "n": 129,
+    "file": "0129.txt",
+    "rel": "khora/native/the-fold/github.js",
+    "sha256": "46c3deef3fd4982d8b5f2ed2d49dc179388cba1dabdc2c56037b42b27b7c2af9",
+    "bytes": 11645
+   },
+   {
+    "n": 130,
+    "file": "0130.txt",
+    "rel": "khora/native/the-fold/grid.js",
+    "sha256": "5e65a84f6a2f2a0bd89bcf595d67162e3505bf2dcedf0c609e76515334066ac8",
+    "bytes": 40478
+   },
+   {
+    "n": 131,
+    "file": "0131.txt",
+    "rel": "khora/native/the-fold/hindsight-log.js",
+    "sha256": "ab82f47ac3da4b5e706b42f041f1e714a6f2bcdba4000e971521371eb6a01541",
+    "bytes": 2384
+   },
+   {
+    "n": 132,
+    "file": "0132.txt",
+    "rel": "khora/native/the-fold/metacognition.js",
+    "sha256": "f06cb322f2fd1a4e2c3461e76d11598f26a1e876bfb2ea5bf3178a1798036689",
+    "bytes": 36377
+   },
+   {
+    "n": 133,
+    "file": "0133.txt",
+    "rel": "khora/native/the-fold/periodicity.js",
+    "sha256": "b122557b738c9f0b2db22b6d629c1810c2a6986b3bcfda09e90b735102da63e3",
+    "bytes": 6748
+   },
+   {
+    "n": 134,
+    "file": "0134.txt",
+    "rel": "khora/native/the-fold/piece-revise.js",
+    "sha256": "011c4e6ba8fc0192903d68f0dfeecde2b0656e5d067c5e0ed318397619fe48f7",
+    "bytes": 13327
+   },
+   {
+    "n": 135,
+    "file": "0135.txt",
+    "rel": "khora/native/the-fold/pipeline-run.mjs",
+    "sha256": "253846e4572cea719634a933479bf2c7a315fc91f3a66a1d565cdd67cf2b0c74",
+    "bytes": 50165
+   },
+   {
+    "n": 136,
+    "file": "0136.txt",
+    "rel": "khora/native/the-fold/priors-ground.js",
+    "sha256": "92393892b106881098ec6321aece5ec22be55d1b2ee4bca8751a641015ad0c3a",
+    "bytes": 19939
+   },
+   {
+    "n": 137,
+    "file": "0137.txt",
+    "rel": "khora/native/the-fold/referent-slots.js",
+    "sha256": "8447e57f206f95ac41132c893af0d3d5e457b1a9e4b16349dbffd0c17632c87f",
+    "bytes": 2922
+   },
+   {
+    "n": 138,
+    "file": "0138.txt",
+    "rel": "khora/native/the-fold/snip-check.js",
+    "sha256": "6d976c40af831097c721656a9220a91634eaf64d5d89544b77b05dbfb6e1c6fe",
+    "bytes": 22896
+   },
+   {
+    "n": 139,
+    "file": "0139.txt",
+    "rel": "khora/native/the-fold/sound.js",
+    "sha256": "5142e0b950fc155fd9709b67b29d2bb38478995d392f47967f5a87c8602e12d6",
+    "bytes": 2251
+   },
+   {
+    "n": 140,
+    "file": "0140.txt",
+    "rel": "khora/native/the-fold/source.js",
+    "sha256": "209f129da0bdd9abbc5a8faa40fe6786b170f29cad40d6d00f3e784dcf4d45d1",
+    "bytes": 3939
+   },
+   {
+    "n": 141,
+    "file": "0141.txt",
+    "rel": "khora/native/the-fold/speaker-model.js",
+    "sha256": "c82469cf29f760a0b1cf4126b2b5af7cc67aef9aa3807e618273ad411e8621ea",
+    "bytes": 6401
+   },
+   {
+    "n": 142,
+    "file": "0142.txt",
+    "rel": "khora/native/the-fold/spiral-contract.js",
+    "sha256": "dd9b8c1220cc20330fc5bb3a3d9825633cf930ebe8393e5f8fe989077bcbeb57",
+    "bytes": 16671
+   },
+   {
+    "n": 143,
+    "file": "0143.txt",
+    "rel": "khora/native/the-fold/surface/bench-demo.mjs",
+    "sha256": "acf7daddd0f923528f93c57ed19a46af8603c876cbc94f2d5a99d4b6b0a83cbd",
+    "bytes": 7387
+   },
+   {
+    "n": 144,
+    "file": "0144.txt",
+    "rel": "khora/native/the-fold/surface/bench-run.mjs",
+    "sha256": "27c545498cade0bdbaeb617ec49684523ac65e766cca409ac91d716802b8091d",
+    "bytes": 752
+   },
+   {
+    "n": 145,
+    "file": "0145.txt",
+    "rel": "khora/native/the-fold/surface/block-extract.mjs",
+    "sha256": "559859dd0dd52c45d3bb264875ac9b9534103b7074ef49dc324f6396c3d2e1be",
+    "bytes": 2275
+   },
+   {
+    "n": 146,
+    "file": "0146.txt",
+    "rel": "khora/native/the-fold/surface/holodeck.mjs",
+    "sha256": "d20ea05b9f48dcd506d55de8127c8e66e12498dbd76e0658cb1078b0292a6ac5",
+    "bytes": 6246
+   },
+   {
+    "n": 147,
+    "file": "0147.txt",
+    "rel": "khora/native/the-fold/surface/notebook-door.mjs",
+    "sha256": "0adf30550a783b35b2903926efd6814d38f1c04ef0b67847fc9de92f620f330d",
+    "bytes": 3519
+   },
+   {
+    "n": 148,
+    "file": "0148.txt",
+    "rel": "khora/native/the-fold/surface/notebook-store.mjs",
+    "sha256": "e89a02740c10c3ccd949bae274629e4082d8ae200e883f2c77be2d01b3d2e076",
+    "bytes": 960
+   },
+   {
+    "n": 149,
+    "file": "0149.txt",
+    "rel": "khora/native/the-fold/surface/podcast-mouth.mjs",
+    "sha256": "8ed68a7b2bfbc920c3eca971bbcd9f0156d552a150fbda5439dd41e29d1b6ac5",
+    "bytes": 8809
+   },
+   {
+    "n": 150,
+    "file": "0150.txt",
+    "rel": "khora/native/the-fold/tables.js",
+    "sha256": "478ca7215b74eb3c9108fda9f1864f3e8f081d1f6d03fb43c809b6ccc8161018",
+    "bytes": 14244
+   },
+   {
+    "n": 151,
+    "file": "0151.txt",
+    "rel": "khora/native/the-fold/transcript.js",
+    "sha256": "2646c4d95169ab630989728e0b550a29c17fea47e00d03499a2f57925dbf1c27",
+    "bytes": 9373
+   }
+  ],
+  "unitsFingerprint": "24925779304e2213",
+  "docOfFingerprint": "0268c014db3a3fb9"
+ },
+ "sib-code-khora-eval-js": {
+  "tokensAtSnapshot": 293157,
+  "docs": [
+   {
+    "n": 0,
+    "file": "0000.txt",
+    "rel": "khora/native/eval/barker/profile-stats.mjs",
+    "sha256": "fc6e50cadc1521efad4f6f9c275e13912cc7ebc0b65806cdc913b498452a2c03",
+    "bytes": 15487
+   },
+   {
+    "n": 1,
+    "file": "0001.txt",
+    "rel": "khora/native/eval/barker/run.mjs",
+    "sha256": "30fa8f28265b0d034bba8126549fca08711e69981ecf55c357fc75fe898ce4a3",
+    "bytes": 17281
+   },
+   {
+    "n": 2,
+    "file": "0002.txt",
+    "rel": "khora/native/eval/barker/self.mjs",
+    "sha256": "5c82455ea7178429c2929ee88d37501a19d38f663091fea9025a664f8c50631b",
+    "bytes": 164828
+   },
+   {
+    "n": 3,
+    "file": "0003.txt",
+    "rel": "khora/native/eval/barker/transfer-data.mjs",
+    "sha256": "ce5850b3e26a9782e7e2edbe10a4fd4df8c78c6128ab094697f631649267f9d3",
+    "bytes": 40494
+   },
+   {
+    "n": 4,
+    "file": "0004.txt",
+    "rel": "khora/native/eval/beings-graded.mjs",
+    "sha256": "43d58e351b3875ae45105c8f8e31563881524dd0adf8df3d6e1c2fc72c392986",
+    "bytes": 22319
+   },
+   {
+    "n": 5,
+    "file": "0005.txt",
+    "rel": "khora/native/eval/coding-competence/build-c2-priors.mjs",
+    "sha256": "664064ac6da6b75212b60879f78386ffca2f7ce3dd843b013c1554215daab631",
+    "bytes": 11609
+   },
+   {
+    "n": 6,
+    "file": "0006.txt",
+    "rel": "khora/native/eval/coding-competence/build-javascript-priors.mjs",
+    "sha256": "5d70d7e86b741c5207ade4ec51341d43dd9a57212a684bf651c0c6fce543fe29",
+    "bytes": 58813
+   },
+   {
+    "n": 7,
+    "file": "0007.txt",
+    "rel": "khora/native/eval/coding-competence/build-rust-priors.mjs",
+    "sha256": "864f570fd03bc185e55c2597d3bf754ee11ec6eba6891768359ede7e23b18b01",
+    "bytes": 67862
+   },
+   {
+    "n": 8,
+    "file": "0008.txt",
+    "rel": "khora/native/eval/coding-competence/c0-build-prior.mjs",
+    "sha256": "05e827d8fce59cb348bcbd5ca32082b7f42ea02a85c138bdf901cc6220fd0ae8",
+    "bytes": 9942
+   },
+   {
+    "n": 9,
+    "file": "0009.txt",
+    "rel": "khora/native/eval/coding-competence/c0-identify.mjs",
+    "sha256": "3e9b89cfb80e7ad0eedfe1a679eb525c9fb6b6cc8f6fed179935691775a01fcd",
+    "bytes": 110947
+   },
+   {
+    "n": 10,
+    "file": "0010.txt",
+    "rel": "khora/native/eval/coding-competence/c1-xauth.mjs",
+    "sha256": "318469dc470c8fc449187e3aedf51448605d682dd5e62f3d3166e1b249508e41",
+    "bytes": 21148
+   },
+   {
+    "n": 11,
+    "file": "0011.txt",
+    "rel": "khora/native/eval/coding-competence/c2-gold-revalidate.mjs",
+    "sha256": "352644298da9b8319274e9e745724b289d23464434732c301d3ab8d0d111a9aa",
+    "bytes": 10944
+   },
+   {
+    "n": 12,
+    "file": "0012.txt",
+    "rel": "khora/native/eval/coding-competence/c2-lib.mjs",
+    "sha256": "ba73dfc41f431292614f672ef56790f06470e7c3a1f6bbf06b796eeb75e31f46",
+    "bytes": 23367
+   },
+   {
+    "n": 13,
+    "file": "0013.txt",
+    "rel": "khora/native/eval/coding-competence/c3-declared.mjs",
+    "sha256": "9a6b64a97d367dd062ca20fece018c3f3b127002e6fea586ad01c7fa3b527158",
+    "bytes": 120431
+   },
+   {
+    "n": 14,
+    "file": "0014.txt",
+    "rel": "khora/native/eval/coding-competence/c4-edges.mjs",
+    "sha256": "37deb7c0ef049cda96626d042e9b638a034217262ae53248caf07f73d179ab08",
+    "bytes": 96246
+   },
+   {
+    "n": 15,
+    "file": "0015.txt",
+    "rel": "khora/native/eval/coding-competence/c5-tasks/validate-adversarial.mjs",
+    "sha256": "f0528f6d76e0408d7181a46842f19247f32e9df7e532b0a63d61c60fb604c9a3",
+    "bytes": 8344
+   },
+   {
+    "n": 16,
+    "file": "0016.txt",
+    "rel": "khora/native/eval/coding-competence/c5-tasks/validate.mjs",
+    "sha256": "7d38804b384b09984ede7ee8aea5198328a93da3de8b5bd1065fd6b86d2d752a",
+    "bytes": 9582
+   },
+   {
+    "n": 17,
+    "file": "0017.txt",
+    "rel": "khora/native/eval/coding-competence/fixtures/javascript.js",
+    "sha256": "56e6619e7b200e917faa5de8ad89e03c28879f716a21e7cdd88e2ca208916087",
+    "bytes": 634
+   },
+   {
+    "n": 18,
+    "file": "0018.txt",
+    "rel": "khora/native/eval/coding-competence/javascript-priors-loader-check.mjs",
+    "sha256": "a1f26a0641158ab11f00ee7aac7034dba02016621400a5413d29a3f3066e38b7",
+    "bytes": 5078
+   },
+   {
+    "n": 19,
+    "file": "0019.txt",
+    "rel": "khora/native/eval/coding-competence/verify-java-priors-loader.mjs",
+    "sha256": "a620a4c330cbb2368bab85f80258beddae7e62bf6f5f25f9dc3810dd44970696",
+    "bytes": 8904
+   },
+   {
+    "n": 20,
+    "file": "0020.txt",
+    "rel": "khora/native/eval/coding-competence/xauth-c4-edges.mjs",
+    "sha256": "0341b2d26dad1be22a86ff07e07eb95cf0b3f0627efcf222c3eb236f10344e00",
+    "bytes": 28418
+   },
+   {
+    "n": 21,
+    "file": "0021.txt",
+    "rel": "khora/native/eval/coding-competence/xauth/xauth_js.mjs",
+    "sha256": "c01416a5f6b5eea0d33527b3eb836a6c8cd5a369fa21c59a620db7c7bb649b61",
+    "bytes": 2788
+   },
+   {
+    "n": 22,
+    "file": "0022.txt",
+    "rel": "khora/native/eval/competence/lib.mjs",
+    "sha256": "3daabf87dc5451f122252eae07f3453457b1d2d1b859f8d21de02edda8ddb033",
+    "bytes": 8694
+   },
+   {
+    "n": 23,
+    "file": "0023.txt",
+    "rel": "khora/native/eval/competence/r0-identify.mjs",
+    "sha256": "742c7406d639ea028245af2a7c350eaabaee4921c40e661ca5fd0682087096f9",
+    "bytes": 99548
+   },
+   {
+    "n": 24,
+    "file": "0024.txt",
+    "rel": "khora/native/eval/competence/r2-class.mjs",
+    "sha256": "c87e764f500edf72c69d0a15bdd423150d6c679490668595b7ea4b18f0dbdfb9",
+    "bytes": 76732
+   },
+   {
+    "n": 25,
+    "file": "0025.txt",
+    "rel": "khora/native/eval/competence/r3-beings.mjs",
+    "sha256": "ccbbbea66881eb93e9a99a1e5adb2a02b0b4e24ec97dfdd47542d490f615e857",
+    "bytes": 66665
+   },
+   {
+    "n": 26,
+    "file": "0026.txt",
+    "rel": "khora/native/eval/kinds-swarm/ant-adversary/analyse_irc.mjs",
+    "sha256": "f4dabfa5e0539c4e15f13a94d9314ae5fa3b41b394ff1f984601b0344d9d641b",
+    "bytes": 9787
+   },
+   {
+    "n": 27,
+    "file": "0027.txt",
+    "rel": "khora/native/eval/kinds-swarm/ant-adversary/kind_position.mjs",
+    "sha256": "1a522b38f62401c6f179f190cddd59f9c8d2d7dcb333449540c2478a2d79d161",
+    "bytes": 1517
+   },
+   {
+    "n": 28,
+    "file": "0028.txt",
+    "rel": "khora/native/eval/kinds-swarm/ant-code/ana_lib.mjs",
+    "sha256": "510b24db3d4e9e6bd85c9ba37f666bf1f18ccca2c4f7e17ce4f1b01cebb12ab6",
+    "bytes": 4444
+   },
+   {
+    "n": 29,
+    "file": "0029.txt",
+    "rel": "khora/native/eval/kinds-swarm/ant-code/lex_js.mjs",
+    "sha256": "d765f9a4a3ef32cd17b61e5694926063f8dab3eb92c15d23af7f5c4135c6cdcb",
+    "bytes": 7450
+   },
+   {
+    "n": 30,
+    "file": "0030.txt",
+    "rel": "khora/native/eval/kinds-swarm/ant-code/lib.mjs",
+    "sha256": "719ab00571f25412e9606c0dd6d804ac3e5b36bd5cb9debd5e15609c996026c6",
+    "bytes": 11573
+   },
+   {
+    "n": 31,
+    "file": "0031.txt",
+    "rel": "khora/native/eval/kinds-swarm/ant-code/sample_report.mjs",
+    "sha256": "78993657a05c22717b192bf56b71fa0b09e9db60432f28ccd5f7f77aa4bd69c8",
+    "bytes": 1724
+   },
+   {
+    "n": 32,
+    "file": "0032.txt",
+    "rel": "khora/native/eval/kinds-swarm/ant-kinds-chat/analyse.mjs",
+    "sha256": "bd758a5c2e6cb461e92cd25bb4eda354415b7d3e6b8a3342b9d6d2483eb7d017",
+    "bytes": 24340
+   },
+   {
+    "n": 33,
+    "file": "0033.txt",
+    "rel": "khora/native/eval/kinds-swarm/ant-kinds-chat/signature.mjs",
+    "sha256": "fe7aeb5f1044c7018dc4381bfc11eecd19e02f7446780121cb79f50936cb23be",
+    "bytes": 13952
+   },
+   {
+    "n": 34,
+    "file": "0034.txt",
+    "rel": "khora/native/eval/kinds-swarm/ant-kinds-novel/induce.mjs",
+    "sha256": "cd03136874833a6fbd584cdb688ca802aeaee765e3ad4adf26e13f692efe4ab2",
+    "bytes": 8965
+   },
+   {
+    "n": 35,
+    "file": "0035.txt",
+    "rel": "khora/native/eval/kinds-swarm/ant-kinds-ud/agg.mjs",
+    "sha256": "903dcb87f80a992a05c8c2a75f8e2ac8ad38726b940a2655364482fb3f771659",
+    "bytes": 21192
+   },
+   {
+    "n": 36,
+    "file": "0036.txt",
+    "rel": "khora/native/eval/kinds-swarm/ant-production/mkA2.mjs",
+    "sha256": "5c30acbb9f29ef31456766e885136fc45765a3fab62a301a30894c76fbc1ce32",
+    "bytes": 742
+   },
+   {
+    "n": 37,
+    "file": "0037.txt",
+    "rel": "khora/native/eval/kinds-swarm/mark.mjs",
+    "sha256": "2273b2fed87ce97de519e9800af939b20cab88900ce524ad8e20b70b8fee990e",
+    "bytes": 2451
+   },
+   {
+    "n": 38,
+    "file": "0038.txt",
+    "rel": "khora/native/eval/language-reach.mjs",
+    "sha256": "2f3b76904b3fd14bf338801fca16ed66852d83f05da9d5de8bfa84675d0e9957",
+    "bytes": 3964
+   },
+   {
+    "n": 39,
+    "file": "0039.txt",
+    "rel": "khora/native/eval/lavar/capacity-swarm.mjs",
+    "sha256": "39f35e11283bbd30568ad2a6c20c6eb5c7b77a9e97e0d220367540b80419af01",
+    "bytes": 9511
+   },
+   {
+    "n": 40,
+    "file": "0040.txt",
+    "rel": "khora/native/eval/lavar/eo-swarm.mjs",
+    "sha256": "444573cc3df542a2e424b8df6aadcd67f63b05770da091c3fe55873a4b3ca379",
+    "bytes": 8673
+   },
+   {
+    "n": 41,
+    "file": "0041.txt",
+    "rel": "khora/native/eval/lavar/swarm-gate.mjs",
+    "sha256": "a64c80e9944db9619554b5b00a6b51e22de1e033675e45c32e6f494f728e430c",
+    "bytes": 4173
+   },
+   {
+    "n": 42,
+    "file": "0042.txt",
+    "rel": "khora/native/eval/lavar/visual-rec.mjs",
+    "sha256": "d3827f1341368ca50b41d5069bb16bc2866235e9881ffdc63a157228cba74f72",
+    "bytes": 9926
+   },
+   {
+    "n": 43,
+    "file": "0043.txt",
+    "rel": "khora/native/eval/law/corpus.mjs",
+    "sha256": "f4acb99f2c503db4269ca9d3245e830e6f1666b1ba8ed8e9596eb8823fb54c4b",
+    "bytes": 100425
+   },
+   {
+    "n": 44,
+    "file": "0044.txt",
+    "rel": "khora/native/eval/law/name-company-diag.mjs",
+    "sha256": "f431375eb26d0d691b70f3511f05b6ac139045c61462c2847f7fdb7f35ea4101",
+    "bytes": 1347
+   },
+   {
+    "n": 45,
+    "file": "0045.txt",
+    "rel": "khora/native/eval/law/name-war-and-peace-real.mjs",
+    "sha256": "cd5549e868dedd30752363e06f74f94e38871138ef3044bffc0b67b859d0f111",
+    "bytes": 8238
+   },
+   {
+    "n": 46,
+    "file": "0046.txt",
+    "rel": "khora/native/eval/law/provisional/ablation-scope/analyse-strata.mjs",
+    "sha256": "1c0703d5dcc131fcac94ab39f5958aae42de3fb8bd61d24ae7db4e5c4bbfb8cb",
+    "bytes": 17672
+   },
+   {
+    "n": 47,
+    "file": "0047.txt",
+    "rel": "khora/native/eval/law/provisional/ablation-scope/avail.mjs",
+    "sha256": "34ac8c5a2e77ba3873d6dbf72356018d3c1b72ad244e49a0554c8523db40cdf8",
+    "bytes": 1006
+   },
+   {
+    "n": 48,
+    "file": "0048.txt",
+    "rel": "khora/native/eval/law/provisional/ablation-scope/bench.mjs",
+    "sha256": "1c17cfff2e449216f9700f05a138366195e1652ec31be0b1eaa3c5742a5e7020",
+    "bytes": 952
+   },
+   {
+    "n": 49,
+    "file": "0049.txt",
+    "rel": "khora/native/eval/law/provisional/ablation-scope/days.mjs",
+    "sha256": "37c443ef227d7650559a670ff95490cb08d1885e6167b205dbd43ad94dd5c6bc",
+    "bytes": 820
+   },
+   {
+    "n": 50,
+    "file": "0050.txt",
+    "rel": "khora/native/eval/law/provisional/ablation-scope/lib-book.mjs",
+    "sha256": "793d51d7c7514ab3ffda8c80c5ab4e243975571f73567aa524febe528281db94",
+    "bytes": 3332
+   },
+   {
+    "n": 51,
+    "file": "0051.txt",
+    "rel": "khora/native/eval/law/provisional/ablation-scope/lib-pairs.mjs",
+    "sha256": "1c75ad474ee1bb254cc9893b3ffa04c748a734b67c4afe3b8bfc07f46628a8b5",
+    "bytes": 10233
+   },
+   {
+    "n": 52,
+    "file": "0052.txt",
+    "rel": "khora/native/eval/law/provisional/ablation-scope/lib-ud.mjs",
+    "sha256": "122619c956eb36aca33a298950b2a6e17698bdd7f372464e0317aed2ae461dba",
+    "bytes": 1435
+   },
+   {
+    "n": 53,
+    "file": "0053.txt",
+    "rel": "khora/native/eval/law/provisional/ablation-scope/read-M.mjs",
+    "sha256": "dc020b6fd0b853e3c2ca11f6e73b4e565d87cf5905c7adf42d8b6fe38f3f9b95",
+    "bytes": 5120
+   },
+   {
+    "n": 54,
+    "file": "0054.txt",
+    "rel": "khora/native/eval/law/provisional/ablation-scope/rinit-plain.mjs",
+    "sha256": "b82dd85c5640a526714709dd74c4fa205bf2796a2723d54ac5f087e88b59c86c",
+    "bytes": 10381
+   },
+   {
+    "n": 55,
+    "file": "0055.txt",
+    "rel": "khora/native/eval/law/provisional/ablation-scope/rival-scope.mjs",
+    "sha256": "85cd49fe80819fd6bc2feaf747b8b484cae2cf7975211c32d5e7fa1b7fac20b3",
+    "bytes": 6131
+   },
+   {
+    "n": 56,
+    "file": "0056.txt",
+    "rel": "khora/native/eval/law/provisional/attack-PM-R1-unit-initial-excess/attack-A2-irc-perday.mjs",
+    "sha256": "049745bc7590be40d433c4789946be5cf8d2f614e96c3fb3b956e56c8c49acc6",
+    "bytes": 5449
+   },
+   {
+    "n": 57,
+    "file": "0057.txt",
+    "rel": "khora/native/eval/law/provisional/attack-PM-R1-unit-initial-excess/attack-B.mjs",
+    "sha256": "c626543678f420f8dce13640fce2d192701def20f1efa7d88d3e135f7d90dc30",
+    "bytes": 26717
+   },
+   {
+    "n": 58,
+    "file": "0058.txt",
+    "rel": "khora/native/eval/law/provisional/attack-PM-R1-unit-initial-excess/attack-C.mjs",
+    "sha256": "ddf1acba5288bfb982707ba388ab6004d6ec9a8a3dcb2931555f10427be37262",
+    "bytes": 20164
+   },
+   {
+    "n": 59,
+    "file": "0059.txt",
+    "rel": "khora/native/eval/law/provisional/attack-PM-R2-left-company-polarity/attack-A-strict.mjs",
+    "sha256": "4d7bdd3317b8a5e6744e6636c92d2692b71c232751d124db0ebad4e718c8e4e8",
+    "bytes": 8761
+   },
+   {
+    "n": 60,
+    "file": "0060.txt",
+    "rel": "khora/native/eval/law/provisional/attack-PM-R2-left-company-polarity/attack-C-rivals.mjs",
+    "sha256": "2baf691edfa396ba60d8ffbbee3f80eb047a7756961e1f36250ce47b772f6f79",
+    "bytes": 7209
+   },
+   {
+    "n": 61,
+    "file": "0061.txt",
+    "rel": "khora/native/eval/law/provisional/attack-R1-first-left-fwc32/attack-A.mjs",
+    "sha256": "2ee19e09e16da625c7c61863cde9f10821799eb7f2b7cfe725a9d4d2038d6944",
+    "bytes": 13277
+   },
+   {
+    "n": 62,
+    "file": "0062.txt",
+    "rel": "khora/native/eval/law/provisional/attack-R1-first-left-fwc32/attack-A2.mjs",
+    "sha256": "627564e2b400e4062f606c6db0f117f19f1680af016d150bc86c8cc65602cf1d",
+    "bytes": 15663
+   },
+   {
+    "n": 63,
+    "file": "0063.txt",
+    "rel": "khora/native/eval/law/provisional/attack-R1-first-left-fwc32/attack-A3.mjs",
+    "sha256": "b11e82d6cf48dc431048798a92a4a4ecaa14ee54bc191cdffd35cbfd160e078d",
+    "bytes": 6400
+   },
+   {
+    "n": 64,
+    "file": "0064.txt",
+    "rel": "khora/native/eval/law/provisional/attack-R1-first-left-fwc32/attack-H.mjs",
+    "sha256": "a202b9bd01f79dcd878c82976c1dc2f468099637a3ee6dbda232446dde46d30f",
+    "bytes": 2969
+   },
+   {
+    "n": 65,
+    "file": "0065.txt",
+    "rel": "khora/native/eval/law/provisional/attack-R1-first-left-fwc32/verify.mjs",
+    "sha256": "4ba613620b3f48ac1a2824cda42357d0150ad14484860dea16671e9c7580fd36",
+    "bytes": 5788
+   },
+   {
+    "n": 66,
+    "file": "0066.txt",
+    "rel": "khora/native/eval/law/provisional/attack-R1_first_slot_share/attackA.mjs",
+    "sha256": "9c2caee73d91088c653ff3baeb231c3891cc4c12d02bc5aaf0113eaa2ad94d20",
+    "bytes": 9349
+   },
+   {
+    "n": 67,
+    "file": "0067.txt",
+    "rel": "khora/native/eval/law/provisional/attack-R1_first_slot_share/match.mjs",
+    "sha256": "8c2fb0985e9afa0aaf7fe5112e0b6431ddc1918205bb7d0ffd3e9c0063a71c82",
+    "bytes": 6615
+   },
+   {
+    "n": 68,
+    "file": "0068.txt",
+    "rel": "khora/native/eval/law/provisional/attack-R1_first_slot_share/postbot.mjs",
+    "sha256": "888d925dad1aba44e1605b80e30bf5fdddf1c55e06025262346c38ab5e1374bc",
+    "bytes": 3208
+   },
+   {
+    "n": 69,
+    "file": "0069.txt",
+    "rel": "khora/native/eval/law/provisional/attack-R1_first_slot_share/postsham.mjs",
+    "sha256": "06d491a2b3139e6c2a79da609200c3902d3c38b6afccffbcd06ab19d33f987dc",
+    "bytes": 2949
+   },
+   {
+    "n": 70,
+    "file": "0070.txt",
+    "rel": "khora/native/eval/law/provisional/attack-R2-later-both-fwc32/attackB.mjs",
+    "sha256": "874d474277badcf7d24a58f9c5ac736ace7429bc907224a9b97bb9d01d804e50",
+    "bytes": 22593
+   },
+   {
+    "n": 71,
+    "file": "0071.txt",
+    "rel": "khora/native/eval/law/provisional/attack-R2-later-both-fwc32/attackB2.mjs",
+    "sha256": "f5ce2fac54def9c2de87868edfc550dc68a8b614270b6cf305449eb081c41cdd",
+    "bytes": 10108
+   },
+   {
+    "n": 72,
+    "file": "0072.txt",
+    "rel": "khora/native/eval/law/provisional/attack-R2-later-both-fwc32/attackX.mjs",
+    "sha256": "ca05113d4dcd09d654e6111a3d02941d64c272b0262d5e1434731124f7535460",
+    "bytes": 8230
+   },
+   {
+    "n": 73,
+    "file": "0073.txt",
+    "rel": "khora/native/eval/law/provisional/attack-R2-later-both-fwc32/pairs.mjs",
+    "sha256": "a9c5335ccad840cc51ac5f957144e1d7ea4a6992097d949aebb126367c6de84f",
+    "bytes": 5631
+   },
+   {
+    "n": 74,
+    "file": "0074.txt",
+    "rel": "khora/native/eval/law/provisional/attack-R2_first_mention_lookahead/hdr.mjs",
+    "sha256": "57412b6ec9d9c475638f3972c6b54658589310cf54e3277f96d3c36d236d1cfb",
+    "bytes": 1476
+   },
+   {
+    "n": 75,
+    "file": "0075.txt",
+    "rel": "khora/native/eval/law/provisional/attack-R2_first_mention_lookahead/sanity.mjs",
+    "sha256": "e458991e6f633cee5ff3f9192d8a6252d12f39111796646eb57b821d914ebf8d",
+    "bytes": 1497
+   },
+   {
+    "n": 76,
+    "file": "0076.txt",
+    "rel": "khora/native/eval/law/provisional/attack-ablscope-1-slot-ircB-c4plus/attack-a-analyse.mjs",
+    "sha256": "a062d01a2ee09fdd5d07b3aeb538906972c6419d50565d8ab8649db5d08fdb06",
+    "bytes": 18932
+   },
+   {
+    "n": 77,
+    "file": "0077.txt",
+    "rel": "khora/native/eval/law/provisional/attack-ablscope-2-company-ircA-c2to6/design-counts.mjs",
+    "sha256": "8c134842461a4870d19bfa39a8ebd6f59ae872a9bb9fa88dd9efd6389cf57f1c",
+    "bytes": 1254
+   },
+   {
+    "n": 78,
+    "file": "0078.txt",
+    "rel": "khora/native/eval/law/provisional/attack-ablscope-2-company-ircA-c2to6/design-fresh.mjs",
+    "sha256": "f75ebac5fc3691c9d418d690b41da82dbc50c772e7fb55f2398c0b1f3d287f1d",
+    "bytes": 2026
+   },
+   {
+    "n": 79,
+    "file": "0079.txt",
+    "rel": "khora/native/eval/law/provisional/attack-relatedness-romance-set/atk-a.mjs",
+    "sha256": "72aaf8b6b9d58119714f4efae3e2754fc701984e9a4eb3a38c5dfaf09b4663ac",
+    "bytes": 8038
+   },
+   {
+    "n": 80,
+    "file": "0080.txt",
+    "rel": "khora/native/eval/law/provisional/attack-relatedness-romance-set/atk-a2.mjs",
+    "sha256": "2e5b85730d7abefe91ac18041dd182e93de1a05493073718f1b1c4b62727a408",
+    "bytes": 7086
+   },
+   {
+    "n": 81,
+    "file": "0081.txt",
+    "rel": "khora/native/eval/law/provisional/attack-relatedness-romance-set/atk-c2.mjs",
+    "sha256": "aff03a1b65ef7b4352e819f9eb7159245a8bbc97d62e76f7608db733d3d3a182",
+    "bytes": 6121
+   },
+   {
+    "n": 82,
+    "file": "0082.txt",
+    "rel": "khora/native/eval/law/provisional/attack-relatedness-sister-dyads/attackC.mjs",
+    "sha256": "ec994fb6d7d1e1d2550b4086b7ad5107b2ad4e728226ba1c1879417fb386a7f8",
+    "bytes": 17811
+   },
+   {
+    "n": 83,
+    "file": "0083.txt",
+    "rel": "khora/native/eval/law/provisional/attack-relatedness-sister-dyads/transfer.mjs",
+    "sha256": "f935ea5c7d861997325d797565fd9bc7e47a7a730e324512bc2bccc274da0b07",
+    "bytes": 4506
+   },
+   {
+    "n": 84,
+    "file": "0084.txt",
+    "rel": "khora/native/eval/law/provisional/carried-rules/build-rulebook.mjs",
+    "sha256": "d0376bf0e390a2e858468dabc9519028baba34750f4c7f1eeec9c3fd1ab9e847",
+    "bytes": 7516
+   },
+   {
+    "n": 85,
+    "file": "0085.txt",
+    "rel": "khora/native/eval/law/provisional/carried-rules/verify-graded.mjs",
+    "sha256": "2bf42009a23c3337a8fd5f6b1dbd7f8d804ee0fa770ef83d7778e4d2f85893e0",
+    "bytes": 5191
+   },
+   {
+    "n": 86,
+    "file": "0086.txt",
+    "rel": "khora/native/eval/law/provisional/carried-rules/verify-signals.mjs",
+    "sha256": "d218c9c193a860e4f3c6c87d3cf5229b9786083c3526035dc8f8058886f98a53",
+    "bytes": 9169
+   },
+   {
+    "n": 87,
+    "file": "0087.txt",
+    "rel": "khora/native/eval/law/provisional/chat-scope/discover.mjs",
+    "sha256": "21d119f2c3da7a9205d9c7ecb02d0e7b5323853608738c7d47065a8b2a382070",
+    "bytes": 12371
+   },
+   {
+    "n": 88,
+    "file": "0088.txt",
+    "rel": "khora/native/eval/law/provisional/chat-scope/explore-limits.mjs",
+    "sha256": "078270f3909ff9c13bf95b015aa6424d799ef7385f1f709ca5decff788ef568b",
+    "bytes": 2182
+   },
+   {
+    "n": 89,
+    "file": "0089.txt",
+    "rel": "khora/native/eval/law/provisional/chat-scope/probe-frame.mjs",
+    "sha256": "0e0b2bcbcc377d977f13dc691af901e7617635108ce45cacce76444f780cdf23",
+    "bytes": 5046
+   },
+   {
+    "n": 90,
+    "file": "0090.txt",
+    "rel": "khora/native/eval/law/provisional/company-moderators/descriptors.mjs",
+    "sha256": "73243f1cfcd2e4dd453cf0554205963d48b96a68686d618ec08efbaebde39731",
+    "bytes": 4886
+   },
+   {
+    "n": 91,
+    "file": "0091.txt",
+    "rel": "khora/native/eval/law/provisional/company-moderators/robust.mjs",
+    "sha256": "2a54316db0ad2a4895b12bcf797d593038e88ffed72f04509b795e5694b8fe76",
+    "bytes": 6793
+   },
+   {
+    "n": 92,
+    "file": "0092.txt",
+    "rel": "khora/native/eval/law/provisional/company-moderators/util.mjs",
+    "sha256": "58b87e32ba788c3645ca8dd43325a2e8e0506de48f7bba66c1ff62af4902a1db",
+    "bytes": 2248
+   },
+   {
+    "n": 93,
+    "file": "0093.txt",
+    "rel": "khora/native/eval/law/provisional/confirm-PM-R1-unit-initial-excess/select-data.mjs",
+    "sha256": "9363a43004dc08b275c20b2b21a20d9d2a11887485533466fc38c581af7d33c3",
+    "bytes": 11727
+   },
+   {
+    "n": 94,
+    "file": "0094.txt",
+    "rel": "khora/native/eval/law/provisional/confirm-PM-R2-left-company-polarity/posthoc-verdict.mjs",
+    "sha256": "66e79f29a775bf086516d1a2e14db8f0b5a292c904799928f1b9613d44c7b4c7",
+    "bytes": 10290
+   },
+   {
+    "n": 95,
+    "file": "0095.txt",
+    "rel": "khora/native/eval/law/provisional/confirm-PM-R2-left-company-polarity/sham-summary.mjs",
+    "sha256": "590c45a7343f6020b135b1ce07bf4242d53da878d273fe4ed9c6e8e45f9cf5e2",
+    "bytes": 2193
+   },
+   {
+    "n": 96,
+    "file": "0096.txt",
+    "rel": "khora/native/eval/law/provisional/confirm-R1-first-left-fwc32/prep-windows.mjs",
+    "sha256": "fbc1e10019f3a5d83a0287d747994bf03c24758061adb17afa54c56520a2babe",
+    "bytes": 1986
+   },
+   {
+    "n": 97,
+    "file": "0097.txt",
+    "rel": "khora/native/eval/law/provisional/confirm-R1_first_slot_share/count2.mjs",
+    "sha256": "05b0a08cb8caa1db1061fcefa10f8971e503dca70a5580f1a7f5d5482e5c3fef",
+    "bytes": 482
+   },
+   {
+    "n": 98,
+    "file": "0098.txt",
+    "rel": "khora/native/eval/law/provisional/confirm-R1_first_slot_share/count4.mjs",
+    "sha256": "0d2432645a5cb8643a722bf678c1a32eafeeb6fae32604b5d3f4e9892230916c",
+    "bytes": 1925
+   },
+   {
+    "n": 99,
+    "file": "0099.txt",
+    "rel": "khora/native/eval/law/provisional/confirm-R1_first_slot_share/part-e.mjs",
+    "sha256": "166291219a11d61769aed2dcaacce268489eb6f93b7cfe513ae651545a756a02",
+    "bytes": 5988
+   },
+   {
+    "n": 100,
+    "file": "0100.txt",
+    "rel": "khora/native/eval/law/provisional/confirm-R1_first_slot_share/strat.mjs",
+    "sha256": "9d30f13961da22c121958228f659cd0c8dfb2fc20fb79e6d690423cfe51237e7",
+    "bytes": 3660
+   },
+   {
+    "n": 101,
+    "file": "0101.txt",
+    "rel": "khora/native/eval/law/provisional/confirm-R1_first_slot_share/summarize.mjs",
+    "sha256": "7c738956c226f35c98883652b095991244d0b55ee8e3965aa2d8c6b4e35ba42c",
+    "bytes": 2419
+   },
+   {
+    "n": 102,
+    "file": "0102.txt",
+    "rel": "khora/native/eval/law/provisional/confirm-R2-later-both-fwc32/confirm.mjs",
+    "sha256": "e3be2573c74454a372316d7f6c63e387c6f0b2168d98dab3cfd2679a97266f11",
+    "bytes": 28099
+   },
+   {
+    "n": 103,
+    "file": "0103.txt",
+    "rel": "khora/native/eval/law/provisional/confirm-R2-later-both-fwc32/lib.mjs",
+    "sha256": "5738c1f5e04ab5db7633c1d30caf5d24e184ae94f06f01f6d7d74bfc37048dea",
+    "bytes": 8721
+   },
+   {
+    "n": 104,
+    "file": "0104.txt",
+    "rel": "khora/native/eval/law/provisional/confirm-R2_first_mention_lookahead/cells.mjs",
+    "sha256": "c7bb966c2e45b3203c6081883c52949000f7a2e04e8124311c6874c49c1cefb6",
+    "bytes": 3752
+   },
+   {
+    "n": 105,
+    "file": "0105.txt",
+    "rel": "khora/native/eval/law/provisional/confirm-R2_first_mention_lookahead/explore-nonen.mjs",
+    "sha256": "074e48216537dde170943480475eff03b804c11f38790409e173313efc43f31f",
+    "bytes": 6020
+   },
+   {
+    "n": 106,
+    "file": "0106.txt",
+    "rel": "khora/native/eval/law/provisional/confirm-R2_first_mention_lookahead/lib.mjs",
+    "sha256": "36faf1085b0c96007536db41a43fa411cd71a26d6898ef858e9b6075f8bf542a",
+    "bytes": 5105
+   },
+   {
+    "n": 107,
+    "file": "0107.txt",
+    "rel": "khora/native/eval/law/provisional/confirm-ablscope-1-slot-ircB-c4plus/lib.mjs",
+    "sha256": "ddf6ebdfc248ec9adb5133d2d5b4b10ebedb0f26904c7f330a03ef7d37c27444",
+    "bytes": 8261
+   },
+   {
+    "n": 108,
+    "file": "0108.txt",
+    "rel": "khora/native/eval/law/provisional/confirm-ablscope-1-slot-ircB-c4plus/robust-redraw.mjs",
+    "sha256": "f1b818f8560906696608bc2b47c5aaac4f8913c851058245d2e3c33b26b53538",
+    "bytes": 3798
+   },
+   {
+    "n": 109,
+    "file": "0109.txt",
+    "rel": "khora/native/eval/law/provisional/confirm-ablscope-2-company-ircA-c2to6/confirm.mjs",
+    "sha256": "01ad81068073167dc0e28017d7f50890d89996fb6ec3e8361cb09c5c367870e7",
+    "bytes": 26204
+   },
+   {
+    "n": 110,
+    "file": "0110.txt",
+    "rel": "khora/native/eval/law/provisional/confirm-ablscope-2-company-ircA-c2to6/design-days.mjs",
+    "sha256": "8eacba2a299a02d0af06be13569a86fdc6c99eb8bcce48dec566815d12241834",
+    "bytes": 4856
+   },
+   {
+    "n": 111,
+    "file": "0111.txt",
+    "rel": "khora/native/eval/law/provisional/confirm-ablscope-2-company-ircA-c2to6/posthoc-decay.mjs",
+    "sha256": "e267da9050c43e2048f18cf150300a04bff5fe9bb9e53de17953cfdde88d2608",
+    "bytes": 2314
+   },
+   {
+    "n": 112,
+    "file": "0112.txt",
+    "rel": "khora/native/eval/law/provisional/confirm-ablscope-2-company-ircA-c2to6/smoke-k0.mjs",
+    "sha256": "69b32b1dc0db1bacab358b32f36481be60a94f973a398a86f6a202594543885e",
+    "bytes": 1132
+   },
+   {
+    "n": 113,
+    "file": "0113.txt",
+    "rel": "khora/native/eval/law/provisional/confirm-relatedness-romance-set/confirm-e1.mjs",
+    "sha256": "86049cffa38ca738fc83b5aa2143639d732ef6e6aa66b6aed4bbf178173e435d",
+    "bytes": 3038
+   },
+   {
+    "n": 114,
+    "file": "0114.txt",
+    "rel": "khora/native/eval/law/provisional/confirm-relatedness-romance-set/confirm-run.mjs",
+    "sha256": "812b0e6a2e8088a392e79b73ca142b867fa2526fc5ed3a1ba634cedaf41bf93c",
+    "bytes": 3625
+   },
+   {
+    "n": 115,
+    "file": "0115.txt",
+    "rel": "khora/native/eval/law/provisional/confirm-relatedness-romance-set/lib-fresh.mjs",
+    "sha256": "47a6316b68a06df31dc9cdb1d1411d4245c1fcbfe7bdb38249459e64de13e16d",
+    "bytes": 7688
+   },
+   {
+    "n": 116,
+    "file": "0116.txt",
+    "rel": "khora/native/eval/law/provisional/confirm-relatedness-romance-set/post-e3.mjs",
+    "sha256": "443c499c81fb275cbad60c2a422422092e56f46461b5f5f38284c59ab9c72bca",
+    "bytes": 5716
+   },
+   {
+    "n": 117,
+    "file": "0117.txt",
+    "rel": "khora/native/eval/law/provisional/confirm-relatedness-sister-dyads/confirm.mjs",
+    "sha256": "6a3748012ccfbc90476ffe470df70bd7d06b45e1013858ca4ccb97f0a2b38e4a",
+    "bytes": 18151
+   },
+   {
+    "n": 118,
+    "file": "0118.txt",
+    "rel": "khora/native/eval/law/provisional/confirm-relatedness-sister-dyads/posthoc.mjs",
+    "sha256": "7f3daff2382be2c2e195ec3d371a1998139416d8831f1d9d9430857ead02f502",
+    "bytes": 5763
+   },
+   {
+    "n": 119,
+    "file": "0119.txt",
+    "rel": "khora/native/eval/law/provisional/family-vs-relatedness/analysis.mjs",
+    "sha256": "cc19ee5bfc496a877c429d0380cf21e30be0e51c3d5b51ac27ec2d7ff9311868",
+    "bytes": 15350
+   },
+   {
+    "n": 120,
+    "file": "0120.txt",
+    "rel": "khora/native/eval/law/provisional/family-vs-relatedness/confirm.mjs",
+    "sha256": "705326fd229f2b2e5e32028830e8ed7946e8bfcb2caf42277298341c46071290",
+    "bytes": 10552
+   },
+   {
+    "n": 121,
+    "file": "0121.txt",
+    "rel": "khora/native/eval/law/provisional/family-vs-relatedness/fingerprint.mjs",
+    "sha256": "856f46aba140de7df3afb5975b4c2df28c769df42156c7ea35b2b73740734bd4",
+    "bytes": 22492
+   },
+   {
+    "n": 122,
+    "file": "0122.txt",
+    "rel": "khora/native/eval/law/provisional/family-vs-relatedness/summary.mjs",
+    "sha256": "0745b7b03462fad04812fab9d47fa0478b76b6a2fb09a91f4bdda1635f7f9731",
+    "bytes": 2706
+   },
+   {
+    "n": 123,
+    "file": "0123.txt",
+    "rel": "khora/native/eval/law/provisional/polarity-map/analyse.mjs",
+    "sha256": "a12990b5a6dfe00f1f4bf810df5242c4fa804e2d977201dc8a17574a4d34d617",
+    "bytes": 11202
+   },
+   {
+    "n": 124,
+    "file": "0124.txt",
+    "rel": "khora/native/eval/law/provisional/polarity-map/lib.mjs",
+    "sha256": "a9e418e3084ac999eadeb91a57d53eeb0b971fbb8fc9cb6557e800a2f6227035",
+    "bytes": 11608
+   },
+   {
+    "n": 125,
+    "file": "0125.txt",
+    "rel": "khora/native/eval/law/provisional/polarity-map/map2.mjs",
+    "sha256": "edcc8523765538590ec0936d0cfb12e3495384c71e1085cda2beb2276d13ca08",
+    "bytes": 7649
+   },
+   {
+    "n": 126,
+    "file": "0126.txt",
+    "rel": "khora/native/eval/law/provisional/polarity-map/registers.mjs",
+    "sha256": "4d5643012403408b6ab5ce28502624bdb0eaea58575d96e1f9a0e4042168e8e7",
+    "bytes": 8367
+   },
+   {
+    "n": 127,
+    "file": "0127.txt",
+    "rel": "khora/native/eval/notation-competence/genetic/build-priors.mjs",
+    "sha256": "993cf766b7c069303a58911340795f33e2932eca6b94a04de27fc4c0830013df",
+    "bytes": 26704
+   },
+   {
+    "n": 128,
+    "file": "0128.txt",
+    "rel": "khora/native/eval/notation-competence/music_abc-build-priors.mjs",
+    "sha256": "bb9993f7d2c4806282e7b7d7253290e09cbf4b2b8eb283564286cafe63f4615e",
+    "bytes": 21788
+   },
+   {
+    "n": 129,
+    "file": "0129.txt",
+    "rel": "khora/native/eval/notation-competence/music_abc-prep/abc_to_midi.mjs",
+    "sha256": "a38d2bd8b7627de12e48142252181ae229c41fa7a7083c2fe21a1d3283e4a33d",
+    "bytes": 1371
+   },
+   {
+    "n": 130,
+    "file": "0130.txt",
+    "rel": "khora/native/eval/notation-competence/music_abc-prep/validate_structure.mjs",
+    "sha256": "36052807b5400bd855cc713d6be258c08b2c15a62b82554fea4cbbd9ef03383e",
+    "bytes": 10358
+   },
+   {
+    "n": 131,
+    "file": "0131.txt",
+    "rel": "khora/native/eval/notation-competence/taxonomy-data/dump-fps.mjs",
+    "sha256": "51af74e2f1425425d2e541fec632311307ddd1bc2fe1fcfb909b9219c55ecdb6",
+    "bytes": 1606
+   },
+   {
+    "n": 132,
+    "file": "0132.txt",
+    "rel": "khora/native/eval/notation-competence/uml_bpmn-priors.mjs",
+    "sha256": "bed7e8213732f49f8a752894c3a774de39bb3a8cc747b16cc6912504b7963a53",
+    "bytes": 21944
+   },
+   {
+    "n": 133,
+    "file": "0133.txt",
+    "rel": "khora/native/eval/physics-handles/clock-energy.mjs",
+    "sha256": "d42b1e29c6318f768fe07938e295c6fa10d08a8ac4ca5b8baa8e8b40b054b11c",
+    "bytes": 6970
+   },
+   {
+    "n": 134,
+    "file": "0134.txt",
+    "rel": "khora/native/eval/physics-handles/curvature.mjs",
+    "sha256": "1d7a0bd2f4ecabf6a1ed4285f71608107a5b6a0e94c78ea263bd45de250905c4",
+    "bytes": 25670
+   },
+   {
+    "n": 135,
+    "file": "0135.txt",
+    "rel": "khora/native/eval/physics-handles/gravity.mjs",
+    "sha256": "1f9d935526fb5bc4939445eb96e0081719dde1b3513a7d975eb1d562a62676c3",
+    "bytes": 20927
+   },
+   {
+    "n": 136,
+    "file": "0136.txt",
+    "rel": "khora/native/eval/physics-handles/reliability.mjs",
+    "sha256": "7d4e26d8b51b8d2f897efcda2cc236f29522b2effe8bcf7dcdb9913a1071f12b",
+    "bytes": 2858
+   },
+   {
+    "n": 137,
+    "file": "0137.txt",
+    "rel": "khora/native/eval/reading-helps-falsify.mjs",
+    "sha256": "307076e066238b7febd70c2fc724833eddc961590a8d0dabb89e0211a5f9a9f5",
+    "bytes": 9302
+   }
+  ],
+  "unitsFingerprint": "523ffc4108edc9ee",
+  "docOfFingerprint": "814e76ecf3c7b9bd"
+ },
+ "sib-code-fold-js": {
+  "tokensAtSnapshot": 294584,
+  "docs": [
+   {
+    "n": 0,
+    "file": "0000.txt",
+    "rel": "the-fold/docs/playback/existence/build.mjs",
+    "sha256": "7210d6888bd0bcd750320c7ac373199d84eb1e010eed70ca6ac4db368ec475b3",
+    "bytes": 1982
+   },
+   {
+    "n": 1,
+    "file": "0001.txt",
+    "rel": "the-fold/docs/playback/existence/parts/nul.js",
+    "sha256": "de4f94565c4e57738c2f3f84f94a188b8f123baa77491fc3bd7dabdc1bd4df99",
+    "bytes": 9189
+   },
+   {
+    "n": 2,
+    "file": "0002.txt",
+    "rel": "the-fold/docs/playback/existence/parts/sig.js",
+    "sha256": "ed3ead0d825dfa23c10ab18f19e5adec56aac91d1dcfbc6920c8129aab878341",
+    "bytes": 13113
+   },
+   {
+    "n": 3,
+    "file": "0003.txt",
+    "rel": "the-fold/docs/playback/interpretation/extract.mjs",
+    "sha256": "3f220fbcc5a3ada0e73e06057a258f0cb7f4fce6e11de90532f0f38adea4822f",
+    "bytes": 11267
+   },
+   {
+    "n": 4,
+    "file": "0004.txt",
+    "rel": "the-fold/docs/playback/interpretation/src/eva.js",
+    "sha256": "d55f39d9ffc3ef29087aacd3da9fb1ceba6280257eb1b3d852b2df76e69d5f3a",
+    "bytes": 13103
+   },
+   {
+    "n": 5,
+    "file": "0005.txt",
+    "rel": "the-fold/docs/playback/nav/shots.mjs",
+    "sha256": "de06e7398f162d30933f0e596bc6835c9146f80952c0f12710b163a5885949d8",
+    "bytes": 3489
+   },
+   {
+    "n": 6,
+    "file": "0006.txt",
+    "rel": "the-fold/docs/playback/nav/src/c.js",
+    "sha256": "fb0565e5bb4691112e38ef5a31887e5e56027483f51ed52e2507f2eb0b2207ad",
+    "bytes": 5951
+   },
+   {
+    "n": 7,
+    "file": "0007.txt",
+    "rel": "the-fold/docs/playback/nav/verify.mjs",
+    "sha256": "ce3270aef2ed6265dd3db6f4e39554f7267850d8e6369437261ca7de5e6ba6e7",
+    "bytes": 14011
+   },
+   {
+    "n": 8,
+    "file": "0008.txt",
+    "rel": "the-fold/docs/playback/structure/prep.mjs",
+    "sha256": "5995731723c8e483f08b4b1f8627d12fa6ea0af7be1c53b4fdb505a76c8598a8",
+    "bytes": 15095
+   },
+   {
+    "n": 9,
+    "file": "0009.txt",
+    "rel": "the-fold/docs/playback/structure/src/con.js",
+    "sha256": "77b8094674bc28761825c91d0aa508252bb8452ca86ba0ae99b4118b19ee54a2",
+    "bytes": 13903
+   },
+   {
+    "n": 10,
+    "file": "0010.txt",
+    "rel": "the-fold/eval/.app-cur-broken1/fold-chat-agentfeed.js",
+    "sha256": "cd37e7b2e8e2191e0ddad134c67d0e0623407418e22ccd83a5ba053b58739e6a",
+    "bytes": 13784
+   },
+   {
+    "n": 11,
+    "file": "0011.txt",
+    "rel": "the-fold/eval/.app-cur-broken1/fold-chat-discourse.js",
+    "sha256": "cce6e06bbbd12f4bb90b9c22f02143f251b9de457ff2660c148d9178a06772e6",
+    "bytes": 6573
+   },
+   {
+    "n": 12,
+    "file": "0012.txt",
+    "rel": "the-fold/eval/.app-cur-broken1/fold-chat-mind.js",
+    "sha256": "67223c04fca2cd62364b03df0a96c1d570327666a6e3cede1068adf0f7bf47b0",
+    "bytes": 17656
+   },
+   {
+    "n": 13,
+    "file": "0013.txt",
+    "rel": "the-fold/eval/.app-cur-broken1/fold-chat-topic.js",
+    "sha256": "74470ca6d116a771164708c81c32d632eef4f9c4b234979b48e1d744fb1c58ea",
+    "bytes": 26627
+   },
+   {
+    "n": 14,
+    "file": "0014.txt",
+    "rel": "the-fold/eval/ants/B3-flip-probe.mjs",
+    "sha256": "8a6d953837cac71543768c2b41bf581764c003c447a83cf4067b0ea31ea67bea",
+    "bytes": 3212
+   },
+   {
+    "n": 15,
+    "file": "0015.txt",
+    "rel": "the-fold/eval/ants/b2-mutate.mjs",
+    "sha256": "dd17d963d63bfea3f02d20f6b8baff57778d4a64c03d88e526e8ccfdbce540bd",
+    "bytes": 7924
+   },
+   {
+    "n": 16,
+    "file": "0016.txt",
+    "rel": "the-fold/eval/ants/b2-real.mjs",
+    "sha256": "f8c3466c18612c4af20102ebec7d0835a2d3c835f948a5383d4f1407f4b5b6b0",
+    "bytes": 6634
+   },
+   {
+    "n": 17,
+    "file": "0017.txt",
+    "rel": "the-fold/eval/ants/c1/origin-base.mjs",
+    "sha256": "06b5aa00f7bc0616d1865d6b0011522da8be33900b165f97161f2b9b31e51c18",
+    "bytes": 53084
+   },
+   {
+    "n": 18,
+    "file": "0018.txt",
+    "rel": "the-fold/eval/ants/c1/origin-fixed-slot3.mjs",
+    "sha256": "f87ba48a44c1c51676bfe33518ce81fd842c435932eb207f59717e6e7e5aea29",
+    "bytes": 60742
+   },
+   {
+    "n": 19,
+    "file": "0019.txt",
+    "rel": "the-fold/eval/ants/c2/c2-eval.mjs",
+    "sha256": "7150ee09dd5fbd3142b1bfd360e65e410ada8976580db1a784b220c5f3a1681f",
+    "bytes": 7664
+   },
+   {
+    "n": 20,
+    "file": "0020.txt",
+    "rel": "the-fold/eval/ants/c4/reach.mjs",
+    "sha256": "83bbb7915bee49e93034c8a6248a4b7e42757b5a72692548cd8d7463a05c3c32",
+    "bytes": 2656
+   },
+   {
+    "n": 21,
+    "file": "0021.txt",
+    "rel": "the-fold/eval/ants/c5/analyze.mjs",
+    "sha256": "fb5e37ab8e778f3c5e7cc6638653af693b360d2555c3d627d10b76dec761f722",
+    "bytes": 4752
+   },
+   {
+    "n": 22,
+    "file": "0022.txt",
+    "rel": "the-fold/eval/ants/c5/salience-fixed.js",
+    "sha256": "8b26ea74a68a0a903fbdbb962c13b67dc1adbc5fb46f36350ba1934f15b19051",
+    "bytes": 13809
+   },
+   {
+    "n": 23,
+    "file": "0023.txt",
+    "rel": "the-fold/eval/ants/c6/probe-adversarial.mjs",
+    "sha256": "8c9adc8b4c92bc18355794ab4f9cc356a8ccd6d8439b24d767f4e37951182784",
+    "bytes": 1713
+   },
+   {
+    "n": 24,
+    "file": "0024.txt",
+    "rel": "the-fold/eval/ants/c7/wiring-check.mjs",
+    "sha256": "b17588e57e21f4e89998d9212256ce4f26ee9e01fc700fa09aca654ce3f60b78",
+    "bytes": 4809
+   },
+   {
+    "n": 25,
+    "file": "0025.txt",
+    "rel": "the-fold/eval/ants/c8/mutate.mjs",
+    "sha256": "b1e9734d3cb7a0d991aa0d7ac698217cc314154d1ad7e8d144ee1abb3fced1c2",
+    "bytes": 6231
+   },
+   {
+    "n": 26,
+    "file": "0026.txt",
+    "rel": "the-fold/eval/ants/d1/fidelity.mjs",
+    "sha256": "950f590b73d82843bf0ac7e6f31c5123e2da7d130db464f6b384dbb6003a0b1f",
+    "bytes": 1559
+   },
+   {
+    "n": 27,
+    "file": "0027.txt",
+    "rel": "the-fold/eval/ants/d1/needles-candidates.mjs",
+    "sha256": "891d7d277aa2fdc9d6289b22a3bf6b142f6116de50a3525a4d8f9dd3e1a66095",
+    "bytes": 831
+   },
+   {
+    "n": 28,
+    "file": "0028.txt",
+    "rel": "the-fold/eval/ants/d1/needles-from-store.mjs",
+    "sha256": "2b3c0eb9a08606f1cec86aa459db108a8bc0dfebf7686bbfab6c1c71f633a0d4",
+    "bytes": 894
+   },
+   {
+    "n": 29,
+    "file": "0029.txt",
+    "rel": "the-fold/eval/ants/d1/proposed/recall.patched.mjs",
+    "sha256": "2579b2cce348c55ca37142a0682bbb39c46c99a3e98b68b46b5355c90380da43",
+    "bytes": 4050
+   },
+   {
+    "n": 30,
+    "file": "0030.txt",
+    "rel": "the-fold/eval/ants/d1/real.mjs",
+    "sha256": "7172317dc250803810f40944ec70f76c2c6f3b7f524ca519966489d3c25f824a",
+    "bytes": 7032
+   },
+   {
+    "n": 31,
+    "file": "0031.txt",
+    "rel": "the-fold/eval/ants/d1/stale.mjs",
+    "sha256": "900c7eccd521315e700619244def593baaaa3cdb426543abf7686243e27b2501",
+    "bytes": 5242
+   },
+   {
+    "n": 32,
+    "file": "0032.txt",
+    "rel": "the-fold/eval/ants/e1/analyze.mjs",
+    "sha256": "799e233d687b7ee2c937f9eb38f4d7d5dae05c4adf227ada6cf56b7b21ab92ff",
+    "bytes": 18726
+   },
+   {
+    "n": 33,
+    "file": "0033.txt",
+    "rel": "the-fold/eval/ants/e2/patch-l1.mjs",
+    "sha256": "eafe7af3aae717aaf6d530ae62ddd130773ddee31db1423ca765a18246b0526a",
+    "bytes": 14587
+   },
+   {
+    "n": 34,
+    "file": "0034.txt",
+    "rel": "the-fold/eval/ants/e2/patched/fold-chat-web-h.js",
+    "sha256": "3dd0c3d9c123b7aebd08295cb78a414b3bf0566a0352724300a08fdb6a9ccb1d",
+    "bytes": 69291
+   },
+   {
+    "n": 35,
+    "file": "0035.txt",
+    "rel": "the-fold/eval/ants/falsify-checks/f1/build-cases.mjs",
+    "sha256": "a0de3a2de39461149c18466718685c83fbc227e0d9b908b027f05053f6ad2f9f",
+    "bytes": 5310
+   },
+   {
+    "n": 36,
+    "file": "0036.txt",
+    "rel": "the-fold/eval/ants/falsify-checks/f1/score.mjs",
+    "sha256": "1ee96137b0521f546de5cc23c5838913040052184c2389f48894829bb710ecc6",
+    "bytes": 1301
+   },
+   {
+    "n": 37,
+    "file": "0037.txt",
+    "rel": "the-fold/eval/ants/falsify-checks/f2/collect-real.mjs",
+    "sha256": "9775d082e7973f2d046fda924150c6bd32ba42374f492d4d0a3ba47f6ac60b4d",
+    "bytes": 2378
+   },
+   {
+    "n": 38,
+    "file": "0038.txt",
+    "rel": "the-fold/eval/ants/g1/corpus3.mjs",
+    "sha256": "6348d49dd21d49f629111498660f9418c40bc7dfb47735ba1ec61ebda7912ce9",
+    "bytes": 8134
+   },
+   {
+    "n": 39,
+    "file": "0039.txt",
+    "rel": "the-fold/eval/ants/g1/measure.mjs",
+    "sha256": "fe7f3a91f63bfea4ecb665532b40c9ad04726baf83979c9768cc0060824c2c11",
+    "bytes": 5734
+   },
+   {
+    "n": 40,
+    "file": "0040.txt",
+    "rel": "the-fold/eval/ants/g1/pick-real.mjs",
+    "sha256": "b3aecc75500fda06a47bef383ac7cc5e52adbcb075a0200a3d584275c1d2ec6c",
+    "bytes": 2239
+   },
+   {
+    "n": 41,
+    "file": "0041.txt",
+    "rel": "the-fold/eval/ants/g2/mutate.mjs",
+    "sha256": "6730bbe98f5e6b4c6a9f42af4b3bf618ef370608fa795365ab9eebc068f14966",
+    "bytes": 10756
+   },
+   {
+    "n": 42,
+    "file": "0042.txt",
+    "rel": "the-fold/eval/ants/g2/run.mjs",
+    "sha256": "dc1941b577dc9242277845af4f867999d9c0072b19dbbb26f7c89a4ec12817fe",
+    "bytes": 4550
+   },
+   {
+    "n": 43,
+    "file": "0043.txt",
+    "rel": "the-fold/eval/ants/g3/measure.mjs",
+    "sha256": "1044ac9b5010fa01338c878de48d9fe006994ebf66bf1462a10dd636013c8729",
+    "bytes": 4181
+   },
+   {
+    "n": 44,
+    "file": "0044.txt",
+    "rel": "the-fold/eval/ants/mark.mjs",
+    "sha256": "0ecfb04a61833de972104be0d5e76f76997f393924e9fd864f491a710d3118c0",
+    "bytes": 2549
+   },
+   {
+    "n": 45,
+    "file": "0045.txt",
+    "rel": "the-fold/eval/ants/p1/arms/b.mjs",
+    "sha256": "eddb7b9bd5002f7eb21d80a6f8c40917aa10da435b8115030351a782424edc5f",
+    "bytes": 2274
+   },
+   {
+    "n": 46,
+    "file": "0046.txt",
+    "rel": "the-fold/eval/ants/p1/arms/dp.mjs",
+    "sha256": "443475bfede3248d2692c328b338186ddb4ac26eeb86f64077f016b146701ae4",
+    "bytes": 1796
+   },
+   {
+    "n": 47,
+    "file": "0047.txt",
+    "rel": "the-fold/eval/ants/p1/arms/f.mjs",
+    "sha256": "0d193dc93397e2d7c13b2a7ba930860e7516265be315d735573888df85ac3c83",
+    "bytes": 2048
+   },
+   {
+    "n": 48,
+    "file": "0048.txt",
+    "rel": "the-fold/eval/ants/p1/cues.mjs",
+    "sha256": "e2fa20b8e0aa18f442932a4c6b3b18b4ac20d63cbf96aac716869dadc8472772",
+    "bytes": 3089
+   },
+   {
+    "n": 49,
+    "file": "0049.txt",
+    "rel": "the-fold/eval/ants/p1/gate-eval.mjs",
+    "sha256": "440cb344563890f1711e38862d0da1376122318b8de3964ba3715e279f5f2321",
+    "bytes": 3062
+   },
+   {
+    "n": 50,
+    "file": "0050.txt",
+    "rel": "the-fold/eval/ants/p1/report.mjs",
+    "sha256": "2555009eeb792b957810944174cc4b5cceab2a337b7d47f4748095d940f7390f",
+    "bytes": 9864
+   },
+   {
+    "n": 51,
+    "file": "0051.txt",
+    "rel": "the-fold/eval/ants/p2/answerspan-v3.js",
+    "sha256": "ff1d0ac0d14fc138ee41e8c3349a2d7e0f324f97cbb0ca8a14ec2e1876a39249",
+    "bytes": 80997
+   },
+   {
+    "n": 52,
+    "file": "0052.txt",
+    "rel": "the-fold/eval/ants/p2/asks-dev.mjs",
+    "sha256": "a671698ece461f64ac50b0eaa3493d8cf2e923016f7700be4adb92a4f6fa7e24",
+    "bytes": 9358
+   },
+   {
+    "n": 53,
+    "file": "0053.txt",
+    "rel": "the-fold/eval/ants/p2/cpu.mjs",
+    "sha256": "2c3b46b1575a0d3d7a7747bc94b2711eba07bdc9d146bd5b1db7d98288307d4d",
+    "bytes": 930
+   },
+   {
+    "n": 54,
+    "file": "0054.txt",
+    "rel": "the-fold/eval/ants/p2/find.mjs",
+    "sha256": "8d35b8e69a8bb57040ce42422b94d2357f45016e6186de3a880797768bbe80ee",
+    "bytes": 551
+   },
+   {
+    "n": 55,
+    "file": "0055.txt",
+    "rel": "the-fold/eval/ants/p2/mutate.mjs",
+    "sha256": "40c1d35b3060d24aca0286318def5a9072a11909063e1af0050af16deb7140aa",
+    "bytes": 10892
+   },
+   {
+    "n": 56,
+    "file": "0056.txt",
+    "rel": "the-fold/eval/ants/p2/showhtml.mjs",
+    "sha256": "241643c22a7eb11335de83cf6d419c45ed048f60a7c256070f7479b655781a17",
+    "bytes": 583
+   },
+   {
+    "n": 57,
+    "file": "0057.txt",
+    "rel": "the-fold/eval/ants/p2/verify-all.mjs",
+    "sha256": "19a89e2f0f2a74e4f292c8b72cb039be597b7c8324430947df06ce4df95ebdf6",
+    "bytes": 1747
+   },
+   {
+    "n": 58,
+    "file": "0058.txt",
+    "rel": "the-fold/eval/ants/primary-oracle.mjs",
+    "sha256": "56ed339205dfeb6ebbf3b1e0791e550a558d143144362e40b3904ffcb54aea4e",
+    "bytes": 3226
+   },
+   {
+    "n": 59,
+    "file": "0059.txt",
+    "rel": "the-fold/eval/backward/controls-certify.mjs",
+    "sha256": "0224c9f26b1a2fbf134bc3248ffd32a755e8aecf9ac6b4ab1952302170b1f40d",
+    "bytes": 19799
+   },
+   {
+    "n": 60,
+    "file": "0060.txt",
+    "rel": "the-fold/eval/backward/identity.mjs",
+    "sha256": "4807648cb2598bede9d5dbdd5f2fce7316fea3652b2ca0a86818a58bc797b949",
+    "bytes": 1884
+   },
+   {
+    "n": 61,
+    "file": "0061.txt",
+    "rel": "the-fold/eval/backward/label-apply.mjs",
+    "sha256": "4f73e0dea830178c20d4fbb10239b671700301ad6f6e1efba31abe4cea510ff4",
+    "bytes": 2669
+   },
+   {
+    "n": 62,
+    "file": "0062.txt",
+    "rel": "the-fold/eval/build-judgments.mjs",
+    "sha256": "d22fcbe1bb4a5ac66220ace9556a5c3b833bb99448df92991bc01b2bdcc7a85d",
+    "bytes": 8709
+   },
+   {
+    "n": 63,
+    "file": "0063.txt",
+    "rel": "the-fold/eval/controls.mjs",
+    "sha256": "3463acfb84665f096ede794e6319661a0c795e48f473f453cf71d1ba2767aa71",
+    "bytes": 19197
+   },
+   {
+    "n": 64,
+    "file": "0064.txt",
+    "rel": "the-fold/eval/gary-flow/measure.mjs",
+    "sha256": "2d91331cb6083602beda4a459d946e1428defa5f121e06e7c56d8898593e5d4c",
+    "bytes": 24434
+   },
+   {
+    "n": 65,
+    "file": "0065.txt",
+    "rel": "the-fold/eval/langid/build.mjs",
+    "sha256": "ab24881f8352466987a6cbc42e4acee5c95ba3704e5e0f60b334e99e8952f98e",
+    "bytes": 4375
+   },
+   {
+    "n": 66,
+    "file": "0066.txt",
+    "rel": "the-fold/eval/pivot/live.mjs",
+    "sha256": "195be721717b68df8e5f3b52479b4200c438384a1bf72d7b127cb3354bd7aa5f",
+    "bytes": 7309
+   },
+   {
+    "n": 67,
+    "file": "0067.txt",
+    "rel": "the-fold/eval/pivot/normal.mjs",
+    "sha256": "205b82f6792b9e06ac319c33cfd18c8df8cdf5e7340768a10ecf44be853ce9c1",
+    "bytes": 2486
+   },
+   {
+    "n": 68,
+    "file": "0068.txt",
+    "rel": "the-fold/eval/pivot/salience-live.mjs",
+    "sha256": "6f4ddfc5f8d2157a51d16daf6fe8cf596e9822e13610cc3e5950dad049ca7129",
+    "bytes": 3264
+   },
+   {
+    "n": 69,
+    "file": "0069.txt",
+    "rel": "the-fold/eval/priors/data/e2-items.mjs",
+    "sha256": "3b0a49b49222fab94e619bf718b3f588219731134408ad8a527547c6583778f3",
+    "bytes": 52252
+   },
+   {
+    "n": 70,
+    "file": "0070.txt",
+    "rel": "the-fold/eval/priors/e1/accept.mjs",
+    "sha256": "b41ac747c07cee96e4bbf8e018ae5eba20c18d4651ed4fcfc75adb19a66b17c4",
+    "bytes": 821
+   },
+   {
+    "n": 71,
+    "file": "0071.txt",
+    "rel": "the-fold/eval/priors/e1/arm.mjs",
+    "sha256": "58a00377e9b3efe3be5849ae593b1e15c649239c0f35705de62635480fe03993",
+    "bytes": 2563
+   },
+   {
+    "n": 72,
+    "file": "0072.txt",
+    "rel": "the-fold/eval/priors/e1/frontier.mjs",
+    "sha256": "24796c0039a173aa992755357b904d50bb6204ba5de816c857d5ace8ed94465a",
+    "bytes": 2919
+   },
+   {
+    "n": 73,
+    "file": "0073.txt",
+    "rel": "the-fold/eval/priors/e4/carry.mjs",
+    "sha256": "feba1ed3cc93aca931c0cdb492680cc6e5a2c4089b2b862ee379cd8a540f851f",
+    "bytes": 9522
+   },
+   {
+    "n": 74,
+    "file": "0074.txt",
+    "rel": "the-fold/eval/priors/e5/model1.mjs",
+    "sha256": "fae1d66ad49a4c9a392a0e3aafce509b9961e75230563b0f26e97936e2bc80a2",
+    "bytes": 2612
+   },
+   {
+    "n": 75,
+    "file": "0075.txt",
+    "rel": "the-fold/eval/priors/e5/size.mjs",
+    "sha256": "147279d353528e9c8c2dca6b3251e74ebaa270960e8b12fb11c04b9780531f62",
+    "bytes": 1148
+   },
+   {
+    "n": 76,
+    "file": "0076.txt",
+    "rel": "the-fold/eval/rescore-labels.mjs",
+    "sha256": "b4ce3e9b29afdf5df1d38ac37a2b558a5a8011c00a2553855878830f923ff58f",
+    "bytes": 7806
+   },
+   {
+    "n": 77,
+    "file": "0077.txt",
+    "rel": "the-fold/eval/snips/verify-gold.mjs",
+    "sha256": "f30340249c2ace878d3b672d80148b4a43eb1df1493fd2cff2df3e2b23f29291",
+    "bytes": 4798
+   },
+   {
+    "n": 78,
+    "file": "0078.txt",
+    "rel": "the-fold/eval/support-fixtures/fetch.mjs",
+    "sha256": "ec441d8aeb0221df3d6071bfd99f597a70734c0e34e4edb402f7dd73c4e951ab",
+    "bytes": 1697
+   },
+   {
+    "n": 79,
+    "file": "0079.txt",
+    "rel": "the-fold/eval/swarm/fresh-check.mjs",
+    "sha256": "7b4bf4a43c6d912839504f8270731016081dd6913bf354fd121fefcfcc31ce92",
+    "bytes": 2270
+   },
+   {
+    "n": 80,
+    "file": "0080.txt",
+    "rel": "the-fold/eval/swarm/sites.mjs",
+    "sha256": "361a322938bfda2adf265472cfa5daad97175fe4066bee8707a2d8f5503259bf",
+    "bytes": 1034
+   },
+   {
+    "n": 81,
+    "file": "0081.txt",
+    "rel": "the-fold/eval/voice/collect.mjs",
+    "sha256": "d177fbf3a3363e304ffffc923df01983d041d6cbb895a39c4264e46b7f24390d",
+    "bytes": 2739
+   },
+   {
+    "n": 82,
+    "file": "0082.txt",
+    "rel": "the-fold/eval/voice/run.mjs",
+    "sha256": "4675b302ef80a12c70bdeae9a6260329988b7349420dabf2cbac1fdb808eb9e6",
+    "bytes": 5019
+   },
+   {
+    "n": 83,
+    "file": "0083.txt",
+    "rel": "the-fold/experiments/context-growth/simulate.mjs",
+    "sha256": "01d48c60de3e962635a2d806ff6acd414ab73cb91ad020c07578aaf07497a0ab",
+    "bytes": 10269
+   },
+   {
+    "n": 84,
+    "file": "0084.txt",
+    "rel": "the-fold/experiments/scoped-edit/shop/src/sessions.js",
+    "sha256": "c773027a942e45a44c4b53dce931c5ba3940f462079f17c82b107169007530d4",
+    "bytes": 238
+   },
+   {
+    "n": 85,
+    "file": "0085.txt",
+    "rel": "the-fold/experiments/scoped-edit/shop/src/validate.js",
+    "sha256": "f52207d04fb2d43bb2b738f50144996a478dfb22fb764964bacb8113e672d6a4",
+    "bytes": 428
+   },
+   {
+    "n": 86,
+    "file": "0086.txt",
+    "rel": "the-fold/experiments/scoped-edit/shop/tests/money.test.js",
+    "sha256": "54d0ff9dac94ff6fd27c6607f4daeb46f7d5bdceded2a099e98e053b0d554701",
+    "bytes": 391
+   },
+   {
+    "n": 87,
+    "file": "0087.txt",
+    "rel": "the-fold/experiments/scoped-edit/shop/tests/seed.test.js",
+    "sha256": "00b8da11accefd820c637afc7305ec29d4bae3ce386c347c0b657761a096f1b1",
+    "bytes": 250
+   },
+   {
+    "n": 88,
+    "file": "0088.txt",
+    "rel": "the-fold/experiments/scoped-edit/shop/tests/shipping.test.js",
+    "sha256": "a830b30f58504ebf99f146df06da388a5368991b656e610d04c30893c2569b8f",
+    "bytes": 291
+   },
+   {
+    "n": 89,
+    "file": "0089.txt",
+    "rel": "the-fold/experiments/scoped-edit/shop/tests/validate.test.js",
+    "sha256": "51ee80a67131195143156ffe9530c7281fee0958ccce7da59bed34f20d81af53",
+    "bytes": 434
+   },
+   {
+    "n": 90,
+    "file": "0090.txt",
+    "rel": "the-fold/experiments/source-routing/brave-direct.mjs",
+    "sha256": "4a5699027634849d1788297838205c076bc9cab1ed1838cbbc0f94846175d07a",
+    "bytes": 3748
+   },
+   {
+    "n": 91,
+    "file": "0091.txt",
+    "rel": "the-fold/experiments/specimen-assembly/lib/assemble-page.mjs",
+    "sha256": "37659fb86b839e68c10899900c3062749c52e63fcbe1ae7ad0688bff7e59c464",
+    "bytes": 4833
+   },
+   {
+    "n": 92,
+    "file": "0092.txt",
+    "rel": "the-fold/experiments/specimen-assembly/lib/cache.mjs",
+    "sha256": "6ffbf0635204aab4af98425ec969766eadd94584d8f0517cb3d4b5bc3c689648",
+    "bytes": 4388
+   },
+   {
+    "n": 93,
+    "file": "0093.txt",
+    "rel": "the-fold/experiments/specimen-assembly/lib/sim.mjs",
+    "sha256": "9480627b84323e1fd7421788f1d1f414400fea2b6875f8cfd32ff51899ee653c",
+    "bytes": 4381
+   },
+   {
+    "n": 94,
+    "file": "0094.txt",
+    "rel": "the-fold/experiments/specimen-assembly/specimens/lifecycle/cancel-always.js",
+    "sha256": "f9253b599941a5f100ca50e4adc3fa32f15d62640c5d7b088b7b320b99a72eaf",
+    "bytes": 73
+   },
+   {
+    "n": 95,
+    "file": "0095.txt",
+    "rel": "the-fold/experiments/specimen-assembly/specimens/lifecycle/key-header.js",
+    "sha256": "2d3a989c3960c9b9f47f9e49ff6ed72733843ed61e641d236eb4a546c5487ff7",
+    "bytes": 58
+   },
+   {
+    "n": 96,
+    "file": "0096.txt",
+    "rel": "the-fold/experiments/specimen-assembly/specimens/lifecycle/retry-lookup.js",
+    "sha256": "5e158421786c132e7a07a62c6138a426d7a02ffb3232463df4a13756b9e83187",
+    "bytes": 310
+   },
+   {
+    "n": 97,
+    "file": "0097.txt",
+    "rel": "the-fold/experiments/specimen-assembly/specimens/lifecycle/store-getset.js",
+    "sha256": "3bb7f25ba2ed3a5bd3a4114464766bc63102a3412aac25a7361739992489475d",
+    "bytes": 511
+   },
+   {
+    "n": 98,
+    "file": "0098.txt",
+    "rel": "the-fold/experiments/specimen-assembly/specimens/lifecycle/store-setnx.js",
+    "sha256": "5b03d2c3ccc9780e6fb566d4be20b3e6fc492536b8c7b451c6ffdb83bdc1bd85",
+    "bytes": 463
+   },
+   {
+    "n": 99,
+    "file": "0099.txt",
+    "rel": "the-fold/fold-blocks-weave.js",
+    "sha256": "5c1188e6b85a7b3a663349f10794a89982ee31671ce4883e021599d3ad105c8a",
+    "bytes": 22751
+   },
+   {
+    "n": 100,
+    "file": "0100.txt",
+    "rel": "the-fold/fold-blocks.js",
+    "sha256": "1ef9047a5da80517b5ef7d84e601bfb4b07accfc4fdb061c6c9346e5c400d4f2",
+    "bytes": 34664
+   },
+   {
+    "n": 101,
+    "file": "0101.txt",
+    "rel": "the-fold/fold-chat-answercard.test.mjs",
+    "sha256": "205be53bc08d9248facb677be01781857df5f0007bc9c0620857c75c960f4285",
+    "bytes": 29200
+   },
+   {
+    "n": 102,
+    "file": "0102.txt",
+    "rel": "the-fold/fold-chat-answerwire.js",
+    "sha256": "5082a212dbbd6c9455ef2cf3cb4b4c6c12a53805aea6bc513024c032ef226a8b",
+    "bytes": 13754
+   },
+   {
+    "n": 103,
+    "file": "0103.txt",
+    "rel": "the-fold/fold-chat-artbar.test.mjs",
+    "sha256": "aa4c1994009e8bdd8bde4ae57df2ba2d353d662eb09674c9940f8705df5812e5",
+    "bytes": 1369
+   },
+   {
+    "n": 104,
+    "file": "0104.txt",
+    "rel": "the-fold/fold-chat-budget.js",
+    "sha256": "78e5ef7099df641ee3c03abe0e5ea2e5e4e3ec83c846f78071ff10d572226a89",
+    "bytes": 13988
+   },
+   {
+    "n": 105,
+    "file": "0105.txt",
+    "rel": "the-fold/fold-chat-compute.test.mjs",
+    "sha256": "15a70fc8e13c3b20de3d1af111c40dfb107e916a0cb04aa2c1dbaecd2c084b16",
+    "bytes": 5132
+   },
+   {
+    "n": 106,
+    "file": "0106.txt",
+    "rel": "the-fold/fold-chat-contact.test.mjs",
+    "sha256": "e861ad55f9c4c2c404d3cf4dbf8f58aee42f417d2206804fcfdcfdd6ab203420",
+    "bytes": 11454
+   },
+   {
+    "n": 107,
+    "file": "0107.txt",
+    "rel": "the-fold/fold-chat-discourse.js",
+    "sha256": "2c5c177ded791e38f60949c9884e89f9dbc26bfb64d50e84562b1936879cc6d5",
+    "bytes": 9921
+   },
+   {
+    "n": 108,
+    "file": "0108.txt",
+    "rel": "the-fold/fold-chat-eot.js",
+    "sha256": "acdc406c734cee84165d7d512a02abbdc70aa8ec63dba8928b8d89ec9f124542",
+    "bytes": 16234
+   },
+   {
+    "n": 109,
+    "file": "0109.txt",
+    "rel": "the-fold/fold-chat-ethos.js",
+    "sha256": "3d9bddd4fda356abadf643e46798b6c8d73c6923727b634ad329157e8f866946",
+    "bytes": 19592
+   },
+   {
+    "n": 110,
+    "file": "0110.txt",
+    "rel": "the-fold/fold-chat-ethos.test.mjs",
+    "sha256": "08aa8f8a0b032bd1f5ba042bc1d45a276937635e8c7b08148013e472abd9b8d5",
+    "bytes": 27998
+   },
+   {
+    "n": 111,
+    "file": "0111.txt",
+    "rel": "the-fold/fold-chat-fetchedvoice.js",
+    "sha256": "d17837db8fd0a23c8618782248abbe5872a165fb8bce791a5b9207345e1ef83d",
+    "bytes": 28872
+   },
+   {
+    "n": 112,
+    "file": "0112.txt",
+    "rel": "the-fold/fold-chat-fetchedvoice.test.mjs",
+    "sha256": "a789234196db504c42b7faf4c84845be8e23728158dd562573494bebaa3330ec",
+    "bytes": 20848
+   },
+   {
+    "n": 113,
+    "file": "0113.txt",
+    "rel": "the-fold/fold-chat-foldview.css.js",
+    "sha256": "539b3f3760e1f1eaafe886e5b1c51c0f93bc89da8a1d3bcff946fa55ac78f97a",
+    "bytes": 12035
+   },
+   {
+    "n": 114,
+    "file": "0114.txt",
+    "rel": "the-fold/fold-chat-freshness.test.mjs",
+    "sha256": "74678db65e7d7761e946d8e637482c291c78b232d46b889898265c6ec6170068",
+    "bytes": 4777
+   },
+   {
+    "n": 115,
+    "file": "0115.txt",
+    "rel": "the-fold/fold-chat-gary.js",
+    "sha256": "aea0290acfe8d5592d4ed184ca2889ec80d646ffa808bfbc054d9da8c18f47e2",
+    "bytes": 12388
+   },
+   {
+    "n": 116,
+    "file": "0116.txt",
+    "rel": "the-fold/fold-chat-genvoid.js",
+    "sha256": "097e1cec88e9aeecdb91f9ead9dde1401a3a626b9e5c9666fcf0424cfbda3644",
+    "bytes": 36211
+   },
+   {
+    "n": 117,
+    "file": "0117.txt",
+    "rel": "the-fold/fold-chat-impression.js",
+    "sha256": "a413e230661a50373cc322d2a573251088947c461a16b003e31051544091ff23",
+    "bytes": 12176
+   },
+   {
+    "n": 118,
+    "file": "0118.txt",
+    "rel": "the-fold/fold-chat-impression.test.mjs",
+    "sha256": "963617b4ccccd457bcd81e071a524186c22436a917eeb55aba296fa9873f6176",
+    "bytes": 8326
+   },
+   {
+    "n": 119,
+    "file": "0119.txt",
+    "rel": "the-fold/fold-chat-kinds.js",
+    "sha256": "1a17f2190767e94262ea7eed3f482f36b5752067fc24014c834a65a6a2929829",
+    "bytes": 17318
+   },
+   {
+    "n": 120,
+    "file": "0120.txt",
+    "rel": "the-fold/fold-chat-kinds.test.mjs",
+    "sha256": "2900865b3676ae7812a1161b96b79988f1860466dea06bab8f6defe7f3ba4f69",
+    "bytes": 11608
+   },
+   {
+    "n": 121,
+    "file": "0121.txt",
+    "rel": "the-fold/fold-chat-lang.js",
+    "sha256": "0595bc849604a9d1390c34b3c3b0319ad2e8c90f105ac32b13a71b41a8b652b4",
+    "bytes": 9966
+   },
+   {
+    "n": 122,
+    "file": "0122.txt",
+    "rel": "the-fold/fold-chat-nudge.test.mjs",
+    "sha256": "0272e89e9805187f4aad59652e16ce2831ca5a7e9ad0759b53756b7d14069d14",
+    "bytes": 7061
+   },
+   {
+    "n": 123,
+    "file": "0123.txt",
+    "rel": "the-fold/fold-chat-origin.js",
+    "sha256": "7bd4831c7917a83654a732dda909424f334b211b4f269693630adf0f1ec4c0f8",
+    "bytes": 60665
+   },
+   {
+    "n": 124,
+    "file": "0124.txt",
+    "rel": "the-fold/fold-chat-outputtype.test.mjs",
+    "sha256": "1ffd2c53e769bac99fa45ee566f99aa91188d7f58e0c6e6108cf02a5e12f2ecf",
+    "bytes": 26897
+   },
+   {
+    "n": 125,
+    "file": "0125.txt",
+    "rel": "the-fold/fold-chat-pageengine.test.mjs",
+    "sha256": "9d7ece515785cdea6a4bb37ca11f1cbff2269221389d3dfe5ad0c1b3d2d558d9",
+    "bytes": 40854
+   },
+   {
+    "n": 126,
+    "file": "0126.txt",
+    "rel": "the-fold/fold-chat-pager.js",
+    "sha256": "eff9a716a37b9cdb6ca9fbe1cc293c7038c5252a2fc463f3dc030e05ed3ad547",
+    "bytes": 3150
+   },
+   {
+    "n": 127,
+    "file": "0127.txt",
+    "rel": "the-fold/fold-chat-pathos.test.mjs",
+    "sha256": "b31f503657aeddb00ecc7d863e561ee1207331446c0fdbd20340e271487f2d85",
+    "bytes": 10170
+   },
+   {
+    "n": 128,
+    "file": "0128.txt",
+    "rel": "the-fold/fold-chat-pivot.js",
+    "sha256": "6ca84be46d59ee0601e9da0eea425106011a0b496f2111831830066a8f79e5c1",
+    "bytes": 29399
+   },
+   {
+    "n": 129,
+    "file": "0129.txt",
+    "rel": "the-fold/fold-chat-present.js",
+    "sha256": "89a4b78aa2c37336046be51b0bbe30ff3ac40c25933a3fcd14f3f629968d7961",
+    "bytes": 36755
+   },
+   {
+    "n": 130,
+    "file": "0130.txt",
+    "rel": "the-fold/fold-chat-presentview.js",
+    "sha256": "502132d8d39468d72b14e95864ff1dfbb164d50e28552f43a5fa9d1e87a883e2",
+    "bytes": 134013
+   },
+   {
+    "n": 131,
+    "file": "0131.txt",
+    "rel": "the-fold/fold-chat-primary.test.mjs",
+    "sha256": "0bf47eaccba931e5e6c4118618802c0d8ae7c2f40261222c38b9a11808aa64e3",
+    "bytes": 28977
+   },
+   {
+    "n": 132,
+    "file": "0132.txt",
+    "rel": "the-fold/fold-chat-route.test.mjs",
+    "sha256": "3836b95093513c76c2815f7c9bb32f18ed1bdb8e37ecd0424082920e4e605324",
+    "bytes": 19101
+   },
+   {
+    "n": 133,
+    "file": "0133.txt",
+    "rel": "the-fold/fold-chat-salience.test.mjs",
+    "sha256": "d7a9e1bcbd8ecb6472369e24fe8d92de3d90e3dd30ebbbeb94859956fb9568c9",
+    "bytes": 4254
+   },
+   {
+    "n": 134,
+    "file": "0134.txt",
+    "rel": "the-fold/fold-chat-sandbox.js",
+    "sha256": "627201183e400cde8023857502301fe842f4a005a7f2bb9ab6d4408725913e2b",
+    "bytes": 15503
+   },
+   {
+    "n": 135,
+    "file": "0135.txt",
+    "rel": "the-fold/fold-chat-seal.test.mjs",
+    "sha256": "5009bf621b5388f234c4b37dc594091d1b220c47ed600d824a8073d2c0bc3ec2",
+    "bytes": 11688
+   },
+   {
+    "n": 136,
+    "file": "0136.txt",
+    "rel": "the-fold/fold-chat-sessions.test.mjs",
+    "sha256": "e48f49bb6af9284c9b92fd0f5277e00d3d928d12124bf9297de9ef346d0f389d",
+    "bytes": 13032
+   },
+   {
+    "n": 137,
+    "file": "0137.txt",
+    "rel": "the-fold/fold-chat-snip.test.mjs",
+    "sha256": "74bdafd5d05a4c3749aabd678c6831f5c679d10fbaabaf83c3245929ef93679c",
+    "bytes": 3815
+   },
+   {
+    "n": 138,
+    "file": "0138.txt",
+    "rel": "the-fold/fold-chat-snippets.test.mjs",
+    "sha256": "0806dbc0e6db5e2aa78e3366b41c6b930826da97cfc9f1a0c86cc7111135fcd0",
+    "bytes": 11709
+   },
+   {
+    "n": 139,
+    "file": "0139.txt",
+    "rel": "the-fold/fold-chat-support.js",
+    "sha256": "e55f4736b954667a7352797b866c7d2922aaacdfacafbde7941370aeee0d2c37",
+    "bytes": 43650
+   },
+   {
+    "n": 140,
+    "file": "0140.txt",
+    "rel": "the-fold/fold-chat-support.test.mjs",
+    "sha256": "57a13ae494a69d253ec9a965dac16f816172aed6352c50f8a271e84dbcecaa80",
+    "bytes": 44214
+   },
+   {
+    "n": 141,
+    "file": "0141.txt",
+    "rel": "the-fold/fold-chat-thinkers.test.mjs",
+    "sha256": "eed245dd731eab1d94010fc1267a61ccf285d2c68df750f1052b57d208a960bf",
+    "bytes": 11036
+   },
+   {
+    "n": 142,
+    "file": "0142.txt",
+    "rel": "the-fold/fold-chat-tipview.js",
+    "sha256": "8b56c8d4974d01ba633b6ed81d42cdf5ccf5e848a0612ce59218c59aa34af3d4",
+    "bytes": 9217
+   },
+   {
+    "n": 143,
+    "file": "0143.txt",
+    "rel": "the-fold/fold-chat-turnfeed.js",
+    "sha256": "9271fdb8abc1913ebbf38e1bafd6068533c74f1d7031836edfbc9e8bc8aa2a79",
+    "bytes": 11420
+   },
+   {
+    "n": 144,
+    "file": "0144.txt",
+    "rel": "the-fold/fold-chat-voiceswire.js",
+    "sha256": "bd7828f8d8c30ca322ed185f779f41b33f8b44ad7621abc3948525782f8927fd",
+    "bytes": 3979
+   },
+   {
+    "n": 145,
+    "file": "0145.txt",
+    "rel": "the-fold/fold-chat-watch.js",
+    "sha256": "b662b299b55ab29f3920b652d08b755040c6b7033fa810ca36f3afbf955e073c",
+    "bytes": 23915
+   },
+   {
+    "n": 146,
+    "file": "0146.txt",
+    "rel": "the-fold/fold-chat-web-recipe.test.mjs",
+    "sha256": "e145c2f235e8ddb8ab67532b763d985cfccb5a9fd04627ddcbec15b74d4a465b",
+    "bytes": 9234
+   },
+   {
+    "n": 147,
+    "file": "0147.txt",
+    "rel": "the-fold/fold-chat-web.js",
+    "sha256": "ed83df5be22bab1aa2beb6d835b8ee1aa9f164e83bfa2c64928e2702b383aa49",
+    "bytes": 66522
+   },
+   {
+    "n": 148,
+    "file": "0148.txt",
+    "rel": "the-fold/fold-chat-webllm.js",
+    "sha256": "ecfa867d2677b5d818c068bffcf0ab8fd2fb7d4fefc1cb67a1d9c113d6da5462",
+    "bytes": 26847
+   },
+   {
+    "n": 149,
+    "file": "0149.txt",
+    "rel": "the-fold/fold-chat-witness.js",
+    "sha256": "367a23232a9196bbdfb5c25c7f9109703629e37d60da7e00dadf71b85cc52cea",
+    "bytes": 12925
+   },
+   {
+    "n": 150,
+    "file": "0150.txt",
+    "rel": "the-fold/fold-chat-workspace.js",
+    "sha256": "495cf0563f67f518d3234dcdad40ff0c42ae8453766eb1947935db7b6ccf8544",
+    "bytes": 22710
+   },
+   {
+    "n": 151,
+    "file": "0151.txt",
+    "rel": "the-fold/fold-chat-workspace.test.mjs",
+    "sha256": "873ac27af225b41ed431bb7549df14be0545107ac5b04e2584162f2eddb2cff2",
+    "bytes": 16939
+   },
+   {
+    "n": 152,
+    "file": "0152.txt",
+    "rel": "the-fold/fold-exit-install.js",
+    "sha256": "dcba2ef43a9099864b77870baa0141c3e0c804211018e53877d6e1f2e58b11f1",
+    "bytes": 393
+   },
+   {
+    "n": 153,
+    "file": "0153.txt",
+    "rel": "the-fold/fold-extension.test.mjs",
+    "sha256": "fbb285a74f1fa94dd93b5cc580c31c1878693b7716e6f0967105eea371409e31",
+    "bytes": 8342
+   },
+   {
+    "n": 154,
+    "file": "0154.txt",
+    "rel": "the-fold/fold-sandbox.js",
+    "sha256": "9adbec4b446ebc32ae7ad2ee7ce7d5995320ca82a9877928207600aae277eae7",
+    "bytes": 1114
+   },
+   {
+    "n": 155,
+    "file": "0155.txt",
+    "rel": "the-fold/fold-webllm-worker.js",
+    "sha256": "bd5198395b40e6a73be10bb526583570058262881e2c8ff8f5c5a6d357fc610e",
+    "bytes": 927
+   },
+   {
+    "n": 156,
+    "file": "0156.txt",
+    "rel": "the-fold/ground-dbg.mjs",
+    "sha256": "02022d3650dfe718a1de7b645a40973c52b534c0b433f78f6fdde788b0cc65e7",
+    "bytes": 52684
+   },
+   {
+    "n": 157,
+    "file": "0157.txt",
+    "rel": "the-fold/scripts/archon-dossiers-export.mjs",
+    "sha256": "f96c871da94b7e2ef6c739046698224f6758913d5e8f0a5f1e212fcb657e3713",
+    "bytes": 3115
+   },
+   {
+    "n": 158,
+    "file": "0158.txt",
+    "rel": "the-fold/scripts/build-lang-priors.mjs",
+    "sha256": "23bfc398d91fdea6c5ae5170c482302b6e4c17e16dd31c0b6d4fed17351bff29",
+    "bytes": 8698
+   },
+   {
+    "n": 159,
+    "file": "0159.txt",
+    "rel": "the-fold/scripts/build-voice.mjs",
+    "sha256": "c6f320ea0f8c2cd8ff732c02818c93c2f4bab6e9ad68def81c454a1af9732e7d",
+    "bytes": 4371
+   },
+   {
+    "n": 160,
+    "file": "0160.txt",
+    "rel": "the-fold/support.js",
+    "sha256": "8fe7df74405f3c55f49b7249c74ea1397e65d07dea2b1bd3b4a489bec2e28cbe",
+    "bytes": 69150
+   }
+  ],
+  "unitsFingerprint": "f386e2fc25ae147e",
+  "docOfFingerprint": "268268773cd4599f"
+ },
+ "sib-code-misc-js": {
+  "tokensAtSnapshot": 292957,
+  "docs": [
+   {
+    "n": 0,
+    "file": "0000.txt",
+    "rel": "ember/build-missing.mjs",
+    "sha256": "34b2adc291b3fbe93b1f298f6f468d138fcf96376293351f8f0e267a6cebe92a",
+    "bytes": 7059
+   },
+   {
+    "n": 1,
+    "file": "0001.txt",
+    "rel": "ember/build.mjs",
+    "sha256": "b71a9e1ddb5e6e9ef434223c4d2d3ac9395cf170e243cfef120cf6a67907f4ae",
+    "bytes": 15650
+   },
+   {
+    "n": 2,
+    "file": "0002.txt",
+    "rel": "ember/src/comments.js",
+    "sha256": "412a9f4ca37132f1e5ab78a34b6bfef19bd7dba90a3e31730ed16b87bcb38fbf",
+    "bytes": 239
+   },
+   {
+    "n": 3,
+    "file": "0003.txt",
+    "rel": "ember/src/feed.js",
+    "sha256": "6c02364c877923957aa6bde8ddf16124e3462c06df9bd789656b1d6064811960",
+    "bytes": 772
+   },
+   {
+    "n": 4,
+    "file": "0004.txt",
+    "rel": "ember/src/likes.js",
+    "sha256": "c0f227774727a6dcf9a6590d024948712971111070f523d23fb91192936dea42",
+    "bytes": 474
+   },
+   {
+    "n": 5,
+    "file": "0005.txt",
+    "rel": "ember/src/store.js",
+    "sha256": "261df645345642f8b222ae5da8bf1f02d0331652c5cd992d815a396fc3106b48",
+    "bytes": 244
+   },
+   {
+    "n": 6,
+    "file": "0006.txt",
+    "rel": "ember/src/time.js",
+    "sha256": "11fdc4fd6a27629e5d7a96b1fe5864e17a5bf23bfab1f4d9f4d3ae240ac5e198",
+    "bytes": 419
+   },
+   {
+    "n": 7,
+    "file": "0007.txt",
+    "rel": "ember/src/validate.js",
+    "sha256": "36a1f5449ec30b92f7d267799ac81da11215bba27c11f3f612a3fcfef82c5114",
+    "bytes": 290
+   },
+   {
+    "n": 8,
+    "file": "0008.txt",
+    "rel": "fold/scripts/build-organs.mjs",
+    "sha256": "1f91d82ceeaaf2acadcdbb99aebaad9718147b60db71c524d0c4f512f458cab2",
+    "bytes": 8363
+   },
+   {
+    "n": 9,
+    "file": "0009.txt",
+    "rel": "fold/server/agenda-probes.mjs",
+    "sha256": "2ce9439e831f22a5f3fb94d1350ea770dc81e9ba69c717cc330ead0b7508adfa",
+    "bytes": 7891
+   },
+   {
+    "n": 10,
+    "file": "0010.txt",
+    "rel": "fold/server/bindings/heimdall.mjs",
+    "sha256": "ad4db97dcab68c61ccc201b02c15dda2ad79d64e9d4e540c40db3c710bc8877b",
+    "bytes": 3208
+   },
+   {
+    "n": 11,
+    "file": "0011.txt",
+    "rel": "fold/server/bindings/janus.mjs",
+    "sha256": "602a3f015b0614bdb9068e5397d404b2df4ff1848be2ef68b189d79ae0ca1e47",
+    "bytes": 2981
+   },
+   {
+    "n": 12,
+    "file": "0012.txt",
+    "rel": "fold/server/bindings/penelope.mjs",
+    "sha256": "e3ddf1cbbef11238f791e52b92df442907ce2c708d8910abb018184150d078e5",
+    "bytes": 3065
+   },
+   {
+    "n": 13,
+    "file": "0013.txt",
+    "rel": "fold/server/gate-ledger.mjs",
+    "sha256": "44b26f2580afd7cea67a1b473d1934880dd98ea0a2d281c9c98407a559e1a0d4",
+    "bytes": 3326
+   },
+   {
+    "n": 14,
+    "file": "0014.txt",
+    "rel": "fold/server/organs.mjs",
+    "sha256": "c275eb8d0b4596cb4785d4379aee4758297322f1371cf0b257f8501c00c84dcf",
+    "bytes": 10640
+   },
+   {
+    "n": 15,
+    "file": "0015.txt",
+    "rel": "fold/server/state.mjs",
+    "sha256": "a5b46584f3094ff227a724bc3f63002995f40532a694508ea629600a4a7eeaf6",
+    "bytes": 5304
+   },
+   {
+    "n": 16,
+    "file": "0016.txt",
+    "rel": "fold/test/agenda-probes.test.mjs",
+    "sha256": "96c17354d8afb98c1fc4c5c9a9c28581ac48fe1b29770a04f3bfee53be97a60b",
+    "bytes": 5576
+   },
+   {
+    "n": 17,
+    "file": "0017.txt",
+    "rel": "fold/test/organs.test.mjs",
+    "sha256": "0632bfc435cffe6c92a95308b5cc555b85e5742318697fa6399238404ca75d4e",
+    "bytes": 9071
+   },
+   {
+    "n": 18,
+    "file": "0018.txt",
+    "rel": "fold/test/routes.test.mjs",
+    "sha256": "361a1b901da5a25469939ab50e181d7cf6a4e4eface742cff5bfa0e6e8be088d",
+    "bytes": 2618
+   },
+   {
+    "n": 19,
+    "file": "0019.txt",
+    "rel": "fold/test/state.test.mjs",
+    "sha256": "bb7a9bcbc37c70c4527d443312ec8c8d57db15d2ea1903084bd805021a299672",
+    "bytes": 5509
+   },
+   {
+    "n": 20,
+    "file": "0020.txt",
+    "rel": "heimdall/bin/heimdall.mjs",
+    "sha256": "3cfe4ea274a0ca2a682e6140ac7a0121d31cd40afbf2a996f85902368863328d",
+    "bytes": 20240
+   },
+   {
+    "n": 21,
+    "file": "0021.txt",
+    "rel": "heimdall/public/sw.js",
+    "sha256": "ca09c40f9c16b067d67aa50edf13a1f2a53859b9a50e711f3843796b1f690913",
+    "bytes": 1774
+   },
+   {
+    "n": 22,
+    "file": "0022.txt",
+    "rel": "heimdall/scripts/capsule-e2e.mjs",
+    "sha256": "5e347bc1db88a29ebe844d4231ed59a1612e14fe1341bf8d63bfc2b70d20a5bd",
+    "bytes": 19098
+   },
+   {
+    "n": 23,
+    "file": "0023.txt",
+    "rel": "heimdall/scripts/capsule-experiment.mjs",
+    "sha256": "f826ad831416467248c82ba9bf99a027e6055e88463c522ff93a1752d70ae614",
+    "bytes": 22591
+   },
+   {
+    "n": 24,
+    "file": "0024.txt",
+    "rel": "heimdall/scripts/capsule-token-economy.mjs",
+    "sha256": "c837181f8b577d7070ba41e1898960f85dcf9c9b0dd13c165fc45b880233e8f3",
+    "bytes": 18729
+   },
+   {
+    "n": 25,
+    "file": "0025.txt",
+    "rel": "heimdall/src/acceptance.js",
+    "sha256": "49299d936aa919506db1e0e8ab2fa2e223cad289d3d0d9cc54522077eb86b090",
+    "bytes": 22328
+   },
+   {
+    "n": 26,
+    "file": "0026.txt",
+    "rel": "heimdall/src/acceptance.test.mjs",
+    "sha256": "d4fe74d061c142c2c8bcc30251d72aef261f8301b6be71209f960c35d53d8af1",
+    "bytes": 9273
+   },
+   {
+    "n": 27,
+    "file": "0027.txt",
+    "rel": "heimdall/src/auth-class.js",
+    "sha256": "92100a07e079ab1c91b2918f03baa5c081b466209d87123b3dc7191fd8d59105",
+    "bytes": 3990
+   },
+   {
+    "n": 28,
+    "file": "0028.txt",
+    "rel": "heimdall/src/auth-class.test.mjs",
+    "sha256": "17c4289b3dde64ee15161315a941839d5eb82d2b26581dcacd44155c620b5786",
+    "bytes": 2751
+   },
+   {
+    "n": 29,
+    "file": "0029.txt",
+    "rel": "heimdall/src/bridge-floor.test.mjs",
+    "sha256": "4562199c3b4cd25968a4af7ecd1f9c5d24aee6b1e0122c463b51cf8dcd0fd988",
+    "bytes": 13861
+   },
+   {
+    "n": 30,
+    "file": "0030.txt",
+    "rel": "heimdall/src/bridge-gate.test.mjs",
+    "sha256": "f44ca1e48e48fff6ac156f3f1a3bce490505e050b79f610362c1f87732f58724",
+    "bytes": 16689
+   },
+   {
+    "n": 31,
+    "file": "0031.txt",
+    "rel": "heimdall/src/bridge-job.test.mjs",
+    "sha256": "b4ebf2c4cd037797c7451e6078d0a7101617d01ee1d0aafd2f7f5eedd73f88db",
+    "bytes": 11016
+   },
+   {
+    "n": 32,
+    "file": "0032.txt",
+    "rel": "heimdall/src/bridge-ladder.test.mjs",
+    "sha256": "6157632786f01390237b923fbbaf0c0fe0a7ffa4926644af21736ea9f3ba3aee",
+    "bytes": 8859
+   },
+   {
+    "n": 33,
+    "file": "0033.txt",
+    "rel": "heimdall/src/bridge-testkit.mjs",
+    "sha256": "e77f701f5eca25d869adfd5fac1ad08aa5d9c6f4a5c5933a2fee340c90f3a3f3",
+    "bytes": 4499
+   },
+   {
+    "n": 34,
+    "file": "0034.txt",
+    "rel": "heimdall/src/capsule.test.mjs",
+    "sha256": "2a1b789a2cfa67ecfd143393f509f81b08839d48f4d29d679620743e9bf77c6f",
+    "bytes": 16628
+   },
+   {
+    "n": 35,
+    "file": "0035.txt",
+    "rel": "heimdall/src/code-fix.js",
+    "sha256": "c20d937278a6d31d0b93ac3d880d31407c7731a170891bd457e1c2d52ffdfd4a",
+    "bytes": 4794
+   },
+   {
+    "n": 36,
+    "file": "0036.txt",
+    "rel": "heimdall/src/competence.js",
+    "sha256": "70c4d3c719ff0e4ce576ce6f50f1b871c6e9adf17b48e7da1ce4534f9585c1e2",
+    "bytes": 10690
+   },
+   {
+    "n": 37,
+    "file": "0037.txt",
+    "rel": "heimdall/src/discovery-keyless.test.mjs",
+    "sha256": "e87d8976f655bd2c90635b27973283da31464c69e93eef1a194102ecf90208c2",
+    "bytes": 1472
+   },
+   {
+    "n": 38,
+    "file": "0038.txt",
+    "rel": "heimdall/src/discovery.js",
+    "sha256": "f13c0803ff16aca8481538accbadfbac4b9337d00b91f2b7932c328e1e79af06",
+    "bytes": 21107
+   },
+   {
+    "n": 39,
+    "file": "0039.txt",
+    "rel": "heimdall/src/dispatch.js",
+    "sha256": "f2f0e635246631cb8f1166a344eb75b703f84956f22dee379b633029f4f01a2e",
+    "bytes": 7495
+   },
+   {
+    "n": 40,
+    "file": "0040.txt",
+    "rel": "heimdall/src/dispatch.test.mjs",
+    "sha256": "908e32b34cacf0e74bc796052abf942f4e76ce4c69173d3bb1aea7eb33529d94",
+    "bytes": 2015
+   },
+   {
+    "n": 41,
+    "file": "0041.txt",
+    "rel": "heimdall/src/engine-share.js",
+    "sha256": "b032c55ed7182651be2209750eccf5178cd29e3c8b5c7c3daaa4c3d0cd210a03",
+    "bytes": 11258
+   },
+   {
+    "n": 42,
+    "file": "0042.txt",
+    "rel": "heimdall/src/free-bench-run.test.mjs",
+    "sha256": "5739f04ee403711f5dc0a7f2d53042c4c788dae11154e81757a5160a654f62c0",
+    "bytes": 5187
+   },
+   {
+    "n": 43,
+    "file": "0043.txt",
+    "rel": "heimdall/src/free-bench.test.mjs",
+    "sha256": "2fc59db28a5ac950b79078711a33cd0f5d08cce860da3d00405253647fa133e8",
+    "bytes": 9701
+   },
+   {
+    "n": 44,
+    "file": "0044.txt",
+    "rel": "heimdall/src/invite.test.mjs",
+    "sha256": "0b25a04657b1d2bcef3465f0b66b94a473c16a38a19a3231d7c82fb2c5287223",
+    "bytes": 3947
+   },
+   {
+    "n": 45,
+    "file": "0045.txt",
+    "rel": "heimdall/src/job-lane.js",
+    "sha256": "268f05df43a0f165d2f452fb5472ac3ff599c9f2abbd2da42cb5ef5519f38b30",
+    "bytes": 8409
+   },
+   {
+    "n": 46,
+    "file": "0046.txt",
+    "rel": "heimdall/src/job.js",
+    "sha256": "b82c63181bc66bda0c4428e05720ae96619c17e2d0b608649a185a082426799b",
+    "bytes": 11214
+   },
+   {
+    "n": 47,
+    "file": "0047.txt",
+    "rel": "heimdall/src/job.test.mjs",
+    "sha256": "13c5b28e3152f3a163ffbf5ed28a3c9da226aac0abdfb07ddcb07c997b027691",
+    "bytes": 3531
+   },
+   {
+    "n": 48,
+    "file": "0048.txt",
+    "rel": "heimdall/src/liveness.js",
+    "sha256": "a9e32cc7fc5b27ef564eb2381618317b7ae0963bcf190162c44b0102d2fcab88",
+    "bytes": 7383
+   },
+   {
+    "n": 49,
+    "file": "0049.txt",
+    "rel": "heimdall/src/main.js",
+    "sha256": "5488105141393f7c74466d64ee7a5b87cd41046db93f7d81e54090ef6e92e7ac",
+    "bytes": 126959
+   },
+   {
+    "n": 50,
+    "file": "0050.txt",
+    "rel": "heimdall/src/models.js",
+    "sha256": "8f63ce800e2c174f2fee57953360a905cac61b3c8f1039047c7e51232774ddf4",
+    "bytes": 2923
+   },
+   {
+    "n": 51,
+    "file": "0051.txt",
+    "rel": "heimdall/src/remote.js",
+    "sha256": "7e77f64a2e777c48aa95273fbd9cbc1543871a5755da22208c3f6f5f90e64593",
+    "bytes": 16713
+   },
+   {
+    "n": 52,
+    "file": "0052.txt",
+    "rel": "heimdall/src/route-sim.js",
+    "sha256": "d41e0e7d180e45978fcb447539b83aae3d3ec50d9fbf9a265bde42da115390b6",
+    "bytes": 7460
+   },
+   {
+    "n": 53,
+    "file": "0053.txt",
+    "rel": "heimdall/src/route-stats.js",
+    "sha256": "292b67194d95d104b3584304f7f15422fc53d3362bb5553b2d86409a6a56afe7",
+    "bytes": 6725
+   },
+   {
+    "n": 54,
+    "file": "0054.txt",
+    "rel": "heimdall/src/route-stats.test.mjs",
+    "sha256": "6f821fcd665be0508ee14037ec0ecc035f9c7c5d988e4130cb52d9eeeb9629a0",
+    "bytes": 3410
+   },
+   {
+    "n": 55,
+    "file": "0055.txt",
+    "rel": "heimdall/src/rtc.js",
+    "sha256": "486398738cd4d27923276ebf65281d8c3be220df44248253793dc9bc8c8bf68c",
+    "bytes": 5360
+   },
+   {
+    "n": 56,
+    "file": "0056.txt",
+    "rel": "heimdall/src/rtc.test.mjs",
+    "sha256": "30401146a413ff03b1db16f9074ee62c9cd5a3614c63bd3f40bf9d69cdf6353b",
+    "bytes": 2562
+   },
+   {
+    "n": 57,
+    "file": "0057.txt",
+    "rel": "heimdall/src/usage.test.mjs",
+    "sha256": "d06ef3630e3ed5f87d988cb2cc29b2617eee1ce7e5b5266438a93342df850cb1",
+    "bytes": 5462
+   },
+   {
+    "n": 58,
+    "file": "0058.txt",
+    "rel": "holodeck/holodeck-carry.js",
+    "sha256": "3053a1a211d51e6a955c23d64ea600b2f58ad3ccd227c438afccc85189605e47",
+    "bytes": 7434
+   },
+   {
+    "n": 59,
+    "file": "0059.txt",
+    "rel": "holodeck/holodeck-eot.js",
+    "sha256": "2e3b80ce1b686b4686a0ee38026e7bd4de6f68d04a2e12b6560faa2fd00a33a0",
+    "bytes": 19239
+   },
+   {
+    "n": 60,
+    "file": "0060.txt",
+    "rel": "holodeck/holodeck-fort.js",
+    "sha256": "a0367f94a57188ab1edde700d8d6bf5c04b2944206f9aed1e8bc82912de9eb14",
+    "bytes": 25191
+   },
+   {
+    "n": 61,
+    "file": "0061.txt",
+    "rel": "holodeck/holodeck-ground.js",
+    "sha256": "ae96624ea134f407943f066da658aa9cd74dda3328ec82d810fcf22924688b4f",
+    "bytes": 1565
+   },
+   {
+    "n": 62,
+    "file": "0062.txt",
+    "rel": "holodeck/holodeck-holons.js",
+    "sha256": "c7ef3561dfa339b29bcd3147cffc9c21961bd8ebd1edeb156bc85683b325b683",
+    "bytes": 6746
+   },
+   {
+    "n": 63,
+    "file": "0063.txt",
+    "rel": "holodeck/holodeck-ingest-player.js",
+    "sha256": "a2249af5567a44579670c7dea311076e1a1ce14c50f3dc15d9dbac9340a90c1a",
+    "bytes": 21130
+   },
+   {
+    "n": 64,
+    "file": "0064.txt",
+    "rel": "holodeck/holodeck-links.js",
+    "sha256": "0f3c5a541fd63d62c637f3ab0cf8c75f0049164aa4e21596adf1dcf1bf200617",
+    "bytes": 41526
+   },
+   {
+    "n": 65,
+    "file": "0065.txt",
+    "rel": "holodeck/holodeck-map.js",
+    "sha256": "866913ee186318dfeba0623eae205d693eb8cd9eced6a3e0dc55c843522d7928",
+    "bytes": 33589
+   },
+   {
+    "n": 66,
+    "file": "0066.txt",
+    "rel": "holodeck/holodeck-media.js",
+    "sha256": "7c735be8a8769a967e340c5b1b16dd3aec5e2a69707d32331e309acc9cb308f4",
+    "bytes": 22751
+   },
+   {
+    "n": 67,
+    "file": "0067.txt",
+    "rel": "holodeck/holodeck-overview.js",
+    "sha256": "a58f0094daff4a5d0616b4e4b39de550f2cada7dfb1a04c4a455e59e3047d163",
+    "bytes": 10729
+   },
+   {
+    "n": 68,
+    "file": "0068.txt",
+    "rel": "holodeck/holodeck-perspectives.js",
+    "sha256": "c593384cac568201e3a89ad0b13b1710ee33c8a1ff1bade858e62ba73289dd9c",
+    "bytes": 16151
+   },
+   {
+    "n": 69,
+    "file": "0069.txt",
+    "rel": "holodeck/holodeck-pyodide.js",
+    "sha256": "1bc74bb40904c08158896a5725ce514d903c5017a062136be54f7c9995d65758",
+    "bytes": 22976
+   },
+   {
+    "n": 70,
+    "file": "0070.txt",
+    "rel": "holodeck/holodeck-reader.js",
+    "sha256": "3686d34001427e50a537a45bf132206a4254b26cb389deb993a3260a446bed03",
+    "bytes": 23412
+   },
+   {
+    "n": 71,
+    "file": "0071.txt",
+    "rel": "holodeck/holodeck-reading.js",
+    "sha256": "9c886cbb0244008ea28dd586d45bedaff535eb49db150c84e0327e31a93ce0ff",
+    "bytes": 13953
+   },
+   {
+    "n": 72,
+    "file": "0072.txt",
+    "rel": "holodeck/holodeck-screen-core.js",
+    "sha256": "e7b3b67c1a0e9cf29e43fbddf79a782c08df1be6919f7286766bf36769c8cc81",
+    "bytes": 29607
+   },
+   {
+    "n": 73,
+    "file": "0073.txt",
+    "rel": "holodeck/holodeck-screen.js",
+    "sha256": "12ea291dcdb03de400e3e572d02d0e188ab91577c021a04ebc287e604f32ef3d",
+    "bytes": 5067
+   },
+   {
+    "n": 74,
+    "file": "0074.txt",
+    "rel": "holodeck/holodeck-summary.js",
+    "sha256": "3c95c3c8b4fabfa0204b84489bef035961878cb7901a699ef6b15440aa3f3b6d",
+    "bytes": 48196
+   },
+   {
+    "n": 75,
+    "file": "0075.txt",
+    "rel": "holodeck/holodeck-trace.test.mjs",
+    "sha256": "b4c0e2314ddde00496d847985ed0f3e368524a8b499deeae659baaece26abcde",
+    "bytes": 3954
+   },
+   {
+    "n": 76,
+    "file": "0076.txt",
+    "rel": "holodeck/reading-worker.js",
+    "sha256": "cbf32a4b060181f91e8984358657fd3d9ec2aebd122b5a5891e14563f38b866d",
+    "bytes": 5690
+   },
+   {
+    "n": 77,
+    "file": "0077.txt",
+    "rel": "holodeck/strip-e2e.mjs",
+    "sha256": "1016e4e8fec73e4a90dae02a81dab8febb1223978b9e357be10a6b2f73a75cd4",
+    "bytes": 20861
+   },
+   {
+    "n": 78,
+    "file": "0078.txt",
+    "rel": "holodeck/tools/check-account.mjs",
+    "sha256": "4db9f15e1ab68454284501d8331532d7026427a140df7c2461e797965493138e",
+    "bytes": 2048
+   },
+   {
+    "n": 79,
+    "file": "0079.txt",
+    "rel": "holodeck/tools/fold-account.mjs",
+    "sha256": "b5b6fd265de02ab8a72f835517f6a751bc144a9cb9d337bf3ee507d6abb03c90",
+    "bytes": 5424
+   },
+   {
+    "n": 80,
+    "file": "0080.txt",
+    "rel": "holodeck/tools/notebook-falsify.mjs",
+    "sha256": "5fbdff3364ec5c5a33ebd2c5f4c8e95812ecd879d19bded7c285051770b13baa",
+    "bytes": 26284
+   },
+   {
+    "n": 81,
+    "file": "0081.txt",
+    "rel": "holodeck/tools/notebook-server.mjs",
+    "sha256": "2e959e6ade36b5cb6be78d8d044d6940cfd08db05365a99df3cd49234a9006cf",
+    "bytes": 16861
+   },
+   {
+    "n": 82,
+    "file": "0082.txt",
+    "rel": "holodeck/tools/phone-fit.mjs",
+    "sha256": "860e9a60c481f5877051530b37a49b327a7b8a19769514f4280ab5da17fbdf2d",
+    "bytes": 3954
+   },
+   {
+    "n": 83,
+    "file": "0083.txt",
+    "rel": "janus-fold/native/handlers.js",
+    "sha256": "f4b2528b5a60a7a17437d6d8d2a1008d9cbec2e582b696e4c58c9bc38b8012da",
+    "bytes": 14893
+   },
+   {
+    "n": 84,
+    "file": "0084.txt",
+    "rel": "janus-fold/native/interpretation/declarations.js",
+    "sha256": "b6f755b4256b10769e6effc940e5e6dbb8c1d876e86664fdd7c6373962eac8a9",
+    "bytes": 8940
+   },
+   {
+    "n": 85,
+    "file": "0085.txt",
+    "rel": "janus-fold/native/kernel/experience-priors.js",
+    "sha256": "cadaba449897560806f4f25a9d7459bcb6074fa183165c11c64a9116a0a726e4",
+    "bytes": 17955
+   },
+   {
+    "n": 86,
+    "file": "0086.txt",
+    "rel": "janus-fold/native/kernel/hyperlexicon.js",
+    "sha256": "ee8039ae19677bf027ada6792adb361ab396860152dfb06be8b902eb30629177",
+    "bytes": 11356
+   },
+   {
+    "n": 87,
+    "file": "0087.txt",
+    "rel": "janus-fold/native/kernel/terrain-activation.js",
+    "sha256": "fc8237c908dc27fc4c8cdf4a65f3b30651f9d33a673a7525cd8bbf1a3a19fb4c",
+    "bytes": 6015
+   },
+   {
+    "n": 88,
+    "file": "0088.txt",
+    "rel": "janus-fold/native/organs/corroboration.js",
+    "sha256": "39b8cec452bebe8a90af9219c597dc84c9cc3f8e623d5137ca035289e62be3b8",
+    "bytes": 75799
+   },
+   {
+    "n": 89,
+    "file": "0089.txt",
+    "rel": "janus-fold/native/organs/derivation.js",
+    "sha256": "af21a4d7a907a549865a86facca29b76d09590e21dc6e14078627b5ac0c4867d",
+    "bytes": 31503
+   },
+   {
+    "n": 90,
+    "file": "0090.txt",
+    "rel": "janus-fold/native/organs/reasoning-record.js",
+    "sha256": "48bd2e90793138bb98cc028ad635f986c85491f2ca322dfd6591df62861130d8",
+    "bytes": 7547
+   },
+   {
+    "n": 91,
+    "file": "0091.txt",
+    "rel": "janus-fold/native/organs/regime.js",
+    "sha256": "8e7658107ddc05aa44b9b327e01866b3ea23786b2a5c37fbcf860878847e999f",
+    "bytes": 17616
+   },
+   {
+    "n": 92,
+    "file": "0092.txt",
+    "rel": "janus/native/organs/fold-claims.test.mjs",
+    "sha256": "f84d780c23b2a4d4fed35102c2a2f72e66b110358763e580384474986ddd078d",
+    "bytes": 1536
+   },
+   {
+    "n": 93,
+    "file": "0093.txt",
+    "rel": "khora-fold/anthropic-upstream.mjs",
+    "sha256": "a99d832a62dbfaa579e6866e4c3543d85c461b248b1a7a76af71aad5c74c175c",
+    "bytes": 15227
+   },
+   {
+    "n": 94,
+    "file": "0094.txt",
+    "rel": "khora-fold/cli/TheFold.mjs",
+    "sha256": "174b970ba9acb61e7e986b40de5d5cbbd1de2c2e58ecbea0dd96a86b17688c18",
+    "bytes": 703
+   },
+   {
+    "n": 95,
+    "file": "0095.txt",
+    "rel": "khora-fold/cli/claude-code-context.mjs",
+    "sha256": "0421ea848844a570d05799cbe6e1a16be8d202df8359a74451c8687d3214a4b8",
+    "bytes": 24071
+   },
+   {
+    "n": 96,
+    "file": "0096.txt",
+    "rel": "khora-fold/cli/claude-code-reason-gate.mjs",
+    "sha256": "0b0d65eb18064cf869e0303632c60f7290b28c751f90449eed867789e7b17069",
+    "bytes": 3370
+   },
+   {
+    "n": 97,
+    "file": "0097.txt",
+    "rel": "khora-fold/cli/claude-code-watch.mjs",
+    "sha256": "5e3d01658ab350e139519551ba91f5c7722a4449d0a40b07d5f7d399ab6fb402",
+    "bytes": 9790
+   },
+   {
+    "n": 98,
+    "file": "0098.txt",
+    "rel": "khora-fold/cli/holograph.mjs",
+    "sha256": "414c6d3dc89371e576004c7619153c81acf897d861b7b8b7fb0128f4744432c7",
+    "bytes": 9713
+   },
+   {
+    "n": 99,
+    "file": "0099.txt",
+    "rel": "khora-fold/cli/reason-surface.mjs",
+    "sha256": "163adecd24a6848ad79d254fe67447130960ef359b7f98cb22c2b18f876fe142",
+    "bytes": 14505
+   },
+   {
+    "n": 100,
+    "file": "0100.txt",
+    "rel": "khora-fold/cli/reason.mjs",
+    "sha256": "3273e43198a54b4e79eae398c266892aa620cbfe0aa8e4742ec202bbd722b5f0",
+    "bytes": 39693
+   },
+   {
+    "n": 101,
+    "file": "0101.txt",
+    "rel": "khora-fold/cli/screen.mjs",
+    "sha256": "fafa59dbbfbcbd199b866960d4349575dd2e2446fbb54e447f30e70108284fa8",
+    "bytes": 3194
+   },
+   {
+    "n": 102,
+    "file": "0102.txt",
+    "rel": "khora-fold/cli/tests/browser-smoke.mjs",
+    "sha256": "ffd4265a84633c96349b6ee84934d4855477810fb5db33e8799619b6cd0a67b3",
+    "bytes": 1703
+   },
+   {
+    "n": 103,
+    "file": "0103.txt",
+    "rel": "khora-fold/cli/tests/e2e/fake-proxy.mjs",
+    "sha256": "898ac7e471e4ec52d2c49c05099bfee0add649bc944f5b8f74c340625788527f",
+    "bytes": 5537
+   },
+   {
+    "n": 104,
+    "file": "0104.txt",
+    "rel": "khora-fold/er7-client.mjs",
+    "sha256": "fa4d797785a400b67aafeda97464691c703dce5d70e99c2ba167e954514e1684",
+    "bytes": 9254
+   },
+   {
+    "n": 105,
+    "file": "0105.txt",
+    "rel": "khora-fold/held-turns.mjs",
+    "sha256": "714574933d4e9358040e055db9d975c860c12c5c114ca3fde65706dc2ac9719a",
+    "bytes": 4893
+   },
+   {
+    "n": 106,
+    "file": "0106.txt",
+    "rel": "khora-fold/khora/H/H.mjs",
+    "sha256": "f311196fbe548482fde7be8ebd481c69ff9f3e61c06df342452f4e86dd6274de",
+    "bytes": 5107
+   },
+   {
+    "n": 107,
+    "file": "0107.txt",
+    "rel": "khora-fold/native/adapters/text/priors.js",
+    "sha256": "4a23db12c801354e1618c60951c7b5a80541994bdf6b89c5c1fc64bacb5cb80f",
+    "bytes": 22659
+   },
+   {
+    "n": 108,
+    "file": "0108.txt",
+    "rel": "khora-fold/native/adapters/text/recursive.js",
+    "sha256": "5d9b2ab2a9e190e6512c1e93fda6dc5db7bd4ed4c86efd9ff574adbdd7c2aba2",
+    "bytes": 54375
+   },
+   {
+    "n": 109,
+    "file": "0109.txt",
+    "rel": "khora-fold/native/assay/runner.js",
+    "sha256": "eab9054427658fbc112b3d9f707719ca9afee1db9cce943d3d6488fdfc6c91ca",
+    "bytes": 13134
+   },
+   {
+    "n": 110,
+    "file": "0110.txt",
+    "rel": "khora-fold/native/constructors/actions.js",
+    "sha256": "f495f8004d1a61f0ff6234d46c4377c9e0e9ef7d9baba23218bd5c40bc995654",
+    "bytes": 13887
+   },
+   {
+    "n": 111,
+    "file": "0111.txt",
+    "rel": "khora-fold/native/docs/surprise-organs.js",
+    "sha256": "ccc55409da9ebfd3c69f455b4018992deecf0531cfda2663284170a963686d4b",
+    "bytes": 17435
+   },
+   {
+    "n": 112,
+    "file": "0112.txt",
+    "rel": "khora-fold/native/execution/bind.js",
+    "sha256": "27fec5d9c78e350ba471fe0fd79d669877d9cd75a9cde935c4671734f75411bc",
+    "bytes": 3219
+   },
+   {
+    "n": 113,
+    "file": "0113.txt",
+    "rel": "khora-fold/native/execution/index.js",
+    "sha256": "fd38eea9df16f685e2f0b7f045b659358853d284fc4e1223f070e68db0894ad8",
+    "bytes": 893
+   },
+   {
+    "n": 114,
+    "file": "0114.txt",
+    "rel": "khora-fold/native/heimdall/peer-mesh.mjs",
+    "sha256": "14a10510a8d191be0df8f11d9987d627823406d68c0bbcbc3b0fd3e5979e267b",
+    "bytes": 8227
+   },
+   {
+    "n": 115,
+    "file": "0115.txt",
+    "rel": "khora-fold/native/integration/counterexamples.js",
+    "sha256": "16d6a423058924b82b9c1d5edd2108b82a4ff61aebfb4fe91006cea87bb4cb73",
+    "bytes": 4548
+   },
+   {
+    "n": 116,
+    "file": "0116.txt",
+    "rel": "khora-fold/native/integration/disclosure.js",
+    "sha256": "f66bce3912cdc035296177fd42552ad6c056e9778201e191e3ed6116f9073a1e",
+    "bytes": 3900
+   },
+   {
+    "n": 117,
+    "file": "0117.txt",
+    "rel": "khora-fold/native/integration/index.js",
+    "sha256": "f0654d88dd14d0fc828ede693940ea913b8b93eee611bd44b5a21a9ac9f2663e",
+    "bytes": 1154
+   },
+   {
+    "n": 118,
+    "file": "0118.txt",
+    "rel": "khora-fold/native/integration/trace.js",
+    "sha256": "14cb003246125c40d64e53b1d720505f22296e03b1fa4277b2374178cf64af9f",
+    "bytes": 3336
+   },
+   {
+    "n": 119,
+    "file": "0119.txt",
+    "rel": "khora-fold/native/kernel/completion.js",
+    "sha256": "6d50d16cb6820b8128aecc7f13b8e2593696ad46208a8cbea4cb34519eda7e40",
+    "bytes": 8919
+   },
+   {
+    "n": 120,
+    "file": "0120.txt",
+    "rel": "khora-fold/native/kernel/dmd.js",
+    "sha256": "0cfd5316cee3559b0fc07af4257605e1eeaf12a46d738edced3492bb277dfe2b",
+    "bytes": 13842
+   },
+   {
+    "n": 121,
+    "file": "0121.txt",
+    "rel": "khora-fold/native/kernel/expectations.js",
+    "sha256": "f0ae248e217a6eb340b12c3042fe28f92e28ae08e4f9c31cfe6b702d7e54b850",
+    "bytes": 2470
+   },
+   {
+    "n": 122,
+    "file": "0122.txt",
+    "rel": "khora-fold/native/kernel/identity.js",
+    "sha256": "fabf2de221055e4cecb6d32a172d069cd5cc7f31a3cf2f7123caf966697a2d1d",
+    "bytes": 16062
+   },
+   {
+    "n": 123,
+    "file": "0123.txt",
+    "rel": "khora-fold/native/kernel/kind-induction.js",
+    "sha256": "2923a27791d0334f46c96806634c5e9db4b0dbde6ac58b7ae5b9ac36340f76bb",
+    "bytes": 20161
+   },
+   {
+    "n": 124,
+    "file": "0124.txt",
+    "rel": "khora-fold/native/kernel/lexicon.js",
+    "sha256": "4545a182dd1b96ec42c989354a5a14804291f61f597fb2483a4b6e4e094cbd71",
+    "bytes": 9999
+   },
+   {
+    "n": 125,
+    "file": "0125.txt",
+    "rel": "khora-fold/native/kernel/pending-sig.js",
+    "sha256": "05b7b3e351447bf7790e99bd79ed5ef8704f40d7e94331fca5d907320bc001c4",
+    "bytes": 6105
+   },
+   {
+    "n": 126,
+    "file": "0126.txt",
+    "rel": "khora-fold/native/kernel/return-curve.js",
+    "sha256": "86af95df4223a28162bb173e7de9ed2ce1f408bfb2c2b40b46d9e0b0e27dd8c8",
+    "bytes": 4582
+   },
+   {
+    "n": 127,
+    "file": "0127.txt",
+    "rel": "khora-fold/native/kernel/rhythm-priors.js",
+    "sha256": "13c35f4d407df4fb42cd8aea39598204926ad89df4211366c94a102df8ffc80f",
+    "bytes": 13246
+   },
+   {
+    "n": 128,
+    "file": "0128.txt",
+    "rel": "khora-fold/native/learning/reuse.js",
+    "sha256": "549676ae342b36eade48c72fc95293ff3d1fc5d2c228d806558f62e66fedda51",
+    "bytes": 6151
+   },
+   {
+    "n": 129,
+    "file": "0129.txt",
+    "rel": "khora-fold/native/memory/activation.js",
+    "sha256": "b3806df63eefd180d3cf983997dd97419cad36f73777e7edc64ee78484fa6dc7",
+    "bytes": 23228
+   },
+   {
+    "n": 130,
+    "file": "0130.txt",
+    "rel": "khora-fold/native/organs/corroboration.js",
+    "sha256": "26872078b4ba49f48247e6f9fe60308e7b4e9ff1930b175536f16c9a9ee9d699",
+    "bytes": 75176
+   },
+   {
+    "n": 131,
+    "file": "0131.txt",
+    "rel": "khora-fold/native/organs/heard-surfaces.js",
+    "sha256": "1a6bfdcefb53ba19c21bb79ddcb7e8214de33fbf3d8df76cd2e43b265e156123",
+    "bytes": 14088
+   },
+   {
+    "n": 132,
+    "file": "0132.txt",
+    "rel": "khora-fold/native/organs/huginn.js",
+    "sha256": "622956e9e592387412058c81a2ea267a726fb9227bba7435d5ec0b553f63cc0c",
+    "bytes": 13449
+   },
+   {
+    "n": 133,
+    "file": "0133.txt",
+    "rel": "khora-fold/native/organs/index.js",
+    "sha256": "41e3f53edf4625793aa7449c825fe566b544240cb54cfa498bef0d245b01c9d6",
+    "bytes": 20038
+   },
+   {
+    "n": 134,
+    "file": "0134.txt",
+    "rel": "khora-fold/native/organs/kairos.js",
+    "sha256": "3fe2fef38f2a25575c96838692c74eb42f65790c73c6106cbe753b4b77536178",
+    "bytes": 9134
+   },
+   {
+    "n": 135,
+    "file": "0135.txt",
+    "rel": "khora-fold/native/organs/kind-standing.js",
+    "sha256": "1f5195ab6fc238672254a47fc2690464c97cd2524c3c5bd9cbfbe212396c523c",
+    "bytes": 18473
+   },
+   {
+    "n": 136,
+    "file": "0136.txt",
+    "rel": "khora-fold/native/organs/pathos.js",
+    "sha256": "b3c574fc2c680b33868d7d6ad3bdc386b059562d9e0d0309a485f6ffb0068762",
+    "bytes": 10113
+   },
+   {
+    "n": 137,
+    "file": "0137.txt",
+    "rel": "khora-fold/native/organs/testimony.js",
+    "sha256": "3f21b9c59dd882456f2c79202cb7b0431853f7b01964f07178c6c4e43d88ba06",
+    "bytes": 29948
+   },
+   {
+    "n": 138,
+    "file": "0138.txt",
+    "rel": "khora-fold/native/organs/voices.js",
+    "sha256": "c3f9238536fd6e071e46121a57d24eb7975284b7ff3dfe84d00a89a43c086d0c",
+    "bytes": 13821
+   },
+   {
+    "n": 139,
+    "file": "0139.txt",
+    "rel": "khora-fold/native/pathos/loop.js",
+    "sha256": "9cb0e00a3a7f856244645552194579fa2b3966ce3d6aeb9559d20c7795814cd2",
+    "bytes": 9273
+   },
+   {
+    "n": 140,
+    "file": "0140.txt",
+    "rel": "khora-fold/native/the-fold/fold.js",
+    "sha256": "313bd5f3b7c3b53a5ba5b6955231a2404b1a6799288b5493e2e6a6e60b6d37dd",
+    "bytes": 24618
+   },
+   {
+    "n": 141,
+    "file": "0141.txt",
+    "rel": "khora-fold/native/the-fold/surface/block-surface.mjs",
+    "sha256": "1bea945c5767d7120164339ce4c0950d00a2a239432ebaf2b98d31db1e1943fe",
+    "bytes": 136274
+   },
+   {
+    "n": 142,
+    "file": "0142.txt",
+    "rel": "khora-fold/scripts/kleene-up.mjs",
+    "sha256": "9c5c2116eeabcbe51732aead286fcd7a492f8171c71603e41abfc016ac349a37",
+    "bytes": 9699
+   },
+   {
+    "n": 143,
+    "file": "0143.txt",
+    "rel": "khora-fold/text.js",
+    "sha256": "5c0c6785ccff9e4b6900a7c61d69d4f82443b9b8446b9c4bb7e1b68cbe9efa77",
+    "bytes": 901
+   },
+   {
+    "n": 144,
+    "file": "0144.txt",
+    "rel": "muninn/atrest.mjs",
+    "sha256": "196d66707c24deb52ed440356726251e966e23696b7ea2ef5108d359276dce52",
+    "bytes": 2012
+   },
+   {
+    "n": 145,
+    "file": "0145.txt",
+    "rel": "muninn/pack.mjs",
+    "sha256": "15423b928e85febc7fa8ecec94387a61b43ab7b7a05d06ded2ef78eee2e18368",
+    "bytes": 2136
+   },
+   {
+    "n": 146,
+    "file": "0146.txt",
+    "rel": "muninn/store.test.mjs",
+    "sha256": "4d659a4d573d5af327c9e242772ef18e2cbfd4b44d68bebd6b4daec6a40a7e35",
+    "bytes": 817
+   },
+   {
+    "n": 147,
+    "file": "0147.txt",
+    "rel": "opencode-fold/packages/app/public/oc-theme-preload.js",
+    "sha256": "8d4449bfa3375186f91aa344dfe7352344af1a5a92d7e2e61d55ada85b1e7c19",
+    "bytes": 1355
+   },
+   {
+    "n": 148,
+    "file": "0148.txt",
+    "rel": "opencode-fold/packages/opencode/test/fixture/lsp/fake-lsp-server.js",
+    "sha256": "3f96e241f80a9b4bec9ac6a315886d1cdfabbf92822eb5981271a46a523d9faa",
+    "bytes": 6969
+   },
+   {
+    "n": 149,
+    "file": "0149.txt",
+    "rel": "opencode-fold/sdks/vscode/.vscode-test.mjs",
+    "sha256": "e773c9bc1c6dceb5c611171a7083936c8913db60200bde2c68ed44c6b540f2c4",
+    "bytes": 116
+   },
+   {
+    "n": 150,
+    "file": "0150.txt",
+    "rel": "penelope-fold/gym/essay-composed.mjs",
+    "sha256": "e298f31d105398f4500be90bcf0dafc621f88f1a78d9983a48bc47f93ee696a0",
+    "bytes": 10596
+   },
+   {
+    "n": 151,
+    "file": "0151.txt",
+    "rel": "penelope-fold/gym/essay-dolphins.mjs",
+    "sha256": "e74137c1bae6bbbdac85da30d746a3725674af81013cff6d6a25dd66dc4e4749",
+    "bytes": 6972
+   },
+   {
+    "n": 152,
+    "file": "0152.txt",
+    "rel": "penelope-fold/gym/essay-grounded.mjs",
+    "sha256": "936b70f98ac3860fb571e6aba781caeff2972272270f9aab2ed2a24ed0d980ff",
+    "bytes": 14781
+   },
+   {
+    "n": 153,
+    "file": "0153.txt",
+    "rel": "penelope-fold/gym/handmaidens/eurycleia.mjs",
+    "sha256": "e43e097b9fff909af6062b5d9d17b9d922e44d93b1dbbab25582d9c0b90cc6cc",
+    "bytes": 3283
+   },
+   {
+    "n": 154,
+    "file": "0154.txt",
+    "rel": "penelope-fold/gym/handmaidens/iphthime.mjs",
+    "sha256": "4fabb4f0e25ac4c553d968fb0c11f96d08427ef0ceba04e3b1c4840f309efb71",
+    "bytes": 3652
+   },
+   {
+    "n": 155,
+    "file": "0155.txt",
+    "rel": "penelope-fold/gym/server.mjs",
+    "sha256": "b45f9a06b29c9be974543e3eaac670e660658e59b797fda2f9c90214f7757028",
+    "bytes": 22539
+   },
+   {
+    "n": 156,
+    "file": "0156.txt",
+    "rel": "penelope-fold/gym/weave.mjs",
+    "sha256": "31a2cc7d7797f6e63a4bcad228a0680eac5b6647677333a193eaacbd78671df4",
+    "bytes": 13192
+   },
+   {
+    "n": 157,
+    "file": "0157.txt",
+    "rel": "penelope-fold/mouth/server.test.mjs",
+    "sha256": "f620db3ce25b9abac2dc74997815c9e86e46ae6f76b878dae46868abbb3971d8",
+    "bytes": 13609
+   },
+   {
+    "n": 158,
+    "file": "0158.txt",
+    "rel": "penelope-fold/organs/agenda-shape.mjs",
+    "sha256": "9783bce5c21f1a06309af80fab2328b099f4a4bf154acb8d07a6ffd8e8a21f68",
+    "bytes": 3045
+   },
+   {
+    "n": 159,
+    "file": "0159.txt",
+    "rel": "penelope-fold/organs/fold-at-point.mjs",
+    "sha256": "ca53919ed0f10dee715354d0a02a01ad9532e31393e2d4a527517d73c1ffdd2f",
+    "bytes": 7548
+   },
+   {
+    "n": 160,
+    "file": "0160.txt",
+    "rel": "penelope-fold/organs/freshness.mjs",
+    "sha256": "ae7629f48cac2d2ff0aaa188294e1f7cb62e83effe9586f2f2056654e05220f7",
+    "bytes": 1418
+   },
+   {
+    "n": 161,
+    "file": "0161.txt",
+    "rel": "penelope-fold/organs/generation-door.mjs",
+    "sha256": "4a3d2ff4da02c56eb2b066388e71c6a1d89467de723a0460df919ed7860e2fa8",
+    "bytes": 12726
+   },
+   {
+    "n": 162,
+    "file": "0162.txt",
+    "rel": "penelope-fold/organs/generation/adapters/code-fix.test.mjs",
+    "sha256": "50c031488b235f7711480b907668da1d90e3883ac1640be8b11cc678938464a2",
+    "bytes": 4801
+   },
+   {
+    "n": 163,
+    "file": "0163.txt",
+    "rel": "penelope-fold/organs/generation/adapters/overview.mjs",
+    "sha256": "4aec0e80630b7944d6ba3f2799acb54a8c8a60d83df8fc54549a630715e37bdc",
+    "bytes": 2515
+   },
+   {
+    "n": 164,
+    "file": "0164.txt",
+    "rel": "penelope-fold/organs/generation/provenance.mjs",
+    "sha256": "d1ff51ef7988f8a1c062b8b97d4bd56276aa18537c345300eab3a61f66d95b2b",
+    "bytes": 4029
+   },
+   {
+    "n": 165,
+    "file": "0165.txt",
+    "rel": "penelope-fold/organs/grounded-composition.mjs",
+    "sha256": "90bdace4bb8191d997817e6ff96a21325ed71340fa0bd20d6526e4b0a3a924b4",
+    "bytes": 3036
+   },
+   {
+    "n": 166,
+    "file": "0166.txt",
+    "rel": "penelope-fold/organs/html-snip.mjs",
+    "sha256": "95407e7c00b71354d25824d05300b814fe146ba4893a62e46f9699701ce90127",
+    "bytes": 6680
+   },
+   {
+    "n": 167,
+    "file": "0167.txt",
+    "rel": "penelope-fold/organs/integration/retention.fixture.mjs",
+    "sha256": "818ad0355814782d0fab0da79e13209e47fce059b09ff5a75fe42448b7428bcb",
+    "bytes": 2625
+   },
+   {
+    "n": 168,
+    "file": "0168.txt",
+    "rel": "penelope-fold/organs/integration/retention.mjs",
+    "sha256": "0b2186e795d0a3147bc7f4b31f047279d2be3ccc7c527a0458f6f823f669cf4f",
+    "bytes": 4338
+   },
+   {
+    "n": 169,
+    "file": "0169.txt",
+    "rel": "penelope-fold/organs/stack-digest.mjs",
+    "sha256": "c7204e5c9b32e810d9ad34a6a4a1aef0f077984308bc15770ef7538362095700",
+    "bytes": 4947
+   },
+   {
+    "n": 170,
+    "file": "0170.txt",
+    "rel": "penelope-fold/organs/steersman.mjs",
+    "sha256": "4c9d106fa88b8655f1c42b1c47683c23cc0971abbf620a656ccccb308d2185a9",
+    "bytes": 13986
+   },
+   {
+    "n": 171,
+    "file": "0171.txt",
+    "rel": "penelope/handlers.mjs",
+    "sha256": "0eff92dd9ac05b65d78b029fe05b6a270fa5536e85d11ec56b212b20ca33e83f",
+    "bytes": 2799
+   },
+   {
+    "n": 172,
+    "file": "0172.txt",
+    "rel": "penelope/handlers.test.mjs",
+    "sha256": "4ae3dbf873d3df05d795d4132538e2cfb0f505b72653abebf60fca3c509c15e8",
+    "bytes": 3004
+   },
+   {
+    "n": 173,
+    "file": "0173.txt",
+    "rel": "penelope/mouth/server.mjs",
+    "sha256": "c01aa511cb75f5ca32fca92640efee4251306e3d291e974a74f5bc63411bbac7",
+    "bytes": 13745
+   },
+   {
+    "n": 174,
+    "file": "0174.txt",
+    "rel": "penelope/organs/agenda-conduct.mjs",
+    "sha256": "d62573a9a19578c337e05cfd45d3e7681fcdc10790a02e187bd53496b68919ae",
+    "bytes": 6508
+   },
+   {
+    "n": 175,
+    "file": "0175.txt",
+    "rel": "penelope/organs/code-fix.mjs",
+    "sha256": "364bc7d3863d8f819fa02c1f8a91a45871d219944b08b40a9ae769d0b144fe78",
+    "bytes": 8764
+   },
+   {
+    "n": 176,
+    "file": "0176.txt",
+    "rel": "penelope/organs/code-pipeline.mjs",
+    "sha256": "37e2af59156bb88f596733b7c6fe7a19e2b3f80e34e7bcddbafb1b7359b844e1",
+    "bytes": 24429
+   },
+   {
+    "n": 177,
+    "file": "0177.txt",
+    "rel": "penelope/organs/code-pipeline.test.mjs",
+    "sha256": "b86d34b4f9064b1cb798fee48af4aa8dc5d898a8f61e8e79bdfae18ebf20a04a",
+    "bytes": 6724
+   },
+   {
+    "n": 178,
+    "file": "0178.txt",
+    "rel": "penelope/organs/generation-door.mjs",
+    "sha256": "79a20ce1f130cefd8ca298606495517ae8b2bc5fc3cbde2735b0d6474740ebb0",
+    "bytes": 11552
+   }
+  ],
+  "unitsFingerprint": "42bfbcfda6b41d78",
+  "docOfFingerprint": "0998186b2b19d3bb"
+ },
+ "sib-code-py": {
+  "tokensAtSnapshot": 233054,
+  "docs": [
+   {
+    "n": 0,
+    "file": "0000.txt",
+    "rel": "NPJ/serve.py",
+    "sha256": "3920035e309ea8388b10ffd8eec9e20d146f472d27d295c06e8c1f4f68f22182",
+    "bytes": 5363
+   },
+   {
+    "n": 1,
+    "file": "0001.txt",
+    "rel": "NPJ/tools/archive/apply.py",
+    "sha256": "6c144a6373fa0dd0744afd8aa0ebccdaa29e78cfc0ef19bfdaafb6807df1ad5f",
+    "bytes": 4126
+   },
+   {
+    "n": 2,
+    "file": "0002.txt",
+    "rel": "NPJ/tools/archive/cdx_check.py",
+    "sha256": "c9e53690b49ab337064556801e6628e7ed963ef93f8b47fea7552c7be425e402",
+    "bytes": 1537
+   },
+   {
+    "n": 3,
+    "file": "0003.txt",
+    "rel": "NPJ/tools/archive/collect.py",
+    "sha256": "116524960f4949c4ce6a8bfac1e2a97594c1b979e2e132dadb0cc9d142c81213",
+    "bytes": 2202
+   },
+   {
+    "n": 4,
+    "file": "0004.txt",
+    "rel": "NPJ/tools/archive/dangling.py",
+    "sha256": "e36cdf10d7e4bb4e69a4b17e309f916f84960ece2cbee5cc7b7395b00b973564",
+    "bytes": 2603
+   },
+   {
+    "n": 5,
+    "file": "0005.txt",
+    "rel": "NPJ/tools/archive/snip.py",
+    "sha256": "2ea8e1812d8c460bcfc73e87a4249ff98a398c35ca3fcda3786efc491d4337bb",
+    "bytes": 18112
+   },
+   {
+    "n": 6,
+    "file": "0006.txt",
+    "rel": "NPJ/tools/archive/spn.py",
+    "sha256": "e51003a37a6be6ebbcd92746a0c3af6eacae81cd38e1f86e55ccc765a5b2548a",
+    "bytes": 4105
+   },
+   {
+    "n": 7,
+    "file": "0007.txt",
+    "rel": "caselink-scraper/case_link_scraper_DER_5.py",
+    "sha256": "ffa76526d01b39f8764e47e015b60e35ac8e6546052895293ed84e928c099851",
+    "bytes": 214039
+   },
+   {
+    "n": 8,
+    "file": "0008.txt",
+    "rel": "caselink-scraper/caselink_accounts.py",
+    "sha256": "7d5caee86a59bc8f1cd1d63ec8bac284c36cd5ecc5c962a6eeba38529fc5a32f",
+    "bytes": 14898
+   },
+   {
+    "n": 9,
+    "file": "0009.txt",
+    "rel": "caselink-scraper/deep_scrape.py",
+    "sha256": "5ab350e4e8c18f307f4516002379ce7996ea1eb6090e08d9c864ecb3804a192d",
+    "bytes": 15223
+   },
+   {
+    "n": 10,
+    "file": "0010.txt",
+    "rel": "caselink-scraper/diag_tabs.py",
+    "sha256": "3168f771f35d94b838b6e85410f483e6b6cd388b64cd7db7639737cb6c8c4075",
+    "bytes": 3461
+   },
+   {
+    "n": 11,
+    "file": "0011.txt",
+    "rel": "caselink-scraper/live_stream.py",
+    "sha256": "4313f41a8a2add3eb17974d0cb87734e6c13aecdb99cc100ff9c0485492f0474",
+    "bytes": 22235
+   },
+   {
+    "n": 12,
+    "file": "0012.txt",
+    "rel": "caselink-scraper/search_server.py",
+    "sha256": "cb319a7bf6ebc601a0da3a655bff58f91a25eefc384f299f22845920ec260893",
+    "bytes": 9299
+   },
+   {
+    "n": 13,
+    "file": "0013.txt",
+    "rel": "caselink-scraper/sweep_windows.py",
+    "sha256": "58c56ace674cc9c587506242ccd40d656d01f8624170a435965a814ea2983a1b",
+    "bytes": 1195
+   },
+   {
+    "n": 14,
+    "file": "0014.txt",
+    "rel": "caselink-scraper/sweep_worker.py",
+    "sha256": "497438e8fb23dfca9c283af6290a60304a64108b24f3b288f3c0426433cb300a",
+    "bytes": 26220
+   },
+   {
+    "n": 15,
+    "file": "0015.txt",
+    "rel": "caselink-scraper/test_deep_scrape.py",
+    "sha256": "1984c09da02eb2be6a6191007a59a7d488918ecb8a9a14d925b1fe91562b0ace",
+    "bytes": 4648
+   },
+   {
+    "n": 16,
+    "file": "0016.txt",
+    "rel": "caselink-scraper/test_search_server.py",
+    "sha256": "ba9633dd742f4fb51b988867eceaeb470e82b230098512527bcea3238cbea893",
+    "bytes": 5776
+   },
+   {
+    "n": 17,
+    "file": "0017.txt",
+    "rel": "caselink-scraper/verify_login.py",
+    "sha256": "e78f4609fd213a68f5ce3ecb26160945700fd923a50e2515127ffaccc48529e6",
+    "bytes": 3222
+   },
+   {
+    "n": 18,
+    "file": "0018.txt",
+    "rel": "caselink-webapp/webapp/caselink_client.py",
+    "sha256": "6d66e19aa4be5f6a50df468d33aaed774d54d3175f04228360c15befc4356180",
+    "bytes": 9255
+   },
+   {
+    "n": 19,
+    "file": "0019.txt",
+    "rel": "caselink-webapp/webapp/pyodide_transport.py",
+    "sha256": "4b8f0f17bf1c11addd5f7741d0d49470ce08edd647e475e94ffd93424c69c8a0",
+    "bytes": 3153
+   },
+   {
+    "n": 20,
+    "file": "0020.txt",
+    "rel": "holodeck/tools/jupyter-session.py",
+    "sha256": "a2150d9c2b780b458081b4665f54fbabf5c826a9f70f4d1586099999ec1ce5c1",
+    "bytes": 2432
+   },
+   {
+    "n": 21,
+    "file": "0021.txt",
+    "rel": "holodeck/tools/ytdl-helper.py",
+    "sha256": "f62ce20388727d561e53b5c6bc793a6fe3dfb9e0b2d955c099efef9e5beea084",
+    "bytes": 11992
+   },
+   {
+    "n": 22,
+    "file": "0022.txt",
+    "rel": "khora/cli/tests/e2e/drive.py",
+    "sha256": "0e74560f2e3d2db31c6823ec8612e6971eff532a66970d0973dc451cbb094368",
+    "bytes": 22356
+   },
+   {
+    "n": 23,
+    "file": "0023.txt",
+    "rel": "khora/integrations/langchain.py",
+    "sha256": "0b4f1aefa9c533ecf2826bf60cff1b9b099d82fd859e64cc2ed1f6c7d5700e97",
+    "bytes": 945
+   },
+   {
+    "n": 24,
+    "file": "0024.txt",
+    "rel": "khora/native/eval/barker/ast_extract.py",
+    "sha256": "a55c51fd6c8bd3a9797d77a899dcbca9869c1748c2d081c2692e9a58dbbb620c",
+    "bytes": 10624
+   },
+   {
+    "n": 25,
+    "file": "0025.txt",
+    "rel": "khora/native/eval/coding-competence/build-c-kw-prior.py",
+    "sha256": "66b0c0fd060fb3bee2be757df23389594fc616159f407bbbc562e11c41f3897a",
+    "bytes": 16295
+   },
+   {
+    "n": 26,
+    "file": "0026.txt",
+    "rel": "khora/native/eval/coding-competence/c0_grammar_keywords.py",
+    "sha256": "60cab5ea6954be541dbc22e1d9ed659a3379cc628e24a44ba3dfe7c7a1fe87f7",
+    "bytes": 3019
+   },
+   {
+    "n": 27,
+    "file": "0027.txt",
+    "rel": "khora/native/eval/coding-competence/corpus/build_manifest.py",
+    "sha256": "0a2267d4293c73c841861589e0458b2961ca4b9f4e754afae62777ba3ae428cd",
+    "bytes": 31015
+   },
+   {
+    "n": 28,
+    "file": "0028.txt",
+    "rel": "khora/native/eval/coding-competence/corpus/discover.py",
+    "sha256": "39ea93743b1734fb62d6433290d55e132250b3f40af2d927a8b355ef7df37e61",
+    "bytes": 5452
+   },
+   {
+    "n": 29,
+    "file": "0029.txt",
+    "rel": "khora/native/eval/coding-competence/corpus/discover_more.py",
+    "sha256": "83d22295252df493dc24daeccfacbc2d1af29c2d7605276267c449114835f674",
+    "bytes": 2281
+   },
+   {
+    "n": 30,
+    "file": "0030.txt",
+    "rel": "khora/native/eval/coding-competence/corpus/fetch.py",
+    "sha256": "e5c9b7cf258ca403b65b73748bb4094ee32a215abb725b65011c4a1e95146b9c",
+    "bytes": 7728
+   },
+   {
+    "n": 31,
+    "file": "0031.txt",
+    "rel": "khora/native/eval/coding-competence/corpus/inventory_local.py",
+    "sha256": "48681dfcdd9804c7718e551e4870b2d45170eef39f09f8e0e70494b2e44a7419",
+    "bytes": 5513
+   },
+   {
+    "n": 32,
+    "file": "0032.txt",
+    "rel": "khora/native/eval/coding-competence/corpus/langmap.py",
+    "sha256": "a785f317191f8c3e90331fe5ae992866aed91e7eb90ee760ab13c81656bd28e8",
+    "bytes": 14594
+   },
+   {
+    "n": 33,
+    "file": "0033.txt",
+    "rel": "khora/native/eval/coding-competence/corpus/plan.py",
+    "sha256": "d9685b862b0f609777f2b20315be7e9e2835354a459e81b95902513ed906a669",
+    "bytes": 11612
+   },
+   {
+    "n": 34,
+    "file": "0034.txt",
+    "rel": "khora/native/eval/coding-competence/corpus/topup.py",
+    "sha256": "b758be2b6c8286d2520e3c50c59459922ab20c48f27ab1142b3bcb4c4951215b",
+    "bytes": 5996
+   },
+   {
+    "n": 35,
+    "file": "0035.txt",
+    "rel": "khora/native/eval/coding-competence/corpus/verify_manifest.py",
+    "sha256": "772469333a065fe2d96249007402fb89563a4326f23c2d3ecd22fcbd0075edf4",
+    "bytes": 3685
+   },
+   {
+    "n": 36,
+    "file": "0036.txt",
+    "rel": "khora/native/eval/coding-competence/fixtures/python.py",
+    "sha256": "32646344ea65ae9257bc6971ee6fdcec550476ab005a593f748084d9a6478700",
+    "bytes": 654
+   },
+   {
+    "n": 37,
+    "file": "0037.txt",
+    "rel": "khora/native/eval/coding-competence/go_kw_giver.py",
+    "sha256": "2f0c858a6d349938cfc4bd6df4ae768164a7bc4634a1eff09a9f199fe3cb7c9a",
+    "bytes": 26011
+   },
+   {
+    "n": 38,
+    "file": "0038.txt",
+    "rel": "khora/native/eval/coding-competence/gold.py",
+    "sha256": "43a31f749a06ae80cc78c77747cce4ab574d83c17ffeb5123c4dbd7e965e1ff5",
+    "bytes": 120497
+   },
+   {
+    "n": 39,
+    "file": "0039.txt",
+    "rel": "khora/native/eval/coding-competence/java_decl_walk.py",
+    "sha256": "1d6f0ab7d4ca359412923c3ed1fa677f7e7f6cebd86beb05477e6380dcea68da",
+    "bytes": 1965
+   },
+   {
+    "n": 40,
+    "file": "0040.txt",
+    "rel": "khora/native/eval/coding-competence/java_kw_giver.py",
+    "sha256": "9e9a308f2cfadb4c7ee7fb9bb824c2917ea1765d1cb783e7cb036f220c95faaf",
+    "bytes": 22972
+   },
+   {
+    "n": 41,
+    "file": "0041.txt",
+    "rel": "khora/native/eval/coding-competence/javascript_kw_giver.py",
+    "sha256": "9d5a74083491d19fb6bbe859dc70ac5cfed781733b9b6107b398b293a79d440c",
+    "bytes": 21090
+   },
+   {
+    "n": 42,
+    "file": "0042.txt",
+    "rel": "khora/native/eval/coding-competence/python_kw_giver.py",
+    "sha256": "1e4cfb9ab518143c42d4077b086591bda3190c7e95678caf4f61c05d9bd44516",
+    "bytes": 12782
+   },
+   {
+    "n": 43,
+    "file": "0043.txt",
+    "rel": "khora/native/eval/coding-competence/ruby_kw_giver.py",
+    "sha256": "bffa7bf04ed4104913a9e16e95f7c3cb839bc8855abdc55f685576135949b5c7",
+    "bytes": 30760
+   },
+   {
+    "n": 44,
+    "file": "0044.txt",
+    "rel": "khora/native/eval/coding-competence/rust-priors-posthoc.py",
+    "sha256": "3d936c7f342e4b44815c57608bd8f53cd934dff37be3ebc4c18a154658cc0cb0",
+    "bytes": 4608
+   },
+   {
+    "n": 45,
+    "file": "0045.txt",
+    "rel": "khora/native/eval/coding-competence/rust_kw_giver.py",
+    "sha256": "3d650f9805b1f5b6ba119d70f4586c182c7795d70f51d71fdf93e2ce6a0fcc55",
+    "bytes": 41132
+   },
+   {
+    "n": 46,
+    "file": "0046.txt",
+    "rel": "khora/native/eval/coding-competence/rust_witness.py",
+    "sha256": "793a65b7bd430116e7c52c163072363176f5b0a70eef3e904edacf84f2829b46",
+    "bytes": 6291
+   },
+   {
+    "n": 47,
+    "file": "0047.txt",
+    "rel": "khora/native/eval/coding-competence/typescript_kw_giver.py",
+    "sha256": "6150b9b9587485495f154829e99e5784dc3bba7bb29fb38a98e929b5c6ffcaa3",
+    "bytes": 24316
+   },
+   {
+    "n": 48,
+    "file": "0048.txt",
+    "rel": "khora/native/eval/coding-competence/xauth/class_py.py",
+    "sha256": "aa4a8467b48bb053806186ec5e81799a969895c9a461ec8467e640a439454d35",
+    "bytes": 3067
+   },
+   {
+    "n": 49,
+    "file": "0049.txt",
+    "rel": "khora/native/eval/coding-competence/xauth/xauth_c4_py.py",
+    "sha256": "c50ad17e0c0e184f88d1c2a1e384c3fc0896496754bbd28530b04d898d229eca",
+    "bytes": 4256
+   },
+   {
+    "n": 50,
+    "file": "0050.txt",
+    "rel": "khora/native/eval/coding-competence/xauth/xauth_py.py",
+    "sha256": "63465da87523a40abec8db53766b03d6d940dd24d0a0f02cbb81145d73fa8c0a",
+    "bytes": 2299
+   },
+   {
+    "n": 51,
+    "file": "0051.txt",
+    "rel": "khora/native/eval/kinds-swarm/ant-adversary/show.py",
+    "sha256": "68795c29a2865055881ad04ce86f10024bfa13d02eaa9758866dea561ff04c9f",
+    "bytes": 1342
+   },
+   {
+    "n": 52,
+    "file": "0052.txt",
+    "rel": "khora/native/eval/kinds-swarm/ant-code/lex_py.py",
+    "sha256": "be981c978f6d96710eef28cc710dfb5ed1e7f05fb29c5bde1e3e8289d46446f9",
+    "bytes": 5049
+   },
+   {
+    "n": 53,
+    "file": "0053.txt",
+    "rel": "khora/native/eval/law/provisional/ablation-scope/show-confirm.py",
+    "sha256": "b96a5b65da8dd3de6f87414586fba590285e6d6fae12c0e5b7e0183103816f47",
+    "bytes": 1539
+   },
+   {
+    "n": 54,
+    "file": "0054.txt",
+    "rel": "khora/native/eval/law/provisional/ablation-scope/show.py",
+    "sha256": "3b45a1822724cb9b8296ff1e22cef8f347b8471c38e48fd69b4cf9b918095c32",
+    "bytes": 2286
+   },
+   {
+    "n": 55,
+    "file": "0055.txt",
+    "rel": "khora/native/eval/law/provisional/confirm-relatedness-sister-dyads/map-overlap.py",
+    "sha256": "4e90f5d02f1e426e8cf10a91aebd5dd6fa7e2d3a41259fc3d11c24c1c6c7b41f",
+    "bytes": 1933
+   },
+   {
+    "n": 56,
+    "file": "0056.txt",
+    "rel": "khora/native/eval/notation-competence/chem_smiles-data/build_corpus.py",
+    "sha256": "88976694077331bde641be3d1cded37ad74bfa1fc3925dd75578cd201b6ae97e",
+    "bytes": 8767
+   },
+   {
+    "n": 57,
+    "file": "0057.txt",
+    "rel": "khora/native/eval/notation-competence/chem_smiles-data/build_gold.py",
+    "sha256": "ceabfc4ea9c52c519d0c77648005253d37053103916cbe9f543016a862a3a63f",
+    "bytes": 10206
+   },
+   {
+    "n": 58,
+    "file": "0058.txt",
+    "rel": "khora/native/eval/notation-competence/chem_smiles-data/build_static_priors.py",
+    "sha256": "9ff6754030c829e39e985498187233a748a6b036bbde1a0db9cf4ba8dc36669a",
+    "bytes": 9292
+   },
+   {
+    "n": 59,
+    "file": "0059.txt",
+    "rel": "khora/native/eval/notation-competence/chem_smiles-data/fetch.py",
+    "sha256": "bbcb9e5b7d1e66c6fed72546db35c28c3cc295b3ce65e174996085c5c7939d58",
+    "bytes": 6511
+   },
+   {
+    "n": 60,
+    "file": "0060.txt",
+    "rel": "khora/native/eval/notation-competence/chess_pgn-data.py",
+    "sha256": "d17aa4b8bad55c5e3b26dc341e3fcf4a7e265d525ee7b7b600d165301db1e60c",
+    "bytes": 28194
+   },
+   {
+    "n": 61,
+    "file": "0061.txt",
+    "rel": "khora/native/eval/notation-competence/chess_pgn-fetch-code.py",
+    "sha256": "3b4720f64aee7ed524b9b1368a42782dd287d7833ade01387b952f1935216a90",
+    "bytes": 2436
+   },
+   {
+    "n": 62,
+    "file": "0062.txt",
+    "rel": "khora/native/eval/notation-competence/chess_pgn-negatives.py",
+    "sha256": "01ec6303cb0cc8b4b147e2292ca1106dd639ed69b76993f76b0769e206f131f5",
+    "bytes": 19450
+   },
+   {
+    "n": 63,
+    "file": "0063.txt",
+    "rel": "khora/native/eval/notation-competence/chess_pgn-probes.py",
+    "sha256": "8c1a8cd2a8dc4a0f43e8bbd8c3954b44d6a33d62cbd101d51ed6bef18e270219",
+    "bytes": 28283
+   },
+   {
+    "n": 64,
+    "file": "0064.txt",
+    "rel": "khora/native/eval/notation-competence/chess_pgn-toy.py",
+    "sha256": "033b47954bdf0dee1478392834e263e88daf11d95243b379e6095b476966af2f",
+    "bytes": 4711
+   },
+   {
+    "n": 65,
+    "file": "0065.txt",
+    "rel": "khora/native/eval/notation-competence/closed_codes-build/audit_corpus.py",
+    "sha256": "2f5f93ed5bfd19406b375db22b2450963bc0752c40117849a29a116ebbadf634",
+    "bytes": 2840
+   },
+   {
+    "n": 66,
+    "file": "0066.txt",
+    "rel": "khora/native/eval/notation-competence/closed_codes-build/audit_morse_wikipedia.py",
+    "sha256": "e1d54e43daff589ba21ae65cb848d2f225d3a8499784d7a08cfafc5e8278f945",
+    "bytes": 1622
+   },
+   {
+    "n": 67,
+    "file": "0067.txt",
+    "rel": "khora/native/eval/notation-competence/closed_codes-build/audit_tables.py",
+    "sha256": "0bc342ebc7e019647cb8b9c54e1450e2dee57b36e78a0035bc2e84832080f387",
+    "bytes": 4397
+   },
+   {
+    "n": 68,
+    "file": "0068.txt",
+    "rel": "khora/native/eval/notation-competence/closed_codes-build/build_hard_decoys.py",
+    "sha256": "7ef39aff4b6ee22dd90a66bef497d82c2531784b473f862dddd542c419d3d89e",
+    "bytes": 5953
+   },
+   {
+    "n": 69,
+    "file": "0069.txt",
+    "rel": "khora/native/eval/notation-competence/closed_codes-build/build_priors.py",
+    "sha256": "212e59624fd2dae1d53b80a5d8e7194d2d7798e9716cac9a50b1620ec268d20d",
+    "bytes": 13440
+   },
+   {
+    "n": 70,
+    "file": "0070.txt",
+    "rel": "khora/native/eval/notation-competence/closed_codes-build/build_units.py",
+    "sha256": "e4713ff58b5f83febee017ff3e08919e357d58eea296e84c336b3c1bba8852e5",
+    "bytes": 4674
+   },
+   {
+    "n": 71,
+    "file": "0071.txt",
+    "rel": "khora/native/eval/notation-competence/closed_codes-build/cc_norm.py",
+    "sha256": "d4ec4bcb81e52576b0c6c0b214a04394a0326d3a1314fd8e483a053e7cb080d7",
+    "bytes": 3317
+   },
+   {
+    "n": 72,
+    "file": "0072.txt",
+    "rel": "khora/native/eval/notation-competence/closed_codes-build/encode_corpus.py",
+    "sha256": "6b9f5431b1cabfc226afdda7fc0298b6d4fd59245e2f09a1950d7eca00ca89fc",
+    "bytes": 16143
+   },
+   {
+    "n": 73,
+    "file": "0073.txt",
+    "rel": "khora/native/eval/notation-competence/closed_codes-build/extract_tables.py",
+    "sha256": "4bc0a7ee782f51e498c422133025ceaa3f83f8919de7069f77229a1ce4cc796a",
+    "bytes": 6909
+   },
+   {
+    "n": 74,
+    "file": "0074.txt",
+    "rel": "khora/native/eval/notation-competence/closed_codes-build/parse_itu.py",
+    "sha256": "90a17d03f9f3a9e4e77f3ee940a98a431502b4d4e5cf10c0cb7c3fc1ee86094f",
+    "bytes": 3595
+   },
+   {
+    "n": 75,
+    "file": "0075.txt",
+    "rel": "khora/native/eval/notation-competence/genetic/data/derive-gold.py",
+    "sha256": "ceda5b694e48aa39b40b1e4479de858d96dd409f4d913a141a445962aca2dfa6",
+    "bytes": 10886
+   },
+   {
+    "n": 76,
+    "file": "0076.txt",
+    "rel": "khora/native/eval/notation-competence/genetic/data/iupac.py",
+    "sha256": "4be2683ad6add23344a40f8bdb2ea3eb083817160ff3bf4944bbdd6f9f47f3a8",
+    "bytes": 801
+   },
+   {
+    "n": 77,
+    "file": "0077.txt",
+    "rel": "khora/native/eval/notation-competence/ipa-data/build_corpus.py",
+    "sha256": "1e7e1c166cbcaeb15583dae85f94fc482e8e03b387f7bc0cafe1d2f21ddb0e2a",
+    "bytes": 6192
+   },
+   {
+    "n": 78,
+    "file": "0078.txt",
+    "rel": "khora/native/eval/notation-competence/ipa-data/build_phoible.py",
+    "sha256": "2167872465669868342c5f67fe39c726626f8923f6176fa74440c98772841c09",
+    "bytes": 3581
+   },
+   {
+    "n": 79,
+    "file": "0079.txt",
+    "rel": "khora/native/eval/notation-competence/ipa-data/build_priors.py",
+    "sha256": "97b9a9499f6e804c82de672fddae001cc1c14d60271c9f00daff0c163600d92c",
+    "bytes": 12743
+   },
+   {
+    "n": 80,
+    "file": "0080.txt",
+    "rel": "khora/native/eval/notation-competence/ipa-data/fetch_wikipron.py",
+    "sha256": "217e9716b06da5169a92483c1ee29da583b6d7cf7ceda95f48824c0a3bb9fc91",
+    "bytes": 3734
+   },
+   {
+    "n": 81,
+    "file": "0081.txt",
+    "rel": "khora/native/eval/notation-competence/music_abc-prep/author_hard_negatives.py",
+    "sha256": "0b342d322b9d05ec658133722152f23374a5026c92b1ab2f52fbec0da29ea3a8",
+    "bytes": 6224
+   },
+   {
+    "n": 82,
+    "file": "0082.txt",
+    "rel": "khora/native/eval/notation-competence/music_abc-prep/batch_convert.py",
+    "sha256": "541203ac33445eece76cc2e41e9de7dd640994044777bd86dcb5b716d9113eda",
+    "bytes": 1721
+   },
+   {
+    "n": 83,
+    "file": "0083.txt",
+    "rel": "khora/native/eval/notation-competence/music_abc-prep/build_manifest.py",
+    "sha256": "f5c7b7432eef5466d1868bf894201a0999a145ea411a26e4a5230ed25add2bf9",
+    "bytes": 4740
+   },
+   {
+    "n": 84,
+    "file": "0084.txt",
+    "rel": "khora/native/eval/notation-competence/music_abc-prep/build_negatives.py",
+    "sha256": "8dd642cdd894c198f54b04bcc1a9571dfe1c491a9e3d4df787aaa43de6f5946a",
+    "bytes": 8296
+   },
+   {
+    "n": 85,
+    "file": "0085.txt",
+    "rel": "khora/native/eval/notation-competence/music_abc-prep/fetch_core.py",
+    "sha256": "51118915f16d6539f2a7f5be2e170e37f3a7abf930ec9661345203292b18114f",
+    "bytes": 4144
+   },
+   {
+    "n": 86,
+    "file": "0086.txt",
+    "rel": "khora/native/eval/notation-competence/music_abc-prep/fetch_extra.py",
+    "sha256": "8c437347d6fe0463511c3d04a0f1b088e08d077aa98cbbc6193169179c047143",
+    "bytes": 7471
+   },
+   {
+    "n": 87,
+    "file": "0087.txt",
+    "rel": "khora/native/eval/notation-competence/music_abc-prep/fetch_mutopia.py",
+    "sha256": "e01d1c28fd0fce3dc67d868810dab21a33c3a82eac9d38a42353b7c126615389",
+    "bytes": 3340
+   },
+   {
+    "n": 88,
+    "file": "0088.txt",
+    "rel": "khora/native/eval/notation-competence/music_abc-prep/fetch_scorewriter.py",
+    "sha256": "cb71ee6edbea18ab8a7b3d9620fb93f8fe7d2ad16f1ad0a4950bdc1bfe2e3736",
+    "bytes": 1549
+   },
+   {
+    "n": 89,
+    "file": "0089.txt",
+    "rel": "khora/native/eval/notation-competence/music_abc-prep/gold_abc_lex.py",
+    "sha256": "03d0e4b2f0713bb0a460ff2570beca4b115c441f8188acc0ee70400f2977cdd9",
+    "bytes": 6172
+   },
+   {
+    "n": 90,
+    "file": "0090.txt",
+    "rel": "khora/native/eval/notation-competence/music_abc-prep/gold_ly_lex.py",
+    "sha256": "386fea352bdbe17735c8215274b43808ac941467502d158be89b35870ad81ebe",
+    "bytes": 3015
+   },
+   {
+    "n": 91,
+    "file": "0091.txt",
+    "rel": "khora/native/eval/notation-competence/music_abc-prep/gold_musicxml.py",
+    "sha256": "76728dd5d0873b3c79200b6755d5432fe87424790a959e9c0d2ebd2e9eed8a97",
+    "bytes": 6899
+   },
+   {
+    "n": 92,
+    "file": "0092.txt",
+    "rel": "khora/native/eval/notation-competence/music_abc-prep/merge_manifest.py",
+    "sha256": "4ded9cc2547408f9bb8dcaac70d4d067d217701826cda47a7cb9e8cabebf4092",
+    "bytes": 1013
+   },
+   {
+    "n": 93,
+    "file": "0093.txt",
+    "rel": "khora/native/eval/notation-competence/music_abc-prep/musicxml_to_abc.py",
+    "sha256": "31290d2c16d61a1abf33793581494d2ba2babd18093b7c4508688825465ae62c",
+    "bytes": 16642
+   },
+   {
+    "n": 94,
+    "file": "0094.txt",
+    "rel": "khora/native/eval/notation-competence/music_abc-prep/validate_derived.py",
+    "sha256": "a73c0dffc2bc210e3f70076facd60467479871f2fe7c6b657c45e866f9933797",
+    "bytes": 4141
+   },
+   {
+    "n": 95,
+    "file": "0095.txt",
+    "rel": "khora/native/eval/notation-competence/music_abc-prep/xsd_facts.py",
+    "sha256": "24a3492818f8d1c0667469abf5ae7d6d36f2c36ea56b4b1b0dab8f01334fbda6",
+    "bytes": 2754
+   },
+   {
+    "n": 96,
+    "file": "0096.txt",
+    "rel": "khora/native/eval/notation-competence/taxonomy-data/adjudicate.py",
+    "sha256": "f0d5836ea5b73bdfb2fcb3d18c5a76b96c7fb990fe13c53da7e104b24e3c4afe",
+    "bytes": 2559
+   },
+   {
+    "n": 97,
+    "file": "0097.txt",
+    "rel": "khora/native/eval/notation-competence/taxonomy-data/build_corpus.py",
+    "sha256": "0e66527e62b154c35933f25d678fa57c039498cdb1da2bab933b5601f350df29",
+    "bytes": 6175
+   },
+   {
+    "n": 98,
+    "file": "0098.txt",
+    "rel": "khora/native/eval/notation-competence/taxonomy-data/build_foreign.py",
+    "sha256": "2febc9c9c43ea5f1329d7f2ce597c3e78326a2941c37c122bc50ca8889ab8b3a",
+    "bytes": 7483
+   },
+   {
+    "n": 99,
+    "file": "0099.txt",
+    "rel": "khora/native/eval/notation-competence/taxonomy-data/build_gold.py",
+    "sha256": "79e6a319659f09a99003b6ebda814c8954ffa444344d960c41803b304045c738",
+    "bytes": 15309
+   },
+   {
+    "n": 100,
+    "file": "0100.txt",
+    "rel": "khora/native/eval/notation-competence/taxonomy-data/fetch.py",
+    "sha256": "4cd6a84395e0a392ec27cd4d5e9ab0d8184a80207017fea74a0bbdf37f58dc17",
+    "bytes": 5953
+   },
+   {
+    "n": 101,
+    "file": "0101.txt",
+    "rel": "khora/native/eval/notation-competence/taxonomy-data/gbif_match.py",
+    "sha256": "669c702db6c2112ece830a36b052b38835351dd25480990fa27be4584b69e682",
+    "bytes": 2694
+   },
+   {
+    "n": 102,
+    "file": "0102.txt",
+    "rel": "khora/native/eval/notation-competence/taxonomy-data/gbif_records.py",
+    "sha256": "505be9ef3bf7ce47d216cf5e2434c7b82016659de3a29f27893e97be9f42390d",
+    "bytes": 2289
+   },
+   {
+    "n": 103,
+    "file": "0103.txt",
+    "rel": "khora/native/eval/notation-competence/taxonomy-data/license_check.py",
+    "sha256": "36912033e91197740b81f7d4285a14611ec9cc91cba6ab37f50ad892dce06ddb",
+    "bytes": 2310
+   },
+   {
+    "n": 104,
+    "file": "0104.txt",
+    "rel": "khora/native/eval/notation-competence/taxonomy-data/make_manifest.py",
+    "sha256": "c2f1cbf11f7eb2cc101b65fc1c7ed8d545b2d64211cce705ddc03c86f86cf909",
+    "bytes": 2476
+   },
+   {
+    "n": 105,
+    "file": "0105.txt",
+    "rel": "khora/native/eval/notation-competence/uml_bpmn-data.py",
+    "sha256": "a2fd7430469f53508b1a1fde0d414c3307d68f5d9fb0eaa4f595caf5e57861d9",
+    "bytes": 47708
+   },
+   {
+    "n": 106,
+    "file": "0106.txt",
+    "rel": "khora/native/eval/notation-competence/uml_bpmn-data/dot_fetch.py",
+    "sha256": "dce7665f870822315c28d851bcbfadaca763772ed02c49e65f610437dda82bd7",
+    "bytes": 3099
+   },
+   {
+    "n": 107,
+    "file": "0107.txt",
+    "rel": "khora/native/eval/notation-competence/uml_bpmn-data/dot_search.py",
+    "sha256": "2f7b3364a79c1d9db69755ad67af08528fcba988f02ac99a54768b3643de8359",
+    "bytes": 2548
+   },
+   {
+    "n": 108,
+    "file": "0108.txt",
+    "rel": "khora/native/eval/notation-competence/uml_bpmn-data/provenance.py",
+    "sha256": "9843ed12da5c978994cf111e36fdcf73a319dcb06f74e941e494cfc6a8f19394",
+    "bytes": 13209
+   },
+   {
+    "n": 109,
+    "file": "0109.txt",
+    "rel": "khora/native/eval/notation-competence/uml_bpmn-data/select_fetch.py",
+    "sha256": "2ac190faf2ea98162323b480fa72fdc58b378af6f5ff771c52859c5f5cfe25fb",
+    "bytes": 3997
+   },
+   {
+    "n": 110,
+    "file": "0110.txt",
+    "rel": "khora/native/organs/er7py/er7.py",
+    "sha256": "d13a8665f355d5bfdf420fc3ed19df3c59a106e0bb117d5162b0722889dc85b0",
+    "bytes": 5450
+   },
+   {
+    "n": 111,
+    "file": "0111.txt",
+    "rel": "khora/native/organs/er7py/swarm.py",
+    "sha256": "64557551cae2a68268aa0c68df4e43aa0970a15001d03be22bc0fcd2446adbe6",
+    "bytes": 7887
+   },
+   {
+    "n": 112,
+    "file": "0112.txt",
+    "rel": "khora/native/organs/er7py/turb.py",
+    "sha256": "75b8bd14ec65474d3a0433f99d9b51e219b421741e17fe63d709d83d21eb6579",
+    "bytes": 7072
+   },
+   {
+    "n": 113,
+    "file": "0113.txt",
+    "rel": "khora/native/organs/vision.py",
+    "sha256": "923710bd7d3b2524ae061c67a775431c5376bbce93ca4193be5db8b429a7b04d",
+    "bytes": 8259
+   },
+   {
+    "n": 114,
+    "file": "0114.txt",
+    "rel": "khora/native/scripts/py-diagnose.py",
+    "sha256": "250edd27ab7302e426ca1b97706d22d51edea344fe8146e03b67699180253183",
+    "bytes": 7803
+   },
+   {
+    "n": 115,
+    "file": "0115.txt",
+    "rel": "khora/native/scripts/py-facts.py",
+    "sha256": "62929aa3721c73025c8ec741c9875516d34dda8cd45c0fd5d79f1c47e92dc4b2",
+    "bytes": 6542
+   },
+   {
+    "n": 116,
+    "file": "0116.txt",
+    "rel": "legistar-surveillance-scanner/scripts/eo_corpus.py",
+    "sha256": "d11b8e583293a47b52c6bff7b3cce45b68392421f5ede048be3f0bd325435327",
+    "bytes": 4019
+   },
+   {
+    "n": 117,
+    "file": "0117.txt",
+    "rel": "legistar-surveillance-scanner/scripts/eval_layers.py",
+    "sha256": "1f23675ac5b91f64e37d6cbefc75b294a69f895fa7d87b456285505f9be337c7",
+    "bytes": 6227
+   },
+   {
+    "n": 118,
+    "file": "0118.txt",
+    "rel": "legistar-surveillance-scanner/scripts/fetch_english_corpus.py",
+    "sha256": "88cfd11867784fbfd2c98eb706660ebdfb64c8b63b3b7fa8d3a128dc68f29ec9",
+    "bytes": 4938
+   },
+   {
+    "n": 119,
+    "file": "0119.txt",
+    "rel": "legistar-surveillance-scanner/scripts/fetch_matters.py",
+    "sha256": "7adeac18d3e37c9f7bdc94d0c252908e24607e515f73e26c48ada6e2e0355e51",
+    "bytes": 1190
+   },
+   {
+    "n": 120,
+    "file": "0120.txt",
+    "rel": "legistar-surveillance-scanner/scripts/fetch_participation.py",
+    "sha256": "5fc2dc57a90175e1642e8ee7d526dd800886007713642107a4fa63b1fc11dcbf",
+    "bytes": 3712
+   },
+   {
+    "n": 121,
+    "file": "0121.txt",
+    "rel": "legistar-surveillance-scanner/scripts/make_headlines.py",
+    "sha256": "eb258aff5a1e68350816dc27bc1cb5d7e9edc9ae942c4e1294491b7307a984d5",
+    "bytes": 2172
+   },
+   {
+    "n": 122,
+    "file": "0122.txt",
+    "rel": "legistar-surveillance-scanner/scripts/pipeline.py",
+    "sha256": "c3af910ecec060914d38dade24a3af1b9c26601febf117ed96a28e47fa25f716",
+    "bytes": 17080
+   },
+   {
+    "n": 123,
+    "file": "0123.txt",
+    "rel": "legistar-surveillance-scanner/src/alerts_engine.py",
+    "sha256": "5f507c42497a84e67768a0a0a5317d86e6b408dca04f46c5c826e0ba683b8ba5",
+    "bytes": 20380
+   },
+   {
+    "n": 124,
+    "file": "0124.txt",
+    "rel": "legistar-surveillance-scanner/src/archive.py",
+    "sha256": "a3aa9c0e928d16d467279031db5c6deb8539cba7e72b405b360c7333564ba74f",
+    "bytes": 1252
+   },
+   {
+    "n": 125,
+    "file": "0125.txt",
+    "rel": "legistar-surveillance-scanner/src/classify.py",
+    "sha256": "7aa12c7cccb1023a4a5fa2f10e79b5dc44235f24e93c38ab9be15c8cb70d187e",
+    "bytes": 9359
+   },
+   {
+    "n": 126,
+    "file": "0126.txt",
+    "rel": "legistar-surveillance-scanner/src/council.py",
+    "sha256": "278459bda156ad325ff482a7cdda7d1b421649b4201b8700b2b5f67b3c6f9fdb",
+    "bytes": 4466
+   },
+   {
+    "n": 127,
+    "file": "0127.txt",
+    "rel": "legistar-surveillance-scanner/src/departments.py",
+    "sha256": "ef6e8f85b87cb456a2d9e119dd36c4f12b3807357018f6a42207c80bf9773bf4",
+    "bytes": 9271
+   },
+   {
+    "n": 128,
+    "file": "0128.txt",
+    "rel": "legistar-surveillance-scanner/src/extract.py",
+    "sha256": "cf524119ea6143e6212a8848b6c3a169fecae7191ccfc88185bae8a6ab0f665c",
+    "bytes": 11283
+   },
+   {
+    "n": 129,
+    "file": "0129.txt",
+    "rel": "legistar-surveillance-scanner/src/gist.py",
+    "sha256": "1fa5e871eb6b01f240b0a483012e3b1802ea1851b7fd71881c8efdc6c7ade22d",
+    "bytes": 4747
+   },
+   {
+    "n": 130,
+    "file": "0130.txt",
+    "rel": "legistar-surveillance-scanner/src/khora.py",
+    "sha256": "3c2f34ffe277118dd1458a5f2ca50e04b95b0a89f72b776cc5902f9f0d9a5db5",
+    "bytes": 1587
+   },
+   {
+    "n": 131,
+    "file": "0131.txt",
+    "rel": "legistar-surveillance-scanner/src/legistar.py",
+    "sha256": "70146fc67747f3be45aa0585c7abae79840be3fc1692e2a856ef906bee4e0fdd",
+    "bytes": 5421
+   },
+   {
+    "n": 132,
+    "file": "0132.txt",
+    "rel": "legistar-surveillance-scanner/src/scorer.py",
+    "sha256": "566140f3e58750a3799115556603766c139be5005a247a6d31e9253defa8a527",
+    "bytes": 11597
+   },
+   {
+    "n": 133,
+    "file": "0133.txt",
+    "rel": "legistar-surveillance-scanner/src/screen_slice.py",
+    "sha256": "9a61bc0e903bcaa2b5b827909e7af4d9732b7b6cb49a71faa081ed60fde6e80c",
+    "bytes": 2091
+   },
+   {
+    "n": 134,
+    "file": "0134.txt",
+    "rel": "legistar-surveillance-scanner/src/slots.py",
+    "sha256": "29a44c3825fc094c4831e0d6eb55a96a273ec7de72d417c85904ece55d1c077e",
+    "bytes": 38768
+   },
+   {
+    "n": 135,
+    "file": "0135.txt",
+    "rel": "legistar-surveillance-scanner/src/snippets.py",
+    "sha256": "2a270d44cbec88229f484997c21c205a73bb76f0d90d85e37236f17e5ee9c472",
+    "bytes": 11367
+   },
+   {
+    "n": 136,
+    "file": "0136.txt",
+    "rel": "legistar-surveillance-scanner/src/summarize.py",
+    "sha256": "a3effc68b3093838c161d0a39bc34fd56e90d6b035acbb26fce7d6d76f975fca",
+    "bytes": 14975
+   },
+   {
+    "n": 137,
+    "file": "0137.txt",
+    "rel": "legistar-surveillance-scanner/webapp/alerts.py",
+    "sha256": "a361b717c7adb5f9e2feb231f0d1367e89b5f1af83bba711162ac6e8b94b9d55",
+    "bytes": 7070
+   },
+   {
+    "n": 138,
+    "file": "0138.txt",
+    "rel": "legistar-surveillance-scanner/webapp/mailer.py",
+    "sha256": "d3a0bba45990af2377cc7030ff69d19f15395a5723373f07093077337fcd8b96",
+    "bytes": 1468
+   },
+   {
+    "n": 139,
+    "file": "0139.txt",
+    "rel": "legistar-surveillance-scanner/webapp/main.py",
+    "sha256": "6717974af735de4114aadcd6de68f21492edac565c2152cda3433a23f844376b",
+    "bytes": 219762
+   },
+   {
+    "n": 140,
+    "file": "0140.txt",
+    "rel": "legistar-surveillance-scanner/webapp/seed.py",
+    "sha256": "bf1e8144e890f65d940889c4869f117fd48fe0d333e8e721becee5c2e1f077d0",
+    "bytes": 10687
+   },
+   {
+    "n": 141,
+    "file": "0141.txt",
+    "rel": "legistar-surveillance-scanner/webapp/statute.py",
+    "sha256": "8b6ae5f416e8adbfef10e3f65cf88f0e70621628f0d38224a1cee96e8f90f483",
+    "bytes": 5485
+   },
+   {
+    "n": 142,
+    "file": "0142.txt",
+    "rel": "nashville-legistar-archive/scripts/backfill.py",
+    "sha256": "fc2a17e516bf0dea534deffd5791966a61bfc4872e6192e6b81f4a1d8c819947",
+    "bytes": 14744
+   },
+   {
+    "n": 143,
+    "file": "0143.txt",
+    "rel": "nashville-legistar-archive/scripts/backfill_epav.py",
+    "sha256": "0d1d8f2564b2d66f52632004b51ad12ef33fc066e4d34b9987dc08f447c6e38a",
+    "bytes": 13236
+   },
+   {
+    "n": 144,
+    "file": "0144.txt",
+    "rel": "nashville-legistar-archive/scripts/build_fold_explorer_payload.py",
+    "sha256": "ea0594eb93467b9587c2391b42faed769e8a179450f32eefb2fb32cc32027bd3",
+    "bytes": 6381
+   },
+   {
+    "n": 145,
+    "file": "0145.txt",
+    "rel": "nashville-legistar-archive/scripts/build_nashville_holodeck.py",
+    "sha256": "2ddf7303e870dae2b10abf1bc8f9efb20350ef0cc598b6a7bd359e1e6a33b391",
+    "bytes": 6931
+   },
+   {
+    "n": 146,
+    "file": "0146.txt",
+    "rel": "nashville-legistar-archive/scripts/fetch_epav_local.py",
+    "sha256": "6eadab5e325840df04cffe46f8c00851701030b1596c03f14e8fc173857d7017",
+    "bytes": 3228
+   },
+   {
+    "n": 147,
+    "file": "0147.txt",
+    "rel": "nashville-legistar-archive/scripts/upload_pending.py",
+    "sha256": "9e9cc9d7ce73c898021b1adcf95738a6be2b51c76732be317e7da0129e262bc2",
+    "bytes": 3809
+   },
+   {
+    "n": 148,
+    "file": "0148.txt",
+    "rel": "nashville-legistar-archive/src/archive_upload.py",
+    "sha256": "b75650d1a65577d09d9776cee73c649814f08a6ba2dccc2a4815dd08f801c8d5",
+    "bytes": 2120
+   },
+   {
+    "n": 149,
+    "file": "0149.txt",
+    "rel": "nashville-legistar-archive/src/boilerplate.py",
+    "sha256": "ce8110f92b8b3306dd726c6cbf57f11ef66bec693a5d609e6b3747cd649087d2",
+    "bytes": 3355
+   },
+   {
+    "n": 150,
+    "file": "0150.txt",
+    "rel": "nashville-legistar-archive/src/company_index.py",
+    "sha256": "495a52dd9f4289dd34f702249d717c099f38355c324531667db3a45f88ac2efa",
+    "bytes": 15796
+   },
+   {
+    "n": 151,
+    "file": "0151.txt",
+    "rel": "nashville-legistar-archive/src/contract_extract.py",
+    "sha256": "60ec3e6d4be681c266227bad16218bbb1bd591d2a37bd63f734f3955d4773730",
+    "bytes": 4507
+   },
+   {
+    "n": 152,
+    "file": "0152.txt",
+    "rel": "nashville-legistar-archive/src/crossref.py",
+    "sha256": "a8e97af9f87f1b5f241c62ea70230b5288d3aba95b82606e9b4ed342cc184206",
+    "bytes": 3852
+   },
+   {
+    "n": 153,
+    "file": "0153.txt",
+    "rel": "nashville-legistar-archive/src/eoreader_pass.py",
+    "sha256": "4940401d5fb218c92d790afb8030c742dd94d1c2b496024ffb99958f99b2c5d9",
+    "bytes": 7083
+   },
+   {
+    "n": 154,
+    "file": "0154.txt",
+    "rel": "nashville-legistar-archive/src/epav_client.py",
+    "sha256": "d57a00ca906409969ab87710947870f190f79e8d7528f8fe2dd0180c66c06f46",
+    "bytes": 13413
+   },
+   {
+    "n": 155,
+    "file": "0155.txt",
+    "rel": "nashville-legistar-archive/src/epav_pipeline.py",
+    "sha256": "d998fc619b2eaddaa9479e770d9f1c2f4ba7d35685f1bd3e0c696d7fce8fa165",
+    "bytes": 10694
+   },
+   {
+    "n": 156,
+    "file": "0156.txt",
+    "rel": "nashville-legistar-archive/src/extract_text.py",
+    "sha256": "af6b6442d84ffe58fa43b089d1f5c88312c880811fe37684275e9771022bc752",
+    "bytes": 5054
+   },
+   {
+    "n": 157,
+    "file": "0157.txt",
+    "rel": "nashville-legistar-archive/src/fold_pipeline.py",
+    "sha256": "4da384e49a4d777fd49f4e1e4f34e0dd42e8fdc342065cff9e5627a473db5352",
+    "bytes": 3259
+   },
+   {
+    "n": 158,
+    "file": "0158.txt",
+    "rel": "nashville-legistar-archive/src/legistar_client.py",
+    "sha256": "d287c61752fb66c4ed45b3c866ea8a1905508799f55c9b9a74d409aa65f0a580",
+    "bytes": 3111
+   },
+   {
+    "n": 159,
+    "file": "0159.txt",
+    "rel": "nashville-legistar-archive/src/search_corpus.py",
+    "sha256": "f926539750b6692a0dc24e788d98e9d25e5b7f43addac84337530341c2d47928",
+    "bytes": 6562
+   },
+   {
+    "n": 160,
+    "file": "0160.txt",
+    "rel": "nashville-legistar-archive/src/surveillance_flag.py",
+    "sha256": "0d6e24ca9ee5c05c10672c2e9b68c301d53875f76abc197e7abb9dbb6258c27d",
+    "bytes": 2786
+   },
+   {
+    "n": 161,
+    "file": "0161.txt",
+    "rel": "podcast/podcast/feed.py",
+    "sha256": "3a369853bc4830cb08eccdc7949a5c4a6ef72d89d7a5eb01b4132d19abcc6f07",
+    "bytes": 1304
+   },
+   {
+    "n": 162,
+    "file": "0162.txt",
+    "rel": "podcast/podcast/opml.py",
+    "sha256": "67f17c91523ec34f49603207fd08f71d35d582616704083c5ec6480594a4b5d9",
+    "bytes": 610
+   },
+   {
+    "n": 163,
+    "file": "0163.txt",
+    "rel": "podcast/podcast/queue.py",
+    "sha256": "9875435b6256b2dd764cc961379fc150ae6a421be4af86fccb70085b2c0dfb86",
+    "bytes": 681
+   },
+   {
+    "n": 164,
+    "file": "0164.txt",
+    "rel": "podcast/podcast/store.py",
+    "sha256": "07450442ac6f9f74ba23346496a20e41773d96bde2b5119dba42e580f0ab06f6",
+    "bytes": 815
+   },
+   {
+    "n": 165,
+    "file": "0165.txt",
+    "rel": "podcast/tests/test_podcast.py",
+    "sha256": "eabb64a038b40bc36c9e5a5a957305e1a5da91761719fca30dd026b2fe1903f5",
+    "bytes": 3004
+   },
+   {
+    "n": 166,
+    "file": "0166.txt",
+    "rel": "the-fold/eval/ants/g2/make-wire-diff.py",
+    "sha256": "9ff4a77b616e90b520836e20f069be197ee62e0da9627c5ee7b4d7988843c9f8",
+    "bytes": 17516
+   },
+   {
+    "n": 167,
+    "file": "0167.txt",
+    "rel": "the-fold/eval/priors/e7/snippets.py",
+    "sha256": "0d5ff3c8e5bf2193303b77a493f01ef4a58aea3454460c6d2fddd3bd1f611966",
+    "bytes": 4596
+   },
+   {
+    "n": 168,
+    "file": "0168.txt",
+    "rel": "the-fold/eval/priors/e7/truth.py",
+    "sha256": "7a97bff6c146c2a98ff2c32be402e13de106bd10f7afd6e659a4efacebe1045f",
+    "bytes": 2611
+   },
+   {
+    "n": 169,
+    "file": "0169.txt",
+    "rel": "the-fold/experiments/context-growth/extract_sessions.py",
+    "sha256": "de0ed95a291d63b653a62b9c144aa68f879b0daf742179fa95104316dc502a26",
+    "bytes": 4552
+   },
+   {
+    "n": 170,
+    "file": "0170.txt",
+    "rel": "the-fold/scripts/pii/engine.py",
+    "sha256": "1666adff11d8a367cf87568d15e6b8baee7e9ac0b76f1d1341418015cf21b8c0",
+    "bytes": 2058
+   },
+   {
+    "n": 171,
+    "file": "0171.txt",
+    "rel": "the-fold/scripts/pii/measure.py",
+    "sha256": "eae13ac37f72d3116c6af7e3dba7d8bb3d7c32a1721db18ddf128d3bb2426b40",
+    "bytes": 2092
+   },
+   {
+    "n": 172,
+    "file": "0172.txt",
+    "rel": "the-fold/scripts/pii/server.py",
+    "sha256": "974a67e1d19a4b2848dc3ca5af38c18f9dab8c26e4c921c30290cf58830ed0d5",
+    "bytes": 3385
+   }
+  ],
+  "unitsFingerprint": "9f01c8771e2ef84e",
+  "docOfFingerprint": "cd75931bda9c27a2"
+ }
+}

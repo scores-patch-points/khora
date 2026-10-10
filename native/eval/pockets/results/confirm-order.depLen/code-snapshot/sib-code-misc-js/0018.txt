@@ -1,0 +1,52 @@
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import { DISPATCH_ORDER, ROUTES, findConflicts, prefixesFor, resolve } from "../server/routes.mjs";
+
+test("the shipped route table has no two organs claiming the same method+path", () => {
+  assert.deepEqual(findConflicts(ROUTES), []);
+});
+
+test("every organ owns at least one route and the order lists exactly the organs in the table", () => {
+  const owners = new Set(ROUTES.map((r) => r.organ));
+  assert.deepEqual([...owners].sort(), [...DISPATCH_ORDER].sort());
+});
+
+test("findConflicts catches a duplicate claim and an unmarked overlap", () => {
+  const dup = [
+    { organ: "janus", kind: "exact", path: "/v1/x", methods: ["POST"] },
+    { organ: "khora", kind: "exact", path: "/v1/x", methods: "*" },
+  ];
+  assert.equal(findConflicts(dup).length, 1);
+  const overlap = [
+    { organ: "khora", kind: "prefix", path: "/v1", methods: "*" }, // not catchAll
+    { organ: "janus", kind: "prefix", path: "/v1/reason", methods: "*" },
+  ];
+  assert.equal(findConflicts(overlap).length, 1);
+  const disjointMethods = [
+    { organ: "janus", kind: "exact", path: "/v1/x", methods: ["GET"] },
+    { organ: "khora", kind: "exact", path: "/v1/x", methods: ["POST"] },
+  ];
+  assert.deepEqual(findConflicts(disjointMethods), []);
+});
+
+test("resolution: specific claims beat the khora /v1/ catch-all, which still owns the rest", () => {
+  assert.deepEqual(resolve("POST", "/v1/reason"), ["janus", "khora"]);
+  assert.deepEqual(resolve("POST", "/v1/reason/stream"), ["janus", "khora"]);
+  assert.deepEqual(resolve("POST", "/v1/draw"), ["penelope", "khora"]);
+  assert.deepEqual(resolve("GET", "/v1/draw"), ["khora"]); // penelope claims POST/OPTIONS only
+  assert.deepEqual(resolve("POST", "/v1/agenda/conduct"), ["penelope", "khora"]); // the ladder's door
+  assert.deepEqual(resolve("GET", "/v1/agenda/conduct"), ["khora"]); // penelope claims POST/OPTIONS only
+  assert.deepEqual(resolve("GET", "/v1/mouth/status"), ["penelope", "khora"]);
+  assert.deepEqual(resolve("POST", "/api/weave"), ["penelope"]);
+  assert.deepEqual(resolve("POST", "/v1/chat/completions"), ["khora"]);
+  assert.deepEqual(resolve("GET", "/heimdall/status"), ["heimdall"]);
+  assert.deepEqual(resolve("GET", "/heimdall-ui"), ["khora"]); // not the heimdall prefix
+  assert.deepEqual(resolve("GET", "/nope"), []);
+});
+
+test("legacy aliases are explicit and flagged", () => {
+  const aliases = ROUTES.filter((r) => r.alias);
+  assert.ok(aliases.length > 0);
+  assert.ok(aliases.every((r) => r.organ === "khora"));
+  assert.ok(prefixesFor("khora").includes("/api/chat"));
+});

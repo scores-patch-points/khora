@@ -1,0 +1,44 @@
+"""Fetch the full Nashville Legistar matter population (metadata) to a JSONL cache.
+
+Usage:
+  python scripts/fetch_matters.py [--out data/matters.jsonl]
+
+Writes one JSON object per matter (the full API record). Also writes a CSV
+summarized view so downstream steps can operate on titles/types/dates without
+re-parsing JSON.
+"""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import json
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+from legistar import Legistar
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out", default="data/matters.jsonl")
+    ap.add_argument("--client", default="nashville")
+    args = ap.parse_args()
+
+    api = Legistar(args.client)
+    out_path = Path(args.out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+
+    n = 0
+    with out_path.open("w") as fh:
+        for m in api.matters():
+            fh.write(json.dumps(m) + "\n")
+            n += 1
+            if n % 500 == 0:
+                print(f"  {n} matters...", file=sys.stderr)
+    print(f"fetched {n} matters -> {out_path}", file=sys.stderr)
+
+
+if __name__ == "__main__":
+    main()

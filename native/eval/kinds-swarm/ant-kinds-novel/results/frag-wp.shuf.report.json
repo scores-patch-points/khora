@@ -1,0 +1,39 @@
+{
+ "shuffledTokens": 600,
+ "cliffUnweighted_shuffled": 1.3374,
+ "ci": [
+  0.9511,
+  1.7341
+ ],
+ "cliffUnweighted_real": 1.7212,
+ "meanD1ByBin_shuffled": [
+  1.57,
+  2.44,
+  1.1,
+  1.17,
+  1.09,
+  0.78,
+  1.01,
+  1.37
+ ],
+ "meanD1ByBin_real": [
+  1.43,
+  2.79,
+  1.07,
+  1.04,
+  1.1,
+  0.94,
+  0.79,
+  1.04
+ ],
+ "nullShare_shuffled": 0.3517,
+ "nullShare_real": 0.3541,
+ "heteroShuffled": {
+  "H": 0.00161,
+  "kinds": 4
+ },
+ "heteroReal": {
+  "H": 0.06217,
+  "kinds": 12
+ }
+}

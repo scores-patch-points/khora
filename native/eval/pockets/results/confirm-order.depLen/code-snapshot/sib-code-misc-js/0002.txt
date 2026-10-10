@@ -1,0 +1,11 @@
+export function addComment(posts, id, { author, text }) {
+  return posts.map(post => {
+    if (post.id === id) {
+      return {
+        ...post,
+        comments: [...post.comments, { author, text }]
+      };
+    }
+    return post;
+  });
+}

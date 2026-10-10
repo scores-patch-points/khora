@@ -1,0 +1,850 @@
+{
+ "headerSha256": "5fde9dacba9851269672ae68efc466c4cb861efea54dba83449becb06031ad7d",
+ "counts": {
+  "W1": {
+   "all": 47,
+   "eligible": 47
+  },
+  "W2": {
+   "all": 42,
+   "eligible": 41
+  },
+  "TEST": {
+   "all": 47,
+   "eligible": 47
+  },
+  "DEV": {
+   "all": 22,
+   "eligible": 22
+  }
+ },
+ "B1": {
+  "n": 48,
+  "nClades": 21,
+  "rho_all": {
+   "rho": 0.725,
+   "p": 0.0002
+  },
+  "rho_within": {
+   "rho": 0.424,
+   "p": 0.011
+  },
+  "rho_between": {
+   "n": 21,
+   "rho": 0.619,
+   "p": 0.0024
+  },
+  "rho_dedup": {
+   "n": 45,
+   "rho": 0.743
+  },
+  "loco": {
+   "min": 0.684,
+   "max": 0.797,
+   "worst": "Slavic"
+  },
+  "Slavic": {
+   "n": 9,
+   "rho": 0.833,
+   "langs": "bul:0.32/0.676 ces:0.24/0.553 hrv:0.26/0.618 pol:0.23/0.573 rus:0.2/0.543 slk:0.24/0.551 slv:0.28/0.613 srp:0.28/0.631 ukr:0.22/0.557"
+  },
+  "Germanic": {
+   "n": 7,
+   "rho": 0.464,
+   "langs": "afr:0.47/0.689 dan:0.36/0.681 deu:0.34/0.621 eng:0.35/0.63 nld:0.38/0.622 nob:0.36/0.708 swe:0.35/0.642"
+  },
+  "Romance": {
+   "n": 7,
+   "rho": -0.071,
+   "langs": "cat:0.46/0.707 fra:0.42/0.693 glg:0.46/0.609 ita:0.44/0.653 por:0.43/0.64 ron:0.35/0.657 spa:0.44/0.713"
+  },
+  "IEonly": {
+   "n": 32,
+   "rho": 0.633
+  },
+  "nonIEonly": {
+   "n": 16,
+   "rho": 0.682,
+   "p": 0.003,
+   "meanAuc": 0.5584
+  },
+  "decision": "NOT_MERELY_FAMILY",
+  "table": [
+   {
+    "name": "afr",
+    "clade": "Germanic",
+    "fwc32": 0.4741,
+    "auc": 0.689,
+    "rate": 1,
+    "k": 2
+   },
+   {
+    "name": "bul",
+    "clade": "Slavic",
+    "fwc32": 0.3152,
+    "auc": 0.6755,
+    "rate": 1,
+    "k": 3
+   },
+   {
+    "name": "cat",
+    "clade": "Romance",
+    "fwc32": 0.4606,
+    "auc": 0.7068,
+    "rate": 1,
+    "k": 3
+   },
+   {
+    "name": "ces",
+    "clade": "Slavic",
+    "fwc32": 0.2395,
+    "auc": 0.5531,
+    "rate": 0,
+    "k": 2
+   },
+   {
+    "name": "cmn",
+    "clade": "Sinitic",
+    "fwc32": 0.2281,
+    "auc": 0.5719,
+    "rate": 0,
+    "k": 3
+   },
+   {
+    "name": "cym",
+    "clade": "Celtic",
+    "fwc32": 0.3858,
+    "auc": 0.6404,
+    "rate": 0.67,
+    "k": 3
+   },
+   {
+    "name": "dan",
+    "clade": "Germanic",
+    "fwc32": 0.3645,
+    "auc": 0.6812,
+    "rate": 1,
+    "k": 3
+   },
+   {
+    "name": "deu",
+    "clade": "Germanic",
+    "fwc32": 0.3363,
+    "auc": 0.6211,
+    "rate": 0.67,
+    "k": 3
+   },
+   {
+    "name": "ell",
+    "clade": "Greek",
+    "fwc32": 0.4008,
+    "auc": 0.5056,
+    "rate": 0,
+    "k": 3
+   },
+   {
+    "name": "eng",
+    "clade": "Germanic",
+    "fwc32": 0.3528,
+    "auc": 0.6302,
+    "rate": 1,
+    "k": 2
+   },
+   {
+    "name": "est",
+    "clade": "Uralic",
+    "fwc32": 0.1782,
+    "auc": 0.5832,
+    "rate": 0.67,
+    "k": 3
+   },
+   {
+    "name": "eus",
+    "clade": "Basque",
+    "fwc32": 0.2066,
+    "auc": 0.5466,
+    "rate": 0,
+    "k": 3
+   },
+   {
+    "name": "fas",
+    "clade": "Iranian",
+    "fwc32": 0.3356,
+    "auc": 0.6101,
+    "rate": 0.67,
+    "k": 3
+   },
+   {
+    "name": "fin",
+    "clade": "Uralic",
+    "fwc32": 0.1621,
+    "auc": 0.5205,
+    "rate": 0,
+    "k": 3
+   },
+   {
+    "name": "fra",
+    "clade": "Romance",
+    "fwc32": 0.418,
+    "auc": 0.6932,
+    "rate": 1,
+    "k": 3
+   },
+   {
+    "name": "gle",
+    "clade": "Celtic",
+    "fwc32": 0.3663,
+    "auc": 0.6549,
+    "rate": 1,
+    "k": 3
+   },
+   {
+    "name": "glg",
+    "clade": "Romance",
+    "fwc32": 0.4626,
+    "auc": 0.6088,
+    "rate": 0.67,
+    "k": 3
+   },
+   {
+    "name": "heb",
+    "clade": "Semitic",
+    "fwc32": 0.3983,
+    "auc": 0.6243,
+    "rate": 0.67,
+    "k": 3
+   },
+   {
+    "name": "hin",
+    "clade": "IndoAryan",
+    "fwc32": 0.3594,
+    "auc": 0.6867,
+    "rate": 1,
+    "k": 3
+   },
+   {
+    "name": "hrv",
+    "clade": "Slavic",
+    "fwc32": 0.2633,
+    "auc": 0.6179,
+    "rate": 1,
+    "k": 3
+   },
+   {
+    "name": "hun",
+    "clade": "Uralic",
+    "fwc32": 0.2624,
+    "auc": 0.53,
+    "rate": 0,
+    "k": 2
+   },
+   {
+    "name": "hye",
+    "clade": "Armenian",
+    "fwc32": 0.1851,
+    "auc": 0.566,
+    "rate": 0,
+    "k": 3
+   },
+   {
+    "name": "ind",
+    "clade": "Austronesian",
+    "fwc32": 0.2498,
+    "auc": 0.6084,
+    "rate": 0.67,
+    "k": 3
+   },
+   {
+    "name": "ita",
+    "clade": "Romance",
+    "fwc32": 0.4366,
+    "auc": 0.6526,
+    "rate": 1,
+    "k": 1
+   },
+   {
+    "name": "jpn",
+    "clade": "Japonic",
+    "fwc32": 0.4328,
+    "auc": 0.5731,
+    "rate": 0,
+    "k": 3
+   },
+   {
+    "name": "kat",
+    "clade": "Kartvelian",
+    "fwc32": 0.1974,
+    "auc": 0.553,
+    "rate": 0,
+    "k": 3
+   },
+   {
+    "name": "kor",
+    "clade": "Koreanic",
+    "fwc32": 0.0682,
+    "auc": 0.4994,
+    "rate": 0,
+    "k": 2
+   },
+   {
+    "name": "lav",
+    "clade": "Baltic",
+    "fwc32": 0.2039,
+    "auc": 0.5908,
+    "rate": 0.33,
+    "k": 3
+   },
+   {
+    "name": "lit",
+    "clade": "Baltic",
+    "fwc32": 0.1804,
+    "auc": 0.5229,
+    "rate": 0,
+    "k": 2
+   },
+   {
+    "name": "lzh",
+    "clade": "Sinitic",
+    "fwc32": 0.3058,
+    "auc": 0.5833,
+    "rate": 0.67,
+    "k": 3
+   },
+   {
+    "name": "mlt",
+    "clade": "Semitic",
+    "fwc32": 0.3,
+    "auc": 0.5759,
+    "rate": 0.33,
+    "k": 3
+   },
+   {
+    "name": "nld",
+    "clade": "Germanic",
+    "fwc32": 0.3766,
+    "auc": 0.6221,
+    "rate": 1,
+    "k": 3
+   },
+   {
+    "name": "nob",
+    "clade": "Germanic",
+    "fwc32": 0.3604,
+    "auc": 0.7084,
+    "rate": 1,
+    "k": 3
+   },
+   {
+    "name": "pol",
+    "clade": "Slavic",
+    "fwc32": 0.2338,
+    "auc": 0.5729,
+    "rate": 0,
+    "k": 3
+   },
+   {
+    "name": "por",
+    "clade": "Romance",
+    "fwc32": 0.427,
+    "auc": 0.6402,
+    "rate": 1,
+    "k": 3
+   },
+   {
+    "name": "ron",
+    "clade": "Romance",
+    "fwc32": 0.3452,
+    "auc": 0.6575,
+    "rate": 1,
+    "k": 3
+   },
+   {
+    "name": "rus",
+    "clade": "Slavic",
+    "fwc32": 0.2048,
+    "auc": 0.5426,
+    "rate": 0,
+    "k": 3
+   },
+   {
+    "name": "slk",
+    "clade": "Slavic",
+    "fwc32": 0.24,
+    "auc": 0.5513,
+    "rate": 0,
+    "k": 3
+   },
+   {
+    "name": "slv",
+    "clade": "Slavic",
+    "fwc32": 0.278,
+    "auc": 0.6127,
+    "rate": 0.67,
+    "k": 3
+   },
+   {
+    "name": "spa",
+    "clade": "Romance",
+    "fwc32": 0.4387,
+    "auc": 0.7134,
+    "rate": 1,
+    "k": 3
+   },
+   {
+    "name": "srp",
+    "clade": "Slavic",
+    "fwc32": 0.2808,
+    "auc": 0.6312,
+    "rate": 1,
+    "k": 3
+   },
+   {
+    "name": "swe",
+    "clade": "Germanic",
+    "fwc32": 0.3487,
+    "auc": 0.6421,
+    "rate": 1,
+    "k": 3
+   },
+   {
+    "name": "tam",
+    "clade": "Dravidian",
+    "fwc32": 0.2228,
+    "auc": 0.4807,
+    "rate": 0,
+    "k": 3
+   },
+   {
+    "name": "tur",
+    "clade": "Turkic",
+    "fwc32": 0.1671,
+    "auc": 0.5058,
+    "rate": 0,
+    "k": 3
+   },
+   {
+    "name": "ukr",
+    "clade": "Slavic",
+    "fwc32": 0.2187,
+    "auc": 0.5568,
+    "rate": 0.33,
+    "k": 3
+   },
+   {
+    "name": "urd",
+    "clade": "IndoAryan",
+    "fwc32": 0.3529,
+    "auc": 0.7256,
+    "rate": 1,
+    "k": 3
+   },
+   {
+    "name": "vie",
+    "clade": "Austroasiatic",
+    "fwc32": 0.2553,
+    "auc": 0.5585,
+    "rate": 0,
+    "k": 2
+   },
+   {
+    "name": "wol",
+    "clade": "NigerCongo",
+    "fwc32": 0.3999,
+    "auc": 0.6196,
+    "rate": 0.67,
+    "k": 3
+   }
+  ]
+ },
+ "B2": {
+  "pairs": [
+   {
+    "from": "W1",
+    "to": "W2",
+    "nFrom": 47,
+    "nTo": 41,
+    "cut": 0.28,
+    "accFrom": 0.851,
+    "accTo": 0.679,
+    "permP": 0.023,
+    "acc2378": 0.721,
+    "p2378": 0.006,
+    "acc28": 0.679,
+    "p28": 0.022
+   },
+   {
+    "from": "W1",
+    "to": "TEST",
+    "nFrom": 47,
+    "nTo": 47,
+    "cut": 0.28,
+    "accFrom": 0.851,
+    "accTo": 0.844,
+    "permP": 0.0005,
+    "acc2378": 0.831,
+    "p2378": 0.002,
+    "acc28": 0.844,
+    "p28": 0.002
+   },
+   {
+    "from": "W1",
+    "to": "DEV",
+    "nFrom": 47,
+    "nTo": 22,
+    "cut": 0.28,
+    "accFrom": 0.851,
+    "accTo": 0.866,
+    "permP": 0.0035,
+    "acc2378": 0.902,
+    "p2378": 0.002,
+    "acc28": 0.866,
+    "p28": 0.002
+   },
+   {
+    "from": "W2",
+    "to": "W1",
+    "nFrom": 41,
+    "nTo": 47,
+    "cut": 0.24,
+    "accFrom": 0.721,
+    "accTo": 0.784,
+    "permP": 0.0005,
+    "acc2378": 0.784,
+    "p2378": 0.002,
+    "acc28": 0.851,
+    "p28": 0.002
+   },
+   {
+    "from": "W2",
+    "to": "TEST",
+    "nFrom": 41,
+    "nTo": 47,
+    "cut": 0.24,
+    "accFrom": 0.721,
+    "accTo": 0.831,
+    "permP": 0.0005,
+    "acc2378": 0.831,
+    "p2378": 0.002,
+    "acc28": 0.844,
+    "p28": 0.002
+   },
+   {
+    "from": "W2",
+    "to": "DEV",
+    "nFrom": 41,
+    "nTo": 22,
+    "cut": 0.24,
+    "accFrom": 0.721,
+    "accTo": 0.902,
+    "permP": 0.0005,
+    "acc2378": 0.902,
+    "p2378": 0.002,
+    "acc28": 0.866,
+    "p28": 0.002
+   },
+   {
+    "from": "TEST",
+    "to": "W1",
+    "nFrom": 47,
+    "nTo": 47,
+    "cut": 0.28,
+    "accFrom": 0.844,
+    "accTo": 0.851,
+    "permP": 0.0005,
+    "acc2378": 0.784,
+    "p2378": 0.002,
+    "acc28": 0.851,
+    "p28": 0.002
+   },
+   {
+    "from": "TEST",
+    "to": "W2",
+    "nFrom": 47,
+    "nTo": 41,
+    "cut": 0.28,
+    "accFrom": 0.844,
+    "accTo": 0.679,
+    "permP": 0.0235,
+    "acc2378": 0.721,
+    "p2378": 0.002,
+    "acc28": 0.679,
+    "p28": 0.03
+   },
+   {
+    "from": "TEST",
+    "to": "DEV",
+    "nFrom": 47,
+    "nTo": 22,
+    "cut": 0.28,
+    "accFrom": 0.844,
+    "accTo": 0.866,
+    "permP": 0.002,
+    "acc2378": 0.902,
+    "p2378": 0.002,
+    "acc28": 0.866,
+    "p28": 0.002
+   },
+   {
+    "from": "DEV",
+    "to": "W1",
+    "nFrom": 22,
+    "nTo": 47,
+    "cut": 0.24,
+    "accFrom": 0.902,
+    "accTo": 0.784,
+    "permP": 0.0005,
+    "acc2378": 0.784,
+    "p2378": 0.002,
+    "acc28": 0.851,
+    "p28": 0.002
+   },
+   {
+    "from": "DEV",
+    "to": "W2",
+    "nFrom": 22,
+    "nTo": 41,
+    "cut": 0.24,
+    "accFrom": 0.902,
+    "accTo": 0.721,
+    "permP": 0.001,
+    "acc2378": 0.721,
+    "p2378": 0.006,
+    "acc28": 0.679,
+    "p28": 0.022
+   },
+   {
+    "from": "DEV",
+    "to": "TEST",
+    "nFrom": 22,
+    "nTo": 47,
+    "cut": 0.24,
+    "accFrom": 0.902,
+    "accTo": 0.831,
+    "permP": 0.0005,
+    "acc2378": 0.831,
+    "p2378": 0.002,
+    "acc28": 0.844,
+    "p28": 0.002
+   }
+  ],
+  "evaluablePairs": 12,
+  "passedPairs": 10,
+  "frozen28": {
+   "W2": 0.679,
+   "TEST": 0.844
+  },
+  "lolo": {
+   "n": 48,
+   "cutsUsed": "0.31,0.33,0.26,0.27",
+   "balancedAcc": 0.79,
+   "sens": 0.808,
+   "spec": 0.773,
+   "baseRate": 0.542
+  },
+  "decision": "CUT_NOT_STABLE",
+  "acc28W2": 0.679,
+  "acc28TEST": 0.844
+ },
+ "B3": {
+  "W1": {
+   "n": 47,
+   "nClean": 25,
+   "clean": 0.84,
+   "cleanCI": [
+    0.692,
+    0.963
+   ],
+   "nDeaf": 15,
+   "deaf": 0.067,
+   "deafCI": [
+    0,
+    0.227
+   ],
+   "nMid": 7,
+   "mid": 0.286
+  },
+  "W2": {
+   "n": 41,
+   "nClean": 23,
+   "clean": 0.696,
+   "cleanCI": [
+    0.5,
+    0.88
+   ],
+   "nDeaf": 14,
+   "deaf": 0.214,
+   "deafCI": [
+    0,
+    0.455
+   ],
+   "nMid": 4,
+   "mid": 0.75
+  },
+  "TEST": {
+   "n": 47,
+   "nClean": 28,
+   "clean": 0.857,
+   "cleanCI": [
+    0.714,
+    0.967
+   ],
+   "nDeaf": 15,
+   "deaf": 0.067,
+   "deafCI": [
+    0,
+    0.222
+   ],
+   "nMid": 4,
+   "mid": 0.5
+  },
+  "pooled": {
+   "n": 48,
+   "nClean": 27,
+   "clean": 0.815,
+   "cleanCI": [
+    0.693,
+    0.919
+   ],
+   "nDeaf": 15,
+   "deaf": 0.089,
+   "deafCI": [
+    0,
+    0.2
+   ],
+   "nMid": 6,
+   "mid": 0.389
+  },
+  "permutation": {
+   "contrast": 0.64,
+   "pLanguageExchangeable": 0.0002,
+   "pWithinClade": 0.0372
+  },
+  "decision": "HOLDS_WITH_MARGIN"
+ },
+ "B4": {
+  "n": 48,
+  "pooledRho": {
+   "fwc8": 0.699,
+   "fwc16": 0.726,
+   "fwc32": 0.714,
+   "fwc64": 0.698,
+   "fwc128": 0.658,
+   "ttr": -0.715,
+   "hapax": -0.68,
+   "sentlen": 0.525,
+   "ltok": 0.373
+  },
+  "order": "fwc16 > ttr > fwc32 > fwc8 > fwc64 > hapax > fwc128 > sentlen > ltok",
+  "halves": {
+   "n": 1000,
+   "meanRhoSelected": 0.659,
+   "meanRhoFwc32": 0.7,
+   "shareFwcFamily": 0.568
+  },
+  "permMaxAbsRho": {
+   "obs": 0.726,
+   "p": 0.0005
+  },
+  "within005": "fwc8,fwc16,fwc32,fwc64,ttr,hapax",
+  "bestNonFwc": 0.715,
+  "decision": "BUNDLE"
+ },
+ "B5": {
+  "cells": 560,
+  "shareContrast025": 0.993,
+  "shareRho040": 1,
+  "contrastQuantiles": [
+   0.217,
+   0.404,
+   0.583,
+   0.722,
+   0.926
+  ],
+  "rhoQuantiles": [
+   0.497,
+   0.529,
+   0.615,
+   0.73,
+   0.73
+  ],
+  "cleanShareAtTheta060": 0.84,
+  "bySet": {
+   "W1": {
+    "n": 140,
+    "share025": 1,
+    "medianContrast": 0.605
+   },
+   "W2": {
+    "n": 140,
+    "share025": 0.971,
+    "medianContrast": 0.435
+   },
+   "TEST": {
+    "n": 140,
+    "share025": 1,
+    "medianContrast": 0.613
+   },
+   "mean3": {
+    "n": 140,
+    "share025": 1,
+    "medianContrast": 0.656
+   }
+  },
+  "byMinPairs": {
+   "60": {
+    "n": 140,
+    "share025": 1,
+    "medianRho": 0.615
+   },
+   "100": {
+    "n": 140,
+    "share025": 0.986,
+    "medianRho": 0.607
+   },
+   "150": {
+    "n": 140,
+    "share025": 0.993,
+    "medianRho": 0.599
+   },
+   "250": {
+    "n": 140,
+    "share025": 0.993,
+    "medianRho": 0.609
+   }
+  },
+  "decision": "ROBUST"
+ },
+ "B6": {
+  "rhoFwcPairs": -0.01,
+  "zones": {
+   "clean": {
+    "n": 77,
+    "eligibleShare": 0.987,
+    "meanPairs": 420.3,
+    "cap600": 0.377
+   },
+   "mid": {
+    "n": 15,
+    "eligibleShare": 1,
+    "meanPairs": 454,
+    "cap600": 0.467
+   },
+   "deaf": {
+    "n": 44,
+    "eligibleShare": 1,
+    "meanPairs": 402.5,
+    "cap600": 0.455
+   }
+  },
+  "rhoPairsAuc": 0.335,
+  "big250": {
+   "n": 38,
+   "rho": 0.728,
+   "p": 0.0002,
+   "meanClean": 0.656,
+   "meanDeaf": 0.558,
+   "nClean": 23,
+   "nDeaf": 11
+  }
+ }
+}

@@ -1,0 +1,21 @@
+{
+ "poolSize": 17,
+ "discovery": [
+  "ubuntu/2008-03-15",
+  "ubuntu/2010-03-15",
+  "ubuntu/2010-07-15",
+  "ubuntu/2013-03-15"
+ ],
+ "confirmation": [
+  "kubuntu/2006-03-15",
+  "ubuntu/2011-03-15",
+  "ubuntu/2012-03-15",
+  "ubuntu/2013-07-15"
+ ],
+ "spare": [
+  "kubuntu/2009-03-15",
+  "ubuntu/2005-07-15",
+  "ubuntu/2008-07-15",
+  "ubuntu/2015-07-15"
+ ]
+}

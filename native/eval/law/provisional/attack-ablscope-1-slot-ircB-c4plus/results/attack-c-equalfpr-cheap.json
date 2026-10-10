@@ -1,0 +1,231 @@
+{
+ "rule": "ablscope-1-slot-ircB-c4plus",
+ "perObservable": {
+  "docfreq": {
+   "perStratum": {
+    "c4_6": {
+     "names": 500,
+     "fprS": 0.0014,
+     "sensS": 0.35,
+     "sensRival": 0,
+     "fprRival": 0
+    },
+    "c7_15": {
+     "names": 537,
+     "fprS": 0.0134,
+     "sensS": 0.5084,
+     "sensRival": 0.0726,
+     "fprRival": 0.0123
+    },
+    "c16p": {
+     "names": 110,
+     "fprS": 0,
+     "sensS": 0.7636,
+     "sensRival": 0.1545,
+     "fprRival": 0
+    }
+   },
+   "pooledSensRival": 0.0488,
+   "pooledSensS": 0.4638,
+   "reproduces": false
+  },
+  "fbin": {
+   "perStratum": {
+    "c4_6": {
+     "names": 500,
+     "fprS": 0.0014,
+     "sensS": 0.35,
+     "sensRival": 0,
+     "fprRival": 0
+    },
+    "c7_15": {
+     "names": 537,
+     "fprS": 0.0134,
+     "sensS": 0.5084,
+     "sensRival": 0.0037,
+     "fprRival": 0.0002
+    },
+    "c16p": {
+     "names": 110,
+     "fprS": 0,
+     "sensS": 0.7636,
+     "sensRival": 0,
+     "fprRival": 0
+    }
+   },
+   "pooledSensRival": 0.0017,
+   "pooledSensS": 0.4638,
+   "reproduces": false
+  },
+  "idx": {
+   "perStratum": {
+    "c4_6": {
+     "names": 500,
+     "fprS": 0.0014,
+     "sensS": 0.35,
+     "sensRival": 0,
+     "fprRival": 0
+    },
+    "c7_15": {
+     "names": 537,
+     "fprS": 0.0134,
+     "sensS": 0.5084,
+     "sensRival": 0,
+     "fprRival": 0
+    },
+    "c16p": {
+     "names": 110,
+     "fprS": 0,
+     "sensS": 0.7636,
+     "sensRival": 0,
+     "fprRival": 0
+    }
+   },
+   "pooledSensRival": 0,
+   "pooledSensS": 0.4638,
+   "reproduces": false
+  },
+  "logsl": {
+   "perStratum": {
+    "c4_6": {
+     "names": 500,
+     "fprS": 0.0014,
+     "sensS": 0.35,
+     "sensRival": 0,
+     "fprRival": 0
+    },
+    "c7_15": {
+     "names": 537,
+     "fprS": 0.0134,
+     "sensS": 0.5084,
+     "sensRival": 0.1359,
+     "fprRival": 0.0122
+    },
+    "c16p": {
+     "names": 110,
+     "fprS": 0,
+     "sensS": 0.7636,
+     "sensRival": 0,
+     "fprRival": 0
+    }
+   },
+   "pooledSensRival": 0.0636,
+   "pooledSensS": 0.4638,
+   "reproduces": false
+  },
+  "logc": {
+   "perStratum": {
+    "c4_6": {
+     "names": 500,
+     "fprS": 0.0014,
+     "sensS": 0.35,
+     "sensRival": 0,
+     "fprRival": 0
+    },
+    "c7_15": {
+     "names": 537,
+     "fprS": 0.0134,
+     "sensS": 0.5084,
+     "sensRival": 0,
+     "fprRival": 0
+    },
+    "c16p": {
+     "names": 110,
+     "fprS": 0,
+     "sensS": 0.7636,
+     "sensRival": 0,
+     "fprRival": 0
+    }
+   },
+   "pooledSensRival": 0,
+   "pooledSensS": 0.4638,
+   "reproduces": false
+  },
+  "burst": {
+   "perStratum": {
+    "c4_6": {
+     "names": 500,
+     "fprS": 0.0014,
+     "sensS": 0.35,
+     "sensRival": 0.004,
+     "fprRival": 0.0013
+    },
+    "c7_15": {
+     "names": 537,
+     "fprS": 0.0134,
+     "sensS": 0.5084,
+     "sensRival": 0.0633,
+     "fprRival": 0.0127
+    },
+    "c16p": {
+     "names": 110,
+     "fprS": 0,
+     "sensS": 0.7636,
+     "sensRival": 0,
+     "fprRival": 0
+    }
+   },
+   "pooledSensRival": 0.0314,
+   "pooledSensS": 0.4638,
+   "reproduces": false
+  },
+  "len": {
+   "perStratum": {
+    "c4_6": {
+     "names": 500,
+     "fprS": 0.0014,
+     "sensS": 0.35,
+     "sensRival": 0,
+     "fprRival": 0.0008
+    },
+    "c7_15": {
+     "names": 537,
+     "fprS": 0.0134,
+     "sensS": 0.5084,
+     "sensRival": 0.0205,
+     "fprRival": 0.0079
+    },
+    "c16p": {
+     "names": 110,
+     "fprS": 0,
+     "sensS": 0.7636,
+     "sensRival": 0,
+     "fprRival": 0
+    }
+   },
+   "pooledSensRival": 0.0096,
+   "pooledSensS": 0.4638,
+   "reproduces": false
+  },
+  "rinit": {
+   "perStratum": {
+    "c4_6": {
+     "names": 500,
+     "fprS": 0.0014,
+     "sensS": 0.35,
+     "sensRival": 0.454,
+     "fprRival": 0.0012
+    },
+    "c7_15": {
+     "names": 537,
+     "fprS": 0.0134,
+     "sensS": 0.5084,
+     "sensRival": 0.5047,
+     "fprRival": 0.0109
+    },
+    "c16p": {
+     "names": 110,
+     "fprS": 0,
+     "sensS": 0.7636,
+     "sensRival": 0.9364,
+     "fprRival": 0
+    }
+   },
+   "pooledSensRival": 0.524,
+   "pooledSensS": 0.4638,
+   "reproduces": true
+  }
+ },
+ "cheapReproducing": [],
+ "headerSha256": "b9eebf8269884f02fdbfd54b608d6d80702d69a116a1daf88dc5a5d42aab150a"
+}

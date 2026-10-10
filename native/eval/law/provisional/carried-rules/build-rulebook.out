@@ -1,0 +1,36 @@
+{
+ "n": 14,
+ "negatives": 31,
+ "problems": [],
+ "ver": {
+  "verify-beings.part1.json": {
+   "n": 26,
+   "reproduced": 23,
+   "notReproduced": [
+    "L3.t1.Aup",
+    "L3.t2.Aup",
+    "L5.dev.salienceAUC"
+   ]
+  },
+  "verify-graded.json": {
+   "n": 14,
+   "reproduced": 14,
+   "notReproduced": []
+  },
+  "verify-physics-auc.json": {
+   "T1_cliffOrdinal": true,
+   "T2_noInertiaAboveFloor": true,
+   "T3_singleLess": true
+  },
+  "verify-physics.json": {
+   "n": 31,
+   "reproduced": 31,
+   "notReproduced": []
+  },
+  "verify-signals.json": {
+   "n": 37,
+   "reproduced": 37,
+   "notReproduced": []
+  }
+ }
+}

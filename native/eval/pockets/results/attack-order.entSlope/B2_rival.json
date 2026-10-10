@@ -1,0 +1,290 @@
+{
+ "nPockets": 390,
+ "all": {
+  "n": 390,
+  "Lin": {
+   "n": 390,
+   "spearman": 0.9931038842616171,
+   "pearson": 0.9923023841808,
+   "partialSpearman": 0.9925581484297156,
+   "partialR2": 0.9851716780142253,
+   "spearmanR2": 0.9862553249355114,
+   "pearsonR2": 0.9846640216509
+  },
+  "Pred": {
+   "n": 390,
+   "spearman": 0.8524323479596032,
+   "pearson": 0.8854838855013698,
+   "partialSpearman": 0.8333956168878854,
+   "partialR2": 0.6945482542479391,
+   "spearmanR2": 0.726640907847922,
+   "pearsonR2": 0.784081711482603
+  },
+  "sigma": {
+   "n": 390,
+   "spearman": 0.6567189285116425,
+   "pearson": 0.5598345749049057,
+   "partialSpearman": 0.6063810531529136,
+   "partialR2": 0.3676979816228366,
+   "spearmanR2": 0.4312797510654798,
+   "pearsonR2": 0.3134147512589565
+  },
+  "shift": {
+   "n": 390,
+   "spearman": -0.43358227713022945,
+   "pearson": -0.4683377113724411,
+   "partialSpearman": -0.3838065355935251,
+   "partialR2": 0.14730745676430387,
+   "spearmanR2": 0.1879935910414351,
+   "pearsonR2": 0.21934021189357597
+  },
+  "rare": {
+   "n": 390,
+   "spearman": -0.3793501904377058,
+   "pearson": -0.42455927582625924,
+   "partialSpearman": -0.32019402744507197,
+   "partialR2": 0.1025242152114955,
+   "spearmanR2": 0.14390656698512366,
+   "pearsonR2": 0.18025057869011768
+  }
+ },
+ "present": {
+  "n": 245,
+  "Lin": {
+   "n": 245,
+   "spearman": 0.9955805432928869,
+   "pearson": 0.9923668380220148,
+   "partialSpearman": 0.995306605175978,
+   "partialR2": 0.9906352383069302,
+   "spearmanR2": 0.9911806181833599,
+   "pearsonR2": 0.9847919412058117
+  },
+  "Pred": {
+   "n": 245,
+   "spearman": 0.8979820316771251,
+   "pearson": 0.8871597809404302,
+   "partialSpearman": 0.8860708169407181,
+   "partialR2": 0.7851214926339916,
+   "spearmanR2": 0.8063717292149772,
+   "pearsonR2": 0.7870524769182722
+  },
+  "sigma": {
+   "n": 245,
+   "spearman": 0.6973577915772466,
+   "pearson": 0.6311957692240674,
+   "partialSpearman": 0.6560647422160653,
+   "partialR2": 0.43042094597903213,
+   "spearmanR2": 0.48630788947349457,
+   "pearsonR2": 0.39840809908636216
+  },
+  "shift": {
+   "n": 245,
+   "spearman": -0.5139478902316624,
+   "pearson": -0.4769167011283362,
+   "partialSpearman": -0.4568722329781425,
+   "partialR2": 0.2087322372664341,
+   "spearmanR2": 0.26414243387357694,
+   "pearsonR2": 0.22744953981513474
+  },
+  "rare": {
+   "n": 245,
+   "spearman": -0.45498372079739535,
+   "pearson": -0.4314515007396141,
+   "partialSpearman": -0.39319007177438575,
+   "partialR2": 0.1545984325419466,
+   "spearmanR2": 0.2070101861906422,
+   "pearsonR2": 0.18615039749046522
+  }
+ },
+ "presentWord": {
+  "n": 175,
+  "Lin": {
+   "n": 175,
+   "spearman": 0.9941804746977161,
+   "pearson": 0.9951983062939489,
+   "partialSpearman": 0.9920250479844599,
+   "partialR2": 0.98411369582857,
+   "spearmanR2": 0.9883948162701761,
+   "pearsonR2": 0.9904196688503445
+  },
+  "Pred": {
+   "n": 175,
+   "spearman": 0.9235490371697268,
+   "pearson": 0.9761005363886696,
+   "partialSpearman": 0.891609396122759,
+   "partialR2": 0.794967315254391,
+   "spearmanR2": 0.8529428240571294,
+   "pearsonR2": 0.9527722571382484
+  },
+  "sigma": {
+   "n": 175,
+   "spearman": 0.7649731303179579,
+   "pearson": 0.6796501964911464,
+   "partialSpearman": 0.6484806355821041,
+   "partialR2": 0.4205271347249697,
+   "spearmanR2": 0.5851838901084554,
+   "pearsonR2": 0.46192438959045395
+  },
+  "shift": {
+   "n": 175,
+   "spearman": -0.47912225705329153,
+   "pearson": -0.5786743273301101,
+   "partialSpearman": -0.3488227239208019,
+   "partialR2": 0.12167729272352797,
+   "spearmanR2": 0.22955813720384036,
+   "pearsonR2": 0.33486397711095545
+  },
+  "rare": {
+   "n": 175,
+   "spearman": -0.3912337662337662,
+   "pearson": -0.5185790601013043,
+   "partialSpearman": -0.23800636825694033,
+   "partialR2": 0.05664703133085829,
+   "spearmanR2": 0.15306385984145723,
+   "pearsonR2": 0.26892424157555217
+  }
+ },
+ "signTablePresent": {
+  "sigma-|shift+|entP-": 130,
+  "sigma-|shift+|entP+": 14,
+  "sigma+|shift+|entP+": 64,
+  "sigma0|shift+|entP+": 9,
+  "sigma-|shiftother|entP+": 14,
+  "sigma+|shift+|entP-": 1,
+  "sigma-|shiftother|entP-": 1,
+  "sigma0|shiftother|entP+": 1,
+  "sigma+|shiftother|entP-": 2,
+  "sigma+|shiftother|entP+": 7,
+  "sigma0|shift+|entP-": 2
+ },
+ "signAccuracyPresent": {
+  "n": 245,
+  "signSigma": 0.8448979591836735,
+  "signPred": 0.8857142857142857,
+  "signLin": 1,
+  "signShiftOnly": 0.37142857142857144,
+  "globalMajority": 0.5551020408163265,
+  "nShiftPositive": 220
+ },
+ "signAccuracyAll": {
+  "n": 390,
+  "signSigmaVsSignEnt": 0.7692307692307693,
+  "signPredVsSignEnt": 0.8
+ },
+ "sigmaByRegister": {
+  "eta2": 0.34779019191024346,
+  "p": 0.01898101898101898
+ },
+ "entByRegister": {
+  "eta2": 0.25541437455201876,
+  "p": 0.000999000999000999
+ },
+ "byRegister": [
+  {
+   "register": "poetry",
+   "n": 13,
+   "shareSigmaNegative": 0.9230769230769231,
+   "shareEntPositive": 0.15384615384615385
+  },
+  {
+   "register": "children",
+   "n": 17,
+   "shareSigmaNegative": 0.8823529411764706,
+   "shareEntPositive": 0.5882352941176471
+  },
+  {
+   "register": "memoir",
+   "n": 13,
+   "shareSigmaNegative": 0.5384615384615384,
+   "shareEntPositive": 0.7692307692307693
+  },
+  {
+   "register": "treatise",
+   "n": 27,
+   "shareSigmaNegative": 0.7407407407407407,
+   "shareEntPositive": 0.5925925925925926
+  },
+  {
+   "register": "novel",
+   "n": 25,
+   "shareSigmaNegative": 0.28,
+   "shareEntPositive": 0.88
+  },
+  {
+   "register": "academic",
+   "n": 12,
+   "shareSigmaNegative": 0.5833333333333334,
+   "shareEntPositive": 0.5833333333333334
+  },
+  {
+   "register": "drama",
+   "n": 12,
+   "shareSigmaNegative": 1,
+   "shareEntPositive": 0
+  },
+  {
+   "register": "dialect",
+   "n": 13,
+   "shareSigmaNegative": 0.38461538461538464,
+   "shareEntPositive": 0.9230769230769231
+  },
+  {
+   "register": "notation",
+   "n": 16,
+   "shareSigmaNegative": 0.1875,
+   "shareEntPositive": 0.875
+  },
+  {
+   "register": "code",
+   "n": 47,
+   "shareSigmaNegative": 0.9787234042553191,
+   "shareEntPositive": 0.14893617021276595
+  },
+  {
+   "register": "legal",
+   "n": 31,
+   "shareSigmaNegative": 0.5483870967741935,
+   "shareEntPositive": 0.6129032258064516
+  },
+  {
+   "register": "scripture",
+   "n": 26,
+   "shareSigmaNegative": 0.7307692307692307,
+   "shareEntPositive": 0.3076923076923077
+  },
+  {
+   "register": "history",
+   "n": 8,
+   "shareSigmaNegative": 1,
+   "shareEntPositive": 0.125
+  },
+  {
+   "register": "book",
+   "n": 19,
+   "shareSigmaNegative": 0.7368421052631579,
+   "shareEntPositive": 0.631578947368421
+  },
+  {
+   "register": "translation",
+   "n": 9,
+   "shareSigmaNegative": 0.3333333333333333,
+   "shareEntPositive": 0.6666666666666666
+  },
+  {
+   "register": "chat",
+   "n": 20,
+   "shareSigmaNegative": 0.9,
+   "shareEntPositive": 0.25
+  },
+  {
+   "register": "treebank",
+   "n": 34,
+   "shareSigmaNegative": 0.9705882352941176,
+   "shareEntPositive": 0.20588235294117646
+  }
+ ],
+ "shiftDistribution": {
+  "share_shift_gt0_bothHalves": 0.8897435897435897,
+  "medianShift": 0.44548560582988417
+ }
+}

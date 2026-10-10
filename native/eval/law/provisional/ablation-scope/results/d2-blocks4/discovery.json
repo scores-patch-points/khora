@@ -1,0 +1,3564 @@
+{
+ "module": "eval/law/provisional/ablation-scope/analyse-strata.mjs",
+ "data": "data/discovery2",
+ "B": 1000,
+ "rows": 2812,
+ "pairs": 1406,
+ "readSummaries": 21,
+ "gapsTotal": 0,
+ "K1_sham": {
+  "nullShare": 1,
+  "n": 168
+ },
+ "K6_determinism": {
+  "same": 168,
+  "n": 168
+ },
+ "cells": {
+  "irc.A": {
+   "c1": {
+    "n": 0,
+    "skipped": "too few pairs"
+   },
+   "c2": {
+    "n": 112,
+    "byStratum": {
+     "c2": 112
+    },
+    "auc": {
+     "S_ENTRY": 0.5,
+     "S_OWN": 0.4753,
+     "S_ALL": 0.4015,
+     "S_SPAN": 0.4472,
+     "EXTENT": 0.3652,
+     "NONNULL": 0.3795,
+     "R_BURST": 0.6845
+    },
+    "ci": {
+     "S_ENTRY": [
+      0.5,
+      0.5
+     ],
+     "S_OWN": [
+      0.4234,
+      0.5331
+     ],
+     "S_ALL": [
+      0.3422,
+      0.4609
+     ],
+     "S_SPAN": [
+      0.3836,
+      0.5131
+     ],
+     "EXTENT": [
+      0.3149,
+      0.4264
+     ],
+     "NONNULL": [
+      0.3238,
+      0.4324
+     ],
+     "R_BURST": [
+      0.6243,
+      0.7411
+     ]
+    },
+    "perm": {
+     "S_ENTRY": {
+      "q95": 0.5,
+      "mean": 0.5,
+      "p": 1
+     },
+     "S_OWN": {
+      "q95": 0.5487,
+      "mean": 0.4999,
+      "p": 0.806
+     },
+     "S_ALL": {
+      "q95": 0.5646,
+      "mean": 0.5021,
+      "p": 0.999
+     },
+     "S_SPAN": {
+      "q95": 0.5613,
+      "mean": 0.5001,
+      "p": 0.917
+     },
+     "EXTENT": {
+      "q95": 0.5656,
+      "mean": 0.5011,
+      "p": 1
+     },
+     "NONNULL": {
+      "q95": 0.5491,
+      "mean": 0.5,
+      "p": 1
+     }
+    },
+    "controls": {
+     "R_LOGC": 0.5,
+     "R_POS": 0.5,
+     "R_IPOS": 0.5,
+     "R_FB": 0.5111,
+     "R_LEN": 0.5172,
+     "R_SL": 0.5104
+    },
+    "controlCI99": {
+     "R_LOGC": [
+      0.5,
+      0.5
+     ],
+     "R_POS": [
+      0.4616,
+      0.5338
+     ],
+     "R_IPOS": [
+      0.5,
+      0.5
+     ],
+     "R_FB": [
+      0.4842,
+      0.5487
+     ],
+     "R_LEN": [
+      0.4981,
+      0.5398
+     ],
+     "R_SL": [
+      0.4504,
+      0.5821
+     ]
+    },
+    "trace": {
+     "nonNullNames": 0.4821,
+     "nonNullUnlabelled": 0.7232,
+     "medianExtentNames": 0,
+     "medianExtentUnlabelled": 36
+    },
+    "diffEntryMinusBurst": {
+     "point": -0.1845,
+     "lo": -0.243,
+     "hi": -0.1217
+    },
+    "voidCell": false,
+    "controlsInBand": true,
+    "active": false
+   },
+   "c3": {
+    "n": 112,
+    "byStratum": {
+     "c3": 112
+    },
+    "auc": {
+     "S_ENTRY": 0.5714,
+     "S_OWN": 0.5169,
+     "S_ALL": 0.5504,
+     "S_SPAN": 0.6529,
+     "EXTENT": 0.5972,
+     "NONNULL": 0.5625,
+     "R_BURST": 0.6354
+    },
+    "ci": {
+     "S_ENTRY": [
+      0.5323,
+      0.6164
+     ],
+     "S_OWN": [
+      0.4465,
+      0.5793
+     ],
+     "S_ALL": [
+      0.4731,
+      0.617
+     ],
+     "S_SPAN": [
+      0.5776,
+      0.7209
+     ],
+     "EXTENT": [
+      0.5258,
+      0.6631
+     ],
+     "NONNULL": [
+      0.487,
+      0.6278
+     ],
+     "R_BURST": [
+      0.5598,
+      0.7199
+     ]
+    },
+    "perm": {
+     "S_ENTRY": {
+      "q95": 0.5357,
+      "mean": 0.5011,
+      "p": 0.001
+     },
+     "S_OWN": {
+      "q95": 0.5621,
+      "mean": 0.5005,
+      "p": 0.325
+     },
+     "S_ALL": {
+      "q95": 0.5584,
+      "mean": 0.4998,
+      "p": 0.074
+     },
+     "S_SPAN": {
+      "q95": 0.555,
+      "mean": 0.4993,
+      "p": 0
+     },
+     "EXTENT": {
+      "q95": 0.5566,
+      "mean": 0.5,
+      "p": 0.002
+     },
+     "NONNULL": {
+      "q95": 0.5536,
+      "mean": 0.5006,
+      "p": 0.04
+     }
+    },
+    "controls": {
+     "R_LOGC": 0.5,
+     "R_POS": 0.4819,
+     "R_IPOS": 0.5,
+     "R_FB": 0.4782,
+     "R_LEN": 0.5095,
+     "R_SL": 0.5129
+    },
+    "controlCI99": {
+     "R_LOGC": [
+      0.5,
+      0.5
+     ],
+     "R_POS": [
+      0.4342,
+      0.5119
+     ],
+     "R_IPOS": [
+      0.5,
+      0.5
+     ],
+     "R_FB": [
+      0.4279,
+      0.5219
+     ],
+     "R_LEN": [
+      0.4859,
+      0.5312
+     ],
+     "R_SL": [
+      0.4656,
+      0.557
+     ]
+    },
+    "trace": {
+     "nonNullNames": 0.5536,
+     "nonNullUnlabelled": 0.4286,
+     "medianExtentNames": 5,
+     "medianExtentUnlabelled": 0
+    },
+    "diffEntryMinusBurst": {
+     "point": -0.064,
+     "lo": -0.1514,
+     "hi": 0.0131
+    },
+    "voidCell": false,
+    "controlsInBand": true,
+    "active": false
+   },
+   "c4_6": {
+    "n": 112,
+    "byStratum": {
+     "c4_6": 112
+    },
+    "auc": {
+     "S_ENTRY": 0.7545,
+     "S_OWN": 0.7046,
+     "S_ALL": 0.6232,
+     "S_SPAN": 0.7123,
+     "EXTENT": 0.7308,
+     "NONNULL": 0.6607,
+     "R_BURST": 0.5902
+    },
+    "ci": {
+     "S_ENTRY": [
+      0.6891,
+      0.8163
+     ],
+     "S_OWN": [
+      0.645,
+      0.7705
+     ],
+     "S_ALL": [
+      0.5568,
+      0.7002
+     ],
+     "S_SPAN": [
+      0.6521,
+      0.7766
+     ],
+     "EXTENT": [
+      0.6544,
+      0.8049
+     ],
+     "NONNULL": [
+      0.5983,
+      0.7311
+     ],
+     "R_BURST": [
+      0.5232,
+      0.6588
+     ]
+    },
+    "perm": {
+     "S_ENTRY": {
+      "q95": 0.558,
+      "mean": 0.4993,
+      "p": 0
+     },
+     "S_OWN": {
+      "q95": 0.5563,
+      "mean": 0.4998,
+      "p": 0
+     },
+     "S_ALL": {
+      "q95": 0.5605,
+      "mean": 0.503,
+      "p": 0.001
+     },
+     "S_SPAN": {
+      "q95": 0.5599,
+      "mean": 0.4998,
+      "p": 0
+     },
+     "EXTENT": {
+      "q95": 0.5668,
+      "mean": 0.4994,
+      "p": 0
+     },
+     "NONNULL": {
+      "q95": 0.5536,
+      "mean": 0.5003,
+      "p": 0
+     }
+    },
+    "controls": {
+     "R_LOGC": 0.5373,
+     "R_POS": 0.5081,
+     "R_IPOS": 0.5,
+     "R_FB": 0.4575,
+     "R_LEN": 0.5145,
+     "R_SL": 0.5197
+    },
+    "controlCI99": {
+     "R_LOGC": [
+      0.484,
+      0.6034
+     ],
+     "R_POS": [
+      0.4723,
+      0.547
+     ],
+     "R_IPOS": [
+      0.5,
+      0.5
+     ],
+     "R_FB": [
+      0.4007,
+      0.511
+     ],
+     "R_LEN": [
+      0.4979,
+      0.5349
+     ],
+     "R_SL": [
+      0.4761,
+      0.5701
+     ]
+    },
+    "trace": {
+     "nonNullNames": 0.8661,
+     "nonNullUnlabelled": 0.5446,
+     "medianExtentNames": 423,
+     "medianExtentUnlabelled": 3
+    },
+    "diffEntryMinusBurst": {
+     "point": 0.1642,
+     "lo": 0.0706,
+     "hi": 0.2572
+    },
+    "voidCell": false,
+    "controlsInBand": true,
+    "active": true
+   },
+   "c7_15": {
+    "n": 112,
+    "byStratum": {
+     "c7_15": 112
+    },
+    "auc": {
+     "S_ENTRY": 0.6071,
+     "S_OWN": 0.5969,
+     "S_ALL": 0.5722,
+     "S_SPAN": 0.6087,
+     "EXTENT": 0.5994,
+     "NONNULL": 0.558,
+     "R_BURST": 0.5664
+    },
+    "ci": {
+     "S_ENTRY": [
+      0.5446,
+      0.6721
+     ],
+     "S_OWN": [
+      0.5339,
+      0.6584
+     ],
+     "S_ALL": [
+      0.5062,
+      0.6481
+     ],
+     "S_SPAN": [
+      0.5413,
+      0.6744
+     ],
+     "EXTENT": [
+      0.5166,
+      0.6868
+     ],
+     "NONNULL": [
+      0.5133,
+      0.5975
+     ],
+     "R_BURST": [
+      0.4833,
+      0.653
+     ]
+    },
+    "perm": {
+     "S_ENTRY": {
+      "q95": 0.5446,
+      "mean": 0.5014,
+      "p": 0
+     },
+     "S_OWN": {
+      "q95": 0.555,
+      "mean": 0.499,
+      "p": 0.003
+     },
+     "S_ALL": {
+      "q95": 0.5613,
+      "mean": 0.5007,
+      "p": 0.031
+     },
+     "S_SPAN": {
+      "q95": 0.5579,
+      "mean": 0.4997,
+      "p": 0.002
+     },
+     "EXTENT": {
+      "q95": 0.5637,
+      "mean": 0.5003,
+      "p": 0.005
+     },
+     "NONNULL": {
+      "q95": 0.5402,
+      "mean": 0.4988,
+      "p": 0.009
+     }
+    },
+    "controls": {
+     "R_LOGC": 0.5083,
+     "R_POS": 0.5042,
+     "R_IPOS": 0.5,
+     "R_FB": 0.4743,
+     "R_LEN": 0.5326,
+     "R_SL": 0.5083
+    },
+    "controlCI99": {
+     "R_LOGC": [
+      0.4792,
+      0.5454
+     ],
+     "R_POS": [
+      0.4525,
+      0.5469
+     ],
+     "R_IPOS": [
+      0.5,
+      0.5
+     ],
+     "R_FB": [
+      0.4247,
+      0.52
+     ],
+     "R_LEN": [
+      0.4882,
+      0.5678
+     ],
+     "R_SL": [
+      0.449,
+      0.5696
+     ]
+    },
+    "trace": {
+     "nonNullNames": 0.9196,
+     "nonNullUnlabelled": 0.8036,
+     "medianExtentNames": 1141,
+     "medianExtentUnlabelled": 710
+    },
+    "diffEntryMinusBurst": {
+     "point": 0.0408,
+     "lo": -0.0822,
+     "hi": 0.1465
+    },
+    "voidCell": false,
+    "controlsInBand": true,
+    "active": true
+   },
+   "c16p": {
+    "n": 81,
+    "byStratum": {
+     "c16p": 81
+    },
+    "auc": {
+     "S_ENTRY": 0.6173,
+     "S_OWN": 0.6838,
+     "S_ALL": 0.6654,
+     "S_SPAN": 0.6994,
+     "EXTENT": 0.6546,
+     "NONNULL": 0.5988,
+     "R_BURST": 0.5607
+    },
+    "ci": {
+     "S_ENTRY": [
+      0.526,
+      0.7195
+     ],
+     "S_OWN": [
+      0.6224,
+      0.7419
+     ],
+     "S_ALL": [
+      0.6011,
+      0.7274
+     ],
+     "S_SPAN": [
+      0.6334,
+      0.7585
+     ],
+     "EXTENT": [
+      0.5939,
+      0.7155
+     ],
+     "NONNULL": [
+      0.5305,
+      0.6667
+     ],
+     "R_BURST": [
+      0.4619,
+      0.6536
+     ]
+    },
+    "perm": {
+     "S_ENTRY": {
+      "q95": 0.5556,
+      "mean": 0.4992,
+      "p": 0.001
+     },
+     "S_OWN": {
+      "q95": 0.5644,
+      "mean": 0.5001,
+      "p": 0
+     },
+     "S_ALL": {
+      "q95": 0.5649,
+      "mean": 0.4963,
+      "p": 0
+     },
+     "S_SPAN": {
+      "q95": 0.5617,
+      "mean": 0.5004,
+      "p": 0
+     },
+     "EXTENT": {
+      "q95": 0.5713,
+      "mean": 0.5004,
+      "p": 0
+     },
+     "NONNULL": {
+      "q95": 0.5494,
+      "mean": 0.4999,
+      "p": 0
+     }
+    },
+    "controls": {
+     "R_LOGC": 0.5285,
+     "R_POS": 0.5264,
+     "R_IPOS": 0.5,
+     "R_FB": 0.4351,
+     "R_LEN": 0.5428,
+     "R_SL": 0.5059
+    },
+    "controlCI99": {
+     "R_LOGC": [
+      0.4741,
+      0.6107
+     ],
+     "R_POS": [
+      0.4694,
+      0.5968
+     ],
+     "R_IPOS": [
+      0.5,
+      0.5
+     ],
+     "R_FB": [
+      0.3865,
+      0.4862
+     ],
+     "R_LEN": [
+      0.4919,
+      0.608
+     ],
+     "R_SL": [
+      0.4616,
+      0.5599
+     ]
+    },
+    "trace": {
+     "nonNullNames": 0.9506,
+     "nonNullUnlabelled": 0.7531,
+     "medianExtentNames": 2222,
+     "medianExtentUnlabelled": 1795
+    },
+    "diffEntryMinusBurst": {
+     "point": 0.0566,
+     "lo": -0.0331,
+     "hi": 0.1616
+    },
+    "voidCell": true,
+    "controlsInBand": false,
+    "active": false
+   }
+  },
+  "irc.B": {
+   "c1": {
+    "n": 0,
+    "skipped": "too few pairs"
+   },
+   "c2": {
+    "n": 86,
+    "byStratum": {
+     "c2": 86
+    },
+    "auc": {
+     "S_ENTRY": 0.5,
+     "S_OWN": 0.468,
+     "S_ALL": 0.3426,
+     "S_SPAN": 0.3359,
+     "EXTENT": 0.2962,
+     "NONNULL": 0.3663,
+     "R_BURST": 0.6038
+    },
+    "ci": {
+     "S_ENTRY": [
+      0.5,
+      0.5
+     ],
+     "S_OWN": [
+      0.414,
+      0.5179
+     ],
+     "S_ALL": [
+      0.2726,
+      0.4088
+     ],
+     "S_SPAN": [
+      0.2742,
+      0.393
+     ],
+     "EXTENT": [
+      0.2235,
+      0.3683
+     ],
+     "NONNULL": [
+      0.3171,
+      0.4136
+     ],
+     "R_BURST": [
+      0.5253,
+      0.6801
+     ]
+    },
+    "perm": {
+     "S_ENTRY": {
+      "q95": 0.5,
+      "mean": 0.5,
+      "p": 1
+     },
+     "S_OWN": {
+      "q95": 0.5525,
+      "mean": 0.5005,
+      "p": 0.859
+     },
+     "S_ALL": {
+      "q95": 0.5704,
+      "mean": 0.5021,
+      "p": 1
+     },
+     "S_SPAN": {
+      "q95": 0.5608,
+      "mean": 0.4996,
+      "p": 1
+     },
+     "EXTENT": {
+      "q95": 0.5692,
+      "mean": 0.5002,
+      "p": 1
+     },
+     "NONNULL": {
+      "q95": 0.5523,
+      "mean": 0.4999,
+      "p": 1
+     }
+    },
+    "controls": {
+     "R_LOGC": 0.5,
+     "R_POS": 0.4777,
+     "R_IPOS": 0.5161,
+     "R_FB": 0.4939,
+     "R_LEN": 0.5049,
+     "R_SL": 0.4594
+    },
+    "controlCI99": {
+     "R_LOGC": [
+      0.5,
+      0.5
+     ],
+     "R_POS": [
+      0.4357,
+      0.5077
+     ],
+     "R_IPOS": [
+      0.4825,
+      0.5511
+     ],
+     "R_FB": [
+      0.4731,
+      0.5053
+     ],
+     "R_LEN": [
+      0.4972,
+      0.5171
+     ],
+     "R_SL": [
+      0.4146,
+      0.4855
+     ]
+    },
+    "trace": {
+     "nonNullNames": 0.5465,
+     "nonNullUnlabelled": 0.814,
+     "medianExtentNames": 0,
+     "medianExtentUnlabelled": 420
+    },
+    "diffEntryMinusBurst": {
+     "point": -0.1038,
+     "lo": -0.1785,
+     "hi": -0.0275
+    },
+    "voidCell": true,
+    "controlsInBand": true,
+    "active": false
+   },
+   "c3": {
+    "n": 86,
+    "byStratum": {
+     "c3": 86
+    },
+    "auc": {
+     "S_ENTRY": 0.5174,
+     "S_OWN": 0.5201,
+     "S_ALL": 0.5479,
+     "S_SPAN": 0.6354,
+     "EXTENT": 0.5396,
+     "NONNULL": 0.5465,
+     "R_BURST": 0.538
+    },
+    "ci": {
+     "S_ENTRY": [
+      0.5,
+      0.539
+     ],
+     "S_OWN": [
+      0.4551,
+      0.5875
+     ],
+     "S_ALL": [
+      0.4748,
+      0.6218
+     ],
+     "S_SPAN": [
+      0.5593,
+      0.7071
+     ],
+     "EXTENT": [
+      0.482,
+      0.5994
+     ],
+     "NONNULL": [
+      0.475,
+      0.6111
+     ],
+     "R_BURST": [
+      0.4768,
+      0.6053
+     ]
+    },
+    "perm": {
+     "S_ENTRY": {
+      "q95": 0.5174,
+      "mean": 0.4998,
+      "p": 0.117
+     },
+     "S_OWN": {
+      "q95": 0.5491,
+      "mean": 0.4997,
+      "p": 0.25
+     },
+     "S_ALL": {
+      "q95": 0.5505,
+      "mean": 0.4985,
+      "p": 0.065
+     },
+     "S_SPAN": {
+      "q95": 0.5637,
+      "mean": 0.5002,
+      "p": 0
+     },
+     "EXTENT": {
+      "q95": 0.5453,
+      "mean": 0.4984,
+      "p": 0.08
+     },
+     "NONNULL": {
+      "q95": 0.5581,
+      "mean": 0.5001,
+      "p": 0.106
+     }
+    },
+    "controls": {
+     "R_LOGC": 0.5,
+     "R_POS": 0.4847,
+     "R_IPOS": 0.4884,
+     "R_FB": 0.4965,
+     "R_LEN": 0.5049,
+     "R_SL": 0.4781
+    },
+    "controlCI99": {
+     "R_LOGC": [
+      0.5,
+      0.5
+     ],
+     "R_POS": [
+      0.4291,
+      0.5353
+     ],
+     "R_IPOS": [
+      0.4329,
+      0.537
+     ],
+     "R_FB": [
+      0.4809,
+      0.5088
+     ],
+     "R_LEN": [
+      0.4903,
+      0.5196
+     ],
+     "R_SL": [
+      0.4268,
+      0.5091
+     ]
+    },
+    "trace": {
+     "nonNullNames": 0.4535,
+     "nonNullUnlabelled": 0.3605,
+     "medianExtentNames": 0,
+     "medianExtentUnlabelled": 0
+    },
+    "diffEntryMinusBurst": {
+     "point": -0.0206,
+     "lo": -0.0877,
+     "hi": 0.0489
+    },
+    "voidCell": false,
+    "controlsInBand": true,
+    "active": false
+   },
+   "c4_6": {
+    "n": 98,
+    "byStratum": {
+     "c4_6": 98
+    },
+    "auc": {
+     "S_ENTRY": 0.6582,
+     "S_OWN": 0.5836,
+     "S_ALL": 0.612,
+     "S_SPAN": 0.5819,
+     "EXTENT": 0.6886,
+     "NONNULL": 0.5918,
+     "R_BURST": 0.5218
+    },
+    "ci": {
+     "S_ENTRY": [
+      0.6126,
+      0.7053
+     ],
+     "S_OWN": [
+      0.5003,
+      0.6671
+     ],
+     "S_ALL": [
+      0.5352,
+      0.6901
+     ],
+     "S_SPAN": [
+      0.4967,
+      0.6677
+     ],
+     "EXTENT": [
+      0.6263,
+      0.7354
+     ],
+     "NONNULL": [
+      0.5132,
+      0.6748
+     ],
+     "R_BURST": [
+      0.4671,
+      0.5728
+     ]
+    },
+    "perm": {
+     "S_ENTRY": {
+      "q95": 0.5459,
+      "mean": 0.4988,
+      "p": 0
+     },
+     "S_OWN": {
+      "q95": 0.5604,
+      "mean": 0.4987,
+      "p": 0.019
+     },
+     "S_ALL": {
+      "q95": 0.5621,
+      "mean": 0.4988,
+      "p": 0.001
+     },
+     "S_SPAN": {
+      "q95": 0.563,
+      "mean": 0.5004,
+      "p": 0.019
+     },
+     "EXTENT": {
+      "q95": 0.5605,
+      "mean": 0.4982,
+      "p": 0
+     },
+     "NONNULL": {
+      "q95": 0.5612,
+      "mean": 0.5009,
+      "p": 0.01
+     }
+    },
+    "controls": {
+     "R_LOGC": 0.492,
+     "R_POS": 0.498,
+     "R_IPOS": 0.4771,
+     "R_FB": 0.493,
+     "R_LEN": 0.5038,
+     "R_SL": 0.4599
+    },
+    "controlCI99": {
+     "R_LOGC": [
+      0.4537,
+      0.5324
+     ],
+     "R_POS": [
+      0.4694,
+      0.5259
+     ],
+     "R_IPOS": [
+      0.4304,
+      0.5117
+     ],
+     "R_FB": [
+      0.4771,
+      0.5061
+     ],
+     "R_LEN": [
+      0.4921,
+      0.5183
+     ],
+     "R_SL": [
+      0.4083,
+      0.5085
+     ]
+    },
+    "trace": {
+     "nonNullNames": 0.5714,
+     "nonNullUnlabelled": 0.3878,
+     "medianExtentNames": 0,
+     "medianExtentUnlabelled": 0
+    },
+    "diffEntryMinusBurst": {
+     "point": 0.1364,
+     "lo": 0.0678,
+     "hi": 0.2026
+    },
+    "voidCell": false,
+    "controlsInBand": true,
+    "active": true
+   },
+   "c7_15": {
+    "n": 100,
+    "byStratum": {
+     "c7_15": 100
+    },
+    "auc": {
+     "S_ENTRY": 0.75,
+     "S_OWN": 0.671,
+     "S_ALL": 0.6693,
+     "S_SPAN": 0.6311,
+     "EXTENT": 0.7693,
+     "NONNULL": 0.665,
+     "R_BURST": 0.5093
+    },
+    "ci": {
+     "S_ENTRY": [
+      0.6858,
+      0.8125
+     ],
+     "S_OWN": [
+      0.5806,
+      0.7442
+     ],
+     "S_ALL": [
+      0.5876,
+      0.7416
+     ],
+     "S_SPAN": [
+      0.5399,
+      0.7142
+     ],
+     "EXTENT": [
+      0.6965,
+      0.8451
+     ],
+     "NONNULL": [
+      0.5857,
+      0.7326
+     ],
+     "R_BURST": [
+      0.431,
+      0.5892
+     ]
+    },
+    "perm": {
+     "S_ENTRY": {
+      "q95": 0.56,
+      "mean": 0.501,
+      "p": 0
+     },
+     "S_OWN": {
+      "q95": 0.5678,
+      "mean": 0.4992,
+      "p": 0
+     },
+     "S_ALL": {
+      "q95": 0.5705,
+      "mean": 0.5011,
+      "p": 0
+     },
+     "S_SPAN": {
+      "q95": 0.5669,
+      "mean": 0.5006,
+      "p": 0.002
+     },
+     "EXTENT": {
+      "q95": 0.5652,
+      "mean": 0.4995,
+      "p": 0
+     },
+     "NONNULL": {
+      "q95": 0.565,
+      "mean": 0.5003,
+      "p": 0
+     }
+    },
+    "controls": {
+     "R_LOGC": 0.5054,
+     "R_POS": 0.498,
+     "R_IPOS": 0.4881,
+     "R_FB": 0.4896,
+     "R_LEN": 0.5114,
+     "R_SL": 0.4439
+    },
+    "controlCI99": {
+     "R_LOGC": [
+      0.4759,
+      0.5342
+     ],
+     "R_POS": [
+      0.4592,
+      0.5258
+     ],
+     "R_IPOS": [
+      0.4362,
+      0.5276
+     ],
+     "R_FB": [
+      0.4592,
+      0.5223
+     ],
+     "R_LEN": [
+      0.4925,
+      0.5316
+     ],
+     "R_SL": [
+      0.4095,
+      0.474
+     ]
+    },
+    "trace": {
+     "nonNullNames": 0.77,
+     "nonNullUnlabelled": 0.44,
+     "medianExtentNames": 543,
+     "medianExtentUnlabelled": 0
+    },
+    "diffEntryMinusBurst": {
+     "point": 0.2407,
+     "lo": 0.1281,
+     "hi": 0.3337
+    },
+    "voidCell": true,
+    "controlsInBand": false,
+    "active": false
+   },
+   "c16p": {
+    "n": 63,
+    "byStratum": {
+     "c16p": 63
+    },
+    "auc": {
+     "S_ENTRY": 0.873,
+     "S_OWN": 0.792,
+     "S_ALL": 0.7611,
+     "S_SPAN": 0.7098,
+     "EXTENT": 0.8907,
+     "NONNULL": 0.754,
+     "R_BURST": 0.4739
+    },
+    "ci": {
+     "S_ENTRY": [
+      0.8083,
+      0.9327
+     ],
+     "S_OWN": [
+      0.7114,
+      0.8713
+     ],
+     "S_ALL": [
+      0.6704,
+      0.8551
+     ],
+     "S_SPAN": [
+      0.6094,
+      0.8046
+     ],
+     "EXTENT": [
+      0.8132,
+      0.9522
+     ],
+     "NONNULL": [
+      0.6636,
+      0.8365
+     ],
+     "R_BURST": [
+      0.3551,
+      0.5682
+     ]
+    },
+    "perm": {
+     "S_ENTRY": {
+      "q95": 0.5873,
+      "mean": 0.4999,
+      "p": 0
+     },
+     "S_OWN": {
+      "q95": 0.5887,
+      "mean": 0.5006,
+      "p": 0
+     },
+     "S_ALL": {
+      "q95": 0.5889,
+      "mean": 0.5006,
+      "p": 0
+     },
+     "S_SPAN": {
+      "q95": 0.5868,
+      "mean": 0.5003,
+      "p": 0
+     },
+     "EXTENT": {
+      "q95": 0.5966,
+      "mean": 0.5,
+      "p": 0
+     },
+     "NONNULL": {
+      "q95": 0.5794,
+      "mean": 0.5011,
+      "p": 0
+     }
+    },
+    "controls": {
+     "R_LOGC": 0.5295,
+     "R_POS": 0.4836,
+     "R_IPOS": 0.5035,
+     "R_FB": 0.4751,
+     "R_LEN": 0.5223,
+     "R_SL": 0.4665
+    },
+    "controlCI99": {
+     "R_LOGC": [
+      0.4714,
+      0.5801
+     ],
+     "R_POS": [
+      0.4109,
+      0.5478
+     ],
+     "R_IPOS": [
+      0.4474,
+      0.545
+     ],
+     "R_FB": [
+      0.3608,
+      0.5516
+     ],
+     "R_LEN": [
+      0.464,
+      0.5793
+     ],
+     "R_SL": [
+      0.4014,
+      0.5124
+     ]
+    },
+    "trace": {
+     "nonNullNames": 0.9048,
+     "nonNullUnlabelled": 0.3968,
+     "medianExtentNames": 2016,
+     "medianExtentUnlabelled": 0
+    },
+    "diffEntryMinusBurst": {
+     "point": 0.3991,
+     "lo": 0.3001,
+     "hi": 0.5134
+    },
+    "voidCell": false,
+    "controlsInBand": true,
+    "active": true
+   }
+  },
+  "wp.A": {
+   "c1": {
+    "n": 0,
+    "skipped": "too few pairs"
+   },
+   "c2": {
+    "n": 30,
+    "byStratum": {
+     "c2": 30
+    },
+    "auc": {
+     "S_ENTRY": 0.4833,
+     "S_OWN": 0.4111,
+     "S_ALL": 0.3844,
+     "S_SPAN": 0.2989,
+     "EXTENT": 0.2806,
+     "NONNULL": 0.35,
+     "R_BURST": 0.65
+    },
+    "ci": {
+     "S_ENTRY": [
+      0.4444,
+      0.5
+     ],
+     "S_OWN": [
+      0.3738,
+      0.4731
+     ],
+     "S_ALL": [
+      0.3258,
+      0.4359
+     ],
+     "S_SPAN": [
+      0.2176,
+      0.4083
+     ],
+     "EXTENT": [
+      0.142,
+      0.3841
+     ],
+     "NONNULL": [
+      0.3333,
+      0.3611
+     ],
+     "R_BURST": [
+      0.5952,
+      0.8047
+     ]
+    },
+    "perm": {
+     "S_ENTRY": {
+      "q95": 0.5167,
+      "mean": 0.5,
+      "p": 1
+     },
+     "S_OWN": {
+      "q95": 0.6128,
+      "mean": 0.4982,
+      "p": 0.936
+     },
+     "S_ALL": {
+      "q95": 0.6061,
+      "mean": 0.499,
+      "p": 0.962
+     },
+     "S_SPAN": {
+      "q95": 0.6206,
+      "mean": 0.4989,
+      "p": 0.999
+     },
+     "EXTENT": {
+      "q95": 0.6306,
+      "mean": 0.501,
+      "p": 1
+     },
+     "NONNULL": {
+      "q95": 0.5833,
+      "mean": 0.5008,
+      "p": 1
+     }
+    },
+    "controls": {
+     "R_LOGC": 0.5,
+     "R_POS": 0.4911,
+     "R_IPOS": 0.5,
+     "R_FB": 0.5144,
+     "R_LEN": 0.5183,
+     "R_SL": 0.5017
+    },
+    "controlCI99": {
+     "R_LOGC": [
+      0.5,
+      0.5
+     ],
+     "R_POS": [
+      0.438,
+      0.526
+     ],
+     "R_IPOS": [
+      0.5,
+      0.5
+     ],
+     "R_FB": [
+      0.5008,
+      0.5332
+     ],
+     "R_LEN": [
+      0.5,
+      0.5398
+     ],
+     "R_SL": [
+      0.4199,
+      0.5694
+     ]
+    },
+    "trace": {
+     "nonNullNames": 0.7,
+     "nonNullUnlabelled": 1,
+     "medianExtentNames": 41,
+     "medianExtentUnlabelled": 564
+    },
+    "diffEntryMinusBurst": {
+     "point": -0.1667,
+     "lo": -0.3432,
+     "hi": -0.0851
+    },
+    "voidCell": true,
+    "controlsInBand": true,
+    "active": false
+   },
+   "c3": {
+    "n": 30,
+    "byStratum": {
+     "c3": 30
+    },
+    "auc": {
+     "S_ENTRY": 0.5167,
+     "S_OWN": 0.5578,
+     "S_ALL": 0.555,
+     "S_SPAN": 0.53,
+     "EXTENT": 0.5228,
+     "NONNULL": 0.5333,
+     "R_BURST": 0.6944
+    },
+    "ci": {
+     "S_ENTRY": [
+      0.5,
+      0.5357
+     ],
+     "S_OWN": [
+      0.5098,
+      0.6111
+     ],
+     "S_ALL": [
+      0.4841,
+      0.6558
+     ],
+     "S_SPAN": [
+      0.4694,
+      0.615
+     ],
+     "EXTENT": [
+      0.4506,
+      0.6304
+     ],
+     "NONNULL": [
+      0.4659,
+      0.6406
+     ],
+     "R_BURST": [
+      0.5802,
+      0.7901
+     ]
+    },
+    "perm": {
+     "S_ENTRY": {
+      "q95": 0.55,
+      "mean": 0.4997,
+      "p": 0.479
+     },
+     "S_OWN": {
+      "q95": 0.5894,
+      "mean": 0.5,
+      "p": 0.174
+     },
+     "S_ALL": {
+      "q95": 0.6167,
+      "mean": 0.4987,
+      "p": 0.225
+     },
+     "S_SPAN": {
+      "q95": 0.6083,
+      "mean": 0.5004,
+      "p": 0.37
+     },
+     "EXTENT": {
+      "q95": 0.6194,
+      "mean": 0.5021,
+      "p": 0.397
+     },
+     "NONNULL": {
+      "q95": 0.6,
+      "mean": 0.5004,
+      "p": 0.405
+     }
+    },
+    "controls": {
+     "R_LOGC": 0.5,
+     "R_POS": 0.5211,
+     "R_IPOS": 0.5,
+     "R_FB": 0.4883,
+     "R_LEN": 0.4933,
+     "R_SL": 0.5311
+    },
+    "controlCI99": {
+     "R_LOGC": [
+      0.5,
+      0.5
+     ],
+     "R_POS": [
+      0.503,
+      0.6
+     ],
+     "R_IPOS": [
+      0.5,
+      0.5
+     ],
+     "R_FB": [
+      0.3951,
+      0.5556
+     ],
+     "R_LEN": [
+      0.47,
+      0.5
+     ],
+     "R_SL": [
+      0.4994,
+      0.642
+     ]
+    },
+    "trace": {
+     "nonNullNames": 0.4667,
+     "nonNullUnlabelled": 0.4,
+     "medianExtentNames": 0,
+     "medianExtentUnlabelled": 0
+    },
+    "diffEntryMinusBurst": {
+     "point": -0.1778,
+     "lo": -0.2551,
+     "hi": -0.0802
+    },
+    "voidCell": true,
+    "controlsInBand": true,
+    "active": false
+   },
+   "c4_6": {
+    "n": 30,
+    "byStratum": {
+     "c4_6": 30
+    },
+    "auc": {
+     "S_ENTRY": 0.5833,
+     "S_OWN": 0.5661,
+     "S_ALL": 0.5528,
+     "S_SPAN": 0.5722,
+     "EXTENT": 0.5911,
+     "NONNULL": 0.5667,
+     "R_BURST": 0.7156
+    },
+    "ci": {
+     "S_ENTRY": [
+      0.475,
+      0.6875
+     ],
+     "S_OWN": [
+      0.378,
+      0.7194
+     ],
+     "S_ALL": [
+      0.443,
+      0.6276
+     ],
+     "S_SPAN": [
+      0.4379,
+      0.6888
+     ],
+     "EXTENT": [
+      0.4793,
+      0.6523
+     ],
+     "NONNULL": [
+      0.4615,
+      0.6429
+     ],
+     "R_BURST": [
+      0.566,
+      0.7852
+     ]
+    },
+    "perm": {
+     "S_ENTRY": {
+      "q95": 0.5833,
+      "mean": 0.5009,
+      "p": 0.093
+     },
+     "S_OWN": {
+      "q95": 0.5894,
+      "mean": 0.4979,
+      "p": 0.143
+     },
+     "S_ALL": {
+      "q95": 0.6039,
+      "mean": 0.5005,
+      "p": 0.198
+     },
+     "S_SPAN": {
+      "q95": 0.6178,
+      "mean": 0.5028,
+      "p": 0.132
+     },
+     "EXTENT": {
+      "q95": 0.6156,
+      "mean": 0.5028,
+      "p": 0.1
+     },
+     "NONNULL": {
+      "q95": 0.6,
+      "mean": 0.4978,
+      "p": 0.208
+     }
+    },
+    "controls": {
+     "R_LOGC": 0.5267,
+     "R_POS": 0.5067,
+     "R_IPOS": 0.5,
+     "R_FB": 0.5522,
+     "R_LEN": 0.5606,
+     "R_SL": 0.4967
+    },
+    "controlCI99": {
+     "R_LOGC": [
+      0.4657,
+      0.6155
+     ],
+     "R_POS": [
+      0.4,
+      0.606
+     ],
+     "R_IPOS": [
+      0.5,
+      0.5
+     ],
+     "R_FB": [
+      0.5243,
+      0.5848
+     ],
+     "R_LEN": [
+      0.5409,
+      0.5816
+     ],
+     "R_SL": [
+      0.46,
+      0.5728
+     ]
+    },
+    "trace": {
+     "nonNullNames": 0.4667,
+     "nonNullUnlabelled": 0.3333,
+     "medianExtentNames": 0,
+     "medianExtentUnlabelled": 0
+    },
+    "diffEntryMinusBurst": {
+     "point": -0.1322,
+     "lo": -0.2175,
+     "hi": -0.0371
+    },
+    "voidCell": true,
+    "controlsInBand": false,
+    "active": false
+   },
+   "c7_15": {
+    "n": 30,
+    "byStratum": {
+     "c7_15": 30
+    },
+    "auc": {
+     "S_ENTRY": 0.55,
+     "S_OWN": 0.4267,
+     "S_ALL": 0.4372,
+     "S_SPAN": 0.4567,
+     "EXTENT": 0.4872,
+     "NONNULL": 0.45,
+     "R_BURST": 0.69
+    },
+    "ci": {
+     "S_ENTRY": [
+      0.5,
+      0.6
+     ],
+     "S_OWN": [
+      0.3128,
+      0.6075
+     ],
+     "S_ALL": [
+      0.3222,
+      0.6
+     ],
+     "S_SPAN": [
+      0.36,
+      0.6075
+     ],
+     "EXTENT": [
+      0.4044,
+      0.6208
+     ],
+     "NONNULL": [
+      0.36,
+      0.6
+     ],
+     "R_BURST": [
+      0.5867,
+      0.845
+     ]
+    },
+    "perm": {
+     "S_ENTRY": {
+      "q95": 0.55,
+      "mean": 0.4999,
+      "p": 0.133
+     },
+     "S_OWN": {
+      "q95": 0.6044,
+      "mean": 0.4998,
+      "p": 0.906
+     },
+     "S_ALL": {
+      "q95": 0.6206,
+      "mean": 0.5004,
+      "p": 0.811
+     },
+     "S_SPAN": {
+      "q95": 0.6206,
+      "mean": 0.5029,
+      "p": 0.766
+     },
+     "EXTENT": {
+      "q95": 0.6133,
+      "mean": 0.4993,
+      "p": 0.576
+     },
+     "NONNULL": {
+      "q95": 0.6167,
+      "mean": 0.5002,
+      "p": 0.849
+     }
+    },
+    "controls": {
+     "R_LOGC": 0.5844,
+     "R_POS": 0.4967,
+     "R_IPOS": 0.5,
+     "R_FB": 0.4728,
+     "R_LEN": 0.5311,
+     "R_SL": 0.515
+    },
+    "controlCI99": {
+     "R_LOGC": [
+      0.535,
+      0.7238
+     ],
+     "R_POS": [
+      0.31,
+      0.5567
+     ],
+     "R_IPOS": [
+      0.5,
+      0.5
+     ],
+     "R_FB": [
+      0.395,
+      0.5568
+     ],
+     "R_LEN": [
+      0.4728,
+      0.596
+     ],
+     "R_SL": [
+      0.4249,
+      0.609
+     ]
+    },
+    "trace": {
+     "nonNullNames": 0.3,
+     "nonNullUnlabelled": 0.4,
+     "medianExtentNames": 0,
+     "medianExtentUnlabelled": 0
+    },
+    "diffEntryMinusBurst": {
+     "point": -0.14,
+     "lo": -0.27,
+     "hi": -0.0867
+    },
+    "voidCell": true,
+    "controlsInBand": false,
+    "active": false
+   },
+   "c16p": {
+    "n": 24,
+    "skipped": "too few pairs"
+   }
+  },
+  "wp.B": {
+   "c1": {
+    "n": 0,
+    "skipped": "too few pairs"
+   },
+   "c2": {
+    "n": 60,
+    "byStratum": {
+     "c2": 60
+    },
+    "auc": {
+     "S_ENTRY": 0.5,
+     "S_OWN": 0.3907,
+     "S_ALL": 0.5112,
+     "S_SPAN": 0.3308,
+     "EXTENT": 0.3071,
+     "NONNULL": 0.45,
+     "R_BURST": 0.6321
+    },
+    "ci": {
+     "S_ENTRY": [
+      0.5,
+      0.5
+     ],
+     "S_OWN": [
+      0.3061,
+      0.4703
+     ],
+     "S_ALL": [
+      0.4519,
+      0.5769
+     ],
+     "S_SPAN": [
+      0.27,
+      0.3828
+     ],
+     "EXTENT": [
+      0.2634,
+      0.3521
+     ],
+     "NONNULL": [
+      0.4,
+      0.5079
+     ],
+     "R_BURST": [
+      0.5888,
+      0.6657
+     ]
+    },
+    "perm": {
+     "S_ENTRY": {
+      "q95": 0.5,
+      "mean": 0.5,
+      "p": 1
+     },
+     "S_OWN": {
+      "q95": 0.5753,
+      "mean": 0.4996,
+      "p": 0.987
+     },
+     "S_ALL": {
+      "q95": 0.5768,
+      "mean": 0.5003,
+      "p": 0.425
+     },
+     "S_SPAN": {
+      "q95": 0.5875,
+      "mean": 0.4987,
+      "p": 0.998
+     },
+     "EXTENT": {
+      "q95": 0.589,
+      "mean": 0.5004,
+      "p": 1
+     },
+     "NONNULL": {
+      "q95": 0.55,
+      "mean": 0.5003,
+      "p": 0.991
+     }
+    },
+    "controls": {
+     "R_LOGC": 0.5,
+     "R_POS": 0.5071,
+     "R_IPOS": 0.455,
+     "R_FB": 0.5133,
+     "R_LEN": 0.5,
+     "R_SL": 0.5022
+    },
+    "controlCI99": {
+     "R_LOGC": [
+      0.5,
+      0.5
+     ],
+     "R_POS": [
+      0.5056,
+      0.5348
+     ],
+     "R_IPOS": [
+      0.4038,
+      0.5271
+     ],
+     "R_FB": [
+      0.5069,
+      0.5189
+     ],
+     "R_LEN": [
+      0.5,
+      0.5
+     ],
+     "R_SL": [
+      0.4985,
+      0.509
+     ]
+    },
+    "trace": {
+     "nonNullNames": 0.85,
+     "nonNullUnlabelled": 0.95,
+     "medianExtentNames": 50,
+     "medianExtentUnlabelled": 763
+    },
+    "diffEntryMinusBurst": {
+     "point": -0.1321,
+     "lo": -0.1657,
+     "hi": -0.0932
+    },
+    "voidCell": true,
+    "controlsInBand": true,
+    "active": false
+   },
+   "c3": {
+    "n": 60,
+    "byStratum": {
+     "c3": 60
+    },
+    "auc": {
+     "S_ENTRY": 0.5,
+     "S_OWN": 0.5044,
+     "S_ALL": 0.4817,
+     "S_SPAN": 0.5176,
+     "EXTENT": 0.4387,
+     "NONNULL": 0.5167,
+     "R_BURST": 0.5533
+    },
+    "ci": {
+     "S_ENTRY": [
+      0.5,
+      0.5
+     ],
+     "S_OWN": [
+      0.4261,
+      0.5939
+     ],
+     "S_ALL": [
+      0.4011,
+      0.593
+     ],
+     "S_SPAN": [
+      0.408,
+      0.6302
+     ],
+     "EXTENT": [
+      0.3852,
+      0.5782
+     ],
+     "NONNULL": [
+      0.4189,
+      0.6034
+     ],
+     "R_BURST": [
+      0.4946,
+      0.6343
+     ]
+    },
+    "perm": {
+     "S_ENTRY": {
+      "q95": 0.5,
+      "mean": 0.5,
+      "p": 1
+     },
+     "S_OWN": {
+      "q95": 0.5749,
+      "mean": 0.4999,
+      "p": 0.435
+     },
+     "S_ALL": {
+      "q95": 0.5835,
+      "mean": 0.4986,
+      "p": 0.633
+     },
+     "S_SPAN": {
+      "q95": 0.5864,
+      "mean": 0.4998,
+      "p": 0.383
+     },
+     "EXTENT": {
+      "q95": 0.5539,
+      "mean": 0.5016,
+      "p": 0.96
+     },
+     "NONNULL": {
+      "q95": 0.5833,
+      "mean": 0.4995,
+      "p": 0.426
+     }
+    },
+    "controls": {
+     "R_LOGC": 0.5,
+     "R_POS": 0.4913,
+     "R_IPOS": 0.4747,
+     "R_FB": 0.5126,
+     "R_LEN": 0.4999,
+     "R_SL": 0.4939
+    },
+    "controlCI99": {
+     "R_LOGC": [
+      0.5,
+      0.5
+     ],
+     "R_POS": [
+      0.4318,
+      0.5858
+     ],
+     "R_IPOS": [
+      0.4369,
+      0.5224
+     ],
+     "R_FB": [
+      0.5065,
+      0.5281
+     ],
+     "R_LEN": [
+      0.4939,
+      0.5148
+     ],
+     "R_SL": [
+      0.4886,
+      0.5072
+     ]
+    },
+    "trace": {
+     "nonNullNames": 0.5,
+     "nonNullUnlabelled": 0.4667,
+     "medianExtentNames": 0,
+     "medianExtentUnlabelled": 0
+    },
+    "diffEntryMinusBurst": {
+     "point": -0.0533,
+     "lo": -0.1343,
+     "hi": 0.0054
+    },
+    "voidCell": true,
+    "controlsInBand": true,
+    "active": false
+   },
+   "c4_6": {
+    "n": 60,
+    "byStratum": {
+     "c4_6": 60
+    },
+    "auc": {
+     "S_ENTRY": 0.5167,
+     "S_OWN": 0.4389,
+     "S_ALL": 0.4282,
+     "S_SPAN": 0.4579,
+     "EXTENT": 0.4963,
+     "NONNULL": 0.4333,
+     "R_BURST": 0.6754
+    },
+    "ci": {
+     "S_ENTRY": [
+      0.5,
+      0.5476
+     ],
+     "S_OWN": [
+      0.351,
+      0.5422
+     ],
+     "S_ALL": [
+      0.36,
+      0.5203
+     ],
+     "S_SPAN": [
+      0.3746,
+      0.5636
+     ],
+     "EXTENT": [
+      0.3872,
+      0.5767
+     ],
+     "NONNULL": [
+      0.3676,
+      0.5192
+     ],
+     "R_BURST": [
+      0.6382,
+      0.7279
+     ]
+    },
+    "perm": {
+     "S_ENTRY": {
+      "q95": 0.5167,
+      "mean": 0.4997,
+      "p": 0.242
+     },
+     "S_OWN": {
+      "q95": 0.5764,
+      "mean": 0.4983,
+      "p": 0.91
+     },
+     "S_ALL": {
+      "q95": 0.5921,
+      "mean": 0.5021,
+      "p": 0.916
+     },
+     "S_SPAN": {
+      "q95": 0.5831,
+      "mean": 0.5003,
+      "p": 0.797
+     },
+     "EXTENT": {
+      "q95": 0.5742,
+      "mean": 0.4997,
+      "p": 0.524
+     },
+     "NONNULL": {
+      "q95": 0.5833,
+      "mean": 0.5005,
+      "p": 0.957
+     }
+    },
+    "controls": {
+     "R_LOGC": 0.5131,
+     "R_POS": 0.4933,
+     "R_IPOS": 0.4664,
+     "R_FB": 0.5436,
+     "R_LEN": 0.4996,
+     "R_SL": 0.5119
+    },
+    "controlCI99": {
+     "R_LOGC": [
+      0.5,
+      0.5269
+     ],
+     "R_POS": [
+      0.4058,
+      0.5527
+     ],
+     "R_IPOS": [
+      0.4495,
+      0.4956
+     ],
+     "R_FB": [
+      0.5234,
+      0.58
+     ],
+     "R_LEN": [
+      0.4971,
+      0.5007
+     ],
+     "R_SL": [
+      0.5,
+      0.5479
+     ]
+    },
+    "trace": {
+     "nonNullNames": 0.4167,
+     "nonNullUnlabelled": 0.55,
+     "medianExtentNames": 0,
+     "medianExtentUnlabelled": 0
+    },
+    "diffEntryMinusBurst": {
+     "point": -0.1587,
+     "lo": -0.1761,
+     "hi": -0.1382
+    },
+    "voidCell": true,
+    "controlsInBand": true,
+    "active": false
+   },
+   "c7_15": {
+    "n": 60,
+    "byStratum": {
+     "c7_15": 60
+    },
+    "auc": {
+     "S_ENTRY": 0.5083,
+     "S_OWN": 0.4992,
+     "S_ALL": 0.5289,
+     "S_SPAN": 0.5167,
+     "EXTENT": 0.5325,
+     "NONNULL": 0.525,
+     "R_BURST": 0.5596
+    },
+    "ci": {
+     "S_ENTRY": [
+      0.5,
+      0.5246
+     ],
+     "S_OWN": [
+      0.4292,
+      0.556
+     ],
+     "S_ALL": [
+      0.4638,
+      0.6035
+     ],
+     "S_SPAN": [
+      0.4718,
+      0.5776
+     ],
+     "EXTENT": [
+      0.4851,
+      0.6004
+     ],
+     "NONNULL": [
+      0.4851,
+      0.5636
+     ],
+     "R_BURST": [
+      0.504,
+      0.6006
+     ]
+    },
+    "perm": {
+     "S_ENTRY": {
+      "q95": 0.5083,
+      "mean": 0.5,
+      "p": 0.5
+     },
+     "S_OWN": {
+      "q95": 0.5772,
+      "mean": 0.5008,
+      "p": 0.531
+     },
+     "S_ALL": {
+      "q95": 0.5756,
+      "mean": 0.5,
+      "p": 0.285
+     },
+     "S_SPAN": {
+      "q95": 0.5803,
+      "mean": 0.4997,
+      "p": 0.37
+     },
+     "EXTENT": {
+      "q95": 0.564,
+      "mean": 0.5018,
+      "p": 0.226
+     },
+     "NONNULL": {
+      "q95": 0.575,
+      "mean": 0.5015,
+      "p": 0.364
+     }
+    },
+    "controls": {
+     "R_LOGC": 0.5138,
+     "R_POS": 0.5172,
+     "R_IPOS": 0.4553,
+     "R_FB": 0.5671,
+     "R_LEN": 0.5035,
+     "R_SL": 0.4831
+    },
+    "controlCI99": {
+     "R_LOGC": [
+      0.4785,
+      0.5346
+     ],
+     "R_POS": [
+      0.4936,
+      0.5586
+     ],
+     "R_IPOS": [
+      0.4005,
+      0.4972
+     ],
+     "R_FB": [
+      0.5124,
+      0.6608
+     ],
+     "R_LEN": [
+      0.5,
+      0.5092
+     ],
+     "R_SL": [
+      0.4449,
+      0.5024
+     ]
+    },
+    "trace": {
+     "nonNullNames": 0.55,
+     "nonNullUnlabelled": 0.5,
+     "medianExtentNames": 0,
+     "medianExtentUnlabelled": 0
+    },
+    "diffEntryMinusBurst": {
+     "point": -0.0513,
+     "lo": -0.1006,
+     "hi": 0.0238
+    },
+    "voidCell": true,
+    "controlsInBand": false,
+    "active": false
+   },
+   "c16p": {
+    "n": 60,
+    "byStratum": {
+     "c16p": 60
+    },
+    "auc": {
+     "S_ENTRY": 0.5,
+     "S_OWN": 0.5158,
+     "S_ALL": 0.516,
+     "S_SPAN": 0.5226,
+     "EXTENT": 0.5014,
+     "NONNULL": 0.5167,
+     "R_BURST": 0.4444
+    },
+    "ci": {
+     "S_ENTRY": [
+      0.5,
+      0.5
+     ],
+     "S_OWN": [
+      0.4742,
+      0.5539
+     ],
+     "S_ALL": [
+      0.4717,
+      0.5464
+     ],
+     "S_SPAN": [
+      0.4733,
+      0.5711
+     ],
+     "EXTENT": [
+      0.4697,
+      0.5529
+     ],
+     "NONNULL": [
+      0.4727,
+      0.557
+     ],
+     "R_BURST": [
+      0.2624,
+      0.5721
+     ]
+    },
+    "perm": {
+     "S_ENTRY": {
+      "q95": 0.5,
+      "mean": 0.5,
+      "p": 1
+     },
+     "S_OWN": {
+      "q95": 0.5703,
+      "mean": 0.5016,
+      "p": 0.386
+     },
+     "S_ALL": {
+      "q95": 0.5699,
+      "mean": 0.4991,
+      "p": 0.348
+     },
+     "S_SPAN": {
+      "q95": 0.5713,
+      "mean": 0.5,
+      "p": 0.301
+     },
+     "EXTENT": {
+      "q95": 0.5525,
+      "mean": 0.4995,
+      "p": 0.455
+     },
+     "NONNULL": {
+      "q95": 0.5667,
+      "mean": 0.499,
+      "p": 0.409
+     }
+    },
+    "controls": {
+     "R_LOGC": 0.5283,
+     "R_POS": 0.5022,
+     "R_IPOS": 0.4601,
+     "R_FB": 0.5114,
+     "R_LEN": 0.5224,
+     "R_SL": 0.4829
+    },
+    "controlCI99": {
+     "R_LOGC": [
+      0.492,
+      0.5927
+     ],
+     "R_POS": [
+      0.4504,
+      0.5618
+     ],
+     "R_IPOS": [
+      0.2622,
+      0.5587
+     ],
+     "R_FB": [
+      0.4914,
+      0.5316
+     ],
+     "R_LEN": [
+      0.5016,
+      0.5336
+     ],
+     "R_SL": [
+      0.4587,
+      0.5128
+     ]
+    },
+    "trace": {
+     "nonNullNames": 0.4333,
+     "nonNullUnlabelled": 0.4,
+     "medianExtentNames": 0,
+     "medianExtentUnlabelled": 0
+    },
+    "diffEntryMinusBurst": {
+     "point": 0.0556,
+     "lo": -0.0721,
+     "hi": 0.2376
+    },
+    "voidCell": true,
+    "controlsInBand": true,
+    "active": false
+   }
+  }
+ },
+ "pooled": {
+  "irc.A": {
+   "n": 529,
+   "byStratum": {
+    "c2": 112,
+    "c3": 112,
+    "c4_6": 112,
+    "c7_15": 112,
+    "c16p": 81
+   },
+   "auc": {
+    "S_ENTRY": 0.6096,
+    "S_OWN": 0.5903,
+    "S_ALL": 0.5565,
+    "S_SPAN": 0.6197,
+    "EXTENT": 0.5856,
+    "NONNULL": 0.5491,
+    "R_BURST": 0.6102
+   },
+   "ci": {
+    "S_ENTRY": [
+     0.582,
+     0.6394
+    ],
+    "S_OWN": [
+     0.5584,
+     0.6221
+    ],
+    "S_ALL": [
+     0.5264,
+     0.5883
+    ],
+    "S_SPAN": [
+     0.5859,
+     0.6511
+    ],
+    "EXTENT": [
+     0.55,
+     0.6203
+    ],
+    "NONNULL": [
+     0.5233,
+     0.5742
+    ],
+    "R_BURST": [
+     0.5732,
+     0.6439
+    ]
+   },
+   "perm": {
+    "S_ENTRY": {
+     "q95": 0.5208,
+     "mean": 0.4999,
+     "p": 0
+    },
+    "S_OWN": {
+     "q95": 0.5246,
+     "mean": 0.4993,
+     "p": 0
+    },
+    "S_ALL": {
+     "q95": 0.5274,
+     "mean": 0.4997,
+     "p": 0
+    },
+    "S_SPAN": {
+     "q95": 0.5257,
+     "mean": 0.4997,
+     "p": 0
+    },
+    "EXTENT": {
+     "q95": 0.5293,
+     "mean": 0.5,
+     "p": 0
+    },
+    "NONNULL": {
+     "q95": 0.5246,
+     "mean": 0.5011,
+     "p": 0
+    }
+   },
+   "controls": {
+    "R_LOGC": 0.514,
+    "R_POS": 0.5028,
+    "R_IPOS": 0.5,
+    "R_FB": 0.4734,
+    "R_LEN": 0.5222,
+    "R_SL": 0.5118
+   },
+   "controlCI99": {
+    "R_LOGC": [
+     0.4971,
+     0.5354
+    ],
+    "R_POS": [
+     0.4752,
+     0.5285
+    ],
+    "R_IPOS": [
+     0.5,
+     0.5
+    ],
+    "R_FB": [
+     0.4428,
+     0.5019
+    ],
+    "R_LEN": [
+     0.5106,
+     0.537
+    ],
+    "R_SL": [
+     0.4864,
+     0.5379
+    ]
+   },
+   "trace": {
+    "nonNullNames": 0.7429,
+    "nonNullUnlabelled": 0.6446,
+    "medianExtentNames": 382,
+    "medianExtentUnlabelled": 13
+   },
+   "diffEntryMinusBurst": {
+    "point": -0.0005,
+    "lo": -0.0402,
+    "hi": 0.0361
+   },
+   "voidCell": true,
+   "controlsInBand": true,
+   "voidPooled": false
+  },
+  "irc.B": {
+   "n": 433,
+   "byStratum": {
+    "c2": 86,
+    "c3": 86,
+    "c4_6": 98,
+    "c7_15": 100,
+    "c16p": 63
+   },
+   "auc": {
+    "S_ENTRY": 0.6513,
+    "S_OWN": 0.5985,
+    "S_ALL": 0.5807,
+    "S_SPAN": 0.5736,
+    "EXTENT": 0.6291,
+    "NONNULL": 0.5785,
+    "R_BURST": 0.5314
+   },
+   "ci": {
+    "S_ENTRY": [
+     0.6179,
+     0.6847
+    ],
+    "S_OWN": [
+     0.564,
+     0.6322
+    ],
+    "S_ALL": [
+     0.5428,
+     0.6173
+    ],
+    "S_SPAN": [
+     0.5353,
+     0.6127
+    ],
+    "EXTENT": [
+     0.5867,
+     0.6738
+    ],
+    "NONNULL": [
+     0.5435,
+     0.6126
+    ],
+    "R_BURST": [
+     0.5038,
+     0.5571
+    ]
+   },
+   "perm": {
+    "S_ENTRY": {
+     "q95": 0.5219,
+     "mean": 0.4996,
+     "p": 0
+    },
+    "S_OWN": {
+     "q95": 0.5301,
+     "mean": 0.5001,
+     "p": 0
+    },
+    "S_ALL": {
+     "q95": 0.5323,
+     "mean": 0.5004,
+     "p": 0
+    },
+    "S_SPAN": {
+     "q95": 0.5318,
+     "mean": 0.5007,
+     "p": 0.001
+    },
+    "EXTENT": {
+     "q95": 0.5294,
+     "mean": 0.5004,
+     "p": 0
+    },
+    "NONNULL": {
+     "q95": 0.5277,
+     "mean": 0.5004,
+     "p": 0
+    }
+   },
+   "controls": {
+    "R_LOGC": 0.5037,
+    "R_POS": 0.4892,
+    "R_IPOS": 0.4935,
+    "R_FB": 0.4905,
+    "R_LEN": 0.5087,
+    "R_SL": 0.4607
+   },
+   "controlCI99": {
+    "R_LOGC": [
+     0.4901,
+     0.517
+    ],
+    "R_POS": [
+     0.4567,
+     0.5104
+    ],
+    "R_IPOS": [
+     0.4708,
+     0.5159
+    ],
+    "R_FB": [
+     0.4763,
+     0.5013
+    ],
+    "R_LEN": [
+     0.4998,
+     0.5229
+    ],
+    "R_SL": [
+     0.4363,
+     0.4795
+    ]
+   },
+   "trace": {
+    "nonNullNames": 0.6374,
+    "nonNullUnlabelled": 0.4804,
+    "medianExtentNames": 2,
+    "medianExtentUnlabelled": 0
+   },
+   "diffEntryMinusBurst": {
+    "point": 0.1198,
+    "lo": 0.0858,
+    "hi": 0.1559
+   },
+   "voidCell": true,
+   "controlsInBand": true,
+   "voidPooled": false
+  },
+  "wp.A": {
+   "n": 144,
+   "byStratum": {
+    "c2": 30,
+    "c3": 30,
+    "c4_6": 30,
+    "c7_15": 30,
+    "c16p": 24
+   },
+   "auc": {
+    "S_ENTRY": 0.5278,
+    "S_OWN": 0.4885,
+    "S_ALL": 0.4795,
+    "S_SPAN": 0.4631,
+    "EXTENT": 0.469,
+    "NONNULL": 0.4722,
+    "R_BURST": 0.6768
+   },
+   "ci": {
+    "S_ENTRY": [
+     0.4951,
+     0.5571
+    ],
+    "S_OWN": [
+     0.4356,
+     0.5307
+    ],
+    "S_ALL": [
+     0.426,
+     0.5118
+    ],
+    "S_SPAN": [
+     0.3922,
+     0.5101
+    ],
+    "EXTENT": [
+     0.3779,
+     0.5234
+    ],
+    "NONNULL": [
+     0.4286,
+     0.5066
+    ],
+    "R_BURST": [
+     0.6468,
+     0.7076
+    ]
+   },
+   "perm": {
+    "S_ENTRY": {
+     "q95": 0.5208,
+     "mean": 0.5005,
+     "p": 0.047
+    },
+    "S_OWN": {
+     "q95": 0.5409,
+     "mean": 0.499,
+     "p": 0.657
+    },
+    "S_ALL": {
+     "q95": 0.546,
+     "mean": 0.501,
+     "p": 0.781
+    },
+    "S_SPAN": {
+     "q95": 0.5469,
+     "mean": 0.4999,
+     "p": 0.903
+    },
+    "EXTENT": {
+     "q95": 0.5469,
+     "mean": 0.4986,
+     "p": 0.826
+    },
+    "NONNULL": {
+     "q95": 0.5417,
+     "mean": 0.501,
+     "p": 0.89
+    }
+   },
+   "controls": {
+    "R_LOGC": 0.5323,
+    "R_POS": 0.4969,
+    "R_IPOS": 0.5,
+    "R_FB": 0.4954,
+    "R_LEN": 0.526,
+    "R_SL": 0.5054
+   },
+   "controlCI99": {
+    "R_LOGC": [
+     0.5127,
+     0.5698
+    ],
+    "R_POS": [
+     0.4225,
+     0.5331
+    ],
+    "R_IPOS": [
+     0.5,
+     0.5
+    ],
+    "R_FB": [
+     0.4844,
+     0.5075
+    ],
+    "R_LEN": [
+     0.5072,
+     0.5604
+    ],
+    "R_SL": [
+     0.4505,
+     0.5646
+    ]
+   },
+   "trace": {
+    "nonNullNames": 0.4167,
+    "nonNullUnlabelled": 0.4722,
+    "medianExtentNames": 0,
+    "medianExtentUnlabelled": 0
+   },
+   "diffEntryMinusBurst": {
+    "point": -0.149,
+    "lo": -0.1689,
+    "hi": -0.1336
+   },
+   "voidCell": true,
+   "controlsInBand": true,
+   "voidPooled": false
+  },
+  "wp.B": {
+   "n": 300,
+   "byStratum": {
+    "c2": 60,
+    "c3": 60,
+    "c4_6": 60,
+    "c7_15": 60,
+    "c16p": 60
+   },
+   "auc": {
+    "S_ENTRY": 0.505,
+    "S_OWN": 0.4698,
+    "S_ALL": 0.4932,
+    "S_SPAN": 0.4691,
+    "EXTENT": 0.4552,
+    "NONNULL": 0.4883,
+    "R_BURST": 0.573
+   },
+   "ci": {
+    "S_ENTRY": [
+     0.5,
+     0.5108
+    ],
+    "S_OWN": [
+     0.4356,
+     0.5052
+    ],
+    "S_ALL": [
+     0.4733,
+     0.5135
+    ],
+    "S_SPAN": [
+     0.4472,
+     0.4912
+    ],
+    "EXTENT": [
+     0.4353,
+     0.4743
+    ],
+    "NONNULL": [
+     0.4752,
+     0.5036
+    ],
+    "R_BURST": [
+     0.5352,
+     0.6164
+    ]
+   },
+   "perm": {
+    "S_ENTRY": {
+     "q95": 0.505,
+     "mean": 0.5001,
+     "p": 0.143
+    },
+    "S_OWN": {
+     "q95": 0.5337,
+     "mean": 0.4995,
+     "p": 0.923
+    },
+    "S_ALL": {
+     "q95": 0.536,
+     "mean": 0.4995,
+     "p": 0.615
+    },
+    "S_SPAN": {
+     "q95": 0.5352,
+     "mean": 0.5006,
+     "p": 0.926
+    },
+    "EXTENT": {
+     "q95": 0.531,
+     "mean": 0.4986,
+     "p": 0.985
+    },
+    "NONNULL": {
+     "q95": 0.5317,
+     "mean": 0.4996,
+     "p": 0.735
+    }
+   },
+   "controls": {
+    "R_LOGC": 0.511,
+    "R_POS": 0.5022,
+    "R_IPOS": 0.4623,
+    "R_FB": 0.5296,
+    "R_LEN": 0.5051,
+    "R_SL": 0.4948
+   },
+   "controlCI99": {
+    "R_LOGC": [
+     0.5014,
+     0.5241
+    ],
+    "R_POS": [
+     0.4657,
+     0.5316
+    ],
+    "R_IPOS": [
+     0.4315,
+     0.4832
+    ],
+    "R_FB": [
+     0.5175,
+     0.5484
+    ],
+    "R_LEN": [
+     0.5026,
+     0.5076
+    ],
+    "R_SL": [
+     0.4912,
+     0.502
+    ]
+   },
+   "trace": {
+    "nonNullNames": 0.55,
+    "nonNullUnlabelled": 0.5733,
+    "medianExtentNames": 0,
+    "medianExtentUnlabelled": 0
+   },
+   "diffEntryMinusBurst": {
+    "point": -0.068,
+    "lo": -0.1056,
+    "hi": -0.0368
+   },
+   "voidCell": true,
+   "controlsInBand": true,
+   "voidPooled": false
+  }
+ },
+ "probes": {
+  "irc.A": {
+   "record": {
+    "auc": 0.7918,
+    "ci": [
+     0.7586,
+     0.8222
+    ],
+    "perStratum": {
+     "c2": 0.8057,
+     "c3": 0.7446,
+     "c4_6": 0.7902,
+     "c7_15": 0.7728,
+     "c16p": 0.8665
+    }
+   },
+   "controlVector": {
+    "auc": 0.5328,
+    "ci": [
+     0.5169,
+     0.5514
+    ],
+    "perStratum": {
+     "c2": 0.5087,
+     "c3": 0.5238,
+     "c4_6": 0.557,
+     "c7_15": 0.5243,
+     "c16p": 0.5571
+    }
+   },
+   "diffToEntry": {
+    "point": 0.1822,
+    "lo": 0.1554,
+    "hi": 0.2162
+   }
+  },
+  "irc.B": {
+   "record": {
+    "auc": 0.7671,
+    "ci": [
+     0.7273,
+     0.8062
+    ],
+    "perStratum": {
+     "c2": 0.6733,
+     "c3": 0.7278,
+     "c4_6": 0.7457,
+     "c7_15": 0.8131,
+     "c16p": 0.909
+    }
+   },
+   "controlVector": {
+    "auc": 0.5574,
+    "ci": [
+     0.5339,
+     0.5835
+    ],
+    "perStratum": {
+     "c2": 0.5855,
+     "c3": 0.5435,
+     "c4_6": 0.542,
+     "c7_15": 0.5635,
+     "c16p": 0.5525
+    }
+   },
+   "diffToEntry": {
+    "point": 0.1158,
+    "lo": 0.0879,
+    "hi": 0.1429
+   }
+  },
+  "wp.A": {
+   "record": {
+    "auc": 0.6739,
+    "ci": [
+     0.6551,
+     0.6917
+    ],
+    "perStratum": {
+     "c2": 0.7211,
+     "c3": 0.6433,
+     "c4_6": 0.6567,
+     "c7_15": 0.6289,
+     "c16p": 0.7309
+    }
+   },
+   "controlVector": {
+    "auc": 0.5052,
+    "ci": [
+     0.487,
+     0.5162
+    ],
+    "perStratum": {
+     "c2": 0.5144,
+     "c3": 0.5056,
+     "c4_6": 0.5144,
+     "c7_15": 0.5044,
+     "c16p": 0.4826
+    }
+   },
+   "diffToEntry": {
+    "point": 0.1461,
+    "lo": 0.1208,
+    "hi": 0.1726
+   }
+  },
+  "wp.B": {
+   "record": {
+    "auc": 0.6331,
+    "ci": [
+     0.5962,
+     0.6587
+    ],
+    "perStratum": {
+     "c2": 0.6806,
+     "c3": 0.625,
+     "c4_6": 0.6164,
+     "c7_15": 0.5772,
+     "c16p": 0.6661
+    }
+   },
+   "controlVector": {
+    "auc": 0.5344,
+    "ci": [
+     0.5065,
+     0.5579
+    ],
+    "perStratum": {
+     "c2": 0.5481,
+     "c3": 0.5003,
+     "c4_6": 0.5383,
+     "c7_15": 0.5469,
+     "c16p": 0.5386
+    }
+   },
+   "diffToEntry": {
+    "point": 0.1281,
+    "lo": 0.0962,
+    "hi": 0.1554
+   }
+  }
+ },
+ "rules": [
+  {
+   "kind": "irc",
+   "group": "B",
+   "strata": [
+    "c16p"
+   ],
+   "score": "EXTENT",
+   "direction": "higher = name",
+   "threshold": 6,
+   "thresholdFittedOnDiscovery": true,
+   "discoveryAuc": 0.8907,
+   "ci95": [
+    0.8159,
+    0.9454
+   ],
+   "pairs": 63,
+   "balancedAccuracyAtThreshold": {
+    "T": 6,
+    "tpr": 0.7937,
+    "tnr": 0.9683,
+    "ba": 0.881
+   },
+   "allScoresStratAuc": {
+    "S_ENTRY": 0.873,
+    "S_OWN": 0.792,
+    "S_ALL": 0.7611,
+    "S_SPAN": 0.7098,
+    "EXTENT": 0.8907,
+    "NONNULL": 0.754
+   },
+   "consistencyPerBlock": [
+    [
+     "ubuntu/2005-07-15",
+     0.8622,
+     14
+    ],
+    [
+     "ubuntu/2008-03-15",
+     0.9615,
+     13
+    ],
+    [
+     "ubuntu/2008-07-15",
+     0.9643,
+     14
+    ],
+    [
+     "ubuntu/2010-03-15",
+     0.8495,
+     14
+    ]
+   ],
+   "gates": {
+    "pairs": true,
+    "consistency": true
+   },
+   "pass": true,
+   "id": "irc.B:c16p..c16p"
+  },
+  {
+   "kind": "irc",
+   "group": "A",
+   "strata": [
+    "c4_6",
+    "c7_15"
+   ],
+   "score": "S_ENTRY",
+   "direction": "higher = name",
+   "threshold": 1,
+   "thresholdFittedOnDiscovery": true,
+   "discoveryAuc": 0.6808,
+   "ci95": [
+    0.6352,
+    0.7245
+   ],
+   "pairs": 224,
+   "balancedAccuracyAtThreshold": {
+    "T": 1,
+    "tpr": 0.808,
+    "tnr": 0.5536,
+    "ba": 0.6808
+   },
+   "allScoresStratAuc": {
+    "S_ENTRY": 0.6808,
+    "S_OWN": 0.6507,
+    "S_ALL": 0.5977,
+    "S_SPAN": 0.6605,
+    "EXTENT": 0.6651,
+    "NONNULL": 0.6094
+   },
+   "consistencyPerBlock": [
+    [
+     "kubuntu/2009-03-15",
+     0.8214,
+     28
+    ],
+    [
+     "ubuntu/2005-07-15",
+     0.6964,
+     28
+    ],
+    [
+     "ubuntu/2008-03-15",
+     0.625,
+     28
+    ],
+    [
+     "ubuntu/2008-07-15",
+     0.5893,
+     28
+    ],
+    [
+     "ubuntu/2010-03-15",
+     0.5893,
+     28
+    ],
+    [
+     "ubuntu/2010-07-15",
+     0.75,
+     28
+    ],
+    [
+     "ubuntu/2013-03-15",
+     0.6071,
+     28
+    ],
+    [
+     "ubuntu/2015-07-15",
+     0.7679,
+     28
+    ]
+   ],
+   "gates": {
+    "pairs": true,
+    "consistency": true
+   },
+   "pass": true,
+   "id": "irc.A:c4_6..c7_15"
+  }
+ ],
+ "candidates": [
+  {
+   "kind": "irc",
+   "group": "A",
+   "strata": [
+    "c4_6",
+    "c7_15"
+   ],
+   "score": "S_ENTRY",
+   "direction": "higher = name",
+   "threshold": 1,
+   "thresholdFittedOnDiscovery": true,
+   "discoveryAuc": 0.6808,
+   "ci95": [
+    0.6352,
+    0.7245
+   ],
+   "pairs": 224,
+   "balancedAccuracyAtThreshold": {
+    "T": 1,
+    "tpr": 0.808,
+    "tnr": 0.5536,
+    "ba": 0.6808
+   },
+   "allScoresStratAuc": {
+    "S_ENTRY": 0.6808,
+    "S_OWN": 0.6507,
+    "S_ALL": 0.5977,
+    "S_SPAN": 0.6605,
+    "EXTENT": 0.6651,
+    "NONNULL": 0.6094
+   },
+   "consistencyPerBlock": [
+    [
+     "kubuntu/2009-03-15",
+     0.8214,
+     28
+    ],
+    [
+     "ubuntu/2005-07-15",
+     0.6964,
+     28
+    ],
+    [
+     "ubuntu/2008-03-15",
+     0.625,
+     28
+    ],
+    [
+     "ubuntu/2008-07-15",
+     0.5893,
+     28
+    ],
+    [
+     "ubuntu/2010-03-15",
+     0.5893,
+     28
+    ],
+    [
+     "ubuntu/2010-07-15",
+     0.75,
+     28
+    ],
+    [
+     "ubuntu/2013-03-15",
+     0.6071,
+     28
+    ],
+    [
+     "ubuntu/2015-07-15",
+     0.7679,
+     28
+    ]
+   ],
+   "gates": {
+    "pairs": true,
+    "consistency": true
+   },
+   "pass": true,
+   "id": "irc.A:c4_6..c7_15"
+  },
+  {
+   "kind": "irc",
+   "group": "B",
+   "strata": [
+    "c4_6"
+   ],
+   "score": "EXTENT",
+   "direction": "higher = name",
+   "threshold": 3,
+   "thresholdFittedOnDiscovery": true,
+   "discoveryAuc": 0.6886,
+   "ci95": [
+    0.628,
+    0.7404
+   ],
+   "pairs": 98,
+   "balancedAccuracyAtThreshold": {
+    "T": 3,
+    "tpr": 0.4592,
+    "tnr": 0.9286,
+    "ba": 0.6939
+   },
+   "allScoresStratAuc": {
+    "S_ENTRY": 0.6582,
+    "S_OWN": 0.5836,
+    "S_ALL": 0.612,
+    "S_SPAN": 0.5819,
+    "EXTENT": 0.6886,
+    "NONNULL": 0.5918
+   },
+   "consistencyPerBlock": [
+    [
+     "kubuntu/2009-03-15",
+     0.8125,
+     8
+    ],
+    [
+     "ubuntu/2005-07-15",
+     0.5816,
+     14
+    ],
+    [
+     "ubuntu/2008-03-15",
+     0.7143,
+     14
+    ],
+    [
+     "ubuntu/2008-07-15",
+     0.7143,
+     14
+    ],
+    [
+     "ubuntu/2010-03-15",
+     0.6531,
+     14
+    ],
+    [
+     "ubuntu/2010-07-15",
+     0.4745,
+     14
+    ],
+    [
+     "ubuntu/2013-03-15",
+     0.8951,
+     9
+    ],
+    [
+     "ubuntu/2015-07-15",
+     0.8017,
+     11
+    ]
+   ],
+   "gates": {
+    "pairs": true,
+    "consistency": true
+   },
+   "pass": true,
+   "id": "irc.B:c4_6..c4_6"
+  },
+  {
+   "kind": "irc",
+   "group": "B",
+   "strata": [
+    "c16p"
+   ],
+   "score": "EXTENT",
+   "direction": "higher = name",
+   "threshold": 6,
+   "thresholdFittedOnDiscovery": true,
+   "discoveryAuc": 0.8907,
+   "ci95": [
+    0.8159,
+    0.9454
+   ],
+   "pairs": 63,
+   "balancedAccuracyAtThreshold": {
+    "T": 6,
+    "tpr": 0.7937,
+    "tnr": 0.9683,
+    "ba": 0.881
+   },
+   "allScoresStratAuc": {
+    "S_ENTRY": 0.873,
+    "S_OWN": 0.792,
+    "S_ALL": 0.7611,
+    "S_SPAN": 0.7098,
+    "EXTENT": 0.8907,
+    "NONNULL": 0.754
+   },
+   "consistencyPerBlock": [
+    [
+     "ubuntu/2005-07-15",
+     0.8622,
+     14
+    ],
+    [
+     "ubuntu/2008-03-15",
+     0.9615,
+     13
+    ],
+    [
+     "ubuntu/2008-07-15",
+     0.9643,
+     14
+    ],
+    [
+     "ubuntu/2010-03-15",
+     0.8495,
+     14
+    ]
+   ],
+   "gates": {
+    "pairs": true,
+    "consistency": true
+   },
+   "pass": true,
+   "id": "irc.B:c16p..c16p"
+  }
+ ],
+ "predictions": {
+  "P1_fragility_gradient": {
+   "hold": false,
+   "aucs": {
+    "c2": 0.5,
+    "c3": 0.5714,
+    "c4_6": 0.7545,
+    "c7_15": 0.6071,
+    "c16p": 0.6173
+   }
+  },
+  "P2_floor": {
+   "hold": false,
+   "detail": [
+    [
+     "irc.A",
+     null,
+     null
+    ],
+    [
+     "irc.B",
+     null,
+     null
+    ],
+    [
+     "wp.A",
+     null,
+     null
+    ],
+    [
+     "wp.B",
+     null,
+     null
+    ]
+   ]
+  },
+  "P3_matching_collapses_irc": {
+   "hold": true,
+   "value": 0.6096
+  },
+  "P4_wp": {
+   "hold": false,
+   "aucs": {
+    "c2": 0.5,
+    "c3": 0.5,
+    "c4_6": 0.5167,
+    "c7_15": 0.5083,
+    "c16p": 0.5
+   }
+  },
+  "P5_record_beats_scalar": {
+   "hold": true,
+   "diffs": [
+    [
+     "irc.A",
+     0.1822
+    ],
+    [
+     "irc.B",
+     0.1158
+    ],
+    [
+     "wp.A",
+     0.1461
+    ],
+    [
+     "wp.B",
+     0.1281
+    ]
+   ]
+  },
+  "P6_extent": {
+   "hold": false,
+   "extent": 0.5856,
+   "entry": 0.6096
+  },
+  "P7_decay": {
+   "hold": false,
+   "byStratum": {
+    "c1": [
+     null,
+     null
+    ],
+    "c2": [
+     0.4821,
+     0.7232
+    ],
+    "c3": [
+     0.5536,
+     0.4286
+    ],
+    "c4_6": [
+     0.8661,
+     0.5446
+    ],
+    "c7_15": [
+     0.9196,
+     0.8036
+    ],
+    "c16p": [
+     0.9506,
+     0.7531
+    ]
+   }
+  }
+ },
+ "runValid": true,
+ "verdict": {
+  "FRAGILITY_SUPPORTED": false,
+  "COUNT_INDEPENDENT_kinds": [],
+  "NO_SCOPE": false,
+  "activeCells": [
+   "irc.A:c4_6",
+   "irc.A:c7_15",
+   "irc.B:c4_6",
+   "irc.B:c16p"
+  ],
+  "runValid": true
+ },
+ "headerSha256": "339480a6bc5e603a6f1a421a013dbfee6bf3ec2a5ca161a42d199a0e7e2e393d",
+ "seconds": 131.9
+}

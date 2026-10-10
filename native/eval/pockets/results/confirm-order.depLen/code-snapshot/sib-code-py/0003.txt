@@ -1,0 +1,60 @@
+#!/usr/bin/env python3
+"""Collect every source record in the NPJ repo into one inventory."""
+import json, glob, os, re, sys
+
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+
+def records_from_json(path):
+    out = []
+    try: d = json.load(open(path))
+    except Exception: return out
+    arr = d.get("sources") if isinstance(d, dict) else None
+    if isinstance(arr, list):
+        for s in arr:
+            if isinstance(s, dict): out.append(s)
+    return out
+
+def records_from_jsonl(path):
+    out = []
+    for line in open(path):
+        line = line.strip()
+        if not line: continue
+        try: ev = json.loads(line)
+        except Exception: continue
+        op = ev.get("operand", ev)
+        srcs = op.get("sources") if isinstance(op, dict) else None
+        if isinstance(srcs, dict):
+            for k, v in srcs.items():
+                if isinstance(v, dict):
+                    rec = dict(v); rec.setdefault("key", k); out.append(rec)
+    return out
+
+def main():
+    found = {}   # original_url -> record (richest)
+    places = {}  # original_url -> [locations]
+    for path in glob.glob(os.path.join(ROOT, "**", "*.sources.json"), recursive=True):
+        for r in records_from_json(path):
+            add(found, places, r, os.path.relpath(path, ROOT))
+    for path in glob.glob(os.path.join(ROOT, "articles", "**", "*.jsonl"), recursive=True):
+        for r in records_from_jsonl(path):
+            add(found, places, r, os.path.relpath(path, ROOT))
+    json.dump({"sources": found, "places": places}, sys.stdout, indent=1)
+
+def add(found, places, r, where):
+    ou = (r.get("original_url") or "").strip()
+    if not ou: return
+    places.setdefault(ou, [])
+    if where not in places[ou]: places[ou].append(where)
+    cur = found.get(ou)
+    # keep the richest record (real title/outlet/archive)
+    def score(x):
+        if not x: return -1
+        s = 0
+        if x.get("title"): s += 1
+        if x.get("outlet"): s += 1
+        if re.search(r"web\.archive\.org/web/\d{14}", x.get("archive_url") or ""): s += 4
+        elif x.get("archive_url"): s += 1
+        return s
+    if score(r) > score(cur): found[ou] = r
+
+if __name__ == "__main__": main()

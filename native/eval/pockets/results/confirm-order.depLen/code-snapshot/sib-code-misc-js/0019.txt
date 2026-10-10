@@ -1,0 +1,103 @@
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import { existsSync, lstatSync, mkdirSync, readFileSync, readlinkSync, statSync, symlinkSync, writeFileSync, readdirSync } from "node:fs";
+import { join } from "node:path";
+import { ensureHome, linkState, loadEnvFile, parseEnvText } from "../server/state.mjs";
+import { tmp } from "./helpers.mjs";
+
+test("ensureHome makes data/ logs/ run/ and a 0600 fold.env, and is idempotent", () => {
+  const t = tmp();
+  try {
+    const home = join(t.dir, "h");
+    const d = ensureHome(home);
+    for (const sub of ["data", "logs", "run"]) assert.ok(statSync(join(home, sub)).isDirectory());
+    assert.equal(statSync(d.envFile).mode & 0o777, 0o600);
+    writeFileSync(d.envFile, "KEEP=me\n");
+    ensureHome(home);
+    assert.equal(readFileSync(d.envFile, "utf8"), "KEEP=me\n");
+    assert.equal(statSync(d.envFile).mode & 0o777, 0o600);
+  } finally { t.cleanup(); }
+});
+
+test("fold.env parses KEY=VALUE and never overrides what the environment already has", () => {
+  const t = tmp();
+  try {
+    const f = join(t.dir, "fold.env");
+    writeFileSync(f, "# c\nA=1\nexport B=\"two words\"\nC='x'\nbad line\nSECRET=s3cr3t\n");
+    assert.deepEqual(parseEnvText(readFileSync(f, "utf8")), { A: "1", B: "two words", C: "x", SECRET: "s3cr3t" });
+    const env = { A: "preset" };
+    const applied = loadEnvFile(f, env);
+    assert.equal(env.A, "preset");
+    assert.equal(env.B, "two words");
+    assert.ok(!applied.includes("A"));
+    assert.deepEqual(loadEnvFile(join(t.dir, "absent.env"), {}), []);
+  } finally { t.cleanup(); }
+});
+
+test("linkState: moves existing contents into an empty target and links, deleting nothing", () => {
+  const t = tmp();
+  try {
+    const organ = join(t.dir, "khora"); const home = join(t.dir, "home");
+    mkdirSync(join(organ, "state"), { recursive: true });
+    writeFileSync(join(organ, "state", "a.json"), "{\"a\":1}");
+    mkdirSync(join(organ, "gym"), { recursive: true });
+    writeFileSync(join(organ, "gym", "swatch.jsonl"), "line\n");
+    const r = linkState(organ, { state: "state", swatch: "gym/swatch.jsonl" }, home);
+    assert.deepEqual(r.map((x) => x.action), ["migrated", "migrated"]);
+    assert.ok(lstatSync(join(organ, "state")).isSymbolicLink());
+    assert.equal(readFileSync(join(home, "data", "khora", "state", "a.json"), "utf8"), "{\"a\":1}");
+    assert.equal(readFileSync(join(organ, "gym", "swatch.jsonl"), "utf8"), "line\n"); // readable through the link
+    assert.equal(readFileSync(join(home, "data", "khora", "swatch"), "utf8"), "line\n");
+    // idempotent
+    assert.deepEqual(linkState(organ, { state: "state", swatch: "gym/swatch.jsonl" }, home).map((x) => x.action), ["linked", "linked"]);
+  } finally { t.cleanup(); }
+});
+
+test("linkState: a non-empty target and non-empty local content is a conflict and both are left untouched", () => {
+  const t = tmp();
+  try {
+    const organ = join(t.dir, "penelope"); const home = join(t.dir, "home");
+    mkdirSync(join(organ, "state"), { recursive: true });
+    writeFileSync(join(organ, "state", "local.txt"), "L");
+    mkdirSync(join(home, "data", "penelope", "state"), { recursive: true });
+    writeFileSync(join(home, "data", "penelope", "state", "target.txt"), "T");
+    const [r] = linkState(organ, { state: "state" }, home);
+    assert.equal(r.action, "conflict");
+    assert.ok(!lstatSync(join(organ, "state")).isSymbolicLink());
+    assert.equal(readFileSync(join(organ, "state", "local.txt"), "utf8"), "L");
+    assert.equal(readFileSync(join(home, "data", "penelope", "state", "target.txt"), "utf8"), "T");
+    assert.deepEqual(readdirSync(join(home, "data", "penelope", "state")), ["target.txt"]);
+  } finally { t.cleanup(); }
+});
+
+test("linkState: an empty target dir is replaced by the migrated contents; a foreign symlink is left alone", () => {
+  const t = tmp();
+  try {
+    const organ = join(t.dir, "janus"); const home = join(t.dir, "home");
+    mkdirSync(join(organ, "state"), { recursive: true });
+    writeFileSync(join(organ, "state", "x"), "x");
+    mkdirSync(join(home, "data", "janus", "state"), { recursive: true }); // empty placeholder
+    assert.equal(linkState(organ, { state: "state" }, home)[0].action, "migrated");
+    assert.equal(readFileSync(join(home, "data", "janus", "state", "x"), "utf8"), "x");
+
+    const elsewhere = join(t.dir, "elsewhere"); mkdirSync(elsewhere);
+    symlinkSync(elsewhere, join(organ, "documents"));
+    assert.equal(linkState(organ, { documents: "documents" }, home)[0].action, "foreign-link");
+    assert.equal(readlinkSync(join(organ, "documents")), elsewhere);
+  } finally { t.cleanup(); }
+});
+
+test("linkState: nothing local -> target prepared and linked; escaping paths are rejected", () => {
+  const t = tmp();
+  try {
+    const organ = join(t.dir, "khora"); const home = join(t.dir, "home");
+    mkdirSync(organ);
+    const r = linkState(organ, { documents: "documents", log: "x/y.jsonl", bad: "../oops" }, home);
+    assert.deepEqual(r.map((x) => x.action), ["created", "created", "rejected"]);
+    assert.ok(statSync(join(home, "data", "khora", "documents")).isDirectory());
+    assert.ok(!existsSync(join(home, "data", "khora", "log"))); // a file target stays absent until first write
+    writeFileSync(join(organ, "x", "y.jsonl"), "w"); // writing through the dangling link creates the target
+    assert.equal(readFileSync(join(home, "data", "khora", "log"), "utf8"), "w");
+    assert.ok(!existsSync(join(t.dir, "oops")));
+  } finally { t.cleanup(); }
+});

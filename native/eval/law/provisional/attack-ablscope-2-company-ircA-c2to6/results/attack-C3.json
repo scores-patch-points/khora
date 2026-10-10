@@ -1,0 +1,82 @@
+{
+ "ruleId": "ablscope-2-company-ircA-c2to6",
+ "attack": "C3 c2 residual",
+ "headerSha256": "278ae754933750f9c223b4271438efdaf8f98ddef8d2588333c4de29e546f063",
+ "B": 1000,
+ "S1": {
+  "c2Pairs": 88,
+  "aucNegDSelf": 0.8159,
+  "aucRInit": 0.7841,
+  "delta2": {
+   "point": 0.0318,
+   "ci": [
+    -0.0166,
+    0.084
+   ]
+  },
+  "ties": {
+   "c2": {
+    "n": 30,
+    "auc": 0.6244,
+    "ci": [
+     0.4956,
+     0.7549
+    ]
+   },
+   "c3": {
+    "n": 12,
+    "auc": null
+   },
+   "c4_6": {
+    "n": 20,
+    "auc": null
+   }
+  },
+  "c2TiesDims": {
+   "-d.log1p_count": 0.5,
+   "-d.distLeft": 0.5,
+   "-d.distRight": 0.5833,
+   "-d.entLeft": 0.4994,
+   "-d.entRight": 0.4072,
+   "-d.initShare": 0.5,
+   "-d.finalShare": 0.5167
+  },
+  "c2TiesFixFirst": 0.6078
+ },
+ "S2": {
+  "c2Pairs": 36,
+  "aucNegDSelf": 0.9012,
+  "aucRInit": 0.8611,
+  "delta2": {
+   "point": 0.0401,
+   "ci": [
+    -0.02,
+    0.0983
+   ]
+  },
+  "ties": {
+   "c2": {
+    "n": 10,
+    "auc": null
+   },
+   "c3": {
+    "n": 7,
+    "auc": null
+   },
+   "c4_6": {
+    "n": 4,
+    "auc": null
+   }
+  },
+  "c2TiesDims": {
+   "-d.log1p_count": null,
+   "-d.distLeft": null,
+   "-d.distRight": null,
+   "-d.entLeft": null,
+   "-d.entRight": null,
+   "-d.initShare": null,
+   "-d.finalShare": null
+  }
+ },
+ "necessaryAtC2": false
+}

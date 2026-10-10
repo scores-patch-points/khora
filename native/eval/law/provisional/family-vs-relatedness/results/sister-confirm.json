@@ -1,0 +1,6979 @@
+{
+ "headerSha256": "b942f9ade8230eb7bde73ae653682c371316501c32c9c3fe88bb38f8a8f32638",
+ "groupsSha256": "b2cad7b4a50c77400c1dfc82a91d53092b9327aaa138dbdf1a1ea07e300650d7",
+ "libSha256": "eaa1d06de53f4ab04a861b646e8d0e0e79bdf71bac2cdb6fbaac4486d024bfe4",
+ "analysisSha256": "cc19ee5bfc496a877c429d0380cf21e30be0e51c3d5b51ac27ec2d7ff9311868",
+ "subbranchSha256": "18ff98ee2e120064b993f282652964271ee9bff4bb3de3cf393f766b5075bac6",
+ "scope": [
+  "IWR",
+  "NGm",
+  "CWGm",
+  "Hind"
+ ],
+ "cells": {
+  "FIRST-LEFT": {
+   "formA": {
+    "table": {
+     "IWR": {
+      "members": [
+       "spa",
+       "por",
+       "glg",
+       "cat",
+       "fra",
+       "ita"
+      ],
+      "dyads": [
+       {
+        "d": "spa",
+        "t": "por",
+        "auc": 0.6188,
+        "ctrl": 0.5459,
+        "diff": 0.0729,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4996,
+        "sham": 0.5234
+       },
+       {
+        "d": "spa",
+        "t": "glg",
+        "auc": 0.5511,
+        "ctrl": 0.5089,
+        "diff": 0.0422,
+        "q95": 0.5411,
+        "n": 268,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4935,
+        "sham": 0.5382
+       },
+       {
+        "d": "spa",
+        "t": "cat",
+        "auc": 0.6588,
+        "ctrl": 0.5593,
+        "diff": 0.0995,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": true,
+        "pos": 0.5011,
+        "sham": 0.5365
+       },
+       {
+        "d": "spa",
+        "t": "fra",
+        "auc": 0.6636,
+        "ctrl": 0.5604,
+        "diff": 0.1032,
+        "q95": 0.5343,
+        "n": 384,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5009,
+        "sham": 0.5322
+       },
+       {
+        "d": "spa",
+        "t": "ita",
+        "auc": 0.6329,
+        "ctrl": 0.5245,
+        "diff": 0.1084,
+        "q95": 0.5331,
+        "n": 413,
+        "pass": true,
+        "twin": false,
+        "pos": 0.506,
+        "sham": 0.542
+       },
+       {
+        "d": "por",
+        "t": "spa",
+        "auc": 0.6436,
+        "ctrl": 0.5589,
+        "diff": 0.0847,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4979,
+        "sham": 0.4899
+       },
+       {
+        "d": "por",
+        "t": "glg",
+        "auc": 0.5422,
+        "ctrl": 0.5089,
+        "diff": 0.0333,
+        "q95": 0.5411,
+        "n": 268,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5017,
+        "sham": 0.5114
+       },
+       {
+        "d": "por",
+        "t": "cat",
+        "auc": 0.6681,
+        "ctrl": 0.5593,
+        "diff": 0.1088,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.497,
+        "sham": 0.4712
+       },
+       {
+        "d": "por",
+        "t": "fra",
+        "auc": 0.6139,
+        "ctrl": 0.5604,
+        "diff": 0.0535,
+        "q95": 0.5343,
+        "n": 384,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5059,
+        "sham": 0.4716
+       },
+       {
+        "d": "por",
+        "t": "ita",
+        "auc": 0.6081,
+        "ctrl": 0.5245,
+        "diff": 0.0836,
+        "q95": 0.5331,
+        "n": 413,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4946,
+        "sham": 0.4755
+       },
+       {
+        "d": "glg",
+        "t": "spa",
+        "auc": 0.6442,
+        "ctrl": 0.5589,
+        "diff": 0.0853,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4961,
+        "sham": 0.4906
+       },
+       {
+        "d": "glg",
+        "t": "por",
+        "auc": 0.6036,
+        "ctrl": 0.5459,
+        "diff": 0.0577,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4922,
+        "sham": 0.4661
+       },
+       {
+        "d": "glg",
+        "t": "cat",
+        "auc": 0.6683,
+        "ctrl": 0.5593,
+        "diff": 0.109,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5001,
+        "sham": 0.4772
+       },
+       {
+        "d": "glg",
+        "t": "fra",
+        "auc": 0.5855,
+        "ctrl": 0.5604,
+        "diff": 0.0251,
+        "q95": 0.5343,
+        "n": 384,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4982,
+        "sham": 0.4914
+       },
+       {
+        "d": "glg",
+        "t": "ita",
+        "auc": 0.6056,
+        "ctrl": 0.5245,
+        "diff": 0.0811,
+        "q95": 0.5331,
+        "n": 413,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5035,
+        "sham": 0.4895
+       },
+       {
+        "d": "cat",
+        "t": "spa",
+        "auc": 0.6885,
+        "ctrl": 0.5589,
+        "diff": 0.1296,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": true,
+        "pos": 0.5002,
+        "sham": 0.5119
+       },
+       {
+        "d": "cat",
+        "t": "por",
+        "auc": 0.6214,
+        "ctrl": 0.5459,
+        "diff": 0.0755,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5085,
+        "sham": 0.5022
+       },
+       {
+        "d": "cat",
+        "t": "glg",
+        "auc": 0.5568,
+        "ctrl": 0.5089,
+        "diff": 0.0479,
+        "q95": 0.5411,
+        "n": 268,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4935,
+        "sham": 0.4914
+       },
+       {
+        "d": "cat",
+        "t": "fra",
+        "auc": 0.656,
+        "ctrl": 0.5604,
+        "diff": 0.0956,
+        "q95": 0.5343,
+        "n": 384,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5019,
+        "sham": 0.5024
+       },
+       {
+        "d": "cat",
+        "t": "ita",
+        "auc": 0.6463,
+        "ctrl": 0.5245,
+        "diff": 0.1218,
+        "q95": 0.5331,
+        "n": 413,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4915,
+        "sham": 0.5068
+       },
+       {
+        "d": "fra",
+        "t": "spa",
+        "auc": 0.6824,
+        "ctrl": 0.5589,
+        "diff": 0.1235,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4984,
+        "sham": 0.4705
+       },
+       {
+        "d": "fra",
+        "t": "por",
+        "auc": 0.6177,
+        "ctrl": 0.5459,
+        "diff": 0.0718,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5007,
+        "sham": 0.4725
+       },
+       {
+        "d": "fra",
+        "t": "glg",
+        "auc": 0.5618,
+        "ctrl": 0.5089,
+        "diff": 0.0529,
+        "q95": 0.5411,
+        "n": 268,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5052,
+        "sham": 0.4843
+       },
+       {
+        "d": "fra",
+        "t": "cat",
+        "auc": 0.6485,
+        "ctrl": 0.5593,
+        "diff": 0.0892,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4982,
+        "sham": 0.4765
+       },
+       {
+        "d": "fra",
+        "t": "ita",
+        "auc": 0.6173,
+        "ctrl": 0.5245,
+        "diff": 0.0928,
+        "q95": 0.5331,
+        "n": 413,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4955,
+        "sham": 0.4613
+       },
+       {
+        "d": "ita",
+        "t": "spa",
+        "auc": 0.6574,
+        "ctrl": 0.5589,
+        "diff": 0.0985,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4993,
+        "sham": 0.5411
+       },
+       {
+        "d": "ita",
+        "t": "por",
+        "auc": 0.6074,
+        "ctrl": 0.5459,
+        "diff": 0.0615,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4973,
+        "sham": 0.5191
+       },
+       {
+        "d": "ita",
+        "t": "glg",
+        "auc": 0.566,
+        "ctrl": 0.5089,
+        "diff": 0.0571,
+        "q95": 0.5411,
+        "n": 268,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5042,
+        "sham": 0.5092
+       },
+       {
+        "d": "ita",
+        "t": "cat",
+        "auc": 0.6298,
+        "ctrl": 0.5593,
+        "diff": 0.0705,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5017,
+        "sham": 0.5661
+       },
+       {
+        "d": "ita",
+        "t": "fra",
+        "auc": 0.6582,
+        "ctrl": 0.5604,
+        "diff": 0.0978,
+        "q95": 0.5343,
+        "n": 384,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5038,
+        "sham": 0.5124
+       }
+      ],
+      "n": 30,
+      "nPass": 24
+     },
+     "NGm": {
+      "members": [
+       "dan",
+       "nob",
+       "swe"
+      ],
+      "dyads": [
+       {
+        "d": "dan",
+        "t": "nob",
+        "auc": 0.6389,
+        "ctrl": 0.5764,
+        "diff": 0.0625,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5016,
+        "sham": 0.4961
+       },
+       {
+        "d": "dan",
+        "t": "swe",
+        "auc": 0.6342,
+        "ctrl": 0.5876,
+        "diff": 0.0466,
+        "q95": 0.5614,
+        "n": 120,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4982,
+        "sham": 0.4641
+       },
+       {
+        "d": "nob",
+        "t": "dan",
+        "auc": 0.6269,
+        "ctrl": 0.5676,
+        "diff": 0.0593,
+        "q95": 0.5346,
+        "n": 378,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5118,
+        "sham": 0.4794
+       },
+       {
+        "d": "nob",
+        "t": "swe",
+        "auc": 0.6666,
+        "ctrl": 0.5876,
+        "diff": 0.079,
+        "q95": 0.5614,
+        "n": 120,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4995,
+        "sham": 0.4731
+       }
+      ],
+      "n": 4,
+      "nPass": 3
+     },
+     "CWGm": {
+      "members": [
+       "deu",
+       "nld",
+       "afr"
+      ],
+      "dyads": [
+       {
+        "d": "deu",
+        "t": "nld",
+        "auc": 0.5831,
+        "ctrl": 0.5591,
+        "diff": 0.024,
+        "q95": 0.5385,
+        "n": 305,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5071,
+        "sham": 0.4897
+       },
+       {
+        "d": "deu",
+        "t": "afr",
+        "auc": 0.653,
+        "ctrl": 0.5998,
+        "diff": 0.0532,
+        "q95": 0.5651,
+        "n": 107,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4996,
+        "sham": 0.4985
+       },
+       {
+        "d": "nld",
+        "t": "deu",
+        "auc": 0.5788,
+        "ctrl": 0.5485,
+        "diff": 0.0303,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5001,
+        "sham": 0.4986
+       },
+       {
+        "d": "nld",
+        "t": "afr",
+        "auc": 0.6891,
+        "ctrl": 0.5998,
+        "diff": 0.0893,
+        "q95": 0.5651,
+        "n": 107,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4978,
+        "sham": 0.5158
+       }
+      ],
+      "n": 4,
+      "nPass": 2
+     },
+     "Hind": {
+      "members": [
+       "hin",
+       "urd"
+      ],
+      "dyads": [
+       {
+        "d": "hin",
+        "t": "urd",
+        "auc": 0.6456,
+        "ctrl": 0.5544,
+        "diff": 0.0912,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5049,
+        "sham": 0.461
+       },
+       {
+        "d": "urd",
+        "t": "hin",
+        "auc": 0.6183,
+        "ctrl": 0.5449,
+        "diff": 0.0734,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5001,
+        "sham": 0.5188
+       }
+      ],
+      "n": 2,
+      "nPass": 2
+     },
+     "SSl": {
+      "members": [
+       "hrv",
+       "srp",
+       "slv",
+       "bul"
+      ],
+      "dyads": [
+       {
+        "d": "hrv",
+        "t": "srp",
+        "auc": 0.5736,
+        "ctrl": 0.5316,
+        "diff": 0.042,
+        "q95": 0.5327,
+        "n": 422,
+        "pass": false,
+        "twin": true,
+        "pos": 0.5051,
+        "sham": 0.4948
+       },
+       {
+        "d": "hrv",
+        "t": "slv",
+        "auc": 0.5806,
+        "ctrl": 0.5588,
+        "diff": 0.0218,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5011,
+        "sham": 0.4834
+       },
+       {
+        "d": "hrv",
+        "t": "bul",
+        "auc": 0.5904,
+        "ctrl": 0.5524,
+        "diff": 0.038,
+        "q95": 0.5285,
+        "n": 554,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4985,
+        "sham": 0.4884
+       },
+       {
+        "d": "srp",
+        "t": "hrv",
+        "auc": 0.5811,
+        "ctrl": 0.5483,
+        "diff": 0.0328,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": true,
+        "pos": 0.5009,
+        "sham": 0.4875
+       },
+       {
+        "d": "srp",
+        "t": "slv",
+        "auc": 0.5799,
+        "ctrl": 0.5588,
+        "diff": 0.0211,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5001,
+        "sham": 0.4766
+       },
+       {
+        "d": "srp",
+        "t": "bul",
+        "auc": 0.5932,
+        "ctrl": 0.5524,
+        "diff": 0.0408,
+        "q95": 0.5285,
+        "n": 554,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4947,
+        "sham": 0.4838
+       },
+       {
+        "d": "slv",
+        "t": "hrv",
+        "auc": 0.5434,
+        "ctrl": 0.5483,
+        "diff": -0.0049,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4994,
+        "sham": 0.5224
+       },
+       {
+        "d": "slv",
+        "t": "srp",
+        "auc": 0.509,
+        "ctrl": 0.5316,
+        "diff": -0.0226,
+        "q95": 0.5327,
+        "n": 422,
+        "pass": false,
+        "twin": false,
+        "pos": 0.497,
+        "sham": 0.5058
+       },
+       {
+        "d": "slv",
+        "t": "bul",
+        "auc": 0.5495,
+        "ctrl": 0.5524,
+        "diff": -0.0029,
+        "q95": 0.5285,
+        "n": 554,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5026,
+        "sham": 0.507
+       },
+       {
+        "d": "bul",
+        "t": "hrv",
+        "auc": 0.5873,
+        "ctrl": 0.5483,
+        "diff": 0.039,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5012,
+        "sham": 0.4887
+       },
+       {
+        "d": "bul",
+        "t": "srp",
+        "auc": 0.5673,
+        "ctrl": 0.5316,
+        "diff": 0.0357,
+        "q95": 0.5327,
+        "n": 422,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5025,
+        "sham": 0.4855
+       },
+       {
+        "d": "bul",
+        "t": "slv",
+        "auc": 0.6106,
+        "ctrl": 0.5588,
+        "diff": 0.0518,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5006,
+        "sham": 0.4989
+       }
+      ],
+      "n": 12,
+      "nPass": 1
+     },
+     "WSl": {
+      "members": [
+       "ces",
+       "slk",
+       "pol"
+      ],
+      "dyads": [
+       {
+        "d": "ces",
+        "t": "slk",
+        "auc": 0.53,
+        "ctrl": 0.5073,
+        "diff": 0.0227,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4998,
+        "sham": 0.4947
+       },
+       {
+        "d": "ces",
+        "t": "pol",
+        "auc": 0.4883,
+        "ctrl": 0.5339,
+        "diff": -0.0456,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.501,
+        "sham": 0.4747
+       },
+       {
+        "d": "slk",
+        "t": "ces",
+        "auc": 0.5045,
+        "ctrl": 0.5271,
+        "diff": -0.0226,
+        "q95": 0.5714,
+        "n": 89,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4955,
+        "sham": 0.5103
+       },
+       {
+        "d": "slk",
+        "t": "pol",
+        "auc": 0.5397,
+        "ctrl": 0.5339,
+        "diff": 0.0058,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4995,
+        "sham": 0.4871
+       },
+       {
+        "d": "pol",
+        "t": "ces",
+        "auc": 0.4853,
+        "ctrl": 0.5271,
+        "diff": -0.0418,
+        "q95": 0.5714,
+        "n": 89,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4999,
+        "sham": 0.5002
+       },
+       {
+        "d": "pol",
+        "t": "slk",
+        "auc": 0.5212,
+        "ctrl": 0.5073,
+        "diff": 0.0139,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5001,
+        "sham": 0.5004
+       }
+      ],
+      "n": 6,
+      "nPass": 0
+     },
+     "ESl": {
+      "members": [
+       "rus",
+       "ukr"
+      ],
+      "dyads": [
+       {
+        "d": "rus",
+        "t": "ukr",
+        "auc": 0.5162,
+        "ctrl": 0.5244,
+        "diff": -0.0082,
+        "q95": 0.5339,
+        "n": 392,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4997,
+        "sham": 0.4992
+       },
+       {
+        "d": "ukr",
+        "t": "rus",
+        "auc": 0.5205,
+        "ctrl": 0.5253,
+        "diff": -0.0048,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5005,
+        "sham": 0.5134
+       }
+      ],
+      "n": 2,
+      "nPass": 0
+     },
+     "Finnic": {
+      "members": [
+       "est",
+       "fin"
+      ],
+      "dyads": [
+       {
+        "d": "est",
+        "t": "fin",
+        "auc": 0.5767,
+        "ctrl": 0.556,
+        "diff": 0.0207,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4986,
+        "sham": 0.5268
+       },
+       {
+        "d": "fin",
+        "t": "est",
+        "auc": 0.5772,
+        "ctrl": 0.5416,
+        "diff": 0.0356,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5012,
+        "sham": 0.4937
+       }
+      ],
+      "n": 2,
+      "nPass": 0
+     },
+     "Baltic": {
+      "members": [
+       "lav",
+       "lit"
+      ],
+      "dyads": [
+       {
+        "d": "lav",
+        "t": "lit",
+        "auc": 0.5305,
+        "ctrl": 0.531,
+        "diff": -0.0005,
+        "q95": 0.5555,
+        "n": 147,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4999,
+        "sham": 0.4892
+       },
+       {
+        "d": "lit",
+        "t": "lav",
+        "auc": 0.5505,
+        "ctrl": 0.5475,
+        "diff": 0.003,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4995,
+        "sham": 0.4855
+       }
+      ],
+      "n": 2,
+      "nPass": 0
+     },
+     "Celtic": {
+      "members": [
+       "cym",
+       "gle"
+      ],
+      "dyads": [
+       {
+        "d": "cym",
+        "t": "gle",
+        "auc": 0.6317,
+        "ctrl": 0.5601,
+        "diff": 0.0716,
+        "q95": 0.5351,
+        "n": 367,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4998,
+        "sham": 0.5108
+       },
+       {
+        "d": "gle",
+        "t": "cym",
+        "auc": 0.5918,
+        "ctrl": 0.5569,
+        "diff": 0.0349,
+        "q95": 0.5343,
+        "n": 383,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5074,
+        "sham": 0.4826
+       }
+      ],
+      "n": 2,
+      "nPass": 1
+     },
+     "Turkic": {
+      "members": [
+       "tur",
+       "uig"
+      ],
+      "dyads": [],
+      "n": 0,
+      "nPass": 0
+     },
+     "Sinitic": {
+      "members": [
+       "cmn",
+       "lzh"
+      ],
+      "dyads": [
+       {
+        "d": "cmn",
+        "t": "lzh",
+        "auc": 0.5672,
+        "ctrl": 0.471,
+        "diff": 0.0962,
+        "q95": 0.5305,
+        "n": 484,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4991,
+        "sham": 0.5315
+       },
+       {
+        "d": "lzh",
+        "t": "cmn",
+        "auc": 0.5278,
+        "ctrl": 0.4905,
+        "diff": 0.0373,
+        "q95": 0.5317,
+        "n": 448,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4954,
+        "sham": 0.4817
+       }
+      ],
+      "n": 2,
+      "nPass": 0
+     },
+     "Semitic": {
+      "members": [
+       "arb",
+       "mlt"
+      ],
+      "dyads": [],
+      "n": 0,
+      "nPass": 0
+     }
+    },
+    "verdict": {
+     "verdict": "HOLDS",
+     "dyads": 40,
+     "nPass": 31,
+     "frac": 0.775,
+     "perCluster": {
+      "IWR": {
+       "n": 30,
+       "nPass": 24
+      },
+      "NGm": {
+       "n": 4,
+       "nPass": 3
+      },
+      "CWGm": {
+       "n": 4,
+       "nPass": 2
+      },
+      "Hind": {
+       "n": 2,
+       "nPass": 2
+      }
+     },
+     "diffBoot": {
+      "mean": 0.0687,
+      "lo": 0.0561,
+      "hi": 0.0807,
+      "n": 14,
+      "pos": 14
+     },
+     "positionControl": 0.5002,
+     "shamControl": 0.4982,
+     "meanAuc": 0.6265,
+     "meanCtrl": 0.5504,
+     "failing": [
+      "spa>glg:0.5511",
+      "por>glg:0.5422",
+      "glg>fra:0.5855",
+      "cat>glg:0.5568",
+      "fra>glg:0.5618",
+      "ita>glg:0.566",
+      "dan>swe:0.6342",
+      "deu>nld:0.5831",
+      "nld>deu:0.5788"
+     ]
+    },
+    "verdictNoTwin": {
+     "verdict": "HOLDS",
+     "dyads": 38,
+     "nPass": 29,
+     "frac": 0.7632,
+     "perCluster": {
+      "IWR": {
+       "n": 28,
+       "nPass": 22
+      },
+      "NGm": {
+       "n": 4,
+       "nPass": 3
+      },
+      "CWGm": {
+       "n": 4,
+       "nPass": 2
+      },
+      "Hind": {
+       "n": 2,
+       "nPass": 2
+      }
+     },
+     "diffBoot": {
+      "mean": 0.0682,
+      "lo": 0.0556,
+      "hi": 0.0801,
+      "n": 14,
+      "pos": 14
+     },
+     "positionControl": 0.5002,
+     "shamControl": 0.4969,
+     "meanAuc": 0.624,
+     "meanCtrl": 0.5499,
+     "failing": [
+      "spa>glg:0.5511",
+      "por>glg:0.5422",
+      "glg>fra:0.5855",
+      "cat>glg:0.5568",
+      "fra>glg:0.5618",
+      "ita>glg:0.566",
+      "dan>swe:0.6342",
+      "deu>nld:0.5831",
+      "nld>deu:0.5788"
+     ]
+    },
+    "outOfScope": {
+     "SSl": {
+      "n": 12,
+      "nPass": 1,
+      "meanAuc": 0.5722
+     },
+     "WSl": {
+      "n": 6,
+      "nPass": 0,
+      "meanAuc": 0.5115
+     },
+     "ESl": {
+      "n": 2,
+      "nPass": 0,
+      "meanAuc": 0.5183
+     },
+     "Finnic": {
+      "n": 2,
+      "nPass": 0,
+      "meanAuc": 0.577
+     },
+     "Baltic": {
+      "n": 2,
+      "nPass": 0,
+      "meanAuc": 0.5405
+     },
+     "Celtic": {
+      "n": 2,
+      "nPass": 1,
+      "meanAuc": 0.6118
+     },
+     "Sinitic": {
+      "n": 2,
+      "nPass": 0,
+      "meanAuc": 0.5475
+     }
+    }
+   },
+   "formB": {
+    "table": {
+     "IWR": {
+      "members": [
+       "spa",
+       "por",
+       "glg",
+       "cat",
+       "fra",
+       "ita"
+      ],
+      "dyads": [
+       {
+        "d": "spa",
+        "t": "por",
+        "auc": 0.6034,
+        "ctrl": 0.5428,
+        "diff": 0.0606,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4994,
+        "sham": 0.4882
+       },
+       {
+        "d": "spa",
+        "t": "glg",
+        "auc": 0.5621,
+        "ctrl": 0.5132,
+        "diff": 0.0489,
+        "q95": 0.5411,
+        "n": 268,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4979,
+        "sham": 0.4685
+       },
+       {
+        "d": "spa",
+        "t": "cat",
+        "auc": 0.6897,
+        "ctrl": 0.5673,
+        "diff": 0.1224,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": true,
+        "pos": 0.4994,
+        "sham": 0.5316
+       },
+       {
+        "d": "spa",
+        "t": "fra",
+        "auc": 0.6575,
+        "ctrl": 0.5682,
+        "diff": 0.0893,
+        "q95": 0.5343,
+        "n": 384,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4972,
+        "sham": 0.4642
+       },
+       {
+        "d": "spa",
+        "t": "ita",
+        "auc": 0.6338,
+        "ctrl": 0.5385,
+        "diff": 0.0953,
+        "q95": 0.5331,
+        "n": 413,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4963,
+        "sham": 0.4895
+       },
+       {
+        "d": "por",
+        "t": "spa",
+        "auc": 0.6273,
+        "ctrl": 0.5713,
+        "diff": 0.056,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5013,
+        "sham": 0.4796
+       },
+       {
+        "d": "por",
+        "t": "glg",
+        "auc": 0.5268,
+        "ctrl": 0.5132,
+        "diff": 0.0136,
+        "q95": 0.5411,
+        "n": 268,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4889,
+        "sham": 0.4719
+       },
+       {
+        "d": "por",
+        "t": "cat",
+        "auc": 0.6198,
+        "ctrl": 0.5673,
+        "diff": 0.0525,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4985,
+        "sham": 0.4869
+       },
+       {
+        "d": "por",
+        "t": "fra",
+        "auc": 0.6184,
+        "ctrl": 0.5682,
+        "diff": 0.0502,
+        "q95": 0.5343,
+        "n": 384,
+        "pass": true,
+        "twin": false,
+        "pos": 0.508,
+        "sham": 0.4934
+       },
+       {
+        "d": "por",
+        "t": "ita",
+        "auc": 0.5929,
+        "ctrl": 0.5385,
+        "diff": 0.0544,
+        "q95": 0.5331,
+        "n": 413,
+        "pass": false,
+        "twin": false,
+        "pos": 0.497,
+        "sham": 0.4725
+       },
+       {
+        "d": "glg",
+        "t": "spa",
+        "auc": 0.5787,
+        "ctrl": 0.5713,
+        "diff": 0.0074,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4953,
+        "sham": 0.4803
+       },
+       {
+        "d": "glg",
+        "t": "por",
+        "auc": 0.5582,
+        "ctrl": 0.5428,
+        "diff": 0.0154,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4917,
+        "sham": 0.4926
+       },
+       {
+        "d": "glg",
+        "t": "cat",
+        "auc": 0.5626,
+        "ctrl": 0.5673,
+        "diff": -0.0047,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4998,
+        "sham": 0.5019
+       },
+       {
+        "d": "glg",
+        "t": "fra",
+        "auc": 0.5481,
+        "ctrl": 0.5682,
+        "diff": -0.0201,
+        "q95": 0.5343,
+        "n": 384,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4994,
+        "sham": 0.4774
+       },
+       {
+        "d": "glg",
+        "t": "ita",
+        "auc": 0.5585,
+        "ctrl": 0.5385,
+        "diff": 0.02,
+        "q95": 0.5331,
+        "n": 413,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5047,
+        "sham": 0.5011
+       },
+       {
+        "d": "cat",
+        "t": "spa",
+        "auc": 0.6503,
+        "ctrl": 0.5713,
+        "diff": 0.079,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": true,
+        "pos": 0.5008,
+        "sham": 0.4695
+       },
+       {
+        "d": "cat",
+        "t": "por",
+        "auc": 0.591,
+        "ctrl": 0.5428,
+        "diff": 0.0482,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4989,
+        "sham": 0.4948
+       },
+       {
+        "d": "cat",
+        "t": "glg",
+        "auc": 0.5224,
+        "ctrl": 0.5132,
+        "diff": 0.0092,
+        "q95": 0.5411,
+        "n": 268,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4982,
+        "sham": 0.5186
+       },
+       {
+        "d": "cat",
+        "t": "fra",
+        "auc": 0.5798,
+        "ctrl": 0.5682,
+        "diff": 0.0116,
+        "q95": 0.5343,
+        "n": 384,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5004,
+        "sham": 0.4962
+       },
+       {
+        "d": "cat",
+        "t": "ita",
+        "auc": 0.6003,
+        "ctrl": 0.5385,
+        "diff": 0.0618,
+        "q95": 0.5331,
+        "n": 413,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5027,
+        "sham": 0.4826
+       },
+       {
+        "d": "fra",
+        "t": "spa",
+        "auc": 0.653,
+        "ctrl": 0.5713,
+        "diff": 0.0817,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4982,
+        "sham": 0.5081
+       },
+       {
+        "d": "fra",
+        "t": "por",
+        "auc": 0.6002,
+        "ctrl": 0.5428,
+        "diff": 0.0574,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5073,
+        "sham": 0.5015
+       },
+       {
+        "d": "fra",
+        "t": "glg",
+        "auc": 0.5656,
+        "ctrl": 0.5132,
+        "diff": 0.0524,
+        "q95": 0.5411,
+        "n": 268,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5031,
+        "sham": 0.4834
+       },
+       {
+        "d": "fra",
+        "t": "cat",
+        "auc": 0.6049,
+        "ctrl": 0.5673,
+        "diff": 0.0376,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4987,
+        "sham": 0.4806
+       },
+       {
+        "d": "fra",
+        "t": "ita",
+        "auc": 0.6121,
+        "ctrl": 0.5385,
+        "diff": 0.0736,
+        "q95": 0.5331,
+        "n": 413,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5025,
+        "sham": 0.5208
+       },
+       {
+        "d": "ita",
+        "t": "spa",
+        "auc": 0.6478,
+        "ctrl": 0.5713,
+        "diff": 0.0765,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4996,
+        "sham": 0.5255
+       },
+       {
+        "d": "ita",
+        "t": "por",
+        "auc": 0.5899,
+        "ctrl": 0.5428,
+        "diff": 0.0471,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4992,
+        "sham": 0.5177
+       },
+       {
+        "d": "ita",
+        "t": "glg",
+        "auc": 0.5405,
+        "ctrl": 0.5132,
+        "diff": 0.0273,
+        "q95": 0.5411,
+        "n": 268,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5006,
+        "sham": 0.4885
+       },
+       {
+        "d": "ita",
+        "t": "cat",
+        "auc": 0.6503,
+        "ctrl": 0.5673,
+        "diff": 0.083,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5021,
+        "sham": 0.5165
+       },
+       {
+        "d": "ita",
+        "t": "fra",
+        "auc": 0.5971,
+        "ctrl": 0.5682,
+        "diff": 0.0289,
+        "q95": 0.5343,
+        "n": 384,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5083,
+        "sham": 0.5158
+       }
+      ],
+      "n": 30,
+      "nPass": 14
+     },
+     "NGm": {
+      "members": [
+       "dan",
+       "nob",
+       "swe"
+      ],
+      "dyads": [
+       {
+        "d": "dan",
+        "t": "nob",
+        "auc": 0.6525,
+        "ctrl": 0.5764,
+        "diff": 0.0761,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5049,
+        "sham": 0.5052
+       },
+       {
+        "d": "dan",
+        "t": "swe",
+        "auc": 0.6412,
+        "ctrl": 0.5706,
+        "diff": 0.0706,
+        "q95": 0.5614,
+        "n": 120,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4965,
+        "sham": 0.4767
+       },
+       {
+        "d": "nob",
+        "t": "dan",
+        "auc": 0.6229,
+        "ctrl": 0.5679,
+        "diff": 0.055,
+        "q95": 0.5346,
+        "n": 378,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5182,
+        "sham": 0.5105
+       },
+       {
+        "d": "nob",
+        "t": "swe",
+        "auc": 0.6146,
+        "ctrl": 0.5706,
+        "diff": 0.044,
+        "q95": 0.5614,
+        "n": 120,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4968,
+        "sham": 0.5311
+       },
+       {
+        "d": "swe",
+        "t": "dan",
+        "auc": 0.6101,
+        "ctrl": 0.5679,
+        "diff": 0.0422,
+        "q95": 0.5346,
+        "n": 378,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4935,
+        "sham": 0.5139
+       },
+       {
+        "d": "swe",
+        "t": "nob",
+        "auc": 0.6418,
+        "ctrl": 0.5764,
+        "diff": 0.0654,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4968,
+        "sham": 0.5359
+       }
+      ],
+      "n": 6,
+      "nPass": 4
+     },
+     "CWGm": {
+      "members": [
+       "deu",
+       "nld",
+       "afr"
+      ],
+      "dyads": [
+       {
+        "d": "deu",
+        "t": "nld",
+        "auc": 0.5898,
+        "ctrl": 0.5505,
+        "diff": 0.0393,
+        "q95": 0.5385,
+        "n": 305,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4924,
+        "sham": 0.4651
+       },
+       {
+        "d": "deu",
+        "t": "afr",
+        "auc": 0.6807,
+        "ctrl": 0.5901,
+        "diff": 0.0906,
+        "q95": 0.5651,
+        "n": 107,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4985,
+        "sham": 0.4198
+       },
+       {
+        "d": "nld",
+        "t": "deu",
+        "auc": 0.5757,
+        "ctrl": 0.5434,
+        "diff": 0.0323,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4984,
+        "sham": 0.4751
+       },
+       {
+        "d": "nld",
+        "t": "afr",
+        "auc": 0.7354,
+        "ctrl": 0.5901,
+        "diff": 0.1453,
+        "q95": 0.5651,
+        "n": 107,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4982,
+        "sham": 0.4774
+       },
+       {
+        "d": "afr",
+        "t": "deu",
+        "auc": 0.6032,
+        "ctrl": 0.5434,
+        "diff": 0.0598,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5023,
+        "sham": 0.4985
+       },
+       {
+        "d": "afr",
+        "t": "nld",
+        "auc": 0.6472,
+        "ctrl": 0.5505,
+        "diff": 0.0967,
+        "q95": 0.5385,
+        "n": 305,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5034,
+        "sham": 0.5059
+       }
+      ],
+      "n": 6,
+      "nPass": 4
+     },
+     "Hind": {
+      "members": [
+       "hin",
+       "urd"
+      ],
+      "dyads": [
+       {
+        "d": "hin",
+        "t": "urd",
+        "auc": 0.6445,
+        "ctrl": 0.5563,
+        "diff": 0.0882,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.508,
+        "sham": 0.5092
+       },
+       {
+        "d": "urd",
+        "t": "hin",
+        "auc": 0.6211,
+        "ctrl": 0.5473,
+        "diff": 0.0738,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5086,
+        "sham": 0.4841
+       }
+      ],
+      "n": 2,
+      "nPass": 2
+     },
+     "SSl": {
+      "members": [
+       "hrv",
+       "srp",
+       "slv",
+       "bul"
+      ],
+      "dyads": [
+       {
+        "d": "hrv",
+        "t": "srp",
+        "auc": 0.5924,
+        "ctrl": 0.5323,
+        "diff": 0.0601,
+        "q95": 0.5327,
+        "n": 422,
+        "pass": false,
+        "twin": true,
+        "pos": 0.5037,
+        "sham": 0.5292
+       },
+       {
+        "d": "hrv",
+        "t": "slv",
+        "auc": 0.5717,
+        "ctrl": 0.5596,
+        "diff": 0.0121,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4995,
+        "sham": 0.5144
+       },
+       {
+        "d": "hrv",
+        "t": "bul",
+        "auc": 0.6013,
+        "ctrl": 0.5558,
+        "diff": 0.0455,
+        "q95": 0.5285,
+        "n": 554,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4971,
+        "sham": 0.5288
+       },
+       {
+        "d": "srp",
+        "t": "hrv",
+        "auc": 0.5934,
+        "ctrl": 0.5506,
+        "diff": 0.0428,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": true,
+        "pos": 0.5034,
+        "sham": 0.4758
+       },
+       {
+        "d": "srp",
+        "t": "slv",
+        "auc": 0.5335,
+        "ctrl": 0.5596,
+        "diff": -0.0261,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4996,
+        "sham": 0.4979
+       },
+       {
+        "d": "srp",
+        "t": "bul",
+        "auc": 0.5857,
+        "ctrl": 0.5558,
+        "diff": 0.0299,
+        "q95": 0.5285,
+        "n": 554,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4931,
+        "sham": 0.4744
+       },
+       {
+        "d": "slv",
+        "t": "hrv",
+        "auc": 0.572,
+        "ctrl": 0.5506,
+        "diff": 0.0214,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5016,
+        "sham": 0.4908
+       },
+       {
+        "d": "slv",
+        "t": "srp",
+        "auc": 0.5596,
+        "ctrl": 0.5323,
+        "diff": 0.0273,
+        "q95": 0.5327,
+        "n": 422,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5024,
+        "sham": 0.5023
+       },
+       {
+        "d": "slv",
+        "t": "bul",
+        "auc": 0.5836,
+        "ctrl": 0.5558,
+        "diff": 0.0278,
+        "q95": 0.5285,
+        "n": 554,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4991,
+        "sham": 0.4872
+       },
+       {
+        "d": "bul",
+        "t": "hrv",
+        "auc": 0.5712,
+        "ctrl": 0.5506,
+        "diff": 0.0206,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4959,
+        "sham": 0.4921
+       },
+       {
+        "d": "bul",
+        "t": "srp",
+        "auc": 0.562,
+        "ctrl": 0.5323,
+        "diff": 0.0297,
+        "q95": 0.5327,
+        "n": 422,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4911,
+        "sham": 0.4765
+       },
+       {
+        "d": "bul",
+        "t": "slv",
+        "auc": 0.5663,
+        "ctrl": 0.5596,
+        "diff": 0.0067,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5003,
+        "sham": 0.4992
+       }
+      ],
+      "n": 12,
+      "nPass": 0
+     },
+     "WSl": {
+      "members": [
+       "ces",
+       "slk",
+       "pol"
+      ],
+      "dyads": [
+       {
+        "d": "slk",
+        "t": "ces",
+        "auc": 0.5296,
+        "ctrl": 0.5306,
+        "diff": -0.001,
+        "q95": 0.5714,
+        "n": 89,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5026,
+        "sham": 0.4821
+       },
+       {
+        "d": "slk",
+        "t": "pol",
+        "auc": 0.4941,
+        "ctrl": 0.5371,
+        "diff": -0.043,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5006,
+        "sham": 0.4996
+       },
+       {
+        "d": "pol",
+        "t": "ces",
+        "auc": 0.4931,
+        "ctrl": 0.5306,
+        "diff": -0.0375,
+        "q95": 0.5714,
+        "n": 89,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5004,
+        "sham": 0.4906
+       },
+       {
+        "d": "pol",
+        "t": "slk",
+        "auc": 0.5132,
+        "ctrl": 0.5094,
+        "diff": 0.0038,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5052,
+        "sham": 0.4962
+       }
+      ],
+      "n": 4,
+      "nPass": 0
+     },
+     "ESl": {
+      "members": [
+       "rus",
+       "ukr"
+      ],
+      "dyads": [
+       {
+        "d": "rus",
+        "t": "ukr",
+        "auc": 0.5171,
+        "ctrl": 0.5228,
+        "diff": -0.0057,
+        "q95": 0.5339,
+        "n": 392,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4984,
+        "sham": 0.5065
+       },
+       {
+        "d": "ukr",
+        "t": "rus",
+        "auc": 0.5217,
+        "ctrl": 0.5278,
+        "diff": -0.0061,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4981,
+        "sham": 0.5129
+       }
+      ],
+      "n": 2,
+      "nPass": 0
+     },
+     "Finnic": {
+      "members": [
+       "est",
+       "fin"
+      ],
+      "dyads": [
+       {
+        "d": "est",
+        "t": "fin",
+        "auc": 0.555,
+        "ctrl": 0.5518,
+        "diff": 0.0032,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4989,
+        "sham": 0.4759
+       },
+       {
+        "d": "fin",
+        "t": "est",
+        "auc": 0.562,
+        "ctrl": 0.5452,
+        "diff": 0.0168,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4996,
+        "sham": 0.5009
+       }
+      ],
+      "n": 2,
+      "nPass": 0
+     },
+     "Baltic": {
+      "members": [
+       "lav",
+       "lit"
+      ],
+      "dyads": [
+       {
+        "d": "lav",
+        "t": "lit",
+        "auc": 0.5304,
+        "ctrl": 0.5321,
+        "diff": -0.0017,
+        "q95": 0.5555,
+        "n": 147,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5003,
+        "sham": 0.4874
+       },
+       {
+        "d": "lit",
+        "t": "lav",
+        "auc": 0.5326,
+        "ctrl": 0.5419,
+        "diff": -0.0093,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5,
+        "sham": 0.506
+       }
+      ],
+      "n": 2,
+      "nPass": 0
+     },
+     "Celtic": {
+      "members": [
+       "cym",
+       "gle"
+      ],
+      "dyads": [
+       {
+        "d": "cym",
+        "t": "gle",
+        "auc": 0.6301,
+        "ctrl": 0.5569,
+        "diff": 0.0732,
+        "q95": 0.5351,
+        "n": 367,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5053,
+        "sham": 0.5208
+       },
+       {
+        "d": "gle",
+        "t": "cym",
+        "auc": 0.6182,
+        "ctrl": 0.5602,
+        "diff": 0.058,
+        "q95": 0.5343,
+        "n": 383,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5014,
+        "sham": 0.5205
+       }
+      ],
+      "n": 2,
+      "nPass": 2
+     },
+     "Turkic": {
+      "members": [
+       "tur",
+       "uig"
+      ],
+      "dyads": [],
+      "n": 0,
+      "nPass": 0
+     },
+     "Sinitic": {
+      "members": [
+       "cmn",
+       "lzh"
+      ],
+      "dyads": [
+       {
+        "d": "cmn",
+        "t": "lzh",
+        "auc": 0.5243,
+        "ctrl": 0.4619,
+        "diff": 0.0624,
+        "q95": 0.5305,
+        "n": 484,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4987,
+        "sham": 0.5246
+       },
+       {
+        "d": "lzh",
+        "t": "cmn",
+        "auc": 0.5307,
+        "ctrl": 0.4785,
+        "diff": 0.0522,
+        "q95": 0.5317,
+        "n": 448,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4998,
+        "sham": 0.5208
+       }
+      ],
+      "n": 2,
+      "nPass": 0
+     },
+     "Semitic": {
+      "members": [
+       "arb",
+       "mlt"
+      ],
+      "dyads": [],
+      "n": 0,
+      "nPass": 0
+     }
+    },
+    "verdict": {
+     "verdict": "PARTIALLY HOLDS",
+     "dyads": 44,
+     "nPass": 24,
+     "frac": 0.5455,
+     "perCluster": {
+      "IWR": {
+       "n": 30,
+       "nPass": 14
+      },
+      "NGm": {
+       "n": 6,
+       "nPass": 4
+      },
+      "CWGm": {
+       "n": 6,
+       "nPass": 4
+      },
+      "Hind": {
+       "n": 2,
+       "nPass": 2
+      }
+     },
+     "diffBoot": {
+      "mean": 0.0613,
+      "lo": 0.0504,
+      "hi": 0.0733,
+      "n": 14,
+      "pos": 14
+     },
+     "positionControl": 0.5003,
+     "shamControl": 0.4938,
+     "meanAuc": 0.6096,
+     "meanCtrl": 0.5547,
+     "failing": [
+      "spa>glg:0.5621",
+      "por>glg:0.5268",
+      "por>ita:0.5929",
+      "glg>spa:0.5787",
+      "glg>por:0.5582",
+      "glg>cat:0.5626",
+      "glg>fra:0.5481",
+      "glg>ita:0.5585",
+      "cat>por:0.591",
+      "cat>glg:0.5224",
+      "cat>fra:0.5798",
+      "fra>glg:0.5656",
+      "fra>cat:0.6049",
+      "ita>por:0.5899",
+      "ita>glg:0.5405",
+      "ita>fra:0.5971",
+      "nob>swe:0.6146",
+      "swe>dan:0.6101",
+      "deu>nld:0.5898",
+      "nld>deu:0.5757"
+     ]
+    },
+    "verdictNoTwin": {
+     "verdict": "PARTIALLY HOLDS",
+     "dyads": 42,
+     "nPass": 22,
+     "frac": 0.5238,
+     "perCluster": {
+      "IWR": {
+       "n": 28,
+       "nPass": 12
+      },
+      "NGm": {
+       "n": 6,
+       "nPass": 4
+      },
+      "CWGm": {
+       "n": 6,
+       "nPass": 4
+      },
+      "Hind": {
+       "n": 2,
+       "nPass": 2
+      }
+     },
+     "diffBoot": {
+      "mean": 0.0598,
+      "lo": 0.0486,
+      "hi": 0.0722,
+      "n": 14,
+      "pos": 14
+     },
+     "positionControl": 0.5003,
+     "shamControl": 0.4935,
+     "meanAuc": 0.6068,
+     "meanCtrl": 0.554,
+     "failing": [
+      "spa>glg:0.5621",
+      "por>glg:0.5268",
+      "por>ita:0.5929",
+      "glg>spa:0.5787",
+      "glg>por:0.5582",
+      "glg>cat:0.5626",
+      "glg>fra:0.5481",
+      "glg>ita:0.5585",
+      "cat>por:0.591",
+      "cat>glg:0.5224",
+      "cat>fra:0.5798",
+      "fra>glg:0.5656",
+      "fra>cat:0.6049",
+      "ita>por:0.5899",
+      "ita>glg:0.5405",
+      "ita>fra:0.5971",
+      "nob>swe:0.6146",
+      "swe>dan:0.6101",
+      "deu>nld:0.5898",
+      "nld>deu:0.5757"
+     ]
+    },
+    "outOfScope": {
+     "SSl": {
+      "n": 12,
+      "nPass": 0,
+      "meanAuc": 0.5744
+     },
+     "WSl": {
+      "n": 4,
+      "nPass": 0,
+      "meanAuc": 0.5075
+     },
+     "ESl": {
+      "n": 2,
+      "nPass": 0,
+      "meanAuc": 0.5194
+     },
+     "Finnic": {
+      "n": 2,
+      "nPass": 0,
+      "meanAuc": 0.5585
+     },
+     "Baltic": {
+      "n": 2,
+      "nPass": 0,
+      "meanAuc": 0.5315
+     },
+     "Celtic": {
+      "n": 2,
+      "nPass": 2,
+      "meanAuc": 0.6241
+     },
+     "Sinitic": {
+      "n": 2,
+      "nPass": 0,
+      "meanAuc": 0.5275
+     }
+    },
+    "gradient": {
+     "n": 1295,
+     "est": {
+      "sameSub": 0.0639,
+      "sameGenusNotSub": 0.0493,
+      "sameFamilyOnly": 0.0344,
+      "sameOrder": 0.0044,
+      "sameScript": 0.0093,
+      "sameMorph": -0.0093,
+      "sameTeam": 0.0361
+     },
+     "ci": {
+      "sameSub": [
+       0.0314,
+       0.0944
+      ],
+      "sameGenusNotSub": [
+       0.0173,
+       0.0791
+      ],
+      "sameFamilyOnly": [
+       0.0056,
+       0.0615
+      ],
+      "sameOrder": [
+       -0.0087,
+       0.0172
+      ],
+      "sameScript": [
+       -0.0059,
+       0.0259
+      ],
+      "sameMorph": [
+       -0.0201,
+       0.0021
+      ],
+      "sameTeam": [
+       0,
+       0.073
+      ]
+     },
+     "sameSubMinusFamilyOnly": {
+      "est": 0.0295,
+      "ci": [
+       0.0138,
+       0.0471
+      ]
+     },
+     "sameSubMinusGenusNotSub": {
+      "est": 0.0147,
+      "ci": [
+       -0.0056,
+       0.0379
+      ]
+     },
+     "graded": false
+    }
+   },
+   "gradientFormA": {
+    "n": 1332,
+    "est": {
+     "sameSub": 0.0786,
+     "sameGenusNotSub": 0.0468,
+     "sameFamilyOnly": 0.0366,
+     "sameOrder": 0.0019,
+     "sameScript": 0.01,
+     "sameMorph": -0.0127,
+     "sameTeam": 0.0173
+    },
+    "ci": {
+     "sameSub": [
+      0.0449,
+      0.11
+     ],
+     "sameGenusNotSub": [
+      0.0231,
+      0.0706
+     ],
+     "sameFamilyOnly": [
+      0.0137,
+      0.0595
+     ],
+     "sameOrder": [
+      -0.0083,
+      0.0115
+     ],
+     "sameScript": [
+      -0.0049,
+      0.0279
+     ],
+     "sameMorph": [
+      -0.0249,
+      -0.0019
+     ],
+     "sameTeam": [
+      -0.025,
+      0.0669
+     ]
+    },
+    "sameSubMinusFamilyOnly": {
+     "est": 0.042,
+     "ci": [
+      0.0212,
+      0.0613
+     ]
+    },
+    "sameSubMinusGenusNotSub": {
+     "est": 0.0318,
+     "ci": [
+      0.0073,
+      0.0549
+     ]
+    },
+    "graded": true
+   }
+  },
+  "FIRST-BOTH": {
+   "formA": {
+    "table": {
+     "IWR": {
+      "members": [
+       "spa",
+       "por",
+       "glg",
+       "cat",
+       "fra",
+       "ita"
+      ],
+      "dyads": [
+       {
+        "d": "spa",
+        "t": "por",
+        "auc": 0.6218,
+        "ctrl": 0.5513,
+        "diff": 0.0705,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4995,
+        "sham": 0.4871
+       },
+       {
+        "d": "spa",
+        "t": "glg",
+        "auc": 0.5463,
+        "ctrl": 0.5147,
+        "diff": 0.0316,
+        "q95": 0.5411,
+        "n": 268,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4948,
+        "sham": 0.4815
+       },
+       {
+        "d": "spa",
+        "t": "cat",
+        "auc": 0.6591,
+        "ctrl": 0.5517,
+        "diff": 0.1074,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": true,
+        "pos": 0.5005,
+        "sham": 0.5088
+       },
+       {
+        "d": "spa",
+        "t": "fra",
+        "auc": 0.6579,
+        "ctrl": 0.5676,
+        "diff": 0.0903,
+        "q95": 0.5343,
+        "n": 384,
+        "pass": true,
+        "twin": false,
+        "pos": 0.498,
+        "sham": 0.4831
+       },
+       {
+        "d": "spa",
+        "t": "ita",
+        "auc": 0.6225,
+        "ctrl": 0.5268,
+        "diff": 0.0957,
+        "q95": 0.5331,
+        "n": 413,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5031,
+        "sham": 0.4974
+       },
+       {
+        "d": "por",
+        "t": "spa",
+        "auc": 0.6262,
+        "ctrl": 0.5639,
+        "diff": 0.0623,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4972,
+        "sham": 0.4972
+       },
+       {
+        "d": "por",
+        "t": "glg",
+        "auc": 0.5439,
+        "ctrl": 0.5147,
+        "diff": 0.0292,
+        "q95": 0.5411,
+        "n": 268,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5035,
+        "sham": 0.4728
+       },
+       {
+        "d": "por",
+        "t": "cat",
+        "auc": 0.637,
+        "ctrl": 0.5517,
+        "diff": 0.0853,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4974,
+        "sham": 0.4909
+       },
+       {
+        "d": "por",
+        "t": "fra",
+        "auc": 0.6179,
+        "ctrl": 0.5676,
+        "diff": 0.0503,
+        "q95": 0.5343,
+        "n": 384,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5057,
+        "sham": 0.4741
+       },
+       {
+        "d": "por",
+        "t": "ita",
+        "auc": 0.5889,
+        "ctrl": 0.5268,
+        "diff": 0.0621,
+        "q95": 0.5331,
+        "n": 413,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4972,
+        "sham": 0.4805
+       },
+       {
+        "d": "glg",
+        "t": "spa",
+        "auc": 0.6472,
+        "ctrl": 0.5639,
+        "diff": 0.0833,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4974,
+        "sham": 0.4765
+       },
+       {
+        "d": "glg",
+        "t": "por",
+        "auc": 0.6007,
+        "ctrl": 0.5513,
+        "diff": 0.0494,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4948,
+        "sham": 0.5112
+       },
+       {
+        "d": "glg",
+        "t": "cat",
+        "auc": 0.6307,
+        "ctrl": 0.5517,
+        "diff": 0.079,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4998,
+        "sham": 0.4791
+       },
+       {
+        "d": "glg",
+        "t": "fra",
+        "auc": 0.6126,
+        "ctrl": 0.5676,
+        "diff": 0.045,
+        "q95": 0.5343,
+        "n": 384,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4989,
+        "sham": 0.5011
+       },
+       {
+        "d": "glg",
+        "t": "ita",
+        "auc": 0.5986,
+        "ctrl": 0.5268,
+        "diff": 0.0718,
+        "q95": 0.5331,
+        "n": 413,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5023,
+        "sham": 0.4995
+       },
+       {
+        "d": "cat",
+        "t": "spa",
+        "auc": 0.6807,
+        "ctrl": 0.5639,
+        "diff": 0.1168,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": true,
+        "pos": 0.4991,
+        "sham": 0.4722
+       },
+       {
+        "d": "cat",
+        "t": "por",
+        "auc": 0.6335,
+        "ctrl": 0.5513,
+        "diff": 0.0822,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.503,
+        "sham": 0.4855
+       },
+       {
+        "d": "cat",
+        "t": "glg",
+        "auc": 0.5703,
+        "ctrl": 0.5147,
+        "diff": 0.0556,
+        "q95": 0.5411,
+        "n": 268,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5004,
+        "sham": 0.463
+       },
+       {
+        "d": "cat",
+        "t": "fra",
+        "auc": 0.6619,
+        "ctrl": 0.5676,
+        "diff": 0.0943,
+        "q95": 0.5343,
+        "n": 384,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5021,
+        "sham": 0.4989
+       },
+       {
+        "d": "cat",
+        "t": "ita",
+        "auc": 0.6356,
+        "ctrl": 0.5268,
+        "diff": 0.1088,
+        "q95": 0.5331,
+        "n": 413,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4981,
+        "sham": 0.4832
+       },
+       {
+        "d": "fra",
+        "t": "spa",
+        "auc": 0.666,
+        "ctrl": 0.5639,
+        "diff": 0.1021,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4999,
+        "sham": 0.4713
+       },
+       {
+        "d": "fra",
+        "t": "por",
+        "auc": 0.6266,
+        "ctrl": 0.5513,
+        "diff": 0.0753,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5005,
+        "sham": 0.4843
+       },
+       {
+        "d": "fra",
+        "t": "glg",
+        "auc": 0.5618,
+        "ctrl": 0.5147,
+        "diff": 0.0471,
+        "q95": 0.5411,
+        "n": 268,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5005,
+        "sham": 0.5074
+       },
+       {
+        "d": "fra",
+        "t": "cat",
+        "auc": 0.6414,
+        "ctrl": 0.5517,
+        "diff": 0.0897,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4994,
+        "sham": 0.4807
+       },
+       {
+        "d": "fra",
+        "t": "ita",
+        "auc": 0.6229,
+        "ctrl": 0.5268,
+        "diff": 0.0961,
+        "q95": 0.5331,
+        "n": 413,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4975,
+        "sham": 0.489
+       },
+       {
+        "d": "ita",
+        "t": "spa",
+        "auc": 0.6503,
+        "ctrl": 0.5639,
+        "diff": 0.0864,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4993,
+        "sham": 0.5018
+       },
+       {
+        "d": "ita",
+        "t": "por",
+        "auc": 0.6391,
+        "ctrl": 0.5513,
+        "diff": 0.0878,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5025,
+        "sham": 0.5037
+       },
+       {
+        "d": "ita",
+        "t": "glg",
+        "auc": 0.5846,
+        "ctrl": 0.5147,
+        "diff": 0.0699,
+        "q95": 0.5411,
+        "n": 268,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5002,
+        "sham": 0.5039
+       },
+       {
+        "d": "ita",
+        "t": "cat",
+        "auc": 0.6199,
+        "ctrl": 0.5517,
+        "diff": 0.0682,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4994,
+        "sham": 0.4932
+       },
+       {
+        "d": "ita",
+        "t": "fra",
+        "auc": 0.6521,
+        "ctrl": 0.5676,
+        "diff": 0.0845,
+        "q95": 0.5343,
+        "n": 384,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5022,
+        "sham": 0.5131
+       }
+      ],
+      "n": 30,
+      "nPass": 21
+     },
+     "NGm": {
+      "members": [
+       "dan",
+       "nob",
+       "swe"
+      ],
+      "dyads": [
+       {
+        "d": "dan",
+        "t": "nob",
+        "auc": 0.633,
+        "ctrl": 0.5703,
+        "diff": 0.0627,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4991,
+        "sham": 0.5303
+       },
+       {
+        "d": "dan",
+        "t": "swe",
+        "auc": 0.605,
+        "ctrl": 0.5708,
+        "diff": 0.0342,
+        "q95": 0.5614,
+        "n": 120,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5008,
+        "sham": 0.5292
+       },
+       {
+        "d": "nob",
+        "t": "dan",
+        "auc": 0.6229,
+        "ctrl": 0.5661,
+        "diff": 0.0568,
+        "q95": 0.5346,
+        "n": 378,
+        "pass": true,
+        "twin": false,
+        "pos": 0.519,
+        "sham": 0.4597
+       },
+       {
+        "d": "nob",
+        "t": "swe",
+        "auc": 0.6373,
+        "ctrl": 0.5708,
+        "diff": 0.0665,
+        "q95": 0.5614,
+        "n": 120,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4973,
+        "sham": 0.449
+       }
+      ],
+      "n": 4,
+      "nPass": 3
+     },
+     "CWGm": {
+      "members": [
+       "deu",
+       "nld",
+       "afr"
+      ],
+      "dyads": [
+       {
+        "d": "deu",
+        "t": "nld",
+        "auc": 0.5964,
+        "ctrl": 0.5479,
+        "diff": 0.0485,
+        "q95": 0.5385,
+        "n": 305,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5086,
+        "sham": 0.5148
+       },
+       {
+        "d": "deu",
+        "t": "afr",
+        "auc": 0.6912,
+        "ctrl": 0.6173,
+        "diff": 0.0739,
+        "q95": 0.5651,
+        "n": 107,
+        "pass": true,
+        "twin": false,
+        "pos": 0.501,
+        "sham": 0.5202
+       },
+       {
+        "d": "nld",
+        "t": "deu",
+        "auc": 0.595,
+        "ctrl": 0.5475,
+        "diff": 0.0475,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4989,
+        "sham": 0.4974
+       },
+       {
+        "d": "nld",
+        "t": "afr",
+        "auc": 0.6854,
+        "ctrl": 0.6173,
+        "diff": 0.0681,
+        "q95": 0.5651,
+        "n": 107,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4955,
+        "sham": 0.5432
+       }
+      ],
+      "n": 4,
+      "nPass": 2
+     },
+     "Hind": {
+      "members": [
+       "hin",
+       "urd"
+      ],
+      "dyads": [
+       {
+        "d": "hin",
+        "t": "urd",
+        "auc": 0.6759,
+        "ctrl": 0.5519,
+        "diff": 0.124,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5058,
+        "sham": 0.5255
+       },
+       {
+        "d": "urd",
+        "t": "hin",
+        "auc": 0.6363,
+        "ctrl": 0.5373,
+        "diff": 0.099,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.507,
+        "sham": 0.5062
+       }
+      ],
+      "n": 2,
+      "nPass": 2
+     },
+     "SSl": {
+      "members": [
+       "hrv",
+       "srp",
+       "slv",
+       "bul"
+      ],
+      "dyads": [
+       {
+        "d": "hrv",
+        "t": "srp",
+        "auc": 0.5708,
+        "ctrl": 0.5234,
+        "diff": 0.0474,
+        "q95": 0.5327,
+        "n": 422,
+        "pass": false,
+        "twin": true,
+        "pos": 0.5055,
+        "sham": 0.4841
+       },
+       {
+        "d": "hrv",
+        "t": "slv",
+        "auc": 0.5639,
+        "ctrl": 0.5298,
+        "diff": 0.0341,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5003,
+        "sham": 0.4963
+       },
+       {
+        "d": "hrv",
+        "t": "bul",
+        "auc": 0.581,
+        "ctrl": 0.5507,
+        "diff": 0.0303,
+        "q95": 0.5285,
+        "n": 554,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4971,
+        "sham": 0.481
+       },
+       {
+        "d": "srp",
+        "t": "hrv",
+        "auc": 0.5972,
+        "ctrl": 0.5452,
+        "diff": 0.052,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": true,
+        "pos": 0.5006,
+        "sham": 0.5179
+       },
+       {
+        "d": "srp",
+        "t": "slv",
+        "auc": 0.5659,
+        "ctrl": 0.5298,
+        "diff": 0.0361,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4978,
+        "sham": 0.4849
+       },
+       {
+        "d": "srp",
+        "t": "bul",
+        "auc": 0.6123,
+        "ctrl": 0.5507,
+        "diff": 0.0616,
+        "q95": 0.5285,
+        "n": 554,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4935,
+        "sham": 0.5216
+       },
+       {
+        "d": "slv",
+        "t": "hrv",
+        "auc": 0.562,
+        "ctrl": 0.5452,
+        "diff": 0.0168,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4987,
+        "sham": 0.5198
+       },
+       {
+        "d": "slv",
+        "t": "srp",
+        "auc": 0.5465,
+        "ctrl": 0.5234,
+        "diff": 0.0231,
+        "q95": 0.5327,
+        "n": 422,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4957,
+        "sham": 0.5136
+       },
+       {
+        "d": "slv",
+        "t": "bul",
+        "auc": 0.5399,
+        "ctrl": 0.5507,
+        "diff": -0.0108,
+        "q95": 0.5285,
+        "n": 554,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5037,
+        "sham": 0.5085
+       },
+       {
+        "d": "bul",
+        "t": "hrv",
+        "auc": 0.5615,
+        "ctrl": 0.5452,
+        "diff": 0.0163,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5014,
+        "sham": 0.5123
+       },
+       {
+        "d": "bul",
+        "t": "srp",
+        "auc": 0.543,
+        "ctrl": 0.5234,
+        "diff": 0.0196,
+        "q95": 0.5327,
+        "n": 422,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5018,
+        "sham": 0.5066
+       },
+       {
+        "d": "bul",
+        "t": "slv",
+        "auc": 0.538,
+        "ctrl": 0.5298,
+        "diff": 0.0082,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4997,
+        "sham": 0.499
+       }
+      ],
+      "n": 12,
+      "nPass": 1
+     },
+     "WSl": {
+      "members": [
+       "ces",
+       "slk",
+       "pol"
+      ],
+      "dyads": [
+       {
+        "d": "ces",
+        "t": "slk",
+        "auc": 0.5124,
+        "ctrl": 0.4789,
+        "diff": 0.0335,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4969,
+        "sham": 0.5
+       },
+       {
+        "d": "ces",
+        "t": "pol",
+        "auc": 0.5059,
+        "ctrl": 0.5322,
+        "diff": -0.0263,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5003,
+        "sham": 0.5173
+       },
+       {
+        "d": "slk",
+        "t": "ces",
+        "auc": 0.5405,
+        "ctrl": 0.5157,
+        "diff": 0.0248,
+        "q95": 0.5714,
+        "n": 89,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4961,
+        "sham": 0.5289
+       },
+       {
+        "d": "slk",
+        "t": "pol",
+        "auc": 0.5102,
+        "ctrl": 0.5322,
+        "diff": -0.022,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4999,
+        "sham": 0.498
+       },
+       {
+        "d": "pol",
+        "t": "ces",
+        "auc": 0.506,
+        "ctrl": 0.5157,
+        "diff": -0.0097,
+        "q95": 0.5714,
+        "n": 89,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4995,
+        "sham": 0.4565
+       },
+       {
+        "d": "pol",
+        "t": "slk",
+        "auc": 0.5293,
+        "ctrl": 0.4789,
+        "diff": 0.0504,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.501,
+        "sham": 0.4729
+       }
+      ],
+      "n": 6,
+      "nPass": 0
+     },
+     "ESl": {
+      "members": [
+       "rus",
+       "ukr"
+      ],
+      "dyads": [
+       {
+        "d": "rus",
+        "t": "ukr",
+        "auc": 0.4972,
+        "ctrl": 0.5207,
+        "diff": -0.0235,
+        "q95": 0.5339,
+        "n": 392,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5004,
+        "sham": 0.4892
+       },
+       {
+        "d": "ukr",
+        "t": "rus",
+        "auc": 0.5492,
+        "ctrl": 0.5201,
+        "diff": 0.0291,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5009,
+        "sham": 0.5041
+       }
+      ],
+      "n": 2,
+      "nPass": 0
+     },
+     "Finnic": {
+      "members": [
+       "est",
+       "fin"
+      ],
+      "dyads": [
+       {
+        "d": "est",
+        "t": "fin",
+        "auc": 0.5571,
+        "ctrl": 0.544,
+        "diff": 0.0131,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4975,
+        "sham": 0.5057
+       },
+       {
+        "d": "fin",
+        "t": "est",
+        "auc": 0.5542,
+        "ctrl": 0.5433,
+        "diff": 0.0109,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5003,
+        "sham": 0.5204
+       }
+      ],
+      "n": 2,
+      "nPass": 0
+     },
+     "Baltic": {
+      "members": [
+       "lav",
+       "lit"
+      ],
+      "dyads": [
+       {
+        "d": "lav",
+        "t": "lit",
+        "auc": 0.556,
+        "ctrl": 0.5275,
+        "diff": 0.0285,
+        "q95": 0.5555,
+        "n": 147,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5026,
+        "sham": 0.5145
+       },
+       {
+        "d": "lit",
+        "t": "lav",
+        "auc": 0.5549,
+        "ctrl": 0.5513,
+        "diff": 0.0036,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4992,
+        "sham": 0.4995
+       }
+      ],
+      "n": 2,
+      "nPass": 0
+     },
+     "Celtic": {
+      "members": [
+       "cym",
+       "gle"
+      ],
+      "dyads": [
+       {
+        "d": "cym",
+        "t": "gle",
+        "auc": 0.6096,
+        "ctrl": 0.5556,
+        "diff": 0.054,
+        "q95": 0.5351,
+        "n": 367,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5003,
+        "sham": 0.4979
+       },
+       {
+        "d": "gle",
+        "t": "cym",
+        "auc": 0.5922,
+        "ctrl": 0.5496,
+        "diff": 0.0426,
+        "q95": 0.5343,
+        "n": 383,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5058,
+        "sham": 0.5145
+       }
+      ],
+      "n": 2,
+      "nPass": 1
+     },
+     "Turkic": {
+      "members": [
+       "tur",
+       "uig"
+      ],
+      "dyads": [],
+      "n": 0,
+      "nPass": 0
+     },
+     "Sinitic": {
+      "members": [
+       "cmn",
+       "lzh"
+      ],
+      "dyads": [
+       {
+        "d": "cmn",
+        "t": "lzh",
+        "auc": 0.4915,
+        "ctrl": 0.4801,
+        "diff": 0.0114,
+        "q95": 0.5305,
+        "n": 484,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4985,
+        "sham": 0.5184
+       },
+       {
+        "d": "lzh",
+        "t": "cmn",
+        "auc": 0.5175,
+        "ctrl": 0.5004,
+        "diff": 0.0171,
+        "q95": 0.5317,
+        "n": 448,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4949,
+        "sham": 0.5007
+       }
+      ],
+      "n": 2,
+      "nPass": 0
+     },
+     "Semitic": {
+      "members": [
+       "arb",
+       "mlt"
+      ],
+      "dyads": [],
+      "n": 0,
+      "nPass": 0
+     }
+    },
+    "verdict": {
+     "verdict": "HOLDS",
+     "dyads": 40,
+     "nPass": 28,
+     "frac": 0.7,
+     "perCluster": {
+      "IWR": {
+       "n": 30,
+       "nPass": 21
+      },
+      "NGm": {
+       "n": 4,
+       "nPass": 3
+      },
+      "CWGm": {
+       "n": 4,
+       "nPass": 2
+      },
+      "Hind": {
+       "n": 2,
+       "nPass": 2
+      }
+     },
+     "diffBoot": {
+      "mean": 0.0725,
+      "lo": 0.0618,
+      "hi": 0.0846,
+      "n": 14,
+      "pos": 14
+     },
+     "positionControl": 0.5007,
+     "shamControl": 0.4942,
+     "meanAuc": 0.6259,
+     "meanCtrl": 0.5519,
+     "failing": [
+      "spa>glg:0.5463",
+      "por>glg:0.5439",
+      "por>ita:0.5889",
+      "glg>por:0.6007",
+      "glg>fra:0.6126",
+      "glg>ita:0.5986",
+      "cat>glg:0.5703",
+      "fra>glg:0.5618",
+      "ita>glg:0.5846",
+      "dan>swe:0.605",
+      "deu>nld:0.5964",
+      "nld>deu:0.595"
+     ]
+    },
+    "verdictNoTwin": {
+     "verdict": "PARTIALLY HOLDS",
+     "dyads": 38,
+     "nPass": 26,
+     "frac": 0.6842,
+     "perCluster": {
+      "IWR": {
+       "n": 28,
+       "nPass": 19
+      },
+      "NGm": {
+       "n": 4,
+       "nPass": 3
+      },
+      "CWGm": {
+       "n": 4,
+       "nPass": 2
+      },
+      "Hind": {
+       "n": 2,
+       "nPass": 2
+      }
+     },
+     "diffBoot": {
+      "mean": 0.0717,
+      "lo": 0.0604,
+      "hi": 0.0834,
+      "n": 14,
+      "pos": 14
+     },
+     "positionControl": 0.5007,
+     "shamControl": 0.4944,
+     "meanAuc": 0.6236,
+     "meanCtrl": 0.5516,
+     "failing": [
+      "spa>glg:0.5463",
+      "por>glg:0.5439",
+      "por>ita:0.5889",
+      "glg>por:0.6007",
+      "glg>fra:0.6126",
+      "glg>ita:0.5986",
+      "cat>glg:0.5703",
+      "fra>glg:0.5618",
+      "ita>glg:0.5846",
+      "dan>swe:0.605",
+      "deu>nld:0.5964",
+      "nld>deu:0.595"
+     ]
+    },
+    "outOfScope": {
+     "SSl": {
+      "n": 12,
+      "nPass": 1,
+      "meanAuc": 0.5652
+     },
+     "WSl": {
+      "n": 6,
+      "nPass": 0,
+      "meanAuc": 0.5174
+     },
+     "ESl": {
+      "n": 2,
+      "nPass": 0,
+      "meanAuc": 0.5232
+     },
+     "Finnic": {
+      "n": 2,
+      "nPass": 0,
+      "meanAuc": 0.5556
+     },
+     "Baltic": {
+      "n": 2,
+      "nPass": 0,
+      "meanAuc": 0.5554
+     },
+     "Celtic": {
+      "n": 2,
+      "nPass": 1,
+      "meanAuc": 0.6009
+     },
+     "Sinitic": {
+      "n": 2,
+      "nPass": 0,
+      "meanAuc": 0.5045
+     }
+    }
+   },
+   "formB": {
+    "table": {
+     "IWR": {
+      "members": [
+       "spa",
+       "por",
+       "glg",
+       "cat",
+       "fra",
+       "ita"
+      ],
+      "dyads": [
+       {
+        "d": "spa",
+        "t": "por",
+        "auc": 0.6155,
+        "ctrl": 0.5483,
+        "diff": 0.0672,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5023,
+        "sham": 0.4798
+       },
+       {
+        "d": "spa",
+        "t": "glg",
+        "auc": 0.5622,
+        "ctrl": 0.517,
+        "diff": 0.0452,
+        "q95": 0.5411,
+        "n": 268,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4927,
+        "sham": 0.4976
+       },
+       {
+        "d": "spa",
+        "t": "cat",
+        "auc": 0.654,
+        "ctrl": 0.5603,
+        "diff": 0.0937,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": true,
+        "pos": 0.5011,
+        "sham": 0.4651
+       },
+       {
+        "d": "spa",
+        "t": "fra",
+        "auc": 0.6399,
+        "ctrl": 0.5593,
+        "diff": 0.0806,
+        "q95": 0.5343,
+        "n": 384,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5018,
+        "sham": 0.4787
+       },
+       {
+        "d": "spa",
+        "t": "ita",
+        "auc": 0.6289,
+        "ctrl": 0.5362,
+        "diff": 0.0927,
+        "q95": 0.5331,
+        "n": 413,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5029,
+        "sham": 0.4673
+       },
+       {
+        "d": "por",
+        "t": "spa",
+        "auc": 0.619,
+        "ctrl": 0.5672,
+        "diff": 0.0518,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5002,
+        "sham": 0.5142
+       },
+       {
+        "d": "por",
+        "t": "glg",
+        "auc": 0.5891,
+        "ctrl": 0.517,
+        "diff": 0.0721,
+        "q95": 0.5411,
+        "n": 268,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4933,
+        "sham": 0.5007
+       },
+       {
+        "d": "por",
+        "t": "cat",
+        "auc": 0.6032,
+        "ctrl": 0.5603,
+        "diff": 0.0429,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4985,
+        "sham": 0.5031
+       },
+       {
+        "d": "por",
+        "t": "fra",
+        "auc": 0.6229,
+        "ctrl": 0.5593,
+        "diff": 0.0636,
+        "q95": 0.5343,
+        "n": 384,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5075,
+        "sham": 0.538
+       },
+       {
+        "d": "por",
+        "t": "ita",
+        "auc": 0.6097,
+        "ctrl": 0.5362,
+        "diff": 0.0735,
+        "q95": 0.5331,
+        "n": 413,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4987,
+        "sham": 0.514
+       },
+       {
+        "d": "glg",
+        "t": "spa",
+        "auc": 0.5741,
+        "ctrl": 0.5672,
+        "diff": 0.0069,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4967,
+        "sham": 0.5001
+       },
+       {
+        "d": "glg",
+        "t": "por",
+        "auc": 0.5547,
+        "ctrl": 0.5483,
+        "diff": 0.0064,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.493,
+        "sham": 0.5014
+       },
+       {
+        "d": "glg",
+        "t": "cat",
+        "auc": 0.5227,
+        "ctrl": 0.5603,
+        "diff": -0.0376,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5004,
+        "sham": 0.5051
+       },
+       {
+        "d": "glg",
+        "t": "fra",
+        "auc": 0.5667,
+        "ctrl": 0.5593,
+        "diff": 0.0074,
+        "q95": 0.5343,
+        "n": 384,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4984,
+        "sham": 0.4983
+       },
+       {
+        "d": "glg",
+        "t": "ita",
+        "auc": 0.5646,
+        "ctrl": 0.5362,
+        "diff": 0.0284,
+        "q95": 0.5331,
+        "n": 413,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5034,
+        "sham": 0.505
+       },
+       {
+        "d": "cat",
+        "t": "spa",
+        "auc": 0.6543,
+        "ctrl": 0.5672,
+        "diff": 0.0871,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": true,
+        "pos": 0.5033,
+        "sham": 0.4611
+       },
+       {
+        "d": "cat",
+        "t": "por",
+        "auc": 0.6287,
+        "ctrl": 0.5483,
+        "diff": 0.0804,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.501,
+        "sham": 0.4716
+       },
+       {
+        "d": "cat",
+        "t": "glg",
+        "auc": 0.5548,
+        "ctrl": 0.517,
+        "diff": 0.0378,
+        "q95": 0.5411,
+        "n": 268,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4937,
+        "sham": 0.4586
+       },
+       {
+        "d": "cat",
+        "t": "fra",
+        "auc": 0.6011,
+        "ctrl": 0.5593,
+        "diff": 0.0418,
+        "q95": 0.5343,
+        "n": 384,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5017,
+        "sham": 0.4707
+       },
+       {
+        "d": "cat",
+        "t": "ita",
+        "auc": 0.6312,
+        "ctrl": 0.5362,
+        "diff": 0.095,
+        "q95": 0.5331,
+        "n": 413,
+        "pass": true,
+        "twin": false,
+        "pos": 0.503,
+        "sham": 0.4741
+       },
+       {
+        "d": "fra",
+        "t": "spa",
+        "auc": 0.6595,
+        "ctrl": 0.5672,
+        "diff": 0.0923,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5008,
+        "sham": 0.524
+       },
+       {
+        "d": "fra",
+        "t": "por",
+        "auc": 0.6435,
+        "ctrl": 0.5483,
+        "diff": 0.0952,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5066,
+        "sham": 0.5225
+       },
+       {
+        "d": "fra",
+        "t": "glg",
+        "auc": 0.5744,
+        "ctrl": 0.517,
+        "diff": 0.0574,
+        "q95": 0.5411,
+        "n": 268,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4961,
+        "sham": 0.5151
+       },
+       {
+        "d": "fra",
+        "t": "cat",
+        "auc": 0.6112,
+        "ctrl": 0.5603,
+        "diff": 0.0509,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5,
+        "sham": 0.5153
+       },
+       {
+        "d": "fra",
+        "t": "ita",
+        "auc": 0.6253,
+        "ctrl": 0.5362,
+        "diff": 0.0891,
+        "q95": 0.5331,
+        "n": 413,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5036,
+        "sham": 0.5095
+       },
+       {
+        "d": "ita",
+        "t": "spa",
+        "auc": 0.6475,
+        "ctrl": 0.5672,
+        "diff": 0.0803,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.501,
+        "sham": 0.4729
+       },
+       {
+        "d": "ita",
+        "t": "por",
+        "auc": 0.611,
+        "ctrl": 0.5483,
+        "diff": 0.0627,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5005,
+        "sham": 0.4973
+       },
+       {
+        "d": "ita",
+        "t": "glg",
+        "auc": 0.5837,
+        "ctrl": 0.517,
+        "diff": 0.0667,
+        "q95": 0.5411,
+        "n": 268,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4965,
+        "sham": 0.5168
+       },
+       {
+        "d": "ita",
+        "t": "cat",
+        "auc": 0.6318,
+        "ctrl": 0.5603,
+        "diff": 0.0715,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5025,
+        "sham": 0.4676
+       },
+       {
+        "d": "ita",
+        "t": "fra",
+        "auc": 0.6536,
+        "ctrl": 0.5593,
+        "diff": 0.0943,
+        "q95": 0.5343,
+        "n": 384,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5078,
+        "sham": 0.4635
+       }
+      ],
+      "n": 30,
+      "nPass": 18
+     },
+     "NGm": {
+      "members": [
+       "dan",
+       "nob",
+       "swe"
+      ],
+      "dyads": [
+       {
+        "d": "dan",
+        "t": "nob",
+        "auc": 0.6453,
+        "ctrl": 0.5691,
+        "diff": 0.0762,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5051,
+        "sham": 0.4978
+       },
+       {
+        "d": "dan",
+        "t": "swe",
+        "auc": 0.6143,
+        "ctrl": 0.568,
+        "diff": 0.0463,
+        "q95": 0.5614,
+        "n": 120,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4965,
+        "sham": 0.4912
+       },
+       {
+        "d": "nob",
+        "t": "dan",
+        "auc": 0.6219,
+        "ctrl": 0.5628,
+        "diff": 0.0591,
+        "q95": 0.5346,
+        "n": 378,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5052,
+        "sham": 0.4918
+       },
+       {
+        "d": "nob",
+        "t": "swe",
+        "auc": 0.6317,
+        "ctrl": 0.568,
+        "diff": 0.0637,
+        "q95": 0.5614,
+        "n": 120,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5003,
+        "sham": 0.4579
+       },
+       {
+        "d": "swe",
+        "t": "dan",
+        "auc": 0.6256,
+        "ctrl": 0.5628,
+        "diff": 0.0628,
+        "q95": 0.5346,
+        "n": 378,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4915,
+        "sham": 0.5139
+       },
+       {
+        "d": "swe",
+        "t": "nob",
+        "auc": 0.6661,
+        "ctrl": 0.5691,
+        "diff": 0.097,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4961,
+        "sham": 0.5308
+       }
+      ],
+      "n": 6,
+      "nPass": 5
+     },
+     "CWGm": {
+      "members": [
+       "deu",
+       "nld",
+       "afr"
+      ],
+      "dyads": [
+       {
+        "d": "deu",
+        "t": "nld",
+        "auc": 0.5432,
+        "ctrl": 0.5398,
+        "diff": 0.0034,
+        "q95": 0.5385,
+        "n": 305,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4971,
+        "sham": 0.4717
+       },
+       {
+        "d": "deu",
+        "t": "afr",
+        "auc": 0.6437,
+        "ctrl": 0.6124,
+        "diff": 0.0313,
+        "q95": 0.5651,
+        "n": 107,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4955,
+        "sham": 0.4805
+       },
+       {
+        "d": "nld",
+        "t": "deu",
+        "auc": 0.5736,
+        "ctrl": 0.5407,
+        "diff": 0.0329,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5007,
+        "sham": 0.4925
+       },
+       {
+        "d": "nld",
+        "t": "afr",
+        "auc": 0.6867,
+        "ctrl": 0.6124,
+        "diff": 0.0743,
+        "q95": 0.5651,
+        "n": 107,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5007,
+        "sham": 0.4847
+       },
+       {
+        "d": "afr",
+        "t": "deu",
+        "auc": 0.5886,
+        "ctrl": 0.5407,
+        "diff": 0.0479,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5027,
+        "sham": 0.522
+       },
+       {
+        "d": "afr",
+        "t": "nld",
+        "auc": 0.6194,
+        "ctrl": 0.5398,
+        "diff": 0.0796,
+        "q95": 0.5385,
+        "n": 305,
+        "pass": true,
+        "twin": false,
+        "pos": 0.504,
+        "sham": 0.5118
+       }
+      ],
+      "n": 6,
+      "nPass": 2
+     },
+     "Hind": {
+      "members": [
+       "hin",
+       "urd"
+      ],
+      "dyads": [
+       {
+        "d": "hin",
+        "t": "urd",
+        "auc": 0.6274,
+        "ctrl": 0.558,
+        "diff": 0.0694,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5062,
+        "sham": 0.5161
+       },
+       {
+        "d": "urd",
+        "t": "hin",
+        "auc": 0.641,
+        "ctrl": 0.537,
+        "diff": 0.104,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5082,
+        "sham": 0.4912
+       }
+      ],
+      "n": 2,
+      "nPass": 2
+     },
+     "SSl": {
+      "members": [
+       "hrv",
+       "srp",
+       "slv",
+       "bul"
+      ],
+      "dyads": [
+       {
+        "d": "hrv",
+        "t": "srp",
+        "auc": 0.5778,
+        "ctrl": 0.5222,
+        "diff": 0.0556,
+        "q95": 0.5327,
+        "n": 422,
+        "pass": false,
+        "twin": true,
+        "pos": 0.5013,
+        "sham": 0.5034
+       },
+       {
+        "d": "hrv",
+        "t": "slv",
+        "auc": 0.5711,
+        "ctrl": 0.5338,
+        "diff": 0.0373,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5007,
+        "sham": 0.4658
+       },
+       {
+        "d": "hrv",
+        "t": "bul",
+        "auc": 0.5786,
+        "ctrl": 0.5451,
+        "diff": 0.0335,
+        "q95": 0.5285,
+        "n": 554,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4996,
+        "sham": 0.5009
+       },
+       {
+        "d": "srp",
+        "t": "hrv",
+        "auc": 0.6,
+        "ctrl": 0.5431,
+        "diff": 0.0569,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": true,
+        "pos": 0.504,
+        "sham": 0.5109
+       },
+       {
+        "d": "srp",
+        "t": "slv",
+        "auc": 0.5419,
+        "ctrl": 0.5338,
+        "diff": 0.0081,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5003,
+        "sham": 0.4927
+       },
+       {
+        "d": "srp",
+        "t": "bul",
+        "auc": 0.6008,
+        "ctrl": 0.5451,
+        "diff": 0.0557,
+        "q95": 0.5285,
+        "n": 554,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4932,
+        "sham": 0.4924
+       },
+       {
+        "d": "slv",
+        "t": "hrv",
+        "auc": 0.5664,
+        "ctrl": 0.5431,
+        "diff": 0.0233,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5013,
+        "sham": 0.4933
+       },
+       {
+        "d": "slv",
+        "t": "srp",
+        "auc": 0.5417,
+        "ctrl": 0.5222,
+        "diff": 0.0195,
+        "q95": 0.5327,
+        "n": 422,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5028,
+        "sham": 0.4935
+       },
+       {
+        "d": "slv",
+        "t": "bul",
+        "auc": 0.5495,
+        "ctrl": 0.5451,
+        "diff": 0.0044,
+        "q95": 0.5285,
+        "n": 554,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4982,
+        "sham": 0.4886
+       },
+       {
+        "d": "bul",
+        "t": "hrv",
+        "auc": 0.596,
+        "ctrl": 0.5431,
+        "diff": 0.0529,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4963,
+        "sham": 0.4885
+       },
+       {
+        "d": "bul",
+        "t": "srp",
+        "auc": 0.5863,
+        "ctrl": 0.5222,
+        "diff": 0.0641,
+        "q95": 0.5327,
+        "n": 422,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4941,
+        "sham": 0.4959
+       },
+       {
+        "d": "bul",
+        "t": "slv",
+        "auc": 0.5273,
+        "ctrl": 0.5338,
+        "diff": -0.0065,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5007,
+        "sham": 0.4962
+       }
+      ],
+      "n": 12,
+      "nPass": 2
+     },
+     "WSl": {
+      "members": [
+       "ces",
+       "slk",
+       "pol"
+      ],
+      "dyads": [
+       {
+        "d": "slk",
+        "t": "ces",
+        "auc": 0.5383,
+        "ctrl": 0.5091,
+        "diff": 0.0292,
+        "q95": 0.5714,
+        "n": 89,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5008,
+        "sham": 0.5369
+       },
+       {
+        "d": "slk",
+        "t": "pol",
+        "auc": 0.5287,
+        "ctrl": 0.5312,
+        "diff": -0.0025,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5002,
+        "sham": 0.5119
+       },
+       {
+        "d": "pol",
+        "t": "ces",
+        "auc": 0.5388,
+        "ctrl": 0.5091,
+        "diff": 0.0297,
+        "q95": 0.5714,
+        "n": 89,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5006,
+        "sham": 0.523
+       },
+       {
+        "d": "pol",
+        "t": "slk",
+        "auc": 0.5139,
+        "ctrl": 0.4787,
+        "diff": 0.0352,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.505,
+        "sham": 0.495
+       }
+      ],
+      "n": 4,
+      "nPass": 0
+     },
+     "ESl": {
+      "members": [
+       "rus",
+       "ukr"
+      ],
+      "dyads": [
+       {
+        "d": "rus",
+        "t": "ukr",
+        "auc": 0.5256,
+        "ctrl": 0.5134,
+        "diff": 0.0122,
+        "q95": 0.5339,
+        "n": 392,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4983,
+        "sham": 0.4749
+       },
+       {
+        "d": "ukr",
+        "t": "rus",
+        "auc": 0.5224,
+        "ctrl": 0.5172,
+        "diff": 0.0052,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5017,
+        "sham": 0.4953
+       }
+      ],
+      "n": 2,
+      "nPass": 0
+     },
+     "Finnic": {
+      "members": [
+       "est",
+       "fin"
+      ],
+      "dyads": [
+       {
+        "d": "est",
+        "t": "fin",
+        "auc": 0.5645,
+        "ctrl": 0.5445,
+        "diff": 0.02,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5003,
+        "sham": 0.5036
+       },
+       {
+        "d": "fin",
+        "t": "est",
+        "auc": 0.5536,
+        "ctrl": 0.5459,
+        "diff": 0.0077,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4995,
+        "sham": 0.5201
+       }
+      ],
+      "n": 2,
+      "nPass": 0
+     },
+     "Baltic": {
+      "members": [
+       "lav",
+       "lit"
+      ],
+      "dyads": [
+       {
+        "d": "lav",
+        "t": "lit",
+        "auc": 0.5119,
+        "ctrl": 0.5302,
+        "diff": -0.0183,
+        "q95": 0.5555,
+        "n": 147,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5016,
+        "sham": 0.5121
+       },
+       {
+        "d": "lit",
+        "t": "lav",
+        "auc": 0.5305,
+        "ctrl": 0.5517,
+        "diff": -0.0212,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5012,
+        "sham": 0.512
+       }
+      ],
+      "n": 2,
+      "nPass": 0
+     },
+     "Celtic": {
+      "members": [
+       "cym",
+       "gle"
+      ],
+      "dyads": [
+       {
+        "d": "cym",
+        "t": "gle",
+        "auc": 0.609,
+        "ctrl": 0.5475,
+        "diff": 0.0615,
+        "q95": 0.5351,
+        "n": 367,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5092,
+        "sham": 0.502
+       },
+       {
+        "d": "gle",
+        "t": "cym",
+        "auc": 0.6052,
+        "ctrl": 0.553,
+        "diff": 0.0522,
+        "q95": 0.5343,
+        "n": 383,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5086,
+        "sham": 0.4799
+       }
+      ],
+      "n": 2,
+      "nPass": 2
+     },
+     "Turkic": {
+      "members": [
+       "tur",
+       "uig"
+      ],
+      "dyads": [],
+      "n": 0,
+      "nPass": 0
+     },
+     "Sinitic": {
+      "members": [
+       "cmn",
+       "lzh"
+      ],
+      "dyads": [
+       {
+        "d": "cmn",
+        "t": "lzh",
+        "auc": 0.5036,
+        "ctrl": 0.4746,
+        "diff": 0.029,
+        "q95": 0.5305,
+        "n": 484,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4991,
+        "sham": 0.4936
+       },
+       {
+        "d": "lzh",
+        "t": "cmn",
+        "auc": 0.5175,
+        "ctrl": 0.4975,
+        "diff": 0.02,
+        "q95": 0.5317,
+        "n": 448,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4998,
+        "sham": 0.5145
+       }
+      ],
+      "n": 2,
+      "nPass": 0
+     },
+     "Semitic": {
+      "members": [
+       "arb",
+       "mlt"
+      ],
+      "dyads": [],
+      "n": 0,
+      "nPass": 0
+     }
+    },
+    "verdict": {
+     "verdict": "PARTIALLY HOLDS",
+     "dyads": 44,
+     "nPass": 27,
+     "frac": 0.6136,
+     "perCluster": {
+      "IWR": {
+       "n": 30,
+       "nPass": 18
+      },
+      "NGm": {
+       "n": 6,
+       "nPass": 5
+      },
+      "CWGm": {
+       "n": 6,
+       "nPass": 2
+      },
+      "Hind": {
+       "n": 2,
+       "nPass": 2
+      }
+     },
+     "diffBoot": {
+      "mean": 0.0622,
+      "lo": 0.0539,
+      "hi": 0.0715,
+      "n": 14,
+      "pos": 14
+     },
+     "positionControl": 0.5004,
+     "shamControl": 0.4946,
+     "meanAuc": 0.6129,
+     "meanCtrl": 0.5528,
+     "failing": [
+      "spa>glg:0.5622",
+      "por>glg:0.5891",
+      "por>cat:0.6032",
+      "glg>spa:0.5741",
+      "glg>por:0.5547",
+      "glg>cat:0.5227",
+      "glg>fra:0.5667",
+      "glg>ita:0.5646",
+      "cat>glg:0.5548",
+      "cat>fra:0.6011",
+      "fra>glg:0.5744",
+      "ita>glg:0.5837",
+      "dan>swe:0.6143",
+      "deu>nld:0.5432",
+      "deu>afr:0.6437",
+      "nld>deu:0.5736",
+      "afr>deu:0.5886"
+     ]
+    },
+    "verdictNoTwin": {
+     "verdict": "PARTIALLY HOLDS",
+     "dyads": 42,
+     "nPass": 25,
+     "frac": 0.5952,
+     "perCluster": {
+      "IWR": {
+       "n": 28,
+       "nPass": 16
+      },
+      "NGm": {
+       "n": 6,
+       "nPass": 5
+      },
+      "CWGm": {
+       "n": 6,
+       "nPass": 2
+      },
+      "Hind": {
+       "n": 2,
+       "nPass": 2
+      }
+     },
+     "diffBoot": {
+      "mean": 0.0608,
+      "lo": 0.0518,
+      "hi": 0.071,
+      "n": 14,
+      "pos": 14
+     },
+     "positionControl": 0.5003,
+     "shamControl": 0.4961,
+     "meanAuc": 0.6109,
+     "meanCtrl": 0.5523,
+     "failing": [
+      "spa>glg:0.5622",
+      "por>glg:0.5891",
+      "por>cat:0.6032",
+      "glg>spa:0.5741",
+      "glg>por:0.5547",
+      "glg>cat:0.5227",
+      "glg>fra:0.5667",
+      "glg>ita:0.5646",
+      "cat>glg:0.5548",
+      "cat>fra:0.6011",
+      "fra>glg:0.5744",
+      "ita>glg:0.5837",
+      "dan>swe:0.6143",
+      "deu>nld:0.5432",
+      "deu>afr:0.6437",
+      "nld>deu:0.5736",
+      "afr>deu:0.5886"
+     ]
+    },
+    "outOfScope": {
+     "SSl": {
+      "n": 12,
+      "nPass": 2,
+      "meanAuc": 0.5698
+     },
+     "WSl": {
+      "n": 4,
+      "nPass": 0,
+      "meanAuc": 0.5299
+     },
+     "ESl": {
+      "n": 2,
+      "nPass": 0,
+      "meanAuc": 0.524
+     },
+     "Finnic": {
+      "n": 2,
+      "nPass": 0,
+      "meanAuc": 0.5591
+     },
+     "Baltic": {
+      "n": 2,
+      "nPass": 0,
+      "meanAuc": 0.5212
+     },
+     "Celtic": {
+      "n": 2,
+      "nPass": 2,
+      "meanAuc": 0.6071
+     },
+     "Sinitic": {
+      "n": 2,
+      "nPass": 0,
+      "meanAuc": 0.5106
+     }
+    },
+    "gradient": {
+     "n": 1295,
+     "est": {
+      "sameSub": 0.0612,
+      "sameGenusNotSub": 0.0481,
+      "sameFamilyOnly": 0.0172,
+      "sameOrder": 0.0163,
+      "sameScript": 0.004,
+      "sameMorph": -0.0083,
+      "sameTeam": 0.022
+     },
+     "ci": {
+      "sameSub": [
+       0.0304,
+       0.0882
+      ],
+      "sameGenusNotSub": [
+       0.0172,
+       0.0789
+      ],
+      "sameFamilyOnly": [
+       -0.0035,
+       0.0392
+      ],
+      "sameOrder": [
+       0.0028,
+       0.0285
+      ],
+      "sameScript": [
+       -0.0103,
+       0.018
+      ],
+      "sameMorph": [
+       -0.0191,
+       0.0044
+      ],
+      "sameTeam": [
+       -0.0016,
+       0.0438
+      ]
+     },
+     "sameSubMinusFamilyOnly": {
+      "est": 0.044,
+      "ci": [
+       0.0266,
+       0.0588
+      ]
+     },
+     "sameSubMinusGenusNotSub": {
+      "est": 0.013,
+      "ci": [
+       -0.0132,
+       0.0393
+      ]
+     },
+     "graded": true
+    }
+   },
+   "gradientFormA": {
+    "n": 1332,
+    "est": {
+     "sameSub": 0.0742,
+     "sameGenusNotSub": 0.054,
+     "sameFamilyOnly": 0.0254,
+     "sameOrder": 0.013,
+     "sameScript": -0.0005,
+     "sameMorph": -0.0131,
+     "sameTeam": 0.0207
+    },
+    "ci": {
+     "sameSub": [
+      0.0477,
+      0.0972
+     ],
+     "sameGenusNotSub": [
+      0.0324,
+      0.0739
+     ],
+     "sameFamilyOnly": [
+      0.0077,
+      0.0429
+     ],
+     "sameOrder": [
+      -0.0014,
+      0.0254
+     ],
+     "sameScript": [
+      -0.012,
+      0.0126
+     ],
+     "sameMorph": [
+      -0.0229,
+      -0.0029
+     ],
+     "sameTeam": [
+      -0.0097,
+      0.0518
+     ]
+    },
+    "sameSubMinusFamilyOnly": {
+     "est": 0.0488,
+     "ci": [
+      0.0289,
+      0.0673
+     ]
+    },
+    "sameSubMinusGenusNotSub": {
+     "est": 0.0202,
+     "ci": [
+      -0.0029,
+      0.0406
+     ]
+    },
+    "graded": true
+   }
+  },
+  "LATER-BOTH": {
+   "formA": {
+    "table": {
+     "IWR": {
+      "members": [
+       "spa",
+       "por",
+       "glg",
+       "cat",
+       "fra",
+       "ita"
+      ],
+      "dyads": [
+       {
+        "d": "spa",
+        "t": "por",
+        "auc": 0.5947,
+        "ctrl": 0.5109,
+        "diff": 0.0838,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4994,
+        "sham": 0.5103
+       },
+       {
+        "d": "spa",
+        "t": "glg",
+        "auc": 0.6179,
+        "ctrl": 0.5197,
+        "diff": 0.0982,
+        "q95": 0.5691,
+        "n": 95,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5,
+        "sham": 0.4961
+       },
+       {
+        "d": "spa",
+        "t": "cat",
+        "auc": 0.6401,
+        "ctrl": 0.5217,
+        "diff": 0.1184,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": true,
+        "pos": 0.5033,
+        "sham": 0.5066
+       },
+       {
+        "d": "spa",
+        "t": "fra",
+        "auc": 0.5854,
+        "ctrl": 0.5179,
+        "diff": 0.0675,
+        "q95": 0.5722,
+        "n": 87,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5183,
+        "sham": 0.4919
+       },
+       {
+        "d": "spa",
+        "t": "ita",
+        "auc": 0.6364,
+        "ctrl": 0.5018,
+        "diff": 0.1346,
+        "q95": 0.5731,
+        "n": 85,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4993,
+        "sham": 0.5039
+       },
+       {
+        "d": "por",
+        "t": "spa",
+        "auc": 0.5777,
+        "ctrl": 0.5192,
+        "diff": 0.0585,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5012,
+        "sham": 0.4887
+       },
+       {
+        "d": "por",
+        "t": "glg",
+        "auc": 0.5415,
+        "ctrl": 0.5197,
+        "diff": 0.0218,
+        "q95": 0.5691,
+        "n": 95,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5,
+        "sham": 0.4793
+       },
+       {
+        "d": "por",
+        "t": "cat",
+        "auc": 0.6048,
+        "ctrl": 0.5217,
+        "diff": 0.0831,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.504,
+        "sham": 0.49
+       },
+       {
+        "d": "por",
+        "t": "fra",
+        "auc": 0.5928,
+        "ctrl": 0.5179,
+        "diff": 0.0749,
+        "q95": 0.5722,
+        "n": 87,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5126,
+        "sham": 0.4934
+       },
+       {
+        "d": "por",
+        "t": "ita",
+        "auc": 0.6011,
+        "ctrl": 0.5018,
+        "diff": 0.0993,
+        "q95": 0.5731,
+        "n": 85,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4988,
+        "sham": 0.5113
+       },
+       {
+        "d": "cat",
+        "t": "spa",
+        "auc": 0.5914,
+        "ctrl": 0.5192,
+        "diff": 0.0722,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": true,
+        "pos": 0.5005,
+        "sham": 0.4938
+       },
+       {
+        "d": "cat",
+        "t": "por",
+        "auc": 0.5736,
+        "ctrl": 0.5109,
+        "diff": 0.0627,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.502,
+        "sham": 0.497
+       },
+       {
+        "d": "cat",
+        "t": "glg",
+        "auc": 0.5793,
+        "ctrl": 0.5197,
+        "diff": 0.0596,
+        "q95": 0.5691,
+        "n": 95,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5,
+        "sham": 0.5043
+       },
+       {
+        "d": "cat",
+        "t": "fra",
+        "auc": 0.6044,
+        "ctrl": 0.5179,
+        "diff": 0.0865,
+        "q95": 0.5722,
+        "n": 87,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4951,
+        "sham": 0.5046
+       },
+       {
+        "d": "cat",
+        "t": "ita",
+        "auc": 0.5738,
+        "ctrl": 0.5018,
+        "diff": 0.072,
+        "q95": 0.5731,
+        "n": 85,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4997,
+        "sham": 0.5026
+       },
+       {
+        "d": "fra",
+        "t": "spa",
+        "auc": 0.5864,
+        "ctrl": 0.5192,
+        "diff": 0.0672,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4964,
+        "sham": 0.5022
+       },
+       {
+        "d": "fra",
+        "t": "por",
+        "auc": 0.5523,
+        "ctrl": 0.5109,
+        "diff": 0.0414,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5014,
+        "sham": 0.5083
+       },
+       {
+        "d": "fra",
+        "t": "glg",
+        "auc": 0.6176,
+        "ctrl": 0.5197,
+        "diff": 0.0979,
+        "q95": 0.5691,
+        "n": 95,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5,
+        "sham": 0.5039
+       },
+       {
+        "d": "fra",
+        "t": "cat",
+        "auc": 0.5934,
+        "ctrl": 0.5217,
+        "diff": 0.0717,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4991,
+        "sham": 0.5231
+       },
+       {
+        "d": "fra",
+        "t": "ita",
+        "auc": 0.5611,
+        "ctrl": 0.5018,
+        "diff": 0.0593,
+        "q95": 0.5731,
+        "n": 85,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5028,
+        "sham": 0.5618
+       },
+       {
+        "d": "ita",
+        "t": "spa",
+        "auc": 0.6085,
+        "ctrl": 0.5192,
+        "diff": 0.0893,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5001,
+        "sham": 0.4914
+       },
+       {
+        "d": "ita",
+        "t": "por",
+        "auc": 0.5608,
+        "ctrl": 0.5109,
+        "diff": 0.0499,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5048,
+        "sham": 0.4982
+       },
+       {
+        "d": "ita",
+        "t": "glg",
+        "auc": 0.6116,
+        "ctrl": 0.5197,
+        "diff": 0.0919,
+        "q95": 0.5691,
+        "n": 95,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5,
+        "sham": 0.4773
+       },
+       {
+        "d": "ita",
+        "t": "cat",
+        "auc": 0.5983,
+        "ctrl": 0.5217,
+        "diff": 0.0766,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5084,
+        "sham": 0.4913
+       },
+       {
+        "d": "ita",
+        "t": "fra",
+        "auc": 0.5431,
+        "ctrl": 0.5179,
+        "diff": 0.0252,
+        "q95": 0.5722,
+        "n": 87,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5178,
+        "sham": 0.4875
+       }
+      ],
+      "n": 25,
+      "nPass": 9
+     },
+     "NGm": {
+      "members": [
+       "dan",
+       "nob",
+       "swe"
+      ],
+      "dyads": [
+       {
+        "d": "nob",
+        "t": "dan",
+        "auc": 0.5833,
+        "ctrl": 0.5382,
+        "diff": 0.0451,
+        "q95": 0.5524,
+        "n": 165,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4945,
+        "sham": 0.5018
+       },
+       {
+        "d": "nob",
+        "t": "swe",
+        "auc": 0.6145,
+        "ctrl": 0.5371,
+        "diff": 0.0774,
+        "q95": 0.5622,
+        "n": 117,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5027,
+        "sham": 0.52
+       }
+      ],
+      "n": 2,
+      "nPass": 1
+     },
+     "CWGm": {
+      "members": [
+       "deu",
+       "nld",
+       "afr"
+      ],
+      "dyads": [
+       {
+        "d": "deu",
+        "t": "nld",
+        "auc": 0.5139,
+        "ctrl": 0.5118,
+        "diff": 0.0021,
+        "q95": 0.5423,
+        "n": 252,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4978,
+        "sham": 0.5256
+       },
+       {
+        "d": "nld",
+        "t": "deu",
+        "auc": 0.5956,
+        "ctrl": 0.5347,
+        "diff": 0.0609,
+        "q95": 0.544,
+        "n": 233,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5011,
+        "sham": 0.5106
+       }
+      ],
+      "n": 2,
+      "nPass": 0
+     },
+     "Hind": {
+      "members": [
+       "hin",
+       "urd"
+      ],
+      "dyads": [
+       {
+        "d": "hin",
+        "t": "urd",
+        "auc": 0.6097,
+        "ctrl": 0.5055,
+        "diff": 0.1042,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4947,
+        "sham": 0.4903
+       },
+       {
+        "d": "urd",
+        "t": "hin",
+        "auc": 0.606,
+        "ctrl": 0.5063,
+        "diff": 0.0997,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5024,
+        "sham": 0.466
+       }
+      ],
+      "n": 2,
+      "nPass": 2
+     },
+     "SSl": {
+      "members": [
+       "hrv",
+       "srp",
+       "slv",
+       "bul"
+      ],
+      "dyads": [
+       {
+        "d": "hrv",
+        "t": "srp",
+        "auc": 0.576,
+        "ctrl": 0.4949,
+        "diff": 0.0811,
+        "q95": 0.5345,
+        "n": 379,
+        "pass": false,
+        "twin": true,
+        "pos": 0.5016,
+        "sham": 0.5018
+       },
+       {
+        "d": "hrv",
+        "t": "slv",
+        "auc": 0.5601,
+        "ctrl": 0.5199,
+        "diff": 0.0402,
+        "q95": 0.5464,
+        "n": 210,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4999,
+        "sham": 0.4995
+       },
+       {
+        "d": "hrv",
+        "t": "bul",
+        "auc": 0.5657,
+        "ctrl": 0.5194,
+        "diff": 0.0463,
+        "q95": 0.546,
+        "n": 214,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5027,
+        "sham": 0.4848
+       },
+       {
+        "d": "srp",
+        "t": "hrv",
+        "auc": 0.5781,
+        "ctrl": 0.5054,
+        "diff": 0.0727,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": true,
+        "pos": 0.5,
+        "sham": 0.5153
+       },
+       {
+        "d": "srp",
+        "t": "slv",
+        "auc": 0.576,
+        "ctrl": 0.5199,
+        "diff": 0.0561,
+        "q95": 0.5464,
+        "n": 210,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5011,
+        "sham": 0.5091
+       },
+       {
+        "d": "srp",
+        "t": "bul",
+        "auc": 0.5261,
+        "ctrl": 0.5194,
+        "diff": 0.0067,
+        "q95": 0.546,
+        "n": 214,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5288,
+        "sham": 0.5093
+       },
+       {
+        "d": "slv",
+        "t": "hrv",
+        "auc": 0.5329,
+        "ctrl": 0.5054,
+        "diff": 0.0275,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5,
+        "sham": 0.48
+       },
+       {
+        "d": "slv",
+        "t": "srp",
+        "auc": 0.5213,
+        "ctrl": 0.4949,
+        "diff": 0.0264,
+        "q95": 0.5345,
+        "n": 379,
+        "pass": false,
+        "twin": false,
+        "pos": 0.511,
+        "sham": 0.4742
+       },
+       {
+        "d": "slv",
+        "t": "bul",
+        "auc": 0.5252,
+        "ctrl": 0.5194,
+        "diff": 0.0058,
+        "q95": 0.546,
+        "n": 214,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5143,
+        "sham": 0.4895
+       },
+       {
+        "d": "bul",
+        "t": "hrv",
+        "auc": 0.55,
+        "ctrl": 0.5054,
+        "diff": 0.0446,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5,
+        "sham": 0.5098
+       },
+       {
+        "d": "bul",
+        "t": "srp",
+        "auc": 0.5367,
+        "ctrl": 0.4949,
+        "diff": 0.0418,
+        "q95": 0.5345,
+        "n": 379,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5061,
+        "sham": 0.4938
+       },
+       {
+        "d": "bul",
+        "t": "slv",
+        "auc": 0.4961,
+        "ctrl": 0.5199,
+        "diff": -0.0238,
+        "q95": 0.5464,
+        "n": 210,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4997,
+        "sham": 0.5211
+       }
+      ],
+      "n": 12,
+      "nPass": 0
+     },
+     "WSl": {
+      "members": [
+       "ces",
+       "slk",
+       "pol"
+      ],
+      "dyads": [
+       {
+        "d": "ces",
+        "t": "slk",
+        "auc": 0.5361,
+        "ctrl": 0.4868,
+        "diff": 0.0493,
+        "q95": 0.5375,
+        "n": 322,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4927,
+        "sham": 0.4952
+       },
+       {
+        "d": "ces",
+        "t": "pol",
+        "auc": 0.4745,
+        "ctrl": 0.5245,
+        "diff": -0.05,
+        "q95": 0.5501,
+        "n": 180,
+        "pass": false,
+        "twin": false,
+        "pos": 0.496,
+        "sham": 0.4718
+       },
+       {
+        "d": "slk",
+        "t": "pol",
+        "auc": 0.4933,
+        "ctrl": 0.5245,
+        "diff": -0.0312,
+        "q95": 0.5501,
+        "n": 180,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5006,
+        "sham": 0.4891
+       },
+       {
+        "d": "pol",
+        "t": "slk",
+        "auc": 0.4832,
+        "ctrl": 0.4868,
+        "diff": -0.0036,
+        "q95": 0.5375,
+        "n": 322,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5071,
+        "sham": 0.4979
+       }
+      ],
+      "n": 4,
+      "nPass": 0
+     },
+     "ESl": {
+      "members": [
+       "rus",
+       "ukr"
+      ],
+      "dyads": [
+       {
+        "d": "rus",
+        "t": "ukr",
+        "auc": 0.5513,
+        "ctrl": 0.4877,
+        "diff": 0.0636,
+        "q95": 0.554,
+        "n": 155,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4927,
+        "sham": 0.5041
+       }
+      ],
+      "n": 1,
+      "nPass": 0
+     },
+     "Finnic": {
+      "members": [
+       "est",
+       "fin"
+      ],
+      "dyads": [
+       {
+        "d": "est",
+        "t": "fin",
+        "auc": 0.5109,
+        "ctrl": 0.5056,
+        "diff": 0.0053,
+        "q95": 0.5325,
+        "n": 428,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5113,
+        "sham": 0.4889
+       },
+       {
+        "d": "fin",
+        "t": "est",
+        "auc": 0.5537,
+        "ctrl": 0.5184,
+        "diff": 0.0353,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5022,
+        "sham": 0.4852
+       }
+      ],
+      "n": 2,
+      "nPass": 0
+     },
+     "Baltic": {
+      "members": [
+       "lav",
+       "lit"
+      ],
+      "dyads": [
+       {
+        "d": "lav",
+        "t": "lit",
+        "auc": 0.5008,
+        "ctrl": 0.5142,
+        "diff": -0.0134,
+        "q95": 0.5684,
+        "n": 97,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4882,
+        "sham": 0.5289
+       },
+       {
+        "d": "lit",
+        "t": "lav",
+        "auc": 0.4987,
+        "ctrl": 0.519,
+        "diff": -0.0203,
+        "q95": 0.5287,
+        "n": 549,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5054,
+        "sham": 0.5028
+       }
+      ],
+      "n": 2,
+      "nPass": 0
+     },
+     "Celtic": {
+      "members": [
+       "cym",
+       "gle"
+      ],
+      "dyads": [
+       {
+        "d": "cym",
+        "t": "gle",
+        "auc": 0.5603,
+        "ctrl": 0.529,
+        "diff": 0.0313,
+        "q95": 0.5571,
+        "n": 139,
+        "pass": false,
+        "twin": false,
+        "pos": 0.501,
+        "sham": 0.4956
+       },
+       {
+        "d": "gle",
+        "t": "cym",
+        "auc": 0.5714,
+        "ctrl": 0.5073,
+        "diff": 0.0641,
+        "q95": 0.5388,
+        "n": 300,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4979,
+        "sham": 0.5154
+       }
+      ],
+      "n": 2,
+      "nPass": 0
+     },
+     "Turkic": {
+      "members": [
+       "tur",
+       "uig"
+      ],
+      "dyads": [],
+      "n": 0,
+      "nPass": 0
+     },
+     "Sinitic": {
+      "members": [
+       "cmn",
+       "lzh"
+      ],
+      "dyads": [
+       {
+        "d": "cmn",
+        "t": "lzh",
+        "auc": 0.4774,
+        "ctrl": 0.4927,
+        "diff": -0.0153,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.499,
+        "sham": 0.5125
+       },
+       {
+        "d": "lzh",
+        "t": "cmn",
+        "auc": 0.5197,
+        "ctrl": 0.5073,
+        "diff": 0.0124,
+        "q95": 0.5366,
+        "n": 338,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5,
+        "sham": 0.5137
+       }
+      ],
+      "n": 2,
+      "nPass": 0
+     },
+     "Semitic": {
+      "members": [
+       "arb",
+       "mlt"
+      ],
+      "dyads": [],
+      "n": 0,
+      "nPass": 0
+     }
+    },
+    "verdict": {
+     "verdict": "FAILS",
+     "dyads": 31,
+     "nPass": 12,
+     "frac": 0.3871,
+     "perCluster": {
+      "IWR": {
+       "n": 25,
+       "nPass": 9
+      },
+      "NGm": {
+       "n": 2,
+       "nPass": 1
+      },
+      "CWGm": {
+       "n": 2,
+       "nPass": 0
+      },
+      "Hind": {
+       "n": 2,
+       "nPass": 2
+      }
+     },
+     "diffBoot": {
+      "mean": 0.0697,
+      "lo": 0.0532,
+      "hi": 0.0838,
+      "n": 12,
+      "pos": 12
+     },
+     "positionControl": 0.5019,
+     "shamControl": 0.5011,
+     "meanAuc": 0.5894,
+     "meanCtrl": 0.5167,
+     "failing": [
+      "spa>por:0.5947",
+      "spa>fra:0.5854",
+      "por>spa:0.5777",
+      "por>glg:0.5415",
+      "por>fra:0.5928",
+      "cat>spa:0.5914",
+      "cat>por:0.5736",
+      "cat>glg:0.5793",
+      "cat>ita:0.5738",
+      "fra>spa:0.5864",
+      "fra>por:0.5523",
+      "fra>cat:0.5934",
+      "fra>ita:0.5611",
+      "ita>por:0.5608",
+      "ita>cat:0.5983",
+      "ita>fra:0.5431",
+      "nob>dan:0.5833",
+      "deu>nld:0.5139",
+      "nld>deu:0.5956"
+     ]
+    },
+    "verdictNoTwin": {
+     "verdict": "FAILS",
+     "dyads": 29,
+     "nPass": 11,
+     "frac": 0.3793,
+     "perCluster": {
+      "IWR": {
+       "n": 23,
+       "nPass": 8
+      },
+      "NGm": {
+       "n": 2,
+       "nPass": 1
+      },
+      "CWGm": {
+       "n": 2,
+       "nPass": 0
+      },
+      "Hind": {
+       "n": 2,
+       "nPass": 2
+      }
+     },
+     "diffBoot": {
+      "mean": 0.0689,
+      "lo": 0.0527,
+      "hi": 0.0822,
+      "n": 12,
+      "pos": 12
+     },
+     "positionControl": 0.5019,
+     "shamControl": 0.5011,
+     "meanAuc": 0.5876,
+     "meanCtrl": 0.5165,
+     "failing": [
+      "spa>por:0.5947",
+      "spa>fra:0.5854",
+      "por>spa:0.5777",
+      "por>glg:0.5415",
+      "por>fra:0.5928",
+      "cat>por:0.5736",
+      "cat>glg:0.5793",
+      "cat>ita:0.5738",
+      "fra>spa:0.5864",
+      "fra>por:0.5523",
+      "fra>cat:0.5934",
+      "fra>ita:0.5611",
+      "ita>por:0.5608",
+      "ita>cat:0.5983",
+      "ita>fra:0.5431",
+      "nob>dan:0.5833",
+      "deu>nld:0.5139",
+      "nld>deu:0.5956"
+     ]
+    },
+    "outOfScope": {
+     "SSl": {
+      "n": 12,
+      "nPass": 0,
+      "meanAuc": 0.5454
+     },
+     "WSl": {
+      "n": 4,
+      "nPass": 0,
+      "meanAuc": 0.4968
+     },
+     "ESl": {
+      "n": 1,
+      "nPass": 0,
+      "meanAuc": 0.5513
+     },
+     "Finnic": {
+      "n": 2,
+      "nPass": 0,
+      "meanAuc": 0.5323
+     },
+     "Baltic": {
+      "n": 2,
+      "nPass": 0,
+      "meanAuc": 0.4998
+     },
+     "Celtic": {
+      "n": 2,
+      "nPass": 0,
+      "meanAuc": 0.5658
+     },
+     "Sinitic": {
+      "n": 2,
+      "nPass": 0,
+      "meanAuc": 0.4986
+     }
+    }
+   },
+   "formB": {
+    "table": {
+     "IWR": {
+      "members": [
+       "spa",
+       "por",
+       "glg",
+       "cat",
+       "fra",
+       "ita"
+      ],
+      "dyads": [
+       {
+        "d": "spa",
+        "t": "por",
+        "auc": 0.5879,
+        "ctrl": 0.5113,
+        "diff": 0.0766,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5001,
+        "sham": 0.5245
+       },
+       {
+        "d": "spa",
+        "t": "glg",
+        "auc": 0.6214,
+        "ctrl": 0.5232,
+        "diff": 0.0982,
+        "q95": 0.5691,
+        "n": 95,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5,
+        "sham": 0.4916
+       },
+       {
+        "d": "spa",
+        "t": "cat",
+        "auc": 0.6476,
+        "ctrl": 0.5255,
+        "diff": 0.1221,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": true,
+        "pos": 0.5021,
+        "sham": 0.519
+       },
+       {
+        "d": "spa",
+        "t": "fra",
+        "auc": 0.5773,
+        "ctrl": 0.5141,
+        "diff": 0.0632,
+        "q95": 0.5722,
+        "n": 87,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5059,
+        "sham": 0.5211
+       },
+       {
+        "d": "spa",
+        "t": "ita",
+        "auc": 0.6325,
+        "ctrl": 0.5099,
+        "diff": 0.1226,
+        "q95": 0.5731,
+        "n": 85,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4965,
+        "sham": 0.5039
+       },
+       {
+        "d": "por",
+        "t": "spa",
+        "auc": 0.5928,
+        "ctrl": 0.529,
+        "diff": 0.0638,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5018,
+        "sham": 0.5116
+       },
+       {
+        "d": "por",
+        "t": "glg",
+        "auc": 0.5763,
+        "ctrl": 0.5232,
+        "diff": 0.0531,
+        "q95": 0.5691,
+        "n": 95,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5,
+        "sham": 0.4983
+       },
+       {
+        "d": "por",
+        "t": "cat",
+        "auc": 0.6015,
+        "ctrl": 0.5255,
+        "diff": 0.076,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5025,
+        "sham": 0.5167
+       },
+       {
+        "d": "por",
+        "t": "fra",
+        "auc": 0.5711,
+        "ctrl": 0.5141,
+        "diff": 0.057,
+        "q95": 0.5722,
+        "n": 87,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5142,
+        "sham": 0.4814
+       },
+       {
+        "d": "por",
+        "t": "ita",
+        "auc": 0.607,
+        "ctrl": 0.5099,
+        "diff": 0.0971,
+        "q95": 0.5731,
+        "n": 85,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5014,
+        "sham": 0.5133
+       },
+       {
+        "d": "cat",
+        "t": "spa",
+        "auc": 0.6259,
+        "ctrl": 0.529,
+        "diff": 0.0969,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": true,
+        "pos": 0.5052,
+        "sham": 0.4827
+       },
+       {
+        "d": "cat",
+        "t": "por",
+        "auc": 0.5844,
+        "ctrl": 0.5113,
+        "diff": 0.0731,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5018,
+        "sham": 0.4809
+       },
+       {
+        "d": "cat",
+        "t": "glg",
+        "auc": 0.5964,
+        "ctrl": 0.5232,
+        "diff": 0.0732,
+        "q95": 0.5691,
+        "n": 95,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5,
+        "sham": 0.4782
+       },
+       {
+        "d": "cat",
+        "t": "fra",
+        "auc": 0.5884,
+        "ctrl": 0.5141,
+        "diff": 0.0743,
+        "q95": 0.5722,
+        "n": 87,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5292,
+        "sham": 0.4652
+       },
+       {
+        "d": "cat",
+        "t": "ita",
+        "auc": 0.6119,
+        "ctrl": 0.5099,
+        "diff": 0.102,
+        "q95": 0.5731,
+        "n": 85,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5009,
+        "sham": 0.4857
+       }
+      ],
+      "n": 15,
+      "nPass": 7
+     },
+     "NGm": {
+      "members": [
+       "dan",
+       "nob",
+       "swe"
+      ],
+      "dyads": [
+       {
+        "d": "dan",
+        "t": "nob",
+        "auc": 0.5867,
+        "ctrl": 0.5237,
+        "diff": 0.063,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5028,
+        "sham": 0.4903
+       },
+       {
+        "d": "dan",
+        "t": "swe",
+        "auc": 0.6385,
+        "ctrl": 0.5269,
+        "diff": 0.1116,
+        "q95": 0.5622,
+        "n": 117,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4919,
+        "sham": 0.5275
+       },
+       {
+        "d": "nob",
+        "t": "dan",
+        "auc": 0.6188,
+        "ctrl": 0.5303,
+        "diff": 0.0885,
+        "q95": 0.5524,
+        "n": 165,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4952,
+        "sham": 0.4704
+       },
+       {
+        "d": "nob",
+        "t": "swe",
+        "auc": 0.6033,
+        "ctrl": 0.5269,
+        "diff": 0.0764,
+        "q95": 0.5622,
+        "n": 117,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5054,
+        "sham": 0.4603
+       },
+       {
+        "d": "swe",
+        "t": "dan",
+        "auc": 0.6184,
+        "ctrl": 0.5303,
+        "diff": 0.0881,
+        "q95": 0.5524,
+        "n": 165,
+        "pass": true,
+        "twin": false,
+        "pos": 0.4847,
+        "sham": 0.4768
+       },
+       {
+        "d": "swe",
+        "t": "nob",
+        "auc": 0.5934,
+        "ctrl": 0.5237,
+        "diff": 0.0697,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5016,
+        "sham": 0.5111
+       }
+      ],
+      "n": 6,
+      "nPass": 4
+     },
+     "CWGm": {
+      "members": [
+       "deu",
+       "nld",
+       "afr"
+      ],
+      "dyads": [
+       {
+        "d": "deu",
+        "t": "nld",
+        "auc": 0.584,
+        "ctrl": 0.509,
+        "diff": 0.075,
+        "q95": 0.5423,
+        "n": 252,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5025,
+        "sham": 0.4994
+       },
+       {
+        "d": "nld",
+        "t": "deu",
+        "auc": 0.595,
+        "ctrl": 0.5267,
+        "diff": 0.0683,
+        "q95": 0.544,
+        "n": 233,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5063,
+        "sham": 0.4856
+       }
+      ],
+      "n": 2,
+      "nPass": 0
+     },
+     "Hind": {
+      "members": [
+       "hin",
+       "urd"
+      ],
+      "dyads": [
+       {
+        "d": "hin",
+        "t": "urd",
+        "auc": 0.6132,
+        "ctrl": 0.5093,
+        "diff": 0.1039,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5049,
+        "sham": 0.5137
+       },
+       {
+        "d": "urd",
+        "t": "hin",
+        "auc": 0.6071,
+        "ctrl": 0.5174,
+        "diff": 0.0897,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": true,
+        "twin": false,
+        "pos": 0.5023,
+        "sham": 0.4957
+       }
+      ],
+      "n": 2,
+      "nPass": 2
+     },
+     "SSl": {
+      "members": [
+       "hrv",
+       "srp",
+       "slv",
+       "bul"
+      ],
+      "dyads": [
+       {
+        "d": "hrv",
+        "t": "srp",
+        "auc": 0.575,
+        "ctrl": 0.4976,
+        "diff": 0.0774,
+        "q95": 0.5345,
+        "n": 379,
+        "pass": false,
+        "twin": true,
+        "pos": 0.5,
+        "sham": 0.5087
+       },
+       {
+        "d": "hrv",
+        "t": "slv",
+        "auc": 0.5545,
+        "ctrl": 0.5163,
+        "diff": 0.0382,
+        "q95": 0.5464,
+        "n": 210,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5,
+        "sham": 0.4997
+       },
+       {
+        "d": "hrv",
+        "t": "bul",
+        "auc": 0.5334,
+        "ctrl": 0.5301,
+        "diff": 0.0033,
+        "q95": 0.546,
+        "n": 214,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5,
+        "sham": 0.5113
+       },
+       {
+        "d": "srp",
+        "t": "hrv",
+        "auc": 0.5759,
+        "ctrl": 0.5059,
+        "diff": 0.07,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": true,
+        "pos": 0.5,
+        "sham": 0.4919
+       },
+       {
+        "d": "srp",
+        "t": "slv",
+        "auc": 0.5187,
+        "ctrl": 0.5163,
+        "diff": 0.0024,
+        "q95": 0.5464,
+        "n": 210,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5029,
+        "sham": 0.4677
+       },
+       {
+        "d": "srp",
+        "t": "bul",
+        "auc": 0.5435,
+        "ctrl": 0.5301,
+        "diff": 0.0134,
+        "q95": 0.546,
+        "n": 214,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5207,
+        "sham": 0.5128
+       },
+       {
+        "d": "slv",
+        "t": "hrv",
+        "auc": 0.5653,
+        "ctrl": 0.5059,
+        "diff": 0.0594,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5,
+        "sham": 0.494
+       },
+       {
+        "d": "slv",
+        "t": "srp",
+        "auc": 0.5379,
+        "ctrl": 0.4976,
+        "diff": 0.0403,
+        "q95": 0.5345,
+        "n": 379,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5101,
+        "sham": 0.4965
+       },
+       {
+        "d": "slv",
+        "t": "bul",
+        "auc": 0.5382,
+        "ctrl": 0.5301,
+        "diff": 0.0081,
+        "q95": 0.546,
+        "n": 214,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4991,
+        "sham": 0.5257
+       },
+       {
+        "d": "bul",
+        "t": "hrv",
+        "auc": 0.5469,
+        "ctrl": 0.5059,
+        "diff": 0.041,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5,
+        "sham": 0.5146
+       },
+       {
+        "d": "bul",
+        "t": "srp",
+        "auc": 0.5357,
+        "ctrl": 0.4976,
+        "diff": 0.0381,
+        "q95": 0.5345,
+        "n": 379,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5088,
+        "sham": 0.5045
+       },
+       {
+        "d": "bul",
+        "t": "slv",
+        "auc": 0.5449,
+        "ctrl": 0.5163,
+        "diff": 0.0286,
+        "q95": 0.5464,
+        "n": 210,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4999,
+        "sham": 0.5239
+       }
+      ],
+      "n": 12,
+      "nPass": 0
+     },
+     "WSl": {
+      "members": [
+       "ces",
+       "slk",
+       "pol"
+      ],
+      "dyads": [
+       {
+        "d": "slk",
+        "t": "pol",
+        "auc": 0.5052,
+        "ctrl": 0.5217,
+        "diff": -0.0165,
+        "q95": 0.5501,
+        "n": 180,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5069,
+        "sham": 0.5061
+       },
+       {
+        "d": "pol",
+        "t": "slk",
+        "auc": 0.4846,
+        "ctrl": 0.4844,
+        "diff": 0.0002,
+        "q95": 0.5375,
+        "n": 322,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5034,
+        "sham": 0.5263
+       }
+      ],
+      "n": 2,
+      "nPass": 0
+     },
+     "ESl": {
+      "members": [
+       "rus",
+       "ukr"
+      ],
+      "dyads": [
+       {
+        "d": "ukr",
+        "t": "rus",
+        "auc": 0.5059,
+        "ctrl": 0.4905,
+        "diff": 0.0154,
+        "q95": 0.5817,
+        "n": 68,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4904,
+        "sham": 0.4841
+       }
+      ],
+      "n": 1,
+      "nPass": 0
+     },
+     "Finnic": {
+      "members": [
+       "est",
+       "fin"
+      ],
+      "dyads": [
+       {
+        "d": "est",
+        "t": "fin",
+        "auc": 0.522,
+        "ctrl": 0.5042,
+        "diff": 0.0178,
+        "q95": 0.5325,
+        "n": 428,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5012,
+        "sham": 0.5143
+       },
+       {
+        "d": "fin",
+        "t": "est",
+        "auc": 0.5347,
+        "ctrl": 0.521,
+        "diff": 0.0137,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5018,
+        "sham": 0.493
+       }
+      ],
+      "n": 2,
+      "nPass": 0
+     },
+     "Baltic": {
+      "members": [
+       "lav",
+       "lit"
+      ],
+      "dyads": [
+       {
+        "d": "lav",
+        "t": "lit",
+        "auc": 0.5148,
+        "ctrl": 0.5053,
+        "diff": 0.0095,
+        "q95": 0.5684,
+        "n": 97,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5103,
+        "sham": 0.4859
+       }
+      ],
+      "n": 1,
+      "nPass": 0
+     },
+     "Celtic": {
+      "members": [
+       "cym",
+       "gle"
+      ],
+      "dyads": [
+       {
+        "d": "cym",
+        "t": "gle",
+        "auc": 0.5704,
+        "ctrl": 0.537,
+        "diff": 0.0334,
+        "q95": 0.5571,
+        "n": 139,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5,
+        "sham": 0.4947
+       },
+       {
+        "d": "gle",
+        "t": "cym",
+        "auc": 0.5817,
+        "ctrl": 0.5158,
+        "diff": 0.0659,
+        "q95": 0.5388,
+        "n": 300,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4995,
+        "sham": 0.4628
+       }
+      ],
+      "n": 2,
+      "nPass": 0
+     },
+     "Turkic": {
+      "members": [
+       "tur",
+       "uig"
+      ],
+      "dyads": [],
+      "n": 0,
+      "nPass": 0
+     },
+     "Sinitic": {
+      "members": [
+       "cmn",
+       "lzh"
+      ],
+      "dyads": [
+       {
+        "d": "cmn",
+        "t": "lzh",
+        "auc": 0.4676,
+        "ctrl": 0.492,
+        "diff": -0.0244,
+        "q95": 0.5274,
+        "n": 600,
+        "pass": false,
+        "twin": false,
+        "pos": 0.5,
+        "sham": 0.5036
+       },
+       {
+        "d": "lzh",
+        "t": "cmn",
+        "auc": 0.4895,
+        "ctrl": 0.4962,
+        "diff": -0.0067,
+        "q95": 0.5366,
+        "n": 338,
+        "pass": false,
+        "twin": false,
+        "pos": 0.4983,
+        "sham": 0.4855
+       }
+      ],
+      "n": 2,
+      "nPass": 0
+     },
+     "Semitic": {
+      "members": [
+       "arb",
+       "mlt"
+      ],
+      "dyads": [],
+      "n": 0,
+      "nPass": 0
+     }
+    },
+    "verdict": {
+     "verdict": "PARTIALLY HOLDS",
+     "dyads": 25,
+     "nPass": 13,
+     "frac": 0.52,
+     "perCluster": {
+      "IWR": {
+       "n": 15,
+       "nPass": 7
+      },
+      "NGm": {
+       "n": 6,
+       "nPass": 4
+      },
+      "CWGm": {
+       "n": 2,
+       "nPass": 0
+      },
+      "Hind": {
+       "n": 2,
+       "nPass": 2
+      }
+     },
+     "diffBoot": {
+      "mean": 0.0836,
+      "lo": 0.0765,
+      "hi": 0.0913,
+      "n": 13,
+      "pos": 13
+     },
+     "positionControl": 0.5024,
+     "shamControl": 0.4962,
+     "meanAuc": 0.6032,
+     "meanCtrl": 0.5199,
+     "failing": [
+      "spa>por:0.5879",
+      "spa>fra:0.5773",
+      "por>spa:0.5928",
+      "por>glg:0.5763",
+      "por>fra:0.5711",
+      "cat>por:0.5844",
+      "cat>glg:0.5964",
+      "cat>fra:0.5884",
+      "dan>nob:0.5867",
+      "swe>nob:0.5934",
+      "deu>nld:0.584",
+      "nld>deu:0.595"
+     ]
+    },
+    "verdictNoTwin": {
+     "verdict": "FAILS",
+     "dyads": 23,
+     "nPass": 11,
+     "frac": 0.4783,
+     "perCluster": {
+      "IWR": {
+       "n": 13,
+       "nPass": 5
+      },
+      "NGm": {
+       "n": 6,
+       "nPass": 4
+      },
+      "CWGm": {
+       "n": 2,
+       "nPass": 0
+      },
+      "Hind": {
+       "n": 2,
+       "nPass": 2
+      }
+     },
+     "diffBoot": {
+      "mean": 0.0805,
+      "lo": 0.0736,
+      "hi": 0.0888,
+      "n": 13,
+      "pos": 13
+     },
+     "positionControl": 0.5023,
+     "shamControl": 0.4958,
+     "meanAuc": 0.6003,
+     "meanCtrl": 0.5193,
+     "failing": [
+      "spa>por:0.5879",
+      "spa>fra:0.5773",
+      "por>spa:0.5928",
+      "por>glg:0.5763",
+      "por>fra:0.5711",
+      "cat>por:0.5844",
+      "cat>glg:0.5964",
+      "cat>fra:0.5884",
+      "dan>nob:0.5867",
+      "swe>nob:0.5934",
+      "deu>nld:0.584",
+      "nld>deu:0.595"
+     ]
+    },
+    "outOfScope": {
+     "SSl": {
+      "n": 12,
+      "nPass": 0,
+      "meanAuc": 0.5475
+     },
+     "WSl": {
+      "n": 2,
+      "nPass": 0,
+      "meanAuc": 0.4949
+     },
+     "ESl": {
+      "n": 1,
+      "nPass": 0,
+      "meanAuc": 0.5059
+     },
+     "Finnic": {
+      "n": 2,
+      "nPass": 0,
+      "meanAuc": 0.5283
+     },
+     "Baltic": {
+      "n": 1,
+      "nPass": 0,
+      "meanAuc": 0.5148
+     },
+     "Celtic": {
+      "n": 2,
+      "nPass": 0,
+      "meanAuc": 0.576
+     },
+     "Sinitic": {
+      "n": 2,
+      "nPass": 0,
+      "meanAuc": 0.4786
+     }
+    },
+    "gradient": {
+     "n": 986,
+     "est": {
+      "sameSub": 0.061,
+      "sameGenusNotSub": 0.0371,
+      "sameFamilyOnly": 0.0082,
+      "sameOrder": 0.0267,
+      "sameScript": 0.0086,
+      "sameMorph": -0.0118,
+      "sameTeam": 0.0383
+     },
+     "ci": {
+      "sameSub": [
+       0.0331,
+       0.0914
+      ],
+      "sameGenusNotSub": [
+       0.0083,
+       0.0662
+      ],
+      "sameFamilyOnly": [
+       -0.0091,
+       0.031
+      ],
+      "sameOrder": [
+       0.0077,
+       0.0501
+      ],
+      "sameScript": [
+       -0.009,
+       0.0275
+      ],
+      "sameMorph": [
+       -0.0222,
+       -0.0024
+      ],
+      "sameTeam": [
+       0,
+       0.0683
+      ]
+     },
+     "sameSubMinusFamilyOnly": {
+      "est": 0.0527,
+      "ci": [
+       0.0285,
+       0.0745
+      ]
+     },
+     "sameSubMinusGenusNotSub": {
+      "est": 0.0239,
+      "ci": [
+       -0.0079,
+       0.0562
+      ]
+     },
+     "graded": true
+    }
+   },
+   "gradientFormA": {
+    "n": 1021,
+    "est": {
+     "sameSub": 0.0682,
+     "sameGenusNotSub": 0.0372,
+     "sameFamilyOnly": 0.0231,
+     "sameOrder": 0.0246,
+     "sameScript": 0.0066,
+     "sameMorph": -0.0102,
+     "sameTeam": 0.0324
+    },
+    "ci": {
+     "sameSub": [
+      0.0343,
+      0.1031
+     ],
+     "sameGenusNotSub": [
+      0.0115,
+      0.0649
+     ],
+     "sameFamilyOnly": [
+      0.0004,
+      0.0497
+     ],
+     "sameOrder": [
+      0.0025,
+      0.0522
+     ],
+     "sameScript": [
+      -0.0142,
+      0.0348
+     ],
+     "sameMorph": [
+      -0.021,
+      -0.0003
+     ],
+     "sameTeam": [
+      0,
+      0.0682
+     ]
+    },
+    "sameSubMinusFamilyOnly": {
+     "est": 0.0451,
+     "ci": [
+      0.0155,
+      0.0714
+     ]
+    },
+    "sameSubMinusGenusNotSub": {
+     "est": 0.031,
+     "ci": [
+      -0.0028,
+      0.0646
+     ]
+    },
+    "graded": true
+   }
+  }
+ }
+}

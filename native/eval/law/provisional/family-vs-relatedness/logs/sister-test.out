@@ -1,0 +1,20 @@
+{
+ "FIRST-LEFT": {
+  "A": "HOLDS",
+  "nPassA": "31/40",
+  "B": "PARTIALLY HOLDS",
+  "graded": false
+ },
+ "FIRST-BOTH": {
+  "A": "HOLDS",
+  "nPassA": "28/40",
+  "B": "PARTIALLY HOLDS",
+  "graded": true
+ },
+ "LATER-BOTH": {
+  "A": "FAILS",
+  "nPassA": "12/31",
+  "B": "PARTIALLY HOLDS",
+  "graded": true
+ }
+}

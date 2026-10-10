@@ -1,0 +1,100 @@
+{
+ "headerSha256": "e67df50123f1b3612f0e037aa47d11f0ca2abef994d5bf0d39b63f480e465653",
+ "part1": {
+  "n": 25,
+  "rho": 0.671,
+  "permP": 0.0006,
+  "skill": 0.2096,
+  "c_in": "8/10",
+  "c_out": "0/4",
+  "d": 0.0879,
+  "nIn": 17,
+  "nOut": 8,
+  "e": "11/12",
+  "S2in": 0.6111,
+  "S2share": 0.9412,
+  "S2diff": 0.0401,
+  "audit": {
+   "rho": true,
+   "skill": true,
+   "d": true,
+   "S2in": true,
+   "S2diff": true,
+   "c": true,
+   "e": true
+  },
+  "pass": true
+ },
+ "part2": [
+  {
+   "name": "en_pud",
+   "fwc32": 0.35,
+   "inScope": true,
+   "pairs": 600,
+   "confirmerAuc": 0.6356,
+   "drawMean": 0.6276,
+   "drawSd": 0.0171,
+   "drawMin": 0.6081,
+   "drawMax": 0.6415,
+   "pos": 0.4991,
+   "hit": true,
+   "straddles": false
+  },
+  {
+   "name": "grc_proiel",
+   "fwc32": 0.3263,
+   "inScope": true,
+   "pairs": 269,
+   "confirmerAuc": 0.5993,
+   "drawMean": 0.568,
+   "drawSd": 0.013,
+   "drawMin": 0.5532,
+   "drawMax": 0.5861,
+   "pos": 0.5,
+   "hit": false,
+   "straddles": false
+  },
+  {
+   "name": "la_perseus_test",
+   "fwc32": 0.1887,
+   "inScope": false,
+   "pairs": 161,
+   "confirmerAuc": 0.5386,
+   "drawMean": 0.5131,
+   "drawSd": 0.0307,
+   "drawMin": 0.461,
+   "drawMax": 0.5374,
+   "pos": 0.5,
+   "hit": true,
+   "straddles": false
+  },
+  {
+   "name": "la_perseus_train",
+   "fwc32": 0.1887,
+   "inScope": false,
+   "pairs": 305,
+   "confirmerAuc": 0.5085,
+   "drawMean": 0.514,
+   "drawSd": 0.0195,
+   "drawMin": 0.4793,
+   "drawMax": 0.5248,
+   "pos": 0.4967,
+   "hit": true,
+   "straddles": false
+  },
+  {
+   "name": "sa_ufal",
+   "fwc32": 0.2191,
+   "inScope": false,
+   "pairs": 78,
+   "confirmerAuc": 0.5031,
+   "drawMean": 0.5183,
+   "drawSd": 0.0467,
+   "drawMin": 0.4602,
+   "drawMax": 0.5855,
+   "pos": 0.5001,
+   "hit": true,
+   "straddles": false
+  }
+ ]
+}

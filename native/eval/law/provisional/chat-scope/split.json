@@ -1,0 +1,495 @@
+{
+ "used": [
+  "kubuntu/2005-07-15.txt",
+  "kubuntu/2005-11-15.txt",
+  "kubuntu/2006-07-15.txt",
+  "kubuntu/2007-07-15.txt",
+  "kubuntu/2008-03-15.txt",
+  "kubuntu/2008-07-15.txt",
+  "ubuntu/2004-11-15.txt",
+  "ubuntu/2005-03-15.txt",
+  "ubuntu/2006-07-15.txt",
+  "ubuntu/2007-03-15.txt",
+  "ubuntu/2009-07-15.txt",
+  "ubuntu/2012-07-15.txt",
+  "ubuntu/2014-07-15.txt",
+  "ubuntu/2015-03-15.txt"
+ ],
+ "discovery": [
+  {
+   "key": "ubuntu/2005-07-15.txt",
+   "pos": 4329,
+   "msgs": 10085
+  },
+  {
+   "key": "ubuntu/2007-07-15.txt",
+   "pos": 5865,
+   "msgs": 10980
+  },
+  {
+   "key": "ubuntu/2008-07-15.txt",
+   "pos": 6394,
+   "msgs": 12630
+  },
+  {
+   "key": "ubuntu/2010-03-15.txt",
+   "pos": 4293,
+   "msgs": 8443
+  },
+  {
+   "key": "ubuntu/2011-03-15.txt",
+   "pos": 3353,
+   "msgs": 6662
+  },
+  {
+   "key": "ubuntu/2012-03-15.txt",
+   "pos": 2038,
+   "msgs": 4511
+  },
+  {
+   "key": "ubuntu/2013-07-15.txt",
+   "pos": 1661,
+   "msgs": 3786
+  },
+  {
+   "key": "ubuntu/2015-07-15.txt",
+   "pos": 1342,
+   "msgs": 3229
+  },
+  {
+   "key": "kubuntu/2006-03-15.txt",
+   "pos": 621,
+   "msgs": 2668
+  },
+  {
+   "key": "kubuntu/2009-03-15.txt",
+   "pos": 405,
+   "msgs": 2132
+  },
+  {
+   "key": "kubuntu/2010-03-15.txt",
+   "pos": 195,
+   "msgs": 769
+  },
+  {
+   "key": "kubuntu/2011-03-15.txt",
+   "pos": 300,
+   "msgs": 1440
+  },
+  {
+   "key": "kubuntu/2012-03-15.txt",
+   "pos": 74,
+   "msgs": 359
+  },
+  {
+   "key": "kubuntu/2013-03-15.txt",
+   "pos": 61,
+   "msgs": 423
+  },
+  {
+   "key": "kubuntu/2015-07-15.txt",
+   "pos": 65,
+   "msgs": 411
+  },
+  {
+   "key": "xubuntu/2007-03-15.txt",
+   "pos": 158,
+   "msgs": 1052
+  },
+  {
+   "key": "xubuntu/2008-03-15.txt",
+   "pos": 21,
+   "msgs": 295
+  },
+  {
+   "key": "xubuntu/2009-03-15.txt",
+   "pos": 63,
+   "msgs": 466
+  },
+  {
+   "key": "xubuntu/2010-07-15.txt",
+   "pos": 22,
+   "msgs": 191
+  },
+  {
+   "key": "xubuntu/2011-07-15.txt",
+   "pos": 37,
+   "msgs": 341
+  },
+  {
+   "key": "xubuntu/2013-03-15.txt",
+   "pos": 64,
+   "msgs": 302
+  },
+  {
+   "key": "xubuntu/2014-03-15.txt",
+   "pos": 40,
+   "msgs": 254
+  },
+  {
+   "key": "ubuntu-server/2007-11-15.txt",
+   "pos": 57,
+   "msgs": 398
+  },
+  {
+   "key": "ubuntu-server/2008-07-15.txt",
+   "pos": 45,
+   "msgs": 601
+  },
+  {
+   "key": "ubuntu-server/2010-03-15.txt",
+   "pos": 209,
+   "msgs": 660
+  },
+  {
+   "key": "ubuntu-server/2011-03-15.txt",
+   "pos": 139,
+   "msgs": 629
+  },
+  {
+   "key": "ubuntu-server/2012-03-15.txt",
+   "pos": 74,
+   "msgs": 373
+  },
+  {
+   "key": "ubuntu-server/2013-03-15.txt",
+   "pos": 77,
+   "msgs": 505
+  },
+  {
+   "key": "ubuntu-server/2014-07-15.txt",
+   "pos": 27,
+   "msgs": 410
+  },
+  {
+   "key": "ubuntu-de/2010-11-15.txt",
+   "pos": 196,
+   "msgs": 591
+  },
+  {
+   "key": "ubuntu-de/2011-07-15.txt",
+   "pos": 271,
+   "msgs": 949
+  },
+  {
+   "key": "ubuntu-de/2012-07-15.txt",
+   "pos": 107,
+   "msgs": 444
+  },
+  {
+   "key": "ubuntu-de/2013-11-15.txt",
+   "pos": 34,
+   "msgs": 149
+  },
+  {
+   "key": "ubuntu-es/2010-11-15.txt",
+   "pos": 267,
+   "msgs": 1817
+  },
+  {
+   "key": "ubuntu-es/2011-07-15.txt",
+   "pos": 111,
+   "msgs": 677
+  },
+  {
+   "key": "ubuntu-es/2013-07-15.txt",
+   "pos": 34,
+   "msgs": 462
+  },
+  {
+   "key": "ubuntu-it/2010-11-15.txt",
+   "pos": 323,
+   "msgs": 1171
+  },
+  {
+   "key": "ubuntu-it/2011-07-15.txt",
+   "pos": 158,
+   "msgs": 690
+  },
+  {
+   "key": "ubuntu-it/2012-07-15.txt",
+   "pos": 112,
+   "msgs": 797
+  },
+  {
+   "key": "ubuntu-it/2013-07-15.txt",
+   "pos": 245,
+   "msgs": 1684
+  },
+  {
+   "key": "ubuntu-it/2014-07-15.txt",
+   "pos": 25,
+   "msgs": 714
+  },
+  {
+   "key": "ubuntu-it/2015-07-15.txt",
+   "pos": 63,
+   "msgs": 365
+  }
+ ],
+ "confirm": [
+  {
+   "key": "ubuntu/2006-03-15.txt",
+   "pos": 4341,
+   "msgs": 9825
+  },
+  {
+   "key": "ubuntu/2008-03-15.txt",
+   "pos": 4545,
+   "msgs": 9819
+  },
+  {
+   "key": "ubuntu/2009-03-15.txt",
+   "pos": 4383,
+   "msgs": 8912
+  },
+  {
+   "key": "ubuntu/2010-07-15.txt",
+   "pos": 3641,
+   "msgs": 6913
+  },
+  {
+   "key": "ubuntu/2011-07-15.txt",
+   "pos": 3186,
+   "msgs": 6156
+  },
+  {
+   "key": "ubuntu/2013-03-15.txt",
+   "pos": 1250,
+   "msgs": 3323
+  },
+  {
+   "key": "ubuntu/2014-03-15.txt",
+   "pos": 272,
+   "msgs": 675
+  },
+  {
+   "key": "kubuntu/2007-03-15.txt",
+   "pos": 1342,
+   "msgs": 4112
+  },
+  {
+   "key": "kubuntu/2009-07-15.txt",
+   "pos": 312,
+   "msgs": 1441
+  },
+  {
+   "key": "kubuntu/2010-07-15.txt",
+   "pos": 66,
+   "msgs": 512
+  },
+  {
+   "key": "kubuntu/2011-07-15.txt",
+   "pos": 120,
+   "msgs": 531
+  },
+  {
+   "key": "kubuntu/2012-07-15.txt",
+   "pos": 85,
+   "msgs": 511
+  },
+  {
+   "key": "kubuntu/2014-07-15.txt",
+   "pos": 77,
+   "msgs": 396
+  },
+  {
+   "key": "xubuntu/2007-07-15.txt",
+   "pos": 36,
+   "msgs": 454
+  },
+  {
+   "key": "xubuntu/2008-07-15.txt",
+   "pos": 97,
+   "msgs": 587
+  },
+  {
+   "key": "xubuntu/2009-07-15.txt",
+   "pos": 23,
+   "msgs": 290
+  },
+  {
+   "key": "xubuntu/2011-03-15.txt",
+   "pos": 24,
+   "msgs": 366
+  },
+  {
+   "key": "xubuntu/2012-03-15.txt",
+   "pos": 20,
+   "msgs": 201
+  },
+  {
+   "key": "xubuntu/2013-07-15.txt",
+   "pos": 31,
+   "msgs": 241
+  },
+  {
+   "key": "ubuntu-server/2008-03-15.txt",
+   "pos": 65,
+   "msgs": 698
+  },
+  {
+   "key": "ubuntu-server/2009-07-15.txt",
+   "pos": 60,
+   "msgs": 482
+  },
+  {
+   "key": "ubuntu-server/2010-07-15.txt",
+   "pos": 134,
+   "msgs": 840
+  },
+  {
+   "key": "ubuntu-server/2011-07-15.txt",
+   "pos": 60,
+   "msgs": 446
+  },
+  {
+   "key": "ubuntu-server/2012-07-15.txt",
+   "pos": 42,
+   "msgs": 291
+  },
+  {
+   "key": "ubuntu-server/2013-07-15.txt",
+   "pos": 60,
+   "msgs": 669
+  },
+  {
+   "key": "ubuntu-de/2011-03-15.txt",
+   "pos": 133,
+   "msgs": 539
+  },
+  {
+   "key": "ubuntu-de/2012-03-15.txt",
+   "pos": 115,
+   "msgs": 518
+  },
+  {
+   "key": "ubuntu-de/2013-03-15.txt",
+   "pos": 92,
+   "msgs": 499
+  },
+  {
+   "key": "ubuntu-de/2015-07-15.txt",
+   "pos": 49,
+   "msgs": 240
+  },
+  {
+   "key": "ubuntu-es/2011-03-15.txt",
+   "pos": 261,
+   "msgs": 1737
+  },
+  {
+   "key": "ubuntu-es/2012-07-15.txt",
+   "pos": 27,
+   "msgs": 379
+  },
+  {
+   "key": "ubuntu-it/2011-03-15.txt",
+   "pos": 128,
+   "msgs": 889
+  },
+  {
+   "key": "ubuntu-it/2012-03-15.txt",
+   "pos": 315,
+   "msgs": 1335
+  },
+  {
+   "key": "ubuntu-it/2013-03-15.txt",
+   "pos": 130,
+   "msgs": 1023
+  },
+  {
+   "key": "ubuntu-it/2014-03-15.txt",
+   "pos": 127,
+   "msgs": 1458
+  },
+  {
+   "key": "ubuntu-it/2015-03-15.txt",
+   "pos": 76,
+   "msgs": 878
+  }
+ ],
+ "ineligible": [
+  {
+   "key": "kubuntu/2013-07-15.txt",
+   "pos": 4
+  },
+  {
+   "key": "kubuntu/2014-03-15.txt",
+   "pos": 1
+  },
+  {
+   "key": "kubuntu/2015-03-15.txt",
+   "pos": 6
+  },
+  {
+   "key": "xubuntu/2010-03-15.txt",
+   "pos": 2
+  },
+  {
+   "key": "xubuntu/2012-07-15.txt",
+   "pos": 8
+  },
+  {
+   "key": "xubuntu/2014-07-15.txt",
+   "pos": 10
+  },
+  {
+   "key": "xubuntu/2015-03-15.txt",
+   "pos": 4
+  },
+  {
+   "key": "xubuntu/2015-07-15.txt",
+   "pos": 13
+  },
+  {
+   "key": "ubuntu-server/2009-03-15.txt",
+   "pos": 12
+  },
+  {
+   "key": "ubuntu-server/2014-03-15.txt",
+   "pos": 15
+  },
+  {
+   "key": "ubuntu-server/2015-03-15.txt",
+   "pos": 7
+  },
+  {
+   "key": "ubuntu-server/2015-07-15.txt",
+   "pos": 10
+  },
+  {
+   "key": "ubuntu-de/2014-03-15.txt",
+   "pos": 2
+  },
+  {
+   "key": "ubuntu-de/2014-07-15.txt",
+   "pos": 7
+  },
+  {
+   "key": "ubuntu-de/2015-03-15.txt",
+   "pos": 5
+  },
+  {
+   "key": "ubuntu-es/2012-03-15.txt",
+   "pos": 7
+  },
+  {
+   "key": "ubuntu-es/2013-03-15.txt",
+   "pos": 13
+  },
+  {
+   "key": "ubuntu-es/2014-03-15.txt",
+   "pos": 4
+  },
+  {
+   "key": "ubuntu-es/2015-07-15.txt",
+   "pos": 3
+  },
+  {
+   "key": "ubuntu-es/2015-11-15.txt",
+   "pos": 4
+  }
+ ],
+ "note": "even index within channel -> discovery, odd -> confirm"
+}

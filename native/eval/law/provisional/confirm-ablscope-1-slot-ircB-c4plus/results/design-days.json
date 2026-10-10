@@ -1,0 +1,3089 @@
+{
+ "excludedCount": 30,
+ "excluded": {
+  "kubuntu/2005-07-15": [
+   "name-company",
+   "name-company-pairblocks"
+  ],
+  "kubuntu/2005-11-15": [
+   "name-company",
+   "name-company-pairblocks"
+  ],
+  "kubuntu/2006-03-15": [
+   "ablation-scope/confirmation",
+   "ablation-scope/confirmation"
+  ],
+  "kubuntu/2006-07-15": [
+   "name-rule-informal"
+  ],
+  "kubuntu/2007-07-15": [
+   "name-company",
+   "name-company-pairblocks"
+  ],
+  "kubuntu/2008-03-15": [
+   "name-rule-informal"
+  ],
+  "kubuntu/2008-07-15": [
+   "name-company",
+   "name-company-pairblocks"
+  ],
+  "kubuntu/2009-03-15": [
+   "ablation-scope/discovery2",
+   "ablation-scope/discovery2"
+  ],
+  "ubuntu/2004-11-15": [
+   "name-company",
+   "name-company-pairblocks"
+  ],
+  "ubuntu/2005-03-15": [
+   "name-company",
+   "name-company-pairblocks"
+  ],
+  "ubuntu/2005-07-15": [
+   "ablation-scope/discovery2",
+   "ablation-scope/discovery2"
+  ],
+  "ubuntu/2006-03-15": [
+   "ablation-scope/confirmation",
+   "ablation-scope/confirmation"
+  ],
+  "ubuntu/2006-07-15": [
+   "name-rule-informal"
+  ],
+  "ubuntu/2007-03-15": [
+   "name-rule-informal"
+  ],
+  "ubuntu/2007-07-15": [
+   "ablation-scope/confirmation",
+   "ablation-scope/confirmation"
+  ],
+  "ubuntu/2008-03-15": [
+   "ablation-scope/discovery",
+   "ablation-scope/discovery",
+   "ablation-scope/discovery",
+   "ablation-scope/discovery",
+   "ablation-scope/discovery2",
+   "ablation-scope/discovery2"
+  ],
+  "ubuntu/2008-07-15": [
+   "ablation-scope/discovery2",
+   "ablation-scope/discovery2"
+  ],
+  "ubuntu/2009-03-15": [
+   "ablation-scope/confirmation",
+   "ablation-scope/confirmation"
+  ],
+  "ubuntu/2009-07-15": [
+   "name-rule-informal"
+  ],
+  "ubuntu/2010-03-15": [
+   "ablation-scope/discovery",
+   "ablation-scope/discovery",
+   "ablation-scope/discovery",
+   "ablation-scope/discovery",
+   "ablation-scope/discovery2",
+   "ablation-scope/discovery2"
+  ],
+  "ubuntu/2010-07-15": [
+   "ablation-scope/discovery",
+   "ablation-scope/discovery",
+   "ablation-scope/discovery",
+   "ablation-scope/discovery",
+   "ablation-scope/discovery2",
+   "ablation-scope/discovery2"
+  ],
+  "ubuntu/2011-03-15": [
+   "ablation-scope/confirmation",
+   "ablation-scope/confirmation"
+  ],
+  "ubuntu/2011-07-15": [
+   "ablation-scope/confirmation",
+   "ablation-scope/confirmation"
+  ],
+  "ubuntu/2012-03-15": [
+   "ablation-scope/confirmation",
+   "ablation-scope/confirmation"
+  ],
+  "ubuntu/2012-07-15": [
+   "name-company",
+   "name-company-pairblocks"
+  ],
+  "ubuntu/2013-03-15": [
+   "ablation-scope/discovery",
+   "ablation-scope/discovery",
+   "ablation-scope/discovery",
+   "ablation-scope/discovery",
+   "ablation-scope/discovery2",
+   "ablation-scope/discovery2"
+  ],
+  "ubuntu/2013-07-15": [
+   "ablation-scope/confirmation",
+   "ablation-scope/confirmation"
+  ],
+  "ubuntu/2014-07-15": [
+   "name-rule-informal"
+  ],
+  "ubuntu/2015-03-15": [
+   "name-company",
+   "name-company-pairblocks"
+  ],
+  "ubuntu/2015-07-15": [
+   "ablation-scope/discovery2",
+   "ablation-scope/discovery2"
+  ]
+ },
+ "days": [
+  {
+   "name": "ubuntu/2014-03-15",
+   "messages": 675,
+   "lang": "en",
+   "channel": "ubuntu",
+   "units": 675,
+   "goldForms": 50,
+   "B_counts": {
+    "c2": {
+     "P": 2,
+     "N": 321
+    },
+    "c3": {
+     "P": 0,
+     "N": 286
+    },
+    "c4_6": {
+     "P": 3,
+     "N": 555
+    },
+    "c7_15": {
+     "P": 1,
+     "N": 726
+    },
+    "c16p": {
+     "P": 0,
+     "N": 973
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 1,
+    "c7_15": 1,
+    "c16p": 0
+   },
+   "v3PairsTotal": 2
+  },
+  {
+   "name": "kubuntu/2007-03-15",
+   "messages": 4171,
+   "lang": "en",
+   "channel": "kubuntu",
+   "units": 4112,
+   "goldForms": 163,
+   "B_counts": {
+    "c2": {
+     "P": 23,
+     "N": 3147
+    },
+    "c3": {
+     "P": 13,
+     "N": 2227
+    },
+    "c4_6": {
+     "P": 28,
+     "N": 4195
+    },
+    "c7_15": {
+     "P": 40,
+     "N": 4965
+    },
+    "c16p": {
+     "P": 10,
+     "N": 4625
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 16,
+    "c7_15": 26,
+    "c16p": 7
+   },
+   "v3PairsTotal": 49
+  },
+  {
+   "name": "kubuntu/2009-07-15",
+   "messages": 1457,
+   "lang": "en",
+   "channel": "kubuntu",
+   "units": 1441,
+   "goldForms": 61,
+   "B_counts": {
+    "c2": {
+     "P": 1,
+     "N": 891
+    },
+    "c3": {
+     "P": 1,
+     "N": 703
+    },
+    "c4_6": {
+     "P": 3,
+     "N": 1321
+    },
+    "c7_15": {
+     "P": 7,
+     "N": 1546
+    },
+    "c16p": {
+     "P": 3,
+     "N": 1361
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 3,
+    "c7_15": 5,
+    "c16p": 0
+   },
+   "v3PairsTotal": 8
+  },
+  {
+   "name": "kubuntu/2010-03-15",
+   "messages": 781,
+   "lang": "en",
+   "channel": "kubuntu",
+   "units": 769,
+   "goldForms": 52,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 349
+    },
+    "c3": {
+     "P": 1,
+     "N": 352
+    },
+    "c4_6": {
+     "P": 3,
+     "N": 545
+    },
+    "c7_15": {
+     "P": 2,
+     "N": 686
+    },
+    "c16p": {
+     "P": 0,
+     "N": 675
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 2,
+    "c7_15": 1,
+    "c16p": 0
+   },
+   "v3PairsTotal": 3
+  },
+  {
+   "name": "kubuntu/2010-07-15",
+   "messages": 517,
+   "lang": "en",
+   "channel": "kubuntu",
+   "units": 512,
+   "goldForms": 33,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 135
+    },
+    "c3": {
+     "P": 0,
+     "N": 132
+    },
+    "c4_6": {
+     "P": 1,
+     "N": 218
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 296
+    },
+    "c16p": {
+     "P": 0,
+     "N": 335
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 1,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 1
+  },
+  {
+   "name": "kubuntu/2011-03-15",
+   "messages": 1458,
+   "lang": "en",
+   "channel": "kubuntu",
+   "units": 1440,
+   "goldForms": 37,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 828
+    },
+    "c3": {
+     "P": 0,
+     "N": 655
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 1212
+    },
+    "c7_15": {
+     "P": 9,
+     "N": 1497
+    },
+    "c16p": {
+     "P": 2,
+     "N": 1411
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 4,
+    "c16p": 0
+   },
+   "v3PairsTotal": 4
+  },
+  {
+   "name": "kubuntu/2011-07-15",
+   "messages": 541,
+   "lang": "en",
+   "channel": "kubuntu",
+   "units": 531,
+   "goldForms": 33,
+   "B_counts": {
+    "c2": {
+     "P": 1,
+     "N": 142
+    },
+    "c3": {
+     "P": 0,
+     "N": 172
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 259
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 275
+    },
+    "c16p": {
+     "P": 0,
+     "N": 232
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "kubuntu/2012-03-15",
+   "messages": 364,
+   "lang": "en",
+   "channel": "kubuntu",
+   "units": 359,
+   "goldForms": 20,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 58
+    },
+    "c3": {
+     "P": 0,
+     "N": 70
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 152
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 176
+    },
+    "c16p": {
+     "P": 0,
+     "N": 143
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "kubuntu/2012-07-15",
+   "messages": 516,
+   "lang": "en",
+   "channel": "kubuntu",
+   "units": 511,
+   "goldForms": 28,
+   "B_counts": {
+    "c2": {
+     "P": 1,
+     "N": 107
+    },
+    "c3": {
+     "P": 1,
+     "N": 110
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 213
+    },
+    "c7_15": {
+     "P": 1,
+     "N": 213
+    },
+    "c16p": {
+     "P": 0,
+     "N": 272
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 1,
+    "c16p": 0
+   },
+   "v3PairsTotal": 1
+  },
+  {
+   "name": "kubuntu/2013-03-15",
+   "messages": 427,
+   "lang": "en",
+   "channel": "kubuntu",
+   "units": 423,
+   "goldForms": 20,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 64
+    },
+    "c3": {
+     "P": 1,
+     "N": 87
+    },
+    "c4_6": {
+     "P": 1,
+     "N": 131
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 155
+    },
+    "c16p": {
+     "P": 0,
+     "N": 125
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 1,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 1
+  },
+  {
+   "name": "kubuntu/2013-07-15",
+   "messages": 107,
+   "lang": "en",
+   "channel": "kubuntu",
+   "units": 106,
+   "goldForms": 13,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 0
+    },
+    "c3": {
+     "P": 0,
+     "N": 0
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 0
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 0
+    },
+    "c16p": {
+     "P": 0,
+     "N": 0
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "kubuntu/2014-03-15",
+   "messages": 66,
+   "lang": "en",
+   "channel": "kubuntu",
+   "units": 66,
+   "goldForms": 6,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 0
+    },
+    "c3": {
+     "P": 0,
+     "N": 0
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 0
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 0
+    },
+    "c16p": {
+     "P": 0,
+     "N": 0
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "kubuntu/2014-07-15",
+   "messages": 397,
+   "lang": "en",
+   "channel": "kubuntu",
+   "units": 396,
+   "goldForms": 26,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 59
+    },
+    "c3": {
+     "P": 0,
+     "N": 77
+    },
+    "c4_6": {
+     "P": 1,
+     "N": 139
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 152
+    },
+    "c16p": {
+     "P": 0,
+     "N": 165
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 1,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 1
+  },
+  {
+   "name": "kubuntu/2015-03-15",
+   "messages": 110,
+   "lang": "en",
+   "channel": "kubuntu",
+   "units": 110,
+   "goldForms": 6,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 0
+    },
+    "c3": {
+     "P": 0,
+     "N": 0
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 0
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 0
+    },
+    "c16p": {
+     "P": 0,
+     "N": 0
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "kubuntu/2015-07-15",
+   "messages": 412,
+   "lang": "en",
+   "channel": "kubuntu",
+   "units": 411,
+   "goldForms": 23,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 83
+    },
+    "c3": {
+     "P": 0,
+     "N": 103
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 239
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 253
+    },
+    "c16p": {
+     "P": 0,
+     "N": 237
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "xubuntu/2007-03-15",
+   "messages": 1070,
+   "lang": "en",
+   "channel": "xubuntu",
+   "units": 1052,
+   "goldForms": 32,
+   "B_counts": {
+    "c2": {
+     "P": 3,
+     "N": 543
+    },
+    "c3": {
+     "P": 1,
+     "N": 473
+    },
+    "c4_6": {
+     "P": 1,
+     "N": 876
+    },
+    "c7_15": {
+     "P": 3,
+     "N": 1054
+    },
+    "c16p": {
+     "P": 1,
+     "N": 954
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 2,
+    "c16p": 0
+   },
+   "v3PairsTotal": 2
+  },
+  {
+   "name": "xubuntu/2007-07-15",
+   "messages": 462,
+   "lang": "en",
+   "channel": "xubuntu",
+   "units": 454,
+   "goldForms": 15,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 57
+    },
+    "c3": {
+     "P": 1,
+     "N": 82
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 126
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 143
+    },
+    "c16p": {
+     "P": 0,
+     "N": 154
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "xubuntu/2008-03-15",
+   "messages": 300,
+   "lang": "en",
+   "channel": "xubuntu",
+   "units": 295,
+   "goldForms": 10,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 7
+    },
+    "c3": {
+     "P": 0,
+     "N": 14
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 28
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 19
+    },
+    "c16p": {
+     "P": 0,
+     "N": 22
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "xubuntu/2008-07-15",
+   "messages": 600,
+   "lang": "en",
+   "channel": "xubuntu",
+   "units": 587,
+   "goldForms": 25,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 151
+    },
+    "c3": {
+     "P": 0,
+     "N": 149
+    },
+    "c4_6": {
+     "P": 1,
+     "N": 279
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 300
+    },
+    "c16p": {
+     "P": 0,
+     "N": 329
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 1,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 1
+  },
+  {
+   "name": "xubuntu/2009-03-15",
+   "messages": 476,
+   "lang": "en",
+   "channel": "xubuntu",
+   "units": 466,
+   "goldForms": 31,
+   "B_counts": {
+    "c2": {
+     "P": 1,
+     "N": 78
+    },
+    "c3": {
+     "P": 0,
+     "N": 86
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 199
+    },
+    "c7_15": {
+     "P": 1,
+     "N": 243
+    },
+    "c16p": {
+     "P": 0,
+     "N": 200
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "xubuntu/2009-07-15",
+   "messages": 295,
+   "lang": "en",
+   "channel": "xubuntu",
+   "units": 290,
+   "goldForms": 25,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 2
+    },
+    "c3": {
+     "P": 0,
+     "N": 15
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 23
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 21
+    },
+    "c16p": {
+     "P": 0,
+     "N": 10
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "xubuntu/2010-03-15",
+   "messages": 119,
+   "lang": "en",
+   "channel": "xubuntu",
+   "units": 118,
+   "goldForms": 9,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 0
+    },
+    "c3": {
+     "P": 0,
+     "N": 0
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 0
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 0
+    },
+    "c16p": {
+     "P": 0,
+     "N": 0
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "xubuntu/2010-07-15",
+   "messages": 195,
+   "lang": "en",
+   "channel": "xubuntu",
+   "units": 191,
+   "goldForms": 13,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 0
+    },
+    "c3": {
+     "P": 0,
+     "N": 0
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 0
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 0
+    },
+    "c16p": {
+     "P": 0,
+     "N": 0
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "xubuntu/2011-03-15",
+   "messages": 369,
+   "lang": "en",
+   "channel": "xubuntu",
+   "units": 366,
+   "goldForms": 15,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 33
+    },
+    "c3": {
+     "P": 1,
+     "N": 56
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 118
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 152
+    },
+    "c16p": {
+     "P": 0,
+     "N": 128
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "xubuntu/2011-07-15",
+   "messages": 346,
+   "lang": "en",
+   "channel": "xubuntu",
+   "units": 341,
+   "goldForms": 22,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 19
+    },
+    "c3": {
+     "P": 0,
+     "N": 41
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 76
+    },
+    "c7_15": {
+     "P": 1,
+     "N": 81
+    },
+    "c16p": {
+     "P": 0,
+     "N": 91
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 1,
+    "c16p": 0
+   },
+   "v3PairsTotal": 1
+  },
+  {
+   "name": "xubuntu/2012-03-15",
+   "messages": 204,
+   "lang": "en",
+   "channel": "xubuntu",
+   "units": 201,
+   "goldForms": 13,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 0
+    },
+    "c3": {
+     "P": 0,
+     "N": 0
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 0
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 0
+    },
+    "c16p": {
+     "P": 0,
+     "N": 0
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "xubuntu/2012-07-15",
+   "messages": 138,
+   "lang": "en",
+   "channel": "xubuntu",
+   "units": 136,
+   "goldForms": 14,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 0
+    },
+    "c3": {
+     "P": 0,
+     "N": 0
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 0
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 0
+    },
+    "c16p": {
+     "P": 0,
+     "N": 0
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "xubuntu/2013-03-15",
+   "messages": 306,
+   "lang": "en",
+   "channel": "xubuntu",
+   "units": 302,
+   "goldForms": 29,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 17
+    },
+    "c3": {
+     "P": 0,
+     "N": 42
+    },
+    "c4_6": {
+     "P": 1,
+     "N": 87
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 118
+    },
+    "c16p": {
+     "P": 0,
+     "N": 88
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 1,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 1
+  },
+  {
+   "name": "xubuntu/2013-07-15",
+   "messages": 246,
+   "lang": "en",
+   "channel": "xubuntu",
+   "units": 241,
+   "goldForms": 21,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 0
+    },
+    "c3": {
+     "P": 0,
+     "N": 0
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 0
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 0
+    },
+    "c16p": {
+     "P": 0,
+     "N": 0
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "xubuntu/2014-03-15",
+   "messages": 254,
+   "lang": "en",
+   "channel": "xubuntu",
+   "units": 254,
+   "goldForms": 18,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 0
+    },
+    "c3": {
+     "P": 0,
+     "N": 0
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 0
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 0
+    },
+    "c16p": {
+     "P": 0,
+     "N": 0
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "xubuntu/2014-07-15",
+   "messages": 79,
+   "lang": "en",
+   "channel": "xubuntu",
+   "units": 79,
+   "goldForms": 12,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 0
+    },
+    "c3": {
+     "P": 0,
+     "N": 0
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 0
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 0
+    },
+    "c16p": {
+     "P": 0,
+     "N": 0
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "xubuntu/2015-03-15",
+   "messages": 56,
+   "lang": "en",
+   "channel": "xubuntu",
+   "units": 56,
+   "goldForms": 8,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 0
+    },
+    "c3": {
+     "P": 0,
+     "N": 0
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 0
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 0
+    },
+    "c16p": {
+     "P": 0,
+     "N": 0
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "xubuntu/2015-07-15",
+   "messages": 132,
+   "lang": "en",
+   "channel": "xubuntu",
+   "units": 132,
+   "goldForms": 11,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 0
+    },
+    "c3": {
+     "P": 0,
+     "N": 0
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 0
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 0
+    },
+    "c16p": {
+     "P": 0,
+     "N": 0
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "ubuntu-server/2007-11-15",
+   "messages": 400,
+   "lang": "en",
+   "channel": "ubuntu-server",
+   "units": 398,
+   "goldForms": 18,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 63
+    },
+    "c3": {
+     "P": 1,
+     "N": 77
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 134
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 163
+    },
+    "c16p": {
+     "P": 0,
+     "N": 193
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "ubuntu-server/2008-03-15",
+   "messages": 702,
+   "lang": "en",
+   "channel": "ubuntu-server",
+   "units": 698,
+   "goldForms": 15,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 294
+    },
+    "c3": {
+     "P": 0,
+     "N": 300
+    },
+    "c4_6": {
+     "P": 1,
+     "N": 597
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 575
+    },
+    "c16p": {
+     "P": 0,
+     "N": 857
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 1,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 1
+  },
+  {
+   "name": "ubuntu-server/2008-07-15",
+   "messages": 605,
+   "lang": "en",
+   "channel": "ubuntu-server",
+   "units": 601,
+   "goldForms": 17,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 210
+    },
+    "c3": {
+     "P": 0,
+     "N": 205
+    },
+    "c4_6": {
+     "P": 3,
+     "N": 338
+    },
+    "c7_15": {
+     "P": 6,
+     "N": 356
+    },
+    "c16p": {
+     "P": 0,
+     "N": 301
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 2,
+    "c7_15": 6,
+    "c16p": 0
+   },
+   "v3PairsTotal": 8
+  },
+  {
+   "name": "ubuntu-server/2009-03-15",
+   "messages": 112,
+   "lang": "en",
+   "channel": "ubuntu-server",
+   "units": 112,
+   "goldForms": 16,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 0
+    },
+    "c3": {
+     "P": 0,
+     "N": 0
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 0
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 0
+    },
+    "c16p": {
+     "P": 0,
+     "N": 0
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "ubuntu-server/2009-07-15",
+   "messages": 486,
+   "lang": "en",
+   "channel": "ubuntu-server",
+   "units": 482,
+   "goldForms": 21,
+   "B_counts": {
+    "c2": {
+     "P": 1,
+     "N": 120
+    },
+    "c3": {
+     "P": 2,
+     "N": 142
+    },
+    "c4_6": {
+     "P": 1,
+     "N": 255
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 315
+    },
+    "c16p": {
+     "P": 0,
+     "N": 215
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 1,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 1
+  },
+  {
+   "name": "ubuntu-server/2010-03-15",
+   "messages": 665,
+   "lang": "en",
+   "channel": "ubuntu-server",
+   "units": 660,
+   "goldForms": 39,
+   "B_counts": {
+    "c2": {
+     "P": 1,
+     "N": 241
+    },
+    "c3": {
+     "P": 0,
+     "N": 246
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 488
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 567
+    },
+    "c16p": {
+     "P": 0,
+     "N": 658
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "ubuntu-server/2010-07-15",
+   "messages": 843,
+   "lang": "en",
+   "channel": "ubuntu-server",
+   "units": 840,
+   "goldForms": 48,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 448
+    },
+    "c3": {
+     "P": 1,
+     "N": 394
+    },
+    "c4_6": {
+     "P": 1,
+     "N": 672
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 725
+    },
+    "c16p": {
+     "P": 0,
+     "N": 699
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 1,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 1
+  },
+  {
+   "name": "ubuntu-server/2011-03-15",
+   "messages": 638,
+   "lang": "en",
+   "channel": "ubuntu-server",
+   "units": 629,
+   "goldForms": 36,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 274
+    },
+    "c3": {
+     "P": 0,
+     "N": 275
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 528
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 555
+    },
+    "c16p": {
+     "P": 0,
+     "N": 580
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "ubuntu-server/2011-07-15",
+   "messages": 451,
+   "lang": "en",
+   "channel": "ubuntu-server",
+   "units": 446,
+   "goldForms": 23,
+   "B_counts": {
+    "c2": {
+     "P": 1,
+     "N": 107
+    },
+    "c3": {
+     "P": 0,
+     "N": 130
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 234
+    },
+    "c7_15": {
+     "P": 1,
+     "N": 247
+    },
+    "c16p": {
+     "P": 0,
+     "N": 275
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "ubuntu-server/2012-03-15",
+   "messages": 374,
+   "lang": "en",
+   "channel": "ubuntu-server",
+   "units": 373,
+   "goldForms": 19,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 44
+    },
+    "c3": {
+     "P": 0,
+     "N": 86
+    },
+    "c4_6": {
+     "P": 2,
+     "N": 128
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 159
+    },
+    "c16p": {
+     "P": 0,
+     "N": 159
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 2,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 2
+  },
+  {
+   "name": "ubuntu-server/2012-07-15",
+   "messages": 292,
+   "lang": "en",
+   "channel": "ubuntu-server",
+   "units": 291,
+   "goldForms": 17,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 7
+    },
+    "c3": {
+     "P": 0,
+     "N": 21
+    },
+    "c4_6": {
+     "P": 1,
+     "N": 47
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 40
+    },
+    "c16p": {
+     "P": 0,
+     "N": 26
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 1,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 1
+  },
+  {
+   "name": "ubuntu-server/2013-03-15",
+   "messages": 512,
+   "lang": "en",
+   "channel": "ubuntu-server",
+   "units": 505,
+   "goldForms": 27,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 179
+    },
+    "c3": {
+     "P": 0,
+     "N": 201
+    },
+    "c4_6": {
+     "P": 1,
+     "N": 343
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 307
+    },
+    "c16p": {
+     "P": 0,
+     "N": 365
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 1,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 1
+  },
+  {
+   "name": "ubuntu-server/2013-07-15",
+   "messages": 670,
+   "lang": "en",
+   "channel": "ubuntu-server",
+   "units": 669,
+   "goldForms": 20,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 223
+    },
+    "c3": {
+     "P": 1,
+     "N": 248
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 412
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 485
+    },
+    "c16p": {
+     "P": 0,
+     "N": 497
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "ubuntu-server/2014-03-15",
+   "messages": 106,
+   "lang": "en",
+   "channel": "ubuntu-server",
+   "units": 106,
+   "goldForms": 6,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 0
+    },
+    "c3": {
+     "P": 0,
+     "N": 0
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 0
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 0
+    },
+    "c16p": {
+     "P": 0,
+     "N": 0
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "ubuntu-server/2014-07-15",
+   "messages": 416,
+   "lang": "en",
+   "channel": "ubuntu-server",
+   "units": 410,
+   "goldForms": 15,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 68
+    },
+    "c3": {
+     "P": 0,
+     "N": 106
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 169
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 222
+    },
+    "c16p": {
+     "P": 0,
+     "N": 203
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "ubuntu-server/2015-03-15",
+   "messages": 62,
+   "lang": "en",
+   "channel": "ubuntu-server",
+   "units": 61,
+   "goldForms": 5,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 0
+    },
+    "c3": {
+     "P": 0,
+     "N": 0
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 0
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 0
+    },
+    "c16p": {
+     "P": 0,
+     "N": 0
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "ubuntu-server/2015-07-15",
+   "messages": 78,
+   "lang": "en",
+   "channel": "ubuntu-server",
+   "units": 77,
+   "goldForms": 9,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 0
+    },
+    "c3": {
+     "P": 0,
+     "N": 0
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 0
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 0
+    },
+    "c16p": {
+     "P": 0,
+     "N": 0
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "ubuntu-de/2010-11-15",
+   "messages": 596,
+   "lang": "de",
+   "channel": "ubuntu-de",
+   "units": 591,
+   "goldForms": 50,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 185
+    },
+    "c3": {
+     "P": 4,
+     "N": 225
+    },
+    "c4_6": {
+     "P": 8,
+     "N": 328
+    },
+    "c7_15": {
+     "P": 7,
+     "N": 423
+    },
+    "c16p": {
+     "P": 1,
+     "N": 850
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 6,
+    "c7_15": 3,
+    "c16p": 0
+   },
+   "v3PairsTotal": 9
+  },
+  {
+   "name": "ubuntu-de/2011-03-15",
+   "messages": 545,
+   "lang": "de",
+   "channel": "ubuntu-de",
+   "units": 539,
+   "goldForms": 45,
+   "B_counts": {
+    "c2": {
+     "P": 2,
+     "N": 187
+    },
+    "c3": {
+     "P": 2,
+     "N": 176
+    },
+    "c4_6": {
+     "P": 5,
+     "N": 286
+    },
+    "c7_15": {
+     "P": 2,
+     "N": 321
+    },
+    "c16p": {
+     "P": 0,
+     "N": 532
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 3,
+    "c7_15": 1,
+    "c16p": 0
+   },
+   "v3PairsTotal": 4
+  },
+  {
+   "name": "ubuntu-de/2011-07-15",
+   "messages": 959,
+   "lang": "de",
+   "channel": "ubuntu-de",
+   "units": 949,
+   "goldForms": 43,
+   "B_counts": {
+    "c2": {
+     "P": 2,
+     "N": 501
+    },
+    "c3": {
+     "P": 3,
+     "N": 458
+    },
+    "c4_6": {
+     "P": 6,
+     "N": 659
+    },
+    "c7_15": {
+     "P": 3,
+     "N": 841
+    },
+    "c16p": {
+     "P": 2,
+     "N": 1646
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 5,
+    "c7_15": 2,
+    "c16p": 0
+   },
+   "v3PairsTotal": 7
+  },
+  {
+   "name": "ubuntu-de/2012-03-15",
+   "messages": 522,
+   "lang": "de",
+   "channel": "ubuntu-de",
+   "units": 518,
+   "goldForms": 26,
+   "B_counts": {
+    "c2": {
+     "P": 1,
+     "N": 163
+    },
+    "c3": {
+     "P": 0,
+     "N": 145
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 330
+    },
+    "c7_15": {
+     "P": 2,
+     "N": 379
+    },
+    "c16p": {
+     "P": 0,
+     "N": 520
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 2,
+    "c16p": 0
+   },
+   "v3PairsTotal": 2
+  },
+  {
+   "name": "ubuntu-de/2012-07-15",
+   "messages": 447,
+   "lang": "de",
+   "channel": "ubuntu-de",
+   "units": 444,
+   "goldForms": 26,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 71
+    },
+    "c3": {
+     "P": 0,
+     "N": 79
+    },
+    "c4_6": {
+     "P": 2,
+     "N": 168
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 249
+    },
+    "c16p": {
+     "P": 0,
+     "N": 321
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 2,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 2
+  },
+  {
+   "name": "ubuntu-de/2013-03-15",
+   "messages": 501,
+   "lang": "de",
+   "channel": "ubuntu-de",
+   "units": 499,
+   "goldForms": 27,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 177
+    },
+    "c3": {
+     "P": 1,
+     "N": 170
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 293
+    },
+    "c7_15": {
+     "P": 1,
+     "N": 464
+    },
+    "c16p": {
+     "P": 0,
+     "N": 667
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 1,
+    "c16p": 0
+   },
+   "v3PairsTotal": 1
+  },
+  {
+   "name": "ubuntu-de/2013-11-15",
+   "messages": 149,
+   "lang": "de",
+   "channel": "ubuntu-de",
+   "units": 149,
+   "goldForms": 18,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 0
+    },
+    "c3": {
+     "P": 0,
+     "N": 0
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 0
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 0
+    },
+    "c16p": {
+     "P": 0,
+     "N": 0
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "ubuntu-de/2014-03-15",
+   "messages": 126,
+   "lang": "de",
+   "channel": "ubuntu-de",
+   "units": 122,
+   "goldForms": 4,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 0
+    },
+    "c3": {
+     "P": 0,
+     "N": 0
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 0
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 0
+    },
+    "c16p": {
+     "P": 0,
+     "N": 0
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "ubuntu-de/2014-07-15",
+   "messages": 90,
+   "lang": "de",
+   "channel": "ubuntu-de",
+   "units": 90,
+   "goldForms": 5,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 0
+    },
+    "c3": {
+     "P": 0,
+     "N": 0
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 0
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 0
+    },
+    "c16p": {
+     "P": 0,
+     "N": 0
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "ubuntu-de/2015-03-15",
+   "messages": 70,
+   "lang": "de",
+   "channel": "ubuntu-de",
+   "units": 70,
+   "goldForms": 5,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 0
+    },
+    "c3": {
+     "P": 0,
+     "N": 0
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 0
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 0
+    },
+    "c16p": {
+     "P": 0,
+     "N": 0
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "ubuntu-de/2015-07-15",
+   "messages": 244,
+   "lang": "de",
+   "channel": "ubuntu-de",
+   "units": 240,
+   "goldForms": 17,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 0
+    },
+    "c3": {
+     "P": 0,
+     "N": 0
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 0
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 0
+    },
+    "c16p": {
+     "P": 0,
+     "N": 0
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "ubuntu-es/2010-11-15",
+   "messages": 1843,
+   "lang": "es",
+   "channel": "ubuntu-es",
+   "units": 1817,
+   "goldForms": 56,
+   "B_counts": {
+    "c2": {
+     "P": 1,
+     "N": 811
+    },
+    "c3": {
+     "P": 4,
+     "N": 613
+    },
+    "c4_6": {
+     "P": 3,
+     "N": 969
+    },
+    "c7_15": {
+     "P": 2,
+     "N": 767
+    },
+    "c16p": {
+     "P": 4,
+     "N": 657
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 3,
+    "c7_15": 2,
+    "c16p": 0
+   },
+   "v3PairsTotal": 5
+  },
+  {
+   "name": "ubuntu-es/2011-03-15",
+   "messages": 1756,
+   "lang": "es",
+   "channel": "ubuntu-es",
+   "units": 1737,
+   "goldForms": 55,
+   "B_counts": {
+    "c2": {
+     "P": 4,
+     "N": 784
+    },
+    "c3": {
+     "P": 8,
+     "N": 563
+    },
+    "c4_6": {
+     "P": 17,
+     "N": 920
+    },
+    "c7_15": {
+     "P": 24,
+     "N": 1000
+    },
+    "c16p": {
+     "P": 10,
+     "N": 631
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 17,
+    "c7_15": 11,
+    "c16p": 4
+   },
+   "v3PairsTotal": 32
+  },
+  {
+   "name": "ubuntu-es/2011-07-15",
+   "messages": 681,
+   "lang": "es",
+   "channel": "ubuntu-es",
+   "units": 677,
+   "goldForms": 31,
+   "B_counts": {
+    "c2": {
+     "P": 3,
+     "N": 231
+    },
+    "c3": {
+     "P": 2,
+     "N": 218
+    },
+    "c4_6": {
+     "P": 3,
+     "N": 320
+    },
+    "c7_15": {
+     "P": 3,
+     "N": 271
+    },
+    "c16p": {
+     "P": 0,
+     "N": 305
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 2,
+    "c7_15": 1,
+    "c16p": 0
+   },
+   "v3PairsTotal": 3
+  },
+  {
+   "name": "ubuntu-es/2012-03-15",
+   "messages": 138,
+   "lang": "es",
+   "channel": "ubuntu-es",
+   "units": 131,
+   "goldForms": 12,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 0
+    },
+    "c3": {
+     "P": 0,
+     "N": 0
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 0
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 0
+    },
+    "c16p": {
+     "P": 0,
+     "N": 0
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "ubuntu-es/2012-07-15",
+   "messages": 384,
+   "lang": "es",
+   "channel": "ubuntu-es",
+   "units": 379,
+   "goldForms": 18,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 33
+    },
+    "c3": {
+     "P": 0,
+     "N": 47
+    },
+    "c4_6": {
+     "P": 1,
+     "N": 84
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 40
+    },
+    "c16p": {
+     "P": 0,
+     "N": 86
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 1,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 1
+  },
+  {
+   "name": "ubuntu-es/2013-03-15",
+   "messages": 484,
+   "lang": "es",
+   "channel": "ubuntu-es",
+   "units": 473,
+   "goldForms": 12,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 60
+    },
+    "c3": {
+     "P": 0,
+     "N": 87
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 115
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 99
+    },
+    "c16p": {
+     "P": 0,
+     "N": 97
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "ubuntu-es/2013-07-15",
+   "messages": 468,
+   "lang": "es",
+   "channel": "ubuntu-es",
+   "units": 462,
+   "goldForms": 19,
+   "B_counts": {
+    "c2": {
+     "P": 1,
+     "N": 82
+    },
+    "c3": {
+     "P": 0,
+     "N": 82
+    },
+    "c4_6": {
+     "P": 1,
+     "N": 134
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 116
+    },
+    "c16p": {
+     "P": 0,
+     "N": 129
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 1,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 1
+  },
+  {
+   "name": "ubuntu-es/2014-03-15",
+   "messages": 154,
+   "lang": "es",
+   "channel": "ubuntu-es",
+   "units": 150,
+   "goldForms": 8,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 0
+    },
+    "c3": {
+     "P": 0,
+     "N": 0
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 0
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 0
+    },
+    "c16p": {
+     "P": 0,
+     "N": 0
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "ubuntu-es/2015-07-15",
+   "messages": 94,
+   "lang": "es",
+   "channel": "ubuntu-es",
+   "units": 91,
+   "goldForms": 6,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 0
+    },
+    "c3": {
+     "P": 0,
+     "N": 0
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 0
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 0
+    },
+    "c16p": {
+     "P": 0,
+     "N": 0
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "ubuntu-es/2015-11-15",
+   "messages": 196,
+   "lang": "es",
+   "channel": "ubuntu-es",
+   "units": 194,
+   "goldForms": 4,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 0
+    },
+    "c3": {
+     "P": 0,
+     "N": 0
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 0
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 0
+    },
+    "c16p": {
+     "P": 0,
+     "N": 0
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "ubuntu-it/2010-11-15",
+   "messages": 1187,
+   "lang": "it",
+   "channel": "ubuntu-it",
+   "units": 1171,
+   "goldForms": 45,
+   "B_counts": {
+    "c2": {
+     "P": 3,
+     "N": 549
+    },
+    "c3": {
+     "P": 1,
+     "N": 443
+    },
+    "c4_6": {
+     "P": 4,
+     "N": 624
+    },
+    "c7_15": {
+     "P": 16,
+     "N": 492
+    },
+    "c16p": {
+     "P": 1,
+     "N": 486
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 4,
+    "c7_15": 10,
+    "c16p": 1
+   },
+   "v3PairsTotal": 15
+  },
+  {
+   "name": "ubuntu-it/2011-03-15",
+   "messages": 903,
+   "lang": "it",
+   "channel": "ubuntu-it",
+   "units": 889,
+   "goldForms": 28,
+   "B_counts": {
+    "c2": {
+     "P": 2,
+     "N": 395
+    },
+    "c3": {
+     "P": 0,
+     "N": 299
+    },
+    "c4_6": {
+     "P": 2,
+     "N": 540
+    },
+    "c7_15": {
+     "P": 2,
+     "N": 451
+    },
+    "c16p": {
+     "P": 2,
+     "N": 390
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 2,
+    "c7_15": 1,
+    "c16p": 2
+   },
+   "v3PairsTotal": 5
+  },
+  {
+   "name": "ubuntu-it/2011-07-15",
+   "messages": 704,
+   "lang": "it",
+   "channel": "ubuntu-it",
+   "units": 690,
+   "goldForms": 35,
+   "B_counts": {
+    "c2": {
+     "P": 1,
+     "N": 312
+    },
+    "c3": {
+     "P": 1,
+     "N": 273
+    },
+    "c4_6": {
+     "P": 6,
+     "N": 429
+    },
+    "c7_15": {
+     "P": 4,
+     "N": 335
+    },
+    "c16p": {
+     "P": 0,
+     "N": 369
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 4,
+    "c7_15": 3,
+    "c16p": 0
+   },
+   "v3PairsTotal": 7
+  },
+  {
+   "name": "ubuntu-it/2012-03-15",
+   "messages": 1351,
+   "lang": "it",
+   "channel": "ubuntu-it",
+   "units": 1335,
+   "goldForms": 38,
+   "B_counts": {
+    "c2": {
+     "P": 2,
+     "N": 641
+    },
+    "c3": {
+     "P": 3,
+     "N": 504
+    },
+    "c4_6": {
+     "P": 10,
+     "N": 849
+    },
+    "c7_15": {
+     "P": 18,
+     "N": 719
+    },
+    "c16p": {
+     "P": 5,
+     "N": 518
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 7,
+    "c7_15": 7,
+    "c16p": 3
+   },
+   "v3PairsTotal": 17
+  },
+  {
+   "name": "ubuntu-it/2012-07-15",
+   "messages": 809,
+   "lang": "it",
+   "channel": "ubuntu-it",
+   "units": 797,
+   "goldForms": 31,
+   "B_counts": {
+    "c2": {
+     "P": 1,
+     "N": 260
+    },
+    "c3": {
+     "P": 1,
+     "N": 199
+    },
+    "c4_6": {
+     "P": 1,
+     "N": 313
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 266
+    },
+    "c16p": {
+     "P": 0,
+     "N": 228
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 1,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 1
+  },
+  {
+   "name": "ubuntu-it/2013-03-15",
+   "messages": 1055,
+   "lang": "it",
+   "channel": "ubuntu-it",
+   "units": 1023,
+   "goldForms": 27,
+   "B_counts": {
+    "c2": {
+     "P": 1,
+     "N": 501
+    },
+    "c3": {
+     "P": 3,
+     "N": 343
+    },
+    "c4_6": {
+     "P": 2,
+     "N": 569
+    },
+    "c7_15": {
+     "P": 4,
+     "N": 449
+    },
+    "c16p": {
+     "P": 1,
+     "N": 553
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 2,
+    "c7_15": 3,
+    "c16p": 1
+   },
+   "v3PairsTotal": 6
+  },
+  {
+   "name": "ubuntu-it/2013-07-15",
+   "messages": 1732,
+   "lang": "it",
+   "channel": "ubuntu-it",
+   "units": 1684,
+   "goldForms": 35,
+   "B_counts": {
+    "c2": {
+     "P": 3,
+     "N": 761
+    },
+    "c3": {
+     "P": 2,
+     "N": 516
+    },
+    "c4_6": {
+     "P": 4,
+     "N": 885
+    },
+    "c7_15": {
+     "P": 9,
+     "N": 725
+    },
+    "c16p": {
+     "P": 1,
+     "N": 547
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 4,
+    "c7_15": 7,
+    "c16p": 0
+   },
+   "v3PairsTotal": 11
+  },
+  {
+   "name": "ubuntu-it/2014-03-15",
+   "messages": 1470,
+   "lang": "it",
+   "channel": "ubuntu-it",
+   "units": 1458,
+   "goldForms": 20,
+   "B_counts": {
+    "c2": {
+     "P": 1,
+     "N": 696
+    },
+    "c3": {
+     "P": 2,
+     "N": 513
+    },
+    "c4_6": {
+     "P": 4,
+     "N": 845
+    },
+    "c7_15": {
+     "P": 2,
+     "N": 769
+    },
+    "c16p": {
+     "P": 1,
+     "N": 567
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 3,
+    "c7_15": 2,
+    "c16p": 1
+   },
+   "v3PairsTotal": 6
+  },
+  {
+   "name": "ubuntu-it/2014-07-15",
+   "messages": 722,
+   "lang": "it",
+   "channel": "ubuntu-it",
+   "units": 714,
+   "goldForms": 12,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 218
+    },
+    "c3": {
+     "P": 1,
+     "N": 211
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 304
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 226
+    },
+    "c16p": {
+     "P": 0,
+     "N": 203
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  },
+  {
+   "name": "ubuntu-it/2015-03-15",
+   "messages": 889,
+   "lang": "it",
+   "channel": "ubuntu-it",
+   "units": 878,
+   "goldForms": 18,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 324
+    },
+    "c3": {
+     "P": 1,
+     "N": 257
+    },
+    "c4_6": {
+     "P": 2,
+     "N": 477
+    },
+    "c7_15": {
+     "P": 3,
+     "N": 383
+    },
+    "c16p": {
+     "P": 0,
+     "N": 421
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 1,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 1
+  },
+  {
+   "name": "ubuntu-it/2015-07-15",
+   "messages": 367,
+   "lang": "it",
+   "channel": "ubuntu-it",
+   "units": 365,
+   "goldForms": 22,
+   "B_counts": {
+    "c2": {
+     "P": 0,
+     "N": 36
+    },
+    "c3": {
+     "P": 1,
+     "N": 53
+    },
+    "c4_6": {
+     "P": 0,
+     "N": 87
+    },
+    "c7_15": {
+     "P": 0,
+     "N": 80
+    },
+    "c16p": {
+     "P": 0,
+     "N": 92
+    }
+   },
+   "v3PairsAvail": {
+    "c4_6": 0,
+    "c7_15": 0,
+    "c16p": 0
+   },
+   "v3PairsTotal": 0
+  }
+ ]
+}

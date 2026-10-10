@@ -1,0 +1,631 @@
+{
+ "G0": {
+  "pl-null": {
+   "definedCells": 24,
+   "cellsAbsZge4": 0,
+   "share": 0,
+   "cellsAbsZge2": 2,
+   "bigCells": []
+  },
+  "pl-null2": {
+   "definedCells": 24,
+   "cellsAbsZge4": 0,
+   "share": 0,
+   "cellsAbsZge2": 1,
+   "bigCells": []
+  }
+ },
+ "planted": [
+  {
+   "world": "pl-markov",
+   "phenomenon": "rank-bin-flow",
+   "stats": [
+    {
+     "id": "condR",
+     "expectedSign": -1,
+     "zDiscover": -527.12,
+     "zConfirm": -1173.24,
+     "recovered": true
+    },
+    {
+     "id": "condL",
+     "expectedSign": -1,
+     "zDiscover": -527.26,
+     "zConfirm": -1173.66,
+     "recovered": true
+    },
+    {
+     "id": "miDecay",
+     "expectedSign": 1,
+     "zDiscover": 41.22,
+     "zConfirm": 32.45,
+     "recovered": true
+    }
+   ]
+  },
+  {
+   "world": "pl-frames",
+   "phenomenon": "rigid-frames + company-classes (edges and neighbours)",
+   "stats": [
+    {
+     "id": "condR",
+     "expectedSign": -1,
+     "zDiscover": -77.45,
+     "zConfirm": -102.94,
+     "recovered": true
+    },
+    {
+     "id": "condL",
+     "expectedSign": -1,
+     "zDiscover": -79.06,
+     "zConfirm": -105.98,
+     "recovered": true
+    },
+    {
+     "id": "initEnt",
+     "expectedSign": -1,
+     "zDiscover": -114.25,
+     "zConfirm": -137.96,
+     "recovered": true
+    },
+    {
+     "id": "finEnt",
+     "expectedSign": -1,
+     "zDiscover": -28.77,
+     "zConfirm": -20.18,
+     "recovered": true
+    },
+    {
+     "id": "edgeGap",
+     "expectedSign": 1,
+     "zDiscover": 27.95,
+     "zConfirm": 37.73,
+     "recovered": true
+    },
+    {
+     "id": "rigidR",
+     "expectedSign": 1,
+     "zDiscover": 58.74,
+     "zConfirm": 55.29,
+     "recovered": true
+    }
+   ]
+  },
+  {
+   "world": "pl-frames",
+   "phenomenon": "vocative-names (unit-initial concentration)",
+   "stats": [
+    {
+     "id": "initEnt",
+     "expectedSign": -1,
+     "zDiscover": -114.25,
+     "zConfirm": -137.96,
+     "recovered": true
+    }
+   ]
+  },
+  {
+   "world": "pl-parallel",
+   "phenomenon": "anaphora + epiphora (adjacent units repeat prefix/suffix)",
+   "stats": [
+    {
+     "id": "sameL",
+     "expectedSign": 1,
+     "zDiscover": 111.86,
+     "zConfirm": 89.19,
+     "recovered": true
+    },
+    {
+     "id": "sameR",
+     "expectedSign": 1,
+     "zDiscover": 96.43,
+     "zConfirm": 114.89,
+     "recovered": true
+    }
+   ]
+  }
+ ],
+ "plantedRecoveredByAtLeastOne": [
+  {
+   "world": "pl-markov",
+   "phenomenon": "rank-bin-flow",
+   "ok": true
+  },
+  {
+   "world": "pl-frames",
+   "phenomenon": "rigid-frames + company-classes (edges and neighbours)",
+   "ok": true
+  },
+  {
+   "world": "pl-frames",
+   "phenomenon": "vocative-names (unit-initial concentration)",
+   "ok": true
+  },
+  {
+   "world": "pl-parallel",
+   "phenomenon": "anaphora + epiphora (adjacent units repeat prefix/suffix)",
+   "ok": true
+  }
+ ],
+ "plantedFires": {
+  "pl-null": [],
+  "pl-burst": [
+   "condR:-",
+   "condL:-",
+   "sameL:+",
+   "sameR:+"
+  ],
+  "pl-markov": [
+   "divSlope:-",
+   "condR:-",
+   "condL:-",
+   "asym:-",
+   "miDecay:+"
+  ],
+  "pl-frames": [
+   "divSlope:+",
+   "condR:-",
+   "condL:-",
+   "rigidL:+",
+   "rigidR:+",
+   "sameL:+",
+   "asym:+",
+   "initEnt:-",
+   "finEnt:-",
+   "edgeGap:+"
+  ],
+  "pl-parallel": [
+   "rigidL:+",
+   "rigidR:+",
+   "sameL:+",
+   "sameR:+"
+  ],
+  "pl-length": [],
+  "pl-mix": [
+   "divSlope:-",
+   "condR:-",
+   "condL:-",
+   "sameL:+",
+   "sameR:+",
+   "asym:-",
+   "miDecay:+",
+   "initEnt:-",
+   "finEnt:-",
+   "edgeGap:+"
+  ],
+  "pl-null2": []
+ },
+ "iidCalibration": {
+  "replicates": 100,
+  "cells": 1200,
+  "cellsAbsZge4": 6,
+  "share": 0.005,
+  "nominalT9": 0.0031,
+  "perStat": {
+   "divSlope": {
+    "zSd": 1.375,
+    "share4": 0,
+    "share2": 0.15,
+    "zMax": 3.97,
+    "nullMeanBias": -0.00017,
+    "vMean": -0.00064
+   },
+   "condR": {
+    "zSd": 1.158,
+    "share4": 0,
+    "share2": 0.09,
+    "zMax": 3.18,
+    "nullMeanBias": -0.000017,
+    "vMean": 0.99942
+   },
+   "condL": {
+    "zSd": 1.158,
+    "share4": 0,
+    "share2": 0.09,
+    "zMax": 3.19,
+    "nullMeanBias": -0.000017,
+    "vMean": 0.99942
+   },
+   "rigidL": {
+    "zSd": 1.098,
+    "share4": 0,
+    "share2": 0.07,
+    "zMax": 3.38,
+    "nullMeanBias": 0.000207,
+    "vMean": 0.02607
+   },
+   "rigidR": {
+    "zSd": 1.275,
+    "share4": 0,
+    "share2": 0.15,
+    "zMax": 3.93,
+    "nullMeanBias": -0.000169,
+    "vMean": 0.0258
+   },
+   "sameL": {
+    "zSd": 1.109,
+    "share4": 0,
+    "share2": 0.09,
+    "zMax": 2.61,
+    "nullMeanBias": -0.000081,
+    "vMean": 0.05825
+   },
+   "sameR": {
+    "zSd": 1.272,
+    "share4": 0.01,
+    "share2": 0.08,
+    "zMax": 4.4,
+    "nullMeanBias": 0.00002,
+    "vMean": 0.05826
+   },
+   "asym": {
+    "zSd": 1.121,
+    "share4": 0.01,
+    "share2": 0.07,
+    "zMax": 4.95,
+    "nullMeanBias": -0.000321,
+    "vMean": -0.00025
+   },
+   "miDecay": {
+    "zSd": 1.158,
+    "share4": 0.01,
+    "share2": 0.06,
+    "zMax": 4.57,
+    "nullMeanBias": -0.001323,
+    "vMean": -0.0029
+   },
+   "initEnt": {
+    "zSd": 1.533,
+    "share4": 0.03,
+    "share2": 0.16,
+    "zMax": 5.76,
+    "nullMeanBias": -0.001633,
+    "vMean": 3.34029
+   },
+   "finEnt": {
+    "zSd": 1.186,
+    "share4": 0,
+    "share2": 0.07,
+    "zMax": 3.6,
+    "nullMeanBias": 0.002256,
+    "vMean": 3.34386
+   },
+   "edgeGap": {
+    "zSd": 1.337,
+    "share4": 0,
+    "share2": 0.16,
+    "zMax": 3.75,
+    "nullMeanBias": 0.000954,
+    "vMean": 0.00085
+   }
+  }
+ },
+ "confounds": {
+  "divSlope": {
+   "rhoTokensIid": -0.9,
+   "rangeTokensIid": 0.0169,
+   "rhoTokensReal": -0.9,
+   "rangeTokensReal": 0.0196,
+   "rhoUnitLenIid": 0.26,
+   "rangeUnitLenIid": 0.0024,
+   "rhoUnitLenReal": 0.8,
+   "rangeUnitLenReal": 0.0032,
+   "realValueAt60k": 0.0754
+  },
+  "condR": {
+   "rhoTokensIid": 1,
+   "rangeTokensIid": 0.0026,
+   "rhoTokensReal": -0.3,
+   "rangeTokensReal": 0.0031,
+   "rhoUnitLenIid": 1,
+   "rangeUnitLenIid": 0.0002,
+   "rhoUnitLenReal": -0.1,
+   "rangeUnitLenReal": 0.0002,
+   "realValueAt60k": 0.9692
+  },
+  "condL": {
+   "rhoTokensIid": 1,
+   "rangeTokensIid": 0.0026,
+   "rhoTokensReal": -0.3,
+   "rangeTokensReal": 0.003,
+   "rhoUnitLenIid": 1,
+   "rangeUnitLenIid": 0.0002,
+   "rhoUnitLenReal": -0.1,
+   "rangeUnitLenReal": 0.0002,
+   "realValueAt60k": 0.9692
+  },
+  "rigidL": {
+   "rhoTokensIid": -0.5,
+   "rangeTokensIid": 0.0002,
+   "rhoTokensReal": 0.1,
+   "rangeTokensReal": 0.0474,
+   "rhoUnitLenIid": -0.37,
+   "rangeUnitLenIid": 0.0002,
+   "rhoUnitLenReal": 0.8,
+   "rangeUnitLenReal": 0.0022,
+   "realValueAt60k": 0.101
+  },
+  "rigidR": {
+   "rhoTokensIid": 0.3,
+   "rangeTokensIid": 0.0004,
+   "rhoTokensReal": 0.8,
+   "rangeTokensReal": 0.0177,
+   "rhoUnitLenIid": -0.37,
+   "rangeUnitLenIid": 0.0005,
+   "rhoUnitLenReal": 0.5,
+   "rangeUnitLenReal": 0.0063,
+   "realValueAt60k": 0.0584
+  },
+  "sameL": {
+   "rhoTokensIid": -0.6,
+   "rangeTokensIid": 0.0008,
+   "rhoTokensReal": 0,
+   "rangeTokensReal": 0.0049,
+   "rhoUnitLenIid": 0.14,
+   "rangeUnitLenIid": 0.0004,
+   "rhoUnitLenReal": 1,
+   "rangeUnitLenReal": 0.0036,
+   "realValueAt60k": 0.1193
+  },
+  "sameR": {
+   "rhoTokensIid": 0.9,
+   "rangeTokensIid": 0.0005,
+   "rhoTokensReal": 0.1,
+   "rangeTokensReal": 0.006,
+   "rhoUnitLenIid": 0.43,
+   "rangeUnitLenIid": 0.0006,
+   "rhoUnitLenReal": 0.9,
+   "rangeUnitLenReal": 0.0035,
+   "realValueAt60k": 0.0997
+  },
+  "asym": {
+   "rhoTokensIid": 0.9,
+   "rangeTokensIid": 0.0017,
+   "rhoTokensReal": -0.1,
+   "rangeTokensReal": 0.0048,
+   "rhoUnitLenIid": 0.71,
+   "rangeUnitLenIid": 0.0008,
+   "rhoUnitLenReal": -0.5,
+   "rangeUnitLenReal": 0.001,
+   "realValueAt60k": -0.0076
+  },
+  "miDecay": {
+   "rhoTokensIid": 0.1,
+   "rangeTokensIid": 0.0613,
+   "rhoTokensReal": 0.7,
+   "rangeTokensReal": 0.2822,
+   "rhoUnitLenIid": -0.5,
+   "rangeUnitLenIid": 0.0474,
+   "rhoUnitLenReal": 0.5,
+   "rangeUnitLenReal": 0.1101,
+   "realValueAt60k": 1.0713
+  },
+  "initEnt": {
+   "rhoTokensIid": 0.9,
+   "rangeTokensIid": 0.0703,
+   "rhoTokensReal": 0,
+   "rangeTokensReal": 0.0283,
+   "rhoUnitLenIid": -0.83,
+   "rangeUnitLenIid": 0.0091,
+   "rhoUnitLenReal": -0.5,
+   "rangeUnitLenReal": 0.0109,
+   "realValueAt60k": 3.2201
+  },
+  "finEnt": {
+   "rhoTokensIid": 0.9,
+   "rangeTokensIid": 0.0617,
+   "rhoTokensReal": 0.1,
+   "rangeTokensReal": 0.1308,
+   "rhoUnitLenIid": -0.94,
+   "rangeUnitLenIid": 0.0048,
+   "rhoUnitLenReal": -0.3,
+   "rangeUnitLenReal": 0.0063,
+   "realValueAt60k": 3.2306
+  },
+  "edgeGap": {
+   "rhoTokensIid": 0.5,
+   "rangeTokensIid": 0.0052,
+   "rhoTokensReal": 0.3,
+   "rangeTokensReal": 0.0093,
+   "rhoUnitLenIid": 0.66,
+   "rangeUnitLenIid": 0.0048,
+   "rhoUnitLenReal": 0.6,
+   "rangeUnitLenReal": 0.0185,
+   "realValueAt60k": 0.226
+  }
+ },
+ "timing": {
+  "budgetMs": 700,
+  "perCall": {
+   "iid-D1-150k": {
+    "tokens": 150022,
+    "types": 4974,
+    "cpuMsMean": 43.1,
+    "cpuMsMax": 97.4
+   },
+   "iid-D2-alpha1.3-150k": {
+    "tokens": 150002,
+    "types": 3923,
+    "cpuMsMean": 22.9,
+    "cpuMsMax": 24.8
+   },
+   "great-expectations-150k": {
+    "tokens": 150005,
+    "types": 9981,
+    "cpuMsMean": 25.9,
+    "cpuMsMax": 26.6
+   },
+   "iid-fixedL3-150k": {
+    "tokens": 150000,
+    "types": 4959,
+    "cpuMsMean": 21.8,
+    "cpuMsMax": 23.4
+   },
+   "iid-fixedL60-150k": {
+    "tokens": 150000,
+    "types": 4963,
+    "cpuMsMean": 28.1,
+    "cpuMsMax": 29.1
+   },
+   "iid-bigvocab-150k": {
+    "tokens": 150004,
+    "types": 33753,
+    "cpuMsMean": 43,
+    "cpuMsMax": 47.4
+   }
+  }
+ },
+ "determinism": {
+  "computeTwiceIdentical": true,
+  "atlasCellsTwiceIdentical": true
+ },
+ "scriptInvariance": {
+  "orderPreservingCyrillicShift_maxAbsDiff": 0,
+  "orderPreservingCJKShift_maxAbsDiff": 0,
+  "orderReversingMap_absDiffPerStat": {
+   "divSlope": 0,
+   "condR": 0.00019676,
+   "condL": 0.00019763,
+   "rigidL": 0,
+   "rigidR": 0,
+   "sameL": 0,
+   "sameR": 0,
+   "asym": 0.00018008,
+   "miDecay": 0.02364077,
+   "initEnt": 0.00139669,
+   "finEnt": 0.00043358,
+   "edgeGap": 0.00019219
+  },
+  "note": "tie-break among equal counts is by string order, so only an order-reversing alphabet map can move ranks (and only among tied types)"
+ },
+ "real": {
+  "bk-great-expect": {
+   "divSlope": {
+    "v": 0.0754,
+    "z": 16.41,
+    "zRegroupIidD1": 12.38
+   },
+   "condR": {
+    "v": 0.9692,
+    "z": -280.44,
+    "zRegroupIidD1": -243.78
+   },
+   "condL": {
+    "v": 0.9692,
+    "z": -280.59,
+    "zRegroupIidD1": -243.66
+   },
+   "rigidL": {
+    "v": 0.101,
+    "z": 478.88,
+    "zRegroupIidD1": 484.34
+   },
+   "rigidR": {
+    "v": 0.0584,
+    "z": 557.54,
+    "zRegroupIidD1": 203.5
+   },
+   "sameL": {
+    "v": 0.1193,
+    "z": 26.8,
+    "zRegroupIidD1": 25.21
+   },
+   "sameR": {
+    "v": 0.0997,
+    "z": 28.55,
+    "zRegroupIidD1": 55.07
+   },
+   "asym": {
+    "v": -0.0076,
+    "z": -12.97,
+    "zRegroupIidD1": -14.78
+   },
+   "miDecay": {
+    "v": 1.0713,
+    "z": 29,
+    "zRegroupIidD1": 13.41
+   },
+   "initEnt": {
+    "v": 3.2201,
+    "z": -49.13,
+    "zRegroupIidD1": 0.26
+   },
+   "finEnt": {
+    "v": 3.2306,
+    "z": -37.54,
+    "zRegroupIidD1": 0.39
+   },
+   "edgeGap": {
+    "v": 0.226,
+    "z": 50.88,
+    "zRegroupIidD1": -0.47
+   }
+  },
+  "bk-prince": {
+   "divSlope": {
+    "v": 0.1014,
+    "z": 32.54,
+    "zRegroupIidD1": 16.3
+   },
+   "condR": {
+    "v": 0.9611,
+    "z": -597.09,
+    "zRegroupIidD1": -202.04
+   },
+   "condL": {
+    "v": 0.961,
+    "z": -597.44,
+    "zRegroupIidD1": -201.97
+   },
+   "rigidL": {
+    "v": 0.1022,
+    "z": 297.02,
+    "zRegroupIidD1": 342.57
+   },
+   "rigidR": {
+    "v": 0.0612,
+    "z": 303.72,
+    "zRegroupIidD1": 202.21
+   },
+   "sameL": {
+    "v": 0.1107,
+    "z": 18.33,
+    "zRegroupIidD1": 22.62
+   },
+   "sameR": {
+    "v": 0.0891,
+    "z": 25.84,
+    "zRegroupIidD1": 19.7
+   },
+   "asym": {
+    "v": 0.0088,
+    "z": 14.69,
+    "zRegroupIidD1": 14.79
+   },
+   "miDecay": {
+    "v": 1.2278,
+    "z": 11.73,
+    "zRegroupIidD1": 20.08
+   },
+   "initEnt": {
+    "v": 3.4324,
+    "z": -25.25,
+    "zRegroupIidD1": 1.22
+   },
+   "finEnt": {
+    "v": 3.0627,
+    "z": -111.76,
+    "zRegroupIidD1": -2.89
+   },
+   "edgeGap": {
+    "v": 0.2697,
+    "z": 28.72,
+    "zRegroupIidD1": 0.38
+   }
+  }
+ },
+ "condRedundancy": {
+  "cells": 18,
+  "maxAbsDiff": 0.0007000000000000339
+ }
+}

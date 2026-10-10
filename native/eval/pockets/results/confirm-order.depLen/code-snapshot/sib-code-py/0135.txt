@@ -1,0 +1,249 @@
+"""Document-grounded snippets — real quoted text from the actual matter,
+not eoreader7's relational graph. That graph is built for clause-level
+language ("shall not," "is prohibited from") and finds almost nothing in a
+bare enumerated scope list ("Public Safety Video Surveillance Solutions;
+Drone Software and Hardware; ..."), even when that list is exactly the
+right evidence — enumerations have no verbs to form a relation from. This
+scans the FULL raw text (not eoreader7's bounded screen-slice, which caps
+at ~24KB and can miss a 1MB+ contract's own exhibit entirely) directly for
+every core/vendor term, and tags each hit with which part of the matter it
+came from: the legislation's own text, or a specific named exhibit —
+matter_text() already marks attachment boundaries, so splitting on that is
+free and exact."""
+from __future__ import annotations
+
+import re
+
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "webapp"))
+
+from classify import CORE_TERMS, VENDOR_TERMS, _norm
+from statute import clause_for
+
+ATTACHMENT_RE = re.compile(r"\n--- ATTACHMENT: (.+?) ---\n")
+WINDOW = 180
+CONTEXT_RADIUS = 550
+MAX_PER_TERM = 2
+MAX_TOTAL = 24
+# Wrap the exact matched span in sentinel bytes that survive HTML-escaping
+# unchanged, so the frontend can drop in <mark>…</mark> around precisely the
+# span the term matched — not a re-derived guess — without a second server
+# round trip to fetch it.
+MARK_OPEN, MARK_CLOSE = "", ""
+
+
+def _clean_ws(s: str) -> str:
+    """Collapse OCR whitespace noise without erasing line structure. A
+    pricing catalog's lines ("448-0723 5.5MM CAMERA IWG 524.18 232.37")
+    read as columns because they ARE columns — flattening every newline to
+    a space the way plain prose cleanup does turns that into one run-on
+    wall of numbers with no way to tell where one item ends and the next
+    begins."""
+    s = re.sub(r"[ \t]+", " ", s)
+    s = re.sub(r" *\n *", "\n", s)
+    s = re.sub(r"\n{3,}", "\n\n", s)
+    return s.strip()
+
+
+def _context(m: re.Match, section_text: str) -> str:
+    """A wide excerpt around one occurrence, for "show me where this lives
+    in the document" — bigger than the inline WINDOW, which is sized to sit
+    next to a dozen other quotes, not to stand alone."""
+    ca = max(0, m.start() - CONTEXT_RADIUS)
+    cb = min(len(section_text), m.end() + CONTEXT_RADIUS)
+    before = _clean_ws(section_text[ca:m.start()])
+    after = _clean_ws(section_text[m.end():cb])
+    matched = re.sub(r"\s+", " ", section_text[m.start():m.end()])
+    out = ("…" if ca > 0 else "")
+    if before:
+        out += before + " "
+    out += MARK_OPEN + matched + MARK_CLOSE
+    if after:
+        out += " " + after
+    if cb < len(section_text):
+        out += "…"
+    return out
+
+
+def _tabular_score(window: str) -> float:
+    """How much a passage reads like a pricing/discount schedule rather
+    than the clause that actually argues something. A cooperative
+    purchasing exhibit routinely names the same category twice: once in
+    the scope-of-agreement clause ("... Public Safety Video Surveillance
+    Solutions ...") and again as a line item in a fee schedule ("Radius
+    Plus 10.00%") — same words, but only one of the two occurrences
+    supports a finding, and a naive "first match wins" scan has no way to
+    tell them apart. This scores every genuine occurrence of the term
+    against the OTHERS found in the same document (never against a fixed
+    cutoff — a table-heavy contract has no prose occurrence to lose to,
+    and still needs its least-bad quote), so a percent sign or a wall of
+    bare digits counts against a passage without ever gating one out."""
+    if not window:
+        return 0.0
+    pct = window.count("%")
+    digits = sum(1 for c in window if c.isdigit())
+    return (pct * 4 + digits) / len(window)
+
+
+def _schedule_line(m: re.Match, section_text: str) -> str | None:
+    """If this occurrence sits inside a name→percent discount schedule
+    ("Rapid Deploy Lightning 5.00% Drone Software and Hardware 0.00% ..."),
+    isolate the single line item the term actually names, rather than
+    quoting the WINDOW of surrounding text — which is some OTHER
+    product's line, not evidence about this one. Structural, not
+    Motorola-specific: it recognizes the pattern (a name immediately
+    bounded by percent signs on both sides) wherever a cooperative
+    purchasing exhibit uses it, and returns nothing when that pattern
+    isn't actually present, so ordinary prose passages are untouched."""
+    left = section_text.rfind("%", 0, m.start())
+    right = section_text.find("%", m.end())
+    if right < 0:
+        return None
+    start = left + 1 if left >= 0 else max(0, m.start() - 60)
+    line = re.sub(r"\s+", " ", section_text[start:right + 1]).strip(" ,;:")
+    if line.count("%") != 1 or not (3 <= len(line) <= 90):
+        return None
+    return line
+
+
+def _best_occurrence(pattern: re.Pattern, section_text: str) -> re.Match | None:
+    """The least tabular real occurrence of `pattern` in this section, not
+    just the first one."""
+    matches = list(pattern.finditer(section_text))
+    if not matches:
+        return None
+    if len(matches) == 1:
+        return matches[0]
+
+    def score(m: re.Match) -> float:
+        a = max(0, m.start() - WINDOW)
+        b = min(len(section_text), m.end() + WINDOW)
+        return _tabular_score(section_text[a:b])
+
+    return min(matches, key=score)
+
+
+def _sections(text: str) -> list[tuple[str, bool, str]]:
+    """Splits on the attachment markers matter_text() writes. Returns
+    [(label, is_exhibit, section_text), ...] — first section is always the
+    legislation's own title/body."""
+    pieces = ATTACHMENT_RE.split(text)
+    out = [("the legislation itself", False, pieces[0])]
+    for i in range(1, len(pieces), 2):
+        name = pieces[i].strip()
+        body = pieces[i + 1] if i + 1 < len(pieces) else ""
+        out.append((name, True, body))
+    return out
+
+
+DECLARED_USE_RE = re.compile(
+    r"good/service that this cooperative will be utilized to purchase\?\s*"
+    r"(.+?)\s*(?:Why is utilizing this cooperative|$)",
+    re.IGNORECASE | re.DOTALL)
+
+
+def declared_use(text: str) -> str | None:
+    """Metro's own answer to its cooperative-purchasing intake form's
+    question, "what is the good/service this will be used to purchase?" —
+    checked live against 75 cached documents that carry the same boilerplate
+    question verbatim, so this is the form's own structure, not language
+    tied to any one vendor or matter. It is the strongest single fact these
+    filings contain about intended use, and it can say something a lexicon
+    term never will ("real-time intelligence," "situational awareness
+    software") — worth surfacing whether or not any of our terms happen to
+    fire inside it."""
+    m = DECLARED_USE_RE.search(text)
+    if not m:
+        return None
+    raw = m.group(1)
+    # The form's checklist items are genuinely on separate LINES in the
+    # source — sometimes with a leading bullet character, often with none
+    # at all (checked live: one document had every item on its own line
+    # with no marker whatsoever). Splitting on whitespace-collapsed bullet
+    # characters, as if newlines didn't exist, missed exactly that case and
+    # glued eight distinct items into one unreadable run-on sentence.
+    # But not every line break is an item boundary — a long prose answer
+    # wraps mid-sentence too, and a wrapped continuation starts lowercase
+    # ("...available locally for pick up as needed" / "for repairs and
+    # maintenance..."), which is how a genuine new item never starts.
+    lines = [re.sub(r"^[\s*+•—-]+", "", re.sub(r"\s+", " ", ln)).strip()
+             for ln in raw.split("\n")]
+    lines = [ln for ln in lines if ln]
+    parts: list[str] = []
+    for ln in lines:
+        if parts and ln[0].islower():
+            parts[-1] = f"{parts[-1]} {ln}"
+        else:
+            parts.append(ln)
+    result = "; ".join(parts) if len(parts) > 1 else (parts[0] if parts else "")
+    if len(result) < 3:
+        return None
+    # A form answer this long is prose, not a checklist — trim for the
+    # summary block rather than drop it; the full document is still one
+    # click away in the exhibit passages below.
+    if len(result) > 480:
+        cut = result.rfind(" ", 0, 460)
+        result = result[: cut if cut > 300 else 460] + "…"
+    return result
+
+
+def document_snippets(text: str) -> list[dict]:
+    """One quoted passage per statutory concept, preferring the exhibit.
+
+    The lexicon says the same thing several ways ("uas"/"uav"/"unmanned
+    aircraft"), and a long contract repeats each of them many times, so a
+    naive scan produces a wall of near-identical quotes that reads as far
+    more evidence than there is. The clause of §13.08.080 a term triggers is
+    the honest identity: same clause, same finding, quote it once — and
+    quote it from the exhibit when the exhibit says it, since that is where
+    scope hides while the title stays clean."""
+    terms = [(t, "technology") for t in CORE_TERMS] + [(t, "vendor") for t in VENDOR_TERMS]
+    sections = _sections(text)
+    best: dict = {}
+    order: list = []
+    for term, kind in terms:
+        concept = clause_for(term) or f"{kind}:{term}"
+        needle = _norm(term).replace("_", " ")
+        if not needle:
+            continue
+        # Word-bounded: a bare substring match lets "alpr" fire inside a
+        # mechanic's parts catalog entry ("SUBARU CALPRBLT SKT" — a brake
+        # caliper bolt socket), which is real text, just not evidence of
+        # anything. \b only applies where the needle's own edge is a word
+        # character, so it doesn't break multi-word or hyphenated terms.
+        edge = r"\b" if needle[0].isalnum() else ""
+        tail = r"\b" if needle[-1].isalnum() else ""
+        pattern = re.compile(edge + re.escape(needle) + tail, re.IGNORECASE)
+        for label, is_exhibit, section_text in sections:
+            m = _best_occurrence(pattern, section_text)
+            if not m:
+                continue
+            existing = best.get(concept)
+            # keep the first find, unless this one is from an exhibit and
+            # the one we kept was not
+            if existing and not (is_exhibit and not existing["isExhibit"]):
+                continue
+            note = None
+            line = _schedule_line(m, section_text)
+            if line:
+                snippet = line
+                note = "listed as a purchase category in the agreement's pricing schedule"
+            else:
+                a = max(0, m.start() - WINDOW)
+                b = min(len(section_text), m.end() + WINDOW)
+                snippet = _clean_ws(section_text[a:b])
+                if a > 0:
+                    snippet = "…" + snippet
+                if b < len(section_text):
+                    snippet = snippet + "…"
+            if concept not in best:
+                order.append(concept)
+            best[concept] = {
+                "term": term.replace("_", " "), "kind": kind,
+                "clause": clause_for(term), "note": note,
+                "section": label, "isExhibit": is_exhibit, "snippet": snippet,
+                "context": _context(m, section_text),
+            }
+    return [best[c] for c in order][:MAX_TOTAL]

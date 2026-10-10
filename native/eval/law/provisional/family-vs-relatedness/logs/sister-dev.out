@@ -1,0 +1,61 @@
+{
+ "scope": [
+  "IWR",
+  "NGm",
+  "CWGm",
+  "Hind"
+ ],
+ "perCell": {
+  "FIRST-LEFT": {
+   "scope": [
+    "IWR",
+    "NGm",
+    "CWGm",
+    "Hind"
+   ],
+   "graded": true,
+   "est": {
+    "sameSub": 0.074,
+    "sameGenusNotSub": 0.0296,
+    "sameFamilyOnly": 0.0294,
+    "sameOrder": -0.0015,
+    "sameScript": 0.0026,
+    "sameMorph": -0.0082,
+    "sameTeam": 0.0197
+   },
+   "devPass": "30/36"
+  },
+  "FIRST-BOTH": {
+   "scope": [
+    "IWR",
+    "NGm",
+    "CWGm"
+   ],
+   "graded": true,
+   "est": {
+    "sameSub": 0.0754,
+    "sameGenusNotSub": 0.0367,
+    "sameFamilyOnly": 0.0284,
+    "sameOrder": 0.0081,
+    "sameScript": 0.002,
+    "sameMorph": -0.0088,
+    "sameTeam": 0.0079
+   },
+   "devPass": "33/34"
+  },
+  "LATER-BOTH": {
+   "scope": [],
+   "graded": true,
+   "est": {
+    "sameSub": 0.0625,
+    "sameGenusNotSub": 0.0465,
+    "sameFamilyOnly": 0.0184,
+    "sameOrder": 0.0121,
+    "sameScript": 0.0015,
+    "sameMorph": -0.0096,
+    "sameTeam": 0.0285
+   },
+   "devPass": "0/0"
+  }
+ }
+}

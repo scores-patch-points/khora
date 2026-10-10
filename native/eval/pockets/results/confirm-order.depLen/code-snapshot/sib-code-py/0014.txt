@@ -1,0 +1,641 @@
+#!/usr/bin/env python3
+"""
+CaseLink backward status sweep.
+
+WHAT IT DOES
+    Walks date windows backwards through the whole filing history, re-reads the
+    results grid for each window, and reports every docket's CURRENT status.
+    A single grid search returns a few hundred rows, so one search refreshes a
+    few hundred cases. Checking those same cases one docket at a time costs a
+    fresh login each (~25-44s), which is why JOB 2 could never finish: at 8,484
+    truly-pending cases that is ~66 hours of scraping per pass, versus a few
+    hours for the window walk.
+
+WHAT IT DELIBERATELY DOES NOT DO
+    It never writes scraper state. No snapshot.jsonl, no today.jsonl, no chain
+    block, no priority queue. It is a pure observer: it appends observations to
+    drop files that the PRIMARY process merges into state on its next cycle.
+    One writer for state, many readers of the court — that is what keeps a
+    parallel worker from corrupting the case store.
+
+HOW OVERLAP IS PREVENTED
+    * vs the primary: the primary owns the newest DISCOVERY_GUARD_DAYS (JOB 1
+      already refreshes status there). The sweep only touches windows that end
+      before that guard, so the two never search the same dates.
+    * vs another sweeper: windows come from a fixed calendar partition, so every
+      worker computes an identical window list, and a window is claimed with an
+      atomic O_EXCL claim file before it is swept. Two workers cannot hold the
+      same window; a claim from a dead process is reclaimed after a TTL.
+    * vs itself on the same account: an exclusive account lease (see
+      caselink_accounts) means no two processes ever authenticate as one account.
+"""
+import os, sys, json, time, errno, signal, asyncio, logging, argparse
+from datetime import datetime, timedelta, timezone
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+import caselink_accounts as accounts_mod
+import sweep_windows
+import case_link_scraper_DER_5 as scraper
+from playwright.async_api import async_playwright
+
+logger = logging.getLogger("sweep")
+
+CT = scraper.CT
+
+SWEEP_DIR   = os.environ.get("CASELINK_SWEEP_DIR", "/mnt/intelechia/caselink/sweep")
+CLAIM_DIR   = os.path.join(SWEEP_DIR, "claims")
+DROP_DIR    = os.path.join(SWEEP_DIR, "drops")
+DONE_DIR    = os.path.join(SWEEP_DIR, "done")
+PASS_FILE   = os.path.join(SWEEP_DIR, "pass.json")
+
+# Fixed calendar partition, shared with the primary (see sweep_windows.py).
+EPOCH        = sweep_windows.EPOCH
+WINDOW_DAYS  = sweep_windows.WINDOW_DAYS
+
+# The primary writes, each cycle, how many NON-TERMINAL cases it holds per
+# window. A window whose cases are all CLOSED has nothing to tell us -- CLOSED
+# is terminal, so re-reading it is pure cost -- and is skipped. This is what
+# turns a 345-window walk over all of 2020-2026 into a walk over the ~90
+# windows that still hold open cases.
+PENDING_INDEX = os.path.join(SWEEP_DIR, "pending_index.json")
+SWEEP_ALL = os.environ.get("CASELINK_SWEEP_ALL") == "1"
+PENDING_INDEX_MAX_AGE = int(os.environ.get("CASELINK_PENDING_INDEX_MAX_AGE", "86400"))
+
+# The primary's JOB 1 discovery sweeps roughly the last three weeks and updates
+# status on everything it finds there. The sweep stays strictly behind that line
+# so the two never search the same dates.
+DISCOVERY_GUARD_DAYS = int(os.environ.get("CASELINK_SWEEP_GUARD_DAYS", "21"))
+
+# A window whose grid comes back at or above this is too coarse to trust
+# (CaseLink's grid stops paging somewhere above ~900), so it is re-swept as
+# single days instead.
+GRID_OVERFLOW = int(os.environ.get("CASELINK_SWEEP_OVERFLOW", "850"))
+
+CLAIM_TTL_SECONDS = int(os.environ.get("CASELINK_SWEEP_CLAIM_TTL", "2700"))
+
+# Consecutive zero-row windows before we conclude the session is dead rather
+# than the court being quiet. Two is enough: one empty week is already
+# implausible in this dataset.
+EMPTY_LIMIT = int(os.environ.get("CASELINK_SWEEP_EMPTY_LIMIT", "2"))
+
+# Backpressure. Drops are only removed when the PRIMARY merges them, so if the
+# primary is down the sweep would otherwise keep filling the disk with work
+# nobody is reading. Well short of a real disk problem, stop and wait instead.
+MAX_PENDING_DROPS = int(os.environ.get("CASELINK_SWEEP_MAX_DROPS", "600"))
+
+# One leg = one process lifetime. The Playwright browser degrades under
+# sustained use (89 crashes / 0 completed cycles over 7 hours, observed
+# 2026-09-04), so a leg is deliberately short and pm2 restarts us fresh.
+LEG_MAX_SECONDS = int(os.environ.get("CASELINK_SWEEP_LEG_SECONDS", "2700"))
+LEG_MAX_WINDOWS = int(os.environ.get("CASELINK_SWEEP_LEG_WINDOWS", "40"))
+
+
+# ---------------------------------------------------------------------------
+# Window partition
+# ---------------------------------------------------------------------------
+
+def window_bounds(idx):
+    return sweep_windows.window_bounds(idx)
+
+
+def load_pending_index():
+    """{window_index: open_case_count}, or None when unavailable/stale.
+
+    Never guessed: with no fresh index from the primary, nothing is skipped.
+    """
+    if SWEEP_ALL:
+        return None
+    try:
+        st = os.stat(PENDING_INDEX)
+        if time.time() - st.st_mtime > PENDING_INDEX_MAX_AGE:
+            logger.info("  pending index is stale — sweeping every window")
+            return None
+        with open(PENDING_INDEX) as f:
+            d = json.load(f)
+        return {int(k): int(v) for k, v in (d.get("windows") or {}).items()}
+    except FileNotFoundError:
+        return None
+    except Exception as e:
+        logger.warning(f"  pending index unreadable ({type(e).__name__}) — "
+                       f"sweeping every window")
+        return None
+
+
+def all_window_indices():
+    """Newest first — the walk backwards the whole job is named for.
+
+    The newest index is the last window that ENDS before the discovery guard,
+    not the one that contains it. Taking the containing window would push the
+    sweep up to WINDOW_DAYS-1 days into the range JOB 1 already owns, which is
+    precisely the overlap this partition exists to prevent.
+    """
+    cutoff = datetime.now(CT).replace(tzinfo=None) - timedelta(days=DISCOVERY_GUARD_DAYS)
+    last = int(((cutoff - EPOCH).days - WINDOW_DAYS) // WINDOW_DAYS)
+    if last < 0:
+        return []
+    return list(range(last, -1, -1))
+
+
+# ---------------------------------------------------------------------------
+# Pass / claim bookkeeping
+# ---------------------------------------------------------------------------
+
+def _read_pass():
+    try:
+        with open(PASS_FILE) as f:
+            return int(json.load(f).get("pass", 1))
+    except Exception:
+        return 1
+
+
+def _bump_pass(current):
+    """Race-free rollover: whoever creates the marker first wins; everyone
+    else simply re-reads the file."""
+    marker = os.path.join(SWEEP_DIR, f".pass-{current + 1}.start")
+    try:
+        fd = os.open(marker, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o644)
+        os.close(fd)
+    except FileExistsError:
+        return _read_pass()
+    tmp = PASS_FILE + ".tmp"
+    with open(tmp, "w") as f:
+        json.dump({"pass": current + 1,
+                   "started": datetime.now(timezone.utc).isoformat()}, f)
+    os.replace(tmp, PASS_FILE)
+    # Done markers are per pass and would otherwise accumulate forever (one
+    # file per window per pass). Only the current and previous pass are ever
+    # consulted, so anything older is deleted here.
+    _prune_old_passes(current + 1)
+    logger.info(f"  ── pass {current} complete, starting pass {current + 1} ──")
+    return current + 1
+
+
+def _prune_old_passes(current, keep=2):
+    removed = 0
+    for d in (DONE_DIR, CLAIM_DIR):
+        try:
+            for name in os.listdir(d):
+                if not name.startswith("p"):
+                    continue
+                try:
+                    pn = int(name[1:name.index("-")])
+                except Exception:
+                    continue
+                if pn <= current - keep:
+                    os.unlink(os.path.join(d, name)); removed += 1
+        except OSError:
+            pass
+    for name in os.listdir(SWEEP_DIR):
+        if name.startswith(".pass-"):
+            try:
+                pn = int(name[len(".pass-"):].split(".")[0])
+                if pn <= current - keep:
+                    os.unlink(os.path.join(SWEEP_DIR, name)); removed += 1
+            except Exception:
+                pass
+    if removed:
+        logger.info(f"  pruned {removed} stale pass file(s)")
+
+
+def _key(pass_no, idx):
+    return f"p{pass_no:03d}-W{idx:05d}"
+
+
+def _done_path(pass_no, idx):
+    return os.path.join(DONE_DIR, _key(pass_no, idx) + ".done")
+
+
+def _claim_path(pass_no, idx):
+    return os.path.join(CLAIM_DIR, _key(pass_no, idx) + ".claim")
+
+
+def _pid_alive(pid):
+    try:
+        os.kill(int(pid), 0)
+        return True
+    except OSError as e:
+        return e.errno == errno.EPERM
+    except Exception:
+        return False
+
+
+def claim_window(pass_no, idx, alias):
+    """Atomically claim one window. False means someone else owns it."""
+    path = _claim_path(pass_no, idx)
+    payload = json.dumps({"pid": os.getpid(), "alias": alias,
+                          "claimed": datetime.now(timezone.utc).isoformat()})
+    for attempt in (1, 2):
+        try:
+            fd = os.open(path, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o644)
+            with os.fdopen(fd, "w") as f:
+                f.write(payload)
+            return True
+        except FileExistsError:
+            if attempt == 2:
+                return False
+            try:
+                info = json.load(open(path))
+            except Exception:
+                info = {}
+            age = time.time() - os.path.getmtime(path)
+            if (info.get("pid") and not _pid_alive(info["pid"])) or age > CLAIM_TTL_SECONDS:
+                logger.info(f"  reclaiming stale claim {_key(pass_no, idx)}"
+                            f" (age {int(age)}s)")
+                try:
+                    os.unlink(path)
+                except OSError:
+                    return False
+            else:
+                return False
+    return False
+
+
+def release_claim(pass_no, idx):
+    try:
+        os.unlink(_claim_path(pass_no, idx))
+    except OSError:
+        pass
+
+
+def next_window(pass_no, alias, pending=None):
+    """Next claimable window in this pass, newest first.
+
+    Skips windows the primary reports as holding no open cases: if every case
+    filed that week is already CLOSED, its status cannot change and there is
+    nothing to re-read.
+    """
+    skipped = 0
+    for idx in all_window_indices():
+        if os.path.exists(_done_path(pass_no, idx)):
+            continue
+        if pending is not None and pending.get(idx, 0) == 0:
+            # Record it as done so the pass can complete, with why.
+            mark_done(pass_no, idx, 0, None, skipped="no open cases")
+            skipped += 1
+            continue
+        if claim_window(pass_no, idx, alias):
+            if skipped:
+                logger.info(f"  skipped {skipped} window(s) holding only "
+                            f"closed cases")
+            return idx
+    if skipped:
+        logger.info(f"  skipped {skipped} window(s) holding only closed cases")
+    return None
+
+
+def pass_complete(pass_no):
+    return all(os.path.exists(_done_path(pass_no, i)) for i in all_window_indices())
+
+
+# ---------------------------------------------------------------------------
+# Drops — the handoff to the primary
+# ---------------------------------------------------------------------------
+
+def write_drop(pass_no, idx, rows, alias, start, end):
+    """Atomic: written as .tmp, renamed into place, so the primary only ever
+    sees a complete file.
+
+    Defendant NAMES ARE DELIBERATELY OMITTED. The primary stores them
+    encrypted; writing them here would put plaintext tenant names on disk in a
+    new place for no gain. A docket the primary has never seen is reported with
+    new=true and the primary's own enrichment fills the name in properly.
+    """
+    os.makedirs(DROP_DIR, exist_ok=True)
+    name = f"{_key(pass_no, idx)}-{int(time.time())}.jsonl"
+    tmp = os.path.join(DROP_DIR, name + ".tmp")
+    observed = datetime.now(CT).isoformat()
+    with open(tmp, "w") as f:
+        f.write(json.dumps({
+            "_meta": True, "pass": pass_no, "window": _key(pass_no, idx),
+            "start": start.strftime("%m/%d/%Y"), "end": end.strftime("%m/%d/%Y"),
+            "alias": alias, "rows": len(rows), "observed_at": observed,
+        }, sort_keys=True) + "\n")
+        for r in rows:
+            docket = (r.get("Docket_Number") or "").strip()
+            if not docket:
+                continue
+            f.write(json.dumps({
+                "docket": docket,
+                "status": r.get("Status", ""),
+                "file_date": r.get("File_Date", ""),
+                "case_type": r.get("Case_Type", ""),
+                "office": r.get("Office", ""),
+                "Plaintiff_1": r.get("Plaintiff_1", ""),
+                "Attorney": r.get("Attorney", ""),
+                "Def_Attorney": r.get("Def_Attorney", ""),
+                "observed_at": observed,
+                "src": alias,
+            }, sort_keys=True) + "\n")
+    os.replace(tmp, os.path.join(DROP_DIR, name))
+    try:
+        os.chmod(os.path.join(DROP_DIR, name), 0o644)
+    except OSError:
+        pass
+    return name
+
+
+def mark_done(pass_no, idx, rows, drop_name, skipped=None):
+    os.makedirs(DONE_DIR, exist_ok=True)
+    rec = {"rows": rows, "drop": drop_name,
+           "at": datetime.now(timezone.utc).isoformat()}
+    if skipped:
+        rec["skipped"] = skipped
+    with open(_done_path(pass_no, idx), "w") as f:
+        json.dump(rec, f)
+
+
+# ---------------------------------------------------------------------------
+# Session health
+# ---------------------------------------------------------------------------
+
+class Displaced(Exception):
+    """Our authenticated session stopped being authenticated. On a shared
+    account that means the human who owns it logged in and took it back."""
+
+
+class EmptyWindow(Exception):
+    """A window came back with no rows at all. Treated as a health signal,
+    never as an answer -- see sweep_window()."""
+
+
+async def find_real_search_frame(page):
+    """The DEDICATED search frame, identified by its placeholder text.
+
+    Deliberately NOT scraper.find_search_frame(): that helper falls back to
+    `page.main_frame` when it cannot find the real one, so it never returns
+    None and can never signal failure. Anything built on it treats a dead
+    session as a live one -- which is exactly what happened here: a displaced
+    session logged "Could not find dedicated search frame, using main frame",
+    reported "Login successful", then recorded nine consecutive windows as
+    holding zero cases.
+    """
+    for frame in page.frames:
+        try:
+            inputs = await frame.query_selector_all('input[type="text"]')
+            if not inputs or len(inputs) <= 10:
+                continue
+            for inp in inputs:
+                try:
+                    if not await inp.is_visible():
+                        continue
+                    ph = await inp.get_attribute('placeholder') or ''
+                    if 'Case Number' in ph or 'Name of Party' in ph:
+                        return frame
+                except Exception:
+                    continue
+        except Exception:
+            continue
+    return None
+
+
+async def assert_session(page):
+    """A genuine authenticated session exposes the dedicated search frame.
+    A displaced one silently falls through to the public homepage — the exact
+    failure that hid the August outage for six days. Do not trust the URL
+    changing, and do not trust do_login()'s return value."""
+    try:
+        frame = await find_real_search_frame(page)
+    except Exception as e:
+        raise Displaced(f"search frame lookup failed: {type(e).__name__}")
+    if frame is None:
+        raise Displaced("no dedicated search frame (session not authenticated)")
+
+
+# ---------------------------------------------------------------------------
+# Leg
+# ---------------------------------------------------------------------------
+
+async def run_leg(account, lease):
+    alias = account["alias"]
+    scraper.USERNAME = account["user"]
+    scraper.PASSWORD = account["pass"]
+    # so the scraper's own log lines name the alias, never the account
+    scraper.ALIAS = alias
+
+    started = time.time()
+    swept = total_rows = 0
+    consecutive_empty = 0
+    pass_no = _read_pass()
+    pending = load_pending_index()
+    if pending is not None:
+        open_windows = sum(1 for i in all_window_indices() if pending.get(i, 0) > 0)
+        logger.info(f"  pending index: {open_windows} of "
+                    f"{len(all_window_indices())} windows still hold open "
+                    f"cases — the rest are all CLOSED and get skipped")
+
+    logger.info("=" * 60)
+    logger.info(f"  BACKWARD STATUS SWEEP — worker {alias}, pass {pass_no}")
+    logger.info(f"  windows: {len(all_window_indices())} of {WINDOW_DAYS}d, "
+                f"newest first, holding off the last {DISCOVERY_GUARD_DAYS}d "
+                f"(primary owns those)")
+    logger.info("=" * 60)
+
+    async with async_playwright() as pw:
+        browser = await pw.chromium.launch(headless=True)
+        ctx = await browser.new_context(viewport={"width": 1280, "height": 900})
+        page = await ctx.new_page()
+        page.set_default_timeout(scraper.PAGE_TIMEOUT)
+
+        try:
+            if not await scraper.do_login(page):
+                raise Displaced("login rejected")
+            await assert_session(page)
+            accounts_mod.note_result(alias, True)
+            accounts_mod.clear_cooldown(alias)
+
+            while True:
+                if time.time() - started > LEG_MAX_SECONDS:
+                    logger.info(f"  leg time budget reached ({swept} windows)")
+                    break
+                if swept >= LEG_MAX_WINDOWS:
+                    logger.info(f"  leg window budget reached ({swept} windows)")
+                    break
+
+                try:
+                    queued = len([n for n in os.listdir(DROP_DIR)
+                                  if n.endswith(".jsonl")])
+                except OSError:
+                    queued = 0
+                if queued >= MAX_PENDING_DROPS:
+                    logger.warning(
+                        f"  {queued} drops are waiting for the primary to "
+                        f"merge (limit {MAX_PENDING_DROPS}) — pausing the "
+                        f"sweep rather than piling up unread work")
+                    break
+
+                if pass_complete(pass_no):
+                    pass_no = _bump_pass(pass_no)
+
+                idx = next_window(pass_no, alias, pending)
+                if idx is None:
+                    if pass_complete(pass_no):
+                        pass_no = _bump_pass(pass_no)
+                        continue
+                    logger.info("  no claimable window (all held by other "
+                                "workers) — ending leg")
+                    break
+
+                start, end = window_bounds(idx)
+                try:
+                    rows = await sweep_window(page, pass_no, idx, start, end, alias)
+                    swept += 1
+                    total_rows += rows
+                    consecutive_empty = 0
+                except EmptyWindow as e:
+                    release_claim(pass_no, idx)
+                    consecutive_empty += 1
+                    logger.warning(f"  {e} — not recording; "
+                                   f"{consecutive_empty} empty in a row")
+                    if consecutive_empty >= EMPTY_LIMIT:
+                        raise Displaced(
+                            f"{consecutive_empty} consecutive empty windows — "
+                            f"session is not authenticated")
+                    if not await scraper.hard_reset(page):
+                        raise Displaced("hard reset failed after empty window")
+                    await assert_session(page)
+                except Displaced:
+                    release_claim(pass_no, idx)
+                    raise
+                except Exception as e:
+                    logger.warning(f"  {_key(pass_no, idx)}: {type(e).__name__}: "
+                                   f"{str(e)[:120]}")
+                    release_claim(pass_no, idx)
+                    # a broken window should not poison the leg
+                    if not await scraper.hard_reset(page):
+                        raise Displaced("hard reset failed after window error")
+                    await assert_session(page)
+
+        except Displaced as e:
+            cooling = account.get("cooldown_minutes", 90)
+            shared = account.get("shared", False)
+            reason = str(e)
+            accounts_mod.note_result(alias, False, reason)
+            if shared:
+                logger.warning(f"  {alias} displaced ({reason}) — this account is "
+                               f"in active human use, backing off {cooling}min")
+            else:
+                logger.warning(f"  {alias} session lost ({reason}) — "
+                               f"cooling down {cooling}min")
+            accounts_mod.start_cooldown(alias, cooling, reason)
+        finally:
+            try:
+                await browser.close()
+            except Exception:
+                pass
+
+    logger.info(f"  leg done: {swept} windows, {total_rows} rows observed, "
+                f"{int(time.time() - started)}s")
+    return swept
+
+
+async def sweep_window(page, pass_no, idx, start, end, alias):
+    key = _key(pass_no, idx)
+    logger.info(f"\n── {key}: {start.strftime('%m/%d/%Y')} – "
+                f"{end.strftime('%m/%d/%Y')} ──")
+
+    if not await scraper.hard_reset(page):
+        raise Displaced("hard reset failed")
+    await assert_session(page)
+
+    rows = await scraper.search_detainer_cases_by_date(page, start, end)
+
+    # Too many rows means the grid stopped paging and the window is lying to
+    # us. Re-sweep it a day at a time rather than record a truncated answer.
+    if len(rows) >= GRID_OVERFLOW:
+        logger.warning(f"  {key}: {len(rows)} rows ≥ overflow guard "
+                       f"{GRID_OVERFLOW} — re-sweeping day by day")
+        rows = []
+        for d in range(WINDOW_DAYS):
+            day = start + timedelta(days=d)
+            if day > end:
+                break
+            if not await scraper.hard_reset(page):
+                raise Displaced("hard reset failed mid-split")
+            day_rows = await scraper.search_detainer_cases_by_date(page, day, day)
+            logger.info(f"    {day.strftime('%m/%d')}: {len(day_rows)}")
+            rows.extend(day_rows)
+
+    # A week with genuinely zero detainer filings does not occur in this
+    # dataset -- every month from 2020 on has hundreds. "No records found"
+    # means the search ran without an authenticated session, not that the
+    # court was idle. Recording it as done would permanently mark that week
+    # as swept while holding nothing, so treat it as a session failure and
+    # leave the window unclaimed for a healthy worker to redo.
+    if not rows:
+        raise EmptyWindow(f"{key}: search returned no records "
+                          f"({start.strftime('%m/%d/%Y')}–{end.strftime('%m/%d/%Y')})")
+
+    drop = write_drop(pass_no, idx, rows, alias, start, end)
+    mark_done(pass_no, idx, len(rows), drop)
+    release_claim(pass_no, idx)
+    logger.info(f"  {key}: {len(rows)} rows → {drop}")
+    return len(rows)
+
+
+# ---------------------------------------------------------------------------
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--role", default="sweep")
+    ap.add_argument("--once", action="store_true",
+                    help="run a single window then exit (smoke test)")
+    args = ap.parse_args()
+
+    for d in (SWEEP_DIR, CLAIM_DIR, DROP_DIR, DONE_DIR):
+        os.makedirs(d, exist_ok=True)
+
+    accts = accounts_mod.load_accounts()
+    accounts_mod.install_redaction(accts)
+
+    if args.once:
+        globals()["LEG_MAX_WINDOWS"] = 1
+
+    account, lease = accounts_mod.acquire_account(args.role, accts)
+    if not account:
+        # Every sweep account is cooling down or already leased. Idle here
+        # rather than exiting immediately: pm2 restarts this process on exit,
+        # and a fast exit/restart cycle would hammer the pool (and, for a
+        # shared account, the person using it) while it is meant to be resting.
+        # Sleep until the earliest moment any sweep account could become
+        # usable again -- the top of its permitted hours, or the end of its
+        # cooldown -- rather than waking every few minutes to say the same
+        # thing into a public log.
+        wait = 0 if args.once else accounts_mod.seconds_until_available(
+            args.role, accts,
+            default=int(os.environ.get("CASELINK_SWEEP_IDLE", "900")))
+        logger.info(f"  no sweep account available — waiting {wait // 60}min "
+                    f"until the next one opens")
+        if wait:
+            time.sleep(wait)
+        return 0
+
+    try:
+        logger.info(f"  worker leased {account['alias']}")
+        asyncio.run(run_leg(account, lease))
+    except KeyboardInterrupt:
+        # pm2 restarts this process on a schedule; a SIGINT mid-login is the
+        # normal way a leg ends. Dumping a Playwright teardown traceback would
+        # push forty lines of noise into a log that is republished live.
+        logger.info("  interrupted — ending leg cleanly")
+    finally:
+        lease.release()
+        logger.info(f"  released {account['alias']}")
+    return 0
+
+
+def _quiet_term(signum, frame):
+    raise KeyboardInterrupt()
+
+
+if __name__ == "__main__":
+    # pm2 restarts this process on a schedule and SIGTERMs it on stop. Either
+    # can land anywhere -- inside a Playwright call, inside the idle sleep --
+    # and an unhandled one dumps forty lines of teardown traceback into a log
+    # that is republished live to anyone watching. Exit quietly instead.
+    signal.signal(signal.SIGTERM, _quiet_term)
+    try:
+        sys.exit(main())
+    except KeyboardInterrupt:
+        logger.info("  stopped")
+        sys.exit(0)

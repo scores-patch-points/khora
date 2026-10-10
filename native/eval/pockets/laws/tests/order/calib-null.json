@@ -1,0 +1,326 @@
+{
+ "A": {
+  "pl-null": {
+   "reps": 20,
+   "cells": 440,
+   "ge4": 1,
+   "ge2": 42,
+   "rateGe4": 0.0023,
+   "rateGe2": 0.0955,
+   "hits": [
+    {
+     "id": "pl-null-rep4",
+     "which": "confirm",
+     "stat": "branch",
+     "z": -4.23
+    }
+   ],
+   "perStat": {
+    "rareSlope": {
+     "cells": 40,
+     "ge4": 0,
+     "ge2": 3
+    },
+    "rareCurve": {
+     "cells": 40,
+     "ge4": 0,
+     "ge2": 4
+    },
+    "fnBefore": {
+     "cells": 40,
+     "ge4": 0,
+     "ge2": 2
+    },
+    "depLen": {
+     "cells": 40,
+     "ge4": 0,
+     "ge2": 2
+    },
+    "initDev": {
+     "cells": 40,
+     "ge4": 0,
+     "ge2": 6
+    },
+    "finalDev": {
+     "cells": 40,
+     "ge4": 0,
+     "ge2": 2
+    },
+    "surprGrow": {
+     "cells": 40,
+     "ge4": 0,
+     "ge2": 1
+    },
+    "entSlope": {
+     "cells": 40,
+     "ge4": 0,
+     "ge2": 5
+    },
+    "entCurv": {
+     "cells": 40,
+     "ge4": 0,
+     "ge2": 8
+    },
+    "branch": {
+     "cells": 40,
+     "ge4": 1,
+     "ge2": 7
+    },
+    "asym": {
+     "cells": 40,
+     "ge4": 0,
+     "ge2": 2
+    }
+   }
+  },
+  "pl-null2": {
+   "reps": 20,
+   "cells": 440,
+   "ge4": 2,
+   "ge2": 32,
+   "rateGe4": 0.0045,
+   "rateGe2": 0.0727,
+   "hits": [
+    {
+     "id": "pl-null2-rep2",
+     "which": "confirm",
+     "stat": "finalDev",
+     "z": 4.23
+    },
+    {
+     "id": "pl-null2-rep14",
+     "which": "confirm",
+     "stat": "rareCurve",
+     "z": 4.83
+    }
+   ],
+   "perStat": {
+    "rareSlope": {
+     "cells": 40,
+     "ge4": 0,
+     "ge2": 3
+    },
+    "rareCurve": {
+     "cells": 40,
+     "ge4": 1,
+     "ge2": 2
+    },
+    "fnBefore": {
+     "cells": 40,
+     "ge4": 0,
+     "ge2": 6
+    },
+    "depLen": {
+     "cells": 40,
+     "ge4": 0,
+     "ge2": 2
+    },
+    "initDev": {
+     "cells": 40,
+     "ge4": 0,
+     "ge2": 2
+    },
+    "finalDev": {
+     "cells": 40,
+     "ge4": 1,
+     "ge2": 5
+    },
+    "surprGrow": {
+     "cells": 40,
+     "ge4": 0,
+     "ge2": 3
+    },
+    "entSlope": {
+     "cells": 40,
+     "ge4": 0,
+     "ge2": 3
+    },
+    "entCurv": {
+     "cells": 40,
+     "ge4": 0,
+     "ge2": 1
+    },
+    "branch": {
+     "cells": 40,
+     "ge4": 0,
+     "ge2": 2
+    },
+    "asym": {
+     "cells": 40,
+     "ge4": 0,
+     "ge2": 3
+    }
+   }
+  }
+ },
+ "B": {
+  "bk-great-expect": {
+   "discover": {
+    "rareSlope": 2.49,
+    "rareCurve": 1.02,
+    "fnBefore": 2.07,
+    "depLen": 2.07,
+    "initDev": -0.94,
+    "finalDev": 2.96,
+    "surprGrow": -2.06,
+    "entSlope": 1.59,
+    "entCurv": -0.2,
+    "branch": 0.17,
+    "asym": 1.99
+   },
+   "confirm": {
+    "rareSlope": -0.27,
+    "rareCurve": 1.23,
+    "fnBefore": -1.49,
+    "depLen": 2.07,
+    "initDev": -0.53,
+    "finalDev": 1.1,
+    "surprGrow": 1.08,
+    "entSlope": -1.83,
+    "entCurv": -1.33,
+    "branch": 1.52,
+    "asym": 0.91
+   }
+  },
+  "ud-fra": {
+   "discover": {
+    "rareSlope": 0.84,
+    "rareCurve": 1.47,
+    "fnBefore": 0.56,
+    "depLen": -2.56,
+    "initDev": 0.06,
+    "finalDev": 1.25,
+    "surprGrow": -0.31,
+    "entSlope": -1.03,
+    "entCurv": -0.34,
+    "branch": 0.23,
+    "asym": -0.38
+   },
+   "confirm": {
+    "rareSlope": 0.81,
+    "rareCurve": 1.23,
+    "fnBefore": 0.92,
+    "depLen": -0.48,
+    "initDev": -1.69,
+    "finalDev": -0.43,
+    "surprGrow": -0.11,
+    "entSlope": -0.42,
+    "entCurv": 0.88,
+    "branch": -1.01,
+    "asym": 1.29
+   }
+  },
+  "cd-cc-python": {
+   "discover": {
+    "rareSlope": 0.14,
+    "rareCurve": -1.89,
+    "fnBefore": 0.03,
+    "depLen": -1.47,
+    "initDev": -1.65,
+    "finalDev": 0.15,
+    "surprGrow": 0.89,
+    "entSlope": 0.35,
+    "entCurv": 1,
+    "branch": -0.21,
+    "asym": -1.49
+   },
+   "confirm": {
+    "rareSlope": 2.43,
+    "rareCurve": 1.96,
+    "fnBefore": -0.48,
+    "depLen": 0.67,
+    "initDev": 0.28,
+    "finalDev": 1.96,
+    "surprGrow": -3.5,
+    "entSlope": 0.54,
+    "entCurv": 1.97,
+    "branch": 1.53,
+    "asym": 0.69
+   }
+  },
+  "ml-lzh-shiji": {
+   "discover": {
+    "rareSlope": 0.19,
+    "rareCurve": 0.78,
+    "fnBefore": -1.92,
+    "depLen": 0.6,
+    "initDev": 1.18,
+    "finalDev": -1.08,
+    "surprGrow": -0.87,
+    "entSlope": -0.53,
+    "entCurv": 1.59,
+    "branch": -0.13,
+    "asym": 0.29
+   },
+   "confirm": {
+    "rareSlope": 0.74,
+    "rareCurve": -1.08,
+    "fnBefore": 1.84,
+    "depLen": -0.81,
+    "initDev": -1.33,
+    "finalDev": 0.6,
+    "surprGrow": -0.04,
+    "entSlope": -0.41,
+    "entCurv": -0.95,
+    "branch": 0.42,
+    "asym": 0.87
+   }
+  },
+  "oc-irc-ubuntu-0406": {
+   "discover": {
+    "rareSlope": -2.96,
+    "rareCurve": -1.07,
+    "fnBefore": -0.11,
+    "depLen": -0.89,
+    "initDev": 0.26,
+    "finalDev": -3.32,
+    "surprGrow": 1.47,
+    "entSlope": 0.25,
+    "entCurv": -0.61,
+    "branch": 0.23,
+    "asym": -1.57
+   },
+   "confirm": {
+    "rareSlope": -0.62,
+    "rareCurve": 0.47,
+    "fnBefore": 0.31,
+    "depLen": 1.05,
+    "initDev": 0.41,
+    "finalDev": 0.53,
+    "surprGrow": -0.27,
+    "entSlope": 1.41,
+    "entCurv": -0.53,
+    "branch": -1.57,
+    "asym": 0.1
+   }
+  },
+  "bk-dante": {
+   "discover": {
+    "rareSlope": 2.47,
+    "rareCurve": 0.33,
+    "fnBefore": 0.36,
+    "depLen": 0.96,
+    "initDev": -0.62,
+    "finalDev": 0.65,
+    "surprGrow": -2.07,
+    "entSlope": 0.19,
+    "entCurv": 1.74,
+    "branch": 0.45,
+    "asym": 0.26
+   },
+   "confirm": {
+    "rareSlope": -1.1,
+    "rareCurve": 1.68,
+    "fnBefore": 1,
+    "depLen": -2.5,
+    "initDev": 1.98,
+    "finalDev": 1.56,
+    "surprGrow": 0.44,
+    "entSlope": -0.49,
+    "entCurv": 0.24,
+    "branch": -0.43,
+    "asym": 0.98
+   }
+  }
+ }
+}

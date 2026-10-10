@@ -1,0 +1,1254 @@
+{
+ "module": "eval/law/provisional/ablation-scope/scan-components.mjs",
+ "data": "data/discovery2",
+ "B": 500,
+ "rows": 2812,
+ "pairs": 1406,
+ "nComponents": 223,
+ "cells": {
+  "irc.A": {
+   "n": 529,
+   "maxNullQ95": 0.0469,
+   "controls": {
+    "R_LOGC": 0.514,
+    "R_POS": 0.5028,
+    "R_IPOS": 0.5,
+    "R_FB": 0.4734,
+    "R_LEN": 0.5222,
+    "R_SL": 0.5118
+   },
+   "controlsInBand": true,
+   "top": [
+    {
+     "name": "c.surprisalDestroyed",
+     "j": 213,
+     "sign": 1,
+     "auc": 0.743,
+     "ci": [
+      0.7163,
+      0.7681
+     ],
+     "perStratum": {
+      "c2": 0.6558,
+      "c3": 0.671,
+      "c4_6": 0.7081,
+      "c7_15": 0.8215,
+      "c16p": 0.9029
+     },
+     "nominated": true
+    },
+    {
+     "name": "c.dSelf",
+     "j": 210,
+     "sign": -1,
+     "auc": 0.7328,
+     "ci": [
+      0.6992,
+      0.7684
+     ],
+     "perStratum": {
+      "c2": 0.85,
+      "c3": 0.8456,
+      "c4_6": 0.7851,
+      "c7_15": 0.5834,
+      "c16p": 0.5488
+     },
+     "nominated": true
+    },
+    {
+     "name": "span.tIsBeing0",
+     "j": 199,
+     "sign": 1,
+     "auc": 0.6947,
+     "ci": [
+      0.6559,
+      0.7359
+     ],
+     "perStratum": {
+      "c2": 0.75,
+      "c3": 0.7232,
+      "c4_6": 0.7545,
+      "c7_15": 0.6071,
+      "c16p": 0.6173
+     },
+     "nominated": true
+    },
+    {
+     "name": "span.mentionShift",
+     "j": 198,
+     "sign": 1,
+     "auc": 0.6465,
+     "ci": [
+      0.6103,
+      0.6796
+     ],
+     "perStratum": {
+      "c2": 0.5,
+      "c3": 0.7321,
+      "c4_6": 0.7589,
+      "c7_15": 0.6071,
+      "c16p": 0.6296
+     },
+     "nominated": true
+    },
+    {
+     "name": "sig.n(ref-entry/b0)",
+     "j": 153,
+     "sign": 1,
+     "auc": 0.6096,
+     "ci": [
+      0.5801,
+      0.6398
+     ],
+     "perStratum": {
+      "c2": 0.5,
+      "c3": 0.5714,
+      "c4_6": 0.7545,
+      "c7_15": 0.6071,
+      "c16p": 0.6173
+     },
+     "nominated": true
+    },
+    {
+     "name": "atm.recalled.self",
+     "j": 166,
+     "sign": -1,
+     "auc": 0.6035,
+     "ci": [
+      0.5676,
+      0.639
+     ],
+     "perStratum": {
+      "c2": 0.5,
+      "c3": 0.5953,
+      "c4_6": 0.6024,
+      "c7_15": 0.6544,
+      "c16p": 0.6888
+     },
+     "nominated": true
+    },
+    {
+     "name": "span.recalled.self",
+     "j": 185,
+     "sign": -1,
+     "auc": 0.6035,
+     "ci": [
+      0.5681,
+      0.6381
+     ],
+     "perStratum": {
+      "c2": 0.5,
+      "c3": 0.5953,
+      "c4_6": 0.6024,
+      "c7_15": 0.6544,
+      "c16p": 0.6888
+     },
+     "nominated": true
+    },
+    {
+     "name": "sig.n(rel-end1/b1)",
+     "j": 145,
+     "sign": 1,
+     "auc": 0.5934,
+     "ci": [
+      0.5513,
+      0.6359
+     ],
+     "perStratum": {
+      "c2": 0.4656,
+      "c3": 0.4789,
+      "c4_6": 0.6299,
+      "c7_15": 0.6632,
+      "c16p": 0.7811
+     },
+     "nominated": true
+    },
+    {
+     "name": "extent.frames",
+     "j": 217,
+     "sign": 1,
+     "auc": 0.5913,
+     "ci": [
+      0.5543,
+      0.6298
+     ],
+     "perStratum": {
+      "c2": 0.3757,
+      "c3": 0.612,
+      "c4_6": 0.7382,
+      "c7_15": 0.6075,
+      "c16p": 0.6353
+     },
+     "nominated": true
+    },
+    {
+     "name": "nTokenSlots",
+     "j": 220,
+     "sign": 1,
+     "auc": 0.5875,
+     "ci": [
+      0.5544,
+      0.6192
+     ],
+     "perStratum": {
+      "c2": 0.4753,
+      "c3": 0.5169,
+      "c4_6": 0.6914,
+      "c7_15": 0.5969,
+      "c16p": 0.6838
+     },
+     "nominated": true
+    },
+    {
+     "name": "extent.tokens",
+     "j": 216,
+     "sign": 1,
+     "auc": 0.5856,
+     "ci": [
+      0.5451,
+      0.6244
+     ],
+     "perStratum": {
+      "c2": 0.3652,
+      "c3": 0.5972,
+      "c4_6": 0.7308,
+      "c7_15": 0.5994,
+      "c16p": 0.6546
+     },
+     "nominated": false
+    },
+    {
+     "name": "counts.ref-entry.r0.refilled",
+     "j": 57,
+     "sign": 1,
+     "auc": 0.5784,
+     "ci": [
+      0.5465,
+      0.6094
+     ],
+     "perStratum": {
+      "c2": 0.5,
+      "c3": 0.5,
+      "c4_6": 0.6696,
+      "c7_15": 0.6071,
+      "c16p": 0.6296
+     },
+     "nominated": false
+    },
+    {
+     "name": "sig.refilled@ref-entry/b0",
+     "j": 129,
+     "sign": 1,
+     "auc": 0.5784,
+     "ci": [
+      0.5476,
+      0.6106
+     ],
+     "perStratum": {
+      "c2": 0.5,
+      "c3": 0.5,
+      "c4_6": 0.6696,
+      "c7_15": 0.6071,
+      "c16p": 0.6296
+     },
+     "nominated": false
+    },
+    {
+     "name": "sig.no-slot",
+     "j": 156,
+     "sign": -1,
+     "auc": 0.5624,
+     "ci": [
+      0.5331,
+      0.5858
+     ],
+     "perStratum": {
+      "c2": 0.4777,
+      "c3": 0.5223,
+      "c4_6": 0.6652,
+      "c7_15": 0.558,
+      "c16p": 0.5988
+     },
+     "nominated": false
+    }
+   ]
+  },
+  "irc.B": {
+   "n": 433,
+   "maxNullQ95": 0.0519,
+   "controls": {
+    "R_LOGC": 0.5037,
+    "R_POS": 0.4892,
+    "R_IPOS": 0.4935,
+    "R_FB": 0.4905,
+    "R_LEN": 0.5087,
+    "R_SL": 0.4607
+   },
+   "controlsInBand": true,
+   "top": [
+    {
+     "name": "c.dSelf",
+     "j": 210,
+     "sign": 1,
+     "auc": 0.732,
+     "ci": [
+      0.7021,
+      0.7659
+     ],
+     "perStratum": {
+      "c2": 0.7123,
+      "c3": 0.6891,
+      "c4_6": 0.7406,
+      "c7_15": 0.7421,
+      "c16p": 0.7879
+     },
+     "nominated": true
+    },
+    {
+     "name": "span.mentionShift",
+     "j": 198,
+     "sign": 1,
+     "auc": 0.6686,
+     "ci": [
+      0.6341,
+      0.6993
+     ],
+     "perStratum": {
+      "c2": 0.5,
+      "c3": 0.5872,
+      "c4_6": 0.6735,
+      "c7_15": 0.75,
+      "c16p": 0.873
+     },
+     "nominated": true
+    },
+    {
+     "name": "span.tIsBeing0",
+     "j": 199,
+     "sign": 1,
+     "auc": 0.6686,
+     "ci": [
+      0.631,
+      0.7019
+     ],
+     "perStratum": {
+      "c2": 0.5,
+      "c3": 0.5872,
+      "c4_6": 0.6735,
+      "c7_15": 0.75,
+      "c16p": 0.873
+     },
+     "nominated": true
+    },
+    {
+     "name": "sig.n(ref-entry/b0)",
+     "j": 153,
+     "sign": 1,
+     "auc": 0.6513,
+     "ci": [
+      0.6183,
+      0.6828
+     ],
+     "perStratum": {
+      "c2": 0.5,
+      "c3": 0.5174,
+      "c4_6": 0.6582,
+      "c7_15": 0.75,
+      "c16p": 0.873
+     },
+     "nominated": true
+    },
+    {
+     "name": "counts.ref-entry.r0.refilled",
+     "j": 57,
+     "sign": 1,
+     "auc": 0.6363,
+     "ci": [
+      0.6055,
+      0.6693
+     ],
+     "perStratum": {
+      "c2": 0.5,
+      "c3": 0.5,
+      "c4_6": 0.6071,
+      "c7_15": 0.75,
+      "c16p": 0.873
+     },
+     "nominated": true
+    },
+    {
+     "name": "sig.refilled@ref-entry/b0",
+     "j": 129,
+     "sign": 1,
+     "auc": 0.6363,
+     "ci": [
+      0.6027,
+      0.6712
+     ],
+     "perStratum": {
+      "c2": 0.5,
+      "c3": 0.5,
+      "c4_6": 0.6071,
+      "c7_15": 0.75,
+      "c16p": 0.873
+     },
+     "nominated": true
+    },
+    {
+     "name": "extent.tokens",
+     "j": 216,
+     "sign": 1,
+     "auc": 0.6291,
+     "ci": [
+      0.5836,
+      0.6693
+     ],
+     "perStratum": {
+      "c2": 0.2962,
+      "c3": 0.5396,
+      "c4_6": 0.6886,
+      "c7_15": 0.7693,
+      "c16p": 0.8907
+     },
+     "nominated": true
+    },
+    {
+     "name": "extent.frames",
+     "j": 217,
+     "sign": 1,
+     "auc": 0.6278,
+     "ci": [
+      0.59,
+      0.6717
+     ],
+     "perStratum": {
+      "c2": 0.2933,
+      "c3": 0.5523,
+      "c4_6": 0.6789,
+      "c7_15": 0.776,
+      "c16p": 0.873
+     },
+     "nominated": true
+    },
+    {
+     "name": "nTokenSlots",
+     "j": 220,
+     "sign": 1,
+     "auc": 0.5996,
+     "ci": [
+      0.5671,
+      0.6297
+     ],
+     "perStratum": {
+      "c2": 0.468,
+      "c3": 0.5256,
+      "c4_6": 0.5836,
+      "c7_15": 0.671,
+      "c16p": 0.792
+     },
+     "nominated": true
+    },
+    {
+     "name": "c.surprisalCreated",
+     "j": 214,
+     "sign": -1,
+     "auc": 0.5934,
+     "ci": [
+      0.5574,
+      0.6312
+     ],
+     "perStratum": {
+      "c2": 0.6067,
+      "c3": 0.5443,
+      "c4_6": 0.5879,
+      "c7_15": 0.6022,
+      "c16p": 0.6364
+     },
+     "nominated": true
+    },
+    {
+     "name": "sig.no-slot",
+     "j": 156,
+     "sign": -1,
+     "auc": 0.5878,
+     "ci": [
+      0.5538,
+      0.6181
+     ],
+     "perStratum": {
+      "c2": 0.4709,
+      "c3": 0.5291,
+      "c4_6": 0.5714,
+      "c7_15": 0.645,
+      "c16p": 0.7619
+     },
+     "nominated": true
+    },
+    {
+     "name": "noSlot",
+     "j": 219,
+     "sign": -1,
+     "auc": 0.5878,
+     "ci": [
+      0.5584,
+      0.6151
+     ],
+     "perStratum": {
+      "c2": 0.4709,
+      "c3": 0.5291,
+      "c4_6": 0.5714,
+      "c7_15": 0.645,
+      "c16p": 0.7619
+     },
+     "nominated": true
+    },
+    {
+     "name": "atm.recalled.self",
+     "j": 166,
+     "sign": -1,
+     "auc": 0.5814,
+     "ci": [
+      0.5414,
+      0.6232
+     ],
+     "perStratum": {
+      "c2": 0.5,
+      "c3": 0.6195,
+      "c4_6": 0.5074,
+      "c7_15": 0.6088,
+      "c16p": 0.7121
+     },
+     "nominated": false
+    },
+    {
+     "name": "span.recalled.self",
+     "j": 185,
+     "sign": -1,
+     "auc": 0.5814,
+     "ci": [
+      0.5373,
+      0.6184
+     ],
+     "perStratum": {
+      "c2": 0.5,
+      "c3": 0.6195,
+      "c4_6": 0.5074,
+      "c7_15": 0.6088,
+      "c16p": 0.7121
+     },
+     "nominated": false
+    }
+   ]
+  },
+  "wp.A": {
+   "n": 144,
+   "maxNullQ95": 0.0857,
+   "controls": {
+    "R_LOGC": 0.5323,
+    "R_POS": 0.4969,
+    "R_IPOS": 0.5,
+    "R_FB": 0.4954,
+    "R_LEN": 0.526,
+    "R_SL": 0.5054
+   },
+   "controlsInBand": true,
+   "top": [
+    {
+     "name": "atm.activation.self",
+     "j": 163,
+     "sign": -1,
+     "auc": 0.6615,
+     "ci": [
+      0.6276,
+      0.6999
+     ],
+     "perStratum": {
+      "c2": 0.6167,
+      "c3": 0.6972,
+      "c4_6": 0.7411,
+      "c7_15": 0.7922,
+      "c16p": 0.4097
+     },
+     "nominated": true
+    },
+    {
+     "name": "span.activation.self",
+     "j": 182,
+     "sign": -1,
+     "auc": 0.6615,
+     "ci": [
+      0.6276,
+      0.7111
+     ],
+     "perStratum": {
+      "c2": 0.6167,
+      "c3": 0.6972,
+      "c4_6": 0.7411,
+      "c7_15": 0.7922,
+      "c16p": 0.4097
+     },
+     "nominated": true
+    },
+    {
+     "name": "c.dRight",
+     "j": 209,
+     "sign": 1,
+     "auc": 0.6355,
+     "ci": [
+      0.6159,
+      0.6607
+     ],
+     "perStratum": {
+      "c2": 0.5833,
+      "c3": 0.65,
+      "c4_6": 0.7106,
+      "c7_15": 0.64,
+      "c16p": 0.5833
+     },
+     "nominated": true
+    },
+    {
+     "name": "atm.novelty.self",
+     "j": 169,
+     "sign": 1,
+     "auc": 0.576,
+     "ci": [
+      0.5295,
+      0.6035
+     ],
+     "perStratum": {
+      "c2": 0.6028,
+      "c3": 0.5989,
+      "c4_6": 0.6011,
+      "c7_15": 0.5983,
+      "c16p": 0.4549
+     },
+     "nominated": false
+    },
+    {
+     "name": "span.novelty.self",
+     "j": 188,
+     "sign": 1,
+     "auc": 0.576,
+     "ci": [
+      0.5295,
+      0.6035
+     ],
+     "perStratum": {
+      "c2": 0.6028,
+      "c3": 0.5989,
+      "c4_6": 0.6011,
+      "c7_15": 0.5983,
+      "c16p": 0.4549
+     },
+     "nominated": false
+    },
+    {
+     "name": "sig.n(rel-label/b2)",
+     "j": 149,
+     "sign": -1,
+     "auc": 0.5722,
+     "ci": [
+      0.5446,
+      0.6289
+     ],
+     "perStratum": {
+      "c2": 0.4967,
+      "c3": 0.515,
+      "c4_6": 0.5811,
+      "c7_15": 0.5733,
+      "c16p": 0.7257
+     },
+     "nominated": false
+    },
+    {
+     "name": "sig.n(rel-end2/b2)",
+     "j": 152,
+     "sign": -1,
+     "auc": 0.5687,
+     "ci": [
+      0.5381,
+      0.6284
+     ],
+     "perStratum": {
+      "c2": 0.4967,
+      "c3": 0.515,
+      "c4_6": 0.58,
+      "c7_15": 0.5706,
+      "c16p": 0.7092
+     },
+     "nominated": false
+    },
+    {
+     "name": "sig.n(rel-end1/b2)",
+     "j": 146,
+     "sign": -1,
+     "auc": 0.5681,
+     "ci": [
+      0.5372,
+      0.6272
+     ],
+     "perStratum": {
+      "c2": 0.495,
+      "c3": 0.5133,
+      "c4_6": 0.5794,
+      "c7_15": 0.5689,
+      "c16p": 0.7127
+     },
+     "nominated": false
+    },
+    {
+     "name": "span.lostAsEnd1",
+     "j": 204,
+     "sign": -1,
+     "auc": 0.5579,
+     "ci": [
+      0.5106,
+      0.6107
+     ],
+     "perStratum": {
+      "c2": 0.6944,
+      "c3": 0.45,
+      "c4_6": 0.5167,
+      "c7_15": 0.6,
+      "c16p": 0.5208
+     },
+     "nominated": false
+    },
+    {
+     "name": "span.edgesLost",
+     "j": 200,
+     "sign": -1,
+     "auc": 0.55,
+     "ci": [
+      0.4949,
+      0.6235
+     ],
+     "perStratum": {
+      "c2": 0.6567,
+      "c3": 0.45,
+      "c4_6": 0.5167,
+      "c7_15": 0.6,
+      "c16p": 0.5208
+     },
+     "nominated": false
+    },
+    {
+     "name": "atm.codeSize.self",
+     "j": 157,
+     "sign": -1,
+     "auc": 0.5417,
+     "ci": [
+      0.5111,
+      0.5809
+     ],
+     "perStratum": {
+      "c2": 0.6167,
+      "c3": 0.5667,
+      "c4_6": 0.5333,
+      "c7_15": 0.5833,
+      "c16p": 0.375
+     },
+     "nominated": false
+    },
+    {
+     "name": "span.codeSize.self",
+     "j": 176,
+     "sign": -1,
+     "auc": 0.5417,
+     "ci": [
+      0.49,
+      0.5809
+     ],
+     "perStratum": {
+      "c2": 0.6167,
+      "c3": 0.5667,
+      "c4_6": 0.5333,
+      "c7_15": 0.5833,
+      "c16p": 0.375
+     },
+     "nominated": false
+    },
+    {
+     "name": "sig.n(rel-end1/b0)",
+     "j": 144,
+     "sign": -1,
+     "auc": 0.5347,
+     "ci": [
+      0.49,
+      0.5809
+     ],
+     "perStratum": {
+      "c2": 0.5833,
+      "c3": 0.45,
+      "c4_6": 0.5167,
+      "c7_15": 0.6,
+      "c16p": 0.5208
+     },
+     "nominated": false
+    },
+    {
+     "name": "atm.traceSize.self",
+     "j": 160,
+     "sign": -1,
+     "auc": 0.5345,
+     "ci": [
+      0.5026,
+      0.5653
+     ],
+     "perStratum": {
+      "c2": 0.5644,
+      "c3": 0.6128,
+      "c4_6": 0.5167,
+      "c7_15": 0.5678,
+      "c16p": 0.3802
+     },
+     "nominated": false
+    }
+   ]
+  },
+  "wp.B": {
+   "n": 300,
+   "maxNullQ95": 0.0614,
+   "controls": {
+    "R_LOGC": 0.511,
+    "R_POS": 0.5022,
+    "R_IPOS": 0.4623,
+    "R_FB": 0.5296,
+    "R_LEN": 0.5051,
+    "R_SL": 0.4948
+   },
+   "controlsInBand": true,
+   "top": [
+    {
+     "name": "sig.n(rel-end2/b2)",
+     "j": 152,
+     "sign": -1,
+     "auc": 0.5969,
+     "ci": [
+      0.5563,
+      0.6251
+     ],
+     "perStratum": {
+      "c2": 0.5615,
+      "c3": 0.5611,
+      "c4_6": 0.6089,
+      "c7_15": 0.579,
+      "c16p": 0.6742
+     },
+     "nominated": true
+    },
+    {
+     "name": "sig.n(rel-end1/b2)",
+     "j": 146,
+     "sign": -1,
+     "auc": 0.5965,
+     "ci": [
+      0.5582,
+      0.6247
+     ],
+     "perStratum": {
+      "c2": 0.5626,
+      "c3": 0.5611,
+      "c4_6": 0.6089,
+      "c7_15": 0.5786,
+      "c16p": 0.6714
+     },
+     "nominated": true
+    },
+    {
+     "name": "sig.n(rel-label/b2)",
+     "j": 149,
+     "sign": -1,
+     "auc": 0.596,
+     "ci": [
+      0.5576,
+      0.6253
+     ],
+     "perStratum": {
+      "c2": 0.5619,
+      "c3": 0.5601,
+      "c4_6": 0.6097,
+      "c7_15": 0.5792,
+      "c16p": 0.6689
+     },
+     "nominated": true
+    },
+    {
+     "name": "atm.novelty.self",
+     "j": 169,
+     "sign": -1,
+     "auc": 0.5542,
+     "ci": [
+      0.5371,
+      0.5802
+     ],
+     "perStratum": {
+      "c2": 0.5014,
+      "c3": 0.5032,
+      "c4_6": 0.5494,
+      "c7_15": 0.5603,
+      "c16p": 0.6565
+     },
+     "nominated": false
+    },
+    {
+     "name": "span.novelty.self",
+     "j": 188,
+     "sign": -1,
+     "auc": 0.5542,
+     "ci": [
+      0.5371,
+      0.5827
+     ],
+     "perStratum": {
+      "c2": 0.5014,
+      "c3": 0.5032,
+      "c4_6": 0.5494,
+      "c7_15": 0.5603,
+      "c16p": 0.6565
+     },
+     "nominated": false
+    },
+    {
+     "name": "atm.recalled.self",
+     "j": 166,
+     "sign": 1,
+     "auc": 0.5533,
+     "ci": [
+      0.5225,
+      0.5885
+     ],
+     "perStratum": {
+      "c2": 0.4914,
+      "c3": 0.5701,
+      "c4_6": 0.5601,
+      "c7_15": 0.5319,
+      "c16p": 0.6129
+     },
+     "nominated": false
+    },
+    {
+     "name": "span.recalled.self",
+     "j": 185,
+     "sign": 1,
+     "auc": 0.5533,
+     "ci": [
+      0.5165,
+      0.5885
+     ],
+     "perStratum": {
+      "c2": 0.4914,
+      "c3": 0.5701,
+      "c4_6": 0.5601,
+      "c7_15": 0.5319,
+      "c16p": 0.6129
+     },
+     "nominated": false
+    },
+    {
+     "name": "c.surprisalCreated",
+     "j": 214,
+     "sign": -1,
+     "auc": 0.5526,
+     "ci": [
+      0.5301,
+      0.5761
+     ],
+     "perStratum": {
+      "c2": 0.5463,
+      "c3": 0.5494,
+      "c4_6": 0.5786,
+      "c7_15": 0.5404,
+      "c16p": 0.5483
+     },
+     "nominated": false
+    },
+    {
+     "name": "c.dSelf",
+     "j": 210,
+     "sign": 1,
+     "auc": 0.5477,
+     "ci": [
+      0.5207,
+      0.5872
+     ],
+     "perStratum": {
+      "c2": 0.5801,
+      "c3": 0.6685,
+      "c4_6": 0.4844,
+      "c7_15": 0.5228,
+      "c16p": 0.4825
+     },
+     "nominated": false
+    },
+    {
+     "name": "span.offsetsMoved",
+     "j": 207,
+     "sign": 1,
+     "auc": 0.5453,
+     "ci": [
+      0.5404,
+      0.5494
+     ],
+     "perStratum": {
+      "c2": 0.5601,
+      "c3": 0.5381,
+      "c4_6": 0.5422,
+      "c7_15": 0.5249,
+      "c16p": 0.561
+     },
+     "nominated": false
+    },
+    {
+     "name": "laterEdges",
+     "j": 221,
+     "sign": 1,
+     "auc": 0.5453,
+     "ci": [
+      0.5407,
+      0.5495
+     ],
+     "perStratum": {
+      "c2": 0.5601,
+      "c3": 0.5381,
+      "c4_6": 0.5422,
+      "c7_15": 0.5249,
+      "c16p": 0.561
+     },
+     "nominated": false
+    },
+    {
+     "name": "extent.tokens",
+     "j": 216,
+     "sign": -1,
+     "auc": 0.5448,
+     "ci": [
+      0.5257,
+      0.5711
+     ],
+     "perStratum": {
+      "c2": 0.6929,
+      "c3": 0.5613,
+      "c4_6": 0.5038,
+      "c7_15": 0.4675,
+      "c16p": 0.4986
+     },
+     "nominated": false
+    },
+    {
+     "name": "c.dLeft",
+     "j": 208,
+     "sign": 1,
+     "auc": 0.5448,
+     "ci": [
+      0.5104,
+      0.5899
+     ],
+     "perStratum": {
+      "c2": 0.6292,
+      "c3": 0.5985,
+      "c4_6": 0.5654,
+      "c7_15": 0.4728,
+      "c16p": 0.4581
+     },
+     "nominated": false
+    },
+    {
+     "name": "span.edgesLost",
+     "j": 200,
+     "sign": -1,
+     "auc": 0.5363,
+     "ci": [
+      0.5081,
+      0.5608
+     ],
+     "perStratum": {
+      "c2": 0.6344,
+      "c3": 0.4956,
+      "c4_6": 0.5633,
+      "c7_15": 0.5042,
+      "c16p": 0.4842
+     },
+     "nominated": false
+    }
+   ]
+  }
+ },
+ "candidates": [
+  {
+   "id": "irc.A:c.surprisalDestroyed",
+   "kind": "irc",
+   "group": "A",
+   "component": "c.surprisalDestroyed",
+   "j": 213,
+   "sign": 1,
+   "direction": "higher = name",
+   "oriented": "score = sign * component",
+   "auc": 0.743,
+   "ci95": [
+    0.7163,
+    0.7681
+   ],
+   "perStratum": {
+    "c2": 0.6558,
+    "c3": 0.671,
+    "c4_6": 0.7081,
+    "c7_15": 0.8215,
+    "c16p": 0.9029
+   },
+   "activeStrata": [
+    "c2",
+    "c3",
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "thresholdFittedOnDiscovery": {
+    "percentileOfNegatives": 0.5,
+    "threshold": 3.200811,
+    "tpr": 0.9074,
+    "tnr": 0.5009,
+    "ba": 0.7042
+   }
+  },
+  {
+   "id": "irc.B:c.dSelf",
+   "kind": "irc",
+   "group": "B",
+   "component": "c.dSelf",
+   "j": 210,
+   "sign": 1,
+   "direction": "higher = name",
+   "oriented": "score = sign * component",
+   "auc": 0.732,
+   "ci95": [
+    0.7021,
+    0.7659
+   ],
+   "perStratum": {
+    "c2": 0.7123,
+    "c3": 0.6891,
+    "c4_6": 0.7406,
+    "c7_15": 0.7421,
+    "c16p": 0.7879
+   },
+   "activeStrata": [
+    "c2",
+    "c3",
+    "c4_6",
+    "c7_15",
+    "c16p"
+   ],
+   "thresholdFittedOnDiscovery": {
+    "percentileOfNegatives": 0.8,
+    "threshold": 0.530492,
+    "tpr": 0.3187,
+    "tnr": 0.8014,
+    "ba": 0.56
+   }
+  },
+  {
+   "id": "wp.A:atm.activation.self",
+   "kind": "wp",
+   "group": "A",
+   "component": "atm.activation.self",
+   "j": 163,
+   "sign": -1,
+   "direction": "lower = name",
+   "oriented": "score = sign * component",
+   "auc": 0.6615,
+   "ci95": [
+    0.6276,
+    0.6999
+   ],
+   "perStratum": {
+    "c2": 0.6167,
+    "c3": 0.6972,
+    "c4_6": 0.7411,
+    "c7_15": 0.7922,
+    "c16p": 0.4097
+   },
+   "activeStrata": [
+    "c2",
+    "c3",
+    "c4_6",
+    "c7_15"
+   ],
+   "thresholdFittedOnDiscovery": {
+    "percentileOfNegatives": 0.8,
+    "threshold": 6.228456,
+    "tpr": 0.3611,
+    "tnr": 0.8056,
+    "ba": 0.5833
+   }
+  },
+  {
+   "id": "wp.B:sig.n(rel-end1/b2)",
+   "kind": "wp",
+   "group": "B",
+   "component": "sig.n(rel-end1/b2)",
+   "j": 146,
+   "sign": -1,
+   "direction": "lower = name",
+   "oriented": "score = sign * component",
+   "auc": 0.5965,
+   "ci95": [
+    0.5582,
+    0.6247
+   ],
+   "perStratum": {
+    "c2": 0.5626,
+    "c3": 0.5611,
+    "c4_6": 0.6089,
+    "c7_15": 0.5786,
+    "c16p": 0.6714
+   },
+   "activeStrata": [
+    "c4_6",
+    "c16p"
+   ],
+   "thresholdFittedOnDiscovery": {
+    "percentileOfNegatives": 0.7,
+    "threshold": -8.67948,
+    "tpr": 0.45,
+    "tnr": 0.7033,
+    "ba": 0.5767
+   }
+  }
+ ],
+ "predictions": {
+  "Q1_ircA_nominated": {
+   "hold": true,
+   "names": [
+    "c.surprisalDestroyed",
+    "c.dSelf",
+    "span.tIsBeing0",
+    "span.mentionShift",
+    "sig.n(ref-entry/b0)",
+    "atm.recalled.self",
+    "span.recalled.self",
+    "sig.n(rel-end1/b1)",
+    "extent.frames",
+    "nTokenSlots"
+   ]
+  },
+  "Q2_company_or_atm": {
+   "hold": true,
+   "first": "c.surprisalDestroyed"
+  },
+  "Q3_wpB_none": {
+   "hold": false,
+   "names": [
+    "sig.n(rel-end2/b2)",
+    "sig.n(rel-end1/b2)",
+    "sig.n(rel-label/b2)"
+   ]
+  },
+  "Q4_same_component_A_and_B": {
+   "hold": true
+  }
+ },
+ "headerSha256": "e920fbce4a44ed78f1b44c5c09c6b05f6a53dabcce98fa9fa7b6696cf13edede",
+ "seconds": 141.5
+}

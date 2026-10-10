@@ -1,0 +1,859 @@
+{
+ "ruleId": "ablscope-2-company-ircA-c2to6",
+ "attack": "C count rival",
+ "headerSha256": "a9b88339678bb3f4973ee7fcf5e8c32c55b8f68edc17b17ee5bdb6c815b37b72",
+ "B": 1000,
+ "sets": {
+  "R1": 350,
+  "R2": 136,
+  "R3": 78
+ },
+ "R1": {
+  "negDSelf": {
+   "auc": 0.8339,
+   "ci": [
+    0.7953,
+    0.8677
+   ],
+   "vsRule": null
+  },
+  "R_INIT": {
+   "auc": 0.8804,
+   "ci": [
+    0.8561,
+    0.9051
+   ],
+   "vsRule": {
+    "delta": 0.0465,
+    "ci": [
+     0.0194,
+     0.0778
+    ],
+    "reproduces": true
+   }
+  },
+  "nInit": {
+   "auc": 0.8795,
+   "ci": [
+    0.8527,
+    0.9034
+   ],
+   "vsRule": {
+    "delta": 0.0456,
+    "ci": [
+     0.0189,
+     0.0748
+    ],
+    "reproduces": true
+   }
+  },
+  "LOO_INIT": {
+   "auc": 0.8803,
+   "ci": [
+    0.8548,
+    0.9057
+   ],
+   "vsRule": {
+    "delta": 0.0464,
+    "ci": [
+     0.0203,
+     0.0749
+    ],
+    "reproduces": true
+   }
+  },
+  "minusNI": {
+   "auc": 0.8775,
+   "ci": [
+    0.8524,
+    0.9022
+   ],
+   "vsRule": {
+    "delta": 0.0435,
+    "ci": [
+     0.018,
+     0.0732
+    ],
+    "reproduces": true
+   }
+  },
+  "ALLINIT": {
+   "auc": 0.8214,
+   "ci": [
+    0.7822,
+    0.8578
+   ],
+   "vsRule": {
+    "delta": -0.0125,
+    "ci": [
+     -0.0382,
+     0.0155
+    ],
+    "reproduces": true
+   }
+  },
+  "GAPPREV": {
+   "auc": 0.7341,
+   "ci": [
+    0.6964,
+    0.7677
+   ],
+   "vsRule": {
+    "delta": -0.0998,
+    "ci": [
+     -0.1416,
+     -0.0537
+    ],
+    "reproduces": false
+   }
+  },
+  "R_BURST": {
+   "auc": 0.7469,
+   "ci": [
+    0.6971,
+    0.7929
+   ],
+   "vsRule": {
+    "delta": -0.087,
+    "ci": [
+     -0.1326,
+     -0.0415
+    ],
+    "reproduces": false
+   }
+  },
+  "R_LOGC": {
+   "auc": 0.5079,
+   "ci": [
+    0.4927,
+    0.5207
+   ],
+   "vsRule": {
+    "delta": -0.326,
+    "ci": [
+     -0.357,
+     -0.2905
+    ],
+    "reproduces": false
+   }
+  },
+  "R_POS": {
+   "auc": 0.493,
+   "ci": [
+    0.4607,
+    0.5203
+   ],
+   "vsRule": {
+    "delta": -0.341,
+    "ci": [
+     -0.3873,
+     -0.2967
+    ],
+    "reproduces": false
+   }
+  },
+  "R_IPOS": {
+   "auc": 0.5,
+   "ci": [
+    0.5,
+    0.5
+   ],
+   "vsRule": {
+    "delta": -0.3339,
+    "ci": [
+     -0.3671,
+     -0.2966
+    ],
+    "reproduces": false
+   }
+  },
+  "R_FB": {
+   "auc": 0.4954,
+   "ci": [
+    0.468,
+    0.5244
+   ],
+   "vsRule": {
+    "delta": -0.3385,
+    "ci": [
+     -0.39,
+     -0.2836
+    ],
+    "reproduces": false
+   }
+  },
+  "R_LEN": {
+   "auc": 0.5188,
+   "ci": [
+    0.5035,
+    0.5355
+   ],
+   "vsRule": {
+    "delta": -0.3152,
+    "ci": [
+     -0.3504,
+     -0.2704
+    ],
+    "reproduces": false
+   }
+  },
+  "R_SL": {
+   "auc": 0.5207,
+   "ci": [
+    0.4991,
+    0.5466
+   ],
+   "vsRule": {
+    "delta": -0.3132,
+    "ci": [
+     -0.3572,
+     -0.2625
+    ],
+    "reproduces": false
+   }
+  },
+  "shufAll": {
+   "auc": 0.4768,
+   "ci": [
+    0.44,
+    0.5164
+   ],
+   "vsRule": {
+    "delta": -0.3572,
+    "ci": [
+     -0.4086,
+     -0.3039
+    ],
+    "reproduces": false
+   }
+  },
+  "shufOthers": {
+   "auc": 0.4822,
+   "ci": [
+    0.446,
+    0.5221
+   ],
+   "vsRule": {
+    "delta": -0.3517,
+    "ci": [
+     -0.399,
+     -0.299
+    ],
+    "reproduces": false
+   }
+  },
+  "negDdInit": {
+   "auc": 0.8783,
+   "ci": [
+    0.8525,
+    0.9048
+   ],
+   "vsRule": {
+    "delta": 0.0444,
+    "ci": [
+     0.0187,
+     0.0751
+    ],
+    "reproduces": true
+   }
+  },
+  "negDdEntLeft": {
+   "auc": 0.8562,
+   "ci": [
+    0.8239,
+    0.8855
+   ],
+   "vsRule": {
+    "delta": 0.0223,
+    "ci": [
+     -0.003,
+     0.0505
+    ],
+    "reproduces": true
+   }
+  },
+  "fixFirstShuf": {
+   "auc": 0.8326,
+   "ci": [
+    0.7915,
+    0.8668
+   ],
+   "vsRule": {
+    "delta": -0.0013,
+    "ci": [
+     -0.0171,
+     0.0152
+    ],
+    "reproduces": true
+   }
+  }
+ },
+ "R2": {
+  "negDSelf": {
+   "auc": 0.85,
+   "ci": [
+    0.7849,
+    0.8989
+   ],
+   "vsRule": null
+  },
+  "R_INIT": {
+   "auc": 0.9114,
+   "ci": [
+    0.8688,
+    0.9517
+   ],
+   "vsRule": {
+    "delta": 0.0615,
+    "ci": [
+     0.0149,
+     0.1135
+    ],
+    "reproduces": true
+   }
+  },
+  "nInit": {
+   "auc": 0.9105,
+   "ci": [
+    0.868,
+    0.9524
+   ],
+   "vsRule": {
+    "delta": 0.0605,
+    "ci": [
+     0.0164,
+     0.1105
+    ],
+    "reproduces": true
+   }
+  },
+  "LOO_INIT": {
+   "auc": 0.9111,
+   "ci": [
+    0.8674,
+    0.9488
+   ],
+   "vsRule": {
+    "delta": 0.0612,
+    "ci": [
+     0.0112,
+     0.1113
+    ],
+    "reproduces": true
+   }
+  },
+  "minusNI": {
+   "auc": 0.9096,
+   "ci": [
+    0.8669,
+    0.9478
+   ],
+   "vsRule": {
+    "delta": 0.0597,
+    "ci": [
+     0.0157,
+     0.1108
+    ],
+    "reproduces": true
+   }
+  },
+  "ALLINIT": {
+   "auc": 0.864,
+   "ci": [
+    0.8053,
+    0.9161
+   ],
+   "vsRule": {
+    "delta": 0.014,
+    "ci": [
+     -0.0269,
+     0.0515
+    ],
+    "reproduces": true
+   }
+  },
+  "R_BURST": {
+   "auc": 0.7771,
+   "ci": [
+    0.7221,
+    0.8298
+   ],
+   "vsRule": {
+    "delta": -0.0728,
+    "ci": [
+     -0.1614,
+     0.0132
+    ],
+    "reproduces": false
+   }
+  },
+  "R_LOGC": {
+   "auc": 0.5,
+   "ci": [
+    0.5,
+    0.5
+   ],
+   "vsRule": {
+    "delta": -0.35,
+    "ci": [
+     -0.4049,
+     -0.2876
+    ],
+    "reproduces": false
+   }
+  },
+  "R_POS": {
+   "auc": 0.4863,
+   "ci": [
+    0.4479,
+    0.5169
+   ],
+   "vsRule": {
+    "delta": -0.3637,
+    "ci": [
+     -0.4242,
+     -0.2907
+    ],
+    "reproduces": false
+   }
+  },
+  "R_IPOS": {
+   "auc": 0.5,
+   "ci": [
+    0.5,
+    0.5
+   ],
+   "vsRule": {
+    "delta": -0.35,
+    "ci": [
+     -0.4032,
+     -0.2906
+    ],
+    "reproduces": false
+   }
+  },
+  "R_FB": {
+   "auc": 0.5,
+   "ci": [
+    0.5,
+    0.5
+   ],
+   "vsRule": {
+    "delta": -0.35,
+    "ci": [
+     -0.4021,
+     -0.2916
+    ],
+    "reproduces": false
+   }
+  },
+  "R_LEN": {
+   "auc": 0.4994,
+   "ci": [
+    0.4623,
+    0.5318
+   ],
+   "vsRule": {
+    "delta": -0.3506,
+    "ci": [
+     -0.4086,
+     -0.2906
+    ],
+    "reproduces": false
+   }
+  },
+  "R_SL": {
+   "auc": 0.507,
+   "ci": [
+    0.4869,
+    0.5264
+   ],
+   "vsRule": {
+    "delta": -0.343,
+    "ci": [
+     -0.3952,
+     -0.2827
+    ],
+    "reproduces": false
+   }
+  },
+  "negDdInit": {
+   "auc": 0.9086,
+   "ci": [
+    0.8676,
+    0.9475
+   ],
+   "vsRule": {
+    "delta": 0.0586,
+    "ci": [
+     0.0116,
+     0.1098
+    ],
+    "reproduces": true
+   }
+  },
+  "negDdEntLeft": {
+   "auc": 0.8929,
+   "ci": [
+    0.8459,
+    0.9354
+   ],
+   "vsRule": {
+    "delta": 0.0429,
+    "ci": [
+     -0.0063,
+     0.0968
+    ],
+    "reproduces": true
+   }
+  }
+ },
+ "R3": {
+  "negDSelf": {
+   "auc": 0.8602,
+   "ci": [
+    0.7865,
+    0.9178
+   ],
+   "vsRule": null
+  },
+  "R_INIT": {
+   "auc": 0.9045,
+   "ci": [
+    0.8547,
+    0.9551
+   ],
+   "vsRule": {
+    "delta": 0.0443,
+    "ci": [
+     -0.0123,
+     0.1124
+    ],
+    "reproduces": true
+   }
+  },
+  "nInit": {
+   "auc": 0.903,
+   "ci": [
+    0.856,
+    0.949
+   ],
+   "vsRule": {
+    "delta": 0.0428,
+    "ci": [
+     -0.0138,
+     0.1107
+    ],
+    "reproduces": true
+   }
+  },
+  "LOO_INIT": {
+   "auc": 0.9045,
+   "ci": [
+    0.8546,
+    0.9528
+   ],
+   "vsRule": {
+    "delta": 0.0443,
+    "ci": [
+     -0.012,
+     0.1159
+    ],
+    "reproduces": true
+   }
+  },
+  "minusNI": {
+   "auc": 0.9023,
+   "ci": [
+    0.8493,
+    0.9553
+   ],
+   "vsRule": {
+    "delta": 0.0421,
+    "ci": [
+     -0.0137,
+     0.1082
+    ],
+    "reproduces": true
+   }
+  },
+  "ALLINIT": {
+   "auc": 0.8654,
+   "ci": [
+    0.8025,
+    0.9179
+   ],
+   "vsRule": {
+    "delta": 0.0051,
+    "ci": [
+     -0.0472,
+     0.0595
+    ],
+    "reproduces": true
+   }
+  },
+  "R_BURST": {
+   "auc": 0.747,
+   "ci": [
+    0.6756,
+    0.8112
+   ],
+   "vsRule": {
+    "delta": -0.1133,
+    "ci": [
+     -0.1876,
+     -0.0296
+    ],
+    "reproduces": false
+   }
+  },
+  "R_LOGC": {
+   "auc": 0.5,
+   "ci": [
+    0.5,
+    0.5
+   ],
+   "vsRule": {
+    "delta": -0.3602,
+    "ci": [
+     -0.4178,
+     -0.2935
+    ],
+    "reproduces": false
+   }
+  },
+  "R_POS": {
+   "auc": 0.4712,
+   "ci": [
+    0.4193,
+    0.5113
+   ],
+   "vsRule": {
+    "delta": -0.3891,
+    "ci": [
+     -0.4555,
+     -0.3208
+    ],
+    "reproduces": false
+   }
+  },
+  "R_IPOS": {
+   "auc": 0.5,
+   "ci": [
+    0.5,
+    0.5
+   ],
+   "vsRule": {
+    "delta": -0.3602,
+    "ci": [
+     -0.4184,
+     -0.2933
+    ],
+    "reproduces": false
+   }
+  },
+  "R_FB": {
+   "auc": 0.5,
+   "ci": [
+    0.5,
+    0.5
+   ],
+   "vsRule": {
+    "delta": -0.3602,
+    "ci": [
+     -0.4192,
+     -0.2933
+    ],
+    "reproduces": false
+   }
+  },
+  "R_LEN": {
+   "auc": 0.5,
+   "ci": [
+    0.5,
+    0.5
+   ],
+   "vsRule": {
+    "delta": -0.3602,
+    "ci": [
+     -0.4174,
+     -0.288
+    ],
+    "reproduces": false
+   }
+  },
+  "R_SL": {
+   "auc": 0.4726,
+   "ci": [
+    0.4293,
+    0.5128
+   ],
+   "vsRule": {
+    "delta": -0.3877,
+    "ci": [
+     -0.4615,
+     -0.3094
+    ],
+    "reproduces": false
+   }
+  },
+  "negDdInit": {
+   "auc": 0.9035,
+   "ci": [
+    0.847,
+    0.9527
+   ],
+   "vsRule": {
+    "delta": 0.0433,
+    "ci": [
+     -0.0161,
+     0.109
+    ],
+    "reproduces": true
+   }
+  },
+  "negDdEntLeft": {
+   "auc": 0.8944,
+   "ci": [
+    0.833,
+    0.9463
+   ],
+   "vsRule": {
+    "delta": 0.0342,
+    "ci": [
+     -0.0203,
+     0.1005
+    ],
+    "reproduces": true
+   }
+  }
+ },
+ "mechanismR1": {
+  "cells": 20,
+  "r2InSample": 0.9511,
+  "aucNegG_lobo": 0.8129,
+  "ciNegG": [
+   0.7738,
+   0.8463
+  ],
+  "residualInSample": {
+   "auc": 0.4551,
+   "ci": [
+    0.4104,
+    0.4967
+   ]
+  },
+  "residualLobo": {
+   "auc": 0.455,
+   "ci": [
+    0.4135,
+    0.4947
+   ]
+  }
+ },
+ "mechanismR2": {
+  "cells": 19,
+  "r2InSample": 0.9548,
+  "aucNegG_lobo": 0.8516,
+  "ciNegG": [
+   0.8015,
+   0.8988
+  ],
+  "residualInSample": {
+   "auc": 0.4623,
+   "ci": [
+    0.3895,
+    0.5292
+   ]
+  },
+  "residualLobo": {
+   "auc": 0.4439,
+   "ci": [
+    0.3467,
+    0.5238
+   ]
+  }
+ },
+ "lists": {
+  "negativesAllInit": [
+   "hello:9",
+   "hey:5",
+   "kris:3",
+   "nope:2",
+   "captain:2",
+   "duckx03:2",
+   "apparently:2",
+   "whats:2",
+   "pirate:2",
+   "morning:2",
+   "billy:2",
+   "cfhow:1",
+   "strange:1",
+   "let:1",
+   "thanks:1",
+   "yep:1",
+   "kde4:1",
+   "removing:1",
+   "alright:1",
+   "partition:1",
+   "that's:1",
+   "okay:1",
+   "question:1",
+   "torrent:1",
+   "hmm:1"
+  ],
+  "nNegAllInit": 58,
+  "positivesNotAllInit": [
+   "puff:5",
+   "tgd:5",
+   "n8w:4",
+   "kgoetz:4",
+   "nxvl:4",
+   "scottk:4",
+   "said:3",
+   "kenro:3",
+   "bobg:3",
+   "qman:3",
+   "bekks:2",
+   "blueskaj:2",
+   "ball:2",
+   "pici:2",
+   "spamaps:2",
+   "rbasak:2",
+   "jorgem:1",
+   "sara:1",
+   "cristian:1",
+   "mamarok:1",
+   "blain:1",
+   "oliver:1",
+   "waffles:1",
+   "rowlo:1",
+   "stephens:1"
+  ],
+  "nPosNotAllInit": 67,
+  "nPairs": 350
+ },
+ "fixFirstSeeds": [
+  0.8391,
+  0.8241,
+  0.8334
+ ],
+ "tiesOnRInitSameC": {
+  "pairs": 58,
+  "aucNegDSelf": 0.6157,
+  "aucFixFirst": 0.6064
+ },
+ "verdictC": {
+  "bestPlainRival": "R_INIT",
+  "bestPlainAucR1": 0.8804,
+  "ruleAucR1": 0.8339,
+  "deltaCI": [
+   0.0194,
+   0.0778
+  ],
+  "rivalReproducesWithin003": true,
+  "ablationNecessary": false,
+  "rivalSignificantlyBetter": true
+ },
+ "analyseSeconds": 7.6
+}

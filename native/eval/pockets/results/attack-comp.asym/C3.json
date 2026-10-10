@@ -1,0 +1,788 @@
+{
+ "counts": {
+  "statistics": 81,
+  "realNonThinPockets": 391,
+  "cellsTotal": 31671,
+  "definedRealCells": 29680,
+  "observedPresentRealCells": 22017,
+  "shareObservedPresent": 0.7418,
+  "iidPlantedRate4": 0.01303,
+  "pPresentPerCellFromIid": 0.00008488153720463878,
+  "expectedFalsePresentAtlas": 2.519,
+  "expectedFalsePresentCompAsym": 0.03259,
+  "nCompAsymDefined": 384,
+  "binomP_atLeast3OfOneSignAsym": 7.07e-7,
+  "controlsRate4": 0.004463,
+  "controlsPresentCells": 0,
+  "t9TailGE4": 0.00311,
+  "t9TailGE2": 0.07655,
+  "t9PresentPerCell": 0.000004837
+ },
+ "nullCalibration": {
+  "halfCells": 44,
+  "ge2": 5,
+  "ge4": 1,
+  "expectedGe2": 3.368,
+  "expectedGe4": 0.1369,
+  "zAll": [
+   -1.34,
+   -0.417,
+   0.547,
+   -1.34,
+   -0.526,
+   0.761,
+   -0.571,
+   1.02,
+   -2.66,
+   -0.0395,
+   -0.702,
+   2.94,
+   -0.0198,
+   -1.62,
+   2.16,
+   0.44,
+   -0.616,
+   0.119,
+   1.99,
+   -0.306,
+   0.341,
+   -0.0395,
+   -0.121,
+   0.811,
+   0.133,
+   -0.78,
+   0.592,
+   3.41,
+   0.487,
+   -0.377,
+   -1.98,
+   -6.13,
+   1.33,
+   0.674,
+   0.536,
+   -0.324,
+   -0.2,
+   -0.731,
+   -0.898,
+   0.876,
+   -0.788,
+   0.251,
+   -0.243,
+   -0.892
+  ],
+  "sdOfZ": 1.477,
+  "t9Sd": 1.134
+ },
+ "familyWise": {
+  "plain": {
+   "nStatistics": 38,
+   "compAsym": {
+    "eta2": 0.3019,
+    "stdEta2": 5.199,
+    "ownP": 0.0004998,
+    "familyWiseP": 0.005997,
+    "rankByStdEta2": 18
+   },
+   "perStat": [
+    {
+     "stat": "burst.kerSlope",
+     "nPos": 287,
+     "nNeg": 73,
+     "eta2": 0.8077,
+     "stdEta2": 31.05,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.0004998
+    },
+    {
+     "stat": "burst.repAdj",
+     "nPos": 81,
+     "nNeg": 265,
+     "eta2": 0.7842,
+     "stdEta2": 30.28,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.0004998
+    },
+    {
+     "stat": "order.rareCurve",
+     "nPos": 174,
+     "nNeg": 81,
+     "eta2": 0.6172,
+     "stdEta2": 17.94,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.0004998
+    },
+    {
+     "stat": "order.surprGrow",
+     "nPos": 50,
+     "nNeg": 224,
+     "eta2": 0.6005,
+     "stdEta2": 16.32,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.0004998
+    },
+    {
+     "stat": "order.entSlope",
+     "nPos": 109,
+     "nNeg": 136,
+     "eta2": 0.5565,
+     "stdEta2": 16.01,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.0004998
+    },
+    {
+     "stat": "freq.zipfAlpha",
+     "nPos": 59,
+     "nNeg": 77,
+     "eta2": 0.7398,
+     "stdEta2": 12.36,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.0004998
+    },
+    {
+     "stat": "freq.rankBinEnt",
+     "nPos": 83,
+     "nNeg": 231,
+     "eta2": 0.3926,
+     "stdEta2": 12.21,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.0004998
+    },
+    {
+     "stat": "fig.arrival",
+     "nPos": 219,
+     "nNeg": 36,
+     "eta2": 0.5504,
+     "stdEta2": 12.13,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.0004998
+    },
+    {
+     "stat": "order.entCurv",
+     "nPos": 126,
+     "nNeg": 53,
+     "eta2": 0.5532,
+     "stdEta2": 10.82,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.0004998
+    },
+    {
+     "stat": "phys.massExp",
+     "nPos": 28,
+     "nNeg": 295,
+     "eta2": 0.4432,
+     "stdEta2": 9.955,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.0004998
+    },
+    {
+     "stat": "phys.massAdd",
+     "nPos": 29,
+     "nNeg": 203,
+     "eta2": 0.4897,
+     "stdEta2": 9.227,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.0004998
+    },
+    {
+     "stat": "order.initDev",
+     "nPos": 38,
+     "nNeg": 297,
+     "eta2": 0.3552,
+     "stdEta2": 8.942,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.0004998
+    },
+    {
+     "stat": "comp.edgeGap",
+     "nPos": 343,
+     "nNeg": 28,
+     "eta2": 0.3347,
+     "stdEta2": 7.987,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.0004998
+    },
+    {
+     "stat": "freq.menzerath",
+     "nPos": 55,
+     "nNeg": 159,
+     "eta2": 0.3864,
+     "stdEta2": 7.519,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.0004998
+    },
+    {
+     "stat": "burst.kerCurv",
+     "nPos": 11,
+     "nNeg": 366,
+     "eta2": 0.4374,
+     "stdEta2": 7.398,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.0004998
+    },
+    {
+     "stat": "fig.persist",
+     "nPos": 7,
+     "nNeg": 320,
+     "eta2": 0.4425,
+     "stdEta2": 5.66,
+     "ownP": 0.0009995,
+     "familyWiseP": 0.003498
+    },
+    {
+     "stat": "comp.initEnt",
+     "nPos": 47,
+     "nNeg": 273,
+     "eta2": 0.2614,
+     "stdEta2": 5.6,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.003998
+    },
+    {
+     "stat": "comp.asym",
+     "nPos": 116,
+     "nNeg": 98,
+     "eta2": 0.3019,
+     "stdEta2": 5.199,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.005997
+    },
+    {
+     "stat": "order.depLen",
+     "nPos": 91,
+     "nNeg": 49,
+     "eta2": 0.423,
+     "stdEta2": 5.169,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.005997
+    },
+    {
+     "stat": "comp.finEnt",
+     "nPos": 14,
+     "nNeg": 362,
+     "eta2": 0.2915,
+     "stdEta2": 4.897,
+     "ownP": 0.001499,
+     "familyWiseP": 0.01349
+    },
+    {
+     "stat": "freq.heapsBeta",
+     "nPos": 16,
+     "nNeg": 94,
+     "eta2": 0.5539,
+     "stdEta2": 4.792,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.01699
+    },
+    {
+     "stat": "order.rareSlope",
+     "nPos": 329,
+     "nNeg": 27,
+     "eta2": 0.241,
+     "stdEta2": 4.508,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.02799
+    },
+    {
+     "stat": "order.fnBefore",
+     "nPos": 124,
+     "nNeg": 30,
+     "eta2": 0.3951,
+     "stdEta2": 4.488,
+     "ownP": 0.0009995,
+     "familyWiseP": 0.02849
+    },
+    {
+     "stat": "order.finalDev",
+     "nPos": 341,
+     "nNeg": 29,
+     "eta2": 0.2245,
+     "stdEta2": 4.386,
+     "ownP": 0.001499,
+     "familyWiseP": 0.03198
+    },
+    {
+     "stat": "fig.initFollow",
+     "nPos": 20,
+     "nNeg": 230,
+     "eta2": 0.325,
+     "stdEta2": 4.336,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.03248
+    },
+    {
+     "stat": "fig.initEnrich",
+     "nPos": 293,
+     "nNeg": 18,
+     "eta2": 0.2608,
+     "stdEta2": 3.804,
+     "ownP": 0.003498,
+     "familyWiseP": 0.06447
+    },
+    {
+     "stat": "order.branch",
+     "nPos": 28,
+     "nNeg": 303,
+     "eta2": 0.2294,
+     "stdEta2": 3.692,
+     "ownP": 0.0009995,
+     "familyWiseP": 0.07796
+    },
+    {
+     "stat": "fig.crpTheta",
+     "nPos": 5,
+     "nNeg": 189,
+     "eta2": 0.4152,
+     "stdEta2": 2.927,
+     "ownP": 0.01799,
+     "familyWiseP": 0.2589
+    },
+    {
+     "stat": "burst.hurst",
+     "nPos": 218,
+     "nNeg": 5,
+     "eta2": 0.3276,
+     "stdEta2": 2.171,
+     "ownP": 0.03798,
+     "familyWiseP": 0.6332
+    },
+    {
+     "stat": "fig.introLeft",
+     "nPos": 3,
+     "nNeg": 53,
+     "eta2": 0.6646,
+     "stdEta2": 1.656,
+     "ownP": 0.07546,
+     "familyWiseP": 0.8686
+    },
+    {
+     "stat": "fig.introRight",
+     "nPos": 14,
+     "nNeg": 17,
+     "eta2": 0.6493,
+     "stdEta2": 1.111,
+     "ownP": 0.1444,
+     "familyWiseP": 0.9875
+    },
+    {
+     "stat": "freq.lenAcf1",
+     "nPos": 307,
+     "nNeg": 11,
+     "eta2": 0.1365,
+     "stdEta2": 0.6433,
+     "ownP": 0.2239,
+     "familyWiseP": 1
+    },
+    {
+     "stat": "fig.converge",
+     "nPos": 11,
+     "nNeg": 4,
+     "eta2": 0.7727,
+     "stdEta2": 0.4665,
+     "ownP": 0.4278,
+     "familyWiseP": 1
+    },
+    {
+     "stat": "freq.recurLen",
+     "nPos": 354,
+     "nNeg": 3,
+     "eta2": 0.1078,
+     "stdEta2": 0.1155,
+     "ownP": 0.2804,
+     "familyWiseP": 1
+    },
+    {
+     "stat": "para.suffixCopy",
+     "nPos": 275,
+     "nNeg": 4,
+     "eta2": 0.108,
+     "stdEta2": -0.08811,
+     "ownP": 0.3693,
+     "familyWiseP": 1
+    },
+    {
+     "stat": "fig.introLeftFq",
+     "nPos": 5,
+     "nNeg": 26,
+     "eta2": 0.4959,
+     "stdEta2": -0.1345,
+     "ownP": 0.5297,
+     "familyWiseP": 1
+    },
+    {
+     "stat": "para.prefixCopy",
+     "nPos": 299,
+     "nNeg": 3,
+     "eta2": 0.09319,
+     "stdEta2": -0.1911,
+     "ownP": 0.3738,
+     "familyWiseP": 1
+    },
+    {
+     "stat": "phys.affectAsym",
+     "nPos": 57,
+     "nNeg": 11,
+     "eta2": 0.2073,
+     "stdEta2": -1.266,
+     "ownP": 0.9145,
+     "familyWiseP": 1
+    }
+   ]
+  },
+  "withinLanguage": {
+   "nStatistics": 38,
+   "compAsym": {
+    "eta2": 0.3019,
+    "stdEta2": 1.672,
+    "ownP": 0.05347,
+    "familyWiseP": 0.8056,
+    "rankByStdEta2": 19
+   },
+   "perStat": [
+    {
+     "stat": "phys.massExp",
+     "nPos": 28,
+     "nNeg": 295,
+     "eta2": 0.4432,
+     "stdEta2": 9.039,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.0009995
+    },
+    {
+     "stat": "order.entSlope",
+     "nPos": 109,
+     "nNeg": 136,
+     "eta2": 0.5565,
+     "stdEta2": 7.337,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.0009995
+    },
+    {
+     "stat": "phys.massAdd",
+     "nPos": 29,
+     "nNeg": 203,
+     "eta2": 0.4897,
+     "stdEta2": 6.688,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.0009995
+    },
+    {
+     "stat": "order.initDev",
+     "nPos": 38,
+     "nNeg": 297,
+     "eta2": 0.3552,
+     "stdEta2": 6.251,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.001999
+    },
+    {
+     "stat": "order.rareCurve",
+     "nPos": 174,
+     "nNeg": 81,
+     "eta2": 0.6172,
+     "stdEta2": 4.833,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.03798
+    },
+    {
+     "stat": "freq.rankBinEnt",
+     "nPos": 83,
+     "nNeg": 231,
+     "eta2": 0.3926,
+     "stdEta2": 4.725,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.03998
+    },
+    {
+     "stat": "freq.menzerath",
+     "nPos": 55,
+     "nNeg": 159,
+     "eta2": 0.3864,
+     "stdEta2": 4.64,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.04148
+    },
+    {
+     "stat": "comp.edgeGap",
+     "nPos": 343,
+     "nNeg": 28,
+     "eta2": 0.3347,
+     "stdEta2": 4.512,
+     "ownP": 0.0004998,
+     "familyWiseP": 0.04398
+    },
+    {
+     "stat": "order.fnBefore",
+     "nPos": 124,
+     "nNeg": 30,
+     "eta2": 0.3951,
+     "stdEta2": 3.553,
+     "ownP": 0.001499,
+     "familyWiseP": 0.09295
+    },
+    {
+     "stat": "fig.initEnrich",
+     "nPos": 293,
+     "nNeg": 18,
+     "eta2": 0.2608,
+     "stdEta2": 3.377,
+     "ownP": 0.001499,
+     "familyWiseP": 0.1184
+    },
+    {
+     "stat": "comp.initEnt",
+     "nPos": 47,
+     "nNeg": 273,
+     "eta2": 0.2614,
+     "stdEta2": 3.36,
+     "ownP": 0.005997,
+     "familyWiseP": 0.1234
+    },
+    {
+     "stat": "order.rareSlope",
+     "nPos": 329,
+     "nNeg": 27,
+     "eta2": 0.241,
+     "stdEta2": 3.011,
+     "ownP": 0.004998,
+     "familyWiseP": 0.2024
+    },
+    {
+     "stat": "order.finalDev",
+     "nPos": 341,
+     "nNeg": 29,
+     "eta2": 0.2245,
+     "stdEta2": 2.982,
+     "ownP": 0.005997,
+     "familyWiseP": 0.2154
+    },
+    {
+     "stat": "fig.crpTheta",
+     "nPos": 5,
+     "nNeg": 189,
+     "eta2": 0.4152,
+     "stdEta2": 2.864,
+     "ownP": 0.01599,
+     "familyWiseP": 0.2469
+    },
+    {
+     "stat": "fig.arrival",
+     "nPos": 219,
+     "nNeg": 36,
+     "eta2": 0.5504,
+     "stdEta2": 2.849,
+     "ownP": 0.01049,
+     "familyWiseP": 0.2529
+    },
+    {
+     "stat": "fig.initFollow",
+     "nPos": 20,
+     "nNeg": 230,
+     "eta2": 0.325,
+     "stdEta2": 2.716,
+     "ownP": 0.01949,
+     "familyWiseP": 0.2964
+    },
+    {
+     "stat": "freq.zipfAlpha",
+     "nPos": 59,
+     "nNeg": 77,
+     "eta2": 0.7398,
+     "stdEta2": 1.918,
+     "ownP": 0.03198,
+     "familyWiseP": 0.6977
+    },
+    {
+     "stat": "fig.persist",
+     "nPos": 7,
+     "nNeg": 320,
+     "eta2": 0.4425,
+     "stdEta2": 1.81,
+     "ownP": 0.07996,
+     "familyWiseP": 0.7531
+    },
+    {
+     "stat": "comp.asym",
+     "nPos": 116,
+     "nNeg": 98,
+     "eta2": 0.3019,
+     "stdEta2": 1.672,
+     "ownP": 0.05347,
+     "familyWiseP": 0.8056
+    },
+    {
+     "stat": "comp.finEnt",
+     "nPos": 14,
+     "nNeg": 362,
+     "eta2": 0.2915,
+     "stdEta2": 1.591,
+     "ownP": 0.07696,
+     "familyWiseP": 0.8436
+    },
+    {
+     "stat": "order.depLen",
+     "nPos": 91,
+     "nNeg": 49,
+     "eta2": 0.423,
+     "stdEta2": 1.259,
+     "ownP": 0.1034,
+     "familyWiseP": 0.962
+    },
+    {
+     "stat": "burst.kerSlope",
+     "nPos": 287,
+     "nNeg": 73,
+     "eta2": 0.8077,
+     "stdEta2": 1.208,
+     "ownP": 0.1004,
+     "familyWiseP": 0.9665
+    },
+    {
+     "stat": "freq.heapsBeta",
+     "nPos": 16,
+     "nNeg": 94,
+     "eta2": 0.5539,
+     "stdEta2": 1.102,
+     "ownP": 0.1449,
+     "familyWiseP": 0.9885
+    },
+    {
+     "stat": "order.surprGrow",
+     "nPos": 50,
+     "nNeg": 224,
+     "eta2": 0.6005,
+     "stdEta2": 1.04,
+     "ownP": 0.1469,
+     "familyWiseP": 0.9925
+    },
+    {
+     "stat": "fig.introLeftFq",
+     "nPos": 5,
+     "nNeg": 26,
+     "eta2": 0.4959,
+     "stdEta2": 0.7947,
+     "ownP": 0.5927,
+     "familyWiseP": 0.9995
+    },
+    {
+     "stat": "burst.kerCurv",
+     "nPos": 11,
+     "nNeg": 366,
+     "eta2": 0.4374,
+     "stdEta2": 0.4854,
+     "ownP": 0.5967,
+     "familyWiseP": 1
+    },
+    {
+     "stat": "burst.hurst",
+     "nPos": 218,
+     "nNeg": 5,
+     "eta2": 0.3276,
+     "stdEta2": 0.4533,
+     "ownP": 0.1354,
+     "familyWiseP": 1
+    },
+    {
+     "stat": "order.entCurv",
+     "nPos": 126,
+     "nNeg": 53,
+     "eta2": 0.5532,
+     "stdEta2": 0.06673,
+     "ownP": 0.4568,
+     "familyWiseP": 1
+    },
+    {
+     "stat": "order.branch",
+     "nPos": 28,
+     "nNeg": 303,
+     "eta2": 0.2294,
+     "stdEta2": -0.107,
+     "ownP": 0.5697,
+     "familyWiseP": 1
+    },
+    {
+     "stat": "freq.recurLen",
+     "nPos": 354,
+     "nNeg": 3,
+     "eta2": 0.1078,
+     "stdEta2": -0.2646,
+     "ownP": 0.4618,
+     "familyWiseP": 1
+    },
+    {
+     "stat": "phys.affectAsym",
+     "nPos": 57,
+     "nNeg": 11,
+     "eta2": 0.2073,
+     "stdEta2": -0.4241,
+     "ownP": 0.6532,
+     "familyWiseP": 1
+    },
+    {
+     "stat": "burst.repAdj",
+     "nPos": 81,
+     "nNeg": 265,
+     "eta2": 0.7842,
+     "stdEta2": -0.5225,
+     "ownP": 0.6897,
+     "familyWiseP": 1
+    },
+    {
+     "stat": "para.prefixCopy",
+     "nPos": 299,
+     "nNeg": 3,
+     "eta2": 0.09319,
+     "stdEta2": -0.7107,
+     "ownP": 0.9415,
+     "familyWiseP": 1
+    },
+    {
+     "stat": "fig.converge",
+     "nPos": 11,
+     "nNeg": 4,
+     "eta2": 0.7727,
+     "stdEta2": -0.809,
+     "ownP": 0.8821,
+     "familyWiseP": 1
+    },
+    {
+     "stat": "freq.lenAcf1",
+     "nPos": 307,
+     "nNeg": 11,
+     "eta2": 0.1365,
+     "stdEta2": -0.8463,
+     "ownP": 0.7221,
+     "familyWiseP": 1
+    },
+    {
+     "stat": "fig.introLeft",
+     "nPos": 3,
+     "nNeg": 53,
+     "eta2": 0.6646,
+     "stdEta2": -0.9879,
+     "ownP": 1,
+     "familyWiseP": 1
+    },
+    {
+     "stat": "para.suffixCopy",
+     "nPos": 275,
+     "nNeg": 4,
+     "eta2": 0.108,
+     "stdEta2": -1.041,
+     "ownP": 0.9995,
+     "familyWiseP": 1
+    },
+    {
+     "stat": "fig.introRight",
+     "nPos": 14,
+     "nNeg": 17,
+     "eta2": 0.6493,
+     "stdEta2": -1.217,
+     "ownP": 0.92,
+     "familyWiseP": 1
+    }
+   ]
+  },
+  "nStatisticsWithOwnPlainPle0035": 27,
+  "nStatisticsWithOwnLangPle005": 17
+ }
+}

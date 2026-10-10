@@ -1,0 +1,119 @@
+wp  real n 200 AUC REAL 0.6843 F+P 0.7246 POS 0.4329 R+F+P 0.7118 KIND 0.555 cond 0.747 gap 0.11 NAME/CTL nonNull 0.85 0.74 surv {"AUC_REAL":1,"gap":1}
+wp  deranged n 200 AUC REAL 0.7109 F+P 0.7246 POS 0.4329 R+F+P 0.7153 KIND 0.555 cond 0.7742 gap 0.09 NAME/CTL nonNull 0.83 0.74 surv {"AUC_REAL":1.1443,"gap":0.8182}
+wp  company n 200 AUC REAL 0.5936 F+P 0.7246 POS 0.4329 R+F+P 0.717 KIND 0.555 cond 0.7593 gap 0.08 NAME/CTL nonNull 0.78 0.7 surv {"AUC_REAL":0.5079,"gap":0.7273}
+wp  null n 200 AUC REAL 0.3706 F+P 0.7246 POS 0.4329 R+F+P 0.7201 KIND 0.555 cond 0.7651 gap 0.02 NAME/CTL nonNull 0.54 0.52 surv {"AUC_REAL":-0.7021,"gap":0.1818}
+wp  shuffle n 200 AUC REAL 0.637 F+P 0.7246 POS 0.4329 R+F+P 0.7084 KIND 0.555 cond 0.7557 gap 0.12 NAME/CTL nonNull 0.9 0.78 surv {"AUC_REAL":0.7434,"gap":1.0909}
+irc  real n 120 AUC REAL 0.8364 F+P 0.8881 POS 0.5286 R+F+P 0.8619 KIND 0.7344 cond 0.8736 gap 0.2834 NAME/CTL nonNull 0.9167 0.6333 surv {"AUC_REAL":1,"gap":1}
+irc  deranged n 120 AUC REAL 0.8612 F+P 0.8881 POS 0.5286 R+F+P 0.8861 KIND 0.7344 cond 0.8919 gap 0.5333 NAME/CTL nonNull 0.95 0.4167 surv {"AUC_REAL":1.0737,"gap":1.8818}
+irc  null n 120 AUC REAL 0.645 F+P 0.8881 POS 0.5286 R+F+P 0.8683 KIND 0.7344 cond 0.8767 gap 0.4334 NAME/CTL nonNull 0.6167 0.1833 surv {"AUC_REAL":0.431,"gap":1.5293}
+fas  real n 120 AUC REAL 0.3729 F+P 0.5737 POS 0.5532 R+F+P 0.5351 KIND 0.4718 cond 0.5496 gap -0.05 NAME/CTL nonNull 0.25 0.3 surv {"AUC_REAL":"undefined(real AUC<0.53)","gap":"undefined(real gap<0.05)"}
+fas  deranged n 120 AUC REAL 0.3932 F+P 0.5737 POS 0.5532 R+F+P 0.5293 KIND 0.4718 cond 0.5413 gap -0.0833 NAME/CTL nonNull 0.35 0.4333 surv {"AUC_REAL":"undefined(real AUC<0.53)","gap":"undefined(real gap<0.05)"}
+fas  company n 120 AUC REAL 0.3751 F+P 0.5737 POS 0.5532 R+F+P 0.541 KIND 0.4718 cond 0.5435 gap -0.0167 NAME/CTL nonNull 0.25 0.2667 surv {"AUC_REAL":"undefined(real AUC<0.53)","gap":"undefined(real gap<0.05)"}
+fas  null n 120 AUC REAL 0.4338 F+P 0.5737 POS 0.5532 R+F+P 0.5471 KIND 0.4718 cond 0.5413 gap -0.0666 NAME/CTL nonNull 0.3667 0.4333 surv {"AUC_REAL":"undefined(real AUC<0.53)","gap":"undefined(real gap<0.05)"}
+fasA  real n 120 AUC REAL 0.449 F+P 0.5769 POS 0.4375 R+F+P 0.5661 KIND 0.4551 cond 0.5269 gap -0.0334 NAME/CTL nonNull 0.4333 0.4667 surv {"AUC_REAL":"undefined(real AUC<0.53)","gap":"undefined(real gap<0.05)"}
+fasA  deranged n 120 AUC REAL 0.5035 F+P 0.5769 POS 0.4375 R+F+P 0.6044 KIND 0.4551 cond 0.5461 gap -0.05 NAME/CTL nonNull 0.4333 0.4833 surv {"AUC_REAL":"undefined(real AUC<0.53)","gap":"undefined(real gap<0.05)"}
+fasA  company n 120 AUC REAL 0.4718 F+P 0.5769 POS 0.4375 R+F+P 0.5553 KIND 0.4551 cond 0.5192 gap -0.05 NAME/CTL nonNull 0.3667 0.4167 surv {"AUC_REAL":"undefined(real AUC<0.53)","gap":"undefined(real gap<0.05)"}
+fasA  null n 120 AUC REAL 0.509 F+P 0.5769 POS 0.4375 R+F+P 0.5753 KIND 0.4551 cond 0.5314 gap -0.05 NAME/CTL nonNull 0.4167 0.4667 surv {"AUC_REAL":"undefined(real AUC<0.53)","gap":"undefined(real gap<0.05)"}
+wpA S real n 200 AUC REAL 0.5461 F+P 0.407 POS 0.3223 R+F+P 0.5298 KIND 0.5713 cond 0.611 gap -0.08 NAME/CTL nonNull 0.85 0.93 surv {"AUC_REAL":1,"gap":"undefined(real gap<0.05)"}
+wpA S deranged n 200 AUC REAL 0.6052 F+P 0.407 POS 0.3223 R+F+P 0.5995 KIND 0.5713 cond 0.6496 gap -0.01 NAME/CTL nonNull 0.87 0.88 surv {"AUC_REAL":2.282,"gap":"undefined(real gap<0.05)"}
+wpA S company n 200 AUC REAL 0.5395 F+P 0.407 POS 0.3223 R+F+P 0.529 KIND 0.5713 cond 0.5936 gap -0.09 NAME/CTL nonNull 0.77 0.86 surv {"AUC_REAL":0.8568,"gap":"undefined(real gap<0.05)"}
+wpA S null n 200 AUC REAL 0.5092 F+P 0.407 POS 0.3223 R+F+P 0.5521 KIND 0.5713 cond 0.6263 gap -0.19 NAME/CTL nonNull 0.58 0.77 surv {"AUC_REAL":0.1996,"gap":"undefined(real gap<0.05)"}
+wpA U real n 200 AUC REAL 0.6566 F+P 0.6199 POS 0.4769 R+F+P 0.6821 KIND 0.5231 cond 0.6955 gap 0.03 NAME/CTL nonNull 0.85 0.82 surv {"AUC_REAL":1,"gap":"undefined(real gap<0.05)"}
+wpA U deranged n 200 AUC REAL 0.5901 F+P 0.6199 POS 0.4769 R+F+P 0.6341 KIND 0.5231 cond 0.6333 gap 0.1 NAME/CTL nonNull 0.87 0.77 surv {"AUC_REAL":0.5754,"gap":"undefined(real gap<0.05)"}
+wpA U company n 200 AUC REAL 0.5259 F+P 0.6199 POS 0.4769 R+F+P 0.6236 KIND 0.5231 cond 0.6683 gap -0.02 NAME/CTL nonNull 0.77 0.79 surv {"AUC_REAL":0.1654,"gap":"undefined(real gap<0.05)"}
+wpA U null n 200 AUC REAL 0.4713 F+P 0.6199 POS 0.4769 R+F+P 0.6235 KIND 0.5231 cond 0.624 gap -0.05 NAME/CTL nonNull 0.58 0.63 surv {"AUC_REAL":-0.1833,"gap":"undefined(real gap<0.05)"}
+ircA S real n 60 AUC REAL 0.49 F+P 0.285 POS 0.3139 R+F+P 0.3489 KIND 0.5061 cond 0.4567 gap 0 NAME/CTL nonNull 0.7333 0.7333 surv {"AUC_REAL":"undefined(real AUC<0.53)","gap":"undefined(real gap<0.05)"}
+ircA S deranged n 60 AUC REAL 0.5189 F+P 0.285 POS 0.3139 R+F+P 0.4561 KIND 0.5061 cond 0.5017 gap -0.0334 NAME/CTL nonNull 0.7333 0.7667 surv {"AUC_REAL":"undefined(real AUC<0.53)","gap":"undefined(real gap<0.05)"}
+ircA S null n 60 AUC REAL 0.3139 F+P 0.285 POS 0.3139 R+F+P 0.2483 KIND 0.5061 cond 0.4917 gap 0 NAME/CTL nonNull 0.5667 0.5667 surv {"AUC_REAL":"undefined(real AUC<0.53)","gap":"undefined(real gap<0.05)"}
+ircA U real n 60 AUC REAL 0.5978 F+P 0.4183 POS 0.31 R+F+P 0.5322 KIND 0.5222 cond 0.6467 gap 0.1 NAME/CTL nonNull 0.7333 0.6333 surv {"AUC_REAL":1,"gap":1}
+ircA U deranged n 60 AUC REAL 0.4461 F+P 0.4183 POS 0.31 R+F+P 0.4083 KIND 0.5222 cond 0.5161 gap 0.0333 NAME/CTL nonNull 0.7333 0.7 surv {"AUC_REAL":-0.5511,"gap":0.333}
+ircA U null n 60 AUC REAL 0.315 F+P 0.4183 POS 0.31 R+F+P 0.3394 KIND 0.5222 cond 0.545 gap 0 NAME/CTL nonNull 0.5667 0.5667 surv {"AUC_REAL":-1.8916,"gap":0}
+== wp  real n=200 seen N/C 0.15/1 refNonNull N/C 0.55/0.27
+  single AUC {"ownExists":0.695,"ownMentions":0.7302,"refAbs":0.4997,"refBornLost":0.51,"relLost":0.5406,"relBorn":0.5083,"relCollateral":0.5083,"kindFlips":0.51,"FREQ_n":0.7712,"seen":0.075}
+  seen: {"nName":15,"nCtl":100,"ownExists":{"NAME":0.5333,"CTL":0.28},"refNonNull":{"NAME":0.3333,"CTL":0.27},"auc_REAL_cv":0.6373,"auc_FREQPOS_cv":0.6773,"auc_REALFREQPOS_cv":0.688,"auc_ownExists_raw":0.6267}
+  unseen: {"nName":85,"nCtl":0,"ownExists":{"NAME":0.6941,"CTL":null},"refNonNull":{"NAME":0.5882,"CTL":null}}
+== wp  deranged n=200 seen N/C 0.15/1 refNonNull N/C 0.5/0.11
+  single AUC {"ownExists":0.77,"ownMentions":0.7768,"refAbs":0.495,"refBornLost":0.5,"relLost":0.462,"relBorn":0.4481,"relCollateral":0.4481,"kindFlips":0.51,"FREQ_n":0.7712,"seen":0.075}
+  seen: {"nName":15,"nCtl":100,"ownExists":{"NAME":0.5333,"CTL":0.11},"refNonNull":{"NAME":0.5333,"CTL":0.11},"auc_REAL_cv":0.6563,"auc_FREQPOS_cv":0.6773,"auc_REALFREQPOS_cv":0.6867,"auc_ownExists_raw":0.7117}
+  unseen: {"nName":85,"nCtl":0,"ownExists":{"NAME":0.6706,"CTL":null},"refNonNull":{"NAME":0.4941,"CTL":null}}
+== wp  company n=200 seen N/C 0.15/1 refNonNull N/C 0.18/0.05
+  single AUC {"ownExists":0.62,"ownMentions":0.62,"refAbs":0.4848,"refBornLost":0.5,"relLost":0.5406,"relBorn":0.5083,"relCollateral":0.5083,"kindFlips":0.51,"FREQ_n":0.7712,"seen":0.075}
+  seen: {"nName":15,"nCtl":100,"ownExists":{"NAME":0.1333,"CTL":0},"refNonNull":{"NAME":0.2,"CTL":0.05},"auc_REAL_cv":0.364,"auc_FREQPOS_cv":0.6773,"auc_REALFREQPOS_cv":0.6033,"auc_ownExists_raw":0.5667}
+  unseen: {"nName":85,"nCtl":0,"ownExists":{"NAME":0.2588,"CTL":null},"refNonNull":{"NAME":0.1765,"CTL":null}}
+== wp  null n=200 seen N/C 0.15/1 refNonNull N/C 0/0
+  single AUC {"ownExists":0.5,"ownMentions":0.5,"refAbs":0.5,"refBornLost":0.5,"relLost":0.5238,"relBorn":0.51,"relCollateral":0.51,"kindFlips":0.51,"FREQ_n":0.7712,"seen":0.075}
+  seen: {"nName":15,"nCtl":100,"ownExists":{"NAME":0,"CTL":0},"refNonNull":{"NAME":0,"CTL":0},"auc_REAL_cv":0.18,"auc_FREQPOS_cv":0.6773,"auc_REALFREQPOS_cv":0.614,"auc_ownExists_raw":0.5}
+  unseen: {"nName":85,"nCtl":0,"ownExists":{"NAME":0,"CTL":null},"refNonNull":{"NAME":0,"CTL":null}}
+== wp  shuffle n=200 seen N/C 0.15/1 refNonNull N/C 0.62/0.37
+  single AUC {"ownExists":0.68,"ownMentions":0.6977,"refAbs":0.5071,"refBornLost":0.5198,"relLost":0.5397,"relBorn":0.5042,"relCollateral":0.5041,"kindFlips":0.495,"FREQ_n":0.7712,"seen":0.075}
+  seen: {"nName":15,"nCtl":100,"ownExists":{"NAME":0.5333,"CTL":0.31},"refNonNull":{"NAME":0.4,"CTL":0.37},"auc_REAL_cv":0.461,"auc_FREQPOS_cv":0.6773,"auc_REALFREQPOS_cv":0.6313,"auc_ownExists_raw":0.6117}
+  unseen: {"nName":85,"nCtl":0,"ownExists":{"NAME":0.6941,"CTL":null},"refNonNull":{"NAME":0.6588,"CTL":null}}
+== irc  real n=120 seen N/C 0.0333/1 refNonNull N/C 0.8833/0.5167
+  single AUC {"ownExists":0.8583,"ownMentions":0.8619,"refAbs":0.4064,"refBornLost":0.4756,"relLost":0.6639,"relBorn":0.4833,"relCollateral":0.4833,"kindFlips":0.4917,"FREQ_n":0.9115,"seen":0.0167}
+  seen: {"nName":2,"nCtl":60,"ownExists":{"NAME":1,"CTL":0.2},"refNonNull":{"NAME":1,"CTL":0.5167}}
+  unseen: {"nName":58,"nCtl":0,"ownExists":{"NAME":0.9138,"CTL":null},"refNonNull":{"NAME":0.8793,"CTL":null}}
+== irc  deranged n=120 seen N/C 0.0333/1 refNonNull N/C 0.9333/0.2667
+  single AUC {"ownExists":0.9083,"ownMentions":0.8949,"refAbs":0.4363,"refBornLost":0.4917,"relLost":0.7049,"relBorn":0.5,"relCollateral":0.5,"kindFlips":0.4917,"FREQ_n":0.9115,"seen":0.0167}
+  seen: {"nName":2,"nCtl":60,"ownExists":{"NAME":0,"CTL":0.1167},"refNonNull":{"NAME":0.5,"CTL":0.2667}}
+  unseen: {"nName":58,"nCtl":0,"ownExists":{"NAME":0.9655,"CTL":null},"refNonNull":{"NAME":0.9483,"CTL":null}}
+== irc  null n=120 seen N/C 0.0333/1 refNonNull N/C 0/0
+  single AUC {"ownExists":0.5,"ownMentions":0.5,"refAbs":0.5,"refBornLost":0.5,"relLost":0.7182,"relBorn":0.5083,"relCollateral":0.5083,"kindFlips":0.4917,"FREQ_n":0.9115,"seen":0.0167}
+  seen: {"nName":2,"nCtl":60,"ownExists":{"NAME":0,"CTL":0},"refNonNull":{"NAME":0,"CTL":0}}
+  unseen: {"nName":58,"nCtl":0,"ownExists":{"NAME":0,"CTL":null},"refNonNull":{"NAME":0,"CTL":null}}
+== wpA S real n=200 seen N/C 0.1/1 refNonNull N/C 0.51/0.56
+  single AUC {"ownExists":0.54,"ownMentions":0.6049,"refAbs":0.5145,"refBornLost":0.505,"relLost":0.4027,"relBorn":0.494,"relCollateral":0.501,"kindFlips":0.495,"FREQ_n":0.572,"seen":0.05}
+  seen: {"nName":10,"nCtl":100,"ownExists":{"NAME":0.6,"CTL":0.59},"refNonNull":{"NAME":0.6,"CTL":0.56},"auc_REAL_cv":0.1305,"auc_FREQPOS_cv":0.13,"auc_REALFREQPOS_cv":0.115,"auc_ownExists_raw":0.505}
+  unseen: {"nName":90,"nCtl":0,"ownExists":{"NAME":0.6778,"CTL":null},"refNonNull":{"NAME":0.5,"CTL":null}}
+== wpA S deranged n=200 seen N/C 0.1/1 refNonNull N/C 0.47/0.28
+  single AUC {"ownExists":0.62,"ownMentions":0.6556,"refAbs":0.5,"refBornLost":0.5,"relLost":0.3644,"relBorn":0.4289,"relCollateral":0.4319,"kindFlips":0.495,"FREQ_n":0.572,"seen":0.05}
+  seen: {"nName":10,"nCtl":100,"ownExists":{"NAME":0.6,"CTL":0.31},"refNonNull":{"NAME":0.6,"CTL":0.28},"auc_REAL_cv":0.5415,"auc_FREQPOS_cv":0.13,"auc_REALFREQPOS_cv":0.431,"auc_ownExists_raw":0.645}
+  unseen: {"nName":90,"nCtl":0,"ownExists":{"NAME":0.5444,"CTL":null},"refNonNull":{"NAME":0.4556,"CTL":null}}
+== wpA S company n=200 seen N/C 0.1/1 refNonNull N/C 0.1/0.03
+  single AUC {"ownExists":0.565,"ownMentions":0.5656,"refAbs":0.5,"refBornLost":0.5,"relLost":0.4027,"relBorn":0.494,"relCollateral":0.501,"kindFlips":0.495,"FREQ_n":0.572,"seen":0.05}
+  seen: {"nName":10,"nCtl":100,"ownExists":{"NAME":0.2,"CTL":0.01},"refNonNull":{"NAME":0,"CTL":0.03},"auc_REAL_cv":0.395,"auc_FREQPOS_cv":0.13,"auc_REALFREQPOS_cv":0.365,"auc_ownExists_raw":0.595}
+  unseen: {"nName":90,"nCtl":0,"ownExists":{"NAME":0.1333,"CTL":null},"refNonNull":{"NAME":0.1111,"CTL":null}}
+== wpA S null n=200 seen N/C 0.1/1 refNonNull N/C 0/0
+  single AUC {"ownExists":0.5,"ownMentions":0.5,"refAbs":0.5,"refBornLost":0.5,"relLost":0.3768,"relBorn":0.49,"relCollateral":0.49,"kindFlips":0.495,"FREQ_n":0.572,"seen":0.05}
+  seen: {"nName":10,"nCtl":100,"ownExists":{"NAME":0,"CTL":0},"refNonNull":{"NAME":0,"CTL":0},"auc_REAL_cv":0.3575,"auc_FREQPOS_cv":0.13,"auc_REALFREQPOS_cv":0.258,"auc_ownExists_raw":0.5}
+  unseen: {"nName":90,"nCtl":0,"ownExists":{"NAME":0,"CTL":null},"refNonNull":{"NAME":0,"CTL":null}}
+== wpA U real n=200 seen N/C 0.1/0 refNonNull N/C 0.51/0.39
+  single AUC {"ownExists":0.63,"ownMentions":0.6812,"refAbs":0.5147,"refBornLost":0.51,"relLost":0.446,"relBorn":0.5431,"relCollateral":0.5472,"kindFlips":0.505,"FREQ_n":0.6201,"seen":0.55}
+  seen: {"nName":10,"nCtl":0,"ownExists":{"NAME":0.6,"CTL":null},"refNonNull":{"NAME":0.6,"CTL":null}}
+  unseen: {"nName":90,"nCtl":100,"ownExists":{"NAME":0.6778,"CTL":0.41},"refNonNull":{"NAME":0.5,"CTL":0.39},"auc_REAL_cv":0.6484,"auc_FREQPOS_cv":0.6274,"auc_REALFREQPOS_cv":0.6812,"auc_ownExists_raw":0.6339}
+== wpA U deranged n=200 seen N/C 0.1/0 refNonNull N/C 0.47/0.29
+  single AUC {"ownExists":0.61,"ownMentions":0.6427,"refAbs":0.4899,"refBornLost":0.505,"relLost":0.448,"relBorn":0.4979,"relCollateral":0.5022,"kindFlips":0.505,"FREQ_n":0.6201,"seen":0.55}
+  seen: {"nName":10,"nCtl":0,"ownExists":{"NAME":0.6,"CTL":null},"refNonNull":{"NAME":0.6,"CTL":null}}
+  unseen: {"nName":90,"nCtl":100,"ownExists":{"NAME":0.5444,"CTL":0.33},"refNonNull":{"NAME":0.4556,"CTL":0.29},"auc_REAL_cv":0.5948,"auc_FREQPOS_cv":0.6274,"auc_REALFREQPOS_cv":0.6494,"auc_ownExists_raw":0.6072}
+== wpA U company n=200 seen N/C 0.1/0 refNonNull N/C 0.1/0.08
+  single AUC {"ownExists":0.53,"ownMentions":0.5293,"refAbs":0.5049,"refBornLost":0.5,"relLost":0.446,"relBorn":0.5431,"relCollateral":0.5472,"kindFlips":0.505,"FREQ_n":0.6201,"seen":0.55}
+  seen: {"nName":10,"nCtl":0,"ownExists":{"NAME":0.2,"CTL":null},"refNonNull":{"NAME":0,"CTL":null}}
+  unseen: {"nName":90,"nCtl":100,"ownExists":{"NAME":0.1333,"CTL":0.08},"refNonNull":{"NAME":0.1111,"CTL":0.08},"auc_REAL_cv":0.5266,"auc_FREQPOS_cv":0.6274,"auc_REALFREQPOS_cv":0.6336,"auc_ownExists_raw":0.5267}
+== wpA U null n=200 seen N/C 0.1/0 refNonNull N/C 0/0
+  single AUC {"ownExists":0.5,"ownMentions":0.5,"refAbs":0.5,"refBornLost":0.5,"relLost":0.4464,"relBorn":0.515,"relCollateral":0.52,"kindFlips":0.505,"FREQ_n":0.6201,"seen":0.55}
+  seen: {"nName":10,"nCtl":0,"ownExists":{"NAME":0,"CTL":null},"refNonNull":{"NAME":0,"CTL":null}}
+  unseen: {"nName":90,"nCtl":100,"ownExists":{"NAME":0,"CTL":0},"refNonNull":{"NAME":0,"CTL":0},"auc_REAL_cv":0.5195,"auc_FREQPOS_cv":0.6274,"auc_REALFREQPOS_cv":0.6561,"auc_ownExists_raw":0.5}
+== ircA S real n=60 seen N/C 0.1/1 refNonNull N/C 0.7333/0.6667
+  single AUC {"ownExists":0.5667,"ownMentions":0.5256,"refAbs":0.4594,"refBornLost":0.4667,"relLost":0.4667,"relBorn":0.4833,"relCollateral":0.4833,"kindFlips":0.5167,"FREQ_n":0.5083,"seen":0.05}
+  seen: {"nName":3,"nCtl":30,"ownExists":{"NAME":0,"CTL":0.5667},"refNonNull":{"NAME":0.3333,"CTL":0.6667}}
+  unseen: {"nName":27,"nCtl":0,"ownExists":{"NAME":0.7778,"CTL":null},"refNonNull":{"NAME":0.7778,"CTL":null}}
+== ircA S deranged n=60 seen N/C 0.1/1 refNonNull N/C 0.7333/0.5667
+  single AUC {"ownExists":0.6,"ownMentions":0.5511,"refAbs":0.4844,"refBornLost":0.5167,"relLost":0.49,"relBorn":0.4667,"relCollateral":0.4667,"kindFlips":0.5167,"FREQ_n":0.5083,"seen":0.05}
+  seen: {"nName":3,"nCtl":30,"ownExists":{"NAME":0,"CTL":0.5},"refNonNull":{"NAME":0,"CTL":0.5667}}
+  unseen: {"nName":27,"nCtl":0,"ownExists":{"NAME":0.7778,"CTL":null},"refNonNull":{"NAME":0.8148,"CTL":null}}
+== ircA S null n=60 seen N/C 0.1/1 refNonNull N/C 0/0
+  single AUC {"ownExists":0.5,"ownMentions":0.5,"refAbs":0.5,"refBornLost":0.5,"relLost":0.5,"relBorn":0.4833,"relCollateral":0.4833,"kindFlips":0.5167,"FREQ_n":0.5083,"seen":0.05}
+  seen: {"nName":3,"nCtl":30,"ownExists":{"NAME":0,"CTL":0},"refNonNull":{"NAME":0,"CTL":0}}
+  unseen: {"nName":27,"nCtl":0,"ownExists":{"NAME":0,"CTL":null},"refNonNull":{"NAME":0,"CTL":null}}
+== ircA U real n=60 seen N/C 0.1/0 refNonNull N/C 0.7333/0.5
+  single AUC {"ownExists":0.6167,"ownMentions":0.6483,"refAbs":0.5111,"refBornLost":0.5,"relLost":0.4583,"relBorn":0.45,"relCollateral":0.4667,"kindFlips":0.4994,"FREQ_n":0.5039,"seen":0.55}
+  seen: {"nName":3,"nCtl":0,"ownExists":{"NAME":0,"CTL":null},"refNonNull":{"NAME":0.3333,"CTL":null}}
+  unseen: {"nName":27,"nCtl":30,"ownExists":{"NAME":0.7778,"CTL":0.4667},"refNonNull":{"NAME":0.7778,"CTL":0.5},"auc_REAL_cv":0.6302,"auc_FREQPOS_cv":0.3704,"auc_REALFREQPOS_cv":0.5556,"auc_ownExists_raw":0.6556}
+== ircA U deranged n=60 seen N/C 0.1/0 refNonNull N/C 0.7333/0.6333
+  single AUC {"ownExists":0.55,"ownMentions":0.5839,"refAbs":0.4661,"refBornLost":0.4656,"relLost":0.5067,"relBorn":0.45,"relCollateral":0.4667,"kindFlips":0.4994,"FREQ_n":0.5039,"seen":0.55}
+  seen: {"nName":3,"nCtl":0,"ownExists":{"NAME":0,"CTL":null},"refNonNull":{"NAME":0,"CTL":null}}
+  unseen: {"nName":27,"nCtl":30,"ownExists":{"NAME":0.7778,"CTL":0.6},"refNonNull":{"NAME":0.8148,"CTL":0.6333},"auc_REAL_cv":0.4685,"auc_FREQPOS_cv":0.3704,"auc_REALFREQPOS_cv":0.4272,"auc_ownExists_raw":0.5889}
+== ircA U null n=60 seen N/C 0.1/0 refNonNull N/C 0/0
+  single AUC {"ownExists":0.5,"ownMentions":0.5,"refAbs":0.5,"refBornLost":0.5,"relLost":0.5167,"relBorn":0.4833,"relCollateral":0.5,"kindFlips":0.4994,"FREQ_n":0.5039,"seen":0.55}
+  seen: {"nName":3,"nCtl":0,"ownExists":{"NAME":0,"CTL":null},"refNonNull":{"NAME":0,"CTL":null}}
+  unseen: {"nName":27,"nCtl":30,"ownExists":{"NAME":0,"CTL":0},"refNonNull":{"NAME":0,"CTL":0},"auc_REAL_cv":0.3765,"auc_FREQPOS_cv":0.3704,"auc_REALFREQPOS_cv":0.3284,"auc_ownExists_raw":0.5}
+FINISHED

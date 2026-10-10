@@ -1,0 +1,7 @@
+D1 cap 25 {"donors":46,"n":36,"meanAuc":0.5824,"meanCtrl":0.5393,"contrast":{"mean":0.0427,"lo":0.0384,"hi":0.0472,"n":9},"nPass":8}
+D1 cap 50 {"donors":46,"n":36,"meanAuc":0.6044,"meanCtrl":0.5473,"contrast":{"mean":0.0586,"lo":0.0523,"hi":0.065,"n":9},"nPass":16}
+D1 cap 100 {"donors":46,"n":36,"meanAuc":0.6361,"meanCtrl":0.5584,"contrast":{"mean":0.0778,"lo":0.0688,"hi":0.0861,"n":9},"nPass":35}
+D1 cap 200 {"donors":45,"n":36,"meanAuc":0.6534,"meanCtrl":0.571,"contrast":{"mean":0.0823,"lo":0.0745,"hi":0.0901,"n":9},"nPass":35}
+D1 cap 400 {"donors":40,"n":29,"meanAuc":0.6674,"meanCtrl":0.5813,"contrast":{"mean":0.087,"lo":0.0776,"hi":0.0963,"n":9},"nPass":28}
+D2 0.0746 0.0516 0.023
+D3 IWR POSITIVE inf 6/6 r 0.8039 ceil 0.651 sis 0.6317 ctrl 0.5539 | NGm POSITIVE inf 3/3 r 0.8355 ceil 0.6744 sis 0.6584 ctrl 0.5804 | CWGm UNINFORMATIVE inf 1/3 r 0.3906 ceil 0.6016 sis 0.6093 ctrl 0.5705 | Hind POSITIVE inf 2/2 r 0.744 ceil 0.6638 sis 0.63 ctrl 0.5617 | SSl POSITIVE inf 3/4 r 0.645 ceil 0.6092 sis 0.5921 ctrl 0.5638 | WSl UNINFORMATIVE inf 0/3 r null ceil 0.5608 sis 0.5258 ctrl 0.5412 | ESl UNINFORMATIVE inf 0/2 r null ceil 0.5585 sis 0.5337 ctrl 0.5489 | Finnic UNINFORMATIVE inf 0/2 r null ceil 0.5385 sis 0.5222 ctrl 0.5377 | Baltic UNINFORMATIVE inf 0/2 r null ceil 0.5724 sis 0.5878 ctrl 0.5639 | Celtic POSITIVE inf 2/2 r 0.8609 ceil 0.6079 sis 0.5958 ctrl 0.5502 | Sinitic UNINFORMATIVE inf 1/2 r -0.1104 ceil 0.5335 sis 0.4892 ctrl 0.4988

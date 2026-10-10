@@ -1,0 +1,62 @@
+// pack.mjs — Muninn's binary record codec (24-byte fixed header + body).
+const HEADER = 24;
+const encoder = new TextEncoder();
+const decoder = new TextDecoder();
+
+export const KIND_CODE = Object.freeze({ act: 1, recipe: 2, material: 3, draw: 4 });
+const CODE_KIND = Object.freeze({ 1: "act", 2: "recipe", 3: "material", 4: "draw" });
+
+export function fnv1a32(str) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 0x01000193); }
+  return h >>> 0;
+}
+
+export function fnv1a64(str) {
+  let h = 0xcbf29ce484222325n;
+  for (let i = 0; i < str.length; i++) { h ^= BigInt(str.charCodeAt(i)); h = (h * 0x100000001b3n) & 0xffffffffffffffffn; }
+  return h;
+}
+
+export function packRecord(record) {
+  const body = encoder.encode(JSON.stringify(record));
+  const buf = new Uint8Array(HEADER + body.length);
+  const dv = new DataView(buf.buffer);
+  dv.setUint8(0, KIND_CODE[record.kind] ?? 0);
+  dv.setUint8(1, 0);
+  const ts = Number(record.ts ?? Date.now());
+  dv.setUint16(2, Math.floor(ts / 2 ** 32));
+  dv.setUint32(4, ts >>> 0);
+  dv.setBigUint64(8, fnv1a64(String(record.id ?? "")));
+  dv.setUint32(16, fnv1a32(String(record.actor ?? "")));
+  dv.setUint32(20, body.length);
+  buf.set(body, HEADER);
+  return buf;
+}
+
+export function unpackRecord(bytes) {
+  const u8 = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
+  const dv = new DataView(u8.buffer, u8.byteOffset, u8.byteLength);
+  const len = dv.getUint32(20);
+  const body = decoder.decode(u8.subarray(HEADER, HEADER + len));
+  return JSON.parse(body);
+}
+
+export function packBatch(records) {
+  return records.map(packRecord);
+}
+
+export function* unpackBatch(bytes) {
+  let off = 0;
+  while (off < bytes.length) {
+    if (off + HEADER > bytes.length) throw new Error("truncated record header");
+    const len = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength).getUint32(off + 20);
+    const end = off + HEADER + len;
+    if (end > bytes.length) throw new Error("truncated record body");
+    yield bytes.subarray(off, end);
+    off = end;
+  }
+}
+
+export const HEADER_SIZE = HEADER;
+export { CODE_KIND };

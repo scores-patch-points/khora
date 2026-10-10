@@ -1,0 +1,28 @@
+{
+ "verdict": {
+  "FRAGILITY_SUPPORTED": false,
+  "COUNT_INDEPENDENT_kinds": [],
+  "NO_SCOPE": false,
+  "activeCells": [
+   "irc.A:c4_6",
+   "irc.A:c7_15",
+   "irc.B:c4_6",
+   "irc.B:c16p"
+  ],
+  "runValid": true
+ },
+ "rules": [
+  "irc.B:c16p..c16p",
+  "irc.A:c4_6..c7_15"
+ ],
+ "predictions": {
+  "P1_fragility_gradient": false,
+  "P2_floor": false,
+  "P3_matching_collapses_irc": true,
+  "P4_wp": false,
+  "P5_record_beats_scalar": true,
+  "P6_extent": false,
+  "P7_decay": false
+ },
+ "headerSha256": "339480a6bc5e603a6f1a421a013dbfee6bf3ec2a5ca161a42d199a0e7e2e393d"
+}

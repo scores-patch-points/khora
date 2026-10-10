@@ -1,0 +1,646 @@
+{
+ "registered": {
+  "verdict": "PARTIAL: holds(code) fails(irc,book,ud) P1=false",
+  "P": {
+   "P1": {
+    "rho": 0.2623,
+    "p": 0.0445,
+    "n": 40,
+    "pass": false,
+    "byFamily": {
+     "irc": 0,
+     "code": 3,
+     "book": 4,
+     "ud": 33
+    }
+   },
+   "P2": {
+    "valid": 0,
+    "cells": [],
+    "pass": false
+   },
+   "P3": {
+    "valid": 3,
+    "cells": [
+     [
+      "code-js",
+      0.6754,
+      0.6292
+     ],
+     [
+      "code-py",
+      0.6175,
+      0.5726
+     ],
+     [
+      "code-rb",
+      0.6149,
+      0.5654
+     ]
+    ],
+    "pass": true
+   },
+   "P4": {
+    "valid": 4,
+    "cells": [
+     [
+      "book-anne-of-green-gables",
+      0.4055
+     ],
+     [
+      "book-crime-and-punishment",
+      0.5078
+     ],
+     [
+      "book-great-expectations",
+      0.4073
+     ],
+     [
+      "book-treasure-island",
+      0.4929
+     ]
+    ],
+    "nLow": 2,
+    "pass": false
+   },
+   "P5": {
+    "valid": 33,
+    "median": 0.4779,
+    "POS": 3,
+    "NEG": 8,
+    "FLAT": 22,
+    "pass": false
+   },
+   "P6": {
+    "irc": null,
+    "code": 0.1077,
+    "book": -0.0429,
+    "ud": -0.0301,
+    "pass": {
+     "irc": false,
+     "code": true,
+     "book": false
+    }
+   }
+  },
+  "controls": {
+   "sham-irc": {
+    "n": 3,
+    "medDev": 0.0067,
+    "ok": true
+   },
+   "sham-code": {
+    "n": 3,
+    "medDev": 0.0172,
+    "ok": true
+   },
+   "sham-book": {
+    "n": 6,
+    "medDev": 0.0142,
+    "ok": true
+   },
+   "sham-ud": {
+    "n": 58,
+    "medDev": 0.015,
+    "ok": true
+   },
+   "impl": {
+    "n": 40,
+    "shareWithin003": 0.975,
+    "ok": true
+   }
+  },
+  "rhoVariants": {
+   "noCode": {
+    "rho": 0.073,
+    "p": 0.3243,
+    "n": 37
+   },
+   "noIrc": {
+    "rho": 0.2623,
+    "p": 0.0545,
+    "n": 40
+   },
+   "noUd": {
+    "rho": 0.8571,
+    "p": 0.0125,
+    "n": 7
+   },
+   "udOnly": {
+    "rho": 0.0575,
+    "p": 0.3733,
+    "n": 33
+   },
+   "nonUd": {
+    "rho": 0.8571,
+    "p": 0.0125,
+    "n": 7
+   }
+  },
+  "signAccuracy": {
+   "n": 21,
+   "hit": 15,
+   "acc": 0.7143,
+   "pOneSidedBinom": 0.0392,
+   "byFamily": {
+    "irc": {
+     "n": 0,
+     "hit": 0
+    },
+    "code": {
+     "n": 3,
+     "hit": 3
+    },
+    "book": {
+     "n": 4,
+     "hit": 3
+    },
+    "ud": {
+     "n": 14,
+     "hit": 9
+    }
+   }
+  },
+  "validity": {
+   "irc": {
+    "total": 3,
+    "pairsGe60": 3,
+    "posOk": 3,
+    "valid": 0
+   },
+   "code": {
+    "total": 3,
+    "pairsGe60": 3,
+    "posOk": 3,
+    "valid": 3
+   },
+   "book": {
+    "total": 6,
+    "pairsGe60": 6,
+    "posOk": 6,
+    "valid": 4
+   },
+   "ud": {
+    "total": 59,
+    "pairsGe60": 52,
+    "posOk": 52,
+    "valid": 33
+   }
+  },
+  "positionOnlyValidity": {
+   "note": "position-only validity (scoper convention); NOT the registered verdict",
+   "P1": {
+    "rho": 0.2449,
+    "p": 0.0235,
+    "n": 64
+   },
+   "irc": {
+    "valid": 3,
+    "cells": [
+     [
+      "irc-kubuntu",
+      0.6621,
+      0.5866,
+      0.4478
+     ],
+     [
+      "irc-ubuntu-server",
+      0.6006,
+      0.5255,
+      0.3774
+     ],
+     [
+      "irc-xubuntu",
+      0.6333,
+      0.5468,
+      0.43
+     ]
+    ],
+    "delta": 0.1985
+   },
+   "code": {
+    "valid": 3,
+    "delta": 0.1077
+   },
+   "book": {
+    "valid": 6,
+    "nLow": 3,
+    "delta": -0.0429
+   },
+   "ud": {
+    "valid": 52,
+    "median": 0.4658,
+    "POS": 3,
+    "NEG": 17,
+    "delta": -0.0458
+   }
+  }
+ },
+ "postHocCountCaliper": {
+  "P": {
+   "P1": {
+    "rho": 0.1114,
+    "p": 0.1929,
+    "n": 63,
+    "pass": false,
+    "byFamily": {
+     "irc": 3,
+     "code": 2,
+     "book": 6,
+     "ud": 52
+    }
+   },
+   "P2": {
+    "valid": 3,
+    "cells": [
+     [
+      "irc-kubuntu",
+      0.6395,
+      0.5552
+     ],
+     [
+      "irc-ubuntu-server",
+      0.6339,
+      0.555
+     ],
+     [
+      "irc-xubuntu",
+      0.5736,
+      0.5
+     ]
+    ],
+    "pass": false
+   },
+   "P3": {
+    "valid": 2,
+    "cells": [
+     [
+      "code-py",
+      0.589,
+      0.5412
+     ],
+     [
+      "code-rb",
+      0.5797,
+      0.5247
+     ]
+    ],
+    "pass": false
+   },
+   "P4": {
+    "valid": 6,
+    "cells": [
+     [
+      "book-anne-of-green-gables",
+      0.4483
+     ],
+     [
+      "book-crime-and-punishment",
+      0.4984
+     ],
+     [
+      "book-great-expectations",
+      0.4822
+     ],
+     [
+      "book-the-war-of-the-worlds",
+      0.4633
+     ],
+     [
+      "book-treasure-island",
+      0.5074
+     ],
+     [
+      "book-wuthering-heights",
+      0.5633
+     ]
+    ],
+    "nLow": 2,
+    "pass": false
+   },
+   "P5": {
+    "valid": 52,
+    "median": 0.455,
+    "POS": 1,
+    "NEG": 17,
+    "FLAT": 34,
+    "pass": true
+   },
+   "P6": {
+    "irc": 0.1493,
+    "code": 0.0564,
+    "book": 0.0433,
+    "ud": -0.0529,
+    "pass": {
+     "irc": true,
+     "code": true,
+     "book": false
+    }
+   }
+  },
+  "rhoVariants": {
+   "noCode": {
+    "rho": 0.0241,
+    "p": 0.4298,
+    "n": 61
+   },
+   "noIrc": {
+    "rho": -0.0076,
+    "p": 0.5372,
+    "n": 60
+   },
+   "noUd": {
+    "rho": 0.6909,
+    "p": 0.0175,
+    "n": 11
+   },
+   "udOnly": {
+    "rho": -0.0453,
+    "p": 0.6167,
+    "n": 52
+   },
+   "nonUd": {
+    "rho": 0.6909,
+    "p": 0.0175,
+    "n": 11
+   }
+  },
+  "validity": {
+   "irc": {
+    "total": 3,
+    "pairsGe60": 3,
+    "posOk": 3,
+    "valid": 3
+   },
+   "code": {
+    "total": 3,
+    "pairsGe60": 3,
+    "posOk": 3,
+    "valid": 2
+   },
+   "book": {
+    "total": 6,
+    "pairsGe60": 6,
+    "posOk": 6,
+    "valid": 6
+   },
+   "ud": {
+    "total": 57,
+    "pairsGe60": 52,
+    "posOk": 52,
+    "valid": 52
+   }
+  }
+ },
+ "shamEnsemble": {
+  "code": {
+   "n": 3,
+   "calibrated": 2,
+   "calibratedAbove": 2,
+   "calibratedBelow": 0,
+   "medShamSd": 0.0231,
+   "medShamMean": 0.4963,
+   "expectedFalse": 0.15
+  },
+  "irc": {
+   "n": 3,
+   "calibrated": 3,
+   "calibratedAbove": 3,
+   "calibratedBelow": 0,
+   "medShamSd": 0.0165,
+   "medShamMean": 0.5015,
+   "expectedFalse": 0.15
+  },
+  "book": {
+   "n": 6,
+   "calibrated": 4,
+   "calibratedAbove": 1,
+   "calibratedBelow": 3,
+   "medShamSd": 0.0197,
+   "medShamMean": 0.5007,
+   "expectedFalse": 0.3
+  },
+  "ud": {
+   "n": 52,
+   "calibrated": 27,
+   "calibratedAbove": 4,
+   "calibratedBelow": 23,
+   "medShamSd": 0.0198,
+   "medShamMean": 0.4984,
+   "expectedFalse": 2.6
+  }
+ },
+ "shamNonUd": {
+  "book-the-war-of-the-worlds": {
+   "fam": "book",
+   "real": 0.3791,
+   "shamMean": 0.5007,
+   "shamSd": 0.018,
+   "shamMin": 0.4642,
+   "shamMax": 0.5283,
+   "pEmp": 0.04,
+   "z": -6.7556,
+   "calibrated": true,
+   "posCtl": true,
+   "freqCtl": false,
+   "pairs": 153
+  },
+  "book-great-expectations": {
+   "fam": "book",
+   "real": 0.4073,
+   "shamMean": 0.5017,
+   "shamSd": 0.0266,
+   "shamMin": 0.4283,
+   "shamMax": 0.5492,
+   "pEmp": 0.04,
+   "z": -3.5489,
+   "calibrated": true,
+   "posCtl": true,
+   "freqCtl": true,
+   "pairs": 313
+  },
+  "book-treasure-island": {
+   "fam": "book",
+   "real": 0.4929,
+   "shamMean": 0.4958,
+   "shamSd": 0.0197,
+   "shamMin": 0.4542,
+   "shamMax": 0.5275,
+   "pEmp": 0.76,
+   "z": -0.1472,
+   "calibrated": false,
+   "posCtl": true,
+   "freqCtl": true,
+   "pairs": 141
+  },
+  "book-anne-of-green-gables": {
+   "fam": "book",
+   "real": 0.4055,
+   "shamMean": 0.5,
+   "shamSd": 0.0267,
+   "shamMin": 0.4492,
+   "shamMax": 0.5458,
+   "pEmp": 0.04,
+   "z": -3.5393,
+   "calibrated": true,
+   "posCtl": true,
+   "freqCtl": true,
+   "pairs": 328
+  },
+  "book-wuthering-heights": {
+   "fam": "book",
+   "real": 0.5525,
+   "shamMean": 0.5012,
+   "shamSd": 0.0227,
+   "shamMin": 0.4525,
+   "shamMax": 0.5392,
+   "pEmp": 0.04,
+   "z": 2.2599,
+   "calibrated": true,
+   "posCtl": true,
+   "freqCtl": false,
+   "pairs": 162
+  },
+  "book-crime-and-punishment": {
+   "fam": "book",
+   "real": 0.5078,
+   "shamMean": 0.5019,
+   "shamSd": 0.0187,
+   "shamMin": 0.4717,
+   "shamMax": 0.5433,
+   "pEmp": 0.52,
+   "z": 0.3155,
+   "calibrated": false,
+   "posCtl": true,
+   "freqCtl": true,
+   "pairs": 320
+  },
+  "code-js": {
+   "fam": "code",
+   "real": 0.6754,
+   "shamMean": 0.4963,
+   "shamSd": 0.0215,
+   "shamMin": 0.4461,
+   "shamMax": 0.529,
+   "pEmp": 0.04,
+   "z": 8.3302,
+   "calibrated": true,
+   "posCtl": true,
+   "freqCtl": true,
+   "pairs": 479
+  },
+  "code-py": {
+   "fam": "code",
+   "real": 0.6175,
+   "shamMean": 0.4887,
+   "shamSd": 0.0959,
+   "shamMin": 0.3777,
+   "shamMax": 0.5954,
+   "pEmp": 0.12,
+   "z": 1.3431,
+   "calibrated": false,
+   "posCtl": true,
+   "freqCtl": true,
+   "pairs": 600
+  },
+  "code-rb": {
+   "fam": "code",
+   "real": 0.6149,
+   "shamMean": 0.5103,
+   "shamSd": 0.0231,
+   "shamMin": 0.4538,
+   "shamMax": 0.5458,
+   "pEmp": 0.04,
+   "z": 4.5281,
+   "calibrated": true,
+   "posCtl": true,
+   "freqCtl": true,
+   "pairs": 483
+  },
+  "irc-kubuntu": {
+   "fam": "irc",
+   "real": 0.6621,
+   "shamMean": 0.5003,
+   "shamSd": 0.0165,
+   "shamMin": 0.4733,
+   "shamMax": 0.5267,
+   "pEmp": 0.04,
+   "z": 9.8061,
+   "calibrated": true,
+   "posCtl": true,
+   "freqCtl": false,
+   "pairs": 182
+  },
+  "irc-ubuntu-server": {
+   "fam": "irc",
+   "real": 0.6006,
+   "shamMean": 0.5015,
+   "shamSd": 0.0176,
+   "shamMin": 0.4667,
+   "shamMax": 0.5375,
+   "pEmp": 0.04,
+   "z": 5.6307,
+   "calibrated": true,
+   "posCtl": true,
+   "freqCtl": false,
+   "pairs": 159
+  },
+  "irc-xubuntu": {
+   "fam": "irc",
+   "real": 0.6333,
+   "shamMean": 0.5034,
+   "shamSd": 0.0152,
+   "shamMin": 0.4683,
+   "shamMax": 0.525,
+   "pEmp": 0.04,
+   "z": 8.5461,
+   "calibrated": true,
+   "posCtl": true,
+   "freqCtl": false,
+   "pairs": 150
+  }
+ },
+ "familyMedians": {
+  "irc": {
+   "registeredAll": 0.6333,
+   "registeredValid": null,
+   "countCaliperAll": 0.6339,
+   "n": 3,
+   "rareL_edgeMedian": 0.1051
+  },
+  "code": {
+   "registeredAll": 0.6175,
+   "registeredValid": 0.6175,
+   "countCaliperAll": 0.589,
+   "n": 3,
+   "rareL_edgeMedian": 0.1409
+  },
+  "book": {
+   "registeredAll": 0.4073,
+   "registeredValid": 0.4073,
+   "countCaliperAll": 0.4822,
+   "n": 6,
+   "rareL_edgeMedian": 0.0335
+  },
+  "ud": {
+   "registeredAll": 0.4684,
+   "registeredValid": 0.4779,
+   "countCaliperAll": 0.4608,
+   "n": 57,
+   "rareL_edgeMedian": 0.0552
+  }
+ },
+ "ircPooled37PostHoc": {
+  "pairs": 408,
+  "auc": 0.6397,
+  "lo": 0.5932,
+  "hi": 0.6825,
+  "ctrl": {
+   "pos": 0.5,
+   "logn": 0.4975,
+   "len": 0.5956,
+   "slen": 0.538
+  }
+ },
+ "ircPooled37Registered": null
+}

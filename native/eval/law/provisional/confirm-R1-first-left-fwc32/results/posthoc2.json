@@ -1,0 +1,366 @@
+{
+ "headerSha256": "47f70b644829a70917335acbc5ff67d851bd08f19c6cf4bb274202396a64b263",
+ "status": "POST-HOC",
+ "window2": {
+  "P2": {
+   "n": 21,
+   "a": {
+    "rho": 0.486,
+    "p": 0.0134,
+    "ci95": [
+     0.089,
+     0.768
+    ],
+    "pass": true
+   },
+   "b": {
+    "skill": 0.1516,
+    "rmseModel": 0.0527,
+    "rmseBaseline": 0.0621,
+    "meanShift": -0.0085,
+    "pass": true
+   },
+   "c": {
+    "inN": 10,
+    "inShareAudible": 1,
+    "outN": 5,
+    "outShareAudible": 0.6,
+    "pass": false
+   },
+   "d": {
+    "nIn": 14,
+    "nOut": 7,
+    "inMean": 0.6365,
+    "outMean": 0.5715,
+    "diff": 0.065,
+    "pass": true
+   },
+   "e": {
+    "n": 11,
+    "shareAudible": 0.7273,
+    "pass": true,
+    "falsified": false
+   },
+   "f": {
+    "inMean": 0.6175,
+    "share50": 1,
+    "diff": 0.0858,
+    "pass": true
+   },
+   "gates": {
+    "A": true,
+    "B": true,
+    "C": false,
+    "D": true,
+    "E": true,
+    "F": true
+   },
+   "zones": [
+    "0-0.2 n2 aud0.5 m0.602",
+    "0.2-0.24 n5 aud0.4 m0.559",
+    "0.24-0.28 n3 aud0.667 m0.602",
+    "0.28-+ n11 aud0.727 m0.646"
+   ]
+  },
+  "S2set": {
+   "n": 20,
+   "a": {
+    "rho": 0.579,
+    "p": 0.0048,
+    "ci95": [
+     0.162,
+     0.829
+    ],
+    "pass": true
+   },
+   "b": {
+    "skill": 0.1697,
+    "rmseModel": 0.0644,
+    "rmseBaseline": 0.0775,
+    "meanShift": -0.0247,
+    "pass": true
+   },
+   "c": {
+    "inN": 11,
+    "inShareAudible": 0.7273,
+    "outN": 5,
+    "outShareAudible": 0,
+    "pass": true
+   },
+   "d": {
+    "nIn": 13,
+    "nOut": 7,
+    "inMean": 0.6393,
+    "outMean": 0.5279,
+    "diff": 0.1115,
+    "pass": true
+   },
+   "e": {
+    "n": 12,
+    "shareAudible": 0.6667,
+    "pass": false,
+    "falsified": false
+   },
+   "f": {
+    "inMean": 0.5925,
+    "share50": 0.9231,
+    "diff": 0.0548,
+    "pass": true
+   },
+   "gates": {
+    "A": true,
+    "B": true,
+    "C": true,
+    "D": true,
+    "E": false,
+    "F": true
+   },
+   "zones": [
+    "0-0.2 n3 aud0 m0.519",
+    "0.2-0.24 n4 aud0 m0.534",
+    "0.24-0.28 n1 aud1 m0.647",
+    "0.28-+ n12 aud0.667 m0.639"
+   ]
+  },
+  "pooled": {
+   "n": 41,
+   "a": {
+    "rho": 0.529,
+    "p": 0.0002,
+    "ci95": [
+     0.231,
+     0.727
+    ],
+    "pass": true
+   },
+   "b": {
+    "skill": 0.1624,
+    "rmseModel": 0.0587,
+    "rmseBaseline": 0.07,
+    "meanShift": -0.0164,
+    "pass": true
+   },
+   "c": {
+    "inN": 21,
+    "inShareAudible": 0.8571,
+    "outN": 10,
+    "outShareAudible": 0.3,
+    "pass": true
+   },
+   "d": {
+    "nIn": 27,
+    "nOut": 14,
+    "inMean": 0.6379,
+    "outMean": 0.5497,
+    "diff": 0.0882,
+    "pass": true
+   },
+   "e": {
+    "n": 23,
+    "shareAudible": 0.6957,
+    "pass": false,
+    "falsified": false
+   },
+   "f": {
+    "inMean": 0.6054,
+    "share50": 0.963,
+    "diff": 0.0708,
+    "pass": true
+   },
+   "gates": {
+    "A": true,
+    "B": true,
+    "C": true,
+    "D": true,
+    "E": false,
+    "F": true
+   },
+   "zones": [
+    "0-0.2 n5 aud0.2 m0.552",
+    "0.2-0.24 n9 aud0.222 m0.548",
+    "0.24-0.28 n4 aud0.75 m0.614",
+    "0.28-+ n23 aud0.696 m0.642"
+   ]
+  }
+ },
+ "averaged": {
+  "pooled": {
+   "n": 41,
+   "a": {
+    "rho": 0.702,
+    "p": 0.0002,
+    "ci95": [
+     0.451,
+     0.844
+    ],
+    "pass": true
+   },
+   "b": {
+    "skill": 0.2578,
+    "rmseModel": 0.0486,
+    "rmseBaseline": 0.0655,
+    "meanShift": -0.0181,
+    "pass": true
+   },
+   "c": {
+    "inN": 25,
+    "inShareAudible": 0.84,
+    "outN": 11,
+    "outShareAudible": 0.0909,
+    "pass": true
+   },
+   "d": {
+    "nIn": 28,
+    "nOut": 13,
+    "inMean": 0.6362,
+    "outMean": 0.5406,
+    "diff": 0.0956,
+    "pass": true
+   },
+   "e": {
+    "n": 23,
+    "shareAudible": 0.8261,
+    "pass": true,
+    "falsified": false
+   },
+   "f": {
+    "inMean": 0.6017,
+    "share50": 0.9643,
+    "diff": 0.0509,
+    "pass": true
+   },
+   "gates": {
+    "A": true,
+    "B": true,
+    "C": true,
+    "D": true,
+    "E": true,
+    "F": true
+   },
+   "zones": [
+    "0-0.2 n6 aud0 m0.53",
+    "0.2-0.24 n7 aud0.143 m0.55",
+    "0.24-0.28 n5 aud0.8 m0.602",
+    "0.28-+ n23 aud0.826 m0.644"
+   ]
+  },
+  "P": {
+   "n": 21,
+   "a": {
+    "rho": 0.697,
+    "p": 0.0002,
+    "ci95": [
+     0.421,
+     0.847
+    ],
+    "pass": true
+   },
+   "b": {
+    "skill": 0.2313,
+    "rmseModel": 0.0456,
+    "rmseBaseline": 0.0593,
+    "meanShift": -0.0128,
+    "pass": true
+   },
+   "c": {
+    "inN": 13,
+    "inShareAudible": 0.8462,
+    "outN": 5,
+    "outShareAudible": 0.2,
+    "pass": true
+   },
+   "d": {
+    "nIn": 15,
+    "nOut": 6,
+    "inMean": 0.6335,
+    "outMean": 0.5521,
+    "diff": 0.0814,
+    "pass": true
+   },
+   "e": {
+    "n": 11,
+    "shareAudible": 0.8182,
+    "pass": true,
+    "falsified": false
+   },
+   "f": {
+    "inMean": 0.609,
+    "share50": 0.9333,
+    "diff": 0.0622,
+    "pass": true
+   },
+   "gates": {
+    "A": true,
+    "B": true,
+    "C": true,
+    "D": true,
+    "E": true,
+    "F": true
+   },
+   "zones": [
+    "0-0.2 n3 aud0 m0.566",
+    "0.2-0.24 n3 aud0.333 m0.538",
+    "0.24-0.28 n4 aud0.75 m0.602",
+    "0.28-+ n11 aud0.818 m0.645"
+   ]
+  }
+ },
+ "nonIE": {
+  "window2": {
+   "n": 14,
+   "rho": 0.442,
+   "p": 0.057,
+   "ci95": [
+    -0.022,
+    0.796
+   ],
+   "meanAuc": 0.5603,
+   "audible": 3
+  },
+  "averaged": {
+   "n": 14,
+   "rho": 0.745,
+   "p": 0.0026,
+   "ci95": [
+    0.427,
+    0.893
+   ],
+   "meanAuc": 0.5552,
+   "audible": 3
+  },
+  "window2IE": {
+   "n": 27,
+   "rho": 0.476,
+   "p": 0.0068,
+   "ci95": [
+    0.087,
+    0.757
+   ],
+   "meanAuc": 0.6324,
+   "audible": 19
+  },
+  "averagedIE": {
+   "n": 27,
+   "rho": 0.576,
+   "p": 0.002,
+   "ci95": [
+    0.228,
+    0.814
+   ],
+   "meanAuc": 0.6322,
+   "audible": 21
+  }
+ },
+ "nonIEavgList": "cmn:0.226/0.566 est:0.17/0.571 eus:0.209/0.534 fin:0.157/0.492 heb:0.393/0.632 ind:0.251/0.605 jpn:0.428/0.591 kat:0.195/0.548 kor:0.068/0.499 lzh:0.287/0.567 mlt:0.302/0.611 tam:0.225/0.473 tur:0.164/0.49 wol:0.402/0.594",
+ "slavicAveraged": {
+  "n": 8,
+  "rho": 0.905,
+  "p": 0.0022,
+  "ci95": [
+   0.538,
+   1
+  ],
+  "meanAuc": 0.594,
+  "audible": 4
+ }
+}

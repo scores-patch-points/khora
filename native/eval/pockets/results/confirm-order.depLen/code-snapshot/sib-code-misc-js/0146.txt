@@ -1,0 +1,16 @@
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import { openStore, putRecord, putCache, putPending, allRecords, allCache, pendingBodies, countOf } from "./store.mjs";
+
+const db = openStore(":memory:");
+
+test("the store holds opaque ciphertext rows plus structural columns", () => {
+  putRecord(db, { id: "a1", kind: "act", ts: 1, material: null, recipe: null, ref: null }, new Uint8Array([1, 2, 3]));
+  putCache(db, { material: "m", recipe: "r", ts: 1 }, new Uint8Array([4, 5]));
+  putPending(db, new Uint8Array([1, 2, 3]));
+  assert.deepEqual(countOf(db), { records: 1, cache: 1, pending: 1 });
+  assert.equal(allRecords(db)[0].id, "a1");
+  assert.deepEqual([...allRecords(db)[0].body], [1, 2, 3]);
+  assert.equal(allCache(db).length, 1);
+  assert.equal(pendingBodies(db).length, 1);
+});

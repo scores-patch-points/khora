@@ -1,0 +1,122 @@
+// results/confirm-comp.rigidR/confirm.mjs — SIBLING REPLICATION of the atlas law comp.rigidR ("rigid-right share": a larger share of types have ONE fixed commonest right-hand neighbour than a within-unit shuffle gives).
+// ===== PRE-REGISTRATION HEADER (written 2026-10-07 before ANY comp-family statistic was computed on ANY sibling pocket; the sha256 of every byte of this file from the first byte through the line '// ===== END OF PRE-REGISTRATION HEADER =====' inclusive is in prereg.sha256) =====
+//
+// DISCLOSURE (what I have seen before writing this header)
+//  SEEN: PROTOCOL.md (sha256 3b7363c5...), lib/pocket.mjs, run-atlas.mjs, laws/comp.mjs, laws/_comp_core.mjs, laws/_comp_prep.mjs, laws/_comp_neigh.mjs (the statistic's definition and code; I did NOT read _comp_pairs.mjs, which rigidR does
+//    not use), results/law-table.json (the comp.rigidR entry: N 391, nPos 387, nNeg 0, nAbs 1, nAmb 3, median min-half |z| 156.6, g1 rho(tokens) 0.352, rho(unit length) -0.349, sizeConfounded false, g0 validated by pl-frames,
+//    eta2 register 0.605 / group 0.435 / script 0.026, most similar statistic comp.sameR rho 0.927), and results/atlas/*.json: the comp.rigidR cell (v, nullMean, z in BOTH halves) of EVERY atlas pocket, including the 28 planted and
+//    control pockets. From it I printed: the four atlas pockets that are not PRESENT+ (cd-protein-aa z -0.2/+5.2, cd-smiles-pubchem z -2.4/-1.9, ml-grc-comedy z +12.0/+1.4, ml-grc-lyric z +1.6/+0.4), the per-register ranges of v
+//    (the table behind the numeric ranges below), the listings of code, chat, treebank, legal, poetry, drama, sequence, notation and diagram pockets, and the planted and control cells; also the meta of the atlas fm / ml / cd pockets (cap counts, sources, tokenisation) to find capped sources
+//    with a remainder. I read comp.rigidL ONLY as an unprinted variable.
+//    I also read the first 60 lines of results/confirm-comp.asym/confirm.mjs (another law's pre-registration, as a template and for its inventory of unused material) and the other agents' sibling LOADERS (_sibling-common, _sibling-ent-common,
+//    _sibling-asym-prose/-ud/-chat/-code, _sibling-bpmn) for their source lists and cleaning rules, which are COPIED (not imported) into my own loaders. I did NOT open results/confirm-comp.asym/pockets/*.json, confirm-result.json
+//    or posthoc.json: those may contain comp-family values (rigidR included) for the same DOCUMENTS under other pocket ids. No results/confirm-comp.rigidL exists at the time of writing, so the 'same NEW pockets as comp.rigidL' of the sibling plan
+//    could not be shared: I built my own set (below); a rigidL agent's set may differ, and the pair rigidL/rigidR is ONE confirmation (rigidL is reported here as a by-product only).
+//  NOT SEEN: any comp-family statistic (any half, any null draw) of any sibling pocket of this file. For siblings I looked only at descriptive facts: token / unit / document / vocabulary counts, mean unit length, and the held-out block
+//    counts. Cleaning rules, cuts and the stem list were fixed from reading raw files and trees, before and without any statistic.
+//  WHAT THE ATLAS SHAPED (disclosed because it changes the predictions): (1) the claim's register order (diagram > legal > code > markup > notation ... > poetry > drama) and the atlas ranges per register; (2) every English drama pocket of the
+//    atlas is PRESENT+ with the lowest v of any English register; (3) the only atlas cells that are not PRESENT+ are two small Greek stage/lyric pockets (23-31k tokens), the SMILES-pubchem pocket (shuffle null 0.45, higher than the text), and the
+//    amino-acid pocket (20-letter alphabet, v equals its null 0.010): the latter is therefore the KIND where the law is absent; the same genes as codon triplets (cd-codons) are PRESENT+ (z +25/+21) and are a sibling of the PRESENT kind.
+//  DEVIATIONS FROM THE SIBLING PLAN (stated, not hidden): (1) no pocket of the SMILES-pubchem kind can be built: the atlas pocket holds ALL 6000 pubchem records of the corpus (60 blocks of 100), nothing is left. (2) No unused poetry,
+//    scripture, treatise or non-English prose exists on this machine (earlier agents' inventory; poetry re-checked), so the low end of the register order is tested only by two English plays, and the markup and notation registers are not tested
+//    (the unused music-notation and markup material was not looked for). Legal, reference, encyclopedia and academic text exist only as HELD-OUT PIECES of capped atlas sources (neighbouring pieces of the same French codes, Factbook entries,
+//    Wikipedia articles, NASA reports). (3) The BPMN, IRC, fm-piece and amino-acid/codon siblings are HELD-OUT DOCUMENTS of the atlas's own sources (same exporters, channel-days, texts, 66 genomes), not new worlds: weaker independence, flagged
+//    per sibling. (4) Fourteen UD treebank TRAIN splits of languages without an atlas pocket are the only non-English siblings besides French law; five stems (hun, mar, tam, tel, uig) are under the 20,000-token floor and are never scored.
+//  KNOWN LIMITS OF THE ATLAS THE LAW COMES FROM: z uses 10 draws (sd with 9 degrees of freedom); the null mean of the soft rigid share moves 3-4x with vocabulary and unit shape (0.007 in codons, 0.45 in SMILES-pubchem), so v alone is not
+//    comparable across pockets and only z or v - nullMean carries the law; rigidR is a near-duplicate of rigidL (twin) and of sameR (rho 0.93), so 'two laws' would be one.
+//
+// HOW THE STATISTIC AND ITS NULL ARE COMPUTED (identical to run-atlas.mjs): per pocket, halves(p) by sha256(id:doc) parity; per half the 'comp' family compute(view) is called once on the real view and once on each of 10
+// nullView(view, 'within-unit', seed) draws with seed = seedOf(p.id, half, 'comp', 'within-unit', k), k = 0..9; v = observed comp.rigidR, nullMean / nullSd over the finite draws (needs >= 3), z = (v - nullMean) / nullSd. (run-atlas.mjs
+// also draws the 'unit-order' kind for sameL / sameR; rigidR uses within-unit only, so those draws cannot change any number here and are not made.) The twin comp.rigidL is read from the same draws, as a by-product only.
+// A self-check recomputes the atlas pocket bk-alice through THIS harness and must reproduce the atlas v and z of comp.rigidR in both halves exactly (to 12 significant digits).
+//
+// PASS RULE, BLIND PREDICTIONS: the data object PREREG below is the single source of truth (the code after the END OF PRE-REGISTRATION HEADER line reads it). In words:
+//  - class A (34 siblings; natural text, notation or code of kinds where the atlas has PRESENT+ cells): claim and blind prediction PRESENT+ (z >= 4 in both halves, same sign, positive) and mean-of-halves v inside the registered range.
+//  - class B (1 sibling, rr-seq-protein, the amino-acid kind): blind prediction NOT PRESENT+ (ABSENT or AMBIGUOUS or PRESENT-), v inside the registered range of cd-protein-aa.
+//  - class I (instrument checks, not part of the law verdict): two NEW planted worlds (rr-pl-null expected not PRESENT+, rr-pl-frames expected PRESENT+) and two law-free shuffled controls (expected not PRESENT+).
+//  VERDICT: REPLICATES iff ALL of R1-R5 hold; FAILS iff fewer than 80% of the class-A siblings with a defined cell are PRESENT+; otherwise PARTIAL and I say which of R1-R5 failed and in which siblings.
+//   R1 presence: no class-A sibling is ABSENT or PRESENT-; at most one (5%) is AMBIGUOUS; every other class-A sibling is PRESENT+.      R2 absence: rr-seq-protein is not PRESENT+.
+//   R3 constant: mean-of-halves v lies in the registered range for at least 80% of the class-A siblings.
+//   R4 register order: O1, O2, O3 hold (strict, on mean-of-halves v) and the Spearman rank correlation O4 >= 0.7.      R5 instrument: both controls and rr-pl-null are not PRESENT+, rr-pl-frames is PRESENT+, and the bk-alice self-check reproduces the atlas.
+//   A sibling whose comp.rigidR cell is undefined in a half (fewer than 20 eligible types, nullSd 0) is UNDEFINED: never scored, listed.
+// ===== DATA OBJECT BELOW (PREREG) =====
+// Registered numeric ranges of the constant: for a kind with atlas pockets, [0.8 x (smallest), 1.25 x (largest)] of the atlas pockets' mean-of-halves v of the SAME REGISTER (all languages); for the two sequence kinds the single atlas kin
+// pocket (cd-protein-aa 0.01015, cd-codons 0.00726). Atlas register medians (for O4) are the medians of the same sets. Both tables were computed from results/atlas only, before any sibling statistic.
+const RANGE = { reportage: [0.0397, 0.094], essay: [0.0281, 0.1537], novel: [0.0292, 0.0857], memoir: [0.0311, 0.0784], drama: [0.0124, 0.0554], code: [0.0712, 0.3574], diagram: [0.1872, 0.6924], chat: [0.0195, 0.0986],
+  treebank: [0.011, 0.1618], legal: [0.0833, 0.4055], reference: [0.2331, 0.3642], encyclopedia: [0.0457, 0.3269], academic: [0.017, 0.1571], codons: [0.0058, 0.0091], protein: [0.0081, 0.0127] };
+const MEDIAN = { reportage: 0.05803, essay: 0.04211, novel: 0.0487, memoir: 0.04935, drama: 0.02362, code: 0.1572, diagram: 0.4331, chat: 0.05843, legal: 0.1818, reference: 0.2914, encyclopedia: 0.08163, academic: 0.09937 };
+const M = (f) => `loaders/_sibling-rr-${f}.mjs`;
+const sib = (id, mod, cls, kind, rangeKey, kin, note = "") => ({ id, mod, cls, kind, predict: cls === "A" ? "PRESENT+" : "NOT-PRESENT+", range: RANGE[rangeKey], kin, note });
+const UD = ["ita", "nld", "rus", "ces", "dan", "lit", "ell", "tur", "hye", "kat", "gle", "afr", "mlt", "wol"];
+const SIBLINGS = [
+  sib("rr-en-about-london", M("prose"), "A", "reportage", "reportage", "atlas reportage (4 pockets, v 0.050-0.075)", "J. E. Ritchie, About London (1860); 53,609 tokens"),
+  sib("rr-en-among-forces", M("prose"), "A", "essay", "essay", "atlas essay (3 pockets, v 0.035-0.123)", "H. W. Warren, Among the Forces (1898); 35,707 tokens"),
+  sib("rr-en-mouret", M("prose"), "A", "novel", "novel", "atlas novel (25 pockets, v 0.037-0.069)", "Zola, Abbe Mouret (Vizetelly); 126,434 tokens"),
+  sib("rr-en-poe2", M("prose"), "A", "novel", "novel", "atlas novel", "Poe, Works vol II tales; 94,473 tokens"),
+  sib("rr-en-waikna", M("prose"), "A", "memoir", "memoir", "atlas memoir (13 pockets, v 0.039-0.063)", "Squier, Waikna (1855); 74,854 tokens"),
+  sib("rr-en-dolls-house", M("prose"), "A", "drama", "drama", "atlas drama (12 pockets; the 3 English ones v 0.0195-0.0235)", "Ibsen, A Doll's House, labels removed; 22,597 tokens (half ~11k)"),
+  sib("rr-en-early-plays", M("prose"), "A", "drama", "drama", "atlas drama", "Marlowe Faustus + Greene James IV pooled; 31,927 tokens"),
+  sib("rr-cd-js", M("code"), "A", "code", "code", "atlas code (47 pockets, v 0.089-0.286)", "the user's JavaScript; 291,182 tokens"),
+  sib("rr-cd-ts", M("code"), "A", "code", "code", "atlas code", "opencode-fold TypeScript; 291,930 tokens"),
+  sib("rr-cd-py", M("code"), "A", "code", "code", "atlas code", "er7-redteam Python; 90,463 tokens"),
+  sib("rr-bpmn-miwg-heldout", M("diag"), "A", "diagram", "diagram", "atlas diagram (7 pockets, v 0.234-0.554; cd-bpmn-miwg 0.554)", "HELD-OUT files of the MIWG BPMN lineage; 292,132 tokens"),
+  sib("rr-bpmn-kogito-heldout", M("diag"), "A", "diagram", "diagram", "atlas diagram (cd-bpmn-kogito 0.515)", "HELD-OUT files of the Kogito BPMN lineage; 161,917 tokens"),
+  sib("rr-bpmn-activiti-heldout", M("diag"), "A", "diagram", "diagram", "atlas diagram (cd-bpmn-activiti 0.396)", "HELD-OUT files of the Activiti BPMN lineage; 68,568 tokens"),
+  sib("rr-oc-irc-ho-0607", M("chat"), "A", "chat", "chat", "atlas chat (20 pockets, v 0.024-0.079)", "HELD-OUT blocks of #ubuntu 2006-07..2007-07; 44,326 tokens"),
+  sib("rr-oc-irc-ho-0809", M("chat"), "A", "chat", "chat", "atlas chat", "HELD-OUT blocks of #ubuntu 2008-03..2009-03; 44,366 tokens"),
+  ...UD.map((s) => sib(`rr-ud-${s}`, M("ud"), "A", "treebank", "treebank", "atlas treebank (34 pockets, v 0.014-0.129)", `UD ${s} train split; a language with no atlas pocket`)),
+  sib("rr-seq-codons", M("seq"), "A", "sequence-codons", "codons", "atlas cd-codons (v 0.0073, z +25/+21)", "HELD-OUT genes as codon triplets; 291,942 tokens; same genes as rr-seq-protein"),
+  sib("rr-law-fr-heldout", M("fm"), "A", "legal", "legal", "atlas legal (31 pockets, v 0.104-0.324; fm-law-fr 0.146)", "HELD-OUT pieces of French codes; 296,993 tokens"),
+  sib("rr-factbook-heldout", M("fm"), "A", "reference", "reference", "atlas reference (fm-factbook 0.291)", "HELD-OUT Factbook pieces; 297,658 tokens"),
+  sib("rr-wiki-heldout", M("fm"), "A", "encyclopedia", "encyclopedia", "atlas encyclopedia (4 pockets, v 0.057-0.262; fm-wikipedia 0.084)", "HELD-OUT Wikipedia pieces; 177,879 tokens"),
+  sib("rr-ntrs-heldout", M("fm"), "A", "academic", "academic", "atlas academic (12 pockets, v 0.021-0.126; fm-ntrs-1965-71 0.102)", "HELD-OUT NASA report pieces; 296,249 tokens"),
+  sib("rr-seq-protein", M("seq"), "B", "sequence-protein", "protein", "atlas cd-protein-aa (v 0.0102 = its null 0.0100; z -0.2/+5.2, AMBIGUOUS)", "HELD-OUT genes as amino-acid letters; 291,024 tokens"),
+  { id: "rr-pl-null", mod: M("planted"), cls: "I", kind: "planted-null", predict: "NOT-PRESENT+", range: null, kin: "atlas pl-null (z -0.8/-0.9)", note: "NEW iid Zipf world, no structure" },
+  { id: "rr-pl-frames", mod: M("planted"), cls: "I", kind: "planted-frames", predict: "PRESENT+", range: null, kin: "atlas pl-frames (z +33/+78)", note: "NEW rigid-frames world" },
+  { id: "rr-ct-en-mouret", mod: M("ctl"), cls: "I", kind: "control", predict: "NOT-PRESENT+", range: null, kin: "atlas ct-* controls (all 20 not PRESENT)", note: "token-global shuffle of rr-en-mouret" },
+  { id: "rr-ct-cd-js", mod: M("ctl"), cls: "I", kind: "control", predict: "NOT-PRESENT+", range: null, kin: "atlas ct-* controls", note: "token-global shuffle of rr-cd-js" },
+];
+const ids = (...kinds) => SIBLINGS.filter((s) => s.cls === "A" && kinds.includes(s.kind)).map((s) => s.id);
+export const PREREG = {
+ law: "comp.rigidR", family: "comp", statId: "rigidR", twin: "comp.rigidL (same law read on the left; ONE confirmation with rigidR, never two; computed as a by-product only)",
+ statement: "soft share of rigid-right types: of types with >= 10 right-neighbour occurrences, mean of 1 if the commonest right neighbour type has >= 0.8 of them, else exp(-(0.8 - m)/0.15)",
+ protocolSha256: "3b7363c5b01642c06ad5df8d059e5909f237516481e0ed8af3379aa39c4330fc",
+ null: "within-unit", draws: 10, seedRule: "seedOf(pocketId, half, 'comp', 'within-unit', k), k = 0..9, exactly as run-atlas.mjs",
+ claimUnderTest: "A larger share of types have one fixed commonest right-hand neighbour than a within-unit shuffle gives, in 99% of atlas pockets (387 of 391 PRESENT+, 0 negative; median v 0.065); the constant is register-specific (eta2 0.61): diagram 0.43, legal 0.18, code 0.16, markup 0.15, notation 0.13 down to poetry 0.029 and drama 0.023.",
+ status: { "PRESENT+": "z >= 4 in both halves (v above the shuffle)", "PRESENT-": "z <= -4 in both halves", ABSENT: "|z| < 2 in both halves", AMBIGUOUS: "anything else", UNDEFINED: "v null or nullSd 0 or < 3 finite null draws in either half (never scored)" },
+ predictValues: { "PRESENT+": "status PRESENT+", "NOT-PRESENT+": "status is anything but PRESENT+ (ABSENT, AMBIGUOUS or PRESENT-)" },
+ vDefinition: "v of a sibling = mean of the discover-half and confirm-half comp.rigidR; 'in range' = RANGE[kind][0] <= v <= RANGE[kind][1]",
+ passRule: {
+  R1: "presence: no class-A sibling is ABSENT or PRESENT-; at most ONE class-A sibling is AMBIGUOUS; every other defined class-A sibling is PRESENT+",
+  R2: "absence: rr-seq-protein (class B) is not PRESENT+ (ABSENT, AMBIGUOUS or PRESENT- all count as the prediction holding)",
+  R3: "constant: v inside the registered range for at least 80% of the defined class-A siblings",
+  R4: "register order: O1, O2 and O3 each hold strictly on v, and O4 (Spearman) >= 0.7",
+  R5: "instrument: rr-ct-en-mouret, rr-ct-cd-js and rr-pl-null are not PRESENT+; rr-pl-frames is PRESENT+; the bk-alice self-check reproduces the atlas v and z exactly",
+  verdict: "REPLICATES iff R1-R5 all hold; FAILS iff fewer than 80% of the defined class-A siblings are PRESENT+; PARTIAL otherwise (the failed rules and siblings are listed)",
+  undefinedSiblings: "a sibling with an UNDEFINED half is excluded from every rule and listed",
+ },
+ order: {
+  O1: { text: "every diagram sibling has a larger v than every code sibling", greater: ids("diagram"), less: ids("code") },
+  O2: { text: "every code sibling has a larger v than every English reportage, essay, novel, memoir, drama and chat sibling", greater: ids("code"), less: ids("reportage", "essay", "novel", "memoir", "drama", "chat") },
+  O3: { text: "every English drama sibling has a smaller v than every English reportage, essay, novel and memoir sibling", greater: ids("reportage", "essay", "novel", "memoir"), less: ids("drama") },
+  O4: { text: "Spearman rho (average ranks) between v and the atlas register median over the class-A siblings of these kinds is >= 0.7", kinds: Object.keys(MEDIAN), median: MEDIAN, min: 0.7 },
+ },
+ range: RANGE,
+ selfCheck: { pocket: "bk-alice", loader: "loaders/books.mjs", rule: "v, nullMean, nullSd and z of comp.rigidR must equal the atlas results/atlas/bk-alice.json to 12 significant digits in both halves" },
+ codeSha256: {
+  "PROTOCOL.md": "3b7363c5b01642c06ad5df8d059e5909f237516481e0ed8af3379aa39c4330fc", "lib/pocket.mjs": "529a5bc7c80a4d01653aab9fa688598b5aa25fadc4a848b90cf7c85b34f78637", "run-atlas.mjs": "df9c2a1e2a8682564ec780fc562b7ef083a478b48e5ce0093437766ba336f8cb",
+  "laws/comp.mjs": "2089fcc5b1118312a1115a567becb20f098a17815c6c5c3b1ed5f108b3686738", "laws/_comp_core.mjs": "262173463c6a12228145642375ca43c4597b1d06de9ab69e5eb526a44ff73fe6", "laws/_comp_neigh.mjs": "e6c3e51f3b8a82e085e710a249263c780a8d00bf4c30ad3c81f99ed1cf491c08",
+  "laws/_comp_pairs.mjs": "04c39bb54bf0c9c05383b52ba11ca8765cc0a2e945c72a57e1901ade12cc43e6", "laws/_comp_prep.mjs": "a8f20d73a87b460cef29bd00273a078a706c751ab51196cc9a0664dc9e91018d",
+  "loaders/_bkcore.mjs": "eb83533561cfde8ecf8578cbd88fb5977a3d61576e46f20728915d6b9640cc96", "loaders/_bkseg.mjs": "d98072525432a180435b5357fa61179d68c49e0b94f1a8a2b82015dadc614e58", "loaders/_cd_util.mjs": "c6b3c22b65333e8b9acfeb5ca240b2b12fd55701e21252c9ab05364702ceb1d2",
+  "loaders/_conllu.mjs": "1802948433cb9c63fa0d51c1c4c1f0792bf54d887c1fb97c743ff7adbe30d6b4", "loaders/_ud_ml_common.mjs": "0047fd37a27811f1e1121b99d69e97afcddb191ceee22fa924cb8782185b36b2", "loaders/_ud_ml_run.mjs": "a502e217b8bf0be353d3d7108d39755901456e99050b74dd6f26d32a6485e86b",
+  "loaders/organic.mjs": "4ac6c85e29f049732448cc8481d5a2db39257627b68a4601ddb39da3f611a545", "loaders/_cd_notation1.mjs": "3d03974c05f0a3671187bb6e788de4e733f84b3152adc471d375c083832066a6", "loaders/_cd_notation2.mjs": "3a619a8534640ea8529b348b3e37290a49f59684d575cda4deaa0af8724ff01e",
+  "loaders/_planted-core.mjs": "b25253a771c2e59557eb687c2fc6aed4d9279328616671c23a81af5ae4d5107c", "loaders/_planted-worlds1.mjs": "c46f3d6306e392a4afd0d4129c6942d40aa5646f3895b551c73b382e0f3358bf", "loaders/_planted-worlds2.mjs": "ce19196732195d01e75dda77200a9ae2a544089e05290002095700a0a9d53eff",
+  "loaders/planted.mjs": "ca672dace43fa9d0a7a339b27765ecbbb6a90476b0061a9cbf873bdb90fbd7a4", "loaders/books.mjs": "dce2622bb6bd03fe015371670081f812b5bdf260f6a02c176ff646c7bb71b8c8", "loaders/_fm_common.mjs": "5c913bb60b1459892f53dbf3f151984cf036335c8c125848e2c43646d6e5db78",
+  "loaders/_fm_legal_src.mjs": "700d7109b2c351670d1ceaa4586bcabd617a11ea49d6c623e26379dd54fb4515", "loaders/_fm_ref_src.mjs": "22ba62e6acbbd6fd48b1d92e1968401b434da2a95c2ef7e347f977eb3af53a2d",
+  "loaders/_sibling-rr-prose.mjs": "df2bb1f785c1e6819d01903a4c9361afbd20a0654171854aeb79fce8d888c69e", "loaders/_sibling-rr-code.mjs": "af6af13a106701451308137b9cadae1df2f5857b451e492181ec99389e7f0675", "loaders/_sibling-rr-ud.mjs": "755c19b6266900631bd2f88ba9bd7525b63162bd23dc0f248535cf929250a9d2",
+  "loaders/_sibling-rr-diag.mjs": "5efe6c545152fa73ae8315a4ebe39f67edb195ea231ac16ead60d1e49184439e", "loaders/_sibling-rr-chat.mjs": "991deccb1a28d06c74a616ca7462b3ae6f79c3a1de6e9a5810f41973b04a557e", "loaders/_sibling-rr-seq.mjs": "8fd67e0e6050b8bbd3097f89337b459707c1920e52bd853881049f57468634a2",
+  "loaders/_sibling-rr-fm.mjs": "abf27a7db0e1046b53c363c34b7fb2d601cd3b7890719acd603fc722bc0a2c55", "loaders/_sibling-rr-planted.mjs": "5ccbb48252068d38e115df05bc0144174b1cc9be3e3b882c3e96dca8228f4320", "loaders/_sibling-rr-ctl.mjs": "8ab23803200ae827ce8efe2820b04f2f3f5c9fc57eb5bfd53c2a489a096f765d",
+ },
+ siblings: SIBLINGS,
+};
+// ===== END OF PRE-REGISTRATION HEADER =====

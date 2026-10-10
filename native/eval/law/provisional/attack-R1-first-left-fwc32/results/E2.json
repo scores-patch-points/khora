@@ -1,0 +1,45 @@
+{
+ "headerSha256": "b5aca891986f7db4192c55db586ca36f5f2d471c400037dc58ac2c197e400247",
+ "n": {
+  "langs": 26,
+  "windows": 230
+ },
+ "within": {
+  "slope": -0.605,
+  "ci": [
+   -1.142,
+   -0.152
+  ]
+ },
+ "between": {
+  "slope": 0.454,
+  "ci": [
+   0.269,
+   0.623
+  ]
+ },
+ "diff": {
+  "est": -1.059,
+  "ci": [
+   -1.623,
+   -0.561
+  ]
+ },
+ "power": {
+  "withinFwcSD": 0.0134,
+  "withinAucSD": 0.0283,
+  "expectedAucSDFromBetweenSlope": 0.0061,
+  "ratio": 0.215
+ },
+ "topHalfByRange": {
+  "n": 13,
+  "slope": -0.649,
+  "meanRange": 0.053,
+  "names": "lzh lav ita slk nld fin eng pol ron bul ukr est nob"
+ },
+ "drift": {
+  "meanRhoAucVsWindowIndex": 0.116,
+  "meanRhoFwcVsWindowIndex": -0.064
+ },
+ "decision": "STREAM_LEVEL_SLOPE_EXCLUDED_AT_95"
+}

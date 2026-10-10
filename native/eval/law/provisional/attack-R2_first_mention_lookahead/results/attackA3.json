@@ -1,0 +1,400 @@
+{
+ "headerSha256": "b4091c90376f59b204a51b246383ab3e78698142daefbf878f8af33f53d627e3",
+ "code": {
+  "common.mjs": "5f2b3417bddb872c",
+  "stats.mjs": "545acdde873ebce2",
+  "hdr.mjs": "57412b6ec9d9c475"
+ },
+ "variants": {
+  "CF": {
+   "K0": {
+    "n": 485,
+    "n1": 485,
+    "aucMean": 0.6779,
+    "aucSd": 0.0035,
+    "ci": {
+     "pair": [
+      0.6536,
+      0.6969
+     ],
+     "day": [
+      0.652,
+      0.6971
+     ],
+     "posForm": [
+      0.6519,
+      0.699
+     ],
+     "negForm": [
+      0.652,
+      0.6963
+     ]
+    },
+    "ctl": {
+     "i": 0.499,
+     "L": 0.4948,
+     "cl": 0.4979,
+     "lc": 0.5103,
+     "rel": 0.5876
+    },
+    "ctlOk": false,
+    "thr2": {
+     "th": 2,
+     "tpr": 0.2928,
+     "fpr": 0.1196,
+     "balPrec": 0.71
+    },
+    "initAuc": 0.6447,
+    "noninitAuc": 0.7597,
+    "relCtlMeanSeeds": 0.5938,
+    "verdict": "VOID(controls)"
+   },
+   "R5": {
+    "n": 177,
+    "n1": 177,
+    "aucMean": 0.6633,
+    "aucSd": 0.0013,
+    "ci": {
+     "pair": [
+      0.6299,
+      0.6949
+     ],
+     "day": [
+      0.6345,
+      0.6903
+     ],
+     "posForm": [
+      0.6286,
+      0.6994
+     ],
+     "negForm": [
+      0.6306,
+      0.6978
+     ]
+    },
+    "ctl": {
+     "i": 0.5141,
+     "L": 0.5,
+     "cl": 0.5085,
+     "lc": 0.5056,
+     "rel": 0.5452
+    },
+    "ctlOk": true,
+    "thr2": {
+     "th": 2,
+     "tpr": 0.2712,
+     "fpr": 0.0734,
+     "balPrec": 0.7869
+    },
+    "initAuc": 0.6422,
+    "noninitAuc": 0.7049,
+    "relCtlMeanSeeds": 0.5492,
+    "verdict": "SURVIVES"
+   },
+   "R10": {
+    "n": 97,
+    "n1": 97,
+    "aucMean": 0.6546,
+    "aucSd": 0,
+    "ci": {
+     "pair": [
+      0.6082,
+      0.701
+     ],
+     "day": [
+      0.5886,
+      0.7202
+     ],
+     "posForm": [
+      0.6094,
+      0.7041
+     ],
+     "negForm": [
+      0.6082,
+      0.701
+     ]
+    },
+    "ctl": {
+     "i": 0.4897,
+     "L": 0.4794,
+     "cl": 0.5052,
+     "lc": 0.4948,
+     "rel": 0.5309
+    },
+    "ctlOk": true,
+    "thr2": {
+     "th": 2,
+     "tpr": 0.268,
+     "fpr": 0.0928,
+     "balPrec": 0.7429
+    },
+    "initAuc": 0.6311,
+    "noninitAuc": 0.6944,
+    "relCtlMeanSeeds": 0.5299,
+    "verdict": "SURVIVES"
+   },
+   "R20": {
+    "n": 54,
+    "n1": 54,
+    "aucMean": 0.6759,
+    "aucSd": 0,
+    "verdict": "VOID(n)"
+   },
+   "R10x": {
+    "n": 81,
+    "n1": 81,
+    "aucMean": 0.679,
+    "aucSd": 0,
+    "ci": {
+     "pair": [
+      0.6235,
+      0.7346
+     ],
+     "day": [
+      0.6161,
+      0.744
+     ],
+     "posForm": [
+      0.6235,
+      0.7313
+     ],
+     "negForm": [
+      0.6296,
+      0.7346
+     ]
+    },
+    "ctl": {
+     "i": 0.5,
+     "L": 0.463,
+     "cl": 0.5,
+     "lc": 0.4938,
+     "rel": 0.5864
+    },
+    "ctlOk": false,
+    "thr2": {
+     "th": 2,
+     "tpr": 0.3086,
+     "fpr": 0.1111,
+     "balPrec": 0.7353
+    },
+    "initAuc": 0.6531,
+    "noninitAuc": 0.7188,
+    "relCtlMeanSeeds": 0.5704,
+    "verdict": "VOID(controls)"
+   }
+  },
+  "ALL_EN": {
+   "K0": {
+    "n": 1467,
+    "n1": 1467,
+    "aucMean": 0.6849,
+    "aucSd": 0.0014,
+    "ci": {
+     "pair": [
+      0.6721,
+      0.6987
+     ],
+     "day": [
+      0.6712,
+      0.6955
+     ],
+     "posForm": [
+      0.6704,
+      0.6978
+     ],
+     "negForm": [
+      0.671,
+      0.6982
+     ]
+    },
+    "ctl": {
+     "i": 0.4969,
+     "L": 0.4819,
+     "cl": 0.4986,
+     "lc": 0.5041,
+     "rel": 0.5961
+    },
+    "ctlOk": false,
+    "thr2": {
+     "th": 2,
+     "tpr": 0.3108,
+     "fpr": 0.1125,
+     "balPrec": 0.7343
+    },
+    "initAuc": 0.6492,
+    "noninitAuc": 0.7648,
+    "relCtlMeanSeeds": 0.5907,
+    "verdict": "VOID(controls)"
+   },
+   "R5": {
+    "n": 544,
+    "n1": 544,
+    "aucMean": 0.6689,
+    "aucSd": 0.001,
+    "ci": {
+     "pair": [
+      0.6498,
+      0.6912
+     ],
+     "day": [
+      0.6513,
+      0.6864
+     ],
+     "posForm": [
+      0.6483,
+      0.6896
+     ],
+     "negForm": [
+      0.6506,
+      0.6883
+     ]
+    },
+    "ctl": {
+     "i": 0.4936,
+     "L": 0.4724,
+     "cl": 0.5037,
+     "lc": 0.5009,
+     "rel": 0.5386
+    },
+    "ctlOk": true,
+    "thr2": {
+     "th": 2,
+     "tpr": 0.2739,
+     "fpr": 0.0735,
+     "balPrec": 0.7884
+    },
+    "initAuc": 0.6292,
+    "noninitAuc": 0.7283,
+    "relCtlMeanSeeds": 0.5397,
+    "verdict": "SURVIVES"
+   },
+   "R10": {
+    "n": 312,
+    "n1": 312,
+    "aucMean": 0.676,
+    "aucSd": 0.0013,
+    "ci": {
+     "pair": [
+      0.6458,
+      0.7003
+     ],
+     "day": [
+      0.6467,
+      0.701
+     ],
+     "posForm": [
+      0.6465,
+      0.7016
+     ],
+     "negForm": [
+      0.6481,
+      0.7029
+     ]
+    },
+    "ctl": {
+     "i": 0.4968,
+     "L": 0.4712,
+     "cl": 0.4968,
+     "lc": 0.492,
+     "rel": 0.5385
+    },
+    "ctlOk": true,
+    "thr2": {
+     "th": 2,
+     "tpr": 0.2821,
+     "fpr": 0.0801,
+     "balPrec": 0.7788
+    },
+    "initAuc": 0.6299,
+    "noninitAuc": 0.7333,
+    "relCtlMeanSeeds": 0.5375,
+    "verdict": "SURVIVES"
+   },
+   "R20": {
+    "n": 187,
+    "n1": 187,
+    "aucMean": 0.6695,
+    "aucSd": 0.0024,
+    "ci": {
+     "pair": [
+      0.6337,
+      0.7059
+     ],
+     "day": [
+      0.644,
+      0.7021
+     ],
+     "posForm": [
+      0.6342,
+      0.7108
+     ],
+     "negForm": [
+      0.6383,
+      0.7077
+     ]
+    },
+    "ctl": {
+     "i": 0.4973,
+     "L": 0.4813,
+     "cl": 0.5,
+     "lc": 0.4813,
+     "rel": 0.5267
+    },
+    "ctlOk": true,
+    "thr2": {
+     "th": 2,
+     "tpr": 0.2674,
+     "fpr": 0.0909,
+     "balPrec": 0.7463
+    },
+    "initAuc": 0.6386,
+    "noninitAuc": 0.7093,
+    "relCtlMeanSeeds": 0.5299,
+    "verdict": "SURVIVES"
+   },
+   "R10x": {
+    "n": 266,
+    "n1": 266,
+    "aucMean": 0.691,
+    "aucSd": 0.001,
+    "ci": {
+     "pair": [
+      0.6617,
+      0.7218
+     ],
+     "day": [
+      0.6604,
+      0.723
+     ],
+     "posForm": [
+      0.6599,
+      0.7204
+     ],
+     "negForm": [
+      0.6629,
+      0.7205
+     ]
+    },
+    "ctl": {
+     "i": 0.4944,
+     "L": 0.4756,
+     "cl": 0.4962,
+     "lc": 0.4925,
+     "rel": 0.5489
+    },
+    "ctlOk": true,
+    "thr2": {
+     "th": 2,
+     "tpr": 0.297,
+     "fpr": 0.0902,
+     "balPrec": 0.767
+    },
+    "initAuc": 0.651,
+    "noninitAuc": 0.7393,
+    "relCtlMeanSeeds": 0.5425,
+    "verdict": "SURVIVES"
+   }
+  }
+ },
+ "seconds": 0
+}

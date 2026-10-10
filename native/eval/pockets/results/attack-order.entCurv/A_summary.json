@@ -1,0 +1,2218 @@
+{
+ "n": 179,
+ "baseMaxAbsDiffToAtlas": 0,
+ "variants": {
+  "base": {
+   "plus": {
+    "atlasN": 126,
+    "evaluated": 126,
+    "skipped": 0,
+    "Psame": 126,
+    "Popp": 0,
+    "M": 0,
+    "A": 0,
+    "weakSame": 0,
+    "weakOpp": 0,
+    "signKept": 126,
+    "zHalfMedian": [],
+    "medianRetention": 0.9999999486214822,
+    "signKeptShare": 1
+   },
+   "minus": {
+    "atlasN": 53,
+    "evaluated": 53,
+    "skipped": 0,
+    "Psame": 53,
+    "Popp": 0,
+    "M": 0,
+    "A": 0,
+    "weakSame": 0,
+    "weakOpp": 0,
+    "signKept": 53,
+    "zHalfMedian": [],
+    "medianRetention": 1.0000001257876063,
+    "signKeptShare": 1
+   }
+  },
+  "tok7500_r0": {
+   "plus": {
+    "atlasN": 126,
+    "evaluated": 117,
+    "skipped": 9,
+    "Psame": 17,
+    "Popp": 0,
+    "M": 72,
+    "A": 28,
+    "weakSame": 37,
+    "weakOpp": 1,
+    "signKept": 111,
+    "zHalfMedian": [],
+    "medianRetention": 0.9514764210749027,
+    "signKeptShare": 0.949
+   },
+   "minus": {
+    "atlasN": 53,
+    "evaluated": 51,
+    "skipped": 2,
+    "Psame": 21,
+    "Popp": 0,
+    "M": 21,
+    "A": 9,
+    "weakSame": 13,
+    "weakOpp": 0,
+    "signKept": 50,
+    "zHalfMedian": [],
+    "medianRetention": 1.639573198271828,
+    "signKeptShare": 0.98
+   }
+  },
+  "tok7500len10_r0": {
+   "plus": {
+    "atlasN": 126,
+    "evaluated": 111,
+    "skipped": 15,
+    "Psame": 17,
+    "Popp": 0,
+    "M": 75,
+    "A": 19,
+    "weakSame": 36,
+    "weakOpp": 0,
+    "signKept": 103,
+    "zHalfMedian": [],
+    "medianRetention": 1.196116435161747,
+    "signKeptShare": 0.928
+   },
+   "minus": {
+    "atlasN": 53,
+    "evaluated": 50,
+    "skipped": 3,
+    "Psame": 6,
+    "Popp": 0,
+    "M": 18,
+    "A": 26,
+    "weakSame": 6,
+    "weakOpp": 0,
+    "signKept": 34,
+    "zHalfMedian": [],
+    "medianRetention": 0.25646880665917254,
+    "signKeptShare": 0.68
+   }
+  },
+  "tok7500_r1": {
+   "plus": {
+    "atlasN": 126,
+    "evaluated": 115,
+    "skipped": 11,
+    "Psame": 22,
+    "Popp": 0,
+    "M": 70,
+    "A": 23,
+    "weakSame": 33,
+    "weakOpp": 0,
+    "signKept": 110,
+    "zHalfMedian": [],
+    "medianRetention": 1.0662233136632888,
+    "signKeptShare": 0.957
+   },
+   "minus": {
+    "atlasN": 53,
+    "evaluated": 51,
+    "skipped": 2,
+    "Psame": 18,
+    "Popp": 0,
+    "M": 31,
+    "A": 2,
+    "weakSame": 15,
+    "weakOpp": 0,
+    "signKept": 49,
+    "zHalfMedian": [],
+    "medianRetention": 1.6430285196735392,
+    "signKeptShare": 0.961
+   }
+  },
+  "tok7500len10_r1": {
+   "plus": {
+    "atlasN": 126,
+    "evaluated": 111,
+    "skipped": 15,
+    "Psame": 16,
+    "Popp": 0,
+    "M": 72,
+    "A": 23,
+    "weakSame": 33,
+    "weakOpp": 0,
+    "signKept": 103,
+    "zHalfMedian": [],
+    "medianRetention": 1.1866412746874144,
+    "signKeptShare": 0.928
+   },
+   "minus": {
+    "atlasN": 53,
+    "evaluated": 50,
+    "skipped": 3,
+    "Psame": 3,
+    "Popp": 0,
+    "M": 26,
+    "A": 21,
+    "weakSame": 7,
+    "weakOpp": 0,
+    "signKept": 33,
+    "zHalfMedian": [],
+    "medianRetention": 0.2592894523376556,
+    "signKeptShare": 0.66
+   }
+  },
+  "tok20000": {
+   "plus": {
+    "atlasN": 126,
+    "evaluated": 102,
+    "skipped": 24,
+    "Psame": 42,
+    "Popp": 0,
+    "M": 52,
+    "A": 8,
+    "weakSame": 38,
+    "weakOpp": 0,
+    "signKept": 99,
+    "zHalfMedian": [],
+    "medianRetention": 0.9853659244727511,
+    "signKeptShare": 0.971
+   },
+   "minus": {
+    "atlasN": 53,
+    "evaluated": 51,
+    "skipped": 2,
+    "Psame": 32,
+    "Popp": 0,
+    "M": 18,
+    "A": 1,
+    "weakSame": 15,
+    "weakOpp": 0,
+    "signKept": 51,
+    "zHalfMedian": [],
+    "medianRetention": 1.2789638786621136,
+    "signKeptShare": 1
+   }
+  },
+  "len10full": {
+   "plus": {
+    "atlasN": 126,
+    "evaluated": 72,
+    "skipped": 54,
+    "Psame": 45,
+    "Popp": 0,
+    "M": 26,
+    "A": 1,
+    "weakSame": 16,
+    "weakOpp": 1,
+    "signKept": 70,
+    "zHalfMedian": [],
+    "medianRetention": 1.131952715942532,
+    "signKeptShare": 0.972
+   },
+   "minus": {
+    "atlasN": 53,
+    "evaluated": 42,
+    "skipped": 11,
+    "Psame": 12,
+    "Popp": 0,
+    "M": 27,
+    "A": 3,
+    "weakSame": 10,
+    "weakOpp": 3,
+    "signKept": 34,
+    "zHalfMedian": [],
+    "medianRetention": 0.36797453840287897,
+    "signKeptShare": 0.81
+   }
+  },
+  "drop1pct": {
+   "plus": {
+    "atlasN": 126,
+    "evaluated": 126,
+    "skipped": 0,
+    "Psame": 113,
+    "Popp": 0,
+    "M": 13,
+    "A": 0,
+    "weakSame": 13,
+    "weakOpp": 0,
+    "signKept": 126,
+    "zHalfMedian": [],
+    "medianRetention": 0.9993425768774459,
+    "signKeptShare": 1
+   },
+   "minus": {
+    "atlasN": 53,
+    "evaluated": 53,
+    "skipped": 0,
+    "Psame": 49,
+    "Popp": 0,
+    "M": 4,
+    "A": 0,
+    "weakSame": 3,
+    "weakOpp": 0,
+    "signKept": 53,
+    "zHalfMedian": [],
+    "medianRetention": 0.9996818125310193,
+    "signKeptShare": 1
+   }
+  },
+  "dropHapax": {
+   "plus": {
+    "atlasN": 126,
+    "evaluated": 126,
+    "skipped": 0,
+    "Psame": 96,
+    "Popp": 0,
+    "M": 29,
+    "A": 1,
+    "weakSame": 25,
+    "weakOpp": 0,
+    "signKept": 126,
+    "zHalfMedian": [],
+    "medianRetention": 0.9269491408589112,
+    "signKeptShare": 1
+   },
+   "minus": {
+    "atlasN": 53,
+    "evaluated": 53,
+    "skipped": 0,
+    "Psame": 44,
+    "Popp": 0,
+    "M": 5,
+    "A": 4,
+    "weakSame": 3,
+    "weakOpp": 0,
+    "signKept": 52,
+    "zHalfMedian": [],
+    "medianRetention": 1.0262002221111473,
+    "signKeptShare": 0.981
+   }
+  },
+  "trunc5": {
+   "plus": {
+    "atlasN": 126,
+    "evaluated": 126,
+    "skipped": 0,
+    "Psame": 107,
+    "Popp": 2,
+    "M": 15,
+    "A": 2,
+    "weakSame": 12,
+    "weakOpp": 0,
+    "signKept": 124,
+    "zHalfMedian": [],
+    "medianRetention": 1.0297744229573444,
+    "signKeptShare": 0.984
+   },
+   "minus": {
+    "atlasN": 53,
+    "evaluated": 53,
+    "skipped": 0,
+    "Psame": 42,
+    "Popp": 0,
+    "M": 11,
+    "A": 0,
+    "weakSame": 8,
+    "weakOpp": 0,
+    "signKept": 53,
+    "zHalfMedian": [],
+    "medianRetention": 1.0823307630732995,
+    "signKeptShare": 1
+   }
+  },
+  "binHalf": {
+   "plus": {
+    "atlasN": 126,
+    "evaluated": 126,
+    "skipped": 0,
+    "Psame": 91,
+    "Popp": 1,
+    "M": 30,
+    "A": 4,
+    "weakSame": 17,
+    "weakOpp": 0,
+    "signKept": 124,
+    "zHalfMedian": [],
+    "medianRetention": 0.7978370692386483,
+    "signKeptShare": 0.984
+   },
+   "minus": {
+    "atlasN": 53,
+    "evaluated": 53,
+    "skipped": 0,
+    "Psame": 38,
+    "Popp": 2,
+    "M": 12,
+    "A": 1,
+    "weakSame": 3,
+    "weakOpp": 0,
+    "signKept": 47,
+    "zHalfMedian": [],
+    "medianRetention": 0.5658506270772865,
+    "signKeptShare": 0.887
+   }
+  },
+  "binMass4": {
+   "plus": {
+    "atlasN": 126,
+    "evaluated": 126,
+    "skipped": 0,
+    "Psame": 106,
+    "Popp": 5,
+    "M": 12,
+    "A": 3,
+    "weakSame": 4,
+    "weakOpp": 0,
+    "signKept": 119,
+    "zHalfMedian": [],
+    "medianRetention": 0.4206017991287231,
+    "signKeptShare": 0.944
+   },
+   "minus": {
+    "atlasN": 53,
+    "evaluated": 53,
+    "skipped": 0,
+    "Psame": 11,
+    "Popp": 31,
+    "M": 10,
+    "A": 1,
+    "weakSame": 1,
+    "weakOpp": 1,
+    "signKept": 15,
+    "zHalfMedian": [],
+    "medianRetention": -0.19424245950488686,
+    "signKeptShare": 0.283
+   }
+  },
+  "plugin": {
+   "plus": {
+    "atlasN": 126,
+    "evaluated": 126,
+    "skipped": 0,
+    "Psame": 126,
+    "Popp": 0,
+    "M": 0,
+    "A": 0,
+    "weakSame": 0,
+    "weakOpp": 0,
+    "signKept": 126,
+    "zHalfMedian": [],
+    "medianRetention": 1.000039547058632,
+    "signKeptShare": 1
+   },
+   "minus": {
+    "atlasN": 53,
+    "evaluated": 53,
+    "skipped": 0,
+    "Psame": 53,
+    "Popp": 0,
+    "M": 0,
+    "A": 0,
+    "weakSame": 0,
+    "weakOpp": 0,
+    "signKept": 53,
+    "zHalfMedian": [],
+    "medianRetention": 1.0000211975593902,
+    "signKeptShare": 1
+   }
+  }
+ },
+ "byKind": {
+  "word-grain": {
+   "n": 119,
+   "nPlus": 106,
+   "nMinus": 13,
+   "variants": {
+    "base": {
+     "plus": {
+      "atlasN": 106,
+      "evaluated": 106,
+      "skipped": 0,
+      "Psame": 106,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 106,
+      "zHalfMedian": [],
+      "medianRetention": 0.9999999143475939,
+      "signKeptShare": 1
+     },
+     "minus": {
+      "atlasN": 13,
+      "evaluated": 13,
+      "skipped": 0,
+      "Psame": 13,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 13,
+      "zHalfMedian": [],
+      "medianRetention": 0.9999997735396899,
+      "signKeptShare": 1
+     }
+    },
+    "tok7500_r0": {
+     "plus": {
+      "atlasN": 106,
+      "evaluated": 98,
+      "skipped": 8,
+      "Psame": 11,
+      "Popp": 0,
+      "M": 60,
+      "A": 27,
+      "weakSame": 33,
+      "weakOpp": 0,
+      "signKept": 93,
+      "zHalfMedian": [],
+      "medianRetention": 1.0489047220712602,
+      "signKeptShare": 0.949
+     },
+     "minus": {
+      "atlasN": 13,
+      "evaluated": 13,
+      "skipped": 0,
+      "Psame": 2,
+      "Popp": 0,
+      "M": 6,
+      "A": 5,
+      "weakSame": 4,
+      "weakOpp": 0,
+      "signKept": 13,
+      "zHalfMedian": [],
+      "medianRetention": 2.6291342538466425,
+      "signKeptShare": 1
+     }
+    },
+    "tok7500len10_r0": {
+     "plus": {
+      "atlasN": 106,
+      "evaluated": 94,
+      "skipped": 12,
+      "Psame": 12,
+      "Popp": 0,
+      "M": 65,
+      "A": 17,
+      "weakSame": 33,
+      "weakOpp": 0,
+      "signKept": 89,
+      "zHalfMedian": [],
+      "medianRetention": 1.290240239540388,
+      "signKeptShare": 0.947
+     },
+     "minus": {
+      "atlasN": 13,
+      "evaluated": 13,
+      "skipped": 0,
+      "Psame": 3,
+      "Popp": 0,
+      "M": 6,
+      "A": 4,
+      "weakSame": 3,
+      "weakOpp": 0,
+      "signKept": 13,
+      "zHalfMedian": [],
+      "medianRetention": 2.0056792429681725,
+      "signKeptShare": 1
+     }
+    },
+    "tok7500_r1": {
+     "plus": {
+      "atlasN": 106,
+      "evaluated": 96,
+      "skipped": 10,
+      "Psame": 15,
+      "Popp": 0,
+      "M": 59,
+      "A": 22,
+      "weakSame": 31,
+      "weakOpp": 0,
+      "signKept": 92,
+      "zHalfMedian": [],
+      "medianRetention": 1.0855555735782423,
+      "signKeptShare": 0.958
+     },
+     "minus": {
+      "atlasN": 13,
+      "evaluated": 13,
+      "skipped": 0,
+      "Psame": 1,
+      "Popp": 0,
+      "M": 12,
+      "A": 0,
+      "weakSame": 5,
+      "weakOpp": 0,
+      "signKept": 13,
+      "zHalfMedian": [],
+      "medianRetention": 2.705414604950525,
+      "signKeptShare": 1
+     }
+    },
+    "tok7500len10_r1": {
+     "plus": {
+      "atlasN": 106,
+      "evaluated": 94,
+      "skipped": 12,
+      "Psame": 10,
+      "Popp": 0,
+      "M": 64,
+      "A": 20,
+      "weakSame": 30,
+      "weakOpp": 0,
+      "signKept": 88,
+      "zHalfMedian": [],
+      "medianRetention": 1.263670238924812,
+      "signKeptShare": 0.936
+     },
+     "minus": {
+      "atlasN": 13,
+      "evaluated": 13,
+      "skipped": 0,
+      "Psame": 0,
+      "Popp": 0,
+      "M": 10,
+      "A": 3,
+      "weakSame": 4,
+      "weakOpp": 0,
+      "signKept": 12,
+      "zHalfMedian": [],
+      "medianRetention": 1.6451303877655552,
+      "signKeptShare": 0.923
+     }
+    },
+    "tok20000": {
+     "plus": {
+      "atlasN": 106,
+      "evaluated": 84,
+      "skipped": 22,
+      "Psame": 33,
+      "Popp": 0,
+      "M": 43,
+      "A": 8,
+      "weakSame": 32,
+      "weakOpp": 0,
+      "signKept": 81,
+      "zHalfMedian": [],
+      "medianRetention": 0.9868241507910467,
+      "signKeptShare": 0.964
+     },
+     "minus": {
+      "atlasN": 13,
+      "evaluated": 13,
+      "skipped": 0,
+      "Psame": 5,
+      "Popp": 0,
+      "M": 7,
+      "A": 1,
+      "weakSame": 7,
+      "weakOpp": 0,
+      "signKept": 13,
+      "zHalfMedian": [],
+      "medianRetention": 1.4670539427690457,
+      "signKeptShare": 1
+     }
+    },
+    "len10full": {
+     "plus": {
+      "atlasN": 106,
+      "evaluated": 57,
+      "skipped": 49,
+      "Psame": 35,
+      "Popp": 0,
+      "M": 22,
+      "A": 0,
+      "weakSame": 14,
+      "weakOpp": 1,
+      "signKept": 56,
+      "zHalfMedian": [],
+      "medianRetention": 1.1605878858883163,
+      "signKeptShare": 0.982
+     },
+     "minus": {
+      "atlasN": 13,
+      "evaluated": 12,
+      "skipped": 1,
+      "Psame": 4,
+      "Popp": 0,
+      "M": 8,
+      "A": 0,
+      "weakSame": 6,
+      "weakOpp": 0,
+      "signKept": 12,
+      "zHalfMedian": [],
+      "medianRetention": 1.4114213169829348,
+      "signKeptShare": 1
+     }
+    },
+    "drop1pct": {
+     "plus": {
+      "atlasN": 106,
+      "evaluated": 106,
+      "skipped": 0,
+      "Psame": 94,
+      "Popp": 0,
+      "M": 12,
+      "A": 0,
+      "weakSame": 12,
+      "weakOpp": 0,
+      "signKept": 106,
+      "zHalfMedian": [],
+      "medianRetention": 0.9993985984544702,
+      "signKeptShare": 1
+     },
+     "minus": {
+      "atlasN": 13,
+      "evaluated": 13,
+      "skipped": 0,
+      "Psame": 11,
+      "Popp": 0,
+      "M": 2,
+      "A": 0,
+      "weakSame": 1,
+      "weakOpp": 0,
+      "signKept": 13,
+      "zHalfMedian": [],
+      "medianRetention": 0.9883250083660333,
+      "signKeptShare": 1
+     }
+    },
+    "dropHapax": {
+     "plus": {
+      "atlasN": 106,
+      "evaluated": 106,
+      "skipped": 0,
+      "Psame": 77,
+      "Popp": 0,
+      "M": 28,
+      "A": 1,
+      "weakSame": 25,
+      "weakOpp": 0,
+      "signKept": 106,
+      "zHalfMedian": [],
+      "medianRetention": 0.9245983813072036,
+      "signKeptShare": 1
+     },
+     "minus": {
+      "atlasN": 13,
+      "evaluated": 13,
+      "skipped": 0,
+      "Psame": 7,
+      "Popp": 0,
+      "M": 2,
+      "A": 4,
+      "weakSame": 1,
+      "weakOpp": 0,
+      "signKept": 13,
+      "zHalfMedian": [],
+      "medianRetention": 0.8317574559128689,
+      "signKeptShare": 1
+     }
+    },
+    "trunc5": {
+     "plus": {
+      "atlasN": 106,
+      "evaluated": 106,
+      "skipped": 0,
+      "Psame": 92,
+      "Popp": 1,
+      "M": 12,
+      "A": 1,
+      "weakSame": 10,
+      "weakOpp": 0,
+      "signKept": 105,
+      "zHalfMedian": [],
+      "medianRetention": 1.0453683691664486,
+      "signKeptShare": 0.991
+     },
+     "minus": {
+      "atlasN": 13,
+      "evaluated": 13,
+      "skipped": 0,
+      "Psame": 4,
+      "Popp": 0,
+      "M": 9,
+      "A": 0,
+      "weakSame": 7,
+      "weakOpp": 0,
+      "signKept": 13,
+      "zHalfMedian": [],
+      "medianRetention": 0.5294768167806876,
+      "signKeptShare": 1
+     }
+    },
+    "binHalf": {
+     "plus": {
+      "atlasN": 106,
+      "evaluated": 106,
+      "skipped": 0,
+      "Psame": 75,
+      "Popp": 1,
+      "M": 26,
+      "A": 4,
+      "weakSame": 16,
+      "weakOpp": 0,
+      "signKept": 104,
+      "zHalfMedian": [],
+      "medianRetention": 0.7969218255543504,
+      "signKeptShare": 0.981
+     },
+     "minus": {
+      "atlasN": 13,
+      "evaluated": 13,
+      "skipped": 0,
+      "Psame": 10,
+      "Popp": 0,
+      "M": 3,
+      "A": 0,
+      "weakSame": 2,
+      "weakOpp": 0,
+      "signKept": 12,
+      "zHalfMedian": [],
+      "medianRetention": 1.1386584978019019,
+      "signKeptShare": 0.923
+     }
+    },
+    "binMass4": {
+     "plus": {
+      "atlasN": 106,
+      "evaluated": 106,
+      "skipped": 0,
+      "Psame": 90,
+      "Popp": 3,
+      "M": 10,
+      "A": 3,
+      "weakSame": 4,
+      "weakOpp": 0,
+      "signKept": 101,
+      "zHalfMedian": [],
+      "medianRetention": 0.4099732741104995,
+      "signKeptShare": 0.953
+     },
+     "minus": {
+      "atlasN": 13,
+      "evaluated": 13,
+      "skipped": 0,
+      "Psame": 0,
+      "Popp": 7,
+      "M": 5,
+      "A": 1,
+      "weakSame": 0,
+      "weakOpp": 1,
+      "signKept": 2,
+      "zHalfMedian": [],
+      "medianRetention": -0.10406625922169918,
+      "signKeptShare": 0.154
+     }
+    },
+    "plugin": {
+     "plus": {
+      "atlasN": 106,
+      "evaluated": 106,
+      "skipped": 0,
+      "Psame": 106,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 106,
+      "zHalfMedian": [],
+      "medianRetention": 1.0000414865843537,
+      "signKeptShare": 1
+     },
+     "minus": {
+      "atlasN": 13,
+      "evaluated": 13,
+      "skipped": 0,
+      "Psame": 13,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 13,
+      "zHalfMedian": [],
+      "medianRetention": 1.0000330715933958,
+      "signKeptShare": 1
+     }
+    }
+   }
+  },
+  "code-grain": {
+   "n": 46,
+   "nPlus": 14,
+   "nMinus": 32,
+   "variants": {
+    "base": {
+     "plus": {
+      "atlasN": 14,
+      "evaluated": 14,
+      "skipped": 0,
+      "Psame": 14,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 14,
+      "zHalfMedian": [],
+      "medianRetention": 1.0000002436440152,
+      "signKeptShare": 1
+     },
+     "minus": {
+      "atlasN": 32,
+      "evaluated": 32,
+      "skipped": 0,
+      "Psame": 32,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 32,
+      "zHalfMedian": [],
+      "medianRetention": 1.0000002187373198,
+      "signKeptShare": 1
+     }
+    },
+    "tok7500_r0": {
+     "plus": {
+      "atlasN": 14,
+      "evaluated": 14,
+      "skipped": 0,
+      "Psame": 4,
+      "Popp": 0,
+      "M": 9,
+      "A": 1,
+      "weakSame": 3,
+      "weakOpp": 1,
+      "signKept": 13,
+      "zHalfMedian": [],
+      "medianRetention": 0.6538980697076081,
+      "signKeptShare": 0.929
+     },
+     "minus": {
+      "atlasN": 32,
+      "evaluated": 32,
+      "skipped": 0,
+      "Psame": 16,
+      "Popp": 0,
+      "M": 12,
+      "A": 4,
+      "weakSame": 7,
+      "weakOpp": 0,
+      "signKept": 31,
+      "zHalfMedian": [],
+      "medianRetention": 1.5692876215366969,
+      "signKeptShare": 0.969
+     }
+    },
+    "tok7500len10_r0": {
+     "plus": {
+      "atlasN": 14,
+      "evaluated": 12,
+      "skipped": 2,
+      "Psame": 1,
+      "Popp": 0,
+      "M": 10,
+      "A": 1,
+      "weakSame": 3,
+      "weakOpp": 0,
+      "signKept": 9,
+      "zHalfMedian": [],
+      "medianRetention": 0.35539345808668626,
+      "signKeptShare": 0.75
+     },
+     "minus": {
+      "atlasN": 32,
+      "evaluated": 32,
+      "skipped": 0,
+      "Psame": 0,
+      "Popp": 0,
+      "M": 10,
+      "A": 22,
+      "weakSame": 1,
+      "weakOpp": 0,
+      "signKept": 16,
+      "zHalfMedian": [],
+      "medianRetention": 0.0038104489806093473,
+      "signKeptShare": 0.5
+     }
+    },
+    "tok7500_r1": {
+     "plus": {
+      "atlasN": 14,
+      "evaluated": 14,
+      "skipped": 0,
+      "Psame": 4,
+      "Popp": 0,
+      "M": 9,
+      "A": 1,
+      "weakSame": 2,
+      "weakOpp": 0,
+      "signKept": 13,
+      "zHalfMedian": [],
+      "medianRetention": 0.611569264953457,
+      "signKeptShare": 0.929
+     },
+     "minus": {
+      "atlasN": 32,
+      "evaluated": 32,
+      "skipped": 0,
+      "Psame": 15,
+      "Popp": 0,
+      "M": 15,
+      "A": 2,
+      "weakSame": 6,
+      "weakOpp": 0,
+      "signKept": 30,
+      "zHalfMedian": [],
+      "medianRetention": 1.3811877491533713,
+      "signKeptShare": 0.938
+     }
+    },
+    "tok7500len10_r1": {
+     "plus": {
+      "atlasN": 14,
+      "evaluated": 12,
+      "skipped": 2,
+      "Psame": 3,
+      "Popp": 0,
+      "M": 7,
+      "A": 2,
+      "weakSame": 2,
+      "weakOpp": 0,
+      "signKept": 10,
+      "zHalfMedian": [],
+      "medianRetention": 0.5174053474435539,
+      "signKeptShare": 0.833
+     },
+     "minus": {
+      "atlasN": 32,
+      "evaluated": 32,
+      "skipped": 0,
+      "Psame": 0,
+      "Popp": 0,
+      "M": 14,
+      "A": 18,
+      "weakSame": 1,
+      "weakOpp": 0,
+      "signKept": 16,
+      "zHalfMedian": [],
+      "medianRetention": 0.033512828290646106,
+      "signKeptShare": 0.5
+     }
+    },
+    "tok20000": {
+     "plus": {
+      "atlasN": 14,
+      "evaluated": 13,
+      "skipped": 1,
+      "Psame": 6,
+      "Popp": 0,
+      "M": 7,
+      "A": 0,
+      "weakSame": 4,
+      "weakOpp": 0,
+      "signKept": 13,
+      "zHalfMedian": [],
+      "medianRetention": 0.905617537131429,
+      "signKeptShare": 1
+     },
+     "minus": {
+      "atlasN": 32,
+      "evaluated": 32,
+      "skipped": 0,
+      "Psame": 22,
+      "Popp": 0,
+      "M": 10,
+      "A": 0,
+      "weakSame": 7,
+      "weakOpp": 0,
+      "signKept": 32,
+      "zHalfMedian": [],
+      "medianRetention": 1.1759199840907408,
+      "signKeptShare": 1
+     }
+    },
+    "len10full": {
+     "plus": {
+      "atlasN": 14,
+      "evaluated": 10,
+      "skipped": 4,
+      "Psame": 6,
+      "Popp": 0,
+      "M": 3,
+      "A": 1,
+      "weakSame": 2,
+      "weakOpp": 0,
+      "signKept": 9,
+      "zHalfMedian": [],
+      "medianRetention": 0.6332137711225667,
+      "signKeptShare": 0.9
+     },
+     "minus": {
+      "atlasN": 32,
+      "evaluated": 26,
+      "skipped": 6,
+      "Psame": 4,
+      "Popp": 0,
+      "M": 19,
+      "A": 3,
+      "weakSame": 4,
+      "weakOpp": 3,
+      "signKept": 18,
+      "zHalfMedian": [],
+      "medianRetention": 0.11060086203595779,
+      "signKeptShare": 0.692
+     }
+    },
+    "drop1pct": {
+     "plus": {
+      "atlasN": 14,
+      "evaluated": 14,
+      "skipped": 0,
+      "Psame": 13,
+      "Popp": 0,
+      "M": 1,
+      "A": 0,
+      "weakSame": 1,
+      "weakOpp": 0,
+      "signKept": 14,
+      "zHalfMedian": [],
+      "medianRetention": 0.9988901081067996,
+      "signKeptShare": 1
+     },
+     "minus": {
+      "atlasN": 32,
+      "evaluated": 32,
+      "skipped": 0,
+      "Psame": 30,
+      "Popp": 0,
+      "M": 2,
+      "A": 0,
+      "weakSame": 2,
+      "weakOpp": 0,
+      "signKept": 32,
+      "zHalfMedian": [],
+      "medianRetention": 1.0032316703723165,
+      "signKeptShare": 1
+     }
+    },
+    "dropHapax": {
+     "plus": {
+      "atlasN": 14,
+      "evaluated": 14,
+      "skipped": 0,
+      "Psame": 13,
+      "Popp": 0,
+      "M": 1,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 14,
+      "zHalfMedian": [],
+      "medianRetention": 0.9398190034893815,
+      "signKeptShare": 1
+     },
+     "minus": {
+      "atlasN": 32,
+      "evaluated": 32,
+      "skipped": 0,
+      "Psame": 31,
+      "Popp": 0,
+      "M": 1,
+      "A": 0,
+      "weakSame": 1,
+      "weakOpp": 0,
+      "signKept": 32,
+      "zHalfMedian": [],
+      "medianRetention": 1.0706777889691281,
+      "signKeptShare": 1
+     }
+    },
+    "trunc5": {
+     "plus": {
+      "atlasN": 14,
+      "evaluated": 14,
+      "skipped": 0,
+      "Psame": 10,
+      "Popp": 1,
+      "M": 2,
+      "A": 1,
+      "weakSame": 2,
+      "weakOpp": 0,
+      "signKept": 13,
+      "zHalfMedian": [],
+      "medianRetention": 0.8838317594465113,
+      "signKeptShare": 0.929
+     },
+     "minus": {
+      "atlasN": 32,
+      "evaluated": 32,
+      "skipped": 0,
+      "Psame": 30,
+      "Popp": 0,
+      "M": 2,
+      "A": 0,
+      "weakSame": 1,
+      "weakOpp": 0,
+      "signKept": 32,
+      "zHalfMedian": [],
+      "medianRetention": 1.253302387324794,
+      "signKeptShare": 1
+     }
+    },
+    "binHalf": {
+     "plus": {
+      "atlasN": 14,
+      "evaluated": 14,
+      "skipped": 0,
+      "Psame": 11,
+      "Popp": 0,
+      "M": 3,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 14,
+      "zHalfMedian": [],
+      "medianRetention": 0.8344271839238393,
+      "signKeptShare": 1
+     },
+     "minus": {
+      "atlasN": 32,
+      "evaluated": 32,
+      "skipped": 0,
+      "Psame": 20,
+      "Popp": 2,
+      "M": 9,
+      "A": 1,
+      "weakSame": 1,
+      "weakOpp": 0,
+      "signKept": 27,
+      "zHalfMedian": [],
+      "medianRetention": 0.40708173209596277,
+      "signKeptShare": 0.844
+     }
+    },
+    "binMass4": {
+     "plus": {
+      "atlasN": 14,
+      "evaluated": 14,
+      "skipped": 0,
+      "Psame": 10,
+      "Popp": 2,
+      "M": 2,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 12,
+      "zHalfMedian": [],
+      "medianRetention": 0.3585855661138428,
+      "signKeptShare": 0.857
+     },
+     "minus": {
+      "atlasN": 32,
+      "evaluated": 32,
+      "skipped": 0,
+      "Psame": 8,
+      "Popp": 21,
+      "M": 3,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 8,
+      "zHalfMedian": [],
+      "medianRetention": -0.3753453049205213,
+      "signKeptShare": 0.25
+     }
+    },
+    "plugin": {
+     "plus": {
+      "atlasN": 14,
+      "evaluated": 14,
+      "skipped": 0,
+      "Psame": 14,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 14,
+      "zHalfMedian": [],
+      "medianRetention": 1.0000221064817374,
+      "signKeptShare": 1
+     },
+     "minus": {
+      "atlasN": 32,
+      "evaluated": 32,
+      "skipped": 0,
+      "Psame": 32,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 32,
+      "zHalfMedian": [],
+      "medianRetention": 1.0000204970883197,
+      "signKeptShare": 1
+     }
+    }
+   }
+  },
+  "notation": {
+   "n": 7,
+   "nPlus": 6,
+   "nMinus": 1,
+   "variants": {
+    "base": {
+     "plus": {
+      "atlasN": 6,
+      "evaluated": 6,
+      "skipped": 0,
+      "Psame": 6,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 6,
+      "zHalfMedian": [],
+      "medianRetention": 1.0000006081983672,
+      "signKeptShare": 1
+     },
+     "minus": {
+      "atlasN": 1,
+      "evaluated": 1,
+      "skipped": 0,
+      "Psame": 1,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 1,
+      "zHalfMedian": [],
+      "medianRetention": 0.9999999348066431,
+      "signKeptShare": 1
+     }
+    },
+    "tok7500_r0": {
+     "plus": {
+      "atlasN": 6,
+      "evaluated": 5,
+      "skipped": 1,
+      "Psame": 2,
+      "Popp": 0,
+      "M": 3,
+      "A": 0,
+      "weakSame": 1,
+      "weakOpp": 0,
+      "signKept": 5,
+      "zHalfMedian": [],
+      "medianRetention": 0.8334885345031021,
+      "signKeptShare": 1
+     },
+     "minus": {
+      "atlasN": 1,
+      "evaluated": 0,
+      "skipped": 1,
+      "Psame": 0,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 0,
+      "zHalfMedian": [],
+      "medianRetention": null,
+      "signKeptShare": null
+     }
+    },
+    "tok7500len10_r0": {
+     "plus": {
+      "atlasN": 6,
+      "evaluated": 5,
+      "skipped": 1,
+      "Psame": 4,
+      "Popp": 0,
+      "M": 0,
+      "A": 1,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 5,
+      "zHalfMedian": [],
+      "medianRetention": 1.1783161065994312,
+      "signKeptShare": 1
+     },
+     "minus": {
+      "atlasN": 1,
+      "evaluated": 0,
+      "skipped": 1,
+      "Psame": 0,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 0,
+      "zHalfMedian": [],
+      "medianRetention": null,
+      "signKeptShare": null
+     }
+    },
+    "tok7500_r1": {
+     "plus": {
+      "atlasN": 6,
+      "evaluated": 5,
+      "skipped": 1,
+      "Psame": 3,
+      "Popp": 0,
+      "M": 2,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 5,
+      "zHalfMedian": [],
+      "medianRetention": 0.909149156317915,
+      "signKeptShare": 1
+     },
+     "minus": {
+      "atlasN": 1,
+      "evaluated": 0,
+      "skipped": 1,
+      "Psame": 0,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 0,
+      "zHalfMedian": [],
+      "medianRetention": null,
+      "signKeptShare": null
+     }
+    },
+    "tok7500len10_r1": {
+     "plus": {
+      "atlasN": 6,
+      "evaluated": 5,
+      "skipped": 1,
+      "Psame": 3,
+      "Popp": 0,
+      "M": 1,
+      "A": 1,
+      "weakSame": 1,
+      "weakOpp": 0,
+      "signKept": 5,
+      "zHalfMedian": [],
+      "medianRetention": 1.1811771745875115,
+      "signKeptShare": 1
+     },
+     "minus": {
+      "atlasN": 1,
+      "evaluated": 0,
+      "skipped": 1,
+      "Psame": 0,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 0,
+      "zHalfMedian": [],
+      "medianRetention": null,
+      "signKeptShare": null
+     }
+    },
+    "tok20000": {
+     "plus": {
+      "atlasN": 6,
+      "evaluated": 5,
+      "skipped": 1,
+      "Psame": 3,
+      "Popp": 0,
+      "M": 2,
+      "A": 0,
+      "weakSame": 2,
+      "weakOpp": 0,
+      "signKept": 5,
+      "zHalfMedian": [],
+      "medianRetention": 1.0136855175142656,
+      "signKeptShare": 1
+     },
+     "minus": {
+      "atlasN": 1,
+      "evaluated": 0,
+      "skipped": 1,
+      "Psame": 0,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 0,
+      "zHalfMedian": [],
+      "medianRetention": null,
+      "signKeptShare": null
+     }
+    },
+    "len10full": {
+     "plus": {
+      "atlasN": 6,
+      "evaluated": 5,
+      "skipped": 1,
+      "Psame": 4,
+      "Popp": 0,
+      "M": 1,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 5,
+      "zHalfMedian": [],
+      "medianRetention": 1.0366608863063287,
+      "signKeptShare": 1
+     },
+     "minus": {
+      "atlasN": 1,
+      "evaluated": 0,
+      "skipped": 1,
+      "Psame": 0,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 0,
+      "zHalfMedian": [],
+      "medianRetention": null,
+      "signKeptShare": null
+     }
+    },
+    "drop1pct": {
+     "plus": {
+      "atlasN": 6,
+      "evaluated": 6,
+      "skipped": 0,
+      "Psame": 6,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 6,
+      "zHalfMedian": [],
+      "medianRetention": 1.0011820862680458,
+      "signKeptShare": 1
+     },
+     "minus": {
+      "atlasN": 1,
+      "evaluated": 1,
+      "skipped": 0,
+      "Psame": 1,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 1,
+      "zHalfMedian": [],
+      "medianRetention": 1.0002705445987459,
+      "signKeptShare": 1
+     }
+    },
+    "dropHapax": {
+     "plus": {
+      "atlasN": 6,
+      "evaluated": 6,
+      "skipped": 0,
+      "Psame": 6,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 6,
+      "zHalfMedian": [],
+      "medianRetention": 0.9879921400773486,
+      "signKeptShare": 1
+     },
+     "minus": {
+      "atlasN": 1,
+      "evaluated": 1,
+      "skipped": 0,
+      "Psame": 1,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 1,
+      "zHalfMedian": [],
+      "medianRetention": 1.0321140074264457,
+      "signKeptShare": 1
+     }
+    },
+    "trunc5": {
+     "plus": {
+      "atlasN": 6,
+      "evaluated": 6,
+      "skipped": 0,
+      "Psame": 5,
+      "Popp": 0,
+      "M": 1,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 6,
+      "zHalfMedian": [],
+      "medianRetention": 0.9785044019550615,
+      "signKeptShare": 1
+     },
+     "minus": {
+      "atlasN": 1,
+      "evaluated": 1,
+      "skipped": 0,
+      "Psame": 1,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 1,
+      "zHalfMedian": [],
+      "medianRetention": 1.012294445956766,
+      "signKeptShare": 1
+     }
+    },
+    "binHalf": {
+     "plus": {
+      "atlasN": 6,
+      "evaluated": 6,
+      "skipped": 0,
+      "Psame": 5,
+      "Popp": 0,
+      "M": 1,
+      "A": 0,
+      "weakSame": 1,
+      "weakOpp": 0,
+      "signKept": 6,
+      "zHalfMedian": [],
+      "medianRetention": 0.811692656374964,
+      "signKeptShare": 1
+     },
+     "minus": {
+      "atlasN": 1,
+      "evaluated": 1,
+      "skipped": 0,
+      "Psame": 1,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 1,
+      "zHalfMedian": [],
+      "medianRetention": 0.6235852671324679,
+      "signKeptShare": 1
+     }
+    },
+    "binMass4": {
+     "plus": {
+      "atlasN": 6,
+      "evaluated": 6,
+      "skipped": 0,
+      "Psame": 6,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 6,
+      "zHalfMedian": [],
+      "medianRetention": 0.7255409292388133,
+      "signKeptShare": 1
+     },
+     "minus": {
+      "atlasN": 1,
+      "evaluated": 1,
+      "skipped": 0,
+      "Psame": 0,
+      "Popp": 1,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 0,
+      "zHalfMedian": [],
+      "medianRetention": -1.7503943239182298,
+      "signKeptShare": 0
+     }
+    },
+    "plugin": {
+     "plus": {
+      "atlasN": 6,
+      "evaluated": 6,
+      "skipped": 0,
+      "Psame": 6,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 6,
+      "zHalfMedian": [],
+      "medianRetention": 1.0000540997348661,
+      "signKeptShare": 1
+     },
+     "minus": {
+      "atlasN": 1,
+      "evaluated": 1,
+      "skipped": 0,
+      "Psame": 1,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 1,
+      "zHalfMedian": [],
+      "medianRetention": 1.0000161835232073,
+      "signKeptShare": 1
+     }
+    }
+   }
+  },
+  "charbigram": {
+   "n": 7,
+   "nPlus": 0,
+   "nMinus": 7,
+   "variants": {
+    "base": {
+     "plus": {
+      "atlasN": 0,
+      "evaluated": 0,
+      "skipped": 0,
+      "Psame": 0,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 0,
+      "zHalfMedian": [],
+      "medianRetention": null,
+      "signKeptShare": null
+     },
+     "minus": {
+      "atlasN": 7,
+      "evaluated": 7,
+      "skipped": 0,
+      "Psame": 7,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 7,
+      "zHalfMedian": [],
+      "medianRetention": 1.000000050318508,
+      "signKeptShare": 1
+     }
+    },
+    "tok7500_r0": {
+     "plus": {
+      "atlasN": 0,
+      "evaluated": 0,
+      "skipped": 0,
+      "Psame": 0,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 0,
+      "zHalfMedian": [],
+      "medianRetention": null,
+      "signKeptShare": null
+     },
+     "minus": {
+      "atlasN": 7,
+      "evaluated": 6,
+      "skipped": 1,
+      "Psame": 3,
+      "Popp": 0,
+      "M": 3,
+      "A": 0,
+      "weakSame": 2,
+      "weakOpp": 0,
+      "signKept": 6,
+      "zHalfMedian": [],
+      "medianRetention": 2.0184689048661917,
+      "signKeptShare": 1
+     }
+    },
+    "tok7500len10_r0": {
+     "plus": {
+      "atlasN": 0,
+      "evaluated": 0,
+      "skipped": 0,
+      "Psame": 0,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 0,
+      "zHalfMedian": [],
+      "medianRetention": null,
+      "signKeptShare": null
+     },
+     "minus": {
+      "atlasN": 7,
+      "evaluated": 5,
+      "skipped": 2,
+      "Psame": 3,
+      "Popp": 0,
+      "M": 2,
+      "A": 0,
+      "weakSame": 2,
+      "weakOpp": 0,
+      "signKept": 5,
+      "zHalfMedian": [],
+      "medianRetention": 2.435623089576255,
+      "signKeptShare": 1
+     }
+    },
+    "tok7500_r1": {
+     "plus": {
+      "atlasN": 0,
+      "evaluated": 0,
+      "skipped": 0,
+      "Psame": 0,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 0,
+      "zHalfMedian": [],
+      "medianRetention": null,
+      "signKeptShare": null
+     },
+     "minus": {
+      "atlasN": 7,
+      "evaluated": 6,
+      "skipped": 1,
+      "Psame": 2,
+      "Popp": 0,
+      "M": 4,
+      "A": 0,
+      "weakSame": 4,
+      "weakOpp": 0,
+      "signKept": 6,
+      "zHalfMedian": [],
+      "medianRetention": 2.075120321985354,
+      "signKeptShare": 1
+     }
+    },
+    "tok7500len10_r1": {
+     "plus": {
+      "atlasN": 0,
+      "evaluated": 0,
+      "skipped": 0,
+      "Psame": 0,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 0,
+      "zHalfMedian": [],
+      "medianRetention": null,
+      "signKeptShare": null
+     },
+     "minus": {
+      "atlasN": 7,
+      "evaluated": 5,
+      "skipped": 2,
+      "Psame": 3,
+      "Popp": 0,
+      "M": 2,
+      "A": 0,
+      "weakSame": 2,
+      "weakOpp": 0,
+      "signKept": 5,
+      "zHalfMedian": [],
+      "medianRetention": 2.01915806224677,
+      "signKeptShare": 1
+     }
+    },
+    "tok20000": {
+     "plus": {
+      "atlasN": 0,
+      "evaluated": 0,
+      "skipped": 0,
+      "Psame": 0,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 0,
+      "zHalfMedian": [],
+      "medianRetention": null,
+      "signKeptShare": null
+     },
+     "minus": {
+      "atlasN": 7,
+      "evaluated": 6,
+      "skipped": 1,
+      "Psame": 5,
+      "Popp": 0,
+      "M": 1,
+      "A": 0,
+      "weakSame": 1,
+      "weakOpp": 0,
+      "signKept": 6,
+      "zHalfMedian": [],
+      "medianRetention": 1.7827877623077033,
+      "signKeptShare": 1
+     }
+    },
+    "len10full": {
+     "plus": {
+      "atlasN": 0,
+      "evaluated": 0,
+      "skipped": 0,
+      "Psame": 0,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 0,
+      "zHalfMedian": [],
+      "medianRetention": null,
+      "signKeptShare": null
+     },
+     "minus": {
+      "atlasN": 7,
+      "evaluated": 4,
+      "skipped": 3,
+      "Psame": 4,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 4,
+      "zHalfMedian": [],
+      "medianRetention": 1.2916400532600305,
+      "signKeptShare": 1
+     }
+    },
+    "drop1pct": {
+     "plus": {
+      "atlasN": 0,
+      "evaluated": 0,
+      "skipped": 0,
+      "Psame": 0,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 0,
+      "zHalfMedian": [],
+      "medianRetention": null,
+      "signKeptShare": null
+     },
+     "minus": {
+      "atlasN": 7,
+      "evaluated": 7,
+      "skipped": 0,
+      "Psame": 7,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 7,
+      "zHalfMedian": [],
+      "medianRetention": 0.9931061107916228,
+      "signKeptShare": 1
+     }
+    },
+    "dropHapax": {
+     "plus": {
+      "atlasN": 0,
+      "evaluated": 0,
+      "skipped": 0,
+      "Psame": 0,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 0,
+      "zHalfMedian": [],
+      "medianRetention": null,
+      "signKeptShare": null
+     },
+     "minus": {
+      "atlasN": 7,
+      "evaluated": 7,
+      "skipped": 0,
+      "Psame": 5,
+      "Popp": 0,
+      "M": 2,
+      "A": 0,
+      "weakSame": 1,
+      "weakOpp": 0,
+      "signKept": 6,
+      "zHalfMedian": [],
+      "medianRetention": 0.8589398125740528,
+      "signKeptShare": 0.857
+     }
+    },
+    "trunc5": {
+     "plus": {
+      "atlasN": 0,
+      "evaluated": 0,
+      "skipped": 0,
+      "Psame": 0,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 0,
+      "zHalfMedian": [],
+      "medianRetention": null,
+      "signKeptShare": null
+     },
+     "minus": {
+      "atlasN": 7,
+      "evaluated": 7,
+      "skipped": 0,
+      "Psame": 7,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 7,
+      "zHalfMedian": [],
+      "medianRetention": 1.000000050318508,
+      "signKeptShare": 1
+     }
+    },
+    "binHalf": {
+     "plus": {
+      "atlasN": 0,
+      "evaluated": 0,
+      "skipped": 0,
+      "Psame": 0,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 0,
+      "zHalfMedian": [],
+      "medianRetention": null,
+      "signKeptShare": null
+     },
+     "minus": {
+      "atlasN": 7,
+      "evaluated": 7,
+      "skipped": 0,
+      "Psame": 7,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 7,
+      "zHalfMedian": [],
+      "medianRetention": 1.0005284621253598,
+      "signKeptShare": 1
+     }
+    },
+    "binMass4": {
+     "plus": {
+      "atlasN": 0,
+      "evaluated": 0,
+      "skipped": 0,
+      "Psame": 0,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 0,
+      "zHalfMedian": [],
+      "medianRetention": null,
+      "signKeptShare": null
+     },
+     "minus": {
+      "atlasN": 7,
+      "evaluated": 7,
+      "skipped": 0,
+      "Psame": 3,
+      "Popp": 2,
+      "M": 2,
+      "A": 0,
+      "weakSame": 1,
+      "weakOpp": 0,
+      "signKept": 5,
+      "zHalfMedian": [],
+      "medianRetention": 0.04191292525893492,
+      "signKeptShare": 0.714
+     }
+    },
+    "plugin": {
+     "plus": {
+      "atlasN": 0,
+      "evaluated": 0,
+      "skipped": 0,
+      "Psame": 0,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 0,
+      "zHalfMedian": [],
+      "medianRetention": null,
+      "signKeptShare": null
+     },
+     "minus": {
+      "atlasN": 7,
+      "evaluated": 7,
+      "skipped": 0,
+      "Psame": 7,
+      "Popp": 0,
+      "M": 0,
+      "A": 0,
+      "weakSame": 0,
+      "weakOpp": 0,
+      "signKept": 7,
+      "zHalfMedian": [],
+      "medianRetention": 1.0000373982896062,
+      "signKeptShare": 1
+     }
+    }
+   }
+  }
+ },
+ "replicateCeiling_tok7500": {
+  "both": 165,
+  "signAgree": 157,
+  "bothPresent": 29,
+  "bothPresentSameSign": 29
+ },
+ "replicateCeiling_tok7500len10": {
+  "both": 161,
+  "signAgree": 148,
+  "bothPresent": 10,
+  "bothPresentSameSign": 10
+ },
+ "signByKindUnderVariant": {
+  "tok7500": {
+   "word-grain": {
+    "n": 112,
+    "medianV": 0.00691,
+    "share_pos": 0.83
+   },
+   "code-grain": {
+    "n": 46,
+    "medianV": -0.01514,
+    "share_pos": 0.304
+   },
+   "notation": {
+    "n": 5,
+    "medianV": 0.0167,
+    "share_pos": 1
+   },
+   "charbigram": {
+    "n": 6,
+    "medianV": -0.06675,
+    "share_pos": 0
+   }
+  },
+  "tok7500len10": {
+   "word-grain": {
+    "n": 107,
+    "medianV": 0.00741,
+    "share_pos": 0.832
+   },
+   "code-grain": {
+    "n": 44,
+    "medianV": 0.00036,
+    "share_pos": 0.545
+   },
+   "notation": {
+    "n": 5,
+    "medianV": 0.02154,
+    "share_pos": 1
+   },
+   "charbigram": {
+    "n": 5,
+    "medianV": -0.07591,
+    "share_pos": 0
+   }
+  },
+  "len10full": {
+   "word-grain": {
+    "n": 69,
+    "medianV": 0.00772,
+    "share_pos": 0.812
+   },
+   "code-grain": {
+    "n": 36,
+    "medianV": -0.00059,
+    "share_pos": 0.472
+   },
+   "notation": {
+    "n": 5,
+    "medianV": 0.02231,
+    "share_pos": 1
+   },
+   "charbigram": {
+    "n": 4,
+    "medianV": -0.05019,
+    "share_pos": 0
+   }
+  },
+  "tok20000": {
+   "word-grain": {
+    "n": 97,
+    "medianV": 0.00522,
+    "share_pos": 0.835
+   },
+   "code-grain": {
+    "n": 45,
+    "medianV": -0.01241,
+    "share_pos": 0.289
+   },
+   "notation": {
+    "n": 5,
+    "medianV": 0.02273,
+    "share_pos": 1
+   },
+   "charbigram": {
+    "n": 6,
+    "medianV": -0.05321,
+    "share_pos": 0
+   }
+  }
+ }
+}

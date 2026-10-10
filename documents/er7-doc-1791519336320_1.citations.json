@@ -1,0 +1,164 @@
+{
+  "docId": "er7-doc-1791519336320:1",
+  "citations": [
+    {
+      "essaySentence": "The City Council's power rests not in its ability to make decisions, but in its ability to remain unseen and unchallenged.",
+      "source": null,
+      "kind": "unsupported",
+      "giver": "Gemma 2 2B",
+      "priors": [
+        "eoreader7:shape-prior:essay-v1",
+        "pos:en-ud-ewt + born anchoring"
+      ],
+      "atoms": [],
+      "basis": "no source shares enough of the claim's words — this is the essay's own statement, cited to its giver (the model) rather than passed off as material"
+    },
+    {
+      "essaySentence": "This means that a transparent record of every individual on the council is crucial for understanding their true influence, especially when they are rarely seen in public.",
+      "source": null,
+      "kind": "unsupported",
+      "giver": "Gemma 2 2B",
+      "priors": [
+        "eoreader7:shape-prior:essay-v1",
+        "pos:en-ud-ewt + born anchoring"
+      ],
+      "atoms": [],
+      "basis": "no source shares enough of the claim's words — this is the essay's own statement, cited to its giver (the model) rather than passed off as material"
+    },
+    {
+      "essaySentence": "The document lists upcoming City Council meetings and provides links for agendas, minutes, and participation information. \"\"\" Council Member: named in this document with their title (Mayor (stated once so far) The piece needs to list every Boulder City Council member, including their title (Mayor, Mayor Pro Tem, or Council Member). \"\"\"",
+      "source": {
+        "url": "Boulder_City_Council.txt",
+        "host": "Boulder_City_Council.txt"
+      },
+      "giver": "Boulder_City_Council.txt",
+      "priors": [
+        "eoreader7:shape-prior:essay-v1",
+        "pos:en-ud-ewt + born anchoring"
+      ],
+      "groundingText": "The City Clerk's Office provides administrative support for City Council, among other duties, and is responsible for managing council-related webpages and documents.",
+      "verbatimSpan": "The City Clerk's Office provides administrative support for City Council, among other duties, and is responsible for managing council-related webpages and documents.",
+      "kind": "verbatim",
+      "at": [
+        2195,
+        2360
+      ],
+      "atoms": [
+        {
+          "kind": "name",
+          "value": "City",
+          "at": [
+            0,
+            4
+          ],
+          "supported": true,
+          "company": [
+            "council",
+            "council",
+            "boulder",
+            "council",
+            "council"
+          ]
+        },
+        {
+          "kind": "name",
+          "value": "Council",
+          "at": [
+            5,
+            12
+          ],
+          "supported": true,
+          "company": [
+            "city",
+            "boulder",
+            "city"
+          ]
+        },
+        {
+          "kind": "name",
+          "value": "Member",
+          "at": [
+            953,
+            959
+          ],
+          "supported": true,
+          "company": [
+            "city",
+            "council",
+            "meetings",
+            "council",
+            "city"
+          ]
+        },
+        {
+          "kind": "name",
+          "value": "Mayor",
+          "at": [
+            1094,
+            1099
+          ],
+          "supported": true,
+          "company": [
+            "city",
+            "council",
+            "council",
+            "member",
+            "city"
+          ]
+        },
+        {
+          "kind": "name",
+          "value": "Boulder",
+          "at": [
+            23,
+            30
+          ],
+          "supported": true,
+          "company": [
+            "city",
+            "council",
+            "council",
+            "city",
+            "council"
+          ]
+        },
+        {
+          "kind": "name",
+          "value": "Pro",
+          "at": [
+            109,
+            112
+          ],
+          "supported": true,
+          "company": [
+            "city",
+            "boulder",
+            "city"
+          ]
+        },
+        {
+          "kind": "name",
+          "value": "Tem",
+          "at": [
+            1358,
+            1361
+          ],
+          "supported": true,
+          "company": [
+            "council",
+            "council",
+            "member",
+            "with",
+            "mayor"
+          ]
+        }
+      ],
+      "retrievedAt": "2026-10-09T04:16:13.985Z"
+    }
+  ],
+  "of": 3,
+  "verbatim": 1,
+  "company": 0,
+  "unsupported": 2,
+  "basis": "mechanically attributed against 1 retained source(s): 1 verbatim, 0 company-supported (paraphrase, atoms byte-addressed), 2 unsupported (disclosed)"
+}

@@ -1,0 +1,22 @@
+{
+ "hdr": "6144c6c6cb88863c004ad3e804cd9e76d52eab2294a2d88cb5eb6b3be527440e",
+ "pairs": 600,
+ "aucs": {
+  "pInitX": {
+   "auc": 0.9017,
+   "lo": 0.8775,
+   "hi": 0.9261
+  },
+  "spanDay": {
+   "auc": 0.3842,
+   "lo": 0.3408,
+   "hi": 0.4247
+  },
+  "daysSeen": {
+   "auc": 0.8917,
+   "lo": 0.8704,
+   "hi": 0.9125
+  }
+ },
+ "spanIsPoolingArtefact": true
+}

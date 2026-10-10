@@ -1,0 +1,330 @@
+{
+  "schema": "EOWheel@1",
+  "task": "What is the scope of services in this contract? Answer with the verbatim sentence(s).",
+  "turns": [
+    {
+      "seq": 1,
+      "phase": "plan",
+      "operator": "SEG",
+      "grain": "Field",
+      "face": "Murch",
+      "def": {
+        "phase": "plan",
+        "satisfaction": "the void's staged phases, ordered toward a climbing arc, each phase a question in the register's form",
+        "basis": null
+      },
+      "eva": {
+        "phase": "plan",
+        "measure": {
+          "sections": 6,
+          "first": "What is What is the scope of services in this contract, marked off from everythi",
+          "arc": "climbing"
+        },
+        "basis": "the predicted fortune arc must match the genre's accumulated shape; the read below is its EVA",
+        "verdict": null
+      },
+      "rec": {
+        "sections": [
+          "What is What is the scope of services in this contract, marked off from everything adjacent to it — what space is this essay, and what is it NOT? What baseline account of What is the scope of services in this contract must be built before any judgment can land on it?",
+          "Does What is the scope of services in this contract name ONE being that clears its ground, or several that must be kept apart? Which What is the scope of services in this contract is this — the names and the referent, so one being is meant, not a byte string?",
+          "What KIND is What is the scope of services in this contract — and do its kinds hold as kinds against the material, or are they unresolved? How many distinct What is the scope of services in this contract keep recurring as the same kind across the sources — each candidate signed as a proposal?",
+          "What extent must the essay cover, and in what units — What is the scope of services in this contract's range, scale, span — so a hole is a visible uncovered stretch? What connective field do What is the scope of services in this contract's relations live in — the ambient of possible relations before any single one is confirmed?",
+          "Where do the parts of What is the scope of services in this contract's story part at natural seams — what separates into distinct chapters at the material's own bridges? What recurring relation runs through What is the scope of services in this contract's story — the same cause → consequence cycle found at a real recurrence floor?",
+          "What binds each named thing to What is the scope of services in this contract — the material's own edges, each span-verified against the bytes? Where do two sources about What is the scope of services in this contract agree into one claim with two witnesses — which re-sightings fold into the same note?"
+        ],
+        "register": null
+      },
+      "basis": null
+    },
+    {
+      "seq": 2,
+      "phase": "declare",
+      "operator": "DEF",
+      "grain": "Atmosphere",
+      "face": "the void declares",
+      "def": {
+        "phase": "declare",
+        "satisfaction": "the piece is declared in the staged register: no felt target — the register's own shape stands",
+        "basis": null
+      },
+      "eva": {
+        "phase": "declare",
+        "measure": {
+          "feltTarget": null,
+          "genre": null
+        },
+        "basis": "the frame is declared before the write; EVA measures the write against it",
+        "verdict": null
+      },
+      "rec": {
+        "feltTarget": null,
+        "register": null
+      },
+      "basis": null
+    },
+    {
+      "seq": 3,
+      "phase": "read",
+      "operator": "CON",
+      "grain": "Link",
+      "face": "Gore",
+      "def": {
+        "phase": "read",
+        "satisfaction": "each phase's sub-satisfaction: what would satisfy THIS phase, from THIS material",
+        "basis": null
+      },
+      "eva": {
+        "phase": "read",
+        "measure": {
+          "propositions": 0,
+          "referents": 0,
+          "surprise": 0
+        },
+        "basis": "the reader's own surprise on the material is the EVA — the felt dimension of the read",
+        "verdict": null
+      },
+      "rec": {
+        "relations": 0,
+        "referents": 0,
+        "surprise": 0,
+        "ground": true
+      },
+      "basis": null
+    },
+    {
+      "seq": 4,
+      "phase": "write",
+      "operator": "SYN",
+      "grain": "Field",
+      "face": "Wolfe",
+      "def": {
+        "phase": "write",
+        "satisfaction": "the parts compose into one carried ground — the artifact itself, Wolfe's work",
+        "basis": null
+      },
+      "eva": {
+        "phase": "write",
+        "measure": {
+          "parts": 1,
+          "chars": 10453,
+          "grounded": true,
+          "seed": null,
+          "cast": []
+        },
+        "basis": "the write is the SYNthesis of the read's ground into one piece — measured against the declare; every cast member keeps its provenance",
+        "verdict": null
+      },
+      "rec": {
+        "parts": 1,
+        "chars": 10453,
+        "voice": "register",
+        "seed": null,
+        "cast": []
+      },
+      "basis": null
+    },
+    {
+      "seq": 5,
+      "phase": "verdict",
+      "operator": "EVA",
+      "grain": "Lens",
+      "face": "LaVar",
+      "def": {
+        "phase": "verdict",
+        "satisfaction": "satisfaction = climbing arc, felt releases, grounded claims — DEF'd before the plan",
+        "basis": null
+      },
+      "eva": {
+        "phase": "verdict",
+        "measure": {
+          "ok": false,
+          "filled": 0,
+          "of": 1,
+          "failures": 1,
+          "strain": 2,
+          "feltTarget": null,
+          "feltRead": 0,
+          "feltGap": null,
+          "ranke": 2,
+          "unsupported": 0,
+          "dmca": {
+            "ok": true,
+            "quoted": 1,
+            "copied": 0
+          },
+          "categorized": {
+            "derivation": "Reproduce",
+            "field": "Reproduce",
+            "echo": {
+              "ratio": 0.03333333333333333,
+              "window": {
+                "n": 6,
+                "min": 0,
+                "max": 0.06451612903225806
+              },
+              "disagreement": false
+            },
+            "cell": {
+              "grain": "Pattern",
+              "phase": "Structure",
+              "derivation": "Reproduce",
+              "name": "Convention",
+              "archon": "Alexander"
+            },
+            "reproduce": {
+              "quoted": 1,
+              "copied": 0
+            },
+            "derive": 0,
+            "invent": 0,
+            "paraphraseCandidates": 0,
+            "paraphraseEquated": 0,
+            "paraphraseChased": null
+          }
+        },
+        "basis": "the artifact is measured against the declare — a real difference, never a softmax",
+        "verdict": null
+      },
+      "rec": {
+        "ok": false,
+        "filled": 0,
+        "of": 1,
+        "failures": [
+          {
+            "kind": "unresolved",
+            "sectionIndex": 0,
+            "detail": "section 1 folds to no material referent — LaVar cannot grade prose the record does not carry"
+          }
+        ],
+        "totalStrain": 2,
+        "recall": 0,
+        "covered": 0,
+        "ofPropositions": 0,
+        "basis": "LaVar: the material carried no propositions to grade against — total (incl. prompted echo) 0, 0 of 0 propositions were handed to the mouth and cannot score unprompted",
+        "perSection": [
+          {
+            "sectionIndex": 0,
+            "carried": 0
+          }
+        ],
+        "total": {
+          "ok": false,
+          "filled": 0,
+          "of": 1,
+          "failures": [
+            {
+              "kind": "unresolved",
+              "sectionIndex": 0,
+              "detail": "section 1 folds to no material referent — LaVar cannot grade prose the record does not carry"
+            }
+          ],
+          "totalStrain": 2,
+          "recall": 0,
+          "covered": 0,
+          "ofPropositions": 0,
+          "basis": "LaVar: the material carried no propositions to grade against",
+          "perSection": [
+            {
+              "sectionIndex": 0,
+              "carried": 0
+            }
+          ]
+        },
+        "handed": 0,
+        "ofTotal": 0,
+        "ranke": {
+          "verbatim": 2,
+          "company": 0,
+          "unsupported": 0,
+          "of": 2,
+          "basis": "mechanically attributed against 1 retained source(s): 2 verbatim, 0 company-supported (paraphrase, atoms byte-addressed), 0 unsupported (disclosed)"
+        },
+        "dmca": {
+          "ok": true,
+          "derivation": 0.03333333333333333,
+          "quoted": 1,
+          "copied": 0,
+          "paraphraseUnmeasured": false,
+          "boundary": "shuffle-null (n=6; the run must survive the source's words being scrambled) — the verbatim end of the derivation spectrum",
+          "basis": "derivation 3% — all 1 reproduced run(s) cited (quotation, not copy)"
+        },
+        "categorized": {
+          "reproduce": {
+            "quoted": 1,
+            "copied": 0
+          },
+          "derive": 0,
+          "invent": 0,
+          "units": {
+            "reproduce": "unique order-specific 6-gram runs (dedup — a copy reused N× reads once)",
+            "derive": "citation-ledger sentence rows (per-sentence attribution)",
+            "invent": "citation-ledger sentence rows (per-sentence attribution)"
+          },
+          "derivation": "Reproduce",
+          "field": "Reproduce",
+          "derivationRatio": 0.03333333333333333,
+          "derivationWindow": {
+            "n": 6,
+            "min": 0,
+            "max": 0.06451612903225806
+          },
+          "echo": {
+            "ratio": 0.03333333333333333,
+            "window": {
+              "n": 6,
+              "min": 0,
+              "max": 0.06451612903225806
+            },
+            "disagreement": false
+          },
+          "paraphraseUnmeasured": false,
+          "paraphraseCandidates": 0,
+          "paraphraseSurfaces": [],
+          "disagreement": false,
+          "cell": {
+            "grain": "Pattern",
+            "phase": "Structure",
+            "derivation": "Reproduce",
+            "name": "Convention",
+            "archon": "Alexander"
+          },
+          "basis": "derivation 3% — all 1 reproduced run(s) cited (quotation, not copy) Field/echo projection: Reproduce STANDS as the field (the category the next read primes on); below the field, still on the record, the echo is ratio=3.3%, window=0.00…0.06@n=6, instruments-agree=true.",
+          "spans": 38,
+          "spanUnit": "words",
+          "rows": 2
+        },
+        "paraphraseChased": null
+      },
+      "basis": null
+    },
+    {
+      "seq": 6,
+      "phase": "fold",
+      "operator": "REC",
+      "grain": "Atmosphere",
+      "face": "Murch",
+      "def": {
+        "phase": "fold",
+        "satisfaction": "the superseding satisfaction — corrected against what this run's material actually allowed",
+        "basis": null
+      },
+      "eva": {
+        "phase": "fold",
+        "measure": {
+          "ok": false,
+          "noGround": false,
+          "felt": 0
+        },
+        "basis": "a failed criterion supersedes the DEF by appending, never editing — the ledger's law",
+        "verdict": null
+      },
+      "rec": {
+        "ok": false,
+        "genre": null,
+        "ground": true,
+        "sidecar": "append-only: this run's shape+felt fold back into the genre's impression"
+      },
+      "basis": null
+    }
+  ]
+}

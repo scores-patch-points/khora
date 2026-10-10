@@ -1,0 +1,62 @@
+{
+ "note": "AMENDED blind PREDICT table of laws/comp.mjs: divSlope was redefined (size confound seen in a first sweep) and re-predicted BEFORE the new definition was computed on any data; all other entries unchanged from predict-frozen.json",
+ "originalSha256": "eca34245633112f8f42b84c20b5fad62cfa930a90f6e5b34e3d20b5585e08475",
+ "sha256": "de2c7cd99e7b94b8cd832adb46ef7d577afff5a1867a4fac5cd05b96dfb6e6eb",
+ "changed": [
+  {
+   "id": "divSlope",
+   "was": "universal-",
+   "now": "universal+"
+  }
+ ],
+ "canon": [
+  [
+   "asym",
+   "specific"
+  ],
+  [
+   "condL",
+   "universal-"
+  ],
+  [
+   "condR",
+   "universal-"
+  ],
+  [
+   "divSlope",
+   "universal+"
+  ],
+  [
+   "edgeGap",
+   "specific"
+  ],
+  [
+   "finEnt",
+   "universal-"
+  ],
+  [
+   "initEnt",
+   "universal-"
+  ],
+  [
+   "miDecay",
+   "universal+"
+  ],
+  [
+   "rigidL",
+   "universal+"
+  ],
+  [
+   "rigidR",
+   "universal+"
+  ],
+  [
+   "sameL",
+   "specific"
+  ],
+  [
+   "sameR",
+   "specific"
+  ]
+ ]
+}

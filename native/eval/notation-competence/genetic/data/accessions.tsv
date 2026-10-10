@@ -1,0 +1,73 @@
+# acc	split	group	expected_table	organism(short)
+# SPLIT IS BY SOURCE (one genome record = one source; no organism appears in two splits; an earlier draft had
+# S. cerevisiae chr I in train and chr VI in test, Ciona robusta/savignyi and two sea urchins across splits; those were
+# replaced BEFORE any measurement (E. cuniculi chr I 2001 record had no CDS annotation, replaced by the 2.0 record).
+# Assigned BEFORE any measurement, stratified by genetic-code table x GC x clade so every
+# split contains alternate-code genomes; the expected_table column is the assigner's expectation,
+# the authority is the /transl_table qualifier of the fetched record (checked by derive-gold.py).
+NC_000908.2	train	bacterium	4	Mycoplasma genitalium G37
+NC_008512.1	train	bacterium	4	Carsonella ruddii PV
+NC_000117.1	train	bacterium	11	Chlamydia trachomatis D/UW-3/CX
+NC_005835.1	train	bacterium	11	Thermus thermophilus HB27 (GC 69)
+NC_012920.1	train	mito	2	Homo sapiens
+NC_001323.1	train	mito	2	Gallus gallus
+NC_001573.1	train	mito	2	Xenopus laevis
+NC_024511.2	train	mito	5	Drosophila melanogaster
+NC_001328.1	train	mito	5	Caenorhabditis elegans
+NC_003057.1	train	mito	5	Limulus polyphemus
+NC_001453.1	train	mito	9	Strongylocentrotus purpuratus
+NC_004447.2	train	mito	13	Ciona robusta
+NC_001224.1	train	mito	3	Saccharomyces cerevisiae mito
+NC_026614.1	train	mito	4	Neurospora crassa mito
+NC_001326.1	train	mito	4	Schizosaccharomyces pombe mito
+NC_001638.1	train	mito	1	Chlamydomonas reinhardtii mito
+NC_001879.2	train	plastid	11	Nicotiana tabacum plastid
+NC_037507.1	train	plastid	11	Marchantia polymorpha chloroplast
+NC_001416.1	train	virus	1	Enterobacteria phage lambda
+NC_001802.1	train	virus	1	HIV-1
+NC_001422.1	train	virus	1	phage phiX174
+NC_001669.1	train	virus	1	SV40
+NC_003977.2	train	virus	1	Hepatitis B virus
+NC_001367.1	train	virus	1	Tobacco mosaic virus
+NC_001133.9	train	nuclear	1	Saccharomyces cerevisiae chr I
+NC_000912.1	dev	bacterium	4	Mycoplasma pneumoniae M129
+NC_002528.1	dev	bacterium	11	Buchnera aphidicola APS
+NC_021490.2	dev	bacterium	11	Treponema pallidum Nichols
+NC_005213.1	dev	bacterium	11	Nanoarchaeum equitans Kin4-M
+NC_005089.1	dev	mito	2	Mus musculus
+NC_002333.2	dev	mito	2	Danio rerio
+NC_001566.1	dev	mito	5	Apis mellifera
+NC_001327.1	dev	mito	5	Ascaris suum
+NC_001627.1	dev	mito	9	Patiria pectinifera
+NC_002177.1	dev	mito	13	Halocynthia roretzi
+NC_004691.1	dev	mito	3	Candida glabrata mito
+NC_017896.1	dev	mito	4	Aspergillus nidulans mito
+NC_002375.1	dev	mito	1	Plasmodium falciparum mito
+NC_000932.1	dev	plastid	11	Arabidopsis thaliana chloroplast
+NC_001604.1	dev	virus	1	Enterobacteria phage T7
+NC_001405.1	dev	virus	1	Human adenovirus C
+NC_001474.2	dev	virus	1	Dengue virus 2
+NC_002058.3	dev	virus	1	Poliovirus
+NC_003242.2	dev	nuclear	1	Encephalitozoon cuniculi chr I
+NC_002162.1	test	bacterium	4	Ureaplasma parvum serovar 3
+NC_001318.1	test	bacterium	11	Borreliella burgdorferi B31
+NC_003551.1	test	bacterium	11	Methanopyrus kandleri AV19 (GC 61)
+NC_000963.1	test	bacterium	11	Rickettsia prowazekii Madrid E
+NC_006853.1	test	mito	2	Bos taurus
+NC_001922.1	test	mito	2	Alligator mississippiensis
+NC_004299.1	test	mito	2	Takifugu rubripes
+NC_002084.1	test	mito	5	Anopheles gambiae
+NC_002355.1	test	mito	5	Bombyx mori
+NC_000844.1	test	mito	5	Daphnia pulex
+NC_001878.1	test	mito	9	Florometra serratissima
+NC_009833.1	test	mito	13	Phallusia mammillata
+NC_006077.1	test	mito	3	Kluyveromyces lactis mito
+NC_002653.1	test	mito	4	Candida albicans mito
+NC_001666.2	test	plastid	11	Zea mays chloroplast
+NC_001631.1	test	plastid	11	Pinus thunbergii chloroplast
+NC_045512.2	test	virus	1	SARS-CoV-2
+NC_012532.1	test	virus	1	Zika virus
+NC_001526.4	test	virus	1	Human papillomavirus 16
+NC_001806.2	test	virus	1	Human herpesvirus 1
+NC_002549.1	test	virus	1	Zaire ebolavirus
+NC_002751.1	test	nuclear	1	Guillardia theta nucleomorph chr 3

@@ -1,0 +1,210 @@
+{
+ "slice": {
+  "docsRequested": 20,
+  "docsRead": 20,
+  "charsCap": 2000,
+  "candidates": [
+   "eng",
+   "spa",
+   "fra",
+   "deu",
+   "ita",
+   "por"
+  ],
+  "perCat": 1
+ },
+ "totals": {
+  "usable": 16,
+  "usableShare": 0.8,
+  "meanCast": 29.3,
+  "meanRelations": 10,
+  "errors": 0
+ },
+ "K3_earAgreesOnEnglish": {
+  "englishDocs": 0,
+  "agreed": 0
+ },
+ "verdict": "PASSING",
+ "rows": [
+  {
+   "address": "06-government-legal/un-udhr/udhr-007.txt",
+   "cast": 32,
+   "relations": 5,
+   "signal": 5,
+   "language": "por",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/un-udhr/udhr-008.txt",
+   "cast": 17,
+   "relations": 2,
+   "signal": 2,
+   "language": "ita",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/un-udhr/udhr-009.txt",
+   "cast": 22,
+   "relations": 5,
+   "signal": 5,
+   "language": "ind",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/un-udhr/udhr-010.txt",
+   "cast": 60,
+   "relations": 20,
+   "signal": 20,
+   "language": "ind",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/un-udhr/udhr-011.txt",
+   "cast": 37,
+   "relations": 5,
+   "signal": 5,
+   "language": "ind",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/un-udhr/udhr-013.txt",
+   "cast": 39,
+   "relations": 3,
+   "signal": 3,
+   "language": "deu",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "06-government-legal/un-udhr/udhr-014.txt",
+   "cast": 28,
+   "relations": 20,
+   "signal": 20,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "06-government-legal/un-udhr/udhr-016.txt",
+   "cast": 30,
+   "relations": 3,
+   "signal": 3,
+   "language": "deu",
+   "languageSource": "by-ear",
+   "explored": 1
+  },
+  {
+   "address": "06-government-legal/un-udhr/udhr-017.txt",
+   "cast": 30,
+   "relations": 3,
+   "signal": 3,
+   "language": "deu",
+   "languageSource": "by-ear",
+   "explored": 1
+  },
+  {
+   "address": "06-government-legal/un-udhr/udhr-020.txt",
+   "cast": 30,
+   "relations": 25,
+   "signal": 25,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "06-government-legal/un-udhr/udhr-021.txt",
+   "cast": 31,
+   "relations": 29,
+   "signal": 29,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "06-government-legal/un-udhr/udhr-022.txt",
+   "cast": 34,
+   "relations": 29,
+   "signal": 29,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/un-udhr/udhr-023.txt",
+   "cast": 30,
+   "relations": 0,
+   "signal": 0,
+   "language": "cmn-hans",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/un-udhr/udhr-025.txt",
+   "cast": 23,
+   "relations": 23,
+   "signal": 23,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "06-government-legal/un-udhr/udhr-026.txt",
+   "cast": 34,
+   "relations": 0,
+   "signal": 0,
+   "language": "kor",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/un-udhr/udhr-027.txt",
+   "cast": 12,
+   "relations": 9,
+   "signal": 9,
+   "language": "eng",
+   "languageSource": "by-ear",
+   "explored": 6
+  },
+  {
+   "address": "06-government-legal/un-udhr/udhr-028.txt",
+   "cast": 29,
+   "relations": 5,
+   "signal": 5,
+   "language": "eng",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/un-udhr/udhr-029.txt",
+   "cast": 13,
+   "relations": 3,
+   "signal": 3,
+   "language": null,
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/un-udhr/udhr-030.txt",
+   "cast": 36,
+   "relations": 11,
+   "signal": 11,
+   "language": "ind",
+   "languageSource": "detected",
+   "explored": null
+  },
+  {
+   "address": "06-government-legal/un-udhr/udhr-032.txt",
+   "cast": 19,
+   "relations": 0,
+   "signal": 0,
+   "language": "tur",
+   "languageSource": "detected",
+   "explored": null
+  }
+ ]
+}

@@ -1,0 +1,27 @@
+export function buildFeed(posts) {
+  return posts.slice().sort((a, b) => b.createdAt - a.createdAt);
+}
+
+export function followingFeed(posts, following) {
+  return posts.filter(post => following.includes(post.author)).sort((a, b) => b.createdAt - a.createdAt);
+}
+
+export function postCount(author, posts) {
+  return posts.filter(post => post.author === author).length;
+}
+
+export function topAuthors(posts) {
+  const authorCounts = posts.reduce((acc, post) => {
+    acc[post.author] = (acc[post.author] || 0) + 1;
+    return acc;
+  }, {});
+
+  return Object.keys(authorCounts)
+    .sort((a, b) => {
+      if (authorCounts[a] === authorCounts[b]) {
+        return a.localeCompare(b);
+      }
+      return authorCounts[b] - authorCounts[a];
+    })
+    .map(author => author);
+}

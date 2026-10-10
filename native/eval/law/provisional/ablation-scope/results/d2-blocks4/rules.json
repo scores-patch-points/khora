@@ -1,0 +1,145 @@
+{
+ "headerSha256": "339480a6bc5e603a6f1a421a013dbfee6bf3ec2a5ca161a42d199a0e7e2e393d",
+ "from": "results/d2/discovery.json",
+ "rules": [
+  {
+   "kind": "irc",
+   "group": "B",
+   "strata": [
+    "c16p"
+   ],
+   "score": "EXTENT",
+   "direction": "higher = name",
+   "threshold": 6,
+   "thresholdFittedOnDiscovery": true,
+   "discoveryAuc": 0.8907,
+   "ci95": [
+    0.8159,
+    0.9454
+   ],
+   "pairs": 63,
+   "balancedAccuracyAtThreshold": {
+    "T": 6,
+    "tpr": 0.7937,
+    "tnr": 0.9683,
+    "ba": 0.881
+   },
+   "allScoresStratAuc": {
+    "S_ENTRY": 0.873,
+    "S_OWN": 0.792,
+    "S_ALL": 0.7611,
+    "S_SPAN": 0.7098,
+    "EXTENT": 0.8907,
+    "NONNULL": 0.754
+   },
+   "consistencyPerBlock": [
+    [
+     "ubuntu/2005-07-15",
+     0.8622,
+     14
+    ],
+    [
+     "ubuntu/2008-03-15",
+     0.9615,
+     13
+    ],
+    [
+     "ubuntu/2008-07-15",
+     0.9643,
+     14
+    ],
+    [
+     "ubuntu/2010-03-15",
+     0.8495,
+     14
+    ]
+   ],
+   "gates": {
+    "pairs": true,
+    "consistency": true
+   },
+   "pass": true,
+   "id": "irc.B:c16p..c16p"
+  },
+  {
+   "kind": "irc",
+   "group": "A",
+   "strata": [
+    "c4_6",
+    "c7_15"
+   ],
+   "score": "S_ENTRY",
+   "direction": "higher = name",
+   "threshold": 1,
+   "thresholdFittedOnDiscovery": true,
+   "discoveryAuc": 0.6808,
+   "ci95": [
+    0.6352,
+    0.7245
+   ],
+   "pairs": 224,
+   "balancedAccuracyAtThreshold": {
+    "T": 1,
+    "tpr": 0.808,
+    "tnr": 0.5536,
+    "ba": 0.6808
+   },
+   "allScoresStratAuc": {
+    "S_ENTRY": 0.6808,
+    "S_OWN": 0.6507,
+    "S_ALL": 0.5977,
+    "S_SPAN": 0.6605,
+    "EXTENT": 0.6651,
+    "NONNULL": 0.6094
+   },
+   "consistencyPerBlock": [
+    [
+     "kubuntu/2009-03-15",
+     0.8214,
+     28
+    ],
+    [
+     "ubuntu/2005-07-15",
+     0.6964,
+     28
+    ],
+    [
+     "ubuntu/2008-03-15",
+     0.625,
+     28
+    ],
+    [
+     "ubuntu/2008-07-15",
+     0.5893,
+     28
+    ],
+    [
+     "ubuntu/2010-03-15",
+     0.5893,
+     28
+    ],
+    [
+     "ubuntu/2010-07-15",
+     0.75,
+     28
+    ],
+    [
+     "ubuntu/2013-03-15",
+     0.6071,
+     28
+    ],
+    [
+     "ubuntu/2015-07-15",
+     0.7679,
+     28
+    ]
+   ],
+   "gates": {
+    "pairs": true,
+    "consistency": true
+   },
+   "pass": true,
+   "id": "irc.A:c4_6..c7_15"
+  }
+ ]
+}

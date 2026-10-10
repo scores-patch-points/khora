@@ -1,0 +1,7 @@
+# python deps of eval/coding-competence/gold.py (install into the venv: /private/tmp/claude-501/venv/bin/pip install -r this file)
+# The grammar authority. Grammars are downloaded on first use into $GOLD_TS_CACHE
+# (default /private/tmp/claude-501/coding-competence/ts-cache) from the language pack's own release (checksummed).
+tree-sitter==0.26.0
+tree-sitter-language-pack==1.21.0
+# a real Groovy grammar (MIT, amaanq): the language pack's groovy grammar is a 61-kind toy
+tree-sitter-groovy==0.1.2

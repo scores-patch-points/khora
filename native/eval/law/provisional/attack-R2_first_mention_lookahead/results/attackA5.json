@@ -1,0 +1,503 @@
+{
+ "headerSha256": "e5aa55471c59a870ac08c79e1979225f7547daff18210a44bdb1a7447cb1a555",
+ "code": {
+  "common.mjs": "5f2b3417bddb872c",
+  "stats.mjs": "545acdde873ebce2",
+  "hdr.mjs": "57412b6ec9d9c475"
+ },
+ "res": {
+  "CF": {
+   "K0": {
+    "all": 485,
+    "LOW": {
+     "n": 328,
+     "n1": 328,
+     "aucMean": 0.5905,
+     "shareOfKey": 0.6763,
+     "ciDay": [
+      0.5641,
+      0.6184
+     ],
+     "thr2": {
+      "th": 2,
+      "tpr": 0,
+      "fpr": 0,
+      "balPrec": null
+     },
+     "verdict": "ERODES"
+    },
+    "HIGH": {
+     "n": 157,
+     "n1": 157,
+     "aucMean": 0.8656,
+     "shareOfKey": 0.3237,
+     "ciDay": [
+      0.8223,
+      0.903
+     ],
+     "thr2": {
+      "th": 2,
+      "tpr": 0.9045,
+      "fpr": 0.3439,
+      "balPrec": 0.7245
+     },
+     "verdict": "SURVIVES"
+    }
+   },
+   "K3": {
+    "all": 452,
+    "LOW": {
+     "n": 324,
+     "n1": 324,
+     "aucMean": 0.5864,
+     "shareOfKey": 0.7168,
+     "ciDay": [
+      0.5601,
+      0.6155
+     ],
+     "thr2": {
+      "th": 2,
+      "tpr": 0,
+      "fpr": 0,
+      "balPrec": null
+     },
+     "verdict": "ERODES"
+    },
+    "HIGH": {
+     "n": 128,
+     "n1": 128,
+     "aucMean": 0.8414,
+     "shareOfKey": 0.2832,
+     "ciDay": [
+      0.7951,
+      0.8879
+     ],
+     "thr2": {
+      "th": 2,
+      "tpr": 0.8906,
+      "fpr": 0.375,
+      "balPrec": 0.7037
+     },
+     "verdict": "SURVIVES"
+    }
+   },
+   "K4": {
+    "all": 337,
+    "LOW": {
+     "n": 285,
+     "n1": 285,
+     "aucMean": 0.5568,
+     "shareOfKey": 0.8457,
+     "ciDay": [
+      0.5404,
+      0.5708
+     ],
+     "thr2": {
+      "th": 2,
+      "tpr": 0,
+      "fpr": 0,
+      "balPrec": null
+     },
+     "verdict": "ERODES"
+    },
+    "HIGH": {
+     "n": 52,
+     "n1": 52,
+     "aucMean": 0.7615,
+     "shareOfKey": 0.1543,
+     "ciDay": [
+      0.6875,
+      0.8333
+     ],
+     "thr2": {
+      "th": 2,
+      "tpr": 0.8269,
+      "fpr": 0.4808,
+      "balPrec": 0.6324
+     },
+     "verdict": "SURVIVES"
+    }
+   },
+   "K5": {
+    "all": 335,
+    "LOW": {
+     "n": 283,
+     "n1": 283,
+     "aucMean": 0.5611,
+     "shareOfKey": 0.8448,
+     "ciDay": [
+      0.5434,
+      0.5815
+     ],
+     "thr2": {
+      "th": 2,
+      "tpr": 0,
+      "fpr": 0,
+      "balPrec": null
+     },
+     "verdict": "ERODES"
+    },
+    "HIGH": {
+     "n": 52,
+     "n1": 52,
+     "aucMean": 0.8462,
+     "shareOfKey": 0.1552,
+     "ciDay": [
+      0.8,
+      0.8974
+     ],
+     "thr2": {
+      "th": 2,
+      "tpr": 0.8462,
+      "fpr": 0.3269,
+      "balPrec": 0.7213
+     },
+     "verdict": "SURVIVES"
+    }
+   },
+   "K7": {
+    "all": 262,
+    "LOW": {
+     "n": 237,
+     "n1": 237,
+     "aucMean": 0.5211,
+     "shareOfKey": 0.9046,
+     "ciDay": [
+      0.5083,
+      0.528
+     ],
+     "thr2": {
+      "th": 2,
+      "tpr": 0,
+      "fpr": 0,
+      "balPrec": null
+     },
+     "verdict": "FALLS"
+    },
+    "HIGH": {
+     "n": 25,
+     "n1": 25,
+     "aucMean": 0.792,
+     "shareOfKey": 0.0954,
+     "verdict": "VOID(n)"
+    }
+   },
+   "K8": {
+    "all": 330,
+    "LOW": {
+     "n": 284,
+     "n1": 284,
+     "aucMean": 0.5535,
+     "shareOfKey": 0.8606,
+     "ciDay": [
+      0.5367,
+      0.5661
+     ],
+     "thr2": {
+      "th": 2,
+      "tpr": 0,
+      "fpr": 0,
+      "balPrec": null
+     },
+     "verdict": "ERODES"
+    },
+    "HIGH": {
+     "n": 46,
+     "n1": 46,
+     "aucMean": 0.7283,
+     "shareOfKey": 0.1394,
+     "ciDay": [
+      0.631,
+      0.8226
+     ],
+     "thr2": {
+      "th": 2,
+      "tpr": 0.8043,
+      "fpr": 0.5217,
+      "balPrec": 0.6066
+     },
+     "verdict": "SURVIVES"
+    }
+   },
+   "K9": {
+    "all": 59,
+    "LOW": {
+     "n": 59,
+     "n1": 59,
+     "aucMean": 0.5,
+     "shareOfKey": 1,
+     "ciDay": [
+      0.5,
+      0.5
+     ],
+     "thr2": {
+      "th": 2,
+      "tpr": 0,
+      "fpr": 0,
+      "balPrec": null
+     },
+     "verdict": "FALLS"
+    },
+    "HIGH": {
+     "n": 0,
+     "n1": 0,
+     "aucMean": null,
+     "shareOfKey": 0,
+     "verdict": "VOID(n)"
+    }
+   }
+  },
+  "ALL_EN": {
+   "K0": {
+    "all": 1467,
+    "LOW": {
+     "n": 953,
+     "n1": 953,
+     "aucMean": 0.5837,
+     "shareOfKey": 0.6496,
+     "ciDay": [
+      0.5729,
+      0.597
+     ],
+     "thr2": {
+      "th": 2,
+      "tpr": 0,
+      "fpr": 0,
+      "balPrec": null
+     },
+     "verdict": "ERODES"
+    },
+    "HIGH": {
+     "n": 514,
+     "n1": 514,
+     "aucMean": 0.873,
+     "shareOfKey": 0.3504,
+     "ciDay": [
+      0.8579,
+      0.8931
+     ],
+     "thr2": {
+      "th": 2,
+      "tpr": 0.8872,
+      "fpr": 0.3152,
+      "balPrec": 0.7379
+     },
+     "verdict": "SURVIVES"
+    }
+   },
+   "K3": {
+    "all": 1374,
+    "LOW": {
+     "n": 944,
+     "n1": 944,
+     "aucMean": 0.5822,
+     "shareOfKey": 0.687,
+     "ciDay": [
+      0.5698,
+      0.595
+     ],
+     "thr2": {
+      "th": 2,
+      "tpr": 0,
+      "fpr": 0,
+      "balPrec": null
+     },
+     "verdict": "ERODES"
+    },
+    "HIGH": {
+     "n": 430,
+     "n1": 430,
+     "aucMean": 0.8537,
+     "shareOfKey": 0.313,
+     "ciDay": [
+      0.8361,
+      0.8719
+     ],
+     "thr2": {
+      "th": 2,
+      "tpr": 0.8698,
+      "fpr": 0.3512,
+      "balPrec": 0.7124
+     },
+     "verdict": "SURVIVES"
+    }
+   },
+   "K4": {
+    "all": 1003,
+    "LOW": {
+     "n": 828,
+     "n1": 828,
+     "aucMean": 0.5473,
+     "shareOfKey": 0.8255,
+     "ciDay": [
+      0.5379,
+      0.5567
+     ],
+     "thr2": {
+      "th": 2,
+      "tpr": 0,
+      "fpr": 0,
+      "balPrec": null
+     },
+     "verdict": "FALLS"
+    },
+    "HIGH": {
+     "n": 175,
+     "n1": 175,
+     "aucMean": 0.7594,
+     "shareOfKey": 0.1745,
+     "ciDay": [
+      0.7294,
+      0.7932
+     ],
+     "thr2": {
+      "th": 2,
+      "tpr": 0.8171,
+      "fpr": 0.4571,
+      "balPrec": 0.6413
+     },
+     "verdict": "SURVIVES"
+    }
+   },
+   "K5": {
+    "all": 1018,
+    "LOW": {
+     "n": 820,
+     "n1": 820,
+     "aucMean": 0.5457,
+     "shareOfKey": 0.8055,
+     "ciDay": [
+      0.5368,
+      0.5556
+     ],
+     "thr2": {
+      "th": 2,
+      "tpr": 0,
+      "fpr": 0,
+      "balPrec": null
+     },
+     "verdict": "FALLS"
+    },
+    "HIGH": {
+     "n": 198,
+     "n1": 198,
+     "aucMean": 0.8338,
+     "shareOfKey": 0.1945,
+     "ciDay": [
+      0.8019,
+      0.867
+     ],
+     "thr2": {
+      "th": 2,
+      "tpr": 0.8232,
+      "fpr": 0.2929,
+      "balPrec": 0.7376
+     },
+     "verdict": "SURVIVES"
+    }
+   },
+   "K7": {
+    "all": 792,
+    "LOW": {
+     "n": 695,
+     "n1": 695,
+     "aucMean": 0.5142,
+     "shareOfKey": 0.8775,
+     "ciDay": [
+      0.5076,
+      0.5197
+     ],
+     "thr2": {
+      "th": 2,
+      "tpr": 0,
+      "fpr": 0,
+      "balPrec": null
+     },
+     "verdict": "FALLS"
+    },
+    "HIGH": {
+     "n": 97,
+     "n1": 97,
+     "aucMean": 0.7794,
+     "shareOfKey": 0.1225,
+     "ciDay": [
+      0.7331,
+      0.8387
+     ],
+     "thr2": {
+      "th": 2,
+      "tpr": 0.866,
+      "fpr": 0.4536,
+      "balPrec": 0.6563
+     },
+     "verdict": "SURVIVES"
+    }
+   },
+   "K8": {
+    "all": 989,
+    "LOW": {
+     "n": 826,
+     "n1": 826,
+     "aucMean": 0.5456,
+     "shareOfKey": 0.8352,
+     "ciDay": [
+      0.5382,
+      0.5551
+     ],
+     "thr2": {
+      "th": 2,
+      "tpr": 0,
+      "fpr": 0,
+      "balPrec": null
+     },
+     "verdict": "FALLS"
+    },
+    "HIGH": {
+     "n": 163,
+     "n1": 163,
+     "aucMean": 0.7429,
+     "shareOfKey": 0.1648,
+     "ciDay": [
+      0.6992,
+      0.7778
+     ],
+     "thr2": {
+      "th": 2,
+      "tpr": 0.8098,
+      "fpr": 0.4969,
+      "balPrec": 0.6197
+     },
+     "verdict": "SURVIVES"
+    }
+   },
+   "K9": {
+    "all": 174,
+    "LOW": {
+     "n": 166,
+     "n1": 166,
+     "aucMean": 0.5072,
+     "shareOfKey": 0.954,
+     "ciDay": [
+      0.5,
+      0.5142
+     ],
+     "thr2": {
+      "th": 2,
+      "tpr": 0,
+      "fpr": 0,
+      "balPrec": null
+     },
+     "verdict": "FALLS"
+    },
+    "HIGH": {
+     "n": 8,
+     "n1": 8,
+     "aucMean": 0.6875,
+     "shareOfKey": 0.046,
+     "verdict": "VOID(n)"
+    }
+   }
+  }
+ },
+ "seconds": 0
+}

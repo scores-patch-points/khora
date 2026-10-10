@@ -1,0 +1,1394 @@
+{
+ "LATER|EN|ALL": {
+  "n": 2768,
+  "NBIN_Cinf|INIT_Cinf": {
+   "kept": 475,
+   "share": 0.1716,
+   "auc": 0.6832
+  },
+  "NDIV_Cinf|INIT_Cinf": {
+   "kept": 475,
+   "share": 0.1716,
+   "auc": 0.6895
+  },
+  "ISHARE_Cinf|INIT_Cinf": {
+   "kept": 475,
+   "share": 0.1716,
+   "auc": 0.6789
+  },
+  "NBIN_Tinf|INIT_Tinf": {
+   "kept": 571,
+   "share": 0.2063,
+   "auc": 0.8459
+  },
+  "NDIV_Tinf|INIT_Tinf": {
+   "kept": 571,
+   "share": 0.2063,
+   "auc": 0.8345
+  },
+  "ISHARE_Tinf|INIT_Tinf": {
+   "kept": 571,
+   "share": 0.2063,
+   "auc": 0.62
+  },
+  "INIT_Tinf|CNT_Tinf": {
+   "kept": 2561,
+   "share": 0.9252,
+   "auc": 0.8793
+  },
+  "INIT_Cinf|CNT_Cinf": {
+   "kept": 1035,
+   "share": 0.3739,
+   "auc": 0.8527
+  },
+  "REC_C|INIT_Cinf": {
+   "kept": 475,
+   "share": 0.1716,
+   "auc": 0.5947
+  },
+  "INIT_C32|CNT_C32": {
+   "kept": 868,
+   "share": 0.3136,
+   "auc": 0.6331
+  },
+  "INIT_C128|CNT_C128": {
+   "kept": 706,
+   "share": 0.2551,
+   "auc": 0.6912
+  }
+ },
+ "LATER|EN|INIT": {
+  "n": 1905,
+  "NBIN_Cinf|INIT_Cinf": {
+   "kept": 314,
+   "share": 0.1648,
+   "auc": 0.7245
+  },
+  "NDIV_Cinf|INIT_Cinf": {
+   "kept": 314,
+   "share": 0.1648,
+   "auc": 0.742
+  },
+  "ISHARE_Cinf|INIT_Cinf": {
+   "kept": 314,
+   "share": 0.1648,
+   "auc": 0.7213
+  },
+  "NBIN_Tinf|INIT_Tinf": {
+   "kept": 469,
+   "share": 0.2462,
+   "auc": 0.8987
+  },
+  "NDIV_Tinf|INIT_Tinf": {
+   "kept": 469,
+   "share": 0.2462,
+   "auc": 0.8945
+  },
+  "ISHARE_Tinf|INIT_Tinf": {
+   "kept": 469,
+   "share": 0.2462,
+   "auc": 0.6354
+  },
+  "INIT_Tinf|CNT_Tinf": {
+   "kept": 1823,
+   "share": 0.957,
+   "auc": 0.881
+  },
+  "INIT_Cinf|CNT_Cinf": {
+   "kept": 745,
+   "share": 0.3911,
+   "auc": 0.8436
+  },
+  "REC_C|INIT_Cinf": {
+   "kept": 314,
+   "share": 0.1648,
+   "auc": 0.6369
+  },
+  "INIT_C32|CNT_C32": {
+   "kept": 537,
+   "share": 0.2819,
+   "auc": 0.676
+  },
+  "INIT_C128|CNT_C128": {
+   "kept": 443,
+   "share": 0.2325,
+   "auc": 0.7359
+  }
+ },
+ "LATER|EN|NONINIT": {
+  "n": 863,
+  "NBIN_Cinf|INIT_Cinf": {
+   "kept": 161,
+   "share": 0.1866,
+   "auc": 0.6025
+  },
+  "NDIV_Cinf|INIT_Cinf": {
+   "kept": 161,
+   "share": 0.1866,
+   "auc": 0.587
+  },
+  "ISHARE_Cinf|INIT_Cinf": {
+   "kept": 161,
+   "share": 0.1866,
+   "auc": 0.5963
+  },
+  "NBIN_Tinf|INIT_Tinf": {
+   "kept": 102,
+   "share": 0.1182,
+   "auc": 0.6029
+  },
+  "NDIV_Tinf|INIT_Tinf": {
+   "kept": 102,
+   "share": 0.1182,
+   "auc": 0.5588
+  },
+  "ISHARE_Tinf|INIT_Tinf": {
+   "kept": 102,
+   "share": 0.1182,
+   "auc": 0.549
+  },
+  "INIT_Tinf|CNT_Tinf": {
+   "kept": 738,
+   "share": 0.8552,
+   "auc": 0.8753
+  },
+  "INIT_Cinf|CNT_Cinf": {
+   "kept": 290,
+   "share": 0.336,
+   "auc": 0.8759
+  },
+  "REC_C|INIT_Cinf": {
+   "kept": 161,
+   "share": 0.1866,
+   "auc": 0.5124
+  },
+  "INIT_C32|CNT_C32": {
+   "kept": 331,
+   "share": 0.3835,
+   "auc": 0.5634
+  },
+  "INIT_C128|CNT_C128": {
+   "kept": 263,
+   "share": 0.3048,
+   "auc": 0.616
+  }
+ },
+ "LATER|DE|ALL": {
+  "n": 43,
+  "NBIN_Cinf|INIT_Cinf": {
+   "kept": 4,
+   "share": 0.093,
+   "auc": null
+  },
+  "NDIV_Cinf|INIT_Cinf": {
+   "kept": 4,
+   "share": 0.093,
+   "auc": null
+  },
+  "ISHARE_Cinf|INIT_Cinf": {
+   "kept": 4,
+   "share": 0.093,
+   "auc": null
+  },
+  "NBIN_Tinf|INIT_Tinf": {
+   "kept": 9,
+   "share": 0.2093,
+   "auc": null
+  },
+  "NDIV_Tinf|INIT_Tinf": {
+   "kept": 9,
+   "share": 0.2093,
+   "auc": null
+  },
+  "ISHARE_Tinf|INIT_Tinf": {
+   "kept": 9,
+   "share": 0.2093,
+   "auc": null
+  },
+  "INIT_Tinf|CNT_Tinf": {
+   "kept": 42,
+   "share": 0.9767,
+   "auc": 0.8333
+  },
+  "INIT_Cinf|CNT_Cinf": {
+   "kept": 17,
+   "share": 0.3953,
+   "auc": null
+  },
+  "REC_C|INIT_Cinf": {
+   "kept": 4,
+   "share": 0.093,
+   "auc": null
+  },
+  "INIT_C32|CNT_C32": {
+   "kept": 11,
+   "share": 0.2558,
+   "auc": null
+  },
+  "INIT_C128|CNT_C128": {
+   "kept": 16,
+   "share": 0.3721,
+   "auc": null
+  }
+ },
+ "LATER|DE|INIT": {
+  "n": 34,
+  "NBIN_Cinf|INIT_Cinf": {
+   "kept": 3,
+   "share": 0.0882,
+   "auc": null
+  },
+  "NDIV_Cinf|INIT_Cinf": {
+   "kept": 3,
+   "share": 0.0882,
+   "auc": null
+  },
+  "ISHARE_Cinf|INIT_Cinf": {
+   "kept": 3,
+   "share": 0.0882,
+   "auc": null
+  },
+  "NBIN_Tinf|INIT_Tinf": {
+   "kept": 8,
+   "share": 0.2353,
+   "auc": null
+  },
+  "NDIV_Tinf|INIT_Tinf": {
+   "kept": 8,
+   "share": 0.2353,
+   "auc": null
+  },
+  "ISHARE_Tinf|INIT_Tinf": {
+   "kept": 8,
+   "share": 0.2353,
+   "auc": null
+  },
+  "INIT_Tinf|CNT_Tinf": {
+   "kept": 34,
+   "share": 1,
+   "auc": 0.7941
+  },
+  "INIT_Cinf|CNT_Cinf": {
+   "kept": 15,
+   "share": 0.4412,
+   "auc": null
+  },
+  "REC_C|INIT_Cinf": {
+   "kept": 3,
+   "share": 0.0882,
+   "auc": null
+  },
+  "INIT_C32|CNT_C32": {
+   "kept": 7,
+   "share": 0.2059,
+   "auc": null
+  },
+  "INIT_C128|CNT_C128": {
+   "kept": 9,
+   "share": 0.2647,
+   "auc": null
+  }
+ },
+ "LATER|DE|NONINIT": {
+  "n": 9,
+  "NBIN_Cinf|INIT_Cinf": {
+   "kept": 1,
+   "share": 0.1111,
+   "auc": null
+  },
+  "NDIV_Cinf|INIT_Cinf": {
+   "kept": 1,
+   "share": 0.1111,
+   "auc": null
+  },
+  "ISHARE_Cinf|INIT_Cinf": {
+   "kept": 1,
+   "share": 0.1111,
+   "auc": null
+  },
+  "NBIN_Tinf|INIT_Tinf": {
+   "kept": 1,
+   "share": 0.1111,
+   "auc": null
+  },
+  "NDIV_Tinf|INIT_Tinf": {
+   "kept": 1,
+   "share": 0.1111,
+   "auc": null
+  },
+  "ISHARE_Tinf|INIT_Tinf": {
+   "kept": 1,
+   "share": 0.1111,
+   "auc": null
+  },
+  "INIT_Tinf|CNT_Tinf": {
+   "kept": 8,
+   "share": 0.8889,
+   "auc": null
+  },
+  "INIT_Cinf|CNT_Cinf": {
+   "kept": 2,
+   "share": 0.2222,
+   "auc": null
+  },
+  "REC_C|INIT_Cinf": {
+   "kept": 1,
+   "share": 0.1111,
+   "auc": null
+  },
+  "INIT_C32|CNT_C32": {
+   "kept": 4,
+   "share": 0.4444,
+   "auc": null
+  },
+  "INIT_C128|CNT_C128": {
+   "kept": 7,
+   "share": 0.7778,
+   "auc": null
+  }
+ },
+ "LATER|ES|ALL": {
+  "n": 55,
+  "NBIN_Cinf|INIT_Cinf": {
+   "kept": 15,
+   "share": 0.2727,
+   "auc": null
+  },
+  "NDIV_Cinf|INIT_Cinf": {
+   "kept": 15,
+   "share": 0.2727,
+   "auc": null
+  },
+  "ISHARE_Cinf|INIT_Cinf": {
+   "kept": 15,
+   "share": 0.2727,
+   "auc": null
+  },
+  "NBIN_Tinf|INIT_Tinf": {
+   "kept": 13,
+   "share": 0.2364,
+   "auc": null
+  },
+  "NDIV_Tinf|INIT_Tinf": {
+   "kept": 13,
+   "share": 0.2364,
+   "auc": null
+  },
+  "ISHARE_Tinf|INIT_Tinf": {
+   "kept": 13,
+   "share": 0.2364,
+   "auc": null
+  },
+  "INIT_Tinf|CNT_Tinf": {
+   "kept": 52,
+   "share": 0.9455,
+   "auc": 0.9423
+  },
+  "INIT_Cinf|CNT_Cinf": {
+   "kept": 24,
+   "share": 0.4364,
+   "auc": 0.8333
+  },
+  "REC_C|INIT_Cinf": {
+   "kept": 15,
+   "share": 0.2727,
+   "auc": null
+  },
+  "INIT_C32|CNT_C32": {
+   "kept": 14,
+   "share": 0.2545,
+   "auc": null
+  },
+  "INIT_C128|CNT_C128": {
+   "kept": 17,
+   "share": 0.3091,
+   "auc": null
+  }
+ },
+ "LATER|ES|INIT": {
+  "n": 35,
+  "NBIN_Cinf|INIT_Cinf": {
+   "kept": 11,
+   "share": 0.3143,
+   "auc": null
+  },
+  "NDIV_Cinf|INIT_Cinf": {
+   "kept": 11,
+   "share": 0.3143,
+   "auc": null
+  },
+  "ISHARE_Cinf|INIT_Cinf": {
+   "kept": 11,
+   "share": 0.3143,
+   "auc": null
+  },
+  "NBIN_Tinf|INIT_Tinf": {
+   "kept": 8,
+   "share": 0.2286,
+   "auc": null
+  },
+  "NDIV_Tinf|INIT_Tinf": {
+   "kept": 8,
+   "share": 0.2286,
+   "auc": null
+  },
+  "ISHARE_Tinf|INIT_Tinf": {
+   "kept": 8,
+   "share": 0.2286,
+   "auc": null
+  },
+  "INIT_Tinf|CNT_Tinf": {
+   "kept": 32,
+   "share": 0.9143,
+   "auc": 0.9688
+  },
+  "INIT_Cinf|CNT_Cinf": {
+   "kept": 15,
+   "share": 0.4286,
+   "auc": null
+  },
+  "REC_C|INIT_Cinf": {
+   "kept": 11,
+   "share": 0.3143,
+   "auc": null
+  },
+  "INIT_C32|CNT_C32": {
+   "kept": 8,
+   "share": 0.2286,
+   "auc": null
+  },
+  "INIT_C128|CNT_C128": {
+   "kept": 6,
+   "share": 0.1714,
+   "auc": null
+  }
+ },
+ "LATER|ES|NONINIT": {
+  "n": 20,
+  "NBIN_Cinf|INIT_Cinf": {
+   "kept": 4,
+   "share": 0.2,
+   "auc": null
+  },
+  "NDIV_Cinf|INIT_Cinf": {
+   "kept": 4,
+   "share": 0.2,
+   "auc": null
+  },
+  "ISHARE_Cinf|INIT_Cinf": {
+   "kept": 4,
+   "share": 0.2,
+   "auc": null
+  },
+  "NBIN_Tinf|INIT_Tinf": {
+   "kept": 5,
+   "share": 0.25,
+   "auc": null
+  },
+  "NDIV_Tinf|INIT_Tinf": {
+   "kept": 5,
+   "share": 0.25,
+   "auc": null
+  },
+  "ISHARE_Tinf|INIT_Tinf": {
+   "kept": 5,
+   "share": 0.25,
+   "auc": null
+  },
+  "INIT_Tinf|CNT_Tinf": {
+   "kept": 20,
+   "share": 1,
+   "auc": 0.9
+  },
+  "INIT_Cinf|CNT_Cinf": {
+   "kept": 9,
+   "share": 0.45,
+   "auc": null
+  },
+  "REC_C|INIT_Cinf": {
+   "kept": 4,
+   "share": 0.2,
+   "auc": null
+  },
+  "INIT_C32|CNT_C32": {
+   "kept": 6,
+   "share": 0.3,
+   "auc": null
+  },
+  "INIT_C128|CNT_C128": {
+   "kept": 11,
+   "share": 0.55,
+   "auc": null
+  }
+ },
+ "LATER|IT|ALL": {
+  "n": 90,
+  "NBIN_Cinf|INIT_Cinf": {
+   "kept": 19,
+   "share": 0.2111,
+   "auc": null
+  },
+  "NDIV_Cinf|INIT_Cinf": {
+   "kept": 19,
+   "share": 0.2111,
+   "auc": null
+  },
+  "ISHARE_Cinf|INIT_Cinf": {
+   "kept": 19,
+   "share": 0.2111,
+   "auc": null
+  },
+  "NBIN_Tinf|INIT_Tinf": {
+   "kept": 14,
+   "share": 0.1556,
+   "auc": null
+  },
+  "NDIV_Tinf|INIT_Tinf": {
+   "kept": 14,
+   "share": 0.1556,
+   "auc": null
+  },
+  "ISHARE_Tinf|INIT_Tinf": {
+   "kept": 14,
+   "share": 0.1556,
+   "auc": null
+  },
+  "INIT_Tinf|CNT_Tinf": {
+   "kept": 74,
+   "share": 0.8222,
+   "auc": 0.9189
+  },
+  "INIT_Cinf|CNT_Cinf": {
+   "kept": 41,
+   "share": 0.4556,
+   "auc": 0.9146
+  },
+  "REC_C|INIT_Cinf": {
+   "kept": 19,
+   "share": 0.2111,
+   "auc": null
+  },
+  "INIT_C32|CNT_C32": {
+   "kept": 20,
+   "share": 0.2222,
+   "auc": 0.8
+  },
+  "INIT_C128|CNT_C128": {
+   "kept": 28,
+   "share": 0.3111,
+   "auc": 0.875
+  }
+ },
+ "LATER|IT|INIT": {
+  "n": 69,
+  "NBIN_Cinf|INIT_Cinf": {
+   "kept": 15,
+   "share": 0.2174,
+   "auc": null
+  },
+  "NDIV_Cinf|INIT_Cinf": {
+   "kept": 15,
+   "share": 0.2174,
+   "auc": null
+  },
+  "ISHARE_Cinf|INIT_Cinf": {
+   "kept": 15,
+   "share": 0.2174,
+   "auc": null
+  },
+  "NBIN_Tinf|INIT_Tinf": {
+   "kept": 6,
+   "share": 0.087,
+   "auc": null
+  },
+  "NDIV_Tinf|INIT_Tinf": {
+   "kept": 6,
+   "share": 0.087,
+   "auc": null
+  },
+  "ISHARE_Tinf|INIT_Tinf": {
+   "kept": 6,
+   "share": 0.087,
+   "auc": null
+  },
+  "INIT_Tinf|CNT_Tinf": {
+   "kept": 54,
+   "share": 0.7826,
+   "auc": 0.9074
+  },
+  "INIT_Cinf|CNT_Cinf": {
+   "kept": 30,
+   "share": 0.4348,
+   "auc": 0.9
+  },
+  "REC_C|INIT_Cinf": {
+   "kept": 15,
+   "share": 0.2174,
+   "auc": null
+  },
+  "INIT_C32|CNT_C32": {
+   "kept": 14,
+   "share": 0.2029,
+   "auc": null
+  },
+  "INIT_C128|CNT_C128": {
+   "kept": 23,
+   "share": 0.3333,
+   "auc": 0.8913
+  }
+ },
+ "LATER|IT|NONINIT": {
+  "n": 21,
+  "NBIN_Cinf|INIT_Cinf": {
+   "kept": 4,
+   "share": 0.1905,
+   "auc": null
+  },
+  "NDIV_Cinf|INIT_Cinf": {
+   "kept": 4,
+   "share": 0.1905,
+   "auc": null
+  },
+  "ISHARE_Cinf|INIT_Cinf": {
+   "kept": 4,
+   "share": 0.1905,
+   "auc": null
+  },
+  "NBIN_Tinf|INIT_Tinf": {
+   "kept": 8,
+   "share": 0.381,
+   "auc": null
+  },
+  "NDIV_Tinf|INIT_Tinf": {
+   "kept": 8,
+   "share": 0.381,
+   "auc": null
+  },
+  "ISHARE_Tinf|INIT_Tinf": {
+   "kept": 8,
+   "share": 0.381,
+   "auc": null
+  },
+  "INIT_Tinf|CNT_Tinf": {
+   "kept": 20,
+   "share": 0.9524,
+   "auc": 0.95
+  },
+  "INIT_Cinf|CNT_Cinf": {
+   "kept": 11,
+   "share": 0.5238,
+   "auc": null
+  },
+  "REC_C|INIT_Cinf": {
+   "kept": 4,
+   "share": 0.1905,
+   "auc": null
+  },
+  "INIT_C32|CNT_C32": {
+   "kept": 6,
+   "share": 0.2857,
+   "auc": null
+  },
+  "INIT_C128|CNT_C128": {
+   "kept": 5,
+   "share": 0.2381,
+   "auc": null
+  }
+ },
+ "FIRST|EN|ALL": {
+  "n": 534,
+  "NBIN_Cinf|INIT_Cinf": {
+   "kept": 534,
+   "share": 1,
+   "auc": 0.5
+  },
+  "NDIV_Cinf|INIT_Cinf": {
+   "kept": 534,
+   "share": 1,
+   "auc": 0.5
+  },
+  "ISHARE_Cinf|INIT_Cinf": {
+   "kept": 534,
+   "share": 1,
+   "auc": 0.5
+  },
+  "NBIN_Tinf|INIT_Tinf": {
+   "kept": 334,
+   "share": 0.6255,
+   "auc": 0.5254
+  },
+  "NDIV_Tinf|INIT_Tinf": {
+   "kept": 334,
+   "share": 0.6255,
+   "auc": 0.5359
+  },
+  "ISHARE_Tinf|INIT_Tinf": {
+   "kept": 334,
+   "share": 0.6255,
+   "auc": 0.515
+  },
+  "INIT_Tinf|CNT_Tinf": {
+   "kept": 518,
+   "share": 0.97,
+   "auc": 0.6824
+  },
+  "INIT_Cinf|CNT_Cinf": {
+   "kept": 534,
+   "share": 1,
+   "auc": 0.5
+  },
+  "REC_C|INIT_Cinf": {
+   "kept": 534,
+   "share": 1,
+   "auc": 0.5
+  },
+  "INIT_C32|CNT_C32": {
+   "kept": 534,
+   "share": 1,
+   "auc": 0.5
+  },
+  "INIT_C128|CNT_C128": {
+   "kept": 534,
+   "share": 1,
+   "auc": 0.5
+  }
+ },
+ "FIRST|EN|INIT": {
+  "n": 358,
+  "NBIN_Cinf|INIT_Cinf": {
+   "kept": 358,
+   "share": 1,
+   "auc": 0.5
+  },
+  "NDIV_Cinf|INIT_Cinf": {
+   "kept": 358,
+   "share": 1,
+   "auc": 0.5
+  },
+  "ISHARE_Cinf|INIT_Cinf": {
+   "kept": 358,
+   "share": 1,
+   "auc": 0.5
+  },
+  "NBIN_Tinf|INIT_Tinf": {
+   "kept": 246,
+   "share": 0.6872,
+   "auc": 0.5305
+  },
+  "NDIV_Tinf|INIT_Tinf": {
+   "kept": 246,
+   "share": 0.6872,
+   "auc": 0.5467
+  },
+  "ISHARE_Tinf|INIT_Tinf": {
+   "kept": 246,
+   "share": 0.6872,
+   "auc": 0.5122
+  },
+  "INIT_Tinf|CNT_Tinf": {
+   "kept": 351,
+   "share": 0.9804,
+   "auc": 0.6567
+  },
+  "INIT_Cinf|CNT_Cinf": {
+   "kept": 358,
+   "share": 1,
+   "auc": 0.5
+  },
+  "REC_C|INIT_Cinf": {
+   "kept": 358,
+   "share": 1,
+   "auc": 0.5
+  },
+  "INIT_C32|CNT_C32": {
+   "kept": 358,
+   "share": 1,
+   "auc": 0.5
+  },
+  "INIT_C128|CNT_C128": {
+   "kept": 358,
+   "share": 1,
+   "auc": 0.5
+  }
+ },
+ "FIRST|EN|NONINIT": {
+  "n": 176,
+  "NBIN_Cinf|INIT_Cinf": {
+   "kept": 176,
+   "share": 1,
+   "auc": 0.5
+  },
+  "NDIV_Cinf|INIT_Cinf": {
+   "kept": 176,
+   "share": 1,
+   "auc": 0.5
+  },
+  "ISHARE_Cinf|INIT_Cinf": {
+   "kept": 176,
+   "share": 1,
+   "auc": 0.5
+  },
+  "NBIN_Tinf|INIT_Tinf": {
+   "kept": 88,
+   "share": 0.5,
+   "auc": 0.5114
+  },
+  "NDIV_Tinf|INIT_Tinf": {
+   "kept": 88,
+   "share": 0.5,
+   "auc": 0.5057
+  },
+  "ISHARE_Tinf|INIT_Tinf": {
+   "kept": 88,
+   "share": 0.5,
+   "auc": 0.5227
+  },
+  "INIT_Tinf|CNT_Tinf": {
+   "kept": 167,
+   "share": 0.9489,
+   "auc": 0.7365
+  },
+  "INIT_Cinf|CNT_Cinf": {
+   "kept": 176,
+   "share": 1,
+   "auc": 0.5
+  },
+  "REC_C|INIT_Cinf": {
+   "kept": 176,
+   "share": 1,
+   "auc": 0.5
+  },
+  "INIT_C32|CNT_C32": {
+   "kept": 176,
+   "share": 1,
+   "auc": 0.5
+  },
+  "INIT_C128|CNT_C128": {
+   "kept": 176,
+   "share": 1,
+   "auc": 0.5
+  }
+ },
+ "FIRST|DE|ALL": {
+  "n": 14,
+  "NBIN_Cinf|INIT_Cinf": {
+   "kept": 14,
+   "share": 1,
+   "auc": null
+  },
+  "NDIV_Cinf|INIT_Cinf": {
+   "kept": 14,
+   "share": 1,
+   "auc": null
+  },
+  "ISHARE_Cinf|INIT_Cinf": {
+   "kept": 14,
+   "share": 1,
+   "auc": null
+  },
+  "NBIN_Tinf|INIT_Tinf": {
+   "kept": 8,
+   "share": 0.5714,
+   "auc": null
+  },
+  "NDIV_Tinf|INIT_Tinf": {
+   "kept": 8,
+   "share": 0.5714,
+   "auc": null
+  },
+  "ISHARE_Tinf|INIT_Tinf": {
+   "kept": 8,
+   "share": 0.5714,
+   "auc": null
+  },
+  "INIT_Tinf|CNT_Tinf": {
+   "kept": 13,
+   "share": 0.9286,
+   "auc": null
+  },
+  "INIT_Cinf|CNT_Cinf": {
+   "kept": 14,
+   "share": 1,
+   "auc": null
+  },
+  "REC_C|INIT_Cinf": {
+   "kept": 14,
+   "share": 1,
+   "auc": null
+  },
+  "INIT_C32|CNT_C32": {
+   "kept": 14,
+   "share": 1,
+   "auc": null
+  },
+  "INIT_C128|CNT_C128": {
+   "kept": 14,
+   "share": 1,
+   "auc": null
+  }
+ },
+ "FIRST|DE|INIT": {
+  "n": 11,
+  "NBIN_Cinf|INIT_Cinf": {
+   "kept": 11,
+   "share": 1,
+   "auc": null
+  },
+  "NDIV_Cinf|INIT_Cinf": {
+   "kept": 11,
+   "share": 1,
+   "auc": null
+  },
+  "ISHARE_Cinf|INIT_Cinf": {
+   "kept": 11,
+   "share": 1,
+   "auc": null
+  },
+  "NBIN_Tinf|INIT_Tinf": {
+   "kept": 6,
+   "share": 0.5455,
+   "auc": null
+  },
+  "NDIV_Tinf|INIT_Tinf": {
+   "kept": 6,
+   "share": 0.5455,
+   "auc": null
+  },
+  "ISHARE_Tinf|INIT_Tinf": {
+   "kept": 6,
+   "share": 0.5455,
+   "auc": null
+  },
+  "INIT_Tinf|CNT_Tinf": {
+   "kept": 10,
+   "share": 0.9091,
+   "auc": null
+  },
+  "INIT_Cinf|CNT_Cinf": {
+   "kept": 11,
+   "share": 1,
+   "auc": null
+  },
+  "REC_C|INIT_Cinf": {
+   "kept": 11,
+   "share": 1,
+   "auc": null
+  },
+  "INIT_C32|CNT_C32": {
+   "kept": 11,
+   "share": 1,
+   "auc": null
+  },
+  "INIT_C128|CNT_C128": {
+   "kept": 11,
+   "share": 1,
+   "auc": null
+  }
+ },
+ "FIRST|DE|NONINIT": {
+  "n": 3,
+  "NBIN_Cinf|INIT_Cinf": {
+   "kept": 3,
+   "share": 1,
+   "auc": null
+  },
+  "NDIV_Cinf|INIT_Cinf": {
+   "kept": 3,
+   "share": 1,
+   "auc": null
+  },
+  "ISHARE_Cinf|INIT_Cinf": {
+   "kept": 3,
+   "share": 1,
+   "auc": null
+  },
+  "NBIN_Tinf|INIT_Tinf": {
+   "kept": 2,
+   "share": 0.6667,
+   "auc": null
+  },
+  "NDIV_Tinf|INIT_Tinf": {
+   "kept": 2,
+   "share": 0.6667,
+   "auc": null
+  },
+  "ISHARE_Tinf|INIT_Tinf": {
+   "kept": 2,
+   "share": 0.6667,
+   "auc": null
+  },
+  "INIT_Tinf|CNT_Tinf": {
+   "kept": 3,
+   "share": 1,
+   "auc": null
+  },
+  "INIT_Cinf|CNT_Cinf": {
+   "kept": 3,
+   "share": 1,
+   "auc": null
+  },
+  "REC_C|INIT_Cinf": {
+   "kept": 3,
+   "share": 1,
+   "auc": null
+  },
+  "INIT_C32|CNT_C32": {
+   "kept": 3,
+   "share": 1,
+   "auc": null
+  },
+  "INIT_C128|CNT_C128": {
+   "kept": 3,
+   "share": 1,
+   "auc": null
+  }
+ },
+ "FIRST|ES|ALL": {
+  "n": 14,
+  "NBIN_Cinf|INIT_Cinf": {
+   "kept": 14,
+   "share": 1,
+   "auc": null
+  },
+  "NDIV_Cinf|INIT_Cinf": {
+   "kept": 14,
+   "share": 1,
+   "auc": null
+  },
+  "ISHARE_Cinf|INIT_Cinf": {
+   "kept": 14,
+   "share": 1,
+   "auc": null
+  },
+  "NBIN_Tinf|INIT_Tinf": {
+   "kept": 10,
+   "share": 0.7143,
+   "auc": null
+  },
+  "NDIV_Tinf|INIT_Tinf": {
+   "kept": 10,
+   "share": 0.7143,
+   "auc": null
+  },
+  "ISHARE_Tinf|INIT_Tinf": {
+   "kept": 10,
+   "share": 0.7143,
+   "auc": null
+  },
+  "INIT_Tinf|CNT_Tinf": {
+   "kept": 14,
+   "share": 1,
+   "auc": null
+  },
+  "INIT_Cinf|CNT_Cinf": {
+   "kept": 14,
+   "share": 1,
+   "auc": null
+  },
+  "REC_C|INIT_Cinf": {
+   "kept": 14,
+   "share": 1,
+   "auc": null
+  },
+  "INIT_C32|CNT_C32": {
+   "kept": 14,
+   "share": 1,
+   "auc": null
+  },
+  "INIT_C128|CNT_C128": {
+   "kept": 14,
+   "share": 1,
+   "auc": null
+  }
+ },
+ "FIRST|ES|INIT": {
+  "n": 13,
+  "NBIN_Cinf|INIT_Cinf": {
+   "kept": 13,
+   "share": 1,
+   "auc": null
+  },
+  "NDIV_Cinf|INIT_Cinf": {
+   "kept": 13,
+   "share": 1,
+   "auc": null
+  },
+  "ISHARE_Cinf|INIT_Cinf": {
+   "kept": 13,
+   "share": 1,
+   "auc": null
+  },
+  "NBIN_Tinf|INIT_Tinf": {
+   "kept": 10,
+   "share": 0.7692,
+   "auc": null
+  },
+  "NDIV_Tinf|INIT_Tinf": {
+   "kept": 10,
+   "share": 0.7692,
+   "auc": null
+  },
+  "ISHARE_Tinf|INIT_Tinf": {
+   "kept": 10,
+   "share": 0.7692,
+   "auc": null
+  },
+  "INIT_Tinf|CNT_Tinf": {
+   "kept": 13,
+   "share": 1,
+   "auc": null
+  },
+  "INIT_Cinf|CNT_Cinf": {
+   "kept": 13,
+   "share": 1,
+   "auc": null
+  },
+  "REC_C|INIT_Cinf": {
+   "kept": 13,
+   "share": 1,
+   "auc": null
+  },
+  "INIT_C32|CNT_C32": {
+   "kept": 13,
+   "share": 1,
+   "auc": null
+  },
+  "INIT_C128|CNT_C128": {
+   "kept": 13,
+   "share": 1,
+   "auc": null
+  }
+ },
+ "FIRST|ES|NONINIT": {
+  "n": 1,
+  "NBIN_Cinf|INIT_Cinf": {
+   "kept": 1,
+   "share": 1,
+   "auc": null
+  },
+  "NDIV_Cinf|INIT_Cinf": {
+   "kept": 1,
+   "share": 1,
+   "auc": null
+  },
+  "ISHARE_Cinf|INIT_Cinf": {
+   "kept": 1,
+   "share": 1,
+   "auc": null
+  },
+  "NBIN_Tinf|INIT_Tinf": {
+   "kept": 0,
+   "share": 0,
+   "auc": null
+  },
+  "NDIV_Tinf|INIT_Tinf": {
+   "kept": 0,
+   "share": 0,
+   "auc": null
+  },
+  "ISHARE_Tinf|INIT_Tinf": {
+   "kept": 0,
+   "share": 0,
+   "auc": null
+  },
+  "INIT_Tinf|CNT_Tinf": {
+   "kept": 1,
+   "share": 1,
+   "auc": null
+  },
+  "INIT_Cinf|CNT_Cinf": {
+   "kept": 1,
+   "share": 1,
+   "auc": null
+  },
+  "REC_C|INIT_Cinf": {
+   "kept": 1,
+   "share": 1,
+   "auc": null
+  },
+  "INIT_C32|CNT_C32": {
+   "kept": 1,
+   "share": 1,
+   "auc": null
+  },
+  "INIT_C128|CNT_C128": {
+   "kept": 1,
+   "share": 1,
+   "auc": null
+  }
+ },
+ "FIRST|IT|ALL": {
+  "n": 20,
+  "NBIN_Cinf|INIT_Cinf": {
+   "kept": 20,
+   "share": 1,
+   "auc": 0.5
+  },
+  "NDIV_Cinf|INIT_Cinf": {
+   "kept": 20,
+   "share": 1,
+   "auc": 0.5
+  },
+  "ISHARE_Cinf|INIT_Cinf": {
+   "kept": 20,
+   "share": 1,
+   "auc": 0.5
+  },
+  "NBIN_Tinf|INIT_Tinf": {
+   "kept": 12,
+   "share": 0.6,
+   "auc": null
+  },
+  "NDIV_Tinf|INIT_Tinf": {
+   "kept": 12,
+   "share": 0.6,
+   "auc": null
+  },
+  "ISHARE_Tinf|INIT_Tinf": {
+   "kept": 12,
+   "share": 0.6,
+   "auc": null
+  },
+  "INIT_Tinf|CNT_Tinf": {
+   "kept": 20,
+   "share": 1,
+   "auc": 0.7
+  },
+  "INIT_Cinf|CNT_Cinf": {
+   "kept": 20,
+   "share": 1,
+   "auc": 0.5
+  },
+  "REC_C|INIT_Cinf": {
+   "kept": 20,
+   "share": 1,
+   "auc": 0.5
+  },
+  "INIT_C32|CNT_C32": {
+   "kept": 20,
+   "share": 1,
+   "auc": 0.5
+  },
+  "INIT_C128|CNT_C128": {
+   "kept": 20,
+   "share": 1,
+   "auc": 0.5
+  }
+ },
+ "FIRST|IT|INIT": {
+  "n": 12,
+  "NBIN_Cinf|INIT_Cinf": {
+   "kept": 12,
+   "share": 1,
+   "auc": null
+  },
+  "NDIV_Cinf|INIT_Cinf": {
+   "kept": 12,
+   "share": 1,
+   "auc": null
+  },
+  "ISHARE_Cinf|INIT_Cinf": {
+   "kept": 12,
+   "share": 1,
+   "auc": null
+  },
+  "NBIN_Tinf|INIT_Tinf": {
+   "kept": 9,
+   "share": 0.75,
+   "auc": null
+  },
+  "NDIV_Tinf|INIT_Tinf": {
+   "kept": 9,
+   "share": 0.75,
+   "auc": null
+  },
+  "ISHARE_Tinf|INIT_Tinf": {
+   "kept": 9,
+   "share": 0.75,
+   "auc": null
+  },
+  "INIT_Tinf|CNT_Tinf": {
+   "kept": 12,
+   "share": 1,
+   "auc": null
+  },
+  "INIT_Cinf|CNT_Cinf": {
+   "kept": 12,
+   "share": 1,
+   "auc": null
+  },
+  "REC_C|INIT_Cinf": {
+   "kept": 12,
+   "share": 1,
+   "auc": null
+  },
+  "INIT_C32|CNT_C32": {
+   "kept": 12,
+   "share": 1,
+   "auc": null
+  },
+  "INIT_C128|CNT_C128": {
+   "kept": 12,
+   "share": 1,
+   "auc": null
+  }
+ },
+ "FIRST|IT|NONINIT": {
+  "n": 8,
+  "NBIN_Cinf|INIT_Cinf": {
+   "kept": 8,
+   "share": 1,
+   "auc": null
+  },
+  "NDIV_Cinf|INIT_Cinf": {
+   "kept": 8,
+   "share": 1,
+   "auc": null
+  },
+  "ISHARE_Cinf|INIT_Cinf": {
+   "kept": 8,
+   "share": 1,
+   "auc": null
+  },
+  "NBIN_Tinf|INIT_Tinf": {
+   "kept": 3,
+   "share": 0.375,
+   "auc": null
+  },
+  "NDIV_Tinf|INIT_Tinf": {
+   "kept": 3,
+   "share": 0.375,
+   "auc": null
+  },
+  "ISHARE_Tinf|INIT_Tinf": {
+   "kept": 3,
+   "share": 0.375,
+   "auc": null
+  },
+  "INIT_Tinf|CNT_Tinf": {
+   "kept": 8,
+   "share": 1,
+   "auc": null
+  },
+  "INIT_Cinf|CNT_Cinf": {
+   "kept": 8,
+   "share": 1,
+   "auc": null
+  },
+  "REC_C|INIT_Cinf": {
+   "kept": 8,
+   "share": 1,
+   "auc": null
+  },
+  "INIT_C32|CNT_C32": {
+   "kept": 8,
+   "share": 1,
+   "auc": null
+  },
+  "INIT_C128|CNT_C128": {
+   "kept": 8,
+   "share": 1,
+   "auc": null
+  }
+ }
+}

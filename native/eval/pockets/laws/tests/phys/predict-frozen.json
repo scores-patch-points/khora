@@ -1,0 +1,51 @@
+{
+ "note": "blind PREDICT table of laws/phys.mjs frozen BEFORE any phys statistic was computed on any data",
+ "sha256": "0227988e28f8caf88b091eaaa1821ee7c5873c244b8ecd8c525f9b7921eb3655",
+ "canon": [
+  [
+   "affect",
+   "universal+"
+  ],
+  [
+   "affectAsym",
+   "specific"
+  ],
+  [
+   "attrDecay",
+   "universal+"
+  ],
+  [
+   "attrPMI",
+   "universal+"
+  ],
+  [
+   "gravAlpha",
+   "universal+"
+  ],
+  [
+   "gravAlphaSd",
+   "universal+"
+  ],
+  [
+   "gravBeta",
+   "universal-"
+  ],
+  [
+   "massAdd",
+   "specific"
+  ],
+  [
+   "massExp",
+   "specific"
+  ],
+  [
+   "voidRescue",
+   "universal+"
+  ],
+  [
+   "voidShare",
+   "universal-"
+  ]
+ ],
+ "physMjsHeaderSha256": "ea79834b399aa9f170f45c7c47a629a7af1446d2a5db2f21dd3e598548595b43"
+}

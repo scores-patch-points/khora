@@ -1,0 +1,112 @@
+{
+ "group": "pl",
+ "loader": "loaders/planted.mjs",
+ "pockets": [
+  {
+   "id": "pl-null",
+   "tokens": 100561,
+   "units": 9682,
+   "docs": 100,
+   "types": 4872,
+   "register": "planted",
+   "language": "zxx",
+   "script": "latn",
+   "tokenisation": "synthetic words",
+   "capApplied": false,
+   "contentSha256": "8055d644df5962b7a5549dffe9c841cb1d0d1bc238a9e6e6b05301bfe2db33a3"
+  },
+  {
+   "id": "pl-burst",
+   "tokens": 100616,
+   "units": 9714,
+   "docs": 100,
+   "types": 4629,
+   "register": "planted",
+   "language": "zxx",
+   "script": "latn",
+   "tokenisation": "synthetic words",
+   "capApplied": false,
+   "contentSha256": "890bbd216655f5b5f8ad80e548481a667ecb54bc97509e343f89534a6d90c0dc"
+  },
+  {
+   "id": "pl-markov",
+   "tokens": 100623,
+   "units": 9786,
+   "docs": 100,
+   "types": 4868,
+   "register": "planted",
+   "language": "zxx",
+   "script": "latn",
+   "tokenisation": "synthetic words",
+   "capApplied": false,
+   "contentSha256": "5d8f8d6374adf9bfcbde708035061a9eb5a9ea89f9c82dc48e71ccd0e07e622d"
+  },
+  {
+   "id": "pl-frames",
+   "tokens": 100182,
+   "units": 23622,
+   "docs": 100,
+   "types": 4614,
+   "register": "planted",
+   "language": "zxx",
+   "script": "latn",
+   "tokenisation": "synthetic words",
+   "capApplied": false,
+   "contentSha256": "4dcb9278698c22c48d6a6aa1428035d4b392f3dcd52fcefd118dbc96f7d6fee4"
+  },
+  {
+   "id": "pl-parallel",
+   "tokens": 100738,
+   "units": 9674,
+   "docs": 100,
+   "types": 4809,
+   "register": "planted",
+   "language": "zxx",
+   "script": "latn",
+   "tokenisation": "synthetic words",
+   "capApplied": false,
+   "contentSha256": "f1d81f4b97cedb067c0843e7f6c525f21696b8e9bd891471b9c7b4415fc93fd7"
+  },
+  {
+   "id": "pl-length",
+   "tokens": 100633,
+   "units": 9720,
+   "docs": 100,
+   "types": 4776,
+   "register": "planted",
+   "language": "zxx",
+   "script": "latn",
+   "tokenisation": "synthetic words",
+   "capApplied": false,
+   "contentSha256": "c88924d7bf6f206c2d3e71b40c4f4ecb1f9a2f94602218e35ca1f0dbaa6e5e68"
+  },
+  {
+   "id": "pl-mix",
+   "tokens": 120587,
+   "units": 16541,
+   "docs": 120,
+   "types": 4800,
+   "register": "planted",
+   "language": "zxx",
+   "script": "latn",
+   "tokenisation": "synthetic words",
+   "capApplied": false,
+   "contentSha256": "7fc3e02a85dabbae72dad9e6df8380cad71fcdf95dd63afedc051ac3bcef8e3d"
+  },
+  {
+   "id": "pl-null2",
+   "tokens": 101284,
+   "units": 6660,
+   "docs": 100,
+   "types": 3391,
+   "register": "planted",
+   "language": "zxx",
+   "script": "latn",
+   "tokenisation": "synthetic words",
+   "capApplied": false,
+   "contentSha256": "a6e9ccb5a4aa99c91b9edb783905f58088e5adbac950f79f410810ff8c50bb76"
+  }
+ ],
+ "skipped": [],
+ "notes": "All eight planted pockets are below the 300,000-token cap, so no whole-document capping was applied. Content hashes allow the G2 determinism check (two separate processes give identical hashes)."
+}

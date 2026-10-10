@@ -1,0 +1,144 @@
+// bridge-job.test.mjs — POST /api/job through the real bridge: the decision trace, escalation on observable failure only,
+// the disclosure wall, the local gate, the ledger, and what is (and is not) in the outbound bytes. A fake Ollama and a fake
+// frontier wire; no network beyond loopback.
+import test from "node:test";
+import assert from "node:assert/strict";
+import http from "node:http";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import { createBridge } from "./bridge-server.mjs";
+import { mulberry32, makeSituation, sampleWitness, buildCapsule, derivedOf, renderPrompt, CAPSULE_ACCEPTANCE } from "./capsule.js";
+
+const frontierExecutor = () => ({ executor: "groq:gpt-oss-120b", endpoint: "https://api.groq.com/openai/v1", model: "gpt-oss-120b", provider: "groq", location: "external", authClass: "api_key", privacyClass: "sealed-only", auth: { kind: "api_key", apiKey: "sk-test" }, live: { reachable: true, inflight: 0, queue: 0 }, advertised: { tools: false, structured: false }, cost: { kind: "provider", freeLocal: false } });
+
+async function rig(t, { remote, local }) {
+  const out = { remoteCalls: [], localCalls: [] };
+  const ollama = http.createServer((req, res) => {
+    let b = ""; req.on("data", (c) => (b += c));
+    req.on("end", () => {
+      res.writeHead(200, { "content-type": "application/json" });
+      if (req.url === "/api/tags") return res.end(JSON.stringify({ models: [{ name: "gemma2:2b" }, { name: "nomic-embed-text:latest" }] }));
+      const j = JSON.parse(b); out.localCalls.push(j);
+      res.end(JSON.stringify({ message: { content: local(j.messages) }, eval_count: 7 }));
+    });
+  });
+  await new Promise((r) => ollama.listen(0, "127.0.0.1", r)); t.after(() => ollama.close());
+  const frontierFetch = async (url, opts) => {
+    const body = JSON.parse(opts.body); out.remoteCalls.push({ url, body, raw: opts.body });
+    const data = "data: " + JSON.stringify({ choices: [{ delta: { content: remote(body.messages) } }] }) + "\n\ndata: [DONE]\n\n";
+    return { ok: true, status: 200, body: new ReadableStream({ start(c) { c.enqueue(new TextEncoder().encode(data)); c.close(); } }) };
+  };
+  const statsFile = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "bj-")), "route-stats.json");
+  const bridge = createBridge({ port: 0, host: "127.0.0.1", dist: null, upstream: "http://127.0.0.1:" + ollama.address().port, autoOpen: false, frontierExecutors: [frontierExecutor()], frontierFetch, routeStatsFile: statsFile, auditFile: null, stateFile: path.join(path.dirname(statsFile), "state.json") });
+  await bridge.listen(); t.after(() => bridge.close());
+  return { ...out, base: "http://127.0.0.1:" + bridge.server.address().port, statsFile };
+}
+const post = (base, p, b) => fetch(base + p, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(b) }).then(async (r) => ({ status: r.status, body: await r.json() }));
+
+function capsuleJob(seed, over = {}) {
+  const rng = mulberry32(seed); const situation = makeSituation(rng), T = sampleWitness(situation, rng);
+  const { capsule, key } = buildCapsule({ situation, witnessed: T, construction: "symmetric-exchangeable", K: 3, rng });
+  const rev = Object.fromEntries(Object.entries(key.eventOf).map(([s, e]) => [e, s]));
+  const oracle = JSON.stringify(Object.fromEntries(capsule.worlds.map((_, j) => [String(j + 1), j === key.real ? derivedOf(situation, T).derived.map(([a, b]) => [rev[a], rev[b]]) : []])));
+  const wrong = JSON.stringify(Object.fromEntries(capsule.worlds.map((_, j) => [String(j + 1), []])));
+  return { capsule, key, situation, T, oracle, wrong, body: { job: { taskClass: "formal.check", disclosure: "abstract-capsule-only", acceptance: CAPSULE_ACCEPTANCE, maxAttempts: 3, ...over }, payload: { capsule }, context: { key, situation, witnessedSet: T } } };
+}
+
+test("a wrong remote PROPOSAL is rejected by the local gate, escalated (observable failure), and the local route's proposal is accepted — trace, ledger and stats all agree", async (t) => {
+  const c = capsuleJob(1);
+  const r = await rig(t, { remote: () => c.wrong, local: () => c.oracle });
+  const j = await post(r.base, "/api/job", c.body);
+  assert.equal(j.status, 200, JSON.stringify(j.body));
+  assert.equal(j.body.state, "accepted");
+  const [a1, a2] = j.body.attempts;
+  assert.equal(a1.route, "groq:gpt-oss-120b");
+  assert.equal(a1.verdict, "rejected"); assert.equal(a1.failureKind, "check_failed");
+  assert.equal(a2.route, "local:gemma2:2b"); assert.match(a2.chosenBy, /^escalation:check_failed/);
+  assert.equal(a2.verdict, "accepted"); assert.equal(j.body.route, "local:gemma2:2b");
+  assert.ok(j.body.decision[0].candidates.length >= 2 && j.body.decision[0].candidates[0].score <= j.body.decision[0].candidates[1].score);
+  // the ledger: one entry per attempt, with the reason and the verdict
+  const led = (await (await fetch(r.base + "/api/ledger")).json()).entries.filter((e) => e.job === j.body.jobId);
+  assert.equal(led.length, 2);
+  assert.match(led[0].reason, /^job:1:.*:rejected$/); assert.match(led[1].reason, /^job:2:escalation:check_failed:accepted$/);
+  assert.equal(led[0].actual.accepted, false); assert.equal(led[1].actual.accepted, true);
+  // the measured accept rates moved, per route × taskClass, over HTTP and on disk
+  const st = await (await fetch(r.base + "/api/route-stats")).json();
+  const rem = st.cells.find((x) => x.route === "groq:gpt-oss-120b"), loc = st.cells.find((x) => x.route === "local:gemma2:2b");
+  assert.ok(rem.p < 0.5 && loc.p > 0.5, JSON.stringify(st.cells));
+  assert.equal(JSON.parse(fs.readFileSync(r.statsFile, "utf8")).routes["groq:gpt-oss-120b"]["formal.check"].rejected, 1);
+});
+
+test("the remote saw EXACTLY the capsule heimdall rendered — symbols only: no key, no witnessed set, no real slot, no context", async (t) => {
+  const c = capsuleJob(2);
+  const r = await rig(t, { remote: () => c.oracle, local: () => c.wrong });
+  const j = await post(r.base, "/api/job", c.body);
+  assert.equal(j.body.state, "accepted"); assert.equal(j.body.route, "groq:gpt-oss-120b");
+  assert.equal(r.remoteCalls.length, 1);
+  assert.equal(r.remoteCalls[0].body.messages.length, 1);
+  assert.equal(r.remoteCalls[0].body.messages[0].content, renderPrompt(c.capsule));
+  const sent = r.remoteCalls[0].raw;
+  for (const secret of ["witnessed", "eventOf", "claimOf", "situation", "pool", "real", "sk-test"]) assert.ok(!sent.includes(secret), `outbound bytes contain ${secret}`);
+  const audit = await (await fetch(r.base + "/api/audit")).json();
+  assert.ok(audit.entries.length >= 1 && audit.entries[0].request.body.includes(c.capsule.events[0]), "heimdall's own outbound ledger recorded the capsule bytes");
+});
+
+test("disclosure none: the remote is never called, even after the local route fails — the job ends in a typed gap, not a looser route", async (t) => {
+  const c = capsuleJob(3, { disclosure: "none", privacy: "local-raw" });
+  const r = await rig(t, { remote: () => c.oracle, local: () => c.wrong });
+  const j = await post(r.base, "/api/job", c.body);
+  assert.equal(r.remoteCalls.length, 0, "nothing left this machine");
+  assert.equal(j.body.state, "rejected");
+  assert.equal(j.body.gap.kind, "not-present");
+  assert.ok(j.body.attempts.every((a) => a.route.startsWith("local:")));
+  assert.ok(!j.body.routes.some((x) => x.id.startsWith("groq")) || j.body.decision[0].excluded.some((e) => e.route.startsWith("groq") && e.reasons.some((m) => /disclosure/.test(m))));
+});
+
+test("a raw-text payload on an abstract-capsule-only job cannot reach a remote route (it would expose text)", async (t) => {
+  const r = await rig(t, { remote: () => "{}", local: () => '{"ok":true}' });
+  const j = await post(r.base, "/api/job", { job: { taskClass: "formal.check", disclosure: "abstract-capsule-only", acceptance: [{ type: "constraint", constraints: [{ path: "ok", op: "eq", value: true }] }] }, payload: { messages: [{ role: "user", content: "Eleanor Voss founded the town in 1779" }] } });
+  assert.equal(j.body.state, "accepted"); assert.equal(j.body.route, "local:gemma2:2b");
+  assert.equal(r.remoteCalls.length, 0);
+});
+
+test("a sealed-external-text job MAY go remote, with its text — and is still judged locally", async (t) => {
+  const r = await rig(t, { remote: () => '{"v":7}', local: () => '{"v":1}' });
+  const j = await post(r.base, "/api/job", { job: { taskClass: "formal.check", disclosure: "sealed-external-text", acceptance: [{ type: "constraint", constraints: [{ path: "v", op: "eq", value: 7 }] }] }, payload: { messages: [{ role: "user", content: "synthetic: what is 3+4?" }] } });
+  assert.equal(j.body.state, "accepted"); assert.equal(j.body.attempts[0].route, "groq:gpt-oss-120b"); assert.equal(r.remoteCalls.length, 1);
+});
+
+test("FALSIFIER — a capsule that is not only symbols is refused with a 400 and nothing is sent anywhere", async (t) => {
+  const c = capsuleJob(4);
+  const r = await rig(t, { remote: () => c.oracle, local: () => c.oracle });
+  const bad = JSON.parse(JSON.stringify(c.body)); bad.payload.capsule.note = "Eleanor Voss founded it";
+  const j = await post(r.base, "/api/job", bad);
+  assert.equal(j.status, 400); assert.match(j.body.error, /sealed capsule/);
+  assert.equal(r.remoteCalls.length + r.localCalls.length, 0);
+  const noKey = JSON.parse(JSON.stringify(c.body)); delete noKey.context.key;
+  assert.equal((await post(r.base, "/api/job", noKey)).status, 400);
+});
+
+test("FALSIFIER — a confidently-wrong remote reply (self-reported confidence 1.0) is rejected like any other wrong reply", async (t) => {
+  const c = capsuleJob(5);
+  const sure = JSON.stringify({ ...JSON.parse(c.wrong), confidence: 1.0, certainty: "absolute" });
+  const r = await rig(t, { remote: () => sure, local: () => c.oracle });
+  const j = await post(r.base, "/api/job", c.body);
+  assert.equal(j.body.attempts[0].verdict === "rejected" || j.body.attempts[0].verdict === "accepted", true);
+  if (c.situation && derivedOf(c.situation, c.T).derived.length) assert.equal(j.body.attempts[0].verdict, "rejected");
+  assert.equal(j.body.state, "accepted"); assert.equal(j.body.route, "local:gemma2:2b");
+});
+
+test("a route that errors escalates as route_error; an unparseable reply is 'unresolved'", async (t) => {
+  const c = capsuleJob(6);
+  const r = await rig(t, { remote: () => "I cannot help with that.", local: () => c.oracle });
+  const j = await post(r.base, "/api/job", c.body);
+  assert.equal(j.body.attempts[0].failureKind, "unresolved");
+  assert.equal(j.body.state, "accepted");
+});
+
+test("existing endpoints are unchanged: /api/tags and /api/ledger still answer, and /api/job needs a body", async (t) => {
+  const r = await rig(t, { remote: () => "{}", local: () => "{}" });
+  assert.equal((await fetch(r.base + "/api/ledger")).status, 200);
+  assert.equal((await post(r.base, "/api/job", {})).status, 400);
+  assert.equal((await post(r.base, "/api/job", { job: { taskClass: "llm.guess" }, payload: { messages: [{ role: "user", content: "x" }] } })).status, 400);
+});

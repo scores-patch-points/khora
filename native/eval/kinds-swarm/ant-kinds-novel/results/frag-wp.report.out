@@ -1,0 +1,255 @@
+{
+ "F1": {
+  "cliff_m2_minus_m3": 1.7793,
+  "ci": [
+   1.3999,
+   2.173
+  ],
+  "n1minus": 0.4344,
+  "pass": true
+ },
+ "F2": {
+  "slopePerDoubling": 0.093,
+  "ci": [
+   -0.0125,
+   0.2385
+  ],
+  "flat": true
+ },
+ "departing": [
+  {
+   "k": 1,
+   "slope": 0.4384,
+   "ci": [
+    0.0984,
+    0.7495
+   ],
+   "reversal": false
+  },
+  {
+   "k": 2,
+   "slope": -0.2271,
+   "ci": [
+    -0.366,
+    -0.0835
+   ],
+   "reversal": true
+  },
+  {
+   "k": 4,
+   "slope": -0.1972,
+   "ci": [
+    -0.3284,
+    -0.0303
+   ],
+   "reversal": true
+  },
+  {
+   "k": 11,
+   "slope": -0.1525,
+   "ci": [
+    -0.3399,
+    -0.0526
+   ],
+   "reversal": true
+  }
+ ],
+ "F3": {
+  "kindsWithLowM": 12,
+  "floorWins": 8,
+  "winners": {
+   "0": "FLOOR",
+   "1": "FLOORLOG",
+   "2": "FLOORLOG",
+   "3": "FLOOR",
+   "4": "FLOORLOG",
+   "5": "FLOOR",
+   "6": "FLOOR",
+   "7": "FLOOR",
+   "8": "FLOOR",
+   "9": "FLOOR",
+   "10": "FLOOR",
+   "11": "FLOORLOG"
+  },
+  "pooledSampleCV": {
+   "n": 2525,
+   "mse": {
+    "CONST": 2.0797,
+    "FLOOR": 1.703,
+    "FLOORLOG": 1.7022,
+    "LOG": 1.9763,
+    "HYP": 2.0011
+   },
+   "best": "FLOORLOG"
+  }
+ },
+ "cast": {
+  "ctrlF": {
+   "pairs": 320,
+   "castMeanD1": 1.123,
+   "ctrlMeanD1": 1.0593,
+   "m1": {
+    "n": 40,
+    "meanDiff": -0.1842,
+    "ci": [
+     -0.5145,
+     0.1513
+    ],
+    "excludes0": false
+   },
+   "m2": {
+    "n": 40,
+    "meanDiff": 0.0606,
+    "ci": [
+     -0.6058,
+     0.6707
+    ],
+    "excludes0": false
+   },
+   "m3+": {
+    "n": 240,
+    "meanDiff": 0.1056,
+    "ci": [
+     -0.1077,
+     0.3207
+    ],
+    "excludes0": false
+   },
+   "m3+_midOnly": {
+    "n": 176,
+    "meanDiff": 0.0193,
+    "ci": [
+     -0.2337,
+     0.2694
+    ],
+    "excludes0": false
+   },
+   "slopeCastMinusCtrl": {
+    "point": 0.0285,
+    "castSlope": -0.0386,
+    "ctrlSlope": -0.0671,
+    "ci": [
+     -0.137,
+     0.1912
+    ],
+    "excludes0": false
+   },
+   "position": {
+    "castShareInitial": 0.175,
+    "ctrlShareInitial": 0.1719,
+    "castShareBeing": 0.0125,
+    "ctrlShareBeing": 0.025,
+    "castShareFigure": 0.8875,
+    "ctrlShareFigure": 0.8656
+   }
+  },
+  "ctrlK": {
+   "pairs": 320,
+   "castMeanD1": 1.123,
+   "ctrlMeanD1": 1.2895,
+   "m1": {
+    "n": 40,
+    "meanDiff": -0.125,
+    "ci": [
+     -0.5703,
+     0.4313
+    ],
+    "excludes0": false
+   },
+   "m2": {
+    "n": 40,
+    "meanDiff": -0.1882,
+    "ci": [
+     -1.0509,
+     0.5842
+    ],
+    "excludes0": false
+   },
+   "m3+": {
+    "n": 240,
+    "meanDiff": -0.1697,
+    "ci": [
+     -0.4373,
+     0.0505
+    ],
+    "excludes0": false
+   },
+   "m3+_midOnly": {
+    "n": 176,
+    "meanDiff": -0.2099,
+    "ci": [
+     -0.4827,
+     0.035
+    ],
+    "excludes0": false
+   },
+   "slopeCastMinusCtrl": {
+    "point": -0.0213,
+    "castSlope": -0.0386,
+    "ctrlSlope": -0.0173,
+    "ci": [
+     -0.1842,
+     0.131
+    ],
+    "excludes0": false
+   },
+   "position": {
+    "castShareInitial": 0.175,
+    "ctrlShareInitial": 0.175,
+    "castShareBeing": 0.0125,
+    "ctrlShareBeing": 0.025,
+    "castShareFigure": 0.8875,
+    "ctrlShareFigure": 0.8344
+   }
+  },
+  "F5": {
+   "kinds": 12,
+   "H": 0.06217,
+   "nullQ95": 0.07177,
+   "nullMedian": 0.0334,
+   "HPass": false,
+   "pH": 0.1009,
+   "Hslope": 0.0329,
+   "nullSlopeQ95": 0.05579,
+   "HslopePass": false,
+   "pHslope": 0.2138
+  }
+ },
+ "mech": {
+  "m1": {
+   "n": 360,
+   "meanD1": 1.4324,
+   "shareNull": 0.2111,
+   "shareFigure": 0.0083,
+   "shareBeing": 0,
+   "meanDirect": 0.79,
+   "meanCollateral": 3.04
+  },
+  "m2": {
+   "n": 360,
+   "meanD1": 2.7894,
+   "shareNull": 0.05,
+   "shareFigure": 0.9722,
+   "shareBeing": 0.0083,
+   "meanDirect": 0.78,
+   "meanCollateral": 8.72
+  },
+  "m3+": {
+   "n": 1805,
+   "meanD1": 1.0079,
+   "shareNull": 0.4432,
+   "shareFigure": 0.9956,
+   "shareBeing": 0.01,
+   "meanDirect": 0.66,
+   "meanCollateral": 2
+  }
+ },
+ "sham": {
+  "n": 100,
+  "nonzero": 0
+ },
+ "det": {
+  "same": 40,
+  "total": 40
+ }
+}

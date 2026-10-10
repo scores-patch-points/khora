@@ -1,0 +1,9 @@
+EN_pooledMatcher: M4 n=912 auc=0.7193 ci=0.7018,0.7363 holds=true core=true wsh=0.5592 bey=0.7135
+NONEN_ALL: M4 n=163 auc=0.6748 ci=0.635,0.7147 holds=true core=true wsh=0.5178 bey=0.6739
+NONEN_de: VOID n=undefined auc=undefined ci=undefined holds=false core=false wsh=undefined bey=undefined
+NONEN_es: VOID n=undefined auc=undefined ci=undefined holds=false core=false wsh=undefined bey=undefined
+NONEN_it: M4 n=64 auc=0.7344 ci=0.6641,0.8047 holds=true core=true wsh=0.5291 bey=0.7302
+NONEN_INIT: M4 n=117 auc=0.6453 ci=0.5983,0.688 holds=true core=true wsh=0.4783 bey=0.6466
+NONEN_NONINIT: VOID n=undefined auc=undefined ci=undefined holds=false core=false wsh=undefined bey=undefined
+NONEN_big: VOID n=undefined auc=undefined ci=undefined holds=false core=false wsh=undefined bey=undefined
+NONEN_small: M4 n=163 auc=0.6748 ci=0.635,0.7147 holds=true core=true wsh=0.5178 bey=0.6739

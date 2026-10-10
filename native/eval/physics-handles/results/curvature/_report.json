@@ -1,0 +1,1253 @@
+{
+ "headerSha256": "56f4c0fc6c13a18aeec1aa7a583bb87063a3178eca08d7309df8b765604e2ea5",
+ "corpora": {
+  "ud-deu-A": {
+   "bodies": 152,
+   "K1": 0,
+   "K2": true,
+   "kNN": 2,
+   "C1": {
+    "shareExcessPositive": 0.4868,
+    "signP": 0.6574,
+    "medianExcessRel": -0.0318
+   },
+   "C2": {
+    "slopeDelete": 0.9869,
+    "ciDelete": {
+     "lo": 0.9425,
+     "hi": 1.0336
+    },
+    "slopeRandom": 0.9472,
+    "ciRandom": {
+     "lo": 0.8918,
+     "hi": 1.0029
+    }
+   },
+   "C3": {
+    "del": -1,
+    "col": -0.9,
+    "radialDel": [
+     0.0011682,
+     0.0011434,
+     0.001132,
+     0.0009969,
+     0.0008044
+    ],
+    "radialCol": [
+     0.0009787,
+     0.0009797,
+     0.0009681,
+     0.0008401,
+     0.000687
+    ],
+    "nearShareMedian": 0.1809
+   },
+   "C4": {
+    "medianMaskOverDelete": 0.7143,
+    "medianColOverDelete": 0.7143
+   },
+   "C5": {
+    "bodiesInT": 80,
+    "throughLongerShare": 0.775,
+    "meanBendThrough": 0.1465,
+    "meanBendOther": 0.0117,
+    "betweennessVsLogN": 0.4694,
+    "betweennessVsEallGivenN": 0.0929
+   },
+   "WG": {
+    "bodies": 152,
+    "rawSpearman": -0.1748,
+    "partialGivenLogN": -0.1096,
+    "ci": {
+     "lo": -0.2608,
+     "hi": 0.0708
+    },
+    "derangedQ95": 0.0595,
+    "derangedMean": -0.0725,
+    "shuffledCorpusPartial": -0.0402,
+    "shuffledBodies": 60,
+    "spearmanEvenVsLogN": -0.1371,
+    "spearmanCoddVsLogN": 0.7944,
+    "oneQuantity": false
+   },
+   "M": {
+    "bodies": 67,
+    "medianR": 0.9978,
+    "ci": {
+     "lo": 0.9924,
+     "hi": 1.0042
+    },
+    "reliability": 0.0718,
+    "Jslope": -0.4454
+   }
+  },
+  "ud-deu-B": {
+   "bodies": 152,
+   "K1": 0,
+   "K2": true,
+   "kNN": 2,
+   "C1": {
+    "shareExcessPositive": 0.5066,
+    "signP": 0.4677,
+    "medianExcessRel": 0.0035
+   },
+   "C2": {
+    "slopeDelete": 1.0473,
+    "ciDelete": {
+     "lo": 0.9919,
+     "hi": 1.102
+    },
+    "slopeRandom": 0.9649,
+    "ciRandom": {
+     "lo": 0.925,
+     "hi": 1.0042
+    }
+   },
+   "C3": {
+    "del": -1,
+    "col": -1,
+    "radialDel": [
+     0.0010359,
+     0.0009112,
+     0.0008348,
+     0.0006879,
+     0.0004667
+    ],
+    "radialCol": [
+     0.0007572,
+     0.0006955,
+     0.0006319,
+     0.0005271,
+     0.0003703
+    ],
+    "nearShareMedian": 0.2218
+   },
+   "C4": {
+    "medianMaskOverDelete": 0.6766,
+    "medianColOverDelete": 0.6766
+   },
+   "C5": {
+    "bodiesInT": 76,
+    "throughLongerShare": 0.6974,
+    "meanBendThrough": 0.1188,
+    "meanBendOther": 0.0039,
+    "betweennessVsLogN": 0.4172,
+    "betweennessVsEallGivenN": -0.0351
+   },
+   "WG": {
+    "bodies": 152,
+    "rawSpearman": -0.0367,
+    "partialGivenLogN": 0.0577,
+    "ci": {
+     "lo": -0.0895,
+     "hi": 0.2074
+    },
+    "derangedQ95": 0.1553,
+    "derangedMean": 0.0308,
+    "shuffledCorpusPartial": 0.1934,
+    "shuffledBodies": 60,
+    "spearmanEvenVsLogN": -0.0866,
+    "spearmanCoddVsLogN": 0.8118,
+    "oneQuantity": false
+   },
+   "M": {
+    "bodies": 71,
+    "medianR": 0.9939,
+    "ci": {
+     "lo": 0.9856,
+     "hi": 0.9995
+    },
+    "reliability": 0.2195,
+    "Jslope": -0.5394
+   }
+  },
+  "ud-eng-A": {
+   "bodies": 152,
+   "K1": 0,
+   "K2": true,
+   "kNN": 2,
+   "C1": {
+    "shareExcessPositive": 0.4276,
+    "signP": 0.9691,
+    "medianExcessRel": -0.0437
+   },
+   "C2": {
+    "slopeDelete": 0.9509,
+    "ciDelete": {
+     "lo": 0.9113,
+     "hi": 0.9926
+    },
+    "slopeRandom": 0.8854,
+    "ciRandom": {
+     "lo": 0.8459,
+     "hi": 0.9341
+    }
+   },
+   "C3": {
+    "del": -1,
+    "col": -1,
+    "radialDel": [
+     0.0011567,
+     0.0010493,
+     0.0009765,
+     0.0008502,
+     0.0007063
+    ],
+    "radialCol": [
+     0.0007999,
+     0.0007527,
+     0.0007405,
+     0.0006589,
+     0.0005723
+    ],
+    "nearShareMedian": 0.1969
+   },
+   "C4": {
+    "medianMaskOverDelete": 0.6048,
+    "medianColOverDelete": 0.6048
+   },
+   "C5": {
+    "bodiesInT": 64,
+    "throughLongerShare": 0.6406,
+    "meanBendThrough": -0.0224,
+    "meanBendOther": -0.047,
+    "betweennessVsLogN": 0.2051,
+    "betweennessVsEallGivenN": -0.0632
+   },
+   "WG": {
+    "bodies": 152,
+    "rawSpearman": -0.0481,
+    "partialGivenLogN": 0.0987,
+    "ci": {
+     "lo": -0.0598,
+     "hi": 0.2842
+    },
+    "derangedQ95": 0.101,
+    "derangedMean": -0.0181,
+    "shuffledCorpusPartial": 0.0244,
+    "shuffledBodies": 60,
+    "spearmanEvenVsLogN": -0.0972,
+    "spearmanCoddVsLogN": 0.9114,
+    "oneQuantity": false
+   },
+   "M": {
+    "bodies": 86,
+    "medianR": 1.0019,
+    "ci": {
+     "lo": 0.9939,
+     "hi": 1.0134
+    },
+    "reliability": 0.1249,
+    "Jslope": -0.5728
+   }
+  },
+  "ud-eng-B": {
+   "bodies": 152,
+   "K1": 0,
+   "K2": true,
+   "kNN": 2,
+   "C1": {
+    "shareExcessPositive": 0.4803,
+    "signP": 0.7148,
+    "medianExcessRel": -0.033
+   },
+   "C2": {
+    "slopeDelete": 1.1088,
+    "ciDelete": {
+     "lo": 1.0427,
+     "hi": 1.2051
+    },
+    "slopeRandom": 1.0419,
+    "ciRandom": {
+     "lo": 0.99,
+     "hi": 1.0968
+    }
+   },
+   "C3": {
+    "del": -1,
+    "col": -1,
+    "radialDel": [
+     0.0009966,
+     0.0008206,
+     0.0007299,
+     0.0005841,
+     0.0004793
+    ],
+    "radialCol": [
+     0.0007316,
+     0.0006169,
+     0.0005618,
+     0.0004455,
+     0.0003608
+    ],
+    "nearShareMedian": 0.2073
+   },
+   "C4": {
+    "medianMaskOverDelete": 0.677,
+    "medianColOverDelete": 0.677
+   },
+   "C5": {
+    "bodiesInT": 66,
+    "throughLongerShare": 0.5152,
+    "meanBendThrough": 0.0607,
+    "meanBendOther": 0.0015,
+    "betweennessVsLogN": 0.363,
+    "betweennessVsEallGivenN": -0.1722
+   },
+   "WG": {
+    "bodies": 151,
+    "rawSpearman": -0.1344,
+    "partialGivenLogN": -0.0384,
+    "ci": {
+     "lo": -0.1969,
+     "hi": 0.1538
+    },
+    "derangedQ95": 0.1302,
+    "derangedMean": -0.0003,
+    "shuffledCorpusPartial": 0.1314,
+    "shuffledBodies": 60,
+    "spearmanEvenVsLogN": -0.134,
+    "spearmanCoddVsLogN": 0.8567,
+    "oneQuantity": false
+   },
+   "M": {
+    "bodies": 67,
+    "medianR": 1.0027,
+    "ci": {
+     "lo": 0.9921,
+     "hi": 1.0222
+    },
+    "reliability": 0.0547,
+    "Jslope": -0.6048
+   }
+  },
+  "ud-fas-A": {
+   "bodies": 152,
+   "K1": 0,
+   "K2": true,
+   "kNN": 4,
+   "C1": {
+    "shareExcessPositive": 0.5,
+    "signP": 0.5323,
+    "medianExcessRel": -0.0038
+   },
+   "C2": {
+    "slopeDelete": 1.0638,
+    "ciDelete": {
+     "lo": 0.9506,
+     "hi": 1.2246
+    },
+    "slopeRandom": 0.9882,
+    "ciRandom": {
+     "lo": 0.9446,
+     "hi": 1.045
+    }
+   },
+   "C3": {
+    "del": -1,
+    "col": -1,
+    "radialDel": [
+     0.0004449,
+     0.0003886,
+     0.0003693,
+     0.000322,
+     0.0002672
+    ],
+    "radialCol": [
+     0.0002844,
+     0.0002416,
+     0.0002363,
+     0.0001985,
+     0.0001751
+    ],
+    "nearShareMedian": 0.1442
+   },
+   "C4": {
+    "medianMaskOverDelete": 0.6134,
+    "medianColOverDelete": 0.6134
+   },
+   "C5": {
+    "bodiesInT": 32,
+    "throughLongerShare": 0.8125,
+    "meanBendThrough": 0.0984,
+    "meanBendOther": 0.0011,
+    "betweennessVsLogN": 0.4452,
+    "betweennessVsEallGivenN": 0.0478
+   },
+   "WG": {
+    "bodies": 151,
+    "rawSpearman": 0.0136,
+    "partialGivenLogN": 0.0563,
+    "ci": {
+     "lo": -0.1026,
+     "hi": 0.226
+    },
+    "derangedQ95": 0.1356,
+    "derangedMean": 0.0078,
+    "shuffledCorpusPartial": -0.0278,
+    "shuffledBodies": 60,
+    "spearmanEvenVsLogN": -0.0295,
+    "spearmanCoddVsLogN": 0.7661,
+    "oneQuantity": false
+   },
+   "M": {
+    "bodies": 71,
+    "medianR": 1.0129,
+    "ci": {
+     "lo": 1.0026,
+     "hi": 1.025
+    },
+    "reliability": -0.1129,
+    "Jslope": -0.6608
+   }
+  },
+  "ud-fas-B": {
+   "bodies": 152,
+   "K1": 0,
+   "K2": true,
+   "kNN": 2,
+   "C1": {
+    "shareExcessPositive": 0.5132,
+    "signP": 0.4039,
+    "medianExcessRel": 0.0254
+   },
+   "C2": {
+    "slopeDelete": 1.0707,
+    "ciDelete": {
+     "lo": 0.9887,
+     "hi": 1.1891
+    },
+    "slopeRandom": 1.0571,
+    "ciRandom": {
+     "lo": 0.9597,
+     "hi": 1.2468
+    }
+   },
+   "C3": {
+    "del": -0.3,
+    "col": 0.1,
+    "radialDel": [
+     0.0006821,
+     0.000753,
+     0.0007239,
+     0.0007357,
+     0.0006718
+    ],
+    "radialCol": [
+     0.0005906,
+     0.0006666,
+     0.0006309,
+     0.0006475,
+     0.0005979
+    ],
+    "nearShareMedian": 0.1451
+   },
+   "C4": {
+    "medianMaskOverDelete": 0.5715,
+    "medianColOverDelete": 0.5715
+   },
+   "C5": {
+    "bodiesInT": 28,
+    "throughLongerShare": 0.5714,
+    "meanBendThrough": 0.0234,
+    "meanBendOther": -0.0092,
+    "betweennessVsLogN": 0.4308,
+    "betweennessVsEallGivenN": -0.0996
+   },
+   "WG": {
+    "bodies": 152,
+    "rawSpearman": -0.0156,
+    "partialGivenLogN": 0.0608,
+    "ci": {
+     "lo": -0.115,
+     "hi": 0.2355
+    },
+    "derangedQ95": 0.1151,
+    "derangedMean": -0.0135,
+    "shuffledCorpusPartial": -0.1843,
+    "shuffledBodies": 59,
+    "spearmanEvenVsLogN": -0.0753,
+    "spearmanCoddVsLogN": 0.7446,
+    "oneQuantity": false
+   },
+   "M": {
+    "bodies": 61,
+    "medianR": 0.9959,
+    "ci": {
+     "lo": 0.9909,
+     "hi": 1.0149
+    },
+    "reliability": 0.3604,
+    "Jslope": -0.3691
+   }
+  },
+  "ud-fra-A": {
+   "bodies": 152,
+   "K1": 0,
+   "K2": true,
+   "kNN": 2,
+   "C1": {
+    "shareExcessPositive": 0.4276,
+    "signP": 0.9691,
+    "medianExcessRel": -0.0796
+   },
+   "C2": {
+    "slopeDelete": 0.9621,
+    "ciDelete": {
+     "lo": 0.9158,
+     "hi": 1.0263
+    },
+    "slopeRandom": 0.8927,
+    "ciRandom": {
+     "lo": 0.8521,
+     "hi": 0.9421
+    }
+   },
+   "C3": {
+    "del": -1,
+    "col": -0.9,
+    "radialDel": [
+     0.0008684,
+     0.000822,
+     0.0007775,
+     0.0006854,
+     0.0005846
+    ],
+    "radialCol": [
+     0.0005918,
+     0.0006156,
+     0.0005895,
+     0.000502,
+     0.000448
+    ],
+    "nearShareMedian": 0.1392
+   },
+   "C4": {
+    "medianMaskOverDelete": 0.5758,
+    "medianColOverDelete": 0.5758
+   },
+   "C5": {
+    "bodiesInT": 47,
+    "throughLongerShare": 0.4894,
+    "meanBendThrough": -0.0129,
+    "meanBendOther": -0.0168,
+    "betweennessVsLogN": 0.2434,
+    "betweennessVsEallGivenN": 0.1533
+   },
+   "WG": {
+    "bodies": 152,
+    "rawSpearman": -0.2405,
+    "partialGivenLogN": -0.0712,
+    "ci": {
+     "lo": -0.2367,
+     "hi": 0.1089
+    },
+    "derangedQ95": 0.1477,
+    "derangedMean": 0.0215,
+    "shuffledCorpusPartial": -0.105,
+    "shuffledBodies": 60,
+    "spearmanEvenVsLogN": -0.2597,
+    "spearmanCoddVsLogN": 0.7515,
+    "oneQuantity": false
+   },
+   "M": {
+    "bodies": 58,
+    "medianR": 0.9999,
+    "ci": {
+     "lo": 0.9889,
+     "hi": 1.0032
+    },
+    "reliability": 0.1259,
+    "Jslope": -0.6578
+   }
+  },
+  "ud-fra-B": {
+   "bodies": 152,
+   "K1": 0,
+   "K2": true,
+   "kNN": 2,
+   "C1": {
+    "shareExcessPositive": 0.4803,
+    "signP": 0.7148,
+    "medianExcessRel": -0.046
+   },
+   "C2": {
+    "slopeDelete": 0.9155,
+    "ciDelete": {
+     "lo": 0.8647,
+     "hi": 0.9618
+    },
+    "slopeRandom": 0.8908,
+    "ciRandom": {
+     "lo": 0.8194,
+     "hi": 0.9862
+    }
+   },
+   "C3": {
+    "del": -0.3,
+    "col": 0.3,
+    "radialDel": [
+     0.0009119,
+     0.0009407,
+     0.000975,
+     0.0009322,
+     0.0008471
+    ],
+    "radialCol": [
+     0.0006901,
+     0.0007799,
+     0.0008243,
+     0.0008138,
+     0.0007404
+    ],
+    "nearShareMedian": 0.1431
+   },
+   "C4": {
+    "medianMaskOverDelete": 0.5843,
+    "medianColOverDelete": 0.5843
+   },
+   "C5": {
+    "bodiesInT": 53,
+    "throughLongerShare": 0.566,
+    "meanBendThrough": 0.0114,
+    "meanBendOther": -0.0088,
+    "betweennessVsLogN": -0.1917,
+    "betweennessVsEallGivenN": 0.1224
+   },
+   "WG": {
+    "bodies": 152,
+    "rawSpearman": -0.1012,
+    "partialGivenLogN": -0.0439,
+    "ci": {
+     "lo": -0.2278,
+     "hi": 0.129
+    },
+    "derangedQ95": 0.0697,
+    "derangedMean": -0.0588,
+    "shuffledCorpusPartial": 0.1921,
+    "shuffledBodies": 60,
+    "spearmanEvenVsLogN": -0.1035,
+    "spearmanCoddVsLogN": 0.6604,
+    "oneQuantity": false
+   },
+   "M": {
+    "bodies": 62,
+    "medianR": 1.0003,
+    "ci": {
+     "lo": 0.9861,
+     "hi": 1.0057
+    },
+    "reliability": -0.0544,
+    "Jslope": -0.6638
+   }
+  },
+  "ud-hin-A": {
+   "bodies": 152,
+   "K1": 0,
+   "K2": true,
+   "kNN": 2,
+   "C1": {
+    "shareExcessPositive": 0.4342,
+    "signP": 0.9559,
+    "medianExcessRel": -0.0538
+   },
+   "C2": {
+    "slopeDelete": 1.0155,
+    "ciDelete": {
+     "lo": 0.9268,
+     "hi": 1.114
+    },
+    "slopeRandom": 1.0429,
+    "ciRandom": {
+     "lo": 0.98,
+     "hi": 1.1231
+    }
+   },
+   "C3": {
+    "del": -1,
+    "col": -1,
+    "radialDel": [
+     0.0007178,
+     0.0004708,
+     0.00039,
+     0.0003199,
+     0.0002033
+    ],
+    "radialCol": [
+     0.0004768,
+     0.0002977,
+     0.0002466,
+     0.000196,
+     0.0001276
+    ],
+    "nearShareMedian": 0.2054
+   },
+   "C4": {
+    "medianMaskOverDelete": 0.6208,
+    "medianColOverDelete": 0.6208
+   },
+   "C5": {
+    "bodiesInT": 44,
+    "throughLongerShare": 0.7955,
+    "meanBendThrough": 0.2358,
+    "meanBendOther": 0.0042,
+    "betweennessVsLogN": 0.2855,
+    "betweennessVsEallGivenN": -0.339
+   },
+   "WG": {
+    "bodies": 152,
+    "rawSpearman": -0.0481,
+    "partialGivenLogN": -0.0605,
+    "ci": {
+     "lo": -0.2295,
+     "hi": 0.1275
+    },
+    "derangedQ95": 0.1116,
+    "derangedMean": -0.0093,
+    "shuffledCorpusPartial": 0.008,
+    "shuffledBodies": 59,
+    "spearmanEvenVsLogN": -0.0137,
+    "spearmanCoddVsLogN": 0.7869,
+    "oneQuantity": false
+   },
+   "M": {
+    "bodies": 69,
+    "medianR": 1.0114,
+    "ci": {
+     "lo": 1.0055,
+     "hi": 1.0269
+    },
+    "reliability": 0.3706,
+    "Jslope": -0.7141
+   }
+  },
+  "ud-hin-B": {
+   "bodies": 152,
+   "K1": 0,
+   "K2": true,
+   "kNN": 3,
+   "C1": {
+    "shareExcessPositive": 0.4211,
+    "signP": 0.9789,
+    "medianExcessRel": -0.0803
+   },
+   "C2": {
+    "slopeDelete": 1.0159,
+    "ciDelete": {
+     "lo": 0.951,
+     "hi": 1.0756
+    },
+    "slopeRandom": 0.8726,
+    "ciRandom": {
+     "lo": 0.825,
+     "hi": 0.9235
+    }
+   },
+   "C3": {
+    "del": -1,
+    "col": -1,
+    "radialDel": [
+     0.0008809,
+     0.000708,
+     0.0006288,
+     0.0005577,
+     0.0003834
+    ],
+    "radialCol": [
+     0.0006246,
+     0.0005359,
+     0.0004572,
+     0.000399,
+     0.0002897
+    ],
+    "nearShareMedian": 0.1999
+   },
+   "C4": {
+    "medianMaskOverDelete": 0.6516,
+    "medianColOverDelete": 0.6516
+   },
+   "C5": {
+    "bodiesInT": 55,
+    "throughLongerShare": 0.6727,
+    "meanBendThrough": 0.0551,
+    "meanBendOther": -0.0042,
+    "betweennessVsLogN": 0.2961,
+    "betweennessVsEallGivenN": -0.3103
+   },
+   "WG": {
+    "bodies": 152,
+    "rawSpearman": -0.0864,
+    "partialGivenLogN": -0.0929,
+    "ci": {
+     "lo": -0.2179,
+     "hi": 0.045
+    },
+    "derangedQ95": 0.1179,
+    "derangedMean": 0.0006,
+    "shuffledCorpusPartial": 0.0137,
+    "shuffledBodies": 60,
+    "spearmanEvenVsLogN": -0.0351,
+    "spearmanCoddVsLogN": 0.7695,
+    "oneQuantity": false
+   },
+   "M": {
+    "bodies": 68,
+    "medianR": 1.0036,
+    "ci": {
+     "lo": 0.9892,
+     "hi": 1.0149
+    },
+    "reliability": -0.1704,
+    "Jslope": -0.6461
+   }
+  },
+  "ud-spa-A": {
+   "bodies": 152,
+   "K1": 0,
+   "K2": true,
+   "kNN": 3,
+   "C1": {
+    "shareExcessPositive": 0.5132,
+    "signP": 0.4039,
+    "medianExcessRel": 0.0297
+   },
+   "C2": {
+    "slopeDelete": 0.9301,
+    "ciDelete": {
+     "lo": 0.8906,
+     "hi": 0.9743
+    },
+    "slopeRandom": 0.8563,
+    "ciRandom": {
+     "lo": 0.8193,
+     "hi": 0.9157
+    }
+   },
+   "C3": {
+    "del": 0.7,
+    "col": 0.9,
+    "radialDel": [
+     0.0010844,
+     0.0012065,
+     0.0011428,
+     0.0011682,
+     0.0012252
+    ],
+    "radialCol": [
+     0.0010039,
+     0.0010863,
+     0.0010522,
+     0.0011032,
+     0.0011622
+    ],
+    "nearShareMedian": 0.1455
+   },
+   "C4": {
+    "medianMaskOverDelete": 0.6435,
+    "medianColOverDelete": 0.6435
+   },
+   "C5": {
+    "bodiesInT": 64,
+    "throughLongerShare": 0.7031,
+    "meanBendThrough": 0.0582,
+    "meanBendOther": -0.0027,
+    "betweennessVsLogN": 0.2236,
+    "betweennessVsEallGivenN": -0.0682
+   },
+   "WG": {
+    "bodies": 152,
+    "rawSpearman": -0.2028,
+    "partialGivenLogN": -0.0649,
+    "ci": {
+     "lo": -0.223,
+     "hi": 0.0858
+    },
+    "derangedQ95": 0.1021,
+    "derangedMean": -0.0187,
+    "shuffledCorpusPartial": -0.1267,
+    "shuffledBodies": 60,
+    "spearmanEvenVsLogN": -0.2223,
+    "spearmanCoddVsLogN": 0.7123,
+    "oneQuantity": false
+   },
+   "M": {
+    "bodies": 57,
+    "medianR": 1.0004,
+    "ci": {
+     "lo": 0.9885,
+     "hi": 1.0064
+    },
+    "reliability": -0.1087,
+    "Jslope": -0.6455
+   }
+  },
+  "ud-spa-B": {
+   "bodies": 152,
+   "K1": 0,
+   "K2": true,
+   "kNN": 3,
+   "C1": {
+    "shareExcessPositive": 0.4539,
+    "signP": 0.8882,
+    "medianExcessRel": -0.0508
+   },
+   "C2": {
+    "slopeDelete": 0.9486,
+    "ciDelete": {
+     "lo": 0.9021,
+     "hi": 1.0291
+    },
+    "slopeRandom": 0.9002,
+    "ciRandom": {
+     "lo": 0.8384,
+     "hi": 0.9829
+    }
+   },
+   "C3": {
+    "del": -0.6,
+    "col": -0.7,
+    "radialDel": [
+     0.0007736,
+     0.0007408,
+     0.000748,
+     0.0007489,
+     0.0006914
+    ],
+    "radialCol": [
+     0.0006222,
+     0.000599,
+     0.0006167,
+     0.0006119,
+     0.0005636
+    ],
+    "nearShareMedian": 0.1342
+   },
+   "C4": {
+    "medianMaskOverDelete": 0.6583,
+    "medianColOverDelete": 0.6583
+   },
+   "C5": {
+    "bodiesInT": 54,
+    "throughLongerShare": 0.7778,
+    "meanBendThrough": 0.0777,
+    "meanBendOther": -0.004,
+    "betweennessVsLogN": 0.2272,
+    "betweennessVsEallGivenN": 0.2015
+   },
+   "WG": {
+    "bodies": 152,
+    "rawSpearman": -0.3212,
+    "partialGivenLogN": -0.0648,
+    "ci": {
+     "lo": -0.2172,
+     "hi": 0.0801
+    },
+    "derangedQ95": 0.0713,
+    "derangedMean": -0.0654,
+    "shuffledCorpusPartial": 0.1043,
+    "shuffledBodies": 60,
+    "spearmanEvenVsLogN": -0.3784,
+    "spearmanCoddVsLogN": 0.7427,
+    "oneQuantity": false
+   },
+   "M": {
+    "bodies": 63,
+    "medianR": 1.0103,
+    "ci": {
+     "lo": 1.003,
+     "hi": 1.0171
+    },
+    "reliability": 0.2312,
+    "Jslope": -0.6433
+   }
+  },
+  "ud-tur-A": {
+   "bodies": 45,
+   "K1": 0,
+   "K2": true,
+   "kNN": 2,
+   "C1": {
+    "shareExcessPositive": 0.5556,
+    "signP": 0.2757,
+    "medianExcessRel": 0.0881
+   },
+   "C2": {
+    "slopeDelete": 1.6251,
+    "ciDelete": {
+     "lo": 1.4306,
+     "hi": 1.854
+    },
+    "slopeRandom": 1.1362,
+    "ciRandom": {
+     "lo": 0.9595,
+     "hi": 1.356
+    }
+   },
+   "C3": {
+    "del": -1,
+    "col": -1,
+    "radialDel": [
+     0.0018117,
+     0.0011082,
+     0.000722,
+     0.000592,
+     0.0003404
+    ],
+    "radialCol": [
+     0.0016344,
+     0.0009783,
+     0.0006879,
+     0.0005915,
+     0.0003698
+    ],
+    "nearShareMedian": 0.4359
+   },
+   "C4": {
+    "medianMaskOverDelete": 0.9661,
+    "medianColOverDelete": 0.9661
+   },
+   "C5": {
+    "bodiesInT": 38,
+    "throughLongerShare": 0.6579,
+    "meanBendThrough": 0.1396,
+    "meanBendOther": -0.0078,
+    "betweennessVsLogN": -0.2183,
+    "betweennessVsEallGivenN": -0.1475
+   },
+   "WG": {
+    "bodies": 45,
+    "rawSpearman": -0.2286,
+    "partialGivenLogN": 0.06,
+    "ci": {
+     "lo": -0.3064,
+     "hi": 0.3141
+    },
+    "derangedQ95": 0.3373,
+    "derangedMean": 0.0765,
+    "shuffledCorpusPartial": -0.1272,
+    "shuffledBodies": 45,
+    "spearmanEvenVsLogN": -0.3212,
+    "spearmanCoddVsLogN": 0.8142,
+    "oneQuantity": false
+   },
+   "M": {
+    "bodies": 17,
+    "medianR": 1.0145,
+    "ci": {
+     "lo": 1,
+     "hi": 1.0477
+    },
+    "reliability": null,
+    "Jslope": 0.0325
+   }
+  },
+  "ud-tur-B": {
+   "bodies": 53,
+   "K1": 0,
+   "K2": true,
+   "kNN": 2,
+   "C1": {
+    "shareExcessPositive": 0.5094,
+    "signP": 0.5,
+    "medianExcessRel": 0.0987
+   },
+   "C2": {
+    "slopeDelete": 1.3394,
+    "ciDelete": {
+     "lo": 1.1235,
+     "hi": 1.5046
+    },
+    "slopeRandom": 0.9427,
+    "ciRandom": {
+     "lo": 0.7185,
+     "hi": 1.2936
+    }
+   },
+   "C3": {
+    "del": -1,
+    "col": -1,
+    "radialDel": [
+     0.0028853,
+     0.0019288,
+     0.0011804,
+     0.0007577,
+     0.0004319
+    ],
+    "radialCol": [
+     0.0025853,
+     0.0016768,
+     0.0010579,
+     0.0007183,
+     0.0004332
+    ],
+    "nearShareMedian": 0.4365
+   },
+   "C4": {
+    "medianMaskOverDelete": 0.8519,
+    "medianColOverDelete": 0.8519
+   },
+   "C5": {
+    "bodiesInT": 44,
+    "throughLongerShare": 0.5909,
+    "meanBendThrough": -0.0036,
+    "meanBendOther": -0.0418,
+    "betweennessVsLogN": -0.164,
+    "betweennessVsEallGivenN": -0.0006
+   },
+   "WG": {
+    "bodies": 53,
+    "rawSpearman": -0.0853,
+    "partialGivenLogN": -0.1673,
+    "ci": {
+     "lo": -0.4276,
+     "hi": 0.1215
+    },
+    "derangedQ95": 0.2273,
+    "derangedMean": -0.0028,
+    "shuffledCorpusPartial": 0.0988,
+    "shuffledBodies": 53,
+    "spearmanEvenVsLogN": 0.03,
+    "spearmanCoddVsLogN": 0.7626,
+    "oneQuantity": false
+   },
+   "M": {
+    "bodies": 21,
+    "medianR": 0.9982,
+    "ci": {
+     "lo": 0.9779,
+     "hi": 1.0171
+    },
+    "reliability": -0.4825,
+    "Jslope": -0.8281
+   }
+  }
+ },
+ "tests": {
+  "C1": {
+   "n": 14,
+   "k": 0,
+   "share": 0,
+   "medianShare": 0.4803,
+   "pass": false,
+   "falsified": true
+  },
+  "C2": {
+   "n": 14,
+   "k": 12,
+   "share": 0.8571,
+   "medianSlopeDelete": 1.0155,
+   "medianSlopeRandom": 0.9427
+  },
+  "C3": {
+   "del": {
+    "n": 14,
+    "k": 10,
+    "share": 0.7143
+   },
+   "col": {
+    "n": 14,
+    "k": 11,
+    "share": 0.7857
+   },
+   "pass": false
+  },
+  "C4": {
+   "n": 14,
+   "k": 14,
+   "share": 1,
+   "median": 0.6435,
+   "note": "MASK and COLDROP are identical by construction in this geometry",
+   "pass": true
+  },
+  "C5": {
+   "n": 14,
+   "k": 4,
+   "share": 0.2857,
+   "medianBetweennessVsLogN": 0.2434,
+   "medianPartialBetweennessVsE": -0.0632
+  },
+  "WG": {
+   "n": 14,
+   "k": 0,
+   "share": 0,
+   "medianRaw": -0.1012,
+   "medianPartial": -0.0605,
+   "partialsByCorpus": {
+    "ud-deu-A": -0.1096,
+    "ud-deu-B": 0.0577,
+    "ud-eng-A": 0.0987,
+    "ud-eng-B": -0.0384,
+    "ud-fas-A": 0.0563,
+    "ud-fas-B": 0.0608,
+    "ud-fra-A": -0.0712,
+    "ud-fra-B": -0.0439,
+    "ud-hin-A": -0.0605,
+    "ud-hin-B": -0.0929,
+    "ud-spa-A": -0.0649,
+    "ud-spa-B": -0.0648,
+    "ud-tur-A": 0.06,
+    "ud-tur-B": -0.1673
+   },
+   "medianShuffledPartial": 0.008,
+   "medianDerangedQ95": 0.1151,
+   "medianSpearmanEvenVsLogN": -0.1035,
+   "medianSpearmanCoddVsLogN": 0.7661,
+   "crossFold": {
+    "stems": 7,
+    "agree": 6,
+    "rule": ">= 6 of 8 stems with |rho_A - rho_B| <= 0.20",
+    "detail": {
+     "deu": [
+      -0.1096,
+      0.0577
+     ],
+     "eng": [
+      0.0987,
+      -0.0384
+     ],
+     "fas": [
+      0.0563,
+      0.0608
+     ],
+     "fra": [
+      -0.0712,
+      -0.0439
+     ],
+     "hin": [
+      -0.0605,
+      -0.0929
+     ],
+     "spa": [
+      -0.0649,
+      -0.0648
+     ],
+     "tur": [
+      0.06,
+      -0.1673
+     ]
+    }
+   },
+   "oneQuantityOverall": false
+  },
+  "M": {
+   "M1": {
+    "n": 14,
+    "k": 1,
+    "share": 0.0714
+   },
+   "medianR": 1.0004,
+   "reliability": {
+    "n": 14,
+    "k": 2,
+    "share": 0.1429
+   },
+   "medianReliability": 0.0718,
+   "medianJslope": -0.6455,
+   "M1pass": false
+  },
+  "K": {
+   "K1_allZero": true,
+   "K2_allSame": true
+  }
+ }
+}

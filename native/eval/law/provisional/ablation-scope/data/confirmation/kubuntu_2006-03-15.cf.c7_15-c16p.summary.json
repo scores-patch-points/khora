@@ -1,0 +1,59 @@
+{
+ "corpus": "irc",
+ "doc": "kubuntu/2006-03-15",
+ "M": 256,
+ "tag": "cf",
+ "match": "v3",
+ "strata": [
+  "c7_15",
+  "c16p"
+ ],
+ "sizes": {
+  "nA": 30,
+  "nB": 40,
+  "n1": 0
+ },
+ "design": {
+  "A:c7_15": {
+   "requested": 30,
+   "got": 30,
+   "dropped": 81,
+   "nPos": 180,
+   "nNegPool": 278
+  },
+  "B:c7_15": {
+   "requested": 40,
+   "got": 12,
+   "dropped": 4,
+   "nPos": 16,
+   "nNegPool": 2655
+  },
+  "A:c16p": {
+   "requested": 30,
+   "got": 9,
+   "dropped": 89,
+   "nPos": 104,
+   "nNegPool": 188
+  },
+  "B:c16p": {
+   "requested": 40,
+   "got": 6,
+   "dropped": 2,
+   "nPos": 8,
+   "nNegPool": 2181
+  }
+ },
+ "tokensRead": 114,
+ "gaps": 0,
+ "seconds": 173.52,
+ "K1_sham": {
+  "nullShare": 1,
+  "n": 8
+ },
+ "K6_determinism": {
+  "same": 8,
+  "n": 8
+ },
+ "headerSha256": "6c0cd12e3d866e11b3da0b284d424e806fb867092872cfdfe4406c7fae58692c",
+ "file": "data/confirmation/kubuntu_2006-03-15.cf.c7_15-c16p.jsonl"
+}

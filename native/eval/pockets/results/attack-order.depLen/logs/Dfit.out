@@ -1,0 +1,108 @@
+{
+ "nPockets": 312,
+ "nHeldOutCells": 1248,
+ "gridWorlds": 63,
+ "heldOutR2": {
+  "world": 0.8282230343740287,
+  "constant": 0.6121783692913736,
+  "zero": -0.10146386108567507
+ },
+ "nBig": 920,
+ "signAgreeBig": {
+  "world": 0.9532608695652174,
+  "constant": 0.8945652173913043
+ },
+ "medianTrainRmse": 0.010231861823323312,
+ "byRegister": {
+  "poetry": {
+   "n": 12,
+   "medianA": 0.15,
+   "medianQ": 0,
+   "signAgreeHeldOut": 0.9230769230769231
+  },
+  "memoir": {
+   "n": 10,
+   "medianA": 0.3,
+   "medianQ": 0,
+   "signAgreeHeldOut": 1
+  },
+  "treatise": {
+   "n": 22,
+   "medianA": 0.15,
+   "medianQ": 0,
+   "signAgreeHeldOut": 0.9152542372881356
+  },
+  "novel": {
+   "n": 22,
+   "medianA": 0.3,
+   "medianQ": 0,
+   "signAgreeHeldOut": 1
+  },
+  "academic": {
+   "n": 12,
+   "medianA": 0.3,
+   "medianQ": 0,
+   "signAgreeHeldOut": 0.9705882352941176
+  },
+  "dialect": {
+   "n": 11,
+   "medianA": 0.3,
+   "medianQ": 0,
+   "signAgreeHeldOut": 1
+  },
+  "notation": {
+   "n": 16,
+   "medianA": 0.3,
+   "medianQ": 0.15,
+   "signAgreeHeldOut": 1
+  },
+  "code": {
+   "n": 47,
+   "medianA": 0.45,
+   "medianQ": 0.05,
+   "signAgreeHeldOut": 0.9225806451612903
+  },
+  "legal": {
+   "n": 29,
+   "medianA": 0.3,
+   "medianQ": 0.05,
+   "signAgreeHeldOut": 0.9431818181818182
+  },
+  "scripture": {
+   "n": 25,
+   "medianA": 0.15,
+   "medianQ": 0,
+   "signAgreeHeldOut": 0.9230769230769231
+  },
+  "history": {
+   "n": 8,
+   "medianA": 0.15,
+   "medianQ": 0,
+   "signAgreeHeldOut": 1
+  },
+  "book": {
+   "n": 16,
+   "medianA": 0.3,
+   "medianQ": 0,
+   "signAgreeHeldOut": 1
+  },
+  "translation": {
+   "n": 9,
+   "medianA": 0.3,
+   "medianQ": 0,
+   "signAgreeHeldOut": 1
+  },
+  "chat": {
+   "n": 16,
+   "medianA": 0.15,
+   "medianQ": 0,
+   "signAgreeHeldOut": 1
+  },
+  "treebank": {
+   "n": 12,
+   "medianA": 0.15,
+   "medianQ": 0,
+   "signAgreeHeldOut": 0.96875
+  }
+ }
+}

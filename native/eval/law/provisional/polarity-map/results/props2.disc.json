@@ -1,0 +1,632 @@
+{
+ "ud-afr": {
+  "rareL_edge": 0.0214,
+  "rareL_top": 0.175,
+  "rareL_rare": 0.3391,
+  "rareR_edge": 0.0543,
+  "rareR_top": 0.1231,
+  "rareR_rare": 0.3391,
+  "rareAnchorAsym": 0.0191,
+  "nRare": 1731
+ },
+ "ud-arb": {
+  "rareL_edge": 0.0152,
+  "rareL_top": 0.151,
+  "rareL_rare": 0.5137,
+  "rareR_edge": 0.0443,
+  "rareR_top": 0.1349,
+  "rareR_rare": 0.5137,
+  "rareAnchorAsym": -0.013,
+  "nRare": 15954
+ },
+ "ud-bul": {
+  "rareL_edge": 0.0857,
+  "rareL_top": 0.1581,
+  "rareL_rare": 0.4067,
+  "rareR_edge": 0.1201,
+  "rareR_top": 0.1615,
+  "rareR_rare": 0.4067,
+  "rareAnchorAsym": -0.0378,
+  "nRare": 7933
+ },
+ "ud-cat": {
+  "rareL_edge": 0.0127,
+  "rareL_top": 0.2392,
+  "rareL_rare": 0.2951,
+  "rareR_edge": 0.0654,
+  "rareR_top": 0.1926,
+  "rareR_rare": 0.2951,
+  "rareAnchorAsym": -0.0061,
+  "nRare": 23129
+ },
+ "ud-ces": {
+  "rareL_edge": 0.0631,
+  "rareL_top": 0.1158,
+  "rareL_rare": 0.5729,
+  "rareR_edge": 0.0799,
+  "rareR_top": 0.1035,
+  "rareR_rare": 0.5729,
+  "rareAnchorAsym": -0.0045,
+  "nRare": 6210
+ },
+ "ud-cmn": {
+  "rareL_edge": 0.0513,
+  "rareL_top": 0.1005,
+  "rareL_rare": 0.5868,
+  "rareR_edge": 0.0603,
+  "rareR_top": 0.1029,
+  "rareR_rare": 0.5868,
+  "rareAnchorAsym": -0.0114,
+  "nRare": 7096
+ },
+ "ud-cmn-hans": {
+  "rareL_edge": 0.0513,
+  "rareL_top": 0.1006,
+  "rareL_rare": 0.5846,
+  "rareR_edge": 0.0608,
+  "rareR_top": 0.1035,
+  "rareR_rare": 0.5846,
+  "rareAnchorAsym": -0.0123,
+  "nRare": 7075
+ },
+ "ud-cym": {
+  "rareL_edge": 0.0271,
+  "rareL_top": 0.1805,
+  "rareL_rare": 0.3498,
+  "rareR_edge": 0.0857,
+  "rareR_top": 0.1519,
+  "rareR_rare": 0.3498,
+  "rareAnchorAsym": -0.03,
+  "nRare": 3839
+ },
+ "ud-dan": {
+  "rareL_edge": 0.0518,
+  "rareL_top": 0.1098,
+  "rareL_rare": 0.3902,
+  "rareR_edge": 0.1087,
+  "rareR_top": 0.1163,
+  "rareR_rare": 0.3902,
+  "rareAnchorAsym": -0.0634,
+  "nRare": 4462
+ },
+ "ud-deu": {
+  "rareL_edge": 0.0352,
+  "rareL_top": 0.1381,
+  "rareL_rare": 0.4467,
+  "rareR_edge": 0.1158,
+  "rareR_top": 0.0876,
+  "rareR_rare": 0.4467,
+  "rareAnchorAsym": -0.0302,
+  "nRare": 5534
+ },
+ "ud-ell": {
+  "rareL_edge": 0.0238,
+  "rareL_top": 0.0804,
+  "rareL_rare": 0.3804,
+  "rareR_edge": 0.0685,
+  "rareR_top": 0.1147,
+  "rareR_rare": 0.3804,
+  "rareAnchorAsym": -0.0789,
+  "nRare": 4613
+ },
+ "ud-eng": {
+  "rareL_edge": 0.0767,
+  "rareL_top": 0.1372,
+  "rareL_rare": 0.3987,
+  "rareR_edge": 0.15,
+  "rareR_top": 0.1042,
+  "rareR_rare": 0.3987,
+  "rareAnchorAsym": -0.0403,
+  "nRare": 10795
+ },
+ "ud-est": {
+  "rareL_edge": 0.0817,
+  "rareL_top": 0.0673,
+  "rareL_rare": 0.6577,
+  "rareR_edge": 0.1046,
+  "rareR_top": 0.0718,
+  "rareR_rare": 0.6577,
+  "rareAnchorAsym": -0.0274,
+  "nRare": 27259
+ },
+ "ud-eus": {
+  "rareL_edge": 0.1062,
+  "rareL_top": 0.0658,
+  "rareL_rare": 0.6306,
+  "rareR_edge": 0.0849,
+  "rareR_top": 0.0627,
+  "rareR_rare": 0.6306,
+  "rareAnchorAsym": 0.0244,
+  "nRare": 13882
+ },
+ "ud-fas": {
+  "rareL_edge": 0.063,
+  "rareL_top": 0.1284,
+  "rareL_rare": 0.5072,
+  "rareR_edge": 0.0561,
+  "rareR_top": 0.1263,
+  "rareR_rare": 0.5072,
+  "rareAnchorAsym": 0.009,
+  "nRare": 12737
+ },
+ "ud-fin": {
+  "rareL_edge": 0.0863,
+  "rareL_top": 0.0753,
+  "rareL_rare": 0.6556,
+  "rareR_edge": 0.1081,
+  "rareR_top": 0.0788,
+  "rareR_rare": 0.6556,
+  "rareAnchorAsym": -0.0252,
+  "nRare": 11573
+ },
+ "ud-fra": {
+  "rareL_edge": 0.0226,
+  "rareL_top": 0.2107,
+  "rareL_rare": 0.3433,
+  "rareR_edge": 0.0895,
+  "rareR_top": 0.1723,
+  "rareR_rare": 0.3433,
+  "rareAnchorAsym": -0.0286,
+  "nRare": 15469
+ },
+ "ud-gle": {
+  "rareL_edge": 0.0377,
+  "rareL_top": 0.1794,
+  "rareL_rare": 0.3361,
+  "rareR_edge": 0.074,
+  "rareR_top": 0.1476,
+  "rareR_rare": 0.3361,
+  "rareAnchorAsym": -0.0045,
+  "nRare": 4269
+ },
+ "ud-glg": {
+  "rareL_edge": 0.0159,
+  "rareL_top": 0.2952,
+  "rareL_rare": 0.3383,
+  "rareR_edge": 0.0607,
+  "rareR_top": 0.265,
+  "rareR_rare": 0.3383,
+  "rareAnchorAsym": -0.0145,
+  "nRare": 12312
+ },
+ "ud-heb": {
+  "rareL_edge": 0.0408,
+  "rareL_top": 0.2656,
+  "rareL_rare": 0.3713,
+  "rareR_edge": 0.0736,
+  "rareR_top": 0.2297,
+  "rareR_rare": 0.3713,
+  "rareAnchorAsym": 0.0031,
+  "nRare": 4902
+ },
+ "ud-hin": {
+  "rareL_edge": 0.0648,
+  "rareL_top": 0.1454,
+  "rareL_rare": 0.4295,
+  "rareR_edge": 0.0215,
+  "rareR_top": 0.1712,
+  "rareR_rare": 0.4295,
+  "rareAnchorAsym": 0.0175,
+  "nRare": 16462
+ },
+ "ud-hrv": {
+  "rareL_edge": 0.0509,
+  "rareL_top": 0.1292,
+  "rareL_rare": 0.572,
+  "rareR_edge": 0.0669,
+  "rareR_top": 0.112,
+  "rareR_rare": 0.572,
+  "rareAnchorAsym": 0.0012,
+  "nRare": 12564
+ },
+ "ud-hun": {
+  "rareL_edge": 0.0239,
+  "rareL_top": 0.1861,
+  "rareL_rare": 0.6072,
+  "rareR_edge": 0.0601,
+  "rareR_top": 0.1317,
+  "rareR_rare": 0.6072,
+  "rareAnchorAsym": 0.0183,
+  "nRare": 6393
+ },
+ "ud-hye": {
+  "rareL_edge": 0.0669,
+  "rareL_top": 0.0676,
+  "rareL_rare": 0.6195,
+  "rareR_edge": 0.0782,
+  "rareR_top": 0.0865,
+  "rareR_rare": 0.6195,
+  "rareAnchorAsym": -0.0302,
+  "nRare": 6021
+ },
+ "ud-ind": {
+  "rareL_edge": 0.0511,
+  "rareL_top": 0.0869,
+  "rareL_rare": 0.5573,
+  "rareR_edge": 0.0649,
+  "rareR_top": 0.0948,
+  "rareR_rare": 0.5573,
+  "rareAnchorAsym": -0.0216,
+  "nRare": 6752
+ },
+ "ud-ita": {
+  "rareL_edge": 0.0354,
+  "rareL_top": 0.1973,
+  "rareL_rare": 0.3493,
+  "rareR_edge": 0.0996,
+  "rareR_top": 0.1687,
+  "rareR_rare": 0.3493,
+  "rareAnchorAsym": -0.0356,
+  "nRare": 5079
+ },
+ "ud-jpn": {
+  "rareL_edge": 0.0791,
+  "rareL_top": 0.179,
+  "rareL_rare": 0.3217,
+  "rareR_edge": 0.025,
+  "rareR_top": 0.1685,
+  "rareR_rare": 0.3217,
+  "rareAnchorAsym": 0.0647,
+  "nRare": 5117
+ },
+ "ud-kat": {
+  "rareL_edge": 0.0619,
+  "rareL_top": 0.0971,
+  "rareL_rare": 0.6238,
+  "rareR_edge": 0.0579,
+  "rareR_top": 0.1154,
+  "rareR_rare": 0.6238,
+  "rareAnchorAsym": -0.0142,
+  "nRare": 5425
+ },
+ "ud-kor": {
+  "rareL_edge": 0.0876,
+  "rareL_top": 0.0076,
+  "rareL_rare": 0.7864,
+  "rareR_edge": 0.0867,
+  "rareR_top": 0.0149,
+  "rareR_rare": 0.7864,
+  "rareAnchorAsym": -0.0065,
+  "nRare": 8833
+ },
+ "ud-lav": {
+  "rareL_edge": 0.0628,
+  "rareL_top": 0.0702,
+  "rareL_rare": 0.6225,
+  "rareR_edge": 0.1009,
+  "rareR_top": 0.0713,
+  "rareR_rare": 0.6225,
+  "rareAnchorAsym": -0.0391,
+  "nRare": 19721
+ },
+ "ud-lit": {
+  "rareL_edge": 0.0596,
+  "rareL_top": 0.0666,
+  "rareL_rare": 0.6479,
+  "rareR_edge": 0.0832,
+  "rareR_top": 0.0717,
+  "rareR_rare": 0.6479,
+  "rareAnchorAsym": -0.0287,
+  "nRare": 6682
+ },
+ "ud-lzh": {
+  "rareL_edge": 0.1957,
+  "rareL_top": 0.045,
+  "rareL_rare": 0.4175,
+  "rareR_edge": 0.1878,
+  "rareR_top": 0.0642,
+  "rareR_rare": 0.4175,
+  "rareAnchorAsym": -0.0114,
+  "nRare": 15234
+ },
+ "ud-mar": {
+  "rareL_edge": 0.1087,
+  "rareL_top": 0.0543,
+  "rareL_rare": 0.2935,
+  "rareR_edge": 0.0978,
+  "rareR_top": 0.0217,
+  "rareR_rare": 0.2935,
+  "rareAnchorAsym": 0.0435,
+  "nRare": 92
+ },
+ "ud-mlt": {
+  "rareL_edge": 0.0382,
+  "rareL_top": 0.1342,
+  "rareL_rare": 0.4225,
+  "rareR_edge": 0.0698,
+  "rareR_top": 0.1403,
+  "rareR_rare": 0.4225,
+  "rareAnchorAsym": -0.0378,
+  "nRare": 4739
+ },
+ "ud-nld": {
+  "rareL_edge": 0.0442,
+  "rareL_top": 0.2076,
+  "rareL_rare": 0.3982,
+  "rareR_edge": 0.1195,
+  "rareR_top": 0.0989,
+  "rareR_rare": 0.3982,
+  "rareAnchorAsym": 0.0335,
+  "nRare": 5048
+ },
+ "ud-nob": {
+  "rareL_edge": 0.0605,
+  "rareL_top": 0.1089,
+  "rareL_rare": 0.3756,
+  "rareR_edge": 0.1251,
+  "rareR_top": 0.1025,
+  "rareR_rare": 0.3756,
+  "rareAnchorAsym": -0.0582,
+  "nRare": 16015
+ },
+ "ud-pol": {
+  "rareL_edge": 0.074,
+  "rareL_top": 0.1034,
+  "rareL_rare": 0.5634,
+  "rareR_edge": 0.1083,
+  "rareR_top": 0.0858,
+  "rareR_rare": 0.5634,
+  "rareAnchorAsym": -0.0168,
+  "nRare": 19376
+ },
+ "ud-por": {
+  "rareL_edge": 0.0262,
+  "rareL_top": 0.3023,
+  "rareL_rare": 0.3683,
+  "rareR_edge": 0.0776,
+  "rareR_top": 0.2225,
+  "rareR_rare": 0.3683,
+  "rareAnchorAsym": 0.0284,
+  "nRare": 13681
+ },
+ "ud-ron": {
+  "rareL_edge": 0.0488,
+  "rareL_top": 0.1418,
+  "rareL_rare": 0.4438,
+  "rareR_edge": 0.0818,
+  "rareR_top": 0.1582,
+  "rareR_rare": 0.4438,
+  "rareAnchorAsym": -0.0495,
+  "nRare": 8633
+ },
+ "ud-rus": {
+  "rareL_edge": 0.0521,
+  "rareL_top": 0.1182,
+  "rareL_rare": 0.6453,
+  "rareR_edge": 0.078,
+  "rareR_top": 0.1022,
+  "rareR_rare": 0.6453,
+  "rareAnchorAsym": -0.01,
+  "nRare": 6819
+ },
+ "ud-slk": {
+  "rareL_edge": 0.0933,
+  "rareL_top": 0.0826,
+  "rareL_rare": 0.5797,
+  "rareR_edge": 0.1295,
+  "rareR_top": 0.0807,
+  "rareR_rare": 0.5797,
+  "rareAnchorAsym": -0.0344,
+  "nRare": 7642
+ },
+ "ud-slv": {
+  "rareL_edge": 0.0503,
+  "rareL_top": 0.1039,
+  "rareL_rare": 0.5538,
+  "rareR_edge": 0.0851,
+  "rareR_top": 0.0952,
+  "rareR_rare": 0.5538,
+  "rareAnchorAsym": -0.0261,
+  "nRare": 14046
+ },
+ "ud-spa": {
+  "rareL_edge": 0.0216,
+  "rareL_top": 0.2598,
+  "rareL_rare": 0.3326,
+  "rareR_edge": 0.0668,
+  "rareR_top": 0.1906,
+  "rareR_rare": 0.3326,
+  "rareAnchorAsym": 0.024,
+  "nRare": 22438
+ },
+ "ud-srp": {
+  "rareL_edge": 0.0553,
+  "rareL_top": 0.1339,
+  "rareL_rare": 0.5445,
+  "rareR_edge": 0.0699,
+  "rareR_top": 0.1186,
+  "rareR_rare": 0.5445,
+  "rareAnchorAsym": 0.0008,
+  "nRare": 6384
+ },
+ "ud-swe": {
+  "rareL_edge": 0.0356,
+  "rareL_top": 0.123,
+  "rareL_rare": 0.3905,
+  "rareR_edge": 0.0947,
+  "rareR_top": 0.1261,
+  "rareR_rare": 0.3905,
+  "rareAnchorAsym": -0.0622,
+  "nRare": 4243
+ },
+ "ud-tam": {
+  "rareL_edge": 0.0712,
+  "rareL_top": 0.0761,
+  "rareL_rare": 0.5307,
+  "rareR_edge": 0.0518,
+  "rareR_top": 0.0971,
+  "rareR_rare": 0.5307,
+  "rareAnchorAsym": -0.0016,
+  "nRare": 618
+ },
+ "ud-tel": {
+  "rareL_edge": 0.0969,
+  "rareL_top": 0.0485,
+  "rareL_rare": 0.37,
+  "rareR_edge": 0.3304,
+  "rareR_top": 0.0308,
+  "rareR_rare": 0.37,
+  "rareAnchorAsym": -0.2159,
+  "nRare": 227
+ },
+ "ud-tur": {
+  "rareL_edge": 0.1203,
+  "rareL_top": 0.0507,
+  "rareL_rare": 0.6579,
+  "rareR_edge": 0.1334,
+  "rareR_top": 0.0425,
+  "rareR_rare": 0.6579,
+  "rareAnchorAsym": -0.0049,
+  "nRare": 6349
+ },
+ "ud-uig": {
+  "rareL_edge": 0.0782,
+  "rareL_top": 0.0487,
+  "rareL_rare": 0.6812,
+  "rareR_edge": 0.1067,
+  "rareR_top": 0.034,
+  "rareR_rare": 0.6812,
+  "rareAnchorAsym": -0.0138,
+  "nRare": 6289
+ },
+ "ud-ukr": {
+  "rareL_edge": 0.0548,
+  "rareL_top": 0.0637,
+  "rareL_rare": 0.6129,
+  "rareR_edge": 0.0871,
+  "rareR_top": 0.0545,
+  "rareR_rare": 0.6129,
+  "rareAnchorAsym": -0.0232,
+  "nRare": 6990
+ },
+ "ud-urd": {
+  "rareL_edge": 0.0445,
+  "rareL_top": 0.1524,
+  "rareL_rare": 0.4236,
+  "rareR_edge": 0.023,
+  "rareR_top": 0.1624,
+  "rareR_rare": 0.4236,
+  "rareAnchorAsym": 0.0114,
+  "nRare": 6655
+ },
+ "ud-vie": {
+  "rareL_edge": 0.039,
+  "rareL_top": 0.0435,
+  "rareL_rare": 0.5169,
+  "rareR_edge": 0.0659,
+  "rareR_top": 0.0337,
+  "rareR_rare": 0.5169,
+  "rareAnchorAsym": -0.0171,
+  "nRare": 12552
+ },
+ "ud-wol": {
+  "rareL_edge": 0.0432,
+  "rareL_top": 0.1425,
+  "rareL_rare": 0.3426,
+  "rareR_edge": 0.082,
+  "rareR_top": 0.0933,
+  "rareR_rare": 0.3426,
+  "rareAnchorAsym": 0.0105,
+  "nRare": 3634
+ },
+ "irc-en": {
+  "rareL_edge": 0.1262,
+  "rareL_top": 0.1102,
+  "rareL_rare": 0.3978,
+  "rareR_edge": 0.1319,
+  "rareR_top": 0.0816,
+  "rareR_rare": 0.3978,
+  "rareAnchorAsym": 0.023,
+  "nRare": 204174
+ },
+ "irc-de": {
+  "rareL_edge": 0.1104,
+  "rareL_top": 0.07,
+  "rareL_rare": 0.4619,
+  "rareR_edge": 0.1326,
+  "rareR_top": 0.0484,
+  "rareR_rare": 0.4619,
+  "rareAnchorAsym": -0.0007,
+  "nRare": 8834
+ },
+ "irc-es": {
+  "rareL_edge": 0.1056,
+  "rareL_top": 0.1009,
+  "rareL_rare": 0.2997,
+  "rareR_edge": 0.2021,
+  "rareR_top": 0.1102,
+  "rareR_rare": 0.2997,
+  "rareAnchorAsym": -0.1059,
+  "nRare": 6423
+ },
+ "irc-it": {
+  "rareL_edge": 0.1221,
+  "rareL_top": 0.063,
+  "rareL_rare": 0.392,
+  "rareR_edge": 0.1732,
+  "rareR_top": 0.062,
+  "rareR_rare": 0.392,
+  "rareAnchorAsym": -0.0502,
+  "nRare": 19650
+ },
+ "book-war-and-peace": {
+  "rareL_edge": 0.0335,
+  "rareL_top": 0.204,
+  "rareL_rare": 0.3201,
+  "rareR_edge": 0.0904,
+  "rareR_top": 0.1523,
+  "rareR_rare": 0.3201,
+  "rareAnchorAsym": -0.0052,
+  "nRare": 243081
+ },
+ "book-pride-and-prejudice": {
+  "rareL_edge": 0.0249,
+  "rareL_top": 0.1598,
+  "rareL_rare": 0.2558,
+  "rareR_edge": 0.0892,
+  "rareR_top": 0.1565,
+  "rareR_rare": 0.2558,
+  "rareAnchorAsym": -0.0609,
+  "nRare": 48502
+ },
+ "book-tale-of-two-cities": {
+  "rareL_edge": 0.0302,
+  "rareL_top": 0.2069,
+  "rareL_rare": 0.304,
+  "rareR_edge": 0.0856,
+  "rareR_top": 0.161,
+  "rareR_rare": 0.304,
+  "rareAnchorAsym": -0.0094,
+  "nRare": 56123
+ },
+ "code-js": {
+  "rareL_edge": 0.2026,
+  "rareL_top": 0.1451,
+  "rareL_rare": 0.2381,
+  "rareR_edge": 0.3725,
+  "rareR_top": 0.0328,
+  "rareR_rare": 0.2381,
+  "rareAnchorAsym": -0.0578,
+  "nRare": 1394.75
+ },
+ "code-py": {
+  "rareL_edge": 0.1593,
+  "rareL_top": 0.1192,
+  "rareL_rare": 0.2027,
+  "rareR_edge": 0.3417,
+  "rareR_top": 0.125,
+  "rareR_rare": 0.2027,
+  "rareAnchorAsym": -0.1882,
+  "nRare": 817.4167
+ },
+ "code-rb": {
+  "rareL_edge": 0.1301,
+  "rareL_top": 0.0997,
+  "rareL_rare": 0.2412,
+  "rareR_edge": 0.2975,
+  "rareR_top": 0.0575,
+  "rareR_rare": 0.2412,
+  "rareAnchorAsym": -0.1252,
+  "nRare": 1079.25
+ }
+}

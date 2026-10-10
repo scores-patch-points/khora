@@ -1,0 +1,130 @@
+{
+ "ctrlF": {
+  "pairs": 32,
+  "castMeanD1": 1.2519,
+  "ctrlMeanD1": 1.4611,
+  "m1": {
+   "n": 4,
+   "meanDiff": 0.9251,
+   "ci": [
+    0,
+    2
+   ],
+   "excludes0": false
+  },
+  "m2": {
+   "n": 4,
+   "meanDiff": -0.5704,
+   "ci": [
+    -3.4594,
+    1.615
+   ],
+   "excludes0": false
+  },
+  "m3+": {
+   "n": 24,
+   "meanDiff": -0.338,
+   "ci": [
+    -1.2967,
+    0.6434
+   ],
+   "excludes0": false
+  },
+  "m3+_midOnly": {
+   "n": 14,
+   "meanDiff": -0.7455,
+   "ci": [
+    -1.3642,
+    -0.0686
+   ],
+   "excludes0": true
+  },
+  "slopeCastMinusCtrl": {
+   "point": 0.3303,
+   "castSlope": 0.1934,
+   "ctrlSlope": -0.1369,
+   "ci": [
+    -0.8373,
+    0.7962
+   ],
+   "excludes0": false
+  },
+  "position": {
+   "castShareInitial": 0.2188,
+   "ctrlShareInitial": 0.2188,
+   "castShareBeing": 0.0313,
+   "ctrlShareBeing": 0.0938,
+   "castShareFigure": 0.875,
+   "ctrlShareFigure": 0.8438
+  }
+ },
+ "ctrlK": {
+  "pairs": 32,
+  "castMeanD1": 1.2519,
+  "ctrlMeanD1": 1.2159,
+  "m1": {
+   "n": 4,
+   "meanDiff": 1.1751,
+   "ci": [
+    0,
+    2.7004
+   ],
+   "excludes0": false
+  },
+  "m2": {
+   "n": 4,
+   "meanDiff": -0.0158,
+   "ci": [
+    -1,
+    1.015
+   ],
+   "excludes0": false
+  },
+  "m3+": {
+   "n": 24,
+   "meanDiff": -0.1452,
+   "ci": [
+    -1.0081,
+    0.7618
+   ],
+   "excludes0": false
+  },
+  "m3+_midOnly": {
+   "n": 14,
+   "meanDiff": -1.1226,
+   "ci": [
+    -1.8031,
+    -0.5
+   ],
+   "excludes0": true
+  },
+  "slopeCastMinusCtrl": {
+   "point": 0.4844,
+   "castSlope": 0.1934,
+   "ctrlSlope": -0.291,
+   "ci": [
+    -0.2511,
+    0.8524
+   ],
+   "excludes0": false
+  },
+  "position": {
+   "castShareInitial": 0.2188,
+   "ctrlShareInitial": 0.2188,
+   "castShareBeing": 0.0313,
+   "ctrlShareBeing": 0.0313,
+   "castShareFigure": 0.875,
+   "ctrlShareFigure": 0.875
+  }
+ },
+ "F5": {
+  "kinds": 0,
+  "H": null,
+  "nullQ95": null,
+  "nullMedian": null,
+  "HPass": false,
+  "Hslope": null,
+  "nullSlopeQ95": null,
+  "HslopePass": false
+ }
+}

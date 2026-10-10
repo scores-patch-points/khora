@@ -1,0 +1,157 @@
+{
+ "cases": {
+  "tiny": {
+   "tokens": 3,
+   "allFiniteOrNull": true,
+   "v": {
+    "rareSlope": null,
+    "rareCurve": null,
+    "fnBefore": null,
+    "depLen": null,
+    "initDev": null,
+    "finalDev": null,
+    "surprGrow": null,
+    "entSlope": null,
+    "entCurv": null,
+    "branch": null,
+    "asym": null
+   }
+  },
+  "oneType": {
+   "tokens": 9000,
+   "allFiniteOrNull": true,
+   "v": {
+    "rareSlope": null,
+    "rareCurve": null,
+    "fnBefore": null,
+    "depLen": null,
+    "initDev": null,
+    "finalDev": null,
+    "surprGrow": null,
+    "entSlope": null,
+    "entCurv": null,
+    "branch": null,
+    "asym": null
+   }
+  },
+  "twoTypes": {
+   "tokens": 7500,
+   "allFiniteOrNull": true,
+   "v": {
+    "rareSlope": null,
+    "rareCurve": null,
+    "fnBefore": null,
+    "depLen": null,
+    "initDev": null,
+    "finalDev": null,
+    "surprGrow": null,
+    "entSlope": null,
+    "entCurv": null,
+    "branch": null,
+    "asym": null
+   }
+  },
+  "unitLength1": {
+   "tokens": 5000,
+   "allFiniteOrNull": true,
+   "v": {
+    "rareSlope": null,
+    "rareCurve": null,
+    "fnBefore": null,
+    "depLen": null,
+    "initDev": null,
+    "finalDev": null,
+    "surprGrow": null,
+    "entSlope": null,
+    "entCurv": null,
+    "branch": null,
+    "asym": null
+   }
+  },
+  "unitLength2": {
+   "tokens": 10000,
+   "allFiniteOrNull": true,
+   "v": {
+    "rareSlope": null,
+    "rareCurve": null,
+    "fnBefore": null,
+    "depLen": null,
+    "initDev": null,
+    "finalDev": null,
+    "surprGrow": null,
+    "entSlope": null,
+    "entCurv": null,
+    "branch": null,
+    "asym": null
+   }
+  },
+  "oneGiantUnit": {
+   "tokens": 60000,
+   "allFiniteOrNull": true,
+   "v": {
+    "rareSlope": null,
+    "rareCurve": null,
+    "fnBefore": 0,
+    "depLen": 0,
+    "initDev": null,
+    "finalDev": null,
+    "surprGrow": null,
+    "entSlope": null,
+    "entCurv": null,
+    "branch": 0,
+    "asym": null
+   }
+  },
+  "nonLatin": {
+   "tokens": 16000,
+   "allFiniteOrNull": true,
+   "v": {
+    "rareSlope": -0.2582,
+    "rareCurve": 0.5774,
+    "fnBefore": -1,
+    "depLen": 0.1823,
+    "initDev": 0.5774,
+    "finalDev": 0.5774,
+    "surprGrow": 0.0174,
+    "entSlope": 1.0001,
+    "entCurv": 0.7327,
+    "branch": -0.2877,
+    "asym": null
+   }
+  },
+  "fewTypesManyUnits": {
+   "tokens": 24000,
+   "allFiniteOrNull": true,
+   "v": {
+    "rareSlope": -0.8077,
+    "rareCurve": -0.2663,
+    "fnBefore": null,
+    "depLen": -0.285,
+    "initDev": 0.6047,
+    "finalDev": -1.023,
+    "surprGrow": 0.9167,
+    "entSlope": -0.0322,
+    "entCurv": 0.1068,
+    "branch": 0.9163,
+    "asym": 0.5807
+   }
+  },
+  "periodic": {
+   "tokens": 60000,
+   "allFiniteOrNull": true,
+   "v": {
+    "rareSlope": null,
+    "rareCurve": null,
+    "fnBefore": null,
+    "depLen": 0,
+    "initDev": null,
+    "finalDev": null,
+    "surprGrow": null,
+    "entSlope": null,
+    "entCurv": null,
+    "branch": null,
+    "asym": null
+   }
+  }
+ }
+}

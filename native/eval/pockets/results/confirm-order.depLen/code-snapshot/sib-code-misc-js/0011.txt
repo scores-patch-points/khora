@@ -1,0 +1,56 @@
+// janus binding: mounts janus (native/handlers.js -> createJanusHandlers). Janus owns /v1/reason and /api/reason.
+//
+//   khoraDir   = the khora organ's directory as the Fold resolved it (pinned / installed / sibling), never a guess. janus's
+//                default runReason spawns <khoraDir>/cli/reason.mjs. With khora proxy/off and no FOLD_KHORA_DIR the door is
+//                still mounted but reasons only through an injected runReason (status says so).
+//   notesRead  = { sourceOfWitness, recipeOfWitness } imported from <khoraDir>/native/kernel/notes.js and wired ONCE
+//                (JANUS-EXTRACTION.md D1). Without it janus's derive declines with a typed gap; /v1/reason still works.
+//   derive     = exposed on the organ record (fold.organ('janus').derive) so khora's classifyTurn can reach it lazily.
+//   deriveContext (ledger, taskLog, hyperlexicon, declarations, floor, carry, maxSteps) is khora's state: the Fold cannot
+//                supply it yet (see README gaps); an injected options.deriveContext is passed through.
+import { existsSync } from "node:fs";
+import { join } from "node:path";
+import { pathToFileURL } from "node:url";
+
+export const name = "janus";
+export const entries = ["native/handlers.js"];
+
+export default {
+  name,
+  entries,
+  async create(ctx) {
+    const { env, log, options } = ctx;
+    const khoraDir = options.khoraDir || env.FOLD_KHORA_DIR || ctx.dirOf("khora") || null;
+    let notesRead = options.notesRead ?? null;
+    let notesNote = notesRead ? "injected" : null;
+    if (!notesRead && khoraDir) {
+      const f = join(khoraDir, "native", "kernel", "notes.js");
+      if (existsSync(f)) {
+        try {
+          const m = await import(pathToFileURL(f).href);
+          notesRead = { sourceOfWitness: m.sourceOfWitness, recipeOfWitness: m.recipeOfWitness };
+          notesNote = f;
+        } catch (e) { notesNote = `unreadable: ${e?.message || e}`; log(`janus: cannot read khora's notes.js: ${e?.message || e}`); }
+      } else notesNote = `absent: ${f}`;
+    } else if (!notesRead) notesNote = "no khora directory known";
+    const mod = await ctx.load();
+    if (typeof mod.createJanusHandlers !== "function") throw new Error("janus entry does not export createJanusHandlers");
+    const { khoraDir: _k, notesRead: _n, ...rest } = options;
+    const inner = mod.createJanusHandlers({
+      ...(notesRead ? { notesRead } : {}),
+      ...(khoraDir ? { khoraDir } : {}),
+      ...(env.FOLD_JANUS_REASON_BUDGET_MS ? { reasonBudgetMs: Number(env.FOLD_JANUS_REASON_BUDGET_MS) } : {}),
+      log,
+      ...rest,
+    });
+    return {
+      handle: (req, res) => inner.handle(req, res),
+      derive: inner.derive,
+      close: () => inner.close?.(),
+      status: () => ({
+        khoraDir, witnessRead: notesNote,
+        reason: options.runReason ? "injected runReason" : khoraDir ? `spawns ${join(khoraDir, "cli", "reason.mjs")}` : "no runReason and no khora dir: POST /v1/reason will fail",
+      }),
+    };
+  },
+};

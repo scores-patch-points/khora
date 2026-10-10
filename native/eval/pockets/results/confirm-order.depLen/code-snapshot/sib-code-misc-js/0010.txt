@@ -1,0 +1,67 @@
+// heimdall binding: mounts the embedded heimdall (heimdall/src/embed.js -> mountHeimdall) under /heimdall, and, while its
+// floor is configured, ALSO serves the legacy wire doors (/api/chat, /v1/chat/completions, /v1/messages ...) by rewriting
+// them under the mount prefix. Who wins those paths is decided by server/routes.mjs; this file only enforces the condition.
+//
+//   floor configured  = FOLD_OLLAMA or FOLD_HEIMDALL_FLOORS is set explicitly (the built-in default 127.0.0.1:11435 is a
+//                       guess, not a configuration: with only the default, legacy paths fall through to khora).
+//   FOLD_LEGACY_DOORS = khora  forces the fallthrough even when a floor is configured (heimdall keeps /heimdall/*).
+import { homedir } from "node:os";
+import { join } from "node:path";
+import { legacyMount } from "../routes.mjs";
+import { joinData } from "./common.mjs";
+
+export const name = "heimdall";
+export const entries = ["src/embed.js"];
+
+export function floorsFrom(cfg, env) {
+  const list = String(env.FOLD_HEIMDALL_FLOORS || "").split(",").map((s) => s.trim().replace(/\/+$/, "")).filter(Boolean);
+  return list.length ? list : [cfg.ollama];
+}
+
+export function floorConfigured(env) {
+  if (String(env.FOLD_LEGACY_DOORS || "").toLowerCase() === "khora") return false;
+  return Boolean(String(env.FOLD_OLLAMA || "").trim() || String(env.FOLD_HEIMDALL_FLOORS || "").trim());
+}
+
+export default {
+  name,
+  entries,
+  conditions: ({ env }) => ({ floor: floorConfigured(env) }),
+  async create(ctx) {
+    const { env, log, options, dataDir } = ctx;
+    const mod = await ctx.load();
+    if (typeof mod.mountHeimdall !== "function") throw new Error("heimdall entry does not export mountHeimdall");
+    const peers = String(env.FOLD_HEIMDALL_PEERS || "").split(",").map((s) => s.trim()).filter(Boolean);
+    // peers on this machine share ONE token (~/.heimdall/peers.token); with no peers the token is private to the Fold's data dir,
+    // so a bare `fold serve` never writes outside FOLD_HOME.
+    const peerTokenFile = env.HEIMDALL_PEER_TOKEN_FILE || (peers.length ? join(homedir(), ".heimdall", "peers.token") : joinData(dataDir, "peers.token"));
+    const floors = options.floors || floorsFrom({ ollama: ctx.ollama }, env);
+    const inner = mod.mountHeimdall({
+      name: "fold",
+      selfUrl: `http://127.0.0.1:${ctx.fold.port()}/heimdall/peers`,
+      peerUrls: peers,
+      floors,
+      stateDir: dataDir,
+      peerTokenFile,
+      log,
+      ...options,
+    });
+    const legacyOn = () => floorConfigured(env);
+    return {
+      async handle(req, res) {
+        const raw = req.url || "/";
+        const q = raw.indexOf("?");
+        const pathname = q === -1 ? raw : raw.slice(0, q);
+        if (await inner.handle(req, res)) return true; // already under /heimdall
+        if (!legacyOn()) return false;
+        const mount = legacyMount("heimdall", (req.method || "GET").toUpperCase(), pathname);
+        if (!mount) return false;
+        req.url = mount + raw;
+        return inner.handle(req, res);
+      },
+      close: () => inner.close(),
+      status: () => ({ ...inner.status(), legacyDoors: legacyOn() ? "heimdall" : "khora", floors }),
+      hm: inner,
+    };
+  },
+};

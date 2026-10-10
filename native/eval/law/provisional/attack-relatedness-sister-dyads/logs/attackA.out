@@ -1,0 +1,347 @@
+{
+ "gate": {
+  "cells": 2070,
+  "maxAbsDiff": 0,
+  "badCells": [],
+  "nBad": 0,
+  "holds": true
+ },
+ "delta": {
+  "V1-strict:LEFT": {
+   "mean": 0.0037,
+   "lo": -0.0025,
+   "hi": 0.0097,
+   "n": 9
+  },
+  "V2-ultra:LEFT": {
+   "mean": 0.0064,
+   "lo": -0.0021,
+   "hi": 0.0148,
+   "n": 9
+  },
+  "V3-local:LEFT": {
+   "mean": 0.013,
+   "lo": 0.0026,
+   "hi": 0.0225,
+   "n": 9
+  },
+  "V4-surf:LEFT": {
+   "mean": 0.0005,
+   "lo": -0.0071,
+   "hi": 0.008,
+   "n": 9
+  },
+  "V5-surfstrict:LEFT": {
+   "mean": -0.0076,
+   "lo": -0.0125,
+   "hi": -0.0023,
+   "n": 9
+  },
+  "V6-causal:LEFT": {
+   "mean": -0.0018,
+   "lo": -0.0083,
+   "hi": 0.0055,
+   "n": 9
+  },
+  "V6-causal:LEFTM": {
+   "mean": -0.0026,
+   "lo": -0.0108,
+   "hi": 0.0063,
+   "n": 9
+  },
+  "V6-causal:LEFTC": {
+   "mean": -0.0065,
+   "lo": -0.0103,
+   "hi": -0.0025,
+   "n": 9
+  }
+ },
+ "summary": {
+  "V0-base:LEFT": {
+   "n": 36,
+   "nPass": 35,
+   "auc": 0.6361,
+   "ctrl": 0.5584,
+   "diff": {
+    "mean": 0.0778,
+    "lo": 0.0691,
+    "hi": 0.0858,
+    "n": 9
+   },
+   "pos": 0.5003,
+   "verdict": "SURVIVES",
+   "IWR": [
+    29,
+    30,
+    0.0777,
+    "SURVIVES"
+   ],
+   "NGm": [
+    6,
+    6,
+    0.078,
+    "SURVIVES"
+   ]
+  },
+  "V0-base:RIVALS": {
+   "n": 36,
+   "nPass": 0,
+   "auc": 0.5001,
+   "ctrl": 0.5005,
+   "diff": {
+    "mean": -0.0002,
+    "lo": -0.0014,
+    "hi": 0.0006,
+    "n": 9
+   },
+   "pos": 0.4995,
+   "verdict": "FAILS",
+   "IWR": [
+    0,
+    30,
+    -0.0007,
+    "FAILS"
+   ],
+   "NGm": [
+    0,
+    6,
+    0.0007,
+    "FAILS"
+   ]
+  },
+  "V1-strict:LEFT": {
+   "n": 36,
+   "nPass": 34,
+   "auc": 0.6429,
+   "ctrl": 0.5598,
+   "diff": {
+    "mean": 0.0815,
+    "lo": 0.0705,
+    "hi": 0.0925,
+    "n": 9
+   },
+   "pos": 0.4998,
+   "verdict": "SURVIVES",
+   "IWR": [
+    28,
+    30,
+    0.0847,
+    "SURVIVES"
+   ],
+   "NGm": [
+    6,
+    6,
+    0.0751,
+    "SURVIVES"
+   ]
+  },
+  "V1-strict:RIVALS": {
+   "n": 36,
+   "nPass": 0,
+   "auc": 0.5004,
+   "ctrl": 0.5018,
+   "diff": {
+    "mean": -0.001,
+    "lo": -0.0023,
+    "hi": 0.0001,
+    "n": 9
+   },
+   "pos": 0.4998,
+   "verdict": "FAILS",
+   "IWR": [
+    0,
+    30,
+    -0.0019,
+    "FAILS"
+   ],
+   "NGm": [
+    0,
+    6,
+    0.0006,
+    "FAILS"
+   ]
+  },
+  "V2-ultra:LEFT": {
+   "n": 31,
+   "nPass": 30,
+   "auc": 0.6396,
+   "ctrl": 0.5546,
+   "diff": {
+    "mean": 0.0842,
+    "lo": 0.074,
+    "hi": 0.0944,
+    "n": 9
+   },
+   "pos": 0.502,
+   "verdict": "SURVIVES",
+   "IWR": [
+    24,
+    25,
+    0.0866,
+    "SURVIVES"
+   ],
+   "NGm": [
+    6,
+    6,
+    0.0793,
+    "SURVIVES"
+   ]
+  },
+  "V3-local:LEFT": {
+   "n": 36,
+   "nPass": 31,
+   "auc": 0.6433,
+   "ctrl": 0.5496,
+   "diff": {
+    "mean": 0.0908,
+    "lo": 0.0762,
+    "hi": 0.1044,
+    "n": 9
+   },
+   "pos": 0.5005,
+   "verdict": "SURVIVES",
+   "IWR": [
+    26,
+    30,
+    0.0965,
+    "SURVIVES"
+   ],
+   "NGm": [
+    5,
+    6,
+    0.0795,
+    "SURVIVES"
+   ]
+  },
+  "V4-surf:LEFT": {
+   "n": 36,
+   "nPass": 36,
+   "auc": 0.6339,
+   "ctrl": 0.5561,
+   "diff": {
+    "mean": 0.0784,
+    "lo": 0.0713,
+    "hi": 0.0856,
+    "n": 9
+   },
+   "pos": 0.5002,
+   "verdict": "SURVIVES",
+   "IWR": [
+    30,
+    30,
+    0.0773,
+    "SURVIVES"
+   ],
+   "NGm": [
+    6,
+    6,
+    0.0806,
+    "SURVIVES"
+   ]
+  },
+  "V5-surfstrict:LEFT": {
+   "n": 36,
+   "nPass": 33,
+   "auc": 0.6292,
+   "ctrl": 0.5606,
+   "diff": {
+    "mean": 0.0703,
+    "lo": 0.064,
+    "hi": 0.0769,
+    "n": 9
+   },
+   "pos": 0.4993,
+   "verdict": "SURVIVES",
+   "IWR": [
+    27,
+    30,
+    0.067,
+    "SURVIVES"
+   ],
+   "NGm": [
+    6,
+    6,
+    0.0769,
+    "SURVIVES"
+   ]
+  },
+  "V6-causal:LEFT": {
+   "n": 36,
+   "nPass": 35,
+   "auc": 0.6473,
+   "ctrl": 0.5686,
+   "diff": {
+    "mean": 0.076,
+    "lo": 0.0672,
+    "hi": 0.0836,
+    "n": 9
+   },
+   "pos": 0.4994,
+   "verdict": "SURVIVES",
+   "IWR": [
+    30,
+    30,
+    0.0814,
+    "SURVIVES"
+   ],
+   "NGm": [
+    5,
+    6,
+    0.0651,
+    "SURVIVES"
+   ]
+  },
+  "V6-causal:LEFTM": {
+   "n": 36,
+   "nPass": 35,
+   "auc": 0.648,
+   "ctrl": 0.569,
+   "diff": {
+    "mean": 0.0753,
+    "lo": 0.0657,
+    "hi": 0.0837,
+    "n": 9
+   },
+   "pos": 0.4994,
+   "verdict": "SURVIVES",
+   "IWR": [
+    30,
+    30,
+    0.0826,
+    "SURVIVES"
+   ],
+   "NGm": [
+    5,
+    6,
+    0.0607,
+    "SURVIVES"
+   ]
+  },
+  "V6-causal:LEFTC": {
+   "n": 36,
+   "nPass": 33,
+   "auc": 0.6432,
+   "ctrl": 0.5707,
+   "diff": {
+    "mean": 0.0713,
+    "lo": 0.0641,
+    "hi": 0.0774,
+    "n": 9
+   },
+   "pos": 0.4994,
+   "verdict": "SURVIVES",
+   "IWR": [
+    28,
+    30,
+    0.0737,
+    "SURVIVES"
+   ],
+   "NGm": [
+    5,
+    6,
+    0.0665,
+    "SURVIVES"
+   ]
+  }
+ }
+}

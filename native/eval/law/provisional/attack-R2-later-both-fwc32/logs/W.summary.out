@@ -1,0 +1,208 @@
+{
+ "headerSha256": "a0e9ccd845182fa32e8f693b8087370200cb7d432fc9a0e89111e97eb216c5ad",
+ "generated": "2026-10-07T07:03:29.842Z",
+ "windows": 34,
+ "languages": 8,
+ "big": 29,
+ "inScope": 17,
+ "inScopeLanguages": [
+  "cat",
+  "grc",
+  "is",
+  "lat",
+  "lzh"
+ ],
+ "W1": {
+  "audibleIn": 10,
+  "nIn": 17,
+  "share": 0.588,
+  "langBoot": {
+   "point": 0.588,
+   "lo": 0.188,
+   "hi": 0.957,
+   "clusters": 8
+  },
+  "cladeBoot": {
+   "point": 0.588,
+   "lo": 0.231,
+   "hi": 0.909,
+   "clusters": 6
+  },
+  "pass": false
+ },
+ "W2": {
+  "baseRate": 0.379,
+  "lift": {
+   "point": 0.209,
+   "lo": 0.025,
+   "hi": 0.489,
+   "clusters": 8
+  },
+  "cladeLift": {
+   "point": 0.209,
+   "lo": 0.029,
+   "hi": 0.544,
+   "clusters": 6
+  },
+  "pass": true
+ },
+ "W3": {
+  "nHigh": 13,
+  "shareHigh": 0.615,
+  "nMid": 4,
+  "shareMid": 0.5,
+  "langBootHigh": {
+   "point": 0.615,
+   "lo": 0.2,
+   "hi": 1,
+   "clusters": 8
+  },
+  "langBootMid": {
+   "point": 0.5,
+   "lo": 0,
+   "hi": 1,
+   "clusters": 8
+  },
+  "pass": false
+ },
+ "W4": {
+  "n": 5,
+  "languages": [
+   "be",
+   "est"
+  ],
+  "share": 0,
+  "pass": true
+ },
+ "W5": {
+  "spearmanAll": 0.635,
+  "spearmanBig": 0.663,
+  "perLanguage": [
+   {
+    "stem": "be",
+    "n": 4,
+    "meanFwc": 0.2113,
+    "meanPairs": 540,
+    "meanAuc": 0.5777,
+    "aucs": [
+     0.5957,
+     0.622,
+     0.5316,
+     0.5616
+    ]
+   },
+   {
+    "stem": "cat",
+    "n": 6,
+    "meanFwc": 0.461,
+    "meanPairs": 600,
+    "meanAuc": 0.671,
+    "aucs": [
+     0.6802,
+     0.6744,
+     0.6609,
+     0.6686,
+     0.6513,
+     0.6905
+    ]
+   },
+   {
+    "stem": "ces",
+    "n": 5,
+    "meanFwc": 0.2396,
+    "meanPairs": 215,
+    "meanAuc": 0.5385,
+    "aucs": [
+     0.5751,
+     0.4847,
+     0.4884,
+     0.5584,
+     0.5859
+    ]
+   },
+   {
+    "stem": "est",
+    "n": 4,
+    "meanFwc": 0.1731,
+    "meanPairs": 600,
+    "meanAuc": 0.5526,
+    "aucs": [
+     0.5453,
+     0.5332,
+     0.5588,
+     0.5731
+    ]
+   },
+   {
+    "stem": "grc",
+    "n": 2,
+    "meanFwc": 0.3267,
+    "meanPairs": 596,
+    "meanAuc": 0.6889,
+    "aucs": [
+     0.7224,
+     0.6555
+    ]
+   },
+   {
+    "stem": "is",
+    "n": 6,
+    "meanFwc": 0.3772,
+    "meanPairs": 369,
+    "meanAuc": 0.5866,
+    "aucs": [
+     0.6445,
+     0.5749,
+     0.5864,
+     0.5991,
+     0.5632,
+     0.5516
+    ]
+   },
+   {
+    "stem": "lat",
+    "n": 1,
+    "meanFwc": 0.3349,
+    "meanPairs": 384,
+    "meanAuc": 0.5801,
+    "aucs": [
+     0.5801
+    ]
+   },
+   {
+    "stem": "lzh",
+    "n": 6,
+    "meanFwc": 0.3241,
+    "meanPairs": 522,
+    "meanAuc": 0.5881,
+    "aucs": [
+     0.581,
+     0.6468,
+     0.5906,
+     0.5562,
+     0.5955,
+     0.5584
+    ]
+   }
+  ]
+ },
+ "inScopeWindows": [
+  "cat:0.4583/600/0.6802",
+  "cat:0.4683/600/0.6744",
+  "cat:0.4673/600/0.6609",
+  "cat:0.4611/600/0.6686",
+  "cat:0.4526/600/0.6513",
+  "cat:0.4584/600/0.6905",
+  "grc:0.3213/600/0.7224",
+  "grc:0.3321/591/0.6555",
+  "is:0.3773/595/0.6445",
+  "is:0.3765/287/0.5749",
+  "is:0.3783/437/0.5864",
+  "is:0.3847/432/0.5632",
+  "is:0.361/291/0.5516",
+  "lat:0.3349/384/0.5801",
+  "lzh:0.3914/600/0.581",
+  "lzh:0.4262/600/0.6468",
+  "lzh:0.2885/600/0.5562"
+ ]
+}

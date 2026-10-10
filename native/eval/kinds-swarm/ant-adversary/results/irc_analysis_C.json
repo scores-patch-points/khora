@@ -1,0 +1,1364 @@
+{
+ "prereg": "PREREG_IRC.md",
+ "sha256": "9354086406f1e9504fdcf5fa3a272392f91441c2272cb7bf22d4754de865458c",
+ "days": [
+  {
+   "day": "kubuntu/2008-03-15",
+   "set": "C",
+   "msgs": 2525,
+   "INIT": {
+    "tiers": [
+     13,
+     14,
+     9,
+     24
+    ],
+    "pairs": 60,
+    "relaxed": 47,
+    "dropped": 28,
+    "posAvailable": 280
+   },
+   "NONINIT": {
+    "tiers": [
+     17,
+     15,
+     1,
+     4
+    ],
+    "pairs": 37,
+    "relaxed": 20,
+    "dropped": 3,
+    "posAvailable": 40
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 414,
+    "neg": 9227,
+    "posInit": 371
+   }
+  },
+  {
+   "day": "ubuntu/2006-03-15",
+   "set": "C",
+   "msgs": 9825,
+   "INIT": {
+    "tiers": [
+     10,
+     25,
+     16,
+     9
+    ],
+    "pairs": 60,
+    "relaxed": 50,
+    "dropped": 3,
+    "posAvailable": 1702
+   },
+   "NONINIT": {
+    "tiers": [
+     27,
+     21,
+     7,
+     5
+    ],
+    "pairs": 60,
+    "relaxed": 33,
+    "dropped": 2,
+    "posAvailable": 244
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 3602,
+    "neg": 46667,
+    "posInit": 3348
+   }
+  },
+  {
+   "day": "ubuntu/2006-07-15",
+   "set": "C",
+   "msgs": 11216,
+   "INIT": {
+    "tiers": [
+     19,
+     20,
+     12,
+     9
+    ],
+    "pairs": 60,
+    "relaxed": 41,
+    "dropped": 0,
+    "posAvailable": 1884
+   },
+   "NONINIT": {
+    "tiers": [
+     39,
+     14,
+     2,
+     5
+    ],
+    "pairs": 60,
+    "relaxed": 21,
+    "dropped": 1,
+    "posAvailable": 211
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 4593,
+    "neg": 63241,
+    "posInit": 4360
+   }
+  },
+  {
+   "day": "ubuntu/2007-03-15",
+   "set": "C",
+   "msgs": 10657,
+   "INIT": {
+    "tiers": [
+     17,
+     19,
+     7,
+     17
+    ],
+    "pairs": 60,
+    "relaxed": 43,
+    "dropped": 3,
+    "posAvailable": 1941
+   },
+   "NONINIT": {
+    "tiers": [
+     25,
+     19,
+     8,
+     8
+    ],
+    "pairs": 60,
+    "relaxed": 35,
+    "dropped": 5,
+    "posAvailable": 302
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 4469,
+    "neg": 61103,
+    "posInit": 4145
+   }
+  },
+  {
+   "day": "ubuntu/2008-07-15",
+   "set": "C",
+   "msgs": 12630,
+   "INIT": {
+    "tiers": [
+     19,
+     29,
+     5,
+     7
+    ],
+    "pairs": 60,
+    "relaxed": 41,
+    "dropped": 1,
+    "posAvailable": 2376
+   },
+   "NONINIT": {
+    "tiers": [
+     37,
+     14,
+     5,
+     4
+    ],
+    "pairs": 60,
+    "relaxed": 23,
+    "dropped": 0,
+    "posAvailable": 376
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 5405,
+    "neg": 75918,
+    "posInit": 4921
+   }
+  },
+  {
+   "day": "ubuntu/2010-07-15",
+   "set": "C",
+   "msgs": 6913,
+   "INIT": {
+    "tiers": [
+     10,
+     17,
+     16,
+     17
+    ],
+    "pairs": 60,
+    "relaxed": 50,
+    "dropped": 4,
+    "posAvailable": 1631
+   },
+   "NONINIT": {
+    "tiers": [
+     30,
+     16,
+     7,
+     7
+    ],
+    "pairs": 60,
+    "relaxed": 30,
+    "dropped": 1,
+    "posAvailable": 189
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 2980,
+    "neg": 42343,
+    "posInit": 2486
+   }
+  },
+  {
+   "day": "ubuntu/2012-03-15",
+   "set": "C",
+   "msgs": 4511,
+   "INIT": {
+    "tiers": [
+     19,
+     23,
+     8,
+     10
+    ],
+    "pairs": 60,
+    "relaxed": 41,
+    "dropped": 7,
+    "posAvailable": 973
+   },
+   "NONINIT": {
+    "tiers": [
+     33,
+     16,
+     3,
+     8
+    ],
+    "pairs": 60,
+    "relaxed": 27,
+    "dropped": 3,
+    "posAvailable": 132
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 1651,
+    "neg": 26876,
+    "posInit": 1519
+   }
+  },
+  {
+   "day": "ubuntu/2013-03-15",
+   "set": "C",
+   "msgs": 3323,
+   "INIT": {
+    "tiers": [
+     10,
+     28,
+     10,
+     12
+    ],
+    "pairs": 60,
+    "relaxed": 50,
+    "dropped": 2,
+    "posAvailable": 694
+   },
+   "NONINIT": {
+    "tiers": [
+     20,
+     22,
+     6,
+     12
+    ],
+    "pairs": 60,
+    "relaxed": 40,
+    "dropped": 7,
+    "posAvailable": 73
+   },
+   "sham": {
+    "n": 10,
+    "nullShare": 1
+   },
+   "determinism": {
+    "same": 3,
+    "total": 3
+   },
+   "cand": {
+    "pos": 946,
+    "neg": 19550,
+    "posInit": 873
+   }
+  }
+ ],
+ "groups": {
+  "C:INIT": {
+   "name": "C:INIT",
+   "n": 960,
+   "pairs": 480,
+   "days": 8,
+   "auc": {
+    "S_ENTRY": 0.6531,
+    "S_OWN": 0.6124,
+    "S_ALL": 0.5623,
+    "S_SPAN": 0.6439,
+    "R_LOCAL": 0.5962,
+    "R_BURST": 0.5853,
+    "R_RECENCY": 0.5323,
+    "R_MSGLEN": 0.4892,
+    "R_IDX": 0.5,
+    "R_FREQ": 0.5051,
+    "R_POSMSG": 0.5286,
+    "X_EXT": 0.6383,
+    "X_NONNULL": 0.5885,
+    "IMP": 0.7179,
+    "FULL": 0.7746,
+    "RIV": 0.6232,
+    "RIVIMP": 0.6939,
+    "POS": 0.5075,
+    "IMPS": 0.5736
+   },
+   "ci": {
+    "S_ENTRY": [
+     0.6292,
+     0.6792
+    ],
+    "S_OWN": [
+     0.5841,
+     0.6379
+    ],
+    "S_ALL": [
+     0.5268,
+     0.5983
+    ],
+    "S_SPAN": [
+     0.606,
+     0.6716
+    ],
+    "R_LOCAL": [
+     0.5836,
+     0.6086
+    ],
+    "R_BURST": [
+     0.5347,
+     0.6342
+    ],
+    "R_RECENCY": [
+     0.4781,
+     0.5842
+    ],
+    "R_MSGLEN": [
+     0.4769,
+     0.5039
+    ],
+    "R_IDX": [
+     0.5,
+     0.5
+    ],
+    "R_FREQ": [
+     0.4915,
+     0.5209
+    ],
+    "R_POSMSG": [
+     0.4988,
+     0.5621
+    ],
+    "X_EXT": [
+     0.6094,
+     0.6632
+    ],
+    "X_NONNULL": [
+     0.5656,
+     0.6062
+    ],
+    "IMP": [
+     0.6916,
+     0.7476
+    ],
+    "FULL": [
+     0.7393,
+     0.8071
+    ],
+    "RIV": [
+     0.6064,
+     0.6418
+    ],
+    "RIVIMP": [
+     0.6596,
+     0.7311
+    ],
+    "POS": [
+     0.4929,
+     0.5212
+    ],
+    "IMPS": [
+     0.5522,
+     0.5982
+    ]
+   },
+   "flipQ95": {
+    "S_ENTRY": 0.524,
+    "S_OWN": 0.526,
+    "S_ALL": 0.5292,
+    "S_SPAN": 0.5298,
+    "R_LOCAL": 0.5172,
+    "IMP": 0.5285,
+    "FULL": 0.5315,
+    "RIV": 0.5229,
+    "RIVIMP": 0.5282,
+    "IMPS": 0.5257
+   },
+   "wAuc": {},
+   "increment": {
+    "point": 0.0707,
+    "ci": [
+     0.0314,
+     0.1103
+    ]
+   },
+   "incrementFitNull": {
+    "B": 50,
+    "q95": 0.0438,
+    "mean": 0.0028
+   },
+   "matching": {
+    "init": [
+     1,
+     1
+    ],
+    "idx": [
+     0,
+     0
+    ],
+    "logLen": [
+     2.173,
+     2.192
+    ],
+    "logDayCount": [
+     2.537,
+     2.527
+    ],
+    "logNwin": [
+     1.638,
+     1.398
+    ],
+    "last16": [
+     1.556,
+     1.202
+    ],
+    "logGap": [
+     2.215,
+     2.425
+    ],
+    "posMsg": [
+     4209.065,
+     3982.385
+    ]
+   },
+   "K5_posNonNull": 0.7833,
+   "negNonNull": 0.6062,
+   "shuffledPosNonNull": 0.4938,
+   "posMedianExtent": 340,
+   "negMedianExtent": 7
+  },
+  "C:STRICT-INIT": {
+   "name": "C:STRICT-INIT",
+   "n": 746,
+   "pairs": 373,
+   "days": 8,
+   "auc": {
+    "S_ENTRY": 0.634,
+    "S_OWN": 0.6075,
+    "S_ALL": 0.5744,
+    "S_SPAN": 0.6475,
+    "R_LOCAL": 0.5668,
+    "R_BURST": 0.5792,
+    "R_RECENCY": 0.5311,
+    "R_MSGLEN": 0.488,
+    "R_IDX": 0.5,
+    "R_FREQ": 0.4895,
+    "R_POSMSG": 0.5198,
+    "X_EXT": 0.6309,
+    "X_NONNULL": 0.5885,
+    "IMP": 0.7408,
+    "FULL": 0.77,
+    "RIV": 0.6039,
+    "RIVIMP": 0.6903,
+    "POS": 0.5093,
+    "IMPS": 0.5545
+   },
+   "ci": {
+    "S_ENTRY": [
+     0.6092,
+     0.6613
+    ],
+    "S_OWN": [
+     0.5739,
+     0.6424
+    ],
+    "S_ALL": [
+     0.5314,
+     0.6129
+    ],
+    "S_SPAN": [
+     0.6013,
+     0.6831
+    ],
+    "R_LOCAL": [
+     0.5514,
+     0.5816
+    ],
+    "R_BURST": [
+     0.5385,
+     0.616
+    ],
+    "R_RECENCY": [
+     0.4866,
+     0.5752
+    ],
+    "R_MSGLEN": [
+     0.4756,
+     0.5014
+    ],
+    "R_IDX": [
+     0.5,
+     0.5
+    ],
+    "R_FREQ": [
+     0.4706,
+     0.5043
+    ],
+    "R_POSMSG": [
+     0.4932,
+     0.548
+    ],
+    "X_EXT": [
+     0.5937,
+     0.6595
+    ],
+    "X_NONNULL": [
+     0.5628,
+     0.6102
+    ],
+    "IMP": [
+     0.7124,
+     0.7658
+    ],
+    "FULL": [
+     0.7302,
+     0.807
+    ],
+    "RIV": [
+     0.5798,
+     0.6307
+    ],
+    "RIVIMP": [
+     0.6599,
+     0.7226
+    ],
+    "POS": [
+     0.4946,
+     0.5231
+    ],
+    "IMPS": [
+     0.5338,
+     0.5757
+    ]
+   },
+   "flipQ95": {
+    "S_ENTRY": 0.5241,
+    "S_OWN": 0.527,
+    "S_ALL": 0.5338,
+    "S_SPAN": 0.531,
+    "R_LOCAL": 0.5197,
+    "IMP": 0.5361,
+    "FULL": 0.5352,
+    "RIV": 0.526,
+    "RIVIMP": 0.5346,
+    "IMPS": 0.5319
+   },
+   "wAuc": {},
+   "increment": {
+    "point": 0.0864,
+    "ci": [
+     0.0384,
+     0.1346
+    ]
+   },
+   "matching": {
+    "init": [
+     1,
+     1
+    ],
+    "idx": [
+     0,
+     0
+    ],
+    "logLen": [
+     2.19,
+     2.211
+    ],
+    "logDayCount": [
+     2.601,
+     2.628
+    ],
+    "logNwin": [
+     1.681,
+     1.505
+    ],
+    "last16": [
+     1.63,
+     1.324
+    ],
+    "logGap": [
+     2.145,
+     2.35
+    ],
+    "posMsg": [
+     4220.008,
+     4060.225
+    ]
+   },
+   "K5_posNonNull": 0.8016,
+   "negNonNull": 0.6247,
+   "shuffledPosNonNull": 0.4987,
+   "posMedianExtent": 389,
+   "negMedianExtent": 10
+  },
+  "C:NONINIT": {
+   "name": "C:NONINIT",
+   "n": 914,
+   "pairs": 457,
+   "days": 8,
+   "auc": {
+    "S_ENTRY": 0.7166,
+    "S_OWN": 0.6525,
+    "S_ALL": 0.6096,
+    "S_SPAN": 0.6063,
+    "R_LOCAL": 0.6184,
+    "R_BURST": 0.5782,
+    "R_RECENCY": 0.573,
+    "R_MSGLEN": 0.4985,
+    "R_IDX": 0.5015,
+    "R_FREQ": 0.5165,
+    "R_POSMSG": 0.4991,
+    "X_EXT": 0.7267,
+    "X_NONNULL": 0.628,
+    "IMP": 0.7905,
+    "FULL": 0.8154,
+    "RIV": 0.6465,
+    "RIVIMP": 0.7959,
+    "POS": 0.4943,
+    "IMPS": 0.5423
+   },
+   "ci": {
+    "S_ENTRY": [
+     0.6727,
+     0.7479
+    ],
+    "S_OWN": [
+     0.6069,
+     0.6983
+    ],
+    "S_ALL": [
+     0.5759,
+     0.6396
+    ],
+    "S_SPAN": [
+     0.5684,
+     0.6458
+    ],
+    "R_LOCAL": [
+     0.5969,
+     0.6359
+    ],
+    "R_BURST": [
+     0.5463,
+     0.6125
+    ],
+    "R_RECENCY": [
+     0.5454,
+     0.6031
+    ],
+    "R_MSGLEN": [
+     0.4938,
+     0.5032
+    ],
+    "R_IDX": [
+     0.4989,
+     0.5039
+    ],
+    "R_FREQ": [
+     0.5052,
+     0.527
+    ],
+    "R_POSMSG": [
+     0.4779,
+     0.5178
+    ],
+    "X_EXT": [
+     0.6788,
+     0.7634
+    ],
+    "X_NONNULL": [
+     0.5865,
+     0.6685
+    ],
+    "IMP": [
+     0.7492,
+     0.821
+    ],
+    "FULL": [
+     0.7779,
+     0.8447
+    ],
+    "RIV": [
+     0.6215,
+     0.6686
+    ],
+    "RIVIMP": [
+     0.7574,
+     0.8283
+    ],
+    "POS": [
+     0.4852,
+     0.5077
+    ],
+    "IMPS": [
+     0.5033,
+     0.5808
+    ]
+   },
+   "flipQ95": {
+    "S_ENTRY": 0.5263,
+    "S_OWN": 0.5274,
+    "S_ALL": 0.5308,
+    "S_SPAN": 0.5282,
+    "R_LOCAL": 0.5188,
+    "IMP": 0.5343,
+    "FULL": 0.5356,
+    "RIV": 0.5235,
+    "RIVIMP": 0.5337,
+    "IMPS": 0.5243
+   },
+   "wAuc": {},
+   "increment": {
+    "point": 0.1495,
+    "ci": [
+     0.1212,
+     0.1717
+    ]
+   },
+   "incrementFitNull": {
+    "B": 50,
+    "q95": 0.0408,
+    "mean": -0.001
+   },
+   "matching": {
+    "init": [
+     0,
+     0
+    ],
+    "idx": [
+     4.503,
+     4.431
+    ],
+    "logLen": [
+     1.883,
+     1.883
+    ],
+    "logDayCount": [
+     2.988,
+     2.938
+    ],
+    "logNwin": [
+     1.719,
+     1.372
+    ],
+    "last16": [
+     1.396,
+     1.013
+    ],
+    "logGap": [
+     2.303,
+     2.696
+    ],
+    "posMsg": [
+     4152.284,
+     4149.144
+    ]
+   },
+   "K5_posNonNull": 0.7002,
+   "negNonNull": 0.4442,
+   "shuffledPosNonNull": 0.4289,
+   "posMedianExtent": 190,
+   "negMedianExtent": 0
+  },
+  "C:STRICT-NONINIT": {
+   "name": "C:STRICT-NONINIT",
+   "n": 796,
+   "pairs": 398,
+   "days": 8,
+   "auc": {
+    "S_ENTRY": 0.7136,
+    "S_OWN": 0.6495,
+    "S_ALL": 0.6089,
+    "S_SPAN": 0.601,
+    "R_LOCAL": 0.6002,
+    "R_BURST": 0.5697,
+    "R_RECENCY": 0.5679,
+    "R_MSGLEN": 0.4977,
+    "R_IDX": 0.5019,
+    "R_FREQ": 0.514,
+    "R_POSMSG": 0.496,
+    "X_EXT": 0.7278,
+    "X_NONNULL": 0.6244,
+    "IMP": 0.794,
+    "FULL": 0.8142,
+    "RIV": 0.6279,
+    "RIVIMP": 0.7959,
+    "POS": 0.4924,
+    "IMPS": 0.5348
+   },
+   "ci": {
+    "S_ENTRY": [
+     0.6671,
+     0.7494
+    ],
+    "S_OWN": [
+     0.5992,
+     0.6983
+    ],
+    "S_ALL": [
+     0.5736,
+     0.641
+    ],
+    "S_SPAN": [
+     0.5535,
+     0.6485
+    ],
+    "R_LOCAL": [
+     0.5777,
+     0.6199
+    ],
+    "R_BURST": [
+     0.5372,
+     0.6001
+    ],
+    "R_RECENCY": [
+     0.5423,
+     0.5961
+    ],
+    "R_MSGLEN": [
+     0.4915,
+     0.5036
+    ],
+    "R_IDX": [
+     0.4988,
+     0.5054
+    ],
+    "R_FREQ": [
+     0.5033,
+     0.5254
+    ],
+    "R_POSMSG": [
+     0.4653,
+     0.5211
+    ],
+    "X_EXT": [
+     0.679,
+     0.769
+    ],
+    "X_NONNULL": [
+     0.578,
+     0.6663
+    ],
+    "IMP": [
+     0.7549,
+     0.831
+    ],
+    "FULL": [
+     0.773,
+     0.8521
+    ],
+    "RIV": [
+     0.6052,
+     0.6514
+    ],
+    "RIVIMP": [
+     0.7614,
+     0.8306
+    ],
+    "POS": [
+     0.4826,
+     0.5082
+    ],
+    "IMPS": [
+     0.4846,
+     0.5891
+    ]
+   },
+   "flipQ95": {
+    "S_ENTRY": 0.5251,
+    "S_OWN": 0.5279,
+    "S_ALL": 0.5339,
+    "S_SPAN": 0.5298,
+    "R_LOCAL": 0.5179,
+    "IMP": 0.5393,
+    "FULL": 0.5385,
+    "RIV": 0.5227,
+    "RIVIMP": 0.538,
+    "IMPS": 0.5285
+   },
+   "wAuc": {},
+   "increment": {
+    "point": 0.168,
+    "ci": [
+     0.1383,
+     0.1948
+    ]
+   },
+   "matching": {
+    "init": [
+     0,
+     0
+    ],
+    "idx": [
+     4.982,
+     4.899
+    ],
+    "logLen": [
+     1.98,
+     1.981
+    ],
+    "logDayCount": [
+     3.012,
+     2.976
+    ],
+    "logNwin": [
+     1.731,
+     1.426
+    ],
+    "last16": [
+     1.384,
+     1.053
+    ],
+    "logGap": [
+     2.302,
+     2.653
+    ],
+    "posMsg": [
+     4070.178,
+     4098.598
+    ]
+   },
+   "K5_posNonNull": 0.706,
+   "negNonNull": 0.4573,
+   "shuffledPosNonNull": 0.4648,
+   "posMedianExtent": 153,
+   "negMedianExtent": 0
+  },
+  "C:POOL": {
+   "name": "C:POOL",
+   "n": 1874,
+   "pairs": 937,
+   "days": 8,
+   "auc": {
+    "S_ENTRY": 0.6841,
+    "S_OWN": 0.6317,
+    "S_ALL": 0.5836,
+    "S_SPAN": 0.6193,
+    "R_LOCAL": 0.6071,
+    "R_BURST": 0.5819,
+    "R_RECENCY": 0.5533,
+    "R_MSGLEN": 0.4947,
+    "R_IDX": 0.5004,
+    "R_FREQ": 0.5085,
+    "R_POSMSG": 0.5142,
+    "X_EXT": 0.6844,
+    "X_NONNULL": 0.6078,
+    "IMP": 0.7407,
+    "FULL": 0.7795,
+    "RIV": 0.6341,
+    "RIVIMP": 0.7389,
+    "POS": 0.5056,
+    "IMPS": 0.5658
+   },
+   "ci": {
+    "S_ENTRY": [
+     0.638,
+     0.6783
+    ],
+    "S_OWN": [
+     0.5883,
+     0.6378
+    ],
+    "S_ALL": [
+     0.5302,
+     0.5993
+    ],
+    "S_SPAN": [
+     0.6042,
+     0.6654
+    ],
+    "R_LOCAL": [
+     0.5867,
+     0.6091
+    ],
+    "R_BURST": [
+     0.5383,
+     0.63
+    ],
+    "R_RECENCY": [
+     0.4845,
+     0.5811
+    ],
+    "R_MSGLEN": [
+     0.4791,
+     0.503
+    ],
+    "R_IDX": [
+     0.5,
+     0.5
+    ],
+    "R_FREQ": [
+     0.4928,
+     0.5208
+    ],
+    "R_POSMSG": [
+     0.499,
+     0.5572
+    ],
+    "X_EXT": [
+     0.6205,
+     0.6694
+    ],
+    "X_NONNULL": [
+     0.5684,
+     0.608
+    ],
+    "IMP": [
+     0.6791,
+     0.7409
+    ],
+    "FULL": [
+     0.7096,
+     0.7813
+    ],
+    "RIV": [
+     0.6032,
+     0.6426
+    ],
+    "RIVIMP": [
+     0.67,
+     0.7359
+    ],
+    "POS": [
+     0.4942,
+     0.5212
+    ],
+    "IMPS": [
+     0.5612,
+     0.5994
+    ]
+   },
+   "flipQ95": {
+    "S_ENTRY": 0.5176,
+    "S_OWN": 0.5181,
+    "S_ALL": 0.5211,
+    "S_SPAN": 0.5197,
+    "R_LOCAL": 0.5137,
+    "IMP": 0.5213,
+    "FULL": 0.5227,
+    "RIV": 0.5173,
+    "RIVIMP": 0.5213,
+    "IMPS": 0.5167
+   },
+   "wAuc": {
+    "S_ENTRY": 0.6581,
+    "S_OWN": 0.6155,
+    "S_ALL": 0.5655,
+    "S_SPAN": 0.6391,
+    "R_LOCAL": 0.598,
+    "R_BURST": 0.5848,
+    "R_RECENCY": 0.5359,
+    "R_MSGLEN": 0.4902,
+    "R_IDX": 0.5,
+    "R_FREQ": 0.5054,
+    "R_POSMSG": 0.5262,
+    "X_EXT": 0.6461,
+    "X_NONNULL": 0.5917,
+    "IMP": 0.7087,
+    "FULL": 0.745,
+    "RIV": 0.6233,
+    "RIVIMP": 0.7034,
+    "POS": 0.5078,
+    "IMPS": 0.5794
+   },
+   "increment": {
+    "point": 0.1048,
+    "ci": [
+     0.0438,
+     0.1141
+    ]
+   },
+   "incrementWeighted": 0.0801,
+   "incrementFitNull": {
+    "B": 50,
+    "q95": 0.0345,
+    "mean": 0.0054
+   },
+   "matching": {
+    "init": [
+     0.512,
+     0.512
+    ],
+    "idx": [
+     2.196,
+     2.161
+    ],
+    "logLen": [
+     2.032,
+     2.041
+    ],
+    "logDayCount": [
+     2.757,
+     2.727
+    ],
+    "logNwin": [
+     1.678,
+     1.385
+    ],
+    "last16": [
+     1.478,
+     1.11
+    ],
+    "logGap": [
+     2.258,
+     2.557
+    ],
+    "posMsg": [
+     4181.371,
+     4063.718
+    ]
+   },
+   "K5_posNonNull": 0.7428,
+   "negNonNull": 0.5272,
+   "shuffledPosNonNull": 0.4621,
+   "posMedianExtent": 269,
+   "negMedianExtent": 0
+  },
+  "C:STRICT-POOL": {
+   "name": "C:STRICT-POOL",
+   "n": 1542,
+   "pairs": 771,
+   "days": 8,
+   "auc": {
+    "S_ENTRY": 0.6751,
+    "S_OWN": 0.6292,
+    "S_ALL": 0.5903,
+    "S_SPAN": 0.6164,
+    "R_LOCAL": 0.5849,
+    "R_BURST": 0.5745,
+    "R_RECENCY": 0.5516,
+    "R_MSGLEN": 0.4937,
+    "R_IDX": 0.5005,
+    "R_FREQ": 0.5013,
+    "R_POSMSG": 0.5077,
+    "X_EXT": 0.6849,
+    "X_NONNULL": 0.607,
+    "IMP": 0.7425,
+    "FULL": 0.773,
+    "RIV": 0.6152,
+    "RIVIMP": 0.7359,
+    "POS": 0.5072,
+    "IMPS": 0.5503
+   },
+   "ci": {
+    "S_ENTRY": [
+     0.6618,
+     0.6875
+    ],
+    "S_OWN": [
+     0.6029,
+     0.661
+    ],
+    "S_ALL": [
+     0.5556,
+     0.6199
+    ],
+    "S_SPAN": [
+     0.5772,
+     0.6537
+    ],
+    "R_LOCAL": [
+     0.5716,
+     0.6001
+    ],
+    "R_BURST": [
+     0.5434,
+     0.6042
+    ],
+    "R_RECENCY": [
+     0.5245,
+     0.5778
+    ],
+    "R_MSGLEN": [
+     0.4888,
+     0.4988
+    ],
+    "R_IDX": [
+     0.4996,
+     0.5013
+    ],
+    "R_FREQ": [
+     0.4881,
+     0.5104
+    ],
+    "R_POSMSG": [
+     0.4851,
+     0.5251
+    ],
+    "X_EXT": [
+     0.6597,
+     0.7094
+    ],
+    "X_NONNULL": [
+     0.5735,
+     0.6347
+    ],
+    "IMP": [
+     0.7141,
+     0.7678
+    ],
+    "FULL": [
+     0.7477,
+     0.7949
+    ],
+    "RIV": [
+     0.5973,
+     0.634
+    ],
+    "RIVIMP": [
+     0.7144,
+     0.7553
+    ],
+    "POS": [
+     0.4996,
+     0.5162
+    ],
+    "IMPS": [
+     0.5198,
+     0.5785
+    ]
+   },
+   "flipQ95": {
+    "S_ENTRY": 0.5182,
+    "S_OWN": 0.5205,
+    "S_ALL": 0.521,
+    "S_SPAN": 0.5221,
+    "R_LOCAL": 0.5145,
+    "IMP": 0.5239,
+    "FULL": 0.5245,
+    "RIV": 0.5178,
+    "RIVIMP": 0.5244,
+    "IMPS": 0.5193
+   },
+   "wAuc": {},
+   "increment": {
+    "point": 0.1206,
+    "ci": [
+     0.0895,
+     0.1483
+    ]
+   },
+   "matching": {
+    "init": [
+     0.484,
+     0.484
+    ],
+    "idx": [
+     2.572,
+     2.529
+    ],
+    "logLen": [
+     2.081,
+     2.093
+    ],
+    "logDayCount": [
+     2.813,
+     2.808
+    ],
+    "logNwin": [
+     1.707,
+     1.464
+    ],
+    "last16": [
+     1.503,
+     1.184
+    ],
+    "logGap": [
+     2.226,
+     2.506
+    ],
+    "posMsg": [
+     4142.664,
+     4080.034
+    ]
+   },
+   "K5_posNonNull": 0.7523,
+   "negNonNull": 0.5383,
+   "shuffledPosNonNull": 0.4812,
+   "posMedianExtent": 288,
+   "negMedianExtent": 0
+  }
+ }
+}

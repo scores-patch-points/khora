@@ -1,0 +1,5 @@
+quantiles 5/25/50/75/95 of the mean unit length across the atlas-P+ pockets
+all      n 275 meanLen 4.22 5.75 12.95 18.29 32.49  pairMeanLen 4.85 6.45 13.96 19.66 33.16 CV 0.63
+band-S   n 275 meanLen 3.37 3.66 3.91 4.27 4.91  pairMeanLen 3.28 3.55 3.82 4.15 4.76 CV 0.121
+band-M   n 275 meanLen 7.88 8.71 9.47 9.98 10.67  pairMeanLen 7.91 8.83 9.53 9.82 10.6 CV 0.099
+band-L   n 274 meanLen 16.88 19.1 22.57 24.32 26.39  pairMeanLen 17.11 19.71 22.95 24.69 26.49 CV 0.143

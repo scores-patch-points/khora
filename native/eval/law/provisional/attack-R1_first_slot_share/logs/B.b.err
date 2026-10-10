@@ -1,0 +1,81 @@
+0s R kubuntu/2005-07-15.txt
+0s R kubuntu/2005-11-15.txt
+0s R kubuntu/2006-07-15.txt
+0s R kubuntu/2007-07-15.txt
+0s R kubuntu/2008-03-15.txt
+0s R kubuntu/2008-07-15.txt
+1s R ubuntu/2004-11-15.txt
+1s R ubuntu/2005-03-15.txt
+1s R ubuntu/2006-07-15.txt
+1s R ubuntu/2007-03-15.txt
+2s R ubuntu/2009-07-15.txt
+2s R ubuntu/2012-07-15.txt
+2s R ubuntu/2014-07-15.txt
+2s R ubuntu/2015-03-15.txt
+2s C ubuntu/2006-03-15.txt
+3s C ubuntu/2008-03-15.txt
+3s C ubuntu/2009-03-15.txt
+3s C ubuntu/2010-07-15.txt
+3s C ubuntu/2011-07-15.txt
+3s C ubuntu/2013-03-15.txt
+3s C ubuntu/2014-03-15.txt
+4s C kubuntu/2007-03-15.txt
+4s C kubuntu/2009-07-15.txt
+4s C kubuntu/2010-07-15.txt
+4s C kubuntu/2011-07-15.txt
+4s C kubuntu/2012-07-15.txt
+4s C kubuntu/2014-07-15.txt
+4s C xubuntu/2007-07-15.txt
+4s C xubuntu/2008-07-15.txt
+4s C xubuntu/2009-07-15.txt
+4s C xubuntu/2011-03-15.txt
+4s C xubuntu/2012-03-15.txt
+4s C xubuntu/2013-07-15.txt
+4s C ubuntu-server/2008-03-15.txt
+4s C ubuntu-server/2009-07-15.txt
+4s C ubuntu-server/2010-07-15.txt
+4s C ubuntu-server/2011-07-15.txt
+4s C ubuntu-server/2012-07-15.txt
+4s C ubuntu-server/2013-07-15.txt
+4s D ubuntu/2005-07-15.txt
+4s D ubuntu/2007-07-15.txt
+5s D ubuntu/2008-07-15.txt
+5s D ubuntu/2010-03-15.txt
+5s D ubuntu/2011-03-15.txt
+5s D ubuntu/2012-03-15.txt
+5s D ubuntu/2013-07-15.txt
+5s D ubuntu/2015-07-15.txt
+6s D kubuntu/2006-03-15.txt
+6s D kubuntu/2009-03-15.txt
+6s D kubuntu/2010-03-15.txt
+6s D kubuntu/2011-03-15.txt
+6s D kubuntu/2012-03-15.txt
+6s D kubuntu/2013-03-15.txt
+6s D kubuntu/2015-07-15.txt
+6s D xubuntu/2007-03-15.txt
+6s D xubuntu/2008-03-15.txt
+6s D xubuntu/2009-03-15.txt
+6s D xubuntu/2010-07-15.txt
+6s D xubuntu/2011-07-15.txt
+6s D xubuntu/2013-03-15.txt
+6s D xubuntu/2014-03-15.txt
+6s D ubuntu-server/2007-11-15.txt
+6s D ubuntu-server/2008-07-15.txt
+6s D ubuntu-server/2010-03-15.txt
+6s D ubuntu-server/2011-03-15.txt
+6s D ubuntu-server/2012-03-15.txt
+6s D ubuntu-server/2013-03-15.txt
+6s D ubuntu-server/2014-07-15.txt
+1s base n=5654 auc=0.871 nPos=49617
+3s spoke1 n=5796 auc=0.8288 nPos=51821
+4s spoke2 n=5663 auc=0.851 nPos=50734
+5s spoke5 n=5540 auc=0.8736 nPos=47613
+7s spoke10 n=5387 auc=0.8636 nPos=43057
+8s topicNone n=5722 auc=0.8613 nPos=57321
+10s topic100 n=5722 auc=0.8611 nPos=56095
+11s topic1000 n=4897 auc=0.8744 nPos=40438
+12s laterMsg n=5653 auc=0.8689 nPos=49608
+14s cap1000 n=9023 auc=0.8492 nPos=49617
+15s seed2 n=5654 auc=0.8734 nPos=49617
+16s seed3 n=5654 auc=0.8742 nPos=49617
+18s seed4 n=5654 auc=0.8712 nPos=49617

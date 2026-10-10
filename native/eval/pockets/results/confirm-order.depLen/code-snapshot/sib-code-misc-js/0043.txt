@@ -1,0 +1,143 @@
+// free-bench.test.mjs — the benchmark's own scoring is falsified here before any model is trusted to it.
+import test from "node:test";
+import assert from "node:assert/strict";
+import {
+  makeOrderTask, scoreOrderTurn, auditOrderMessages, makeMaskTask, scoreMaskTurn, auditMaskMessages, extractCode, stripThink,
+  classifyFailure, foldDeltas, summarizeModel, verdictOf, pctile, BAR,
+} from "./free-bench.js";
+
+/** The oracle: the exact answer to a turn, in the symbols the model was shown. */
+const oracle = (task, idx, { drop = false, add = false } = {}) => {
+  const t = task.turns[idx], n = task.situation.n, sym = task.capsule.events;
+  const reply = {};
+  task.capsule.worlds.forEach((_, j) => {
+    const w = t.truth[j];
+    let pairs = w ? [...w].map((p) => [sym[Math.floor(p / n)], sym[p % n]]) : [];
+    if (j === task.key.real) { if (drop) pairs = pairs.slice(1); if (add) pairs.push([sym[0], sym[0 === 1 ? 2 : 1]]); }
+    reply[String(j + 1)] = pairs;
+  });
+  return JSON.stringify(reply);
+};
+
+test("order tasks are deterministic per seed and differ across seeds", () => {
+  const a = makeOrderTask(11), b = makeOrderTask(11), c = makeOrderTask(12);
+  assert.equal(a.turns.map((t) => t.message).join("|").replace(/E[a-z0-9]{5}/g, "S") , b.turns.map((t) => t.message).join("|").replace(/E[a-z0-9]{5}/g, "S"));
+  assert.notEqual(a.turns.map((t) => t.kind).join() + a.turns[0].message.length, c.turns.map((t) => t.kind).join() + c.turns[0].message.length + "x");
+  assert.ok(a.turns.length >= 2);
+});
+
+test("every follow-up is symbol-only and the real world's truth moves with it", async () => {
+  for (let seed = 1; seed <= 60; seed++) {
+    const task = makeOrderTask(seed, { K: 3, turns: 3 });
+    const audit = auditOrderMessages(task.turns.map((t) => ({ role: "user", content: t.message })), task.issued);
+    assert.ok(audit.ok, `seed ${seed}: ${JSON.stringify(audit.leaks)}`);
+    for (let i = 0; i < task.turns.length; i++) {
+      const s = await scoreOrderTurn(task, i, oracle(task, i));
+      assert.ok(s.exact && s.accepted && s.allWorldsExact && s.gateAgrees, `seed ${seed} turn ${i} ${task.turns[i].kind}: ${JSON.stringify(s)}`);
+    }
+    // follow-ups really change the state: the real world's derived set differs between consecutive turns often enough to test memory
+  }
+});
+
+test("the answer to turn 1 is NOT the answer to turn 2 (a model that ignores the follow-up fails)", async () => {
+  let differ = 0, total = 0;
+  for (let seed = 1; seed <= 60; seed++) {
+    const task = makeOrderTask(seed);
+    for (let i = 1; i < task.turns.length; i++) { total++; if ((await scoreOrderTurn(task, i, oracle(task, i - 1))).exact === false) differ++; }
+  }
+  assert.ok(differ / total > 0.8, `only ${differ}/${total} follow-ups change the answer`);
+});
+
+test("the gate rejects dropped, extra and prose answers, and the independent check agrees", async () => {
+  const task = makeOrderTask(5);
+  for (const text of [oracle(task, 0, { drop: true }), oracle(task, 0, { add: true }), "I think E1 comes first.", "{}", ""]) {
+    const s = await scoreOrderTurn(task, 0, text);
+    assert.equal(s.exact, false); assert.equal(s.accepted, false);
+  }
+});
+
+test("a leak in the outbound bytes is caught: a real word, an unissued symbol, a name", () => {
+  const task = makeOrderTask(3);
+  const msgs = [{ role: "user", content: task.turns[0].message + "\nIts about Eleanor Voss at Acme" }];
+  const a = auditOrderMessages(msgs, task.issued);
+  assert.equal(a.ok, false); assert.ok(a.leaks.some((l) => l.word === "Eleanor"));
+  const b = auditOrderMessages([{ role: "user", content: task.turns[0].message + " Ezzzzz<Eyyyyy" }], task.issued);
+  assert.ok(b.leaks.some((l) => l.why.includes("never issued")));
+  const c = auditOrderMessages([{ role: "assistant", content: "anything Eleanor" }], task.issued);
+  assert.ok(c.ok, "the model's own reply is not ours to audit");
+});
+
+test("mask task: ids have the de-identifier's shape; intact passes; each failure kind is named and only the unrecoverable ones fail", () => {
+  for (let seed = 1; seed <= 60; seed++) {
+    const task = makeMaskTask(seed, { turns: 3 });
+    assert.ok(task.placeholders.length >= 8);
+    assert.ok(task.placeholders.every((p) => /^[A-Z]+_[abcdefghjkmnpqrstuvwxyz23456789]{6}$/.test(p)), task.placeholders.join());
+    assert.ok(auditMaskMessages(task.turns.map((t) => ({ role: "user", content: t.message }))).ok);
+    const good = task.code + `\ndef ${task.turns[0].fn}():\n    return []\n`;
+    const s = scoreMaskTurn(task, 0, "```python\n" + good + "```");
+    assert.ok(s.exact && s.placeholdersIntact, JSON.stringify(s));
+    const p = task.placeholders[0], suffix = p.split("_")[1];
+    // lowercased: the map home ignores case, so it is recoverable — reported, not failed
+    const lower = scoreMaskTurn(task, 0, good.split(p).join(p.toLowerCase()));
+    assert.ok(lower.exact && !lower.placeholdersIntact && lower.placeholdersRecoverable && lower.caseOnly.includes(p), JSON.stringify(lower));
+    // a dropped character is NOT recoverable
+    const dropped = scoreMaskTurn(task, 0, good.split(p).join(p.slice(0, -1)));
+    assert.ok(!dropped.exact && dropped.typo.some((x) => x.was === p), JSON.stringify(dropped));
+    // a changed character is NOT recoverable
+    const changed = scoreMaskTurn(task, 0, good.split(p).join(p.slice(0, -1) + (suffix.endsWith("z") ? "y" : "z")));
+    assert.ok(!changed.exact && changed.failureKinds.typo === 1);
+    // "fixed" into a word: the id is gone
+    const word = scoreMaskTurn(task, 0, good.split(p).join(p.split("_")[0].toLowerCase() === "path" ? "/etc/app" : "Alice"));
+    assert.ok(!word.exact && word.lost.includes(p));
+    // a fabricated id
+    const invented = scoreMaskTurn(task, 0, good + `\nX = "TERM_qqqqqq"\n`);
+    assert.ok(!invented.exact && invented.invented.includes("TERM_qqqqqq"));
+    // ordinary identifiers that merely look like a kind are not "invented"
+    const benign = scoreMaskTurn(task, 0, good + "\nuser_name = 1\npath_list = []\n");
+    assert.ok(benign.exact && benign.invented.length === 0, JSON.stringify(benign));
+    const noEdit = scoreMaskTurn(task, 0, task.code);
+    assert.equal(noEdit.editDone, false); assert.equal(noEdit.placeholdersIntact, true);
+    assert.equal(scoreMaskTurn(task, 0, "").answered, false);
+  }
+});
+
+test("mask audit refuses a real email, a home path and a key", () => {
+  for (const bad of ["mail me at a.b@example.com", "/Users/someone/proj", "sk-abcdefghijklmnop12345"]) assert.equal(auditMaskMessages([{ role: "user", content: bad }]).ok, false);
+});
+
+test("reasoning is not the answer; fenced code is", () => {
+  assert.equal(stripThink("<think>{ not json }</think>{\"1\":[]}"), "{\"1\":[]}");
+  assert.equal(extractCode("sure:\n```python\nx = 1\n```\nthanks"), "x = 1");
+});
+
+test("failures are named by what a person can do about them", () => {
+  assert.equal(classifyFailure({ status: 429, body: '{"error":{"message":"Daily token quota exceeded. Retry after 60 seconds.","code":"quota_exceeded"}}' }).kind, "quota");
+  assert.equal(classifyFailure({ status: 429, body: '{"error":{"message":"Daily token quota exceeded. Retry after 60 seconds."}}' }).retryAfterMs, 60000);
+  assert.equal(classifyFailure({ status: 429, body: '{"message":"API rate limit exceeded"}' }).kind, "rate_limited");
+  assert.equal(classifyFailure({ status: 500, body: '{"error":"ENOSPC: no space left on device"}' }).kind, "server");
+  assert.equal(classifyFailure({ status: 401 }).kind, "auth");
+  assert.equal(classifyFailure({ error: Object.assign(new Error("The operation was aborted due to timeout"), { name: "TimeoutError" }) }).kind, "timeout");
+  assert.equal(classifyFailure({ error: new Error("fetch failed") }).kind, "network");
+  assert.equal(classifyFailure({ status: 200 }).kind, "empty");
+});
+
+test("stream deltas fold into content and reasoning separately", () => {
+  const r = foldDeltas(['{"choices":[{"delta":{"reasoning_content":"hm "}}]}', '{"choices":[{"delta":{"content":"o"}}]}', '{"choices":[{"delta":{"content":"k"}}],"usage":{"completion_tokens":2}}', "[DONE]", "garbage"]);
+  assert.deepEqual([r.content, r.reasoning, r.usage.completion_tokens], ["ok", "hm ", 2]);
+});
+
+const turn = (o) => ({ status: "ok", ms: 3000, ttftMs: 500, answered: true, exact: true, chars: 100, gateAgrees: true, ...o });
+test("verdicts: the bar decides, and a disagreeing gate voids the run", () => {
+  const good = summarizeModel({ probe: { ok: true, attempts: [] }, trials: [{ turns: [turn(), turn(), turn()] }, { turns: [turn(), turn(), turn()] }] });
+  assert.equal(good.verdict.grade, "WORTH_IT"); assert.equal(good.chainsAllExact, 2); assert.equal(good.msPerAccepted, 3000);
+  const down = summarizeModel({ probe: { ok: false, attempts: [{ status: "quota" }] }, trials: [] });
+  assert.equal(down.verdict.grade, "DOWN"); assert.equal(down.failures.quota, 1);
+  const wrong = summarizeModel({ probe: { ok: true, attempts: [] }, trials: [{ turns: [turn({ exact: false }), turn({ exact: false }), turn()] }] });
+  assert.equal(wrong.verdict.grade, "NOT_WORTH_IT");
+  const flaky = summarizeModel({ probe: { ok: true, attempts: [] }, trials: [{ turns: [turn(), turn({ status: "rate_limited", answered: false, exact: false }), turn({ status: "skipped" })] }, { turns: [turn(), turn({ status: "rate_limited", answered: false, exact: false }), turn()] }] });
+  assert.equal(flaky.verdict.grade, "MARGINAL");
+  const bad = summarizeModel({ probe: { ok: true, attempts: [] }, trials: [{ turns: [turn({ gateAgrees: false })] }] });
+  assert.match(bad.verdict.reasons.join(" "), /DO NOT TRUST/);
+  assert.equal(pctile([5, 1, 3], 0.5), 3);
+  assert.ok(BAR.worthIt.accuracyOfAnswered > BAR.marginal.accuracyOfAnswered);
+});

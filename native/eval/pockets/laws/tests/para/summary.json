@@ -1,0 +1,1040 @@
+{
+ "scorecardOnFourRealTexts": {
+  "adjNg2": {
+   "predicted": "universal+",
+   "dracula": "PRESENT+",
+   "quran-en": "PRESENT+",
+   "hebrew-torah": "PRESENT+",
+   "code-bitcoin": "PRESENT+"
+  },
+  "adjNg3": {
+   "predicted": "specific",
+   "dracula": "PRESENT+",
+   "quran-en": "PRESENT+",
+   "hebrew-torah": "PRESENT+",
+   "code-bitcoin": "PRESENT+"
+  },
+  "adjNg4": {
+   "predicted": "specific",
+   "dracula": "PRESENT+",
+   "quran-en": "PRESENT+",
+   "hebrew-torah": "PRESENT+",
+   "code-bitcoin": "PRESENT+"
+  },
+  "dupShare": {
+   "predicted": "universal+",
+   "dracula": "PRESENT+",
+   "quran-en": "PRESENT+",
+   "hebrew-torah": "PRESENT+",
+   "code-bitcoin": "PRESENT+"
+  },
+  "formulaCov": {
+   "predicted": "universal+",
+   "dracula": "PRESENT+",
+   "quran-en": "PRESENT+",
+   "hebrew-torah": "PRESENT+",
+   "code-bitcoin": "PRESENT+"
+  },
+  "lagDecay": {
+   "predicted": "specific",
+   "dracula": "PRESENT-",
+   "quran-en": "PRESENT-",
+   "hebrew-torah": "ABSENT",
+   "code-bitcoin": "AMBIGUOUS"
+  },
+  "lcsLift": {
+   "predicted": "specific",
+   "dracula": "PRESENT+",
+   "quran-en": "PRESENT+",
+   "hebrew-torah": "PRESENT+",
+   "code-bitcoin": "PRESENT+"
+  },
+  "posPar": {
+   "predicted": "universal+",
+   "dracula": "PRESENT+",
+   "quran-en": "PRESENT+",
+   "hebrew-torah": "PRESENT+",
+   "code-bitcoin": "PRESENT+"
+  },
+  "prefixCopy": {
+   "predicted": "specific",
+   "dracula": "PRESENT+",
+   "quran-en": "PRESENT+",
+   "hebrew-torah": "PRESENT+",
+   "code-bitcoin": "PRESENT+"
+  },
+  "refrain": {
+   "predicted": "specific",
+   "dracula": "PRESENT+",
+   "quran-en": "PRESENT+",
+   "hebrew-torah": "PRESENT+",
+   "code-bitcoin": "PRESENT+"
+  },
+  "suffixCopy": {
+   "predicted": "specific",
+   "dracula": "PRESENT+",
+   "quran-en": "PRESENT+",
+   "hebrew-torah": "PRESENT+",
+   "code-bitcoin": "PRESENT+"
+  },
+  "tmplReuse": {
+   "predicted": "universal+",
+   "dracula": "PRESENT+",
+   "quran-en": "PRESENT+",
+   "hebrew-torah": "PRESENT+",
+   "code-bitcoin": "PRESENT+"
+  }
+ },
+ "plantedRecovery": {
+  "pl-parallel": [
+   {
+    "stat": "prefixCopy",
+    "expectedSign": 1,
+    "phenomenon": "anaphora",
+    "discover": 419.4367129201444,
+    "confirm": 337.4323076691369,
+    "recovered": true
+   },
+   {
+    "stat": "suffixCopy",
+    "expectedSign": 1,
+    "phenomenon": "epiphora",
+    "discover": 473.5065677456131,
+    "confirm": 588.4998726049935,
+    "recovered": true
+   },
+   {
+    "stat": "posPar",
+    "expectedSign": 1,
+    "phenomenon": "anaphora",
+    "discover": 108.60288730484122,
+    "confirm": 145.8876127095707,
+    "recovered": true
+   },
+   {
+    "stat": "adjNg2",
+    "expectedSign": 1,
+    "phenomenon": "adjacent-unit-overlap",
+    "discover": 315.9462596725695,
+    "confirm": 757.9037370050713,
+    "recovered": true
+   },
+   {
+    "stat": "adjNg3",
+    "expectedSign": 1,
+    "phenomenon": "adjacent-unit-overlap",
+    "discover": 1003.1300139079358,
+    "confirm": 875.1523653114023,
+    "recovered": true
+   },
+   {
+    "stat": "lcsLift",
+    "expectedSign": 1,
+    "phenomenon": "adjacent-unit-overlap",
+    "discover": 35.13617384066783,
+    "confirm": 43.55625869783708,
+    "recovered": true
+   },
+   {
+    "stat": "lagDecay",
+    "expectedSign": -1,
+    "phenomenon": "adjacent-unit-overlap (lag-1 only)",
+    "discover": -21.613005393075515,
+    "confirm": -31.846403236153908,
+    "recovered": true
+   }
+  ],
+  "pl-burst": [
+   {
+    "stat": "adjNg2",
+    "expectedSign": 1,
+    "phenomenon": "local-repetition across units",
+    "discover": 37.96281544084137,
+    "confirm": 32.952220212218556,
+    "recovered": true
+   },
+   {
+    "stat": "lagDecay",
+    "expectedSign": -1,
+    "phenomenon": "local-repetition fades with lag",
+    "discover": -14.18331913530488,
+    "confirm": -18.28819742844218,
+    "recovered": true
+   },
+   {
+    "stat": "posPar",
+    "expectedSign": 1,
+    "phenomenon": "local-repetition",
+    "discover": 30.10762365845118,
+    "confirm": 64.32222342434657,
+    "recovered": true
+   }
+  ],
+  "pl-markov": [
+   {
+    "stat": "tmplReuse",
+    "expectedSign": 1,
+    "phenomenon": "rank-bin-flow",
+    "discover": 70.25655416240087,
+    "confirm": 92.7741192317577,
+    "recovered": true
+   },
+   {
+    "stat": "formulaCov",
+    "expectedSign": 1,
+    "phenomenon": "rank-bin-flow",
+    "discover": 18.79569113535381,
+    "confirm": 32.046530741756,
+    "recovered": true
+   }
+  ],
+  "pl-frames": [
+   {
+    "stat": "tmplReuse",
+    "expectedSign": 1,
+    "phenomenon": "rigid-frames",
+    "discover": 117.94425511522753,
+    "confirm": 103.33043605514294,
+    "recovered": true
+   },
+   {
+    "stat": "formulaCov",
+    "expectedSign": 1,
+    "phenomenon": "rigid-frames",
+    "discover": 116.36754279397105,
+    "confirm": 91.00707221623064,
+    "recovered": true
+   },
+   {
+    "stat": "refrain",
+    "expectedSign": 1,
+    "phenomenon": "rigid-frames (repeated short units)",
+    "discover": 50.946577558141556,
+    "confirm": 23.98348388633343,
+    "recovered": true
+   },
+   {
+    "stat": "dupShare",
+    "expectedSign": 1,
+    "phenomenon": "rigid-frames",
+    "discover": 56.86315474566982,
+    "confirm": 30.49866960770706,
+    "recovered": true
+   }
+  ]
+ },
+ "lawFreeWorldsGate": {
+  "pl-null": {
+   "definedCells": 19,
+   "nullZ": 5,
+   "absZge4": 1
+  },
+  "pl-null2": {
+   "definedCells": 24,
+   "nullZ": 0,
+   "absZge4": 0
+  },
+  "pl-length": {
+   "definedCells": 19,
+   "nullZ": 5,
+   "absZge4": 0
+  }
+ },
+ "iidCalibration": {
+  "reps": 60,
+  "configs": [
+   "a10",
+   "rho07",
+   "a13",
+   "m4"
+  ],
+  "perStat": {
+   "adjNg2": {
+    "cells": 240,
+    "definedZ": 240,
+    "nullZ": 0,
+    "ge4": 0,
+    "ge3": 6,
+    "ge2": 29,
+    "meanZ": -0.01,
+    "sdZ": 1.21,
+    "maxAbsZ": 3.7
+   },
+   "adjNg3": {
+    "cells": 240,
+    "definedZ": 239,
+    "nullZ": 1,
+    "ge4": 2,
+    "ge3": 5,
+    "ge2": 17,
+    "meanZ": 0.08,
+    "sdZ": 1.14,
+    "maxAbsZ": 4.3
+   },
+   "adjNg4": {
+    "cells": 240,
+    "definedZ": 105,
+    "nullZ": 135,
+    "ge4": 0,
+    "ge3": 0,
+    "ge2": 7,
+    "meanZ": 0.06,
+    "sdZ": 1.02,
+    "maxAbsZ": 3
+   },
+   "prefixCopy": {
+    "cells": 240,
+    "definedZ": 240,
+    "nullZ": 0,
+    "ge4": 1,
+    "ge3": 1,
+    "ge2": 15,
+    "meanZ": 0.11,
+    "sdZ": 1.15,
+    "maxAbsZ": 7.3
+   },
+   "suffixCopy": {
+    "cells": 240,
+    "definedZ": 240,
+    "nullZ": 0,
+    "ge4": 1,
+    "ge3": 10,
+    "ge2": 23,
+    "meanZ": 0.06,
+    "sdZ": 1.25,
+    "maxAbsZ": 6
+   },
+   "posPar": {
+    "cells": 240,
+    "definedZ": 240,
+    "nullZ": 0,
+    "ge4": 3,
+    "ge3": 6,
+    "ge2": 22,
+    "meanZ": 0.09,
+    "sdZ": 1.24,
+    "maxAbsZ": 4.9
+   },
+   "lcsLift": {
+    "cells": 240,
+    "definedZ": 240,
+    "nullZ": 0,
+    "ge4": 1,
+    "ge3": 5,
+    "ge2": 23,
+    "meanZ": -0.05,
+    "sdZ": 1.25,
+    "maxAbsZ": 5.3
+   },
+   "lagDecay": {
+    "cells": 240,
+    "definedZ": 240,
+    "nullZ": 0,
+    "ge4": 1,
+    "ge3": 7,
+    "ge2": 20,
+    "meanZ": 0.1,
+    "sdZ": 1.16,
+    "maxAbsZ": 4.1
+   },
+   "refrain": {
+    "cells": 240,
+    "definedZ": 149,
+    "nullZ": 91,
+    "ge4": 0,
+    "ge3": 3,
+    "ge2": 12,
+    "meanZ": -0.05,
+    "sdZ": 1.15,
+    "maxAbsZ": 3.7
+   },
+   "dupShare": {
+    "cells": 240,
+    "definedZ": 187,
+    "nullZ": 53,
+    "ge4": 1,
+    "ge3": 1,
+    "ge2": 16,
+    "meanZ": 0.04,
+    "sdZ": 1.15,
+    "maxAbsZ": 4.3
+   },
+   "formulaCov": {
+    "cells": 240,
+    "definedZ": 240,
+    "nullZ": 0,
+    "ge4": 2,
+    "ge3": 5,
+    "ge2": 27,
+    "meanZ": -0.1,
+    "sdZ": 1.23,
+    "maxAbsZ": 4.1
+   },
+   "tmplReuse": {
+    "cells": 240,
+    "definedZ": 240,
+    "nullZ": 0,
+    "ge4": 1,
+    "ge3": 4,
+    "ge2": 19,
+    "meanZ": 0.06,
+    "sdZ": 1.18,
+    "maxAbsZ": 7
+   }
+  }
+ },
+ "real": {
+  "dracula/discover": {
+   "adjNg2": {
+    "v": 0.0007294603710761294,
+    "nullMean": 0.00021211274433881045,
+    "z": 38.8
+   },
+   "adjNg3": {
+    "v": 0.00012131110634072684,
+    "nullMean": 0.0000081258356658509,
+    "z": 37
+   },
+   "adjNg4": {
+    "v": 0.00003846534309559502,
+    "nullMean": 0.0000013394914276432245,
+    "z": 34.9
+   },
+   "prefixCopy": {
+    "v": 0.013938315540144686,
+    "nullMean": 0.0022548678398379707,
+    "z": 14.3
+   },
+   "suffixCopy": {
+    "v": 0.005338078291970305,
+    "nullMean": 0.0002373887448811729,
+    "z": 14
+   },
+   "posPar": {
+    "v": 0.024440760368634074,
+    "nullMean": 0.013603139799943164,
+    "z": 10.2
+   },
+   "lcsLift": {
+    "v": 0.3373892971794703,
+    "nullMean": -0.005152355645259376,
+    "z": 19.7
+   },
+   "lagDecay": {
+    "v": -0.17801399572636,
+    "nullMean": 0.00013274423745315289,
+    "z": -12.5
+   },
+   "refrain": {
+    "v": 0.0032419687595393043,
+    "nullMean": 0.00023577954598295037,
+    "z": 9.9
+   },
+   "dupShare": {
+    "v": 0.025833333333139308,
+    "nullMean": 0.021833333333324843,
+    "z": 14.9
+   },
+   "formulaCov": {
+    "v": 0.031227733201376395,
+    "nullMean": 0.00001858793639257783,
+    "z": 530.9
+   },
+   "tmplReuse": {
+    "v": 0.10078455039183609,
+    "nullMean": 0.017290283645161254,
+    "z": 33.2
+   }
+  },
+  "dracula/confirm": {
+   "adjNg2": {
+    "v": 0.0006732725951223983,
+    "nullMean": 0.000208791178829415,
+    "z": 40.1
+   },
+   "adjNg3": {
+    "v": 0.00010432828821649309,
+    "nullMean": 0.0000075145080700167455,
+    "z": 32.9
+   },
+   "adjNg4": {
+    "v": 0.00002190339091612259,
+    "nullMean": 5.619087460217997e-7,
+    "z": 28
+   },
+   "prefixCopy": {
+    "v": 0.008718572586985829,
+    "nullMean": 0.0018921548954494937,
+    "z": 22.5
+   },
+   "suffixCopy": {
+    "v": 0.00486618004833872,
+    "nullMean": 0.000447592853106471,
+    "z": 11.6
+   },
+   "posPar": {
+    "v": 0.022367982101968664,
+    "nullMean": 0.01345150065881171,
+    "z": 14.2
+   },
+   "lcsLift": {
+    "v": 0.3025493616332824,
+    "nullMean": -0.0013868106481822906,
+    "z": 9
+   },
+   "lagDecay": {
+    "v": -0.16668965036842565,
+    "nullMean": 0.00210611334123314,
+    "z": -11.9
+   },
+   "refrain": {
+    "v": 0.00757424755829561,
+    "nullMean": 0.001474985050936084,
+    "z": 14.8
+   },
+   "dupShare": {
+    "v": 0.03098009763380105,
+    "nullMean": 0.02602328201282944,
+    "z": 20.9
+   },
+   "formulaCov": {
+    "v": 0.04101270553019276,
+    "nullMean": 0.0001660853679823049,
+    "z": 262.9
+   },
+   "tmplReuse": {
+    "v": 0.1155820160129224,
+    "nullMean": 0.025313077396822335,
+    "z": 23.1
+   }
+  },
+  "quran-en/discover": {
+   "adjNg2": {
+    "v": 0.0012545732697617495,
+    "nullMean": 0.0004453677142919332,
+    "z": 47.8
+   },
+   "adjNg3": {
+    "v": 0.00044162574067740934,
+    "nullMean": 0.00005636704627249855,
+    "z": 30.5
+   },
+   "adjNg4": {
+    "v": 0.00023699495704931905,
+    "nullMean": 0.000016900805621844484,
+    "z": 28.4
+   },
+   "prefixCopy": {
+    "v": 0.04772653982581687,
+    "nullMean": 0.006997742663679673,
+    "z": 34
+   },
+   "suffixCopy": {
+    "v": 0.010964205094751378,
+    "nullMean": 0.0018703643986555107,
+    "z": 9.3
+   },
+   "posPar": {
+    "v": 0.05886276729961537,
+    "nullMean": 0.029891132762259076,
+    "z": 26.6
+   },
+   "lcsLift": {
+    "v": 0.3161480610651779,
+    "nullMean": -0.0006240932354558027,
+    "z": 19.3
+   },
+   "lagDecay": {
+    "v": -0.15517599464783416,
+    "nullMean": 0.0024285444514134725,
+    "z": -12.9
+   },
+   "refrain": {
+    "v": 0.032216905900895654,
+    "nullMean": 0.0005422647529485403,
+    "z": 66.4
+   },
+   "dupShare": {
+    "v": 0.022929936305445153,
+    "nullMean": 0.0006687898090603994,
+    "z": 70.3
+   },
+   "formulaCov": {
+    "v": 0.3269418574182055,
+    "nullMean": 0.00036324226493889,
+    "z": 1187.1
+   },
+   "tmplReuse": {
+    "v": 0.3327989740300836,
+    "nullMean": 0.026001923693547722,
+    "z": 65.8
+   }
+  },
+  "quran-en/confirm": {
+   "adjNg2": {
+    "v": 0.0014256709582696203,
+    "nullMean": 0.00047389743058374735,
+    "z": 45.8
+   },
+   "adjNg3": {
+    "v": 0.0005531725237233331,
+    "nullMean": 0.00005804116108265589,
+    "z": 71.5
+   },
+   "adjNg4": {
+    "v": 0.00031278262486011954,
+    "nullMean": 0.00001674337645454216,
+    "z": 106.2
+   },
+   "prefixCopy": {
+    "v": 0.055285767650275375,
+    "nullMean": 0.00661187896885167,
+    "z": 29
+   },
+   "suffixCopy": {
+    "v": 0.010459469555826217,
+    "nullMean": 0.001606275681842817,
+    "z": 17.7
+   },
+   "posPar": {
+    "v": 0.06375204009054869,
+    "nullMean": 0.030031996360048652,
+    "z": 31.3
+   },
+   "lcsLift": {
+    "v": 0.34288232636299654,
+    "nullMean": -0.0014447217572524096,
+    "z": 16.3
+   },
+   "lagDecay": {
+    "v": -0.1671662935477798,
+    "nullMean": 0.0022228987143535052,
+    "z": -19.8
+   },
+   "refrain": {
+    "v": 0.02063375092075148,
+    "nullMean": 0.0005158437728823628,
+    "z": 43.2
+   },
+   "dupShare": {
+    "v": 0.016917984553401766,
+    "nullMean": 0.0010297903641912852,
+    "z": 54.8
+   },
+   "formulaCov": {
+    "v": 0.30996320407575695,
+    "nullMean": 0.0003113501273219299,
+    "z": 1346.6
+   },
+   "tmplReuse": {
+    "v": 0.31247686042206624,
+    "nullMean": 0.020621991854568478,
+    "z": 98.2
+   }
+  },
+  "hebrew-torah/discover": {
+   "adjNg2": {
+    "v": 0.0007183142952271737,
+    "nullMean": 0.000024677941655681935,
+    "z": 60.9
+   },
+   "adjNg3": {
+    "v": 0.00032193437345995335,
+    "nullMean": 0.000008968676593212876,
+    "z": 43.8
+   },
+   "adjNg4": {
+    "v": 0.00017453225336794276,
+    "nullMean": 0.000004880757205683039,
+    "z": 36.4
+   },
+   "prefixCopy": {
+    "v": 0.0051132213293385576,
+    "nullMean": 0.00021913805685471743,
+    "z": 15.9
+   },
+   "suffixCopy": {
+    "v": 0.016800584367956617,
+    "nullMean": 0.0005113221328429063,
+    "z": 46.2
+   },
+   "posPar": {
+    "v": 0.015708274357166374,
+    "nullMean": 0.0026976916115017957,
+    "z": 32.1
+   },
+   "lcsLift": {
+    "v": 1.156078947214155,
+    "nullMean": -0.006713080899226042,
+    "z": 29.8
+   },
+   "lagDecay": {
+    "v": -0.09710835648184002,
+    "nullMean": 0.155744704555309,
+    "z": -0.9
+   },
+   "refrain": {
+    "v": 0.020530973451059253,
+    "nullMean": 0.003362831858339632,
+    "z": 13.3
+   },
+   "dupShare": {
+    "v": 0.017661603673332138,
+    "nullMean": 0.0019427764040301555,
+    "z": 21.5
+   },
+   "formulaCov": {
+    "v": 0.04131823611896834,
+    "nullMean": 0.0008985612631477125,
+    "z": 71.8
+   },
+   "tmplReuse": {
+    "v": 0.27507975895059644,
+    "nullMean": 0.19666784828068556,
+    "z": 14.3
+   }
+  },
+  "hebrew-torah/confirm": {
+   "adjNg2": {
+    "v": 0.0006526427887365571,
+    "nullMean": 0.00002341977551623131,
+    "z": 71.3
+   },
+   "adjNg3": {
+    "v": 0.00031074221260496415,
+    "nullMean": 0.000005207651520322543,
+    "z": 49.1
+   },
+   "adjNg4": {
+    "v": 0.00018197783901996445,
+    "nullMean": 0.000002368560217291815,
+    "z": 46.2
+   },
+   "prefixCopy": {
+    "v": 0.0037568306006505736,
+    "nullMean": 0.00020491803270488161,
+    "z": 14.9
+   },
+   "suffixCopy": {
+    "v": 0.018442622950715304,
+    "nullMean": 0.0004098360655007127,
+    "z": 43
+   },
+   "posPar": {
+    "v": 0.014485074836557033,
+    "nullMean": 0.002272701442052494,
+    "z": 54.9
+   },
+   "lcsLift": {
+    "v": 1.281732075304717,
+    "nullMean": -0.019491437362921714,
+    "z": 19
+   },
+   "lagDecay": {
+    "v": -0.21023052577675116,
+    "nullMean": 0.004712852264856337,
+    "z": -1.1
+   },
+   "refrain": {
+    "v": 0.03209794837857771,
+    "nullMean": 0.004037061548660859,
+    "z": 23.5
+   },
+   "dupShare": {
+    "v": 0.02812706816712307,
+    "nullMean": 0.002150893448106217,
+    "z": 35.3
+   },
+   "formulaCov": {
+    "v": 0.04663886813341378,
+    "nullMean": 0.0006724674009092269,
+    "z": 88.5
+   },
+   "tmplReuse": {
+    "v": 0.29126536034527817,
+    "nullMean": 0.22620391896371075,
+    "z": 7.9
+   }
+  },
+  "code-bitcoin/discover": {
+   "adjNg2": {
+    "v": 0.007769361824102816,
+    "nullMean": 0.00037355156964622436,
+    "z": 103.5
+   },
+   "adjNg3": {
+    "v": 0.003811049281466694,
+    "nullMean": 0.00017001411879391526,
+    "z": 55.2
+   },
+   "adjNg4": {
+    "v": 0.0018601261817821069,
+    "nullMean": 0.0001276620974749676,
+    "z": 27.8
+   },
+   "prefixCopy": {
+    "v": 0.06761710794307874,
+    "nullMean": 0.003136997007914033,
+    "z": 70.2
+   },
+   "suffixCopy": {
+    "v": 0.03665987780004798,
+    "nullMean": 0.0011404499011405278,
+    "z": 46.6
+   },
+   "posPar": {
+    "v": 0.06458300805752515,
+    "nullMean": 0.008675701350057352,
+    "z": 52.7
+   },
+   "lcsLift": {
+    "v": 1.768338461636631,
+    "nullMean": -0.046453412542723525,
+    "z": 18.8
+   },
+   "lagDecay": {
+    "v": -0.217051641391663,
+    "nullMean": 0.018955700375317974,
+    "z": -3.8
+   },
+   "refrain": {
+    "v": 0.1795425118689309,
+    "nullMean": 0.04898575744491609,
+    "z": 62.5
+   },
+   "dupShare": {
+    "v": 0.18658357771255396,
+    "nullMean": 0.10223607038115005,
+    "z": 54.1
+   },
+   "formulaCov": {
+    "v": 0.20941834996392572,
+    "nullMean": 0.004970795814097073,
+    "z": 273.5
+   },
+   "tmplReuse": {
+    "v": 0.22251308900558797,
+    "nullMean": 0.032094240837705,
+    "z": 40.8
+   }
+  },
+  "code-bitcoin/confirm": {
+   "adjNg2": {
+    "v": 0.007795071503096551,
+    "nullMean": 0.0003325673658764572,
+    "z": 78.7
+   },
+   "adjNg3": {
+    "v": 0.004522300489043118,
+    "nullMean": 0.00010899367271122173,
+    "z": 73.1
+   },
+   "adjNg4": {
+    "v": 0.003363827489920368,
+    "nullMean": 0.00007495749750887625,
+    "z": 53.2
+   },
+   "prefixCopy": {
+    "v": 0.05319148936177953,
+    "nullMean": 0.001735170068059233,
+    "z": 63.3
+   },
+   "suffixCopy": {
+    "v": 0.025531914893690555,
+    "nullMean": 0.0010956597415315628,
+    "z": 48.8
+   },
+   "posPar": {
+    "v": 0.06604391761084116,
+    "nullMean": 0.008566912892365507,
+    "z": 45.3
+   },
+   "lcsLift": {
+    "v": 1.6369725480535635,
+    "nullMean": -0.013306787121382512,
+    "z": 24.1
+   },
+   "lagDecay": {
+    "v": -0.2890903182433249,
+    "nullMean": -0.012621190455865872,
+    "z": -7.3
+   },
+   "refrain": {
+    "v": 0.14081373172302847,
+    "nullMean": 0.027082008900106303,
+    "z": 52
+   },
+   "dupShare": {
+    "v": 0.14083333333292103,
+    "nullMean": 0.0746111111110622,
+    "z": 57.9
+   },
+   "formulaCov": {
+    "v": 0.20681836585936253,
+    "nullMean": 0.00011336950356053422,
+    "z": 854
+   },
+   "tmplReuse": {
+    "v": 0.19292487235634326,
+    "nullMean": 0.03362509117450827,
+    "z": 41.2
+   }
+  }
+ },
+ "scanSpearman": {
+  "adjNg2": {
+   "n": 12,
+   "vVsMeanLen": 0.26620005796857155,
+   "vVsTokens": 0.5390613237202199,
+   "zVsMeanLen": 0.6549922478963537,
+   "zVsTokens": 0.1134865944674147,
+   "nZ": 12
+  },
+  "adjNg3": {
+   "n": 12,
+   "vVsMeanLen": 0.6729971333810469,
+   "vVsTokens": 0.4618496001607239,
+   "zVsMeanLen": -0.2636363636363636,
+   "zVsTokens": 0.25930372530182266,
+   "nZ": 11
+  },
+  "adjNg4": {
+   "n": 12,
+   "vVsMeanLen": -0.13124359177794215,
+   "vVsTokens": 0.22147611102939233,
+   "zVsMeanLen": null,
+   "zVsTokens": null,
+   "nZ": 4
+  },
+  "prefixCopy": {
+   "n": 12,
+   "vVsMeanLen": -0.24697083176463205,
+   "vVsTokens": -0.47070276925791715,
+   "zVsMeanLen": -0.06655001449214289,
+   "zVsTokens": -0.3404597834022441,
+   "nZ": 12
+  },
+  "suffixCopy": {
+   "n": 12,
+   "vVsMeanLen": 0.2852416998937054,
+   "vVsTokens": 0.5812312243944153,
+   "zVsMeanLen": 0.6013683028032308,
+   "zVsTokens": 0.44452067194598166,
+   "nZ": 11
+  },
+  "posPar": {
+   "n": 12,
+   "vVsMeanLen": 0.021015794050150388,
+   "vVsTokens": -0.31918104693960386,
+   "zVsMeanLen": -0.02802105873353385,
+   "zVsTokens": -0.028371648616853675,
+   "nZ": 12
+  },
+  "lcsLift": {
+   "n": 12,
+   "vVsMeanLen": 0.07705791151721808,
+   "vVsTokens": 0.2624377497058965,
+   "zVsMeanLen": 0.11908949961751886,
+   "zVsTokens": 0.16313697954690864,
+   "nZ": 12
+  },
+  "lagDecay": {
+   "n": 12,
+   "vVsMeanLen": -0.14360792600936098,
+   "vVsTokens": -0.4326676414070186,
+   "zVsMeanLen": -0.021015794050150388,
+   "zVsTokens": -0.6454550060334211,
+   "nZ": 12
+  },
+  "refrain": {
+   "n": 12,
+   "vVsMeanLen": -0.7585906232425551,
+   "vVsTokens": -0.15827141133620817,
+   "zVsMeanLen": null,
+   "zVsTokens": null,
+   "nZ": 3
+  },
+  "dupShare": {
+   "n": 12,
+   "vVsMeanLen": -0.8377181841902328,
+   "vVsTokens": -0.28695303998103194,
+   "zVsMeanLen": null,
+   "zVsTokens": null,
+   "nZ": 4
+  },
+  "formulaCov": {
+   "n": 12,
+   "vVsMeanLen": 0.4794139675431093,
+   "vVsTokens": 0.7796014615834254,
+   "zVsMeanLen": 0.38178692524439867,
+   "zVsTokens": 0.38301725632752465,
+   "nZ": 12
+  },
+  "tmplReuse": {
+   "n": 12,
+   "vVsMeanLen": -0.756568585805414,
+   "vVsTokens": 0.2837164861685368,
+   "zVsMeanLen": 0.17863424942627829,
+   "zVsTokens": 0.29080939832275016,
+   "nZ": 12
+  }
+ },
+ "timingCpuSeconds150kTokens": {
+  "greatExpectations": [
+   0.194944,
+   0.132881,
+   0.141378,
+   0.106937,
+   0.087506
+  ],
+  "worstCases": {
+   "tiny-units-mean3": {
+    "tokens": 150002,
+    "units": 45610,
+    "cpuSeconds": [
+     0.138,
+     0.142,
+     0.076
+    ]
+   },
+   "mean9": {
+    "tokens": 150004,
+    "units": 14401,
+    "cpuSeconds": [
+     0.097,
+     0.071,
+     0.062
+    ]
+   },
+   "long-units-mean40": {
+    "tokens": 150028,
+    "units": 3454,
+    "cpuSeconds": [
+     0.088,
+     0.084,
+     0.083
+    ]
+   },
+   "alpha1.3-mean14": {
+    "tokens": 150014,
+    "units": 8209,
+    "cpuSeconds": [
+     0.071,
+     0.064,
+     0.075
+    ]
+   }
+  }
+ },
+ "determinism": true,
+ "edge": {
+  "empty": true,
+  "oneUnit": true,
+  "allLen1": true,
+  "allIdentical": true,
+  "oneHugeUnit": true,
+  "cjkChars": true,
+  "twoDocsShort": true,
+  "noDocOf": true
+ }
+}

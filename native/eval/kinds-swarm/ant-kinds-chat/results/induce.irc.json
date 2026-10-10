@@ -1,0 +1,1066 @@
+{
+ "module": "ant-kinds-chat/induce.mjs",
+ "corpus": "irc",
+ "preregSha256": "0b7ebeba45da9ec1a28d91472b1f4437f7ede987aa2eca565e12541ae8fb2878",
+ "MINC": 30,
+ "F_MAX": 1000,
+ "D": 48,
+ "LADDER": [
+  2,
+  3,
+  4,
+  6,
+  8,
+  12,
+  16,
+  24
+ ],
+ "MIN_HALF": 8,
+ "NULL_DRAWS": 4,
+ "SESOI": 0.1,
+ "devDocs": 14,
+ "conformance": {
+  "formsChecked": 25,
+  "featuresChecked": 863,
+  "mismatches": 0
+ },
+ "curve": [
+  {
+   "K": 2,
+   "real": 0.766,
+   "realBySplit": [
+    0.7914,
+    0.7406
+   ],
+   "nullMean": 0.7925,
+   "nullMax": 0.7983,
+   "gap": -0.0323
+  },
+  {
+   "K": 3,
+   "real": 0.7221,
+   "realBySplit": [
+    0.7232,
+    0.721
+   ],
+   "nullMean": 0.7057,
+   "nullMax": 0.7468,
+   "gap": -0.0247
+  },
+  {
+   "K": 4,
+   "real": 0.5765,
+   "realBySplit": [
+    0.6638,
+    0.4892
+   ],
+   "nullMean": 0.6609,
+   "nullMax": 0.6901,
+   "gap": -0.1137
+  },
+  {
+   "K": 6,
+   "real": 0.3845,
+   "realBySplit": [
+    0.3761,
+    0.3928
+   ],
+   "nullMean": 0.4274,
+   "nullMax": 0.5428,
+   "gap": -0.1583
+  },
+  {
+   "K": 8,
+   "real": 0.3492,
+   "realBySplit": [
+    0.3675,
+    0.3308
+   ],
+   "nullMean": 0.3619,
+   "nullMax": 0.4038,
+   "gap": -0.0546
+  },
+  {
+   "K": 12,
+   "real": 0.3256,
+   "realBySplit": [
+    0.3319,
+    0.3193
+   ],
+   "nullMean": 0.2761,
+   "nullMax": 0.2963,
+   "gap": 0.0294
+  },
+  {
+   "K": 16,
+   "real": 0.2806,
+   "realBySplit": [
+    0.2778,
+    0.2833
+   ],
+   "nullMean": 0.2563,
+   "nullMax": 0.277,
+   "gap": 0.0036
+  },
+  {
+   "K": 24,
+   "real": 0.2708,
+   "realBySplit": [
+    0.2703,
+    0.2713
+   ],
+   "nullMean": 0.2299,
+   "nullMax": 0.2406,
+   "gap": 0.0302
+  }
+ ],
+ "vocabHalves": [
+  2047,
+  2010
+ ],
+ "Kstar": 24,
+ "gapKstar": 0.0302,
+ "K1_curve_holds": false,
+ "final": {
+  "V": 2288,
+  "K": 24,
+  "tokenShare": [
+   0.2711,
+   0.1633,
+   0.1021,
+   0.0888,
+   0.0836,
+   0.0634,
+   0.0201,
+   0.0194,
+   0.0192,
+   0.0178,
+   0.0173,
+   0.0172,
+   0.0157,
+   0.0138,
+   0.0117,
+   0.0109,
+   0.0097,
+   0.0096,
+   0.0088,
+   0.0084,
+   0.0084,
+   0.0072,
+   0.007,
+   0.0057
+  ],
+  "types": [
+   67,
+   65,
+   94,
+   48,
+   146,
+   53,
+   76,
+   35,
+   299,
+   248,
+   73,
+   217,
+   92,
+   90,
+   119,
+   25,
+   110,
+   83,
+   57,
+   63,
+   45,
+   72,
+   67,
+   44
+  ]
+ },
+ "frequency": {
+  "NMI_decile": 0.2397,
+  "ARI_bands": 0.0587,
+  "NMI_bands": 0.229
+ },
+ "signatures": [
+  [
+   "after=the",
+   "after=a",
+   "after=you",
+   "after=not",
+   "before=it",
+   "after=i",
+   "after=do",
+   "after=my",
+   "after=it",
+   "after=there"
+  ],
+  [
+   "before=in",
+   "before=on",
+   "before=for",
+   "before=of",
+   "before=with",
+   "before=is",
+   "before=have",
+   "after=com",
+   "before=use",
+   "before=from"
+  ],
+  [
+   "before=to",
+   "before=i",
+   "before=you",
+   "after=to",
+   "after=a",
+   "after=it",
+   "after=the",
+   "before=don't",
+   "before=can",
+   "before=apt"
+  ],
+  [
+   "after=have",
+   "before=i",
+   "after=be",
+   "before=you",
+   "after=know",
+   "after=am",
+   "after=think",
+   "after=need",
+   "before=can",
+   "before=when"
+  ],
+  [
+   "before=the",
+   "after=$",
+   "before=a",
+   "before=my",
+   "after=and",
+   "before=your",
+   "after=is",
+   "after=of",
+   "after=to",
+   "after=for"
+  ],
+  [
+   "after=$",
+   "before=ubuntu",
+   "before=^",
+   "after=community",
+   "before=https",
+   "before=help",
+   "after=i",
+   "after=with",
+   "after=me",
+   "after=but"
+  ],
+  [
+   "before=^",
+   "after=$",
+   "after=i",
+   "after=willis",
+   "before=dr",
+   "after=guys",
+   "after=ok",
+   "after=all",
+   "after=thanks",
+   "after=sparrow"
+  ],
+  [
+   "after=to",
+   "before=be",
+   "before=i'm",
+   "before=not",
+   "before=am",
+   "before=is",
+   "before=im",
+   "after=for",
+   "before=was",
+   "before=i've"
+  ],
+  [
+   "after=org",
+   "before=en",
+   "after=php",
+   "before=org",
+   "before=abhi",
+   "before=http",
+   "before=jack",
+   "after=en",
+   "before=ubuntu",
+   "after=net"
+  ],
+  [
+   "before=^",
+   "after=yes",
+   "after=i",
+   "after=ok",
+   "after=u",
+   "after=nav",
+   "after=no",
+   "after=what",
+   "after=yeah",
+   "after=you"
+  ],
+  [
+   "before=the",
+   "before=my",
+   "before=a",
+   "after=cd",
+   "before=your",
+   "before=https",
+   "after=list",
+   "after=card",
+   "after=thing",
+   "after=version"
+  ],
+  [
+   "before=the",
+   "before=com",
+   "after=of",
+   "after=$",
+   "after=and",
+   "before=my",
+   "before=a",
+   "before=an",
+   "after=is",
+   "before=dev"
+  ],
+  [
+   "after=$",
+   "before=any",
+   "before=the",
+   "after=kb",
+   "after=with",
+   "after=and",
+   "after=are",
+   "after=on",
+   "after=in",
+   "after=for"
+  ],
+  [
+   "before=i",
+   "after=to",
+   "before=just",
+   "before=you",
+   "after=it",
+   "before=i've",
+   "before=never",
+   "after=a",
+   "after=that",
+   "after=trying"
+  ],
+  [
+   "before=a",
+   "after=of",
+   "before=the",
+   "after=$",
+   "after=screen",
+   "before=my",
+   "after=boot",
+   "after=install",
+   "before=any",
+   "before=having"
+  ],
+  [
+   "before=a",
+   "before=very",
+   "after=as",
+   "before=so",
+   "before=too",
+   "after=drive",
+   "before=as",
+   "before=is",
+   "before=pretty",
+   "after=$"
+  ],
+  [
+   "before=to",
+   "after=it",
+   "after=the",
+   "before=can",
+   "before=don't",
+   "before=dpkg",
+   "after=out",
+   "before=i",
+   "after=your",
+   "after=my"
+  ],
+  [
+   "after=$",
+   "before=size",
+   "before=alt",
+   "before=as",
+   "before=dev",
+   "before=likely",
+   "before=compiz",
+   "after=installed",
+   "before=tar",
+   "before=menu"
+  ],
+  [
+   "before=it",
+   "before=that",
+   "after=like",
+   "after=to",
+   "after=me",
+   "after=up",
+   "after=on",
+   "before=nothing",
+   "after=fine",
+   "before=just"
+  ],
+  [
+   "after=$",
+   "before=showthread",
+   "after=t",
+   "before=with",
+   "before=install",
+   "after=and",
+   "before=use",
+   "after=is",
+   "before=in",
+   "before=using"
+  ],
+  [
+   "before=http",
+   "before=in",
+   "after=$",
+   "before=for",
+   "after=lib",
+   "after=log",
+   "before=ubuntu",
+   "after=bin",
+   "after=share",
+   "before=an"
+  ],
+  [
+   "after=the",
+   "before=was",
+   "before=i'm",
+   "after=a",
+   "before=try",
+   "before=anyone",
+   "after=it",
+   "before=am",
+   "before=not",
+   "before=difference"
+  ],
+  [
+   "before=is",
+   "after=to",
+   "before=be",
+   "before=most",
+   "after=$",
+   "before=it's",
+   "after=by",
+   "after=in",
+   "before=not",
+   "before=was"
+  ],
+  [
+   "before=sudo",
+   "after=l",
+   "before=etc",
+   "after=d",
+   "after=reconfigure",
+   "before=ctrl",
+   "after=alt",
+   "before=with",
+   "after=r",
+   "before=use"
+  ]
+ ],
+ "heldOut": {
+  "confV": 2946,
+  "shared": 1993,
+  "transferARI": 0.4739,
+  "transferNullARI": [
+   0.097,
+   0.0914,
+   0.0936,
+   0.0908
+  ],
+  "reinductionARI_vs_transfer": 0.5105,
+  "reinductionNull": [
+   0.1612,
+   0.1656,
+   0.1759,
+   0.1482
+  ]
+ },
+ "K1_heldout_holds": true,
+ "K1_holds": false,
+ "characterise": {
+  "dev": {
+   "rows": [
+    {
+     "kind": 0,
+     "types": 67,
+     "tokenShare": 0.2374,
+     "goldShare": 0.0072,
+     "enrichment": 0.0304,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 1,
+     "types": 65,
+     "tokenShare": 0.1429,
+     "goldShare": 0.0036,
+     "enrichment": 0.0253,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 2,
+     "types": 94,
+     "tokenShare": 0.0894,
+     "goldShare": 0,
+     "enrichment": 0,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 3,
+     "types": 48,
+     "tokenShare": 0.0777,
+     "goldShare": 0.0241,
+     "enrichment": 0.3101,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 4,
+     "types": 146,
+     "tokenShare": 0.0732,
+     "goldShare": 0.0132,
+     "enrichment": 0.1809,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 5,
+     "types": 53,
+     "tokenShare": 0.0555,
+     "goldShare": 0,
+     "enrichment": 0,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 6,
+     "types": 76,
+     "tokenShare": 0.0176,
+     "goldShare": 0.1314,
+     "enrichment": 7.4579,
+     "nickTypes": 36,
+     "purity": 0.4737
+    },
+    {
+     "kind": 7,
+     "types": 35,
+     "tokenShare": 0.0169,
+     "goldShare": 0,
+     "enrichment": 0,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 8,
+     "types": 299,
+     "tokenShare": 0.0168,
+     "goldShare": 0.0022,
+     "enrichment": 0.1331,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 9,
+     "types": 248,
+     "tokenShare": 0.0156,
+     "goldShare": 0.2524,
+     "enrichment": 16.2153,
+     "nickTypes": 190,
+     "purity": 0.7661
+    },
+    {
+     "kind": 10,
+     "types": 73,
+     "tokenShare": 0.0151,
+     "goldShare": 0.0004,
+     "enrichment": 0.0247,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 11,
+     "types": 217,
+     "tokenShare": 0.0151,
+     "goldShare": 0.0016,
+     "enrichment": 0.1075,
+     "nickTypes": 1,
+     "purity": 0.0046
+    },
+    {
+     "kind": 12,
+     "types": 92,
+     "tokenShare": 0.0137,
+     "goldShare": 0,
+     "enrichment": 0,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 13,
+     "types": 90,
+     "tokenShare": 0.0121,
+     "goldShare": 0.0005,
+     "enrichment": 0.0413,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 14,
+     "types": 119,
+     "tokenShare": 0.0102,
+     "goldShare": 0.0012,
+     "enrichment": 0.1157,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 15,
+     "types": 25,
+     "tokenShare": 0.0095,
+     "goldShare": 0.0007,
+     "enrichment": 0.075,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 16,
+     "types": 110,
+     "tokenShare": 0.0084,
+     "goldShare": 0,
+     "enrichment": 0,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 17,
+     "types": 83,
+     "tokenShare": 0.0084,
+     "goldShare": 0.0003,
+     "enrichment": 0.0406,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 18,
+     "types": 57,
+     "tokenShare": 0.0077,
+     "goldShare": 0,
+     "enrichment": 0,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 19,
+     "types": 63,
+     "tokenShare": 0.0074,
+     "goldShare": 0.0002,
+     "enrichment": 0.0339,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 20,
+     "types": 45,
+     "tokenShare": 0.0073,
+     "goldShare": 0.0005,
+     "enrichment": 0.0638,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 21,
+     "types": 72,
+     "tokenShare": 0.0063,
+     "goldShare": 0,
+     "enrichment": 0,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 22,
+     "types": 67,
+     "tokenShare": 0.0061,
+     "goldShare": 0,
+     "enrichment": 0,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 23,
+     "types": 44,
+     "tokenShare": 0.005,
+     "goldShare": 0.0006,
+     "enrichment": 0.1244,
+     "nickTypes": 0,
+     "purity": 0
+    }
+   ],
+   "thin": {
+    "tokenShare": 0.1244,
+    "goldShare": 0.5596
+   },
+   "goldTokens": 32114,
+   "landing": {
+    "cstar": 9,
+    "nickTypesMatched": 227,
+    "nickTypesInCstar": 0.837,
+    "matchedNonNickInCstar": 0.022,
+    "nickTypesByKind": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     36,
+     0,
+     0,
+     190,
+     0,
+     1,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "matchedByKind": [
+     1,
+     0,
+     2,
+     0,
+     5,
+     0,
+     0,
+     0,
+     60,
+     5,
+     6,
+     39,
+     10,
+     8,
+     12,
+     0,
+     20,
+     13,
+     5,
+     10,
+     4,
+     12,
+     7,
+     8
+    ]
+   },
+   "nickTypeCount": 227
+  },
+  "conf": {
+   "rows": [
+    {
+     "kind": 0,
+     "types": 74,
+     "tokenShare": 0.2358,
+     "goldShare": 0,
+     "enrichment": 0,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 1,
+     "types": 103,
+     "tokenShare": 0.1544,
+     "goldShare": 0.0169,
+     "enrichment": 0.1093,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 2,
+     "types": 119,
+     "tokenShare": 0.0936,
+     "goldShare": 0.0004,
+     "enrichment": 0.0038,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 3,
+     "types": 54,
+     "tokenShare": 0.0793,
+     "goldShare": 0.0038,
+     "enrichment": 0.0483,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 4,
+     "types": 187,
+     "tokenShare": 0.0799,
+     "goldShare": 0.0086,
+     "enrichment": 0.1073,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 5,
+     "types": 69,
+     "tokenShare": 0.0592,
+     "goldShare": 0.0019,
+     "enrichment": 0.0317,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 6,
+     "types": 145,
+     "tokenShare": 0.0225,
+     "goldShare": 0.2247,
+     "enrichment": 9.9796,
+     "nickTypes": 89,
+     "purity": 0.6138
+    },
+    {
+     "kind": 7,
+     "types": 61,
+     "tokenShare": 0.022,
+     "goldShare": 0,
+     "enrichment": 0,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 8,
+     "types": 358,
+     "tokenShare": 0.0154,
+     "goldShare": 0.0009,
+     "enrichment": 0.0582,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 9,
+     "types": 382,
+     "tokenShare": 0.0171,
+     "goldShare": 0.2601,
+     "enrichment": 15.1904,
+     "nickTypes": 290,
+     "purity": 0.7592
+    },
+    {
+     "kind": 10,
+     "types": 105,
+     "tokenShare": 0.0146,
+     "goldShare": 0.0035,
+     "enrichment": 0.2423,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 11,
+     "types": 253,
+     "tokenShare": 0.0118,
+     "goldShare": 0.0004,
+     "enrichment": 0.0381,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 12,
+     "types": 101,
+     "tokenShare": 0.0108,
+     "goldShare": 0,
+     "enrichment": 0,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 13,
+     "types": 100,
+     "tokenShare": 0.0097,
+     "goldShare": 0,
+     "enrichment": 0,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 14,
+     "types": 141,
+     "tokenShare": 0.0093,
+     "goldShare": 0.0006,
+     "enrichment": 0.0651,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 15,
+     "types": 39,
+     "tokenShare": 0.012,
+     "goldShare": 0.0011,
+     "enrichment": 0.0895,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 16,
+     "types": 131,
+     "tokenShare": 0.007,
+     "goldShare": 0.0003,
+     "enrichment": 0.0472,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 17,
+     "types": 106,
+     "tokenShare": 0.0069,
+     "goldShare": 0.0011,
+     "enrichment": 0.1575,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 18,
+     "types": 71,
+     "tokenShare": 0.0071,
+     "goldShare": 0,
+     "enrichment": 0,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 19,
+     "types": 89,
+     "tokenShare": 0.007,
+     "goldShare": 0.0004,
+     "enrichment": 0.0504,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 20,
+     "types": 45,
+     "tokenShare": 0.006,
+     "goldShare": 0.0005,
+     "enrichment": 0.0878,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 21,
+     "types": 85,
+     "tokenShare": 0.006,
+     "goldShare": 0,
+     "enrichment": 0,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 22,
+     "types": 84,
+     "tokenShare": 0.0053,
+     "goldShare": 0,
+     "enrichment": 0,
+     "nickTypes": 0,
+     "purity": 0
+    },
+    {
+     "kind": 23,
+     "types": 44,
+     "tokenShare": 0.0041,
+     "goldShare": 0.0001,
+     "enrichment": 0.0191,
+     "nickTypes": 0,
+     "purity": 0
+    }
+   ],
+   "thin": {
+    "tokenShare": 0.1031,
+    "goldShare": 0.4748
+   },
+   "goldTokens": 51211,
+   "landing": {
+    "cstar": 9,
+    "nickTypesMatched": 379,
+    "nickTypesInCstar": 0.7652,
+    "matchedNonNickInCstar": 0.0422,
+    "nickTypesByKind": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     89,
+     0,
+     0,
+     290,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "matchedByKind": [
+     0,
+     1,
+     3,
+     4,
+     5,
+     1,
+     2,
+     3,
+     91,
+     16,
+     11,
+     65,
+     13,
+     14,
+     38,
+     1,
+     32,
+     16,
+     14,
+     10,
+     5,
+     13,
+     16,
+     5
+    ]
+   },
+   "nickTypeCount": 379
+  }
+ },
+ "seconds": 172.6
+}

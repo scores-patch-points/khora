@@ -1,0 +1,54 @@
+{
+ "note": "blind PREDICT table of laws/comp.mjs frozen BEFORE any comp statistic was computed on any data (no _comp_core.mjs existed at freeze time)",
+ "sha256": "eca34245633112f8f42b84c20b5fad62cfa930a90f6e5b34e3d20b5585e08475",
+ "canon": [
+  [
+   "asym",
+   "specific"
+  ],
+  [
+   "condL",
+   "universal-"
+  ],
+  [
+   "condR",
+   "universal-"
+  ],
+  [
+   "divSlope",
+   "universal-"
+  ],
+  [
+   "edgeGap",
+   "specific"
+  ],
+  [
+   "finEnt",
+   "universal-"
+  ],
+  [
+   "initEnt",
+   "universal-"
+  ],
+  [
+   "miDecay",
+   "universal+"
+  ],
+  [
+   "rigidL",
+   "universal+"
+  ],
+  [
+   "rigidR",
+   "universal+"
+  ],
+  [
+   "sameL",
+   "specific"
+  ],
+  [
+   "sameR",
+   "specific"
+  ]
+ ]
+}

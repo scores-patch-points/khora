@@ -1,0 +1,61 @@
+{
+ "ud": {
+  "n": 59,
+  "mentionedElsewhere": 0
+ },
+ "irc": {
+  "nEn": 80,
+  "tiers": {
+   "T0_never": 0,
+   "T3_lens": 37,
+   "TX_excluded": 43
+  },
+  "T0": [],
+  "T3ch": {
+   "kubuntu": 10,
+   "ubuntu-server": 11,
+   "xubuntu": 16
+  },
+  "sib": [
+   "kubuntu/2013-07-15.txt",
+   "kubuntu/2014-03-15.txt",
+   "kubuntu/2015-03-15.txt",
+   "ubuntu-server/2009-03-15.txt",
+   "ubuntu-server/2014-03-15.txt",
+   "ubuntu-server/2015-03-15.txt",
+   "ubuntu-server/2015-07-15.txt",
+   "xubuntu/2010-03-15.txt",
+   "xubuntu/2012-07-15.txt",
+   "xubuntu/2014-07-15.txt",
+   "xubuntu/2015-03-15.txt",
+   "xubuntu/2015-07-15.txt"
+  ]
+ },
+ "books": [
+  "book-the-war-of-the-worlds:60538",
+  "book-great-expectations:186692",
+  "book-treasure-island:69173",
+  "book-anne-of-green-gables:103639",
+  "book-wuthering-heights:122541",
+  "book-crime-and-punishment:205301"
+ ],
+ "code": {
+  "counts": {
+   "A": 89,
+   "B": 167,
+   "P": 78,
+   "R": 24,
+   "excluded": 88
+  },
+  "js": 12,
+  "py": 12,
+  "rb": 8,
+  "skipped": {
+   "ja": 3,
+   "jb": 0,
+   "py": 11,
+   "rb": 15
+  }
+ }
+}
+manifest sha256 c4f83ffea302afa6eeb1cf8c8fca5351f1c834f8d719534c9d78d08bc397a9f6

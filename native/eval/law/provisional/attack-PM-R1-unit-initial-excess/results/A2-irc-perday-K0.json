@@ -1,0 +1,52 @@
+{
+ "hdr": "dc5dfa0f54999d70a8229f3579d62fb63d7291993f326f0532467ab3dfdd9b10",
+ "rung": "K0",
+ "FULL": {
+  "pairs": 836,
+  "nDays": 43,
+  "aucs": {
+   "pInitX": 0.9522,
+   "logn": 0.4737,
+   "loc": 0.7721,
+   "rec": 0.6992,
+   "burst": 0.7428,
+   "span": 0.7937,
+   "invLen": 0.6435,
+   "relPos": 0.9175,
+   "meanIdx": 0.9366,
+   "charLen": 0.6328,
+   "pInit": 0.9432
+  },
+  "lo": 0.9337,
+  "hi": 0.9688,
+  "rivalsWithin03": [
+   "meanIdx",
+   "pInit"
+  ],
+  "hold": true
+ },
+ "CAUSAL4": {
+  "pairs": 449,
+  "nDays": 38,
+  "aucs": {
+   "pInitX": 0.9599,
+   "logn": 0.4788,
+   "loc": 0.8018,
+   "rec": 0.7405,
+   "burst": 0.7695,
+   "span": 0.8486,
+   "invLen": 0.608,
+   "relPos": 0.9287,
+   "meanIdx": 0.9432,
+   "charLen": 0.6448,
+   "pInit": 0.9532
+  },
+  "lo": 0.9419,
+  "hi": 0.9777,
+  "rivalsWithin03": [
+   "meanIdx",
+   "pInit"
+  ],
+  "hold": true
+ }
+}

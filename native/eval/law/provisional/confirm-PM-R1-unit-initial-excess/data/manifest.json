@@ -1,0 +1,841 @@
+{
+ "made": "2026-10-07",
+ "uses": {},
+ "ud": {
+  "rule": "one cell per treebank with a *-ud-train*.conllu (first part in name order if several); a contiguous window of sentences starting at a seeded random sentence and growing to >= 40000 non-PUNCT word units (whole file if smaller); window drawn in confirm.mjs from seedFor('pm-r1-confirm', treebank, 'window')",
+  "files": {
+   "af_afribooms": "/Users/mlacy/Documents/data/ud/af_afribooms/af_afribooms-ud-train.conllu",
+   "ar_padt": "/Users/mlacy/Documents/data/ud/ar_padt/ar_padt-ud-train.conllu",
+   "be_hse": "/Users/mlacy/Documents/data/ud/be_hse/be_hse-ud-train.conllu",
+   "bg_btb": "/Users/mlacy/Documents/data/ud/bg_btb/bg_btb-ud-train.conllu",
+   "ca_ancora": "/Users/mlacy/Documents/data/ud/ca_ancora/ca_ancora-ud-train.conllu",
+   "cop_scriptorium": "/Users/mlacy/Documents/data/ud/cop_scriptorium/cop_scriptorium-ud-train.conllu",
+   "cs_pdt": "/Users/mlacy/Documents/data/ud/cs_pdt/cs_pdtc-ud-train-ca.conllu",
+   "cu_proiel": "/Users/mlacy/Documents/data/ud/cu_proiel/cu_proiel-ud-train.conllu",
+   "cy_ccg": "/Users/mlacy/Documents/data/ud/cy_ccg/cy_ccg-ud-train.conllu",
+   "da_ddt": "/Users/mlacy/Documents/data/ud/da_ddt/da_ddt-ud-train.conllu",
+   "de_gsd": "/Users/mlacy/Documents/data/ud/de_gsd/de_gsd-ud-train.conllu",
+   "en_ewt": "/Users/mlacy/Documents/data/ud/en_ewt/en_ewt-ud-train.conllu",
+   "es_gsd": "/Users/mlacy/Documents/data/ud/es_gsd/es_gsd-ud-train.conllu",
+   "et_edt": "/Users/mlacy/Documents/data/ud/et_edt/et_edt-ud-train.conllu",
+   "eu_bdt": "/Users/mlacy/Documents/data/ud/eu_bdt/eu_bdt-ud-train.conllu",
+   "fa_seraji": "/Users/mlacy/Documents/data/ud/fa_seraji/fa_seraji-ud-train.conllu",
+   "fi_tdt": "/Users/mlacy/Documents/data/ud/fi_tdt/fi_tdt-ud-train.conllu",
+   "fo_farpahc": "/Users/mlacy/Documents/data/ud/fo_farpahc/fo_farpahc-ud-train.conllu",
+   "fr_gsd": "/Users/mlacy/Documents/data/ud/fr_gsd/fr_gsd-ud-train.conllu",
+   "ga_idt": "/Users/mlacy/Documents/data/ud/ga_idt/ga_idt-ud-train.conllu",
+   "gl_treegal": "/Users/mlacy/Documents/data/ud/gl_treegal/gl_treegal-ud-train.conllu",
+   "got_proiel": "/Users/mlacy/Documents/data/ud/got_proiel/got_proiel-ud-train.conllu",
+   "grc_proiel": "/Users/mlacy/Documents/data/ud/grc_proiel/grc_proiel-ud-train.conllu",
+   "he_htb": "/Users/mlacy/Documents/data/ud/he_htb/he_htb-ud-train.conllu",
+   "hi_hdtb": "/Users/mlacy/Documents/data/ud/hi_hdtb/hi_hdtb-ud-train.conllu",
+   "hr_set": "/Users/mlacy/Documents/data/ud/hr_set/hr_set-ud-train.conllu",
+   "hu_szeged": "/Users/mlacy/Documents/data/ud/hu_szeged/hu_szeged-ud-train.conllu",
+   "hy_armtdp": "/Users/mlacy/Documents/data/ud/hy_armtdp/hy_armtdp-ud-train.conllu",
+   "id_gsd": "/Users/mlacy/Documents/data/ud/id_gsd/id_gsd-ud-train.conllu",
+   "is_icepahc": "/Users/mlacy/Documents/data/ud/is_icepahc/is_icepahc-ud-train.conllu",
+   "it_isdt": "/Users/mlacy/Documents/data/ud/it_isdt/it_isdt-ud-train.conllu",
+   "ja_gsd": "/Users/mlacy/Documents/data/ud/ja_gsd/ja_gsd-ud-train.conllu",
+   "ka_glc": "/Users/mlacy/Documents/data/ud/ka_glc/ka_glc-ud-train.conllu",
+   "kk_ktb": "/Users/mlacy/Documents/data/ud/kk_ktb/kk_ktb-ud-train.conllu",
+   "ko_gsd": "/Users/mlacy/Documents/data/ud/ko_gsd/ko_gsd-ud-train.conllu",
+   "la_proiel": "/Users/mlacy/Documents/data/ud/la_proiel/la_proiel-ud-train.conllu",
+   "lt_alksnis": "/Users/mlacy/Documents/data/ud/lt_alksnis/lt_alksnis-ud-train.conllu",
+   "lv_lvtb": "/Users/mlacy/Documents/data/ud/lv_lvtb/lv_lvtb-ud-train.conllu",
+   "lzh_kyoto": "/Users/mlacy/Documents/data/ud/lzh_kyoto/lzh_kyoto-ud-train.conllu",
+   "mt_mudt": "/Users/mlacy/Documents/data/ud/mt_mudt/mt_mudt-ud-train.conllu",
+   "nl_alpino": "/Users/mlacy/Documents/data/ud/nl_alpino/nl_alpino-ud-train.conllu",
+   "no_bokmaal": "/Users/mlacy/Documents/data/ud/no_bokmaal/no_bokmaal-ud-train.conllu",
+   "pl_pdb": "/Users/mlacy/Documents/data/ud/pl_pdb/pl_pdb-ud-train.conllu",
+   "pt_bosque": "/Users/mlacy/Documents/data/ud/pt_bosque/pt_bosque-ud-train.conllu",
+   "ro_rrt": "/Users/mlacy/Documents/data/ud/ro_rrt/ro_rrt-ud-train.conllu",
+   "ru_syntagrus": "/Users/mlacy/Documents/data/ud/ru_syntagrus/ru_syntagrus-ud-train-a.conllu",
+   "sa_vedic": "/Users/mlacy/Documents/data/ud/sa_vedic/sa_vedic-ud-train.conllu",
+   "sk_snk": "/Users/mlacy/Documents/data/ud/sk_snk/sk_snk-ud-train.conllu",
+   "sl_ssj": "/Users/mlacy/Documents/data/ud/sl_ssj/sl_ssj-ud-train.conllu",
+   "sr_set": "/Users/mlacy/Documents/data/ud/sr_set/sr_set-ud-train.conllu",
+   "sv_talbanken": "/Users/mlacy/Documents/data/ud/sv_talbanken/sv_talbanken-ud-train.conllu",
+   "ta_ttb": "/Users/mlacy/Documents/data/ud/ta_ttb/ta_ttb-ud-train.conllu",
+   "tr_imst": "/Users/mlacy/Documents/data/ud/tr_imst/tr_imst-ud-train.conllu",
+   "ug_udt": "/Users/mlacy/Documents/data/ud/ug_udt/ug_udt-ud-train.conllu",
+   "uk_iu": "/Users/mlacy/Documents/data/ud/uk_iu/uk_iu-ud-train.conllu",
+   "ur_udtb": "/Users/mlacy/Documents/data/ud/ur_udtb/ur_udtb-ud-train.conllu",
+   "vi_vtb": "/Users/mlacy/Documents/data/ud/vi_vtb/vi_vtb-ud-train.conllu",
+   "wo_wtb": "/Users/mlacy/Documents/data/ud/wo_wtb/wo_wtb-ud-train.conllu",
+   "zh_gsd": "/Users/mlacy/Documents/data/ud/zh_gsd/zh_gsd-ud-train.conllu"
+  },
+  "n": 59,
+  "windowTokens": 40000
+ },
+ "udReplicate": {
+  "root": "/private/tmp/claude-501/ud-eval",
+  "split": "test.conllu",
+  "stems": [
+   "afr",
+   "arb",
+   "bul",
+   "cat",
+   "ces",
+   "cmn",
+   "cym",
+   "dan",
+   "deu",
+   "ell",
+   "eng",
+   "est",
+   "eus",
+   "fas",
+   "fin",
+   "fra",
+   "gle",
+   "glg",
+   "heb",
+   "hin",
+   "hrv",
+   "hun",
+   "hye",
+   "ind",
+   "ita",
+   "jpn",
+   "kat",
+   "kor",
+   "lav",
+   "lit",
+   "lzh",
+   "mar",
+   "mlt",
+   "nld",
+   "nob",
+   "pol",
+   "por",
+   "ron",
+   "rus",
+   "slk",
+   "slv",
+   "spa",
+   "srp",
+   "swe",
+   "tam",
+   "tel",
+   "tur",
+   "uig",
+   "ukr",
+   "urd",
+   "vie",
+   "wol"
+  ]
+ },
+ "irc": {
+  "rule": "FRESH-EN = every en-language day of the 7 ubuntu-irc channels that is NOT one of the 48 days the polarity-map scoper read for pInitX (results/irc-split.json disc+conf) and NOT read by the earlier name tests (name-rule-informal, name-company(+pairblocks), name-floor1, USED14); pooled into one stream (unit = message) = the primary set; per-channel pools = secondary sets. de/es/it: every one of the 32 days was read by the scoper (disc or conf) -> NO fresh day exists.",
+  "excludedPm48": [
+   "kubuntu/2006-03-15.txt",
+   "kubuntu/2007-03-15.txt",
+   "kubuntu/2009-03-15.txt",
+   "ubuntu-de/2010-11-15.txt",
+   "ubuntu-de/2011-03-15.txt",
+   "ubuntu-de/2011-07-15.txt",
+   "ubuntu-de/2012-03-15.txt",
+   "ubuntu-de/2012-07-15.txt",
+   "ubuntu-de/2013-03-15.txt",
+   "ubuntu-de/2013-11-15.txt",
+   "ubuntu-de/2014-03-15.txt",
+   "ubuntu-de/2014-07-15.txt",
+   "ubuntu-de/2015-03-15.txt",
+   "ubuntu-de/2015-07-15.txt",
+   "ubuntu-es/2010-11-15.txt",
+   "ubuntu-es/2011-03-15.txt",
+   "ubuntu-es/2011-07-15.txt",
+   "ubuntu-es/2012-03-15.txt",
+   "ubuntu-es/2012-07-15.txt",
+   "ubuntu-es/2013-03-15.txt",
+   "ubuntu-es/2013-07-15.txt",
+   "ubuntu-es/2014-03-15.txt",
+   "ubuntu-es/2015-07-15.txt",
+   "ubuntu-es/2015-11-15.txt",
+   "ubuntu-it/2010-11-15.txt",
+   "ubuntu-it/2011-03-15.txt",
+   "ubuntu-it/2011-07-15.txt",
+   "ubuntu-it/2012-03-15.txt",
+   "ubuntu-it/2012-07-15.txt",
+   "ubuntu-it/2013-03-15.txt",
+   "ubuntu-it/2013-07-15.txt",
+   "ubuntu-it/2014-03-15.txt",
+   "ubuntu-it/2014-07-15.txt",
+   "ubuntu-it/2015-03-15.txt",
+   "ubuntu-it/2015-07-15.txt",
+   "ubuntu/2005-07-15.txt",
+   "ubuntu/2006-03-15.txt",
+   "ubuntu/2007-07-15.txt",
+   "ubuntu/2008-03-15.txt",
+   "ubuntu/2008-07-15.txt",
+   "ubuntu/2009-03-15.txt",
+   "ubuntu/2010-03-15.txt",
+   "ubuntu/2010-07-15.txt",
+   "ubuntu/2011-03-15.txt",
+   "ubuntu/2012-03-15.txt",
+   "ubuntu/2013-03-15.txt",
+   "ubuntu/2013-07-15.txt",
+   "ubuntu/2015-07-15.txt"
+  ],
+  "excludedEarlierTests": [
+   "kubuntu/2005-07-15.txt",
+   "kubuntu/2005-11-15.txt",
+   "kubuntu/2006-03-15.txt",
+   "kubuntu/2006-07-15.txt",
+   "kubuntu/2007-03-15.txt",
+   "kubuntu/2007-07-15.txt",
+   "kubuntu/2008-03-15.txt",
+   "kubuntu/2008-07-15.txt",
+   "ubuntu/2004-11-15.txt",
+   "ubuntu/2005-03-15.txt",
+   "ubuntu/2006-07-15.txt",
+   "ubuntu/2007-03-15.txt",
+   "ubuntu/2009-07-15.txt",
+   "ubuntu/2010-07-15.txt",
+   "ubuntu/2012-03-15.txt",
+   "ubuntu/2012-07-15.txt",
+   "ubuntu/2013-03-15.txt",
+   "ubuntu/2013-07-15.txt",
+   "ubuntu/2014-07-15.txt",
+   "ubuntu/2015-03-15.txt",
+   "ubuntu/2015-07-15.txt"
+  ],
+  "freshEnAll": [
+   {
+    "id": "kubuntu/2009-07-15.txt",
+    "ch": "kubuntu",
+    "n": 1457,
+    "siblingRead": true
+   },
+   {
+    "id": "kubuntu/2010-03-15.txt",
+    "ch": "kubuntu",
+    "n": 781,
+    "siblingRead": true
+   },
+   {
+    "id": "kubuntu/2010-07-15.txt",
+    "ch": "kubuntu",
+    "n": 517,
+    "siblingRead": true
+   },
+   {
+    "id": "kubuntu/2011-03-15.txt",
+    "ch": "kubuntu",
+    "n": 1458,
+    "siblingRead": true
+   },
+   {
+    "id": "kubuntu/2011-07-15.txt",
+    "ch": "kubuntu",
+    "n": 541,
+    "siblingRead": true
+   },
+   {
+    "id": "kubuntu/2012-03-15.txt",
+    "ch": "kubuntu",
+    "n": 364,
+    "siblingRead": true
+   },
+   {
+    "id": "kubuntu/2012-07-15.txt",
+    "ch": "kubuntu",
+    "n": 516,
+    "siblingRead": true
+   },
+   {
+    "id": "kubuntu/2013-03-15.txt",
+    "ch": "kubuntu",
+    "n": 427,
+    "siblingRead": true
+   },
+   {
+    "id": "kubuntu/2013-07-15.txt",
+    "ch": "kubuntu",
+    "n": 107,
+    "siblingRead": false
+   },
+   {
+    "id": "kubuntu/2014-03-15.txt",
+    "ch": "kubuntu",
+    "n": 66,
+    "siblingRead": false
+   },
+   {
+    "id": "kubuntu/2014-07-15.txt",
+    "ch": "kubuntu",
+    "n": 397,
+    "siblingRead": true
+   },
+   {
+    "id": "kubuntu/2015-03-15.txt",
+    "ch": "kubuntu",
+    "n": 110,
+    "siblingRead": false
+   },
+   {
+    "id": "kubuntu/2015-07-15.txt",
+    "ch": "kubuntu",
+    "n": 412,
+    "siblingRead": true
+   },
+   {
+    "id": "ubuntu/2011-07-15.txt",
+    "ch": "ubuntu",
+    "n": 6195,
+    "siblingRead": true
+   },
+   {
+    "id": "ubuntu/2014-03-15.txt",
+    "ch": "ubuntu",
+    "n": 675,
+    "siblingRead": true
+   },
+   {
+    "id": "ubuntu-server/2007-11-15.txt",
+    "ch": "ubuntu-server",
+    "n": 400,
+    "siblingRead": true
+   },
+   {
+    "id": "ubuntu-server/2008-03-15.txt",
+    "ch": "ubuntu-server",
+    "n": 702,
+    "siblingRead": true
+   },
+   {
+    "id": "ubuntu-server/2008-07-15.txt",
+    "ch": "ubuntu-server",
+    "n": 605,
+    "siblingRead": true
+   },
+   {
+    "id": "ubuntu-server/2009-03-15.txt",
+    "ch": "ubuntu-server",
+    "n": 112,
+    "siblingRead": false
+   },
+   {
+    "id": "ubuntu-server/2009-07-15.txt",
+    "ch": "ubuntu-server",
+    "n": 486,
+    "siblingRead": true
+   },
+   {
+    "id": "ubuntu-server/2010-03-15.txt",
+    "ch": "ubuntu-server",
+    "n": 665,
+    "siblingRead": true
+   },
+   {
+    "id": "ubuntu-server/2010-07-15.txt",
+    "ch": "ubuntu-server",
+    "n": 843,
+    "siblingRead": true
+   },
+   {
+    "id": "ubuntu-server/2011-03-15.txt",
+    "ch": "ubuntu-server",
+    "n": 638,
+    "siblingRead": true
+   },
+   {
+    "id": "ubuntu-server/2011-07-15.txt",
+    "ch": "ubuntu-server",
+    "n": 451,
+    "siblingRead": true
+   },
+   {
+    "id": "ubuntu-server/2012-03-15.txt",
+    "ch": "ubuntu-server",
+    "n": 374,
+    "siblingRead": true
+   },
+   {
+    "id": "ubuntu-server/2012-07-15.txt",
+    "ch": "ubuntu-server",
+    "n": 292,
+    "siblingRead": true
+   },
+   {
+    "id": "ubuntu-server/2013-03-15.txt",
+    "ch": "ubuntu-server",
+    "n": 512,
+    "siblingRead": true
+   },
+   {
+    "id": "ubuntu-server/2013-07-15.txt",
+    "ch": "ubuntu-server",
+    "n": 670,
+    "siblingRead": true
+   },
+   {
+    "id": "ubuntu-server/2014-03-15.txt",
+    "ch": "ubuntu-server",
+    "n": 106,
+    "siblingRead": false
+   },
+   {
+    "id": "ubuntu-server/2014-07-15.txt",
+    "ch": "ubuntu-server",
+    "n": 416,
+    "siblingRead": true
+   },
+   {
+    "id": "ubuntu-server/2015-03-15.txt",
+    "ch": "ubuntu-server",
+    "n": 62,
+    "siblingRead": false
+   },
+   {
+    "id": "ubuntu-server/2015-07-15.txt",
+    "ch": "ubuntu-server",
+    "n": 78,
+    "siblingRead": false
+   },
+   {
+    "id": "xubuntu/2007-03-15.txt",
+    "ch": "xubuntu",
+    "n": 1070,
+    "siblingRead": true
+   },
+   {
+    "id": "xubuntu/2007-07-15.txt",
+    "ch": "xubuntu",
+    "n": 462,
+    "siblingRead": true
+   },
+   {
+    "id": "xubuntu/2008-03-15.txt",
+    "ch": "xubuntu",
+    "n": 300,
+    "siblingRead": true
+   },
+   {
+    "id": "xubuntu/2008-07-15.txt",
+    "ch": "xubuntu",
+    "n": 600,
+    "siblingRead": true
+   },
+   {
+    "id": "xubuntu/2009-03-15.txt",
+    "ch": "xubuntu",
+    "n": 476,
+    "siblingRead": true
+   },
+   {
+    "id": "xubuntu/2009-07-15.txt",
+    "ch": "xubuntu",
+    "n": 295,
+    "siblingRead": true
+   },
+   {
+    "id": "xubuntu/2010-03-15.txt",
+    "ch": "xubuntu",
+    "n": 119,
+    "siblingRead": false
+   },
+   {
+    "id": "xubuntu/2010-07-15.txt",
+    "ch": "xubuntu",
+    "n": 195,
+    "siblingRead": true
+   },
+   {
+    "id": "xubuntu/2011-03-15.txt",
+    "ch": "xubuntu",
+    "n": 369,
+    "siblingRead": true
+   },
+   {
+    "id": "xubuntu/2011-07-15.txt",
+    "ch": "xubuntu",
+    "n": 346,
+    "siblingRead": true
+   },
+   {
+    "id": "xubuntu/2012-03-15.txt",
+    "ch": "xubuntu",
+    "n": 204,
+    "siblingRead": true
+   },
+   {
+    "id": "xubuntu/2012-07-15.txt",
+    "ch": "xubuntu",
+    "n": 138,
+    "siblingRead": false
+   },
+   {
+    "id": "xubuntu/2013-03-15.txt",
+    "ch": "xubuntu",
+    "n": 306,
+    "siblingRead": true
+   },
+   {
+    "id": "xubuntu/2013-07-15.txt",
+    "ch": "xubuntu",
+    "n": 246,
+    "siblingRead": true
+   },
+   {
+    "id": "xubuntu/2014-03-15.txt",
+    "ch": "xubuntu",
+    "n": 254,
+    "siblingRead": true
+   },
+   {
+    "id": "xubuntu/2014-07-15.txt",
+    "ch": "xubuntu",
+    "n": 79,
+    "siblingRead": false
+   },
+   {
+    "id": "xubuntu/2015-03-15.txt",
+    "ch": "xubuntu",
+    "n": 56,
+    "siblingRead": false
+   },
+   {
+    "id": "xubuntu/2015-07-15.txt",
+    "ch": "xubuntu",
+    "n": 132,
+    "siblingRead": false
+   }
+  ],
+  "freshEnByChannel": {
+   "kubuntu": [
+    "kubuntu/2009-07-15.txt",
+    "kubuntu/2010-03-15.txt",
+    "kubuntu/2010-07-15.txt",
+    "kubuntu/2011-03-15.txt",
+    "kubuntu/2011-07-15.txt",
+    "kubuntu/2012-03-15.txt",
+    "kubuntu/2012-07-15.txt",
+    "kubuntu/2013-03-15.txt",
+    "kubuntu/2013-07-15.txt",
+    "kubuntu/2014-03-15.txt",
+    "kubuntu/2014-07-15.txt",
+    "kubuntu/2015-03-15.txt",
+    "kubuntu/2015-07-15.txt"
+   ],
+   "ubuntu": [
+    "ubuntu/2011-07-15.txt",
+    "ubuntu/2014-03-15.txt"
+   ],
+   "ubuntu-server": [
+    "ubuntu-server/2007-11-15.txt",
+    "ubuntu-server/2008-03-15.txt",
+    "ubuntu-server/2008-07-15.txt",
+    "ubuntu-server/2009-03-15.txt",
+    "ubuntu-server/2009-07-15.txt",
+    "ubuntu-server/2010-03-15.txt",
+    "ubuntu-server/2010-07-15.txt",
+    "ubuntu-server/2011-03-15.txt",
+    "ubuntu-server/2011-07-15.txt",
+    "ubuntu-server/2012-03-15.txt",
+    "ubuntu-server/2012-07-15.txt",
+    "ubuntu-server/2013-03-15.txt",
+    "ubuntu-server/2013-07-15.txt",
+    "ubuntu-server/2014-03-15.txt",
+    "ubuntu-server/2014-07-15.txt",
+    "ubuntu-server/2015-03-15.txt",
+    "ubuntu-server/2015-07-15.txt"
+   ],
+   "xubuntu": [
+    "xubuntu/2007-03-15.txt",
+    "xubuntu/2007-07-15.txt",
+    "xubuntu/2008-03-15.txt",
+    "xubuntu/2008-07-15.txt",
+    "xubuntu/2009-03-15.txt",
+    "xubuntu/2009-07-15.txt",
+    "xubuntu/2010-03-15.txt",
+    "xubuntu/2010-07-15.txt",
+    "xubuntu/2011-03-15.txt",
+    "xubuntu/2011-07-15.txt",
+    "xubuntu/2012-03-15.txt",
+    "xubuntu/2012-07-15.txt",
+    "xubuntu/2013-03-15.txt",
+    "xubuntu/2013-07-15.txt",
+    "xubuntu/2014-03-15.txt",
+    "xubuntu/2014-07-15.txt",
+    "xubuntu/2015-03-15.txt",
+    "xubuntu/2015-07-15.txt"
+   ]
+  },
+  "neverReadByAnyone": [
+   "kubuntu/2013-07-15.txt",
+   "kubuntu/2014-03-15.txt",
+   "kubuntu/2015-03-15.txt",
+   "ubuntu-server/2009-03-15.txt",
+   "ubuntu-server/2014-03-15.txt",
+   "ubuntu-server/2015-03-15.txt",
+   "ubuntu-server/2015-07-15.txt",
+   "xubuntu/2010-03-15.txt",
+   "xubuntu/2012-07-15.txt",
+   "xubuntu/2014-07-15.txt",
+   "xubuntu/2015-03-15.txt",
+   "xubuntu/2015-07-15.txt"
+  ],
+  "siblingReadForOtherStatistics": [
+   "kubuntu/2009-07-15.txt",
+   "kubuntu/2010-03-15.txt",
+   "kubuntu/2010-07-15.txt",
+   "kubuntu/2011-03-15.txt",
+   "kubuntu/2011-07-15.txt",
+   "kubuntu/2012-03-15.txt",
+   "kubuntu/2012-07-15.txt",
+   "kubuntu/2013-03-15.txt",
+   "kubuntu/2014-07-15.txt",
+   "kubuntu/2015-07-15.txt",
+   "ubuntu/2011-07-15.txt",
+   "ubuntu/2014-03-15.txt",
+   "ubuntu-server/2007-11-15.txt",
+   "ubuntu-server/2008-03-15.txt",
+   "ubuntu-server/2008-07-15.txt",
+   "ubuntu-server/2009-07-15.txt",
+   "ubuntu-server/2010-03-15.txt",
+   "ubuntu-server/2010-07-15.txt",
+   "ubuntu-server/2011-03-15.txt",
+   "ubuntu-server/2011-07-15.txt",
+   "ubuntu-server/2012-03-15.txt",
+   "ubuntu-server/2012-07-15.txt",
+   "ubuntu-server/2013-03-15.txt",
+   "ubuntu-server/2013-07-15.txt",
+   "ubuntu-server/2014-07-15.txt",
+   "xubuntu/2007-03-15.txt",
+   "xubuntu/2007-07-15.txt",
+   "xubuntu/2008-03-15.txt",
+   "xubuntu/2008-07-15.txt",
+   "xubuntu/2009-03-15.txt",
+   "xubuntu/2009-07-15.txt",
+   "xubuntu/2010-07-15.txt",
+   "xubuntu/2011-03-15.txt",
+   "xubuntu/2011-07-15.txt",
+   "xubuntu/2012-03-15.txt",
+   "xubuntu/2013-03-15.txt",
+   "xubuntu/2013-07-15.txt",
+   "xubuntu/2014-03-15.txt"
+  ],
+  "nonEnFreshDays": [],
+  "allNonEnDays": 32,
+  "replicate": {
+   "note": "NON-fresh replicate tier: the scoper's reserved confirmation days, re-read by this independent pipeline",
+   "conf": {
+    "en": [
+     "kubuntu/2007-03-15.txt",
+     "ubuntu/2005-07-15.txt",
+     "ubuntu/2006-03-15.txt",
+     "ubuntu/2007-07-15.txt",
+     "ubuntu/2008-03-15.txt",
+     "ubuntu/2008-07-15.txt",
+     "ubuntu/2009-03-15.txt",
+     "ubuntu/2013-03-15.txt"
+    ],
+    "de": [
+     "ubuntu-de/2011-07-15.txt",
+     "ubuntu-de/2012-03-15.txt",
+     "ubuntu-de/2012-07-15.txt",
+     "ubuntu-de/2013-03-15.txt",
+     "ubuntu-de/2013-11-15.txt"
+    ],
+    "es": [
+     "ubuntu-es/2010-11-15.txt",
+     "ubuntu-es/2011-03-15.txt",
+     "ubuntu-es/2012-03-15.txt",
+     "ubuntu-es/2012-07-15.txt",
+     "ubuntu-es/2014-03-15.txt"
+    ],
+    "it": [
+     "ubuntu-it/2012-03-15.txt",
+     "ubuntu-it/2012-07-15.txt",
+     "ubuntu-it/2013-03-15.txt",
+     "ubuntu-it/2013-07-15.txt",
+     "ubuntu-it/2014-03-15.txt"
+    ]
+   }
+  }
+ },
+ "books": [
+  {
+   "name": "book-dracula",
+   "file": "/Users/mlacy/Documents/3.0/ethos/01-literature-books/gutenberg/pg345_Dracula.txt",
+   "sha": "96cd16eacdbfebae8fdda5591f66e0cc8ee76be18e0cd1aca02bc00615782d28"
+  },
+  {
+   "name": "book-dorian-gray",
+   "file": "/Users/mlacy/Documents/3.0/ethos/01-literature-books/gutenberg/pg174_The_Picture_of_Dorian_Gray.txt",
+   "sha": "cff1585005b24cf871b1aadec2b4413ecc742c8f926c6a39ab76322c2fcf19c0"
+  },
+  {
+   "name": "book-moby-dick",
+   "file": "/Users/mlacy/Documents/3.0/ethos/01-literature-books/gutenberg/pg2701_Moby_Dick.txt",
+   "sha": "7e1d3ff98ff62ac0c7cd16945c3bcd07d6a289ba5c0882ca63b99e1079878b5c"
+  },
+  {
+   "name": "book-sherlock",
+   "file": "/Users/mlacy/Documents/3.0/ethos/01-literature-books/gutenberg/pg768_The_Adventures_of_Sherlock_Holmes.txt",
+   "sha": "28ebc9fb97c5934c448428565f5032376ba570c594723d3e14e1581c06a14dc6"
+  }
+ ],
+ "code": {
+  "rule": "ant-code hash order with salt 'pm-r1-confirm-fresh|', excluding ant-code's 24 and the scoper's 24 files; js 8 khora(<=1/dir)+8 node_modules(<=1/package), py 16 stdlib(<=2/subpackage); a file that fails to lex or has <500 units is skipped",
+  "counts": {
+   "A": 97,
+   "B": 175,
+   "P": 94
+  },
+  "js": [
+   {
+    "file": "/Users/mlacy/Documents/3.0/khora/native/adapters/notation/taxonomy.js",
+    "pool": "khora",
+    "units": 1008
+   },
+   {
+    "file": "/Users/mlacy/Documents/3.0/khora/native/eval/coding-competence/build-javascript-priors.mjs",
+    "pool": "khora",
+    "units": 798
+   },
+   {
+    "file": "/Users/mlacy/Documents/3.0/khora/native/eval/notation-competence/ipa.mjs",
+    "pool": "khora",
+    "units": 1966
+   },
+   {
+    "file": "/Users/mlacy/Documents/3.0/khora/native/eval/competence/run.mjs",
+    "pool": "khora",
+    "units": 1444
+   },
+   {
+    "file": "/Users/mlacy/Documents/3.0/khora/native/adapters/code/mechanical.js",
+    "pool": "khora",
+    "units": 683
+   },
+   {
+    "file": "/Users/mlacy/Documents/3.0/khora/native/the-fold/build-log.js",
+    "pool": "khora",
+    "units": 808
+   },
+   {
+    "file": "/Users/mlacy/Documents/3.0/khora/native/eval/law/impact.mjs",
+    "pool": "khora",
+    "units": 1991
+   },
+   {
+    "file": "/Users/mlacy/Documents/3.0/khora/native/organs/capacity-runner.js",
+    "pool": "khora",
+    "units": 510
+   },
+   {
+    "file": "/Users/mlacy/Documents/jupyter/node_modules/eslint/lib/rules/utils/ast-utils.js",
+    "pool": "node_modules",
+    "units": 951
+   },
+   {
+    "file": "/Users/mlacy/Documents/jupyter/node_modules/webpack/lib/dependencies/HarmonyExportImportedSpecifierDependency.js",
+    "pool": "node_modules",
+    "units": 825
+   },
+   {
+    "file": "/Users/mlacy/Documents/jupyter/node_modules/css-tree/dist/data.js",
+    "pool": "node_modules",
+    "units": 1092
+   },
+   {
+    "file": "/Users/mlacy/Documents/jupyter/node_modules/ejs/lib/ejs.js",
+    "pool": "node_modules",
+    "units": 583
+   },
+   {
+    "file": "/Users/mlacy/Documents/jupyter/node_modules/schema-utils/dist/ValidationError.js",
+    "pool": "node_modules",
+    "units": 1300
+   },
+   {
+    "file": "/Users/mlacy/Documents/jupyter/node_modules/terser/lib/ast.js",
+    "pool": "node_modules",
+    "units": 3257
+   },
+   {
+    "file": "/Users/mlacy/Documents/jupyter/node_modules/big.js/big.js",
+    "pool": "node_modules",
+    "units": 522
+   },
+   {
+    "file": "/Users/mlacy/Documents/jupyter/node_modules/esquery/parser.js",
+    "pool": "node_modules",
+    "units": 2909
+   }
+  ],
+  "py": [
+   {
+    "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/functools.py",
+    "units": 716
+   },
+   {
+    "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/shutil.py",
+    "units": 976
+   },
+   {
+    "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/multiprocessing/connection.py",
+    "units": 770
+   },
+   {
+    "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/difflib.py",
+    "units": 738
+   },
+   {
+    "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/logging/handlers.py",
+    "units": 860
+   },
+   {
+    "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/unittest/case.py",
+    "units": 1010
+   },
+   {
+    "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/urllib/request.py",
+    "units": 1306
+   },
+   {
+    "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/re/_parser.py",
+    "units": 845
+   },
+   {
+    "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/imaplib.py",
+    "units": 1094
+   },
+   {
+    "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/doctest.py",
+    "units": 1137
+   },
+   {
+    "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/http/client.py",
+    "units": 869
+   },
+   {
+    "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/threading.py",
+    "units": 834
+   },
+   {
+    "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py",
+    "units": 1465
+   },
+   {
+    "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/dis.py",
+    "units": 740
+   },
+   {
+    "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py",
+    "units": 1242
+   },
+   {
+    "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/xml/dom/minidom.py",
+    "units": 1457
+   }
+  ],
+  "skipped": {
+   "ja": 1,
+   "jb": 1,
+   "py": 11
+  }
+ }
+}

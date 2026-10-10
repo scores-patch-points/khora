@@ -1,0 +1,437 @@
+{
+ "ruleId": "ablscope-2-company-ircA-c2to6",
+ "attack": "A leakage and confounds",
+ "headerSha256": "a99d00678f8b746779cfc75259f4125a4de3d52fd949f6d416946b3702ba3f39",
+ "B": 1000,
+ "M": 256,
+ "L1a_independentInstrument": {
+  "sample": 120,
+  "within1e6": 120,
+  "maxAbsDiff": 0,
+  "mismatches": [],
+  "pass": true
+ },
+ "L1b_staticScan": {
+  "confirm/lib-dself.mjs": [],
+  "ablation-scope/lib-pairs.mjs": [
+   "31: if (isGoldForm && !gold) continue;                 // a gold form's non-gold occurrences (e.g. the speaker's own nick) are neither positive nor negati"
+  ],
+  "ablation-scope/lib-data.mjs(loadIrcDay)": [
+   "3: //   negExclude: Set(form) (forms that must not be used as unlabelled negatives), speakers?: string[] }.",
+   "18: const nickForm = (n) => n.replace(/[^\\p{L}\\p{N}]+/gu, \"\").toLowerCase();",
+   "42: /** One IRC channel-day. NAME occurrence = body token equal to the form of a nick that spoke >= 3 messages that day, speaker differs, not a topic word",
+   "46: const nickForms = new Set([...spoke].filter(([, c]) => c >= 3).map(([n]) => nickForm(n)).filter((n) => n.length >= 3));",
+   "47: const anyNick = new Set([...spoke.keys()].map(nickForm).filter((n) => n.length >= 3));",
+   "48: const msgs = lines.map(([, n, t]) => ({ nick: nickForm(n), toks: tokensOf(t) })).filter((m) => m.toks.length >= 1);",
+   "50: const topic = new Set([...nickForms].filter((n) => (tot.get(n) ?? 0) / all >= 1 / 300));",
+   "51: const goldPos = new Set(), negExclude = new Set([...anyNick, ...topic]);",
+   "52: msgs.forEach((m, k) => m.toks.forEach((t, i) => { if (nickForms.has(t) && !topic.has(t) && t !== m.nick) goldPos.add(`${k}:${i}`); }));",
+   "53: return { name, kind: \"irc\", stream: msgs.map((m) => m.toks), speakers: msgs.map((m) => m.nick), goldPos, negExclude, goldForms: [...nickForms].filter("
+  ],
+  "impact.mjs windowCompanyModel..ablate": []
+ },
+ "L2a_confirmerLadders": {
+  "all350": {
+   "pairs": 350,
+   "aucNegDSelf": 0.8339,
+   "ci": [
+    0.7934,
+    0.8652
+   ],
+   "aucRInit": 0.8804,
+   "ciRInit": [
+    0.8532,
+    0.9066
+   ],
+   "perStratum": {
+    "c2": {
+     "n": 88,
+     "auc": 0.8159
+    },
+    "c3": {
+     "n": 93,
+     "auc": 0.8333
+    },
+    "c4_6": {
+     "n": 169,
+     "auc": 0.8437
+    },
+    "c7_15": {
+     "n": 0,
+     "auc": null
+    },
+    "c16p": {
+     "n": 0,
+     "auc": null
+    }
+   },
+   "controls": {
+    "R_LOGC": 0.5079,
+    "R_POS": 0.493,
+    "R_IPOS": 0.5,
+    "R_FB": 0.4954,
+    "R_LEN": 0.5188,
+    "R_SL": 0.5207
+   },
+   "controlsInBand": true,
+   "days": 23
+  },
+  "exactC": {
+   "pairs": 287,
+   "aucNegDSelf": 0.821,
+   "ci": [
+    0.7778,
+    0.8564
+   ],
+   "aucRInit": 0.8702,
+   "ciRInit": [
+    0.8402,
+    0.8987
+   ],
+   "perStratum": {
+    "c2": {
+     "n": 88,
+     "auc": 0.8159
+    },
+    "c3": {
+     "n": 93,
+     "auc": 0.8333
+    },
+    "c4_6": {
+     "n": 106,
+     "auc": 0.8143
+    },
+    "c7_15": {
+     "n": 0,
+     "auc": null
+    },
+    "c16p": {
+     "n": 0,
+     "auc": null
+    }
+   },
+   "controls": {
+    "R_LOGC": 0.5,
+    "R_POS": 0.4829,
+    "R_IPOS": 0.5,
+    "R_FB": 0.5045,
+    "R_LEN": 0.5126,
+    "R_SL": 0.5224
+   },
+   "controlsInBand": true,
+   "days": 23
+  },
+  "exactC_FB": {
+   "pairs": 164,
+   "aucNegDSelf": 0.857,
+   "ci": [
+    0.8162,
+    0.9007
+   ],
+   "aucRInit": 0.9073,
+   "ciRInit": [
+    0.8631,
+    0.9466
+   ],
+   "perStratum": {
+    "c2": {
+     "n": 43,
+     "auc": 0.8899
+    },
+    "c3": {
+     "n": 58,
+     "auc": 0.8639
+    },
+    "c4_6": {
+     "n": 63,
+     "auc": 0.8282
+    },
+    "c7_15": {
+     "n": 0,
+     "auc": null
+    },
+    "c16p": {
+     "n": 0,
+     "auc": null
+    }
+   },
+   "controls": {
+    "R_LOGC": 0.5,
+    "R_POS": 0.4825,
+    "R_IPOS": 0.5,
+    "R_FB": 0.5,
+    "R_LEN": 0.4972,
+    "R_SL": 0.5104
+   },
+   "controlsInBand": true,
+   "days": 22
+  },
+  "exactC_FB_LEN": {
+   "pairs": 70,
+   "aucNegDSelf": 0.8587,
+   "ci": [
+    0.8004,
+    0.912
+   ],
+   "aucRInit": 0.8837,
+   "ciRInit": [
+    0.8104,
+    0.9521
+   ],
+   "perStratum": {
+    "c2": {
+     "n": 22,
+     "auc": 0.9194
+    },
+    "c3": {
+     "n": 28,
+     "auc": 0.8903
+    },
+    "c4_6": {
+     "n": 20,
+     "auc": 0.7475
+    },
+    "c7_15": {
+     "n": 0,
+     "auc": null
+    },
+    "c16p": {
+     "n": 0,
+     "auc": null
+    }
+   },
+   "controls": {
+    "R_LOGC": 0.5,
+    "R_POS": 0.4881,
+    "R_IPOS": 0.5,
+    "R_FB": 0.5,
+    "R_LEN": 0.5,
+    "R_SL": 0.5052
+   },
+   "controlsInBand": true,
+   "days": 19
+  },
+  "confirmerCaliper": {
+   "pairs": 30,
+   "aucNegDSelf": 0.8808,
+   "ci": [
+    0.8023,
+    0.9545
+   ],
+   "aucRInit": 0.8969,
+   "ciRInit": [
+    0.8226,
+    0.9854
+   ],
+   "perStratum": {
+    "c2": {
+     "n": 9,
+     "auc": 1
+    },
+    "c3": {
+     "n": 16,
+     "auc": 0.8516
+    },
+    "c4_6": {
+     "n": 5,
+     "auc": null
+    },
+    "c7_15": {
+     "n": 0,
+     "auc": null
+    },
+    "c16p": {
+     "n": 0,
+     "auc": null
+    }
+   },
+   "controls": {
+    "R_LOGC": 0.5,
+    "R_POS": 0.5069,
+    "R_IPOS": 0.5,
+    "R_FB": 0.5,
+    "R_LEN": 0.5,
+    "R_SL": 0.5076
+   },
+   "controlsInBand": true,
+   "days": 13
+  }
+ },
+ "L2bc_strictRematch": {
+  "conf.S_FB": {
+   "pairs": 304,
+   "aucNegDSelf": 0.8271,
+   "ci": [
+    0.7841,
+    0.8676
+   ],
+   "aucRInit": 0.8956,
+   "ciRInit": [
+    0.8701,
+    0.9198
+   ],
+   "perStratum": {
+    "c2": {
+     "n": 80,
+     "auc": 0.8015
+    },
+    "c3": {
+     "n": 90,
+     "auc": 0.8442
+    },
+    "c4_6": {
+     "n": 134,
+     "auc": 0.8308
+    },
+    "c7_15": {
+     "n": 0,
+     "auc": null
+    },
+    "c16p": {
+     "n": 0,
+     "auc": null
+    }
+   },
+   "controls": {
+    "R_LOGC": 0.5,
+    "R_POS": 0.4996,
+    "R_IPOS": 0.5,
+    "R_FB": 0.5,
+    "R_LEN": 0.7235,
+    "R_SL": 0.5038
+   },
+   "controlsInBand": false,
+   "days": 23,
+   "permQ95": 0.5468,
+   "permP": 0,
+   "tiesOnRInit": {
+    "pairs": 48,
+    "aucNegDSelf": 0.5872
+   },
+   "maxAbsDc": 0,
+   "exactCShare": 1
+  },
+  "conf.S_FBLEN": {
+   "pairs": 78,
+   "aucNegDSelf": 0.8602,
+   "ci": [
+    0.7861,
+    0.9178
+   ],
+   "aucRInit": 0.9045,
+   "ciRInit": [
+    0.8527,
+    0.9536
+   ],
+   "perStratum": {
+    "c2": {
+     "n": 21,
+     "auc": 0.9433
+    },
+    "c3": {
+     "n": 31,
+     "auc": 0.8741
+    },
+    "c4_6": {
+     "n": 26,
+     "auc": 0.7766
+    },
+    "c7_15": {
+     "n": 0,
+     "auc": null
+    },
+    "c16p": {
+     "n": 0,
+     "auc": null
+    }
+   },
+   "controls": {
+    "R_LOGC": 0.5,
+    "R_POS": 0.4712,
+    "R_IPOS": 0.5,
+    "R_FB": 0.5,
+    "R_LEN": 0.5,
+    "R_SL": 0.4726
+   },
+   "controlsInBand": true,
+   "days": 18,
+   "permQ95": 0.5842,
+   "permP": 0,
+   "tiesOnRInit": {
+    "pairs": 11,
+    "aucNegDSelf": 0.6303
+   },
+   "maxAbsDc": 0,
+   "exactCShare": 1
+  },
+  "fresh.S_FB": {
+   "pairs": 20,
+   "aucNegDSelf": 0.7942,
+   "ci": [
+    0.6603,
+    0.9323
+   ],
+   "aucRInit": 0.7533,
+   "ciRInit": [
+    0.5889,
+    0.9063
+   ],
+   "perStratum": {
+    "c2": {
+     "n": 4,
+     "auc": null
+    },
+    "c3": {
+     "n": 6,
+     "auc": null
+    },
+    "c4_6": {
+     "n": 10,
+     "auc": 0.78
+    },
+    "c7_15": {
+     "n": 0,
+     "auc": null
+    },
+    "c16p": {
+     "n": 0,
+     "auc": null
+    }
+   },
+   "controls": {
+    "R_LOGC": 0.5,
+    "R_POS": 0.4233,
+    "R_IPOS": 0.5,
+    "R_FB": 0.5,
+    "R_LEN": 0.8108,
+    "R_SL": 0.4813
+   },
+   "controlsInBand": false,
+   "days": 8,
+   "permQ95": 0.6458,
+   "permP": 0,
+   "tiesOnRInit": {
+    "pairs": 5,
+    "aucNegDSelf": null
+   },
+   "maxAbsDc": 0,
+   "exactCShare": 1
+  },
+  "fresh.S_FBLEN": {
+   "pairs": 4
+  }
+ },
+ "verdictA": {
+  "survivesStrictRematch": false,
+  "S_FB": {
+   "pass": false
+  },
+  "S_FBLEN": {
+   "pass": true,
+   "nOrSkipped": 78
+  },
+  "falls": false,
+  "leaks": false
+ },
+ "analyseSeconds": 0.9
+}

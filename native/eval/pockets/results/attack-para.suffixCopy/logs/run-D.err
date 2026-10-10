@@ -1,0 +1,29 @@
+W0a unit-order statuses A M A A A A M A A A
+W0b unit-order statuses A M A A A M A A A A
+W1(q=0.1) unit-order statuses P+ P+ P+ P+ P+ P+ P+ P+ P+ M
+W1(q=0.25) unit-order statuses P+ P+ P+ P+ P+ P+ P+ P+ P+ P+
+W1(q=0.5) unit-order statuses P+ P+ P+ P+ P+ P+ P+ P+ P+ P+
+W2(stay=0.5,aS=1) unit-order statuses A A A A A A A A A A
+W2(stay=0.5,aS=1.4) unit-order statuses A M M A A A A A A A
+W2(stay=0.5,aS=1.8) unit-order statuses A A A A A M M A A A
+W2(stay=0.8,aS=1) unit-order statuses A A A M A A M A A M
+W2(stay=0.8,aS=1.4) unit-order statuses M M M M M M M M M M
+W2(stay=0.8,aS=1.8) unit-order statuses P+ P+ P+ P+ P+ P+ P+ P+ P+ P+
+W2(stay=0.95,aS=1) unit-order statuses A M M A A A M A A A
+W2(stay=0.95,aS=1.4) unit-order statuses M M M M M M M P+ M M
+W2(stay=0.95,aS=1.8) unit-order statuses P+ P+ P+ P+ P+ P+ P+ P+ P+ P+
+W2b(aS=1) unit-order statuses A M A A A M A A A A
+W2b(aS=1.8) unit-order statuses P+ P+ P+ P+ P+ P+ P+ P+ P+ P+
+W2b(aS=2.5) unit-order statuses P+ P+ P+ P+ P+ P+ P+ P+ P+ P+
+W3(p=0.02) unit-order statuses P+ P+ P+ P+ P+ P+ P+ P+ P+ P+
+W3(p=0.05) unit-order statuses P+ P+ P+ P+ P+ P+ P+ P+ P+ P+
+W3(p=0.15) unit-order statuses P+ P+ P+ P+ P+ P+ P+ P+ P+ P+
+pl-null A
+pl-burst M
+pl-markov M
+pl-frames A
+pl-parallel P+
+pl-length M
+pl-mix P+
+pl-null2 M
+ALL DONE

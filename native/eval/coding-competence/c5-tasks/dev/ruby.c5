@@ -1,0 +1,229 @@
+@@@@ task fibonacci
+def fibonacci(n)
+  return n if n < 2
+  fibonacci(n - 1) + fibonacci(n - 2)
+end
+
+puts((0..10).map { |i| fibonacci(i) }.join(" "))
+@@@@ task gcd
+def gcd(a, b)
+  return a if b == 0
+  gcd(b, a % b)
+end
+
+pairs = [[48, 18], [17, 5], [0, 9], [100, 75]]
+puts pairs.map { |a, b| gcd(a, b) }.join(" ")
+@@@@ task binary_search
+def search_range(items, target, low, high)
+  return -1 if low > high
+  mid = (low + high) / 2
+  return mid if items[mid] == target
+  return search_range(items, target, mid + 1, high) if items[mid] < target
+  search_range(items, target, low, mid - 1)
+end
+
+def binary_search(items, target)
+  search_range(items, target, 0, items.length - 1)
+end
+
+data = [1, 3, 5, 7, 9, 11, 13]
+puts [7, 1, 13, 4].map { |t| binary_search(data, t) }.join(" ")
+@@@@ task quicksort
+def partition(items, low, high)
+  pivot = items[high]
+  i = low - 1
+  (low...high).each do |j|
+    if items[j] <= pivot
+      i += 1
+      items[i], items[j] = items[j], items[i]
+    end
+  end
+  items[i + 1], items[high] = items[high], items[i + 1]
+  i + 1
+end
+
+def quicksort(items, low, high)
+  return unless low < high
+  pivot_index = partition(items, low, high)
+  quicksort(items, low, pivot_index - 1)
+  quicksort(items, pivot_index + 1, high)
+end
+
+data = [5, 2, 9, 1, 5, 6, 0, 3]
+quicksort(data, 0, data.length - 1)
+puts data.join(" ")
+@@@@ task merge_sort
+def merge(left, right)
+  result = []
+  i = 0
+  j = 0
+  while i < left.length && j < right.length
+    if left[i] <= right[j]
+      result << left[i]
+      i += 1
+    else
+      result << right[j]
+      j += 1
+    end
+  end
+  result + left[i..-1] + right[j..-1]
+end
+
+def merge_sort(items)
+  return items if items.length <= 1
+  mid = items.length / 2
+  merge(merge_sort(items[0...mid]), merge_sort(items[mid..-1]))
+end
+
+puts merge_sort([38, 27, 43, 3, 9, 82, 10]).join(" ")
+@@@@ task factorial
+def factorial(n)
+  return 1 if n <= 1
+  n * factorial(n - 1)
+end
+
+puts((0..10).map { |i| factorial(i) }.join(" "))
+@@@@ task palindrome
+def normalize(text)
+  out = ""
+  text.each_char do |ch|
+    out << ch.downcase if ch =~ /[A-Za-z0-9]/
+  end
+  out
+end
+
+def reverse_text(text)
+  out = ""
+  text.each_char { |ch| out = ch + out }
+  out
+end
+
+def is_palindrome?(text)
+  cleaned = normalize(text)
+  cleaned == reverse_text(cleaned)
+end
+
+samples = ["A man, a plan, a canal: Panama", "hello", "Was it a car or a cat I saw?"]
+puts samples.map { |s| is_palindrome?(s) }.join(" ")
+@@@@ task word_count
+def split_words(text)
+  text.split(" ")
+end
+
+def count_words(text)
+  counts = Hash.new(0)
+  split_words(text).each { |word| counts[word] += 1 }
+  counts
+end
+
+counts = count_words("the quick brown fox jumps over the lazy dog the end")
+puts counts.keys.sort.map { |w| "#{w}=#{counts[w]}" }.join(" ")
+@@@@ task fizzbuzz
+def is_divisible?(n, d)
+  n % d == 0
+end
+
+def fizz_buzz(n)
+  return "FizzBuzz" if is_divisible?(n, 15)
+  return "Fizz" if is_divisible?(n, 3)
+  return "Buzz" if is_divisible?(n, 5)
+  n.to_s
+end
+
+puts((1..15).map { |i| fizz_buzz(i) }.join(" "))
+@@@@ task linked_list
+class Node
+  attr_accessor :value, :next_node
+
+  def initialize(value, next_node = nil)
+    @value = value
+    @next_node = next_node
+  end
+end
+
+def reverse_list(node, previous = nil)
+  return previous if node.nil?
+  following = node.next_node
+  node.next_node = previous
+  reverse_list(following, node)
+end
+
+def to_array(node)
+  values = []
+  until node.nil?
+    values << node.value
+    node = node.next_node
+  end
+  values
+end
+
+head = nil
+[5, 4, 3, 2, 1].each { |v| head = Node.new(v, head) }
+puts to_array(reverse_list(head)).join(" ")
+@@@@ task stack
+class Stack
+  def initialize
+    @items = []
+  end
+
+  def push(value)
+    @items << value
+  end
+
+  def is_empty?
+    @items.length == 0
+  end
+
+  def pop
+    if is_empty?
+      raise IndexError, "pop from empty stack"
+    end
+    value = @items[-1]
+    @items.delete_at(-1)
+    value
+  end
+
+  def peek
+    if is_empty?
+      raise IndexError, "peek at empty stack"
+    end
+    @items[-1]
+  end
+end
+
+stack = Stack.new
+[1, 2, 3].each { |v| stack.push(v) }
+out = [stack.peek, stack.pop, stack.pop, stack.is_empty?, stack.pop, stack.is_empty?]
+puts out.join(" ")
+@@@@ task tree_traversal
+class TreeNode
+  attr_accessor :value, :left, :right
+
+  def initialize(value, left = nil, right = nil)
+    @value = value
+    @left = left
+    @right = right
+  end
+end
+
+def inorder(node, out)
+  return if node.nil?
+  inorder(node.left, out)
+  out << node.value
+  inorder(node.right, out)
+end
+
+def preorder(node, out)
+  return if node.nil?
+  out << node.value
+  preorder(node.left, out)
+  preorder(node.right, out)
+end
+
+root = TreeNode.new(4, TreeNode.new(2, TreeNode.new(1), TreeNode.new(3)), TreeNode.new(6, TreeNode.new(5), TreeNode.new(7)))
+visited = []
+inorder(root, visited)
+puts visited.join(" ")
+visited = []
+preorder(root, visited)
+puts visited.join(" ")

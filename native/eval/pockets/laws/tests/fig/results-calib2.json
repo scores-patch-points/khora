@@ -1,0 +1,88 @@
+{
+ "D2": {
+  "figShare": {
+   "n": 40,
+   "meanZ": -0.1,
+   "sdZ": 1.23,
+   "ge4": 0,
+   "ge2": 5
+  },
+  "arrival": {
+   "n": 40,
+   "meanZ": -0.15,
+   "sdZ": 1.46,
+   "ge4": 0,
+   "ge2": 6
+  },
+  "persist": {
+   "n": 40,
+   "meanZ": 0.2,
+   "sdZ": 1.2,
+   "ge4": 0,
+   "ge2": 3
+  },
+  "crpTheta": {
+   "n": 40,
+   "meanZ": -0.1,
+   "sdZ": 1.54,
+   "ge4": 1,
+   "ge2": 8
+  },
+  "fano": {
+   "n": 40,
+   "meanZ": 0.28,
+   "sdZ": 1.15,
+   "ge4": 1,
+   "ge2": 3
+  },
+  "introLeft": {
+   "n": 40,
+   "meanZ": -0.17,
+   "sdZ": 0.97,
+   "ge4": 0,
+   "ge2": 1
+  },
+  "introRight": {
+   "n": 40,
+   "meanZ": 0.14,
+   "sdZ": 1.14,
+   "ge4": 1,
+   "ge2": 2
+  },
+  "introLeftFq": {
+   "n": 40,
+   "meanZ": 0.13,
+   "sdZ": 1.18,
+   "ge4": 0,
+   "ge2": 5
+  },
+  "initEnrich": {
+   "n": 40,
+   "meanZ": -0.16,
+   "sdZ": 1.55,
+   "ge4": 1,
+   "ge2": 5
+  },
+  "initSplit": {
+   "n": 40,
+   "meanZ": -0.18,
+   "sdZ": 0.92,
+   "ge4": 0,
+   "ge2": 1
+  },
+  "initFollow": {
+   "n": 40,
+   "meanZ": -0.22,
+   "sdZ": 1.05,
+   "ge4": 0,
+   "ge2": 3
+  },
+  "converge": {
+   "n": 40,
+   "meanZ": 0.08,
+   "sdZ": 1.31,
+   "ge4": 0,
+   "ge2": 6
+  }
+ }
+}

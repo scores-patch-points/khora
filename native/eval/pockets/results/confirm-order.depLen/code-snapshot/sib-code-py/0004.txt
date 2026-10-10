@@ -1,0 +1,61 @@
+#!/usr/bin/env python3
+"""dangling.py — find citation keys used in claims that no source record defines.
+
+A claim cites a source via its token's `q[key]` map. If `key` is not present in
+any `operand.sources` (any article log) or `fact-checks/*.sources.json`, the
+citation has no title/outlet/URL: it cannot render and cannot be archived.
+
+    python3 tools/archive/dangling.py           # report
+    python3 tools/archive/dangling.py --json    # machine-readable
+"""
+import collections, glob, json, os, sys
+
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+
+
+def walk_tokens(tokens, out):
+    for t in tokens or []:
+        if isinstance(t, dict) and isinstance(t.get("q"), dict):
+            for k in t["q"]:
+                out[k] += 1
+
+
+def main():
+    defined, cited, where = set(), collections.Counter(), collections.defaultdict(set)
+    for f in glob.glob(os.path.join(ROOT, "fact-checks", "*.sources.json")):
+        try: d = json.load(open(f))
+        except Exception: continue
+        for s in (d.get("sources") or []):
+            k = s.get("key") or s.get("id")
+            if k: defined.add(k)
+    for f in glob.glob(os.path.join(ROOT, "articles", "**", "*.jsonl"), recursive=True):
+        for line in open(f):
+            line = line.strip()
+            if not line or '"q"' not in line: continue
+            try: ev = json.loads(line)
+            except Exception: continue
+            op = ev.get("operand", ev)
+            if not isinstance(op, dict): continue
+            defined.update((op.get("sources") or {}).keys())
+            local = collections.Counter()
+            for b in (op.get("body") or []):
+                walk_tokens(b.get("tokens"), local)
+                for it in (b.get("items") or []): walk_tokens(it, local)
+            for k, n in local.items():
+                cited[k] += n
+                where[k].add(os.path.relpath(f, ROOT))
+
+    dangling = {k: n for k, n in cited.items() if k not in defined}
+    if "--json" in sys.argv:
+        json.dump({k: {"citations": n, "files": sorted(where[k])} for k, n in dangling.items()},
+                  open(os.path.join(ROOT, "tools/archive/dangling.json"), "w"), indent=1)
+        print("wrote tools/archive/dangling.json")
+        return
+    print("defined source keys: %d · cited keys: %d · DANGLING: %d (%d citations)" %
+          (len(defined), len(cited), len(dangling), sum(dangling.values())))
+    for k, n in sorted(dangling.items(), key=lambda x: (-x[1], x[0])):
+        print("  %-34s %2d citations  %s" % (k, n, sorted(where[k])[0]))
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,1327 @@
+{
+ "schema": "C5Manifest@1",
+ "label": "authored: model-written programs, never held-out natural data",
+ "author": "model (claude), human review pending",
+ "split": "dev",
+ "validated_at": "2026-10-06T05:43:20.918Z",
+ "task_ids": [
+  "fibonacci",
+  "gcd",
+  "binary_search",
+  "quicksort",
+  "merge_sort",
+  "factorial",
+  "palindrome",
+  "word_count",
+  "fizzbuzz",
+  "linked_list",
+  "stack",
+  "tree_traversal"
+ ],
+ "toolchains": {
+  "executed_with": {
+   "python": {
+    "available": true,
+    "command": "python3",
+    "version": "Python 3.14.7"
+   },
+   "javascript": {
+    "available": true,
+    "command": "node",
+    "version": "v24.10.0"
+   },
+   "typescript": {
+    "available": true,
+    "command": "node (type stripping)",
+    "version": "v24.10.0"
+   },
+   "ruby": {
+    "available": true,
+    "command": "ruby",
+    "version": "ruby 2.6.10p210 (2022-04-12 revision 67958) [universal.arm64e-darwin23]"
+   },
+   "c": {
+    "available": true,
+    "command": "gcc -std=c11",
+    "version": "Apple clang version 15.0.0 (clang-1500.3.9.4)"
+   },
+   "java": {
+    "available": true,
+    "command": "/opt/homebrew/opt/openjdk/bin/javac + java",
+    "version": "javac 25.0.2"
+   }
+  },
+  "no_toolchain": {
+   "go": "no go toolchain on this machine (go not on PATH, not in /opt/homebrew)",
+   "rust": "no rustc/cargo on this machine"
+  }
+ },
+ "gold": {
+  "grammar_pack": {
+   "tree-sitter": "0.26.0",
+   "tree-sitter-language-pack": "1.21.0",
+   "tree-sitter-groovy": "0.1.2"
+  },
+  "gold_version": "gold-1"
+ },
+ "summary": {
+  "c": {
+   "authored": 12,
+   "missing": [],
+   "executed": 12,
+   "output_ok": 12,
+   "output_bad": [],
+   "parse_ok": 12,
+   "parse_bad": [],
+   "kept": 12,
+   "toolchain": "gcc -std=c11"
+  },
+  "go": {
+   "authored": 12,
+   "missing": [],
+   "executed": 0,
+   "output_ok": 0,
+   "output_bad": [],
+   "parse_ok": 12,
+   "parse_bad": [],
+   "kept": 12,
+   "toolchain": "no go toolchain on this machine (go not on PATH, not in /opt/homebrew)"
+  },
+  "java": {
+   "authored": 12,
+   "missing": [],
+   "executed": 12,
+   "output_ok": 12,
+   "output_bad": [],
+   "parse_ok": 12,
+   "parse_bad": [],
+   "kept": 12,
+   "toolchain": "/opt/homebrew/opt/openjdk/bin/javac + java"
+  },
+  "javascript": {
+   "authored": 12,
+   "missing": [],
+   "executed": 12,
+   "output_ok": 12,
+   "output_bad": [],
+   "parse_ok": 12,
+   "parse_bad": [],
+   "kept": 12,
+   "toolchain": "node"
+  },
+  "python": {
+   "authored": 12,
+   "missing": [],
+   "executed": 12,
+   "output_ok": 12,
+   "output_bad": [],
+   "parse_ok": 12,
+   "parse_bad": [],
+   "kept": 12,
+   "toolchain": "python3"
+  },
+  "ruby": {
+   "authored": 12,
+   "missing": [],
+   "executed": 12,
+   "output_ok": 12,
+   "output_bad": [],
+   "parse_ok": 12,
+   "parse_bad": [],
+   "kept": 12,
+   "toolchain": "ruby"
+  },
+  "rust": {
+   "authored": 12,
+   "missing": [],
+   "executed": 0,
+   "output_ok": 0,
+   "output_bad": [],
+   "parse_ok": 12,
+   "parse_bad": [],
+   "kept": 12,
+   "toolchain": "no rustc/cargo on this machine"
+  },
+  "typescript": {
+   "authored": 12,
+   "missing": [],
+   "executed": 12,
+   "output_ok": 12,
+   "output_bad": [],
+   "parse_ok": 12,
+   "parse_bad": [],
+   "kept": 12,
+   "toolchain": "node (type stripping)"
+  }
+ },
+ "programs": {
+  "c": {
+   "fibonacci": {
+    "sha256": "9958a9cc91c486f3376fa4122f653af48339b25d024563b657eac2fac8bb1c15",
+    "bytes": 320,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "gcd": {
+    "sha256": "b5fa0ed662264a920277c5ce8f55c5e4bbe82ecebb292e06db6c2eda18d9ed1f",
+    "bytes": 377,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "binary_search": {
+    "sha256": "788a91a91f1ca6c1f38e4281d5801d7ec87bc16e45de64ab99e69cb899da9fbb",
+    "bytes": 780,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "quicksort": {
+    "sha256": "29a5131cd907f405c85e3d26b23a23048b9b9ccb30dd254edf3e1e2d8a05ca04",
+    "bytes": 872,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "merge_sort": {
+    "sha256": "37f4b985e70775c1dc7189f421ce44cd2cde43c80865314f4f4996ca32d672a3",
+    "bytes": 1086,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "factorial": {
+    "sha256": "71aaa564d60682dbfa1a3322963525efbf8d2632baa23740142c607a7821d06b",
+    "bytes": 314,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "palindrome": {
+    "sha256": "c362e916dec7f6afcec567e1ce514476e2975bc0b4674b76752313d47bc49b6a",
+    "bytes": 1028,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "word_count": {
+    "sha256": "054ec5d25e4ecaf51724dc269ffc7c2622e97155f1448b17eab5d352ef24b1b4",
+    "bytes": 1925,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "fizzbuzz": {
+    "sha256": "d9673ab303a1b634e7596656146240652f3fae8cc974181bf9874a6b3e11f577",
+    "bytes": 616,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "linked_list": {
+    "sha256": "2294411fc53de04a722f6c883a560fac6dd974f56313ab6710b298c8322f2196",
+    "bytes": 1014,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "stack": {
+    "sha256": "ed58e0b4344eb16efb171a669650f2d3553fb4e54aad287c6ec8e307632499e7",
+    "bytes": 982,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "tree_traversal": {
+    "sha256": "89ead1393063658ea0df689e1fcb6e05c3524d19d1e976c268a048223f054e38",
+    "bytes": 1302,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   }
+  },
+  "go": {
+   "fibonacci": {
+    "sha256": "f3542d7cdf4c9c16a3fef3368b61c73b03bbf6cefb7f8f6030fb6b57c6c56d50",
+    "bytes": 298,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "gcd": {
+    "sha256": "df586e3dc3d803cd931c8535f111138891b0d14e351c2feb13df30fae67b954d",
+    "bytes": 335,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "binary_search": {
+    "sha256": "a646c0f912c2e90488a411ff2bb7602ef103aba55c4e33d5fd80621a02be7eb1",
+    "bytes": 651,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "quicksort": {
+    "sha256": "c3702d2113cc66bdbb616190e6311634ca5f8e2e2b663fdc09ab70e5fe876551",
+    "bytes": 691,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "merge_sort": {
+    "sha256": "265fb55c7b1bc8229e817fc16dad86ee445be527ab21f125c72b80929a4ba580",
+    "bytes": 735,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "factorial": {
+    "sha256": "43d1e1445e2c7ff6e7244c542429973302fd3c88dd0a8448926c54705649d54a",
+    "bytes": 286,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "palindrome": {
+    "sha256": "9c27c76d00513d829465d7635c24b083644a2f00a7426ca206aed36739d3833e",
+    "bytes": 727,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "word_count": {
+    "sha256": "b70493149562fc1b4119288060d11dcb1de69b50851c1b886a981a4a54a27177",
+    "bytes": 619,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "fizzbuzz": {
+    "sha256": "5c11edfa6fd6257928789b6b71dcbbc8375f1ee52f8e1e0a550eae35ffc923d2",
+    "bytes": 431,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "linked_list": {
+    "sha256": "59bb30153b1f9bd8f85804dfe42ca9e7c3d7e2134940fc1420d9ab2207505a35",
+    "bytes": 686,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "stack": {
+    "sha256": "58c1750d57a035966f40a9a0e13bde12142a9fdd1fb6330b54c67ac683ea2543",
+    "bytes": 916,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "tree_traversal": {
+    "sha256": "d1aaba2dc81539b135579503a18aed2db8a076df3907b03bf1bf7222d8cb66e4",
+    "bytes": 802,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   }
+  },
+  "java": {
+   "fibonacci": {
+    "sha256": "abc5aed95b42f020ee7a6e7633e4cbbd8b2585fd04587663602bb97f9ce83acd",
+    "bytes": 454,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "gcd": {
+    "sha256": "222f8bcbb26aaa248970023f2fd31b52874ac13e7069b7419e8c4f93c4e158f2",
+    "bytes": 504,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "binary_search": {
+    "sha256": "d4bb9ae1afdc1bf43878230512888288f73ff3253cc916119297ebbf1bd18d1b",
+    "bytes": 940,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "quicksort": {
+    "sha256": "8344387c5e9e916e55521bc031b6698d0ddfd50ad36e0f09ecb7684b51e181c8",
+    "bytes": 1100,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "merge_sort": {
+    "sha256": "c0f0068d0f275b49ed5c1dcb3a59677deab90e2f2d440783773152406b24aa2c",
+    "bytes": 1258,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "factorial": {
+    "sha256": "412f1edcc5800ee3216484c10ce80f7e993a27744ba7338abdf67b479c2e0b92",
+    "bytes": 441,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "palindrome": {
+    "sha256": "883f127b94bc8107cdcf2e80579e791eeadeefca0e65b5b08d916dc4ed30799d",
+    "bytes": 1091,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "word_count": {
+    "sha256": "f97d14365722d90cdcc4a9bc07cb87f73984d462cee5fdb30de37ff5526ac81d",
+    "bytes": 878,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "fizzbuzz": {
+    "sha256": "c75a4f732fc36675c678623326fe379b1091aa27253f5df840618163a25dca39",
+    "bytes": 680,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "linked_list": {
+    "sha256": "033262359fc8a569514a40dd60f6b08209b6782ce407ebabe44f148df8ed938c",
+    "bytes": 1115,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "stack": {
+    "sha256": "6f4c1d02be8fc7cebf33accbab126d5a4de077fc37f257375c90a83cefecc1a9",
+    "bytes": 1135,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "tree_traversal": {
+    "sha256": "d40290c59ba599d98ece5a87eb865e74a1fc98dbaf7ae37acbdcadeb2fbd2bdb",
+    "bytes": 1644,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   }
+  },
+  "javascript": {
+   "fibonacci": {
+    "sha256": "4b9324b1850b0758219d6ceef1526a55c2761c990f3501a505d049f4bb36c04c",
+    "bytes": 219,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "gcd": {
+    "sha256": "95cd2b7cec3f3acb5c06ea41b06a9850bbfd4451227f241e17bcf0e176010112",
+    "bytes": 195,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "binary_search": {
+    "sha256": "e612dab0e59b280ec3157e8e76c8b51a6fc00bb0b00cbf2b8e5ab91e4f3f3900",
+    "bytes": 534,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "quicksort": {
+    "sha256": "a335a63a3fe8fe3c11831bd1443dd98550d72e740dfdc034e42661ab62c4d0c2",
+    "bytes": 635,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "merge_sort": {
+    "sha256": "b2c9512a9af0e15b1748e242d50d5e0bcc071d1165b6f7245decc5d85133ee66",
+    "bytes": 585,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "factorial": {
+    "sha256": "9530205e0218ce32db5d6133bcc6a5629e62de7ffd555d5828ccab4a0a2cdd8e",
+    "bytes": 205,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "palindrome": {
+    "sha256": "3f3d988585db9579f88ec877e4e6f42f983e9e669fa93053ff3073a93b022869",
+    "bytes": 547,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "word_count": {
+    "sha256": "9bf4bbdf31d681b0f25a1ac65c83b3ac2d8aaccae3d32996cb7a1c572980cae0",
+    "bytes": 380,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "fizzbuzz": {
+    "sha256": "73ac9e6ce1dd8cc618c96a3ab341f14710b133ee716aeac6e540b83ed57609b2",
+    "bytes": 358,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "linked_list": {
+    "sha256": "1bcd487765de21030c6ff1117c571d70f343d332d598c6e69c44c3f4b39b5603",
+    "bytes": 565,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "stack": {
+    "sha256": "b2185d9e96ec6cc9c80edf202a458d8ed59016d58461d4acf251421c9119eb0e",
+    "bytes": 751,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "tree_traversal": {
+    "sha256": "178cb1b5a88ed54853b75574900c356bbef75810bdfdb7058d09db849ea43db1",
+    "bytes": 764,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   }
+  },
+  "python": {
+   "fibonacci": {
+    "sha256": "e27f54cbc1da6c8556bff44b9ada01260617773ddec0e23b11e86f0aaa3f6b80",
+    "bytes": 152,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "gcd": {
+    "sha256": "a026b86d7e5aa646d34d4520fddc1ccae723e45e5615c291680290f727248dd8",
+    "bytes": 171,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "binary_search": {
+    "sha256": "1d10c5e7a3b8853a59525849baf8d6e248e1223c3fdf9d8e8eebdc88f6f44321",
+    "bytes": 491,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "quicksort": {
+    "sha256": "b070f474350267bea291fbd0bac876bdb81d9c2128cee2a07bc4dbf083ae8531",
+    "bytes": 555,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "merge_sort": {
+    "sha256": "98978c35633ecf9d8225f31239a9f3d9dae2c4711ac14e056eb583be15cea285",
+    "bytes": 571,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "factorial": {
+    "sha256": "1b896b30b6810b252d1a4d0f151b19d3d9055783634ace92a3d13aebf67e6c69",
+    "bytes": 138,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "palindrome": {
+    "sha256": "8828a6f7c37acd77cc0288d5a6b80cb9ec5407b42b6ee15286eebeaa8a8967ef",
+    "bytes": 433,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "word_count": {
+    "sha256": "7ab015874afe8d5ed1dcaec5e676f530c680bfefee1286d19f335f2f0ecbfdcd",
+    "bytes": 335,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "fizzbuzz": {
+    "sha256": "64f3322d507c27d67f10758d60810c5f8dc961bf45695f695abcbdd7634f64a5",
+    "bytes": 290,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "linked_list": {
+    "sha256": "d7b9043db103a7ba627a7a0bf918d64e80eab22a842d6a5c2b6def62203073ea",
+    "bytes": 564,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "stack": {
+    "sha256": "23fa8fcea8b3e6aa2cd5758bb0532c20c4252861fcda8a9397c80b2217887db3",
+    "bytes": 709,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "tree_traversal": {
+    "sha256": "add096df775ab6f3d7e87fdd91992dc141f1776b35a8037acbaa569ccf25d2ed",
+    "bytes": 698,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   }
+  },
+  "ruby": {
+   "fibonacci": {
+    "sha256": "6ff346d56c6dc5808354fda4c2fc259935da100c64a67b857f2e6d9423488079",
+    "bytes": 129,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "gcd": {
+    "sha256": "33e6882d9eab3b5652b271b27425e9df6245b151891ec14b4779535db11244d2",
+    "bytes": 149,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "binary_search": {
+    "sha256": "60d65f0de9dd4d7def25c3e3f011ad4dd510f3c914525c5acab532aa63e07b90",
+    "bytes": 439,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "quicksort": {
+    "sha256": "8617e2f3512fdb7d0c750475a01fbf496129fba2f7154a49d89ad7f6c05c028d",
+    "bytes": 541,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "merge_sort": {
+    "sha256": "1277bf3999a0f81bcba584097d013351b79034f61d59e180f083dce68b942f40",
+    "bytes": 471,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "factorial": {
+    "sha256": "40d50b53ac3aeb6e52d8e337b66c54aa9eff9da2b28cd2dcc665a82b6c780976",
+    "bytes": 115,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "palindrome": {
+    "sha256": "fbc297058f62990abc1c487e1057ef1c8860f6ad2da0f39b778796a67cff8c5b",
+    "bytes": 437,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "word_count": {
+    "sha256": "7f7910cb635b6e553695e18b0799bafe9566a24eaa3a532e577cfab7e2d027b5",
+    "bytes": 298,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "fizzbuzz": {
+    "sha256": "aede15bc7b606f92533a980beb5d1e906e094f2ba26936ecd75ae5a54d9694ed",
+    "bytes": 244,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "linked_list": {
+    "sha256": "f610bd135b4ae96b5f717ca94120abf86b2abb10d3798bb02ad5ddb60d97e22c",
+    "bytes": 540,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "stack": {
+    "sha256": "34bff800aa65a5a80db1fdedfd5fb5a21ecf491c0d9b5ee49c32b379eeddd7ea",
+    "bytes": 558,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "tree_traversal": {
+    "sha256": "e6cb817fa846f51e6a32723d452958303ca39f0d0c05d7cc2925109eac8d4a86",
+    "bytes": 662,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   }
+  },
+  "rust": {
+   "fibonacci": {
+    "sha256": "0ad093d311bf6d2647424ca2f8f3bd7d110b5a85ae08ebce1e61b641604cdb54",
+    "bytes": 246,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "gcd": {
+    "sha256": "76e9c2e24ea94f406a27aff1dfbd85f73486885ee87a12db909913df75a55447",
+    "bytes": 290,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "binary_search": {
+    "sha256": "dd2389ce7f7c4c06e6b21630d32fe240493527d14393b0834b1b22e66e5ae999",
+    "bytes": 682,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "quicksort": {
+    "sha256": "5784f44850e12b81997761ae4ee0a87519c440d1823e1983b1995a0099e3abca",
+    "bytes": 786,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "merge_sort": {
+    "sha256": "e6712c1dae30cce008ab87d9d2256ae2ba9fddeead427787c35fd357ffb0fb3b",
+    "bytes": 835,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "factorial": {
+    "sha256": "49fea7b1d2c48bf5b747284600466683cff69215d8b35abd7fe876c6252d229a",
+    "bytes": 232,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "palindrome": {
+    "sha256": "e693eea14e14304cdf093e5bc97698faaa1f51765cc84e3a81a176fba6474287",
+    "bytes": 707,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "word_count": {
+    "sha256": "bb034813bc1bc9edd16e051c0cfc358a8f3c9d626e12d2d6ee858ec7acb98e15",
+    "bytes": 544,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "fizzbuzz": {
+    "sha256": "9b8ae2f8d61144bd0441a0b5c372b674ef9979bd854409eb72401cc28d0ce2bf",
+    "bytes": 448,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "linked_list": {
+    "sha256": "738f12cad2b19857641cd4e21b004e37bd4056ab97af19175ff88a267b4a7fe7",
+    "bytes": 942,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "stack": {
+    "sha256": "525668fb345bb88b0054398620f9a475c3108e6577764456433b977c36c103bc",
+    "bytes": 1066,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "tree_traversal": {
+    "sha256": "cd0376ddecce0f187ef50d10a1e688ff4d0787c905957e4ac323d991abae0a12",
+    "bytes": 1416,
+    "executed": false,
+    "output_ok": null,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   }
+  },
+  "typescript": {
+   "fibonacci": {
+    "sha256": "e4d9374ed3abc608370a30408dbea1330641ec060592b7deefae211be73027ec",
+    "bytes": 245,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "gcd": {
+    "sha256": "357c8720c45a4831531e2b9e65998f54e04d9449ece0b802edc006a83ea5709d",
+    "bytes": 231,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "binary_search": {
+    "sha256": "aa5c6af3d372e69ec391f200e4f76ce1162f7c81cbf8b9bd23ceef7ea350be79",
+    "bytes": 612,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "quicksort": {
+    "sha256": "7c34a56fb1ec56b0f4819d6d85ed4eeef98a98da5915f42e340b970b2fe8cea2",
+    "bytes": 711,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "merge_sort": {
+    "sha256": "3a0a0d7d58a465f3adc3dc2527fd6559153ea65a4f0aa485e0d01190ff3322ec",
+    "bytes": 645,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "factorial": {
+    "sha256": "71f4fb81b246ac12142a36668884cf5caf761e4ad8cb1a51be05497f8d8aa84a",
+    "bytes": 231,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "palindrome": {
+    "sha256": "0877c67bfb8c4da221dea7b787281e713b363fa50fec5bd4eddcdaf699b30afe",
+    "bytes": 606,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "word_count": {
+    "sha256": "9419829077b33b153ab5fb66be666da82f85bdd9d727b276ef12c95d19dd228e",
+    "bytes": 454,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "fizzbuzz": {
+    "sha256": "4abea2779978bc079c0f5e56a56bf0135ccfdc4047a525504e4e99fcd661fa12",
+    "bytes": 409,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "linked_list": {
+    "sha256": "cebed79c44515dbf7cc4fb39e554c2c935ee9ded2a064d1fc0de18691c0ca85a",
+    "bytes": 710,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "stack": {
+    "sha256": "9a7f269aaeb94ac63c31675295aeb0245ff27859cfdf5267e75a8fe488259245",
+    "bytes": 810,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   },
+   "tree_traversal": {
+    "sha256": "b62110b50ea0be71b01616324fc23c827b06720fcc6d029e5b4868802cddf720",
+    "bytes": 951,
+    "executed": true,
+    "output_ok": true,
+    "parse": {
+     "ok": true,
+     "error_nodes": 0,
+     "missing_nodes": 0,
+     "error_bytes_frac": 0
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,221 @@
+#!/usr/bin/env python3
+"""
+CaseLink on-demand directed search — EXPERIMENT, not production traffic.
+
+WHAT IT DOES
+    A small standalone aiohttp server (same shape as live_stream.py) that lets
+    an external caller trigger ONE directed case-number search right now,
+    instead of waiting for the daemon's own ~10-minute cycle. The daemon
+    (case_link_scraper_DER_5.py) has no on-demand mode at all today.
+
+WHY IT EXISTS
+    This is scoped as a leasing/backoff experiment: does a brand-new kind of
+    caller correctly participate in the shared account-leasing, hour-gating,
+    and cooldown rules in caselink_accounts.py? It is deliberately restricted
+    to CASELINK_ONDEMAND_ALIASES (default just ALPHA) so it can be tested
+    against a real account without becoming a production path for public
+    traffic. See ONDEMAND_SEARCH.md.
+
+WHAT IT DOES NOT DO
+    - No party-name or date-range search (search_detainer_cases_by_date is
+      hardcoded to case-type DETAINER WARRANT via date fields only).
+    - No public exposure. This is meant to sit behind an SSH tunnel or an
+      internal nginx location during the experiment, not the public site.
+"""
+import os
+import sys
+import logging
+import asyncio
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+import caselink_accounts as accounts_mod
+import case_link_scraper_DER_5 as scraper
+from sweep_worker import Displaced, assert_session
+from playwright.async_api import async_playwright
+from aiohttp import web
+
+logger = logging.getLogger("search")
+
+# Same file the primary daemon checks (SCHEDULING.md) — a human-engaged
+# global stop should also stop this, not just the daemon.
+KILLSWITCH_PATH = os.environ.get(
+    "CASELINK_KILLSWITCH", "/mnt/intelechia/caselink/KILLSWITCH")
+
+# acquire_account() only considers an account whose .accounts.json "roles"
+# list already contains this string — that file lives on the VM only and
+# isn't in this repo, so whoever deploys this must add the role to ALPHA's
+# entry (or point this at a role ALPHA already has).
+ONDEMAND_ROLE = os.environ.get("CASELINK_ONDEMAND_ROLE", "ondemand")
+
+# Hard allowlist for the experiment. Config, not a code branch, so widening
+# it later to SIGMA/EPSILON needs no redeploy.
+ONDEMAND_ALIASES = {
+    a.strip() for a in os.environ.get("CASELINK_ONDEMAND_ALIASES", "ALPHA").split(",")
+    if a.strip()
+}
+
+SEARCH_TIMEOUT_SECONDS = float(os.environ.get("CASELINK_ONDEMAND_SEARCH_TIMEOUT", "15"))
+
+# Best-effort serialization: one CaseLink session in flight at a time. Good
+# enough for a single-tester experiment; not a strict mutex (see the
+# locked()-then-acquire check in the handler).
+_search_lock = asyncio.Lock()
+
+
+async def do_directed_search(docket):
+    """One leg, one docket. Mirrors sweep_worker.run_leg's acquire → use →
+    release contract (sweep_worker.py:409-521) applied to a single directed
+    search instead of a sweep window, including its account-health
+    bookkeeping (note_result/start_cooldown) on failure."""
+    if os.path.exists(KILLSWITCH_PATH):
+        return {"available": False, "reason": "KILLSWITCH engaged"}
+
+    accts = [a for a in accounts_mod.load_accounts() if a["alias"] in ONDEMAND_ALIASES]
+    accounts_mod.install_redaction(accts)
+
+    account, lease = accounts_mod.acquire_account(ONDEMAND_ROLE, accts)
+    if not account:
+        return {
+            "available": False,
+            "reason": (
+                "no allowed account is currently leaseable (killswitched, "
+                "outside its permitted hours, cooling down, or already "
+                "leased by another worker)"
+            ),
+        }
+
+    alias = account["alias"]
+    # Set on the scraper module itself — the same globals do_login()/logging
+    # read — exactly as sweep_worker.run_leg does (sweep_worker.py:409-414).
+    scraper.USERNAME = account["user"]
+    scraper.PASSWORD = account["pass"]
+    scraper.ALIAS = alias
+    cooling = account.get("cooldown_minutes", 90)
+
+    try:
+        # A fresh browser per request, closed at the end — not reused across
+        # requests. sweep_worker.py:87-90 documents sustained Playwright use
+        # degrading (89 crashes / 0 completed cycles over 7 hours); this is
+        # that same one-leg discipline applied to a long-lived server.
+        async with async_playwright() as pw:
+            browser = await pw.chromium.launch(headless=True)
+            ctx = await browser.new_context(viewport={"width": 1280, "height": 900})
+            page = await ctx.new_page()
+            page.set_default_timeout(scraper.PAGE_TIMEOUT)
+            try:
+                # do_login()'s own return value is not trustworthy (a failed
+                # login can also leave '#login' out of the URL) — the real
+                # signal is assert_session finding the dedicated search
+                # frame. Never use scraper.find_search_frame directly; it
+                # falls back to page.main_frame and so never reports failure.
+                if not await scraper.do_login(page):
+                    raise Displaced("login rejected")
+                await assert_session(page)
+                accounts_mod.note_result(alias, True)
+                accounts_mod.clear_cooldown(alias)
+
+                await asyncio.wait_for(
+                    scraper.search_case(page, docket), timeout=SEARCH_TIMEOUT_SECONDS)
+                if not await scraper.click_into_case(page, docket):
+                    return {"available": True, "docket": docket, "found": False}
+
+                # Pleadings tab is the default on open and must be read first
+                # — clicking any other tab replaces the page's global Gvals
+                # array. Judgments are derived from that SAME payload
+                # (case_link_scraper_DER_5.py:4195-4210) instead of paying
+                # for a second tab click.
+                pleadings_data = await scraper.extract_pleadings(page, docket)
+                gv = pleadings_data.get('_gvals') or {}
+                judgments = scraper.parse_judgments({
+                    'arr_4': gv.get('dates'),
+                    'arr_5': gv.get('codes'),
+                    'arr_6': gv.get('descriptions'),
+                    'arr_7': gv.get('details'),
+                    'line_count': gv.get('line_count') or 0,
+                }) if gv else []
+
+                await scraper.click_general_tab(page)
+                address = await scraper.get_defendant_address(page, docket)
+
+                return {
+                    "available": True,
+                    "docket": docket,
+                    "found": True,
+                    "pleadings": pleadings_data.get('pleadings', []),
+                    "judgments": judgments,
+                    "address": address,
+                }
+            except Displaced as e:
+                reason = str(e)
+                accounts_mod.note_result(alias, False, reason)
+                accounts_mod.start_cooldown(alias, cooling, reason)
+                return {"available": False, "reason": f"session lost: {reason}"}
+            finally:
+                try:
+                    await browser.close()
+                except Exception:
+                    pass
+    finally:
+        # Always released, even if the browser was killed out from under us
+        # (watchdog_kill.sh's KILLSWITCH branch does a blanket
+        # `pkill -f ms-playwright` that isn't scoped to any one pm2 app).
+        lease.release()
+
+
+# This is an internal experiment tool with no credentials or PII in its
+# request/response bodies (a docket number, and case data that is already a
+# public court record) — permissive CORS matches live_stream.py's own
+# endpoints, which exist for the same reason: a static test page on a
+# different origin/port needs to call it directly.
+def _json(data, status=200):
+    return web.json_response(
+        data, status=status, headers={"Access-Control-Allow-Origin": "*"})
+
+
+async def search_case_handler(request):
+    try:
+        body = await request.json()
+    except Exception:
+        return _json({"error": "invalid json body"}, status=400)
+
+    docket = (body.get("docket") or "").strip()
+    if not docket:
+        return _json({"error": "docket is required"}, status=400)
+
+    if _search_lock.locked():
+        return _json({"error": "a search is already in progress"}, status=503)
+
+    await _search_lock.acquire()
+    try:
+        result = await do_directed_search(docket)
+    except Exception as e:
+        logger.exception("directed search failed")
+        return _json({"error": f"{type(e).__name__}: {e}"}, status=500)
+    finally:
+        _search_lock.release()
+
+    return _json(result)
+
+
+async def health_handler(request):
+    return _json({"ok": True, "busy": _search_lock.locked()})
+
+
+async def options_handler(request):
+    return web.Response(headers={
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+    })
+
+
+app = web.Application()
+app.router.add_post("/search/case", search_case_handler)
+app.router.add_get("/health", health_handler)
+app.router.add_route("OPTIONS", "/{tail:.*}", options_handler)
+
+
+if __name__ == "__main__":
+    port = int(os.environ.get("CASELINK_SEARCH_PORT", "8422"))
+    web.run_app(app, host="127.0.0.1", port=port)

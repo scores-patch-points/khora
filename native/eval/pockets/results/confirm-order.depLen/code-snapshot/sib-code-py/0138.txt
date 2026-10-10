@@ -1,0 +1,36 @@
+"""Direct SMTP sending — the same Gmail app-password credential the Amino
+Immigration Matrix instance already uses reliably for its own password-reset
+and notification emails (see /mnt/synapse/homeserver.yaml's `email:`
+section). Bypasses the n8n relay entirely: that path gave an opaque 200/
+empty response on both success and failure alike, with no way to tell
+which had happened or why. Direct SMTP raises a real exception with a real
+SMTP error code when something is actually wrong.
+
+.smtp_credentials.yaml is NOT committed anywhere — chmod 600, copied once
+from the Matrix config, read at send time only."""
+from __future__ import annotations
+
+import smtplib
+import ssl
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from pathlib import Path
+
+import yaml
+
+CRED_PATH = Path(__file__).resolve().parent / ".smtp_credentials.yaml"
+
+
+def send_email(to: str, subject: str, html_body: str) -> None:
+    creds = yaml.safe_load(CRED_PATH.read_text())
+    msg = MIMEMultipart("alternative")
+    msg["Subject"] = subject
+    msg["From"] = f"Legislation Watch <{creds['smtp_user']}>"
+    msg["To"] = to
+    msg.attach(MIMEText(html_body, "html"))
+
+    context = ssl.create_default_context()
+    with smtplib.SMTP(creds["smtp_host"], creds["smtp_port"]) as server:
+        server.starttls(context=context)
+        server.login(creds["smtp_user"], creds["smtp_pass"])
+        server.sendmail(creds["smtp_user"], [to], msg.as_string())

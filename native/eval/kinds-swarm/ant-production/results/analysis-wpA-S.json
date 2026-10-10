@@ -1,0 +1,926 @@
+{
+ "corpus": "wpA",
+ "arms": {
+  "real": {
+   "n": 200,
+   "kindLevels": [
+    "before=^",
+    "before=of",
+    "before=the",
+    "none",
+    "other"
+   ],
+   "auc": {
+    "REAL": 0.5461,
+    "FREQ": 0.4375,
+    "POS": 0.3223,
+    "FREQ+POS": 0.407,
+    "FREQ+POS+COMPANY": 0.5176,
+    "KIND": 0.5713,
+    "FREQ+POS+KIND": 0.5844,
+    "REAL+FREQ+POS": 0.5298,
+    "REAL+FREQ+POS+COMPANY": 0.5728,
+    "REAL+FREQ+POS+KIND": 0.6547
+   },
+   "trace": {
+    "nonNullNAME": 0.85,
+    "nonNullCTL": 0.93,
+    "ownExistsNAME": 0.67,
+    "ownExistsCTL": 0.59,
+    "relLostNAME": 1.11,
+    "relLostCTL": 1.41,
+    "refAbsNAME": 1.7,
+    "refAbsCTL": 0.94,
+    "nRef0": 44.5,
+    "gap": -0.08
+   },
+   "diffs": {
+    "REAL+FREQ+POS - FREQ+POS": {
+     "point": 0.1228,
+     "lo": 0.0448,
+     "hi": 0.1748,
+     "n": 1000
+    },
+    "REAL+FREQ+POS+KIND - FREQ+POS+KIND": {
+     "point": 0.0703,
+     "lo": 0.0323,
+     "hi": 0.108,
+     "n": 1000
+    },
+    "REAL+FREQ+POS+COMPANY - FREQ+POS+COMPANY": {
+     "point": 0.0552,
+     "lo": -0.0145,
+     "hi": 0.1052,
+     "n": 1000
+    }
+   },
+   "conditioned": {
+    "auc": 0.611,
+    "vsMainEffect": {
+     "point": -0.0437,
+     "lo": -0.0723,
+     "hi": -0.0185,
+     "n": 1000
+    }
+   },
+   "byKind": {
+    "before=^": {
+     "nName": 8,
+     "nCtl": 2,
+     "ownExistsShare": 0.8,
+     "nonNullShare": 0.9,
+     "meanOwnDelta": 0.6,
+     "meanRelLost": 0.8,
+     "dNonNull": -0.125,
+     "dOwnDelta": 0.75,
+     "dRelLost": -0.25,
+     "dRefAbs": 0,
+     "dKindFlips": 0,
+     "auc_REAL_inKind": 0.75
+    },
+    "before=of": {
+     "nName": 1,
+     "nCtl": 7,
+     "ownExistsShare": 0.75,
+     "nonNullShare": 1,
+     "meanOwnDelta": 0.75,
+     "meanRelLost": 1.75,
+     "dNonNull": 0,
+     "dOwnDelta": -0.8571,
+     "dRelLost": -0.8571,
+     "dRefAbs": 0,
+     "dKindFlips": 0,
+     "auc_REAL_inKind": 0.0714
+    },
+    "before=the": {
+     "nName": 3,
+     "nCtl": 36,
+     "ownExistsShare": 0.5641,
+     "nonNullShare": 0.8974,
+     "meanOwnDelta": 0.56,
+     "meanRelLost": 1.44,
+     "dNonNull": 0.1111,
+     "dOwnDelta": 0.8333,
+     "dRelLost": -0.1111,
+     "dRefAbs": 9.3889,
+     "dKindFlips": -0.0278,
+     "auc_REAL_inKind": 0.9074
+    },
+    "none": {
+     "nName": 63,
+     "nCtl": 41,
+     "ownExistsShare": 0.7115,
+     "nonNullShare": 0.8654,
+     "meanOwnDelta": 0.6,
+     "meanRelLost": 1.2,
+     "dNonNull": -0.1014,
+     "dOwnDelta": -0.1432,
+     "dRelLost": -0.1498,
+     "dRefAbs": 0.1792,
+     "dKindFlips": -0.0499,
+     "auc_REAL_inKind": 0.5827
+    },
+    "other": {
+     "nName": 25,
+     "nCtl": 14,
+     "ownExistsShare": 0.4103,
+     "nonNullShare": 0.9231,
+     "meanOwnDelta": 0.46,
+     "meanRelLost": 1.26,
+     "dNonNull": -0.12,
+     "dOwnDelta": 0.1629,
+     "dRelLost": -0.38,
+     "dRefAbs": 1.1514,
+     "dKindFlips": -0.0229,
+     "auc_REAL_inKind": 0.4943
+    }
+   },
+   "simpson": {
+    "ownDelta": {
+     "pooledSign": 0,
+     "reversals": []
+    },
+    "relLost": {
+     "pooledSign": -1,
+     "reversals": []
+    },
+    "refAbs": {
+     "pooledSign": 1,
+     "reversals": []
+    },
+    "nonNull": {
+     "pooledSign": -1,
+     "reversals": []
+    }
+   },
+   "K2": {
+    "vsRandomPartition": {
+     "ownExists": {
+      "obs": 0.01574,
+      "p": 0.006
+     },
+     "refAbs": {
+      "obs": 0.01031,
+      "p": 0.3566
+     },
+     "relLost": {
+      "obs": 0.00496,
+      "p": 0.2368
+     },
+     "relCollateral": {
+      "obs": 0.00173,
+      "p": 0.7333
+     },
+     "kindFlips": {
+      "obs": 0.0007,
+      "p": 0.2867
+     }
+    },
+    "vsRandomPartitionWithinClass": {
+     "ownExists": {
+      "obs": 0.01574,
+      "p": 0.015
+     },
+     "refAbs": {
+      "obs": 0.01031,
+      "p": 0.3946
+     },
+     "relLost": {
+      "obs": 0.00496,
+      "p": 0.4605
+     },
+     "relCollateral": {
+      "obs": 0.00173,
+      "p": 0.7602
+     },
+     "kindFlips": {
+      "obs": 0.0007,
+      "p": 0.2727
+     }
+    },
+    "sigStats": {
+     "random": 1,
+     "withinClass": 1
+    }
+   },
+   "kindTable": {
+    "before=^": [
+     8,
+     2
+    ],
+    "before=of": [
+     1,
+     7
+    ],
+    "before=the": [
+     3,
+     36
+    ],
+    "none": [
+     63,
+     41
+    ],
+    "other": [
+     25,
+     14
+    ]
+   },
+   "survival": {
+    "AUC_REAL": 1,
+    "gap": "undefined(real gap<0.05)"
+   }
+  },
+  "deranged": {
+   "n": 200,
+   "kindLevels": [
+    "before=^",
+    "before=of",
+    "before=the",
+    "none",
+    "other"
+   ],
+   "auc": {
+    "REAL": 0.6052,
+    "FREQ": 0.4375,
+    "POS": 0.3223,
+    "FREQ+POS": 0.407,
+    "FREQ+POS+COMPANY": 0.5176,
+    "KIND": 0.5713,
+    "FREQ+POS+KIND": 0.5844,
+    "REAL+FREQ+POS": 0.5995,
+    "REAL+FREQ+POS+COMPANY": 0.6172,
+    "REAL+FREQ+POS+KIND": 0.7136
+   },
+   "trace": {
+    "nonNullNAME": 0.87,
+    "nonNullCTL": 0.88,
+    "ownExistsNAME": 0.55,
+    "ownExistsCTL": 0.31,
+    "relLostNAME": 1.05,
+    "relLostCTL": 1.49,
+    "refAbsNAME": 0.66,
+    "refAbsCTL": 0.8,
+    "nRef0": 83.3,
+    "gap": -0.01
+   },
+   "diffs": {
+    "REAL+FREQ+POS - FREQ+POS": {
+     "point": 0.1925,
+     "lo": 0.1055,
+     "hi": 0.2586,
+     "n": 1000
+    },
+    "REAL+FREQ+POS+KIND - FREQ+POS+KIND": {
+     "point": 0.1292,
+     "lo": 0.0813,
+     "hi": 0.1812,
+     "n": 1000
+    },
+    "REAL+FREQ+POS+COMPANY - FREQ+POS+COMPANY": {
+     "point": 0.0996,
+     "lo": 0.0239,
+     "hi": 0.1543,
+     "n": 1000
+    }
+   },
+   "conditioned": {
+    "auc": 0.6496,
+    "vsMainEffect": {
+     "point": -0.064,
+     "lo": -0.1019,
+     "hi": -0.0236,
+     "n": 1000
+    }
+   },
+   "byKind": {
+    "before=^": {
+     "nName": 8,
+     "nCtl": 2,
+     "ownExistsShare": 0.8,
+     "nonNullShare": 0.7,
+     "meanOwnDelta": 0.7,
+     "meanRelLost": 0.7,
+     "dNonNull": 0.25,
+     "dOwnDelta": 0.875,
+     "dRelLost": 0.25,
+     "dRefAbs": 0,
+     "dKindFlips": 0,
+     "auc_REAL_inKind": 0.7188
+    },
+    "before=of": {
+     "nName": 1,
+     "nCtl": 7,
+     "ownExistsShare": 0.375,
+     "nonNullShare": 0.875,
+     "meanOwnDelta": 0.38,
+     "meanRelLost": 1.88,
+     "dNonNull": 0.1429,
+     "dOwnDelta": -0.4286,
+     "dRelLost": -1,
+     "dRefAbs": 0,
+     "dKindFlips": 0,
+     "auc_REAL_inKind": 0.1429
+    },
+    "before=the": {
+     "nName": 3,
+     "nCtl": 36,
+     "ownExistsShare": 0.359,
+     "nonNullShare": 0.8974,
+     "meanOwnDelta": 0.33,
+     "meanRelLost": 1.51,
+     "dNonNull": 0.1111,
+     "dOwnDelta": 0.7222,
+     "dRelLost": -0.5556,
+     "dRefAbs": 0,
+     "dKindFlips": -0.0278,
+     "auc_REAL_inKind": 0.8611
+    },
+    "none": {
+     "nName": 63,
+     "nCtl": 41,
+     "ownExistsShare": 0.5,
+     "nonNullShare": 0.8942,
+     "meanOwnDelta": 0.47,
+     "meanRelLost": 1.23,
+     "dNonNull": 0.0267,
+     "dOwnDelta": 0.2544,
+     "dRelLost": -0.3438,
+     "dRefAbs": -1.9512,
+     "dKindFlips": -0.0499,
+     "auc_REAL_inKind": 0.6301
+    },
+    "other": {
+     "nName": 25,
+     "nCtl": 14,
+     "ownExistsShare": 0.2308,
+     "nonNullShare": 0.8462,
+     "meanOwnDelta": 0.26,
+     "meanRelLost": 1.15,
+     "dNonNull": -0.1286,
+     "dOwnDelta": 0.0657,
+     "dRelLost": -0.3171,
+     "dRefAbs": 2.64,
+     "dKindFlips": -0.0229,
+     "auc_REAL_inKind": 0.5029
+    }
+   },
+   "simpson": {
+    "ownDelta": {
+     "pooledSign": 1,
+     "reversals": []
+    },
+    "relLost": {
+     "pooledSign": -1,
+     "reversals": []
+    },
+    "refAbs": {
+     "pooledSign": -1,
+     "reversals": [
+      "other"
+     ]
+    },
+    "nonNull": {
+     "pooledSign": -1,
+     "reversals": [
+      "none"
+     ]
+    }
+   },
+   "K2": {
+    "vsRandomPartition": {
+     "ownExists": {
+      "obs": 0.01824,
+      "p": 0.007
+     },
+     "refAbs": {
+      "obs": 0.00135,
+      "p": 0.979
+     },
+     "relLost": {
+      "obs": 0.00869,
+      "p": 0.0599
+     },
+     "relCollateral": {
+      "obs": 0.00324,
+      "p": 0.5015
+     },
+     "kindFlips": {
+      "obs": 0.0007,
+      "p": 0.2867
+     }
+    },
+    "vsRandomPartitionWithinClass": {
+     "ownExists": {
+      "obs": 0.01824,
+      "p": 0.023
+     },
+     "refAbs": {
+      "obs": 0.00135,
+      "p": 0.973
+     },
+     "relLost": {
+      "obs": 0.00869,
+      "p": 0.3926
+     },
+     "relCollateral": {
+      "obs": 0.00324,
+      "p": 0.7772
+     },
+     "kindFlips": {
+      "obs": 0.0007,
+      "p": 0.2727
+     }
+    },
+    "sigStats": {
+     "random": 1,
+     "withinClass": 1
+    }
+   },
+   "kindTable": {
+    "before=^": [
+     8,
+     2
+    ],
+    "before=of": [
+     1,
+     7
+    ],
+    "before=the": [
+     3,
+     36
+    ],
+    "none": [
+     63,
+     41
+    ],
+    "other": [
+     25,
+     14
+    ]
+   },
+   "survival": {
+    "AUC_REAL": 2.282,
+    "gap": "undefined(real gap<0.05)"
+   }
+  },
+  "company": {
+   "n": 200,
+   "kindLevels": [
+    "before=^",
+    "before=of",
+    "before=the",
+    "none",
+    "other"
+   ],
+   "auc": {
+    "REAL": 0.5395,
+    "FREQ": 0.4375,
+    "POS": 0.3223,
+    "FREQ+POS": 0.407,
+    "FREQ+POS+COMPANY": 0.5176,
+    "KIND": 0.5713,
+    "FREQ+POS+KIND": 0.5844,
+    "REAL+FREQ+POS": 0.529,
+    "REAL+FREQ+POS+COMPANY": 0.5752,
+    "REAL+FREQ+POS+KIND": 0.6587
+   },
+   "trace": {
+    "nonNullNAME": 0.77,
+    "nonNullCTL": 0.86,
+    "ownExistsNAME": 0.14,
+    "ownExistsCTL": 0.01,
+    "relLostNAME": 1.11,
+    "relLostCTL": 1.41,
+    "refAbsNAME": 0.04,
+    "refAbsCTL": 0.05,
+    "nRef0": 2.7,
+    "gap": -0.09
+   },
+   "diffs": {
+    "REAL+FREQ+POS - FREQ+POS": {
+     "point": 0.122,
+     "lo": 0.011,
+     "hi": 0.1977,
+     "n": 1000
+    },
+    "REAL+FREQ+POS+KIND - FREQ+POS+KIND": {
+     "point": 0.0743,
+     "lo": 0.0276,
+     "hi": 0.1174,
+     "n": 1000
+    },
+    "REAL+FREQ+POS+COMPANY - FREQ+POS+COMPANY": {
+     "point": 0.0576,
+     "lo": -0.0314,
+     "hi": 0.1121,
+     "n": 1000
+    }
+   },
+   "conditioned": {
+    "auc": 0.5936,
+    "vsMainEffect": {
+     "point": -0.0651,
+     "lo": -0.1004,
+     "hi": -0.0401,
+     "n": 1000
+    }
+   },
+   "byKind": {
+    "before=^": {
+     "nName": 8,
+     "nCtl": 2,
+     "ownExistsShare": 0.8,
+     "nonNullShare": 0.9,
+     "meanOwnDelta": 0.6,
+     "meanRelLost": 0.8,
+     "dNonNull": -0.125,
+     "dOwnDelta": 0.75,
+     "dRelLost": -0.25,
+     "dRefAbs": 0,
+     "dKindFlips": 0,
+     "auc_REAL_inKind": 0.875
+    },
+    "before=of": {
+     "nName": 1,
+     "nCtl": 7,
+     "ownExistsShare": 0,
+     "nonNullShare": 1,
+     "meanOwnDelta": 0,
+     "meanRelLost": 1.75,
+     "dNonNull": 0,
+     "dOwnDelta": 0,
+     "dRelLost": -0.8571,
+     "dRefAbs": 0,
+     "dKindFlips": 0,
+     "auc_REAL_inKind": 0.2143
+    },
+    "before=the": {
+     "nName": 3,
+     "nCtl": 36,
+     "ownExistsShare": 0,
+     "nonNullShare": 0.7949,
+     "meanOwnDelta": 0,
+     "meanRelLost": 1.44,
+     "dNonNull": -0.1389,
+     "dOwnDelta": 0,
+     "dRelLost": -0.1111,
+     "dRefAbs": -0.0278,
+     "dKindFlips": -0.0278,
+     "auc_REAL_inKind": 0.4769
+    },
+    "none": {
+     "nName": 63,
+     "nCtl": 41,
+     "ownExistsShare": 0.0673,
+     "nonNullShare": 0.7885,
+     "meanOwnDelta": 0.01,
+     "meanRelLost": 1.2,
+     "dNonNull": -0.1076,
+     "dOwnDelta": 0.0159,
+     "dRelLost": -0.1498,
+     "dRefAbs": -0.0085,
+     "dKindFlips": -0.0499,
+     "auc_REAL_inKind": 0.5211
+    },
+    "other": {
+     "nName": 25,
+     "nCtl": 14,
+     "ownExistsShare": 0,
+     "nonNullShare": 0.8462,
+     "meanOwnDelta": 0,
+     "meanRelLost": 1.26,
+     "dNonNull": -0.1286,
+     "dOwnDelta": 0,
+     "dRelLost": -0.38,
+     "dRefAbs": -0.0943,
+     "dKindFlips": -0.0229,
+     "auc_REAL_inKind": 0.4243
+    }
+   },
+   "simpson": {
+    "ownDelta": {
+     "pooledSign": 1,
+     "reversals": []
+    },
+    "relLost": {
+     "pooledSign": -1,
+     "reversals": []
+    },
+    "refAbs": {
+     "pooledSign": -1,
+     "reversals": []
+    },
+    "nonNull": {
+     "pooledSign": -1,
+     "reversals": []
+    }
+   },
+   "K2": {
+    "vsRandomPartition": {
+     "ownExists": {
+      "obs": 0.02873,
+      "p": 0.001
+     },
+     "refAbs": {
+      "obs": 0.00076,
+      "p": 0.2098
+     },
+     "relLost": {
+      "obs": 0.00496,
+      "p": 0.2368
+     },
+     "relCollateral": {
+      "obs": 0.00173,
+      "p": 0.7333
+     },
+     "kindFlips": {
+      "obs": 0.0007,
+      "p": 0.2867
+     }
+    },
+    "vsRandomPartitionWithinClass": {
+     "ownExists": {
+      "obs": 0.02873,
+      "p": 0.001
+     },
+     "refAbs": {
+      "obs": 0.00076,
+      "p": 0.2068
+     },
+     "relLost": {
+      "obs": 0.00496,
+      "p": 0.4605
+     },
+     "relCollateral": {
+      "obs": 0.00173,
+      "p": 0.7602
+     },
+     "kindFlips": {
+      "obs": 0.0007,
+      "p": 0.2727
+     }
+    },
+    "sigStats": {
+     "random": 1,
+     "withinClass": 1
+    }
+   },
+   "kindTable": {
+    "before=^": [
+     8,
+     2
+    ],
+    "before=of": [
+     1,
+     7
+    ],
+    "before=the": [
+     3,
+     36
+    ],
+    "none": [
+     63,
+     41
+    ],
+    "other": [
+     25,
+     14
+    ]
+   },
+   "survival": {
+    "AUC_REAL": 0.8568,
+    "gap": "undefined(real gap<0.05)"
+   }
+  },
+  "null": {
+   "n": 200,
+   "kindLevels": [
+    "before=^",
+    "before=of",
+    "before=the",
+    "none",
+    "other"
+   ],
+   "auc": {
+    "REAL": 0.5092,
+    "FREQ": 0.4375,
+    "POS": 0.3223,
+    "FREQ+POS": 0.407,
+    "FREQ+POS+COMPANY": 0.5176,
+    "KIND": 0.5713,
+    "FREQ+POS+KIND": 0.5844,
+    "REAL+FREQ+POS": 0.5521,
+    "REAL+FREQ+POS+COMPANY": 0.5811,
+    "REAL+FREQ+POS+KIND": 0.6779
+   },
+   "trace": {
+    "nonNullNAME": 0.58,
+    "nonNullCTL": 0.77,
+    "ownExistsNAME": 0,
+    "ownExistsCTL": 0,
+    "relLostNAME": 0.68,
+    "relLostCTL": 1,
+    "refAbsNAME": 0,
+    "refAbsCTL": 0,
+    "nRef0": 0,
+    "gap": -0.19
+   },
+   "diffs": {
+    "REAL+FREQ+POS - FREQ+POS": {
+     "point": 0.1451,
+     "lo": 0.0485,
+     "hi": 0.2211,
+     "n": 1000
+    },
+    "REAL+FREQ+POS+KIND - FREQ+POS+KIND": {
+     "point": 0.0935,
+     "lo": 0.0491,
+     "hi": 0.1393,
+     "n": 1000
+    },
+    "REAL+FREQ+POS+COMPANY - FREQ+POS+COMPANY": {
+     "point": 0.0635,
+     "lo": -0.0099,
+     "hi": 0.1282,
+     "n": 1000
+    }
+   },
+   "conditioned": {
+    "auc": 0.6263,
+    "vsMainEffect": {
+     "point": -0.0516,
+     "lo": -0.0773,
+     "hi": -0.0223,
+     "n": 1000
+    }
+   },
+   "byKind": {
+    "before=^": {
+     "nName": 8,
+     "nCtl": 2,
+     "ownExistsShare": 0,
+     "nonNullShare": 0.7,
+     "meanOwnDelta": 0,
+     "meanRelLost": 0.6,
+     "dNonNull": -0.375,
+     "dOwnDelta": 0,
+     "dRelLost": -0.5,
+     "dRefAbs": 0,
+     "dKindFlips": 0,
+     "auc_REAL_inKind": 0.5
+    },
+    "before=of": {
+     "nName": 1,
+     "nCtl": 7,
+     "ownExistsShare": 0,
+     "nonNullShare": 0.875,
+     "meanOwnDelta": 0,
+     "meanRelLost": 1.5,
+     "dNonNull": 0.1429,
+     "dOwnDelta": 0,
+     "dRelLost": -0.5714,
+     "dRefAbs": 0,
+     "dKindFlips": 0,
+     "auc_REAL_inKind": 0.2857
+    },
+    "before=the": {
+     "nName": 3,
+     "nCtl": 36,
+     "ownExistsShare": 0,
+     "nonNullShare": 0.641,
+     "meanOwnDelta": 0,
+     "meanRelLost": 0.92,
+     "dNonNull": -0.3333,
+     "dOwnDelta": 0,
+     "dRelLost": -0.6389,
+     "dRefAbs": 0,
+     "dKindFlips": -0.0278,
+     "auc_REAL_inKind": 0.2639
+    },
+    "none": {
+     "nName": 63,
+     "nCtl": 41,
+     "ownExistsShare": 0,
+     "nonNullShare": 0.6827,
+     "meanOwnDelta": 0,
+     "meanRelLost": 0.83,
+     "dNonNull": -0.2017,
+     "dOwnDelta": 0,
+     "dRelLost": -0.2052,
+     "dRefAbs": 0,
+     "dKindFlips": -0.0499,
+     "auc_REAL_inKind": 0.4353
+    },
+    "other": {
+     "nName": 25,
+     "nCtl": 14,
+     "ownExistsShare": 0,
+     "nonNullShare": 0.641,
+     "meanOwnDelta": 0,
+     "meanRelLost": 0.72,
+     "dNonNull": -0.3371,
+     "dOwnDelta": 0,
+     "dRelLost": -0.3286,
+     "dRefAbs": 0,
+     "dKindFlips": -0.0229,
+     "auc_REAL_inKind": 0.3943
+    }
+   },
+   "simpson": {
+    "ownDelta": {
+     "pooledSign": 0,
+     "reversals": []
+    },
+    "relLost": {
+     "pooledSign": -1,
+     "reversals": []
+    },
+    "refAbs": {
+     "pooledSign": 0,
+     "reversals": []
+    },
+    "nonNull": {
+     "pooledSign": -1,
+     "reversals": []
+    }
+   },
+   "K2": {
+    "vsRandomPartition": {
+     "ownExists": {
+      "obs": 0,
+      "p": 1
+     },
+     "refAbs": {
+      "obs": 0,
+      "p": 1
+     },
+     "relLost": {
+      "obs": 0.00573,
+      "p": 0.1369
+     },
+     "relCollateral": {
+      "obs": 0.00392,
+      "p": 0.1409
+     },
+     "kindFlips": {
+      "obs": 0.0007,
+      "p": 0.2867
+     }
+    },
+    "vsRandomPartitionWithinClass": {
+     "ownExists": {
+      "obs": 0,
+      "p": 1
+     },
+     "refAbs": {
+      "obs": 0,
+      "p": 1
+     },
+     "relLost": {
+      "obs": 0.00573,
+      "p": 0.4196
+     },
+     "relCollateral": {
+      "obs": 0.00392,
+      "p": 0.1229
+     },
+     "kindFlips": {
+      "obs": 0.0007,
+      "p": 0.2727
+     }
+    },
+    "sigStats": {
+     "random": 0,
+     "withinClass": 0
+    }
+   },
+   "kindTable": {
+    "before=^": [
+     8,
+     2
+    ],
+    "before=of": [
+     1,
+     7
+    ],
+    "before=the": [
+     3,
+     36
+    ],
+    "none": [
+     63,
+     41
+    ],
+    "other": [
+     25,
+     14
+    ]
+   },
+   "survival": {
+    "AUC_REAL": 0.1996,
+    "gap": "undefined(real gap<0.05)"
+   }
+  }
+ },
+ "M": 128
+}

@@ -1,0 +1,36 @@
+{
+ "slice": {
+  "docs": 20,
+  "chromeDf": 0.5,
+  "in": "v1-factbook/sidecar.jsonl"
+ },
+ "before": {
+  "cast": 533,
+  "capitalShare": 0.433,
+  "relations": 453,
+  "relBothEndsShare": 0.046
+ },
+ "after": {
+  "cast": 151,
+  "relations": 53,
+  "docsWith2Names": 20,
+  "chromeSurvivors": 0
+ },
+ "chromeExamples": [
+  "africa (18/20 corpus)",
+  "president (10/20 corpus)",
+  "central intelligence agency (20/20 corpus)",
+  "world factbook (20/20 corpus)",
+  "gec (20/20 corpus)",
+  "publisher (20/20 corpus)",
+  "area (12/20 corpus)",
+  "africa (18/20 world-factbook)",
+  "president (10/20 world-factbook)",
+  "central intelligence agency (20/20 world-factbook)",
+  "world factbook (20/20 world-factbook)",
+  "gec (20/20 world-factbook)",
+  "publisher (20/20 world-factbook)",
+  "area (12/20 world-factbook)"
+ ],
+ "verdict": "PASSING"
+}

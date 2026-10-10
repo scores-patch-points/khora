@@ -1,0 +1,65 @@
+{
+ "fixedLength": {
+  "4": {
+   "units": 25109,
+   "persist": -0.19989670161546197,
+   "driftSlope": 0.07909924729085924,
+   "driftTail": -0.1266268772779777,
+   "hurst": 0.5017342069923125
+  },
+  "8": {
+   "units": 12531,
+   "persist": -0.21116743629418183,
+   "driftSlope": 0.04431100445195569,
+   "driftTail": -0.08944559344655488,
+   "hurst": 0.5015470832305297
+  },
+  "16": {
+   "units": 6227,
+   "persist": -0.3010063876552548,
+   "driftSlope": 0.08265406501039514,
+   "driftTail": 0.05506114874955627,
+   "hurst": 0.4979958654866548
+  },
+  "32": {
+   "units": 3102,
+   "persist": -0.025929929572781413,
+   "driftSlope": 0.0031379015540321685,
+   "driftTail": 0.008639805713263745,
+   "hurst": 0.49537380370950856
+  },
+  "64": {
+   "units": 1502,
+   "persist": -0.004918370537323353,
+   "driftSlope": 0.019841463020515065,
+   "driftTail": 0.06008390869276387,
+   "hurst": 0.4917070752443156
+  }
+ },
+ "autocorrelatedLength": {
+  "units": 6296,
+  "matchedLift": [
+   -0.166,
+   -0.099,
+   0.087,
+   -0.219,
+   0.062,
+   -0.031
+  ],
+  "compute": {
+   "burstB": -0.0028,
+   "burstBmid": -0.0175,
+   "burstM": -0.0021,
+   "repAdj": 0.0124,
+   "kerSlope": -0.0015,
+   "kerCurv": 0.0009,
+   "kerFar": 0.0011,
+   "persist": -0.1662,
+   "driftSlope": 0.0352,
+   "driftTail": -0.0312,
+   "hurst": 0.4973
+  },
+  "meanLenFirstHalfRegimes": "alternating 15-unit regimes: 2-5 tokens / 20-40 tokens",
+  "unmatchedLnRatioLag1": 0.361
+ }
+}

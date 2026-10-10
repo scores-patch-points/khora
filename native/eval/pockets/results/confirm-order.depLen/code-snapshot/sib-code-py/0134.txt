@@ -1,0 +1,800 @@
+"""The universal frame every municipal matter fills — with its receipts.
+
+A Legistar title is one bureaucratic run-on, but it is not unstructured —
+it is the same frame every time, with different fillers:
+
+    ACTION       accepting / approving / amending / authorizing / ratifying
+    INSTRUMENT   the legal vehicle: cooperative purchasing master agreement,
+                 sole source contract, intergovernmental agreement, grant
+    COUNTERPARTY who the government is dealing with: Motorola Solutions,
+                 WatchGuard, Panasonic, the State of Tennessee, US DOT
+    SUBJECT      what is actually being acquired or done: body camera
+                 equipment, computer-aided dispatch, license plate readers
+    BENEFICIARY  for whom: MNPD, Emergency Communication, Waste Services
+    AMOUNT       dollar value, when stated
+    CODE         the code section at issue (§13.08.080), when cited
+
+Filling the same slots for every matter is what makes a feed comparable
+rather than a wall of prose — and an EMPTY slot is itself informative.
+
+Every filler carries its receipts: the exact span it was read from, the
+surrounding text, and the OTHER candidates that were in contention for that
+slot but ranked lower. A slot that asserts one answer and hides the
+runners-up is claiming more certainty than the extraction has. Nothing here
+is generated — each candidate is a verbatim span of the title or document,
+and eoreader7 supplies the action (its `cast` head is the title's own verb)
+and the segmentation whose prepositional joints mark where slots divide."""
+from __future__ import annotations
+
+import json
+import re
+from pathlib import Path
+
+import departments
+
+# A real, measured signal for "is this word usually a verb" — vendored from
+# eoreader7's own reading kernel (native/adapters/text/wordclass.js,
+# POSPrior@1), not reinvented here. Built from Universal Dependencies
+# UD_English-EWT (CC BY-SA 4.0) via that repo's scripts/build-pos-prior.mjs:
+# per-form tag COUNTS from a real human-annotated treebank, ambiguity
+# preserved (never collapsed to one answer) until a caller declares how much
+# dominance counts as real — the same discipline wordclass.js's own
+# dominantClass() holds ("how dominant is never a default"). This treebank
+# is general web text, not Metro's legal/policy prose, so it has real gaps
+# for this domain's vocabulary ("exploits", "enforce" don't appear at all) —
+# IMPLAUSIBLE_SUBJECT_VERBS below covers exactly that disclosed gap; this
+# prior extends the same check to verbs nobody enumerated by hand.
+_POS_PRIOR_PATH = Path(__file__).resolve().parent / "priors" / "pos-prior-en.json"
+try:
+    _POS_PRIOR = json.loads(_POS_PRIOR_PATH.read_text())["forms"]
+except (FileNotFoundError, KeyError, json.JSONDecodeError):
+    _POS_PRIOR = {}
+
+_VERB_TAGS = {"VERB", "AUX"}
+
+
+def _measured_verb_share(word: str) -> float | None:
+    """The measured share of this form's attested tags that are VERB/AUX in
+    UD_English-EWT, or None if the form was never attested — a disclosed
+    absence, never guessed at. Mirrors wordclass.js's classifyWord()
+    exactly: raw counts in, a share out, no winner picked here."""
+    counts = _POS_PRIOR.get((word or "").lower())
+    if not counts:
+        return None
+    total = sum(counts.values())
+    if total == 0:
+        return None
+    return sum(c for tag, c in counts.items() if tag in _VERB_TAGS) / total
+
+ACTIONS = ["accepting and approving", "accepting", "approving", "amending",
+           "authorizing", "appropriating", "abandoning", "ratifying",
+           "requesting", "establishing", "declaring", "adopting", "exempting",
+           "repealing", "confirming"]
+
+INSTRUMENTS = [
+    "cooperative purchasing master agreement", "cooperative purchasing agreement",
+    "intergovernmental agreement", "interlocal agreement",
+    "memorandum of understanding", "professional services contract",
+    "sole source contract", "data use agreement", "grant contract",
+    "master agreement", "amendment", "grant", "contract", "lease", "easement",
+    "franchise",
+]
+
+ORG_SUFFIX = re.compile(
+    r"\b([A-Z][A-Za-z&.\-']*(?:\s+[A-Z][A-Za-z&.\-']*){0,4}),?\s+"
+    # Case-sensitive on "Inc"/"Corp" missed a real vendor written the way ITS
+    # OWN filings do — "CSX TRANSPORTATION, INC." — which left the
+    # counterparty slot empty and, downstream, nothing to catch the same
+    # name winning the SUBJECT slot as if it were what the matter is about.
+    # Scoped to just the suffix, not the whole pattern: a blanket IGNORECASE
+    # here also loosens the NAME group's own `[A-Z]` — checked live, it then
+    # happily captured "and", "Prepared by", "A Resolution Authorizing" as
+    # if any of them were an organization's own name, because the one thing
+    # that told a real capitalised name apart from ordinary prose stopped
+    # meaning anything.
+    r"((?i:Inc\.?|LLC|L\.L\.C\.|Corp\.?|Corporation|Company|Co\.|Ltd\.?|L\.P\.|LP|Solutions))\b")
+GOV_ORG = re.compile(
+    r"\b((?:United States|U\.S\.|State of Tennessee|Tennessee)\s+"
+    r"Department of [A-Z][A-Za-z ]{3,40})\b")
+AMOUNT = re.compile(r"\$[\d,]+(?:\.\d{2})?")
+# Phrases that actually introduce THIS matter's money, as opposed to the
+# threshold and penalty figures that appear in every procurement contract's
+# boilerplate. Both lists were read off real documents, not guessed: 14600's
+# only figures are "purchase price of the item exceeds $10,000" and "civil
+# penalty of not less than $10,000"; 17936's real one is "The anticipated
+# project value is $5,000,000.00".
+VALUE_LEAD = re.compile(
+    r"(not to exceed|contract value|project value|total (?:contract )?"
+    r"(?:value|amount|compensation|cost)|value (?:is|of)|in the amount of"
+    r"|revised total|aggregate amount|anticipated|estimated (?:value|cost)"
+    r"|maximum (?:value|amount)|sum of|compensation|increase[sd]? the value)"
+    r"[^.$]{0,45}$")
+VALUE_VETO = re.compile(
+    r"(civil penalty|penalty of|exceeds|exceeded|not less than|not more than"
+    r"|per hour|per unit|each|fine of)[^.$]{0,45}$")
+
+CODE = re.compile(r"\b(\d{1,2}\.\d{2}\.\d{3})\b")
+BENEFICIARY = re.compile(
+    r"\bfor (?:the )?((?:Metropolitan |Nashville |Metro )?[A-Z][A-Za-z]*"
+    r"(?:\s+[A-Z][A-Za-z]*){0,4}\s+(?:Department|Division|Office|Commission|Board|Authority))\b")
+DEPT_TAIL = re.compile(
+    r"\b((?:Metropolitan |Metro |Nashville )?[A-Z][A-Za-z]*(?:\s+[A-Z][A-Za-z]*){0,4}\s+"
+    r"(?:Department|Police Department|Fire Department|Communications?|Library|Services))\b")
+
+# Longest first: the alternation is tried left to right, so "_by_and_between_"
+# has to precede "_by_", and "_relative_to_" has to precede "_to_". "_by_" and
+# "_regarding_" matter for ordinances, which name their subject in a
+# "regarding the use of X by Y" tail rather than a procurement "for X" clause.
+JOINTS = ["_related_to_", "_relating_to_", "_relative_to_", "_pertaining_to_",
+          "_by_and_between_", "_between_", "_regarding_", "_concerning_",
+          "_for_", "_with_", "_by_", "_of_", "_to_", "_from_"]
+
+# An ordinary "_and_" is a joint like any other — but an "_and_" that
+# continues an Oxford-comma-style list ("maintenance, repair, AND operations
+# supplies, equipment, AND related products") isn't separating two different
+# slot fillers, it's continuing ONE list of them. Splitting there anyway is
+# what let a single throwaway last item ("related products") outrank the
+# whole list tail-first, on a title whose real subject was the entire
+# enumerated list.
+#
+# A list "_and_" is told apart from an ordinary coordinating one by the
+# comma immediately before it, but that comma alone isn't a safe enough
+# signal on its own — checked live, it also fires on this corpus's other
+# constant construction, "between The Metropolitan Government ..., acting
+# by and through THE DEPARTMENT, and THE VENDOR", where the lone comma
+# before "and" introduces the contract's SECOND PARTY, not a third list
+# item; merging there glued the vendor's own name onto the department
+# clause, which then collided with the counterparty slot and threw both
+# away. A genuine Oxford list has at least two commas ahead of its final
+# "and" ("A, B, and C"); that two-party clause only ever has the one.
+_JOINT_PATTERN = re.compile("|".join(re.escape(j) for j in JOINTS) + "|_and_")
+
+
+def _split_fragments(text: str) -> list[str]:
+    """JOINTS-split `text` (already "_"-joined), except across an "_and_"
+    that continues a real enumerated list rather than introducing a new
+    clause — see the comment above."""
+    fragments, pos = [], 0
+    for m in _JOINT_PATTERN.finditer(text):
+        start, end = m.span()
+        if m.group() == "_and_" and start > 0 and text[start - 1] == ",":
+            if text[pos:start].count(",") >= 2:
+                continue
+        fragments.append(text[pos:start])
+        pos = end
+    fragments.append(text[pos:])
+    return fragments
+
+CARRIER = {
+    "resolution", "ordinance", "substitute ordinance", "terms",
+    "terms and conditions", "amendment", "metropolitan government",
+    "nashville", "davidson county", "approval", "purpose", "purposes", "use", "contract",
+    "agreement", "execution", "other departments", "departments as",
+    "various departments", "provision", "cooperative purchasing master agreement",
+    "master agreement", "cooperative purchasing agreement", "sole source contract",
+    "full scope", "scope", "work", "services", "related services", "purchase",
+    "purchases", "metropolitan purchasing agent", "originating agency", "behalf",
+    "department", "departments", "department agency", "council", "metro",
+    "metropolitan government of nashville", "the metropolitan government",
+    "metropolitan government of nashville and davidson county",
+    # Boilerplate closers, not what the matter is about — checked live:
+    # an MOU between ATF/MNPD/the fire department, ABOUT a real, named arson
+    # task force, ended up headlined "Surrounding Areas for the Police
+    # Department" because "...in Nashville and surrounding areas" is this
+    # corpus's own stock way of closing a jurisdiction clause, and it was
+    # the very last fragment JOINTS produced.
+    "surrounding areas", "surrounding area", "the surrounding area",
+}
+
+
+def _is_carrier(fragment: str) -> bool:
+    """A fragment is pure boilerplate if it names nothing beyond CARRIER
+    itself — including when a JOINTS split left a stray trailing word
+    glued onto an otherwise-boilerplate phrase. "Metropolitan Government,
+    initially" is exactly CARRIER's own "metropolitan government" plus an
+    adverb that actually belongs to the NEXT fragment ("initially for
+    purposes of..."); stripping one trailing ", <word>" and re-checking
+    catches that without hand-listing every adverb Metro's prose tacks on."""
+    f = fragment.lower()
+    if f in CARRIER:
+        return True
+    stripped = re.sub(r",\s*[a-z']+$", "", f)
+    return stripped != f and stripped in CARRIER
+
+
+ARTICLES = re.compile(r"^(a|an|the)\s+", re.I)
+CONTEXT = 120
+MAX_ALTERNATIVES = 5
+
+
+LOWER_WORDS = {"a", "an", "the", "and", "or", "of", "for", "to", "in", "on",
+               "with", "at", "by", "from", "as", "per", "via"}
+
+
+def _locate(value: str, source: str) -> tuple[int, int]:
+    """Where in `source` a candidate's words actually appear, or (-1, -1).
+
+    A literal find is not enough. Candidates built from an eoreader7 surface
+    are normalised — lowercased, hyphens and commas flattened to spaces — so
+    "motorola solutions inc" never literally occurs in a title that reads
+    "Motorola Solutions, Inc.". That silently cost every surface-derived
+    candidate its span, and a candidate with no span can't be compared
+    against another slot's span or quoted in its modal. Joining on any
+    non-alphanumeric run recovers it."""
+    if not value:
+        return (-1, -1)
+    idx = source.lower().find(value.lower())
+    if idx >= 0:
+        return (idx, idx + len(value))
+    flex = re.compile(r"[^A-Za-z0-9]+".join(re.escape(w) for w in value.split()),
+                      re.I)
+    m = flex.search(source)
+    return (m.start(), m.end()) if m else (-1, -1)
+
+
+def _recase(value: str, source: str) -> str:
+    """Prefer the casing the document itself used — eoreader7's surface keys
+    are lowercased, which turns "Panasonic" into "panasonic". If the span is
+    findable in the original text, use those exact bytes; otherwise title-case
+    it, leaving small joining words alone."""
+    if not value:
+        return value
+    a, b = _locate(value, source)
+    if a >= 0:
+        return source[a:b]
+    words = value.split()
+    out = []
+    for i, w in enumerate(words):
+        if w.lower() in LOWER_WORDS and i > 0:
+            out.append(w.lower())
+        elif w.isupper() and len(w) <= 5:
+            out.append(w)
+        else:
+            out.append(w[:1].upper() + w[1:])
+    return " ".join(out)
+
+
+def _clean(fragment: str) -> str:
+    f = fragment.replace("_", " ").strip(" ,.;:")
+    f = ARTICLES.sub("", f).strip()
+    return re.sub(r"\s+", " ", f)
+
+
+def _context(source: str, start: int, end: int) -> str:
+    """The surrounding text a span was read from, for the modal."""
+    a, b = max(0, start - CONTEXT), min(len(source), end + CONTEXT)
+    out = re.sub(r"\s+", " ", source[a:b]).strip()
+    if a > 0:
+        out = "…" + out
+    if b < len(source):
+        out = out + "…"
+    return out
+
+
+def _candidate(value: str, source: str, where: str, start: int = -1) -> dict:
+    """One possible filler, with the span it was read from."""
+    end = start + len(value) if start >= 0 else -1
+    if start < 0 and value:
+        start, end = _locate(value, source)
+    context = _context(source, start, end) if start >= 0 else ""
+    return {"value": _recase(value, source), "start": start, "end": end,
+            "context": context, "where": where}
+
+
+def _slot(candidates: list[dict]) -> dict:
+    """Winner plus the runners-up that were in contention."""
+    deduped, seen = [], set()
+    for c in candidates:
+        key = c["value"].lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(c)
+    if not deduped:
+        return {"value": "", "candidates": []}
+    return {
+        "value": deduped[0]["value"],
+        "span": deduped[0],
+        "candidates": deduped[:MAX_ALTERNATIVES],
+    }
+
+
+def _slot_with_fallback(filling: list[dict], seen_only: list[dict]) -> dict:
+    """A slot whose value must come from `filling`, while `seen_only` holds
+    things that were found but aren't trustworthy enough to assert."""
+    slot = _slot(filling)
+    if not slot["value"] and seen_only:
+        slot["candidates"] = seen_only[:MAX_ALTERNATIVES]
+    return slot
+
+
+def _title_surface(title: str, surfaces: list[str]) -> str | None:
+    t = re.sub(r"[^a-z0-9 ]", " ", (title or "").lower())
+    t = re.sub(r"\s+", " ", t)
+    best = None
+    for s in surfaces or []:
+        words = s.replace("_", " ")
+        if len(words) < 25:
+            continue
+        head = " ".join(words.split()[:5])
+        if head and head in t and (best is None or len(words) > len(best)):
+            best = words
+    return best
+
+
+def _protect_departments(source: str) -> tuple[str, list[tuple[str, str]]]:
+    """Swap department names for single opaque tokens before splitting.
+
+    "Metropolitan Nashville Department of Emergency Communications" contains
+    "of", which is one of the joints, so splitting first tears the
+    department in half and both halves then compete as the subject — that is
+    how a summary ends up reading "Metropolitan Nashville Department ·
+    Emergency Communications", naming one thing twice and the actual
+    procurement not at all."""
+    out, swaps, last = [], [], 0
+    for i, (a, b, _canon) in enumerate(departments.spans_in(source)):
+        tok = f"Dept{i}Token"
+        out.append(source[last:a])
+        out.append(tok)
+        swaps.append((tok, source[a:b]))
+        last = b
+    out.append(source[last:])
+    return "".join(out), swaps
+
+
+# A fragment opening with one of these is never the true grammatical
+# subject — verified against a real failure: BL2026-1450's title ends
+# "...online extremist content THAT TARGETS AND EXPLOITS young people in
+# Nashville..."; JOINTS splits "_and_" mid-coordination, so "exploits
+# young people in Nashville" surfaces as its own fragment and — because
+# the subject/beneficiary sit at the TAIL of a normal procurement title,
+# so ranking prefers the last fragment — won the subject slot outright,
+# turning an ordinance protecting young people into a headline that
+# reads as if the POLICE DEPARTMENT does the exploiting. Every word here
+# is a finite, third-person verb that agrees with a distant subject
+# elsewhere in the sentence — Metro's headline-style titles do sometimes
+# open on a bare verb, but always the base/imperative form ("Adopt
+# Updated Building Codes," "Combat Gun Related Violence"), never this
+# inflected form used to describe a threat something ELSE poses.
+IMPLAUSIBLE_SUBJECT_VERBS = {
+    "exploits", "targets", "threatens", "endangers", "harms", "victimizes",
+    "attacks", "violates", "abuses", "exposes", "jeopardizes", "harasses",
+    "intimidates", "manipulates", "deceives", "defrauds", "discriminates",
+}
+
+
+# Declared, not defaulted (wordclass.js's own dominantClass() discipline):
+# a form counts as verb-led only when at least this share of its REAL
+# attested tags in UD_English-EWT are VERB/AUX. 0.8 is a plain "strong
+# majority" reading, not a value tuned against this corpus's own output.
+_VERB_SHARE_FLOOR = 0.8
+
+
+def _implausible_verb(word: str) -> bool:
+    w = re.sub(r"[^a-z]", "", (word or "").lower())
+    if not w:
+        return False
+    if w in IMPLAUSIBLE_SUBJECT_VERBS:
+        return True
+    # The measured check is scoped to words ending in "s" ON PURPOSE — that
+    # is the exact surface shape of third-person-singular-present agreement
+    # ("targets", "exploits": the finite predicate of a relative clause
+    # whose real subject is somewhere else in the sentence). Metro's
+    # headline style correctly LEADS with a bare verb constantly, but
+    # always the base/imperative form with no such ending ("Install an
+    # Aerial Encroachment," "Protect a Main Sewer Line," "Combat Gun
+    # Related Violence") — checked live: dropping this "s" scope regressed
+    # 315 real headlines, "Install an Aerial Encroachment…" among them,
+    # because "install" is measured as a verb too; the point was never
+    # "is this a verb," it was "is this THIS inflection of one."
+    if not w.endswith("s") or len(w) < 4:
+        return False
+    share = _measured_verb_share(w)
+    return share is not None and share >= _VERB_SHARE_FLOOR
+
+
+def _plausible_subject_lead(value: str) -> bool:
+    """Checked at BOTH ends, not just the first word: a JOINTS split on
+    "_and_" mid-coordination ("...content that TARGETS and EXPLOITS young
+    people...") leaves TWO broken fragments, not one — reject
+    "exploits young people in Nashville" for opening on a bare verb, and
+    "online extremist content that targets" is JUST as broken (a relative
+    clause split from its own object), caught here because it ends on
+    one instead. A real subject never legitimately ends on a bare verb
+    either — that shape only happens when a clause got cut off mid-way."""
+    words = re.findall(r"[A-Za-z']+", value or "")
+    if not words:
+        return True
+    return not (_implausible_verb(words[0]) or _implausible_verb(words[-1]))
+
+
+# A fragment is a near-duplicate of an earlier one only if it contains the
+# EARLIER one at a word boundary — a raw substring test treats "managed" as
+# already seen the moment "unmanaged" shows up ("managed" is a literal
+# substring of "unmanaged"), which silently deleted the one real NP out of
+# AT&T's "managed and unmanaged telecommunications services": "managed" won
+# the subject slot alone, a bare adjective with no noun of its own, and
+# "unmanaged telecommunications services" never became a candidate at all.
+def _fragment_overlaps(a: str, b: str) -> bool:
+    a, b = a.lower(), b.lower()
+
+    def bounded(needle: str, haystack: str) -> bool:
+        return re.search(r"(?<![A-Za-z0-9])" + re.escape(needle) + r"(?![A-Za-z0-9])",
+                          haystack) is not None
+
+    return bounded(a, b) or bounded(b, a)
+
+
+# A fragment opening on a possessive pronoun points at an antecedent that
+# lived in an earlier, now-separate fragment ("...to provide clinical
+# experience opportunities for its students" — "its" is Western Governors
+# University, named several JOINTS-splits earlier). Standing alone it names
+# nothing, exactly the same shape IMPLAUSIBLE_SUBJECT_VERBS already refuses
+# a bare verb for.
+POSSESSIVE_PRONOUNS = {"its", "his", "her", "their", "our", "your"}
+
+
+def _subject_candidates(title: str, surfaces: list[str]) -> list[dict]:
+    # The title is always the source. An eoreader7 surface used to REPLACE it,
+    # but a surface is a span of the title, not a superset of it — the one for
+    # a procurement title typically stops at the vendor and the goods and
+    # never reaches the department, so substituting it silently deleted half
+    # the title from consideration. Surfaces stay useful as extra candidates.
+    source, swaps = _protect_departments(title)
+    seen, parts = set(), []
+    for frag in _split_fragments("_" + source.replace(" ", "_") + "_"):
+        c = _clean(frag)
+        for tok, original in swaps:
+            if tok in c:
+                c = c.replace(tok, original)
+        if not c or len(c) < 4 or _is_carrier(c) or c.lower() in seen:
+            continue
+        # A bare number ("2022") never names what a matter is about — the
+        # amount and code slots already exist for the figures that do.
+        # Worth checking explicitly now that fragment overlap is word-
+        # bounded: "2022" used to get blocked as a false "duplicate" of
+        # "BL2022-1532" by the old raw-substring check (2022 IS a raw
+        # substring of that code), which _fragment_overlaps correctly no
+        # longer treats as the same phrase — so a title code's bare digits
+        # need their own floor now that they aren't being blocked by accident.
+        if re.fullmatch(r"[\d.,\-/ ]+", c):
+            continue
+        if any(_fragment_overlaps(c, p) for p in parts):
+            continue
+        if not _plausible_subject_lead(c):
+            continue
+        if c.split(" ", 1)[0].lower() in POSSESSIVE_PRONOUNS:
+            continue
+        seen.add(c.lower())
+        parts.append(c)
+    # The subject and beneficiary sit at the tail of these titles; the front
+    # is the procurement vehicle. Rank tail-first, but keep the rest as the
+    # runners-up rather than discarding them.
+    # The subject is ONE fragment. It used to be glued to the next fragment
+    # as "a · b", which read as a label rather than a sentence and, worse,
+    # usually glued on the department — which headline() adds itself, in
+    # prose, with the preposition the title actually used.
+    ranked = list(reversed(parts))
+    # A parenthesised all-caps acronym is a strong signal that a fragment
+    # names a real, specific thing — nobody parenthesises an acronym next to
+    # boilerplate. Checked live: the same MOU above also produces "Metro
+    # Nashville Arson & Explosives Task Force (MNAETF), which is a
+    # collective coordination" as a candidate, genuinely the matter's real
+    # subject, but it ranks 7th by position alone, behind six shorter
+    # fragments from the sentence's own closing clause ("resources",
+    # "assets", "fire", "explosives in Nashville"...) — invisible to the
+    # rest of the pipeline, since callers only ever look at the front of
+    # this list. A stable sort — acronym-bearing fragments first, tail-first
+    # order preserved on both sides of that split — surfaces it without
+    # discarding or reordering anything else.
+    #
+    # Gated to fragments with at least 3 words AHEAD of the acronym, checked
+    # live against the full corpus: a bare "Understanding (MOU)" — its own
+    # head noun "Memorandum" split off by the very next "_of_" joint — and a
+    # vendor's own "Infor (US), Inc" both parenthesise two capital letters
+    # too, and boosting either produced a worse headline than leaving tail
+    # order alone. Every real specimen this rule exists for ("Emergency
+    # Management Performance Grant (EMPG)", "Metro Nashville Arson &
+    # Explosives Task Force (MNAETF)") clears 3 words with room to spare;
+    # nothing legitimate in the corpus needed fewer.
+    HAS_ACRONYM = re.compile(r"\([A-Z]{2,}\)")
+
+    def _strong_acronym(p: str) -> bool:
+        m = HAS_ACRONYM.search(p)
+        return bool(m) and len(p[:m.start()].split()) >= 3
+
+    ranked.sort(key=lambda p: 0 if _strong_acronym(p) else 1)
+    return [_candidate(p, title, "title") for p in ranked]
+
+
+# A fragment dropped for opening on one of the CURATED harm verbs (never the
+# general measured check below it — tried on the whole corpus, that broader
+# signal produces five false drops here: "uses"/"CARES"/"assess"/"Pass"/
+# "provides", zoning and procurement words it misreads as this shape) is not
+# a broken subject with nothing worth keeping. The verb's real subject is
+# elsewhere in the sentence (already its own candidate), but the verb's
+# OBJECT — who or what is targeted, exploited, endangered — is real content
+# that appears nowhere else in the title. BL2026-1450 never says "young
+# people" anywhere except inside "exploits young people in Nashville"; losing
+# the fragment for being unusable as a SUBJECT silently lost the one thing
+# the ordinance is actually protecting. Checked against the real corpus
+# (5,572 titles): this fires exactly once, on exactly this title.
+def _curated_harm_object(title: str) -> dict | None:
+    source, swaps = _protect_departments(title)
+    for frag in _split_fragments("_" + source.replace(" ", "_") + "_"):
+        c = _clean(frag)
+        for tok, original in swaps:
+            if tok in c:
+                c = c.replace(tok, original)
+        if not c or len(c) < 4 or _is_carrier(c):
+            continue
+        words = re.findall(r"[A-Za-z']+", c)
+        if not words:
+            continue
+        lead = re.sub(r"[^a-z]", "", words[0].lower())
+        if lead not in IMPLAUSIBLE_SUBJECT_VERBS:
+            continue
+        remainder = " ".join(words[1:])
+        if len(remainder) < 4 or _is_carrier(remainder):
+            continue
+        if not _plausible_subject_lead(remainder):
+            continue
+        return _candidate(remainder, title, "title")
+    return None
+
+
+def _collides(a: str, b: str) -> bool:
+    """Same entity wearing different punctuation. Titles name a vendor once
+    in the `with ...` clause and again inside the tail fragment, so a raw
+    string compare misses it ("Motorola Solutions" vs "Motorola Solutions,
+    Inc.")."""
+    ak = re.sub(r"[^a-z0-9]", "", (a or "").lower())
+    bk = re.sub(r"[^a-z0-9]", "", (b or "").lower())
+    if not ak or not bk:
+        return False
+    return ak in bk or bk in ak
+
+
+def _overlaps(c: dict, other: dict) -> bool:
+    """Do two readings point at the same stretch of the title? Spans are the
+    honest test — "Emergency Communications" and "Department of Emergency
+    Communications" are different strings that quote the same words, and no
+    amount of string comparison settles that as cleanly as asking whether
+    the two readings claim overlapping characters."""
+    span = other.get("span") or {}
+    a0, a1 = c.get("start", -1), c.get("end", -1)
+    b0, b1 = span.get("start", -1), span.get("end", -1)
+    if a0 >= 0 and b0 >= 0:
+        return a0 < b1 and b0 < a1
+    return _collides(c.get("value", ""), other.get("value", ""))
+
+
+def _slot_avoiding(candidates: list[dict], taken: list[dict]) -> dict:
+    """Fill from the best candidate that doesn't re-read text another slot
+    already answered from. A frame that says COUNTERPARTY: Motorola and
+    SUBJECT: Motorola has spent two of its seven slots saying one thing —
+    and the subject the reader actually wants ("public safety software") is
+    sitting right there as the runner-up. Losers stay in `candidates` either
+    way, so the modal still shows the demoted reading."""
+    slot = _slot(candidates)
+    if not slot["value"]:
+        return slot
+    for c in slot["candidates"]:
+        if not any(_overlaps(c, t) for t in taken if t.get("value")):
+            return slot | {"value": c["value"], "span": c}
+    return slot
+
+
+def extract_slots(title: str, surfaces: list[str] | None = None,
+                   cast: list[str] | None = None, text: str = "") -> dict:
+    title = (title or "").strip()
+    low = title.lower()
+    surfaces = surfaces or []
+    cast = cast or []
+    body = text or ""
+
+    action_c = []
+    for c in cast[:8]:
+        if c.lower() in ACTIONS:
+            action_c.append(_candidate(c.lower(), title, "the reader's verb for the title"))
+    for a in ACTIONS:
+        if a in low and not any(a == x["value"] for x in action_c):
+            action_c.append(_candidate(a, title, "title"))
+
+    instrument_c = [_candidate(i, title, "title") for i in INSTRUMENTS if i in low]
+
+    counterparty_c = []
+    for m in GOV_ORG.finditer(title):
+        counterparty_c.append(_candidate(m.group(1).strip(), title, "title", m.start(1)))
+    for m in ORG_SUFFIX.finditer(title):
+        val = f"{m.group(1).strip()} {m.group(2).strip()}"
+        counterparty_c.append(_candidate(val, title, "title", m.start(1)))
+
+    # Resolve to a real Metro department rather than whatever capitalized run
+    # the regex caught — "Waste Services Department" and "MNPD" are the names
+    # legislation uses, not the names the org chart uses.
+    beneficiary_c = []
+    for canon in departments.find_in(title):
+        beneficiary_c.append(_candidate(canon, title, "named in the title") | {"value": canon})
+    for m in BENEFICIARY.finditer(title):
+        canon = departments.resolve(m.group(1))
+        val = canon or m.group(1).strip()
+        if not any(val == c["value"] for c in beneficiary_c):
+            beneficiary_c.append(_candidate(val, title, "title", m.start(1)) | {"value": val})
+    for m in DEPT_TAIL.finditer(title):
+        canon = departments.resolve(m.group(1))
+        val = canon or m.group(1).strip()
+        if not any(val == c["value"] for c in beneficiary_c):
+            beneficiary_c.append(_candidate(val, title, "title", m.start(1)) | {"value": val})
+
+    # Prefer the title's own figure; a body figure only when substantial —
+    # scanning a contract for the first "$" turns up unit prices ("$1").
+    amount_c = [_candidate(m.group(0), title, "title", m.start())
+                for m in AMOUNT.finditer(title)]
+    if not amount_c and body:
+        # A bare "$" in a contract is usually procurement-code boilerplate
+        # ("where the purchase price of the item exceeds $10,000") or a unit
+        # price, not this matter's value. Rank figures that are actually
+        # introduced as a contract value first; keep bare ones as runners-up
+        # so the slot can still show something when nothing is labelled.
+        labelled, bare = [], []
+        for m in AMOUNT.finditer(body[:60000]):
+            digits = re.sub(r"[^\d]", "", m.group(0).split(".")[0])
+            if len(digits) < 5:
+                continue
+            lead = body[max(0, m.start() - 90):m.start()].lower()
+            cand = _candidate(m.group(0), body, "the document body", m.start())
+            if VALUE_VETO.search(lead):
+                bare.append(cand)
+            elif VALUE_LEAD.search(lead):
+                labelled.append(cand)
+            else:
+                bare.append(cand)
+            if len(labelled) + len(bare) >= 12:
+                break
+        # Only a labelled figure may FILL the slot. Unlabelled ones stay
+        # visible as candidates so the modal shows what was seen, but an
+        # empty slot beats asserting a boilerplate threshold as the value.
+        if labelled:
+            amount_c = labelled + bare
+        else:
+            amount_c = []
+            unlabelled_only = bare
+
+    unlabelled_only = locals().get("unlabelled_only") or []
+
+    code_c = [_candidate(f"§{m.group(1)}", title, "title", m.start(1))
+              for m in CODE.finditer(title)]
+    if body:
+        # A bare d.dd.ddd in a contract is usually a phone number, a part
+        # number, or an OCR artifact — require it to actually be cited as a
+        # code section before believing it.
+        for m in CODE.finditer(body[:40000]):
+            val = f"§{m.group(1)}"
+            lead = body[max(0, m.start(1) - 40):m.start(1)].lower()
+            if not re.search(r"(section|§|mcl|code|chapter)\s*$", lead):
+                continue
+            if not any(val == c["value"] for c in code_c):
+                code_c.append(_candidate(val, body, "the document body", m.start(1)))
+            if len(code_c) >= MAX_ALTERNATIVES:
+                break
+
+    counterparty = _slot(counterparty_c)
+    beneficiary = _slot(beneficiary_c)
+    # A procurement buys something FOR a department; an ordinance regulates
+    # what a department may do — "drone use for the Police Department" gets
+    # the relationship backwards. Take the preposition from the title.
+    if beneficiary["value"]:
+        lead = title[:max(0, (beneficiary.get("span") or {}).get("start", 0))]
+        beneficiary["prep"] = "by" if re.search(r"\bby\s+(the\s+)?$", lead, re.I) else "for"
+    harm_c = _curated_harm_object(title)
+    return {
+        "action": _slot(action_c),
+        "instrument": _slot(instrument_c),
+        "counterparty": counterparty,
+        "subject": _slot_avoiding(_subject_candidates(title, surfaces),
+                                  [counterparty, beneficiary]),
+        "beneficiary": beneficiary,
+        "amount": _slot_with_fallback(amount_c, unlabelled_only),
+        "code": _slot(code_c),
+        "harmedParty": _slot([harm_c] if harm_c else []),
+    }
+
+
+def title_case(s: str) -> str:
+    """Title Case for the summary line, hyphens included — "computer-aided
+    dispatch" has to come out "Computer-Aided Dispatch", not "Computer-aided".
+    Acronyms and names already carrying internal capitals ("LLC", "CBRE",
+    "iPad") are left exactly as the document wrote them."""
+    def cap(word: str, first: bool) -> str:
+        if not word:
+            return word
+        if word.upper() == word and len(word) <= 5:
+            return word
+        if any(c.isupper() for c in word[1:]):
+            return word
+        if not first and word.lower() in LOWER_WORDS:
+            return word.lower()
+        return word[:1].upper() + word[1:]
+
+    out, n = [], 0
+    for token in re.split(r"(\s+|·)", s or ""):
+        if not token.strip() or token == "·":
+            out.append(token)
+            continue
+        # A separator resets "first word" so each half of an "A · B" summary
+        # capitalises its own opening word.
+        first_in_part = n == 0 or "·" in "".join(out[-3:])
+        parts = re.split(r"(-)", token)
+        out.append("".join(
+            p if p == "-" else cap(p, first_in_part and i == 0)
+            for i, p in enumerate(parts)))
+        n += 1
+    return "".join(out)
+
+
+def _short_dept(name: str) -> str:
+    """The department as a person would say it. Every Metro department's
+    canonical name starts "Metropolitan Nashville Department of …", and
+    repeating that in a one-line summary spends most of the line on the word
+    "Metropolitan"."""
+    s = re.sub(r"^(the\s+)?metropolitan\s+(government\s+of\s+nashville\s+and\s+"
+               r"davidson\s+county|nashville\s+and\s+davidson\s+county|nashville)?\s*",
+               "", name or "", flags=re.I).strip()
+    s = re.sub(r"^department\s+of\s+", "", s, flags=re.I).strip()
+    return s or name
+
+
+def headline(slots: dict) -> str:
+    """The one line a feed shows, as a phrase rather than a label: what was
+    bought, who from, and who for. Reads as "Public safety software from
+    Motorola Solutions for Emergency Communications" instead of a pile of
+    slot values separated by punctuation."""
+    subject = (slots.get("subject") or {}).get("value") or ""
+    # A defining relative clause glued onto a named subject by the JOINTS
+    # split ("Metro Nashville Arson & Explosives Task Force (MNAETF), WHICH
+    # IS A collective coordination of...") describes the noun before it
+    # rather than adding a second one — real content stayed real content
+    # when the SAME clause chopped it into two, so a headline reading only
+    # the name and dropping its own definition is not a loss.
+    subject = re.sub(r",\s+which\s+(?:is|was|are|were)\s+(?:an?\s+|the\s+)?.*$",
+                      "", subject, flags=re.IGNORECASE).strip()
+    party = (slots.get("counterparty") or {}).get("value") or ""
+    dept_slot = slots.get("beneficiary") or {}
+    dept = _short_dept(dept_slot.get("value") or "")
+    if party and subject:
+        # Containment can run either way: the subject may quote the party
+        # ("body camera equipment from Motorola Solutions"), or the subject
+        # may itself be a fragment OF the party's name ("n ear" out of
+        # "N Ear, Inc."). Drop the subject in both cases.
+        if _collides(subject, party):
+            subject = ""
+    if dept and subject and _collides(subject, dept):
+        dept = ""
+
+    head = subject or party
+    if not head:
+        return title_case((slots.get("instrument") or {}).get("value") or "")
+    line = head
+    if subject and party:
+        line += f" from {party}"
+    if dept:
+        # "the Police Department" reads; "the Emergency Communications" does
+        # not. Only the names that end in an institution word take an article,
+        # and a name that already leads with Metro or Nashville never does.
+        takes_article = (
+            re.search(r"\b(department|office|board|division|commission|"
+                      r"authority|agency|council)$", dept, re.I)
+            and not re.match(r"(metro|nashville)\b", dept, re.I))
+        line += f" {dept_slot.get('prep') or 'for'} {'the ' if takes_article else ''}{dept}"
+
+    # Who or what a curated harm-verb fragment names as its object (see
+    # _curated_harm_object) — real content the split lost from the SUBJECT
+    # slot but not from the sentence. Only added when it isn't already said:
+    # the subject may itself be the department's own name in a short title,
+    # and the harmed party is sometimes the same institution as the dept.
+    harmed = (slots.get("harmedParty") or {}).get("value") or ""
+    if harmed and not _collides(harmed, head) and not (dept and _collides(harmed, dept)):
+        line += f", affecting {harmed}"
+
+    return title_case(line)

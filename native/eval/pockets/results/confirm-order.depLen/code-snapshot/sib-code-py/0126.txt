@@ -1,0 +1,111 @@
+"""Who sponsored a matter, and who voted for it.
+
+Two things make this less direct than it looks.
+
+Sponsors come back once per matter VERSION, so a bill that was substituted
+lists every sponsor two or more times — and in mirrored order, which reads
+like a longer coalition than it is. We dedupe by name and keep first-seen
+sequence, which is the order Legistar itself considers meaningful (sequence
+1 is the lead sponsor).
+
+Roll calls do not hang off the history record. A history says a vote
+happened ("approved by the following roll call vote") and carries the event
+it happened at, but the named votes belong to the EVENT ITEM. The two ids
+coincide often enough to be a tempting shortcut and they are not the same
+id — measured on real matters, 6 of 8 matched and 2 did not (RS2022-1563,
+RS2024-792), so we resolve by matching EventItemMatterId instead. One
+council meeting covers ~177 items, so the per-event fetch is cached and a
+whole backfill costs about one request per meeting rather than per matter.
+"""
+from __future__ import annotations
+
+from typing import Any, Optional
+
+
+def sponsors(api, matter_id: int) -> list[dict]:
+    try:
+        raw = api.sponsors(matter_id) or []
+    except Exception:
+        return []
+    seen, out = set(), []
+    for s in sorted(raw, key=lambda x: x.get("MatterSponsorSequence") or 0):
+        name = (s.get("MatterSponsorName") or "").strip()
+        if not name or name.lower() in seen:
+            continue
+        seen.add(name.lower())
+        out.append({"name": name, "sequence": s.get("MatterSponsorSequence")})
+    return out
+
+
+def _tally(votes: list[dict]) -> dict:
+    counts: dict = {}
+    for v in votes:
+        # Takes the already-transformed {name, value} shape `actions()`
+        # builds, not the raw Legistar field — this used to read
+        # "VoteValueName", a key that dict never had, so every vote fell
+        # through to "—" and the tally silently reported nothing.
+        val = (v.get("value") or "").strip() or "—"
+        counts[val] = counts.get(val, 0) + 1
+    return counts
+
+
+def actions(api, matter_id: int, ei_cache: Optional[dict] = None) -> list[dict]:
+    """Every recorded action, newest first, each with its roll call if one
+    was taken."""
+    try:
+        hist = api.histories(matter_id) or []
+    except Exception:
+        return []
+    cache = ei_cache if ei_cache is not None else {}
+    out = []
+    for h in hist:
+        ev = h.get("MatterHistoryEventId")
+        votes: list[dict] = []
+        if ev:
+            if ev not in cache:
+                try:
+                    cache[ev] = api.eventitems(ev) or []
+                except Exception:
+                    cache[ev] = []
+            for item in cache[ev]:
+                if item.get("EventItemMatterId") != matter_id:
+                    continue
+                try:
+                    raw = api._get(f"eventitems/{item['EventItemId']}/votes") or []
+                except Exception:
+                    raw = []
+                for v in raw:
+                    votes.append({
+                        "name": (v.get("VotePersonName") or "").strip(),
+                        "value": (v.get("VoteValueName") or "").strip(),
+                    })
+                if votes:
+                    break
+        out.append({
+            "date": (h.get("MatterHistoryActionDate") or "")[:10],
+            "action": h.get("MatterHistoryActionName") or "",
+            "body": h.get("MatterHistoryActionBodyName") or "",
+            "mover": h.get("MatterHistoryMoverName") or "",
+            "seconder": h.get("MatterHistorySeconderName") or "",
+            "result": h.get("MatterHistoryPassedFlagName") or "",
+            "votes": votes,
+            "tally": _tally(votes) if votes else {},
+        })
+    out.sort(key=lambda a: a["date"], reverse=True)
+    return out
+
+
+def participation(api, matter_id: int, ei_cache: Optional[dict] = None) -> dict:
+    acts = actions(api, matter_id, ei_cache)
+    voters: dict = {}
+    # A member can vote on the same matter several times (committee, first
+    # reading, third reading). The page shows their LATEST recorded vote,
+    # since actions are newest-first and an earlier one is superseded.
+    for a in acts:
+        for v in a["votes"]:
+            voters.setdefault(v["name"], v["value"])
+    return {
+        "sponsors": sponsors(api, matter_id),
+        "actions": acts,
+        "voters": [{"name": k, "value": v} for k, v in voters.items()],
+    }

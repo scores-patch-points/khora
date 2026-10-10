@@ -1,0 +1,1054 @@
+{
+ "headerSha256": "3377f5b2020b273959ab433ffc535df916d34f04148759056d3fc771430c61ad",
+ "verdict": {
+  "verdict": "CONFIRMED",
+  "why": "primary cell holds (a-e)",
+  "primaryHolds": true,
+  "subScopeHolding": [
+   "EN_INIT",
+   "EN_NONINIT",
+   "EN_ubuntu",
+   "EN_kubuntu",
+   "EN_2004-07",
+   "EN_2008-11",
+   "EN_big",
+   "EN_small"
+  ],
+  "subScopeFailing": [
+   "EN_2012-15"
+  ],
+  "mode": "irc"
+ },
+ "registeredCells": {
+  "PRIMARY_EN_ALL": {
+   "variant": "M4",
+   "n": 485,
+   "days": 16,
+   "auc": 0.6845,
+   "ci": [
+    0.6629,
+    0.7062
+   ],
+   "dayCi": [
+    0.6575,
+    0.7053
+   ],
+   "tpr": 0.2928,
+   "fpr": 0.1093,
+   "balPrec": 0.7282,
+   "wordshuf": 0.5573,
+   "wordshufDrop": 0.1272,
+   "msgshuf": 0.6563,
+   "beyondCNT_Tinf": 0.6752,
+   "beyondCNT_T128": 0.5924,
+   "core": true,
+   "companions": {
+    "dayCi": true,
+    "wordshuf": true,
+    "beyondCNT_Tinf": true
+   },
+   "holds": true,
+   "ctl": {
+    "i": 0.4979,
+    "len": 0.4928,
+    "cl": 0.499,
+    "lc": 0.5103
+   },
+   "tieShare": 0.6103
+  },
+  "EN_INIT": {
+   "variant": "M4",
+   "n": 356,
+   "days": 16,
+   "auc": 0.6531,
+   "ci": [
+    0.6278,
+    0.6784
+   ],
+   "dayCi": [
+    0.6215,
+    0.6748
+   ],
+   "tpr": 0.2893,
+   "fpr": 0.132,
+   "balPrec": 0.6867,
+   "wordshuf": 0.5033,
+   "wordshufDrop": 0.1498,
+   "msgshuf": 0.6229,
+   "beyondCNT_Tinf": 0.6431,
+   "beyondCNT_T128": 0.5625,
+   "core": true,
+   "companions": {
+    "dayCi": true,
+    "wordshuf": true,
+    "beyondCNT_Tinf": true
+   },
+   "holds": true,
+   "ctl": {
+    "i": 0.5,
+    "len": 0.493,
+    "cl": 0.4972,
+    "lc": 0.5084
+   },
+   "tieShare": 0.6713
+  },
+  "EN_NONINIT": {
+   "variant": "M4",
+   "n": 129,
+   "days": 14,
+   "auc": 0.7713,
+   "ci": [
+    0.7248,
+    0.8178
+   ],
+   "dayCi": [
+    0.7353,
+    0.805
+   ],
+   "tpr": 0.3023,
+   "fpr": 0.0465,
+   "balPrec": 0.8667,
+   "wordshuf": 0.5678,
+   "wordshufDrop": 0.2035,
+   "msgshuf": 0.7661,
+   "beyondCNT_Tinf": 0.764,
+   "beyondCNT_T128": 0.6829,
+   "core": true,
+   "companions": {
+    "dayCi": true,
+    "wordshuf": true,
+    "beyondCNT_Tinf": true
+   },
+   "holds": true,
+   "ctl": {
+    "i": 0.4922,
+    "len": 0.4922,
+    "cl": 0.5039,
+    "lc": 0.5155
+   },
+   "tieShare": 0.4419
+  },
+  "EN_ubuntu": {
+   "variant": "M4",
+   "n": 391,
+   "days": 8,
+   "auc": 0.6829,
+   "ci": [
+    0.656,
+    0.7084
+   ],
+   "dayCi": [
+    0.6553,
+    0.7029
+   ],
+   "tpr": 0.3223,
+   "fpr": 0.1228,
+   "balPrec": 0.7241,
+   "wordshuf": 0.566,
+   "wordshufDrop": 0.1169,
+   "msgshuf": 0.6545,
+   "beyondCNT_Tinf": 0.672,
+   "beyondCNT_T128": 0.5966,
+   "core": true,
+   "companions": {
+    "dayCi": true,
+    "wordshuf": true,
+    "beyondCNT_Tinf": true
+   },
+   "holds": true,
+   "ctl": {
+    "i": 0.4974,
+    "len": 0.5013,
+    "cl": 0.5,
+    "lc": 0.5102
+   },
+   "tieShare": 0.6087
+  },
+  "EN_kubuntu": {
+   "variant": "M4",
+   "n": 92,
+   "days": 6,
+   "auc": 0.6957,
+   "ci": [
+    0.6467,
+    0.7446
+   ],
+   "dayCi": [
+    0.6307,
+    0.7424
+   ],
+   "tpr": 0.1739,
+   "fpr": 0.0543,
+   "balPrec": 0.7619,
+   "wordshuf": 0.5191,
+   "wordshufDrop": 0.1766,
+   "msgshuf": 0.6667,
+   "beyondCNT_Tinf": 0.6923,
+   "beyondCNT_T128": 0.5781,
+   "core": true,
+   "companions": {
+    "dayCi": true,
+    "wordshuf": true,
+    "beyondCNT_Tinf": true
+   },
+   "holds": true,
+   "ctl": {
+    "i": 0.5,
+    "len": 0.4565,
+    "cl": 0.4946,
+    "lc": 0.5109
+   },
+   "tieShare": 0.6087
+  },
+  "EN_2004-07": {
+   "variant": "M4",
+   "n": 306,
+   "days": 8,
+   "auc": 0.6879,
+   "ci": [
+    0.6601,
+    0.719
+   ],
+   "dayCi": [
+    0.6635,
+    0.7135
+   ],
+   "tpr": 0.2745,
+   "fpr": 0.1013,
+   "balPrec": 0.7304,
+   "wordshuf": 0.5593,
+   "wordshufDrop": 0.1286,
+   "msgshuf": 0.6622,
+   "beyondCNT_Tinf": 0.6806,
+   "beyondCNT_T128": 0.5986,
+   "core": true,
+   "companions": {
+    "dayCi": true,
+    "wordshuf": true,
+    "beyondCNT_Tinf": true
+   },
+   "holds": true,
+   "ctl": {
+    "i": 0.4967,
+    "len": 0.5016,
+    "cl": 0.4951,
+    "lc": 0.5131
+   },
+   "tieShare": 0.6111
+  },
+  "EN_2008-11": {
+   "variant": "M4",
+   "n": 98,
+   "days": 4,
+   "auc": 0.6939,
+   "ci": [
+    0.6429,
+    0.7398
+   ],
+   "dayCi": [
+    0.575,
+    0.7333
+   ],
+   "tpr": 0.3163,
+   "fpr": 0.0918,
+   "balPrec": 0.775,
+   "wordshuf": 0.548,
+   "wordshufDrop": 0.1459,
+   "msgshuf": 0.663,
+   "beyondCNT_Tinf": 0.6809,
+   "beyondCNT_T128": 0.6045,
+   "core": true,
+   "companions": {
+    "dayCi": true,
+    "wordshuf": true,
+    "beyondCNT_Tinf": true
+   },
+   "holds": true,
+   "ctl": {
+    "i": 0.4949,
+    "len": 0.5102,
+    "cl": 0.5051,
+    "lc": 0.5153
+   },
+   "tieShare": 0.6122
+  },
+  "EN_2012-15": {
+   "variant": "M8",
+   "n": 74,
+   "days": 4,
+   "auc": 0.6419,
+   "ci": [
+    0.5811,
+    0.6959
+   ],
+   "dayCi": [
+    0.5,
+    0.7051
+   ],
+   "tpr": 0.2703,
+   "fpr": 0.1622,
+   "balPrec": 0.625,
+   "wordshuf": 0.5387,
+   "wordshufDrop": 0.1032,
+   "msgshuf": 0.62,
+   "beyondCNT_Tinf": 0.637,
+   "beyondCNT_T128": 0.5472,
+   "core": false,
+   "companions": {
+    "dayCi": false,
+    "wordshuf": true,
+    "beyondCNT_Tinf": true
+   },
+   "holds": false,
+   "ctl": {
+    "i": 0.4932,
+    "len": 0.473,
+    "cl": 0.5068,
+    "lc": 0.5
+   },
+   "tieShare": 0.6622
+  },
+  "EN_big": {
+   "variant": "M4",
+   "n": 334,
+   "days": 6,
+   "auc": 0.6931,
+   "ci": [
+    0.6647,
+    0.7201
+   ],
+   "dayCi": [
+    0.6713,
+    0.7138
+   ],
+   "tpr": 0.3114,
+   "fpr": 0.1078,
+   "balPrec": 0.7429,
+   "wordshuf": 0.5667,
+   "wordshufDrop": 0.1264,
+   "msgshuf": 0.6667,
+   "beyondCNT_Tinf": 0.6836,
+   "beyondCNT_T128": 0.6041,
+   "core": true,
+   "companions": {
+    "dayCi": true,
+    "wordshuf": true,
+    "beyondCNT_Tinf": true
+   },
+   "holds": true,
+   "ctl": {
+    "i": 0.4955,
+    "len": 0.5135,
+    "cl": 0.497,
+    "lc": 0.5135
+   },
+   "tieShare": 0.6018
+  },
+  "EN_small": {
+   "variant": "M8",
+   "n": 142,
+   "days": 10,
+   "auc": 0.6479,
+   "ci": [
+    0.6092,
+    0.6901
+   ],
+   "dayCi": [
+    0.5833,
+    0.6939
+   ],
+   "tpr": 0.2042,
+   "fpr": 0.1056,
+   "balPrec": 0.6591,
+   "wordshuf": 0.5185,
+   "wordshufDrop": 0.1294,
+   "msgshuf": 0.6154,
+   "beyondCNT_Tinf": 0.6429,
+   "beyondCNT_T128": 0.5571,
+   "core": true,
+   "companions": {
+    "dayCi": true,
+    "wordshuf": true,
+    "beyondCNT_Tinf": true
+   },
+   "holds": true,
+   "ctl": {
+    "i": 0.493,
+    "len": 0.4648,
+    "cl": 0.5035,
+    "lc": 0.5
+   },
+   "tieShare": 0.6761
+  }
+ },
+ "predictions": {
+  "primaryAuc_0_62_0_74": true,
+  "tpr_0_22_0_42": true,
+  "fpr_0_04_0_16": true,
+  "initLtNoninit": true,
+  "init_0_58_0_70": true,
+  "noninit_0_66_0_84": true,
+  "wordshuf_le_0_58": true,
+  "wordshufDrop_ge_0_08": true,
+  "msgshufWithin_0_05": true,
+  "beyondCNT_Tinf_0_60_0_74": true,
+  "beyondCNT_T128_0_52_0_66": true,
+  "controlsInBandM4": true,
+  "lastSham_0_48_0_60": false,
+  "secSham_0_48_0_60": false,
+  "fnext_0_46_0_56": true,
+  "daysAbove05_ge_0_65": true,
+  "ubuntuGeKubuntu": false,
+  "naturalPrecision_0_10_0_60": true,
+  "naturalRecall_0_20_0_45": false
+ },
+ "primaryExtras": {
+  "rivalAuc": {
+   "CNT_Tinf": 0.5247,
+   "CNT_T128": 0.6155,
+   "INIT_T128": 0.6639
+  },
+  "slotSham": {
+   "SEC_Tinf": 0.466,
+   "LAST_Tinf": 0.4526
+  },
+  "FNEXT": 0.5495,
+  "perDay": [
+   {
+    "day": "kubuntu/2005-07-15.txt",
+    "n": 10,
+    "auc": 0.65
+   },
+   {
+    "day": "kubuntu/2005-11-15.txt",
+    "n": 15,
+    "auc": 0.7333
+   },
+   {
+    "day": "kubuntu/2006-07-15.txt",
+    "n": 13,
+    "auc": 0.6538
+   },
+   {
+    "day": "kubuntu/2007-07-15.txt",
+    "n": 23,
+    "auc": 0.7609
+   },
+   {
+    "day": "kubuntu/2008-03-15.txt",
+    "n": 17,
+    "auc": 0.5882
+   },
+   {
+    "day": "kubuntu/2008-07-15.txt",
+    "n": 14,
+    "auc": 0.75
+   },
+   {
+    "day": "ubuntu-server/2009-03-15.txt",
+    "n": 1,
+    "auc": 0.5
+   },
+   {
+    "day": "ubuntu/2004-11-15.txt",
+    "n": 26,
+    "auc": 0.6154
+   },
+   {
+    "day": "ubuntu/2005-03-15.txt",
+    "n": 51,
+    "auc": 0.7157
+   },
+   {
+    "day": "ubuntu/2006-07-15.txt",
+    "n": 71,
+    "auc": 0.669
+   },
+   {
+    "day": "ubuntu/2007-03-15.txt",
+    "n": 97,
+    "auc": 0.6907
+   },
+   {
+    "day": "ubuntu/2009-07-15.txt",
+    "n": 66,
+    "auc": 0.7121
+   },
+   {
+    "day": "ubuntu/2012-07-15.txt",
+    "n": 40,
+    "auc": 0.725
+   },
+   {
+    "day": "ubuntu/2014-07-15.txt",
+    "n": 22,
+    "auc": 0.6136
+   },
+   {
+    "day": "ubuntu/2015-03-15.txt",
+    "n": 18,
+    "auc": 0.5833
+   },
+   {
+    "day": "xubuntu/2015-07-15.txt",
+    "n": 1,
+    "auc": 0.5
+   }
+  ],
+  "perDaySummary": {
+   "daysWithN10": 14,
+   "above05": 14,
+   "binomP": 0.0001
+  },
+  "nullQ95": [
+   0.5373,
+   0.5237
+  ]
+ },
+ "natural": {
+  "ALL": {
+   "n": 70891,
+   "nPos": 2570,
+   "rule": {
+    "tp": 1818,
+    "fp": 3064,
+    "fn": 752,
+    "tn": 65257,
+    "precision": 0.3724,
+    "recall": 0.7074,
+    "fpr": 0.0448,
+    "prevalence": 0.0363,
+    "flagRate": 0.0689
+   },
+   "popAuc": {
+    "INIT_Tinf": 0.8992,
+    "CNT_Tinf": 0.7386,
+    "CNT_T128": 0.8277
+   },
+   "rivalAtSameFlagRate": {
+    "col": "CNT_Tinf",
+    "thetaCNT": 19,
+    "tp": 401,
+    "fp": 4272,
+    "fn": 2169,
+    "tn": 64049,
+    "precision": 0.0858,
+    "recall": 0.156,
+    "fpr": 0.0625,
+    "prevalence": 0.0363,
+    "flagRate": 0.0659
+   }
+  },
+  "INIT": {
+   "n": 6757,
+   "nPos": 2188,
+   "rule": {
+    "tp": 1564,
+    "fp": 714,
+    "fn": 624,
+    "tn": 3855,
+    "precision": 0.6866,
+    "recall": 0.7148,
+    "fpr": 0.1563,
+    "prevalence": 0.3238,
+    "flagRate": 0.3371
+   },
+   "popAuc": {
+    "INIT_Tinf": 0.8351,
+    "CNT_Tinf": 0.7564,
+    "CNT_T128": 0.8209
+   },
+   "rivalAtSameFlagRate": {
+    "col": "CNT_Tinf",
+    "thetaCNT": 4,
+    "tp": 1212,
+    "fp": 841,
+    "fn": 976,
+    "tn": 3728,
+    "precision": 0.5904,
+    "recall": 0.5539,
+    "fpr": 0.1841,
+    "prevalence": 0.3238,
+    "flagRate": 0.3038
+   }
+  },
+  "NONINIT": {
+   "n": 64134,
+   "nPos": 382,
+   "rule": {
+    "tp": 254,
+    "fp": 2350,
+    "fn": 128,
+    "tn": 61402,
+    "precision": 0.0975,
+    "recall": 0.6649,
+    "fpr": 0.0369,
+    "prevalence": 0.006,
+    "flagRate": 0.0406
+   },
+   "popAuc": {
+    "INIT_Tinf": 0.9011,
+    "CNT_Tinf": 0.7382,
+    "CNT_T128": 0.7864
+   },
+   "rivalAtSameFlagRate": {
+    "col": "CNT_Tinf",
+    "thetaCNT": 31,
+    "tp": 35,
+    "fp": 2496,
+    "fn": 347,
+    "tn": 61256,
+    "precision": 0.0138,
+    "recall": 0.0916,
+    "fpr": 0.0392,
+    "prevalence": 0.006,
+    "flagRate": 0.0395
+   }
+  }
+ },
+ "posthoc": {
+  "streamPosition": {
+   "relControl": 0.6041,
+   "remControl": 0.3959,
+   "subsets": {
+    "equalRemBin": {
+     "n": 146,
+     "auc": 0.7226,
+     "ci": [
+      0.6815,
+      0.7637
+     ],
+     "dayCi": [
+      0.6786,
+      0.7583
+     ],
+     "relCtl": 0.5822
+    },
+    "relWithin05": {
+     "n": 62,
+     "auc": 0.7258,
+     "ci": [
+      0.6613,
+      0.7903
+     ],
+     "dayCi": [
+      0.6623,
+      0.8095
+     ],
+     "relCtl": 0.5645
+    },
+    "relWithin02": {
+     "n": 24,
+     "auc": 0.7292,
+     "ci": [
+      0.625,
+      0.8333
+     ],
+     "dayCi": [
+      0.6071,
+      0.875
+     ],
+     "relCtl": 0.5417
+    }
+   }
+  },
+  "forwardDelay": {
+   "INIT_F8": {
+    "auc": 0.5907,
+    "ci": [
+     0.5691,
+     0.6124
+    ],
+    "tpr_ge2": 0.066,
+    "fpr_ge2": 0.0206,
+    "tpr_ge1": 0.2907,
+    "fpr_ge1": 0.1093
+   },
+   "INIT_F32": {
+    "auc": 0.6443,
+    "ci": [
+     0.6206,
+     0.6711
+    ],
+    "tpr_ge2": 0.1814,
+    "fpr_ge2": 0.0392,
+    "tpr_ge1": 0.4186,
+    "fpr_ge1": 0.1443
+   },
+   "INIT_F128": {
+    "auc": 0.6639,
+    "ci": [
+     0.6402,
+     0.6866
+    ],
+    "tpr_ge2": 0.2268,
+    "fpr_ge2": 0.0598,
+    "tpr_ge1": 0.4763,
+    "fpr_ge1": 0.1649
+   },
+   "INIT_F512": {
+    "auc": 0.6711,
+    "ci": [
+     0.6464,
+     0.6938
+    ],
+    "tpr_ge2": 0.2433,
+    "fpr_ge2": 0.0722,
+    "tpr_ge1": 0.499,
+    "fpr_ge1": 0.1938
+   },
+   "INIT_Tinf": {
+    "auc": 0.6845,
+    "ci": [
+     0.6639,
+     0.7093
+    ],
+    "tpr_ge2": 0.2928,
+    "fpr_ge2": 0.1093,
+    "tpr_ge1": 0.5546,
+    "fpr_ge1": 0.2722
+   }
+  },
+  "falsePositiveAnatomy": {
+   "firingNegatives": 53,
+   "negFormSpokeAtAll": 8,
+   "share": 0.1509,
+   "cleanNegPairs": {
+    "n": 430,
+    "auc": 0.7058,
+    "ci": [
+     0.6814,
+     0.7302
+    ],
+    "tpr": 0.3093,
+    "fpr": 0.1047
+   },
+   "allNegSpokeShare": 0.1134
+  }
+ },
+ "exploratoryNonEN": {
+  "equivalence": {
+   "registeredEN": 0.6845,
+   "pooledEN": 0.7193,
+   "within04": true
+  },
+  "cells": {
+   "EN_pooledMatcher": {
+    "variant": "M4",
+    "n": 912,
+    "days": 22,
+    "auc": 0.7193,
+    "ci": [
+     0.7018,
+     0.7363
+    ],
+    "dayCi": [
+     0.6953,
+     0.7457
+    ],
+    "tpr": 0.4068,
+    "fpr": 0.1524,
+    "balPrec": 0.7275,
+    "wordshuf": 0.5592,
+    "wordshufDrop": 0.1601,
+    "msgshuf": 0.708,
+    "beyondCNT_Tinf": 0.7135,
+    "beyondCNT_T128": 0.619,
+    "core": true,
+    "companions": {
+     "dayCi": true,
+     "wordshuf": true,
+     "beyondCNT_Tinf": true
+    },
+    "holds": true,
+    "ctl": {
+     "i": 0.4978,
+     "len": 0.5099,
+     "cl": 0.5016,
+     "lc": 0.5099
+    },
+    "tieShare": 0.5175
+   },
+   "NONEN_ALL": {
+    "variant": "M4",
+    "n": 163,
+    "days": 29,
+    "auc": 0.6748,
+    "ci": [
+     0.635,
+     0.7147
+    ],
+    "dayCi": [
+     0.6259,
+     0.723
+    ],
+    "tpr": 0.2577,
+    "fpr": 0.0736,
+    "balPrec": 0.7778,
+    "wordshuf": 0.5178,
+    "wordshufDrop": 0.157,
+    "msgshuf": 0.6737,
+    "beyondCNT_Tinf": 0.6739,
+    "beyondCNT_T128": 0.5864,
+    "core": true,
+    "companions": {
+     "dayCi": true,
+     "wordshuf": true,
+     "beyondCNT_Tinf": true
+    },
+    "holds": true,
+    "ctl": {
+     "i": 0.5123,
+     "len": 0.5,
+     "cl": 0.5,
+     "lc": 0.5
+    },
+    "tieShare": 0.6012
+   },
+   "NONEN_de": {
+    "variant": "VOID",
+    "note": "controls fine but n below the minimum (60; strict 40)"
+   },
+   "NONEN_es": {
+    "variant": "VOID",
+    "note": "controls fine but n below the minimum (60; strict 40)"
+   },
+   "NONEN_it": {
+    "variant": "M4",
+    "n": 64,
+    "days": 10,
+    "auc": 0.7344,
+    "ci": [
+     0.6641,
+     0.8047
+    ],
+    "dayCi": [
+     0.6404,
+     0.8115
+    ],
+    "tpr": 0.3906,
+    "fpr": 0.125,
+    "balPrec": 0.7576,
+    "wordshuf": 0.5291,
+    "wordshufDrop": 0.2053,
+    "msgshuf": 0.7177,
+    "beyondCNT_Tinf": 0.7302,
+    "beyondCNT_T128": null,
+    "core": true,
+    "companions": {
+     "dayCi": true,
+     "wordshuf": true,
+     "beyondCNT_Tinf": true
+    },
+    "holds": true,
+    "ctl": {
+     "i": 0.5156,
+     "len": 0.5156,
+     "cl": 0.4922,
+     "lc": 0.4922
+    },
+    "tieShare": 0.4375
+   },
+   "NONEN_INIT": {
+    "variant": "M4",
+    "n": 117,
+    "days": 26,
+    "auc": 0.6453,
+    "ci": [
+     0.5983,
+     0.688
+    ],
+    "dayCi": [
+     0.5973,
+     0.6898
+    ],
+    "tpr": 0.2479,
+    "fpr": 0.0855,
+    "balPrec": 0.7436,
+    "wordshuf": 0.4783,
+    "wordshufDrop": 0.167,
+    "msgshuf": 0.656,
+    "beyondCNT_Tinf": 0.6466,
+    "beyondCNT_T128": 0.5617,
+    "core": true,
+    "companions": {
+     "dayCi": true,
+     "wordshuf": true,
+     "beyondCNT_Tinf": true
+    },
+    "holds": true,
+    "ctl": {
+     "i": 0.5,
+     "len": 0.5085,
+     "cl": 0.5043,
+     "lc": 0.5043
+    },
+    "tieShare": 0.6581
+   },
+   "NONEN_NONINIT": {
+    "variant": "VOID",
+    "note": "controls fine but n below the minimum (60; strict 40)"
+   },
+   "NONEN_big": {
+    "variant": "VOID",
+    "note": "controls out of [0.45,0.55] in M4, M8 and the strict subset (or no pairs)"
+   },
+   "NONEN_small": {
+    "variant": "M4",
+    "n": 163,
+    "days": 29,
+    "auc": 0.6748,
+    "ci": [
+     0.635,
+     0.7147
+    ],
+    "dayCi": [
+     0.6259,
+     0.723
+    ],
+    "tpr": 0.2577,
+    "fpr": 0.0736,
+    "balPrec": 0.7778,
+    "wordshuf": 0.5178,
+    "wordshufDrop": 0.157,
+    "msgshuf": 0.6737,
+    "beyondCNT_Tinf": 0.6739,
+    "beyondCNT_T128": 0.5864,
+    "core": true,
+    "companions": {
+     "dayCi": true,
+     "wordshuf": true,
+     "beyondCNT_Tinf": true
+    },
+    "holds": true,
+    "ctl": {
+     "i": 0.5123,
+     "len": 0.5,
+     "cl": 0.5,
+     "lc": 0.5
+    },
+    "tieShare": 0.6012
+   }
+  },
+  "reportOnly": {
+   "NONEN_de": {
+    "n": 54,
+    "days": 11,
+    "ctl": {
+     "i": 0.5093,
+     "len": 0.4907,
+     "cl": 0.5,
+     "lc": 0.5
+    },
+    "auc": 0.6574,
+    "ci": [
+     0.6019,
+     0.7222
+    ],
+    "note": "n < 60: descriptive only"
+   },
+   "NONEN_es": {
+    "n": 45,
+    "days": 8,
+    "ctl": {
+     "i": 0.5111,
+     "len": 0.4889,
+     "cl": 0.5111,
+     "lc": 0.5111
+    },
+    "auc": 0.6111,
+    "ci": [
+     0.5444,
+     0.6778
+    ],
+    "note": "n < 60: descriptive only"
+   },
+   "NONEN_NONINIT": {
+    "n": 46,
+    "days": 21,
+    "ctl": {
+     "i": 0.5435,
+     "len": 0.4783,
+     "cl": 0.4891,
+     "lc": 0.4891
+    },
+    "auc": 0.75,
+    "ci": [
+     0.6739,
+     0.8261
+    ],
+    "note": "n < 60: descriptive only"
+   }
+  },
+  "headerSha256": "caf59c41ec3053cb8e4ca4269ed762fca96f3ff9752388c0c5b9399f163a60ab"
+ },
+ "udProbe": {
+  "pooled": {
+   "n": 13477,
+   "auc": 0.5079,
+   "ci": [
+    0.5065,
+    0.5095
+   ],
+   "tieShare": 0.9676,
+   "bothZero": 0.9662
+  },
+  "eng": {
+   "auc": 0.5138,
+   "ci": [
+    0.5012,
+    0.525
+   ]
+  },
+  "summary": {
+   "languages": 53,
+   "testable": 34,
+   "void": 19,
+   "core": [],
+   "holdsAll": [],
+   "coreShare": 0,
+   "aucAbove05": 23,
+   "aucTable": {
+    "bul": 0.5,
+    "cat": 0.5138,
+    "cym": 0.4984,
+    "dan": 0.5035,
+    "deu": 0.5125,
+    "ell": 0.5,
+    "eng": 0.5138,
+    "est": 0.52,
+    "eus": 0.5088,
+    "fas": 0.5038,
+    "fin": 0.5162,
+    "fra": 0.5015,
+    "gle": 0.5034,
+    "glg": 0.5,
+    "heb": 0.5146,
+    "hun": 0.5126,
+    "hye": 0.5056,
+    "ind": 0.5,
+    "ita": 0.4983,
+    "kat": 0.5,
+    "lav": 0.5088,
+    "lit": 0.5115,
+    "nob": 0.5313,
+    "pol": 0.4975,
+    "por": 0.5012,
+    "ron": 0.5,
+    "rus": 0.5012,
+    "slk": 0.5112,
+    "slv": 0.5,
+    "spa": 0.5162,
+    "srp": 0.5071,
+    "tur": 0.4966,
+    "ukr": 0.5044,
+    "wol": 0.5061
+   }
+  },
+  "predictions": {
+   "pooledAuc_0_46_0_60": true,
+   "coreShare_le_0_25": true,
+   "engAuc_0_45_0_62": true
+  }
+ }
+}

@@ -1,0 +1,164 @@
+{
+ "corpus": "ircA",
+ "arms": {
+  "real": {
+   "n": 60,
+   "seenShare": {
+    "NAME": 0.1,
+    "CTL": 0
+   },
+   "refNonNull": {
+    "NAME": 0.7333,
+    "CTL": 0.5
+   },
+   "singleAUC": {
+    "ownExists": 0.6167,
+    "ownMentions": 0.6483,
+    "refAbs": 0.5111,
+    "refBornLost": 0.5,
+    "relLost": 0.4583,
+    "relBorn": 0.45,
+    "relCollateral": 0.4667,
+    "kindFlips": 0.4994,
+    "FREQ_n": 0.5039,
+    "seen": 0.55
+   },
+   "strata": {
+    "seen": {
+     "nName": 3,
+     "nCtl": 0,
+     "ownExists": {
+      "NAME": 0,
+      "CTL": null
+     },
+     "refNonNull": {
+      "NAME": 0.3333,
+      "CTL": null
+     }
+    },
+    "unseen": {
+     "nName": 27,
+     "nCtl": 30,
+     "ownExists": {
+      "NAME": 0.7778,
+      "CTL": 0.4667
+     },
+     "refNonNull": {
+      "NAME": 0.7778,
+      "CTL": 0.5
+     },
+     "auc_REAL_cv": 0.6302,
+     "auc_FREQPOS_cv": 0.3704,
+     "auc_REALFREQPOS_cv": 0.5556,
+     "auc_ownExists_raw": 0.6556
+    }
+   }
+  },
+  "deranged": {
+   "n": 60,
+   "seenShare": {
+    "NAME": 0.1,
+    "CTL": 0
+   },
+   "refNonNull": {
+    "NAME": 0.7333,
+    "CTL": 0.6333
+   },
+   "singleAUC": {
+    "ownExists": 0.55,
+    "ownMentions": 0.5839,
+    "refAbs": 0.4661,
+    "refBornLost": 0.4656,
+    "relLost": 0.5067,
+    "relBorn": 0.45,
+    "relCollateral": 0.4667,
+    "kindFlips": 0.4994,
+    "FREQ_n": 0.5039,
+    "seen": 0.55
+   },
+   "strata": {
+    "seen": {
+     "nName": 3,
+     "nCtl": 0,
+     "ownExists": {
+      "NAME": 0,
+      "CTL": null
+     },
+     "refNonNull": {
+      "NAME": 0,
+      "CTL": null
+     }
+    },
+    "unseen": {
+     "nName": 27,
+     "nCtl": 30,
+     "ownExists": {
+      "NAME": 0.7778,
+      "CTL": 0.6
+     },
+     "refNonNull": {
+      "NAME": 0.8148,
+      "CTL": 0.6333
+     },
+     "auc_REAL_cv": 0.4685,
+     "auc_FREQPOS_cv": 0.3704,
+     "auc_REALFREQPOS_cv": 0.4272,
+     "auc_ownExists_raw": 0.5889
+    }
+   }
+  },
+  "null": {
+   "n": 60,
+   "seenShare": {
+    "NAME": 0.1,
+    "CTL": 0
+   },
+   "refNonNull": {
+    "NAME": 0,
+    "CTL": 0
+   },
+   "singleAUC": {
+    "ownExists": 0.5,
+    "ownMentions": 0.5,
+    "refAbs": 0.5,
+    "refBornLost": 0.5,
+    "relLost": 0.5167,
+    "relBorn": 0.4833,
+    "relCollateral": 0.5,
+    "kindFlips": 0.4994,
+    "FREQ_n": 0.5039,
+    "seen": 0.55
+   },
+   "strata": {
+    "seen": {
+     "nName": 3,
+     "nCtl": 0,
+     "ownExists": {
+      "NAME": 0,
+      "CTL": null
+     },
+     "refNonNull": {
+      "NAME": 0,
+      "CTL": null
+     }
+    },
+    "unseen": {
+     "nName": 27,
+     "nCtl": 30,
+     "ownExists": {
+      "NAME": 0,
+      "CTL": 0
+     },
+     "refNonNull": {
+      "NAME": 0,
+      "CTL": 0
+     },
+     "auc_REAL_cv": 0.3765,
+     "auc_FREQPOS_cv": 0.3704,
+     "auc_REALFREQPOS_cv": 0.3284,
+     "auc_ownExists_raw": 0.5
+    }
+   }
+  }
+ }
+}

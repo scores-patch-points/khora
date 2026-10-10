@@ -1,0 +1,82 @@
+#!/usr/bin/env python3
+"""Where does the tab bar live, before and after a click?
+
+deep_scrape asserts L_TAB_<n>_ACT to prove a switch, and that assertion never
+becomes true. Either the ids move to a new frame, or they change shape. This
+dumps every frame's url + tab ids at each step so the answer is observed, not
+guessed.
+"""
+import sys, asyncio
+sys.path.insert(0, '/mnt/intelechia/caselink')
+import caselink_accounts as accounts_mod
+import case_link_scraper_DER_5 as scraper
+from playwright.async_api import async_playwright
+
+DOCKET = sys.argv[1] if len(sys.argv) > 1 else '26GT877'
+ROLE   = sys.argv[2] if len(sys.argv) > 2 else 'sweep'
+
+DUMP = """
+() => {
+  const ids = [];
+  document.querySelectorAll('[id^="L_TAB"]').forEach(e =>
+    ids.push(e.id + '=' + (e.innerText||'').trim().slice(0,14)));
+  const anyTab = document.querySelectorAll('[id*="TAB"]').length;
+  return { ids, anyTab, inputs: document.querySelectorAll('input').length,
+           textLen: (document.body.innerText||'').length };
+}"""
+
+async def snap(page, label):
+    print(f"\n  ===== {label} =====")
+    for n, f in enumerate(page.frames):
+        try:
+            r = await f.evaluate(DUMP)
+        except Exception as e:
+            print(f"    frame{n} {(f.url or '')[-46:]:<46} <dead: {type(e).__name__}>")
+            continue
+        if not r: continue
+        mark = ' <-- TAB BAR' if r['ids'] else ''
+        print(f"    frame{n} {(f.url or '')[-46:]:<46} tabs={len(r['ids'])} "
+              f"anyTABel={r['anyTab']} inputs={r['inputs']} text={r['textLen']}{mark}")
+        if r['ids']:
+            print(f"        {r['ids'][:12]}")
+
+async def main():
+    accts = accounts_mod.load_accounts(); accounts_mod.install_redaction(accts)
+    acct, lease = accounts_mod.acquire_account(ROLE, accts)
+    if not acct: print('NO ACCOUNT'); return 1
+    scraper.USERNAME=acct['user']; scraper.PASSWORD=acct['pass']; scraper.ALIAS=acct['alias']
+    print(f'  {acct["alias"]}')
+    try:
+        async with async_playwright() as pw:
+            b = await pw.chromium.launch(headless=True)
+            page = await (await b.new_context(viewport={'width':1400,'height':1000})).new_page()
+            page.set_default_timeout(60000)
+            if not await scraper.do_login(page): print('LOGIN FAILED'); return 1
+            for a in (1,2,3):
+                await scraper.search_case(page, DOCKET)
+                if await scraper.click_into_case(page, DOCKET): break
+                await scraper.hard_reset(page)
+            await page.wait_for_timeout(1500)
+            await snap(page, 'ON LANDING')
+
+            # click Executions (tab 8) wherever the element lives
+            hit = None
+            for n, f in enumerate(page.frames):
+                try:
+                    ok = await f.evaluate("""() => {
+                      for (const sfx of ['INACT','ACT']) {
+                        const el = document.getElementById('L_TAB_8_'+sfx);
+                        if (el) { el.click(); return 'L_TAB_8_'+sfx; }
+                      }
+                      return null; }""")
+                    if ok: hit = (n, ok); break
+                except Exception: continue
+            print(f"\n  clicked {hit}")
+            for wait in (1000, 2000, 4000):
+                await page.wait_for_timeout(wait)
+                await snap(page, f'AFTER CLICK +{wait}ms cumulative')
+            await b.close()
+    finally:
+        lease.release()
+    return 0
+sys.exit(asyncio.run(main()))

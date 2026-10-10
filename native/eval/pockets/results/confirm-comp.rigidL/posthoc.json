@@ -1,0 +1,116 @@
+{
+ "ud_mwt": {
+  "n": 14,
+  "rho_vbar_vs_mwtShare": -0.368,
+  "rho_vbar_vs_meanUnit": 0.714
+ },
+ "pubchem_pooled": {
+  "atlas_z": [
+   -0.9938940996610809,
+   -1.7243112514352503
+  ],
+  "sibling_z": [
+   -1.2063497113172197,
+   -2.491359742816368
+  ],
+  "stouffer_atlas_two_halves": -1.922061436417776,
+  "stouffer_sibling_two_halves": -2.614675429875467,
+  "stouffer_all_four_halves": -3.2079574026149595,
+  "v_minus_null_all_four_halves": [
+   -0.03648212638977433,
+   -0.06661549835474545,
+   -0.03580246132776482,
+   -0.07985062484231287
+  ],
+  "eligL_sibling_halves": [
+   21,
+   21
+  ],
+  "tokens_sibling": 82245,
+  "tokens_atlas": 166163
+ },
+ "code": {
+  "sibling_median_vbar": 0.1163,
+  "atlas_code_median": 0.1838,
+  "by_id": {
+   "sib-js-fold": 0.0833,
+   "sib-js-heimdall": 0.1091,
+   "sib-js-eoreader7": 0.0748,
+   "asym-cd-js": 0.0966,
+   "ent-cd-js": 0.0849,
+   "sfx-cd-npmjs": 0.133,
+   "asym-cd-ts": 0.1596,
+   "ent-cd-ts": 0.1178,
+   "sib-py-foldvenv": 0.154,
+   "asym-cd-py": 0.1553,
+   "ent-cd-py": 0.1148,
+   "sfx-cd-py314": 0.1541,
+   "sfx-cd-rb26": 0.1112,
+   "sfx-cd-chdr": 0.2287
+  },
+  "ratio_median": 0.633,
+  "n_below_pool_median": 13,
+  "atlas_reference_pockets": {
+   "cd-e09-cpp": 0.1539,
+   "cd-e09-python": 0.1838,
+   "cd-e09-c": 0.1481,
+   "cd-e09-docs": 0.0814,
+   "cd-e09-go": 0.1484,
+   "cd-e09-eoapp-js": 0.1159,
+   "cd-cc-javascript": 0.1696,
+   "cd-cc-python": 0.2404,
+   "cd-cc-typescript": 0.1375
+  }
+ },
+ "kind_order": {
+  "kinds_with_>=2_siblings": {
+   "code": [
+    14,
+    0.1163,
+    0.1838
+   ],
+   "novel": [
+    4,
+    0.0904,
+    0.0887
+   ],
+   "memoir": [
+    2,
+    0.0881,
+    0.0876
+   ],
+   "drama": [
+    3,
+    0.0449,
+    0.0401
+   ],
+   "chat": [
+    2,
+    0.0576,
+    0.0741
+   ],
+   "treebank": [
+    15,
+    0.0829,
+    0.054
+   ],
+   "diagram": [
+    3,
+    0.5369,
+    0.4224
+   ]
+  },
+  "pairs": 21,
+  "concordant": 20,
+  "discordant": [
+   [
+    "chat",
+    "treebank",
+    0.0576,
+    0.0829,
+    0.0741,
+    0.054
+   ]
+  ]
+ }
+}

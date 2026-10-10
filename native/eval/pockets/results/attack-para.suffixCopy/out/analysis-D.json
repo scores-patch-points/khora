@@ -1,0 +1,506 @@
+{
+ "reps": 10,
+ "draws": 10,
+ "settings": {
+  "W0a": {
+   "nullWorlds": {
+    "unit-order": {
+     "A": 8,
+     "M": 2
+    },
+    "within-doc": {
+     "A": 9,
+     "M": 1
+    },
+    "len": {
+     "A": 8,
+     "M": 2
+    },
+    "doc-len": {
+     "A": 9,
+     "M": 1
+    }
+   },
+   "meanV": 0.0004,
+   "meanNull": 0.00038,
+   "ratio": 1.05,
+   "medianZunitOrder": 0
+  },
+  "W0b": {
+   "nullWorlds": {
+    "unit-order": {
+     "A": 8,
+     "M": 2
+    },
+    "within-doc": {
+     "A": 9,
+     "M": 1
+    },
+    "len": {
+     "A": 9,
+     "M": 1
+    },
+    "doc-len": {
+     "A": 9,
+     "M": 1
+    }
+   },
+   "meanV": 0.0383,
+   "meanNull": 0.03831,
+   "ratio": 1,
+   "medianZunitOrder": -0.1
+  },
+  "W1(q=0.1)": {
+   "nullWorlds": {
+    "unit-order": {
+     "P+": 9,
+     "M": 1
+    },
+    "within-doc": {
+     "A": 8,
+     "M": 2
+    },
+    "len": {
+     "P+": 9,
+     "M": 1
+    },
+    "doc-len": {
+     "A": 9,
+     "M": 1
+    }
+   },
+   "meanV": 0.00295,
+   "meanNull": 0.00044,
+   "ratio": 6.74,
+   "medianZunitOrder": 9.8
+  },
+  "W1(q=0.25)": {
+   "nullWorlds": {
+    "unit-order": {
+     "P+": 10
+    },
+    "within-doc": {
+     "A": 10
+    },
+    "len": {
+     "P+": 10
+    },
+    "doc-len": {
+     "A": 7,
+     "M": 3
+    }
+   },
+   "meanV": 0.01638,
+   "meanNull": 0.0007,
+   "ratio": 23.47,
+   "medianZunitOrder": 42.1
+  },
+  "W1(q=0.5)": {
+   "nullWorlds": {
+    "unit-order": {
+     "P+": 10
+    },
+    "within-doc": {
+     "A": 5,
+     "M": 5
+    },
+    "len": {
+     "P+": 10
+    },
+    "doc-len": {
+     "A": 7,
+     "M": 3
+    }
+   },
+   "meanV": 0.06331,
+   "meanNull": 0.00168,
+   "ratio": 37.74,
+   "medianZunitOrder": 115.2
+  },
+  "W2(stay=0.5,aS=1)": {
+   "nullWorlds": {
+    "unit-order": {
+     "A": 10
+    },
+    "within-doc": {
+     "M": 2,
+     "A": 8
+    },
+    "len": {
+     "A": 9,
+     "M": 1
+    },
+    "doc-len": {
+     "A": 9,
+     "M": 1
+    }
+   },
+   "meanV": 0.0003,
+   "meanNull": 0.00037,
+   "ratio": 0.8,
+   "medianZunitOrder": -0.2
+  },
+  "W2(stay=0.5,aS=1.4)": {
+   "nullWorlds": {
+    "unit-order": {
+     "A": 8,
+     "M": 2
+    },
+    "within-doc": {
+     "A": 7,
+     "M": 3
+    },
+    "len": {
+     "A": 7,
+     "M": 3
+    },
+    "doc-len": {
+     "A": 9,
+     "M": 1
+    }
+   },
+   "meanV": 0.00568,
+   "meanNull": 0.00585,
+   "ratio": 0.97,
+   "medianZunitOrder": -0.1
+  },
+  "W2(stay=0.5,aS=1.8)": {
+   "nullWorlds": {
+    "unit-order": {
+     "A": 8,
+     "M": 2
+    },
+    "within-doc": {
+     "A": 8,
+     "M": 2
+    },
+    "len": {
+     "A": 9,
+     "M": 1
+    },
+    "doc-len": {
+     "M": 2,
+     "A": 8
+    }
+   },
+   "meanV": 0.02808,
+   "meanNull": 0.02798,
+   "ratio": 1,
+   "medianZunitOrder": 0.1
+  },
+  "W2(stay=0.8,aS=1)": {
+   "nullWorlds": {
+    "unit-order": {
+     "A": 7,
+     "M": 3
+    },
+    "within-doc": {
+     "A": 8,
+     "M": 2
+    },
+    "len": {
+     "M": 3,
+     "A": 7
+    },
+    "doc-len": {
+     "A": 10
+    }
+   },
+   "meanV": 0.00045,
+   "meanNull": 0.00039,
+   "ratio": 1.17,
+   "medianZunitOrder": 0.3
+  },
+  "W2(stay=0.8,aS=1.4)": {
+   "nullWorlds": {
+    "unit-order": {
+     "M": 10
+    },
+    "within-doc": {
+     "M": 9,
+     "A": 1
+    },
+    "len": {
+     "A": 7,
+     "M": 3
+    },
+    "doc-len": {
+     "A": 7,
+     "M": 3
+    }
+   },
+   "meanV": 0.00882,
+   "meanNull": 0.00611,
+   "ratio": 1.44,
+   "medianZunitOrder": 2.8
+  },
+  "W2(stay=0.8,aS=1.8)": {
+   "nullWorlds": {
+    "unit-order": {
+     "P+": 10
+    },
+    "within-doc": {
+     "P+": 10
+    },
+    "len": {
+     "A": 9,
+     "M": 1
+    },
+    "doc-len": {
+     "A": 8,
+     "M": 2
+    }
+   },
+   "meanV": 0.04184,
+   "meanNull": 0.02781,
+   "ratio": 1.5,
+   "medianZunitOrder": 7.5
+  },
+  "W2(stay=0.95,aS=1)": {
+   "nullWorlds": {
+    "unit-order": {
+     "A": 7,
+     "M": 3
+    },
+    "within-doc": {
+     "A": 8,
+     "M": 2
+    },
+    "len": {
+     "A": 8,
+     "M": 2
+    },
+    "doc-len": {
+     "A": 7,
+     "M": 3
+    }
+   },
+   "meanV": 0.00049,
+   "meanNull": 0.00042,
+   "ratio": 1.17,
+   "medianZunitOrder": -0.1
+  },
+  "W2(stay=0.95,aS=1.4)": {
+   "nullWorlds": {
+    "unit-order": {
+     "M": 9,
+     "P+": 1
+    },
+    "within-doc": {
+     "M": 9,
+     "A": 1
+    },
+    "len": {
+     "A": 8,
+     "M": 2
+    },
+    "doc-len": {
+     "A": 7,
+     "M": 3
+    }
+   },
+   "meanV": 0.00904,
+   "meanNull": 0.00624,
+   "ratio": 1.45,
+   "medianZunitOrder": 3
+  },
+  "W2(stay=0.95,aS=1.8)": {
+   "nullWorlds": {
+    "unit-order": {
+     "P+": 10
+    },
+    "within-doc": {
+     "P+": 10
+    },
+    "len": {
+     "A": 10
+    },
+    "doc-len": {
+     "A": 10
+    }
+   },
+   "meanV": 0.04848,
+   "meanNull": 0.02863,
+   "ratio": 1.69,
+   "medianZunitOrder": 11.5
+  },
+  "W2b(aS=1)": {
+   "nullWorlds": {
+    "unit-order": {
+     "A": 8,
+     "M": 2
+    },
+    "within-doc": {
+     "A": 9,
+     "M": 1
+    },
+    "len": {
+     "A": 9,
+     "M": 1
+    },
+    "doc-len": {
+     "A": 9,
+     "M": 1
+    }
+   },
+   "meanV": 0.00046,
+   "meanNull": 0.00037,
+   "ratio": 1.24,
+   "medianZunitOrder": 0.2
+  },
+  "W2b(aS=1.8)": {
+   "nullWorlds": {
+    "unit-order": {
+     "P+": 10
+    },
+    "within-doc": {
+     "P+": 8,
+     "M": 2
+    },
+    "len": {
+     "A": 7,
+     "M": 3
+    },
+    "doc-len": {
+     "A": 9,
+     "M": 1
+    }
+   },
+   "meanV": 0.01014,
+   "meanNull": 0.00254,
+   "ratio": 4,
+   "medianZunitOrder": 11.8
+  },
+  "W2b(aS=2.5)": {
+   "nullWorlds": {
+    "unit-order": {
+     "P+": 10
+    },
+    "within-doc": {
+     "P+": 10
+    },
+    "len": {
+     "A": 10
+    },
+    "doc-len": {
+     "M": 3,
+     "A": 7
+    }
+   },
+   "meanV": 0.03272,
+   "meanNull": 0.00611,
+   "ratio": 5.35,
+   "medianZunitOrder": 25.7
+  },
+  "W3(p=0.02)": {
+   "nullWorlds": {
+    "unit-order": {
+     "P+": 10
+    },
+    "within-doc": {
+     "P+": 10
+    },
+    "len": {
+     "P+": 10
+    },
+    "doc-len": {
+     "P+": 10
+    }
+   },
+   "meanV": 0.01863,
+   "meanNull": 0.00044,
+   "ratio": 42.23,
+   "medianZunitOrder": 65.3
+  },
+  "W3(p=0.05)": {
+   "nullWorlds": {
+    "unit-order": {
+     "P+": 10
+    },
+    "within-doc": {
+     "P+": 10
+    },
+    "len": {
+     "P+": 10
+    },
+    "doc-len": {
+     "P+": 10
+    }
+   },
+   "meanV": 0.04644,
+   "meanNull": 0.0004,
+   "ratio": 116.2,
+   "medianZunitOrder": 166.4
+  },
+  "W3(p=0.15)": {
+   "nullWorlds": {
+    "unit-order": {
+     "P+": 10
+    },
+    "within-doc": {
+     "P+": 10
+    },
+    "len": {
+     "P+": 10
+    },
+    "doc-len": {
+     "P+": 10
+    }
+   },
+   "meanV": 0.14068,
+   "meanNull": 0.0005,
+   "ratio": 279.79,
+   "medianZunitOrder": 443.3
+  }
+ },
+ "atlasPlanted": {
+  "pl-null": {
+   "unit-order": "A z 1.4/-0.3",
+   "within-doc": "A z 1.5/-0.3",
+   "len": "A z 1.9/-0.6",
+   "doc-len": "A z 0.7/-0.3"
+  },
+  "pl-burst": {
+   "unit-order": "M z 3.8/11.7",
+   "within-doc": "M z 2.9/4.8",
+   "len": "M z 3.1/8.1",
+   "doc-len": "M z 3.7/6.9"
+  },
+  "pl-markov": {
+   "unit-order": "M z 1.3/3.9",
+   "within-doc": "M z 0.1/2.9",
+   "len": "M z 0.5/3.1",
+   "doc-len": "M z 0.6/2.3"
+  },
+  "pl-frames": {
+   "unit-order": "A z 0.2/-0.2",
+   "within-doc": "A z -0.0/0.1",
+   "len": "A z 0.0/-0.0",
+   "doc-len": "A z 0.2/0.1"
+  },
+  "pl-parallel": {
+   "unit-order": "P+ z 473.5/588.5",
+   "within-doc": "P+ z 176.7/219.7",
+   "len": "P+ z 1015.3/493.9",
+   "doc-len": "P+ z 119.4/103.6"
+  },
+  "pl-length": {
+   "unit-order": "M z 3.1/-1.4",
+   "within-doc": "M z 3.5/-1.8",
+   "len": "A z 1.1/-2.0",
+   "doc-len": "A z 1.9/-1.7"
+  },
+  "pl-mix": {
+   "unit-order": "P+ z 4.3/4.5",
+   "within-doc": "A z 1.8/0.9",
+   "len": "M z 3.0/3.2",
+   "doc-len": "A z 2.0/1.6"
+  },
+  "pl-null2": {
+   "unit-order": "M z 2.3/2.0",
+   "within-doc": "A z 1.7/0.7",
+   "len": "A z 1.2/0.4",
+   "doc-len": "A z 0.9/0.3"
+  }
+ }
+}

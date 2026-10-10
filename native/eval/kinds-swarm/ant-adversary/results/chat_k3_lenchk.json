@@ -1,0 +1,74 @@
+[
+ {
+  "name": "P vs NK (all kind-mates)",
+  "nPos": 520,
+  "nNeg": 441,
+  "IMP": 0.809,
+  "LOC": 0.694,
+  "IMPLOC": 0.813,
+  "initPos": 0.85,
+  "initNeg": 0.621,
+  "meanLenPos": 6.833,
+  "meanLenNeg": 4.045
+ },
+ {
+  "name": "P vs NK, negatives >= 3 chars",
+  "nPos": 520,
+  "nNeg": 330,
+  "IMP": 0.753,
+  "LOC": 0.684,
+  "IMPLOC": 0.753,
+  "initPos": 0.85,
+  "initNeg": 0.609,
+  "meanLenPos": 6.833,
+  "meanLenNeg": 4.733
+ },
+ {
+  "name": "P vs NK, negatives >= 3 chars AND initial; positives initial",
+  "nPos": 442,
+  "nNeg": 201,
+  "IMP": 0.835,
+  "LOC": 0.637,
+  "IMPLOC": 0.819,
+  "initPos": 1,
+  "initNeg": 1,
+  "meanLenPos": 7.118,
+  "meanLenNeg": 4.567
+ },
+ {
+  "name": "P vs NP (pooled), all",
+  "nPos": 520,
+  "nNeg": 520,
+  "IMP": 0.907,
+  "LOC": 0.929,
+  "IMPLOC": 0.938,
+  "initPos": 0.85,
+  "initNeg": 0.079,
+  "meanLenPos": 6.833,
+  "meanLenNeg": 5.019
+ },
+ {
+  "name": "P vs NP, negatives >= 3 chars",
+  "nPos": 520,
+  "nNeg": 487,
+  "IMP": 0.902,
+  "LOC": 0.929,
+  "IMPLOC": 0.934,
+  "initPos": 0.85,
+  "initNeg": 0.074,
+  "meanLenPos": 6.833,
+  "meanLenNeg": 5.224
+ },
+ {
+  "name": "P non-initial vs NP >= 3 chars non-initial",
+  "nPos": 78,
+  "nNeg": 451,
+  "IMP": 0.674,
+  "LOC": 0.687,
+  "IMPLOC": 0.718,
+  "initPos": 0,
+  "initNeg": 0,
+  "meanLenPos": 5.218,
+  "meanLenNeg": 5.231
+ }
+]

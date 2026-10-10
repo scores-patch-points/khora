@@ -1,0 +1,160 @@
+{
+ "module": "eval/law/name-war-and-peace-real.mjs",
+ "contaminated": true,
+ "M": 128,
+ "sample": {
+  "later": 60,
+  "first": 80
+ },
+ "later": {
+  "label": "LATER causal",
+  "F": 0,
+  "n": 120,
+  "trace": {
+   "NAME": {
+    "n": 60,
+    "nonNull": 24,
+    "ownExists": 21,
+    "nonNullShare": 0.4,
+    "ownExistsShare": 0.35
+   },
+   "COMMON": {
+    "n": 60,
+    "nonNull": 3,
+    "ownExists": 4,
+    "nonNullShare": 0.05,
+    "ownExistsShare": 0.0667
+   }
+  },
+  "charNonNullShare": 0.5,
+  "charN": 10,
+  "auc": {
+   "REAL": 0.5371,
+   "FREQ": 0.6747,
+   "FREQ+BURST+COMPANY-LITE": 0.7161,
+   "POSITION": 0.4889,
+   "REAL+FREQ": 0.6489,
+   "REAL+FREQ+BURST+COMPANY-LITE": 0.7144
+  },
+  "diffs": {
+   "REAL+FREQ - FREQ": {
+    "point": -0.0258,
+    "lo": -0.0917,
+    "hi": 0.0276,
+    "n": 1000
+   },
+   "REAL+FREQ+BURST+COMPANY-LITE - FREQ+BURST+COMPANY-LITE": {
+    "point": -0.0017,
+    "lo": -0.027,
+    "hi": 0.0217,
+    "n": 1000
+   }
+  },
+  "medianOwnDelta": {
+   "NAME": 0,
+   "COMMON": 0
+  }
+ },
+ "firstCausal": {
+  "label": "FIRST causal",
+  "F": 0,
+  "n": 160,
+  "trace": {
+   "NAME": {
+    "n": 80,
+    "nonNull": 3,
+    "ownExists": 0,
+    "nonNullShare": 0.0375,
+    "ownExistsShare": 0
+   },
+   "COMMON": {
+    "n": 80,
+    "nonNull": 0,
+    "ownExists": 0,
+    "nonNullShare": 0,
+    "ownExistsShare": 0
+   }
+  },
+  "charNonNullShare": 0,
+  "charN": 11,
+  "auc": {
+   "REAL": 0.5,
+   "FREQ": null,
+   "FREQ+BURST+COMPANY-LITE": 0.6297,
+   "POSITION": 0.5004,
+   "REAL+FREQ": 0.5,
+   "REAL+FREQ+BURST+COMPANY-LITE": 0.6292
+  },
+  "diffs": {
+   "REAL+FREQ - FREQ": {
+    "point": 0.5,
+    "lo": null,
+    "hi": null,
+    "n": 0
+   },
+   "REAL+FREQ+BURST+COMPANY-LITE - FREQ+BURST+COMPANY-LITE": {
+    "point": -0.0005,
+    "lo": -0.0066,
+    "hi": 0.0083,
+    "n": 1000
+   }
+  },
+  "medianOwnDelta": {
+   "NAME": 0,
+   "COMMON": 0
+  }
+ },
+ "firstNoncausal": {
+  "label": "FIRST F=32",
+  "F": 32,
+  "n": 160,
+  "trace": {
+   "NAME": {
+    "n": 80,
+    "nonNull": 20,
+    "ownExists": 17,
+    "nonNullShare": 0.25,
+    "ownExistsShare": 0.2125
+   },
+   "COMMON": {
+    "n": 80,
+    "nonNull": 1,
+    "ownExists": 1,
+    "nonNullShare": 0.0125,
+    "ownExistsShare": 0.0125
+   }
+  },
+  "charNonNullShare": 0.3636,
+  "charN": 11,
+  "auc": {
+   "REAL": 0.5894,
+   "FREQ": null,
+   "FREQ+BURST+COMPANY-LITE": 0.6297,
+   "POSITION": 0.5004,
+   "REAL+FREQ": 0.5894,
+   "REAL+FREQ+BURST+COMPANY-LITE": 0.7139
+  },
+  "diffs": {
+   "REAL+FREQ - FREQ": {
+    "point": 0.5894,
+    "lo": null,
+    "hi": null,
+    "n": 0
+   },
+   "REAL+FREQ+BURST+COMPANY-LITE - FREQ+BURST+COMPANY-LITE": {
+    "point": 0.0842,
+    "lo": 0.0327,
+    "hi": 0.1112,
+    "n": 1000
+   }
+  },
+  "medianOwnDelta": {
+   "NAME": 0,
+   "COMMON": 0
+  }
+ },
+ "cost": {
+  "reads": 822,
+  "seconds": 3395.9
+ }
+}

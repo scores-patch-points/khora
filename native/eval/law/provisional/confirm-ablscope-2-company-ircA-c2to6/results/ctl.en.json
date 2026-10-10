@@ -1,0 +1,1255 @@
+{
+ "K6_same": 50,
+ "K6_n": 50,
+ "K1_zero": 1038,
+ "K1_n": 1038,
+ "docs": [
+  [
+   "ubuntu/2014-03-15",
+   35
+  ],
+  [
+   "kubuntu/2009-07-15",
+   82
+  ],
+  [
+   "kubuntu/2010-03-15",
+   48
+  ],
+  [
+   "kubuntu/2010-07-15",
+   8
+  ],
+  [
+   "kubuntu/2011-03-15",
+   51
+  ],
+  [
+   "kubuntu/2011-07-15",
+   21
+  ],
+  [
+   "kubuntu/2012-07-15",
+   8
+  ],
+  [
+   "kubuntu/2013-03-15",
+   8
+  ],
+  [
+   "xubuntu/2007-03-15",
+   27
+  ],
+  [
+   "xubuntu/2007-07-15",
+   2
+  ],
+  [
+   "xubuntu/2008-07-15",
+   17
+  ],
+  [
+   "xubuntu/2009-03-15",
+   6
+  ],
+  [
+   "ubuntu-server/2007-11-15",
+   6
+  ],
+  [
+   "ubuntu-server/2008-03-15",
+   21
+  ],
+  [
+   "ubuntu-server/2008-07-15",
+   21
+  ],
+  [
+   "ubuntu-server/2009-07-15",
+   22
+  ],
+  [
+   "ubuntu-server/2010-03-15",
+   19
+  ],
+  [
+   "ubuntu-server/2010-07-15",
+   63
+  ],
+  [
+   "ubuntu-server/2011-03-15",
+   28
+  ],
+  [
+   "ubuntu-server/2011-07-15",
+   4
+  ],
+  [
+   "ubuntu-server/2013-03-15",
+   9
+  ],
+  [
+   "ubuntu-server/2013-07-15",
+   5
+  ],
+  [
+   "ubuntu-server/2014-07-15",
+   8
+  ]
+ ],
+ "design": {
+  "ubuntu/2014-03-15|A:c2": {
+   "got": 5,
+   "nPos": 14,
+   "dropped": 9
+  },
+  "ubuntu/2014-03-15|A:c3": {
+   "got": 7,
+   "nPos": 15,
+   "dropped": 8
+  },
+  "ubuntu/2014-03-15|A:c4_6": {
+   "got": 10,
+   "nPos": 35,
+   "dropped": 25
+  },
+  "ubuntu/2014-03-15|A:c7_15": {
+   "got": 10,
+   "nPos": 33,
+   "dropped": 22
+  },
+  "ubuntu/2014-03-15|A:c16p": {
+   "got": 0,
+   "nPos": 22,
+   "dropped": 22
+  },
+  "ubuntu/2014-03-15|B:c2": {
+   "got": 1,
+   "nPos": 2,
+   "dropped": 1
+  },
+  "ubuntu/2014-03-15|B:c3": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu/2014-03-15|B:c4_6": {
+   "got": 1,
+   "nPos": 3,
+   "dropped": 2
+  },
+  "ubuntu/2014-03-15|B:c7_15": {
+   "got": 1,
+   "nPos": 1,
+   "dropped": 0
+  },
+  "ubuntu/2014-03-15|B:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "kubuntu/2009-07-15|A:c2": {
+   "got": 18,
+   "nPos": 24,
+   "dropped": 6
+  },
+  "kubuntu/2009-07-15|A:c3": {
+   "got": 17,
+   "nPos": 23,
+   "dropped": 6
+  },
+  "kubuntu/2009-07-15|A:c4_6": {
+   "got": 26,
+   "nPos": 55,
+   "dropped": 29
+  },
+  "kubuntu/2009-07-15|A:c7_15": {
+   "got": 11,
+   "nPos": 64,
+   "dropped": 53
+  },
+  "kubuntu/2009-07-15|A:c16p": {
+   "got": 0,
+   "nPos": 27,
+   "dropped": 27
+  },
+  "kubuntu/2009-07-15|B:c2": {
+   "got": 1,
+   "nPos": 1,
+   "dropped": 0
+  },
+  "kubuntu/2009-07-15|B:c3": {
+   "got": 1,
+   "nPos": 1,
+   "dropped": 0
+  },
+  "kubuntu/2009-07-15|B:c4_6": {
+   "got": 3,
+   "nPos": 3,
+   "dropped": 0
+  },
+  "kubuntu/2009-07-15|B:c7_15": {
+   "got": 5,
+   "nPos": 7,
+   "dropped": 2
+  },
+  "kubuntu/2009-07-15|B:c16p": {
+   "got": 0,
+   "nPos": 3,
+   "dropped": 3
+  },
+  "kubuntu/2010-03-15|A:c2": {
+   "got": 9,
+   "nPos": 15,
+   "dropped": 6
+  },
+  "kubuntu/2010-03-15|A:c3": {
+   "got": 9,
+   "nPos": 13,
+   "dropped": 4
+  },
+  "kubuntu/2010-03-15|A:c4_6": {
+   "got": 17,
+   "nPos": 32,
+   "dropped": 15
+  },
+  "kubuntu/2010-03-15|A:c7_15": {
+   "got": 5,
+   "nPos": 33,
+   "dropped": 24
+  },
+  "kubuntu/2010-03-15|A:c16p": {
+   "got": 4,
+   "nPos": 9,
+   "dropped": 2
+  },
+  "kubuntu/2010-03-15|B:c2": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "kubuntu/2010-03-15|B:c3": {
+   "got": 1,
+   "nPos": 1,
+   "dropped": 0
+  },
+  "kubuntu/2010-03-15|B:c4_6": {
+   "got": 2,
+   "nPos": 3,
+   "dropped": 1
+  },
+  "kubuntu/2010-03-15|B:c7_15": {
+   "got": 1,
+   "nPos": 2,
+   "dropped": 1
+  },
+  "kubuntu/2010-03-15|B:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "kubuntu/2010-07-15|A:c2": {
+   "got": 1,
+   "nPos": 4,
+   "dropped": 3
+  },
+  "kubuntu/2010-07-15|A:c3": {
+   "got": 3,
+   "nPos": 3,
+   "dropped": 0
+  },
+  "kubuntu/2010-07-15|A:c4_6": {
+   "got": 1,
+   "nPos": 3,
+   "dropped": 2
+  },
+  "kubuntu/2010-07-15|A:c7_15": {
+   "got": 2,
+   "nPos": 2,
+   "dropped": 0
+  },
+  "kubuntu/2010-07-15|A:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "kubuntu/2010-07-15|B:c2": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "kubuntu/2010-07-15|B:c3": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "kubuntu/2010-07-15|B:c4_6": {
+   "got": 1,
+   "nPos": 1,
+   "dropped": 0
+  },
+  "kubuntu/2010-07-15|B:c7_15": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "kubuntu/2010-07-15|B:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "kubuntu/2011-03-15|A:c2": {
+   "got": 8,
+   "nPos": 13,
+   "dropped": 5
+  },
+  "kubuntu/2011-03-15|A:c3": {
+   "got": 7,
+   "nPos": 13,
+   "dropped": 6
+  },
+  "kubuntu/2011-03-15|A:c4_6": {
+   "got": 17,
+   "nPos": 48,
+   "dropped": 31
+  },
+  "kubuntu/2011-03-15|A:c7_15": {
+   "got": 14,
+   "nPos": 117,
+   "dropped": 83
+  },
+  "kubuntu/2011-03-15|A:c16p": {
+   "got": 1,
+   "nPos": 17,
+   "dropped": 16
+  },
+  "kubuntu/2011-03-15|B:c2": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "kubuntu/2011-03-15|B:c3": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "kubuntu/2011-03-15|B:c4_6": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "kubuntu/2011-03-15|B:c7_15": {
+   "got": 4,
+   "nPos": 9,
+   "dropped": 5
+  },
+  "kubuntu/2011-03-15|B:c16p": {
+   "got": 0,
+   "nPos": 2,
+   "dropped": 2
+  },
+  "kubuntu/2011-07-15|A:c2": {
+   "got": 1,
+   "nPos": 5,
+   "dropped": 4
+  },
+  "kubuntu/2011-07-15|A:c3": {
+   "got": 5,
+   "nPos": 7,
+   "dropped": 2
+  },
+  "kubuntu/2011-07-15|A:c4_6": {
+   "got": 7,
+   "nPos": 14,
+   "dropped": 7
+  },
+  "kubuntu/2011-07-15|A:c7_15": {
+   "got": 8,
+   "nPos": 19,
+   "dropped": 9
+  },
+  "kubuntu/2011-07-15|A:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "kubuntu/2011-07-15|B:c2": {
+   "got": 0,
+   "nPos": 1,
+   "dropped": 1
+  },
+  "kubuntu/2011-07-15|B:c3": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "kubuntu/2011-07-15|B:c4_6": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "kubuntu/2011-07-15|B:c7_15": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "kubuntu/2011-07-15|B:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "kubuntu/2012-07-15|A:c2": {
+   "got": 1,
+   "nPos": 2,
+   "dropped": 1
+  },
+  "kubuntu/2012-07-15|A:c3": {
+   "got": 1,
+   "nPos": 3,
+   "dropped": 2
+  },
+  "kubuntu/2012-07-15|A:c4_6": {
+   "got": 2,
+   "nPos": 5,
+   "dropped": 3
+  },
+  "kubuntu/2012-07-15|A:c7_15": {
+   "got": 0,
+   "nPos": 3,
+   "dropped": 3
+  },
+  "kubuntu/2012-07-15|A:c16p": {
+   "got": 1,
+   "nPos": 1,
+   "dropped": 0
+  },
+  "kubuntu/2012-07-15|B:c2": {
+   "got": 1,
+   "nPos": 1,
+   "dropped": 0
+  },
+  "kubuntu/2012-07-15|B:c3": {
+   "got": 1,
+   "nPos": 1,
+   "dropped": 0
+  },
+  "kubuntu/2012-07-15|B:c4_6": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "kubuntu/2012-07-15|B:c7_15": {
+   "got": 1,
+   "nPos": 1,
+   "dropped": 0
+  },
+  "kubuntu/2012-07-15|B:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "kubuntu/2013-03-15|A:c2": {
+   "got": 0,
+   "nPos": 5,
+   "dropped": 5
+  },
+  "kubuntu/2013-03-15|A:c3": {
+   "got": 0,
+   "nPos": 3,
+   "dropped": 3
+  },
+  "kubuntu/2013-03-15|A:c4_6": {
+   "got": 4,
+   "nPos": 8,
+   "dropped": 4
+  },
+  "kubuntu/2013-03-15|A:c7_15": {
+   "got": 2,
+   "nPos": 3,
+   "dropped": 1
+  },
+  "kubuntu/2013-03-15|A:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "kubuntu/2013-03-15|B:c2": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "kubuntu/2013-03-15|B:c3": {
+   "got": 1,
+   "nPos": 1,
+   "dropped": 0
+  },
+  "kubuntu/2013-03-15|B:c4_6": {
+   "got": 1,
+   "nPos": 1,
+   "dropped": 0
+  },
+  "kubuntu/2013-03-15|B:c7_15": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "kubuntu/2013-03-15|B:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "xubuntu/2007-03-15|A:c2": {
+   "got": 6,
+   "nPos": 11,
+   "dropped": 5
+  },
+  "xubuntu/2007-03-15|A:c3": {
+   "got": 3,
+   "nPos": 10,
+   "dropped": 7
+  },
+  "xubuntu/2007-03-15|A:c4_6": {
+   "got": 6,
+   "nPos": 26,
+   "dropped": 20
+  },
+  "xubuntu/2007-03-15|A:c7_15": {
+   "got": 4,
+   "nPos": 38,
+   "dropped": 34
+  },
+  "xubuntu/2007-03-15|A:c16p": {
+   "got": 3,
+   "nPos": 4,
+   "dropped": 1
+  },
+  "xubuntu/2007-03-15|B:c2": {
+   "got": 2,
+   "nPos": 3,
+   "dropped": 1
+  },
+  "xubuntu/2007-03-15|B:c3": {
+   "got": 1,
+   "nPos": 1,
+   "dropped": 0
+  },
+  "xubuntu/2007-03-15|B:c4_6": {
+   "got": 0,
+   "nPos": 1,
+   "dropped": 1
+  },
+  "xubuntu/2007-03-15|B:c7_15": {
+   "got": 2,
+   "nPos": 3,
+   "dropped": 1
+  },
+  "xubuntu/2007-03-15|B:c16p": {
+   "got": 0,
+   "nPos": 1,
+   "dropped": 1
+  },
+  "xubuntu/2007-07-15|A:c2": {
+   "got": 0,
+   "nPos": 2,
+   "dropped": 2
+  },
+  "xubuntu/2007-07-15|A:c3": {
+   "got": 1,
+   "nPos": 2,
+   "dropped": 1
+  },
+  "xubuntu/2007-07-15|A:c4_6": {
+   "got": 0,
+   "nPos": 4,
+   "dropped": 4
+  },
+  "xubuntu/2007-07-15|A:c7_15": {
+   "got": 0,
+   "nPos": 1,
+   "dropped": 1
+  },
+  "xubuntu/2007-07-15|A:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "xubuntu/2007-07-15|B:c2": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "xubuntu/2007-07-15|B:c3": {
+   "got": 1,
+   "nPos": 1,
+   "dropped": 0
+  },
+  "xubuntu/2007-07-15|B:c4_6": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "xubuntu/2007-07-15|B:c7_15": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "xubuntu/2007-07-15|B:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "xubuntu/2008-07-15|A:c2": {
+   "got": 1,
+   "nPos": 7,
+   "dropped": 6
+  },
+  "xubuntu/2008-07-15|A:c3": {
+   "got": 3,
+   "nPos": 8,
+   "dropped": 5
+  },
+  "xubuntu/2008-07-15|A:c4_6": {
+   "got": 7,
+   "nPos": 17,
+   "dropped": 10
+  },
+  "xubuntu/2008-07-15|A:c7_15": {
+   "got": 5,
+   "nPos": 19,
+   "dropped": 14
+  },
+  "xubuntu/2008-07-15|A:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "xubuntu/2008-07-15|B:c2": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "xubuntu/2008-07-15|B:c3": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "xubuntu/2008-07-15|B:c4_6": {
+   "got": 1,
+   "nPos": 1,
+   "dropped": 0
+  },
+  "xubuntu/2008-07-15|B:c7_15": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "xubuntu/2008-07-15|B:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "xubuntu/2009-03-15|A:c2": {
+   "got": 1,
+   "nPos": 1,
+   "dropped": 0
+  },
+  "xubuntu/2009-03-15|A:c3": {
+   "got": 1,
+   "nPos": 2,
+   "dropped": 1
+  },
+  "xubuntu/2009-03-15|A:c4_6": {
+   "got": 3,
+   "nPos": 5,
+   "dropped": 2
+  },
+  "xubuntu/2009-03-15|A:c7_15": {
+   "got": 0,
+   "nPos": 1,
+   "dropped": 1
+  },
+  "xubuntu/2009-03-15|A:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "xubuntu/2009-03-15|B:c2": {
+   "got": 1,
+   "nPos": 1,
+   "dropped": 0
+  },
+  "xubuntu/2009-03-15|B:c3": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "xubuntu/2009-03-15|B:c4_6": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "xubuntu/2009-03-15|B:c7_15": {
+   "got": 0,
+   "nPos": 1,
+   "dropped": 1
+  },
+  "xubuntu/2009-03-15|B:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2007-11-15|A:c2": {
+   "got": 3,
+   "nPos": 3,
+   "dropped": 0
+  },
+  "ubuntu-server/2007-11-15|A:c3": {
+   "got": 1,
+   "nPos": 2,
+   "dropped": 1
+  },
+  "ubuntu-server/2007-11-15|A:c4_6": {
+   "got": 1,
+   "nPos": 3,
+   "dropped": 2
+  },
+  "ubuntu-server/2007-11-15|A:c7_15": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2007-11-15|A:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2007-11-15|B:c2": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2007-11-15|B:c3": {
+   "got": 1,
+   "nPos": 1,
+   "dropped": 0
+  },
+  "ubuntu-server/2007-11-15|B:c4_6": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2007-11-15|B:c7_15": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2007-11-15|B:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2008-03-15|A:c2": {
+   "got": 2,
+   "nPos": 3,
+   "dropped": 1
+  },
+  "ubuntu-server/2008-03-15|A:c3": {
+   "got": 5,
+   "nPos": 5,
+   "dropped": 0
+  },
+  "ubuntu-server/2008-03-15|A:c4_6": {
+   "got": 8,
+   "nPos": 9,
+   "dropped": 1
+  },
+  "ubuntu-server/2008-03-15|A:c7_15": {
+   "got": 5,
+   "nPos": 9,
+   "dropped": 4
+  },
+  "ubuntu-server/2008-03-15|A:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2008-03-15|B:c2": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2008-03-15|B:c3": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2008-03-15|B:c4_6": {
+   "got": 1,
+   "nPos": 1,
+   "dropped": 0
+  },
+  "ubuntu-server/2008-03-15|B:c7_15": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2008-03-15|B:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2008-07-15|A:c2": {
+   "got": 2,
+   "nPos": 2,
+   "dropped": 0
+  },
+  "ubuntu-server/2008-07-15|A:c3": {
+   "got": 2,
+   "nPos": 2,
+   "dropped": 0
+  },
+  "ubuntu-server/2008-07-15|A:c4_6": {
+   "got": 7,
+   "nPos": 7,
+   "dropped": 0
+  },
+  "ubuntu-server/2008-07-15|A:c7_15": {
+   "got": 2,
+   "nPos": 4,
+   "dropped": 2
+  },
+  "ubuntu-server/2008-07-15|A:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2008-07-15|B:c2": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2008-07-15|B:c3": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2008-07-15|B:c4_6": {
+   "got": 2,
+   "nPos": 3,
+   "dropped": 1
+  },
+  "ubuntu-server/2008-07-15|B:c7_15": {
+   "got": 6,
+   "nPos": 6,
+   "dropped": 0
+  },
+  "ubuntu-server/2008-07-15|B:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2009-07-15|A:c2": {
+   "got": 5,
+   "nPos": 7,
+   "dropped": 2
+  },
+  "ubuntu-server/2009-07-15|A:c3": {
+   "got": 4,
+   "nPos": 4,
+   "dropped": 0
+  },
+  "ubuntu-server/2009-07-15|A:c4_6": {
+   "got": 6,
+   "nPos": 6,
+   "dropped": 0
+  },
+  "ubuntu-server/2009-07-15|A:c7_15": {
+   "got": 4,
+   "nPos": 5,
+   "dropped": 0
+  },
+  "ubuntu-server/2009-07-15|A:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2009-07-15|B:c2": {
+   "got": 0,
+   "nPos": 1,
+   "dropped": 1
+  },
+  "ubuntu-server/2009-07-15|B:c3": {
+   "got": 2,
+   "nPos": 2,
+   "dropped": 0
+  },
+  "ubuntu-server/2009-07-15|B:c4_6": {
+   "got": 1,
+   "nPos": 1,
+   "dropped": 0
+  },
+  "ubuntu-server/2009-07-15|B:c7_15": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2009-07-15|B:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2010-03-15|A:c2": {
+   "got": 2,
+   "nPos": 11,
+   "dropped": 9
+  },
+  "ubuntu-server/2010-03-15|A:c3": {
+   "got": 2,
+   "nPos": 12,
+   "dropped": 10
+  },
+  "ubuntu-server/2010-03-15|A:c4_6": {
+   "got": 8,
+   "nPos": 32,
+   "dropped": 24
+  },
+  "ubuntu-server/2010-03-15|A:c7_15": {
+   "got": 6,
+   "nPos": 51,
+   "dropped": 44
+  },
+  "ubuntu-server/2010-03-15|A:c16p": {
+   "got": 0,
+   "nPos": 16,
+   "dropped": 16
+  },
+  "ubuntu-server/2010-03-15|B:c2": {
+   "got": 1,
+   "nPos": 1,
+   "dropped": 0
+  },
+  "ubuntu-server/2010-03-15|B:c3": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2010-03-15|B:c4_6": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2010-03-15|B:c7_15": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2010-03-15|B:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2010-07-15|A:c2": {
+   "got": 13,
+   "nPos": 18,
+   "dropped": 5
+  },
+  "ubuntu-server/2010-07-15|A:c3": {
+   "got": 11,
+   "nPos": 18,
+   "dropped": 7
+  },
+  "ubuntu-server/2010-07-15|A:c4_6": {
+   "got": 21,
+   "nPos": 31,
+   "dropped": 10
+  },
+  "ubuntu-server/2010-07-15|A:c7_15": {
+   "got": 14,
+   "nPos": 31,
+   "dropped": 4
+  },
+  "ubuntu-server/2010-07-15|A:c16p": {
+   "got": 2,
+   "nPos": 2,
+   "dropped": 0
+  },
+  "ubuntu-server/2010-07-15|B:c2": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2010-07-15|B:c3": {
+   "got": 1,
+   "nPos": 1,
+   "dropped": 0
+  },
+  "ubuntu-server/2010-07-15|B:c4_6": {
+   "got": 1,
+   "nPos": 1,
+   "dropped": 0
+  },
+  "ubuntu-server/2010-07-15|B:c7_15": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2010-07-15|B:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2011-03-15|A:c2": {
+   "got": 7,
+   "nPos": 9,
+   "dropped": 2
+  },
+  "ubuntu-server/2011-03-15|A:c3": {
+   "got": 7,
+   "nPos": 10,
+   "dropped": 3
+  },
+  "ubuntu-server/2011-03-15|A:c4_6": {
+   "got": 8,
+   "nPos": 17,
+   "dropped": 9
+  },
+  "ubuntu-server/2011-03-15|A:c7_15": {
+   "got": 6,
+   "nPos": 13,
+   "dropped": 6
+  },
+  "ubuntu-server/2011-03-15|A:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2011-03-15|B:c2": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2011-03-15|B:c3": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2011-03-15|B:c4_6": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2011-03-15|B:c7_15": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2011-03-15|B:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2011-07-15|A:c2": {
+   "got": 1,
+   "nPos": 3,
+   "dropped": 2
+  },
+  "ubuntu-server/2011-07-15|A:c3": {
+   "got": 1,
+   "nPos": 4,
+   "dropped": 3
+  },
+  "ubuntu-server/2011-07-15|A:c4_6": {
+   "got": 1,
+   "nPos": 8,
+   "dropped": 7
+  },
+  "ubuntu-server/2011-07-15|A:c7_15": {
+   "got": 0,
+   "nPos": 9,
+   "dropped": 9
+  },
+  "ubuntu-server/2011-07-15|A:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2011-07-15|B:c2": {
+   "got": 1,
+   "nPos": 1,
+   "dropped": 0
+  },
+  "ubuntu-server/2011-07-15|B:c3": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2011-07-15|B:c4_6": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2011-07-15|B:c7_15": {
+   "got": 0,
+   "nPos": 1,
+   "dropped": 1
+  },
+  "ubuntu-server/2011-07-15|B:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2013-03-15|A:c2": {
+   "got": 0,
+   "nPos": 3,
+   "dropped": 3
+  },
+  "ubuntu-server/2013-03-15|A:c3": {
+   "got": 2,
+   "nPos": 3,
+   "dropped": 1
+  },
+  "ubuntu-server/2013-03-15|A:c4_6": {
+   "got": 4,
+   "nPos": 11,
+   "dropped": 7
+  },
+  "ubuntu-server/2013-03-15|A:c7_15": {
+   "got": 2,
+   "nPos": 10,
+   "dropped": 8
+  },
+  "ubuntu-server/2013-03-15|A:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2013-03-15|B:c2": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2013-03-15|B:c3": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2013-03-15|B:c4_6": {
+   "got": 1,
+   "nPos": 1,
+   "dropped": 0
+  },
+  "ubuntu-server/2013-03-15|B:c7_15": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2013-03-15|B:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2013-07-15|A:c2": {
+   "got": 0,
+   "nPos": 2,
+   "dropped": 2
+  },
+  "ubuntu-server/2013-07-15|A:c3": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2013-07-15|A:c4_6": {
+   "got": 2,
+   "nPos": 6,
+   "dropped": 4
+  },
+  "ubuntu-server/2013-07-15|A:c7_15": {
+   "got": 3,
+   "nPos": 3,
+   "dropped": 0
+  },
+  "ubuntu-server/2013-07-15|A:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2013-07-15|B:c2": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2013-07-15|B:c3": {
+   "got": 0,
+   "nPos": 1,
+   "dropped": 1
+  },
+  "ubuntu-server/2013-07-15|B:c4_6": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2013-07-15|B:c7_15": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2013-07-15|B:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2014-07-15|A:c2": {
+   "got": 2,
+   "nPos": 2,
+   "dropped": 0
+  },
+  "ubuntu-server/2014-07-15|A:c3": {
+   "got": 1,
+   "nPos": 2,
+   "dropped": 1
+  },
+  "ubuntu-server/2014-07-15|A:c4_6": {
+   "got": 3,
+   "nPos": 6,
+   "dropped": 3
+  },
+  "ubuntu-server/2014-07-15|A:c7_15": {
+   "got": 2,
+   "nPos": 4,
+   "dropped": 2
+  },
+  "ubuntu-server/2014-07-15|A:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2014-07-15|B:c2": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2014-07-15|B:c3": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2014-07-15|B:c4_6": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2014-07-15|B:c7_15": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  },
+  "ubuntu-server/2014-07-15|B:c16p": {
+   "got": 0,
+   "nPos": 0,
+   "dropped": 0
+  }
+ },
+ "seconds": 91.3,
+ "headerSha256": "1bb2872ed0b491d0daaa6f6f9076359939d77c192c56199263befce7984a5f9a",
+ "daysSha256": "97ff0d9c40899ad31db4a1960e90cbd1496553d59b5b7bf57c2961d3cd0902f5"
+}

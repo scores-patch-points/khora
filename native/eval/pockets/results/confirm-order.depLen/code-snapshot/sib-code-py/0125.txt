@@ -1,0 +1,307 @@
+"""Surveillance classifier over eoreader7 output.
+
+The classifier scores a document's eoreader7 surface keys (the noun-phrase
+chunks the reader surfaces as grammatical subjects/objects) plus the raw text
+against a surveillance lexicon. Using the eoreader7 referent surfaces rather
+than raw keyword counts is the point: a term must be an actual referent of the
+document (something the legislation is ABOUT), which filters out background
+noise like "LPRF parks grant" or ceremonial mentions.
+
+Scoring model (weights tuned on the golden/background corpus in
+reports/eo_matrix.json):
+  - CORE: surveillance technology nouns          weight 3.0
+  - SENSOR: collection/capture vocabulary        weight 1.0
+  - GUARDRAIL: restriction/oversight grammar     weight 1.2
+  - VENDOR: named surveillance vendors           weight 2.0
+  - CODE: MCL 13.08.080 anchor                   weight 2.5
+  - density bonus: graph density vs a baseline
+Verdict: surveillance if score >= threshold.
+"""
+
+from __future__ import annotations
+
+import re
+from dataclasses import dataclass, field
+
+
+# -- lexicons --------------------------------------------------------------
+CORE_TERMS = [
+    # NOT "surveillance" bare, and NOT "lpr" bare — both too ambiguous to
+    # anchor alone. "surveillance" is ordinary English for epidemiological
+    # monitoring (disease/HIV/STI/vital-records surveillance is routine,
+    # frequent Health Department grant language, nothing to do with
+    # surveillance technology) and "lpr" collides with the unrelated
+    # networking/printing term "Line Printer Remote" — confirmed live: both
+    # produced real false positives (public-health grants, a Dell hardware
+    # purchase) that anchored on nothing else. "video_surveillance",
+    # "license_plate_reader", and "alpr" stay — specific enough to be safe.
+    "camera",
+    "license_plate",
+    "license_plate_scanner",
+    "license_plate_reader",
+    "alpr",
+    "drone",
+    "unmanned_aircraft",
+    "unmanned_aerial",
+    "uas",
+    "uav",
+    "facial_recognition",
+    "facial",
+    "biometric",
+    "cctv",
+    "body_camera",
+    "body_worn",
+    "video_surveillance",
+    "shotspotter",
+    "gunshot",
+    "stingray",
+    "cell_site_simulator",
+    "cell_site",
+    "imsi",
+    "automatic_license",
+    "plate_reader",
+    "x-ray_van",
+    "mobile_dna",
+    "real-time_crime",
+    "live_video",
+    "video_management",
+    "donor_camera",
+    "public_safety_camera",
+    "video_integration",
+    "community_safety_camera",
+]
+
+SENSOR_TERMS = [
+    # "surveillance" lives here now, not in CORE_TERMS: it still counts as
+    # supporting evidence once a real anchor is present, but can no longer
+    # anchor a flag by itself (see the note in CORE_TERMS).
+    "surveillance",
+    "data",
+    "information",
+    "image",
+    "images",
+    "video",
+    "audio",
+    "thermal",
+    "location",
+    "record",
+    "recorded",
+    "recording",
+    "collect",
+    "collecting",
+    "capture",
+    "capturing",
+    "retain",
+    "retention",
+    "process",
+    "intercept",
+    "analyze",
+    "analysis",
+    "monitor",
+    "monitoring",
+    "track",
+    "tracking",
+    "footage",
+    "device",
+    "equipment",
+    "sensor",
+    "payload",
+    "biometric_data",
+    "digital",
+    "live_or_recorded",
+    "access",
+    "identify",
+    "identification",
+    "apprehension",
+]
+
+GUARDRAIL_TERMS = [
+    "not_include",
+    "not_apply",
+    "not_approve",
+    "not_to",
+    "capable_of",
+    "shall_not",
+    "authorized_purposes",
+    "usage_and_privacy_policy",
+    "privacy_policy",
+    "reasonable_suspicion",
+    "reasonable_expectation_of_privacy",
+    "exigent_circumstances",
+    "search_warrant",
+    "audit",
+    "audit_trail",
+    "hot_list",
+    "retention",
+    "custodian",
+    "public_hearing",
+    "civil_liberties",
+    "civil_rights",
+    "prohibit",
+    "prohibited",
+    "restrict",
+    "restrictions",
+    "termination_clause",
+    "facial_recognition_technology",
+    "artificial_intelligence",
+    "machine_learning",
+    "biometric_surveillance",
+]
+
+VENDOR_TERMS = [
+    "fusus",
+    "motorola",
+    "flock",
+    "axon",
+    "verizon_connect",
+    "verizon",
+    "watchguard",
+    "rapid_deploy",
+    "vigilant",
+    "accenture",
+    "palantir",
+    "shotspotter",
+    "axxon",
+    "skycop",
+    "brinc",
+    "dji",
+    "skydio",
+]
+
+CODE_ANCHOR_RE = re.compile(r"13\.08\.080")
+
+# terms that can legitimately appear in NON-surveillance police/finance docs
+NEGATIVE_LEXICON = [
+    "tow-in_lot",
+    "tow_in_lot",
+    "notaries",
+    "beer_permit",
+    "minimum_distance",
+    "capital_improvements",
+    "fiber_optic",
+]
+
+
+@dataclass
+class Verdict:
+    file: str
+    score: float
+    label: str  # "surveillance" | "background"
+    evidence: list = field(default_factory=list)
+
+
+def _norm(term: str) -> str:
+    return term.strip().lower().replace(" ", "_").replace("-", "_")
+
+
+def surface_matches(surfaces: list[str], lexicon: list[str]) -> list[str]:
+    """Return lexicon terms found as (substring of) any surface key."""
+    hits = []
+    for s in surfaces:
+        sn = _norm(s)
+        for t in lexicon:
+            if t in sn:
+                hits.append(t)
+    return hits
+
+
+def classify_surfaces(
+    surfaces: list[str],
+    *,
+    title: str = "",
+    text: str = "",
+    relation_edges: int = 0,
+    n_entries: int = 0,
+    file: str = "",
+) -> Verdict:
+    evidence: list[str] = []
+    score = 0.0
+    core_hits: list[str] = []
+    vendor_hits: list[str] = []
+
+    def add(weight: float, term: str):
+        nonlocal score
+        score += weight
+        evidence.append(f"{term} (w={weight})")
+
+    for t in surface_matches(surfaces, CORE_TERMS):
+        add(3.0, f"CORE:{t}")
+        core_hits.append(t)
+    for t in surface_matches(surfaces, SENSOR_TERMS):
+        add(1.0, f"SENSOR:{t}")
+    for t in surface_matches(surfaces, GUARDRAIL_TERMS):
+        add(1.2, f"GUARD:{t}")
+    for t in surface_matches(surfaces, VENDOR_TERMS):
+        add(2.0, f"VENDOR:{t}")
+        vendor_hits.append(t)
+
+    joined = (title + " " + text).lower().replace("-", " ")
+    code_hit = bool(CODE_ANCHOR_RE.search(joined))
+    if code_hit:
+        add(2.5, "CODE:13.08.080")
+
+    # density bonus: surveillance legislation is denser (more relations per entry)
+    if n_entries > 300:
+        score += 0.5 * min(1.0, (n_entries - 300) / 200)
+        evidence.append(f"density:nGraphEntries={n_entries}")
+
+    # negative correction: strong background lexicon overrides marginal scores
+    neg_hits = [t for t in NEGATIVE_LEXICON if t in joined]
+    if neg_hits and score < 6:
+        for t in neg_hits:
+            evidence.append(f"negative:{t}")
+        score *= 0.5
+
+    # CORE-ANCHOR RULE: sensor/guardrail/density vocabulary alone is not
+    # surveillance (zoning, beer, and procurement docs share it). Nor is the
+    # 13.08.080 code citation by itself — confirmed live: EVERY Nashville
+    # cooperative-purchasing contract carries a standard certification page
+    # ("Does the contract contain any good/service relative to surveillance,
+    # as described in MCL 13.08.080?"), regardless of what's actually being
+    # purchased (UPS courier services, Dell computers, waste equipment all
+    # false-positived on exactly this boilerplate). A document must
+    # reference a concrete surveillance technology (CORE term) or a named
+    # surveillance vendor to be flagged; the code citation and bare
+    # "surveillance" still count as supporting evidence once something
+    # concrete has already anchored it.
+    anchored = bool(core_hits) or bool(vendor_hits)
+    label = "surveillance" if anchored and score >= 5.0 else "background"
+    if not anchored:
+        evidence.append("no_core_anchor")
+    return Verdict(file=file, score=round(score, 2), label=label, evidence=evidence)
+
+
+def classify_title(title: str, *, file: str = "") -> Verdict:
+    """Lightweight title-only pre-filter. Uses the same lexicons but matches
+    against the raw title string (titles are too short for eoreader7). Not a
+    substitute for the surface-based pass — it is the fast screen that decides
+    which matters warrant the expensive eoreader7 deep pass."""
+    t = _norm(title).replace("_", " ")
+    evidence: list[str] = []
+    score = 0.0
+    core_hits = [x for x in CORE_TERMS if _norm(x).replace("_", " ") in t or x in _norm(title)]
+    vendor_hits = [x for x in VENDOR_TERMS if _norm(x).replace("_", " ") in t or x in _norm(title)]
+    for x in core_hits:
+        score += 3.0
+        evidence.append(f"CORE:{x}")
+    for x in vendor_hits:
+        score += 2.0
+        evidence.append(f"VENDOR:{x}")
+    for x in GUARDRAIL_TERMS:
+        if _norm(x).replace("_", " ") in t:
+            score += 1.0
+            evidence.append(f"GUARD:{x}")
+    if CODE_ANCHOR_RE.search(title):
+        score += 2.5
+        evidence.append("CODE:13.08.080")
+    anchored = bool(core_hits) or bool(vendor_hits) or bool(CODE_ANCHOR_RE.search(title))
+    # 3.0 = a single CORE technology term in the title (e.g. "surveillance",
+    # "drone", "camera"). This is the recall screen: anything plausible is
+    # forwarded to the deep pass, which is the authority.
+    label = "surveillance" if anchored and score >= 3.0 else "background"
+    if not anchored:
+        evidence.append("no_core_anchor")
+    return Verdict(file=file, score=round(score, 2), label=label, evidence=evidence)
+
+
+THRESHOLD = 5.0

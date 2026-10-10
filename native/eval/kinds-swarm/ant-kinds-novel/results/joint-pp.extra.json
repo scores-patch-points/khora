@@ -1,0 +1,83 @@
+{
+ "perKind": [
+  {
+   "c": 0,
+   "tokens": 503,
+   "cosObsVsRandMean": 0.9961,
+   "randLooMin": 0.9943,
+   "randLooMedian": 0.9981,
+   "outsideRandomRange": false,
+   "changedPerToken": 3.396,
+   "randChangedPerToken": 3.692
+  },
+  {
+   "c": 1,
+   "tokens": 1147,
+   "cosObsVsRandMean": 0.9912,
+   "randLooMin": 0.9987,
+   "randLooMedian": 0.9992,
+   "outsideRandomRange": true,
+   "changedPerToken": 2.718,
+   "randChangedPerToken": 3.132
+  },
+  {
+   "c": 2,
+   "tokens": 1075,
+   "cosObsVsRandMean": 0.9926,
+   "randLooMin": 0.9973,
+   "randLooMedian": 0.9991,
+   "outsideRandomRange": true,
+   "changedPerToken": 2.438,
+   "randChangedPerToken": 3.358
+  },
+  {
+   "c": 3,
+   "tokens": 976,
+   "cosObsVsRandMean": 0.9946,
+   "randLooMin": 0.9987,
+   "randLooMedian": 0.9995,
+   "outsideRandomRange": true,
+   "changedPerToken": 2.375,
+   "randChangedPerToken": 3.33
+  },
+  {
+   "c": 4,
+   "tokens": 662,
+   "cosObsVsRandMean": 0.9659,
+   "randLooMin": 0.9991,
+   "randLooMedian": 0.9992,
+   "outsideRandomRange": true,
+   "changedPerToken": 2.477,
+   "randChangedPerToken": 4.004
+  },
+  {
+   "c": 5,
+   "tokens": 14722,
+   "cosObsVsRandMean": 0.7068,
+   "randLooMin": 0.9999,
+   "randLooMedian": 0.9999,
+   "outsideRandomRange": true,
+   "changedPerToken": 0.825,
+   "randChangedPerToken": 2.008
+  }
+ ],
+ "magnitudeHeterogeneity": {
+  "realVarChangedPerToken": 0.71524,
+  "partitionDraws": [
+   0.787,
+   0.81404,
+   0.63412,
+   0.8285,
+   0.68289,
+   0.62058,
+   0.60765,
+   0.65289,
+   0.75587,
+   0.65201,
+   0.78399,
+   0.70869
+  ],
+  "partitionMax": 0.8285,
+  "exceedsAll": false
+ }
+}

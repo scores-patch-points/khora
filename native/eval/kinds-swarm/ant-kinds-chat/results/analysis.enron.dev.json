@@ -1,0 +1,207 @@
+{
+ "module": "ant-kinds-chat/analyse.mjs",
+ "corpus": "enron",
+ "stages": [
+  "dev"
+ ],
+ "preregSha256": "0b7ebeba45da9ec1a28d91472b1f4437f7ede987aa2eca565e12541ae8fb2878",
+ "rows": 72,
+ "jointRows": 84,
+ "joint": {
+  "windows": 2,
+  "nullDraws": 6,
+  "J1": {
+   "windowsUsed": 2,
+   "meanReal": 0.2788,
+   "meanNull": 0.199,
+   "meanDiff": 0.0798,
+   "windowsRealAboveNullMean": 2,
+   "windowsRealAboveNullMax": 1,
+   "bootDiff": {
+    "lo": 0.0798,
+    "hi": 0.0798,
+    "n": 500
+   },
+   "perWindow": [
+    {
+     "win": "dev:allen-p|0",
+     "real": 0.3489,
+     "nullMean": 0.2316,
+     "classes": 6
+    },
+    {
+     "win": "dev:allen-p|1",
+     "real": 0.2087,
+     "nullMean": 0.1663,
+     "classes": 6
+    }
+   ]
+  },
+  "J2": {
+   "real": 0.1952,
+   "nulls": [
+    0.0226,
+    0.1129,
+    0.0992,
+    0.0682,
+    0.1006,
+    0.0896
+   ],
+   "nullMean": 0.0822,
+   "realAboveAllNulls": true
+  },
+  "perKind": [
+   {
+    "kind": 0,
+    "windows": 2,
+    "meanTokens": 808.5,
+    "changedPerToken": 1.0367,
+    "amplification": null,
+    "noSlotShare": 0.4532
+   },
+   {
+    "kind": 1,
+    "windows": 2,
+    "meanTokens": 388,
+    "changedPerToken": 1.2375,
+    "amplification": null,
+    "noSlotShare": 0.5146
+   },
+   {
+    "kind": 2,
+    "windows": 2,
+    "meanTokens": 167.5,
+    "changedPerToken": 0.4963,
+    "amplification": null,
+    "noSlotShare": 0.6873
+   },
+   {
+    "kind": 3,
+    "windows": 2,
+    "meanTokens": 147,
+    "changedPerToken": 2.0477,
+    "amplification": null,
+    "noSlotShare": 0.4334
+   },
+   {
+    "kind": 4,
+    "windows": 2,
+    "meanTokens": 86,
+    "changedPerToken": 2.535,
+    "amplification": null,
+    "noSlotShare": 0.7123
+   },
+   {
+    "kind": 5,
+    "windows": 2,
+    "meanTokens": 93.5,
+    "changedPerToken": 0.599,
+    "amplification": null,
+    "noSlotShare": 0.6953
+   }
+  ],
+  "meanShapeCos": [
+   [
+    1,
+    0.837,
+    0.724,
+    0.705,
+    0.553,
+    0.713
+   ],
+   [
+    0.837,
+    1,
+    0.593,
+    0.938,
+    0.893,
+    0.666
+   ],
+   [
+    0.724,
+    0.593,
+    1,
+    0.671,
+    0.528,
+    0.978
+   ],
+   [
+    0.705,
+    0.938,
+    0.671,
+    1,
+    0.974,
+    0.752
+   ],
+   [
+    0.553,
+    0.893,
+    0.528,
+    0.974,
+    1,
+    0.634
+   ],
+   [
+    0.713,
+    0.666,
+    0.978,
+    0.752,
+    0.634,
+    1
+   ]
+  ],
+  "meanShapeKinds": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ]
+ },
+ "S": {
+  "n": 72,
+  "kinds": 6,
+  "blocks": 3,
+  "S1": {
+   "RECORD": {
+    "balancedAccuracy": 0.2778,
+    "nullMean": 0.1908,
+    "nullQ95": 0.2639,
+    "chance": 0.1667
+   },
+   "FREQ": {
+    "balancedAccuracy": 0.25,
+    "nullMean": 0.2235,
+    "nullQ95": 0.2778,
+    "chance": 0.1667
+   },
+   "RECORD+FREQ": {
+    "balancedAccuracy": 0.3194,
+    "nullMean": 0.2218,
+    "nullQ95": 0.3056,
+    "chance": 0.1667
+   },
+   "recordMinusFreq": 0.0278,
+   "recordAboveNullQ95": true
+  },
+  "S2": {
+   "pooledSlope": -0.2086,
+   "pooledLo": -0.2469,
+   "pooledHi": 0.0304,
+   "perKind": [],
+   "signReversal": [],
+   "kindsPositiveCI": 0,
+   "kindsNegativeCI": 0,
+   "kindsWithCIcrossing0": 0
+  },
+  "S3": {
+   "nonNullShare": 0.5139
+  }
+ },
+ "verdicts": {
+  "K2_J1": "J1 holds (real dispersion > random frequency-stratified partitions, lower bound > 0)",
+  "K2_S1": "S1 record accuracy 0.2778 vs null q95 0.2639; record - freq-only = 0.0278 (SESOI 0.03)",
+  "K3": "no data"
+ }
+}

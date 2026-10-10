@@ -1,0 +1,21 @@
+  tur rec 100/740 17395ms
+  tur rec 200/740 33574ms
+  tur rec 300/740 57610ms
+  tur rec 400/740 76858ms
+  tur rec 500/740 121298ms
+  tur rec 600/740 175121ms
+  tur rec 700/740 231039ms
+tur rec: 740 records, 240 pairs, eligible 2924 1013576ms
+  cmn-hans rec 100/710 29711ms
+  cmn-hans rec 200/710 55671ms
+  cmn-hans rec 300/710 81285ms
+  cmn-hans rec 400/710 100911ms
+  cmn-hans rec 500/710 124379ms
+  cmn-hans rec 600/710 156435ms
+  cmn-hans rec 700/710 187389ms
+cmn-hans rec: 710 records, 240 pairs, eligible 4603 192027ms
+  swe rec 100/466 127402ms
+  swe rec 200/466 226295ms
+  swe rec 300/466 363658ms
+  swe rec 400/466 441450ms
+swe rec: 466 records, 122 pairs, eligible 4448 477554ms

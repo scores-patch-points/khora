@@ -1,0 +1,812 @@
+{
+ "len10": {
+  "P+ word:plusReg": {
+   "n": 114,
+   "run": 58,
+   "sign": 58,
+   "keep": 47,
+   "medianV0": 0.0639,
+   "medianV": 0.0606
+  },
+  "P+ word:otherWord": {
+   "n": 26,
+   "run": 10,
+   "sign": 10,
+   "keep": 7,
+   "medianV0": 0.0412,
+   "medianV": 0.0439
+  },
+  "P+ word:liturgicalLegal": {
+   "n": 19,
+   "run": 8,
+   "sign": 8,
+   "keep": 5,
+   "medianV0": 0.0464,
+   "medianV": 0.0486
+  },
+  "P+ code": {
+   "n": 10,
+   "run": 10,
+   "sign": 10,
+   "keep": 9,
+   "medianV0": 0.0509,
+   "medianV": 0.0463
+  },
+  "P+ notation": {
+   "n": 5,
+   "run": 2,
+   "sign": 2,
+   "keep": 0,
+   "medianV0": 0.0397,
+   "medianV": 0.0447
+  },
+  "P- code": {
+   "n": 45,
+   "run": 34,
+   "sign": 21,
+   "keep": 14,
+   "medianV0": -0.1129,
+   "medianV": -0.0229
+  },
+  "P- notation": {
+   "n": 5,
+   "run": 3,
+   "sign": 3,
+   "keep": 2,
+   "medianV0": -0.0316,
+   "medianV": -0.0246
+  },
+  "P- word:liturgicalLegal": {
+   "n": 18,
+   "run": 15,
+   "sign": 15,
+   "keep": 13,
+   "medianV0": -0.0375,
+   "medianV": -0.0461
+  },
+  "P- charbigram": {
+   "n": 10,
+   "run": 6,
+   "sign": 6,
+   "keep": 6,
+   "medianV0": -0.1225,
+   "medianV": -0.1179
+  },
+  "P- word:plusReg": {
+   "n": 2,
+   "run": 1,
+   "sign": 1,
+   "keep": 0,
+   "medianV0": -0.062,
+   "medianV": -0.0545
+  },
+  "P- word:otherWord": {
+   "n": 1,
+   "run": 0,
+   "sign": 0,
+   "keep": 0,
+   "medianV0": null,
+   "medianV": null
+  }
+ },
+ "t7500m10_r0": {
+  "P+ word:plusReg": {
+   "n": 114,
+   "run": 88,
+   "sign": 86,
+   "keep": 46,
+   "medianV0": 0.0476,
+   "medianV": 0.0519
+  },
+  "P+ word:otherWord": {
+   "n": 26,
+   "run": 17,
+   "sign": 17,
+   "keep": 8,
+   "medianV0": 0.0335,
+   "medianV": 0.0501
+  },
+  "P+ word:liturgicalLegal": {
+   "n": 19,
+   "run": 17,
+   "sign": 17,
+   "keep": 4,
+   "medianV0": 0.0252,
+   "medianV": 0.0434
+  },
+  "P+ code": {
+   "n": 10,
+   "run": 10,
+   "sign": 10,
+   "keep": 3,
+   "medianV0": 0.0509,
+   "medianV": 0.0429
+  },
+  "P+ notation": {
+   "n": 5,
+   "run": 3,
+   "sign": 3,
+   "keep": 1,
+   "medianV0": 0.0434,
+   "medianV": 0.0486
+  },
+  "P- code": {
+   "n": 45,
+   "run": 44,
+   "sign": 29,
+   "keep": 11,
+   "medianV0": -0.1195,
+   "medianV": -0.0135
+  },
+  "P- notation": {
+   "n": 5,
+   "run": 3,
+   "sign": 3,
+   "keep": 1,
+   "medianV0": -0.0316,
+   "medianV": -0.0196
+  },
+  "P- word:liturgicalLegal": {
+   "n": 18,
+   "run": 17,
+   "sign": 17,
+   "keep": 7,
+   "medianV0": -0.0375,
+   "medianV": -0.0456
+  },
+  "P- charbigram": {
+   "n": 10,
+   "run": 7,
+   "sign": 7,
+   "keep": 7,
+   "medianV0": -0.1234,
+   "medianV": -0.1039
+  },
+  "P- word:plusReg": {
+   "n": 2,
+   "run": 1,
+   "sign": 1,
+   "keep": 0,
+   "medianV0": -0.062,
+   "medianV": -0.0515
+  },
+  "P- word:otherWord": {
+   "n": 1,
+   "run": 1,
+   "sign": 1,
+   "keep": 0,
+   "medianV0": -0.0368,
+   "medianV": -0.0211
+  }
+ },
+ "t20000m10_r0": {
+  "P+ word:plusReg": {
+   "n": 114,
+   "run": 50,
+   "sign": 49,
+   "keep": 35,
+   "medianV0": 0.0416,
+   "medianV": 0.0464
+  },
+  "P+ word:otherWord": {
+   "n": 26,
+   "run": 13,
+   "sign": 13,
+   "keep": 9,
+   "medianV0": 0.0326,
+   "medianV": 0.0419
+  },
+  "P+ word:liturgicalLegal": {
+   "n": 19,
+   "run": 13,
+   "sign": 13,
+   "keep": 10,
+   "medianV0": 0.0252,
+   "medianV": 0.0507
+  },
+  "P+ code": {
+   "n": 10,
+   "run": 10,
+   "sign": 10,
+   "keep": 6,
+   "medianV0": 0.0509,
+   "medianV": 0.0558
+  },
+  "P+ notation": {
+   "n": 5,
+   "run": 3,
+   "sign": 3,
+   "keep": 3,
+   "medianV0": 0.0434,
+   "medianV": 0.0486
+  },
+  "P- code": {
+   "n": 45,
+   "run": 44,
+   "sign": 29,
+   "keep": 16,
+   "medianV0": -0.1195,
+   "medianV": -0.0225
+  },
+  "P- notation": {
+   "n": 5,
+   "run": 3,
+   "sign": 3,
+   "keep": 1,
+   "medianV0": -0.0316,
+   "medianV": -0.0249
+  },
+  "P- word:liturgicalLegal": {
+   "n": 18,
+   "run": 15,
+   "sign": 15,
+   "keep": 7,
+   "medianV0": -0.0365,
+   "medianV": -0.0354
+  },
+  "P- charbigram": {
+   "n": 10,
+   "run": 5,
+   "sign": 5,
+   "keep": 5,
+   "medianV0": -0.125,
+   "medianV": -0.1152
+  },
+  "P- word:plusReg": {
+   "n": 2,
+   "run": 0,
+   "sign": 0,
+   "keep": 0,
+   "medianV0": null,
+   "medianV": null
+  },
+  "P- word:otherWord": {
+   "n": 1,
+   "run": 0,
+   "sign": 0,
+   "keep": 0,
+   "medianV0": null,
+   "medianV": null
+  }
+ },
+ "tok7500_r0": {
+  "P+ word:plusReg": {
+   "n": 114,
+   "run": 101,
+   "sign": 101,
+   "keep": 48,
+   "medianV0": 0.0531,
+   "medianV": 0.0522
+  },
+  "P+ word:otherWord": {
+   "n": 26,
+   "run": 22,
+   "sign": 22,
+   "keep": 10,
+   "medianV0": 0.0412,
+   "medianV": 0.0434
+  },
+  "P+ word:liturgicalLegal": {
+   "n": 19,
+   "run": 12,
+   "sign": 12,
+   "keep": 4,
+   "medianV0": 0.0464,
+   "medianV": 0.0504
+  },
+  "P+ code": {
+   "n": 10,
+   "run": 10,
+   "sign": 10,
+   "keep": 4,
+   "medianV0": 0.0509,
+   "medianV": 0.0506
+  },
+  "P+ notation": {
+   "n": 5,
+   "run": 3,
+   "sign": 3,
+   "keep": 0,
+   "medianV0": 0.0434,
+   "medianV": 0.0394
+  },
+  "P- code": {
+   "n": 45,
+   "run": 45,
+   "sign": 45,
+   "keep": 33,
+   "medianV0": -0.1213,
+   "medianV": -0.1297
+  },
+  "P- notation": {
+   "n": 5,
+   "run": 3,
+   "sign": 3,
+   "keep": 0,
+   "medianV0": -0.0316,
+   "medianV": -0.0244
+  },
+  "P- word:liturgicalLegal": {
+   "n": 18,
+   "run": 16,
+   "sign": 16,
+   "keep": 3,
+   "medianV0": -0.037,
+   "medianV": -0.0298
+  },
+  "P- charbigram": {
+   "n": 10,
+   "run": 9,
+   "sign": 9,
+   "keep": 8,
+   "medianV0": -0.1234,
+   "medianV": -0.1236
+  },
+  "P- word:plusReg": {
+   "n": 2,
+   "run": 2,
+   "sign": 2,
+   "keep": 1,
+   "medianV0": -0.0445,
+   "medianV": -0.0441
+  },
+  "P- word:otherWord": {
+   "n": 1,
+   "run": 0,
+   "sign": 0,
+   "keep": 0,
+   "medianV0": null,
+   "medianV": null
+  }
+ },
+ "tok20000_r0": {
+  "P+ word:plusReg": {
+   "n": 114,
+   "run": 80,
+   "sign": 80,
+   "keep": 48,
+   "medianV0": 0.0384,
+   "medianV": 0.0396
+  },
+  "P+ word:otherWord": {
+   "n": 26,
+   "run": 20,
+   "sign": 20,
+   "keep": 10,
+   "medianV0": 0.0308,
+   "medianV": 0.0289
+  },
+  "P+ word:liturgicalLegal": {
+   "n": 19,
+   "run": 18,
+   "sign": 18,
+   "keep": 7,
+   "medianV0": 0.0251,
+   "medianV": 0.0282
+  },
+  "P+ code": {
+   "n": 10,
+   "run": 10,
+   "sign": 10,
+   "keep": 7,
+   "medianV0": 0.0509,
+   "medianV": 0.0531
+  },
+  "P+ notation": {
+   "n": 5,
+   "run": 4,
+   "sign": 4,
+   "keep": 4,
+   "medianV0": 0.0397,
+   "medianV": 0.0417
+  },
+  "P- code": {
+   "n": 45,
+   "run": 45,
+   "sign": 45,
+   "keep": 38,
+   "medianV0": -0.1213,
+   "medianV": -0.1244
+  },
+  "P- notation": {
+   "n": 5,
+   "run": 3,
+   "sign": 3,
+   "keep": 1,
+   "medianV0": -0.0316,
+   "medianV": -0.0238
+  },
+  "P- word:liturgicalLegal": {
+   "n": 18,
+   "run": 18,
+   "sign": 18,
+   "keep": 10,
+   "medianV0": -0.037,
+   "medianV": -0.0369
+  },
+  "P- charbigram": {
+   "n": 10,
+   "run": 7,
+   "sign": 7,
+   "keep": 7,
+   "medianV0": -0.1255,
+   "medianV": -0.1292
+  },
+  "P- word:plusReg": {
+   "n": 2,
+   "run": 1,
+   "sign": 1,
+   "keep": 1,
+   "medianV0": -0.0269,
+   "medianV": -0.0282
+  },
+  "P- word:otherWord": {
+   "n": 1,
+   "run": 1,
+   "sign": 1,
+   "keep": 1,
+   "medianV0": -0.0368,
+   "medianV": -0.0367
+  }
+ },
+ "dedup": {
+  "P+ word:plusReg": {
+   "n": 114,
+   "run": 114,
+   "sign": 114,
+   "keep": 107,
+   "medianV0": 0.0489,
+   "medianV": 0.0492
+  },
+  "P+ word:otherWord": {
+   "n": 26,
+   "run": 26,
+   "sign": 26,
+   "keep": 26,
+   "medianV0": 0.0342,
+   "medianV": 0.0346
+  },
+  "P+ word:liturgicalLegal": {
+   "n": 19,
+   "run": 19,
+   "sign": 19,
+   "keep": 17,
+   "medianV0": 0.0252,
+   "medianV": 0.0269
+  },
+  "P+ code": {
+   "n": 10,
+   "run": 10,
+   "sign": 10,
+   "keep": 8,
+   "medianV0": 0.0509,
+   "medianV": 0.0461
+  },
+  "P+ notation": {
+   "n": 5,
+   "run": 5,
+   "sign": 5,
+   "keep": 5,
+   "medianV0": 0.0434,
+   "medianV": 0.0434
+  },
+  "P- code": {
+   "n": 45,
+   "run": 45,
+   "sign": 44,
+   "keep": 41,
+   "medianV0": -0.1213,
+   "medianV": -0.108
+  },
+  "P- notation": {
+   "n": 5,
+   "run": 5,
+   "sign": 5,
+   "keep": 5,
+   "medianV0": -0.0509,
+   "medianV": -0.0506
+  },
+  "P- word:liturgicalLegal": {
+   "n": 18,
+   "run": 18,
+   "sign": 18,
+   "keep": 14,
+   "medianV0": -0.037,
+   "medianV": -0.0317
+  },
+  "P- charbigram": {
+   "n": 10,
+   "run": 10,
+   "sign": 10,
+   "keep": 10,
+   "medianV0": -0.1242,
+   "medianV": -0.1219
+  },
+  "P- word:plusReg": {
+   "n": 2,
+   "run": 2,
+   "sign": 2,
+   "keep": 2,
+   "medianV0": -0.0445,
+   "medianV": -0.045
+  },
+  "P- word:otherWord": {
+   "n": 1,
+   "run": 1,
+   "sign": 1,
+   "keep": 1,
+   "medianV0": -0.0368,
+   "medianV": -0.0366
+  }
+ },
+ "xhap": {
+  "P+ word:plusReg": {
+   "n": 114,
+   "run": 114,
+   "sign": 85,
+   "keep": 26,
+   "medianV0": 0.0489,
+   "medianV": 0.0084
+  },
+  "P+ word:otherWord": {
+   "n": 26,
+   "run": 26,
+   "sign": 21,
+   "keep": 7,
+   "medianV0": 0.0342,
+   "medianV": 0.003
+  },
+  "P+ word:liturgicalLegal": {
+   "n": 19,
+   "run": 19,
+   "sign": 11,
+   "keep": 1,
+   "medianV0": 0.0252,
+   "medianV": 0.0011
+  },
+  "P+ code": {
+   "n": 10,
+   "run": 10,
+   "sign": 7,
+   "keep": 2,
+   "medianV0": 0.0509,
+   "medianV": 0.0078
+  },
+  "P+ notation": {
+   "n": 5,
+   "run": 5,
+   "sign": 3,
+   "keep": 0,
+   "medianV0": 0.0434,
+   "medianV": 0.0025
+  },
+  "P- code": {
+   "n": 45,
+   "run": 45,
+   "sign": 31,
+   "keep": 13,
+   "medianV0": -0.1213,
+   "medianV": -0.0081
+  },
+  "P- notation": {
+   "n": 5,
+   "run": 5,
+   "sign": 4,
+   "keep": 1,
+   "medianV0": -0.0509,
+   "medianV": -0.0074
+  },
+  "P- word:liturgicalLegal": {
+   "n": 18,
+   "run": 18,
+   "sign": 16,
+   "keep": 11,
+   "medianV0": -0.037,
+   "medianV": -0.0188
+  },
+  "P- charbigram": {
+   "n": 10,
+   "run": 10,
+   "sign": 10,
+   "keep": 8,
+   "medianV0": -0.1242,
+   "medianV": -0.0556
+  },
+  "P- word:plusReg": {
+   "n": 2,
+   "run": 2,
+   "sign": 2,
+   "keep": 2,
+   "medianV0": -0.0445,
+   "medianV": -0.0423
+  },
+  "P- word:otherWord": {
+   "n": 1,
+   "run": 1,
+   "sign": 1,
+   "keep": 1,
+   "medianV0": -0.0368,
+   "medianV": -0.0233
+  }
+ },
+ "xcont": {
+  "P+ word:plusReg": {
+   "n": 114,
+   "run": 114,
+   "sign": 102,
+   "keep": 38,
+   "medianV0": 0.0489,
+   "medianV": 0.0154
+  },
+  "P+ word:otherWord": {
+   "n": 26,
+   "run": 26,
+   "sign": 24,
+   "keep": 7,
+   "medianV0": 0.0342,
+   "medianV": 0.0095
+  },
+  "P+ word:liturgicalLegal": {
+   "n": 19,
+   "run": 19,
+   "sign": 12,
+   "keep": 4,
+   "medianV0": 0.0252,
+   "medianV": 0.0043
+  },
+  "P+ code": {
+   "n": 10,
+   "run": 10,
+   "sign": 9,
+   "keep": 7,
+   "medianV0": 0.0509,
+   "medianV": 0.0341
+  },
+  "P+ notation": {
+   "n": 5,
+   "run": 4,
+   "sign": 3,
+   "keep": 2,
+   "medianV0": 0.0397,
+   "medianV": 0.0143
+  },
+  "P- code": {
+   "n": 45,
+   "run": 45,
+   "sign": 37,
+   "keep": 26,
+   "medianV0": -0.1213,
+   "medianV": -0.0221
+  },
+  "P- notation": {
+   "n": 5,
+   "run": 5,
+   "sign": 5,
+   "keep": 3,
+   "medianV0": -0.0509,
+   "medianV": -0.0465
+  },
+  "P- word:liturgicalLegal": {
+   "n": 18,
+   "run": 18,
+   "sign": 18,
+   "keep": 15,
+   "medianV0": -0.037,
+   "medianV": -0.0309
+  },
+  "P- charbigram": {
+   "n": 10,
+   "run": 10,
+   "sign": 10,
+   "keep": 8,
+   "medianV0": -0.1242,
+   "medianV": -0.0846
+  },
+  "P- word:plusReg": {
+   "n": 2,
+   "run": 2,
+   "sign": 2,
+   "keep": 2,
+   "medianV0": -0.0445,
+   "medianV": -0.05
+  },
+  "P- word:otherWord": {
+   "n": 1,
+   "run": 1,
+   "sign": 1,
+   "keep": 1,
+   "medianV0": -0.0368,
+   "medianV": -0.0397
+  }
+ },
+ "xlin": {
+  "P+ word:plusReg": {
+   "n": 114,
+   "run": 114,
+   "sign": 106,
+   "keep": 45,
+   "medianV0": 0.0489,
+   "medianV": 0.0171
+  },
+  "P+ word:otherWord": {
+   "n": 26,
+   "run": 26,
+   "sign": 25,
+   "keep": 8,
+   "medianV0": 0.0342,
+   "medianV": 0.0102
+  },
+  "P+ word:liturgicalLegal": {
+   "n": 19,
+   "run": 19,
+   "sign": 14,
+   "keep": 4,
+   "medianV0": 0.0252,
+   "medianV": 0.0067
+  },
+  "P+ code": {
+   "n": 10,
+   "run": 10,
+   "sign": 9,
+   "keep": 7,
+   "medianV0": 0.0509,
+   "medianV": 0.0312
+  },
+  "P+ notation": {
+   "n": 5,
+   "run": 5,
+   "sign": 5,
+   "keep": 3,
+   "medianV0": 0.0434,
+   "medianV": 0.0328
+  },
+  "P- code": {
+   "n": 45,
+   "run": 45,
+   "sign": 41,
+   "keep": 30,
+   "medianV0": -0.1213,
+   "medianV": -0.0298
+  },
+  "P- notation": {
+   "n": 5,
+   "run": 5,
+   "sign": 5,
+   "keep": 5,
+   "medianV0": -0.0509,
+   "medianV": -0.0631
+  },
+  "P- word:liturgicalLegal": {
+   "n": 18,
+   "run": 18,
+   "sign": 18,
+   "keep": 15,
+   "medianV0": -0.037,
+   "medianV": -0.0313
+  },
+  "P- charbigram": {
+   "n": 10,
+   "run": 10,
+   "sign": 10,
+   "keep": 10,
+   "medianV0": -0.1242,
+   "medianV": -0.0852
+  },
+  "P- word:plusReg": {
+   "n": 2,
+   "run": 2,
+   "sign": 2,
+   "keep": 2,
+   "medianV0": -0.0445,
+   "medianV": -0.0531
+  },
+  "P- word:otherWord": {
+   "n": 1,
+   "run": 1,
+   "sign": 1,
+   "keep": 1,
+   "medianV0": -0.0368,
+   "medianV": -0.0338
+  }
+ }
+}

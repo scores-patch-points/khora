@@ -1,0 +1,421 @@
+@@@@ task fibonacci
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func fibonacci(n int) int {
+	if n < 2 {
+		return n
+	}
+	return fibonacci(n-1) + fibonacci(n-2)
+}
+
+func main() {
+	parts := []string{}
+	for i := 0; i <= 10; i++ {
+		parts = append(parts, fmt.Sprint(fibonacci(i)))
+	}
+	fmt.Println(strings.Join(parts, " "))
+}
+@@@@ task gcd
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func gcd(a, b int) int {
+	if b == 0 {
+		return a
+	}
+	return gcd(b, a%b)
+}
+
+func main() {
+	pairs := [][2]int{{48, 18}, {17, 5}, {0, 9}, {100, 75}}
+	parts := []string{}
+	for _, p := range pairs {
+		parts = append(parts, fmt.Sprint(gcd(p[0], p[1])))
+	}
+	fmt.Println(strings.Join(parts, " "))
+}
+@@@@ task binary_search
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func searchRange(items []int, target, low, high int) int {
+	if low > high {
+		return -1
+	}
+	mid := (low + high) / 2
+	if items[mid] == target {
+		return mid
+	}
+	if items[mid] < target {
+		return searchRange(items, target, mid+1, high)
+	}
+	return searchRange(items, target, low, mid-1)
+}
+
+func binarySearch(items []int, target int) int {
+	return searchRange(items, target, 0, len(items)-1)
+}
+
+func main() {
+	data := []int{1, 3, 5, 7, 9, 11, 13}
+	parts := []string{}
+	for _, t := range []int{7, 1, 13, 4} {
+		parts = append(parts, fmt.Sprint(binarySearch(data, t)))
+	}
+	fmt.Println(strings.Join(parts, " "))
+}
+@@@@ task quicksort
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func partition(items []int, low, high int) int {
+	pivot := items[high]
+	i := low - 1
+	for j := low; j < high; j++ {
+		if items[j] <= pivot {
+			i += 1
+			items[i], items[j] = items[j], items[i]
+		}
+	}
+	items[i+1], items[high] = items[high], items[i+1]
+	return i + 1
+}
+
+func quicksort(items []int, low, high int) {
+	if low < high {
+		p := partition(items, low, high)
+		quicksort(items, low, p-1)
+		quicksort(items, p+1, high)
+	}
+}
+
+func main() {
+	data := []int{5, 2, 9, 1, 5, 6, 0, 3}
+	quicksort(data, 0, len(data)-1)
+	parts := []string{}
+	for _, x := range data {
+		parts = append(parts, fmt.Sprint(x))
+	}
+	fmt.Println(strings.Join(parts, " "))
+}
+@@@@ task merge_sort
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func merge(left, right []int) []int {
+	result := []int{}
+	i := 0
+	j := 0
+	for i < len(left) && j < len(right) {
+		if left[i] <= right[j] {
+			result = append(result, left[i])
+			i += 1
+		} else {
+			result = append(result, right[j])
+			j += 1
+		}
+	}
+	result = append(result, left[i:]...)
+	result = append(result, right[j:]...)
+	return result
+}
+
+func mergeSort(items []int) []int {
+	if len(items) <= 1 {
+		return items
+	}
+	mid := len(items) / 2
+	return merge(mergeSort(items[:mid]), mergeSort(items[mid:]))
+}
+
+func main() {
+	parts := []string{}
+	for _, x := range mergeSort([]int{38, 27, 43, 3, 9, 82, 10}) {
+		parts = append(parts, fmt.Sprint(x))
+	}
+	fmt.Println(strings.Join(parts, " "))
+}
+@@@@ task factorial
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func factorial(n int) int {
+	if n <= 1 {
+		return 1
+	}
+	return n * factorial(n-1)
+}
+
+func main() {
+	parts := []string{}
+	for i := 0; i <= 10; i++ {
+		parts = append(parts, fmt.Sprint(factorial(i)))
+	}
+	fmt.Println(strings.Join(parts, " "))
+}
+@@@@ task palindrome
+package main
+
+import (
+	"fmt"
+	"strings"
+	"unicode"
+)
+
+func normalize(text string) string {
+	out := ""
+	for _, ch := range text {
+		if unicode.IsLetter(ch) || unicode.IsDigit(ch) {
+			out += string(unicode.ToLower(ch))
+		}
+	}
+	return out
+}
+
+func reverseText(text string) string {
+	out := ""
+	for _, ch := range text {
+		out = string(ch) + out
+	}
+	return out
+}
+
+func isPalindrome(text string) bool {
+	cleaned := normalize(text)
+	return cleaned == reverseText(cleaned)
+}
+
+func main() {
+	samples := []string{"A man, a plan, a canal: Panama", "hello", "Was it a car or a cat I saw?"}
+	parts := []string{}
+	for _, s := range samples {
+		parts = append(parts, fmt.Sprint(isPalindrome(s)))
+	}
+	fmt.Println(strings.Join(parts, " "))
+}
+@@@@ task word_count
+package main
+
+import (
+	"fmt"
+	"sort"
+	"strings"
+)
+
+func splitWords(text string) []string {
+	return strings.Split(text, " ")
+}
+
+func countWords(text string) map[string]int {
+	counts := map[string]int{}
+	for _, word := range splitWords(text) {
+		counts[word] += 1
+	}
+	return counts
+}
+
+func main() {
+	counts := countWords("the quick brown fox jumps over the lazy dog the end")
+	keys := []string{}
+	for w := range counts {
+		keys = append(keys, w)
+	}
+	sort.Strings(keys)
+	parts := []string{}
+	for _, w := range keys {
+		parts = append(parts, fmt.Sprintf("%s=%d", w, counts[w]))
+	}
+	fmt.Println(strings.Join(parts, " "))
+}
+@@@@ task fizzbuzz
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func isDivisible(n, d int) bool {
+	return n%d == 0
+}
+
+func fizzBuzz(n int) string {
+	if isDivisible(n, 15) {
+		return "FizzBuzz"
+	}
+	if isDivisible(n, 3) {
+		return "Fizz"
+	}
+	if isDivisible(n, 5) {
+		return "Buzz"
+	}
+	return fmt.Sprint(n)
+}
+
+func main() {
+	parts := []string{}
+	for i := 1; i <= 15; i++ {
+		parts = append(parts, fizzBuzz(i))
+	}
+	fmt.Println(strings.Join(parts, " "))
+}
+@@@@ task linked_list
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+type Node struct {
+	value int
+	next  *Node
+}
+
+func reverseList(node *Node, previous *Node) *Node {
+	if node == nil {
+		return previous
+	}
+	following := node.next
+	node.next = previous
+	return reverseList(following, node)
+}
+
+func toArray(node *Node) []int {
+	values := []int{}
+	for node != nil {
+		values = append(values, node.value)
+		node = node.next
+	}
+	return values
+}
+
+func main() {
+	var head *Node
+	for _, v := range []int{5, 4, 3, 2, 1} {
+		head = &Node{value: v, next: head}
+	}
+	parts := []string{}
+	for _, v := range toArray(reverseList(head, nil)) {
+		parts = append(parts, fmt.Sprint(v))
+	}
+	fmt.Println(strings.Join(parts, " "))
+}
+@@@@ task stack
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+type Stack struct {
+	items []int
+}
+
+func (s *Stack) push(value int) {
+	s.items = append(s.items, value)
+}
+
+func (s *Stack) isEmpty() bool {
+	return len(s.items) == 0
+}
+
+func (s *Stack) pop() int {
+	if s.isEmpty() {
+		panic("pop from empty stack")
+	}
+	value := s.items[len(s.items)-1]
+	s.items = s.items[:len(s.items)-1]
+	return value
+}
+
+func (s *Stack) peek() int {
+	if s.isEmpty() {
+		panic("peek at empty stack")
+	}
+	return s.items[len(s.items)-1]
+}
+
+func main() {
+	stack := &Stack{}
+	for _, v := range []int{1, 2, 3} {
+		stack.push(v)
+	}
+	out := []string{}
+	out = append(out, fmt.Sprint(stack.peek()))
+	out = append(out, fmt.Sprint(stack.pop()))
+	out = append(out, fmt.Sprint(stack.pop()))
+	out = append(out, fmt.Sprint(stack.isEmpty()))
+	out = append(out, fmt.Sprint(stack.pop()))
+	out = append(out, fmt.Sprint(stack.isEmpty()))
+	fmt.Println(strings.Join(out, " "))
+}
+@@@@ task tree_traversal
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+type TreeNode struct {
+	value int
+	left  *TreeNode
+	right *TreeNode
+}
+
+func inorder(node *TreeNode, out *[]int) {
+	if node == nil {
+		return
+	}
+	inorder(node.left, out)
+	*out = append(*out, node.value)
+	inorder(node.right, out)
+}
+
+func preorder(node *TreeNode, out *[]int) {
+	if node == nil {
+		return
+	}
+	*out = append(*out, node.value)
+	preorder(node.left, out)
+	preorder(node.right, out)
+}
+
+func main() {
+	root := &TreeNode{4,
+		&TreeNode{2, &TreeNode{1, nil, nil}, &TreeNode{3, nil, nil}},
+		&TreeNode{6, &TreeNode{5, nil, nil}, &TreeNode{7, nil, nil}}}
+	visited := []int{}
+	inorder(root, &visited)
+	fmt.Println(strings.Trim(fmt.Sprint(visited), "[]"))
+	visited = []int{}
+	preorder(root, &visited)
+	fmt.Println(strings.Trim(fmt.Sprint(visited), "[]"))
+}

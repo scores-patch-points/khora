@@ -1,0 +1,33 @@
+defined real pockets N = 384  PRESENT = 31  (+ 14  - 17 )
+(1) reproduce {'register': (0.2516, 0.0004997501249375312), 'group': (0.1212, 0.0004997501249375312), 'script': (0.0462, 0.09795102448775612)}
+   null eta2(register) mean 0.088 sd 0.029
+(2) LOO-pocket: eta2 range 0.232-0.263; max p 0.0050; n with p>=0.05: 0
+(3) leave-register-out (eta2, p, present left):
+    -book                                   n=365 present=30 eta2=0.26 p=0.000999000999000999
+    -code                                   n=337 present=18 eta2=0.3 p=0.001998001998001998
+    -diagram                                n=377 present=26 eta2=0.178 p=0.017982017982017984
+    -history                                n=376 present=29 eta2=0.259 p=0.000999000999000999
+    -legal                                  n=353 present=29 eta2=0.269 p=0.000999000999000999
+    -lexicon                                n=382 present=30 eta2=0.247 p=0.000999000999000999
+    -markup                                 n=379 present=30 eta2=0.257 p=0.000999000999000999
+    -notation                               n=373 present=29 eta2=0.264 p=0.001998001998001998
+    -sms                                    n=382 present=30 eta2=0.247 p=0.000999000999000999
+    -translation                            n=375 present=30 eta2=0.259 p=0.000999000999000999
+    -treatise                               n=357 present=29 eta2=0.269 p=0.000999000999000999
+    -code+diagram                           n=330 present=13 eta2=0.16 p=0.1068931068931069
+    -code+diagram+markup+notation+config    n=311 present=10 eta2=0.167 p=0.1008991008991009
+(4) register eta2 under within-GROUP permutation: eta2 0.252 p 0.0410
+    cd group only (n=82, present=21): eta2 0.151 p 0.1734
+    outside cd (n=302, present=10): eta2 0.166 p 0.0690
+(5) sign split register eta2 0.649 p 0.0020 (levels 11)
+    sign-split LOO: eta2 0.635-0.743, max p 0.0083, #p>=0.05 0
+    PRESENT code pockets: +11 -2 (cd-cc-csharp-,cd-cc-php-)
+(6) eligible statistics in the atlas selection: 33
+    fig.introRight     het 2.377 (atlas 2.377) rank  1 | sign-free het 1.778 rank  3 | present 31 (+9 -22)
+    order.entSlope     het 2.178 (atlas 2.178) rank  2 | sign-free het 1.557 rank  4 | present 245 (+109 -136)
+    order.depLen       het 2.135 (atlas 2.135) rank  3 | sign-free het 1.323 rank  6 | present 140 (+91 -49)
+    para.prefixCopy    het 2.016 (atlas 2.016) rank  4 | sign-free het 2.016 rank  1 | present 302 (+302 -0)
+    para.suffixCopy    het 1.930 (atlas 1.930) rank  5 | sign-free het 1.930 rank  2 | present 279 (+279 -0)
+    Spearman rho(heterogeneity, sign-balance) over 33 eligible statistics: 0.61
+(7) real non-thin pockets 391 x 81 statistics = 31671 cell slots; defined real cells 29680; observed PRESENT cells 22017; binomial false-PRESENT reference mean 2.52 sd 1.59 over all cells -> for ONE statistic (N=384): 0.033
+    law-free shuffled controls, introRight z: n=38 sd=1.29  |z|>=2: 5  |z|>=4: 0

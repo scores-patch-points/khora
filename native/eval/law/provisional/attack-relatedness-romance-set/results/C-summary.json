@@ -1,0 +1,1045 @@
+{
+ "headerSha256": "5cb62204fe5f323f840b3b7795a3aec51a72ae67773106a4bf7cb3ad59b9607f",
+ "arms": {},
+ "groups": {
+  "romance": {
+   "BOTH": {
+    "a": 0.6784,
+    "g": 0.6474,
+    "e": 0.5942,
+    "aMinusE": {
+     "mean": 0.0842,
+     "lo": 0.0798,
+     "hi": 0.088,
+     "n": 5
+    },
+    "aMinusG": {
+     "mean": 0.0309,
+     "lo": 0.0231,
+     "hi": 0.04,
+     "n": 5
+    },
+    "n": 5,
+    "reproducesLevel": true,
+    "reproducesBonus": true,
+    "shareOfAboveChance": 1
+   },
+   "POSITION": {
+    "a": 0.5009,
+    "g": 0.5002,
+    "e": 0.4996,
+    "aMinusE": {
+     "mean": 0.0013,
+     "lo": 0,
+     "hi": 0.0027,
+     "n": 5
+    },
+    "aMinusG": {
+     "mean": 0.0007,
+     "lo": -0.0004,
+     "hi": 0.0017,
+     "n": 5
+    },
+    "n": 5,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.005
+   },
+   "CHARLEN": {
+    "a": 0.5,
+    "g": 0.5,
+    "e": 0.5,
+    "aMinusE": {
+     "mean": 0,
+     "lo": 0,
+     "hi": 0,
+     "n": 5
+    },
+    "aMinusG": {
+     "mean": 0,
+     "lo": 0,
+     "hi": 0,
+     "n": 5
+    },
+    "n": 5,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0
+   },
+   "FREQ": {
+    "a": 0.5001,
+    "g": 0.5003,
+    "e": 0.5003,
+    "aMinusE": {
+     "mean": -0.0002,
+     "lo": -0.0005,
+     "hi": 0,
+     "n": 5
+    },
+    "aMinusG": {
+     "mean": -0.0001,
+     "lo": -0.0007,
+     "hi": 0.0002,
+     "n": 5
+    },
+    "n": 5,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.0006
+   },
+   "RIVALS": {
+    "a": 0.5009,
+    "g": 0.5004,
+    "e": 0.5,
+    "aMinusE": {
+     "mean": 0.0008,
+     "lo": -0.0004,
+     "hi": 0.0022,
+     "n": 5
+    },
+    "aMinusG": {
+     "mean": 0.0005,
+     "lo": -0.0005,
+     "hi": 0.0015,
+     "n": 5
+    },
+    "n": 5,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.005
+   },
+   "NBRMEAN": {
+    "a": 0.6343,
+    "g": 0.6225,
+    "e": 0.621,
+    "aMinusE": {
+     "mean": 0.0134,
+     "lo": 0.0085,
+     "hi": 0.0187,
+     "n": 5
+    },
+    "aMinusG": {
+     "mean": 0.0118,
+     "lo": 0.0037,
+     "hi": 0.0224,
+     "n": 5
+    },
+    "n": 5,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.7528
+   },
+   "NBRRARE": {
+    "a": 0.6403,
+    "g": 0.6308,
+    "e": 0.6288,
+    "aMinusE": {
+     "mean": 0.0115,
+     "lo": 0.0083,
+     "hi": 0.0148,
+     "n": 5
+    },
+    "aMinusG": {
+     "mean": 0.0095,
+     "lo": 0.0024,
+     "hi": 0.0202,
+     "n": 5
+    },
+    "n": 5,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.7864
+   },
+   "FUNC": {
+    "a": 0.604,
+    "g": 0.5907,
+    "e": 0.5832,
+    "aMinusE": {
+     "mean": 0.0208,
+     "lo": 0.0171,
+     "hi": 0.0255,
+     "n": 5
+    },
+    "aMinusG": {
+     "mean": 0.0133,
+     "lo": 0.0037,
+     "hi": 0.0268,
+     "n": 5
+    },
+    "n": 5,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.583
+   },
+   "ADJ": {
+    "a": 0.6785,
+    "g": 0.6387,
+    "e": 0.595,
+    "aMinusE": {
+     "mean": 0.0835,
+     "lo": 0.0767,
+     "hi": 0.0891,
+     "n": 5
+    },
+    "aMinusG": {
+     "mean": 0.0398,
+     "lo": 0.0294,
+     "hi": 0.0496,
+     "n": 5
+    },
+    "n": 5,
+    "reproducesLevel": true,
+    "reproducesBonus": true,
+    "shareOfAboveChance": 1.0006
+   },
+   "DIST2": {
+    "a": 0.5809,
+    "g": 0.5583,
+    "e": 0.5393,
+    "aMinusE": {
+     "mean": 0.0416,
+     "lo": 0.0382,
+     "hi": 0.0448,
+     "n": 5
+    },
+    "aMinusG": {
+     "mean": 0.0226,
+     "lo": 0.0131,
+     "hi": 0.032,
+     "n": 5
+    },
+    "n": 5,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.4535
+   },
+   "LEFT1": {
+    "a": 0.6444,
+    "g": 0.6161,
+    "e": 0.5772,
+    "aMinusE": {
+     "mean": 0.0673,
+     "lo": 0.0555,
+     "hi": 0.0761,
+     "n": 5
+    },
+    "aMinusG": {
+     "mean": 0.0284,
+     "lo": 0.017,
+     "hi": 0.0372,
+     "n": 5
+    },
+    "n": 5,
+    "reproducesLevel": false,
+    "reproducesBonus": true,
+    "shareOfAboveChance": 0.8094
+   },
+   "BAG": {
+    "a": 0.5594,
+    "g": 0.5619,
+    "e": 0.5558,
+    "aMinusE": {
+     "mean": 0.0036,
+     "lo": 0.0005,
+     "hi": 0.0056,
+     "n": 5
+    },
+    "aMinusG": {
+     "mean": -0.0025,
+     "lo": -0.0053,
+     "hi": -0.0003,
+     "n": 5
+    },
+    "n": 5,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.333
+   },
+   "BOTH+BAG": {
+    "a": 0.6765,
+    "g": 0.6455,
+    "e": 0.5909,
+    "aMinusE": {
+     "mean": 0.0856,
+     "lo": 0.0812,
+     "hi": 0.0907,
+     "n": 5
+    },
+    "aMinusG": {
+     "mean": 0.031,
+     "lo": 0.0231,
+     "hi": 0.0396,
+     "n": 5
+    },
+    "n": 5,
+    "reproducesLevel": true,
+    "reproducesBonus": true,
+    "shareOfAboveChance": 0.9893
+   },
+   "BOTH+RIVALS": {
+    "a": 0.6766,
+    "g": 0.6461,
+    "e": 0.5944,
+    "aMinusE": {
+     "mean": 0.0822,
+     "lo": 0.0784,
+     "hi": 0.0862,
+     "n": 5
+    },
+    "aMinusG": {
+     "mean": 0.0305,
+     "lo": 0.0241,
+     "hi": 0.0378,
+     "n": 5
+    },
+    "n": 5,
+    "reproducesLevel": true,
+    "reproducesBonus": true,
+    "shareOfAboveChance": 0.9899
+   },
+   "FIX_RARE": {
+    "a": 0.625,
+    "g": 0.625,
+    "e": 0.625,
+    "aMinusE": {
+     "mean": 0,
+     "lo": 0,
+     "hi": 0,
+     "n": 5
+    },
+    "aMinusG": {
+     "mean": 0,
+     "lo": 0,
+     "hi": 0,
+     "n": 5
+    },
+    "n": 5,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.7007
+   },
+   "FIX_NOFUNC": {
+    "a": 0.5923,
+    "g": 0.5923,
+    "e": 0.5923,
+    "aMinusE": {
+     "mean": 0,
+     "lo": 0,
+     "hi": 0,
+     "n": 5
+    },
+    "aMinusG": {
+     "mean": 0,
+     "lo": 0,
+     "hi": 0,
+     "n": 5
+    },
+    "n": 5,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.5174
+   }
+  },
+  "romanceAll7": {
+   "BOTH": {
+    "a": 0.6664,
+    "g": 0.6381,
+    "e": 0.5906,
+    "aMinusE": {
+     "mean": 0.0757,
+     "lo": 0.0634,
+     "hi": 0.0855,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0.0283,
+     "lo": 0.022,
+     "hi": 0.0364,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": true,
+    "reproducesBonus": true,
+    "shareOfAboveChance": 1
+   },
+   "POSITION": {
+    "a": 0.501,
+    "g": 0.5003,
+    "e": 0.5,
+    "aMinusE": {
+     "mean": 0.001,
+     "lo": 0.0001,
+     "hi": 0.0021,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0.0007,
+     "lo": -0.0001,
+     "hi": 0.0015,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.006
+   },
+   "CHARLEN": {
+    "a": 0.5,
+    "g": 0.5,
+    "e": 0.5,
+    "aMinusE": {
+     "mean": 0,
+     "lo": 0,
+     "hi": 0,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0,
+     "lo": 0,
+     "hi": 0,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0
+   },
+   "FREQ": {
+    "a": 0.5001,
+    "g": 0.5002,
+    "e": 0.5003,
+    "aMinusE": {
+     "mean": -0.0001,
+     "lo": -0.0004,
+     "hi": 0,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": -0.0001,
+     "lo": -0.0005,
+     "hi": 0.0002,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.0006
+   },
+   "RIVALS": {
+    "a": 0.5011,
+    "g": 0.5004,
+    "e": 0.5003,
+    "aMinusE": {
+     "mean": 0.0008,
+     "lo": -0.0003,
+     "hi": 0.0019,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0.0007,
+     "lo": -0.0001,
+     "hi": 0.0014,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.0066
+   },
+   "NBRMEAN": {
+    "a": 0.6316,
+    "g": 0.6219,
+    "e": 0.6198,
+    "aMinusE": {
+     "mean": 0.0118,
+     "lo": 0.0081,
+     "hi": 0.0164,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0.0098,
+     "lo": 0.0031,
+     "hi": 0.0187,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.7909
+   },
+   "NBRRARE": {
+    "a": 0.6373,
+    "g": 0.6291,
+    "e": 0.6268,
+    "aMinusE": {
+     "mean": 0.0105,
+     "lo": 0.0081,
+     "hi": 0.0133,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0.0082,
+     "lo": 0.0025,
+     "hi": 0.0168,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": true,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.8251
+   },
+   "FUNC": {
+    "a": 0.603,
+    "g": 0.5921,
+    "e": 0.5844,
+    "aMinusE": {
+     "mean": 0.0186,
+     "lo": 0.015,
+     "hi": 0.0232,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0.0109,
+     "lo": 0.0041,
+     "hi": 0.0209,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.619
+   },
+   "ADJ": {
+    "a": 0.6671,
+    "g": 0.6308,
+    "e": 0.5921,
+    "aMinusE": {
+     "mean": 0.075,
+     "lo": 0.0616,
+     "hi": 0.086,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0.0363,
+     "lo": 0.027,
+     "hi": 0.0454,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": true,
+    "reproducesBonus": true,
+    "shareOfAboveChance": 1.0042
+   },
+   "DIST2": {
+    "a": 0.5737,
+    "g": 0.5559,
+    "e": 0.5385,
+    "aMinusE": {
+     "mean": 0.0352,
+     "lo": 0.0264,
+     "hi": 0.0427,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0.0178,
+     "lo": 0.0088,
+     "hi": 0.0276,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.4429
+   },
+   "LEFT1": {
+    "a": 0.6358,
+    "g": 0.6142,
+    "e": 0.5787,
+    "aMinusE": {
+     "mean": 0.0571,
+     "lo": 0.0399,
+     "hi": 0.0717,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0.0216,
+     "lo": 0.008,
+     "hi": 0.0331,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": false,
+    "reproducesBonus": true,
+    "shareOfAboveChance": 0.8161
+   },
+   "BAG": {
+    "a": 0.5717,
+    "g": 0.5747,
+    "e": 0.5691,
+    "aMinusE": {
+     "mean": 0.0025,
+     "lo": 0.0002,
+     "hi": 0.0046,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": -0.0031,
+     "lo": -0.0051,
+     "hi": -0.0011,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.4309
+   },
+   "BOTH+BAG": {
+    "a": 0.6649,
+    "g": 0.6371,
+    "e": 0.5884,
+    "aMinusE": {
+     "mean": 0.0765,
+     "lo": 0.0641,
+     "hi": 0.0873,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0.0279,
+     "lo": 0.0214,
+     "hi": 0.0359,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": true,
+    "reproducesBonus": true,
+    "shareOfAboveChance": 0.991
+   },
+   "BOTH+RIVALS": {
+    "a": 0.6652,
+    "g": 0.6372,
+    "e": 0.5912,
+    "aMinusE": {
+     "mean": 0.074,
+     "lo": 0.0621,
+     "hi": 0.0835,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0.0281,
+     "lo": 0.0223,
+     "hi": 0.0345,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": true,
+    "reproducesBonus": true,
+    "shareOfAboveChance": 0.9928
+   },
+   "FIX_RARE": {
+    "a": 0.6242,
+    "g": 0.6242,
+    "e": 0.6242,
+    "aMinusE": {
+     "mean": 0,
+     "lo": 0,
+     "hi": 0,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0,
+     "lo": 0,
+     "hi": 0,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.7464
+   },
+   "FIX_NOFUNC": {
+    "a": 0.5957,
+    "g": 0.5957,
+    "e": 0.5957,
+    "aMinusE": {
+     "mean": 0,
+     "lo": 0,
+     "hi": 0,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0,
+     "lo": 0,
+     "hi": 0,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.5751
+   }
+  },
+  "germanic": {
+   "BOTH": {
+    "a": 0.6697,
+    "g": 0.6514,
+    "e": 0.6074,
+    "aMinusE": {
+     "mean": 0.0623,
+     "lo": 0.0479,
+     "hi": 0.077,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0.0183,
+     "lo": 0.0136,
+     "hi": 0.0232,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": true,
+    "reproducesBonus": true,
+    "shareOfAboveChance": 1
+   },
+   "POSITION": {
+    "a": 0.5005,
+    "g": 0.4999,
+    "e": 0.5005,
+    "aMinusE": {
+     "mean": 0,
+     "lo": -0.0014,
+     "hi": 0.0016,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0.0006,
+     "lo": -0.0009,
+     "hi": 0.0022,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.0029
+   },
+   "CHARLEN": {
+    "a": 0.5,
+    "g": 0.5,
+    "e": 0.5,
+    "aMinusE": {
+     "mean": 0,
+     "lo": 0,
+     "hi": 0,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0,
+     "lo": 0,
+     "hi": 0,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0
+   },
+   "FREQ": {
+    "a": 0.5001,
+    "g": 0.5,
+    "e": 0.5001,
+    "aMinusE": {
+     "mean": 0.0001,
+     "lo": -0.0005,
+     "hi": 0.0005,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0.0001,
+     "lo": -0.0004,
+     "hi": 0.0006,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.0006
+   },
+   "RIVALS": {
+    "a": 0.5005,
+    "g": 0.5,
+    "e": 0.5004,
+    "aMinusE": {
+     "mean": 0.0001,
+     "lo": -0.0007,
+     "hi": 0.0014,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0.0006,
+     "lo": -0.0008,
+     "hi": 0.002,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.0029
+   },
+   "NBRMEAN": {
+    "a": 0.6771,
+    "g": 0.666,
+    "e": 0.6661,
+    "aMinusE": {
+     "mean": 0.0111,
+     "lo": 0.0078,
+     "hi": 0.0142,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0.0111,
+     "lo": 0.0083,
+     "hi": 0.0143,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": true,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 1.0436
+   },
+   "NBRRARE": {
+    "a": 0.68,
+    "g": 0.6724,
+    "e": 0.6687,
+    "aMinusE": {
+     "mean": 0.0113,
+     "lo": 0.0084,
+     "hi": 0.0142,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0.0076,
+     "lo": 0.0061,
+     "hi": 0.0094,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": true,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 1.0607
+   },
+   "FUNC": {
+    "a": 0.6066,
+    "g": 0.6017,
+    "e": 0.5948,
+    "aMinusE": {
+     "mean": 0.0118,
+     "lo": 0.0036,
+     "hi": 0.0209,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0.0049,
+     "lo": -0.0029,
+     "hi": 0.0106,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.6282
+   },
+   "ADJ": {
+    "a": 0.6469,
+    "g": 0.6382,
+    "e": 0.6051,
+    "aMinusE": {
+     "mean": 0.0418,
+     "lo": 0.0335,
+     "hi": 0.0502,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0.0087,
+     "lo": 0.0037,
+     "hi": 0.0136,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": true,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.8656
+   },
+   "DIST2": {
+    "a": 0.5945,
+    "g": 0.5742,
+    "e": 0.5547,
+    "aMinusE": {
+     "mean": 0.0398,
+     "lo": 0.0325,
+     "hi": 0.0475,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0.0203,
+     "lo": 0.0124,
+     "hi": 0.0283,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.5569
+   },
+   "LEFT1": {
+    "a": 0.6067,
+    "g": 0.6133,
+    "e": 0.5811,
+    "aMinusE": {
+     "mean": 0.0255,
+     "lo": 0.0203,
+     "hi": 0.0326,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": -0.0066,
+     "lo": -0.0166,
+     "hi": 0.0035,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.6288
+   },
+   "BAG": {
+    "a": 0.6315,
+    "g": 0.6239,
+    "e": 0.6156,
+    "aMinusE": {
+     "mean": 0.0159,
+     "lo": 0.0109,
+     "hi": 0.0221,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0.0075,
+     "lo": 0.0039,
+     "hi": 0.0116,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.7749
+   },
+   "BOTH+BAG": {
+    "a": 0.6693,
+    "g": 0.6511,
+    "e": 0.6068,
+    "aMinusE": {
+     "mean": 0.0625,
+     "lo": 0.0481,
+     "hi": 0.0776,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0.0182,
+     "lo": 0.0127,
+     "hi": 0.0238,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": true,
+    "reproducesBonus": true,
+    "shareOfAboveChance": 0.9976
+   },
+   "BOTH+RIVALS": {
+    "a": 0.6679,
+    "g": 0.6485,
+    "e": 0.6079,
+    "aMinusE": {
+     "mean": 0.06,
+     "lo": 0.0468,
+     "hi": 0.0736,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0.0193,
+     "lo": 0.0142,
+     "hi": 0.0246,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": true,
+    "reproducesBonus": true,
+    "shareOfAboveChance": 0.9894
+   },
+   "FIX_RARE": {
+    "a": 0.6781,
+    "g": 0.6781,
+    "e": 0.6781,
+    "aMinusE": {
+     "mean": 0,
+     "lo": 0,
+     "hi": 0,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0,
+     "lo": 0,
+     "hi": 0,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": true,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 1.0495
+   },
+   "FIX_NOFUNC": {
+    "a": 0.5968,
+    "g": 0.5968,
+    "e": 0.5968,
+    "aMinusE": {
+     "mean": 0,
+     "lo": 0,
+     "hi": 0,
+     "n": 7
+    },
+    "aMinusG": {
+     "mean": 0,
+     "lo": 0,
+     "hi": 0,
+     "n": 7
+    },
+    "n": 7,
+    "reproducesLevel": false,
+    "reproducesBonus": false,
+    "shareOfAboveChance": 0.5704
+   }
+  }
+ },
+ "attackSucceeds": [],
+ "adjReproducesBoth": true,
+ "matchingLeak": [
+  {
+   "arm": "POSITION",
+   "a": 0.5009,
+   "outsideBand": false
+  },
+  {
+   "arm": "CHARLEN",
+   "a": 0.5,
+   "outsideBand": false
+  },
+  {
+   "arm": "FREQ",
+   "a": 0.5001,
+   "outsideBand": false
+  },
+  {
+   "arm": "RIVALS",
+   "a": 0.5009,
+   "outsideBand": false
+  }
+ ],
+ "cheapPlus": -0.0019
+}

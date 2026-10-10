@@ -1,0 +1,291 @@
+{
+ "verdict": "PARTIAL: holds(ud) fails(irc,code,book) P1=false",
+ "famPass": {
+  "irc": false,
+  "code": false,
+  "book": false,
+  "ud": true
+ },
+ "P": {
+  "P1": {
+   "rho": 0.1114,
+   "p": 0.1929,
+   "n": 63,
+   "pass": false,
+   "byFamily": {
+    "irc": 3,
+    "code": 2,
+    "book": 6,
+    "ud": 52
+   }
+  },
+  "P2": {
+   "valid": 3,
+   "cells": [
+    [
+     "irc-kubuntu",
+     0.6395,
+     0.5552
+    ],
+    [
+     "irc-ubuntu-server",
+     0.6339,
+     0.555
+    ],
+    [
+     "irc-xubuntu",
+     0.5736,
+     0.5
+    ]
+   ],
+   "pass": false
+  },
+  "P3": {
+   "valid": 2,
+   "cells": [
+    [
+     "code-py",
+     0.589,
+     0.5412
+    ],
+    [
+     "code-rb",
+     0.5797,
+     0.5247
+    ]
+   ],
+   "pass": false
+  },
+  "P4": {
+   "valid": 6,
+   "cells": [
+    [
+     "book-anne-of-green-gables",
+     0.4483
+    ],
+    [
+     "book-crime-and-punishment",
+     0.4984
+    ],
+    [
+     "book-great-expectations",
+     0.4822
+    ],
+    [
+     "book-the-war-of-the-worlds",
+     0.4633
+    ],
+    [
+     "book-treasure-island",
+     0.5074
+    ],
+    [
+     "book-wuthering-heights",
+     0.5633
+    ]
+   ],
+   "nLow": 2,
+   "pass": false
+  },
+  "P5": {
+   "valid": 52,
+   "median": 0.455,
+   "POS": 1,
+   "NEG": 17,
+   "FLAT": 34,
+   "pass": true
+  },
+  "P6": {
+   "irc": 0.1493,
+   "code": 0.0564,
+   "book": 0.0433,
+   "ud": -0.0529,
+   "pass": {
+    "irc": true,
+    "code": true,
+    "book": false
+   }
+  }
+ },
+ "controls": {
+  "sham-irc": {
+   "n": 3,
+   "medDev": 0.0067,
+   "ok": true
+  },
+  "sham-code": {
+   "n": 3,
+   "medDev": 0.0172,
+   "ok": true
+  },
+  "sham-book": {
+   "n": 6,
+   "medDev": 0.0142,
+   "ok": true
+  },
+  "sham-ud": {
+   "n": 58,
+   "medDev": 0.015,
+   "ok": true
+  },
+  "impl": {
+   "n": 40,
+   "shareWithin003": 0.975,
+   "ok": true
+  }
+ },
+ "report": {
+  "rho": {
+   "noCode": {
+    "rho": 0.0241,
+    "p": 0.4298,
+    "n": 61
+   },
+   "noIrc": {
+    "rho": -0.0076,
+    "p": 0.5372,
+    "n": 60
+   },
+   "noUd": {
+    "rho": 0.6909,
+    "p": 0.0175,
+    "n": 11
+   },
+   "udOnly": {
+    "rho": -0.0453,
+    "p": 0.6167,
+    "n": 52
+   },
+   "nonUd": {
+    "rho": 0.6909,
+    "p": 0.0175,
+    "n": 11
+   }
+  },
+  "validity": {
+   "irc": {
+    "total": 3,
+    "pairsGe60": 3,
+    "posOk": 3,
+    "valid": 3
+   },
+   "code": {
+    "total": 3,
+    "pairsGe60": 3,
+    "posOk": 3,
+    "valid": 2
+   },
+   "book": {
+    "total": 6,
+    "pairsGe60": 6,
+    "posOk": 6,
+    "valid": 6
+   },
+   "ud": {
+    "total": 57,
+    "pairsGe60": 52,
+    "posOk": 52,
+    "valid": 52
+   }
+  },
+  "signAccuracy": {
+   "n": 34,
+   "hit": 24,
+   "acc": 0.7059,
+   "pOneSidedBinom": 0.0122,
+   "byFamily": {
+    "irc": {
+     "n": 2,
+     "hit": 2
+    },
+    "code": {
+     "n": 2,
+     "hit": 2
+    },
+    "book": {
+     "n": 6,
+     "hit": 4
+    },
+    "ud": {
+     "n": 24,
+     "hit": 16
+    }
+   }
+  },
+  "udSignedAbove": [
+   [
+    "ud-be_hse",
+    0.1019,
+    0.4375
+   ],
+   [
+    "ud-eu_bdt",
+    0.1106,
+    0.4225
+   ],
+   [
+    "ud-lzh_kyoto",
+    0.2044,
+    0.5096
+   ],
+   [
+    "ud-sk_snk",
+    0.1331,
+    0.4677
+   ],
+   [
+    "ud-tr_imst",
+    0.1062,
+    0.4909
+   ]
+  ]
+ },
+ "posthoc": {
+  "note": "position-only validity (scoper convention); NOT the registered verdict",
+  "P1": {
+   "rho": 0.1515,
+   "p": 0.1109,
+   "n": 64
+  },
+  "irc": {
+   "valid": 3,
+   "cells": [
+    [
+     "irc-kubuntu",
+     0.6395,
+     0.5552,
+     0.5034
+    ],
+    [
+     "irc-ubuntu-server",
+     0.6339,
+     0.555,
+     0.4688
+    ],
+    [
+     "irc-xubuntu",
+     0.5736,
+     0.5,
+     0.469
+    ]
+   ],
+   "delta": 0.1493
+  },
+  "code": {
+   "valid": 3,
+   "delta": 0.0848
+  },
+  "book": {
+   "valid": 6,
+   "nLow": 2,
+   "delta": 0.0433
+  },
+  "ud": {
+   "valid": 52,
+   "median": 0.455,
+   "POS": 1,
+   "NEG": 17,
+   "delta": -0.0529
+  }
+ }
+}

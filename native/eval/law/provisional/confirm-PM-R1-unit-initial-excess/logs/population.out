@@ -1,0 +1,10 @@
+irc-en-fresh       493P/4974N base 0.0902 pooledAUC 0.989 | >=.25: n 649 prec 0.7458 rec 0.9817 lift 8.2699 | >=.5: n 518 prec 0.8726 rec 0.9168 lift 9.6763
+book-dracula       109P/1515N base 0.0671 pooledAUC 0.5963 | >=.25: n 17 prec 0.5294 rec 0.0826 lift 7.8877 | >=.5: n 2 prec 1 rec 0.0183 lift 14.8991
+book-dorian-gray   58P/1029N base 0.0534 pooledAUC 0.598 | >=.25: n 9 prec 0 rec 0 lift 0 | >=.5: n 1 prec 0 rec 0 lift 0
+book-moby-dick     161P/2086N base 0.0717 pooledAUC 0.4073 | >=.25: n 8 prec 0 rec 0 lift 0 | >=.5: n 1 prec 0 rec 0 lift 0
+book-sherlock      120P/1358N base 0.0812 pooledAUC 0.502 | >=.25: n 15 prec 0.4 rec 0.05 lift 4.9267 | >=.5: n 1 prec 0 rec 0 lift 0
+code-js            2268P/428N base 0.8412 pooledAUC 0.6236 | >=.25: n 119 prec 0.9244 rec 0.0485 lift 1.0988 | >=.5: n 35 prec 0.9143 rec 0.0141 lift 1.0868
+code-py            2468P/675N base 0.7852 pooledAUC 0.676 | >=.25: n 259 prec 0.9344 rec 0.0981 lift 1.1899 | >=.5: n 43 prec 0.7907 rec 0.0138 lift 1.007
+ud SOV pooled      1534P/10571N base 0.1267 pooledAUC 0.6577 | >=.25: n 1193 prec 0.28 rec 0.2177 lift 2.2093 | >=.5: n 297 prec 0.2492 rec 0.0482 lift 1.9661
+ud rest pooled     7160P/37742N base 0.1595 pooledAUC 0.5847 | >=.25: n 2188 prec 0.3432 rec 0.1049 lift 2.1525 | >=.5: n 485 prec 0.3278 rec 0.0222 lift 2.0559
+ud median over cells {"n":53,"pooledAuc":0.5944,"baseRate":0.1629,"prec25":0.3131,"lift25":2.1467}

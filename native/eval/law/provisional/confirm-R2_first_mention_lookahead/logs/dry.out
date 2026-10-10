@@ -1,0 +1,54 @@
+{
+ "mode": "dry",
+ "headerSha256": "3377f5b2020b273959ab433ffc535df916d34f04148759056d3fc771430c61ad",
+ "verdict": {
+  "verdict": "CONFIRMED",
+  "why": "primary cell holds (a-e)",
+  "primaryHolds": true,
+  "subScopeHolding": [
+   "EN_INIT",
+   "EN_NONINIT",
+   "EN_ubuntu",
+   "EN_2008-11",
+   "EN_big",
+   "EN_small"
+  ],
+  "subScopeFailing": [
+   "EN_kubuntu",
+   "EN_2004-07",
+   "EN_2012-15"
+  ],
+  "mode": "dry"
+ },
+ "primary": {
+  "variant": "M4",
+  "n": 391,
+  "days": 8,
+  "auc": 0.7059,
+  "ci": [
+   0.6803,
+   0.7315
+  ],
+  "dayCi": [
+   0.6883,
+   0.7161
+  ],
+  "ctl": {
+   "i": 0.491,
+   "len": 0.4847,
+   "cl": 0.5038,
+   "lc": 0.5038
+  },
+  "thr": {
+   "n": 391,
+   "tpr": 0.3529,
+   "fpr": 0.1355,
+   "balPrec": 0.7225
+  },
+  "wordshuf": 0.5471,
+  "drop": 0.1588,
+  "msgshuf": 0.6676,
+  "beyond": 0.6947,
+  "beyond128": 0.6011
+ }
+}

@@ -1,0 +1,420 @@
+{
+ "ent-en-mouret": {
+  "expect": "PRESENT+",
+  "c1.00": {
+   "status": "PRESENT+",
+   "zD": 16.8,
+   "zC": 21.5,
+   "vD": 0.0143,
+   "vC": 0.0161
+  },
+  "c1.25": {
+   "status": "PRESENT+",
+   "zD": 14.9,
+   "zC": 15,
+   "vD": 0.0098,
+   "vC": 0.0117
+  },
+  "c1.50": {
+   "status": "PRESENT+",
+   "zD": 12.1,
+   "zC": 21.9,
+   "vD": 0.0109,
+   "vC": 0.0229
+  },
+  "c1.75": {
+   "status": "PRESENT+",
+   "zD": 17.6,
+   "zC": 23.9,
+   "vD": 0.0196,
+   "vC": 0.0224
+  },
+  "fine": {
+   "status": "AMBIGUOUS",
+   "zD": 1,
+   "zC": 8.4,
+   "vD": 0.0004,
+   "vC": 0.0064
+  }
+ },
+ "ent-en-poe2": {
+  "expect": "PRESENT+",
+  "c1.00": {
+   "status": "PRESENT+",
+   "zD": 7.3,
+   "zC": 14.3,
+   "vD": 0.0035,
+   "vC": 0.0068
+  },
+  "c1.25": {
+   "status": "ABSENT",
+   "zD": -1.2,
+   "zC": 1.3,
+   "vD": -0.0004,
+   "vC": 0.0007
+  },
+  "c1.50": {
+   "status": "AMBIGUOUS",
+   "zD": -2.2,
+   "zC": 3.8,
+   "vD": -0.0015,
+   "vC": 0.0034
+  },
+  "c1.75": {
+   "status": "PRESENT+",
+   "zD": 10.9,
+   "zC": 6.6,
+   "vD": 0.0091,
+   "vC": 0.0052
+  },
+  "fine": {
+   "status": "PRESENT-",
+   "zD": -10.3,
+   "zC": -5.4,
+   "vD": -0.007,
+   "vC": -0.0054
+  }
+ },
+ "ent-en-waikna": {
+  "expect": "PRESENT+",
+  "c1.00": {
+   "status": "AMBIGUOUS",
+   "zD": -6.2,
+   "zC": 3.4,
+   "vD": -0.0085,
+   "vC": 0.0025
+  },
+  "c1.25": {
+   "status": "AMBIGUOUS",
+   "zD": 0.8,
+   "zC": -4.5,
+   "vD": 0.0012,
+   "vC": -0.0025
+  },
+  "c1.50": {
+   "status": "ABSENT",
+   "zD": -1.3,
+   "zC": -0.9,
+   "vD": -0.0008,
+   "vC": -0.0009
+  },
+  "c1.75": {
+   "status": "AMBIGUOUS",
+   "zD": 2.1,
+   "zC": 14,
+   "vD": 0.0019,
+   "vC": 0.009
+  },
+  "fine": {
+   "status": "PRESENT-",
+   "zD": -10,
+   "zC": -10.3,
+   "vD": -0.0101,
+   "vC": -0.0109
+  }
+ },
+ "ent-en-awakening": {
+  "expect": "PRESENT+",
+  "c1.00": {
+   "status": "PRESENT+",
+   "zD": 19.7,
+   "zC": 15.1,
+   "vD": 0.0126,
+   "vC": 0.0078
+  },
+  "c1.25": {
+   "status": "PRESENT+",
+   "zD": 13.7,
+   "zC": 21.2,
+   "vD": 0.0096,
+   "vC": 0.0155
+  },
+  "c1.50": {
+   "status": "PRESENT+",
+   "zD": 21.1,
+   "zC": 19.4,
+   "vD": 0.0181,
+   "vC": 0.0127
+  },
+  "c1.75": {
+   "status": "PRESENT+",
+   "zD": 23.3,
+   "zC": 21.3,
+   "vD": 0.0187,
+   "vC": 0.019
+  },
+  "fine": {
+   "status": "AMBIGUOUS",
+   "zD": -5,
+   "zC": 9.7,
+   "vD": -0.0065,
+   "vC": 0.0069
+  }
+ },
+ "ent-en-siddhartha": {
+  "expect": "PRESENT+",
+  "c1.00": {
+   "status": "PRESENT+",
+   "zD": 9.2,
+   "zC": 5.5,
+   "vD": 0.019,
+   "vC": 0.0069
+  },
+  "c1.25": {
+   "status": "AMBIGUOUS",
+   "zD": 8,
+   "zC": -1.2,
+   "vD": 0.0135,
+   "vC": -0.0011
+  },
+  "c1.50": {
+   "status": "PRESENT+",
+   "zD": 6.6,
+   "zC": 6.9,
+   "vD": 0.0109,
+   "vC": 0.0133
+  },
+  "c1.75": {
+   "status": "PRESENT+",
+   "zD": 7.6,
+   "zC": 7.3,
+   "vD": 0.0134,
+   "vC": 0.0153
+  },
+  "fine": {
+   "status": "AMBIGUOUS",
+   "zD": 7.3,
+   "zC": -1.4,
+   "vD": 0.0079,
+   "vC": -0.0018
+  }
+ },
+ "ent-en-dolls-house": {
+  "expect": "PRESENT-",
+  "c1.00": {
+   "status": "PRESENT+",
+   "zD": 4.6,
+   "zC": 4.3,
+   "vD": 0.0176,
+   "vC": 0.0158
+  },
+  "c1.25": {
+   "status": "AMBIGUOUS",
+   "zD": 3.1,
+   "zC": 3.8,
+   "vD": 0.0094,
+   "vC": 0.0109
+  },
+  "c1.50": {
+   "status": "AMBIGUOUS",
+   "zD": -2.1,
+   "zC": -2.4,
+   "vD": -0.0071,
+   "vC": -0.007
+  },
+  "c1.75": {
+   "status": "AMBIGUOUS",
+   "zD": -1.8,
+   "zC": -6.2,
+   "vD": -0.0061,
+   "vC": -0.0155
+  },
+  "fine": {
+   "status": "AMBIGUOUS",
+   "zD": 3.6,
+   "zC": 0.1,
+   "vD": 0.0079,
+   "vC": 0.0002
+  }
+ },
+ "ent-en-early-plays": {
+  "expect": "PRESENT-",
+  "c1.00": {
+   "status": "AMBIGUOUS",
+   "zD": -2.3,
+   "zC": 0.1,
+   "vD": -0.0076,
+   "vC": -0.0005
+  },
+  "c1.25": {
+   "status": "ABSENT",
+   "zD": -1.4,
+   "zC": 0.3,
+   "vD": -0.0046,
+   "vC": 0.0002
+  },
+  "c1.50": {
+   "status": "AMBIGUOUS",
+   "zD": -5.6,
+   "zC": -0.4,
+   "vD": -0.0111,
+   "vC": -0.0022
+  },
+  "c1.75": {
+   "status": "AMBIGUOUS",
+   "zD": -6.8,
+   "zC": -1.5,
+   "vD": -0.0119,
+   "vC": -0.0048
+  },
+  "fine": {
+   "status": "PRESENT-",
+   "zD": -6,
+   "zC": -4.2,
+   "vD": -0.015,
+   "vC": -0.0135
+  }
+ },
+ "ent-ud-lat-perseus": {
+  "expect": "PRESENT-",
+  "c1.00": {
+   "status": "PRESENT-",
+   "zD": -15.7,
+   "zC": -10.4,
+   "vD": -0.1522,
+   "vC": -0.1588
+  },
+  "c1.25": {
+   "status": "PRESENT-",
+   "zD": -16,
+   "zC": -10.1,
+   "vD": -0.1519,
+   "vC": -0.1398
+  },
+  "c1.50": {
+   "status": "PRESENT-",
+   "zD": -16.2,
+   "zC": -9.7,
+   "vD": -0.1585,
+   "vC": -0.1425
+  },
+  "c1.75": {
+   "status": "PRESENT-",
+   "zD": -16.5,
+   "zC": -9.7,
+   "vD": -0.1526,
+   "vC": -0.1436
+  },
+  "fine": {
+   "status": "PRESENT-",
+   "zD": -17.8,
+   "zC": -11,
+   "vD": -0.1792,
+   "vC": -0.1719
+  }
+ },
+ "ent-cd-js": {
+  "expect": "PRESENT-",
+  "c1.00": {
+   "status": "PRESENT-",
+   "zD": -21.5,
+   "zC": -37.4,
+   "vD": -0.0333,
+   "vC": -0.0246
+  },
+  "c1.25": {
+   "status": "PRESENT-",
+   "zD": -19.9,
+   "zC": -20.8,
+   "vD": -0.0359,
+   "vC": -0.0256
+  },
+  "c1.50": {
+   "status": "PRESENT-",
+   "zD": -25.4,
+   "zC": -41,
+   "vD": -0.0477,
+   "vC": -0.0447
+  },
+  "c1.75": {
+   "status": "PRESENT-",
+   "zD": -29.9,
+   "zC": -61.4,
+   "vD": -0.0541,
+   "vC": -0.0431
+  },
+  "fine": {
+   "status": "PRESENT-",
+   "zD": -19.4,
+   "zC": -25.9,
+   "vD": -0.0219,
+   "vC": -0.0159
+  }
+ },
+ "ent-cd-ts": {
+  "expect": "PRESENT-",
+  "c1.00": {
+   "status": "PRESENT-",
+   "zD": -39.4,
+   "zC": -18.7,
+   "vD": -0.0744,
+   "vC": -0.0526
+  },
+  "c1.25": {
+   "status": "PRESENT-",
+   "zD": -31.9,
+   "zC": -22.8,
+   "vD": -0.0867,
+   "vC": -0.0638
+  },
+  "c1.50": {
+   "status": "PRESENT-",
+   "zD": -18.8,
+   "zC": -24.3,
+   "vD": -0.0642,
+   "vC": -0.069
+  },
+  "c1.75": {
+   "status": "PRESENT-",
+   "zD": -26.5,
+   "zC": -19.1,
+   "vD": -0.063,
+   "vC": -0.0569
+  },
+  "fine": {
+   "status": "PRESENT-",
+   "zD": -18.5,
+   "zC": -20.4,
+   "vD": -0.0511,
+   "vC": -0.0373
+  }
+ },
+ "ent-cd-py": {
+  "expect": "PRESENT-",
+  "c1.00": {
+   "status": "PRESENT-",
+   "zD": -17.7,
+   "zC": -19.7,
+   "vD": -0.0236,
+   "vC": -0.0386
+  },
+  "c1.25": {
+   "status": "PRESENT-",
+   "zD": -10.9,
+   "zC": -18.3,
+   "vD": -0.0234,
+   "vC": -0.0356
+  },
+  "c1.50": {
+   "status": "PRESENT-",
+   "zD": -9.3,
+   "zC": -20.6,
+   "vD": -0.0192,
+   "vC": -0.0361
+  },
+  "c1.75": {
+   "status": "PRESENT-",
+   "zD": -11.4,
+   "zC": -16.8,
+   "vD": -0.0229,
+   "vC": -0.034
+  },
+  "fine": {
+   "status": "PRESENT-",
+   "zD": -14.9,
+   "zC": -16.4,
+   "vD": -0.0191,
+   "vC": -0.0206
+  }
+ }
+}

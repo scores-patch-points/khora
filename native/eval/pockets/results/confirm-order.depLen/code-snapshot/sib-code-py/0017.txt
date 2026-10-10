@@ -1,0 +1,81 @@
+#!/usr/bin/env python3
+"""Verify a CaseLink account by capturing the webshell.asp login POST response body.
+Per the Aug-20 post-mortem: do NOT trust a URL change. The response body states
+the real reason in plain text, and a genuine session shows the dedicated search frame."""
+import asyncio, os, sys
+from playwright.async_api import async_playwright
+
+USER = os.environ['TEST_USER']
+PWD  = os.environ['TEST_PASS']
+LOGIN_URL = "https://caselink.nashville.gov/#login"
+
+async def main():
+    bodies = []
+    async with async_playwright() as pw:
+        browser = await pw.chromium.launch(headless=True)
+        ctx = await browser.new_context(viewport={'width':1280,'height':900})
+        page = await ctx.new_page()
+        page.set_default_timeout(60000)
+
+        async def on_response(resp):
+            if 'webshell.asp' in resp.url.lower():
+                try:
+                    t = await resp.text()
+                    bodies.append((resp.url, resp.status, t[:4000]))
+                except Exception as e:
+                    bodies.append((resp.url, resp.status, f'<unreadable: {e}>'))
+        page.on('response', lambda r: asyncio.ensure_future(on_response(r)))
+        page.on('dialog', lambda d: asyncio.ensure_future(d.accept()))
+
+        await page.goto(LOGIN_URL, wait_until='domcontentloaded')
+        await page.wait_for_timeout(4000)
+
+        # find the frame holding OPERCODE
+        lf = None
+        for f in page.frames:
+            try:
+                if await f.query_selector('input#OPERCODE, input[name="OPERCODE"]'):
+                    lf = f; break
+            except Exception:
+                continue
+        if lf is None:
+            print('FAIL: no login frame found'); return
+
+        await lf.fill('input#OPERCODE', USER)
+        await lf.fill('input#PASSWD', PWD)
+        await page.wait_for_timeout(500)
+        try:
+            await lf.click('#LogInSub', timeout=8000)
+        except Exception:
+            await page.keyboard.press('Enter')
+        await page.wait_for_timeout(9000)
+
+        print(f'URL after login: {page.url}')
+
+        # The decisive signal: a dedicated search frame with the party/case input
+        found_search = False
+        for f in page.frames:
+            try:
+                inputs = await f.query_selector_all('input[type="text"]')
+                for inp in inputs:
+                    ph = (await inp.get_attribute('placeholder')) or ''
+                    if 'Case Number' in ph or 'Name of Party' in ph:
+                        print(f"SEARCH FRAME FOUND (placeholder: {ph!r})")
+                        found_search = True
+                        break
+            except Exception:
+                continue
+            if found_search: break
+
+        print('--- webshell.asp responses ---')
+        for url, status, body in bodies[-4:]:
+            flat = ' '.join(body.split())
+            print(f'[{status}] {url}')
+            print(f'   {flat[:600]}')
+        low = ' '.join(b[2] for b in bodies).lower()
+        bad = 'user-id or password is incorrect' in low or 'incorrect' in low
+        print()
+        print('VERDICT:', 'LOGIN OK' if (found_search and not bad) else 'LOGIN FAILED')
+        await browser.close()
+
+asyncio.run(main())

@@ -1,0 +1,30 @@
+all_v {'n': 391, 'R2_size_length_only': 0.3207039082279195, 'rho_logTokens': 0.5362976112787726, 'rho_unitLength': -0.26679263017139915} rivals>=0.7: 4 of 80
+   phys.voidRescue      n=384 rho=0.914 partial=0.902 R2=0.813 R2cov=0.876
+   comp.sameR           n=391 rho=0.893 partial=0.895 R2=0.802 R2cov=0.865
+   comp.sameL           n=391 rho=0.891 partial=0.894 R2=0.799 R2cov=0.864
+   comp.rigidR          n=391 rho=0.865 partial=0.850 R2=0.723 R2cov=0.812
+   para.adjNg2          n=391 rho=0.828 partial=0.833 R2=0.695 R2cov=0.793
+   para.adjNg3          n=391 rho=0.798 partial=0.816 R2=0.666 R2cov=0.773
+forward_v {"chosen": ["comp.sameR", "phys.voidShare", "para.tmplReuse"], "history": [{"added": "comp.sameR", "R2": 0.8654251515329376}, {"added": "phys.voidShare", "R2": 0.919742439802741}, {"added": "para.tmplReuse", "R2": 0.9279314619196196}], "leaveGroupOut": {"bk": {"n": 81, "spearman_pred_vs_obs": 0.9282068654019874}, "cd": {"n": 89, "spearman_pred_vs_obs": 0.7907728975144706}, "fm": {"n": 61, "spearman_pred_vs_obs": 0.9140137493389741}, "ml": {"n": 105, "spearman_pred_vs_obs": 0.8763033285933656}, "oc": {"n": 21, "spearman_pred_vs_obs": 0.8792207792207792}, "ud": {"n": 34, "spearman_pred_vs_obs": 0.8996867625004239}}}
+all_excess {'n': 391, 'R2_size_length_only': 0.32259988414368734, 'rho_logTokens': 0.5193198391978137, 'rho_unitLength': -0.3114979974252143} rivals>=0.7: 1 of 77
+   phys.voidRescue      n=384 rho=0.901 partial=0.889 R2=0.790 R2cov=0.859
+   para.tmplReuse       n=391 rho=0.885 partial=0.829 R2=0.688 R2cov=0.789
+   comp.rigidR          n=391 rho=0.853 partial=0.826 R2=0.682 R2cov=0.785
+   comp.rigidL          n=391 rho=0.788 partial=0.785 R2=0.616 R2cov=0.740
+   phys.attrPMI         n=356 rho=0.822 partial=0.780 R2=0.609 R2cov=0.720
+   comp.sameR           n=391 rho=0.792 partial=0.733 R2=0.538 R2cov=0.687
+forward_excess {"chosen": ["para.tmplReuse", "comp.rigidR", "comp.sameR"], "history": [{"added": "para.tmplReuse", "R2": 0.788650418835586}, {"added": "comp.rigidR", "R2": 0.8486950727713635}, {"added": "comp.sameR", "R2": 0.8815356942358672}], "leaveGroupOut": {"bk": {"n": 81, "spearman_pred_vs_obs": 0.9339430894308943}, "cd": {"n": 89, "spearman_pred_vs_obs": 0.7130915900578821}, "fm": {"n": 61, "spearman_pred_vs_obs": 0.8990481226864093}, "ml": {"n": 105, "spearman_pred_vs_obs": 0.8080105950954857}, "oc": {"n": 21, "spearman_pred_vs_obs": 0.912987012987013}, "ud": {"n": 34, "spearman_pred_vs_obs": 0.8781419538196223}}}
+present_v {'n': 242, 'R2_size_length_only': 0.1790478969403574, 'rho_logTokens': 0.18197909815687313, 'rho_unitLength': -0.4098425895232132} rivals>=0.7: 5 of 80
+   comp.sameR           n=242 rho=0.906 partial=0.906 R2=0.820 R2cov=0.852
+   phys.voidRescue      n=235 rho=0.916 partial=0.892 R2=0.795 R2cov=0.845
+   comp.sameL           n=242 rho=0.885 partial=0.876 R2=0.768 R2cov=0.810
+   comp.rigidR          n=242 rho=0.870 partial=0.864 R2=0.746 R2cov=0.791
+   para.tmplReuse       n=242 rho=0.870 partial=0.851 R2=0.724 R2cov=0.773
+   phys.massExp         n=242 rho=-0.847 partial=-0.831 R2=0.691 R2cov=0.747
+present_excess {'n': 242, 'R2_size_length_only': 0.24831295415900834, 'rho_logTokens': 0.1781497819364272, 'rho_unitLength': -0.4909233158950247} rivals>=0.7: 1 of 77
+   phys.voidRescue      n=235 rho=0.890 partial=0.871 R2=0.759 R2cov=0.813
+   para.tmplReuse       n=242 rho=0.862 partial=0.831 R2=0.691 R2cov=0.767
+   comp.rigidR          n=242 rho=0.828 partial=0.799 R2=0.639 R2cov=0.728
+   phys.attrPMI         n=242 rho=0.791 partial=0.735 R2=0.541 R2cov=0.655
+   comp.rigidL          n=242 rho=0.732 partial=0.726 R2=0.527 R2cov=0.645
+   para.refrain         n=242 rho=0.794 partial=0.719 R2=0.517 R2cov=0.637

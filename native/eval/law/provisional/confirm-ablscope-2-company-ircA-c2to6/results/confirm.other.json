@@ -1,0 +1,234 @@
+{
+ "arm": "other",
+ "headerSha256": "1bb2872ed0b491d0daaa6f6f9076359939d77c192c56199263befce7984a5f9a",
+ "daysSha256": "97ff0d9c40899ad31db4a1960e90cbd1496553d59b5b7bf57c2961d3cd0902f5",
+ "rowsSha256": "6761ae58cbdc8dbde5ef581c32409e20d67a5c1c392f8f78355f86bed7c7b242",
+ "B": 1000,
+ "pairsTotal": 159,
+ "instrument": {
+  "K1_sham_zero": [
+   318,
+   318
+  ],
+  "K6_determinism": [
+   41,
+   41
+  ]
+ },
+ "computeSeconds": 14.8,
+ "docs": [
+  [
+   "ubuntu-de/2010-11-15",
+   23
+  ],
+  [
+   "ubuntu-de/2011-03-15",
+   14
+  ],
+  [
+   "ubuntu-de/2012-03-15",
+   14
+  ],
+  [
+   "ubuntu-de/2012-07-15",
+   9
+  ],
+  [
+   "ubuntu-de/2013-03-15",
+   8
+  ],
+  [
+   "ubuntu-es/2011-07-15",
+   20
+  ],
+  [
+   "ubuntu-es/2013-03-15",
+   3
+  ],
+  [
+   "ubuntu-es/2013-07-15",
+   7
+  ],
+  [
+   "ubuntu-it/2011-07-15",
+   30
+  ],
+  [
+   "ubuntu-it/2012-07-15",
+   10
+  ],
+  [
+   "ubuntu-it/2014-07-15",
+   8
+  ],
+  [
+   "ubuntu-it/2015-03-15",
+   13
+  ]
+ ],
+ "result": {
+  "core": {
+   "pairs": 159,
+   "auc": 0.7143,
+   "ci": [
+    0.6424,
+    0.7748
+   ],
+   "permQ95": 0.5502,
+   "permMean": 0.4997,
+   "permP": 0,
+   "perStratum": {
+    "c2": {
+     "n": 47,
+     "auc": 0.6849
+    },
+    "c3": {
+     "n": 40,
+     "auc": 0.6787
+    },
+    "c4_6": {
+     "n": 72,
+     "auc": 0.7533
+    },
+    "c7_15": {
+     "n": 0,
+     "auc": null
+    },
+    "c16p": {
+     "n": 0,
+     "auc": null
+    }
+   },
+   "controls": {
+    "R_LOGC": 0.5047,
+    "R_POS": 0.4859,
+    "R_IPOS": 0.5,
+    "R_FB": 0.444,
+    "R_LEN": 0.5438,
+    "R_SL": 0.526
+   },
+   "controlsInBand": false,
+   "probeAuc": 0.576,
+   "caliper": {
+    "pairs": 10
+   }
+  },
+  "shamCompany": {
+   "ALL": 0.4748,
+   "OTHERS": 0.5268
+  },
+  "perDoc": {
+   "ubuntu-de/2010-11-15": {
+    "pairs": 23,
+    "auc": 0.8138
+   },
+   "ubuntu-de/2011-03-15": {
+    "pairs": 14,
+    "auc": 0.7202
+   },
+   "ubuntu-de/2012-03-15": {
+    "pairs": 14,
+    "auc": 0.7321
+   },
+   "ubuntu-de/2012-07-15": {
+    "pairs": 9,
+    "auc": null
+   },
+   "ubuntu-de/2013-03-15": {
+    "pairs": 8,
+    "auc": null
+   },
+   "ubuntu-es/2011-07-15": {
+    "pairs": 20,
+    "auc": 0.7802
+   },
+   "ubuntu-es/2013-03-15": {
+    "pairs": 3,
+    "auc": null
+   },
+   "ubuntu-es/2013-07-15": {
+    "pairs": 7,
+    "auc": null
+   },
+   "ubuntu-it/2011-07-15": {
+    "pairs": 30,
+    "auc": 0.5762
+   },
+   "ubuntu-it/2012-07-15": {
+    "pairs": 10,
+    "auc": 0.8333
+   },
+   "ubuntu-it/2014-07-15": {
+    "pairs": 8,
+    "auc": null
+   },
+   "ubuntu-it/2015-03-15": {
+    "pairs": 13,
+    "auc": 0.7115
+   }
+  },
+  "perChannel": {
+   "ubuntu-de": {
+    "pairs": 68,
+    "auc": 0.7859
+   },
+   "ubuntu-es": {
+    "pairs": 30,
+    "auc": 0.7078
+   },
+   "ubuntu-it": {
+    "pairs": 61,
+    "auc": 0.6402
+   }
+  },
+  "reduction": {
+   "aucNegDSelf": 0.7143,
+   "aucRInit": 0.7923,
+   "aucAllInit": 0.7327,
+   "diffNegDSelfMinusRInit": {
+    "point": -0.078,
+    "lo": -0.1342,
+    "hi": -0.0264,
+    "nBoot": 1000
+   },
+   "probeControlsPlusRInit": 0.8067,
+   "probeControlsPlusRInitPlusDSelf": 0.8034,
+   "probeControlsPlusDSelf": 0.6885,
+   "incrementalOverRInit": -0.0033,
+   "tiesOnRInit": {
+    "pairs": 39,
+    "aucNegDSelf": 0.5549
+   },
+   "perDimension": {
+    "log1p_count": 0.5047,
+    "distLeft": 0.3789,
+    "distRight": 0.5647,
+    "entLeft": 0.77,
+    "entRight": 0.4508,
+    "initShare": 0.7925,
+    "finalShare": 0.4709
+   },
+   "medianDSelf": {
+    "c2": {
+     "pos": 0.7245,
+     "neg": 0.7316,
+     "n": 47
+    },
+    "c3": {
+     "pos": 0.4203,
+     "neg": 0.5347,
+     "n": 40
+    },
+    "c4_6": {
+     "pos": 0.3123,
+     "neg": 0.364,
+     "n": 72
+    }
+   }
+  },
+  "holdsPrimary": false,
+  "holdsCaliper": false,
+  "verdict": "VOID"
+ },
+ "analyseSeconds": 1
+}

@@ -1,0 +1,97 @@
+{
+ "reproduction": {
+  "maxAbsDiffVsAtlasMeanV": 1.8709369725700142e-07
+ },
+ "rivals": [
+  {
+   "stat": "plug",
+   "n": 384,
+   "rho": 0.99986754433556,
+   "partialRho": 0.9998637086962006,
+   "partialR2": 0.9997274359677206,
+   "signAgreeOnPresent": 214,
+   "signDisagreeOnPresent": 0
+  },
+  {
+   "stat": "deep2",
+   "n": 376,
+   "rho": 0.8729908008352616,
+   "partialRho": 0.8698917721439735,
+   "partialR2": 0.7567116952437827,
+   "signAgreeOnPresent": 199,
+   "signDisagreeOnPresent": 10
+  },
+  {
+   "stat": "deep3",
+   "n": 360,
+   "rho": 0.8367528556033097,
+   "partialRho": 0.8329008228241926,
+   "partialR2": 0.6937237806612171,
+   "signAgreeOnPresent": 190,
+   "signDisagreeOnPresent": 11
+  },
+  {
+   "stat": "k10",
+   "n": 311,
+   "rho": 0.6877286907677946,
+   "partialRho": 0.6839972694643984,
+   "partialR2": 0.4678522646347529,
+   "signAgreeOnPresent": 144,
+   "signDisagreeOnPresent": 35
+  },
+  {
+   "stat": "k40",
+   "n": 384,
+   "rho": 0.6810630785663423,
+   "partialRho": 0.6732583989646288,
+   "partialR2": 0.4532768717764153,
+   "signAgreeOnPresent": 179,
+   "signDisagreeOnPresent": 35
+  },
+  {
+   "stat": "meanbin",
+   "n": 384,
+   "rho": -0.1235580346546404,
+   "partialRho": -0.12721485926721204,
+   "partialR2": 0.016183620418376565,
+   "signAgreeOnPresent": 80,
+   "signDisagreeOnPresent": 134
+  },
+  {
+   "stat": "distinct",
+   "n": 384,
+   "rho": 0.23892755416906852,
+   "partialRho": 0.24299061387035445,
+   "partialR2": 0.05904443842909169,
+   "signAgreeOnPresent": 122,
+   "signDisagreeOnPresent": 92
+  },
+  {
+   "stat": "topadj",
+   "n": 384,
+   "rho": 0.14306949577837305,
+   "partialRho": 0.1480207610725855,
+   "partialR2": 0.021910145708507443,
+   "signAgreeOnPresent": 137,
+   "signDisagreeOnPresent": 77
+  },
+  {
+   "stat": "edgeGrad",
+   "n": 384,
+   "rho": -0.16739005120206166,
+   "partialRho": -0.14990187771243504,
+   "partialR2": 0.02247057294171383,
+   "signAgreeOnPresent": 107,
+   "signDisagreeOnPresent": 107
+  },
+  {
+   "stat": "posSlope",
+   "n": 384,
+   "rho": -0.15655856871587942,
+   "partialRho": -0.15488469396799007,
+   "partialR2": 0.023989268425557937,
+   "signAgreeOnPresent": 106,
+   "signDisagreeOnPresent": 108
+  }
+ ]
+}

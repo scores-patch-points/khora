@@ -1,0 +1,69 @@
+{
+  "schema": "EOReadShot@1",
+  "medium": "text",
+  "language": "eng",
+  "source": "pg1342_Pride_and_Prejudice.txt",
+  "span": [
+    34941,
+    39816
+  ],
+  "registers": {
+    "atmosphere": {
+      "feltTokens": 887,
+      "axes": [
+        "SCONJ=0.57",
+        "ADJ=0.55",
+        "PROPN=0.55"
+      ],
+      "note": "the reader's meter — consumed, never shouted"
+    },
+    "lens": [
+      {
+        "figure": "evenings",
+        "lensWeight": 4564
+      },
+      {
+        "figure": "intention",
+        "lensWeight": 942
+      },
+      {
+        "figure": "elizabeth",
+        "lensWeight": 625
+      },
+      {
+        "figure": "leisure",
+        "lensWeight": 614
+      }
+    ],
+    "topic": {
+      "converged": false,
+      "standingFigures": [
+        "dear",
+        "bennet",
+        "see",
+        "know"
+      ],
+      "basis": "never settled (honest)"
+    },
+    "paradigm": {
+      "bingley": "AGREE",
+      "wife": "AGREE",
+      "married": "AGREE",
+      "darcy": "UNDETERMINED",
+      "daughter": "UNDETERMINED"
+    }
+  },
+  "telling": [
+    "jane make.",
+    "leisure falling.",
+    "leisure love.",
+    "desire married.",
+    "house dined.",
+    "evenings spent.",
+    "evenings enabled.",
+    "parties known.",
+    "way Occupied.",
+    "discovery succeeded."
+  ],
+  "refusals": []
+}

@@ -1,0 +1,49 @@
+{
+ "n": 391,
+ "statistics": 81,
+ "definedCellsAllStats": 29680,
+ "reproduce": {
+  "presence": {
+   "group": 0.05112831075798432,
+   "register": 0.24604949317568517,
+   "script": 0.021990533562822785,
+   "tokens": 0.10142400685817234,
+   "meanUnitLength": 0.004640879655974703,
+   "docs": 0.014362286247339545
+  },
+  "signSplit": {
+   "group": 0.26390922669434075,
+   "register": 0.4230016015730305,
+   "script": 0.14046015428503916,
+   "tokens": 0.0007029407759938871,
+   "meanUnitLength": 0.047411578516681874,
+   "docs": 0.03730336152546796
+  },
+  "nDefined": 390,
+  "nPresent": 140,
+  "nSign": 140
+ },
+ "counts": {
+  "statistics": 81,
+  "realPockets": 391,
+  "definedCells": 29680,
+  "depLenDefinedCells": 390,
+  "depLenPresentCells": 140,
+  "pPresentFromIid": 0.00008488153720463878,
+  "pPresentFromT9": 0.000004841032308840334,
+  "rate4UpperCP95": 0.029566453927851323,
+  "pPresentUpper": 0.00043708759893387744,
+  "expectedFalsePresentAllCells": {
+   "iidRate": 2.519284024233679,
+   "t9Theory": 0.14368183892638112,
+   "upper95": 12.972759936357482
+  },
+  "expectedFalsePresentDepLen": {
+   "iidRate": 0.03310379950980912,
+   "t9Theory": 0.0018880026004477303,
+   "upper95": 0.1704641635842122
+  },
+  "observedPresentAllCells": 22017,
+  "tailProbObserved140OrMoreDepLen_upper95": 0
+ }
+}

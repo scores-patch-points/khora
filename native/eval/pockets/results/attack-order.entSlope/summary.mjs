@@ -1,0 +1,18 @@
+// summary.mjs -- collect the headline numbers of the ATTACK on order.entSlope from the result JSONs (reads only).  node summary.mjs -> attack-summary.json
+import fs from "node:fs";
+import path from "node:path";
+import { HERE } from "./lib.mjs";
+const J = (f) => JSON.parse(fs.readFileSync(path.join(HERE, f), "utf8"));
+const B = J("B_rival.json"), Bcv = [J("B_cv_all.json"), J("B_cv_present.json")], B2 = J("B2_rival.json"), C1 = J("C_multiplicity_part1.json"), C2 = J("C_multiplicity_part2.json"), A = J("A_summary.json"), A2 = J("A2_summary.json"), D = J("D_summary.json"), E = J("E_beyond_sigma.json");
+const top = (p) => B.populations[p].rivals.slice(0, 3).map((r) => ({ stat: r.stat, partialRho: r.partialRho, partialR2: r.partialR2 }));
+const out = {
+  A: { baseMaxAbsDiffToAtlas: A.baseMaxAbsDiffToAtlas, tokenisation: Object.fromEntries(["drop1pct", "dropHapax", "trunc5"].map((k) => [k, { P_plus_same: A.variants[k].byOriginal["P+"].P_same + "/" + A.variants[k].byOriginal["P+"].n, P_plus_opposite: A.variants[k].byOriginal["P+"].P_opposite, P_minus_same: A.variants[k].byOriginal["P-"].P_same + "/" + A.variants[k].byOriginal["P-"].n, P_minus_opposite: A.variants[k].byOriginal["P-"].P_opposite }])),
+    equalSize7500: { plus: A.variants.tok7500_r0.byOriginal["P+"], minus: A.variants.tok7500_r0.byOriginal["P-"], undefinedFewUnits: A.variants.tok7500_r0.undefinedBecauseFewUnitsOrNullSd, replicateCeiling: A.variants.tok7500_replicateCeiling },
+    equalSize20000: { plus: A.variants.tok20000.byOriginal["P+"], minus: A.variants.tok20000.byOriginal["P-"] }, equalSizeAndUnitLen: { plus: A.variants.tok7500len10_r0.byOriginal["P+"], minus: A.variants.tok7500len10_r0.byOriginal["P-"], unreachable: A.variants.tok7500len10_r0.skipped }, equalUnitLenFull: { plus: A.variants.len10full.byOriginal["P+"], minus: A.variants.len10full.byOriginal["P-"], unreachable: A.variants.len10full.skipped },
+    sizeCurve: Object.fromEntries(Object.entries(A2.bySize).map(([N, o]) => [N, { nDefined: o.nDefined, plusMedianV: o.classes["P+"].medianV, plusShareVpositive: o.classes["P+"].shareVpositive, minusShareVnegative: 1 - o.classes["P-"].shareVpositive, cellsSigmaSignAgrees: o.cellsSigmaSignAgrees }])), withinPocketTrend: A2.withinPocketTrend, sigmaTrend: A2.sigmaTrend },
+  B: { batteryTop_all390: top("allReal390"), batteryTop_present: top("present245"), nestedCv: Bcv.map((c) => ({ pop: c.pop, inSampleR2: c.inSample.r2, nestedLooR2: c.nestedLooR2, controlsOnlyR2: c.controlsOnlyR2, permNull: c.permNullR2, chosen: c.inSample.chosen })), allBatteryOLS: { all390: B.populations.allReal390.allRivalsR2, present245: B.populations.present245.allRivalsR2 }, textRivals: { all: B2.all, present: B2.present, presentWord: B2.presentWord, signAccuracyPresent: B2.signAccuracyPresent }, beyondSigma: { strata: E.strata, signSplitBySigmaSign: E.signSplitBySigmaSign, looAccuracy: E.looAccuracy } },
+  C: { multiplicity: C1.multiplicity, reversalCheapness: C1.reversalCheapness, signSplit: C1.signSplit, leave: { onePocket: C2.leaveOnePocketOut, oneRegisterMin: C2.leaveOneRegisterOut[0], oneGroup: C2.leaveOneGroupOut }, looPrediction: C2.looPrediction, englishVsOtherWithinRegister: { mhOR: C2.englishVsOtherWithinRegister.mhOddsRatioPositiveSign, p: C2.englishVsOtherWithinRegister.permP, n: C2.englishVsOtherWithinRegister.pocketsInInformativeStrata }, presenceRegister: C2.presenceRegister },
+  D: { lawFree: D.lawFree, gradient: D.gradient, gradientByDelta: D.gradientByDelta, atlasPlanted: D.atlasPlanted },
+};
+fs.writeFileSync(path.join(HERE, "attack-summary.json"), JSON.stringify(out, null, 1));
+console.log("wrote attack-summary.json", Object.keys(out).join(","));

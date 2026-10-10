@@ -1,0 +1,57 @@
+{
+ "bk-lesmis/discover(full half)": {
+  "tokens": 152539,
+  "units": 10000,
+  "cpuSecCallsInOrder": [
+   0.115,
+   0.058,
+   0.04,
+   0.033
+  ],
+  "cpuSecOnWithinUnitNull": 0.036
+ },
+ "bk-lesmis/confirm(full half)": {
+  "tokens": 147308,
+  "units": 9408,
+  "cpuSecCallsInOrder": [
+   0.027,
+   0.026,
+   0.065,
+   0.056
+  ],
+  "cpuSecOnWithinUnitNull": 0.041
+ },
+ "pl-markov(all)": {
+  "tokens": 100623,
+  "units": 9786,
+  "cpuSecCallsInOrder": [
+   0.04,
+   0.018,
+   0.025,
+   0.016
+  ],
+  "cpuSecOnWithinUnitNull": 0.018
+ },
+ "bk-lesmis/discover with ~20k extra types": {
+  "tokens": 152539,
+  "units": 10000,
+  "cpuSecCallsInOrder": [
+   0.037,
+   0.039,
+   0.066,
+   0.028
+  ],
+  "cpuSecOnWithinUnitNull": 0.033
+ },
+ "bk-lesmis/discover, all units cut to length 2 (many tiny units)": {
+  "tokens": 147404,
+  "units": 73702,
+  "cpuSecCallsInOrder": [
+   0.043,
+   0.027,
+   0.013,
+   0.02
+  ],
+  "cpuSecOnWithinUnitNull": 0.044
+ }
+}

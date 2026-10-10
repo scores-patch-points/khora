@@ -1,0 +1,2126 @@
+{
+ "law": "order.entSlope",
+ "headerSha256": "6137b1bab5abc26e2431186b05bc2c5846fc6ebeff3fcba34602ba2a2b947c19",
+ "headerMatchesPrereg": true,
+ "verdict": "PARTIAL",
+ "missing": [],
+ "counts": {
+  "scored": 14,
+  "confirmed": 11,
+  "refuted": 1,
+  "uninformative": 2,
+  "confirmedPlus": 4,
+  "confirmedMinus": 4,
+  "confirmedControls": 3,
+  "nonControlConfirmed": 8,
+  "nonControlRefuted": 1
+ },
+ "refuted": [
+  "ent-en-dolls-house: expected PRESENT-, got PRESENT+"
+ ],
+ "perKind": {
+  "prose": {
+   "confirmed": 4,
+   "refuted": 0,
+   "uninformative": 1,
+   "ids": [
+    "ent-en-mouret:PRESENT+",
+    "ent-en-poe2:PRESENT+",
+    "ent-en-waikna:AMBIGUOUS",
+    "ent-en-awakening:PRESENT+",
+    "ent-en-siddhartha:PRESENT+"
+   ],
+   "verdict": "holds"
+  },
+  "drama": {
+   "confirmed": 0,
+   "refuted": 1,
+   "uninformative": 1,
+   "ids": [
+    "ent-en-dolls-house:PRESENT+",
+    "ent-en-early-plays:AMBIGUOUS"
+   ],
+   "verdict": "refuted"
+  },
+  "treebank": {
+   "confirmed": 1,
+   "refuted": 0,
+   "uninformative": 0,
+   "ids": [
+    "ent-ud-lat-perseus:PRESENT-"
+   ],
+   "verdict": "holds"
+  },
+  "code": {
+   "confirmed": 3,
+   "refuted": 0,
+   "uninformative": 0,
+   "ids": [
+    "ent-cd-js:PRESENT-",
+    "ent-cd-ts:PRESENT-",
+    "ent-cd-py:PRESENT-"
+   ],
+   "verdict": "holds"
+  },
+  "control": {
+   "confirmed": 3,
+   "refuted": 0,
+   "uninformative": 0,
+   "ids": [
+    "ent-ctl-mouret:ABSENT",
+    "ent-ctl-awakening:ABSENT",
+    "ent-ctl-cd-ts:ABSENT"
+   ],
+   "verdict": "holds"
+  }
+ },
+ "planGroups": {
+  "prose": {
+   "n": 5,
+   "nPlus": 4,
+   "nMinus": 0,
+   "holds": true
+  },
+  "drama": {
+   "n": 2,
+   "nPlus": 1,
+   "nMinus": 0,
+   "holds": false
+  },
+  "treebank": {
+   "n": 1,
+   "nPlus": 0,
+   "nMinus": 1,
+   "holds": true
+  },
+  "code": {
+   "n": 3,
+   "nPlus": 0,
+   "nMinus": 3,
+   "holds": true
+  },
+  "control": {
+   "n": 3,
+   "nPlus": 0,
+   "nMinus": 0,
+   "holds": true
+  }
+ },
+ "adversary": {
+  "A_MillerMadow": {
+   "survives": true,
+   "perSibling": [
+    {
+     "id": "ent-en-mouret",
+     "mm": "PRESENT+",
+     "plain": "PRESENT+",
+     "same": true
+    },
+    {
+     "id": "ent-en-poe2",
+     "mm": "PRESENT+",
+     "plain": "PRESENT+",
+     "same": true
+    },
+    {
+     "id": "ent-en-awakening",
+     "mm": "PRESENT+",
+     "plain": "PRESENT+",
+     "same": true
+    },
+    {
+     "id": "ent-en-siddhartha",
+     "mm": "PRESENT+",
+     "plain": "PRESENT+",
+     "same": true
+    },
+    {
+     "id": "ent-en-dolls-house",
+     "mm": "PRESENT+",
+     "plain": "PRESENT+",
+     "same": true
+    },
+    {
+     "id": "ent-ud-lat-perseus",
+     "mm": "PRESENT-",
+     "plain": "PRESENT-",
+     "same": true
+    },
+    {
+     "id": "ent-cd-js",
+     "mm": "PRESENT-",
+     "plain": "PRESENT-",
+     "same": true
+    },
+    {
+     "id": "ent-cd-ts",
+     "mm": "PRESENT-",
+     "plain": "PRESENT-",
+     "same": true
+    },
+    {
+     "id": "ent-cd-py",
+     "mm": "PRESENT-",
+     "plain": "PRESENT-",
+     "same": true
+    }
+   ],
+   "reimplementationEqualsCompute": true
+  },
+  "A_unitLength": {
+   "survives": false,
+   "presentSiblings": 9,
+   "registerPredictionHits": 8,
+   "unitLengthBaselineHits": 8,
+   "perSibling": [
+    {
+     "id": "ent-en-mouret",
+     "meanUnitLength": 15.86,
+     "baselineSign": "+",
+     "baselineMedianV": 0.0005,
+     "status": "PRESENT+",
+     "observedVMean": 0.015217579715769388
+    },
+    {
+     "id": "ent-en-poe2",
+     "meanUnitLength": 23.04,
+     "baselineSign": "+",
+     "baselineMedianV": 0.0041,
+     "status": "PRESENT+",
+     "observedVMean": 0.0051307887029848915
+    },
+    {
+     "id": "ent-en-waikna",
+     "meanUnitLength": 26.22,
+     "baselineSign": "+",
+     "baselineMedianV": 0.0025,
+     "status": "AMBIGUOUS",
+     "observedVMean": -0.002977809147642994
+    },
+    {
+     "id": "ent-en-awakening",
+     "meanUnitLength": 14.5,
+     "baselineSign": "+",
+     "baselineMedianV": 0.0005,
+     "status": "PRESENT+",
+     "observedVMean": 0.010173973996960881
+    },
+    {
+     "id": "ent-en-siddhartha",
+     "meanUnitLength": 20.98,
+     "baselineSign": "+",
+     "baselineMedianV": 0.0036,
+     "status": "PRESENT+",
+     "observedVMean": 0.012945241213139594
+    },
+    {
+     "id": "ent-en-dolls-house",
+     "meanUnitLength": 9.05,
+     "baselineSign": "-",
+     "baselineMedianV": -0.0052,
+     "status": "PRESENT+",
+     "observedVMean": 0.016684037756677362
+    },
+    {
+     "id": "ent-en-early-plays",
+     "meanUnitLength": 17.28,
+     "baselineSign": "+",
+     "baselineMedianV": 0.0027,
+     "status": "AMBIGUOUS",
+     "observedVMean": -0.004057671059637857
+    },
+    {
+     "id": "ent-ud-lat-perseus",
+     "meanUnitLength": 10.81,
+     "baselineSign": "-",
+     "baselineMedianV": -0.004,
+     "status": "PRESENT-",
+     "observedVMean": -0.15548369242192034
+    },
+    {
+     "id": "ent-cd-js",
+     "meanUnitLength": 8.3,
+     "baselineSign": "-",
+     "baselineMedianV": -0.0067,
+     "status": "PRESENT-",
+     "observedVMean": -0.028947710216424366
+    },
+    {
+     "id": "ent-cd-ts",
+     "meanUnitLength": 4.1,
+     "baselineSign": "-",
+     "baselineMedianV": -0.0206,
+     "status": "PRESENT-",
+     "observedVMean": -0.06352844431160248
+    },
+    {
+     "id": "ent-cd-py",
+     "meanUnitLength": 5.98,
+     "baselineSign": "-",
+     "baselineMedianV": -0.0145,
+     "status": "PRESENT-",
+     "observedVMean": -0.031138590245639745
+    }
+   ]
+  },
+  "A_rivalStatistics": {
+   "survives": true,
+   "entSlopeConfirmed": 8,
+   "rareSlopeSameSignPresent": 5,
+   "entCurvSameSignPresent": 5,
+   "atlasSpearmanV": {
+    "entSlope_vs_rareSlope": -0.3793501904377058,
+    "entSlope_vs_entCurv": 0.1936069978713257,
+    "nAtlas": 390
+   },
+   "perSibling": [
+    {
+     "id": "ent-en-mouret",
+     "expect": "PRESENT+",
+     "entSlope": "PRESENT+",
+     "rareSlope": "PRESENT+",
+     "entCurv": "PRESENT+"
+    },
+    {
+     "id": "ent-en-poe2",
+     "expect": "PRESENT+",
+     "entSlope": "PRESENT+",
+     "rareSlope": "PRESENT+",
+     "entCurv": "PRESENT+"
+    },
+    {
+     "id": "ent-en-waikna",
+     "expect": "PRESENT+",
+     "entSlope": "AMBIGUOUS",
+     "rareSlope": "PRESENT+",
+     "entCurv": "AMBIGUOUS"
+    },
+    {
+     "id": "ent-en-awakening",
+     "expect": "PRESENT+",
+     "entSlope": "PRESENT+",
+     "rareSlope": "PRESENT+",
+     "entCurv": "PRESENT+"
+    },
+    {
+     "id": "ent-en-siddhartha",
+     "expect": "PRESENT+",
+     "entSlope": "PRESENT+",
+     "rareSlope": "PRESENT+",
+     "entCurv": "AMBIGUOUS"
+    },
+    {
+     "id": "ent-en-dolls-house",
+     "expect": "PRESENT-",
+     "entSlope": "PRESENT+",
+     "rareSlope": "PRESENT+",
+     "entCurv": "AMBIGUOUS"
+    },
+    {
+     "id": "ent-en-early-plays",
+     "expect": "PRESENT-",
+     "entSlope": "AMBIGUOUS",
+     "rareSlope": "PRESENT+",
+     "entCurv": "ABSENT"
+    },
+    {
+     "id": "ent-ud-lat-perseus",
+     "expect": "PRESENT-",
+     "entSlope": "PRESENT-",
+     "rareSlope": "PRESENT+",
+     "entCurv": "AMBIGUOUS"
+    },
+    {
+     "id": "ent-cd-js",
+     "expect": "PRESENT-",
+     "entSlope": "PRESENT-",
+     "rareSlope": "PRESENT+",
+     "entCurv": "PRESENT-"
+    },
+    {
+     "id": "ent-cd-ts",
+     "expect": "PRESENT-",
+     "entSlope": "PRESENT-",
+     "rareSlope": "PRESENT+",
+     "entCurv": "PRESENT-"
+    },
+    {
+     "id": "ent-cd-py",
+     "expect": "PRESENT-",
+     "entSlope": "PRESENT-",
+     "rareSlope": "PRESENT+",
+     "entCurv": "AMBIGUOUS"
+    }
+   ]
+  },
+  "A_multiplicity": {
+   "scoredSiblingCells": 14,
+   "chancePresentPerCell": 0.00008488153720463878,
+   "expectedChancePresentCells": 0.0011883415208649429,
+   "observedPresentCells": 9,
+   "controlsPresent": 0
+  }
+ },
+ "rows": [
+  {
+   "id": "ent-en-mouret",
+   "kind": "prose",
+   "role": "strong",
+   "scored": true,
+   "expect": "PRESENT+",
+   "probExpectHolds": 0.85,
+   "tokens": 126434,
+   "meanUnitLength": 15.855781289189867,
+   "halfTokens": {
+    "discover": 54422,
+    "confirm": 72012
+   },
+   "errors": [],
+   "contentMatchesPrereg": true,
+   "entSlope": {
+    "discover": {
+     "v": 0.01431477016865242,
+     "nullMean": 0.00035246000759475444,
+     "nullSd": 0.0008300750078812177,
+     "z": 16.82054034694615,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.016120389262886357,
+     "nullMean": -0.00005306398515335014,
+     "nullSd": 0.000752223926467426,
+     "z": 21.500849253749543,
+     "n": 10
+    },
+    "status": "PRESENT+",
+    "vMean": 0.015217579715769388
+   },
+   "rareSlope": {
+    "discover": {
+     "v": 0.08687750664684886,
+     "nullMean": 0.0009336937592314589,
+     "nullSd": 0.005727461290716396,
+     "z": 15.005568527704092,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.09843884099100454,
+     "nullMean": -0.0025987378085618094,
+     "nullSd": 0.0049314811303731955,
+     "z": 20.488282552126527,
+     "n": 10
+    },
+    "status": "PRESENT+",
+    "vMean": 0.0926581738189267
+   },
+   "entCurv": {
+    "discover": {
+     "v": 0.0064900426597499115,
+     "nullMean": -0.00022023841951001235,
+     "nullSd": 0.0005639173038866082,
+     "z": 11.89940623033128,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.00609555942406364,
+     "nullMean": -0.0003564509396902113,
+     "nullSd": 0.00041915674742651533,
+     "z": 15.39283431166759,
+     "n": 10
+    },
+    "status": "PRESENT+",
+    "vMean": 0.006292801041906776
+   },
+   "entSlopePlain": {
+    "discover": {
+     "v": 0.014315394404377638,
+     "nullMean": 0.0003524753776025058,
+     "nullSd": 0.0008301112056314033,
+     "z": 16.82054034694615,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.0161209197037611,
+     "nullMean": -0.00005306573122202398,
+     "nullSd": 0.0007522486783708105,
+     "z": 21.500849253749546,
+     "n": 10
+    },
+    "status": "PRESENT+"
+   },
+   "entSlopeMMre": {
+    "status": "PRESENT+",
+    "sameAsCompute": true,
+    "selfcheck": [
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     },
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     }
+    ]
+   },
+   "status": "PRESENT+",
+   "outcome": "CONFIRMED",
+   "vInRange": true,
+   "unitLengthBaseline": {
+    "medianV": 0.00048671287998010445,
+    "sign": "+",
+    "neighbours": 25,
+    "maxDist": 0.04307886958597029
+   }
+  },
+  {
+   "id": "ent-en-poe2",
+   "kind": "prose",
+   "role": "strong",
+   "scored": true,
+   "expect": "PRESENT+",
+   "probExpectHolds": 0.75,
+   "tokens": 94473,
+   "meanUnitLength": 23.03657644476957,
+   "halfTokens": {
+    "discover": 49031,
+    "confirm": 45442
+   },
+   "errors": [],
+   "contentMatchesPrereg": true,
+   "entSlope": {
+    "discover": {
+     "v": 0.003461479292290037,
+     "nullMean": -0.0001604739199622972,
+     "nullSd": 0.0004944136345492205,
+     "z": 7.325755115055907,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.006800098113679746,
+     "nullMean": -0.000021543116491266012,
+     "nullSd": 0.0004766207193974922,
+     "z": 14.312515072350221,
+     "n": 10
+    },
+    "status": "PRESENT+",
+    "vMean": 0.0051307887029848915
+   },
+   "rareSlope": {
+    "discover": {
+     "v": 0.0745189033245591,
+     "nullMean": -0.002872342983251281,
+     "nullSd": 0.003796611787498218,
+     "z": 20.384292795658055,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.07945399041165906,
+     "nullMean": 0.0013340394197487362,
+     "nullSd": 0.005179832017641724,
+     "z": 15.081560700394453,
+     "n": 10
+    },
+    "status": "PRESENT+",
+    "vMean": 0.07698644686810907
+   },
+   "entCurv": {
+    "discover": {
+     "v": 0.0016798376956183273,
+     "nullMean": -0.00019824217870468438,
+     "nullSd": 0.00028647251888033385,
+     "z": 6.555881456495061,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.00316986964800291,
+     "nullMean": 0.00011423611873836443,
+     "nullSd": 0.0004676547963528813,
+     "z": 6.53395101064854,
+     "n": 10
+    },
+    "status": "PRESENT+",
+    "vMean": 0.0024248536718106187
+   },
+   "entSlopePlain": {
+    "discover": {
+     "v": 0.003461645434124517,
+     "nullMean": -0.00016048162228526303,
+     "nullSd": 0.0004944373650936785,
+     "z": 7.325755115055906,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.006800450419995232,
+     "nullMean": -0.000021544232618690663,
+     "nullSd": 0.0004766454126426084,
+     "z": 14.31251507235022,
+     "n": 10
+    },
+    "status": "PRESENT+"
+   },
+   "entSlopeMMre": {
+    "status": "PRESENT+",
+    "sameAsCompute": true,
+    "selfcheck": [
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     },
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     }
+    ]
+   },
+   "status": "PRESENT+",
+   "outcome": "CONFIRMED",
+   "vInRange": true,
+   "unitLengthBaseline": {
+    "medianV": 0.004076482932776707,
+    "sign": "+",
+    "neighbours": 25,
+    "maxDist": 0.06603685073186627
+   }
+  },
+  {
+   "id": "ent-en-waikna",
+   "kind": "prose",
+   "role": "strong",
+   "scored": true,
+   "expect": "PRESENT+",
+   "probExpectHolds": 0.65,
+   "tokens": 74854,
+   "meanUnitLength": 26.218563922942206,
+   "halfTokens": {
+    "discover": 32601,
+    "confirm": 42253
+   },
+   "errors": [],
+   "contentMatchesPrereg": true,
+   "entSlope": {
+    "discover": {
+     "v": -0.008474309531333917,
+     "nullMean": -0.0005340299876123594,
+     "nullSd": 0.001286145443909132,
+     "z": -6.173702656511179,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.0025186912360479295,
+     "nullMean": 0.00020068076517796484,
+     "nullSd": 0.000691456060706425,
+     "z": 3.3523612021012195,
+     "n": 10
+    },
+    "status": "AMBIGUOUS",
+    "vMean": -0.002977809147642994
+   },
+   "rareSlope": {
+    "discover": {
+     "v": 0.06925029817377706,
+     "nullMean": -0.0020568967850655203,
+     "nullSd": 0.005565251332349348,
+     "z": 12.812933450885234,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.06946836209699118,
+     "nullMean": 0.0012497213979833202,
+     "nullSd": 0.004174283055921673,
+     "z": 16.34260058196876,
+     "n": 10
+    },
+    "status": "PRESENT+",
+    "vMean": 0.06935933013538412
+   },
+   "entCurv": {
+    "discover": {
+     "v": 0.0021825683981435617,
+     "nullMean": 0.00026404748984600355,
+     "nullSd": 0.0011210412586876506,
+     "z": 1.7113740403662563,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.0030142413422568353,
+     "nullMean": -0.00002655477064903206,
+     "nullSd": 0.0005571149784341058,
+     "z": 5.45811229389792,
+     "n": 10
+    },
+    "status": "AMBIGUOUS",
+    "vMean": 0.0025984048702001987
+   },
+   "entSlopePlain": {
+    "discover": {
+     "v": -0.008474893590988476,
+     "nullMean": -0.0005340667936045095,
+     "nullSd": 0.0012862340866075018,
+     "z": -6.173702656511181,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.0025188313312673348,
+     "nullMean": 0.0002006919274893373,
+     "nullSd": 0.0006914945210334186,
+     "z": 3.352361202101218,
+     "n": 10
+    },
+    "status": "AMBIGUOUS"
+   },
+   "entSlopeMMre": {
+    "status": "AMBIGUOUS",
+    "sameAsCompute": true,
+    "selfcheck": [
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     },
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     }
+    ]
+   },
+   "status": "AMBIGUOUS",
+   "outcome": "UNINFORMATIVE",
+   "vInRange": false,
+   "unitLengthBaseline": {
+    "medianV": 0.002478266776038825,
+    "sign": "+",
+    "neighbours": 25,
+    "maxDist": 0.07820534420231207
+   }
+  },
+  {
+   "id": "ent-en-awakening",
+   "kind": "prose",
+   "role": "strong",
+   "scored": true,
+   "expect": "PRESENT+",
+   "probExpectHolds": 0.6,
+   "tokens": 64499,
+   "meanUnitLength": 14.500674460431656,
+   "halfTokens": {
+    "discover": 24650,
+    "confirm": 39849
+   },
+   "errors": [],
+   "contentMatchesPrereg": true,
+   "entSlope": {
+    "discover": {
+     "v": 0.01256462207679131,
+     "nullMean": -0.00017180882604173254,
+     "nullSd": 0.000646507904088325,
+     "z": 19.700348321020698,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.007783325917130453,
+     "nullMean": -0.0000379587963110229,
+     "nullSd": 0.0005196846463796623,
+     "z": 15.050059238670551,
+     "n": 10
+    },
+    "status": "PRESENT+",
+    "vMean": 0.010173973996960881
+   },
+   "rareSlope": {
+    "discover": {
+     "v": 0.08795400554553875,
+     "nullMean": -0.0005541929820516165,
+     "nullSd": 0.005447804831635703,
+     "z": 16.246580276447936,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.10212942089682826,
+     "nullMean": -0.0002561163325869392,
+     "nullSd": 0.005581183348166534,
+     "z": 18.344772218072666,
+     "n": 10
+    },
+    "status": "PRESENT+",
+    "vMean": 0.09504171322118352
+   },
+   "entCurv": {
+    "discover": {
+     "v": 0.007989993895233178,
+     "nullMean": -0.000600564594488205,
+     "nullSd": 0.001093446931320288,
+     "z": 7.856401845994181,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.0050273811573626065,
+     "nullMean": 0.0004440744393809035,
+     "nullSd": 0.0006269891135644115,
+     "z": 7.310025993793996,
+     "n": 10
+    },
+    "status": "PRESENT+",
+    "vMean": 0.006508687526297892
+   },
+   "entSlopePlain": {
+    "discover": {
+     "v": 0.012565767459943478,
+     "nullMean": -0.00017182448802770711,
+     "nullSd": 0.0006465668393477032,
+     "z": 19.700348321020698,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.007783765201272567,
+     "nullMean": -0.00003796093867245692,
+     "nullSd": 0.0005197139769289013,
+     "z": 15.050059238670551,
+     "n": 10
+    },
+    "status": "PRESENT+"
+   },
+   "entSlopeMMre": {
+    "status": "PRESENT+",
+    "sameAsCompute": true,
+    "selfcheck": [
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     },
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     }
+    ]
+   },
+   "status": "PRESENT+",
+   "outcome": "CONFIRMED",
+   "vInRange": true,
+   "unitLengthBaseline": {
+    "medianV": 0.00048671287998010445,
+    "sign": "+",
+    "neighbours": 25,
+    "maxDist": 0.058473089650995735
+   }
+  },
+  {
+   "id": "ent-en-siddhartha",
+   "kind": "prose",
+   "role": "weak",
+   "scored": true,
+   "expect": "PRESENT+",
+   "probExpectHolds": 0.3,
+   "tokens": 39275,
+   "meanUnitLength": 20.980235042735043,
+   "halfTokens": {
+    "discover": 26400,
+    "confirm": 12875
+   },
+   "errors": [],
+   "contentMatchesPrereg": true,
+   "entSlope": {
+    "discover": {
+     "v": 0.01899137873131613,
+     "nullMean": 0.0007386124025616657,
+     "nullSd": 0.0019939364530309166,
+     "z": 9.154136432487125,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.0068991036949630595,
+     "nullMean": -0.00016004337769662656,
+     "nullSd": 0.001281713035158951,
+     "z": 5.507587797750883,
+     "n": 10
+    },
+    "status": "PRESENT+",
+    "vMean": 0.012945241213139594
+   },
+   "rareSlope": {
+    "discover": {
+     "v": 0.06302372577767296,
+     "nullMean": -0.00012329952101674345,
+     "nullSd": 0.0058716903523386285,
+     "z": 10.754488317582847,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.062411439458561285,
+     "nullMean": -0.001575723053027402,
+     "nullSd": 0.008964017823707936,
+     "z": 7.138223480809703,
+     "n": 10
+    },
+    "status": "PRESENT+",
+    "vMean": 0.06271758261811712
+   },
+   "entCurv": {
+    "discover": {
+     "v": 0.00391555210236894,
+     "nullMean": -0.00004350198511611534,
+     "nullSd": 0.0017206947984534564,
+     "z": 2.300846199479079,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.00560568415730602,
+     "nullMean": -0.0002220217317234885,
+     "nullSd": 0.0018779551836302852,
+     "z": 3.103218830687929,
+     "n": 10
+    },
+    "status": "AMBIGUOUS",
+    "vMean": 0.0047606181298374805
+   },
+   "entSlopePlain": {
+    "discover": {
+     "v": 0.01899300689269049,
+     "nullMean": 0.0007386757249881988,
+     "nullSd": 0.001994107396402732,
+     "z": 9.154136432487123,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.0069002336879810736,
+     "nullMean": -0.00016006959094219767,
+     "nullSd": 0.001281922964860672,
+     "z": 5.507587797750883,
+     "n": 10
+    },
+    "status": "PRESENT+"
+   },
+   "entSlopeMMre": {
+    "status": "PRESENT+",
+    "sameAsCompute": true,
+    "selfcheck": [
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     },
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     }
+    ]
+   },
+   "status": "PRESENT+",
+   "outcome": "CONFIRMED",
+   "vInRange": true,
+   "unitLengthBaseline": {
+    "medianV": 0.003641370829979406,
+    "sign": "+",
+    "neighbours": 25,
+    "maxDist": 0.047960262240810625
+   }
+  },
+  {
+   "id": "ent-en-dolls-house",
+   "kind": "drama",
+   "role": "weak",
+   "scored": true,
+   "expect": "PRESENT-",
+   "probExpectHolds": 0.35,
+   "tokens": 22597,
+   "meanUnitLength": 9.049659591509812,
+   "halfTokens": {
+    "discover": 10562,
+    "confirm": 12035
+   },
+   "errors": [],
+   "contentMatchesPrereg": true,
+   "entSlope": {
+    "discover": {
+     "v": 0.017611880945637662,
+     "nullMean": 0.0006016068264784135,
+     "nullSd": 0.0036737409093417104,
+     "z": 4.630232381359545,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.015756194567717062,
+     "nullMean": 0.0005112835270262841,
+     "nullSd": 0.00354943685152337,
+     "z": 4.295022472127619,
+     "n": 10
+    },
+    "status": "PRESENT+",
+    "vMean": 0.016684037756677362
+   },
+   "rareSlope": {
+    "discover": {
+     "v": 0.17223786694413842,
+     "nullMean": 0.0000614464648857913,
+     "nullSd": 0.009315949178532968,
+     "z": 18.481897784071656,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.17032264931924862,
+     "nullMean": -0.002744328251241732,
+     "nullSd": 0.009333923842006485,
+     "z": 18.54171734202694,
+     "n": 10
+    },
+    "status": "PRESENT+",
+    "vMean": 0.1712802581316935
+   },
+   "entCurv": {
+    "discover": {
+     "v": 0.013860632064131398,
+     "nullMean": -0.0000402760742990841,
+     "nullSd": 0.0036366940659172224,
+     "z": 3.8224024035204316,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.010721758927194935,
+     "nullMean": -0.0012384118040692095,
+     "nullSd": 0.0032496203520487135,
+     "z": 3.6804824673515752,
+     "n": 10
+    },
+    "status": "AMBIGUOUS",
+    "vMean": 0.012291195495663166
+   },
+   "entSlopePlain": {
+    "discover": {
+     "v": 0.017615526890801446,
+     "nullMean": 0.000601731368854453,
+     "nullSd": 0.0036745014333279184,
+     "z": 4.630232381359546,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.015759043856260056,
+     "nullMean": 0.0005113759855377298,
+     "nullSd": 0.0035500787177882016,
+     "z": 4.295022472127618,
+     "n": 10
+    },
+    "status": "PRESENT+"
+   },
+   "entSlopeMMre": {
+    "status": "PRESENT+",
+    "sameAsCompute": true,
+    "selfcheck": [
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     },
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     }
+    ]
+   },
+   "status": "PRESENT+",
+   "outcome": "REFUTED",
+   "vInRange": false,
+   "unitLengthBaseline": {
+    "medianV": -0.005174527026052266,
+    "sign": "-",
+    "neighbours": 25,
+    "maxDist": 0.11753927339045322
+   }
+  },
+  {
+   "id": "ent-en-early-plays",
+   "kind": "drama",
+   "role": "weak",
+   "scored": true,
+   "expect": "PRESENT-",
+   "probExpectHolds": 0.35,
+   "tokens": 31927,
+   "meanUnitLength": 17.276515151515152,
+   "halfTokens": {
+    "discover": 15738,
+    "confirm": 16189
+   },
+   "errors": [],
+   "contentMatchesPrereg": true,
+   "entSlope": {
+    "discover": {
+     "v": -0.007622838302391309,
+     "nullMean": -0.0013909382273859495,
+     "nullSd": 0.002711967344179496,
+     "z": -2.297925927603976,
+     "n": 10
+    },
+    "confirm": {
+     "v": -0.0004925038168844043,
+     "nullMean": -0.0006311379534892375,
+     "nullSd": 0.001417802941023428,
+     "z": 0.09778096277946875,
+     "n": 10
+    },
+    "status": "AMBIGUOUS",
+    "vMean": -0.004057671059637857
+   },
+   "rareSlope": {
+    "discover": {
+     "v": 0.05671388052145997,
+     "nullMean": -0.001173156150406435,
+     "nullSd": 0.006648198258492482,
+     "z": 8.707176654655395,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.05696693633512309,
+     "nullMean": 0.0030565232009179995,
+     "nullSd": 0.00658455346961772,
+     "z": 8.187406083488753,
+     "n": 10
+    },
+    "status": "PRESENT+",
+    "vMean": 0.05684040842829153
+   },
+   "entCurv": {
+    "discover": {
+     "v": 0.0017437790654138456,
+     "nullMean": -0.0004247631388501757,
+     "nullSd": 0.0017205456224881302,
+     "z": 1.2603805304087377,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.0023907135964503804,
+     "nullMean": -0.00036093833479607486,
+     "nullSd": 0.0016425956855002383,
+     "z": 1.67518516914189,
+     "n": 10
+    },
+    "status": "ABSENT",
+    "vMean": 0.002067246330932113
+   },
+   "entSlopePlain": {
+    "discover": {
+     "v": -0.007623946205495741,
+     "nullMean": -0.0013911403863087891,
+     "nullSd": 0.0027123615014370086,
+     "z": -2.2979259276039765,
+     "n": 10
+    },
+    "confirm": {
+     "v": -0.0004925730782017411,
+     "nullMean": -0.0006312267110675166,
+     "nullSd": 0.0014180023281064368,
+     "z": 0.09778096277946872,
+     "n": 10
+    },
+    "status": "AMBIGUOUS"
+   },
+   "entSlopeMMre": {
+    "status": "AMBIGUOUS",
+    "sameAsCompute": true,
+    "selfcheck": [
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     },
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     }
+    ]
+   },
+   "status": "AMBIGUOUS",
+   "outcome": "UNINFORMATIVE",
+   "vInRange": false,
+   "unitLengthBaseline": {
+    "medianV": 0.0026792996559365295,
+    "sign": "+",
+    "neighbours": 25,
+    "maxDist": 0.03134105147883526
+   }
+  },
+  {
+   "id": "ent-ud-lat-perseus",
+   "kind": "treebank",
+   "role": "weak",
+   "scored": true,
+   "expect": "PRESENT-",
+   "probExpectHolds": 0.35,
+   "tokens": 21484,
+   "meanUnitLength": 10.812279818822345,
+   "halfTokens": {
+    "discover": 10850,
+    "confirm": 10634
+   },
+   "errors": [],
+   "contentMatchesPrereg": true,
+   "entSlope": {
+    "discover": {
+     "v": -0.15218876158895145,
+     "nullMean": -0.002772829834338556,
+     "nullSd": 0.009489815494883699,
+     "z": -15.744872156383694,
+     "n": 10
+    },
+    "confirm": {
+     "v": -0.15877862325488926,
+     "nullMean": -0.0038561813227422762,
+     "nullSd": 0.014888175400676914,
+     "z": -10.405737289010123,
+     "n": 10
+    },
+    "status": "PRESENT-",
+    "vMean": -0.15548369242192034
+   },
+   "rareSlope": {
+    "discover": {
+     "v": 0.1665502554592259,
+     "nullMean": 0.0011569763420276556,
+     "nullSd": 0.007673126521709502,
+     "z": 21.55487448946041,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.16307660065754037,
+     "nullMean": 0.003728003800335844,
+     "nullSd": 0.014387793107583324,
+     "z": 11.075263291992796,
+     "n": 10
+    },
+    "status": "PRESENT+",
+    "vMean": 0.16481342805838312
+   },
+   "entCurv": {
+    "discover": {
+     "v": 0.03256730550838239,
+     "nullMean": 0.001863348742524745,
+     "nullSd": 0.007590439466926833,
+     "z": 4.045082883493287,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.028534939855285414,
+     "nullMean": 0.0030182842492503087,
+     "nullSd": 0.010635081265571847,
+     "z": 2.3992910791042346,
+     "n": 10
+    },
+    "status": "AMBIGUOUS",
+    "vMean": 0.030551122681833902
+   },
+   "entSlopePlain": {
+    "discover": {
+     "v": -0.152223673294562,
+     "nullMean": -0.0027734659142821323,
+     "nullSd": 0.009491992433846843,
+     "z": -15.744872156383694,
+     "n": 10
+    },
+    "confirm": {
+     "v": -0.15881695960325262,
+     "nullMean": -0.003857112379502377,
+     "nullSd": 0.014891770080281476,
+     "z": -10.405737289010125,
+     "n": 10
+    },
+    "status": "PRESENT-"
+   },
+   "entSlopeMMre": {
+    "status": "PRESENT-",
+    "sameAsCompute": true,
+    "selfcheck": [
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     },
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     }
+    ]
+   },
+   "status": "PRESENT-",
+   "outcome": "CONFIRMED",
+   "vInRange": false,
+   "unitLengthBaseline": {
+    "medianV": -0.004005873813846873,
+    "sign": "-",
+    "neighbours": 25,
+    "maxDist": 0.07688502882347192
+   }
+  },
+  {
+   "id": "ent-cd-js",
+   "kind": "code",
+   "role": "strong",
+   "scored": true,
+   "expect": "PRESENT-",
+   "probExpectHolds": 0.9,
+   "tokens": 249034,
+   "meanUnitLength": 8.29670842217484,
+   "halfTokens": {
+    "discover": 118291,
+    "confirm": 130743
+   },
+   "errors": [],
+   "contentMatchesPrereg": true,
+   "entSlope": {
+    "discover": {
+     "v": -0.03332041784217457,
+     "nullMean": -0.00016608776032856311,
+     "nullSd": 0.0015409946645707291,
+     "z": -21.51488959962215,
+     "n": 10
+    },
+    "confirm": {
+     "v": -0.024575002590674164,
+     "nullMean": -0.0006041266818532216,
+     "nullSd": 0.0006409815722224452,
+     "z": -37.39713737121623,
+     "n": 10
+    },
+    "status": "PRESENT-",
+    "vMean": -0.028947710216424366
+   },
+   "rareSlope": {
+    "discover": {
+     "v": 0.14920605723688218,
+     "nullMean": -0.0004748637211958435,
+     "nullSd": 0.003499908643293578,
+     "z": 42.76709371968671,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.13058879019708225,
+     "nullMean": 0.002617384903828352,
+     "nullSd": 0.0025977817712378418,
+     "z": 49.26179970547549,
+     "n": 10
+    },
+    "status": "PRESENT+",
+    "vMean": 0.13989742371698222
+   },
+   "entCurv": {
+    "discover": {
+     "v": -0.009597587551636883,
+     "nullMean": -0.00011916740937453817,
+     "nullSd": 0.0009130747374055672,
+     "z": -10.380771424247877,
+     "n": 10
+    },
+    "confirm": {
+     "v": -0.008151649898502708,
+     "nullMean": 0.0001768465074303719,
+     "nullSd": 0.0008494016771443833,
+     "z": -9.805132989533034,
+     "n": 10
+    },
+    "status": "PRESENT-",
+    "vMean": -0.008874618725069797
+   },
+   "entSlopePlain": {
+    "discover": {
+     "v": -0.033321119018808805,
+     "nullMean": -0.00016609125538847886,
+     "nullSd": 0.0015410270924189453,
+     "z": -21.514889599622148,
+     "n": 10
+    },
+    "confirm": {
+     "v": -0.024575466667520685,
+     "nullMean": -0.0006041380902428801,
+     "nullSd": 0.0006409936765835991,
+     "z": -37.39713737121623,
+     "n": 10
+    },
+    "status": "PRESENT-"
+   },
+   "entSlopeMMre": {
+    "status": "PRESENT-",
+    "sameAsCompute": true,
+    "selfcheck": [
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     },
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     }
+    ]
+   },
+   "status": "PRESENT-",
+   "outcome": "CONFIRMED",
+   "vInRange": true,
+   "unitLengthBaseline": {
+    "medianV": -0.0066511520067955,
+    "sign": "-",
+    "neighbours": 25,
+    "maxDist": 0.1186447702622353
+   }
+  },
+  {
+   "id": "ent-cd-ts",
+   "kind": "code",
+   "role": "strong",
+   "scored": true,
+   "expect": "PRESENT-",
+   "probExpectHolds": 0.85,
+   "tokens": 68340,
+   "meanUnitLength": 4.09614001438504,
+   "halfTokens": {
+    "discover": 23375,
+    "confirm": 44965
+   },
+   "errors": [],
+   "contentMatchesPrereg": true,
+   "entSlope": {
+    "discover": {
+     "v": -0.07444430381954205,
+     "nullMean": 0.0014032230080460336,
+     "nullSd": 0.0019241024102713783,
+     "z": -39.41969326720527,
+     "n": 10
+    },
+    "confirm": {
+     "v": -0.05261258480366292,
+     "nullMean": 0.00010872373209706612,
+     "nullSd": 0.002813084341463172,
+     "z": -18.74146031054938,
+     "n": 10
+    },
+    "status": "PRESENT-",
+    "vMean": -0.06352844431160248
+   },
+   "rareSlope": {
+    "discover": {
+     "v": 0.2632976759401947,
+     "nullMean": -0.0030155296673343413,
+     "nullSd": 0.007823939428246269,
+     "z": 34.038249918714286,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.21448635823269036,
+     "nullMean": -0.0011150397241098966,
+     "nullSd": 0.005597313533205257,
+     "z": 38.51872807870704,
+     "n": 10
+    },
+    "status": "PRESENT+",
+    "vMean": 0.23889201708644253
+   },
+   "entCurv": {
+    "discover": {
+     "v": -0.014075358011676937,
+     "nullMean": -0.0001670370171606717,
+     "nullSd": 0.0021970975249729382,
+     "z": -6.330315717181272,
+     "n": 10
+    },
+    "confirm": {
+     "v": -0.021205317948149015,
+     "nullMean": 0.0005028165304997498,
+     "nullSd": 0.001446089498775914,
+     "z": -15.011612003976428,
+     "n": 10
+    },
+    "status": "PRESENT-",
+    "vMean": -0.017640337979912976
+   },
+   "entSlopePlain": {
+    "discover": {
+     "v": -0.07445305543534424,
+     "nullMean": 0.0014033879698768402,
+     "nullSd": 0.0019243286062890017,
+     "z": -39.419693267205275,
+     "n": 10
+    },
+    "confirm": {
+     "v": -0.05261594685084606,
+     "nullMean": 0.00010873067975642565,
+     "nullSd": 0.002813264103060544,
+     "z": -18.74146031054938,
+     "n": 10
+    },
+    "status": "PRESENT-"
+   },
+   "entSlopeMMre": {
+    "status": "PRESENT-",
+    "sameAsCompute": true,
+    "selfcheck": [
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     },
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     }
+    ]
+   },
+   "status": "PRESENT-",
+   "outcome": "CONFIRMED",
+   "vInRange": true,
+   "unitLengthBaseline": {
+    "medianV": -0.020649791891914772,
+    "sign": "-",
+    "neighbours": 25,
+    "maxDist": 0.10232298265315287
+   }
+  },
+  {
+   "id": "ent-cd-py",
+   "kind": "code",
+   "role": "strong",
+   "scored": true,
+   "expect": "PRESENT-",
+   "probExpectHolds": 0.8,
+   "tokens": 118706,
+   "meanUnitLength": 5.978645177537144,
+   "halfTokens": {
+    "discover": 38937,
+    "confirm": 79769
+   },
+   "errors": [],
+   "contentMatchesPrereg": true,
+   "entSlope": {
+    "discover": {
+     "v": -0.023643170025501408,
+     "nullMean": -0.00023724608202743176,
+     "nullSd": 0.0013250493455279086,
+     "z": -17.66419041107401,
+     "n": 10
+    },
+    "confirm": {
+     "v": -0.038634010465778086,
+     "nullMean": -0.00021411566126917472,
+     "nullSd": 0.001951023927758075,
+     "z": -19.69216997182463,
+     "n": 10
+    },
+    "status": "PRESENT-",
+    "vMean": -0.031138590245639745
+   },
+   "rareSlope": {
+    "discover": {
+     "v": 0.0671103338036058,
+     "nullMean": 0.00033074830504119376,
+     "nullSd": 0.005607009354292366,
+     "z": 11.910018564075063,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.10034897617321831,
+     "nullMean": -0.0009313035551259006,
+     "nullSd": 0.004077704888268953,
+     "z": 24.837569785816257,
+     "n": 10
+    },
+    "status": "PRESENT+",
+    "vMean": 0.08372965498841206
+   },
+   "entCurv": {
+    "discover": {
+     "v": 0.0021320929733410995,
+     "nullMean": -0.0005737948331924537,
+     "nullSd": 0.001155263227971643,
+     "z": 2.3422262052644265,
+     "n": 10
+    },
+    "confirm": {
+     "v": -0.0036938972525442323,
+     "nullMean": 0.00019952389755601064,
+     "nullSd": 0.0009976637870407114,
+     "z": -3.9025383106757636,
+     "n": 10
+    },
+    "status": "AMBIGUOUS",
+    "vMean": -0.0007809021396015664
+   },
+   "entSlopePlain": {
+    "discover": {
+     "v": -0.023644641558492524,
+     "nullMean": -0.0002372608480438475,
+     "nullSd": 0.0013251318155953614,
+     "z": -17.66419041107401,
+     "n": 10
+    },
+    "confirm": {
+     "v": -0.038635279640066,
+     "nullMean": -0.0002141226952293733,
+     "nullSd": 0.0019510880212698374,
+     "z": -19.692169971824633,
+     "n": 10
+    },
+    "status": "PRESENT-"
+   },
+   "entSlopeMMre": {
+    "status": "PRESENT-",
+    "sameAsCompute": true,
+    "selfcheck": [
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     },
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     }
+    ]
+   },
+   "status": "PRESENT-",
+   "outcome": "CONFIRMED",
+   "vInRange": true,
+   "unitLengthBaseline": {
+    "medianV": -0.014529669024558042,
+    "sign": "-",
+    "neighbours": 25,
+    "maxDist": 0.1015845493616474
+   }
+  },
+  {
+   "id": "ent-ctl-mouret",
+   "kind": "control",
+   "role": "control",
+   "scored": true,
+   "expect": "ABSENT",
+   "probExpectHolds": 0.85,
+   "tokens": 126434,
+   "meanUnitLength": 15.855781289189867,
+   "halfTokens": {
+    "discover": 50979,
+    "confirm": 75455
+   },
+   "errors": [],
+   "contentMatchesPrereg": true,
+   "entSlope": {
+    "discover": {
+     "v": 0.00004877900339197314,
+     "nullMean": 0.0000448370365703639,
+     "nullSd": 0.0006640849614824383,
+     "z": 0.0059359374933134704,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.0005886008673503508,
+     "nullMean": 0.00015435053932629143,
+     "nullSd": 0.0006817163728783165,
+     "z": 0.636995597143405,
+     "n": 10
+    },
+    "status": "ABSENT",
+    "vMean": 0.00031868993537116197
+   },
+   "rareSlope": {
+    "discover": {
+     "v": -0.00030804526042549655,
+     "nullMean": -0.0009251861079037086,
+     "nullSd": 0.003817656937744558,
+     "z": 0.16165434913143717,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.00424599167485856,
+     "nullMean": -0.000374980862912768,
+     "nullSd": 0.0035869508049274634,
+     "z": 1.2882731849635096,
+     "n": 10
+    },
+    "status": "ABSENT",
+    "vMean": 0.001968973207216532
+   },
+   "entCurv": {
+    "discover": {
+     "v": -0.0007787621782276137,
+     "nullMean": -0.00007594763057858977,
+     "nullSd": 0.0005033095373991322,
+     "z": -1.3963863098657736,
+     "n": 10
+    },
+    "confirm": {
+     "v": -0.00004451204288396007,
+     "nullMean": -0.00011656762107757129,
+     "nullSd": 0.0003931109688021818,
+     "z": 0.18329577119958324,
+     "n": 10
+    },
+    "status": "ABSENT",
+    "vMean": -0.00041163711055578687
+   },
+   "entSlopePlain": {
+    "discover": {
+     "v": 0.00004878127183878432,
+     "nullMean": 0.00004483912169768422,
+     "nullSd": 0.0006641158444711931,
+     "z": 0.005935937493313478,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.0005886193587221619,
+     "nullMean": 0.0001543553883731927,
+     "nullSd": 0.0006817377895489669,
+     "z": 0.6369955971434051,
+     "n": 10
+    },
+    "status": "ABSENT"
+   },
+   "entSlopeMMre": {
+    "status": "ABSENT",
+    "sameAsCompute": true,
+    "selfcheck": [
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     },
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     }
+    ]
+   },
+   "status": "ABSENT",
+   "outcome": "CONFIRMED",
+   "vInRange": true,
+   "unitLengthBaseline": {
+    "medianV": 0.00048671287998010445,
+    "sign": "+",
+    "neighbours": 25,
+    "maxDist": 0.04307886958597029
+   }
+  },
+  {
+   "id": "ent-ctl-awakening",
+   "kind": "control",
+   "role": "control",
+   "scored": true,
+   "expect": "ABSENT",
+   "probExpectHolds": 0.85,
+   "tokens": 64499,
+   "meanUnitLength": 14.500674460431656,
+   "halfTokens": {
+    "discover": 28632,
+    "confirm": 35867
+   },
+   "errors": [],
+   "contentMatchesPrereg": true,
+   "entSlope": {
+    "discover": {
+     "v": 0.0006254649638191988,
+     "nullMean": 0.0002496914123416647,
+     "nullSd": 0.001363146587441464,
+     "z": 0.27566628192411513,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.0006139128863299019,
+     "nullMean": 0.00024451622563204675,
+     "nullSd": 0.0011436687732368645,
+     "z": 0.32299269626149846,
+     "n": 10
+    },
+    "status": "ABSENT",
+    "vMean": 0.0006196889250745503
+   },
+   "rareSlope": {
+    "discover": {
+     "v": -0.0007679946585558377,
+     "nullMean": 0.0004204116517275053,
+     "nullSd": 0.005344997790118146,
+     "z": -0.22233990675926443,
+     "n": 10
+    },
+    "confirm": {
+     "v": -0.006950504477871876,
+     "nullMean": -0.0008374807964574039,
+     "nullSd": 0.005217675845062168,
+     "z": -1.171598976812565,
+     "n": 10
+    },
+    "status": "ABSENT",
+    "vMean": -0.003859249568213857
+   },
+   "entCurv": {
+    "discover": {
+     "v": 0.0006638088029135061,
+     "nullMean": 0.00011003868967602815,
+     "nullSd": 0.0008403167220208858,
+     "z": 0.659001658214906,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.0009716631433642082,
+     "nullMean": 0.000037866691226890856,
+     "nullSd": 0.0009796688114560024,
+     "z": 0.9531756459098574,
+     "n": 10
+    },
+    "status": "ABSENT",
+    "vMean": 0.0008177359731388571
+   },
+   "entSlopePlain": {
+    "discover": {
+     "v": 0.0006255139645931002,
+     "nullMean": 0.00024971097390490013,
+     "nullSd": 0.0013632533803740656,
+     "z": 0.27566628192411513,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.0006139513730354255,
+     "nullMean": 0.0002445315545560378,
+     "nullSd": 0.0011437404707761608,
+     "z": 0.32299269626149846,
+     "n": 10
+    },
+    "status": "ABSENT"
+   },
+   "entSlopeMMre": {
+    "status": "ABSENT",
+    "sameAsCompute": true,
+    "selfcheck": [
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     },
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     }
+    ]
+   },
+   "status": "ABSENT",
+   "outcome": "CONFIRMED",
+   "vInRange": true,
+   "unitLengthBaseline": {
+    "medianV": 0.00048671287998010445,
+    "sign": "+",
+    "neighbours": 25,
+    "maxDist": 0.058473089650995735
+   }
+  },
+  {
+   "id": "ent-ctl-cd-ts",
+   "kind": "control",
+   "role": "control",
+   "scored": true,
+   "expect": "ABSENT",
+   "probExpectHolds": 0.85,
+   "tokens": 68340,
+   "meanUnitLength": 4.09614001438504,
+   "halfTokens": {
+    "discover": 46384,
+    "confirm": 21956
+   },
+   "errors": [],
+   "contentMatchesPrereg": true,
+   "entSlope": {
+    "discover": {
+     "v": -0.0018114914185271111,
+     "nullMean": 0.0004689914497590191,
+     "nullSd": 0.0026427466045596216,
+     "z": -0.8629215015739817,
+     "n": 10
+    },
+    "confirm": {
+     "v": -0.0026656117543760426,
+     "nullMean": 0.00021165270524052377,
+     "nullSd": 0.0028975986646628364,
+     "z": -0.9929823942514012,
+     "n": 10
+    },
+    "status": "ABSENT",
+    "vMean": -0.0022385515864515766
+   },
+   "rareSlope": {
+    "discover": {
+     "v": 0.0038574732114844343,
+     "nullMean": 0.0002909478935286711,
+     "nullSd": 0.005186893485049953,
+     "z": 0.6876033464414617,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.005224718309428591,
+     "nullMean": 0.0009946157862602768,
+     "nullSd": 0.009390019577523659,
+     "z": 0.45048921232216205,
+     "n": 10
+    },
+    "status": "ABSENT",
+    "vMean": 0.004541095760456512
+   },
+   "entCurv": {
+    "discover": {
+     "v": 0.0008607194237683465,
+     "nullMean": -0.0007751096746667288,
+     "nullSd": 0.001408179002111255,
+     "z": 1.1616627545095537,
+     "n": 10
+    },
+    "confirm": {
+     "v": -0.00042821048483036156,
+     "nullMean": 0.00045893330123851137,
+     "nullSd": 0.0032482465492740926,
+     "z": -0.27311467051881544,
+     "n": 10
+    },
+    "status": "ABSENT",
+    "vMean": 0.00021625446946899247
+   },
+   "entSlopePlain": {
+    "discover": {
+     "v": -0.0018116033859124788,
+     "nullMean": 0.0004690204378877248,
+     "nullSd": 0.002642909951415409,
+     "z": -0.8629215015739817,
+     "n": 10
+    },
+    "confirm": {
+     "v": -0.00266594576127638,
+     "nullMean": 0.00021167922578084995,
+     "nullSd": 0.0028979617400232364,
+     "z": -0.9929823942514012,
+     "n": 10
+    },
+    "status": "ABSENT"
+   },
+   "entSlopeMMre": {
+    "status": "ABSENT",
+    "sameAsCompute": true,
+    "selfcheck": [
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     },
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     }
+    ]
+   },
+   "status": "ABSENT",
+   "outcome": "CONFIRMED",
+   "vInRange": true,
+   "unitLengthBaseline": {
+    "medianV": -0.020649791891914772,
+    "sign": "-",
+    "neighbours": 25,
+    "maxDist": 0.10232298265315287
+   }
+  },
+  {
+   "id": "ent-ud-san-vedic",
+   "kind": "treebank",
+   "role": "thin",
+   "scored": false,
+   "expect": "none",
+   "probExpectHolds": null,
+   "tokens": 16802,
+   "meanUnitLength": 7.4279398762157385,
+   "halfTokens": {
+    "discover": 10050,
+    "confirm": 6752
+   },
+   "errors": [],
+   "contentMatchesPrereg": true,
+   "entSlope": {
+    "discover": {
+     "v": -0.05397320013577617,
+     "nullMean": 0.0039268486775447965,
+     "nullSd": 0.010077943907894125,
+     "z": -5.745224357516759,
+     "n": 10
+    },
+    "confirm": {
+     "v": -0.012670148135153693,
+     "nullMean": 0.002301872897385514,
+     "nullSd": 0.007867558450304674,
+     "z": -1.903007283277242,
+     "n": 10
+    },
+    "status": "AMBIGUOUS",
+    "vMean": -0.033321674135464927
+   },
+   "rareSlope": {
+    "discover": {
+     "v": 0.0795183963275565,
+     "nullMean": -0.0037103380464046736,
+     "nullSd": 0.015835449230848692,
+     "z": 5.255849275928662,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.016311212860861603,
+     "nullMean": -0.00372101881786982,
+     "nullSd": 0.006329086861801623,
+     "z": 3.1651061387122588,
+     "n": 10
+    },
+    "status": "AMBIGUOUS",
+    "vMean": 0.04791480459420905
+   },
+   "entCurv": {
+    "discover": {
+     "v": -0.0034975064777612508,
+     "nullMean": -0.0001772783166384978,
+     "nullSd": 0.007158465257999274,
+     "z": -0.4638184361393026,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.0031246875471701535,
+     "nullMean": -0.0002662413216382717,
+     "nullSd": 0.008402283125725244,
+     "z": 0.40357231696066376,
+     "n": 10
+    },
+    "status": "ABSENT",
+    "vMean": -0.00018640946529554863
+   },
+   "entSlopePlain": {
+    "discover": {
+     "v": -0.053985901471118515,
+     "nullMean": 0.003927772769904834,
+     "nullSd": 0.010080315517226416,
+     "z": -5.74522435751676,
+     "n": 10
+    },
+    "confirm": {
+     "v": -0.012674701069104536,
+     "nullMean": 0.002302700060190024,
+     "nullSd": 0.007870385605409452,
+     "z": -1.903007283277243,
+     "n": 10
+    },
+    "status": "AMBIGUOUS"
+   },
+   "entSlopeMMre": {
+    "status": "AMBIGUOUS",
+    "sameAsCompute": true,
+    "selfcheck": [
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     },
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     }
+    ]
+   },
+   "status": "AMBIGUOUS",
+   "outcome": "THIN-UNSCORED",
+   "vInRange": null,
+   "unitLengthBaseline": {
+    "medianV": -0.011455468893858456,
+    "sign": "-",
+    "neighbours": 25,
+    "maxDist": 0.13069187293080864
+   }
+  },
+  {
+   "id": "ent-ud-eng-pud",
+   "kind": "treebank",
+   "role": "thin",
+   "scored": false,
+   "expect": "none",
+   "probExpectHolds": null,
+   "tokens": 18385,
+   "meanUnitLength": 18.385,
+   "halfTokens": {
+    "discover": 9670,
+    "confirm": 8715
+   },
+   "errors": [],
+   "contentMatchesPrereg": true,
+   "entSlope": {
+    "discover": {
+     "v": -0.02661073533605819,
+     "nullMean": -0.001548923575602753,
+     "nullSd": 0.005063617056109362,
+     "z": -4.949389237524948,
+     "n": 10
+    },
+    "confirm": {
+     "v": -0.034581361053116405,
+     "nullMean": 0.00046740251240720234,
+     "nullSd": 0.004734268550320862,
+     "z": -7.403205625745123,
+     "n": 10
+    },
+    "status": "PRESENT-",
+    "vMean": -0.0305960481945873
+   },
+   "rareSlope": {
+    "discover": {
+     "v": 0.0768465733945393,
+     "nullMean": 0.002349271583347642,
+     "nullSd": 0.011163598934561004,
+     "z": 6.673233448091548,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.07316464768033427,
+     "nullMean": -0.002316029736781117,
+     "nullSd": 0.010578836568014808,
+     "z": 7.135064137896959,
+     "n": 10
+    },
+    "status": "PRESENT+",
+    "vMean": 0.07500561053743679
+   },
+   "entCurv": {
+    "discover": {
+     "v": 0.0006116352464675395,
+     "nullMean": -0.0005656828349263584,
+     "nullSd": 0.005719767075909406,
+     "z": 0.20583322113806737,
+     "n": 10
+    },
+    "confirm": {
+     "v": 0.01441440333222456,
+     "nullMean": -0.0006038875587479522,
+     "nullSd": 0.00275618067429173,
+     "z": 5.44895007466513,
+     "n": 10
+    },
+    "status": "AMBIGUOUS",
+    "vMean": 0.00751301928934605
+   },
+   "entSlopePlain": {
+    "discover": {
+     "v": -0.026616738899323113,
+     "nullMean": -0.0015492730233185419,
+     "nullSd": 0.005064759442629755,
+     "z": -4.949389237524949,
+     "n": 10
+    },
+    "confirm": {
+     "v": -0.034590034070798865,
+     "nullMean": 0.00046751973712397135,
+     "nullSd": 0.004735455906561334,
+     "z": -7.403205625745122,
+     "n": 10
+    },
+    "status": "PRESENT-"
+   },
+   "entSlopeMMre": {
+    "status": "PRESENT-",
+    "sameAsCompute": true,
+    "selfcheck": [
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     },
+     {
+      "mmReImplDiffObs": 0,
+      "mmReImplDiffNull": 0
+     }
+    ]
+   },
+   "status": "PRESENT-",
+   "outcome": "THIN-UNSCORED",
+   "vInRange": null,
+   "unitLengthBaseline": {
+    "medianV": -0.001295993841332728,
+    "sign": "-",
+    "neighbours": 25,
+    "maxDist": 0.044065722738751756
+   }
+  }
+ ]
+}

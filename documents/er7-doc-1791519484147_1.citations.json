@@ -1,0 +1,250 @@
+{
+  "docId": "er7-doc-1791519484147:1",
+  "citations": [
+    {
+      "essaySentence": "This list will be a testament to the power of bureaucratic inertia.",
+      "source": null,
+      "kind": "unsupported",
+      "giver": "qwen2.5-coder:1.5b",
+      "priors": [
+        "eoreader7:shape-prior:essay-v1",
+        "pos:en-ud-ewt + born anchoring"
+      ],
+      "atoms": [],
+      "basis": "no source shares enough of the claim's words — this is the essay's own statement, cited to its giver (the model) rather than passed off as material"
+    },
+    {
+      "essaySentence": "Every member listed is there because they were elected and then reappointed, not because their positions are truly essential or even desirable.",
+      "source": {
+        "url": "Boulder_City_Council.txt",
+        "host": "Boulder_City_Council.txt"
+      },
+      "giver": "Boulder_City_Council.txt",
+      "priors": [
+        "eoreader7:shape-prior:essay-v1",
+        "pos:en-ud-ewt + born anchoring"
+      ],
+      "groundingText": "View City Council Hotline Archives Subscribe/Unsubscribe to Hotline Contact City Council Phone [REDACTED:phone] Fax Number [REDACTED:phone] Address 1777 Broadway Boulder , CO 80302 United States About Boulder City Council The City of Boulder has a council-manager form of government where the elected City Council sets policies and the council-appointed city manager administers them.",
+      "verbatimSpan": null,
+      "kind": "unsupported",
+      "at": null,
+      "atoms": [
+        {
+          "kind": "name",
+          "value": "Every",
+          "at": null,
+          "supported": false,
+          "company": []
+        }
+      ],
+      "retrievedAt": "2026-10-09T04:21:04.155Z"
+    },
+    {
+      "essaySentence": "It matters because it highlights how easily political offices become entrenched and resistant to change.",
+      "source": null,
+      "kind": "unsupported",
+      "giver": "qwen2.5-coder:1.5b",
+      "priors": [
+        "eoreader7:shape-prior:essay-v1",
+        "pos:en-ud-ewt + born anchoring"
+      ],
+      "atoms": [],
+      "basis": "no source shares enough of the claim's words — this is the essay's own statement, cited to its giver (the model) rather than passed off as material"
+    },
+    {
+      "essaySentence": "This document lists Boulder City Council members and their titles.",
+      "source": {
+        "url": "Boulder_City_Council.txt",
+        "host": "Boulder_City_Council.txt"
+      },
+      "giver": "Boulder_City_Council.txt",
+      "priors": [
+        "eoreader7:shape-prior:essay-v1",
+        "pos:en-ud-ewt + born anchoring"
+      ],
+      "groundingText": "The City Clerk's Office provides administrative support for City Council, among other duties, and is responsible for managing council-related webpages and documents.",
+      "verbatimSpan": "The City Clerk's Office provides administrative support for City Council, among other duties, and is responsible for managing council-related webpages and documents.",
+      "kind": "verbatim",
+      "at": [
+        2195,
+        2360
+      ],
+      "atoms": [
+        {
+          "kind": "name",
+          "value": "Boulder",
+          "at": [
+            23,
+            30
+          ],
+          "supported": true,
+          "company": [
+            "city",
+            "council"
+          ]
+        },
+        {
+          "kind": "name",
+          "value": "City",
+          "at": [
+            0,
+            4
+          ],
+          "supported": true,
+          "company": [
+            "boulder",
+            "council"
+          ]
+        },
+        {
+          "kind": "name",
+          "value": "Council",
+          "at": [
+            5,
+            12
+          ],
+          "supported": true,
+          "company": [
+            "boulder",
+            "city"
+          ]
+        }
+      ],
+      "retrievedAt": "2026-10-09T04:21:04.155Z"
+    },
+    {
+      "essaySentence": "The provided text lists links and contact information for the City of Boulder government.",
+      "source": {
+        "url": "Boulder_City_Council.txt",
+        "host": "Boulder_City_Council.txt"
+      },
+      "giver": "Boulder_City_Council.txt",
+      "priors": [
+        "eoreader7:shape-prior:essay-v1",
+        "pos:en-ud-ewt + born anchoring"
+      ],
+      "groundingText": "City Council | City of Boulder Skip to main content Calendar Employment Contact Us Search Locations Services Projects Government News Toggle Menu City of Boulder Locations Services Projects Government News Calendar Employment Contact Us Search Breadcrumb Home Government City Council Upcoming City Council Meetings City Council Meeting Penfield Tate II Municipal Building Thu Oct 15 2026 City Council Study Session Virtual Thu Oct 22 2026 City Council Special Meeting Virtual Thu Nov 12 2026 City Council Meeting Penfield Tate II Municipal Building Thu Nov 19 2026 City Council Meeting Penfield Tate II Municipal Building Thu Dec 3 2026 City Council Study Session Virtual Thu Dec 10 2026 See All Events in Series View Agendas and Materials, Participate in City Council Meetings View agendas, minutes and information on how to participate in City Council meetings.",
+      "verbatimSpan": null,
+      "kind": "company",
+      "at": null,
+      "atoms": [
+        {
+          "kind": "name",
+          "value": "City",
+          "at": [
+            0,
+            4
+          ],
+          "supported": true,
+          "company": [
+            "boulder"
+          ]
+        },
+        {
+          "kind": "name",
+          "value": "Boulder",
+          "at": [
+            23,
+            30
+          ],
+          "supported": true,
+          "company": [
+            "contact",
+            "city"
+          ]
+        }
+      ],
+      "retrievedAt": "2026-10-09T04:21:04.156Z"
+    },
+    {
+      "essaySentence": "Boulder City Council members are listed on the official website of the city government: [link to website] [Contact information for Boulder City Council]",
+      "source": {
+        "url": "Boulder_City_Council.txt",
+        "host": "Boulder_City_Council.txt"
+      },
+      "giver": "Boulder_City_Council.txt",
+      "priors": [
+        "eoreader7:shape-prior:essay-v1",
+        "pos:en-ud-ewt + born anchoring"
+      ],
+      "groundingText": "Regular City Council meetings are held in Council Chambers located in the Penfield Tate II Municipal Building, 1777 Broadway St.",
+      "verbatimSpan": "Regular City Council meetings are held in Council Chambers located in the Penfield Tate II Municipal Building, 1777 Broadway St.",
+      "kind": "verbatim",
+      "at": [
+        2066,
+        2194
+      ],
+      "atoms": [
+        {
+          "kind": "name",
+          "value": "Boulder",
+          "at": [
+            23,
+            30
+          ],
+          "supported": true,
+          "company": [
+            "city",
+            "council",
+            "city",
+            "contact",
+            "city"
+          ]
+        },
+        {
+          "kind": "name",
+          "value": "City",
+          "at": [
+            0,
+            4
+          ],
+          "supported": true,
+          "company": [
+            "boulder",
+            "council",
+            "boulder",
+            "council"
+          ]
+        },
+        {
+          "kind": "name",
+          "value": "Council",
+          "at": [
+            5,
+            12
+          ],
+          "supported": true,
+          "company": [
+            "boulder",
+            "city",
+            "city",
+            "boulder",
+            "city"
+          ]
+        },
+        {
+          "kind": "name",
+          "value": "Contact",
+          "at": [
+            72,
+            79
+          ],
+          "supported": true,
+          "company": [
+            "boulder",
+            "city",
+            "city",
+            "government",
+            "boulder"
+          ]
+        }
+      ],
+      "retrievedAt": "2026-10-09T04:21:04.156Z"
+    }
+  ],
+  "of": 6,
+  "verbatim": 2,
+  "company": 1,
+  "unsupported": 3,
+  "basis": "mechanically attributed against 1 retained source(s): 2 verbatim, 1 company-supported (paraphrase, atoms byte-addressed), 3 unsupported (disclosed)"
+}

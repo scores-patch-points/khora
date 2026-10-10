@@ -1,0 +1,156 @@
+afr A: 30047 tok 1282 sent range 21,1303 dupRemoved 1 pairs {"LATER":154,"FIRST":164,"LATERs":154,"FIRSTs":164} 0.1s
+afr set B: no disjoint window
+afr C: 30153 tok 1284 sent range 1,153,156,310,316,479,479,634,640,794,798,913,915,1014,1015,1110,1112,1219,1219,1309 dupRemoved 1 pairs {"LATER":159,"FIRST":192,"LATERs":159,"FIRSTs":192} 0.2s
+arb A: 30012 tok 1060 sent range 364,1424 dupRemoved 36 pairs {"LATER":41,"FIRST":11,"LATERs":43,"FIRSTs":11} 0.5s
+arb B: 30050 tok 619 sent range 2031,2650 dupRemoved 36 pairs {"LATER":8,"FIRST":8,"LATERs":8,"FIRSTs":8} 0.5s
+arb C: 30246 tok 930 sent range 529,628,1091,1243,1717,1785,2282,2336,2511,2581,3238,3360,3713,3782,4225,4310,5208,5321,5705,5803 dupRemoved 36 pairs {"LATER":7,"FIRST":7,"LATERs":7,"FIRSTs":7} 0.6s
+bul A: 30020 tok 2398 sent range 5031,7429 dupRemoved 7 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.3s
+bul B: 30006 tok 2471 sent range 1594,4065 dupRemoved 7 pairs {"LATER":417,"FIRST":548,"LATERs":426,"FIRSTs":554} 0.4s
+bul C: 30089 tok 2600 sent range 389,781,1812,2035,2538,2874,3380,3613,4106,4341,5295,5565,5775,6000,6646,6902,7395,7615,8644,8854 dupRemoved 7 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.4s
+cat A: 30021 tok 1194 sent range 5520,6714 dupRemoved 0 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.4s
+cat B: 30014 tok 1084 sent range 10669,11753 dupRemoved 0 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.5s
+cat C: 30235 tok 1039 sent range 1045,1139,1818,1884,2720,2880,3694,3786,5385,5492,6489,6619,9000,9089,9896,9998,11151,11235,12003,12118 dupRemoved 0 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.5s
+ces A: 30002 tok 1738 sent range 5622,7360 dupRemoved 6 pairs {"LATER":345,"FIRST":497,"LATERs":343,"FIRSTs":496} 0.5s
+ces B: 30027 tok 1864 sent range 8171,10035 dupRemoved 6 pairs {"LATER":500,"FIRST":600,"LATERs":505,"FIRSTs":600} 0.5s
+ces C: 30093 tok 1701 sent range 152,298,4906,5132,7187,7366,8181,8352,10837,11076,13314,13503,16544,16660,18313,18414,19066,19190,21403,21613 dupRemoved 6 pairs {"LATER":203,"FIRST":390,"LATERs":202,"FIRSTs":391} 0.6s
+cmn A: 30013 tok 1422 sent range 1912,3334 dupRemoved 0 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.2s
+cmn B: 30018 tok 1425 sent range 241,1666 dupRemoved 0 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.2s
+cmn C: 30130 tok 1423 sent range 175,329,435,579,924,1069,1439,1575,1803,1953,2099,2233,2504,2652,3007,3148,3439,3575,3625,3760 dupRemoved 0 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.3s
+cym A: 25926 tok 1352 sent range 0,1352 dupRemoved 3 pairs {"LATER":509,"FIRST":492,"LATERs":508,"FIRSTs":494} 0.1s
+cym set B: no disjoint window
+cym C: 25926 tok 1352 sent range 0,1352 dupRemoved 3 pairs {"LATER":509,"FIRST":492,"LATERs":508,"FIRSTs":494} 0.1s
+dan A: 30000 tok 1891 sent range 1770,3661 dupRemoved 4 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.1s
+dan set B: no disjoint window
+dan C: 30126 tok 1896 sent range 72,277,583,784,1121,1302,1392,1572,1983,2173,2466,2656,2723,2906,3164,3362,3563,3739,4076,4268 dupRemoved 4 pairs {"LATER":593,"FIRST":600,"LATERs":588,"FIRSTs":600} 0.2s
+deu A: 30000 tok 1733 sent range 8131,9864 dupRemoved 27 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.3s
+deu B: 30022 tok 2048 sent range 780,2828 dupRemoved 27 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.3s
+deu C: 30082 tok 1831 sent range 1290,1525,2865,3036,3552,3718,5558,5742,6981,7159,7452,7631,9380,9564,10072,10246,11249,11431,12570,12748 dupRemoved 27 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.4s
+ell A: 30005 tok 1285 sent range 195,1480 dupRemoved 14 pairs {"LATER":488,"FIRST":375,"LATERs":488,"FIRSTs":375} 0.1s
+ell set B: no disjoint window
+ell C: 30173 tok 1311 sent range 23,138,189,315,340,469,515,635,646,787,830,953,967,1096,1150,1279,1301,1447,1471,1624 dupRemoved 14 pairs {"LATER":526,"FIRST":413,"LATERs":526,"FIRSTs":413} 0.1s
+eng A: 30000 tok 1767 sent range 5227,6994 dupRemoved 486 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.2s
+eng B: 30008 tok 2035 sent range 9578,11613 dupRemoved 486 pairs {"LATER":405,"FIRST":550,"LATERs":411,"FIRSTs":562} 0.3s
+eng C: 30100 tok 1902 sent range 683,846,1247,1384,2113,2398,4542,4760,5489,5659,6743,6957,7976,8135,8941,9125,10564,10768,11473,11641 dupRemoved 486 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.3s
+est A: 30012 tok 3153 sent range 15611,18764 dupRemoved 76 pairs {"LATER":600,"FIRST":438,"LATERs":600,"FIRSTs":438} 0.4s
+est B: 30011 tok 2557 sent range 9657,12214 dupRemoved 76 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.5s
+est C: 30065 tok 2468 sent range 874,1124,3712,3983,5702,5920,8333,8589,10351,10592,13497,13722,16472,16868,20065,20270,22325,22516,23879,24094 dupRemoved 76 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.5s
+eus A: 30001 tok 2633 sent range 1613,4246 dupRemoved 18 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.1s
+eus set B: no disjoint window
+eus C: 30083 tok 2676 sent range 269,571,636,975,1507,1828,2012,2328,2665,2967,3369,3576,3740,3967,4065,4288,4658,4883,5072,5286 dupRemoved 18 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.2s
+fas A: 30014 tok 1958 sent range 12810,14768 dupRemoved 6 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.5s
+fas B: 30000 tok 1930 sent range 15211,17141 dupRemoved 6 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.6s
+fas C: 30121 tok 1879 sent range 133,238,4720,4910,7682,7885,9976,10183,10754,10938,13787,14016,18122,18335,20775,20956,22692,22873,24675,24861 dupRemoved 6 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.6s
+fin A: 30005 tok 2459 sent range 4829,7288 dupRemoved 104 pairs {"LATER":558,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.2s
+fin B: 30000 tok 2508 sent range 8532,11040 dupRemoved 104 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.3s
+fin C: 30066 tok 2876 sent range 204,515,1539,1725,3273,3639,4493,4916,5562,5962,6577,6756,7966,8246,8739,8986,10451,10681,11255,11509 dupRemoved 104 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.4s
+fra A: 30001 tok 1361 sent range 5821,7182 dupRemoved 1 pairs {"LATER":463,"FIRST":600,"LATERs":468,"FIRSTs":600} 0.3s
+fra B: 30022 tok 1363 sent range 7665,9028 dupRemoved 1 pairs {"LATER":510,"FIRST":600,"LATERs":511,"FIRSTs":600} 0.4s
+fra C: 30108 tok 1363 sent range 1092,1237,2234,2371,3640,3782,5123,5253,6584,6726,8391,8528,9132,9268,10915,11058,12428,12547,14211,14343 dupRemoved 1 pairs {"LATER":524,"FIRST":600,"LATERs":529,"FIRSTs":600} 0.4s
+gle A: 30022 tok 1540 sent range 638,2178 dupRemoved 4 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.1s
+gle B: 30023 tok 1279 sent range 2442,3721 dupRemoved 4 pairs {"LATER":600,"FIRST":378,"LATERs":600,"FIRSTs":381} 0.2s
+gle C: 30125 tok 1396 sent range 135,298,530,672,1009,1157,1315,1472,1744,1891,2290,2427,2562,2692,3069,3196,3464,3584,3690,3815 dupRemoved 4 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.2s
+glg A: 30000 tok 951 sent range 1168,2119 dupRemoved 0 pairs {"LATER":142,"FIRST":277,"LATERs":139,"FIRSTs":275} 0.1s
+glg B: 30026 tok 950 sent range 40,990 dupRemoved 0 pairs {"LATER":154,"FIRST":283,"LATERs":155,"FIRSTs":281} 0.2s
+glg C: 30193 tok 960 sent range 40,135,299,400,545,641,755,847,1019,1114,1162,1261,1417,1510,1607,1704,1842,1937,2160,2257 dupRemoved 0 pairs {"LATER":147,"FIRST":299,"LATERs":145,"FIRSTs":298} 0.2s
+heb A: 30060 tok 1250 sent range 24,1274 dupRemoved 0 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.2s
+heb B: 30012 tok 1370 sent range 2446,3816 dupRemoved 0 pairs {"LATER":600,"FIRST":547,"LATERs":600,"FIRSTs":550} 0.3s
+heb C: 30139 tok 1175 sent range 229,364,882,995,1227,1332,1638,1767,2167,2294,2786,2906,3264,3378,4029,4136,4407,4518,4688,4802 dupRemoved 0 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.3s
+hin A: 30003 tok 1540 sent range 1620,3160 dupRemoved 10 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.5s
+hin B: 30011 tok 1493 sent range 4135,5628 dupRemoved 10 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.5s
+hin C: 30103 tok 1544 sent range 511,692,2027,2180,2940,3103,4698,4848,6160,6307,7463,7610,8639,8793,10126,10264,11705,11862,12843,12997 dupRemoved 10 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.6s
+hrv A: 30018 tok 1532 sent range 1597,3129 dupRemoved 1 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.2s
+hrv B: 30003 tok 1538 sent range 5021,6559 dupRemoved 1 pairs {"LATER":299,"FIRST":600,"LATERs":296,"FIRSTs":600} 0.3s
+hrv C: 30126 tok 1487 sent range 390,543,737,889,1600,1752,2162,2317,2965,3098,4002,4141,4618,4767,5250,5394,5673,5831,6283,6435 dupRemoved 1 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.3s
+hun A: 17282 tok 910 sent range 0,910 dupRemoved 0 pairs {"LATER":435,"FIRST":600,"LATERs":443,"FIRSTs":600} 0.1s
+hun set B: no disjoint window
+hun C: 17282 tok 910 sent range 0,910 dupRemoved 0 pairs {"LATER":435,"FIRST":600,"LATERs":443,"FIRSTs":600} 0.1s
+hye A: 30001 tok 1834 sent range 2002,3836 dupRemoved 17 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.2s
+hye set B: no disjoint window
+hye C: 30140 tok 1890 sent range 236,438,515,723,1011,1240,1549,1753,2043,2271,2503,2706,3008,3173,3281,3430,3640,3777,4113,4278 dupRemoved 17 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.2s
+ind A: 30003 tok 1566 sent range 1956,3522 dupRemoved 5 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.2s
+ind B: 30007 tok 1619 sent range 297,1916 dupRemoved 5 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.2s
+ind C: 30106 tok 1619 sent range 79,238,597,762,1009,1174,1444,1603,2010,2165,2364,2520,2776,2931,3320,3492,3641,3811,4272,4435 dupRemoved 5 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.3s
+ita A: 30006 tok 1427 sent range 3828,5255 dupRemoved 1 pairs {"LATER":16,"FIRST":6,"LATERs":16,"FIRSTs":6} 0.2s
+ita B: 30003 tok 2359 sent range 7780,10139 dupRemoved 1 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.3s
+ita C: 30069 tok 1645 sent range 28,215,2157,2319,3760,3891,4974,5165,5377,5519,6525,6648,7476,7742,9745,9847,10921,11080,11864,12046 dupRemoved 1 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.3s
+jpn A: 30006 tok 1461 sent range 480,1941 dupRemoved 0 pairs {"LATER":275,"FIRST":600,"LATERs":275,"FIRSTs":600} 0.3s
+jpn B: 30006 tok 1368 sent range 4130,5498 dupRemoved 0 pairs {"LATER":307,"FIRST":600,"LATERs":305,"FIRSTs":600} 0.4s
+jpn C: 30139 tok 1450 sent range 212,356,1068,1223,1603,1761,2719,2866,3337,3474,3867,3998,4509,4643,5319,5460,5911,6070,6660,6804 dupRemoved 0 pairs {"LATER":282,"FIRST":600,"LATERs":281,"FIRSTs":600} 0.4s
+kat A: 30005 tok 1972 sent range 1,1973 dupRemoved 12 pairs {"LATER":362,"FIRST":593,"LATERs":362,"FIRSTs":593} 0.1s
+kat set B: no disjoint window
+kat C: 30071 tok 1973 sent range 10,175,202,401,416,603,631,816,837,1030,1058,1265,1277,1484,1507,1706,1741,1957,1983,2198 dupRemoved 12 pairs {"LATER":378,"FIRST":600,"LATERs":377,"FIRSTs":600} 0.2s
+kor A: 30008 tok 2631 sent range 83,2714 dupRemoved 138 pairs {"LATER":40,"FIRST":189,"LATERs":39,"FIRSTs":190} 0.2s
+kor set B: no disjoint window
+kor C: 30104 tok 2661 sent range 16,274,498,764,884,1144,1289,1554,1702,1980,2270,2519,2593,2864,3004,3246,3418,3713,3846,4123 dupRemoved 138 pairs {"LATER":37,"FIRST":174,"LATERs":34,"FIRSTs":177} 0.2s
+lav A: 30013 tok 2176 sent range 9803,11979 dupRemoved 38 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.4s
+lav B: 30000 tok 2304 sent range 2313,4617 dupRemoved 38 pairs {"LATER":521,"FIRST":600,"LATERs":539,"FIRSTs":600} 0.4s
+lav C: 30084 tok 2182 sent range 567,887,2909,3117,4097,4280,6071,6264,7348,7567,8452,8648,9676,9918,11318,11526,13354,13614,14677,14830 dupRemoved 38 pairs {"LATER":493,"FIRST":600,"LATERs":494,"FIRSTs":600} 0.5s
+lit A: 30009 tok 1859 sent range 96,1955 dupRemoved 6 pairs {"LATER":357,"FIRST":349,"LATERs":366,"FIRSTs":349} 0.1s
+lit set B: no disjoint window
+lit C: 30081 tok 1770 sent range 4,185,263,449,499,637,692,881,903,1126,1266,1457,1481,1636,1711,1901,1935,2101,2181,2332 dupRemoved 6 pairs {"LATER":244,"FIRST":373,"LATERs":244,"FIRSTs":373} 0.2s
+lzh A: 30002 tok 6046 sent range 5217,11263 dupRemoved 6125 pairs {"LATER":600,"FIRST":240,"LATERs":600,"FIRSTs":241} 0.4s
+lzh B: 30003 tok 5267 sent range 44291,49558 dupRemoved 6125 pairs {"LATER":600,"FIRST":464,"LATERs":600,"FIRSTs":464} 0.5s
+lzh C: 30021 tok 5553 sent range 1516,2080,7771,8353,19847,20383,23083,23595,31483,32080,37551,38071,43791,44442,55008,55510,56367,56924,65928,66460 dupRemoved 6125 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.6s
+mar A: 2447 tok 373 sent range 0,373 dupRemoved 0 pairs {"LATER":25,"FIRST":6,"LATERs":25,"FIRSTs":7} 0.0s
+mar set B: no disjoint window
+mar C: 2447 tok 373 sent range 0,373 dupRemoved 0 pairs {"LATER":25,"FIRST":6,"LATERs":25,"FIRSTs":7} 0.0s
+mlt A: 20316 tok 1121 sent range 0,1121 dupRemoved 2 pairs {"LATER":475,"FIRST":278,"LATERs":501,"FIRSTs":281} 0.1s
+mlt set B: no disjoint window
+mlt C: 20316 tok 1121 sent range 0,1121 dupRemoved 2 pairs {"LATER":475,"FIRST":278,"LATERs":501,"FIRSTs":281} 0.1s
+nld A: 30022 tok 1714 sent range 4681,6395 dupRemoved 0 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.2s
+nld B: 30002 tok 1673 sent range 1127,2800 dupRemoved 0 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.3s
+nld C: 30102 tok 1966 sent range 780,945,1504,1677,2371,2525,3182,3352,4431,4585,5346,5524,5864,6033,6966,7118,9839,10235,11348,11603 dupRemoved 0 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.3s
+nob A: 30008 tok 2018 sent range 1687,3705 dupRemoved 77 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.3s
+nob B: 30010 tok 1969 sent range 11890,13859 dupRemoved 77 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.3s
+nob C: 30091 tok 2283 sent range 607,845,1804,1988,3163,3348,5234,5494,7247,7522,8363,8610,10316,10584,11447,11671,13939,14110,15122,15353 dupRemoved 77 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.4s
+pol A: 30005 tok 3573 sent range 1640,5213 dupRemoved 68 pairs {"LATER":301,"FIRST":600,"LATERs":303,"FIRSTs":600} 0.4s
+pol B: 30012 tok 2066 sent range 6916,8982 dupRemoved 68 pairs {"LATER":338,"FIRST":600,"LATERs":335,"FIRSTs":600} 0.4s
+pol C: 30061 tok 2106 sent range 10,287,4416,4635,5289,5486,6980,7201,9217,9412,10076,10274,12132,12342,13936,14081,15637,15867,17231,17445 dupRemoved 68 pairs {"LATER":197,"FIRST":600,"LATERs":198,"FIRSTs":600} 0.5s
+por A: 30002 tok 1278 sent range 7901,9179 dupRemoved 0 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.2s
+por B: 30012 tok 1309 sent range 3665,4974 dupRemoved 0 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.3s
+por C: 30155 tok 1304 sent range 265,394,1780,1910,2063,2193,3494,3626,4017,4143,5405,5533,6285,6416,7173,7304,7829,7966,9070,9200 dupRemoved 0 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.3s
+ron A: 30005 tok 1315 sent range 462,1777 dupRemoved 1 pairs {"LATER":380,"FIRST":600,"LATERs":380,"FIRSTs":600} 0.2s
+ron B: 30012 tok 1499 sent range 6020,7519 dupRemoved 1 pairs {"LATER":305,"FIRST":428,"LATERs":307,"FIRSTs":427} 0.3s
+ron C: 30140 tok 1650 sent range 230,423,1240,1347,1835,1932,2828,3066,3171,3374,4549,4737,5109,5251,6224,6374,6579,6748,7363,7526 dupRemoved 1 pairs {"LATER":229,"FIRST":594,"LATERs":230,"FIRSTs":594} 0.3s
+rus A: 30000 tok 1876 sent range 1232,3108 dupRemoved 3 pairs {"LATER":430,"FIRST":600,"LATERs":431,"FIRSTs":600} 0.2s
+rus set B: no disjoint window
+rus C: 30132 tok 1897 sent range 81,274,569,750,774,965,1203,1396,1617,1808,2049,2243,2317,2489,2806,2990,3140,3337,3513,3714 dupRemoved 3 pairs {"LATER":445,"FIRST":600,"LATERs":443,"FIRSTs":600} 0.2s
+slk A: 30006 tok 3642 sent range 1411,5053 dupRemoved 8 pairs {"LATER":354,"FIRST":306,"LATERs":363,"FIRSTs":305} 0.2s
+slk set B: no disjoint window
+slk C: 30051 tok 3970 sent range 116,525,896,1272,1662,1953,2536,3002,3356,3668,4118,4508,4844,5214,5654,6205,6878,7292,7687,8078 dupRemoved 8 pairs {"LATER":600,"FIRST":586,"LATERs":600,"FIRSTs":584} 0.2s
+slv A: 30010 tok 1727 sent range 6881,8608 dupRemoved 16 pairs {"LATER":238,"FIRST":600,"LATERs":241,"FIRSTs":600} 0.3s
+slv B: 30016 tok 1640 sent range 4799,6439 dupRemoved 16 pairs {"LATER":338,"FIRST":600,"LATERs":344,"FIRSTs":600} 0.3s
+slv C: 30096 tok 1865 sent range 829,1004,1214,1383,2195,2394,3289,3426,4559,4786,5724,5882,6445,6629,7511,7691,8423,8636,9977,10200 dupRemoved 16 pairs {"LATER":280,"FIRST":600,"LATERs":283,"FIRSTs":600} 0.4s
+spa A: 30015 tok 1087 sent range 7199,8286 dupRemoved 19 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.5s
+spa B: 30010 tok 810 sent range 4573,5383 dupRemoved 19 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.6s
+spa C: 30201 tok 1167 sent range 1053,1166,2641,2825,3364,3446,4336,4429,5497,5579,7133,7218,8020,8136,9885,10053,11902,12027,13019,13138 dupRemoved 19 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.6s
+srp A: 30026 tok 1523 sent range 965,2488 dupRemoved 0 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.1s
+srp set B: no disjoint window
+srp C: 30162 tok 1519 sent range 172,319,483,633,855,1007,1049,1199,1469,1626,1765,1936,2109,2261,2353,2511,2676,2812,3176,3322 dupRemoved 0 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.2s
+swe A: 30015 tok 2322 sent range 805,3127 dupRemoved 3 pairs {"LATER":398,"FIRST":320,"LATERs":399,"FIRSTs":323} 0.2s
+swe set B: no disjoint window
+swe C: 30132 tok 2205 sent range 180,396,671,952,1205,1443,1686,1917,2133,2372,2570,2809,2972,3179,3437,3670,3799,3975,4059,4204 dupRemoved 3 pairs {"LATER":343,"FIRST":272,"LATERs":344,"FIRSTs":269} 0.2s
+tam A: 5664 tok 400 sent range 0,400 dupRemoved 0 pairs {"LATER":403,"FIRST":482,"LATERs":427,"FIRSTs":498} 0.0s
+tam set B: no disjoint window
+tam C: 5664 tok 400 sent range 0,400 dupRemoved 0 pairs {"LATER":403,"FIRST":482,"LATERs":427,"FIRSTs":498} 0.1s
+tel A: 3906 tok 1044 sent range 0,1044 dupRemoved 7 pairs {"LATER":65,"FIRST":58,"LATERs":104,"FIRSTs":59} 0.0s
+tel set B: no disjoint window
+tel C: 3906 tok 1044 sent range 0,1044 dupRemoved 7 pairs {"LATER":65,"FIRST":58,"LATERs":104,"FIRSTs":59} 0.0s
+tur A: 30009 tok 3348 sent range 58,3406 dupRemoved 1 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.2s
+tur set B: no disjoint window
+tur C: 30066 tok 3303 sent range 1,280,307,624,629,892,907,1195,1204,1557,1561,2109,2144,2597,2610,2913,2917,3186,3195,3425 dupRemoved 1 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.3s
+uig A: 15562 tok 1656 sent range 0,1656 dupRemoved 0 pairs {"LATER":23,"FIRST":11,"LATERs":23,"FIRSTs":11} 0.1s
+uig set B: no disjoint window
+uig C: 15562 tok 1656 sent range 0,1656 dupRemoved 0 pairs {"LATER":23,"FIRST":11,"LATERs":23,"FIRSTs":11} 0.1s
+ukr A: 30009 tok 2392 sent range 242,2634 dupRemoved 26 pairs {"LATER":297,"FIRST":460,"LATERs":300,"FIRSTs":461} 0.3s
+ukr B: 30043 tok 2105 sent range 3246,5351 dupRemoved 26 pairs {"LATER":339,"FIRST":600,"LATERs":340,"FIRSTs":600} 0.4s
+ukr C: 30115 tok 2168 sent range 12,206,728,1051,1388,1595,1874,2131,2648,2907,3146,3275,3381,3575,4098,4332,4658,4829,4986,5186 dupRemoved 26 pairs {"LATER":347,"FIRST":523,"LATERs":350,"FIRSTs":523} 0.5s
+urd A: 30008 tok 1164 sent range 1458,2622 dupRemoved 0 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.3s
+urd B: 30001 tok 1166 sent range 2839,4005 dupRemoved 0 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.4s
+urd C: 30134 tok 1171 sent range 103,211,455,578,1023,1140,1390,1508,1685,1798,2119,2240,2551,2669,3095,3219,3450,3575,3747,3851 dupRemoved 0 pairs {"LATER":600,"FIRST":600,"LATERs":600,"FIRSTs":600} 0.4s
+vie A: 17209 tok 1388 sent range 0,1388 dupRemoved 12 pairs {"LATER":600,"FIRST":224,"LATERs":600,"FIRSTs":224} 0.1s
+vie set B: no disjoint window
+vie C: 17209 tok 1388 sent range 0,1388 dupRemoved 12 pairs {"LATER":600,"FIRST":224,"LATERs":600,"FIRSTs":224} 0.1s
+wol A: 20774 tok 1188 sent range 0,1188 dupRemoved 0 pairs {"LATER":600,"FIRST":442,"LATERs":600,"FIRSTs":442} 0.1s
+wol set B: no disjoint window
+wol C: 20774 tok 1188 sent range 0,1188 dupRemoved 0 pairs {"LATER":600,"FIRST":442,"LATERs":600,"FIRSTs":442} 0.1s

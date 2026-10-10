@@ -1,0 +1,156 @@
+UD (FRESH train windows; median over valid cells; verdict per header)
+  base|K0|FULL           valid 52/59  medLower 0.578  POS 30 NEG 2 (share 0.577)  HOLD          common-with-K0 n=52: 0.578 vs K0 0.578  meanPairs 379
+  base|K1|FULL           valid 52/59  medLower 0.574  POS 29 NEG 2 (share 0.558)  HOLD          common-with-K0 n=52: 0.574 vs K0 0.578  meanPairs 369
+  base|K2|FULL           valid 51/59  medLower 0.577  POS 28 NEG 3 (share 0.549)  HOLD          common-with-K0 n=51: 0.577 vs K0 0.578  meanPairs 333
+  base|K3|FULL           valid 48/59  medLower 0.582  POS 26 NEG 0 (share 0.542)  HOLD          common-with-K0 n=48: 0.582 vs K0 0.575  meanPairs 275
+  base|K4|FULL           valid 22/59  medLower 0.572  POS 10 NEG 0 (share 0.455)  HOLD          common-with-K0 n=22: 0.572 vs K0 0.572  meanPairs 171
+  base|K0|CAUSAL4        valid 44/59  medLower 0.556  POS 17 NEG 0 (share 0.386)  DEGRADED      common-with-K0 n=44: 0.556 vs K0 0.576  meanPairs 223
+  base|K1|CAUSAL4        valid 43/59  medLower 0.574  POS 15 NEG 0 (share 0.349)  DEGRADED      common-with-K0 n=43: 0.574 vs K0 0.576  meanPairs 211
+  base|K2|CAUSAL4        valid 32/59  medLower 0.561  POS 14 NEG 0 (share 0.438)  HOLD          common-with-K0 n=32: 0.561 vs K0 0.573  meanPairs 201
+  base|K3|CAUSAL4        valid 23/59  medLower 0.608  POS 12 NEG 0 (share 0.522)  HOLD          common-with-K0 n=23: 0.608 vs K0 0.573  meanPairs 181
+  base|K4|CAUSAL4        valid  5/59  medLower 0.583  POS 2 NEG 0 (share 0.400)  UNDERPOWERED  common-with-K0 n=5: 0.583 vs K0 0.583  meanPairs 153
+  base|K0|LOO            valid 52/59  medLower 0.586  POS 31 NEG 1 (share 0.596)  HOLD          common-with-K0 n=52: 0.586 vs K0 0.587  meanPairs 379
+  base|K2|LOO            valid 51/59  medLower 0.589  POS 29 NEG 2 (share 0.569)  HOLD          common-with-K0 n=51: 0.589 vs K0 0.587  meanPairs 334
+  base|K3|LOO            valid 47/59  medLower 0.587  POS 26 NEG 1 (share 0.553)  HOLD          common-with-K0 n=47: 0.587 vs K0 0.587  meanPairs 279
+  LONG6|K0|FULL          valid 52/59  medLower 0.570  POS 28 NEG 1 (share 0.538)  HOLD          common-with-K0 n=52: 0.570 vs K0 0.575  meanPairs 365
+  LONG6|K2|FULL          valid 51/59  medLower 0.575  POS 29 NEG 0 (share 0.569)  HOLD          common-with-K0 n=51: 0.575 vs K0 0.575  meanPairs 320
+  DIST25|K0|FULL         valid 49/59  medLower 0.569  POS 24 NEG 1 (share 0.490)  HOLD          common-with-K0 n=49: 0.569 vs K0 0.580  meanPairs 273
+  DIST25|K2|FULL         valid 46/59  medLower 0.580  POS 21 NEG 2 (share 0.457)  HOLD          common-with-K0 n=46: 0.580 vs K0 0.580  meanPairs 252
+
+IRC
+  irc-en-fresh   FRESH     base      K0 FULL     pairs  600 AUC 0.891 [0.861,0.916] posCtl 0.500 lenCtl 0.583 slenCtl 0.551 HOLD
+  irc-en-fresh   FRESH     base      K1 FULL     pairs  600 AUC 0.910 [0.886,0.934] posCtl 0.500 lenCtl 0.580 slenCtl 0.576 HOLD
+  irc-en-fresh   FRESH     base      K2 FULL     pairs  600 AUC 0.905 [0.880,0.929] posCtl 0.500 lenCtl 0.561 slenCtl 0.499 HOLD
+  irc-en-fresh   FRESH     base      K3 FULL     pairs  600 AUC 0.916 [0.890,0.943] posCtl 0.500 lenCtl 0.500 slenCtl 0.499 HOLD
+  irc-en-fresh   FRESH     base      K4 FULL     pairs  225 AUC 0.818 [0.756,0.876] posCtl 0.500 lenCtl 0.500 slenCtl 0.491 HOLD
+  irc-en-fresh   FRESH     base      K0 CAUSAL4  pairs  600 AUC 0.932 [0.907,0.951] posCtl 0.500 lenCtl 0.578 slenCtl 0.604 HOLD
+  irc-en-fresh   FRESH     base      K1 CAUSAL4  pairs  600 AUC 0.928 [0.905,0.949] posCtl 0.500 lenCtl 0.596 slenCtl 0.569 HOLD
+  irc-en-fresh   FRESH     base      K2 CAUSAL4  pairs  600 AUC 0.922 [0.896,0.949] posCtl 0.500 lenCtl 0.584 slenCtl 0.483 HOLD
+  irc-en-fresh   FRESH     base      K3 CAUSAL4  pairs  511 AUC 0.924 [0.903,0.946] posCtl 0.500 lenCtl 0.500 slenCtl 0.500 HOLD
+  irc-en-fresh   FRESH     base      K4 CAUSAL4  pairs  103 AUC 0.845 [0.741,0.936] posCtl 0.500 lenCtl 0.500 slenCtl 0.519 HOLD
+  irc-en-fresh   FRESH     base      K0 LOO      pairs  600 AUC 0.908 [0.882,0.933] posCtl 0.500 lenCtl 0.573 slenCtl 0.586 HOLD
+  irc-en-fresh   FRESH     base      K2 LOO      pairs  600 AUC 0.917 [0.893,0.940] posCtl 0.500 lenCtl 0.585 slenCtl 0.490 HOLD
+  irc-en-fresh   FRESH     base      K3 LOO      pairs  600 AUC 0.897 [0.869,0.924] posCtl 0.500 lenCtl 0.500 slenCtl 0.517 HOLD
+  irc-en-fresh   FRESH     NOBOT     K0 FULL     pairs  600 AUC 0.895 [0.866,0.920] posCtl 0.500 lenCtl 0.568 slenCtl 0.574 HOLD
+  irc-en-fresh   FRESH     NOBOT     K2 FULL     pairs  600 AUC 0.919 [0.896,0.944] posCtl 0.500 lenCtl 0.565 slenCtl 0.503 HOLD
+  irc-en-fresh   FRESH     NOBOT     K3 FULL     pairs  600 AUC 0.902 [0.870,0.927] posCtl 0.500 lenCtl 0.500 slenCtl 0.498 HOLD
+  irc-en-fresh   FRESH     LONG6     K0 FULL     pairs  600 AUC 0.905 [0.877,0.931] posCtl 0.500 lenCtl 0.598 slenCtl 0.544 HOLD
+  irc-en-fresh   FRESH     LONG6     K2 FULL     pairs  600 AUC 0.907 [0.875,0.933] posCtl 0.500 lenCtl 0.618 slenCtl 0.502 HOLD
+  irc-en-fresh   FRESH     DIST25    K0 FULL     pairs  421 AUC 0.922 [0.892,0.953] posCtl 0.500 lenCtl 0.576 slenCtl 0.574 HOLD
+  irc-en-fresh   FRESH     DIST25    K2 FULL     pairs  423 AUC 0.929 [0.904,0.954] posCtl 0.500 lenCtl 0.593 slenCtl 0.509 HOLD
+  irc-en-fresh   FRESH     EVALINIT  K2 FULL     pairs  600 AUC 0.912 [0.886,0.937] posCtl 0.500 lenCtl 0.569 slenCtl 0.501 HOLD
+  irc-en-fresh   FRESH     EVALNON   K2 FULL     pairs  317 AUC 0.959 [0.922,0.990] posCtl 0.500 lenCtl 0.606 slenCtl 0.516 HOLD
+  irc-en-fresh   FRESH     EVALNON   K0 FULL     pairs  324 AUC 0.969 [0.940,0.991] posCtl 0.500 lenCtl 0.608 slenCtl 0.394 HOLD
+  irc-en-conf    REPLICATE base      K0 FULL     pairs  600 AUC 0.869 [0.839,0.896] posCtl 0.500 lenCtl 0.566 slenCtl 0.587 HOLD
+  irc-en-conf    REPLICATE base      K1 FULL     pairs  600 AUC 0.867 [0.838,0.897] posCtl 0.500 lenCtl 0.542 slenCtl 0.539 HOLD
+  irc-en-conf    REPLICATE base      K2 FULL     pairs  600 AUC 0.859 [0.831,0.887] posCtl 0.500 lenCtl 0.547 slenCtl 0.499 HOLD
+  irc-en-conf    REPLICATE base      K3 FULL     pairs  600 AUC 0.834 [0.798,0.868] posCtl 0.500 lenCtl 0.500 slenCtl 0.481 HOLD
+  irc-en-conf    REPLICATE base      K4 FULL     pairs  600 AUC 0.756 [0.723,0.790] posCtl 0.500 lenCtl 0.500 slenCtl 0.500 DEGRADED
+  irc-en-conf    REPLICATE base      K0 CAUSAL4  pairs  600 AUC 0.850 [0.809,0.882] posCtl 0.500 lenCtl 0.555 slenCtl 0.589 HOLD
+  irc-en-conf    REPLICATE base      K1 CAUSAL4  pairs  600 AUC 0.868 [0.841,0.894] posCtl 0.500 lenCtl 0.552 slenCtl 0.608 HOLD
+  irc-en-conf    REPLICATE base      K2 CAUSAL4  pairs  600 AUC 0.848 [0.815,0.879] posCtl 0.500 lenCtl 0.563 slenCtl 0.502 HOLD
+  irc-en-conf    REPLICATE base      K3 CAUSAL4  pairs  600 AUC 0.858 [0.830,0.890] posCtl 0.500 lenCtl 0.500 slenCtl 0.495 HOLD
+  irc-en-conf    REPLICATE base      K4 CAUSAL4  pairs  600 AUC 0.778 [0.740,0.812] posCtl 0.500 lenCtl 0.500 slenCtl 0.490 DEGRADED
+  irc-en-conf    REPLICATE base      K0 LOO      pairs  600 AUC 0.872 [0.846,0.898] posCtl 0.500 lenCtl 0.572 slenCtl 0.578 HOLD
+  irc-en-conf    REPLICATE base      K2 LOO      pairs  600 AUC 0.863 [0.835,0.893] posCtl 0.500 lenCtl 0.569 slenCtl 0.496 HOLD
+  irc-en-conf    REPLICATE base      K3 LOO      pairs  600 AUC 0.848 [0.815,0.881] posCtl 0.500 lenCtl 0.500 slenCtl 0.501 HOLD
+  irc-de-conf    REPLICATE base      K0 FULL     pairs  152 AUC 0.914 [0.857,0.961] posCtl 0.500 lenCtl 0.467 slenCtl 0.589 HOLD
+  irc-de-conf    REPLICATE base      K1 FULL     pairs  145 AUC 0.917 [0.868,0.960] posCtl 0.500 lenCtl 0.517 slenCtl 0.521 HOLD
+  irc-de-conf    REPLICATE base      K2 FULL     pairs  113 AUC 0.916 [0.851,0.968] posCtl 0.500 lenCtl 0.451 slenCtl 0.478 HOLD
+  irc-de-conf    REPLICATE base      K3 FULL     pairs   80 AUC 0.931 [0.838,0.988] posCtl 0.500 lenCtl 0.500 slenCtl 0.475 HOLD
+  irc-de-conf    REPLICATE base      K4 FULL     pairs    6 AUC 0.667 [0.250,1.000] posCtl 0.500 lenCtl 0.500 slenCtl 0.500 UNDERPOWERED
+  irc-de-conf    REPLICATE base      K0 CAUSAL4  pairs   96 AUC 0.917 [0.840,0.978] posCtl 0.500 lenCtl 0.453 slenCtl 0.656 HOLD
+  irc-de-conf    REPLICATE base      K1 CAUSAL4  pairs   79 AUC 0.886 [0.821,0.961] posCtl 0.500 lenCtl 0.494 slenCtl 0.525 HOLD
+  irc-de-conf    REPLICATE base      K2 CAUSAL4  pairs   52 AUC 0.904 [0.811,0.983] posCtl 0.500 lenCtl 0.481 slenCtl 0.500 UNDERPOWERED
+  irc-de-conf    REPLICATE base      K3 CAUSAL4  pairs   34 AUC 0.882 [0.750,0.973] posCtl 0.500 lenCtl 0.500 slenCtl 0.441 UNDERPOWERED
+  irc-de-conf    REPLICATE base      K4 CAUSAL4  pairs    3 AUC 0.667 [0.000,1.000] posCtl 0.500 lenCtl 0.500 slenCtl 0.500 UNDERPOWERED
+  irc-de-conf    REPLICATE base      K0 LOO      pairs  154 AUC 0.916 [0.869,0.955] posCtl 0.500 lenCtl 0.480 slenCtl 0.578 HOLD
+  irc-de-conf    REPLICATE base      K2 LOO      pairs  115 AUC 0.909 [0.849,0.958] posCtl 0.500 lenCtl 0.513 slenCtl 0.461 HOLD
+  irc-de-conf    REPLICATE base      K3 LOO      pairs   81 AUC 0.920 [0.856,0.976] posCtl 0.500 lenCtl 0.500 slenCtl 0.494 HOLD
+  irc-es-conf    REPLICATE base      K0 FULL     pairs  160 AUC 0.931 [0.885,0.969] posCtl 0.500 lenCtl 0.572 slenCtl 0.544 HOLD
+  irc-es-conf    REPLICATE base      K1 FULL     pairs  148 AUC 0.919 [0.846,0.979] posCtl 0.500 lenCtl 0.554 slenCtl 0.530 HOLD
+  irc-es-conf    REPLICATE base      K2 FULL     pairs  130 AUC 0.908 [0.828,0.969] posCtl 0.500 lenCtl 0.550 slenCtl 0.500 HOLD
+  irc-es-conf    REPLICATE base      K3 FULL     pairs   91 AUC 0.879 [0.779,0.959] posCtl 0.500 lenCtl 0.500 slenCtl 0.494 HOLD
+  irc-es-conf    REPLICATE base      K4 FULL     pairs   10 AUC 1.000 [1.000,1.000] posCtl 0.500 lenCtl 0.500 slenCtl 0.500 UNDERPOWERED
+  irc-es-conf    REPLICATE base      K0 CAUSAL4  pairs   98 AUC 0.898 [0.820,0.969] posCtl 0.500 lenCtl 0.597 slenCtl 0.474 HOLD
+  irc-es-conf    REPLICATE base      K1 CAUSAL4  pairs   88 AUC 0.841 [0.736,0.916] posCtl 0.500 lenCtl 0.563 slenCtl 0.494 HOLD
+  irc-es-conf    REPLICATE base      K2 CAUSAL4  pairs   70 AUC 0.886 [0.813,0.958] posCtl 0.500 lenCtl 0.593 slenCtl 0.493 HOLD
+  irc-es-conf    REPLICATE base      K3 CAUSAL4  pairs   43 AUC 0.837 [0.700,0.951] posCtl 0.500 lenCtl 0.500 slenCtl 0.512 UNDERPOWERED
+  irc-es-conf    REPLICATE base      K4 CAUSAL4  pairs    4 AUC 1.000 [1.000,1.000] posCtl 0.500 lenCtl 0.500 slenCtl 0.500 UNDERPOWERED
+  irc-es-conf    REPLICATE base      K0 LOO      pairs  160 AUC 0.906 [0.849,0.955] posCtl 0.500 lenCtl 0.534 slenCtl 0.528 HOLD
+  irc-es-conf    REPLICATE base      K2 LOO      pairs  133 AUC 0.887 [0.822,0.954] posCtl 0.500 lenCtl 0.526 slenCtl 0.500 HOLD
+  irc-es-conf    REPLICATE base      K3 LOO      pairs   92 AUC 0.870 [0.767,0.969] posCtl 0.500 lenCtl 0.500 slenCtl 0.500 HOLD
+  irc-it-conf    REPLICATE base      K0 FULL     pairs  219 AUC 0.945 [0.913,0.972] posCtl 0.500 lenCtl 0.507 slenCtl 0.657 HOLD
+  irc-it-conf    REPLICATE base      K1 FULL     pairs  210 AUC 0.938 [0.880,0.976] posCtl 0.500 lenCtl 0.533 slenCtl 0.640 HOLD
+  irc-it-conf    REPLICATE base      K2 FULL     pairs  174 AUC 0.945 [0.898,0.983] posCtl 0.500 lenCtl 0.506 slenCtl 0.486 HOLD
+  irc-it-conf    REPLICATE base      K3 FULL     pairs  111 AUC 0.955 [0.914,0.987] posCtl 0.500 lenCtl 0.500 slenCtl 0.491 HOLD
+  irc-it-conf    REPLICATE base      K4 FULL     pairs   13 AUC 0.962 [0.850,1.000] posCtl 0.500 lenCtl 0.500 slenCtl 0.615 UNDERPOWERED
+  irc-it-conf    REPLICATE base      K0 CAUSAL4  pairs  143 AUC 0.909 [0.853,0.971] posCtl 0.500 lenCtl 0.566 slenCtl 0.566 HOLD
+  irc-it-conf    REPLICATE base      K1 CAUSAL4  pairs  130 AUC 0.915 [0.849,0.969] posCtl 0.500 lenCtl 0.527 slenCtl 0.592 HOLD
+  irc-it-conf    REPLICATE base      K2 CAUSAL4  pairs  108 AUC 0.917 [0.848,0.981] posCtl 0.500 lenCtl 0.491 slenCtl 0.486 HOLD
+  irc-it-conf    REPLICATE base      K3 CAUSAL4  pairs   63 AUC 0.952 [0.873,1.000] posCtl 0.500 lenCtl 0.500 slenCtl 0.476 HOLD
+  irc-it-conf    REPLICATE base      K4 CAUSAL4  pairs    9 AUC 0.778 [0.429,1.000] posCtl 0.500 lenCtl 0.500 slenCtl 0.556 UNDERPOWERED
+  irc-it-conf    REPLICATE base      K0 LOO      pairs  220 AUC 0.909 [0.857,0.946] posCtl 0.500 lenCtl 0.502 slenCtl 0.625 HOLD
+  irc-it-conf    REPLICATE base      K2 LOO      pairs  176 AUC 0.943 [0.891,0.988] posCtl 0.500 lenCtl 0.506 slenCtl 0.503 HOLD
+  irc-it-conf    REPLICATE base      K3 LOO      pairs  111 AUC 0.960 [0.911,1.000] posCtl 0.500 lenCtl 0.500 slenCtl 0.469 HOLD
+  info {"hdr":"ba0f51a8504ac50299598dcf5e0910d1876a05ca74693ab0d31e090ee9f26cb5","tier":"FRESH","reg":"irc-en-fresh","variant":"loaderCheck","sameStream":true,"nMsg":26825}
+  info {"hdr":"ba0f51a8504ac50299598dcf5e0910d1876a05ca74693ab0d31e090ee9f26cb5","tier":"FRESH","reg":"irc-en-fresh","variant":"botInfo","botSpeakers":["ubottu","floodbotk1","floodbotk2","floodbot1","kbot","ubotu","uvirtbot"],"nBotMsgs":422}
+
+CODE
+  code-py base     K0 FULL     pairs  992 AUC 0.658 [0.621,0.688] HOLD
+  code-py base     K1 FULL     pairs  963 AUC 0.639 [0.600,0.679] HOLD
+  code-py base     K2 FULL     pairs  801 AUC 0.699 [0.666,0.734] HOLD
+  code-py base     K3 FULL     pairs  368 AUC 0.670 [0.613,0.732] HOLD
+  code-py base     K4 FULL     pairs   50 AUC 0.640 [0.490,0.787] UNDERPOWERED
+  code-py base     K0 CAUSAL4  pairs  710 AUC 0.648 [0.613,0.688] HOLD
+  code-py base     K1 CAUSAL4  pairs  565 AUC 0.658 [0.612,0.700] HOLD
+  code-py base     K2 CAUSAL4  pairs  324 AUC 0.716 [0.668,0.760] HOLD
+  code-py base     K3 CAUSAL4  pairs   99 AUC 0.677 [0.583,0.767] HOLD
+  code-py base     K4 CAUSAL4  pairs   11 AUC 0.818 [0.500,1.000] UNDERPOWERED
+  code-py base     K2 LOO      pairs  800 AUC 0.679 [0.642,0.717] HOLD
+  code-py EVALNON  K2 FULL     pairs  781 AUC 0.709 [0.670,0.746] HOLD
+  code-py EVALINIT K2 FULL     pairs   43 AUC 0.349 [0.146,0.535] UNDERPOWERED
+  code-js base     K0 FULL     pairs  726 AUC 0.588 [0.551,0.628] HOLD
+  code-js base     K1 FULL     pairs  636 AUC 0.590 [0.543,0.642] HOLD
+  code-js base     K2 FULL     pairs  425 AUC 0.605 [0.544,0.664] HOLD
+  code-js base     K3 FULL     pairs  173 AUC 0.642 [0.557,0.724] HOLD
+  code-js base     K4 FULL     pairs   22 AUC 0.500 [0.261,0.750] UNDERPOWERED
+  code-js base     K0 CAUSAL4  pairs  503 AUC 0.588 [0.538,0.630] HOLD
+  code-js base     K1 CAUSAL4  pairs  384 AUC 0.563 [0.506,0.618] HOLD
+  code-js base     K2 CAUSAL4  pairs  150 AUC 0.537 [0.459,0.619] FAIL
+  code-js base     K3 CAUSAL4  pairs   67 AUC 0.567 [0.443,0.689] FAIL
+  code-js base     K4 CAUSAL4  pairs    8 AUC 0.625 [0.250,1.000] UNDERPOWERED
+  code-js base     K2 LOO      pairs  425 AUC 0.617 [0.555,0.672] HOLD
+  code-js EVALNON  K2 FULL     pairs  424 AUC 0.624 [0.564,0.682] HOLD
+  code-js EVALINIT K2 FULL     pairs   13 AUC 0.231 [0.000,0.600] UNDERPOWERED
+
+BOOKS (segmenter: default vs title prior)
+  book-dracula|K0|FULL               default 0.587 [0.512,0.663] (305) | title-prior 0.569 [0.485,0.658] (306) | delta 0.018 | name-initial share 0.157 -> 0.141
+  book-dracula|K2|FULL               default 0.557 [0.487,0.630] (298) | title-prior 0.586 [0.503,0.650] (297) | delta -0.029 | name-initial share 0.157 -> 0.141
+  book-dracula|K0|CAUSAL4            default 0.538 [0.460,0.612] (262) | title-prior 0.519 [0.447,0.594] (262) | delta 0.019 | name-initial share 0.157 -> 0.141
+  book-dracula|K2|CAUSAL4            default 0.535 [0.465,0.602] (245) | title-prior 0.482 [0.411,0.552] (247) | delta 0.053 | name-initial share 0.157 -> 0.141
+  book-dorian-gray|K0|FULL           default 0.625 [0.527,0.705] (168) | title-prior 0.571 [0.468,0.679] (168) | delta 0.054 | name-initial share 0.119 -> 0.117
+  book-dorian-gray|K2|FULL           default 0.594 [0.500,0.697] (155) | title-prior 0.615 [0.506,0.718] (156) | delta -0.022 | name-initial share 0.119 -> 0.117
+  book-dorian-gray|K0|CAUSAL4        default 0.521 [0.431,0.622] (140) | title-prior 0.475 [0.397,0.551] (141) | delta 0.046 | name-initial share 0.119 -> 0.117
+  book-dorian-gray|K2|CAUSAL4        default 0.521 [0.421,0.655] (117) | title-prior 0.559 [0.456,0.667] (118) | delta -0.038 | name-initial share 0.119 -> 0.117
+  book-moby-dick|K0|FULL             default 0.383 [0.325,0.449] (459) | title-prior 0.432 [0.359,0.492] (461) | delta -0.048 | name-initial share 0.048 -> 0.048
+  book-moby-dick|K2|FULL             default 0.386 [0.327,0.447] (451) | title-prior 0.398 [0.328,0.454] (450) | delta -0.012 | name-initial share 0.048 -> 0.048
+  book-moby-dick|K0|CAUSAL4          default 0.410 [0.350,0.457] (383) | title-prior 0.415 [0.356,0.475] (383) | delta -0.005 | name-initial share 0.048 -> 0.048
+  book-moby-dick|K2|CAUSAL4          default 0.417 [0.356,0.477] (345) | title-prior 0.419 [0.366,0.483] (344) | delta -0.001 | name-initial share 0.048 -> 0.048
+  book-sherlock|K0|FULL              default 0.522 [0.455,0.600] (345) | title-prior 0.477 [0.397,0.543] (348) | delta 0.045 | name-initial share 0.095 -> 0.087
+  book-sherlock|K2|FULL              default 0.505 [0.436,0.579] (329) | title-prior 0.491 [0.429,0.553] (332) | delta 0.014 | name-initial share 0.095 -> 0.087
+  book-sherlock|K0|CAUSAL4           default 0.489 [0.420,0.546] (307) | title-prior 0.493 [0.424,0.573] (310) | delta -0.005 | name-initial share 0.095 -> 0.087
+  book-sherlock|K2|CAUSAL4           default 0.460 [0.389,0.536] (278) | title-prior 0.450 [0.385,0.514] (282) | delta 0.010 | name-initial share 0.095 -> 0.087
+  book-tom-sawyer|K0|FULL            default 0.605 [0.497,0.712] (177) | title-prior 0.576 [0.458,0.672] (177) | delta 0.028 | name-initial share 0.253 -> 0.245
+  book-tom-sawyer|K2|FULL            default 0.640 [0.516,0.748] (153) | title-prior 0.596 [0.491,0.701] (156) | delta 0.044 | name-initial share 0.253 -> 0.245
+  book-tom-sawyer|K0|CAUSAL4         default 0.548 [0.453,0.626] (157) | title-prior 0.522 [0.429,0.615] (159) | delta 0.026 | name-initial share 0.253 -> 0.245
+  book-tom-sawyer|K2|CAUSAL4         default 0.557 [0.434,0.675] (122) | title-prior 0.591 [0.492,0.687] (127) | delta -0.033 | name-initial share 0.253 -> 0.245
+  book-middlemarch|K0|FULL           default 0.675 [0.619,0.734] (425) | title-prior 0.574 [0.515,0.629] (484) | delta 0.101 | name-initial share 0.234 -> 0.098
+  book-middlemarch|K2|FULL           default 0.686 [0.618,0.749] (453) | title-prior 0.561 [0.490,0.623] (499) | delta 0.125 | name-initial share 0.234 -> 0.098
+  book-middlemarch|K0|CAUSAL4        default 0.568 [0.505,0.629] (382) | title-prior 0.465 [0.411,0.518] (415) | delta 0.103 | name-initial share 0.234 -> 0.098
+  book-middlemarch|K2|CAUSAL4        default 0.587 [0.525,0.646] (373) | title-prior 0.468 [0.415,0.526] (417) | delta 0.119 | name-initial share 0.234 -> 0.098
+  book-frankenstein|K0|FULL          default 0.589 [0.473,0.705] (129) | title-prior 0.594 [0.480,0.724] (123) | delta -0.004 | name-initial share 0.123 -> 0.127
+  book-frankenstein|K2|FULL          default 0.561 [0.447,0.691] (123) | title-prior 0.588 [0.479,0.700] (119) | delta -0.027 | name-initial share 0.123 -> 0.127
+  book-frankenstein|K0|CAUSAL4       default 0.549 [0.446,0.646] (111) | title-prior 0.562 [0.440,0.679] (105) | delta -0.012 | name-initial share 0.123 -> 0.127
+  book-frankenstein|K2|CAUSAL4       default 0.566 [0.449,0.674] (99) | title-prior 0.608 [0.510,0.702] (97) | delta -0.043 | name-initial share 0.123 -> 0.127
+  median (default - titlePrior) over 7 novels at K0 FULL = 0.028  MATERIAL LEAK: false

@@ -1,0 +1,88 @@
+{
+ "denominators": {
+  "LATER": 22,
+  "FIRST": 23
+ },
+ "C1_LATER_BOTH": {
+  "mean": 0.6076,
+  "ge060": 14,
+  "ge065": 7,
+  "n": 22
+ },
+ "C1_LATER_RIVALS": {
+  "mean": 0.3574,
+  "ge060": 0,
+  "ge065": 0,
+  "n": 22
+ },
+ "C1_FIRST_LEFT": {
+  "mean": 0.5978,
+  "ge060": 11,
+  "ge065": 6,
+  "n": 23
+ },
+ "C5": {
+  "LATER_BOTH_plus_RIVALS_minus_RIVALS": {
+   "mean": 0.2278,
+   "lo": 0.2051,
+   "hi": 0.25,
+   "ge003": 22
+  },
+  "FIRST_LEFT_plus_RIVALS_minus_RIVALS": {
+   "mean": 0.1995,
+   "lo": 0.1693,
+   "hi": 0.2279,
+   "ge003": 23
+  }
+ },
+ "C2_2fam": {
+  "LATER_BOTH": {
+   "mean": 0.0327,
+   "lo": 0.0056,
+   "hi": 0.0592,
+   "win": 12,
+   "p": 0.3318
+  }
+ },
+ "C3": {
+  "days": [
+   "kubuntu/2005-07-15.txt",
+   "kubuntu/2005-11-15.txt",
+   "kubuntu/2007-07-15.txt",
+   "kubuntu/2008-07-15.txt",
+   "ubuntu/2004-11-15.txt",
+   "ubuntu/2005-03-15.txt",
+   "ubuntu/2012-07-15.txt",
+   "ubuntu/2015-03-15.txt"
+  ],
+  "ircPairs": {
+   "LATER": 1200,
+   "FIRST": 726
+  },
+  "ircPositionControl": {
+   "LATER": 0.5279,
+   "FIRST": 0.5455
+  },
+  "LATER": {
+   "arm": "BOTH",
+   "udPooledToIrc": 0.4573,
+   "udEngToIrc": 0.4674,
+   "udSvoToIrc": 0.4542,
+   "udSovToIrc": 0.5293,
+   "udPooledToIrcPositionArm": 0.4739,
+   "ircLeaveOneDayOut": 0.6067,
+   "ircToUdEng": 0.5048
+  },
+  "FIRST": {
+   "arm": "LEFT",
+   "udPooledToIrc": 0.5153,
+   "udEngToIrc": 0.5126,
+   "udSvoToIrc": 0.5086,
+   "udSovToIrc": 0.5273,
+   "udPooledToIrcPositionArm": 0.4747,
+   "ircLeaveOneDayOut": 0.5259,
+   "ircToUdEng": 0.5461
+  }
+ },
+ "headerSha256": "c3234d9b030573ca82c85049929c35cb65d1eafd4c16dd4344de018cb03652e1"
+}

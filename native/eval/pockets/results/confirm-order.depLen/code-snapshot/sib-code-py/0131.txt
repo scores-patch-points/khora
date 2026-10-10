@@ -1,0 +1,145 @@
+"""Legistar REST client.
+
+Nashville (and most cities) expose the Legistar WebAPI at
+https://webapi.legistar.com/v1/<client>. Endpoints of interest:
+
+  GET /matters                    list legislation (OData $filter/$select/$top/$skip)
+  GET /matters/{id or guid}       single matter
+  GET /matters/{id}/attachments   attachment manifests
+  GET /matters/{id}/sponsors
+  GET /events                     meetings
+  GET /events/{id}/eventitems     agenda items for a meeting
+  GET /attachments/{id}           attachment binary (falls back to Hyperlink URL)
+
+OData filter syntax supported for the common subset: eq/ne/gt/ge/lt/le/and/or/
+substringof. Kept deliberately thin — no external deps beyond requests.
+"""
+
+from __future__ import annotations
+
+import time
+from dataclasses import dataclass
+from typing import Any, Iterable, Iterator, Optional
+
+import requests
+
+BASE = "https://webapi.legistar.com/v1"
+DEFAULT_CLIENT = "nashville"
+
+
+@dataclass
+class Matter:
+    id: int
+    guid: str
+    file: str  # e.g. "BL2026-1498", "RS2026-2264"
+    title: str
+    type: str
+    status: str
+    intro_date: Optional[str]
+    agenda_date: Optional[str]
+    body: str
+    raw: dict
+
+
+class Legistar:
+    def __init__(self, client: str = DEFAULT_CLIENT, *, delay: float = 0.25):
+        self.base = f"{BASE}/{client}"
+        self.delay = delay
+        self.s = requests.Session()
+        self.s.headers.update({"Accept": "application/json", "User-Agent": "nashville-surveillance-scan/1.0"})
+
+    def _get(self, path: str, **params) -> Any:
+        url = f"{self.base}/{path}"
+        for attempt in range(4):
+            r = self.s.get(url, params=params or None, timeout=120)
+            if r.status_code == 200:
+                try:
+                    return r.json()
+                except ValueError:
+                    return r.text
+            if r.status_code in (429, 500, 502, 503, 504):
+                time.sleep(2 * (attempt + 1))
+                continue
+            r.raise_for_status()
+        raise RuntimeError(f"failed after retries: {url}")
+
+    def _pages(self, path: str, **params) -> Iterator[dict]:
+        """Follow Legistar's $skip-based paging ($top capped by server)."""
+        skip = 0
+        while True:
+            page = self._get(path, **{**params, "$top": 1000, "$skip": skip})
+            if not page:
+                return
+            yield from page
+            if len(page) < 1000:
+                return
+            skip += 1000
+            time.sleep(self.delay)
+
+    # -- matters -----------------------------------------------------------
+    def matters(self, **params) -> Iterator[dict]:
+        yield from self._pages("matters", **params)
+
+    def matter(self, id_or_guid) -> dict:
+        return self._get(f"matters/{id_or_guid}")
+
+    def attachments(self, matter_id: int) -> list[dict]:
+        return self._get(f"matters/{matter_id}/attachments")
+
+    def sponsors(self, matter_id: int) -> list[dict]:
+        return self._get(f"matters/{matter_id}/sponsors")
+
+    def histories(self, matter_id: int) -> list[dict]:
+        """Every action taken on a matter: which body, what date, the mover
+        and seconder, and the tally. The roll call itself lives one hop
+        further down, keyed by MatterHistoryId."""
+        return self._get(f"matters/{matter_id}/histories")
+
+    def history_votes(self, history_id: int) -> list[dict]:
+        """The named roll call for one action — who voted which way."""
+        return self._get(f"matters/histories/{history_id}/votes")
+
+    def to_matter(self, raw: dict) -> Matter:
+        return Matter(
+            id=raw["MatterId"],
+            guid=raw.get("MatterGuid", ""),
+            file=raw.get("MatterFile") or "",
+            title=raw.get("MatterTitle") or "",
+            type=raw.get("MatterTypeName") or "",
+            status=raw.get("MatterStatusName") or "",
+            intro_date=raw.get("MatterIntroDate"),
+            agenda_date=raw.get("MatterAgendaDate"),
+            body=raw.get("MatterBodyName") or "",
+            raw=raw,
+        )
+
+    # -- attachments -------------------------------------------------------
+    def attachment_bytes(self, att: dict) -> Optional[bytes]:
+        """Resolve an attachment to bytes (Hyperlink URL or binary endpoint)."""
+        link = att.get("MatterAttachmentHyperlink")
+        if link:
+            # the attachments host rejects the API's application/json Accept;
+            # use a browser-like profile for the binary fetch
+            hdr = {
+                "Accept": "application/pdf, application/octet-stream, */*",
+                "User-Agent": self.s.headers.get("User-Agent", "Mozilla/5.0"),
+            }
+            r = self.s.get(link, headers=hdr, timeout=180)
+            if r.status_code == 200:
+                return r.content
+        aid = att.get("MatterAttachmentId")
+        if aid:
+            try:
+                r = self.s.get(f"{self.base}/attachments/{aid}", timeout=180)
+                if r.status_code == 200 and r.content:
+                    return r.content
+            except requests.RequestException:
+                pass
+        return None
+
+    # -- events ------------------------------------------------------------
+    def events(self, **params) -> Iterator[dict]:
+        yield from self._pages("events", **params)
+
+    def eventitems(self, event_id: int) -> list[dict]:
+        return self._get(f"events/{event_id}/eventitems")

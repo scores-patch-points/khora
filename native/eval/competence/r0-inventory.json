@@ -1,0 +1,492 @@
+{
+  "schema": "r0-inventory@1",
+  "pinned_on": "2026-10-06",
+  "note": "Pinned candidate inventory for the R0 instrument (amendment A2 D2). measure() refuses with the typed gap inventory_mismatch when the live candidate set of the stem's family or of a foreign partner's family, or the content digest of any such prior, differs. Re-pin only with a dated amendment before a TEST run.",
+  "families": {
+    "Arabic": [
+      "arb",
+      "fas",
+      "uig",
+      "urd"
+    ],
+    "Cyrillic": [
+      "bul",
+      "rus",
+      "ukr"
+    ],
+    "Devanagari": [
+      "hin",
+      "mar"
+    ],
+    "Greek": [
+      "ell"
+    ],
+    "Han": [
+      "cmn",
+      "cmn-hans",
+      "jpn",
+      "lzh"
+    ],
+    "Hangul": [
+      "kor"
+    ],
+    "Hebrew": [
+      "heb"
+    ],
+    "Latin": [
+      "afr",
+      "cat",
+      "ces",
+      "cym",
+      "dan",
+      "deu",
+      "eng",
+      "est",
+      "eus",
+      "fin",
+      "fra",
+      "gle",
+      "glg",
+      "hrv",
+      "hun",
+      "hye",
+      "ind",
+      "ita",
+      "kat",
+      "lav",
+      "lit",
+      "mlt",
+      "nld",
+      "nob",
+      "pol",
+      "por",
+      "ron",
+      "slk",
+      "slv",
+      "spa",
+      "srp",
+      "swe",
+      "tam",
+      "tel",
+      "tur",
+      "vie",
+      "wol"
+    ]
+  },
+  "priors_sha256": {
+    "afr": "f7b30821882bb6162338f9e7efa3f531bac2139682d0fa64c9b7d6613b845958",
+    "arb": "e3afce6385d433febd6cf041e19b552167e47809eed505868a940af91f1ec9ae",
+    "bul": "6755c1a387158f01d6888aac93387299b5f515c1447fe3753fd13e9c9a0e4067",
+    "cat": "4a2eee5131b4ad04731553bdaf2483191d638a51d6a0d15876439bdc62c9207f",
+    "ces": "7b5559590dc5b9c01de77f8fe05344c728b966d07caae78663ca9f942bd45072",
+    "cmn": "83eecaf9a67a8f7427940c4b5db02a864f93253cf9b81e5a95cb1c07e9b10e54",
+    "cmn-hans": "697db95abd0c1a62c8a09067a7ff366d1c2d281da70c60edb0247d5d5b554913",
+    "cym": "5a16ceea596b2ad0b673706857011deced62a27df841541f7ac087924baa3a4b",
+    "dan": "6088dbfb47e74fc369c6117d5c8a1d06a4d3531fb9ffb24aad688663abd22517",
+    "deu": "51069e89c4c38e805beeed81d9298ea11eede0e0cac59e09d4544ad157cb7cc5",
+    "ell": "f00842e6476c1e5dc86ef7bba7eafe5487afacc9f39f733c78aa8c1ebaaaa213",
+    "eng": "7e124e15e661401087dd6bd2b44b95c468ab8e8d50151f59729df7dad47ccfaa",
+    "est": "5acbf9046bdbc9e4abbd7a14a47af075c51f44a9ab5349f8f52c4f08b90469f9",
+    "eus": "3592c2581bda2ef2625a1556cab5999d28b0854d1ad8fef9d90e1ae7978bcff0",
+    "fas": "3ff96d795fb55e5e871d77fd29d50d14b32d9d7478b683550292f7d9b7b3c9a1",
+    "fin": "478fbd174222b5bc170f865fbd557475037ab22aa5788f1f5bb7cec1f9154683",
+    "fra": "d87ac080c0579d751d97b543179a577c56c102d24fd29bacdd78720d64535be3",
+    "gle": "0fe50722eecf92e3a79e523e049e738813dcb4c771b2cdae5a17d3925e39a9c9",
+    "glg": "54d1d82c07cd568508a7cb0d17a72094106150b5c5951644eb0873760035705c",
+    "heb": "acad824c68a90eed0d19879f598b8343a86cb2562191f0a72f41565f7a9e7b5e",
+    "hin": "ae74ee2e05c30a1c20771f9bc74d173d2e047a8a729d1d5743b29b2d9d17f8a7",
+    "hrv": "4589e51c2ebdf9dd4187e6fb181f24c7f35534d265ae8a8f2b40523d080aea42",
+    "hun": "e608835d2d650d7a3557de7488dc1a442fcd439004883f3b724b75fbeefbe401",
+    "hye": "75f23d1ddfd358e8f0fec6fda51a12193fa370f06407685e53f19907e17a082b",
+    "ind": "adf9ce07578618d6fd37a339b083796c872f09cc403a3546a7ac09c543ef10ee",
+    "ita": "d3aa708021619bf193665bf9ae3612e7d304d0e4b1e1a7307ec0d6ceba8f257a",
+    "jpn": "4c6049a908d5e13a26987a5121a6fc00ec2991611ccd4347147cff84ffbe42dd",
+    "kat": "433638990441b3b222c9aa52c470bf19924624c302be804a198f07497ff657f4",
+    "kor": "0a0f18d0c79365e0bfb24bff553d9798bb7b1420d4984e09d8fe94a3b417c487",
+    "lav": "55e934b5f46b5f80c975ad3b7e9941ba2a0d11dfcdebd4819ca92812cf803f34",
+    "lit": "c507530fca9593e359a7aabab30cbd0faf422c1b33a292dcca6f3fc69b1ff8ed",
+    "lzh": "d65045cf858da5dd82b2e472e999b9f341fc2cd098117b6057df81354bb2d1b2",
+    "mar": "cdc7f88ec461da5d3bd75154d60049e4a9ee007f9619f7114c51ae7c13bdfbcc",
+    "mlt": "245bed6a6a0b1586036f56e5dccac807d0ad981c707067e2409fc0474a94000c",
+    "nld": "7ff566ffe85c00df29033abf7111e4ea197de7c7ab2960d31ebc5e0d480fe0c8",
+    "nob": "46ea19803bdd2be44a9d911ef7b755eb1a445c16cc97e49b46b716fd812b9105",
+    "pol": "8c1cee997dac04f474b44b7f734548c760a2cf3854440f42921aeae56bf97b98",
+    "por": "cb9d83ae4ede8df1c82c464a21e8858df36b3ddd01efbc9501cb38c28f56bd99",
+    "ron": "6c2f7d8952706cfc9b8417442694321e7a0a954e03b3494602301febced3afb3",
+    "rus": "e78d2f80ff5d77fd8b90e4c0787353827c99c0cfdbb37bff0aeb13f62b372f6b",
+    "slk": "3e00a0a8eff11d437dbd77c331569108d269b2ae7a14b00eeab79b537af90d7f",
+    "slv": "b71b3039cce311ea9f9c0c266a4a31e2ed4c87066b43a097f086d00a38a8d2a2",
+    "spa": "cf501b2e7b61de0ca81ce8931df79e3311fe4a3f3255a0c3858846f7c5b5fbbb",
+    "srp": "9ef018d41c8a223ec6dbb4cd05ac9c04a95f1b424b7392b960383a9bc299312a",
+    "swe": "f9300baf091bde490d7e5f06b1c8c92dd1ae79bbcec95315e290d487df886727",
+    "tam": "843b2d84462024d24e40a73a28102dec92d4859878335eb1796215dff07458f6",
+    "tel": "39da0644775ebccac503cb118ed7f60236c6c39771b86597cd0161cb9038a08a",
+    "tur": "23218ce29007cbd5c4082b1ac4026141b8979259ca7cce8afb791749d8a01a5b",
+    "uig": "aab037a53c859d3e5598548e04ddda29a5a7b5e50e2d1a4037559d77a9ad38f2",
+    "ukr": "34f38415d04756cb4bc07768962bf40cef60b09ad3473176dcc1f80b2172ec96",
+    "urd": "57aa49eca30dfcbebf1c37a88d511857283cb3c94fb90fc38033420291454600",
+    "vie": "dee42591a690a1abb6863e562b50d28319ad228aecca3ca1a21de0bb19f1ce3f",
+    "wol": "7d9777df78bfcd9593485f69567c0f2bb4aa0d14a58fe06064a31ac3f415ebe7"
+  },
+  "same_family": {
+    "arb": "fas",
+    "cmn": "jpn",
+    "cmn-hans": "jpn",
+    "deu": "nld",
+    "eng": "deu",
+    "fas": "arb",
+    "fin": "swe",
+    "fra": "ita",
+    "ind": "vie",
+    "ita": "spa",
+    "jpn": "cmn",
+    "lzh": "cmn",
+    "nld": "deu",
+    "pol": "deu",
+    "por": "spa",
+    "rus": "ukr",
+    "spa": "por",
+    "swe": "deu",
+    "tur": "fin",
+    "ukr": "rus",
+    "urd": "fas",
+    "vie": "ind"
+  },
+  "cross_family": {
+    "Latin": "rus",
+    "other": "eng"
+  },
+  "foreign_partners": {
+    "afr": [
+      "cat",
+      "ces",
+      "cym",
+      "rus"
+    ],
+    "arb": [
+      "fas",
+      "uig",
+      "urd",
+      "eng"
+    ],
+    "bul": [
+      "rus",
+      "ukr",
+      "eng"
+    ],
+    "cat": [
+      "ces",
+      "cym",
+      "dan",
+      "rus"
+    ],
+    "ces": [
+      "cym",
+      "dan",
+      "deu",
+      "rus"
+    ],
+    "cmn": [
+      "jpn",
+      "cmn-hans",
+      "lzh",
+      "eng"
+    ],
+    "cmn-hans": [
+      "jpn",
+      "lzh",
+      "cmn",
+      "eng"
+    ],
+    "cym": [
+      "dan",
+      "deu",
+      "eng",
+      "rus"
+    ],
+    "dan": [
+      "deu",
+      "eng",
+      "est",
+      "rus"
+    ],
+    "deu": [
+      "nld",
+      "eng",
+      "est",
+      "rus"
+    ],
+    "ell": [
+      "eng"
+    ],
+    "eng": [
+      "deu",
+      "est",
+      "eus",
+      "rus"
+    ],
+    "est": [
+      "eus",
+      "fin",
+      "fra",
+      "rus"
+    ],
+    "eus": [
+      "fin",
+      "fra",
+      "gle",
+      "rus"
+    ],
+    "fas": [
+      "arb",
+      "uig",
+      "urd",
+      "eng"
+    ],
+    "fin": [
+      "swe",
+      "fra",
+      "gle",
+      "rus"
+    ],
+    "fra": [
+      "ita",
+      "gle",
+      "glg",
+      "rus"
+    ],
+    "gle": [
+      "glg",
+      "hrv",
+      "hun",
+      "rus"
+    ],
+    "glg": [
+      "hrv",
+      "hun",
+      "hye",
+      "rus"
+    ],
+    "heb": [
+      "eng"
+    ],
+    "hin": [
+      "mar",
+      "eng"
+    ],
+    "hrv": [
+      "hun",
+      "hye",
+      "ind",
+      "rus"
+    ],
+    "hun": [
+      "hye",
+      "ind",
+      "ita",
+      "rus"
+    ],
+    "hye": [
+      "ind",
+      "ita",
+      "kat",
+      "rus"
+    ],
+    "ind": [
+      "vie",
+      "ita",
+      "kat",
+      "rus"
+    ],
+    "ita": [
+      "spa",
+      "kat",
+      "lav",
+      "rus"
+    ],
+    "jpn": [
+      "cmn",
+      "lzh",
+      "cmn-hans",
+      "eng"
+    ],
+    "kat": [
+      "lav",
+      "lit",
+      "mlt",
+      "rus"
+    ],
+    "kor": [
+      "eng"
+    ],
+    "lav": [
+      "lit",
+      "mlt",
+      "nld",
+      "rus"
+    ],
+    "lit": [
+      "mlt",
+      "nld",
+      "nob",
+      "rus"
+    ],
+    "lzh": [
+      "cmn",
+      "cmn-hans",
+      "jpn",
+      "eng"
+    ],
+    "mar": [
+      "hin",
+      "eng"
+    ],
+    "mlt": [
+      "nld",
+      "nob",
+      "pol",
+      "rus"
+    ],
+    "nld": [
+      "deu",
+      "nob",
+      "pol",
+      "rus"
+    ],
+    "nob": [
+      "pol",
+      "por",
+      "ron",
+      "rus"
+    ],
+    "pol": [
+      "deu",
+      "por",
+      "ron",
+      "rus"
+    ],
+    "por": [
+      "spa",
+      "ron",
+      "slk",
+      "rus"
+    ],
+    "ron": [
+      "slk",
+      "slv",
+      "spa",
+      "rus"
+    ],
+    "rus": [
+      "ukr",
+      "bul",
+      "eng"
+    ],
+    "slk": [
+      "slv",
+      "spa",
+      "srp",
+      "rus"
+    ],
+    "slv": [
+      "spa",
+      "srp",
+      "swe",
+      "rus"
+    ],
+    "spa": [
+      "por",
+      "srp",
+      "swe",
+      "rus"
+    ],
+    "srp": [
+      "swe",
+      "tam",
+      "tel",
+      "rus"
+    ],
+    "swe": [
+      "deu",
+      "tam",
+      "tel",
+      "rus"
+    ],
+    "tam": [
+      "tel",
+      "tur",
+      "vie",
+      "rus"
+    ],
+    "tel": [
+      "tur",
+      "vie",
+      "wol",
+      "rus"
+    ],
+    "tur": [
+      "fin",
+      "vie",
+      "wol",
+      "rus"
+    ],
+    "uig": [
+      "urd",
+      "arb",
+      "fas",
+      "eng"
+    ],
+    "ukr": [
+      "rus",
+      "bul",
+      "eng"
+    ],
+    "urd": [
+      "fas",
+      "arb",
+      "uig",
+      "eng"
+    ],
+    "vie": [
+      "ind",
+      "wol",
+      "afr",
+      "rus"
+    ],
+    "wol": [
+      "afr",
+      "cat",
+      "ces",
+      "rus"
+    ]
+  },
+  "oov_udhr": {
+    "Arabic": [
+      "pbu",
+      "pnb",
+      "skr"
+    ],
+    "Cyrillic": [
+      "bel",
+      "kaz",
+      "mkd"
+    ],
+    "Devanagari": [
+      "nep",
+      "mai"
+    ],
+    "Greek": [],
+    "Han": [
+      "yue"
+    ],
+    "Hangul": [],
+    "Hebrew": [
+      "ydd"
+    ],
+    "Latin": [
+      "swh",
+      "zul",
+      "haw"
+    ]
+  }
+}

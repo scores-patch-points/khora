@@ -1,0 +1,125 @@
+{
+ "rule": "ant-code select_files hash order minus ant-code's 24 files",
+ "js": [
+  {
+   "file": "/Users/mlacy/Documents/3.0/khora/native/eval/coding-competence/run.mjs",
+   "pool": "khora",
+   "units": 1911
+  },
+  {
+   "file": "/Users/mlacy/Documents/3.0/khora/native/organs/mnemonic.js",
+   "pool": "khora",
+   "units": 1056
+  },
+  {
+   "file": "/Users/mlacy/Documents/3.0/khora/native/eval/law/form.mjs",
+   "pool": "khora",
+   "units": 572
+  },
+  {
+   "file": "/Users/mlacy/Documents/3.0/khora/native/eval/notation-competence/chem_smiles.mjs",
+   "pool": "khora",
+   "units": 2188
+  },
+  {
+   "file": "/Users/mlacy/Documents/3.0/khora/native/adapters/text/pronouns.js",
+   "pool": "khora",
+   "units": 596
+  },
+  {
+   "file": "/Users/mlacy/Documents/3.0/khora/native/adapters/code/lex.js",
+   "pool": "khora",
+   "units": 1051
+  },
+  {
+   "file": "/Users/mlacy/Documents/jupyter/node_modules/table/dist/src/generated/validators.js",
+   "pool": "node_modules",
+   "units": 3043
+  },
+  {
+   "file": "/Users/mlacy/Documents/jupyter/node_modules/postcss-selector-parser/dist/parser.js",
+   "pool": "node_modules",
+   "units": 1154
+  },
+  {
+   "file": "/Users/mlacy/Documents/jupyter/node_modules/eslint/lib/rule-tester/flat-rule-tester.js",
+   "pool": "node_modules",
+   "units": 717
+  },
+  {
+   "file": "/Users/mlacy/Documents/jupyter/node_modules/app-builder-lib/out/targets/nsis/NsisTarget.js",
+   "pool": "node_modules",
+   "units": 813
+  },
+  {
+   "file": "/Users/mlacy/Documents/jupyter/node_modules/@lumino/algorithm/dist/index.es6.js",
+   "pool": "node_modules",
+   "units": 1450
+  },
+  {
+   "file": "/Users/mlacy/Documents/jupyter/node_modules/browserslist/index.js",
+   "pool": "node_modules",
+   "units": 1214
+  }
+ ],
+ "py": [
+  {
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/collections/__init__.py",
+   "units": 963
+  },
+  {
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py",
+   "units": 846
+  },
+  {
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/tempfile.py",
+   "units": 550
+  },
+  {
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/uuid.py",
+   "units": 547
+  },
+  {
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/multiprocessing/pool.py",
+   "units": 609
+  },
+  {
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/http/server.py",
+   "units": 733
+  },
+  {
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/bdb.py",
+   "units": 762
+  },
+  {
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/tomllib/_parser.py",
+   "units": 502
+  },
+  {
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/ssl.py",
+   "units": 880
+  },
+  {
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/concurrent/futures/process.py",
+   "units": 507
+  },
+  {
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/ipaddress.py",
+   "units": 1103
+  },
+  {
+   "file": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/_bootstrap_external.py",
+   "units": 932
+  }
+ ],
+ "counts": {
+  "A": 103,
+  "B": 181,
+  "P": 106
+ },
+ "skipped": {
+  "ja": 1,
+  "jb": 0,
+  "py": 19
+ }
+}

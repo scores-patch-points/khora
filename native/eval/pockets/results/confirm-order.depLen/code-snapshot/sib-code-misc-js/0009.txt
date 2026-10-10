@@ -1,0 +1,154 @@
+// agenda-probes.mjs — LAYER 2 (SIG): the instruments. Penelope's probe↺spiral,
+// as the loop's eyes.
+//
+// L1 (agenda.mjs) ranks voids it is handed; it cannot see. This layer looks.
+// A PROBE is one instrument with a place on the cube: it answers, with evidence,
+// either "clear" (ok:true) or a named void. The instruments here are the
+// mechanical ones the workspace actually has — a gate script's exit, an artifact
+// that must exist, an endpoint that must answer — and every one is injectable,
+// so the whole layer is tested with fakes and no network.
+//
+// Two laws, both falsifiable (test/agenda-probes.test.mjs):
+//   · A THROWING PROBE IS ITSELF A VOID, named "probe-error" — never a silent
+//     skip and never a crash. A broken instrument is reported, not swallowed
+//     (the same honesty as a wall in the pipeline).
+//   · A probe that says "clear" is recorded as a CLOSED row — the perspective
+//     that found nothing is kept, so a later reader cannot mistake "unchecked"
+//     for "checked".
+//
+// The SIG stage is grounded: ethos = each probe's own evidence (a command and
+// its tail, a path and its size, a URL and its status); logos = the probe
+// contract itself; pathos = none (seeing a void changes no action yet — the
+// action is the loop's, L4). The probe SET is one instrument, not competing
+// readings, so it is framed as one.
+
+import { execFile } from "node:child_process";
+import { statSync } from "node:fs";
+import { promisify } from "node:util";
+
+const execFileP = promisify(execFile);
+
+export const PROBE_SCHEMA = "Probe@1";
+
+const tail = (s, n = 200) => String(s ?? "").trim().slice(-n);
+
+/** Run every probe concurrently, in input order. Never rejects: a thrown probe
+ *  becomes a named void. Returns { observations, verdicts, evidence, errors }. */
+export async function collect(probes = [], ctx = {}) {
+  const verdicts = await Promise.all(
+    (probes ?? []).map(async (p) => {
+      try {
+        if (!p || typeof p.run !== "function") return { probe: p, ok: false, detail: null, evidence: null, error: "a probe entry is null or has no run" };
+        const r = (await p.run(ctx)) ?? {};
+        return { probe: p, ok: r.ok === true, detail: r.detail ?? null, evidence: r.evidence ?? null, error: null };
+      } catch (e) {
+        return { probe: p, ok: false, detail: null, evidence: null, error: tail(e?.message ?? e, 160) };
+      }
+    }),
+  );
+
+  const observations = [];
+  const evidence = [];
+  const errors = [];
+  for (const [i, v] of verdicts.entries()) {
+    const p = v.probe;
+    if (v.error) {
+      errors.push(p ? `${p.id}: ${v.error}` : `probe ${i}: ${v.error}`);
+      observations.push({ id: p ? p.id : `probe-${i}`, op: p?.op ?? null, kind: "probe-error", about: p?.about ?? null, detail: `the probe failed: ${v.error}`, ok: false, cost: p?.cost ?? 1, requires: p?.requires, target: p?.target ?? null });
+      continue;
+    }
+    if (v.evidence) evidence.push(`${p.id}: ${v.evidence}`);
+    observations.push({ id: p.id, op: p.op, kind: p.kind ?? "gate", about: p.about ?? p.id, detail: v.ok ? null : (v.detail ?? "open"), ok: v.ok, cost: p.cost, requires: p.requires, target: p.target ?? null });
+  }
+  return { observations, verdicts, evidence, errors };
+}
+
+/** The SIG stage, ready to append to a Think@1 trace. */
+export function probeStage({ observations = [], evidence = [], errors = [] } = {}) {
+  const open = observations.filter((o) => o.ok !== true);
+  const closed = observations.filter((o) => o.ok === true);
+  return {
+    layer: "SIG",
+    title: "the probes report",
+    framed: [`probe set: ${observations.length} instrument${observations.length === 1 ? "" : "s"}`],
+    survivor: open.length ? open.map((o) => o.id).join(", ") : null,
+    dissent: closed.map((o) => `${o.id}: clear`),
+    gap: errors.length ? errors.join(" | ") : null,
+    decision: `${observations.length} probes: ${open.length} open, ${closed.length} clear`,
+    grounded: {
+      ethos: evidence.length ? evidence : ["no probe returned evidence"],
+      logos: ["a probe answers ok:true or names a void; a throwing probe is itself a void (probe-error)"],
+      pathos: [],
+    },
+  };
+}
+
+/** Convenience: look, then hand L1 its rows. */
+export async function survey(probes, ctx = {}) {
+  const r = await collect(probes, ctx);
+  return { ...r, stage: probeStage(r) };
+}
+
+// ── the mechanical instruments ────────────────────────────────────────────────
+
+/** A gate script: exit 0 = clear; a non-zero exit, or the timeout, is a void
+ *  whose detail is the tail of what it said. */
+export function gateProbe({ id, op = "DEF", kind = "gate", about, command, args = [], cwd = process.cwd(), timeoutMs = 60_000, cost, requires } = {}) {
+  if (!id || !command) throw new TypeError("gateProbe needs an id and a command");
+  return {
+    id, op, kind, about: about ?? id, cost, requires, target: null,
+    async run() {
+      try {
+        await execFileP(command, args, { cwd, timeout: timeoutMs, maxBuffer: 8 * 1024 * 1024 });
+        return { ok: true, evidence: `${command} ${args.join(" ")} → exit 0 (${cwd})` };
+      } catch (e) {
+        const said = tail(e?.stderr || e?.stdout || e?.message || e);
+        return { ok: false, detail: said || `${command} exited ${e?.code ?? "?"}`, evidence: `${command} ${args.join(" ")} → ${e?.killed ? "timeout" : "exit " + (e?.code ?? "?")} (${cwd})` };
+      }
+    },
+  };
+}
+
+/** An artifact that must exist (and, if minBytes is given, be big enough). */
+export function fileProbe({ id, op = "INS", kind = "missing", about, path: file, minBytes = 0, cost, requires } = {}) {
+  if (!id || !file) throw new TypeError("fileProbe needs an id and a path");
+  return {
+    id, op, kind, about: about ?? id, cost, requires,
+    target: file, // where a conduct must land its artifact for this void to close
+    async run() {
+      try {
+        const st = statSync(file);
+        if (st.isDirectory()) {
+          return { ok: true, evidence: `${file} → directory` };
+        }
+        if (st.size < minBytes) return { ok: false, detail: `${file} is ${st.size}B, below the ${minBytes}B floor`, evidence: `${file} → ${st.size}B` };
+        return { ok: true, evidence: `${file} → ${st.size}B` };
+      } catch {
+        return { ok: false, detail: `${file} is absent`, evidence: `${file} → absent` };
+      }
+    },
+  };
+}
+
+/** An endpoint that must answer. `expect` is a status predicate (default: ok). */
+export function httpProbe({ id, op = "DEF", kind = "gate", about, url, method = "GET", timeoutMs = 5_000, expect = (r) => r.ok, body, cost, requires, fetchImpl = fetch } = {}) {
+  if (!id || !url) throw new TypeError("httpProbe needs an id and a url");
+  return {
+    id, op, kind, about: about ?? id, cost, requires, target: null,
+    async run() {
+      try {
+        const r = await fetchImpl(url, { method, headers: body ? { "content-type": "application/json" } : undefined, body: body ? JSON.stringify(body) : undefined, signal: AbortSignal.timeout(timeoutMs) });
+        // RELEASE THE SOCKET: an unread response body holds an undici connection
+        // per probe (measured: 30 sequential httpProbes left 30 live sockets).
+        // Cancel — the status alone is the verdict.
+        try { await r.body?.cancel(); } catch { /* best effort */ }
+        if (!expect(r)) return { ok: false, detail: `${method} ${url} → HTTP ${r.status}`, evidence: `${method} ${url} → HTTP ${r.status}` };
+        return { ok: true, evidence: `${method} ${url} → HTTP ${r.status}` };
+      } catch (e) {
+        return { ok: false, detail: `${method} ${url} unreachable: ${tail(e?.message ?? e, 120)}`, evidence: `${method} ${url} → unreachable` };
+      }
+    },
+  };
+}
+
+export default { PROBE_SCHEMA, collect, probeStage, survey, gateProbe, fileProbe, httpProbe };

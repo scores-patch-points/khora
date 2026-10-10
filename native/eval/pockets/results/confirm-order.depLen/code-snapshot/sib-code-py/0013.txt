@@ -1,0 +1,37 @@
+#!/usr/bin/env python3
+"""The date-window partition, shared by the sweep workers and the primary.
+
+Both processes must agree on exactly which dates window N covers: the workers
+claim windows by name, and the primary reports per-window pending counts under
+the same names. Two copies of this arithmetic would eventually drift, so there
+is one copy and both import it.
+"""
+from datetime import datetime, timedelta
+
+# Fixed anchor. Every worker derives the same windows from these two constants,
+# which is what makes claim-by-name safe without a coordinator.
+EPOCH = datetime(2020, 1, 1)
+WINDOW_DAYS = 7
+
+
+def window_bounds(idx):
+    start = EPOCH + timedelta(days=WINDOW_DAYS * idx)
+    return start, start + timedelta(days=WINDOW_DAYS - 1)
+
+
+def index_for_date(dt):
+    """Window index containing dt, or None if it predates the epoch."""
+    days = (dt - EPOCH).days
+    if days < 0:
+        return None
+    return int(days // WINDOW_DAYS)
+
+
+def index_for_file_date(file_date):
+    """CaseLink file_date is MM/DD/YYYY."""
+    if not file_date:
+        return None
+    try:
+        return index_for_date(datetime.strptime(file_date.strip(), "%m/%d/%Y"))
+    except Exception:
+        return None

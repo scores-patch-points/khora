@@ -1,0 +1,93 @@
+{
+ "headerSha256": "089611669313f8c11287b44ab86ae0e8764e6d57ad50481a5988f049b5ea81ca",
+ "generated": "2026-10-07T07:04:14.999Z",
+ "observations": 160,
+ "languages": 34,
+ "X1": {
+  "modern": {
+   "windows": 32,
+   "languages": 10,
+   "share": 0.969,
+   "boot": {
+    "point": 0.969,
+    "lo": 0.857,
+    "hi": 1,
+    "clusters": 10
+   }
+  },
+  "historical": {
+   "windows": 30,
+   "languages": 6,
+   "share": 0.467,
+   "boot": {
+    "point": 0.467,
+    "lo": 0.292,
+    "hi": 0.722,
+    "clusters": 6
+   }
+  },
+  "languageLevel": {
+   "modern": "10/10",
+   "historical": "2/6",
+   "modernLangs": [
+    "cat:0.46/600/0.671",
+    "cym:0.38/279/0.676",
+    "dan:0.36/302/0.669",
+    "gle:0.37/447/0.742",
+    "mlt:0.31/353/0.631",
+    "nob:0.37/546/0.653",
+    "ron:0.32/311/0.607",
+    "srp:0.28/490/0.625",
+    "bul:0.31/600/0.657",
+    "wol:0.40/358/0.684"
+   ],
+   "historicalLangs": [
+    "fao:0.46/582/0.632",
+    "got:0.34/264/0.564",
+    "grc:0.33/441/0.632",
+    "lzh:0.38/600/0.594",
+    "is:0.38/424/0.585",
+    "lat:0.34/436/0.577"
+   ]
+  }
+ },
+ "X2": {
+  "fisherP": 0.0082
+ },
+ "X3": {
+  "outModern": {
+   "n": 40,
+   "share": 0.325
+  },
+  "outHistorical": {
+   "n": 6,
+   "share": 0.167,
+   "langs": [
+    "lat",
+    "lzh"
+   ]
+  }
+ },
+ "X4": {
+  "modernInScopeLanguages": "10/10",
+  "modernOutLanguages": "3/9",
+  "fisherP": 0.0031,
+  "outLangs": [
+   "be:0.22/0.596",
+   "ces:0.25/0.601",
+   "est:0.18/0.567",
+   "eus:0.21/0.662",
+   "hye:0.19/0.573",
+   "slk:0.24/0.574",
+   "tam:0.17/0.566",
+   "hrv:0.26/0.638",
+   "lav:0.20/0.572"
+  ]
+ },
+ "candidate": {
+  "modernLowerGe60": true,
+  "modernShareGe80": true,
+  "historicalLe55": true,
+  "worthPreregisteredTest": true
+ }
+}

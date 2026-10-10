@@ -1,0 +1,122 @@
+"""Fetch an English knowledge corpus (Wiktionary definitions + Wikipedia lead
+sections) for the surveillance vocabulary. This is Snowden's LOGOS substrate:
+a corpus large enough for the hyperlexicon's composition candidates to reach
+minWitnesses=2, so "surveillance" learns the relations it composes with
+(camera, monitor, record, observe, license plate, ...) from recurrence across
+definitions — the way the reader learns from a book, in order.
+
+Usage:
+  python scripts/fetch_english_corpus.py [--out corpus/english-knowledge] [--max-terms 40]
+
+Politely rate-limited (1.6s between calls, exponential backoff on 429).
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import sys
+import time
+from pathlib import Path
+
+import requests
+
+UA = "SnowdenDefinitionsOrgan/1.0 (research corpus build)"
+WIKT = "https://en.wiktionary.org/w/api.php"
+WIKI = "https://en.wikipedia.org/w/api.php"
+
+# Wiktionary terms whose English definitions anchor the vocabulary
+WIKTIONARY_TERMS = [
+    # core technology nouns
+    "surveillance", "camera", "drone", "unmanned aerial vehicle", "license plate",
+    "automatic number plate recognition", "closed-circuit television", "facial recognition",
+    "biometrics", "monitoring", "observation", "interception", "recording", "thermal imaging",
+    "radar", "license plate reader", "stingray", "cell site simulator", "IMSI catcher",
+    "photograph", "video", "tracking", "surveillance camera", "body camera", "dashcam",
+    "geolocation", "geofence", "wiretap", "data collection", "microphone", "telescope",
+    "binoculars", "night vision", "subpoena", "undercover",
+    # the capability verbs (so they recur and the hyperlexicon can link them)
+    "observe", "monitor", "record", "capture", "collect", "track", "scan", "detect",
+    "identify", "measure", "watch", "intercept", "retain", "process", "analyze", "share",
+]
+
+# Wikipedia topics whose lead sections give the encyclopedic context
+WIKIPEDIA_TOPICS = [
+    "Surveillance", "Mass surveillance", "Closed-circuit television",
+    "Automatic number-plate recognition", "Facial recognition system", "Drone",
+    "Unmanned aerial vehicle", "Police body camera", "Surveillance camera",
+    "ShotSpotter", "License plate", "Biometrics", "Mobile phone tracking",
+    "Data retention", "Fusus (company)", "Real-time crime center",
+]
+
+
+def get(url: str, params: dict) -> dict:
+    for attempt in range(6):
+        r = requests.get(url, params=params, headers={"User-Agent": UA}, timeout=60)
+        if r.status_code == 200:
+            return r.json()
+        if r.status_code in (429, 503):
+            time.sleep(3 * (attempt + 1))
+            continue
+        r.raise_for_status()
+    raise RuntimeError(f"rate-limited out: {url}")
+
+
+def english_section(extract: str) -> str:
+    """Keep the English-language section of a Wiktionary extract (first == English ==)."""
+    i = extract.find("== English ==")
+    if i < 0:
+        return extract
+    j = extract.find("\n==", i + 12)  # next language section
+    return extract[i : j if j > i else len(extract)]
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out", default="corpus/english-knowledge")
+    ap.add_argument("--max-terms", type=int, default=200)
+    args = ap.parse_args()
+
+    out = Path(args.out)
+    out.mkdir(parents=True, exist_ok=True)
+    terms = WIKTIONARY_TERMS[: args.max_terms]
+
+    n = 0
+    for t in terms:
+        try:
+            d = get(WIKT, {"action": "query", "titles": t, "prop": "extracts", "explaintext": 1, "format": "json", "redirects": 1})
+            page = next(iter(d["query"]["pages"].values()))
+            title = page.get("title", t)
+            extract = english_section(page.get("extract") or "")
+            if not extract.strip():
+                continue
+            slug = re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")
+            (out / f"wikt-{slug}.txt").write_text(f"{title}\n\n{extract}")
+            n += 1
+            print(f"  wikt {title}", file=sys.stderr)
+        except Exception as e:
+            print(f"  wikt {t} ERR {e}", file=sys.stderr)
+        time.sleep(1.6)
+
+    for t in WIKIPEDIA_TOPICS:
+        try:
+            d = get(WIKI, {"action": "query", "titles": t, "prop": "extracts", "explaintext": 1, "exintro": 1, "format": "json", "redirects": 1})
+            page = next(iter(d["query"]["pages"].values()))
+            title = page.get("title", t)
+            extract = page.get("extract") or ""
+            if not extract.strip():
+                continue
+            slug = re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")
+            (out / f"wiki-{slug}.txt").write_text(f"{title}\n\n{extract}")
+            n += 1
+            print(f"  wiki {title}", file=sys.stderr)
+        except Exception as e:
+            print(f"  wiki {t} ERR {e}", file=sys.stderr)
+        time.sleep(1.8)
+
+    print(f"wrote {n} docs -> {out}")
+
+
+if __name__ == "__main__":
+    main()

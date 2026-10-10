@@ -1,0 +1,354 @@
+"""End-to-end Legistar surveillance scanner.
+
+Two-stage pipeline over the FULL Nashville matter population:
+
+  Stage 1 (fast): score every matter's title with classify_title -> candidate list.
+  Stage 2 (deep):  for candidates, fetch full text + attachments, extract text
+                   (PDFs OCR'd as needed), run eoreader7, score surfaces, and
+                   attach evidence. Writes a ranked JSON report + CSV.
+
+Usage:
+  python scripts/pipeline.py [--matters data/matters.jsonl] [--out reports/scan.json]
+                             [--max-deep N] [--title-threshold 4.0]
+"""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import json
+import os
+import subprocess
+import sys
+import tempfile
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+
+import extract  # noqa: E402
+from archive import archive_url  # noqa: E402
+from classify import classify_title  # noqa: E402
+from khora import archive_sidecar  # noqa: E402
+from legistar import Legistar  # noqa: E402
+from slots import extract_slots, headline  # noqa: E402
+from snippets import declared_use, document_snippets  # noqa: E402
+from scorer import evidence_keywords, shape_surfaces, fuse, strip_known_boilerplate, EmbeddingScorer  # noqa: E402
+
+EOREAD = "node"
+EO_SCRIPT = str(Path(__file__).resolve().parent / "eo_read.mjs")
+
+
+def eo_read_surfaces(txt_path: Path, workdir: Path) -> tuple[list[str], int, int, list[dict], list[str]]:
+    """Run the fast batched reader (refreshEvery:25). Returns surfaces, edges,
+    entries, and the grounded entries (relation + quoted surface text + a
+    snippet of surrounding source text per graph entry) — the holographic
+    grounding a matter's profile page quotes as the actual argument."""
+    proc = subprocess.run(
+        [EOREAD, EO_SCRIPT, str(txt_path), "--out", str(workdir)],
+        capture_output=True, text=True, timeout=1800,
+    )
+    if proc.returncode != 0:
+        raise RuntimeError(proc.stderr[-400:])
+    slug = txt_path.stem.lower()
+    read_path = workdir / f"{slug}.eo_read.json"
+    if not read_path.exists():
+        read_path = workdir / f"{slug.replace('_', '-')}.eo_read.json"
+    d = json.loads(read_path.read_text())
+    return (d["surfaces"], d["relationEdges"], d["nGraphEntries"],
+            d.get("entries") or [], d.get("cast") or [])
+
+
+def _relevant_entries(entries: list[dict], evidence_tags: list[str], cap: int = 60) -> list[dict]:
+    """Filter the full grounded-entry list down to just the ones that back
+    an actual evidence tag — the profile page quotes these, not all ~500
+    entries a document produces."""
+    terms = {tag.split(":", 1)[-1].replace("_", " ") for tag in evidence_tags}
+    out = []
+    for e in entries:
+        text = " ".join(p.get("surface") or "" for p in e.get("participants") or []).lower()
+        if any(t in text for t in terms):
+            out.append(e)
+    return out[:cap]
+
+
+def _with_source_urls(snippets: list[dict], archives: list[dict]) -> list[dict]:
+    """Point each exhibit quote at the actual hosted document it was read
+    from — matter_text() names each attachment when it writes the section
+    marker, matter_text()'s own archives_out list carries that SAME name
+    next to the attachment's real Legistar-hosted URL, so joining on it is
+    exact, not a guess. A quote from "the legislation itself" has no
+    attachment to point at and is left alone."""
+    by_name = {a["name"]: a.get("sourceUrl") for a in archives if a.get("sourceUrl")}
+    for s in snippets:
+        url = by_name.get(s.get("section"))
+        if url:
+            s["sourceUrl"] = url
+    return snippets
+
+
+def matter_text(matter: dict, api: Legistar, tmp: Path, *, max_attachments: int = 3,
+                 archives_out: list | None = None) -> str:
+    """Compose the text a matter should be read on: title + attachment bodies.
+    Each attachment's own hosted URL (never our extracted bytes) is also sent
+    to the Wayback Machine for a permanent, independent copy; the resulting
+    archive.org links are appended to `archives_out` if given. The source PDF
+    itself is never retained locally beyond this call's temp dir."""
+    parts = [matter.get("MatterTitle") or ""]
+    try:
+        atts = api.attachments(matter["MatterId"]) or []
+    except Exception:
+        atts = []
+    for att in atts[:max_attachments]:
+        name = att.get("MatterAttachmentName") or "att"
+        link = att.get("MatterAttachmentHyperlink")
+        if archives_out is not None and link:
+            archived = archive_url(link)
+            archives_out.append({"name": name, "sourceUrl": link, "archiveUrl": archived})
+        try:
+            data = api.attachment_bytes(att)
+            if not data:
+                continue
+            p = tmp / f"{matter['MatterId']}_{name.replace(' ','_')[:40]}.{att.get('MatterAttachmentFileName','').split('.')[-1].lower() or 'bin'}"
+            p.write_bytes(data)
+            parts.append(f"\n\n--- ATTACHMENT: {name} ---\n" + extract.extract_file(p))
+        except Exception as exc:
+            parts.append(f"\n\n--- ATTACHMENT {name} (extraction failed: {exc}) ---")
+    return "\n".join(parts)
+
+
+# module-level globals for the parallel workers (set per-worker via
+# _init_worker so the pool works under both fork and spawn)
+_API: Legistar | None = None
+_ES = None
+_CACHE_DIR: Path | None = None
+
+
+def _init_worker(cache_dir: str, client: str):
+    global _API, _ES, _CACHE_DIR
+    _CACHE_DIR = Path(cache_dir)
+    _API = Legistar(client)
+    _ES = None  # the embedding model is heavy; the parent scores it
+
+
+def deep_one(item):
+    """One matter's deep pass, in a worker process: cached extraction ->
+    bounded SCREEN SLICE -> eo_read (seconds, not minutes) -> L1/L2.
+    The embedding layer and fusion run in the parent (the model is heavy)."""
+    from screen_slice import screen_slice
+
+    score, m, ev = item
+    file = m.get("MatterFile") or str(m["MatterId"])
+    mid = m["MatterId"]
+    archives: list = []
+    try:
+        text_path = _CACHE_DIR / "text" / f"{mid}.txt"
+        archives_path = _CACHE_DIR / "archives" / f"{mid}.json"
+        if text_path.exists():
+            text = text_path.read_text()
+            if archives_path.exists():
+                archives = json.loads(archives_path.read_text())
+        else:
+            with tempfile.TemporaryDirectory() as td:
+                text = matter_text(m, _API, Path(td), archives_out=archives)
+            text_path.parent.mkdir(parents=True, exist_ok=True)
+            text_path.write_text(text)
+            archives_path.parent.mkdir(parents=True, exist_ok=True)
+            archives_path.write_text(json.dumps(archives))
+        # The cache file keeps the full, untouched extraction (useful for
+        # debugging and for exhibit quoting below) — boilerplate is only
+        # stripped from what actually reaches the scoring layers.
+        text = strip_known_boilerplate(text)
+        if len(text) < 200:
+            text = m.get("MatterTitle") or ""
+        slice_text = screen_slice(text)
+        with tempfile.TemporaryDirectory() as td:
+            work = Path(td)
+            tf = work / f"m{mid}.txt"
+            tf.write_text(slice_text)
+            try:
+                surfaces, edges, n_entries, grounded, cast = eo_read_surfaces(tf, work)
+            except Exception as exc:
+                # A read FAILURE is not a finding — it was being reported as
+                # "surveillance" unconditionally, which silently flagged
+                # every unreadable document as a positive result (caught
+                # live: 4 of 5 scan errors this run were 0.0-score matters
+                # mislabeled this way). "error" keeps it out of the feed and
+                # out of alerts while staying visible for a retry/audit.
+                return {"file": file, "matterId": mid, "title": m.get("MatterTitle"),
+                        "error": f"eo_read: {exc}", "score": score, "evidence": ev,
+                        "label": "error", "text_chars": len(text), "archives": archives}
+        l1 = evidence_keywords(text, title=m.get("MatterTitle") or "")
+        l2 = shape_surfaces(surfaces, text=text, title=m.get("MatterTitle") or "",
+                            relation_edges=edges, n_entries=n_entries)
+        evidence = (l1["evidence"] + l2["evidence"])[:25]
+        result = {"file": file, "matterId": mid, "title": m.get("MatterTitle"),
+                  "l1": l1["label"], "l2": l2["label"], "l1_score": l1["score"], "l2_score": l2["score"],
+                  "evidence": evidence,
+                  "relationEdges": edges, "nGraphEntries": n_entries,
+                  "text_chars": len(text), "title_score": score, "archives": archives,
+                  "groundedEvidence": _relevant_entries(grounded, evidence),
+                  "documentSnippets": _with_source_urls(document_snippets(text), archives),
+                  "declaredUse": declared_use(text)}
+        slots = extract_slots(m.get("MatterTitle") or "", surfaces, cast, text)
+        result["slots"] = slots
+        result["headline"] = headline(slots)
+        # preserve our own reading independent of Legistar/eoreader7 state —
+        # every deep-pass conclusion, flagged or not, is an auditable record
+        result["sidecarArchive"] = archive_sidecar(file, result)
+        return result
+    except Exception as exc:
+        import traceback
+        return {"file": file, "matterId": mid, "title": m.get("MatterTitle"),
+                "error": str(exc), "tb": traceback.format_exc(limit=8), "score": score, "evidence": ev,
+                "label": "error", "text_chars": 0, "archives": archives}
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--matters", default="data/matters.jsonl")
+    ap.add_argument("--out", default="reports/scan.json")
+    ap.add_argument("--max-deep", type=int, default=1000)
+    ap.add_argument("--title-threshold", type=float, default=4.0)
+    ap.add_argument("--client", default="nashville")
+    ap.add_argument("--no-deep", action="store_true", help="title pass only")
+    args = ap.parse_args()
+
+    matters = [json.loads(l) for l in Path(args.matters).open()]
+    print(f"loaded {len(matters)} matters")
+
+    # ---- Stage 1: title screen -------------------------------------------
+    candidates = []
+    for m in matters:
+        v = classify_title(m.get("MatterTitle") or "", file=m.get("MatterFile") or "")
+        if v.label == "surveillance":
+            candidates.append((v.score, m, v.evidence))
+    candidates.sort(key=lambda x: -x[0])
+    print(f"stage1 title candidates: {len(candidates)}")
+
+    # ---- Stage 1b: procurement forward -----------------------------------
+    # Cooperative-purchasing master agreements and sole-source contracts are
+    # the laundering vector: surveillance rides in under benign titles
+    # ("public safety software"). Forward every one of them to the deep pass
+    # regardless of title score.
+    PROCV = ("cooperative purchasing", "master agreement", "sole source")
+    seen = {id(m) for _, m, _ in candidates}
+    for m in matters:
+        t = (m.get("MatterTitle") or "").lower()
+        if any(k in t for k in PROCV):
+            if id(m) not in seen:
+                candidates.append((0.0, m, ["procurement_forward"]))
+                seen.add(id(m))
+    candidates.sort(key=lambda x: -x[0])
+    print(f"stage1 total candidates (title + procurement forward): {len(candidates)}")
+
+    if args.no_deep:
+        out = {"schema": "NashvilleSurveillanceScan@1",
+               "client": args.client, "titleThreshold": args.title_threshold,
+               "totalMatters": len(matters),
+               "stage1": [{"file": m["MatterFile"], "matterId": m["MatterId"],
+                           "title": m["MatterTitle"], "score": s, "evidence": ev}
+                          for s, m, ev in candidates]}
+        Path(args.out).write_text(json.dumps(out, indent=2))
+        print(f"wrote {args.out}")
+        return
+
+    # ---- Stage 2: deep pass over top candidates --------------------------
+    # The fast path: full extraction (every page, cached), then a bounded
+    # SCREEN SLICE fed to eoreader7 (front + lexicon windows, ~seconds not
+    # minutes), then all three layers. Matters run in PARALLEL across cores.
+    global _API, _ES, _CACHE_DIR
+    _API = Legistar(args.client)
+    _CACHE_DIR = Path("data/cache")
+    extract.set_ocr_cache(str(_CACHE_DIR / "ocr"))
+
+    # embed prototypes once (the embedding layer is optional and slow to load)
+    _ES = None
+    try:
+        from scorer import EmbeddingScorer
+        _ES = EmbeddingScorer()
+        surv_protos = [p.read_text() for p in Path("goldens/other-cities").glob("*.txt")]
+        bg_protos = [p.read_text() for p in Path("corpus/background").glob("*.txt")]
+        _ES.fit(surv_protos, bg_protos)
+    except Exception as exc:
+        print(f"  embed layer off: {exc}", file=sys.stderr)
+
+    from concurrent.futures import ProcessPoolExecutor, as_completed
+
+    # Deep-read the NEWEST candidates first, not the highest-scoring ones.
+    # Candidates arrive ordered by title score, and a laundered title scores
+    # 0.0 — that is the entire point of RS2026-2264, whose title says
+    # "public safety software" while its exhibit lists video surveillance and
+    # drones. Ordering by score and then capping put exactly the matters this
+    # exists to catch at the tail, where the cap cut them off: the Motorola
+    # matter was silently dropped from a 234-candidate stage 1 by a cap of
+    # 200. Recency is the honest priority for a monitor — a thing before the
+    # Council this week matters more than a 2019 item already decided.
+    def _recency(item):
+        m = item[1]
+        return (m.get("MatterAgendaDate") or m.get("MatterIntroDate")
+                or m.get("MatterLastModifiedUtc") or "")
+    todo = sorted(candidates, key=_recency, reverse=True)[: args.max_deep]
+    # Capped well below cpu_count()-1: this runs on a shared box (Matrix,
+    # Postgres, other services) and a worker mid-OCR on a large scanned PDF
+    # can hold several hundred MB of rendered pages at once — enough
+    # concurrent workers hitting big documents together OOM-killed the box
+    # once already. 3 gives real parallelism with real headroom.
+    workers = min(3, max(1, (os.cpu_count() or 2) - 1))
+    deep = []
+    with ProcessPoolExecutor(max_workers=workers, initializer=_init_worker,
+                             initargs=(str(_CACHE_DIR), args.client)) as ex:
+        futs = {ex.submit(deep_one, item): item for item in todo}
+        done = 0
+        for fut in as_completed(futs):
+            done += 1
+            deep.append(fut.result())
+            print(f"  deep {done}/{len(todo)} done", file=sys.stderr, flush=True)
+
+    # ---- parent-side: the embedding layer (heavy model, kept out of the
+    # workers) + the fused verdict --------------------------------
+    for d in deep:
+        if d.get("error"):
+            continue
+        mid = d["matterId"]
+        text_path = _CACHE_DIR / "text" / f"{mid}.txt"
+        text = text_path.read_text() if text_path.exists() else d.get("title", "")
+        text = strip_known_boilerplate(text)
+        l3 = _ES.score(text) if _ES else {"margin": 0.0, "surv_sim": 0.0, "bg_sim": 0.0}
+        l1 = {"label": d.get("l1"), "score": d.get("l1_score", 0)}
+        l2 = {"label": d.get("l2"), "score": d.get("l2_score", 0)}
+        fused = fuse(l1, l2, l3)
+        d["l3"] = "surveillance" if l3.get("margin", 0) > 0.05 and l3.get("surv_sim", 0) > 0.6 else "background"
+        d["l3_margin"] = round(l3.get("margin", 0), 3)
+        d["l3_surv"] = round(l3.get("surv_sim", 0), 3)
+        d["label"] = fused["label"]
+        d["score"] = round(max(d.get("l1_score", 0), d.get("l2_score", 0), (l3.get("surv_sim", 0)) * 100), 2)
+
+    deep.sort(key=lambda x: -(x.get("score") or 0))
+    flagged = [d for d in deep if d.get("label") == "surveillance"]
+    report = {
+        "schema": "NashvilleSurveillanceScan@3",
+        "client": args.client,
+        "titleThreshold": args.title_threshold,
+        "totalMatters": len(matters),
+        "stage1Candidates": len(candidates),
+        "deepProcessed": len(deep),
+        "flagged": flagged,
+        "all": deep,
+    }
+    Path(args.out).write_text(json.dumps(report, indent=2))
+
+    csv_path = Path(args.out).with_suffix(".csv")
+    with csv_path.open("w", newline="") as fh:
+        w = csv.writer(fh)
+        w.writerow(["file", "matterId", "title", "label", "score", "l1", "l2", "l3",
+                    "l1_score", "l2_score", "l3_margin", "relationEdges", "nGraphEntries", "text_chars"])
+        for d in deep:
+            w.writerow([d.get("file"), d.get("matterId"), d.get("title"), d.get("label"),
+                        d.get("score"), d.get("l1"), d.get("l2"), d.get("l3"),
+                        d.get("l1_score"), d.get("l2_score"), d.get("l3_margin"),
+                        d.get("relationEdges"), d.get("nGraphEntries"), d.get("text_chars")])
+    print(f"flagged {len(flagged)} -> {args.out}")
+
+
+if __name__ == "__main__":
+    main()

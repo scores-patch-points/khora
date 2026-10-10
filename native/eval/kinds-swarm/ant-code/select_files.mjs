@@ -1,0 +1,22 @@
+// select_files.mjs -- ant-code: MECHANICAL, result-blind file selection (written and run before any reader result). Output: data/files.json
+// Rule: candidate = size 20-150KB (py 20-120KB), >= 500 lines, mean line length <= 100 chars, not minified/generated/test; hash order sha256("ant-code-select|"+path) ascending;
+// JS: 6 from pool A (khora/native, <=1 per directory) + 6 from pool B (jupyter/node_modules, <=1 per package); PY: 12 from stdlib (<=2 per subpackage). A file whose lexer fails
+// or yields < 500 units is skipped and the next in hash order is taken (the skip list is recorded).
+import fs from "node:fs"; import path from "node:path"; import crypto from "node:crypto"; import { execFileSync } from "node:child_process"; import { lexJs } from "./lex_js.mjs";
+const H = (p) => crypto.createHash("sha256").update("ant-code-select|" + p).digest("hex");
+const walk = (d, test, out = []) => { let es; try { es = fs.readdirSync(d, { withFileTypes: true }); } catch { return out; } for (const e of es) { const p = path.join(d, e.name); if (e.isDirectory()) { if (test.skipDir(p, e.name)) continue; walk(p, test, out); } else if (test.file(e.name)) out.push(p); } return out; };
+const ok = (p, lo, hi) => { let st; try { st = fs.statSync(p); } catch { return false; } if (st.size < lo * 1024 || st.size > hi * 1024) return false; const s = fs.readFileSync(p, "utf8"); const n = s.split("\n").length; return n >= 500 && s.length / n <= 100 && !/@generated|sourceMappingURL|DO NOT EDIT/i.test(s.slice(0, 3000)); };
+const NATIVE = "/Users/mlacy/Documents/3.0/khora/native", NM = "/Users/mlacy/Documents/jupyter/node_modules";
+const PYLIB = "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/lib/python3.14";
+const skipA = (p, n) => n === "node_modules" || n === "results" || n === "data" || n === "logs" || n === "kinds-swarm" || n.startsWith(".") || /tests?$|fixtures?$/.test(n);
+const A = walk(NATIVE, { skipDir: skipA, file: (n) => /\.(m?js)$/.test(n) && !/\.min\./.test(n) }).filter((p) => ok(p, 20, 150));
+const B = walk(NM, { skipDir: (p, n) => /^(tests?|__tests__|test-.*|fixtures?|esm|umd|browser|\.bin|\.cache)$/.test(n) || n.startsWith("."), file: (n) => /\.js$/.test(n) && !/\.min\.|\.d\./.test(n) }).filter((p) => ok(p, 20, 150));
+const P = walk(PYLIB, { skipDir: (p, n) => /^(test|tests|idlelib|lib2to3|site-packages|turtledemo|__pycache__|config-.*|ensurepip|pydoc_data|_pyrepl|tkinter|distutils|encodings)$/.test(n), file: (n) => n.endsWith(".py") }).filter((p) => ok(p, 20, 120));
+const pick = (pool, n, keyOf, maxPer, tryIt) => { const order = pool.slice().sort((a, b) => H(a).localeCompare(H(b))); const per = new Map(), out = [], skipped = []; for (const p of order) { if (out.length >= n) break; const k = keyOf(p); if ((per.get(k) ?? 0) >= maxPer) continue; const r = tryIt(p); if (!r.ok) { skipped.push([p, r.why]); continue; } per.set(k, (per.get(k) ?? 0) + 1); out.push(p); } return { out, skipped }; };
+const tryJs = (p) => { try { const d = lexJs(p); return d.units.length >= 500 ? { ok: true } : { ok: false, why: `units ${d.units.length}` }; } catch (e) { return { ok: false, why: String(e.message).slice(0, 60) }; } };
+const tryPy = (p) => { try { const o = execFileSync("python3", [path.join(path.dirname(new URL(import.meta.url).pathname), "lex_py.py"), p], { maxBuffer: 1 << 28 }); const d = JSON.parse(o); return d.units.length >= 500 ? { ok: true } : { ok: false, why: `units ${d.units.length}` }; } catch (e) { return { ok: false, why: "lexer error" }; } };
+const ja = pick(A, 6, (p) => path.dirname(p), 1, tryJs), jb = pick(B, 6, (p) => p.slice(NM.length + 1).split("/")[0], 1, tryJs);
+const py = pick(P, 12, (p) => { const r = p.slice(PYLIB.length + 1).split("/"); return r.length > 1 ? r[0] : r[0]; }, 2, tryPy);
+const out = { js: [...ja.out.map((p) => ({ file: p, pool: "khora" })), ...jb.out.map((p) => ({ file: p, pool: "node_modules" }))], py: py.out.map((p) => ({ file: p, pool: "stdlib" })), counts: { A: A.length, B: B.length, P: P.length }, skipped: { ja: ja.skipped, jb: jb.skipped, py: py.skipped } };
+fs.writeFileSync(path.join(path.dirname(new URL(import.meta.url).pathname), "data", "files.json"), JSON.stringify(out, null, 1));
+console.log(JSON.stringify({ counts: out.counts, js: out.js.map((x) => x.file.replace(/^.*(native|node_modules)\//, "$1/")), py: out.py.map((x) => x.file.replace(PYLIB + "/", "")), skipped: [ja.skipped.length, jb.skipped.length, py.skipped.length] }, null, 1));

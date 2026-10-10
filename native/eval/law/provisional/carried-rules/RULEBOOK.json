@@ -1,0 +1,592 @@
+{
+ "builtBy": "build-rulebook.mjs",
+ "headerSha256": "3483e399147eb71fd6ce09cf215989bf1a526e401bcfb28e4aa259030aeb4fe9",
+ "lens": "carried-rules",
+ "n": 14,
+ "problems": [],
+ "verification": {
+  "verify-beings.part1.json": {
+   "script": "verify-beings.mjs",
+   "headerSha256": "d862466420d774311b82ad6af790dfebeaefacfdd9799512855c221271687871",
+   "summary": {
+    "n": 26,
+    "reproduced": 23,
+    "notReproduced": [
+     "L3.t1.Aup",
+     "L3.t2.Aup",
+     "L5.dev.salienceAUC"
+    ]
+   }
+  },
+  "verify-graded.json": {
+   "script": "verify-graded.mjs",
+   "headerSha256": "b03eaf841f4459b09874ac4d06f4d20cbbfd660e8ebc0c21f11c1dc8c4e7e26d",
+   "summary": {
+    "n": 14,
+    "reproduced": 14,
+    "notReproduced": []
+   }
+  },
+  "verify-physics-auc.json": {
+   "script": "verify-physics-auc.mjs",
+   "headerSha256": "26d884bcb7a2bc267613224906696a27fd4fc602ae1529741f67be60baf0ac46",
+   "summary": {
+    "T1_cliffOrdinal": true,
+    "T2_noInertiaAboveFloor": true,
+    "T3_singleLess": true
+   }
+  },
+  "verify-physics.json": {
+   "script": "verify-physics.mjs",
+   "headerSha256": "7fec9824d8e97cbc22667820bca81a3d537ff457803bd5d9839eeb7047d15072",
+   "summary": {
+    "n": 31,
+    "reproduced": 31,
+    "notReproduced": []
+   }
+  },
+  "verify-signals.json": {
+   "script": "verify-signals.mjs",
+   "headerSha256": "1fbbd6538e55d4ab110b0b71c261cfc67b9dd01c68ebfefebb38f9ad015dbf63",
+   "summary": {
+    "n": 37,
+    "reproduced": 37,
+    "notReproduced": []
+   }
+  }
+ },
+ "nonReproducedExplained": [
+  {
+   "file": "verify-beings.part1.json",
+   "id": "L3.t1.Aup",
+   "why": "report says 12 stems up for A; at |effect| > 0.0005 it is 12, at the 0.002 threshold used here 10 (fold A) and 9 (fold B): a threshold difference, not a number difference"
+  },
+  {
+   "file": "verify-beings.part1.json",
+   "id": "L3.t2.Aup",
+   "why": "same as L3.t1.Aup"
+  },
+  {
+   "file": "verify-beings.part1.json",
+   "id": "L5.dev.salienceAUC",
+   "why": "the reported 0.52 is the stage-s0 value (0.5238); the final configuration gives 0.447 (DEV s4), 0.416 (fold A), 0.448 (fold B)"
+  }
+ ],
+ "rules": [
+  {
+   "id": "COMPANY-FIRST-LEFT",
+   "statement": "If a word is at its FIRST occurrence in treebank-register text of one of ~21 languages, then the frequency-rank bins of its two LEFT neighbours (prefix only, causal) rank proper nouns above position-, character-length-, form-frequency- and sentence-length-matched ordinary open-class words (expected AUC about 0.62, language range 0.51-0.72).",
+   "scope": "UD DEV text of 23 languages with enough matched pairs at FIRST (eng spa cmn cmn-hans heb fas jpn fra deu ita por nld pol ukr hin vie ind urd tur ell fin plus rus and kor which fail); stratum FIRST = first occurrence of the form in the document (single mention); case-stripped; one ridge-logistic PROBE per language, leave-pair-block-out. Strongest: spa .721, heb .705, hin .704, fra .681, deu .677, nld .669, urd .666, ita .661, por .653.",
+   "outOfScope": "rus 0.507 (600 pairs, below its own permutation q95 0.544); kor 0.580 (67 pairs, q95 0.638); weak: pol .570, tur .575, ukr .588, fin .593, cmn .567; arb and swe too thin (13-20 pairs). Chat: UD pooled to IRC 0.515, IRC-within-register 0.526 (near chance). NOT word-order-family-specific (same minus other family -0.0001, same>other in 14/23, sign p 0.20). A fitted probe, not a zero-shot score; no UD test.conllu read.",
+   "observables": "For one token occurrence: the frequency-rank bin (12 log2 bins plus edge marker) of each of its two left neighbours, taken from the stream's own counts. No neighbour string, no capital, no POS prior, no word list. Gold UD PROPN is used only to label the probe's training pairs and to evaluate.",
+   "discovery": "name-company.mjs amended run (NAME_COMPANY_PAIRBLOCK=1; header sha256 c3234d9b030573ca82c85049929c35cb65d1eafd4c16dd4344de018cb03652e1), results/name-company-pairblocks/report.json, recomputed by verify-signals.json (37/37 checks reproduce). LEFT at FIRST: mean AUC 0.6236 over 23 languages; 21 of 23 above their OWN permutation q95 (mean q95 0.5425); 14 languages >= 0.60, 9 >= 0.65; matched controls POSITION 0.505 / CHARLEN 0.500 / FREQ 0.499 / RIVALS 0.505 (all inside [0.45, 0.55]); beyond the matched rivals (LEFT+RIVALS minus RIVALS) +0.118 [0.094, 0.141], >= +0.03 in 22 of 23. With right-side lookahead (BOTH, non-causal): 0.6553, 19 >= 0.60, 12 >= 0.65, 22 of 23 above q95. Word-order shuffle was run on LATER only (0.612 -> 0.516), not on FIRST. effect = mean AUC. Discovery data = UD DEV only (all discovery used dev; test untouched).",
+   "effect": 0.6236,
+   "confirmPlan": "carried",
+   "passIf": "On the untouched UD test.conllu of the same stems, with the same matching and NAME_COMPANY_PAIRBLOCK=1: mean LEFT-at-FIRST AUC >= 0.58 over the non-thin languages, >= 16 languages above their own permutation q95, >= 8 languages >= 0.62, POSITION control inside [0.45, 0.55].",
+   "failIf": "Mean AUC < 0.55, or fewer than 12 languages above their own q95, or the POSITION control outside [0.45, 0.55] (the comparison is then void, not a pass).",
+   "evidenceFiles": [
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/law/results/name-company-pairblocks/report.json",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/law/NAME-COMPANY-RESULTS.md",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/law/name-company.mjs",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/law/provisional/carried-rules/verify-signals.json",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "id": "COMPANY-LATER-BOTH",
+   "statement": "If a word is a repeated (not first) occurrence in treebank-register text, then the frequency-rank bins of its two left and two right neighbours rank proper nouns above matched ordinary words (expected AUC about 0.615, range 0.48-0.73); the shape is language-general but modest and vanishes when word order is shuffled.",
+   "scope": "UD DEV text, 22 non-thin languages, stratum LATER (form seen before); probe trained and tested inside one language. Strongest: fra .726, spa .693, fas .688, urd .688, heb .685, hin .657, por .655 (three of them SOV-like), then nld .644, eng .633, cmn-hans .630, jpn .617, ind .614, cmn .614, ell .602.",
+   "outOfScope": "Fails its own permutation q95 in deu (.552 vs .583), pol (.550 vs .559), ukr (.526 vs .625), tur (.481 vs .568); LEFT-only fails in jpn, deu, pol, ukr, tur, fin; arb, kor, swe thin. Not family-specific: same-family minus other-family +0.0327 [0.006, 0.059] but same>other in only 12 of 22 (sign p 0.33), 3-cluster +0.006; post-hoc the gain sits in Romance plus rus and ell (relatedness, not word order). UD pooled to IRC 0.457 (register-bound). Japanese does not collapse under shuffling (0.617 -> 0.662, 88 pairs), unexplained.",
+   "observables": "Frequency-rank bins (12 log2 bins plus edge) of two left and two right neighbours, from the stream's own counts; no strings, capitals, POS prior or lists.",
+   "discovery": "Same run and file as COMPANY-FIRST-LEFT (name-company-pairblocks/report.json; verify-signals.json). BOTH at LATER: mean AUC 0.6154 over 22 languages, 18 of 22 above own permutation q95 (mean q95 0.552), 14 >= 0.60, 7 >= 0.65; controls POSITION 0.500 / CHARLEN 0.500 / FREQ 0.501 / RIVALS 0.501; beyond rivals (BOTH+RIVALS minus RIVALS) +0.1154 [0.0908, 0.1388], >= +0.03 in 20 of 22; word-order shuffle over 8 languages 0.6122 -> 0.5161 (eng .633->.548, spa .693->.430, fas .688->.559, hin .657->.516). The first (invalid) run had POSITION at 0.38 because pair members fell in different blocks; the amended pair-block run is the valid one. effect = mean AUC. UD DEV only; not confirmed on a fresh fold.",
+   "effect": 0.6154,
+   "confirmPlan": "carried",
+   "passIf": "On untouched UD test.conllu: mean BOTH-LATER AUC >= 0.58, >= 14 non-thin languages above their own q95, shuffled-word-order arm within 0.03 of chance, POSITION control inside [0.45, 0.55].",
+   "failIf": "Mean AUC < 0.55, or word-order shuffle leaves the mean above 0.57 (then it is counts, not company), or POSITION control outside [0.45, 0.55] (void).",
+   "evidenceFiles": [
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/law/results/name-company-pairblocks/report.json",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/law/NAME-COMPANY-RESULTS.md",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/law/name-company-diag.mjs",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/law/provisional/carried-rules/verify-signals.json",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "id": "COMPANY-CHAT-WITHIN-REGISTER",
+   "statement": "If the text is multi-party chat (Ubuntu IRC) and the probe is trained on other days of the SAME register, then the rank-bin company of a repeated word ranks nickname occurrences above position-, length- and frequency-matched words (expected AUC about 0.61); it does not transfer from treebank text and is near chance at first mention.",
+   "scope": "8 IRC channel-days (kubuntu/ubuntu 2004-2015), 1200 LATER pairs and 726 FIRST pairs, gold = word equals a nickname that spoke that day (speaker field used only as gold); BOTH arm at LATER, leave-one-day-out.",
+   "outOfScope": "Treebank to chat: UD pooled 0.457 (UD-English 0.467, SOV-like 0.529); chat to UD-English 0.505. First mention in chat: 0.526 (position arm 0.546, at the edge of the band). Pairs were NOT matched on local window mention count or recency, which the adversary found still carries 0.60-0.62 AUC in chat, so a local-count residual is not excluded. SMS, Singlish, Enron: no gold, untested.",
+   "observables": "Same rank-bin company profile (two left, two right neighbours); trained on seven days, tested on the eighth. Gold nickname set only labels pairs.",
+   "discovery": "report.json section C3: IRC leave-one-day-out BOTH LATER 0.6067 (1200 pairs, 8 days), IRC position arm 0.5279 (in [0.45, 0.55], so the number is controlled); FIRST LEFT 0.5259 (position arm 0.5455); UD pooled -> IRC 0.4573 (position arm 0.4739). verify-signals.json reproduces all. effect = leave-one-day-out AUC. The leave-one-day-out CV is inside the same 8 days (no fresh days yet). Matched on within-message position, form frequency, character length and message length.",
+   "effect": 0.6067,
+   "confirmPlan": "carried",
+   "passIf": "On >= 8 never-used IRC channel-days with the same matching, leave-one-day-out BOTH-LATER AUC >= 0.58 with the position arm in [0.45, 0.55]; and adding window-mention-count and recency matching leaves it >= 0.56.",
+   "failIf": "AUC < 0.54, or it disappears once local count and recency are matched, or the position arm leaves [0.45, 0.55] (void).",
+   "evidenceFiles": [
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/law/results/name-company-pairblocks/report.json",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/law/NAME-COMPANY-RESULTS.md",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/law/provisional/carried-rules/verify-signals.json",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "id": "EDGE-SLOT",
+   "statement": "If the register puts names at the head of a sentence or message (chat addressee vocatives, novels with sentence-initial subjects), then being message/sentence-initial, or the share of a form's occurrences that sit directly after the edge, identifies names: IRC chat 0.92 for the bare message-initial indicator, novels 0.66-0.85, but only about 0.53 in treebank text.",
+   "scope": "Ubuntu IRC (6 + 14 + 17 channel-days used across the swarm): nicknames, first names, bots and other addressees; War and Peace and Pride and Prejudice cast forms (exploratory); UD (very weak). The observable is position/company only (no casing).",
+   "outOfScope": "It marks the vocative SLOT, not names: the induced IRC kinds 9 and 6 also hold real first names, bots, mr, doc, god and non-names such as nobody, somebody, damn, err, ive, theres; software names (kind 19) and common nouns are NOT in them. UD: message-initial indicator AUC only 0.531 mean (19 of 22 languages above 0.5). Absent where names occur mid-sentence only. SMS, cosem and Enron have no gold: whether an addressee kind forms there is untested. The novel numbers (0.66, 0.85) are exploratory, post-hoc and stated in REPORT.md only (not recomputed here).",
+   "observables": "(a) is the token the first word of its message/sentence (position after the stream edge); (b) share of a form's occurrences whose left neighbour is the edge; (c) company-induced kind membership with a before=edge signature (spherical k-means on neighbour-count vectors, no tags). No capitals, no priors, no lists.",
+   "discovery": "IRC: 92.1% of 20,105 gold nickname occurrences (18,524) are message-initial vs 9.3% of all tokens (NAME-RULE-RESULTS.md CORRECTION); on ant-shape's 600 sampled rows 94.66% of 281 initial tokens are nickname positives vs 10.66% of 319 non-initial, and the bare message-initial indicator alone scores AUC 0.9183 (results/extras.json X2/X3; recomputed). Induced kinds (ant-kinds-chat, 14 DEV days): kind 9 = 248 forms of which 190 are nick types, purity 0.766, enrichment 16.2; kinds 9+6 hold 226 of 227 nick types; a frequency-matched non-nick type lands in kind 9 with probability 0.022 (nick types 0.837); on 17 held-out channel-days with frozen DEV centroids 290 of 379 nick types land in kind 9 (matched non-nick 0.042 vs 0.765); message-initial share kind 9 0.759, kind 6 0.698, every other kind <= 0.109, overall 0.095 (kind_position.rerun.out reproduces this). UD: sentInitial AUC mean 0.531, 19/22 languages above 0.5 (ant-shape A7_rivals). Novels (exploratory): before-edge share alone 0.66 (W&P) and 0.85 (P&P); reader's edge-based being rule hears 29% of P&P cast tokens vs 7% of controls (W&P 1.3% vs 2.5%). effect = message-initial AUC on IRC. Fresh-fold status: the kind landing replicated on 17 held-out channel-days with frozen centroids; the message-initial shares were measured on the 6 name-rule days and the 14 DEV days (ant-shape's 600 rows come from the 6 days); the novel numbers are unconfirmed and exploratory.",
+   "effect": 0.9183,
+   "confirmPlan": "carried",
+   "passIf": "On >= 8 IRC channel-days never read by the swarm: message-initial share of nickname tokens >= 0.85 vs <= 0.15 for matched tokens, and a re-induced kind with before=edge signature holds >= 60% of nick types with frequency-matched non-nick landing <= 0.06; for a novel: edge-share AUC >= 0.60 on a third book with the cast fixed before the run.",
+   "failIf": "Initial share of nickname tokens < 0.70 on fresh chat days, or a kind induced with the edge feature REMOVED still shows >= 60% nick purity (then it is not position), or novel edge-share AUC < 0.55 on a third book.",
+   "evidenceFiles": [
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/law/NAME-RULE-RESULTS.md",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-shape/results/extras.json",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-kinds-chat/results/induce.irc.json",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-adversary/kind_position.mjs",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/law/provisional/carried-rules/kind_position.rerun.out",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-kinds-novel/REPORT.md",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/law/provisional/carried-rules/verify-signals.json",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "id": "IRC-SENTRY-MATCHED",
+   "statement": "If a recurring token in IRC-style chat is deleted and the causal window re-read by the three prior-free readers, then the number of referent-entry slots that change (S_ENTRY, higher = more name-like, direction fixed in advance) ranks nickname occurrences above position-, frequency-, message-length- and character-length-matched ordinary words at about 0.65-0.72, above a residual local mention count (0.60-0.62); the full 104-d record (a probe) reaches 0.72-0.79 and collapses when the words are shuffled inside messages.",
+   "scope": "Ubuntu IRC, tokens of >= 3 characters that recur >= 2 times in their 256-message causal window; ablation-derived slot deltas of impact.mjs's three prior-free readers; strata message-initial (INIT) and non-initial (NONINIT) reported separately.",
+   "outOfScope": "The pre-registered licence C7 FAILED (R_LOCAL 0.596 INIT / 0.618 NONINIT outside [0.45, 0.55]), so the strict verdict is UNDERPOWERED(matching): a local-count residual is not excluded (strict subsets: R_LOCAL 0.567 / 0.600, S_ENTRY 0.634 / 0.714). Matched negatives were ordinary words, not other rare strings, so 'a username string' is not excluded. S_SPAN is nearly as good as S_ENTRY once matched (INIT 0.644 vs 0.653), so 'slot beats span' holds only in NONINIT (0.717 vs 0.606). Earlier unmatched numbers (S_ENTRY 0.843, R_FREQ 0.853, physics within-count 0.81) are upper bounds contaminated by position and the 3-character figure floor. War and Peace 0.513, UD PROPN at chance after position matching (0.454). A causal first mention is invisible (0.500).",
+   "observables": "Ablate the token, re-read the prefix window, count changed referent-entry slots (S_ENTRY); rivals R_LOCAL, R_BURST, R_RECENCY computed from the same stream. No capital, prior or list; gold nickname set only evaluates. The 104-d record variant is a fitted ridge-logistic PROBE (existence test), labelled as such.",
+   "discovery": "ant-adversary round C (8 channel-days never read by the adversary; PREREG_IRC_A2.md sha256 1289e1a2ae6b38fe...), results/irc_analysis_C.json, recomputed in verify-signals.json. S_ENTRY: INIT 0.6531 [0.629, 0.679] (480 pairs), NONINIT 0.7166 (457 pairs), POOL 0.6841 (937 pairs); R_LOCAL 0.5962 / 0.6184 / 0.6071; R_BURST 0.585 / 0.578 / 0.582; position control 0.5075 / 0.4943 / 0.5056. Record IMP (probe): 0.7179 [0.692, 0.748] / 0.7905 [0.749, 0.821] / 0.7407, increment over fitted rivals +0.0707 [0.031, 0.110] / +0.1495 [0.121, 0.172] / +0.1048 (fit-level null q95 0.044 / 0.041 / 0.035); company-shuffled record 0.574 / 0.542 / 0.566. Kind-mate negatives (ant-kinds-chat K arm): record 0.81 / 0.83 vs count 0.63 / 0.73, but 25% of those negatives were < 3 characters; with >= 3 characters and message-initial matched on the same rows, record 0.835 vs local model 0.637. effect = pooled S_ENTRY AUC. Rounds A and A2 were used to design the matching; round C is the fresh fold for that design.",
+   "effect": 0.6841,
+   "confirmPlan": "carried",
+   "passIf": "On >= 8 more never-read IRC days with count-exact and recency-exact matching plus rare-string negatives (package/software names): S_ENTRY AUC >= 0.62 pooled, R_LOCAL inside [0.45, 0.55], S_ENTRY minus R_LOCAL >= +0.04 with a day-bootstrap lower bound > 0.",
+   "failIf": "S_ENTRY AUC < 0.57 once local count and recency are matched exactly, or S_ENTRY <= R_LOCAL, or the company-shuffled record stays above 0.60 (then it is counts).",
+   "evidenceFiles": [
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-adversary/results/irc_analysis_C.json",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-adversary/PREREG_IRC_A2.md",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-adversary/CRITIQUE.md",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-kinds-chat/REPORT.md",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/law/provisional/carried-rules/verify-signals.json",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "id": "UD-NOUN-ROLE",
+   "statement": "If a token is a COMMON NOUN in treebank-register text, then its single-token ablation record (85-d slot signature plus 19-d atmosphere, read by the three prior-free readers) ranks it above frequency-matched ordinary tokens even when pairs are matched on within-sentence position, and it beats position/length/mention-count covariates (position-matched AUC 0.579 vs covariates 0.451); the readers hear the noun's ROLE, and no comparable signal exists for proper nouns.",
+   "scope": "UD DEV of 19 languages (position-matched subset; 20 unmatched), ant-kinds-ud's records (120 NOUN pairs per language before matching, frequency-bin matched), ridge-logistic PROBE leave-position-block-out, tested by ant-adversary's covariate attack; 17 of 19 languages have the signature above the covariates.",
+   "outOfScope": "PROPN: unmatched 0.573 vs covariates 0.554 (+0.036 [0.000, 0.075]), position-matched 0.454 vs 0.462 (+0.006 [-0.083, +0.085]), i.e. nothing beyond position. Position-matched subsets are small (about 45-57 pairs per language), controls were matched on frequency bin only, character length >= 3 (the reader's figure floor) was NOT matched in these records, so a short-function-word control leak is not excluded for UD. No held-out fold, no informal English, not pre-registered as a replacement verdict (it is an attack on ant-kinds-ud's K3). In UD a proper noun leaves a SMALLER shadow than matched common words (extent AUC mean 0.453 by tokens, 0.439 by frames; frames below 0.45 in 14 of 22 languages).",
+   "observables": "Ablate one token, re-read the prefix window, take typed slot deltas (emptied, retyped, rebound, refilled, shifted, born) as the record; covariates are token index, relative index, sentence length, initial flag, log mentions in window, log position. No capital, prior or list; gold UPOS only selects the NOUN stratum and the evaluation.",
+   "discovery": "ant-adversary results/ud_confound.json (aggregate, recomputed in verify-signals.json): NOUN all 20 languages signature 0.577 vs covariates 0.518, increment +0.070 [0.043, 0.098], signature beats covariates in 15 and increment > 0 in 17; NOUN position-matched 19 languages signature 0.579 vs covariates 0.451, signature+covariates 0.574, increment +0.123 [0.081, 0.171] (language bootstrap), beats covariates in 17 of 19, increment > 0 in 18. Companion: ant-kinds-ud reports pooled signature AUC 0.59 for PROPN-vs-controls and K3 falsified 0/17. effect = position-matched NOUN signature AUC. Discovery on DEV only.",
+   "effect": 0.579,
+   "confirmPlan": "carried",
+   "passIf": "On fold80B (first 20% of the TRAIN treebanks) with character-length >= 3, position and mention count matched: NOUN signature AUC >= 0.55 with increment over covariates >= +0.05 in >= 12 of 16 languages.",
+   "failIf": "Increment over covariates <= +0.02 once character length, position and mention count are all matched, or the signature is not above its label-permutation q95.",
+   "evidenceFiles": [
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-adversary/results/ud_confound.json",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-adversary/ud_confound.mjs",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-kinds-ud/REPORT.md",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/law/provisional/carried-rules/verify-signals.json",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "id": "KIND-COARSE-COMPANY",
+   "statement": "If a stream is large (about 10^5 tokens or more: IRC 782k, a novel), then company-induced kinds (spherical k-means on before/after neighbour-count vectors, no tags) are reproducible on held-out days or book halves and are not frequency bands, but they are coarse POS-like frame classes: persons do NOT get their own kind, and conditioning a model on kind does not reveal a hidden name signal.",
+   "scope": "IRC (24 kinds; held-out transfer to 17 unused channel-days), War and Peace (12 kinds), Pride and Prejudice (6), UD DEV of 19 languages (K* median 3, 2-12; function words, pronoun/aux/verb forms, nominal forms), enron (6); in UD, noun kinds separate place from institution where they exist (spa, hin, arb).",
+   "outOfScope": "K1 as REGISTERED fails: IRC half-split gap 0.030 at K*=24 (< 0.10; the shuffled-company null is as stable as the real partition at every K <= 8), UD first batch 6 of 10 (needed 80%; all 19: 15 = 79%; the post-hoc amendment A1 'best margin above all 10 shuffled maxima' holds 19/19), P&P halves ARI 0.150 < 0.25, SMS gap 0.098 and cosem 0.071 (K*=16). No proper-noun-majority kind in any of 19 UD languages (max PROPN share in a kind: hin 0.33, spa 0.23, rus 0.18, eng 0.18). War and Peace: 49 of 62 cast forms sit in ONE kind with pronouns/determiners/conjunctions (the subject-position kind, 37% of tokens); places, titles, nationalities in the plain-noun kind. Kind labels are induced on the whole stream (non-causal) while reading is causal. Kind-conditioning (K3/Simpson): refuted, UD 0/17 (kind-conditioned minus pooled-plus-kind-feature -0.077; 0 sign reversals in 19 languages), novel matched-in-kind control -0.17 [-0.44, 0.05]; family-specific kind structure (K4) not supported (3-cluster -0.007, p 0.62; 2-family +0.030, p 0.079 with frequency-band control +0.022). K2: kinds differ in signature from random same-size partitions only slightly (IRC J1 +0.038 DEV, +0.009 CONF; novels J4 fails).",
+   "observables": "Neighbour-token count vectors (sqrt, L2, PCA 48, spherical k-means), K by split-half ARI against a within-sentence-shuffled null; mention floor 3-8. No tags, capitals, priors or lists; gold only describes kinds afterwards.",
+   "discovery": "ant-kinds-chat results/induce.irc.json (recomputed): K*=24, gap 0.0302, NMI(kind, frequency decile) 0.2397, held-out transfer ARI 0.4739 vs shuffled null 0.091-0.097 (re-induction vs transferred 0.511 vs 0.15-0.18); ant-kinds-novel War and Peace: 12 kinds vs 1 on shuffled text, halves ARI 0.594 vs null max 0.046, NMI vs frequency bin 0.047; ant-kinds-ud: NMI vs frequency bands median 0.008-0.01, NMI vs UPOS 0.23-0.25 vs 0.09-0.10 for shuffled-company kinds, observed best margin above all 10 shuffled maxima in 19/19 (post-hoc rule). Kind as an ADDITIVE feature helps (UD signature+kind 0.67 vs 0.59 each; ant-shape +0.055 in 11/11 languages) but per-kind models do not (-0.014). effect field: structure rule, AUC not defined; 0.5 is a placeholder (the number that matters is transfer ARI 0.474 vs 0.09).",
+   "effect": 0.5,
+   "confirmPlan": "carried",
+   "passIf": "On fresh IRC days or a third novel with a stricter null (shuffled-company partitions compared at the SAME K, K <= 12): held-out transfer ARI >= 0.40 vs shuffled <= 0.15, NMI vs frequency <= 0.30, and the same-K gap >= 0.10 for some K <= 12.",
+   "failIf": "Held-out transfer ARI within 0.10 of its shuffled null, or NMI vs frequency > 0.5, or a persons-only kind appears (which would overturn the 'persons share the subject kind' reading).",
+   "evidenceFiles": [
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-kinds-chat/results/induce.irc.json",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-kinds-chat/REPORT.md",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-kinds-ud/REPORT.md",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-kinds-novel/REPORT.md",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-adversary/CRITIQUE.md",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/law/provisional/carried-rules/verify-signals.json",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "id": "CODE-IDENTIFIER-DIVERSITY",
+   "statement": "If the text is source code (JavaScript, Python, Ruby) and tokens are matched on position, frequency, length and first-in-line status, then user-bound identifiers differ from keywords, externals and literals by neighbour DIVERSITY: an identifier's current left or right neighbour matches its earlier ones less often (sameLeft AUC 0.37-0.41, sameRight 0.39-0.43, below 0.5 in all three languages), and the reader's 8-d company-structure arm separates them at 0.56-0.65 (later) and 0.65-0.71 (first occurrence, causal).",
+   "scope": "12 JS files, 12 Python stdlib files, 8 Ruby files (parser gold: acorn, ast/tokenize, Ripper; balance-gated matched negatives from E=externals, K=keywords, L=literals), leave-one-file-out; the first occurrence of an identifier is NOT deaf in code (causal FIRST AUC 0.56/0.65/0.63 for the full record).",
+   "outOfScope": "Fitted counting rivals beat the ablation record (rivals 0.73/0.78/0.73 vs full record 0.553/0.628/0.607, FULL minus best rival -0.18/-0.15/-0.13), so the shape is company diversity in disguise, not an ablation signal. Does not transfer to treebank PROPN (code to UD 0.50-0.54) and is REVERSED on chat nicknames (code to IRC record AUC 0.33-0.41, significantly below chance, where nicknames repeat the same left neighbour: sameLeft 0.859). Code-language transfer is weak (JS to PY company-structure 0.604, PY to JS 0.587; full record 0.565/0.535). Paired joint ablation: the identifier hole differs from a frequency-matched non-identifier hole (p 0.0002 in JS and PY) but cosine 0.99, and amplification flips sign between languages (JS 1.73 vs 1.30, PY 1.63 vs 1.69). Ruby was exploratory.",
+   "observables": "Left/right neighbour diversity inside the causal window (distinct neighbours over mentions; share of earlier mentions with the same left/right neighbour) and the reader's 8-d company-structure features (the 'C' arm of the impact record, not the rank-bin probe of COMPANY-LATER-BOTH); token form lowercase with non-alphanumerics mapped to z. No keyword list, no capitals, no POS.",
+   "discovery": "ant-code results/*-np-PA.json, *-FIRST.json, transfer.json, summary.txt (no REPORT.md was written; summary read from files). PA (primary, 623/808 JS, 212/217 PY, 505/676 RB pos/neg): full record 0.5533 [0.523, 0.579] / 0.6283 / 0.6066 vs fitted rivals 0.7318 / 0.7793 / 0.7324; company-structure arm 0.6434 / 0.6462 / 0.5597; sameLeft 0.4125 / 0.3592 / 0.3741, sameRight 0.3908 / 0.3816 / 0.4313 (raw direction, identifier positive). FIRST (188/55/263 pairs, causal): company 0.6525 / 0.7112 / 0.6533 vs rivals 0.6931 / 0.6957 / 0.6588, full 0.563 / 0.648 / 0.632. Within-unit word shuffle takes the company-structure arm to 0.553 / 0.476 / 0.536. Balance gates passed (|SMD| <= 0.10, covariate AUC in [0.44, 0.56]); sham 100% null; determinism 218/218 JS, 238/238 PY. effect = JS company-structure arm at PA. Leave-one-FILE-out inside the same 12 files per language; no fresh files (the cross-language transfer test is the nearest thing).",
+   "effect": 0.6434,
+   "confirmPlan": "carried",
+   "passIf": "On 12 further code files per language (hash-order rule fixed in advance) the company-structure arm >= 0.58 at PA in JS and PY, sameLeft and sameRight AUC both < 0.45, and the within-unit shuffle takes that arm below 0.55.",
+   "failIf": "Company-structure arm < 0.54 or sameLeft/sameRight AUC >= 0.48 in either language, or the shuffled arm stays >= 0.58 (then it is counts).",
+   "evidenceFiles": [
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-code/results/summary.txt",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-code/results/js-np-PA.json",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-code/results/transfer.json",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-code/results/joint-report.json",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-code/PREREG.md",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "id": "BEINGS-STANDING-NAMES-EXEMPT",
+   "statement": "If a word has arrived at least twice and the RECEIVED PRIOR nominates it as a name (never met it, or tallies PROPN/X >= 0.5), then it exists as a being at the structural floor without a keyness test, while any other word the prior has met must still be key against its received rate; expected gain over the 5% keyness gate: PROPN macro F1 about +0.056 to +0.064 on fresh treebank folds (22 and 19 of 25 stems up), up to +0.25.",
+   "scope": "25 UD stems, caseless-script and cased alike (caseless mean +0.067, cased +0.056); recurring PROPN gold (>= 2 in a block), exact string match, text case-stripped; folds A (last 20%) and B (first 20%) of every TRAIN treebank with ALL priors rebuilt without them. Largest where the old gate was removing real names: por +0.252, hin +0.163, ind +0.143, spa +0.127, fra +0.115, deu +0.114, fas +0.108, cmn +0.098, urd +0.086, jpn +0.056 (S >= 0.05 on both folds: spa cmn cmn-hans fas jpn fra por hin ind urd).",
+   "outOfScope": "Effect <= 0.02 on both folds: arb kor (gold names ~0, unmeasured), pol ukr swe tur ell fin. Requires a received POS prior (observable is PRIOR-BASED, so it violates the format-free rule; listed because it is shipped). The cast is NOT wired into the production reading path (production uses heardNominals), so the gain is an eval-level result. Folds are slices of the TRAIN treebanks (same domain): nothing about domain shift. Salience as a rank does NOT order names (AUC 0.447 DEV, 0.416 fold A, 0.448 fold B, below 0.5 in 18 of 23-25 stems). A name seen once is still not admitted here (floor 2).",
+   "observables": "Arrival counts of the form in the material; the prior's tally for the form (PROPN/X share, or never met); the binomial tail against the received rate for words the prior has met.",
+   "discovery": "beings-ladder-results/{s4,t1,t2} (recomputed in verify-beings.json, 23 of 26 checks reproduce, the other three are threshold or stage-label differences explained in RULEBOOK.json nonReproducedExplained). Old (000) to new (111) macro F1: fold A 0.3377 -> 0.4151 (+0.0774; 23 up / 0 down / 2 flat), fold B 0.3113 -> 0.3778 (+0.0665; 21 up / 1-2 down / 2-3 flat), DEV 0.346 -> 0.417. S main effect +0.0636 / +0.0556 (fold A / B; up in 22 / 19 stems, down in 0 / 1 (vie, borderline), flat in 3 / 5 (arb kor tur; arb kor swe tur ell)), DEV +0.0486 (designed on DEV, optimistic). S profile is a stable property of a language: fold A vs fold B Spearman 0.87. Rules add: effect of S with A on minus off +0.0033, with R -0.0003 (n=75). Pre-registered PS1 (>= 18 of 25 stems) failed (15) and led to S-prime then S-double-prime; the final form was confirmed on the two folds. effect = probability that S helps in a random stem (fold B: 19 up + 0.5 x 5 flat of 25, 1 down = 0.86); fold A is 0.94 (22 up, 3 flat).",
+   "effect": 0.86,
+   "confirmPlan": "carried",
+   "passIf": "On a fresh slice of a new treebank domain (priors rebuilt without it): S main effect >= +0.03 mean F1 with >= 15 of 25 stems up and <= 2 down.",
+   "failIf": "Mean S effect < +0.01 or more than 5 stems down by > 0.02.",
+   "evidenceFiles": [
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/BEINGS-LADDER.md",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/beings-ladder-results/t1/eng.json",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/beings-ladder-results/t2/eng.json",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/rules-structure-results.json",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/law/provisional/carried-rules/verify-beings.part1.json",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "id": "BEINGS-CONTRACTION-EAR",
+   "statement": "If the language writes fused or apostrophe-bound surfaces (del, don't, l', dell'italia, 's, host-guarded suffixes), then splitting them with a contraction prior derived by simulating each rule on the treebank (kept only if right at least half the times it fires) raises PROPN F1 by about +0.012 on average, up to +0.097 (ita), and by exactly 0 where there is no contraction file.",
+   "scope": "The 13 stems with priors/contractions-<stem>.json (deu ell eng fas fin fra ind ita pol por spa tur ukr); effect >= 0.01 on both folds in eng fra deu ita por ind ell; fold A effects ita +0.097, fra +0.081, ell +0.041, deu +0.026, eng +0.020, ind +0.016, por +0.013. A is the only one of the three beings rules wired into production (ear.js).",
+   "outOfScope": "Priors are treebank-derived (PRIOR-BASED). heb proclitic ear false-splits 14-15% of plain words and arb 2.4-2.6% (defect surfaced, not fixed); tur split-recall 0.35-0.51 (agglutinative languages need their own affix priors; fin hun too); ukr hin urd swe nld have almost no surface splits. A DERANGED contraction prior still raised F1 in 7 stems (ita +0.15, ell +0.04, deu +0.02: PA4 failed), so the surface list alone carries part of the gain in ita. The instrument R1 (hear words) still says ear_inert for spa fra deu ita por ind tur ell. Same-domain folds only.",
+   "observables": "The treebank-derived list of whole-surface splits and apostrophe-bound affix rules applied to the raw word stream before counting.",
+   "discovery": "beings-ladder-results t1/t2/s4 (verify-beings.json). A main effect +0.0126 (fold A) / +0.0120 (fold B) / +0.0192 (DEV); among the 13 stems with a file: up 10 / 9 stems, down 0 / 0, mean +0.0242 / +0.0232; the 12 stems without: exactly 0.000 in every one. Split recall (on): fra 0.995/0.999, deu 0.999/0.997, ita 0.985/0.968, por 0.986/0.992, ell 1.00, spa 0.962/0.942, eng 0.834 (fold A; misses are typos 'its = it 's') / 0.958 (fold B), false-split <= 0.0063 (fra). Profile stability fold A vs fold B Spearman 0.987; correlation with contraction density 0.885. effect = probability of superiority among the 13 stems with a file (fold B: 9 up + 0.5 x 4 flat of 13; fold A 0.885).",
+   "effect": 0.846,
+   "confirmPlan": "carried",
+   "passIf": "On a fresh treebank domain: mean A effect >= +0.01 over stems with a file, 0 stems down by > 0.01, exactly 0 where no file exists.",
+   "failIf": "Mean A effect < +0.005, or any no-file stem changes (the control built to fail), or split false-positive rate > 1% in a stem that has a file.",
+   "evidenceFiles": [
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/BEINGS-LADDER.md",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/beings-ladder-results/t1/ita.json",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/beings-ladder-results/t2/ita.json",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/priors/contractions-ita.json",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/law/provisional/carried-rules/verify-beings.part1.json",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "id": "BEINGS-REFUSAL-LOSS-BOUNDED",
+   "statement": "If a word the prior has never met has frame naming mass below a floor derived on the language's own held-out treebank folds (the mass below which only 5% of true naming occurrences fall), then refuse it; expected: a better loss-for-catch trade than the plurality rule (median lost naming 0.049 vs 0.069 at catch 0.33 vs 0.37), but NOT a 5% bound and NO F1 gain (+0.001 fold A, -0.001 fold B).",
+   "scope": "25 stems with priors/refusal-<stem>.json; stems where it moves F1 with the same sign on both folds: tur +0.026 / +0.016 (helps), pol -0.005 / -0.024 and vie -0.016 / -0.008 (hurts); other effects are fold-dependent (ell +0.006 / -0.021, eng +0.009 / ~0).",
+   "outOfScope": "The loss bound it is named for FAILED on held-out text: lost naming <= 0.05 in only 15 of 25 stems (fold A), 12 of 25 (fold B), 13 (DEV); the held-out loss runs 5-7% in many stems; pre-registered PR4, F3 and the t2 prediction all missed and the floor was not retuned. The naive 'refuse below 5% naming mass' is vacuous (catches 3.5% of non-names vs 36% for plurality). R's per-language profile is not stable (fold A vs fold B Spearman 0.127; A and S are 0.987 and 0.87). Needs a conservative (fold-max) calibration on a fresh slice. PRIOR-BASED (frame prior).",
+   "observables": "The frame prior's naming mass for the word's frame, compared with a floor derived from held-out folds of the treebank (PRIOR-BASED; violates the format-free rule; listed because shipped).",
+   "discovery": "beings-ladder-results m2 blocks and R main effects (verify-beings.json). Median lost naming loss-bounded vs plurality: DEV 0.0483 vs 0.0764, fold A 0.0491 vs 0.0691, fold B 0.0506 vs 0.0672; median caught: 0.3095 vs 0.3629, 0.3339 vs 0.3707, 0.3123 vs 0.3388. R main effect on F1: +0.0013 (fold A; 8 up, 6 down, 11 flat), -0.0011 (fold B; 8 up, 10 down, 7 flat), DEV +0.0029; interactions with S and A within +-0.0003 (rules add). effect = probability that R helps in a random stem (fold A 0.54, fold B 0.46, mean 0.50).",
+   "effect": 0.5,
+   "confirmPlan": "carried",
+   "passIf": "On a fresh treebank slice with a fold-max calibrated floor: lost naming <= 0.05 in >= 20 of 25 stems and caught share >= the plurality rule's at equal loss.",
+   "failIf": "Lost naming > 0.06 median on the fresh slice, or F1 change < -0.01 in more than 5 stems.",
+   "evidenceFiles": [
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/BEINGS-LADDER.md",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/beings-ladder-results/t1/eng.json",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/priors/refusal-eng.json",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/law/provisional/carried-rules/verify-beings.part1.json",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "id": "BEINGS-EVIDENCE-ORDER-AND-SINGLE-MENTION",
+   "statement": "If received priors are available, then a form's mean PROPN+X mass (the 'proper' evidence) ranks recurring names at AUC about 0.96, with evidence combined as ORDERED roles (proper first, keyness second: 0.965) rather than a blend (equal four-way blend 0.891); and ranking the ONE-arrival candidates by graded mass recovers single-mention proper nouns at 0.5-0.9 precision, at least twice the base rate in 23 of 25 stems (fold A) and 25 of 25 (fold B), at low recall.",
+   "scope": "UD stems 24-25, fold A and fold B (priors rebuilt without them); single-mention gold SINGLE = PROPN forms occurring once in the block; graded top-K with K = size of the shipped set (a comparison device, not a proposal). Recall is highest in hin 0.53, urd 0.45, heb 0.36, ell 0.30, ita 0.30; precision highest in eng .82, spa .89, ind .91, por .90, ita .90, hin .88 (base rates 0.09-0.33).",
+   "outOfScope": "PRIOR-BASED: the evidence is the received treebank POS tally of the same class the gold uses (priors built from TRAIN, gold from held-out slices; circularity of lookup, not leakage). It does NOT replace the shipped gate on recurring gold (G minus shipped -0.177 fold A, -0.160 fold B; 0 of 23 / 24 stems up; DMD weights no better than equal weights, G minus Gq -0.079 / -0.070). Single-mention precision fails in kor (0 of 62 picked right), vie (1 picked), arb (2 of 327; gold names ~0). Bare recurrence is NOT name evidence among multi-arrival candidates (recur AUC 0.465). Not wired into production. The competence card still says R3 fails 23/23 on TEST for the ORIGINAL gate (the lexicon filter ties it); the graded and shipped changes are fold-tested, not TEST-tested.",
+   "observables": "Per candidate form: mean NOUN+PROPN mass (class), mean PROPN+X mass (proper), binomial keyness against the received rate (key), mid-rank arrival percentile (recur), all from the received priors plus arrival counts.",
+   "discovery": "rules-structure-results.json (evidenceRules, fold A, candidates with >= 2 arrivals, 24 stems): AUC for recurring names class 0.717, proper 0.958, key 0.681, recur 0.465; blends proper+key 0.959, proper*key 0.957, ordered proper-then-key 0.965, proper-key-recur 0.964, all four equal 0.891. beings-graded-results g0-foldA/g0-foldB (verify-graded.json, 14/14 checks reproduce): single-mention clause 23 / 25 and 25 / 25 stems (DEV 21), e.g. eng precision 0.822 vs base 0.088 (recall 0.134), spa 0.893 vs 0.142, heb 0.797 vs 0.095 (recall 0.360), hin 0.882 vs 0.207 (recall 0.529), fin 0.518 vs 0.158, tur 0.184 vs 0.084; on ALL-PROPN gold (which includes single mentions) graded minus shipped +0.090 / +0.105 (21 / 22 stems up, 4 / 3 down; sign test p 0.0005 / 0.0001) and, as an exploratory aggregation, the equal-weight blend minus shipped +0.143 / +0.144 (25 up / 24 up, 0 / 1 down); mean Born weights class 0.705 / 0.731, proper 0.098 / 0.093, key 0.129 / 0.115, recur 0.068 / 0.061 (cv of the proper weight 1.18-1.22: weights differ by language). effect = AUC of the 'proper' evidence for recurring names.",
+   "effect": 0.958,
+   "confirmPlan": "carried",
+   "passIf": "On a fresh slice: proper-then-key AUC >= 0.93 for recurring names in >= 20 of 24 stems and single-mention precision >= 2 x base rate (hits > 0) in >= 20 of 25 stems.",
+   "failIf": "'proper' AUC < 0.85, or single-mention precision below the base rate in more than 5 stems.",
+   "evidenceFiles": [
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/beings-graded.mjs",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/beings-graded-results/g0-foldA/eng.json",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/beings-graded-results/g0-foldB/eng.json",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/rules-structure-results.json",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/competence/CARD.md",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/law/provisional/carried-rules/verify-graded.json",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "id": "PHYS-SHADOW-ADDITIVE-FLOOR",
+   "statement": "If a form is deleted from a window re-read by the prior-free readers, then (a) the slots that change add exactly over forms that do not touch (slope 1.000, 99.9% exact); (b) a single deletion changes about twice as many slots when the form has exactly 2 mentions in the window as when it has 3-4 (floor cliff: mean 4.17 vs 1.99, ratio 2.09, AUC 0.687), and is flat above that (AUC 0.49); (c) about 70% (wave 2: 59-63%) of mentions of a form with 3 or more mentions change at least one slot and 54% of the change lands on slots the form did not occupy. The cliff is the readers' recurrence floor, a COUNT rule, not a name rule.",
+   "scope": "9 licensed corpora in wave 1 (UD fold A: eng fra spa deu fas jpn tur; Ubuntu IRC; War and Peace; Hindi fails the licence), wave 2 replication on UD fold B and new IRC days and a shifted War and Peace grid; window M = 128 sentences (256 messages for IRC); n counted inside the window. The cliff holds in all 12 War and Peace kinds (2.3-3.3 at m=2) and in Pride and Prejudice.",
+   "outOfScope": "Extensivity: log-log slope of shadow on mentions 0.839 (wave 2 0.750), heterogeneous (Q p < 1e-4; extensive only in German); mentions of one body at n=2 are sub-additive (whole 4.5 vs parts 9.5). Additivity is partly an instrument fact: the extractor is local (93.6% of changed slots are at radius 1; wave 2 92.0%). INERTIA IS DEAD above the floor (Spearman(n, fragility) -0.0094 [-0.029, 0.009], wave 2 -0.0253 [-0.049, 0.001]). The cliff is NOT name-specific: War and Peace cast minus matched controls +0.106 [-0.108, 0.321]; in Pride and Prejudice the slope differs (+0.377 [0.124, 0.641]) only because the reader hears those names as beings (29% of cast tokens vs 7%). Deletion is dissipative (empties 1.18 slots, creates 0.02).",
+   "observables": "Slot deltas (emptied, retyped, rebound, refilled, shifted, born) from deleting all mentions, or one mention, of a form and re-reading the prefix window; mention count in the window. No priors, capitals or lists.",
+   "discovery": "physics-handles/results/reader/_report.w1.json and _report.w2.json, recomputed in verify-physics.json (31/31 checks) and verify-physics-auc.json (AUC re-aggregated from the saved single-deletion rows, bootstrap over snapshots). Far pairs: n 1312 slope 1.000 exact 99.92% (wave 2 n 717, 100%); near pairs 0.983 / 0.972 (83.7% / 84.2% exact); informativeness control R^2 1.00 vs 0.54 for a wrong sum. n=3 mentions exactly additive 91.4% / 93.4%. Cliff ratio 2.094 / 2.108; AUC(S at n=2 vs n=3-4) 0.687 [0.674, 0.703] / 0.688 [0.676, 0.702]; AUC(n>=5 vs n=3-4) 0.490 / 0.495 (flat); AUC(n=1 vs n=3-4) 0.377 / 0.384. War and Peace D1 m=1 1.42, m=2 2.77, m>=3 0.99, cliff +1.78 [1.40, 2.17] (P&P +1.69 [1.29, 2.02]); 78% of the cliff survives within-sentence company shuffle. Collateral share 0.539 [0.533, 0.545] (wave 2 0.526). effect = AUC(S at n=2 vs n=3-4), wave 1.",
+   "effect": 0.687,
+   "confirmPlan": "carried",
+   "passIf": "On UD fold B languages not yet read and new IRC days: far-pair slope within [0.95, 1.05], cliff AUC >= 0.65 with the n>=5 vs n=3-4 AUC inside [0.45, 0.55].",
+   "failIf": "Far-pair slope outside [0.85, 1.15], or the cliff AUC < 0.58, or fragility becomes monotone in n above the floor (Spearman below -0.05 with interval).",
+   "evidenceFiles": [
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/physics-handles/REPORT.md",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/physics-handles/PHYSICS-HANDLES.md",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/physics-handles/results/reader/_report.w1.json",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/physics-handles/results/reader/_report.w2.json",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/kinds-swarm/ant-kinds-novel/results/frag-wp.report.json",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/law/provisional/carried-rules/verify-physics.json",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/law/provisional/carried-rules/verify-physics-auc.json",
+     "exists": true
+    }
+   ]
+  },
+  {
+   "id": "PHYS-LOCAL-ATTRACTION",
+   "statement": "If a form has at least 8 mentions in a corpus of at least about 10^4 mentions, then the company it keeps is measurably above random placement and falls steeply with distance (amplitude sqrt of excess coincidence 0.25-0.35 at one token, 0.15-0.18 at two, 0.06-0.10 at three to four, 0.010-0.017 at 65-128); within-sentence shuffling removes the near field (near ratio median 0.02) and sentence-order shuffling removes the far field (median 0.01); at sentence scale the burst memory decays exponentially.",
+   "scope": "33 corpora (24 languages on two held-out folds, Ubuntu IRC, NUS SMS, CoSEM Singlish, War and Peace); 24 of 33 have >= 6 of 8 lag bins above the null band; informal English local exponent IRC 0.80 [0.78, 0.84], SMS 0.66, CoSEM 0.82, formal English 0.86; burst memory exponential with lambda 3-10 sentences (chat, treebank slices) and 30-36 (IRC, War and Peace); reader locality law r^-1.52 [1.38, 1.69] beyond two tokens, power beats exponential 9/9 (wave 2 1.45 [1.32, 1.92], 7/8).",
+   "outOfScope": "NOT a power law with a stable exponent: power beats exponential in only 20 of 31 fitted corpora (65%), median alpha 1.14 (0.90-1.42) outside the predicted range; fold-to-fold Spearman -0.11 (13 powered languages; 0.13 over all 21), median |difference| 0.22; not family-specific (permutation p 0.039 fold A, 0.73 fold B). 9 of 33 corpora are under the 10^4-mention power floor. Per-neighbour pull is weaker for frequent bodies (median rho -0.12; 21 of 33). ud-fra-A (sentences not in discourse order) has burst L = 0 by design. Warp is not gravity (partial rho -0.06). The vacuum band slope is -0.14 to -0.35, not -0.5. 94% of reader change is in the same relation (extractor locality).",
+   "observables": "Excess coincidence of a form's neighbours in eight dyadic lag bins on each side, against random placement of the same mentions inside the document; within-sentence and sentence-order shuffles as controls. No priors, capitals or lists.",
+   "discovery": "physics-handles/results/gravity/_report.json (recomputed in verify-physics.json): PG1 24 of 33 corpora (73%; the registered 90% bar FAILED); PG2 power wins 20 of 31 (65%), median alpha 1.14, quartiles 0.90-1.42; PG3 stability rho -0.11, median |diff| 0.22 (13 languages). Controls: within-sentence shuffle near ratio median 0.02 / far 0.98 (24 of 33 met the 75% rule, narrowly failed by count); sentence-order shuffle far 0.01 / near 1.00 (26 of 33 held). Planted-law check (plant.mjs) valid only at >= 10^4 mentions (run 4: 10/10, 10/10, 8/10 recoveries of exponents 0.5/1.0/1.5; null 10/10 returns no law). effect = share of corpora with >= 6 of 8 bins above the null band (24/33), not an AUC.",
+   "effect": 0.727,
+   "confirmPlan": "carried",
+   "passIf": "On >= 10 further corpora of >= 10^4 mentions: >= 6 of 8 bins above the null band in >= 80% and the within-sentence shuffle takes the near-field ratio to <= 0.10.",
+   "failIf": "< 60% of powered corpora show >= 6 of 8 bins above the band, or the shuffles fail to move the near and far fields as predicted.",
+   "evidenceFiles": [
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/physics-handles/REPORT.md",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/physics-handles/results/gravity/_report.json",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/physics-handles/attraction.mjs",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/physics-handles/plant.mjs",
+     "exists": true
+    },
+    {
+     "path": "/Users/mlacy/Documents/3.0/khora/native/eval/law/provisional/carried-rules/verify-physics.json",
+     "exists": true
+    }
+   ]
+  }
+ ],
+ "negatives": [
+  "REFUTED: the rank-bin company shape is word-order-family-specific. Same-family minus other-family training +0.0327 [0.0056, 0.0592] but same > other in only 12 of 22 languages (55%, sign p 0.33), 3-cluster +0.006, first-mention arm -0.0001; the gain sits post-hoc in Romance plus rus and ell (relatedness, not order). SOV-like individually: hin +0.06, urd +0.07, tur +0.06 but fas -0.02, jpn -0.01, nld -0.04 (NAME-COMPANY-RESULTS.md, C2).",
+  "REFUTED: the learned full-record shape is family-specific: same minus other -0.008, same > other in 7/22, p 0.97 (3-cluster +0.012, 14/22, p 0.14); training on 21 other languages 0.598 ~ own language; SOV-like own-language 0.633 vs 0.595 is a level difference (ant-shape V2). NAME-SHAPE T4a +0.010 p 0.16, T4b -0.004 (same-family better in 8/24), T4c p 0.90 / 0.21.",
+  "REFUTED: the pooled PROPN shadow (normalised 24-cell slot-family x delta-type distribution) is a shape of its own: it differs from deleting equally frequent random words in 1 of 20 languages (cosine ~0.98), reproduces and differs from NOUN/VERB/ADJ in 12 of 25, labels held-out tokens at AUC 0.545 (4 languages >= 0.60), imprint differs in 2 of 15, amplification exceeds random in 4 of 25 (2.42 vs 2.80). Not a refutation of the claim: the representation drops magnitude, radius bands, atmosphere and span (NAME-SHAPE-RESULTS.md; ant-kinds-ud finds 17/18 below its own null but cosines 0.885-0.95+, the two nulls were never reconciled).",
+  "REFUTED: a learned full ablation record beats case-free rivals. ant-shape: FULL 0.605 (15/22 >= 0.60, above null q95 0.508) but RIVALS 0.658 beat it; FULL+RIVALS minus RIVALS +0.006 [-0.014, +0.025]; the normalised family x type profile (SHAPE24) is at chance 0.506; company shuffle drops it 0.605 -> 0.554 (about half is counts). It is language-general, not name-specific.",
+  "REFUTED in UD: the single-token ablation signature identifies PROPN beyond position. Pairs matched on position: signature 0.454 vs covariates 0.462 (+0.006 [-0.083, +0.085], 15 languages); unmatched +0.036 [0.000, +0.075] (ant-adversary ud_confound.json). The prior-free readers hear NOUN roles instead (UD-NOUN-ROLE).",
+  "REFUTED: company shape transfers from treebank text to chat: UD pooled to IRC 0.457 (position arm 0.474), SOV-like 0.529, first mention 0.515; IRC to UD-English 0.505. The shape is register-bound (COMPANY-CHAT-WITHIN-REGISTER is the within-register version).",
+  "REFUTED as a registered claim: 'a company shape exists' (>= 0.65 in >= 15 languages): only 7 of 22 reach 0.65 at LATER (mean 0.615 is above the permutation q95 and C5 holds, so a modest shape does exist); register-robustness P5 failed; family-specific P4 held as 'not specific'.",
+  "UPPER BOUNDS, not name-detector strengths: IRC S_ENTRY 0.843 (6 channel-days), local mention count 0.853, physics within-count nickname AUC 0.81 (0.806 wave 2). 92.1% of nickname mentions are message-initial vs 9.3% of tokens, a message-initial indicator alone scores 0.918, the reader's 3-character figure floor makes every 1-2 character negative invisible by construction (all earlier IRC results), and matched-on-frequency negatives do not match local clustering. After matching position, length, character length: S_ENTRY 0.653 / 0.717, local count 0.60-0.62 (IRC-SENTRY-MATCHED).",
+  "NOT SHOWN: the ablation impact is a better name detector than a local recency count in chat: S_ENTRY minus COUNT +0.014 [-0.030, 0.054] (DEV) / -0.019 [-0.080, 0.056] (CONF), pooled -0.003 [-0.048, 0.041] on the kind-mate rows; a fitted position-and-length model (LOC 0.92-0.94) beats the full record (0.89-0.90) in the pooled arm (ant-kinds-chat K3).",
+  "NOT SHOWN: 'slot beats span'. Unmatched IRC slot 0.843 vs span 0.492, but after matching S_SPAN 0.644 vs S_ENTRY 0.653 (INIT) and 0.606 vs 0.717 (NONINIT); in War and Peace span >= slot (0.776 vs 0.753, supervised control).",
+  "NOT SHOWN in novels: S_ENTRY on War and Peace 0.513 (permutation q95 0.513, position control failed 0.362; K5 licence passed barely 0.503); a character mentioned hundreds of times per window loses nothing when one mention goes (hypothesis, untested).",
+  "NOT SHOWN: a single mention is audible to the ABLATION reader causally. Causal first-mention S_ENTRY 0.500 on IRC and War and Peace (names non-null 0.10); with a 32-message lookahead IRC first mention 0.648 [0.605, 0.690] vs the rate rival 0.625; production arm on War and Peace: first mentions are deaf causally (0.04 vs 0.00) and change the referent index 0.25 vs 0.01 with 32 sentences of lookahead; later mentions change it 0.40 vs 0.05 for common words, but four summary numbers add nothing to frequency (-0.03). Single mentions ARE audible through company (COMPANY-FIRST-LEFT 0.624) and through priors (BEINGS-EVIDENCE-ORDER-AND-SINGLE-MENTION), not through the ablation reader. A fitted classifier hears them in War and Peace (0.627 vs q 0.542) but its labels come from capitals (control only).",
+  "REFUTED (Simpson / pooling hides it): kind-conditioning does not reveal a name signal. UD: kind-conditioned minus pooled-plus-kind-feature -0.077, 0 of 17 pass, 0 sign reversals in 19 languages (PROPN and NOUN strata); signature+kind 0.67 vs 0.59 each (additive information only); chat: the K-arm gain comes from kind-mate NEGATIVES, not a kind-specific fit (conditioned minus pooled fit +0.036 [-0.052, 0.130] DEV, -0.009 [-0.063, 0.022] CONF, pooled days +0.029 [-0.011, 0.064]) and 25% of those negatives were below the 3-character floor; novels: matched-in-kind control -0.17 [-0.44, 0.05] (W&P), +0.11 [-0.26, 0.50] (P&P).",
+  "NOT SUPPORTED: kinds differ in holographic signature more than random same-size partitions (K2). UD frequency-stratified 5/10 (11/19), eta^2 0.03-0.10, fragility slopes differ between kinds 0/19; IRC joint J1 +0.038 DEV, +0.009 CONF (interval spans 0), per-token differences are a size effect; novels J4 fails (0.0712 vs q95 0.0742; P&P 0.190 vs 0.198); single-token S1 0.094 / 0.101 below a two-feature frequency classifier 0.136 / 0.129. Kinds do have reproducible shadows across windows (J2 margin 0.057-0.058 vs 0.023-0.031 for random partitions).",
+  "NOT SUPPORTED: kind structure is more alike within a word-order family (K4): 3-cluster -0.007 (p 0.62), 2-family +0.030 (p 0.079, frequency-band control +0.022 p 0.19); kind-centroid alignment 0.481 vs random 0.286 vs frequency bands 0.528; English only for chat and novels.",
+  "REFUTED: proper nouns get their own induced kind. No proper-noun-majority kind in any of 19 UD languages (names rarely reach 5 mentions in 10-50k-token DEV sets: eng 32% of PROPN tokens, rus 4%); War and Peace 49 of 62 cast forms sit with pronouns, determiners and conjunctions; the IRC 'nick kinds' are message-initial position bands (0.759 / 0.698 initial vs 0.095 overall; kind_position.rerun.out).",
+  "REFUTED: inertia. Fragility is flat in mention count from 3 mentions up (Spearman -0.0094 [-0.029, 0.009]; wave 2 -0.0253 [-0.049, 0.001]; CV-selected form constant or exponent 0.007-0.037, deviance gain 0.07%); only the floor cliff exists; per-kind slopes (4 of 12 W&P kinds depart: nouns -0.15, adverb/particle -0.23, aux-adverb -0.20, predicate adjective +0.44) are not beyond random frequency-stratified partitions (p 0.10 levels, 0.21 slopes).",
+  "NOT SHOWN: the cast sits on a different fragility curve than matched ordinary words. War and Peace +0.106 [-0.108, 0.321], slope diff +0.029; matched-in-kind -0.170 [-0.437, 0.051]; Pride and Prejudice level +0.050 [-0.292, 0.424] and slope +0.377 [0.124, 0.641], carried by the reader hearing those names as beings (29% of cast tokens vs 7%; 1.3% vs 2.5% in W&P).",
+  "DEAD physics words (physics-handles REPORT.md): momentum (persistence ratio 1.000, reliability 0.07); density (n, n/L, Born share all within 0.5% deviance of a constant; Born edge 0.4-0.8% below the 2% bar); time dilation (every key decays at one rate, the measured dmdWindow is the ceiling in 24 of 24 cells, Spearman(H_slot, H_cast) 0.50 < 0.6); Schwarzschild horizon (partial given mass -0.07 [-0.22, 0.09], horizon falls with n, rho -0.25, 80% of bodies have no conclusion to change); conservation (a deletion empties 1.18 slots, creates 0.02; wave 2 0.97 / 0.03); the warp as a property of beings (excess over matched random deletion positive for 43-51% of bodies, 0 of 11 corpora pass; slope vs mass 0.99 deletion vs 0.90 random); warp = gravity (partial rho -0.06, raw -0.10, needed 0.30); geodesic bending (3 of 11 corpora).",
+  "NOT ESTABLISHED: equivalence of inertial and gravitational mass: partial rho 0.114 [0.029, 0.204] with attraction energy (deranged q95 0.064, positive in 6 of 8 corpora; needed 0.30); the pre-registered 'fails within +-0.10' narrowly failed, so the relation is weakly positive at best; the curvature version was not tested.",
+  "NOT ESTABLISHED: a power-law attraction with a stable or family-specific exponent (rho -0.11 between folds on 13 powered languages, median |diff| 0.22; 0.13 on 21; permutation p 0.039 fold A, 0.73 fold B); burst memory is exponential (power wins 2 of 21), not power.",
+  "DEFECT (verified, not edited): kernel/activation.js observe() stamps t: now + 1 and decays to now, so a key observed on consecutive ticks never decays: observed every tick for 400 ticks with window 8, activationOf = 400 while the decayed total stays near 8; per-key activations do not sum to total. Fixing it changes measured results (the user's call).",
+  "REFUTED: salience ranks names. Final-config salience AUC for names 0.447 (DEV), 0.416 (fold A, below 0.5 in 18 of 23 stems), 0.448 (fold B, 18 of 25); at stage s0 it was 0.52. A name the language says often is not less of a being; only the 'is it key' membership question for descriptors was worth keeping.",
+  "REFUTED: the refusal floor is a 5% loss bound: held-out lost naming <= 5% in 15 of 25 stems (fold A), 12 (fold B), 13 (DEV); the naive 'refuse below 5% naming mass' catches 3.5% of non-names vs 36% for plurality (vacuous); R is F1-neutral (+0.001 / -0.001).",
+  "REFUTED: recurrence is name evidence among multi-arrival candidates: the 'recur' rule ranks recurring names at AUC 0.465 (24 stems, fold A) and is the best single rule in 0 of 25 stems; existence is not 'occurs twice' (the memory-note rule stands: recurrence is standing, never existence).",
+  "REFUTED: the graded (Born-weighted evidence) cast replaces the shipped on/off tier on recurring gold: G minus shipped -0.177 / -0.160 (0 of 23 / 24 stems up; VG1 failed); DMD weighting no better than equal weights (G minus Gq -0.079 / -0.070; G beats the rotated-weights control in only 6 / 5 stems; VG2 failed). It wins only on all-PROPN gold (+0.090 / +0.105), i.e. through one-arrival names.",
+  "REFUTED on TEST (before the S fix): the original 5% standing gate adds anything over the prior's own lexicon filter: R3 passes 0 of 23 measurable languages, K:lexicon_filter and K:shuffled fail 23 of 23; the capital-letter witness (non-causal) beats the lowercase heard reader in 13 of 16 cased languages (competence/CARD.md section 7). The shipped S, R, A changes are fold-tested, not TEST-tested.",
+  "NO REGISTER-ROBUST SIGN: in UD a PROPN leaves a SMALLER shadow than matched common words (extent AUC 0.453 by tokens, 0.439 by frames, below 0.45 in 14 of 22 languages), in IRC a larger one (0.77); a UD-trained MAGNITUDE arm scores 0.21 on IRC; code-trained arms score 0.33-0.41 on IRC nicknames; sameLeft is 0.37-0.41 for code identifiers and 0.859 for IRC nicknames. Polarity must be learned or fixed per register.",
+  "NOT SHOWN (ablation record in code): identifier shape beyond counting rivals. FULL 0.553 / 0.628 / 0.607 (JS / PY / RB) vs fitted rivals 0.73 / 0.78 / 0.73 (FULL minus best rival -0.18 / -0.15 / -0.13); JS-to-PY 0.565, PY-to-JS 0.535; code to UD PROPN 0.50-0.54; within-unit shuffle takes FULL to 0.52 / 0.50 (JS / PY).",
+  "NOT SHOWN (partial, unreported): the production reading pipeline with real priors hears names better than with deranged priors: War and Peace token ablation AUC real 0.684 vs deranged 0.711 vs company 0.594 vs shuffle 0.637 (200 units); Persian fold hears no name/noun difference (0.37-0.50 all arms); 85% of cast tokens are unseen by the English POS prior vs 100% of controls (coverage, not field); ant-production stopped with no report, so read these as unverified.",
+  "OPEN, not refuted: Japanese shuffled stream scores as high as the real one (BOTH 0.617 -> 0.662, 88 pairs); a phylogeny-controlled family test; a zero-shot (not fitted) company similarity to known names; the floor-1 reader (name-floor1.mjs, run with go); whether SMS, Singlish or Enron have an addressee/name kind (no gold); cosine of a form's company vector to the other cast forms separates cast from frequency-matched forms at AUC 0.93 inside the subject kind of War and Peace (exploratory, uses the gold cast as prototype, not zero-shot)."
+ ],
+ "sourceFileSha256": {
+  "rules-1.json": "e9fa21bbe94bd43ab7bed4da0737f274fea125cbb2396e1cc121fa02e4319b73",
+  "rules-2.json": "a07fd32e89984b131821146def666ceadcc648649964a175edf0a8032de0a58a",
+  "rules-3.json": "81e2bed69c41f0805847ea460577dc5a3ecf636e5dc1857baab81b3a0d0b7eca",
+  "negatives.json": "aa61a6c50bb5f734909a98658c0382189dd18d4e7cb1f30b62c49e3352a21d9d"
+ }
+}

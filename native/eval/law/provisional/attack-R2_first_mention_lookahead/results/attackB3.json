@@ -1,0 +1,134 @@
+{
+ "headerSha256": "8ec369d6dbbb1ae8ca2f40a5d9313980ce00f3f0fb2ba4f2e22513c0d6b8542e",
+ "code": {
+  "common.mjs": "5f2b3417bddb872c",
+  "stats.mjs": "545acdde873ebce2",
+  "hdr.mjs": "57412b6ec9d9c475"
+ },
+ "groups": {
+  "EN": {
+   "days": 80,
+   "n": 3463,
+   "aucMean": 0.7353,
+   "ciDay": [
+    0.7271,
+    0.7445
+   ],
+   "ciPair": [
+    0.7268,
+    0.7456
+   ],
+   "ctl": {
+    "i": 0.5032,
+    "L": 0.498,
+    "cl": 0.4991,
+    "lc": 0.5027
+   },
+   "ctlOk": true,
+   "thr2tpr": 0.4617,
+   "thr2fpr": 0.1868,
+   "holds": false
+  },
+  "ubuntu": {
+   "days": 23,
+   "n": 2646,
+   "aucMean": 0.731,
+   "ciDay": [
+    0.7215,
+    0.7386
+   ],
+   "ciPair": [
+    0.7198,
+    0.7406
+   ],
+   "ctl": {
+    "i": 0.5002,
+    "L": 0.4979,
+    "cl": 0.4991,
+    "lc": 0.5028
+   },
+   "ctlOk": true,
+   "thr2tpr": 0.4864,
+   "thr2fpr": 0.2018,
+   "holds": false
+  },
+  "de": {
+   "days": 11,
+   "n": 54,
+   "aucMean": 0.6605,
+   "ciDay": [
+    0.6,
+    0.713
+   ],
+   "ciPair": [
+    0.5926,
+    0.7222
+   ],
+   "ctl": {
+    "i": 0.5093,
+    "L": 0.4815,
+    "cl": 0.5,
+    "lc": 0.5
+   },
+   "ctlOk": true,
+   "thr2tpr": 0.2222,
+   "thr2fpr": 0.0741,
+   "holds": false
+  },
+  "es": {
+   "days": 10,
+   "n": 45,
+   "aucMean": 0.6222,
+   "ciDay": [
+    0.5294,
+    0.6887
+   ],
+   "ciPair": [
+    0.5556,
+    0.6889
+   ],
+   "ctl": {
+    "i": 0.5111,
+    "L": 0.4889,
+    "cl": 0.5111,
+    "lc": 0.5111
+   },
+   "ctlOk": true,
+   "thr2tpr": 0.1111,
+   "thr2fpr": 0,
+   "holds": false
+  },
+  "it": {
+   "days": 11,
+   "n": 64,
+   "aucMean": 0.7292,
+   "ciDay": [
+    0.6583,
+    0.8083
+   ],
+   "ciPair": [
+    0.6641,
+    0.8047
+   ],
+   "ctl": {
+    "i": 0.5156,
+    "L": 0.5156,
+    "cl": 0.4844,
+    "lc": 0.4922
+   },
+   "ctlOk": true,
+   "thr2tpr": 0.3906,
+   "thr2fpr": 0.125,
+   "holds": false
+  }
+ },
+ "shift": {
+  "enDayLocal": 0.6861,
+  "enPooledSizeMatched": 0.7353,
+  "nLocal": 1467,
+  "nPooled": 3463,
+  "shift": 0.0492,
+  "valid": false
+ },
+ "seconds": 7.526
+}

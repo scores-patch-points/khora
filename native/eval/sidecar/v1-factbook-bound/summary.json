@@ -1,0 +1,224 @@
+{
+ "docs": 20,
+ "relations": 453,
+ "bothBound": 63,
+ "boundShare": 0.1391,
+ "byBasis": {
+  "witness": 52,
+  "probe": 0,
+  "mixed": 11
+ },
+ "ambiguous": 0,
+ "unbound": 390,
+ "self": 24,
+ "sample": [
+  {
+   "schema": "EORelationAssertion@1",
+   "id": "rel-assert:06-government-legal/world-factbook/africa_ag.txt:18",
+   "relation": "ran for",
+   "end1": {
+    "referent": "ref:auto:abdelmadjid_tebboune",
+    "surface": "abdelmadjid tebboune",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "end2": {
+    "referent": "ref:auto:president",
+    "surface": "president",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "doc": "06-government-legal/world-factbook/africa_ag.txt",
+   "language": "eng",
+   "standing": "witnessed",
+   "witness": {
+    "doc": "06-government-legal/world-factbook/africa_ag.txt",
+    "basis": "sidecar-projection"
+   }
+  },
+  {
+   "schema": "EORelationAssertion@1",
+   "id": "rel-assert:06-government-legal/world-factbook/africa_ag.txt:19",
+   "relation": "ran",
+   "end1": {
+    "referent": "ref:auto:abdelmadjid_tebboune",
+    "surface": "abdelmadjid tebboune",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "end2": {
+    "referent": "ref:auto:president",
+    "surface": "president",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "doc": "06-government-legal/world-factbook/africa_ag.txt",
+   "language": "eng",
+   "standing": "witnessed",
+   "witness": {
+    "doc": "06-government-legal/world-factbook/africa_ag.txt",
+    "basis": "sidecar-projection"
+   }
+  },
+  {
+   "schema": "EORelationAssertion@1",
+   "id": "rel-assert:06-government-legal/world-factbook/africa_ag.txt:20",
+   "relation": "held",
+   "end1": {
+    "referent": "ref:auto:algeria",
+    "surface": "Algeria",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "end2": {
+    "referent": "ref:auto:government",
+    "surface": "government",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "doc": "06-government-legal/world-factbook/africa_ag.txt",
+   "language": "eng",
+   "standing": "witnessed",
+   "witness": {
+    "doc": "06-government-legal/world-factbook/africa_ag.txt",
+    "basis": "sidecar-projection"
+   }
+  },
+  {
+   "schema": "EORelationAssertion@1",
+   "id": "rel-assert:06-government-legal/world-factbook/africa_ao.txt:32",
+   "relation": "including",
+   "end1": {
+    "referent": "ref:auto:angola_region",
+    "surface": "Angola Region",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "end2": {
+    "referent": "ref:auto:kongo",
+    "surface": "Kongo",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "doc": "06-government-legal/world-factbook/africa_ao.txt",
+   "language": "eng",
+   "standing": "witnessed",
+   "witness": {
+    "doc": "06-government-legal/world-factbook/africa_ao.txt",
+    "basis": "sidecar-projection"
+   }
+  },
+  {
+   "schema": "EORelationAssertion@1",
+   "id": "rel-assert:06-government-legal/world-factbook/africa_ao.txt:34",
+   "relation": "diplomat to the",
+   "end1": {
+    "referent": "ref:auto:century",
+    "surface": "century",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "end2": {
+    "referent": "ref:auto:portuguese",
+    "surface": "Portuguese",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "doc": "06-government-legal/world-factbook/africa_ao.txt",
+   "language": "eng",
+   "standing": "witnessed",
+   "witness": {
+    "doc": "06-government-legal/world-factbook/africa_ao.txt",
+    "basis": "sidecar-projection"
+   }
+  },
+  {
+   "schema": "EORelationAssertion@1",
+   "id": "rel-assert:06-government-legal/world-factbook/africa_ao.txt:47",
+   "relation": "and the US and South",
+   "end1": {
+    "referent": "ref:auto:mpla",
+    "surface": "MPLA",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "end2": {
+    "referent": "ref:auto:africa",
+    "surface": "africa",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "doc": "06-government-legal/world-factbook/africa_ao.txt",
+   "language": "eng",
+   "standing": "witnessed",
+   "witness": {
+    "doc": "06-government-legal/world-factbook/africa_ao.txt",
+    "basis": "sidecar-projection"
+   }
+  },
+  {
+   "schema": "EORelationAssertion@1",
+   "id": "rel-assert:06-government-legal/world-factbook/africa_bc.txt:59",
+   "relation": ", which means \"land of the",
+   "end1": {
+    "referent": "ref:auto:botswana_region",
+    "surface": "Botswana Region",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "end2": {
+    "referent": "ref:auto:tswana",
+    "surface": "Tswana",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "doc": "06-government-legal/world-factbook/africa_bc.txt",
+   "language": "eng",
+   "standing": "witnessed",
+   "witness": {
+    "doc": "06-government-legal/world-factbook/africa_bc.txt",
+    "basis": "sidecar-projection"
+   }
+  },
+  {
+   "schema": "EORelationAssertion@1",
+   "id": "rel-assert:06-government-legal/world-factbook/africa_bn.txt:78",
+   "relation": "in the second half of the 19th",
+   "end1": {
+    "referent": "ref:auto:dahomey",
+    "surface": "Dahomey",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "end2": {
+    "referent": "ref:auto:century",
+    "surface": "century",
+    "basis": "witness",
+    "standing": "witnessed",
+    "alternatives": null
+   },
+   "doc": "06-government-legal/world-factbook/africa_bn.txt",
+   "language": "eng",
+   "standing": "witnessed",
+   "witness": {
+    "doc": "06-government-legal/world-factbook/africa_bn.txt",
+    "basis": "sidecar-projection"
+   }
+  }
+ ]
+}

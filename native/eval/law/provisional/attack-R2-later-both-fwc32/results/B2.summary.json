@@ -1,0 +1,365 @@
+{
+ "headerSha256": "a026d42b07030b967e3d72fdb30e65681788a0130d0fb3135a81cd1608545207",
+ "generated": "2026-10-07T07:00:43.959Z",
+ "n": {
+  "fresh": 126,
+  "fit": 127
+ },
+ "bands": {
+  "pairs>=60": {
+   "<0.20": {
+    "n": 15,
+    "languages": 7,
+    "audibleShare": 0.333,
+    "meanAuc": 0.5889,
+    "cladeBootShare": {
+     "point": 0.333,
+     "lo": 0.143,
+     "hi": 0.667,
+     "clusters": 6
+    },
+    "langBootShare": {
+     "point": 0.333,
+     "lo": 0.182,
+     "hi": 0.667,
+     "clusters": 7
+    },
+    "fitN": 9,
+    "fitAudibleShare": 0
+   },
+   "0.20-0.2795": {
+    "n": 41,
+    "languages": 14,
+    "audibleShare": 0.39,
+    "meanAuc": 0.5868,
+    "cladeBootShare": {
+     "point": 0.39,
+     "lo": 0.222,
+     "hi": 0.525,
+     "clusters": 8
+    },
+    "langBootShare": {
+     "point": 0.39,
+     "lo": 0.25,
+     "hi": 0.526,
+     "clusters": 14
+    },
+    "fitN": 26,
+    "fitAudibleShare": 0.423
+   },
+   "0.2795-0.35": {
+    "n": 28,
+    "languages": 10,
+    "audibleShare": 0.464,
+    "meanAuc": 0.5912,
+    "cladeBootShare": {
+     "point": 0.464,
+     "lo": 0.333,
+     "hi": 0.538,
+     "clusters": 6
+    },
+    "langBootShare": {
+     "point": 0.464,
+     "lo": 0.267,
+     "hi": 0.656,
+     "clusters": 10
+    },
+    "fitN": 23,
+    "fitAudibleShare": 0.826
+   },
+   ">=0.35": {
+    "n": 42,
+    "languages": 14,
+    "audibleShare": 0.81,
+    "meanAuc": 0.6349,
+    "cladeBootShare": {
+     "point": 0.81,
+     "lo": 0.704,
+     "hi": 0.889,
+     "clusters": 7
+    },
+    "langBootShare": {
+     "point": 0.81,
+     "lo": 0.625,
+     "hi": 0.955,
+     "clusters": 14
+    },
+    "fitN": 69,
+    "fitAudibleShare": 0.884
+   },
+   "spearmanFwcAuc": 0.317,
+   "n": 126
+  },
+  "pairs>=150": {
+   "<0.20": {
+    "n": 13,
+    "languages": 6,
+    "audibleShare": 0.308,
+    "meanAuc": 0.5776,
+    "cladeBootShare": {
+     "point": 0.308,
+     "lo": 0.133,
+     "hi": 0.714,
+     "clusters": 6
+    },
+    "langBootShare": {
+     "point": 0.308,
+     "lo": 0.133,
+     "hi": 0.714,
+     "clusters": 6
+    },
+    "fitN": 8,
+    "fitAudibleShare": 0
+   },
+   "0.20-0.2795": {
+    "n": 38,
+    "languages": 13,
+    "audibleShare": 0.395,
+    "meanAuc": 0.5877,
+    "cladeBootShare": {
+     "point": 0.395,
+     "lo": 0.267,
+     "hi": 0.55,
+     "clusters": 7
+    },
+    "langBootShare": {
+     "point": 0.395,
+     "lo": 0.263,
+     "hi": 0.531,
+     "clusters": 13
+    },
+    "fitN": 21,
+    "fitAudibleShare": 0.524
+   },
+   "0.2795-0.35": {
+    "n": 26,
+    "languages": 10,
+    "audibleShare": 0.462,
+    "meanAuc": 0.5906,
+    "cladeBootShare": {
+     "point": 0.462,
+     "lo": 0.308,
+     "hi": 0.538,
+     "clusters": 6
+    },
+    "langBootShare": {
+     "point": 0.462,
+     "lo": 0.25,
+     "hi": 0.667,
+     "clusters": 10
+    },
+    "fitN": 22,
+    "fitAudibleShare": 0.864
+   },
+   ">=0.35": {
+    "n": 34,
+    "languages": 10,
+    "audibleShare": 0.882,
+    "meanAuc": 0.6447,
+    "cladeBootShare": {
+     "point": 0.882,
+     "lo": 0.807,
+     "hi": 1,
+     "clusters": 6
+    },
+    "langBootShare": {
+     "point": 0.882,
+     "lo": 0.714,
+     "hi": 1,
+     "clusters": 10
+    },
+    "fitN": 63,
+    "fitAudibleShare": 0.905
+   },
+   "spearmanFwcAuc": 0.401,
+   "n": 111
+  },
+  "pairs>=250": {
+   "<0.20": {
+    "n": 10,
+    "languages": 4,
+    "audibleShare": 0.2,
+    "meanAuc": 0.5726,
+    "cladeBootShare": {
+     "point": 0.2,
+     "lo": 0,
+     "hi": 0.429,
+     "clusters": 4
+    },
+    "langBootShare": {
+     "point": 0.2,
+     "lo": 0,
+     "hi": 0.429,
+     "clusters": 4
+    },
+    "fitN": 5,
+    "fitAudibleShare": 0
+   },
+   "0.20-0.2795": {
+    "n": 24,
+    "languages": 10,
+    "audibleShare": 0.458,
+    "meanAuc": 0.6022,
+    "cladeBootShare": {
+     "point": 0.458,
+     "lo": 0.222,
+     "hi": 0.6,
+     "clusters": 7
+    },
+    "langBootShare": {
+     "point": 0.458,
+     "lo": 0.25,
+     "hi": 0.692,
+     "clusters": 10
+    },
+    "fitN": 13,
+    "fitAudibleShare": 0.846
+   },
+   "0.2795-0.35": {
+    "n": 14,
+    "languages": 8,
+    "audibleShare": 0.571,
+    "meanAuc": 0.6037,
+    "cladeBootShare": {
+     "point": 0.571,
+     "lo": 0.333,
+     "hi": 0.722,
+     "clusters": 6
+    },
+    "langBootShare": {
+     "point": 0.571,
+     "lo": 0.357,
+     "hi": 0.786,
+     "clusters": 8
+    },
+    "fitN": 18,
+    "fitAudibleShare": 0.944
+   },
+   ">=0.35": {
+    "n": 31,
+    "languages": 10,
+    "audibleShare": 0.871,
+    "meanAuc": 0.6477,
+    "cladeBootShare": {
+     "point": 0.871,
+     "lo": 0.786,
+     "hi": 1,
+     "clusters": 6
+    },
+    "langBootShare": {
+     "point": 0.871,
+     "lo": 0.667,
+     "hi": 1,
+     "clusters": 10
+    },
+    "fitN": 55,
+    "fitAudibleShare": 0.927
+   },
+   "spearmanFwcAuc": 0.488,
+   "n": 79
+  }
+ },
+ "L": {
+  "n": 15,
+  "languages": [
+   "kat",
+   "kaz",
+   "lit",
+   "tam",
+   "est",
+   "hye",
+   "lav"
+  ],
+  "audibleShare": 0.333,
+  "cladeBoot": {
+   "point": 0.333,
+   "lo": 0.143,
+   "hi": 0.667,
+   "clusters": 6
+  },
+  "rows": [
+   "kat:train:0.1956/177/0.6126",
+   "kaz:train:0.1257/231/0.654",
+   "lit:train:0.1889/145/0.7886",
+   "tam:train:0.1699/258/0.5663",
+   "est:ext:0.1895/600/0.5979",
+   "est:ext:0.1861/591/0.5744",
+   "est:ext:0.1642/600/0.5335",
+   "est:ext:0.1709/600/0.6017",
+   "est:ext:0.1826/600/0.5632",
+   "hye:ext:0.164/600/0.5485",
+   "lav:ext:0.1989/427/0.6002",
+   "lav:ext:0.1809/414/0.5441",
+   "est:test:0.1942/600/0.5963",
+   "hye:test:0.1643/233/0.5155",
+   "lit:test:0.1755/97/0.5366"
+  ],
+  "pass": false
+ },
+ "M": {
+  "n": 41,
+  "audibleShare": 0.39,
+  "cladeBoot": {
+   "point": 0.39,
+   "lo": 0.222,
+   "hi": 0.525,
+   "clusters": 8
+  },
+  "mixedSupported": true
+ },
+ "lowWithPairControl": {
+  "<0.20": {
+   "n": 13,
+   "share": 0.308
+  },
+  "0.20-0.2795": {
+   "n": 38,
+   "share": 0.395
+  }
+ },
+ "I": {
+  "languages": {
+   "cmn": {
+    "n": 4,
+    "audibleShare": 1,
+    "rows": [
+     "train:0.2217/600/0.6294",
+     "ext:0.2237/600/0.6765",
+     "test:0.2329/338/0.6236",
+     "dev:0.2216/365/0.6136"
+    ]
+   },
+   "cmn-hans": {
+    "n": 2,
+    "audibleShare": 1,
+    "rows": [
+     "test:0.233/339/0.6677",
+     "dev:0.222/369/0.6303"
+    ]
+   },
+   "ind": {
+    "n": 4,
+    "audibleShare": 1,
+    "rows": [
+     "train:0.2478/600/0.6518",
+     "ext:0.2487/600/0.6693",
+     "test:0.2478/600/0.6589",
+     "dev:0.2439/600/0.6142"
+    ]
+   },
+   "vie": {
+    "n": 2,
+    "audibleShare": 0.5,
+    "rows": [
+     "test:0.2633/388/0.651",
+     "dev:0.236/600/0.5725"
+    ]
+   }
+  },
+  "pooledAudibleShare": 0.917,
+  "nObs": 12,
+  "languagesWithGe2": 4,
+  "holds": true,
+  "note": "cmn and cmn-hans are the same corpus"
+ }
+}

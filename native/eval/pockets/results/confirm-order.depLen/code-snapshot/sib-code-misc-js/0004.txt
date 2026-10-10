@@ -1,0 +1,16 @@
+export function toggleLike(posts, id, user) {
+  const updatedPosts = posts.map(post => {
+    if (post.id === id) {
+      if (!post.likes.includes(user)) {
+        return { ...post, likes: [...post.likes, user] };
+      } else {
+        return { ...post, likes: post.likes.filter(like => like !== user) };
+      }
+    }
+    return post;
+  });
+
+  const liked = updatedPosts.some(post => post.id === id && post.likes.includes(user));
+
+  return { posts: updatedPosts, liked };
+}

@@ -1,0 +1,24 @@
+UD FULL K0: valid 52/59 medLower 0.577 POS 29 (0.558) HOLD; common-with-K0 n=52: 0.577 vs K0 0.577 (mean paired delta 0.000)
+UD FULL K5: valid 50/59 medLower 0.557 POS 21 (0.420) HOLD; common-with-K0 n=50: 0.557 vs K0 0.577 (mean paired delta -0.009)
+UD FULL K6: valid 24/59 medLower 0.562 POS 9 (0.375) RESIDUAL; common-with-K0 n=24: 0.562 vs K0 0.578 (mean paired delta 0.007)
+UD CAUSAL4 K0: valid 44/59 medLower 0.560 POS 20 (0.455) HOLD; common-with-K0 n=44: 0.560 vs K0 0.560 (mean paired delta 0.000)
+UD CAUSAL4 K5: valid 23/59 medLower 0.555 POS 9 (0.391) RESIDUAL; common-with-K0 n=23: 0.555 vs K0 0.560 (mean paired delta -0.012)
+UD CAUSAL4 K6: valid 5/59 medLower 0.571 POS 1 (0.200) ABSORBED(paired); common-with-K0 n=5: 0.571 vs K0 0.620 (mean paired delta -0.030)
+IRC irc-en-fresh FULL K0: pairs 600 AUC 0.915 [0.893,0.937] HOLD
+IRC irc-en-fresh FULL K5: pairs 217 AUC 0.781 [0.717,0.851] RESIDUAL
+IRC irc-en-fresh FULL K6: pairs 94 AUC 0.745 [0.639,0.832] RESIDUAL
+IRC irc-en-fresh CAUSAL4 K0: pairs 600 AUC 0.923 [0.900,0.944] HOLD
+IRC irc-en-fresh CAUSAL4 K5: pairs 166 AUC 0.837 [0.770,0.904] HOLD
+IRC irc-en-fresh CAUSAL4 K6: pairs 65 AUC 0.831 [0.717,0.922] HOLD
+CODE code-py FULL K0: pairs 992 AUC 0.664 [0.629,0.701] HOLD
+CODE code-py FULL K5: pairs 314 AUC 0.675 [0.614,0.738] HOLD
+CODE code-py FULL K6: pairs 82 AUC 0.677 [0.556,0.795] HOLD
+CODE code-py CAUSAL4 K0: pairs 711 AUC 0.636 [0.599,0.675] HOLD
+CODE code-py CAUSAL4 K5: pairs 83 AUC 0.651 [0.540,0.756] HOLD
+CODE code-py CAUSAL4 K6: pairs 19 AUC 0.579 [0.333,0.833] UNDERPOWERED
+CODE code-js FULL K0: pairs 726 AUC 0.605 [0.564,0.641] HOLD
+CODE code-js FULL K5: pairs 177 AUC 0.582 [0.503,0.665] HOLD
+CODE code-js FULL K6: pairs 29 AUC 0.517 [0.333,0.710] UNDERPOWERED
+CODE code-js CAUSAL4 K0: pairs 503 AUC 0.573 [0.521,0.622] HOLD
+CODE code-js CAUSAL4 K5: pairs 56 AUC 0.589 [0.462,0.700] UNDERPOWERED
+CODE code-js CAUSAL4 K6: pairs 7 AUC 0.429 [0.143,0.714] UNDERPOWERED

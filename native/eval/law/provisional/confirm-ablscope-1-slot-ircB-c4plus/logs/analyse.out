@@ -1,0 +1,192 @@
+{
+ "verdictRule": "CONFIRMED",
+ "runValid": true,
+ "headerSha256": "9ea935088986f8ee3ef09cee89f8d109f1cf72b168ae6113209afebe3a991c7d",
+ "designSha256": "7b70f89881c224311aa04f5dd56a06870e4e85ff29cc3310bf90edf403a9b675",
+ "controlsRun": {
+  "K1": {
+   "nullShare": 1,
+   "n": 1012
+  },
+  "K6": {
+   "same": 1012,
+   "n": 1012
+  },
+  "K7": {
+   "same": 24,
+   "total": 24
+  }
+ },
+ "T1": {
+  "pairs": 75,
+  "days": 13,
+  "auc": 0.8467,
+  "ci": [
+   0.8102,
+   0.9355
+  ],
+  "permQ95": 0.58,
+  "sens": 0.7067,
+  "spec": 0.9867,
+  "controls": {
+   "R_LOGC": 0.518,
+   "R_POS": 0.4806,
+   "R_IPOS": 0.5069,
+   "R_FB": 0.4836,
+   "R_LEN": 0.5326,
+   "R_SL": 0.4783
+  },
+  "probe": 0.5296,
+  "caliper": {
+   "pairs": 8
+  },
+  "perStratum": {
+   "c4_6": {
+    "n": 27,
+    "auc": 0.7778,
+    "ci": [
+     0.6774,
+     0.9118
+    ],
+    "sens": 0.5556,
+    "spec": 1
+   },
+   "c7_15": {
+    "n": 41,
+    "auc": 0.9146,
+    "ci": [
+     0.8714,
+     1
+    ],
+    "sens": 0.8537,
+    "spec": 0.9756
+   },
+   "c16p": {
+    "n": 7,
+    "auc": 0.7143,
+    "ci": [
+     0.5,
+     1
+    ],
+    "sens": 0.4286,
+    "spec": 1
+   }
+  }
+ },
+ "T1pass": {
+  "a_pairs": true,
+  "b_auc": true,
+  "c_lb": true,
+  "d_perm": true,
+  "e_controls": true,
+  "f_probe": true,
+  "g_consistency": true,
+  "h_spec": true,
+  "i_caliper": true,
+  "void": false,
+  "pass": true
+ },
+ "floor": {
+  "verdict": "PASS",
+  "auc": 0.5,
+  "ci": [
+   0.5,
+   0.5
+  ],
+  "pairs": 49
+ },
+ "T2": {
+  "pairs": 407,
+  "days": 14,
+  "auc": 0.817,
+  "ci": [
+   0.782,
+   0.8501
+  ],
+  "permQ95": 0.5344,
+  "sens": 0.6413,
+  "spec": 0.9926,
+  "controls": {
+   "R_LOGC": 0.5158,
+   "R_POS": 0.5015,
+   "R_IPOS": 0.4955,
+   "R_FB": 0.4641,
+   "R_LEN": 0.509,
+   "R_SL": 0.489
+  },
+  "probe": 0.5341,
+  "caliper": {
+   "pairs": 82,
+   "auc": 0.7378,
+   "ci": [
+    0.6686,
+    0.8148
+   ]
+  },
+  "perStratum": {
+   "c4_6": {
+    "n": 160,
+    "auc": 0.725,
+    "ci": [
+     0.6835,
+     0.7647
+    ],
+    "sens": 0.4562,
+    "spec": 0.9938
+   },
+   "c7_15": {
+    "n": 157,
+    "auc": 0.8631,
+    "ci": [
+     0.8086,
+     0.9136
+    ],
+    "sens": 0.7325,
+    "spec": 0.9936
+   },
+   "c16p": {
+    "n": 90,
+    "auc": 0.9,
+    "ci": [
+     0.8526,
+     0.9437
+    ],
+    "sens": 0.8111,
+    "spec": 0.9889
+   }
+  },
+  "pass": {
+   "a_pairs": true,
+   "b_auc": true,
+   "c_lb": true,
+   "d_perm": true,
+   "e_controls": true,
+   "f_probe": true,
+   "g_consistency": true,
+   "h_spec": true,
+   "i_caliper": true,
+   "void": false,
+   "pass": true,
+   "days8": true
+  }
+ },
+ "scope": {
+  "strataT1": [
+   "c4_6",
+   "c7_15"
+  ],
+  "strataT1Under15": [
+   "c16p"
+  ],
+  "reusePass": true,
+  "extensionPass": {
+   "X_DE": false,
+   "X_ES": false,
+   "X_IT": false,
+   "X_ALL": true
+  },
+  "floorT1": "PASS",
+  "floorReuse": "PASS",
+  "groupAspecificity": 0.7166
+ }
+}

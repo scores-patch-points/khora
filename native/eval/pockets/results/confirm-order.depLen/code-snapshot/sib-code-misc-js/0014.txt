@@ -1,0 +1,189 @@
+// Turns FOLD_ORGANS into organ records for createFold.
+//   FOLD_ORGANS="khora=proxy:http://127.0.0.1:11436,penelope=proxy:http://127.0.0.1:11439,heimdall=inproc,janus=off"
+// Unlisted organs default to inproc. An inproc organ whose module cannot be found becomes mode 'off' with a reason
+// (never a crash); one that is found but fails to load/start is inproc and DOWN (visible in /health).
+//
+// Where an in-proc organ comes from, first hit wins (an explicit pin never falls back to anything else):
+//   1. FOLD_ORGANS "name=inproc:/abs/dir"      2. FOLD_ORGAN_DIR_<NAME> (e.g. FOLD_ORGAN_DIR_KHORA=/abs/dir)
+//   3. FOLD_ORGANS_DIR/<name> (default ./organs/<name>, the installed copy)   4. the sibling ../<name>
+// What is loaded from that directory, first hit wins:
+//   a) a Fold-aware shim: <dir>/organ.mjs (or package.json "fold": {"entry"}; fallbacks handlers.mjs, src/handlers.mjs,
+//      index.mjs) exporting createKhoraHandlers / createPenelopeHandlers / createJanusHandlers (or a default export of the same
+//      shape): (ctx) => { name, handle(req,res): Promise<boolean>, close(), start?(), handleChannel? (khora), derive? (janus) }
+//   b) the organ's own mountable module, through its binding in server/bindings/<name>.mjs (khora proxy.mjs, penelope
+//      mouth/server.mjs, janus native/handlers.js, heimdall src/embed.js). The organ repos know nothing about the Fold.
+// Options per organ (tests inject fakes): buildOrgans({ options: { janus: { runReason }, penelope: { weave }, heimdall: {...} } }).
+import { existsSync, mkdirSync, readFileSync } from "node:fs";
+import { isAbsolute, join, resolve } from "node:path";
+import { pathToFileURL } from "node:url";
+import { ROOT } from "./config.mjs";
+import khoraBinding from "./bindings/khora.mjs";
+import penelopeBinding from "./bindings/penelope.mjs";
+import janusBinding from "./bindings/janus.mjs";
+import heimdallBinding from "./bindings/heimdall.mjs";
+import { createProxyOrgan } from "./proxy-organ.mjs";
+import { DISPATCH_ORDER, prefixesFor } from "./routes.mjs";
+import { linkState } from "./state.mjs";
+
+export const ORGAN_NAMES = DISPATCH_ORDER;
+export const ENTRY_CANDIDATES = ["organ.mjs", "handlers.mjs", "src/handlers.mjs", "index.mjs"];
+export const BINDINGS = Object.freeze({ khora: khoraBinding, penelope: penelopeBinding, janus: janusBinding, heimdall: heimdallBinding });
+
+// organ-local paths relocated into FOLD_HOME/data/<organ>/<key>. Applied ONLY to the installed copies under organs/
+// (never to a sibling checkout such as ../khora, which may be live under the old stack).
+export const STATE_MAPS = Object.freeze({
+  khora: { state: "state", documents: "documents", swatch: "gym/swatch.jsonl" },
+  penelope: { state: "state", documents: "documents" },
+  janus: { state: "state" },
+});
+
+export function parseOrganSpec(spec) {
+  const out = {};
+  for (const part of String(spec || "").split(",").map((s) => s.trim()).filter(Boolean)) {
+    const i = part.indexOf("=");
+    if (i < 1) throw new Error(`FOLD_ORGANS: expected name=mode, got "${part}"`);
+    const name = part.slice(0, i).trim();
+    const val = part.slice(i + 1).trim();
+    if (!ORGAN_NAMES.includes(name)) throw new Error(`FOLD_ORGANS: unknown organ "${name}" (known: ${ORGAN_NAMES.join(", ")})`);
+    if (val === "inproc" || val === "off") out[name] = { mode: val };
+    else if (val.startsWith("inproc:")) {
+      const dir = val.slice("inproc:".length);
+      if (!isAbsolute(dir)) throw new Error(`FOLD_ORGANS: inproc directory for ${name} must be an absolute path (got "${dir}")`);
+      out[name] = { mode: "inproc", dir };
+    } else if (val.startsWith("proxy:")) {
+      const target = val.slice("proxy:".length);
+      let u;
+      try { u = new URL(target); } catch { throw new Error(`FOLD_ORGANS: bad proxy target for ${name}: "${target}"`); }
+      if (u.protocol !== "http:" && u.protocol !== "https:") throw new Error(`FOLD_ORGANS: proxy target for ${name} must be http(s)`);
+      out[name] = { mode: "proxy", target };
+    } else throw new Error(`FOLD_ORGANS: mode for ${name} must be inproc, inproc:<dir>, off or proxy:<url> (got "${val}")`);
+  }
+  return out;
+}
+
+const cap = (s) => s[0].toUpperCase() + s.slice(1);
+
+/** An entry in `dir`: a Fold-aware shim first, then the organ's own mountable module (its binding's entries). */
+function entryIn(name, dir) {
+  try {
+    const pkg = JSON.parse(readFileSync(join(dir, "package.json"), "utf8"));
+    const e = pkg?.fold?.entry;
+    if (typeof e === "string" && existsSync(join(dir, e))) return { entry: e, via: "shim" };
+  } catch { /* no package.json */ }
+  const shim = ENTRY_CANDIDATES.find((c) => existsSync(join(dir, c)));
+  if (shim) return { entry: shim, via: "shim" };
+  const native = (BINDINGS[name]?.entries || []).find((c) => existsSync(join(dir, c)));
+  return native ? { entry: native, via: "binding" } : null;
+}
+
+/**
+ * Where an in-proc organ lives. `pin` (spec dir or FOLD_ORGAN_DIR_<NAME>) is explicit: if it has no entry the organ is not found;
+ * it never falls back to the installed copy or a sibling checkout (which may be live under the old stack).
+ */
+export function locateOrgan(name, { organsDir = "", root = ROOT, pin = "" } = {}) {
+  const looked = [];
+  if (pin) {
+    const dir = resolve(pin);
+    if (!existsSync(dir)) return { dir: null, entry: null, kind: null, looked: [`${dir} (pinned, absent)`] };
+    const hit = entryIn(name, dir);
+    if (hit) return { dir, ...hit, kind: "pinned", looked };
+    return { dir: null, entry: null, kind: null, looked: [`${dir} (pinned, no entry module)`] };
+  }
+  const installed = resolve(organsDir || join(root, "organs"), name);
+  const sibling = resolve(root, "..", name);
+  for (const [dir, kind] of [[installed, "installed"], [sibling, "sibling"]]) {
+    if (!existsSync(dir)) { looked.push(`${dir} (absent)`); continue; }
+    const hit = entryIn(name, dir);
+    if (hit) return { dir, ...hit, kind, looked };
+    looked.push(`${dir} (no entry module)`);
+  }
+  return { dir: null, entry: null, kind: null, looked };
+}
+
+function offOrgan(name, reason) {
+  return { name, mode: "off", reason, handle: async () => false, close() {} };
+}
+
+function inprocOrgan({ name, dir, entry, via, kind, cfg, env, log, options = {}, dirOf, organMode }) {
+  const file = join(dir, entry);
+  const binding = via === "binding" ? BINDINGS[name] : null;
+  let inner = null;
+  const organ = {
+    name,
+    mode: "inproc",
+    dir,
+    entry,
+    source: kind,
+    via,
+    ...(binding?.startTimeoutMs ? { startTimeoutMs: binding.startTimeoutMs } : {}),
+    async start(ctx) {
+      const dataDir = join(cfg.home, "data", name);
+      mkdirSync(dataDir, { recursive: true });
+      // relocate organ-local state into FOLD_HOME/data/<name> for installed copies (and pinned ones that opt in); never a sibling
+      const link = kind === "installed" ? env.FOLD_LINK_STATE !== "0" : kind === "pinned" ? env.FOLD_LINK_STATE === "1" : false;
+      if (link && STATE_MAPS[name]) {
+        for (const r of linkState(dir, STATE_MAPS[name], cfg.home, { name })) {
+          if (r.action === "conflict" || r.action === "foreign-link" || r.action === "rejected") log(`state ${name}/${r.key}: ${r.action} (left untouched)`);
+        }
+      }
+      const load = () => import(pathToFileURL(file).href);
+      if (binding) {
+        inner = await binding.create({
+          name, dir, entry, kind, home: cfg.home, dataDir, logDir: join(cfg.home, "logs"), env, log, ollama: cfg.ollama,
+          fold: ctx, options: options[name] || {}, load, dirOf, organMode,
+        });
+        if (!inner || typeof inner.handle !== "function") throw new Error(`${name} binding did not return { handle }`);
+      } else {
+        const mod = await load();
+        const fn = `create${cap(name)}Handlers`;
+        const factory = mod[fn] || mod.default?.[fn] || (typeof mod.default === "function" ? mod.default : null);
+        if (typeof factory !== "function") throw new Error(`${file} does not export ${fn}`);
+        inner = await factory({
+          name, dir, home: cfg.home, dataDir, logDir: join(cfg.home, "logs"), env, log,
+          ollama: cfg.ollama, fold: ctx, ...(options[name] || {}),
+        });
+        if (!inner || typeof inner.handle !== "function") throw new Error(`${fn}() did not return { handle }`);
+      }
+      if (typeof inner.start === "function") await inner.start();
+    },
+    async handle(req, res) { return inner ? inner.handle(req, res) : false; },
+    async close() { if (inner) await inner.close?.(); },
+    status() { return { dir, entry, source: kind, via, ...(inner?.status?.() ?? {}) }; },
+  };
+  Object.defineProperty(organ, "handleChannel", {
+    enumerable: true,
+    get() { return inner && typeof inner.handleChannel === "function" ? (req, res) => inner.handleChannel(req, res) : undefined; },
+  });
+  Object.defineProperty(organ, "derive", {
+    enumerable: true,
+    get() { return inner && typeof inner.derive === "function" ? inner.derive : undefined; },
+  });
+  if (binding?.conditions) {
+    Object.defineProperty(organ, "conditions", { enumerable: true, get: () => binding.conditions({ env }) });
+  }
+  return organ;
+}
+
+/** @returns organ records in DISPATCH_ORDER */
+export function buildOrgans({ cfg, env = process.env, root = ROOT, log = () => {}, heimdall = {}, options = {}, timeouts = {} } = {}) {
+  const spec = parseOrganSpec(cfg.organsSpec);
+  const opts = { ...options, heimdall: { ...heimdall, ...(options.heimdall || {}) } };
+  // plan first: peers ask each other (dirOf / organMode) while they start, so every organ's location is known up front
+  const plan = new Map();
+  for (const name of ORGAN_NAMES) {
+    const s = spec[name] || { mode: "inproc" };
+    if (s.mode === "off") { plan.set(name, { mode: "off", reason: "FOLD_ORGANS says off" }); continue; }
+    if (s.mode === "proxy") { plan.set(name, { mode: "proxy", target: s.target }); continue; }
+    const pin = s.dir || env[`FOLD_ORGAN_DIR_${name.toUpperCase()}`] || "";
+    const found = locateOrgan(name, { organsDir: cfg.organsDir, root, pin });
+    plan.set(name, found.dir ? { mode: "inproc", found } : { mode: "off", reason: `no in-proc module found; looked: ${found.looked.join("; ")}` });
+  }
+  const dirOf = (n) => plan.get(n)?.found?.dir ?? null;
+  const organMode = (n) => plan.get(n)?.mode ?? "off";
+  return ORGAN_NAMES.map((name) => {
+    const p = plan.get(name);
+    if (p.mode === "off") return offOrgan(name, p.reason);
+    if (p.mode === "proxy") return createProxyOrgan({ name, target: p.target, prefixes: prefixesFor(name), log, timeouts });
+    return inprocOrgan({ name, ...p.found, cfg, env, log, options: opts, dirOf, organMode });
+  });
+}

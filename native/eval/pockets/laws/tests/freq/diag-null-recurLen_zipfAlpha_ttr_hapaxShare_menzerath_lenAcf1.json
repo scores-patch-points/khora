@@ -1,0 +1,50 @@
+{
+ "recurLen": {
+  "reps": 40,
+  "sdZ_with200draws": 0.88,
+  "sdZ_with10draws": 1.05,
+  "meanNullKurtosis": 2.96,
+  "maxAbsZ200": 2.36,
+  "maxAbsZ10": 2.82
+ },
+ "zipfAlpha": {
+  "reps": 40,
+  "sdZ_with200draws": 0.88,
+  "sdZ_with10draws": 1.2,
+  "meanNullKurtosis": 2.92,
+  "maxAbsZ200": 1.76,
+  "maxAbsZ10": 3.64
+ },
+ "ttr": {
+  "reps": 40,
+  "sdZ_with200draws": 1.03,
+  "sdZ_with10draws": 1.02,
+  "meanNullKurtosis": 2.96,
+  "maxAbsZ200": 2.46,
+  "maxAbsZ10": 2.34
+ },
+ "hapaxShare": {
+  "reps": 40,
+  "sdZ_with200draws": 0.94,
+  "sdZ_with10draws": 0.91,
+  "meanNullKurtosis": 2.9,
+  "maxAbsZ200": 2.26,
+  "maxAbsZ10": 2.13
+ },
+ "menzerath": {
+  "reps": 40,
+  "sdZ_with200draws": 1.12,
+  "sdZ_with10draws": 1.49,
+  "meanNullKurtosis": 2.95,
+  "maxAbsZ200": 3.13,
+  "maxAbsZ10": 5.31
+ },
+ "lenAcf1": {
+  "reps": 40,
+  "sdZ_with200draws": null,
+  "sdZ_with10draws": null,
+  "meanNullKurtosis": null,
+  "maxAbsZ200": null,
+  "maxAbsZ10": null
+ }
+}

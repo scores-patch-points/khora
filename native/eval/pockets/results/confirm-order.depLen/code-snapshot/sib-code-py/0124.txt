@@ -1,0 +1,30 @@
+"""Permanent, independent copies of source documents via the Internet
+Archive's Save Page Now — so a Legistar attachment can't quietly change or
+disappear out from under a finding. Keyless (no IA account needed); best
+effort, short timeout, never blocks the pipeline on failure."""
+from __future__ import annotations
+
+import re
+
+import requests
+
+SAVE_URL = "https://web.archive.org/save/"
+_TIMESTAMP_RE = re.compile(r"/web/(\d{14})/")
+
+
+def archive_url(url: str, *, timeout: int = 20) -> str | None:
+    """Ask the Wayback Machine to capture `url` now. Returns the permanent
+    web.archive.org URL, or None if capture failed or timed out (never
+    raises — a source we couldn't archive still gets read normally)."""
+    try:
+        r = requests.get(SAVE_URL + url, timeout=timeout, allow_redirects=True,
+                          headers={"User-Agent": "legistar-watch/1.0 (surveillance-ordinance tracker)"})
+    except requests.RequestException:
+        return None
+
+    loc = r.headers.get("Content-Location") or r.headers.get("Link")
+    if loc and _TIMESTAMP_RE.search(loc):
+        return "https://web.archive.org" + loc if loc.startswith("/web/") else loc
+    if r.url and _TIMESTAMP_RE.search(r.url):
+        return r.url
+    return None

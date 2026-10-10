@@ -1,0 +1,224 @@
+#!/usr/bin/env node
+// capsule-e2e.mjs — the whole sealed-capsule loop against REAL models, synthetic problems only.
+//
+//   node scripts/capsule-e2e.mjs                 n=30 problems × 3 arms × 3 models, then the integrated /api/job run
+//   node scripts/capsule-e2e.mjs --n 3 --quick   smoke run
+//   node scripts/capsule-e2e.mjs --models openai-fast
+//
+// What is sent: opaque symbols and the relation `<` only (src/capsule.js). The problems are generated here from a
+// seeded generator; no document, name, or Fold corpus is read. Volume is small and strictly serialized.
+// Models used in the recorded run: gemma2:2b (this machine's Ollama) and `claude-sonnet-4-6` (the cheapest model of the
+// Anthropic account already configured on this machine, ~$3/$15 per Mtok; ~100 small synthetic calls ≈ $1-2). The free keyless
+// remotes were quota-blocked when this was run (Pollinations HTTP 402; LLM7 "Daily token quota exceeded"); `openai-fast` (Pollinations, keyless; a REASONING model — its reasoning
+// tokens count as output) — reached THROUGH an in-process heimdall bridge (sealed gate; the outbound audit ledger records the
+// bytes). `anthropic/claude-haiku-4-5` (LLM7) was tried and is NOT keyless (401 "Missing API key": discovery.js's probe sends a
+//
+// PRE-REGISTRATION (written before the first model call of this script; Constitution II.5)
+//   n = 30 situations (seeds 1..30), the SAME situations in every arm and for every model (paired).
+//   arms: abstract (K=1: abstraction only), worlds (K=4, symmetric-exchangeable), constraint-space.
+//   per call, scored against ground truth computed locally:
+//     real-world exact   the answer for the world that matters equals the locally computed closure exactly
+//     all-worlds exact   the same, over every world in the capsule (what "what follows in EACH world" asks)
+//     gate verdict       the local acceptance checks (capsule-sound, capsule-complete) on the reconnected proposal
+//   GATE BAR: false accepts (gate accepted, answer not exact) must be 0; false rejects (gate rejected an exact answer) must be 0;
+//             of N deliberately corrupted proposals (5 kinds) the gate must reject ALL.
+//   PREDICTIONS (guesses, not measurements): frontier models >= 70% real-world exact on `abstract`; `worlds` costs them
+//     little (<= 10 points); `constraint-space` is the hardest for every model (long enumerations); gemma2:2b < 40% on
+//     worlds and worse on constraint-space. A model that is wrong is expected to be rejected by the gate, not trusted.
+//   The integrated run (Part 2) sends n=30 unpinned capsule jobs to POST /api/job with disclosure abstract-capsule-only and
+//     maxAttempts 3, and reports where they were accepted and how often escalation was needed.
+
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import { createBridge } from "../src/bridge-server.mjs";
+import { discoverAll } from "../src/discovery.js";
+import { runAcceptance } from "../src/acceptance.js";
+import { wilson } from "../src/capsule-attack.js";
+import {
+  mulberry32, makeSituation, sampleWitness, buildCapsule, renderPrompt, parseAnswer, derivedOf, closureOf, pid, allChains, chainF1,
+  registerCapsuleChecks, CAPSULE_ACCEPTANCE, proposalFromReply, createSymbolRegistry, checkDerived,
+} from "../src/capsule.js";
+
+registerCapsuleChecks();
+const arg = (k, d) => { const i = process.argv.indexOf(k); return i >= 0 ? process.argv[i + 1] : d; };
+const QUICK = process.argv.includes("--quick");
+const N = Number(arg("--n", QUICK ? 3 : 30));
+const MODELS = (arg("--models", "gemma2:2b,claude-sonnet-4-6")).split(",");
+const ONLY_ARMS = arg("--arms", "abstract,worlds,constraint-space").split(",");
+const SKIP_PARTS = process.argv.includes("--part1-only");
+const ARMS = [["abstract", "symmetric-exchangeable", 1], ["worlds", "symmetric-exchangeable", 4], ["constraint-space", "constraint-space", 0]].filter((a) => ONLY_ARMS.includes(a[0]));
+const pct = (x) => (100 * x).toFixed(1) + "%";
+const cell = (w) => `${pct(w.p)} [${pct(w.lo)},${pct(w.hi)}] (${Math.round(w.p * w.n)}/${w.n})`;
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const OUT = { n: N, at: new Date().toISOString(), models: {}, corruption: null, integrated: null };
+
+// ── an in-process bridge: this machine's Ollama + the two keyless remote models, its own port, its own stats file
+// Remote models are reached through the heimdall bridge already running on this machine (it holds the provider keys server-side;
+// this script holds none). Only synthetic symbols are sent, through its sealed gate. It is used, never restarted.
+const REMOTE_BASE = process.env.HEIMDALL_REMOTE_BRIDGE || "http://127.0.0.1:8790";
+let remoteTags = [];
+try { remoteTags = ((await (await fetch(REMOTE_BASE + "/api/tags", { signal: AbortSignal.timeout(4000) })).json()).models ?? []).filter((m) => m.heimdall?.frontier).map((m) => m.name); } catch {}
+const isRemoteModel = (m) => remoteTags.includes(m);
+const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "capsule-e2e-"));
+const frontierExecutors = []; // none of its own: the remote models ride the running bridge (REMOTE_BASE)
+let remoteQueue = 0; // Part 2b sets this: an ASSUMED backlog on the remote route, so the router tries local first
+const remoteRoutes = async () => MODELS.filter(isRemoteModel).map((model) => ({ id: `remote:${model}`, kind: "remote", trust: "external", model, queue: remoteQueue, capabilities: ["reasoning", "classification", "composition", "extraction", "verification", "compute", "retrieval", "structured-output", "native-tools", "long-context"], run: async (messages, { maxTokens }) => {
+  const t0 = Date.now();
+  const r = await fetch(REMOTE_BASE + "/v1/chat/completions", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ model, messages, temperature: 0, max_tokens: maxTokens, stream: false, heimdall_privacy: "sealed-external" }) });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) { const e = new Error(`remote ${r.status}`); e.status = r.status; throw e; }
+  return { text: j.choices?.[0]?.message?.content ?? "", ms: Date.now() - t0, tokens: j.usage?.completion_tokens ?? null };
+} }));
+const bridge = createBridge({ port: 0, host: "127.0.0.1", dist: null, autoOpen: false, frontierExecutors, extraJobRoutes: remoteRoutes, routeStatsFile: path.join(tmp, "route-stats.json"), auditFile: path.join(tmp, "outbound.ndjson"), stateFile: path.join(tmp, "state.json") });
+await bridge.listen();
+const base = "http://127.0.0.1:" + bridge.server.address().port;
+console.log(`in-process bridge ${base} (local + job lane); remote models via ${REMOTE_BASE}: ${MODELS.filter(isRemoteModel).join(", ") || "(none reachable)"}`);
+
+async function ask(model, prompt, maxTokens) {
+  const isRemote = isRemoteModel(model);
+  const where = isRemote ? REMOTE_BASE : base;
+  for (let attempt = 0; attempt < 5; attempt++) {
+    const t0 = Date.now();
+    try {
+      // a remote reasoning model spends tokens thinking before it answers: give it room (its reasoning tokens are billed output)
+      const r = await fetch(where + "/v1/chat/completions", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ model, messages: [{ role: "user", content: prompt }], temperature: 0, max_tokens: isRemote ? maxTokens * 5 : maxTokens, stream: false, ...(isRemote ? { heimdall_privacy: "sealed-external" } : {}) }), signal: AbortSignal.timeout(300000) });
+      const j = await r.json();
+      if (r.ok && j.choices?.[0]?.message?.content != null) return { text: j.choices[0].message.content, usage: j.usage ?? null, ms: Date.now() - t0 };
+      if (![402, 429].includes(r.status) && r.status < 500) return { error: `${r.status} ${JSON.stringify(j).slice(0, 120)}`, ms: Date.now() - t0 };
+    } catch (e) { if (attempt === 4) return { error: String(e?.message || e).slice(0, 120), ms: Date.now() - t0 }; }
+    await sleep(isRemote ? 12000 * (attempt + 1) : 1500 * 2 ** attempt);
+  }
+  return { error: "rate-limited after 5 tries", ms: 0 };
+}
+
+/** score one reply against ground truth. */
+function score({ arm, capsule, key, situation, T, text }) {
+  const parsed = parseAnswer(text);
+  const out = { parsed: !!parsed };
+  if (arm === "constraint-space") {
+    const f = chainF1(situation, key, parsed);
+    out.chainF1 = f.f1;
+  } else if (parsed) {
+    const exact = capsule.worlds.map((w, j) => {
+      const tab = Array.isArray(key.eventOf) ? key.eventOf[j] : key.eventOf;
+      const wp = w.claims.map(([a, b]) => [tab[a], tab[b]]);
+      const want = new Set(closureOf(situation.n, wp).derived.map(([a, b]) => pid(a, b, situation.n)));
+      const ans = parsed[String(j + 1)];
+      if (!Array.isArray(ans)) return false;
+      const got = new Set();
+      for (const p of ans) { if (!Array.isArray(p) || !(p[0] in tab) || !(p[1] in tab)) return false; got.add(pid(tab[p[0]], tab[p[1]], situation.n)); }
+      return got.size === want.size && [...want].every((x) => got.has(x));
+    });
+    out.worldsExact = exact; out.allWorldsExact = exact.every(Boolean);
+  }
+  return out;
+}
+
+const problems = Array.from({ length: N }, (_, i) => { const rng = mulberry32(1000 + i); const situation = makeSituation(rng); return { i, rng, situation, T: sampleWitness(situation, rng) }; });
+const registry = createSymbolRegistry({ rng: mulberry32(4242) });
+
+console.log(`\n══ PART 1 — accuracy per arm × model (n=${N} paired problems)`);
+for (const model of MODELS) {
+  if (model !== "gemma2:2b" && !isRemoteModel(model)) { console.log(`${model}: not reachable — skipped`); continue; }
+  OUT.models[model] = {};
+  for (const [arm, construction, K] of ARMS) {
+    const rows = [];
+    for (const p of problems) {
+      const rng = mulberry32(7000 + p.i);
+      const { capsule, key } = buildCapsule({ situation: p.situation, witnessed: arm === "constraint-space" ? null : p.T, construction, K: K || undefined, rng, registry });
+      if (arm === "constraint-space") key.witnessed = p.T.slice();
+      const prompt = renderPrompt(capsule);
+      const maxTokens = arm === "constraint-space" ? (model === "gemma2:2b" ? 900 : 1800) : 700;
+      const r = await ask(model, prompt, maxTokens);
+      process.stdout.write(r.error ? "x" : ".");
+      if (r.error) { rows.push({ error: r.error, ms: r.ms }); if (model !== "gemma2:2b") await sleep(600); continue; }
+      const sc = score({ arm, capsule, key, situation: p.situation, T: p.T, text: r.text });
+      const rep = proposalFromReply({ capsule, key, situation: p.situation, text: r.text });
+      const gate = await runAcceptance(CAPSULE_ACCEPTANCE, rep.proposal ?? undefined, { capsuleLocal: { situation: p.situation, T: p.T } });
+      const truthExact = rep.proposal ? checkDerived(p.situation, p.T, rep.proposal.pairs).exact : false;
+      rows.push({ ...sc, gate: gate.state, accepted: gate.accepted, realExact: truthExact, promptChars: prompt.length, usage: r.usage, replyChars: r.text.length, ms: r.ms });
+      if (model !== "gemma2:2b") await sleep(600);
+    }
+    process.stdout.write("\n");
+    const ok = rows.filter((r) => !r.error);
+    const realExact = wilson(ok.filter((r) => r.realExact).length, Math.max(1, ok.length));
+    const falseAccept = ok.filter((r) => r.accepted && !r.realExact).length, falseReject = ok.filter((r) => !r.accepted && r.realExact).length;
+    const allW = arm === "constraint-space" ? null : wilson(ok.filter((r) => r.allWorldsExact).length, Math.max(1, ok.length));
+    const mean = (xs) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : null);
+    const summary = {
+      arm, K, n: rows.length, answered: ok.length, errors: rows.length - ok.length, parsed: ok.filter((r) => r.parsed).length, realExact, allWorldsExact: allW,
+      chainF1: arm === "constraint-space" ? mean(ok.filter((r) => r.chainF1 != null).map((r) => r.chainF1)) : null,
+      gate: { accepted: ok.filter((r) => r.accepted).length, rejected: ok.filter((r) => !r.accepted && r.gate === "rejected").length, unresolved: ok.filter((r) => r.gate === "unresolved").length, falseAccept, falseReject },
+      wrongProposalsRejected: `${ok.filter((r) => !r.realExact && !r.accepted).length}/${ok.filter((r) => !r.realExact).length}`,
+      meanPromptChars: mean(ok.map((r) => r.promptChars)), meanReplyChars: mean(ok.map((r) => r.replyChars)),
+      usage: mean(ok.filter((r) => r.usage?.prompt_tokens).map((r) => r.usage.prompt_tokens)) != null ? { promptTokens: mean(ok.filter((r) => r.usage?.prompt_tokens).map((r) => r.usage.prompt_tokens)), completionTokens: mean(ok.filter((r) => r.usage?.completion_tokens != null).map((r) => r.usage.completion_tokens)) } : null,
+      meanMs: mean(ok.map((r) => r.ms)),
+    };
+    OUT.models[model][arm] = summary;
+    console.log(`${model.padEnd(30)} ${arm.padEnd(17)} answered ${ok.length}/${rows.length}  real-world exact ${cell(realExact)}${allW ? `  all-worlds exact ${pct(allW.p)}` : `  chain F1 ${summary.chainF1?.toFixed(2)}`}  gate: accepted ${summary.gate.accepted}, false-accept ${falseAccept}, false-reject ${falseReject}; wrong proposals rejected ${summary.wrongProposalsRejected}`);
+  }
+}
+
+if (!SKIP_PARTS) {
+console.log(`\n══ PART 1b — the gate against DELIBERATELY CORRUPTED proposals (oracle answers corrupted five ways, ${N} problems)`);
+{
+  const kinds = { drop: 0, bogus: 0, reverse: 0, junk: 0, empty: 0 }, tried = { ...kinds };
+  for (const p of problems) {
+    const rng = mulberry32(9000 + p.i);
+    const { capsule, key } = buildCapsule({ situation: p.situation, witnessed: p.T, construction: "symmetric-exchangeable", K: 4, rng });
+    const rev = Object.fromEntries(Object.entries(key.eventOf).map(([s, e]) => [e, s]));
+    const good = derivedOf(p.situation, p.T).derived;
+    const reply = (pairs) => JSON.stringify(Object.fromEntries(capsule.worlds.map((_, j) => [String(j + 1), j === key.real ? pairs.map(([a, b]) => [rev[a] ?? a, rev[b] ?? b]) : []])));
+    const stated = new Set(p.T.map((i) => pid(p.situation.claims[i].a, p.situation.claims[i].b, p.situation.n))), have = new Set(good.map(([a, b]) => pid(a, b, p.situation.n)));
+    let bogus = null;
+    for (let a = 0; a < p.situation.n && !bogus; a++) for (let b = 0; b < p.situation.n && !bogus; b++) if (a !== b && ![pid(a, b, p.situation.n), pid(b, a, p.situation.n)].some((x) => stated.has(x) || have.has(x))) bogus = [a, b];
+    const cases = { drop: reply(good.slice(1)), bogus: bogus ? reply([...good, bogus]) : null, reverse: reply([...good.slice(1), [good[0][1], good[0][0]]]), junk: reply([...good, ["Ezzzzz", "Eyyyyy"]]), empty: "{}" };
+    for (const [k, text] of Object.entries(cases)) {
+      if (text == null) continue;
+      tried[k]++;
+      const rep = proposalFromReply({ capsule, key, situation: p.situation, text });
+      const v = await runAcceptance(CAPSULE_ACCEPTANCE, rep.proposal ?? undefined, { capsuleLocal: { situation: p.situation, T: p.T } });
+      if (!v.accepted) kinds[k]++;
+    }
+    const okReply = proposalFromReply({ capsule, key, situation: p.situation, text: reply(good) });
+    tried.control = (tried.control || 0) + 1;
+    if ((await runAcceptance(CAPSULE_ACCEPTANCE, okReply.proposal, { capsuleLocal: { situation: p.situation, T: p.T } })).accepted) kinds.control = (kinds.control || 0) + 1;
+  }
+  OUT.corruption = { rejected: kinds, tried };
+  console.log(Object.keys(tried).map((k) => `${k}: ${k === "control" ? "accepted" : "rejected"} ${kinds[k] || 0}/${tried[k]}`).join("   "));
+}
+
+async function integrated(label, nJobs, seedBase) {
+  console.log(`\n══ PART ${label} — the integrated path: POST /api/job (unpinned, disclosure abstract-capsule-only, maxAttempts 3), n=${nJobs} world capsules`);
+  const results = [];
+  for (const p of problems.slice(0, nJobs)) {
+    const rng = mulberry32(seedBase + p.i);
+    const { capsule, key } = buildCapsule({ situation: p.situation, witnessed: p.T, construction: "symmetric-exchangeable", K: 4, rng, registry });
+    const r = await fetch(base + "/api/job", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ job: { taskClass: "formal.check", disclosure: "abstract-capsule-only", acceptance: CAPSULE_ACCEPTANCE, maxAttempts: 3, output: { kind: "text", maxTokens: 4000 }, task: "what follows in each synthetic world" }, payload: { capsule }, context: { key, situation: p.situation, witnessedSet: p.T } }) });
+    const j = await r.json();
+    results.push(j);
+    if (p.i === 0) console.log("first job trace:", JSON.stringify({ route: j.route, state: j.state, attempts: j.attempts?.map((a) => `${a.route}:${a.verdict}${a.failureKind ? "(" + a.failureKind + ")" : ""}`), candidates: j.decision?.[0]?.candidates?.map((c) => `${c.route}=${c.score}`) }));
+    await sleep(300);
+  }
+  const states = {}; for (const r of results) states[r.state] = (states[r.state] || 0) + 1;
+  const via = {}; for (const r of results.filter((x) => x.state === "accepted")) via[r.route] = (via[r.route] || 0) + 1;
+  const attempts = {}; for (const r of results) attempts[r.attempts?.length ?? 0] = (attempts[r.attempts?.length ?? 0] || 0) + 1;
+  const firstRoute = {}; for (const r of results) { const f = r.attempts?.[0]?.route; firstRoute[f] = (firstRoute[f] || 0) + 1; }
+  const escalated = results.filter((r) => (r.attempts?.length ?? 0) > 1);
+  const accepted = results.filter((r) => r.state === "accepted").length;
+  const stats = await (await fetch(base + "/api/route-stats")).json();
+  const ledger = (await (await fetch(base + "/api/ledger")).json()).entries.filter((e) => /^job:/.test(e.reason)).length;
+  const summary = { label, n: results.length, states, firstRoute, acceptedVia: via, attemptsHistogram: attempts, escalatedJobs: escalated.length, escalatedThenAccepted: escalated.filter((r) => r.state === "accepted").length, escalationKinds: escalated.map((r) => r.attempts[0].failureKind), accepted: wilson(accepted, results.length), ledgerAttemptEntries: ledger, routeStats: stats.cells };
+  console.log(`final states: ${JSON.stringify(states)}   accepted ${cell(wilson(accepted, results.length))}\nfirst route: ${JSON.stringify(firstRoute)}   accepted via: ${JSON.stringify(via)}   attempts per job: ${JSON.stringify(attempts)}   escalated ${escalated.length} (then accepted ${summary.escalatedThenAccepted}); ledger attempt entries (cumulative): ${ledger}`);
+  console.log("measured accept rates so far (Laplace-smoothed):\n" + stats.cells.map((c) => `  ${c.route.padEnd(36)} P=${c.p.toFixed(3)} accepted ${c.accepted} rejected ${c.rejected} errors ${c.errors}`).join("\n"));
+  return summary;
+}
+OUT.integrated = await integrated("2", N, 12000);
+remoteQueue = 8; // Part 2b: the remote is congested (assumed backlog) — local is tried first, fails the gate, and escalation moves the job
+OUT.integratedRemoteBusy = await integrated("2b (remote congested, queue=8)", Math.min(N, 12), 15000);
+
+}
+fs.mkdirSync("docs/data", { recursive: true });
+if (!QUICK) { const f = `docs/data/capsule-e2e-${MODELS.join("+").replace(/[^a-zA-Z0-9+.-]/g, "_")}.json`; fs.writeFileSync(f, JSON.stringify(OUT, null, 1)); console.log("\nwrote " + f); }
+await bridge.close();
