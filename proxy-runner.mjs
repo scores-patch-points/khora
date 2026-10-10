@@ -20,6 +20,13 @@ import { diaNorm, namesCorefer } from "./native/adapters/text/surfaces.js";
 import { deriveRegister, detectLanguage, questionFor, writeVoiceFor, voiceIsDeclaredFor, madePlatform } from "./native/kernel/register.js";
 import { createSeededRng, seedFrom } from "./native/kernel/rng.js";
 import { queryMeaningPotential, loadSidecar, SIDECAR_PATH } from "./native/kernel/prior-query.js";
+import { makeBrokerFromDerivedPriors } from "./native/kernel/prior-broker.js";
+
+// The prior broker, built once (its discovery reads the derived-priors tree);
+// a turn that names no genre never builds it at all (the call is gated on the
+// register's field below).
+let _priorBrokerOnceRef = null;
+const priorBrokerOnce = () => _priorBrokerOnceRef || (_priorBrokerOnceRef = makeBrokerFromDerivedPriors());
 import { createWheelLedger } from "./native/kernel/wheel.js";
 import { discoveredFramingFor, discoverFraming, applyDiscovered } from "./native/kernel/discovery.js";
 import { reviseTextFold } from "./native/adapters/text/revision.js";
@@ -174,7 +181,7 @@ import { cellOf } from "./native/kernel/cube.js";
 import { loadSpeakerModel, saveSpeakerModel, updateSpeakerModel, durableFacts, edgeFromRecords } from "./native/the-fold/speaker-model.js";
 import { readIntent } from "./native/organs/intent-reader.js";
 import { intentParser } from "./native/organs/reason-gate.js";
-import { detectLanguage, grammarFor } from "./native/the-fold/language-grammar.js";
+import { grammarFor } from "./native/the-fold/language-grammar.js";
 // The opencode lane (opencode-upstream.mjs): Claude/DeepSeek models a caller
 // names are generated through `opencode serve`, never Ollama — same
 // antistrauss gate, same draw contract, tools hard-disabled. Re-exported so
@@ -6170,6 +6177,20 @@ export async function runProxyTurn({ sessionId, userId = null, model, task, chat
   if (runMode === "projection" && prelimShape?.register?.field?.field && !isCode) {
     try {
       const staged = queryMeaningPotential(prelimShape.register, { record: null, seams: [] });
+      // THE PRIOR BROKER (§6): which registered families are in play for this
+      // genre's meaning potential, and which a scope expects but no
+      // registration covers. Advisory and additive — the broker SELECTS and
+      // NAMES the library, it never invents content. It rides on the impression
+      // so the turn records which prior families stood behind the meaning
+      // potential, and which were missing (the named-gap discipline, never a
+      // silent substitution). Zero change to routing.
+      let broker = { consulted: [], missing: [] };
+      try {
+        const bk = priorBrokerOnce().broker.consult({
+          inquiry: { mode: prelimShape.register?.mode ?? "text", field: prelimShape.register?.field?.field ?? null },
+        });
+        broker = { consulted: bk.consulted.map((c) => c.familyId), missing: bk.missing.map((m) => m.familyId) };
+      } catch { broker = { consulted: [], missing: [] }; }
       // THE IMPRESSION (D/E/R, the first EVA after the register DEF): the
       // meaning potential is measured for what it KNOWS of this genre's
       // shape and feeling — hits, phases, shapes — no content rides.
@@ -6179,6 +6200,8 @@ export async function runProxyTurn({ sessionId, userId = null, model, task, chat
         phases: [...new Set(staged.evidence.flatMap((e) => e.phases ?? []))].slice(0, 7),
         shapes: [...new Set(staged.evidence.flatMap((e) => e.shapes ?? []))],
         contributors: staged.evidence.map((e) => e.from),
+        priorFamilies: broker.consulted,
+        priorMissing: broker.missing,
       };
       wheel.turn("impression",
         `what a satisfying ${impression.genre} would FEEL like — shape, felt, staging; no content`,
