@@ -1,0 +1,855 @@
+{
+  "schema": "@field/EOT-v1",
+  "medium": "text",
+  "language": "declared, not baked — Latin shares the Greek seam; only the priors differ (the exemplar compounding)",
+  "source": "01-literature-books/gutenberg/pg17270_The_Aeneid__Latin_.txt",
+  "tools": "case-ending (nominalEndings + verbPersonalEndings) · greekClauses parameterized by case-marking-lat + pos-lat · resolvePronouns · admit().bayes",
+  "counts": {
+    "clauses": 76,
+    "sentences": 84,
+    "bindings": 0,
+    "gaps": 0,
+    "referents": 0
+  },
+  "referents": [],
+  "edges": [
+    {
+      "at": 1,
+      "span": [
+        21,
+        66
+      ],
+      "action": "primus",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 1,
+      "span": [
+        21,
+        66
+      ],
+      "action": "oris",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 2,
+      "span": [
+        66,
+        106
+      ],
+      "action": "venit",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 3,
+      "span": [
+        106,
+        152
+      ],
+      "action": "terris",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 5,
+      "span": [
+        194,
+        243
+      ],
+      "action": "conderet",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 9,
+      "span": [
+        372,
+        416
+      ],
+      "action": "dolens",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 9,
+      "span": [
+        372,
+        416
+      ],
+      "action": "volvere",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 10,
+      "span": [
+        416,
+        457
+      ],
+      "action": "adire",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 12,
+      "span": [
+        490,
+        530
+      ],
+      "action": "fuit",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 12,
+      "span": [
+        490,
+        530
+      ],
+      "action": "tenuere",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 15,
+      "span": [
+        617,
+        659
+      ],
+      "action": "fertur",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 15,
+      "span": [
+        617,
+        659
+      ],
+      "action": "terris",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 17,
+      "span": [
+        701,
+        747
+      ],
+      "action": "fuit",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 17,
+      "span": [
+        701,
+        747
+      ],
+      "action": "esse",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 18,
+      "span": [
+        747,
+        794
+      ],
+      "action": "sinant",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 19,
+      "span": [
+        794,
+        836
+      ],
+      "action": "duci",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 20,
+      "span": [
+        836,
+        878
+      ],
+      "action": "audierat",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 20,
+      "span": [
+        836,
+        878
+      ],
+      "action": "verteret",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 22,
+      "span": [
+        919,
+        964
+      ],
+      "action": "volvere",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 23,
+      "span": [
+        964,
+        1008
+      ],
+      "action": "metuens",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 24,
+      "span": [
+        1008,
+        1056
+      ],
+      "action": "caris",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 24,
+      "span": [
+        1008,
+        1056
+      ],
+      "action": "gesserat",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 26,
+      "span": [
+        1099,
+        1143
+      ],
+      "action": "exciderant",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 26,
+      "span": [
+        1099,
+        1143
+      ],
+      "action": "manet",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 28,
+      "span": [
+        1186,
+        1231
+      ],
+      "action": "invisum",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 29,
+      "span": [
+        1231,
+        1271
+      ],
+      "action": "accensa",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 31,
+      "span": [
+        1317,
+        1357
+      ],
+      "action": "arcebat",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 32,
+      "span": [
+        1357,
+        1398
+      ],
+      "action": "errabant",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 33,
+      "span": [
+        1398,
+        1439
+      ],
+      "action": "erat",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 33,
+      "span": [
+        1398,
+        1439
+      ],
+      "action": "condere",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 34,
+      "span": [
+        1439,
+        1480
+      ],
+      "action": "telluris",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 35,
+      "span": [
+        1480,
+        1528
+      ],
+      "action": "dabant",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 35,
+      "span": [
+        1480,
+        1528
+      ],
+      "action": "aere",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 35,
+      "span": [
+        1480,
+        1528
+      ],
+      "action": "ruebant",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 36,
+      "span": [
+        1528,
+        1574
+      ],
+      "action": "servans",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 37,
+      "span": [
+        1574,
+        1618
+      ],
+      "action": "desistere",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 38,
+      "span": [
+        1618,
+        1660
+      ],
+      "action": "posse",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 38,
+      "span": [
+        1618,
+        1660
+      ],
+      "action": "avertere",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 40,
+      "span": [
+        1679,
+        1703
+      ],
+      "action": "exurere",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 41,
+      "span": [
+        1703,
+        1747
+      ],
+      "action": "potuit",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 41,
+      "span": [
+        1703,
+        1747
+      ],
+      "action": "submergere",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 46,
+      "span": [
+        1916,
+        1959
+      ],
+      "action": "corripuit",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 46,
+      "span": [
+        1916,
+        1959
+      ],
+      "action": "infixit",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 49,
+      "span": [
+        2046,
+        2078
+      ],
+      "action": "adoret",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 50,
+      "span": [
+        2078,
+        2122
+      ],
+      "action": "aris",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 52,
+      "span": [
+        2161,
+        2211
+      ],
+      "action": "austris",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 55,
+      "span": [
+        2276,
+        2320
+      ],
+      "action": "carcere",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 57,
+      "span": [
+        2361,
+        2409
+      ],
+      "action": "fremunt",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 57,
+      "span": [
+        2361,
+        2409
+      ],
+      "action": "sedet",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 58,
+      "span": [
+        2409,
+        2459
+      ],
+      "action": "tenens",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 58,
+      "span": [
+        2409,
+        2459
+      ],
+      "action": "temperat",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 60,
+      "span": [
+        2505,
+        2553
+      ],
+      "action": "ferant",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 60,
+      "span": [
+        2505,
+        2553
+      ],
+      "action": "rapidi",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 61,
+      "span": [
+        2553,
+        2598
+      ],
+      "action": "abdidit",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 61,
+      "span": [
+        2553,
+        2598
+      ],
+      "action": "atris",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 62,
+      "span": [
+        2598,
+        2643
+      ],
+      "action": "metuens",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 63,
+      "span": [
+        2643,
+        2686
+      ],
+      "action": "imposuit",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 63,
+      "span": [
+        2643,
+        2686
+      ],
+      "action": "dedit",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 63,
+      "span": [
+        2643,
+        2686
+      ],
+      "action": "foedere",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 64,
+      "span": [
+        2686,
+        2733
+      ],
+      "action": "premere",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 64,
+      "span": [
+        2686,
+        2733
+      ],
+      "action": "sciret",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 64,
+      "span": [
+        2686,
+        2733
+      ],
+      "action": "dare",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 65,
+      "span": [
+        2733,
+        2778
+      ],
+      "action": "est",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 67,
+      "span": [
+        2827,
+        2869
+      ],
+      "action": "mulcere",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 67,
+      "span": [
+        2827,
+        2869
+      ],
+      "action": "dedit",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 67,
+      "span": [
+        2827,
+        2869
+      ],
+      "action": "tollere",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 71,
+      "span": [
+        2999,
+        3041
+      ],
+      "action": "age",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 71,
+      "span": [
+        2999,
+        3041
+      ],
+      "action": "diversos",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 72,
+      "span": [
+        3041,
+        3089
+      ],
+      "action": "Sunt",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 78,
+      "span": [
+        3301,
+        3347
+      ],
+      "action": "iussa",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 78,
+      "span": [
+        3301,
+        3347
+      ],
+      "action": "capessere",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 78,
+      "span": [
+        3301,
+        3347
+      ],
+      "action": "est",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 80,
+      "span": [
+        3397,
+        3438
+      ],
+      "action": "das",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 80,
+      "span": [
+        3397,
+        3438
+      ],
+      "action": "accumbere",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 83,
+      "span": [
+        3525,
+        3573
+      ],
+      "action": "impulit",
+      "subject": null,
+      "object": null
+    },
+    {
+      "at": 83,
+      "span": [
+        3525,
+        3573
+      ],
+      "action": "facto",
+      "subject": null,
+      "object": null
+    }
+  ],
+  "sceneSignal": [
+    0.2786524795555184,
+    0.43284183126838877,
+    0.4872945570996416,
+    0.5151491475935163,
+    0.5320888292272978,
+    0.5434942982899875,
+    0.55170939805828,
+    0.5579184424845625,
+    0.5627842241898534,
+    0.5667065481256585,
+    0.5699408532859638,
+    0.4085981471693171,
+    0.35439663275705363,
+    0.5736644432866895,
+    0.5757764405049626,
+    0.5776230049286659,
+    0.5792533766837519,
+    0.5807052433280441,
+    0.4639109963869424,
+    0.5821533696809534,
+    0.5833048122214205,
+    0.5843536181269379,
+    0.5853137821490427,
+    0.5861968158073876,
+    0.5870122759635572,
+    0.5877681641038175,
+    0.5884712317379701,
+    0.5891272166618056,
+    0.5897410276501095,
+    0.5903168902282707,
+    0.5908584627485084,
+    0.5913689295819198,
+    0.5918510765110659,
+    0.5923073521582919,
+    0.5927399183703622,
+    0.593150691803563,
+    0.5935413784479643,
+    0.5939135024486798,
+    0.5942684302921682,
+    0.5946073912036389,
+    0.5949314944299824,
+    0.5952417439493141,
+    0.5955390510435783,
+    0.5958242450883411,
+    0.5960980828485202,
+    0.5963612565166713,
+    0.5966144006886716,
+    0.5968580984379253,
+    0.5970928866219306,
+    0.5973192605328125,
+    0.5975376779852917,
+    0.5977485629205881,
+    0.5979523085925466,
+    0.5981492803919962,
+    0.5983398183569941,
+    0.5870142661468136,
+    0.5985247349714565,
+    0.5987032715252224,
+    0.5988762717393208,
+    0.5990439932482172,
+    0.599206677558519,
+    0.5993645513274588,
+    0.5995178275184911,
+    0.5996667064478066,
+    0.42478818602057794,
+    0.5998115279054942,
+    0.5999521484662252,
+    0.600088908301472,
+    0.6002219655020661,
+    0.6003514695226961,
+    0.6004775617752409,
+    0.4506819267325545,
+    0.6006004376612557,
+    0.6007200935609597,
+    0.6008367198371245,
+    0.600950430625871
+  ]
+}

@@ -166,7 +166,15 @@ import { cellOf } from "./native/kernel/cube.js";
 // The durable theory of mind — type-level continuity about the person
 // across sessions. SPECIFICS stay in the per-session chat history; this
 // store holds only what the person has asserted and its standing.
-import { loadSpeakerModel, saveSpeakerModel, updateSpeakerModel, durableFacts } from "./native/the-fold/speaker-model.js";
+// The speaker model's input: the turn's INTENT read structurally from its
+// Universal-Dependencies parse (organs/intent-reader.js — phatic/question/
+// imperative/statement, omnilingually, NO WORD LISTS), and the proposition
+// bound as an EDGE from the parser's own deprels (the holograph's unit). The
+// speaker model parses nothing and lists no words.
+import { loadSpeakerModel, saveSpeakerModel, updateSpeakerModel, durableFacts, edgeFromRecords } from "./native/the-fold/speaker-model.js";
+import { readIntent } from "./native/organs/intent-reader.js";
+import { intentParser } from "./native/organs/reason-gate.js";
+import { detectLanguage, grammarFor } from "./native/the-fold/language-grammar.js";
 // The opencode lane (opencode-upstream.mjs): Claude/DeepSeek models a caller
 // names are generated through `opencode serve`, never Ollama — same
 // antistrauss gate, same draw contract, tools hard-disabled. Re-exported so
@@ -8889,11 +8897,43 @@ export async function runProxyTurn({ sessionId, userId = null, model, task, chat
     || (session.webSources?.size ?? 0) > 0
     || (session.corpus && [...session.corpus.documents.keys()].some((k) => !String(k).startsWith("chat:")));
   if (speakerModel && userId) {
+    // NL → THE LANGUAGE'S OWN GRAMMAR → EOT (2026-10-09): omnilingual by
+    // construction, never a borrowed grammar. The GRAMMAR hop is real for
+    // every language the reads themselves carry (language-grammar.js reads
+    // pos-*.json from disk: eng, ell, grc, san, deu, ... — the project is
+    // good with Greek and Sanskrit and increasingly German). The structural
+    // readers (readIntent, edgeFromRecords) consume CoNLL-U, whose labels are
+    // the SAME in every UD-annotated language. What is wired at turn level
+    // today is English's UD turn-parse; a language whose GRAMMAR exists but
+    // whose turn-level structured read is not yet wired declares NO claim (a
+    // named gap) — English grammar is never forced onto another NL, and a
+    // turn with no grammar at all is a typed gap, never a guess.
+    let turn = null;
+    try {
+      let lang = null, grammar = null;
+      try {
+        const d = detectLanguage(task);
+        if (d?.language) { lang = d.language; const g = grammarFor(lang); if (g?.language) grammar = g; }
+        else if (d?.gap) { /* unidentified — a typed gap */ }
+      } catch { lang = null; }
+      const turnParser = lang === "eng" && grammar ? await intentParser() : null;
+      const recs = turnParser ? turnParser.parse(task) : null;
+      const intent = recs?.length ? readIntent(recs) : null;
+      const edge = edgeFromRecords(recs);
+      turn = {
+        intent: intent?.intents?.[0] ?? null,
+        claim: task,
+        edge: edge.ok ? edge.edge : null,
+        witness: `turn:${session.turnCount ?? 0}`,
+        language: lang,
+      };
+    } catch { turn = null; }
     const updated = updateSpeakerModel(speakerModel, {
-      task,
-      classification: (() => { try { return classifySpeech(task); } catch { return "question"; } })(),
+      turn,
       surfVoid: surfVoid && hasNonConversationGround,
-      surfaced: surfacedSegments.length,
+      // No corroboration is declared here: this model re-derives none from
+      // surfaced material (lexical overlap cannot tell support from attack), so
+      // a claim stays "unexamined" until the corroboration instrument reports.
     });
     saveSpeakerModel(userId, updated);
   }

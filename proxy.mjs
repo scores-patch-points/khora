@@ -1221,6 +1221,83 @@ async function handleRequest(req, res) {
     return;
   }
 
+  // POST /v1/names — THE BOX ANSWERS ONE MORE SHAPE (2026-10-09): proper-name
+  // candidate admission, model-free, through the proven organ
+  // native/adapters/text/parse-gated-names.js (parse-any SVO PROPN AND a
+  // capitalised run). The mouth is never consulted — a mechanical extraction,
+  // same standing as the read door. Returns the capitalised runs (multi-word
+  // surfaces like "Aaron Brockett") plus the admitted words behind them.
+  if (req.method === "POST" && req.url === "/v1/names") {
+    let body = "";
+    req.on("data", (c) => (body += c));
+    req.on("end", async () => {
+      let parsed;
+      try { parsed = JSON.parse(body); } catch { res.writeHead(400, { "content-type": "application/json" }); res.end(JSON.stringify({ error: "bad json" })); return; }
+      const text = String(parsed?.text ?? "");
+      if (!text.trim()) { res.writeHead(400, { "content-type": "application/json" }); res.end(JSON.stringify({ error: "text is required — the material to mine names from" })); return; }
+      const t0 = Date.now();
+      try {
+        const { loadModel } = await import("./native/adapters/text/english-parser.js");
+        const { parseGatedNames } = await import("./native/adapters/text/parse-gated-names.js");
+        if (!globalThis.__ER7_NAMES_MODEL) {
+          const prior = new URL("./native/priors/parser-eng-ewt.json", import.meta.url);
+          globalThis.__ER7_NAMES_MODEL = loadModel(JSON.parse(fs.readFileSync(prior, "utf8")));
+        }
+        const out = parseGatedNames(text.slice(0, 200000), { model: globalThis.__ER7_NAMES_MODEL });
+        const adm = out.admitted instanceof Set ? out.admitted : new Set(out.admitted || []);
+        let runs = (out.runs || []).map((r) => r.surface);
+        let people = null;
+        if (parsed.people) {
+          // THE LEARNED RULE (2026-10-09, content-rules ledger): an official is
+          // a name ADJACENT TO AN OFFICE TOKEN, in either direction — no model,
+          // no mouth. Normalise (strip office words), reject nav/heading tokens,
+          // dedup by token-set, corroborate a word with the box PROPN parse.
+          const OFFICE = /(Mayor Pro Tem|Vice[ -]?Mayor|Deputy Mayor|Mayor|City Council Member|Council Member|Councilmember|Councilor|Councillor|Council President|Alderman|Alderwoman|Alderperson|Supervisor|Commissioner|Trustee|District\s+\d+|Ward\s+\d+|Place\s+\d+|Position\s+\d+|Seat\s+\d+|At[ -]?Large)/gi;
+          const OFFW = new Set("mayor pro tem vice deputy councilor councilmember council councillor member councilman councilwoman president alderman alderwoman alderperson commissioner supervisor trustee".split(" "));
+          const NAV = new Set(("city council members member term years district ward place position seat at large county of the and for board commission committee office contact about home news events services view all get skip main content feedback search translate departments government toggle menu open data maps public comment calendar information sessions session jump crime fairs newsletters executive orders regarding covid food fair list more meeting agenda press release").split(" "));
+          const NW = "[A-Z][A-Za-z\\u00C0-\\u024F'’.\\-]+";
+          const norm = (s) => {
+            let w = String(s).trim().split(/\s+/).filter(Boolean);
+            while (w.length && OFFW.has(w[0].toLowerCase().replace(/\.$/, ""))) w.shift();
+            while (w.length && OFFW.has(w[w.length - 1].toLowerCase().replace(/\.$/, ""))) w.pop();
+            if (w.length < 2 || w.length > 3) return null;
+            if (w.some((x) => /\d/.test(x))) return null;
+            if (w.some((x) => NAV.has(x.toLowerCase().replace(/\.$/, "")))) return null;
+            if (!w.every((x) => /^[A-Z][A-Za-z\u00C0-\u024F'’.\-]+$/.test(x))) return null;
+            if (!w.some((x) => adm.has(x.toLowerCase()))) return null; // box corroboration
+            return w.join(" ");
+          };
+          const found = new Map();
+          const T = text.slice(0, 200000);
+          for (const m of T.matchAll(OFFICE)) {
+            const i = m.index, j = i + m[0].length;
+            for (const pre of [true, false]) {
+              const seg = pre ? T.slice(Math.max(0, i - 55), i) : T.slice(j, j + 55);
+              const mm = pre
+                ? new RegExp(`(${NW}(?:\\s+${NW}){1,3})\\s*$`).exec(seg.trim())
+                : new RegExp(`^(${NW}(?:\\s+${NW}){1,3})`).exec(seg.trim());
+              if (!mm) continue;
+              const name = norm(mm[1]);
+              if (!name) continue;
+              const key = name.toLowerCase().split(/\s+/).sort().join(" ");
+              if (!found.has(key)) found.set(key, { name, role: m[0].replace(/\b\w/g, (c) => c.toUpperCase()) });
+            }
+          }
+          people = [...found.values()];
+          runs = people.map((p) => p.name);
+        }
+        log(`names → ${runs.length}${parsed.people ? ` people (box-corroborated, office-gated)` : " runs"} (${Date.now() - t0}ms)`);
+        res.writeHead(200, { "content-type": "application/json" });
+        res.end(JSON.stringify({ runs, admitted: [...adm], people }));
+      } catch (e) {
+        log(`names error: ${String(e.message ?? e).slice(0, 140)}`);
+        if (!res.headersSent) res.writeHead(500, { "content-type": "application/json" });
+        res.end(JSON.stringify({ error: e.message }));
+      }
+    });
+    return;
+  }
+
   if (req.method === "POST" && req.url === "/v1/ask") {
     let body = "";
     req.on("data", (c) => (body += c));

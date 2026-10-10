@@ -1,0 +1,29 @@
+// attack-F.mjs: ATTACK F (the "raw reader" version of the headline): re-state the rule's headline on the streams a zero-model reader would actually get. Reads results of attack A (V0b, word streams) and attack A2 (surface-token streams for languages with MWT).
+//   NAME_COMPANY_PAIRBLOCK=1 node attack-F.mjs OUT.json
+//
+// ═══ PRE-REGISTRATION (FOLD-CONSTITUTION II.5; written 2026-10-07 BEFORE the first run of this file; sha256 of this header is recorded in the output JSON) ═══
+// DISCLOSURE. Seen: attack A2 MWT rows (heb word FWC32 0.398 / AUC 0.705 and 0.609 -> surface 0.145 / 0.528 and 0.492; arb word 0.32-0.33 -> surface 0.18-0.19 (no AUC, < 60 pairs); glg, por, kat, tam modest changes; "ruleHits byWord 9/10, bySurface 9/10";
+//   among the 31 stems with MWT lines the surface-stream rho 0.839 vs word-stream 0.669). All other results of A, B, C, D and part of E (progress lines only). NOT seen: the pooled headline on the raw-reader streams.
+// UNITS. language-windows (w1, w2) of attack A V0b: eligible iff >= 60 pairs and POSITION in [0.45, 0.55] (draw means), cmn-hans excluded. RAW-READER stream = for every language-window with a computed MWT surface row (MWT share >= 1%), the surface-token stream (FWC32 and probe AUC from attack A2 `surf`);
+//   for every other language-window the word stream (no MWT or MWT share < 1%: identical or nearly). RAW-READER-STRICT additionally drops cmn, jpn, lzh (no whitespace word boundaries: a zero-model reader has no word stream without a segmenter).
+// STATISTICS. For WORD (attack-A V0b as is), RAW and RAW-STRICT: n; Spearman(FWC32, AUC) with one-sided permutation p (B = 5000); clean zone (FWC32 >= 0.28) mean AUC and audible share; deaf zone (< 0.24) mean; contrast; IE vs non-IE rho (non-IE = arb heb mlt cmn lzh jpn kor vie ind tur uig fin est hun eus kat tam tel wol mar? no: mar is IE) with n and p; audible non-IE languages in the clean zone.
+// DECISIONS (fixed now). The headline "survives on the raw reader" iff RAW-STRICT rho >= 0.40 with p <= 0.05, clean-zone audible share >= 0.60, clean-minus-deaf >= 0.04. The non-IE gradient "survives" iff non-IE rho > 0 with p <= 0.10 at n >= 12 on RAW-STRICT; otherwise the rule's claim that the gradient also exists outside Indo-European is not supported on raw-reader streams.
+// BLIND PREDICTIONS. headline survives: 0.85. Non-IE gradient survives: 0.45 (heb leaves the clean zone; jpn/lzh/cmn removed; left: kor vie ind tur fin est hun eus kat tam wol mlt arb mostly deaf: expected rho about 0.3, p about 0.15). Clean-zone audible share falls by >= 0.05: 0.5.
+// ═══ END OF PRE-REGISTRATION ═══
+import fs from "node:fs";
+import path from "node:path";
+import { rdj, round, mean, share, spearman, permRho, headerSha, inBand, AHERE } from "./lib-attack.mjs";
+const R = path.join(AHERE, "results"), out = { headerSha256: headerSha(import.meta.url) };
+const A1 = rdj(path.join(R, "A.w1.json")).rows, A2 = rdj(path.join(R, "A.w2.json")).rows, M1 = rdj(path.join(R, "A2.mwt.w1.json")).rows, M2 = rdj(path.join(R, "A2.mwt.w2.json")).rows;
+const NONIE = new Set("arb heb mlt cmn lzh jpn kor vie ind tur uig fin est hun eus kat tam tel wol".split(" ")), UNSEG = new Set(["cmn", "jpn", "lzh"]);
+const units = []; for (const [wk, AR, MR] of [["w1", A1, M1], ["w2", A2, M2]]) for (const r of AR) { if (r.name === "cmn-hans") continue; const v = r.V.V0b, m = MR.find((x) => x.name === r.name); if (!v || v.thin || v.error) continue;
+  const word = { fwc: r.fwc32, auc: v.auc, pos: v.pos, pairs: v.pairs }; let raw = word, usedSurface = false; if (m && m.surf && m.mwtShare >= 0.01) { raw = m.surf.thin ? null : { fwc: m.fwcSurf, auc: m.surf.auc, pos: m.surf.pos, pairs: m.surf.pairs }; usedSurface = true; }
+  units.push({ name: r.name, wk, word, raw, usedSurface, mwtShare: m?.mwtShare ?? 0 }); }
+const stat = (us, key) => { const e = us.filter((u) => u[key] && !u[key].thin && u[key].pairs >= 60 && inBand(u[key].pos)), f = e.map((u) => u[key].fwc), a = e.map((u) => u[key].auc); if (e.length < 8) return { n: e.length };
+  const pm = permRho(f, a, 5000), cl = e.filter((u) => u[key].fwc >= 0.28), dl = e.filter((u) => u[key].fwc < 0.24), ni = e.filter((u) => NONIE.has(u.name)), ie = e.filter((u) => !NONIE.has(u.name)); const rhoOf = (xs) => (xs.length >= 6 ? permRho(xs.map((u) => u[key].fwc), xs.map((u) => u[key].auc), 3000) : { rho: null, p: null });
+  const pn = rhoOf(ni), pi = rhoOf(ie);
+  return { n: e.length, rho: round(pm.rho, 3), p: round(pm.p, 4), nClean: cl.length, cleanMean: round(mean(cl.map((u) => u[key].auc))), cleanAudible: round(share(cl, (u) => u[key].auc >= 0.6)), nDeaf: dl.length, deafMean: round(mean(dl.map((u) => u[key].auc))), deafAudible: round(share(dl, (u) => u[key].auc >= 0.6)), contrast: round(mean(cl.map((u) => u[key].auc)) - mean(dl.map((u) => u[key].auc))),
+    nonIE: { n: ni.length, rho: round(pn.rho, 3), p: round(pn.p, 4), meanAuc: round(mean(ni.map((u) => u[key].auc))), cleanAudibleLangs: [...new Set(ni.filter((u) => u[key].fwc >= 0.28 && u[key].auc >= 0.6).map((u) => u.name))].join(","), cleanLangs: [...new Set(ni.filter((u) => u[key].fwc >= 0.28).map((u) => u.name))].join(",") }, IE: { n: ie.length, rho: round(pi.rho, 3), p: round(pi.p, 4) } }; };
+out.nUnits = units.length; out.nSurfaceUnits = units.filter((u) => u.usedSurface).length; out.WORD = stat(units, "word"); out.RAW = stat(units, "raw"); out.RAWSTRICT = stat(units.filter((u) => !UNSEG.has(u.name)), "raw"); out.WORDSTRICT = stat(units.filter((u) => !UNSEG.has(u.name)), "word");
+const s = out.RAWSTRICT; out.decision = { headline: s.rho >= 0.4 && s.p <= 0.05 && s.cleanAudible >= 0.6 && s.contrast >= 0.04, nonIEgradient: s.nonIE.n >= 12 && s.nonIE.rho > 0 && s.nonIE.p <= 0.1 };
+fs.writeFileSync(process.argv[2], JSON.stringify(out, null, 1)); console.log(JSON.stringify(out, null, 1));

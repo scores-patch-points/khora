@@ -1,0 +1,22 @@
+// attackA3.mjs — ATTACK A3: STREAM-POSITION matching (the one control that was out of band in the registered design) on R2_first_mention_lookahead (lens chat-scope). Run: node attackA3.mjs (never "run") -> results/attackA3.json
+// ═══ PRE-REGISTRATION (FOLD-CONSTITUTION II.5; written before the first run of this file; sha256 of this block is recorded in the output JSON) ═══
+// WHY. In K0 pairs the stream-position control rel = m / N (where in the day the first mention falls) has paired AUC 0.592 (CF) / 0.594 (ALL_EN) in attackC (the confirmer found 0.604): nicks are first mentioned later than matched ordinary forms, outside the [0.45, 0.55] band the project demands of a
+//   position control. The confirmer addressed it post hoc (equal-remaining bins 0.723, |d rel| <= 0.05 gives n = 62). attackA K6 (decile of rel + floor(log2(1+N-m))) kept n = 81 / 266 (AUC 0.679 / 0.691) but its rel control was never checked. This script matches on rel directly with more pairs and checks the control.
+// DISCLOSURE (seen): attackA, A2, B, B2, B3, C, C2 results. NOT seen: any rel-matched pair set with its rel control.
+// METHOD. K0 plus (R5) floor(5 rel); (R10) floor(10 rel); (R20) floor(20 rel); (R10x) floor(10 rel) + floor(log2(1+N-m)); seeds 1..5. Populations CF (26 EN days) and ALL_EN (80). Controls: i, L, cl, lc AND rel must be in [0.45, 0.55]; n >= 60 (CF) / 100 (ALL_EN).
+//   DECISIONS: SURVIVES iff mean AUC >= 0.62, day-CI lower >= 0.55, all five controls in band. FALLS iff mean AUC < 0.55. Otherwise ERODES. Reported also: INIT / NONINIT facets, thr2 TPR / FPR.
+// BLIND PREDICTIONS: R5: AUC in [0.66, 0.72], rel control in band; R10 in [0.66, 0.73]; R20 in [0.64, 0.74] (n shrinks); R10x in [0.64, 0.74]; every variant SURVIVES where n permits.
+// NOT TESTED: anything else. If a code bug is found after the first run it is fixed, the whole run repeated, and an AMENDMENT appended below the block (thresholds may only tighten).
+// ═══ END OF PRE-REGISTRATION ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+import fs from "node:fs";
+import { loadDay, candidates, matchPairs, GOLD0, ibk, clb, mlb, rnd4 } from "./common.mjs";
+import { auc, summ, thr, mean, sd, BAND } from "./stats.mjs";
+import { headerSha, CODE, enDays } from "./hdr.mjs";
+const D = enDays(), CF = D.CF, ALL = [...new Set([...D.CF, ...D.SD, ...D.SC])], SEEDS = [1, 2, 3, 4, 5], SHA = headerSha(import.meta.url);
+const K0 = (x) => [ibk(x.i), Math.floor(4 * x.lc), clb(x.w), mlb(x.L)].join("|"), KEYS = { K0, R5: (x) => K0(x) + "|" + Math.floor(5 * x.rel), R10: (x) => K0(x) + "|" + Math.floor(10 * x.rel), R20: (x) => K0(x) + "|" + Math.floor(20 * x.rel), R10x: (x) => K0(x) + "|" + Math.floor(10 * x.rel) + "|" + Math.floor(x.rem) };
+const cands = new Map(); for (const k of ALL) cands.set(k, candidates(loadDay(k), 3)); const OUT = { headerSha256: SHA, code: CODE(), variants: {} }, ctl5 = (ps) => Object.fromEntries(["i", "L", "cl", "lc", "rel"].map((c) => [c, rnd4(auc(ps, c))]));
+for (const [pop, days] of [["CF", CF], ["ALL_EN", ALL]]) { OUT.variants[pop] = {}; const minN = pop === "CF" ? 60 : 100;
+  for (const [kn, kf] of Object.entries(KEYS)) { const per = SEEDS.map((s) => days.flatMap((k) => matchPairs(cands.get(k), GOLD0, kf, s, kn).pairs)), p1 = per[0], a = per.map((p) => auc(p, "INIT_Tinf")), o = { n: Math.round(mean(per.map((p) => p.length))), n1: p1.length, aucMean: rnd4(mean(a)), aucSd: rnd4(sd(a)) };
+    if (p1.length >= minN) { const s = summ(p1, "INIT_Tinf", 600, "A3" + kn + pop); o.ci = s.ci; o.ctl = ctl5(p1); o.ctlOk = Object.values(o.ctl).every((v) => v >= BAND[0] && v <= BAND[1]); o.thr2 = thr(p1, "INIT_Tinf", 2); o.initAuc = rnd4(auc(p1.filter((p) => p.pos.i === 0), "INIT_Tinf")); o.noninitAuc = rnd4(auc(p1.filter((p) => p.pos.i > 0), "INIT_Tinf")); o.relCtlMeanSeeds = rnd4(mean(per.map((p) => auc(p, "rel")))); o.verdict = !o.ctlOk ? "VOID(controls)" : o.aucMean >= 0.62 && s.ci.day[0] >= 0.55 ? "SURVIVES" : o.aucMean < 0.55 ? "FALLS" : "ERODES"; } else o.verdict = "VOID(n)"; OUT.variants[pop][kn] = o; } }
+OUT.seconds = 0; fs.writeFileSync(new URL("./results/attackA3.json", import.meta.url), JSON.stringify(OUT, null, 1));
+for (const p of Object.keys(OUT.variants)) for (const [k, o] of Object.entries(OUT.variants[p])) console.log(p, k, JSON.stringify({ n: o.n1, auc: o.aucMean, sd: o.aucSd, ciDay: o.ci?.day, ciPos: o.ci?.posForm, ctl: o.ctl, ok: o.ctlOk, thr2: o.thr2, init: o.initAuc, non: o.noninitAuc, v: o.verdict }));

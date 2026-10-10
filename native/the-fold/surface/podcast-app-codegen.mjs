@@ -256,7 +256,7 @@ async function main() {
 
   // APPEND-ONLY, EVERY ROUND (2026-09-30): a mechanical-repair round that
   // is STILL broken is real, valuable fiber — "everything the collapse
-  // could have been but wasn't" (THE-ENZYME-PIPELINE.md §6) — not
+  // could have been but wasn't" (THE-ENZYME-SUBSTRATE.md §6) — not
   // something to discard the moment a later round supersedes it. Every
   // internal round of THIS invocation's own DMD loop lands as its own
   // entry on the ledger, not only the one the loop finally settles on;

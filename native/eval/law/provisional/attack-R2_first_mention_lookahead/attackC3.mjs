@@ -1,0 +1,33 @@
+// attackC3.mjs — ATTACK C3: rivals and shuffled-company controls SPLIT BY COUNT REGIME (LOW c <= 2, HIGH c >= 3) on the same K0 rows (rule R2_first_mention_lookahead, lens chat-scope). Run: node attackC3.mjs (never "run") -> results/attackC3.json
+// ═══ PRE-REGISTRATION (FOLD-CONSTITUTION II.5; written before the first run of this file; sha256 of this block is recorded in the output JSON) ═══
+// WHY. attackA4/A5: the pooled matched AUC (0.685) is a mixture of LOW pairs (65%: AUC 0.585, theta 2 silent) and HIGH pairs (35%: AUC 0.873 [0.858, 0.893], n = 514 in ALL_EN; survives exact local keys at 0.74-0.85). attackC pooled the regimes: pure counts 0.52-0.62, INIT_T128 0.655-0.660, ngap 0.60,
+//   nbg 0.72-0.73, msgshuf 0.656-0.665, firstswap 0.682, wordshuf 0.545. The mixture can hide a count rival that reproduces the rule in the regime where the rule can fire. Redo the comparison per regime.
+// DISCLOSURE (seen): everything through attackA5 and attackC / C2. NOT seen: any per-regime rival AUC, per-regime shuffle AUC.
+// METHOD. ALL_EN (80 EN days) and CF (26). K0 pairs with the rule's gold; seeds 1..5 (rivals) and 1..3 (shuffles: msgshuf, blockshuf, wordshuf, firstswap, restshuf). Regimes by the positive's day count c: LOW (c <= 2), HIGH (c >= 3). SCORES as attackC (name-like = higher): INIT_Tinf (rule), rate, CNT_Tinf, CNT_T8/T32/T128/T512, ngap, rel, INIT_T8/T32/T128/T512,
+//   nbg (cross-day lexicon rival), SEC_Tinf, LAST_Tinf. BEYOND (HIGH only, ALL_EN): INIT_Tinf AUC within equal bins of CNT_T128 (log2(1+x)), CNT_T32, gap (floor), nbg (floor), rel decile; kept >= 40.
+// DECISIONS (per regime; a rival REPRODUCES the rule iff mean AUC within 0.03 of INIT_Tinf in BOTH populations): (i) HIGH: if a no-slot rival (CNT_*, ngap, rel, nbg) reproduces the rule, the rule's value in the regime where it fires is not specific to the first slot; otherwise the first slot adds value there.
+//   (ii) a shuffle mode that keeps the first-word multiset (msgshuf, blockshuf, firstswap) leaves the HIGH AUC within 0.03 => bag-of-first-words statistic, not company; wordshuf lowers HIGH by >= 0.10 => first-slot specific. Controls i, L, cl, lc must be in [0.45, 0.55] per regime or the cell is VOID.
+// BLIND PREDICTIONS: HIGH rule AUC in [0.82, 0.92] (both pops); HIGH CNT_T128 in [0.72, 0.84]; HIGH ngap in [0.70, 0.84]; HIGH CNT_Tinf in [0.55, 0.72]; HIGH INIT_T128 within 0.03 of the rule; HIGH nbg >= 0.75; at least one no-slot rival within 0.03 of the rule in HIGH is NOT expected (<= 25% chance);
+//   LOW: rule in [0.55, 0.62]; no-slot rivals in [0.50, 0.62]; HIGH shuffles: msgshuf/blockshuf/firstswap within 0.03 of real, wordshuf drop >= 0.10; beyond (HIGH): CNT_T128 bins >= 0.70, CNT_T32 >= 0.70, gap >= 0.65, nbg >= 0.70.
+// NOT TESTED: fitted combinations; non-English. If a code bug is found after the first run it is fixed, the whole run repeated, and an AMENDMENT appended below the block (thresholds may only tighten).
+// ═══ END OF PRE-REGISTRATION ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+import fs from "node:fs";
+import { loadDay, candidates, matchPairs, GOLD0, K0, rnd4 } from "./common.mjs";
+import { auc, boot, CL, ctl, ctlOk, beyond, log2b, mean, sd } from "./stats.mjs";
+import { headerSha, CODE, enDays } from "./hdr.mjs";
+const D = enDays(), CF = D.CF, ALL = [...new Set([...D.CF, ...D.SD, ...D.SC])], S5 = [1, 2, 3, 4, 5], S3 = [1, 2, 3], SHA = headerSha(import.meta.url), f3 = (x) => Math.abs(x) <= 0.03;
+const COLS = ["INIT_Tinf", "rate", "CNT_Tinf", "CNT_T8", "CNT_T32", "CNT_T128", "CNT_T512", "ngap", "rel", "INIT_T8", "INIT_T32", "INIT_T128", "INIT_T512", "nbg", "SEC_Tinf", "LAST_Tinf"], REG = { LOW: (p) => p.pos.c <= 2, HIGH: (p) => p.pos.c >= 3 };
+function prep(mode) { const docs = ALL.map((k) => loadDay(k, mode)), G = new Map(); let Gt = 0; for (const d of docs) { for (const [w, c] of d.tot) G.set(w, (G.get(w) ?? 0) + c); Gt += d.nTok; }
+  return new Map(docs.map((d) => { const cs = candidates(d, 3); for (const x of cs) { x.ngap = -x.gap; x.rate = x.INIT_Tinf / (x.CNT_Tinf + 1); x.nbg = -Math.log10(((G.get(x.w) ?? 0) - x.c + 0.5) / (Gt - d.nTok)); } return [d.key, cs]; })); }
+const pairsOf = (cs, days, seeds, tag) => seeds.map((s) => days.flatMap((k) => matchPairs(cs.get(k), GOLD0, K0(4), s, tag).pairs)), OUT = { headerSha256: SHA, code: CODE(), rivals: {}, beyondHigh: {}, shuffles: {} }, real = prep("real");
+for (const [pop, days] of [["CF", CF], ["ALL_EN", ALL]]) { const per = pairsOf(real, days, S5, "C3"); OUT.rivals[pop] = {};
+  for (const [rn, rf] of Object.entries(REG)) { const a = per.map((ps) => ps.filter(rf)), base = mean(a.map((x) => auc(x, "INIT_Tinf"))), c1 = ctl(a[0]); OUT.rivals[pop][rn] = { n: a[0].length, ruleAuc: rnd4(base), ctl: c1, ctlOk: ctlOk(c1), cols: {} };
+    for (const c of COLS) { const v = a.map((x) => auc(x, c)), m = mean(v); OUT.rivals[pop][rn].cols[c] = { auc: rnd4(m), diff: rnd4(m - base), within003: f3(m - base) }; } }
+  if (pop === "ALL_EN") { const hi = per[0].filter(REG.HIGH); OUT.beyondHigh[pop] = {}; for (const [r, f] of Object.entries({ CNT_T128: log2b, CNT_T32: log2b, gap: Math.floor, nbg: Math.floor, rel: (x) => Math.floor(10 * x) })) OUT.beyondHigh[pop][r] = beyond(hi, "INIT_Tinf", r, f, 500, "C3b" + r); }
+  console.error(pop, "rivals done"); }
+for (const mode of ["msgshuf", "blockshuf", "wordshuf", "firstswap", "restshuf"]) { const cs = prep(mode); OUT.shuffles[mode] = {};
+  for (const [pop, days] of [["CF", CF], ["ALL_EN", ALL]]) { const per = pairsOf(cs, days, S3, "C3" + mode); OUT.shuffles[mode][pop] = {}; for (const [rn, rf] of Object.entries(REG)) { const a = per.map((ps) => ps.filter(rf)), c1 = ctl(a[0]), m = mean(a.map((x) => auc(x, "INIT_Tinf"))); OUT.shuffles[mode][pop][rn] = { n: a[0].length, auc: rnd4(m), drop: rnd4(OUT.rivals[pop][rn].ruleAuc - m), ctlOk: ctlOk(c1) }; } }
+  console.error(mode, JSON.stringify(OUT.shuffles[mode].ALL_EN)); }
+OUT.seconds = 0; fs.writeFileSync(new URL("./results/attackC3.json", import.meta.url), JSON.stringify(OUT, null, 1));
+for (const p of Object.keys(OUT.rivals)) for (const [r, v] of Object.entries(OUT.rivals[p])) console.log(p, r, "n", v.n, "rule", v.ruleAuc, "ctlOk", v.ctlOk, "\n  " + Object.entries(v.cols).map(([c, x]) => `${c} ${x.auc}${x.within003 ? "*" : ""}`).join(" | "));
+console.log("beyondHigh", JSON.stringify(OUT.beyondHigh)); console.log("shuffles", JSON.stringify(Object.fromEntries(Object.entries(OUT.shuffles).map(([m, v]) => [m, Object.fromEntries(Object.entries(v).map(([p, w]) => [p, Object.fromEntries(Object.entries(w).map(([r, x]) => [r, [x.n, x.auc, x.drop, x.ctlOk]]))]))]))));

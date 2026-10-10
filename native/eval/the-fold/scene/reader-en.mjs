@@ -5,13 +5,16 @@
 // the verb, its object the first after — S-V-O, the received word-order sense.
 // One doctrine: byte → clauses → beings → bound edges → scene signal → EOT.
 import fs from "node:fs";
-const KHOR = "/Users/mlacy/Documents/3.0/khora";
-const JANUS = "/Users/mlacy/Documents/3.0/janus";
-const { createActivation } = await import(`${KHOR}/native/kernel/activation.js`);
-const { createHolograph, admit } = await import(`${KHOR}/native/kernel/bayes-surprise.js`);
-const { resolvePronounsByActivation } = await import(`${KHOR}/native/adapters/text/pronouns.js`);
-const posPrior = JSON.parse(fs.readFileSync(`${JANUS}/priors/pos-eng.json`, "utf8"));
-const TEXT_DIR = "/Users/mlacy/Documents/3.0/Zenodotus";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { createActivation } from "../../../kernel/activation.js";
+import { createHolograph, admit } from "../../../kernel/bayes-surprise.js";
+import { resolvePronounsByActivation } from "../../../adapters/text/pronouns.js";
+const HERE = path.dirname(fileURLToPath(import.meta.url));
+// Khora carries this measured UD prior itself; the reader no longer depends
+// on a private home path or a Janus sibling checkout merely to import.
+const posPrior = JSON.parse(fs.readFileSync(path.resolve(HERE, "../../../../cli/priors/pos-prior-en.json"), "utf8"));
+const TEXT_DIR = process.env.FOLD_CORPUS_ROOT ? path.resolve(process.env.FOLD_CORPUS_ROOT) : process.cwd();
 const face = (x) => { if (!x) return ""; if (typeof x === "string") return x; return String(x.head ?? x.surface ?? x.text ?? ""); };
 const stF = (s) => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 const WIN = 160, MIN_A = 0.05, MIN_M = 0.3;
@@ -34,8 +37,8 @@ const CASE_FREE_FLOOR = 3, CASE_FREE_VETO = new Set(["i", "me", "my", "mine", "y
 
 export async function readEnglish({ text = null, file = null, chars = null, out = null } = {}) {
   let raw;
-  if (text) raw = text;
-  else if (file) raw = fs.readFileSync(file.startsWith("/") ? file : `${TEXT_DIR}/${file}`, "utf8");
+  if (typeof text === "string") raw = text;
+  else if (file) raw = fs.readFileSync(path.isAbsolute(file) ? file : path.resolve(TEXT_DIR, file), "utf8");
   else throw new TypeError("readEnglish: text or a source file path");
   if (chars) raw = raw.slice(0, chars);
   // THE CASE-FREE FREQUENCY FLOOR (per book): recurring tokens the POS prior
@@ -46,8 +49,13 @@ export async function readEnglish({ text = null, file = null, chars = null, out 
   const isCaseFreeBeing = (w) => { if (!w) return false; const f = stF(w); if (CASE_FREE_VETO.has(f)) return false; if (classOf(w) !== null) return false; return (seenFreq.get(f) ?? 0) >= CASE_FREE_FLOOR; };
   const isSeat = (w) => isNominal(w) || isCaseFreeBeing(w);
   const parts = raw.split(/(?<=[.!?]\s+)/g).map((p) => p.trim()).filter((p) => p.split(" ").length >= 3);
-  let acc = 0; const sents = [];
-  for (const part of parts) { sents.push({ text: part, order: sents.length, offset: acc }); acc += part.length; }
+  let cursor = 0; const sents = [];
+  for (const part of parts) {
+    const at = raw.indexOf(part, cursor);
+    if (at < 0) throw new Error("readEnglish: sentence lost its source position");
+    sents.push({ text: part, order: sents.length, offset: at });
+    cursor = at + part.length;
+  }
 
   // WORD-ORDER CLAUSE — ENGLISH HAS NO CASE-ENDING, BUT POSITION IS ITS CASE
   // (2026-10-09, the user: "from SVO to EO so it can fit in the cube and we can
@@ -173,7 +181,7 @@ export async function readEnglish({ text = null, file = null, chars = null, out 
   const isSpeechClause = (c) => sentenceQuoted.has(c.order) && !!subjectCandidateRef(c);
   const addresseeOf = (exclude) => { const top = [...zaSeen].filter((r) => r !== exclude).map((r) => [r, zaAct.activationOf(r)]).sort((a, b) => b[1] - a[1]); return top[0]?.[0] ?? null; };
   const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const sMatcher2 = (() => { const u = [...new Set([...refMap.keys()].filter(Boolean))].sort((a, b) => b.length - a.length); return new RegExp(`(?<![\\p{L}\\p{N}])(?:${u.map(escapeRe).join("|")})(?![\\p{L}\\p{N}])`, "giu"); })();
+  const sMatcher2 = (() => { const u = [...new Set([...refMap.keys()].filter(Boolean))].sort((a, b) => b.length - a.length); return u.length ? new RegExp(`(?<![\\p{L}\\p{N}])(?:${u.map(escapeRe).join("|")})(?![\\p{L}\\p{N}])`, "giu") : null; })();
   // A pronoun/ADJ-headed seat is a seat WITHOUT A BEING at it — the same gap the
   // reference-binding tier was built to close, now ALSO for seats the S-V-O seam
   // filled with a pronoun instead of leaving empty (2026-10-09, whole-book and
@@ -192,7 +200,7 @@ export async function readEnglish({ text = null, file = null, chars = null, out 
   };
   const topActive = (exclude) => { const top = [...zaSeen].filter((r) => r !== exclude).map((r) => [r, zaAct.activationOf(r)]).sort((a, b) => b[1] - a[1]); const [ref, score] = top[0] ?? []; if (ref && score >= MIN_A) { const sc = top[1]?.[1] ?? 0; if (score > 0 && (score - sc) / score >= MIN_M) return ref; } return null; };
   for (const s of sents) {
-    const named = new Set(); sMatcher2.lastIndex = 0; let m; while (m = sMatcher2.exec(s.text), m) { const r = refMap.get(m[0]) ?? refMap.get(m[0].toLowerCase()); if (r) named.add(r); }
+    const named = new Set(); if (sMatcher2) { sMatcher2.lastIndex = 0; let m; while ((m = sMatcher2.exec(s.text))) { const r = refMap.get(m[0]) ?? refMap.get(m[0].toLowerCase()); if (r) named.add(r); } }
     for (const c of clauses.filter((c) => c.order === s.order && unboundSeated(c) && !bySentence.has(c.order))) {
       const ref = topActive(null);
       if (ref) refBind.set(c.order, ref);
@@ -247,7 +255,7 @@ export async function readEnglish({ text = null, file = null, chars = null, out 
     const rr = admit(holo, p); c.perSlot = rr.perSlot;
     c.learning = rr.bayes; B.push(rr.bayes);
   }
-  const THR = B.sort((a, b) => a - b)[Math.floor(B.length * 0.9)] ?? 0;
+  const THR = [...B].sort((a, b) => a - b)[Math.floor(B.length * 0.9)] ?? 0;
 
   const hashOf = (id) => { let h = 0x811c9dc5; for (let i = 0; i < id.length; i++) { h ^= id.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; } return "r_" + h.toString(16).padStart(8, "0"); };
   const hashById = new Map(), idByHash = new Map();
@@ -264,7 +272,7 @@ export async function readEnglish({ text = null, file = null, chars = null, out 
     referents: [...visiting].map((id) => ({ hash: hashById.get(id), name: id })),
     edges: clauses.map((c) => ({ at: c.order, span: c.span, action: c.verb, subject: yes(subjectRefOf(c)), object: yes(objectRefOf(c)) })),
     sceneSignal: B,
-    language: "declared, not baked — English reads by word order, the prior carries the classes",
+    languageNote: "declared, not baked — English reads by word order, the prior carries the classes",
   };
   if (out) fs.writeFileSync(out, JSON.stringify(eot, null, 2));
   return { raw, sents, clauses, refMap, idOf, subjectRefOf, objectRefOf, objBind, bindings, gaps, B, THR, bySentence, eot, hashOf, hashById, idByHash, yes };

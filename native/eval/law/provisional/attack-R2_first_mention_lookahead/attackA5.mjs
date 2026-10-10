@@ -1,0 +1,23 @@
+// attackA5.mjs — ATTACK A5: do the local-recurrence keys erode the rule only through count <= 2 forms? (rule R2_first_mention_lookahead, lens chat-scope). Run: node attackA5.mjs (never "run") -> results/attackA5.json
+// ═══ PRE-REGISTRATION (FOLD-CONSTITUTION II.5; written before the first run of this file; sha256 of this block is recorded in the output JSON) ═══
+// WHY. attackA4: 65-68% of K0 pairs are forms with whole-day count 1-2 (theta = 2 cannot fire: TPR = FPR = 0; graded AUC 0.585-0.595), while pairs with count >= 3 have AUC 0.80-0.97 (n = 514 in ALL_EN) and theta-2 TPR 0.82-0.99 / FPR 0.29-0.35. attackA2 showed that local keys keep the "weak" positives and drop the easy ones.
+//   Hypothesis: the local-recurrence erosion (K4 0.588, K5 0.604, K7 0.547, K8 0.579) is carried by the count <= 2 pairs; in the count >= 3 regime the rule may survive local controls (or may not have enough pairs to say).
+// DISCLOSURE (seen): everything in attackA..C2, including attackA4's count-binned numbers (K0 only). NOT seen: count-split numbers under K3/K4/K5/K7/K8/K9.
+// METHOD. ALL_EN (80 days) and CF (26 days); keys K0, K3 (CNT_Tinf exact cap 12), K4 (CNT_T128 exact cap 8), K5 (CNT_T32 exact cap 5), K7 (floor gap), K8 (CNT_Tinf cap 8 + CNT_T128 cap 6), K9 (K8 + rel decile + gap bin); seeds 1..5; rule's gold. Each key's pairs split by the positive's day count: LOW = c <= 2, HIGH = c >= 3 (K0's quarter-octave bins never mix them; the exact-count keys also contain the K0 bin).
+//   Per key x regime: n (mean over seeds), AUC (mean over seeds), day-CI (seed 1), theta-2 TPR / FPR, share of the key's pairs in HIGH.
+// DECISION: the rule SURVIVES a key in a regime iff n1 >= 40 and mean AUC >= 0.62 and day-CI lower >= 0.55; VOID(n) if n1 < 40; otherwise ERODES (AUC in [0.55,0.62)) or FALLS (< 0.55).
+// BLIND PREDICTIONS (ALL_EN): K0 HIGH in [0.80, 0.92], LOW in [0.55, 0.62]; share of K7 pairs in LOW >= 0.80; K4 LOW in [0.50, 0.58]; K7 LOW in [0.50, 0.58]; K4/K5/K8 HIGH either VOID(n) or >= 0.62; K7 HIGH VOID(n) or >= 0.62; K3 HIGH >= 0.70.
+// ═══ END OF PRE-REGISTRATION ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+import fs from "node:fs";
+import { loadDay, candidates, matchPairs, GOLD0, ibk, clb, mlb, rnd4 } from "./common.mjs";
+import { auc, boot, CL, thr, mean } from "./stats.mjs";
+import { headerSha, CODE, enDays } from "./hdr.mjs";
+const D = enDays(), CF = D.CF, ALL = [...new Set([...D.CF, ...D.SD, ...D.SC])], SEEDS = [1, 2, 3, 4, 5], SHA = headerSha(import.meta.url), cp = (x, m) => Math.min(x, m);
+const K0 = (x) => [ibk(x.i), Math.floor(4 * x.lc), clb(x.w), mlb(x.L)].join("|"), KEYS = { K0, K3: (x) => K0(x) + "|" + cp(x.CNT_Tinf, 12), K4: (x) => K0(x) + "|" + cp(x.CNT_T128, 8), K5: (x) => K0(x) + "|" + cp(x.CNT_T32, 5), K7: (x) => K0(x) + "|" + Math.floor(x.gap), K8: (x) => K0(x) + "|" + cp(x.CNT_Tinf, 8) + "|" + cp(x.CNT_T128, 6), K9: (x) => K0(x) + "|" + cp(x.CNT_Tinf, 8) + "|" + cp(x.CNT_T128, 6) + "|" + Math.floor(10 * x.rel) + "|" + Math.floor(x.gap) };
+const cands = new Map(); for (const k of ALL) cands.set(k, candidates(loadDay(k), 3)); const OUT = { headerSha256: SHA, code: CODE(), res: {} };
+for (const [pop, days] of [["CF", CF], ["ALL_EN", ALL]]) { OUT.res[pop] = {};
+  for (const [kn, kf] of Object.entries(KEYS)) { const per = SEEDS.map((s) => days.flatMap((k) => matchPairs(cands.get(k), GOLD0, kf, s, "A5" + kn).pairs)); OUT.res[pop][kn] = { all: per[0].length };
+    for (const [rn, rf] of [["LOW", (p) => p.pos.c <= 2], ["HIGH", (p) => p.pos.c >= 3]]) { const a = per.map((ps) => ps.filter(rf)), p1 = a[0], o = { n: Math.round(mean(a.map((x) => x.length))), n1: p1.length, aucMean: p1.length ? rnd4(mean(a.map((x) => auc(x, "INIT_Tinf")))) : null, shareOfKey: rnd4(p1.length / Math.max(1, per[0].length)) };
+      if (p1.length >= 40) { o.ciDay = boot(p1, "INIT_Tinf", CL.day, 600, "A5" + kn + rn + pop); o.thr2 = thr(p1, "INIT_Tinf", 2); o.verdict = o.aucMean >= 0.62 && o.ciDay[0] >= 0.55 ? "SURVIVES" : o.aucMean < 0.55 ? "FALLS" : "ERODES"; } else o.verdict = "VOID(n)"; OUT.res[pop][kn][rn] = o; } } }
+OUT.seconds = 0; fs.writeFileSync(new URL("./results/attackA5.json", import.meta.url), JSON.stringify(OUT, null, 1));
+for (const p of Object.keys(OUT.res)) for (const [k, o] of Object.entries(OUT.res[p])) console.log(p, k, "all", o.all, "| LOW", JSON.stringify({ n: o.LOW.n1, auc: o.LOW.aucMean, ci: o.LOW.ciDay, v: o.LOW.verdict }), "| HIGH", JSON.stringify({ n: o.HIGH.n1, auc: o.HIGH.aucMean, ci: o.HIGH.ciDay, share: o.HIGH.shareOfKey, thr2: o.HIGH.thr2, v: o.HIGH.verdict }));

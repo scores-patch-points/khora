@@ -1,0 +1,48 @@
+// attackC.mjs — ATTACK C (count / recency / lexicon rivals and shuffled-company controls, SAME ROWS) on rule R2_first_mention_lookahead (lens chat-scope). Run: node attackC.mjs (never "run") -> results/attackC.json
+// ═══ PRE-REGISTRATION (FOLD-CONSTITUTION II.5; written before the first run of this file; sha256 of this block is recorded in the output JSON) ═══
+// RULE: INIT_Tinf at the first occurrence of a form (other messages of the day whose first word is the form), name-like = higher.
+// DISCLOSURE (seen): everything in attackA.mjs's header AND attackA's results: static matching keys (exact count, exact CNT_Tinf, exact position and lengths) leave the AUC at 0.656-0.673 (K0 0.678 CF / 0.685 ALL_EN); local-recurrence keys erode it:
+//   exact CNT_T128 0.588, exact CNT_T32 0.604, CNT_Tinf+CNT_T128 0.578, gap-to-next-mention bin 0.547 (CF and ALL_EN agree to 0.001); message-initial facet falls more (0.526 at gap-match) than non-initial (0.61);
+//   floors 2-5 characters 0.668-0.681; '!'-prefixed bot commands are 6.9% of firing negatives; self-address 0.4%; distinct-speaker AUC 0.660 vs 0.675. And the confirmer's rival AUCs (CNT_Tinf 0.525, CNT_T128 0.616, INIT_T128 0.664; forward-delay INIT_F8 0.591, F32 0.644, F128 0.664). NOT seen: any lexicon/background-frequency score, gap alone as a score, CNT_F* alone, any shuffle mode other than the confirmer's wordshuf 0.557 / msgshuf 0.656.
+// DATA: CF (26 EN days of the confirmer, 16 productive) and ALL_EN (80 EN days). Pairs = baseline cell key K0 = [ibk(i), floor(4 log2 count), clb(chars), mlb(msg len)] with the rule's gold, matcher seeds 1..5 (shuffle modes: seeds 1..3, one shuffle realisation).
+// SCORES COMPARED ON THE SAME ROWS (name-like = higher; direction fixed here): INIT_Tinf (the rule); count type with NO slot information: CNT_Tinf, CNT_T8/32/128/512 (+-W messages), CNT_F8/32/128 (next W messages), ngap = -(log2(1+distance to the next message containing the form)); static: rel = m/N (later = name-like), lc, i, L, cl (controls);
+//   slot type: INIT_T8/32/128/512, INIT_F8/32/128, rate = INIT_Tinf/(CNT_Tinf+1); sham slots SEC_Tinf, LAST_Tinf; LEXICON RIVAL (cross-day background; excluded from rules by the project's no-word-list law, tested only as a rival): nbg = -log10((G(w)-count_day(w)+0.5)/(Gtot-ntok_day)), G over all 80 EN days.
+// DECISIONS: a rival REPRODUCES the rule iff its mean paired AUC is within 0.03 of INIT_Tinf's on the same rows (|diff| <= 0.03) in BOTH populations. A cheaper rival (count / recency / static / lexicon: no first-slot information) that reproduces the rule is a SUCCESSFUL attack; a slot-type rival with a local or delayed window that reproduces it narrows the rule's "whole-day lookahead" claim.
+//   BEYOND (the rule's value over the rival): AUC of INIT_Tinf on pairs whose rival value is in the same bin (CNT_T128 log2(1+x); CNT_F32 log2(1+x); gap floor; nbg floor; rel decile; CNT_Tinf log2(1+x)), kept >= 100 (ALL_EN) / 60 (CF); BEYOND HOLDS iff AUC >= 0.60 and day-CI lower >= 0.55 (the confirmer's own bars).
+//   REVERSE BEYOND: AUC of CNT_F32 (no slot) and of ngap within equal INIT_Tinf bins {0, 1, 2+}: does the count rival still discriminate once INIT_Tinf is equal?
+// SHUFFLED-COMPANY CONTROLS (each mode re-matched with K0): msgshuf (message order), blockshuf (order inside blocks of 64), wordshuf (tokens inside messages), firstswap (first words permuted across messages), restshuf (first words stay, other tokens dealt out at random). Controls i,L,cl,lc must be in [0.45,0.55] or the mode is VOID.
+// BLIND PREDICTIONS (mean over seeds, ALL_EN unless stated): CNT_Tinf <= 0.56; CNT_T128 in [0.58, 0.64]; INIT_T128 within 0.03 of INIT_Tinf; INIT_F128 within 0.03; INIT_F32 at least 0.03 below INIT_Tinf; ngap in [0.58, 0.68]; CNT_F32 in [0.58, 0.66]; nbg >= 0.70; rel in [0.55, 0.65]; rate in [0.60, 0.70];
+//   BEYOND: gap-bin 0.50-0.60, CNT_F32 0.55-0.66, nbg 0.55-0.70, CNT_T128 0.54-0.62, CNT_Tinf 0.62-0.70, rel decile >= 0.64; shuffles: wordshuf drop >= 0.08; msgshuf, blockshuf within 0.04 of real; firstswap within 0.05 of msgshuf; restshuf within 0.04 of real.
+// NOT TESTED: fitted classifiers; combinations of rivals; non-English; causal prefix-only readers. If a code bug is found after the first run it is fixed, the whole run repeated, and an AMENDMENT appended below the block (thresholds may only tighten).
+// ═══ END OF PRE-REGISTRATION ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+import fs from "node:fs";
+import { loadDay, candidates, matchPairs, GOLD0, K0, rnd4 } from "./common.mjs";
+import { auc, summ, ctl, ctlOk, beyond, boot, CL, log2b, mean, sd } from "./stats.mjs";
+import { headerSha, CODE, enDays } from "./hdr.mjs";
+const D = enDays(), CF = D.CF, ALL = [...new Set([...D.CF, ...D.SD, ...D.SC])], S5 = [1, 2, 3, 4, 5], S3 = [1, 2, 3];
+const SHA = headerSha(import.meta.url), t0 = Date.now(), log = (m) => process.stderr.write(`[${((Date.now() - t0) / 1000).toFixed(1)}s] ${m}\n`), f3 = (x) => Math.abs(x) <= 0.03;
+const COLS = ["INIT_Tinf", "CNT_Tinf", "CNT_T8", "CNT_T32", "CNT_T128", "CNT_T512", "CNT_F8", "CNT_F32", "CNT_F128", "ngap", "rel", "lc", "i", "L", "cl", "INIT_T8", "INIT_T32", "INIT_T128", "INIT_T512", "INIT_F8", "INIT_F32", "INIT_F128", "rate", "SEC_Tinf", "LAST_Tinf", "nbg"];
+function prep(mode) { // load every EN day in a mode, add derived columns incl. the leave-day-out lexicon score
+  const docs = ALL.map((k) => loadDay(k, mode)), G = new Map(); let Gt = 0; for (const d of docs) { for (const [w, c] of d.tot) G.set(w, (G.get(w) ?? 0) + c); Gt += d.nTok; }
+  const cands = new Map(docs.map((d) => { const cs = candidates(d, 3); for (const x of cs) { x.ngap = -x.gap; x.rate = x.INIT_Tinf / (x.CNT_Tinf + 1); x.nbg = -Math.log10(((G.get(x.w) ?? 0) - x.c + 0.5) / (Gt - d.nTok)); } return [d.key, cs]; })); return cands;
+}
+const pairsOf = (cands, days, seeds, tag) => seeds.map((s) => days.flatMap((k) => matchPairs(cands.get(k), GOLD0, K0(4), s, tag).pairs));
+const OUT = { headerSha256: SHA, code: CODE(), rivals: {}, beyond: {}, reverse: {}, shuffles: {} };
+const real = prep("real"); log("real loaded");
+for (const [pop, days] of [["CF", CF], ["ALL_EN", ALL]]) {
+  const per = pairsOf(real, days, S5, "C"), p1 = per[0], base = mean(per.map((p) => auc(p, "INIT_Tinf"))); OUT.rivals[pop] = { n: p1.length, ruleAuc: rnd4(base), ctl: ctl(p1), ctlOk: ctlOk(ctl(p1)), cols: {} };
+  for (const c of COLS) { const a = per.map((p) => auc(p, c)), m = mean(a); OUT.rivals[pop].cols[c] = { auc: rnd4(m), sd: rnd4(sd(a)), diffToRule: rnd4(m - base), within003: f3(m - base) }; }
+  const need = pop === "CF" ? 60 : 100, B = {}; const bins = { CNT_T128: log2b, CNT_F32: log2b, CNT_Tinf: log2b, gap: Math.floor, nbg: Math.floor, rel: (x) => Math.floor(10 * x) };
+  for (const [r, f] of Object.entries(bins)) { const k = p1.filter((p) => f(p.pos[r]) === f(p.neg[r])), mm = mean(per.map((p) => { const kk = p.filter((q) => f(q.pos[r]) === f(q.neg[r])); return kk.length ? auc(kk, "INIT_Tinf") : NaN; })); B[r] = { kept: k.length, aucMeanSeeds: rnd4(mm), ciDay: k.length >= 30 ? boot(k, "INIT_Tinf", CL.day, 600, "bC" + r + pop) : null, ciPosForm: k.length >= 30 ? boot(k, "INIT_Tinf", CL.posForm, 400, "bF" + r + pop) : null, holds: k.length >= need && mm >= 0.6 && boot(k, "INIT_Tinf", CL.day, 600, "bC" + r + pop)[0] >= 0.55 }; }
+  OUT.beyond[pop] = B; const R = {};
+  for (const col of ["CNT_F32", "ngap", "CNT_T128", "nbg"]) { R[col] = {}; for (const [nm, f] of [["INIT0", (x) => x === 0], ["INIT1", (x) => x === 1], ["INIT2+", (x) => x >= 2]]) { const k = p1.filter((p) => nm === "INIT0" ? p.pos.INIT_Tinf === 0 && p.neg.INIT_Tinf === 0 : nm === "INIT1" ? p.pos.INIT_Tinf === 1 && p.neg.INIT_Tinf === 1 : p.pos.INIT_Tinf >= 2 && p.neg.INIT_Tinf >= 2); R[col][nm] = { n: k.length, auc: k.length >= 20 ? rnd4(auc(k, col)) : null }; } }
+  OUT.reverse[pop] = R; log(`${pop}: rule ${OUT.rivals[pop].ruleAuc}; ngap ${OUT.rivals[pop].cols.ngap.auc}; nbg ${OUT.rivals[pop].cols.nbg.auc}; INIT_T128 ${OUT.rivals[pop].cols.INIT_T128.auc}`);
+}
+fs.writeFileSync(new URL("./results/attackC.part1.json", import.meta.url), JSON.stringify(OUT, null, 1)); log("part1 written");
+for (const mode of ["msgshuf", "blockshuf", "wordshuf", "firstswap", "restshuf"]) {
+  const cs = prep(mode); OUT.shuffles[mode] = {};
+  for (const [pop, days] of [["CF", CF], ["ALL_EN", ALL]]) { const per = pairsOf(cs, days, S3, "C" + mode), a = per.map((p) => auc(p, "INIT_Tinf")), c1 = ctl(per[0]); OUT.shuffles[mode][pop] = { n: per[0].length, auc: rnd4(mean(a)), sd: rnd4(sd(a)), drop: rnd4(OUT.rivals[pop].ruleAuc - mean(a)), ctl: c1, ctlOk: ctlOk(c1), ciDay: boot(per[0], "INIT_Tinf", CL.day, 400, "sh" + mode + pop), ctlRel: rnd4(auc(per[0], "rel")) }; }
+  log(`${mode}: CF ${OUT.shuffles[mode].CF.auc} ALL ${OUT.shuffles[mode].ALL_EN.auc} ctlOk ${OUT.shuffles[mode].ALL_EN.ctlOk}`);
+}
+OUT.seconds = (Date.now() - t0) / 1000; fs.writeFileSync(new URL("./results/attackC.json", import.meta.url), JSON.stringify(OUT, null, 1));
+console.log(JSON.stringify({ sha: SHA, rivals: Object.fromEntries(Object.entries(OUT.rivals).map(([p, v]) => [p, Object.fromEntries([["rule", v.ruleAuc], ...Object.entries(v.cols).map(([c, x]) => [c, x.auc + (x.within003 ? " *" : "")])])])), beyond: Object.fromEntries(Object.entries(OUT.beyond).map(([p, v]) => [p, Object.fromEntries(Object.entries(v).map(([r, x]) => [r, [x.kept, x.aucMeanSeeds, x.ciDay?.join("-"), x.holds]]))])), reverse: OUT.reverse, shuffles: Object.fromEntries(Object.entries(OUT.shuffles).map(([m, v]) => [m, [v.CF.auc, v.ALL_EN.auc, v.ALL_EN.drop, v.ALL_EN.ctlOk]])) }, null, 1));

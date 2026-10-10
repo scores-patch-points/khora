@@ -1,0 +1,121 @@
+// attack-B.mjs: ATTACK B (forking paths, clade structure, multiplicity) on rule R1-first-left-fwc32. Reads existing result JSON only (no probe is refit here).   NAME_COMPANY_PAIRBLOCK=1 node attack-B.mjs OUT.json
+//
+// ═══ PRE-REGISTRATION (FOLD-CONSTITUTION II.5; written 2026-10-07 BEFORE the first run of this file; sha256 of this header is recorded in the output JSON) ═══
+// DISCLOSURE. Seen: the rule JSON; the confirmer's per-language window-1 and window-2 tables (name, FWC32, pairs, AUC, POSITION, S2, shuffled AUC) and verdict summaries; the scoper's descriptors/moderator FORMATS and ONE test row (afr).
+//   NOT seen before this header: the scoper's per-language TEST AUCs (28 new + 25 old stems), the own.json dev AUCs of the old 25 as a table, any clade-structured statistic, any attack-A/C result (A collect jobs were still running;
+//   I saw progress lines of A for cat, ces, est, heb only; C collect jobs started after this header was written).
+// DATA = four measurement sets per language, each of independent text: W1 (confirmer window 1, train), W2 (confirmer window 2, train), TEST (scoper's single confirmation run on test.conllu, read from its result file; test.conllu itself is not read),
+//   DEV (name-company-pairblocks/own.json, the old 25 stems only; the rule's discovery data). A measurement is ELIGIBLE iff pairs >= 60 AND POSITION in [0.45, 0.55] AND stem != cmn-hans. Language-level AUC = mean over a language's eligible
+//   measurements among a stated set of sets; language FWC32 = mean over the same measurements. "Audible" = AUC >= 0.60. Clean zone = FWC32 >= 0.28 (post hoc cut), rule cut 0.2378, deaf zone < 0.24.
+// CLADES (fixed by linguistics before the run, lib-attack.mjs): Slavic, Germanic, Romance, Baltic, Celtic, IndoAryan, Semitic, Sinitic, Turkic, Uralic, Dravidian and singletons (hye ell fas jpn kor ind vie kat eus wol).
+// TESTS AND DECISIONS (fixed now; tighten only).
+//   B1 CLADE STRUCTURE. On the language-level AUC averaged over W1, W2, TEST: (i) rho_all = Spearman(FWC32, AUC); (ii) rho_within = pooled Spearman after centring ranks within clades (clades with >= 2 languages), one-sided permutation p with FWC32 permuted WITHIN clades (B = 5000);
+//     (iii) rho_between = Spearman of clade means (all clades) with permutation p; (iv) rho after removing near-duplicate languages (srp urd nob); (v) leave-one-clade-out range of rho_all. DECISION: the gradient is NOT merely a family effect iff rho_within >= 0.30 and p <= 0.05;
+//     "family-confounded" if rho_within < 0.20 or p > 0.10; between those = inconclusive. Also report the gradient inside Slavic, Germanic, Romance separately (descriptive).
+//   B2 CUT ON SPLIT. For each ordered pair (A -> B) of sets in {W1, W2, TEST, DEV}: choose the cut c in {0.20, 0.21, ..., 0.34} maximising balanced accuracy of "FWC32 >= c predicts AUC >= 0.60" on set A (ties: the largest cut); report c, A accuracy, and the balanced accuracy of that cut on set B,
+//     next to the frozen cuts 0.2378 and 0.28 on B and next to a permutation reference (FWC32 permuted across the languages of B, 2000 draws, same cut): p = P(null >= observed). Leave-one-LANGUAGE-out cut selection pooled over all measurements, balanced accuracy of the held-out calls.
+//     DECISION: the zone is "not a lucky subset" iff (a) the derived cut transfers with balanced accuracy >= 0.70 and perm p <= 0.05 in at least 8 of the 12 ordered pairs, and (b) the frozen 0.28 cut has balanced accuracy >= 0.70 on W2 and on TEST.
+//   B3 ZONE SHARES WITH CLUSTER CI. Clean-zone audible rate (language-level; each language's rate = share of its eligible measurements audible) with a language-bootstrap 95% CI (B = 4000) for sets {W1}, {W2}, {TEST}, {W1,W2,TEST}; the rule's own falsifier level is 0.60.
+//     DECISION: clean-zone claim "holds with margin" iff the point estimate >= 0.70 and the lower CI bound >= 0.55 on the pooled set; the falsifier "fires" iff the pooled point estimate < 0.60. Deaf zone (< 0.24) claimed <= 0.25: report the upper CI bound.
+//     PERMUTATION REFERENCE for the clean-minus-rest audible-rate contrast: FWC32 permuted across languages (B = 5000) and WITHIN clades (B = 5000); one-sided p each.
+//   B4 MODERATOR SELECTION (winner's curse). Candidates (label-free stream descriptors averaged over W1/W2): FWC8 FWC16 FWC32 FWC64 FWC128 TTR hapaxTokenShare meanSentLen log2tokens. 1000 random language split-halves: select the candidate with the largest |rho| with AUC in half A, evaluate its
+//     signed rho in half B; report mean rho_B(selected), mean rho_B(FWC32 fixed), the share of halves in which an FWC candidate (8/16/32/64) is chosen, and the permutation null for max_k |rho_k| (2000). DECISION: FWC32 is "specifically" supported iff its rank among the K candidates by pooled |rho| is 1 and
+//     the best non-FWC candidate is <= FWC32 - 0.10; the rule's scope variable is "a bundle" if two or more candidates are within 0.05 of it.
+//   B5 MULTIVERSE. Audible threshold in {0.57..0.63}, clean cut in {0.24, 0.26, 0.28, 0.30, 0.32}, min pairs in {60, 100, 150, 250}, set in {W1, W2, TEST, mean of the three}: for each cell, clean-minus-rest audible-rate contrast, Spearman(FWC32, AUC), clean mean AUC - rest mean AUC.
+//     Report the share of cells with contrast >= 0.25 and with Spearman >= 0.40. DECISION: fragile if fewer than 0.80 of the cells with n_clean >= 5 and n_rest >= 5 keep contrast >= 0.25.
+//   B6 SELECTION BY ELIGIBILITY. Spearman(FWC32, pairs) over language-measurements and the thin/void share by zone; gradient restricted to languages with >= 250 pairs in every used measurement.
+// BLIND PREDICTIONS. B1: rho_all about 0.68; rho_within about 0.40 (P(>= 0.30 and p <= 0.05) = 0.55); rho_between about 0.60. B2: derived cuts 0.24-0.30; 8 of 12 pairs pass (0.4); 0.28 cut accuracy >= 0.70 on W2 and TEST (0.7). B3: pooled clean-zone rate 0.80 (CI lower about 0.62; holds with margin 0.5);
+//   deaf-zone upper CI > 0.25 (0.7). B4: FWC32 rank 1 (0.35), a bundle (0.8), FWC family selected in half of the halves (0.7). B5: fragile (0.4). B6: |rho(FWC32, pairs)| < 0.3 (0.7).
+// NOT TESTED HERE: new data (attacks A and C refit the probe); IRC; LATER; mechanism.
+// ═══ END OF PRE-REGISTRATION ═══
+import fs from "node:fs";
+import path from "node:path";
+import { rdj, CONF, round, mean, spearman, ranks, pearson, mulberry, shuffleIn, cladeOf, headerSha, listWin, win1, win2, describe, inBand, permRho } from "./lib-attack.mjs";
+const LAWD = path.join(CONF, "..", "..");
+const MOD = path.join(LAWD, "provisional/company-moderators/results");
+const out = { headerSha256: headerSha(import.meta.url) };
+// ── measurement tables ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+const M = { W1: new Map(), W2: new Map(), TEST: new Map(), DEV: new Map() };
+const put = (set, name, fwc32, pairs, auc, pos) => { if (name === "cmn-hans" || auc == null || pos == null) return; M[set].set(name, { name, fwc32, pairs, auc, pos, ok: pairs >= 60 && inBand(pos) }); };
+for (const f of ["collect.new.json", "collect.old.json"]) for (const r of rdj(path.join(CONF, "results", f)).rows) if (!r.error && !r.thin) put("W1", r.name, r.fwc32, r.pairs, r.auc, r.position);
+for (const r of rdj(path.join(CONF, "results/collect.w2.json")).rows) if (!r.error && !r.thin) put("W2", r.name, r.fwc32, r.pairs, r.auc, r.position);
+for (const f of ["confirm.new.test.json", "confirm.old.test.json"]) for (const r of rdj(path.join(MOD, f)).rows) if (r.FIRST && !r.FIRST.thin) put("TEST", r.stem, r.fwc32, r.FIRST.pairs, r.FIRST.auc, r.FIRST.position);
+const own = rdj(path.join(LAWD, "results/name-company-pairblocks/own.json")), desc = rdj(path.join(MOD, "descriptors.dev.json")).languages;
+for (const [k, v] of Object.entries(own)) if (v.FIRST && !v.FIRST.thin && desc[k]) put("DEV", k, desc[k].FWC32, v.FIRST.pairs, v.FIRST.LEFT, v.FIRST.POSITION);
+out.counts = Object.fromEntries(Object.entries(M).map(([k, m]) => [k, { all: m.size, eligible: [...m.values()].filter((x) => x.ok).length }]));
+const langTable = (sets, minPairs = 60) => { const names = new Set(); for (const s of sets) for (const [n, x] of M[s]) if (x.ok && x.pairs >= minPairs) names.add(n); const rows = [];
+  for (const n of [...names].sort()) { const ms = sets.map((s) => M[s].get(n)).filter((x) => x && x.ok && x.pairs >= minPairs); rows.push({ name: n, clade: cladeOf[n] ?? "single:" + n, fwc32: mean(ms.map((x) => x.fwc32)), auc: mean(ms.map((x) => x.auc)), rate: mean(ms.map((x) => (x.auc >= 0.6 ? 1 : 0))), k: ms.length, pairs: mean(ms.map((x) => x.pairs)) }); } return rows; };
+const rho = (rows, f = (r) => r.fwc32, g = (r) => r.auc) => spearman(rows.map(f), rows.map(g));
+const R = mulberry(20261007);
+// ── B1 clade structure ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+function withinRho(rows) { const rf = ranks(rows.map((r) => r.fwc32)), ra = ranks(rows.map((r) => r.auc)), cl = new Map(); rows.forEach((r, i) => (cl.get(r.clade) ?? cl.set(r.clade, []).get(r.clade)).push(i));
+  const cf = new Array(rows.length).fill(0), ca = new Array(rows.length).fill(0), keep = []; for (const idx of cl.values()) if (idx.length >= 2) { const mf = mean(idx.map((i) => rf[i])), ma = mean(idx.map((i) => ra[i])); for (const i of idx) { cf[i] = rf[i] - mf; ca[i] = ra[i] - ma; keep.push(i); } }
+  return pearson(keep.map((i) => cf[i]), keep.map((i) => ca[i])); }
+function withinPerm(rows, B = 5000) { const obs = withinRho(rows), cl = new Map(); rows.forEach((r, i) => (cl.get(r.clade) ?? cl.set(r.clade, []).get(r.clade)).push(i)); let ge = 0;
+  for (let b = 0; b < B; b++) { const f = rows.map((r) => r.fwc32); for (const idx of cl.values()) if (idx.length >= 2) { const v = shuffleIn(idx.map((i) => f[i]), R); idx.forEach((i, k) => (f[i] = v[k])); } if (withinRho(rows.map((r, i) => ({ ...r, fwc32: f[i] }))) >= obs - 1e-12) ge++; } return { rho: obs, p: (ge + 1) / (B + 1) }; }
+function betweenPerm(rows, B = 5000) { const cl = new Map(); for (const r of rows) (cl.get(r.clade) ?? cl.set(r.clade, []).get(r.clade)).push(r); const cs = [...cl.values()].map((rs) => ({ f: mean(rs.map((r) => r.fwc32)), a: mean(rs.map((r) => r.auc)) }));
+  const obs = spearman(cs.map((c) => c.f), cs.map((c) => c.a)); let ge = 0; for (let b = 0; b < B; b++) if (spearman(shuffleIn(cs.map((c) => c.f), R), cs.map((c) => c.a)) >= obs - 1e-12) ge++; return { n: cs.length, rho: obs, p: (ge + 1) / (B + 1) }; }
+const main = langTable(["W1", "W2", "TEST"]);
+{ const pa = permRho(main.map((r) => r.fwc32), main.map((r) => r.auc), 5000), w = withinPerm(main), bt = betweenPerm(main), dd = main.filter((r) => !["srp", "urd", "nob"].includes(r.name)), clNames = [...new Set(main.map((r) => r.clade))];
+  const loco = clNames.map((c) => ({ c, rho: rho(main.filter((r) => r.clade !== c)) })), sub = (c) => { const rs = main.filter((r) => r.clade === c); return rs.length >= 5 ? { n: rs.length, rho: round(rho(rs), 3), langs: rs.map((r) => `${r.name}:${round(r.fwc32, 2)}/${round(r.auc, 3)}`).join(" ") } : { n: rs.length }; };
+  out.B1 = { n: main.length, nClades: clNames.length, rho_all: { rho: round(pa.rho, 3), p: round(pa.p, 4) }, rho_within: { rho: round(w.rho, 3), p: round(w.p, 4) }, rho_between: { n: bt.n, rho: round(bt.rho, 3), p: round(bt.p, 4) }, rho_dedup: { n: dd.length, rho: round(rho(dd), 3) },
+    loco: { min: round(Math.min(...loco.map((x) => x.rho)), 3), max: round(Math.max(...loco.map((x) => x.rho)), 3), worst: loco.sort((a, b) => a.rho - b.rho)[0].c }, Slavic: sub("Slavic"), Germanic: sub("Germanic"), Romance: sub("Romance"),
+    IEonly: (() => { const ie = main.filter((r) => ["Slavic", "Germanic", "Romance", "Baltic", "Celtic", "IndoAryan", "Greek", "Armenian", "Iranian"].includes(r.clade)); return { n: ie.length, rho: round(rho(ie), 3) }; })(),
+    nonIEonly: (() => { const ne = main.filter((r) => !["Slavic", "Germanic", "Romance", "Baltic", "Celtic", "IndoAryan", "Greek", "Armenian", "Iranian"].includes(r.clade)); const p = permRho(ne.map((r) => r.fwc32), ne.map((r) => r.auc), 5000); return { n: ne.length, rho: round(p.rho, 3), p: round(p.p, 4), meanAuc: round(mean(ne.map((r) => r.auc))) }; })() };
+  out.B1.decision = w.rho >= 0.3 && w.p <= 0.05 ? "NOT_MERELY_FAMILY" : w.rho < 0.2 || w.p > 0.1 ? "FAMILY_CONFOUNDED" : "INCONCLUSIVE"; out.B1.table = main.map((r) => ({ name: r.name, clade: r.clade, fwc32: round(r.fwc32), auc: round(r.auc), rate: round(r.rate, 2), k: r.k }));
+}
+// ── B2 cuts on split ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+const bacc = (rows, c) => { const P = rows.filter((r) => r.auc >= 0.6), N = rows.filter((r) => r.auc < 0.6); if (!P.length || !N.length) return null; return 0.5 * (P.filter((r) => r.fwc32 >= c).length / P.length + N.filter((r) => r.fwc32 < c).length / N.length); };
+const CUTS = Array.from({ length: 15 }, (_, i) => 0.2 + i * 0.01);
+function bestCut(rows) { let best = null; for (const c of CUTS) { const b = bacc(rows, c); if (b != null && (best == null || b >= best.b)) best = { c: round(c, 2), b }; } return best; }
+function permAcc(rows, c, B = 2000) { const obs = bacc(rows, c); if (obs == null) return { obs: null, p: null }; let ge = 0; for (let b = 0; b < B; b++) { const f = shuffleIn(rows.map((r) => r.fwc32), R), x = bacc(rows.map((r, i) => ({ ...r, fwc32: f[i] })), c); if (x >= obs - 1e-12) ge++; } return { obs, p: (ge + 1) / (B + 1) }; }
+{ const S = ["W1", "W2", "TEST", "DEV"], pairs = []; let pass = 0, evalN = 0;
+  for (const a of S) for (const b of S) if (a !== b) { const ra = langTable([a]), rb = langTable([b]); if (ra.length < 12 || rb.length < 12) { pairs.push({ from: a, to: b, note: "too few" }); continue; } const bc = bestCut(ra), pt = permAcc(rb, bc.c), p2378 = permAcc(rb, 0.2378, 500), p28 = permAcc(rb, 0.28, 500); evalN++; if (pt.obs >= 0.7 && pt.p <= 0.05) pass++;
+    pairs.push({ from: a, to: b, nFrom: ra.length, nTo: rb.length, cut: bc.c, accFrom: round(bc.b, 3), accTo: round(pt.obs, 3), permP: round(pt.p, 4), acc2378: round(p2378.obs, 3), p2378: round(p2378.p, 3), acc28: round(p28.obs, 3), p28: round(p28.p, 3) }); }
+  // leave-one-language-out cut selection pooled over language-level means of all sets
+  const all = langTable(["W1", "W2", "TEST", "DEV"]), calls = all.map((r, i) => { const rest = all.filter((_, j) => j !== i), bc = bestCut(rest); return { name: r.name, cut: bc.c, pred: r.fwc32 >= bc.c, aud: r.auc >= 0.6 }; });
+  const tp = calls.filter((x) => x.pred && x.aud).length, tn = calls.filter((x) => !x.pred && !x.aud).length, P = calls.filter((x) => x.aud).length, N = calls.length - P;
+  out.B2 = { pairs, evaluablePairs: evalN, passedPairs: pass, frozen28: { W2: pairs.find((x) => x.to === "W2" && x.acc28 != null)?.acc28, TEST: pairs.find((x) => x.to === "TEST" && x.acc28 != null)?.acc28 }, lolo: { n: all.length, cutsUsed: [...new Set(calls.map((x) => x.cut))].join(","), balancedAcc: round(0.5 * (tp / P + tn / N), 3), sens: round(tp / P, 3), spec: round(tn / N, 3), baseRate: round(P / calls.length, 3) } };
+  const bW2 = pairs.filter((x) => x.to === "W2" && x.acc28 != null).map((x) => x.acc28), bT = pairs.filter((x) => x.to === "TEST" && x.acc28 != null).map((x) => x.acc28);
+  out.B2.decision = pass >= 8 && mean(bW2) >= 0.7 && mean(bT) >= 0.7 ? "NOT_A_LUCKY_SUBSET" : "CUT_NOT_STABLE"; out.B2.acc28W2 = round(mean(bW2), 3); out.B2.acc28TEST = round(mean(bT), 3);
+}
+// ── B3 zone shares with cluster CI ────────────────────────────────────────────────────────────────────────────────────────────────────────
+function zoneShare(rows, f) { const z = rows.filter(f); return z.length ? mean(z.map((r) => r.rate)) : null; }
+function bootZone(rows, f, B = 4000) { const n = rows.length, v = []; for (let b = 0; b < B; b++) { const s = Array.from({ length: n }, () => rows[Math.floor(R() * n)]), x = zoneShare(s, f); if (x != null) v.push(x); } v.sort((a, b) => a - b); return [round(v[Math.floor(0.025 * v.length)], 3), round(v[Math.floor(0.975 * v.length)], 3)]; }
+out.B3 = {}; for (const [nm, sets] of Object.entries({ W1: ["W1"], W2: ["W2"], TEST: ["TEST"], pooled: ["W1", "W2", "TEST"] })) { const rows = langTable(sets), cl = (r) => r.fwc32 >= 0.28, dz = (r) => r.fwc32 < 0.24;
+  out.B3[nm] = { n: rows.length, nClean: rows.filter(cl).length, clean: round(zoneShare(rows, cl), 3), cleanCI: bootZone(rows, cl), nDeaf: rows.filter(dz).length, deaf: round(zoneShare(rows, dz), 3), deafCI: bootZone(rows, dz), nMid: rows.filter((r) => r.fwc32 >= 0.24 && r.fwc32 < 0.28).length, mid: round(zoneShare(rows, (r) => r.fwc32 >= 0.24 && r.fwc32 < 0.28), 3) }; }
+{ const rows = langTable(["W1", "W2", "TEST"]), cl = (r) => r.fwc32 >= 0.28, contrast = (rs) => zoneShare(rs, cl) - zoneShare(rs, (r) => !cl(r)), obs = contrast(rows); let g1 = 0, g2 = 0; const B = 5000, byClade = new Map(); rows.forEach((r, i) => (byClade.get(r.clade) ?? byClade.set(r.clade, []).get(r.clade)).push(i));
+  for (let b = 0; b < B; b++) { const f = shuffleIn(rows.map((r) => r.fwc32), R); if (contrast(rows.map((r, i) => ({ ...r, fwc32: f[i] }))) >= obs - 1e-12) g1++; const f2 = rows.map((r) => r.fwc32); for (const idx of byClade.values()) if (idx.length >= 2) { const v = shuffleIn(idx.map((i) => f2[i]), R); idx.forEach((i, k) => (f2[i] = v[k])); } if (contrast(rows.map((r, i) => ({ ...r, fwc32: f2[i] }))) >= obs - 1e-12) g2++; }
+  out.B3.permutation = { contrast: round(obs, 3), pLanguageExchangeable: round((g1 + 1) / (B + 1), 4), pWithinClade: round((g2 + 1) / (B + 1), 4) }; }
+{ const p = out.B3.pooled; out.B3.decision = p.clean < 0.6 ? "FALSIFIER_FIRES" : p.clean >= 0.7 && p.cleanCI[0] >= 0.55 ? "HOLDS_WITH_MARGIN" : "HOLDS_NO_MARGIN"; }
+// ── B4 moderator selection ────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+{ const names = langTable(["W1", "W2", "TEST"]).map((r) => r.name), D = new Map();
+  for (const n of names) { const ds = []; for (const [wf, dir] of [[win1, "windows"], [win2, "windows2"]]) { if (!listWin(dir).includes(n)) continue; const w = wf(n), d = describe(w.sents); ds.push({ fwc8: d.fwc8, fwc16: d.fwc16, fwc32: d.fwc32, fwc64: d.fwc64, fwc128: d.fwc128, ttr: d.ttr, hapax: d.hapaxTokenShare, sentlen: d.meanSentLen, ltok: Math.log2(d.tokens) }); }
+    if (ds.length) D.set(n, Object.fromEntries(Object.keys(ds[0]).map((k) => [k, mean(ds.map((x) => x[k]))]))); }
+  const rows = langTable(["W1", "W2", "TEST"]).filter((r) => D.has(r.name)).map((r) => ({ ...r, d: D.get(r.name) })), K = Object.keys(rows[0].d), rk = (rs, k) => spearman(rs.map((r) => r.d[k]), rs.map((r) => r.auc));
+  const pooled = Object.fromEntries(K.map((k) => [k, round(rk(rows, k), 3)])); let nFwc = 0, sumSel = 0, sumF = 0, nh = 0; const FW = new Set(["fwc8", "fwc16", "fwc32", "fwc64"]);
+  for (let b = 0; b < 1000; b++) { const idx = shuffleIn(rows.map((_, i) => i), R), h = Math.floor(idx.length / 2), A_ = idx.slice(0, h).map((i) => rows[i]), B_ = idx.slice(h).map((i) => rows[i]); let bk = null, bv = -1; for (const k of K) { const v = Math.abs(rk(A_, k)); if (v > bv) { bv = v; bk = k; } }
+    const sg = Math.sign(rk(A_, bk)); sumSel += sg * rk(B_, bk); sumF += rk(B_, "fwc32"); if (FW.has(bk)) nFwc++; nh++; }
+  const obsMax = Math.max(...K.map((k) => Math.abs(rk(rows, k)))); let ge = 0; for (let b = 0; b < 2000; b++) { const a = shuffleIn(rows.map((r) => r.auc), R), m = Math.max(...K.map((k) => Math.abs(spearman(rows.map((r) => r.d[k]), a)))); if (m >= obsMax - 1e-12) ge++; }
+  const ord = K.slice().sort((a, b) => Math.abs(pooled[b]) - Math.abs(pooled[a])), nonF = K.filter((k) => !FW.has(k) && k !== "fwc128"), bestNon = Math.max(...nonF.map((k) => Math.abs(pooled[k])));
+  out.B4 = { n: rows.length, pooledRho: pooled, order: ord.join(" > "), halves: { n: nh, meanRhoSelected: round(sumSel / nh, 3), meanRhoFwc32: round(sumF / nh, 3), shareFwcFamily: round(nFwc / nh, 3) }, permMaxAbsRho: { obs: round(obsMax, 3), p: round((ge + 1) / 2001, 4) },
+    within005: K.filter((k) => Math.abs(pooled[k]) >= Math.abs(pooled.fwc32) - 0.05).join(","), bestNonFwc: round(bestNon, 3), decision: ord[0] === "fwc32" && bestNon <= Math.abs(pooled.fwc32) - 0.1 ? "FWC32_SPECIFIC" : "BUNDLE" };
+}
+// ── B5 multiverse ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+{ const cells = []; for (const theta of [0.57, 0.58, 0.59, 0.6, 0.61, 0.62, 0.63]) for (const cut of [0.24, 0.26, 0.28, 0.3, 0.32]) for (const mp of [60, 100, 150, 250]) for (const [sn, sets] of Object.entries({ W1: ["W1"], W2: ["W2"], TEST: ["TEST"], mean3: ["W1", "W2", "TEST"] })) {
+    const rows = langTable(sets, mp), z = rows.filter((r) => r.fwc32 >= cut), rest = rows.filter((r) => r.fwc32 < cut); if (z.length < 5 || rest.length < 5) continue; const aud = (rs) => mean(rs.map((r) => r.auc >= theta ? 1 : 0));
+    cells.push({ theta, cut, mp, set: sn, n: rows.length, nz: z.length, contrast: aud(z) - aud(rest), clean: aud(z), rest: aud(rest), rho: rho(rows), dMean: mean(z.map((r) => r.auc)) - mean(rest.map((r) => r.auc)) }); }
+  const q = (xs, p) => { const s = xs.slice().sort((a, b) => a - b); return s[Math.floor(p * (s.length - 1))]; };
+  out.B5 = { cells: cells.length, shareContrast025: round(cells.filter((c) => c.contrast >= 0.25).length / cells.length, 3), shareRho040: round(cells.filter((c) => c.rho >= 0.4).length / cells.length, 3), contrastQuantiles: [0, 0.1, 0.5, 0.9, 1].map((p) => round(q(cells.map((c) => c.contrast), p), 3)), rhoQuantiles: [0, 0.1, 0.5, 0.9, 1].map((p) => round(q(cells.map((c) => c.rho), p), 3)),
+    cleanShareAtTheta060: round(mean(cells.filter((c) => c.theta === 0.6 && c.cut === 0.28).map((c) => c.clean)), 3), bySet: Object.fromEntries(["W1", "W2", "TEST", "mean3"].map((s) => [s, { n: cells.filter((c) => c.set === s).length, share025: round(cells.filter((c) => c.set === s && c.contrast >= 0.25).length / Math.max(1, cells.filter((c) => c.set === s).length), 3), medianContrast: round(q(cells.filter((c) => c.set === s).map((c) => c.contrast), 0.5), 3) }])),
+    byMinPairs: Object.fromEntries([60, 100, 150, 250].map((m) => [m, { n: cells.filter((c) => c.mp === m).length, share025: round(cells.filter((c) => c.mp === m && c.contrast >= 0.25).length / Math.max(1, cells.filter((c) => c.mp === m).length), 3), medianRho: round(q(cells.filter((c) => c.mp === m).map((c) => c.rho), 0.5), 3) }])) };
+  out.B5.decision = out.B5.shareContrast025 >= 0.8 ? "ROBUST" : "FRAGILE";
+}
+// ── B6 selection by eligibility ──────────────────────────────────────────────────────────────────────────────────────────────────────────
+{ const all = []; for (const s of ["W1", "W2", "TEST"]) for (const x of M[s].values()) all.push({ ...x, set: s }); const zone = (f) => f >= 0.28 ? "clean" : f >= 0.24 ? "mid" : "deaf";
+  const z = {}; for (const zn of ["clean", "mid", "deaf"]) { const rs = all.filter((x) => zone(x.fwc32) === zn); z[zn] = { n: rs.length, eligibleShare: round(rs.filter((x) => x.ok).length / rs.length, 3), meanPairs: round(mean(rs.map((x) => x.pairs)), 1), cap600: round(rs.filter((x) => x.pairs >= 600).length / rs.length, 3) }; }
+  const big = langTable(["W1", "W2", "TEST"], 250), pr = permRho(big.map((r) => r.fwc32), big.map((r) => r.auc), 5000);
+  out.B6 = { rhoFwcPairs: round(spearman(all.map((x) => x.fwc32), all.map((x) => x.pairs)), 3), zones: z, rhoPairsAuc: round(spearman(all.filter((x) => x.ok).map((x) => x.pairs), all.filter((x) => x.ok).map((x) => x.auc)), 3), big250: { n: big.length, rho: round(pr.rho, 3), p: round(pr.p, 4), meanClean: round(mean(big.filter((r) => r.fwc32 >= 0.28).map((r) => r.auc)), 3), meanDeaf: round(mean(big.filter((r) => r.fwc32 < 0.24).map((r) => r.auc)), 3), nClean: big.filter((r) => r.fwc32 >= 0.28).length, nDeaf: big.filter((r) => r.fwc32 < 0.24).length } };
+}
+fs.writeFileSync(process.argv[2], JSON.stringify(out, null, 1));
+console.log(JSON.stringify({ counts: out.counts, B1: { ...out.B1, table: undefined }, B2: { ...out.B2, pairs: out.B2.pairs.map((p) => `${p.from}->${p.to} cut${p.cut} accTo${p.accTo} p${p.permP} a2378 ${p.acc2378} a28 ${p.acc28}`) }, B3: out.B3, B4: out.B4, B5: { ...out.B5 }, B6: out.B6 }, null, 1));

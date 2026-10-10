@@ -40,6 +40,13 @@
 
 const CONLLU_ROW = /^\d+\t/;
 
+// The trailing ASK mark, script-neutral (ASCII ?, Arabic ؟, fullwidth ？,
+// Armenian ՞, small ﹖, ‽, ⁇, ⸮) — a structural punctuation class, never a
+// word list. FALSIFIED 2026-10-09: this was written `[?…]?\s*$` — the
+// optional mark made the test TRUE FOR EVERY SENTENCE, so every statement
+// parsed as a question and the speaker model could never hold a claim.
+const QUESTION_MARK = /[\u003F\u061F\uFF1F\u055E\uFE56\u2E2E\u203D\u2047\u2048\u2049]+[\s]*$/u;
+
 function parseConlluLines(lines) {
   const rows = [];
   for (const line of lines ?? []) {
@@ -100,13 +107,13 @@ function readOne(rec) {
     hasSubject: hasDep(rows, root.id, "nsubj") || hasDep(rows, root.id, "csubj"),
     hasNumbers: rows.some((r) => r.upos === "NUM" || r.upos === "NUM_"),
     pronTypeInt: rows.some((r) => r.feats.PronType === "Int"),
-    endsQuestion: /[?]$/.test(text),
+    endsQuestion: QUESTION_MARK.test(text),
   };
 
   // QUESTION — computed from the parser's fields: an interrogative pronoun
   // (PronType=Int), an interrogative mood on an aux, or a question mark with
   // a relational root. No word list.
-  //   THE PHATIC EXCEPTION (structural): when the only interrogative signal
+// THE PHATIC EXCEPTION (structural): when the only interrogative signal
   //   is an ADVERB (advmod "how") on a verb whose SUBJECT is the addressee
   //   (Person=2) — "how are you doing?" — the question is about the
   //   addressee's wellbeing, a greeting, never a content request. Computed:
@@ -115,8 +122,13 @@ function readOne(rec) {
     rows.some((r) => r.upos === "PRON" && r.feats.Person === "2" && (r.deprel === "nsubj" || r.deprel?.startsWith("nsubj:"))) &&
     root.upos === "VERB";
   const hasQuestionWord = rows.some((r) => isInterrogativePron(r) && (r.deprel === "nsubj" || r.deprel === "root" || r.deprel === "obj" || r.head === root.id || r.id === root.id));
-  const endsQuestion = /[?؟؟؟؟؟]?\s*$/.test(text) && (root.upos === "AUX" || root.upos === "VERB" || root.upos === "NOUN" || root.upos === "ADJ");
-  const auxInterrogative = rows.some((r) => r.upos === "AUX" && (r.feats.Mood === "Int" || r.feats.VerbForm === "Fin") && (r.deprel === "aux" || r.deprel === "cop" || r.head === root.id));
+  const endsQuestion = QUESTION_MARK.test(text) && (root.upos === "AUX" || root.upos === "VERB" || root.upos === "NOUN" || root.upos === "ADJ");
+  // The interrogative mood is the AUX's own computed feature; ANY finite
+  // auxiliary or copula is NOT an interrogative signal (that made "I think
+  // the mayor is corrupt" a question — every copular clause fired it,
+  // falsified 2026-10-09). EndsQuestion and the question word carry the real
+  // weight; this is the residual mood path.
+  const auxInterrogative = rows.some((r) => r.upos === "AUX" && r.feats.Mood === "Int" && (r.deprel === "aux" || r.deprel === "cop" || r.head === root.id));
   const interrogative = !howAreYou && (hasQuestionWord || endsQuestion || auxInterrogative);
 
   // PHATIC — the parser's fields, computed: an interjection root (INTJ), a
