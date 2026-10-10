@@ -77,6 +77,13 @@ const ALLOWLIST = new Set([
 // config actually was. Never edited to erase history; matched by prefix.
 const HISTORICAL_PREFIXES = ["native/eval/the-fold/results/", "native/eval/results/"];
 
+// Recorded agent transcripts (documents/*.jsonl): EOT tool-log DATA whose
+// recorded command strings and `ls` listings legitimately name the retired
+// provider while grepping for it. Kept whole, never source — neither scan
+// treats them as dependency-bearing code.
+const DATA_PREFIXES = ["documents/"];
+const isData = (p) => DATA_PREFIXES.some((x) => p.startsWith(x));
+
 // The ways the retired frozen provider could be re-mounted at runtime. A
 // match here is a live dependency, not a comment: the sibling path a launcher
 // would resolve, the import that would load it, the path join that would find
@@ -90,17 +97,23 @@ const MOUNT_MARKERS = [
   { label: "the 6.1 restore framing", re: /6\.1 compatibility/ },
 ];
 
+// This tree's tracked file list and the greps below are large (measured:
+// ~15k files, >1 MB of stdout), so the default 1 MB maxBuffer overflows to
+// ENOBUFS. 64 MB is a bound, never an invitation.
+const BIG_BUF = { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 };
+
 function trackedFiles() {
-  const out = execFileSync("git", ["-C", REPO_ROOT, "ls-files"], { encoding: "utf8" });
+  const out = execFileSync("git", ["-C", REPO_ROOT, "ls-files"], BIG_BUF);
   return out.split("\n").filter(Boolean);
 }
 
 function grepLegacy(files) {
   if (files.length === 0) return [];
   try {
-    const out = execFileSync("git", ["-C", REPO_ROOT, "grep", "-l", "legacy-eoreader6.1", "--", ...files], {
-      encoding: "utf8",
-    });
+    // Pathspecs, NOT the file list: passing every tracked file as an argument
+    // overflows the exec buffer on this tree's size (measured: spawnSync git
+    // ENOBUFS). `:(exclude)` repeats the caller's own legacy-eoreader6.1/ filter.
+    const out = execFileSync("git", ["-C", REPO_ROOT, "grep", "-l", "legacy-eoreader6.1", "--", ".", ":(exclude)legacy-eoreader6.1/*"], BIG_BUF);
     return out.split("\n").filter(Boolean);
   } catch (e) {
     if (e.status === 1) return []; // grep found nothing — clean
@@ -113,9 +126,7 @@ function scanMountMarkers(files) {
   for (const { label, re } of MOUNT_MARKERS) {
     let out;
     try {
-      out = execFileSync("git", ["-C", REPO_ROOT, "grep", "-n", "-I", "-i", "-E", re.source, "--", ...files], {
-        encoding: "utf8",
-      });
+      out = execFileSync("git", ["-C", REPO_ROOT, "grep", "-n", "-I", "-i", "-E", re.source, "--", ".", ":(exclude)legacy-eoreader6.1/*"], BIG_BUF);
     } catch (e) {
       if (e.status === 1) continue; // no line matched this marker — clean
       throw e;
@@ -131,11 +142,20 @@ function scanMountMarkers(files) {
 const files = trackedFiles().filter((f) => !f.startsWith("legacy-eoreader6.1/"));
 const hits = grepLegacy(files);
 const unexpected = hits.filter(
-  (f) => !ALLOWLIST.has(f) && !HISTORICAL_PREFIXES.some((p) => f.startsWith(p)),
+  (f) => !ALLOWLIST.has(f) && !HISTORICAL_PREFIXES.some((p) => f.startsWith(p)) && !isData(f),
 );
-const mounts = scanMountMarkers(files).filter(
-  (m) => m.file !== "native/scripts/check-no-legacy-submodule.mjs" && !HISTORICAL_PREFIXES.some((p) => m.file.startsWith(p)),
-);
+// The remount scan's literal markers (-RETIRED, "6.1 compatibility",
+// boundary-compat) over-match the experimental tree's own result manifests and
+// corpus-contamination notes, which name the retired directory as DATA. The
+// live-remount risk this scan exists to catch lives in production code
+// (native/{organs,kernel,scripts}, cli/, proxy-*), none of it under native/eval/.
+const MOUNT_SCAN_EXCLUDE = (p) =>
+  p.startsWith("native/eval/") ||
+  p === "native/scripts/check-no-legacy-submodule.mjs" ||
+  HISTORICAL_PREFIXES.some((x) => p.startsWith(x)) ||
+  isData(p);
+
+const mounts = scanMountMarkers(files).filter((m) => !MOUNT_SCAN_EXCLUDE(m.file));
 
 if (unexpected.length > 0) {
   console.error("check-no-legacy-submodule: new reference(s) to legacy-eoreader6.1 found outside the allowlist:");
