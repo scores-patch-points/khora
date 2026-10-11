@@ -21,6 +21,7 @@ import {
   compositionCoords,
   withMetaMembership,
   abstractionNotes,
+  releaseDecision,
 } from "../kernel/hyperlexicon-abstraction.js";
 import { createHyperlexicon, giveHyperlexiconAffordance } from "../kernel/hyperlexicon.js";
 
@@ -110,9 +111,9 @@ test("coordinate composition rules resolve by cell without shadowing exact pairs
 });
 
 // ── 5. The generalized meta law: Pattern abstractions have a depth ladder ─
-test("withMetaMembership ladders any Pattern abstraction into a same-terrain meta at depth+1", () => {
+test("withMetaMembership ladders a BOUND Pattern abstraction into its same-terrain meta at depth+1", () => {
   const r = createAbstractionRegistry();
-  const admitted = admitAbstraction(r, { op: "CON", grain: "Pattern", terrain: "Network", label: "feedback-loop", depth: 0 });
+  const admitted = admitAbstraction(r, { op: "CON", grain: "Pattern", terrain: "Network", label: "feedback-loop", depth: 0, memberRefs: ["a", "b", "c"] });
   const id = Object.values(admitted.abstractions)[0].id;
   const { registry, meta, note, refused } = withMetaMembership(admitted, { id });
   assert.equal(refused, false);
@@ -130,6 +131,32 @@ test("withMetaMembership ladders any Pattern abstraction into a same-terrain met
   // Idempotent: a second call does not mint a second meta row.
   const { registry: again } = withMetaMembership(registry, { id });
   assert.equal(Object.values(again.abstractions).filter((a) => a.depth === 1).length, 1);
+});
+
+// The law, after its live falsification (step-3 arena): a second floor must
+// not be generated out of nothing — an EMPTY floor (fewer than two live
+// members) and a DEFEATED floor (refuted) are refused, and the refutation is
+// PRESERVED: the refusal never mints an eager meta row.
+test("the meta law refuses an empty floor and a defeated floor (repaired gates)", () => {
+  const r = createAbstractionRegistry();
+  // empty floor — one live member cannot telescope a second floor
+  const single = admitAbstraction(r, { op: "SIG", grain: "Pattern", terrain: "Kind", label: "phantom", depth: 0, memberRefs: ["e1"] });
+  const sId = Object.values(single.abstractions)[0].id;
+  const g1 = withMetaMembership(single, { id: sId });
+  assert.equal(g1.refused, true);
+  assert.match(g1.basis, /fewer than two live members|empty floor/);
+  // the refusal minted NOTHING — the registry is unchanged at depth 1
+  assert.equal(Object.values(g1.registry.abstractions).filter((a) => a.depth === 1).length, 0);
+
+  // defeated floor — a refuted finding is preserved but not a parent floor
+  const row = admitAbstraction(r, { op: "CON", grain: "Pattern", terrain: "Kind", label: "defeated", depth: 0, memberRefs: ["e1", "e2", "e3"] });
+  const defId = Object.values(row.abstractions)[0].id;
+  const defeated = refuteAbstraction(row, { id: defId, falsifier: "counterexample", reason: { basis: "defeated" } });
+  assert.equal(defeated.abstractions[defId].standing, "refuted");
+  const g2 = withMetaMembership(defeated, { id: defId });
+  assert.equal(g2.refused, true);
+  assert.match(g2.basis, /refuted|not a floor/);
+  assert.equal(Object.values(g2.registry.abstractions).filter((a) => a.depth === 1).length, 0);
 });
 
 test("the meta law refuses Figure and Ground rows — units and substrates are not emission points", () => {
@@ -150,4 +177,40 @@ test("abstractionAt resolves terrain anchors and returns null when absent", () =
   assert.equal(anchor.terrain, "Kind");
   assert.equal(abstractionAt(admitted, { terrain: "Lens", depth: 0 }), null);
   assert.equal(abstractionId({ terrain: "Kind", depth: 1 }), "abstraction:kind:depth1");
+});
+
+// ── 7. The standing ladder has a consumer (step-4 repair) ───────────────
+test("releaseDecision decides by standing: earned releases, candidate withholds, refuted never", () => {
+  const r = createAbstractionRegistry();
+  const row = admitAbstraction(r, { op: "SIG", grain: "Pattern", terrain: "Kind", label: "k", depth: 0, memberRefs: ["a", "b", "c"] });
+  const id = Object.values(row.abstractions)[0].id;
+
+  // candidate — coherence releases nothing
+  const beforeWithhold = Object.values(row.abstractions)[0];
+  const c = releaseDecision(row, { id });
+  assert.equal(c.released, false);
+  assert.equal(c.standing, "candidate");
+  // the withhold changed NOTHING — still candidate, still the only row
+  assert.equal(Object.values(row.abstractions).length, 1);
+  assert.equal(Object.values(row.abstractions)[0].standing, "candidate");
+
+  // earned — releases with its measured validation
+  const earned = earnAbstraction(row, { id, validation: { method: "held_out_consequence", effect: 0.71, pValue: 0.01 } });
+  const e = releaseDecision(earned, { id });
+  assert.equal(e.released, true);
+  assert.equal(e.standing, "earned");
+  assert.equal(e.evidence.effect, 0.71);
+  assert.notEqual(c.released, e.released);
+
+  // refuted — never releases, even after a fresh validation is attempted
+  const defeated = refuteAbstraction(earned, { id, falsifier: "counterexample", reason: { basis: "defeated" } });
+  const attempted = earnAbstraction(defeated, { id, validation: { method: "fresh", effect: 0.9, pValue: 0.001 } });
+  const df = releaseDecision(attempted, { id });
+  assert.equal(df.released, false);
+  assert.equal(df.standing, "refuted");
+
+  // honest absence
+  const missing = releaseDecision(row, { id: "abstraction:none:depth0" });
+  assert.equal(missing.released, false);
+  assert.equal(missing.standing, "unknown");
 });

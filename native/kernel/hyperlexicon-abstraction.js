@@ -226,6 +226,41 @@ export function refuteAbstraction(registry, { id = null, falsifier = null, reaso
 }
 
 /**
+ * releaseDecision — the standing ladder's consumer. FALSIFIED + REPAIRED
+ * (2026-10-10, step-4 arena): the registry exposed NO downstream consumer of
+ * standing, so an earned and a coherence-promoted candidate were behaviorally
+ * identical — the discipline was decorative. Repair: a consumer question that
+ * decides by standing, in the module itself:
+ *   earned  → released:true, carrying the measured validation (method, effect,
+ *             pValue) — the only tier that licenses a consequential act.
+ *   given   → released:true with its basis (the attested/dictionary tier or a
+ *             stamped derivation rule releases its ground, not a p-value).
+ *   candidate → released:false, WITHHELD — coherence alone licenses no action
+ *             (the self-audit's p≈0.630 rule: cohesion is not standing); the
+ *             row is unchanged and stays provisional in the registry.
+ *   refuted → released:false, preserved — a defeated finding never re-releases,
+ *             even if a new validation is stamped on it upstream.
+ * PURE and frozen: it only reads; it never mutates the registry.
+ */
+export function releaseDecision(registry, { id = null } = {}) {
+  const r = normalizeAbstractionRegistry(registry);
+  const row = id ? r.abstractions[id] : null;
+  if (!row || row.schema !== HL_ABSTRACTION_SCHEMA) {
+    return freeze({ released: false, standing: "unknown", why: "no such abstraction — the honest absence, never a synthesized release" });
+  }
+  if (row.standing === "refuted") {
+    return freeze({ released: false, standing: "refuted", why: "refuted — preserved with its defeat; a defeated abstraction never re-releases, even under a fresh validation" });
+  }
+  if (row.standing === "earned") {
+    return freeze({ released: true, standing: "earned", why: "earned — measured consequence (method/effect/pValue) licenses the consequential act", evidence: row.validation });
+  }
+  if (row.standing === "given") {
+    return freeze({ released: true, standing: "given", why: "given — the attested tier or a stamped derivation rule releases its ground", evidence: row.validation ?? freeze({ basis: row.provenance.basis }) });
+  }
+  return freeze({ released: false, standing: "candidate", why: "candidate — coherence alone licenses no action (cohesion is not standing); the decision is WITHHELD and the row stays provisional" });
+}
+
+/**
  * abstractionAt — best-match lookup: exact id, then coordinate match on
  * (terrain × depth) anchor, then the first row for the grain at depth (when a
  * depth is given). Returns null on honest absence — never a synthetic row.
@@ -296,6 +331,14 @@ export function compositionCoords(hyperlexicon, left, right, { leftOp = null, le
  * is minted as structural chemistry the first time (given, chemistry-stamped —
  * a derivation rule, not a discovery), and membership is a ledger note
  * (keeps-company). A Figure or Ground row is refused with basis disclosed.
+ *
+ * FALSIFIED + REPAIRED (2026-10-10, step-3 arena): the law once admitted any
+ * Pattern row, so a SINGLETON candidate or a REFUTED row was laddered into a
+ * meta — a second floor generated out of nothing, contradicting the measured
+ * kinds-on-kinds law ("the second floor is a test of the first; a starved
+ * floor reads blank"). The narrower distinction: a floor must BIND — at least
+ * two live members — and must not be REFUTED. Defeated findings are preserved
+ * (they are not deleted), they just cannot stand as a parent floor.
  */
 export function withMetaMembership(registry, { id = null, row = null } = {}) {
   const r = normalizeAbstractionRegistry(registry);
@@ -308,6 +351,20 @@ export function withMetaMembership(registry, { id = null, row = null } = {}) {
       registry: r,
       refused: true,
       basis: "only Pattern-grain abstractions (Kind, Network, Paradigm) have a meta law; Figure is a unit, Ground is a substrate",
+    };
+  }
+  if (existing.standing === "refuted") {
+    return {
+      registry: r,
+      refused: true,
+      basis: "a REFUTED abstraction is preserved but not a floor — a defeated finding cannot telescope a second floor",
+    };
+  }
+  if ((existing.memberRefs ?? []).length < 2) {
+    return {
+      registry: r,
+      refused: true,
+      basis: "an empty floor cannot telescope a second floor — fewer than two live members (the kinds-on-kinds law: a starved floor reads blank)",
     };
   }
   const terrain = existing.terrain ?? existing.cell.terrain;
