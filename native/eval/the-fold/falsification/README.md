@@ -39,7 +39,9 @@ controls the discrimination sweep for steps 12/12b.
 | `terrain-arena-step12.mjs` | The weld cure at the FEATURE level? | empty: universal seats are 0 — the weld is a feature-model artifact, not per-feature prevalence |
 | `terrain-arena-step12b.mjs` | The weld cure at the REFERENT level (company model)? | FALSIFIED: hubs 0 on both seams; company-kind basins are inside their own null (p=1.0) |
 | `terrain-arena-step13.mjs` | The weld as Network vs Kind on real text? | instrument confound exposed (text-position split) — negative effects untrustworthy |
-| `terrain-arena-step14.mjs` | Repaired instrument (in-distribution clause hold-out, participant-conditioned): does ANY reading earn standing on real text? | **CONFIRMED**: multi-occasion participation (the seat/Network reading) effect +0.348, selection-aware shuffle-p 0.002; Kind membership earns nothing (−0.03) |
+| `terrain-arena-step14.mjs` | Repaired instrument (in-distribution clause hold-out, participant-conditioned): does ANY reading earn standing on real text? | ~~CONFIRMED~~ **RETRACTED by step 16b** (multi-occasion effect +0.348, shuffle-p 0.002 on the random holdout) |
+| `rigveda-frontier-step16b.mjs` | The stricter temporal-frontier instrument on the SAME Rigveda material: clauses 0-60% predict participation 60-100% | **FALSIFIED**: multi-occasion −0.01 (p 0.66) — the step-14 earning was an artifact of the random holdout and collapses under the honest temporal instrument |
+| `odyssey-frontier-step16.mjs` | The weld's home: Greek Odyssey seam (22 books, 128 noun-beings, 1 universal seat), temporal frontier books 1-14 → 15-22 | FALSIFIED: multi-occasion +0.01 (p 0.59); no reading predicts the future (local-pipeline arena; needs the khora/Zenodotus paths) |
 
 ## The standing conviction this battery enforces
 
@@ -47,5 +49,9 @@ Coherence alone earns nothing. A Kind of Kinds is not a higher order. Monitoring
 is governance, not a signal. A candidate abstraction may be promoted only by a
 measured consequence on held-out evidence, with its defeat preserved, and the
 instrument that measures the consequence must itself be falsified first
-(step 13 → step 14). The first real-corpus abstraction that earned standing did
-so on the Network terrain — the same evidence that Kind could not use.
+(step 13 → step 14 → step 16b). To date, NO real-corpus abstraction — Kind
+membership, network-degree, or active participation, on Rigveda, PnP, or the
+Odyssey — earns standing under the honest TEMPORAL instrument: the one
+positive result (step 14, +0.35) was an artifact of the random in-distribution
+holdout and failed on its own temporal frontier. The discipline's answer to the
+real material is a strong, reproducible null.
