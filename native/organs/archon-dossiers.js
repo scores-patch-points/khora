@@ -2,7 +2,7 @@
 // Do not edit. Edit the dossier and re-export. This is AntiStrauss's disclosure data: for each archon, the verdict on whether our use
 // matches what the author argued, and every place we bend, narrow or invent beyond them (ours vs theirs). A credit line that leaves these out
 // lets a name stand in for an argument it does not make. Dossier digest binds this file to its sources.
-export const ARCHON_DOSSIERS_DIGEST = "cd89d7e292bfca2a20a13e4b447606450970271c4412bc55122b9a40be98bc3a";
+export const ARCHON_DOSSIERS_DIGEST = "687032a3998f72e91e41d0b8ee123327acb3d3ce8ef6e6b4134c395e46059cdf";
 export const ARCHON_DOSSIERS = Object.freeze({
  "abhinavagupta": {
   "standing": "verified",
@@ -429,6 +429,30 @@ export const ARCHON_DOSSIERS = Object.freeze({
   "snips": [
    "eo-teachings/manifest/bukhari-corroboration.json",
    "eo-teachings/manifest/bukhari-reproduction.json"
+  ],
+  "noBendReason": null
+ },
+ "champollion": {
+  "standing": "verified",
+  "verdict": "partial",
+  "creditAsScholarship": true,
+  "disclosure": "By our reading, not the author's own claim. re-scoped: the UDHR parallel provides content to verify (paragraph alignment, proposition presence). / theirs: the Rosetta stone was a grid of POSITIONS and rigid proper-name pins, never content; Greek on the stone was n… | affirmed: proper names bind by recurrence and company within the known grid (the case-free cast; th… / theirs: Ptolemy and Cleopatra pinned the phonetic system by their recurrence across the cartouche — names are fixed p…",
+  "bends": [
+   {
+    "id": "rosetta-as-grid-not-content",
+    "kind": "re-scoped",
+    "ours": "the UDHR parallel provides content to verify (paragraph alignment, proposition presence).",
+    "theirs": "the Rosetta stone was a grid of POSITIONS and rigid proper-name pins, never content; Greek on the stone was not 'the meaning' but the coordinate system."
+   },
+   {
+    "id": "names-as-pins",
+    "kind": "affirmed",
+    "ours": "proper names bind by recurrence and company within the known grid (the case-free cast; the seat before the verb).",
+    "theirs": "Ptolemy and Cleopatra pinned the phonetic system by their recurrence across the cartouche — names are fixed points, not dictionary lookups."
+   }
+  ],
+  "snips": [
+   "eo-teachings/manifest/champollion-linguistic-decipherment.json"
   ],
   "noBendReason": null
  },
