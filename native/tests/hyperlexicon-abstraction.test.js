@@ -22,6 +22,8 @@ import {
   withMetaMembership,
   abstractionNotes,
   releaseDecision,
+  recordReading,
+  priorsFromRegistry,
 } from "../kernel/hyperlexicon-abstraction.js";
 import { createHyperlexicon, giveHyperlexiconAffordance } from "../kernel/hyperlexicon.js";
 
@@ -213,4 +215,30 @@ test("releaseDecision decides by standing: earned releases, candidate withholds,
   const missing = releaseDecision(row, { id: "abstraction:none:depth0" });
   assert.equal(missing.released, false);
   assert.equal(missing.standing, "unknown");
+});
+// ── 8. The reading loop earned/withheld (step 31 wiring) ─────────────────
+test("recordReading admits candidates that shape nothing until earned; priorsFromRegistry sources only released rows", () => {
+  const r0 = createAbstractionRegistry();
+  const r1 = recordReading(r0, {
+    id: "reading:rigveda:frontier",
+    cells: [
+      { op: "SIG", grain: "Pattern", terrain: "Kind", id: "abs:recurrence", memberRefs: ["a", "b", "c"], witnesses: ["seam@1"], meta: { rates: { a: 0.8, b: 0.5, c: 0.2 } } },
+    ],
+  });
+  // candidate — the write path never earns
+  const row = Object.values(r1.abstractions)[0];
+  assert.equal(row.standing, "candidate");
+  assert.equal(releaseDecision(r1, { id: row.id }).released, false);
+  assert.equal(row.meta.reading, "reading:rigveda:frontier");
+  // a candidate shapes nothing — the mind has no entries
+  assert.equal(priorsFromRegistry(r1).entries.length, 0);
+
+  // after a measured consequence earns it, it becomes the mind
+  const earned = earnAbstraction(r1, { id: row.id, validation: { method: "held_out_brier", effect: 0.2, pValue: 0.003 } });
+  const prior = priorsFromRegistry(earned);
+  assert.equal(prior.schema, "EOReceivedPrior@1");
+  assert.equal(prior.entries.length, 3);
+  assert.equal(prior.entries[0].referent, "a");
+  assert.equal(prior.entries[0].rate, 0.8);
+  assert.equal(prior.entries[0].terrain, "Kind");
 });
