@@ -27,6 +27,8 @@ import {
   surfaceKinds,
   sealMind,
   unsealMind,
+  routeReadingOutcome,
+  reviseReading,
 } from "../kernel/hyperlexicon-abstraction.js";
 import { createHyperlexicon, giveHyperlexiconAffordance } from "../kernel/hyperlexicon.js";
 
@@ -280,4 +282,44 @@ test("sealMind round-trips the mind with defeats preserved and refuses tampering
   // tampering is refused, never silently repaired
   const tampered = { ...seal, body: seal.body.replace('"a"', '"z"') };
   assert.equal(unsealMind(tampered).ok, false);
+});
+
+// ── 10. The CON/DEF/REC routing loop (step 31 piece 4) ───────────────────
+test("routeReadingOutcome promotes candidates, defeats earned rows, and refuses re-earn via refuted", () => {
+  const r0 = createAbstractionRegistry();
+  const admitted = admitAbstraction(r0, { op: "SIG", grain: "Pattern", terrain: "Kind", id: "kind:role:x", label: "x", depth: 0, memberRefs: ["a", "b"], meta: { rates: { a: 0.9, b: 0.5 } } });
+
+  // CON: a measured candidate success promotes
+  const con = routeReadingOutcome(admitted, { id: "kind:role:x", heldOut: { method: "held_out_brier", success: true, effect: 0.2, pValue: 0.01 } });
+  assert.equal(con.acted, "promoted_con");
+  assert.equal(con.registry.abstractions["kind:role:x"].standing, "earned");
+
+  // a success WITHOUT measurement is refused (coherence never earns)
+  assert.throws(() => routeReadingOutcome(admitted, { id: "kind:role:x", heldOut: { method: "held_out_brier", success: true } }), /coherence/);
+
+  // DEF: a failed held-out defeats the earned row, preserved, mind withdraws
+  const def = routeReadingOutcome(con.registry, { id: "kind:role:x", heldOut: { method: "held_out_brier", success: false } });
+  assert.equal(def.acted, "defeated_def");
+  assert.equal(def.registry.abstractions["kind:role:x"].standing, "refuted");
+  assert.equal(def.registry.abstractions["kind:role:x"].retractions.length, 1);
+  assert.equal(priorsFromRegistry(def.registry).entries.length, 0);
+
+  // a refuted row never re-earns through routing
+  const refused = routeReadingOutcome(def.registry, { id: "kind:role:x", heldOut: { method: "again", success: true, effect: 0.9, pValue: 0.001 } });
+  assert.equal(refused.acted, "refused_refuted");
+  assert.equal(refused.registry.abstractions["kind:role:x"].standing, "refuted");
+});
+
+test("reviseReading supersedes with the revision preserved candidate that must re-earn", () => {
+  const r0 = createAbstractionRegistry();
+  const admitted = admitAbstraction(r0, { op: "SIG", grain: "Pattern", terrain: "Kind", id: "kind:role:old", label: "old", depth: 0, memberRefs: ["a", "b"] });
+  const oldId = Object.values(admitted.abstractions)[0].id;
+  const rev = reviseReading(admitted, { id: oldId, revision: { op: "SIG", grain: "Pattern", terrain: "Kind", id: "kind:role:new", label: "new", memberRefs: ["a", "b", "c"] } });
+  assert.equal(rev.acted, "revised_rec");
+  assert.equal(rev.registry.abstractions[oldId].standing, "refuted");
+  const revRow = rev.registry.abstractions["kind:role:new"];
+  assert.equal(revRow.standing, "candidate");
+  assert.equal(revRow.meta.supersedes, oldId);
+  // the revision must still RE-EARN on its own consequence (candidate injects nothing)
+  assert.equal(priorsFromRegistry(rev.registry).entries.length, 0);
 });
