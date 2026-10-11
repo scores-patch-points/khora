@@ -24,6 +24,9 @@ import {
   releaseDecision,
   recordReading,
   priorsFromRegistry,
+  surfaceKinds,
+  sealMind,
+  unsealMind,
 } from "../kernel/hyperlexicon-abstraction.js";
 import { createHyperlexicon, giveHyperlexiconAffordance } from "../kernel/hyperlexicon.js";
 
@@ -241,4 +244,40 @@ test("recordReading admits candidates that shape nothing until earned; priorsFro
   assert.equal(prior.entries[0].referent, "a");
   assert.equal(prior.entries[0].rate, 0.8);
   assert.equal(prior.entries[0].terrain, "Kind");
+});
+
+// ── 9. The surface gate + the sealed mind (step 31 pieces 3 & 5) ─────────
+test("surfaceKinds surfaces only released abstractions, with withholding disclosed", () => {
+  const r0 = createAbstractionRegistry();
+  const admitted = admitAbstraction(r0, { op: "SIG", grain: "Pattern", terrain: "Kind", id: "kind:role:x", label: "x", depth: 0, memberRefs: ["a", "b"] });
+  const id = Object.values(admitted.abstractions)[0].id;
+  const withCandidate = admitAbstraction(admitted, { op: "SIG", grain: "Pattern", terrain: "Kind", id: "kind:role:candidate", label: "c", depth: 0, memberRefs: ["c", "d"] });
+  const earned = earnAbstraction(withCandidate, { id, validation: { method: "held_out", effect: 0.5, pValue: 0.01 } });
+  const gate = surfaceKinds(earned, [{ id: "kind:role:x" }, { id: "kind:role:candidate" }, { id: "kind:role:never" }]);
+  assert.equal(gate.surfaced.length, 1);
+  assert.equal(gate.surfaced[0].id, "kind:role:x");
+  assert.equal(gate.withheld.length, 2);
+  assert.equal(gate.withheld[0].standing, "candidate");
+  assert.equal(gate.withheld[1].standing, "unknown");
+});
+
+test("sealMind round-trips the mind with defeats preserved and refuses tampering", () => {
+  const r0 = createAbstractionRegistry();
+  const admitted = admitAbstraction(r0, { op: "SIG", grain: "Pattern", terrain: "Kind", id: "kind:role:x", label: "x", depth: 0, memberRefs: ["a", "b", "c"], meta: { rates: { a: 0.9, b: 0.5, c: 0.1 } } });
+  const id = Object.values(admitted.abstractions)[0].id;
+  const earned = earnAbstraction(admitted, { id, validation: { method: "held_out", effect: 0.5, pValue: 0.01 } });
+  const second = admitAbstraction(earned, { op: "SIG", grain: "Pattern", terrain: "Kind", id: "kind:role:y", label: "y", depth: 0, memberRefs: ["d", "e"] });
+  const yId = Object.values(second.abstractions).find((x) => x.id === "kind:role:y").id;
+  const defeated = refuteAbstraction(second, { id: yId, falsifier: "tamper-test" });
+  const seal = sealMind(defeated, { giver: "rigveda" });
+  assert.equal(seal.schema, "EOSealedMind@1");
+  const out = unsealMind(seal);
+  assert.equal(out.ok, true);
+  // the earned row feeds the mind; the defeat travels with the seal
+  assert.equal(out.prior.entries.length, 3);
+  assert.equal(out.registry.abstractions[yId].standing, "refuted");
+  assert.equal(releaseDecision(out.registry, { id }).released, true);
+  // tampering is refused, never silently repaired
+  const tampered = { ...seal, body: seal.body.replace('"a"', '"z"') };
+  assert.equal(unsealMind(tampered).ok, false);
 });
