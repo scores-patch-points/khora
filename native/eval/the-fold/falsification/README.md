@@ -43,6 +43,7 @@ controls the discrimination sweep for steps 12/12b.
 | `rigveda-frontier-step16b.mjs` | The stricter temporal-frontier instrument on the SAME Rigveda material: clauses 0-60% predict participation 60-100% | **FALSIFIED**: multi-occasion −0.01 (p 0.66) — the step-14 earning was an artifact of the random holdout and collapses under the honest temporal instrument |
 | `odyssey-frontier-step16.mjs` | The weld's home: Greek Odyssey seam (22 books, 128 noun-beings, 1 universal seat), temporal frontier books 1-14 → 15-22 | FALSIFIED: multi-occasion +0.01 (p 0.59); no reading predicts the future (local-pipeline arena; needs the khora/Zenodotus paths) |
 | `rigveda-network-step17.mjs` | The SHIPPED Network organ (relationNetworkComponents cycle-rank/motifs) on the Rigveda temporal frontier | FALSIFIED: cycle −0.29 (p 1), large-component −0.22 (p 1), membership −0.33 — the null is closed against co-occurrence, degree, membership, AND topology |
+| `odyssey-enriched-step18.mjs` | With the CAST in the population (data-derived proper-name tier: οδύσσεια, ζεύς, τηλέμαχος, παλλὰς, πηνελόπεια…, 261 names), the Odyssey temporal frontier | FALSIFIED: networkMulti −0.14 (p 1), roleMulti −0.23 (p 1), membership −0.53 — the mechanical null holds even with the actors present (local-pipeline arena) |
 
 ## The standing conviction this battery enforces
 
@@ -51,9 +52,11 @@ is governance, not a signal. A candidate abstraction may be promoted only by a
 measured consequence on held-out evidence, with its defeat preserved, and the
 instrument that measures the consequence must itself be falsified first
 (step 13 → step 14 → step 16b). To date, NO real-corpus abstraction — Kind
-membership, network-degree, active participation, or shipped Network topology,
-on Rigveda, PnP, or the Odyssey — earns standing under the honest TEMPORAL
-instrument: the one positive result (step 14, +0.35) was an artifact of the
-random in-distribution holdout and failed on its own temporal frontier. The
-discipline's answer to the real material is a strong, reproducible null,
-closed against the full space of mechanical readings.
+membership, network-degree, active participation, shipped Network topology,
+or predication roles; Rigveda, PnP, and Odyssey, including with the poem's
+own cast (proper names) in the population — earns standing under the honest
+TEMPORAL instrument. The one positive result (step 14, +0.35) was an artifact
+of the random in-distribution holdout and failed on its own temporal frontier
+and again with the cast present (step 18). The discipline's answer to the real
+material is a strong, reproducible null, closed against the full space of
+mechanical readings.
