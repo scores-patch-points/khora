@@ -83,6 +83,15 @@ export async function readEnglish({ text = null, file = null, chars = null, out 
     const toks = s.text.split(/\s+/).map((t) => t.replace(/^[^a-zA-Z0-9']+|[,.;:]$|-…$/g, "")).filter(Boolean);
     const verbs = toks.map((t, i) => ({ t, i })).filter(({ t }) => isVerb(t));
     for (const { t, i } of verbs) {
+      // ENGLISH AUXILIARY CHAIN (2026-10-11, legal-prose register; measured
+      // before: UDHR 60 of 227 clauses were aux-as-verb junk). An AUX
+      // immediately followed by a lexical verb is not its own predicate:
+      // "shall strive" / "has been proclaimed" / "should act" — the clause
+      // belongs to the MAIN verb, which carries the subject and the object.
+      // Skipped only when the next token is ITSELF a verb — never otherwise,
+      // so nothing already bound is lost and a single-token "is" stays.
+      const auxNext = toks[i + 1];
+      if (classOf(t) === "AUX" && auxNext && isVerb(auxNext)) continue;
       const subjIdx = toks.slice(0, i).reduce((acc, x, j) => (isSeat(x) ? j : acc), -1);
       const subject = subjIdx >= 0 ? seatOf(toks[subjIdx], subjIdx, toks, s) : null;
       let object = null, dative = null;
