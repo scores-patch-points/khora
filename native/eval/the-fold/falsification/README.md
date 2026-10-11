@@ -44,6 +44,8 @@ controls the discrimination sweep for steps 12/12b.
 | `odyssey-frontier-step16.mjs` | The weld's home: Greek Odyssey seam (22 books, 128 noun-beings, 1 universal seat), temporal frontier books 1-14 → 15-22 | FALSIFIED: multi-occasion +0.01 (p 0.59); no reading predicts the future (local-pipeline arena; needs the khora/Zenodotus paths) |
 | `rigveda-network-step17.mjs` | The SHIPPED Network organ (relationNetworkComponents cycle-rank/motifs) on the Rigveda temporal frontier | FALSIFIED: cycle −0.29 (p 1), large-component −0.22 (p 1), membership −0.33 — the null is closed against co-occurrence, degree, membership, AND topology |
 | `odyssey-enriched-step18.mjs` | With the CAST in the population (data-derived proper-name tier: οδύσσεια, ζεύς, τηλέμαχος, παλλὰς, πηνελόπεια…, 261 names), the Odyssey temporal frontier | FALSIFIED: networkMulti −0.14 (p 1), roleMulti −0.23 (p 1), membership −0.53 — the mechanical null holds even with the actors present (local-pipeline arena) |
+| `terrain-arena-step19.mjs` | Are STANCES real takings? Three Relate-stances (Tracing/Binding/Tending) over the same Rigveda seam | FALSIFIED — collapsed operationalizations (Tracing≈Binding 0.99 on the sparse seam); only the arrangement reading broke its shuffle-null early |
+| `terrain-arena-step19b.mjs` | Stance discrimination on the DENSE Odyssey seam + permutation-null control | **FALSIFIED, noiselessly**: the three orderings (max Spearman 0.089) sit INSIDE the random-order permutation null (p95 0.13) and each score was near-constant/lumpy — distinct arbitrarily, not meaningfully. A stance earns standing only if structured + orthogonal beyond the null + anchored to a verifiable world property |
 
 ## The standing conviction this battery enforces
 
