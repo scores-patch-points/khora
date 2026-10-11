@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>sealed agent · the fold</title>
+<link rel="stylesheet" href="/fold-agent.css" />
+</head>
+<body>
+<header id="topbar">
+  <div id="tabs" role="tablist"></div>
+  <button id="newTab" title="new session (⌘T)" aria-label="new session">+</button>
+  <div id="brand">sealed agent · fold <span id="gate">gate on</span></div>
+</header>
+
+<main id="thread" aria-live="polite"></main>
+
+<footer id="comp">
+  <div id="meta"></div>
+  <div id="composer">
+    <div id="testRow"><label for="testCommand">check</label><input id="testCommand" type="text" spellcheck="false" placeholder="test command (run to accept the work; never model-authored)" /></div>
+    <textarea id="ask" rows="3" spellcheck="false" placeholder="what should the agent do? (return to send · ⇧⏎ newline · ⌘T new tab)"></textarea>
+    <div id="composerRow">
+      <button id="stopBtn" hidden>stop</button>
+      <button id="sendBtn">send</button>
+    </div>
+  </div>
+</footer>
+
+<script src="/fold-agent.js"></script>
+</body>
+</html>

@@ -20,6 +20,7 @@ in the right-hand column.
 | **11435** | Ollama daemon | the real model runner (direct; skips the gate) | `ER7_OLLAMA_PORT` |
 | **11434** | `proxy.mjs` channel | the gated Ollama-compatible door — forwards to 11435, answers `HEAD /` so `ollama run` works; OpenAI/Ollama clients walk the gate here | `ER7_CHANNEL_PORT` |
 | 4096 | `opencode serve` | the second mouth — frontier models drawn through the opencode server's HTTP API (basic-auth; the proxy discovers its credentials) | `ER7_OPENCODE_URL`, `ER7_OPENCODE_PORT` |
+| 4097 | `native/sealed-agent/server.mjs` | **the sealed agent door** — the opencode session wire (`POST /session`, `POST /session/:id/message`, `GET /event`) into the sealed agent: frontier planned (antistrauss-gated, audit-ledgered), tools execute locally, lessons compile on green and serve repeated asks with zero frontier calls. Per-workspace store under `<workspace>/.sealed-agent/` | `SEALED_AGENT_PORT` |
 
 ## Pointing a client
 
