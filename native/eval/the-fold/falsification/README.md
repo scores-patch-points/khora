@@ -42,6 +42,7 @@ controls the discrimination sweep for steps 12/12b.
 | `terrain-arena-step14.mjs` | Repaired instrument (in-distribution clause hold-out, participant-conditioned): does ANY reading earn standing on real text? | ~~CONFIRMED~~ **RETRACTED by step 16b** (multi-occasion effect +0.348, shuffle-p 0.002 on the random holdout) |
 | `rigveda-frontier-step16b.mjs` | The stricter temporal-frontier instrument on the SAME Rigveda material: clauses 0-60% predict participation 60-100% | **FALSIFIED**: multi-occasion −0.01 (p 0.66) — the step-14 earning was an artifact of the random holdout and collapses under the honest temporal instrument |
 | `odyssey-frontier-step16.mjs` | The weld's home: Greek Odyssey seam (22 books, 128 noun-beings, 1 universal seat), temporal frontier books 1-14 → 15-22 | FALSIFIED: multi-occasion +0.01 (p 0.59); no reading predicts the future (local-pipeline arena; needs the khora/Zenodotus paths) |
+| `rigveda-network-step17.mjs` | The SHIPPED Network organ (relationNetworkComponents cycle-rank/motifs) on the Rigveda temporal frontier | FALSIFIED: cycle −0.29 (p 1), large-component −0.22 (p 1), membership −0.33 — the null is closed against co-occurrence, degree, membership, AND topology |
 
 ## The standing conviction this battery enforces
 
@@ -50,8 +51,9 @@ is governance, not a signal. A candidate abstraction may be promoted only by a
 measured consequence on held-out evidence, with its defeat preserved, and the
 instrument that measures the consequence must itself be falsified first
 (step 13 → step 14 → step 16b). To date, NO real-corpus abstraction — Kind
-membership, network-degree, or active participation, on Rigveda, PnP, or the
-Odyssey — earns standing under the honest TEMPORAL instrument: the one
-positive result (step 14, +0.35) was an artifact of the random in-distribution
-holdout and failed on its own temporal frontier. The discipline's answer to the
-real material is a strong, reproducible null.
+membership, network-degree, active participation, or shipped Network topology,
+on Rigveda, PnP, or the Odyssey — earns standing under the honest TEMPORAL
+instrument: the one positive result (step 14, +0.35) was an artifact of the
+random in-distribution holdout and failed on its own temporal frontier. The
+discipline's answer to the real material is a strong, reproducible null,
+closed against the full space of mechanical readings.
