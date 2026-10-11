@@ -48,6 +48,8 @@ controls the discrimination sweep for steps 12/12b.
 | `terrain-arena-step19b.mjs` | Stance discrimination on the DENSE Odyssey seam + permutation-null control | **FALSIFIED, noiselessly**: the three orderings (max Spearman 0.089) sit INSIDE the random-order permutation null (p95 0.13) and each score was near-constant/lumpy — distinct arbitrarily, not meaningfully. A stance earns standing only if structured + orthogonal beyond the null + anchored to a verifiable world property |
 | `terrain-arena-step20.mjs` | The ANCHORED-stance falsifier: each stance must be graded, track ONE verifiable property (beyond its shuffle null), and not ride the other anchors | FALSIFIED: stances became perceptually grounded (Tracing ρ=0.996 with arrangement-degree; Binding ρ=−0.59 with temporal span, sign-flipped; Tending ρ=0.375 with context density — all beyond their nulls) but NONE is both discriminant (they collapse onto the general participation/rarity axis) and graded (flat or lumpy). The precise rule: a real stance is graded, specific, and not-rarity |
 | `terrain-arena-step25.mjs` | FINISH THE STANCE SET — declared search over 4 Figure + 4 Ground operationalizations, same four gates | PARTIAL-success: **Tending EARNED** (`crowdingMean`: ground-crowding, anchored 0.43 p=0.005, partial-clean, graded); Binding failed all 4 candidates (spanFrac/laterality/gapMean/peakShare — partial or graded each fail) |
+| `terrain-arena-step26.mjs` | Figure = EDGE-OWNERSHIP/OCCLUSION (Rubin; the shared boundary belongs to the figure, the ground continues behind): P(turn at big ensemble transition | turn) | FALSIFIED-close: valid (0.71), partial-clean (−0.12/−0.12/−0.03), count-free — but discrete, only 26 unique values (grading failure, not entanglement) |
+| `terrain-arena-step26b.mjs` | Continuous weighted ownership: the figure's share of the FIELD's total turnover-weight (Figure measured AS its ground-dependence — the cube's own Three Mathematics: Figure = difference from a Ground) | **EARNED: Binding·Figure CONFIRMED** — validity 0.81 p=0.002, partials −0.04/0.04/0.01 (isolated), count-free, graded. A GRADER BUG in the first pass (compared `new Set(raw)` against the raw text) was caught and fixed; with it the set is COMPLETE: Tracing (Pattern), Binding (Figure), Tending (Ground) all earn |
 | `terrain-arena-step25b.mjs` | Focused re-anchor pass for Binding (story-position A_centroid; laterality/timelineHHI/varOfGaps) | FALSIFIED: **Binding does not pass partial-discriminant on this material** — every temporal Figure measure bleeds into the degree/crowd anchors (laterality: partials −0.82/−0.51/−0.41) beyond residualization. 2/3 stance set earned (Tracing, Tending); Figure-stance is declared-open with the structural blocker named |
 | `terrain-arena-step24.mjs` | IS THE MIND MOVED BY READINGS? (recurrence-prior injection, primed vs unprimed vs 500 shuffled minds) | **CONFIRMED — the loop closes positively**: the retained prior changes the future read's surprise beyond EVERY same-strength shuffled mind (p=0.004) and forecasts the future at Brier 0.063 vs 0.311 blank (content beats shell). The mind is moved by readings, and the moved mind moves the next reading |
 | `terrain-arena-step23.mjs` | The three named fixes (Pattern→concentration, Figure→span-continuity, Ground→ambient variance), same four gates | **PARTIAL, the crossing**: **Tracing EARNED** — the first fully-earned STANCE (graded, count-free, anchored to arrangement −0.64 p=0.002, leaves nothing of the other anchors). The perceiver-term is no longer hypothetical: stances can be real, specific, machine-checkable takings |
@@ -69,3 +71,30 @@ of the random in-distribution holdout and failed on its own temporal frontier
 and again with the cast present (step 18). The discipline's answer to the real
 material is a strong, reproducible null, closed against the full space of
 mechanical readings.
+
+## The stances law (steps 19-26, end of thread)
+
+"Declared-open" is a specific empirical finding, not a vague failure to
+understand a terrain. Two measurements must never be confused: **ontological
+differentiation** (the cube's distinctions are roles in a transformation) and
+**empirical identifiability** (whether a distinct, isolated signal is
+measurable on this material). The cube's distinctions need not be separable in
+the world to be meaningful; each earns usefulness only through consequences.
+
+This reframing closed the Figure/Figure-stance wedge:
+- The cube's Three Mathematics define Figure as **the difference from a
+  Ground** — so Figure inherently depends on Ground; the cube distinguishes
+  ROLES IN A TRANSFORMATION, not statistically independent components.
+- Consequently the temporal Figure/Binding stance was "declared-open" under
+  six count/span/laterality operationalizations — then **EARNED** the moment it
+  was measured AS its ground-dependence: **edge-ownership** (Rubin: the shared
+  boundary belongs to the figure; the ground continues behind), i.e. the
+  being's weighted share of the field's ensemble-turnover transitions.
+- Pearl lesson: a bad Figure discriminator may still be genuine Field or
+  Network structure — the error is asking an individual distinction to carry
+  information that exists only in the arrangement (the Rigveda weld, steps
+  12b-18): what doesn't factor as a Figure may still be the field it moves
+  through. The next falsifier is a null preserving degree, crowd-size
+  distribution and local temporal activity while disrupting cross-referent
+  temporal associations, then measuring whether Binding adds out-of-sample
+  predictive information beyond that ground.
