@@ -28,7 +28,14 @@ const ALL = confirmedVerbSet(posPrior);
 const PRON_S = new Set(["οι","τοι","ο","η","οἱ","ος","η","σφε","μιν","αυτος","αυτοι","αυτους","τον","τα","ων","το","τους","ον","ην"]);
 const WIN = 160, MIN_A = 0.05, MIN_M = 0.3;
 
-const nameOfId = (id) => { if (!id) return null; const c = id.startsWith("N:") ? id.slice(2) : id; if (g(c) && !g(c).startsWith("?")) return g(c); const s = fold(stF(c)); if (g(s) && !g(s).startsWith("?")) return g(s); const m = fold(stmF(c)); if (g(m) && !g(m).startsWith("?")) return g(m); return `?${c}`; };
+// NON-LATIN BEING RESOLUTION (2026-10-11). The glossary `g` is an ENGLISH door:
+// a Greek word with no English entry was rendered `?<surface>`, so 91% of the
+// Odyssey's beings came out as case-fragments (`?ος`, `?πον`) and the Kind
+// population clustered on morphology, not beings. A resolved nominal whose
+// surface the lemma prior knows IS a being — render its own language's lemma
+// (the source's own word) before conceding a `?` fragment. Falls back to the
+// underived surface only when neither the glossary nor the lemma prior answers.
+const nameOfId = (id) => { if (!id) return null; const c = id.startsWith("N:") ? id.slice(2) : id; if (g(c) && !g(c).startsWith("?")) return g(c); const s = fold(stF(c)); if (g(s) && !g(s).startsWith("?")) return g(s); const m = fold(stmF(c)); if (g(m) && !g(m).startsWith("?")) return g(m); const lem = LEM[stF(c)] ?? LEM[stF(stmF(c))] ?? LEM[stF(stF(c))]; if (lem) return String(lem); return `?${c}`; };
 
 export async function readGreek({ text = null, chars = 150000, out = null } = {}) {
   const raw = text ?? fs.readFileSync("/Users/mlacy/Documents/3.0/Zenodotus/11-multi-language/greek-originals/homer-odyssey.txt", "utf8").replace(/^---[\s\S]*?\n---\n/, "").slice(0, chars);
