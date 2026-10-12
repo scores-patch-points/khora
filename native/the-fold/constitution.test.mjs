@@ -40,6 +40,7 @@ import {
   addWarrantRecord,
   updateSummaryWithFold,
   mechanicalFoldLine,
+  conflationOf,
   buildSummarySystemMessage,
   buildRecordSystemMessage,
 } from "./fold.js";
@@ -177,6 +178,50 @@ test("IV.5 registers: paraphrase disclaims itself; the record is a separate bloc
   assert.ok(s1 && s2 && s1 !== s2, "the two grounds must render as two blocks, never merged");
   assert.ok(/paraphrase/i.test(s1), "the paraphrase block must disclaim itself");
   assert.ok(s2.includes("notes.txt#0-74"), "the record block must carry the addresses");
+});
+
+// ── The fold's disqualifying case: two distinct figures on one line ──────────
+// fold.js's own header names the limit: "the report put the figure at 12%"
+// and "the report put the figure at 21%" fold to the same line. A fold that
+// maps two rows whose ground values differ onto one line has conflated two
+// distinct addresses: it is typed `recall`, never a fold of record.
+
+test("a fold that maps two differing values onto one line is typed recall, never a fold of record", () => {
+  const rows = [
+    { span: "notes.txt#0-41", value: "12%" },
+    { span: "notes.txt#42-84", value: "21%" },
+  ];
+  const merged = conflationOf(rows, "the report put the figure at 12%");
+  assert.equal(merged.ok, false, "two distinct figures on one line are a conflation");
+  assert.equal(merged.typed, "recall");
+  assert.equal(merged.findings.length, 1);
+  assert.ok(merged.findings[0].spans.includes("notes.txt#0-41"), "the conflation must name both addresses");
+  assert.ok(merged.findings[0].spans.includes("notes.txt#42-84"), "the conflation must name both addresses");
+
+  const dropped = conflationOf(rows, "the report put the figure at some value");
+  assert.equal(dropped.ok, false, "a line that keeps neither value has conflated them too");
+
+  const keptApart = conflationOf(rows, "the report put the figure at 12% in spring and 21% in summer");
+  assert.equal(keptApart.ok, true, "a line that keeps both values apart is a fold, not recall");
+  assert.equal(keptApart.typed, "fold");
+});
+
+test("the store records the recall typing, and the paraphrase block discloses it", () => {
+  const rows = [
+    { span: "notes.txt#0-41", value: "12%" },
+    { span: "notes.txt#42-84", value: "21%" },
+  ];
+  let summary = emptySummary();
+  summary = updateSummaryWithFold(summary, mechanicalFoldLine("q", "a"), null, { rows });
+  assert.equal(summary.recalls.length, 1, "the conflating fold must be typed on the store");
+  assert.equal(summary.recalls[0].turn, 1);
+  assert.ok(summary.recalls[0].values.includes("12%"), "the recall must name the values it conflated");
+
+  summary = updateSummaryWithFold(summary, mechanicalFoldLine("q2", "a2"), null, { rows: [{ span: "s#1", value: "42%" }] });
+  assert.equal(summary.recalls.length, 1, "a fold that keeps its rows apart must add nothing");
+
+  const s1 = buildSummarySystemMessage({ ...summary, topic: "ports", flow: "", entities: [], context: "" });
+  assert.ok(/typed recall/i.test(s1), "a recalled line must not ride unpoliced in the paraphrase block");
 });
 
 // ── P244 socrates: a non-AGREE standing ships with its standing question ─────

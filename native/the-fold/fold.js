@@ -106,6 +106,7 @@ export function emptySummary() {
     flow: null,
     folds: [],
     records: [],
+    recalls: [],
   };
 }
 
@@ -119,6 +120,75 @@ export function emptySummary() {
  */
 export function mechanicalFoldLine(question, answer) {
   return truncate(`Q: ${question} A: ${answer}`, FOLD_MAX_CHARS);
+}
+
+// ── Conflation — the fold's disqualifying case, checked mechanically ─────────
+//
+// System 1's own header names its limit: "the report put the figure at 12%"
+// and "the report put the figure at 21%" fold to the same line, and nothing
+// in the prompt can tell them apart. A fold that maps two rows whose ground
+// values differ onto one line has conflated two distinct addresses. In the
+// paper fold this is the act the fold-and-cut theorem refuses — an isometry
+// can never identify two distinct points; in the record it is a paraphrase
+// that must never wear a fold of record's authority. Where this check flags,
+// the fold is typed `recall`: it can be recalled, it cannot be re-opened.
+//
+// `conflationOf` is shape-parameterized on purpose: the CALLER supplies the
+// rows (`span` + `value`), because extracting values from free text is
+// exactly the NLP extractor this module's purity refuses to invent
+// (extractSummaryFindings's own containment posture: "the words are there",
+// no semantic claim). Two values that differ and are not BOTH kept apart in
+// the line are conflated — one of them missing is indistinguishable from the
+// other wearing its place.
+export function conflationOf(rows, line) {
+  const list = (rows || []).filter((r) => r && r.span && r.value != null && String(r.value).trim());
+  const byValue = new Map();
+  for (const r of list) {
+    const v = String(r.value).trim().toLowerCase();
+    if (!byValue.has(v)) byValue.set(v, []);
+    byValue.get(v).push(r.span);
+  }
+  const values = [...byValue.keys()];
+  const haystack = String(line ?? "").toLowerCase();
+  const findings = [];
+  for (let i = 0; i < values.length; i++) {
+    for (let j = i + 1; j < values.length; j++) {
+      const a = values[i];
+      const b = values[j];
+      if (haystack.includes(a) && haystack.includes(b)) continue;
+      findings.push({
+        kind: "conflation",
+        spans: [...byValue.get(a), ...byValue.get(b)],
+        values: [a, b],
+        detail: `"${a}" and "${b}" fold to one line that does not keep them apart — a System 1 paraphrase, typed recall, never a fold of record`,
+      });
+    }
+  }
+  return { ok: findings.length === 0, findings, typed: findings.length ? "recall" : "fold" };
+}
+
+/**
+ * Append the typing when a fold line conflates. The store's own shape stays
+ * additive (`recalls` is a new list on the summary; the fold line itself is
+ * unchanged, so prompt paths keep their string shape). A caller with no
+ * rows — or rows the line keeps apart — changes nothing.
+ */
+function withRecallTyping(summary, rows, turnFold) {
+  if (!rows || !rows.length) return summary;
+  const { ok, findings } = conflationOf(rows, turnFold);
+  if (ok) return summary;
+  return {
+    ...summary,
+    recalls: [
+      ...(summary.recalls ?? []),
+      {
+        turn: summary.turnCount,
+        line: turnFold,
+        values: [...new Set(findings.flatMap((c) => c.values))],
+        findings,
+      },
+    ],
+  };
 }
 
 /**
@@ -230,23 +300,23 @@ function normalizeSummary(parsed, prev, folds) {
  * presentation concern (buildSummaryUpdatePrompt's own `window` parameter),
  * not a fact this store gets to bake in. See the file header.
  */
-export function updateSummaryWithFold(prev, turnFold, rawResponse) {
+export function updateSummaryWithFold(prev, turnFold, rawResponse, { rows } = {}) {
   const prevSummary = prev || emptySummary();
   const folds = [...(prevSummary.folds || []), turnFold];
   const parsed = rawResponse ? parseSummaryResponse(rawResponse) : null;
-  return normalizeSummary(parsed, prevSummary, folds);
+  return withRecallTyping(normalizeSummary(parsed, prevSummary, folds), rows, turnFold);
 }
 
 /** Carry the summary forward unchanged, appending only the fold. Store, not
- * projection — see updateSummaryWithFold's header note. */
-export function advanceSummaryFold(prev, turnFold) {
+ *  projection — see updateSummaryWithFold's header note. */
+export function advanceSummaryFold(prev, turnFold, { rows } = {}) {
   const prevSummary = prev || emptySummary();
   const folds = [...(prevSummary.folds || []), turnFold];
-  return {
-    ...prevSummary,
-    folds,
-    turnCount: prevSummary.turnCount + 1,
-  };
+  return withRecallTyping(
+    { ...prevSummary, folds, turnCount: prevSummary.turnCount + 1 },
+    rows,
+    turnFold,
+  );
 }
 
 // ── Consolidation, witnessed ──────────────────────────────────────────────────
@@ -419,6 +489,12 @@ export function buildSummarySystemMessage(summary) {
   parts.push(
     "This is a paraphrase, not a record. It cannot support a factual claim: if an answer would rest on something in here, say it would need to be checked rather than restating it as settled.",
   );
+  if (summary.recalls?.length) {
+    const last = summary.recalls[summary.recalls.length - 1];
+    parts.push(
+      `Some carried lines conflate distinct values (${last.values.join(", ")}): they are typed recall — the two readings were folded onto one line and cannot be told apart without a fresh check.`,
+    );
+  }
   parts.push(`Topic: ${summary.topic}`);
   if (summary.flow) parts.push(`Flow: ${summary.flow}`);
   if (summary.entities?.length)

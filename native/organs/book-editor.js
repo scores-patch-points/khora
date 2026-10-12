@@ -235,7 +235,7 @@ export function makeBookEditor({ lf, ask, parse = null, parser = null, medium, m
       for (const k of f.sections.slice(1)) {
         const p = piece[k];
         const hit = p?.pieces.find((pc) => (f.kind === "repeated-template" ? pc.text.split(" ").slice(0, 6).map(bare).join(" ") === key : key.split(" ").every((w) => pc.text.toLowerCase().includes(w))));
-        if (hit) out.push({ kind: f.kind === "repeated-template" ? "repeated_template" : "repeated_fact", editor: "Oliver Sacks", part: p.id, sentence: hit.text, words: f.kind === "repeated-template" ? key.split(" ") : [], detail: f.detail, licenses: f.kind === "repeated-template" ? "rewrite" : "fold" });
+        if (hit) out.push({ kind: f.kind === "repeated-template" ? "repeated_template" : "repeated_fact", editor: "Oliver Sacks", part: p.id, sentence: hit.text, words: f.kind === "repeated-template" ? key.split(" ") : [], detail: f.detail, licenses: f.kind === "repeated-template" ? "rewrite" : "cut" });
       }
     }
     return out;
@@ -413,7 +413,7 @@ export function makeBookEditor({ lf, ask, parse = null, parser = null, medium, m
     const cur = lf.currentLines(notes, store, f.leaf);
     if (!cur) return null;
     // a fold never takes a part below a part's worth of sentences (long-form's own set-down)
-    if (f.licenses === "fold" && f.addr) return cur.lines.length <= MIN_BODY_SENTENCES ? null : { edits: [{ label: f.addr, text: "", witness: "derived:fold", premise: f.lineNote }], asks: 0 };
+    if (f.licenses === "cut" && f.addr) return cur.lines.length <= MIN_BODY_SENTENCES ? null : { edits: [{ label: f.addr, text: "", witness: "derived:cut", premise: f.lineNote }], asks: 0 };
     if (f.licenses === "repair" && f.addr && f.repair) return { edits: [{ label: f.addr, text: capitalised(String(f.repair)), witness: "derived:repair", premise: f.lineNote }], asks: 0 };
     if (f.licenses === "floor" && f.source) {
       const leaf = gd.outline.leaves[f.index];
@@ -585,7 +585,7 @@ export function makeBookEditor({ lf, ask, parse = null, parser = null, medium, m
         for (const f of readWindow(out)) {
           const k = out.indexOf(f.sentence);
           if (k < 0) continue;
-          if (f.licenses === "fold" && out.length > MIN_BODY_SENTENCES) out.splice(k, 1);
+          if (f.licenses === "cut" && out.length > MIN_BODY_SENTENCES) out.splice(k, 1);
           else if (f.licenses === "repair" && f.repair && wholeSentence(capitalised(f.repair), parser)) out[k] = capitalised(f.repair);
         }
         return out;

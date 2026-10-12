@@ -65,7 +65,7 @@ const PHASES = [
   { key: "draft",     title: "The piece",   asks: "what does it say now?",                            roles: ["part"] },
   { key: "revision",  title: "Revision",    asks: "what did re-grounding and editing change?",        roles: ["revision"] },
   { key: "archon",    title: "Archons",     asks: "what does each editor find, and what does it license?", roles: ["archon"] },
-  { key: "fold",      title: "Fold",        asks: "what had no job, and left the piece?",             roles: ["fold"] },
+  { key: "cut",       title: "Cut",        asks: "what had no job, and left the piece — recorded, never destroyed?", roles: ["cut"] },
   { key: "tighten",   title: "Tighten",     asks: "what was rewritten plainly, and what was refused?", roles: ["tighten"] },
   { key: "turn",      title: "Turns",       asks: "which transitions were earned?",                   roles: ["turn"] },
   { key: "arrive",    title: "Arrival · Gebser", asks: "is the origin present in every part, none of it lost, and no single perspective with the last word?", roles: ["arrive", "concrescence"] },

@@ -375,7 +375,7 @@ export async function runPipeline({ task, groundFiles = [], groundText = null, m
     // ── 8–12. THE ARCHONS READ, THEIR REVISIONS RUN, THEY READ AGAIN ────────
     // Every rule here was taught to the archon whose charge it serves
     // (archon-rules.js). The pipeline only carries out what a finding licenses,
-    // in the order a writer would: fold what has no job, tighten what oversells,
+    // in the order a writer would: cut what has no job, tighten what oversells,
     // then earn the transitions between what remains.
     piece = checkLoop("prose", result.parts.map((p) => ({ id: p.id, pieces: (p.pieces ?? []).map((x) => ({ ...x })) })), { addsFindings: true });
     const ctx = () => ({ piece, draft, ground, task, parse: parser.ok ? parser.parse : null });
@@ -383,8 +383,8 @@ export async function runPipeline({ task, groundFiles = [], groundText = null, m
     // so they group under their own "Harry Houdini" line in the re-read loop
     // below by the same generic per-cell grouping every other archon already
     // uses -- no change needed there. They flow into the SAME licenses-driven
-    // fold action and the SAME gebserArrival(findings) gate every grid
-    // finding already does, so an apparatus leak is folded out exactly as
+    // cut action and the SAME gebserArrival(findings) gate every grid
+    // finding already does, so an apparatus leak is cut out exactly as
     // Clark's or Caro's "has no job" findings already are.
     const readAll = () => { const r = readPiece(ctx()); return { ...r, findings: [...r.findings, ...houdiniExclusivity("", ctx())] }; };
     const archonLines = new Map();
@@ -395,7 +395,7 @@ export async function runPipeline({ task, groundFiles = [], groundText = null, m
     // by construction); everything from the prose on is pathos — texture,
     // cadence, transitions — ADDITIVE ONLY: judgeLoop undoes any loop that
     // loses a fact or a question. Each pass: the archons read, the pipeline
-    // carries out what a finding licenses (fold what has no job, restore what
+    // carries out what a finding licenses (cut what has no job, restore what
     // links what the material keeps apart, repair a splice, floor a dropped
     // statement, tighten what oversells, earn the transitions), they read
     // again, and Gebser says whether the piece has arrived. Not arrived, with
@@ -411,7 +411,7 @@ export async function runPipeline({ task, groundFiles = [], groundText = null, m
     const firstRead = read.findings.length;
     const proseCalls = result.calls ?? result.records.length;
     const budget = pathosBudget ?? Math.max(1, proseCalls);
-    const totals = { passes: 0, calls: 0, folded: 0, lish: 0, tightCalls: 0, rewritesKept: 0, bridgeCalls: 0, bridgesKept: 0 };
+    const totals = { passes: 0, calls: 0, cut: 0, lish: 0, tightCalls: 0, rewritesKept: 0, bridgeCalls: 0, bridgesKept: 0 };
     let g = null, licensed = [], shapeCheck = null, stopped = null;
     for (;;) {
       const pass = ++totals.passes;
@@ -421,12 +421,13 @@ export async function runPipeline({ task, groundFiles = [], groundText = null, m
       const keepOrUndo = (name, candidate) => { const kept = checkLoop(tag(name), candidate); if (kept !== candidate) undone = true; return kept; };
       stage = "archons";
 
-      // FOLD: what Clark and Caro found has no job leaves the piece.
-      const toFold = new Map(read.findings.filter((f) => f.licenses === "fold" && f.sentence).map((f) => [f.sentence, f]));
-      piece = piece.map((p) => ({ ...p, pieces: p.pieces.filter((pc) => !toFold.has(pc.text)) }));
-      for (const [sentence, f] of toFold) write("flesh", `(folded by ${f.editor})`, "", `${f.detail} — folded out of the piece`, `archon:${f.cell}`, fleshLine.get(sentence) ?? null);
-      write("fold", `Fold: ${toFold.size} sentence(s)`, [...toFold.keys()].join("\n") || "(nothing had no job)", "licensed by Clark (restatement) and Caro (unverified)", "eoreader7:finish");
-      totals.folded += toFold.size;
+      // CUT: what had no job leaves the piece — severed from the shape, kept
+      // on the record (both sides of the cut stay on the sheet).
+      const toCut = new Map(read.findings.filter((f) => f.licenses === "cut" && f.sentence).map((f) => [f.sentence, f]));
+      piece = piece.map((p) => ({ ...p, pieces: p.pieces.filter((pc) => !toCut.has(pc.text)) }));
+      for (const [sentence, f] of toCut) write("flesh", `(cut by ${f.editor})`, "", `${f.detail} — cut out of the piece, kept on the record`, `archon:${f.cell}`, fleshLine.get(sentence) ?? null);
+      write("cut", `Cut: ${toCut.size} sentence(s)`, [...toCut.keys()].join("\n") || "(nothing had no job)", "licensed by Clark (restatement), Caro (unverified), Gornick (stance), Houdini (exclusivity)", "eoreader7:finish");
+      totals.cut += toCut.size;
 
       // RESTORE: a sentence Kidder & Todd found linking what the material keeps
       // apart is replaced by the source sentences of the statements it carries —
@@ -593,7 +594,7 @@ export async function runPipeline({ task, groundFiles = [], groundText = null, m
     const secs = Math.round((Date.now() - t0) / 1000);
     const floored = result.parts.reduce((s, p) => s + p.floored, 0);
     const facts = result.parts.reduce((s, p) => s + p.of, 0);
-    write("summary", "Run summary", `model calls: ${proseCalls + totals.calls + steered.votes.length} (steer ${steered.votes.length}, prose ${proseCalls}, tighten ${totals.tightCalls}, turns ${totals.bridgeCalls})\npathos passes: ${totals.passes} (budget ${budget} call(s); stopped: ${stopped})\nmouth votes licensed: ${steered.votes.filter((v) => v.kept).length} of ${steered.votes.length}\nseconds from prose to arrival: ${secs}\nfacts in the draft: ${facts}\nfacts at the floor: ${floored}\nparts carried whole: ${result.parts.filter((p) => p.status === "carried whole").length} of ${result.parts.length}\narchon findings, first read: ${firstRead}\nsentences folded: ${totals.folded}\nLish cuts (no model): ${totals.lish}\nrewrites kept: ${totals.rewritesKept} of ${totals.tightCalls}\nbridges kept: ${totals.bridgesKept} of ${totals.bridgeCalls}\nfindings still licensing a revision: ${licensed.length}\narrived: ${g?.arrived && (shapeCheck ? shapeCheck.ok !== false : true)}`, "measured on this run");
+    write("summary", "Run summary", `model calls: ${proseCalls + totals.calls + steered.votes.length} (steer ${steered.votes.length}, prose ${proseCalls}, tighten ${totals.tightCalls}, turns ${totals.bridgeCalls})\npathos passes: ${totals.passes} (budget ${budget} call(s); stopped: ${stopped})\nmouth votes licensed: ${steered.votes.filter((v) => v.kept).length} of ${steered.votes.length}\nseconds from prose to arrival: ${secs}\nfacts in the draft: ${facts}\nfacts at the floor: ${floored}\nparts carried whole: ${result.parts.filter((p) => p.status === "carried whole").length} of ${result.parts.length}\narchon findings, first read: ${firstRead}\nsentences cut: ${totals.cut}\nLish cuts (no model): ${totals.lish}\nrewrites kept: ${totals.rewritesKept} of ${totals.tightCalls}\nbridges kept: ${totals.bridgesKept} of ${totals.bridgeCalls}\nfindings still licensing a revision: ${licensed.length}\narrived: ${g?.arrived && (shapeCheck ? shapeCheck.ok !== false : true)}`, "measured on this run");
 
 
   };

@@ -102,7 +102,7 @@ function anchorEchoed(anchor, text) {
 /** CLARK (meso.logos, one job per paragraph; transitions that earn their
  *  keep) — TAUGHT two rules. RESTATEMENT: a sentence that carries no statement
  *  of the draft and brings no grounded word the piece has not already said has
- *  no job — licenses a fold. A sentence that instead echoes one of an
+ *  no job — licenses a cut. A sentence that instead echoes one of an
  *  ALREADY-CARRIED statement's own numbers or names has no job either, even
  *  when it also uses a grounded word from elsewhere in the material the piece
  *  has not yet said — measured live (documents/layer-resolution-check-3, part
@@ -128,7 +128,7 @@ export function clarkJobsAndTransitions(text, ctx = {}) {
     const echoesCarried = !pc.carries.length && [...carriedBefore].some((id) => anchorEchoed(anchors.get(id), pc.text));
     if (restatesSaid || echoesCarried) {
       const detail = restatesSaid ? "carries no statement and says nothing the piece has not already said" : "carries no statement and echoes, by its own name or number, a statement the piece has already carried in full";
-      out.push({ kind: "restatement", part: p.id, sentence: pc.text, detail, licenses: "fold" });
+      out.push({ kind: "restatement", part: p.id, sentence: pc.text, detail, licenses: "cut" });
     }
     for (const w of matter) said.add(w);
     for (const id of pc.carries) carriedBefore.add(id);
@@ -145,7 +145,7 @@ export function clarkJobsAndTransitions(text, ctx = {}) {
 
 /** CARO (macro.ethos, authority earned through verification) — TAUGHT: a
  *  sentence carrying no statement and holding no grounded word at all has no
- *  witness in the material. Licenses a fold. */
+ *  witness in the material. Licenses a cut. */
 export function caroUnverified(text, ctx = {}) {
   const piece = partsOf(ctx);
   if (!piece) return [];
@@ -153,7 +153,7 @@ export function caroUnverified(text, ctx = {}) {
   const out = [];
   for (const p of piece) for (const pc of p.pieces ?? []) {
     if (pc.carries.length) continue;
-    if (!draftWords(pc.text).some((w) => known.has(w))) out.push({ kind: "unverified", part: p.id, sentence: pc.text, detail: "no statement, and no word of it is in the material", licenses: "fold" });
+    if (!draftWords(pc.text).some((w) => known.has(w))) out.push({ kind: "unverified", part: p.id, sentence: pc.text, detail: "no statement, and no word of it is in the material", licenses: "cut" });
   }
   return out;
 }
@@ -235,8 +235,8 @@ function subjectOf(draft) {
  *  stance (organs/stance.js, STANCE_GIVER — an English lens, recorded as such)
  *  against the ground's, per part where parts exist: a piece that argues the
  *  opposite evaluation of the material it stands on is a pathos error, and it
- *  licenses a fold — the sentence is dropped back to its own source, the piece's
- *  rhetoric removed from it. Reported with the words that carried the stance,
+ *  licenses a cut — the sentence is dropped back to its own source (kept on the
+ *  record, never destroyed), the piece's rhetoric removed from it. Reported with the words that carried the stance,
  *  never just a sign. */
 export function gornickStance(text, ctx = {}) {
   const ground = String(ctx.ground ?? "");
@@ -265,7 +265,7 @@ export function gornickStance(text, ctx = {}) {
         detail: r.stance === "against"
           ? `the piece reads ${r.sign < 0 ? "against" : "off"} the material it stands on${words.length ? " — it carries none of the material's commitment (" + words.slice(0, 4).join(", ") + ")" : ""}`
           : "the piece lands off the being the material names (theme word only)",
-        basis: r.basis, licenses: "fold" });
+        basis: r.basis, licenses: "cut" });
     }
   }
   return out;
@@ -324,7 +324,7 @@ export function gebserArrival({ piece = [], draft = null, findings = [] } = {}) 
  *  because this one runs later, over the assembled whole, and asks only
  *  "does this look like the mouth talking about itself" — the same
  *  question, asked a second time, from a place the first exemption cannot
- *  reach. Licenses a fold (the same mechanical action Clark and Caro's
+ *  reach. Licenses a cut (the same mechanical action Clark and Caro's
  *  "has no job" findings already trigger): an apparatus leak has no job in
  *  the piece, whatever bonded it there. */
 export function houdiniExclusivity(text, ctx = {}) {
@@ -332,10 +332,10 @@ export function houdiniExclusivity(text, ctx = {}) {
   const out = [];
   if (piece) {
     for (const p of piece) for (const s of sentencesOf(p)) {
-      if (isMetaSentence(s)) out.push({ kind: "apparatus_leak", part: p.id, sentence: s, detail: "the mouth's own account of its phrasing choice or task, not the piece's content -- caught on the assembled whole, after admission, regardless of whether admission's own turn exemption let it through", licenses: "fold" });
+      if (isMetaSentence(s)) out.push({ kind: "apparatus_leak", part: p.id, sentence: s, detail: "the mouth's own account of its phrasing choice or task, not the piece's content -- caught on the assembled whole, after admission, regardless of whether admission's own turn exemption let it through", licenses: "cut" });
     }
   } else {
-    for (const s of segmentSentences(text)) if (isMetaSentence(s)) out.push({ kind: "apparatus_leak", sentence: s, detail: "the mouth's own account of its phrasing choice or task, not the piece's content", licenses: "fold" });
+    for (const s of segmentSentences(text)) if (isMetaSentence(s)) out.push({ kind: "apparatus_leak", sentence: s, detail: "the mouth's own account of its phrasing choice or task, not the piece's content", licenses: "cut" });
   }
   return out;
 }
@@ -385,7 +385,7 @@ export function williamsCausalOrder(text, ctx = {}) {
       out.push({
         kind: "cause_after_effect", part: s.part, sentence: s.text, words: [m[0].toLowerCase()],
         detail: `"${m[0]}" makes ${Math.min(...cause)} the cause of ${Math.max(...effect)}: the effect would come before its cause`,
-        licenses: s.carries.length ? "rewrite" : "fold",
+        licenses: s.carries.length ? "rewrite" : "cut",
       });
     }
   });
@@ -463,7 +463,7 @@ export function kidderToddRelations(text, ctx = {}) {
         const objs = kids.filter((a) => a.rel === "obj" || /^obl/.test(a.rel)).map(nom).filter(Boolean);
         for (const s of subj) for (const o of objs) if (s !== o && known.has(s) && known.has(o) && !together(s, o)) bad.push(`${s} —${v.lemma}→ ${o}`);
       }
-      if (bad.length) out.push({ kind: "unwitnessed_relation", part: p.id, sentence: pc.text, carries: [...(pc.carries ?? [])], detail: `links what no source sentence holds together: ${bad.join("; ")}`, licenses: (pc.carries ?? []).length ? "restore" : "fold" });
+      if (bad.length) out.push({ kind: "unwitnessed_relation", part: p.id, sentence: pc.text, carries: [...(pc.carries ?? [])], detail: `links what no source sentence holds together: ${bad.join("; ")}`, licenses: (pc.carries ?? []).length ? "restore" : "cut" });
     }
   }
   return out;
