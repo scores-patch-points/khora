@@ -1,7 +1,16 @@
+import { recognizerNominations } from "./prior-recognizer.js";
+
 const asArray = (value) => value == null ? [] : Array.isArray(value) ? value : [value];
 
 function priorHypotheses(prior, encounter, orientation) {
-  if (!prior || typeof prior.hypotheses !== "function") return [];
+  if (!prior) return [];
+  // A retained mind (EOReceivedPrior@1) is data, not code: its surface
+  // recognizers are interpreted mechanically (kernel/prior-recognizer.js) —
+  // the retained entries ride the same hypothesis channel as a function
+  // prior, so the sealed mind can change perception without carrying
+  // functions. Nomination only; witness still decides admission.
+  if (prior.schema === "EOReceivedPrior@1") return recognizerNominations(prior, encounter, orientation);
+  if (typeof prior.hypotheses !== "function") return [];
   if (typeof prior.applicability === "function" && !prior.applicability(encounter, orientation)) return [];
   return asArray(prior.hypotheses(encounter, orientation)).map((candidate) => ({
     ...candidate,

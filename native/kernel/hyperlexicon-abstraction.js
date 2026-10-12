@@ -432,7 +432,8 @@ export function serializeAbstractions(registry) {
  * later pass a measured consequence to shape the mind (priorsFromRegistry
  * ignores un-earned rows). `reading.cells` = [{ op, grain, terrain, id,
  * memberRefs, witnesses, firstAt, lastAt, meta (may carry per-referent
- * `rates`), validation }]. Pure; returns a new frozen registry.
+ * `rates`), recognizer: { mode: "surface", surfaces: { [ref]: [form, ...] } },
+ * validation }]. Pure; returns a new frozen registry.
  */
 export function recordReading(registry, reading = {}) {
   const id = String(reading.id ?? "").trim();
@@ -453,7 +454,7 @@ export function recordReading(registry, reading = {}) {
       witnesses: [...(cell.witnesses ?? [])],
       firstAt: cell.firstAt ?? null,
       lastAt: cell.lastAt ?? null,
-      meta: freeze({ ...(cell.meta ?? {}), reading: id }),
+      meta: freeze({ ...(cell.meta ?? {}), reading: id, ...(cell.recognizer ? { recognizer: freeze(cell.recognizer) } : {}) }),
     });
   }
   return r;
@@ -467,6 +468,10 @@ export function recordReading(registry, reading = {}) {
  * expectation rates ride on `row.meta.rates` when the reading declared them.
  * Returns { schema: "EOReceivedPrior@1", entries: [{ referent, standing,
  * terrain, basis, rate }] }.
+ * Each entry also carries the abstraction's retained working structure when
+ * the row declared one: `recognizer: { mode: "surface", forms }` per referent
+ * — data, JSON-portable, so the sealed mind stays function-free and the
+ * receivable prior is still interpretable by perception (prior-recognizer.js).
  */
 export function priorsFromRegistry(registry) {
   const r = normalizeAbstractionRegistry(registry);
@@ -476,12 +481,17 @@ export function priorsFromRegistry(registry) {
     if (!release.released) continue;
     for (const ref of row.memberRefs ?? []) {
       const rate = row.meta?.rates?.[ref] ?? row.meta?.rate ?? null;
+      const rec = row.meta?.recognizer;
+      const surfaces = rec?.mode === "surface" ? rec.surfaces?.[ref] : null;
       entries.push(freeze({
         referent: ref,
         standing: row.standing,
         terrain: row.terrain,
         basis: row.provenance.basis,
         ...(rate != null ? { rate } : {}),
+        ...(Array.isArray(surfaces) && surfaces.length
+          ? { recognizer: freeze({ mode: "surface", forms: freeze([...surfaces]) }) }
+          : {}),
       }));
     }
   }

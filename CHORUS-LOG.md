@@ -1041,3 +1041,17 @@ Context: user — "now implement the plan", "continue", "go". The staged diff is
 | Simon/Chekhov | tests/language-reach.test.js, eval/language-reach.mjs | 13 tests (119/119 total here); UDHR over 22 languages: language detected correctly 22/22 from words alone; non-standard English (lowercase/SMS/Singlish/IRC) yields its names and refuses verbs and laughter. | disclosed — only the 119 tests present in this stripped checkout were run; the eoreader7 suites were not |
 
 Context: user — "get us up to speed on those languages as many others as possible", "kill this capitalization obsession. that is A signal, not the signal", "it'll need to work on non-standard english like … the ethos repo", "be sure we are using all our real reading pipelines … DMD is the secret key".
+
+## 2026-10-11 — the retained mind moves the real reader (step35): data recognizers ride the export, perception interprets them; held-out recognition earns (codex/constitutive-spiral-20261010, staged: 6 files)
+fast: 6 files · 24 affected tests pass (prior-recognizer 8/8 + standing/hyperlexicon/weft focused set) · law: ok (dup S17/S96 pre-existing, renumber in its own commit)
+| lens | citation | file:line | verdict | one line |
+| Diaconis | II.23 | native/eval/the-fold/falsification/terrain-arena-step35.mjs:148-165 | clean | the earn null is 199 seeded, identity-guarded Fisher-Yates draws of the SAME retained forms scored by the same task — a cyclic shift by the list length would have been the retained mapping itself (caught, rejected); p=0.005 reproduced |
+| Feynman | III.3 | native/eval/the-fold/falsification/terrain-arena-step35.mjs:165-172 | clean | gates are declared task bars (>0.5 attribution, <0.2 null), not tuned; recall/attribution are measured on held-out clauses; the honest failing sibling (rate forecast brier 0.340 vs 0.250 blank, p=0.54) is reported, not claimed |
+| Dijkstra | S113's norm discipline | native/kernel/prior-recognizer.js:33-70 | clean | matching is \p{L}\p{N} + NFD both sides, offsets mapped back to raw via index map; a candidate slice is admitted only when its normalized form equals the entry's normalized form |
+| Holmes | S113 | native/eval/the-fold/falsification/terrain-arena-step35.mjs:93-97 | clean | the surface is evidence, the referent is the retained point — the deranged arm exists so a shared form can never be mistaken for identity |
+| Ostrom | II.23 | native/eval/the-fold/falsification/terrain-arena-step35.mjs:195-201 | clean | recall/attribution scoped to the learner set within the scene's own recorded gold; sparse-annotation limitation disclosed |
+| Alexander | expectation seam | native/kernel/perception.js:9-17 | clean | composition is one explicit schema branch; the function-prior path is byte-identical (blank reader turns unchanged) |
+| Greenberg | — | native/kernel/prior-recognizer.js (no language parameter) | clean | forms are the retained reading's own surfaces; case-insensitivity disclosed |
+| Marshall | S113 | native/kernel/prior-recognizer.js:75-80 | clean | citation resolves; law not edited |
+| Simon/Chekhov | — | native/kernel/prior-recognizer.js, native/kernel/perception.js | fixed | the recognizer is imported by perception.js (the shipped seam), exercised by prior-recognizer.test.js 8/8 + the step35 arena; the arena driver follows its terrain-arena siblings' pattern |
+clean: Kondo (nothing dead or stray added), Lévi-Strauss (not routed — no stash join)
