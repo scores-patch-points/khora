@@ -1,0 +1,39 @@
+{
+  "schema": "ApprenticeScope@1",
+  "decidedBy": "the user, 2026-10-13: learn only from the work done creating eoreader and the Fold, all of it, scoped by the PATH of each code edit (never by prompt wording)",
+  "rule": "an edit is IN iff some directory segment of its file_path matches an `in` pattern and none matches an `out` pattern or names a `tier2` directory; anything else is OUT. A turn is IN only if every one of its code edits is IN; a turn mixing IN and OUT code edits is withheld whole as withheld:mixed-scope. A turn with no code edit is judged on all its edits.",
+  "in": [
+    "^eoreader[\\w.-]*$",
+    "^khora[\\w-]*$",
+    "^janus[\\w-]*$",
+    "^penelope[\\w-]*$",
+    "^the-fold[\\w-]*$",
+    "^live_priors$",
+    "^Zenodotus$",
+    "^archon-holocracy$"
+  ],
+  "out": [
+    "^mnpd-network-audit$",
+    "^alpr-abuse-corpus$",
+    "^Eviction-Overwatch$",
+    "^caselink[\\w.-]*$",
+    "^MNPD-DFR$",
+    "^DFR[\\w.-]*$",
+    "^dfr-atlas$",
+    "^NPJ$",
+    "^holodeck[\\w.-]*$",
+    "^gmail-sender$",
+    "^legistar[\\w.-]*$",
+    "^nashville-[\\w.-]*$",
+    "^ohs-custody$",
+    "^ab$",
+    "^commoncite$",
+    "^eopm$",
+    "^eochat$"
+  ],
+  "tier2": ["eoWebLLM", "eo-teachings"],
+  "tier2Note": "default OUT until the user decides; the user confirmed 2026-10-13 that they stay OUT",
+  "codeExt": [".js", ".mjs", ".cjs", ".jsx", ".ts", ".tsx", ".py", ".rb", ".c", ".h", ".go", ".java", ".sh", ".html", ".css", ".scss"],
+  "primaryRoot": "/Users/mlacy/Documents/3.0/",
+  "primaryRootNote": "accounting only: how many IN edits sit outside the main checkout (Default Project, New Project, 2.0, /tmp worktrees). Not a rule."
+}
