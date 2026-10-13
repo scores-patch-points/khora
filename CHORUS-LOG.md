@@ -1066,3 +1066,14 @@ fast: 7 files · 49 cli tests pass; native affected 31 pass / 1 fail / 10 skippe
 | Frankfurt | — | cli/claude-code-spiral.mjs:20 | false-positive-on-review | UNLICENSED names janus's own standing in a comment, not a placeholder value |
 | Greenberg | — | cli/claude-code-spiral.mjs:87 | false-positive-on-review | subject/verb/object are janus's ReasoningSpiral@1 relation fields (reasoning-spiral.js requires them); the bridge maps ARG0/ARG1 role slots, no grammar or language assumption |
 clean: Kondo (every new export is imported by a test or a caller; nothing left dead)
+
+## 2026-10-13 — apprentice replay: the first instrument for the Fold's apprenticeship to Claude Code (claude-code-gate-and-apprentice, staged)
+fast: 3 files · 31 affected tests pass · law: WARN pre-existing duplicate S17 S96 in native/READING-SPEC.md (unchanged)
+| lens | citation | file:line | verdict | one line |
+| Diaconis | — | cli/apprentice-replay.mjs:649-653 | clean | every redeal null is seeded (mulberry32, declared --seed, per-arm offsets), B=1000 draws, p reported at its floor |
+| Feynman | — | cli/apprentice-replay.mjs:663,699 | clean | n<2 returns a disclosed note, never a silent skip |
+| Dijkstra | — | cli/apprentice-replay.mjs:129 | clean | lowercasing compares file extensions only, never text identity |
+| Holmes | — | cli/apprentice-replay.mjs:172 | clean | edits copied into forked/continued transcripts dedupe by exact tool_use id, not by surface overlap |
+| Ostrom | — | cli/tests/apprentice-replay.test.mjs:179 | clean | a refused edit is a typed gap (edit failed), never read as "the code does not exist" |
+| Simon/Chekhov | — | cli/apprentice-replay.mjs | clean | imported by its test (31); outputs refuse tracked paths (check-ignore) |
+clean: Kondo (typed gaps are recorded, nothing dead added)
