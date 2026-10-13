@@ -33,7 +33,7 @@
 // as every sibling hook.
 import fs from "node:fs";
 import { sidOf, logError } from "./claude-code-state.mjs";
-import { findMatches, foldMatches } from "./claude-code-context.mjs";
+import { findMatches, foldMatches, describeNote } from "./claude-code-context.mjs";
 import { relevantClaims } from "../native/organs/claim-relevance.js";
 
 // A system notice is not the user's own ask — claude-code-ledger.mjs's own
@@ -71,9 +71,26 @@ export function recallContextFor(ev) {
   const shown = relevant.slice(0, CAP);
   const lines = [
     `eoreader7 — ${relevant.length}/${folded.notes.length} claim(s) this session already ran through reasoning (cli/reason.mjs), surfaced because they bond to this prompt more than this session's claims typically do:`,
-    ...shown.map((n) => `- [${n.standing}, ${n.witnessCount} witness(es)] ${n.subject} ${n.rel} ${n.object}`),
+    // POLARITY (2026-10-13). This line used to be its own template —
+    // `[standing, N witness(es)] subject rel object` — which never read
+    // n.polarity, so a claim only ever DENIED on the record (claude-code-spiral
+    // `calls` saveState, polarity "-") printed as its opposite, and a "±"
+    // contested one printed as if merely asserted. The fold carried polarity
+    // all along (claude-code-context.mjs, POLARITY AND GROUNDING); this was the
+    // one place it was dropped. describeNote is the renderer that file's own
+    // header says recall and the CLI share, so a denial reads "NOT:" and a
+    // contest names both sides here exactly as it does there.
+    ...shown.map((n) => `- ${describeNote(n)}`),
   ];
   if (relevant.length > shown.length) lines.push(`… and ${relevant.length - shown.length} more relevant — node cli/claude-code-context.mjs --json for the full set.`);
+  // WHAT THE BRACKET MEANS. "ungrounded" is this ledger's own basis and no
+  // more: no reasoning run's citation (ground-cite.js citeGround — the claim's
+  // own words found at the ground it named) cleared for that claim. It is not
+  // a verdict that the claim is false, and a different instrument may have
+  // earned it (the session's janus spiral record, ~/.claude/eo-reason/spiral,
+  // carries those verdicts and is not read here). "NOT:" marks a claim only
+  // ever denied: the denial is what stands.
+  lines.push("Reading these: \"N grounded run(s)\" means that many runs' citation of the claim's ground cleared; [ungrounded] means only that none did here (stated, not cited — not that it is false, and the session's janus record may hold its own verdict); NOT: means the claim was reasoned as denied.");
   lines.push("Build on these rather than re-deriving or quietly contradicting them; if one no longer holds, say so and re-run reason.mjs.");
   return lines.join("\n");
 }
