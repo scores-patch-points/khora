@@ -1221,6 +1221,38 @@ async function handleRequest(req, res) {
     return;
   }
 
+  // POST /v1/read-across — THE SOURCES READ TOGETHER (2026-10-14). Several documents in, what they establish together
+  // out: which source names which (by carrying the other's title, no cue word), what the named text holds that the
+  // naming source never writes and other sources return to, and what is spoken of in modified ways no source holds.
+  // Model-free, same standing as /v1/read: the mouth is never consulted. Findings are LICENSED (they cleared a null);
+  // candidates are held below the line and never asserted. Every mark is a UTF-16 index into the document as sent.
+  // The body lives in native/the-fold/read-across.js so a test can call it without a server.
+  if (req.method === "POST" && req.url === "/v1/read-across") {
+    let body = "";
+    req.on("data", (c) => (body += c));
+    req.on("end", async () => {
+      let parsed;
+      try { parsed = JSON.parse(body); } catch { res.writeHead(400, { "content-type": "application/json" }); res.end(JSON.stringify({ error: "bad json" })); return; }
+      const documents = Array.isArray(parsed?.documents) ? parsed.documents : null;
+      if (!documents || documents.length < 2 || documents.some((d) => !d || typeof d.text !== "string" || !String(d.id ?? "").length)) {
+        res.writeHead(400, { "content-type": "application/json" });
+        res.end(JSON.stringify({ error: "documents is required: an array of at least two {id, title, text}" })); return;
+      }
+      const t0 = Date.now();
+      try {
+        const { readAcross } = await import("./native/the-fold/read-across.js");
+        const out = readAcross({ documents: documents.map((d) => ({ id: String(d.id), title: String(d.title ?? ""), text: d.text })), locale: parsed.language ?? undefined });
+        log(`read-across → ${documents.length} sources, ${out.findings.length} findings, ${out.candidates.length} candidates, ${Date.now() - t0}ms`);
+        res.writeHead(200, { "content-type": "application/json" });
+        res.end(JSON.stringify(out));
+      } catch (e) {
+        log(`read-across error: ${String(e.message ?? e).slice(0, 140)}`);
+        if (!res.headersSent) res.writeHead(500, { "content-type": "application/json" });
+        res.end(JSON.stringify({ error: e.message }));
+      }
+    });
+    return;
+  }
   if (req.method === "POST" && req.url === "/v1/ask") {
     let body = "";
     req.on("data", (c) => (body += c));
