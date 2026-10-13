@@ -11,7 +11,9 @@
 //
 // {
 //   "claims":      [{ "ground": "/p3", "rel": "has-type", "roles": {"ARG0": "x", "ARG1": "int"},
-//                     "polarity": "+", "force": "default"|"strict", "id": "c1", "said": "…" }],
+//                     "polarity": "+", "force": "default"|"strict", "id": "c1", "said": "…",
+//                     "premises": ["c0" | "<earlier claim's janus id>"] }],   — optional; janus's
+//                     session record (cli/claude-code-spiral.mjs) suspends this claim if a premise is withdrawn,
 //   "declare":     { "functional": [rel | {rel, role, giver}], "symmetric": [rel], "acyclic": [rel] },
 //   "identity":    "exact" (default — code-safe) | "caseless" (prose),
 //   "inferences":  [{ "kind": "same-reasoning"|"deduction"|"vacuous", "end1", "label", "end2", "relation", "yields", "ref" }],
@@ -492,6 +494,28 @@ if (declared.length || (text && hl && hlLog)) {
   } catch { /* additive only; the verdict and every field of `out` above stand without it */ }
 }
 
+// JANUS (2026-10-13): the run's claims go onto the session's ReasoningSpiral@1
+// record (cli/claude-code-spiral.mjs — wiring only; the reasoning is janus's
+// organs/reasoning-spiral.js + consequence-verdict.js), so a conclusion's
+// standing carries across runs and turns. Additive like the feed above: it
+// adds out.janus and one output line, never changes ok, errors or the exit
+// code, and a failure here is reported as out.janus.error, never thrown.
+if (sessionKey && declared.length) {
+  try {
+    const { recordRun } = await import("./claude-code-spiral.mjs");
+    out.janus = recordRun(sessionKey, { declared, inputClaims: input.claims ?? [], findings, sources: sourcesOut, declare: decl });
+  } catch (e) { out.janus = { error: String(e?.message ?? e) }; }
+}
+const janusLines = () => {
+  const j = out.janus;
+  if (!j) return [];
+  if (j.error) return [`  janus: not recorded (${j.error})`];
+  return [
+    `  janus (session record, ${j.events} event(s)): earned ${j.earned} · withheld ${j.withheld} · defeated ${j.defeated} · retained mind ${j.retainedMind}${j.superseded ? ` · ${j.superseded} superseded proposal(s) kept on the record` : ""}${j.refused.length ? ` · ${j.refused.length} move(s) refused: ${j.refused.map((r) => r.why).join(", ")}` : ""}`,
+    ...j.moved.map((m) => `  ⚠ janus: ${m.id} was supported, now ${m.standing} (${m.because.join("; ")}) — ${m.question}`),
+  ];
+};
+
 // The marker a hook reads: reasoning was handed to the engine this turn.
 try {
   const dir = path.join(os.homedir(), ".claude", "eo-reason");
@@ -528,6 +552,7 @@ else if (compact) {
   if (antFindings.length) console.log(`  ⚠ ${antFindings.length} falsification(s) from ants`);
   if (sources.length) console.log(`  sources: ${cited.length}/${sources.length} cited — open a file:line above, or the record, to see the real bytes (never printed here)`);
   console.log(`  grounds: ${JSON.stringify(grounds)}`);
+  for (const l of janusLines()) console.log(l);
   if (recordPath) console.log(`  reasoning record (real GFP notation, never prose): ${recordPath}`);
   console.log(`  (details hidden; pass --json for full report)`);
 } else {
@@ -542,6 +567,7 @@ else if (compact) {
     console.log(`  sources (${cited.length}/${sources.length} cited — the real bytes live only at the address; never copied here):`);
     for (const s of sources) console.log(citationLine(s));
   }
+  for (const l of janusLines()) console.log(l);
   if (recordPath) console.log(`  reasoning record (claims in real GFP case-marked notation, findings, source verdicts — never prose): ${recordPath}`);
 }
 // exitCode, not exit() (2026-09-25, found by adversarial testing): a large

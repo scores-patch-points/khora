@@ -1055,3 +1055,14 @@ fast: 6 files · 24 affected tests pass (prior-recognizer 8/8 + standing/hyperle
 | Marshall | S113 | native/kernel/prior-recognizer.js:75-80 | clean | citation resolves; law not edited |
 | Simon/Chekhov | — | native/kernel/prior-recognizer.js, native/kernel/perception.js | fixed | the recognizer is imported by perception.js (the shipped seam), exercised by prior-recognizer.test.js 8/8 + the step35 arena; the arena driver follows its terrain-arena siblings' pattern |
 clean: Kondo (nothing dead or stray added), Lévi-Strauss (not routed — no stash join)
+
+## 2026-10-13 — Claude Code gate restored for all sessions + janus spiral wiring + doorway one-answer rule (claude-code-gate-and-apprentice, staged)
+fast: 7 files · 49 cli tests pass; native affected 31 pass / 1 fail / 10 skipped · law: WARN pre-existing duplicate S17 S96 in native/READING-SPEC.md (unchanged)
+| lens | citation | file:line | verdict | one line |
+| Feynman | — | native/eval/barker/profiles.mjs:240 | deferred-with-reason | coding-c1 "c1-xauth-class engines, LIVE … (skipped per tool when absent)" throws ENOENT on the hard-coded venvPython /private/tmp/claude-501/venv/bin/python instead of skipping; pre-existing, environmental, outside this diff (selected only because the test file matches the basename "reason") |
+| Simon/Chekhov | — | claude-code-doorway.mjs (oneAnswer) | fixed | the Stop-block merge was tested only live; lifted into exported oneAnswer, pinned by cli/tests/claude-code-doorway.test.mjs (5 tests incl. a single-block control) |
+| Dijkstra | — | claude-code-doorway.mjs:67 | noted | steering covers Edit/Write/NotebookEdit/MultiEdit/Bash (the earlier engine's table, verbatim); a new write-capable tool bypasses PreToolUse steering until it is added here |
+| Diaconis | — | cli/tests/claude-code-recall.test.mjs:26 | false-positive-on-review | `seed` names a ledger fixture helper; no RNG, no null |
+| Frankfurt | — | cli/claude-code-spiral.mjs:20 | false-positive-on-review | UNLICENSED names janus's own standing in a comment, not a placeholder value |
+| Greenberg | — | cli/claude-code-spiral.mjs:87 | false-positive-on-review | subject/verb/object are janus's ReasoningSpiral@1 relation fields (reasoning-spiral.js requires them); the bridge maps ARG0/ARG1 role slots, no grammar or language assumption |
+clean: Kondo (every new export is imported by a test or a caller; nothing left dead)

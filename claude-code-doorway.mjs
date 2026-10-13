@@ -41,6 +41,7 @@
 // ONE ANSWER per event. An event's handlers run in table order (the Stop gate
 // reads the session state the ledger has just written). A blocking answer (a
 // Stop "block", a PreToolUse "deny") wins; otherwise the last answer given.
+// Several Stop blocks are merged into one (each gate gets one block per turn).
 //
 // TIME. The plugin gives each hook 10 s and its curl gives up at 9 s, so an
 // event's handlers share 8 s. eo-reason waits 120 s, so a reasoning run gets
@@ -56,10 +57,19 @@ const REASON = path.join(HERE, "cli", "reason.mjs");
 const EVENT_BUDGET_MS = 8000;
 const REASON_BUDGET_MS = 110000;
 
+// ORDER IS THE CONTRACT: the ledger runs first on every event (it writes the
+// session state the gates read); recall and the gates are readers that never
+// write that state, so they cannot race it. Steering is skipped, not
+// failed, under ~/.claude/eo-reason/steer.off (each gate checks it itself).
 export const HOOKS = [
   { event: "UserPromptSubmit", script: "cli/claude-code-ledger.mjs" },
+  { event: "UserPromptSubmit", script: "cli/claude-code-recall.mjs" },
+  { event: "PreToolUse", tools: new Set(["Edit", "Write", "NotebookEdit", "MultiEdit", "Bash"]), script: "cli/claude-code-steer.mjs" },
   { event: "PostToolUse", script: "cli/claude-code-ledger.mjs" },
   { event: "Stop", script: "cli/claude-code-ledger.mjs" },
+  { event: "Stop", script: "cli/claude-code-reason-gate.mjs" },
+  { event: "Stop", script: "cli/claude-code-shape-gate.mjs" },
+  { event: "Stop", script: "cli/claude-code-spiral.mjs" },
 ];
 
 export const handlersFor = (ev) =>
@@ -83,6 +93,18 @@ const blocks = (answer) => {
   try { const j = JSON.parse(answer); return j?.decision === "block" || j?.hookSpecificOutput?.permissionDecision === "deny"; } catch { return false; }
 };
 
+// The one answer for an event, from its handlers' answers in table order.
+// Every Stop gate blocks only ONCE per turn (stop_hook_active passes all of
+// them), so a second blocking gate's reason would never be seen if only the
+// first were returned: Stop blocks are merged into one, in table order. A
+// PreToolUse deny is returned as the first blocking answer; with no block,
+// the last answer given.
+export function oneAnswer(answers = []) {
+  const stopBlocks = answers.filter(blocks).map((a) => JSON.parse(a)).filter((j) => j.decision === "block");
+  if (stopBlocks.length > 1) return JSON.stringify({ decision: "block", reason: stopBlocks.map((j) => j.reason).join("\n\n---\n\n") });
+  return answers.find(blocks) ?? answers[answers.length - 1] ?? "";
+}
+
 export async function answerHook(ev, { log = () => {} } = {}) {
   const deadline = Date.now() + EVENT_BUDGET_MS;
   const answers = [];
@@ -95,7 +117,7 @@ export async function answerHook(ev, { log = () => {} } = {}) {
     if (r.timedOut || r.code !== 0) { log(`claude-code: ${h.script} ${r.timedOut ? "timed out" : `exited ${r.code}`}${r.err ? `: ${r.err.split("\n")[0]}` : ""}`); continue; }
     if (r.out.trim()) answers.push(r.out.trim());
   }
-  return answers.find(blocks) ?? answers[answers.length - 1] ?? "";
+  return oneAnswer(answers);
 }
 
 const REASON_FLAGS = new Set(["--ants", "--json", "--compact"]);
