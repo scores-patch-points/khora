@@ -144,29 +144,53 @@ export function concede(log, taskId, { trigger }) {
   };
 }
 
-/** The live register: for each (kind, rel), the latest standing —
- * "given" (has a giver, ready for declareFunctional/declareTransitive),
- * "candidate" (disclosed-flag only), or absent if every proposal for
- * that relation has since been conceded. Later entries win, per this
- * log's own append-only "supersession keeps the past, the fold reads
- * forward" rule — mirrors foldGrid's own DEF/EVA companion-matching
- * fix (latest wins within a relation's own history, not first-match). */
+/** The live register: for each (kind, rel), its standing — "given" (has a
+ * giver, ready for declareFunctional/declareTransitive), "candidate"
+ * (disclosed-flag only), or absent if every proposal for that relation
+ * has since been conceded. Later entries win, per this log's own
+ * append-only "supersession keeps the past, the fold reads forward" rule
+ * — mirrors foldGrid's own DEF/EVA companion-matching fix (latest wins
+ * within a relation's own history, not first-match).
+ *
+ * WHAT A LATER PROPOSAL MAY SUPERSEDE. Only a live CANDIDATE — one
+ * unrefuted@stage reading replacing another. A re-proposal never touches
+ * a GIVEN row (only promote() makes one, only concede() unmakes one, and
+ * concede() refuses without a trigger) nor a CONCEDED row (the concession
+ * is the record). It lands as a new candidate BESIDE them. Rows are keyed
+ * by task id, not by (kind, rel): keying by relation is what let an
+ * acquirer re-running on a new corpus overwrite a human-given declaration
+ * into a bare candidate — in neither `given` nor `conceded`, a concession
+ * with no trigger — and what made a promote() of an already-superseded
+ * candidate return ok while folding to nothing.
+ *
+ * Why beside, not a refusal at proposeCandidate: the fold is the reader of
+ * an append-only log and must be sound over ANY log it is handed (replayed,
+ * merged, appended to directly), which a write-side guard cannot promise;
+ * and the re-proposal is real material — a second source's refutation
+ * search found nothing — that recheck can still concede against the new
+ * corpus, leaving the GIVEN row for its giver to concede or not. Refusing
+ * the write would throw that disclosure away. */
 export function foldDeclarations(log) {
-  const byRel = new Map(); // "kind:rel" -> latest entry chain
+  const rows = new Map(); // task id -> row, in proposal order
   for (const e of log.entries) {
     if (e.kind === ENTRY_KINDS.PROPOSE && e.declKind) {
-      const key = `${e.declKind}:${e.rel}`;
-      byRel.set(key, { declKind: e.declKind, rel: e.rel, yields: e.yields ?? null, status: "candidate", acquisition: e.acquisition, source: e.source, taskId: e.task_id, giver: null, conceded: false });
+      for (const v of rows.values())
+        if (v.declKind === e.declKind && v.rel === e.rel && v.status === "candidate" && !v.conceded) v.superseded = true;
+      rows.set(e.task_id, { declKind: e.declKind, rel: e.rel, yields: e.yields ?? null, status: "candidate", acquisition: e.acquisition, source: e.source, taskId: e.task_id, giver: null, conceded: false, superseded: false });
     } else if (e.kind === ENTRY_KINDS.EVIDENCE && e.status === "given") {
-      for (const v of byRel.values()) if (v.taskId === e.task_id) { v.status = "given"; v.giver = e.giver; }
+      const v = rows.get(e.task_id);
+      if (v) { v.status = "given"; v.giver = e.giver; v.superseded = false; }
     } else if (e.kind === ENTRY_KINDS.EVIDENCE && e.concedes) {
-      for (const v of byRel.values()) if (v.taskId === e.concedes) { v.conceded = true; v.concessionReason = e.trigger; }
+      const v = rows.get(e.concedes);
+      if (v) { v.conceded = true; v.concessionReason = e.trigger; }
     }
   }
-  const live = [...byRel.values()].filter((v) => !v.conceded);
+  const all = [...rows.values()];
+  const live = all.filter((v) => !v.conceded && !v.superseded);
+  const strip = ({ superseded, ...v }) => v;
   return {
-    given: live.filter((v) => v.status === "given"),
-    candidates: live.filter((v) => v.status === "candidate"),
-    conceded: [...byRel.values()].filter((v) => v.conceded),
+    given: live.filter((v) => v.status === "given").map(strip),
+    candidates: live.filter((v) => v.status === "candidate").map(strip),
+    conceded: all.filter((v) => v.conceded).map(strip),
   };
 }
