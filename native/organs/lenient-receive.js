@@ -16,9 +16,16 @@
 // Import lines in the body that `before` does not already hold go to the top. Anything else outside a declaration is a
 // typed gap (`undeclared-text`), never silently kept or dropped.
 //
-// CARRY (off by default). `carryExport: true` keeps a replaced declaration exported when the answer drops `export`. Re-scored
-// offline on all 24 stored live draws, on and off: 0 draws changed (the one failure that dropped `export` also had a wrong
-// body), so by the lesson rule it is not admitted; it stays a switch and a test until a draw needs it.
+// THE SIGNATURE IS GROUND (on by default since 2026-10-13). A small mouth writes the right body under an emptier signature
+// than its ground holds: it drops `export` from a declaration the file exports, or writes `function mean()` and then uses
+// `xs`, which the ask itself names, `mean(xs)`. Two carries, each from ground and never invented:
+//   carryExport  a replaced declaration the file exports stays exported (ground = the file's own bytes)
+//   ask          an EMPTY parameter list takes the list the ask's words name for that function, `name(a, b)`, and only when
+//                the body uses one of those names (ground = the ask; an ask that names no list carries nothing)
+// Admitted by the lesson rule on one live batch (cennini-ladder, gemma2:2b, 27 draws, 2026-10-13, khora proxy, 14-161 s a
+// call): off 11/27, on 20/27, 9 draws fail->pass and 0 pass->fail, on 3 of 6 asks (clamp: export; mean, even: params);
+// a deranged control (each ask given the NEXT ask's list) recovered 1 draw, by a shared name `x`. The earlier 24 stored
+// draws changed 2 (params) and 0 (export). The ask cluster is small: 3 discordant asks is p 0.125, at its floor.
 //
 // WHAT IT DOES NOT DO. No model, no network, nothing written, no test run. It does not decide whether the result is
 // RIGHT; the test does. It never replaces more than the spans the body's own declarations name, and a name declared
@@ -35,6 +42,25 @@ const FENCE_LINE = /^[ \t]*```[\w.+-]*[ \t]*$/;
 const IMPORT_LINE = /^\s*(import\s|(?:const|let|var)\s+[\w{},\s*]+=\s*require\()/;
 const COMMENT_LINE = /^\s*(\/\/|#|\/\*|\*)/;
 const EXPORT_PREFIX = /^\s*export\s+(?:default\s+)?/;
+const PARAM_LIST = /^\s*[A-Za-z_$][\w$]*(?:\s*,\s*[A-Za-z_$][\w$]*)*\s*$/;
+const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+/** the parameter list the ask's words name for `name` — `name(a, b)` — or null; identifiers only */
+const askedParams = (ask, name) => {
+  const m = new RegExp(`(?:^|[^\\w$.])${escapeRe(name)}\\(([^)]*)\\)`).exec(String(ask ?? ""));
+  return m && PARAM_LIST.test(m[1]) ? m[1].split(",").map((s) => s.trim()) : null;
+};
+
+/** `function name()` in the snippet takes the asked list, when the body uses one of its names */
+const carryParams = (snippet, name, params) => {
+  if (!params) return null;
+  const re = new RegExp(`(\\bfunction\\s*\\*?\\s*${escapeRe(name)}\\s*)\\(\\s*\\)`);
+  const m = re.exec(snippet);
+  if (!m) return null;
+  const rest = snippet.slice(m.index + m[0].length);
+  if (!params.some((p) => new RegExp(`(?:^|[^\\w$.])${escapeRe(p)}(?![\\w$])`).test(rest))) return null;
+  return snippet.slice(0, m.index) + m[1] + `(${params.join(", ")})` + rest;
+};
 
 const gap = (kind, reason, extra = {}) => ({ ok: false, schema: RECEIVE_SCHEMA, gap: { kind, reason, ...extra } });
 
@@ -51,8 +77,9 @@ const unfence = (body) => {
 /**
  * receive({ text, before, file }) -> { ok:true, after, replaced, added, imports, via } | { ok:false, gap:{kind,reason} }
  * `text` is the model's answer; `before` the located file's current bytes; `file` its path (extension picks the syntax).
+ * `ask` the ask's own words (optional): the ground an empty parameter list is carried from.
  */
-export function receive({ text, before, file, carryExport = false } = {}) {
+export function receive({ text, before, file, carryExport = true, ask = null } = {}) {
   if (typeof before !== "string" || !file) return gap("no-file", "no located file bytes to anchor against");
   const raw = String(text ?? "");
   if (FIND_RE.test(raw)) return gap("has-find", "the answer carries a <<<FIND>>> anchor; that grammar is the door's own");
@@ -85,7 +112,9 @@ export function receive({ text, before, file, carryExport = false } = {}) {
   for (const d of added) {
     const hits = there.filter((b) => b.name === d.name);
     if (hits.length > 1) return gap("ambiguous-name", `${d.name} is declared ${hits.length} times in the file`, { name: d.name });
-    const snippet = body.slice(d.start, d.end);
+    let snippet = body.slice(d.start, d.end);
+    const withParams = carryParams(snippet, d.name, askedParams(ask, d.name));
+    if (withParams !== null) { snippet = withParams; carried.push(`params:${d.name}`); }
     if (hits.length === 1) {
       // THE FILE'S SURFACE IS GROUND: a replaced declaration the file exports stays exported (the mouth often drops `export`)
       const was = EXPORT_PREFIX.exec(before.slice(hits[0].start, hits[0].end));

@@ -2791,3 +2791,41 @@ Falsifying control: two batches whose serving records and latencies match and
 whose door-alone rates still differ by more than the paired draw floor
 supersedes this and sends the search to the prompt or the panel.
 
+
+## 112. The signature is ground: carry it, and most of what best-of-k bought was the receiver's job (2026-10-13)
+Batch: cennini-ladder, unsigned stubs, 5 draws per ask, one round, khora proxy
+(gemma2:2b resident, 14-161 s a call, slowing; the last 3 draws refused 429), 27
+served draws. Of the 15 draws that made an attempt and failed the real test, 11
+were the right body under an emptier signature than its ground holds: 5 dropped
+`export` from a declaration the file exports (clamp x4, a correct body each), 6
+wrote `function mean()` / `isEven()` and used `xs` / `n`, names the ask itself
+states (`Implement mean(xs)`). Only 4 were logic (slugify via `this.lower` on
+every draw; one formatTotal that lost its trailing zeros). lenient-receive now
+carries both from ground, never invents them: `export` from the file (carryExport,
+on), the parameter list from the ask's words, `name(a, b)`, identifiers only, and
+only when the body uses one of those names. Same bytes, off vs on: 11/27 -> 20/27,
+9 fail->pass, 0 pass->fail, on 3 of 6 asks; a deranged control (each ask given the
+next ask's list) recovered 1, through a shared name `x`. The earlier 31 stored
+draws changed 2. Best-of-k by the real test (L1): receiver off, pass@1 0.383 ->
+pass@4 0.633 (k helps on 3 asks); receiver on, 0.725 -> 0.833 (2 asks). At a
+6-ask cluster the floor is 0.0156 and needs every ask to move, so the panel can
+neither license nor close best-of-k; the honest reading is that a wider receiver
+recovers in one draw most of what k draws recovered. Also learned: the door's
+unit-fill path (code-loop DEF) applies a body, runs the test, reverts a failure
+and keeps no raw, which the ladder had counted as a lost format; it is now typed
+`door-tested-failed` (a wrong answer, not a lost one).
+Falsifying control: a held-out batch where the carry turns a passing draw into a
+failing one, or where the deranged list recovers as many draws as the asked list,
+supersedes this. The next receivable shape is `this.<helper>` inside a top-level
+function (every slugify draw): ESM `this` is undefined there, so the call can only
+throw; test it the same way, off vs on, with a wrong-world control.
+HELD-OUT REPLICATION (2026-10-14, 30 fresh draws the carry was not designed on,
+all served, 74-183 s a call under 89% swap): carry off 8/30, on 20/30, 12
+fail->pass, 0 pass->fail, the same 3 asks (mean, even, clamp); the asked list
+added 7 over export alone, the deranged list 1. Finish added 4 more on mean once
+the parameter was carried (imports sum, count), so the parts compose. Getting the
+batch served needed two proxy fixes: heimdall's expected wait counted a stale
+daemon-queue estimate with nothing in flight (12.6 s past a 12 s promise, so
+every turn was refused and none ended to refresh it; now the queue term counts
+only behind work), and /v1/code answered a pressure hold with 400, which a
+caller reads as a bad request (now 429 + Retry-After; the ladder waits on 429).

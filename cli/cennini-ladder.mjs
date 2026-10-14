@@ -36,11 +36,13 @@ const loadParse = async () => (await import("../native/the-fold/code-loop.js")).
 
 /**
  * attemptOf({ raw, before, file, parse, target, onDisk, done }) -> { attempt, via, gap }
- * The first draw's attempt, as bytes. The door's own result wins when it accepted something; otherwise the door's
+ * The first draw's attempt, as bytes. `ask` is the ask's words, the ground the receiver carries an empty parameter list from. The door's own result wins when it accepted something; otherwise the door's
  * grammar reads the answer, then the lenient receiver; a refusal is a typed gap, never an invented attempt.
  */
-export function attemptOf({ raw, before, file, parse, target, onDisk = null, done = false }) {
+export function attemptOf({ raw, before, file, parse, target, onDisk = null, done = false, ask = null, testedAndReverted = false }) {
   if (done && onDisk !== null && onDisk !== before) return { attempt: onDisk, via: "door", gap: null };
+  // the door's unit-fill path applies a body, runs the real test, reverts a failure and keeps no raw: a WRONG answer, not a lost one
+  if (testedAndReverted && !raw) return { attempt: null, via: null, gap: "door-tested-failed" };
   const p = parse(raw, { impliedPath: target });
   if (p.ok) {
     if (p.action !== "INS") return { attempt: null, via: null, gap: "read-not-patch" };
@@ -48,7 +50,7 @@ export function attemptOf({ raw, before, file, parse, target, onDisk = null, don
     if (n !== 1) return { attempt: null, via: null, gap: n === 0 ? "find-unlocated" : "find-ambiguous" };
     return { attempt: before.replace(p.find, () => p.add), via: "door-grammar", gap: null };
   }
-  const r = receive({ text: raw, before, file });
+  const r = receive({ text: raw, before, file, ask });
   return r.ok ? { attempt: r.after, via: "add-only", gap: null } : { attempt: null, via: null, gap: r.gap.kind };
 }
 
@@ -70,23 +72,34 @@ export async function ladderRun({ ask, rep = 1, base = "http://127.0.0.1:11436",
     // DOOR, under its own real test
     const t0 = Date.now();
     let door = { ok: false, ms: 0, done: false, rounds: 0, error: null, served: null }, answer = { raw: "", gap: null };
+    let waited = 0;
     try {
-      const r = await (fetchImpl ?? fetch)(`${base}/v1/code`, {
-        method: "POST", headers: { "content-type": "application/json" },
-        body: JSON.stringify({ task: ask.task, workspace, testCommand: "node test.mjs", maxRounds }),
-        signal: AbortSignal.timeout(timeoutMs),
-      });
-      if (!r.ok) throw new Error(`the code door answered ${r.status}`);
+      // A 429 is the admission gate saying "busy, come back in N s" — a refusal, not a draw. Wait what it names and ask
+      // again, inside the run's own time budget; the count of waits is kept on the record.
+      let r;
+      for (;;) {
+        r = await (fetchImpl ?? fetch)(`${base}/v1/code`, {
+          method: "POST", headers: { "content-type": "application/json" },
+          body: JSON.stringify({ task: ask.task, workspace, testCommand: "node test.mjs", maxRounds }),
+          signal: AbortSignal.timeout(timeoutMs),
+        });
+        if (r.status !== 429) break;
+        const wait = Math.max(1, Number(r.headers.get("retry-after")) || 15) * 1000;
+        if (Date.now() - t0 + wait > timeoutMs) break;
+        waited++;
+        await new Promise((ok) => setTimeout(ok, wait));
+      }
+      if (!r.ok) throw new Error(`the code door answered ${r.status}${waited ? ` after ${waited} wait(s)` : ""}`);
       const j = await r.json();
       const first = (j.rounds ?? [])[0] ?? {};
-      answer = { raw: String(first.raw ?? ""), gap: first.gap?.kind ?? null };
-      door = { ok: true, ms: Date.now() - t0, done: j.done === true, rounds: (j.rounds ?? []).length, error: null, served: j.served ?? null };
-    } catch (e) { door = { ok: false, ms: Date.now() - t0, done: false, rounds: 0, error: String(e?.message ?? e).slice(0, 160), served: null }; }
+      answer = { raw: String(first.raw ?? ""), gap: first.gap?.kind ?? null, testedAndReverted: first.applied === true && first.reverted === true };
+      door = { ok: true, ms: Date.now() - t0, done: j.done === true, rounds: (j.rounds ?? []).length, error: null, served: j.served ?? null, waited };
+    } catch (e) { door = { ok: false, ms: Date.now() - t0, done: false, rounds: 0, error: String(e?.message ?? e).slice(0, 160), served: null, waited }; }
 
     const onDisk = fs.readFileSync(abs, "utf8");
     const A = runTest(workspace);
     const world = readWorld(workspace, ask.target);
-    const got = door.ok ? attemptOf({ raw: answer.raw, before, file: abs, parse: parseFn, target: ask.target, onDisk, done: door.done }) : { attempt: null, via: null, gap: "door-failed" };
+    const got = door.ok ? attemptOf({ raw: answer.raw, before, file: abs, parse: parseFn, target: ask.target, onDisk, done: door.done, ask: ask.task, testedAndReverted: answer.testedAndReverted }) : { attempt: null, via: null, gap: "door-failed" };
 
     let R = null, F = null, C = null;
     if (got.attempt !== null) {
