@@ -5,6 +5,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { foldGrain, splitRegion, selectGrain, contactVerdict, closureOf, uSpansFromRecord, STEPS, CELLS, ROLES } from "./grain.js";
 import { makePinax, makeSpan, quoteOf, parseAddress } from "./pinax.js";
+import { STANCE_BY_MODE, cellOf } from "../kernel/cube.js";
 import { readCorpus } from "./callimachus.js";
 
 let n = 0;
@@ -153,11 +154,17 @@ test("PATTERN: Clearing, then unravel the held edge the record cannot walk and t
   assert.deepEqual(oversees.spans.slice(1), [region[0].address, region[1].address], "the chain of U spans that walks one end to the other");
   assert.equal(trace.seams.seamCount, 0, "a chain of addressed spans needs no sentence between them");
 
-  assert.equal(compose.items.length, 1);
-  const c = compose.items[0];
+  const edges = compose.items.filter((i) => !i.unrelated);
+  assert.equal(edges.length, 1, "exactly one new edge");
+  const c = edges[0];
   assert.ok(c.spans.includes(region[6].address), "the new edge");
   assert.equal(c.spans.length, 3, "addressed at both ends");
   assert.ok(compose.seams.seamCount >= 1, "Composing's new bytes are the joins");
+  // the generating cell also lays down what is absent: region[5] (Anna Cole opposed the bus route) has no relation to compose, and is still new
+  const unrelated = compose.items.filter((i) => i.unrelated);
+  assert.equal(unrelated.length, 1);
+  assert.ok(unrelated[0].spans.includes(region[5].address));
+  assert.equal(unrelated[0].attachedBy, "entity", "it shares the bus route with a held span, so it sits beside it with no seam");
   assert.equal(f.closure.closed, true);
   assert.equal(f.closure.mouthConfined, true);
   assert.equal(f.seams.contract.ok, true);
@@ -253,4 +260,82 @@ test("claimsOfWhom: W's pinned units read by the same claim reader become W span
   assert.equal(split.H.length, u.length, "the same claims, read by the same reader, are held");
   const f = foldGrain({ region: u.map((s) => ({ ...s, activation: 1 })), whom: w.spans });
   assert.equal(f.distance.witness, "claim-arrangement");
+});
+
+test("the nine cells are the engine's own stance table (kernel/cube.js), never a second copy", () => {
+  for (const [grain, row] of Object.entries(CELLS)) for (const [mode, cell] of Object.entries(row)) assert.equal(cell, STANCE_BY_MODE[mode][grain]);
+  // and they are what cellOf stamps: every operator of a mode, at each grain, carries the same stance name
+  for (const op of ["DEF", "SEG", "NUL"]) for (const grain of ["Ground", "Figure", "Pattern"]) { const c = cellOf(op, grain); assert.equal(CELLS[grain][c.mode], c.stance); }
+});
+
+test("the new is never left unshown: at every grain every absent cleared span appears in a cell other than Clearing", () => {
+  const region = U(["Maria Lopez", "endorsed", "the hiring freeze", "+", 5], ["Maria Lopez", "opposed", "the fare increase", "+", 4], ["Daniel Reyes", "vetoed", "the bus route", "+", 3], ["The council", "ratified", "the depot lease", "+", 6], ["Daniel Reyes", "questioned", "the depot lease", "+", 2], ["The budget office", "approved", "the plan", "+", 1], ["Anna Cole", "chairs", "the finance committee", "+", 2], ["The finance committee", "reviews", "the fare increase", "+", 1]);
+  const whom = W(["Maria Lopez", "endorsed", "the hiring freeze"], ["Daniel Reyes", "vetoed", "the bus route"], ["The council", "ratified", "the depot lease"], ["Anna Cole", "chairs", "the finance committee"], ...FILLER);
+  const heldAddr = new Set(region.filter((u) => [0, 2, 3, 6].includes(region.indexOf(u))).map((u) => u.address));
+  const absentAddr = region.filter((u) => !heldAddr.has(u.address)).map((u) => u.address);
+  for (const force of [null, "Figure", "Pattern"]) {
+    const f = foldGrain({ region, whom, forceGrain: force });
+    const shown = new Set(f.modes.filter((m) => m.mode !== "Clearing").flatMap((m) => m.items.flatMap((i) => i.spans)));
+    for (const a of absentAddr) assert.ok(shown.has(a), `${force ?? f.grain}: absent span ${a} is shown nowhere`);
+    assert.equal(f.closure.closed, true);
+    assert.equal(f.closure.mouthConfined, true);
+  }
+});
+
+test("forcing the grain changes the shape but not what is new: Figure and Pattern show the same absent spans", () => {
+  const region = U(["Maria Lopez", "endorsed", "the hiring freeze", "+", 5], ["Daniel Reyes", "vetoed", "the bus route", "+", 3], ["The council", "ratified", "the depot lease", "+", 6], ["Anna Cole", "chairs", "the finance committee", "+", 2], ["Noor Aziz", "audited", "the fleet", "+", 1], ["Pia Lund", "surveyed", "the lot", "+", 1]);
+  const whom = W(["Maria Lopez", "endorsed", "the hiring freeze"], ["Daniel Reyes", "vetoed", "the bus route"], ["The council", "ratified", "the depot lease"], ["Anna Cole", "chairs", "the finance committee"], ...FILLER);
+  const newOf = (f) => new Set(f.modes.filter((m) => m.mode !== "Clearing").flatMap((m) => m.items.map((i) => i.spans[i.spans.length - 1])));
+  const fig = foldGrain({ region, whom, forceGrain: "Figure" }), pat = foldGrain({ region, whom, forceGrain: "Pattern" });
+  assert.equal(fig.grain, "Figure");
+  assert.equal(pat.grain, "Pattern");
+  assert.match(pat.why, /forced to Pattern/);
+  const absent = [region[4].address, region[5].address];
+  for (const a of absent) { assert.ok(newOf(fig).has(a)); assert.ok(newOf(pat).has(a)); }
+  assert.equal(typeof fig.distance.margin, "number");
+  assert.equal(fig.distance.margin, (4 - 2) / 6);
+});
+
+test("Tracing types an echo apart from a walked chain, and puts chains first", () => {
+  const region = U(["Maria Lopez", "chairs", "the finance committee", "+", 5], ["The finance committee", "reviews", "the budget office", "+", 4], ["The budget office", "funds", "the depot lease", "+", 3], ["The council", "approved", "the depot lease", "+", 6], ["Anna Cole", "opposed", "the bus route", "+", 2], ["Daniel Reyes", "approved", "the bus route", "+", 3]);
+  const whom = W(
+    ["Maria Lopez", "chairs", "the finance committee"],
+    ["The finance committee", "reviews", "the budget office"],
+    ["The budget office", "funds", "the depot lease"],
+    ["The council", "approved", "the depot lease"],
+    ["Daniel Reyes", "approved", "the bus route"],
+    ["Maria Lopez", "oversees", "the budget office"], // walked in two hops over the record
+    ...FILLER.slice(0, 5),
+  );
+  // W spans carry the SAME text as the record's spans, so every one-hop corroboration is an echo; the oversees edge is a genuine two-hop chain
+  whom.forEach((w) => { const u = region.find((r) => r.claim.subj === w.claim.subj && r.claim.pred === w.claim.pred); if (u) w.text = u.text; });
+  const f = foldGrain({ region, whom });
+  assert.equal(f.grain, "Pattern");
+  const tracing = f.modes.find((m) => m.mode === "Tracing");
+  const chains = tracing.items.filter((i) => !i.echo), echoes = tracing.items.filter((i) => i.echo);
+  assert.ok(chains.length >= 1 && echoes.length >= 1);
+  assert.ok(chains.every((i) => i.hops >= 2));
+  assert.ok(echoes.every((i) => i.hops === 1));
+  const firstEcho = tracing.items.findIndex((i) => i.echo);
+  assert.ok(tracing.items.slice(0, firstEcho).every((i) => !i.echo), "chains come before echoes");
+});
+
+test("anchors: 'shared-most' spreads new passages over the held spans they share most with; 'first' collapses onto one; rank overrides activation", () => {
+  const held = U(["Maria Lopez", "endorsed", "the hiring freeze", "+", 5], ["Daniel Reyes", "vetoed", "the bus route", "+", 4], ["The council", "ratified", "the depot lease", "+", 3], ["Anna Cole", "chairs", "the finance committee", "+", 2]);
+  const absent = U(["Maria Lopez", "opposed", "the fare increase", "+", 1], ["Maria Lopez", "praised", "the finance committee", "+", 1], ["Daniel Reyes", "questioned", "the depot lease", "+", 1], ["The council", "reviews", "the finance committee", "+", 1]);
+  const whom = W(["Maria Lopez", "endorsed", "the hiring freeze"], ["Daniel Reyes", "vetoed", "the bus route"], ["The council", "ratified", "the depot lease"], ["Anna Cole", "chairs", "the finance committee"], ...FILLER);
+  const region = [...held, ...absent];
+  const anchorsOf = (f) => f.modes.find((m) => m.role === "generate").items.map((it) => it.spans[0]);
+  const first = foldGrain({ region, whom, anchor: "first" });
+  const best = foldGrain({ region, whom, anchor: "shared-most" });
+  assert.ok(new Set(anchorsOf(best)).size >= new Set(anchorsOf(first)).size, "shared-most never anchors on fewer distinct held spans than first");
+  // rank overrides activation: the lowest-activation absent span, given the top rank, leads
+  const low = absent[3];
+  const ranked = region.map((u) => (u === low ? { ...u, rank: 99 } : u));
+  const f = foldGrain({ region: ranked, whom, anchor: "shared-most" });
+  const gen = f.modes.find((m) => m.role === "generate").items;
+  assert.equal(gen[0].spans[gen[0].spans.length - 1], low.address, "the ranked span is laid down first");
+  // default is unchanged: no rank, anchor "first"
+  const dflt = foldGrain({ region, whom });
+  assert.deepEqual(dflt.modes.map((m) => m.items.length), first.modes.map((m) => m.items.length));
 });

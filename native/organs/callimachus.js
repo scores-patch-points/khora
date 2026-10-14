@@ -323,7 +323,14 @@ const shareOf = (a, b) => { if (!a.size || !b.size) return 0; let n = 0; for (co
  * records: [{ entry, layers, declared?: { published, modified, links } }] — Pinax records (pinax.js) for every source version collected.
  * absences: typed absence events from collection (§7.1, L6), carried through untouched.
  */
-export function readCorpus(records, { question = "", absences = [] } = {}) {
+/**
+ * `received` (optional, default null = byte-identical to before): a RECEIVED prior the vocabulary may lean on where recurrence alone cannot.
+ *   { minSurfaces?: number, posPrior?: POSPrior@1, verbForms?: Set<string>, verbs?: Set<string> }
+ * `posPrior` / `verbForms` are handed to discoverRelationVocab (a token must be attested verb-dominant, giver named by the caller);
+ * `minSurfaces` replaces the recurrence bar (default 2) and is only meaningful WITH a posPrior; `verbs` is unioned in, disclosed
+ * (the reader's own earned vocabulary from another reading is a vocabulary, not a prior). Nothing here fires unless a caller passes it.
+ */
+export function readCorpus(records, { question = "", absences = [], received = null } = {}) {
   const docs = records.map((rec) => {
     const text = textOf(rec);
     const sentences = splitSentences(text).filter((s) => s.text.trim());
@@ -338,8 +345,8 @@ export function readCorpus(records, { question = "", absences = [] } = {}) {
   // The closed class is this corpus's own Zipf head (material.js), never a stored stopword list: it walls the verb slot and the
   // complementiser slot of an embedding alike.
   const functionWords = functionWordSet(buildFrequencyTable(tokenize(corpusText)));
-  const vocab = discoverRelationVocab(corpusText, { surfaces: extractSurfaces(corpusSentences), minSurfaces: 2, functionWords });
-  const verbs = vocab.verbs;
+  const vocab = discoverRelationVocab(corpusText, { surfaces: extractSurfaces(corpusSentences), minSurfaces: received?.minSurfaces ?? 2, functionWords, ...(received?.posPrior ? { posPrior: received.posPrior } : {}), ...(received?.verbForms ? { verbForms: received.verbForms } : {}) });
+  const verbs = received?.verbs ? new Set([...vocab.verbs, ...received.verbs]) : vocab.verbs;
   // functionWords walls the VERB slot (vocab discovery) only: passed to extraction it ends an object at its next closed-class word and
   // cuts the clause an embedding is made of ("said the budget office approved the plan" → object "the budget office approved").
   const rel = (str) => extractRelations(str, { verbs, nounPhraseSubjects: true });
