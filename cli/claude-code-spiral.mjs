@@ -80,15 +80,16 @@ const reasoningAt = (...a) => need().reasoningAt(...a);
 const consequenceVerdict = (...a) => need().consequenceVerdict(...a);
 
 // The record's location and reader live in cli/spiral-read.mjs (so recall can read the same record).
-import { SPIRAL_DIR, safeSid, spiralFile, loadSpiral } from "./spiral-read.mjs";
-export { SPIRAL_DIR, spiralFile, loadSpiral };
+import { SPIRAL_DIR, safeSid, spiralFile, loadSpiral, viewOf, sweptLog, staleWitnesses } from "./spiral-read.mjs";
+import { pinWitness, parseAddress } from "./witness-pin.mjs";
+export { SPIRAL_DIR, spiralFile, loadSpiral, sweptLog, staleWitnesses };
 
 // Identity (claimKey/claimId, slotOf, revisionKind) lives in cli/claim-identity.mjs — ONE place, shared with the
 // ledger's claim lines, so the spiral node id and the ledger's `claimId` are the same string for one claim.
 const FALSIFY_KIND = /falsif|strict|ant_/;
 
 /** Pure: one reason.mjs run → the spiral log with this run's events appended. */
-export function spiralEventsOf(log, run, { forWhom, at = new Date().toISOString(), readGround = null } = {}) {
+export function spiralEventsOf(log, run, { forWhom, at = new Date().toISOString(), readGround = null, pin = null } = {}) {
   const { declared = [], inputClaims = [], findings = [], sources = [], declare = {} } = run;
   const functional = functionalRels(declare);
   const localKey = new Map(declared.map((c, i) => [str(inputClaims[i]?.id ?? c.id), claimId(c)]));
@@ -121,10 +122,18 @@ export function spiralEventsOf(log, run, { forWhom, at = new Date().toISOString(
       ...(reading?.witness ? [reading.witness] : []),
       ...(src.verdict === "cited" && Number.isInteger(src.line) && src.guard?.reachable !== false ? [`${src.file ?? c.ground}#${src.line}-${src.line + 1}`] : []),
     ];
+    // Each witness's unit and content pin (cli/witness-pin.mjs), beside the address janus holds. `pin` is injected:
+    // this function stays pure and a caller with no filesystem (a test of the projection) passes none.
+    const pins = typeof pin === "function" ? witnesses.map((w) => {
+      const a = parseAddress(w);
+      if (!a) return null;
+      const byte = w === reading?.witness;
+      return pin({ address: w, unit: byte ? "byte" : "line", file: a.file, from: a.from, to: byte ? a.to : a.from });
+    }).filter(Boolean) : [];
     const premises = (inputClaims[i]?.premises ?? []).map((p) => idOf(localKey.get(str(p)) ?? str(p))).filter(Boolean);
     const propose = (pid) => {
       out = appendReasoning(out, { kind: "propose", id: pid, relation: { subject: str(c.roles?.ARG0), verb: str(c.rel), object: str(c.roles?.ARG1) },
-        forWhom, premises, witnesses, claim: here, said: inputClaims[i]?.said ?? null, at,
+        forWhom, premises, witnesses, ...(pins.length ? { witnessPins: pins } : {}), claim: here, said: inputClaims[i]?.said ?? null, at,
         ...(run.ledger?.claims?.[i] ? { ledger: { run: run.ledger.runId ?? null, line: run.ledger.claims[i] } } : {}) });
       noteProposal(pid, here);
       id = pid;
@@ -154,7 +163,7 @@ export function spiralEventsOf(log, run, { forWhom, at = new Date().toISOString(
       : { verdict: "unresolved", method: "deduction", by: "khora:lintGfp", basis: "coherent with this run's claims; not tested by any instrument" };
     const prior = proposed.assessment;
     if (prior && prior.verdict === verdict.verdict && prior.method === verdict.method && proposed.standing !== "withdrawn") return; // a restatement is not a re-assessment
-    out = appendReasoning(out, { kind: "assess", id, ...verdict, witnesses, at });
+    out = appendReasoning(out, { kind: "assess", id, ...verdict, witnesses, ...(pins.length ? { witnessPins: pins } : {}), at });
   });
   return out;
 }
@@ -210,14 +219,15 @@ export function codeGroundReader() {
   };
 }
 
-/** What this stretch of the record moved: conclusions SUPPORTED at `fromSeq` that no longer are. */
+/** What this stretch of the record moved: conclusions SUPPORTED at `fromSeq` that no longer are. A claim whose
+ *  witness changed reads `stale` (cli/spiral-read.mjs viewOf), naming the span. */
 export function movedSince(log, fromSeq) {
-  const before = new Map(reasoningAt(log, { asOf: fromSeq }).claims.map((n) => [n.id, n.standing]));
-  const now = reasoningAt(log);
-  const question = new Map(now.openings.map((o) => [o.id, o.question]));
-  return now.claims
-    .filter((n) => before.get(n.id) === "supported" && ["suspended", "stale", "refuted"].includes(n.standing))
-    .map((n) => ({ id: n.id, standing: n.standing, because: n.because, question: question.get(n.id) ?? "What now supports or refutes this?" }));
+  const before = viewOf(log, { asOf: fromSeq });
+  const now = viewOf(log);
+  const question = new Map(reasoningAt(log).openings.map((o) => [o.id, o.question]));
+  return [...now.values()]
+    .filter((n) => before.get(n.id)?.standing === "supported" && ["suspended", "stale", "refuted"].includes(n.standing))
+    .map((n) => ({ id: n.id, standing: n.standing, because: n.because, question: n.witnessChanged ? "Re-read that span and re-assess: what do the bytes there say now?" : (question.get(n.id) ?? "What now supports or refutes this?") }));
 }
 
 // ── PENDING VERDICTS (nesting-fix J D4) ─────────────────────────────────────
@@ -242,7 +252,7 @@ const ADVERSE = new Set(["suspended", "stale", "refuted"]);
 function sinceSeq(log, id, standing) {
   let since = log.length;
   for (let k = log.length - 1; k >= 0; k--) {
-    const n = reasoningAt(log, { asOf: k }).claims.find((x) => x.id === id);
+    const n = viewOf(log, { asOf: k }).get(id);
     if (n?.standing !== standing) break;
     since = k;
   }
@@ -270,7 +280,7 @@ export function pendingDecision(pending, log, turnStart) {
     if (first >= 0) for (const m of movedSince(log, first)) { const v = verdictOf(log, m); if (!delivered.has(v.key) && !cands.has(v.key)) cands.set(v.key, { ...v, carried: false }); }
   }
   if (!cands.size) return { reason: null, deliver: [], resolved: [] };
-  const now = new Map(reasoningAt(log).claims.map((n) => [n.id, n]));
+  const now = viewOf(log);
   const live = [], resolved = [];
   for (const v of cands.values()) { const n = now.get(v.id); (n && ADVERSE.has(n.standing) && n.standing === v.standing ? live : resolved).push(v); }
   return {
@@ -284,7 +294,10 @@ export function recordRun(sid, run, { at = new Date().toISOString() } = {}) {
   // Absent layer: nothing to record on and no verdict to give — a TYPED result, never an exception, never an OK.
   if (spiralLayer.state !== "present") return { ...layerRecord(spiralLayer), recorded: false, line: absentLine(spiralLayer) };
   const log = loadSpiral(sid);
-  const next = spiralEventsOf(log, run, { forWhom: `session:${safeSid(sid)}`, at, readGround: codeGroundReader() });
+  // Witnesses whose pinned bytes changed since their assessment are reopened FIRST (append-only, with the reason),
+  // so a restatement below re-earns the claim on the bytes as they are now (nesting-fix J D8).
+  const swept = sweptLog(log, { at }).log;
+  const next = spiralEventsOf(swept, run, { forWhom: `session:${safeSid(sid)}`, at, readGround: codeGroundReader(), pin: pinWitness });
   if (next.length > log.length) {
     fs.mkdirSync(SPIRAL_DIR, { recursive: true });
     fs.appendFileSync(spiralFile(sid), next.slice(log.length).map((e) => JSON.stringify(e)).join("\n") + "\n");
@@ -340,7 +353,7 @@ if (isMain) {
       // stop_hook_active does NOT pass this gate (J D4): the guard against a loop is that each verdict is delivered
       // once — recorded before the answer is written, so a verdict can never be spoken twice.
       const sid = sidOf(ev);
-      const d = pendingDecision(loadPending(sid), loadSpiral(sid), loadState(sid).turnStart);
+      const d = pendingDecision(loadPending(sid), sweptLog(loadSpiral(sid)).log, loadState(sid).turnStart); // virtual sweep: a changed witness is heard
       const at = new Date().toISOString();
       appendPending(sid, [...d.deliver.map((key) => ({ kind: "delivered", key, at, viaActiveStop: !!ev.stop_hook_active })),
         ...d.resolved.map((key) => ({ kind: "delivered", key, at, outcome: "resolved" }))]);
