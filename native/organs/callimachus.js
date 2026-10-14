@@ -29,7 +29,7 @@ import { discoverRelationVocab, extractRelations } from "../adapters/text/relati
 import { tokenize, buildFrequencyTable, functionWordSet } from "../adapters/text/material.js";
 import { offsetMap, convertOffset, formatAddress } from "./pinax.js";
 import { bylineOf } from "./byline.js";
-import { isIndexUrl } from "./index-source.js";
+import { isIndexUrl, footnotesOf, marksOf, trailOf } from "./index-source.js";
 
 export const WINNOW_K = 24;
 export const WINNOW_W = 8;
@@ -552,7 +552,22 @@ export function readCorpus(records, { question = "", absences = [] } = {}) {
           no_named_giver: b.no_named_giver, ambiguous_article: b.ambiguous_article,
         };
       } catch { byline = null; }
-      return { ...r.entry, declared: r.declared ?? null, title: titles[r.entry.id] ?? null, role, byline };
+      // THE POINTERS of an index page: every sentence that stands over footnotes with an origin URL, as a text-layer address plus the
+      // origin hrefs (index-source.js trailOf). The pages those hrefs name, once pinned, are matched back to the sentence by typed slots
+      // (pointer-match.js). Empty for a page that is not an index.
+      let index_trail = [];
+      if (role === "index") {
+        try {
+          const d = docs.find((x) => x.rec === r), raw = dec.decode(r.layers.raw);
+          const fn = footnotesOf(raw), marks = marksOf(d.text);
+          for (const sn of d.sentences) {
+            const s0 = sn.offset, s1 = sn.offset + sn.text.trimEnd().length;
+            const t = trailOf({ text: d.text, footnotes: fn, marks, span: [s0, s1], pinax: r.entry.id });
+            if (t.follow.length) index_trail.push({ span: formatAddress({ pinax: r.entry.id, layer: "text", layerSha256: r.entry.text.sha256, start: convertOffset(d.map, "u", "b", s0), end: convertOffset(d.map, "u", "b", s1) }), text: d.text.slice(s0, s1), hrefs: t.follow.map((f) => f.href), notes: t.notes });
+          }
+        } catch { index_trail = []; }
+      }
+      return { ...r.entry, declared: r.declared ?? null, title: titles[r.entry.id] ?? null, role, byline, index_trail };
     }),
     entities: referents.map((r) => ({ ...r, sources: [...r.sources] })),
     unadmitted_surfaces: unadmitted,

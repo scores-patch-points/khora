@@ -74,7 +74,7 @@ export function candidatesOf(record, fixity) {
 }
 
 /** The witness table: one column per witness, one boolean or count per candidate. Columns are grouped by layer. */
-function witnesses(cands, { question, record }) {
+function witnesses(cands, { question, record, pointed = null }) {
   const focus = new Set(question.focus ?? []);
   const rel = stemOf(question.reading?.relation?.lemma);
   const qWords = new Set((question.reading?.words ?? []).filter((w) => w.length >= 4).map(stemOf));
@@ -102,6 +102,9 @@ function witnesses(cands, { question, record }) {
       admits: cands.map(admitsOf),
       relation: cands.map((a) => !!rel && stemOf(a.relation?.pred) === rel),
       words: cands.map((a) => [...new Set([...contentWords(a._sentence ?? "")].map(stemOf))].filter((s) => qWords.has(s))),
+      // POINTED (pointer-match.js): an index sentence that carries the question's figures led here, matched slot to slot against the
+      // origin sentence. The index is the query; this sentence is the source it found.
+      pointed: cands.map((a) => !!pointed?.has(a.id)),
     },
     logos: {
       chains: cands.map((a) => a.independent_count ?? 1),
@@ -134,7 +137,7 @@ function scoreWith(cols, layers, n, prior = NO_PRIOR) {
     }
     // INS (what kind may stand here) only qualifies a binding SIG or CON made: the kind witness counts for a candidate only when a
     // content witness (anchor, actor, relation, words) already ties it to what the question is about. A date alone answers no "when".
-    const bound = (i) => cols.perception.anchor[i] || cols.perception.actor[i] || cols.perception.relation[i] || (cols.perception.words[i]?.length ?? 0) > 0;
+    const bound = (i) => cols.perception.anchor[i] || cols.perception.pointed?.[i] || cols.perception.actor[i] || cols.perception.relation[i] || (cols.perception.words[i]?.length ?? 0) > 0;
     const w = surprisal(col);
     col.forEach((v, i) => { if (v && (name !== "admits" || bound(i))) { s[i] += w; why[i][`perception.${name}`] = +w.toFixed(3); } });
   }
@@ -182,7 +185,7 @@ export function cornerOf({ evidence, contest, denies = false }) {
 
 // ---- the ladder ---------------------------------------------------------------------------------------------------------------------
 
-export async function answerLadder(record, { question, slice, grammar, telling = null, fixity = {}, seed = 20261014, whom = VOID_READER } = {}) {
+export async function answerLadder(record, { question, slice, grammar, telling = null, fixity = {}, seed = 20261014, whom = VOID_READER, pointed = null } = {}) {
   const reading = whom && !whom.empty;
   const experiencer = requireExperiencer({ who: "the asker", read: reading ? `${question.id} over ${record.sources.length} pinned pages, for a reader holding ${whom.size} units (${whom.pinax.join(", ")})` : `${question.id} over ${record.sources.length} pinned pages`, revision: null });
   const realize = realizer(record, { slice, grammar });
@@ -197,7 +200,7 @@ export async function answerLadder(record, { question, slice, grammar, telling =
   const prior = reading ? { m: whom.size, df: whomStemDf(whom) } : NO_PRIOR;
   const told = (ss) => (reading ? ss.filter((s) => !sentenceHeld(whom, s)) : ss);
   const n = cands.length;
-  const cols = witnesses(cands, { question, record });
+  const cols = witnesses(cands, { question, record, pointed });
   const frameOf = new Map();
   for (const a of record.atoms) if (a.frame_id) frameOf.set(a.pinax, a.frame_id);
 
@@ -259,7 +262,7 @@ export async function answerLadder(record, { question, slice, grammar, telling =
   const denies = (lead) => negOnly || (question.form === "polar" && lead?.relation?.polarity === "-");
   const nothing = async () => { const s = grammar.constructions.nothing_carries ? grammar.finish(grammar.constructions.nothing_carries({}), [question.id]) : null; return s && !lintSentence(s, grammar).length ? [s] : []; };
   // The reader already holds everything that carries the question: for this reader the void is held, not empty.
-  const allHeld = reading && evidence <= 0 && held.length > 0 && Math.max(0, ...scoreWith(witnesses(all, { question, record }), ["perception"], all.length).s) > 0;
+  const allHeld = reading && evidence <= 0 && held.length > 0 && Math.max(0, ...scoreWith(witnesses(all, { question, record, pointed }), ["perception"], all.length).s) > 0;
   if (evidence <= 0) {
     const s = allHeld && grammar.constructions.already_held ? (() => { const x = grammar.finish(grammar.constructions.already_held({}), [question.id]); return lintSentence(x, grammar).length ? [] : [x]; })() : await nothing();
     const why = allHeld ? `held: every candidate that carries the question is already in this reader's W (${held.length} held)` : "no candidate carries any perception witness: the question's figures, kind, relation and words are absent from the record (a question in another language than the record's needs a bilingual lexicon, which is not on disk)";

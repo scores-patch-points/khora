@@ -14,6 +14,7 @@ import { fileURLToPath } from "node:url";
 import { makePinax, checkFixity, quoteOf, makeSpan, parseAddress, SIGLA } from "../organs/pinax.js";
 import { readCorpus, claimSheet, dossier, extractText, declaredOf, queriesFrom } from "../organs/callimachus.js";
 import { answerLadder, candidatesOf, seamsByStage } from "../organs/answer-ladder.js";
+import { pointedAtoms } from "../organs/pointer-match.js";
 import { readWhom, restrictWhom, VOID_READER } from "../organs/whom.js";
 import { dmdWindow } from "../kernel/activation.js";
 import { readdirSync, statSync } from "node:fs";
@@ -177,22 +178,24 @@ const folds = [];
 const creaseOf = (lad) => ({ leads: lad.stages.slice(0, 3).map((st) => st.lead?.atom ?? null), copied: [...new Set(lad.stages.slice(0, 3).flatMap((st) => st.sentences.flatMap((s) => s.segs.filter((x) => x.kind === "source").map((x) => x.address))))].sort() });
 const answerMd = [];
 const ladders = [];
-let parserModel = null;
+let parserModel = null, pointed = null;
 for (const ask of asks) {
   for (const l of langs) {
     const qg = (await import(`../adapters/text/question-grammar.${/^[¿¡]|[áéíóúñ]/i.test(ask) ? "es" : "en"}.js`)).default;
-    if (qg.lang === "en" && !parserModel) { const { loadModel } = await import("../adapters/text/english-parser.js"); parserModel = loadModel(JSON.parse(readFileSync(join(here, "../priors/parser-eng-ewt.json"), "utf8"))); }
+    if (qg.lang === "en" && !parserModel) { const { loadModel } = await import("../adapters/text/english-parser.js"); parserModel = loadModel(JSON.parse(readFileSync(join(here, "../priors/parser-eng-ewt.json"), "utf8")), { morphology: JSON.parse(readFileSync(join(here, "../priors/morphology-eng.json"), "utf8")) }); }
     const reading = qg.readQuestion(ask, { model: parserModel });
+    // The index as QUERY: origin sentences an index sentence points at (footnote → pinned page), matched slot to slot (pointer-match.js).
+    if (!pointed && parserModel && record.sources.some((x) => x.role === "index" && x.index_trail?.length)) pointed = pointedAtoms(record, { model: parserModel });
     const qv = questionVoid(reading, record);
     const t = l === langs[0] ? telling : await cubeTelling(record, { slice, interp, fixity: verdicts, grammar: grammars[l] });
-    const { reader, ...lad } = await answerLadder(record, { question: qv, slice, grammar: grammars[l], telling: t, fixity: verdicts, whom });
+    const { reader, ...lad } = await answerLadder(record, { question: qv, slice, grammar: grammars[l], telling: t, fixity: verdicts, whom, pointed });
     // The DMD window over the READER: the shallowest depth of recent thread that reproduces the whole-W fold (depth 0 = the void reader).
     // The ladder is async and dmdWindow's derive is not, so each depth's fold is computed in order until one agrees, then measured.
     let dmd = null;
     if (!whom.empty) {
       const cache = new Map([[whom.size, JSON.stringify(creaseOf(lad))]]);
       for (let d = 0; d < whom.size; d++) {
-        const r = await answerLadder(record, { question: qv, slice, grammar: grammars[l], telling: t, fixity: verdicts, whom: restrictWhom(whom, d) });
+        const r = await answerLadder(record, { question: qv, slice, grammar: grammars[l], telling: t, fixity: verdicts, whom: restrictWhom(whom, d), pointed });
         cache.set(d, JSON.stringify(creaseOf(r)));
         if (cache.get(d) === cache.get(whom.size)) break;
       }
