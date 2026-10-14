@@ -19,8 +19,11 @@
 //                                equations, order), its verdict out, for any
 //                                caller. Flags in x-er7-reason-flags (--ants
 //                                --json --compact), the caller's working
-//                                directory in x-er7-cwd, reason.mjs's exit
-//                                code back in x-er7-exit.
+//                                directory in x-er7-cwd, its Claude Code
+//                                session in x-er7-session (the run is
+//                                recorded on THAT session's spiral and
+//                                ledger; none sent = no session, typed),
+//                                reason.mjs's exit code back in x-er7-exit.
 //   GET  /v1/reason              reason.mjs's own header: the input format,
 //                                stated once, where the engine keeps it.
 //   GET  /v1/surface              the citation/grounding report cli/reason-
