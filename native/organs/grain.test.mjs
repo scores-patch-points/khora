@@ -186,3 +186,28 @@ test("uSpansFromRecord: a real Callimachus record becomes spans whose claim text
   assert.equal(contactVerdict(w, spans).case, "CONTRADICTED");
   assert.equal(contactVerdict(w, spans).refused[0].address, bus.address);
 });
+
+test("claimsOfWhom: W's pinned units read by the same claim reader become W spans; a thread too short to admit a claim is a typed absence", async () => {
+  const { claimsOfWhom } = await import("./holdings.js");
+  const BULK = "the lantern of the harbor was in the old lantern and the harbor was near it. ".repeat(40);
+  const thread = "Daniel Reyes said the council delayed the vote. Maria Lopez approved the hiring freeze. Maria Lopez opposed the fare increase. The council approved the depot lease in March 2026. Daniel Reyes approved the bus route.";
+  const pin = async (url, text) => Object.assign(await makePinax({ url, retrievedAt: "2026-10-14T00:00:00Z", raw: `<p>${text}</p>`, text: `${text}\n\n${BULK}` }), { declared: { published: "2026-10-01", modified: null, links: [] } });
+  const rec = await pin("https://w.test/thread", thread);
+  const slice = async (address) => { const p = parseAddress(address); if (p.pinax !== rec.entry.id) return null; const sp = await makeSpan(rec, p.layer, p.start, p.end); const q = sp.ok === false ? null : await quoteOf(sp, rec); return q?.ok ? q.text : null; };
+  const w = await claimsOfWhom([rec], { slice });
+  assert.ok(w.spans.length >= 3, w.why ?? "");
+  assert.ok(w.spans.every((s) => s.side === "W" && s.claim.subj && s.address.startsWith(`${rec.entry.id}/`)), "every W span is addressed into W's own bytes");
+
+  const none = await claimsOfWhom([], { slice });
+  assert.deepEqual(none.spans, []);
+  assert.match(none.why, /void reader/);
+
+  // the reader's own claims, folded against a record that holds the same claims: held by claim arrangement, and typed as that witness
+  const uRec = await pin("https://u.test/1", thread);
+  const uSlice = async (address) => { const p = parseAddress(address); if (p.pinax !== uRec.entry.id) return null; const sp = await makeSpan(uRec, p.layer, p.start, p.end); const q = sp.ok === false ? null : await quoteOf(sp, uRec); return q?.ok ? q.text : null; };
+  const u = await uSpansFromRecord(readCorpus([uRec], { question: "Who approved the depot lease?" }), { slice: uSlice, activation: new Map() });
+  const split = splitRegion(u.map((s) => ({ ...s, activation: 1 })), w.spans);
+  assert.equal(split.H.length, u.length, "the same claims, read by the same reader, are held");
+  const f = foldGrain({ region: u.map((s) => ({ ...s, activation: 1 })), whom: w.spans });
+  assert.equal(f.distance.witness, "claim-arrangement");
+});

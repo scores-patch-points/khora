@@ -16,9 +16,9 @@
 //   seamReport(sentences)        → bytes by kind, addressedShare, seamDensity, mouthShare, each seam with the spans it joins, and the
 //                                  contract verdict (an unaddressed source segment, or a kind that is neither, is a violation).
 //   creaseEntry({...})           → one append-only record of a fold: whom, question, nulls, seams, distance. The sheet remembers.
-//   untouchedBy(whom, touched)   → the whom's holdings no fold ever touched (W is observable, hence forgeable).
+//   untouchedBy(holdings, touched) → the whom's holdings no fold ever touched (W is observable, hence forgeable).
 //
-// The whom itself (declareWhom, distanceOf, partitionByWhom) lives in organs/whom.js.
+// The holdings themselves (declareHoldings, distanceOf, partitionByHoldings) live in organs/holdings.js.
 //
 // WHAT IS NOT HERE (named, not implied). This file builds the entry, not the store: no ledger is kept, so nothing yet measures a whom
 // against earlier creases (CALLIMACHUS-SHAPE.md H4: recurring seams locate U's gaps).
@@ -92,11 +92,11 @@ export function seamReport(sentences = []) {
  * One crease: a fold, as it was held. Append-only by construction (frozen, no id minted from a clock). The whom is recorded by what
  * it held — counts and giver, never the corpus — so the ledger can be shared where the whom's own thread cannot.
  */
-export function creaseEntry({ whom, question, nulls = {}, report, distance = null, output = null } = {}) {
-  if (!whom || !whom.told) throw new Error("creaseEntry: a declared whom is required");
+export function creaseEntry({ holdings: h, question, nulls = {}, report, distance = null, output = null } = {}) {
+  if (!h || !h.told) throw new Error("creaseEntry: declared holdings are required");
   if (!report || !report.contract) throw new Error("creaseEntry: a seamReport is required");
   return Object.freeze({
-    whom: { giver: whom.giver, kind: whom.kind, holdings: whom.holdings, empty: whom.empty },
+    whom: { giver: h.giver, kind: h.kind, holdings: h.holdings, empty: h.empty },
     question: question ?? null,
     nulls: Object.freeze({ ...nulls }),
     seams: { count: report.seamCount, mouthSeams: report.mouthSeams, seamDensity: report.seamDensity, addressedShare: report.addressedShare, mouthShare: report.mouthShare },
@@ -111,8 +111,8 @@ export function creaseEntry({ whom, question, nulls = {}, report, distance = nul
  * fold. A span in W that the ledger has never seen a fold touch is suspicious in exactly the way an untouched span in U is. Returns
  * the keys; it does not decide what to do about them.
  */
-export function untouchedBy(whom, touchedKeys = new Set()) {
-  if (!whom || !whom.told) throw new Error("untouchedBy: a declared whom is required");
+export function untouchedBy(holdings, touchedKeys = new Set()) {
+  if (!holdings || !holdings.told) throw new Error("untouchedBy: declared holdings are required");
   const touched = touchedKeys instanceof Set ? touchedKeys : new Set(touchedKeys);
-  return [...whom.told.keys()].filter((k) => !touched.has(k));
+  return [...holdings.told.keys()].filter((k) => !touched.has(k));
 }

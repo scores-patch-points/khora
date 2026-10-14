@@ -289,7 +289,8 @@ export function foldGrain({ region = [], whom = [], survives = (u) => (u.activat
   });
   return {
     grain, why,
-    distance: { region: region.length, held: split.H.length, absent: split.A.length, share: split.distance, null: split.null },
+    // "held" here is a CLAIM-ARRANGEMENT match (same subject, same predicate), a different witness from byte containment (twin-reader's heldIn).
+    distance: { region: region.length, held: split.H.length, absent: split.A.length, share: split.distance, witness: "claim-arrangement", null: split.null },
     contacts: pairs.map((p) => ({ w: p.w.address, case: p.case, standing: p.standing, holds: p.holds.map((u) => u.address), refused: p.refused.map((u) => u.address), undetermined: p.undetermined.map((u) => u.address) })),
     modes,
     closure: closureOf(modes),
@@ -297,8 +298,8 @@ export function foldGrain({ region = [], whom = [], survives = (u) => (u.activat
   };
 }
 
-/** U spans from a Callimachus record: each claim atom as a span, its subject/object read from their addresses. `activation` maps atom id → score. */
-export async function uSpansFromRecord(record, { slice, activation = new Map() } = {}) {
+/** Spans from a Callimachus record: each claim atom as a span, its subject/object read from their addresses. `activation` maps atom id → score. */
+export async function spansFromRecord(record, { slice, activation = new Map(), side = "U" } = {}) {
   const out = [];
   for (const a of record.atoms) {
     const r = a.relation;
@@ -307,7 +308,10 @@ export async function uSpansFromRecord(record, { slice, activation = new Map() }
     const subj = r.subj_surface ? await slice(r.subj_surface) : null;
     const obj = r.obj_surface ? await slice(r.obj_surface) : a._object ?? null;
     if (!text || !subj) continue;
-    out.push({ id: a.id, address: a.span, text, side: "U", claim: { subj, pred: r.pred, obj, polarity: r.polarity === "-" ? "-" : "+" }, activation: activation.get(a.id) ?? 0 });
+    out.push({ id: a.id, address: a.span, text, side, claim: { subj, pred: r.pred, obj, polarity: r.polarity === "-" ? "-" : "+" }, activation: activation.get(a.id) ?? 0 });
   }
   return out;
 }
+
+/** U spans: the record read as the universe. */
+export const uSpansFromRecord = (record, opts = {}) => spansFromRecord(record, { ...opts, side: "U" });

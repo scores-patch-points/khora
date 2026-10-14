@@ -146,7 +146,7 @@ Output is the same in all nine: addressed spans interleaved with flagged seams.
 **Not done, and not decided.**
 - The Figure/Pattern cut is the majority rule, not a measured null.
 - Clearing's "U's own null" is the caller's `survives` (default: activation > 0, the ladder's evidence floor).
-- W is read into spans by the caller; there is no W reader here. A W built from the claim reader (`readCorpus`) came back with 0 atoms on a three-sentence thread, so a W reader is real work.
+`claimsOfWhom` reads W with the same claim reader as U; on a three-sentence thread the reader admitted 0 atoms (too little recurrence to admit a subject), so it returns a typed absence, and a W must be a real thread.
 - Matching is exact surface (articles stripped, case folded): "approved" never meets "approves".
 - The answer ladder is not routed through this; it still answers at fixed sizes.
 - The ledger and the twin-reader harness (`callimachus/twin-reader`) have not run against it.
@@ -734,29 +734,23 @@ Each step is a whole answer on its own, and each has a falsifier and a pre-regis
 
 This step needs no induced shape, so it runs on today's ladder. It is the smallest move that makes the whom real.
 
-**Status, 2026-10-14 (built on this branch; tests green):**
-- **Built.** `organs/whom.js` (`declareWhom`, `distanceOf`, `partitionByWhom`) and `organs/seam-ledger.js` (`seamReport`, `creaseEntry`, `untouchedBy`), both pure and tested. `answerLadder(record, { whom })`:
-  - names the experiencer from the whom, with its holdings in `read`, in place of `{ who: "the asker" }`;
-  - reports `seams` on every stage (addressed share, seam density, mouth share, each seam with the two spans it joins, and a contract verdict that refuses an unaddressed source or a third kind);
-  - reports `distance` (touched claims the whom was never told, and never shown);
-  - **orders by holdings.** A candidate the whom was told, that carries evidence, is placed after every fresh candidate that does. It is an order, not a weight: no constant was added, and with no whom (or a whom holding nothing the question touches) the pick is exactly what it was. The record's `contest` verdict is still the record's: what binds in U does not change with the reader.
-  - **accounts for every held claim.** One that is picked is typed (`sentence.heldBy`, listed in `stage.held`). One that carries evidence and is not picked is in `stage.droppedHeld` with the address it was told at, a reason distinct from "below the floor".
-- **Bar, as measured by `answer-ladder.test.mjs`.**
-  - Seam density is reported first on every stage.
-  - Identical holdings give byte-identical sentences.
-  - Differing holdings differ where the holdings differ: the near reader's line is a claim new to them; the far reader's is the record's lead.
-  - Swap-null: a different giver with the same holdings reads the same output, and the same giver with different holdings reads differently.
-  - A whom holding something the question never touches changes nothing.
-  - A whom told everything the question touches is answered with the lead, typed held.
-  - Every source segment re-verifies (the contract check, plus the existing slice test).
-- **Not met, and not decided.**
-  - The swap-null is one hand-built pair, not the seeded shuffle over many whoms the bar describes.
-  - `realizeClaim`'s `whom` is still recorded and unused.
-  - `createForWhom` is not called (its gate has hand-set floors).
-  - Nothing builds a whom from earlier `telling.addressed.json` files; `told` keys are the ladder's atom ids, and a builder must map earlier grounds onto them.
-  - The dossier (stage 4, the whole cube) is not re-ordered by the whom.
-  - Seen pages order nothing: a page the whom was shown is available to them, not told.
-  - Distance is a number. Where it picks figure over ground is H1's null, unmeasured.
+**Status, 2026-10-14 (reconciled with `callimachus/twin-reader`; tests green):**
+
+Step 0's file name and ladder option are taken by the twin-reader branch: `organs/whom.js` (W as pinned bytes, "held" is exact containment, held candidates are **dropped** and every witness re-based on the reader's population; PR scores-patch-points/khora#11). This branch had also built a `whom` ladder option that **ordered** held claims after fresh ones, which would have given a reader two meanings of "held" in one ladder. It is withdrawn from the ladder. It survives in the history (`a557374a`) as a **candidate rival arm**: to be pre-registered against twin-reader's drop semantics, never shipped beside it.
+
+- **Here, and not wired into `answerLadder`:**
+  - `organs/holdings.js`: `declareHoldings` (claim keys: `told`, `seen`; refuses a placeholder giver and an omitted holding; `witness: "claim-key"`), `distanceOf`, `partitionByHoldings` (typed `held` reason), `claimsOfWhom(pinned, { slice })` (W's units read by the same claim reader as U, as W spans; a thread too short to admit a claim is a typed absence).
+  - `organs/seam-ledger.js`: `seamReport` (addressed share, seam density, mouth share, each seam with the spans it joins, and a contract verdict), `creaseEntry`, `untouchedBy`.
+  - `organs/grain.js`: the selection and the nine modes ("Grain" below).
+- **Held has two witnesses and they are typed apart.** Byte containment (twin-reader's `heldIn`) is the ladder's. A claim-arrangement match (same subject and predicate, this branch) is a different witness; `foldGrain` reports `distance.witness: "claim-arrangement"`.
+- **Bar, as it now stands.**
+  - Seam density is reported first: `seamReport`, not yet on the ladder's stages (twin-reader's `seamsOf` feeds `folds.json`; swapping needs its numbers checked before and after).
+  - W = ∅ is byte-identical because the ladder is untouched here.
+  - The swap-null, the many-whom shuffle, and "differing holdings differ where they differ" belong to twin-reader's pre-registration (P5, P6), not to this branch.
+- **Not decided.**
+  - The ordering arm's pre-registration.
+  - The Figure/Pattern cut.
+  - A grain arm in twin-reader's harness: it needs its own pre-registration, committed before it runs.
 - **Ledger.** `creaseEntry` makes one record; no ledger is stored, so H4 has nothing to read.
 
 ### Step 1. Projector + read-back verifier for the media the reader can already read; add `table` and `frame-break` to medium.js
@@ -825,5 +819,5 @@ Retire `DECLARED_FORM`, `DEFAULT_ESSAY_BEATS`, the telling's paragraph-per-terra
 
 - **Clause-level reading** (`clause-spans.js`, branch `callimachus/clause-segmentation`): its tree is the leaf level of §2. Fronted subordinates and "that" are the gaps that most affect L2's measurement.
 - **Cell organs** (`callimachus/cell-organs`): Kind, Atmosphere and Paradigm move from stand-ins to registered organs. §3.2's section, camp and period licences read whatever those organs admit, so this design waits on them rather than reading the stand-ins.
-- **Twin reader** (`callimachus/twin-reader`): it has its own `organs/whom.js` (W as pinned bytes read by `readWhom`, exact-containment `heldIn`, `seamsOf`) and its own `answerLadder({ whom })` signature, which collide by filename and by option name with `organs/whom.js` and `answerLadder({ whom })` here (a declared holdings object: `declareWhom`). They answer the same Step 0 differently: its W is bytes and "held" is containment; this one's is claim keys. One has to give way before either merges. `grain.js` takes W as spans and uses neither.
+- **Twin reader** (`callimachus/twin-reader`, PR scores-patch-points/khora#11): owns `organs/whom.js` and the ladder's `whom` option (W as bytes; held is dropped). Agreed 2026-10-14: this branch renamed its holdings to `organs/holdings.js` and left the ladder alone; seam-ledger.js and grain.js stay. One finding from that branch bears on the grain: its P3 ("a far reader gets more structure") was **falsified**, and post hoc, unregistered, the reader got the grain it *lacks* (a W holding figures was given ground back; a W holding ground was given figures). That is the natural first pre-registration for `foldGrain`, with an accumulating W (a reader who holds only the last fold is a 2-cycle).
 - **Drive eval** (`callimachus/drive-eval`): the form layer is admitted or not by that pre-registered harness, never by its own author's measure alone.

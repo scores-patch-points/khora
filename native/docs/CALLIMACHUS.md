@@ -161,17 +161,16 @@ node --test native/organs/{pinax,callimachus,cube-telling,answer-ladder,claim-re
 
 Live repair needs the mouth channel on `:11434` with `gemma2:2b`. Without it, level 3 reports "no mouth reachable" and changes nothing.
 
-## Added on `callimachus/shape`: the whom and the seams (2026-10-14)
+## Added on `callimachus/shape`: holdings, seams and the grain (2026-10-14)
 
-Written after the user's essay "The Prompt Is a Crease". The design is in `CALLIMACHUS-SHAPE.md` ("For whom", "The fold as a function", Step 0). What landed in code:
+Written after the user's essay "The Prompt Is a Crease". The design is in `CALLIMACHUS-SHAPE.md` ("For whom", "The fold as a function", "Grain", Step 0). What landed in code, none of it wired into `answerLadder` (the ladder's `whom` option belongs to the twin-reader branch, agreed 2026-10-14):
 
 | File | What it does |
 |---|---|
-| `organs/whom.js` | `declareWhom`: the second operand with holdings. A placeholder giver ("the asker") is refused, an omitted `told`/`seen` is refused, an empty one is a declared first contact. `kind` may be a person, institution, statute, document, past self, or `void` (the catalog pole); a statute or document needs a boundary. `distanceOf`: share of touched claims never told / never shown. `partitionByWhom`: fresh vs `held`, with the typed reason. |
-| `organs/seam-ledger.js` | `seamReport`: bytes by kind, addressed share, seam density, mouth share, each seam with the spans it joins, and a contract verdict. `creaseEntry` and `untouchedBy`: the ledger's entry and the whom-provenance check; no store. |
-| `organs/grain.js` | The grain: `splitRegion` (held / absent, with the predicate-shuffle null), `selectGrain` (Ground / Figure / Pattern), `contactVerdict` (`mergeTestimony` across U and W), the nine modes, `foldGrain` (selection, contacts, the three modes in order, closure). Design: `CALLIMACHUS-SHAPE.md` "Grain". The ladder is not routed through it yet. |
-| `organs/answer-ladder.js` | Optional `whom`. Every stage carries `seams`; the result carries `whom` and `distance`. A claim the whom was told is ordered after fresh claims (an order, not a weight) and accounted for: typed `held` where placed (`stage.held`, `sentence.heldBy`), or in `stage.droppedHeld` with its address. Without a whom the result says `declared: false` and the pick is unchanged. |
+| `organs/holdings.js` | `declareHoldings`: what a whom already holds, as claim keys. A placeholder giver ("the asker") and an omitted `told`/`seen` are refused; an empty one is a declared first contact. `kind` may be a person, institution, statute, document, past self, or `void` (the catalog pole). `distanceOf`: share of touched claims never told / never shown. `partitionByHoldings`: fresh vs `held`, typed. `claimsOfWhom`: W's pinned units read by the claim reader as W spans. |
+| `organs/seam-ledger.js` | `seamReport`: bytes by kind, addressed share, seam density, mouth share, each seam with the spans it joins, and a contract verdict. `creaseEntry` and `untouchedBy`: the ledger's entry and the holdings-provenance check; no store. |
+| `organs/grain.js` | The grain: `splitRegion` (held / absent, with the predicate-shuffle null), `selectGrain` (Ground / Figure / Pattern), `contactVerdict` (`mergeTestimony` across U and W), the nine modes, `foldGrain` (selection, contacts, the three modes in order, closure). |
 
-Open, in addition to §8: `realizeClaim`'s `whom` is still unused; the dossier is not re-ordered by the whom; nothing builds a whom from earlier tellings; no ledger store; H1–H4 in `CALLIMACHUS-SHAPE.md` are unmeasured.
+Open, in addition to §8: the ordering-not-dropping ladder arm is withdrawn (history only) pending a pre-registration as a rival to twin-reader's; no grain arm in the twin-reader harness; nothing builds holdings from earlier tellings; no ledger store; H1–H4 in `CALLIMACHUS-SHAPE.md` are unmeasured.
 
-Tests: `node --test native/organs/{seam-ledger,answer-ladder}.test.mjs`.
+Tests: `node --test native/organs/{seam-ledger,grain}.test.mjs`.
