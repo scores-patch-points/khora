@@ -194,6 +194,7 @@ export function standingsOf({ region = [], whom = [] } = {}) {
     items.push({
       proposition: pk, record, reader, standing,
       chains: chainSet.size,
+      n: { u: { holds: rec.holds.length, refused: rec.refused.length }, w: { holds: rea.holds.length, refused: rea.refused.length } },
       u: [...rec.holds, ...rec.refused].map((r) => r.span.address),
       w: [...rea.holds, ...rea.refused].map((r) => r.span.address),
       ...(rea.case === "DISAGREE" ? { readerSplit: true } : {}),
