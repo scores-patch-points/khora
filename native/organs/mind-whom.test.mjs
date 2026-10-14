@@ -116,3 +116,19 @@ test("P2/P3: exact bytes are typed apart from claim-equivalent spans; P4: unreso
   const m3 = mindOf({ question: Q, region: reg, trail: accumulate(trail, ["px_nowhere/text@h#b0-1"], { turn: 2 }) });
   assert.equal(m3.gaps.filter((g) => g.type === "trail_unresolved").length, 1);
 });
+
+test("Q4/Q1: includeOutOfRegion is off by default; on, trail spans outside the region ride along typed, and `related` can name them", () => {
+  const outside = U("Maria", "approved", "the depot lease", "Maria approved the depot lease.", 0);
+  const reg = region;                       // does not contain `outside`
+  const uni = [...region, outside];
+  const trail = accumulate([], [region[0].address, outside.address], { turn: 1 });
+  const off = mindOf({ question: Q, region: reg, universe: uni, trail });
+  assert.equal(off.counts.outOfRegion, 0);
+  assert.ok(off.whom.every((w) => !w.outOfRegion));
+  const on = mindOf({ question: Q, region: reg, universe: uni, trail, includeOutOfRegion: true });
+  assert.equal(on.counts.outOfRegion, 1);
+  assert.equal(on.whom.filter((w) => !w.outOfRegion).length, off.whom.length, "the in-region spans are exactly the default's");
+  const oor = on.whom.find((w) => w.outOfRegion);
+  assert.equal(oor.address, outside.address);
+  assert.equal(oor.exactBytes, true);
+});

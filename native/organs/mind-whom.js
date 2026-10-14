@@ -48,7 +48,7 @@ export const claimKeyOf = (u) => {
   return a ? `${a}|${objNorm(u.claim?.obj)}|${u.claim?.polarity === "-" ? "-" : "+"}` : null;
 };
 
-export function mindOf({ question = "", region = [], universe = null, trail = [], turns = [], mind = null, priors = {} } = {}) {
+export function mindOf({ question = "", region = [], universe = null, trail = [], turns = [], mind = null, priors = {}, includeOutOfRegion = false } = {}) {
   const uni = universe ?? region;
   const byKey = new Map();
   for (const u of region) { const k = claimKeyOf(u); if (k) (byKey.get(k) ?? byKey.set(k, []).get(k)).push(u); }
@@ -140,6 +140,16 @@ export function mindOf({ question = "", region = [], universe = null, trail = []
     const ref = t?.ref ?? tr?.ref ?? "mind";
     for (const u of us) whom.push({ ...u, side: "W", id: `mind-${u.id}`, stance, mindKey: a.key, exactBytes: exactAddrs.has(u.address), acts: actsBy.get(a.key) ?? [], provenance: { kind, ref } });
   }
+  // GRAIN-HELD-CLAIM-PREREG Amendment 2: the person was also shown spans OUTSIDE this region. They cannot be held region spans, but an
+  // arrangement they share with a region span is what `related` is typed against. Off by default (the default is run 12, unchanged).
+  if (includeOutOfRegion) {
+    const inRegion = new Set(region.map((r) => r.address));
+    for (const s of trailSpans) {
+      if (inRegion.has(s.address)) continue;
+      const k = claimKeyOf(s);
+      whom.push({ ...s, side: "W", id: `mind-oor-${s.id}`, stance: STANCE.HOLDS, mindKey: k, exactBytes: true, outOfRegion: true, acts: [{ seq: null, kind: "saw", witness: s.provenance?.ref ?? null }], provenance: { kind: s.provenance?.kind ?? "seen", ref: s.provenance?.ref ?? "mind" } });
+    }
+  }
   if (model.count === 0) gaps.push({ type: model.gap?.type ?? "no_attributed_beliefs", detail: model.gap?.detail ?? "the reader has attributed nothing to the person: unmodelled, which is not the person holding nothing" });
   for (const g of uFold.gaps) gaps.push({ type: g.type, detail: g.detail });
 
@@ -155,6 +165,6 @@ export function mindOf({ question = "", region = [], universe = null, trail = []
     unanchored,
     unmodelled: model.count === 0,
     entries: Object.freeze(entries),
-    counts: { whom: whom.length, exactBytes: whom.filter((w) => w.exactBytes).length, claimEquivalent: whom.filter((w) => !w.exactBytes).length },
+    counts: { whom: whom.length, exactBytes: whom.filter((w) => w.exactBytes && !w.outOfRegion).length, claimEquivalent: whom.filter((w) => !w.exactBytes).length, outOfRegion: whom.filter((w) => w.outOfRegion).length },
   };
 }
