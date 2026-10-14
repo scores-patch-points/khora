@@ -160,3 +160,51 @@ test("unplugged (L1): callimachus.js's static import closure reaches no model do
   walk(resolve(here, "callimachus.js"));
   assert.ok(seen.size >= 6, `positive control: the walk reached the organs (${seen.size})`);
 });
+
+// ---- referents by whole capitalised run (GRAIN-R7-PREREG.md) -------------------------------------------------------------------------
+import { referentsInRuns, capitalisedRuns } from "./callimachus.js";
+test("a mention resolves to a referent by its whole capitalised run, not by containing a surface", () => {
+  const refs = [{ id: "r_senate", surfaces: ["Senate"] }, { id: "r_house", surfaces: ["House"] }, { id: "r_cong", surfaces: ["Congress"] }];
+  const fw = new Set(["the", "a", "of", "and", "in", "which", "to"]);
+  const at = (s) => referentsInRuns(s, refs, { functionWords: fw });
+  assert.deepEqual(at("the Senate"), ["r_senate"], "a determiner at the edge is stripped");
+  assert.deepEqual(at("the House’s"), ["r_house"], "a possessive is stripped");
+  assert.deepEqual(at("the Nevada Senate"), [], "an extra content word makes a different surface, not the Senate");
+  assert.deepEqual(at("Senate Bill 100"), []);
+  assert.deepEqual(at("Senate Committee"), []);
+  assert.deepEqual(at("House Democrats"), []);
+  assert.deepEqual(at("Substitute House Bill"), []);
+  assert.deepEqual(at("U.S. Senate"), [], "an alias is NOT merged by name: that is identity-induction's licence");
+  assert.deepEqual(at("a resolution which urged Congress to act"), ["r_cong"], "a separate run inside a longer phrase still resolves");
+  assert.deepEqual(at("Congress and the Senate"), ["r_cong", "r_senate"].sort(), "two runs, two referents");
+  assert.deepEqual(capitalisedRuns("the Missouri House of Representatives passed it").map((r) => r.join(" ")), ["Missouri House of Representatives"]);
+});
+test('referentMatch "contains" is the default and unchanged: "the Nevada Senate" still contains the Senate', async () => {
+  const { referentsIn } = await import("./callimachus.js");
+  assert.deepEqual(referentsIn("the Nevada Senate", [{ id: "r_senate", surfaces: ["Senate"] }]), ["r_senate"]);
+});
+
+test("amendment 1: a sentence-initial or headline capital that the corpus shows is not a name does not split the run", () => {
+  const refs = [{ id: "r_st", surfaces: ["Standard Time"] }, { id: "r_dst", surfaces: ["Daylight Saving Time"] }, { id: "r_sen", surfaces: ["Senate"] }];
+  const fw = new Set(["the", "a", "of"]);
+  const posPrior = { forms: { permanent: { ADJ: 90, NOUN: 2 }, make: { VERB: 80 }, bill: { NOUN: 95 }, committee: { NOUN: 99 }, time: { NOUN: 99 }, standard: { ADJ: 60, NOUN: 30 } } };
+  const lowercaseSeen = new Set(["permanent", "make", "bill", "committee", "standard", "time"]);
+  const at = (s) => referentsInRuns(s, refs, { functionWords: fw, posPrior, lowercaseSeen });
+  assert.deepEqual(at("Permanent Standard Time"), ["r_st"], "an adjective at the edge is not part of the name");
+  assert.deepEqual(at("Make Daylight Saving Time Permanent"), ["r_dst"], "a headline's edge words are not the name");
+  assert.deepEqual(at("Senate Bill 100"), [], "a noun extends the name into a different thing, so it is kept");
+  assert.deepEqual(at("the Senate Committee"), []);
+  assert.deepEqual(at("the Nevada Senate"), [], "Nevada is never lowercase: it is part of the name");
+  assert.deepEqual(at("Standard Time Act"), [], "the run's own surface is still matched exactly");
+});
+
+test("amendment 2: a run ends at clause punctuation, so 'In July, the House' is two things and the House resolves", () => {
+  const runs = (s) => capitalisedRuns(s).map((r) => r.join(" "));
+  assert.deepEqual(runs("In 2015, the Nevada Senate passed Nevada Assembly Joint Resolution 4"), ["In 2015,", "the Nevada Senate".replace(/^the /, "") ? "Nevada Senate" : "", "Nevada Assembly Joint Resolution 4"].filter(Boolean));
+  assert.deepEqual(runs("In July, the House passed a bill"), ["In July,", "House"]);
+  assert.deepEqual(runs("Congress, the Senate and the House"), ["Congress,", "Senate", "House"]);
+  assert.deepEqual(runs("The U.S. Senate passed it. The House did not."), ["The U.S. Senate", "The House"], "an abbreviation's dot is not a boundary; a sentence's is");
+  const refs = [{ id: "r_house", surfaces: ["House"] }, { id: "r_sen", surfaces: ["Senate"] }];
+  assert.deepEqual(referentsInRuns("In July, the House", refs, { functionWords: new Set(["the", "a", "in"]) }), ["r_house"]);
+  assert.deepEqual(referentsInRuns("In 2015, the Nevada Senate", refs, { functionWords: new Set(["the", "a", "in"]) }), [], "still a different surface");
+});

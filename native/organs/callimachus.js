@@ -240,6 +240,79 @@ function admitEntities(perSource) {
   return { referents, unadmitted };
 }
 
+/**
+ * referentsInRuns(str, referents, { functionWords }) — a mention resolves to an admitted referent by its WHOLE capitalised run
+ * (GRAIN-R7-PREREG.md), not by containing one of its surfaces. A run is a capitalised word followed by capitalised words (an internal
+ * "of" / "the" / "and" joins only when the run continues). Edge tokens in the corpus's own closed class and a trailing possessive are
+ * stripped; the run must then EQUAL a surface. "the Nevada Senate" is the run "Nevada Senate": no referent, not the Senate. Aliases are
+ * not merged here: that is identity-induction's licence, not a name's.
+ */
+const RUN_JOIN = new Set(["of", "the", "and", "for"]);
+export function capitalisedRuns(str) {
+  const toks = String(str ?? "").split(/\s+/).filter(Boolean);
+  const isCap = (t) => /^[\p{Lu}\p{N}]/u.test(t.replace(/^[("'“‘\[]+/, ""));
+  // A run ENDS at a token carrying clause punctuation (, ; : ! ? a closing bracket, or a full stop that is not inside an abbreviation
+  // like "U.S."). Amendment 2 (GRAIN-R7-PREREG.md): without this "In July, the House" was one run and the House never resolved.
+  const ends = (t) => /[,;:!?)\]”’"]$/.test(t) || (/\.$/.test(t) && !/\./.test(t.slice(0, -1)) && t.length > 2);
+  const runs = [];
+  for (let i = 0; i < toks.length;) {
+    if (!isCap(toks[i])) { i++; continue; }
+    let j = i + 1;
+    if (!ends(toks[i])) {
+      while (j < toks.length) {
+        if (isCap(toks[j])) { j++; if (ends(toks[j - 1])) break; continue; }
+        if (RUN_JOIN.has(toks[j].toLowerCase()) && !ends(toks[j]) && j + 1 < toks.length && isCap(toks[j + 1])) { j += 2; if (ends(toks[j - 1])) break; continue; }
+        break;
+      }
+    }
+    runs.push(toks.slice(i, j));
+    i = j;
+  }
+  return runs;
+}
+const cleanTok = (t) => t.replace(/^[("'“‘\[]+|[)"'”’\],.;:!?]+$/g, "").replace(/['’]s$/i, "");
+/**
+ * Amendment 1 (GRAIN-R7-PREREG.md): run 1 over-split. A sentence-initial or headline capital ("Permanent Standard Time", "Make Daylight
+ * Saving Time Permanent") was read as part of the name and 19 of 53 referents vanished. An EDGE token is droppable when the corpus
+ * itself shows it is not a name (it occurs in lowercase somewhere: `lowercaseSeen`) AND the received POS prior does not call it a noun
+ * ("Permanent" ADJ, "Make" VERB, droppable; "Bill", "Committee", "Democrats" NOUN, kept, so "Senate Bill" is still not the Senate;
+ * "Nevada" is never lowercase, kept). Without a prior, only the closed class is stripped, as in run 1.
+ */
+export function referentsInRuns(str, referents, { functionWords = new Set(), posPrior = null, lowercaseSeen = null } = {}) {
+  const hits = new Set();
+  const surfaceKey = (f) => String(f).split(/\s+/).map(cleanTok).filter(Boolean).join(" ").toLowerCase();
+  const nounish = (tok) => {
+    const f = posPrior?.forms?.[tok.toLowerCase()];
+    if (!f) return false;
+    const tot = Object.values(f).reduce((a, b) => a + b, 0);
+    return tot > 0 && ((f.NOUN ?? 0) + (f.PROPN ?? 0)) / tot > 0.5;
+  };
+  const droppable = (tok) => {
+    const l = tok.toLowerCase();
+    if (functionWords.has(l)) return true;
+    return !!(posPrior && lowercaseSeen && lowercaseSeen.has(l) && !nounish(tok));
+  };
+  for (const run of capitalisedRuns(str)) {
+    const toks = run.map(cleanTok).filter(Boolean);
+    // The run itself first, then the fewest edge drops that reach a surface: an edge word is dropped only if it is droppable AND the
+    // drop is what makes the run EQUAL a surface (so "Standard" in "Standard Time" is never stripped to "Time").
+    let nL = 0; while (nL < toks.length - 1 && droppable(toks[nL])) nL++;
+    let nR = 0; while (nR < toks.length - 1 - 0 && droppable(toks[toks.length - 1 - nR])) nR++;
+    let found = null;
+    for (let total = 0; total <= nL + nR && !found; total++) {
+      for (let l = 0; l <= Math.min(nL, total) && !found; l++) {
+        const r = total - l;
+        if (r > nR || l + r >= toks.length) continue;
+        const key = toks.slice(l, toks.length - r).join(" ").toLowerCase();
+        const hit = referents.filter((x) => x.surfaces.some((f) => surfaceKey(f) === key));
+        if (hit.length) found = hit;
+      }
+    }
+    for (const r of found ?? []) hits.add(r.id);
+  }
+  return [...hits];
+}
+
 export function referentsIn(str, referents) {
   const s = ` ${str} `;
   const hits = [];
@@ -330,7 +403,7 @@ const shareOf = (a, b) => { if (!a.size || !b.size) return 0; let n = 0; for (co
  * `minSurfaces` replaces the recurrence bar (default 2) and is only meaningful WITH a posPrior; `verbs` is unioned in, disclosed
  * (the reader's own earned vocabulary from another reading is a vocabulary, not a prior). Nothing here fires unless a caller passes it.
  */
-export function readCorpus(records, { question = "", absences = [], received = null } = {}) {
+export function readCorpus(records, { question = "", absences = [], received = null, referentMatch = "contains", referentPrior = null } = {}) {
   const docs = records.map((rec) => {
     const text = textOf(rec);
     const sentences = splitSentences(text).filter((s) => s.text.trim());
@@ -347,6 +420,10 @@ export function readCorpus(records, { question = "", absences = [], received = n
   const functionWords = functionWordSet(buildFrequencyTable(tokenize(corpusText)));
   const vocab = discoverRelationVocab(corpusText, { surfaces: extractSurfaces(corpusSentences), minSurfaces: received?.minSurfaces ?? 2, functionWords, ...(received?.posPrior ? { posPrior: received.posPrior } : {}), ...(received?.verbForms ? { verbForms: received.verbForms } : {}) });
   const verbs = received?.verbs ? new Set([...vocab.verbs, ...received.verbs]) : vocab.verbs;
+  // How a mention finds its admitted referent. "contains" (default, byte-identical): any surface inside the mention. "run": the mention's
+  // whole capitalised run must equal a surface (GRAIN-R7-PREREG.md). Both are exact about what they do; neither merges aliases.
+  const lowercaseSeen = new Set((corpusText.match(/\b\p{Ll}[\p{L}'’-]*/gu) ?? []).map((w) => w.toLowerCase()));
+  const refsIn = referentMatch === "run" ? (str) => referentsInRuns(str, referents, { functionWords, posPrior: referentPrior, lowercaseSeen }) : (str) => referentsIn(str, referents);
   // functionWords walls the VERB slot (vocab discovery) only: passed to extraction it ends an object at its next closed-class word and
   // cuts the clause an embedding is made of ("said the budget office approved the plan" → object "the budget office approved").
   const rel = (str) => extractRelations(str, { verbs, nounPhraseSubjects: true });
@@ -361,8 +438,8 @@ export function readCorpus(records, { question = "", absences = [], received = n
     const { rec, map } = d;
     const layerSha = rec.entry.text.sha256;
     const addr = (u0, u1) => formatAddress({ pinax: rec.entry.id, layer: "text", layerSha256: layerSha, start: convertOffset(map, "u", "b", u0), end: convertOffset(map, "u", "b", u1) });
-    const quoteGivers = d.quotes.map((q) => ({ q, at: attributionOf(d.text, q, { verbs: attitudeVerbs, functionWords, abbreviations, isReferent: (str) => referentsIn(str, referents).length > 0 }) }));
-    const giverOfQuote = (g) => ({ surface: addr(g.giverU, g.giverEnd), surface_verbatim: g.giver, referent: g.pronoun ? null : referentsIn(g.giver, referents)[0] ?? null, pronoun: g.pronoun, attitude: addr(g.verbU, g.verbU + g.verb.length), attitude_verbatim: g.verb, via: `quotation_frame_${g.side}` });
+    const quoteGivers = d.quotes.map((q) => ({ q, at: attributionOf(d.text, q, { verbs: attitudeVerbs, functionWords, abbreviations, isReferent: (str) => refsIn(str).length > 0 }) }));
+    const giverOfQuote = (g) => ({ surface: addr(g.giverU, g.giverEnd), surface_verbatim: g.giver, referent: g.pronoun ? null : refsIn(g.giver)[0] ?? null, pronoun: g.pronoun, attitude: addr(g.verbU, g.verbU + g.verb.length), attitude_verbatim: g.verb, via: `quotation_frame_${g.side}` });
     // Every attributed quotation is a reported atom in its own right: its span is exactly the quoted bytes. A quotation with no
     // attribution frame is a mention (a title, a scare quote), not testimony; it is dropped, with that reason.
     for (const { q, at } of quoteGivers) {
@@ -371,7 +448,7 @@ export function readCorpus(records, { question = "", absences = [], received = n
         schema: "ClaimAtom@1", id: `a_${fnv(addr(q[0], q[1])).toString(16)}q${atoms.length.toString(36)}`,
         pinax: rec.entry.id, url: rec.entry.url, span: addr(q[0], q[1]),
         kind: "reported", why_kind: "quotation", giver: giverOfQuote(at), relation: null,
-        entities: referentsIn(d.text.slice(q[0], q[1]), referents),
+        entities: refsIn(d.text.slice(q[0], q[1])),
         valid_time: { value: null, precision: null, why: "undated: the CLDR date parse (§7.2) is not yet wired" },
         document_time: rec.declared?.published ?? null, transaction_time: rec.entry.retrieved_at,
         _sentence: d.text.slice(q[0], q[1]), _object: "",
@@ -409,8 +486,8 @@ export function readCorpus(records, { question = "", absences = [], received = n
         }) : [];
         const embedded = inner.length > 0 && attitudeVerbs.has(t.verb.toLowerCase());
         const kind = p.inQuote || p.attribution || embedded ? "reported" : "located";
-        const subjRefs = referentsIn(t.subject, referents);
-        const objRefs = referentsIn(t.object ?? "", referents);
+        const subjRefs = refsIn(t.subject);
+        const objRefs = refsIn(t.object ?? "");
         const sentenceAt = addr(s0, s1);
         let giver = null;
         const qg = p.inQuote ? quoteGivers.find(({ q }) => q[0] <= verbU && verbU < q[1])?.at : null;
@@ -419,7 +496,7 @@ export function readCorpus(records, { question = "", absences = [], received = n
         } else if (p.inQuote) {
           const by = outside.slice().sort((x, y) => Math.abs(x.verbU - verbU) - Math.abs(y.verbU - verbU))[0];
           giver = by
-            ? { surface: addr(by.subjU, by.subjU + String(by.t.subject).length), surface_verbatim: by.t.subject, pronoun: functionWords.has(String(by.t.subject).toLowerCase()), referent: referentsIn(by.t.subject, referents)[0] ?? null, attitude: addr(by.verbU, by.verbU + by.t.verb.length), attitude_verbatim: by.t.verb, via: "attribution_outside_quote" }
+            ? { surface: addr(by.subjU, by.subjU + String(by.t.subject).length), surface_verbatim: by.t.subject, pronoun: functionWords.has(String(by.t.subject).toLowerCase()), referent: refsIn(by.t.subject)[0] ?? null, attitude: addr(by.verbU, by.verbU + by.t.verb.length), attitude_verbatim: by.t.verb, via: "attribution_outside_quote" }
             : { surface: null, surface_verbatim: null, referent: null, attitude: null, attitude_verbatim: null, via: "attribution_not_found" };
         } else if (kind === "reported") {
           giver = { surface: addr(subjU, subjU + String(t.subject).length), surface_verbatim: t.subject, pronoun: functionWords.has(String(t.subject).toLowerCase()), referent: subjRefs[0] ?? null, attitude: addr(verbU, verbU + t.verb.length), attitude_verbatim: t.verb, via: p.attribution ? "attribution" : "embedding" };
@@ -435,7 +512,7 @@ export function readCorpus(records, { question = "", absences = [], received = n
             subj: subjRefs[0] ?? null, subj_surface: addr(subjU, subjU + String(t.subject).length),
             pred: t.verb, obj_refs: objRefs, obj_surface: t.object ? addr(objU, objU + t.object.length) : null,
             polarity: t.polarity ?? "unknown", polarity_giver: POLARITY_GIVER,
-            inner: embedded ? inner.map((x) => ({ subj: referentsIn(x.subject, referents)[0] ?? null, pred: x.verb, polarity: x.polarity })) : [],
+            inner: embedded ? inner.map((x) => ({ subj: refsIn(x.subject)[0] ?? null, pred: x.verb, polarity: x.polarity })) : [],
           },
           entities: [...new Set([...subjRefs, ...objRefs])],
           valid_time: { value: null, precision: null, why: "undated: the CLDR date parse (§7.2) is not yet wired" },
@@ -507,7 +584,7 @@ export function readCorpus(records, { question = "", absences = [], received = n
   for (const a of atoms) if (!a.standing) { a.standing = "SINGLE"; a.independent_count = 1; a.chain = a.chain ?? null; a.why_unkeyed = "subject is not an admitted referent"; }
 
   // Presupposition (§6.3): the question's definite descriptions against admitted referents.
-  const qRefs = referentsIn(question, referents);
+  const qRefs = refsIn(question);
 
   // Lens per source (§7.8): referents carried by ≥2 other sources that this source never names — "within this corpus".
   const omissions = Object.fromEntries(records.map((r) => {

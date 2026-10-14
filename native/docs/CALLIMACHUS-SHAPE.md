@@ -313,6 +313,24 @@ Pre-registration `eval/callimachus/GRAIN-R6-PREREG.md`, runner `eval/callimachus
 
 **Limit found (L44).** For "Did the Senate pass the bill?" the biggest mover is "In 2015, the **Nevada** Senate passed Nevada Assembly Joint Resolution 4": the subject names *Senate*, so it carries, but it is a different body and a different measure. The patient ("the bill") is not in the slot.
 
+### Results: the seventh registration (referents by whole capitalised run, two runs, 2026-10-14)
+
+The user's observation: the referents are not merging correctly on the Senate problem. **Cause, verified in the code and the record:** `referentsIn` resolves a mention to any admitted referent whose surface occurs as a whole word inside it, so the one `Senate` referent absorbs the Nevada Senate, Senate Bill, Senate File, Senate Committee and Senate Republicans (21 distinct longer runs, 32 mentions), `House` another 21, `Standard Time` another 17 (Mountain, Eastern, Pacific). The Nevada atom's subject was the United States Senate's referent. Pre-registration `eval/callimachus/GRAIN-R7-PREREG.md` (amendment 1), opt-in `readCorpus({ referentMatch: "run", referentPrior })`, default byte-identical (E4).
+
+| | prediction | run 1 (closed class only) | run 2 (+ edge words the corpus shows are not names) |
+|---|---|---|---|
+| E1 | the Nevada Senate's subject is not the Senate | **holds** | **holds** |
+| E3 | 12 named phrases do not resolve to the shorter referent | **holds** (12/12 distinct; 12/12 merged under containment) | **falsified**: *Eastern Standard Time* → Standard Time (11/12 distinct) |
+| E4 | the default is byte-identical | **holds** | **holds** |
+| E2, E5 | the Senate ask drops the Nevada passage; the House ask is intact | vacuous / failed: upstream `b733f9af` cut candidates 387 → 230 (L46); no carriers in either mode | not re-asked |
+| E6 | fewer referents lost than 19 | (19 lost: the defect) | **holds** (13 lost; 40 of 53 kept) |
+| E7 | Daylight Saving Time and Standard Time return | no | **holds** |
+| E8 | no regression of E1, E3 | — | **falsified** (E3) |
+
+**Reported.** Claims that corroborate: 0 under containment, 5 under run 1, 2 under run 2 (the "House passed the Sunshine Protection Act" statements key together). Atoms whose referents changed: 97, then 59, of 573. Referents lost under run 2: Clinical Sleep Medicine, State Legislatures, National, Pennsylvania, World, Representative, Sleep Society, New Jersey, Orthodox, Georgia, Press, Till, Vern. True aliases (*U.S. Senate*, *United States Congress*) are **not** merged by name: licensing them is identity-induction's job, not built here.
+
+**What this says.** Containment is wrong in both directions; whole-run equality fixes the false merges but over-splits at capitals, and the repair by lowercase attestation and POS brings back one false merge (a proper adjective that is also an ordinary one). The evidence-based answer is identity-induction over the two surfaces' contexts, not a longer rule. L45, L46, L47.
+
 ### The whom can be any pinned corpus
 
 **[H3] The second argument can be any pinned corpus with a null.** The same operation with a different W:
@@ -983,3 +1001,7 @@ Retire `DECLARED_FORM`, `DEFAULT_ESSAY_BEATS`, the telling's paragraph-per-terra
 - **Cell organs** (`callimachus/cell-organs`): Kind, Atmosphere and Paradigm move from stand-ins to registered organs. §3.2's section, camp and period licences read whatever those organs admit, so this design waits on them rather than reading the stand-ins.
 - **Twin reader** (`callimachus/twin-reader`, PR scores-patch-points/khora#11): owns `organs/whom.js` and the ladder's `whom` option (W as bytes; held is dropped). Agreed 2026-10-14: this branch renamed its holdings to `organs/holdings.js` and left the ladder alone; seam-ledger.js and grain.js stay. One finding from that branch bears on the grain: its P3 ("a far reader gets more structure") was **falsified**, and post hoc, unregistered, the reader got the grain it *lacks* (a W holding figures was given ground back; a W holding ground was given figures). That is the natural first pre-registration for `foldGrain`, with an accumulating W (a reader who holds only the last fold is a 2-cycle).
 - **Drive eval** (`callimachus/drive-eval`): the form layer is admitted or not by that pre-registered harness, never by its own author's measure alone.
+
+### Seventh and eighth registrations, after the boundary fix (2026-10-14)
+
+`capitalisedRuns` now ends a run at clause punctuation (found through the eighth registration's missing `Nevada Senate` node). Re-run: the seventh registration's resolver is **unchanged** (573/573 atoms byte-identical; it receives subject phrases, not sentences), so the earlier statement that the bug had corrupted it was wrong (L49). Measured on the House ask under run mode: **0 carriers** (contains: 1), because "the US House of Representatives" is a different whole run than `House`: the disclosed alias cost, now seen on an answer. The eighth registration's re-run: the planted twin of `Senate` (23 / 23) is still not judged the same, so no "unbound" there is evidence of difference (L51); 0 of 84 pairs bound, 0 of 19 shuffles; and `U.S. Senate` was never a node because the sentence splitter ends the sentence after "U.S.", with or without a corpus-wide abbreviation set (L50, corrected: a dotted multi-letter abbreviation is not covered by the name-initial rule; 3 mentions on 2 pages, 0 whole in any sentence). L49, L50, L51.
