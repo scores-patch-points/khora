@@ -37,7 +37,7 @@ const mulberry = (seed) => () => { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; le
 const isBound = (v) => v === "BOUND" || v === "bound";
 const judge = (rec, a, b) => {
   const r = makeIdentityInduction(rec, { ...OPTS, namesNode: () => null }).judge(a, b);
-  return { verdict: r.verdict, reason: r.reason ?? null, read: r.read ?? null, tests: r.tests ? { worlds: r.tests.worlds?.match ?? null, weightA: r.tests.weightA?.ok ?? r.tests.weightA ?? null, weightB: r.tests.weightB?.ok ?? r.tests.weightB ?? null, consequenceAligned: r.tests.consequence?.aligned ?? r.tests.consequenceAligned ?? null } : null };
+  return { verdict: r.verdict, reason: r.reason ?? null, read: r.read ?? null, tests: r.tests ? { worlds: r.tests.worlds?.match ?? null, weightA: r.tests.weight?.a?.carries ?? null, weightB: r.tests.weight?.b?.carries ?? null, consequenceAligned: r.tests.consequence?.aligned ?? null, settled: r.tests.bound?.settled ?? null } : null };
 };
 const results = { prereg: "native/eval/callimachus/GRAIN-R9-PREREG.md", textSha256: createHash("sha256").update(raw).digest("hex"), declared: OPTS, sizes: SIZES, nodes: names.map(([k, v]) => ({ name: k, mentions: v.length })), twins: [], different: [], shuffles: [], predictions: {} };
 
