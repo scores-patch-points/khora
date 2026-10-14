@@ -53,7 +53,7 @@ const asSegs = (x) => (Array.isArray(x) ? x : [x]);
 const givers = ({ names, rest }) => [...list(names.map(asSegs)), ...(rest ? [F(" and "), n(rest), F(" others")] : [])];
 const INSTITUTION = "institution"; // the giver kind a body speaking for itself carries (organs/byline.js)
 // Number follows the giver (CGEL ch. 5): one name takes -s; two or more (or a counted remainder) take the base form.
-const many = (g) => g.names.length > 1 || !!g.rest;
+const many = (g) => g.names.length > 1 || !!g.rest || !!g.plural;
 export const ATTRIBUTION = Object.freeze([
   ({ giver, quote }) => [...givers(giver), F(giver.kind === INSTITUTION ? (many(giver) ? " say: " : " says: ") : many(giver) ? " write: " : " writes: "), ...q(quote)],
   ({ giver, quote }) => (!many(giver) ? [F("In "), ...asSegs(giver.names[0]), F("’s words, "), ...q(quote)] : null),

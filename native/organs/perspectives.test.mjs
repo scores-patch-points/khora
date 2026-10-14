@@ -156,3 +156,44 @@ test("options come from what the pages declare; exclusivity is NOMINATED with it
   // CONTROL that can fail: with no declaring marker there is no option
   assert.deepEqual(discoverOptions({ texts: new Map([["px_a", "Permanent standard time is discussed widely in the press this month."]]), model, topicNames: ["permanent daylight saving time"] }), []);
 });
+
+import { withStanceAtoms, stanceAtoms } from "./perspectives.js";
+import { giverOf } from "./giver.js";
+test("a stance is cited to its HOLDER: it replaces the page-author atom on the same sentence; a quotation atom and other pages are untouched", () => {
+  const record = {
+    sources: [{ id: "px_a", byline: { authors: [{ name: "Chantelle Lee", address: "px_a/raw@aaaaaaaaaaaa#b1-5" }] } }, { id: "px_b", byline: { authors: [{ name: "Pat Quinn", address: "px_b/raw@bbbbbbbbbbbb#b1-5" }] } }],
+    atoms: [
+      { id: "a1", pinax: "px_a", span: "px_a/text@111111111111#b100-200", why_kind: "own_voice", _sentence: "Sleep experts have opposed it." },
+      { id: "a2", pinax: "px_a", span: "px_a/text@111111111111#b300-400", why_kind: "quotation", giver: { surface: "px_a/text@111111111111#b410-420", surface_verbatim: "Maria Lopez", pronoun: false }, _sentence: "q" },
+      { id: "a3", pinax: "px_b", span: "px_b/text@222222222222#b100-200", why_kind: "own_voice", _sentence: "Another page." },
+    ],
+  };
+  const perspectives = { positions: [{ pole: "+", option: "topic", span: "px_a/text@111111111111#b100-200", text: "Sleep experts have opposed it.", holder: "experts", holder_at: "px_a/text@111111111111#b108-114", pinax: "px_a", url: "u", pred: "oppose", negated: false, basis: "asserted", via: ["Chantelle Lee"] }] };
+  const out = withStanceAtoms(record, perspectives);
+  assert.deepEqual(out.atoms.map((a) => a.id).filter((i) => !i.startsWith("a_s")).sort(), ["a2", "a3"], "the page-author atom on that sentence is replaced; the quotation and the other page stay");
+  const st = out.atoms.find((a) => a.why_kind === "stance");
+  assert.ok(st);
+  const g = giverOf(st, out);
+  assert.equal(g.kind, "speaker");
+  assert.equal(g.names[0].name, "experts", "cited to the holder, not to the byline");
+  // CONTROL that can fail: with no asked-pole row nothing changes
+  assert.equal(withStanceAtoms(record, { positions: [] }), record);
+  assert.equal(stanceAtoms({ positions: [{ pole: "-", span: "x", holder_at: "y", holder: "h" }] }).length, 0);
+});
+
+import { giverSlot } from "./giver.js";
+import { ATTRIBUTION } from "../adapters/text/telling-grammar.en.js";
+test("a CLASS holder is plural (no possessive, no singular verb); a stance sentence with an unbalanced inner quote is narrowed to the clause before it, bytes unedited", () => {
+  const rec = { sources: [], atoms: [] };
+  const slot = giverSlot(giverOf({ why_kind: "stance", giver: { surface: "px_a/text@111111111111#b8-14", surface_verbatim: "experts" } }, rec));
+  assert.equal(slot.plural, true);
+  assert.equal(ATTRIBUTION[1]({ giver: slot, quote: [] }), null, "no 'experts’s words'");
+  const named = giverSlot(giverOf({ why_kind: "stance", giver: { surface: "px_a/text@111111111111#b0-11", surface_verbatim: "Maria Lopez" } }, rec));
+  assert.ok(!named.plural, "a named person is not made plural");
+  const text = "Senator Mike Rounds told reporters that he opposes it: “It does not work in South Dakota. I mean, kids in the dark.";
+  const at = stanceAtoms({ positions: [{ pole: "+", option: "topic", span: "px_a/text@111111111111#b100-200", text, holder: "Senator Mike Rounds", holder_at: "px_a/text@111111111111#b100-119", pinax: "px_a", url: "u", pred: "oppose", negated: false, basis: "asserted", via: [] }] });
+  assert.equal(at.length, 1);
+  assert.equal(at[0]._sentence, "Senator Mike Rounds told reporters that he opposes it");
+  const end = +/#b\d+-(\d+)$/.exec(at[0].span)[1];
+  assert.equal(end, 100 + new TextEncoder().encode(at[0]._sentence).length, "the narrowed span ends exactly where the kept bytes end");
+});

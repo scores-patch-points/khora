@@ -101,7 +101,9 @@ export function witnesses(cands, { question, record, pointed = null, askedSide =
       // relations.js gave it; its predicate is on the asked pole and its holder is named
       anchor: cands.map((a) => (a.entities ?? []).some((e) => focus.has(e)) || !!askedSide?.has(a.id)),
       // Figure grain (CON·Link): the question's figure ACTS in the claim — it is the relation's subject, not merely named in it.
-      actor: cands.map((a) => !!a.relation?.subj && focus.has(a.relation.subj)),
+      // When perspectives.js read the asked stance and found holders on the asked pole, the question is who HOLDS it: a claim of what the
+      // topic itself does (the topic as agent) is an effect, not an answer, so the topic acting counts for nothing there.
+      actor: cands.map((a) => !!a.relation?.subj && focus.has(a.relation.subj) && !(askedSide && askedSide.size && !askedSide.has(a.id))),
       admits: cands.map(admitsOf),
       relation: cands.map((a) => (!!rel && stemOf(a.relation?.pred) === rel) || !!askedSide?.has(a.id)),
       words: cands.map((a) => [...new Set([...contentWords(a._sentence ?? "")].map(stemOf))].filter((s) => qWords.has(s))),
@@ -239,7 +241,14 @@ export async function answerLadder(record, { question, slice, grammar, telling =
     if (!sayCache.has(k)) { const r = await realize(propOf(a, v)); const s = r.sentence ?? null; if (s) { s.via = urlOf.get(a.pinax) ?? null; s.variant = v; } sayCache.set(k, s); }
     return sayCache.get(k);
   };
-  const say = (a) => sayVariant(a, 0);
+  // The first LAWFUL construction: variant 0 is preferred, and a giver the first cannot open on (a lowercase class holder: "experts" cannot
+  // begin a sentence, PL1) falls through to a construction that opens on a frame word ("Per experts, …"). A quotation has one construction.
+  const say = async (a) => {
+    const first = await sayVariant(a, 0);
+    if (first || propOf(a).type !== "attributed") return first;
+    for (let v = 1; v < nVariants; v++) { const s = await sayVariant(a, v); if (s) return s; }
+    return null;
+  };
   // Every lawful construction of a candidate (a quotation has one).
   const variantsOf = async (a) => {
     if (propOf(a).type !== "attributed") { const s = await sayVariant(a, 0); return s ? [s] : []; }
