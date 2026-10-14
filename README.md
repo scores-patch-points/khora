@@ -351,7 +351,7 @@ table, and `archon-holocracy/archons.json`. See CODING-LESSONS.md #75.
 |---|---|---|
 | `kernel/hypergraph.js` | Berge | He coined it. |
 | `kernel/relation-composition.js` | Tarski | Calculus of relations. |
-| `kernel/kind-induction.js` | Kanada | A kind induced from what instances share. |
+| `kernel/terrain-induction.js` | Kanada | A kind induced from what instances share. |
 | `organs/kind-standing.js` | Shizhen | One individual placed into a ranked kind. |
 | `kernel/kind-graph-structure.js` | Xunzi | Names graded by resemblance — a graph, not a tree. |
 | `kernel/kind-graph-structure.js` | Osgood | An injected embedding reports the distance between two predicates as a number, never their identity. |

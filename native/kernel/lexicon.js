@@ -51,7 +51,7 @@ const stable = (values = []) => freeze([...new Set(Array.from(values ?? []).filt
 const FILLED_BY = freeze({
   Void: "refusals and typed gaps (exclusions, unresolved alternatives)",
   Entity: "admitted referents and their occurrences (perceiver + revision)",
-  Kind: "kind induction over the admitted population (kind-induction.js)",
+  Kind: "kind induction over the admitted population (terrain-induction.js)",
   Field: "scope projections over relation edges (emergent-terrain.js)",
   Link: "witnessed relation edges (perceiver's SVO extraction)",
   Network: "relation network components (emergent-terrain.js)",

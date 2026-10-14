@@ -3,7 +3,7 @@
 // and kind induction properly … we can instantly summarize something with EOT
 // and a few choice linked spans." The arrangement grouped statements with
 // hand-built heuristics (shared beings, word overlap) while the engine already
-// holds a kind inducer (kernel/kind-induction.js + entity-kind-induction.js:
+// holds a kind inducer (kernel/terrain-induction.js + entity-kind-induction.js:
 // capacities `kinds` and `kindnull`, Kind terrain) that finds basins in an
 // affinity field and tests each against a random-subset binding null.
 //
@@ -20,7 +20,7 @@
 // SATURATION — the instance that shows the most beings and figures not yet
 // shown, until the next shows none — each linked to its exact bytes.
 
-import { kindEvidence, createKindInductionIndex, indexKindEntries } from "../kernel/kind-induction.js";
+import { terrainEvidence, createTerrainInductionIndex, indexTerrainEntries } from "../kernel/terrain-induction.js";
 import { induceEntityKindCandidates } from "../kernel/entity-kind-induction.js";
 import { drawnParts } from "./eot-draft.js";
 import { isProperReferent } from "./referents.js";
@@ -62,7 +62,7 @@ export function statementKinds(draft, { population = null } = {}) {
   // sequencePosition is the statement's place in the material: the organ
   // refuses evidence without one (it orders what is witnessed when).
   const pos = new Map(points.map((pt, i) => [pt.id, i]));
-  const ev = (pt, featureKey, featureValue) => entries.push(kindEvidence({ id: `ke-${++seq}`, entityRef: pt.id, featureKey, featureValue, sequencePosition: pos.get(pt.id), witness: pt.id, anchor: { start: pt.span.start, end: pt.span.end } }));
+  const ev = (pt, featureKey, featureValue) => entries.push(terrainEvidence({ id: `ke-${++seq}`, entityRef: pt.id, featureKey, featureValue, sequencePosition: pos.get(pt.id), witness: pt.id, anchor: { start: pt.span.start, end: pt.span.end } }));
   for (const pt of points) {
     const label = labelOf(pt.text);
     if (label) ev(pt, "label", label);
@@ -71,8 +71,8 @@ export function statementKinds(draft, { population = null } = {}) {
     if (subject) ev(pt, "subject", subject);
     if (R) for (const id of R.resolveText(pt.text)) if (isProperReferent(R, id)) ev(pt, "being", id);
   }
-  const index = createKindInductionIndex();
-  indexKindEntries(index, entries);
+  const index = createTerrainInductionIndex();
+  indexTerrainEntries(index, entries);
   const induced = induceEntityKindCandidates(index.entityFeatures, { population: population ?? `statements:${draft?.sourceId ?? "draft"}` });
   const text = new Map(points.map((pt) => [pt.id, pt.text]));
   const kinds = induced.candidates.map((c) => {

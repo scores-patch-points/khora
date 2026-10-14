@@ -208,7 +208,7 @@ walls are shown to fire; POLICIES.md P65 is the full account):
 - **SIG·Pattern + NUL·Pattern — BUILT/REGISTERED, and the gate above was
   WRONG**: this plan gated the pair on "the legacy-engine path question,"
   but eoreader7's native kernel already carried full ports
-  (`kind-induction.js::projectKinds`; `entity-kind-induction.js` with a
+  (`terrain-induction.js::projectTerrains`; `entity-kind-induction.js` with a
   built-in seeded random-subset null per basin). The gate had dissolved
   before this plan was written — found by reading the modules, kept here
   as the correction rather than silently rewritten above. NUL·Pattern's

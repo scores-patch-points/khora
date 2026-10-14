@@ -150,7 +150,7 @@ organ over real dropped material — `Bezukhov, Rostova` found, the result
 attached to the act's own INS entry.
 
 **SIG·Pattern — Kind · Tracing** — `kinds` (eoreader7
-`native/kernel/kind-induction.js::projectKinds`, registered P65).
+`native/kernel/terrain-induction.js::projectTerrains`, registered P65).
 Recurring kind candidates signed PROVISIONALLY from a population's own
 interaction field — every basin carries its own null arm, tiny
 populations are refused as underpowered, and nothing is promoted by

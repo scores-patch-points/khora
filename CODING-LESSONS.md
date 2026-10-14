@@ -1746,7 +1746,7 @@ distinction is worth stating:
   titled "white paper" and named itself from them.
 
 Grammar (closed, small, listable) versus content (open, must be induced or
-looked up) is the same line kind-induction.js draws. Measured on the live
+looked up) is the same line terrain-induction.js draws. Measured on the live
 surf: sonnet 14 lines on 4/4 hosts; haiku 3 lines and 17 syllables (and 5,
 a part); "5 paragraphs" for an essay on exactly 4 of 8 hosts — half is not
 more than not, and the stage said "no agreed shape" instead of rounding up.

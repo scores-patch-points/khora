@@ -179,7 +179,7 @@
 // SOURCE RULES (scanned by tests/barker-organ.test.js).
 //   No LLM, embedding, network, fs or process access anywhere in this file. No EO module is imported and no EO
 //   vocabulary appears in any profile it accepts. The only kernel organs imported are kernel/rng.js,
-//   kernel/nullcheck.js, kernel/entity-kind-induction.js, kernel/kind-induction.js,
+//   kernel/nullcheck.js, kernel/entity-kind-induction.js, kernel/terrain-induction.js,
 //   kernel/kind-functional-induction.js and organs/kind-standing.js. A candidate the inducer flags as a
 //   fallback nomination is excluded wherever candidates are read. No description-length or parameter-count
 //   penalty and no MDE-as-threshold appears: SESOIs are registered, never read off the instrument.
@@ -198,7 +198,7 @@
 import { createSeededRng, shuffled, stableHash } from "../kernel/rng.js";
 import { permutationCount } from "../kernel/nullcheck.js";
 import { induceEntityKindCandidates } from "../kernel/entity-kind-induction.js";
-import { kindEvidence, createKindInductionIndex, snapshotKindState } from "../kernel/kind-induction.js";
+import { terrainEvidence, createTerrainInductionIndex, snapshotTerrainState } from "../kernel/terrain-induction.js";
 import { characteristicSetKinds, induceKindsAndFunctions } from "../kernel/kind-functional-induction.js";
 import { kindMembership } from "./kind-standing.js";
 
@@ -2211,7 +2211,7 @@ export function archPowerCard({ branchSizes, lineageOf = null, sesoi = DEFAULTS.
 // ── rivals and ledgers the kernel already knows how to hold ─────────────────────
 /**
  * Registers rival partitions (family, script, a data-driven grouping, Barker's own) as EXPLICIT classifications beside the induced kinds:
- * `partitions` is { name: { systemId: label } }; each is projected by kernel/kind-induction.js as received_explicit_classification, witnessed: false.
+ * `partitions` is { name: { systemId: label } }; each is projected by kernel/terrain-induction.js as received_explicit_classification, witnessed: false.
  * Declared and induced kinds are never merged; they are compared (held-out cross-entropy at equal k, BARKER.md 6.0).
  */
 export function registerRivals(partitions, { giver } = {}) {
@@ -2219,10 +2219,10 @@ export function registerRivals(partitions, { giver } = {}) {
   const entries = [];
   for (const [name, assignment] of Object.entries(partitions)) {
     for (const [sys, label] of Object.entries(assignment)) {
-      entries.push(kindEvidence({ id: `rival:${name}:${sys}`, entityRef: sys, evidenceType: "explicit_classification", kindKey: `${name}:${label}`, kindSurface: String(label), witness: `${giver}/${name}` }));
+      entries.push(terrainEvidence({ id: `rival:${name}:${sys}`, entityRef: sys, evidenceType: "explicit_classification", kindKey: `${name}:${label}`, kindSurface: String(label), witness: `${giver}/${name}` }));
     }
   }
-  return { entries, projections: snapshotKindState(createKindInductionIndex(entries)) };
+  return { entries, projections: snapshotTerrainState(createTerrainInductionIndex(entries)) };
 }
 
 /**
@@ -2357,7 +2357,7 @@ export function induceMetastructure(profiles, opts = {}) {
   const givers = [...new Set(profiles.flatMap((p) => Object.values(p.cells ?? {}).map((c) => c.giver)))].sort();
   const provenance = {
     organ: "organs/barker.js", version: BARKER_VERSION, seed: o.seed, alpha: o.alpha, draws: o.draws, instruments: [...o.instruments], bins: o.bins, minKindSize: o.minKindSize, groups, systems: profiles.map((p) => ({ id: p.id, contentHash: p.contentHash ?? null })),
-    givers, kernel: ["kernel/entity-kind-induction.js", "kernel/kind-functional-induction.js", "kernel/kind-induction.js", "kernel/rng.js", "organs/kind-standing.js"],
+    givers, kernel: ["kernel/entity-kind-induction.js", "kernel/kind-functional-induction.js", "kernel/terrain-induction.js", "kernel/rng.js", "organs/kind-standing.js"],
     typedNumbers: { ...DEFAULTS }, powerGridSupplied: !!o.powerGrid, calibrationsSupplied: Object.keys(o.calibrations), archPowerSupplied: !!o.archPower,
     frameDeclaration: { organs: { barker: `organs/barker.js@${BARKER_VERSION}`, kanada: "kernel/entity-kind-induction.js", characteristicSets: "kernel/kind-functional-induction.js", ledger: "kernel/kind-functional-induction.js", membership: "organs/kind-standing.js" }, givers: Object.fromEntries(givers.map((g) => [g, g])), numbers: { alpha: o.alpha, draws: o.draws, seed: o.seed, bins: o.bins, minKindSize: o.minKindSize, controlReps: o.controlReps, couplingSesoi: o.sesoi } },
     lens: "UD annotation conventions and khora's own instruments, as measured by the profile builders; one author's choice of nulls and instruments. The map is itself coordinated and claims no standpoint outside.",
