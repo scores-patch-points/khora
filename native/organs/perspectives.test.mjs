@@ -5,7 +5,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { makePinax } from "./pinax.js";
 import { readCorpus } from "./callimachus.js";
-import { readPerspectives, edgesOf, STANCE_FRAMES } from "./perspectives.js";
+import { readPerspectives, edgesOf, stancesOf, STANCE_FRAMES } from "./perspectives.js";
 import { readRows } from "./claim-realize.js";
 import { loadModel } from "../adapters/text/english-parser.js";
 
@@ -107,3 +107,18 @@ test("the ladder does not let a supporter lead 'who opposed …' when an opposer
   assert.equal(kept.candidates, base.candidates);
 });
 
+
+test("an evaluation is a stance: 'experts argue that X is better' puts the experts on X's side; 'than X' flips it; affix antonymy extends the seed", () => {
+  const stances = (text, surf) => stancesOf(text, "x", { model, focusSurfaces: surf });
+  const a = stances("Scientists and health experts argue that permanent standard time is better for human health.", ["permanent standard time"]);
+  const ev = a.find((r) => r.evaluation);
+  assert.ok(ev, "the copular clause is read");
+  assert.equal(ev.pred, "good", "better is the comparative of good (morphology prior)");
+  assert.match(ev.holder.text, /experts/);
+  assert.equal(ev.negated, false);
+  const b = stances("The current system is better than permanent standard time for evenings.", ["permanent standard time"]);
+  const flipped = b.find((r) => r.evaluation);
+  assert.ok(flipped && flipped.negated === true && flipped.flipped_by_than, "the topic is what the other is better than: the evaluation is reversed");
+  // CONTROL that can fail: a copular clause about something else is not a stance on the topic
+  assert.ok(!stances("The weather is better in March.", ["permanent standard time"]).some((r) => r.evaluation));
+});

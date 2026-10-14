@@ -26,6 +26,7 @@ import { claimFromSentence, claimFromRows, readRows } from "./claim-realize.js";
 import { giverOf } from "./giver.js";
 import { splitSentences } from "../adapters/text/spans.js";
 import { offsetMap, convertOffset, formatAddress } from "./pinax.js";
+import { quotedSpans, attributeQuotation } from "../adapters/text/attribution.js";
 import { projectPerspectives, perspectiveOperation, commonGround, divergence, STANCE, BASIS } from "../kernel/perspective.js";
 
 /**
@@ -38,6 +39,10 @@ export const STANCE_FRAMES = Object.freeze({
   giver: "user direction 2026-10-14: 'who is against? who doesn't like?' — declared frame words, English",
   pro: Object.freeze(["support", "back", "favor", "endorse", "champion", "applaud", "like", "want", "welcome"]),
   con: Object.freeze(["oppose", "object", "dislike", "criticize", "reject", "resist", "block", "fight", "hate"]),
+  // EVALUATIVE adjectives ("X is better for your health"): a minimal axis; affix antonymy (un-/dis-/non-/anti-) and the corpus's own
+  // contrast edges extend it (healthy/unhealthy …). Ablation 2026-10-14 (eval/callimachus/polarity-ablation.mjs): no derived arm
+  // covers the corpus's contrast pairs, so this seed stays declared.
+  eval: Object.freeze({ pos: Object.freeze(["good", "better", "best"]), neg: Object.freeze(["bad", "worse", "worst"]) }),
 });
 
 const CONTRAST = new Set(["but", "while", "whereas", "yet"]);
@@ -114,7 +119,7 @@ const base = (d) => String(d).split(":")[0];
  * has none (a coordinated verb sharing its subject, a ccomp) takes the subject of the verb that governs it (UD): "Critics say the
  * bill would harm riders" → the clause "harm" is held by "critics" and REPORTED. A refusal is typed, never dropped.
  */
-export function stancesOf(text, address, { model, focusSurfaces }) {
+export function stancesOf(text, address, { model, focusSurfaces, entities = [] }) {
   const rows = repairRows(readRows(model, text));
   if (!rows.length) return [{ refusal: "no_parse" }];
   const out = [];
@@ -165,7 +170,70 @@ export function stancesOf(text, address, { model, focusSurfaces }) {
     }
     const hc = holder?._claim ?? claim;
     const hs = holder ? (holder._claim ? holder._claim.subj : claim.voice === "passive" ? (claim.obls ?? []).find((o) => o.id === holder.id) ?? claim.subj : claim.subj) : null;
-    out.push({ role, pred: claim.pred.lemma, negated: !!claim.neg, voice: claim.voice, reported, holder: holder ? { lemma: holder.lemma, upos: holder.upos, text: pronoun ? null : spanText(hc, hs) ?? holder.form, pronoun, from: hs?.from ?? null, to: hs?.to ?? null } : null });
+    let htext = holder && !pronoun ? spanText(hc, hs) ?? holder.form : null, hfrom = hs?.from ?? null, hto = hs?.to ?? null, referent = null;
+    // REFERENTS MERGE: a holder is the record's admitted referent, not a string. "Republican Senator" followed in the sentence by an
+    // admitted name ("… Senator Mike Rounds …") is that name's referent; a bare title or a surface the record already admitted resolves
+    // to the same id, so "Rounds", "Sen. Rounds" and "Mike Rounds" are one holder across pages.
+    if (htext && entities.length && hto != null) {
+      const after = text.slice(hto).replace(/^\s+/, ""), lead = text.length - text.slice(hto).length;
+      const surf = (e) => e.surfaces ?? [e.name].filter(Boolean);
+      let best = null;
+      for (const e of entities) for (const f of surf(e)) if (f.length >= 3 && after.startsWith(f) && !/[\p{L}\p{N}]/u.test(after[f.length] ?? " ") && (!best || f.length > best.f.length)) best = { e, f };
+      if (best) { htext = `${htext} ${best.f}`; hto = hto + (text.slice(hto).length - after.length) + best.f.length; referent = best.e.id; void lead; }
+    }
+    // A title the parse follows with proper-name tokens ("Republican Senator | Mike Rounds") is that person: the name is attested in the
+    // sentence even when the record never admitted it (one occurrence is below the admission floor).
+    if (htext && !referent && hto != null) {
+      let end = hto, name = [];
+      for (const r of rows.filter((x) => x.at >= hto).sort((a, b) => a.at - b.at)) {
+        // a name's continuation: PROPN, or a capitalised token the parse hangs as `flat` on the name ("Rounds" tagged NOUN)
+        // (the continuation may be mis-tagged — "Rounds" came back NOUN — so once a name has begun, an ADJACENT capitalised token continues it)
+        const cap = /^\p{Lu}/u.test(r.form);
+        if (!(r.upos === "PROPN" || (cap && (name.length > 0 || /^flat/.test(r.deprel)))) || !/^\s*$/.test(text.slice(end, r.at))) break;
+        name.push(r.form); end = r.at + r.form.length;
+      }
+      if (name.length) { htext = `${htext} ${name.join(" ")}`; hto = end; }
+    }
+    if (htext && entities.length && !referent) {
+      const low = htext.toLowerCase();
+      const hit = entities.find((e) => (e.surfaces ?? [e.name]).some((f) => f && f.toLowerCase() === low))
+;
+      if (hit) referent = hit.id;
+    }
+    out.push({ role, pred: claim.pred.lemma, negated: !!claim.neg, voice: claim.voice, reported, holder: holder ? { lemma: holder.lemma, upos: holder.upos, text: pronoun ? null : htext, pronoun, from: hfrom, to: hto, referent } : null });
+  }
+  // EVALUATION: a copular clause whose predicate is an ADJECTIVE and whose subject is the topic ("permanent standard time IS better for
+  // health"). The stance is the adjective's pole; a comparative's "than"-complement flips it (the topic is what the other is better than).
+  const forms = model.morphology?.forms ?? {};
+  for (const a of rows.filter((r) => r.upos === "ADJ")) {
+    const kids = rows.filter((r) => r.head === a.id);
+    const subjRow = kids.find((r) => base(r.deprel) === "nsubj"), isCop = kids.some((r) => r.deprel === "cop");
+    if (!subjRow || !isCop) continue;
+    const sub = (id) => { const out = new Set([id]); let grew = true; while (grew) { grew = false; for (const r of rows) if (!out.has(r.id) && out.has(r.head) && !["punct"].includes(r.deprel)) { out.add(r.id); grew = true; } } return rows.filter((r) => out.has(r.id)).sort((x, y) => x.at - y.at); };
+    const stext = sub(subjRow.id).map((r) => r.form).join(" ").toLowerCase();
+    const onSubject = focusSurfaces.some((f) => stext.includes(f));
+    const thanKid = kids.find((r) => base(r.deprel) === "obl" && rows.some((c) => c.head === r.id && c.deprel === "case" && c.form.toLowerCase() === "than"));
+    const onThan = !!thanKid && focusSurfaces.some((f) => sub(thanKid.id).map((r) => r.form).join(" ").toLowerCase().includes(f));
+    if (!onSubject && !onThan) continue;
+    let lemma = String(a.lemma).toLowerCase();
+    if (forms[lemma]?.length) lemma = forms[lemma][0]; // "better" → "good" (the morphology prior's irregular table)
+    const negated = kids.some((r) => r.deprel === "advmod" && /^(not|n't|never)$/i.test(r.form)) || kids.some((r) => r.deprel === "cop" && false);
+    // holder: climb the governing verbs of the adjective (ccomp of "argue"/"say")
+    let holder = null, reported = false, at = a;
+    for (let hop = 0; !holder && hop < 6; hop++) {
+      const gov = rows.find((r) => r.id === at.head);
+      if (!gov) break;
+      if (CLAUSAL.has(base(at.deprel)) && base(at.deprel) !== "conj") reported = true;
+      if (gov.upos === "VERB") {
+        const gc = claimFromRows(text, address, rows, { predForm: gov.form, predAt: gov.at });
+        if (gc && !gc.untrusted && gc.subj && gc.voice !== "passive") { holder = { ...headRow(gc, gc.subj), _claim: gc }; break; }
+      }
+      at = gov;
+    }
+    // a governing clause's pronoun subject cannot be resolved here
+    const htxt = holder ? spanText(holder._claim, holder._claim.subj) : null;
+    out.push({ role: "evaluated", pred: lemma, negated: negated !== onThan ? true : false, flipped_by_than: onThan, voice: "active", reported, evaluation: true,
+      holder: holder ? { lemma: holder.lemma, upos: holder.upos, text: holder.upos === "PRON" ? null : htxt, pronoun: holder.upos === "PRON" ? holder.form : null, from: holder._claim.subj?.from ?? null, to: holder._claim.subj?.to ?? null, referent: null } : null });
   }
   return out.length ? out : [{ refusal: "topic_not_in_claim" }];
 }
@@ -189,7 +257,15 @@ export function readPerspectives(record, { model, question, texts = new Map(), t
     for (const l of fr.pro.slice(1)) G.link(fr.pro[0], l, 0);
     for (const l of fr.con.slice(1)) G.link(fr.con[0], l, 0);
     if (fr.pro[0] && fr.con[0]) G.link(fr.pro[0], fr.con[0], 1);
+    const ev = fr.eval;
+    if (ev) {
+      for (const l of ev.pos.slice(1)) G.link(ev.pos[0], l, 0);
+      for (const l of ev.neg.slice(1)) G.link(ev.neg[0], l, 0);
+      G.link(ev.pos[0], ev.neg[0], 1);
+      if (fr.pro[0]) G.link(fr.pro[0], ev.pos[0], 0); // "X is good" and "supports X" are the same side
+    }
   }
+  const vocab = new Set();
   const indexIds = new Set((record.sources ?? []).filter((s) => s.role === "index").map((s) => s.id));
   for (const [pinax, text] of texts) {
     if (indexIds.has(pinax)) continue;
@@ -200,8 +276,12 @@ export function readPerspectives(record, { model, question, texts = new Map(), t
       const rows = c?.rows ? repairRows(c.rows) : null;
       if (!rows) continue;
       for (const e of edgesOf(rows)) { G.link(e.a, e.b, e.parity); edges.push(e); }
+      for (const r of rows) if (r.upos === "VERB" || r.upos === "ADJ") vocab.add(String(r.lemma).toLowerCase());
     }
   }
+  // AFFIX ANTONYMY, from the corpus's own vocabulary: L and un|dis|non|anti|de + L both attested → opposite poles (derivational morphology,
+  // no list: the pair must occur in these pages). Ablation: it covers none of the verb contrast pairs, so it only ever ADDS adjectives.
+  for (const l of vocab) for (const pre of ["un", "dis", "non", "anti", "de"]) if (l.startsWith(pre) && l.length - pre.length >= 3 && vocab.has(l.slice(pre.length))) G.link(l, l.slice(pre.length), 1);
   // the topic's ALIASES: what the topic itself does ("the Act would make DAYLIGHT SAVING TIME permanent") names its content; a phrase
   // counts only when two different pages write it as that patient (one witness is a coincidence of one writer).
   let topicNames = surfaces;
@@ -252,16 +332,28 @@ export function readPerspectives(record, { model, question, texts = new Map(), t
       const t = sn.text.trim();
       if (t.length < 20 || t.length > 500 || !topicNames.some((f) => t.toLowerCase().includes(f))) continue;
       const span = addr(sn.offset, sn.offset + sn.text.trimEnd().length);
-      let rs; try { rs = stancesOf(t, span, { model, focusSurfaces: topicNames }); } catch { rs = [{ refusal: "parse_error" }]; }
+      let rs; try { rs = stancesOf(t, span, { model, focusSurfaces: topicNames, entities: record.entities ?? [] }); } catch { rs = [{ refusal: "parse_error" }]; }
       for (const r of rs) {
       if (r.refusal) { refused.push({ span, why: r.refusal, pred: r.pred ?? null }); continue; }
       // A quotation's speaker holds it; the page's author only REPORTS it.
       const q = quotes.find((a) => a.pinax === src.id && a.span && String(a._sentence ?? "").length > 3 && t.includes(String(a._sentence).trim().slice(0, 40)));
-      const speaker = q?.giver?.surface_verbatim ?? null;
+      // ATTRIBUTION (adapters/text/attribution.js, the house's own): where no atom named the speaker, the quotation frame's trailing or
+      // leading "said NAME" is read with the POS prior's verb call and the record's ADMITTED referents (it refuses; it never invents).
+      let speaker = q?.giver?.surface_verbatim ?? null, speakerRef = null;
+      if (!speaker && /["“”]/.test(t)) {
+        const isVerb = (w) => !!model.lexicon?.form?.[`${String(w).toLowerCase()}|VERB`];
+        const referentFor = (surface) => (record.entities ?? []).find((e) => (e.surfaces ?? [e.name]).some((f) => f && f.toLowerCase() === String(surface).toLowerCase()))?.id ?? null;
+        // attribution.js reads typographic quotes; straight pairs are the same convention (same length, so offsets hold)
+        const curly = t.replace(/"([^"]*)"/g, "\u201c$1\u201d");
+        for (const qs of quotedSpans(curly).spans) {
+          const att = attributeQuotation(qs.before, qs.after, { isVerb, referentFor });
+          if (att.speaker) { speakerRef = att.speaker; speaker = (record.entities ?? []).find((e) => e.id === att.speaker)?.name ?? null; break; }
+        }
+      }
       const who = speaker ?? r.holder?.text ?? null;
       const lead = sn.text.length - sn.text.trimStart().length;
       const holder_at = !speaker && r.holder?.from != null && r.holder.to != null ? addr(sn.offset + lead + r.holder.from, sn.offset + lead + r.holder.to) : null;
-      const row = { span, text: t, holder_at, pinax: src.id, url: src.final_url ?? src.url, holder: who, pred: r.pred, negated: r.negated, role: r.role, voice: r.voice, basis: speaker || !r.reported ? BASIS.ASSERTED : BASIS.REPORTED, via: author && author !== who ? [author] : [] };
+      const row = { span, text: t, holder_at, pinax: src.id, url: src.final_url ?? src.url, holder: who, referent: speakerRef ?? r.holder?.referent ?? null, pred: r.pred, negated: r.negated, role: r.role, voice: r.voice, basis: speaker || !r.reported ? BASIS.ASSERTED : BASIS.REPORTED, via: author && author !== who ? [author] : [] };
       if (!who) { unresolved.push({ ...row, pole: "?", why: r.holder?.pronoun ? `pronoun_holder:${r.holder.pronoun}` : "no_holder" }); continue; }
       const { pole, why } = poleOf(r.pred, r.negated);
       emit(row, pole, why);
@@ -270,7 +362,11 @@ export function readPerspectives(record, { model, question, texts = new Map(), t
   }
   const projected = projectPerspectives(ops);
   // 3. how they fit together: each side's holders, the shared holders' ground, and the typed divergences
-  const side = (p) => [...new Set(positions.filter((x) => x.pole === p).map((x) => x.holder))];
+  // one holder per REFERENT: "Mike Rounds", "Rounds" and "Republican Senator Mike Rounds" are one holder, shown by the longest surface
+  const full = [...new Set(positions.map((x) => x.holder).filter((h) => h && /\s/.test(h)))];
+  const nameOf = (x) => { if (!x.referent) { const last = String(x.holder ?? "").split(/\s+/).pop(); const m = full.filter((f) => f !== x.holder && f.split(/\s+/).pop() === last && /^\p{Lu}/u.test(last)); return m.length === 1 && String(x.holder).split(/\s+/).length === 1 ? m[0] : x.holder; } const e = (record.entities ?? []).find((y) => y.id === x.referent); return e ? [e.name, ...(e.surfaces ?? [])].filter(Boolean).sort((a, b) => b.length - a.length)[0] : x.holder; };
+  for (const x of positions) x.holder_display = nameOf(x);
+  const side = (p) => [...new Set(positions.filter((x) => x.pole === p).map((x) => x.holder_display))];
   const sides = { "+": side("+"), "-": side("-") };
   const fit = [];
   for (const a of sides["+"]) for (const b of sides["-"]) fit.push({ a, b, divergence: divergence(projected, `holder:${a}`, `holder:${b}`) });
@@ -283,6 +379,7 @@ export function readPerspectives(record, { model, question, texts = new Map(), t
     edges: { count: edges.length, contrast: edges.filter((e) => e.kind === "contrast").length, and: edges.filter((e) => e.kind === "and").length },
     projected, fit,
     aliases: aliasReport,
+    edgeList: edges,
     topicNames,
     // the live graph, for an incremental reader (scripts/hunt-stance.mjs): read ONE new page without re-parsing the corpus
     poleOf,
