@@ -32,6 +32,10 @@
 // before it can measure anything, so the loop is never stopped on a
 // measurement that was never taken.
 //
+//   a state that returns   -> STOP: cycling (the last rounds repeat the
+//                rounds before them exactly; a 1-D DMD fit reads such a
+//                limit cycle as decay, so it is found by equality instead)
+//
 // A HARD CEILING still bounds every loop this module makes (P9: a budget is
 // always declared, never implicit) — but it is the SAFETY FLOOR under the
 // measured test, not the operative stop. A well-behaved loop should almost
@@ -53,9 +57,35 @@ export const VERDICTS = Object.freeze({
   DIVERGING: "diverging",       // stop: the measured mode is growing — repair is making it worse
   RESOLVED: "resolved",         // stop: the issue count itself reached zero
   CEILING: "ceiling",           // stop: the declared safety floor was reached first
+  CYCLING: "cycling",           // stop: the last rounds repeat the rounds before them — the repair undoes its own work
   INSUFFICIENT_HISTORY: "insufficient_history", // continue: fewer than two rounds pushed yet
   DECAYING: "decaying",         // continue: the measured mode is genuinely shrinking
 });
+
+/**
+ * The smallest period p >= 2 for which the last p rounds repeat the p rounds
+ * before them EXACTLY (and are not all one value), or 0.
+ *
+ * A one-dimensional DMD fit cannot see a limit cycle: 4,2,4,2 fits a
+ * decaying mode on every prefix and the loop ran to the ceiling, which this
+ * module's header calls the safety floor and not the operative stop. A state
+ * that returns to the very rounds it just left is a repeated state, found by
+ * equality — no tolerance, no threshold. Needs two full periods, so a count
+ * that merely revisits a value once (5,3,4,2,1: progress through a bump) is
+ * never flagged. p = 1 (the same count twice) and constant blocks are
+ * stillness, which the measured test already reads as `converged`.
+ */
+const cyclePeriod = (rounds) => {
+  const n = rounds.length;
+  for (let p = 2; 2 * p <= n; p += 1) {
+    let same = true;
+    for (let i = 0; i < p && same; i += 1) same = rounds[n - 1 - i] === rounds[n - 1 - i - p];
+    if (!same) continue;
+    const block = rounds.slice(n - p);
+    if (block.some((x) => x !== block[0])) return p;
+  }
+  return 0;
+};
 
 /**
  * makeMeasuredLoop({ ceiling, relTol }) — one loop's own convergence
@@ -86,6 +116,8 @@ export function makeMeasuredLoop({ ceiling, relTol = 1e-10 } = {}) {
   function verdict() {
     const n = rounds.length;
     if (n && rounds[n - 1] === 0) return Object.freeze({ continue: false, verdict: VERDICTS.RESOLVED, rounds: n });
+    const period = cyclePeriod(rounds);
+    if (period) return Object.freeze({ continue: false, verdict: VERDICTS.CYCLING, rounds: n, period });
     if (n >= ceiling) return Object.freeze({ continue: false, verdict: VERDICTS.CEILING, rounds: n });
     const m = dmd.modes({ rank: 1, relTol });
     if (m.gap) return Object.freeze({ continue: true, verdict: VERDICTS.INSUFFICIENT_HISTORY, rounds: n, gap: m.gap });
