@@ -37,6 +37,7 @@
 // the ladder is not yet routed through this (it still answers at fixed sizes). Nothing here calls a model.
 import { mergeTestimony } from "./capacity-runner.js";
 import { STANCE_BY_MODE } from "../kernel/cube.js";
+import { sourceOfWitness } from "../kernel/notes.js";
 import { seg, sentence } from "./prose-laws.js";
 import { seamReport } from "./seam-ledger.js";
 
@@ -103,6 +104,46 @@ export function contactVerdict(w, region) {
     refused: merged.refused.map((r) => r.span),
     undetermined: merged.undetermined.map((r) => r.span),
   };
+}
+
+/**
+ * contestOf(w, verdict) — a contact verdict as an ADMIT-ABLE contest. PURE, and NOT WIRED: nothing in this file or any caller lands it.
+ *
+ * `contactVerdict` produces DISAGREE / CONTRADICTED — a W claim and the U spans that refuse it — and nothing wrote it down: the verdict
+ * lived and died inside one fold. The kernel's contest is landed AT THE DOOR (notes.admit: a cut meeting its link, either order of
+ * arrival, lands CON·Figure·CONTESTED against the link, the denying source named and its own bytes the decider). So the durable form of
+ * a contact verdict is the two sides as ARRANGEMENTS, each under its own witness, for the door to read. This is that transcription and
+ * nothing more: the claim under test, then each refusing span, in the shape admit() takes ({ end1, label, end2, polarity, spans:[{at}],
+ * decider }); the caller passes `witness` per admit() call. The polarity each side carries is its own — whichever side is "-" is the cut.
+ *
+ *   returns { contest, case, reason?, notes: [{ side: "W"|"U", witness, source, arrangement }], skipped: [{ type, address, detail }] }
+ *
+ * Typed, never guessed: only DISAGREE / CONTRADICTED are contests (`reason: "not_a_contest"`); a W claim with no address cannot be a side
+ * (`w_unaddressed`); a refusing span is skipped with `no_address`, `no_bytes` (a denial's decider is its own bytes — an affirmative span
+ * needs none) or `same_source` (the door's wall: a source that witnesses the link cannot also deny it, named here rather than discovered
+ * by a silent non-landing). `holds` are corroboration, not denial, and are not carried.
+ */
+export function contestOf(w, verdict) {
+  const c = verdict?.case ?? null;
+  if (c !== "DISAGREE" && c !== "CONTRADICTED") return { contest: false, case: c, reason: "not_a_contest", notes: [], skipped: [] };
+  if (!w?.address || !w?.claim) return { contest: false, case: c, reason: "w_unaddressed", notes: [], skipped: [] };
+  const sourceOf = (address) => sourceOfWitness(address);
+  const side = (span, which) => {
+    const k = span.claim;
+    const arrangement = { end1: k.subj, label: k.pred, end2: k.obj, polarity: k.polarity === "-" ? "-" : "+", spans: [{ at: span.address }] };
+    if (arrangement.polarity === "-") arrangement.decider = span.text;
+    return { side: which, witness: span.address, source: sourceOf(span.address), arrangement };
+  };
+  const notes = [side(w, "W")];
+  const skipped = [];
+  for (const u of verdict.refused ?? []) {
+    if (!u?.address) { skipped.push({ type: "no_address", address: null, detail: "a refusal with no address is an assertion, not a reading" }); continue; }
+    if (u.claim?.polarity === "-" && !(typeof u.text === "string" && u.text.trim())) { skipped.push({ type: "no_bytes", address: u.address, detail: "a denial's decider is the span's own bytes; none were carried" }); continue; }
+    if (sourceOf(u.address) === notes[0].source) { skipped.push({ type: "same_source", address: u.address, detail: "the claim and its refusal share a source; a source cannot deny what it witnesses" }); continue; }
+    notes.push(side(u, "U"));
+  }
+  if (notes.length < 2) return { contest: false, case: c, reason: "no_admitable_refusal", notes: [], skipped };
+  return { contest: true, case: c, notes, skipped };
 }
 
 // ---- selecting -----------------------------------------------------------------------------------------------------------------
