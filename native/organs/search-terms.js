@@ -15,7 +15,7 @@
 // files' own words).
 //
 // clusters: is routed to kind-standing.js, NOT terrain-induction.js, though
-// capacities.js itself registers terrain-induction.js::projectTerrains at the
+// capacities.js itself registers terrain-induction.js::projectTerrainInduction at the
 // same cell (SIG.Kind) and kind-standing.js is not in that table at all —
 // disclosed, not smoothed over. The obvious choice was terrain-induction.js;
 // THE-CORE-MECHANISM.md names that organ's own basin null as one of only
@@ -47,7 +47,7 @@ export const SEARCH_TERMS = Object.freeze([
     id: "clusters", family: "PERTURBATION", cell: "SIG.Kind",
     module: "native/organs/kind-standing.js", fn: "discoverCompanyKinds",
     question: "what groups cohere on their own, measured against the real population?",
-    note: "not terrain-induction.js::projectTerrains — see file header",
+    note: "not terrain-induction.js::projectTerrainInduction — see file header",
   }),
   Object.freeze({
     id: "reversed", family: "PERTURBATION", cell: "CON.Network",

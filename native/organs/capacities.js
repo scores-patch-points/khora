@@ -340,7 +340,7 @@ export const CAPACITIES = Object.freeze([
     terrain: "Kind",
     op: "SIG",
     module: "eoreader7/native/kernel/terrain-induction.js",
-    fn: "projectTerrains",
+    fn: "projectTerrainInduction",
     what: "recurring kind candidates signed PROVISIONALLY from a population's own interaction field, each basin carrying its own random-subset binding-energy null — the native port of the kinds discipline Explore's view already holds (null arm, refused-as-underpowered). Typing reasoned: signing a recurring kind is Relate·Existence at Pattern grain — SIG·Kind.",
   }),
   Object.freeze({

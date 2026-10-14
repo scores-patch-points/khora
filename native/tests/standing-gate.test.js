@@ -1,12 +1,12 @@
 // tests/standing-gate.test.js — the standing gate lives in the kernel's own
 // diagnostics: every induced population Kind is disclosed as a WITHHELD
 // candidate by default (coherence alone earns nothing), so any consumer of
-// terrainDiagnostics() inherits the discipline with no per-surface change.
+// terrainInductionDiagnostics() inherits the discipline with no per-surface change.
 // A pipeline that has independently measured a consequence promotes upstream.
 import test from "node:test";
 import assert from "node:assert/strict";
 
-import { createTerrainInductionIndex, indexTerrainEntries, terrainEvidence, terrainDiagnostics } from "../kernel/terrain-induction.js";
+import { createTerrainInductionIndex, indexTerrainInductionEntries, terrainEvidence, terrainInductionDiagnostics } from "../kernel/terrain-induction.js";
 import { createAbstractionRegistry, admitAbstraction, earnAbstraction, releaseDecision } from "../kernel/hyperlexicon-abstraction.js";
 
 function grant(index) {
@@ -17,13 +17,13 @@ function grant(index) {
     entries.push(terrainEvidence({ id: `ev:${i}:1`, entityRef: eid, featureKey: `group:${i % 3}`, featureValue: true, sequencePosition: i }));
     entries.push(terrainEvidence({ id: `ev:${i}:2`, entityRef: eid, featureKey: `shared`, featureValue: true, sequencePosition: i + 100 }));
   }
-  indexTerrainEntries(index, entries);
+  indexTerrainInductionEntries(index, entries);
   return index;
 }
 
-test("terrainDiagnostics discloses every population candidate as withheld (candidate)", () => {
+test("terrainInductionDiagnostics discloses every population candidate as withheld (candidate)", () => {
   const index = grant(createTerrainInductionIndex([], { populationMinPrevalence: 0.02, populationPermutations: 12 }));
-  const diag = terrainDiagnostics(index);
+  const diag = terrainInductionDiagnostics(index);
   assert.equal(diag.populationKindCandidates.length > 0, true);
   for (const c of diag.populationKindCandidates) {
     assert.equal(c.released, false);

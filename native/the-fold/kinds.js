@@ -20,7 +20,7 @@
 // SATURATION — the instance that shows the most beings and figures not yet
 // shown, until the next shows none — each linked to its exact bytes.
 
-import { terrainEvidence, createTerrainInductionIndex, indexTerrainEntries } from "../kernel/terrain-induction.js";
+import { terrainEvidence, createTerrainInductionIndex, indexTerrainInductionEntries } from "../kernel/terrain-induction.js";
 import { induceEntityKindCandidates } from "../kernel/entity-kind-induction.js";
 import { drawnParts } from "./eot-draft.js";
 import { isProperReferent } from "./referents.js";
@@ -72,7 +72,7 @@ export function statementKinds(draft, { population = null } = {}) {
     if (R) for (const id of R.resolveText(pt.text)) if (isProperReferent(R, id)) ev(pt, "being", id);
   }
   const index = createTerrainInductionIndex();
-  indexTerrainEntries(index, entries);
+  indexTerrainInductionEntries(index, entries);
   const induced = induceEntityKindCandidates(index.entityFeatures, { population: population ?? `statements:${draft?.sourceId ?? "draft"}` });
   const text = new Map(points.map((pt) => [pt.id, pt.text]));
   const kinds = induced.candidates.map((c) => {

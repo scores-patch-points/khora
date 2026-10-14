@@ -198,7 +198,7 @@
 import { createSeededRng, shuffled, stableHash } from "../kernel/rng.js";
 import { permutationCount } from "../kernel/nullcheck.js";
 import { induceEntityKindCandidates } from "../kernel/entity-kind-induction.js";
-import { terrainEvidence, createTerrainInductionIndex, snapshotTerrainState } from "../kernel/terrain-induction.js";
+import { terrainEvidence, createTerrainInductionIndex, snapshotTerrainInductionState } from "../kernel/terrain-induction.js";
 import { characteristicSetKinds, induceKindsAndFunctions } from "../kernel/kind-functional-induction.js";
 import { kindMembership } from "./kind-standing.js";
 
@@ -2222,7 +2222,7 @@ export function registerRivals(partitions, { giver } = {}) {
       entries.push(terrainEvidence({ id: `rival:${name}:${sys}`, entityRef: sys, evidenceType: "explicit_classification", kindKey: `${name}:${label}`, kindSurface: String(label), witness: `${giver}/${name}` }));
     }
   }
-  return { entries, projections: snapshotTerrainState(createTerrainInductionIndex(entries)) };
+  return { entries, projections: snapshotTerrainInductionState(createTerrainInductionIndex(entries)) };
 }
 
 /**

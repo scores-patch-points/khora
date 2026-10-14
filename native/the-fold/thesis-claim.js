@@ -54,7 +54,7 @@
 // sentence out, re-checked through arrange.js's eligibility gate before it
 // replaces anything.
 
-import { terrainEvidence, createTerrainInductionIndex, indexTerrainEntries } from "../kernel/terrain-induction.js";
+import { terrainEvidence, createTerrainInductionIndex, indexTerrainInductionEntries } from "../kernel/terrain-induction.js";
 import { induceEntityKindCandidates } from "../kernel/entity-kind-induction.js";
 import { gfpClaim, claimFromTriple, generalizeClaims, caselessIdentity, holon } from "../kernel/gfp-claim.js";
 
@@ -88,7 +88,7 @@ export function thesisBasin(pool, winnerId, { population = "thesis-pool" } = {})
     if (any) noted += 1;
   }
   const index = createTerrainInductionIndex();
-  indexTerrainEntries(index, entries);
+  indexTerrainInductionEntries(index, entries);
   const induced = induceEntityKindCandidates(index.entityFeatures, { population });
   const validated = induced.candidates.filter((c) => c.field?.stable === true && c.fallbackNomination !== true && c.memberCount >= 2);
   const candidate = validated.find((c) => c.memberRefs.includes(winnerId)) ?? null;
