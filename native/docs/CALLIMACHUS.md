@@ -206,3 +206,25 @@ Fixed along the way:
 - an interrogative filter;
 - a timeframe witness for present-tense holders;
 - an abstention for the line.
+
+### 10.1 Omnilingual arms and seam density (Amendment 1, 2026-10-14)
+
+The pre-registration was amended before any Spanish run; results are in `native/eval/callimachus/RESULTS.md`, "Amendment 1 results". No model was used, and `self:model` words are 0.
+
+- **Spanish questions** (42, translated and frozen) were asked two ways: over the English pins, and over Spanish pages collected live. The table counts line commits.
+
+  | arm | committed correct | confident wrong | below_floor |
+  |---|---|---|---|
+  | English reference | 5 | 28 | 9 |
+  | ES→EN | 9 | 16 | 17 |
+  | ES→ES | 11 | 24 | 7 |
+
+  - Read by hand, 7 of ES→ES's 11 correct leads answer the question, for example "La capital de Canadá es Ottawa."
+  - B1 fails in every arm.
+- **Cross-language matching is only names and cognate stems.** `identity-induction.js` and `qidBridge` are unwired, so ES→EN refuses 17 of 42 for lack of any shared witness.
+- **fr, de, ru, zh and it are read by the English parser.** The runner's sniff knows only es; there is no third question grammar, telling grammar or parser on disk. A language-identification step before the grammar is owed.
+- **The telling is 100% lawful and byte-verified in both en and es.** Lawful is not correct: every confident-wrong lead is lawful.
+- **Seam density.** Answers are 63–77% copied, addressed source bytes, 5–10% computed values (mostly attribution) and 17–40% frame words. The figures are pooled per arm and stage; per category and per language are in RESULTS.
+  - The seam tells a reader which words are ours. It says nothing about whether a quoted claim answers the question.
+- **Gold-regex defect.** The holder gold `Leo` matches "Napo*leo*n", which gave one false credit in ES→EN. Gold regexes need word boundaries.
+- **`--qlang`** now declares the question grammar instead of sniffing it.

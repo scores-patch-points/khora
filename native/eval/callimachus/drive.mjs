@@ -8,7 +8,7 @@
 // first replay's answers.json is the scored one and the second must match it byte for byte. Writes <root>/<run>/<id>/ and a
 // drive.<run>.jsonl log beside this file. No model is called anywhere: the runner has no model path.
 import { spawnSync } from "node:child_process";
-import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync, appendFileSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, mkdirSync, copyFileSync, appendFileSync, symlinkSync, realpathSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -21,8 +21,13 @@ const run = opt("--run") ?? "A";
 const root = resolve(opt("--root") ?? "/Users/mlacy/Documents/3.0/callimachus-runs/drive-eval-2026-10-14");
 const only = opt("--only")?.split(",");
 const replayOnly = args.includes("--replay-only");
+// Amendment 1: --prompts FILE (default prompts.json), --lang/--qlang passed to the runner, and --from-run R: no collection — each prompt's
+// directory is seeded from run R's pinned record (layers linked, record.json copied) and the ask is replayed over it.
+const promptsFile = opt("--prompts") ?? "prompts.json";
+const lang = opt("--lang"), qlang = opt("--qlang"), fromRun = opt("--from-run");
+const extra = [...(lang ? ["--lang", lang] : []), ...(qlang ? ["--qlang", qlang] : [])];
 const SEARCH = "10"; // PREREG: the budget of CALLIMACHUS §9, not tuned here
-const { prompts } = JSON.parse(readFileSync(join(here, "prompts.json"), "utf8"));
+const { prompts } = JSON.parse(readFileSync(join(here, promptsFile), "utf8"));
 const log = join(here, replayOnly ? `drive.${run}.replay.jsonl` : `drive.${run}.jsonl`);
 writeFileSync(log, "");
 
@@ -37,9 +42,15 @@ for (const p of prompts) {
   if (only && !only.includes(p.id)) continue;
   const dir = join(root, run, p.id.replace("#", "-"));
   mkdirSync(dir, { recursive: true });
-  const base = ["--question", p.turns[0], "--ask", p.turns.at(-1), "--out", dir];
-  const row = { id: p.id, run, question: p.turns[0], ask: p.turns.at(-1) };
-  if (!replayOnly) {
+  // Over another run's record, the record keeps the question it was collected for; only the ask is new.
+  const collectedFor = fromRun ? (p.en_turns ?? p.turns)[0] : p.turns[0];
+  const base = ["--question", collectedFor, "--ask", p.turns.at(-1), "--out", dir, ...extra];
+  const row = { id: p.id, run, question: collectedFor, ask: p.turns.at(-1), ...(fromRun ? { from_run: fromRun } : {}) };
+  if (fromRun) {
+    const src = realpathSync(join(root, fromRun, p.id.replace("#", "-")));
+    if (!existsSync(join(dir, "layers"))) symlinkSync(join(src, "layers"), join(dir, "layers"));
+    if (existsSync(join(src, "record.json"))) copyFileSync(join(src, "record.json"), join(dir, "record.json"));
+  } else if (!replayOnly) {
     const c = node([...base, "--search", SEARCH]);
     row.collect = { code: c.code, ms: c.ms, error: c.code ? c.stderr.split("\n").find((l) => /Error|error/.test(l)) ?? c.stderr.split("\n").filter(Boolean).at(-1) ?? null : null };
   }
