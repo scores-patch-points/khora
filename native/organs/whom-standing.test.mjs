@@ -259,3 +259,33 @@ test("unaddressed-item and stance-conflict are typed and refuse rendering", () =
   assert.ok(stanceConflicts(wrong).some((p) => p.code === "stance-conflict"));
   assert.deepEqual(stanceConflicts(f), []);
 });
+
+// ---- the topic-level differentiation (Amendment 8) ----------------------------------------------------------------------------------
+
+test("topic: every cleared span is in exactly one class; the void names nothing; no cell moves", () => {
+  const rows = [["EOT", "is", "a pivot"], ["the fold", "reads", "claims"], ["Bateson", "wrote", "a rule"], ["the reader", "holds", "spans"]];
+  const region = U("a", ...rows.map((r, i) => [...r, "+", 10 - i]));
+  const entities = [{ id: "r1", surfaces: ["EOT"] }, { id: "r2", surfaces: ["Bateson"] }];
+  const void_ = foldWithWhom({ region, whom: [], referents: { entities, mentioned: new Set() } });
+  assert.equal(void_.topic.counts.newAboutHeld, 0);
+  assert.equal(void_.topic.counts.newThings, 4);
+  const f = foldWithWhom({ region, whom: [], referents: { entities, mentioned: new Set(["r1"]) } });
+  assert.deepEqual(f.topic.newAboutHeld, [region[0].address]);
+  assert.equal(f.topic.newAboutHeld.length + f.topic.newThings.length, f.topic.counts.cleared);
+  assert.equal(new Set([...f.topic.newAboutHeld, ...f.topic.newThings]).size, 4, "disjoint and total");
+  assert.deepEqual(f.topic.referentsOf[region[0].address], ["r1"]);
+  // an annotation only: the same fold without `referents` is identical in grain and in every cell's item list
+  const plain = foldWithWhom({ region, whom: [] });
+  assert.equal(plain.grain, f.grain);
+  assert.equal(JSON.stringify(plain.modes.map((m) => m.items.map((i) => i.spans))), JSON.stringify(f.modes.map((m) => m.items.map((i) => i.spans))));
+  assert.equal(plain.topic, undefined, "absent unless asked for");
+});
+
+test("topic: the reading entry carries counts only, never addresses", async () => {
+  const region = U("a", ["EOT", "is", "a pivot", "+", 3], ["the fold", "reads", "claims", "+", 2]);
+  const entities = [{ id: "r1", surfaces: ["EOT"] }];
+  const f = foldWithWhom({ region, whom: [], referents: { entities, mentioned: new Set(["r1"]) } });
+  const e = await readingEntry({ question: "q", region, whom: [], fold: f, digest: sha });
+  assert.deepEqual({ ...e.topic }, { newAboutHeld: 1, newThings: 1, mentioned: 1 });
+  assert.ok(!JSON.stringify(e).includes(region[0].address));
+});

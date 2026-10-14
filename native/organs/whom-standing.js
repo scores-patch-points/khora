@@ -32,6 +32,7 @@
 //   d. A reader who contradicts themself on a proposition reads as `nothing` with `readerSplit: true`; the table has no cell for it.
 import { mergeTestimony } from "./capacity-runner.js";
 import { sha256Hex } from "./pinax.js";
+import { referentsOfSpan } from "./referent-held.js";
 import { CELLS, MODES, GRAINS, arrangementOf, contactVerdict, splitRegion, selectGrain, foldGrain } from "./grain.js";
 
 // ---- shared normalization (grain.js keeps its own private; this one is the same rule so arrangements compare equal) ----------------
@@ -270,7 +271,7 @@ export function refusalsOf({ fold, standings, admitted = [], refusedW = [], regi
  * typed refusals, and `refused` (true when a surface must not render it). `wFull` is the region re-read as W by the same reader.
  * grain.js is not edited: the selection is passed to `foldGrain` as `forceGrain`, and the result says it was selected here.
  */
-export function foldWithWhom({ region = [], whom = [], wFull = null, survives = (u) => (u.activation ?? 0) > 0, draws = 199, seed = 20261014, anchor = "first" } = {}) {
+export function foldWithWhom({ region = [], whom = [], wFull = null, referents = null, survives = (u) => (u.activation ?? 0) > 0, draws = 199, seed = 20261014, anchor = "first" } = {}) {
   const { admitted, refused: refusedW } = admitWhom(whom, { universe: region });
   const split = splitRegion(region, admitted, { draws, seed });
   const cleared = region.filter(survives);
@@ -293,6 +294,30 @@ export function foldWithWhom({ region = [], whom = [], wFull = null, survives = 
     stance: CELLS[selection.grain][standings.leadingMode],
     refusals,
     refused: refusals.some((r) => r.renders === false),
+    ...(referents ? { topic: topicOf(cleared, referents) } : {}),
+  };
+}
+
+/**
+ * The topic-level differentiation (OWN-WORDS-PREREG Amendment 8). `referents = { entities, mentioned }`: the record's own referents and
+ * the ids the reader's own text mentions (`mentionsOf`). Each cleared span is exactly one of
+ *   newAboutHeld  its subject or object contains a mentioned referent: a new fact about a thing the reader names
+ *   newThings     it does not: a thing the reader has not named
+ * An ANNOTATION: no cell, order, seam or grain is changed by it. Which class a surface shows first is the reader's judgment.
+ */
+export function topicOf(cleared = [], { entities = [], mentioned = new Set() } = {}) {
+  const newAboutHeld = [], newThings = [];
+  for (const u of cleared) {
+    const hit = [...referentsOfSpan(u, entities)].filter((id) => mentioned.has(id));
+    (hit.length ? newAboutHeld : newThings).push({ address: u.address, referents: hit });
+  }
+  return {
+    witness: "referent-held",
+    mentioned: mentioned.size,
+    newAboutHeld: newAboutHeld.map((x) => x.address),
+    newThings: newThings.map((x) => x.address),
+    referentsOf: Object.fromEntries(newAboutHeld.map((x) => [x.address, x.referents])),
+    counts: { cleared: cleared.length, newAboutHeld: newAboutHeld.length, newThings: newThings.length },
   };
 }
 
@@ -319,6 +344,7 @@ export async function readingEntry({ question = "", region = [], whom = [], fold
     standings: Object.freeze({ ...fold.standings.counts }),
     seams: fold.seams.seamCount,
     seamDensity: fold.seams.seamDensity,
+    ...(fold.topic ? { topic: Object.freeze({ newAboutHeld: fold.topic.counts.newAboutHeld, newThings: fold.topic.counts.newThings, mentioned: fold.topic.mentioned }) } : {}),
     dropped: fold.whom.refused.length,
     refusals: Object.freeze(fold.refusals.map((r) => r.code)),
   });
