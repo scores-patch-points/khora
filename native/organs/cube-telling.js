@@ -33,6 +33,7 @@ import { cellOf, GRAINS, OPERATOR_CHAIN } from "../kernel/cube.js";
 import { makeComposer, hostOf, monthOf, monthName, dayName, F, V, n, S, joinSegs } from "./composer.js";
 import { kindTerrain, paradigmTerrain, atmosphereTerrain, testimonyOf } from "./telling-organs.js";
 import english from "../adapters/text/telling-grammar.en.js";
+import { giverOf, giverSlot, isIndex } from "./giver.js";
 
 
 // ---- the three terrains, by their registered organs ----------------------------------------------------------------------------------
@@ -93,8 +94,8 @@ export const FRAME_WORDS = {
   "CON·Figure": W(""),
   "SYN·Figure": W("that"),
   "SEG·Pattern": W("pairs pair of pages that look separate share their wording or cite each other and counts once"),
-  "CON·Pattern": W("independent pages carry the same claim one of them in these words no recurs terms on two"),
-  "SYN·Pattern": W("about the pages add to each other rather than conflict has and"),
+  "CON·Pattern": W("independent pages carry the same claim here it is as has no recurs in terms on two"),
+  "SYN·Pattern": W("about two voices add to each other rather than conflict has and"),
   "DEF·Ground": W("no claim carries a date of its own so the dates here are when pages were published not claims held"),
   "EVA·Ground": W("page by in order publication no brought wording before it them did not predict kept closer to than chance first had nothing the pages fall into periods period page with rest undated"),
   "REC·Ground": W("taken whole wording shifts once times a new stretch begins with holds as one throughout on a second fetch of every page cited bytes held where they were page pages changed its markup but not text could be reached so and was were"),
@@ -112,7 +113,9 @@ export async function cubeTelling(record, { slice, interp, fixity = {}, limits =
   const atomById = new Map(record.atoms.map((a) => [a.id, a]));
   const pageById = Object.fromEntries(record.sources.map((s) => [s.id, s]));
   const nPages = record.sources.length;
-  const quotes = record.atoms.filter((a) => a.why_kind === "quotation");
+  // An encyclopedia is an INDEX, never quoted as a source; and a claim is cited to a person or a body on the record, never a publication.
+  const citable = (a) => !isIndex(record, a.pinax) && giverOf(a, record).kind !== "none";
+  const quotes = record.atoms.filter((a) => a.why_kind === "quotation" && !isIndex(record, a.pinax));
 
   const { srcSeg, quoteSeg, nameSegs, names, pageSegs } = makeComposer(record, { slice });
   const blocked = record.absences.filter((a) => a.type === "bot_blocked");
@@ -190,7 +193,7 @@ export async function cubeTelling(record, { slice, interp, fixity = {}, limits =
     "CON·Pattern": async () => {
       const ag = record.claims.filter((c) => c.standing === "AGREE");
       if (!ag.length) return [P("agree_none", {}, ["agree:none"])];
-      return ag.map((c) => ({ alts: c.atoms.map((id) => P("agree", { k: { count: c.independent_count }, quote: { span: atomById.get(id).span, quoted: true } }, c.atoms)), take: 1, cap: L.agree }));
+      return ag.map((c) => ({ alts: c.atoms.map((id) => atomById.get(id)).filter(citable).map((a) => { const g = giverOf(a, record); const by = a.why_kind === "quotation" ? (a.giver?.surface ? { names: [{ span: a.giver.surface }], kind: "speaker" } : null) : giverSlot(g); return by ? P("agree", { k: { count: c.independent_count }, by, quote: { span: a.span, quoted: true } }, c.atoms) : null; }).filter(Boolean), take: 1, cap: L.agree }));
     },
     "SYN·Pattern": async () => {
       const groups = new Map();
@@ -203,8 +206,11 @@ export async function cubeTelling(record, { slice, interp, fixity = {}, limits =
         const pages = [...byPage.keys()];
         const alts = [];
         for (let i = 0; i < pages.length && alts.length < 12; i++) for (let j = i + 1; j < pages.length && alts.length < 12; j++) {
-          const [x, y] = [byPage.get(pages[i])[0], byPage.get(pages[j])[0]];
-          alts.push(P("differ", { subject: { fig: subj }, pageA: { page: x.pinax }, quoteA: { span: x.span, quoted: true }, pageB: { page: y.pinax }, quoteB: { span: y.span, quoted: true } }, [x.id, y.id]));
+          const [x, y] = [byPage.get(pages[i]).find(citable), byPage.get(pages[j]).find(citable)];
+          if (!x || !y) continue;
+          const gx = giverSlot(giverOf(x, record)), gy = giverSlot(giverOf(y, record));
+          if (!gx || !gy || JSON.stringify(gx.names) === JSON.stringify(gy.names)) continue; // two pages by one person are one voice, not two
+          alts.push(P("differ", { subject: { fig: subj }, giverA: gx, quoteA: { span: x.span, quoted: true }, giverB: gy, quoteB: { span: y.span, quoted: true } }, [x.id, y.id]));
         }
         return { alts, take: 1, cap: L.divergences };
       });

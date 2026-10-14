@@ -28,6 +28,9 @@
 // RECURSION. A stage re-scores EVERY candidate with all layers up to it, so the lead of a bigger answer is chosen by more of the stack;
 // each stage reports whether its lead moved and which layer's witnesses moved it.
 import { logos } from "./logos.js";
+import { chooseVariants } from "./pathos-variants.js";
+import { giverOf, giverSlot } from "./giver.js";
+export { giverOf };
 import { pathosOf, strainOf } from "./pathos.js";
 import { requireExperiencer } from "./experiencer.js";
 import { adjudicate, CONTEST_VERDICTS } from "../kernel/contest.js";
@@ -49,13 +52,18 @@ const contentWords = (t) => new Set((String(t).toLowerCase().match(/[\p{L}]{4,}/
 
 export function candidatesOf(record, fixity) {
   const altered = new Set(Object.entries(fixity ?? {}).filter(([, v]) => v.verdict === "altered").map(([k]) => k));
+  const index = new Set((record.sources ?? []).filter((s) => s.role === "index").map((s) => s.id));
   const bySpan = new Map();
   for (const a of record.atoms) {
     if (altered.has(a.pinax)) continue; // perception: a span whose bytes are gone is not a candidate
+    if (index.has(a.pinax)) continue; // an encyclopedia is an INDEX: its sentences lead to a source and are never one (index-source.js)
+    if (giverOf(a, record).kind === "none") continue; // a claim no one is on record as making is not citable
     const named = a.giver?.surface && !a.giver.pronoun && /^\p{Lu}/u.test(a.giver.surface_verbatim ?? "");
     if (a.why_kind === "quotation" && !named) continue;
     // A claim quoted in a page's own voice is a whole sentence: terminal punctuation, not a list item or a heading.
     if (a.why_kind !== "quotation" && !/[.!?]["”’)\]]*\s*$/.test(String(a._sentence ?? "").trim())) continue;
+    // A question asserts nothing: an article's own heading ("Why do critics oppose it?") is not an answer to anyone's question.
+    if (/\?["”’)\]]*\s*$/.test(String(a._sentence ?? "").trim())) continue;
     const prior = bySpan.get(a.span);
     if (!prior || (a.why_kind === "quotation" && prior.why_kind !== "quotation")) bySpan.set(a.span, a);
   }
@@ -193,12 +201,38 @@ export async function answerLadder(record, { question, slice, grammar, telling =
   const frameOf = new Map();
   for (const a of record.atoms) if (a.frame_id) frameOf.set(a.pinax, a.frame_id);
 
-  const propOf = (a) => (a.why_kind === "quotation"
-    ? { type: "said", slots: { who: { span: a.giver.surface }, verb: { span: a.giver.attitude }, quote: { span: a.span, quoted: true } }, grounds: [a.id] }
-    : { type: "page_says", slots: { page: { page: a.pinax }, quote: { span: a.span, quoted: true } }, grounds: [a.id] });
+  // A candidate is said as its SPEAKER's words (the source's own attitude verb, copied) or, in a page's own voice, as its AUTHOR's (or the
+  // body's, where the markup types one). Never as a publication's: the page is the path (the sentence's `via`), not the party.
+  const propOf = (a, variant = 0) => {
+    const g = giverOf(a, record);
+    if (a.why_kind === "quotation") return { type: "said", slots: { who: { span: a.giver.surface }, verb: { span: a.giver.attitude }, quote: { span: a.span, quoted: true } }, grounds: [a.id] };
+    const slot = giverSlot(g);
+    if (!slot) return { type: "page_says", slots: { page: { page: a.pinax }, quote: { span: a.span, quoted: true } }, grounds: [a.id] };
+    return { type: "attributed", slots: { giver: slot, quote: { span: a.span, quoted: true }, variant }, grounds: [a.id] };
+  };
+  const nVariants = grammar.attributionVariants ?? 1;
+  const urlOf = new Map((record.sources ?? []).map((x) => [x.id, x.final_url ?? x.url]));
   const sayCache = new Map();
-  const say = async (a) => { if (!sayCache.has(a.id)) { const r = await realize(propOf(a)); sayCache.set(a.id, r.sentence ?? null); } return sayCache.get(a.id); };
-
+  const sayVariant = async (a, v) => {
+    const k = `${a.id}#${v}`;
+    if (!sayCache.has(k)) { const r = await realize(propOf(a, v)); const s = r.sentence ?? null; if (s) { s.via = urlOf.get(a.pinax) ?? null; s.variant = v; } sayCache.set(k, s); }
+    return sayCache.get(k);
+  };
+  const say = (a) => sayVariant(a, 0);
+  // Every lawful construction of a candidate (a quotation has one).
+  const variantsOf = async (a) => {
+    if (propOf(a).type !== "attributed") { const s = await sayVariant(a, 0); return s ? [s] : []; }
+    const out = [];
+    for (let v = 0; v < nVariants; v++) { const s = await sayVariant(a, v); if (s) out.push(s); }
+    return out;
+  };
+  /** PATHOS (organs/pathos-variants.js): choose, jointly for a passage, the constructions that give it a cadence. Returns the picks re-said. */
+  const vary = async (picked) => {
+    if (picked.length < 2) return picked;
+    const alts = await Promise.all(picked.map((p) => variantsOf(p.a)));
+    const ch = chooseVariants(alts);
+    return picked.map((p, i) => (ch.index[i] >= 0 ? { ...p, s: alts[i][ch.index[i]] } : p));
+  };
   /** Pick k lawful candidates in score order; `diverse(a, picked)` returns a log2 penalty for redundancy with what is already picked. */
   const pick = async (scores, k, diverse = () => 0) => {
     const picked = [];
@@ -250,7 +284,7 @@ export async function answerLadder(record, { question, slice, grammar, telling =
   const contestedLead = (ids) => ids.some((id) => contestedIds.includes(id));
   const verdict = adjudicate({ scores: odds, coPresent: contestedIds.filter((id) => odds.has(id)), minActivation: 1, minMargin: bar.p95, contestedMargin: Math.max(bar.p95, bar.p99) });
   const byPage = (a, picked) => log2(1 + picked.filter((p) => p.a.pinax === a.pinax).length);
-  const para = await pick(p2.s, 3, byPage);
+  const para = await vary(await pick(p2.s, 3, byPage));
   let paraSentences = para.map((x) => x.s);
   if (verdict.verdict !== "bound" && para.length >= 2) {
     // The lead does not clear its runner-up past the null: say both, never pick one silently.
@@ -259,7 +293,11 @@ export async function answerLadder(record, { question, slice, grammar, telling =
     const both = grammar.constructions[contestedLead([para[0].a.id, para[1].a.id]) ? "both" : "both_weigh"]?.({ a: strip(para[0].s), b: strip(para[1].s) });
     if (both) { const s = grammar.finish(both, [para[0].a.id, para[1].a.id]); if (!lintSentence(s, grammar).length) paraSentences = [s, ...para.slice(2).map((x) => x.s)]; }
   }
-  const holds = told((telling?.cells ?? []).find((c) => c.key === "CON·Pattern")?.sentences ?? []);
+  // What holds across sources is told only when it touches THIS question: a sentence whose grounds include a candidate that carried a
+  // perception witness. A claim the pages agree on that has nothing to do with the ask is a different answer, not this one's release.
+  const carrierIds = new Set(carriers.map((a) => a.id));
+  const touches = (ss) => ss.filter((s) => (s.grounds ?? []).some((g) => carrierIds.has(g)));
+  const holds = touches(told((telling?.cells ?? []).find((c) => c.key === "CON·Pattern")?.sentences ?? []));
   const corner2 = cornerOf({ evidence, contest: verdict, denies: denies(para[0]?.a) });
   stages.push({
     stage: 2, size: "paragraph", layers: ["perception", "logos"], verdict: corner2.verdict, corner: corner2,
@@ -273,7 +311,7 @@ export async function answerLadder(record, { question, slice, grammar, telling =
   const strain = strainOf({ contested: contestedIds, contradictions: [], cycles: cycles.length });
   const sides = strain === "report" && question.form !== "deliberative" ? 3 : 5;
   const byCamp = (a, picked) => byPage(a, picked) + log2(1 + picked.filter((p) => frameOf.get(p.a.pinax) && frameOf.get(p.a.pinax) === frameOf.get(a.pinax)).length);
-  let brief = await pick(p2.s, sides, byCamp);
+  let brief = await vary(await pick(p2.s, sides, byCamp));
   let draft = brief.map((x) => x.s.text).join(" ");
   let rhythm = pathosOf({ text: draft || "—", experiencer, state: { contested: contestedIds } }).rhythm;
   if (rhythm.flatline && brief.length > 1) {
@@ -286,7 +324,7 @@ export async function answerLadder(record, { question, slice, grammar, telling =
   }
   const cell = (k) => told((telling?.cells ?? []).find((c) => c.key === k)?.sentences ?? []);
   const tension = [...cell("SYN·Pattern"), ...cell("DEF·Pattern")];
-  const release = [...cell("CON·Pattern"), ...cell("EVA·Pattern"), ...cell("REC·Ground")];
+  const release = [...touches(cell("CON·Pattern")), ...cell("EVA·Pattern"), ...cell("REC·Ground")];
   stages.push({
     stage: 3, size: "brief", layers: ["perception", "logos", "pathos"], verdict: cornerOf({ evidence, contest: verdict, denies: denies(brief[0]?.a) }).verdict, corner: cornerOf({ evidence, contest: verdict, denies: denies(brief[0]?.a) }),
     lead: leadOf(brief, p2.why), experiencer, strain, sides,

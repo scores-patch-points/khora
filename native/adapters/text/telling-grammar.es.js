@@ -40,7 +40,22 @@ const consistent = (segs) => (segs.some((x) => x.count >= 10) ? segs.map((x) => 
 export const finish = (segs, grounds) => sentence(Cap(consistent(segs)), grounds);
 const qmid = (s) => [F(QUOTES.open), s, F(QUOTES.close)];
 
+// ATTRIBUTION (see telling-grammar.en.js): the author or speaker, never the publication. Spanish punctuation: «»; the verb is declared
+// frame text, not a translation of any source's verb.
+const asSegs = (x) => (Array.isArray(x) ? x : [x]);
+const givers = ({ names, rest }) => [...list(names.map(asSegs)), ...(rest ? [F(" y "), n(rest), F(" más")] : [])];
+const INSTITUTION = "institution"; // the giver kind a body speaking for itself carries (organs/byline.js)
+const many = (g) => g.names.length > 1 || !!g.rest;
+export const ATTRIBUTION = Object.freeze([
+  ({ giver, quote }) => [...givers(giver), F(giver.kind === INSTITUTION ? (many(giver) ? " dicen: " : " dice: ") : many(giver) ? " escriben: " : " escribe: "), ...qmid(quote), F(".")],
+  ({ giver, quote }) => (!many(giver) ? [F("En palabras de "), ...asSegs(giver.names[0]), F(", "), ...qmid(quote), F(".")] : null),
+  ({ giver, quote }) => [...givers(giver), F(many(giver) ? " lo plantean así: " : " lo plantea así: "), ...qmid(quote), F(".")],
+  ({ giver, quote }) => [F("Según "), ...givers(giver), F(", "), ...qmid(quote), F(".")],
+]);
+export const ATTRIBUTION_VARIANTS = ATTRIBUTION.length;
+
 export const CONSTRUCTIONS = {
+  attributed: (slots) => ATTRIBUTION[(slots.variant ?? 0) % ATTRIBUTION.length](slots),
   refused: ({ hosts }) => [n(hosts.length), F(` ${pick(hosts.length, "editor rechazó", "editores rechazaron")} la solicitud de ${pick(hosts.length, "su página", "sus páginas")}: `), ...list(hosts), F(".")],
   search_empty: ({ query }) => [F("La búsqueda de «"), ...query, F("» no devolvió nada.")],
   question_names: ({ figs }) => [F("La pregunta nombra a "), ...list(figs), F(`, y las páginas también ${pick(figs.length, "lo", "los")} nombran.`)],
@@ -64,9 +79,9 @@ export const CONSTRUCTIONS = {
   said: ({ who, quote }) => [who, F(": "), ...qmid(quote), F(".")],
   said_that: () => null,
   collapses: ({ pairs }) => [n(pairs, "m"), F(` ${pick(pairs, "par", "pares")} de páginas que parecen distintas comparten su redacción o se citan entre sí, y cada par cuenta una sola vez.`)],
-  agree: ({ k, quote }) => [n(k, "f"), F(" páginas independientes recogen la misma afirmación; una de ellas, con estas palabras: "), ...qmid(quote), F(".")],
+  agree: ({ k, by, quote }) => [n(k, "f"), F(" páginas independientes recogen la misma afirmación; así la expresa "), ...givers(by), F(": "), ...qmid(quote), F(".")],
   agree_none: () => [F("Ninguna afirmación se repite, en los mismos términos, en dos páginas independientes.")],
-  differ: ({ subject, pageA, quoteA, pageB, quoteB }) => [F("Sobre "), ...subject, F(", las páginas se complementan en lugar de contradecirse: "), ...pageA, F(" dice "), ...qmid(quoteA), F(", y "), ...pageB, F(" dice "), ...qmid(quoteB), F(".")],
+  differ: ({ subject, giverA, quoteA, giverB, quoteB }) => [F("Sobre "), ...subject, F(", dos voces se complementan en lugar de contradecirse: "), ...givers(giverA), F(" dice "), ...qmid(quoteA), F(", y "), ...givers(giverB), F(" dice "), ...qmid(quoteB), F(".")],
   undated_claims: () => [F("Ninguna afirmación lleva fecha propia, así que las fechas de aquí son las de publicación de las páginas, no las de cuándo valían las afirmaciones.")],
   periods: ({ items, undated }) => [F("Las páginas se reparten en "), n(items.length), F(` ${pick(items.length, "periodo", "periodos")}: `), ...list(items.map((it) => [month(it.month), F(" ("), n(it.pages, "f"), F(` ${pick(it.pages, "página", "páginas")})`)])), ...(undated ? [F(", y el resto sin fecha")] : []), F(".")],
   fixity: ({ held, reencoded, changed, unreached }) => [F("En una segunda descarga de cada página, los bytes citados seguían donde estaban en "), n(held, "f"), F(` ${pick(held, "página", "páginas")}`), ...(reencoded ? [F(" ("), n(reencoded, "f"), F(` ${pick(reencoded, "página cambió su marcado", "páginas cambiaron su marcado")} pero no su texto)`)] : []), ...(changed ? [F(", y "), n(changed, "f"), F(` ${pick(changed, "página cambió", "páginas cambiaron")}`)] : []), ...(unreached ? [F(", y "), n(unreached, "f"), F(" no se pudieron alcanzar")] : []), F(".")],
@@ -96,7 +111,8 @@ export function lawsOf(s) {
 export const CAUSAL = /\b(porque|por lo tanto|por eso|por consiguiente|debido a|a causa de|caus[óa]|provoc[óa])\b/i;
 export const MACHINERY = /\b(átomos?|referentes?|pinax|facetas?|terrenos?|holones?|sha256|EOT|GFP|nulos?)\b/i;
 export const FRAME_WORDS = Object.fromEntries(Object.entries(CONSTRUCTIONS).map(([k, fn]) => [k, new Set([...wordsOf(fn)])]));
+FRAME_WORDS.attributed = new Set([...wordsOf(ATTRIBUTION.map(String).join("\n"))]);
 
 export const TITLES = Object.freeze({ Void: "Lo que falta", Entity: "A quién se nombra", Kind: "Qué se nombra junto", Field: "Qué se leyó", Link: "Quién dice qué", Network: "Qué se sostiene entre páginas", Atmosphere: "Cuándo, y si se mantuvo", Lens: "Dónde se sitúa cada página", Paradigm: "Cómo se dividen las páginas" });
 
-export default Object.freeze({ titles: TITLES, lang: LANG, giver: GIVER, quotes: QUOTES, constructions: CONSTRUCTIONS, list, finish, lawsOf, causal: CAUSAL, machinery: MACHINERY, maxFrameWords: 40, frameWords: FRAME_WORDS, complementiser: COMPLEMENTISER });
+export default Object.freeze({ attributionVariants: ATTRIBUTION_VARIANTS, titles: TITLES, lang: LANG, giver: GIVER, quotes: QUOTES, constructions: CONSTRUCTIONS, list, finish, lawsOf, causal: CAUSAL, machinery: MACHINERY, maxFrameWords: 40, frameWords: FRAME_WORDS, complementiser: COMPLEMENTISER });

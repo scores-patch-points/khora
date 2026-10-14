@@ -28,6 +28,8 @@ import { extractSurfaces, namesCorefer, diaNorm } from "../adapters/text/surface
 import { discoverRelationVocab, extractRelations } from "../adapters/text/relations.js";
 import { tokenize, buildFrequencyTable, functionWordSet } from "../adapters/text/material.js";
 import { offsetMap, convertOffset, formatAddress } from "./pinax.js";
+import { bylineOf } from "./byline.js";
+import { isIndexUrl } from "./index-source.js";
 
 export const WINNOW_K = 24;
 export const WINNOW_W = 8;
@@ -535,7 +537,23 @@ export function readCorpus(records, { question = "", absences = [] } = {}) {
   return {
     schema: "CallimachusRecord@1",
     question,
-    sources: records.map((r) => ({ ...r.entry, declared: r.declared ?? null, title: titles[r.entry.id] ?? null })),
+    // ROLE and GIVER, decided from the page's own bytes with no input: an encyclopedia is an INDEX (its claims lead to a source and are never
+    // one: index-source.js); and WHO SAID IT is read from the page's markup (byline.js), as copied bytes with a raw-layer address.
+    sources: records.map((r) => {
+      const url = r.entry.final_url ?? r.entry.url;
+      const role = r.declared?.role ?? (isIndexUrl(url) ? "index" : "source");
+      const addr = (at) => (at ? formatAddress({ pinax: r.entry.id, layer: "raw", layerSha256: r.entry.raw.sha256, start: at.start, end: at.end }) : null);
+      let byline = null;
+      try {
+        const b = bylineOf({ raw: dec.decode(r.layers.raw), text: dec.decode(r.layers.text), url, title: titles[r.entry.id]?.text ?? "" });
+        byline = {
+          authors: b.authors.map((a) => ({ name: a.name, kind: a.kind, witnesses: a.witnesses, address: addr(a.at) })),
+          institutional: b.institutional ? { name: b.institutional.name, type: b.institutional.type, address: addr(b.institutional.at) } : null,
+          no_named_giver: b.no_named_giver, ambiguous_article: b.ambiguous_article,
+        };
+      } catch { byline = null; }
+      return { ...r.entry, declared: r.declared ?? null, title: titles[r.entry.id] ?? null, role, byline };
+    }),
     entities: referents.map((r) => ({ ...r, sources: [...r.sources] })),
     unadmitted_surfaces: unadmitted,
     vocab: [...verbs],
