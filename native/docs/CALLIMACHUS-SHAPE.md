@@ -280,6 +280,24 @@ Pre-registration `eval/callimachus/GRAIN-R4-PREREG.md`, runner `eval/callimachus
 
 **Reported.** Kendall tau between activation order and the ladder's order: 0.945, 0.974, 0.988, 0.928; top five shared: 4, 5, 5, 5 of 5. The ladder's richer score barely reorders the new passages (L42): the order problem is not solved by the witnesses the ladder already has. What is left is a signal that is not relevance to the ask.
 
+### Results: the grain experiment, fifth registration (relevance as belief movement, three runs, 2026-10-14)
+
+Pre-registration `eval/callimachus/GRAIN-R5-PREREG.md` (amendments 1–2), organ `organs/belief-movement.js`, runner `eval/callimachus/grain-belief-r5.mjs` (committed `18f848c4` before run 1), outputs local only `callimachus-runs/grain-r5-2026-10-14/` (`results.json`, `.run2.json`, `.run3.json`). Relevance is how far a passage moves the reader's belief about the question's slot (`bayes-surprise.js`, zero only if nothing moved), laid down greedily and cut by `dmdWindow` where the conclusion stops changing.
+
+| | prediction | result |
+|---|---|---|
+| B1, B2 | (dense reader) the cut cuts; not activation in disguise | falsified as registered and **uninformative**: 0 of the 45 new spans carried a value; the reader holds the answer by construction |
+| B3 | "not nothing" as a property | holds |
+| B4 | the deliberative ask has an empty list | holds |
+| C1 | (void reader, House ask) window shorter than the carrying set | **holds** (4 carrying, window 3, 88 context) |
+| C2 | not activation order | **holds** (τ = 0, n = 4: weak) |
+| C3 | the cut cuts for re-dealt readers | **holds** (14 of 14) |
+| C5 | the person fix fills the "Who opposes…?" list | **falsified**: 0 of 387 candidates carry an *oppose* predicate (verified) |
+
+**What the void reader is shown for the House ask.** Four passages carry a year for the House passing; three are inside the window: "In 2026 … the House passed a reintroduced version" (answer none → 2026), "A similar version of the Sunshine Protection Act passed the Senate in 2022" (the biggest mover, 0.44 bits: a rival date, so the answer is contested), "On July 14, 2026, the House passed …" (back to 2026). A second 2026 statement is beyond the window: it strengthens and changes nothing. The other 88 passages move exactly nothing about the answer.
+
+**Limits found.** The slot cannot tell which agent passed (the Senate-2022 passage counts because the Act is the subject and the predicate matches). The person slot is empty because the record's reading has no *oppose* claim. A tie broke alphabetically in runs 1–2 (amendment 2). The dense reader is vacuous here. L43.
+
 ### The whom can be any pinned corpus
 
 **[H3] The second argument can be any pinned corpus with a null.** The same operation with a different W:
