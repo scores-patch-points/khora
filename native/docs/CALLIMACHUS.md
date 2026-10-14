@@ -136,6 +136,7 @@ Measured on the DST record (10 pinned pages):
 | Movement measured as Jaccard distance over copied addresses, with Clearing first | U-side distance 0 for dense and B; d = 0.098 comes from added W-side addresses | The measure cannot see the record move. Refutation ledger L36. |
 | An accumulating chain whose step adds the fold's own copied spans back to W (grain experiment, second registration N6) | W doubled each step (claims 136, 266, 527, 1049, 2093); the copied set never repeated; the record-side set was constant (92) and the grain Pattern from step 1 | The stop rule counted addresses the chain itself creates. Refutation ledger L38. |
 | Pattern selected by a bare majority, dense reader (held 47, absent 45) | Tracing 48 items, mostly the reader's own sentence beside the identical record sentence; Composing 0; the 45 absent spans in no cell | The fold is closed and addressed and shows the reader almost nothing new. Refutation ledger L39. |
+| Showing the whole absent set as the repair for a thin answer (grain experiment, third registration) | The new is always shown (M1–M4 hold), but it is 45 passages for the House ask and 195–209 for three others, in relevance order with no cut; 25 distinct anchors for 41 attached items; 46 of 48 Tracing items remain echoes | Showing everything that is new is not showing what is worth knowing. Refutation ledger L40. |
 
 ## 7. Hand-set constants still owed a null (the user's rule: no hand-set thresholds; born rule, DMD all the way)
 

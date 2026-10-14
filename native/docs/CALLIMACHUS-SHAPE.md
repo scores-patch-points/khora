@@ -250,6 +250,23 @@ Pre-registration `eval/callimachus/GRAIN-R2-PREREG.md`, runner `eval/callimachus
 
 **Not shown.** Whether a measured cut on held beats the majority rule; whether surfacing the absent set at Pattern is the right repair; "the reader gets the grain it lacks" (B's null was not beaten); anything with a person's thread instead of a constructed reader.
 
+### Results: the grain experiment, third registration (the new is never left unshown; one run, 2026-10-14)
+
+Pre-registration `eval/callimachus/GRAIN-R3-PREREG.md` (amendment 1 records a crashed first execution that wrote no result), runner `eval/callimachus/grain-arms-r3.mjs`, outputs local only `callimachus-runs/grain-r3-2026-10-14/` (`results.json`, `answers.html`). The change is in `grain.js`: Composing also places every absent cleared span; Tracing types an echo apart from a walked chain; `forceGrain` and `distance.margin` exist for evaluation. The cut (H > A) is unchanged.
+
+| | prediction | result |
+|---|---|---|
+| M1 | every absent cleared span is shown in a cell other than Clearing | **holds** (92 folds: 4 asks × void, dense, B, shown and the 19 re-dealt readers) |
+| M2 | the cut no longer decides what is new | **holds** (168 forced folds, Figure and Pattern both) |
+| M3 | echo typing is truthful | **holds** (the four Pattern folds with a Tracing cell) |
+| M4 | nothing else moved vs the second registration | **holds** (void copied set, grains, held, absent; shuffled-W 19 of 19 Ground; shuffled-U 0 of 19; determinism) |
+
+M1 and M2 are close to guaranteed by construction; they show the change works and would catch a regression.
+
+**What the reader is shown now (House ask, dense reader).** Pattern by 47 held against 45 absent (margin 0.022). Tracing: 2 real chains and 46 echoes (96% echo), listed after the chains and collapsed in the page. Composing: no new connection between held things, and 45 new passages, each beside a held passage. Of the 45, 41 have an anchor, 25 distinct anchors, the most-used serving 7; 4 are shown alone. For the other three asks the dense reader is at Figure with 195–209 new passages (ledger L40).
+
+**Not shown.** That the answer is good: no cut ranks the absent set against the reader, attachment is by byte distance when no entity is shared, and no person's thread was used. B stays at Ground for every ask (held 3–8, null not beaten).
+
 ### The whom can be any pinned corpus
 
 **[H3] The second argument can be any pinned corpus with a null.** The same operation with a different W:
