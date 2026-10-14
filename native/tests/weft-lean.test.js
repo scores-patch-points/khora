@@ -57,10 +57,28 @@ test("L5 only differences are recorded: negatives are EVA records, text and cons
   let negEdges = 0, evaCon = 0;
   for (const p of passes) {
     const l = leanOf(p);
-    assert.ok(!JSON.stringify(l).includes('"text"'), "no sentence text in a transformation record");
+    assert.deepEqual(Object.keys(l).sort(), ["a", "con", "eva", "g", "ins", "l", "s", "seg", "w", "ws"], "no text field in a transformation record");
+    const longest = Math.max(0, ...[...l.ins, ...l.seg.flat().filter((x) => typeof x === "string"), ...l.con.flat().filter((x) => typeof x === "string")].map((x) => x.length));
+    assert.ok(longest <= 200, `no sentence-length string in a record (longest ${longest})`);
     for (const e of p.edges ?? []) if (e.end1 && e.label && e.end2 && e.polarity === "-") negEdges += 1;
     evaCon += l.eva.filter((v) => v[0] === "con").length;
     for (const v of l.eva.filter((x) => x[0] === "con")) assert.ok(v[1] < l.con.length);
   }
   assert.equal(evaCon, negEdges, "one EVA record per negation, none for the default");
+});
+
+test("L6 SEG carries the subject and predicate heads, and a v1 segment still reads (heads empty)", { skip: !have }, () => {
+  const withClauses = passes.filter((p) => (p.clauses ?? []).length).slice(0, 5);
+  assert.ok(withClauses.length > 0);
+  for (const p of withClauses) {
+    const l = leanOf(p);
+    assert.ok(l.seg.every((c) => c.length === 7), "every SEG record has subject and predicate slots");
+    assert.ok(l.seg.some((c) => c[6]), "predicates are named");
+  }
+  // a v1 segment (the foundation store written before the heads existed) still unpacks, with empty head slots
+  const legacy = "/Users/mlacy/Documents/3.0/khora/native/eval/the-fold/scene/foundation-weft.v1";
+  if (fs.existsSync(legacy)) {
+    const old = fs.readdirSync(legacy).filter((f) => f.endsWith(".bin")).sort().slice(0, 1).flatMap((f) => unpack(fs.readFileSync(`${legacy}/${f}`)));
+    assert.ok(old.length > 0 && old.every((l) => l.seg.every((c) => c.length === 7 && c[5] === "" && c[6] === "")));
+  }
 });

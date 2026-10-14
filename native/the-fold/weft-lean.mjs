@@ -6,8 +6,9 @@
 // re-expands it (the weft's own rule, weft.js: "a holon stands in for its material, re-expandable by address").
 //
 //   INS  a being was admitted from the Void          [surface]
-//   SEG  a sentence was cut into a clause, under a parent, by a relation (complement, adverbial, relative …) and a marker
-//                                                       [id, parent, relation, marker, at]
+//   SEG  a sentence was cut into a clause, under a parent, by a relation (complement, adverbial, relative …) and a marker, by
+//        a subject and a predicate (their HEADS — the beings and the act the clause is about, so a clause under a verb of saying is
+//        a FRAME: who said what held)             [id, parent, relation, marker, at, subjectHead, predicateLemma]
 //   CON  two ends were connected by a connector, at a byte, inside a clause     [end1, label, end2, at, clause]
 //   EVA  an evaluation changed a sign — recorded ONLY where it made a difference (a negation); the default is not a record
 //                                                       [kind ("con" | "seg"), index]
@@ -29,7 +30,8 @@
 import zlib from "node:zlib";
 
 export const LEAN_SCHEMA = "WeftLean@1";
-const MAGIC = Buffer.from("WEFT1\u0000");
+const MAGIC = Buffer.from("WEFT2\u0000");        // v2: SEG carries subject and predicate heads
+const MAGIC_V1 = Buffer.from("WEFT1\u0000");     // v1 segments are still readable (their SEG has no heads: "")
 const REL = ["root", "complement", "open-complement", "subject-clause", "adverbial", "adnominal", "relative", "parataxis", "coordinate", "list", "apposition"];
 const relId = (r) => { const i = REL.indexOf(r); return i < 0 ? REL.length : i; };
 const atOf = (a) => { const m = /#(\d+)$/.exec(String(a ?? "")); return m ? Number(m[1]) : -1; };
@@ -49,7 +51,7 @@ export function leanOf(p) {
     if (!r?.relation) continue;
     con.push([r.relation, r.participants?.[0]?.surface ?? "", r.participants?.[1]?.surface ?? "", Number.isFinite(r.at) ? r.at : -1, 0, 0, ""]);
   }
-  const seg = clauses.map((c, i) => { if (c.polarity === "-") eva.push(["seg", i]); return [c.id, c.parent ?? "", relId(c.relation), c.marker ?? "", atOf(c.own?.at)]; });
+  const seg = clauses.map((c, i) => { if (c.polarity === "-") eva.push(["seg", i]); return [c.id, c.parent ?? "", relId(c.relation), c.marker ?? "", atOf(c.own?.at), String(c.subject?.head ?? "").toLowerCase(), String(c.predicate?.lemma ?? c.predicate?.head ?? "").toLowerCase()]; });
   void idxOf;
   return {
     a: p.address, l: p.foundation?.layer ?? p.category ?? null, g: p.foundation?.language ?? p.language ?? null,
@@ -80,7 +82,7 @@ export function pack(passes, { quality = 11 } = {}) {
     const l = p.ins !== undefined && Array.isArray(p.con) && Array.isArray(p.seg) ? p : leanOf(p);
     w.s(l.a); w.s(l.l); w.s(l.g); w.i(l.w); w.i(l.ws ?? -1); w.i(l.s ?? -1);
     w.u(l.ins.length); for (const x of l.ins) w.s(x);
-    w.u(l.seg.length); for (const c of l.seg) { w.s(c[0]); w.s(c[1]); w.u(c[2]); w.s(c[3]); w.i(c[4]); }
+    w.u(l.seg.length); for (const c of l.seg) { w.s(c[0]); w.s(c[1]); w.u(c[2]); w.s(c[3]); w.i(c[4]); w.s(c[5] ?? ""); w.s(c[6] ?? ""); }
     w.u(l.con.length); for (const e of l.con) { w.s(e[0]); w.s(e[1]); w.s(e[2]); w.i(e[3]); w.u(e[4]); w.u(e[5]); w.s(e[6]); }
     w.u(l.eva.length); for (const v of l.eva) { w.u(v[0] === "seg" ? 1 : 0); w.u(v[1]); }
   }
@@ -93,7 +95,8 @@ export function pack(passes, { quality = 11 } = {}) {
 }
 
 export function unpack(buf) {
-  if (buf.subarray(0, MAGIC.length).compare(MAGIC) !== 0) throw new Error("weft-lean: not a WEFT1 file");
+  const v2 = buf.subarray(0, MAGIC.length).compare(MAGIC) === 0;
+  if (!v2 && buf.subarray(0, MAGIC_V1.length).compare(MAGIC_V1) !== 0) throw new Error("weft-lean: not a WEFT1/WEFT2 file");
   const body = zlib.brotliDecompressSync(buf.subarray(MAGIC.length));
   let p = 0;
   const u = () => { let n = 0, m = 1, c; do { c = body[p++]; n += (c & 127) * m; m *= 128; } while (c & 128); return n; };
@@ -106,7 +109,7 @@ export function unpack(buf) {
     if (l.s < 0) l.s = null;
     if (l.ws < 0) l.ws = null;
     l.ins = []; for (let m = r.u(); m > 0; m--) l.ins.push(r.s());
-    l.seg = []; for (let m = r.u(); m > 0; m--) l.seg.push([r.s(), r.s(), r.u(), r.s(), r.i()]);
+    l.seg = []; for (let m = r.u(); m > 0; m--) l.seg.push(v2 ? [r.s(), r.s(), r.u(), r.s(), r.i(), r.s(), r.s()] : [r.s(), r.s(), r.u(), r.s(), r.i(), "", ""]);
     l.con = []; for (let m = r.u(); m > 0; m--) l.con.push([r.s(), r.s(), r.s(), r.i(), r.u(), r.u(), r.s()]);
     l.eva = []; for (let m = r.u(); m > 0; m--) l.eva.push([r.u() === 1 ? "seg" : "con", r.u()]);
     out.push(l);
