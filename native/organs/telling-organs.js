@@ -120,10 +120,10 @@ export function publicationOrder(record) {
  *           built: "above" (beyond every continuation of that ground), "below" (steadier than every continuation), placed, or unmeasured.
  */
 export function atmosphereTerrain(record, { textOf = null } = {}) {
-  if (typeof textOf !== "function") return { gap: "no_text: the pages' pinned text was not supplied, so neither the regime nor the meter can read it" };
+  if (typeof textOf !== "function") return { gap: "no_text", detail: { supplied: false } };
   const order = publicationOrder(record);
   const texts = order.map((s) => textOf(s.id));
-  if (texts.some((t) => typeof t !== "string")) return { gap: "no_text: a page's pinned text did not resolve" };
+  if (texts.some((t) => typeof t !== "string")) return { gap: "no_text", detail: { unresolved: order.filter((s) => typeof textOf(s.id) !== "string").map((s) => s.id) } };
   const startOf = new Map();
   let body = "";
   for (const [i, s] of order.entries()) { startOf.set(s.id, body.length); body += `${texts[i]}\n\n`; }
@@ -149,7 +149,7 @@ export function atmosphereTerrain(record, { textOf = null } = {}) {
   const placements = order.map((s, i) => { const o = meter.observe(m, { turn: i, role: "page", text: texts[i] }); return { page: s.id, censored: o.censored, rank: o.rank, gap: o.gap }; });
   return {
     order: order.map((s) => s.id),
-    regime: found == null ? { declined: true, why: "atmosphereBoundaries declined: too little material to license the test" } : { regions, rezeros: Math.max(0, regions.length - 1) },
+    regime: found == null ? { declined: true, by: "atmosphereBoundaries" } : { regions, rezeros: Math.max(0, regions.length - 1) },
     meter: { placements, snapshot: meterSnapshot(m) },
   };
 }

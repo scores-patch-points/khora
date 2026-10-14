@@ -31,8 +31,8 @@ export function list(items) {
 }
 const dfLong = new Intl.DateTimeFormat("en", { dateStyle: "long", timeZone: "UTC" });
 const dfMonth = new Intl.DateTimeFormat("en", { year: "numeric", month: "long", timeZone: "UTC" });
-const date = (iso) => V(dfLong.format(new Date(`${String(iso).slice(0, 10)}T12:00:00Z`)));
-const month = (ym) => V(dfMonth.format(new Date(`${ym}-15T12:00:00Z`)));
+const date = (iso) => ({ ...V(dfLong.format(new Date(`${String(iso).slice(0, 10)}T12:00:00Z`))), cldr: true });
+const month = (ym) => ({ ...V(dfMonth.format(new Date(`${ym}-15T12:00:00Z`))), cldr: true });
 
 const Cap = (segs) => { const [h, ...r] = segs; if (!h) return segs; return [{ ...h, t: h.kind === "source" ? h.t : h.t.charAt(0).toUpperCase() + h.t.slice(1) }, ...r]; };
 // CMOS 9.7: within one sentence, if any count needs numerals (10 or more), every count is set in numerals.

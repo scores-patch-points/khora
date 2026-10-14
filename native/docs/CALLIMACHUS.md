@@ -188,9 +188,13 @@ Not touched: REC·Figure (`rezero`) is a Lens cell and was never a stand-in. Its
 |---|---|---|---|---|---|---|---|
 | before, en | 24 | 1 (SYN·Figure) | 1 (REC·Pattern) | 1 | 26 | 26/26 | 40/40 |
 | after, en | 24 | 1 (SYN·Figure) | 1 (REC·Pattern) | 1 | 28 | 28/28 | 36/36 |
-| after, es | 24 | 1 | 1 | 1 | 28 | 28/28 | 33/33 |
+| after, es | 24 | 1 (SYN·Figure) | 1 (REC·Pattern) | 1 | 28 | 28/28 | 33/33 |
 
-No cell changed status. What the three terrains **say** changed:
+No cell changed status, and the two languages answer every cell the same way. SYN·Figure is silent in both: in English no indirect-speech candidate passes the laws on this record, and in Spanish it is silent by design, because the grammar declines indirect speech rather than code-switch. The answers, telling included, re-verify 603/603 copied segments against the pinned layers.
+
+**Omnilingual check, and a Spanish bug it found.** `cube-telling.test.mjs` now requires every proposition type the lens emits to have a construction in **both** grammars, and the en and es tellings to give every cell the same status. On the fixture it failed: Spanish CON·Ground went silent, because PL4 read the day numeral inside a CLDR date ("1 de octubre de 2026") as a stray digit. English escaped only because its date form puts a comma after the day. Dates and months are CLDR output, received rather than written, so both grammars now mark them `cldr` the way they already mark list joiners. Not yet tested: a pinned **non-English record**. None exists yet (the clause-level session is collecting one), and the organs are medium-blind (their refusals are typed codes, never prose), so it should only need a replay.
+
+What the three terrains **say** changed:
 
 - **Kind.** Before: "Four groups of figures…; the largest joins Daylight Saving Time and Standard Time (30 claims)". After: one group holds, "Clinical Sleep Medicine, European, and World" (nine claims), and the NUL cell says that of two groups found, one holds.
 - **Atmosphere.** Before: "seven periods" by month. After: page by page, six pages brought wording the pages before them did not predict, two (witness.usatoday.com, fox29.com) kept closer to it than chance, and the first two had nothing before them. Taken whole, the wording shifts once, at aasm.org (October 31, 2023), after the two Wikipedia pages.

@@ -72,3 +72,17 @@ test("reading order is terrain by terrain, and the plain text holds every senten
   let at = 0;
   for (const c of readingOrder(telling)) for (const s of c.sentences ?? []) { const i = plain.indexOf(s.text, at); assert.ok(i >= at, s.text); at = i + s.text.length; }
 });
+
+test("omnilingual: every proposition type has a construction in BOTH grammars, and the two tellings answer every cell the same way", async () => {
+  const en = (await import("../adapters/text/telling-grammar.en.js")).default;
+  const es = (await import("../adapters/text/telling-grammar.es.js")).default;
+  const src = (await import("node:fs")).readFileSync(new URL("./cube-telling.js", import.meta.url), "utf8");
+  const types = new Set([...src.matchAll(/\bP\("([a-z_]+)"/g)].map((m) => m[1]));
+  assert.ok(types.size >= 30, `positive control: the lens's proposition types were read (${types.size})`);
+  for (const t of types) { assert.ok(en.constructions[t], `en lacks ${t}`); assert.ok(es.constructions[t], `es lacks ${t}`); }
+  const { record, slice } = await told();
+  const interp = interpret(record);
+  const [te, ts] = [await cubeTelling(record, { slice, interp, grammar: en }), await cubeTelling(record, { slice, interp, grammar: es })];
+  // SYN·Figure is the one declared difference: Spanish declines indirect speech rather than code-switch (telling-grammar.es.js header).
+  for (const c of te.cells.filter((x) => x.key !== "SYN·Figure")) assert.equal(ts.cells.find((x) => x.key === c.key).status, c.status, c.key);
+});

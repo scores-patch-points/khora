@@ -32,8 +32,8 @@ export function list(items) {
 }
 const dfLong = new Intl.DateTimeFormat("es", { dateStyle: "long", timeZone: "UTC" });
 const dfMonth = new Intl.DateTimeFormat("es", { year: "numeric", month: "long", timeZone: "UTC" });
-const date = (iso) => V(dfLong.format(new Date(`${String(iso).slice(0, 10)}T12:00:00Z`)));
-const month = (ym) => V(dfMonth.format(new Date(`${ym}-15T12:00:00Z`)));
+const date = (iso) => ({ ...V(dfLong.format(new Date(`${String(iso).slice(0, 10)}T12:00:00Z`))), cldr: true });
+const month = (ym) => ({ ...V(dfMonth.format(new Date(`${ym}-15T12:00:00Z`))), cldr: true });
 
 const Cap = (segs) => { const [h, ...r] = segs; if (!h) return segs; return [{ ...h, t: h.kind === "source" ? h.t : h.t.charAt(0).toUpperCase() + h.t.slice(1) }, ...r]; };
 const consistent = (segs) => (segs.some((x) => x.count >= 10) ? segs.map((x) => (x.count != null ? { ...x, t: nf.format(x.count) } : x)) : segs);
