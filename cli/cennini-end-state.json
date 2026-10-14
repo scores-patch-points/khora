@@ -37,8 +37,8 @@
       "article": "II.13",
       "says": "Nothing leaves the machine, only the registered small model answers, and the pair is no slower than the master on the same asks.",
       "facets": [
-        { "id": "no-egress", "kind": "beats-null", "direction": "lower", "instrument": null, "control": "a run with a frontier fallback switched on must be flagged" },
-        { "id": "small-model-only", "kind": "beats-null", "direction": "lower", "instrument": null, "control": "a run served by a larger model must be flagged" },
+        { "id": "no-egress", "kind": "beats-null", "direction": "lower", "instrument": "cli/cennini-local.mjs", "control": "a run with a frontier fallback switched on must be flagged" },
+        { "id": "small-model-only", "kind": "beats-null", "direction": "lower", "instrument": "cli/cennini-local.mjs", "control": "a run served by a larger model must be flagged" },
         { "id": "no-slower", "kind": "not-worse", "instrument": null, "control": "a deliberately slowed run must be rejected at the same n" }
       ]
     },

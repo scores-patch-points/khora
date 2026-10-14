@@ -69,7 +69,7 @@ export async function ladderRun({ ask, rep = 1, base = "http://127.0.0.1:11436",
 
     // DOOR, under its own real test
     const t0 = Date.now();
-    let door = { ok: false, ms: 0, done: false, rounds: 0, error: null }, answer = { raw: "", gap: null };
+    let door = { ok: false, ms: 0, done: false, rounds: 0, error: null, served: null }, answer = { raw: "", gap: null };
     try {
       const r = await (fetchImpl ?? fetch)(`${base}/v1/code`, {
         method: "POST", headers: { "content-type": "application/json" },
@@ -80,8 +80,8 @@ export async function ladderRun({ ask, rep = 1, base = "http://127.0.0.1:11436",
       const j = await r.json();
       const first = (j.rounds ?? [])[0] ?? {};
       answer = { raw: String(first.raw ?? ""), gap: first.gap?.kind ?? null };
-      door = { ok: true, ms: Date.now() - t0, done: j.done === true, rounds: (j.rounds ?? []).length, error: null };
-    } catch (e) { door = { ok: false, ms: Date.now() - t0, done: false, rounds: 0, error: String(e?.message ?? e).slice(0, 160) }; }
+      door = { ok: true, ms: Date.now() - t0, done: j.done === true, rounds: (j.rounds ?? []).length, error: null, served: j.served ?? null };
+    } catch (e) { door = { ok: false, ms: Date.now() - t0, done: false, rounds: 0, error: String(e?.message ?? e).slice(0, 160), served: null }; }
 
     const onDisk = fs.readFileSync(abs, "utf8");
     const A = runTest(workspace);
