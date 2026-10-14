@@ -160,3 +160,26 @@ test("unplugged (L1): callimachus.js's static import closure reaches no model do
   walk(resolve(here, "callimachus.js"));
   assert.ok(seen.size >= 6, `positive control: the walk reached the organs (${seen.size})`);
 });
+
+// ---- referents by whole capitalised run (GRAIN-R7-PREREG.md) -------------------------------------------------------------------------
+import { referentsInRuns, capitalisedRuns } from "./callimachus.js";
+test("a mention resolves to a referent by its whole capitalised run, not by containing a surface", () => {
+  const refs = [{ id: "r_senate", surfaces: ["Senate"] }, { id: "r_house", surfaces: ["House"] }, { id: "r_cong", surfaces: ["Congress"] }];
+  const fw = new Set(["the", "a", "of", "and", "in", "which", "to"]);
+  const at = (s) => referentsInRuns(s, refs, { functionWords: fw });
+  assert.deepEqual(at("the Senate"), ["r_senate"], "a determiner at the edge is stripped");
+  assert.deepEqual(at("the House’s"), ["r_house"], "a possessive is stripped");
+  assert.deepEqual(at("the Nevada Senate"), [], "an extra content word makes a different surface, not the Senate");
+  assert.deepEqual(at("Senate Bill 100"), []);
+  assert.deepEqual(at("Senate Committee"), []);
+  assert.deepEqual(at("House Democrats"), []);
+  assert.deepEqual(at("Substitute House Bill"), []);
+  assert.deepEqual(at("U.S. Senate"), [], "an alias is NOT merged by name: that is identity-induction's licence");
+  assert.deepEqual(at("a resolution which urged Congress to act"), ["r_cong"], "a separate run inside a longer phrase still resolves");
+  assert.deepEqual(at("Congress and the Senate"), ["r_cong", "r_senate"].sort(), "two runs, two referents");
+  assert.deepEqual(capitalisedRuns("the Missouri House of Representatives passed it").map((r) => r.join(" ")), ["Missouri House of Representatives"]);
+});
+test('referentMatch "contains" is the default and unchanged: "the Nevada Senate" still contains the Senate', async () => {
+  const { referentsIn } = await import("./callimachus.js");
+  assert.deepEqual(referentsIn("the Nevada Senate", [{ id: "r_senate", surfaces: ["Senate"] }]), ["r_senate"]);
+});
