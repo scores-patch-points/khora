@@ -39,9 +39,11 @@ export function yearsIn(text) {
 
 /** The values a passage carries for the question's slot. `c` = { admits, actor, relation, sentence, subj, polarity }. */
 export function valuesFor(admits, c) {
+  // A "who" question is answered by the SUBJECT of the relation, so the question's figure is not required to be that subject
+  // (amendment 1, GRAIN-R5-PREREG.md: run 1 required it, which made every person question empty by construction).
+  if (admits === "person") return c.relation && c.subj ? [String(c.subj)] : [];
   if (!c.actor || !c.relation) return [];
   if (admits === "time") return yearsIn(c.sentence);
-  if (admits === "person") return c.subj ? [String(c.subj)] : [];
   if (admits === "proposition" || admits === "polar") return [c.polarity === "-" ? "not" : "yes"];
   return [];
 }

@@ -126,47 +126,60 @@ const strip = ({ _fold, _whomSpans, ...rest }) => rest;
 // ---- run ------------------------------------------------------------------------------------------------------------------------
 const ASKS = [ASK, "Should the United States make daylight saving time permanent?", "Who opposes permanent daylight saving time?", "Did the Senate pass the bill?"];
 const results = { prereg: "native/eval/callimachus/GRAIN-R5-PREREG.md", universe: UNIVERSE, perAsk: [], predictions: {} };
-const dense = await readW("dense", whomText("dense"));
+const readers = [["dense", (await readW("dense", whomText("dense"))).spans], ["void", []]];
+for (const name of NULL_SEEDS.dense) readers.push([name, (await readW(name, whomText(name))).spans]);
 const byId = new Map(cands.map((a, i) => [a.id, { a, i }]));
 
 const tau = (a, b) => { const pos = new Map(b.map((x, i) => [x, i])); let c = 0, d = 0; for (let i = 0; i < a.length; i++) for (let j = i + 1; j < a.length; j++) { const pi = pos.get(a[i]), pj = pos.get(a[j]); if (pi === undefined || pj === undefined) continue; pi < pj ? c++ : d++; } return c + d ? (c - d) / (c + d) : null; };
 
+const prepared = [];
 for (const ask of ASKS) {
   const qv3 = questionVoid(qg.readQuestion(ask, { model }), record);
   const cols = witnesses(cands, { question: qv3, record });
   const perc = scoreWith(cols, ["perception"], cands.length);
   const act = new Map(cands.map((a, i) => [a.id, perc.s[i]]));
   const region = (await spansFromRecord(record, { slice, activation: act })).filter((x) => x.activation > 0);
-  const split = splitRegion(region, dense.spans);
   const admits = qv3.reading?.admits ?? null;
   const form = qv3.form ?? null;
   const kind = form === "deliberative" ? "deliberative" : admits;
-  const valuesOfSpan = (s) => {
-    const { a, i } = byId.get(s.id);
-    return valuesFor(kind, { actor: cols.perception.actor[i], relation: cols.perception.relation[i], sentence: a._sentence ?? "", subj: a.relation?.subj ?? null, polarity: a.relation?.polarity ?? "+" });
-  };
+  const valuesOfSpan = (s) => { const { a, i } = byId.get(s.id); return valuesFor(kind, { actor: cols.perception.actor[i], relation: cols.perception.relation[i], sentence: a._sentence ?? "", subj: a.relation?.subj ?? null, polarity: a.relation?.polarity ?? "+" }); };
+  prepared.push({ ask, admits, form, region, valuesOfSpan });
+}
+for (const [rname, spans] of readers) for (const pr of prepared) {
+  const { ask, admits, form, region, valuesOfSpan } = pr;
+  const split = splitRegion(region, spans);
   const held = split.H.map((s) => ({ id: s.address, values: valuesOfSpan(s) }));
   const passages = split.A.map((s) => ({ id: s.address, values: valuesOfSpan(s) }));
   const r = rankByBelief({ held, passages });
   const textOf = new Map(region.map((s) => [s.address, s.text]));
   const actOrder = [...split.A].sort((x, y) => y.activation - x.activation).map((s) => s.address).filter((id) => passages.find((p) => p.id === id)?.values.length);
   const beliefOrder = r.order.map((o) => o.id);
+  const keep = rname === "dense" || rname === "void";
   results.perAsk.push({
-    ask, admits, form, grain: foldGrain({ region, whom: dense.spans }).grain,
+    reader: rname, ask, admits, form,
     heldSpans: split.H.length, newSpans: split.A.length, heldCarrying: held.filter((h) => h.values.length).length, newCarrying: passages.filter((p) => p.values.length).length,
     before: r.before, after: r.after, window: r.window, context: r.context.length,
-    order: r.order.map((o) => ({ ...o, text: textOf.get(o.id), inWindow: r.order.indexOf(o) < r.window })),
+    order: r.order.map((o, k) => ({ ...o, ...(keep ? { text: textOf.get(o.id) } : {}), inWindow: k < r.window })),
     tauVsActivation: tau(actOrder, beliefOrder),
     propertyBitsPositive: r.order.every((o) => o.bits > 0),
     propertyContextEmpty: passages.filter((p) => r.context.includes(p.id)).every((p) => p.values.length === 0),
   });
 }
+const row = (reader, k) => results.perAsk.find((r) => r.reader === reader && r.ask === ASKS[k]);
 const P = results.predictions;
-const hz = results.perAsk[0], delib = results.perAsk[1];
-P.B1 = { newCarrying: hz.newCarrying, window: hz.window, holds: hz.newCarrying > 0 && hz.window < hz.newCarrying };
-P.B2 = { tau: hz.tauVsActivation, n: hz.order.length, holds: hz.tauVsActivation !== null && hz.tauVsActivation < 0.9 };
+// run 1 (dense reader only; amendment 1 keeps it): nothing new carried a value
+const d0 = row("dense", 0), v0 = row("void", 0), v2 = row("void", 2), v1 = row("void", 1);
+P.B1_dense = { newCarrying: d0.newCarrying, window: d0.window, holds: d0.newCarrying > 0 && d0.window < d0.newCarrying };
+P.B2_dense = { tau: d0.tauVsActivation, holds: d0.tauVsActivation !== null && d0.tauVsActivation < 0.9 };
 P.B3 = { holds: results.perAsk.every((r) => r.propertyBitsPositive && r.propertyContextEmpty) };
-P.B4 = { kind: delib.form, orderLength: delib.order.length, holds: delib.order.length === 0 };
+P.B4 = { kind: v1.form, orderLength: v1.order.length, holds: v1.order.length === 0 };
+// amendment 1 (registered before run 2)
+P.C1 = { reader: "void", newCarrying: v0.newCarrying, window: v0.window, holds: v0.newCarrying >= 2 && v0.window < v0.newCarrying };
+P.C2 = { reader: "void", tau: v0.tauVsActivation, holds: v0.tauVsActivation !== null && v0.tauVsActivation < 0.9 };
+const red = results.perAsk.filter((r) => r.reader.startsWith("null-") && r.ask === ASKS[0] && r.newCarrying >= 2);
+P.C3 = { readers: red.length, windowLessThanCarrying: red.filter((r) => r.window < r.newCarrying).length, holds: red.length > 0 && red.every((r) => r.window < r.newCarrying) };
+P.C5 = { reader: "void", ask: ASKS[2], newCarrying: v2.newCarrying, window: v2.window, holds: v2.newCarrying > 0 };
+results.reported = { redealtHouse: results.perAsk.filter((r) => r.reader.startsWith("null-") && r.ask === ASKS[0]).map((r) => ({ reader: r.reader, heldCarrying: r.heldCarrying, newCarrying: r.newCarrying, window: r.window, before: r.before.answer, after: r.after.answer, tau: r.tauVsActivation })) };
 writeFileSync(OUT, JSON.stringify(results, null, 1));
 log("wrote", OUT);
-console.log(JSON.stringify({ hashMismatches: hashMismatches.length, predictions: P, summary: results.perAsk.map((r) => ({ ask: r.ask, admits: r.admits, form: r.form, grain: r.grain, newSpans: r.newSpans, newCarrying: r.newCarrying, window: r.window, before: r.before.answer, after: r.after.answer, tau: r.tauVsActivation })) }, null, 1));
+console.log(JSON.stringify({ hashMismatches: hashMismatches.length, predictions: P, summary: results.perAsk.filter((r) => r.reader === "dense" || r.reader === "void").map((r) => ({ reader: r.reader, ask: r.ask, admits: r.admits, newSpans: r.newSpans, newCarrying: r.newCarrying, window: r.window, before: r.before.answer, after: r.after.answer, tau: r.tauVsActivation })) }, null, 1));

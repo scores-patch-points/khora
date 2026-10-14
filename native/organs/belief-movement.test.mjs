@@ -12,6 +12,7 @@ test("valuesFor: a passage carries a value for the slot only if its subject is t
   assert.deepEqual(valuesFor("time", { actor: false, relation: true, sentence: "passed in 2026" }), []);
   assert.deepEqual(valuesFor("time", { actor: true, relation: false, sentence: "passed in 2026" }), []);
   assert.deepEqual(valuesFor("person", { actor: true, relation: true, subj: "Maria Lopez" }), ["Maria Lopez"]);
+  assert.deepEqual(valuesFor("person", { actor: false, relation: true, subj: "Maria Lopez" }), ["Maria Lopez"], "a who-question is answered by the subject, which need not be the figure");
   assert.deepEqual(valuesFor("proposition", { actor: true, relation: true, polarity: "-" }), ["not"]);
   assert.deepEqual(valuesFor("deliberative", { actor: true, relation: true }), [], "a question with no single slot has no values");
 });
