@@ -85,6 +85,8 @@ const norm = (v) => String(v ?? "").trim().toLowerCase();
 
 /** The one identity for an arrangement, so two sightings of it are one task. */
 export const noteId = (end1, label, end2) => `${norm(end1)}|${norm(label)}|${norm(end2)}`;
+/** The typed report `hear` carries when a heard note would have re-zeroed an open void (see `hear`). */
+export const HEARD_NOT_REZEROED = "heard-not-rezeroed";
 /** A cut's id is its link's id under this prefix: the same ends, never the same note. */
 export const CUT_PREFIX = "cut:";
 export const isCutId = (id) => typeof id === "string" && id.startsWith(CUT_PREFIX);
@@ -363,7 +365,7 @@ export function makeNotes({ taskLog = nativeTaskLog, cellOf = nativeCellOf, iden
    * — one sighting of one arrangement, admitted. Returns the log UNCHANGED
    * when the sighting moved neither the witness set nor the span set.
    */
-  function hear(log, { end1, label, end2, spans = [], witness = null, because = null, end1Face = null, end2Face = null, cut = false }) {
+  function hear(log, { end1, label, end2, spans = [], witness = null, because = null, end1Face = null, end2Face = null, cut = false, report = true }) {
     // THE CUT (S69 / the-fold P104 — docs/THE-NULL-STATES.md, SEG·Figure).
     // A denial is not a link with a minus sign: it is a figure SEPARATED
     // from an extent. It shares the link's ends and never its id, so it can
@@ -437,7 +439,7 @@ export function makeNotes({ taskLog = nativeTaskLog, cellOf = nativeCellOf, iden
     for (const s of addressed(spans)) if (!at.has(s.at)) { at.add(s.at); merged.push(s); }
     if (prior && witnesses.length === prior.witnesses.length && merged.length === (prior.spans?.length ?? 0)) return log;
     const birthOp = cut ? "SEG" : "INS";
-    return append(log, {
+    const next = append(log, {
       kind: prior ? ENTRY_KINDS.SUPERSEDE : ENTRY_KINDS.PROPOSE,
       task_id: id,
       operator: prior ? "SYN" : birthOp,
@@ -457,6 +459,18 @@ export function makeNotes({ taskLog = nativeTaskLog, cellOf = nativeCellOf, iden
       ...(unbridged ? { unbridged } : {}),
       ...(because != null ? { because } : {}),
     });
+    // `hear` is the RAW door and stays one: only `admit` re-zeroes a void
+    // (and lands a contest, requires spans, runs the gate). A hearing that
+    // would have re-zeroed an open void says so rather than leaving the void
+    // quietly open: the returned log carries `heardNotRezeroed`, typed, as a
+    // non-enumerable report beside the log (never an entry, never on the
+    // record — the log's own shape is unchanged). The door that re-zeroes is
+    // `admit`, or `rezeroVoid` for a filling that arrived another way.
+    if (!report || cut || !tasks.some((t) => t.void === true)) return next;
+    const open = foldVoids(next).filter((v) => voidFills({ end1, label, end2, end1Face, end2Face }, v));
+    if (!open.length) return next;
+    const flagged = open.map((v) => Object.freeze({ type: HEARD_NOT_REZEROED, void: v.id, by: baseId, detail: "heard through hear(), which never re-zeroes a void; admit() or rezeroVoid() does" }));
+    return Object.freeze(Object.defineProperty({ ...next }, "heardNotRezeroed", { value: Object.freeze(flagged), enumerable: false }));
   }
 
   /**
@@ -490,7 +504,7 @@ export function makeNotes({ taskLog = nativeTaskLog, cellOf = nativeCellOf, iden
       // (`decider`, set by the face that read the span); the kernel
       // carries it as `because` and never reads a medium's own field.
       const decider = cut ? (typeof a?.decider === "string" && a.decider.trim() ? a.decider : null) : null;
-      next = hear(next, { end1, label, end2, spans, witness, end1Face: a.end1Face ?? null, end2Face: a.end2Face ?? null, cut, ...(decider ? { because: decider } : {}) });
+      next = hear(next, { end1, label, end2, spans, witness, end1Face: a.end1Face ?? null, end2Face: a.end2Face ?? null, cut, report: false, ...(decider ? { because: decider } : {}) });
       const linkId = canonId(end1, label, end2, a.end1Face ?? null, a.end2Face ?? null);
       heard.push({ id: (cut ? CUT_PREFIX : "") + linkId, end1, label, end2, ...(cut ? { cut: true } : {}) });
       // THE CONTEST, AT THE DOOR (S69): a cut meeting its link — either
