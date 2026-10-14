@@ -132,7 +132,8 @@ for (const name of ["dense", "B"]) {
   if (PREREG_SHA[name] && w.sha256 !== PREREG_SHA[name]) arms[name].shaMismatch = { registered: PREREG_SHA[name], found: w.sha256 };
 }
 // determinism (G6): dense, again, from the same bytes
-const denseAgain = await armOf("dense", (await readW("dense-again", whomText("dense"))).spans);
+// Same URL, same bytes, so the same Pinax id: G6 asks whether the SAME reader gives the same fold (amendment 2: run 1 pinned this under a different URL).
+const denseAgain = await armOf("dense", (await readW("dense", whomText("dense"))).spans);
 // re-dealt nulls
 const nulls = { dense: [], B: [] };
 for (const kind of ["dense", "B"]) for (const name of NULL_SEEDS[kind]) {
