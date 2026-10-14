@@ -7,6 +7,7 @@ import { makePinax, makeSpan, quoteOf, parseAddress } from "./pinax.js";
 import { readCorpus } from "./callimachus.js";
 import { interpret, cubeTelling, renderPlain } from "./cube-telling.js";
 import { answerLadder } from "./answer-ladder.js";
+import { readWhom, heldIn, VOID_READER } from "./whom.js";
 import { questionVoid } from "./question-void.js";
 import { lintSentence } from "./prose-laws.js";
 import en from "../adapters/text/telling-grammar.en.js";
@@ -70,6 +71,7 @@ test("every stage is a whole lawful answer, and each stage carries at least as m
   for (const st of [line, para, brief]) for (const s of st.sentences) assert.deepEqual(lintSentence(s, en), [], s.text);
   assert.ok(para.sentences.length >= line.sentences.length && brief.sentences.length >= para.sentences.length && dossier.sentences.length >= brief.sentences.length);
   assert.ok(para.contest && ["bound", "no_margin", "contested_no_margin", "below_floor"].includes(para.contest.verdict));
+  for (const st of [line, para, brief]) assert.ok(["bound", "contradicted", "contested", "unbound"].includes(st.verdict) && st.corner.says, `${st.size}: ${st.verdict}`);
   assert.equal(brief.experiencer.who, "the asker", "pathos names its experiencer");
 });
 
@@ -80,7 +82,8 @@ test("the line answers from the record: the figure that ACTS, for the kind asked
 
 test("no evidence is not an answer: a question nothing in the record carries is refused, not filled", async () => {
   const { ladder } = await ask("When did the lighthouse keeper retire?");
-  assert.equal(ladder.stages[0].verdict, "below_floor");
+  assert.equal(ladder.stages[0].verdict, "unbound", "the void's outcome is hl.js's own string: neither");
+  assert.equal(ladder.stages[0].corner.says, "neither");
   assert.match(ladder.stages[0].sentences[0]?.text ?? "", /Nothing in this record carries/);
 });
 
@@ -94,4 +97,24 @@ test("omnilingual: the same record and ladder realize in Spanish; copied bytes s
   assert.ok(t.cells.filter((c) => c.status === "voiced").length >= 10);
   assert.match(renderPlain(t), /Qué se leyó/);
   for (const c of t.cells) for (const x of (c.sentences ?? []).flatMap((y) => y.segs.filter((g) => g.kind === "source"))) assert.equal(await slice(x.address), x.t);
+});
+
+test("the reader is the second operand: W = ∅ is the catalog exactly; a reader holding the lead gets a lead it does not hold", async () => {
+  const q = "Who approved the depot lease?";
+  const { record, slice, interp } = await setup();
+  const telling = await cubeTelling(record, { slice, interp, grammar: en });
+  const qv = questionVoid(qen.readQuestion(q, { model }), record);
+  const run = (whom) => answerLadder(record, { question: qv, slice, grammar: en, telling, ...(whom ? { whom } : {}) });
+  const strip = (l) => JSON.stringify(l, (k, v) => (k === "a" ? undefined : v));
+  const none = await run(null);
+  assert.equal(strip(await run(VOID_READER)), strip(none), "the void reader reproduces the ladder with no reader, byte for byte");
+  assert.equal(none.reader, undefined);
+  const leadAtom = record.atoms.find((a) => a.id === none.stages[0].lead.atom);
+  const leadBytes = await slice(leadAtom.span);
+  const W = readWhom([await makePinax({ url: "whom:t.md", raw: `Shown earlier:\n\n${leadBytes}`, text: `Shown earlier:\n\n${leadBytes}`, extractor: { name: "test" } })]);
+  const r = await run(W);
+  assert.ok(r.reader.held.some((h) => h.atom === leadAtom.id && h.reason === "held" && /#b\d+-\d+$/.test(h.at)), "the held lead is dropped, typed, with the W bytes that hold it");
+  assert.equal(r.candidates, none.candidates - r.reader.held.length);
+  for (const st of r.stages.slice(0, 3)) if (st.lead) assert.equal(heldIn(W, await slice(record.atoms.find((a) => a.id === st.lead.atom).span)), null, `stage ${st.stage}: the lead is not one the reader holds`);
+  assert.equal(strip(await run(W)), strip(r), "a function of W: the same holdings give the same fold");
 });

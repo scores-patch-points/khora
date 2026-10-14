@@ -437,16 +437,63 @@ export function analyse(model, forms) {
   });
 }
 
+// ADDITIVE (2026-10-14, Callimachus clause segmentation): CLOSED CLASSES ARE
+// ENUMERATED, NOT GUESSED. Universal Dependencies v2 declares ADP, AUX, CCONJ,
+// DET, NUM, PART, PRON and SCONJ closed classes (universaldependencies.org/u/
+// pos, "closed class words"): their members are a finite list, and the
+// treebank the tagger learned from enumerates it. A closed-class tag is
+// admitted for a form only when EWT attests that form with that tag; the
+// tagger's best ADMITTED class is taken otherwise ("bill" was tagged AUX;
+// EWT never attests bill|AUX). NUM is left out of the list: digit numerals
+// are productive (UD itself counts "2026" a NUM it has never seen). Open
+// classes are untouched. Passing `closed: tagger.classes` holds EVERY class to
+// the treebank's attestation (a tag dictionary); a form the treebank never saw
+// keeps every class. Both scopes were measured on the official EWT dev and test
+// splits (native/docs/CALLIMACHUS.md §10, scripts/eval-attested-tags.mjs) and
+// each beat the plain tagger beyond a sign-flip null. tagSentence and analyse
+// are unchanged; callers opt in.
+export const CLOSED_UPOS = Object.freeze(["ADP", "AUX", "CCONJ", "DET", "PART", "PRON", "SCONJ"]);
+export const CLOSED_UPOS_GIVER = "Universal Dependencies v2, u/pos: closed class words (NUM excluded: digit numerals are productive)";
+export function tagSentenceAttested(tagger, words, lexicon, { closed = CLOSED_UPOS } = {}) {
+  const context = ["-START-", "-START2-", ...words.map(normalize), "-END-", "-END2-"];
+  const closedIdx = closed.map((c) => tagger.index.get(c)).filter((i) => i != null);
+  let prev = "-START-", prev2 = "-START2-";
+  const tags = [];
+  for (let i = 0; i < words.length; i++) {
+    const lf = words[i].toLowerCase();
+    const valid = new Array(tagger.n).fill(true);
+    for (const c of closedIdx) if (!lexicon.form[`${lf}|${tagger.classes[c]}`]) valid[c] = false;
+    if (!valid.some(Boolean)) valid.fill(true); // a form the treebank never saw keeps every class
+    const c = tagger.best(tagFeatures(i, words[i], context, prev, prev2), valid);
+    const t = tagger.classes[c];
+    tags.push(t); prev2 = prev; prev = t;
+  }
+  return tags;
+}
+/** analyse() with tags held to what EWT attests (tagSentenceAttested). `scope` is "closed" (the UD closed classes) or "all" (every
+ *  class: a form the treebank saw takes only a tag it saw it with; an unseen form keeps every class). */
+export function analyseAttested(model, forms, { scope = "closed" } = {}) {
+  const tags = tagSentenceAttested(model.tagger, forms, model.lexicon, scope === "all" ? { closed: model.tagger.classes } : {});
+  const words = ["ROOT", ...forms], T = ["ROOT", ...tags];
+  const heads = parseSentence(model.parser, words, T);
+  const labels = labelSentence(model.labeller, heads, words, T);
+  return forms.map((form, k) => {
+    const { lemma, feats } = lemmaAndFeats(model.lexicon, form, tags[k]);
+    return { id: k + 1, form, lemma, upos: tags[k], xpos: "_", feats, head: heads[k + 1], deprel: labels[k + 1], deps: "_", misc: "_" };
+  });
+}
+
 /** Raw text in; one CoNLL-U block per sentence out, with the sentence's raw
- *  byte offsets kept as provenance in the comments. */
-export function parseText(model, text, { idPrefix = "s" } = {}) {
+ *  byte offsets kept as provenance in the comments. `attested: true` reads
+ *  with analyseAttested (closed classes held to EWT's enumeration). */
+export function parseText(model, text, { idPrefix = "s", attested = false } = {}) {
   const out = [];
   let n = 0;
   for (const s of sentences(text)) {
     const toks = tokenize(s.text);
     if (!toks.length) continue;
     n++;
-    const rows = analyse(model, toks.map((t) => t.form));
+    const rows = attested ? analyseAttested(model, toks.map((t) => t.form), { scope: attested === true ? "closed" : attested }) : analyse(model, toks.map((t) => t.form));
     rows.forEach((r, k) => { r.misc = `Offset=${s.start + toks[k].start}`; });
     const lines = [`# sent_id = ${idPrefix}${n}`, `# text = ${s.text.replace(/\s+/g, " ")}`, `# offset = ${s.start}-${s.end}`,
       ...rows.map((r) => [r.id, r.form, r.lemma, r.upos, r.xpos, r.feats, r.head, r.deprel, r.deps, r.misc].join("\t"))];

@@ -54,7 +54,7 @@ try {
 
 // hardcoded fallbacks for modules the regex misses (read from // Handle: headers)
 const HANDLE_FALLBACK = {
-  "measure.js": "Fisher", "kind-induction.js": "Kanada", "hypergraph.js": "Berge",
+  "measure.js": "Fisher", "terrain-induction.js": "Kanada", "hypergraph.js": "Berge",
   "derivation.js": "Liu Hui", "frame.js": "Alhazen", "interlocutor.js": "Buber",
   "witness.js": "Thymus", "source.js": "Nadim", "notes-text.js": "Arokin",
   "socratic.js": "Kierkegaard", "cast.js": "Zhengming", "corroboration.js": "Bukhari",

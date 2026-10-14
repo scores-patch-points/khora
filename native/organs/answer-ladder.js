@@ -19,14 +19,22 @@
 //               opens on the tension (where pages differ) and closes on the release (what holds); pathosOf reads the draft's rhythm (Murch)
 //               and a flatlined draft swaps a candidate for one of different length. The curve is a typed gap (no fold is run).
 //
+// THE READER (organs/whom.js). Every measure above is taken against a population; the reader decides which. With W = ∅ (the void
+// reader, the catalog) the population is the record's candidates, and the ladder is exactly what it was. With a reader, a candidate
+// whose span bytes W already holds is HELD (surprisal −log2 1 = 0): it leaves the population and is dropped with its W address. Every
+// witness's base rate is then the share among what is new to this reader, the question-word witness also counts W's own units in its
+// document frequency, and the margin null is drawn over the same population. A told cell sentence W already holds is not told again.
+//
 // RECURSION. A stage re-scores EVERY candidate with all layers up to it, so the lead of a bigger answer is chosen by more of the stack;
 // each stage reports whether its lead moved and which layer's witnesses moved it.
 import { logos } from "./logos.js";
 import { pathosOf, strainOf } from "./pathos.js";
 import { requireExperiencer } from "./experiencer.js";
-import { adjudicate } from "../kernel/contest.js";
+import { adjudicate, CONTEST_VERDICTS } from "../kernel/contest.js";
+import { BOUND, CONTRADICTED, CONTESTED, UNBOUND, verdictOfSupport } from "../interpretation/hl.js";
 import { realizer } from "./cube-telling.js";
 import { lintSentence } from "./prose-laws.js";
+import { VOID_READER, heldIn, sentenceHeld, whomStemDf, seamsOf } from "./whom.js";
 
 const log2 = Math.log2;
 const mulberry = (seed) => () => { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
@@ -39,7 +47,7 @@ const contentWords = (t) => new Set((String(t).toLowerCase().match(/[\p{L}]{4,}/
 
 // ---- the candidates and their witnesses ----------------------------------------------------------------------------------------------
 
-function candidatesOf(record, fixity) {
+export function candidatesOf(record, fixity) {
   const altered = new Set(Object.entries(fixity ?? {}).filter(([, v]) => v.verdict === "altered").map(([k]) => k));
   const bySpan = new Map();
   for (const a of record.atoms) {
@@ -97,18 +105,23 @@ function witnesses(cands, { question, record }) {
   };
 }
 
+const NO_PRIOR = Object.freeze({ m: 0, df: new Map() });
+
 /** Surprisal weight of a boolean column: −log2(share present). A witness every candidate carries says nothing (weight 0). */
 const surprisal = (col) => { const k = col.filter(Boolean).length; return k === 0 || k === col.length ? 0 : log2(col.length / k); };
 
-function scoreWith(cols, layers, n) {
+function scoreWith(cols, layers, n, prior = NO_PRIOR) {
   const s = new Array(n).fill(0);
   const why = Array.from({ length: n }, () => ({}));
   if (layers.includes("perception")) for (const [name, col] of Object.entries(cols.perception)) {
     if (name === "words") {
       // Each question word the claim carries is its own witness, weighed by its own surprisal across the candidates.
       const df = new Map();
+      // The reader's own units are part of the word population: a stem W already carries everywhere says nothing new (W = ∅: m = 0).
       for (const ws of col) for (const w of ws) df.set(w, (df.get(w) ?? 0) + 1);
-      col.forEach((ws, i) => { const w = ws.reduce((k, x) => k + (df.get(x) === n ? 0 : log2(n / df.get(x))), 0); if (w) { s[i] += w; why[i]["perception.words"] = +w.toFixed(3); } });
+      const N = n + prior.m;
+      const dfOf = (x) => df.get(x) + (prior.df.get(x) ?? 0);
+      col.forEach((ws, i) => { const w = ws.reduce((k, x) => k + (dfOf(x) === N ? 0 : log2(N / dfOf(x))), 0); if (w) { s[i] += w; why[i]["perception.words"] = +w.toFixed(3); } });
       continue;
     }
     // INS (what kind may stand here) only qualifies a binding SIG or CON made: the kind witness counts for a candidate only when a
@@ -125,13 +138,13 @@ function scoreWith(cols, layers, n) {
 }
 
 /** The margin null: shuffle each witness column independently (seeded) and read the top-vs-runner-up odds margin; p95 is the bar. */
-function marginNull(cols, layers, n, { seed = 20261014, draws = 199 } = {}) {
+function marginNull(cols, layers, n, { seed = 20261014, draws = 199, prior = NO_PRIOR } = {}) {
   const rnd = mulberry(seed);
   const shuffle = (col) => { const c = col.slice(); for (let i = c.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [c[i], c[j]] = [c[j], c[i]]; } return c; };
   const margins = [];
   for (let d = 0; d < draws; d++) {
     const sh = { perception: Object.fromEntries(Object.entries(cols.perception).map(([k, c]) => [k, shuffle(c)])), logos: Object.fromEntries(Object.entries(cols.logos).map(([k, c]) => [k, shuffle(c)])) };
-    const { s } = scoreWith(sh, layers, n);
+    const { s } = scoreWith(sh, layers, n, prior);
     const [a, b] = s.slice().sort((x, y) => y - x);
     margins.push(1 - 2 ** -((a ?? 0) - (b ?? 0)));
   }
@@ -139,12 +152,42 @@ function marginNull(cols, layers, n, { seed = 20261014, draws = 199 } = {}) {
   return { p95: margins[Math.floor(0.95 * (margins.length - 1))], p99: margins[Math.floor(0.99 * (margins.length - 1))], draws };
 }
 
+// ---- the void's outcome: the four corners --------------------------------------------------------------------------------------------
+
+/**
+ * Every stage reports its outcome in Nagarjuna's four corners: hl.js's Belnap–Dunn lattice, the ONE lattice (organs/nagarjuna.js),
+ * computed from two independent supports through hl.js verdictOfSupport — never a re-typed synonym. For a question's void, as
+ * precision-race.js already reads the same lattice:
+ *   is      (bound)        one filler is determined: the lead binds past its runner-up (contest.js adjudicate)
+ *   is-not  (contradicted) what carries the question's terms denies it: every evidence-bearing candidate is negative, or a polar
+ *                          question's bound lead is
+ *   both    (contested)    more than one filler holds: the lead does not clear its runner-up past the null
+ *   neither (unbound)      nothing in the record decides it: no candidate carries anything the question declared
+ */
+export const CORNER_SAYS = Object.freeze({ [BOUND]: "is", [CONTRADICTED]: "is-not", [CONTESTED]: "both", [UNBOUND]: "neither" });
+export function cornerOf({ evidence, contest, denies = false }) {
+  const carried = evidence > 0;
+  const rival = [CONTEST_VERDICTS.NO_MARGIN, CONTEST_VERDICTS.CONTESTED_NO_MARGIN].includes(contest?.verdict);
+  const verdict = verdictOfSupport(carried && !denies, carried && (denies || rival));
+  return Object.freeze({ verdict, says: CORNER_SAYS[verdict], contest: contest?.verdict ?? null });
+}
+
 // ---- the ladder ---------------------------------------------------------------------------------------------------------------------
 
-export async function answerLadder(record, { question, slice, grammar, telling = null, fixity = {}, seed = 20261014 } = {}) {
-  const experiencer = requireExperiencer({ who: "the asker", read: `${question.id} over ${record.sources.length} pinned pages`, revision: null });
+export async function answerLadder(record, { question, slice, grammar, telling = null, fixity = {}, seed = 20261014, whom = VOID_READER } = {}) {
+  const reading = whom && !whom.empty;
+  const experiencer = requireExperiencer({ who: "the asker", read: reading ? `${question.id} over ${record.sources.length} pinned pages, for a reader holding ${whom.size} units (${whom.pinax.join(", ")})` : `${question.id} over ${record.sources.length} pinned pages`, revision: null });
   const realize = realizer(record, { slice, grammar });
-  const cands = candidatesOf(record, fixity);
+  const all = candidatesOf(record, fixity);
+  // The reader's population: what this reader does not already hold. Held candidates are dropped, typed, with the W bytes that hold them.
+  const held = [];
+  const cands = [];
+  for (const a of all) {
+    const at = reading ? heldIn(whom, (await slice(a.span)) ?? a._sentence) : null;
+    if (at) held.push({ atom: a.id, reason: "held", at }); else cands.push(a);
+  }
+  const prior = reading ? { m: whom.size, df: whomStemDf(whom) } : NO_PRIOR;
+  const told = (ss) => (reading ? ss.filter((s) => !sentenceHeld(whom, s)) : ss);
   const n = cands.length;
   const cols = witnesses(cands, { question, record });
   const frameOf = new Map();
@@ -174,23 +217,32 @@ export async function answerLadder(record, { question, slice, grammar, telling =
   const stages = [];
 
   // STAGE 1 — PERCEPTION: the line.
-  const p1 = scoreWith(cols, ["perception"], n);
-  // No evidence is not an answer: when no candidate carries anything the question declared, the line says so (adjudicate's below_floor).
+  const p1 = scoreWith(cols, ["perception"], n, prior);
+  // No evidence is not an answer: when no candidate carries anything the question declared, the line says so — the corner "neither".
   const evidence = Math.max(0, ...p1.s);
+  const carriers = cands.filter((_, i) => p1.s[i] > 0);
+  const negOnly = carriers.length > 0 && carriers.every((a) => a.relation?.polarity === "-");
+  const denies = (lead) => negOnly || (question.form === "polar" && lead?.relation?.polarity === "-");
   const nothing = async () => { const s = grammar.constructions.nothing_carries ? grammar.finish(grammar.constructions.nothing_carries({}), [question.id]) : null; return s && !lintSentence(s, grammar).length ? [s] : []; };
+  // The reader already holds everything that carries the question: for this reader the void is held, not empty.
+  const allHeld = reading && evidence <= 0 && held.length > 0 && Math.max(0, ...scoreWith(witnesses(all, { question, record }), ["perception"], all.length).s) > 0;
   if (evidence <= 0) {
-    const s = await nothing();
-    const why = "no candidate carries any perception witness: the question's figures, kind, relation and words are absent from the record (a question in another language than the record's needs a bilingual lexicon, which is not on disk)";
-    for (const [i, size] of ["line", "paragraph", "brief"].entries()) stages.push({ stage: i + 1, size, layers: ["perception", "logos", "pathos"].slice(0, i + 1), lead: null, verdict: "below_floor", why, sentences: s, ...(i === 1 ? { contest: { verdict: "below_floor", margin: null, bar: null } } : {}), ...(i === 2 ? { experiencer, strain: "report", sides: 0, rhythm: { flatline: false, ratio: 0, n: 0 } } : {}) });
+    const s = allHeld && grammar.constructions.already_held ? (() => { const x = grammar.finish(grammar.constructions.already_held({}), [question.id]); return lintSentence(x, grammar).length ? [] : [x]; })() : await nothing();
+    const why = allHeld ? `held: every candidate that carries the question is already in this reader's W (${held.length} held)` : "no candidate carries any perception witness: the question's figures, kind, relation and words are absent from the record (a question in another language than the record's needs a bilingual lexicon, which is not on disk)";
+    const corner = cornerOf({ evidence, contest: null });
+    for (const [i, size] of ["line", "paragraph", "brief"].entries()) stages.push({ stage: i + 1, size, layers: ["perception", "logos", "pathos"].slice(0, i + 1), lead: null, verdict: corner.verdict, corner, why, sentences: s, ...(i === 1 ? { contest: { verdict: null, margin: null, bar: null, why: "not run: there is no candidate to adjudicate" } } : {}), ...(i === 2 ? { experiencer, strain: "report", sides: 0, rhythm: { flatline: false, ratio: 0, n: 0 } } : {}) });
     stages.push({ stage: 4, size: "dossier", layers: ["perception", "logos", "pathos", "cube"], sentences: (telling?.cells ?? []).flatMap((c) => c.sentences ?? []) });
-    return { question: { id: question.id, form: question.form, admits: question.reading?.admits, modality: question.modality, focus: question.focus, undeclared: question.undeclared.map((u) => u.field) }, candidates: n, stages };
+    return { question: { id: question.id, form: question.form, admits: question.reading?.admits, modality: question.modality, focus: question.focus, undeclared: question.undeclared.map((u) => u.field) }, candidates: n, stages, ...(reading ? { reader: readerReport(whom, all.length, held, stages) } : {}) };
   }
   const line = await pick(p1.s, 1);
-  stages.push({ stage: 1, size: "line", layers: ["perception"], lead: leadOf(line, p1.why), sentences: line.map((x) => x.s) });
+  const bar1 = marginNull(cols, ["perception"], n, { seed, prior });
+  const contest1 = adjudicate({ scores: new Map(cands.map((a, i) => [a.id, 2 ** p1.s[i]])), coPresent: [], minActivation: 1, minMargin: bar1.p95, contestedMargin: Math.max(bar1.p95, bar1.p99) });
+  const corner1 = cornerOf({ evidence, contest: contest1, denies: denies(line[0]?.a) });
+  stages.push({ stage: 1, size: "line", layers: ["perception"], lead: leadOf(line, p1.why), verdict: corner1.verdict, corner: corner1, sentences: line.map((x) => x.s) });
 
   // STAGE 2 — + LOGOS: the paragraph. The lead is re-chosen; contest decides whether it binds.
-  const p2 = scoreWith(cols, ["perception", "logos"], n);
-  const bar = marginNull(cols, ["perception", "logos"], n, { seed });
+  const p2 = scoreWith(cols, ["perception", "logos"], n, prior);
+  const bar = marginNull(cols, ["perception", "logos"], n, { seed, prior });
   const odds = new Map(cands.map((a, i) => [a.id, 2 ** p2.s[i]]));
   const notes = cands.filter((a) => a.relation?.subj).map((a) => ({ end1: a.relation.subj, label: String(a.relation.pred).toLowerCase(), end2: (a.relation.obj_refs ?? [])[0] ?? null })).filter((x) => x.end2);
   const cycles = logos(notes);
@@ -207,9 +259,10 @@ export async function answerLadder(record, { question, slice, grammar, telling =
     const both = grammar.constructions[contestedLead([para[0].a.id, para[1].a.id]) ? "both" : "both_weigh"]?.({ a: strip(para[0].s), b: strip(para[1].s) });
     if (both) { const s = grammar.finish(both, [para[0].a.id, para[1].a.id]); if (!lintSentence(s, grammar).length) paraSentences = [s, ...para.slice(2).map((x) => x.s)]; }
   }
-  const holds = (telling?.cells ?? []).find((c) => c.key === "CON·Pattern")?.sentences ?? [];
+  const holds = told((telling?.cells ?? []).find((c) => c.key === "CON·Pattern")?.sentences ?? []);
+  const corner2 = cornerOf({ evidence, contest: verdict, denies: denies(para[0]?.a) });
   stages.push({
-    stage: 2, size: "paragraph", layers: ["perception", "logos"],
+    stage: 2, size: "paragraph", layers: ["perception", "logos"], verdict: corner2.verdict, corner: corner2,
     lead: leadOf(para, p2.why), moved: line[0] && para[0] && line[0].a.id !== para[0].a.id ? { from: line[0].a.id, to: para[0].a.id, by: Object.keys(p2.why[para[0].i]).filter((k) => k.startsWith("logos")) } : null,
     contest: { verdict: verdict.verdict, margin: verdict.margin, bar: +bar.p95.toFixed(3), null: `p95 of ${bar.draws} seeded shuffles` },
     cycles: cycles.length,
@@ -231,11 +284,11 @@ export async function answerLadder(record, { question, slice, grammar, telling =
     const alt = more.filter((m) => !brief.some((b) => b.i === m.i)).sort((x, y) => Math.abs(y.s.text.length - mean) - Math.abs(x.s.text.length - mean))[0];
     if (alt) { brief = [...brief.slice(0, -1), alt]; draft = brief.map((x) => x.s.text).join(" "); rhythm = pathosOf({ text: draft, experiencer, state: { contested: contestedIds } }).rhythm; }
   }
-  const cell = (k) => (telling?.cells ?? []).find((c) => c.key === k)?.sentences ?? [];
+  const cell = (k) => told((telling?.cells ?? []).find((c) => c.key === k)?.sentences ?? []);
   const tension = [...cell("SYN·Pattern"), ...cell("DEF·Pattern")];
   const release = [...cell("CON·Pattern"), ...cell("EVA·Pattern"), ...cell("REC·Ground")];
   stages.push({
-    stage: 3, size: "brief", layers: ["perception", "logos", "pathos"],
+    stage: 3, size: "brief", layers: ["perception", "logos", "pathos"], verdict: cornerOf({ evidence, contest: verdict, denies: denies(brief[0]?.a) }).verdict, corner: cornerOf({ evidence, contest: verdict, denies: denies(brief[0]?.a) }),
     lead: leadOf(brief, p2.why), experiencer, strain, sides,
     rhythm: { flatline: rhythm.flatline, ratio: rhythm.ratio, n: rhythm.n }, curve: "unmeasured: no fold is run over the answer (a typed gap, not a verdict)",
     // Useful first: the lead answers; then the tension (where pages differ), the other sides, and the release (what holds).
@@ -245,5 +298,13 @@ export async function answerLadder(record, { question, slice, grammar, telling =
   // STAGE 4 — the whole cube: the telling. STAGE 5 (the claim sheet) is every atom, rendered by the claim-sheet lens.
   stages.push({ stage: 4, size: "dossier", layers: ["perception", "logos", "pathos", "cube"], sentences: (telling?.cells ?? []).flatMap((c) => c.sentences ?? []) });
 
-  return { question: { id: question.id, form: question.form, admits: question.reading?.admits, modality: question.modality, focus: question.focus, undeclared: question.undeclared.map((u) => u.field) }, candidates: n, stages };
+  return { question: { id: question.id, form: question.form, admits: question.reading?.admits, modality: question.modality, focus: question.focus, undeclared: question.undeclared.map((u) => u.field) }, candidates: n, stages, ...(reading ? { reader: readerReport(whom, all.length, held, stages) } : {}) };
 }
+
+/** What the reader changed: the population before and after, every held drop with its W address, and the told sentences that W held. */
+function readerReport(whom, before, held, stages) {
+  return { units: whom.size, pinax: whom.pinax, population: { record: before, reader: before - held.length }, held };
+}
+
+/** Seam density per stage (stages 1–3 and the dossier): reported first on every fold, for any reader, the void reader included. */
+export const seamsByStage = (stages) => stages.map((st) => ({ stage: st.stage, size: st.size, ...seamsOf(st.sentences ?? []) }));

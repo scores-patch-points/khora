@@ -303,7 +303,7 @@ export const CAPACITIES = Object.freeze([
   // frontier cell, built and registered together. One premise of that plan
   // was WRONG and is corrected in the plan itself: the kinds pair was
   // "gated on the legacy-engine path" — but eoreader7's native kernel
-  // already carries full ports (kind-induction.js / entity-kind-induction.js,
+  // already carries full ports (terrain-induction.js / entity-kind-induction.js,
   // the latter with a built-in random-subset null arm), so the gate had
   // already dissolved when the plan was written. Two of these five rows
   // name eoreader7 NATIVE modules — the first registry rows to do so; the
@@ -339,8 +339,8 @@ export const CAPACITIES = Object.freeze([
     id: "kinds",
     terrain: "Kind",
     op: "SIG",
-    module: "eoreader7/native/kernel/kind-induction.js",
-    fn: "projectKinds",
+    module: "eoreader7/native/kernel/terrain-induction.js",
+    fn: "projectTerrainInduction",
     what: "recurring kind candidates signed PROVISIONALLY from a population's own interaction field, each basin carrying its own random-subset binding-energy null — the native port of the kinds discipline Explore's view already holds (null arm, refused-as-underpowered). Typing reasoned: signing a recurring kind is Relate·Existence at Pattern grain — SIG·Kind.",
   }),
   Object.freeze({

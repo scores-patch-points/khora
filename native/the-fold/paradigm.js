@@ -372,7 +372,7 @@ export function paradigmLines(p) {
 // generated, never assigned by hand to a named relation.
 import { emergentFacts } from "./form-prior.js";
 import { ABSENT } from "../kernel/bayes-surprise.js";
-import { kindEvidence, createKindInductionIndex } from "../kernel/kind-induction.js";
+import { terrainEvidence, createTerrainInductionIndex } from "../kernel/terrain-induction.js";
 import { induceEntityKindCandidates } from "../kernel/entity-kind-induction.js";
 
 export function cellOfFact(slot, value) {
@@ -496,9 +496,9 @@ export function detectParadigmPlurality(instances = [], { name = "form", populat
   let seq = 0;
   instances.forEach((u, i) => {
     const id = (typeof u === "object" && u?.id != null) ? String(u.id) : `instance-${i}`;
-    for (const [slot, value] of facts(u)) entries.push(kindEvidence({ id: `pp-${++seq}`, entityRef: id, featureKey: slot, featureValue: value, sequencePosition: i }));
+    for (const [slot, value] of facts(u)) entries.push(terrainEvidence({ id: `pp-${++seq}`, entityRef: id, featureKey: slot, featureValue: value, sequencePosition: i }));
   });
-  const index = createKindInductionIndex(entries);
+  const index = createTerrainInductionIndex(entries);
   const popLabel = population || `paradigm:${name}`;
   const induced = induceEntityKindCandidates(index.entityFeatures, { population: popLabel });
   const validatedCount = induced.diagnostics.validated;

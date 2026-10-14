@@ -32,8 +32,8 @@ export function list(items) {
 }
 const dfLong = new Intl.DateTimeFormat("es", { dateStyle: "long", timeZone: "UTC" });
 const dfMonth = new Intl.DateTimeFormat("es", { year: "numeric", month: "long", timeZone: "UTC" });
-const date = (iso) => V(dfLong.format(new Date(`${String(iso).slice(0, 10)}T12:00:00Z`)));
-const month = (ym) => V(dfMonth.format(new Date(`${ym}-15T12:00:00Z`)));
+const date = (iso) => ({ ...V(dfLong.format(new Date(`${String(iso).slice(0, 10)}T12:00:00Z`))), cldr: true });
+const month = (ym) => ({ ...V(dfMonth.format(new Date(`${ym}-15T12:00:00Z`))), cldr: true });
 
 const Cap = (segs) => { const [h, ...r] = segs; if (!h) return segs; return [{ ...h, t: h.kind === "source" ? h.t : h.t.charAt(0).toUpperCase() + h.t.slice(1) }, ...r]; };
 const consistent = (segs) => (segs.some((x) => x.count >= 10) ? segs.map((x) => (x.count != null ? { ...x, t: nf.format(x.count) } : x)) : segs);
@@ -52,7 +52,7 @@ export const CONSTRUCTIONS = {
   unsorted: ({ claims, unsorted }) => [F("De "), n(claims, "f"), F(" afirmaciones, "), n(unsorted, "f"), F(" no nombran ninguna figura de ningún grupo.")],
   groups: ({ k }) => [F("Hay "), n(k), F(` ${pick(k, "grupo", "grupos")} de figuras que se nombran juntas más a menudo de lo que permite el azar.`)],
   groups_none: () => [F("Ningún grupo de figuras se nombra junto más a menudo de lo que permite el azar.")],
-  largest_groups: ({ groups }) => [...groups.flatMap((g, i) => [...(i ? [F("; el siguiente reúne a ")] : [F("El mayor reúne a ")]), ...list(g.figs), F(" ("), n(g.claims, "f"), F(` ${pick(g.claims, "afirmación", "afirmaciones")})`)]), F(".")],
+  largest_groups: ({ groups }) => [...groups.flatMap((g, i) => [...(i ? [F("; el siguiente reúne a ")] : [F(groups.length === 1 ? "El grupo reúne a " : "El mayor reúne a ")]), ...list(g.figs), F(" ("), n(g.claims, "f"), F(` ${pick(g.claims, "afirmación", "afirmaciones")})`)]), F(".")],
   holdings: ({ pages, bytes, passages }) => [F("El registro contiene "), n(pages, "f"), F(" páginas, "), n(bytes), F(" bytes de texto en "), n(passages), F(" pasajes, cada una fijada por un hash de sus bytes exactos.")],
   pub_range: ({ from, to, undated }) => [F("Sus fechas de publicación van del "), date(from), F(" al "), date(to), ...(undated ? [F("; "), n(undated, "f"), F(` ${pick(undated, "página no declara", "páginas no declaran")} ninguna`)] : []), F(".")],
   voices: ({ claims, own, reported, quoted }) => [F("De "), n(claims, "f"), F(" afirmaciones, "), n(own, "f"), F(" están en la voz propia de una página y "), n(reported, "f"), F(" recogen lo que dijo otra persona, "), n(quoted, "f"), F(" de ellas entre comillas.")],
@@ -60,6 +60,7 @@ export const CONSTRUCTIONS = {
   both_weigh: ({ a, b }) => [F("Dos lecturas pesan lo mismo aquí: "), ...a, F("; y "), ...b, F(".")],
   both: ({ a, b }) => [F("El registro no puede elegir entre dos lecturas: "), ...a, F("; o "), ...b, F(".")],
   nothing_carries: () => [F("Nada en este registro lleva lo que la pregunta pide: ni sus figuras, ni el tipo de respuesta, ni la relación ni sus palabras aparecen en las páginas.")],
+  already_held: () => [F("Todo lo que en este registro lleva lo que la pregunta pide ya se le mostró a este lector.")],
   said: ({ who, quote }) => [who, F(": "), ...qmid(quote), F(".")],
   said_that: () => null,
   collapses: ({ pairs }) => [n(pairs, "m"), F(` ${pick(pairs, "par", "pares")} de páginas que parecen distintas comparten su redacción o se citan entre sí, y cada par cuenta una sola vez.`)],
@@ -74,6 +75,11 @@ export const CONSTRUCTIONS = {
   silences: ({ page, figs }) => [F("También hay silencios: "), ...page, F(" nunca nombra a "), ...list(figs), F(`, ${pick(Math.min(3, figs.length), "a quien", "a quienes")} nombran al menos otras dos páginas.`)],
   camps: ({ items }) => [F("Las páginas se dividen en "), n(items.length), F(` ${pick(items.length, "bloque", "bloques")} según lo que ponen en el centro: `), ...items.flatMap((it, i) => [...(i === 0 ? [] : i === items.length - 1 ? [F("; y ")] : [F("; ")]), ...list(it.figs), F(" para "), ...list(it.pages)]), F(".")],
   camps_none: () => [F("Las páginas no se dividen en bloques que el registro pueda detectar.")],
+  camp_one: ({ figs, pages, total, rest }) => [F("De las "), n(total, "f"), F(" páginas, "), n(pages.length, "f"), F(` ${pick(pages.length, "forma", "forman")} un bloque por las figuras que nombran, centrado en `), ...list(figs), F(": "), ...list(pages), ...(rest ? [F(`; ${pick(rest, "la otra", "las otras")} `), n(rest, "f"), F(` ${pick(rest, "queda", "quedan")} aparte`)] : []), F(".")],
+  kinds_challenged: ({ held, tried }) => [...(held === tried ? [F("Todos los grupos de figuras hallados se sostienen")] : [F("De "), n(tried), F(` ${pick(tried, "grupo", "grupos")} de figuras ${pick(tried, "hallado", "hallados")}, `), held === 1 ? { ...V("uno"), count: 1 } : n(held), F(` ${pick(held, "se sostiene", "se sostienen")}`)]), F(" al ponerlos a prueba frente a conjuntos aleatorios del mismo tamaño y frente a las mismas figuras con sus emparejamientos barajados.")],
+  ground_meter: ({ moved, steady, unmeasured }) => [F("Página a página, en orden de publicación, "), ...(moved ? [n(moved, "f"), F(` ${pick(moved, "página trajo", "páginas trajeron")} palabras que las anteriores no anticipaban`)] : [F("ninguna página trajo palabras que las anteriores no anticiparan")]), ...(steady.length ? [F("; "), ...list(steady), F(" se mantuvieron más cerca de ellas que el azar")] : []), ...(unmeasured ? [F("; las "), n(unmeasured, "f"), F(" primeras no tenían nada antes")] : []), F(".")],
+  regime: ({ starts }) => [F("Tomada en conjunto, la redacción cambia "), ...(starts.length === 1 ? [F("una vez")] : [n(starts.length, "f"), F(" veces")]), F(": un nuevo tramo empieza con "), ...list(starts.map((x) => [...x.page, ...(x.date ? [F(" ("), date(x.date), F(")")] : [])])), F(".")],
+  regime_one: () => [F("Tomada en conjunto, la redacción se mantiene como un solo tramo de principio a fin.")],
   contested: ({ k }) => (k ? [F("Hay "), n(k, "f"), F(` ${pick(k, "afirmación que aparece", "afirmaciones que aparecen")} con polaridad opuesta en páginas independientes.`)] : [F("Ninguna afirmación se contradice entre páginas independientes.")]),
 };
 

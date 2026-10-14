@@ -18,7 +18,7 @@
 //                                 This is NOT a genre table — it is closed
 //                                 grammar (English has a small, closed set of
 //                                 anaphoric devices), the same distinction
-//                                 kind-induction.js draws between grammar
+//                                 terrain-induction.js draws between grammar
 //                                 (closed, may be listed) and content (open,
 //                                 must be induced/looked up).
 //   resolveFormReferent(task, …)  if a cue is found, reads this engine's own

@@ -57,7 +57,7 @@ Sullivan in here"*). The legacy host did **not** load these; the native reader d
 
 **Stage 8, kind (jati/induceKinds), is not a read stage.** Kind induction lives in *organs*
 (`kind-standing.js`, `heard-surfaces.js`, `company-index.js`, `barker.js`, `signal.js`, `parmenides.js`,
-`notes-text.js`) and in `kernel/kind-induction.js` — none are called by `engineRelationsFor` or
+`notes-text.js`) and in `kernel/terrain-induction.js` — none are called by `engineRelationsFor` or
 `createSessionReader`. So the real read yields **beings + addressed edges**, and kinds are a *separate*
 projection — which is exactly the step the weft/ruliad work needs wired.
 
