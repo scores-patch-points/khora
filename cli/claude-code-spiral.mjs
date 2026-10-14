@@ -51,6 +51,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { probeSpiral, layerRecord, absentLine } from "./spiral-layer.mjs";
+import { str, claimKey, claimId, slotOf, metaOf, functionalRels, revisionKind } from "./claim-identity.mjs";
+export { claimKey, claimId };
 import { EO_DIR, steeringOff, sidOf, loadState, logError } from "./claude-code-state.mjs";
 import { readEdges, keywordsFor, resolveLanguage } from "../native/adapters/code/edges.js";
 
@@ -76,39 +78,36 @@ export function loadSpiral(sid) {
   return raw.split("\n").filter(Boolean).map((l) => JSON.parse(l));
 }
 
-const str = (x) => (x === undefined || x === null ? "" : String(x));
-export const claimKey = (c) => `${c.polarity === "-" ? "¬" : ""}${str(c.rel)}(${str(c.roles?.ARG0)}, ${str(c.roles?.ARG1)}) @ ${str(c.ground)}`;
-const slotOf = (c) => JSON.stringify([str(c.ground), str(c.rel), str(c.roles?.ARG0)]);
-const functionalRels = (declare) => new Set((declare?.functional ?? []).map((f) => (typeof f === "string" ? f : f?.rel)).filter(Boolean));
+// Identity (claimKey/claimId, slotOf, revisionKind) lives in cli/claim-identity.mjs — ONE place, shared with the
+// ledger's claim lines, so the spiral node id and the ledger's `claimId` are the same string for one claim.
 const FALSIFY_KIND = /falsif|strict|ant_/;
 
 /** Pure: one reason.mjs run → the spiral log with this run's events appended. */
 export function spiralEventsOf(log, run, { forWhom, at = new Date().toISOString(), readGround = null } = {}) {
   const { declared = [], inputClaims = [], findings = [], sources = [], declare = {} } = run;
   const functional = functionalRels(declare);
-  const localKey = new Map(declared.map((c, i) => [str(inputClaims[i]?.id ?? c.id), claimKey(c)]));
+  const localKey = new Map(declared.map((c, i) => [str(inputClaims[i]?.id ?? c.id), claimId(c)]));
   let out = log;
   const meta = new Map(); // id → { key, slot, object, polarity } from the record's own propose events
   const current = new Map(); // content key → the id of its latest proposal (a revision is `<key> ·rN`)
   const revisions = new Map();
   const noteProposal = (id, claim) => { meta.set(id, claim); current.set(claim.key ?? id, id); revisions.set(claim.key ?? id, (revisions.get(claim.key ?? id) ?? 0) + 1); };
   for (const e of out) if (e.kind === "propose" && e.claim) noteProposal(e.id, e.claim);
-  const idOf = (k) => current.get(k) ?? k;
+  const idOf = (k) => current.get(k) ?? k; // a content key IS the claim id (claimId); a revision is `<id> ·rN`
 
   declared.forEach((c, i) => {
-    const key = claimKey(c);
+    const key = claimId(c);
     const fold = reasoningAt(out);
     let id = idOf(key);
     const node = fold.claims.find((n) => n.id === id);
-    const here = { key, slot: slotOf(c), object: str(c.roles?.ARG1), polarity: c.polarity === "-" ? "-" : "+" };
+    const here = metaOf(c);
 
     // Revision: retire what this claim supersedes in its own slot.
     for (const n of fold.claims) {
       const m = meta.get(n.id);
       if (!m || (m.key ?? n.id) === key || m.slot !== here.slot || n.standing === "withdrawn") continue;
-      const retraction = m.object === here.object && m.polarity !== here.polarity;
-      const revision = functional.has(str(c.rel)) && m.object !== here.object && m.polarity === here.polarity;
-      if (retraction || revision) out = appendReasoning(out, { kind: "withdraw", id: n.id, basis: `${retraction ? "retracted" : "one-valued revision"} by ${key}`, at });
+      const kind = revisionKind({ ...m, key: m.key ?? n.id }, here, functional);
+      if (kind) out = appendReasoning(out, { kind: "withdraw", id: n.id, basis: `${kind === "retraction" ? "retracted" : "one-valued revision"} by ${key}`, at });
     }
 
     const src = sources[i] ?? {};
@@ -120,7 +119,8 @@ export function spiralEventsOf(log, run, { forWhom, at = new Date().toISOString(
     const premises = (inputClaims[i]?.premises ?? []).map((p) => idOf(localKey.get(str(p)) ?? str(p))).filter(Boolean);
     const propose = (pid) => {
       out = appendReasoning(out, { kind: "propose", id: pid, relation: { subject: str(c.roles?.ARG0), verb: str(c.rel), object: str(c.roles?.ARG1) },
-        forWhom, premises, witnesses, claim: here, said: inputClaims[i]?.said ?? null, at });
+        forWhom, premises, witnesses, claim: here, said: inputClaims[i]?.said ?? null, at,
+        ...(run.ledger?.claims?.[i] ? { ledger: { run: run.ledger.runId ?? null, line: run.ledger.claims[i] } } : {}) });
       noteProposal(pid, here);
       id = pid;
     };

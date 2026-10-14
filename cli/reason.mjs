@@ -465,6 +465,7 @@ const out = { ok, errors: errors.length, grounds, findings, vouched, gfp: { coun
 // cli/claude-code-ledger.mjs for the OTHER, separate per-session audit trail
 // (never the claims store as of this widening — see its own header) this is
 // deliberately additive beside.
+let ledgerRef = null; // {runId, claims: [line ids]} — what the spiral record points back at
 if (declared.length || (text && hl && hlLog)) {
   try {
     const { appendReasoningLedger } = await import("./reasoning-ledger.mjs");
@@ -490,7 +491,7 @@ if (declared.length || (text && hl && hlLog)) {
       polarity: c.polarity,
       verdict: sources[i]?.verdict ?? null,
     }));
-    appendReasoningLedger({ hl, log: hlLog, declaredClaims: declaredClaimsOut, session: sessionKey, runAt: new Date().toISOString(), cwd: process.cwd(), grounds, ok: out.ok, errors: out.errors });
+    ledgerRef = appendReasoningLedger({ hl, log: hlLog, declaredClaims: declaredClaimsOut, session: sessionKey, runAt: new Date().toISOString(), cwd: process.cwd(), grounds, ok: out.ok, errors: out.errors, functional: decl.functional ?? [] });
   } catch { /* additive only; the verdict and every field of `out` above stand without it */ }
 }
 
@@ -503,7 +504,7 @@ if (declared.length || (text && hl && hlLog)) {
 if (sessionKey && declared.length) {
   try {
     const { recordRun } = await import("./claude-code-spiral.mjs");
-    out.janus = recordRun(sessionKey, { declared, inputClaims: input.claims ?? [], findings, sources: sourcesOut, declare: decl });
+    out.janus = recordRun(sessionKey, { declared, inputClaims: input.claims ?? [], findings, sources: sourcesOut, declare: decl, ledger: ledgerRef?.claims?.length === declared.length ? { runId: ledgerRef.runId, claims: ledgerRef.claims } : null });
   } catch (e) { out.janus = { state: "spiral-error", error: String(e?.message ?? e) }; }
 }
 const janusLines = () => {

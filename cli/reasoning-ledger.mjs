@@ -53,6 +53,7 @@ import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
+import { claimId as claimIdOf, metaOf, claimOfLine, revisionKind, functionalRels } from "./claim-identity.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 // Mirrors cli/claude-code-ledger.mjs's own EO_LEDGER_DIR override (today's
@@ -171,9 +172,20 @@ export function appendLayerState({ layer = "spiral", state = "spiral-absent", mo
  * swallowed and reported back as {written: 0, error}, the same "additive,
  * never blocking" discipline cli/claude-code-ledger.mjs's own hook holds to
  * — a durable-feed failure must never break the reasoning check it rides on.
- * Returns {written, file, runId}.
+ * Returns {written, file, runId, claims} — `claims` is each declared claim's line id, in order, so the spiral
+ * record can point back at the statement it came from.
+ *
+ * IDENTITY AND SUPERSESSION (nesting-fix J D2, 2026-10-14). Every claim line carries `claimId` — the claim's
+ * content address from cli/claim-identity.mjs, the SAME string the janus spiral uses as the node id — beside its
+ * own per-statement `id`. `supersedes` is set (it was null on every line) when this statement REPLACES an earlier
+ * one of the same session: a retraction (same object, polarity flipped), a one-valued revision (the run declared
+ * the relation `functional`), or the claim re-proposed WITH a citation after being stated without one. Those are
+ * the spiral's own withdraw rules (claim-identity.mjs revisionKind — decided in one place). A plain restatement of
+ * a claim does NOT supersede its earlier statement: that is corroboration, and each statement stays a witness. A
+ * line with no session never supersedes (there is no one conversation to scope it to). Lines written before this
+ * field existed read through the same function (claimOfLine) — nothing is rewritten.
  */
-export function appendReasoningLedger({ hl = null, log = null, declaredClaims = [], session = null, runAt = null, cwd = process.cwd(), grounds = [], ok = null, errors = null, dir = DOCS } = {}) {
+export function appendReasoningLedger({ hl = null, log = null, declaredClaims = [], session = null, runAt = null, cwd = process.cwd(), grounds = [], ok = null, errors = null, functional = [], dir = DOCS } = {}) {
   let notes = [];
   if (hl && log) {
     try { notes = hl.foldHyperlexicon(log); } catch (e) { return { written: 0, error: `fold failed: ${e?.message ?? e}` }; }
@@ -183,6 +195,34 @@ export function appendReasoningLedger({ hl = null, log = null, declaredClaims = 
   try {
     const at = runAt ?? new Date().toISOString();
     file = ledgerFile(dir);
+    const fnRels = functionalRels({ functional });
+    const GROUNDED = new Set(["cited", "event"]); // ground-cite.js verdicts that clear a citation (context.mjs GROUNDED_VERDICTS)
+    const slots = new Map(); // slot → this session's earlier statements in that slot, oldest first
+    const noteStatement = (id, c, verdict) => {
+      const m = metaOf(c);
+      if (!slots.has(m.slot)) slots.set(m.slot, []);
+      slots.get(m.slot).push({ id, meta: m, grounded: GROUNDED.has(verdict) });
+    };
+    if (session && declaredClaims.length) {
+      let raw = "";
+      try { raw = fs.readFileSync(file, "utf8"); } catch { /* no ledger yet */ }
+      for (const l of raw.split("\n")) {
+        if (!l.includes('"reasoning-claim"')) continue;
+        let j; try { j = JSON.parse(l); } catch { continue; }
+        if (j.kind === "reasoning-claim" && j.session === session) noteStatement(j.id, claimOfLine(j), j.verdict);
+      }
+    }
+    const supersededBy = (c, verdict) => {
+      if (!session) return null;
+      const m = metaOf(c), grounded = GROUNDED.has(verdict);
+      const earlier = slots.get(m.slot) ?? [];
+      for (let k = earlier.length - 1; k >= 0; k--) {
+        const e = earlier[k];
+        if (revisionKind(e.meta, m, fnRels)) return e.id;
+        if (e.meta.key === m.key && grounded && !e.grounded) return e.id; // re-proposed with a ground
+      }
+      return null;
+    };
     const runId = `${DOC_ID}:run:${crypto.createHash("sha1").update(`${at}\n${cwd}\n${process.pid}`).digest("hex").slice(0, 16)}`;
 
     // ONE RUN LINE — the address every claim/note line below reads back through.
@@ -199,6 +239,7 @@ export function appendReasoningLedger({ hl = null, log = null, declaredClaims = 
     }
 
     let written = 1;
+    const claimLineIds = [];
 
     // ── LAYER 1: one line per DECLARED CLAIM, structure kept whole ─────────
     for (let i = 0; i < declaredClaims.length; i++) {
@@ -229,6 +270,10 @@ export function appendReasoningLedger({ hl = null, log = null, declaredClaims = 
       const verdict = typeof c?.verdict === "string" && c.verdict ? c.verdict : null;
       const claimId = `${DOC_ID}:obs:${crypto.createHash("sha1").update(`${at}\n${process.pid}\nclaim\n${i}\n${ground}\n${rel}`).digest("hex").slice(0, 16)}`;
       const start = nextStart(file);
+      const claimOut = claimOfLine({ ground, rel, roles, polarity });
+      const supersedes = supersededBy(claimOut, verdict);
+      noteStatement(claimId, claimOut, verdict);
+      claimLineIds.push(claimId);
       // fingerprint/source (2026-09-25, mechanical-shortcuts first slice):
       // pass-through only — cli/reason.mjs is the one place that computes
       // fingerprintOf (it has the built gfpClaim + declare table this
@@ -242,8 +287,9 @@ export function appendReasoningLedger({ hl = null, log = null, declaredClaims = 
       appendLine(file, {
         schema: "EOTObservation@1", id: claimId, at: [start, start + said.length],
         role: "claim", kind: "reasoning-claim", title: `/reason/${at}/claim/${i}`,
-        text: said, supersedes: null, giver: "eoreader7-reason",
+        text: said, supersedes, giver: "eoreader7-reason",
         basis: scrub(`reason:${at}#${ground}`),
+        claimId: claimIdOf(claimOut),
         ground, rel, roles, said, session, witness, polarity, verdict, fingerprint, source,
         appendedAt: new Date().toISOString(),
       });
@@ -274,7 +320,7 @@ export function appendReasoningLedger({ hl = null, log = null, declaredClaims = 
       });
       written++;
     }
-    return { written, file, runId };
+    return { written, file, runId, claims: claimLineIds };
   } catch (e) {
     return { written: 0, error: `${e?.message ?? e}`, file };
   }
