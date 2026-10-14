@@ -116,6 +116,41 @@ H1 is refuted if either of these holds:
 
 **[H2] W = ∅ gives the catalog.** With nothing held, the fold is a catalog: what the universe holds, from whom, how pinned. That is Callimachus's own Pinakes role. §7.3 is suggestive but is not a test, because no W was varied: the 27-cell tellings, which are read today for no particular whom, are almost entirely seam, meaning the grammar describing the record.
 
+### Grain: select, then run the triad (the user's specification, 2026-10-14; built in `organs/grain.js`)
+
+H1 said distance induces shape. The specification gives the mechanism, in two steps over the same four inputs (U, W, Q, N).
+
+**Selecting.** Q activates a region R of U. R splits against W into **held** spans H (a W span on the same arrangement: the same subject and predicate) and **absent** spans A. Distance is the share of A. The shuffle null permutes W's predicates among W's spans, keeping every vocabulary item and destroying the pairing, so a hit that survives it is more than words in common.
+
+| the reader holds | grain | rule |
+|---|---|---|
+| nothing beyond the null | **Ground** | H does not beat every draw (p ≤ 1/(draws+1)) |
+| some, and some is absent | **Figure** | H beats the null, and A ≥ H |
+| most | **Pattern** | H beats the null, and H > A (the house majority rule, "more than not") |
+
+**Running.** At the selected grain all three modes run, in order **clear, witness, generate**; a fold that skips one is unclosed. Each held span goes through the corroboration verdict (`mergeTestimony`) **between U and W**: the claim under test is a W span, the witnesses are U's spans on its arrangement.
+
+| | clear | witness | generate |
+|---|---|---|---|
+| **Ground** | Clearing: R against U's own null only; no reader, zero seams | Tending: W's held spans that U corroborates, both addresses | Cultivating: the survivors by their own divisions, ordered by activation, seams between divisions |
+| **Figure** | Dissecting: each W span beside the U span that refuses it, no verdict on who is right | Binding: the U span joined to the W span it corroborates | Making: the absent spans by salience against W, each framed by the nearest held span |
+| **Pattern** | Unraveling: W holds an edge between two held things, U holds no path or a contradicting one; the absence is the finding | Tracing: W's edge is corroborated; the chain of U spans that walks it | Composing: an edge U holds among held things that W lacks, addressed at both ends |
+
+Output is the same in all nine: addressed spans interleaved with flagged seams.
+
+**Measured on synthetic fixtures (`grain.test.mjs`), not on a corpus.**
+- A reader holding the region's vocabulary but none of its claims is Ground (H = 0).
+- Three held of eight did **not** beat the null at 199 draws (exceeded 1, p = 0.01); four held of eight did. A reader holding a few claims in a small W is Ground. That is the strict "beats every draw" rule showing its power, not a bug; it is reported as `null.exceeded`, `null.p` and `null.permutations`.
+- A reader holding the whole region is Pattern; the empty reader is Ground, Clearing has seam density 0.
+
+**Not done, and not decided.**
+- The Figure/Pattern cut is the majority rule, not a measured null.
+- Clearing's "U's own null" is the caller's `survives` (default: activation > 0, the ladder's evidence floor).
+- W is read into spans by the caller; there is no W reader here. A W built from the claim reader (`readCorpus`) came back with 0 atoms on a three-sentence thread, so a W reader is real work.
+- Matching is exact surface (articles stripped, case folded): "approved" never meets "approves".
+- The answer ladder is not routed through this; it still answers at fixed sizes.
+- The ledger and the twin-reader harness (`callimachus/twin-reader`) have not run against it.
+
 ### The whom can be any pinned corpus
 
 **[H3] The second argument can be any pinned corpus with a null.** The same operation with a different W:
@@ -790,4 +825,5 @@ Retire `DECLARED_FORM`, `DEFAULT_ESSAY_BEATS`, the telling's paragraph-per-terra
 
 - **Clause-level reading** (`clause-spans.js`, branch `callimachus/clause-segmentation`): its tree is the leaf level of §2. Fronted subordinates and "that" are the gaps that most affect L2's measurement.
 - **Cell organs** (`callimachus/cell-organs`): Kind, Atmosphere and Paradigm move from stand-ins to registered organs. §3.2's section, camp and period licences read whatever those organs admit, so this design waits on them rather than reading the stand-ins.
+- **Twin reader** (`callimachus/twin-reader`): it has its own `organs/whom.js` (W as pinned bytes read by `readWhom`, exact-containment `heldIn`, `seamsOf`) and its own `answerLadder({ whom })` signature, which collide by filename and by option name with `organs/whom.js` and `answerLadder({ whom })` here (a declared holdings object: `declareWhom`). They answer the same Step 0 differently: its W is bytes and "held" is containment; this one's is claim keys. One has to give way before either merges. `grain.js` takes W as spans and uses neither.
 - **Drive eval** (`callimachus/drive-eval`): the form layer is admitted or not by that pre-registered harness, never by its own author's measure alone.
