@@ -1,5 +1,6 @@
 // commitments — the kernel's declared, defeasible readings (kernel/commitments.js).
-// Pins: (D1) a second giver's commitment is its OWN commitment.
+// Pins: (D1) a second giver's commitment is its OWN commitment; (D2) evaluate's
+// evidence is carried opaque (object OR array), anything else is a typed refusal.
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import * as K from "../kernel/commitments.js";
@@ -109,3 +110,32 @@ test("D1 — concede names a giver: another giver's commitment is refused (negat
   assert.equal(r.log, log);
 });
 
+test("D2 — evaluate carries an object as evidence opaque", () => {
+  const C = makeCommitments();
+  const d = C.declare(createTaskLog(), { kind: "does-not-matter", members: ["n1"], giver: "g", purpose: "p" });
+  const ev = { lift: 0.3, null: 0.1 };
+  const e = C.evaluate(d.log, d.id, { verdict: "holds", ground: "g", broken: "b", evidence: ev });
+  assert.equal(e.refused, null);
+  assert.deepEqual(C.standings(e.log)[0].evaluated.evidence, [ev]);
+});
+
+test("D2 — evaluate accepts an array of evidence as it always did (positive control)", () => {
+  const C = makeCommitments();
+  const d = C.declare(createTaskLog(), { kind: "does-not-matter", members: ["n1"], giver: "g", purpose: "p" });
+  const ev = [{ lift: 0.3 }, { lift: 0.2 }];
+  const e = C.evaluate(d.log, d.id, { verdict: "holds", ground: "g", broken: "b", evidence: ev });
+  assert.equal(e.refused, null);
+  assert.deepEqual(C.standings(e.log)[0].evaluated.evidence, ev);
+});
+
+test("D2 — a number or a string as evidence is a typed refusal, never char-split (negative control)", () => {
+  const C = makeCommitments();
+  const d = C.declare(createTaskLog(), { kind: "does-not-matter", members: ["n1"], giver: "g", purpose: "p" });
+  for (const bad of [0.3, "abc", true]) {
+    const e = C.evaluate(d.log, d.id, { verdict: "holds", ground: "g", broken: "b", evidence: bad });
+    assert.equal(e.refused?.type, "bad_evidence", JSON.stringify(bad));
+    assert.equal(e.log, d.log);
+  }
+  // null / undefined stay "no evidence"
+  assert.equal(C.evaluate(d.log, d.id, { verdict: "holds", ground: "g", broken: "b" }).refused, null);
+});
