@@ -56,7 +56,13 @@ export function bitsOf(counts, value, alpha = 1) {
   return klAdmit(bv, B) / LN2;
 }
 const admitTo = (counts, values) => { for (const v of values) counts.set(v, (counts.get(v) ?? 0) + 1); };
-const modeOf = (counts) => { let best = null, bc = -1; for (const [v, c] of counts) if (c > bc || (c === bc && String(v) < String(best))) { best = v; bc = c; } return best; };
+// The modal value, or null when two or more values tie for the lead: a tie is "no single answer yet", never an alphabetical pick
+// (amendment 2, GRAIN-R5-PREREG.md: run 2 broke ties by string order, which made the answer flip on a 1-1 count).
+const modeOf = (counts) => {
+  let best = null, bc = 0, tied = false;
+  for (const [v, c] of counts) { if (c > bc) { best = v; bc = c; tied = false; } else if (c === bc && c > 0) tied = true; }
+  return tied ? null : best;
+};
 const conclusion = (counts) => ({ answer: modeOf(counts), rival: [...counts.keys()].length > 1 });
 const probOf = (counts, v, alpha = 1) => { let N = 0; for (const c of counts.values()) N += c; const K = counts.size + (counts.has(v) ? 0 : 1) + 1; return ((counts.get(v) ?? 0) + alpha) / (N + alpha * K); };
 

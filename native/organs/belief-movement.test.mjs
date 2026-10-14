@@ -45,3 +45,13 @@ test("rankByBelief: a passage that overturns the answer is reported as 'changes'
   assert.equal(r.after.answer, "2026");
   assert.ok(r.order.some((o) => o.direction === "changes"));
 });
+
+test("a tie for the lead is no single answer, never an alphabetical pick", () => {
+  const r = rankByBelief({ held: [{ id: "h", values: ["2026"] }], passages: [{ id: "a", values: ["2022"] }, { id: "b", values: ["2026"] }] });
+  assert.equal(r.before.answer, "2026");
+  // after admitting the rival the lead is tied 1-1: the answer is null, not "2022"
+  const first = r.order[0];
+  assert.equal(first.values[0], "2022");
+  assert.equal(first.answerAfter, null, "1-1 is contested: no answer");
+  assert.equal(r.after.answer, "2026", "2-1 after the second");
+});
