@@ -11,6 +11,7 @@ import { engineRelationsFor } from "./reader-bundle.js";
 import { splitSentences } from "../adapters/text/spans.js";
 import { extractSurfaces, discoverReferents } from "../adapters/text/surfaces.js";
 import { tokenEvents, surpriseCut } from "./surprise-gate.mjs";
+import { applyPolarity, readGates, nestedClauses, scopePolarity } from "./read-quality.mjs";
 
 export const READ_PROCESS = Object.freeze({
   schema: "ReadProcess@1",
@@ -26,7 +27,7 @@ const edge = (e) => ({ end1: e.end1, end1Face: e.end1Face ?? null, label: e.labe
 
 /** Read a source into a `WeftEntry@4`. The ONE reading call. Whole text in, edges out; a short source is a
  *  typed skip, a reader failure is a typed error — never silent. */
-export function readToWeft(text, { address, category = null } = {}) {
+export function readToWeft(text, { address, category = null, language = "en", quality = true } = {}) {
   const str = String(text ?? "");
   const bytes = Buffer.byteLength(str);
   if (str.trim().length < 200) return { schema: "WeftEntry@4", address, category, bytes, readCharacters: 0, skipped: "too_short", vocabulary: null, cast: [], edges: [], surprise: null, error: null, ms: 0 };
@@ -57,12 +58,34 @@ export function readToWeft(text, { address, category = null } = {}) {
   let surprise = null;
   try { surprise = surpriseCut(tokenEvents(str)); }
   catch (e) { if (!err) err = `surprise_failed: ${String(e?.message ?? e)}`; }
+  // THE QUALITY LAYER (read-quality.mjs — Sullivan's learned Polarity cues, scoped above the GFP record as Chomsky's
+  // dispatch leaves room for; Champollion's per-read gates). The reader's polarity is the constant "+" (relations-gfp.js:190).
+  // `quality: false` returns the reader's own edges untouched, so the layer can be A/B'd on the same bytes.
+  let edges = (out?.edges ?? []).map(edge);
+  let qualityReport = null;
+  let clauses = null;
+  if (quality !== false) {
+    const applied = applyPolarity(edges, language);
+    edges = applied.edges;
+    qualityReport = { polarity: applied.report };
+    // THE CLAUSE TREE: nested clauses kept as a tree, and each edge's polarity scoped to the clause that holds its ends
+    const nested = nestedClauses(str, language);
+    if (!nested.gap) {
+      const sc = scopePolarity(edges, nested.clauses, language);
+      edges = sc.edges; clauses = nested.clauses;
+      qualityReport.polarity = { ...applied.report, scoped: sc.report };
+      qualityReport.clauses = { sentences: nested.sentences, clauses: nested.clauses.length, nested: nested.clauses.filter((c) => c.parent).length, skippedLong: nested.skippedLong };
+    } else qualityReport.clauses = { gap: nested.gap };
+    qualityReport.gates = readGates({ edges, cast, text: str });
+  }
   return {
     schema: "WeftEntry@4", address, category, bytes,
     readCharacters: str.length,
     vocabulary: out?.vocabulary ?? null,                 // { verbs, candidates, grammarPrior } — primed proof
     cast,                                                 // the admitted referents (both-bound; the kind-induction cast)
-    edges: (out?.edges ?? []).map(edge),
+    edges,
+    clauses,                                              // the nested clause TREE (parent, relation, marker, own words, polarity) — null for a language with no parser
+    quality: qualityReport,
     surprise,                                             // SurpriseCut@1 — where the reading's ground was most wrong, vs its shuffled null
     error: err, ms: Date.now() - t0,
   };
