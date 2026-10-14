@@ -1010,3 +1010,7 @@ Retire `DECLARED_FORM`, `DEFAULT_ESSAY_BEATS`, the telling's paragraph-per-terra
 
 A planted twin with no neighbourhood cannot be judged the same: the consequence test needs the nodes around the pair (R8's control and R9 run 1 both had two nodes). With a 22-node neighbourhood the twin is BOUND from 24 (French) and 48 (Pierre) mentions a half on *War and Peace*, never for Natásha; different names are never BOUND (0/18). The earlier "the instrument cannot say same at this size" (L51) is withdrawn and restated: inside R8's own 9-node set the `Senate`, `House`, `Congress`, `Standard Time` twins (23, 18, 13, 8 a half) are `idle` on the **weight** tests, so this record has too little reading of these names. And a pool-and-redeal shuffle is a power control (exchangeable halves), not a false-same null; R8's F4 is withdrawn as calibration. L51.
 
+### Tenth registration: power is a rate (2026-10-14)
+
+Over 19 random draws per size, the planted twin is judged the same in Pierre 3/19 (48 a half) and 13/19 (96), French 7/19 and 18/19, Natásha 3/19 and 2/19. R9's "smallest n bound" came from one deterministic draw and is withdrawn as a threshold. Natásha's consequence margin is negative at both sizes and does not grow with n: it is the name, not the sample; the cause is not diagnosed. About 96 mentions a half (≈190 in a node) is where two of three names reach 68–95%. L52.
+
