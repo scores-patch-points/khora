@@ -160,3 +160,162 @@ node --test native/organs/{pinax,callimachus,cube-telling,answer-ladder,claim-re
 ```
 
 Live repair needs the mouth channel on `:11434` with `gemma2:2b`. Without it, level 3 reports "no mouth reachable" and changes nothing.
+
+## 10. Clause segmentation before the claim is read (2026-10-14, session `eaadca`)
+
+**Goal:** raise how many witnessed claims get a lawful, read-back, net-new paraphrase from `claim-realize.js` (level 2, no model). On the 12-claim sample in §5, 7 refusals were parser misreadings: a predicate hung on a noun or a number, "bill" tagged AUX, a fronted date made the root.
+
+### 10.1 What was built
+
+| Piece | Where | Giver |
+|---|---|---|
+| **Attested tags.** A tag is admitted for a form only when UD English-EWT attests that form with that tag; an unseen form keeps every class. Two scopes: `closed` (the UD closed classes ADP AUX CCONJ DET PART PRON SCONJ; NUM is excluded because digit numerals are productive) and `all` (every class, a tag dictionary). Additive: `tagSentence` and `analyse` are unchanged. | `adapters/text/english-parser.js` `tagSentenceAttested`, `analyseAttested`, `parseText({ attested })` | UD v2 u/pos (closed classes); the treebank's own lexicon |
+| **Which scope the claim reader uses** is decided by measurement (§10.2), not by assertion. | `claim-realize.js` `readRows`, `READ_SCOPE = "all"` | `scripts/eval-attested-tags.mjs` |
+| **Clause segmentation.** See the list below this table. | `claim-realize.js` `segmentClauses` | CMOS 6.22, 6.25, 6.26; UD v2 cc/conj, SCONJ, mark; EWT PronType |
+| **Each clause parsed alone.** A fronted adjunct is parsed alone too, then hung on the predicate as an oblique. | `readClause` | CMOS 6.25 (it modifies the clause it introduces) |
+| **Two parses agree.** A clause reading is accepted only where the whole-sentence parse and the clause parse give the predicate (same token, same lemma) the same arguments: nsubj, obj, iobj, ccomp, xcomp, csubj and obl, over the same bytes inside the clause. This is an agreement check between **two readings of one giver**. It is *not* a second witness: the independent witness is still `relations.js` (§6, Pearl). | `readClause`, `argsKey` | the user's two-witness rule, applied as a check |
+| **A subordinate predicate is not asserted.** The witness's predicate sitting in a subordinate or fronted subordinate clause is refused, typed. A predicate carrying a `mark` dependent ("has yet *to* take") is refused too. Before this, "If the measure ultimately passes both chambers…" came out as "Both chambers are passed by the measure." | `readClause`, `claimFromRows` | UD v2 mark |
+| **The verb group.** When relations.js names an auxiliary ("Sleep experts *have* opposed…"), the claim anchors on its lexical head; the witness agrees if it names the head or one of its auxiliaries. A copula's head is nominal and is still refused. | `readClause`, the witness check in `realizeClaim` | CGEL ch. 3 (auxiliary + lexical head) |
+| **Passive keeps the auxiliary chain.** A modal is copied with its address ("could be created"). The perfect is re-agreed ("experts have opposed the idea" → "the idea has been opposed by experts"), or copied bare after a modal. Progressive and do-support chains get no passive. An object that holds its own subject is a clause, and gets no passive. | `englishAlternations` | CGEL ch. 3 §2 (auxiliary order), ch. 11 |
+| **Omission ledger.** Every content word of the sentence that no copied segment carries is accounted for. See the list below this table. | `omissionLedger`, `checkDisclosure` | UD v2 core arguments; EWT Polarity/PronType=Neg; compound:prt |
+| **Moved spans read back inside their clause.** A moved adjunct may hang on the predicate or on one of its nominal arguments (that is the reader's PP-attachment ambiguity, and stays licensed). It may not cross a clausal relation (acl advcl ccomp xcomp csubj parataxis, or a conjoined predicate). | `movedReadBack` (part of reverse equate) | the reverse equate's own contract: "the same argument bytes in their new roles" |
+| **The according-to read-back.** It now checks that the report's own head reads back as the root, and as the root when the report is parsed alone. The head need not be a verb: a copular report ("would be more beneficial") is a clause. | `reverseEquateRoles` | UD v2 cop |
+| **CASE.** A pronoun after a frame preposition ("by", "according to") must not be nominative, but only where English has a distinct accusative: an EWT lemma with another Case=Acc form (he/him, they/them). "By it" stands. | `formLaws` | CGEL ch. 5 §16.2 |
+| **PAIRS.** A copied segment holds its brackets and parentheses in pairs ("[ 69" refused). | `formLaws` | CMOS 6.95, 6.101 |
+| **ROLES** (optional `roles`). A passive whose new patient the record itself attests as the doer of the same lemma is refused. "It passed the Senate" uses a path object; "The Senate was passed by it" reverses an attested role. | `roleLaw`; the measure script builds `roles` from every relations.js subject in the record | the record |
+| **Positional capital.** A moved span is case-folded only when its capital was positional: after only non-letters ("[ 10 ] It"), at a line start, or after a colon. A capital anywhere else belongs to a name and stays. | `partsToSegs` | CMOS 6.63 |
+
+The segmentation cuts, read off the whole-sentence parse:
+- **Fronted:** comma-delimited segments at the head of the sentence. A verbless one with no subject is an adjunct ("On July 14, 2026"). One opened by a subordinator is a subordinate clause.
+- **Coordinate:** a CCONJ between two stretches that each hold a predicate, after a comma or as the parse's cc of a predicate.
+- **Subordinate:** an SCONJ, a wh-word, or a `mark`, after a comma or as the mark of an advcl or acl.
+- **Never cut:** a complement clause (ccomp, csubj, xcomp is an argument), or anything inside quotation marks (opaque).
+
+How the omission ledger decides:
+- A dropped **core argument** of the predicate is **refused**.
+- A dropped **negation** in the clause is **refused**.
+- A dropped **phrasal-verb particle** is **refused**.
+- Anything else is **disclosed** as `omitted`, each with its byte address. Within the clause, the unit is a contiguous run of a dropped subtree. Outside it, the unit is the whole other clause or fronted segment.
+- Before this, "yet for ending the twice-yearly clock change" was dropped silently.
+
+Every earlier gate is kept unchanged:
+- the independent witness;
+- logos at the clause;
+- the prose laws;
+- bytes re-verify;
+- reverse equate;
+- anchors;
+- logos within arguments;
+- net new.
+
+### 10.2 Measured: the attested-tag scopes, held out
+
+`node native/scripts/eval-attested-tags.mjs --gold …/en_ewt-ud-dev.conllu --gold …/en_ewt-ud-test.conllu`. This is the official dev and test splits: 4,078 sentences and 50,243 words the tagger never trained on. Gold tokenization is fed to every arm. The null is a paired sign-flip over sentences; only the draws (999) and the seed ("attested-tags") are declared. (The fixtures sit untracked in the main khora checkout: `native/eval/fixtures/ud-english-ewt/`.)
+
+| Arm | UPOS | UAS | LAS |
+|---|---|---|---|
+| plain tagger | 93.75 | 79.54 | 74.68 |
+| closed classes held to EWT | 93.81 | 79.60 | 74.77 (vs plain p = 0.005) |
+| **every class held to EWT** | **94.39** | **79.87** | **75.23** (vs plain p = 0.001; vs closed p = 0.002) |
+
+The every-class arm changed 1,225 tags: 716 are now right, and 396 that were right are now wrong. It is still the measured winner, so it is what the claim reader uses.
+
+### 10.3 Measured: the DST record, before and after
+
+`node native/scripts/claim-realize-measure.mjs --out 3.0/callimachus-runs/permanent-dst`:
+- It replays all 10 pages from `layers/` exactly as `callimachus-run.mjs --replay` does; each must reproduce its pinned sha256 or the run stops.
+- It sends **every atom with a relations.js witness** through `realizeClaim`, one call per (sentence, predicate, subject) position: **560 positions**.
+- "Before" is the same script against `callimachus/paraphrase` @ `2255241b`.
+
+| | Before | After |
+|---|---|---|
+| **Paraphrased** (≥ 1 alternative passed every gate), all 560 positions | **25** (20 distinct sentences) | **41** (37 distinct sentences) |
+| Paraphrased, subject an admitted referent (149 positions) | 14 | 20 |
+
+Movement between the two runs: 11 kept, 14 lost, 30 gained.
+
+What the 14 lost were, each now refused by a named gate:
+
+| Refused output | Now refused because |
+|---|---|
+| "Both chambers are passed by the measure." (×2) | the "If…" clause is not asserted |
+| "By unanimous consent, it passed." (×2) | it is a "when…" clause |
+| "A version was introduced by Scott of the bill last year from both parties." | a "When…" clause |
+| "He told in 2025." (×2) | a core argument was dropped |
+| "In a statement, she said." | a dropped negation inside the quotation |
+| "…Substitute House Bill 1196, [ 69 in 2019." | PAIRS |
+| "The Sunshine Protection Act was passed by house." | logos |
+| "Resolutions were passed … to abolish the annual transitions in the late 2010s." | the moved adjunct reads back inside an acl |
+| "The House passed a bill … to eliminate the clock change in July." | read back |
+| "Laws were passed by 19 states." | a core argument was dropped; an over-refusal, kept as conservative |
+
+**Refusals by group**:
+
+| Group | Before | After |
+|---|---|---|
+| logos at the clause (predicate hangs on a non-predicate) | 241 | 101 |
+| relations.js and the parser disagree | 162 | 6 |
+| the witness's predicate is not read as a verb | 89 | 230 |
+| predicate in a subordinate clause (new) | — | 58 |
+| an alternative was built and a gate refused it | 19 | 47 |
+| no alternation applies | 20 | 45 |
+| the sentence and clause parses disagree (new) | — | 17 |
+| a predicate carrying a mark (new) | — | 8 |
+| no EWT participle | 4 | 7 |
+
+The full per-reason tallies print from the script.
+
+Reading the after column:
+- Most of the 230 "not a verb" refusals are **relations.js naming a non-predicate**: "is" (73), "more", "by", "bill", "or", "law", "year".
+- Most of the 101 logos refusals are **copular clauses**: a cop on an ADJ or NOUN (54). No copular alternation is built.
+- Neither is a parser misreading. Both are the next places to work (§10.6).
+
+**The §5 sample** (`paraphrase.html` shows 11 witnessed positions; the "5 of 12" in §5 counted the 2022 Senate sentence's two passing alternatives separately) is 4 positions paraphrased before and the same 4 after, but its refusals moved:
+- **"On July 14, 2026, the House passed a … bill backed by President Trump."** The clause is now read right: "bill" is a NOUN, the fronted date is re-joined, and the two parses agree. Both alternatives are refused at read-back, correctly: "…bill backed by President Trump on July 14, 2026" re-scopes the date onto *backed*.
+- **"Sleep experts have opposed the idea…"** It is now anchored on *opposed* and gets the perfect passive. It is refused because the read-back parses "Saving" (in Daylight Saving Time) as a verb.
+- **"Opponents … argue …"** "argue" is a VERB now (every-class attestation). The according-to is refused because the read-back makes "opponents" the root.
+
+Paraphrases gained, for example:
+- "Since 1915, DST has been supported by the Chamber of Commerce."
+- "The idea has been approved by the Senate so far."
+- "According to others, mornings are more important, especially for schoolchildren and workers who start their day early."
+- "Until 1918, the United States did not adopt it."
+- "Bipartisan support has grown in recent years." [omitted, with address: "for ending the clock changes altogether"]
+- "The bill was approved by the House by a bipartisan 308-117 vote, one of the strongest congressional showings." [omitted: "yet"; "for ending the twice-yearly clock change"]
+
+### 10.4 Still wrong among the 41 (read by hand, not hidden)
+
+| Output | Why it is wrong |
+|---|---|
+| "The semiannual clock changes result in …, and … resulting in more health problems and traffic accidents has been shown by studies." | **Both** parses tag "result" as NOUN, so the clause reads as one object. The agreement check is two readings of one giver and cannot catch a shared misreading (Pearl, again). |
+| "Their clocks will be set by Americans by one hour." [omitted: back] and "Their clocks will be set by Tennesseans back an hour." | The particle of *set back* is not labelled `compound:prt` by the parser, so the particle law cannot see it. |
+| "For early 2025 that includes legislation for permanent standard time, a bill is planned." | The relative clause is hung on "2025" in both parses. |
+| "Senate leaders have not committed however." and "DST has been expanded … additionally." | A one-word connective moved to the end without its comma. Lawful, but poor. |
+
+### 10.5 Tried and falsified, or corrected
+
+| What | Measured | Outcome |
+|---|---|---|
+| Clause segmentation alone to fix "bill" AUX | Parsed alone, "the House passed a Sunshine Protection Act bill backed by President Trump." still tags *bill* AUX | Segmentation does not fix tagging. The attested-tag constraint does. |
+| Moved span must hang on the root (or the patient) when read back | Refused "The bill was passed by the Senate in 2022 by unanimous consent." (stacked PPs: "by unanimous consent" hangs on "2022") | Too strict: PP attachment among the clause's own arguments is the reader's ambiguity. Replaced by "no clausal relation crossed". |
+| CASE on every Case=Nom pronoun | Refused "by it": the lexicon keeps only the first feature set per form, and "it" is listed Nom | Restricted to lemmas with a distinct accusative form. |
+| ROLES keyed by surface form | "must pass the Senate" slipped through, because "pass" ≠ "passed" | Keyed by EWT lemma. |
+| Two-parse agreement as a witness | The shared NOUN reading of "result" passes both | It is a check, not a witness. The independent witness stays relations.js. |
+
+No new hand-set threshold was added. The tag scope was chosen by the held-out null (§10.2). Every cut is a closed class or a punctuation convention with a giver.
+
+### 10.6 Open, next
+
+- **relations.js names auxiliaries, copulas and nouns** as predicates (230 refusals). Feed it the attested tags, or have it name the lexical head.
+- A **copular alternation** ("X is Y" → "Y is what X is"; or "According to X, …" for evaluative copulars) would take on the 54 cop refusals.
+- **Garden paths in the read-back:** "N backed by X was passed by Y". The read-back could use the same segmentation and agreement as the source reading, instead of one whole-sentence parse.
+- **Particles the parser does not label**, and connectives moved without their comma (§10.4).
+- `readClause` wiring into the answer ladder, with `roles` built from the record, as the measure script does.
+
+### 10.7 How to run
+
+```bash
+node native/scripts/claim-realize-measure.mjs --out 3.0/callimachus-runs/permanent-dst [--show N] [--json FILE]
+node native/scripts/eval-attested-tags.mjs --gold <en_ewt-ud-dev.conllu> --gold <en_ewt-ud-test.conllu>
+node --test native/organs/claim-realize.test.mjs
+```
