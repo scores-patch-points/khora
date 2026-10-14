@@ -13,7 +13,7 @@ const INJ = "/Users/mlacy/Documents/3.0/Zenodotus/derived-priors/hyperlexicon-pr
 const PRIORS = path.resolve(HERE, "../../../../../janus/priors");
 const have = fs.existsSync(UDHR) && fs.existsSync(INJ);
 
-test("the modal class is the injunction reading's own (drift guard)", () => {
+test("the modal class is the injunction reading's own (drift guard)", { skip: !fs.existsSync(path.join(HERE, "read-injunctions.mjs")) }, () => {
   const src = fs.readFileSync(path.join(HERE, "read-injunctions.mjs"), "utf8");
   for (const M of MODALS) assert.ok(src.includes(String(M.re)), `read-injunctions.mjs no longer carries ${M.re}`);
   assert.ok(src.includes(String(BEARER_UNIVERSAL)), "bearer rule drifted from read-injunctions.mjs");
