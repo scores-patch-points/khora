@@ -81,6 +81,14 @@ const norm = (t) => {
 const arrangement = (c) => (c?.subj && c?.pred ? `${norm(c.subj)}|${norm(c.pred)}` : null);
 /** The arrangement key of a span's claim (normalized subject|predicate), or null. Exported so an evaluation can check held-ness itself. */
 export const arrangementOf = (s) => arrangement(s?.claim);
+/**
+ * The CLAIM key: arrangement, normalized object, polarity. `held: "claim"` (GRAIN-HELD-CLAIM-PREREG.md) holds a span only when this key is
+ * held; the default `held: "arrangement"` is the original rule and every earlier registration ran under it.
+ */
+const polarityOf = (c) => (c?.polarity === "-" ? "-" : "+");
+/** Claim mode only: an unknown polarity (null, "unknown", missing) is NOT "+": it matches nothing and contests nothing (UNDETERMINED). */
+const strictPolarity = (c) => (c?.polarity === "-" ? "-" : c?.polarity === "+" ? "+" : null);
+const claimKeyOf = (s) => { const a = arrangement(s?.claim); const p = strictPolarity(s?.claim); return a && p ? `${a}|${norm(s.claim.obj)}|${p}` : null; };
 const sameObject = (a, b) => norm(a?.obj) === norm(b?.obj);
 
 /** One witness reading of a W claim, given by one U span. Same arrangement is required; the object and polarity decide the verdict. */
@@ -125,28 +133,54 @@ function permutationsOf(xs) {
  * Split the region against W and measure how far apart they are. `real` is true only when the observed number of held spans beats
  * EVERY draw of the predicate-shuffle null.
  */
-export function splitRegion(region, whom, { draws = 199, seed = 20261014 } = {}) {
+export function splitRegion(region, whom, { draws = 199, seed = 20261014, held = "arrangement" } = {}) {
+  if (held !== "arrangement" && held !== "claim") throw new TypeError(`splitRegion: held must be "arrangement" or "claim", not ${JSON.stringify(held)}`);
   const wSpans = (whom ?? []).filter((w) => arrangement(w.claim));
   const wKeys = wSpans.map((w) => arrangement(w.claim));
   const heldKeys = new Set(wKeys);
-  const H = [], A = [];
-  for (const u of region) (arrangement(u.claim) && heldKeys.has(arrangement(u.claim)) ? H : A).push(u);
+  const byClaim = held === "claim";
+  const wClaims = new Set(wSpans.map(claimKeyOf).filter((k) => k !== null)); // a null key (unknown polarity) matches nothing, itself included
+  const H = [], A = [], related = [];
+  for (const u of region) {
+    const arr = arrangement(u.claim);
+    const ck = byClaim ? claimKeyOf(u) : null;
+    const isHeld = byClaim ? ck !== null && wClaims.has(ck) : !!arr && heldKeys.has(arr);
+    if (isHeld) { H.push(u); continue; }
+    A.push(u);
+    // `related` (claim mode only): an arrangement a W span has, with another object, the other polarity, or an unknown polarity.
+    // Shown, typed, and it names the W spans it is about (and, if contested, the ones it opposes). Never silent.
+    if (byClaim && arr && heldKeys.has(arr)) {
+      const onArr = wSpans.filter((w) => arrangement(w.claim) === arr);
+      const sameObj = onArr.filter((w) => sameObject(w.claim, u.claim));
+      const up = strictPolarity(u.claim);
+      const against = up ? sameObj.filter((w) => { const wp = strictPolarity(w.claim); return wp && wp !== up; }) : [];
+      const unknown = !up || sameObj.some((w) => !strictPolarity(w.claim));
+      const kind = against.length ? "opposite-polarity" : unknown && sameObj.length ? "unknown-polarity" : !up ? "unknown-polarity" : "same-subject-predicate";
+      related.push({ address: u.address, id: u.id, kind, about: onArr.map((w) => w.address), against: against.map((w) => w.address) });
+    }
+  }
 
-  const rKeys = region.map((u) => arrangement(u.claim));
+  const rKeys = region.map((u) => (byClaim ? claimKeyOf(u) : arrangement(u.claim)));
   const rnd = mulberry(seed);
   const preds = wSpans.map((w) => norm(w.claim.pred));
   const subjs = wSpans.map((w) => norm(w.claim.subj));
+  const objs = wSpans.map((w) => norm(w.claim.obj));
+  const pols = wSpans.map((w) => strictPolarity(w.claim));
   let exceeded = 0, sum = 0;
   for (let d = 0; d < draws && wSpans.length; d++) {
     const p = preds.slice();
     for (let i = p.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [p[i], p[j]] = [p[j], p[i]]; }
-    const h = heldCount(rKeys, subjs.map((s, i) => `${s}|${p[i]}`));
+    // claim mode keeps each W span's object and polarity with its subject; only the predicate is dealt again
+    const keys = subjs.map((s, i) => (byClaim ? (pols[i] ? `${s}|${p[i]}|${objs[i]}|${pols[i]}` : null) : `${s}|${p[i]}`));
+    const h = heldCount(rKeys, keys);
     sum += h;
     if (h >= H.length) exceeded++;
   }
   const real = H.length > 0 && wSpans.length > 0 && exceeded === 0;
   return {
     H, A,
+    ...(byClaim ? { related } : {}),
+    held,
     distance: region.length ? A.length / region.length : null,
     null: { draws, seed, exceeded, p: (1 + exceeded) / (draws + 1), mean: draws && wSpans.length ? sum / draws : 0, permutations: permutationsOf(preds), real },
   };
@@ -212,7 +246,9 @@ function pathOf(region, a, b) {
 const startOf = (s) => Number(/#b(\d+)-/.exec(s.address)?.[1] ?? 0);
 /** W spans that join two held entities: the edges a reader already holds between things they hold. */
 function wEdges(whom, split) {
-  const held = new Set(split.H.flatMap(entitiesOf));
+  // `split.R` (claim mode): the related spans. Their entities are entities the reader HAS met (that is what makes them related), so an
+  // edge between them is still an edge between things the reader holds, and an opposed claim still surfaces as Unraveling's refusal.
+  const held = new Set([...split.H, ...(split.R ?? [])].flatMap(entitiesOf));
   return (whom ?? []).filter((w) => w.claim?.subj && w.claim?.obj && w.claim.polarity && held.has(norm(w.claim.subj)) && held.has(norm(w.claim.obj)) && norm(w.claim.subj) !== norm(w.claim.obj));
 }
 
@@ -342,12 +378,18 @@ export function closureOf(modes) {
  *   whom:   W's spans (side "W"), read by the same relation reader. Empty or absent = the void reader.
  * Selection happens on the whole activated region; every cell then works on what Clearing left standing.
  */
-export function foldGrain({ region = [], whom = [], survives = (u) => (u.activation ?? 0) > 0, draws = 199, seed = 20261014, forceGrain = null, anchor = "first" } = {}) {
-  const selection = splitRegion(region, whom, { draws, seed });
+export function foldGrain({ region = [], whom = [], survives = (u) => (u.activation ?? 0) > 0, draws = 199, seed = 20261014, forceGrain = null, anchor = "first", held = "arrangement" } = {}) {
+  const selection = splitRegion(region, whom, { draws, seed, held });
+  const relatedBy = new Map((selection.related ?? []).map((r) => [r.address, r]));
   const cleared = region.filter(survives);
   const standing = new Set(cleared.map((u) => u.id));
-  const split = { ...selection, H: selection.H.filter((u) => standing.has(u.id)), A: selection.A.filter((u) => standing.has(u.id)) };
-  const pairs = pairsOf(split, cleared, whom);
+  const split = { ...selection, H: selection.H.filter((u) => standing.has(u.id)), A: selection.A.filter((u) => standing.has(u.id)), ...(selection.related ? { R: cleared.filter((u) => new Set(selection.related.map((r) => r.address)).has(u.address)) } : {}) };
+  // The W spans that get a contact verdict are chosen by the arrangements of H. Under held:"claim" an opposite-polarity span has left
+  // H, so its W counterpart would lose its CONTRADICTED verdict and stop surfacing: pair over H plus the related spans (the same
+  // arrangement set as the default), so every cell sees exactly the pairs it saw before (Grain session, objection (c)).
+  const relatedAddr = new Set((selection.related ?? []).map((r) => r.address));
+  const pairSplit = selection.related ? { ...split, H: [...split.H, ...cleared.filter((u) => relatedAddr.has(u.address))] } : split;
+  const pairs = pairsOf(pairSplit, cleared, whom);
   const selected = selectGrain(selection, pairs.map((p) => p.case));
   // `forceGrain` is for evaluation only (does what is shown as new depend on the cut?); the fold says it was forced.
   const picked = forceGrain && GRAINS.includes(forceGrain) ? { grain: forceGrain, why: `forced to ${forceGrain} (selected: ${selected.grain})`, forced: true } : selected;
@@ -356,7 +398,8 @@ export function foldGrain({ region = [], whom = [], survives = (u) => (u.activat
   const ctx = { region, cleared, whom, split, pairs, survives, anchor };
   const modes = STEPS[grain].map(([role, cell]) => {
     const out = CELL[cell](ctx);
-    const items = out.items.map((it) => stamp(it, cell));
+    // GRAIN-HELD-CLAIM-PREREG H4: an item that shows a `related` span says so (claim mode only; nothing changes otherwise)
+    const items = out.items.map((it) => { const s2 = stamp(it, cell); const last = (it.spans ?? [])[(it.spans ?? []).length - 1]; const r = relatedBy.get(last); return r ? { ...s2, related: true, relatedKind: r.kind, relatedAbout: r.about, ...(r.against.length ? { against: r.against } : {}) } : s2; });
     const seams = seamReport(items);
     return { mode: cell, stance: stanceOf(cell), role, ran: true, items, ...(out.divisions ? { divisions: out.divisions } : {}), seams, ...(items.length ? {} : { empty: "ran and found nothing in this region for this reader; the absence is the output" }) };
   });
@@ -365,7 +408,8 @@ export function foldGrain({ region = [], whom = [], survives = (u) => (u.activat
   const confined = silent.every((m) => m.items.every((it) => (it.segs ?? []).every((g) => g.kind === "source" || (g.kind === "frame" && g.t === "" && g.seam === "absence"))));
   return {
     grain, why: picked.why, ...(picked.selectorUnreadable ? { selectorUnreadable: true } : {}),
-    distance: { region: region.length, cleared: cleared.length, held: selection.H.length, absent: selection.A.length, share: selection.distance, margin: selection.H.length + selection.A.length ? (selection.H.length - selection.A.length) / (selection.H.length + selection.A.length) : null, witness: "claim-arrangement", null: selection.null },
+    ...(selection.related ? { related: selection.related } : {}),
+    distance: { region: region.length, cleared: cleared.length, held: selection.H.length, absent: selection.A.length, ...(selection.related ? { related: selection.related.length } : {}), share: selection.distance, margin: selection.H.length + selection.A.length ? (selection.H.length - selection.A.length) / (selection.H.length + selection.A.length) : null, witness: "claim-arrangement", null: selection.null },
     contacts: pairs.map((p) => ({ w: p.w.address, case: p.case, standing: p.standing, holds: p.holds.map((u) => u.address), refused: p.refused.map((u) => u.address), undetermined: p.undetermined.map((u) => u.address) })),
     modes,
     closure: { ...closureOf(modes), mouthConfined: confined },

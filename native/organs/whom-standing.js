@@ -277,18 +277,18 @@ export function refusalsOf({ fold, standings, admitted = [], refusedW = [], regi
  * typed refusals, and `refused` (true when a surface must not render it). `wFull` is the region re-read as W by the same reader.
  * grain.js is not edited: the selection is passed to `foldGrain` as `forceGrain`, and the result says it was selected here.
  */
-export function foldWithWhom({ region = [], whom: whomIn = [], wFull = null, referents = null, mind = null, survives = (u) => (u.activation ?? 0) > 0, draws = 199, seed = 20261014, anchor = "first" } = {}) {
+export function foldWithWhom({ region = [], whom: whomIn = [], wFull = null, referents = null, mind = null, held = "arrangement", survives = (u) => (u.activation ?? 0) > 0, draws = 199, seed = 20261014, anchor = "first" } = {}) {
   // `mind` (mind-whom.js): the reader's state as a mind through the theory-of-mind organ. Its spans join W; its disclosure rides the fold.
   const whom = mind?.whom?.length ? [...whomIn, ...mind.whom] : whomIn;
   const { admitted, refused: refusedW } = admitWhom(whom, { universe: region });
-  const split = splitRegion(region, admitted, { draws, seed });
+  const split = splitRegion(region, admitted, { draws, seed, held });
   const cleared = region.filter(survives);
   const standing = new Set(cleared.map((u) => u.id));
   const heldKeys = new Set(split.H.filter((u) => standing.has(u.id)).map(arrangementOf));
   const verdicts = admitted.filter((w) => heldKeys.has(arrangementOf(w))).map((w) => contactVerdict(w, cleared).case);
   const coverage = wFull ? coverageOf(region, wFull) : null;
   const selection = selectGrainTwoNulls(split, verdicts, { coverage });
-  const fold = foldGrain({ region, whom: admitted, survives, draws, seed, forceGrain: selection.grain, anchor });
+  const fold = foldGrain({ region, whom: admitted, survives, draws, seed, forceGrain: selection.grain, anchor, held });
   const standings = standingsOf({ region: cleared, whom: admitted });
   const refusals = refusalsOf({ fold, standings, admitted, refusedW, region, whom: admitted, selection });
   if (mind?.unmodelled) refusals.push({ code: "mind-unmodelled", renders: true, forced: "Ground", why: "the reader has attributed nothing to the person: unmodelled, which is not the person holding nothing" });
