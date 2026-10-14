@@ -97,14 +97,17 @@ export function partitionByHoldings(items = [], whom, { keyOf = (x) => x.key ?? 
  * by the twin-reader session, whose `whomPinned` records these are.
  *
  * Entity ids are per corpus: U and W are matched on SURFACE strings (grain.js normalizes), never on ids. This is a claim-key witness,
- * not byte containment (twin-reader's `heldIn`); the grain types it as one. A short thread yields few or no atoms (the reader needs
+ * not byte containment (twin-reader's `heldIn`); the grain types it as one.
+ *
+ * `received` (optional, default null = as before) is passed to readCorpus: `{ verbs }` reads W through the vocabulary the RECORD's own reading
+ * earned (a thread is read in the record's terms; it never writes back). See W-READER-PREREG.md: that, not a received POS prior, recovered the spans shown. A short thread yields few or no atoms (the reader needs
  * recurrence to admit a subject): an empty result is a typed absence, not an error.
  */
-export async function claimsOfWhom(pinned, { slice, question = "" } = {}) {
+export async function claimsOfWhom(pinned, { slice, question = "", received = null } = {}) {
   const { readCorpus } = await import("./callimachus.js");
   const { spansFromRecord } = await import("./grain.js");
   if (!pinned?.length) return { spans: [], why: "no pinned units: the void reader" };
-  const record = readCorpus(pinned, { question });
+  const record = readCorpus(pinned, { question, received });
   const spans = await spansFromRecord(record, { slice, side: "W" });
   return { spans, atoms: record.atoms.length, why: spans.length ? null : "the claim reader admitted no claim from W's units (a short thread has too little recurrence to admit a subject)" };
 }

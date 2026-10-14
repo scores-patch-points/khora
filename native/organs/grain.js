@@ -36,6 +36,7 @@
 // NOT HERE: reading a W corpus into spans (the caller supplies spans from whichever reader it trusts; `uSpansFromRecord` does U), and
 // the ladder is not yet routed through this (it still answers at fixed sizes). Nothing here calls a model.
 import { mergeTestimony } from "./capacity-runner.js";
+import { STANCE_BY_MODE } from "../kernel/cube.js";
 import { seg, sentence } from "./prose-laws.js";
 import { seamReport } from "./seam-ledger.js";
 
@@ -44,12 +45,12 @@ export const GRAINS = Object.freeze(["Ground", "Figure", "Pattern"]);
 export const MODES = Object.freeze(["Differentiate", "Relate", "Generate"]);
 /** The roles of the triad, in order. Witnessing holds both Differentiate (refuses) and Relate (corroborates). */
 export const ROLES = Object.freeze(["clear", "witness", "generate"]);
-/** The nine cells: row = grain (distance), column = mode (verdict). Clearing is also the first step at EVERY grain. */
-export const CELLS = Object.freeze({
-  Ground: Object.freeze({ Differentiate: "Clearing", Relate: "Tending", Generate: "Cultivating" }),
-  Figure: Object.freeze({ Differentiate: "Dissecting", Relate: "Binding", Generate: "Making" }),
-  Pattern: Object.freeze({ Differentiate: "Unraveling", Relate: "Tracing", Generate: "Composing" }),
-});
+/**
+ * The nine cells: row = grain (distance), column = mode (verdict). NOT typed here: kernel/cube.js `STANCE_BY_MODE` is the one table, and
+ * `cellOf(op, grain).stance` already stamps it on every cell of the engine. This is that table, transposed to grain-major.
+ * (Clearing is also the first step at EVERY grain.)
+ */
+export const CELLS = Object.freeze(Object.fromEntries(GRAINS.map((g) => [g, Object.freeze(Object.fromEntries(MODES.map((m) => [m, STANCE_BY_MODE[m][g]])))])));
 /** The steps run at a grain, in order: clear (always Clearing), witness (refuse, then corroborate), generate. */
 export const STEPS = Object.freeze({
   Ground: Object.freeze([["clear", "Clearing"], ["witness", "Tending"], ["generate", "Cultivating"]]),
@@ -78,6 +79,8 @@ const norm = (t) => {
 };
 /** A span: { id, address, text, side: "U"|"W", claim: { subj, pred, obj, polarity: "+"|"-" } | null, activation?, division? }. */
 const arrangement = (c) => (c?.subj && c?.pred ? `${norm(c.subj)}|${norm(c.pred)}` : null);
+/** The arrangement key of a span's claim (normalized subject|predicate), or null. Exported so an evaluation can check held-ness itself. */
+export const arrangementOf = (s) => arrangement(s?.claim);
 const sameObject = (a, b) => norm(a?.obj) === norm(b?.obj);
 
 /** One witness reading of a W claim, given by one U span. Same arrangement is required; the object and polarity decide the verdict. */
@@ -213,6 +216,34 @@ function wEdges(whom, split) {
   return (whom ?? []).filter((w) => w.claim?.subj && w.claim?.obj && w.claim.polarity && held.has(norm(w.claim.subj)) && held.has(norm(w.claim.obj)) && norm(w.claim.subj) !== norm(w.claim.obj));
 }
 
+/** The order a new passage is laid down in: a caller-supplied `rank` (e.g. the answer ladder's reader-relative score) or, absent that, activation. */
+const rankOf = (u) => u.rank ?? u.activation ?? 0;
+
+/**
+ * One absent span, placed beside the nearest thing the reader already holds. A shared entity is an addressed join: the two sit side by
+ * side with no seam. With only the nearest held span (same division, nearest by byte) the bridge is a seam. With nothing held to attach
+ * to, the span stands alone. Used by Making (Figure) and, so the new is never left unshown, by Composing (Pattern).
+ *
+ * ANCHOR RULE (GRAIN-R4-PREREG.md). "first" (the earlier behaviour): the first held span, in list order, that shares any entity. That
+ * collapsed onto one sentence: 4 of the first 6 new passages for the dense reader were set beside the same anchor. "shared-most": the
+ * held span sharing the MOST entities with the new passage, ties broken by the fewest times it has already been used as an anchor in this
+ * list, then by activation. No constant: counts and an order.
+ */
+function attachNew(u, held, { used = null, anchor = "shared-most" } = {}) {
+  const mine = new Set(entitiesOf(u));
+  const shared = (h) => entitiesOf(h).filter((e) => mine.has(e)).length;
+  const byEntity = held.filter((h) => shared(h) > 0);
+  let near = null;
+  if (byEntity.length) {
+    near = anchor === "first" ? byEntity[0] : [...byEntity].sort((a, b) => shared(b) - shared(a) || (used?.get(a.address) ?? 0) - (used?.get(b.address) ?? 0) || (b.activation ?? 0) - (a.activation ?? 0))[0];
+  } else {
+    near = held.filter((h) => divisionOf(h) === divisionOf(u)).sort((a, b) => Math.abs(startOf(a) - startOf(u)) - Math.abs(startOf(b) - startOf(u)))[0] ?? null;
+  }
+  if (near && used) used.set(near.address, (used.get(near.address) ?? 0) + 1);
+  if (byEntity.length) return { ...P([near, u]), attachedBy: "entity" };
+  return near ? { ...S([src(near), seg.frame(FRAME_WORDS.Making[0]), src(u)], [near, u]), attachedBy: "nearest" } : { ...P([u]), attachedBy: null };
+}
+
 // Every cell consumes the material Clearing left standing (`cleared`), never the raw activated region.
 const CELL = {
   // ---- Ground row
@@ -239,16 +270,9 @@ const CELL = {
   Binding: ({ pairs }) => ({
     items: pairs.filter((p) => ["AGREE", "SINGLE"].includes(p.case)).map((p) => P([p.w, p.holds[0]])),
   }),
-  Making: ({ split }) => {
-    const held = split.H;
-    const items = [...split.A].sort((a, b) => (b.activation ?? 0) - (a.activation ?? 0)).map((u) => {
-      const mine = new Set(entitiesOf(u));
-      const byEntity = held.filter((h) => entitiesOf(h).some((e) => mine.has(e)));
-      const near = byEntity[0] ?? held.filter((h) => divisionOf(h) === divisionOf(u)).sort((a, b) => Math.abs(startOf(a) - startOf(u)) - Math.abs(startOf(b) - startOf(u)))[0] ?? null;
-      // A shared entity is an addressed join: the two spans sit side by side with no seam. With only the nearest span, the bridge is a seam.
-      if (byEntity[0]) return { ...P([near, u]), attachedBy: "entity" };
-      return near ? { ...S([src(near), seg.frame(FRAME_WORDS.Making[0]), src(u)], [near, u]), attachedBy: "nearest" } : { ...P([u]), attachedBy: null };
-    });
+  Making: ({ split, anchor }) => {
+    const used = new Map();
+    const items = [...split.A].sort((a, b) => rankOf(b) - rankOf(a)).map((u) => attachNew(u, split.H, { used, anchor }));
     return { items };
   },
 
@@ -262,15 +286,19 @@ const CELL = {
     }
     return { items };
   },
-  Tracing: ({ cleared, whom, split }) => ({
-    items: wEdges(whom, split).flatMap((w) => {
+  Tracing: ({ cleared, whom, split }) => {
+    const items = wEdges(whom, split).flatMap((w) => {
       if (["DISAGREE", "CONTRADICTED"].includes(contactVerdict(w, cleared).case)) return [];
       const chain = pathOf(cleared, norm(w.claim.subj), norm(w.claim.obj));
       if (!chain || !chain.length) return [];
-      return [{ ...P([w, ...chain]), hops: chain.length }];
-    }),
-  }),
-  Composing: ({ cleared, whom, split }) => {
+      // An ECHO is the reader's own claim corroborated by one record span that says the same thing in the same words: confirmation, not a walk.
+      const echo = chain.length === 1 && norm(w.text) === norm(chain[0].text);
+      return [{ ...P([w, ...chain]), hops: chain.length, echo }];
+    });
+    // genuine chains first, echoes after (stable within each)
+    return { items: [...items.filter((i) => !i.echo), ...items.filter((i) => i.echo)] };
+  },
+  Composing: ({ cleared, whom, split, anchor }) => {
     const held = new Set(split.H.flatMap(entitiesOf));
     const wPairs = new Set((whom ?? []).filter((w) => w.claim?.subj && w.claim?.obj).map((w) => [norm(w.claim.subj), norm(w.claim.obj)].sort().join("␟")));
     const endSpan = (e, not) => [...split.H].filter((h) => h !== not && entitiesOf(h).includes(e)).sort((a, b) => (b.activation ?? 0) - (a.activation ?? 0))[0] ?? null;
@@ -282,6 +310,14 @@ const CELL = {
       const left = endSpan(a, u), right = endSpan(b, u);
       if (!left || !right) continue;
       items.push(S([src(left), seg.frame(FRAME_WORDS.Composing[0]), src(u), seg.frame(FRAME_WORDS.Composing[1]), src(right)], [left, u, right]));
+    }
+    // The generating cell lays down what is ABSENT as well as what is newly related (GRAIN-R3-PREREG.md): an absent span with no relation to
+    // anything held is still the thing the reader has not seen. Each is placed beside the nearest held span, as Making does at Figure.
+    const composedAddr = new Set(items.flatMap((it) => it.spans));
+    const used = new Map();
+    for (const u of [...split.A].sort((a, b) => rankOf(b) - rankOf(a))) {
+      if (composedAddr.has(u.address)) continue;
+      items.push({ ...attachNew(u, split.H, { used, anchor }), unrelated: true });
     }
     return { items };
   },
@@ -306,15 +342,18 @@ export function closureOf(modes) {
  *   whom:   W's spans (side "W"), read by the same relation reader. Empty or absent = the void reader.
  * Selection happens on the whole activated region; every cell then works on what Clearing left standing.
  */
-export function foldGrain({ region = [], whom = [], survives = (u) => (u.activation ?? 0) > 0, draws = 199, seed = 20261014 } = {}) {
+export function foldGrain({ region = [], whom = [], survives = (u) => (u.activation ?? 0) > 0, draws = 199, seed = 20261014, forceGrain = null, anchor = "first" } = {}) {
   const selection = splitRegion(region, whom, { draws, seed });
   const cleared = region.filter(survives);
   const standing = new Set(cleared.map((u) => u.id));
   const split = { ...selection, H: selection.H.filter((u) => standing.has(u.id)), A: selection.A.filter((u) => standing.has(u.id)) };
   const pairs = pairsOf(split, cleared, whom);
-  const picked = selectGrain(selection, pairs.map((p) => p.case));
+  const selected = selectGrain(selection, pairs.map((p) => p.case));
+  // `forceGrain` is for evaluation only (does what is shown as new depend on the cut?); the fold says it was forced.
+  const picked = forceGrain && GRAINS.includes(forceGrain) ? { grain: forceGrain, why: `forced to ${forceGrain} (selected: ${selected.grain})`, forced: true } : selected;
   const grain = picked.grain;
-  const ctx = { region, cleared, whom, split, pairs, survives };
+  // `anchor`: "first" (default, so every earlier registration reproduces) or "shared-most" (GRAIN-R4-PREREG.md).
+  const ctx = { region, cleared, whom, split, pairs, survives, anchor };
   const modes = STEPS[grain].map(([role, cell]) => {
     const out = CELL[cell](ctx);
     const items = out.items.map((it) => stamp(it, cell));
@@ -326,7 +365,7 @@ export function foldGrain({ region = [], whom = [], survives = (u) => (u.activat
   const confined = silent.every((m) => m.items.every((it) => (it.segs ?? []).every((g) => g.kind === "source" || (g.kind === "frame" && g.t === "" && g.seam === "absence"))));
   return {
     grain, why: picked.why, ...(picked.selectorUnreadable ? { selectorUnreadable: true } : {}),
-    distance: { region: region.length, cleared: cleared.length, held: selection.H.length, absent: selection.A.length, share: selection.distance, witness: "claim-arrangement", null: selection.null },
+    distance: { region: region.length, cleared: cleared.length, held: selection.H.length, absent: selection.A.length, share: selection.distance, margin: selection.H.length + selection.A.length ? (selection.H.length - selection.A.length) / (selection.H.length + selection.A.length) : null, witness: "claim-arrangement", null: selection.null },
     contacts: pairs.map((p) => ({ w: p.w.address, case: p.case, standing: p.standing, holds: p.holds.map((u) => u.address), refused: p.refused.map((u) => u.address), undetermined: p.undetermined.map((u) => u.address) })),
     modes,
     closure: { ...closureOf(modes), mouthConfined: confined },

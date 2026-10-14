@@ -75,7 +75,7 @@ export function candidatesOf(record, fixity) {
 }
 
 /** The witness table: one column per witness, one boolean or count per candidate. Columns are grouped by layer. */
-function witnesses(cands, { question, record, pointed = null, askedSide = null }) {
+export function witnesses(cands, { question, record, pointed = null, askedSide = null }) {
   const focus = new Set(question.focus ?? []);
   const rel = stemOf(question.reading?.relation?.lemma);
   const qWords = new Set((question.reading?.words ?? []).filter((w) => w.length >= 4).map(stemOf));
@@ -124,7 +124,7 @@ const NO_PRIOR = Object.freeze({ m: 0, df: new Map() });
 /** Surprisal weight of a boolean column: −log2(share present). A witness every candidate carries says nothing (weight 0). */
 const surprisal = (col) => { const k = col.filter(Boolean).length; return k === 0 || k === col.length ? 0 : log2(col.length / k); };
 
-function scoreWith(cols, layers, n, prior = NO_PRIOR) {
+export function scoreWith(cols, layers, n, prior = NO_PRIOR) {
   const s = new Array(n).fill(0);
   const why = Array.from({ length: n }, () => ({}));
   if (layers.includes("perception")) for (const [name, col] of Object.entries(cols.perception)) {
