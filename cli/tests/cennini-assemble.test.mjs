@@ -9,6 +9,9 @@ import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { PANEL, PARAMS, filesOf, complete, assembledRun, summarize, missingNames, SURFACE } from "../cennini-assemble.mjs";
 
+// A hermetic JavaScript keyword set for these tests. The product reads the vendored CodeKeywordPrior@1 (native/priors,
+// a symlink into janus/priors that a clean clone does not have); a test hands one in so it needs no symlink. Test data only.
+const KW = new Set(["break", "case", "catch", "class", "const", "continue", "debugger", "default", "delete", "do", "else", "export", "extends", "finally", "for", "function", "if", "import", "in", "instanceof", "let", "new", "of", "return", "super", "switch", "this", "throw", "try", "typeof", "var", "void", "while", "with", "yield", "async", "await", "static", "null", "true", "false", "undefined"]);
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const tmp = () => fs.mkdtempSync(path.join(fs.realpathSync(os.tmpdir()), "asm-test-"));
 const ask = (id) => PANEL.find((a) => a.id === id);
@@ -63,7 +66,7 @@ test("SIGNED stubs carry the parameter list the ask states, still fail their own
 });
 
 test("an attempt that forgot the import FAILS alone and PASSES once FINISH completes it; the re-read says which names landed", async () => {
-  const r = await assembledRun({ ask: ask("total"), fetchImpl: door(NO_IMPORT.total) });
+  const r = await assembledRun({ keywords: KW, ask: ask("total"), fetchImpl: door(NO_IMPORT.total) });
   assert.equal(r.live, false);
   assert.equal(r.A.pass, false, "the raw attempt references sum without importing it");
   assert.match(r.A.detail, /sum|not defined/);
@@ -75,21 +78,21 @@ test("an attempt that forgot the import FAILS alone and PASSES once FINISH compl
 });
 
 test("the same holds for a two-name need: both imports are found and applied", async () => {
-  const r = await assembledRun({ ask: ask("mean"), fetchImpl: door(NO_IMPORT.mean) });
+  const r = await assembledRun({ keywords: KW, ask: ask("mean"), fetchImpl: door(NO_IMPORT.mean) });
   assert.equal(r.A.pass, false);
   assert.equal(r.B.pass, true);
   assert.deepEqual(r.B.proposals.map((p) => p.name).sort(), ["count", "sum"]);
 });
 
 test("CONTROL BUILT TO FAIL (wrong world): the same attempt completed against files that do not hold the helper is NOT fixed", async () => {
-  const r = await assembledRun({ ask: ask("total"), fetchImpl: door(NO_IMPORT.total) });
+  const r = await assembledRun({ keywords: KW, ask: ask("total"), fetchImpl: door(NO_IMPORT.total) });
   assert.equal(r.B.pass, true);
   assert.equal(r.C.pass, false, "a wrong world must not fix it, or arm B would prove nothing");
   assert.ok(!r.C.proposals.some((p) => p.kind === "import" && p.spec === "./numbers.mjs"));
 });
 
 test("CONTROL ASK: a self-contained attempt proposes nothing, the text is unchanged, and the verdict is the same in both arms", async () => {
-  const r = await assembledRun({ ask: ask("even"), fetchImpl: door(SOLUTIONS.even) });
+  const r = await assembledRun({ keywords: KW, ask: ask("even"), fetchImpl: door(SOLUTIONS.even) });
   assert.equal(r.control, true);
   assert.deepEqual(r.B.proposals, []);
   assert.equal(r.B.changed, false);
@@ -98,7 +101,7 @@ test("CONTROL ASK: a self-contained attempt proposes nothing, the text is unchan
 });
 
 test("an attempt that already imported what it needs is left alone (no spurious second import)", async () => {
-  const r = await assembledRun({ ask: ask("greeting"), fetchImpl: door(SOLUTIONS.greeting) });
+  const r = await assembledRun({ keywords: KW, ask: ask("greeting"), fetchImpl: door(SOLUTIONS.greeting) });
   assert.equal(r.A.pass, true);
   assert.deepEqual(r.B.proposals, []);
   assert.equal(r.B.changed, false);
@@ -106,7 +109,7 @@ test("an attempt that already imported what it needs is left alone (no spurious 
 });
 
 test("an attempt that is simply WRONG stays wrong: the assembly completes support, it does not repair logic", async () => {
-  const r = await assembledRun({ ask: ask("total"), fetchImpl: door('import { sum } from "./numbers.mjs";\n\nexport function formatTotal(items) {\n  return "$" + sum(items.map((i) => i.price));\n}\n') });
+  const r = await assembledRun({ keywords: KW, ask: ask("total"), fetchImpl: door('import { sum } from "./numbers.mjs";\n\nexport function formatTotal(items) {\n  return "$" + sum(items.map((i) => i.price));\n}\n') });
   assert.equal(r.A.pass, false);
   assert.equal(r.B.pass, false);
   assert.equal(r.B.changed, false);
@@ -114,14 +117,14 @@ test("an attempt that is simply WRONG stays wrong: the assembly completes suppor
 
 test("LOOK is real in the assembly: the file the ask names is among the first candidates for every ask", async () => {
   for (const a of PANEL) {
-    const r = await assembledRun({ ask: a, fetchImpl: door(SOLUTIONS[a.id]) });
+    const r = await assembledRun({ keywords: KW, ask: a, fetchImpl: door(SOLUTIONS[a.id]) });
     assert.equal(r.looked.found, true, `${a.id}: the look finds ${a.target}`);
     assert.equal(r.looked.top, a.target, `${a.id}: and ranks it first`);
   }
 });
 
 test("a door that fails is recorded as a failure, never as a pass, and the fake door is never live", async () => {
-  const r = await assembledRun({ ask: ask("total"), fetchImpl: async () => ({ ok: false, status: 503, json: async () => ({}) }) });
+  const r = await assembledRun({ keywords: KW, ask: ask("total"), fetchImpl: async () => ({ ok: false, status: 503, json: async () => ({}) }) });
   assert.equal(r.door.ok, false);
   assert.match(r.door.error, /503/);
   assert.equal(r.attempted, false);
@@ -131,8 +134,8 @@ test("a door that fails is recorded as a failure, never as a pass, and the fake 
 
 test("summarize counts transitions, harm and the wrong-world arm; fake runs are never counted as live", async () => {
   const recs = [
-    await assembledRun({ ask: ask("total"), fetchImpl: door(NO_IMPORT.total) }),
-    await assembledRun({ ask: ask("even"), fetchImpl: door(SOLUTIONS.even) }),
+    await assembledRun({ keywords: KW, ask: ask("total"), fetchImpl: door(NO_IMPORT.total) }),
+    await assembledRun({ keywords: KW, ask: ask("even"), fetchImpl: door(SOLUTIONS.even) }),
   ];
   const sFake = summarize(recs);
   assert.equal(sFake.live, 0);
@@ -146,8 +149,8 @@ test("summarize counts transitions, harm and the wrong-world arm; fake runs are 
 });
 
 test("missingNames reads unbound names from text (the re-read), and the driver makes no write outside its workspace and no token use", () => {
-  assert.deepEqual(missingNames(NO_IMPORT.total, "cart.mjs").filter((n) => n === "sum"), ["sum"]);
-  assert.deepEqual(missingNames(SOLUTIONS.total, "cart.mjs").filter((n) => n === "sum"), []);
+  assert.deepEqual(missingNames(NO_IMPORT.total, "cart.mjs", KW).filter((n) => n === "sum"), ["sum"]);
+  assert.deepEqual(missingNames(SOLUTIONS.total, "cart.mjs", KW).filter((n) => n === "sum"), []);
   const src = fs.readFileSync(path.join(HERE, "..", "cennini-assemble.mjs"), "utf8");
   assert.doesNotMatch(src, /x-heimdall-token|\.heimdall|HEIMDALL_TOKEN/i);
   assert.match(src, /refusing to write run records inside the khora repo/);

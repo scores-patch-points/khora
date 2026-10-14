@@ -53,7 +53,7 @@ export function attemptOf({ raw, before, file, parse, target, onDisk = null, don
 }
 
 /** One ladder run on a fresh workspace. `fetchImpl` null = the real door; any injected fetch makes `live` false. */
-export async function ladderRun({ ask, rep = 1, base = "http://127.0.0.1:11436", timeoutMs = 280000, maxRounds = 1, signed = false, fetchImpl = null, parse = null, workspaceRoot = os.tmpdir(), wrongWorld = null }) {
+export async function ladderRun({ ask, rep = 1, base = "http://127.0.0.1:11436", timeoutMs = 280000, maxRounds = 1, signed = false, fetchImpl = null, parse = null, workspaceRoot = os.tmpdir(), wrongWorld = null, keywords = undefined }) {
   const parseFn = parse ?? await loadParse();
   const workspace = fs.mkdtempSync(path.join(fs.realpathSync(workspaceRoot), `cennini-lad-${ask.id}-`));
   try {
@@ -92,11 +92,11 @@ export async function ladderRun({ ask, rep = 1, base = "http://127.0.0.1:11436",
     if (got.attempt !== null) {
       fs.writeFileSync(abs, got.attempt);
       R = { ...runTest(workspace), via: got.via };
-      const f = complete({ before, after: got.attempt, file: abs, world });
+      const f = complete({ before, after: got.attempt, file: abs, world, keywords });
       fs.writeFileSync(abs, f.completed);
       F = { ...runTest(workspace), proposals: f.proposals, gaps: f.gaps, reread: f.reread, changed: f.changed };
       const wr = wrongWorld ?? [{ path: path.join(workspace, "other.mjs"), text: "export function nothing() {\n  return 0;\n}\n" }];
-      const c = complete({ before, after: got.attempt, file: abs, world: wr });
+      const c = complete({ before, after: got.attempt, file: abs, world: wr, keywords });
       fs.writeFileSync(abs, c.completed);
       C = { ...runTest(workspace), proposals: c.proposals, changed: c.changed };
     }
@@ -104,7 +104,7 @@ export async function ladderRun({ ask, rep = 1, base = "http://127.0.0.1:11436",
       ask: ask.id, rep, live: fetchImpl === null, surface: SURFACE, control: !!ask.control, needs: ask.needs, maxRounds, signed,
       looked, door, answer: { gap: answer.gap, bytes: answer.raw.length, raw: answer.raw.slice(0, RAW_KEPT) },
       attempt: { made: got.attempt !== null, via: got.via, lost: got.gap },
-      needsBound: got.attempt !== null && ask.needs.length ? ask.needs.every((n) => !missingNames(got.attempt, ask.target).includes(n)) : null,
+      needsBound: got.attempt !== null && ask.needs.length ? ask.needs.every((n) => !missingNames(got.attempt, ask.target, keywords).includes(n)) : null,
       A, R, F, C,
     };
   } finally { fs.rmSync(workspace, { recursive: true, force: true }); }

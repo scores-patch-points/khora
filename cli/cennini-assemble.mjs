@@ -81,13 +81,14 @@ export const filesOf = (ask, { signed = false } = {}) => ({ ...HELPERS, [ask.tar
 const STUB_MARKER = (ask) => `TODO: ${ask.fn}`;
 
 const keywordsOf = (file) => keywordsFor("javascript")?.keywords ?? null;
-export const missingNames = (text, file) => missingImports(text, file, { keywords: keywordsOf(file) }).map((m) => m.name).sort();
+export const missingNames = (text, file, keywords = keywordsOf(file)) => missingImports(text, file, { keywords }).map((m) => m.name).sort();
 
 /** FINISH + APPLY + RE-READ over an attempt. Pure. `world` is [{ path, text }] (the files the session holds). */
-export function complete({ before, after, file, world }) {
-  const f = finish({ before, after, file, world });
+export function complete({ before, after, file, world, keywords = undefined }) {
+  const f = finish({ before, after, file, world, keywords });
   const completed = applyFinish(after, f.proposals);
-  const wasMissing = missingNames(after, file), nowMissing = missingNames(completed, file);
+  const kw = keywords === undefined ? keywordsOf(file) : keywords;
+  const wasMissing = missingNames(after, file, kw), nowMissing = missingNames(completed, file, kw);
   const seed = new Set(f.seed);
   return {
     completed, changed: completed !== after,
@@ -109,7 +110,7 @@ export const readWorld = (workspace, exceptFile) => fs.readdirSync(workspace)
   .map((f) => ({ path: path.join(workspace, f), text: fs.readFileSync(path.join(workspace, f), "utf8") }));
 
 /** One assembled run on a fresh workspace. `fetchImpl` null = the real door; any injected fetch makes `live` false. */
-export async function assembledRun({ ask, rep = 1, base = "http://127.0.0.1:11436", timeoutMs = 170000, fetchImpl = null, workspaceRoot = os.tmpdir(), wrongWorld = null }) {
+export async function assembledRun({ ask, rep = 1, base = "http://127.0.0.1:11436", timeoutMs = 170000, fetchImpl = null, workspaceRoot = os.tmpdir(), wrongWorld = null, keywords = undefined }) {
   const workspace = fs.mkdtempSync(path.join(fs.realpathSync(workspaceRoot), `cennini-asm-${ask.id}-`));
   try {
     for (const [f, body] of Object.entries(filesOf(ask))) fs.writeFileSync(path.join(workspace, f), body);
@@ -144,13 +145,13 @@ export async function assembledRun({ ask, rep = 1, base = "http://127.0.0.1:1143
     const A = runTest(workspace);
     // ARM B: completed against the files the session holds
     const abs = path.join(workspace, ask.target);
-    const b = complete({ before, after, file: abs, world });
+    const b = complete({ before, after, file: abs, world, keywords });
     fs.writeFileSync(path.join(workspace, ask.target), b.completed);
     const B = runTest(workspace);
     // ARM C: the same attempt completed against a WRONG world
     fs.writeFileSync(path.join(workspace, ask.target), after);
     const wrong = wrongWorld ?? [{ path: path.join(workspace, "other.mjs"), text: "export function nothing() {\n  return 0;\n}\n" }];
-    const c = complete({ before, after, file: abs, world: wrong });
+    const c = complete({ before, after, file: abs, world: wrong, keywords });
     fs.writeFileSync(path.join(workspace, ask.target), c.completed);
     const C = runTest(workspace);
     fs.writeFileSync(path.join(workspace, ask.target), after);
@@ -158,7 +159,7 @@ export async function assembledRun({ ask, rep = 1, base = "http://127.0.0.1:1143
     return {
       ask: ask.id, rep, live: fetchImpl === null, surface: SURFACE, control: !!ask.control, needs: ask.needs,
       looked, door, attempted,
-      importedByAttempt: ask.needs.length ? ask.needs.every((n) => !missingNames(after, ask.target).includes(n)) : null,
+      importedByAttempt: ask.needs.length ? ask.needs.every((n) => !missingNames(after, ask.target, keywords === undefined ? keywordsOf(ask.target) : keywords).includes(n)) : null,
       A, B: { ...B, proposals: b.proposals, gaps: b.gaps, reread: b.reread, changed: b.changed },
       C: { ...C, proposals: c.proposals, changed: c.changed },
     };

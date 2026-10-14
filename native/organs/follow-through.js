@@ -194,20 +194,26 @@ export function anchorOf(after) {
 }
 
 /**
- * finish({ before, after, file, world, lessons, scope }) → { schema, language, seed, proposals, gaps }
+ * finish({ before, after, file, world, lessons, scope, keywords }) → { schema, language, seed, proposals, gaps }
+ *   keywords optional Set: the language's keyword prior (default: the vendored CodeKeywordPrior@1; null = none, so no stubs)
  *   world    files the session holds ([{ path, text, ts }] / Map) or a resolver { resolve(name, file) → target }
  *   lessons  { binding(name) → target | null } (earlier sessions only; the caller keeps it prequential)
  *   scope    optional { in: RegExp[] }: targets are read below an in-scope root, so a worktree and its checkout agree
  * proposals: [{ kind: "import"|"extend"|"stub", name, spec?, via?, arity?, snippet, anchor }] (an extend has no snippet)
  * gaps: typed; a gap that withholds a proposal carries `would` (the proposal it withheld)
  */
-export function finish({ before = "", after = "", file, world = null, lessons = null, scope = null } = {}) {
+export function finish({ before = "", after = "", file, world = null, lessons = null, scope = null, keywords = undefined } = {}) {
   const language = resolveLanguage(null, file);
   if (!language) return { schema: FINISH_SCHEMA, language: null, seed: [], proposals: [], gaps: [{ kind: "no-reader", ext: path.extname(String(file ?? "")) || "(none)" }] };
   // specifiers are computed from ABSOLUTE paths (the graded instrument always had them); a relative path is refused
   // with a typed gap, because it would be read as a bare package and produce an import that cannot resolve
   if (!path.isAbsolute(String(file ?? ""))) return { schema: FINISH_SCHEMA, language, seed: [], proposals: [], gaps: [{ kind: "path-not-absolute", file: String(file ?? ""), why: "a relative path reads as a bare package specifier; pass the absolute path" }] };
-  const rB = readOf(before, language, file), rA = readOf(after, language, file);
+  // the language's keyword prior is a RECEIVED giver; `keywords` lets a caller (a test, a hermetic run) hand one in. With
+  // none, names are still read, but no stub is synthesised: `for` and `return` are then indistinguishable from a callee.
+  const kw = keywords === undefined ? kwOf(language) : keywords;
+  const readWith = (text) => readEdges({ text, language, fileName: file, keywords: kw });
+  const missingWith = (text) => new Set(missingImports(text, file, { keywords: kw }).map((m) => m.name));
+  const rB = readWith(before), rA = readWith(after);
   if (rB.disclosure?.error || rA.disclosure?.error) return { schema: FINISH_SCHEMA, language, seed: [], proposals: [], gaps: [{ kind: "reader-error" }] };
   const gaps = [];
   const cB = countBy(rB.calls, (c) => String(c.callee)), cA = countBy(rA.calls, (c) => String(c.callee));
@@ -218,8 +224,8 @@ export function finish({ before = "", after = "", file, world = null, lessons = 
   const relWorld = worldList.filter((p) => !path.isAbsolute(String(p ?? "")));
   if (relWorld.length) gaps.push({ kind: "world-path-not-absolute", count: relWorld.length, why: "those files offer nothing: a relative path reads as a bare package specifier" });
   const resolver = !world ? null : typeof world.resolve === "function" ? world : worldOf(world, scope);
-  const beforeMissing = missingSet(before, file, language);
-  const missing = [...missingSet(after, file, language)].filter((n) => !beforeMissing.has(n)).sort();
+  const beforeMissing = missingWith(before);
+  const missing = [...missingWith(after)].filter((n) => !beforeMissing.has(n)).sort();
   const seedSet = new Set(seed);
   const uncalled = missing.filter((n) => !seedSet.has(n));
   if (uncalled.length) gaps.push({ kind: "not-called-by-seed", names: uncalled });
@@ -247,7 +253,8 @@ export function finish({ before = "", after = "", file, world = null, lessons = 
     const would = { kind: "stub", name: n, arity };
     if (declaredHere.has(n)) { gaps.push({ kind: "declared-in-file", name: n, would }); continue; }
     if (language === "javascript" && Object.prototype.hasOwnProperty.call(globalThis, n)) { gaps.push({ kind: "runtime-global", name: n, would }); continue; }
-    const st = synthesizeStub({ name: n, arity, language, keywords: kwOf(language) });
+    if (!kw) { gaps.push({ kind: "stub-refused:no-keyword-prior", name: n, would }); continue; }
+    const st = synthesizeStub({ name: n, arity, language, keywords: kw });
     if (!st.ok) { gaps.push({ kind: `stub-refused:${st.gap.kind}`, name: n }); continue; }
     emit({ kind: "stub", name: n, arity, snippet: st.add, anchor });
   }
