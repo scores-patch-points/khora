@@ -26,7 +26,8 @@
 //            paraphrase is refused, never shown.
 //   TYPOGRAPHY  a span that moves onto or off sentence start has its first letter case-folded unless its first token is a proper noun
 //            (UD PROPN). Declared, recorded on the segment (`caseFolded`); the address still names the original bytes.
-import { tokenize, analyseAttested, CLOSED_UPOS_GIVER } from "../adapters/text/english-parser.js";
+import { tokenize, analyseAttested } from "../adapters/text/english-parser.js";
+import { clauseSpans } from "../adapters/text/clause-spans.js";
 import { normFeats } from "../kernel/eot-realize.js";
 import { seg, sentence, lintSentence, verifyWords, narrow } from "./prose-laws.js";
 import { runDMCA } from "./run-dmca.js";
@@ -121,101 +122,38 @@ export function claimFromRows(text, address, rows, { predForm = null, predAt = n
 // ---- CLAUSE SEGMENTATION, before the claim is read ----------------------------------------------------------------------------------
 //
 // One parser over a whole long sentence misreads it in ways no alternation can survive: a fronted date made the root ("2026 ← passed"),
-// a predicate hung on a noun. A clause read ON ITS OWN is a shorter, easier input. The sentence is cut into clauses, each clause is
-// parsed separately, and a clause reading is accepted only where the WHOLE-sentence parse and the CLAUSE parse agree on the predicate
-// and its arguments (two readings, one giver: an agreement check, never counted as an independent witness — that stays relations.js).
-//
-// The cuts, each a closed class or a punctuation convention, each with its giver:
-//   FRONTED     comma-delimited segments at the head of the sentence, while the rest still holds a predicate: a verbless one with no
-//               subject in it is an introductory ADJUNCT (CMOS 6.25, the comma after an introductory phrase); one opened by a
-//               subordinator is a fronted SUBORDINATE clause (CMOS 6.26).
-//   COORDINATE  a coordinator (UPOS CCONJ, a UD closed class) between two stretches that each hold a predicate, after a comma (CMOS
-//               6.22, independent clauses joined by a conjunction) or where the parse makes it the cc of a predicate.
-//   SUBORDINATE a subordinator: UPOS SCONJ (closed), a wh-word (EWT feature PronType=Rel|Int), or a token the parse marks `mark` — after
-//               a comma, or the mark of an adverbial or adnominal clause. A complement clause (ccomp, csubj, xcomp) is an ARGUMENT of
-//               its predicate and is never cut off it.
-// Closed classes are held to what UD English-EWT enumerates (english-parser.js CLOSED_UPOS). A cut is a candidate; agreement decides.
-export const CLAUSE_CUT_GIVERS = Object.freeze({
-  closed: CLOSED_UPOS_GIVER,
-  fronted: "CMOS 6.25 (comma after an introductory phrase), 6.26 (introductory dependent clause)",
-  coordinate: "CMOS 6.22 (comma between independent clauses joined by a conjunction); UD v2 cc/conj",
-  subordinate: "UD v2 SCONJ and mark; EWT features PronType=Rel|Int; complement clauses (ccomp, csubj, xcomp) are arguments, after UD v2 core/non-core",
-});
+// a predicate hung on a noun. A clause read ON ITS OWN is a shorter, easier input. The sentence is cut into clauses by the house's
+// clause layer, adapters/text/clause-spans.js (2026-09-23; its gap 2, the FRONTED clause or adjunct closed at its comma, was closed for
+// this, 2026-10-14), given the whole-sentence parse so every cut needs the closed class AND the parse to agree, and with quotations
+// opaque. Each clause is then parsed separately, and a clause reading is accepted only where the WHOLE-sentence parse and the CLAUSE
+// parse agree on the predicate and its arguments (two readings, one giver: an agreement check, never counted as an independent
+// witness — that stays relations.js).
 const PRED = (r) => r.upos === "VERB" || r.upos === "AUX";
-const COMMA = (r) => r.upos === "PUNCT" && r.form === ",";
-const SUBORD = (r) => r.upos === "SCONJ" || /PronType=(Rel|Int)/.test(r.feats ?? "") || r.deprel === "mark";
-const ARGUMENT_CLAUSE = new Set(["ccomp", "csubj", "xcomp"]);
 const CLAUSAL = new Set(["acl", "advcl", "ccomp", "xcomp", "csubj", "parataxis"]);
-const SUBJECTISH = /^(nsubj|csubj|expl)/;
+const KIND = { root: "main", coordinate: "coordinate", elaborates: "coordinate", "coordinate-predicate": "coordinate", subordinate: "subordinate", relative: "subordinate", adjunct: "adjunct" };
 
 /**
- * segmentClauses(text, rows) — the sentence's clauses, read off its whole-sentence parse `rows` (offsets into `text`).
- * → { fronted: [{ kind: "adjunct"|"subordinate", from, to }], clauses: [{ kind: "main"|"coordinate"|"subordinate", from, to, cut }] }
- * Offsets are UTF-16 [from, to) with edge punctuation and the cutting coordinator trimmed off.
+ * segmentClauses(text, rows) — the sentence's clauses, from clause-spans.js read with the whole-sentence parse `rows` (offsets into
+ * `text`). → { fronted: [{ kind: "adjunct"|"subordinate", from, to }], clauses: [{ kind: "main"|"coordinate"|"subordinate", from, to,
+ * relation }] }, UTF-16 [from, to) with edge punctuation and a cutting coordinator trimmed off.
  */
 export function segmentClauses(text, rows) {
-  // A QUOTATION IS OPAQUE: no cut falls inside quotation marks (the quoted words are the speaker's own clause structure, one argument of
-  // the reporting verb). Regions are paired marks, curly or straight, read off the text (CMOS 6.9).
-  const quoted = [];
-  for (const m of text.matchAll(/“[^”]*”|"[^"]*"/g)) quoted.push([m.index, m.index + m[0].length]);
-  const opaque = (r) => quoted.some(([a, b]) => r.at > a && r.at < b - 1);
-  const toks = [...rows].sort((a, b) => a.at - b.at).map((r) => (opaque(r) && (COMMA(r) || r.upos === "CCONJ" || SUBORD(r)) ? { ...r, upos: "X", deprel: "opaque", feats: "_" } : r));
-  const end = (r) => r.at + r.form.length;
-  const span = (ts) => {
-    const t = ts.filter(Boolean);
-    while (t.length && t[0].upos === "PUNCT") t.shift();
-    while (t.length && t.at(-1).upos === "PUNCT") t.pop();
-    return t.length ? { from: t[0].at, to: end(t.at(-1)), toks: t } : null;
+  const spans = clauseSpans(text, { rows, opaqueQuotes: true });
+  const edge = (a, b, { dropCoordinator }) => {
+    const ts = rows.filter((r) => r.at >= a && r.at < b).sort((x, y) => x.at - y.at);
+    while (ts.length && (ts[0].upos === "PUNCT" || (dropCoordinator && ts[0].upos === "CCONJ"))) ts.shift();
+    while (ts.length && ts.at(-1).upos === "PUNCT") ts.pop();
+    return ts.length ? { from: ts[0].at, to: ts.at(-1).at + ts.at(-1).form.length } : null;
   };
-  const byId = new Map(rows.map((r) => [r.id, r]));
-  // FRONTED segments.
-  const fronted = [];
-  let i = 0;
-  for (;;) {
-    const j = toks.findIndex((r, k) => k >= i && COMMA(r));
-    if (j < 0) break;
-    const segT = toks.slice(i, j), rest = toks.slice(j + 1);
-    if (!segT.length || !rest.some(PRED)) break;
-    const opener = segT[0].upos === "CCONJ" && fronted.length ? segT[1] : segT[0];
-    let kind = null;
-    if (!segT.some(PRED) && !segT.some((r) => SUBJECTISH.test(r.deprel) && byId.get(r.head) && rest.includes(byId.get(r.head)))) kind = "adjunct";
-    else if (opener && SUBORD(opener) && segT.some(PRED)) kind = "subordinate";
-    if (!kind) break;
-    const sp = span(segT[0].upos === "CCONJ" && fronted.length ? segT.slice(1) : segT);
-    if (!sp) break;
-    // Consecutive adjunct segments are one adjunct ("On July 14, 2026,").
-    const last = fronted.at(-1);
-    if (last && last.kind === "adjunct" && kind === "adjunct") { last.to = sp.to; last.toks.push(...sp.toks); }
-    else fronted.push({ kind, ...sp });
-    i = j + 1;
+  const fronted = [], clauses = [];
+  for (const sp of spans) {
+    const kind = KIND[sp.relation] ?? "subordinate";
+    const e = edge(sp.start, sp.end, { dropCoordinator: kind === "coordinate" });
+    if (!e) continue;
+    if (sp.fronted) fronted.push({ kind: kind === "adjunct" ? "adjunct" : "subordinate", ...e });
+    else clauses.push({ kind, relation: sp.relation, ...e });
   }
-  // CUTS in the rest.
-  const rest = toks.slice(i);
-  const cuts = [];
-  const hasPred = (a, b) => rest.slice(a, b).some(PRED);
-  for (let k = 1; k < rest.length; k++) {
-    const r = rest[k], prev = rest[k - 1];
-    const nextCut = () => { const n = rest.findIndex((x, m) => m > k && COMMA(x)); return n < 0 ? rest.length : n; };
-    const from = cuts.length ? cuts.at(-1).k : 0;
-    if (r.upos === "CCONJ" && hasPred(from, k) && hasPred(k + 1, nextCut())) {
-      const head = byId.get(r.head);
-      if (COMMA(prev) || (head && PRED(head) && head.deprel.split(":")[0] === "conj")) { cuts.push({ k, kind: "coordinate", by: r.form }); continue; }
-    }
-    if (SUBORD(r) && hasPred(k + 1, rest.length)) {
-      const head = byId.get(r.head);
-      const argument = head && ARGUMENT_CLAUSE.has(head.deprel.split(":")[0]);
-      if (!argument && (COMMA(prev) || (r.deprel === "mark" && head && /^(advcl|acl)/.test(head.deprel)))) cuts.push({ k, kind: "subordinate", by: r.form });
-    }
-  }
-  const clauses = [];
-  const bounds = [{ k: 0, kind: "main", by: null }, ...cuts];
-  for (const [n, b] of bounds.entries()) {
-    const stop = n + 1 < bounds.length ? bounds[n + 1].k : rest.length;
-    const sp = span(rest.slice(b.kind === "coordinate" ? b.k + 1 : b.k, stop));
-    if (sp) clauses.push({ kind: b.kind, cut: b.by, from: sp.from, to: sp.to, toks: sp.toks });
-  }
-  // A subordinate clause runs until the next cut; a clause it interrupts is not rejoined (that reading is refused, never stitched).
-  return { fronted: fronted.map(({ toks: _t, ...f }) => f), clauses: clauses.map(({ toks: _t, ...c }) => c), text };
+  return { fronted, clauses, text };
 }
 
 const CORE = new Set(["nsubj", "obj", "iobj", "ccomp", "xcomp", "csubj"]);
@@ -630,7 +568,7 @@ function roleLaw(alt, c, roles) {
  */
 export async function realizeClaim({ claim, grounds = [], lang = "en", whom = null, witness = null, roles = null } = {}, { slice, grammar, model, forms = null } = {}) {
   forms = forms ?? formsFromParserLexicon(model);
-  if (lang !== "en") return { ok: false, alternatives: [], refusals: [{ why: `no ${lang} construction for an English predicate: a paraphrase across languages needs a bilingual lexicon, which is not on disk` }], whom };
+  if (lang !== "en") return { ok: false, alternatives: [], refusals: [{ why: `no ${lang} paraphrase on disk: a ${lang} claim paraphrased in ${lang} needs a ${lang} UD treebank (to parse the clause and to attest verb forms such as participles) and that language's alternations; an English claim told in ${lang} needs a bilingual lexicon. Neither is on disk` }], whom };
   // The independent witness comes first: without it there is nothing to segment toward.
   if (!claim?.pred && !witness?.pred) return { ok: false, alternatives: [], refusals: [{ why: "no independent witness: the relation reader found no claim in this sentence, so the parser's reading stands alone" }], whom };
   let c = claim?.pred ? claim : null;

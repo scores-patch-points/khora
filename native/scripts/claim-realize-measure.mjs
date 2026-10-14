@@ -22,6 +22,7 @@ const args = process.argv.slice(2);
 const opt = (k) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : null; };
 const out = resolve(opt("--out") ?? "callimachus-out");
 const show = Number(opt("--show") ?? 0);
+const lang = opt("--lang") ?? "en";
 
 const EXTRACTOR = { name: "web.js#extractReadable", sha256: createHash("sha256").update(readFileSync(join(here, "../organs/web.js"))).digest("hex") };
 const prior = JSON.parse(readFileSync(join(out, "record.json"), "utf8"));
@@ -73,7 +74,7 @@ for (const a of prior.atoms) {
   const text = await slice(a.span);
   if (text == null) continue;
   const witness = { pred: a.relation.pred, subj: a.relation.subj_surface ? await slice(a.relation.subj_surface) : null };
-  const r = await realizeClaim({ claim: { text, address: a.span }, witness, roles }, { slice, grammar: en, model });
+  const r = await realizeClaim({ claim: { text, address: a.span }, witness, roles, lang }, { slice, grammar: en, model });
   const why = r.ok ? "paraphrased"
     : r.refusals?.length && !r.alternatives.length ? reason(r.refusals[0].why)
     : r.alternatives.length ? `all alternatives failed: ${firstFail(r.alternatives[0])}`

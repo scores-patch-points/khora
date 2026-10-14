@@ -319,3 +319,105 @@ node native/scripts/claim-realize-measure.mjs --out 3.0/callimachus-runs/permane
 node native/scripts/eval-attested-tags.mjs --gold <en_ewt-ud-dev.conllu> --gold <en_ewt-ud-test.conllu>
 node --test native/organs/claim-realize.test.mjs
 ```
+
+## 11. The house clause layer, elevated; and the same layer in another language (2026-10-14, session `eaadca`, amendment)
+
+The user, on §10: "we've done clauses better before, elevate that" and "test it omnilingually". §10's own `segmentClauses` is **retired**. `claim-realize.js` now cuts clauses with the house clause layer, `adapters/text/clause-spans.js` (2026-09-23). Its `segmentClauses` export is a thin adapter over `clauseSpans`.
+
+### 11.1 What `clause-spans.js` gained
+
+All of it is additive. Existing callers (`relations-gfp.js`, `gfp-relations-composed.js`, `received-vocabulary-relations.js`) pass no options and see one change only: gap 2.
+
+| Change | What it does |
+|---|---|
+| **Gap 2 closed: the fronted clause.** | A sentence-initial subordinator-opened segment ends at its comma ("Because it rained, \| the match…"). The main clause after it is the root, and the fronted clause carries `fronted: true` with the main clause as its parent. With `opts.posPrior` or `opts.rows`, a fronted **adjunct** is cut too. Its test: a verbless comma segment while the rest holds a predicate. Its opener: ADP, ADV, NUM or a digit by the prior, or, by the parse, nothing in it is the rest's subject. "On July 14, 2026, \| the House…" is cut; "The bill, the House said, passed." is not. |
+| **`opts.posPrior`** | A token is a predicate when its dominant tag is VERB or AUX. This licenses the fronted adjunct and a **coordinate cut after comma + coordinator** when the stretch after it holds a predicate. Pro-drop languages need this: no subject pronoun follows "y". |
+| **`opts.rows`** (a UD parse) | Every cut needs the closed class **and** the parse: two witnesses for a cut. A complement clause (ccomp, csubj, xcomp) is never cut. "after" tagged ADP ("repealed after two years") is not a subordinator. A coordinator cuts after a comma, or as the cc of a conjoined predicate, with a predicate on both sides. |
+| **Gap 1, "that", with a parse** | "That" cuts when the parse makes it the mark of an advcl or acl, or a relative pronoun. Without a parse it stays excluded (§11.3 measures why). |
+| **`opts.opaqueQuotes`** | No cut inside paired quotation marks. |
+| **`closedClassesFromPrior(posPrior)`** | A language's coordinators (CCONJ-dominant forms) and subordinators (SCONJ-dominant), **derived** from the received UD POS prior `priors/pos-<iso639-3>.json`, with the prior's own giver. Relativizers and subject pronouns come back **empty, and it says so**: a POS prior has no PronType. Spanish (UD_Spanish-AnCora, train split) derives coordinators *y pero e o i sino ni u ó ou* and subordinators *como pues mientras aunque si cuando porque*. |
+
+### 11.2 Measured: clause boundaries against an independent witness, in two languages
+
+`node native/scripts/clause-witness-agreement.mjs --out <record> --lang eng|spa [--parser] [--verbal] [--add-sub that|que]`:
+- The script is language-neutral. It replays a pinned record from `layers/`.
+- The witness is relations.js, as stored on each atom: the stretch from its subject's start to its predicate.
+- **Witness agreement** is the share of those stretches that no clause boundary cuts.
+- The **null** re-deals the same number of boundaries per sentence uniformly over the sentence's word starts (999 seeded draws; seed "clause-witness"). Only the draws and the seed are declared.
+- `--verbal` keeps only witnesses whose predicate is VERB- or AUX-dominant in the language's own POS prior. relations.js also names prepositions and stray English words as predicates, especially on the Spanish pages.
+
+The **Spanish record** is `3.0/callimachus-runs/cambio-hora-es`:
+- Question: "¿Debería la Unión Europea eliminar el cambio de hora estacional?"
+- Collected with `callimachus-run.mjs --search 10 --url es.wikipedia.org/wiki/Horario_de_verano --lang es`, then replayed.
+- 8 pinned pages: es.wikipedia, cadenaser, rtve, eldiario, hosteltur, baenegocios, economiadigital, diariodesevilla.
+- 4 absences: El País ×2 and the Council of the EU answered 403; one Wikipedia page was 404.
+- 444 atoms.
+
+| Record | Mode | Boundaries (fronted) | Witness agreement | Null | p |
+|---|---|---|---|---|---|
+| **eng** DST, 560 stretches | bare (priors.js) | 283 (27) | 95.2% | 93.3% | 0.026 |
+| | + POS prior | 385 (93) | 95.2% | 90.5% | 0.001 |
+| | + UD parse | 478 (106) | 95.0% | 88.1% | 0.001 |
+| **eng**, verbal witnesses (332) | bare / prior / parse | 216 / 300 / 359 | 99.4 / 99.4 / 98.2% | 93.1 / 89.5 / 87.3% | 0.001 each |
+| **spa** cambio de hora, 418 stretches | bare (derived from AnCora) | 225 (7) | 98.1% | 92.3% | 0.001 |
+| | + POS prior | 320 (87) | 98.1% | 89.1% | 0.001 |
+| **spa**, verbal witnesses (199) | bare / prior | 130 / 198 | 97.5 / 97.5% | 91.7 / 88.1% | 0.001 each |
+
+In both languages, each mode finds more boundaries than the one before it while witness agreement holds. The null falls as boundaries are added, so the margin over chance grows.
+
+**There is no Spanish parse arm.** There is no Spanish parser on disk: `pos-spa.json` is a tag-count prior, not a treebank. So the two-parse agreement of §10 cannot run in Spanish, and witness agreement is the agreement available there.
+
+### 11.3 Falsified: gap 1 by the prior alone
+
+Arm `--add-sub that|que`: the excluded form is added to the subordinators.
+
+| Language | Boundaries | Witness agreement | Null | p |
+|---|---|---|---|---|
+| Spanish *que*, all witnesses | 544 (from 320) | 84.7% (from 98.1%) | 82.5% | **0.081** |
+| Spanish *que*, verbal witnesses | 364 | 79.9% | 79.7% | **0.52** |
+| English *that*, all witnesses | 488 (from 385) | 94.5% (from 95.2%) | — | still beats the null |
+| English *that*, verbal witnesses | — | 98.5% (from 99.4%) | — | still beats the null |
+
+- **Spanish "que" as a closed-class boundary is falsified.** Its cuts are indistinguishable from random ones.
+- **English "that" costs witness agreement in both subsets.** It stays excluded without a parse.
+- The module's 2026-09-23 judgment was "too close to a three-way split to trust". It is now a measurement: pos-eng gives *that* SCONJ 994 / PRON 851 / DET 176, and AnCora gives *que* PRON 6,859 / SCONJ 6,348.
+- With a parse, "that" is decided per token (§11.1).
+
+### 11.4 Paraphrase yield, per language
+
+**English (DST record, 560 witnessed positions, `claim-realize-measure.mjs`):**
+
+| | Paraphrased | Distinct sentences | Referent subjects |
+|---|---|---|---|
+| §10, own segmentation | 41 | 37 | 20 |
+| **with clause-spans.js** | **51** | **42** | **23** |
+
+The before was 25 (§10.3). Of those 25, 12 still pass and 13 are refused by §10's gates.
+
+Gained over §10, for example:
+- "The Florida Senate approved the Sunshine Protection Act in 2018."
+- "According to Scott, he hears from constituents."
+- "The House passed a bill with bipartisan support in July." (its relative clause disclosed as omitted)
+
+Still poor, all lawful:
+- "From Trump, the measure has backing."
+- "By both chambers in these states, none have yet been agreed." This is a faithful but marked fronting of the source's own passive agent, after the `;` cut clause-spans makes.
+
+**Spanish: 0 of 418, every one refused with one typed reason.** A Spanish claim paraphrased in Spanish needs three things, none on disk:
+1. A Spanish UD treebank, to parse the clause and to attest verb forms (participles, and the person and number forms of *ser* and *haber*). UD_Spanish-AnCora is the giver of `pos-spa.json`, but only its tag counts are on disk, not the treebank.
+2. Spanish alternations with their givers: the periphrastic passive ("fue aprobado por"), the reflexive passive ("se aprobó"), "según X, …" for reports, and clitic doubling when an object is fronted.
+3. Spanish prose laws: PL3 and PL4 are English conventions.
+
+An English claim told in Spanish would also need a bilingual lexicon. What already works in Spanish today, with no new data:
+- the clause layer (§11.2);
+- the relations.js witness;
+- the record, telling and answers.
+
+### 11.5 How to run
+
+```bash
+node native/scripts/clause-witness-agreement.mjs --out 3.0/callimachus-runs/permanent-dst --lang eng --parser [--verbal] [--add-sub that]
+node native/scripts/clause-witness-agreement.mjs --out 3.0/callimachus-runs/cambio-hora-es --lang spa [--verbal] [--add-sub que]
+node native/scripts/claim-realize-measure.mjs --out 3.0/callimachus-runs/cambio-hora-es --lang es   # 0: the typed refusal
+node --test native/adapters/text/clause-spans.test.mjs native/organs/claim-realize.test.mjs
+```
