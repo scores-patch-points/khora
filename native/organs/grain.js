@@ -1,0 +1,317 @@
+// organs/grain.js — the fold's two steps: SELECT the grain from where the reader stands, then RUN the triad at that grain.
+//
+// The user's specification, 2026-10-14 (a message to the Callimachus session; this file is its first transcription):
+//
+//   Same four inputs every time (U, W, Q, N). Q activates a region R of U. Split R against W into HELD spans H (a match in the
+//   reader's state) and ABSENT spans A. Distance is the share of A, with a shuffle null so "held" means more than vocabulary overlap.
+//   Mostly A: Ground. Mixed: Figure. Mostly H: Pattern. Then each held span goes through the corroboration verdict — AGREE / SINGLE /
+//   UNDETERMINED / DISAGREE / CONTRADICTED — between U and W instead of between witnesses. At the selected grain all three modes run, in
+//   order clear → witness → generate; a fold that skips one is unclosed. Output form is identical in all nine: addressed spans
+//   interleaved with flagged seams.
+//
+//     GROUND   clear: Clearing    witness: Tending     generate: Cultivating
+//     FIGURE   clear: Dissecting  witness: Binding     generate: Making
+//     PATTERN  clear: Unraveling  witness: Tracing     generate: Composing
+//
+// WHAT IS REUSED. `mergeTestimony` (capacity-runner.js) is the verdict, unchanged, pointed across the two corpora: the claim under test
+// is a W span, the witnesses are U's spans on the same arrangement, each a reading { verdict: holds | refused | undetermined, read:
+// [its address] }. `seg`/`sentence` (prose-laws.js) type the output; `seamReport` (seam-ledger.js) measures it.
+//
+// WHAT IS DECIDED HERE, and disclosed (not measured; each is owed a null or a measurement):
+//   1. The cut between FIGURE and PATTERN is the house majority rule ("more than not"), H > A. The cut between GROUND and the rest is
+//      born: H must beat EVERY draw of the shuffle null (p ≤ 1/(draws+1), CALLIMACHUS-SHAPE.md §8's convention). A reader whose
+//      holdings do not beat the null "holds almost nothing here", whatever their vocabulary.
+//   2. "Matches" is the same ARRANGEMENT: the same subject and the same predicate, compared as normalized surface. It is exact, not
+//      similar (callimachus.js header: no similarity). A W reading polarity-opposite on the same object REFUSES; the same arrangement
+//      with another object, or another polarity on another object, is UNDETERMINED — two things can both be true.
+//   3. The shuffle null permutes the predicates among W's spans, keeping every subject, every predicate and every W span. It destroys
+//      the pairing and keeps the vocabulary: a hit that survives it is more than words in common. A small W cannot beat it (few
+//      distinct permutations): that is the null's power, reported as `null.permutations`, not a defect to be tuned away.
+//   4. Clearing's "U's own null" is the caller's `survives` (default: activation > 0, the ladder's evidence floor). This file does not
+//      re-derive the ladder's margin null.
+//   5. Pattern's nodes are the entities (subject and object surfaces) of held spans; an edge is a claim span from its subject to its
+//      object. A U "path" is an undirected walk over U's region spans; "expanding hops until null" is bounded by the region itself,
+//      which is already the null-bounded activation.
+//
+// NOT HERE: reading a W corpus into spans (the caller supplies spans from whichever reader it trusts; `uSpansFromRecord` does U), and
+// the ladder is not yet routed through this (it still answers at fixed sizes). Nothing here calls a model.
+import { mergeTestimony } from "./capacity-runner.js";
+import { seg, sentence } from "./prose-laws.js";
+import { seamReport } from "./seam-ledger.js";
+
+export const GRAINS = Object.freeze(["Ground", "Figure", "Pattern"]);
+export const ROLES = Object.freeze(["clear", "witness", "generate"]);
+export const MODES = Object.freeze({
+  Ground: Object.freeze(["Clearing", "Tending", "Cultivating"]),
+  Figure: Object.freeze(["Dissecting", "Binding", "Making"]),
+  Pattern: Object.freeze(["Unraveling", "Tracing", "Composing"]),
+});
+
+/** The frame words this file may generate, declared (PL14): everything else in an output is a copied, addressed span. */
+export const FRAME_WORDS = Object.freeze({
+  Tending: [" — the record carries it: "],
+  Cultivating: ["Then: "],
+  Dissecting: [" — the record refuses it: "],
+  Binding: [" — the record: "],
+  Making: [", and then: "],
+  Unraveling: [" — but the record holds no path between these two."],
+  Tracing: [" — the record walks it: ", ", then "],
+  Composing: [" — then: ", " — and: "],
+});
+
+// ---- spans ---------------------------------------------------------------------------------------------------------------------
+
+const ARTICLES = new Set(["the", "a", "an"]);
+const norm = (t) => {
+  const w = String(t ?? "").normalize("NFC").toLowerCase().replace(/[^\p{L}\p{N}\s'’-]/gu, " ").split(/\s+/).filter(Boolean);
+  while (w.length > 1 && ARTICLES.has(w[0])) w.shift();
+  return w.join(" ");
+};
+/** A span: { id, address, text, side: "U"|"W", claim: { subj, pred, obj, polarity: "+"|"-" } | null, activation?, division? }. */
+const arrangement = (c) => (c?.subj && c?.pred ? `${norm(c.subj)}|${norm(c.pred)}` : null);
+const sameObject = (a, b) => norm(a?.obj) === norm(b?.obj);
+
+/** One witness reading of a W claim, given by one U span. Same arrangement is required; the object and polarity decide the verdict. */
+function readingOf(wClaim, u) {
+  const same = sameObject(wClaim, u.claim);
+  const verdict = same && u.claim.polarity === wClaim.polarity ? "holds" : same ? "refused" : "undetermined";
+  return { verdict, read: [u.address], who: `U:${u.address}`, span: u };
+}
+
+/** The contact verdict: mergeTestimony pointed across the corpora. Claim = a W span; witnesses = the U spans on its arrangement. */
+export function contactVerdict(w, region) {
+  const key = arrangement(w.claim);
+  const on = key ? region.filter((u) => arrangement(u.claim) === key) : [];
+  const readings = on.map((u) => readingOf(w.claim, u));
+  const merged = mergeTestimony(readings);
+  return {
+    case: merged.case,
+    standing: merged.standing,
+    holds: merged.holds.map((r) => r.span),
+    refused: merged.refused.map((r) => r.span),
+    undetermined: merged.undetermined.map((r) => r.span),
+  };
+}
+
+// ---- selecting -----------------------------------------------------------------------------------------------------------------
+
+function mulberry(seed) { return () => { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+
+const heldCount = (regionKeys, wKeys) => { const s = new Set(wKeys.filter(Boolean)); return regionKeys.filter((k) => k && s.has(k)).length; };
+
+/** Distinct orderings of a multiset of predicates (the null's power), capped at Infinity for large inputs. */
+function permutationsOf(xs) {
+  const counts = new Map();
+  for (const x of xs) counts.set(x, (counts.get(x) ?? 0) + 1);
+  let n = 1;
+  for (let i = 2; i <= xs.length; i++) { n *= i; if (n > 1e12) return Infinity; }
+  for (const c of counts.values()) for (let i = 2; i <= c; i++) n /= i;
+  return Math.round(n);
+}
+
+/**
+ * Split the region against W and measure how far apart they are. `real` is true only when the observed number of held spans beats
+ * EVERY draw of the predicate-shuffle null.
+ */
+export function splitRegion(region, whom, { draws = 199, seed = 20261014 } = {}) {
+  const wSpans = (whom ?? []).filter((w) => arrangement(w.claim));
+  const wKeys = wSpans.map((w) => arrangement(w.claim));
+  const heldKeys = new Set(wKeys);
+  const H = [], A = [];
+  for (const u of region) (arrangement(u.claim) && heldKeys.has(arrangement(u.claim)) ? H : A).push(u);
+
+  const rKeys = region.map((u) => arrangement(u.claim));
+  const rnd = mulberry(seed);
+  const preds = wSpans.map((w) => norm(w.claim.pred));
+  const subjs = wSpans.map((w) => norm(w.claim.subj));
+  let exceeded = 0, sum = 0;
+  for (let d = 0; d < draws && wSpans.length; d++) {
+    const p = preds.slice();
+    for (let i = p.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [p[i], p[j]] = [p[j], p[i]]; }
+    const h = heldCount(rKeys, subjs.map((s, i) => `${s}|${p[i]}`));
+    sum += h;
+    if (h >= H.length) exceeded++;
+  }
+  const real = H.length > 0 && wSpans.length > 0 && exceeded === 0;
+  return {
+    H, A,
+    distance: region.length ? A.length / region.length : null,
+    null: { draws, seed, exceeded, p: (1 + exceeded) / (draws + 1), mean: draws && wSpans.length ? sum / draws : 0, permutations: permutationsOf(preds), real },
+  };
+}
+
+/** Ground when what is held does not beat the null; Pattern when more is held than not; Figure otherwise. */
+export function selectGrain(split) {
+  if (!split.null.real) return { grain: "Ground", why: split.H.length ? "what the reader holds here does not beat the shuffle null: shared vocabulary, not shared claims" : "the reader holds nothing of this region" };
+  if (split.H.length > split.A.length) return { grain: "Pattern", why: "more of the region is held than absent (the house majority rule, disclosed): relations are what can be new" };
+  return { grain: "Figure", why: "some of the region is held beyond the null and some is absent" };
+}
+
+// ---- outputs: addressed spans interleaved with flagged seams ----------------------------------------------------------------------
+
+const src = (s) => seg.source(s.text, s.address);
+const S = (segs, spans) => ({ ...sentence(segs, spans.map((s) => s.id)), spans: spans.map((s) => s.address) });
+
+/** Group spans by their own division (the terrain ladder's, supplied as `span.division`; default: the page the address names). */
+const divisionOf = (s) => s.division ?? String(s.address).split("/")[0];
+
+// ---- the nine modes -------------------------------------------------------------------------------------------------------------
+
+const entitiesOf = (s) => [s.claim?.subj, s.claim?.obj].filter(Boolean).map(norm);
+
+function pairsOf(split, region, whom) {
+  const heldKeys = new Set(split.H.map((u) => arrangement(u.claim)));
+  return (whom ?? []).filter((w) => heldKeys.has(arrangement(w.claim))).map((w) => ({ w, ...contactVerdict(w, region) }));
+}
+
+/** Undirected shortest walk over U spans (positive polarity) from entity a to entity b: the chain of spans, or null. */
+function pathOf(region, a, b) {
+  if (a === b) return [];
+  const edges = region.filter((u) => u.claim?.polarity === "+" && u.claim.subj && u.claim.obj);
+  const seen = new Map([[a, null]]);
+  const queue = [a];
+  while (queue.length) {
+    const x = queue.shift();
+    for (const e of edges) {
+      const s = norm(e.claim.subj), o = norm(e.claim.obj);
+      const y = s === x ? o : o === x ? s : null;
+      if (y === null || seen.has(y)) continue;
+      seen.set(y, { from: x, via: e });
+      if (y === b) { const chain = []; for (let c = b; seen.get(c); c = seen.get(c).from) chain.unshift(seen.get(c).via); return chain; }
+      queue.push(y);
+    }
+  }
+  return null;
+}
+
+const joinSpans = (spans, first, between) => spans.flatMap((s, i) => [...(i === 0 ? [] : [seg.frame(i === 1 ? first : between)]), src(s)]);
+
+const RUN = {
+  // ---- Ground
+  Clearing: ({ region, survives }) => ({
+    items: region.filter(survives).sort((a, b) => (b.activation ?? 0) - (a.activation ?? 0)).map((u) => S([src(u)], [u])),
+  }),
+  Tending: ({ pairs }) => ({
+    items: pairs.filter((p) => ["AGREE", "SINGLE"].includes(p.case)).map((p) => S([src(p.w), seg.frame(FRAME_WORDS.Tending[0]), src(p.holds[0])], [p.w, p.holds[0]])),
+  }),
+  Cultivating: ({ region, survives }) => {
+    const by = new Map();
+    for (const u of region.filter(survives)) (by.get(divisionOf(u)) ?? by.set(divisionOf(u), []).get(divisionOf(u))).push(u);
+    const top = (xs) => Math.max(...xs.map((u) => u.activation ?? 0));
+    const divisions = [...by.entries()].sort((a, b) => top(b[1]) - top(a[1]));
+    const items = [];
+    divisions.forEach(([, xs], di) => xs.sort((a, b) => (b.activation ?? 0) - (a.activation ?? 0)).forEach((u, i) => items.push(S(di > 0 && i === 0 ? [seg.frame(FRAME_WORDS.Cultivating[0]), src(u)] : [src(u)], [u]))));
+    return { items, divisions: divisions.map(([d, xs]) => ({ division: d, spans: xs.length })) };
+  },
+
+  // ---- Figure
+  Dissecting: ({ pairs }) => ({
+    items: pairs.filter((p) => ["DISAGREE", "CONTRADICTED"].includes(p.case)).flatMap((p) => p.refused.map((u) => S([src(p.w), seg.frame(FRAME_WORDS.Dissecting[0]), src(u)], [p.w, u]))),
+  }),
+  Binding: ({ pairs }) => ({
+    items: pairs.filter((p) => ["AGREE", "SINGLE"].includes(p.case)).map((p) => S([src(p.w), seg.frame(FRAME_WORDS.Binding[0]), src(p.holds[0])], [p.w, p.holds[0]])),
+  }),
+  Making: ({ split }) => {
+    const held = split.H;
+    const items = [...split.A].sort((a, b) => (b.activation ?? 0) - (a.activation ?? 0)).map((u) => {
+      const mine = new Set(entitiesOf(u));
+      const byEntity = held.filter((h) => entitiesOf(h).some((e) => mine.has(e)));
+      const near = byEntity[0] ?? held.filter((h) => divisionOf(h) === divisionOf(u)).sort((a, b) => Math.abs(startOf(a) - startOf(u)) - Math.abs(startOf(b) - startOf(u)))[0] ?? null;
+      return near ? { ...S([src(near), seg.frame(FRAME_WORDS.Making[0]), src(u)], [near, u]), attachedBy: byEntity[0] ? "entity" : "nearest" } : { ...S([src(u)], [u]), attachedBy: null };
+    });
+    return { items };
+  },
+
+  // ---- Pattern
+  Unraveling: ({ region, whom, split }) => {
+    const edges = wEdges(whom, split);
+    const items = [];
+    for (const w of edges) {
+      const v = contactVerdict(w, region);
+      if (["DISAGREE", "CONTRADICTED"].includes(v.case)) { for (const u of v.refused) items.push({ ...S([src(w), seg.frame(FRAME_WORDS.Dissecting[0]), src(u)], [w, u]), absence: false }); continue; }
+      if (pathOf(region, norm(w.claim.subj), norm(w.claim.obj)) === null) items.push({ ...S([src(w), seg.frame(FRAME_WORDS.Unraveling[0])], [w]), absence: { between: [norm(w.claim.subj), norm(w.claim.obj)] } });
+    }
+    return { items };
+  },
+  Tracing: ({ region, whom, split }) => ({
+    items: wEdges(whom, split).flatMap((w) => {
+      if (["DISAGREE", "CONTRADICTED"].includes(contactVerdict(w, region).case)) return [];
+      const chain = pathOf(region, norm(w.claim.subj), norm(w.claim.obj));
+      if (!chain || !chain.length) return [];
+      return [{ ...S([src(w), seg.frame(FRAME_WORDS.Tracing[0]), ...joinSpans(chain, "", FRAME_WORDS.Tracing[1])], [w, ...chain]), hops: chain.length }];
+    }),
+  }),
+  Composing: ({ region, whom, split }) => {
+    const held = new Set(split.H.flatMap(entitiesOf));
+    const wPairs = new Set((whom ?? []).filter((w) => w.claim?.subj && w.claim?.obj).map((w) => [norm(w.claim.subj), norm(w.claim.obj)].sort().join("␟")));
+    const endSpan = (e, not) => [...split.H].filter((h) => h !== not && entitiesOf(h).includes(e)).sort((a, b) => (b.activation ?? 0) - (a.activation ?? 0))[0] ?? null;
+    const items = [];
+    for (const u of region) {
+      if (u.claim?.polarity !== "+" || !u.claim.subj || !u.claim.obj) continue;
+      const a = norm(u.claim.subj), b = norm(u.claim.obj);
+      if (a === b || !held.has(a) || !held.has(b) || wPairs.has([a, b].sort().join("␟"))) continue;
+      const left = endSpan(a, u), right = endSpan(b, u);
+      if (!left || !right) continue;
+      items.push(S([src(left), seg.frame(FRAME_WORDS.Composing[0]), src(u), seg.frame(FRAME_WORDS.Composing[1]), src(right)], [left, u, right]));
+    }
+    return { items };
+  },
+};
+
+const startOf = (s) => Number(/#b(\d+)-/.exec(s.address)?.[1] ?? 0);
+/** W spans that join two held entities: the edges a reader already holds between things they hold. */
+function wEdges(whom, split) {
+  const held = new Set(split.H.flatMap(entitiesOf));
+  return (whom ?? []).filter((w) => w.claim?.subj && w.claim?.obj && w.claim.polarity && held.has(norm(w.claim.subj)) && held.has(norm(w.claim.obj)) && norm(w.claim.subj) !== norm(w.claim.obj));
+}
+
+// ---- the fold -------------------------------------------------------------------------------------------------------------------
+
+/** Closed means all three roles ran, in order: clear, witness, generate. A fold that skips one is unclosed (the August triad check). */
+export function closureOf(modes) {
+  const ran = modes.filter((m) => m.ran).map((m) => m.role);
+  return { order: ROLES.slice(), ran, closed: ran.length === ROLES.length && ROLES.every((r, i) => ran[i] === r) };
+}
+
+/**
+ * foldGrain({ region, whom }) → the selection, the contacts, the three modes in order, and the closure verdict.
+ *   region: U's spans activated by Q, each with `activation` (and optionally `division`).
+ *   whom:   W's spans (side "W"), read by the same relation reader. Empty or absent = the void reader.
+ */
+export function foldGrain({ region = [], whom = [], survives = (u) => (u.activation ?? 0) > 0, draws = 199, seed = 20261014 } = {}) {
+  const split = splitRegion(region, whom, { draws, seed });
+  const { grain, why } = selectGrain(split);
+  const pairs = pairsOf(split, region, whom);
+  const ctx = { region, whom, split, pairs, survives };
+  const modes = MODES[grain].map((mode, i) => {
+    const out = RUN[mode](ctx);
+    return { mode, role: ROLES[i], ran: true, items: out.items, ...(out.divisions ? { divisions: out.divisions } : {}), seams: seamReport(out.items), ...(out.items.length ? {} : { empty: "ran and found nothing in this region for this reader; the absence is the output" }) };
+  });
+  return {
+    grain, why,
+    // "held" here is a CLAIM-ARRANGEMENT match (same subject, same predicate), a different witness from byte containment (twin-reader's heldIn).
+    distance: { region: region.length, held: split.H.length, absent: split.A.length, share: split.distance, witness: "claim-arrangement", null: split.null },
+    contacts: pairs.map((p) => ({ w: p.w.address, case: p.case, standing: p.standing, holds: p.holds.map((u) => u.address), refused: p.refused.map((u) => u.address), undetermined: p.undetermined.map((u) => u.address) })),
+    modes,
+    closure: closureOf(modes),
+    seams: seamReport(modes.flatMap((m) => m.items)),
+  };
+}
+
+/** Spans from a Callimachus record: each claim atom as a span, its subject/object read from their addresses. `activation` maps atom id → score. */
+export async function spansFromRecord(record, { slice, activation = new Map(), side = "U" } = {}) {
+  const out = [];
+  for (const a of record.atoms) {
+    const r = a.relation;
+    if (!r?.pred) continue;
+    const text = await slice(a.span);
+    const subj = r.subj_surface ? await slice(r.subj_surface) : null;
+    const obj = r.obj_surface ? await slice(r.obj_surface) : a._object ?? null;
+    if (!text || !subj) continue;
+    out.push({ id: a.id, address: a.span, text, side, claim: { subj, pred: r.pred, obj, polarity: r.polarity === "-" ? "-" : "+" }, activation: activation.get(a.id) ?? 0 });
+  }
+  return out;
+}
+
+/** U spans: the record read as the universe. */
+export const uSpansFromRecord = (record, opts = {}) => spansFromRecord(record, { ...opts, side: "U" });

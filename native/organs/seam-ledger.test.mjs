@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { seamReport, creaseEntry, untouchedBy } from "./seam-ledger.js";
-import { declareWhom, distanceOf, partitionByWhom } from "./whom.js";
+import { declareHoldings, distanceOf, partitionByHoldings } from "./holdings.js";
 import { seg, sentence } from "./prose-laws.js";
 
 const S = (...segs) => sentence(segs, ["g1"]);
@@ -54,37 +54,37 @@ test("seamReport: nothing in, null shares out (not 0, not NaN)", () => {
   assert.equal(r.contract.ok, true);
 });
 
-test("declareWhom: a placeholder is not a whom, and an omitted holding is not an empty one", () => {
-  assert.throws(() => declareWhom({ giver: "the asker", told: [], seen: [] }), /placeholder/);
-  assert.throws(() => declareWhom({ giver: "reader-7" }), /must be passed/);
-  assert.throws(() => declareWhom({ giver: "reader-7", told: [] }), /must be passed/);
-  assert.throws(() => declareWhom({ kind: "person", told: [], seen: [] }), /giver is required/);
-  const first = declareWhom({ giver: "reader-7", told: [], seen: [] });
+test("declareHoldings: a placeholder is not a whom, and an omitted holding is not an empty one", () => {
+  assert.throws(() => declareHoldings({ giver: "the asker", told: [], seen: [] }), /placeholder/);
+  assert.throws(() => declareHoldings({ giver: "reader-7" }), /must be passed/);
+  assert.throws(() => declareHoldings({ giver: "reader-7", told: [] }), /must be passed/);
+  assert.throws(() => declareHoldings({ kind: "person", told: [], seen: [] }), /giver is required/);
+  const first = declareHoldings({ giver: "reader-7", told: [], seen: [] });
   assert.equal(first.empty, true, "a first contact is declared, not unset");
   assert.equal(Object.isFrozen(first), true);
 });
 
-test("declareWhom: any corpus with a boundary can be the whom; a statute without one cannot", () => {
-  assert.throws(() => declareWhom({ giver: "Metro Code 13.08.080", kind: "statute", told: [], seen: [] }), /boundary/);
-  const statute = declareWhom({ giver: "Metro Code 13.08.080", kind: "statute", told: ["13.08.080(A)"], seen: ["px_code"], boundary: "px_code/text@h#b0-9000" });
+test("declareHoldings: any corpus with a boundary can be the whom; a statute without one cannot", () => {
+  assert.throws(() => declareHoldings({ giver: "Metro Code 13.08.080", kind: "statute", told: [], seen: [] }), /boundary/);
+  const statute = declareHoldings({ giver: "Metro Code 13.08.080", kind: "statute", told: ["13.08.080(A)"], seen: ["px_code"], boundary: "px_code/text@h#b0-9000" });
   assert.equal(statute.kind, "statute");
   assert.equal(statute.holdings.told, 1);
-  assert.throws(() => declareWhom({ kind: "void", told: ["x"], seen: [] }), /holds nothing/);
-  assert.equal(declareWhom({ kind: "void", told: [], seen: [] }).giver, null);
+  assert.throws(() => declareHoldings({ kind: "void", told: ["x"], seen: [] }), /holds nothing/);
+  assert.equal(declareHoldings({ kind: "void", told: [], seen: [] }).giver, null);
 });
 
 test("distanceOf: the catalog pole is the empty whom; held-everything is the other pole; between is a number", () => {
   const touched = [{ key: "c1", page: "pA" }, { key: "c2", page: "pA" }, { key: "c3", page: "pB" }, { key: "c4", page: "pB" }];
-  const none = declareWhom({ kind: "void", told: [], seen: [] });
+  const none = declareHoldings({ kind: "void", told: [], seen: [] });
   const d0 = distanceOf(touched, none);
   assert.equal(d0.told, 1);
   assert.equal(d0.pole, "catalog");
 
-  const all = declareWhom({ giver: "reader-7", told: touched.map((t) => t.key), seen: ["pA", "pB"] });
+  const all = declareHoldings({ giver: "reader-7", told: touched.map((t) => t.key), seen: ["pA", "pB"] });
   assert.equal(distanceOf(touched, all).told, 0);
   assert.equal(distanceOf(touched, all).pole, "held");
 
-  const near = declareWhom({ giver: "reader-9", told: ["c1", "c2", "c3"], seen: ["pA"] });
+  const near = declareHoldings({ giver: "reader-9", told: ["c1", "c2", "c3"], seen: ["pA"] });
   const d = distanceOf(touched, near);
   assert.equal(d.told, 0.25);
   assert.equal(d.seen, 0.5, "told and seen are different holdings");
@@ -95,11 +95,11 @@ test("distanceOf: the catalog pole is the empty whom; held-everything is the oth
 
 test("two-whom property at the partition: one universe, shapes differ exactly where holdings differ", () => {
   const universe = ["c1", "c2", "c3", "c4", "c5"].map((id) => ({ id, pinax: id < "c3" ? "pA" : "pB" }));
-  const A = declareWhom({ giver: "reader-A", told: new Map([["c1", "out/1#s0"], ["c2", "out/1#s1"], ["c3", "out/2#s0"]]), seen: ["pA", "pB"] });
-  const B = declareWhom({ giver: "reader-B", told: [], seen: [] });
-  const A2 = declareWhom({ giver: "reader-A-twin", told: new Map([["c1", "out/9#s0"], ["c2", "out/9#s1"], ["c3", "out/9#s2"]]), seen: ["pA", "pB"] });
+  const A = declareHoldings({ giver: "reader-A", told: new Map([["c1", "out/1#s0"], ["c2", "out/1#s1"], ["c3", "out/2#s0"]]), seen: ["pA", "pB"] });
+  const B = declareHoldings({ giver: "reader-B", told: [], seen: [] });
+  const A2 = declareHoldings({ giver: "reader-A-twin", told: new Map([["c1", "out/9#s0"], ["c2", "out/9#s1"], ["c3", "out/9#s2"]]), seen: ["pA", "pB"] });
 
-  const pa = partitionByWhom(universe, A), pb = partitionByWhom(universe, B), pa2 = partitionByWhom(universe, A2);
+  const pa = partitionByHoldings(universe, A), pb = partitionByHoldings(universe, B), pa2 = partitionByHoldings(universe, A2);
   const ids = (xs) => xs.map((x) => x.item.id);
 
   // same universe: every item lands in exactly one side, for every whom
@@ -118,19 +118,19 @@ test("two-whom property at the partition: one universe, shapes differ exactly wh
 });
 
 test("creaseEntry: records what the whom held and how the fold stood, never the whom's corpus", () => {
-  const whom = declareWhom({ giver: "reader-A", told: ["c1"], seen: ["pA"], thread: ["t1", "t2"] });
+  const whom = declareHoldings({ giver: "reader-A", told: ["c1"], seen: ["pA"], thread: ["t1", "t2"] });
   const report = seamReport([S(seg.frame("From "), seg.source("a page", "px_a/text@abc#b0-6"), seg.frame("."))]);
-  const e = creaseEntry({ whom, question: "q:who-approved", nulls: { draws: 199, seed: 20261014 }, report, distance: distanceOf([{ key: "c1", page: "pA" }], whom), output: "out/3" });
+  const e = creaseEntry({ holdings: whom, question: "q:who-approved", nulls: { draws: 199, seed: 20261014 }, report, distance: distanceOf([{ key: "c1", page: "pA" }], whom), output: "out/3" });
   assert.equal(Object.isFrozen(e), true);
   assert.deepEqual(e.whom.holdings, { told: 1, seen: 1, thread: 2 });
   assert.equal(e.whom.told, undefined);
   assert.equal(e.contract, true);
   assert.equal(e.seams.count, 2);
-  assert.throws(() => creaseEntry({ whom, report: {} }), /seamReport/);
+  assert.throws(() => creaseEntry({ holdings: whom, report: {} }), /seamReport/);
 });
 
 test("untouchedBy: W spans no fold ever touched are named, not judged", () => {
-  const whom = declareWhom({ giver: "reader-A", told: ["c1", "c2", "c3"], seen: [] });
+  const whom = declareHoldings({ giver: "reader-A", told: ["c1", "c2", "c3"], seen: [] });
   assert.deepEqual(untouchedBy(whom, new Set(["c2"])), ["c1", "c3"]);
   assert.deepEqual(untouchedBy(whom, ["c1", "c2", "c3"]), []);
 });
