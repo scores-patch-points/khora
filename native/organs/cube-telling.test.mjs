@@ -86,3 +86,16 @@ test("omnilingual: every proposition type has a construction in BOTH grammars, a
   // SYN·Figure is the one declared difference: Spanish declines indirect speech rather than code-switch (telling-grammar.es.js header).
   for (const c of te.cells.filter((x) => x.key !== "SYN·Figure")) assert.equal(ts.cells.find((x) => x.key === c.key).status, c.status, c.key);
 });
+
+test("a page whose declared publication date does not parse is undated, not a crash (drive eval 2026-10-14: 5 of 48 runs died here)", async () => {
+  const recs = [await page("https://a.test/1", A), await page("https://b.test/2", B)];
+  recs[0].declared = { published: "{{ post.date }}" };
+  recs[1].declared = { published: "2026-03-02T09:00:00Z" };
+  const store = Object.fromEntries(recs.map((r) => [r.entry.id, r]));
+  const slice = async (address) => { const p = parseAddress(address); const rec = store[p.pinax]; if (!rec) return null; const sp = await makeSpan(rec, p.layer, p.start, p.end); const q = sp.ok === false ? null : await quoteOf(sp, rec); return q?.ok ? q.text : null; };
+  const record = readCorpus(recs, { question: "Did Maria Lopez approve the plan?" });
+  const telling = await cubeTelling(record, { slice, interp: interpret(record) });
+  const said = telling.cells.find((c) => c.key === "CON·Ground").sentences.map((s) => s.text).join(" ");
+  assert.match(said, /March 2, 2026/, "positive control: the parseable date is still told");
+  assert.match(said, /one page declares none|1 page declares none/);
+});

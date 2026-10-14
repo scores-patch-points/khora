@@ -750,3 +750,71 @@ User, 2026-10-14: "finish what's left." The gap named in §18-§20: a stance sen
 **Result.** Stage 1 reads "Per experts, “Sleep experts have opposed the idea of year-round Daylight Saving Time because they argue that Standard Time aligns best with people’s circadian rhythms.”" with verdict `bound` (it was `contested`, no margin, and led with a neutral sentence before); stage 2 adds Republican Senator Mike Rounds. 159 organ tests pass.
 
 **Still open (honest).** (1) The distant-supervision test needs a search backend that returns pages (§20); it is preregistered and unrun on topic 2. (2) `grain.js`'s three changes (report held-agree/refused/undetermined; a Ground cell for refusals; stop mapping unknown to "+" there) are the Grain session's. (3) Sullivan's learned Polarity cues and `nested-clauses.js` as the negation giver: not swapped in, because nothing here shows they beat the parser's own negation test. (4) Roberts' `holder-scope.js` stays unwired until a per-holder establishment ledger exists.
+
+## 22. Measured against the-fold's no-model drive test (2026-10-14)
+
+Pre-registered in `native/eval/callimachus/PREREG.md`, which was committed and pushed before any eval prompt ran. Full results are in `native/eval/callimachus/RESULTS.md`.
+
+**The setup.**
+- The prompts are the-fold `eval/modelless`'s 48 answerable ones (compute, slot, holder, compound, follow-up, multilingual), with its gold regexes.
+- Collection is round-0 DuckDuckGo at `--search 10`, pinned, and answered by `--replay` from the pins.
+- The arms are the ladder's line, paragraph and brief. There is no model in any arm.
+
+**The bars.** B1: confident wrong = 0, as in the baseline. B2: committed correct ≥ 10, against the baseline's 9 of 48.
+
+**Result: no arm passes, in any of three live collections.**
+
+| arm | committed correct (A / A-fix / B) | confident wrong (A / A-fix / B) |
+|---|---|---|
+| line | 5 / 5 / 6 | 28 / 33 / 32 |
+| paragraph | 0 / 0 / 0 | 3 / 3 / 2 |
+| brief | 0 / 0 / 0 | 3 / 3 / 2 |
+
+- Of the line's 5 correct leads in A, only 2 answer the question; the other 3 carry the gold string while saying something else.
+- Gold is in the paragraph's copied bytes on 22 to 24 of 48 records, so the loss is in the reading, not only in retrieval.
+
+Falsified, with the specimens in RESULTS.md:
+- **Perception, as built, picks claims about the figure, not claims that fill the slot.** Anchor, actor and words reward naming the question's figures. Nothing asks whether the claim puts a filler of the admitted kind in the open position of the asked relation. Example: "Who is the US president?" → "The president of the United States (POTUS) is the head of state…".
+- **The `words` witness rewards restating the question.** Example: Spanish capital of Australia → "…la respuesta más habitual es Sydney o Melbourne."
+- **`candidatesOf` admits interrogatives as claims**, because `?` counts as a sentence end.
+- **The permutation-null contest is not a correctness guard.** It bound 5 times across A and B, and all 5 were wrong. A clear margin over a column set that rewards the wrong thing is a clear margin for the wrong claim.
+- **The line has no abstention except `below_floor`**, so every one of findings 1–3 is committed.
+
+Also found:
+- Sentences are cut at "St.", and one of those cut sentences was a bound lead.
+- Collection has no timeframe ("Who is the US president" pinned *Joe Biden – Wikipedia*).
+- Compute has no lane: 3 of 10 compute records have zero sentence candidates.
+- Follow-ups have no binder.
+- Han text is `below_floor`.
+
+Fixed along the way:
+- `cube-telling.js` threw on a page whose declared publication date does not parse. That killed 5 of 48 run-A collections; there is now a regression test.
+- `--replay` refetched every page for fixity, so a replay depended on today's web. It now reuses the pinned verdicts.
+
+**Next, needing its own pre-registration.** Run against the same pins (`drive.mjs --replay-only`), so web variance is out:
+- a slot-filler witness: the claim's relation holds the question's figure in one position and an admitted-kind filler in the asked one;
+- an interrogative filter;
+- a timeframe witness for present-tense holders;
+- an abstention for the line.
+
+### 22.1 Omnilingual arms and seam density (Amendment 1, 2026-10-14)
+
+The pre-registration was amended before any Spanish run; results are in `native/eval/callimachus/RESULTS.md`, "Amendment 1 results". No model was used, and `self:model` words are 0.
+
+- **Spanish questions** (42, translated and frozen) were asked two ways: over the English pins, and over Spanish pages collected live. The table counts line commits.
+
+  | arm | committed correct | confident wrong | below_floor |
+  |---|---|---|---|
+  | English reference | 5 | 28 | 9 |
+  | ES→EN | 9 | 16 | 17 |
+  | ES→ES | 11 | 24 | 7 |
+
+  - Read by hand, 7 of ES→ES's 11 correct leads answer the question, for example "La capital de Canadá es Ottawa."
+  - B1 fails in every arm.
+- **Cross-language matching is only names and cognate stems.** `identity-induction.js` and `qidBridge` are unwired, so ES→EN refuses 17 of 42 for lack of any shared witness.
+- **fr, de, ru, zh and it are read by the English parser.** The runner's sniff knows only es; there is no third question grammar, telling grammar or parser on disk. A language-identification step before the grammar is owed.
+- **The telling is 100% lawful and byte-verified in both en and es.** Lawful is not correct: every confident-wrong lead is lawful.
+- **Seam density.** Answers are 63–77% copied, addressed source bytes, 5–10% computed values (mostly attribution) and 17–40% frame words. The figures are pooled per arm and stage; per category and per language are in RESULTS.
+  - The seam tells a reader which words are ours. It says nothing about whether a quoted claim answers the question.
+- **Gold-regex defect.** The holder gold `Leo` matches "Napo*leo*n", which gave one false credit in ES→EN. Gold regexes need word boundaries.
+- **`--qlang`** now declares the question grammar instead of sniffing it.
