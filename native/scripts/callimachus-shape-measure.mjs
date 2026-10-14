@@ -1,6 +1,7 @@
 // scripts/callimachus-shape-measure.mjs — the two measurements in docs/CALLIMACHUS-SHAPE.md §7. No model, no network.
 //   node native/scripts/callimachus-shape-measure.mjs roundtrip <telling.addressed.json>
 //   node native/scripts/callimachus-shape-measure.mjs lean <telling.addressed.json> [more …]
+//   node native/scripts/callimachus-shape-measure.mjs seams <telling.addressed.json> [more …]   (§7.3: share of bytes not copied)
 import fs from "node:fs";
 import { elementsOf } from "../the-fold/medium.js";
 import { attachArc } from "../the-fold/arc.js";
@@ -52,4 +53,10 @@ for (const k of ["T", "S"]) {
 }
 const tab = {}; for (const p of pairs) { const k = `${p.dT} -> ${p.aT}`; tab[k] = (tab[k] ?? 0) + 1; }
 console.log(Object.entries(tab).sort((a, b) => b[1] - a[1]).slice(0, 12).map(([k, v]) => `${v} ${k}`).join("; "));
-} else console.log("usage: roundtrip <file> | lean <file …>");
+} else if (mode === "seams") {
+  for (const f of files) {
+    const k = {}; let tot = 0;
+    for (const s of load(f)) for (const g of s.segments) { const b = Buffer.byteLength(g.text ?? ""); k[g.kind] = (k[g.kind] ?? 0) + b; tot += b; }
+    console.log(`${f}  bytes ${tot}  seam density ${((tot - (k.source ?? 0)) / tot).toFixed(3)}  ${JSON.stringify(k)}`);
+  }
+} else console.log("usage: roundtrip <file> | lean <file …> | seams <file …>");

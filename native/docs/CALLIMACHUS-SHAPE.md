@@ -76,6 +76,80 @@ The falsifier and bar are step 0 of the build plan (§8).
 
 ---
 
+## The fold as a function (after "The Prompt Is a Crease")
+
+The user's essay "The Prompt Is a Crease" (2026-10-14) is used here as **inspiration, not spec**. What is already true of the code is marked **[holds]**. What is a claim still owed a test is marked **[H*n*]**, with its falsifier.
+
+### The signature
+
+> **fold(U, W, Q, N, C) → addressed spans + seams**
+
+| argument | what it is | here |
+|---|---|---|
+| U | the pinned universe | the Pinax versions and the record built over them |
+| W | the whom's corpus | the holdings of the section above |
+| Q | the words, as a handle on U | the question, read into a void (`question-void.js`) |
+| N | the nulls | the born nulls, with draws and seed declared |
+| C | the crease ledger | every earlier fold against U (below) |
+
+**[holds] Two kinds of output.** The output has exactly two kinds of material:
+- **addressed spans**: copied bytes with a Pinax address;
+- **seams**: every place where no span joins two others.
+
+The composer already types this split. Source segments are spans. Frame, value and grammar segments are the grammar's **declared** seams. `self:model` is the mouth, and it is confined to seams by construction: `mouth-repair.js` refuses any repair that touches a copied segment or adds a content word.
+
+**[holds] Seam density is computable today,** and every fold should report it first: the share of output bytes that are not copied spans. §7.3 measures it on the existing tellings.
+
+### Distance induces shape
+
+**[H1] Distance induces shape.** Define the distance between Q and W as how much of what Q touches in U is absent from W. That is a share of the anchored atoms, scored against a null that resamples W at the same size. The hypothesis is that distance, not a declared size, picks the fold:
+- **near** (the whom holds most of it): a figure, one line with one address, the difference only;
+- **far**: a ground, meaning structure, relations, who says what, and where pages differ.
+
+On this reading "line", "brief", "abstract" and "dossier" are names for folds at particular distances, not templates. The answer ladder's fixed sizes would become points on a measured axis.
+
+**Falsifier.** The twin-reader experiment: the same Q over the same U, once with a dense W and once with W = ∅. It runs as a separate session, [twin-reader-fold-the-who](#local_00d7bf64-5ead-45c3-8d69-409ba42ea184).
+
+H1 is refuted if either of these holds:
+- the two folds do not differ in shape (count, levels, the ratio of figure to ground) beyond the W-resample null;
+- they differ in the opposite direction: the near reader gets more structure.
+
+**[H2] W = ∅ gives the catalog.** With nothing held, the fold is a catalog: what the universe holds, from whom, how pinned. That is Callimachus's own Pinakes role. §7.3 is suggestive but is not a test, because no W was varied: the 27-cell tellings, which are read today for no particular whom, are almost entirely seam, meaning the grammar describing the record.
+
+### The whom can be any pinned corpus
+
+**[H3] The second argument can be any pinned corpus with a null.** The same operation with a different W:
+
+| U | W | the fold is |
+|---|---|---|
+| a statute | the logs | an audit; its seams are the amendment agenda |
+| a contract | the invoices | a reconciliation |
+| the record | a prior answer | a reply |
+| the record | a past self | drift |
+
+The code already takes W as an argument: `createForWhom`'s `ground` and `universe` are corpora, not names. The first test pair is the cheapest one: a reply, with W = a prior `telling.addressed.json`. It is H3's falsifier on the smallest scale. A reply must drop or mark as held every claim the prior answer told, and differ from a W = ∅ fold beyond the resample null.
+
+### The crease ledger
+
+**[new; nothing built] The crease ledger C.** Every fold against U is kept as a first-class, append-only object: its W (by hash), Q, N (draws and seed), its output addresses, and its seams. Later folds are then measured against earlier perspectives:
+- what this whom was already told (the `heldBy` field);
+- what other whoms were told;
+- where seams recur, which is where U itself is thin.
+
+It follows the discipline of `form-priors.jsonl` and `document-ledger.js`: append-only, folded on read, never edited. `telling.addressed.json` is already one fold's record. What is missing is the ledger that keys these records by U and W.
+
+**[H4] Recurring seams locate U's gaps.** A seam that recurs across creases from different whoms marks a place the universe cannot join itself. That is a collection target for Wald, and the agenda in the audit case. The falsifier: recurring seams are no more frequent than seams under a whom-label shuffle across the ledger.
+
+### Prior art for zero-model generators
+
+There are two families of generator that use no model, and Callimachus is both:
+- **Rulebooks:** Pāṇini's grammar, Llull's wheels. The construction tables and prose laws are a rulebook.
+- **Corpora:** the Markov chain run on *Eugene Onegin*, the cento (a poem stitched from lines of other poems), and ELIZA read as "a cento of the whom". Addressed spans are a cento.
+
+The difference from both families is the null and the address. Every joint is a typed seam, every piece is pinned, and no choice is made without beating a null.
+
+---
+
 ## 0. The answer in one paragraph
 
 A clause is already a holon: an addressed proposition whose segments say where every word came from. Every larger unit (sentence, paragraph, section, list, table row, slide, stanza) is **the same kind of node one level up**. The parent is built from its children. Its only words of its own are joins and labels, and those may say nothing the children's grounds don't carry. A *shape* is a tree of slots, each slot a small void with features (position, count, class, role word, the move it makes). That tree is never declared. It is induced **for a whom** (the section above), from four sources read through that whom, each deciding its features against its own null:
@@ -506,6 +580,7 @@ Instance-learned shapes for other scripts need the Ground reader rebuilt on `Int
 | medium read-back | **built** for heading, item, line and block (medium.js) | **new**: a table class (pipe rows, header row, separator) and a frame-break class (`---`) |
 | for-whom frame, fold, three-leg gate | **built** (`kernel/for-whom.js`), not called by Callimachus | fill it with holdings (§For whom); wire as the experiencer and `realizeClaim`'s `whom` |
 | dmdWindow | **built** (`kernel/activation.js`) | use it over the whom's holdings for the window |
+| crease ledger C (every fold keyed by U, W hash, Q, N, with its seams) | **new**; one fold's record already exists (`telling.addressed.json`) | append-only ledger keyed by U and W; feeds `heldBy`, H1 and H4 |
 | ladder re-weighting by layer | **built** (answer-ladder) | add the form layer as a witness column, **new** |
 | the node type spanning levels | **new** | small: a shape over existing leaves |
 | licences and the four-corner shape verdict | **new** | |
@@ -527,7 +602,7 @@ Instance-learned shapes for other scripts need the Ground reader rebuilt on `Int
 
 ---
 
-## 7. Measured this session (to settle two design questions)
+## 7. Measured this session
 
 Both measurements are reproduced by `native/scripts/callimachus-shape-measure.mjs` (modes `roundtrip` and `lean`), run against khora at `2255241b`; no organ was changed. The data are existing Callimachus run outputs in `callimachus-runs/` (outside the repo):
 - `permanent-dst`;
@@ -578,6 +653,25 @@ Two larger, unpinned sets taken while the drive eval was still writing gave the 
 
 ---
 
+### 7.3 Seam density of today's tellings
+
+**Seam density** is the share of output bytes in non-source segments (frame, value, grammar, `self:model`). I computed it from the `segments` arrays in the same pinned eleven files as §7.2 (script mode `seams`).
+
+| telling | bytes | seam density | split (frame / value / source bytes) |
+|---|---|---|---|
+| permanent-dst | 3,532 | 0.668 | 1,830 / 530 / 1,172 |
+| compute-5 | 3,939 | 0.457 | 1,521 / 281 / 2,137 |
+| compute-6 | 2,185 | 0.832 | 1,512 / 307 / 366 |
+| compute-2, -4, -9 | 1,586 to 1,719 | 0.953 to 0.973 | under 82 source bytes each |
+| compute-0, -1, -3, -7, -8 | 1,358 to 1,467 | **1.000** | no copied bytes at all |
+
+**What this shows:**
+- Five of eleven 27-cell tellings copy no source bytes at all. They are the grammar describing the record: counts, dates, who was refused.
+- That fits H2 (a telling for no whom is a catalog), but it is not a test of H2, because no W was varied.
+- It is also a warning for §4. The telling's declared shape puts most of its words in seams, so an induced shape has a low bar to clear on seam density.
+
+Seam density is to be reported first by every fold from build step 0 on.
+
 ## 8. Build plan, ranked: smallest licensed step first
 
 Each step is a whole answer on its own, and each has a falsifier and a pre-registered bar written before it runs.
@@ -597,6 +691,7 @@ Each step is a whole answer on its own, and each has a falsifier and a pre-regis
 - two whoms whose holdings differ by claims the record would otherwise lead with get the same lead and the same drops.
 
 **Bar.**
+- Every fold reports its seam density first.
 - Identical holdings give byte-identical outputs: 0 differences.
 - Differing holdings give outputs that differ where the holdings differ. Each claim one whom already holds is either dropped with the reason `held` or placed typed as held.
 - Every sentence in both outputs re-verifies against its bytes.
