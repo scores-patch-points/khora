@@ -121,6 +121,8 @@ import { makeHyperlexicon } from "../native/organs/hyperlexicon.js";
 import * as TL from "../native/kernel/task-log.js";
 import * as cube from "../native/kernel/cube.js";
 import { ledgerFile as reasoningLedgerFile } from "./reasoning-ledger.mjs";
+import { claimId as claimIdOf, claimOfLine } from "./claim-identity.mjs";
+import { annotateWithSpiral } from "./spiral-read.mjs";
 
 /** Same structural identity cli/reason.mjs's write side uses (that file's
  *  own header explains why: additive robustness — NFKC + internal
@@ -219,6 +221,9 @@ export function findMatches(seedGround, { allSessions, session }) {
       if (!(contains(seed, claimGround) || contains(claimGround, seed))) continue;
       matches.push({
         id: line.id ?? null,
+        // The claim's one content address (cli/claim-identity.mjs): what the janus spiral names this claim by.
+        // A line written before `claimId` existed derives the same string from its own fields.
+        claimId: line.claimId ?? claimIdOf(claimOfLine(line)),
         ground: claimGround,
         rel: line.rel ?? "?",
         roles: line.roles ?? {},
@@ -303,7 +308,7 @@ export function foldMatches(matches) {
   for (const m of matches) {
     const k = canonKey(m.roles?.ARG0 ?? "", m.rel, m.roles?.ARG1 ?? "");
     if (!rolesByKey.has(k)) rolesByKey.set(k, []);
-    rolesByKey.get(k).push({ roles: m.roles ?? {}, said: m.said, ground: m.ground, session: m.session, polarity: m.polarity ?? "+", verdict: m.verdict ?? null, appendedAt: m.appendedAt ?? null });
+    rolesByKey.get(k).push({ claimId: m.claimId ?? null, roles: m.roles ?? {}, said: m.said, ground: m.ground, session: m.session, polarity: m.polarity ?? "+", verdict: m.verdict ?? null, appendedAt: m.appendedAt ?? null });
   }
   // Both folds, joined on the same canonical key: the links (every "+"
   // hearing) and the cuts (every "-"). A key on both sides is contested.
@@ -354,6 +359,16 @@ export function foldMatches(matches) {
  *  "witnessed six times". */
 export function describeNote(n) {
   const prop = `${n.subject} ${n.rel} ${n.object}`;
+  // janus's verdict, when the session's spiral record holds this claim against it (cli/spiral-read.mjs
+  // annotateWithSpiral): it LEADS, and the ledger's own standing rides behind it, so a refuted claim is never
+  // presented as a standing one (nesting-fix J D3).
+  if (n.spiral) {
+    // A size bound on the basis text (token cost, like recall's CAP — not a claim about the world).
+    const raw = (n.spiral.because ?? []).filter(Boolean).join("; ");
+    const why = raw.length > 200 ? `${raw.slice(0, 200)}…` : raw;
+    const ledger = n.standing === "contested" ? "contested" : n.standing === "ungrounded" ? "ungrounded" : `${n.standing} · ${n.sources} grounded run(s)`;
+    return `[${n.spiral.standing} · janus${why ? `: ${why}` : ""} | ledger: ${ledger}] ${n.polarity === "-" ? "NOT: " : ""}${prop}`;
+  }
   if (n.standing === "contested") {
     return `[contested · asserted ${n.witnessCount}× (${n.grounded} grounded), denied ${n.against?.witnessCount ?? 0}× (${n.against?.grounded ?? 0} grounded); latest ${n.latest === "-" ? "denied" : "asserted"}] ${prop}`;
   }
@@ -389,6 +404,7 @@ function main() {
   if (args.help) { console.log(USAGE); process.exit(0); }
   const result = findMatches(args.seed, { allSessions: args.allSessions, session: args.session });
   const folded = foldMatches(result.matches);
+  if (!result.allSessions && result.scopeSession) annotateWithSpiral(folded.notes, result.scopeSession);
   const payload = {
     seedGround: result.seed,
     scope: result.allSessions ? "all-sessions" : `session:${result.scopeSession ?? "none"}`,

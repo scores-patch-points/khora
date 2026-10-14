@@ -53,7 +53,7 @@ import { fileURLToPath } from "node:url";
 import { probeSpiral, layerRecord, absentLine } from "./spiral-layer.mjs";
 import { str, claimKey, claimId, slotOf, metaOf, functionalRels, revisionKind } from "./claim-identity.mjs";
 export { claimKey, claimId };
-import { EO_DIR, steeringOff, sidOf, loadState, logError } from "./claude-code-state.mjs";
+import { steeringOff, sidOf, loadState, logError } from "./claude-code-state.mjs";
 import { readEdges, keywordsFor, resolveLanguage } from "../native/adapters/code/edges.js";
 
 // THE LAYER, TYPED (2026-10-14, nesting-fix J D1). janus's spiral organs exist only on its unmerged branch; their
@@ -68,15 +68,9 @@ const appendReasoning = (...a) => need().appendReasoning(...a);
 const reasoningAt = (...a) => need().reasoningAt(...a);
 const consequenceVerdict = (...a) => need().consequenceVerdict(...a);
 
-export const SPIRAL_DIR = path.join(EO_DIR, "spiral");
-const safeSid = (sid) => String(sid ?? "").replace(/[^A-Za-z0-9_-]/g, "");
-export const spiralFile = (sid) => path.join(SPIRAL_DIR, `${safeSid(sid)}.jsonl`);
-
-export function loadSpiral(sid) {
-  let raw = "";
-  try { raw = fs.readFileSync(spiralFile(sid), "utf8"); } catch { return []; }
-  return raw.split("\n").filter(Boolean).map((l) => JSON.parse(l));
-}
+// The record's location and reader live in cli/spiral-read.mjs (so recall can read the same record).
+import { SPIRAL_DIR, safeSid, spiralFile, loadSpiral } from "./spiral-read.mjs";
+export { SPIRAL_DIR, spiralFile, loadSpiral };
 
 // Identity (claimKey/claimId, slotOf, revisionKind) lives in cli/claim-identity.mjs — ONE place, shared with the
 // ledger's claim lines, so the spiral node id and the ledger's `claimId` are the same string for one claim.

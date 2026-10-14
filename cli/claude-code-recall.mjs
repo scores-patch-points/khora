@@ -35,6 +35,7 @@ import fs from "node:fs";
 import { sidOf, logError } from "./claude-code-state.mjs";
 import { findMatches, foldMatches, describeNote } from "./claude-code-context.mjs";
 import { relevantClaims } from "../native/organs/claim-relevance.js";
+import { annotateWithSpiral } from "./spiral-read.mjs";
 
 // A system notice is not the user's own ask — claude-code-ledger.mjs's own
 // UserPromptSubmit branch defines the identical table for the identical
@@ -61,6 +62,10 @@ export function recallContextFor(ev) {
   const result = findMatches("/", { allSessions: false, session: sid });
   const folded = foldMatches(result.matches);
   if (!folded.notes.length) return null;
+  // JANUS'S VERDICT (nesting-fix J D3, 2026-10-14). A claim the session's spiral record holds refuted, suspended,
+  // stale or withdrawn is shown as that, ahead of the ledger's own standing: this hook used to say "Build on
+  // these" over claims janus had already refuted.
+  annotateWithSpiral(folded.notes, sid);
   // RELEVANCE (2026-09-25, native/organs/claim-relevance.js): the user,
   // after this file's first cut surfaced every standing claim up to CAP
   // unconditionally — "not get ALL the tokens, only the ones the SURF
@@ -87,10 +92,12 @@ export function recallContextFor(ev) {
   // more: no reasoning run's citation (ground-cite.js citeGround — the claim's
   // own words found at the ground it named) cleared for that claim. It is not
   // a verdict that the claim is false, and a different instrument may have
-  // earned it (the session's janus spiral record, ~/.claude/eo-reason/spiral,
-  // carries those verdicts and is not read here). "NOT:" marks a claim only
-  // ever denied: the denial is what stands.
+  // earned it. The session's janus spiral record (~/.claude/eo-reason/spiral)
+  // IS read here since 2026-10-14: a claim it holds refuted / suspended /
+  // stale / withdrawn leads with that. "NOT:" marks a claim only ever
+  // denied: the denial is what stands.
   lines.push("Reading these: \"N grounded run(s)\" means that many runs' citation of the claim's ground cleared; [ungrounded] means only that none did here (stated, not cited — not that it is false, and the session's janus record may hold its own verdict); NOT: means the claim was reasoned as denied.");
+  if (shown.some((n) => n.spiral)) lines.push("[refuted|suspended|stale|withdrawn · janus: …] is the session's janus record holding that claim against itself — do not build on it; its ledger standing follows the bar for reference. Re-state it with its premises and re-run reason.mjs to re-earn it, or say it no longer holds.");
   lines.push("Build on these rather than re-deriving or quietly contradicting them; if one no longer holds, say so and re-run reason.mjs.");
   return lines.join("\n");
 }
