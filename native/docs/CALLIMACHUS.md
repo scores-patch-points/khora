@@ -160,3 +160,49 @@ node --test native/organs/{pinax,callimachus,cube-telling,answer-ladder,claim-re
 ```
 
 Live repair needs the mouth channel on `:11434` with `gemma2:2b`. Without it, level 3 reports "no mouth reachable" and changes nothing.
+
+## 10. Measured against the-fold's no-model drive test (2026-10-14)
+
+Pre-registered in `native/eval/callimachus/PREREG.md`, which was committed and pushed before any eval prompt ran. Full results are in `native/eval/callimachus/RESULTS.md`.
+
+**The setup.**
+- The prompts are the-fold `eval/modelless`'s 48 answerable ones (compute, slot, holder, compound, follow-up, multilingual), with its gold regexes.
+- Collection is round-0 DuckDuckGo at `--search 10`, pinned, and answered by `--replay` from the pins.
+- The arms are the ladder's line, paragraph and brief. There is no model in any arm.
+
+**The bars.** B1: confident wrong = 0, as in the baseline. B2: committed correct ≥ 10, against the baseline's 9 of 48.
+
+**Result: no arm passes, in any of three live collections.**
+
+| arm | committed correct (A / A-fix / B) | confident wrong (A / A-fix / B) |
+|---|---|---|
+| line | 5 / 5 / 6 | 28 / 33 / 32 |
+| paragraph | 0 / 0 / 0 | 3 / 3 / 2 |
+| brief | 0 / 0 / 0 | 3 / 3 / 2 |
+
+- Of the line's 5 correct leads in A, only 2 answer the question; the other 3 carry the gold string while saying something else.
+- Gold is in the paragraph's copied bytes on 22 to 24 of 48 records, so the loss is in the reading, not only in retrieval.
+
+Falsified, with the specimens in RESULTS.md:
+- **Perception, as built, picks claims about the figure, not claims that fill the slot.** Anchor, actor and words reward naming the question's figures. Nothing asks whether the claim puts a filler of the admitted kind in the open position of the asked relation. Example: "Who is the US president?" → "The president of the United States (POTUS) is the head of state…".
+- **The `words` witness rewards restating the question.** Example: Spanish capital of Australia → "…la respuesta más habitual es Sydney o Melbourne."
+- **`candidatesOf` admits interrogatives as claims**, because `?` counts as a sentence end.
+- **The permutation-null contest is not a correctness guard.** It bound 5 times across A and B, and all 5 were wrong. A clear margin over a column set that rewards the wrong thing is a clear margin for the wrong claim.
+- **The line has no abstention except `below_floor`**, so every one of findings 1–3 is committed.
+
+Also found:
+- Sentences are cut at "St.", and one of those cut sentences was a bound lead.
+- Collection has no timeframe ("Who is the US president" pinned *Joe Biden – Wikipedia*).
+- Compute has no lane: 3 of 10 compute records have zero sentence candidates.
+- Follow-ups have no binder.
+- Han text is `below_floor`.
+
+Fixed along the way:
+- `cube-telling.js` threw on a page whose declared publication date does not parse. That killed 5 of 48 run-A collections; there is now a regression test.
+- `--replay` refetched every page for fixity, so a replay depended on today's web. It now reuses the pinned verdicts.
+
+**Next, needing its own pre-registration.** Run against the same pins (`drive.mjs --replay-only`), so web variance is out:
+- a slot-filler witness: the claim's relation holds the question's figure in one position and an admitted-kind filler in the asked one;
+- an interrogative filter;
+- a timeframe witness for present-tense holders;
+- an abstention for the line.

@@ -94,11 +94,12 @@ if (replay) {
 const store = Object.fromEntries(records.map((r) => [r.entry.id, r]));
 const record = readCorpus(records, { question, absences });
 const interp = interpret(record);
-record.collection = { seeds, rounds_run: searchN > 0 ? 1 : 0, stop: "budget: round 0 only (targeted, gap and saturation rounds are increment E, not built)" };
+record.collection = replay ? JSON.parse(readFileSync(join(out, "record.json"), "utf8")).collection : { seeds, rounds_run: searchN > 0 ? 1 : 0, stop: "budget: round 0 only (targeted, gap and saturation rounds are increment E, not built)" };
 
-// Fixity, live: refetch every source and check one span per source (its incipit) on both axes.
-const verdicts = {};
-for (const rec of records) {
+// Fixity, live: refetch every source and check one span per source (its incipit) on both axes. A replay reuses the pinned verdicts:
+// refetching would make the replay depend on today's web, and the lenses read fixity.
+const verdicts = replay ? { ...(JSON.parse(readFileSync(join(out, "record.json"), "utf8")).fixity ?? {}) } : {};
+if (!replay) for (const rec of records) {
   const r = await get(rec.entry.url);
   let current = null;
   if (r.ok) {
