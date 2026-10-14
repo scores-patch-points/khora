@@ -251,14 +251,19 @@ const RUN_JOIN = new Set(["of", "the", "and", "for"]);
 export function capitalisedRuns(str) {
   const toks = String(str ?? "").split(/\s+/).filter(Boolean);
   const isCap = (t) => /^[\p{Lu}\p{N}]/u.test(t.replace(/^[("'“‘\[]+/, ""));
+  // A run ENDS at a token carrying clause punctuation (, ; : ! ? a closing bracket, or a full stop that is not inside an abbreviation
+  // like "U.S."). Amendment 2 (GRAIN-R7-PREREG.md): without this "In July, the House" was one run and the House never resolved.
+  const ends = (t) => /[,;:!?)\]”’"]$/.test(t) || (/\.$/.test(t) && !/\./.test(t.slice(0, -1)) && t.length > 2);
   const runs = [];
   for (let i = 0; i < toks.length;) {
     if (!isCap(toks[i])) { i++; continue; }
     let j = i + 1;
-    while (j < toks.length) {
-      if (isCap(toks[j])) { j++; continue; }
-      if (RUN_JOIN.has(toks[j].toLowerCase()) && j + 1 < toks.length && isCap(toks[j + 1])) { j += 2; continue; }
-      break;
+    if (!ends(toks[i])) {
+      while (j < toks.length) {
+        if (isCap(toks[j])) { j++; if (ends(toks[j - 1])) break; continue; }
+        if (RUN_JOIN.has(toks[j].toLowerCase()) && !ends(toks[j]) && j + 1 < toks.length && isCap(toks[j + 1])) { j += 2; if (ends(toks[j - 1])) break; continue; }
+        break;
+      }
     }
     runs.push(toks.slice(i, j));
     i = j;

@@ -197,3 +197,14 @@ test("amendment 1: a sentence-initial or headline capital that the corpus shows 
   assert.deepEqual(at("the Nevada Senate"), [], "Nevada is never lowercase: it is part of the name");
   assert.deepEqual(at("Standard Time Act"), [], "the run's own surface is still matched exactly");
 });
+
+test("amendment 2: a run ends at clause punctuation, so 'In July, the House' is two things and the House resolves", () => {
+  const runs = (s) => capitalisedRuns(s).map((r) => r.join(" "));
+  assert.deepEqual(runs("In 2015, the Nevada Senate passed Nevada Assembly Joint Resolution 4"), ["In 2015,", "the Nevada Senate".replace(/^the /, "") ? "Nevada Senate" : "", "Nevada Assembly Joint Resolution 4"].filter(Boolean));
+  assert.deepEqual(runs("In July, the House passed a bill"), ["In July,", "House"]);
+  assert.deepEqual(runs("Congress, the Senate and the House"), ["Congress,", "Senate", "House"]);
+  assert.deepEqual(runs("The U.S. Senate passed it. The House did not."), ["The U.S. Senate", "The House"], "an abbreviation's dot is not a boundary; a sentence's is");
+  const refs = [{ id: "r_house", surfaces: ["House"] }, { id: "r_sen", surfaces: ["Senate"] }];
+  assert.deepEqual(referentsInRuns("In July, the House", refs, { functionWords: new Set(["the", "a", "in"]) }), ["r_house"]);
+  assert.deepEqual(referentsInRuns("In 2015, the Nevada Senate", refs, { functionWords: new Set(["the", "a", "in"]) }), [], "still a different surface");
+});
