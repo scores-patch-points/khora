@@ -1014,3 +1014,7 @@ A planted twin with no neighbourhood cannot be judged the same: the consequence 
 
 Over 19 random draws per size, the planted twin is judged the same in Pierre 3/19 (48 a half) and 13/19 (96), French 7/19 and 18/19, Natásha 3/19 and 2/19. R9's "smallest n bound" came from one deterministic draw and is withdrawn as a threshold. Natásha's consequence margin is negative at both sizes and does not grow with n: it is the name, not the sample; the cause is not diagnosed. About 96 mentions a half (≈190 in a node) is where two of three names reach 68–95%. L52.
 
+### Eleventh registration: more reading (2026-10-14)
+
+The record grew from 10 to 21 pages (11 of 15 listed URLs fetched, all Wikipedia). `Senate` 508, `Congress` 432, `House` 356 mentions: the planted twin binds at those sizes and different things stay apart (0 of 3). Every candidate alias is still unbound, but the long forms are small (`United States Senate` 55), and a twin of the candidate's own size (27 a half) binds in 0 of 19, so the unbound is silence, not a refusal. The long form needs about 190 mentions in text that writes it; Wikipedia's chamber pages say "the Senate". No alias is licensed or refused. L53.
+
