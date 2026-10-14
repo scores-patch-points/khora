@@ -45,7 +45,7 @@ const qmid = (s) => [F(QUOTES.open), s, F(QUOTES.close)];
 const asSegs = (x) => (Array.isArray(x) ? x : [x]);
 const givers = ({ names, rest }) => [...list(names.map(asSegs)), ...(rest ? [F(" y "), n(rest), F(" más")] : [])];
 const INSTITUTION = "institution"; // the giver kind a body speaking for itself carries (organs/byline.js)
-const many = (g) => g.names.length > 1 || !!g.rest;
+const many = (g) => g.names.length > 1 || !!g.rest || !!g.plural;
 export const ATTRIBUTION = Object.freeze([
   ({ giver, quote }) => [...givers(giver), F(giver.kind === INSTITUTION ? (many(giver) ? " dicen: " : " dice: ") : many(giver) ? " escriben: " : " escribe: "), ...qmid(quote), F(".")],
   ({ giver, quote }) => (!many(giver) ? [F("En palabras de "), ...asSegs(giver.names[0]), F(", "), ...qmid(quote), F(".")] : null),

@@ -153,6 +153,184 @@ H1 said distance induces shape. The specification gives the mechanism, in two st
 - The answer ladder is not routed through this; it still answers at fixed sizes.
 - The ledger and the twin-reader harness (`callimachus/twin-reader`) have not run against it.
 
+#### Where this was already solved (prior work, read 2026-10-14)
+
+The grain is mostly existing machinery given a second corpus, and the stance table was already canonical. What I found, and what I did not:
+
+| Piece of the specification | Already in | Note |
+|---|---|---|
+| The nine stance names, mode × grain | `kernel/cube.js` `STANCE_BY_MODE`; `cellOf(op, grain).stance`, stamped by `organs/derivation.js`, `organs/cube-telling.js`, `organs/story-shapes.js` | `grain.js` first hand-typed a copy; it now derives `CELLS` from this table, with a test that they are identical. |
+| The cube refuted as a content classifier ("95.7% of naive content-based cell assignments survived shuffling the words") | `docs/THE-MODULE-CENSUS.md`; memory `eoreader7-cube-classifies-moves-not-content` | The addendum's explanation of this (distance is reader-relative) is **not** tested by an arrangement-level distance; see GRAIN-PREREG "What is not claimed". |
+| Significance for the reader, measured against a ground built only from the reader's own prior experience, against a permutation null | `eoreader6/scripts/triad-independence.mjs` (copies in `commoncite/eoreader7/scripts/` and `eoWebLLM/eoreader6/scripts/`); `eo-evidence/POLICY.md` P7 notes it reads an absolute path and its numbers are cited in CUBE.md | This is the second-operand thesis, in an earlier form, for one axis, and it cannot run from a clean checkout. |
+| The difference window: "walk candidate depths outward and take the shallowest at which forgetting everything older no longer changes what the reader concludes" | `kernel/activation.js` `dmdWindow` | Tracing's hop expansion is this with the reference changed: a shortest walk **is** the shallowest depth that reproduces the conclusion. `grain.js` uses a breadth-first walk, not `dmdWindow` itself. |
+| The corroboration verdict (AGREE, SINGLE, UNDETERMINED, DISAGREE, CONTRADICTED) | `organs/capacity-runner.js` `mergeTestimony`, `landContest` ("four walls") | Used unchanged, with U's spans as witnesses to a W span. |
+| Interpretation at Ground: a declared gap, a witness, a re-zero | `kernel/notes.js` `declareVoid` / `rezeroVoid` / `foldVoids` (READING-SPEC S70, S71; wall 9, 13/13); `kernel/commitments.js` declare / evaluate / concede (S56, 19 tests) | The one place a whom already existed: the engine's own prior ground. |
+| The ledger the work is entered in | `fold-rules/ledger/ledger.json` (RefutationLedger@1) and `preflight.py` | L31–L33 added 2026-10-14. `eo-evidence/` (P1–P8, standing) is the method but is stale (eoreader6, last commit August). |
+| Output as addressed span or marked `self:model` | `organs/output-holograph.js` | The contract `seamReport` measures. |
+
+**Two names collide.** `kernel/ground-closure.js` uses "closure" for the ground *closing* (deposits exceed passage: sclerosis, the failure). `grain.js`'s `closure.closed: true` means the *triad is complete*. A reader of the fold's output could take it backwards. `organs/stance.js` uses "stance" for a text's position toward a theme (`in_terms`, `against`, `off_being`), unrelated to the cube's stance. Neither is renamed here: the field names are in a ratified pre-registration, so a rename is an amendment and the user's call.
+
+**A caution from §6.** `closure.closed` is a completeness check on what ran, not evidence the fold is good: the operator-chain closure over UD feature cells was falsified three ways because "closure over this mapping rewards role diversity, not sense". Do not cite `closed` as a result.
+
+**Not found.** The July "Generate-row output-shape ladder" and a file literally named for the August "triad-closure check". Nearest: `CAPABILITY-POLICIES.md` (the-fold-latest root) lines 158 ("every claimed closure lands with a falsifiable specimen") and 232 ("mode, domain, and grain are each closed triads by declaration"), the nine-stage generation modules (`shape.js`, `paradigm.js`, `form-prior.js`), and `triad-independence.mjs`. A pointer is welcome.
+
+### Results: the grain experiment (permanent-dst, runs 1–3, 2026-10-14)
+
+Pre-registration `eval/callimachus/GRAIN-PREREG.md` (ratified, amendments 1–3); runner `eval/callimachus/grain-arms.mjs`; outputs local only, `callimachus-runs/grain-2026-10-14/results{,.run2,.run3}.json`. Runs 1, 2 and 3 agree on every prediction except G6, which was a harness defect corrected in amendments 2 and 3 (amendment 2's diagnosis was incomplete and stays in the log). All 40 W hashes matched.
+
+| | prediction | result |
+|---|---|---|
+| G1 | the void fold is Ground; Clearing has no seam; closed | **holds** (92 spans, 0 seams, Cultivating 7 seams) |
+| G2 | dense: beats the null, Figure or Pattern, moves past every re-dealt null | **holds under the registered measure** (Figure; H 10 of 92, exceeded 0 of 199; d = 0.098 against a null maximum of 0.061, 18 of 18). **U-side movement is 0**: see L36 |
+| G3 | B gets Figure | **uninformative**: B's 14 blocks admitted no claim (nor did any of the 19 B nulls) |
+| G4 | the chain's grain never falls and the chain stops | **falsified**: Ground, Figure, Figure, Figure, Figure, Ground; not stopped in 5 steps |
+| G5 | contract, closure, confined mouth, re-slice | **holds** (7 folds) |
+| G6 | the same reader folds the same bytes identically | **holds** after amendments 2–3; only `atoms` and `sha256` bookkeeping differed |
+| G7 | all-UNDETERMINED falls to Ground | **uninformative**: not exercised (dense: 10 SINGLE, 1 UNDETERMINED) |
+| G8 | calibration: at most 1 of 19 shuffled universes non-Ground | **holds** (0 of 19; `null.real` 0 of 19) |
+
+**What the numbers say, and do not say.**
+- **The selector held up; the reader did not.** G8 holds, but the claim reader admitted 766–873 claims from the word-shuffled pages against 573 from the real ones (L34). A count of claims is not evidence of structure.
+- **The W reader limits the grain** (L35). Shown exactly the 92 region spans, the reader admitted 50 claims and held 21, so the fold ran at Figure, not Pattern. In the accumulating chain the W only grew, yet admitted claims went 50, 68, 92, 176, 138 and held 21, 17, 12, 33, 11. G4 is falsified by the instrument's non-monotone reading, not by anything the reader holds.
+- **G2 "held" and eliminated nothing about the record** (L36). Clearing runs first and emits the whole region at every grain, so the record-side addresses equal the void fold's by construction.
+- **Dense, in cells.** Dissecting 0 (no span of the reader's is refused); Binding 10 pairs, no seam; Making 82 items with 57 seams, because 57 of the 82 absent spans share no entity with a held span. The mouth's only work is where the record has no join, as specified.
+- **The re-dealt dense nulls** ran 14 at Ground and 5 at Figure. They are sentences drawn from the same record, so some are literally region claims: this null is a null for *which* sentences, not for held-ness.
+
+**Not shown.** Pattern was never reached. "The reader gets the grain it lacks" (G3) was not tested. Nothing here bears on the addendum's explanation of the cube's shuffle-survival.
+
+### Results: the W-reader experiment (permanent-dst, one run, 2026-10-14)
+
+Pre-registration `eval/callimachus/W-READER-PREREG.md`, script `eval/callimachus/w-reader-roundtrip.mjs` (committed `0ef9022e` before the run), output local only `callimachus-runs/w-reader-2026-10-14/results.json`. The reader's verbs are admitted only if they follow `minSurfaces` distinct capitalised surfaces; a short thread cannot clear that (the grain experiment's L35). Tested: a received POS prior as the admitter (R1), against the reader as it was (R0) and against the record's own earned vocabulary (R2, a ceiling, not a prior).
+
+| reader / W | claims | recall of the 92 region spans | precision | shuffled mean claims | shuffled / real |
+|---|---|---|---|---|---|
+| R0 / the 92 spans shown | 50 | 0.228 (21) | 0.46 | 45.4 | 0.91 |
+| R1 / the 92 spans shown | 58 | 0.304 (28) | 0.50 | 73.5 | **1.27** |
+| R2 / the 92 spans shown | 136 | 0.978 (90) | 0.71 | 125.3 | 0.92 |
+| R0 / twin-reader B (14 blocks) | 0 | 0.000 | n/a | 0.8 | n/a |
+| R1 / twin-reader B | 1 | 0.000 | 0.00 | 5.9 | 5.9 |
+| R2 / twin-reader B | 19 | 0.087 (8) | 0.63 | 19.3 | 1.01 |
+
+| | prediction | result |
+|---|---|---|
+| H1 | R1's recall exceeds R0's | **holds** (0.228 → 0.304) |
+| H2 | R1's shuffled/real ratio is no higher than R0's | **FALSIFIED** (0.91 → 1.27) |
+| H3 | R1 admits at least one claim from B | holds, trivially: 1 claim against a shuffled mean of 5.9 |
+| H4 | R1 does not lose precision | holds (0.46 → 0.50) |
+
+**What it says.**
+- **The prior as admitter inflates noise more than text.** It added 21 verbs, among them `did`, `was`, `should` (AUX counts as verb-dominant). Refusal worked: it removed 5 non-verbs (`all`, `as`, `from`, `if`, `through`) that recurrence alone had admitted. Ledger L37.
+- **The limit is verb admission, and the vocabulary the universe was read with carries it.** With the record's own earned verbs the reader recovers 90 of the 92 spans it was shown. That is not a prior: it is the engine's accumulated vocabulary, and for *contact* it is the correct reader, since a W verb outside the record's vocabulary could match no record claim anyway. On twin-reader's B file (14 blocks) R2 admits 19 claims where R0 admits none and recovers 8 of the 92 spans; that is not a claim about how much B holds, only that the reader is no longer blind to it. (Reading the record's own sentences with the record's own vocabulary is close to circular; the Wdense row, whose blocks are other sentences of the record, is the less circular one: recall 0.109 → 0.511.)
+- **Counts are still not structure.** Even R2 admits 125 claims from shuffled text against 136 from real. The signal is the arrangement match to the region, which this experiment did not measure on the shuffles.
+
+**Not shown.** Whether a prior used only as a refuser (minSurfaces 2) beats R0; whether recall under shuffle collapses for R2 (the calibration the grain needs); anything about the grain with R2 as the W reader. Each is a new registration.
+
+### Results: the grain experiment, second registration (record-vocabulary reader, one run, 2026-10-14)
+
+Pre-registration `eval/callimachus/GRAIN-R2-PREREG.md`, runner `eval/callimachus/grain-arms-r2.mjs` (committed `ca104aae` before the run), outputs local only `callimachus-runs/grain-r2-2026-10-14/` (`results.json`, `results.demo.md`). The person's thread is read **through** the record's own earned vocabulary (49 verbs); no received POS prior. All 40 W hashes matched.
+
+| | prediction | result |
+|---|---|---|
+| N1 | void is Ground, Clearing silent, closed | **holds** |
+| N2 | the 92 spans shown are held and run at Pattern | **holds** (136 claims; held 90, absent 2) |
+| N3 | calibration of the reader: shuffled-W is not read as holding the region | **holds** (19 of 19 Ground; held at most 7 against 90) |
+| N4 | dense beats the null, Figure/Pattern, holds more than every re-dealt reader | **holds** (Pattern; held 47 against a re-dealt maximum of 28) |
+| N5 | B is informative and gets Figure, no Making leak | **falsified**: 19 claims, held 8, null not beaten (exceeded 182 of 199, chance mean 9.2); Ground |
+| N6 | the chain never falls and stops | **falsified as registered**: the grain never fell (Pattern from step 1) but the stop rule is unreachable by construction (ledger L38); the record-side copied set was identical at every step |
+| N7 | calibration of the selector: at most 1 of 19 shuffled universes non-Ground | **holds** (0 of 19) |
+| N8 | determinism | **holds** (no differing field) |
+| N9 | contract, closure, mouth confined, re-slice | **holds** (9 folds) |
+
+**What it says.**
+- **The reader and the selector are now calibrated on both controls.** Shuffled-W: 19 of 19 at Ground; shuffled-U: 0 of 19. Claim counts still do not discriminate (shuffled-W admitted 111–137 claims against 136 real); the held count does.
+- **The void fold answers the ask first.** Cultivating's first span is "On July 14, 2026, the House passed a Sunshine Protection Act bill backed by President Trump." (the best-activated span), then the rest of the region, seven seams in 92 items.
+- **Pattern, by a margin of two, mostly echoes** (L39). Dense: held 47, absent 45. Tracing shows 48 of the reader's own sentences beside the identical record sentences; Composing and Unraveling are empty; the 45 absent spans are shown in no cell. The fold is closed, addressed and gave the reader almost nothing new.
+- **B is not shown a Figure.** B holds 8 spans and chance holds 9.2 on average: it does not hold more than a re-dealt reader would.
+- **The chain's growth is an artifact** (L38): W doubles each step because the fold's own copied spans, re-addressed, are added back.
+
+**Not shown.** Whether a measured cut on held beats the majority rule; whether surfacing the absent set at Pattern is the right repair; "the reader gets the grain it lacks" (B's null was not beaten); anything with a person's thread instead of a constructed reader.
+
+### Results: the grain experiment, third registration (the new is never left unshown; one run, 2026-10-14)
+
+Pre-registration `eval/callimachus/GRAIN-R3-PREREG.md` (amendment 1 records a crashed first execution that wrote no result), runner `eval/callimachus/grain-arms-r3.mjs`, outputs local only `callimachus-runs/grain-r3-2026-10-14/` (`results.json`, `answers.html`). The change is in `grain.js`: Composing also places every absent cleared span; Tracing types an echo apart from a walked chain; `forceGrain` and `distance.margin` exist for evaluation. The cut (H > A) is unchanged.
+
+| | prediction | result |
+|---|---|---|
+| M1 | every absent cleared span is shown in a cell other than Clearing | **holds** (92 folds: 4 asks × void, dense, B, shown and the 19 re-dealt readers) |
+| M2 | the cut no longer decides what is new | **holds** (168 forced folds, Figure and Pattern both) |
+| M3 | echo typing is truthful | **holds** (the four Pattern folds with a Tracing cell) |
+| M4 | nothing else moved vs the second registration | **holds** (void copied set, grains, held, absent; shuffled-W 19 of 19 Ground; shuffled-U 0 of 19; determinism) |
+
+M1 and M2 are close to guaranteed by construction; they show the change works and would catch a regression.
+
+**What the reader is shown now (House ask, dense reader).** Pattern by 47 held against 45 absent (margin 0.022). Tracing: 2 real chains and 46 echoes (96% echo), listed after the chains and collapsed in the page. Composing: no new connection between held things, and 45 new passages, each beside a held passage. Of the 45, 41 have an anchor, 25 distinct anchors, the most-used serving 7; 4 are shown alone. For the other three asks the dense reader is at Figure with 195–209 new passages (ledger L40).
+
+**Not shown.** That the answer is good: no cut ranks the absent set against the reader, attachment is by byte distance when no entity is shared, and no person's thread was used. B stays at Ground for every ask (held 3–8, null not beaten).
+
+### Results: the grain experiment, fourth registration (the order of what is new, one run, 2026-10-14)
+
+Pre-registration `eval/callimachus/GRAIN-R4-PREREG.md`, runner `eval/callimachus/grain-rank-r4.mjs` (committed `04ffe8f3` before the run), outputs local only `callimachus-runs/grain-r4-2026-10-14/` (`results.json`, `results.blind.html`, and a withheld `results.key.json`). Change: `foldGrain({ anchor: "shared-most" })` and a span `rank` (the ladder's perception + logos score with the reader's prior); defaults unchanged.
+
+| | prediction | result |
+|---|---|---|
+| R1 | the anchors spread, never worse | **falsified**: dense 6 → 7 (House ask), 8 = 8, 5 = 5, 9 = 9; of 19 re-dealt readers 12 better, 5 equal, **2 worse** (8 → 7) |
+| R2 | the order is the ladder's (non-increasing rank) | holds (a property of the code) |
+| R3 | nothing else moves (grain, set of new passages, other cells) | holds |
+| R4 | the user prefers the ranked, spread list in at least 3 of 4 asks, blind | **pending**: `results.blind.html` |
+
+**Reported.** Kendall tau between activation order and the ladder's order: 0.945, 0.974, 0.988, 0.928; top five shared: 4, 5, 5, 5 of 5. The ladder's richer score barely reorders the new passages (L42): the order problem is not solved by the witnesses the ladder already has. What is left is a signal that is not relevance to the ask.
+
+### Results: the grain experiment, fifth registration (relevance as belief movement, three runs, 2026-10-14)
+
+Pre-registration `eval/callimachus/GRAIN-R5-PREREG.md` (amendments 1–2), organ `organs/belief-movement.js`, runner `eval/callimachus/grain-belief-r5.mjs` (committed `18f848c4` before run 1), outputs local only `callimachus-runs/grain-r5-2026-10-14/` (`results.json`, `.run2.json`, `.run3.json`). Relevance is how far a passage moves the reader's belief about the question's slot (`bayes-surprise.js`, zero only if nothing moved), laid down greedily and cut by `dmdWindow` where the conclusion stops changing.
+
+| | prediction | result |
+|---|---|---|
+| B1, B2 | (dense reader) the cut cuts; not activation in disguise | falsified as registered and **uninformative**: 0 of the 45 new spans carried a value; the reader holds the answer by construction |
+| B3 | "not nothing" as a property | holds |
+| B4 | the deliberative ask has an empty list | holds |
+| C1 | (void reader, House ask) window shorter than the carrying set | **holds** (4 carrying, window 3, 88 context) |
+| C2 | not activation order | **holds** (τ = 0, n = 4: weak) |
+| C3 | the cut cuts for re-dealt readers | **holds** (14 of 14) |
+| C5 | the person fix fills the "Who opposes…?" list | **falsified**: 0 of 387 candidates carry an *oppose* predicate (verified) |
+
+**What the void reader is shown for the House ask.** Four passages carry a year for the House passing; three are inside the window: "In 2026 … the House passed a reintroduced version" (answer none → 2026), "A similar version of the Sunshine Protection Act passed the Senate in 2022" (the biggest mover, 0.44 bits: a rival date, so the answer is contested), "On July 14, 2026, the House passed …" (back to 2026). A second 2026 statement is beyond the window: it strengthens and changes nothing. The other 88 passages move exactly nothing about the answer.
+
+**Limits found.** The slot cannot tell which agent passed (the Senate-2022 passage counts because the Act is the subject and the predicate matches). The person slot is empty because the record's reading has no *oppose* claim. A tie broke alphabetically in runs 1–2 (amendment 2). The dense reader is vacuous here. L43.
+
+### Results: the grain experiment, sixth registration (the agent in the slot, one run, 2026-10-14)
+
+Pre-registration `eval/callimachus/GRAIN-R6-PREREG.md`, runner `eval/callimachus/grain-belief-r6.mjs` (committed `5b246b4b` before the run), outputs local only `callimachus-runs/grain-r6-2026-10-14/`. The question's agent is the head of the root's `nsubj` in its own UD parse (in-repo parser; nothing installed); a passage carries a value for the slot only if its subject surface names that agent.
+
+| | prediction | result |
+|---|---|---|
+| D1 | the Senate-2022 passage is context for the House ask | **holds** |
+| D2 | the answer is 2026 and uncontested, void reader | **holds** (2026 × 3, no rival) |
+| D3 | every carrier's subject names the agent (property) | **holds** |
+| D4 | the cut still cuts | **holds** (3 carrying, window 1) |
+
+**Reported.** House ask: 4 carriers before, 3 after; 1 lost to the agent rule, 0 to a pronoun or missing subject. Senate ask: 2 carriers, both with a Senate subject. The list for the House ask is now: one passage that sets the answer ("In 2026 … the House passed a reintroduced version"), then two that strengthen it and change nothing.
+
+**Limit found (L44).** For "Did the Senate pass the bill?" the biggest mover is "In 2015, the **Nevada** Senate passed Nevada Assembly Joint Resolution 4": the subject names *Senate*, so it carries, but it is a different body and a different measure. The patient ("the bill") is not in the slot.
+
+### Results: the seventh registration (referents by whole capitalised run, two runs, 2026-10-14)
+
+The user's observation: the referents are not merging correctly on the Senate problem. **Cause, verified in the code and the record:** `referentsIn` resolves a mention to any admitted referent whose surface occurs as a whole word inside it, so the one `Senate` referent absorbs the Nevada Senate, Senate Bill, Senate File, Senate Committee and Senate Republicans (21 distinct longer runs, 32 mentions), `House` another 21, `Standard Time` another 17 (Mountain, Eastern, Pacific). The Nevada atom's subject was the United States Senate's referent. Pre-registration `eval/callimachus/GRAIN-R7-PREREG.md` (amendment 1), opt-in `readCorpus({ referentMatch: "run", referentPrior })`, default byte-identical (E4).
+
+| | prediction | run 1 (closed class only) | run 2 (+ edge words the corpus shows are not names) |
+|---|---|---|---|
+| E1 | the Nevada Senate's subject is not the Senate | **holds** | **holds** |
+| E3 | 12 named phrases do not resolve to the shorter referent | **holds** (12/12 distinct; 12/12 merged under containment) | **falsified**: *Eastern Standard Time* → Standard Time (11/12 distinct) |
+| E4 | the default is byte-identical | **holds** | **holds** |
+| E2, E5 | the Senate ask drops the Nevada passage; the House ask is intact | vacuous / failed: upstream `b733f9af` cut candidates 387 → 230 (L46); no carriers in either mode | not re-asked |
+| E6 | fewer referents lost than 19 | (19 lost: the defect) | **holds** (13 lost; 40 of 53 kept) |
+| E7 | Daylight Saving Time and Standard Time return | no | **holds** |
+| E8 | no regression of E1, E3 | — | **falsified** (E3) |
+
+**Reported.** Claims that corroborate: 0 under containment, 5 under run 1, 2 under run 2 (the "House passed the Sunshine Protection Act" statements key together). Atoms whose referents changed: 97, then 59, of 573. Referents lost under run 2: Clinical Sleep Medicine, State Legislatures, National, Pennsylvania, World, Representative, Sleep Society, New Jersey, Orthodox, Georgia, Press, Till, Vern. True aliases (*U.S. Senate*, *United States Congress*) are **not** merged by name: licensing them is identity-induction's job, not built here.
+
+**What this says.** Containment is wrong in both directions; whole-run equality fixes the false merges but over-splits at capitals, and the repair by lowercase attestation and POS brings back one false merge (a proper adjective that is also an ordinary one). The evidence-based answer is identity-induction over the two surfaces' contexts, not a longer rule. L45, L46, L47.
+
 ### The whom can be any pinned corpus
 
 **[H3] The second argument can be any pinned corpus with a null.** The same operation with a different W:
@@ -823,3 +1001,20 @@ Retire `DECLARED_FORM`, `DEFAULT_ESSAY_BEATS`, the telling's paragraph-per-terra
 - **Cell organs** (`callimachus/cell-organs`): Kind, Atmosphere and Paradigm move from stand-ins to registered organs. §3.2's section, camp and period licences read whatever those organs admit, so this design waits on them rather than reading the stand-ins.
 - **Twin reader** (`callimachus/twin-reader`, PR scores-patch-points/khora#11): owns `organs/whom.js` and the ladder's `whom` option (W as bytes; held is dropped). Agreed 2026-10-14: this branch renamed its holdings to `organs/holdings.js` and left the ladder alone; seam-ledger.js and grain.js stay. One finding from that branch bears on the grain: its P3 ("a far reader gets more structure") was **falsified**, and post hoc, unregistered, the reader got the grain it *lacks* (a W holding figures was given ground back; a W holding ground was given figures). That is the natural first pre-registration for `foldGrain`, with an accumulating W (a reader who holds only the last fold is a 2-cycle).
 - **Drive eval** (`callimachus/drive-eval`): the form layer is admitted or not by that pre-registered harness, never by its own author's measure alone.
+
+### Seventh and eighth registrations, after the boundary fix (2026-10-14)
+
+`capitalisedRuns` now ends a run at clause punctuation (found through the eighth registration's missing `Nevada Senate` node). Re-run: the seventh registration's resolver is **unchanged** (573/573 atoms byte-identical; it receives subject phrases, not sentences), so the earlier statement that the bug had corrupted it was wrong (L49). Measured on the House ask under run mode: **0 carriers** (contains: 1), because "the US House of Representatives" is a different whole run than `House`: the disclosed alias cost, now seen on an answer. The eighth registration's re-run: the planted twin of `Senate` (23 / 23) is still not judged the same, so no "unbound" there is evidence of difference (L51); 0 of 84 pairs bound, 0 of 19 shuffles; and `U.S. Senate` was never a node because the sentence splitter ends the sentence after "U.S.", with or without a corpus-wide abbreviation set (L50, corrected: a dotted multi-letter abbreviation is not covered by the name-initial rule; 3 mentions on 2 pages, 0 whole in any sentence). L49, L50, L51.
+
+### Ninth registration and what it did to the eighth's reading (2026-10-14)
+
+A planted twin with no neighbourhood cannot be judged the same: the consequence test needs the nodes around the pair (R8's control and R9 run 1 both had two nodes). With a 22-node neighbourhood the twin is BOUND from 24 (French) and 48 (Pierre) mentions a half on *War and Peace*, never for Natásha; different names are never BOUND (0/18). The earlier "the instrument cannot say same at this size" (L51) is withdrawn and restated: inside R8's own 9-node set the `Senate`, `House`, `Congress`, `Standard Time` twins (23, 18, 13, 8 a half) are `idle` on the **weight** tests, so this record has too little reading of these names. And a pool-and-redeal shuffle is a power control (exchangeable halves), not a false-same null; R8's F4 is withdrawn as calibration. L51.
+
+### Tenth registration: power is a rate (2026-10-14)
+
+Over 19 random draws per size, the planted twin is judged the same in Pierre 3/19 (48 a half) and 13/19 (96), French 7/19 and 18/19, Natásha 3/19 and 2/19. R9's "smallest n bound" came from one deterministic draw and is withdrawn as a threshold. Natásha's consequence margin is negative at both sizes and does not grow with n: it is the name, not the sample; the cause is not diagnosed. About 96 mentions a half (≈190 in a node) is where two of three names reach 68–95%. L52.
+
+### Eleventh registration: more reading (2026-10-14)
+
+The record grew from 10 to 21 pages (11 of 15 listed URLs fetched, all Wikipedia). `Senate` 508, `Congress` 432, `House` 356 mentions: the planted twin binds at those sizes and different things stay apart (0 of 3). Every candidate alias is still unbound, but the long forms are small (`United States Senate` 55), and a twin of the candidate's own size (27 a half) binds in 0 of 19, so the unbound is silence, not a refusal. The long form needs about 190 mentions in text that writes it; Wikipedia's chamber pages say "the Senate". No alias is licensed or refused. L53.
+

@@ -28,6 +28,7 @@
 // RECURSION. A stage re-scores EVERY candidate with all layers up to it, so the lead of a bigger answer is chosen by more of the stack;
 // each stage reports whether its lead moved and which layer's witnesses moved it.
 import { logos } from "./logos.js";
+import { parseAddress } from "./pinax.js";
 import { chooseVariants } from "./pathos-variants.js";
 import { giverOf, giverSlot } from "./giver.js";
 export { giverOf };
@@ -74,7 +75,7 @@ export function candidatesOf(record, fixity) {
 }
 
 /** The witness table: one column per witness, one boolean or count per candidate. Columns are grouped by layer. */
-function witnesses(cands, { question, record, pointed = null }) {
+export function witnesses(cands, { question, record, pointed = null, askedSide = null }) {
   const focus = new Set(question.focus ?? []);
   const rel = stemOf(question.reading?.relation?.lemma);
   const qWords = new Set((question.reading?.words ?? []).filter((w) => w.length >= 4).map(stemOf));
@@ -85,7 +86,7 @@ function witnesses(cands, { question, record, pointed = null }) {
   const admitsOf = (a) => {
     const t = a._sentence ?? "";
     switch (admits) {
-      case "person": return named(a);
+      case "person": return named(a) || !!askedSide?.has(a.id);
       case "time": return hasDate(t);
       case "quantity": return hasNumber(t);
       case "position": return a.kind === "reported";
@@ -96,11 +97,15 @@ function witnesses(cands, { question, record, pointed = null }) {
   const frames = new Map((record.sources ?? []).map((s) => [s.id, null]));
   return {
     perception: {
-      anchor: cands.map((a) => (a.entities ?? []).some((e) => focus.has(e))),
+      // a claim perspectives.js read as stating a stance toward the topic (its alias surfaces) is about the topic, whatever referent id
+      // relations.js gave it; its predicate is on the asked pole and its holder is named
+      anchor: cands.map((a) => (a.entities ?? []).some((e) => focus.has(e)) || !!askedSide?.has(a.id)),
       // Figure grain (CON·Link): the question's figure ACTS in the claim — it is the relation's subject, not merely named in it.
-      actor: cands.map((a) => !!a.relation?.subj && focus.has(a.relation.subj)),
+      // When perspectives.js read the asked stance and found holders on the asked pole, the question is who HOLDS it: a claim of what the
+      // topic itself does (the topic as agent) is an effect, not an answer, so the topic acting counts for nothing there.
+      actor: cands.map((a) => !!a.relation?.subj && focus.has(a.relation.subj) && !(askedSide && askedSide.size && !askedSide.has(a.id))),
       admits: cands.map(admitsOf),
-      relation: cands.map((a) => !!rel && stemOf(a.relation?.pred) === rel),
+      relation: cands.map((a) => (!!rel && stemOf(a.relation?.pred) === rel) || !!askedSide?.has(a.id)),
       words: cands.map((a) => [...new Set([...contentWords(a._sentence ?? "")].map(stemOf))].filter((s) => qWords.has(s))),
       // POINTED (pointer-match.js): an index sentence that carries the question's figures led here, matched slot to slot against the
       // origin sentence. The index is the query; this sentence is the source it found.
@@ -123,7 +128,7 @@ const NO_PRIOR = Object.freeze({ m: 0, df: new Map() });
 /** Surprisal weight of a boolean column: −log2(share present). A witness every candidate carries says nothing (weight 0). */
 const surprisal = (col) => { const k = col.filter(Boolean).length; return k === 0 || k === col.length ? 0 : log2(col.length / k); };
 
-function scoreWith(cols, layers, n, prior = NO_PRIOR) {
+export function scoreWith(cols, layers, n, prior = NO_PRIOR) {
   const s = new Array(n).fill(0);
   const why = Array.from({ length: n }, () => ({}));
   if (layers.includes("perception")) for (const [name, col] of Object.entries(cols.perception)) {
@@ -139,7 +144,7 @@ function scoreWith(cols, layers, n, prior = NO_PRIOR) {
     }
     // INS (what kind may stand here) only qualifies a binding SIG or CON made: the kind witness counts for a candidate only when a
     // content witness (anchor, actor, relation, words) already ties it to what the question is about. A date alone answers no "when".
-    const bound = (i) => cols.perception.anchor[i] || cols.perception.pointed?.[i] || cols.perception.actor[i] || cols.perception.relation[i] || (cols.perception.words[i]?.length ?? 0) > 0;
+    const bound = (i) => cols.perception.anchor[i] || cols.perception.pointed?.[i] || cols.perception.stance?.[i] || cols.perception.actor[i] || cols.perception.relation[i] || (cols.perception.words[i]?.length ?? 0) > 0;
     const w = surprisal(col);
     col.forEach((v, i) => { if (v && (name !== "admits" || bound(i))) { s[i] += w; why[i][`perception.${name}`] = +w.toFixed(3); } });
   }
@@ -187,11 +192,26 @@ export function cornerOf({ evidence, contest, denies = false }) {
 
 // ---- the ladder ---------------------------------------------------------------------------------------------------------------------
 
-export async function answerLadder(record, { question, slice, grammar, telling = null, fixity = {}, seed = 20261014, whom = VOID_READER, pointed = null } = {}) {
+export async function answerLadder(record, { question, slice, grammar, telling = null, fixity = {}, seed = 20261014, whom = VOID_READER, pointed = null, perspectives = null } = {}) {
   const reading = whom && !whom.empty;
   const experiencer = requireExperiencer({ who: "the asker", read: reading ? `${question.id} over ${record.sources.length} pinned pages, for a reader holding ${whom.size} units (${whom.pinax.join(", ")})` : `${question.id} over ${record.sources.length} pinned pages`, revision: null });
   const realize = realizer(record, { slice, grammar });
-  const all = candidatesOf(record, fixity);
+  let all = candidatesOf(record, fixity);
+  // STANCE (perspectives.js): a claim whose holder sits on the OPPOSITE pole of what the question asked ("who opposes …" ← a supporter's
+  // quote) is not an answer while any candidate sits on the asked pole. Typed, never silent; with no asked-pole holder nothing is dropped.
+  const wrongSide = [];
+  let askedSide = null;
+  if (perspectives?.positions?.length) {
+    const within = (a, row) => { try { const x = parseAddress(a.span), y = parseAddress(row.span); return x.pinax === y.pinax && x.start < y.end && y.start < x.end; } catch { return false; } };
+    // a sentence can hold both poles ("Reyes approved it, but Lopez opposed it"): it is on the wrong side only when every holder in it is
+    const polesOf = (a) => new Set(perspectives.positions.filter((row) => (!row.option || row.option === "topic") && within(a, row)).map((row) => row.pole));
+    askedSide = new Set(all.filter((a) => polesOf(a).has("+")).map((a) => a.id));
+    if (askedSide.size) {
+      const keep = [];
+      for (const a of all) { const ps = polesOf(a); (ps.size && !ps.has("+") ? wrongSide : keep).push(a); }
+      if (wrongSide.length) all = keep;
+    }
+  }
   // The reader's population: what this reader does not already hold. Held candidates are dropped, typed, with the W bytes that hold them.
   const held = [];
   const cands = [];
@@ -202,7 +222,7 @@ export async function answerLadder(record, { question, slice, grammar, telling =
   const prior = reading ? { m: whom.size, df: whomStemDf(whom) } : NO_PRIOR;
   const told = (ss) => (reading ? ss.filter((s) => !sentenceHeld(whom, s)) : ss);
   const n = cands.length;
-  const cols = witnesses(cands, { question, record, pointed });
+  const cols = witnesses(cands, { question, record, pointed, askedSide });
   const frameOf = new Map();
   for (const a of record.atoms) if (a.frame_id) frameOf.set(a.pinax, a.frame_id);
 
@@ -223,7 +243,14 @@ export async function answerLadder(record, { question, slice, grammar, telling =
     if (!sayCache.has(k)) { const r = await realize(propOf(a, v)); const s = r.sentence ?? null; if (s) { s.via = urlOf.get(a.pinax) ?? null; s.variant = v; } sayCache.set(k, s); }
     return sayCache.get(k);
   };
-  const say = (a) => sayVariant(a, 0);
+  // The first LAWFUL construction: variant 0 is preferred, and a giver the first cannot open on (a lowercase class holder: "experts" cannot
+  // begin a sentence, PL1) falls through to a construction that opens on a frame word ("Per experts, …"). A quotation has one construction.
+  const say = async (a) => {
+    const first = await sayVariant(a, 0);
+    if (first || propOf(a).type !== "attributed") return first;
+    for (let v = 1; v < nVariants; v++) { const s = await sayVariant(a, v); if (s) return s; }
+    return null;
+  };
   // Every lawful construction of a candidate (a quotation has one).
   const variantsOf = async (a) => {
     if (propOf(a).type !== "attributed") { const s = await sayVariant(a, 0); return s ? [s] : []; }
@@ -264,14 +291,14 @@ export async function answerLadder(record, { question, slice, grammar, telling =
   const denies = (lead) => negOnly || (question.form === "polar" && lead?.relation?.polarity === "-");
   const nothing = async () => { const s = grammar.constructions.nothing_carries ? grammar.finish(grammar.constructions.nothing_carries({}), [question.id]) : null; return s && !lintSentence(s, grammar).length ? [s] : []; };
   // The reader already holds everything that carries the question: for this reader the void is held, not empty.
-  const allHeld = reading && evidence <= 0 && held.length > 0 && Math.max(0, ...scoreWith(witnesses(all, { question, record, pointed }), ["perception"], all.length).s) > 0;
+  const allHeld = reading && evidence <= 0 && held.length > 0 && Math.max(0, ...scoreWith(witnesses(all, { question, record, pointed, askedSide }), ["perception"], all.length).s) > 0;
   if (evidence <= 0) {
     const s = allHeld && grammar.constructions.already_held ? (() => { const x = grammar.finish(grammar.constructions.already_held({}), [question.id]); return lintSentence(x, grammar).length ? [] : [x]; })() : await nothing();
     const why = allHeld ? `held: every candidate that carries the question is already in this reader's W (${held.length} held)` : "no candidate carries any perception witness: the question's figures, kind, relation and words are absent from the record (a question in another language than the record's needs a bilingual lexicon, which is not on disk)";
     const corner = cornerOf({ evidence, contest: null });
     for (const [i, size] of ["line", "paragraph", "brief"].entries()) stages.push({ stage: i + 1, size, layers: ["perception", "logos", "pathos"].slice(0, i + 1), lead: null, verdict: corner.verdict, corner, why, sentences: s, ...(i === 1 ? { contest: { verdict: null, margin: null, bar: null, why: "not run: there is no candidate to adjudicate" } } : {}), ...(i === 2 ? { experiencer, strain: "report", sides: 0, rhythm: { flatline: false, ratio: 0, n: 0 } } : {}) });
     stages.push({ stage: 4, size: "dossier", layers: ["perception", "logos", "pathos", "cube"], sentences: (telling?.cells ?? []).flatMap((c) => c.sentences ?? []) });
-    return { question: { id: question.id, form: question.form, admits: question.reading?.admits, modality: question.modality, focus: question.focus, undeclared: question.undeclared.map((u) => u.field) }, candidates: n, stages, ...(reading ? { reader: readerReport(whom, all.length, held, stages) } : {}) };
+    return { question: { id: question.id, form: question.form, admits: question.reading?.admits, modality: question.modality, focus: question.focus, undeclared: question.undeclared.map((u) => u.field) }, candidates: n, ...(askedSide ? { asked_side: askedSide.size } : {}), ...(wrongSide.length ? { wrong_side: wrongSide.map((a) => ({ atom: a.id, why: "holder on the opposite pole of the asked stance (perspectives.js)" })) } : {}), stages, ...(reading ? { reader: readerReport(whom, all.length, held, stages) } : {}) };
   }
   const line = await pick(p1.s, 1);
   const bar1 = marginNull(cols, ["perception"], n, { seed, prior });
@@ -341,7 +368,7 @@ export async function answerLadder(record, { question, slice, grammar, telling =
   // STAGE 4 — the whole cube: the telling. STAGE 5 (the claim sheet) is every atom, rendered by the claim-sheet lens.
   stages.push({ stage: 4, size: "dossier", layers: ["perception", "logos", "pathos", "cube"], sentences: (telling?.cells ?? []).flatMap((c) => c.sentences ?? []) });
 
-  return { question: { id: question.id, form: question.form, admits: question.reading?.admits, modality: question.modality, focus: question.focus, undeclared: question.undeclared.map((u) => u.field) }, candidates: n, stages, ...(reading ? { reader: readerReport(whom, all.length, held, stages) } : {}) };
+  return { question: { id: question.id, form: question.form, admits: question.reading?.admits, modality: question.modality, focus: question.focus, undeclared: question.undeclared.map((u) => u.field) }, candidates: n, ...(askedSide ? { asked_side: askedSide.size } : {}), ...(wrongSide.length ? { wrong_side: wrongSide.map((a) => ({ atom: a.id, why: "holder on the opposite pole of the asked stance (perspectives.js)" })) } : {}), stages, ...(reading ? { reader: readerReport(whom, all.length, held, stages) } : {}) };
 }
 
 /** What the reader changed: the population before and after, every held drop with its W address, and the told sentences that W held. */

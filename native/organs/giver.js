@@ -9,6 +9,8 @@
 //   isIndex(record, pinaxId)    an encyclopedia page: a pointer to a source, never one
 export function giverOf(a, record) {
   const src = (record.sources ?? []).find((s) => s.id === a.pinax);
+  // a STANCE atom (perspectives.js stanceAtoms) is cited to the holder whose address it carries: the page's author only reports it
+  if (a.why_kind === "stance" && a.giver?.surface_verbatim && a.giver.surface) return { kind: "speaker", names: [{ name: a.giver.surface_verbatim, address: a.giver.surface }], ...(/^\p{Ll}/u.test(a.giver.surface_verbatim) ? { class: true } : {}) };
   if (a.why_kind === "quotation" && a.giver?.surface && !a.giver.pronoun && /^\p{Lu}/u.test(a.giver.surface_verbatim ?? "")) return { kind: "speaker" };
   const by = src?.byline;
   if (!by) return { kind: "unread", note: "no byline was read for this page: nothing excludes it (a record built before byline.js)" };
@@ -23,5 +25,6 @@ export function giverSlot(g) {
   const names = (g.names ?? []).map((x) => (x.address ? { span: x.address } : { text: x.name }));
   if (!names.length) return null;
   const top = names.slice(0, 2), rest = names.length - top.length;
-  return { names: top, ...(rest > 0 ? { rest: { count: rest } } : {}), kind: g.kind };
+  // a CLASS holder ("experts", "supporters") is a plural noun phrase: number agreement and the possessive follow that
+  return { names: top, ...(rest > 0 ? { rest: { count: rest } } : {}), ...(g.class ? { plural: true } : {}), kind: g.kind };
 }
