@@ -40,9 +40,10 @@ test("no hand-set threshold: clauses hold no number, and alpha is the one declar
 
 test("unwired is failing: an instrument that is named must exist, and a row for an unwired facet is ignored", () => {
   for (const f of FACETS.filter((x) => x.instrument)) assert.ok(fs.existsSync(path.join(ROOT, f.instrument)), `${f.clause}.${f.id}: ${f.instrument} must exist`);
-  const rows = [{ clause: "J1", facet: "no-egress", value: 0, null: 1, p: 0.001, n: 100, controlRejected: true, at: "2026-10-13" }];
+  // `no-slower` has no instrument (no-egress and small-model-only gained cli/cennini-local.mjs on 2026-10-13)
+  const rows = [{ clause: "J1", facet: "no-slower", value: 0, null: 1, p: 0.001, n: 100, controlRejected: true, at: "2026-10-13" }];
   const rep = judge(end, rows);
-  const f = rep.clauses[0].facets.find((x) => x.id === "no-egress");
+  const f = rep.clauses[0].facets.find((x) => x.id === "no-slower");
   assert.equal(f.verdict, "gap");
   assert.match(f.why, /unwired/);
   assert.equal(f.ignoredRows, 1);

@@ -2778,3 +2778,16 @@ Falsifying control: a routed resolver that beats the prior alone on short and
 middle asks at the floor supersedes this; a wired prior whose switch-on changes
 no ladder verdict is "noticed, not learned".
 
+## 111. A rate measured in one serving environment is that environment's rate (2026-10-13)
+The ladder gave the door alone 1 of 12 passes at 80-140 s a call with two empty
+draws per panel; a batch hours later, same panel and model, gave 3 of 6 at 5-22 s
+with none. Whatever moved (residency, contention, an eviction, a door change) was
+not recorded, so the absolute door-alone rate cannot be carried across batches.
+What does carry is the paired structure inside a batch: the same draw graded at
+each rung (receive won 5 of 12, then 1 of 6, harming none). Rules: every ladder
+record keeps `door.served` (who answered, where) and `door.ms`; a headline number
+names its batch; a comparison across batches is not a comparison.
+Falsifying control: two batches whose serving records and latencies match and
+whose door-alone rates still differ by more than the paired draw floor
+supersedes this and sends the search to the prompt or the panel.
+
