@@ -13,7 +13,10 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { makePinax, checkFixity, quoteOf, makeSpan, parseAddress, SIGLA } from "../organs/pinax.js";
 import { readCorpus, claimSheet, dossier, extractText, declaredOf, queriesFrom } from "../organs/callimachus.js";
-import { answerLadder } from "../organs/answer-ladder.js";
+import { answerLadder, candidatesOf, seamsByStage } from "../organs/answer-ladder.js";
+import { readWhom, restrictWhom, VOID_READER } from "../organs/whom.js";
+import { dmdWindow } from "../kernel/activation.js";
+import { readdirSync, statSync } from "node:fs";
 import { questionVoid } from "../organs/question-void.js";
 import { interpret, cubeTelling, renderMarkdown, renderPlain, readingOrder, LAWS } from "../organs/cube-telling.js";
 import { parseSearchResults, WEB_UA, WEB_FETCH_TIMEOUT_MS, BLOCKED_STATUSES, looksLikeChallenge } from "../organs/web.js";
@@ -29,6 +32,9 @@ const searchN = Number(opt("--search") ?? 0);
 const replay = args.includes("--replay");
 // --lang: the grammar the telling is realized in (adapters/text/telling-grammar.<lang>.js). The record is the same in every language.
 const langs = (opt("--lang") ?? "en").split(",");
+// --whom PATH (repeatable; a file or a directory of files): the reader-state corpus W, the fold's second operand (organs/whom.js). Read
+// from local files only, pinned like any source, never fetched or sent. No --whom, or an empty directory, is the void reader (W = ∅).
+const whomPaths = all("--whom");
 if (!question) { console.error("--question is required"); process.exit(2); }
 mkdirSync(join(out, "layers"), { recursive: true });
 
@@ -94,11 +100,12 @@ if (replay) {
 const store = Object.fromEntries(records.map((r) => [r.entry.id, r]));
 const record = readCorpus(records, { question, absences });
 const interp = interpret(record, { textOf: (id) => (store[id] ? new TextDecoder().decode(store[id].layers.text) : null) });
-record.collection = { seeds, rounds_run: searchN > 0 ? 1 : 0, stop: "budget: round 0 only (targeted, gap and saturation rounds are increment E, not built)" };
+record.collection = replay ? JSON.parse(readFileSync(join(out, "record.json"), "utf8")).collection : { seeds, rounds_run: searchN > 0 ? 1 : 0, stop: "budget: round 0 only (targeted, gap and saturation rounds are increment E, not built)" };
 
-// Fixity, live: refetch every source and check one span per source (its incipit) on both axes.
-const verdicts = {};
-for (const rec of records) {
+// Fixity, live: refetch every source and check one span per source (its incipit) on both axes. A replay reuses the pinned verdicts:
+// refetching would make the replay depend on today's web, and the lenses read fixity.
+const verdicts = replay ? { ...(JSON.parse(readFileSync(join(out, "record.json"), "utf8")).fixity ?? {}) } : {};
+if (!replay) for (const rec of records) {
   const r = await get(rec.entry.url);
   let current = null;
   if (r.ok) {
@@ -162,6 +169,12 @@ writeFileSync(join(out, "telling.addressed.json"), JSON.stringify({ pinax: told.
 writeFileSync(join(out, "telling.json"), JSON.stringify({ measures: M, interp: { facets: interp.facets.map((f) => ({ ...f, atoms: f.atoms.length })), kinds: interp.kinds, grounds: interp.grounds, atmosphere: interp.atmosphere, frames: interp.frames, paradigm: interp.paradigm, testimony: Object.values(interp.testimony).reduce((m, t) => ((m[t.case] = (m[t.case] ?? 0) + 1), m), {}) } }, null, 1));
 // ANSWERS: each --ask read by its language's grammar (NL → grammar → EOT), declared as a void, answered at every stage.
 const asks = all("--ask").length ? all("--ask") : [question];
+// THE READER: W's files, in path order then name order, each pinned with makePinax under whom:<name>. Thread order = file order, then block.
+const whomFiles = whomPaths.flatMap((p) => (statSync(p).isDirectory() ? readdirSync(p).filter((f) => !f.startsWith(".")).sort().map((f) => join(p, f)) : [p]));
+const whomPinned = await Promise.all(whomFiles.map(async (f) => { const raw = readFileSync(f); return makePinax({ url: `whom:${f.split("/").pop()}`, raw: new Uint8Array(raw), text: raw.toString("utf8"), extractor: { name: "whom: local file, read as UTF-8" } }); }));
+const whom = readWhom(whomPinned);
+const folds = [];
+const creaseOf = (lad) => ({ leads: lad.stages.slice(0, 3).map((st) => st.lead?.atom ?? null), copied: [...new Set(lad.stages.slice(0, 3).flatMap((st) => st.sentences.flatMap((s) => s.segs.filter((x) => x.kind === "source").map((x) => x.address))))].sort() });
 const answerMd = [];
 const ladders = [];
 let parserModel = null;
@@ -172,7 +185,21 @@ for (const ask of asks) {
     const reading = qg.readQuestion(ask, { model: parserModel });
     const qv = questionVoid(reading, record);
     const t = l === langs[0] ? telling : await cubeTelling(record, { slice, interp, fixity: verdicts, grammar: grammars[l] });
-    const lad = await answerLadder(record, { question: qv, slice, grammar: grammars[l], telling: t, fixity: verdicts });
+    const { reader, ...lad } = await answerLadder(record, { question: qv, slice, grammar: grammars[l], telling: t, fixity: verdicts, whom });
+    // The DMD window over the READER: the shallowest depth of recent thread that reproduces the whole-W fold (depth 0 = the void reader).
+    // The ladder is async and dmdWindow's derive is not, so each depth's fold is computed in order until one agrees, then measured.
+    let dmd = null;
+    if (!whom.empty) {
+      const cache = new Map([[whom.size, JSON.stringify(creaseOf(lad))]]);
+      for (let d = 0; d < whom.size; d++) {
+        const r = await answerLadder(record, { question: qv, slice, grammar: grammars[l], telling: t, fixity: verdicts, whom: restrictWhom(whom, d) });
+        cache.set(d, JSON.stringify(creaseOf(r)));
+        if (cache.get(d) === cache.get(whom.size)) break;
+      }
+      // The whole thread is the last candidate: if no shallower depth agrees, the window is all of it.
+      dmd = dmdWindow(whom.units, (units) => cache.get(units.length), { candidates: [...cache.keys()].sort((a, b) => a - b) });
+    }
+    folds.push({ ask, lang: l, whom: whom.empty ? "void reader (W = ∅)" : { units: whom.size, pinax: whomPinned.map((r) => ({ id: r.entry.id, url: r.entry.url, text_sha256: r.entry.text.sha256 })) }, seams: seamsByStage(lad.stages), crease: creaseOf(lad), ...(reader ? { reader } : {}), ...(dmd ? { dmd } : {}), candidates: candidatesOf(record, verdicts).map((a) => ({ atom: a.id, sentence: a._sentence })) });
     ladders.push({ ask, lang: l, ...lad, stages: lad.stages.map(({ sentences, ...st }) => ({ ...st, text: sentences.map((s) => s.text), segments: sentences.map((s) => s.segs.map((x) => ({ kind: x.kind, text: x.t, ...(x.address ? { address: x.address } : {}) }))) })) });
     for (const s of lad.stages.flatMap((st) => st.sentences)) for (const g of s.segs) if (g.address && !ctx[g.address]) {
       const p = parseAddress(g.address); const rec = store[p.pinax]; if (!rec) continue; const L = rec.layers[p.layer]; const dec = new TextDecoder();
@@ -189,6 +216,7 @@ for (const ask of asks) {
   }
 }
 writeFileSync(join(out, "answers.json"), JSON.stringify(ladders, null, 1));
+writeFileSync(join(out, "folds.json"), JSON.stringify(folds, null, 1));
 writeFileSync(join(out, "answers.md"), answerMd.join("\n"));
 writeView(join(out, "view.html"), { Answers: answerMd.join("\n"), Telling: tellingMd, ...Object.fromEntries(langs.slice(1).map((l) => [`Telling (${l})`, readFileSync(join(out, `telling.${l}.md`), "utf8")])), Dossier: dos.text, "Claim sheet": sheet.text }, ctx);
 const strip = (a) => { const { _sentence, _object, ...rest } = a; return rest; };

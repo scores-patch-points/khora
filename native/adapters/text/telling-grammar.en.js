@@ -65,6 +65,7 @@ export const CONSTRUCTIONS = {
   both_weigh: ({ a, b }) => [F("Two readings weigh the same here: "), ...a, F("; and "), ...b, F(".")],
   both: ({ a, b }) => [F("The record cannot choose between two readings: "), ...a, F("; or "), ...b, F(".")],
   nothing_carries: () => [F("Nothing in this record carries what the question asks: none of its figures, kind of answer, relation or words appear in the pages.")],
+  already_held: () => [F("Everything in this record that carries what the question asks has already been shown to this reader.")],
   said: ({ who, verb, quote }) => [who, F(" "), verb, F(", "), ...q(quote)],
   said_that: ({ who, verb, clause }) => [who, F(" "), verb, F(" that "), clause, F(".")],
   collapses: ({ pairs }) => [n(pairs), F(` ${pick(pairs, "pair", "pairs")} of pages that look separate share their wording or cite each other, and each pair counts once.`)],

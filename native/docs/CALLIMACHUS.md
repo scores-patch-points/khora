@@ -474,3 +474,70 @@ node native/scripts/clause-witness-agreement.mjs --out 3.0/callimachus-runs/camb
 node native/scripts/claim-realize-measure.mjs --out 3.0/callimachus-runs/cambio-hora-es --lang es   # 0: the typed refusal
 node --test native/adapters/text/clause-spans.test.mjs native/organs/claim-realize.test.mjs
 ```
+
+## 13. The reader as the second operand: the twin-reader experiment (2026-10-14)
+
+The question, from the user's essay *The Prompt Is a Crease*: is the reader-state corpus W the second operand of every fold? If so, salience, novelty and the DMD boundary are relations between the universe and W, not properties of the source. Pre-registered in `eval/callimachus/TWIN-READER-PREREG.md` (commit `68f652ff`). The mechanism and the harness were frozen in `f4ac1238`, before the run. Results are in `eval/callimachus/twin-reader.results.json`. W's bytes are not committed; only their sha256s are.
+
+### What was built
+
+| Where | What |
+|---|---|
+| `organs/whom.js` (new, pure) | `readWhom(pinned)`: W is bytes. Its files are pinned with `makePinax` under `whom:<name>`, and its units are blank-line blocks in thread order, each addressed into W's own text layer. `VOID_READER` is W = ∅. Also `heldIn`, `sentenceHeld`, `restrictWhom` and `seamsOf`. |
+| `organs/answer-ladder.js` | `whom` option. A candidate whose span bytes W holds is **held**: surprisal −log2 1 = 0, so it leaves the population and is dropped with its W address. Every witness's base rate becomes the share among what is new to this reader. The question-word witness also counts W's units in its document frequency. The margin null is drawn over the same population, and a told cell sentence W holds is not told again. If every candidate that carries the question is held, the void is *held* (construction `already_held`, en + es), which is different from empty. |
+| `organs/claim-realize.js` | **Net new** for a reader: the null is the source clause **plus W**. `novelty.newForWhom` and `novelty.heldByWhom` are reported. |
+| `scripts/callimachus-run.mjs` | `--whom PATH` (repeatable, local files only). `folds.json` holds per ask: **seam density per stage, reported first**, the crease, the reader's drops, and the **DMD window over W**. That is `dmdWindow` with the thread's units as observations and the fold as the conclusion: the shallowest depth of recent thread that reproduces the whole-W fold. `--replay` now reuses the pinned fixity (the drive-eval fix). |
+
+With W = ∅ every measure reduces to the source-relative one, and `answers.json` keeps its exact bytes. Seams and the reader go in `folds.json`, never into the answer.
+
+### Results: `permanent-dst`, "When did the House pass the Sunshine Protection Act?"
+
+There are 387 candidates, 59 of which carry "House" or "Senate". The dense W is one turn plus those 59 sentences (60 units). It held 61 candidates, because two quote spans sit inside held sentences.
+
+| | prediction | result |
+|---|---|---|
+| P1 | the folds differ | **holds** |
+| P2 | the dense reader's lead is absent from their W | **holds** at all three stages (a check of the byte test, as registered) |
+| P2b | the dense line still answers: a content witness and `admits` | **holds as registered**, but see the caveat below |
+| P3 | the far reader's brief is more structural than the near reader's | **falsified**: void 5/10 = 0.50, dense 5/8 = 0.625 |
+| P4 | W = ∅ is today's output, byte for byte | **holds**: all 8 files, all 5 asks, en + es, for both no `--whom` and an empty `--whom` dir, against base `3b084a80` + the replay hunk |
+| P5 | crease movement beats re-dealt W | **holds**: d = 0.5625 against a null max of 0.2857 (19/19 draws; 7 draws moved it 0) |
+| P6 | B reads A's fold, asks again: the fold changes again | **holds**: d = 0.9412 against a null max of 0.1538 (19/19); B's lead is not quoted in A |
+| P7 | a function of W | **holds**: two dense runs are byte-identical in `answers.json` and `folds.json` |
+
+**The three lines:**
+- **void**: "On July 14, 2026, the House passed a Sunshine Protection Act bill backed by President Trump." (en.wikipedia.org)
+- **dense**: "The Sunshine Protection Act was first introduced in 2018 by U.S." The lead moved to Opponents… at the paragraph.
+- **B**: "In July, the House passed a bill with bipartisan support…" (time.com). This is a House-passage claim the void reader was never shown.
+
+**Reported, not predicted:**
+- **DMD window.** Dense: 45 of 60 units. The oldest 15, the turn and the first 14 shown sentences, make no difference to the fold. B: 10 of 14.
+- **Seam density** (seams per word, line/paragraph/brief):
+
+  | reader | line | paragraph | brief |
+  |---|---|---|---|
+  | void | 0.154 | 0.115 | 0.138 |
+  | dense | 0.182 | 0.126 | 0.160 |
+  | B | 0.077 | 0.099 | 0.108 |
+
+  B's fold is the most copied: 132 of 185 brief words are source bytes. No arm has a `self:model` word: no mouth is in this path.
+- **The chain.** C reads B's fold and asks again, and gets A's fold back exactly: a **2-cycle**. A reader who holds only the last fold oscillates between two creases. To walk forward, a reader must accumulate, so W must be the thread, not the last answer.
+
+### Falsified, or weaker than it looks (do not over-read these)
+
+- **P3, the scalar-distance reading of "near gets a figure, far gets a ground", is falsified.** The dense reader's brief is *more* structural, because its W held figures (59 single claims) and no ground. B's W held the void fold's ground sentences (tension, release), and B's brief came out 1 structural to 5 figures. Post hoc, unregistered: **what W holds decides which grain comes back. The reader gets the grain it lacks**, not the grain its distance predicts. Distance is not a scalar here. It is per grain. This needs its own pre-registration before it is claimed.
+- **P2b passes its letter, not its spirit.** The dense line carries a date (`admits`) and the Act (anchor), but it tells *when the Act was introduced*, not when the House passed it. Every House-passage claim is held, so the honest answer for this reader is "you already hold that". `already_held` fires only when **no** candidate carries any witness. The ladder has no notion that the question's *relation* is exhausted while its anchor is not. Also, the line's sentence is cut at "U.S." by the sentence splitter, a defect older than this work.
+- **P2 is guaranteed by construction** (held candidates leave the population). It tests the byte test, nothing more.
+- **One universe, one question.** The passes are an existence proof that W moves the crease and that the movement follows what W holds (P5, P6 against re-dealt W). They are not a rate.
+
+### Hand-set constants this adds (for §7)
+
+None in the mechanism: held is exact containment, and base rates are −log2(share). In the experiment: 19 null draws (the fewest for p ≤ 0.05), "most" of the House/Senate material taken as all of it, and the chain capped at 20 steps (it stopped at C).
+
+### Open
+
+- **Relation exhaustion.** Make the void *held* per declared slot, not only as a whole. If every carrier of the question's relation is held, the line should say so rather than fall to an anchor + date. Pre-register first.
+- **Grain-wise distance.** Pre-register "the reader gets the grain it lacks" on another universe and question, with W built to hold only ground versus only figures.
+- **Accumulating readers.** W = thread + every fold shown, and its trajectory against the 2-cycle.
+- `realizeClaim` is still not wired into the ladder, so the W-relative net new is exercised only by its unit test.
+- The dossier (stage 4, the 27-cell telling) is not yet folded for the reader. It stays the catalog.

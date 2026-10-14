@@ -6,6 +6,8 @@ import { fileURLToPath } from "node:url";
 import { realizeClaim, claimFromSentence, logosOrder, segmentClauses, readRows, readClause, omissionLedger, checkDisclosure } from "./claim-realize.js";
 import { loadModel, tokenize, tagSentence, tagSentenceAttested } from "../adapters/text/english-parser.js";
 import en from "../adapters/text/telling-grammar.en.js";
+import { readWhom } from "./whom.js";
+import { makePinax } from "./pinax.js";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const model = loadModel(JSON.parse(readFileSync(join(here, "../priors/parser-eng-ewt.json"), "utf8")));
@@ -181,4 +183,20 @@ test("another language returns a typed refusal: no bilingual lexicon, never a gu
   const r = await realizeClaim({ claim: { text: "The Senate passed the bill.", address: `${PX}#b0-27` }, lang: "es", witness: { pred: "passed" } }, { slice: sliceOf("The Senate passed the bill."), grammar: en, model });
   assert.equal(r.ok, false);
   assert.match(r.refusals[0].why, /bilingual lexicon/);
+});
+
+test("net new is reader-relative: an adjacency the reader's W already holds is not new to them (W = ∅: the source alone)", async () => {
+  const text = "In 2022, the Senate passed the bill by unanimous consent.";
+  const witness = { pred: "passed", subj: "the Senate" };
+  const passive = (r) => r.alternatives.find((a) => a.alternation === "passive");
+  const alone = passive(await run(text, witness));
+  assert.ok(alone.novelty.netNew && alone.novelty.newForWhom === undefined);
+  const shown = alone.text;
+  const W = readWhom([await makePinax({ url: "whom:t.md", raw: shown, text: shown, extractor: { name: "test" } })]);
+  const r = passive(await realizeClaim({ claim: { text, address: `${PX}#b0-${new TextEncoder().encode(text).length}` }, witness, whom: W }, { slice: sliceOf(text), grammar: en, model }));
+  assert.equal(r.text, shown, "the paraphrase itself is unchanged; only the gate reads the reader");
+  assert.equal(r.novelty.newForWhom, 0);
+  assert.equal(r.novelty.heldByWhom, alone.novelty.newAdjacencies);
+  assert.equal(r.novelty.netNew, false, "a reader who was already shown this paraphrase gets nothing net new from it");
+  assert.equal(r.ok, false);
 });
