@@ -60,6 +60,7 @@ export const CONSTRUCTIONS = {
   both_weigh: ({ a, b }) => [F("Dos lecturas pesan lo mismo aquí: "), ...a, F("; y "), ...b, F(".")],
   both: ({ a, b }) => [F("El registro no puede elegir entre dos lecturas: "), ...a, F("; o "), ...b, F(".")],
   nothing_carries: () => [F("Nada en este registro lleva lo que la pregunta pide: ni sus figuras, ni el tipo de respuesta, ni la relación ni sus palabras aparecen en las páginas.")],
+  already_held: () => [F("Todo lo que en este registro lleva lo que la pregunta pide ya se le mostró a este lector.")],
   said: ({ who, quote }) => [who, F(": "), ...qmid(quote), F(".")],
   said_that: () => null,
   collapses: ({ pairs }) => [n(pairs, "m"), F(` ${pick(pairs, "par", "pares")} de páginas que parecen distintas comparten su redacción o se citan entre sí, y cada par cuenta una sola vez.`)],

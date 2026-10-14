@@ -15,7 +15,8 @@
 //            are generated (was/were, by, according to, the participle); every content word is a copied span with its address.
 //   GATE     (1) the prose laws (prose-laws.js lintSentence + verifyWords); (2) REVERSE EQUATE — the output is parsed back and must
 //            recover the same predicate lemma and the same argument bytes in their new roles; (3) NET NEW, no constant — the source
-//            clause is its own null: at least one word adjacency the source never holds; (4) a needed verb form not attested in EWT is a
+//            clause is its own null, and so is the READER (organs/whom.js): at least one word adjacency that neither the source nor
+//            the reader's W holds (W = ∅: the source alone, as before); (4) a needed verb form not attested in EWT is a
 //            typed refusal, never a guessed inflection; (5) ANCHORS — every number and proper name of the clause is carried or disclosed
 //            as omitted (prosify.js's law); (6) LOGOS — the dependency order of what makes sense: no carried word outlives or outranks
 //            its head, and no predicate hangs on a non-predicate (see logosOrder and claimFromSentence).
@@ -258,8 +259,8 @@ export function logosOrder(sourceRows, outRows, { predId, exempt = new Set() } =
 
 /**
  * realizeClaim — the interface agreed with the Wald session (2026-10-14). `claim` is either a parsed claim (claimFromSentence) or
- * { text, address } of the source sentence to read. `grounds` are carried onto every sentence. `whom` is recorded, never used to change
- * the content. Only English realizes a paraphrase today; another language returns a typed refusal (no bilingual lexicon is on disk, and
+ * { text, address } of the source sentence to read. `grounds` are carried onto every sentence. `whom` (organs/whom.js) is the second
+ * operand of NET NEW: an adjacency the reader's W already holds is not new to them. It never changes the content, only the gate. Only English realizes a paraphrase today; another language returns a typed refusal (no bilingual lexicon is on disk, and
  * the claim's predicate is an English lemma).
  */
 export async function realizeClaim({ claim, grounds = [], lang = "en", whom = null, witness = null } = {}, { slice, grammar, model, forms = null } = {}) {
@@ -288,7 +289,10 @@ export async function realizeClaim({ claim, grounds = [], lang = "en", whom = nu
     const srcBi = bigrams(c.text);
     const fresh = [...bigrams(s.text)].filter((b) => !srcBi.has(b));
     const dm = runDMCA({ text: s.text, sources: new Map([["src", c.text]]), n: 6 });
-    const novelty = { newAdjacencies: fresh.length, examples: fresh.slice(0, 3), dmcaCopied6: dm.copied ?? 0, netNew: fresh.length > 0 };
+    // For a reader, the null is the source plus W: an adjacency W already holds is not news to them.
+    const reading = whom && !whom.empty && whom.bigrams;
+    const freshForWhom = reading ? fresh.filter((b) => !whom.bigrams.has(b)) : fresh;
+    const novelty = { newAdjacencies: fresh.length, examples: fresh.slice(0, 3), dmcaCopied6: dm.copied ?? 0, netNew: freshForWhom.length > 0, ...(reading ? { newForWhom: freshForWhom.length, heldByWhom: fresh.length - freshForWhom.length } : {}) };
     const outLow = s.text.toLowerCase();
     const omittedLow = (alt.omitted ?? []).join(" ").toLowerCase();
     const dropped = c.anchors.filter((a) => !outLow.includes(a.toLowerCase()) && !omittedLow.includes(a.toLowerCase()));

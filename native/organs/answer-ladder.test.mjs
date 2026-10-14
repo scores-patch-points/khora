@@ -7,6 +7,7 @@ import { makePinax, makeSpan, quoteOf, parseAddress } from "./pinax.js";
 import { readCorpus } from "./callimachus.js";
 import { interpret, cubeTelling, renderPlain } from "./cube-telling.js";
 import { answerLadder } from "./answer-ladder.js";
+import { readWhom, heldIn, VOID_READER } from "./whom.js";
 import { questionVoid } from "./question-void.js";
 import { lintSentence } from "./prose-laws.js";
 import en from "../adapters/text/telling-grammar.en.js";
@@ -96,4 +97,24 @@ test("omnilingual: the same record and ladder realize in Spanish; copied bytes s
   assert.ok(t.cells.filter((c) => c.status === "voiced").length >= 10);
   assert.match(renderPlain(t), /Qué se leyó/);
   for (const c of t.cells) for (const x of (c.sentences ?? []).flatMap((y) => y.segs.filter((g) => g.kind === "source"))) assert.equal(await slice(x.address), x.t);
+});
+
+test("the reader is the second operand: W = ∅ is the catalog exactly; a reader holding the lead gets a lead it does not hold", async () => {
+  const q = "Who approved the depot lease?";
+  const { record, slice, interp } = await setup();
+  const telling = await cubeTelling(record, { slice, interp, grammar: en });
+  const qv = questionVoid(qen.readQuestion(q, { model }), record);
+  const run = (whom) => answerLadder(record, { question: qv, slice, grammar: en, telling, ...(whom ? { whom } : {}) });
+  const strip = (l) => JSON.stringify(l, (k, v) => (k === "a" ? undefined : v));
+  const none = await run(null);
+  assert.equal(strip(await run(VOID_READER)), strip(none), "the void reader reproduces the ladder with no reader, byte for byte");
+  assert.equal(none.reader, undefined);
+  const leadAtom = record.atoms.find((a) => a.id === none.stages[0].lead.atom);
+  const leadBytes = await slice(leadAtom.span);
+  const W = readWhom([await makePinax({ url: "whom:t.md", raw: `Shown earlier:\n\n${leadBytes}`, text: `Shown earlier:\n\n${leadBytes}`, extractor: { name: "test" } })]);
+  const r = await run(W);
+  assert.ok(r.reader.held.some((h) => h.atom === leadAtom.id && h.reason === "held" && /#b\d+-\d+$/.test(h.at)), "the held lead is dropped, typed, with the W bytes that hold it");
+  assert.equal(r.candidates, none.candidates - r.reader.held.length);
+  for (const st of r.stages.slice(0, 3)) if (st.lead) assert.equal(heldIn(W, await slice(record.atoms.find((a) => a.id === st.lead.atom).span)), null, `stage ${st.stage}: the lead is not one the reader holds`);
+  assert.equal(strip(await run(W)), strip(r), "a function of W: the same holdings give the same fold");
 });
