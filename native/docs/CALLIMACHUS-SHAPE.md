@@ -198,6 +198,33 @@ Pre-registration `eval/callimachus/GRAIN-PREREG.md` (ratified, amendments 1–3)
 
 **Not shown.** Pattern was never reached. "The reader gets the grain it lacks" (G3) was not tested. Nothing here bears on the addendum's explanation of the cube's shuffle-survival.
 
+### Results: the W-reader experiment (permanent-dst, one run, 2026-10-14)
+
+Pre-registration `eval/callimachus/W-READER-PREREG.md`, script `eval/callimachus/w-reader-roundtrip.mjs` (committed `0ef9022e` before the run), output local only `callimachus-runs/w-reader-2026-10-14/results.json`. The reader's verbs are admitted only if they follow `minSurfaces` distinct capitalised surfaces; a short thread cannot clear that (the grain experiment's L35). Tested: a received POS prior as the admitter (R1), against the reader as it was (R0) and against the record's own earned vocabulary (R2, a ceiling, not a prior).
+
+| reader / W | claims | recall of the 92 region spans | precision | shuffled mean claims | shuffled / real |
+|---|---|---|---|---|---|
+| R0 / the 92 spans shown | 50 | 0.228 (21) | 0.46 | 45.4 | 0.91 |
+| R1 / the 92 spans shown | 58 | 0.304 (28) | 0.50 | 73.5 | **1.27** |
+| R2 / the 92 spans shown | 136 | 0.978 (90) | 0.71 | 125.3 | 0.92 |
+| R0 / twin-reader B (14 blocks) | 0 | 0.000 | n/a | 0.8 | n/a |
+| R1 / twin-reader B | 1 | 0.000 | 0.00 | 5.9 | 5.9 |
+| R2 / twin-reader B | 19 | 0.087 (8) | 0.63 | 19.3 | 1.01 |
+
+| | prediction | result |
+|---|---|---|
+| H1 | R1's recall exceeds R0's | **holds** (0.228 → 0.304) |
+| H2 | R1's shuffled/real ratio is no higher than R0's | **FALSIFIED** (0.91 → 1.27) |
+| H3 | R1 admits at least one claim from B | holds, trivially: 1 claim against a shuffled mean of 5.9 |
+| H4 | R1 does not lose precision | holds (0.46 → 0.50) |
+
+**What it says.**
+- **The prior as admitter inflates noise more than text.** It added 21 verbs, among them `did`, `was`, `should` (AUX counts as verb-dominant). Refusal worked: it removed 5 non-verbs (`all`, `as`, `from`, `if`, `through`) that recurrence alone had admitted. Ledger L37.
+- **The limit is verb admission, and the vocabulary the universe was read with carries it.** With the record's own earned verbs the reader recovers 90 of the 92 spans it was shown. That is not a prior: it is the engine's accumulated vocabulary, and for *contact* it is the correct reader, since a W verb outside the record's vocabulary could match no record claim anyway. The ceiling is not circular on the B file: 8 of 92 from 14 blocks.
+- **Counts are still not structure.** Even R2 admits 125 claims from shuffled text against 136 from real. The signal is the arrangement match to the region, which this experiment did not measure on the shuffles.
+
+**Not shown.** Whether a prior used only as a refuser (minSurfaces 2) beats R0; whether recall under shuffle collapses for R2 (the calibration the grain needs); anything about the grain with R2 as the W reader. Each is a new registration.
+
 ### The whom can be any pinned corpus
 
 **[H3] The second argument can be any pinned corpus with a null.** The same operation with a different W:
