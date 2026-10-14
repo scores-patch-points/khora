@@ -35,15 +35,32 @@ test("an index sentence is matched to its origin by typed slots, voice-normalise
   const a = slotsOf(claimFromSentence("The council approved the depot lease in March 2026.", "px#b0-1", { model }));
   const p = slotsOf(claimFromSentence("The depot lease was approved by the council in March 2026.", "px#b0-1", { model }));
   for (const role of ["pred", "agent", "patient"]) assert.ok([...a].some((k) => k.startsWith(role + ":") && p.has(k)), `${role} is shared across voices`);
-  const pointed = pointedAtoms(record, { model });
-  const hit = [...pointed.entries()].map(([id, v]) => ({ atom: record.atoms.find((x) => x.id === id), v }));
-  assert.ok(hit.length >= 1, "the origin sentence is found");
-  for (const h of hit) { assert.equal(h.atom.url, ORIGIN, "only the origin page is ever pointed at"); assert.ok(h.v.agree.length > h.v.runner_up); }
+  const { atoms, pages } = pointedAtoms(record, { model });
+  const originId = record.sources.find((x) => x.url === ORIGIN).id, decoyId = record.sources.find((x) => x.url === DECOY).id;
+  assert.ok(pages.has(originId) && !pages.has(decoyId), "the markup names the origin page and never the decoy");
+  assert.ok(pages.get(originId).covered.length >= 2, "the origin page's sentences cover at least two of the index sentence's role slots");
+  // a page this small cannot clear p<=0.05 against random draws of its own sentences; whatever IS pointed lies on the origin page only
+  for (const [id] of atoms) assert.equal(record.atoms.find((x) => x.id === id).url, ORIGIN);
 });
 
 test("CONTROL that can fail: an index sentence whose footnote names a page that is not pinned points at nothing", async () => {
   const origin = `The depot lease was approved by the council in March 2026. ${FILL}`;
   const recs = [await mk(INDEX, indexRaw.replace(ORIGIN, "https://elsewhere.test/x"), indexText), await mk(ORIGIN, `<html><body><p>${origin}</p></body></html>`, `${origin}\n\n${BULK}`)];
   const record = readCorpus(recs, { question: "Who approved the depot lease?" });
-  assert.equal(pointedAtoms(record, { model }).size, 0, "a pointer is only as good as the page it names: no guessed matches");
+  assert.equal(pointedAtoms(record, { model }).atoms.size + pointedAtoms(record, { model }).pages.size, 0, "a pointer is only as good as the page it names: no guessed matches");
+});
+
+import { coverSet } from "./pointer-match.js";
+test("a synthesized claim is carried by a SET of sentences: two origin sentences together cover what neither does alone, and chance does not", () => {
+  const q = new Set(["pred:VERB:approve", "agent:NOUN:council", "patient:NOUN:lease", "obl:PROPN:march"]);
+  const filler = Array.from({ length: 30 }, (_, i) => ({ keys: new Set([`pred:VERB:v${i}`, `patient:NOUN:n${i}`]) }));
+  const sents = [{ keys: new Set(["pred:VERB:approve", "agent:NOUN:council"]) }, ...filler, { keys: new Set(["patient:NOUN:lease", "obl:PROPN:march"]) }];
+  const r = coverSet(q, sents);
+  assert.deepEqual(r.chosen.sort((a, b) => a - b), [0, 31]);
+  assert.equal(r.covered.length, 4);
+  assert.ok(r.pointed && r.p <= 0.05);
+  // CONTROL that can fail: when every sentence of the page carries the same slots, the set is no better than chance
+  const flat = Array.from({ length: 30 }, () => ({ keys: new Set(["pred:VERB:approve", "agent:NOUN:council"]) }));
+  const f = coverSet(q, flat);
+  assert.ok(!f || !f.pointed);
 });
