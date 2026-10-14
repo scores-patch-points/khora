@@ -541,3 +541,17 @@ None in the mechanism: held is exact containment, and base rates are −log2(sha
 - **Accumulating readers.** W = thread + every fold shown, and its trajectory against the 2-cycle.
 - `realizeClaim` is still not wired into the ladder, so the W-relative net new is exercised only by its unit test.
 - The dossier (stage 4, the 27-cell telling) is not yet folded for the reader. It stays the catalog.
+
+## 14. Added on `callimachus/shape`: holdings, seams and the grain (2026-10-14)
+
+Written after the user's essay "The Prompt Is a Crease". The design is in `CALLIMACHUS-SHAPE.md` ("For whom", "The fold as a function", "Grain", Step 0). What landed in code, none of it wired into `answerLadder` (the ladder's `whom` option belongs to the twin-reader branch, agreed 2026-10-14):
+
+| File | What it does |
+|---|---|
+| `organs/holdings.js` | `declareHoldings`: what a whom already holds, as claim keys. A placeholder giver ("the asker") and an omitted `told`/`seen` are refused; an empty one is a declared first contact. `kind` may be a person, institution, statute, document, past self, or `void` (the catalog pole). `distanceOf`: share of touched claims never told / never shown. `partitionByHoldings`: fresh vs `held`, typed. `claimsOfWhom`: W's pinned units read by the claim reader as W spans. |
+| `organs/seam-ledger.js` | `seamReport`: bytes by kind, addressed share, seam density, mouth share, each seam with the spans it joins, and a contract verdict. `creaseEntry` and `untouchedBy`: the ledger's entry and the holdings-provenance check; no store. |
+| `organs/grain.js` | The grain: `splitRegion` (held / absent, with the predicate-shuffle null), `selectGrain` (Ground / Figure / Pattern), `contactVerdict` (`mergeTestimony` across U and W), the nine cells (Clearing runs first at every grain; only the generating cell may carry a seam), `foldGrain` (selection, contacts, the cells in order, closure, `selectorUnreadable` falls back to Ground). |
+
+Open, in addition to §8: the ordering-not-dropping ladder arm is withdrawn (history only) pending a pre-registration as a rival to twin-reader's; no grain arm in the twin-reader harness; nothing builds holdings from earlier tellings; no ledger store; H1–H4 in `CALLIMACHUS-SHAPE.md` are unmeasured.
+
+Tests: `node --test native/organs/{seam-ledger,grain}.test.mjs`.
