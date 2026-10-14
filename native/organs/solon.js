@@ -61,6 +61,15 @@
 //              fits the window heimdall says the model is loaded at. Names
 //              the OWNER of every finding and never cuts a prompt herself
 //              (P186). Under heimdall. (live)
+//   wald       the pull — what must be pulled before a prompt can be
+//              answered (nothing, the thread, what the fold holds, a
+//              structured source, the web), each witness's vote one
+//              observation of a sequential test; possible at one vote,
+//              probable past log A, refused past log B, the cheapest
+//              further pull between. Prices are measured ms; consent is
+//              never priced. Under heimdall, beside huginn (who picks the
+//              model once the pull is decided). Ratified by the person
+//              2026-10-14. (shadow — records every turn, gates nothing yet)
 //   elenchus   Socrates — the standing question: every non-AGREE crown
 //              carries one closed-bank question (elenchus.js), and no live
 //              claim in view refuses the oracle default (gary.js's
