@@ -15,7 +15,7 @@ import { makePinax, checkFixity, quoteOf, makeSpan, parseAddress, SIGLA } from "
 import { readCorpus, claimSheet, dossier, extractText, declaredOf, queriesFrom } from "../organs/callimachus.js";
 import { answerLadder, candidatesOf, seamsByStage } from "../organs/answer-ladder.js";
 import { pointedAtoms } from "../organs/pointer-match.js";
-import { readPerspectives, stanceAtoms, STANCE_FRAMES } from "../organs/perspectives.js";
+import { readPerspectives, withStanceAtoms, STANCE_FRAMES } from "../organs/perspectives.js";
 import { huntPlan } from "../organs/stance-probes.js";
 import { discoverOptions, spectrum as optionSpectrum } from "../organs/options.js";
 import { readWhom, restrictWhom, VOID_READER } from "../organs/whom.js";
@@ -209,7 +209,7 @@ for (const ask of asks) {
       writeFileSync(join(out, "perspectives.json"), JSON.stringify({ schema: "Perspectives@1", frame: perspectives.frame, asked: perspectives.asked, rows: perspectives.positions.map((p, i) => ({ id: `pos_${i}`, address: p.span, text: p.text, side: p.pole === "+" ? "record" : "record", claim: { subj: p.referent ?? p.holder_display ?? p.holder, pred: perspectives.asked && p.pole === "+" ? perspectives.asked : (p.pred ?? null), obj: p.option, polarity: p.pole === "+" ? "+" : "-" }, via: p.via, basis: p.basis, standing: p.holder_standing ?? null, provenance: { kind: "pinax", ref: p.span } })), options: perspectives.spectrum, contested_holders: perspectives.contested_holders }, null, 1));
     }
     // the positions the asked pole states join the candidates, cited to their holders
-    const rec2 = perspectives ? { ...record, atoms: [...record.atoms, ...stanceAtoms(perspectives)] } : record;
+    const rec2 = perspectives ? withStanceAtoms(record, perspectives) : record;
     const { reader, ...lad } = await answerLadder(rec2, { question: qv, slice, grammar: grammars[l], telling: t, fixity: verdicts, whom, pointed, perspectives });
     if (perspectives) { lad.perspectives = { frame: perspectives.frame, options: perspectives.spectrum?.corners, exclusivity: perspectives.spectrum?.exclusivity?.map((e) => ({ b: e.b, status: e.status, declared_by_pages: e.declared_by_pages })), implied: perspectives.spectrum?.implied?.length ?? 0, contested_holders: perspectives.contested_holders, asked: perspectives.asked, sides: perspectives.sides, poles: perspectives.poles, aliases: perspectives.aliases, unresolved: perspectives.unresolved.length, refused: perspectives.refused.length, edges: perspectives.edges, frameCheck: perspectives.frameCheck, hunt }; }
     // The DMD window over the READER: the shallowest depth of recent thread that reproduces the whole-W fold (depth 0 = the void reader).

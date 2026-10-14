@@ -463,14 +463,45 @@ export function stanceAtoms(perspectives, { poles = ["+"] } = {}) {
     if (r.option && r.option !== "topic") continue; // the asked topic's positions only; other options are read through options.js
     if (!poles.includes(r.pole) || !r.holder_at || !r.holder || r.pronoun || seen.has(r.span)) continue;
     seen.add(r.span);
-    let h = 5381; for (const ch of r.span) h = ((h << 5) + h + ch.charCodeAt(0)) | 0;
+    // A sentence that carries its own UNBALANCED quotation ("… opposes it: “It doesn't work in South Dakota.”") cannot be framed in marks
+    // (PL7). The span is NARROWED to the clause before the inner quote: a contiguous sub-span of the same bytes, never an edit.
+    let span = r.span, text = r.text;
+    const marks = (t) => ({ open: (t.match(/[“«]/g) ?? []).length, close: (t.match(/[”»]/g) ?? []).length, straight: (t.match(/"/g) ?? []).length });
+    const m = marks(text);
+    const m0 = /^(px_[^/]+\/[^#]+)#b(\d+)-(\d+)$/.exec(r.span);
+    if ((m.open !== m.close || m.straight % 2 === 1) && m0) {
+      const cut = text.search(/[“«"]/);
+      if (cut > 0) {
+        const kept = text.slice(0, cut).replace(/[\s:,;—-]+$/u, "");
+        if (kept.length >= 20) { text = kept; span = `${m0[1]}#b${m0[2]}-${+m0[2] + new TextEncoder().encode(kept).length}`; }
+      }
+    }
+    let h = 5381; for (const ch of span) h = ((h << 5) + h + ch.charCodeAt(0)) | 0;
     out.push({
-      schema: "ClaimAtom@1", id: `a_s${(h >>> 0).toString(16)}`, pinax: r.pinax, url: r.url, span: r.span,
+      schema: "ClaimAtom@1", id: `a_s${(h >>> 0).toString(16)}`, pinax: r.pinax, url: r.url, span,
       kind: "reported", why_kind: "stance",
       giver: { surface: r.holder_at, surface_verbatim: r.holder, referent: null, pronoun: false, attitude: null, attitude_verbatim: null, via: "perspective_agent" },
       relation: null, entities: [], valid_time: { value: null, precision: null, why: "undated" }, document_time: null, transaction_time: null,
-      _sentence: r.text, _object: "", stance: { pole: r.pole, pred: r.pred, negated: r.negated, basis: r.basis, via: r.via },
+      _sentence: text, _object: "", stance: { pole: r.pole, pred: r.pred, negated: r.negated, basis: r.basis, via: r.via },
     });
   }
   return out;
+}
+
+/**
+ * The record with each asked-pole STANCE put in the place of the page-author atom that already stood on the same sentence: a position
+ * is cited to its HOLDER ("experts"), not to the article's byline. An atom that overlaps a stance row's sentence on the same page is
+ * replaced (a quotation atom is kept: its speaker is already the holder); the stance atoms are appended. Nothing is mutated.
+ */
+export function withStanceAtoms(record, perspectives, opts = {}) {
+  const mine = stanceAtoms(perspectives, opts);
+  if (!mine.length) return record;
+  const range = (addr) => { const m = /^(px_[^/]+)\/[^#]+#b(\d+)-(\d+)$/.exec(String(addr)); return m ? { pinax: m[1], start: +m[2], end: +m[3] } : null; };
+  const spans = mine.map((a) => range(a.span)).filter(Boolean);
+  const replaced = (a) => {
+    if (a.why_kind === "quotation" || a.why_kind === "stance") return false;
+    const r = range(a.span);
+    return !!r && spans.some((x) => x.pinax === r.pinax && x.start < r.end && r.start < x.end);
+  };
+  return { ...record, atoms: [...(record.atoms ?? []).filter((a) => !replaced(a)), ...mine] };
 }
