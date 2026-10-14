@@ -211,3 +211,17 @@ test("RELATIVE PATHS ARE A TYPED GAP, never a bare specifier (found by the first
   assert.ok(relWorld.gaps.some((g) => g.kind === "world-path-not-absolute"));
   assert.ok(!relWorld.proposals.some((p) => p.kind === "import" && p.spec === "numbers.mjs"), "never a bare specifier");
 });
+
+test("NO KEYWORD PRIOR, NO STUB: without the language's keyword prior `for` and `return` look like callees, so no stub is synthesised and the refusal is typed", () => {
+  const file = "/p/khora/cli/a.mjs";
+  const before = "export function a() {\n  return 1;\n}\n";
+  const after = "export function a(xs) {\n  const out = [];\n  for (const x of xs) {\n    out.push(mystery(x));\n  }\n  return out;\n}\n";
+  const none = finish({ before, after, file, world: [], keywords: null });
+  assert.deepEqual(none.proposals, [], "nothing is synthesised without the giver");
+  assert.ok(none.gaps.some((g) => g.kind === "stub-refused:no-keyword-prior" && g.name === "mystery"), JSON.stringify(none.gaps));
+  assert.ok(none.gaps.every((g) => !["for", "return", "const"].includes(g.name)) || none.proposals.length === 0);
+  // the same move with a keyword set handed in: the real callee gets its stub, the keywords are not callees
+  const KW = new Set(["for", "return", "const", "of", "export", "function"]);
+  const some = finish({ before, after, file, world: [], keywords: KW });
+  assert.deepEqual(some.proposals.filter((p) => p.kind === "stub").map((p) => p.name), ["mystery"]);
+});

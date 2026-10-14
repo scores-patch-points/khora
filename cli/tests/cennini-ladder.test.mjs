@@ -10,6 +10,9 @@ import { PANEL } from "../cennini-assemble.mjs";
 import { ladderRun, attemptOf, summarize, SURFACE } from "../cennini-ladder.mjs";
 import { parseProposal } from "../../native/the-fold/code-loop.js";
 
+// A hermetic JavaScript keyword set for these tests. The product reads the vendored CodeKeywordPrior@1 (native/priors,
+// a symlink into janus/priors that a clean clone does not have); a test hands one in so it needs no symlink. Test data only.
+const KW = new Set(["break", "case", "catch", "class", "const", "continue", "debugger", "default", "delete", "do", "else", "export", "extends", "finally", "for", "function", "if", "import", "in", "instanceof", "let", "new", "of", "return", "super", "switch", "this", "throw", "try", "typeof", "var", "void", "while", "with", "yield", "async", "await", "static", "null", "true", "false", "undefined"]);
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ask = (id) => PANEL.find((a) => a.id === id);
 
@@ -27,7 +30,7 @@ const door = (raw, { done = false, write = null, gap = null } = {}) => async (_u
   if (write) fs.writeFileSync(path.join(workspace, a.target), write);
   return { ok: true, status: 200, json: async () => ({ done, rounds: [{ round: 1, raw, ...(gap ? { gap: { kind: gap } } : {}) }] }) };
 };
-const run = (id, fetchImpl, o = {}) => ladderRun({ ask: ask(id), fetchImpl, parse: parseProposal, ...o });
+const run = (id, fetchImpl, o = {}) => ladderRun({ ask: ask(id), fetchImpl, parse: parseProposal, keywords: KW, ...o });
 
 test("a signed panel is recorded as signed and the door's workspace holds the stated signature", async () => {
   let seen = null;
