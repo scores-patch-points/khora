@@ -319,3 +319,23 @@ test("Tracing types an echo apart from a walked chain, and puts chains first", (
   const firstEcho = tracing.items.findIndex((i) => i.echo);
   assert.ok(tracing.items.slice(0, firstEcho).every((i) => !i.echo), "chains come before echoes");
 });
+
+test("anchors: 'shared-most' spreads new passages over the held spans they share most with; 'first' collapses onto one; rank overrides activation", () => {
+  const held = U(["Maria Lopez", "endorsed", "the hiring freeze", "+", 5], ["Daniel Reyes", "vetoed", "the bus route", "+", 4], ["The council", "ratified", "the depot lease", "+", 3], ["Anna Cole", "chairs", "the finance committee", "+", 2]);
+  const absent = U(["Maria Lopez", "opposed", "the fare increase", "+", 1], ["Maria Lopez", "praised", "the finance committee", "+", 1], ["Daniel Reyes", "questioned", "the depot lease", "+", 1], ["The council", "reviews", "the finance committee", "+", 1]);
+  const whom = W(["Maria Lopez", "endorsed", "the hiring freeze"], ["Daniel Reyes", "vetoed", "the bus route"], ["The council", "ratified", "the depot lease"], ["Anna Cole", "chairs", "the finance committee"], ...FILLER);
+  const region = [...held, ...absent];
+  const anchorsOf = (f) => f.modes.find((m) => m.role === "generate").items.map((it) => it.spans[0]);
+  const first = foldGrain({ region, whom, anchor: "first" });
+  const best = foldGrain({ region, whom, anchor: "shared-most" });
+  assert.ok(new Set(anchorsOf(best)).size >= new Set(anchorsOf(first)).size, "shared-most never anchors on fewer distinct held spans than first");
+  // rank overrides activation: the lowest-activation absent span, given the top rank, leads
+  const low = absent[3];
+  const ranked = region.map((u) => (u === low ? { ...u, rank: 99 } : u));
+  const f = foldGrain({ region: ranked, whom, anchor: "shared-most" });
+  const gen = f.modes.find((m) => m.role === "generate").items;
+  assert.equal(gen[0].spans[gen[0].spans.length - 1], low.address, "the ranked span is laid down first");
+  // default is unchanged: no rank, anchor "first"
+  const dflt = foldGrain({ region, whom });
+  assert.deepEqual(dflt.modes.map((m) => m.items.length), first.modes.map((m) => m.items.length));
+});
