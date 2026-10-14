@@ -267,6 +267,19 @@ M1 and M2 are close to guaranteed by construction; they show the change works an
 
 **Not shown.** That the answer is good: no cut ranks the absent set against the reader, attachment is by byte distance when no entity is shared, and no person's thread was used. B stays at Ground for every ask (held 3–8, null not beaten).
 
+### Results: the grain experiment, fourth registration (the order of what is new, one run, 2026-10-14)
+
+Pre-registration `eval/callimachus/GRAIN-R4-PREREG.md`, runner `eval/callimachus/grain-rank-r4.mjs` (committed `04ffe8f3` before the run), outputs local only `callimachus-runs/grain-r4-2026-10-14/` (`results.json`, `results.blind.html`, and a withheld `results.key.json`). Change: `foldGrain({ anchor: "shared-most" })` and a span `rank` (the ladder's perception + logos score with the reader's prior); defaults unchanged.
+
+| | prediction | result |
+|---|---|---|
+| R1 | the anchors spread, never worse | **falsified**: dense 6 → 7 (House ask), 8 = 8, 5 = 5, 9 = 9; of 19 re-dealt readers 12 better, 5 equal, **2 worse** (8 → 7) |
+| R2 | the order is the ladder's (non-increasing rank) | holds (a property of the code) |
+| R3 | nothing else moves (grain, set of new passages, other cells) | holds |
+| R4 | the user prefers the ranked, spread list in at least 3 of 4 asks, blind | **pending**: `results.blind.html` |
+
+**Reported.** Kendall tau between activation order and the ladder's order: 0.945, 0.974, 0.988, 0.928; top five shared: 4, 5, 5, 5 of 5. The ladder's richer score barely reorders the new passages (L42): the order problem is not solved by the witnesses the ladder already has. What is left is a signal that is not relevance to the ask.
+
 ### The whom can be any pinned corpus
 
 **[H3] The second argument can be any pinned corpus with a null.** The same operation with a different W:
