@@ -292,7 +292,7 @@ const r2 = JSON.parse(readFileSync(prevPath, "utf8"));
 const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 const m4 = {
   voidCopied: same(strip(arms.void).copied, r2.arms.void.copied),
-  selection: ["dense", "B", "shown"].map((k) => ({ k, same: arms[k].grain === prev.arms[k].grain && arms[k].distance.held === prev.arms[k].distance.held && arms[k].distance.absent === prev.arms[k].distance.absent })),
+  selection: ["dense", "B", "shown"].map((k) => ({ k, same: arms[k].grain === r2.arms[k].grain && arms[k].distance.held === r2.arms[k].distance.held && arms[k].distance.absent === r2.arms[k].distance.absent })),
   shuffledWGround: shuffledW.shown.filter((x) => x.grain === "Ground").length,
   shuffledUNonGround: shuffledU.filter((c) => c.grain !== "Ground").length,
   determinism: P.N8.holds,
