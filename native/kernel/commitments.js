@@ -133,6 +133,31 @@ const norm = (v) => String(v ?? "").trim();
 const memberKey = (members) => [...new Set((members ?? []).map(norm).filter(Boolean))].sort().map((m) => `${m.length}:${m}`).join("");
 
 /**
+ * THE IDENTITY OF A COMMITMENT IS ITS KIND, ITS MEMBERS AND ITS GIVER.
+ *
+ * Before 2026-10-14 the id was `commit:<kind>:<members>` alone. task-log
+ * merges every entry of one `task_id` into one task (last payload wins), so a
+ * second giver declaring the same members silently REPLACED the first's
+ * giver and purpose while the first's EVA stayed attached (their wish
+ * inherited another's test), a concession by either took both, and nobody
+ * could ever re-declare a conceded id. A commitment is somebody's: the giver
+ * is part of what it is. Purpose is NOT in the id — the same giver putting
+ * the same members forward for a second purpose is still the same standing
+ * commitment, re-declared.
+ *
+ * `legacyIdOf` is the old members-only id, kept exported: logs written before
+ * the change carry it as their `task_id`, and a DEF written now records it as
+ * `legacy_id` so a caller holding the old id can still name the commitment
+ * (see `resolve` in makeCommitments). A log with only legacy ids folds
+ * exactly as it did.
+ */
+export const legacyIdOf = ({ kind, members } = {}) => `commit:${kind}:${memberKey(members)}`;
+export const idOf = ({ kind, members, giver } = {}) => {
+  const g = norm(giver);
+  return `${legacyIdOf({ kind, members })}|by:${g.length}:${g}`;
+};
+
+/**
  * makeCommitments({ taskLog, cellOf }) — the ledger of declared readings,
  * over an injected task-log (default: this kernel's own), so a caller
  * already holding a provider of the algebra keeps its commitments beside
@@ -171,15 +196,45 @@ export function makeCommitments({ taskLog = nativeTaskLog, cellOf = nativeCellOf
     const ms = [...new Set((members ?? []).map(norm).filter(Boolean))].sort();
     const floor = kind === KINDS.SAME_AS ? 2 : 1;
     if (ms.length < floor) return { log, refused: { type: REFUSALS.TOO_FEW_MEMBERS, detail: `${kind} acts on at least ${floor} member(s), got ${ms.length}` } };
-    const id = `commit:${kind}:${memberKey(ms)}`;
+    // A log written before the id carried the giver holds this commitment
+    // under its members-only id: the same giver re-declaring it addresses
+    // THAT task (the fold is unchanged); any other giver gets their own.
+    const legacy = legacyIdOf({ kind, members: ms });
+    const old = projectTasks(log).find((t) => t.task_id === legacy && t.commitment) ?? null;
+    const id = old && norm(old.giver) === norm(giver) ? legacy : idOf({ kind, members: ms, giver });
     const next = append(log, {
-      kind: ENTRY_KINDS.PROPOSE, task_id: id, operator: "DEF", operator_basis: OPERATOR_BASIS.DECLARED, grain,
+      kind: ENTRY_KINDS.PROPOSE, task_id: id, legacy_id: legacy, operator: "DEF", operator_basis: OPERATOR_BASIS.DECLARED, grain,
       ...cellFields("DEF", grain),
       description: `declared: ${kind} over ${ms.length} member(s)`,
       commitment: kind, members: ms, giver: norm(giver), purpose: norm(purpose),
       ...(because != null ? { because } : {}),
     });
-    return { log: next, refused: null, id };
+    return { log: next, refused: null, id, legacy_id: legacy };
+  }
+
+  /**
+   * resolve(log, id, { giver }) — which standing commitment does `id` name?
+   * An exact task_id wins (a giver-scoped id, or a legacy id the log really
+   * holds). A members-only legacy id that no task carries verbatim names every
+   * giver-scoped commitment over those members: one resolves, several are
+   * AMBIGUOUS (typed, with the candidates — the caller must name a giver).
+   * A `giver`, when given, narrows to that giver's commitment and refuses
+   * `not_the_giver` rather than touch another's.
+   */
+  function resolve(log, id, { giver = null, verb = "act on" } = {}) {
+    const tasks = projectTasks(log);
+    const want = norm(giver);
+    const exact = tasks.find((t) => t.task_id === id) ?? null;
+    if (exact && (!want || norm(exact.giver) === want)) return { task: exact };
+    const kin = tasks.filter((t) => t.commitment && (t.task_id === id || t.legacy_id === id));
+    if (!exact && kin.length === 0) return { refused: { type: "unknown_commitment", detail: `nothing stands to ${verb}`, id } };
+    if (want) {
+      const mine = kin.filter((t) => norm(t.giver) === want);
+      if (mine.length === 1) return { task: mine[0] };
+      return { refused: { type: "not_the_giver", detail: `${id} is not ${want}'s; only its giver may ${verb} it`, id, giver: want, holders: kin.map((t) => t.giver) } };
+    }
+    if (kin.length === 1) return { task: kin[0] };
+    return { refused: { type: "ambiguous_commitment", detail: `${id} is a members-only id shared by ${kin.length} givers; name the giver or use a giver-scoped id`, id, candidates: kin.map((t) => t.task_id) } };
   }
 
   /**
@@ -189,11 +244,13 @@ export function makeCommitments({ taskLog = nativeTaskLog, cellOf = nativeCellOf
    * is an opinion wearing a measurement's clothes. `verdict` is "holds" or
    * "refused"; `evidence` is the caller's own numbers, carried opaque.
    */
-  function evaluate(log, id, { verdict, ground, broken, because = null, evidence = null } = {}) {
+  function evaluate(log, id, { verdict, ground, broken, because = null, evidence = null, giver = null } = {}) {
     if (verdict !== "holds" && verdict !== "refused") return { log, refused: { type: "unknown_verdict", detail: 'a commitment evaluates to "holds" or "refused"' } };
     if (!norm(ground) || !norm(broken)) return { log, refused: { type: "no_ground", detail: "evaluate names the ground it read and the perturbation it broke that ground against" } };
-    const prior = projectTasks(log).find((t) => t.task_id === id) ?? null;
-    if (!prior) return { log, refused: { type: "unknown_commitment", detail: "nothing stands to evaluate", id } };
+    const r = resolve(log, id, { giver, verb: "evaluate" });
+    if (r.refused) return { log, refused: r.refused };
+    const prior = r.task;
+    id = prior.task_id;
     const next = append(log, {
       kind: ENTRY_KINDS.EVIDENCE, task_id: id, operator: "EVA", operator_basis: OPERATOR_BASIS.PRODUCED, grain: prior.grain ?? FIGURE,
       ...cellFields("EVA", prior.grain ?? FIGURE),
@@ -202,7 +259,7 @@ export function makeCommitments({ taskLog = nativeTaskLog, cellOf = nativeCellOf
       ...(evidence != null ? { evidence } : {}),
       ...(because != null ? { because } : {}),
     });
-    return { log: next, refused: null };
+    return { log: next, refused: null, id };
   }
 
   /**
@@ -211,17 +268,19 @@ export function makeCommitments({ taskLog = nativeTaskLog, cellOf = nativeCellOf
    * folded or withheld is read as it was heard again. The trigger is
    * recorded VERBATIM — never a silent concession.
    */
-  function concede(log, id, { trigger } = {}) {
+  function concede(log, id, { trigger, giver = null } = {}) {
     if (typeof trigger !== "string" || !trigger.trim()) return { log, refused: { type: "no_trigger", detail: "a re-zero records its own reason" } };
-    const prior = projectTasks(log).find((t) => t.task_id === id) ?? null;
-    if (!prior) return { log, refused: { type: "unknown_commitment", detail: "nothing stands to concede", id } };
+    const r = resolve(log, id, { giver, verb: "concede" });
+    if (r.refused) return { log, refused: r.refused };
+    const prior = r.task;
+    id = prior.task_id;
     const next = append(log, {
       kind: ENTRY_KINDS.EVIDENCE, task_id: `rec:${log.nextSeq}`, operator: "REC", operator_basis: OPERATOR_BASIS.PRODUCED, grain: prior.grain ?? FIGURE,
       ...cellFields("REC", prior.grain ?? FIGURE),
       description: `re-zero: ${trigger}`,
       concedes: id, trigger,
     });
-    return { log: next, refused: null };
+    return { log: next, refused: null, id };
   }
 
   const concededIds = (log) => new Set((log?.entries ?? []).filter((e) => e?.operator === "REC" && e.concedes).map((e) => e.concedes));
@@ -252,7 +311,7 @@ export function makeCommitments({ taskLog = nativeTaskLog, cellOf = nativeCellOf
             : ev.verdict === "holds"
               ? STANDINGS.TESTIMONY
               : STANDINGS.REFUSED;
-        return { id: t.task_id, kind: t.commitment, members: t.members ?? [], giver: t.giver, purpose: t.purpose, grain: t.grain, standing, evaluated: ev ? { verdict: ev.verdict, ground: ev.ground, broken: ev.broken, evidence: ev.evidence ?? null } : null };
+        return { id: t.task_id, legacy_id: t.legacy_id ?? t.task_id, kind: t.commitment, members: t.members ?? [], giver: t.giver, purpose: t.purpose, grain: t.grain, standing, evaluated: ev ? { verdict: ev.verdict, ground: ev.ground, broken: ev.broken, evidence: ev.evidence ?? null } : null };
       });
   }
 
@@ -369,5 +428,5 @@ export function makeCommitments({ taskLog = nativeTaskLog, cellOf = nativeCellOf
     return log;
   }
 
-  return { declare, evaluate, concede, standings, inForce, classesOf, readUnder, redeal, KINDS, STANDINGS, REFUSALS };
+  return { declare, evaluate, concede, resolve, standings, inForce, classesOf, readUnder, redeal, KINDS, STANDINGS, REFUSALS };
 }
