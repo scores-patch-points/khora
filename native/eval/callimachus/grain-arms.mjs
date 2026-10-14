@@ -219,8 +219,12 @@ const stopped = chain.length > 1 && sets[sets.length - 1] === sets[sets.length -
 P.G4 = { grains: chainGrains, steps: chain.length - 1, monotone, twoCycle, stopped, holds: monotone && !twoCycle && stopped };
 const informativeFolds = [arms.void, arms.dense, arms.B, ...chain.slice(1)].filter((a) => a.informative);
 P.G5 = { checked: informativeFolds.length, holds: informativeFolds.every((a) => a.contract && a.closure.closed && a.closure.mouthConfined && a.resliceFailures === 0), failures: informativeFolds.filter((a) => !(a.contract && a.closure.closed && a.closure.mouthConfined && a.resliceFailures === 0)).map((a) => a.name) };
-const whole = (a) => JSON.stringify({ ...strip(a), name: null, sha256: null, informative: null });
-P.G6 = { holds: whole(arms.dense) === whole(denseAgain) };
+// G6 compares the FOLD (its grain, distance, verdicts, cells, closure and copied addresses), not the harness's bookkeeping fields. Every
+// field that differs between the two runs, bookkeeping included, is listed (amendment 3: run 2 compared `atoms`, passed 26 vs 0).
+const FOLD_FIELDS = ["grain", "why_grain", "selectorUnreadable", "distance", "verdicts", "modes", "closure", "contract", "resliceFailures", "copied", "copiedU", "claims"];
+const foldOf = (a) => JSON.stringify(Object.fromEntries(FOLD_FIELDS.map((k) => [k, a[k]])));
+const d1 = strip(arms.dense), d2 = strip(denseAgain);
+P.G6 = { holds: foldOf(arms.dense) === foldOf(denseAgain), differingFieldsBetweenRuns: [...new Set([...Object.keys(d1), ...Object.keys(d2)])].filter((k) => JSON.stringify(d1[k]) !== JSON.stringify(d2[k])).sort() };
 const unread = informativeFolds.filter((a) => a.claims > 0 && Object.keys(a.verdicts).length > 0 && Object.keys(a.verdicts).every((c) => c === "UNDETERMINED"));
 P.G7 = unread.length ? { arms: unread.map((a) => a.name), holds: unread.every((a) => a.grain === "Ground" && a.selectorUnreadable) } : { uninformative: "no informative arm had all-UNDETERMINED contacts, so the fallback was not exercised" };
 
