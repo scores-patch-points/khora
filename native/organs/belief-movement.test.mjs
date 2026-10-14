@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { yearsIn, valuesFor, bitsOf, rankByBelief } from "./belief-movement.js";
+import { yearsIn, valuesFor, bitsOf, rankByBelief, questionAgent, agentMatches } from "./belief-movement.js";
 
 test("yearsIn reads four-digit year tokens by character class", () => {
   assert.deepEqual(yearsIn("On July 14, 2026, the House passed it; in 2022 the Senate did. Page 1234567, H.R. 8"), ["2026", "2022"]);
@@ -54,4 +54,17 @@ test("a tie for the lead is no single answer, never an alphabetical pick", () =>
   assert.equal(first.values[0], "2022");
   assert.equal(first.answerAfter, null, "1-1 is contested: no answer");
   assert.equal(r.after.answer, "2026", "2-1 after the second");
+});
+
+test("the agent is part of the slot: the question's nsubj must be the passage's subject", () => {
+  const q = "# text = When did the House pass the Act?\n1\tWhen\twhen\tADV\t_\t_\t5\tadvmod\t_\t_\n2\tdid\tdo\tAUX\t_\t_\t5\taux\t_\t_\n3\tthe\tthe\tDET\t_\t_\t4\tdet\t_\t_\n4\tHouse\tHouse\tPROPN\t_\t_\t5\tnsubj\t_\t_\n5\tpass\tpass\tVERB\t_\t_\t0\troot\t_\t_\n";
+  const agent = questionAgent(q);
+  assert.deepEqual(agent, { head: "house", verb: "pass" });
+  assert.equal(agentMatches("the House", agent), true);
+  assert.equal(agentMatches("The United States House of Representatives", agent), true);
+  assert.equal(agentMatches("A similar version of the Sunshine Protection Act", agent), false, "the Act as subject is not the House passing");
+  assert.equal(agentMatches("It", agent), false, "a pronoun subject is excluded, and counted by the runner");
+  assert.deepEqual(valuesFor("time", { agentOk: false, actor: true, relation: true, sentence: "passed the Senate in 2022" }), [], "agentOk overrides the earlier actor witness");
+  assert.deepEqual(valuesFor("time", { agentOk: true, actor: false, relation: true, sentence: "the House passed it in 2026" }), ["2026"]);
+  assert.equal(questionAgent("1\tWho\twho\tPRON\t_\t_\t2\tnsubj\t_\t_\n2\topposes\toppose\tVERB\t_\t_\t0\troot\t_\t_\n"), null, "a who-question has no agent to require");
 });

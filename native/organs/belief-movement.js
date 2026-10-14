@@ -42,10 +42,32 @@ export function valuesFor(admits, c) {
   // A "who" question is answered by the SUBJECT of the relation, so the question's figure is not required to be that subject
   // (amendment 1, GRAIN-R5-PREREG.md: run 1 required it, which made every person question empty by construction).
   if (admits === "person") return c.relation && c.subj ? [String(c.subj)] : [];
-  if (!c.actor || !c.relation) return [];
+  // The AGENT is part of the slot (GRAIN-R6-PREREG.md): "when did the House pass it" is carried by a passage whose subject is the House,
+  // not by one in which the Act is the subject and the Senate did the passing. `agentOk` is decided by the caller from the question's own
+  // parse (agentMatches); absent it, the earlier `actor` witness stands.
+  if (!(c.agentOk ?? c.actor) || !c.relation) return [];
   if (admits === "time") return yearsIn(c.sentence);
   if (admits === "proposition" || admits === "polar") return [c.polarity === "-" ? "not" : "yes"];
   return [];
+}
+
+/**
+ * The question's agent from its dependency parse: the head word of the root's nsubj, lowercased, or null when the subject is a wh-word
+ * or pronoun (a "who" question has no agent to require). `conllu` is the parser's CoNLL-U text for the question.
+ */
+export function questionAgent(conllu) {
+  const rows = String(conllu ?? "").split("\n").filter((l) => l && !l.startsWith("#")).map((l) => l.split("\t")).filter((c) => c.length >= 8)
+    .map((c) => ({ id: Number(c[0]), form: c[1], lemma: c[2], upos: c[3], head: Number(c[6]), deprel: c[7] }));
+  const root = rows.find((r) => r.deprel === "root");
+  const subj = root && rows.find((r) => r.head === root.id && r.deprel.split(":")[0] === "nsubj");
+  if (!subj || !["PROPN", "NOUN"].includes(subj.upos)) return null;
+  return { head: subj.form.toLowerCase(), verb: root.lemma };
+}
+/** Does a candidate's subject surface name the agent? Whole-word match on the agent's head word (the subject "the House", "the United States House of Representatives"). */
+export function agentMatches(subjectText, agent) {
+  if (!agent) return true;
+  const words = String(subjectText ?? "").toLowerCase().split(/[^\p{L}\p{N}]+/u).filter(Boolean);
+  return words.includes(agent.head);
 }
 
 /** Bayesian surprise, in bits, of admitting `value` into a slot with `counts` (Map value → count). The holograph's own arithmetic. */
