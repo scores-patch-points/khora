@@ -87,7 +87,13 @@ async function readW(name, text) {
   const got = await claimsOfWhom([rec], { slice });
   return { pinax: rec.entry.id, sha256: sha(raw), spans: got.spans, atoms: got.atoms ?? 0, why: got.why };
 }
-const whomText = (name) => readFileSync(join(WHOM, name, "thread.md"), "utf8");
+const PINNED = JSON.parse(readFileSync(join(here, "grain-whom-sha256.json"), "utf8")).files;
+const hashMismatches = [];
+const whomText = (name) => {
+  const t = readFileSync(join(WHOM, name, "thread.md"), "utf8");
+  if (PINNED[name] && sha(Buffer.from(t, "utf8")) !== PINNED[name]) hashMismatches.push({ name, pinned: PINNED[name], found: sha(Buffer.from(t, "utf8")) });
+  return t;
+};
 
 // ---- one arm --------------------------------------------------------------------------------------------------------------------
 const copiedOf = (f) => [...new Set(f.modes.flatMap((m) => m.items.flatMap((it) => it.segs.filter((g) => g.kind === "source").map((g) => g.address))))].sort();
@@ -149,6 +155,33 @@ for (let k = 1; k <= CHAIN_MAX; k++) {
   if (same) break;
 }
 
+// ---- the calibration arm (eo-evidence P1; GRAIN-PREREG.md amendment 1): the same pipeline on material with nothing in it ----------------
+// Each of the record's pages, word-shuffled within every paragraph (seeded Fisher-Yates), re-pinned and re-read by the SAME claim reader,
+// scored against the same ask, folded against the dense reader's real claims. A calibrated selector finds no held claims in noise.
+const mulberry = (seed) => () => { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+const shuffleParagraphs = (text, seed) => { const rnd = mulberry(seed); return text.split(/\n\s*\n/).map((par) => { const w = par.split(/\s+/).filter(Boolean); for (let i = w.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [w[i], w[j]] = [w[j], w[i]]; } return w.join(" "); }).join("\n\n"); };
+const SHUFFLE_SEEDS = Array.from({ length: 19 }, (_, i) => 201 + i);
+const calibration = [];
+for (const seed of SHUFFLE_SEEDS) {
+  const recs = [];
+  for (let i = 0; i < prior.sources.length; i++) {
+    const s0 = prior.sources[i];
+    const text = shuffleParagraphs(readFileSync(join(UNIVERSE, "layers", `${s0.id}.txt`), "utf8"), seed * 1000 + i);
+    const rec = await makePinax({ url: `${s0.url}#shuffled-${seed}`, raw: new Uint8Array(Buffer.from(text, "utf8")), text, extractor: { name: "word-shuffled control (paragraph-wise, seeded)" } });
+    rec.declared = s0.declared;
+    store[rec.entry.id] = rec;
+    recs.push(rec);
+  }
+  const rec2 = readCorpus(recs, { question: prior.question, absences: [] });
+  const qv2 = questionVoid(qg.readQuestion(ASK, { model }), rec2);
+  const c2 = candidatesOf(rec2, {});
+  const s2 = scoreWith(witnesses(c2, { question: qv2, record: rec2 }), ["perception"], c2.length);
+  const act2 = new Map(c2.map((a, i) => [a.id, s2.s[i]]));
+  const region2 = (await spansFromRecord(rec2, { slice, activation: act2 })).filter((x) => x.activation > 0);
+  const f = foldGrain({ region: region2, whom: arms.dense._whomSpans });
+  calibration.push({ seed, atoms: rec2.atoms.length, touched: c2.filter((_, i) => s2.s[i] > 0).length, regionSpans: region2.length, grain: f.grain, held: f.distance.held, nullReal: f.distance.null.real, exceeded: f.distance.null.exceeded });
+}
+
 // ---- the predictions, computed ----------------------------------------------------------------------------------------------------
 const voidSet = arms.void.copied;
 const dOf = (a) => jaccardD(a.copied, voidSet);
@@ -190,6 +223,13 @@ P.G6 = { holds: whole(arms.dense) === whole(denseAgain) };
 const unread = informativeFolds.filter((a) => a.claims > 0 && Object.keys(a.verdicts).length > 0 && Object.keys(a.verdicts).every((c) => c === "UNDETERMINED"));
 P.G7 = unread.length ? { arms: unread.map((a) => a.name), holds: unread.every((a) => a.grain === "Ground" && a.selectorUnreadable) } : { uninformative: "no informative arm had all-UNDETERMINED contacts, so the fallback was not exercised" };
 
+const nonGround = calibration.filter((c) => c.grain !== "Ground");
+const withRegion = calibration.filter((c) => c.regionSpans > 0);
+P.G8 = withRegion.length === 0
+  ? { uninformative: "the claim reader admitted no claim from any word-shuffled page: it is calibrated against noise, and this arm cannot exercise the selector", seeds: calibration.length }
+  : { seeds: calibration.length, withRegion: withRegion.length, nonGround: nonGround.length, nullReal: calibration.filter((c) => c.nullReal).length, holds: nonGround.length <= 1 };
+results.hashes = { pinned: Object.keys(PINNED).length, mismatches: hashMismatches };
+results.calibration = calibration;
 results.arms = Object.fromEntries(Object.entries(arms).map(([k, a]) => [k, strip(a)]));
 results.chain = chain;
 results.nulls = Object.fromEntries(Object.entries(nulls).map(([k, ns]) => [k, ns.map((n) => (n.missing ? n : { name: n.name, claims: n.claims, grain: n.grain, d: dOf(n), dU: dUOf(n) }))]));
@@ -200,4 +240,4 @@ results.reported = {
 };
 writeFileSync(OUT, JSON.stringify(results, null, 1));
 log("wrote", OUT);
-console.log(JSON.stringify({ predictions: P, grains: { void: arms.void.grain, dense: arms.dense.grain, B: arms.B.grain, chain: chainGrains } }, null, 1));
+console.log(JSON.stringify({ hashMismatches: hashMismatches.length, predictions: P, grains: { void: arms.void.grain, dense: arms.dense.grain, B: arms.B.grain, chain: chainGrains } }, null, 1));
