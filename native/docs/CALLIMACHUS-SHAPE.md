@@ -128,20 +128,22 @@ H1 said distance induces shape. The specification gives the mechanism, in two st
 | some, and some is absent | **Figure** | H beats the null, and A ≥ H |
 | most | **Pattern** | H beats the null, and H > A (the house majority rule, "more than not") |
 
-**Running.** At the selected grain all three modes run, in order **clear, witness, generate**; a fold that skips one is unclosed. Each held span goes through the corroboration verdict (`mergeTestimony`) **between U and W**: the claim under test is a W span, the witnesses are U's spans on its arrangement.
+**Running.** At the selected grain the triad runs in order: **clear, witness, generate**. Clearing is the clear step at *every* grain (the only fold with no reader in it); the witness step holds the refusing cell and then the corroborating cell; a fold that skips a role is unclosed. Each held span goes through the corroboration verdict (`mergeTestimony`) **between U and W**: the claim under test is a W span, the witnesses are U's spans on its arrangement. The verdict selects the **mode** (the column): Differentiate when the record refuses, Relate when it corroborates, Generate when something must be laid down.
 
-| | clear | witness | generate |
+| | Differentiate | Relate | Generate |
 |---|---|---|---|
-| **Ground** | Clearing: R against U's own null only; no reader, zero seams | Tending: W's held spans that U corroborates, both addresses | Cultivating: the survivors by their own divisions, ordered by activation, seams between divisions |
-| **Figure** | Dissecting: each W span beside the U span that refuses it, no verdict on who is right | Binding: the U span joined to the W span it corroborates | Making: the absent spans by salience against W, each framed by the nearest held span |
-| **Pattern** | Unraveling: W holds an edge between two held things, U holds no path or a contradicting one; the absence is the finding | Tracing: W's edge is corroborated; the chain of U spans that walks it | Composing: an edge U holds among held things that W lacks, addressed at both ends |
+| **Ground** | Clearing: R against U's own null only; no reader, zero seams | Tending: W's held spans that U corroborates, both addresses, no sentence between | Cultivating: the survivors by their own divisions, ordered by activation, a seam between divisions |
+| **Figure** | Dissecting: each W span beside the U span that refuses it, no verdict on who is right | Binding: the W span beside the U span that corroborates it | Making: the absent spans by salience against W, each beside its nearest held span; a seam only when no shared entity joins them |
+| **Pattern** | Unraveling: W holds an edge between two held things, U holds no path or a contradicting one; the absence is a flagged seam with no words | Tracing: W's edge is corroborated; the chain of U spans that walks it | Composing: an edge U holds among held things that W lacks, addressed at both ends; its new bytes are the joins |
 
-Output is the same in all nine: addressed spans interleaved with flagged seams.
+**The mouth is confined.** Only the generating cell carries seams; clear and witness cells output pairs and chains of addressed spans with nothing between them (`closure.mouthConfined`, computed). **If every contact verdict is UNDETERMINED** the mode cannot be selected; the fold runs at Ground whatever the distance and sets `selectorUnreadable`. Every item carries a computed `stance: { grain, mode, cell }`. Output is the same in all nine: addressed spans interleaved with flagged seams.
 
 **Measured on synthetic fixtures (`grain.test.mjs`), not on a corpus.**
 - A reader holding the region's vocabulary but none of its claims is Ground (H = 0).
 - Three held of eight did **not** beat the null at 199 draws (exceeded 1, p = 0.01); four held of eight did. A reader holding a few claims in a small W is Ground. That is the strict "beats every draw" rule showing its power, not a bug; it is reported as `null.exceeded`, `null.p` and `null.permutations`.
 - A reader holding the whole region is Pattern; the empty reader is Ground, Clearing has seam density 0.
+- A reader who holds the region's arrangements beyond the null but about other objects (every verdict UNDETERMINED) is run at Ground.
+- Clearing is first at all three grains and the later cells never contain a span Clearing dropped.
 
 **Not done, and not decided.**
 - The Figure/Pattern cut is the majority rule, not a measured null.

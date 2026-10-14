@@ -40,22 +40,31 @@ import { seg, sentence } from "./prose-laws.js";
 import { seamReport } from "./seam-ledger.js";
 
 export const GRAINS = Object.freeze(["Ground", "Figure", "Pattern"]);
+/** The columns: what the reader's state does on contact with the material. */
+export const MODES = Object.freeze(["Differentiate", "Relate", "Generate"]);
+/** The roles of the triad, in order. Witnessing holds both Differentiate (refuses) and Relate (corroborates). */
 export const ROLES = Object.freeze(["clear", "witness", "generate"]);
-export const MODES = Object.freeze({
-  Ground: Object.freeze(["Clearing", "Tending", "Cultivating"]),
-  Figure: Object.freeze(["Dissecting", "Binding", "Making"]),
-  Pattern: Object.freeze(["Unraveling", "Tracing", "Composing"]),
+/** The nine cells: row = grain (distance), column = mode (verdict). Clearing is also the first step at EVERY grain. */
+export const CELLS = Object.freeze({
+  Ground: Object.freeze({ Differentiate: "Clearing", Relate: "Tending", Generate: "Cultivating" }),
+  Figure: Object.freeze({ Differentiate: "Dissecting", Relate: "Binding", Generate: "Making" }),
+  Pattern: Object.freeze({ Differentiate: "Unraveling", Relate: "Tracing", Generate: "Composing" }),
 });
+/** The steps run at a grain, in order: clear (always Clearing), witness (refuse, then corroborate), generate. */
+export const STEPS = Object.freeze({
+  Ground: Object.freeze([["clear", "Clearing"], ["witness", "Tending"], ["generate", "Cultivating"]]),
+  Figure: Object.freeze([["clear", "Clearing"], ["witness", "Dissecting"], ["witness", "Binding"], ["generate", "Making"]]),
+  Pattern: Object.freeze([["clear", "Clearing"], ["witness", "Unraveling"], ["witness", "Tracing"], ["generate", "Composing"]]),
+});
+const stanceOf = (cell) => { for (const [grain, row] of Object.entries(CELLS)) for (const [mode, name] of Object.entries(row)) if (name === cell) return { grain, mode, cell }; return null; };
 
-/** The frame words this file may generate, declared (PL14): everything else in an output is a copied, addressed span. */
+/**
+ * The frame words this file may generate, declared (PL14). Only the GENERATING modes speak: a pairing of two addresses needs no
+ * sentence between them, so Clearing, Tending, Dissecting, Binding and Tracing have none, and Unraveling's one seam is a flag with no words.
+ */
 export const FRAME_WORDS = Object.freeze({
-  Tending: [" — the record carries it: "],
   Cultivating: ["Then: "],
-  Dissecting: [" — the record refuses it: "],
-  Binding: [" — the record: "],
   Making: [", and then: "],
-  Unraveling: [" — but the record holds no path between these two."],
-  Tracing: [" — the record walks it: ", ", then "],
   Composing: [" — then: ", " — and: "],
 });
 
@@ -140,9 +149,16 @@ export function splitRegion(region, whom, { draws = 199, seed = 20261014 } = {})
   };
 }
 
-/** Ground when what is held does not beat the null; Pattern when more is held than not; Figure otherwise. */
-export function selectGrain(split) {
+/**
+ * Ground when what is held does not beat the null; Pattern when more is held than not; Figure otherwise.
+ *
+ * And Ground when the MODE cannot be read (the addendum's caveat): if the reader holds spans beyond the null but every contact verdict
+ * between U and W is UNDETERMINED, the record cannot read the reader's state in its own vocabulary, so for the record's purposes the
+ * reader holds nothing. The fold runs at Ground whatever the distance, and says so.
+ */
+export function selectGrain(split, verdicts = null) {
   if (!split.null.real) return { grain: "Ground", why: split.H.length ? "what the reader holds here does not beat the shuffle null: shared vocabulary, not shared claims" : "the reader holds nothing of this region" };
+  if (verdicts && verdicts.length && verdicts.every((c) => c === "UNDETERMINED")) return { grain: "Ground", selectorUnreadable: true, why: "the reader holds spans beyond the null, but every contact verdict between the record and the reader is UNDETERMINED: the mode cannot be selected, so the record treats the reader as holding nothing" };
   if (split.H.length > split.A.length) return { grain: "Pattern", why: "more of the region is held than absent (the house majority rule, disclosed): relations are what can be new" };
   return { grain: "Figure", why: "some of the region is held beyond the null and some is absent" };
 }
@@ -150,12 +166,18 @@ export function selectGrain(split) {
 // ---- outputs: addressed spans interleaved with flagged seams ----------------------------------------------------------------------
 
 const src = (s) => seg.source(s.text, s.address);
+const stamp = (item, cell) => ({ ...item, stance: stanceOf(cell) });
+/** A speaking item: addressed spans and declared frame words (generating modes only). */
 const S = (segs, spans) => ({ ...sentence(segs, spans.map((s) => s.id)), spans: spans.map((s) => s.address) });
+/** A silent item: addressed spans and nothing between them. `text` is a layout join for display, not fold material. */
+const P = (spans) => ({ segs: spans.map(src), grounds: [...new Set(spans.map((s) => s.id))], text: spans.map((s) => s.text).join("\n"), spans: spans.map((s) => s.address) });
+/** A flagged seam with no words: the finding is the absence itself. */
+const absent = (w, between) => ({ segs: [src(w), { kind: "frame", t: "", seam: "absence" }], grounds: [w.id], text: w.text, spans: [w.address], absence: { between } });
 
 /** Group spans by their own division (the terrain ladder's, supplied as `span.division`; default: the page the address names). */
 const divisionOf = (s) => s.division ?? String(s.address).split("/")[0];
 
-// ---- the nine modes -------------------------------------------------------------------------------------------------------------
+// ---- the nine cells -------------------------------------------------------------------------------------------------------------
 
 const entitiesOf = (s) => [s.claim?.subj, s.claim?.obj].filter(Boolean).map(norm);
 
@@ -184,32 +206,38 @@ function pathOf(region, a, b) {
   return null;
 }
 
-const joinSpans = (spans, first, between) => spans.flatMap((s, i) => [...(i === 0 ? [] : [seg.frame(i === 1 ? first : between)]), src(s)]);
+const startOf = (s) => Number(/#b(\d+)-/.exec(s.address)?.[1] ?? 0);
+/** W spans that join two held entities: the edges a reader already holds between things they hold. */
+function wEdges(whom, split) {
+  const held = new Set(split.H.flatMap(entitiesOf));
+  return (whom ?? []).filter((w) => w.claim?.subj && w.claim?.obj && w.claim.polarity && held.has(norm(w.claim.subj)) && held.has(norm(w.claim.obj)) && norm(w.claim.subj) !== norm(w.claim.obj));
+}
 
-const RUN = {
-  // ---- Ground
+// Every cell consumes the material Clearing left standing (`cleared`), never the raw activated region.
+const CELL = {
+  // ---- Ground row
   Clearing: ({ region, survives }) => ({
-    items: region.filter(survives).sort((a, b) => (b.activation ?? 0) - (a.activation ?? 0)).map((u) => S([src(u)], [u])),
+    items: region.filter(survives).sort((a, b) => (b.activation ?? 0) - (a.activation ?? 0)).map((u) => P([u])),
   }),
   Tending: ({ pairs }) => ({
-    items: pairs.filter((p) => ["AGREE", "SINGLE"].includes(p.case)).map((p) => S([src(p.w), seg.frame(FRAME_WORDS.Tending[0]), src(p.holds[0])], [p.w, p.holds[0]])),
+    items: pairs.filter((p) => ["AGREE", "SINGLE"].includes(p.case)).map((p) => P([p.w, p.holds[0]])),
   }),
-  Cultivating: ({ region, survives }) => {
+  Cultivating: ({ cleared }) => {
     const by = new Map();
-    for (const u of region.filter(survives)) (by.get(divisionOf(u)) ?? by.set(divisionOf(u), []).get(divisionOf(u))).push(u);
+    for (const u of cleared) (by.get(divisionOf(u)) ?? by.set(divisionOf(u), []).get(divisionOf(u))).push(u);
     const top = (xs) => Math.max(...xs.map((u) => u.activation ?? 0));
     const divisions = [...by.entries()].sort((a, b) => top(b[1]) - top(a[1]));
     const items = [];
-    divisions.forEach(([, xs], di) => xs.sort((a, b) => (b.activation ?? 0) - (a.activation ?? 0)).forEach((u, i) => items.push(S(di > 0 && i === 0 ? [seg.frame(FRAME_WORDS.Cultivating[0]), src(u)] : [src(u)], [u]))));
+    divisions.forEach(([, xs], di) => xs.sort((a, b) => (b.activation ?? 0) - (a.activation ?? 0)).forEach((u, i) => items.push(di > 0 && i === 0 ? S([seg.frame(FRAME_WORDS.Cultivating[0]), src(u)], [u]) : P([u]))));
     return { items, divisions: divisions.map(([d, xs]) => ({ division: d, spans: xs.length })) };
   },
 
-  // ---- Figure
+  // ---- Figure row
   Dissecting: ({ pairs }) => ({
-    items: pairs.filter((p) => ["DISAGREE", "CONTRADICTED"].includes(p.case)).flatMap((p) => p.refused.map((u) => S([src(p.w), seg.frame(FRAME_WORDS.Dissecting[0]), src(u)], [p.w, u]))),
+    items: pairs.filter((p) => ["DISAGREE", "CONTRADICTED"].includes(p.case)).flatMap((p) => p.refused.map((u) => P([p.w, u]))),
   }),
   Binding: ({ pairs }) => ({
-    items: pairs.filter((p) => ["AGREE", "SINGLE"].includes(p.case)).map((p) => S([src(p.w), seg.frame(FRAME_WORDS.Binding[0]), src(p.holds[0])], [p.w, p.holds[0]])),
+    items: pairs.filter((p) => ["AGREE", "SINGLE"].includes(p.case)).map((p) => P([p.w, p.holds[0]])),
   }),
   Making: ({ split }) => {
     const held = split.H;
@@ -217,36 +245,37 @@ const RUN = {
       const mine = new Set(entitiesOf(u));
       const byEntity = held.filter((h) => entitiesOf(h).some((e) => mine.has(e)));
       const near = byEntity[0] ?? held.filter((h) => divisionOf(h) === divisionOf(u)).sort((a, b) => Math.abs(startOf(a) - startOf(u)) - Math.abs(startOf(b) - startOf(u)))[0] ?? null;
-      return near ? { ...S([src(near), seg.frame(FRAME_WORDS.Making[0]), src(u)], [near, u]), attachedBy: byEntity[0] ? "entity" : "nearest" } : { ...S([src(u)], [u]), attachedBy: null };
+      // A shared entity is an addressed join: the two spans sit side by side with no seam. With only the nearest span, the bridge is a seam.
+      if (byEntity[0]) return { ...P([near, u]), attachedBy: "entity" };
+      return near ? { ...S([src(near), seg.frame(FRAME_WORDS.Making[0]), src(u)], [near, u]), attachedBy: "nearest" } : { ...P([u]), attachedBy: null };
     });
     return { items };
   },
 
-  // ---- Pattern
-  Unraveling: ({ region, whom, split }) => {
-    const edges = wEdges(whom, split);
+  // ---- Pattern row
+  Unraveling: ({ cleared, whom, split }) => {
     const items = [];
-    for (const w of edges) {
-      const v = contactVerdict(w, region);
-      if (["DISAGREE", "CONTRADICTED"].includes(v.case)) { for (const u of v.refused) items.push({ ...S([src(w), seg.frame(FRAME_WORDS.Dissecting[0]), src(u)], [w, u]), absence: false }); continue; }
-      if (pathOf(region, norm(w.claim.subj), norm(w.claim.obj)) === null) items.push({ ...S([src(w), seg.frame(FRAME_WORDS.Unraveling[0])], [w]), absence: { between: [norm(w.claim.subj), norm(w.claim.obj)] } });
+    for (const w of wEdges(whom, split)) {
+      const v = contactVerdict(w, cleared);
+      if (["DISAGREE", "CONTRADICTED"].includes(v.case)) { for (const u of v.refused) items.push(P([w, u])); continue; }
+      if (pathOf(cleared, norm(w.claim.subj), norm(w.claim.obj)) === null) items.push(absent(w, [norm(w.claim.subj), norm(w.claim.obj)]));
     }
     return { items };
   },
-  Tracing: ({ region, whom, split }) => ({
+  Tracing: ({ cleared, whom, split }) => ({
     items: wEdges(whom, split).flatMap((w) => {
-      if (["DISAGREE", "CONTRADICTED"].includes(contactVerdict(w, region).case)) return [];
-      const chain = pathOf(region, norm(w.claim.subj), norm(w.claim.obj));
+      if (["DISAGREE", "CONTRADICTED"].includes(contactVerdict(w, cleared).case)) return [];
+      const chain = pathOf(cleared, norm(w.claim.subj), norm(w.claim.obj));
       if (!chain || !chain.length) return [];
-      return [{ ...S([src(w), seg.frame(FRAME_WORDS.Tracing[0]), ...joinSpans(chain, "", FRAME_WORDS.Tracing[1])], [w, ...chain]), hops: chain.length }];
+      return [{ ...P([w, ...chain]), hops: chain.length }];
     }),
   }),
-  Composing: ({ region, whom, split }) => {
+  Composing: ({ cleared, whom, split }) => {
     const held = new Set(split.H.flatMap(entitiesOf));
     const wPairs = new Set((whom ?? []).filter((w) => w.claim?.subj && w.claim?.obj).map((w) => [norm(w.claim.subj), norm(w.claim.obj)].sort().join("␟")));
     const endSpan = (e, not) => [...split.H].filter((h) => h !== not && entitiesOf(h).includes(e)).sort((a, b) => (b.activation ?? 0) - (a.activation ?? 0))[0] ?? null;
     const items = [];
-    for (const u of region) {
+    for (const u of cleared) {
       if (u.claim?.polarity !== "+" || !u.claim.subj || !u.claim.obj) continue;
       const a = norm(u.claim.subj), b = norm(u.claim.obj);
       if (a === b || !held.has(a) || !held.has(b) || wPairs.has([a, b].sort().join("␟"))) continue;
@@ -258,42 +287,49 @@ const RUN = {
   },
 };
 
-const startOf = (s) => Number(/#b(\d+)-/.exec(s.address)?.[1] ?? 0);
-/** W spans that join two held entities: the edges a reader already holds between things they hold. */
-function wEdges(whom, split) {
-  const held = new Set(split.H.flatMap(entitiesOf));
-  return (whom ?? []).filter((w) => w.claim?.subj && w.claim?.obj && w.claim.polarity && held.has(norm(w.claim.subj)) && held.has(norm(w.claim.obj)) && norm(w.claim.subj) !== norm(w.claim.obj));
-}
-
 // ---- the fold -------------------------------------------------------------------------------------------------------------------
 
-/** Closed means all three roles ran, in order: clear, witness, generate. A fold that skips one is unclosed (the August triad check). */
+/**
+ * Closed means: clear ran, then at least one witnessing cell ran, then generate ran, in that order. A fold that skips one is unclosed
+ * (the August triad check, with the whom supplying the grain).
+ */
 export function closureOf(modes) {
   const ran = modes.filter((m) => m.ran).map((m) => m.role);
-  return { order: ROLES.slice(), ran, closed: ran.length === ROLES.length && ROLES.every((r, i) => ran[i] === r) };
+  const rank = (r) => ROLES.indexOf(r);
+  const ordered = ran.every((r, i) => i === 0 || rank(r) >= rank(ran[i - 1]));
+  return { order: ROLES.slice(), ran, closed: ordered && ROLES.every((r) => ran.includes(r)) };
 }
 
 /**
- * foldGrain({ region, whom }) → the selection, the contacts, the three modes in order, and the closure verdict.
+ * foldGrain({ region, whom }) → the selection, the contacts, the cells in order, and the closure verdict.
  *   region: U's spans activated by Q, each with `activation` (and optionally `division`).
  *   whom:   W's spans (side "W"), read by the same relation reader. Empty or absent = the void reader.
+ * Selection happens on the whole activated region; every cell then works on what Clearing left standing.
  */
 export function foldGrain({ region = [], whom = [], survives = (u) => (u.activation ?? 0) > 0, draws = 199, seed = 20261014 } = {}) {
-  const split = splitRegion(region, whom, { draws, seed });
-  const { grain, why } = selectGrain(split);
-  const pairs = pairsOf(split, region, whom);
-  const ctx = { region, whom, split, pairs, survives };
-  const modes = MODES[grain].map((mode, i) => {
-    const out = RUN[mode](ctx);
-    return { mode, role: ROLES[i], ran: true, items: out.items, ...(out.divisions ? { divisions: out.divisions } : {}), seams: seamReport(out.items), ...(out.items.length ? {} : { empty: "ran and found nothing in this region for this reader; the absence is the output" }) };
+  const selection = splitRegion(region, whom, { draws, seed });
+  const cleared = region.filter(survives);
+  const standing = new Set(cleared.map((u) => u.id));
+  const split = { ...selection, H: selection.H.filter((u) => standing.has(u.id)), A: selection.A.filter((u) => standing.has(u.id)) };
+  const pairs = pairsOf(split, cleared, whom);
+  const picked = selectGrain(selection, pairs.map((p) => p.case));
+  const grain = picked.grain;
+  const ctx = { region, cleared, whom, split, pairs, survives };
+  const modes = STEPS[grain].map(([role, cell]) => {
+    const out = CELL[cell](ctx);
+    const items = out.items.map((it) => stamp(it, cell));
+    const seams = seamReport(items);
+    return { mode: cell, stance: stanceOf(cell), role, ran: true, items, ...(out.divisions ? { divisions: out.divisions } : {}), seams, ...(items.length ? {} : { empty: "ran and found nothing in this region for this reader; the absence is the output" }) };
   });
+  // The mouth is confined: only generating cells may carry a seam, and the one exception is Unraveling's flagged absence (no words).
+  const silent = modes.filter((m) => m.role !== "generate");
+  const confined = silent.every((m) => m.items.every((it) => (it.segs ?? []).every((g) => g.kind === "source" || (g.kind === "frame" && g.t === "" && g.seam === "absence"))));
   return {
-    grain, why,
-    // "held" here is a CLAIM-ARRANGEMENT match (same subject, same predicate), a different witness from byte containment (twin-reader's heldIn).
-    distance: { region: region.length, held: split.H.length, absent: split.A.length, share: split.distance, witness: "claim-arrangement", null: split.null },
+    grain, why: picked.why, ...(picked.selectorUnreadable ? { selectorUnreadable: true } : {}),
+    distance: { region: region.length, cleared: cleared.length, held: selection.H.length, absent: selection.A.length, share: selection.distance, witness: "claim-arrangement", null: selection.null },
     contacts: pairs.map((p) => ({ w: p.w.address, case: p.case, standing: p.standing, holds: p.holds.map((u) => u.address), refused: p.refused.map((u) => u.address), undetermined: p.undetermined.map((u) => u.address) })),
     modes,
-    closure: closureOf(modes),
+    closure: { ...closureOf(modes), mouthConfined: confined },
     seams: seamReport(modes.flatMap((m) => m.items)),
   };
 }
