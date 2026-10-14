@@ -699,6 +699,31 @@ Each step is a whole answer on its own, and each has a falsifier and a pre-regis
 
 This step needs no induced shape, so it runs on today's ladder. It is the smallest move that makes the whom real.
 
+**Status, 2026-10-14 (built on this branch; tests green):**
+- **Built.** `organs/whom.js` (`declareWhom`, `distanceOf`, `partitionByWhom`) and `organs/seam-ledger.js` (`seamReport`, `creaseEntry`, `untouchedBy`), both pure and tested. `answerLadder(record, { whom })`:
+  - names the experiencer from the whom, with its holdings in `read`, in place of `{ who: "the asker" }`;
+  - reports `seams` on every stage (addressed share, seam density, mouth share, each seam with the two spans it joins, and a contract verdict that refuses an unaddressed source or a third kind);
+  - reports `distance` (touched claims the whom was never told, and never shown);
+  - **orders by holdings.** A candidate the whom was told, that carries evidence, is placed after every fresh candidate that does. It is an order, not a weight: no constant was added, and with no whom (or a whom holding nothing the question touches) the pick is exactly what it was. The record's `contest` verdict is still the record's: what binds in U does not change with the reader.
+  - **accounts for every held claim.** One that is picked is typed (`sentence.heldBy`, listed in `stage.held`). One that carries evidence and is not picked is in `stage.droppedHeld` with the address it was told at, a reason distinct from "below the floor".
+- **Bar, as measured by `answer-ladder.test.mjs`.**
+  - Seam density is reported first on every stage.
+  - Identical holdings give byte-identical sentences.
+  - Differing holdings differ where the holdings differ: the near reader's line is a claim new to them; the far reader's is the record's lead.
+  - Swap-null: a different giver with the same holdings reads the same output, and the same giver with different holdings reads differently.
+  - A whom holding something the question never touches changes nothing.
+  - A whom told everything the question touches is answered with the lead, typed held.
+  - Every source segment re-verifies (the contract check, plus the existing slice test).
+- **Not met, and not decided.**
+  - The swap-null is one hand-built pair, not the seeded shuffle over many whoms the bar describes.
+  - `realizeClaim`'s `whom` is still recorded and unused.
+  - `createForWhom` is not called (its gate has hand-set floors).
+  - Nothing builds a whom from earlier `telling.addressed.json` files; `told` keys are the ladder's atom ids, and a builder must map earlier grounds onto them.
+  - The dossier (stage 4, the whole cube) is not re-ordered by the whom.
+  - Seen pages order nothing: a page the whom was shown is available to them, not told.
+  - Distance is a number. Where it picks figure over ground is H1's null, unmeasured.
+- **Ledger.** `creaseEntry` makes one record; no ledger is stored, so H4 has nothing to read.
+
 ### Step 1. Projector + read-back verifier for the media the reader can already read; add `table` and `frame-break` to medium.js
 
 **Files:**

@@ -160,3 +160,17 @@ node --test native/organs/{pinax,callimachus,cube-telling,answer-ladder,claim-re
 ```
 
 Live repair needs the mouth channel on `:11434` with `gemma2:2b`. Without it, level 3 reports "no mouth reachable" and changes nothing.
+
+## Added on `callimachus/shape`: the whom and the seams (2026-10-14)
+
+Written after the user's essay "The Prompt Is a Crease". The design is in `CALLIMACHUS-SHAPE.md` ("For whom", "The fold as a function", Step 0). What landed in code:
+
+| File | What it does |
+|---|---|
+| `organs/whom.js` | `declareWhom`: the second operand with holdings. A placeholder giver ("the asker") is refused, an omitted `told`/`seen` is refused, an empty one is a declared first contact. `kind` may be a person, institution, statute, document, past self, or `void` (the catalog pole); a statute or document needs a boundary. `distanceOf`: share of touched claims never told / never shown. `partitionByWhom`: fresh vs `held`, with the typed reason. |
+| `organs/seam-ledger.js` | `seamReport`: bytes by kind, addressed share, seam density, mouth share, each seam with the spans it joins, and a contract verdict. `creaseEntry` and `untouchedBy`: the ledger's entry and the whom-provenance check; no store. |
+| `organs/answer-ladder.js` | Optional `whom`. Every stage carries `seams`; the result carries `whom` and `distance`. A claim the whom was told is ordered after fresh claims (an order, not a weight) and accounted for: typed `held` where placed (`stage.held`, `sentence.heldBy`), or in `stage.droppedHeld` with its address. Without a whom the result says `declared: false` and the pick is unchanged. |
+
+Open, in addition to §8: `realizeClaim`'s `whom` is still unused; the dossier is not re-ordered by the whom; nothing builds a whom from earlier tellings; no ledger store; H1–H4 in `CALLIMACHUS-SHAPE.md` are unmeasured.
+
+Tests: `node --test native/organs/{seam-ledger,answer-ladder}.test.mjs`.

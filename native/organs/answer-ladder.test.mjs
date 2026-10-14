@@ -9,6 +9,7 @@ import { interpret, cubeTelling, renderPlain } from "./cube-telling.js";
 import { answerLadder } from "./answer-ladder.js";
 import { questionVoid } from "./question-void.js";
 import { lintSentence } from "./prose-laws.js";
+import { declareWhom } from "./whom.js";
 import en from "../adapters/text/telling-grammar.en.js";
 import es from "../adapters/text/telling-grammar.es.js";
 import qen from "../adapters/text/question-grammar.en.js";
@@ -31,11 +32,11 @@ async function setup() {
   const interp = interpret(record);
   return { record, slice, interp };
 }
-const ask = async (q, { lang = en, reader = qen } = {}) => {
+const ask = async (q, { lang = en, reader = qen, whom = null } = {}) => {
   const { record, slice, interp } = await setup();
   const telling = await cubeTelling(record, { slice, interp, grammar: lang });
   const qv = questionVoid(reader.readQuestion(q, { model }), record);
-  return { qv, record, ladder: await answerLadder(record, { question: qv, slice, grammar: lang, telling }) };
+  return { qv, record, ladder: await answerLadder(record, { question: qv, slice, grammar: lang, telling, whom }) };
 };
 
 test("question grammar (en): UD parse → form, admits, modality; a clause-initial wh-word is interrogative whatever the tag", () => {
@@ -94,4 +95,81 @@ test("omnilingual: the same record and ladder realize in Spanish; copied bytes s
   assert.ok(t.cells.filter((c) => c.status === "voiced").length >= 10);
   assert.match(renderPlain(t), /Qué se leyó/);
   for (const c of t.cells) for (const x of (c.sentences ?? []).flatMap((y) => y.segs.filter((g) => g.kind === "source"))) assert.equal(await slice(x.address), x.t);
+});
+
+test("the fold contract holds on every stage: every source segment is addressed, and each stage reports its seams and its mouth", async () => {
+  const { ladder } = await ask("Who approved the depot lease?");
+  for (const st of ladder.stages) {
+    assert.equal(st.seams.contract.ok, true, `${st.size}: ${JSON.stringify(st.seams.contract.violations)}`);
+    assert.ok(st.seams.addressedShare > 0 && st.seams.addressedShare <= 1, `${st.size} has addressed bytes`);
+    assert.equal(st.seams.mouthShare, 0, "no model call is made in the ladder: the mouth's share is exactly zero, as a number");
+    assert.ok(Math.abs(st.seams.addressedShare + st.seams.seamDensity - 1) < 1e-9);
+  }
+  assert.equal(ladder.whom.declared, false, "without a whom the result says so rather than implying one");
+  assert.equal(ladder.distance, null);
+});
+
+test("a refused question still reports its contract: all seam, no addressed bytes, no invention", async () => {
+  const { ladder } = await ask("When did the lighthouse keeper retire?");
+  assert.equal(ladder.stages[0].seams.contract.ok, true);
+  assert.equal(ladder.stages[0].seams.addressedShare, 0);
+});
+
+test("two whoms, the same words, one record: distance differs, the lead stays addressed, and the placeholder is gone", async () => {
+  const q = "Who approved the depot lease?";
+  const base = await ask(q);
+  const leadAtom = base.ladder.stages[0].lead.atom;
+
+  const far = declareWhom({ giver: "reader-B", told: [], seen: [] });
+  const near = declareWhom({ giver: "reader-A", told: [leadAtom], seen: [] });
+  const voidReader = declareWhom({ kind: "void", told: [], seen: [] });
+
+  const a = (await ask(q, { whom: near })).ladder, b = (await ask(q, { whom: far })).ladder, v = (await ask(q, { whom: voidReader })).ladder;
+  assert.ok(a.distance.touched > 0 && a.distance.touched === b.distance.touched, "one universe: both whoms touch the same claims");
+  assert.equal(b.distance.told, 1, "the empty whom is at the catalog pole");
+  assert.ok(a.distance.told < b.distance.told, "the reader who was told the lead claim is nearer");
+  assert.equal(v.distance.pole, "catalog");
+  assert.equal(a.stages[2].experiencer.who, "reader-A", "pathos is declared for a named whom, not 'the asker'");
+  assert.match(a.stages[2].experiencer.read, /1 told claims/);
+  for (const l of [a, b, v]) for (const st of l.stages) assert.equal(st.seams.contract.ok, true);
+  // far reader: exactly the base answer. Near reader: the claim they were already told is no longer the lead.
+  assert.equal(b.stages[0].lead.atom, leadAtom);
+  assert.notEqual(a.stages[0].lead.atom, leadAtom, "the lens re-orders by what the whom holds: held is placed after fresh");
+  assert.deepEqual(a.stages[0].held, [], "the near reader's line is a claim that is new to them");
+  assert.deepEqual(b.stages[0].held, []);
+  assert.equal(base.ladder.stages[0].held, undefined, "no whom declared, no held claim is made");
+  // the held claim is accounted for in every stage: placed typed as held, or on the drop list with its own reason (never silently gone)
+  for (const st of a.stages.slice(0, 3)) {
+    const placed = st.held.map((h) => h.atom), dropped = st.droppedHeld.map((h) => h.atom);
+    assert.ok(placed.includes(leadAtom) || dropped.includes(leadAtom), `${st.size}: the held lead is placed typed held or dropped as held`);
+    assert.equal(placed.filter((x) => dropped.includes(x)).length, 0);
+  }
+  assert.ok(a.stages[0].droppedHeld.some((h) => h.atom === leadAtom && /already told to this whom/.test(h.text)), "the line has room for one claim: the held lead is a typed drop");
+  for (const x of a.stages.flatMap((st) => st.sentences).filter((y) => y.heldBy)) assert.equal(x.heldBy.kind, "held");
+  assert.deepEqual(b.stages.slice(0, 3).flatMap((st) => st.droppedHeld), [], "the far reader had nothing held to leave out");
+  // the same words, the same whom's holdings, the same output: byte-identical
+  const a2 = (await ask(q, { whom: declareWhom({ giver: "reader-A", told: [leadAtom], seen: [] }) })).ladder;
+  const texts = (l) => l.stages.map((st) => st.sentences.map((x) => x.text));
+  assert.deepEqual(texts(a2), texts(a));
+  // swap-null: differences follow the HOLDINGS, not the giver. Reader-B holding what A held reads what A read; A holding nothing reads what B read.
+  const bWithAHoldings = (await ask(q, { whom: declareWhom({ giver: "reader-B", told: [leadAtom], seen: [] }) })).ladder;
+  const aWithNothing = (await ask(q, { whom: declareWhom({ giver: "reader-A", told: [], seen: [] }) })).ladder;
+  assert.deepEqual(texts(bWithAHoldings), texts(a));
+  assert.deepEqual(texts(aWithNothing), texts(b));
+  // a whom holding something the question never touches changes nothing
+  const unrelated = (await ask(q, { whom: declareWhom({ giver: "reader-C", told: ["a_not_in_this_record"], seen: [] }) })).ladder;
+  assert.deepEqual(texts(unrelated), texts(b));
+});
+
+test("a whom told everything the question touches is answered with the lead, typed held — a reminder, never presented as new", async () => {
+  const q = "Who approved the depot lease?";
+  const { record, ladder: base } = await ask(q);
+  const all = declareWhom({ giver: "reader-D", told: new Map(record.atoms.map((a) => [a.id, "out/earlier#s0"])), seen: [] });
+  const { ladder } = await ask(q, { whom: all });
+  assert.equal(ladder.stages[0].lead.atom, base.stages[0].lead.atom, "nothing is fresh, so the lead is the record's lead");
+  assert.equal(ladder.stages[0].held.length, 1);
+  assert.equal(ladder.stages[0].held[0].at, "out/earlier#s0");
+  assert.equal(ladder.stages[0].sentences[0].heldBy.kind, "held");
+  assert.equal(ladder.distance.told, 0);
+  assert.equal(ladder.distance.pole, "held");
 });

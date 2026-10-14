@@ -27,6 +27,8 @@ import { requireExperiencer } from "./experiencer.js";
 import { adjudicate } from "../kernel/contest.js";
 import { realizer } from "./cube-telling.js";
 import { lintSentence } from "./prose-laws.js";
+import { seamReport } from "./seam-ledger.js";
+import { distanceOf, partitionByWhom } from "./whom.js";
 
 const log2 = Math.log2;
 const mulberry = (seed) => () => { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
@@ -141,8 +143,34 @@ function marginNull(cols, layers, n, { seed = 20261014, draws = 199 } = {}) {
 
 // ---- the ladder ---------------------------------------------------------------------------------------------------------------------
 
-export async function answerLadder(record, { question, slice, grammar, telling = null, fixity = {}, seed = 20261014 } = {}) {
-  const experiencer = requireExperiencer({ who: "the asker", read: `${question.id} over ${record.sources.length} pinned pages`, revision: null });
+export async function answerLadder(record, { question, slice, grammar, telling = null, fixity = {}, seed = 20261014, whom = null } = {}) {
+  // The whom is the second operand (CALLIMACHUS-SHAPE.md "For whom"). Declared with holdings (seam-ledger.js declareWhom) it names the
+  // experiencer and what they hold; absent, the placeholder stands and the result says the whom was never declared.
+  const experiencer = requireExperiencer(whom
+    ? { who: whom.giver ?? "the void reader (no whom: the catalog)", read: `${question.id} over ${record.sources.length} pinned pages, for a ${whom.kind} holding ${whom.holdings.told} told claims and ${whom.holdings.seen} seen pages`, revision: null }
+    : { who: "the asker", read: `${question.id} over ${record.sources.length} pinned pages`, revision: null });
+  // Every stage reports its fold contract (addressed spans vs seams, the mouth's share), and the question reports its distance from the whom.
+  const withSeams = (out, touched) => {
+    for (const st of out.stages) st.seams = seamReport(st.sentences ?? []);
+    out.whom = whom ? { giver: whom.giver, kind: whom.kind, holdings: whom.holdings, empty: whom.empty } : { declared: false, note: "no whom declared: the placeholder asker stands, so no distance is measured" };
+    out.distance = whom ? distanceOf(touched, whom) : null;
+    return out;
+  };
+  // A pick this whom already holds is placed TYPED as held — never presented as new (CALLIMACHUS-SHAPE.md Step 0). A held claim that
+  // carries evidence and was NOT picked is on the record too, as a drop with its own reason, distinct from "below the floor": the lens
+  // outputs what it dropped. `held` = placed typed as held; `droppedHeld` = left out because this whom already holds it.
+  const heldOf = (picks) => (whom ? partitionByWhom(picks.map((x) => ({ key: x.a.id, page: x.a.pinax })), whom).held.map((h) => ({ atom: h.item.key, ...h.reason })) : undefined);
+  const droppedHeldOf = (picks, scores) => {
+    if (!whom) return undefined;
+    const out = [];
+    cands.forEach((a, i) => {
+      if (!whom.told.has(a.id) || !(scores[i] > 0) || picks.some((p) => p.i === i)) return;
+      const at = whom.told.get(a.id);
+      out.push({ atom: a.id, kind: "held", at, text: `held: already told to this whom${at ? ` at ${at}` : ""}; not placed here` });
+    });
+    return out;
+  };
+  const withHeld = (stage, picks, scores) => { const held = heldOf(picks); if (held) { stage.held = held; stage.droppedHeld = droppedHeldOf(picks, scores); } return stage; };
   const realize = realizer(record, { slice, grammar });
   const cands = candidatesOf(record, fixity);
   const n = cands.length;
@@ -156,17 +184,29 @@ export async function answerLadder(record, { question, slice, grammar, telling =
   const sayCache = new Map();
   const say = async (a) => { if (!sayCache.has(a.id)) { const r = await realize(propOf(a)); sayCache.set(a.id, r.sentence ?? null); } return sayCache.get(a.id); };
 
-  /** Pick k lawful candidates in score order; `diverse(a, picked)` returns a log2 penalty for redundancy with what is already picked. */
+  // What this whom already holds. Told is exact set membership on the claim's key; a held candidate that carries evidence is placed AFTER
+  // every fresh candidate that does, and typed `held` (CALLIMACHUS-SHAPE.md Step 0). Nothing is dropped and no weight constant is added:
+  // the tier is an order, so with no whom declared (or one holding nothing the question touches) the pick is exactly what it was.
+  const heldAt = new Map();
+  if (whom) cands.forEach((a, i) => { if (whom.told.has(a.id)) heldAt.set(i, whom.told.get(a.id)); });
+  const tier = (scores, i) => (whom && heldAt.size ? (scores[i] > 0 ? (heldAt.has(i) ? 1 : 0) : 2) : 0);
+
+  /** Pick k lawful candidates in score order (fresh before held, for a declared whom); `diverse(a, picked)` returns a log2 penalty for redundancy with what is already picked. */
   const pick = async (scores, k, diverse = () => 0) => {
     const picked = [];
     const pool = cands.map((a, i) => ({ a, i }));
     while (picked.length < k) {
-      let best = null, bestS = -Infinity;
-      for (const c of pool) { if (picked.some((p) => p.i === c.i)) continue; const v = scores[c.i] - diverse(c.a, picked); if (v > bestS) { best = c; bestS = v; } }
+      let best = null, bestS = -Infinity, bestT = Infinity;
+      for (const c of pool) {
+        if (picked.some((p) => p.i === c.i)) continue;
+        const v = scores[c.i] - diverse(c.a, picked), t = tier(scores, c.i);
+        if (t < bestT || (t === bestT && v > bestS)) { best = c; bestS = v; bestT = t; }
+      }
       if (!best) break;
-      const s = await say(best.a);
+      let s = await say(best.a);
       pool.splice(pool.indexOf(best), 1);
-      if (s) picked.push({ ...best, s, score: scores[best.i], adjusted: bestS });
+      if (s && heldAt.has(best.i)) s = { ...s, heldBy: { kind: "held", at: heldAt.get(best.i) ?? null } };
+      if (s) picked.push({ ...best, s, score: scores[best.i], adjusted: bestS, held: heldAt.has(best.i) });
     }
     return picked;
   };
@@ -183,10 +223,11 @@ export async function answerLadder(record, { question, slice, grammar, telling =
     const why = "no candidate carries any perception witness: the question's figures, kind, relation and words are absent from the record (a question in another language than the record's needs a bilingual lexicon, which is not on disk)";
     for (const [i, size] of ["line", "paragraph", "brief"].entries()) stages.push({ stage: i + 1, size, layers: ["perception", "logos", "pathos"].slice(0, i + 1), lead: null, verdict: "below_floor", why, sentences: s, ...(i === 1 ? { contest: { verdict: "below_floor", margin: null, bar: null } } : {}), ...(i === 2 ? { experiencer, strain: "report", sides: 0, rhythm: { flatline: false, ratio: 0, n: 0 } } : {}) });
     stages.push({ stage: 4, size: "dossier", layers: ["perception", "logos", "pathos", "cube"], sentences: (telling?.cells ?? []).flatMap((c) => c.sentences ?? []) });
-    return { question: { id: question.id, form: question.form, admits: question.reading?.admits, modality: question.modality, focus: question.focus, undeclared: question.undeclared.map((u) => u.field) }, candidates: n, stages };
+    return withSeams({ question: { id: question.id, form: question.form, admits: question.reading?.admits, modality: question.modality, focus: question.focus, undeclared: question.undeclared.map((u) => u.field) }, candidates: n, stages }, []);
   }
+  const touched = cands.filter((_, i) => p1.s[i] > 0).map((a) => ({ key: a.id, page: a.pinax }));
   const line = await pick(p1.s, 1);
-  stages.push({ stage: 1, size: "line", layers: ["perception"], lead: leadOf(line, p1.why), sentences: line.map((x) => x.s) });
+  stages.push(withHeld({ stage: 1, size: "line", layers: ["perception"], lead: leadOf(line, p1.why), sentences: line.map((x) => x.s) }, line, p1.s));
 
   // STAGE 2 — + LOGOS: the paragraph. The lead is re-chosen; contest decides whether it binds.
   const p2 = scoreWith(cols, ["perception", "logos"], n);
@@ -208,13 +249,13 @@ export async function answerLadder(record, { question, slice, grammar, telling =
     if (both) { const s = grammar.finish(both, [para[0].a.id, para[1].a.id]); if (!lintSentence(s, grammar).length) paraSentences = [s, ...para.slice(2).map((x) => x.s)]; }
   }
   const holds = (telling?.cells ?? []).find((c) => c.key === "CON·Pattern")?.sentences ?? [];
-  stages.push({
+  stages.push(withHeld({
     stage: 2, size: "paragraph", layers: ["perception", "logos"],
     lead: leadOf(para, p2.why), moved: line[0] && para[0] && line[0].a.id !== para[0].a.id ? { from: line[0].a.id, to: para[0].a.id, by: Object.keys(p2.why[para[0].i]).filter((k) => k.startsWith("logos")) } : null,
     contest: { verdict: verdict.verdict, margin: verdict.margin, bar: +bar.p95.toFixed(3), null: `p95 of ${bar.draws} seeded shuffles` },
     cycles: cycles.length,
     sentences: [...paraSentences, ...holds.slice(0, 1)],
-  });
+  }, para, p2.s));
 
   // STAGE 3 — + PATHOS: the brief, for a declared experiencer.
   const strain = strainOf({ contested: contestedIds, contradictions: [], cycles: cycles.length });
@@ -234,16 +275,16 @@ export async function answerLadder(record, { question, slice, grammar, telling =
   const cell = (k) => (telling?.cells ?? []).find((c) => c.key === k)?.sentences ?? [];
   const tension = [...cell("SYN·Pattern"), ...cell("DEF·Pattern")];
   const release = [...cell("CON·Pattern"), ...cell("EVA·Pattern"), ...cell("REC·Ground")];
-  stages.push({
+  stages.push(withHeld({
     stage: 3, size: "brief", layers: ["perception", "logos", "pathos"],
     lead: leadOf(brief, p2.why), experiencer, strain, sides,
     rhythm: { flatline: rhythm.flatline, ratio: rhythm.ratio, n: rhythm.n }, curve: "unmeasured: no fold is run over the answer (a typed gap, not a verdict)",
     // Useful first: the lead answers; then the tension (where pages differ), the other sides, and the release (what holds).
     sentences: [brief[0]?.s, ...tension.slice(0, 2), ...brief.slice(1).map((x) => x.s), ...release.slice(0, 3)].filter(Boolean),
-  });
+  }, brief, p2.s));
 
   // STAGE 4 — the whole cube: the telling. STAGE 5 (the claim sheet) is every atom, rendered by the claim-sheet lens.
   stages.push({ stage: 4, size: "dossier", layers: ["perception", "logos", "pathos", "cube"], sentences: (telling?.cells ?? []).flatMap((c) => c.sentences ?? []) });
 
-  return { question: { id: question.id, form: question.form, admits: question.reading?.admits, modality: question.modality, focus: question.focus, undeclared: question.undeclared.map((u) => u.field) }, candidates: n, stages };
+  return withSeams({ question: { id: question.id, form: question.form, admits: question.reading?.admits, modality: question.modality, focus: question.focus, undeclared: question.undeclared.map((u) => u.field) }, candidates: n, stages }, touched);
 }
