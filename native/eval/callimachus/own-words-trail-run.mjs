@@ -139,6 +139,8 @@ const out = {
   P4: { unresolved: m.gaps.filter((g) => g.type === "trail_unresolved").length, holds: m.gaps.filter((g) => g.type === "trail_unresolved").length === 0 },
   P1: { everyWhomHasActs: m.whom.every((w) => w.acts.length >= 1), actsOfFirst: m.whom[0]?.acts, entries: m.entries.length },
   counts: { shownVoid: nv.length, shownMind: shown.length, withheldExactAddresses: exactAddr.length, claimEquivalentSpans: claimEq.length, subjectAndPredicateOnly: arrOnly.length, grain: fMind.grain, leak: fMind.grain === "Ground" ? null : shown.filter((a) => heldAddr.has(a)).length },
+  arrOnlyInShown: arrOnly.filter((u) => shown.includes(u.address)).length,
+  arrOnlyWithheldByTheFold: arrOnly.filter((u) => !shown.includes(u.address)).length,
   sheetKey: key,
 };
 writeFileSync(OUT, JSON.stringify(out, null, 1));
@@ -149,7 +151,7 @@ writeFileSync(OUT.replace(/\.json$/, ".new-to-you.md"), [
   "**A**", lists.A.map(txt).join("\n") || "_(nothing)_", "", "**B**", lists.B.map(txt).join("\n") || "_(nothing)_", "",
   `**Passages you were shown, left out of B (${exactAddr.length}; first 8):**`, top(exactAddr, 8).map(txt).join("\n") || "_(none)_", "",
   `**Other sentences that state the identical claim, also left out of B (${claimEq.length}):**`, claimEq.slice(0, 8).map(txt).join("\n") || "_(none)_", "",
-  `**Sentences left IN B that share only a subject and a verb with something you were shown, but say something different (${arrOnly.length}; first 6). These were wrongly counted as "already shown" in the earlier sheet:**`, arrOnly.slice(0, 6).map(txt).join("\n") || "_(none)_", "",
+  `**Sentences ALSO left out of B that share only a subject and a verb with something you were shown but say something different (${arrOnly.filter((u) => !shown.includes(u.address)).length} of ${arrOnly.length}; first 6). You were not shown these. The fold withholds them because it counts "same subject and verb" as held:**`, arrOnly.slice(0, 6).map(txt).join("\n") || "_(none)_", "",
   "Your judgment is the test: which list has more you did not already know, and was anything in the first group not in fact something you had seen? The key is in the json beside this file.",
 ].join("\n"));
 log("wrote", OUT);
