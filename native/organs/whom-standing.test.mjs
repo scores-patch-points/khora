@@ -41,6 +41,16 @@ test("N3: a W span with no provenance, wrong side, no address, or a U address ne
   assert.deepEqual(r.refused.map((x) => x.why), ["no-provenance", "no-provenance", "no-provenance", "not-w-side", "no-address", "address-collision", "duplicate-id"]);
 });
 
+test("N3 (Amendment 6): `seen` and `spoken` spans name universe addresses on purpose and are admitted; other kinds still may not", () => {
+  const u = U("a", ["Maria Lopez", "approved", "the freeze", "+", 3]);
+  const seen = { ...W(["Maria Lopez", "approved", "the freeze"])[0], address: u[0].address, provenance: { kind: "seen", ref: "ask-1" } };
+  const spoken = { ...W(["Maria Lopez", "chairs", "the committee"])[0], address: u[0].address, provenance: { kind: "spoken", ref: "turn-2" }, id: "sp" };
+  const turn = { ...W(["Daniel Reyes", "opposed", "the fare"])[0], address: u[0].address, provenance: { kind: "turn", ref: "chat#1" }, id: "tn" };
+  const r = admitWhom([seen, spoken, turn], { universe: u });
+  assert.deepEqual(r.admitted.map((w) => w.provenance.kind), ["seen", "spoken"]);
+  assert.deepEqual(r.refused.map((x) => x.why), ["address-collision"]);
+});
+
 test("N3 (Amendment 2): several claims read from one sentence share its address and are all admitted; uniqueness is on id", () => {
   const [a, b] = W(["Maria Lopez", "approved", "the freeze"], ["Maria Lopez", "chairs", "the committee"]);
   const sameSentence = { ...b, address: a.address };

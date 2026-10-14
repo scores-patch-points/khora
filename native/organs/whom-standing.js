@@ -48,11 +48,18 @@ const docOf = (address) => String(address ?? "").split("/")[0];
 
 /** What a W span may say it came from. A vocabulary, not a threshold. */
 export const W_KINDS = Object.freeze(["memory", "turn", "spoken", "seen", "pinax"]);
+/**
+ * Kinds whose spans are, by what they mean, spans OF the universe: `seen` (the reader was shown this passage) and `spoken` (the fold said
+ * this passage to the reader). Their address names a U span on purpose; every other kind is an independent corpus and may not borrow a
+ * universe address. Run 7 of OWN-WORDS-PREREG (Amendment 6): refusing them as "address-collision" removed exactly the 18 spans the
+ * reader had been shown, which is what the kind exists to carry.
+ */
+export const REFERS_TO_U = Object.freeze(new Set(["seen", "spoken"]));
 
 /**
  * Admit W spans. A span is `{ id, address, text, side: "W", claim, provenance: { kind, ref } }`. Refused ones are returned typed; they
  * never enter H. `universe` is U's spans (or just anything with an `address`): a W address equal to a U address is refused so an address
- * can never be mistaken for the other corpus's. Uniqueness is on `id`, NOT on address: several claims are read from one sentence and
+ * can never be mistaken for the other corpus's (except `seen` and `spoken`, which are spans OF the universe). Uniqueness is on `id`, NOT on address: several claims are read from one sentence and
  * share its address (grain.js keys spans on `id`). Run 1 of WHOM-STANDING-PREREG refused them as "duplicate-address" and so read a
  * different W than `foldGrain` did; Amendment 2.
  */
@@ -66,7 +73,7 @@ export function admitWhom(spans = [], { universe = [] } = {}) {
       : w.side !== "W" ? "not-w-side"
       : !w.address ? "no-address"
       : !(w.provenance && W_KINDS.includes(w.provenance.kind) && String(w.provenance.ref ?? "").trim()) ? "no-provenance"
-      : uAddr.has(w.address) ? "address-collision"
+      : uAddr.has(w.address) && !REFERS_TO_U.has(w.provenance.kind) ? "address-collision"
       : w.id != null && seenIds.has(w.id) ? "duplicate-id"
       : null;
     if (why) refused.push({ id: w?.id ?? null, address: w?.address ?? null, why });
