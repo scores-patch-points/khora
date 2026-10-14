@@ -128,6 +128,26 @@ test("a door that fails is recorded as a failure, never a pass; a fake door is n
   assert.equal(r.surface, SURFACE);
 });
 
+test("a 429 is a refusal, not a draw: the ladder waits the retry-after it names and asks again; past the budget it is a failure", async () => {
+  let calls = 0;
+  const busyOnce = async (url, init) => {
+    calls++;
+    if (calls === 1) return { ok: false, status: 429, headers: new Headers({ "retry-after": "1" }), json: async () => ({}) };
+    return door(LOST_ANSWER)(url, init);
+  };
+  const r = await run("total", busyOnce);
+  assert.equal(calls, 2);
+  assert.equal(r.door.ok, true);
+  assert.equal(r.door.waited, 1);
+  assert.equal(r.R.pass, true, "the draw after the wait is graded like any other");
+  // a gate that stays busy past the run's budget is recorded as the door failing, never as a pass
+  const always = async () => ({ ok: false, status: 429, headers: new Headers({ "retry-after": "5" }), json: async () => ({}) });
+  const f = await run("total", always, { timeoutMs: 2000 });
+  assert.equal(f.door.ok, false);
+  assert.match(f.door.error, /429/);
+  assert.equal(f.attempt.lost, "door-failed");
+});
+
 test("LOOK is real in the ladder: the file the ask names is ranked first", async () => {
   const r = await run("greeting", door(""));
   assert.equal(r.looked.found, true);

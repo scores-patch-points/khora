@@ -58,22 +58,49 @@ test("only the declaration the block names is touched; its neighbours keep their
   assert.equal(r.after, "export function a() {\n  return 1;\n}\n\nexport function b() {\n  return 2;\n}\n\nexport function c() {\n  return 3;\n}\n");
 });
 
-test("carryExport (off by default, 0 of 24 live draws changed): a replaced declaration the file exports stays exported; one it does not export is not made public", () => {
+test("carryExport (on by default; 4 of 27 live draws, clamp): a replaced declaration the file exports stays exported; one it does not export is not made public", () => {
   const exported = "export function slugify(title) {\n  throw new Error(\"TODO\");\n}\n";
   const dropped = "<<<ADD>>>\n  function slugify(title) {\n    return title.toLowerCase();\n  }\n<<<END>>>";
-  const r = receive({ text: dropped, before: exported, file: "/ws/slug.mjs", carryExport: true });
+  const r = receive({ text: dropped, before: exported, file: "/ws/slug.mjs" });
   assert.equal(r.ok, true);
   assert.equal(r.after, "export function slugify(title) {\n    return title.toLowerCase();\n  }\n");
   assert.deepEqual(r.carried, ["export:slugify"]);
-  // the default arm: the same answer without the carry leaves the export off (the form the live ladder recorded)
-  const off = receive({ text: dropped, before: exported, file: "/ws/slug.mjs" });
+  // the off arm: the same answer without the carry leaves the export off (the form the live ladder recorded)
+  const off = receive({ text: dropped, before: exported, file: "/ws/slug.mjs", carryExport: false });
   assert.ok(!/^export\b/.test(off.after));
   // an answer that already exports is left alone; a file that did not export is not widened
-  const already = receive({ text: "<<<ADD>>>\nexport function slugify(title) {\n  return title;\n}\n<<<END>>>", before: exported, file: "/ws/slug.mjs", carryExport: true });
+  const already = receive({ text: "<<<ADD>>>\nexport function slugify(title) {\n  return title;\n}\n<<<END>>>", before: exported, file: "/ws/slug.mjs" });
   assert.deepEqual(already.carried, []);
-  const priv = receive({ text: dropped, before: "function slugify(title) {\n  throw new Error(\"TODO\");\n}\n", file: "/ws/slug.mjs", carryExport: true });
+  const priv = receive({ text: dropped, before: "function slugify(title) {\n  throw new Error(\"TODO\");\n}\n", file: "/ws/slug.mjs" });
   assert.deepEqual(priv.carried, []);
   assert.ok(!/^export\b/.test(priv.after));
+});
+
+test("THE SIGNATURE IS GROUND: an empty parameter list takes the list the ask names; another ask's list does not pass; no list, no carry", () => {
+  // verbatim: gemma2:2b through the Fold's door, 2026-10-13, unsigned stub — the right body under `mean()` (4 of 5 draws)
+  const stub = 'export function mean() {\n  throw new Error("TODO: mean");\n}\n';
+  const answer = "ACTION: patch\nPATH: stats.mjs\n<<<ADD>>>\nexport function mean() {\n  return xs.reduce((a, b) => a + b, 0) / xs.length;\n}\n<<<END>>> \n";
+  const test = 'import assert from "node:assert";\nimport { mean } from "./stats.mjs";\nassert.strictEqual(mean([2, 4, 6]), 4);\nassert.strictEqual(mean([5]), 5);\nconsole.log("ok");\n';
+  const ask = "Implement mean(xs) in stats.mjs so that `node test.mjs` passes.";
+  const r = receive({ text: answer, before: stub, file: "/ws/stats.mjs", ask });
+  assert.equal(r.ok, true);
+  assert.deepEqual(r.carried, ["params:mean"]);
+  assert.ok(r.after.includes("export function mean(xs) {"));
+  assert.equal(passes({ "stats.mjs": r.after, "test.mjs": test }), true, "the carried file passes its real test");
+  // the off arm: no ask, the body's xs stays unbound and the real test fails
+  const off = receive({ text: answer, before: stub, file: "/ws/stats.mjs" });
+  assert.deepEqual(off.carried, []);
+  assert.equal(passes({ "stats.mjs": off.after, "test.mjs": test }), false);
+  // CONTROL built to fail: another ask's list (slugify's) — the body uses none of its names, so nothing is carried
+  const wrong = receive({ text: answer, before: stub, file: "/ws/stats.mjs", ask: "Implement mean(title) in stats.mjs." });
+  assert.deepEqual(wrong.carried, []);
+  assert.equal(passes({ "stats.mjs": wrong.after, "test.mjs": test }), false, "the wrong ground does not pass");
+  // a list the answer already wrote is never overwritten; an ask that names no list carries nothing
+  const kept = receive({ text: answer.replace("mean()", "mean(ys)"), before: stub, file: "/ws/stats.mjs", ask });
+  assert.deepEqual(kept.carried, []);
+  assert.deepEqual(receive({ text: answer, before: stub, file: "/ws/stats.mjs", ask: "Implement mean in stats.mjs." }).carried, []);
+  // a list that is not plain identifiers is not ground (a call in prose, a default value)
+  assert.deepEqual(receive({ text: answer, before: stub, file: "/ws/stats.mjs", ask: "Implement mean(xs = []) here." }).carried, []);
 });
 
 test("a name the file does not declare is appended; imports it needs go to the top once", () => {

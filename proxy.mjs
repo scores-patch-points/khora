@@ -1676,10 +1676,17 @@ async function handleRequest(req, res) {
         clearTimeout(loopDeadline);
         res.removeListener("close", onDisconnect);
         log(`code execution error: ${err.message}`);
+        // A turn HELD for box pressure (proxy-runner retryUnderLoad) is the box being busy, not the request being bad:
+        // 429 with the wait it names, so a caller waits instead of recording a failure (measured 2026-10-13: every
+        // ladder draw under swap pressure came back 400 and was counted as a failed draw).
+        const held = err?.code === "ERR_BOX_PRESSURED";
         if (!res.headersSent) {
-          res.writeHead(err?.message === "cancelled" ? 499 : 400, { "content-type": "application/json" });
+          res.writeHead(err?.message === "cancelled" ? 499 : held ? 429 : 400, {
+            "content-type": "application/json",
+            ...(held ? { "retry-after": String(err.retryAfterS ?? 30) } : {}),
+          });
         }
-        res.end(JSON.stringify({ error: err.message }));
+        res.end(JSON.stringify({ error: err.message, ...(held ? { type: "box_pressured", retry_after: err.retryAfterS ?? 30 } : {}) }));
       }
     });
     return;
