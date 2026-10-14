@@ -50,10 +50,21 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { appendReasoning, reasoningAt } from "../../janus/native/organs/reasoning-spiral.js";
-import { consequenceVerdict } from "../../janus/native/organs/consequence-verdict.js";
+import { probeSpiral, layerRecord, absentLine } from "./spiral-layer.mjs";
 import { EO_DIR, steeringOff, sidOf, loadState, logError } from "./claude-code-state.mjs";
 import { readEdges, keywordsFor, resolveLanguage } from "../native/adapters/code/edges.js";
+
+// THE LAYER, TYPED (2026-10-14, nesting-fix J D1). janus's spiral organs exist only on its unmerged branch; their
+// absence is a state this file reports ("spiral-absent", naming the module — cli/spiral-layer.mjs), never an import
+// error. Resolved once at load; EO_JANUS_ROOT points it at another janus checkout.
+export const spiralLayer = await probeSpiral();
+export class SpiralAbsent extends Error {
+  constructor(layer) { super(absentLine(layer)); this.name = "SpiralAbsent"; this.code = "spiral-absent"; this.layer = layerRecord(layer); }
+}
+const need = () => { if (spiralLayer.state !== "present") throw new SpiralAbsent(spiralLayer); return spiralLayer; };
+const appendReasoning = (...a) => need().appendReasoning(...a);
+const reasoningAt = (...a) => need().reasoningAt(...a);
+const consequenceVerdict = (...a) => need().consequenceVerdict(...a);
 
 export const SPIRAL_DIR = path.join(EO_DIR, "spiral");
 const safeSid = (sid) => String(sid ?? "").replace(/[^A-Za-z0-9_-]/g, "");
@@ -206,6 +217,8 @@ export function movedSince(log, fromSeq) {
 
 /** I/O: append one run's events to the session's spiral; return janus's verdict on it. */
 export function recordRun(sid, run, { at = new Date().toISOString() } = {}) {
+  // Absent layer: nothing to record on and no verdict to give — a TYPED result, never an exception, never an OK.
+  if (spiralLayer.state !== "present") return { ...layerRecord(spiralLayer), recorded: false, line: absentLine(spiralLayer) };
   const log = loadSpiral(sid);
   const next = spiralEventsOf(log, run, { forWhom: `session:${safeSid(sid)}`, at, readGround: codeGroundReader() });
   if (next.length > log.length) {
@@ -220,7 +233,7 @@ export function recordRun(sid, run, { at = new Date().toISOString() } = {}) {
   const live = new Set(latest.values());
   const only = (ids) => ids.filter((x) => live.has(x)).length;
   const earned = only(v.earned), defeated = only(v.defeated);
-  return { file: spiralFile(sid), events: next.length, earned, withheld: only(v.withheld), defeated,
+  return { state: "present", file: spiralFile(sid), events: next.length, earned, withheld: only(v.withheld), defeated,
     retainedMind: earned - defeated, superseded: v.earned.length + v.withheld.length + v.defeated.length - live.size, byStanding: v.byStanding, refused: v.refused.filter((r) => r.seq >= log.length),
     moved: movedSince(next, log.length) };
 }
@@ -228,6 +241,7 @@ export function recordRun(sid, run, { at = new Date().toISOString() } = {}) {
 /** Pure Stop decision over a session's spiral and the turn start (ISO) the ledger recorded. */
 export function stopDecision(log, turnStart) {
   if (!log.length || !turnStart) return null;
+  need();
   const firstThisTurn = log.findIndex((e) => typeof e.at === "string" && e.at >= turnStart);
   if (firstThisTurn < 0) return null;
   const moved = movedSince(log, firstThisTurn);
@@ -245,7 +259,11 @@ const isMain = process.argv[1] && fileURLToPath(import.meta.url) === path.resolv
 if (isMain) {
   try {
     const ev = JSON.parse(fs.readFileSync(0, "utf8") || "{}");
-    if (ev.hook_event_name === "Stop" && !ev.stop_hook_active && !steeringOff()) {
+    if (spiralLayer.state !== "present") {
+      // Typed, on the error log and in the exit path: no verdict can be given, and the doorway records the same state
+      // on the reason ledger. The script itself exits 0 — an absent layer must not look like a crashed gate.
+      logError("claude-code-spiral", new SpiralAbsent(spiralLayer));
+    } else if (ev.hook_event_name === "Stop" && !ev.stop_hook_active && !steeringOff()) {
       const sid = sidOf(ev);
       const reason = stopDecision(loadSpiral(sid), loadState(sid).turnStart);
       if (reason) process.stdout.write(JSON.stringify({ decision: "block", reason }));

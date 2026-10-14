@@ -51,6 +51,8 @@ import path from "node:path";
 import { spawn } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { surfaceFileFor } from "./native/organs/reasoning-record.js";
+import { probeSpiral, layerRecord, absentLine } from "./cli/spiral-layer.mjs";
+import { appendLayerState } from "./cli/reasoning-ledger.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const REASON = path.join(HERE, "cli", "reason.mjs");
@@ -105,12 +107,34 @@ export function oneAnswer(answers = []) {
   return answers.find(blocks) ?? answers[answers.length - 1] ?? "";
 }
 
+// A LAYER THE STACK CALLS IS NOT THERE (nesting-fix J D1). janus's spiral organs live only on its unmerged branch, so
+// on the merged stack the spiral Stop script cannot run and reason.mjs cannot record. That used to be an exit 1 the
+// doorway swallowed into a proxy-log line. It is now a typed record on the reason ledger (kind "layer-absent"),
+// written once per process per (session, module, reason) so a long session is one line, not one per Stop.
+const noted = new Set();
+async function noteSpiralLayer({ session = null, log = () => {} } = {}) {
+  const probe = await probeSpiral();
+  if (probe.state === "present") return probe;
+  const rec = layerRecord(probe);
+  const key = `${session ?? ""}|${rec.module}|${rec.reason}`;
+  if (!noted.has(key)) {
+    noted.add(key);
+    appendLayerState({ layer: "spiral", state: rec.state, module: rec.module, reason: rec.reason, detail: probe.detail, session });
+    log(`claude-code: ${absentLine(probe)}`);
+  }
+  return probe;
+}
+
 export async function answerHook(ev, { log = () => {} } = {}) {
   const deadline = Date.now() + EVENT_BUDGET_MS;
   const answers = [];
   for (const h of handlersFor(ev)) {
     const script = path.join(HERE, h.script);
     if (!fs.existsSync(script)) { log(`claude-code: ${h.script} is not in this checkout; skipped`); continue; }
+    if (h.script === "cli/claude-code-spiral.mjs") {
+      const layer = await noteSpiralLayer({ session: ev?.session_id ?? null, log });
+      if (layer.state !== "present") continue; // typed + recorded above; not a crash, not an OK
+    }
     const left = deadline - Date.now();
     if (left <= 0) { log(`claude-code: ${ev.hook_event_name} ran out of time before ${h.script}`); break; }
     const r = await runNode(script, [], JSON.stringify(ev), { timeoutMs: left });
@@ -122,7 +146,7 @@ export async function answerHook(ev, { log = () => {} } = {}) {
 
 const REASON_FLAGS = new Set(["--ants", "--json", "--compact"]);
 
-export async function runReason(spec, flags = [], cwd = null) {
+export async function runReason(spec, flags = [], cwd = null, { log = () => {} } = {}) {
   const unknown = flags.filter((f) => !REASON_FLAGS.has(f));
   if (unknown.length) return { status: 400, type: "application/json", body: JSON.stringify({ error: { type: "unknown_reason_flag", message: `unknown flag(s): ${unknown.join(" ")}; known: ${[...REASON_FLAGS].join(" ")}` } }) };
   try { JSON.parse(spec); } catch (e) {
@@ -130,6 +154,7 @@ export async function runReason(spec, flags = [], cwd = null) {
   }
   const dir = cwd && path.isAbsolute(cwd) && fs.existsSync(cwd) ? cwd : HERE;
   const r = await runNode(REASON, flags, spec, { cwd: dir, timeoutMs: REASON_BUDGET_MS });
+  await noteSpiralLayer({ log });
   // Exit 0 is a pass and 1 a verdict with errors; anything else is a crash,
   // and then its stderr is the answer.
   const crashed = r.timedOut || (r.code !== 0 && r.code !== 1);
@@ -180,7 +205,7 @@ export async function route(req, res, { log = () => {} } = {}) {
   if (url === "/v1/reason" && req.method === "POST") {
     const spec = await readBody(req);
     const flags = String(req.headers["x-er7-reason-flags"] ?? "").split(/\s+/).filter(Boolean);
-    const r = await runReason(spec, flags, String(req.headers["x-er7-cwd"] ?? "") || null);
+    const r = await runReason(spec, flags, String(req.headers["x-er7-cwd"] ?? "") || null, { log });
     res.writeHead(r.status, { "content-type": r.type, ...(r.exit != null ? { "x-er7-exit": String(r.exit) } : {}) });
     res.end(r.body);
     return true;

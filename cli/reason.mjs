@@ -504,11 +504,14 @@ if (sessionKey && declared.length) {
   try {
     const { recordRun } = await import("./claude-code-spiral.mjs");
     out.janus = recordRun(sessionKey, { declared, inputClaims: input.claims ?? [], findings, sources: sourcesOut, declare: decl });
-  } catch (e) { out.janus = { error: String(e?.message ?? e) }; }
+  } catch (e) { out.janus = { state: "spiral-error", error: String(e?.message ?? e) }; }
 }
 const janusLines = () => {
   const j = out.janus;
   if (!j) return [];
+  // spiral-absent (nesting-fix J D1): janus's spiral organs are not on this stack. A typed state, named, never a
+  // silent skip — and never the reading of the OK line above, which is khora's lint alone.
+  if (j.state === "spiral-absent") return [`  janus: ${j.line}`];
   if (j.error) return [`  janus: not recorded (${j.error})`];
   return [
     `  janus (session record, ${j.events} event(s)): earned ${j.earned} · withheld ${j.withheld} · defeated ${j.defeated} · retained mind ${j.retainedMind}${j.superseded ? ` · ${j.superseded} superseded proposal(s) kept on the record` : ""}${j.refused.length ? ` · ${j.refused.length} move(s) refused: ${j.refused.map((r) => r.why).join(", ")}` : ""}`,

@@ -95,6 +95,30 @@ function appendLine(file, line) {
 }
 
 /**
+ * appendLayerState({ layer, state, module, reason, detail, session, dir }) — a TYPED gap on the same ledger
+ * (nesting-fix J D1, 2026-10-14): a layer the stack calls is not there (janus's spiral organs live only on an
+ * unmerged branch). Append-only, one line, kind "layer-absent" — read by nothing that folds claims (those read
+ * kind "reasoning-claim"), so it never counts as a witness; it exists so an absent layer leaves a RECORD instead of
+ * a proxy-log line. Never throws. Returns {written, file}.
+ */
+export function appendLayerState({ layer = "spiral", state = "spiral-absent", module = null, reason = null, detail = null, session = null, at = null, dir = DOCS } = {}) {
+  try {
+    const when = at ?? new Date().toISOString();
+    const file = ledgerFile(dir);
+    const text = scrub(excerpt(`${layer} layer ${state}${module ? `: ${module}` : ""}${reason ? ` — ${reason}` : ""}${detail ? ` (${detail})` : ""}`));
+    const id = `${DOC_ID}:layer:${crypto.createHash("sha1").update(`${when}\n${process.pid}\n${layer}\n${state}\n${module ?? ""}\n${session ?? ""}`).digest("hex").slice(0, 16)}`;
+    const start = nextStart(file);
+    appendLine(file, {
+      schema: "EOTObservation@1", id, at: [start, start + text.length],
+      role: "gap", kind: "layer-absent", title: `/layer/${layer}/${state}`,
+      text, supersedes: null, giver: "eoreader7-doorway", basis: scrub(`layer:${layer} state:${state}${module ? ` module:${module}` : ""}`),
+      session, layer, state, module, reason, detail: detail == null ? null : scrub(excerpt(detail)), appendedAt: new Date().toISOString(),
+    });
+    return { written: 1, file };
+  } catch (e) { return { written: 0, error: `${e?.message ?? e}` }; }
+}
+
+/**
  * appendReasoningLedger({ hl, log, declaredClaims, session, runAt, cwd,
  * grounds, ok, errors, dir }) — append this run's reasoning to the one
  * shared ledger, in TWO independent layers that never gate each other:

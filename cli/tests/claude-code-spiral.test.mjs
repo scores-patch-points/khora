@@ -1,15 +1,20 @@
 // cli/tests/claude-code-spiral.test.mjs — the janus wiring (cli/claude-code-spiral.mjs) against janus's
 // REAL organs (reasoning-spiral.js, consequence-verdict.js; no stand-ins), plus one run of the real
 // cli/reason.mjs. Each gate test carries the control that must stay silent.
-import { test } from "node:test";
+import { test as nodeTest } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { reasoningAt } from "../../../janus/native/organs/reasoning-spiral.js";
 import os from "node:os";
-import { spiralEventsOf, movedSince, stopDecision, claimKey, spiralFile, codeGroundReader } from "../claude-code-spiral.mjs";
+import { spiralEventsOf, movedSince, stopDecision, claimKey, spiralFile, codeGroundReader, spiralLayer } from "../claude-code-spiral.mjs";
+
+// janus's spiral organs exist only on its unmerged branch (nesting-fix J D1); on the merged stack they are a typed
+// absence (see claude-code-spiral-layer.test.mjs) and the tests that need them are SKIPPED with that reason, never
+// failed at import.
+const reasoningAt = (...a) => spiralLayer.reasoningAt(...a);
+const test = (name, fn) => nodeTest(name, { skip: spiralLayer.state === "present" ? false : `${spiralLayer.module} ${spiralLayer.reason} (janus@39b705e layout)` }, fn);
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const G = "/repo/src/a.js";
