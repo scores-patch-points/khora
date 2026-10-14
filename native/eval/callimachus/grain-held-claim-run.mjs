@@ -12,7 +12,8 @@ import { makePinax, makeSpan, quoteOf, parseAddress } from "../../organs/pinax.j
 import { readCorpus } from "../../organs/callimachus.js";
 import { candidatesOf, witnesses, scoreWith } from "../../organs/answer-ladder.js";
 import { questionVoid } from "../../organs/question-void.js";
-import { spansFromRecord, arrangementOf, splitRegion } from "../../organs/grain.js";
+import { arrangementOf, foldGrain, spansFromRecord, splitRegion } from "../../organs/grain.js";
+import { execSync } from "node:child_process";
 import { foldWithWhom, verifyFold } from "../../organs/whom-standing.js";
 import { mindOf, claimKeyOf } from "../../organs/mind-whom.js";
 import { whomFromTrail } from "../../organs/trail-whom.js";
