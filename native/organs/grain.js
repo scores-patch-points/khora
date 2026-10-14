@@ -216,6 +216,19 @@ function wEdges(whom, split) {
   return (whom ?? []).filter((w) => w.claim?.subj && w.claim?.obj && w.claim.polarity && held.has(norm(w.claim.subj)) && held.has(norm(w.claim.obj)) && norm(w.claim.subj) !== norm(w.claim.obj));
 }
 
+/**
+ * One absent span, placed beside the nearest thing the reader already holds. A shared entity is an addressed join: the two sit side by
+ * side with no seam. With only the nearest held span (same division, nearest by byte) the bridge is a seam. With nothing held to attach
+ * to, the span stands alone. Used by Making (Figure) and, so the new is never left unshown, by Composing (Pattern).
+ */
+function attachNew(u, held) {
+  const mine = new Set(entitiesOf(u));
+  const byEntity = held.filter((h) => entitiesOf(h).some((e) => mine.has(e)));
+  const near = byEntity[0] ?? held.filter((h) => divisionOf(h) === divisionOf(u)).sort((a, b) => Math.abs(startOf(a) - startOf(u)) - Math.abs(startOf(b) - startOf(u)))[0] ?? null;
+  if (byEntity[0]) return { ...P([near, u]), attachedBy: "entity" };
+  return near ? { ...S([src(near), seg.frame(FRAME_WORDS.Making[0]), src(u)], [near, u]), attachedBy: "nearest" } : { ...P([u]), attachedBy: null };
+}
+
 // Every cell consumes the material Clearing left standing (`cleared`), never the raw activated region.
 const CELL = {
   // ---- Ground row
@@ -243,15 +256,7 @@ const CELL = {
     items: pairs.filter((p) => ["AGREE", "SINGLE"].includes(p.case)).map((p) => P([p.w, p.holds[0]])),
   }),
   Making: ({ split }) => {
-    const held = split.H;
-    const items = [...split.A].sort((a, b) => (b.activation ?? 0) - (a.activation ?? 0)).map((u) => {
-      const mine = new Set(entitiesOf(u));
-      const byEntity = held.filter((h) => entitiesOf(h).some((e) => mine.has(e)));
-      const near = byEntity[0] ?? held.filter((h) => divisionOf(h) === divisionOf(u)).sort((a, b) => Math.abs(startOf(a) - startOf(u)) - Math.abs(startOf(b) - startOf(u)))[0] ?? null;
-      // A shared entity is an addressed join: the two spans sit side by side with no seam. With only the nearest span, the bridge is a seam.
-      if (byEntity[0]) return { ...P([near, u]), attachedBy: "entity" };
-      return near ? { ...S([src(near), seg.frame(FRAME_WORDS.Making[0]), src(u)], [near, u]), attachedBy: "nearest" } : { ...P([u]), attachedBy: null };
-    });
+    const items = [...split.A].sort((a, b) => (b.activation ?? 0) - (a.activation ?? 0)).map((u) => attachNew(u, split.H));
     return { items };
   },
 
@@ -265,14 +270,18 @@ const CELL = {
     }
     return { items };
   },
-  Tracing: ({ cleared, whom, split }) => ({
-    items: wEdges(whom, split).flatMap((w) => {
+  Tracing: ({ cleared, whom, split }) => {
+    const items = wEdges(whom, split).flatMap((w) => {
       if (["DISAGREE", "CONTRADICTED"].includes(contactVerdict(w, cleared).case)) return [];
       const chain = pathOf(cleared, norm(w.claim.subj), norm(w.claim.obj));
       if (!chain || !chain.length) return [];
-      return [{ ...P([w, ...chain]), hops: chain.length }];
-    }),
-  }),
+      // An ECHO is the reader's own claim corroborated by one record span that says the same thing in the same words: confirmation, not a walk.
+      const echo = chain.length === 1 && norm(w.text) === norm(chain[0].text);
+      return [{ ...P([w, ...chain]), hops: chain.length, echo }];
+    });
+    // genuine chains first, echoes after (stable within each)
+    return { items: [...items.filter((i) => !i.echo), ...items.filter((i) => i.echo)] };
+  },
   Composing: ({ cleared, whom, split }) => {
     const held = new Set(split.H.flatMap(entitiesOf));
     const wPairs = new Set((whom ?? []).filter((w) => w.claim?.subj && w.claim?.obj).map((w) => [norm(w.claim.subj), norm(w.claim.obj)].sort().join("␟")));
@@ -285,6 +294,13 @@ const CELL = {
       const left = endSpan(a, u), right = endSpan(b, u);
       if (!left || !right) continue;
       items.push(S([src(left), seg.frame(FRAME_WORDS.Composing[0]), src(u), seg.frame(FRAME_WORDS.Composing[1]), src(right)], [left, u, right]));
+    }
+    // The generating cell lays down what is ABSENT as well as what is newly related (GRAIN-R3-PREREG.md): an absent span with no relation to
+    // anything held is still the thing the reader has not seen. Each is placed beside the nearest held span, as Making does at Figure.
+    const composedAddr = new Set(items.flatMap((it) => it.spans));
+    for (const u of [...split.A].sort((a, b) => (b.activation ?? 0) - (a.activation ?? 0))) {
+      if (composedAddr.has(u.address)) continue;
+      items.push({ ...attachNew(u, split.H), unrelated: true });
     }
     return { items };
   },
@@ -309,13 +325,15 @@ export function closureOf(modes) {
  *   whom:   W's spans (side "W"), read by the same relation reader. Empty or absent = the void reader.
  * Selection happens on the whole activated region; every cell then works on what Clearing left standing.
  */
-export function foldGrain({ region = [], whom = [], survives = (u) => (u.activation ?? 0) > 0, draws = 199, seed = 20261014 } = {}) {
+export function foldGrain({ region = [], whom = [], survives = (u) => (u.activation ?? 0) > 0, draws = 199, seed = 20261014, forceGrain = null } = {}) {
   const selection = splitRegion(region, whom, { draws, seed });
   const cleared = region.filter(survives);
   const standing = new Set(cleared.map((u) => u.id));
   const split = { ...selection, H: selection.H.filter((u) => standing.has(u.id)), A: selection.A.filter((u) => standing.has(u.id)) };
   const pairs = pairsOf(split, cleared, whom);
-  const picked = selectGrain(selection, pairs.map((p) => p.case));
+  const selected = selectGrain(selection, pairs.map((p) => p.case));
+  // `forceGrain` is for evaluation only (does what is shown as new depend on the cut?); the fold says it was forced.
+  const picked = forceGrain && GRAINS.includes(forceGrain) ? { grain: forceGrain, why: `forced to ${forceGrain} (selected: ${selected.grain})`, forced: true } : selected;
   const grain = picked.grain;
   const ctx = { region, cleared, whom, split, pairs, survives };
   const modes = STEPS[grain].map(([role, cell]) => {
@@ -329,7 +347,7 @@ export function foldGrain({ region = [], whom = [], survives = (u) => (u.activat
   const confined = silent.every((m) => m.items.every((it) => (it.segs ?? []).every((g) => g.kind === "source" || (g.kind === "frame" && g.t === "" && g.seam === "absence"))));
   return {
     grain, why: picked.why, ...(picked.selectorUnreadable ? { selectorUnreadable: true } : {}),
-    distance: { region: region.length, cleared: cleared.length, held: selection.H.length, absent: selection.A.length, share: selection.distance, witness: "claim-arrangement", null: selection.null },
+    distance: { region: region.length, cleared: cleared.length, held: selection.H.length, absent: selection.A.length, share: selection.distance, margin: selection.H.length + selection.A.length ? (selection.H.length - selection.A.length) / (selection.H.length + selection.A.length) : null, witness: "claim-arrangement", null: selection.null },
     contacts: pairs.map((p) => ({ w: p.w.address, case: p.case, standing: p.standing, holds: p.holds.map((u) => u.address), refused: p.refused.map((u) => u.address), undetermined: p.undetermined.map((u) => u.address) })),
     modes,
     closure: { ...closureOf(modes), mouthConfined: confined },
