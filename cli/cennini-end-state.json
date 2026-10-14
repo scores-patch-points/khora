@@ -1,0 +1,112 @@
+{
+  "schema": "CenniniEndState@1",
+  "name": "The Journeyman's Piece",
+  "canon": "FOLD-CONSTITUTION.md VI.6 amendment A2; recorded whole in CENNINI.md",
+  "says": "On held-out asks from this engine's own work, a system of mechanical processing and a small local model gives Claude Code-level coding assistance: the same places, the same changes, the same answers, nothing leaving the machine, no invented values, and the operator cannot prefer the master's outcome beyond chance.",
+  "alpha": 0.05,
+  "alphaGiver": "declared, the lineage's own (khora/native/organs/consequence.js CONSEQUENCE_BAR.alpha); never fitted to a result",
+  "freeze": "The piece (the held-out asks, drawn from sessions after the last session any lesson learned from) is fixed by hash BEFORE the first run, and no lesson is tuned after seeing its result (II.5 firewall; params_set_after_seeing_result refuses).",
+  "masterBaseline": {
+    "note": "the master's own measured rates, the bar where the master has a rate; sources are the findings notes of 2026-10-13",
+    "undoneLaterSameSession": { "value": 0.039, "source": "survival of the master's structural additions" },
+    "addedBytesAlreadyHeld": {
+    "value": 0.055,
+    "donorNull": 0.010,
+    "source": "apprentice-assembled-1, 688 transcripts, 2,620 edits, paired against donor sessions (p at its floor): the share of an edit's added bytes a file the session already held contained verbatim; only 1% of edits fully so, median residue 1,494 bytes. A floor: files never Read are not held"
+  },
+  "addedCallsReachingHeldNames": {
+    "value": 0.245,
+    "donorNull": 0.051,
+    "source": "apprentice-assembled-1, same run: per edit, the share of added calls that reach a name a held file binds or declares (library 4.4%, repo 10.0%, own file 1.3% of all added calls); p at its floor"
+  },
+  "addedCallsReusingAnythingExisting": {
+    "value": 0.782,
+    "source": "apprentice-assembled-1, same run: library + repo + own file + the running engine's own names (62.5%, JavaScript only, not donor-nullable); 16.5% of added calls reach a name the edit itself declares, 5.2% unresolved. Mostly builtin plumbing (push, map, join), so read the 15% of library and repo calls as the 'found the thing' part"
+  },
+  "judgeableAdditionsStillPresent": { "value": 0.956, "source": "survival of the master's structural additions" }
+  },
+  "kinds": {
+    "beats-null": "passes iff the facet's declared test has p <= alpha, the value beats its null in the declared direction, and the known-bad control arm was REJECTED at the same n",
+    "not-worse": "passes iff the one-sided p that the pair is WORSE than the reference is > alpha AND the known-bad control arm was rejected at the same n (a test that could not have failed is not a test, II.10)",
+    "holds-on-trace": "a property of how a run LOOKS AND BEHAVES, judged on the events of recorded LIVE runs: passes iff n >= 1 live runs, zero violations, and the judge rejected its known-bad trace and accepted a good one (a fixture proves the judge can fail; only live runs prove the product)"
+  },
+  "clauses": [
+    {
+      "id": "J1",
+      "name": "LOCAL",
+      "article": "II.13",
+      "says": "Nothing leaves the machine, only the registered small model answers, and the pair is no slower than the master on the same asks.",
+      "facets": [
+        { "id": "no-egress", "kind": "beats-null", "direction": "lower", "instrument": "cli/cennini-local.mjs", "control": "a run with a frontier fallback switched on must be flagged" },
+        { "id": "small-model-only", "kind": "beats-null", "direction": "lower", "instrument": "cli/cennini-local.mjs", "control": "a run served by a larger model must be flagged" },
+        { "id": "no-slower", "kind": "not-worse", "instrument": null, "control": "a deliberately slowed run must be rejected at the same n" }
+      ]
+    },
+    {
+      "id": "J2",
+      "name": "HONEST",
+      "article": "II.9",
+      "says": "Every figure, name, path and citation the mouth utters traces to a mechanical result; a gap is said, never filled.",
+      "facets": [
+        { "id": "no-invented-values", "kind": "beats-null", "direction": "lower", "instrument": "native/organs/grounding.js", "control": "a planted invented figure must be flagged" }
+      ]
+    },
+    {
+      "id": "J3",
+      "name": "CHANGE",
+      "article": "II.6",
+      "says": "On the piece's change-asks the pair makes the master's change and it lasts: it beats doing nothing on a discriminating grade, beats its swapped-ask null, and is undone no more often than the master's.",
+      "facets": [
+        { "id": "finish", "kind": "beats-null", "direction": "higher", "instrument": "cli/apprentice-mover.mjs", "control": "a swapped seed must score below it" },
+        { "id": "start", "kind": "beats-null", "direction": "higher", "instrument": null, "control": "a swapped ask must score below it" },
+        { "id": "whole", "kind": "beats-null", "direction": "higher", "instrument": null, "control": "doing nothing must score below it" },
+        { "id": "assembled-not-generated", "kind": "beats-null", "direction": "higher", "instrument": null, "control": "assembling from another repo's bytes must score below it", "instrumentDraft": "cli/apprentice-assembled.mjs", "note": "found, not written: every coder finds the library that already has the thing and adds a little. Two halves, each against a donor-session null: the share of the added bytes a file the session held already contained, and the share of the added calls that reach a name that already exists (a library, a repo file, the file's own). Report the residue the mouth had to write, in bytes, as a distribution beside the share; never threshold it. Held files are a floor: a line taken from a package never Read counts as written, so finding the library is its own part (CENNINI.md, the movement)." },
+        { "id": "lasts", "kind": "not-worse", "instrument": null, "control": "a deliberately reverted change must be rejected at the same n" }
+      ]
+    },
+    {
+      "id": "J4",
+      "name": "PLACE",
+      "article": "II.3",
+      "says": "The pair reaches the place the master reached, within the master's own hops, and what it learned about where changes land is about THIS ask, not a base rate.",
+      "facets": [
+        { "id": "seeded-by-the-ask", "kind": "beats-null", "direction": "higher", "instrument": "cli/apprentice-trail.mjs", "control": "another ask's words must reach less often" },
+        { "id": "ask-specific-lesson", "kind": "beats-null", "direction": "higher", "instrument": "cli/apprentice-trail.mjs", "control": "a memory list nominated by another ask must NOT do as well" }
+      ]
+    },
+    {
+      "id": "J5",
+      "name": "ANSWER",
+      "article": "III.3",
+      "says": "Asked about the repo, every claim cites bytes that exist and hold it, and the master's cited places are among the pair's.",
+      "facets": [
+        { "id": "cited-and-held", "kind": "beats-null", "direction": "higher", "instrument": null, "control": "an answer with an uncited claim must be rejected" }
+      ]
+    },
+    {
+      "id": "J6",
+      "name": "BLIND",
+      "article": "VI.2",
+      "says": "Shown the pair's outcome and the master's, unlabelled, the operator does not prefer the master's beyond chance, and the same blind test rejects the known-bad arm at the same n.",
+      "facets": [
+        { "id": "operator-cannot-tell", "kind": "not-worse", "instrument": null, "control": "the doing-nothing arm must be rejected by the same operator at the same n" }
+      ]
+    },
+    {
+      "id": "J7",
+      "name": "EXPERIENCE",
+      "article": "V",
+      "says": "Using agentic mode feels like working with Claude Code, and every mark of that is checkable on a recorded run: you start from your own words; a plan is stated first; it looks before it touches; every step says who made it; it re-reads what happened and says what it could not do; nothing leaves the machine; every step is undoable and your corrections win; and an ask it has handled before comes back faster.",
+      "facets": [
+        { "id": "ask-in-words", "kind": "holds-on-trace", "instrument": "cli/cennini-contract.mjs", "control": "a run that starts from no ask must be rejected" },
+        { "id": "plan-first", "kind": "holds-on-trace", "instrument": "cli/cennini-contract.mjs", "control": "a run that acts before it states a plan must be rejected" },
+        { "id": "looks-first", "kind": "holds-on-trace", "instrument": "cli/cennini-contract.mjs", "control": "a run that acts without having read or looked must be rejected" },
+        { "id": "says-who-made-it", "kind": "holds-on-trace", "instrument": "cli/cennini-contract.mjs", "control": "an act that does not name its lane must be rejected" },
+        { "id": "observes-and-stops-by-measure", "kind": "holds-on-trace", "instrument": "cli/cennini-contract.mjs", "control": "a run that acts and claims success without observing must be rejected" },
+        { "id": "stays-local", "kind": "holds-on-trace", "instrument": "cli/cennini-contract.mjs", "control": "a run with an escalation must be rejected" },
+        { "id": "undo-and-corrections-win", "kind": "holds-on-trace", "instrument": null, "control": "a fold that cannot undo a step, or a lesson that outranks a correction, must be rejected" },
+        { "id": "handled-before-is-faster", "kind": "not-worse", "instrument": null, "control": "a repeat of an ask that is no faster than its first time must be rejected at the same n" }
+      ]
+    }
+  ]
+}
