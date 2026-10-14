@@ -20,9 +20,20 @@
 //   UNLICENSED (janus's low gate), a coherent but untested one UNRESOLVED.
 //
 //   STOP HOOK (run as a script, after claude-code-reason-gate.mjs in the
-//   doorway table): blocks ONCE when this turn moved a conclusion that stood
+//   doorway table): blocks when this turn moved a conclusion that stood
 //   SUPPORTED at the turn's start to suspended / stale / refuted, naming each
-//   and janus's own question for it. stop_hook_active always passes (no loop).
+//   and janus's own question for it — and EACH VERDICT IS DELIVERED AT MOST
+//   ONCE (nesting-fix J D4, 2026-10-14). The loop guard used to be
+//   stop_hook_active, which shadowed this gate in exactly the turn where the
+//   reason-gate had blocked Stop #1 and the model's reasoning run moved a
+//   claim: Stop #2 is stop_hook_active, so the verdict was never spoken. The
+//   guard is now the verdict's own key (claim, standing, the record position
+//   it began standing there): recordRun appends it to a small append-only
+//   pending record (~/.claude/eo-reason/pending/<session>.jsonl), the Stop
+//   gate delivers every pending verdict still true, and a `delivered` line
+//   retires it — so a verdict is carried forward until it is heard, then
+//   never again, active stop or not, and a verdict that stopped being true
+//   is retired as `resolved` without a word.
 //   Off switch: ~/.claude/eo-reason/steer.off. Fails open, logged. Never
 //   writes the session state file (the lost-update class the ledger's other
 //   Stop readers are written against).
@@ -53,7 +64,7 @@ import { fileURLToPath } from "node:url";
 import { probeSpiral, layerRecord, absentLine } from "./spiral-layer.mjs";
 import { str, claimKey, claimId, slotOf, metaOf, functionalRels, revisionKind } from "./claim-identity.mjs";
 export { claimKey, claimId };
-import { steeringOff, sidOf, loadState, logError } from "./claude-code-state.mjs";
+import { EO_DIR, steeringOff, sidOf, loadState, logError } from "./claude-code-state.mjs";
 import { readEdges, keywordsFor, resolveLanguage } from "../native/adapters/code/edges.js";
 
 // THE LAYER, TYPED (2026-10-14, nesting-fix J D1). janus's spiral organs exist only on its unmerged branch; their
@@ -209,6 +220,65 @@ export function movedSince(log, fromSeq) {
     .map((n) => ({ id: n.id, standing: n.standing, because: n.because, question: question.get(n.id) ?? "What now supports or refutes this?" }));
 }
 
+// ── PENDING VERDICTS (nesting-fix J D4) ─────────────────────────────────────
+export const PENDING_DIR = path.join(EO_DIR, "pending");
+export const pendingFile = (sid) => path.join(PENDING_DIR, `${safeSid(sid)}.jsonl`);
+export function loadPending(sid) {
+  let raw = "";
+  try { raw = fs.readFileSync(pendingFile(sid), "utf8"); } catch { return []; }
+  const out = [];
+  for (const l of raw.split("\n")) { if (!l) continue; try { out.push(JSON.parse(l)); } catch { /* a torn line is not a verdict */ } }
+  return out;
+}
+export function appendPending(sid, entries) {
+  if (!entries.length) return;
+  fs.mkdirSync(PENDING_DIR, { recursive: true });
+  fs.appendFileSync(pendingFile(sid), entries.map((e) => JSON.stringify(e)).join("\n") + "\n");
+}
+const ADVERSE = new Set(["suspended", "stale", "refuted"]);
+
+/** The record position at which `id` began standing at `standing`, unbroken until now — what tells a claim that was
+ *  suspended, re-earned and suspended again from the same suspension heard twice. */
+function sinceSeq(log, id, standing) {
+  let since = log.length;
+  for (let k = log.length - 1; k >= 0; k--) {
+    const n = reasoningAt(log, { asOf: k }).claims.find((x) => x.id === id);
+    if (n?.standing !== standing) break;
+    since = k;
+  }
+  return since;
+}
+/** One moved conclusion, as a verdict with the key that makes it deliverable once. */
+export const verdictOf = (log, m) => ({ key: `${m.id}|${m.standing}|${sinceSeq(log, m.id, m.standing)}`, id: m.id, standing: m.standing, because: m.because, question: m.question });
+
+const renderVerdicts = (moved, { carried = false } = {}) => [
+  `**janus: ${carried ? "an earlier turn" : "this turn"} moved earlier conclusions off their standing.** These stood SUPPORTED before:`,
+  "",
+  ...moved.map((m) => `- **${m.id}**: now **${m.standing}** (${(m.because ?? []).join("; ")}). ${m.question}`),
+  "",
+  "Re-run `cli/reason.mjs` with each restated (and its `premises`) to re-earn it, or say plainly that it no longer holds. Each verdict is spoken once; the record keeps the history either way.",
+].join("\n");
+
+/** What the Stop gate owes the session now: every pending-or-derived verdict that is still true and not yet
+ *  delivered. Pure over (pending lines, log, turnStart). Returns {reason, deliver:[keys], resolved:[keys]}. */
+export function pendingDecision(pending, log, turnStart) {
+  const delivered = new Set(pending.filter((e) => e.kind === "delivered").map((e) => e.key));
+  const cands = new Map();
+  for (const e of pending) if (e.kind === "verdict" && !delivered.has(e.key)) cands.set(e.key, { ...e, carried: !!(turnStart && e.turnStart && e.turnStart < turnStart) });
+  if (log.length && turnStart) { // this turn's own moves, even if recordRun never wrote them (another writer, an older run)
+    const first = log.findIndex((e) => typeof e.at === "string" && e.at >= turnStart);
+    if (first >= 0) for (const m of movedSince(log, first)) { const v = verdictOf(log, m); if (!delivered.has(v.key) && !cands.has(v.key)) cands.set(v.key, { ...v, carried: false }); }
+  }
+  if (!cands.size) return { reason: null, deliver: [], resolved: [] };
+  const now = new Map(reasoningAt(log).claims.map((n) => [n.id, n]));
+  const live = [], resolved = [];
+  for (const v of cands.values()) { const n = now.get(v.id); (n && ADVERSE.has(n.standing) && n.standing === v.standing ? live : resolved).push(v); }
+  return {
+    reason: live.length ? renderVerdicts(live, { carried: live.every((v) => v.carried) }) : null,
+    deliver: live.map((v) => v.key), resolved: resolved.map((v) => v.key),
+  };
+}
+
 /** I/O: append one run's events to the session's spiral; return janus's verdict on it. */
 export function recordRun(sid, run, { at = new Date().toISOString() } = {}) {
   // Absent layer: nothing to record on and no verdict to give — a TYPED result, never an exception, never an OK.
@@ -227,9 +297,18 @@ export function recordRun(sid, run, { at = new Date().toISOString() } = {}) {
   const live = new Set(latest.values());
   const only = (ids) => ids.filter((x) => live.has(x)).length;
   const earned = only(v.earned), defeated = only(v.defeated);
+  const moved = movedSince(next, log.length);
+  if (moved.length) {
+    // Carry each moved conclusion forward until the Stop gate has spoken it (J D4). Never throws into the run.
+    try {
+      const have = new Set(loadPending(sid).filter((e) => e.kind === "verdict").map((e) => e.key));
+      const turnStart = loadState(sid).turnStart ?? null;
+      appendPending(sid, moved.map((m) => verdictOf(next, m)).filter((v) => !have.has(v.key)).map((v) => ({ kind: "verdict", ...v, at, turnStart })));
+    } catch (e) { logError("claude-code-spiral:pending", e); }
+  }
   return { state: "present", file: spiralFile(sid), events: next.length, earned, withheld: only(v.withheld), defeated,
     retainedMind: earned - defeated, superseded: v.earned.length + v.withheld.length + v.defeated.length - live.size, byStanding: v.byStanding, refused: v.refused.filter((r) => r.seq >= log.length),
-    moved: movedSince(next, log.length) };
+    moved };
 }
 
 /** Pure Stop decision over a session's spiral and the turn start (ISO) the ledger recorded. */
@@ -257,10 +336,15 @@ if (isMain) {
       // Typed, on the error log and in the exit path: no verdict can be given, and the doorway records the same state
       // on the reason ledger. The script itself exits 0 — an absent layer must not look like a crashed gate.
       logError("claude-code-spiral", new SpiralAbsent(spiralLayer));
-    } else if (ev.hook_event_name === "Stop" && !ev.stop_hook_active && !steeringOff()) {
+    } else if (ev.hook_event_name === "Stop" && !steeringOff()) {
+      // stop_hook_active does NOT pass this gate (J D4): the guard against a loop is that each verdict is delivered
+      // once — recorded before the answer is written, so a verdict can never be spoken twice.
       const sid = sidOf(ev);
-      const reason = stopDecision(loadSpiral(sid), loadState(sid).turnStart);
-      if (reason) process.stdout.write(JSON.stringify({ decision: "block", reason }));
+      const d = pendingDecision(loadPending(sid), loadSpiral(sid), loadState(sid).turnStart);
+      const at = new Date().toISOString();
+      appendPending(sid, [...d.deliver.map((key) => ({ kind: "delivered", key, at, viaActiveStop: !!ev.stop_hook_active })),
+        ...d.resolved.map((key) => ({ kind: "delivered", key, at, outcome: "resolved" }))]);
+      if (d.reason) process.stdout.write(JSON.stringify({ decision: "block", reason: d.reason }));
     }
   } catch (e) { logError("claude-code-spiral", e); }
 }
