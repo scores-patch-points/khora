@@ -247,6 +247,14 @@ export function makeCommitments({ taskLog = nativeTaskLog, cellOf = nativeCellOf
   function evaluate(log, id, { verdict, ground, broken, because = null, evidence = null, giver = null } = {}) {
     if (verdict !== "holds" && verdict !== "refused") return { log, refused: { type: "unknown_verdict", detail: 'a commitment evaluates to "holds" or "refused"' } };
     if (!norm(ground) || !norm(broken)) return { log, refused: { type: "no_ground", detail: "evaluate names the ground it read and the perturbation it broke that ground against" } };
+    // task-log reserves `evidence` for an iterable of items. The caller's own
+    // numbers are "carried opaque": an object is ONE item, an array is the
+    // items; a string/number/boolean is neither and is refused, never
+    // char-split ("abc" -> ["a","b","c"]) or thrown on.
+    const isItems = Array.isArray(evidence);
+    const isRecord = evidence != null && typeof evidence === "object" && !isItems;
+    if (evidence != null && !isItems && !isRecord) return { log, refused: { type: "bad_evidence", detail: `evidence is an object or an array of them, got ${typeof evidence}`, got: typeof evidence } };
+    const items = evidence == null ? null : isItems ? evidence : [evidence];
     const r = resolve(log, id, { giver, verb: "evaluate" });
     if (r.refused) return { log, refused: r.refused };
     const prior = r.task;
@@ -256,7 +264,7 @@ export function makeCommitments({ taskLog = nativeTaskLog, cellOf = nativeCellOf
       ...cellFields("EVA", prior.grain ?? FIGURE),
       description: `evaluated: ${verdict}`,
       verdict, ground: norm(ground), broken: norm(broken),
-      ...(evidence != null ? { evidence } : {}),
+      ...(items != null ? { evidence: items } : {}),
       ...(because != null ? { because } : {}),
     });
     return { log: next, refused: null, id };
