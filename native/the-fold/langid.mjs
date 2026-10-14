@@ -47,12 +47,20 @@ const SINGLE = Object.freeze({
 });
 const KW = 500, K2 = 300, K3 = 900, FW = 120, RHO = 0.25, ALPHA = 0.5;
 
-/** The pos stems the reader can be asked in: every prior on disk except English (which is the default, not
+// The candidate set is PINNED (langid-stems.json: the stems the detector was measured on). It used to be "every pos-*.json in the priors
+// directory", so publishing more priors to janus changed this detector's answers without any change here: 177 new files turned the rus and
+// deu detections into nulls (near-ties) and broke khora main's CI (2026-10-14). A stem enters the set deliberately, with the falsification
+// re-run. No pin file = the old behaviour (every prior on disk).
+const PIN = (() => { try { const j = JSON.parse(fs.readFileSync(new URL("./langid-stems.json", import.meta.url), "utf8")); return Array.isArray(j.stems) ? new Set(j.stems) : null; } catch { return null; } })();
+export const PINNED_STEMS = PIN ? [...PIN].sort() : null;
+
+/** The pos stems the reader can be asked in: every PINNED prior present on disk except English (which is the default, not
  *  detected — the repo's declared rule), the unimorph-derived files and the `pos-prior-*` backoffs. A
- *  missing home is no stems. */
-export function availableStems() {
+ *  missing home is no stems. `dir` and `pin` are injectable for the tests. */
+export function availableStems({ dir = PRIORS_DIR, pin = PIN } = {}) {
   try {
-    return fs.readdirSync(PRIORS_DIR).filter((f) => /^pos-[a-z-]+\.json$/.test(f) && !/unimorph|^pos-prior-|^pos-en\.json$/.test(f)).map((f) => f.slice(4, -5)).sort();
+    const all = fs.readdirSync(dir).filter((f) => /^pos-[a-z-]+\.json$/.test(f) && !/unimorph|^pos-prior-|^pos-en\.json$/.test(f)).map((f) => f.slice(4, -5)).sort();
+    return pin ? all.filter((s) => pin.has(s)) : all;
   } catch { return []; }
 }
 
