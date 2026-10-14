@@ -13,9 +13,72 @@ House rules this design is held to:
 
 ---
 
+## For whom: the lens that induces the shape (read this first)
+
+The user's definition, given 2026-10-14 and relayed near-verbatim by the Callimachus spec session: a prompt "is a stated 'for whom', it is a lens, it is telling the universe to fold, bounded by differences that make a difference, to unfold itself from a particular perspective."
+
+This anchors everything below. The shape is not a property of the material, and it is not a genre chosen from the ask's form word. It is **how the pinned universe unfolds for one perspective**. The other three sources in §3 (the ask, instances, the material) are read *through* the whom. They do not stand beside it.
+
+### What the whom is today: a placeholder
+
+- The answer ladder declares its experiencer as `{ who: "the asker", read: "<question> over N pinned pages" }` (`answer-ladder.js` line 145). The `requireExperiencer` gate (Panini, `experiencer.js`) refuses a missing experiencer but accepts a name with no content.
+- `realizeClaim({ whom })` records `whom` and never uses it (`claim-realize.js` line 261: "recorded, never used").
+- `kernel/for-whom.js` already has the right frame, `createForWhom({ giver, question, ground, priors, universe, medium, knowing })`, with a fold (`foldForWhom`) and a three-leg gate:
+  - DMD coherence against a shuffled trajectory null;
+  - material discovery;
+  - question relevance (Bateson).
+
+  Callimachus does not call it.
+
+### What the whom holds, and where each part comes from mechanically
+
+The whom is a declared field **with content**. Each part has a mechanical source that already exists, and none of it needs a model.
+
+| part of the whom | what it is | where it comes from |
+|---|---|---|
+| **giver** | who is asking | the session or requester id the doorway already carries (`held-turns.mjs` `heldKey(requester, …)`; the experiencer's `who`) |
+| **thread** | the turns of this conversation, and the referents and claims already told in it | the conversation log Wald reads for its `thread` pull; prior answers' `telling.addressed.json` in the same thread |
+| **pages already seen** | the sources this whom has already been shown | the sha256s of every Pinax version in this whom's earlier records. Pinax addresses are content hashes, so "seen" is exact set membership on bytes, not a fuzzy match |
+| **claims already told** | the propositions this whom has already received | the output addresses in earlier `telling.addressed.json` files: each sentence's `{cell, at, grounds}` |
+| **prior outputs** | the shapes this whom has already been given or has written | `form-referent.js` `resolveFormReferent` over the document ledger (`the-fold/document-ledger.js`); earlier Callimachus outputs, which carry content cells (§4.1) |
+| **priors** | the forms and terms this whom has made predictable | `form-priors.jsonl` folded **per giver**, plus the `form-prior.js` expectation stream run over this whom's prior outputs |
+| **medium** | where the answer lands | the surface the request came through (view.html, chat, CLI, file), declared by the doorway |
+| **language** | the whom's language | the ask's language (`question-grammar.<lang>`), or the thread's |
+
+Each part is a *holding*, and **the holdings are the ground the new answer is a difference against**. A whom with no holdings is a real case, a first contact. It is declared as empty, which is different from leaving the field unset.
+
+### Differences that make a difference, measured relative to the holdings
+
+Every null in this design is taken **against what the whom already holds**, not against the record alone:
+
+- **Novelty.** A claim the whom was already told (same claim key, same independent sources) carries no surprisal for them. Its weight in the ladder is its surprisal against the whom's told set, not against the record's base rate. This uses the same `−log2(share)` the ladder already computes, with the whom's holdings as the population.
+- **The window.** `kernel/activation.js` `dmdWindow(observations, derive, { candidates })` finds the depth at which a difference stops making a difference to a derived conclusion. Here the observations are the whom's holdings in thread order, and the conclusion is the induced shape. The window measures **how much of the whom's history the shape depends on**, so the depth of the thread is measured rather than chosen.
+- **The gate.** `gateForWhomFold` is the three-leg gate. A reading for this whom that is not coherent above its shuffled null, or that touches none of the whom's question terms, does not get to shape the answer. Its defaults include hand-set floors (`minTrajectoryLength = 12`, `minDiscovered`, `minRelevance`); they go on the CALLIMACHUS §7 list when wired.
+- **Shape features.** A form feature the whom already holds as a prior is *probable* for them. A feature the whom has never seen still needs instances to clear their null (§3.1 b).
+
+### The two-whom property, as a test
+
+**The same words from two whoms should fold the same pinned universe into different shapes, and both must stay byte-addressed.**
+
+- **Same universe.** The two outputs share one record: the same Pinax versions and the same atoms. Only selection, order, grouping and framing may differ, because the lens adds nothing (spec L10).
+- **Different shapes.** They should differ exactly where the whoms' holdings differ, and only there. If two whoms with *identical* holdings get different shapes, the lens is not a function of the whom: a bug. If two whoms whose holdings differ in ways that make a difference (by `dmdWindow`) get the *same* shape, the whom is still a placeholder: the property fails.
+- **Both addressed.** Every sentence in both outputs re-verifies against its bytes. Each output's drop list says what it left out *because this whom already holds it*, as a typed reason distinct from "below the floor".
+
+The falsifier and bar are step 0 of the build plan (§8).
+
+### How the rest of this file reads through the whom
+
+- **§2.** The node's `grounds` gain a sibling, `heldBy`: whether this whom already holds the node. A held node can still be placed (as context, or a reminder), but it is typed as such, never presented as new.
+- **§3.** Source (d), the person's prior outputs, is part of the whom. Source (a), the ask, is the whom's stated part. Sources (b) and (c) are read through it: which instances count is filtered by the whom's language and medium, and which material is new is filtered by what the whom has seen.
+- **§3.3.** The per-ask null becomes a **per-whom** null: the source attributions are shuffled among features possible *for this whom*.
+- **§4.** The placer's drop list gains the reason `held: already told to this whom at <output address>`.
+- **§5.** The whom's language picks the grammar adapter and the instance pool.
+
+---
+
 ## 0. The answer in one paragraph
 
-A clause is already a holon: an addressed proposition whose segments say where every word came from. Every larger unit (sentence, paragraph, section, list, table row, slide, stanza) is **the same kind of node one level up**. The parent is built from its children. Its only words of its own are joins and labels, and those may say nothing the children's grounds don't carry. A *shape* is a tree of slots, each slot a small void with features (position, count, class, role word, the move it makes). That tree is never declared. It comes from four sources, each deciding its features against its own null:
+A clause is already a holon: an addressed proposition whose segments say where every word came from. Every larger unit (sentence, paragraph, section, list, table row, slide, stanza) is **the same kind of node one level up**. The parent is built from its children. Its only words of its own are joins and labels, and those may say nothing the children's grounds don't carry. A *shape* is a tree of slots, each slot a small void with features (position, count, class, role word, the move it makes). That tree is never declared. It is induced **for a whom** (the section above), from four sources read through that whom, each deciding its features against its own null:
 - the ask, read into a void;
 - instances of the form, fetched or held;
 - the material's own holarchy;
@@ -172,6 +235,7 @@ node = {
   cell,         // CONTENT address: the cube cell of the record the proposition reads (cube-telling's key)
   lean,         // MOVE address: the stance/terrain its realized sentence leans to (arc.js), filled after realization
   grounds,      // for a leaf, its own; for a parent, the union of its children's (never more)
+  heldBy,       // whether this whom already holds it (told at <output address>, or a seen Pinax sha256); null = new to them
   children,
 }
 ```
@@ -440,6 +504,8 @@ Instance-learned shapes for other scripts need the Ground reader rebuilt on `Int
 | exemplars never ground | **built** (hunt.js) | keep it so in the Callimachus collector |
 | material holarchy | **built** (eot-draft; the record's facets, grounds, frames) | the licence reader (§3.2), **new**, small |
 | medium read-back | **built** for heading, item, line and block (medium.js) | **new**: a table class (pipe rows, header row, separator) and a frame-break class (`---`) |
+| for-whom frame, fold, three-leg gate | **built** (`kernel/for-whom.js`), not called by Callimachus | fill it with holdings (§For whom); wire as the experiencer and `realizeClaim`'s `whom` |
+| dmdWindow | **built** (`kernel/activation.js`) | use it over the whom's holdings for the window |
 | ladder re-weighting by layer | **built** (answer-ladder) | add the form layer as a witness column, **new** |
 | the node type spanning levels | **new** | small: a shape over existing leaves |
 | licences and the four-corner shape verdict | **new** | |
@@ -457,6 +523,7 @@ Instance-learned shapes for other scripts need the Ground reader rebuilt on `Int
 | the five-instance floor | `paradigm.js` and `form-prior.js` (stated as structural, still a number) |
 | the in-sample `satisfies.cut` | `paradigm.js` (should be held out) |
 | `rnd = Math.random` default | `form-prior.js` `necessaryFacts` (not seeded) |
+| `minTrajectoryLength = 12`, `minDiscovered`, `minRelevance` | `kernel/for-whom.js` `gateForWhomFold` |
 
 ---
 
@@ -518,6 +585,24 @@ Each step is a whole answer on its own, and each has a falsifier and a pre-regis
 - "Beats the null" means beats every draw (p ≤ 1/(draws+1)) unless the step names its level.
 - Bars are run on dev **and** held.
 - The pre-registration goes in `eval/callimachus/` beside the drive eval (sibling session), before any result.
+
+### Step 0. Give the whom content, and test the two-whom property
+
+**Files:**
+- `organs/whom.js`, new and pure: build the holdings from what already exists. That means `createForWhom` (`kernel/for-whom.js`) filled with the giver, the thread's earlier `telling.addressed.json` files, their Pinax sha256s and told-claim keys, and their prior outputs.
+- Pass the result as the ladder's experiencer and as `realizeClaim`'s `whom`.
+
+**Falsifier.** Two failures count:
+- two whoms with identical holdings, asked the same words over one pinned universe, get different outputs;
+- two whoms whose holdings differ by claims the record would otherwise lead with get the same lead and the same drops.
+
+**Bar.**
+- Identical holdings give byte-identical outputs: 0 differences.
+- Differing holdings give outputs that differ where the holdings differ. Each claim one whom already holds is either dropped with the reason `held` or placed typed as held.
+- Every sentence in both outputs re-verifies against its bytes.
+- The swap-null: shuffle the holdings between the two whoms (seeded) and the differences must follow the holdings.
+
+This step needs no induced shape, so it runs on today's ladder. It is the smallest move that makes the whom real.
 
 ### Step 1. Projector + read-back verifier for the media the reader can already read; add `table` and `frame-break` to medium.js
 
