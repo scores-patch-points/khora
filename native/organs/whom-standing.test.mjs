@@ -35,10 +35,24 @@ test("N3: a W span with no provenance, wrong side, no address, or a U address ne
   const wrongSide = { ...W(["Ruth Doyle", "sang", "a ballad"])[0], side: "U" };
   const noAddr = { ...W(["Omar Reed", "repaired", "the pump"])[0], address: "" };
   const collide = { ...W(["Iris Vale", "painted", "the fence"])[0], address: u[0].address };
-  const dup = { ...good, id: "dup" };
-  const r = admitWhom([good, noProv, badKind, emptyRef, wrongSide, noAddr, collide, dup], { universe: u });
+  const dupId = { ...good };
+  const r = admitWhom([good, noProv, badKind, emptyRef, wrongSide, noAddr, collide, dupId], { universe: u });
   assert.deepEqual(r.admitted.map((w) => w.id), [good.id]);
-  assert.deepEqual(r.refused.map((x) => x.why), ["no-provenance", "no-provenance", "no-provenance", "not-w-side", "no-address", "address-collision", "duplicate-address"]);
+  assert.deepEqual(r.refused.map((x) => x.why), ["no-provenance", "no-provenance", "no-provenance", "not-w-side", "no-address", "address-collision", "duplicate-id"]);
+});
+
+test("N3 (Amendment 2): several claims read from one sentence share its address and are all admitted; uniqueness is on id", () => {
+  const [a, b] = W(["Maria Lopez", "approved", "the freeze"], ["Maria Lopez", "chairs", "the committee"]);
+  const sameSentence = { ...b, address: a.address };
+  const r = admitWhom([a, sameSentence]);
+  assert.equal(r.admitted.length, 2);
+  assert.equal(r.refused.length, 0);
+  // and the layer reads the same W as grain.js does
+  const region = U("a", ["Maria Lopez", "approved", "the freeze", "+", 3], ["Maria Lopez", "chairs", "the committee", "+", 2], ...FILLER.map((f) => [...f, "+", 1]));
+  const g = foldGrain({ region, whom: [a, sameSentence] });
+  const m = foldWithWhom({ region, whom: [a, sameSentence] });
+  assert.equal(m.whom.admitted, 2);
+  assert.equal(m.distance.held, g.distance.held);
 });
 
 // ---- the absent cut (N1′, as repaired) ---------------------------------------------------------------------------------------------

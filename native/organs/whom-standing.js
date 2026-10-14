@@ -52,11 +52,13 @@ export const W_KINDS = Object.freeze(["memory", "turn", "spoken", "seen", "pinax
 /**
  * Admit W spans. A span is `{ id, address, text, side: "W", claim, provenance: { kind, ref } }`. Refused ones are returned typed; they
  * never enter H. `universe` is U's spans (or just anything with an `address`): a W address equal to a U address is refused so an address
- * can never be mistaken for the other corpus's.
+ * can never be mistaken for the other corpus's. Uniqueness is on `id`, NOT on address: several claims are read from one sentence and
+ * share its address (grain.js keys spans on `id`). Run 1 of WHOM-STANDING-PREREG refused them as "duplicate-address" and so read a
+ * different W than `foldGrain` did; Amendment 2.
  */
 export function admitWhom(spans = [], { universe = [] } = {}) {
   const uAddr = new Set(universe.map((u) => u?.address).filter(Boolean));
-  const seen = new Set();
+  const seenIds = new Set();
   const admitted = [], refused = [];
   for (const w of spans ?? []) {
     const why =
@@ -65,10 +67,10 @@ export function admitWhom(spans = [], { universe = [] } = {}) {
       : !w.address ? "no-address"
       : !(w.provenance && W_KINDS.includes(w.provenance.kind) && String(w.provenance.ref ?? "").trim()) ? "no-provenance"
       : uAddr.has(w.address) ? "address-collision"
-      : seen.has(w.address) ? "duplicate-address"
+      : w.id != null && seenIds.has(w.id) ? "duplicate-id"
       : null;
     if (why) refused.push({ id: w?.id ?? null, address: w?.address ?? null, why });
-    else { seen.add(w.address); admitted.push(w); }
+    else { if (w.id != null) seenIds.add(w.id); admitted.push(w); }
   }
   return { admitted, refused };
 }
