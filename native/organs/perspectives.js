@@ -283,6 +283,10 @@ export function readPerspectives(record, { model, question, texts = new Map(), t
     edges: { count: edges.length, contrast: edges.filter((e) => e.kind === "contrast").length, and: edges.filter((e) => e.kind === "and").length },
     projected, fit,
     aliases: aliasReport,
+    topicNames,
+    // the live graph, for an incremental reader (scripts/hunt-stance.mjs): read ONE new page without re-parsing the corpus
+    poleOf,
+    learn: (rows) => { for (const e of edgesOf(repairRows(rows))) { G.link(e.a, e.b, e.parity); edges.push(e); } },
     // FALSIFIABLE: corpus edges between two frame lemmas must agree with the frame seed (pro~pro, con~con: parity 0; pro~con: 1).
     frameCheck: fr ? (() => {
       const grp = (l) => (fr.pro.includes(l) ? "pro" : fr.con.includes(l) ? "con" : null);
