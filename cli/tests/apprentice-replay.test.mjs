@@ -549,3 +549,24 @@ test("output location: a path inside the tracked repo is refused; outside it, or
   assert.doesNotThrow(() => assertUntrackedOutput(path.join(repo, "state", "ledger.jsonl")), "state/ is gitignored");
   assert.match(opaque("/Users/mlacy/Documents/3.0/khora/a.js"), /^[0-9a-f]{12}$/);
 });
+
+test("turnsOfTranscript records the turn's tool calls in order with the strings they name; an Edit/Write body is never held", async () => {
+  const dir = tmp();
+  const root = path.join(dir, "projects"); fs.mkdirSync(path.join(root, "-p"), { recursive: true });
+  const F = "/work/eoreader7/a.js";
+  const L = [
+    userPrompt("look around and edit a.js", "p1"),
+    asst({ type: "tool_use", id: "g1", name: "Grep", input: { pattern: "frobnicate", path: "/work/eoreader7" } }), result("g1", { type: "text" }),
+    asst({ type: "tool_use", id: "b1", name: "Bash", input: { command: "node cli/reason.mjs spec.json" } }), result("b1", "ok"),
+    asst({ type: "tool_use", id: "e1", name: "Edit", input: { file_path: F, old_string: "SECRET OLD BODY", new_string: "SECRET NEW BODY" } }),
+    result("e1", editResult("function f() {}\n", "function f() {}", "function f() { return 1; }", { orig: true })),
+  ].join("\n") + "\n";
+  const f = path.join(root, "-p", "s.jsonl");
+  fs.writeFileSync(f, L);
+  const turns = await turnsOfTranscript(f, { root });
+  assert.deepEqual(turns[0].calls.map((c) => c.name), ["Grep", "Bash", "Edit"]);
+  assert.ok(turns[0].calls[0].strs.includes("frobnicate"));
+  assert.ok(turns[0].calls[2].strs.includes(F));
+  assert.ok(!JSON.stringify(turns[0].calls).includes("SECRET"), "an Edit body is not held");
+  fs.rmSync(dir, { recursive: true, force: true });
+});

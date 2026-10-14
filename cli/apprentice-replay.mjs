@@ -177,6 +177,19 @@ export function promptOf(d) {
   return { text, origin: o === "human" ? "human" : d.turnOrigin === "sdk" ? "sdk" : "legacy" };
 }
 
+/** the string values a tool call's input names (clipped), for "does this call touch that path" */
+export function callStrings(input) {
+  const out = [];
+  const walk = (v) => {
+    if (out.length >= 12) return;
+    if (typeof v === "string") out.push(v.length > 600 ? v.slice(0, 600) : v);
+    else if (Array.isArray(v)) v.forEach(walk);
+    else if (v && typeof v === "object") Object.values(v).forEach(walk);
+  };
+  walk(input);
+  return out;
+}
+
 /**
  * Stream one transcript into turns: { session, project, promptId, ts, prompt, origin, edits:[{id,tool,file,row}] },
  * each edit graded AT ITS RESULT, while the file's replayed state is what it was then. An edit made before any
@@ -193,7 +206,7 @@ export async function turnsOfTranscript(file, { root, seen = new Set(), stats = 
   const rl = readline.createInterface({ input: fs.createReadStream(file, { encoding: "utf8" }), crlfDelay: Infinity });
   // the prompt is held only after Goffman: its findings are COUNTED (categories), its text is redacted
   const open = (p, d) => {
-    cur = { session, project, promptId: d?.promptId ?? null, ts: d?.timestamp ?? null, prompt: p ? scrubPrompt(p.text) : null, piiPrompt: p ? piiCounts(p.text) : {}, origin: p?.origin ?? null, edits: [] };
+    cur = { session, project, promptId: d?.promptId ?? null, ts: d?.timestamp ?? null, cwd: d?.cwd ?? null, prompt: p ? scrubPrompt(p.text) : null, piiPrompt: p ? piiCounts(p.text) : {}, origin: p?.origin ?? null, edits: [], calls: [] };
     turns.push(cur);
   };
   for await (const line of rl) {
@@ -228,6 +241,12 @@ export async function turnsOfTranscript(file, { root, seen = new Set(), stats = 
       }
     } else if (d.type === "assistant" && !d.isSidechain && Array.isArray(d.message?.content)) {
       for (const b of d.message.content) {
+        // the master's own hop sequence: every tool call of the turn, in order, with the strings it names (never
+        // an Edit/Write body: only its file_path). In memory only; the trail test counts hops from it.
+        if (b?.type === "tool_use" && cur && !seen.has(b.id) && !(cur.calls.length && cur.calls.some((c) => c.id === b.id))) {
+          const body = b.name === "Edit" || b.name === "Write";
+          cur.calls.push({ id: b.id, name: b.name, strs: callStrings(body ? { file_path: b.input?.file_path } : b.input) });
+        }
         if (b?.type !== "tool_use" || !["Edit", "Write", "Read"].includes(b.name)) continue;
         const fp = b.input?.file_path ?? "";
         if (b.name === "Read") { byId.set(b.id, { tool: "Read", file: fp }); continue; }

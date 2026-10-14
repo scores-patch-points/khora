@@ -1062,3 +1062,67 @@ fast: 3 files · 31 affected tests pass · law: WARN pre-existing duplicate S17 
 | Ostrom | — | cli/tests/apprentice-replay.test.mjs:179 | clean | a refused edit is a typed gap (edit failed), never read as "the code does not exist" |
 | Simon/Chekhov | — | cli/apprentice-replay.mjs | clean | imported by its test (31); outputs refuse tracked paths (check-ignore) |
 clean: Kondo (typed gaps are recorded, nothing dead added)
+
+## 2026-10-13 — the coding end state canonized: amendment A2 (FOLD-CONSTITUTION.md VI.6) + the Journeyman's exam (working tree, uncommitted)
+fast: 4 new cli files · 80 cli tests + 32 native pass, 0 fail (coding-c1 now skips with a reason) · law: citations resolve (11) · WARN pre-existing duplicate S17 S96
+| lens | citation | file:line | verdict | one line |
+| Feynman | II.10 | cli/cennini-exam.mjs:loadEvidence | fixed | a missing ledger was swallowed as "no evidence", so a mistyped --evidence path read as an honest gap; a NAMED ledger must now exist (test added), the default may be absent |
+| Feynman | II.11 | cli/cennini-exam.mjs:rowPasses | clean | the only constants are range checks on p and n; alpha is declared once, its giver named, never fitted; a test scans the clauses for any number or threshold-shaped key |
+| Frankfurt | — | cli/cennini-end-state.json | false-positive-on-review | `"instrument": null` marks an unwired facet and the exam ignores rows for it; it is a typed gap, not a number standing in for a prior |
+| Simon/Chekhov | VI.3 | cli/cennini-exam.mjs | clean | imported by cli/tests/cennini-exam.test.mjs (12); unwired facets are reported as gap and cannot be passed by a row from nowhere |
+| Marshall | VI.1, VI.2 | FOLD-CONSTITUTION.md A2 | clean | the amendment names its enforcement test in the same change, is proposed by an agent and disposed by the operator, and the control it names is a test; no line the active source cites (<= 479) moved |
+clean: Kondo (nothing dead added; the evidence ledger is append-only data), Greenberg (no language parameter)
+
+## 2026-10-13 — the experience of agentic mode canonized: amendment A3 (J7 EXPERIENCE) + the contract on a run's events (working tree, uncommitted)
+fast: 2 new + 3 edited cli files · 91 cli + 32 native pass, 0 fail · law: citations resolve (14) · WARN pre-existing duplicate S17 S96
+| lens | citation | file:line | verdict | one line |
+| Feynman | II.10 | cli/cennini-contract.mjs:JUDGES | clean | every judge ships a known-bad trace it must reject and a good one it must accept; a test asserts each known-bad trace fails ITS OWN mark and few others, so no judge is one blunt rule |
+| Feynman | II.9 | cli/cennini-contract.mjs:observes-and-stops-by-measure | noted | `stopped` carries no reason (user abort), so it is allowed as a terminal but is not a measured stop; a run that is only ever aborted can pass this mark without ever observing, which is why a mark needs n live runs and is judged with the other marks |
+| Simon/Chekhov | VI.3 | cli/cennini-contract.test.mjs | clean | the contract's event names are asserted against the loop's own source, and the real runAgent is run and judged, so an event the contract reads that the loop does not emit fails the test; two marks are named unwired in the end state |
+| Frankfurt | — | cli/cennini-end-state.json | false-positive-on-review | `"instrument": null` marks an unwired facet and the exam ignores rows for it |
+| Marshall | VI.1, VI.2 | FOLD-CONSTITUTION.md A3 | clean | the amendment names its enforcement test and control in the same change, is proposed by an agent and disposed by the operator; no cited line (<= 479) moved (Article VII 550 -> 573) |
+clean: Kondo (nothing dead; fixtures are inside the test), Greenberg (no language parameter)
+
+## 2026-10-13 — the first LIVE evidence for J7 and the live-run driver (working tree, uncommitted)
+fast: cli/cennini-live.mjs + test, cennini-contract.mjs (surface in the row's source), cennini-evidence.jsonl +6 rows · 96 cli + 32 native pass, 0 fail · law: citations resolve (14) · WARN pre-existing duplicate S17 S96
+| lens | citation | file:line | verdict | one line |
+| Feynman | II.10 | cli/cennini-live.mjs:liveRun | clean | `live` is true only when no fetch was injected, and a test runs a fake door and asserts live:false and that its marks are judged but never counted; the files the model wrote were re-run independently and pass |
+| Feynman | II.9 | cennini-evidence.jsonl J7 rows | noted | n = 3 tiny asks, one door, node-driven observer: the five met marks prove the loop's SHAPE on that surface, not the browser's and not capability; the row's source names the surface, and CENNINI.md says 35% overstates the pace to Claude-Code level |
+| Feynman | II.11 | cli/cennini-live.mjs:ASKS | noted | asks are fixtures written for the contract marks, not drawn from the frozen piece; they cannot count toward J3 or J5 |
+| Simon/Chekhov | VI.3 | cli/cennini-live.mjs | clean | imported by its test (5); the driver never reads or sends the heimdall access token (asserted), and it refuses to write run records inside the repo |
+| Ostrom | — | acted.model | noted | the door's result carried no model, so `model: null` in all three: whether a model drew or hunt-first snippeted is not in the run record; a gap named, not filled |
+| Pearl | — | looks-first | noted | the three runs share one door and one loop, so the 3/3 violation is one cause, not three witnesses |
+clean: Kondo (scratch workspaces removed; run records live outside the repo), Greenberg (no language parameter)
+
+## 2026-10-13 — Look, the first stable sub-assembly of the movement: organs/repo-look.js (capacity look-repo, SEG·Figure) (working tree, uncommitted)
+fast: native/organs/repo-look.js + native/tests/repo-look.test.js (11), capacities.js (+1 entry), cli/cennini-contract.mjs (looks-first tightened, PENDING_EVENTS) · all affected tests pass · law: citations resolve · WARN pre-existing duplicate S17 S96
+| lens | citation | file:line | verdict | one line |
+| Feynman | II.10 | native/tests/repo-look.test.js:EQUIVALENCE | fixed | the first draft of the equivalence tests PASSED VACUOUSLY: `toplevelOf` takes a file path and was given the repo dir, so the trail instrument's index and the organ's were both empty and equal; the tests now assert the tree is non-empty, N = 7, and both oracles (the instrument and real `git grep`) find the same four files |
+| Feynman | II.11 | native/organs/repo-look.js | clean | no constant: idf = ln(N/df) as in the graded arm; `limit` and `matchesPer` bound display only, never the ranking |
+| Dijkstra | — | native/organs/repo-look.js:WORD | noted | words are `[a-z0-9_]+` over latin1-decoded bytes, exactly what the graded arm and `git grep -w -i` see; non-ASCII identifiers are not seeds; disclosed in the header and pinned by the oracle |
+| Simon/Chekhov | VI.3 | native/organs/repo-look.js | noted | built and registered but NOT yet wired into runAgent; the contract declares `look` PENDING and its test fails the day the loop emits it unremoved, so the gap is named, not hidden |
+| Ostrom | — | cli/cennini-contract.mjs:looks-first | fixed | khora reading the ASK was being counted as a look at the material; the judge now requires a `look` event, and a test pins that a read of the ask alone fails |
+| Greenberg | — | native/organs/repo-look.js:seedsOf | noted | English-agnostic mechanically (whole words by byte class) but the fragment grammar assumes Latin-script paths and the nameable-extension list is code-centric; declared scope, not defect |
+clean: Kondo (nothing dead; Look is the one live consumer of its own exports), Pearl (one oracle pair, both independent of the organ)
+
+## 2026-10-13 — level 3: Look wired into runAgent (the-fold), Finish extracted (organs/follow-through.js), second live batch (working tree, uncommitted)
+fast: the-fold/fold-chat-agent.js (+look stage, +5 tests; loop suite 76 pass) · khora native/organs/follow-through.js + test (8) · cli/cennini-live.mjs injects the real Look · cennini-contract PENDING_EVENTS emptied · evidence +6 rows · 116 cli + 19 native pass, 0 fail
+| lens | citation | file:line | verdict | one line |
+| Feynman | II.10 | the-fold/fold-chat-agent.js:look | clean | the stage is additive: a test pins that a run with no look emits exactly the old nine events and states the old plan; a throwing look is reported and the run goes on; an abort before it stops without acting |
+| Feynman | II.9 | the-fold/fold-chat-agent.js:look | noted | the look is SHOWN, not FED: the writer's prompt is unchanged, so this run is honest about what it saw and the look is not yet shown to change what is written; feeding it must earn its place by ablation |
+| Simon/Chekhov | VI.3 | cli/cennini-contract.mjs | fixed | PENDING_EVENTS emptied the day the loop began emitting `look`; the test that fails on a stale pending entry did its job and is kept |
+| Ostrom | — | cennini-evidence.jsonl J7 | noted | n = 3 tiny asks through one door, node-driven; the browser surface has no look route (the bridge needs an access token this work did not use), so the marks are NOT shown there |
+| Pearl | — | cennini-live.mjs | noted | the three runs share one loop and one door: one witness repeated, so `met` on three is the loop's shape, not three independent confirmations |
+| Feynman | II.10 | native/organs/follow-through.js | clean | equivalence to the graded instrument with a comparator proven to catch a dropped proposal (non-vacuity), and a stub guard that names each withheld stub as a typed gap so the equivalence can show the rest is unchanged |
+clean: Kondo (the instrument is untouched; the organ and the instrument are not duplicates: the instrument grades, the organ runs), Greenberg (no language parameter beyond the readEdges language set)
+
+## 2026-10-13 — the ladder, Receive, Find-the-thing and the assembled-share instrument (branch claude-code-gate-and-apprentice, staged by path)
+fast: 31 files · 13 affected test files pass (134 + 41) · law: WARN pre-existing duplicate S17 S96 in native/READING-SPEC.md (not this diff)
+| lens | citation | file:line | verdict | one line |
+| Greenberg | scope | native/organs/find-thing.js (stem, wordsOf) | fixed | suffix stripping is English and Latin-letter only; the header now says so, and the test names the limit |
+| Dijkstra | base unit | cli/apprentice-assembled.mjs:49 lineKey | noted | a 52-bit FNV key over a trimmed line stands in for line identity; a collision would over-count "held", and the donor null is scored with the same key, so the paired difference is not biased by it |
+| Diaconis | null | cli/apprentice-assembled.mjs findPass | noted | the donor null is other sessions' asks against the SAME ground; the priors (popularity, recency) have no donor arm and are reported against chance, not against another ask |
+| Simon/Chekhov | unwired | native/organs/{lenient-receive,find-thing,follow-through}.js | noted | three real organs ship unwired by design; CENNINI.md's movement table names each as unwired and the exam reads unwired as a gap, not a pass |
+| Kondo | dead | cli/apprentice-assembled.mjs findArm | noted | the helper is now exercised only by its own unit test (the time-ordered pass superseded it); kept this commit, a sweep candidate |
+clean: Feynman, Holmes, Pearl, Ostrom, Frankfurt, Alexander, Marshall (no law edited)
+
