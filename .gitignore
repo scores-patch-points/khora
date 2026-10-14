@@ -7,3 +7,14 @@ dist/
 # conductor runtime state (session workspaces + traces), never source
 native/state/
 state/
+
+# generated reading outputs: stores, ledgers, logs and run reports (reproducible from the scripts; some hold verbatim closed-licence testimony,
+# and one `git add -A` away from a rejected push). Commit the SCRIPTS that write them, never these.
+native/eval/the-fold/scene/*-weft/
+native/eval/the-fold/scene/*-weft.v*/
+native/eval/the-fold/scene/read-batch-ledger.jsonl
+native/eval/the-fold/scene/foundation-manifest.json
+native/eval/the-fold/scene/*.log.jsonl
+native/eval/the-fold/scene/republic-*.jsonl
+native/eval/the-fold/scene/historicity-witnesses.jsonl
+native/eval/the-fold/results/readings/

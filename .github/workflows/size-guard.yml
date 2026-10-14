@@ -1,0 +1,27 @@
+name: Large-file guard
+
+# GitHub rejects a push containing a file over 100 MB (GH001) and warns over 50 MB; the history keeps it forever once it is committed.
+# This fails a pull request that ADDS or GROWS a file past 50 MB, before it can reach a branch someone pushes to main.
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  size-guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: No file added or changed over 50 MB
+        run: |
+          set -euo pipefail
+          limit=$((50 * 1024 * 1024)); bad=0
+          while IFS= read -r f; do
+            [ -f "$f" ] || continue
+            sz=$(wc -c < "$f")
+            if [ "$sz" -gt "$limit" ]; then printf 'TOO LARGE  %s  %s MB\n' "$f" "$((sz / 1024 / 1024))"; bad=1; fi
+          done < <(git diff --name-only --diff-filter=AM "origin/${{ github.base_ref }}...HEAD")
+          if [ "$bad" -ne 0 ]; then echo "::error::a file over 50 MB is in this change; keep it out of git (generated stores belong in .gitignore)"; exit 1; fi
+          echo "no added or modified file over 50 MB"
