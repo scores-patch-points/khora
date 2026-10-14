@@ -77,10 +77,10 @@ export const HOOKS = [
 export const handlersFor = (ev) =>
   HOOKS.filter((h) => h.event === ev?.hook_event_name && (!h.tools || h.tools.has(ev?.tool_name)));
 
-function runNode(script, args, input, { cwd = HERE, timeoutMs }) {
+function runNode(script, args, input, { cwd = HERE, timeoutMs, env = process.env }) {
   return new Promise((resolve) => {
     let out = "", err = "", timedOut = false;
-    const child = spawn(process.execPath, [script, ...args], { cwd, stdio: ["pipe", "pipe", "pipe"] });
+    const child = spawn(process.execPath, [script, ...args], { cwd, env, stdio: ["pipe", "pipe", "pipe"] });
     const timer = setTimeout(() => { timedOut = true; child.kill("SIGKILL"); }, timeoutMs);
     child.stdout.on("data", (d) => { out += d; });
     child.stderr.on("data", (d) => { err += d; });
@@ -146,15 +146,31 @@ export async function answerHook(ev, { log = () => {} } = {}) {
 
 const REASON_FLAGS = new Set(["--ants", "--json", "--compact"]);
 
-export async function runReason(spec, flags = [], cwd = null, { log = () => {} } = {}) {
+// THE SESSION ADDRESS (nesting-fix J D9, 2026-10-14). A reasoning run is recorded on a session's spiral and ledger
+// by the session key reason.mjs reads from its environment (CLAUDE_CODE_SESSION_ID — set in the Bash tool's own
+// subprocess) or input.session. On this route reason.mjs is the PROXY's child, so it saw the proxy's environment:
+// the run was attributed to no session at all (or, worse, to whichever session the proxy was started from). The
+// caller's session now travels as `x-er7-session` and becomes the child's CLAUDE_CODE_SESSION_ID; with none given,
+// the child's session is explicitly empty rather than inherited.
+const SESSION_RE = /^[A-Za-z0-9_-]{1,128}$/;
+export const sessionOf = (raw) => (typeof raw === "string" && SESSION_RE.test(raw.trim()) ? raw.trim() : null);
+function reasonEnv(session) {
+  const env = { ...process.env };
+  delete env.CLAUDE_CODE_SESSION_ID; delete env.CLAUDE_SESSION_ID;
+  if (session) env.CLAUDE_CODE_SESSION_ID = session;
+  return env;
+}
+
+export async function runReason(spec, flags = [], cwd = null, { log = () => {}, session = null } = {}) {
   const unknown = flags.filter((f) => !REASON_FLAGS.has(f));
   if (unknown.length) return { status: 400, type: "application/json", body: JSON.stringify({ error: { type: "unknown_reason_flag", message: `unknown flag(s): ${unknown.join(" ")}; known: ${[...REASON_FLAGS].join(" ")}` } }) };
   try { JSON.parse(spec); } catch (e) {
     return { status: 400, type: "application/json", body: JSON.stringify({ error: { type: "spec_not_json", message: `the spec is not JSON: ${e.message}` } }) };
   }
   const dir = cwd && path.isAbsolute(cwd) && fs.existsSync(cwd) ? cwd : HERE;
-  const r = await runNode(REASON, flags, spec, { cwd: dir, timeoutMs: REASON_BUDGET_MS });
-  await noteSpiralLayer({ log });
+  const sid = sessionOf(session);
+  const r = await runNode(REASON, flags, spec, { cwd: dir, timeoutMs: REASON_BUDGET_MS, env: reasonEnv(sid) });
+  await noteSpiralLayer({ session: sid, log });
   // Exit 0 is a pass and 1 a verdict with errors; anything else is a crash,
   // and then its stderr is the answer.
   const crashed = r.timedOut || (r.code !== 0 && r.code !== 1);
@@ -205,7 +221,7 @@ export async function route(req, res, { log = () => {} } = {}) {
   if (url === "/v1/reason" && req.method === "POST") {
     const spec = await readBody(req);
     const flags = String(req.headers["x-er7-reason-flags"] ?? "").split(/\s+/).filter(Boolean);
-    const r = await runReason(spec, flags, String(req.headers["x-er7-cwd"] ?? "") || null, { log });
+    const r = await runReason(spec, flags, String(req.headers["x-er7-cwd"] ?? "") || null, { log, session: req.headers["x-er7-session"] });
     res.writeHead(r.status, { "content-type": r.type, ...(r.exit != null ? { "x-er7-exit": String(r.exit) } : {}) });
     res.end(r.body);
     return true;

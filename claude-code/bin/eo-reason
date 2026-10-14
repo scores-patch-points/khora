@@ -12,8 +12,12 @@ for a in "$@"; do
   case "$a" in --*) flags="$flags $a" ;; *) spec="$a" ;; esac
 done
 headers="$(mktemp)"
+# The Claude Code session this Bash call belongs to (set in the Bash tool's own environment), so the proxy records
+# the run on THIS session's spiral and ledger; sent only when there is one.
+session_header=""
+[ -n "${CLAUDE_CODE_SESSION_ID:-}" ] && session_header="x-er7-session: $CLAUDE_CODE_SESSION_ID"
 curl -sS -m 120 -D "$headers" -X POST -H 'content-type: application/json' \
-  -H "x-er7-reason-flags: $flags" -H "x-er7-cwd: $PWD" \
+  -H "x-er7-reason-flags: $flags" -H "x-er7-cwd: $PWD" ${session_header:+-H "$session_header"} \
   --data-binary @"$spec" "$URL/v1/reason"
 status=$?
 code="$(awk 'tolower($1) == "x-er7-exit:" { sub(/\r$/, "", $2); print $2 }' "$headers")"

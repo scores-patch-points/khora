@@ -215,35 +215,50 @@ function tryAutoDerive(ev, f, st, sid) {
   if (derived.status !== "derived") {
     return { covered: false, evidence: `eoreader7 claim-deriver: could not auto-derive a claim for this edit (${derived.reason}) — hand-author one grounded at this file.` };
   }
-  const run = runDerivedSpec(derived.spec);
-  if (!run) {
-    return { covered: false, evidence: "eoreader7 claim-deriver: a claim was derived, but checking it through reason.mjs did not come back cleanly — hand-author one instead." };
+  const run = runDerivedSpec(derived.spec, sid);
+  if (run.outcome) {
+    // A TYPED outcome (nesting-fix J D10), on the error log and in the denial — never a silent drop into "did not come back".
+    logError("claude-code-steer", `${run.outcome}: ${run.detail}`);
+    return { covered: false, evidence: `eoreader7 ${run.outcome}: ${run.detail} — hand-author a claim grounded at this file instead.` };
   }
-  st.runs.push(run);
+  st.runs.push(run.run);
   saveState(sid, st);
   return { covered: coverageOf(st, f).covered, evidence: null };
 }
 
-/** Spawns `node reason.mjs <tmp spec> --json` SYNCHRONOUSLY (this hook
- *  must decide allow/deny before returning) with an 8s timeout, safely
- *  under this hook's own 10s budget (settings.local.json). Returns a run
- *  object in the exact shape claude-code-state.mjs's coverageOf already
- *  expects ({ok, grounds, declaredClaims}), or null on ANY failure — a
- *  timeout, a spawn error, output that doesn't parse — which the caller
- *  above treats identically to "not covered". Whether reason.mjs itself
- *  exits 0 (ok) or 1 (a real, reported failure) it still prints valid
- *  --json on stdout, so both are parsed the same way; only a genuine
- *  crash/timeout returns null. */
-function runDerivedSpec(spec) {
+/** Spawns `node reason.mjs <tmp spec> --json` SYNCHRONOUSLY (this hook must decide allow/deny before returning)
+ *  with an 8 s budget, safely under this hook's own 10 s. Returns {run} — a run object in the exact shape
+ *  claude-code-state.mjs's coverageOf already expects ({ok, grounds, declaredClaims}) — or {outcome, detail} naming
+ *  WHY there is none: "steer-timeout" (reason.mjs was killed at the budget), "steer-spawn-error",
+ *  "steer-unparseable" (no JSON on stdout). Whether reason.mjs itself exits 0 (ok) or 1 (a real, reported failure)
+ *  it still prints valid --json on stdout, so both are parsed the same way.
+ *
+ *  Two fixes (nesting-fix J D9/D10, 2026-10-14):
+ *   - `text` is NOT passed. A derived spec's `text` is the claim's own `said` sentence; handing it to reason.mjs
+ *     switches on the prose reader, which (a) loads every language prior to identify the sentence's language —
+ *     measured ~11-14 s here against ~1.5 s without, past this budget — and (b) reads nothing in a machine-built
+ *     sentence, so the verdict is the third state "unread", which coverageOf (rightly) never counts as a pass: the
+ *     auto-derive could not have covered an edit even given the time. The claim keeps `said`.
+ *   - the session is passed, so the run's claims reach the session's ledger and spiral (it went in with none).
+ *  The budget can be overridden with EO_STEER_DERIVE_TIMEOUT_MS (tests, operators); it is not a tuned threshold. */
+function runDerivedSpec(spec, sid = null) {
   let tmp = null;
+  const budget = Number(process.env.EO_STEER_DERIVE_TIMEOUT_MS) > 0 ? Number(process.env.EO_STEER_DERIVE_TIMEOUT_MS) : 8000;
   try {
+    const { text: _redundant, ...bare } = spec;
     tmp = path.join(os.tmpdir(), `eo-claim-deriver-${process.pid}-${Date.now()}-${Math.random().toString(36).slice(2)}.json`);
-    fs.writeFileSync(tmp, JSON.stringify(spec));
-    const r = spawnSync(process.execPath, [REASON, tmp, "--json"], { encoding: "utf8", timeout: 8000 });
-    if (r.error) return null;
-    const out = JSON.parse(r.stdout);
-    return { at: new Date().toISOString(), ok: out.ok === true, grounds: out.grounds ?? [], declaredClaims: out.declaredClaims ?? [] };
-  } catch { return null; }
+    fs.writeFileSync(tmp, JSON.stringify(sid ? { ...bare, session: sid } : bare));
+    const r = spawnSync(process.execPath, [REASON, tmp, "--json"], { encoding: "utf8", timeout: budget });
+    if (r.error) {
+      return r.error.code === "ETIMEDOUT"
+        ? { outcome: "steer-timeout", detail: `checking the derived claim through reason.mjs did not finish within ${budget} ms (killed)` }
+        : { outcome: "steer-spawn-error", detail: String(r.error.message ?? r.error) };
+    }
+    if (r.signal === "SIGTERM") return { outcome: "steer-timeout", detail: `checking the derived claim through reason.mjs did not finish within ${budget} ms (killed)` };
+    let out;
+    try { out = JSON.parse(r.stdout); } catch { return { outcome: "steer-unparseable", detail: `reason.mjs exited ${r.status} with no JSON verdict on stdout` }; }
+    return { run: { at: new Date().toISOString(), ok: out.ok === true, grounds: out.grounds ?? [], declaredClaims: out.declaredClaims ?? [] } };
+  } catch (e) { return { outcome: "steer-spawn-error", detail: String(e?.message ?? e) }; }
   finally { if (tmp) { try { fs.unlinkSync(tmp); } catch {} } }
 }
 
