@@ -61,7 +61,10 @@ for (const s of prior.sources) {
   store[rec.entry.id] = rec;
 }
 const MODE = process.env.REFERENT_MATCH === "run" ? "run" : "contains";
-const record = readCorpus(records, { question: prior.question, absences: prior.absences ?? [], referentMatch: MODE });
+// amendment 1: REFERENT_PRIOR=1 hands the resolver the received POS prior (priors/pos-en.json) as a REFUSER of edge words; it is NOT
+// passed as `received`, which would change the verb vocabulary and so the atoms.
+const REFERENT_PRIOR = process.env.REFERENT_PRIOR === "1" ? JSON.parse(readFileSync(join(here, "../../priors/pos-en.json"), "utf8")) : null;
+const record = readCorpus(records, { question: prior.question, absences: prior.absences ?? [], referentMatch: MODE, referentPrior: REFERENT_PRIOR });
 const verdicts = { ...(prior.fixity ?? {}) };
 /** Slice any address, in U or in any W pinned so far: the bytes the span names, or null. */
 const slice = async (address) => {
@@ -128,12 +131,14 @@ async function armOf(name, whomSpans, { sha256 = null, atoms = 0, why = null } =
 }
 const strip = ({ _fold, _whomSpans, ...rest }) => rest;
 
+const texts = records.map((r) => new TextDecoder().decode(r.layers.text));
 // ---- run ------------------------------------------------------------------------------------------------------------------------
 const ASKS = [ASK, "Did the Senate pass the bill?"];
 const functionWords = new Set(record.functionWords ?? ["the", "a", "an", "of", "and", "in", "to", "for", "which", "that", "on", "at", "by", "with"]);
-const refsOf = (str) => (MODE === "run" ? referentsInRuns(str, record.entities, { functionWords }) : referentsIn(str, record.entities));
+const lowercaseSeen = new Set((texts.join("\n\n").match(/\b\p{Ll}[\p{L}\u0027\u2019-]*/gu) ?? []).map((w) => w.toLowerCase()));
+const refsOf = (str) => (MODE === "run" ? referentsInRuns(str, record.entities, { functionWords, posPrior: REFERENT_PRIOR, lowercaseSeen }) : referentsIn(str, record.entities));
 const byId = new Map(cands.map((a, i) => [a.id, { a, i }]));
-const out = { prereg: "native/eval/callimachus/GRAIN-R7-PREREG.md", mode: MODE, universe: UNIVERSE, entities: record.entities.map((e) => ({ id: e.id, name: e.name, surfaces: e.surfaces, top: e.top })), atoms: [], claimsByStanding: {}, asks: [] };
+const out = { prereg: "native/eval/callimachus/GRAIN-R7-PREREG.md", mode: MODE, referentPrior: !!REFERENT_PRIOR, universe: UNIVERSE, entities: record.entities.map((e) => ({ id: e.id, name: e.name, surfaces: e.surfaces, top: e.top })), atoms: [], claimsByStanding: {}, asks: [] };
 for (const a of record.atoms) out.atoms.push({ id: a.id, subj: a.relation?.subj ?? null, objRefs: a.relation?.obj_refs ?? [], entities: a.entities ?? [], sentence: (a._sentence ?? "").slice(0, 140), span: a.span, kind: a.kind, standing: a.standing });
 for (const c of record.claims) out.claimsByStanding[c.standing] = (out.claimsByStanding[c.standing] ?? 0) + 1;
 out.claimsKeys = record.claims.map((c) => c.key).sort();

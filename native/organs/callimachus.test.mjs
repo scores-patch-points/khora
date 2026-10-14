@@ -183,3 +183,17 @@ test('referentMatch "contains" is the default and unchanged: "the Nevada Senate"
   const { referentsIn } = await import("./callimachus.js");
   assert.deepEqual(referentsIn("the Nevada Senate", [{ id: "r_senate", surfaces: ["Senate"] }]), ["r_senate"]);
 });
+
+test("amendment 1: a sentence-initial or headline capital that the corpus shows is not a name does not split the run", () => {
+  const refs = [{ id: "r_st", surfaces: ["Standard Time"] }, { id: "r_dst", surfaces: ["Daylight Saving Time"] }, { id: "r_sen", surfaces: ["Senate"] }];
+  const fw = new Set(["the", "a", "of"]);
+  const posPrior = { forms: { permanent: { ADJ: 90, NOUN: 2 }, make: { VERB: 80 }, bill: { NOUN: 95 }, committee: { NOUN: 99 }, time: { NOUN: 99 }, standard: { ADJ: 60, NOUN: 30 } } };
+  const lowercaseSeen = new Set(["permanent", "make", "bill", "committee", "standard", "time"]);
+  const at = (s) => referentsInRuns(s, refs, { functionWords: fw, posPrior, lowercaseSeen });
+  assert.deepEqual(at("Permanent Standard Time"), ["r_st"], "an adjective at the edge is not part of the name");
+  assert.deepEqual(at("Make Daylight Saving Time Permanent"), ["r_dst"], "a headline's edge words are not the name");
+  assert.deepEqual(at("Senate Bill 100"), [], "a noun extends the name into a different thing, so it is kept");
+  assert.deepEqual(at("the Senate Committee"), []);
+  assert.deepEqual(at("the Nevada Senate"), [], "Nevada is never lowercase: it is part of the name");
+  assert.deepEqual(at("Standard Time Act"), [], "the run's own surface is still matched exactly");
+});

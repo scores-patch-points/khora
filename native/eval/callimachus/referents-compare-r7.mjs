@@ -34,5 +34,9 @@ const diffs = [];
 const idx = new Map(R.atoms.map((a) => [a.id, a]));
 for (const a of C.atoms) { const b = idx.get(a.id); if (!b) continue; if (a.subj !== b.subj || JSON.stringify(a.objRefs) !== JSON.stringify(b.objRefs) || JSON.stringify(a.entities) !== JSON.stringify(b.entities)) diffs.push({ id: a.id, sentence: a.sentence.slice(0, 90), subj: [a.subj, b.subj], objRefs: [a.objRefs, b.objRefs] }); }
 out.reported = { ...out.reported, atomsWhoseReferentsChanged: diffs.length, atoms: C.atoms.length, claimsByStanding: { contains: C.claimsByStanding, run: R.claimsByStanding }, claimsTotal: [C.claimsKeys.length, R.claimsKeys.length], sampleChanged: diffs.slice(0, 12), houseAsk: { contains: { carriers: C.asks[0].carriers.length, answer: C.asks[0].after.answer }, run: { carriers: R.asks[0].carriers.length, answer: R.asks[0].after.answer } }, senateAsk: { contains: sC.carriers.map((c) => c.text.slice(0, 90)), run: sR.carriers.map((c) => c.text.slice(0, 90)) } };
+const lost = C.entities.filter((e) => !R.entities.some((x) => x.id === e.id)).map((e) => e.name);
+out.predictions.E6 = { referentsContains: C.entities.length, referentsRun: R.entities.length, lost: lost.length, lostNames: lost, holds: lost.length < 19 };
+out.predictions.E7 = { dst: R.entities.some((e) => e.surfaces.includes("Daylight Saving Time")), standardTime: R.entities.some((e) => e.surfaces.includes("Standard Time")), holds: R.entities.some((e) => e.surfaces.includes("Daylight Saving Time")) && R.entities.some((e) => e.surfaces.includes("Standard Time")) };
+out.predictions.E8 = { E1: out.predictions.E1.holds, E3: out.predictions.E3.holds, holds: out.predictions.E1.holds && out.predictions.E3.holds };
 console.log(JSON.stringify(out, null, 1));
 if (process.argv[5]) writeFileSync(process.argv[5], JSON.stringify(out, null, 1));

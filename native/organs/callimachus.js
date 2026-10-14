@@ -266,15 +266,44 @@ export function capitalisedRuns(str) {
   return runs;
 }
 const cleanTok = (t) => t.replace(/^[("'“‘\[]+|[)"'”’\],.;:!?]+$/g, "").replace(/['’]s$/i, "");
-export function referentsInRuns(str, referents, { functionWords = new Set() } = {}) {
+/**
+ * Amendment 1 (GRAIN-R7-PREREG.md): run 1 over-split. A sentence-initial or headline capital ("Permanent Standard Time", "Make Daylight
+ * Saving Time Permanent") was read as part of the name and 19 of 53 referents vanished. An EDGE token is droppable when the corpus
+ * itself shows it is not a name (it occurs in lowercase somewhere: `lowercaseSeen`) AND the received POS prior does not call it a noun
+ * ("Permanent" ADJ, "Make" VERB, droppable; "Bill", "Committee", "Democrats" NOUN, kept, so "Senate Bill" is still not the Senate;
+ * "Nevada" is never lowercase, kept). Without a prior, only the closed class is stripped, as in run 1.
+ */
+export function referentsInRuns(str, referents, { functionWords = new Set(), posPrior = null, lowercaseSeen = null } = {}) {
   const hits = new Set();
   const surfaceKey = (f) => String(f).split(/\s+/).map(cleanTok).filter(Boolean).join(" ").toLowerCase();
+  const nounish = (tok) => {
+    const f = posPrior?.forms?.[tok.toLowerCase()];
+    if (!f) return false;
+    const tot = Object.values(f).reduce((a, b) => a + b, 0);
+    return tot > 0 && ((f.NOUN ?? 0) + (f.PROPN ?? 0)) / tot > 0.5;
+  };
+  const droppable = (tok) => {
+    const l = tok.toLowerCase();
+    if (functionWords.has(l)) return true;
+    return !!(posPrior && lowercaseSeen && lowercaseSeen.has(l) && !nounish(tok));
+  };
   for (const run of capitalisedRuns(str)) {
-    let toks = run.map(cleanTok).filter(Boolean);
-    while (toks.length > 1 && functionWords.has(toks[0].toLowerCase())) toks = toks.slice(1);
-    while (toks.length > 1 && functionWords.has(toks[toks.length - 1].toLowerCase())) toks = toks.slice(0, -1);
-    const key = toks.join(" ").toLowerCase();
-    for (const r of referents) if (r.surfaces.some((f) => surfaceKey(f) === key)) hits.add(r.id);
+    const toks = run.map(cleanTok).filter(Boolean);
+    // The run itself first, then the fewest edge drops that reach a surface: an edge word is dropped only if it is droppable AND the
+    // drop is what makes the run EQUAL a surface (so "Standard" in "Standard Time" is never stripped to "Time").
+    let nL = 0; while (nL < toks.length - 1 && droppable(toks[nL])) nL++;
+    let nR = 0; while (nR < toks.length - 1 - 0 && droppable(toks[toks.length - 1 - nR])) nR++;
+    let found = null;
+    for (let total = 0; total <= nL + nR && !found; total++) {
+      for (let l = 0; l <= Math.min(nL, total) && !found; l++) {
+        const r = total - l;
+        if (r > nR || l + r >= toks.length) continue;
+        const key = toks.slice(l, toks.length - r).join(" ").toLowerCase();
+        const hit = referents.filter((x) => x.surfaces.some((f) => surfaceKey(f) === key));
+        if (hit.length) found = hit;
+      }
+    }
+    for (const r of found ?? []) hits.add(r.id);
   }
   return [...hits];
 }
@@ -369,7 +398,7 @@ const shareOf = (a, b) => { if (!a.size || !b.size) return 0; let n = 0; for (co
  * `minSurfaces` replaces the recurrence bar (default 2) and is only meaningful WITH a posPrior; `verbs` is unioned in, disclosed
  * (the reader's own earned vocabulary from another reading is a vocabulary, not a prior). Nothing here fires unless a caller passes it.
  */
-export function readCorpus(records, { question = "", absences = [], received = null, referentMatch = "contains" } = {}) {
+export function readCorpus(records, { question = "", absences = [], received = null, referentMatch = "contains", referentPrior = null } = {}) {
   const docs = records.map((rec) => {
     const text = textOf(rec);
     const sentences = splitSentences(text).filter((s) => s.text.trim());
@@ -388,7 +417,8 @@ export function readCorpus(records, { question = "", absences = [], received = n
   const verbs = received?.verbs ? new Set([...vocab.verbs, ...received.verbs]) : vocab.verbs;
   // How a mention finds its admitted referent. "contains" (default, byte-identical): any surface inside the mention. "run": the mention's
   // whole capitalised run must equal a surface (GRAIN-R7-PREREG.md). Both are exact about what they do; neither merges aliases.
-  const refsIn = referentMatch === "run" ? (str) => referentsInRuns(str, referents, { functionWords }) : (str) => referentsIn(str, referents);
+  const lowercaseSeen = new Set((corpusText.match(/\b\p{Ll}[\p{L}'’-]*/gu) ?? []).map((w) => w.toLowerCase()));
+  const refsIn = referentMatch === "run" ? (str) => referentsInRuns(str, referents, { functionWords, posPrior: referentPrior, lowercaseSeen }) : (str) => referentsIn(str, referents);
   // functionWords walls the VERB slot (vocab discovery) only: passed to extraction it ends an object at its next closed-class word and
   // cuts the clause an embedding is made of ("said the budget office approved the plan" → object "the budget office approved").
   const rel = (str) => extractRelations(str, { verbs, nounPhraseSubjects: true });
