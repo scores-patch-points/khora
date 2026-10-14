@@ -103,6 +103,30 @@ test("THE SIGNATURE IS GROUND: an empty parameter list takes the list the ask na
   assert.deepEqual(receive({ text: answer, before: stub, file: "/ws/stats.mjs", ask: "Implement mean(xs = []) here." }).carried, []);
 });
 
+test("UNBOUND THIS: `this.name` in a plain function becomes `name` when the ask states it; a method keeps its this; an unstated name keeps it", () => {
+  // verbatim: gemma2:2b through the Fold's door, 2026-10-14 held-out batch — every slugify draw wrote this shape
+  const stub = 'export function slugify() {\n  throw new Error("TODO: slugify");\n}\n';
+  const answer = "ACTION: patch\nPATH: slug.mjs\n<<<ADD>>>\nexport function slugify() {\n  return this.lower(this.dashed(this.title.toLowerCase()));\n}\n<<<END>>> \n";
+  const ask = "Implement slugify(title) in slug.mjs so that `node test.mjs` passes. It lower-cases the title and joins its words with dashes. Use the lower() and dashed() helpers from strings.mjs.";
+  const strings = 'export function lower(s) {\n  return s.toLowerCase();\n}\n\nexport function dashed(s) {\n  return s.trim().replace(/\\s+/g, "-");\n}\n';
+  const test = 'import assert from "node:assert";\nimport { slugify } from "./slug.mjs";\nassert.strictEqual(slugify("Hello Big World"), "hello-big-world");\nassert.strictEqual(slugify("  One  Two "), "one-two");\nconsole.log("ok");\n';
+  const r = receive({ text: answer, before: stub, file: "/ws/slug.mjs", ask });
+  assert.deepEqual(r.carried, ["this:slugify", "params:slugify"]);
+  assert.equal(r.after, "export function slugify(title) {\n  return lower(dashed(title.toLowerCase()));\n}\n");
+  const imported = 'import { lower, dashed } from "./strings.mjs";\n' + r.after; // what Finish adds (follow-through.js)
+  assert.equal(passes({ "slug.mjs": imported, "strings.mjs": strings, "test.mjs": test }), true, "received and imported, it passes");
+  // the off arm: no ask, `this` stays and the real test throws
+  const off = receive({ text: answer, before: stub, file: "/ws/slug.mjs" });
+  assert.ok(off.after.includes("this.lower"));
+  assert.equal(passes({ "slug.mjs": 'import { lower, dashed } from "./strings.mjs";\n' + off.after, "strings.mjs": strings, "test.mjs": test }), false);
+  // CONTROL: a name the ask never states keeps its `this` (only `title` and the helpers it names are unbound)
+  const other = receive({ text: answer.replace("this.lower(", "this.shout("), before: stub, file: "/ws/slug.mjs", ask });
+  assert.ok(other.after.includes("this.shout("), "an unstated name is not unbound");
+  // a class method's `this` is real and is never touched
+  const cls = receive({ text: "<<<ADD>>>\nexport class Slug {\n  make() {\n    return this.lower(this.title);\n  }\n}\n<<<END>>>", before: "export class Slug {}\n", file: "/ws/slug.mjs", ask });
+  assert.ok(cls.after.includes("this.lower(this.title)"));
+});
+
 test("a name the file does not declare is appended; imports it needs go to the top once", () => {
   const before = 'import { x } from "./x.mjs";\nexport function a() {\n  return x;\n}\n';
   const block = '<<<ADD>>>\n```js\nimport { x } from "./x.mjs";\nimport { y } from "./y.mjs";\nexport function d() {\n  return y;\n}\n```\n<<<END>>>';

@@ -22,6 +22,9 @@
 //   carryExport  a replaced declaration the file exports stays exported (ground = the file's own bytes)
 //   ask          an EMPTY parameter list takes the list the ask's words name for that function, `name(a, b)`, and only when
 //                the body uses one of those names (ground = the ask; an ask that names no list carries nothing)
+//   ask          `this.name` inside a plain module function becomes `name` when the ask states that name, as a call or
+//                a parameter: `this` is undefined there, so the access could only throw (every slugify draw of the
+//                held-out batch wrote `this.lower(this.dashed(this.title))` for "Use the lower() and dashed() helpers")
 // Admitted by the lesson rule on one live batch (cennini-ladder, gemma2:2b, 27 draws, 2026-10-13, khora proxy, 14-161 s a
 // call): off 11/27, on 20/27, 9 draws fail->pass and 0 pass->fail, on 3 of 6 asks (clamp: export; mean, even: params);
 // a deranged control (each ask given the NEXT ask's list) recovered 1 draw, by a shared name `x`. The earlier 24 stored
@@ -49,6 +52,25 @@ const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const askedParams = (ask, name) => {
   const m = new RegExp(`(?:^|[^\\w$.])${escapeRe(name)}\\(([^)]*)\\)`).exec(String(ask ?? ""));
   return m && PARAM_LIST.test(m[1]) ? m[1].split(",").map((s) => s.trim()) : null;
+};
+
+/** every name the ask's words state: a call `name(` and each identifier of an asked parameter list */
+const askedNames = (ask) => {
+  const out = new Set();
+  for (const m of String(ask ?? "").matchAll(/(?:^|[^\w$.])([A-Za-z_$][\w$]*)\(([^)]*)\)/g)) {
+    out.add(m[1]);
+    if (PARAM_LIST.test(m[2])) for (const p of m[2].split(",")) out.add(p.trim());
+  }
+  return out;
+};
+
+/** UNBOUND THIS: in a plain module function `this` is undefined, so `this.name` can only throw; when the ask states
+ *  `name`, the access is to that name (a helper the ask told it to use, or the input the ask gave it) */
+const unbindThis = (snippet, names) => {
+  if (!names.size || !/^\s*(?:export\s+(?:default\s+)?)?(?:async\s+)?function\b/.test(snippet)) return null;
+  let hit = false;
+  const out = snippet.replace(/\bthis\.([A-Za-z_$][\w$]*)/g, (all, n) => (names.has(n) ? ((hit = true), n) : all));
+  return hit ? out : null;
 };
 
 /** `function name()` in the snippet takes the asked list, when the body uses one of its names */
@@ -113,6 +135,8 @@ export function receive({ text, before, file, carryExport = true, ask = null } =
     const hits = there.filter((b) => b.name === d.name);
     if (hits.length > 1) return gap("ambiguous-name", `${d.name} is declared ${hits.length} times in the file`, { name: d.name });
     let snippet = body.slice(d.start, d.end);
+    const unbound = unbindThis(snippet, askedNames(ask));
+    if (unbound !== null) { snippet = unbound; carried.push(`this:${d.name}`); }
     const withParams = carryParams(snippet, d.name, askedParams(ask, d.name));
     if (withParams !== null) { snippet = withParams; carried.push(`params:${d.name}`); }
     if (hits.length === 1) {

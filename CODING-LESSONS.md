@@ -2829,3 +2829,23 @@ daemon-queue estimate with nothing in flight (12.6 s past a 12 s promise, so
 every turn was refused and none ended to refresh it; now the queue term counts
 only behind work), and /v1/code answered a pressure hold with 400, which a
 caller reads as a bad request (now 429 + Retry-After; the ladder waits on 429).
+
+## 113. `this` in a plain function is the mouth reaching for the ask's names; the repair loop is not yet the receiver's (2026-10-14)
+After lesson 112 the held-out batch failed 10 of 30. Five were every slugify
+draw: `this.lower(this.dashed(this.title))` for "Use the lower() and dashed()
+helpers", in a plain module function where `this` is undefined, so the access can
+only throw. lenient-receive now drops `this.` before a name the ask states (a call
+`name(` or an asked parameter), inside a function declaration only (a class
+method's `this` is real), and the parameter carry then binds `title`; Finish
+imports the helpers. Same bytes: held-out 20 -> 25 of 30, the earlier batch 20 ->
+23 of 27; 8 fail->pass, and no passing draw contained `this.` to break. One ask
+cluster, so it is admitted as a receive rule with its controls (an unstated name
+keeps its `this`; a method keeps its `this`), not as a rate. Of the rest, one
+isEven draw used `x` where the ask names `n` (no grounded binding without a scope
+reader; the free-name finder counts builtins and needs the vendored keyword
+prior), and four formatTotal draws were logic. The door's own repair loop, three
+rounds, 5 draws: 1 recovered (rounds 2-3 go through the door's strict grammar,
+not the receiver, so a right second answer in the ADD-only shape is still lost).
+Next lever: the receiver inside the door (L4), then repair rounds re-measured.
+Falsifying control: a draw where the unbound name resolves to something other
+than what the ask stated, and the rewrite turns a pass into a fail.
