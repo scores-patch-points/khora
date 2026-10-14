@@ -40,34 +40,69 @@ const slotsOfSentence = (text, address, model) => {
 };
 const overlap = (a, b) => [...a].filter((k) => b.has(k));
 
+const mulberry = (seed) => () => { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+const isRole = (k) => !k.startsWith("anchor:");
+
 /**
- * pointedAtoms(record, { model }) → Map<atomId, { from: indexSpan, via: href, agree: [slot keys], runner_up: n, rival: n }>
- * `record.sources[].index_trail` names the origin hrefs; an origin source is the pinned source whose url/final_url is that href.
+ * A synthesized index sentence is carried by a SET of origin sentences, not one. Greedy cover of its role slots by the page's sentences
+ * (each pick must add a role slot; ties broken by document order), then a born null: the coverage k RANDOM sentences of the same page
+ * reach (seeded, `draws` permutations; the convention of the margin null, 199). The set is pointed only when its coverage covers at
+ * least two role slots and is not reached by chance (p <= 0.05, the house convention).
  */
-export function pointedAtoms(record, { model }) {
+export function coverSet(q, sents, { draws = 199, seed = 20261014 } = {}) {
+  const want = new Set([...q].filter(isRole));
+  if (want.size < 2 || !sents.length) return null;
+  const covered = new Set(), chosen = [];
+  for (;;) {
+    let best = -1, gain = 0;
+    sents.forEach((x, i) => { if (chosen.includes(i)) return; const g = [...x.keys].filter((k) => want.has(k) && !covered.has(k)).length; if (g > gain) { gain = g; best = i; } });
+    if (best < 0) break;
+    chosen.push(best); sents[best].keys.forEach((k) => want.has(k) && covered.add(k));
+  }
+  if (covered.size < 2) return null;
+  const rnd = mulberry(seed), k = chosen.length;
+  let ge = 0;
+  for (let d = 0; d < draws; d++) {
+    const pick = new Set(); while (pick.size < Math.min(k, sents.length)) pick.add(Math.floor(rnd() * sents.length));
+    const c = new Set(); for (const i of pick) sents[i].keys.forEach((x) => want.has(x) && c.add(x));
+    if (c.size >= covered.size) ge++;
+  }
+  const p = (ge + 1) / (draws + 1);
+  return { chosen, covered: [...covered], wanted: want.size, p, pointed: p <= 0.05 };
+}
+
+/**
+ * pointedAtoms(record, { model }) → { atoms: Map<atomId, {from, via, agree, set_size, p}>, pages: Map<sourceId, {from, via, covered, p, pointed}> }
+ * `record.sources[].index_trail` names the origin hrefs; an origin source is the pinned source whose url/final_url is that href.
+ * `pages` is the markup's own witness (the footnote names the page) and is kept whether or not any sentence set is found.
+ */
+export function pointedAtoms(record, { model, draws = 199, seed = 20261014 }) {
   const bySource = new Map();
   for (const a of record.atoms) { if (!bySource.has(a.pinax)) bySource.set(a.pinax, []); bySource.get(a.pinax).push(a); }
   const norm = (u) => String(u ?? "").replace(/#.*$/, "").replace(/\/+$/, "").toLowerCase();
   const sourceOf = new Map(record.sources.flatMap((s) => [[norm(s.url), s], [norm(s.final_url), s]]).filter(([k]) => k));
   const sentencesOf = (s) => { const seen = new Set(); return (bySource.get(s.id) ?? []).filter((a) => a._sentence && !seen.has(a.span) && seen.add(a.span)); };
-  const out = new Map();
+  const atoms = new Map(), pages = new Map();
   for (const ix of record.sources.filter((s) => s.role === "index")) for (const t of ix.index_trail ?? []) {
     const origins = [...new Set(t.hrefs.map((h) => sourceOf.get(norm(h))).filter((s) => s && s.role !== "index"))];
     if (!origins.length) continue;
+    for (const s of origins) if (!pages.has(s.id)) pages.set(s.id, { from: t.span, via: s.final_url ?? s.url, covered: [], p: null, pointed: false });
     // the footnote marks ("[ 57 ]") are markup the index page put between words, not words (index-source.js marksOf)
     const q = slotsOfSentence(t.text.replace(/\[\s*\d+\s*\]/g, " ").replace(/\s+/g, " ").trim(), t.span, model);
     if (!q.size) continue;
-    const originIds = new Set(origins.map((s) => s.id));
-    // reported, never gating: the best the index sentence reaches on pages it does NOT point to
-    let rival = 0;
-    for (const s of record.sources) if (s.role !== "index" && !originIds.has(s.id)) for (const a of sentencesOf(s)) rival = Math.max(rival, overlap(q, slotsOfSentence(a._sentence, a.span, model)).length);
     for (const s of origins) {
-      const scored = sentencesOf(s).map((a) => ({ a, agree: overlap(q, slotsOfSentence(a._sentence, a.span, model)) })).sort((x, y) => y.agree.length - x.agree.length);
-      const top = scored[0];
-      if (!top || top.agree.filter((k) => !k.startsWith("anchor:")).length < 2 || (scored[1] && scored[1].agree.length === top.agree.length)) continue;
-      const prior = out.get(top.a.id);
-      if (!prior || prior.agree.length < top.agree.length) out.set(top.a.id, { from: t.span, via: s.final_url ?? s.url, agree: top.agree, runner_up: scored[1]?.agree.length ?? 0, rival });
+      const cands = sentencesOf(s), sents = cands.map((a) => ({ a, keys: slotsOfSentence(a._sentence, a.span, model) }));
+      const r = coverSet(q, sents, { draws, seed });
+      if (!r) continue;
+      const prev = pages.get(s.id);
+      if (prev.p == null || r.p < prev.p) pages.set(s.id, { ...prev, from: t.span, covered: r.covered, p: r.p, pointed: r.pointed });
+      if (!r.pointed) continue;
+      for (const i of r.chosen) {
+        const a = sents[i].a, mine = sents[i].keys, agree = r.covered.filter((k) => mine.has(k));
+        const old = atoms.get(a.id);
+        if (!old || old.agree.length < agree.length) atoms.set(a.id, { from: t.span, via: s.final_url ?? s.url, agree, set_size: r.chosen.length, p: r.p });
+      }
     }
   }
-  return out;
+  return { atoms, pages };
 }

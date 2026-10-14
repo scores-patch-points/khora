@@ -109,7 +109,9 @@ export function witnesses(cands, { question, record, pointed = null, askedSide =
       words: cands.map((a) => [...new Set([...contentWords(a._sentence ?? "")].map(stemOf))].filter((s) => qWords.has(s))),
       // POINTED (pointer-match.js): an index sentence that carries the question's figures led here, matched slot to slot against the
       // origin sentence. The index is the query; this sentence is the source it found.
-      pointed: cands.map((a) => !!pointed?.has(a.id)),
+      pointed: cands.map((a) => !!(pointed?.atoms ?? pointed)?.has?.(a.id)),
+      // POINTED PAGE: the footnote itself names this candidate's page for a claim that carries the question (the markup's own witness).
+      pointed_page: cands.map((a) => !!pointed?.pages?.get(a.pinax)),
     },
     logos: {
       chains: cands.map((a) => a.independent_count ?? 1),
