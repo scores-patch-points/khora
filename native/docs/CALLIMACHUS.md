@@ -647,3 +647,19 @@ node native/scripts/follow-index.mjs --out DIR                              # fo
 node native/scripts/callimachus-run.mjs --question "…" --replay --ask "…" --out DIR
 node --test native/organs/{byline,index-source,pathos-variants,answer-ladder}.test.mjs
 ```
+
+## 16. The index sentence as a query, read through POS slots (2026-10-14)
+
+User, 2026-10-14: "be sure you're making full use of the POS slots, NL to specific POS to EOT and back."
+
+**Built (additive; off unless `pointed` is passed).** `callimachus.js` attaches `index_trail` to each index source: every sentence standing over footnotes with an origin URL, as a text-layer address, its text, and the origin hrefs (`index-source.js trailOf`). `pointer-match.js` reads the index sentence and every candidate sentence of the page its footnote names through the same parse (`claim-realize.js claimFromSentence`: UPOS, deprel, lemma) into typed slots `role:UPOS:lemma`, roles voice-normalised (a passive's subject is its patient, its `by`-oblique its agent). `answer-ladder.js` takes `pointed` and adds a `perception.pointed` witness (a content witness for the binding gate). `callimachus-run.mjs` computes it when the record has index trails.
+
+**What the slots buy (tests).** "The council approved the depot lease in March 2026." and "The depot lease was approved by the council in March 2026." share pred, agent, patient, oblique and both anchors; a word-bag decoy with the same words in the wrong roles does not match. A footnote naming a page that is not pinned points at nothing.
+
+**Falsified on the real record (Permanent DST: 124 index sentences with origins, 21 naming a pinned page).**
+- A cross-page null (the best the index sentence reaches on pages it does not point to) cannot be beaten: 0/21. Other same-topic pages carry the same slots. Kept as a reported `rival`, not a gate.
+- The within-page null (unique best sentence of the pointed page, at least two role slots): 0 pointed. With one role slot it admitted junk ("Cited by other articles" matching pred `cite`), so the two-role-slot floor was added after seeing it. It is a structural rule (a verb alone says only the verb), not a tuned number.
+- 8 of 21 index sentences give no slots at all (fragments, list items, no verbal root), after stripping the `[ n ]` footnote marks.
+- So the "Who opposes…?" regression is NOT fixed by this step. Reading: Wikipedia sentences are syntheses of several origin sentences (§15: partial coverage 33–100%), so no single origin sentence carries a synthesized claim's slots; the origin is found at the page, not the sentence.
+
+**Open.** Match a synthesized index sentence against a SET of origin sentences (slot union), and let the footnote-named page itself be the witness (page-level `pointed`) with the sentence unresolved.
