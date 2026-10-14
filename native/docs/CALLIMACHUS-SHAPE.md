@@ -174,6 +174,30 @@ The grain is mostly existing machinery given a second corpus, and the stance tab
 
 **Not found.** The July "Generate-row output-shape ladder" and a file literally named for the August "triad-closure check". Nearest: `CAPABILITY-POLICIES.md` (the-fold-latest root) lines 158 ("every claimed closure lands with a falsifiable specimen") and 232 ("mode, domain, and grain are each closed triads by declaration"), the nine-stage generation modules (`shape.js`, `paradigm.js`, `form-prior.js`), and `triad-independence.mjs`. A pointer is welcome.
 
+### Results: the grain experiment (permanent-dst, runs 1–3, 2026-10-14)
+
+Pre-registration `eval/callimachus/GRAIN-PREREG.md` (ratified, amendments 1–3); runner `eval/callimachus/grain-arms.mjs`; outputs local only, `callimachus-runs/grain-2026-10-14/results{,.run2,.run3}.json`. Runs 1, 2 and 3 agree on every prediction except G6, which was a harness defect corrected in amendments 2 and 3 (amendment 2's diagnosis was incomplete and stays in the log). All 40 W hashes matched.
+
+| | prediction | result |
+|---|---|---|
+| G1 | the void fold is Ground; Clearing has no seam; closed | **holds** (92 spans, 0 seams, Cultivating 7 seams) |
+| G2 | dense: beats the null, Figure or Pattern, moves past every re-dealt null | **holds under the registered measure** (Figure; H 10 of 92, exceeded 0 of 199; d = 0.098 against a null maximum of 0.061, 18 of 18). **U-side movement is 0**: see L36 |
+| G3 | B gets Figure | **uninformative**: B's 14 blocks admitted no claim (nor did any of the 19 B nulls) |
+| G4 | the chain's grain never falls and the chain stops | **falsified**: Ground, Figure, Figure, Figure, Figure, Ground; not stopped in 5 steps |
+| G5 | contract, closure, confined mouth, re-slice | **holds** (7 folds) |
+| G6 | the same reader folds the same bytes identically | **holds** after amendments 2–3; only `atoms` and `sha256` bookkeeping differed |
+| G7 | all-UNDETERMINED falls to Ground | **uninformative**: not exercised (dense: 10 SINGLE, 1 UNDETERMINED) |
+| G8 | calibration: at most 1 of 19 shuffled universes non-Ground | **holds** (0 of 19; `null.real` 0 of 19) |
+
+**What the numbers say, and do not say.**
+- **The selector held up; the reader did not.** G8 holds, but the claim reader admitted 766–873 claims from the word-shuffled pages against 573 from the real ones (L34). A count of claims is not evidence of structure.
+- **The W reader limits the grain** (L35). Shown exactly the 92 region spans, the reader admitted 50 claims and held 21, so the fold ran at Figure, not Pattern. In the accumulating chain the W only grew, yet admitted claims went 50, 68, 92, 176, 138 and held 21, 17, 12, 33, 11. G4 is falsified by the instrument's non-monotone reading, not by anything the reader holds.
+- **G2 "held" and eliminated nothing about the record** (L36). Clearing runs first and emits the whole region at every grain, so the record-side addresses equal the void fold's by construction.
+- **Dense, in cells.** Dissecting 0 (no span of the reader's is refused); Binding 10 pairs, no seam; Making 82 items with 57 seams, because 57 of the 82 absent spans share no entity with a held span. The mouth's only work is where the record has no join, as specified.
+- **The re-dealt dense nulls** ran 14 at Ground and 5 at Figure. They are sentences drawn from the same record, so some are literally region claims: this null is a null for *which* sentences, not for held-ness.
+
+**Not shown.** Pattern was never reached. "The reader gets the grain it lacks" (G3) was not tested. Nothing here bears on the addendum's explanation of the cube's shuffle-survival.
+
 ### The whom can be any pinned corpus
 
 **[H3] The second argument can be any pinned corpus with a null.** The same operation with a different W:
