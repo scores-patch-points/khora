@@ -427,7 +427,9 @@ export function readCorpus(records, { question = "", absences = [] } = {}) {
           relation: {
             subj: subjRefs[0] ?? null, subj_surface: addr(subjU, subjU + String(t.subject).length),
             pred: t.verb, obj_refs: objRefs, obj_surface: t.object ? addr(objU, objU + t.object.length) : null,
-            polarity: t.polarity ?? "unknown", polarity_giver: POLARITY_GIVER,
+            // an unreadable polarity is NULL, never "positive": a consumer that maps anything-but-"-" to "+" (grain.js did) would read two claims whose
+            // polarity could not be read as agreeing. The giver of every value, null included, is stamped (POLARITY_GIVER).
+            polarity: t.polarity ?? null, polarity_giver: POLARITY_GIVER,
             inner: embedded ? inner.map((x) => ({ subj: referentsIn(x.subject, referents)[0] ?? null, pred: x.verb, polarity: x.polarity })) : [],
           },
           entities: [...new Set([...subjRefs, ...objRefs])],
@@ -452,7 +454,7 @@ export function readCorpus(records, { question = "", absences = [] } = {}) {
   unadmitted.push(...dropped.map((r) => r.name));
 
   // Same claim, exact: subject referent + predicate surface + polarity + object (its referents if any, else its lowercased form).
-  const keyOf = (a) => a.relation?.subj && [a.relation.subj, a.relation.pred.toLowerCase(), a.relation.polarity, a.relation.obj_refs.length ? a.relation.obj_refs.join("+") : diaNorm(a._object)].join("|");
+  const keyOf = (a) => a.relation?.subj && [a.relation.subj, a.relation.pred.toLowerCase(), a.relation.polarity ?? "unknown", a.relation.obj_refs.length ? a.relation.obj_refs.join("+") : diaNorm(a._object)].join("|");
   const claims = new Map();
   for (const a of atoms) { const k = keyOf(a); if (!k) continue; (claims.get(k) ?? claims.set(k, []).get(k)).push(a); }
 

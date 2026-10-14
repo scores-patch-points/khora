@@ -200,7 +200,7 @@ export async function answerLadder(record, { question, slice, grammar, telling =
   if (perspectives?.positions?.length) {
     const within = (a, row) => { try { const x = parseAddress(a.span), y = parseAddress(row.span); return x.pinax === y.pinax && x.start < y.end && y.start < x.end; } catch { return false; } };
     // a sentence can hold both poles ("Reyes approved it, but Lopez opposed it"): it is on the wrong side only when every holder in it is
-    const polesOf = (a) => new Set(perspectives.positions.filter((row) => within(a, row)).map((row) => row.pole));
+    const polesOf = (a) => new Set(perspectives.positions.filter((row) => (!row.option || row.option === "topic") && within(a, row)).map((row) => row.pole));
     askedSide = new Set(all.filter((a) => polesOf(a).has("+")).map((a) => a.id));
     if (askedSide.size) {
       const keep = [];

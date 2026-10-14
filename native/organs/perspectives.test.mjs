@@ -122,3 +122,37 @@ test("an evaluation is a stance: 'experts argue that X is better' puts the exper
   // CONTROL that can fail: a copular clause about something else is not a stance on the topic
   assert.ok(!stances("The weather is better in March.", ["permanent standard time"]).some((r) => r.evaluation));
 });
+
+import { discoverOptions, exclusivity, cornersOf, spectrum, optionKey } from "./options.js";
+test("options come from what the pages declare; exclusivity is NOMINATED with its spans and REFUTED by a holder on both; four corners per option", () => {
+  const texts = new Map([
+    ["px_a", "The new analysis examines the health effects of permanent standard time versus permanent daylight saving time for riders."],
+    ["px_b", "Lawmakers prefer permanent daylight saving time rather than permanent standard time in the spring."],
+    ["px_c", "Fifty-six percent support permanent daylight saving time, compared to 42% for permanent standard time."],
+  ]);
+  const opts = discoverOptions({ texts, model, topicNames: ["permanent daylight saving time"] });
+  assert.equal(opts.length, 1);
+  assert.equal(opts[0].key, optionKey("permanent standard time"));
+  assert.equal(opts[0].pages.length, 3);
+  assert.ok(opts[0].declared.every((d) => ["versus", "rather than", "compared to"].includes(d.marker)));
+  const pos = [
+    { option: "topic", pole: "+", holder: "Rounds", holder_display: "Rounds", text: "a", span: "s1" },
+    { option: opts[0].id, pole: "-", holder: "Doe", holder_display: "Doe", text: "b", span: "s2" },
+  ];
+  const ex = exclusivity(opts, pos);
+  assert.equal(ex[0].status, "nominated");
+  // a holder on the SAME pole of both refutes it, and the refutation names the holder and both spans
+  const ex2 = exclusivity(opts, [...pos, { option: opts[0].id, pole: "+", holder: "Rounds", holder_display: "Rounds", text: "c", span: "s3" }]);
+  assert.equal(ex2[0].status, "refuted");
+  assert.deepEqual(ex2[0].refuted_by.map((r) => r.holder), ["Rounds"]);
+  // four corners from the one lattice
+  assert.equal(cornersOf("topic", pos).says, "is-not", "only an opposer is on record: is-not");
+  assert.equal(cornersOf("nothing", pos).says, "neither");
+  const both = cornersOf("topic", [...pos, { option: "topic", pole: "-", holder: "Lee", holder_display: "Lee", text: "d", span: "s4" }]);
+  assert.equal(both.says, "both");
+  // the cross-option reading is typed `consistent_with` and never asserted
+  const sp = spectrum({ perspectives: { positions: pos }, options: opts });
+  assert.ok(sp.implied.every((i) => i.asserted === false && i.relation === "consistent_with"));
+  // CONTROL that can fail: with no declaring marker there is no option
+  assert.deepEqual(discoverOptions({ texts: new Map([["px_a", "Permanent standard time is discussed widely in the press this month."]]), model, topicNames: ["permanent daylight saving time"] }), []);
+});
