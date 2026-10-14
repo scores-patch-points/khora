@@ -163,7 +163,13 @@ export function assertAxesApart(recordReadings = [], readerReadings = []) {
 /** One side's verdict on a positive proposition, as a reading that `mergeTestimony` can take. `-` polarity refuses it; another object says nothing. */
 const readingOf = (side, obj) => (s) => {
   const same = norm(s.claim?.obj) === obj;
-  const verdict = !same ? "undetermined" : s.claim?.polarity === "-" ? "refused" : "holds";
+  let verdict = !same ? "undetermined" : s.claim?.polarity === "-" ? "refused" : "holds";
+  // The theory-of-mind organ's stance (mind-whom.js): the reader's model of the person says they REFUSE the span's claim (the
+  // proposition's verdict flips), DOUBT it (undetermined), or CONCEDED it (held once, re-zeroed: not a reading).
+  if (side === "W" && same && s.stance) {
+    if (s.stance === "refuses") verdict = verdict === "holds" ? "refused" : "holds";
+    else if (s.stance === "doubts" || s.stance === "conceded") verdict = "undetermined";
+  }
   return { verdict, read: [s.address], who: `${side}:${s.address}`, side, span: s };
 };
 
@@ -271,7 +277,9 @@ export function refusalsOf({ fold, standings, admitted = [], refusedW = [], regi
  * typed refusals, and `refused` (true when a surface must not render it). `wFull` is the region re-read as W by the same reader.
  * grain.js is not edited: the selection is passed to `foldGrain` as `forceGrain`, and the result says it was selected here.
  */
-export function foldWithWhom({ region = [], whom = [], wFull = null, referents = null, survives = (u) => (u.activation ?? 0) > 0, draws = 199, seed = 20261014, anchor = "first" } = {}) {
+export function foldWithWhom({ region = [], whom: whomIn = [], wFull = null, referents = null, mind = null, survives = (u) => (u.activation ?? 0) > 0, draws = 199, seed = 20261014, anchor = "first" } = {}) {
+  // `mind` (mind-whom.js): the reader's state as a mind through the theory-of-mind organ. Its spans join W; its disclosure rides the fold.
+  const whom = mind?.whom?.length ? [...whomIn, ...mind.whom] : whomIn;
   const { admitted, refused: refusedW } = admitWhom(whom, { universe: region });
   const split = splitRegion(region, admitted, { draws, seed });
   const cleared = region.filter(survives);
@@ -283,6 +291,7 @@ export function foldWithWhom({ region = [], whom = [], wFull = null, referents =
   const fold = foldGrain({ region, whom: admitted, survives, draws, seed, forceGrain: selection.grain, anchor });
   const standings = standingsOf({ region: cleared, whom: admitted });
   const refusals = refusalsOf({ fold, standings, admitted, refusedW, region, whom: admitted, selection });
+  if (mind?.unmodelled) refusals.push({ code: "mind-unmodelled", renders: true, forced: "Ground", why: "the reader has attributed nothing to the person: unmodelled, which is not the person holding nothing" });
   return {
     ...fold,
     grain: selection.grain,
@@ -295,6 +304,7 @@ export function foldWithWhom({ region = [], whom = [], wFull = null, referents =
     refusals,
     refused: refusals.some((r) => r.renders === false),
     ...(referents ? { topic: topicOf(cleared, referents) } : {}),
+    ...(mind ? { mind: { model: mind.model, legs: mind.legs, common: mind.common, divergence: mind.divergence, held: mind.held, gaps: mind.gaps, unanchored: mind.unanchored, unmodelled: mind.unmodelled } } : {}),
   };
 }
 
