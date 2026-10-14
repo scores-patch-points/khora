@@ -78,6 +78,8 @@ const norm = (t) => {
 };
 /** A span: { id, address, text, side: "U"|"W", claim: { subj, pred, obj, polarity: "+"|"-" } | null, activation?, division? }. */
 const arrangement = (c) => (c?.subj && c?.pred ? `${norm(c.subj)}|${norm(c.pred)}` : null);
+/** The arrangement key of a span's claim (normalized subject|predicate), or null. Exported so an evaluation can check held-ness itself. */
+export const arrangementOf = (s) => arrangement(s?.claim);
 const sameObject = (a, b) => norm(a?.obj) === norm(b?.obj);
 
 /** One witness reading of a W claim, given by one U span. Same arrangement is required; the object and polarity decide the verdict. */
