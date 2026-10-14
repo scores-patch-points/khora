@@ -6279,7 +6279,7 @@ export async function runProxyTurn({ sessionId, userId = null, model, task, chat
       sections.length ? "the void's staged phases, ordered toward a climbing arc, each phase a question in the register's form" : "a single declared artifact — the void stages it as it writes",
       { sections: sections.length, first: sections[0]?.slice(0, 80) ?? null, arc: "climbing" },
       { sections, register: prelimShape.register?.field?.field ?? null },
-      { evaBasis: "the predicted fortune arc must match the genre's accumulated shape; the read below is its EVA", operator: "SEG", grain: "Field", face: "Murch" });
+      { evaBasis: "the predicted fortune arc must match the genre's accumulated shape; the read below is its EVA", operator: "SEG", grain: "Ground", face: "Murch" });
     // DEF — the interpretive frame is DECLARED (not read off grammar): what
     // would satisfy this piece, named before a word is written. The felt
     // target rides here — the genre's own release count is the criterion the
@@ -6288,7 +6288,7 @@ export async function runProxyTurn({ sessionId, userId = null, model, task, chat
       `the piece is declared in the ${prelimShape.register?.field?.field ?? "staged"} register: ${discoveredFelt ? `felt target ${discoveredFelt.releases ?? "?"} releases, shape "${String(discoveredFelt.shape ?? "")}"` : "no felt target — the register's own shape stands"}`,
       { feltTarget: discoveredFelt?.releases ?? null, genre: prelimShape.register?.field?.field ?? null },
       { feltTarget: discoveredFelt, register: prelimShape.register?.field?.field ?? null },
-      { evaBasis: "the frame is declared before the write; EVA measures the write against it", operator: "DEF", grain: "Atmosphere", face: "the void declares" });
+      { evaBasis: "the frame is declared before the write; EVA measures the write against it", operator: "DEF", grain: "Ground", face: "the void declares" });
   }
   // The composition block below may EVOLVE the plan (REC supersedes the outline
   // and adds themes as the reading grows). Hoisted so the satisfaction check
@@ -8949,12 +8949,12 @@ export async function runProxyTurn({ sessionId, userId = null, model, task, chat
       "each phase's sub-satisfaction: what would satisfy THIS phase, from THIS material",
       { propositions: stats.relationEdges ?? 0, referents: stats.referentBindings ?? 0, surprise: readSurprise },
       { relations: stats.relationEdges ?? 0, referents: stats.referentBindings ?? 0, surprise: readSurprise, ground: hasGrounding },
-      { evaBasis: "the reader's own surprise on the material is the EVA — the felt dimension of the read", operator: "CON", grain: "Link", face: "Gore" });
+      { evaBasis: "the reader's own surprise on the material is the EVA — the felt dimension of the read", operator: "CON", grain: "Figure", face: "Gore" });
     wheel.turn("write",
       "the parts compose into one carried ground — the artifact itself, Wolfe's work",
       { parts: documentLines.length, chars: fullText.length, grounded: hasGrounding, seed: storySeed?.seed ?? null, cast: storySeed?.cast?.map((c) => c.name) ?? [] },
       { parts: documentLines.length, chars: fullText.length, voice: discoveredVoice ? "discovered" : "register", seed: storySeed?.seed ?? null, cast: storySeed?.cast ?? [] },
-      { evaBasis: "the write is the SYNthesis of the read's ground into one piece — measured against the declare; every cast member keeps its provenance", operator: "SYN", grain: "Field", face: "Wolfe" });
+      { evaBasis: "the write is the SYNthesis of the read's ground into one piece — measured against the declare; every cast member keeps its provenance", operator: "SYN", grain: "Ground", face: "Wolfe" });
     const sat = satisfaction?.ok ?? false;
     // THE FELT IS THREADED INTO THE VERDICT: the read's release/surprise is
     // measured against the declare's feltTarget (Bharata's rasa, closed).
@@ -9008,12 +9008,12 @@ export async function runProxyTurn({ sessionId, userId = null, model, task, chat
       documentLedger ? "satisfaction = climbing arc, felt releases, grounded claims — DEF'd before the plan" : "chat satisfaction",
       { ok: sat, filled: satisfaction?.filled ?? 0, of: satisfaction?.of ?? 0, failures: satisfaction?.failures?.length ?? 0, strain: satisfaction?.totalStrain ?? 0, feltTarget, feltRead: readSurprise, feltGap: feltTarget == null ? null : (feltTarget - readSurprise), ranke: ranke?.verbatim ?? null, unsupported: ranke?.unsupported ?? null, dmca: dmca ? { ok: dmca.ok, quoted: dmca.quoted, copied: dmca.copied } : null, categorized: categorized ? { derivation: categorized.derivation, field: categorized.field, echo: categorized.echo, cell: categorized.cell, reproduce: categorized.reproduce, derive: categorized.derive, invent: categorized.invent, paraphraseCandidates: categorized.paraphraseCandidates ?? 0, paraphraseEquated: categorized.paraphraseEquated ?? 0, paraphraseChased: paraphraseChased ?? null } : null },
       { ...satisfaction, ranke, dmca, categorized, paraphraseChased },
-      { evaBasis: "the artifact is measured against the declare — a real difference, never a softmax", operator: "EVA", grain: "Lens", face: "LaVar" });
+      { evaBasis: "the artifact is measured against the declare — a real difference, never a softmax", operator: "EVA", grain: "Figure", face: "LaVar" });
     wheel.turn("fold",
       "the superseding satisfaction — corrected against what this run's material actually allowed",
       { ok: sat, noGround: !hasGrounding, felt: readSurprise },
       { ok: sat, genre: prelimShape.register?.field?.field ?? null, ground: hasGrounding, sidecar: "append-only: this run's shape+felt fold back into the genre's impression" },
-      { evaBasis: "a failed criterion supersedes the DEF by appending, never editing — the ledger's law", operator: "REC", grain: "Atmosphere", face: "Murch" });
+      { evaBasis: "a failed criterion supersedes the DEF by appending, never editing — the ledger's law", operator: "REC", grain: "Ground", face: "Murch" });
   }
 
   // THE CHARTER GATE — governs this generation against the UDHR, on EVERY
