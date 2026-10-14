@@ -66,8 +66,15 @@
 //      triggers (see priors.js's own note on SUBORDINATING_CONJUNCTIONS) —
 //      pos-eng.json measures it too close to a three-way split
 //      (SCONJ/PRON/DET) to trust as a closed-class boundary signal alone.
+//      MEASURED 2026-10-14 (CALLIMACHUS.md §11.3): adding it costs witness
+//      agreement in English, and Spanish "que" as a boundary is no better
+//      than a random re-dealing (p = 0.52). With `opts.rows` (a UD parse)
+//      "that" is decided per token instead.
 //      "the theory that Curie discovered" will NOT be split at "that".
-//   2. FRONTED subordinate clauses ("Because it rained, the match was
+//   2. CLOSED 2026-10-14 (clauseSpans below; native/docs/CALLIMACHUS.md
+//      §11): a fronted subordinate clause now ends at its comma, and with a
+//      POS prior or a parse a fronted adjunct does too. The original note:
+//      FRONTED subordinate clauses ("Because it rained, the match was
 //      postponed") are NOT split — the subordinator-as-first-token guard
 //      (below) exists to avoid a zero-length clause before it, but this
 //      module does not yet detect the comma that should close a fronted
