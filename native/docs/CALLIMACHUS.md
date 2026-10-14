@@ -134,6 +134,8 @@ Measured on the DST record (10 pinned pages):
 | Accumulating W as the grain's reader across five steps (grain experiment G4, permanent-dst) | Grain Ground, Figure, Figure, Figure, Figure, Ground; admitted claims 50, 68, 92, 176, 138 as W only grew; not stopped | The claim reader read a larger W as holding less (held 33 → 11 at the last step). Instrument-limited, not a finding about the reader. Refutation ledger L35. |
 | The claim reader on word-shuffled pages (grain experiment calibration arm, 19 seeds) | 766–873 atoms from shuffled pages against 573 from real | It admits more claims from noise than from text. The selector downstream was calibrated (0 of 19 non-Ground); the reader is not. Refutation ledger L34. |
 | Movement measured as Jaccard distance over copied addresses, with Clearing first | U-side distance 0 for dense and B; d = 0.098 comes from added W-side addresses | The measure cannot see the record move. Refutation ledger L36. |
+| An accumulating chain whose step adds the fold's own copied spans back to W (grain experiment, second registration N6) | W doubled each step (claims 136, 266, 527, 1049, 2093); the copied set never repeated; the record-side set was constant (92) and the grain Pattern from step 1 | The stop rule counted addresses the chain itself creates. Refutation ledger L38. |
+| Pattern selected by a bare majority, dense reader (held 47, absent 45) | Tracing 48 items, mostly the reader's own sentence beside the identical record sentence; Composing 0; the 45 absent spans in no cell | The fold is closed and addressed and shows the reader almost nothing new. Refutation ledger L39. |
 
 ## 7. Hand-set constants still owed a null (the user's rule: no hand-set thresholds; born rule, DMD all the way)
 

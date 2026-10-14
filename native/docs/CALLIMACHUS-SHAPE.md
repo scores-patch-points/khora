@@ -225,6 +225,31 @@ Pre-registration `eval/callimachus/W-READER-PREREG.md`, script `eval/callimachus
 
 **Not shown.** Whether a prior used only as a refuser (minSurfaces 2) beats R0; whether recall under shuffle collapses for R2 (the calibration the grain needs); anything about the grain with R2 as the W reader. Each is a new registration.
 
+### Results: the grain experiment, second registration (record-vocabulary reader, one run, 2026-10-14)
+
+Pre-registration `eval/callimachus/GRAIN-R2-PREREG.md`, runner `eval/callimachus/grain-arms-r2.mjs` (committed `ca104aae` before the run), outputs local only `callimachus-runs/grain-r2-2026-10-14/` (`results.json`, `results.demo.md`). The person's thread is read **through** the record's own earned vocabulary (49 verbs); no received POS prior. All 40 W hashes matched.
+
+| | prediction | result |
+|---|---|---|
+| N1 | void is Ground, Clearing silent, closed | **holds** |
+| N2 | the 92 spans shown are held and run at Pattern | **holds** (136 claims; held 90, absent 2) |
+| N3 | calibration of the reader: shuffled-W is not read as holding the region | **holds** (19 of 19 Ground; held at most 7 against 90) |
+| N4 | dense beats the null, Figure/Pattern, holds more than every re-dealt reader | **holds** (Pattern; held 47 against a re-dealt maximum of 28) |
+| N5 | B is informative and gets Figure, no Making leak | **falsified**: 19 claims, held 8, null not beaten (exceeded 182 of 199, chance mean 9.2); Ground |
+| N6 | the chain never falls and stops | **falsified as registered**: the grain never fell (Pattern from step 1) but the stop rule is unreachable by construction (ledger L38); the record-side copied set was identical at every step |
+| N7 | calibration of the selector: at most 1 of 19 shuffled universes non-Ground | **holds** (0 of 19) |
+| N8 | determinism | **holds** (no differing field) |
+| N9 | contract, closure, mouth confined, re-slice | **holds** (9 folds) |
+
+**What it says.**
+- **The reader and the selector are now calibrated on both controls.** Shuffled-W: 19 of 19 at Ground; shuffled-U: 0 of 19. Claim counts still do not discriminate (shuffled-W admitted 111–137 claims against 136 real); the held count does.
+- **The void fold answers the ask first.** Cultivating's first span is "On July 14, 2026, the House passed a Sunshine Protection Act bill backed by President Trump." (the best-activated span), then the rest of the region, seven seams in 92 items.
+- **Pattern, by a margin of two, mostly echoes** (L39). Dense: held 47, absent 45. Tracing shows 48 of the reader's own sentences beside the identical record sentences; Composing and Unraveling are empty; the 45 absent spans are shown in no cell. The fold is closed, addressed and gave the reader almost nothing new.
+- **B is not shown a Figure.** B holds 8 spans and chance holds 9.2 on average: it does not hold more than a re-dealt reader would.
+- **The chain's growth is an artifact** (L38): W doubles each step because the fold's own copied spans, re-addressed, are added back.
+
+**Not shown.** Whether a measured cut on held beats the majority rule; whether surfacing the absent set at Pattern is the right repair; "the reader gets the grain it lacks" (B's null was not beaten); anything with a person's thread instead of a constructed reader.
+
 ### The whom can be any pinned corpus
 
 **[H3] The second argument can be any pinned corpus with a null.** The same operation with a different W:
