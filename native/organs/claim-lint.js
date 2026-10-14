@@ -46,6 +46,23 @@ const squash = (t) => ` ${norm(t)} `;
 const stemOf = (w) => norm(w).slice(0, 4);
 const hasContentToken = (t) => /[\p{L}]{4,}/u.test(String(t ?? ""));
 
+/**
+ * Declared relations (the logos lint is inert without them). A declaration is `{ rel, role?, giver }` and **must name its giver**: a
+ * relation is functional, symmetric or acyclic because someone on the record said so, never because it looks so. An entry with no
+ * giver (or a bare string) is returned in `ignored`, typed, and is not used.
+ *   declared = { functional: [{ rel, role = "ARG1", giver }], symmetric: [{ rel, giver }], acyclic: [{ rel, giver }] }
+ */
+export function declarationsOf(declared) {
+  const out = { functional: [], symmetric: [], acyclic: [], used: [], ignored: [] };
+  for (const kind of ["functional", "symmetric", "acyclic"]) {
+    for (const d of declared?.[kind] ?? []) {
+      if (d && typeof d === "object" && d.rel && String(d.giver ?? "").trim()) { out[kind].push(d); out.used.push({ kind, rel: d.rel, giver: d.giver }); }
+      else out.ignored.push({ kind, rel: typeof d === "string" ? d : d?.rel ?? null, why: "no giver" });
+    }
+  }
+  return out;
+}
+
 /** The form laws on one span. Returns the ids of the laws it breaks. */
 export function formLaws(s) {
   const c = s?.claim ?? null;
@@ -71,7 +88,8 @@ export function formLaws(s) {
  *   flagged  [{ id, address, laws }] — logos findings on spans that stay
  *   logos    { cycle, gfp: { ok, counts, unjudged } }
  */
-export function lintClaims(spans = [], { identity = caselessIdentity } = {}) {
+export function lintClaims(spans = [], { identity = caselessIdentity, declared = null } = {}) {
+  const decl = declarationsOf(declared);
   const sound = [], refused = [];
   for (const s of spans) {
     const laws = formLaws(s);
@@ -91,7 +109,7 @@ export function lintClaims(spans = [], { identity = caselessIdentity } = {}) {
   let gfp = { ok: true, counts: {}, unjudged: null };
   const apartIds = new Set();
   try {
-    const r = lintGfp(gfps, { strictness: "standard", identity });
+    const r = lintGfp(gfps, { strictness: "standard", identity, functional: decl.functional, symmetric: decl.symmetric, acyclic: decl.acyclic });
     gfp = { ok: r.ok, counts: r.counts ?? {}, unjudged: r.unjudged ?? null };
     for (const f of r.findings ?? []) for (const id of f.claims ?? f.ids ?? []) apartIds.add(id);
   } catch (e) { gfp = { ok: null, error: String(e?.message ?? e), counts: {}, unjudged: null }; }
@@ -101,5 +119,5 @@ export function lintClaims(spans = [], { identity = caselessIdentity } = {}) {
     if (laws.length) flagged.push({ id: s.id, address: s.address, laws });
     return laws.length ? { ...s, lint: laws } : s;
   });
-  return { sound: flaggedSound, refused, flagged, logos: { cycle: cyc ? cyc.cycle : null, gfp }, counts: { in: spans.length, sound: sound.length, refused: refused.length, flagged: flagged.length } };
+  return { sound: flaggedSound, refused, flagged, logos: { cycle: cyc ? cyc.cycle : null, gfp, declared: { used: decl.used, ignored: decl.ignored } }, counts: { in: spans.length, sound: sound.length, refused: refused.length, flagged: flagged.length } };
 }

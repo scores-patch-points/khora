@@ -49,3 +49,17 @@ test("CL4: a cycle in the claim graph is flagged, not silently dropped", () => {
 test("every law names its giver and its kind", () => {
   for (const [id, law] of Object.entries(CLAIM_LAWS)) { assert.ok(law.giver, id); assert.ok(["form", "logos"].includes(law.kind), id); }
 });
+
+test("declared relations reach the logos lint, but only with a named giver", () => {
+  const a = sp("Maria", "born", "Lisbon", "Maria was born in Lisbon.");
+  const b = sp("Maria", "born", "Porto", "Maria was born in Porto.");
+  const none = lintClaims([a, b]);
+  assert.equal(none.flagged.length, 0, "undeclared: convicts nobody");
+  const withGiver = lintClaims([a, b], { declared: { functional: [{ rel: "born", role: "ARG1", giver: "the user, 2026-10-14" }] } });
+  assert.deepEqual(withGiver.logos.declared.used, [{ kind: "functional", rel: "born", giver: "the user, 2026-10-14" }]);
+  assert.ok(withGiver.flagged.length >= 1, "a one-valued relation with two values is flagged");
+  assert.equal(withGiver.counts.sound, 2, "flagged, not refused");
+  const noGiver = lintClaims([a, b], { declared: { functional: [{ rel: "born" }, "born"] } });
+  assert.equal(noGiver.logos.declared.ignored.length, 2);
+  assert.equal(noGiver.flagged.length, 0);
+});
