@@ -10,12 +10,18 @@ import https from "node:https";
 import net from "node:net";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { keywordsFor } from "../adapters/code/edges.js";
 import { FINISH_SCHEMA, finish, applyFinish, worldOf, targetOf, specFor, anchorOf } from "../organs/follow-through.js";
 import { findCapacity } from "../organs/capacities.js";
 import { cellOf } from "../kernel/cube.js";
 import { prepareUnit, propose, assemble, World, FULL } from "../../cli/apprentice-mover.mjs";
 import { loadScope } from "../../cli/apprentice-replay.mjs";
 
+// These tests compare the organ with the graded instrument, which reads the vendored CodeKeywordPrior@1 through
+// native/priors (a symlink into janus/priors). A clean clone has no such prior; without it the organ refuses stubs by
+// design (stub-refused:no-keyword-prior) and the equivalence is not defined, so they skip with a named reason rather
+// than pass on keywords read as callees.
+const SKIP_NO_PRIOR = keywordsFor("javascript") ? false : "needs the vendored CodeKeywordPrior@1 (native/priors -> janus/priors); absent in a clean clone";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const scope = loadScope();
 const P = "/p/khora/cli"; // an in-scope directory: the `khora` segment matches the scope's `in` rules
@@ -92,7 +98,7 @@ test("registered before it ran: capacity follow-through, SYN·Figure → Generat
   assert.equal(typeof mod[c.fn], "function", "the registry names a real export");
 });
 
-test("EQUIVALENCE: on every fixture unit the organ computes what the graded instrument computed (proposals and assembled bytes)", () => {
+test("EQUIVALENCE: on every fixture unit the organ computes what the graded instrument computed (proposals and assembled bytes)", { skip: SKIP_NO_PRIOR }, () => {
   for (const u of UNITS) {
     const { unit, p, files } = instrumentOf(u);
     const o = finish({ before: u.before, after: unit.seeded, file: u.file, world: files, scope });
@@ -103,7 +109,7 @@ test("EQUIVALENCE: on every fixture unit the organ computes what the graded inst
   }
 });
 
-test("NON-VACUITY: the fixtures exercise an import, an extend, a stub and both guards, and the comparator catches a dropped proposal", () => {
+test("NON-VACUITY: the fixtures exercise an import, an extend, a stub and both guards, and the comparator catches a dropped proposal", { skip: SKIP_NO_PRIOR }, () => {
   const seen = { import: 0, extend: 0, stub: 0, "runtime-global": 0, "declared-in-file": 0 };
   let caught = 0, withProposals = 0;
   for (const u of UNITS) {
@@ -124,7 +130,7 @@ test("NON-VACUITY: the fixtures exercise an import, an extend, a stub and both g
   assert.equal(equivalent({ proposals: [], gaps: [] }, { proposals: [{ kind: "stub", name: "x" }] }, "", "javascript").keys, false, "an empty organ output never passes against a nonempty instrument");
 });
 
-test("(a) the organ proposes exactly the import, with its snippet at importAnchor; the world OFF falls to a stub", () => {
+test("(a) the organ proposes exactly the import, with its snippet at importAnchor; the world OFF falls to a stub", { skip: SKIP_NO_PRIOR }, () => {
   const u = UNITS[0];
   const { unit, files } = instrumentOf(u);
   const o = finish({ before: u.before, after: unit.seeded, file: u.file, world: files, scope });
@@ -139,7 +145,7 @@ test("(a) the organ proposes exactly the import, with its snippet at importAncho
   assert.equal(specFor(`${P}/a.js`, targetOf("./util.js", `${P}/b.js`), null, "javascript"), "./util.js");
 });
 
-test("the binding lesson resolves what the world cannot; equivalence holds through it", () => {
+test("the binding lesson resolves what the world cannot; equivalence holds through it", { skip: SKIP_NO_PRIOR }, () => {
   const u = { name: "lesson", file: `${P}/l.js`, world: {}, before: "export function main() {\n  return 0;\n}\n", after: "import { join } from \"node:path\";\nexport function main() {\n  return join(\"a\", \"b\");\n}\n" };
   const lessons = { binding: (n) => (n === "join" ? "bare:node:path" : null), ambient: () => false };
   const { unit, p, files } = instrumentOf(u, GRADED, lessons);
@@ -157,7 +163,7 @@ test("typed gaps: an uncalled name, a removed call, a file with no reader — na
   assert.deepEqual(finish({ before: "a", after: "b", file: "/p/khora/README.md" }).gaps, [{ kind: "no-reader", ext: ".md" }]);
 });
 
-test("PLANTED PII: personal data in comments, strings and the world never reaches a snippet; a PII-shaped specifier is withheld, fail-closed", () => {
+test("PLANTED PII: personal data in comments, strings and the world never reaches a snippet; a PII-shaped specifier is withheld, fail-closed", { skip: SKIP_NO_PRIOR }, () => {
   const EMAIL = "jane.doe@example.com", PHONE = "(615) 555-0123", SSN = "123-45-6789", STREET = "1428 Elm Street";
   const before = `// contact ${EMAIL} or ${PHONE}\nconst who = "${STREET}, ${SSN}";\nexport function main() {\n  return who;\n}\n`;
   const after = `// contact ${EMAIL} or ${PHONE}\nconst who = "${STREET}, ${SSN}";\nexport function main() {\n  return helper(who) + lookup(who) + fresh("${EMAIL}");\n}\n`;
