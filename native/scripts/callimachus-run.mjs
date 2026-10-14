@@ -184,7 +184,8 @@ const ladders = [];
 let parserModel = null, pointed = null;
 for (const ask of asks) {
   for (const l of langs) {
-    const qg = (await import(`../adapters/text/question-grammar.${/^[¿¡]|[áéíóúñ]/i.test(ask) ? "es" : "en"}.js`)).default;
+    // --qlang declares the question's grammar; without it the language is sniffed (¿/¡ or Spanish accents → es, else en).
+    const qg = (await import(`../adapters/text/question-grammar.${opt("--qlang") ?? (/^[¿¡]|[áéíóúñ]/i.test(ask) ? "es" : "en")}.js`)).default;
     if (qg.lang === "en" && !parserModel) { const { loadModel } = await import("../adapters/text/english-parser.js"); parserModel = loadModel(JSON.parse(readFileSync(join(here, "../priors/parser-eng-ewt.json"), "utf8")), { morphology: JSON.parse(readFileSync(join(here, "../priors/morphology-eng.json"), "utf8")) }); }
     const reading = qg.readQuestion(ask, { model: parserModel });
     // The index as QUERY: origin sentences an index sentence points at (footnote → pinned page), matched slot to slot (pointer-match.js).

@@ -120,7 +120,8 @@ export async function cubeTelling(record, { slice, interp, fixity = {}, limits =
   const { srcSeg, quoteSeg, nameSegs, names, pageSegs } = makeComposer(record, { slice });
   const blocked = record.absences.filter((a) => a.type === "bot_blocked");
   const loc = record.atoms.filter((a) => a.kind === "located").length;
-  const pubs = record.sources.map((s) => s.declared?.published).filter(Boolean).sort();
+  // A declared date that does not parse as a calendar date is not a date: that page counts as undated (a page's meta can say anything).
+  const pubs = record.sources.map((s) => s.declared?.published).filter((d) => d && !Number.isNaN(Date.parse(`${String(d).slice(0, 10)}T12:00:00Z`))).sort();
   const atm = interp.atmosphere ?? { gap: "not interpreted" };
 
   // THE LENS IS MEDIUM-BLIND. Each cell returns PROPOSITIONS — { type, slots, grounds } or { alts: [...] } (the first lawful wins) — and
@@ -165,7 +166,7 @@ export async function cubeTelling(record, { slice, interp, fixity = {}, limits =
     "INS·Pattern": async () => interp.facets.length ? [P("largest_groups", { groups: interp.facets.slice(0, 2).map((f) => ({ figs: f.core.slice(0, 3).map((id) => ({ fig: id })), claims: { count: f.atoms.length } })) }, interp.facets.slice(0, 2).flatMap((f) => f.atoms))] : [],
 
     "SEG·Ground": async () => [P("holdings", { pages: { count: nPages }, bytes: { count: record.sources.reduce((k, s) => k + s.stichometry.bytes, 0) }, passages: { count: record.sources.reduce((k, s) => k + s.stichometry.passages, 0) } }, record.sources.map((s) => s.id))],
-    "CON·Ground": async () => pubs.length ? [P("pub_range", { from: { date: pubs[0] }, to: { date: pubs.at(-1) }, undated: { count: nPages - pubs.length } }, record.sources.filter((s) => s.declared?.published).map((s) => s.id))] : [],
+    "CON·Ground": async () => pubs.length ? [P("pub_range", { from: { date: pubs[0] }, to: { date: pubs.at(-1) }, undated: { count: nPages - pubs.length } }, record.sources.filter((s) => pubs.includes(s.declared?.published)).map((s) => s.id))] : [],
     "SEG·Figure": async () => [P("voices", { claims: { count: record.atoms.length }, own: { count: loc }, reported: { count: record.atoms.length - loc }, quoted: { count: quotes.length } }, ["claims"])],
     "CON·Figure": async () => {
       const bySpeaker = new Map();
