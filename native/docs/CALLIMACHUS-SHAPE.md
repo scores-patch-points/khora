@@ -153,6 +153,27 @@ H1 said distance induces shape. The specification gives the mechanism, in two st
 - The answer ladder is not routed through this; it still answers at fixed sizes.
 - The ledger and the twin-reader harness (`callimachus/twin-reader`) have not run against it.
 
+#### Where this was already solved (prior work, read 2026-10-14)
+
+The grain is mostly existing machinery given a second corpus, and the stance table was already canonical. What I found, and what I did not:
+
+| Piece of the specification | Already in | Note |
+|---|---|---|
+| The nine stance names, mode × grain | `kernel/cube.js` `STANCE_BY_MODE`; `cellOf(op, grain).stance`, stamped by `organs/derivation.js`, `organs/cube-telling.js`, `organs/story-shapes.js` | `grain.js` first hand-typed a copy; it now derives `CELLS` from this table, with a test that they are identical. |
+| The cube refuted as a content classifier ("95.7% of naive content-based cell assignments survived shuffling the words") | `docs/THE-MODULE-CENSUS.md`; memory `eoreader7-cube-classifies-moves-not-content` | The addendum's explanation of this (distance is reader-relative) is **not** tested by an arrangement-level distance; see GRAIN-PREREG "What is not claimed". |
+| Significance for the reader, measured against a ground built only from the reader's own prior experience, against a permutation null | `eoreader6/scripts/triad-independence.mjs` (copies in `commoncite/eoreader7/scripts/` and `eoWebLLM/eoreader6/scripts/`); `eo-evidence/POLICY.md` P7 notes it reads an absolute path and its numbers are cited in CUBE.md | This is the second-operand thesis, in an earlier form, for one axis, and it cannot run from a clean checkout. |
+| The difference window: "walk candidate depths outward and take the shallowest at which forgetting everything older no longer changes what the reader concludes" | `kernel/activation.js` `dmdWindow` | Tracing's hop expansion is this with the reference changed: a shortest walk **is** the shallowest depth that reproduces the conclusion. `grain.js` uses a breadth-first walk, not `dmdWindow` itself. |
+| The corroboration verdict (AGREE, SINGLE, UNDETERMINED, DISAGREE, CONTRADICTED) | `organs/capacity-runner.js` `mergeTestimony`, `landContest` ("four walls") | Used unchanged, with U's spans as witnesses to a W span. |
+| Interpretation at Ground: a declared gap, a witness, a re-zero | `kernel/notes.js` `declareVoid` / `rezeroVoid` / `foldVoids` (READING-SPEC S70, S71; wall 9, 13/13); `kernel/commitments.js` declare / evaluate / concede (S56, 19 tests) | The one place a whom already existed: the engine's own prior ground. |
+| The ledger the work is entered in | `fold-rules/ledger/ledger.json` (RefutationLedger@1) and `preflight.py` | L31–L33 added 2026-10-14. `eo-evidence/` (P1–P8, standing) is the method but is stale (eoreader6, last commit August). |
+| Output as addressed span or marked `self:model` | `organs/output-holograph.js` | The contract `seamReport` measures. |
+
+**Two names collide.** `kernel/ground-closure.js` uses "closure" for the ground *closing* (deposits exceed passage: sclerosis, the failure). `grain.js`'s `closure.closed: true` means the *triad is complete*. A reader of the fold's output could take it backwards. `organs/stance.js` uses "stance" for a text's position toward a theme (`in_terms`, `against`, `off_being`), unrelated to the cube's stance. Neither is renamed here: the field names are in a ratified pre-registration, so a rename is an amendment and the user's call.
+
+**A caution from §6.** `closure.closed` is a completeness check on what ran, not evidence the fold is good: the operator-chain closure over UD feature cells was falsified three ways because "closure over this mapping rewards role diversity, not sense". Do not cite `closed` as a result.
+
+**Not found.** The July "Generate-row output-shape ladder" and a file literally named for the August "triad-closure check". Nearest: `CAPABILITY-POLICIES.md` (the-fold-latest root) lines 158 ("every claimed closure lands with a falsifiable specimen") and 232 ("mode, domain, and grain are each closed triads by declaration"), the nine-stage generation modules (`shape.js`, `paradigm.js`, `form-prior.js`), and `triad-independence.mjs`. A pointer is welcome.
+
 ### The whom can be any pinned corpus
 
 **[H3] The second argument can be any pinned corpus with a null.** The same operation with a different W:

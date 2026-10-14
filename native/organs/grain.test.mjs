@@ -5,6 +5,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { foldGrain, splitRegion, selectGrain, contactVerdict, closureOf, uSpansFromRecord, STEPS, CELLS, ROLES } from "./grain.js";
 import { makePinax, makeSpan, quoteOf, parseAddress } from "./pinax.js";
+import { STANCE_BY_MODE, cellOf } from "../kernel/cube.js";
 import { readCorpus } from "./callimachus.js";
 
 let n = 0;
@@ -253,4 +254,10 @@ test("claimsOfWhom: W's pinned units read by the same claim reader become W span
   assert.equal(split.H.length, u.length, "the same claims, read by the same reader, are held");
   const f = foldGrain({ region: u.map((s) => ({ ...s, activation: 1 })), whom: w.spans });
   assert.equal(f.distance.witness, "claim-arrangement");
+});
+
+test("the nine cells are the engine's own stance table (kernel/cube.js), never a second copy", () => {
+  for (const [grain, row] of Object.entries(CELLS)) for (const [mode, cell] of Object.entries(row)) assert.equal(cell, STANCE_BY_MODE[mode][grain]);
+  // and they are what cellOf stamps: every operator of a mode, at each grain, carries the same stance name
+  for (const op of ["DEF", "SEG", "NUL"]) for (const grain of ["Ground", "Figure", "Pattern"]) { const c = cellOf(op, grain); assert.equal(CELLS[grain][c.mode], c.stance); }
 });

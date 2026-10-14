@@ -36,6 +36,7 @@
 // NOT HERE: reading a W corpus into spans (the caller supplies spans from whichever reader it trusts; `uSpansFromRecord` does U), and
 // the ladder is not yet routed through this (it still answers at fixed sizes). Nothing here calls a model.
 import { mergeTestimony } from "./capacity-runner.js";
+import { STANCE_BY_MODE } from "../kernel/cube.js";
 import { seg, sentence } from "./prose-laws.js";
 import { seamReport } from "./seam-ledger.js";
 
@@ -44,12 +45,12 @@ export const GRAINS = Object.freeze(["Ground", "Figure", "Pattern"]);
 export const MODES = Object.freeze(["Differentiate", "Relate", "Generate"]);
 /** The roles of the triad, in order. Witnessing holds both Differentiate (refuses) and Relate (corroborates). */
 export const ROLES = Object.freeze(["clear", "witness", "generate"]);
-/** The nine cells: row = grain (distance), column = mode (verdict). Clearing is also the first step at EVERY grain. */
-export const CELLS = Object.freeze({
-  Ground: Object.freeze({ Differentiate: "Clearing", Relate: "Tending", Generate: "Cultivating" }),
-  Figure: Object.freeze({ Differentiate: "Dissecting", Relate: "Binding", Generate: "Making" }),
-  Pattern: Object.freeze({ Differentiate: "Unraveling", Relate: "Tracing", Generate: "Composing" }),
-});
+/**
+ * The nine cells: row = grain (distance), column = mode (verdict). NOT typed here: kernel/cube.js `STANCE_BY_MODE` is the one table, and
+ * `cellOf(op, grain).stance` already stamps it on every cell of the engine. This is that table, transposed to grain-major.
+ * (Clearing is also the first step at EVERY grain.)
+ */
+export const CELLS = Object.freeze(Object.fromEntries(GRAINS.map((g) => [g, Object.freeze(Object.fromEntries(MODES.map((m) => [m, STANCE_BY_MODE[m][g]])))])));
 /** The steps run at a grain, in order: clear (always Clearing), witness (refuse, then corroborate), generate. */
 export const STEPS = Object.freeze({
   Ground: Object.freeze([["clear", "Clearing"], ["witness", "Tending"], ["generate", "Cultivating"]]),
