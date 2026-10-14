@@ -33,7 +33,10 @@ import { askShapeBest } from "../native/organs/askshape.js";
 import { defaultCharter } from "../native/organs/charter.js";
 
 const HERE = path.dirname(new URL(import.meta.url).pathname);
-const DOCS = path.join(HERE, "..", "documents");
+// EO_LEDGER_DIR (nesting-fix J D12, 2026-10-14): the same override cli/reasoning-ledger.mjs has always documented as
+// "mirroring" this file. Without it a plugin install (or a test with an isolated ledger) wrote the two ledgers into
+// different directories.
+const DOCS = process.env.EO_LEDGER_DIR || path.join(HERE, "..", "documents");
 const EXCERPT = 4000;
 // The AntiStraussian check's charter ground — built once (pure: parses a
 // fixed in-memory UDHR excerpt, no I/O), same default askshape.js's own
