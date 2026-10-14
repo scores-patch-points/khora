@@ -81,7 +81,7 @@ import {
   PREDETERMINERS,
   SUBJECT_PRONOUNS,
   CLAUSE_COORDINATORS,
-  NEGATION_WORDS, NEGATION_CORRELATIVES, THIRD_PERSON_SINGULAR,
+  NEGATION_WORDS, NEGATION_CORRELATIVES, NEGATION_QUANTIFIERS, NEGATION_EXCEPTIVES, THIRD_PERSON_SINGULAR,
   AUXILIARY_VERBS, DEFINITE_DETERMINERS, INDEFINITE_DETERMINERS,
   POSSESSIVE_DETERMINERS, NP_COORDINATORS,
 } from "./priors.js";
@@ -225,9 +225,19 @@ const negationBeforeVerbFor = (words) => {
   // never gets an English-specific guard grafted onto it.
   const isEnglishDefault = words === NEGATION_WORDS;
   const guardNot = isEnglishDefault && words.has("not");
+  // The quantifier negators (no / nobody / nothing / none — priors.js
+  // NEGATION_QUANTIFIERS) join ONLY the English default, each as its own
+  // guarded alternative: what follows it can cancel it (NEGATION_EXCEPTIVES:
+  // "nobody BUT", "no DOUBT", "No,"). Never added to NEGATION_WORDS itself —
+  // the token-level readers of that class have no such guard.
+  const exceptive = (q) => {
+    const tails = (NEGATION_EXCEPTIVES[q] ?? []).map((t) => (t === "," ? "\\s*," : `\\s+${t.split(" ").map(escapeRe).join("\\s+")}\\b`));
+    return tails.length ? `${q}(?!${tails.join("|")})` : q;
+  };
+  const quantifiers = isEnglishDefault ? [...NEGATION_QUANTIFIERS].map(exceptive) : [];
   const alt = (guardNot
-    ? [`not(?!\\s+(?:${altOf(NEGATION_CORRELATIVES)})\\b)`, altOf(new Set([...words].filter((w) => w !== "not")))]
-    : [altOf(words)]
+    ? [`not(?!\\s+(?:${altOf(NEGATION_CORRELATIVES)})\\b)`, altOf(new Set([...words].filter((w) => w !== "not"))), ...quantifiers]
+    : [altOf(words), ...quantifiers]
   ).join("|").replace(/'/g, "['’]");
   const extra = isEnglishDefault ? "|no longer" : "";
   re = new RegExp(bWord(`${alt}${extra}`), "iu");
@@ -307,6 +317,12 @@ const matcherFor = (source, flags) => {
 // (it never deletes, splits, or reorders a word), so no sentence that
 // already resolved "-" changes.
 const NOISE_RUN = /[^\p{L}\p{N}_'’]+/gu;
+// The comma is part of the interjection "No, ..." — and NOISE_RUN collapses
+// commas before the polarity regex sees the window, so a quantifier negator
+// followed by a comma (priors.js NEGATION_EXCEPTIVES, ",") is struck out of
+// the window FIRST, English default only.
+const INTERJECTION_QUANTIFIER = new RegExp(
+  bWord([...NEGATION_QUANTIFIERS].filter((q) => NEGATION_EXCEPTIVES[q]?.includes(",")).map(escapeRe).join("|") || "(?!)") + "\\s*,", "giu");
 
 // Sentence-ending punctuation — a real boundary already used elsewhere in
 // this file's own design (MATCHER's object terminator below), not a
@@ -1066,7 +1082,8 @@ export const extractRelations = (text, { verbs, limit = Infinity, functionWords 
       // subordinate clause, its own first comma — never the raw windowStart
       // above — is where that clause's negation stops reaching.
       const polarityWindowStart = frontedClauseFloor(s, windowStart, subjEnd, clauseOpeners);
-      const before = s.slice(polarityWindowStart, subjEnd + 1).replace(NOISE_RUN, " ");
+      const windowText = s.slice(polarityWindowStart, subjEnd + 1);
+      const before = (negationWords === NEGATION_WORDS ? windowText.replace(INTERJECTION_QUANTIFIER, " ") : windowText).replace(NOISE_RUN, " ");
       // DR4 (live_priors/goldens/reading/DERIVED-RULES.md): OFF by default
       // — byte-identical subject/offset to before. ON, the survived subject
       // (post function-word-stripping, so `subjectStart` already reflects

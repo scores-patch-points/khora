@@ -52,6 +52,41 @@ export const NEGATION_CORRELATIVES = Object.freeze(new Set(["only", "just"]));
 export const NEGATION_CORRELATIVES_META = Object.freeze({ giver: "lang/en", scope: null });
 
 /**
+ * Quantifier negators — "no", "nobody", "nothing", "none" (and "no one", which
+ * is "no" + "one"). NEGATION_WORDS was missing them, so "Nobody appointed
+ * Hamlin." and "No senator signed the bill." read polarity "+" and every
+ * cut/contest/re-zero rung above the door rested on that. Measured one at a
+ * time against a hand-built gold (native/tests/negation-cues.test.js), each
+ * flips every gold negation it can reach and only these four do: "without"
+ * (manner, not polarity: "left without saying goodbye") and "nowhere" (no
+ * gain on the gold) are REFUSED.
+ *
+ * A SEPARATE class from NEGATION_WORDS on purpose. NEGATION_WORDS is also read
+ * token-by-token, with no guard, by copula-claims, charter, stance,
+ * judgment-reader and the widget's `judged`; "no doubt" would read negated
+ * there. These four are consumed only by the extractor's polarity window
+ * (relations.js `negationBeforeVerbFor`), which applies the exceptives below.
+ */
+export const NEGATION_QUANTIFIERS = Object.freeze(new Set(["no", "nobody", "nothing", "none"]));
+export const NEGATION_QUANTIFIERS_META = Object.freeze({ giver: "lang/en", scope: null });
+
+/**
+ * What cancels a quantifier negator when it FOLLOWS the cue — the stated
+ * false-positive classes, each a closed English construction:
+ *   exceptive "X but Y" (= only Y):  nobody but / nothing but / none but / no one but
+ *   idiom, the proposition affirmed: no doubt / no wonder / no matter / in no time
+ *   interjection:                     "No, Lincoln appointed Hamlin" (a comma follows)
+ * A continuation may be several words ("one but"); "," is a literal comma.
+ * Same shape as NEGATION_CORRELATIVES above (not + only/just).
+ */
+export const NEGATION_EXCEPTIVES = Object.freeze({
+  no: Object.freeze([",", "doubt", "wonder", "matter", "time", "one but"]),
+  nobody: Object.freeze(["but"]),
+  nothing: Object.freeze(["but"]),
+  none: Object.freeze(["but"]),
+});
+
+/**
  * First-person pronouns — forms whose capitalisation carries no naming
  * information in English. Same giver as FIRST_PERSON.
  */
