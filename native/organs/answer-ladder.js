@@ -24,7 +24,8 @@
 import { logos } from "./logos.js";
 import { pathosOf, strainOf } from "./pathos.js";
 import { requireExperiencer } from "./experiencer.js";
-import { adjudicate } from "../kernel/contest.js";
+import { adjudicate, CONTEST_VERDICTS } from "../kernel/contest.js";
+import { BOUND, CONTRADICTED, CONTESTED, UNBOUND, verdictOfSupport } from "../interpretation/hl.js";
 import { realizer } from "./cube-telling.js";
 import { lintSentence } from "./prose-laws.js";
 
@@ -139,6 +140,26 @@ function marginNull(cols, layers, n, { seed = 20261014, draws = 199 } = {}) {
   return { p95: margins[Math.floor(0.95 * (margins.length - 1))], p99: margins[Math.floor(0.99 * (margins.length - 1))], draws };
 }
 
+// ---- the void's outcome: the four corners --------------------------------------------------------------------------------------------
+
+/**
+ * Every stage reports its outcome in Nagarjuna's four corners: hl.js's Belnap–Dunn lattice, the ONE lattice (organs/nagarjuna.js),
+ * computed from two independent supports through hl.js verdictOfSupport — never a re-typed synonym. For a question's void, as
+ * precision-race.js already reads the same lattice:
+ *   is      (bound)        one filler is determined: the lead binds past its runner-up (contest.js adjudicate)
+ *   is-not  (contradicted) what carries the question's terms denies it: every evidence-bearing candidate is negative, or a polar
+ *                          question's bound lead is
+ *   both    (contested)    more than one filler holds: the lead does not clear its runner-up past the null
+ *   neither (unbound)      nothing in the record decides it: no candidate carries anything the question declared
+ */
+export const CORNER_SAYS = Object.freeze({ [BOUND]: "is", [CONTRADICTED]: "is-not", [CONTESTED]: "both", [UNBOUND]: "neither" });
+export function cornerOf({ evidence, contest, denies = false }) {
+  const carried = evidence > 0;
+  const rival = [CONTEST_VERDICTS.NO_MARGIN, CONTEST_VERDICTS.CONTESTED_NO_MARGIN].includes(contest?.verdict);
+  const verdict = verdictOfSupport(carried && !denies, carried && (denies || rival));
+  return Object.freeze({ verdict, says: CORNER_SAYS[verdict], contest: contest?.verdict ?? null });
+}
+
 // ---- the ladder ---------------------------------------------------------------------------------------------------------------------
 
 export async function answerLadder(record, { question, slice, grammar, telling = null, fixity = {}, seed = 20261014 } = {}) {
@@ -175,18 +196,25 @@ export async function answerLadder(record, { question, slice, grammar, telling =
 
   // STAGE 1 — PERCEPTION: the line.
   const p1 = scoreWith(cols, ["perception"], n);
-  // No evidence is not an answer: when no candidate carries anything the question declared, the line says so (adjudicate's below_floor).
+  // No evidence is not an answer: when no candidate carries anything the question declared, the line says so — the corner "neither".
   const evidence = Math.max(0, ...p1.s);
+  const carriers = cands.filter((_, i) => p1.s[i] > 0);
+  const negOnly = carriers.length > 0 && carriers.every((a) => a.relation?.polarity === "-");
+  const denies = (lead) => negOnly || (question.form === "polar" && lead?.relation?.polarity === "-");
   const nothing = async () => { const s = grammar.constructions.nothing_carries ? grammar.finish(grammar.constructions.nothing_carries({}), [question.id]) : null; return s && !lintSentence(s, grammar).length ? [s] : []; };
   if (evidence <= 0) {
     const s = await nothing();
     const why = "no candidate carries any perception witness: the question's figures, kind, relation and words are absent from the record (a question in another language than the record's needs a bilingual lexicon, which is not on disk)";
-    for (const [i, size] of ["line", "paragraph", "brief"].entries()) stages.push({ stage: i + 1, size, layers: ["perception", "logos", "pathos"].slice(0, i + 1), lead: null, verdict: "below_floor", why, sentences: s, ...(i === 1 ? { contest: { verdict: "below_floor", margin: null, bar: null } } : {}), ...(i === 2 ? { experiencer, strain: "report", sides: 0, rhythm: { flatline: false, ratio: 0, n: 0 } } : {}) });
+    const corner = cornerOf({ evidence, contest: null });
+    for (const [i, size] of ["line", "paragraph", "brief"].entries()) stages.push({ stage: i + 1, size, layers: ["perception", "logos", "pathos"].slice(0, i + 1), lead: null, verdict: corner.verdict, corner, why, sentences: s, ...(i === 1 ? { contest: { verdict: null, margin: null, bar: null, why: "not run: there is no candidate to adjudicate" } } : {}), ...(i === 2 ? { experiencer, strain: "report", sides: 0, rhythm: { flatline: false, ratio: 0, n: 0 } } : {}) });
     stages.push({ stage: 4, size: "dossier", layers: ["perception", "logos", "pathos", "cube"], sentences: (telling?.cells ?? []).flatMap((c) => c.sentences ?? []) });
     return { question: { id: question.id, form: question.form, admits: question.reading?.admits, modality: question.modality, focus: question.focus, undeclared: question.undeclared.map((u) => u.field) }, candidates: n, stages };
   }
   const line = await pick(p1.s, 1);
-  stages.push({ stage: 1, size: "line", layers: ["perception"], lead: leadOf(line, p1.why), sentences: line.map((x) => x.s) });
+  const bar1 = marginNull(cols, ["perception"], n, { seed });
+  const contest1 = adjudicate({ scores: new Map(cands.map((a, i) => [a.id, 2 ** p1.s[i]])), coPresent: [], minActivation: 1, minMargin: bar1.p95, contestedMargin: Math.max(bar1.p95, bar1.p99) });
+  const corner1 = cornerOf({ evidence, contest: contest1, denies: denies(line[0]?.a) });
+  stages.push({ stage: 1, size: "line", layers: ["perception"], lead: leadOf(line, p1.why), verdict: corner1.verdict, corner: corner1, sentences: line.map((x) => x.s) });
 
   // STAGE 2 — + LOGOS: the paragraph. The lead is re-chosen; contest decides whether it binds.
   const p2 = scoreWith(cols, ["perception", "logos"], n);
@@ -208,8 +236,9 @@ export async function answerLadder(record, { question, slice, grammar, telling =
     if (both) { const s = grammar.finish(both, [para[0].a.id, para[1].a.id]); if (!lintSentence(s, grammar).length) paraSentences = [s, ...para.slice(2).map((x) => x.s)]; }
   }
   const holds = (telling?.cells ?? []).find((c) => c.key === "CON·Pattern")?.sentences ?? [];
+  const corner2 = cornerOf({ evidence, contest: verdict, denies: denies(para[0]?.a) });
   stages.push({
-    stage: 2, size: "paragraph", layers: ["perception", "logos"],
+    stage: 2, size: "paragraph", layers: ["perception", "logos"], verdict: corner2.verdict, corner: corner2,
     lead: leadOf(para, p2.why), moved: line[0] && para[0] && line[0].a.id !== para[0].a.id ? { from: line[0].a.id, to: para[0].a.id, by: Object.keys(p2.why[para[0].i]).filter((k) => k.startsWith("logos")) } : null,
     contest: { verdict: verdict.verdict, margin: verdict.margin, bar: +bar.p95.toFixed(3), null: `p95 of ${bar.draws} seeded shuffles` },
     cycles: cycles.length,
@@ -235,7 +264,7 @@ export async function answerLadder(record, { question, slice, grammar, telling =
   const tension = [...cell("SYN·Pattern"), ...cell("DEF·Pattern")];
   const release = [...cell("CON·Pattern"), ...cell("EVA·Pattern"), ...cell("REC·Ground")];
   stages.push({
-    stage: 3, size: "brief", layers: ["perception", "logos", "pathos"],
+    stage: 3, size: "brief", layers: ["perception", "logos", "pathos"], verdict: cornerOf({ evidence, contest: verdict, denies: denies(brief[0]?.a) }).verdict, corner: cornerOf({ evidence, contest: verdict, denies: denies(brief[0]?.a) }),
     lead: leadOf(brief, p2.why), experiencer, strain, sides,
     rhythm: { flatline: rhythm.flatline, ratio: rhythm.ratio, n: rhythm.n }, curve: "unmeasured: no fold is run over the answer (a typed gap, not a verdict)",
     // Useful first: the lead answers; then the tension (where pages differ), the other sides, and the release (what holds).

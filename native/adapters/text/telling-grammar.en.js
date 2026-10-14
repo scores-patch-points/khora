@@ -57,7 +57,7 @@ export const CONSTRUCTIONS = {
   unsorted: ({ claims, unsorted }) => [F("Of "), n(claims), F(" claims, "), n(unsorted), F(" name no figure in any group.")],
   groups: ({ k }) => [n(k), F(` ${pick(k, "group", "groups")} of figures ${pick(k, "is", "are")} named together more often than chance allows.`)],
   groups_none: () => [F("No group of figures is named together more often than chance allows.")],
-  largest_groups: ({ groups }) => [...groups.flatMap((g, i) => [...(i ? [F("; the next joins ")] : [F("The largest joins ")]), ...list(g.figs), F(" ("), n(g.claims), F(` ${pick(g.claims, "claim", "claims")})`)]), F(".")],
+  largest_groups: ({ groups }) => [...groups.flatMap((g, i) => [...(i ? [F("; the next joins ")] : [F(groups.length === 1 ? "The group joins " : "The largest joins ")]), ...list(g.figs), F(" ("), n(g.claims), F(` ${pick(g.claims, "claim", "claims")})`)]), F(".")],
   holdings: ({ pages, bytes, passages }) => [F("The record holds "), n(pages), F(" pages, "), n(bytes), F(" bytes of text in "), n(passages), F(" passages, each pinned by a hash of its exact bytes.")],
   pub_range: ({ from, to, undated }) => [F("Their publication dates run from "), date(from), F(" to "), date(to), ...(undated ? [F("; "), n(undated), F(` ${pick(undated, "page declares", "pages declare")} none`)] : []), F(".")],
   voices: ({ claims, own, reported, quoted }) => [F("Of "), n(claims), F(" claims, "), n(own), F(" are in a page’s own voice and "), n(reported), F(" report someone else, "), n(quoted), F(" of them in quotation marks.")],
@@ -79,6 +79,11 @@ export const CONSTRUCTIONS = {
   silences: ({ page, figs }) => [F("Silences show too: "), ...page, F(" never names "), ...list(figs), F(`, ${pick(Math.min(3, figs.length), "whom", "all of whom")} at least two other pages name.`)],
   camps: ({ items }) => [F("The pages divide into "), n(items.length), F(` ${pick(items.length, "camp", "camps")} by what they center on: `), ...items.flatMap((it, i) => [...(i === 0 ? [] : i === items.length - 1 ? [F("; and ")] : [F("; ")]), ...list(it.figs), F(" for "), ...list(it.pages)]), F(".")],
   camps_none: () => [F("The pages do not divide into camps the record can detect.")],
+  camp_one: ({ figs, pages, total, rest }) => [F("Of the "), n(total), F(" pages, "), n(pages.length), F(` ${pick(pages.length, "forms", "form")} one camp by the figures they name, centered on `), ...list(figs), F(": "), ...list(pages), ...(rest ? [F("; the other "), n(rest), F(` ${pick(rest, "stands", "stand")} apart`)] : []), F(".")],
+  kinds_challenged: ({ held, tried }) => [...(held === tried ? [F("Every group of figures found holds")] : [F("Of "), n(tried), F(` ${pick(tried, "group", "groups")} of figures found, `), n(held), F(` ${pick(held, "holds", "hold")}`)]), F(" when tested against random sets of the same size and against the same figures with their pairings shuffled.")],
+  ground_meter: ({ moved, steady, unmeasured }) => [F("Page by page in order of publication, "), ...(moved ? [n(moved), F(` ${pick(moved, "page", "pages")} brought wording the pages before ${pick(moved, "it", "them")} did not predict`)] : [F("no page brought wording the pages before it did not predict")]), ...(steady.length ? [F("; "), ...list(steady), F(" kept closer to it than chance")] : []), ...(unmeasured ? [F("; the first "), n(unmeasured), F(" had nothing before them")] : []), F(".")],
+  regime: ({ starts }) => [F("Taken whole, the wording shifts "), ...(starts.length === 1 ? [F("once")] : [n(starts.length), F(" times")]), F(": a new stretch begins with "), ...list(starts.map((x) => [...x.page, ...(x.date ? [F(" ("), date(x.date), F(")")] : [])])), F(".")],
+  regime_one: () => [F("Taken whole, the wording holds as one stretch throughout.")],
   contested: ({ k }) => (k ? [n(k), F(` ${pick(k, "claim appears", "claims appear")} with opposite polarity on independent pages.`)] : [F("No claim is contradicted between independent pages.")]),
 };
 
