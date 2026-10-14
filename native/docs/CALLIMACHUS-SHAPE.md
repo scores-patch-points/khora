@@ -298,6 +298,21 @@ Pre-registration `eval/callimachus/GRAIN-R5-PREREG.md` (amendments 1–2), organ
 
 **Limits found.** The slot cannot tell which agent passed (the Senate-2022 passage counts because the Act is the subject and the predicate matches). The person slot is empty because the record's reading has no *oppose* claim. A tie broke alphabetically in runs 1–2 (amendment 2). The dense reader is vacuous here. L43.
 
+### Results: the grain experiment, sixth registration (the agent in the slot, one run, 2026-10-14)
+
+Pre-registration `eval/callimachus/GRAIN-R6-PREREG.md`, runner `eval/callimachus/grain-belief-r6.mjs` (committed `5b246b4b` before the run), outputs local only `callimachus-runs/grain-r6-2026-10-14/`. The question's agent is the head of the root's `nsubj` in its own UD parse (in-repo parser; nothing installed); a passage carries a value for the slot only if its subject surface names that agent.
+
+| | prediction | result |
+|---|---|---|
+| D1 | the Senate-2022 passage is context for the House ask | **holds** |
+| D2 | the answer is 2026 and uncontested, void reader | **holds** (2026 × 3, no rival) |
+| D3 | every carrier's subject names the agent (property) | **holds** |
+| D4 | the cut still cuts | **holds** (3 carrying, window 1) |
+
+**Reported.** House ask: 4 carriers before, 3 after; 1 lost to the agent rule, 0 to a pronoun or missing subject. Senate ask: 2 carriers, both with a Senate subject. The list for the House ask is now: one passage that sets the answer ("In 2026 … the House passed a reintroduced version"), then two that strengthen it and change nothing.
+
+**Limit found (L44).** For "Did the Senate pass the bill?" the biggest mover is "In 2015, the **Nevada** Senate passed Nevada Assembly Joint Resolution 4": the subject names *Senate*, so it carries, but it is a different body and a different measure. The patient ("the bill") is not in the slot.
+
 ### The whom can be any pinned corpus
 
 **[H3] The second argument can be any pinned corpus with a null.** The same operation with a different W:
