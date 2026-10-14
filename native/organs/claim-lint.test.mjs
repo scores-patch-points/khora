@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { lintClaims, formLaws, CLAIM_LAWS } from "./claim-lint.js";
+import { lintClaims, formLaws, CLAIM_LAWS, dominantTag } from "./claim-lint.js";
 
 let n = 0;
 const sp = (subj, pred, obj, text, polarity = "+") => ({ id: `s${n++}`, address: `px_t/text@h#b${n * 10}-${n * 10 + 5}`, text, claim: { subj, pred, obj, polarity } });
@@ -62,4 +62,25 @@ test("declared relations reach the logos lint, but only with a named giver", () 
   const noGiver = lintClaims([a, b], { declared: { functional: [{ rel: "born" }, "born"] } });
   assert.equal(noGiver.logos.declared.ignored.length, 2);
   assert.equal(noGiver.flagged.length, 0);
+});
+
+test("CL6: with a received POS prior the predicate must be a verb or auxiliary; without one the law does not run", () => {
+  const prior = { forms: { as: { ADP: 438, SCONJ: 388, ADV: 218 }, cell: { NOUN: 13 }, again: { ADV: 134 }, approved: { VERB: 40 }, are: { AUX: 1162, VERB: 116 } } };
+  assert.equal(dominantTag(prior, "As"), "ADP");
+  assert.equal(dominantTag(prior, "zzzz"), null, "unknown forms are not judged");
+  const prep = sp("The council", "as", "a body", "The council as a body.");
+  const noun = sp("The council", "cell", "a unit", "The council cell a unit.");
+  const verb = sp("The council", "approved", "the budget", "The council approved the budget.");
+  const cop = sp("The reader", "are", "witnesses", "The readers are witnesses.");
+  const unknown = sp("The council", "zzzz", "the budget", "The council zzzz the budget.");
+  assert.ok(formLaws(prep, prior).includes("CL6"));
+  assert.ok(formLaws(noun, prior).includes("CL6"));
+  assert.ok(!formLaws(verb, prior).includes("CL6"));
+  assert.ok(!formLaws(cop, prior).includes("CL6"), "a copula is a relation");
+  assert.ok(!formLaws(unknown, prior).includes("CL6"), "the prior only refuses what it knows");
+  assert.ok(!formLaws(prep).includes("CL6"), "no prior: the law does not run");
+  const r = lintClaims([prep, noun, verb], { posPrior: prior });
+  assert.equal(r.counts.sound, 1);
+  assert.equal(r.logos.cl6, "run");
+  assert.equal(lintClaims([prep]).logos.cl6, "not run: no received POS prior");
 });

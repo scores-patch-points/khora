@@ -30,6 +30,7 @@ import { claimFromTriple, caselessIdentity } from "../kernel/gfp-claim.js";
 import { findClaimCycle, lintGfp } from "./reasoning-lint.js";
 
 export const CLAIM_LAWS = Object.freeze({
+  CL6: { kind: "form", says: "the predicate is a verb or auxiliary by the received POS prior's dominant tag (a preposition, adverb, conjunction or noun is not a relation)", giver: "received POSPrior@1 (UD English-EWT) used as a REFUSER over a vocabulary admitted another way: ledger L37's own unless" },
   CL1: { kind: "form", says: "a claim is a declarative relation: subject and predicate present, not a question, subject is not the object, predicate is not the subject", giver: "the author, 2026-10-14 (the user: claims need full logos linting)" },
   CL2: { kind: "form", says: "the subject, the predicate's stem and the object occur in the claim's own span", giver: "callimachus P5.2: a claim names the bytes it stands on" },
   CL3: { kind: "form", says: "the subject carries a content token (four or more letters)", giver: "answer-ladder.js contentWords (declared there, reused)" },
@@ -63,8 +64,18 @@ export function declarationsOf(declared) {
   return out;
 }
 
-/** The form laws on one span. Returns the ids of the laws it breaks. */
-export function formLaws(s) {
+const RELATION_TAGS = new Set(["VERB", "AUX"]);
+/** Dominant tag of a form under a received POSPrior@1 (`{forms: {form: {TAG: count}}}`), or null when the prior does not know the form. */
+export function dominantTag(prior, form) {
+  const e = prior?.forms?.[String(form ?? "").toLowerCase()];
+  if (!e) return null;
+  let best = null, n = -1;
+  for (const [tag, c] of Object.entries(e)) if (c > n) { best = tag; n = c; }
+  return best;
+}
+
+/** The form laws on one span. Returns the ids of the laws it breaks. `posPrior` (optional) turns CL6 on; absent, CL6 does not run. */
+export function formLaws(s, posPrior = null) {
   const c = s?.claim ?? null;
   const broken = [];
   const subj = norm(c?.subj), pred = norm(c?.pred), obj = norm(c?.obj);
@@ -78,6 +89,7 @@ export function formLaws(s) {
     if (!(grounded && predIn && objIn)) broken.push("CL2");
   }
   if (subj && !hasContentToken(c?.subj)) broken.push("CL3");
+  if (posPrior && pred) { const tag = dominantTag(posPrior, pred); if (tag && !RELATION_TAGS.has(tag)) broken.push("CL6"); }
   return broken;
 }
 
@@ -88,11 +100,11 @@ export function formLaws(s) {
  *   flagged  [{ id, address, laws }] — logos findings on spans that stay
  *   logos    { cycle, gfp: { ok, counts, unjudged } }
  */
-export function lintClaims(spans = [], { identity = caselessIdentity, declared = null } = {}) {
+export function lintClaims(spans = [], { identity = caselessIdentity, declared = null, posPrior = null } = {}) {
   const decl = declarationsOf(declared);
   const sound = [], refused = [];
   for (const s of spans) {
-    const laws = formLaws(s);
+    const laws = formLaws(s, posPrior);
     if (laws.length) refused.push({ id: s?.id ?? null, address: s?.address ?? null, laws });
     else sound.push(s);
   }
@@ -119,5 +131,5 @@ export function lintClaims(spans = [], { identity = caselessIdentity, declared =
     if (laws.length) flagged.push({ id: s.id, address: s.address, laws });
     return laws.length ? { ...s, lint: laws } : s;
   });
-  return { sound: flaggedSound, refused, flagged, logos: { cycle: cyc ? cyc.cycle : null, gfp, declared: { used: decl.used, ignored: decl.ignored } }, counts: { in: spans.length, sound: sound.length, refused: refused.length, flagged: flagged.length } };
+  return { sound: flaggedSound, refused, flagged, logos: { cycle: cyc ? cyc.cycle : null, gfp, declared: { used: decl.used, ignored: decl.ignored }, cl6: posPrior ? "run" : "not run: no received POS prior" }, counts: { in: spans.length, sound: sound.length, refused: refused.length, flagged: flagged.length } };
 }
