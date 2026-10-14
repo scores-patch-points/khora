@@ -1,7 +1,9 @@
 // wheel ledger — an operator×grain stamp is a CUBE CELL or a typed refusal (D9).
-// kernel/wheel.js.
+// kernel/wheel.js; the stamp sites live in proxy-runner.mjs (never imported
+// here: it opens ports — scanned as text).
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import { createWheelLedger } from "../kernel/wheel.js";
 import { cellOf } from "../kernel/cube.js";
 
@@ -58,4 +60,12 @@ test("D9 — positive control: no stamp at all is untouched (null, null, no refu
   const op = turn({ operator: "NUL" });
   assert.equal(op.operator, "NUL");
   assert.equal(op.stamp_refused, undefined);
+});
+
+test("D9 — every wheel.turn stamp literal in proxy-runner.mjs is a cube cell", () => {
+  const src = fs.readFileSync(new URL("../../proxy-runner.mjs", import.meta.url), "utf8");
+  const stamps = [...src.matchAll(/operator: "([A-Z]{3})", grain: "([A-Za-z]+)"/g)].map((m) => ({ op: m[1], grain: m[2] }));
+  assert.ok(stamps.length >= 10, `found ${stamps.length} stamp sites`);
+  const bad = stamps.filter((s) => cellOf(s.op, s.grain).gap).map((s) => `${s.op}·${s.grain}`);
+  assert.deepEqual(bad, []);
 });
