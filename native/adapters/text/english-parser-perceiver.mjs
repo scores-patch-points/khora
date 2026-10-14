@@ -36,6 +36,7 @@ import { loadModel, analyse, tokenize, sentences } from "./english-parser.js";
 import { makeGrainTyper, cellLabelOf } from "./grain-typing.js";
 import { hyperedge } from "../../kernel/hypergraph.js";
 import { sha256hex } from "./sha256hex.js";
+import { readPolarity, polarityOfHead } from "./negation-read.js";
 
 /** Every {end1, rel, end2} triple in one sentence's parsed rows -- one per
  *  VERB token with both an nsubj* and an obj/iobj dependent, not just the
@@ -89,6 +90,11 @@ export function createEnglishParserPerceiver({ model, posPrior = null } = {}) {
 
       const sequencePosition = encounter.sequencePosition ?? 0;
       const sourceScope = String(encounter.source ?? "text");
+      // POLARITY IS READ OFF THE PARSE (negation-read.js): a negator is a form
+      // the model's own lexicon marks Polarity=Neg / PronType=Neg, placed by
+      // its dependency relation. The model carrying no such feature is the
+      // typed gap "no-polarity-source", never a silent "+".
+      const negation = readPolarity(model, rows);
 
       for (const { verbRow, subjRow, objRow } of verbTriplesOf(rows, sentTokens)) {
         const end1 = sentTokens[subjRow.id - 1]?.form;
@@ -111,6 +117,7 @@ export function createEnglishParserPerceiver({ model, posPrior = null } = {}) {
         // it can't cross-reference a referent -- this perceiver has no
         // access to that perceiver's private matching cache and must not
         // fake a cross-reference it doesn't have.
+        const pol = polarityOfHead(negation, verbRow.id);
         const content = `edge|src:${sourceScope}|rel:${label}|end1:${end1}|end2:${end2}|off:${offset}|perceiver:english-parser`;
         const eid = sha256hex(content);
         const ewit = sha256hex(`${content}|wit`);
@@ -132,7 +139,11 @@ export function createEnglishParserPerceiver({ model, posPrior = null } = {}) {
           end1, label, end2,
           cell,
           grain: grainRecord,
-          polarity: "+", // negation is a declared per-language lens, unmeasured here -- same disclosed choice relations-gfp.js makes
+          polarity: pol.polarity,
+          // where the polarity came from, or the typed reason it is the door's
+          // default "+" and not a finding (negation-read.js gap types)
+          ...(pol.via ? { polarity_read: pol.via } : {}),
+          ...(pol.gap ? { polarity_gap: pol.gap } : {}),
           offset,
           // REQUIRED for admission: kernel/witness.js's default decision is
           // Boolean(candidate.evidence) && sameAnchor(...) -- an unevidenced
