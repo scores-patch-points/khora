@@ -293,7 +293,11 @@ export function expectedWaitMs(model) {
     const mean = h.meanMs.get(model);
     if (!Number.isFinite(mean) || mean <= 0) continue;
     const ahead = modelInflight(h, model) + pendingEach;
-    const ms = ahead * mean + (h.queueMs ?? 0);
+    // THE QUEUE TERM WAITS BEHIND WORK (2026-10-13): h.queueMs is refreshed only when a turn ENDS (hostEnd). Counted with
+    // nothing ahead, a stale estimate past the promise refused every turn, so no turn ended and it never came down
+    // (measured live: 12.6 s, 0 in flight, every /v1/code call a 429 for over an hour). With nothing ahead it is not a
+    // hold; the turn admitted is the one that measures it again, and the next caller sees it ahead.
+    const ms = ahead * mean + (ahead > 0 ? (h.queueMs ?? 0) : 0);
     if (best == null || ms < best.ms) best = { ms, host: h.name, inflight: ahead, meanMs: mean, queueMs: h.queueMs ?? 0 };
   }
   return best ?? { ms: null, host: null, inflight: 0, meanMs: null };
@@ -1974,7 +1978,8 @@ export function serveTiersFor(model, { exclude = null } = {}) {
       else if (isGeneralMouth((installedModels ?? []).find((x) => x.name === m) ?? { name: m })) tier = "warm";
       if (!tier) continue;
       const mean = h.meanMs.get(m);
-      const waitMs = modelInflight(h, m) * (Number.isFinite(mean) && mean > 0 ? mean : 0) + (h.queueMs ?? 0);
+      const ahead = modelInflight(h, m);
+      const waitMs = ahead * (Number.isFinite(mean) && mean > 0 ? mean : 0) + (ahead > 0 ? (h.queueMs ?? 0) : 0); // queue waits behind work (expectedWaitMs)
       out.push({ host: h.name, model: m, tier, waitMs, measured: Number.isFinite(mean) && mean > 0, provisional: tier !== "full" });
     }
   }

@@ -2636,3 +2636,196 @@ the first thing to grep.
 Falsifying control: a live importer of either hunt shape that still resolves
 to the wrong module, or a test suite that stays green while one pipeline's
 imports are dead — either supersedes this.
+
+## 102. Order the operations, find the cards — the work is composition, not explicit results (Lovelace, 2026-10-13)
+Advice taken from her own text (eo-teachings/sources/lovelace-notes-analytical-engine-1843.txt, verbatim):
+"the cards when once made out for any formula, have all the generality of
+algebra, and include an infinite number of particular cases" (line 60);
+"A cycle of operations, then, must be understood to signify any set of
+operations which is repeated more than once" (line 1262); and the cost of
+trusting the order: "the cards may give it wrong orders" (line 60). Three
+rules for the coding pair. (1) The unit worth retrieving is an OPERATION and
+how it is distributed (a call group), not a finished result: `Find the thing`
+(CENNINI.md, the movement) puts packages, the standard library and what the
+repo already imports on the ground and returns callables with their call
+shape. (2) A cycle is a call group that recurs more than once, so the library
+is mined from history by her own definition (two occurrences, against a
+shuffled-history null), never by a hand-set threshold. (3) The order is the
+error surface, so the gate and the test stay: assembly never skips the real
+test. The engine originates nothing; it does what it is ordered to perform.
+Falsifying control: a pair that finds a callable the ask does not name no
+better than another ask's words would, or a retrieved cycle that does not
+recur in a held-out session — either supersedes this.
+
+## 103. A format refusal loses correct answers — widen the receiver, never ask harder (2026-10-13)
+The Fold's door needs a `<<<FIND>>>` anchor; a small mouth shown a stub wrote
+the right function under `<<<ADD>>>` alone and the whole answer was refused
+as `unparsed_proposal`. First live ladder (gemma2:2b, the door's own real
+test, one draw per ask, 12 draws): the door alone passed 1, the same draws
+through `organs/lenient-receive.js` (an ADD-only block anchored by the
+declaration it names; typed gaps for stray code, a doubled name, a foreign
+PATH) passed 6 (7 of 12 on signed stubs), and it made no draw worse.
+Falsifying control: a draw the receiver turns from passing to failing, or a
+typed-gap kind that is silently accepted — either supersedes this.
+
+## 104. The mouth copies the stub it is shown — state the signature (2026-10-13)
+Four of ten unsigned attempts copied the stub's empty parameter list
+(`mean()`, `isEven()`) and then used the names the ask gave
+(`ReferenceError: xs is not defined`). Stubs that carry the signature the ask
+states removed the failure (7 vs 6 of 12, not a difference at that n). The
+panel keeps both arms because the drop is itself a finding. No
+"signature from the ask" step is built: nothing yet shows it would change an
+outcome the signed stub does not already.
+Falsifying control: a held-out ask whose unsigned stub fails on a missing
+parameter and whose signed twin passes by more than the draw floor supersedes
+this and licenses the step.
+
+## 105. The master composes by calling, not by copying lines (2026-10-13)
+Over 688 transcripts and 2,620 in-scope edits (`cli/apprentice-assembled.mjs`,
+donor-session null, p at its floor): 5.5% of added bytes already sat in a file
+the session held (donors 1.0%), 1% of edits were fully assembled that way,
+and the median edit still wrote about 1,500 bytes. At the call grain 78% of
+added calls reach something that already existed (library 4.4%, repo 10.0%,
+own file 1.3%, the engine's own names 62.5%) against 16.5% reaching a name the
+edit declares. Held files are a floor and the engine's names are plumbing
+(`push`, `join`), so the 15% of library and repo calls is the part to move.
+Falsifying control: an edit population in which the added calls reach held
+names no more often than another session's would supersedes this.
+
+## 106. A harness that gates on its own marker measures the harness (2026-10-13)
+The first assembled run kept the door's attempt with a stub-marker gate and
+repair off: 9 of 12 draws made no edit and the number graded the harness. The
+ladder instead gives the door its own real test and grades the same draw at
+each rung (door alone, plus receive, plus Finish, plus a wrong-world
+control), so no rung has draw-to-draw noise against another.
+Falsifying control: a rung comparison made on different draws, or a fake door
+counted as live — either supersedes this.
+
+## 107. A part with no work to do is not evidence, and a lesson that changes nothing is off (2026-10-13)
+Finish won nothing in 24 live draws because the panel never needed a helper
+(the mouth wrote helper-free bodies); its graded value stays the history
+replay (Jaccard 0.360 vs 0.010). `carryExport` (keep a replaced declaration
+exported) re-scored on the 24 stored answers on and off changed 0 draws, so it
+ships off. A part earns its place by a paired switch-on against switch-off on
+the same units, and a panel that cannot exercise it reports "no work", not a
+pass.
+Falsifying control: a held-out unit where switching the part on changes the
+verdict supersedes this.
+
+## 108. The first lexical finder beats another ask's words and is still weak — name it so (Lovelace's 102, graded 2026-10-13)
+`organs/find-thing.js` (the ask's words cut the field of callables a session
+already holds) graded over 691 transcripts by `cli/apprentice-assembled.mjs`,
+R-precision against the existing names the master's added calls reached,
+paired against up to three other sessions' asks, cluster sign-flip, p at its
+floor: held names 0.059 vs 0.032 (n=1,567; some ask word landed in a name on
+61% of edits; at least one reached name in the top R on 16.5%); with the
+engine's own names in the field 0.018 vs 0.009. Chance (R/N) is 0.075 for the
+held field, so the ranker beats the null and does NOT beat picking at random:
+a statistically real signal, not yet a capability, and it stays unwired.
+Names-only lexical matching is the limit (`slug` does not find `slugify`; the
+callees the master reaches are often named for the file's own domain, not the
+ask's words). The candidates for the next arm are Lovelace's own: names that
+recur together (a cycle of calls, two occurrences, shuffled-history null) and
+the callables the located file already uses, both graded by the same
+instrument before either is wired.
+Falsifying control: an arm that lifts R-precision above chance on held names
+supersedes this; a wired finder whose switch-on changes no verdict on the
+ladder's units is "noticed, not learned".
+
+## 109. Matching on referents: the signal is the master's hot callables, and the ask adds to it only when the ask is long (2026-10-13)
+User direction: "match on referents." `find-thing.js` gained `ReferentField` (the ask
+words attested for a callable by strictly earlier asks, time-ordered, an ask's
+own units never teach each other) and the instrument gained three arms plus two
+ask-independent priors, all on the same 1,537-1,568 units over 695 transcripts,
+the ground snapshotted at each edit (the first lexical number, 0.059, let the
+edit's own new declarations into the field and is superseded). R-precision of
+the callables the master's added calls reached (chance 0.075): by name 0.060
+vs another ask's words 0.037; by referent 0.218 vs 0.211 (p 0.14, noticed, not
+learned); the POPULARITY prior, which never reads the ask, 0.240; recency
+within the session 0.122. By ask length (tercile cuts 5 and 16 distinct words,
+from the data): short asks 0.178 vs 0.205 (below their own null: "go" and
+"continue" carry no referent), middle 0.236 vs 0.225, long 0.241 vs 0.201
+(+0.040, +106/-36, p at its floor; by name 0.108 vs 0.042). So: the referent
+index is the popularity prior with a small ask-specific increment on long asks;
+as a standalone capability it is not better than the prior it contains. What it
+is NOT: the engine's own referent resolver (cast.js, the relation reader, the
+read-across door); this is a surface-attestation index, and routing the ask
+and the repos through those organs is the unbuilt part.
+Falsifying control: a blend of the popularity prior with an ask-specific
+re-rank that beats the prior alone at the floor on long asks, or a routed
+engine-tier referent resolution that beats this index, supersedes this; a
+switch-on of the finder that changes no ladder verdict is "noticed, not learned".
+
+## 110. The ask does not beat the prior; it adds a little to it, and only when it is long (2026-10-13)
+The blend, graded paired per edit against the popularity prior alone (same 1,568
+units, 176 sessions, p at a floor of 0.001): putting the ask FIRST and filling
+from popularity is worse than popularity everywhere (0.196 vs 0.240, the wrong
+way, p at its floor); the referent index alone is worse than popularity on
+short asks (0.174 vs 0.238, the wrong way) and level on long ones; summing the
+prior and the ask's evidence, each scaled by its own maximum, is level overall
+(0.246 vs 0.240, +0.006, p 0.12) and +0.025 on long asks (0.258 vs 0.233,
++69/-35, p 0.002: one draw above the floor, so "noticed, not learned" by the
+house rule, not a pass). The finder therefore does not understand the ask; the
+callables the master keeps reaching are most of what any ranker recovers
+(R-precision 0.24 against 0.075 chance, at least one reached callable in the
+top R on half of all edits), and the ask's words are a small addend. Practical
+reading: hand the mouth the hot callables of the repo and the session as the
+default "library", and let a specific ask nudge the order; do not route on the
+ask's words alone. The unbuilt step is the engine's own referent resolution
+(cast.js, the relation reader, the read-across door) routed through the proxy,
+which is the only candidate left that could read the ask rather than count it.
+Falsifying control: a routed resolver that beats the prior alone on short and
+middle asks at the floor supersedes this; a wired prior whose switch-on changes
+no ladder verdict is "noticed, not learned".
+
+## 111. A rate measured in one serving environment is that environment's rate (2026-10-13)
+The ladder gave the door alone 1 of 12 passes at 80-140 s a call with two empty
+draws per panel; a batch hours later, same panel and model, gave 3 of 6 at 5-22 s
+with none. Whatever moved (residency, contention, an eviction, a door change) was
+not recorded, so the absolute door-alone rate cannot be carried across batches.
+What does carry is the paired structure inside a batch: the same draw graded at
+each rung (receive won 5 of 12, then 1 of 6, harming none). Rules: every ladder
+record keeps `door.served` (who answered, where) and `door.ms`; a headline number
+names its batch; a comparison across batches is not a comparison.
+Falsifying control: two batches whose serving records and latencies match and
+whose door-alone rates still differ by more than the paired draw floor
+supersedes this and sends the search to the prompt or the panel.
+
+
+## 112. The signature is ground: carry it, and most of what best-of-k bought was the receiver's job (2026-10-13)
+Batch: cennini-ladder, unsigned stubs, 5 draws per ask, one round, khora proxy
+(gemma2:2b resident, 14-161 s a call, slowing; the last 3 draws refused 429), 27
+served draws. Of the 15 draws that made an attempt and failed the real test, 11
+were the right body under an emptier signature than its ground holds: 5 dropped
+`export` from a declaration the file exports (clamp x4, a correct body each), 6
+wrote `function mean()` / `isEven()` and used `xs` / `n`, names the ask itself
+states (`Implement mean(xs)`). Only 4 were logic (slugify via `this.lower` on
+every draw; one formatTotal that lost its trailing zeros). lenient-receive now
+carries both from ground, never invents them: `export` from the file (carryExport,
+on), the parameter list from the ask's words, `name(a, b)`, identifiers only, and
+only when the body uses one of those names. Same bytes, off vs on: 11/27 -> 20/27,
+9 fail->pass, 0 pass->fail, on 3 of 6 asks; a deranged control (each ask given the
+next ask's list) recovered 1, through a shared name `x`. The earlier 31 stored
+draws changed 2. Best-of-k by the real test (L1): receiver off, pass@1 0.383 ->
+pass@4 0.633 (k helps on 3 asks); receiver on, 0.725 -> 0.833 (2 asks). At a
+6-ask cluster the floor is 0.0156 and needs every ask to move, so the panel can
+neither license nor close best-of-k; the honest reading is that a wider receiver
+recovers in one draw most of what k draws recovered. Also learned: the door's
+unit-fill path (code-loop DEF) applies a body, runs the test, reverts a failure
+and keeps no raw, which the ladder had counted as a lost format; it is now typed
+`door-tested-failed` (a wrong answer, not a lost one).
+Falsifying control: a held-out batch where the carry turns a passing draw into a
+failing one, or where the deranged list recovers as many draws as the asked list,
+supersedes this. The next receivable shape is `this.<helper>` inside a top-level
+function (every slugify draw): ESM `this` is undefined there, so the call can only
+throw; test it the same way, off vs on, with a wrong-world control.
+HELD-OUT REPLICATION (2026-10-14, 30 fresh draws the carry was not designed on,
+all served, 74-183 s a call under 89% swap): carry off 8/30, on 20/30, 12
+fail->pass, 0 pass->fail, the same 3 asks (mean, even, clamp); the asked list
+added 7 over export alone, the deranged list 1. Finish added 4 more on mean once
+the parameter was carried (imports sum, count), so the parts compose. Getting the
+batch served needed two proxy fixes: heimdall's expected wait counted a stale
+daemon-queue estimate with nothing in flight (12.6 s past a 12 s promise, so
+every turn was refused and none ended to refresh it; now the queue term counts
+only behind work), and /v1/code answered a pressure hold with 400, which a
+caller reads as a bad request (now 429 + Retry-After; the ladder waits on 429).
