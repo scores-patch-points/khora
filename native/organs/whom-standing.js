@@ -32,7 +32,7 @@
 //   d. A reader who contradicts themself on a proposition reads as `nothing` with `readerSplit: true`; the table has no cell for it.
 import { mergeTestimony } from "./capacity-runner.js";
 import { sha256Hex } from "./pinax.js";
-import { referentsOfSpan } from "./referent-held.js";
+import { referentsOfSpan, headReferentsOfSpan } from "./referent-held.js";
 import { CELLS, MODES, GRAINS, arrangementOf, contactVerdict, splitRegion, selectGrain, foldGrain } from "./grain.js";
 
 // ---- shared normalization (grain.js keeps its own private; this one is the same rule so arrangements compare equal) ----------------
@@ -305,14 +305,15 @@ export function foldWithWhom({ region = [], whom = [], wFull = null, referents =
  *   newThings     it does not: a thing the reader has not named
  * An ANNOTATION: no cell, order, seam or grain is changed by it. Which class a surface shows first is the reader's judgment.
  */
-export function topicOf(cleared = [], { entities = [], mentioned = new Set() } = {}) {
+export function topicOf(cleared = [], { entities = [], mentioned = new Set(), mode = "mention" } = {}) {
   const newAboutHeld = [], newThings = [];
+  const of = mode === "about" ? headReferentsOfSpan : referentsOfSpan;
   for (const u of cleared) {
-    const hit = [...referentsOfSpan(u, entities)].filter((id) => mentioned.has(id));
+    const hit = [...of(u, entities)].filter((id) => mentioned.has(id));
     (hit.length ? newAboutHeld : newThings).push({ address: u.address, referents: hit });
   }
   return {
-    witness: "referent-held",
+    witness: mode === "about" ? "referent-held:head" : "referent-held",
     mentioned: mentioned.size,
     newAboutHeld: newAboutHeld.map((x) => x.address),
     newThings: newThings.map((x) => x.address),

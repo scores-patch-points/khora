@@ -35,3 +35,22 @@ export function heldByReferent(region = [], mentioned = new Set(), entities = []
   const held = region.filter((u) => [...referentsOfSpan(u, entities)].some((id) => mentioned.has(id)));
   return { held, share: region.length ? held.length / region.length : null };
 }
+
+/**
+ * Aboutness by head (OWN-WORDS-PREREG Amendment 9): a referent is the HEAD of a span's subject or object if that surface, normalized
+ * (a trailing possessive and trailing punctuation removed), ENDS with the referent's surface as a whole word, case-sensitive. A
+ * conservative head-final English noun-phrase rule: "the EOT" and "EOT" are hits; "the EOT contract" (head: contract) and "EOT's rule"
+ * (head: rule) are not. DECLARED, not measured; the loss on modifier-final and appositive surfaces is stated, not tuned.
+ */
+const headRe = (surface) => new RegExp(`(?<![\\p{L}\\p{N}])${escapeRe(surface)}$`, "u");
+const cleanSurface = (t) => String(t ?? "").normalize("NFC").trim().replace(/[\s.,;:!?)"”’']+$/u, "").replace(/(?:'s|’s)$/u, "").trim();
+
+export function headReferentsOfSpan(span, entities = []) {
+  const parts = [span?.claim?.subj, span?.claim?.obj].filter(Boolean).map(cleanSurface);
+  const out = new Set();
+  for (const e of entities) {
+    const surfs = (Array.isArray(e.surfaces) ? e.surfaces : [e.surfaces ?? e.name]).filter(Boolean);
+    for (const sf of surfs) { const re = headRe(String(sf)); if (parts.some((p) => re.test(p))) out.add(e.id); }
+  }
+  return out;
+}
