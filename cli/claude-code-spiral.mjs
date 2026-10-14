@@ -186,7 +186,13 @@ export function spiralEventsOf(log, run, { forWhom, at = new Date().toISOString(
 // to that caller. Every other rel, and every non-code file, is not read here.
 const CODE_ORDERS = new Set(["imports", "calls", "extends", "declares"]);
 const lastSeg = (s) => str(s).split(/[/.]/).filter(Boolean).at(-1)?.toLowerCase() ?? "";
-const moduleStem = (m) => str(m).split("/").at(-1).replace(/\.[A-Za-z0-9]+$/, "").toLowerCase();
+// A runtime scheme prefix is not part of a module's name: `node:fs` is the module `fs` (nesting-fix J D7 — a TRUE
+// `imports(x, fs)` against `import fs from "node:fs"` stayed unlicensed). A declared CLOSED class of runtime
+// schemes, applied to BOTH the claim's ARG1 and the edge's module so either spelling meets either. Its false-positive
+// class: a package literally named `<scheme>:<name>` (none exists — the scheme is not a legal package-name part).
+const RUNTIME_SCHEME = /^(node|bun|deno|npm|jsr):/i;
+export const unscheme = (m) => str(m).replace(RUNTIME_SCHEME, "");
+export const moduleStem = (m) => unscheme(m).split("/").at(-1).replace(/\.[A-Za-z0-9]+$/, "").toLowerCase();
 const byteAt = (text, i) => Buffer.byteLength(text.slice(0, i));
 
 export function codeGroundReader() {
@@ -204,7 +210,8 @@ export function codeGroundReader() {
     const { text, r } = cache.get(file);
     const scope = str(c.ground).slice(file.length).split("/").filter(Boolean).at(-1) ?? null;
     const want = str(c.roles?.ARG1).toLowerCase();
-    const hits = c.rel === "imports" ? r.imports.filter((e) => moduleStem(e.module) === want || str(e.module).toLowerCase() === want)
+    const wantU = unscheme(want).toLowerCase();
+    const hits = c.rel === "imports" ? r.imports.filter((e) => moduleStem(e.module) === wantU || unscheme(e.module).toLowerCase() === wantU || str(e.module).toLowerCase() === want)
       : c.rel === "calls" ? r.calls.filter((e) => lastSeg(e.callee) === lastSeg(want) && (!scope || e.caller === scope))
       : c.rel === "extends" ? r.extends.filter((e) => lastSeg(e.base) === lastSeg(want))
       : r.declared.filter((e) => str(e.name).toLowerCase() === want);
