@@ -415,13 +415,16 @@ export function lemmaAndFeats(lexicon, form, upos) {
 }
 
 // ── the whole reader ───────────────────────────────────────────────────────
-export function loadModel(json) {
+export function loadModel(json, { morphology = null } = {}) {
   return {
     tagger: Perceptron.fromJSON(json.tagger),
     parser: Perceptron.fromJSON(json.parser),
     labeller: Perceptron.fromJSON(json.labeller),
     lexicon: json.lexicon,
     meta: json.meta,
+    // ADDITIVE (2026-10-14): a second GIVER for forms the treebank never saw. `morphology` is a parsed MorphologyPrior@1
+    // (priors/morphology-eng.json, UniMorph English: form → lemma, irregular inflections). Absent, nothing changes.
+    morphology: morphology?.forms ? { forms: morphology.forms, giver: morphology.provenance?.source ?? "morphology prior" } : null,
   };
 }
 
@@ -454,7 +457,22 @@ export function analyse(model, forms) {
 // are unchanged; callers opt in.
 export const CLOSED_UPOS = Object.freeze(["ADP", "AUX", "CCONJ", "DET", "PART", "PRON", "SCONJ"]);
 export const CLOSED_UPOS_GIVER = "Universal Dependencies v2, u/pos: closed class words (NUM excluded: digit numerals are productive)";
-export function tagSentenceAttested(tagger, words, lexicon, { closed = CLOSED_UPOS } = {}) {
+// IRREGULAR BACKOFF (ADDITIVE, 2026-10-14). A form UD English-EWT never saw in ANY class ("sank": EWT's train split holds "sink" and
+// "sunk" nowhere, and the tagger read it as a NOUN, which left the sentence with no root) may still be an inflection of a lemma EWT
+// attests as a VERB. The morphology prior (a second giver, UniMorph English) names that lemma. The form is then held to VERB. Only an
+// UNSEEN form is touched (a seen form keeps what the treebank attests), only a lemma EWT attests as VERB counts, and no regular
+// suffix rule is added: the prior's own table is the whole of it.
+export function irregularVerbLemma(model, form) {
+  const forms = model?.morphology?.forms;
+  if (!forms) return null;
+  const lf = String(form).toLowerCase();
+  if (model.tagger.classes.some((c) => model.lexicon.form[`${lf}|${c}`])) return null;
+  // The lemma must be attested as a VERB and NOT as ADJ/ADV, so "closest" (UniMorph: close, which EWT also attests as ADJ and ADV)
+  // stays an adjective, while "sink" (VERB, NOUN) takes "sank". The lexicon is attestation, not counts, so this is a presence test.
+  const verbal = (l) => model.lexicon.form[`${l}|VERB`] && !model.lexicon.form[`${l}|ADJ`] && !model.lexicon.form[`${l}|ADV`];
+  return (forms[lf] ?? []).find((l) => l !== lf && verbal(l)) ?? null;
+}
+export function tagSentenceAttested(tagger, words, lexicon, { closed = CLOSED_UPOS, irregular = null } = {}) {
   const context = ["-START-", "-START2-", ...words.map(normalize), "-END-", "-END2-"];
   const closedIdx = closed.map((c) => tagger.index.get(c)).filter((i) => i != null);
   let prev = "-START-", prev2 = "-START2-";
@@ -463,7 +481,9 @@ export function tagSentenceAttested(tagger, words, lexicon, { closed = CLOSED_UP
     const lf = words[i].toLowerCase();
     const valid = new Array(tagger.n).fill(true);
     for (const c of closedIdx) if (!lexicon.form[`${lf}|${tagger.classes[c]}`]) valid[c] = false;
-    if (!valid.some(Boolean)) valid.fill(true); // a form the treebank never saw keeps every class
+    const verb = irregular ? irregular(words[i]) : null;
+    if (verb) { valid.fill(false); valid[tagger.index.get("VERB")] = true; } // an unseen inflection of an attested verb is a verb
+    else if (!valid.some(Boolean)) valid.fill(true); // a form the treebank never saw keeps every class
     const c = tagger.best(tagFeatures(i, words[i], context, prev, prev2), valid);
     const t = tagger.classes[c];
     tags.push(t); prev2 = prev; prev = t;
@@ -473,12 +493,15 @@ export function tagSentenceAttested(tagger, words, lexicon, { closed = CLOSED_UP
 /** analyse() with tags held to what EWT attests (tagSentenceAttested). `scope` is "closed" (the UD closed classes) or "all" (every
  *  class: a form the treebank saw takes only a tag it saw it with; an unseen form keeps every class). */
 export function analyseAttested(model, forms, { scope = "closed" } = {}) {
-  const tags = tagSentenceAttested(model.tagger, forms, model.lexicon, scope === "all" ? { closed: model.tagger.classes } : {});
+  const irregular = model.morphology ? (f) => irregularVerbLemma(model, f) : null;
+  const tags = tagSentenceAttested(model.tagger, forms, model.lexicon, { ...(scope === "all" ? { closed: model.tagger.classes } : {}), irregular });
   const words = ["ROOT", ...forms], T = ["ROOT", ...tags];
   const heads = parseSentence(model.parser, words, T);
   const labels = labelSentence(model.labeller, heads, words, T);
   return forms.map((form, k) => {
-    const { lemma, feats } = lemmaAndFeats(model.lexicon, form, tags[k]);
+    let { lemma, feats } = lemmaAndFeats(model.lexicon, form, tags[k]);
+    const il = tags[k] === "VERB" && irregular ? irregular(form) : null;
+    if (il) lemma = il; // the second giver's lemma for an inflection the treebank never saw
     return { id: k + 1, form, lemma, upos: tags[k], xpos: "_", feats, head: heads[k + 1], deprel: labels[k + 1], deps: "_", misc: "_" };
   });
 }

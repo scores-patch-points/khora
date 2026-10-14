@@ -45,7 +45,25 @@ const qmid = (s) => [F(QUOTES.open), s, F(QUOTES.close)];
  * The constructions. Each takes the proposition's RESOLVED slots (figures, pages and spans already turned into segments by the lens's
  * resolver) and returns segments. `null` = this construction cannot say it (the cell goes silent, never filled with something nearby).
  */
+// ATTRIBUTION: a claim is given to the AUTHOR or SPEAKER on the record, never to a publication (the user, 2026-10-14). The giver arrives as
+// { names: [copied name bytes], rest: { count }?, kind: "author" | "institution" }. Several constructions say the same attribution, so the
+// pathos pass (organs/pathos-variants.js) can give a passage a cadence; each is lawful alone. A construction that cannot say a giver
+// (a possessive for a list of names) returns null and is not offered.
+const asSegs = (x) => (Array.isArray(x) ? x : [x]);
+const givers = ({ names, rest }) => [...list(names.map(asSegs)), ...(rest ? [F(" and "), n(rest), F(" others")] : [])];
+const INSTITUTION = "institution"; // the giver kind a body speaking for itself carries (organs/byline.js)
+// Number follows the giver (CGEL ch. 5): one name takes -s; two or more (or a counted remainder) take the base form.
+const many = (g) => g.names.length > 1 || !!g.rest;
+export const ATTRIBUTION = Object.freeze([
+  ({ giver, quote }) => [...givers(giver), F(giver.kind === INSTITUTION ? (many(giver) ? " say: " : " says: ") : many(giver) ? " write: " : " writes: "), ...q(quote)],
+  ({ giver, quote }) => (!many(giver) ? [F("In "), ...asSegs(giver.names[0]), F("’s words, "), ...q(quote)] : null),
+  ({ giver, quote }) => [...givers(giver), F(many(giver) ? " put it this way: " : " puts it this way: "), ...q(quote)],
+  ({ giver, quote }) => [F("Per "), ...givers(giver), F(", "), ...q(quote)],
+]);
+export const ATTRIBUTION_VARIANTS = ATTRIBUTION.length;
+
 export const CONSTRUCTIONS = {
+  attributed: (slots) => ATTRIBUTION[(slots.variant ?? 0) % ATTRIBUTION.length](slots),
   refused: ({ hosts }) => [n(hosts.length), F(` ${pick(hosts.length, "publisher", "publishers")} refused the request for ${pick(hosts.length, "its page", "their pages")}: `), ...list(hosts), F(".")],
   search_empty: ({ query }) => [F("The search for “"), ...query, F("” returned nothing.")],
   question_names: ({ figs }) => [F("The question names "), ...list(figs), F(`, and the pages name ${pick(figs.length, "it", "them")} too.`)],
@@ -69,9 +87,9 @@ export const CONSTRUCTIONS = {
   said: ({ who, verb, quote }) => [who, F(" "), verb, F(", "), ...q(quote)],
   said_that: ({ who, verb, clause }) => [who, F(" "), verb, F(" that "), clause, F(".")],
   collapses: ({ pairs }) => [n(pairs), F(` ${pick(pairs, "pair", "pairs")} of pages that look separate share their wording or cite each other, and each pair counts once.`)],
-  agree: ({ k, quote }) => [n(k), F(" independent pages carry the same claim, one of them in these words: "), ...qmid(quote), F(".")],
+  agree: ({ k, by, quote }) => [n(k), F(" independent pages carry the same claim; here it is as "), ...givers(by), F(" has it: "), ...qmid(quote), F(".")],
   agree_none: () => [F("No claim recurs, in the same terms, on two independent pages.")],
-  differ: ({ subject, pageA, quoteA, pageB, quoteB }) => [F("About "), ...subject, F(", the pages add to each other rather than conflict: "), ...pageA, F(" has "), ...qmid(quoteA), F(", and "), ...pageB, F(" has "), ...qmid(quoteB), F(".")],
+  differ: ({ subject, giverA, quoteA, giverB, quoteB }) => [F("About "), ...subject, F(", two voices add to each other rather than conflict: "), ...givers(giverA), F(" has "), ...qmid(quoteA), F(", and "), ...givers(giverB), F(" has "), ...qmid(quoteB), F(".")],
   undated_claims: () => [F("No claim carries a date of its own, so the dates here are when pages were published, not when claims held.")],
   periods: ({ items, undated }) => [F("The pages fall into "), n(items.length), F(` ${pick(items.length, "period", "periods")}: `), ...list(items.map((it) => [month(it.month), F(" ("), n(it.pages), F(` ${pick(it.pages, "page", "pages")})`)])), ...(undated ? [F(", with the rest undated")] : []), F(".")],
   fixity: ({ held, reencoded, changed, unreached }) => [F("On a second fetch of every page, the cited bytes held where they were on "), n(held), F(` ${pick(held, "page", "pages")}`), ...(reencoded ? [F(" ("), n(reencoded), F(` ${pick(reencoded, "page", "pages")} changed ${pick(reencoded, "its", "their")} markup but not ${pick(reencoded, "its", "their")} text)`)] : []), ...(changed ? [F(", and "), n(changed), F(` ${pick(changed, "page", "pages")} changed`)] : []), ...(unreached ? [F(", and "), n(unreached), F(" could not be reached")] : []), F(".")],
@@ -124,7 +142,9 @@ export function wordsOf(fn) {
   return new Set([...quoted, ...tmpl, QUOTES.open, QUOTES.close].join(" ").match(/[\p{L}][\p{L}'’-]*/gu)?.map((w) => w.toLowerCase()) ?? []);
 }
 export const FRAME_WORDS = Object.fromEntries(Object.entries(CONSTRUCTIONS).map(([k, fn]) => [k, wordsOf(fn)]));
+// The attribution constructions live in one array; their words are the union of its members' literals.
+FRAME_WORDS.attributed = wordsOf(ATTRIBUTION.map(String).join("\n"));
 
 export const TITLES = Object.freeze({ Void: "What is missing", Entity: "Who is named", Kind: "What is named together", Field: "What was read", Link: "Who says what", Network: "What holds across pages", Atmosphere: "When, and whether it held", Lens: "Where each page stands", Paradigm: "How the pages divide" });
 
-export default Object.freeze({ titles: TITLES, lang: LANG, giver: GIVER, quotes: QUOTES, constructions: CONSTRUCTIONS, list, finish, lawsOf, causal: CAUSAL, machinery: MACHINERY, maxFrameWords: MAX_FRAME_WORDS, frameWords: FRAME_WORDS, complementiser: COMPLEMENTISER });
+export default Object.freeze({ attributionVariants: ATTRIBUTION_VARIANTS, titles: TITLES, lang: LANG, giver: GIVER, quotes: QUOTES, constructions: CONSTRUCTIONS, list, finish, lawsOf, causal: CAUSAL, machinery: MACHINERY, maxFrameWords: MAX_FRAME_WORDS, frameWords: FRAME_WORDS, complementiser: COMPLEMENTISER });

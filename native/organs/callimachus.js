@@ -28,6 +28,8 @@ import { extractSurfaces, namesCorefer, diaNorm } from "../adapters/text/surface
 import { discoverRelationVocab, extractRelations } from "../adapters/text/relations.js";
 import { tokenize, buildFrequencyTable, functionWordSet } from "../adapters/text/material.js";
 import { offsetMap, convertOffset, formatAddress } from "./pinax.js";
+import { bylineOf } from "./byline.js";
+import { isIndexUrl, footnotesOf, marksOf, trailOf } from "./index-source.js";
 
 export const WINNOW_K = 24;
 export const WINNOW_W = 8;
@@ -542,7 +544,38 @@ export function readCorpus(records, { question = "", absences = [], received = n
   return {
     schema: "CallimachusRecord@1",
     question,
-    sources: records.map((r) => ({ ...r.entry, declared: r.declared ?? null, title: titles[r.entry.id] ?? null })),
+    // ROLE and GIVER, decided from the page's own bytes with no input: an encyclopedia is an INDEX (its claims lead to a source and are never
+    // one: index-source.js); and WHO SAID IT is read from the page's markup (byline.js), as copied bytes with a raw-layer address.
+    sources: records.map((r) => {
+      const url = r.entry.final_url ?? r.entry.url;
+      const role = r.declared?.role ?? (isIndexUrl(url) ? "index" : "source");
+      const addr = (at) => (at ? formatAddress({ pinax: r.entry.id, layer: "raw", layerSha256: r.entry.raw.sha256, start: at.start, end: at.end }) : null);
+      let byline = null;
+      try {
+        const b = bylineOf({ raw: dec.decode(r.layers.raw), text: dec.decode(r.layers.text), url, title: titles[r.entry.id]?.text ?? "" });
+        byline = {
+          authors: b.authors.map((a) => ({ name: a.name, kind: a.kind, witnesses: a.witnesses, address: addr(a.at) })),
+          institutional: b.institutional ? { name: b.institutional.name, type: b.institutional.type, address: addr(b.institutional.at) } : null,
+          no_named_giver: b.no_named_giver, ambiguous_article: b.ambiguous_article,
+        };
+      } catch { byline = null; }
+      // THE POINTERS of an index page: every sentence that stands over footnotes with an origin URL, as a text-layer address plus the
+      // origin hrefs (index-source.js trailOf). The pages those hrefs name, once pinned, are matched back to the sentence by typed slots
+      // (pointer-match.js). Empty for a page that is not an index.
+      let index_trail = [];
+      if (role === "index") {
+        try {
+          const d = docs.find((x) => x.rec === r), raw = dec.decode(r.layers.raw);
+          const fn = footnotesOf(raw), marks = marksOf(d.text);
+          for (const sn of d.sentences) {
+            const s0 = sn.offset, s1 = sn.offset + sn.text.trimEnd().length;
+            const t = trailOf({ text: d.text, footnotes: fn, marks, span: [s0, s1], pinax: r.entry.id });
+            if (t.follow.length) index_trail.push({ span: formatAddress({ pinax: r.entry.id, layer: "text", layerSha256: r.entry.text.sha256, start: convertOffset(d.map, "u", "b", s0), end: convertOffset(d.map, "u", "b", s1) }), text: d.text.slice(s0, s1), hrefs: t.follow.map((f) => f.href), notes: t.notes });
+          }
+        } catch { index_trail = []; }
+      }
+      return { ...r.entry, declared: r.declared ?? null, title: titles[r.entry.id] ?? null, role, byline, index_trail };
+    }),
     entities: referents.map((r) => ({ ...r, sources: [...r.sources] })),
     unadmitted_surfaces: unadmitted,
     vocab: [...verbs],

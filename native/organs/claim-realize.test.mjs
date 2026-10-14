@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { realizeClaim, claimFromSentence, logosOrder, segmentClauses, readRows, readClause, omissionLedger, checkDisclosure } from "./claim-realize.js";
-import { loadModel, tokenize, tagSentence, tagSentenceAttested } from "../adapters/text/english-parser.js";
+import { loadModel, tokenize, tagSentence, tagSentenceAttested, analyseAttested } from "../adapters/text/english-parser.js";
 import en from "../adapters/text/telling-grammar.en.js";
 import { readWhom } from "./whom.js";
 import { makePinax } from "./pinax.js";
@@ -199,4 +199,21 @@ test("net new is reader-relative: an adjacency the reader's W already holds is n
   assert.equal(r.novelty.heldByWhom, alone.novelty.newAdjacencies);
   assert.equal(r.novelty.netNew, false, "a reader who was already shown this paraphrase gets nothing net new from it");
   assert.equal(r.ok, false);
+});
+
+test("irregular backoff: an inflection the treebank never saw ('sank') is read as its attested verb's form, via the morphology prior; absent the prior nothing changes", async () => {
+  const { readFileSync } = await import("node:fs");
+  const { loadModel } = await import("../adapters/text/english-parser.js");
+  const J = JSON.parse(readFileSync(new URL("../priors/parser-eng-ewt.json", import.meta.url), "utf8"));
+  const M = JSON.parse(readFileSync(new URL("../priors/morphology-eng.json", import.meta.url), "utf8"));
+  const text = "RMS Titanic sank in the North Atlantic Ocean on 15 April 1912.";
+  const plain = readClause(text, "px_t/text@abcdef012345#b0-62", { model: loadModel(J), predForm: "sank" });
+  assert.ok(plain.refusal, "without the prior the word is not a verb to EWT, and the reader says so");
+  const withM = readClause(text, "px_t/text@abcdef012345#b0-62", { model: loadModel(J, { morphology: M }), predForm: "sank" });
+  assert.equal(withM.refusal, undefined);
+  assert.equal(withM.claim.subj.text, "RMS Titanic");
+  // CONTROL that can fail: "closest" is an inflection of "close", which EWT attests as ADJ/ADV, so it must NOT become a verb.
+  const model = loadModel(J, { morphology: M });
+  const rows = analyseAttested(model, ["the", "closest", "town"]);
+  assert.notEqual(rows[1].upos, "VERB");
 });

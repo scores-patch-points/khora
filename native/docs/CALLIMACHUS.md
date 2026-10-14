@@ -564,3 +564,111 @@ Written after the user's essay "The Prompt Is a Crease". The design is in `CALLI
 Open, in addition to §8: the ordering-not-dropping ladder arm is withdrawn (history only) pending a pre-registration as a rival to twin-reader's; no grain arm in the twin-reader harness; nothing builds holdings from earlier tellings; no ledger store; H1–H4 in `CALLIMACHUS-SHAPE.md` are unmeasured.
 
 Tests: `node --test native/organs/{seam-ledger,grain}.test.mjs`.
+
+## 15. An encyclopedia is an index; a claim is cited to its author or speaker; the pathos archons choose the phrasing (2026-10-14)
+
+The user, in three steps. "We need to use Wikipedia as an index, not a source." Then: "we can't cite a publication, we should cite the author or the speaker of the content within the publication, and then use the pathos archons to write this non-boringly." Then: "be sure it can mechanically extract on its own."
+
+The first rule already existed in the-fold (`fold-chat-tertiary.js`, `fold-chat-origin.js`; the user, 2026-10-06): an encyclopedia is a pointer, never a citation. khora had none of it. Callimachus pinned Wikipedia like any page and let its sentences lead.
+
+### 15.1 What the record said before (permanent-dst, 10 pages)
+
+| | |
+|---|---|
+| Wikipedia pages | 2 of 10 |
+| Share of all claims | 208 of 573 (36%) |
+| Share of answer sentences (line, paragraph, brief, all asks) | 29 of 53 (55%) |
+| Line answers that rested on a Wikipedia sentence | 4 of 5 |
+
+### 15.2 What was built (all with no model; each organ pure)
+
+| Piece | File | What it does |
+|---|---|---|
+| **Index role** | `organs/index-source.js` | `isIndexUrl` (declared host: wikipedia.org, giver the user 2026-10-06); `footnotesOf` reads Parsoid's reference list from the pinned RAW bytes (each footnote's external origin URLs, archived copies kept apart, wiki plumbing dropped, a raw-layer byte span); `marksOf`/`notesUnder` find the `[ n ]` marks under a sentence (a mark that closes a sentence is carried at the head of the next, and is not its own); `trailOf` names the origins to fetch with the footnote's address. |
+| **Following** | `scripts/follow-index.mjs` | For each index sentence an answer showed, fetch the footnote origins (at most 3 per claim, the-fold's own `ORIGIN.maxAttempts`), pin them, record the path in the seed (`index:<pinax>/raw#b..:n<k>`), append to `record.json`. A page that cannot be read is a typed absence. Cached by URL hash, so a rerun is the same bytes. |
+| **Who said it** | `organs/byline.js` | Four witnesses on the page's own markup: a resolved JSON-LD Article author, page-level `<meta>`, `rel=author`/`itemprop=author`, and a visible head-of-page line. Every name carries a raw-layer byte address. Quoted, single-quoted and unquoted attributes are read (minified markup is common). |
+| **Citable** | `organs/giver.js` | `giverOf`: a named speaker, else the page's author(s), else a body the markup itself types as a non-news organization; else `none` (`no_named_giver`). A page that names no one leaves no answer line; its claims stay in the claim sheet, typed. |
+| **Read on its own** | `organs/callimachus.js` `readCorpus` | Every source carries `role` (index or source) and `byline`, computed from its bytes, with no input. |
+| **Cited as a person** | `organs/answer-ladder.js`, `telling-grammar.{en,es}.js` | `attributed` is a language-neutral proposition (giver, quote, variant); four constructions in each grammar. The telling's `agree` and `differ` cite authors too. A construction that cannot say a giver (a possessive for a list) is not offered. |
+| **Pathos** | `organs/pathos-variants.js` | See §15.4. |
+
+### 15.3 Measured
+
+**Following the footnotes (13 distinct index sentences shown in answers):**
+
+| | |
+|---|---|
+| Stand under at least one footnote | 9 |
+| Stand under none (Wikipedia itself has no source for them) | 4 |
+| Distinct origin pages | 18 |
+| Read | 11 |
+| Blocked or shell (congress.gov ×2, leginfo, politico, newspapers.com, thehill, legis.ga.gov) | 7 |
+| **Carried by ONE origin sentence** (every number and name of the claim in one sentence) | **0 of 13** |
+| Anchor coverage in the claim's own footnote pages (union), 8 claims whose footnotes were readable | 33%, 40%, 50%, 67%, 75%, 75%, 94%, 100% |
+
+The strict reading is 0 of 13 by construction, not by accident: a Wikipedia sentence is a **synthesis** of several footnotes, and each footnote carries a fragment of it. The thing to quote is the origin's own sentence, with its own author. `followClaim` in the-fold does this per claim with a consequence rung and a bound rung; here the origins are pinned as ordinary sources and the ladder reads them like any other page.
+
+**Bylines, extracted on their own (19 pages: 8 record pages and 11 origins):**
+
+| | |
+|---|---|
+| Pages with an accepted person | 15 of 19 |
+| Pages that are bodies speaking for themselves (markup types an NGO or Organization) | AASM, Save Standard Time |
+| Pages with no named giver (a legislature page) | kslegislature.gov |
+| Names corroborated by the visible head-of-page line: real pages / **mismatched-text control** | 17 / **0** |
+
+The control pairs each page's markup with another page's text layer; the visible witness must corroborate nothing there, and it corroborates 0.
+
+Bugs the real pages found in the organ (each now a test): unquoted attributes (`<meta property=article:author content="Jordan Green"/>`) were missed; a bare name line with no "By" is the common byline shape; every JSON-LD Organization node was being added to the publisher set, which refused a press release's real author (the issuing body) as "the publisher"; a script tag with an unquoted `type=application/ld+json` was skipped.
+
+### 15.4 Pathos, honestly scoped
+
+The revision grid's pathos column (`the-fold/revision-spiral.js`): Gornick (macro), Orlean (meso), Lish/Klinkenborg (micro). **Only one of them has a mechanical, taught probe**: Klinkenborg/Lish's cadence (Murch's flatline, `organs/pacing.js pacingGrade`). Orlean (stakes) and Gornick (what the piece is about underneath) are named and UNTAUGHT; this organ does not pretend to serve them.
+
+`pathos-variants.js` chooses, jointly for a passage, among the lawful constructions of each sentence. Order of preference, lexicographic with no weights: fewest repeated openers (Clark); fewest repeated constructions (Zinsser's tic, applied to the frame); not a flatline (Klinkenborg); greatest variance ratio; then lowest variant indices (deterministic). Exhaustive over the product, capped (`maxCombos`, said when exceeded).
+
+What it does NOT do: invent a word, reword a quotation, or choose a stronger verb. The verbs are the declared frame words of the construction, not a classification of the claim. The variety is real but modest: four constructions per language.
+
+### 15.5 Falsified, or weaker than it looks
+
+- **Index sentences are not carried by a single origin sentence** (0 of 13); see §15.3.
+- **"Who opposes permanent daylight saving time?" got WORSE as an answer line.** Before, a Wikipedia sentence ("Opponents of the Sunshine Protection Act argue permanent standard time would be more beneficial…") answered it directly. With the index excluded and its origins pinned, the ladder leads with `McCormick said, “I think it’s popular…”`, a supporter, not an opponent. Cause: the relation reader returns `have` for "Sleep experts have opposed…", so the relation witness misses it, and the named-speaker witness wins. The origins that do answer (the AASM position statement; the press release) are in the record and are outscored.
+- **The index sentence is not used as a query.** It should be: the Wikipedia sentence says what the claim is, and the origin sentence that best carries its anchors, cited to its own author, should be the candidate. That is the-fold's origin trail (`followClaim`). Not built.
+- **Typed absences are a large share.** 7 of 18 origins could not be read; the claims under them stay pointers.
+- **Authors for papers.** NCBI names 23 people; the construction shows two and counts the rest ("and 21 others"). Fine for a citation, not an answer to "who".
+
+### 15.6 Hand-set constants this adds (for §7)
+
+| Constant | Where | Giver |
+|---|---|---|
+| `INDEX_HOSTS` (wikipedia.org) | index-source.js | the user, 2026-10-06 |
+| `MAX_ORIGINS_PER_CLAIM = 3` | index-source.js | the-fold `ORIGIN.maxAttempts`, reused |
+| `HEAD_LINE_CHARS = 200`, `HEAD_LINES = 40` | byline.js | the author; owed a null |
+| meta names, JSON-LD types, particle and connective classes | byline.js | schema.org and HTML conventions; the author |
+| names shown: 2, then a count | answer-ladder.js `giverSlot` | the author |
+| `maxCombos = 4096` | pathos-variants.js | the author |
+
+### 15.7 How to run
+
+```bash
+node native/scripts/callimachus-run.mjs --question "…" --out DIR            # collect, read, answer
+node native/scripts/follow-index.mjs --out DIR                              # follow the index footnotes, pin the origins
+node native/scripts/callimachus-run.mjs --question "…" --replay --ask "…" --out DIR
+node --test native/organs/{byline,index-source,pathos-variants,answer-ladder}.test.mjs
+```
+
+## 16. The index sentence as a query, read through POS slots (2026-10-14)
+
+User, 2026-10-14: "be sure you're making full use of the POS slots, NL to specific POS to EOT and back."
+
+**Built (additive; off unless `pointed` is passed).** `callimachus.js` attaches `index_trail` to each index source: every sentence standing over footnotes with an origin URL, as a text-layer address, its text, and the origin hrefs (`index-source.js trailOf`). `pointer-match.js` reads the index sentence and every candidate sentence of the page its footnote names through the same parse (`claim-realize.js claimFromSentence`: UPOS, deprel, lemma) into typed slots `role:UPOS:lemma`, roles voice-normalised (a passive's subject is its patient, its `by`-oblique its agent). `answer-ladder.js` takes `pointed` and adds a `perception.pointed` witness (a content witness for the binding gate). `callimachus-run.mjs` computes it when the record has index trails.
+
+**What the slots buy (tests).** "The council approved the depot lease in March 2026." and "The depot lease was approved by the council in March 2026." share pred, agent, patient, oblique and both anchors; a word-bag decoy with the same words in the wrong roles does not match. A footnote naming a page that is not pinned points at nothing.
+
+**Falsified on the real record (Permanent DST: 124 index sentences with origins, 21 naming a pinned page).**
+- A cross-page null (the best the index sentence reaches on pages it does not point to) cannot be beaten: 0/21. Other same-topic pages carry the same slots. Kept as a reported `rival`, not a gate.
+- The within-page null (unique best sentence of the pointed page, at least two role slots): 0 pointed. With one role slot it admitted junk ("Cited by other articles" matching pred `cite`), so the two-role-slot floor was added after seeing it. It is a structural rule (a verb alone says only the verb), not a tuned number.
+- 8 of 21 index sentences give no slots at all (fragments, list items, no verbal root), after stripping the `[ n ]` footnote marks.
+- So the "Who opposes…?" regression is NOT fixed by this step. Reading: Wikipedia sentences are syntheses of several origin sentences (§15: partial coverage 33–100%), so no single origin sentence carries a synthesized claim's slots; the origin is found at the page, not the sentence.
+
+**Open.** Match a synthesized index sentence against a SET of origin sentences (slot union), and let the footnote-named page itself be the witness (page-level `pointed`) with the sentence unresolved.
