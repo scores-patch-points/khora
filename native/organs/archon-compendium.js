@@ -626,7 +626,7 @@ export const ARCHONS = Object.freeze([
   {
     handle: "kanada",
     name: "Kanada",
-    organ: "kernel/kind-induction.js",
+    organ: "kernel/terrain-induction.js",
     role: "a kind induced from what instances share",
     pdStatus: "public-domain",
     work: "The founder of the Vaisheshika school, whose categories (padartha) are kinds induced from what their instances share. A kind is what the instances have in common, never a list handed down.",

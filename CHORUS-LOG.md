@@ -1126,3 +1126,10 @@ fast: 31 files · 13 affected test files pass (134 + 41) · law: WARN pre-existi
 | Kondo | dead | cli/apprentice-assembled.mjs findArm | noted | the helper is now exercised only by its own unit test (the time-ordered pass superseded it); kept this commit, a sweep candidate |
 clean: Feynman, Holmes, Pearl, Ostrom, Frankfurt, Alexander, Marshall (no law edited)
 
+
+## 2026-10-14 — Callimachus telling: Kind/Atmosphere/Paradigm on registered cell organs; ladder voids in four corners (callimachus/cell-organs, working)
+fast: 9 files · 55 affected tests pass · law: WARN pre-existing S17/S96 duplicates in READING-SPEC.md (not this diff)
+| lens | citation | file:line | verdict | one line |
+| Diaconis | measure a null, not a threshold | native/organs/telling-organs.js POPULATION_NULL | noted | the population null is seeded and quantile-received; self-pairs created by the shuffle are dropped (disclosed) |
+| Simon/Chekhov | untested source | native/scripts/callimachus-run.mjs | noted | runner predates the diff; verified end to end by --replay instead |
+clean: Dijkstra, Pearl, Frankfurt, Greenberg

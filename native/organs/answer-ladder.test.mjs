@@ -70,6 +70,7 @@ test("every stage is a whole lawful answer, and each stage carries at least as m
   for (const st of [line, para, brief]) for (const s of st.sentences) assert.deepEqual(lintSentence(s, en), [], s.text);
   assert.ok(para.sentences.length >= line.sentences.length && brief.sentences.length >= para.sentences.length && dossier.sentences.length >= brief.sentences.length);
   assert.ok(para.contest && ["bound", "no_margin", "contested_no_margin", "below_floor"].includes(para.contest.verdict));
+  for (const st of [line, para, brief]) assert.ok(["bound", "contradicted", "contested", "unbound"].includes(st.verdict) && st.corner.says, `${st.size}: ${st.verdict}`);
   assert.equal(brief.experiencer.who, "the asker", "pathos names its experiencer");
 });
 
@@ -80,7 +81,8 @@ test("the line answers from the record: the figure that ACTS, for the kind asked
 
 test("no evidence is not an answer: a question nothing in the record carries is refused, not filled", async () => {
   const { ladder } = await ask("When did the lighthouse keeper retire?");
-  assert.equal(ladder.stages[0].verdict, "below_floor");
+  assert.equal(ladder.stages[0].verdict, "unbound", "the void's outcome is hl.js's own string: neither");
+  assert.equal(ladder.stages[0].corner.says, "neither");
   assert.match(ladder.stages[0].sentences[0]?.text ?? "", /Nothing in this record carries/);
 });
 

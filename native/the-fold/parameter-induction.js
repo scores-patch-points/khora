@@ -11,7 +11,7 @@
 // organ. words-per-page is one caller's use of it, not something this file
 // knows about.
 //
-// NOT kernel/kind-induction.js — that induces a CATEGORY (Kanada's atomism:
+// NOT kernel/terrain-induction.js — that induces a CATEGORY (Kanada's atomism:
 // a kind from what several instances share). This organ induces a single
 // NUMBER (or other simple value) for a parameter asked about directly, by
 // real corroborated search — closer in spirit to shape.js's own "the surfed

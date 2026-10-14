@@ -20,76 +20,55 @@
 //   Each sentence must pass every law in prose-laws.js. A quotation that breaks one is passed over for the next candidate; a frame that
 //   breaks one is refused and reported, never shipped. Nothing is paraphrased or translated. What no frame can say is left to the author.
 //
-// DECLARED STAND-INS (the organs the spec names are not in this tree; every output says so):
-//   Kind       — facets are components of the figure co-mention graph; an edge is kept only when its co-mention count clears a one-sided
-//                binomial against independence (ATTITUDE_ALPHA). Stands in for kernel/kind-induction's Born tests.
-//   Atmosphere — grounds are pages grouped by declared publication month. Stands in for loops/atmosphere.js re-zeroing, absent here.
-//   Paradigm   — a page's frame is its dominant facet; frames are reported only when ≥2 facets each dominate ≥2 pages.
-import { binomTail, ATTITUDE_ALPHA } from "./callimachus.js";
+// THE ENGINE'S OWN CELL ORGANS (organs/telling-organs.js, thin adapters; the stand-ins that preceded them are retired, before/after
+// in docs/CALLIMACHUS.md §10):
+//   Kind       — SIG·Pattern `kinds` (kernel/terrain-induction.js) over the figures, each challenged by NUL·Pattern `kindnull`
+//                (entity-kind-induction.js testKindMembers); a group is told only when both nulls pass.
+//   Atmosphere — REC·Ground `regime` (source.js atmosphereBoundaries → loops/atmosphere.js readAtmosphere) and EVA·Ground `atmosphere`
+//                (the-fold/aperture.js meter), the pages read in order of publication.
+//   Paradigm   — the same terrain induction over the PAGES (a camp is an induced kind of page), EVA·Pattern `standing`
+//                (capacity-runner.js mergeTestimony) per claim; REC·Pattern `reshape` needs the question's void loop, which is not run here.
 import { seg, sentence, lintSentence, firstLawful, verifyWords, cleanSpan, narrow, num, agree, LAWS } from "./prose-laws.js";
 import { cellOf, GRAINS, OPERATOR_CHAIN } from "../kernel/cube.js";
 import { makeComposer, hostOf, monthOf, monthName, dayName, F, V, n, S, joinSegs } from "./composer.js";
+import { kindTerrain, paradigmTerrain, atmosphereTerrain, testimonyOf } from "./telling-organs.js";
 import english from "../adapters/text/telling-grammar.en.js";
 
 
-// ---- increment D ------------------------------------------------------------------------------------------------------------------
+// ---- the three terrains, by their registered organs ----------------------------------------------------------------------------------
 
-export function interpret(record, { alpha = ATTITUDE_ALPHA } = {}) {
-  const atoms = record.atoms.filter((a) => a.entities?.length);
-  const N = atoms.length;
-  const freq = new Map();
-  const pair = new Map();
-  for (const a of atoms) {
-    const es = [...new Set(a.entities)].sort();
-    for (const e of es) freq.set(e, (freq.get(e) ?? 0) + 1);
-    for (let i = 0; i < es.length; i++) for (let j = i + 1; j < es.length; j++) { const k = `${es[i]}|${es[j]}`; pair.set(k, (pair.get(k) ?? 0) + 1); }
-  }
-  const adj = new Map();
-  let kindEdges = 0;
-  for (const [k, x] of pair) {
-    const [a, b] = k.split("|");
-    if (x >= 2 && binomTail(x, freq.get(a), freq.get(b) / N) < alpha) {
-      kindEdges++;
-      (adj.get(a) ?? adj.set(a, new Set()).get(a)).add(b);
-      (adj.get(b) ?? adj.set(b, new Set()).get(b)).add(a);
-    }
-  }
-  const seen = new Set();
-  const facets = [];
-  for (const start of adj.keys()) {
-    if (seen.has(start)) continue;
-    const comp = [];
-    const stack = [start];
-    while (stack.length) { const v = stack.pop(); if (seen.has(v)) continue; seen.add(v); comp.push(v); for (const w of adj.get(v) ?? []) stack.push(w); }
-    if (comp.length >= 2) facets.push({ id: `k_${facets.length}`, core: comp.sort((x, y) => freq.get(y) - freq.get(x)), atoms: [] });
-  }
+/**
+ * interpret(record, { textOf }) → { facets, kinds, grounds, atmosphere, frames, paradigm, testimony }. Writes a.facet, a.ground_id and
+ * a.frame_id on every atom (read by the telling and the answer ladder) and c.testimony on every claim. `textOf(pageId)` supplies the
+ * pinned text the Atmosphere reads; without it the Atmosphere is a typed gap.
+ */
+export function interpret(record, { textOf = null } = {}) {
+  const kind = kindTerrain(record);
+  const facets = kind.held.map((k, i) => ({ id: `k_${i}`, kind: k.id, core: k.members, atoms: [] }));
+  const share = new Map(record.entities.map((e) => [e.id, e.sources.length]));
+  for (const f of facets) f.core.sort((x, y) => (share.get(y) ?? 0) - (share.get(x) ?? 0) || x.localeCompare(y));
   for (const a of record.atoms) {
     let best = null, bestN = 0;
-    for (const f of facets) { const n = (a.entities ?? []).filter((e) => f.core.includes(e)).length; if (n > bestN) { best = f; bestN = n; } }
+    for (const f of facets) { const k = (a.entities ?? []).filter((e) => f.core.includes(e)).length; if (k > bestN) { best = f; bestN = k; } }
     a.facet = best?.id ?? "unsorted";
     if (best) best.atoms.push(a.id);
   }
   facets.sort((x, y) => y.atoms.length - x.atoms.length);
 
-  const byMonth = new Map();
-  for (const s of record.sources) { const m = monthOf(s.declared?.published) ?? "undated"; (byMonth.get(m) ?? byMonth.set(m, []).get(m)).push(s.id); }
-  const grounds = [...byMonth].map(([month, ids]) => ({ id: `atm_${month}`, month, sources: ids })).sort((a, b) => (a.month === "undated") - (b.month === "undated") || a.month.localeCompare(b.month));
-  for (const a of record.atoms) a.ground_id = grounds.find((g) => g.sources.includes(a.pinax))?.id ?? null;
+  const atmosphere = atmosphereTerrain(record, { textOf });
+  const grounds = atmosphere.gap || atmosphere.regime.declined ? [] : atmosphere.regime.regions;
+  if (atmosphere.gap) for (const a of record.atoms) a.ground_id = null;
 
-  const dom = {};
-  for (const s of record.sources) {
-    const c = {};
-    for (const a of record.atoms) if (a.pinax === s.id && a.facet !== "unsorted") c[a.facet] = (c[a.facet] ?? 0) + 1;
-    dom[s.id] = Object.entries(c).sort((x, y) => y[1] - x[1])[0]?.[0] ?? "unsorted";
-  }
-  const groups = new Map();
-  for (const [sid, f] of Object.entries(dom)) if (f !== "unsorted") (groups.get(f) ?? groups.set(f, []).get(f)).push(sid);
-  const strong = [...groups].filter(([, ids]) => ids.length >= 2);
-  const frames = strong.length >= 2 ? strong.map(([f, ids]) => ({ id: `fr_${f}`, facet: f, sources: ids })) : [];
+  const paradigm = paradigmTerrain(record);
+  const frames = paradigm.held.map((k, i) => ({ id: `fr_${i}`, kind: k.id, sources: k.members, figs: k.shares.filter((x) => x.feature === "names").map((x) => x.value) }));
   for (const a of record.atoms) a.frame_id = frames.find((fr) => fr.sources.includes(a.pinax))?.id ?? null;
 
-  record.ladder = { reached: [...new Set([...record.ladder.reached, "kind", "atmosphere", "paradigm"])], skipped: [], stand_ins: { kind: "co-mention graph, binomial-gated", atmosphere: "publication month", paradigm: "dominant facet" } };
-  return { facets, grounds, frames: frames.length ? frames : "single_or_undetermined", kind_edges: kindEdges };
+  const testimony = testimonyOf(record);
+  for (const c of record.claims) c.testimony = testimony.get(c.key);
+
+  const organs = { kind: "kinds+kindnull (terrain-induction over figures)", atmosphere: "regime+atmosphere (atmosphereBoundaries, aperture meter)", paradigm: "terrain-induction over pages + standing (mergeTestimony)" };
+  record.ladder = { reached: [...new Set([...record.ladder.reached, "kind", "atmosphere", "paradigm"])], skipped: atmosphere.gap ? ["atmosphere"] : [], ...(atmosphere.gap ? { why_skipped: { atmosphere: atmosphere.gap } } : {}), organs };
+  return { facets, kinds: kind, grounds, atmosphere, frames, paradigm, testimony: Object.fromEntries(testimony) };
 }
 
 // ---- the telling: 27 cells ----------------------------------------------------------------------------------------------------------
@@ -105,9 +84,9 @@ export const FRAME_WORDS = {
   "NUL·Figure": W("of capitalised words in these pages were declined as figures they are dates or never act any claim"),
   "SIG·Figure": W("the figures named on most pages are of"),
   "INS·Figure": W("in all figures recur and act in some claim of them appear on only one page every appears more than"),
-  "NUL·Pattern": W("of claims name no figure in any group"),
+  "NUL·Pattern": W("with their pairings shuffled every found tested when again against random sets same size groups group hold holds of claims name no figure in any group"),
   "SIG·Pattern": W("groups group of figures are is named together more often than chance allows no"),
-  "INS·Pattern": W("the largest joins next claims claim and"),
+  "INS·Pattern": W("group the largest joins next claims claim and"),
   "SEG·Ground": W("the record holds pages page bytes of text in passages passage each pinned by a hash its exact"),
   "CON·Ground": W("their publication dates run from to page pages declares declare none"),
   "SEG·Figure": W("of claims are in a page’s own voice and report someone else them quotation marks"),
@@ -117,12 +96,12 @@ export const FRAME_WORDS = {
   "CON·Pattern": W("independent pages carry the same claim one of them in these words no recurs terms on two"),
   "SYN·Pattern": W("about the pages add to each other rather than conflict has and"),
   "DEF·Ground": W("no claim carries a date of its own so the dates here are when pages were published not claims held"),
-  "EVA·Ground": W("the pages fall into periods period page with rest undated"),
-  "REC·Ground": W("on a second fetch of every page cited bytes held where they were page pages changed its markup but not text could be reached so and was were"),
+  "EVA·Ground": W("page by in order publication no brought wording before it them did not predict kept closer to than chance first had nothing the pages fall into periods period page with rest undated"),
+  "REC·Ground": W("taken whole wording shifts once times a new stretch begins with holds as one throughout on a second fetch of every page cited bytes held where they were page pages changed its markup but not text could be reached so and was were"),
   "DEF·Figure": W("of pages page speak speaks mostly in their its own voice every no"),
   "EVA·Figure": W("the pages that quote people give floor to different voices quotes and"),
   "REC·Figure": W("silences show too never names whom all of at least two other pages name"),
-  "DEF·Pattern": W("the pages divide into camps camp by what they center on for and do not the record can detect"),
+  "DEF·Pattern": W("of form forms one by figures name centered on other stand stands apart the pages divide into camps camp by what they center on for and do not the record can detect"),
   "EVA·Pattern": W("claim claims appears appear with opposite polarity on independent pages no is contradicted between"),
   "REC·Pattern": W(""),
 };
@@ -139,7 +118,7 @@ export async function cubeTelling(record, { slice, interp, fixity = {}, limits =
   const blocked = record.absences.filter((a) => a.type === "bot_blocked");
   const loc = record.atoms.filter((a) => a.kind === "located").length;
   const pubs = record.sources.map((s) => s.declared?.published).filter(Boolean).sort();
-  const dated = interp.grounds.filter((g) => g.month !== "undated");
+  const atm = interp.atmosphere ?? { gap: "not interpreted" };
 
   // THE LENS IS MEDIUM-BLIND. Each cell returns PROPOSITIONS — { type, slots, grounds } or { alts: [...] } (the first lawful wins) — and
   // never a word of any language. Slots are typed references the grammar resolves: { fig } a figure id, { page } a page id, { span } a
@@ -170,7 +149,15 @@ export async function cubeTelling(record, { slice, interp, fixity = {}, limits =
     },
     "INS·Figure": async () => [P("figures_total", { k: { count: record.entities.length }, single: { count: record.entities.filter((e) => e.sources.length === 1).length } }, ["entities"])],
 
-    "NUL·Pattern": async () => { const u = record.atoms.filter((a) => a.facet === "unsorted").length; return u ? [P("unsorted", { claims: { count: record.atoms.length }, unsorted: { count: u } }, ["unsorted"])] : []; },
+    "NUL·Pattern": async () => {
+      // kindnull: every group the inducer nominated, challenged again as a declared membership (testKindMembers).
+      const tried = (interp.kinds?.kinds ?? []).filter((k) => !k.induced.fallback && k.challenged.cleared != null);
+      const u = record.atoms.filter((a) => a.facet === "unsorted").length;
+      return [
+        ...(tried.length ? [P("kinds_challenged", { held: { count: tried.filter((k) => k.holds).length }, tried: { count: tried.length } }, tried.map((k) => `kind:${k.id}`))] : []),
+        ...(u && interp.facets.length ? [P("unsorted", { claims: { count: record.atoms.length }, unsorted: { count: u } }, ["unsorted"])] : []),
+      ];
+    },
     "SIG·Pattern": async () => interp.facets.length ? [P("groups", { k: { count: interp.facets.length } }, interp.facets.flatMap((f) => f.atoms.slice(0, 2)))] : [P("groups_none", {}, ["facet:none"])],
     "INS·Pattern": async () => interp.facets.length ? [P("largest_groups", { groups: interp.facets.slice(0, 2).map((f) => ({ figs: f.core.slice(0, 3).map((id) => ({ fig: id })), claims: { count: f.atoms.length } })) }, interp.facets.slice(0, 2).flatMap((f) => f.atoms))] : [],
 
@@ -224,12 +211,26 @@ export async function cubeTelling(record, { slice, interp, fixity = {}, limits =
     },
 
     "DEF·Ground": async () => [P("undated_claims", {}, ["valid_time:none"])],
-    "EVA·Ground": async () => dated.length ? [P("periods", { items: dated.map((g) => ({ month: g.month, pages: { count: g.sources.length } })), undated: { flag: interp.grounds.some((g) => g.month === "undated") } }, dated.flatMap((g) => g.sources))] : [],
+    "EVA·Ground": async () => {
+      // atmosphere: each page, in order of publication, placed against the ground the pages before it built (aperture meter).
+      if (atm.gap) return [];
+      const pl = atm.meter.placements;
+      const moved = pl.filter((x) => x.censored === "above"), steady = pl.filter((x) => x.censored === "below");
+      if (!moved.length && !steady.length) return [];
+      return [P("ground_meter", { moved: { count: moved.length }, steady: steady.map((x) => ({ page: x.page })), placed: { count: pl.filter((x) => !x.censored && !x.gap).length }, unmeasured: { count: pl.filter((x) => x.gap).length } }, [...moved, ...steady].map((x) => x.page))];
+    },
     "REC·Ground": async () => {
+      // regime: where, read in order of publication, the text's own ground re-zeros (atmosphereBoundaries). Then fixity: whether it held.
+      const out = [];
+      if (!atm.gap && !atm.regime.declined) {
+        const pub = Object.fromEntries(record.sources.map((s) => [s.id, s.declared?.published]));
+        const starts = atm.regime.regions.slice(1).map((g) => ({ page: g.first, ...(pub[g.first] ? { date: pub[g.first] } : {}) }));
+        out.push(starts.length ? P("regime", { starts }, atm.regime.regions.slice(1).flatMap((g) => g.pages)) : P("regime_one", {}, atm.order));
+      }
       const vs = Object.values(fixity);
-      if (!vs.length) return [];
+      if (!vs.length) return out;
       const c = (k) => vs.filter((v) => v.verdict === k).length;
-      return [P("fixity", { held: { count: c("intact") + c("re_encoded") }, reencoded: { count: c("re_encoded") }, changed: { count: c("altered") + c("revised") + c("moved") }, unreached: { count: c("unchecked") } }, Object.keys(fixity))];
+      return [...out, P("fixity", { held: { count: c("intact") + c("re_encoded") }, reencoded: { count: c("re_encoded") }, changed: { count: c("altered") + c("revised") + c("moved") }, unreached: { count: c("unchecked") } }, Object.keys(fixity))];
     },
 
     "DEF·Figure": async () => {
@@ -249,11 +250,19 @@ export async function cubeTelling(record, { slice, interp, fixity = {}, limits =
     },
 
     "DEF·Pattern": async () => {
-      if (!Array.isArray(interp.frames) || !interp.frames.length) return [P("camps_none", {}, ["paradigm:single_or_undetermined"])];
-      return [P("camps", { items: interp.frames.map((fr) => ({ figs: interp.facets.find((x) => x.id === fr.facet).core.slice(0, 2).map((id) => ({ fig: id })), pages: fr.sources.map((sid) => ({ page: sid })) })) }, interp.frames.flatMap((f) => f.sources))];
+      // A camp is an induced kind of PAGE (terrain induction over the pages, both nulls passed); it centers on what its pages share most.
+      const frames = interp.frames ?? [];
+      if (!frames.length) return [P("camps_none", {}, ["paradigm:none_held"])];
+      const item = (fr) => ({ figs: fr.figs.slice(0, 2).map((id) => ({ fig: id })), pages: fr.sources.map((sid) => ({ page: sid })) });
+      if (frames.length === 1) return [P("camp_one", { ...item(frames[0]), total: { count: nPages }, rest: { count: nPages - frames[0].sources.length } }, frames[0].sources)];
+      return [P("camps", { items: frames.map(item) }, frames.flatMap((f) => f.sources))];
     },
-    "EVA·Pattern": async () => { const k = record.claims.filter((c) => c.standing === "CONTRADICTED"); return [P("contested", { k: { count: k.length } }, k.length ? k.flatMap((c) => c.atoms) : ["contest:none"])]; },
-    "REC·Pattern": { gap: "author", why: "what the material means for the question, and what should follow from it, is the author's to say" },
+    "EVA·Pattern": async () => {
+      // standing: mergeTestimony over each claim's chains; DISAGREE and CONTRADICTED are the set-level contests no single page carries.
+      const k = record.claims.filter((c) => ["DISAGREE", "CONTRADICTED"].includes(c.testimony?.case));
+      return [P("contested", { k: { count: k.length } }, k.length ? k.flatMap((c) => c.atoms) : ["contest:none"])];
+    },
+    "REC·Pattern": { gap: "nagarjuna", why: "reshape (void-loop.js) re-zeros a question's declared space when the loop's own findings contradict it; the question's void loop (openLoop → proposeFrom → admit) is not run over this record, so there are no findings to reshape on. What the material means for the question stays the author's to say" },
   };
 
   const realize = realizer(record, { slice, grammar });

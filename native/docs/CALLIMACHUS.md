@@ -38,7 +38,7 @@ Recorded with the Wald session, 2026-10-14; the user corrected it the same day. 
 | Fixity | `organs/pinax.js` | `Pinax@1` per source version: raw and text hashes, NFC/LF text layer, stichometry, incipit and explicit. Versioned byte addresses `px_…/layer@sha12#bS-E`, a UTF-8/code point/UTF-16 offset map, and two-axis fixity verdicts (intact, re_encoded, revised, moved, altered, address_error, unchecked) with an archive witness and sigla. |
 | The ladder | `organs/callimachus.js` | See the list below. |
 | Composer | `organs/composer.js`, `organs/prose-laws.js` | Segments (frame, value, source+address), the laws PL1–PL14 (§4), and `narrow`/`cleanSpan`, which narrow a span and never edit it. |
-| The telling | `organs/cube-telling.js` | All 27 `op·grain` cells (`kernel/cube.js` `cellOf`), each **voiced**, **silent**, **gap** or **desert**. Cells emit **language-neutral propositions**; `realizer()` resolves the slots and the grammar realizes them. Kind, Atmosphere and Paradigm are declared stand-ins (§6). |
+| The telling | `organs/cube-telling.js` | All 27 `op·grain` cells (`kernel/cube.js` `cellOf`), each **voiced**, **silent**, **gap** or **desert**. Cells emit **language-neutral propositions**; `realizer()` resolves the slots and the grammar realizes them. Kind, Atmosphere and Paradigm are read by the engine's registered cell organs through thin adapters in `organs/telling-organs.js` (§10). |
 | Grammars | `adapters/text/telling-grammar.{en,es}.js` | One construction per proposition type. Lists, dates and plurals come from **CLDR via `Intl`**. Per-construction frame words are read from each construction's own literals (PL14). Spanish is the author's grammar, not yet reviewed by a native speaker. |
 | The question | `adapters/text/question-grammar.{en,es}.js` → `organs/question-void.js` | English uses the UD parser (EWT); a clause-initial wh-word counts as interrogative whatever its tag. Spanish uses closed classes only; there is no Spanish parser on disk, and it says so. The reading becomes `declareVoid({ slot: type, anchor: [names], admits, relation })` plus a `void:` id. |
 | Sized answers | `organs/answer-ladder.js` | See §3. |
@@ -63,10 +63,12 @@ What `scripts/callimachus-run.mjs` does:
 
 `answer-ladder.js`. Candidates are claims. Each layer adds log-odds; a stage re-scores **every** candidate with all layers up to it, and reports whether its lead moved and which witness moved it.
 
-1. **Perception** → the **line**. The witnesses are anchor, actor (the figure is the relation's subject: CON·Link), admits, relation, and the question's words, each weighed by its own surprisal. **Admits only counts once a content witness binds the claim**: a date alone answers no "when". A zero-evidence question is refused (`below_floor`), not filled.
+1. **Perception** → the **line**. The witnesses are anchor, actor (the figure is the relation's subject: CON·Link), admits, relation, and the question's words, each weighed by its own surprisal. **Admits only counts once a content witness binds the claim**: a date alone answers no "when". A zero-evidence question is refused, not filled: its corner is **neither**.
 2. **Logos** → the **paragraph**. The witnesses are chains (log2), agreement, a named speaker (counted once), and `logos()` claim cycles. `kernel/contest.js` `adjudicate` decides whether the lead binds, against **margins from a seeded permutation null**. If it doesn't bind, both readings are shown.
 3. **Pathos** → the **brief**. The experiencer is declared (`organs/experiencer.js`). `strainOf` sets how many sides to show, camps are balanced, and `pathosOf` rhythm (Murch) re-picks a flatlined draft. The order is: lead first, then the tension (where pages differ), then the other sides, then the release (what holds).
 4. The **dossier** is the whole 27-cell telling. The **claim sheet** is every atom.
+
+Every stage reports the void's outcome as one of **Nagarjuna's four corners**: `hl.js`'s Belnap–Dunn strings, computed from two supports through `hl.js` `verdictOfSupport` (`cornerOf` in `answer-ladder.js`). **is** (`bound`): the lead binds past the null. **both** (`contested`): it doesn't clear its runner-up. **is-not** (`contradicted`): every evidence-bearing candidate is negative, or a polar question's bound lead is. **neither** (`unbound`): nothing carries the question. `contest.js`'s own verdict is kept beside it as `corner.contest`. The mapping is the one `precision-race.js` already uses.
 
 Measured on the DST record (10 pinned pages):
 - "When did the House pass the Sunshine Protection Act?" → "On July 14, 2026, the House passed…"
@@ -133,21 +135,22 @@ Measured on the DST record (10 pinned pages):
 |---|---|
 | `WINNOW_K=24`, `WINNOW_W=8`, `SHARE_FLOOR=0.5` | callimachus.js |
 | `MIN_ENTITY_SENTENCES=2` | callimachus.js |
-| `ATTITUDE_ALPHA=0.01` | callimachus.js; also used by cube-telling Kind |
+| `ATTITUDE_ALPHA=0.01` | callimachus.js (cube-telling Kind no longer uses it, §10) |
 | `QUOTE_FRAME_WORDS=3` | callimachus.js |
 | `INCIPIT_BYTES=64`, `SPAN_EDGE_BYTES=16`, `ADDRESS_HASH_HEX=12` | pinax.js; identity aids, not gates |
 | `minActivation: 1`, `contestedMargin = max(p95, p99)` | answer-ladder.js; the p-levels are conventions |
 | Brief sides 3/5, speaker caps (8, 3, 2, 1), alternative caps (12) | answer-ladder.js, cube-telling.js |
 | PL12 at 35 words | prose-laws.js |
+| `POPULATION_NULL` 19 draws at the inducer's own 0.95 quantile; `ATMOSPHERE_REGIME` received from source.js | telling-organs.js (§10): the draws are the fewest that resolve the quantile |
 
 Each one should be replaced by a measured value from a null over the material, with only its draws and seed declared.
 
 ## 8. Open work
 
-- **Kind, Atmosphere, Paradigm** in the telling are stand-ins. Wire them to the registered cell organs listed in `docs/THE-27-CELLS.md`: `kinds`/`kindnull` (now `kernel/terrain-induction.js`, on branch `terrain-induction`), `atmosphere`, `regime`, `standing`, `rezero`, `reshape`.
+- **REC·Pattern (`reshape`)** needs the question's void loop (`void-loop.js` openLoop → proposeFrom → admit) run over the record. That is the void-in-the-universe work, owned by Nagarjuna (§10).
+- **The terrain-induction false positive** (§10) belongs to the kernel organ, not to this adapter. The population null here is the measured guard; whether `entity-kind-induction.js` should carry it itself is the kernel's call.
 - **Cross-language referents**: `identity-induction.js` ("same thing, for someone, when the universes folded on them match beyond a null") plus `qidBridge` with non-English titles.
 - **Paraphrase in other languages** needs a bilingual lexicon (or the question's own language as the record's), plus a UD treebank per language for its parser and forms.
-- **Void verdicts** in lenses should use the four `hl.js` values (§1). The ladder's `below_floor` is the "gap" (neither) corner.
 - Wire `realizeClaim` (level 2) and `repairSentence` (level 3) into the answer ladder's lines, beside the verbatim snip.
 - The **Spanish grammar** needs a native speaker's review.
 
@@ -156,21 +159,71 @@ Each one should be replaced by a measured value from a null over the material, w
 ```bash
 node native/scripts/callimachus-run.mjs --question "…" --search 10 --url <seed> --out <dir>
 node native/scripts/callimachus-run.mjs --question "…" --replay --lang en,es --ask "…" --ask "…" --out <dir>
-node --test native/organs/{pinax,callimachus,cube-telling,answer-ladder,claim-realize,mouth-repair}.test.mjs
+node --test native/organs/{pinax,callimachus,cube-telling,telling-organs,answer-ladder,claim-realize,mouth-repair}.test.mjs
 ```
 
 Live repair needs the mouth channel on `:11434` with `gemma2:2b`. Without it, level 3 reports "no mouth reachable" and changes nothing.
 
-## 10. Clause segmentation before the claim is read (2026-10-14, session `eaadca`)
+## 10. The three terrains on the engine's own organs (2026-10-14)
+
+The stand-ins are retired. Every cell of Kind, Atmosphere and Paradigm now calls a registered organ (`organs/capacities.js`) through a thin adapter in `organs/telling-organs.js`, which only reshapes the record into the organ's own input. No organ was copied, and none was changed.
+
+| Cell | Before (stand-in) | After (registered organ) |
+|---|---|---|
+| SIG·Pattern (Kind) | co-mention graph, binomial at `ATTITUDE_ALPHA` | `kinds`: `kernel/terrain-induction.js` over the figures, each featured by the figures it co-arrives with in one claim |
+| NUL·Pattern (Kind) | count of claims outside every group | `kindnull`: each induced group challenged again by `testKindMembers`; plus the same count |
+| INS·Pattern (Kind) | largest components | the largest held kinds (same construction) |
+| EVA·Ground (Atmosphere) | pages grouped by publication month | `atmosphere`: the aperture meter (`the-fold/aperture.js`), one arrival per page in order of publication; each page above, below or placed against the continuation null of the pages before it |
+| REC·Ground (Atmosphere) | fixity only | `regime`: `source.js` `atmosphereBoundaries` → `loops/atmosphere.js` `readAtmosphere` over the pages' text in order of publication, at the received `ATMOSPHERE_REGIME` `{window 5, draws 256, tolerance 3, hop 5}`; then fixity |
+| DEF·Ground (Atmosphere) | undated-claims disclosure | unchanged (`frame` is the registered organ; nothing new to say) |
+| DEF·Pattern (Paradigm) | a page's dominant facet; camps if ≥2 facets each dominate ≥2 pages (hand-set) | terrain induction over the **pages**, each featured by the figures it names (the same co-arrival, one grain up), with the same two nulls |
+| EVA·Pattern (Paradigm) | count of `CONTRADICTED` claims | `standing`: `capacity-runner.js` `mergeTestimony` per claim, one reading per independent chain ("holds") and per opposite-polarity rival chain on another page ("refused"); DISAGREE and CONTRADICTED are told |
+| REC·Pattern (Paradigm) | gap, owner: author | still a gap, now owned by **nagarjuna**. `reshape` needs the findings of the question's void loop, and that loop is not run over the record. |
+
+Not touched: REC·Figure (`rezero`) is a Lens cell and was never a stand-in. Its telling still reads silences from `record.omissions`. Wiring `concedeEvaluation` there needs a log of checked claims, which the record doesn't keep.
+
+**Cell statuses, `permanent-dst` replay (`--lang en,es`, the five asks of §3):**
+
+| | voiced | silent | gap | desert | sentences | lawful | copied segments verified |
+|---|---|---|---|---|---|---|---|
+| before, en | 24 | 1 (SYN·Figure) | 1 (REC·Pattern) | 1 | 26 | 26/26 | 40/40 |
+| after, en | 24 | 1 (SYN·Figure) | 1 (REC·Pattern) | 1 | 28 | 28/28 | 36/36 |
+| after, es | 24 | 1 (SYN·Figure) | 1 (REC·Pattern) | 1 | 28 | 28/28 | 33/33 |
+
+No cell changed status, and the two languages answer every cell the same way. SYN·Figure is silent in both: in English no indirect-speech candidate passes the laws on this record, and in Spanish it is silent by design, because the grammar declines indirect speech rather than code-switch. The answers, telling included, re-verify 603/603 copied segments against the pinned layers.
+
+**Omnilingual check, and a Spanish bug it found.** `cube-telling.test.mjs` now requires every proposition type the lens emits to have a construction in **both** grammars, and the en and es tellings to give every cell the same status. On the fixture it failed: Spanish CON·Ground went silent, because PL4 read the day numeral inside a CLDR date ("1 de octubre de 2026") as a stray digit. English escaped only because its date form puts a comma after the day. Dates and months are CLDR output, received rather than written, so both grammars now mark them `cldr` the way they already mark list joiners. Not yet tested: a pinned **non-English record**. None exists yet (the clause-level session is collecting one), and the organs are medium-blind (their refusals are typed codes, never prose), so it should only need a replay.
+
+What the three terrains **say** changed:
+
+- **Kind.** Before: "Four groups of figures…; the largest joins Daylight Saving Time and Standard Time (30 claims)". After: one group holds, "Clinical Sleep Medicine, European, and World" (nine claims), and the NUL cell says that of two groups found, one holds.
+- **Atmosphere.** Before: "seven periods" by month. After: page by page, six pages brought wording the pages before them did not predict, two (witness.usatoday.com, fox29.com) kept closer to it than chance, and the first two had nothing before them. Taken whole, the wording shifts once, at aasm.org (October 31, 2023), after the two Wikipedia pages.
+- **Paradigm.** Before: two camps split on dominant facet. After: one camp of 7 pages, centered on the Sunshine Protection Act and Daylight Saving Time; the other 3 (aasm.org, usatoday.com, savestandardtime.com) stand apart. `mergeTestimony` finds no DISAGREE (94 SINGLE, 35 SINGLE-with-differing-rivals). Callimachus's own `standing` field is kept for SYN·Pattern and the claim sheet.
+- **Answers**, as four corners: "Should the US…?" **is** at every stage. "Who opposes…?" and "When did the House pass…?" **both** (`no_margin`). "Did the Senate pass the bill?" **both** at the line, **is** from the paragraph up. The Spanish "¿Quién se opone…?" **is**.
+
+**Falsified, and fixed by a measured null (the population null).** The adapter's negative control, structureless co-arrivals of 30 figures, showed that `terrainInduction` **and** `testKindMembers` both pass a near-whole-population basin (28–29 of 30) on **4 of 8 seeds**, plus 2–3-figure loner kinds on 2 more. Both nulls compare a basin only with random subsets of the same population, and noise still has a best basin. The guard calls the same organ on the population with its feature values shuffled (each unit keeps its arrival count and each value its frequency), and tells a kind only when its binding energy beats the 95th percentile of the best held energy across 19 shuffles. Measured, seeds 1–8:
+
+| | false kinds on noise | planted groups (two of 8, in 30) recovered |
+|---|---|---|
+| without the population null | 4/8 seeds | 8/8 seeds, both groups every time, plus spurious small kinds on 2 |
+| with it | 0/8 | ≥1 group on 6/8 seeds, both groups on 5 |
+
+On `permanent-dst` the population null refuses the 29-figure "group" (binding 0.154 against a bar of 0.211). That is the before-telling's "largest" group, now shown to be the noise shape. It keeps the four sleep-medicine figures (0.314). The page camp clears narrowly (0.343 against 0.326).
+
+**Feature sets, disclosed rather than chosen.** Co-arrival is declared once, because it is the relation THE-27-CELLS.md records for SIG·Pattern's own use and the one the stand-in measured. With the population null on `permanent-dst`: `with` (co-arrival) holds 1 kind. `page`, `acts`, `with+acts` and `with+page+acts` hold none.
+
+**Organ inputs that did not match, and their adapters:** figures and pages become `terrainEvidence` rows (unit, feature, value, sequence = the atom's place); the record's pages, joined in publication order, become `atmosphereBoundaries`'s body, and its regions are mapped back to each atom's byte offset (`a.ground_id`); a claim's chains become `mergeTestimony` readings.
+
+## 11. Clause segmentation before the claim is read (2026-10-14, session `eaadca`)
 
 **Goal:** raise how many witnessed claims get a lawful, read-back, net-new paraphrase from `claim-realize.js` (level 2, no model). On the 12-claim sample in §5, 7 refusals were parser misreadings: a predicate hung on a noun or a number, "bill" tagged AUX, a fronted date made the root.
 
-### 10.1 What was built
+### 11.1 What was built
 
 | Piece | Where | Giver |
 |---|---|---|
 | **Attested tags.** A tag is admitted for a form only when UD English-EWT attests that form with that tag; an unseen form keeps every class. Two scopes: `closed` (the UD closed classes ADP AUX CCONJ DET PART PRON SCONJ; NUM is excluded because digit numerals are productive) and `all` (every class, a tag dictionary). Additive: `tagSentence` and `analyse` are unchanged. | `adapters/text/english-parser.js` `tagSentenceAttested`, `analyseAttested`, `parseText({ attested })` | UD v2 u/pos (closed classes); the treebank's own lexicon |
-| **Which scope the claim reader uses** is decided by measurement (§10.2), not by assertion. | `claim-realize.js` `readRows`, `READ_SCOPE = "all"` | `scripts/eval-attested-tags.mjs` |
+| **Which scope the claim reader uses** is decided by measurement (§11.2), not by assertion. | `claim-realize.js` `readRows`, `READ_SCOPE = "all"` | `scripts/eval-attested-tags.mjs` |
 | **Clause segmentation.** See the list below this table. | `claim-realize.js` `segmentClauses` | CMOS 6.22, 6.25, 6.26; UD v2 cc/conj, SCONJ, mark; EWT PronType |
 | **Each clause parsed alone.** A fronted adjunct is parsed alone too, then hung on the predicate as an oblique. | `readClause` | CMOS 6.25 (it modifies the clause it introduces) |
 | **Two parses agree.** A clause reading is accepted only where the whole-sentence parse and the clause parse give the predicate (same token, same lemma) the same arguments: nsubj, obj, iobj, ccomp, xcomp, csubj and obl, over the same bytes inside the clause. This is an agreement check between **two readings of one giver**. It is *not* a second witness: the independent witness is still `relations.js` (§6, Pearl). | `readClause`, `argsKey` | the user's two-witness rule, applied as a check |
@@ -208,7 +261,7 @@ Every earlier gate is kept unchanged:
 - logos within arguments;
 - net new.
 
-### 10.2 Measured: the attested-tag scopes, held out
+### 11.2 Measured: the attested-tag scopes, held out
 
 `node native/scripts/eval-attested-tags.mjs --gold …/en_ewt-ud-dev.conllu --gold …/en_ewt-ud-test.conllu`. This is the official dev and test splits: 4,078 sentences and 50,243 words the tagger never trained on. Gold tokenization is fed to every arm. The null is a paired sign-flip over sentences; only the draws (999) and the seed ("attested-tags") are declared. (The fixtures sit untracked in the main khora checkout: `native/eval/fixtures/ud-english-ewt/`.)
 
@@ -220,7 +273,7 @@ Every earlier gate is kept unchanged:
 
 The every-class arm changed 1,225 tags: 716 are now right, and 396 that were right are now wrong. It is still the measured winner, so it is what the claim reader uses.
 
-### 10.3 Measured: the DST record, before and after
+### 11.3 Measured: the DST record, before and after
 
 `node native/scripts/claim-realize-measure.mjs --out 3.0/callimachus-runs/permanent-dst`:
 - It replays all 10 pages from `layers/` exactly as `callimachus-run.mjs --replay` does; each must reproduce its pinned sha256 or the run stops.
@@ -268,7 +321,7 @@ The full per-reason tallies print from the script.
 Reading the after column:
 - Most of the 230 "not a verb" refusals are **relations.js naming a non-predicate**: "is" (73), "more", "by", "bill", "or", "law", "year".
 - Most of the 101 logos refusals are **copular clauses**: a cop on an ADJ or NOUN (54). No copular alternation is built.
-- Neither is a parser misreading. Both are the next places to work (§10.6).
+- Neither is a parser misreading. Both are the next places to work (§11.6).
 
 **The §5 sample** (`paraphrase.html` shows 11 witnessed positions; the "5 of 12" in §5 counted the 2022 Senate sentence's two passing alternatives separately) is 4 positions paraphrased before and the same 4 after, but its refusals moved:
 - **"On July 14, 2026, the House passed a … bill backed by President Trump."** The clause is now read right: "bill" is a NOUN, the fronted date is re-joined, and the two parses agree. Both alternatives are refused at read-back, correctly: "…bill backed by President Trump on July 14, 2026" re-scopes the date onto *backed*.
@@ -283,7 +336,7 @@ Paraphrases gained, for example:
 - "Bipartisan support has grown in recent years." [omitted, with address: "for ending the clock changes altogether"]
 - "The bill was approved by the House by a bipartisan 308-117 vote, one of the strongest congressional showings." [omitted: "yet"; "for ending the twice-yearly clock change"]
 
-### 10.4 Still wrong among the 41 (read by hand, not hidden)
+### 11.4 Still wrong among the 41 (read by hand, not hidden)
 
 | Output | Why it is wrong |
 |---|---|
@@ -292,7 +345,7 @@ Paraphrases gained, for example:
 | "For early 2025 that includes legislation for permanent standard time, a bill is planned." | The relative clause is hung on "2025" in both parses. |
 | "Senate leaders have not committed however." and "DST has been expanded … additionally." | A one-word connective moved to the end without its comma. Lawful, but poor. |
 
-### 10.5 Tried and falsified, or corrected
+### 11.5 Tried and falsified, or corrected
 
 | What | Measured | Outcome |
 |---|---|---|
@@ -302,17 +355,17 @@ Paraphrases gained, for example:
 | ROLES keyed by surface form | "must pass the Senate" slipped through, because "pass" ≠ "passed" | Keyed by EWT lemma. |
 | Two-parse agreement as a witness | The shared NOUN reading of "result" passes both | It is a check, not a witness. The independent witness stays relations.js. |
 
-No new hand-set threshold was added. The tag scope was chosen by the held-out null (§10.2). Every cut is a closed class or a punctuation convention with a giver.
+No new hand-set threshold was added. The tag scope was chosen by the held-out null (§11.2). Every cut is a closed class or a punctuation convention with a giver.
 
-### 10.6 Open, next
+### 11.6 Open, next
 
 - **relations.js names auxiliaries, copulas and nouns** as predicates (230 refusals). Feed it the attested tags, or have it name the lexical head.
 - A **copular alternation** ("X is Y" → "Y is what X is"; or "According to X, …" for evaluative copulars) would take on the 54 cop refusals.
 - **Garden paths in the read-back:** "N backed by X was passed by Y". The read-back could use the same segmentation and agreement as the source reading, instead of one whole-sentence parse.
-- **Particles the parser does not label**, and connectives moved without their comma (§10.4).
+- **Particles the parser does not label**, and connectives moved without their comma (§11.4).
 - `readClause` wiring into the answer ladder, with `roles` built from the record, as the measure script does.
 
-### 10.7 How to run
+### 11.7 How to run
 
 ```bash
 node native/scripts/claim-realize-measure.mjs --out 3.0/callimachus-runs/permanent-dst [--show N] [--json FILE]
@@ -320,11 +373,11 @@ node native/scripts/eval-attested-tags.mjs --gold <en_ewt-ud-dev.conllu> --gold 
 node --test native/organs/claim-realize.test.mjs
 ```
 
-## 11. The house clause layer, elevated; and the same layer in another language (2026-10-14, session `eaadca`, amendment)
+## 12. The house clause layer, elevated; and the same layer in another language (2026-10-14, session `eaadca`, amendment)
 
-The user, on §10: "we've done clauses better before, elevate that" and "test it omnilingually". §10's own `segmentClauses` is **retired**. `claim-realize.js` now cuts clauses with the house clause layer, `adapters/text/clause-spans.js` (2026-09-23). Its `segmentClauses` export is a thin adapter over `clauseSpans`.
+The user, on §11: "we've done clauses better before, elevate that" and "test it omnilingually". §11's own `segmentClauses` is **retired**. `claim-realize.js` now cuts clauses with the house clause layer, `adapters/text/clause-spans.js` (2026-09-23). Its `segmentClauses` export is a thin adapter over `clauseSpans`.
 
-### 11.1 What `clause-spans.js` gained
+### 12.1 What `clause-spans.js` gained
 
 All of it is additive. Existing callers (`relations-gfp.js`, `gfp-relations-composed.js`, `received-vocabulary-relations.js`) pass no options and see one change only: gap 2.
 
@@ -333,11 +386,11 @@ All of it is additive. Existing callers (`relations-gfp.js`, `gfp-relations-comp
 | **Gap 2 closed: the fronted clause.** | A sentence-initial subordinator-opened segment ends at its comma ("Because it rained, \| the match…"). The main clause after it is the root, and the fronted clause carries `fronted: true` with the main clause as its parent. With `opts.posPrior` or `opts.rows`, a fronted **adjunct** is cut too. Its test: a verbless comma segment while the rest holds a predicate. Its opener: ADP, ADV, NUM or a digit by the prior, or, by the parse, nothing in it is the rest's subject. "On July 14, 2026, \| the House…" is cut; "The bill, the House said, passed." is not. |
 | **`opts.posPrior`** | A token is a predicate when its dominant tag is VERB or AUX. This licenses the fronted adjunct and a **coordinate cut after comma + coordinator** when the stretch after it holds a predicate. Pro-drop languages need this: no subject pronoun follows "y". |
 | **`opts.rows`** (a UD parse) | Every cut needs the closed class **and** the parse: two witnesses for a cut. A complement clause (ccomp, csubj, xcomp) is never cut. "after" tagged ADP ("repealed after two years") is not a subordinator. A coordinator cuts after a comma, or as the cc of a conjoined predicate, with a predicate on both sides. |
-| **Gap 1, "that", with a parse** | "That" cuts when the parse makes it the mark of an advcl or acl, or a relative pronoun. Without a parse it stays excluded (§11.3 measures why). |
+| **Gap 1, "that", with a parse** | "That" cuts when the parse makes it the mark of an advcl or acl, or a relative pronoun. Without a parse it stays excluded (§12.3 measures why). |
 | **`opts.opaqueQuotes`** | No cut inside paired quotation marks. |
 | **`closedClassesFromPrior(posPrior)`** | A language's coordinators (CCONJ-dominant forms) and subordinators (SCONJ-dominant), **derived** from the received UD POS prior `priors/pos-<iso639-3>.json`, with the prior's own giver. Relativizers and subject pronouns come back **empty, and it says so**: a POS prior has no PronType. Spanish (UD_Spanish-AnCora, train split) derives coordinators *y pero e o i sino ni u ó ou* and subordinators *como pues mientras aunque si cuando porque*. |
 
-### 11.2 Measured: clause boundaries against an independent witness, in two languages
+### 12.2 Measured: clause boundaries against an independent witness, in two languages
 
 `node native/scripts/clause-witness-agreement.mjs --out <record> --lang eng|spa [--parser] [--verbal] [--add-sub that|que]`:
 - The script is language-neutral. It replays a pinned record from `layers/`.
@@ -365,9 +418,9 @@ The **Spanish record** is `3.0/callimachus-runs/cambio-hora-es`:
 
 In both languages, each mode finds more boundaries than the one before it while witness agreement holds. The null falls as boundaries are added, so the margin over chance grows.
 
-**There is no Spanish parse arm.** There is no Spanish parser on disk: `pos-spa.json` is a tag-count prior, not a treebank. So the two-parse agreement of §10 cannot run in Spanish, and witness agreement is the agreement available there.
+**There is no Spanish parse arm.** There is no Spanish parser on disk: `pos-spa.json` is a tag-count prior, not a treebank. So the two-parse agreement of §11 cannot run in Spanish, and witness agreement is the agreement available there.
 
-### 11.3 Falsified: gap 1 by the prior alone
+### 12.3 Falsified: gap 1 by the prior alone
 
 Arm `--add-sub that|que`: the excluded form is added to the subordinators.
 
@@ -381,20 +434,20 @@ Arm `--add-sub that|que`: the excluded form is added to the subordinators.
 - **Spanish "que" as a closed-class boundary is falsified.** Its cuts are indistinguishable from random ones.
 - **English "that" costs witness agreement in both subsets.** It stays excluded without a parse.
 - The module's 2026-09-23 judgment was "too close to a three-way split to trust". It is now a measurement: pos-eng gives *that* SCONJ 994 / PRON 851 / DET 176, and AnCora gives *que* PRON 6,859 / SCONJ 6,348.
-- With a parse, "that" is decided per token (§11.1).
+- With a parse, "that" is decided per token (§12.1).
 
-### 11.4 Paraphrase yield, per language
+### 12.4 Paraphrase yield, per language
 
 **English (DST record, 560 witnessed positions, `claim-realize-measure.mjs`):**
 
 | | Paraphrased | Distinct sentences | Referent subjects |
 |---|---|---|---|
-| §10, own segmentation | 41 | 37 | 20 |
+| §11, own segmentation | 41 | 37 | 20 |
 | **with clause-spans.js** | **51** | **42** | **23** |
 
-The before was 25 (§10.3). Of those 25, 12 still pass and 13 are refused by §10's gates.
+The before was 25 (§11.3). Of those 25, 12 still pass and 13 are refused by §11's gates.
 
-Gained over §10, for example:
+Gained over §11, for example:
 - "The Florida Senate approved the Sunshine Protection Act in 2018."
 - "According to Scott, he hears from constituents."
 - "The House passed a bill with bipartisan support in July." (its relative clause disclosed as omitted)
@@ -409,11 +462,11 @@ Still poor, all lawful:
 3. Spanish prose laws: PL3 and PL4 are English conventions.
 
 An English claim told in Spanish would also need a bilingual lexicon. What already works in Spanish today, with no new data:
-- the clause layer (§11.2);
+- the clause layer (§12.2);
 - the relations.js witness;
 - the record, telling and answers.
 
-### 11.5 How to run
+### 12.5 How to run
 
 ```bash
 node native/scripts/clause-witness-agreement.mjs --out 3.0/callimachus-runs/permanent-dst --lang eng --parser [--verbal] [--add-sub that]

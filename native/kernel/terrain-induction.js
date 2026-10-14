@@ -7,6 +7,17 @@ Understanding.”
  * — the engineering record below, kept whole —
  */
 // Handle: Kanada — after the Vaisheshika atomist: a kind (samanya) is induced from what its instances share, nothing declared in advance. Amendment XVII.
+//
+// terrainInduction (renamed from kind-induction.js on 2026-10-14, the user's direction: "rename this … as terrainInduction", after
+// "remember the work we did on induction for ALL terrains"). THE MECHANISM IS UNCHANGED: a category is induced from what its members
+// share, against a null, with nothing declared in advance. The name now says what the members may be: the units of ANY terrain whose
+// features an evidence record carries (an entity, a link, a field, a frame…), not only an entity's Kind. Whether the induction EARNS
+// on a given terrain is measured elsewhere (native/eval/the-fold/falsification/terrain-arena-step*.mjs, which drive the inner inducer,
+// entity-kind-induction.js, directly), never assumed by this name. What THIS index emits is still Kind-tagged (EOKindProjection@1,
+// terrain: "Kind"); no other terrain's projection is produced here yet. Exported names carry "TerrainInduction" because the plain
+// indexTerrainEntries / snapshotTerrainState belong to terrain-state.js (re-exported from kernel/index.js).
+// Data contracts are kept as they were: the schema strings (EOKindEvidence@1, EOKindInductionIndex@1) and the record fields (kindKey,
+// kindSurface) are unchanged, so nothing persisted or vendored under the old shape breaks.
 
 import { createKindGraphStructureLedger } from "./kind-graph-structure.js";
 import { induceEntityKindCandidates } from "./entity-kind-induction.js";
@@ -109,18 +120,18 @@ function ingestExplicit(index, entry) {
   return true;
 }
 
-export function kindEvidence({ id, entityRef, evidenceType = "structural_feature", featureKey = null, featureValue = undefined, kindKey = null, kindSurface = null, sequencePosition = null, witness = null, witnessRefs = [], anchor = null, provenance = {} } = {}) {
-  if (!id || !entityRef) throw new TypeError("kindEvidence requires id and entityRef");
+export function terrainEvidence({ id, entityRef, evidenceType = "structural_feature", featureKey = null, featureValue = undefined, kindKey = null, kindSurface = null, sequencePosition = null, witness = null, witnessRefs = [], anchor = null, provenance = {} } = {}) {
+  if (!id || !entityRef) throw new TypeError("terrainEvidence requires id and entityRef");
   if (evidenceType === "explicit_classification" && !kindKey) throw new TypeError("explicit classification requires kindKey");
   if (evidenceType === "structural_feature" && !featureKey) throw new TypeError("structural feature evidence requires featureKey");
   return freeze({ schema: "EOKindEvidence@1", id, entityRef, evidenceType, featureKey, featureValue, kindKey, kindSurface, sequencePosition, standing: "witnessed_evidence", witnessed: true, witness, witnessRefs: freeze([...new Set(witnessRefsOf({ witness, witnessRefs }))]), anchor: anchor ? freeze({ ...anchor }) : null, provenance: freeze({ ...provenance }) });
 }
 
 function graphDescriptorEvidence(descriptor) {
-  return kindEvidence({ ...descriptor, evidenceType: "structural_feature" });
+  return terrainEvidence({ ...descriptor, evidenceType: "structural_feature" });
 }
 
-export function createKindInductionIndex(entries = [], options = {}) {
+export function createTerrainInductionIndex(entries = [], options = {}) {
   const index = {
     schema: "EOKindInductionIndex@1",
     options: freeze({
@@ -148,7 +159,7 @@ export function createKindInductionIndex(entries = [], options = {}) {
     earnedDiagnostics: freeze({ selectorNominations: 0, selectorAdmission: "disabled", earnedKinds: 0, withheldNoHoldout: 0, withheldNoConsequence: 0 }),
     graphStructure: createKindGraphStructureLedger({ depthThresholds: options.depthThresholds }), structuralDirty: false, snapshot: null, diagnostics: null,
   };
-  indexKindEntries(index, entries);
+  indexTerrainInductionEntries(index, entries);
   return index;
 }
 
@@ -169,8 +180,8 @@ function syncGraphStructure(index) {
   return changed;
 }
 
-export function indexKindEntries(index, entries = []) {
-  if (index?.schema !== "EOKindInductionIndex@1") throw new TypeError("indexKindEntries requires EOKindInductionIndex@1");
+export function indexTerrainInductionEntries(index, entries = []) {
+  if (index?.schema !== "EOKindInductionIndex@1") throw new TypeError("indexTerrainInductionEntries requires EOKindInductionIndex@1");
   let changed = 0;
   for (const entry of entries ?? []) if (ingestKindEvidence(index, entry)) changed += 1;
   if (index.graphStructure.ingest(entries) > 0) changed += syncGraphStructure(index);
@@ -333,7 +344,7 @@ function computeSnapshot(index) {
 // candidates are hypotheses, not findings: each is reported with its
 // releaseDecision standing, and by default a discovered basin is WITHHELD
 // (coherence alone earns nothing — the fold self-audit ruling). Consumers
-// that read kindDiagnostics() inherit the discipline with no per-surface
+// that read terrainInductionDiagnostics() inherit the discipline with no per-surface
 // change; a pipeline that has independently validated a candidate promotes
 // it upstream (earned) and it alone is released.
 function gateCandidate(candidate) {
@@ -350,24 +361,24 @@ function gateCandidate(candidate) {
   return freeze({ released: verdict.released, standing: verdict.standing, releaseWhy: verdict.why });
 }
 
-export function snapshotKindState(index, { ids = null } = {}) {
-  if (index?.schema !== "EOKindInductionIndex@1") throw new TypeError("snapshotKindState requires EOKindInductionIndex@1");
+export function snapshotTerrainInductionState(index, { ids = null } = {}) {
+  if (index?.schema !== "EOKindInductionIndex@1") throw new TypeError("snapshotTerrainInductionState requires EOKindInductionIndex@1");
   const snapshot = index.snapshot ?? computeSnapshot(index);
   if (!ids) return snapshot;
   const allowed = ids instanceof Set ? ids : new Set(ids);
   return freeze(snapshot.filter((projection) => allowed.has(projection.id) || allowed.has(projection.kindKey) || (projection.memberRefs ?? []).some((id) => allowed.has(id)) || (projection.evidenceRefs ?? []).some((id) => allowed.has(id))));
 }
 
-export function kindDiagnostics(index) {
-  if (index?.schema !== "EOKindInductionIndex@1") throw new TypeError("kindDiagnostics requires EOKindInductionIndex@1");
+export function terrainInductionDiagnostics(index) {
+  if (index?.schema !== "EOKindInductionIndex@1") throw new TypeError("terrainInductionDiagnostics requires EOKindInductionIndex@1");
   if (!index.diagnostics) computeSnapshot(index);
   return index.diagnostics;
 }
 
-export function kindCandidates(index) {
-  if (index?.schema !== "EOKindInductionIndex@1") throw new TypeError("kindCandidates requires EOKindInductionIndex@1");
+export function terrainInductionCandidates(index) {
+  if (index?.schema !== "EOKindInductionIndex@1") throw new TypeError("terrainInductionCandidates requires EOKindInductionIndex@1");
   if (index.structuralDirty || !index.diagnostics) computeSnapshot(index);
   return index.populationKindCandidates;
 }
 
-export function projectKinds(entries = [], options = {}) { return snapshotKindState(createKindInductionIndex(entries, options)); }
+export function projectTerrainInduction(entries = [], options = {}) { return snapshotTerrainInductionState(createTerrainInductionIndex(entries, options)); }

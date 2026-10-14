@@ -675,7 +675,7 @@ a verb.
 | assembly.js | check each operation's cell against its assembly's declared contract | DEF·Figure | reasoned | contractViolations, typed refusal rows |
 | assembly.js | re-zero every standing contribution of a refuted assembly, wholesale, named trigger | REC·Pattern | **self-declared**: "ONE REC (Pattern grain — the concession is the ∀-shaped act)" | nothing deleted, marked via projection |
 | atmosphere-math.js | read unresolved obligations as a factor graph, measure frustration/tension | EVA·Ground | **self-declared** domain+grain | terrain matches filename |
-| cast-ledger.js | project fold's individuated referents + mention counts into a canonical ledger | SIG·Figure | reasoned | parallels "project*→SIG" one grain down from projectKinds |
+| cast-ledger.js | project fold's individuated referents + mention counts into a canonical ledger | SIG·Figure | reasoned | parallels "project*→SIG" one grain down from projectTerrainInduction |
 | cast-ledger.js | check conformance and seal the ledger as boundary-crossable artifact | DEF·Figure | reasoned | wraps artifact.js's act |
 | completion.js | type an expected-but-unfilled role as a positive event rather than silence | NUL·Figure | **self-declared**: `ABSENCE_CELL = cellOf("NUL","Figure")` | VP-ellipsis/gapping/sluicing generalized |
 | completion.js | resolve the declared absence to a winning earlier-filled candidate | CON·Figure | **self-declared**: `RESOLUTION_CELL = cellOf("CON","Figure")` | reuses contest.js |
@@ -720,11 +720,11 @@ of `kernel/`:** five independent files converge there
 **CON·Figure is second**, shared verbatim across four files'
 self-declarations, all composing `contest.js::adjudicate`.
 
-### 5.8 `eoreader7/native/kernel/` — medium-agnostic mechanisms, batch 2 of 2 (kind-induction.js – witness.js)
+### 5.8 `eoreader7/native/kernel/` — medium-agnostic mechanisms, batch 2 of 2 (terrain-induction.js – witness.js)
 
 | Module | Verb | Cell | Basis | Note |
 |---|---|---|---|---|
-| kind-induction.js | sign a recurring kind candidate from a population's feature profile | SIG·Pattern | **registry-quoted** (capacities.js "kinds") | legacy earnedKindProjection is a second, disabled-by-default act, reasoned NUL·Pattern |
+| terrain-induction.js | sign a recurring kind candidate from a population's feature profile | SIG·Pattern | **registry-quoted** (capacities.js "kinds") | legacy earnedKindProjection is a second, disabled-by-default act, reasoned NUL·Pattern |
 | lexicon.js | — | — | not-applicable | pure projection/report over terrain counts |
 | network-standing.js | grant co-arriving pairs standing as an edge, licensed only by their own permutation null | CON·Pattern | **self-declared** (file header) | presence(low)/standing(high) kept apart |
 | network-standing.js | orient and polarize an already-standing pair via a three-null direction gate | CON·Figure | reasoned | directedEdges, runs only on already-admitted pairs |

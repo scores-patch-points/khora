@@ -93,7 +93,7 @@ if (replay) {
 }
 const store = Object.fromEntries(records.map((r) => [r.entry.id, r]));
 const record = readCorpus(records, { question, absences });
-const interp = interpret(record);
+const interp = interpret(record, { textOf: (id) => (store[id] ? new TextDecoder().decode(store[id].layers.text) : null) });
 record.collection = { seeds, rounds_run: searchN > 0 ? 1 : 0, stop: "budget: round 0 only (targeted, gap and saturation rounds are increment E, not built)" };
 
 // Fixity, live: refetch every source and check one span per source (its incipit) on both axes.
@@ -159,7 +159,7 @@ const tellingMd = [`# The record, told`, ``, `**Question:** ${question}`, ``,
 writeFileSync(join(out, "telling.md"), tellingMd);
 writeFileSync(join(out, "telling.txt"), plain);
 writeFileSync(join(out, "telling.addressed.json"), JSON.stringify({ pinax: told.entry, laws: LAWS, measures: M, refused: telling.refused, sentences: addressed, cells: telling.cells.map(({ sentences, ...c }) => ({ ...c, sentences: sentences?.length ?? 0 })) }, null, 1));
-writeFileSync(join(out, "telling.json"), JSON.stringify({ measures: M, interp: { facets: interp.facets.map((f) => ({ ...f, atoms: f.atoms.length })), grounds: interp.grounds, frames: interp.frames, kind_edges: interp.kind_edges } }, null, 1));
+writeFileSync(join(out, "telling.json"), JSON.stringify({ measures: M, interp: { facets: interp.facets.map((f) => ({ ...f, atoms: f.atoms.length })), kinds: interp.kinds, grounds: interp.grounds, atmosphere: interp.atmosphere, frames: interp.frames, paradigm: interp.paradigm, testimony: Object.values(interp.testimony).reduce((m, t) => ((m[t.case] = (m[t.case] ?? 0) + 1), m), {}) } }, null, 1));
 // ANSWERS: each --ask read by its language's grammar (NL → grammar → EOT), declared as a void, answered at every stage.
 const asks = all("--ask").length ? all("--ask") : [question];
 const answerMd = [];

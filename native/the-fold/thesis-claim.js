@@ -54,7 +54,7 @@
 // sentence out, re-checked through arrange.js's eligibility gate before it
 // replaces anything.
 
-import { kindEvidence, createKindInductionIndex, indexKindEntries } from "../kernel/kind-induction.js";
+import { terrainEvidence, createTerrainInductionIndex, indexTerrainInductionEntries } from "../kernel/terrain-induction.js";
 import { induceEntityKindCandidates } from "../kernel/entity-kind-induction.js";
 import { gfpClaim, claimFromTriple, generalizeClaims, caselessIdentity, holon } from "../kernel/gfp-claim.js";
 
@@ -80,15 +80,15 @@ export function thesisBasin(pool, winnerId, { population = "thesis-pool" } = {})
     for (const note of f.notes) {
       if (!note.label) continue;
       any = true;
-      entries.push(kindEvidence({
+      entries.push(terrainEvidence({
         id: `tb-${++seq}`, entityRef: f.pt.id, featureKey: "claim", featureValue: `${note.label}\u0001${note.polarity ?? "+"}\u0001${note.via ?? "obj"}`,
         sequencePosition: posOf.get(f.pt.id), witness: f.pt.id, anchor: { start: f.pt.span.start, end: f.pt.span.end },
       }));
     }
     if (any) noted += 1;
   }
-  const index = createKindInductionIndex();
-  indexKindEntries(index, entries);
+  const index = createTerrainInductionIndex();
+  indexTerrainInductionEntries(index, entries);
   const induced = induceEntityKindCandidates(index.entityFeatures, { population });
   const validated = induced.candidates.filter((c) => c.field?.stable === true && c.fallbackNomination !== true && c.memberCount >= 2);
   const candidate = validated.find((c) => c.memberRefs.includes(winnerId)) ?? null;

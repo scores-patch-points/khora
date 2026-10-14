@@ -107,7 +107,7 @@ export const KIND = assembly({
   layer: "lattice",
   cells: [],
   terrains: ["Kind"],
-  organs: ["native/kernel/kind-induction.js", "native/kernel/entity-kind-induction.js"],
+  organs: ["native/kernel/terrain-induction.js", "native/kernel/entity-kind-induction.js"],
   regimes: {},
   consumes: [],
   produces: [],
