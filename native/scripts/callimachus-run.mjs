@@ -15,6 +15,9 @@ import { makePinax, checkFixity, quoteOf, makeSpan, parseAddress, SIGLA } from "
 import { readCorpus, claimSheet, dossier, extractText, declaredOf, queriesFrom } from "../organs/callimachus.js";
 import { answerLadder, candidatesOf, seamsByStage } from "../organs/answer-ladder.js";
 import { pointedAtoms } from "../organs/pointer-match.js";
+import { readPerspectives, stanceAtoms, STANCE_FRAMES } from "../organs/perspectives.js";
+import { huntPlan } from "../organs/stance-probes.js";
+import { discoverOptions, spectrum as optionSpectrum } from "../organs/options.js";
 import { readWhom, restrictWhom, VOID_READER } from "../organs/whom.js";
 import { dmdWindow } from "../kernel/activation.js";
 import { readdirSync, statSync } from "node:fs";
@@ -188,7 +191,27 @@ for (const ask of asks) {
     if (!pointed && parserModel && record.sources.some((x) => x.role === "index" && x.index_trail?.length)) pointed = pointedAtoms(record, { model: parserModel });
     const qv = questionVoid(reading, record);
     const t = l === langs[0] ? telling : await cubeTelling(record, { slice, interp, fixity: verdicts, grammar: grammars[l] });
-    const { reader, ...lad } = await answerLadder(record, { question: qv, slice, grammar: grammars[l], telling: t, fixity: verdicts, whom, pointed });
+    // THE SPECTRUM (perspectives.js): holders × stances toward the question's topic, for a question that asks who holds a stance.
+    let perspectives = null, hunt = null;
+    if (parserModel && qv.reading?.relation?.lemma && qv.focus?.length) {
+      const names = record.entities.filter((e) => qv.focus.includes(e.id)).flatMap((e) => [e.name, ...(e.surfaces ?? [])]).filter(Boolean);
+      const texts = new Map(record.sources.filter((x) => x.role !== "index").map((x) => [x.id, readFileSync(join(out, "layers", `${x.id}.txt`), "utf8")]));
+      const actPrior = JSON.parse(readFileSync(join(here, "../priors/act-prior-en.json"), "utf8"));
+      // OPTIONS (options.js): the alternatives the pages themselves set against the topic, read in the same pass; exclusivity is nominated
+      // from their declarations and defeasible, the four corners are per option, and the cross-option reading is typed, never asserted.
+      const skipIdx = new Set(record.sources.filter((x) => x.role === "index").map((x) => x.id));
+      const first = readPerspectives(record, { model: parserModel, question: qv, texts, topicSurfaces: names, frames: STANCE_FRAMES, actPrior });
+      const opts = discoverOptions({ texts, model: parserModel, topicNames: first.topicNames, skip: skipIdx });
+      perspectives = opts.length ? readPerspectives(record, { model: parserModel, question: qv, texts, topicSurfaces: names, frames: STANCE_FRAMES, actPrior, extraTopics: opts.map((o) => ({ id: o.id, names: o.names })) }) : first;
+      perspectives.spectrum = optionSpectrum({ perspectives, options: opts });
+      hunt = huntPlan(perspectives, { topic: names[0] ?? ask });
+      // WHOM-SHAPED ROWS (the Whom session's contract): one row per position, claim {subj,pred,obj,polarity}, provenance {kind:"pinax",ref}
+      writeFileSync(join(out, "perspectives.json"), JSON.stringify({ schema: "Perspectives@1", frame: perspectives.frame, asked: perspectives.asked, rows: perspectives.positions.map((p, i) => ({ id: `pos_${i}`, address: p.span, text: p.text, side: p.pole === "+" ? "record" : "record", claim: { subj: p.referent ?? p.holder_display ?? p.holder, pred: perspectives.asked && p.pole === "+" ? perspectives.asked : (p.pred ?? null), obj: p.option, polarity: p.pole === "+" ? "+" : "-" }, via: p.via, basis: p.basis, standing: p.holder_standing ?? null, provenance: { kind: "pinax", ref: p.span } })), options: perspectives.spectrum, contested_holders: perspectives.contested_holders }, null, 1));
+    }
+    // the positions the asked pole states join the candidates, cited to their holders
+    const rec2 = perspectives ? { ...record, atoms: [...record.atoms, ...stanceAtoms(perspectives)] } : record;
+    const { reader, ...lad } = await answerLadder(rec2, { question: qv, slice, grammar: grammars[l], telling: t, fixity: verdicts, whom, pointed, perspectives });
+    if (perspectives) { lad.perspectives = { frame: perspectives.frame, options: perspectives.spectrum?.corners, exclusivity: perspectives.spectrum?.exclusivity?.map((e) => ({ b: e.b, status: e.status, declared_by_pages: e.declared_by_pages })), implied: perspectives.spectrum?.implied?.length ?? 0, contested_holders: perspectives.contested_holders, asked: perspectives.asked, sides: perspectives.sides, poles: perspectives.poles, aliases: perspectives.aliases, unresolved: perspectives.unresolved.length, refused: perspectives.refused.length, edges: perspectives.edges, frameCheck: perspectives.frameCheck, hunt }; }
     // The DMD window over the READER: the shallowest depth of recent thread that reproduces the whole-W fold (depth 0 = the void reader).
     // The ladder is async and dmdWindow's derive is not, so each depth's fold is computed in order until one agrees, then measured.
     let dmd = null;
