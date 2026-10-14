@@ -547,6 +547,49 @@ export const CAPACITIES = Object.freeze([
     fn: "whatIsThis",
     what: "what IS this giant hunk — the archon of artifact identity (Cuvier: 'show me a bone and I will reconstruct the beast'): a giant minified bundle's own structural bytes (module map, vendor stack, feature modules, endpoint literals, banners, declared names) reconstructed into an account of what the artifact IS, with every byte skipped disclosed and every claim byte-anchored. The same reconstruction also reads a GraphQL schema artifact (introspection JSON): type inventory, root operations, Connection pagination, mutation Payloads, enums, unions, domain vocabulary, mutation verbs. The admission fix that makes a 3.2 MB bundle step-able is adapters/code/encounters.js (codeEncounters, never a 1.8 MB 'sentence').",
   }),
+
+  // ── the ground audit (2026-10-13) ───────────────────────────────────────
+  // fold-rules/cube-map/ground-audit.mjs checked every Ground-grain row
+  // against the bytes (module resolves, function exported, non-test
+  // importers, tests, own cell stamp). All 15 registered Ground rows
+  // resolved; three real Ground-cell organs were absent from this table.
+  // They are registered here. Typing is taken from the module's own words
+  // where it stamps itself (segments.js:74) and otherwise reasoned per this
+  // table's hand-check discipline, never from the audit's guess; each row
+  // says what the audit found about its wiring so the registry stops
+  // implying more than the code does.
+  Object.freeze({
+    id: "find-thing",
+    terrain: "Field",
+    op: "SEG",
+    module: "organs/find-thing.js",
+    fn: "find",
+    what: "FIND the thing: the ask's own words cut the field of callables a session already has (names its held files declare or bind, a library it imports, the engine's own names) to the few that answer it, IDF-ranked, kind reported. Look cuts the repo's files; this cuts its callables. Born of the master's own rate (78% of added calls reach something that already existed) and Lovelace's advice to retrieve operations, not results. Lexical, names only; graded against another ask's words in cli/apprentice-assembled.mjs.",
+  }),
+  Object.freeze({
+    id: "lenient-receive",
+    terrain: "Link",
+    op: "CON",
+    module: "organs/lenient-receive.js",
+    fn: "receive",
+    what: "RECEIVE a patch the door's grammar refuses, by the declaration it names: an <<<ADD>>> block with no <<<FIND>>> is anchored by its own top-level declarations (same name replaces that span, a new name is appended, new imports go to the top), or a typed gap. Born of one lost answer — gemma2:2b wrote the right formatTotal in the wrong frame and the door kept nothing. Widens the receiver; never asks the model harder.",
+  }),
+  Object.freeze({
+    id: "look-repo",
+    terrain: "Link",
+    op: "SEG",
+    module: "organs/repo-look.js",
+    fn: "look",
+    what: "LOOK at the material before acting: the ask's own words cut against a repo, each word that lands a Link from a word to a place (path, line, UTF-8 byte span). Ask-named files first, then IDF-ranked candidates; no trail-following (a newest-first walk measured worse than search alone). Pure over an index; an ask with no word the repo holds is a typed gap. Graded arm: cli/apprentice-trail.mjs arm A, 38.3% reach within the master's hops on 1,647 in-scope units; equivalence to that arm and to real git grep is pinned in tests/repo-look.test.js (CENNINI.md, the movement; cell SEG·Figure)",
+  }),
+  Object.freeze({
+    id: "follow-through",
+    terrain: "Link",
+    op: "SYN",
+    module: "organs/follow-through.js",
+    fn: "finish",
+    what: "FINISH a first move: from the calls an edit added (before vs after), the support they imply — an import when a file the session holds (or an earlier session's binding) names where the callee lives, else a stub declaration — each a snippet with its anchor; a name the move did not call, a name already declared in the file, and a runtime global are typed gaps, never stubbed. Additions only, no search, one lesson (the binding lesson). Pure: no model, no network, no write. Graded arm: cli/apprentice-mover.mjs follow-through, Jaccard 0.360 vs a swapped seed's 0.010 on 1,179 in-scope units (p = 0.001); equivalence to that arm's propose + assemble is pinned in tests/follow-through.test.js (CENNINI.md, the movement; cell SYN·Figure)",
+  }),
 ]);
 
 const byId = new Map(CAPACITIES.map((c) => [c.id, c]));
