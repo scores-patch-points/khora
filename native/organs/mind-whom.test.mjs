@@ -84,3 +84,35 @@ test("M6: the gate is reported and the grain does not depend on it", () => {
   assert.equal(withMind.grain, withSpans.grain);
   assert.ok(withMind.mind.legs);
 });
+
+test("P1: the trail is the log: a span seen, then quoted-and-refused, keeps both acts in order and nothing is erased", () => {
+  const trail = accumulate([], [region[0].address], { turn: 1 });
+  const m = mindOf({ question: Q, region, trail, turns: ["No, that's wrong: Maria approved the freeze."], priors });
+  const w = m.whom.find((s) => s.address === region[0].address);
+  assert.equal(w.stance, "refuses", "the last act is the stance");
+  assert.deepEqual(w.acts.map((a) => a.kind), ["saw", "refuses"], "both acts, in order");
+  assert.ok(w.acts[0].seq < w.acts[1].seq);
+  // the reader's own witnessed belief is untouched and the log kept every act it was given
+  assert.ok(m.witnessedByReader.includes(claimKeyOf(region[0])));
+  const before = m.entries.length;
+  const again = mindOf({ question: Q, region, trail, turns: ["No, that's wrong: Maria approved the freeze."], priors });
+  assert.equal(again.entries.length, before);
+  assert.ok(Object.isFrozen(m.entries));
+});
+
+test("P2/P3: exact bytes are typed apart from claim-equivalent spans; P4: unresolved only if the universe lacks the address", () => {
+  const twin = U("Maria", "approved", "the freeze", "In March, Maria approved the freeze.", 1); // same claim, another sentence
+  const reg = [...region, twin];
+  const trail = accumulate([], [region[0].address], { turn: 1 });
+  const m = mindOf({ question: Q, region: reg, trail });
+  const exact = m.whom.filter((w) => w.exactBytes).map((w) => w.address);
+  assert.deepEqual(exact, [region[0].address]);
+  assert.equal(m.counts.claimEquivalent, 1);
+  assert.equal(m.whom.find((w) => w.address === twin.address).exactBytes, false);
+  // an address outside the region but inside the universe is not "unresolved"
+  const outside = U("Zed", "wrote", "a note", "Zed wrote a note.", 0);
+  const m2 = mindOf({ question: Q, region: reg, universe: [...reg, outside], trail: accumulate(trail, [outside.address], { turn: 2 }) });
+  assert.equal(m2.gaps.filter((g) => g.type === "trail_unresolved").length, 0);
+  const m3 = mindOf({ question: Q, region: reg, trail: accumulate(trail, ["px_nowhere/text@h#b0-1"], { turn: 2 }) });
+  assert.equal(m3.gaps.filter((g) => g.type === "trail_unresolved").length, 1);
+});

@@ -48,7 +48,8 @@ export const claimKeyOf = (u) => {
   return a ? `${a}|${objNorm(u.claim?.obj)}|${u.claim?.polarity === "-" ? "-" : "+"}` : null;
 };
 
-export function mindOf({ question = "", region = [], trail = [], turns = [], mind = null, priors = {} } = {}) {
+export function mindOf({ question = "", region = [], universe = null, trail = [], turns = [], mind = null, priors = {} } = {}) {
+  const uni = universe ?? region;
   const byKey = new Map();
   for (const u of region) { const k = claimKeyOf(u); if (k) (byKey.get(k) ?? byKey.set(k, []).get(k)).push(u); }
   const ops = [];
@@ -62,7 +63,8 @@ export function mindOf({ question = "", region = [], trail = [], turns = [], min
   }
 
   // 2. the trail: the reader knows the person was shown these
-  const { spans: trailSpans, unresolved } = whomFromTrail(trail, { universe: region });
+  const { spans: trailSpans, unresolved } = whomFromTrail(trail, { universe: uni });
+  const exactAddrs = new Set(trailSpans.map((s) => s.address));
   const trailBy = new Map();
   for (const s of trailSpans) {
     const k = claimKeyOf(s);
@@ -88,6 +90,7 @@ export function mindOf({ question = "", region = [], trail = [], turns = [], min
       const t = norm(us[0].text);
       if (t && hay.includes(` ${t} `)) {
         anchored = true;
+        for (const u of us) exactAddrs.add(u.address);
         if (turnBy.has(k)) continue;
         turnBy.set(k, { stance: op.payload.stance, ref: op.payload.witness ?? "turn" });
         const kind = ABOUT[op.payload.stance] ? op.payload.stance : "holds";
@@ -101,9 +104,18 @@ export function mindOf({ question = "", region = [], trail = [], turns = [], min
 
   // 4. fold at the person's frame (the organ's one operation) and project
   const entries = [...structure, ...ops].map((e, i) => (e.seq != null ? e : { ...e, seq: i + 1 }));
+  // THE TRAIL: the log keeps every act; the projection's one-belief-per-claim is a view. History is read from the log.
+  const actsBy = new Map();
+  for (const e of entries) {
+    const pl = e.payload;
+    if (!pl || pl.holder !== READER || !Array.isArray(pl.via) || !pl.via.includes(USER)) continue;
+    const a = unAbout(pl.claim);
+    if (!a) continue;
+    (actsBy.get(a.key) ?? actsBy.set(a.key, []).get(a.key)).push({ seq: e.seq, kind: a.kind, witness: pl.witness ?? null });
+  }
   const forWhom = userForWhom({ question });
   const holder = mind ? mindHolder(USER, mind) : USER;
-  const universe = foldUniverseAt(forWhom, { holder, entries });
+  const uFold = foldUniverseAt(forWhom, { holder, entries });
   const projected = projectPerspectives(entries);
   const model = mentalModel(projected, USER, READER);
   const common = commonGround(projected, READER, holder);
@@ -126,21 +138,23 @@ export function mindOf({ question = "", region = [], trail = [], turns = [], min
     seenKeys.add(a.key);
     const kind = tr ? tr.via : "seen";
     const ref = t?.ref ?? tr?.ref ?? "mind";
-    for (const u of us) whom.push({ ...u, side: "W", id: `mind-${u.id}`, stance, mindKey: a.key, provenance: { kind, ref } });
+    for (const u of us) whom.push({ ...u, side: "W", id: `mind-${u.id}`, stance, mindKey: a.key, exactBytes: exactAddrs.has(u.address), acts: actsBy.get(a.key) ?? [], provenance: { kind, ref } });
   }
   if (model.count === 0) gaps.push({ type: model.gap?.type ?? "no_attributed_beliefs", detail: model.gap?.detail ?? "the reader has attributed nothing to the person: unmodelled, which is not the person holding nothing" });
-  for (const g of universe.gaps) gaps.push({ type: g.type, detail: g.detail });
+  for (const g of uFold.gaps) gaps.push({ type: g.type, detail: g.detail });
 
   return {
     whom,
     model: { count: model.count, ofHoldsInTotal: model.ofHoldsInTotal, coverage: model.coverage },
-    legs: { admitted: universe.admitted, material: universe.gate.material, relevant: universe.gate.relevant, coherent: universe.gate.coherent, evaluable: universe.gate.coherentEvaluable, trajectory: universe.gate.trajectoryLength },
+    legs: { admitted: uFold.admitted, material: uFold.gate.material, relevant: uFold.gate.relevant, coherent: uFold.gate.coherent, evaluable: uFold.gate.coherentEvaluable, trajectory: uFold.gate.trajectoryLength },
     common: common.count,
     divergence: { asymmetric: div.asymmetric.length, conflicting: div.conflicting.length },
-    held: universe.perspective?.heldCount ?? 0,
+    held: uFold.perspective?.heldCount ?? 0,
     witnessedByReader: [...(projected.perspectives?.[READER]?.beliefs ?? [])].filter((b) => b.basis === BASIS.WITNESSED).map((b) => b.claim),
     gaps,
     unanchored,
     unmodelled: model.count === 0,
+    entries: Object.freeze(entries),
+    counts: { whom: whom.length, exactBytes: whom.filter((w) => w.exactBytes).length, claimEquivalent: whom.filter((w) => !w.exactBytes).length },
   };
 }
