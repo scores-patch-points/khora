@@ -18,3 +18,23 @@ native/eval/the-fold/scene/*.log.jsonl
 native/eval/the-fold/scene/republic-*.jsonl
 native/eval/the-fold/scene/historicity-witnesses.jsonl
 native/eval/the-fold/results/readings/
+
+# ── runtime data and eval artifacts: never source ───────────────────────
+# Claude Code / reader session transcripts
+documents/
+# ledgers, logs and per-session reader state
+*.jsonl
+native/moral-shadows/
+native/the-fold/speaker-models/
+# evaluation and reading artifacts: generated data stays out.
+# Code under native/eval (*.mjs/*.js/*.ts/*.py/*.sh/*.rb/*.m/*.java) stays in.
+native/eval/**
+!native/eval/**/
+!native/eval/**/*.mjs
+!native/eval/**/*.js
+!native/eval/**/*.ts
+!native/eval/**/*.py
+!native/eval/**/*.sh
+!native/eval/**/*.rb
+!native/eval/**/*.m
+!native/eval/**/*.java
