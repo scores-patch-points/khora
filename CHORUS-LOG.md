@@ -1149,3 +1149,11 @@ fast: 3 files · 13 affected tests pass · law: ok (WARN pre-existing duplicate 
 | Simon/Chekhov | — | opencode-doorway.mjs | noted | the door is imported by tests/opencode-doorway.test.mjs (5 pass, incl. junk fail-open) and mounted in proxy.mjs ahead of territory; inert in the running proxy until it restarts (same note as claude-code-doorway), and live-verified against the opencode-fold doorway client: first ask recorded, repeat ask recalled, title served locally, FOLD_OFF=1 and unreachable-door controls left the door untouched |
 clean: Dijkstra
 
+## 2026-10-15 — the opencode doorway folds to the ask: context kept precise, titles by rule, a savings ledger (branch claude-code-gate-and-apprentice, staged)
+fast: 2 files · 10 affected tests pass · law: ok (WARN pre-existing duplicate S17 S96 in native/READING-SPEC.md, not this diff)
+| lens | citation | file:line | verdict | one line |
+| Feynman | — | opencode-doorway.mjs:140 termsOf | noted | the 3-char term floor and the keep-budget only shape which windows stay; a wrong floor costs a kept line or an elision, never correctness, and the edges fold is the floor under it |
+| Dijkstra | — | opencode-doorway.mjs:130 STOPWORDS | noted | term extraction is ASCII/code-shaped and English-stopworded; the scope is declared in the code — a non-ASCII ask matches nothing and falls to the edges fold, never to a guess |
+| Kondo | — | tests/opencode-doorway.test.mjs:8 | fixed | the dead-mouth env line was a stray from the removed local-model path; deleted, and the test still proves the edges fold |
+clean: —
+
