@@ -117,6 +117,32 @@ test("coordinate composition rules resolve by cell without shadowing exact pairs
   assert.equal(absent.standing, "unknown");
 });
 
+// ── 4b. W2 — the universe coordinate: a license is scoped to its world ───
+// (REALITY-LEVELS-SPEC §11.2.) A composition tagged @world is not carried into
+// the stipulated universe; an untagged row is universal and applies anywhere.
+test("a universe-tagged composition does not cross universes; an untagged one is universal", () => {
+  const opts = { leftOp: "CON", leftGrain: "Pattern", rightOp: "INS", rightGrain: "Figure" };
+  const worldOnly = giveHyperlexiconAffordance(createHyperlexicon(), {
+    left: "cell:CON·Pattern@world",
+    right: "cell:INS·Figure@world",
+    giver: "the 1912 record",
+    meta: { chemistry: true, yields: "sank" },
+  });
+  assert.equal(compositionCoords(worldOnly, "a", "b", { ...opts, universe: "world" }).standing, "given", "the world license resolves in the world");
+  assert.equal(compositionCoords(worldOnly, "a", "b", { ...opts, universe: "world" }).meta.yields, "sank");
+  assert.equal(compositionCoords(worldOnly, "a", "b", { ...opts, universe: "stipulated" }).standing, "unknown", "the world license does not cross into the film's universe");
+  assert.equal(compositionCoords(worldOnly, "a", "b", opts).standing, "unknown", "no universe declared: the tagged row is not a universal license");
+
+  const withUniversal = giveHyperlexiconAffordance(worldOnly, {
+    left: "cell:CON·Pattern",
+    right: "cell:INS·Figure",
+    giver: "universal",
+    meta: { chemistry: true, yields: "always" },
+  });
+  assert.equal(compositionCoords(withUniversal, "a", "b", { ...opts, universe: "world" }).meta.yields, "sank", "the universe-tagged row still wins in its world");
+  assert.equal(compositionCoords(withUniversal, "a", "b", { ...opts, universe: "stipulated" }).meta.yields, "always", "an untagged row is universal and applies in any universe");
+});
+
 // ── 5. The generalized meta law: Pattern abstractions have a depth ladder ─
 test("withMetaMembership ladders a BOUND Pattern abstraction into its same-terrain meta at depth+1", () => {
   const r = createAbstractionRegistry();
