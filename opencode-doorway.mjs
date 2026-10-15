@@ -375,6 +375,24 @@ export function audit({ limit = 20 } = {}) {
     door: "opencode",
     schema: "fold-audit/1",
     audited: rows.length,
+    // The turns still open — what the model is being prompted with RIGHT NOW. The panel reads this to animate the
+    // fold processing a request while it streams, not just its settled record afterwards.
+    live: [...sessions.values()].map((turn) => ({
+      sessionID: turn.sessionID,
+      ask: turn.ask,
+      address: turn.address,
+      model: turn.model,
+      steps: turn.steps,
+      tools: [...turn.tools.values()].map((t) => ({ name: t.name, ok: t.ok })),
+      recalled: turn.recalled,
+      projectedChars: turn.projectedChars,
+      startedAt: turn.startedAt,
+      system: turn.system,
+      look: turn.look,
+      project: turn.project,
+      title: turn.title,
+      prompt: prompts.get(turn.sessionID)?.body ?? null,
+    })),
     turns: rows.map((r) => ({
       when: r.when,
       sessionID: r.sessionID,
@@ -412,6 +430,27 @@ function readBody(req) {
   });
 }
 
+// ── workspace (serve the repo the fold is reading, for the holodeck) ──────
+// The holodeck explores the CODEBASE, so the door serves it: a tree and file reads, scoped to FOLD_WORKSPACE.
+const WORKSPACE = process.env.FOLD_WORKSPACE ?? null;
+const WS = WORKSPACE ? path.resolve(WORKSPACE) : null;
+function safeJoin(rel) {
+  if (!WS) return null;
+  const target = path.resolve(WS, String(rel ?? ""));
+  return target === WS || target.startsWith(WS + path.sep) ? target : null;
+}
+function workspaceTree(rel = "") {
+  const dir = safeJoin(rel);
+  if (!dir) return null;
+  try {
+    const entries = fs.readdirSync(dir, { withFileTypes: true })
+      .filter((e) => e.name !== ".git" && e.name !== "node_modules")
+      .map((e) => ({ name: e.name, type: e.isDirectory() ? "dir" : "file", path: path.relative(WS, path.join(dir, e.name)) }))
+      .sort((a, b) => (a.type === b.type ? a.name.localeCompare(b.name) : a.type === "dir" ? -1 : 1));
+    return { root: WS, path: path.relative(WS, dir), entries };
+  } catch { return null; }
+}
+
 // ── prompt (verbatim audit) ───────────────────────────────────────────────
 // The client forwards the exact assembled request body it is about to send the
 // frontier. Stored verbatim, per session; served back by the audit. Nothing is
@@ -444,6 +483,22 @@ export async function route(req, res, { log = () => {} } = {}) {
   if (url === "/v1/hooks/opencode/meter" && req.method === "GET") {
     res.writeHead(200, { "content-type": "application/json" });
     res.end(JSON.stringify(meter(), null, 2));
+    return true;
+  }
+  if (url === "/v1/workspace/tree" && req.method === "GET") {
+    const rel = new URL(req.url, "http://x").searchParams.get("path") ?? "";
+    const tree = workspaceTree(rel);
+    res.writeHead(tree ? 200 : 404, { "content-type": "application/json" });
+    res.end(JSON.stringify(tree ?? { error: WORKSPACE ? "no such path" : "no workspace configured (set FOLD_WORKSPACE)" }));
+    return true;
+  }
+  if (url === "/v1/workspace/file" && req.method === "GET") {
+    const rel = new URL(req.url, "http://x").searchParams.get("path") ?? "";
+    const abs = safeJoin(rel);
+    let text = null;
+    try { if (abs) text = fs.readFileSync(abs, "utf8"); } catch { /* unreadable or missing */ }
+    res.writeHead(text === null ? 404 : 200, { "content-type": "application/json" });
+    res.end(JSON.stringify(text === null ? { error: "no such file" } : { path: rel, text }));
     return true;
   }
   if (url === "/v1/hooks/opencode/audit" && req.method === "GET") {
