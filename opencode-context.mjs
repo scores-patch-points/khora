@@ -74,7 +74,7 @@ export async function lookNote({ ask, workspace, limit = 5 } = {}) {
 }
 
 // ── houdini ──────────────────────────────────────────────────────────────
-const HOUDINI_PATH = process.env.FOLD_HOUDINI_PATH ?? path.resolve(HERE, "..", "the-fold-houdini-wired", "fold-chat-houdini.js");
+const HOUDINI_PATH = process.env.FOLD_HOUDINI_PATH ?? path.resolve(HERE, "the-fold-houdini-wired", "fold-chat-houdini.js");
 let houdiniModule = null;
 async function houdini() {
   if (houdiniModule) return houdiniModule;

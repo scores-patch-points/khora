@@ -69,7 +69,7 @@ test("a title is derived from the ask, by rule, with its estimate ledgered", asy
   assert.equal(after.pricedTitles, before.pricedTitles + 1);
 });
 
-const houdiniPresent = fs.existsSync(path.resolve(import.meta.dirname, "..", "..", "the-fold-houdini-wired", "fold-chat-houdini.js")) || Boolean(process.env.FOLD_HOUDINI_PATH);
+const houdiniPresent = fs.existsSync(path.resolve(import.meta.dirname, "..", "the-fold-houdini-wired", "fold-chat-houdini.js")) || Boolean(process.env.FOLD_HOUDINI_PATH);
 
 const exchanges = [
   { id: "m1", q: "Fix the pagination bug in the invoices list", a: "Fixed the off-by-one in invoices/list.js page offset.", files: ["invoices/list.js"], chars: 9000 },
