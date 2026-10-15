@@ -1,39 +1,41 @@
 // opencode-doorway.mjs — OPENCODE, AS A CLIENT OF THE ONE PIPELINE.
 //
 // The opencode-fold fork (the real opencode, rebased on upstream, plus one
-// internal plugin: packages/core/src/plugin/fold.ts) forwards four things
+// internal plugin: packages/core/src/plugin/fold.ts) forwards three things
 // here and carries no fold logic of its own:
 //
 //   context   a new ask is about to reach the frontier model. The doorway
-//             answers { system } — text the plugin appends to the system
-//             prompt — or nothing. Today that is the hunt-first recall: this
-//             exact ask was settled before; here is how it ended.
+//             answers, each from an organ that already exists:
+//               system   the hunt-first recall of an exact repeat ask
+//               look     LOOK (native/organs/repo-look.js): the places in the
+//                        workspace the ask's own words point at, as addresses
+//               project  HOUDINI (the-fold fold-chat-houdini.js): which earlier
+//                        exchanges ride, and the record that stands in for the
+//                        rest — need and moment, not position
+//             Adapters: opencode-context.mjs. Each fails open with a typed gap.
 //   title     opencode wants a session title. It is derived from the ask by
 //             rule (first words, cleaned), so the frontier is never consulted
 //             for it ({ title }). No model, local or otherwise.
-//   fold      a tool output is about to enter the frontier's context. The
-//             doorway answers { folded } — a smaller text the plugin swaps
-//             in. The fold is extractive (exact head, exact tail, exact
-//             counts between, cut on line boundaries): instant, deterministic,
-//             and honest about what it dropped. The chars kept out are the
-//             tokens saved.
 //   event     the turn's own events (steps, tools, text, usage, boundary).
 //             They are folded into a turn record and appended to the record
 //             at the turn's end. The record is what the fold learns from.
 //
-//   POST /v1/hooks/opencode          the four events above
+// RETIRED (2026-10-15): a line-level fold of single tool outputs lived here.
+// Replayed over 1,010 real tool outputs it lost the identifiers the model went
+// on to use as often as head/tail or random lines did at the same size
+// (scripts/opencode-fold-replay.mjs). The `fold` event now answers {}.
+//
+//   POST /v1/hooks/opencode          the events above
 //   GET  /v1/hooks/opencode/meter    what the frontier cost, first ask vs
 //                                    repeat, and what the fold kept out of it
 //
 // The savings ledger (state/savings.json) counts, honestly:
-//   foldedChars        chars the frontier never received because of folds
-//   savedTokensEst     foldedChars/4 — an estimate, disclosed as one
+//   projectedChars     chars of earlier exchanges left out of a request
+//   projectedTokensEst projectedChars/4 — GROSS, an estimate, disclosed as one
 //   titleTokensEst     ceil(ask chars/4) + 150 per title — the frontier title
 //                      request avoided, disclosed as an estimate
 //   savedUSD           accumulated at the priceIn the client sends from the
-//                      running model's own catalog entry, per fold and title
-// Only priced rows move savedUSD; an unpriced deployment keeps the token
-// count and says so.
+//                      running model's own catalog entry
 //
 // WHAT THIS DOES NOT DO YET (THE-ONE-TIME-TEACHER.md §XII, none of it built):
 // a record here is an INSTANCE — the ask, the plan the frontier took, how it
@@ -48,6 +50,7 @@ import path from "node:path";
 import crypto from "node:crypto";
 import http from "node:http";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { lookNote, projectHistory } from "./opencode-context.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const STATE = process.env.FOLD_OPENCODE_STATE ?? path.join(HERE, "state", "opencode");
@@ -67,14 +70,14 @@ export const addressOf = (ask) =>
   crypto.createHash("sha256").update(String(ask ?? "").toLowerCase().replace(/\s+/g, " ").trim()).digest("hex").slice(0, 16);
 
 const sessions = new Map(); // sessionID -> the open turn
-const counters = { titlesLocal: 0, titlesFailed: 0, recallsServed: 0, turnsRecorded: 0 };
+const counters = { titlesLocal: 0, titlesFailed: 0, recallsServed: 0, turnsRecorded: 0, looksServed: 0, looksDeclined: 0, projections: 0, projectionGaps: 0 };
 
 const blankTokens = () => ({ input: 0, output: 0, reasoning: 0, cacheRead: 0, cacheWrite: 0 });
 
 function turnFor(sessionID) {
   let turn = sessions.get(sessionID);
   if (!turn) {
-    turn = { sessionID, ask: "", address: null, model: null, steps: 0, tools: new Map(), answer: "", tokens: blankTokens(), cost: 0, startedAt: Date.now(), recalled: false, foldedChars: 0 };
+    turn = { sessionID, ask: "", address: null, model: null, steps: 0, tools: new Map(), answer: "", tokens: blankTokens(), cost: 0, startedAt: Date.now(), recalled: false, projectedChars: 0, system: null, look: null, project: null, title: null };
     sessions.set(sessionID, turn);
   }
   return turn;
@@ -99,11 +102,11 @@ function append(row) {
 // the running model's own catalog entry.
 const blankLedger = () => ({
   since: new Date().toISOString(),
-  folds: 0,
-  foldedChars: 0,
+  projections: 0,
+  projectedChars: 0, // chars of earlier exchanges left out of a request (Houdini's drop), measured on the exchange sizes the client sent
   titleTokensEst: 0, // ceil(ask chars/4) + 150 per title: the frontier title request avoided, disclosed as an estimate
   savedUSD: 0,
-  pricedFolds: 0,
+  pricedProjections: 0,
   pricedTitles: 0,
 });
 
@@ -126,113 +129,6 @@ function countPrice(ledger, chars, priceIn, pricedKey) {
   }
 }
 
-// ── fold ─────────────────────────────────────────────────────────────────
-// The ask decides what the frontier sees. Nothing here is a model: the ask's
-// content words are scored against the output's lines (rarer terms weigh
-// more), the best windows are kept in document order, and every elision is
-// receipted with its line range. What is not needed is not sent.
-const STOPWORDS = new Set([
-  "the", "and", "for", "with", "this", "that", "from", "what", "when", "where", "which", "how",
-  "does", "did", "you", "your", "are", "was", "were", "will", "would", "can", "could", "should",
-  "just", "about", "into", "only", "then", "than", "them", "they", "have", "has", "had", "not",
-  "but", "its", "read", "file", "here", "reply", "please", "tell", "give", "show", "find", "need",
-]);
-const FOLD_CONTEXT_LINES = Number(process.env.FOLD_CONTEXT_LINES ?? 3);
-const FOLD_KEEP_CHARS = Number(process.env.FOLD_KEEP_CHARS ?? 3500);
-
-// Terms are ASCII and code-shaped by design: opencode asks and the identifiers
-// in tool output are. A non-ASCII ask simply matches nothing and falls to the
-// edges fold — a declared scope, never a guess.
-const termsOf = (ask) =>
-  [...new Set(
-    String(ask ?? "").toLowerCase().split(/[^a-z0-9_$-]+/).filter((term) => term.length >= 3 && !STOPWORDS.has(term)),
-  )];
-
-// Head/tail: the fold when there is no ask to steer by, or when nothing in the
-// ask appears in the output. Exact edges, exact counts between, line cut.
-function edges(text, headChars = 3000, tailChars = 800) {
-  if (text.length <= headChars + tailChars + 200) return text;
-  const headCut = text.lastIndexOf("\n", headChars);
-  const head = headCut > 0 ? text.slice(0, headCut) : text.slice(0, headChars);
-  const tailStart = text.indexOf("\n", text.length - tailChars);
-  const tail = tailStart > 0 ? text.slice(tailStart) : text.slice(-tailChars);
-  const dropped = text.length - head.length - tail.length;
-  return `${head}\n… [fold: ${dropped} chars between this head and the tail are in the session record; re-read the exact range if needed] …\n${tail}`;
-}
-
-function selectForAsk(text, ask) {
-  const lines = text.split("\n");
-  const lower = lines.map((line) => line.toLowerCase());
-  const terms = termsOf(ask);
-  if (terms.length === 0) return null;
-  const df = new Map(terms.map((term) => [term, lower.filter((line) => line.includes(term)).length]));
-  if ([...df.values()].every((n) => n === 0)) return null;
-  const weight = (term) => 1 + Math.log((lines.length + 1) / (df.get(term) + 1));
-  const hits = lines
-    .map((_, index) => ({
-      index,
-      score: terms.reduce((score, term) => (lower[index].includes(term) ? score + weight(term) : score), 0),
-    }))
-    .filter((hit) => hit.score > 0)
-    .sort((a, b) => b.score - a.score);
-
-  const keep = new Set();
-  let chars = 0;
-  for (const hit of hits) {
-    const from = Math.max(0, hit.index - FOLD_CONTEXT_LINES);
-    const to = Math.min(lines.length - 1, hit.index + FOLD_CONTEXT_LINES);
-    for (let i = from; i <= to; i++) {
-      if (keep.has(i) || chars + lines[i].length + 1 > FOLD_KEEP_CHARS) continue;
-      keep.add(i);
-      chars += lines[i].length + 1;
-    }
-  }
-  if (keep.size === 0) return null;
-  // the head (imports, banner, first definitions) and the last lines are
-  // structural, not topic: keep them cheap, bounded so they cannot flood
-  for (let i = 0; i < Math.min(10, lines.length); i++) if (lines[i].length < 200) keep.add(i);
-  for (let i = Math.max(0, lines.length - 3); i < lines.length; i++) if (lines[i].length < 200) keep.add(i);
-
-  const order = [...keep].sort((a, b) => a - b);
-  const out = [];
-  let prev = -1;
-  for (const i of order) {
-    if (i > prev + 1) {
-      out.push(
-        prev === -1
-          ? `… [fold: lines 1–${i} elided — not needed for this ask; full output in the session record] …`
-          : `… [fold: lines ${prev + 2}–${i} elided] …`,
-      );
-    }
-    out.push(lines[i]);
-    prev = i;
-  }
-  if (prev < lines.length - 1) out.push(`… [fold: lines ${prev + 2}–${lines.length} elided] …`);
-  return out.join("\n");
-}
-
-function fold(text, ask) {
-  if (text.length <= FOLD_KEEP_CHARS + 200) return text;
-  return selectForAsk(text, ask) ?? edges(text);
-}
-
-function onFold(body) {
-  const text = String(body.text ?? "");
-  if (!text) return {};
-  const folded = fold(text, body.ask);
-  const savedBytes = Math.max(0, text.length - folded.length);
-  if (savedBytes === 0) return {};
-  const ledger = readLedger();
-  ledger.folds++;
-  ledger.foldedChars += savedBytes;
-  if (body.priceIn !== undefined) countPrice(ledger, savedBytes, body.priceIn, "pricedFolds");
-  const turn = sessions.get(body.sessionID);
-  if (turn) turn.foldedChars += savedBytes;
-  writeLedger(ledger);
-
-  return { folded, savedBytes };
-}
-
 // ── context ──────────────────────────────────────────────────────────────
 function recallNote(address) {
   const prior = readRecord().filter((r) => r.address === address && r.settled).at(-1);
@@ -247,17 +143,45 @@ function recallNote(address) {
   ].join("\n");
 }
 
-function onContext(body) {
+// The context event answers three things, each an existing organ:
+//   system   the hunt-first recall of an exact repeat ask (the record)
+//   look     LOOK: the places the ask's own words point at, as addresses
+//   project  HOUDINI: which earlier exchanges ride, and the record that stands
+//            in for the rest. Decided once per ASK; the client holds the
+//            decision for the turn's steps so the request prefix is stable.
+async function onContext(body) {
   const turn = turnFor(body.sessionID);
   turn.ask = String(body.ask ?? "");
   turn.address = addressOf(turn.ask);
   turn.model = body.model ?? turn.model;
-  if (!RECALL || !turn.ask.trim()) return {};
-  const note = recallNote(turn.address);
-  if (!note) return {};
-  turn.recalled = true;
-  counters.recallsServed++;
-  return { system: note };
+  const out = {};
+  if (RECALL && turn.ask.trim()) {
+    const note = recallNote(turn.address);
+    if (note) { turn.recalled = true; counters.recallsServed++; out.system = note; turn.system = note; }
+  }
+  if (!turn.ask.trim()) return out;
+
+  const [looked, projected] = await Promise.all([
+    body.workspace ? lookNote({ ask: turn.ask, workspace: body.workspace }) : { gap: "no-workspace" },
+    Array.isArray(body.exchanges) && body.exchanges.length ? projectHistory({ ask: turn.ask, exchanges: body.exchanges }) : { gap: "no-history" },
+  ]);
+  if (looked.note) { counters.looksServed++; out.look = looked.note; turn.look = looked.note; } else { counters.looksDeclined++; turn.look = looked.gap ?? null; }
+  if (projected.drop) {
+    const sizes = new Map(body.exchanges.map((e) => [e.id, e.chars ?? 0]));
+    const dropped = projected.drop.reduce((n, id) => n + (sizes.get(id) ?? 0), 0);
+    counters.projections++;
+    turn.projectedChars += dropped;
+    if (projected.drop.length) {
+      const ledger = readLedger();
+      ledger.projections++;
+      ledger.projectedChars += dropped;
+      if (body.priceIn !== undefined) countPrice(ledger, dropped, body.priceIn, "pricedProjections");
+      writeLedger(ledger);
+    }
+    out.project = { drop: projected.drop, keep: projected.keep, record: projected.record, droppedChars: dropped };
+    turn.project = { drop: projected.drop, keep: projected.keep, record: projected.record, droppedChars: dropped };
+  } else if (projected.gap !== "no-history") { counters.projectionGaps++; turn.project = { gap: projected.gap }; }
+  return out;
 }
 
 // ── title ────────────────────────────────────────────────────────────────
@@ -286,6 +210,7 @@ function onTitle(body) {
     return {};
   }
   counters.titlesLocal++;
+  try { turnFor(body.sessionID).title = title; } catch { /* a title with no live turn just records nothing */ }
   // The frontier would have read this ask plus instructions to write the
   // title; ask chars/4 + 150 is that request as an estimate, disclosed as one.
   const est = Math.ceil(ask.length / 4) + 150;
@@ -352,6 +277,7 @@ function finish(turn, endType) {
   sessions.delete(turn.sessionID);
   if (!turn.ask.trim() && turn.steps === 0) return; // a boundary with nothing under it
   const plan = [...turn.tools.values()].map((t) => ({ name: t.name, ok: t.ok }));
+  const settled = endType === "session.execution.succeeded" && plan.every((t) => t.ok !== false);
   const prior = turn.address ? readRecord().filter((r) => r.address === turn.address) : [];
   append({
     when: new Date().toISOString(),
@@ -365,9 +291,15 @@ function finish(turn, endType) {
     tokens: turn.tokens,
     cost: turn.cost,
     recalled: turn.recalled,
-    settled: endType === "session.execution.succeeded" && plan.every((t) => t.ok !== false),
+    // How this turn was PROMPTED: the notes the door injected and the cuts it
+    // made, kept verbatim so the audit can disclose them (never the model's words).
+    system: turn.system,
+    look: turn.look,
+    project: turn.project,
+    title: turn.title,
+    settled,
     repeat: prior.length, // how many times this exact ask was already bought
-    folded: turn.foldedChars, // chars this turn kept out of the frontier's context
+    projected: turn.projectedChars, // chars of earlier exchanges this turn kept out of the frontier's context
     kind: "instance", // never "skill": nothing here is compiled or held-trialed
     ms: Date.now() - turn.startedAt,
   });
@@ -392,26 +324,64 @@ export function meter() {
     titlesServedLocally: counters.titlesLocal,
     titlesFellThrough: counters.titlesFailed,
     recallsServed: counters.recallsServed,
+    looksServed: counters.looksServed,
+    looksDeclined: counters.looksDeclined,
+    projections: counters.projections,
     savings: {
       since: ledger.since,
       formulas: {
-        savedTokensEst: "foldedChars / 4",
+        projectedTokensEst: "projectedChars / 4 — GROSS: earlier exchanges left out of a request, not net of anything the model then had to re-open",
         titleTokensEst: "ceil(ask chars / 4) + 150, per title served",
         dollars: "estimated tokens × priceIn the client sent (the running model's own catalog price)",
       },
-      folds: ledger.folds,
-      foldedChars: ledger.foldedChars,
-      savedTokensEst: Math.round(ledger.foldedChars / 4),
+      projections: ledger.projections,
+      projectedChars: ledger.projectedChars,
+      projectedTokensEst: Math.round(ledger.projectedChars / 4),
       titleTokensEst: ledger.titleTokensEst,
       savedUSD: Number(ledger.savedUSD.toFixed(4)),
-      pricedFolds: ledger.pricedFolds,
+      pricedProjections: ledger.pricedProjections,
       pricedTitles: ledger.pricedTitles,
       note:
-        ledger.pricedFolds + ledger.pricedTitles > 0
+        ledger.pricedProjections + ledger.pricedTitles > 0
           ? "priced at the running model's own input price; estimate, not an invoice"
           : "no priced rows yet — the fork sends priceIn from the model in use",
     },
     unmeasured: ["held-out error", "decoy rejection", "necessity audit", "promotion with held trial"],
+  };
+}
+
+// ── audit ────────────────────────────────────────────────────────────────
+// How the last turns were PROMPTED, disclosed: the recall note the door
+// injected, the addresses LOOK pointed at, the title it derived by rule, the
+// cut HOUDINI made (dropped / kept / the record that stood in), beside what
+// the frontier then did with it. Read-only; nothing here is the model's own
+// words, and nothing is generated for display.
+export function audit({ limit = 20 } = {}) {
+  const rows = readRecord().slice(-limit).reverse();
+  return {
+    door: "opencode",
+    schema: "fold-audit/1",
+    audited: rows.length,
+    turns: rows.map((r) => ({
+      when: r.when,
+      sessionID: r.sessionID,
+      ask: r.ask,
+      model: r.model,
+      address: r.address,
+      recall: r.recalled ? r.system ?? "<fold-recall> (note not recorded on this row)" : null,
+      look: r.look ?? null,
+      project: r.project ?? null,
+      title: r.title ?? null,
+      plan: r.plan ?? [],
+      steps: r.steps ?? 0,
+      settled: !!r.settled,
+      repeat: r.repeat ?? 0,
+      projectedChars: r.projected ?? 0,
+      tokens: r.tokens ?? null,
+      cost: r.cost ?? 0,
+      answer: r.answer ?? "",
+      kind: r.kind ?? "instance",
+    })),
   };
 }
 
@@ -430,7 +400,7 @@ export async function answer(body) {
   switch (body?.event) {
     case "context": return onContext(body);
     case "title": return onTitle(body);
-    case "fold": return onFold(body);
+    case "fold": return {}; // retired: the line-level fold measured equal to its null (see the replay script)
     case "event": return onEvent(body);
     default: return {};
   }
@@ -445,10 +415,16 @@ export async function route(req, res, { log = () => {} } = {}) {
     res.end(JSON.stringify(meter(), null, 2));
     return true;
   }
+  if (url === "/v1/hooks/opencode/audit" && req.method === "GET") {
+    const limit = Number(new URL(req.url, "http://x").searchParams.get("limit")) || 20;
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify(audit({ limit: Math.min(Math.max(limit, 1), 200) }), null, 2));
+    return true;
+  }
   if (url !== "/v1/hooks/opencode") return false;
   if (req.method === "GET") {
     res.writeHead(200, { "content-type": "application/json" });
-    res.end(JSON.stringify({ door: "opencode", events: ["context", "title", "fold", "event"] }));
+    res.end(JSON.stringify({ door: "opencode", events: ["context", "title", "event"] }));
     return true;
   }
   if (req.method !== "POST") return false;
