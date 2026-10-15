@@ -66,6 +66,35 @@ test("an ambiguous anchor says so, with candidates, not a verdict", () => {
   assert.match(page, /candidates: RMS Lusitania/);
 });
 
+test("the induced key parameters render with their standing; for-whom is shown, never erased", () => {
+  const page = profileCard({ id: "J. Bruce Ismay" }, {
+    reality: { id: "J. Bruce Ismay", realityKind: "real", attested: [], anchor: { found: false } },
+    rows: [
+      { rel: "titled", star: "★", standing: "one at a time", values: "managing director → chairman" },
+      { rel: "aboard", star: "★", standing: "fixed", values: "RMS Titanic ×7" },
+      { rel: "typed", star: "", standing: "", values: "person" },
+    ],
+    forWhom: { giver: "the reader", question: "who was aboard Titanic", ground: "corpus" },
+  });
+  assert.match(page, /WHAT THE SOURCES SAY/);
+  assert.match(page, /★ titled/);
+  assert.match(page, /one at a time/);
+  assert.match(page, /RMS Titanic ×7/);
+  assert.match(page, /FOR WHOM/);
+  assert.match(page, /giver the reader/);
+  assert.match(page, /who was aboard Titanic/);
+});
+
+test("no rows and no for-whom renders exactly as before; a no-kind row still renders", () => {
+  const bare = profileCard({ id: "x" }, { reality: { id: "x", realityKind: "real", attested: [], anchor: { found: false } } });
+  assert.ok(!/FOR WHOM/.test(bare), "no frame given, no FOR WHOM block");
+  assert.ok(!/WHAT THE SOURCES SAY/.test(bare), "no claims and no rows, no section");
+  const withRow = profileCard({ id: "x" }, { reality: { id: "x", realityKind: "real", attested: [], anchor: { found: false } }, rows: [{ rel: "typed", star: "", standing: "", values: "other" }] });
+  assert.match(withRow, /WHAT THE SOURCES SAY/);
+  assert.match(withRow, /typed/);
+  assert.match(withRow, /other/);
+});
+
 test("the index groups things by reality-kind; the legend names the badges", () => {
   const idx = profileIndex({ title: "Titanic, 1912", things: [{ name: "Titanic", realityKind: "real" }, { name: "Jack Dawson", realityKind: "fictional" }] });
   assert.match(idx, /● real/);
