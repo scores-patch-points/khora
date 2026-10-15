@@ -76,12 +76,18 @@ import { spawnSync } from "node:child_process";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { lookNote, projectHistory } from "./opencode-context.mjs";
 import { archonNote } from "./opencode-archons.mjs";
+import { connect as matrixConnect } from "./fold-matrix.mjs";
+import { connect as driveConnect } from "./fold-gdrive.mjs";
 import { perceiveMedia, probeBackends, PERCEIVE_VERSION } from "./khora/perceive/local.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const STATE = process.env.FOLD_OPENCODE_STATE ?? path.join(HERE, "state", "opencode");
 const RECORD = path.join(STATE, "record.jsonl");
 const LEDGER = path.join(STATE, "savings.json");
+// The record also rides to the account's Matrix room as EODB operators (fold-matrix.mjs)
+// once `login` has run on this box; before that, or offline, it is purely local.
+const matrix = matrixConnect({ state: STATE });
+const drive = driveConnect({ state: STATE }); // the same record, sealed, in Google Drive's hidden app folder
 const RECALL = (process.env.FOLD_RECALL ?? "1") !== "0";
 // Step 1 of the doorway plan (archon-aware context): FOLD_ARCHONS=1 injects
 // the archon ground note into the context answer. Default 0 is shadow — the
@@ -135,7 +141,10 @@ function readRecord() {
   } catch { return []; }
 }
 
+let appended = null;
+const lastRow = () => appended;
 function append(row) {
+  appended = row;
   fs.mkdirSync(STATE, { recursive: true });
   fs.appendFileSync(RECORD, JSON.stringify(row) + "\n");
 }
@@ -364,6 +373,8 @@ function finish(turn, endType) {
     ms: Date.now() - turn.startedAt,
   });
   counters.turnsRecorded++;
+  try { if (matrix.enqueue(lastRow())) matrix.push().catch(() => {}); } catch { /* the record is already local */ }
+  try { if (drive.enqueue(lastRow())) drive.push().catch(() => {}); } catch { /* the record is already local */ }
 }
 
 // ── meter ────────────────────────────────────────────────────────────────
@@ -815,6 +826,29 @@ export async function route(req, res, { log = () => {} } = {}) {
     if (!job) { res.writeHead(404, { "content-type": "application/json" }); res.end(JSON.stringify({ error: "no such job" })); return true; }
     res.writeHead(200, { "content-type": "application/json" });
     res.end(JSON.stringify({ status: job.status, projection: job.projection, job: { satisfaction: job.satisfaction } }));
+    return true;
+  }
+  if (url.startsWith("/v1/hooks/opencode/matrix") && ["GET", "POST"].includes(req.method)) {
+    const act = url.slice("/v1/hooks/opencode/matrix".length).replace(/^\//, "") || "status";
+    let b = {};
+    if (req.method === "POST") { try { b = JSON.parse((await readBody(req)) || "{}"); } catch { /* empty */ } }
+    let out;
+    try {
+      out = act === "login" ? await matrix.login({ base: b.base, user: b.user, password: b.password ?? process.env.FOLD_MATRIX_PASSWORD })
+        : act === "pull" ? await matrix.pull() : act === "push" ? await matrix.push()
+        : act === "logout" ? matrix.logout() : matrix.status();
+    } catch (e) { out = { ok: false, gap: "matrix-unreachable", why: e.message }; }
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify(out));
+    return true;
+  }
+  if (url.startsWith("/v1/hooks/opencode/drive") && ["GET", "POST"].includes(req.method)) {
+    const act = url.slice("/v1/hooks/opencode/drive".length).replace(/^\//, "") || "status";
+    let out;
+    try { out = act === "login" ? await drive.login() : act === "pull" ? await drive.pull() : act === "push" ? await drive.push() : act === "logout" ? drive.logout() : drive.status(); }
+    catch (e) { out = { ok: false, gap: "drive-unreachable", why: e.message }; }
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify(out));
     return true;
   }
   if (url === "/v1/hooks/opencode/audit" && req.method === "GET") {
