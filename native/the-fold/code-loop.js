@@ -779,7 +779,7 @@ export function buildVoidPatch(unit, body) {
  *  real draws MOVES the chase to the next stub-bearing file, and only when no
  *  other file has a void is the wall TERMINAL — disclosed, never a budget
  *  burn. Returns done, rounds (the disclosed audit trail), finalTestOutput. */
-export async function runVoidLoop({ sessionId, userId = null, model, task, workspace, locatedFile = null, files = null, testCommand, maxRounds = DEFAULT_MAX_ROUNDS, testTimeoutMs = DEFAULT_TEST_TIMEOUT_MS, caller = null, signal = null, turn = defaultTurn, kelsenFor = null, candidates = 3, logFile = null, huntRoots = [], huntWeb = false, contextFold = false }) {
+export async function runVoidLoop({ sessionId, userId = null, model, task, workspace, locatedFile = null, files = null, testCommand, maxRounds = DEFAULT_MAX_ROUNDS, testTimeoutMs = DEFAULT_TEST_TIMEOUT_MS, caller = null, signal = null, turn = defaultTurn, kelsenFor = null, candidates = 3, logFile = null, huntRoots = [], huntWeb = false, contextFold = false, onRec = null }) {
   const root = path.resolve(workspace);
   const fileList = (files && files.length ? files : [locatedFile ? [locatedFile] : listFiles(root)]).flat().filter(Boolean);
   const draws = Math.max(1, Math.floor(candidates ?? 1));
@@ -799,8 +799,27 @@ export async function runVoidLoop({ sessionId, userId = null, model, task, works
   if (logFile) {
     try { seq = fs.readFileSync(logFile, "utf8").split("\n").filter(Boolean).length; } catch { seq = 0; }
   }
+  // REC SINK (2026-10-15): an optional caller hook so a kept or reverted
+  // draw also lands in a shared record (opencode-rec.mjs: EOT block on exit
+  // 0, VoidLog line either way). Only rounds the real declared test judged
+  // reach it; a carried body (kept on disk while the suite is still red elsewhere) goes
+  // as `provisional`: logged, never a block, until the caller promotes it.
+  // A sink that throws is a finding, never a kill, like the log append.
+  const toRec = (r) => {
+    if (!onRec || !r.applied || typeof r.testExitCode !== "number" || !r.target) return;
+    try {
+      onRec({
+        provisional: !!r.carried, action: r.action ?? null, by: r.by ?? null,
+        referent: `${r.file ?? "?"}:${r.target}`,
+        delta: r.basis ?? `${r.action ?? "DEF"} ${r.mode ?? ""} ${r.target}`.replace(/\s+/g, " ").trim(),
+        check: testCommand, exitCode: r.testExitCode, address: r.address ?? r.file ?? "",
+        source: r.source ?? r.by ?? "mouth", model: r.model ?? model,
+      });
+    } catch (e) { console.error(`[void-loop] rec sink failed: ${e.message}`); }
+  };
   const push = (r) => {
     rounds.push(r);
+    toRec(r);
     seq += 1;
     if (logFile) {
       try {

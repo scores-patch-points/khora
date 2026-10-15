@@ -786,12 +786,28 @@ async function onChase(body, opts = {}) {
   const { runVoidLoop } = await import("./native/the-fold/code-loop.js");
   const maxRounds = Math.min(6, Math.max(1, Math.floor(Number(body.maxRounds) || 3)));
   const result = await runVoidLoop({
-    sessionId: agent, model: String(body.model ?? "qwen2.5-coder:1.5b"), task: String(body.ask ?? "fill the stubs so the test passes"),
+    sessionId: agent, model: String(body.model ?? process.env.FOLD_CHASE_MODEL ?? "qwen2.5-coder:1.5b"), task: String(body.ask ?? "fill the stubs so the test passes"),
     workspace, testCommand, maxRounds, candidates: 1, ...(opts.turn ? { turn: opts.turn } : {}),
     onRec: recSink({ task, agent }),
   });
+  // Suite green: every unit the loop carried on disk is now verified by the same real test.
+  // Promote the latest carried draw per referent into the record (source says why).
+  if (result.done) {
+    const latest = new Map();
+    for (const r of result.rounds ?? []) if (r.applied && r.carried && r.target) latest.set(`${r.file ?? "?"}:${r.target}`, r);
+    const have = new Set(foldRecord({ task }).map((b) => b.referent));
+    for (const [referent, r] of latest) {
+      if (have.has(referent)) continue;
+      recChange({ task, agent, referent, delta: r.basis ?? `${r.action ?? "DEF"} ${r.target}`, check: testCommand, exitCode: 0, address: r.address ?? r.file ?? "", source: "suite-green", model: r.model ?? String(body.model ?? process.env.FOLD_CHASE_MODEL ?? "") });
+    }
+  }
+  // The cheap rungs first, disclosed: of the draws the real test judged, how many the box or
+  // the field hunt supplied (no model) vs the mouth. Reported, never a quality score.
+  const judged = (result.rounds ?? []).filter((r) => r.applied && typeof r.testExitCode === "number");
+  const viaMouth = judged.filter((r) => !["BOX", "HUNT"].includes(r.action)).length;
+  const mouthShare = judged.length ? viaMouth / judged.length : null;
   return {
-    ok: true, done: !!result.done, gap: result.gap?.kind ?? null,
+    ok: true, done: !!result.done, gap: result.gap?.kind ?? null, judged: judged.length, mouthShare,
     rounds: (result.rounds ?? []).map((r) => ({ action: r.action ?? null, by: r.by ?? null, target: r.target ?? null, applied: r.applied ?? null, reverted: r.reverted ?? null, testExitCode: r.testExitCode ?? null })),
     record: foldRecord({ task }).map((b) => ({ referent: b.referent, id: b.id })),
   };

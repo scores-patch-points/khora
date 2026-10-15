@@ -50,7 +50,7 @@ export function recNote({ task, limit = 8 } = {}) {
 const tail = (s, n = 400) => { const t = String(s ?? "").trim(); return t.length > n ? t.slice(-n) : t; };
 
 /** DEF -> EVA -> REC. Returns { ok, kept, id, judge, exitCode, tail } or { ok:false, gap }. */
-export function rec({ task, agent, referent, delta, check, cwd, exitCode, address = "", source = "box", model = "box", now = Date.now() } = {}) {
+export function rec({ task, agent, referent, delta, check, cwd, exitCode, address = "", source = "box", model = "box", provisional = false, action = null, by = null, now = Date.now() } = {}) {
   const f = files(task);
   if (!f || !/^[\w.-]+$/.test(String(agent ?? ""))) return { ok: false, gap: "bad-address" };
   if (!REFERENT.test(String(referent ?? "")) || !oneLine(delta)) return { ok: false, gap: "bad-referent" };
@@ -64,13 +64,14 @@ export function rec({ task, agent, referent, delta, check, cwd, exitCode, addres
   fs.mkdirSync(f.dir, { recursive: true });
   const prior = fold({ task }).find((b) => b.referent === referent);
   const id = `e${now.toString(36)}-${agent}`;
-  const kept = exit === 0;
+  // provisional: the draw is on disk but the suite is red elsewhere (carried). Logged, never a block.
+  const kept = exit === 0 && !provisional;
   let seq = 0;
   try { seq = fs.readFileSync(f.log, "utf8").split("\n").filter(Boolean).length; } catch { /* first line */ }
   fs.appendFileSync(f.log, JSON.stringify({
-    seq, schema: "VoidLog@1", action: "REC", target: referent, by: agent, judge, testExitCode: exit,
-    verdict: kept ? "green" : "reverted", source, model, address, id: kept ? id : null,
-    basis: oneLine(delta).slice(0, 300), dissent: kept ? "" : tail(output || `check exited ${exit}`),
+    seq, schema: "VoidLog@1", action: action ?? "REC", target: referent, by: by ?? agent, agent, judge, testExitCode: exit,
+    verdict: kept ? "green" : provisional ? "carried" : "reverted", source, model, address, id: kept ? id : null,
+    basis: oneLine(delta).slice(0, 300), dissent: kept ? "" : provisional ? "carried: suite still red elsewhere" : tail(output || `check exited ${exit}`),
   }) + "\n");
   if (kept) {
     if (!fs.existsSync(f.eot)) fs.appendFileSync(f.eot, HEADER);
@@ -79,12 +80,12 @@ export function rec({ task, agent, referent, delta, check, cwd, exitCode, addres
       `### ${id} · ${date} · referent: \`${referent}\``,
       `supersedes: ${prior?.id ?? "none"}`,
       `+ ${oneLine(delta)}`,
-      `+ source: ${source}${address ? `, address: ${address}` : ""}, judge: ${judge}, model: ${model}`,
+      `+ source: ${source}${address ? `, address: ${address}` : ""}, rung: ${action ?? "REC"}, judge: ${judge}, model: ${model}`,
       `check: \`${oneLine(check)}\``,
       `◼ EOT`, "", "",
     ].join("\n"));
   }
-  return { ok: true, kept, id: kept ? id : null, judge, exitCode: exit, tail: kept ? "" : tail(output || `check exited ${exit}`) };
+  return { ok: true, kept, provisional, id: kept ? id : null, judge, exitCode: exit, tail: kept || provisional ? "" : tail(output || `check exited ${exit}`) };
 }
 
 /** An `onRec` sink for runVoidLoop (native/the-fold/code-loop.js): every draw the real test judged lands in the task's record. */
