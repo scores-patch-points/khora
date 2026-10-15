@@ -71,6 +71,7 @@ const ALLOWLIST = new Set([
   "native/the-fold/ground-selector.js", // comment citing the retired host/population.js measurement
   "proxy-runner.mjs", // two comments recording past thresholds and the retired exact-term ladder
   "scripts/kleene-up.mjs", // the sweep's own skip-list of retired/moved directories
+  "native/docs/REALITY-LEVELS-SPEC.md", // provenance table naming the frozen provider's holon_level as the "holon level" capability source (prose, not a live read)
 ]);
 
 // Historical result artifacts: dated postmortems recording what a past run's
