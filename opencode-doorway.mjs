@@ -72,6 +72,19 @@ export const addressOf = (ask) =>
 const sessions = new Map(); // sessionID -> the open turn
 const counters = { titlesLocal: 0, titlesFailed: 0, recallsServed: 0, turnsRecorded: 0, looksServed: 0, looksDeclined: 0, projections: 0, projectionGaps: 0 };
 
+// The EXACT assembled frontier prompts, verbatim, for the audit: what the model
+// was actually sent. Kept per session (last one wins) and persisted. Never
+// vectorized, never ranked, never summarized — the bytes the frontier received.
+const PROMPTS = path.join(STATE, "prompts.json");
+const prompts = new Map();
+function loadPrompts() {
+  try { for (const [k, v] of Object.entries(JSON.parse(fs.readFileSync(PROMPTS, "utf8")))) prompts.set(k, v); } catch { /* none yet */ }
+}
+function savePrompts() {
+  try { fs.mkdirSync(STATE, { recursive: true }); fs.writeFileSync(PROMPTS, JSON.stringify(Object.fromEntries(prompts))); } catch { /* never blocks a turn */ }
+}
+loadPrompts();
+
 const blankTokens = () => ({ input: 0, output: 0, reasoning: 0, cacheRead: 0, cacheWrite: 0 });
 
 function turnFor(sessionID) {
@@ -381,6 +394,10 @@ export function audit({ limit = 20 } = {}) {
       cost: r.cost ?? 0,
       answer: r.answer ?? "",
       kind: r.kind ?? "instance",
+      // The verbatim request the frontier received for this session (last one
+      // captured), beside the door's own decisions. Bytes, never summaries.
+      prompt: prompts.get(r.sessionID)?.body ?? null,
+      promptModel: prompts.get(r.sessionID)?.model ?? null,
     })),
   };
 }
@@ -395,12 +412,26 @@ function readBody(req) {
   });
 }
 
+// ── prompt (verbatim audit) ───────────────────────────────────────────────
+// The client forwards the exact assembled request body it is about to send the
+// frontier. Stored verbatim, per session; served back by the audit. Nothing is
+// embedded, scored, or rewritten.
+function onPrompt(body) {
+  const sessionID = body?.sessionID;
+  if (!sessionID) return {};
+  prompts.set(sessionID, { when: new Date().toISOString(), model: body.model ?? null, body: String(body.body ?? "") });
+  while (prompts.size > 50) prompts.delete(prompts.keys().next().value);
+  savePrompts();
+  return {};
+}
+
 export async function answer(body) {
   if (process.env.FOLD_DOOR_DEBUG) console.error(`door ← ${body?.event} ${body?.type ?? ""} ${body?.sessionID ?? ""}`);
   switch (body?.event) {
     case "context": return onContext(body);
     case "title": return onTitle(body);
     case "fold": return {}; // retired: the line-level fold measured equal to its null (see the replay script)
+    case "prompt": return onPrompt(body);
     case "event": return onEvent(body);
     default: return {};
   }
