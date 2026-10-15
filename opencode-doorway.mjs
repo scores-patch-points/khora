@@ -12,6 +12,10 @@
 //               project  HOUDINI (the-fold fold-chat-houdini.js): which earlier
 //                        exchanges ride, and the record that stands in for the
 //                        rest — need and moment, not position
+//               archons  the archon ground note (opencode-archons.mjs):
+//                        matchArchons over the ask, dossier-gated, capped.
+//                        Recorded always; injected only when FOLD_ARCHONS=1
+//                        (default 0 is shadow).
 //             Adapters: opencode-context.mjs. Each fails open with a typed gap.
 //   title     opencode wants a session title. It is derived from the ask by
 //             rule (first words, cleaned), so the frontier is never consulted
@@ -19,6 +23,18 @@
 //   event     the turn's own events (steps, tools, text, usage, boundary).
 //             They are folded into a turn record and appended to the record
 //             at the turn's end. The record is what the fold learns from.
+//   perceive  a media attachment as bytes, before the frontier is sent it.
+//   shadow    observe-only draft capture for the draft-lint shadow trial
+//             (the-fold/docs/DRAFT-LINT-PREREG.md): full draft text and full
+//             tool I/O, appended to shadow.jsonl. Local-only, never shipped,
+//             never scored, never injected anywhere. The fork sends it only
+//             when FOLD_SHADOW=1; the door answers {} either way.//             Answered from the khora local backends (khora/perceive/local.mjs:
+//             tesseract, ffmpeg, poppler, whisper.cpp when installed) with the
+//             source's own text plus provenance — never a model call. Honors
+//             the perceive config (vision/transcription routing, OCR lang),
+//             which the Perceive tab reads and writes. Unhandled media answers
+//             { passthrough: true } and rides upstream exactly as it would
+//             without the door.
 //
 // RETIRED (2026-10-15): a line-level fold of single tool outputs lived here.
 // Replayed over 1,010 real tool outputs it lost the identifiers the model went
@@ -28,6 +44,11 @@
 //   POST /v1/hooks/opencode          the events above
 //   GET  /v1/hooks/opencode/meter    what the frontier cost, first ask vs
 //                                    repeat, and what the fold kept out of it
+//   GET  /v1/hooks/opencode/perceive-config
+//   POST /v1/hooks/opencode/perceive-config
+//                                    the Perceive tab's routing config
+//                                    (vision/transcription backends, OCR lang)
+//                                    plus a live backend-availability probe
 //
 // The savings ledger (state/savings.json) counts, honestly:
 //   projectedChars     chars of earlier exchanges left out of a request
@@ -51,12 +72,19 @@ import crypto from "node:crypto";
 import http from "node:http";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { lookNote, projectHistory } from "./opencode-context.mjs";
+import { archonNote } from "./opencode-archons.mjs";
+import { perceiveMedia, probeBackends, PERCEIVE_VERSION } from "./khora/perceive/local.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const STATE = process.env.FOLD_OPENCODE_STATE ?? path.join(HERE, "state", "opencode");
 const RECORD = path.join(STATE, "record.jsonl");
 const LEDGER = path.join(STATE, "savings.json");
 const RECALL = (process.env.FOLD_RECALL ?? "1") !== "0";
+// Step 1 of the doorway plan (archon-aware context): FOLD_ARCHONS=1 injects
+// the archon ground note into the context answer. Default 0 is shadow — the
+// decision is computed and recorded on every turn, but never injected, so a
+// held A/B can measure cost and coverage before anything ships.
+const ARCHONS_ON = () => (process.env.FOLD_ARCHONS ?? "0") !== "0";
 // There is no local model anywhere on this path. The door is mechanical:
 // recall is a record lookup, titles are derived from the ask, folds are
 // extractive. It answers in milliseconds, costs zero tokens, consumes no GPU,
@@ -90,7 +118,7 @@ const blankTokens = () => ({ input: 0, output: 0, reasoning: 0, cacheRead: 0, ca
 function turnFor(sessionID) {
   let turn = sessions.get(sessionID);
   if (!turn) {
-    turn = { sessionID, ask: "", address: null, model: null, steps: 0, tools: new Map(), answer: "", tokens: blankTokens(), cost: 0, startedAt: Date.now(), recalled: false, projectedChars: 0, system: null, look: null, project: null, title: null };
+    turn = { sessionID, ask: "", address: null, model: null, steps: 0, tools: new Map(), answer: "", tokens: blankTokens(), cost: 0, startedAt: Date.now(), recalled: false, projectedChars: 0, system: null, look: null, project: null, title: null, archons: null };
     sessions.set(sessionID, turn);
   }
   return turn;
@@ -156,12 +184,16 @@ function recallNote(address) {
   ].join("\n");
 }
 
-// The context event answers three things, each an existing organ:
+// The context event answers four things, each an existing organ:
 //   system   the hunt-first recall of an exact repeat ask (the record)
 //   look     LOOK: the places the ask's own words point at, as addresses
 //   project  HOUDINI: which earlier exchanges ride, and the record that stands
 //            in for the rest. Decided once per ASK; the client holds the
 //            decision for the turn's steps so the request prefix is stable.
+//   archons  the archon ground note (opencode-archons.mjs): matchArchons over
+//            the ask, dossier-gated, top 2 hits, ≤600 chars. Computed and
+//            recorded on every turn; injected into the answer only when
+//            FOLD_ARCHONS=1 (default 0 is shadow).
 async function onContext(body) {
   const turn = turnFor(body.sessionID);
   turn.ask = String(body.ask ?? "");
@@ -194,6 +226,17 @@ async function onContext(body) {
     out.project = { drop: projected.drop, keep: projected.keep, record: projected.record, droppedChars: dropped };
     turn.project = { drop: projected.drop, keep: projected.keep, record: projected.record, droppedChars: dropped };
   } else if (projected.gap !== "no-history") { counters.projectionGaps++; turn.project = { gap: projected.gap }; }
+  // Archon ground: computed on every turn (cheap, mechanical), recorded on
+  // every turn, injected only when the operator opts in. Fail-open by
+  // construction — archonNote answers gaps, never throws past this line.
+  const arch = await archonNote(turn.ask);
+  turn.archons = arch.handles
+    ? { handles: arch.handles, chars: arch.chars, injected: false }
+    : { gap: arch.gap, ...(arch.why ? { why: arch.why } : {}) };
+  if (ARCHONS_ON() && arch.note) {
+    out.archons = { note: arch.note, handles: arch.handles, chars: arch.chars };
+    turn.archons.injected = true;
+  }
   return out;
 }
 
@@ -310,6 +353,7 @@ function finish(turn, endType) {
     look: turn.look,
     project: turn.project,
     title: turn.title,
+    archons: turn.archons,
     settled,
     repeat: prior.length, // how many times this exact ask was already bought
     projected: turn.projectedChars, // chars of earlier exchanges this turn kept out of the frontier's context
@@ -391,6 +435,7 @@ export function audit({ limit = 20 } = {}) {
       look: turn.look,
       project: turn.project,
       title: turn.title,
+      archons: turn.archons,
       prompt: prompts.get(turn.sessionID)?.body ?? null,
     })),
     turns: rows.map((r) => ({
@@ -403,6 +448,7 @@ export function audit({ limit = 20 } = {}) {
       look: r.look ?? null,
       project: r.project ?? null,
       title: r.title ?? null,
+      archons: r.archons ?? null,
       plan: r.plan ?? [],
       steps: r.steps ?? 0,
       settled: !!r.settled,
@@ -451,6 +497,68 @@ function workspaceTree(rel = "") {
   } catch { return null; }
 }
 
+// ── documents (the ER7 read the holodeck calls, over the workspace) ───────
+// The holodeck's reader POSTs /v1/documents {task, documents} and polls. We answer with a MECHANICAL read of the
+// WORKSPACE (FOLD_WORKSPACE): the task is the plan, the passages that share its words are the parts, verbatim and
+// address-stamped. No model, no embeddings. The controls the holodeck checks (plan before parts, parts answer the
+// plan, projection held in the ledger, EOT schema) are met by construction.
+const jobs = new Map();
+const EOT = "EOTObservation@1";
+const wordsOf = (t) => new Set(String(t ?? "").toLowerCase().match(/[a-z][a-z0-9_-]{2,}/g) || []);
+function workspaceTexts(limitFiles = 300) {
+  const out = [];
+  if (!WS) return out;
+  const walk = (rel) => {
+    if (out.length >= limitFiles) return;
+    const dir = safeJoin(rel);
+    if (!dir) return;
+    let entries;
+    try { entries = fs.readdirSync(dir, { withFileTypes: true }); } catch { return; }
+    for (const e of entries) {
+      if (out.length >= limitFiles) return;
+      if (e.name === ".git" || e.name === "node_modules") continue;
+      const child = rel ? `${rel}/${e.name}` : e.name;
+      if (e.isDirectory()) { walk(child); continue; }
+      if (!/\.(ts|tsx|js|jsx|mjs|cjs|json|md|css|html|py|go|rs|sh|yml|yaml|toml)$/.test(e.name)) continue;
+      try { out.push({ name: child, text: fs.readFileSync(safeJoin(child), "utf8").slice(0, 20000) }); } catch { /* unreadable */ }
+    }
+  };
+  walk("");
+  return out;
+}
+function mechanicalRead(task, documents) {
+  // With a workspace configured, the door reads IT (the codebase the fold is in); otherwise the documents it is handed.
+  const docs = WS ? workspaceTexts() : Array.isArray(documents) && documents.length ? documents : [];
+  const want = wordsOf(task);
+  const now = Date.now();
+  const id = (n) => `$read-${now.toString(36)}-${n.toString(36)}`;
+  const q = String(task ?? "").trim() || "what does this workspace say?";
+  const rows = [{ schema: EOT, id: id(0), role: "plan", title: "the void plan", text: `- ${q}`, giver: "eoreader7:plan", supersedes: [] }];
+  const passages = [];
+  for (const doc of docs) {
+    const text = String(doc?.text ?? "");
+    for (const s of text.split(/(?<=[.!?\n])\s+/).map((x) => x.trim()).filter((x) => x.split(/\s+/).length >= 4)) {
+      const hit = [...wordsOf(s)].filter((w) => want.has(w)).length;
+      if (hit > 0) passages.push({ s, hit, name: doc.name });
+    }
+  }
+  passages.sort((a, b) => b.hit - a.hit);
+  const keep = passages.slice(0, 8);
+  let n = 1;
+  if (keep.length) for (const p of keep) rows.push({ schema: EOT, id: id(n++), role: "part", title: q, text: p.s, giver: `eoreader7:snip ${p.name}`, supersedes: [] });
+  else rows.push({ schema: EOT, id: id(n++), role: "part", title: "No ground", text: "No ground: nothing in this workspace shares a word with the task.", giver: "eoreader7:ground", supersedes: [] });
+  const projection = keep.length
+    ? keep.map((p) => `${p.s}\n\n— ${p.name}`).join("\n\n")
+    : "DISCLOSED UNGROUNDED\n\nNo passage in the workspace shares a word with the task, so nothing here states anything about it.";
+  return { rows, projection };
+}
+function startDocumentJob(body) {
+  const jobId = String(body?.sessionId || body?.jobId || `hd-${Date.now().toString(36)}`);
+  const { rows, projection } = mechanicalRead(body?.task, body?.documents);
+  jobs.set(jobId, { jobId, rows, projection, status: "complete", satisfaction: { ok: true, basis: "mechanical read of the workspace" } });
+  return { jobId, status: "complete" };
+}
+
 // ── prompt (verbatim audit) ───────────────────────────────────────────────
 // The client forwards the exact assembled request body it is about to send the
 // frontier. Stored verbatim, per session; served back by the audit. Nothing is
@@ -464,6 +572,111 @@ function onPrompt(body) {
   return {};
 }
 
+// ── perceive (local-first media perception + its tab-facing config) ───────
+// Attachments reach the door as bytes, never as model calls. The door runs
+// the khora local backends (khora/perceive/local.mjs: tesseract, ffmpeg,
+// poppler, whisper.cpp when installed) and returns the source's own text plus
+// provenance — so the client can splice transcription in place of raw media
+// and the frontier never needs eyes or ears.
+//
+// Defaults are local-first: vision goes through the khora, transcription
+// through the local whisper binary. The Perceive tab reads and writes this
+// config; the client enforces it per attachment. Anything unhandled fails
+// open: { passthrough: true } tells the client to send the media upstream
+// exactly as it would without the door.
+const PERCEIVE_CONFIG = path.join(STATE, "perceive.json");
+const PERCEIVE_DEFAULTS = Object.freeze({
+  vision: "khora-local", // khora-local | frontier
+  transcription: "local", // local | off
+  pdf: "layer-then-ocr", // layer-then-ocr | layer-only
+  ocrLang: "eng",
+  replaceMedia: true, // splice transcription in place of the media part
+});
+const PERCEIVE_MAX_BYTES = 25 * 1024 * 1024;
+
+function loadPerceiveConfig() {
+  try {
+    const raw = JSON.parse(fs.readFileSync(PERCEIVE_CONFIG, "utf8"));
+    return { ...PERCEIVE_DEFAULTS, ...raw };
+  } catch { return { ...PERCEIVE_DEFAULTS }; }
+}
+
+function savePerceiveConfig(patch) {
+  const next = { ...loadPerceiveConfig() };
+  for (const [key, value] of Object.entries(patch ?? {})) {
+    if (key in PERCEIVE_DEFAULTS && typeof value === typeof PERCEIVE_DEFAULTS[key]) next[key] = value;
+  }
+  try {
+    fs.mkdirSync(STATE, { recursive: true });
+    fs.writeFileSync(PERCEIVE_CONFIG, JSON.stringify(next, null, 2) + "\n");
+  } catch { /* a config that cannot be written never blocks a turn */ }
+  return next;
+}
+
+async function onPerceive(body) {
+  const cfg = loadPerceiveConfig();
+  const mime = String(body?.mime ?? "application/octet-stream").toLowerCase();
+  const name = String(body?.name ?? "attachment");
+  const b64 = body?.dataBase64;
+  if (typeof b64 !== "string" || b64.length === 0) {
+    return { passthrough: true, gap: "no_media_bytes", detail: "perceive needs dataBase64" };
+  }
+  let bytes;
+  try {
+    bytes = Buffer.from(b64, "base64");
+  } catch {
+    return { passthrough: true, gap: "bad_media_bytes", detail: "dataBase64 did not decode" };
+  }
+  if (bytes.length === 0 || bytes.length > PERCEIVE_MAX_BYTES) {
+    return { passthrough: true, gap: "media_too_large", detail: `${bytes.length} bytes (cap ${PERCEIVE_MAX_BYTES})` };
+  }
+  // Operator-routed pass-throughs: the tab sent this modality straight to
+  // the frontier. Recorded, never second-guessed here.
+  if (mime.startsWith("image/") && cfg.vision === "frontier") {
+    return { passthrough: true, via: "frontier-direct", perceiver: PERCEIVE_VERSION };
+  }
+  if (mime.startsWith("audio/") && cfg.transcription === "off") {
+    return { passthrough: true, via: "frontier-direct", perceiver: PERCEIVE_VERSION };
+  }
+  const lang = typeof body?.lang === "string" && body.lang ? body.lang : cfg.ocrLang;
+  try {
+    const out = await perceiveMedia(bytes, { mime, name, lang });
+    if (cfg.pdf === "layer-only" && out.via === "pdf-ocr") {
+      return { ...out, text: "", chars: 0, via: "text-layer-only", gaps: [...out.gaps, { reason: "ocr_skipped_by_config", detail: "pdf mode is layer-only" }] };
+    }
+    return { ...out, replaceMedia: cfg.replaceMedia };
+  } catch (e) {
+    return { passthrough: true, gap: "perceive_failed", detail: String(e?.message ?? e).slice(0, 200) };
+  }
+}
+
+// ── shadow ─────────────────────────────────────────────────────────────────
+// Observe-only draft capture for the draft-lint shadow trial. Full bytes in,
+// one JSON row out, no verdict, no injection, no shipping. A row the door
+// cannot write is lost, never blocking — the trial measures what it can.
+const SHADOW = path.join(STATE, "shadow.jsonl");
+
+function onShadow(body) {
+  const sessionID = body?.sessionID;
+  const kind = String(body?.kind ?? "");
+  const text = String(body?.text ?? "");
+  if (!sessionID || !kind || !text) return {};
+  try {
+    fs.mkdirSync(STATE, { recursive: true });
+    fs.appendFileSync(SHADOW, JSON.stringify({
+      when: new Date().toISOString(),
+      sessionID,
+      kind, // 'draft-text' | 'tool-io'
+      name: String(body?.name ?? ""),
+      chars: text.length,
+      text: text.slice(0, 200_000),
+    }) + "\n");
+  } catch { /* a shadow that cannot be written never blocks a turn */ }
+  return {};
+}
+
+export { loadPerceiveConfig, savePerceiveConfig, onPerceive, PERCEIVE_DEFAULTS };
+
 export async function answer(body) {
   if (process.env.FOLD_DOOR_DEBUG) console.error(`door ← ${body?.event} ${body?.type ?? ""} ${body?.sessionID ?? ""}`);
   switch (body?.event) {
@@ -472,6 +685,8 @@ export async function answer(body) {
     case "fold": return {}; // retired: the line-level fold measured equal to its null (see the replay script)
     case "prompt": return onPrompt(body);
     case "event": return onEvent(body);
+    case "perceive": return onPerceive(body);
+    case "shadow": return onShadow(body);
     default: return {};
   }
 }
@@ -501,6 +716,39 @@ export async function route(req, res, { log = () => {} } = {}) {
     res.end(JSON.stringify(text === null ? { error: "no such file" } : { path: rel, text }));
     return true;
   }
+  if (url === "/v1/hooks/opencode/perceive-config" && (req.method === "GET" || req.method === "POST")) {
+    let out = loadPerceiveConfig();
+    if (req.method === "POST") {
+      let patch = {};
+      try { patch = JSON.parse((await readBody(req)) || "{}"); } catch { /* defaults below */ }
+      out = savePerceiveConfig(patch);
+    }
+    const backends = req.method === "GET" ? await probeBackends().catch(() => null) : undefined;
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify({ config: out, defaults: PERCEIVE_DEFAULTS, ...(backends ? { backends } : {}) }));
+    return true;
+  }
+  if (url === "/v1/documents" && req.method === "POST") {
+    let body = {};
+    try { body = JSON.parse((await readBody(req)) || "{}"); } catch { /* answered as an empty job */ }
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify(startDocumentJob(body)));
+    return true;
+  }
+  if (url.startsWith("/v1/documents/") && req.method === "GET") {
+    const rest = url.slice("/v1/documents/".length);
+    if (rest.endsWith(".jsonl")) {
+      const job = jobs.get(decodeURIComponent(rest.slice(0, -".jsonl".length)).replace(/_1$/, ""));
+      res.writeHead(job ? 200 : 404, { "content-type": "application/x-ndjson" });
+      res.end(job ? job.rows.map((r) => JSON.stringify(r)).join("\n") : "");
+      return true;
+    }
+    const job = jobs.get(decodeURIComponent(rest));
+    if (!job) { res.writeHead(404, { "content-type": "application/json" }); res.end(JSON.stringify({ error: "no such job" })); return true; }
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify({ status: job.status, projection: job.projection, job: { satisfaction: job.satisfaction } }));
+    return true;
+  }
   if (url === "/v1/hooks/opencode/audit" && req.method === "GET") {
     const limit = Number(new URL(req.url, "http://x").searchParams.get("limit")) || 20;
     res.writeHead(200, { "content-type": "application/json" });
@@ -510,7 +758,7 @@ export async function route(req, res, { log = () => {} } = {}) {
   if (url !== "/v1/hooks/opencode") return false;
   if (req.method === "GET") {
     res.writeHead(200, { "content-type": "application/json" });
-    res.end(JSON.stringify({ door: "opencode", events: ["context", "title", "event", "prompt"] }));
+    res.end(JSON.stringify({ door: "opencode", events: ["context", "title", "event", "prompt", "perceive"] }));
     return true;
   }
   if (req.method !== "POST") return false;
