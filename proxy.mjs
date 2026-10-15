@@ -8,6 +8,7 @@ import * as ProxyRunner from "./proxy-runner.mjs";
 // and /v1/reason (claude-code-doorway.mjs). Namespace-imported for the same
 // reason as ProxyRunner below.
 import * as ClaudeCodeDoorway from "./claude-code-doorway.mjs";
+import * as OpencodeDoorway from "./opencode-doorway.mjs";
 // The territory door (territory-door.mjs): a whole folder made sense of almost instantly, then the part you open goes to the reader.
 import * as TerritoryDoor from "./territory-door.mjs";
 // Namespace-imported and destructured so a sibling editing proxy-runner.mjs
@@ -417,6 +418,7 @@ async function handleRequest(req, res) {
   }
 
   if (await ClaudeCodeDoorway.route?.(req, res, { log })) return;
+  if (await OpencodeDoorway.route?.(req, res, { log })) return;
   if (await TerritoryDoor.route?.(req, res, { log })) return;
 
   // GET / — the self-describing front door. Any app pointed at this base

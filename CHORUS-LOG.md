@@ -1141,3 +1141,11 @@ fast: 31 files · 13 affected test files pass (134 + 41) · law: WARN pre-existi
 | Kondo | dead | cli/apprentice-assembled.mjs findArm | noted | the helper is now exercised only by its own unit test (the time-ordered pass superseded it); kept this commit, a sweep candidate |
 clean: Feynman, Holmes, Pearl, Ostrom, Frankfurt, Alexander, Marshall (no law edited)
 
+## 2026-10-14 — opencode doorway: the fork's turns recorded, titles local, settled asks recalled (branch claude-code-gate-and-apprentice, staged by path)
+fast: 3 files · 13 affected tests pass · law: ok (WARN pre-existing duplicate S17 S96 in native/READING-SPEC.md, not this diff)
+| lens | citation | file:line | verdict | one line |
+| Feynman | — | opencode-doorway.mjs:113 | noted | the 3-char title floor and the swallow-on-failure both fall back to the frontier's own title path and are counted on the meter (titlesFailed), never silent; a wrong floor costs a frontier call, not correctness |
+| Dijkstra | — | opencode-doorway.mjs:42 addressOf | clean | the address claims only surface identity — same normalized words, "nothing fuzzier" is in the comment and the sha256 is over exactly that; normalization is narrow (case, space), so a near ask can only miss a recall, never serve the wrong one |
+| Simon/Chekhov | — | opencode-doorway.mjs | noted | the door is imported by tests/opencode-doorway.test.mjs (5 pass, incl. junk fail-open) and mounted in proxy.mjs ahead of territory; inert in the running proxy until it restarts (same note as claude-code-doorway), and live-verified against the opencode-fold doorway client: first ask recorded, repeat ask recalled, title served locally, FOLD_OFF=1 and unreachable-door controls left the door untouched |
+clean: Dijkstra
+
