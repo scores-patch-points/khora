@@ -473,6 +473,12 @@ export async function route(req, res, { log = () => {} } = {}) {
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href && process.argv.includes("--serve")) {
   const port = Number(process.argv[process.argv.indexOf("--serve") + 1]) || 11470;
   http.createServer(async (req, res) => {
+    // CORS: the app reads the audit from the window (a different origin). The
+    // mounted proxy sets this globally; the standalone server must too.
+    res.setHeader("access-control-allow-origin", "*");
+    res.setHeader("access-control-allow-headers", "content-type, x-er7-surface");
+    res.setHeader("access-control-allow-methods", "GET, POST, OPTIONS");
+    if (req.method === "OPTIONS") { res.writeHead(204); res.end(); return; }
     if (!(await route(req, res, { log: console.error }))) { res.writeHead(404); res.end(); }
   }).listen(port, "127.0.0.1", () => console.error(`opencode doorway on :${port}, record ${RECORD}`));
 }
