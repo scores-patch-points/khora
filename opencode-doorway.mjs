@@ -68,6 +68,10 @@
 //
 // Fails open: an unknown event or a malformed body answers {} and opencode
 // carries on exactly as upstream would.
+import os from "node:os";
+import { surf as surfLadder } from "./opencode-surf.mjs";
+import { rec as recChange, fold as foldRecord, recNote, recSink } from "./opencode-rec.mjs";
+import { mark as markNote, claim as claimItem, done as doneItem, read as readNotes, noteFor, turnsFile } from "./opencode-worknotes.mjs";
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
@@ -735,12 +739,79 @@ function onAct(body) {
 
 export { loadPerceiveConfig, savePerceiveConfig, onPerceive, PERCEIVE_DEFAULTS };
 
-export async function answer(body) {
+// Worknotes: the stigmergic medium (opencode-worknotes.mjs). Per task, one
+// append-only marks file per agent plus atomic claims; this session's settled
+// turns go in its own single-writer turns file. The context carries the ladder
+// and the open claims; detail is read from the files on demand. `task`
+// defaults to the sessionID, so a lone session behaves as before.
+function onSurf(body) {
+  const turns = Array.isArray(body.turns) ? body.turns : [];
+  const out = surfLadder({ ask: String(body.ask ?? ""), turns });
+  const agent = String(body.sessionID ?? "");
+  const task = String(body.task ?? agent);
+  const file = turnsFile(task, agent);
+  if (file) {
+    try {
+      fs.mkdirSync(path.dirname(file), { recursive: true });
+      const sections = turns.map((t) => `## turn ${t.n}\n\nask: ${t.ask}\n${t.grounds?.length ? `tools: ${t.grounds.join(", ")}\n` : ""}\n${t.answer || "(no text reply)"}\n`);
+      fs.writeFileSync(file, `# turns ${agent}\n\n${sections.join("\n")}`);
+      out.note += `\nturns: ${file} (one "## turn N" section per turn above)`;
+    } catch { /* never blocks a turn */ }
+  }
+  const note = noteFor({ task, agent });
+  if (note) out.note += `\n${note}`;
+  const record = recNote({ task });
+  if (record) out.note += `\n${record}`;
+  return out;
+}
+
+function onMark(body) { return markNote({ task: body.task, agent: body.agent, kind: body.kind, text: body.text }); }
+function onClaim(body) { return claimItem({ task: body.task, agent: body.agent, item: body.item, ttlMs: body.ttlMs }); }
+function onDone(body) { return doneItem({ task: body.task, agent: body.agent, item: body.item }); }
+function onRec(body) { return recChange({ task: body.task, agent: body.agent, referent: body.referent, delta: body.delta, check: body.check, cwd: body.cwd, exitCode: body.exitCode, address: body.address, source: body.source, model: body.model }); }
+function onRecord(body) { return { record: foldRecord({ task: body.task }) }; }
+// CHASE: run the DEF->EVA->REC void loop over a workspace. The loop executes
+// the caller's declared testCommand, so this is OFF unless FOLD_REC_EXEC=1 (the
+// same opt-in as the box judge), takes only an absolute existing directory, and
+// is bounded by maxRounds. Every judged draw lands in the task's record.
+async function onChase(body, opts = {}) {
+  if (process.env.FOLD_REC_EXEC !== "1") return { ok: false, gap: "exec-disabled" };
+  const workspace = String(body.workspace ?? "");
+  const testCommand = String(body.testCommand ?? "").trim();
+  if (!path.isAbsolute(workspace) || !fs.existsSync(workspace) || !fs.statSync(workspace).isDirectory()) return { ok: false, gap: "bad-workspace" };
+  if (!testCommand) return { ok: false, gap: "no-test-command" };
+  const agent = String(body.agent ?? body.sessionID ?? "chase");
+  const task = String(body.task ?? agent);
+  if (!/^[\w.-]+$/.test(agent) || !/^[\w.-]+$/.test(task) || task === ".." || agent === "..") return { ok: false, gap: "bad-address" };
+  const { runVoidLoop } = await import("./native/the-fold/code-loop.js");
+  const maxRounds = Math.min(6, Math.max(1, Math.floor(Number(body.maxRounds) || 3)));
+  const result = await runVoidLoop({
+    sessionId: agent, model: String(body.model ?? "qwen2.5-coder:1.5b"), task: String(body.ask ?? "fill the stubs so the test passes"),
+    workspace, testCommand, maxRounds, candidates: 1, ...(opts.turn ? { turn: opts.turn } : {}),
+    onRec: recSink({ task, agent }),
+  });
+  return {
+    ok: true, done: !!result.done, gap: result.gap?.kind ?? null,
+    rounds: (result.rounds ?? []).map((r) => ({ action: r.action ?? null, by: r.by ?? null, target: r.target ?? null, applied: r.applied ?? null, reverted: r.reverted ?? null, testExitCode: r.testExitCode ?? null })),
+    record: foldRecord({ task }).map((b) => ({ referent: b.referent, id: b.id })),
+  };
+}
+function onRead(body) { return readNotes({ task: body.task }); }
+
+export async function answer(body, opts = {}) {
   if (process.env.FOLD_DOOR_DEBUG) console.error(`door ← ${body?.event} ${body?.type ?? ""} ${body?.sessionID ?? ""}`);
   switch (body?.event) {
     case "context": return onContext(body);
     case "title": return onTitle(body);
     case "fold": return {}; // retired: the line-level fold measured equal to its null (see the replay script)
+    case "surf": return onSurf(body);
+    case "mark": return onMark(body);
+    case "claim": return onClaim(body);
+    case "done": return onDone(body);
+    case "notes": return onRead(body);
+    case "rec": return onRec(body);
+    case "chase": return onChase(body, opts);
+    case "record": return onRecord(body);
     case "prompt": return onPrompt(body);
     case "event": return onEvent(body);
     case "perceive": return onPerceive(body);
@@ -860,7 +931,7 @@ export async function route(req, res, { log = () => {} } = {}) {
   if (url !== "/v1/hooks/opencode") return false;
   if (req.method === "GET") {
     res.writeHead(200, { "content-type": "application/json" });
-    res.end(JSON.stringify({ door: "opencode", events: ["context", "title", "event", "prompt", "perceive", "draft", "act"] }));
+    res.end(JSON.stringify({ door: "opencode", events: ["context", "surf", "mark", "claim", "done", "notes", "rec", "record", "chase", "title", "event", "prompt", "perceive", "draft", "act"] }));
     return true;
   }
   if (req.method !== "POST") return false;
