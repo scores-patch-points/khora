@@ -455,7 +455,7 @@ export async function route(req, res, { log = () => {} } = {}) {
   if (url !== "/v1/hooks/opencode") return false;
   if (req.method === "GET") {
     res.writeHead(200, { "content-type": "application/json" });
-    res.end(JSON.stringify({ door: "opencode", events: ["context", "title", "event"] }));
+    res.end(JSON.stringify({ door: "opencode", events: ["context", "title", "event", "prompt"] }));
     return true;
   }
   if (req.method !== "POST") return false;
