@@ -131,5 +131,14 @@
     "basis": "user ruling 2026-10-11: 'we don't think in tokens. we think in the physics of referents' — applied to the consultation-null instrumentation; the token null is recorded (udhr-consultation-null-v1.json) as a surface null, never a mind verdict",
     "giver": "the user",
     "standing": "disclosed"
+  },
+  "referent-for-whom": {
+    "type": "referent-for-whom",
+    "signal": "a referent (cast row / EOReferent@1 / WeftEntry cast) admitted without a reading frame — for whom/for what the referent is a referent; or any question that assumes a frame-free referent stands on its own",
+    "read": "every referent carries a for-whom (S113: identity exists only for-whom; S42: a claim without a frame is a view from nowhere). The frame is the condition of admission, not decoration: for-whom.js::admitReferent(referent, forWhom, {gateOpts}) admits only FOR a frame, stamping forWhom (id) + frame ({giver, question, ground}); a frameless referent is a typed gap (EOReferentGap@1, reason no_for_whom), never a bare admit. The fold surface threads it: holodeck-reading.js readDoc/readSighted/mergeReadings stamp every cast row (default reader frame) and route a frameless one into castGaps (excluded from castTotal); holodeck-activation.js never indexes a gap-marked row; holodeck-ask.js narrates Read for <giver> and the turn carries the ask frame; index.html shows for <giver> on the cast and passes fwOf(q) into turn(). With gateOpts the for-whom own gate is the outer bound: two frames over one material differ (the frame the reading is about admits, another refuses).",
+    "falsifying": "a referent admitted bare (a cast row with no forWhom/frame, or a frameless referent that still rides in cast or activates); or two for-whoms over identical material that cannot differ (both admit a referent the question is not about); or a gap-marked referent that activates — any breaks the rule.",
+    "basis": "user ruling 2026-10-15: a referent always has a for whom, wire this deep into the fold — native/kernel/for-whom.js admitReferent/referentFrame, native/the-fold/read-process.mjs WeftEntry cast, holodeck-reading.js/activation.js/ask.js + index.html; tests native/tests/referent-for-whom.test.js and holodeck-referent-for-whom.test.mjs + holodeck-activation.test.mjs",
+    "giver": "the user",
+    "standing": "disclosed"
   }
 }

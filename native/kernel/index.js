@@ -7,6 +7,7 @@ export { perceive } from "./perception.js";
 export { witness, witnessVerbose } from "./witness.js";
 export { hyperedge, graphObject, indexHypergraphEntries, buildHypergraph, graphEntriesForIds, graphEdgesForRelation, graphEdgesAtSequence, relevantHypergraphNeighborhood } from "./hypergraph.js";
 export { identityAlternative, canonicalizeHyperedge, deriveIdentityRevision, deriveIdentityRevisionForWhom } from "./identity.js";
+export { createForWhom, referentFrame, admitReferent, questionTerms, gateForWhom, gateForWhomFold } from "./for-whom.js";
 export { relationOf, refsOf, relationOfPoints, survivingIdentity, survivingIdentityAtPoints } from "./identity-meet.js";
 export { addressOf, cubeAddresses, relevantNeighborhood, interrogateCube, deriveEOTransformations } from "./interrogation.js";
 export { deriveSurprise, deriveTension, deriveRelease } from "./dynamics.js";

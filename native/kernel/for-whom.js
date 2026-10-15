@@ -217,6 +217,66 @@ export function gateForWhom(forWhom, entries = [], opts = {}) {
   return gateForWhomFold(fold, opts);
 }
 
+// ── EVERY REFERENT HAS A FOR-WHOM (2026-10-15) ───────────────────────────────
+// S113: identity exists only for-whom. A referent is a referent FOR someone, and
+// the frame is the outer bound (S42: a claim without a frame is a view from
+// nowhere). So the frame is not decoration added after admission — it is the
+// CONDITION of admission. `referentFrame` names it; `admitReferent` is the gate:
+// a frameless referent is NEVER admitted bare (it is a typed EOReferentGap@1),
+// and an admitted referent carries the frame it was read under (`forWhom` id +
+// `frame`), so no bare referent enters the fold. When a for-whom's own gate is
+// supplied it is the outer bound too: a referent whose reading makes no admitted
+// difference to the question is refused, so two frames over one material differ.
+
+/** referentFrame(forWhom) — the frame every admitted referent carries: the
+ *  for-whom's id and its coordinates (FOR WHOM / FOR WHAT / ON WHAT FIELD).
+ *  Null when there is no for-whom — the input to the gate's refusal. Pure. */
+export function referentFrame(forWhom) {
+  if (!forWhom || !forWhom.id) return null;
+  return Object.freeze({
+    forWhom: forWhom.id,
+    giver: forWhom.giver ?? null,
+    question: forWhom.question ?? null,
+    ground: forWhom.ground ?? null,
+  });
+}
+
+/**
+ * admitReferent(referent, forWhom, { entries, gateOpts }) — the constitutive
+ * gate. A referent is admitted only FOR a frame; the admitted referent carries
+ * `forWhom` (id) and `frame` (the reading frame). A FRAMELESS referent is a
+ * TYPED GAP (`admitted:false`, a gap naming why), never a bare admit (S113/S42).
+ * When `gateOpts` is supplied the for-whom's own gate is the outer bound
+ * (coherence + material + question relevance): a referent whose reading makes no
+ * difference to the question is refused too, so two frames over the same
+ * material can differ. @returns EOReferentAdmission@1 (frozen). */
+export function admitReferent(referent, forWhom, { entries = [], gateOpts = null } = {}) {
+  if (!referent || !referent.id) throw new TypeError("admitReferent requires a referent with an id");
+  const frame = referentFrame(forWhom);
+  if (!frame) {
+    return Object.freeze({
+      schema: "EOReferentAdmission@1", admitted: false, standing: "gap",
+      forWhom: null, frame: null, gate: null, referent: null,
+      gap: Object.freeze({ schema: "EOReferentGap@1", id: `gap:referent:${referent.id}:no-for-whom`, reason: "no_for_whom", referent: referent.id, tier: "referent",
+        detail: "a referent is a referent only for-whom (S113); with no frame it is a view from nowhere (S42), so it is a typed gap, never a bare admit" }),
+    });
+  }
+  const gate = gateOpts ? gateForWhom(forWhom, entries, gateOpts) : null;
+  if (gate && !gate.admitted) {
+    return Object.freeze({
+      schema: "EOReferentAdmission@1", admitted: false, standing: "gap",
+      forWhom: frame.forWhom, frame, gate, referent: null,
+      gap: Object.freeze({ schema: "EOReferentGap@1", id: `gap:referent:${referent.id}:no-admitted-difference`, reason: "no_admitted_difference", referent: referent.id, tier: "referent",
+        detail: "the record this referent would ride on makes no admitted difference to this for-whom (coherence, material, or question relevance)" }),
+    });
+  }
+  return Object.freeze({
+    schema: "EOReferentAdmission@1", admitted: true, standing: "referent",
+    forWhom: frame.forWhom, frame, gate,
+    referent: Object.freeze({ ...referent, forWhom: frame.forWhom, frame }),
+  });
+}
+
 /** relevanceOf(entries, questionTerms) — how much of the for-whom's
  * reading touches the question: the share of discovered structure whose
  * referents/relations carry a question term. A for-whom that discovers a

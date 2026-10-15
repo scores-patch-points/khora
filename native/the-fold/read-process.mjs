@@ -12,6 +12,14 @@ import { splitSentences } from "../adapters/text/spans.js";
 import { extractSurfaces, discoverReferents } from "../adapters/text/surfaces.js";
 import { tokenEvents, surpriseCut } from "./surprise-gate.mjs";
 import { applyPolarity, readGates, nestedClauses, scopePolarity } from "./read-quality.mjs";
+import { admitReferent, referentFrame } from "../kernel/for-whom.js";
+
+// EVERY REFERENT HAS A FOR-WHOM (S113/S42). A whole-document read is read FOR the
+// reader — the frame a bare document read stands under is { giver: "the reader",
+// question: null (no ask yet), ground: the address }. A caller may pass its own
+// for-whom (a question-bearing frame); a caller that passes `null` explicitly gets
+// the gate's refusal — the referents become typed gaps, never bare admits.
+const READER_FRAME = (address) => ({ id: "reader", giver: "the reader", question: null, ground: address ?? null });
 
 export const READ_PROCESS = Object.freeze({
   schema: "ReadProcess@1",
@@ -27,10 +35,10 @@ const edge = (e) => ({ end1: e.end1, end1Face: e.end1Face ?? null, label: e.labe
 
 /** Read a source into a `WeftEntry@4`. The ONE reading call. Whole text in, edges out; a short source is a
  *  typed skip, a reader failure is a typed error — never silent. */
-export function readToWeft(text, { address, category = null, language = "en", quality = true } = {}) {
+export function readToWeft(text, { address, category = null, language = "en", quality = true, forWhom = READER_FRAME(address) } = {}) {
   const str = String(text ?? "");
   const bytes = Buffer.byteLength(str);
-  if (str.trim().length < 200) return { schema: "WeftEntry@4", address, category, bytes, readCharacters: 0, skipped: "too_short", vocabulary: null, cast: [], edges: [], surprise: null, error: null, ms: 0 };
+  if (str.trim().length < 200) return { schema: "WeftEntry@4", address, category, bytes, readCharacters: 0, skipped: "too_short", vocabulary: null, cast: [], castGaps: [], edges: [], surprise: null, error: null, ms: 0 };
   const t0 = Date.now();
   let out = null, err = null;
   try { out = engineRelationsFor([{ text: str }], {}); } catch (e) { err = String(e?.message ?? e); }
@@ -40,6 +48,7 @@ export function readToWeft(text, { address, category = null, language = "en", qu
   // khora/native/eval/weft/treebank-seed.mjs + fold-plot-test/treebank-kinds-RESULTS.md). No new reading
   // rule: the beings are the engine's own, only persisted. `standing:"referent"` is the both-bound mark.
   let cast = [];
+  let castGaps = [];
   try {
     const surfaces = extractSurfaces(splitSentences(str), {});
     const disc = discoverReferents(surfaces, {});
@@ -49,7 +58,13 @@ export function readToWeft(text, { address, category = null, language = "en", qu
       const r = byRef.get(ev.referent_id) ?? { ref: ev.referent_id, surface: ev.surface, allSurfaces: new Set(), mentionsAt: [], standing: "referent" };
       r.allSurfaces.add(ev.surface); byRef.set(ev.referent_id, r);
     }
-    cast = [...byRef.values()].map((r) => ({ ref: r.ref, surface: r.surface, allSurfaces: [...r.allSurfaces], mentionsAt: r.mentionsAt, standing: "referent" }));
+    // Every referent is admitted FOR the frame; a frameless one (forWhom === null)
+    // is a typed gap, never a bare admit (S113/S42).
+    for (const r of byRef.values()) {
+      const base = { ref: r.ref, surface: r.surface, allSurfaces: [...r.allSurfaces], mentionsAt: r.mentionsAt, standing: "referent" };
+      const adm = admitReferent(base, forWhom);
+      if (adm.admitted) cast.push(adm.referent); else castGaps.push(adm.gap);
+    }
   } catch (e) { if (!err) err = `cast_failed: ${String(e?.message ?? e)}`; }
   // SURPRISE — the canonical cycle's second constitutive gate (SEG+EVA), called
   // here so the read that feeds the weft carries it. The instrument is the
@@ -83,6 +98,7 @@ export function readToWeft(text, { address, category = null, language = "en", qu
     readCharacters: str.length,
     vocabulary: out?.vocabulary ?? null,                 // { verbs, candidates, grammarPrior } — primed proof
     cast,                                                 // the admitted referents (both-bound; the kind-induction cast)
+    castGaps,                                             // referents refused admission for lack of a frame (typed, never dropped silently)
     edges,
     clauses,                                              // the nested clause TREE (parent, relation, marker, own words, polarity) — null for a language with no parser
     quality: qualityReport,
