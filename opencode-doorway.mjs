@@ -41,7 +41,9 @@
 // on to use as often as head/tail or random lines did at the same size
 // (scripts/opencode-fold-replay.mjs). The `fold` event now answers {}.
 //
-//   POST /v1/hooks/opencode          the events above
+//   POST /v1/hooks/opencode          the events above, plus draft + act
+//                                    (DRAFT-LINT shadow: recorded, never
+//                                    enforced until the composer is built)
 //   GET  /v1/hooks/opencode/meter    what the frontier cost, first ask vs
 //                                    repeat, and what the fold kept out of it
 //   GET  /v1/hooks/opencode/perceive-config
@@ -70,6 +72,7 @@ import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 import http from "node:http";
+import { spawnSync } from "node:child_process";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { lookNote, projectHistory } from "./opencode-context.mjs";
 import { archonNote } from "./opencode-archons.mjs";
@@ -368,7 +371,7 @@ function finish(turn, endType) {
 // is only what is honestly knowable: how often a recalled ask still needed the
 // frontier to run a full plan. Held-out error is not measured, and says so.
 export function meter() {
-  const rows = readRecord();
+  const rows = readRecord().filter((r) => (r.kind ?? "instance") !== "draft-lint");
   const sum = (rs) => rs.reduce((a, r) => a + (r.tokens.input + r.tokens.output + r.tokens.cacheRead + r.tokens.cacheWrite), 0);
   const first = rows.filter((r) => r.repeat === 0);
   const repeats = rows.filter((r) => r.repeat > 0);
@@ -414,7 +417,7 @@ export function meter() {
 // the frontier then did with it. Read-only; nothing here is the model's own
 // words, and nothing is generated for display.
 export function audit({ limit = 20 } = {}) {
-  const rows = readRecord().slice(-limit).reverse();
+  const rows = readRecord().filter((r) => (r.kind ?? "instance") !== "draft-lint").slice(-limit).reverse();
   return {
     door: "opencode",
     schema: "fold-audit/1",
@@ -675,6 +678,50 @@ function onShadow(body) {
   return {};
 }
 
+// ── draft / act (DRAFT-LINT shadow) ────────────────────────────────────
+// the-fold/docs/DRAFT-LINT.md §3, rollout step 1: observe-only. The door
+// records the draft (or proposed act) as a kind:"draft-lint" row and answers
+// pass/allow with no findings — the lint composer (draft-lint.js) is not
+// built, so there is nothing to enforce yet and the verdict is recorded,
+// never acted on. Fail-open: junk answers {} and writes nothing.
+function draftLintRow(phase, body, extra = {}) {
+  const turn = body?.sessionID ? sessions.get(body.sessionID) : null;
+  const text = String(body?.text ?? body?.input ?? "");
+  return {
+    when: new Date().toISOString(),
+    kind: "draft-lint",
+    phase, // 'draft' | 'act'
+    sessionID: body?.sessionID ?? null,
+    address: turn?.address ?? (body?.ask ? addressOf(body.ask) : null),
+    ask: String(body?.ask ?? turn?.ask ?? "").slice(0, 2000),
+    model: body?.model ?? turn?.model ?? null,
+    attempt: Number(body?.attempt ?? 1),
+    tool: phase === "act" ? String(body?.tool ?? "") : null,
+    draftHash: crypto.createHash("sha256").update(text).digest("hex").slice(0, 16),
+    draftChars: text.length,
+    draft: text.slice(0, 8000),
+    findings: [],
+    lintMs: 0,
+    escalated: false,
+    note: "shadow — composer not built; verdict recorded, never enforced",
+    ...extra,
+  };
+}
+
+function onDraft(body) {
+  if (!body?.sessionID || !String(body?.text ?? "")) return {};
+  const row = draftLintRow("draft", body, { verdict: "pass" });
+  try { append(row); } catch { /* shadow never blocks */ }
+  return { verdict: "pass", findings: [], spans: [] };
+}
+
+function onAct(body) {
+  if (!body?.sessionID || !body?.tool) return {};
+  const row = draftLintRow("act", body, { verdict: "allow" });
+  try { append(row); } catch { /* shadow never blocks */ }
+  return { verdict: "allow", findings: [] };
+}
+
 export { loadPerceiveConfig, savePerceiveConfig, onPerceive, PERCEIVE_DEFAULTS };
 
 export async function answer(body) {
@@ -687,6 +734,8 @@ export async function answer(body) {
     case "event": return onEvent(body);
     case "perceive": return onPerceive(body);
     case "shadow": return onShadow(body);
+    case "draft": return onDraft(body);
+    case "act": return onAct(body);
     default: return {};
   }
 }
@@ -728,6 +777,25 @@ export async function route(req, res, { log = () => {} } = {}) {
     res.end(JSON.stringify({ config: out, defaults: PERCEIVE_DEFAULTS, ...(backends ? { backends } : {}) }));
     return true;
   }
+  // POST /v1/perceive { path } → the local vision sense: OCR the image on this box (tesseract), no network, no
+  // vision model. Returns the measured text with a giver; the model reads this, never the pixels.
+  if (url === "/v1/perceive" && req.method === "POST") {
+    let body = {};
+    try { body = JSON.parse((await readBody(req)) || "{}"); } catch { /* answered as an empty read */ }
+    const file = typeof body.path === "string" ? body.path : "";
+    let text = "";
+    let giver = "image-khora (tesseract)";
+    try {
+      const r = spawnSync("tesseract", [file, "stdout"], { encoding: "utf8", timeout: 60_000 });
+      if (r.error) throw r.error;
+      text = r.status === 0 ? String(r.stdout ?? "").trim() : "";
+    } catch (e) {
+      giver = `image-khora (tesseract unavailable: ${e.message})`;
+    }
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify({ text, giver, source: file }));
+    return true;
+  }
   if (url === "/v1/documents" && req.method === "POST") {
     let body = {};
     try { body = JSON.parse((await readBody(req)) || "{}"); } catch { /* answered as an empty job */ }
@@ -758,7 +826,7 @@ export async function route(req, res, { log = () => {} } = {}) {
   if (url !== "/v1/hooks/opencode") return false;
   if (req.method === "GET") {
     res.writeHead(200, { "content-type": "application/json" });
-    res.end(JSON.stringify({ door: "opencode", events: ["context", "title", "event", "prompt", "perceive"] }));
+    res.end(JSON.stringify({ door: "opencode", events: ["context", "title", "event", "prompt", "perceive", "draft", "act"] }));
     return true;
   }
   if (req.method !== "POST") return false;
