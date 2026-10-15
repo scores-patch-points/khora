@@ -1133,3 +1133,9 @@ fast: 9 files · 55 affected tests pass · law: WARN pre-existing S17/S96 duplic
 | Diaconis | measure a null, not a threshold | native/organs/telling-organs.js POPULATION_NULL | noted | the population null is seeded and quantile-received; self-pairs created by the shuffle are dropped (disclosed) |
 | Simon/Chekhov | untested source | native/scripts/callimachus-run.mjs | noted | runner predates the diff; verified end to end by --replay instead |
 clean: Dijkstra, Pearl, Frankfurt, Greenberg
+
+## 2026-10-15 — native guard: allowlist REALITY-LEVELS-SPEC.md's frozen-provider provenance row (branch fix/allowlist-reality-levels-spec, range main..HEAD)
+fast: 1 files · 0 affected tests (no test imports the guard; CI's native-kernel runs it) · law: ok (WARN pre-existing S17/S96 in native/READING-SPEC.md, not this diff)
+| lens | citation | file:line | verdict | one line |
+| Simon/Chekhov | new/untested source | native/scripts/check-no-legacy-submodule.mjs | clean | the diff only adds a Set entry; the guard is exercised by CI's native-kernel gate, which this change turns green — no new module, no unwired seam |
+clean: Simon/Chekhov (the entry is data the guard itself consumes)
