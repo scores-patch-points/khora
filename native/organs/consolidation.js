@@ -40,8 +40,15 @@
 // worktree forward — its memory, capped, with every pruned entry and its
 // path back to the immortal action log. So the night's output is a worktree
 // that cannot balloon, not an ever-growing one.
+//
+// THE MORNING DECIDES NOTHING (settle). The waking dream's three hypotheses are settled the
+// night's way: a discrepancy becomes a CONTEST (disclosed, no verdict), a nomination a
+// QUESTION for the meet, a support a CANDIDATE whose consequence is still owed. `settle`
+// never promotes — standing is the gate's, on a later turn.
 import { corroborateLedger } from "./corroboration.js";
 import { wakingDream } from "./waking-dream.js";
+
+const freeze = (x) => Object.freeze(x);
 
 /** note task_id -> the seq of its latest hearing — the present's reach. */
 function recencyOf(log) {
@@ -136,4 +143,41 @@ export function wake(actions = [], { floor = 2, cap = 64 } = {}) {
     pruned: w.pruned,     // path back: addrs / actionLog#i, one hop to the immortal log
     actionLog: w.actionLog,
   };
+}
+
+/**
+ * settle(waking) — THE MORNING'S JUDGMENT over the day's hypotheses. The waking dream opened
+ * QUESTIONS (nominations), disclosed DISAGREEMENTS (discrepancies), and recorded RECURRENCE
+ * (support). The night settles none of them by deciding:
+ *   · a discrepancy becomes a CONTEST — at n >= 2 the record keeps THAT they disagree and no
+ *     opinion about which is right (corroboration.js's own rule), every reading carried;
+ *   · a nomination becomes a QUESTION for the meet (identity-meet.js::survivingIdentity) — the
+ *     caller runs it with its for-whoms; the settle only hands the alternatives over;
+ *   · a support becomes a CANDIDATE — recurrence is met, CONSEQUENCE is still owed, and only
+ *     the gate (the-fold/consequence.js) may promote, on a LATER turn this morning cannot see.
+ * It NEVER promotes: `promoted` is always empty, with the reason named. Pure; accepts the
+ * object `wake()` returns.
+ */
+export function settle(waking = {}) {
+  const discrepancies = waking.discrepancies ?? [];
+  const alternatives = waking.alternatives ?? [];
+  const recurrent = waking.recurrent ?? [];
+  const contests = discrepancies.map((d) => freeze({
+    schema: "EOContest@1", kind: "contest", being: d.being, predicate: d.predicate,
+    readings: d.readings, at: d.at ?? null,
+    disclosure: `${d.readings.length} readings of “${d.being} · ${d.predicate}” disagree — kept as a contest, no opinion about which is right (corroboration.js)`,
+  }));
+  const questions = alternatives.map((n) => n.alternative);   // handed to the meet, never met here
+  const candidates = recurrent.map((s) => freeze({
+    key: s.key, being: s.being, predicate: s.predicate, value: s.value, refs: s.refs, count: s.count,
+    owed: "consequence", basis: "recurrence met; standing is owed the gate (recurrence AND consequence, on a later turn)",
+  }));
+  return freeze({
+    schema: "EODreamSettle@1",
+    contests: freeze(contests),
+    questions: freeze(questions),
+    candidates: freeze(candidates),
+    promoted: freeze([]),
+    reason: "the night decides nothing: a contest is disclosed, a question is met by its for-whoms, a candidate awaits a later turn's consequence — never promoted here",
+  });
 }

@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { dream, wake, projectField } from "./consolidation.js";
+import { dream, wake, settle, projectField } from "./consolidation.js";
 
 // A stand-in notes door: foldWithStanding returns the ledger's notes, hear is a no-op here.
 const door = { foldWithStanding: (log) => log.notes ?? [], hear: (log) => log };
@@ -52,4 +52,21 @@ test("projectField is untouched: a note stands on sources >= floor, else falls t
   assert.equal(cursor, 0);
   assert.deepEqual(field.map((n) => n.id), ["n1"]);
   assert.deepEqual(echo.map((n) => n.id), ["n2"]);
+});
+
+test("settle: a discrepancy becomes a CONTEST (disclosed), a nomination a QUESTION, a support a CANDIDATE", () => {
+  const s = settle(wake(actions(), { cap: 10 }));
+  assert.equal(s.contests.length, 40, "every disagreeing being is a contest");
+  assert.equal(s.questions.length, 40, "every nominated pair is a question for the meet");
+  assert.ok(s.candidates.length >= 1, "the recurrent key is a candidate");
+  assert.equal(s.candidates[0].owed, "consequence");
+  // the disagreement is KEPT, both readings carried — never collapsed to a winner
+  assert.ok(s.contests[0].readings.length >= 2);
+});
+
+test("settle NEVER PROMOTES: promoted is empty and says why", () => {
+  const s = settle(wake(actions(), { cap: 10 }));
+  assert.deepEqual(s.promoted, []);
+  assert.match(s.reason, /never promoted/);
+  assert.ok(!JSON.stringify(s).includes('"standing":"standing"'));
 });
