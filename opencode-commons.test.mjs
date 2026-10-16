@@ -138,13 +138,13 @@ test("TINY: the whole surf note stays under its budget however much there is to 
   assert.doesNotMatch(s.note, /fold-commons/, "the commons rides the context event only, never twice");
 });
 
-test("TINY: the marks cue appears once per session, not every turn", async () => {
+test("TINY: the marks cue is GONE — the stack writes the claim, the model never appends", async () => {
   const { answer } = await boot();
   const ws = repo();
   const t = [turn(1, "a", "b"), turn(2, "c", "d"), turn(3, "e", "f")];
   const one = await answer({ event: "surf", sessionID: "ses_Z", workspace: ws, ask: "q", turns: t });
   const two = await answer({ event: "surf", sessionID: "ses_Z", workspace: ws, ask: "q", turns: t });
-  assert.match(one.note, /marks: append/);
+  assert.doesNotMatch(one.note, /marks: append/);
   assert.doesNotMatch(two.note, /marks: append/);
 });
 

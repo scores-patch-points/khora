@@ -183,13 +183,55 @@ function readRecord() {
   } catch { return []; }
 }
 
+// ONLY THE DMD + SLEEP CLEANING (2026-10-16). The record keeps only the DIFFERENCE THAT MAKES A
+// DIFFERENCE: a turn that carries nothing the last recorded turn for the same address lacked — the
+// same plan, settled outcome, recall, injected notes and answer — is a repetition, and is not appended.
+// When the door has been idle for FOLD_SLEEP_MS it compacts the file, dropping those repetitions, so a
+// long session folds to its differences rather than its "did it again"s.
+const SLEEP_MS = Number(process.env.FOLD_SLEEP_MS ?? 30 * 60_000);
+// The DMD is the OUTCOME of the work — what was done and how it ended — not the prompting that produced
+// it: a repeat answered the same way through a recall carries no new difference, so `recalled`/`system`
+// are deliberately NOT compared.
+const DMD_FIELDS = ["address", "plan", "settled", "answer"];
+const dmdSame = (a, b) =>
+  !!a && !!b && a.sessionID === b.sessionID && DMD_FIELDS.every((k) => JSON.stringify(a[k] ?? null) === JSON.stringify(b[k] ?? null));
+
 let appended = null;
 const lastRow = () => appended;
+let sleepTimer = null;
+
+// SLEEP CLEANING: idle -> compact. Per address the last row stands; a row identical in the DMD fields to
+// the last kept row for its address is a repetition and drops. Atomic rewrite; cleaning never blocks a turn.
+function compactRecord() {
+  try {
+    const rows = readRecord();
+    const byAddr = new Map();
+    const kept = [];
+    for (const r of rows) {
+      if (r.address && dmdSame(byAddr.get(r.address), r)) continue;
+      if (r.address) byAddr.set(r.address, r);
+      kept.push(r);
+    }
+    if (kept.length === rows.length) return;
+    const tmp = `${RECORD}.tmp`;
+    fs.writeFileSync(tmp, kept.map((r) => JSON.stringify(r)).join("\n") + (kept.length ? "\n" : ""));
+    fs.renameSync(tmp, RECORD);
+  } catch { /* cleaning never blocks a turn */ }
+}
+function scheduleSleep() {
+  clearTimeout(sleepTimer);
+  sleepTimer = setTimeout(compactRecord, SLEEP_MS);
+  sleepTimer.unref?.();
+}
 function append(row) {
+  if (dmdSame(appended, row)) return appended; // carries no difference: not recorded
   appended = row;
   fs.mkdirSync(STATE, { recursive: true });
   fs.appendFileSync(RECORD, JSON.stringify(row) + "\n");
+  scheduleSleep();
 }
+try { appended = readRecord().at(-1) ?? null; } catch { appended = null; }
+if (appended) scheduleSleep();
 
 // ── savings ledger ───────────────────────────────────────────────────────
 // The counter the operator reads. Chars are measured; tokens are chars/4 and
