@@ -26,6 +26,7 @@ import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 import { taskDir } from "./opencode-worknotes.mjs";
+import { neutralize } from "./opencode-defang.mjs";
 
 export const EOT_SCHEMA = "OpenCodeEOT@1";
 export const STAGES = Object.freeze(["read", "turn", "mark", "claim", "done", "draw", "hunt", "refuse", "verify", "admit", "reject", "reason", "flag", "ibid", "contend", "edit", "exec", "wt"]);
@@ -39,14 +40,9 @@ const MODEL_KINDS = new Set(["turn", "mark", "model", "claim"]);
 const MECHANICAL_STAGES = new Set(["verify", "admit", "read", "contend", "edit", "exec", "wt"]);
 export const originOf = (kind) => (MODEL_KINDS.has(kind) ? "model" : "mechanical");
 
-/** Defang the markers a model could forge to look mechanical. Visible, but no longer parseable. */
-export function neutralize(text) {
-  return String(text ?? "")
-    .replace(/⟨/g, "‹").replace(/⟩/g, "›").replace(/⟦/g, "‹").replace(/⟧/g, "›")
-    .replace(/\[\[\s*snip:/gi, "[ snip:")
-    .replace(/<\s*\/?\s*fold-/gi, (m) => m.replace(/fold-/i, "fold_"))
-    .replace(/\b(evt|src)_([0-9a-f]{20})\b/g, "$1-$2");
-}
+/** Defang the markers a model could forge to look mechanical. Visible, but no longer parseable.
+ *  Shared with the worknotes store (opencode-defang.mjs) so the firewall is the same on both paths. */
+export { neutralize };
 const ident = (s) => { const v = String(s ?? ""); return /^[\w.-]+$/.test(v) && v !== "." && v !== ".." ? v : null; };
 const oneLine = (s) => String(s ?? "").replace(/\s+/g, " ").trim();
 
@@ -282,11 +278,14 @@ export function projectRecord(task) {
 /** What others hold: live claims (a decaying trace) minus anything `done`, excluding this agent's own. */
 export function projectTaken(task, agent, { now = Date.now(), ttlMs = 15 * 60_000 } = {}) {
   const { events } = read(task);
-  const done = new Set(events.filter((e) => e.stage === "done").map((e) => e.detail?.item));
+  // Items are matched on a folded key (case/space), so "Migrate Users" done and "migrate  users" claimed
+  // are the same item — done cannot be undone by a case variant.
+  const key = (s) => oneLine(s).toLowerCase();
+  const done = new Set(events.filter((e) => e.stage === "done").map((e) => key(e.detail?.item)));
   const latest = new Map();
-  for (const e of events) if (e.stage === "claim") latest.set(`${e.detail?.item}|${e.agent}`, e);
+  for (const e of events) if (e.stage === "claim") latest.set(`${key(e.detail?.item)}|${e.agent}`, e);
   return [...latest.values()]
-    .filter((e) => e.agent !== agent && !done.has(e.detail?.item) && now - e.ts <= (e.detail?.ttlMs ?? ttlMs))
+    .filter((e) => e.agent !== agent && !done.has(key(e.detail?.item)) && now - e.ts <= (e.detail?.ttlMs ?? ttlMs))
     .map((e) => ({ item: e.detail.item, agent: e.agent }));
 }
 
@@ -487,7 +486,13 @@ export function projectTreeNote(task, { max = 6 } = {}) {
 // ── the guard: what a model SAID, typed against the log and the disk ─────────────────────────────
 
 const PATH_RE = /(?<![\w/.-])((?:[\w.-]+\/)*[\w.-]+\.(?:mjs|cjs|js|jsx|ts|tsx|py|json|md|css|html|sh|yaml|yml|toml|go|rs|java|rb))(?![\w/-])/g;
-const PASS_RE = /\b(?:all\s+)?(?:tests?|checks?|suite|build|specs?)\b[^.!?]{0,30}\b(?:pass(?:es|ed|ing)?|green|succeed(?:s|ed)?)\b|\ball\s+green\b|\b\d+\s*\/\s*\d+\s+(?:tests?\s+)?pass/i;
+// A claim that work is finished/passing. The first alternatives name a check explicitly; the rest catch the
+// paraphrase that avoids the words "test/pass" ("the implementation is complete", "everything works now",
+// "I have finished the refactor") — the class that used to slip the guard unflagged.
+const PASS_RE = /\b(?:all\s+)?(?:tests?|checks?|suite|build|specs?)\b[^.!?]{0,30}\b(?:pass(?:es|ed|ing)?|green|succeed(?:s|ed)?)\b|\ball\s+green\b|\b\d+\s*\/\s*\d+\s+(?:tests?\s+)?pass\b|\b(?:is|are|was|were|it'?s|now|has been|have been)\s+(?:all\s+)?(?:done|complete|completed|finished|fixed|resolved|implemented|working|functional|operational|ready|shipped|merged|good)\b|\b(?:i|we)(?:'ve| have)\s+(?:finished|completed|fixed|implemented|resolved|done|built|shipped|merged|refactored)\b|\b(?:everything|it|this|that|all)\b[^.!?]{0,12}\bworks?\b/i;
+// Polarity: a sentence that NEGATES what its matched witnessed source asserts (or vice versa) has not
+// been grounded by the overlap — it may contradict it. Disclosed as a flag, never silently "supported".
+const NEG_RE = /\b(?:not|no|never|without|none|neither|nor|cannot|can't|won't|isn't|aren't|wasn't|weren't|doesn't|don't|didn't|hasn't|haven't)\b/i;
 
 /**
  * groundCheck({ task, text, root, now, passWindowMs }) → { sentences:[{text, type, ref?}], flags:[{kind, detail}], summary }
@@ -498,13 +503,20 @@ const PASS_RE = /\b(?:all\s+)?(?:tests?|checks?|suite|build|specs?)\b[^.!?]{0,30
 export function groundCheck({ task, text, root = null, now = Date.now(), passWindowMs = 30 * 60_000 } = {}) {
   const { events, sources } = read(task);
   const known = new Set();
-  for (const s of sources.values()) if (s.kind === "file" || s.kind === "claim") known.add(String(s.locator).replace(/^edit\s+/, ""));
-  for (const e of events) if (e.unit) known.add(String(e.unit));
+  // A path counts as known only when the FIREWALL vouched for it: a mechanical source (kind "file") or a
+  // mechanical event's unit. A model-authored `claim` is MODEL origin and never whitelists a path — before
+  // this, a claim naming "src/ghost/phantom.ts" made groundCheck stop flagging it (the model minted its own
+  // evidence that the file existed).
+  for (const s of sources.values()) if (originOf(s.kind) === "mechanical" && s.kind === "file") known.add(String(s.locator).replace(/^edit\s+/, ""));
+  for (const e of events) if (e.origin === "mechanical" && e.unit) known.add(String(e.unit));
   const witnessedPass = events.some((e) => e.stage === "verify" && e.standing === "witnessed" && now - e.ts <= passWindowMs && Number(sources.get(e.source_id)?.meta?.exit) === 0);
   // content terms: 4+ letters, a trailing plural/3rd-person "s" folded, so "continues" meets "continue"
   // and the function words ("the", "now", "and") never count as evidence of grounding
   const terms = (t) => new Set((String(t).toLowerCase().match(/[\p{L}\p{N}_]{4,}/gu) ?? []).map((w) => (w.length > 4 && w.endsWith("s") && !w.endsWith("ss") ? w.slice(0, -1) : w)));
-  const witnessedText = events.filter((e) => e.standing === "witnessed").map((e) => ({ e, t: terms(`${e.detail?.delta ?? ""} ${sources.get(e.source_id)?.locator ?? ""} ${e.unit ?? ""}`) }));
+  const witnessedText = events.filter((e) => e.standing === "witnessed").map((e) => {
+    const raw = `${e.detail?.delta ?? ""} ${sources.get(e.source_id)?.locator ?? ""} ${e.unit ?? ""}`;
+    return { e, raw, t: terms(raw) };
+  });
   const saidText = events.filter((e) => e.stage === "turn" || e.stage === "mark").map((e) => ({ e, t: terms(sources.get(e.source_id)?.locator ?? "") }));
   const flags = [], out = [];
   for (const s of sentencesOf(text)) {
@@ -513,6 +525,8 @@ export function groundCheck({ task, text, root = null, now = Date.now(), passWin
     const g = overlap(witnessedText);
     const a = g ? null : overlap(saidText);
     out.push({ text: s, type: g ? "grounded" : a ? "asserted" : "self:model", ...(g ? { ref: g.e.event_id } : a ? { ref: a.e.event_id } : {}) });
+    // the overlap grounds the WORDS; if the polarity differs, the sentence says the opposite of its source
+    if (g && NEG_RE.test(s) !== NEG_RE.test(g.raw)) flags.push({ kind: "polarity_mismatch", detail: s.slice(0, 120) });
     for (const m of s.matchAll(PATH_RE)) {
       const p = m[1];
       const onDisk = root ? fs.existsSync(path.join(root, p)) : false;
