@@ -26,9 +26,10 @@ import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 import { taskDir } from "./opencode-worknotes.mjs";
+import { STAGES } from "./opencode-eot-stages.mjs";
 
 export const EOT_SCHEMA = "OpenCodeEOT@1";
-export const STAGES = Object.freeze(["read", "turn", "mark", "claim", "done", "draw", "hunt", "refuse", "verify", "admit", "reject", "reason", "flag", "ibid", "contend", "edit", "exec", "wt"]);
+export { STAGES };
 const WITNESS_KINDS = new Set(["file", "tool", "test", "fs"]);
 // THE FIREWALL. Two origins, never merged: MECHANICAL (bytes a tool/fs/test produced or the stack snipped;
 // anchored) and MODEL (anything an agent or a model said). The origin is a function of the source's kind,
