@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { wakingDream, projectMemory, pruneWorktree, reopen, WAKE_SCHEMA } from "./waking-dream.js";
+import { wakingDream, projectMemory, pruneWorktree, reopen, recall, WAKE_SCHEMA } from "./waking-dream.js";
 
 // The Titanic, 1912 — one night, several accounts that do not agree on how many were saved.
 // This is the living corpus the organ was built against (holodeck-samples/titanic-1912 and
@@ -94,6 +94,28 @@ test("PATH BACK: reopen returns the very actions that produced a pruned entry", 
   assert.ok(back.every((a) => a && a.being && a.witness), "the actions are recoverable verbatim");
   // The recalled actions all belong to the one being the pruned entry is about.
   assert.equal(new Set(back.map((a) => a.being)).size, 1);
+});
+
+test("RECALL: a pruned being is remembered by re-folding the immortal log (never a restore)", () => {
+  const many = [];
+  for (let i = 0; i < 40; i++) {
+    many.push({ being: "x" + i, predicate: "is", value: "a", witness: "s1#" + i });
+    many.push({ being: "x" + i, predicate: "is", value: "b", witness: "s2#" + i });
+  }
+  const { actionLog, memory } = wakingDream(many, { cap: 10 });
+  const gone = "x0";
+  assert.ok(!memory.some((e) => e.being === gone), "the cap did prune x0 out of the worktree");
+  const r = recall(gone, actionLog);
+  assert.equal(r.status, "recalled");
+  assert.ok(r.entries.length > 0, "its standing comes back");
+  assert.ok(r.addrs.length > 0, "with the addresses that back it");
+});
+
+test("RECALL of a being the log never named is a typed absence, not an empty one", () => {
+  const r = recall("nobody", A);
+  assert.equal(r.status, "absent");
+  assert.deepEqual(r.entries, []);
+  assert.match(r.basis, /typed absence/);
 });
 
 test("CLEAN CONTROL: a log with no recurrence and no disagreement emits nothing", () => {

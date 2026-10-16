@@ -215,3 +215,19 @@ export function reopen(entry, actionLog = []) {
   const addrs = entry?.addrs ?? [];
   return freeze(addrs.map((i) => actionLog[i]).filter(Boolean));
 }
+
+/**
+ * recall(being, actionLog, {floor}) — REMEMBER WHAT WAS PRUNED. Whether or not the being is
+ * in the current worktree, its standing is recomputed from the IMMORTAL action log and returned
+ * with the addresses that back it. This is the path back made callable: a pruned being is not
+ * lost, only out of the field, and asking for it is a re-fold — never a write, never a restore.
+ * A being the log never named is a TYPED absent, not an empty one.
+ */
+export function recall(being, actionLog = [], { floor = 2 } = {}) {
+  const q = str(being);
+  if (!q) throw new TypeError("recall: a being is required");
+  const entries = projectMemory(actionLog, { floor }).entries.filter((e) => e.being === q);
+  const addrs = freeze([...new Set(entries.flatMap((e) => e.addrs ?? []))].sort((a, b) => a - b));
+  if (!entries.length) return freeze({ schema: WAKE_SCHEMA, query: q, status: "absent", entries: freeze([]), addrs: freeze([]), basis: "no action names this being on the log — a typed absence, not an empty recall" });
+  return freeze({ schema: WAKE_SCHEMA, query: q, status: "recalled", entries: freeze(entries), addrs, basis: "re-folded from the immortal action log — recall is a re-fold, never a write" });
+}
