@@ -81,6 +81,7 @@ import { spawnSync, execFileSync } from "node:child_process";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { lookNote, projectHistory } from "./opencode-context.mjs";
 import { recordTurnsToWeft } from "./opencode-weft-record.mjs";
+import { findInWeft } from "./opencode-weft-find.mjs";
 import { archonNote } from "./opencode-archons.mjs";
 import { connect as matrixConnect } from "./fold-matrix.mjs";
 import { connect as driveConnect } from "./fold-gdrive.mjs";
@@ -1079,8 +1080,19 @@ async function onSurf(body) {
   if (recordLines.length) mech.push({ p: 4, t: `verified: ${recordLines.join("; ")}`.slice(0, 240) });
   const turnState = turnFor(agent);
   if (turnState.flags?.length) mech.push({ p: 1, t: `unverified in your last answer: ${turnState.flags.slice(0, 3).map((f) => `${f.kind}${f.kind === "unknown_path" ? ` ${f.detail}` : ""}`).join("; ")}`.slice(0, 200) });
+  if (turnState.standing && (turnState.standing.refuted.length || turnState.standing.unresolved)) mech.push({ p: 1, t: `standing of your last answer: ${turnState.standing.licensed} licensed, ${turnState.standing.refuted.length} refuted${turnState.standing.refuted.length ? ` (${turnState.standing.refuted.join(",")})` : ""}, ${turnState.standing.unresolved} untested` });
   for (const b of blocks.slice(-2)) said.push({ p: 2, t: `block [${short8(b.agent)}]: ${String(b.text).slice(0, 110)}` });
   said.push({ p: 3, t: String(out.note ?? "").split("\n").slice(0, 5).join("\n").slice(0, 380) });
+  // THE WEFT: where in the raw turns the ask's own beings are (offsets into <agent>.turns.md, from the lean records). Addresses only, never prose.
+  try {
+    const w = process.env.FOLD_WEFT === "0" ? null : findInWeft({ ask: String(body.ask ?? ""), task, max: 3 });
+    if (w?.hits.length || w?.conflicts.length) {
+      const strip = (a) => a.slice(a.indexOf("/") + 1);
+      const home = (process.env.FOLD_WORKNOTES_DIR ?? "~/.fold/worknotes").replace(process.env.HOME ?? "\0", "~");
+      const parts = [...w.hits.map((h) => strip(h.address)), ...w.conflicts.slice(0, 1).map((c) => `conflict ${c.relation.replace(/\|/g, " ")}: held ${strip(c.holds[0])} denied ${strip(c.denies[0])}`)];
+      said.push({ p: 4, atomic: true, t: `weft ${home}/${task}/: ${parts.join(" · ")}` });
+    }
+  } catch { /* the weft read never blocks a turn */ }
   if (!cueSeen.has(agent)) {
     cueSeen.add(agent);
     const home = (process.env.FOLD_WORKNOTES_DIR ?? "~/.fold/worknotes").replace(process.env.HOME ?? "\0", "~");
@@ -1092,6 +1104,7 @@ async function onSurf(body) {
       if (!part.t) continue;
       const room = budget - used - (kept.length ? 1 : 0);
       if (room <= 40) continue;
+      if (part.atomic && part.t.length > room) continue; // an address cut in half points nowhere: drop the whole part
       const t = part.t.length > room ? `${part.t.slice(0, room - 1)}…` : part.t;
       kept.push(t); used += t.length + (kept.length > 1 ? 1 : 0);
     }

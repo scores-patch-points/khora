@@ -4,12 +4,18 @@
 // The index is the lean records themselves (INS beings, CON relations, EVA negations); it is rebuilt from the store per call, a pure fold.
 import fs from "node:fs";
 import path from "node:path";
-import { openStore } from "./native/the-fold/weft-store.mjs";
+import { unpack } from "./native/the-fold/weft-lean.mjs";
 import { weftDir } from "./opencode-weft-record.mjs";
 
 const WORD = /[a-z_][a-z0-9_]*/g;
+// segments are immutable once written, so each is unpacked once per process; only new segments are read on a later call
+const SEG = new Map(); // `${dir}/${file}` -> passes
+function storePasses(dir) {
+  const files = fs.readdirSync(dir).filter((f) => /^seg-\d{6}\.bin$/.test(f)).sort();
+  return files.flatMap((f) => { const k = `${dir}/${f}`; if (!SEG.has(k)) SEG.set(k, unpack(fs.readFileSync(path.join(dir, f)))); return SEG.get(k); });
+}
 export function findInWeft({ ask = "", task = null, dir = weftDir(), hops = 1, max = 5 } = {}) {
-  let passes = []; try { passes = openStore(dir).passes(); } catch { return { hits: [], conflicts: [], gap: "no-store" }; }
+  let passes = []; try { passes = storePasses(dir); } catch { return { hits: [], conflicts: [], gap: "no-store" }; }
   if (task) passes = passes.filter((p) => p.a.startsWith(`${task}/`));
   const beings = new Map(), cons = [];
   const addBeing = (b, p, at) => { if (!beings.has(b)) beings.set(b, []); beings.get(b).push({ p, at }); };

@@ -69,3 +69,51 @@ test("F6 the store holds offsets, not prose: the packed record is a small fracti
   const segs = fs.readdirSync(STORE).filter((f) => f.startsWith("seg-")).map((f) => fs.statSync(path.join(STORE, f)).size);
   assert.ok(segs.at(-1) < raw / 4, `${segs.at(-1)} B segment vs ${raw} B raw`);
 });
+
+// ── the surf note: where in the raw turns the ask's beings are, as offsets, inside the existing budget ──
+const surfNote = (ans, task, sid, ask, turns) => ans({ event: "surf", sessionID: sid, task, ask, turns }).then((r) => r.note);
+const planted = (len, plants) => Array.from({ length: len }, (_, i) => ({ ...filler(i + 1), ...(plants[i + 1] ?? {}) }));
+
+test("S1 the surf note carries a weft line whose address expands to the planted sentence", { skip: SKIP }, async () => {
+  const task = fresh(), s = "The zorblax3 contract requires idempotent writes.";
+  const note = await surfNote(answer, task, "ses_s1aaaa", "extend the zorblax3 writes", planted(60, { 7: { answer: `${s} Tests pass.` } }));
+  const m = /weft [^\n]*?: ([^\n]*)/.exec(note); assert.ok(m, note);
+  const addr = /([\w.-]+\.turns\.md)#(\d+)/.exec(m[1]);
+  assert.equal(expandHit({ file: `${task}/${addr[1]}`, at: Number(addr[2]), address: addr[0] }, { root: WN }).text, s);
+  assert.ok(/<fold-said>[\s\S]*weft /.test(note) && !/<fold-mechanical>[^<]*weft /.test(note), "a said-derived pointer is in the said section");
+});
+
+test("S2 the note stays inside FOLD_NOTE_CHARS and carries addresses, not prose", { skip: SKIP }, async () => {
+  const task = fresh();
+  await answer({ event: "surf", sessionID: "ses_s2bbbb", task, ask: "q", turns: [{ n: 1, ask: "a", answer: "The parser drops trailing commas.", grounds: [] }] });
+  const note = await surfNote(answer, task, "ses_s2aaaa", "does the parser drop trailing commas", [{ n: 1, ask: "a", answer: "The parser does not drop trailing commas.", grounds: [] }]);
+  assert.ok(note.length <= 700, `${note.length}`);
+  const line = /weft [^\n]*/.exec(note)?.[0] ?? ""; assert.match(line, /conflict parser drop commas/);
+  assert.doesNotMatch(line, /requires|Tests pass|trailing/, "no sentence text rides in the line");
+});
+
+test("S3 under a tight budget the weft line is dropped whole, never an address cut in half", { skip: SKIP }, async () => {
+  process.env.FOLD_NOTE_CHARS = "500"; // measured: at 460-500 an unguarded pack cut the second address mid-way
+  try {
+    const { answer: tight } = await import(`./opencode-doorway.mjs?tight=${Date.now()}`);
+    const turns = Array.from({ length: 4 }, (_, i) => ({ n: i + 1, ask: `ask ${i}`, answer: i === 1 ? "The zorblax3 contract requires idempotent writes." : "Done.", grounds: [] }));
+    const note = await surfNote(tight, fresh(), "ses_s3aaaa", "extend the zorblax3 writes", turns);
+    assert.ok(!/weft [^\n]*…/.test(note), `cut line: ${note}`);
+    for (const l of note.split("\n").filter((x) => x.startsWith("weft "))) assert.match(l, /#\d+$/, l);
+  } finally { delete process.env.FOLD_NOTE_CHARS; }
+});
+
+test("S4 FOLD_WEFT=0 and an ask that names nothing known both leave the note without a weft line", { skip: SKIP }, async () => {
+  const task = fresh(), turns = planted(30, { 7: { answer: "The zorblax3 contract requires idempotent writes. Tests pass." } });
+  assert.doesNotMatch(await surfNote(answer, task, "ses_s4aaaa", "something about nothing indexed", turns), /weft /);
+  process.env.FOLD_WEFT = "0";
+  try { assert.doesNotMatch(await surfNote(answer, fresh(), "ses_s4bbbb", "extend the zorblax3 writes", turns), /weft /); } finally { delete process.env.FOLD_WEFT; }
+});
+
+test("S5 the read stays cheap with a big store (300 turns, 40 segments already in it)", { skip: SKIP }, async () => {
+  const task = fresh();
+  for (let i = 0; i < 40; i++) await answer({ event: "surf", sessionID: `ses_pad${i}aaaa`, task: fresh(), ask: "q", turns: planted(8, {}) });
+  await answer({ event: "surf", sessionID: "ses_s5aaaa", task, ask: "q", turns: planted(300, { 9: { answer: "The zorblax3 contract requires idempotent writes. Tests pass." } }) });
+  const t0 = Date.now(); const note = await surfNote(answer, task, "ses_s5aaaa", "extend the zorblax3 writes", planted(300, { 9: { answer: "The zorblax3 contract requires idempotent writes. Tests pass." } }));
+  const ms = Date.now() - t0; assert.match(note, /weft /); assert.ok(ms < 1000, `${ms}ms`);
+});
