@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { dream, wake, settle, projectField } from "./consolidation.js";
+import { dream, wake, settle, promote, projectField } from "./consolidation.js";
 import { createForWhom } from "../kernel/for-whom.js";
 import { identityAlternative } from "../kernel/identity.js";
 
@@ -98,4 +98,22 @@ test("settle: given reads, the MEET RUNS — a pair one for-whom joins survives;
   const key = ["705", "711"].sort().join("\u0000");
   assert.ok(s.meet.survivors.includes(key), "the supported pair 705/711 survives the meet");
   assert.equal(settle(wake(actions(), { cap: 10 })).meet, null, "no reads -> questions handed over unmett");
+});
+
+test("promote: the gate promotes ONLY on measured consequence (recurrence AND consequence)", () => {
+  const cands = [{ key: "k1", value: "a" }, { key: "k2", value: "b" }];
+  const p = promote(cands, { consequenceOf: (c) => (c.value === "a" ? { status: "mattered" } : { status: "recurring_no_consequence" }) });
+  assert.deepEqual(p.promoted.map((x) => x.key), ["k1"]);
+  assert.equal(p.promoted[0].reason, "recurrence_and_consequence");
+  assert.equal(p.held[0].reason, "recurring_no_consequence");
+});
+
+test("promote: an unmeasured consequence is HELD as untested — a gap is never a silent promote", () => {
+  const p = promote([{ key: "k1", value: "a" }], { consequenceOf: () => null });
+  assert.equal(p.promoted.length, 0);
+  assert.equal(p.held[0].reason, "consequence_untested");
+});
+
+test("promote: without a consequence measurement it refuses (consequence is never assumed)", () => {
+  assert.throws(() => promote([{ key: "k1", value: "a" }]), /consequenceOf is a function/);
 });
