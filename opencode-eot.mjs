@@ -360,6 +360,29 @@ export function projectProvenance(task, unit) {
   }));
 }
 
+/** One event in full, for the panel's detail pane: the event, its source, the parent chain that justifies
+ *  it, and who held the path it touches (claims and contentions, chronological). Pure, no bytes. */
+export function eventDetail(task, id) {
+  const { events, sources } = read(task);
+  const ev = events.find((e) => e.event_id === id);
+  if (!ev) return null;
+  const chain = [];
+  for (let cur = ev; cur; cur = cur.parent ? events.find((e) => e.event_id === cur.parent) : null) chain.push(cur);
+  // a file edit names its path in detail.path; a claim/contend names it as detail.item === "edit <path>"
+  const rel = ev.detail?.path ?? (typeof ev.unit === "string" && ev.unit.startsWith("edit ") ? ev.unit.slice(5) : null);
+  const item = rel ? `edit ${rel}` : null;
+  const held = [];
+  for (const e of events) if (item && e.detail?.item === item && (e.stage === "claim" || e.stage === "contend" || e.stage === "done"))
+    held.push({ id: e.event_id, stage: e.stage, agent: e.agent, holder: e.detail?.holder ?? null, ts: e.ts });
+  return {
+    id: ev.event_id, stage: ev.stage, agent: ev.agent, ts: ev.ts, origin: ev.origin, standing: ev.standing,
+    parent: ev.parent ?? null, unit: ev.unit ?? null, range: ev.range ?? null, detail: ev.detail ?? null,
+    source: ev.source_id ? { id: ev.source_id, kind: sources.get(ev.source_id)?.kind ?? null, locator: sources.get(ev.source_id)?.locator ?? null, meta: sources.get(ev.source_id)?.meta ?? null } : null,
+    chain: chain.slice(1).map((e) => ({ id: e.event_id, stage: e.stage, agent: e.agent, standing: e.standing, ts: e.ts })),
+    held,
+  };
+}
+
 
 /**
  * THE WORK TREE as a fold of the log. asOf is an event_id (inclusive) or a ms timestamp; omitted = now.
