@@ -5,6 +5,7 @@ import os from "node:os";
 import path from "node:path";
 
 process.env.FOLD_OPENCODE_STATE = fs.mkdtempSync(path.join(os.tmpdir(), "oc-door-"));
+process.env.FOLD_WORKNOTES_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "oc-wn-"));
 const door = await import("../opencode-doorway.mjs");
 
 const ev = (sessionID, type, data = {}) => door.answer({ event: "event", sessionID, type, data });
@@ -147,6 +148,51 @@ test("context looks at the workspace (Look): the first ask starts the index, the
   assert.doesNotMatch(out.look, /other\.js/);
   const { shutdown } = await import("../opencode-context.mjs");
   shutdown();
+});
+
+test("swarm deploys the registry, records the finding, and the next ask surfaces it", async () => {
+  const material = "The council voted 6-3 to approve the budget. The mayor vetoed it. The council overrode the veto 7-2.";
+  const r = await door.answer({ event: "swarm", sessionID: "s30", agent: "s30", task: "s30", ask: "what does this material hold", text: material });
+  assert.equal(r.ok, true);
+  assert.equal(r.mode, "all"); // the tool always deploys the whole registry
+  assert.ok(["converged", "unresolved", "gap"].includes(r.standing));
+  assert.equal(typeof r.reading, "string");
+  assert.equal(typeof r.holes, "string");
+  // The finding enters the task's medium as a swarm fact mark (asserted, never a witness).
+  const { read } = await import("../opencode-worknotes.mjs");
+  const marks = read({ task: "s30" }).marks.filter((m) => m.agent === "swarm" && m.kind === "fact");
+  assert.equal(marks.length, 1);
+  assert.match(marks[0].text, /^swarm\(/);
+  // The next ask whose words bear on the finding carries it, mechanically.
+  const ctx = await door.answer({ event: "context", sessionID: "s30", task: "s30", ask: "what did the swarm measure about the budget veto material" });
+  assert.match(ctx.swarm, /<fold-swarm measured="1">/);
+  assert.match(ctx.swarm, /swarm\(/);
+  // An ask whose words do not bear on it gets no swarm note.
+  const off = await door.answer({ event: "context", sessionID: "s30", task: "s30", ask: "unrelated question about quantum chromodynamics" });
+  assert.equal(off.swarm, undefined);
+});
+
+test("an unnamed pointing still deploys: the swarm tool never gaps on the ask's phrasing", async () => {
+  const r = await door.answer({ event: "swarm", sessionID: "s31", agent: "s31", task: "s31", ask: "what", text: "one plain sentence." });
+  assert.equal(r.ok, true);
+  assert.notEqual(r.mode, "gap"); // a bare "what" must not spuriously point at the `what` row alone
+});
+
+test("swarm reads any-modality material through the senses: a text file is its own ground", async () => {
+  const f = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "oc-swarm-")), "material.txt");
+  fs.writeFileSync(f, "The council voted 6-3 to approve the budget.\n");
+  const r = await door.answer({ event: "swarm", sessionID: "s32", agent: "s32", task: "s32", ask: "what holds", path: f });
+  assert.equal(r.ok, true);
+  assert.equal(r.modality, "text/plain");
+  assert.equal(r.giver, "utf8-passthrough");
+});
+
+test("the sense hunt is inspectable and partitions the registry", async () => {
+  const sink = { status: null, body: null, writeHead(s) { this.status = s; }, end(b) { this.body = b; } };
+  assert.equal(await door.route({ method: "GET", url: "/v1/hooks/opencode/senses" }, sink), true);
+  const o = JSON.parse(sink.body);
+  assert.equal(o.schema, "SenseSwarm@1");
+  assert.ok(Array.isArray(o.hunt.found) && Array.isArray(o.hunt.missing));
 });
 
 test("route answers the door and declines other paths", async () => {

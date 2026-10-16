@@ -41,11 +41,24 @@
 // on to use as often as head/tail or random lines did at the same size
 // (scripts/opencode-fold-replay.mjs). The `fold` event now answers {}.
 //
+//   swarm     deploy the model-free capacity-swarm on hard material (the `swarm`
+//             tool). Reads any language and any modality: a file is resolved by the
+//             SENSE-SWARM first — every present organ (khora/senses/registry.mjs:
+//             the macOS Vision organ, tesseract, cv-khora, sips, poppler, whisper,
+//             each found by the hunt, none assumed) reads the bytes at once, the
+//             delta is their agreement, and the representative reading is the one
+//             that best agrees with the consensus, never a blend. The swarm points
+//             the registry at that ground's referent-physics, and records the
+//             surviving read as a task mark the next turn's note carries.
+//
 //   POST /v1/hooks/opencode          the events above, plus draft + act
 //                                    (DRAFT-LINT shadow: recorded, never
 //                                    enforced until the composer is built)
 //   GET  /v1/hooks/opencode/meter    what the frontier cost, first ask vs
 //                                    repeat, and what the fold kept out of it
+//   GET  /v1/hooks/opencode/senses   the sense hunt: which organs are present or
+//                                    absent, and what the ledger has learned about
+//                                    each one's agreement over time
 //   GET  /v1/hooks/opencode/perceive-config
 //   POST /v1/hooks/opencode/perceive-config
 //                                    the Perceive tab's routing config
@@ -91,6 +104,7 @@ import * as remember from "./opencode-remember.mjs";
 import { connect as matrixConnect } from "./fold-matrix.mjs";
 import { connect as driveConnect } from "./fold-gdrive.mjs";
 import { perceiveMedia, probeBackends, PERCEIVE_VERSION } from "./khora/perceive/local.mjs";
+import { perceiveMany as senseMany, huntOrgans, organStanding } from "./senses/registry.mjs";
 import * as cube from "./native/kernel/cube.js";
 import { makeStandingCube, cellForFlag } from "./native/the-fold/standing-cube.js";
 // THE STANDING CUBE (native/the-fold/standing-cube.js): where a reply's claim stands, and which cell
@@ -308,6 +322,13 @@ async function onContext(body) {
   const system = SYSTEM_ON ? remember.noteFor("system", turn.ask) : { gap: "off" };
   if (system.note) { counters.systemServed++; out.systemPrompt = system.note; turn.systemPrompt = system.note; }
   else turn.systemPrompt = system.gap ?? null;
+  // The swarm's learning: what the ants already measured on this task, injected when
+  // the ask's own words bear on it. A mechanical read of the swarm's own marks — no
+  // model, no guess; the standing the swarm measured rides with each finding.
+  if (turn.ask.trim() && (body.workspace || body.task)) {
+    const swarmNote = swarmFindingsNote({ task: taskFor(body, String(body.sessionID ?? "")), ask: turn.ask });
+    if (swarmNote) { out.swarm = swarmNote; turn.swarm = swarmNote; }
+  }
   return out;
 }
 
@@ -1231,6 +1252,122 @@ function onGround(body) {
   return { ...r, flags, standing: standingFor(flags) };
 }
 
+// The modality of a file by extension, for the local senses. Text-family is the
+// fallback (utf8), so code and prose need no enumeration; only the senses that read
+// bytes differently (image / PDF / audio) are named. Video and provider refs are the
+// local senses' own typed gaps (perceiveMedia), never derived here.
+const SWARM_MIME = { png: "image/png", jpg: "image/jpeg", jpeg: "image/jpeg", gif: "image/gif", webp: "image/webp", bmp: "image/bmp", tif: "image/tiff", tiff: "image/tiff", pdf: "application/pdf", wav: "audio/wav", mp3: "audio/mpeg", m4a: "audio/mp4", flac: "audio/flac", ogg: "audio/ogg", opus: "audio/opus", aac: "audio/aac", webm: "audio/webm", mp4: "video/mp4", mov: "video/quicktime", mkv: "video/x-matroska", avi: "video/x-msvideo" };
+const mimeOfPath = (p) => SWARM_MIME[path.extname(String(p)).slice(1).toLowerCase()] ?? "text/plain";
+
+// SWARM: deploy the ant-swarm on hard meaning. The capacity-swarm is model-free
+// (pure organ reads, same as proxy.mjs's /v1/swarm), so this runs with no Heimdall
+// admission and no model draw. It reads any language and any modality — a file is
+// resolved to its own ground by the local senses first (khora/perceive/local.mjs) —
+// and points the registry at that ground's referent-physics (the reader's cast and
+// relations), never at tokens. It returns the swarm's own report (a measurement,
+// never a guess) and records the finding in the task's medium so the next turn's
+// note carries it — the cross-session standing rule for the content type is written
+// inside runSwarmTurn (preserveHardMeaningRule, content-rules.json).
+async function onSwarm(body) {
+  const agent = String(body.agent ?? body.sessionID ?? "swarm");
+  const task = taskFor(body, agent);
+  const workspace = body.workspace ? String(body.workspace) : null;
+  const ask = String(body.ask ?? "");
+  const lang = typeof body.lang === "string" && body.lang ? body.lang : "eng";
+  // Material, in order: a file of any modality (its text read by the local senses
+  // first), then the caller's text, then the bytes at an address, then this task's
+  // own recent turns. Never guessed into existence; an unreadable or textless sense
+  // (video, an unsupported container) is a typed gap, never a swarm over nothing.
+  let text = "", via = null, modality = null, materialName = "swarm-material";
+  let sense = null;
+  if (typeof body.path === "string" && body.path) {
+    try {
+      const bytes = fs.readFileSync(body.path);
+      materialName = path.basename(body.path);
+      modality = mimeOfPath(body.path);
+      // A named-text extension whose bytes carry a NUL is not text: hand it to the
+      // senses as an opaque container instead, so an unreadable binary gaps, never
+      // swarms garbage. Keeps code/prose on the utf8 path with no enumeration.
+      if (modality === "text/plain" && bytes.includes(0)) modality = "application/octet-stream";
+      if (modality.startsWith("text/") || modality === "application/json") {
+        // Text-family is its own ground (utf8) — no organ needed; the senses are for
+        // what bytes do not already spell out.
+        text = bytes.toString("utf8");
+        via = "utf8-passthrough";
+      } else {
+        // THE SENSE-SWARM: every present organ for this modality reads the bytes at
+        // once; the representative reading is the one that best agrees with the
+        // consensus (never a blend), and the delta rides with the finding.
+        sense = await senseMany(bytes, { mime: modality, name: materialName, lang, stateDir: STATE });
+        text = String(sense.text ?? "");
+        via = sense.via ?? null;
+        if (!text) return { ok: false, gap: "no_ground", why: via ?? "unsupported", modality, gaps: sense.gaps ?? [], delta: sense.delta ?? null };
+      }
+    } catch (e) {
+      return { ok: false, gap: "unreadable", why: String(e?.message ?? e).slice(0, 200), modality: mimeOfPath(body.path) };
+    }
+  }
+  if (!text && typeof body.text === "string" && body.text) { text = body.text; via = "text"; modality = "text/plain"; }
+  if (!text && typeof body.ref === "string" && body.ref) {
+    const s = eot.snip({ task, agent, ref: body.ref, root: workspace });
+    if (s && s.ok && typeof s.bytes === "string") { text = s.bytes; via = "snip"; modality = "text/plain"; }
+  }
+  let history = [];
+  if (!text) {
+    try { history = (eot.turnsFromLog(task) ?? []).slice(-4).map((t) => ({ name: agent, text: String(t.text ?? "") })).filter((t) => t.text.trim()); } catch { history = []; }
+    if (history.length) { via = "session-turns"; modality = "text/plain"; }
+  }
+  const texts = text ? [{ name: materialName, text }] : [];
+  const { runSwarmTurn } = await import("./swarm-server.mjs");
+  // Deploy the whole registry: the tool IS "the swarm". The NL is prefixed with the
+  // registry's own "everything" pointing (pointCapacities, capacity-swarm.mjs) rather
+  // than the raw ask, whose ordinary words otherwise spuriously name a capacity (a
+  // bare "what" matches the `what` row). The ask rides for context and hard-meaning.
+  const report = runSwarmTurn({ task: `swarm everything — ${ask}`, texts, history, name: "swarm-material", force: true });
+  if (!report || report.routed !== true) return { ok: false, gap: "not-routed", why: report?.reason ?? null };
+  const best = report.best ?? null;
+  const bar = Number(report.bar ?? 0);
+  const converged = !!(best && Number.isFinite(best.f) && best.f > bar && best.f > 0);
+  // The sense delta rides ahead of the swarm read: which organs read the material,
+  // how they agreed, and what they disputed — the ground's own provenance, disclosed.
+  const senseLine = sense?.delta?.pairs > 0 ? `[${sense.delta.line}]\n` : "";
+  const rawReading = `${senseLine}${String(report.answer ?? "")}`;
+  const reading = rawReading.length > 3500 ? `${rawReading.slice(0, 3500)}…[+${rawReading.length - 3500}]` : rawReading;
+  const standing = report.mode === "gap" ? "gap" : converged ? "converged" : "unresolved";
+  const holes = String(report.residue?.line ?? "");
+  // LEARN: the finding enters the task's medium as a fact mark, attributed to the
+  // swarm (asserted, never a witness — it is what the swarm measured, disclosed as
+  // such), so the next turn's note carries it. Compact by construction: the best
+  // capacity, the ones that measured signal, and the residue — not the whole census.
+  // Written to both the EOT log and the stigmergic medium, the pair every mark uses.
+  const signals = (report.ants ?? []).filter((a) => Number(a.yield) > 0).map((a) => `${(a.ids ?? []).join("+")}(${a.yield})`);
+  const bestTxt = best && Array.isArray(best.ids) ? `${best.ids.join("+")} at ${best.f}` : "none";
+  const src = `${via ?? "?"}${modality && modality !== "text/plain" ? `/${modality}` : ""}${modality !== "text/plain" && lang ? ` ${lang}` : ""}`;
+  const finding = `swarm(${standing}) on "${ask.replace(/\s+/g, " ").slice(0, 80)}" [read ${src}]: best ${bestTxt}${signals.length ? `; signal: ${signals.slice(0, 6).join(", ")}` : "; no capacity measured signal"}${holes ? `; ${holes}` : ""}`;
+  try { eot.recordMark({ task, agent: "swarm", kind: "fact", text: finding }); } catch { /* the log never blocks */ }
+  try { markNote({ task, agent: "swarm", kind: "fact", text: finding }); } catch { /* the medium never blocks */ }
+  return { ok: true, reading, standing, holes, giver: via ?? "ant-swarm", modality, lang, bar, best, mode: report.mode ?? null, meaning: report.meaning ?? null, ants: report.ants ?? [], residue: report.residue ?? null, senses: sense ? { delta: sense.delta, readings: sense.readings } : null };
+}
+
+// THE SWARM'S LEARNING, at the next ask. The swarm's own marks (agent "swarm"),
+// ranked by term overlap with the ask, injected as one note. Mechanical, no model:
+// the standing the swarm measured rides with each finding. Nothing relevant → no note.
+function swarmFindingsNote({ task, ask }) {
+  let marks = [];
+  try { marks = (readNotes({ task })?.marks ?? []).filter((m) => m.agent === "swarm" && m.kind === "fact"); } catch { return null; }
+  if (!marks.length) return null;
+  const terms = new Set(String(ask ?? "").toLowerCase().match(/[\p{L}\p{N}_]{3,}/gu) ?? []);
+  const score = (t) => (String(t).toLowerCase().match(/[\p{L}\p{N}_]{3,}/gu) ?? []).filter((w) => terms.has(w)).length;
+  const ranked = marks.slice().sort((a, b) => score(b.text) - score(a.text) || b.t - a.t);
+  const picked = (terms.size ? ranked.filter((m) => score(m.text) > 0) : ranked).slice(0, 3);
+  if (!picked.length) return null;
+  return [
+    `<fold-swarm measured="${marks.length}">`,
+    ...picked.map((m) => `- ${String(m.text).replace(/\s+/g, " ").slice(0, 300)}`),
+    "</fold-swarm>",
+  ].join("\n");
+}
+
 function onMark(body) {
   try { eot.recordMark({ task: body.task, agent: body.agent, kind: body.kind, text: body.text }); } catch { /* the log never blocks */ }
   return markNote({ task: body.task, agent: body.agent, kind: body.kind, text: body.text });
@@ -1326,6 +1463,7 @@ export async function answer(body, opts = {}) {
     case "notes": return onRead(body);
     case "admit": return onAdmit(body);
     case "snip": return onSnip(body);
+    case "swarm": return onSwarm(body);
     case "tree": return onTree(body);
     case "ground": return onGround(body);
     case "provenance": return { ok: true, ...provenance({ task: taskFor(body, String(body.agent ?? body.sessionID ?? "")) }) };
@@ -1502,10 +1640,18 @@ export async function route(req, res, { log = () => {} } = {}) {
     res.end(JSON.stringify(audit({ limit: Math.min(Math.max(limit, 1), 200) }), null, 2));
     return true;
   }
+  // THE SENSE-SWARM, inspected: which organs the hunt found or found absent, and what
+  // the ledger has learned about each one's agreement. Read-only; a missing state dir
+  // is an empty hunt, never an error.
+  if (url === "/v1/hooks/opencode/senses" && req.method === "GET") {
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify({ schema: "SenseSwarm@1", hunt: huntOrgans({ stateDir: STATE }), standing: organStanding({ stateDir: STATE }) }, null, 2));
+    return true;
+  }
   if (url !== "/v1/hooks/opencode") return false;
   if (req.method === "GET") {
     res.writeHead(200, { "content-type": "application/json" });
-    res.end(JSON.stringify({ door: "opencode", priors: seedStatus(), events: ["context", "surf", "mark", "claim", "done", "notes", "admit", "record", "provenance", "snip", "ground", "nextVoid", "chase", "title", "event", "prompt", "perceive", "draft", "act", "memory", "refs", "system"] }));
+    res.end(JSON.stringify({ door: "opencode", priors: seedStatus(), senses: huntOrgans({ stateDir: STATE }), events: ["context", "surf", "mark", "claim", "done", "notes", "admit", "record", "provenance", "snip", "swarm", "ground", "nextVoid", "chase", "title", "event", "prompt", "perceive", "draft", "act", "memory", "refs", "system"] }));
     return true;
   }
   if (req.method !== "POST") return false;
