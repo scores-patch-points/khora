@@ -21,6 +21,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { greekStemOf } from "./derived-lexicon.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const args = process.argv.slice(2);
@@ -43,7 +44,12 @@ const TEXTS = [
   { file: "xenophon-anabasis.txt", epoch: -370, genre: "memoir", place: "Persia/Greece" },
   { file: "aristotle-politics.txt", epoch: -335, genre: "treatise", place: "Athens/Lyceum" },
 ];
-const STEMS = { slave: ["δουλ", "ανδραποδ", "οικετ"], attendant: ["θεραπον"], free: ["ελευθερ"] };
+// DERIVED: the slave and free stems are the Greek stems the Republic's own Stephanus-page grid pins to the concepts "slavery" and
+// "freedom" (plato-republic-concepts-v1), reduced by successor variety (derived-lexicon.mjs) — δουλειασ → δουλ, ελευθερια → ελευθερ,
+// identical to the stems this line used to type. DECLARED, NOT DERIVABLE (left, on purpose): ανδραποδ and οικετ are aligned with the
+// English slave words too, but so are the tyrant and master stems (τυραν-, δεσπο-), so deriving them would pull those kinds in;
+// θεραπον has no pin, and the "attendant" kind is itself a declared reading (θεράπων is ambiguous).
+const STEMS = { slave: [greekStemOf("slavery"), "ανδραποδ", "οικετ"], attendant: ["θεραπον"], free: [greekStemOf("freedom")] };
 const stripped = (c) => c.normalize("NFD").replace(/[̀-ͯͅ]/g, "").toLowerCase().replace(/ς/g, "σ");
 
 const witnesses = []; const perText = [];

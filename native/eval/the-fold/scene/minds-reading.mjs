@@ -26,6 +26,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { loadModel, analyse, tokenize } from "../../../adapters/text/english-parser.js";
+import { isNegatorRow } from "./derived-lexicon.mjs";
 
 const FOLD = "/Users/mlacy/Documents/3.0/the-fold";
 const { indexOf, mindPassagesFor, contentStems } = await import(path.join(FOLD, "fold-chat-foundation.js"));
@@ -40,7 +42,12 @@ const mulberry32 = (a) => () => { a |= 0; a = (a + 0x6d2b79f5) | 0; let t = Math
 const rnd = mulberry32(SEED);
 const norm = (s) => String(s ?? "").replace(/\s+/g, " ").trim();
 const bytes = (s) => Buffer.byteLength(s, "utf8");
-const NEG = /\b(?:not|never|no|nobody|none|nothing|neither|nor|cannot|without)\b|n['’]t\b/i;
+// negation is what the parser's own lexicon types as negation (Polarity=Neg / PronType=Neg, class agreeing with the POS prior), read off
+// the parsed row of each token — derived-lexicon.mjs. Same call shape as the regex this replaced.
+const NEG = (() => {
+  const model = loadModel(JSON.parse(fs.readFileSync("/Users/mlacy/Documents/3.0/janus/priors/parser-eng-ewt.json", "utf8")));
+  return { test: (s) => analyse(model, tokenize(String(s)).map((t) => t.form)).some(isNegatorRow) };
+})();
 
 // ── the text, in sections and in sentences with byte addresses ─────────────────────────────────────────────────────────────────
 const SLAVE = /\b(slaves?|slavery|enslave\w*|servants?|bondmen|bondman|masters?|bondage)\b/i;

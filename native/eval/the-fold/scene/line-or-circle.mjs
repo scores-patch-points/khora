@@ -24,6 +24,7 @@ import { pathosOf, reGroundCondition } from "../../../organs/pathos.js";
 import { obligation } from "../../../kernel/obligations.js";
 import { loadModel, analyse, tokenize } from "../../../adapters/text/english-parser.js";
 import { clausesOf } from "../../../adapters/text/nested-clauses.js";
+import { negatorForms, isNegatorRow } from "./derived-lexicon.mjs";
 
 const FOLD = "/Users/mlacy/Documents/3.0/the-fold";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -43,8 +44,9 @@ const MODALS = new Set(["must", "ought", "shall", "should", "need", "needs", "ne
 const OBEY = new Set(["obey", "follow", "serve", "submit", "heed", "mind"]);
 const COMMAND = new Set(["command", "order", "forbid", "forbade", "forbidden", "bid", "make", "made", "let", "allow", "permit", "compel", "force", "require", "demand", "direct", "instruct", "tell", "told", "ask"]);
 const NONDEONTIC = new Set(["like", "love", "prefer", "wish", "hope", "say", "think", "imagine", "suppose", "add", "observe", "mention", "remark", "venture", "submit", "beg", "suggest", "guess", "expect", "fancy"]);   // a closed class: verbs that make a modal a hedge or a courtesy
-const NEGW = new Set(["not", "n't", "never", "no", "nobody", "nothing", "neither", "nor", "cannot", "without"]);
 const model = loadModel(JSON.parse(fs.readFileSync("/Users/mlacy/Documents/3.0/janus/priors/parser-eng-ewt.json", "utf8")));
+// negation is what the parser's own lexicon types as negation (Polarity=Neg / PronType=Neg, class agreeing with the POS prior) — derived-lexicon.mjs
+const NEGW = negatorForms(model);
 const STOPHEAD = new Set(["it", "that", "this", "which", "what", "there", "one", "thing", "things", "way"]);
 const headNorm = (h) => String(h ?? "").toLowerCase().replace(/[^\p{L}']/gu, "").replace(/(?<=[a-z]{4})s$/, "");
 
@@ -62,7 +64,7 @@ function frameOf(sentence) {
     const cmd = COMMAND.has(head) ? head : null, obey = OBEY.has(head) ? head : null;
     if (modal && !cmd && !obey && NONDEONTIC.has(head)) continue;     // "I should like to know": a courtesy wish, not an obligation
     if (!modal && !cmd && !obey) continue;
-    const neg = pt.some((w) => NEGW.has(w)) || /\b(?:forbid|forbade|forbidden)\b/.test(head) || rows.some((r) => r.head === c.head && NEGW.has(r.form.toLowerCase()));
+    const neg = pt.some((w) => NEGW.has(w)) || /\b(?:forbid|forbade|forbidden)\b/.test(head) || rows.some((r) => r.head === c.head && (NEGW.has(r.form.toLowerCase()) || isNegatorRow(r)));
     let bearer = c.subject?.head ?? null, issuer = "∅", matter = head;
     if (cmd) {                                                         // X commands Y to Z: the issuer is the subject, the bearer the one acted on
       issuer = c.subject?.head ?? "∅"; bearer = c.object?.head ?? rows.find((r) => r.head === c.head && (r.deprel === "iobj" || r.deprel === "obj"))?.form ?? null;
