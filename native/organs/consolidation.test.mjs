@@ -1,6 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { dream, wake, settle, projectField } from "./consolidation.js";
+import { createForWhom } from "../kernel/for-whom.js";
+import { identityAlternative } from "../kernel/identity.js";
 
 // A stand-in notes door: foldWithStanding returns the ledger's notes, hear is a no-op here.
 const door = { foldWithStanding: (log) => log.notes ?? [], hear: (log) => log };
@@ -69,4 +71,31 @@ test("settle NEVER PROMOTES: promoted is empty and says why", () => {
   assert.deepEqual(s.promoted, []);
   assert.match(s.reason, /never promoted/);
   assert.ok(!JSON.stringify(s).includes('"standing":"standing"'));
+});
+
+test("settle: given reads, the MEET RUNS — a pair one for-whom joins survives; a divided pair splits", () => {
+  // The Titanic, via the house's own for-whom/identity machinery: one question, several accounts.
+  const fw = createForWhom({ id: "q-saved", giver: "the reader", question: "How many lives were saved?" });
+  const entry = (id, doc, s, raw, ref) => ({ schema: "EOHyperedge@1", id: "value:" + id, witness: doc, scope: { byteOffset: s }, relation: "count", referent: ref, participants: [{ surface: raw, ref }, { surface: ref, ref }] });
+  const entries = [
+    entry("b711", "british", 100, "711", "saved"),
+    entry("m705", "marshall", 200, "705", "saved"),
+    entry("be705", "beesley", 300, "705", "saved"),
+    entry("m1635", "marshall", 400, "1635", "lost"),
+    entry("sen500", "senate", 500, "nearly 500", "sacrificed"),
+  ];
+  const nominated = [["711", "705"], ["711", "1635"], ["711", "nearly 500"], ["1635", "nearly 500"]].map(([a, b]) => identityAlternative({ left: a, right: b, giver: "the unit string" }));
+  const supports = [{ left: "711", right: "705", witness: "british#100" }];
+  const attacks = [
+    { left: "711", right: "1635", witness: "british#100", reason: "different referents for this question" },
+    { left: "711", right: "nearly 500", witness: "british#100", reason: "different referents for this question" },
+    { left: "1635", right: "nearly 500", witness: "marshall#400", reason: "different referents for this question" },
+  ];
+  const reads = [{ forWhom: fw, ctx: { fold: { graphEntries: entries, unresolvedAlternatives: nominated }, supports, attacks } }];
+  const s = settle(wake(actions(), { cap: 10 }), { reads });
+  assert.ok(s.meet, "the meet ran");
+  assert.ok(Array.isArray(s.meet.survivors) && Array.isArray(s.meet.splits));
+  const key = ["705", "711"].sort().join("\u0000");
+  assert.ok(s.meet.survivors.includes(key), "the supported pair 705/711 survives the meet");
+  assert.equal(settle(wake(actions(), { cap: 10 })).meet, null, "no reads -> questions handed over unmett");
 });
