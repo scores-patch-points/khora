@@ -268,3 +268,16 @@ test("a model cannot author an edit; drift is closed by reconcile; bash is swept
   assert.equal(E.recordExec({ task: "t", agent: "a", command: "ls", ok: true }).standing, "witnessed");
   assert.equal(E.append({ task: "t", agent: "a", stage: "admit", parent: E.recordExec({ task: "t", agent: "a", command: "ls", ok: true }).event_id }).gap, "unwitnessed_admit", "an exec is not a verify");
 });
+
+test("the panel's views: log without bytes, per-path edits with before/after, both at a cursor", () => {
+  fresh();
+  const root = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), "wt-")));
+  const f = path.join(root, "a.txt");
+  E.recordEdit({ task: "t", agent: "a", root, file: f, after: "one", now: 10 });
+  E.recordEdit({ task: "t", agent: "b", root, file: f, after: "two", now: 20 });
+  const log = E.projectLog("t", { asOf: 15 });
+  assert.equal(log.total, 1); assert.equal(log.events[0].path, "a.txt"); assert.equal("before" in log.events[0], false);
+  const ch = E.editsOf("t", "a.txt");
+  assert.deepEqual(ch.map((c) => [c.by, c.before, c.after]), [["a", "", "one"], ["b", "one", "two"]]);
+  assert.equal(E.editsOf("t", "a.txt", { asOf: 15 }).length, 1);
+});
