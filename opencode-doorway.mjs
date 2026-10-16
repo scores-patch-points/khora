@@ -53,7 +53,9 @@
 //                                    plus a live backend-availability probe
 //
 // The savings ledger (state/savings.json) counts, honestly:
-//   projectedChars     chars of earlier exchanges left out of a request
+//   projectedChars     chars of earlier exchanges left out of a request — the
+//                      Houdini drop (context) and the surf cut (surf), both
+//                      measured on the sizes the client sent
 //   projectedTokensEst projectedChars/4 — GROSS, an estimate, disclosed as one
 //   titleTokensEst     ceil(ask chars/4) + 150 per title — the frontier title
 //                      request avoided, disclosed as an estimate
@@ -169,7 +171,7 @@ function append(row) {
 const blankLedger = () => ({
   since: new Date().toISOString(),
   projections: 0,
-  projectedChars: 0, // chars of earlier exchanges left out of a request (Houdini's drop), measured on the exchange sizes the client sent
+  projectedChars: 0, // chars of earlier exchanges left out of a request (the Houdini drop and the surf cut), measured on the sizes the client sent
   titleTokensEst: 0, // ceil(ask chars/4) + 150 per title: the frontier title request avoided, disclosed as an estimate
   savedUSD: 0,
   pricedProjections: 0,
@@ -572,7 +574,7 @@ export function meter() {
     savings: {
       since: ledger.since,
       formulas: {
-        projectedTokensEst: "projectedChars / 4 — GROSS: earlier exchanges left out of a request, not net of anything the model then had to re-open",
+        projectedTokensEst: "projectedChars / 4 — GROSS: earlier exchanges/turns left out of a request (Houdini's drop and the surf cut), not net of anything the model then had to re-open",
         titleTokensEst: "ceil(ask chars / 4) + 150, per title served",
         dollars: "estimated tokens × priceIn the client sent (the running model's own catalog price)",
       },
@@ -1100,6 +1102,20 @@ async function onSurf(body) {
   const agent = String(body.sessionID ?? "");
   const task = taskFor(body, agent);
   writeTurns({ task, agent, turns });
+  // THE SURF CUT, ledgered. The client measures the chars its own cut kept out of THIS request (the
+  // older turns it spliced away) and reports them, so the savings ledger and the top-right tally
+  // record the real reduction, not only the title calls. Counted like a Houdini drop (onContext);
+  // GROSS per request, disclosed as an estimate, never net of what the model then re-opens.
+  const kept = Number(body.keptOutChars);
+  if (Number.isFinite(kept) && kept > 0) {
+    turnFor(agent).projectedChars += kept;
+    counters.projections++;
+    const saved = readLedger();
+    saved.projections++;
+    saved.projectedChars += kept;
+    if (body.priceIn !== undefined) countPrice(saved, kept, body.priceIn, "pricedProjections");
+    writeLedger(saved);
+  }
   // PRIORITY PACKING under one hard budget (FOLD_NOTE_CHARS). What is actionable first (what others
   // hold, what they raised), then the ladder, then the verified record. The marks cue rides once
   // per session, not every turn. The commons is NOT here: the context event already delivers it.

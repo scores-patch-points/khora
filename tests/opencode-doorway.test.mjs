@@ -69,6 +69,30 @@ test("a title is derived from the ask, by rule, with its estimate ledgered", asy
   assert.equal(after.pricedTitles, before.pricedTitles + 1);
 });
 
+test("the surf cut is ledgered: the chars a cut keeps out of a request are recorded, and priced", async () => {
+  const before = door.meter().savings;
+  await door.answer({
+    event: "surf",
+    sessionID: "s20",
+    ask: "does the webhook retry back off for the invoices endpoint too?",
+    turns: [{ n: 1, ask: "add a retry to the webhook sender", answer: "added exponential retry", grounds: ["edit"] }],
+    keptOutChars: 12000,
+    priceIn: 3,
+  });
+  const after = door.meter().savings;
+  assert.equal(after.projections, before.projections + 1);
+  assert.equal(after.projectedChars, before.projectedChars + 12000);
+  assert.equal(after.projectedTokensEst, Math.round(after.projectedChars / 4));
+  assert.equal(after.pricedProjections, before.pricedProjections + 1);
+  assert.ok(after.savedUSD > before.savedUSD, "a priced surf cut moves the dollars");
+});
+
+test("a surf cut with nothing kept out does not move the ledger", async () => {
+  const before = door.meter().savings;
+  await door.answer({ event: "surf", sessionID: "s21", ask: "hello", turns: [], keptOutChars: 0 });
+  assert.equal(door.meter().savings.projectedChars, before.projectedChars);
+});
+
 const houdiniPresent = fs.existsSync(path.resolve(import.meta.dirname, "..", "the-fold-houdini-wired", "fold-chat-houdini.js")) || Boolean(process.env.FOLD_HOUDINI_PATH);
 
 const exchanges = [
