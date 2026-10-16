@@ -48,6 +48,7 @@
 import { corroborateLedger } from "./corroboration.js";
 import { wakingDream } from "./waking-dream.js";
 import { survivingIdentity, survivingIdentityAtPoints } from "../kernel/identity-meet.js";
+import { evaluatePromotion } from "../the-fold/consequence.js";
 
 const freeze = (x) => Object.freeze(x);
 
@@ -187,4 +188,26 @@ export function settle(waking = {}, { reads = null, meet = null, atPoints = fals
     promoted: freeze([]),
     reason: "the night decides nothing: a contest is disclosed, a question is met by its for-whoms, a candidate awaits a later turn's consequence — never promoted here",
   });
+}
+
+/**
+ * promote(candidates, { consequenceOf }) — THE GATE, APPLIED (the-fold/consequence.js).
+ * `settle` promotes nothing; this is the step a caller runs when it can MEASURE consequence.
+ * A candidate already meets the recurrence half; standing also needs CONSEQUENCE — a later
+ * turn's verdict actually changed because the claim was available (S9: a count is possibility,
+ * never standing). `consequenceOf(candidate)` returns the candidate's classified consequence
+ * (classifyConsequence's {status: "mattered" | "recurring_no_consequence" | "consequence_untested"}).
+ * A missing or untyped measurement is held as `consequence_untested` — a gap is not a zero and
+ * never a silent promote (seriesOf's own rule). The gate always names which half failed.
+ */
+export function promote(candidates = [], { consequenceOf = null } = {}) {
+  if (typeof consequenceOf !== "function") throw new TypeError("promote: consequenceOf is a function — consequence is measured, never assumed");
+  const promoted = [], held = [];
+  for (const c of candidates) {
+    const raw = consequenceOf(c);
+    const consequence = raw && raw.status ? raw : { status: "consequence_untested", gap: "consequence_untested" };
+    const verdict = evaluatePromotion({ recurs: true, consequence });
+    (verdict.promoted ? promoted : held).push(freeze({ key: c.key, value: c.value, reason: verdict.reason }));
+  }
+  return freeze({ schema: "EODreamPromote@1", promoted: freeze(promoted), held: freeze(held) });
 }
