@@ -8,14 +8,19 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { surf } from "./opencode-surf.mjs";
 
+// The arm under test: FOLD_SURF_MODE=ladder (default, sentences ride) or =pointer (addresses only). The ablation is
+// the same suite run twice; a red in pointer where ladder is green is the case where the trail alone is NOT enough.
+const MODE = process.env.FOLD_SURF_MODE || "ladder";
+const MODES = MODE === "both" ? ["ladder", "pointer"] : [MODE];
+
 const TOPICS = ["parser lexer", "deploy staging", "database migration", "css layout", "auth token", "billing invoice", "search index", "email queue"];
 const FILLER = (i) => ({ n: i, ask: `please work on the ${TOPICS[i % 8]} item ${i}`, answer: `Done with ${TOPICS[i % 8]} in file${i}. Tests pass.`, grounds: [i % 3 ? "edit" : "bash"] });
 const history = (len, plant) => Array.from({ length: len }, (_, i) => plant[i + 1] ? { ...FILLER(i + 1), ...plant[i + 1] } : FILLER(i + 1));
 
 const cites = (note, n) => new RegExp(`(?:turns? |,)${n}(?:[,\\s]|$)|turn ${n}:|\\b${n}–|–${n}\\b`).test(note);
 const quotes = (note, s) => note.includes(s);
-const arms = (turns, ask, needed) => {
-  const note = surf({ ask, turns }).note;
+const arms = (turns, ask, needed, mode = MODE) => {
+  const note = surf({ ask, turns, mode }).note;
   const nullView = turns.slice(-2).map((t) => `${t.ask} ${t.answer}`).join(" ");
   return {
     trace: { addr: cites(note, needed), text: false, note },
