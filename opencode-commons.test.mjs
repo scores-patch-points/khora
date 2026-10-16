@@ -5,6 +5,7 @@ import os from "node:os";
 import path from "node:path";
 
 process.env.FOLD_LOOK_IDLE_MS = "50";
+process.env.FOLD_COMMONS_PROSIFY = "extractive"; // penelope is the default prosifier; these tests pin the extractive projection
 const boot = async () => {
   process.env.FOLD_WORKNOTES_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "wn-"));
   process.env.FOLD_OPENCODE_STATE = fs.mkdtempSync(path.join(os.tmpdir(), "st-"));

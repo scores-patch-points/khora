@@ -74,6 +74,7 @@
 // carries on exactly as upstream would.
 import os from "node:os";
 import { surf as surfLadder } from "./opencode-surf.mjs";
+import { standingOf } from "./opencode-standing.mjs";
 import { admit as admitChange, fold as foldRecord, recordNote, recordSink, reconcile, nextVoid, reasonFor, provenance, refusalsFor } from "./opencode-record.mjs";
 import * as eot from "./opencode-eot.mjs";
 import { mark as markNote, claim as claimItem, done as doneItem, read as readNotes, noteFor, stateFor, turnsFile, turnsOf, projectKey, projectRoot, plans as workPlans } from "./opencode-worknotes.mjs";
@@ -490,6 +491,7 @@ function autoClaim(sessionID, turn, tool) {
 // THE GUARD. What the model just said is typed against the log and the disk: a path that exists in
 // neither, or a claim that checks pass with no witnessed passing check in the log, is a flag. Flags are
 // system observations (mechanical); the words themselves stay model-origin. The next note carries them.
+const answerCount = new Map(); // sessionID -> answers judged so far, so standing ids name the turn
 function guardAnswer(sessionID, turn) {
   const text = String(turn.answer ?? "");
   if (text.length < 8) return;
@@ -498,6 +500,13 @@ function guardAnswer(sessionID, turn) {
   const r = eot.groundCheck({ task, text, root: turn.workspace ?? null });
   turn.flags = r.flags.slice(0, 4);
   turn.groundSummary = r.summary;
+  // THE DRAFT, JUDGED. Janus gives each sentence of the answer a standing from the instrument above;
+  // the counts ride the next note and the log keeps them (stage "reason"), the model's say-so never decides.
+  try {
+    const st = standingOf({ agent: sessionID, n: answerCount.set(sessionID, (answerCount.get(sessionID) ?? 0) + 1).get(sessionID), ground: r });
+    turn.standing = { ...st.counts, refuted: st.refuted.slice(0, 3) };
+    if (st.claims) eot.append({ task, agent: sessionID, stage: "reason", detail: { op: "SPIRAL", by: "khora:opencode-eot.groundCheck", counts: st.counts, refuted: st.refuted.slice(0, 6) } });
+  } catch { /* the spiral never blocks a turn */ }
   if (r.flags.length) eot.append({ task, agent: sessionID, stage: "flag", detail: { flags: r.flags.slice(0, 6), summary: r.summary } });
 }
 
@@ -1007,12 +1016,21 @@ const taskFor = (body, agent) => {
 // Never a raw relay of another agent's text.
 let commonsProsify = null;
 export const setCommonsProsify = (fn) => { commonsProsify = typeof fn === "function" ? fn : null; };
-// PENELOPE AS PROSIFIER (opt-in: FOLD_COMMONS_PROSIFY=penelope). Penelope's text weave is the full
+// PENELOPE AS PROSIFIER (the default; FOLD_COMMONS_PROSIFY=extractive turns it off). Penelope's text weave is the full
 // arrangement pipeline, not a note-writer: it runs its own gates (a small ground is REFUSED for
 // individuating no being), writes an HTML widget under penelope/organs/arrangement-out, and costs
 // seconds. So it is accepted only when it returns prose it verified; anything else is null and the
-// commons keeps the extractive, address-typed projection. Never on the default path.
-async function penelopeProsify({ ask, ground }) {
+// commons keeps the extractive, address-typed projection. After a miss it is not asked again for
+// FOLD_PROSIFY_COOLDOWN_MS (default 60s), so a mouth that is down costs one wait, not one per turn.
+let prosifyBackoffUntil = 0;
+async function penelopeProsify(args) {
+  if (Date.now() < prosifyBackoffUntil) return null;
+  let text = null;
+  try { text = await penelopeWeave(args); } catch { text = null; }
+  if (!text) prosifyBackoffUntil = Date.now() + Number(process.env.FOLD_PROSIFY_COOLDOWN_MS ?? 60_000);
+  return text;
+}
+async function penelopeWeave({ ask, ground }) {
   const api = path.resolve(HERE, "..", "penelope", "organs", "generation", "api.mjs");
   if (!fs.existsSync(api)) return null;
   process.env.PENELOPE_MOUTH_URL ??= process.env.FOLD_PROSIFY_MOUTH ?? "http://127.0.0.1:11435";
@@ -1026,7 +1044,7 @@ async function penelopeProsify({ ask, ground }) {
   const text = r?.ok === true ? (m?.text ?? m?.prose ?? (typeof m?.bytes === "string" ? m.bytes : null)) : null;
   return typeof text === "string" && text.trim() ? text : null;
 }
-if (process.env.FOLD_COMMONS_PROSIFY === "penelope") commonsProsify = penelopeProsify;
+if (!["extractive", "off"].includes(process.env.FOLD_COMMONS_PROSIFY ?? "")) commonsProsify = penelopeProsify;
 
 const COMMONS_CHARS = Number(process.env.FOLD_COMMONS_CHARS ?? 600);
 const COMMONS_SENTENCE_CHARS = Number(process.env.FOLD_COMMONS_SENTENCE_CHARS ?? 150);
