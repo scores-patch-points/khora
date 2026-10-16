@@ -172,6 +172,14 @@ export function projectRoot(workspace) {
 export function projectKey(workspace) {
   const rootDir = projectRoot(workspace);
   if (!rootDir) return null;
+  // A home directory (or the filesystem root, or anything above home) is not a project: sessions the
+  // app starts with no project report it as their workspace, and keying on it pools UNRELATED sessions
+  // into one medium, so one session's sentences would reach another's prompt through the commons.
+  // Such a workspace gets no project key; the caller falls back to the session alone.
+  try {
+    const home = fs.realpathSync(os.homedir());
+    if (rootDir === home || home.startsWith(rootDir + path.sep) || rootDir === path.parse(rootDir).root) return null;
+  } catch { /* home unreadable: do not guess */ }
   const base = path.basename(rootDir).replace(/[^\w.-]+/g, "-").replace(/^\.+/, "") || "root";
   return `proj-${base.slice(0, 40)}-${crypto.createHash("sha1").update(rootDir).digest("hex").slice(0, 6)}`;
 }

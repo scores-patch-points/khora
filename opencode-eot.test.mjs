@@ -281,3 +281,24 @@ test("the panel's views: log without bytes, per-path edits with before/after, bo
   assert.deepEqual(ch.map((c) => [c.by, c.before, c.after]), [["a", "", "one"], ["b", "one", "two"]]);
   assert.equal(E.editsOf("t", "a.txt", { asOf: 15 }).length, 1);
 });
+
+test("eventDetail: the full event, its source, the parent chain, and who held its path", () => {
+  fresh();
+  const root = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), "wt-")));
+  const f = path.join(root, "a.txt");
+  E.recordClaim({ task: "t", agent: "a", item: "edit a.txt", ttlMs: 60_000, now: 5 });
+  const r1 = E.recordEdit({ task: "t", agent: "a", root, file: f, after: "one", now: 10 });
+  E.recordContention({ task: "t", agent: "b", item: "edit a.txt", holder: "a", now: 15 });
+  const r2 = E.recordEdit({ task: "t", agent: "b", root, file: f, after: "two", now: 20 });
+  const d = E.eventDetail("t", r2.event_id);
+  assert.equal(d.id, r2.event_id);
+  assert.equal(d.stage, "edit");
+  assert.equal(d.origin, "mechanical");
+  assert.equal(d.standing, "witnessed");
+  assert.equal(d.detail.path, "a.txt");
+  assert.equal(d.source.kind, "fs");
+  assert.equal(d.chain.length, 1, "an edit's parent is the previous edit of the same path");
+  assert.equal(d.chain[0].id, r1.event_id);
+  assert.deepEqual(d.held.map((h) => [h.stage, h.agent, h.holder]), [["claim", "a", null], ["contend", "b", "a"]], "claims and contentions for the path, chronological");
+  assert.equal(E.eventDetail("t", "evt_missing"), null);
+});
