@@ -13,11 +13,13 @@ process.env.FOLD_WORKNOTES_DIR = WN; process.env.FOLD_WEFT_DIR = STORE; process.
 const { answer } = await import(`./opencode-doorway.mjs?t=${Date.now()}`);
 const { openStore, asPass } = await import("./native/the-fold/weft-store.mjs");
 const { weftAttestations, reopen } = await import("./native/the-fold/weft.js");
+const { loadRegister } = await import("./opencode-predigest.mjs");
+const SKIP = loadRegister().gap ? `priors not on disk (${JSON.stringify(loadRegister().gap)}): set FOLD_ENG_PRIOR_DIR / FOLD_POS_PRIOR or check out khora beside Zenodotus and janus` : false;
 const T = (n, a) => ({ n, ask: `ask ${n}`, answer: a, grounds: ["edit"] });
 const surf = (task, sid, turns) => answer({ event: "surf", sessionID: sid, task, ask: "q", turns });
 const turns = [T(1, "Added validateOrder, which calls normalizeTotals. Tests pass."), T(2, "The parser drops trailing commas."), T(3, "The parser does not drop trailing commas.")];
 
-test("W1 a surf event appends one lean pass per turn and leaves turns.md whole", async () => {
+test("W1 a surf event appends one lean pass per turn and leaves turns.md whole", { skip: SKIP }, async () => {
   await surf("t1", "ses_a1", turns);
   const passes = openStore(STORE).passes();
   assert.equal(passes.length, 3);
@@ -26,7 +28,7 @@ test("W1 a surf event appends one lean pass per turn and leaves turns.md whole",
   assert.ok(passes.every((p) => p.a === "t1/ses_a1.turns.md" && p.ins.length >= 1));
 });
 
-test("W2 a rerun resumes: the same turns append nothing, a new turn appends one", async () => {
+test("W2 a rerun resumes: the same turns append nothing, a new turn appends one", { skip: SKIP }, async () => {
   const before = openStore(STORE).count();
   await surf("t1", "ses_a1", turns);
   assert.equal(openStore(STORE).count(), before);
@@ -34,14 +36,14 @@ test("W2 a rerun resumes: the same turns append nothing, a new turn appends one"
   assert.equal(openStore(STORE).count(), before + 1);
 });
 
-test("W3 negation is recorded as EVA, only where it made a difference", () => {
+test("W3 negation is recorded as EVA, only where it made a difference", { skip: SKIP }, () => {
   const ps = openStore(STORE).passes().filter((p) => p.con.length);
   const neg = ps.filter((p) => p.eva.length), pos = ps.filter((p) => !p.eva.length);
   assert.equal(neg.length, 1); assert.ok(pos.length >= 1);
   const edges = asPass(neg[0]).edges; assert.ok(edges.some((e) => e.polarity === "-"));
 });
 
-test("W4 the weft's own consumers read the records (weftAttestations), and an address re-expands to the sentence", () => {
+test("W4 the weft's own consumers read the records (weftAttestations), and an address re-expands to the sentence", { skip: SKIP }, () => {
   const passes = openStore(STORE).passes().map(asPass);
   const atts = [...weftAttestations(passes)];
   assert.ok(atts.length >= 2, `${atts.length} attestations`);
@@ -51,7 +53,7 @@ test("W4 the weft's own consumers read the records (weftAttestations), and an ad
   assert.match(r.text, /^validateOrder/);
 });
 
-test("W5 six processes append to one store at once: no segment is lost", async () => {
+test("W5 six processes append to one store at once: no segment is lost", { skip: SKIP }, async () => {
   const dir = tmp("wr-conc-"), script = path.join(tmp("wr-child-"), "child.mjs");
   fs.writeFileSync(script, `import fs from "node:fs";
 import { recordTurnsToWeft } from ${JSON.stringify(path.join(HERE, "opencode-weft-record.mjs"))};
@@ -64,7 +66,7 @@ process.stdout.write(String(recordTurnsToWeft({ task: "c", agent: "a" + id, turn
   assert.equal(openStore(dir).count(), 6);
 });
 
-test("W6 fails open: an unwritable store never throws into the turn, and FOLD_WEFT=0 writes nothing", async () => {
+test("W6 fails open: an unwritable store never throws into the turn, and FOLD_WEFT=0 writes nothing", { skip: SKIP }, async () => {
   const blocker = path.join(tmp("wr-bad-"), "file"); fs.writeFileSync(blocker, "x");
   process.env.FOLD_WEFT_DIR = path.join(blocker, "store");
   const r = await surf("t2", "ses_b2", turns);
