@@ -39,6 +39,8 @@ export function anthropicApiModelId(stripped) {
   return id;
 }
 
+/** True when the model still accepts temperature/top_p/top_k (Claude 4.6 and older). */
+export const samplingAccepted = (id) => !/^claude-(opus|sonnet|haiku|fable|mythos)-5|^claude-opus-4-[78]\b|^claude-(fable|mythos)/.test(String(id ?? ""));
 export const ANTHROPIC_URL = (process.env.ER7_ANTHROPIC_URL ?? "https://api.anthropic.com").replace(/\/+$/, "");
 export const ANTHROPIC_VERSION = process.env.ER7_ANTHROPIC_VERSION ?? "2023-06-01";
 export const ANTHROPIC_ON = (process.env.ER7_ANTHROPIC ?? "1") !== "0";
@@ -286,7 +288,9 @@ export async function* streamAnthropicText(
           stream: true,
           // KELSEN-DEGREES → temperature, the same mapping the Ollama lane
           // uses (bound = cold, free = warm), so one gauge steers every mouth.
-          ...(kelsen == null ? {} : { temperature: 0.1 + (1 - kelsen) * 0.8 }),
+          // Sampling is removed on the current generation (Opus 4.7+/5.x, Sonnet 5/5.5, Haiku 5.5,
+          // Fable, Mythos: a non-default value is a 400), so the gauge rides only where accepted.
+          ...(kelsen == null || !samplingAccepted(modelID) ? {} : { temperature: 0.1 + (1 - kelsen) * 0.8 }),
         }),
       });
     } finally {

@@ -52,6 +52,11 @@ export function claim({ task, agent, item, ttlMs = DEFAULT_TTL, now = Date.now()
       if (e.code !== "EEXIST") return { ok: false, gap: e.code ?? "error" };
       const held = readClaim(file);
       if (held?.done) return { ok: false, holder: held.doneBy ?? held.agent, done: true };
+      if (held && !held.done && held.agent === agent) {
+        // the holder is touching it again: the trace is refreshed (decay restarts), not contended
+        try { fs.writeFileSync(file, JSON.stringify({ ...held, t: now, ttl: ttlMs })); } catch { /* best effort */ }
+        return { ok: true, refreshed: true };
+      }
       if (live(held, now, ttlMs)) return { ok: false, holder: held.agent, since: held.t };
       // lapsed: move the stale file aside (only one mover wins the rename), verify it was stale, retry the create
       const aside = `${file}.${process.pid}.${crypto.randomBytes(3).toString("hex")}`;
@@ -96,6 +101,16 @@ export function read({ task, now = Date.now(), ttlMs = DEFAULT_TTL, limit = 200 
   };
 }
 
+/** What this agent needs to know, structured (the door packs it under a budget): claims others hold
+ *  and blocks others raised, newest first. Nothing else is ever required to coordinate. */
+export function stateFor({ task, agent, now = Date.now() } = {}) {
+  const v = read({ task, now });
+  return {
+    taken: v.open.filter((c) => c.agent !== agent).map((c) => ({ item: c.item, agent: c.agent })),
+    blocks: v.marks.filter((m) => m.kind === "block" && m.agent !== agent).slice(-3).map((m) => ({ text: m.text, agent: m.agent })),
+  };
+}
+
 /** The stigmergic note for a context window: what is taken, what is done, the latest facts and blocks, and how to leave a mark. */
 export function noteFor({ task, agent, now = Date.now() } = {}) {
   const dir = taskDir(task);
@@ -110,4 +125,69 @@ export function noteFor({ task, agent, now = Date.now() } = {}) {
     `leave marks by appending lines "<iso-ts> · ${agent} · fact|claim|done|block · <text>" to ${path.join(dir, `${agent}.md`)}`,
   ];
   return lines.join("\n");
+}
+
+/** Every task's work plan, newest first: its marks, open claims, and each agent's settled turns (the ask, the tools,
+ *  and the text the agent wrote - reasoning included - exactly as it was kept). Read-only; a missing root is no plans. */
+/** Every agent's settled turns in a task, parsed from its single-writer `<agent>.turns.md`. */
+export function turnsOf({ task } = {}) {
+  const dir = taskDir(task);
+  if (!dir || !fs.existsSync(dir)) return [];
+  const turns = [];
+  for (const f of fs.readdirSync(dir).filter((x) => x.endsWith(".turns.md"))) {
+    const agent = f.replace(/\.turns\.md$/, "");
+    let text = "";
+    try { text = fs.readFileSync(path.join(dir, f), "utf8"); } catch { continue; }
+    for (const part of text.split(/^## turn /m).slice(1)) {
+      const n = Number(/^(\d+)/.exec(part)?.[1] ?? 0);
+      const ask = /^ask: (.*)$/m.exec(part)?.[1] ?? "";
+      const tools = (/^tools: (.*)$/m.exec(part)?.[1] ?? "").split(",").map((t) => t.trim()).filter(Boolean);
+      const body = part.replace(/^\d+\s*\n/, "").replace(/^ask: .*\n?/m, "").replace(/^tools: .*\n?/m, "").trim();
+      turns.push({ agent, n, ask, tools, text: body });
+    }
+  }
+  return turns;
+}
+
+/** The git root (or the directory itself) a path belongs to, or null. Pure fs reads. */
+export function projectRoot(workspace) {
+  const w = String(workspace ?? "");
+  if (!path.isAbsolute(w)) return null;
+  try {
+    let at = fs.realpathSync(w);
+    if (!fs.statSync(at).isDirectory()) at = path.dirname(at);
+    let rootDir = at;
+    for (let i = 0; i < 40; i++) {
+      if (fs.existsSync(path.join(at, ".git"))) { rootDir = at; break; }
+      const up = path.dirname(at);
+      if (up === at) break;
+      at = up;
+    }
+    return rootDir;
+  } catch { return null; }
+}
+
+/** The project a workspace belongs to, as a task name: its git root's basename plus a short hash of
+ *  the root's path, so every agent working in one repository shares one medium. */
+export function projectKey(workspace) {
+  const rootDir = projectRoot(workspace);
+  if (!rootDir) return null;
+  const base = path.basename(rootDir).replace(/[^\w.-]+/g, "-").replace(/^\.+/, "") || "root";
+  return `proj-${base.slice(0, 40)}-${crypto.createHash("sha1").update(rootDir).digest("hex").slice(0, 6)}`;
+}
+
+export function plans({ limit = 20, turnLimit = 40, now = Date.now() } = {}) {
+  const base = root();
+  if (!fs.existsSync(base)) return [];
+  const tasks = fs.readdirSync(base, { withFileTypes: true }).filter((d) => d.isDirectory() && ident(d.name)).map((d) => {
+    const dir = path.join(base, d.name);
+    let updated = 0;
+    try { updated = fs.statSync(dir).mtimeMs; } catch { /* unreadable: sorts last */ }
+    return { task: d.name, dir, updated };
+  }).sort((a, b) => b.updated - a.updated).slice(0, Math.min(Math.max(limit, 1), 100));
+  return tasks.map(({ task, dir, updated }) => {
+    const turns = turnsOf({ task });
+    const notes = read({ task, now });
+    return { task, updated, marks: notes.marks, open: notes.open, finished: notes.finished, turns: turns.slice(-turnLimit) };
+  });
 }

@@ -34,7 +34,8 @@ test("surf writes this agent's turns file and a note with the task directory", a
   const { answer } = await import(`./opencode-doorway.mjs?t=${Date.now()}`);
   const r = await answer({ event: "surf", sessionID: "s1", task: "t1", ask: "q", turns: mk(5) });
   assert.match(fs.readFileSync(path.join(dir, "t1", "s1.turns.md"), "utf8"), /## turn 5/);
-  assert.match(r.note, /worknotes: .*t1/);
+  assert.match(r.note, /marks: append .*t1\/s1\.md/, "the cue (once per session) names the task directory and the agent file");
+  assert.ok(r.note.length <= 700, `the note stays tiny: ${r.note.length}`);
   const bad = await answer({ event: "surf", sessionID: "s1", task: "../evil", ask: "q", turns: mk(2) });
   assert.doesNotMatch(bad.note, /evil/);
   assert.ok(!fs.existsSync(path.join(dir, "..", "evil")));

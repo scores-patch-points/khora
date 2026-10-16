@@ -38,7 +38,7 @@ test("chase with a scripted mouth: red draw reverted, green kept, record folded"
     assert.equal(r.record.length, 1);
     assert.match(fs.readFileSync(path.join(ws, "lib.py"), "utf8"), /return a \+ b/);
     const note = await answer({ event: "surf", sessionID: "m", task: "tk", ask: "q", turns: [1, 2, 3].map((k) => ({ n: k, ask: `a${k}`, answer: `r${k}`, grounds: [] })) });
-    assert.match(note.note, /record \(verified, last-wins\):[\s\S]*lib\.py:add/);
+    assert.match(note.note, /<fold-mechanical>[\s\S]*verified: [^\n]*lib\.py:add/);
   } finally { delete process.env.FOLD_REC_EXEC; }
 });
 
@@ -103,5 +103,31 @@ test("the spiral climbs: a same-name implementation in the field is snipped befo
     assert.equal(drawn, 0, "the mouth was never asked");
     assert.ok(log.some((l) => l.action === "HUNT" && l.verdict === "green"), `a HUNT rung kept it: ${JSON.stringify(log.map((l) => [l.action, l.by, l.verdict]))}`);
     assert.equal(r.mouthShare, 0);
+  } finally { delete process.env.FOLD_REC_EXEC; }
+});
+
+test("a chase resumes from the record's nextVoid nomination, not a cold stub scan", opts, async () => {
+  const { answer } = await boot();
+  process.env.FOLD_REC_EXEC = "1";
+  try {
+    const ws = fs.mkdtempSync(path.join(os.tmpdir(), "ch-"));
+    fs.writeFileSync(path.join(ws, "lib.py"), 'def add(a, b):\n    """Sum."""\n    raise NotImplementedError\n\n\ndef neg(a):\n    """Negate a."""\n    raise NotImplementedError\n');
+    fs.writeFileSync(path.join(ws, "check.py"), "import sys\nfrom lib import add, neg\nbad=[]\nif add(1, 2) != 3: bad.append('add(1,2) expected 3')\nif neg(4) != -4: bad.append('neg(4) expected -4')\nif bad:\n    print('FAIL:', '; '.join(bad)); sys.exit(1)\n");
+    const bodies = { add: "    return a + b", neg: "    return -a" };
+    const mouth = async (args) => ({ text: bodies[/filling one function[\s\S]*?def (\w+)\(/.exec(String(args.task))?.[1]] ?? "    return None" });
+    const task = "resume";
+    // One round: add is drawn correct and CARRIED (neg is still a stub), never promoted.
+    const first = await answer({ event: "chase", workspace: ws, testCommand: "python3 check.py", agent: "m", task, maxRounds: 1 }, { turn: mouth });
+    assert.equal(first.done, false);
+    // The record now holds an open void: add was carried, never promoted (suite still red on neg).
+    const nom = await answer({ event: "nextVoid", task });
+    assert.equal(nom.kind, "carried");
+    assert.equal(nom.referent, "lib.py:add");
+    // Second chase on the SAME task: its first DEF is read off the record. `add` has no open stub
+    // (it is filled, carried), so only the record — never a cold scan — can name it in round 1.
+    const second = await answer({ event: "chase", workspace: ws, testCommand: "python3 check.py", agent: "m", task, maxRounds: 1 }, { turn: mouth });
+    assert.equal(second.resumed, "carried");
+    assert.ok(second.rounds.length > 0, "the resumed chase judged a round");
+    assert.equal(second.rounds[0].target, "add", "the first DEF is the record's nomination, not the cold scan's remaining stub (neg)");
   } finally { delete process.env.FOLD_REC_EXEC; }
 });

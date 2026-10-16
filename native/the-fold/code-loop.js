@@ -24,16 +24,18 @@
 //           caller's own declared string — never a model-authored
 //           command) and the real exit code decides pass/fail.
 //
-// EVA: exit 0 -> REC, concede: done, the change is kept.
+// EVA: exit 0 -> the change is ADMITTED (kept): concede, done.
 //      exit nonzero -> the file is REVERTED to its pre-round bytes (nothing
-//      broken is ever left on disk mid-loop) and the real failure output
-//      is folded into the next round's prompt as grounded material.
+//      broken is ever left on disk mid-loop), and in the void loop the slot
+//      DEF is REC'd: restructured onto new ground (spiral-contract.js
+//      voidGate), never re-drawn as it was. When the DEFs don't EVA, REC them.
 //
 // Every round's record (action, proposal, derived op, applied/reverted,
 // real test output) is returned in full — a disclosed audit trail, since
 // this server process has no browser ledger to land it on.
 
 import fs from "node:fs";
+import { createHash } from "node:crypto";
 import path from "node:path";
 import { execSync, execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
@@ -50,6 +52,9 @@ import { emptyForecast, forecastKey, forecast, observe, forecastError } from "./
 import { runProxyTurn } from "../../proxy-runner.mjs";
 import { ask } from "../organs/territory.js";
 import { readDocument } from "../adapters/sources/folder-index.js";
+import { voidGate } from "./spiral-contract.js";
+import { formInvariants, checkForm, deviationNote } from "./form-witness.js";
+import { makeMeasuredLoop } from "../kernel/measured-loop.js";
 
 const SKIP_DIRS = new Set([".git", "node_modules", ".venv", "venv", "dist", "build", ".next", "__pycache__", ".cache", "coverage"]);
 const MAX_LISTED_FILES = 200;
@@ -632,6 +637,7 @@ export function precheckSyntax(fileName, code) {
 // the test's own words (which name the failing unit) go back to the mouth
 // next round. No FIND/ADD grammar, no PATH, no fences to author.
 
+const sha = (t) => createHash("sha256").update(String(t ?? "")).digest("hex").slice(0, 16);
 const escapeRe = (s) => String(s ?? "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 /** detectVoidUnits(text, fileName) -> the located file's own function
@@ -685,6 +691,18 @@ export function detectVoidUnits(text, fileName) {
  *  a fact-gate disclaimer line into every draw — the machine drops it). A
  *  draw with no code-shaped line at all is a typed gap, never a guess. The
  *  caller re-indents by the stub's own indent when building the patch. */
+/** A draw that defines ANOTHER unit and never the slot's own: the name it answered, or null.
+ *  A multi-unit ask makes a small mouth answer the wrong one; applying that draw nests the
+ *  other function inside the slot, parses, returns None, and burns a real test run. Python
+ *  `def`, JS/TS `function` and `const f =` declarations; fenced or bare. */
+export function wrongUnit(draw, name) {
+  const t = String(draw ?? "");
+  const decls = [...t.matchAll(/^[ \t]*(?:async\s+)?(?:def|function\*?|(?:export\s+)?(?:const|let|var))\s+([A-Za-z_$][\w$]*)\s*(?:\(|=)/gm)].map((m) => m[1]);
+  if (!decls.length) return null;
+  if (decls.includes(name)) return null;
+  return decls[0];
+}
+
 export function extractBody(draw, name) {
   let t = String(draw ?? "")
     .replace(/^\s*```[A-Za-z0-9_-]*\s*$/gm, "")
@@ -779,7 +797,7 @@ export function buildVoidPatch(unit, body) {
  *  real draws MOVES the chase to the next stub-bearing file, and only when no
  *  other file has a void is the wall TERMINAL — disclosed, never a budget
  *  burn. Returns done, rounds (the disclosed audit trail), finalTestOutput. */
-export async function runVoidLoop({ sessionId, userId = null, model, task, workspace, locatedFile = null, files = null, testCommand, maxRounds = DEFAULT_MAX_ROUNDS, testTimeoutMs = DEFAULT_TEST_TIMEOUT_MS, caller = null, signal = null, turn = defaultTurn, kelsenFor = null, candidates = 3, logFile = null, huntRoots = [], huntWeb = false, contextFold = false, onRec = null }) {
+export async function runVoidLoop({ sessionId, userId = null, model, task, workspace, locatedFile = null, files = null, testCommand, maxRounds = DEFAULT_MAX_ROUNDS, testTimeoutMs = DEFAULT_TEST_TIMEOUT_MS, caller = null, signal = null, turn = defaultTurn, kelsenFor = null, candidates = 3, logFile = null, huntRoots = [], huntWeb = false, contextFold = false, onRecord = null, priorRefusals = null, resumeVoid = null }) {
   const root = path.resolve(workspace);
   const fileList = (files && files.length ? files : [locatedFile ? [locatedFile] : listFiles(root)]).flat().filter(Boolean);
   const draws = Math.max(1, Math.floor(candidates ?? 1));
@@ -799,27 +817,28 @@ export async function runVoidLoop({ sessionId, userId = null, model, task, works
   if (logFile) {
     try { seq = fs.readFileSync(logFile, "utf8").split("\n").filter(Boolean).length; } catch { seq = 0; }
   }
-  // REC SINK (2026-10-15): an optional caller hook so a kept or reverted
+  // RECORD SINK (2026-10-15): an optional caller hook so a kept or reverted
   // draw also lands in a shared record (opencode-rec.mjs: EOT block on exit
   // 0, VoidLog line either way). Only rounds the real declared test judged
   // reach it; a carried body (kept on disk while the suite is still red elsewhere) goes
   // as `provisional`: logged, never a block, until the caller promotes it.
   // A sink that throws is a finding, never a kill, like the log append.
-  const toRec = (r) => {
-    if (!onRec || !r.applied || typeof r.testExitCode !== "number" || !r.target) return;
+  const toRecord = (r) => {
+    if (!onRecord || !r.applied || typeof r.testExitCode !== "number" || !r.target) return;
     try {
-      onRec({
+      onRecord({
         provisional: !!r.carried, action: r.action ?? null, by: r.by ?? null,
         referent: `${r.file ?? "?"}:${r.target}`,
         delta: r.basis ?? `${r.action ?? "DEF"} ${r.mode ?? ""} ${r.target}`.replace(/\s+/g, " ").trim(),
         check: testCommand, exitCode: r.testExitCode, address: r.address ?? r.file ?? "",
         source: r.source ?? r.by ?? "mouth", model: r.model ?? model,
+        before: r.before ?? null, after: r.after ?? null, rungs: r.rungs ?? [], def: r.def ?? null, draw: r.draw ?? null,
       });
     } catch (e) { console.error(`[void-loop] rec sink failed: ${e.message}`); }
   };
   const push = (r) => {
     rounds.push(r);
-    toRec(r);
+    toRecord(r);
     seq += 1;
     if (logFile) {
       try {
@@ -857,8 +876,89 @@ export async function runVoidLoop({ sessionId, userId = null, model, task, works
   let cursor = 0;
   let reopenedTarget = null; // a carried body the whole suite implicates — consumed directly next round
   const walledTargets = new Map(); // file → names; homonyms in another file are different units
+  // RESUME FROM THE RECORD (2026-10-15): when the caller passes a `resumeVoid`
+  // (nextVoid's nomination — reopen/reverted/carried, a `file:unit` referent),
+  // the chase's FIRST DEF is read off that record entry, not a cold stub scan.
+  // The referent is resolved to a real file+unit in THIS workspace; if it does
+  // not resolve (stale record, a different workspace, a referent that is not
+  // `file:unit`), the resume is skipped and the cold scan runs — a stale
+  // nomination never forces a wrong target. The kind is carried as `resumeBy`
+  // so the round discloses its provenance (`record-carried` etc.), distinct
+  // from the mid-run `failure-named-reopen` of a carried body the suite names.
+  let resumeBy = null;
+  if (resumeVoid?.kind && resumeVoid?.referent) {
+    const sep = String(resumeVoid.referent).lastIndexOf(":");
+    if (sep > 0) {
+      const rFile = String(resumeVoid.referent).slice(0, sep);
+      const rUnit = String(resumeVoid.referent).slice(sep + 1);
+      let fi = order.indexOf(rFile);
+      if (fi < 0) { order.push(rFile); fi = order.length - 1; }
+      const unit = readUnits(rFile).find((u) => u.name === rUnit) ?? null;
+      if (unit) { cursor = fi; reopenedTarget = unit; resumeBy = `record-${resumeVoid.kind}`; }
+    }
+  }
   const currentFile = () => (order.length ? order[cursor] : null);
   const historyHere = () => rounds.filter((r) => r.file === currentFile());
+
+  // REC (2026-10-15 — "when the defs don't eva, ya rec'em"). A failed EVA no
+  // longer re-draws the same slot DEF with a sharper note (a circle). It
+  // RESTRUCTURES the DEF: voidGate.revise names one rung of new ground, and a
+  // rung that adds nothing is not a REC — the next is tried. When no rung adds
+  // ground, or the unit's own findings MEASURE as converged / cycling /
+  // diverging (kernel/measured-loop.js), the unit is walled and disclosed.
+  // REC state lives per unit across rounds; the history is in the rounds.
+  const recOf = new Map();
+  const recFor = (name) => {
+    const k = `${currentFile()}:${name}`;
+    if (!recOf.has(k)) {
+      let prior = [];
+      try { prior = typeof priorRefusals === "function" ? (priorRefusals({ unit: name, file: currentFile() }) ?? []) : []; } catch { prior = []; }
+      recOf.set(k, { rungs: [], ground: [], refused: [...prior], narrowed: new Set(), wrong: 0, formHits: 0, inv: null, loop: makeMeasuredLoop({ ceiling: maxRounds + 2 }) });
+    }
+    return recOf.get(k);
+  };
+  const namesUnit = (name) => new RegExp(`\\b${escapeRe(name)}\\b`);
+  const findingsAbout = (output, name) => String(output ?? "").split("\n").filter((l) => l.trim() && namesUnit(name).test(l)).length;
+  // The deciding material, as text: the files the test command names, else the other files of the
+  // workspace. Read only to learn the SHAPE the unit is called in (form-witness.js), never quoted.
+  const decidingTexts = () => {
+    const named = String(testCommand).split(/\s+/).filter((t) => t && fs.existsSync(path.join(root, t)) && fs.statSync(path.join(root, t)).isFile());
+    const files = (named.length ? named : fileList.filter((f) => f !== currentFile())).slice(0, 6);
+    return files.flatMap((rel) => { try { return [fs.readFileSync(path.join(root, rel), "utf8").slice(0, 40_000)]; } catch { return []; } });
+  };
+  const groundFor = (rung, target, rec) => {
+    if (rung === "dependence") {
+      const named = String(testCommand).split(/\s+/).filter((t) => t && fs.existsSync(path.join(root, t)) && fs.statSync(path.join(root, t)).isFile());
+      const files = named.length ? named : fileList.filter((f) => f !== currentFile());
+      const call = new RegExp(`\\b${escapeRe(target.name)}\\s*\\(`);
+      const lines = [];
+      for (const rel of files) {
+        let text = "";
+        try { text = fs.readFileSync(path.join(root, rel), "utf8"); } catch { continue; }
+        text.split("\n").forEach((l, i) => { if (lines.length < 12 && call.test(l) && !/^\s*(def|function|async function|export function)\b/.test(l)) lines.push(`${rel}:${i + 1}: ${l.trim()}`); });
+      }
+      return lines.length ? `The test that decides — the lines that exercise ${target.name}:\n${lines.join("\n")}` : "";
+    }
+    if (rung === "refusals") {
+      const refused = [...new Set(rec.refused)].slice(-3);
+      return refused.length ? `These bodies were tried and the real test refuted them — the answer is none of these:\n${refused.map((b) => `---\n${b.slice(0, 200)}`).join("\n")}\n---` : "";
+    }
+    if (rung === "neighbourhood") return contextFold ? "" : (renderVoidNeighbourhood(root, fileList, target.name) || "");
+    return "";
+  };
+  /** REC the slot DEF onto new ground, or say why it cannot be. */
+  const recSlot = (target, rec, product) => {
+    const measured = rec.loop.verdict();
+    if (!measured.continue && measured.verdict !== "resolved") return { ok: false, kind: `measured_${measured.verdict}`, reason: `the unit's findings measure as ${measured.verdict} over ${measured.rounds} EVA(s)` };
+    const high = voidGate.high(product);
+    for (;;) {
+      const instruction = voidGate.revise({ ...product, rungs: rec.rungs }, high);
+      if (!instruction) return { ok: false, kind: "no_new_ground", reason: `every REC rung is spent (${rec.rungs.join(", ") || "none"}) — no new ground to stand the DEF on` };
+      rec.rungs.push(instruction.rec);
+      const ground = groundFor(instruction.rec, target, rec);
+      if (ground) { rec.ground.push(ground); return { ok: true, rung: instruction.rec, because: instruction.because, chars: ground.length }; }
+    }
+  };
   // REOPEN: a carried body the whole suite now implicates — no stub remains,
   // the test is red and NAMES a unit. Scan every file for that unit and
   // return it for body-correction (a direct traceback frame beats a mention).
@@ -936,9 +1036,12 @@ export async function runVoidLoop({ sessionId, userId = null, model, task, works
     let decision = null;
     if (reopenedTarget) {
       target = reopenedTarget;
-      by = "failure-named-reopen";
-      decision = { basis: `reopen: ${target.name} — a carried body the whole suite now implicates`, ok: true, tied: false };
+      by = resumeBy ?? "failure-named-reopen";
+      decision = { basis: resumeBy
+        ? `resume: ${target.name} — the record's nextVoid nomination (${resumeBy.replace(/^record-/, "")})`
+        : `reopen: ${target.name} — a carried body the whole suite now implicates`, ok: true, tied: false };
       reopenedTarget = null;
+      resumeBy = null;
     } else {
       // THE ARROW-OF-TIME GATE, riding Kelsen's validity-window precedence
       // (arrow-gate.js), over THIS FILE's own record: the next void is chosen
@@ -1080,6 +1183,7 @@ export async function runVoidLoop({ sessionId, userId = null, model, task, works
         `You are filling one function in ${currentFile()}. Its real signature and docstring are already in the file:`,
         ...target.declText.split("\n").map((l) => (l === target.stubLine ? "" : l)),
         ...(contextFold ? [renderVoidNeighbourhood(root, fileList, target.name)] : []).filter(Boolean),
+        ...recFor(target.name).ground,
         lastTestFailure ? `The real test failed last round with:\n${lastTestFailure.slice(0, 400)}` : null,
         lastNote && lastNote !== lastTestFailure ? `Last round note: ${lastNote.slice(0, 300)}` : null,
         "Complete the function's body, continuing the indentation:",
@@ -1090,11 +1194,73 @@ export async function runVoidLoop({ sessionId, userId = null, model, task, works
         sessionId, userId, model, task: fragment, chatHistory: [], workspace: root, mode: "chat", drawOnly: true, caller, signal,
         ...(kelsen === null ? null : { kelsen: kelsenFor ?? kelsen }),
       });
+      // WRONG UNIT: refuse before anything is written or tested, and REC the slot DEF onto
+      // narrower ground (this slot only, the other unit named as not-this-slot).
+      const answeredOther = wrongUnit(turned.text, target.name);
+      if (answeredOther) {
+        const rec = recFor(target.name);
+        rec.wrong += 1;
+        if (!rec.narrowed.has(answeredOther)) {
+          rec.narrowed.add(answeredOther);
+          rec.rungs.push("narrow");
+          // FACTS, not prohibitions: an imperative negation ("do not write it") tripped the safety gate on a
+          // 1.5B mouth and returned its canned refusal four times (measured 2026-10-15); the same fact,
+          // stated plainly, passes and steers the mouth to the right unit.
+          rec.ground.push(`This slot is \`${target.name}\` (not \`${answeredOther}\`, which has its own slot). Write only the body of \`${target.name}\`.`);
+        }
+        push({ round, file: currentFile(), draw, kelsen, target: target.name, by: "rec", action: "REC", rung: "narrow", gap: { kind: "wrong_unit", reason: `the draw defines ${answeredOther}, not ${target.name}` }, raw: String(turned.text ?? "").slice(0, 300), basis: `the mouth answered ${answeredOther} for the ${target.name} slot; the DEF is narrowed, nothing was written or tested` });
+        lastNote = `you answered ${answeredOther}; this slot is ${target.name}`;
+        if (rec.wrong > 2) {
+          // narrowing alone is not changing what the mouth does: climb the ordinary rungs
+          const recd = recSlot(target, rec, { unit: target.name, outcome: "wrong_unit" });
+          if (!recd.ok) {
+            if (!walledTargets.has(currentFile())) walledTargets.set(currentFile(), new Set());
+            walledTargets.get(currentFile()).add(target.name);
+            push({ round, file: currentFile(), target: target.name, by: "rec", action: "REC", gap: { kind: recd.kind, reason: recd.reason }, basis: `the mouth keeps answering another unit and the slot DEF cannot be restructured: ${recd.reason}` });
+            break;
+          }
+        }
+        continue;
+      }
       const body = extractBody(turned.text, target.name);
       if (!body) {
         push({ round, file: currentFile(), draw, kelsen, target: target.name, by, action: "DEF", gap: { kind: "empty_draw", reason: "the mouth returned no body bytes" }, raw: String(turned.text ?? "").slice(0, 300), basis: decision.basis });
         lastNote = `no body was drawn for ${target.name}; it remains open`;
         continue;
+      }
+      // THE FORM WITNESS (before any test is spent): the shape the deciding material implies for
+      // this unit, against the shape of this body. Only a KNOWN, DISJOINT shape is refused; an
+      // unreadable one is flagged and goes on to the real test. The note it hands back is the
+      // shape, never a word of the answer.
+      {
+        const formRec = recFor(target.name);
+        if (!formRec.inv) formRec.inv = formInvariants({ unit: target.name, texts: decidingTexts() });
+        const form = checkForm({ body, invariants: formRec.inv });
+        if (form.verdict === "deviates") {
+          formRec.formHits += 1;
+          formRec.refused.push(body);
+          const note = deviationNote(target.name, form.deviations, formRec.inv);
+          if (!formRec.ground.includes(note)) { formRec.ground.push(note); formRec.rungs.push("form"); }
+          push({ round, file: currentFile(), draw, kelsen, target: target.name, by: "rec", action: "REC", rung: "form", gap: { kind: "form_deviation", reason: form.deviations.map((d) => d.detail).join("; ") }, basis: `shape check refused the draw before the test: ${form.deviations[0].detail}` });
+          lastNote = form.deviations[0].detail;
+          if (onRecord) {
+            try {
+              onRecord({ referent: `${currentFile()}:${target.name}`, delta: `shape: ${form.deviations[0].detail}`, check: testCommand, refused: form.deviations[0].detail,
+                draw: body.slice(0, 300), action: "REC", by: "rec", source: "form-witness", model, rungs: [...formRec.rungs], def: sha(formRec.ground.join("\n")),
+                address: currentFile() });
+            } catch (e) { console.error(`[void-loop] rec sink failed: ${e.message}`); }
+          }
+          if (formRec.formHits > 2) {
+            const recd = recSlot(target, formRec, { unit: target.name, outcome: "form_deviation" });
+            if (!recd.ok) {
+              if (!walledTargets.has(currentFile())) walledTargets.set(currentFile(), new Set());
+              walledTargets.get(currentFile()).add(target.name);
+              push({ round, file: currentFile(), target: target.name, by: "rec", action: "REC", gap: { kind: recd.kind, reason: recd.reason }, basis: `the draws keep the wrong shape and the slot DEF cannot be restructured: ${recd.reason}` });
+              break;
+            }
+          }
+          continue;
+        }
       }
       // THE ARROW RUNNING IN PLACE: a body that already ran the real test and
       // failed this run is a repeat — named on the round and folded into the
@@ -1124,6 +1290,8 @@ export async function runVoidLoop({ sessionId, userId = null, model, task, works
         continue;
       }
       fs.writeFileSync(abs, applied.code);
+      const rec0 = recFor(target.name);
+      const prov = { before: sha(before), after: sha(applied.code), rungs: [...rec0.rungs], def: sha(rec0.ground.join("\n")), draw: body.slice(0, 300) };
       const test = runTestCommand(testCommand, root, testTimeoutMs);
       finalTestOutput = test.output;
       const won = test.exitCode === 0;
@@ -1137,20 +1305,32 @@ export async function runVoidLoop({ sessionId, userId = null, model, task, works
       // final green proves every carried change.
       const implicated = won ? null : new RegExp(`\\b${escapeRe(target.name)}\\b`).test(test.output);
       if (won) {
-        push({ round, file: currentFile(), draw, kelsen, target: target.name, by, action: "DEF", mode: patch.mode, applied: true, reverted: false, syntax: gate.syntax, testExitCode: 0, testOutput: test.output, bodyHash, basis: decision.basis, ...(cyclePrior ? { cycle: cyclePrior } : null) });
+        push({ round, file: currentFile(), draw, kelsen, target: target.name, by, action: "DEF", mode: patch.mode, applied: true, reverted: false, syntax: gate.syntax, testExitCode: 0, testOutput: test.output, bodyHash, ...prov, basis: decision.basis, ...(cyclePrior ? { cycle: cyclePrior } : null) });
         logDone({ action: "done", done: true, verdict: "green" });
     return { done: true, rounds, finalTestOutput: test.output };
       }
       if (implicated) {
         fs.writeFileSync(abs, before); // this unit IS the failure — its change never stays
-        push({ round, file: currentFile(), draw, kelsen, target: target.name, by, action: "DEF", mode: patch.mode, applied: true, reverted: true, syntax: gate.syntax, testExitCode: test.exitCode, testOutput: test.output, bodyHash, basis: decision.basis, ...(cyclePrior ? { cycle: cyclePrior } : null) });
+        push({ round, file: currentFile(), draw, kelsen, target: target.name, by, action: "DEF", mode: patch.mode, applied: true, reverted: true, syntax: gate.syntax, testExitCode: test.exitCode, testOutput: test.output, bodyHash, ...prov, basis: decision.basis, ...(cyclePrior ? { cycle: cyclePrior } : null) });
         lastTestFailure = test.output;
         lastNote = cycleNote;
-        continue; // sharpen and re-draw the same void, within this round
+        // REC, not re-draw: the DEF that did not EVA is restructured onto new ground.
+        const rec = recFor(target.name);
+        rec.refused.push(body);
+        rec.loop.push(findingsAbout(test.output, target.name));
+        const recd = recSlot(target, rec, { unit: target.name, outcome: "implicated" });
+        if (!recd.ok) {
+          if (!walledTargets.has(currentFile())) walledTargets.set(currentFile(), new Set());
+          walledTargets.get(currentFile()).add(target.name);
+          push({ round, file: currentFile(), target: target.name, by: "rec", action: "REC", gap: { kind: recd.kind, reason: recd.reason }, basis: `EVA failed and the slot DEF cannot be restructured: ${recd.reason}` });
+          break; // walled: the gate skips it; no flat re-draw
+        }
+        push({ round, file: currentFile(), target: target.name, by: "rec", action: "REC", move: `REC ${target.name}: + ${recd.rung}`, rung: recd.rung, basis: `EVA failed (${recd.because}); the slot DEF now stands on new ground: ${recd.rung} (${recd.chars} chars)` });
+        continue; // the next draw is at the REC'd DEF
       }
       // the failure is another unit's — carry this change, chase what the
       // test named (disclosed on the round: carried, not proven alone)
-      push({ round, file: currentFile(), draw, kelsen, target: target.name, by, action: "DEF", mode: patch.mode, applied: true, reverted: false, carried: true, syntax: gate.syntax, testExitCode: test.exitCode, testOutput: test.output, bodyHash, basis: decision.basis, ...(cyclePrior ? { cycle: cyclePrior } : null) });
+      push({ round, file: currentFile(), draw, kelsen, target: target.name, by, action: "DEF", mode: patch.mode, applied: true, reverted: false, carried: true, syntax: gate.syntax, testExitCode: test.exitCode, testOutput: test.output, bodyHash, ...prov, basis: decision.basis, ...(cyclePrior ? { cycle: cyclePrior } : null) });
       lastTestFailure = test.output;
       lastNote = cycleNote;
       break; // this void is done for now — the named unit is chased next round

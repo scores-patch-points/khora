@@ -252,6 +252,35 @@ export const arriveGate = {
  * last one, and `record.exhausted` says whether the budget ran out before the
  * high gate passed. Budget is a COST the caller sets, never a judgment.
  */
+// ── THE VOID LAYER (code, 2026-10-15) ─────────────────────────────────────
+// The product is one draw at one slot DEF: { unit, outcome, rungs }. When the
+// DEFs don't EVA, ya REC 'em: a failed high gate never asks for the same DEF
+// again. `revise` names the next rung of NEW GROUND the slot DEF must take on
+// (the frame changes, not the note), and returns null when every rung is
+// spent: no new ground left, so the layer stops instead of circling.
+//   dependence     the test that decides — the lines that exercise the unit
+//   refusals       the bodies the real test already refuted (anti-matter)
+//   neighbourhood  zoom out a grain: the field's declarations around the unit
+export const VOID_REC_RUNGS = Object.freeze(["dependence", "refusals", "neighbourhood"]);
+
+export const voidGate = {
+  low(product) {
+    const ok = !!product?.unit;
+    return verdict(ok, ok ? `a void to fill: ${product.unit}` : "no unit — nothing to fill");
+  },
+  high(product) {
+    const o = product?.outcome ?? null;
+    if (o === "won") return verdict(true, "the real test exited 0");
+    if (o === "carried") return verdict(true, "the failure names another unit — this change is carried, not refuted");
+    return verdict(false, `EVA failed at this DEF: ${o ?? "no outcome"}`, { missing: o ?? "outcome" });
+  },
+  revise(product, high) {
+    const spent = new Set(product?.rungs ?? []);
+    const rung = VOID_REC_RUNGS.find((r) => !spent.has(r));
+    return rung ? { rec: rung, because: high?.missing ?? null } : null;
+  },
+};
+
 export async function runLayer({ name, gate, product, ctx = {}, revise = null, budget = 0 } = {}) {
   const record = { layer: name, attempts: [], exhausted: false, low: null };
   const low = gate.low(product, ctx);

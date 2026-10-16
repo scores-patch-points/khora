@@ -70,13 +70,14 @@
 // carries on exactly as upstream would.
 import os from "node:os";
 import { surf as surfLadder } from "./opencode-surf.mjs";
-import { rec as recChange, fold as foldRecord, recNote, recSink } from "./opencode-rec.mjs";
-import { mark as markNote, claim as claimItem, done as doneItem, read as readNotes, noteFor, turnsFile } from "./opencode-worknotes.mjs";
+import { admit as admitChange, fold as foldRecord, recordNote, recordSink, reconcile, nextVoid, reasonFor, provenance, refusalsFor } from "./opencode-record.mjs";
+import * as eot from "./opencode-eot.mjs";
+import { mark as markNote, claim as claimItem, done as doneItem, read as readNotes, noteFor, stateFor, turnsFile, turnsOf, projectKey, projectRoot, plans as workPlans } from "./opencode-worknotes.mjs";
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 import http from "node:http";
-import { spawnSync } from "node:child_process";
+import { spawnSync, execFileSync } from "node:child_process";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { lookNote, projectHistory } from "./opencode-context.mjs";
 import { archonNote } from "./opencode-archons.mjs";
@@ -215,6 +216,8 @@ async function onContext(body) {
   turn.ask = String(body.ask ?? "");
   turn.address = addressOf(turn.ask);
   turn.model = body.model ?? turn.model;
+  if (body.workspace || body.task) turn.task = taskFor(body, String(body.sessionID ?? ""));
+  if (body.workspace) turn.workspace = String(body.workspace);
   const out = {};
   if (RECALL && turn.ask.trim()) {
     const note = recallNote(turn.address);
@@ -227,6 +230,14 @@ async function onContext(body) {
     Array.isArray(body.exchanges) && body.exchanges.length ? projectHistory({ ask: turn.ask, exchanges: body.exchanges }) : { gap: "no-history" },
   ]);
   if (looked.note) { counters.looksServed++; out.look = looked.note; turn.look = looked.note; } else { counters.looksDeclined++; turn.look = looked.gap ?? null; }
+  // The project's commons: publish this agent's settled turns, then read the others' through
+  // Houdini against this ask. Computed every turn so a first-turn agent hears the others too.
+  if (turn.ask.trim() && (body.workspace || body.task)) {
+    const agent = String(body.sessionID ?? "");
+    const task = taskFor(body, agent);
+    if (Array.isArray(body.turns)) writeTurns({ task, agent, turns: body.turns });
+    try { const commons = await commonsNote({ task, agent, ask: turn.ask }, { prosify: commonsProsify }); if (commons) { out.commons = commons; turn.commons = commons.length; } } catch { /* never blocks */ }
+  }
   if (projected.drop) {
     const sizes = new Map(body.exchanges.map((e) => [e.id, e.chars ?? 0]));
     const dropped = projected.drop.reduce((n, id) => n + (sizes.get(id) ?? 0), 0);
@@ -296,8 +307,126 @@ function onTitle(body) {
 // ── event ────────────────────────────────────────────────────────────────
 const TURN_END = new Set(["session.execution.succeeded", "session.execution.failed", "session.execution.interrupted"]);
 
+// MECHANICAL TRACES (zero prompt cost). An agent that edits a file leaves a claim on it, made by the
+// system from the tool event, not by asking the model to write anything. The claim decays (a TTL,
+// never `done`), so it is a trace, not a lock. Contention (another live agent holds the path) is
+// recorded as a `block` mark that surfaces in the other agents' next note; nothing is refused.
+const EDIT_TOOLS = /^(?:edit|write|multiedit|patch|apply_patch|str_replace\w*|notebookedit)$/i;
+const CLAIM_TTL_MS = Number(process.env.FOLD_FILE_CLAIM_TTL_MS ?? 10 * 60_000);
+// THE WORK TREE LOG. Every file transformation a tool makes is an EOT `edit` event with its bytes stored once
+// (opencode-eot.mjs). Single-file tools are captured exactly (before read at `called`, after read at `success`);
+// anything whose writes we cannot name (bash, patches) is swept from disk by mtime. Never blocks a turn.
+const ONE_FILE_TOOLS = /^(?:edit|write|multiedit|str_replace\w*)$/i;
+const SWEEP_TOOLS = /^(?:bash|shell|exec|patch|apply_patch)$/i;
+const realOf = (file) => {
+  try { return fs.realpathSync(file); } catch { /* new file */ }
+  try { return path.join(fs.realpathSync(path.dirname(file)), path.basename(file)); } catch { return file; }
+};
+function traceStart(sessionID, turn, tool) {
+  const name = String(tool?.name ?? "");
+  tool.t0 = Date.now();
+  if (!ONE_FILE_TOOLS.test(name)) return;
+  const input = tool.input && typeof tool.input === "object" ? tool.input : null;
+  const file = input?.filePath ?? input?.file_path ?? input?.path ?? null;
+  if (typeof file !== "string" || !path.isAbsolute(file)) return;
+  const real = realOf(file);
+  let before = null; try { before = fs.readFileSync(real); } catch { /* new file */ }
+  tool.trace = { file: real, before };
+}
+function traceEnd(sessionID, turn, tool) {
+  const name = String(tool?.name ?? "");
+  const task = turn.task ?? sessionTask.get(sessionID);
+  if (!task) return;
+  const ok = tool.ok === true;
+  if (tool.trace && ok) {
+    const root = projectRoot(tool.trace.file);
+    if (!root) return;
+    let after = null; try { after = fs.readFileSync(tool.trace.file); } catch { /* deleted */ }
+    eot.recordEdit({ task, agent: sessionID, root, file: tool.trace.file, before: tool.trace.before, after, tool: name });
+  } else if (SWEEP_TOOLS.test(name)) {
+    const cmd = tool.input && typeof tool.input === "object" ? String(tool.input.command ?? tool.input.cmd ?? name) : name;
+    eot.recordExec({ task, agent: sessionID, command: cmd, ok, cwd: turn.workspace ?? null, tool: name });
+    const root = turn.workspace ? realOf(turn.workspace) : null;
+    if (root && tool.t0) eot.sweepEdits({ task, agent: sessionID, root, since: tool.t0, tool: name });
+  }
+  delete tool.trace;
+}
+
+// A worktree operation reached the bus: diff `git worktree list` against the tree's last known set and record
+// each create/remove as a `wt` event (the mechanical read of what git now says, not a model's account of it).
+function traceWorktrees(sessionID, turn, workspace) {
+  const task = turn.task ?? sessionTask.get(sessionID) ?? taskFor({ workspace }, sessionID);
+  if (!workspace || !task) return;
+  let out = "";
+  try { out = execFileSync("git", ["-C", workspace, "worktree", "list", "--porcelain"], { encoding: "utf8", timeout: 3000 }); } catch { return; }
+  const now = new Map();
+  let cur = null;
+  for (const l of out.split("\n")) { if (l.startsWith("worktree ")) { cur = l.slice(9); now.set(cur, null); } else if (l.startsWith("branch ") && cur) now.set(cur, l.slice(7)); }
+  const known = eot.projectTree(task).worktrees;
+  for (const [dir, branch] of now) if (!known.has(dir)) eot.recordWorktree({ task, agent: sessionID, op: "create", directory: dir, branch });
+  for (const dir of known) if (!now.has(dir)) eot.recordWorktree({ task, agent: sessionID, op: "remove", directory: dir });
+}
+
+function autoClaim(sessionID, turn, tool) {
+  if (!EDIT_TOOLS.test(String(tool?.name ?? ""))) return;
+  const input = tool.input && typeof tool.input === "object" ? tool.input : null;
+  const file = input?.filePath ?? input?.file_path ?? input?.path ?? input?.file ?? null;
+  if (typeof file !== "string" || !path.isAbsolute(file)) return;
+  // the project root is real-pathed (macOS /var -> /private/var); so must the file be, including a
+  // file a `write` is about to create (its directory is real-pathed, the basename kept)
+  const real = (() => {
+    try { return fs.realpathSync(file); } catch { /* new file */ }
+    try { return path.join(fs.realpathSync(path.dirname(file)), path.basename(file)); } catch { return file; }
+  })();
+  const rootDir = projectRoot(real);
+  const task = turn.task ?? projectKey(real);
+  if (!rootDir || !task) return;
+  const rel = path.relative(rootDir, real);
+  if (!rel || rel.startsWith("..")) return;
+  sessionTask.set(sessionID, task);
+  const r = claimItem({ task, agent: sessionID, item: `edit ${rel}`, ttlMs: CLAIM_TTL_MS });
+  if (r.ok) { try { eot.recordClaim({ task, agent: sessionID, item: `edit ${rel}`, ttlMs: CLAIM_TTL_MS }); } catch { /* */ } }
+  if (r.ok === false && r.holder && r.holder !== sessionID && !r.done) {
+    try { eot.recordContention({ task, agent: sessionID, item: `edit ${rel}`, holder: r.holder }); } catch { /* the log never blocks */ }
+    markNote({ task, agent: sessionID, kind: "block", text: `contended: ${rel} is held by ${r.holder}` });
+    turn.contended = (turn.contended ?? 0) + 1;
+  }
+}
+
+// THE GUARD. What the model just said is typed against the log and the disk: a path that exists in
+// neither, or a claim that checks pass with no witnessed passing check in the log, is a flag. Flags are
+// system observations (mechanical); the words themselves stay model-origin. The next note carries them.
+function guardAnswer(sessionID, turn) {
+  const text = String(turn.answer ?? "");
+  if (text.length < 8) return;
+  const task = turn.task ?? sessionTask.get(sessionID);
+  if (!task) return;
+  const r = eot.groundCheck({ task, text, root: turn.workspace ?? null });
+  turn.flags = r.flags.slice(0, 4);
+  turn.groundSummary = r.summary;
+  if (r.flags.length) eot.append({ task, agent: sessionID, stage: "flag", detail: { flags: r.flags.slice(0, 6), summary: r.summary } });
+}
+
+// THE WORK TREE, asked: a fold of the log at a cursor. op: note | files | diff | drift | reconcile.
+function onTree(body) {
+  const task = taskFor(body, String(body.agent ?? body.sessionID ?? ""));
+  const asOf = body.asOf ?? null, root = body.workspace ? realOf(String(body.workspace)) : null;
+  switch (body.op ?? "note") {
+    case "files": return { ok: true, files: [...eot.projectTree(task, { asOf }).files.values()].map(({ path: p, sha, bytes, agent, ts }) => ({ path: p, sha, bytes, agent, ts })) };
+    case "diff": return { ok: true, ...eot.treeDiff(task, body.from ?? null, body.to ?? null) };
+    case "drift": return root ? { ok: true, drift: eot.treeVsDisk(task, root) } : { ok: false, gap: "no-workspace" };
+    case "reconcile": return root ? eot.reconcile({ task, agent: String(body.agent ?? body.sessionID ?? "door"), root }) : { ok: false, gap: "no-workspace" };
+    default: return { ok: true, ...eot.projectTreeNote(task) };
+  }
+}
+
 function onEvent(body) {
   const { type, data = {} } = body;
+  if (type === "worktree.updated" || type === "worktree.resolved") {
+    // a bus event, not a turn: it carries no session, only the workspace the plugin was loaded in
+    try { traceWorktrees(String(body.sessionID ?? "worktree"), { task: body.task }, body.workspace); } catch { /* the log never blocks */ }
+    return {};
+  }
   if (!body.sessionID) return {};
   const turn = turnFor(body.sessionID);
   switch (type) {
@@ -326,6 +455,8 @@ function onEvent(body) {
       const tool = turn.tools.get(data.id) ?? { name: "?", input: null, ok: null };
       tool.input = data.input;
       turn.tools.set(data.id, tool);
+      try { autoClaim(body.sessionID, turn, tool); } catch { /* a trace is never worth a turn */ }
+      try { traceStart(body.sessionID, turn, tool); } catch { /* the log never blocks */ }
       break;
     }
     case "session.tool.success":
@@ -333,10 +464,12 @@ function onEvent(body) {
       const tool = turn.tools.get(data.id) ?? { name: "?", input: null, ok: null };
       tool.ok = type === "session.tool.success";
       turn.tools.set(data.id, tool);
+      try { traceEnd(body.sessionID, turn, tool); } catch { /* the log never blocks */ }
       break;
     }
     case "session.text.ended":
       turn.answer = String(data.text ?? "");
+      try { guardAnswer(body.sessionID, turn); } catch { /* the guard never blocks a turn */ }
       break;
     default:
       break;
@@ -744,32 +877,265 @@ export { loadPerceiveConfig, savePerceiveConfig, onPerceive, PERCEIVE_DEFAULTS }
 // turns go in its own single-writer turns file. The context carries the ladder
 // and the open claims; detail is read from the files on demand. `task`
 // defaults to the sessionID, so a lone session behaves as before.
-function onSurf(body) {
+// THE SEED, reported: the UDHR lexicons (the omnilingual mind seed) and the hyperlexicon that
+// composes over them. Read from janus/priors beside this checkout; a missing seed is a typed gap
+// in the handshake, never an error. Cached: the directory does not change under a running door.
+let seedCache = null;
+function seedStatus() {
+  if (seedCache) return seedCache;
+  const dir = process.env.FOLD_PRIORS_DIR ?? path.resolve(HERE, "..", "janus", "priors");
+  try {
+    const files = fs.readdirSync(dir).filter((f) => /^udhr-.+\.lexicon\.json$/.test(f));
+    const languages = files.map((f) => f.replace(/^udhr-/, "").replace(/\.lexicon\.json$/, "")).sort();
+    const hl = fs.existsSync(path.join(HERE, "native", "kernel", "hyperlexicon.js"));
+    seedCache = { udhr: { lexicons: languages.length, languages }, hyperlexicon: hl, dir };
+  } catch (e) { seedCache = { udhr: { lexicons: 0, languages: [] }, hyperlexicon: false, gap: String(e.code ?? "unreadable") }; }
+  return seedCache;
+}
+
+// The task a call belongs to: an explicit one wins, else the PROJECT the workspace
+// belongs to (so every agent in one repository shares one medium), else the agent alone.
+// An older client sends no workspace; the door then falls back to the project it already learned
+// from that agent's own edits (sessionTask, set by autoClaim), and only then to the agent alone.
+const sessionTask = new Map();
+const taskFor = (body, agent) => {
+  const t = body.task ? String(body.task) : null;
+  return t && /^[\w.-]+$/.test(t) && t !== ".." ? t : (projectKey(body.workspace) ?? sessionTask.get(agent) ?? agent);
+};
+
+// THE COMMONS: what the OTHER agents of this project have settled, ingested and reasoned
+// over before the model sees it. Their turns are read as addressed exchanges and put
+// through Houdini against THIS agent's ask (projectHistory: which ride, which are
+// recalled by a rare anchor, which become a gist); only that projection is injected.
+// Never a raw relay of another agent's text.
+let commonsProsify = null;
+export const setCommonsProsify = (fn) => { commonsProsify = typeof fn === "function" ? fn : null; };
+// PENELOPE AS PROSIFIER (opt-in: FOLD_COMMONS_PROSIFY=penelope). Penelope's text weave is the full
+// arrangement pipeline, not a note-writer: it runs its own gates (a small ground is REFUSED for
+// individuating no being), writes an HTML widget under penelope/organs/arrangement-out, and costs
+// seconds. So it is accepted only when it returns prose it verified; anything else is null and the
+// commons keeps the extractive, address-typed projection. Never on the default path.
+async function penelopeProsify({ ask, ground }) {
+  const api = path.resolve(HERE, "..", "penelope", "organs", "generation", "api.mjs");
+  if (!fs.existsSync(api)) return null;
+  process.env.PENELOPE_MOUTH_URL ??= process.env.FOLD_PROSIFY_MOUTH ?? "http://127.0.0.1:11435";
+  const { weave } = await import(api);
+  const r = await weave({
+    intent: `In plain sentences, tell another engineer what each agent has said that bears on: ${String(ask).slice(0, 200)}. Say only what is in the material, attributing each statement to its agent.`,
+    artifact: "text", model: process.env.FOLD_CHASE_MODEL ?? "qwen2.5-coder:1.5b",
+    context: { ground, material: ground.map((g) => `[${g.holder}] ${g.text}`).join("\n") },
+  });
+  const m = r?.materialization;
+  const text = r?.ok === true ? (m?.text ?? m?.prose ?? (typeof m?.bytes === "string" ? m.bytes : null)) : null;
+  return typeof text === "string" && text.trim() ? text : null;
+}
+if (process.env.FOLD_COMMONS_PROSIFY === "penelope") commonsProsify = penelopeProsify;
+
+const COMMONS_CHARS = Number(process.env.FOLD_COMMONS_CHARS ?? 600);
+const COMMONS_SENTENCE_CHARS = Number(process.env.FOLD_COMMONS_SENTENCE_CHARS ?? 150);
+const COMMONS_MAX_SENTENCES = Number(process.env.FOLD_COMMONS_SENTENCES ?? 4);
+const NOTE_CHARS = Number(process.env.FOLD_NOTE_CHARS ?? 700);
+const cueSeen = new Set();
+async function commonsNote({ task, agent, ask }, { prosify = null } = {}) {
+  const fromLog = (() => { try { return eot.turnsFromLog(task); } catch { return []; } })();
+  const theirs = (fromLog.length ? fromLog : turnsOf({ task })).filter((t) => t.agent !== agent);
+  if (!theirs.length) return "";
+  const exchanges = theirs.map((t) => ({
+    id: `${t.agent}#${t.n}`, q: t.ask, a: t.text, chars: (t.ask?.length ?? 0) + (t.text?.length ?? 0),
+    files: t.tools, failed: 0, open: false, holder: t.agent,
+  }));
+  const projected = await projectHistory({ ask, exchanges: exchanges.map((e) => ({ ...e, q: `[${e.holder.slice(0, 12)}] ${e.q}` })) });
+  const keepIds = new Set(projected.keep ?? []);
+  const byHoudini = projected.gap ? exchanges.slice(-3) : exchanges.filter((e) => keepIds.has(e.id));
+  // NO STANDPOINT IS SILENCED BY SELECTION. Houdini weighs a term at zero when the thread says it in
+  // half its units, so on a small or single-topic thread it keeps only the recent suffix and an
+  // agent's matching standpoint would vanish. Selection may rank; it may not erase a holder: each
+  // agent's best-matching turn (term overlap with the ask, ties to the most recent) always rides.
+  const askTerms = new Set(String(ask).toLowerCase().match(/[\p{L}\p{N}_]{3,}/gu) ?? []);
+  const overlap = (e) => (`${e.q} ${e.a}`.toLowerCase().match(/[\p{L}\p{N}_]{3,}/gu) ?? []).filter((w) => askTerms.has(w)).length;
+  const bestPerHolder = [...new Set(exchanges.map((e) => e.holder))].map((h) =>
+    exchanges.filter((e) => e.holder === h).reduce((best, e, i) => (best === null || overlap(e) >= overlap(best) ? e : best), null));
+  const chosen = new Map(byHoudini.map((e) => [e.id, e]));
+  for (const e of bestPerHolder) if (e) chosen.set(e.id, e);
+  const picked = [...chosen.values()].sort((a, b) => exchanges.indexOf(a) - exchanges.indexOf(b)).slice(-8);
+
+  // PERSPECTIVE LAW (antistrauss.mjs PERSPECTIVAL): engagement cannot invalidate a perspective,
+  // only contextualize it. Each projected turn is HELD by the agent that settled it (kernel/
+  // perspective.js, basis "asserted"), kept apart, never merged into this agent's own facts.
+  // Material is scanned as non-user text: hits are contextualized (counted, never dropped).
+  let held = [], conflicts = [], contextualized = 0;
+  try {
+    const { projectPerspectives, perspectiveOperation, divergence, BASIS, STANCE } = await import("./native/kernel/perspective.js");
+    const ops = picked.map((e) => perspectiveOperation({
+      holder: `holder:${e.holder}`, claim: String(e.a).replace(/\s+/g, " ").slice(0, 160) || e.q,
+      stance: STANCE.HOLDS, basis: BASIS.ASSERTED, witness: e.id,
+    }));
+    const view = projectPerspectives(ops.map((op, seq) => ({ ...op, seq })));
+    held = picked.map((e) => ({ holder: e.holder, q: e.q, id: e.id }));
+    const holders = [...new Set(picked.map((e) => e.holder))];
+    for (let i = 0; i < holders.length; i++) for (let j = i + 1; j < holders.length; j++) {
+      const d = divergence(view, `holder:${holders[i]}`, `holder:${holders[j]}`);
+      for (const c of d?.conflicting ?? []) conflicts.push({ a: holders[i], b: holders[j], claim: c.claim });
+    }
+  } catch { held = picked.map((e) => ({ holder: e.holder, q: e.q, id: e.id })); }
+  try {
+    const { scopeScan } = await import("./native/the-fold/antistrauss.mjs");
+    contextualized = scopeScan(picked.map((e) => ({ role: "assistant", content: e.a }))).contextualized.length;
+  } catch { /* the scan is a disclosure, never a gate here */ }
+
+  // THE HOLOGRAPH TYPES WHAT THE MODEL IS HANDED. Every picked sentence is a ground fact with its
+  // address (<agent>.turns.md#t<turn>.s<sentence>). The prose that rides is either the extractive
+  // projection (each sentence IS its ground, so each carries its address) or a prosifier's rewrite
+  // (penelope's mouth, injected), and is then typed against that ground: a sentence carrying a
+  // ground fact's ends keeps its address; one that carries none is the mouth's own and is marked
+  // [M], never laundered into the record (output-holograph.js, the facing-page law).
+  let typedLines = null, voice = "extractive", s_voidClaims = 0;
+  try {
+    const { segmentSentences } = await import("./native/the-fold/admission.js");
+    const { holographType } = await import("./native/organs/output-holograph.js");
+    const rows = [];
+    for (const e of picked) {
+      const n = Number(String(e.id).split("#")[1] ?? 0);
+      segmentSentences(String(e.a)).slice(0, 6).forEach((sent, i) => {
+        const text = String(sent?.text ?? sent).trim();
+        if (text.length > 1) rows.push({ end1: text, label: "states", end2: "", source: `${e.holder}.turns.md`, span: { start: `t${n}.s${i}` }, holder: e.holder });
+      });
+    }
+    let prose = null;
+    if (typeof prosify === "function" && rows.length) {
+      try { prose = await Promise.race([prosify({ ask, ground: rows.map((r) => ({ holder: r.holder, text: r.end1, address: `${r.source}#${r.span.start}` })) }), new Promise((res) => setTimeout(() => res(null), Number(process.env.FOLD_PROSIFY_MS ?? 8000)))]); } catch { prose = null; }
+      if (typeof prose === "string" && prose.trim()) voice = "prosified"; else prose = null;
+    }
+    const sourceText = prose ?? rows.map((r) => r.end1).join(" ");
+    const typed = holographType({ prose: sourceText, ground: rows, splitSentences: (t) => segmentSentences(t).map((x) => x?.text ?? x), source: "commons" });
+    // A sentence only counts as grounded when it carries enough of a ground fact: carry < 0.3 is
+    // the mouth's own prose (disclosed, not silently blended).
+    typedLines = typed.prose.map((t) => (t.ground === "material" && t.carry >= 0.3 && t.ref ? `${t.text} ⟨${t.ref}⟩` : `${t.text} [M]`));
+    s_voidClaims = typed.prose.filter((t) => t.voidClaim).length;
+  } catch { typedLines = null; }
+  // TINY BY CONSTRUCTION. No explanatory prose (the attribute `held-apart` says it), no repeated
+  // sentence (an agent re-stating itself costs the model once), at most MAX sentences each clipped,
+  // addresses shortened to <agent8>#t<turn>.s<i>. Conflicts ride first: they are what needs saying.
+  const short = (ref) => String(ref).replace(/^ses_([0-9a-z]{8})[0-9a-z]*\.turns\.md#/i, "$1#").replace(/\.turns\.md#/, "#");
+  const seenText = new Set();
+  const sentences = [];
+  for (const l of (typedLines ?? picked.map((e) => `${String(e.a).replace(/\s+/g, " ").slice(0, 160)} ⟨${e.holder}.turns.md#${e.id.split("#")[1] ? `t${e.id.split("#")[1]}.s0` : "t0.s0"}⟩`))) {
+    const text = l.replace(/\s*⟨[^⟩]*⟩\s*$/, "").replace(/\s*\[M\]\s*$/, "").trim().toLowerCase();
+    if (!text || seenText.has(text)) continue;
+    seenText.add(text);
+    sentences.push(l.replace(/⟨([^⟩]*)⟩/, (_m, r) => `⟨${short(r)}⟩`).slice(0, COMMONS_SENTENCE_CHARS));
+  }
+  const holders = [...new Set(picked.map((e) => e.holder))].map((h) => String(h).replace(/^ses_/, "").slice(0, 8));
+  const body = [
+    `<fold-commons from="${holders.join(",")}">`,
+    ...conflicts.slice(0, 2).map((c) => `! ${String(c.a).replace(/^ses_/, "").slice(0, 8)}≠${String(c.b).replace(/^ses_/, "").slice(0, 8)}: ${String(c.claim).slice(0, 100)}`),
+    ...sentences.slice(0, COMMONS_MAX_SENTENCES).map((l) => `- ${l}`),
+    "</fold-commons>",
+  ].join("\n");
+  return body.length > COMMONS_CHARS ? `${body.slice(0, COMMONS_CHARS - 16)}\n</fold-commons>` : body;
+}
+
+// This agent's settled turns, single-writer, so the others can read them.
+function writeTurns({ task, agent, turns }) {
+  try { if (turns.length) eot.recordTurns({ task, agent, turns }); } catch { /* the log never blocks a turn */ }
+  const file = turnsFile(task, agent);
+  if (!file || !turns.length) return null;
+  try {
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    const sections = turns.map((t) => `## turn ${t.n}\n\nask: ${t.ask}\n${t.grounds?.length ? `tools: ${t.grounds.join(", ")}\n` : ""}\n${t.answer || "(no text reply)"}\n`);
+    fs.writeFileSync(file, `# turns ${agent}\n\n${sections.join("\n")}`);
+    return file;
+  } catch { return null; }
+}
+
+async function onSurf(body) {
   const turns = Array.isArray(body.turns) ? body.turns : [];
   const out = surfLadder({ ask: String(body.ask ?? ""), turns });
   const agent = String(body.sessionID ?? "");
-  const task = String(body.task ?? agent);
-  const file = turnsFile(task, agent);
-  if (file) {
-    try {
-      fs.mkdirSync(path.dirname(file), { recursive: true });
-      const sections = turns.map((t) => `## turn ${t.n}\n\nask: ${t.ask}\n${t.grounds?.length ? `tools: ${t.grounds.join(", ")}\n` : ""}\n${t.answer || "(no text reply)"}\n`);
-      fs.writeFileSync(file, `# turns ${agent}\n\n${sections.join("\n")}`);
-      out.note += `\nturns: ${file} (one "## turn N" section per turn above)`;
-    } catch { /* never blocks a turn */ }
+  const task = taskFor(body, agent);
+  writeTurns({ task, agent, turns });
+  // PRIORITY PACKING under one hard budget (FOLD_NOTE_CHARS). What is actionable first (what others
+  // hold, what they raised), then the ladder, then the verified record. The marks cue rides once
+  // per session, not every turn. The commons is NOT here: the context event already delivers it.
+  // THE FIREWALL, at the prompt. MECHANICAL: what the system observed or snipped (claims by others,
+  // contention, the witnessed record). SAID: what an agent or a model wrote (this agent's own ladder,
+  // blocks others raised). Two tags, never interleaved; an agent's words never sit inside <fold-mechanical>.
+  const mech = [], said = [];
+  const short8 = (a) => String(a).replace(/^ses_/, "").slice(0, 8);
+  let taken = [], contention = [], blocks = [], recordLines = [];
+  try {
+    taken = eot.projectTaken(task, agent);
+    contention = eot.projectContention(task, agent);
+    blocks = eot.projectBlocks(task, agent);
+    const rec = eot.projectRecord(task);
+    recordLines = rec.slice(-3).map((r) => `${r.referent}: ${String(r.delta).slice(0, 80)}`);
+  } catch { /* the files answer below */ }
+  if (!taken.length && !blocks.length) { const st = stateFor({ task, agent }); taken = st.taken; blocks = st.blocks; }
+  if (!recordLines.length) { const legacy = recordNote({ task, limit: 3 }); if (legacy) recordLines = legacy.split("\n").slice(1, 4).map((l) => l.replace(/^-\s*/, "").slice(0, 100)); }
+  if (taken.length) mech.push({ p: 1, t: `taken: ${taken.slice(0, 4).map((c) => `${c.item} [${short8(c.agent)}]`).join("; ")}${taken.length > 4 ? ` +${taken.length - 4}` : ""}` });
+  for (const c of contention.slice(-2)) mech.push({ p: 2, t: c.holder === agent ? `contended: [${short8(c.contender)}] also edited ${c.item}` : `contended: ${c.item} held by [${short8(c.holder)}]` });
+  if (recordLines.length) mech.push({ p: 4, t: `verified: ${recordLines.join("; ")}`.slice(0, 240) });
+  const turnState = turnFor(agent);
+  if (turnState.flags?.length) mech.push({ p: 1, t: `unverified in your last answer: ${turnState.flags.slice(0, 3).map((f) => `${f.kind}${f.kind === "unknown_path" ? ` ${f.detail}` : ""}`).join("; ")}`.slice(0, 200) });
+  for (const b of blocks.slice(-2)) said.push({ p: 2, t: `block [${short8(b.agent)}]: ${String(b.text).slice(0, 110)}` });
+  said.push({ p: 3, t: String(out.note ?? "").split("\n").slice(0, 5).join("\n").slice(0, 380) });
+  if (!cueSeen.has(agent)) {
+    cueSeen.add(agent);
+    const home = (process.env.FOLD_WORKNOTES_DIR ?? "~/.fold/worknotes").replace(process.env.HOME ?? "\0", "~");
+    mech.push({ p: 5, t: `marks: append "<iso> · ${short8(agent)} · fact|claim|done|block · text" to ${home}/${task}/${agent}.md` });
   }
-  const note = noteFor({ task, agent });
-  if (note) out.note += `\n${note}`;
-  const record = recNote({ task });
-  if (record) out.note += `\n${record}`;
+  const pack = (items, budget) => {
+    let used = 0; const kept = [];
+    for (const part of items.sort((a, b) => a.p - b.p)) {
+      if (!part.t) continue;
+      const room = budget - used - (kept.length ? 1 : 0);
+      if (room <= 40) continue;
+      const t = part.t.length > room ? `${part.t.slice(0, room - 1)}…` : part.t;
+      kept.push(t); used += t.length + (kept.length > 1 ? 1 : 0);
+    }
+    return kept;
+  };
+  const mechKept = pack(mech, Math.floor(NOTE_CHARS * 0.45));
+  const saidKept = pack(said, NOTE_CHARS - mechKept.join("\n").length - 60);
+  out.note = [
+    mechKept.length ? `<fold-mechanical>\n${mechKept.join("\n")}\n</fold-mechanical>` : "",
+    saidKept.length ? `<fold-said>\n${saidKept.join("\n")}\n</fold-said>` : "",
+  ].filter(Boolean).join("\n");
   return out;
 }
 
-function onMark(body) { return markNote({ task: body.task, agent: body.agent, kind: body.kind, text: body.text }); }
-function onClaim(body) { return claimItem({ task: body.task, agent: body.agent, item: body.item, ttlMs: body.ttlMs }); }
-function onDone(body) { return doneItem({ task: body.task, agent: body.agent, item: body.item }); }
-function onRec(body) { return recChange({ task: body.task, agent: body.agent, referent: body.referent, delta: body.delta, check: body.check, cwd: body.cwd, exitCode: body.exitCode, address: body.address, source: body.source, model: body.model }); }
-function onRecord(body) { return { record: foldRecord({ task: body.task }) }; }
+// SNIP: the model composes by reference; the door returns the verbatim bytes and their provenance.
+function onSnip(body) {
+  const agent = String(body.agent ?? body.sessionID ?? "");
+  const task = taskFor(body, agent);
+  const root = body.root ?? body.workspace ?? turnFor(agent).workspace ?? null;
+  return eot.snip({ task, agent: agent || null, ref: body.ref, root: root ? String(root) : null });
+}
+function onGround(body) {
+  const agent = String(body.agent ?? body.sessionID ?? "");
+  return eot.groundCheck({ task: taskFor(body, agent), text: String(body.text ?? ""), root: body.workspace ? String(body.workspace) : null });
+}
+
+function onMark(body) {
+  try { eot.recordMark({ task: body.task, agent: body.agent, kind: body.kind, text: body.text }); } catch { /* the log never blocks */ }
+  return markNote({ task: body.task, agent: body.agent, kind: body.kind, text: body.text });
+}
+function onClaim(body) {
+  const r = claimItem({ task: body.task, agent: body.agent, item: body.item, ttlMs: body.ttlMs });
+  if (r.ok) { try { eot.recordClaim({ task: body.task, agent: body.agent, item: body.item, ttlMs: body.ttlMs }); } catch { /* */ } }
+  return r;
+}
+function onDone(body) {
+  try { eot.recordDone({ task: body.task, agent: body.agent, item: body.item }); } catch { /* */ }
+  return doneItem({ task: body.task, agent: body.agent, item: body.item });
+}
+function onAdmit(body) { return admitChange({ task: body.task, agent: body.agent, referent: body.referent, delta: body.delta, check: body.check, cwd: body.cwd, exitCode: body.exitCode, address: body.address, source: body.source, model: body.model }); }
+function onRecord(body) {
+  const r = reconcile({ task: body.task });
+  return { record: r.fold, supersedes: r.supersedes, disagreements: r.disagreements };
+}
+function onNextVoid(body) { return nextVoid({ task: body.task }); }
+function onReason(body) { return reasonFor({ task: body.task, ask: String(body.ask ?? ""), limit: Number(body.limit) || 6 }); }
 // CHASE: run the DEF->EVA->REC void loop over a workspace. The loop executes
 // the caller's declared testCommand, so this is OFF unless FOLD_REC_EXEC=1 (the
 // same opt-in as the box judge), takes only an absolute existing directory, and
@@ -781,14 +1147,23 @@ async function onChase(body, opts = {}) {
   if (!path.isAbsolute(workspace) || !fs.existsSync(workspace) || !fs.statSync(workspace).isDirectory()) return { ok: false, gap: "bad-workspace" };
   if (!testCommand) return { ok: false, gap: "no-test-command" };
   const agent = String(body.agent ?? body.sessionID ?? "chase");
-  const task = String(body.task ?? agent);
+  if (body.task != null && (!/^[\w.-]+$/.test(String(body.task)) || String(body.task) === "..")) return { ok: false, gap: "bad-address" };
+  const task = taskFor({ task: body.task, workspace }, agent);
   if (!/^[\w.-]+$/.test(agent) || !/^[\w.-]+$/.test(task) || task === ".." || agent === "..") return { ok: false, gap: "bad-address" };
   const { runVoidLoop } = await import("./native/the-fold/code-loop.js");
   const maxRounds = Math.min(6, Math.max(1, Math.floor(Number(body.maxRounds) || 3)));
+  // RE-ENTER FROM THE RECORD, NOT A COLD SCAN: when this task's record already
+  // holds an open void (a carried/refuted draw, or a referent answered two
+  // distinct ways), the chase's first DEF is read off nextVoid's nomination.
+  // A settled or empty record yields void:null — the cold scan runs as before.
+  const nom = nextVoid({ task });
+  const resumeVoid = nom?.ok && nom?.kind ? nom : null;
   const result = await runVoidLoop({
     sessionId: agent, model: String(body.model ?? process.env.FOLD_CHASE_MODEL ?? "qwen2.5-coder:1.5b"), task: String(body.ask ?? "fill the stubs so the test passes"),
     workspace, testCommand, maxRounds, candidates: 1, ...(opts.turn ? { turn: opts.turn } : {}),
-    onRec: recSink({ task, agent }),
+    onRecord: recordSink({ task, agent }),
+    priorRefusals: ({ unit, file }) => refusalsFor({ task, unit, file }),
+    resumeVoid,
   });
   // Suite green: every unit the loop carried on disk is now verified by the same real test.
   // Promote the latest carried draw per referent into the record (source says why).
@@ -798,7 +1173,7 @@ async function onChase(body, opts = {}) {
     const have = new Set(foldRecord({ task }).map((b) => b.referent));
     for (const [referent, r] of latest) {
       if (have.has(referent)) continue;
-      recChange({ task, agent, referent, delta: r.basis ?? `${r.action ?? "DEF"} ${r.target}`, check: testCommand, exitCode: 0, address: r.address ?? r.file ?? "", source: "suite-green", model: r.model ?? String(body.model ?? process.env.FOLD_CHASE_MODEL ?? "") });
+      admitChange({ task, agent, referent, delta: r.basis ?? `${r.action ?? "DEF"} ${r.target}`, check: testCommand, exitCode: 0, address: r.address ?? r.file ?? "", source: "suite-green", model: r.model ?? String(body.model ?? process.env.FOLD_CHASE_MODEL ?? "") });
     }
   }
   // The cheap rungs first, disclosed: of the draws the real test judged, how many the box or
@@ -808,6 +1183,7 @@ async function onChase(body, opts = {}) {
   const mouthShare = judged.length ? viaMouth / judged.length : null;
   return {
     ok: true, done: !!result.done, gap: result.gap?.kind ?? null, judged: judged.length, mouthShare,
+    resumed: resumeVoid?.kind ?? null,
     rounds: (result.rounds ?? []).map((r) => ({ action: r.action ?? null, by: r.by ?? null, target: r.target ?? null, applied: r.applied ?? null, reverted: r.reverted ?? null, testExitCode: r.testExitCode ?? null })),
     record: foldRecord({ task }).map((b) => ({ referent: b.referent, id: b.id })),
   };
@@ -825,9 +1201,15 @@ export async function answer(body, opts = {}) {
     case "claim": return onClaim(body);
     case "done": return onDone(body);
     case "notes": return onRead(body);
-    case "rec": return onRec(body);
+    case "admit": return onAdmit(body);
+    case "snip": return onSnip(body);
+    case "tree": return onTree(body);
+    case "ground": return onGround(body);
+    case "provenance": return { ok: true, ...provenance({ task: taskFor(body, String(body.agent ?? body.sessionID ?? "")) }) };
     case "chase": return onChase(body, opts);
     case "record": return onRecord(body);
+    case "nextVoid": return onNextVoid(body);
+    case "reason": return onReason(body);
     case "prompt": return onPrompt(body);
     case "event": return onEvent(body);
     case "perceive": return onPerceive(body);
@@ -938,6 +1320,12 @@ export async function route(req, res, { log = () => {} } = {}) {
     res.end(JSON.stringify(out));
     return true;
   }
+  if (url.split("?")[0] === "/v1/hooks/opencode/plans" && req.method === "GET") {
+    const limit = Number(new URL(req.url, "http://x").searchParams.get("limit")) || 20;
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify({ schema: "WorkPlans@1", plans: workPlans({ limit }) }));
+    return true;
+  }
   if (url === "/v1/hooks/opencode/audit" && req.method === "GET") {
     const limit = Number(new URL(req.url, "http://x").searchParams.get("limit")) || 20;
     res.writeHead(200, { "content-type": "application/json" });
@@ -947,7 +1335,7 @@ export async function route(req, res, { log = () => {} } = {}) {
   if (url !== "/v1/hooks/opencode") return false;
   if (req.method === "GET") {
     res.writeHead(200, { "content-type": "application/json" });
-    res.end(JSON.stringify({ door: "opencode", events: ["context", "surf", "mark", "claim", "done", "notes", "rec", "record", "chase", "title", "event", "prompt", "perceive", "draft", "act"] }));
+    res.end(JSON.stringify({ door: "opencode", priors: seedStatus(), events: ["context", "surf", "mark", "claim", "done", "notes", "admit", "record", "provenance", "snip", "ground", "nextVoid", "chase", "title", "event", "prompt", "perceive", "draft", "act"] }));
     return true;
   }
   if (req.method !== "POST") return false;
