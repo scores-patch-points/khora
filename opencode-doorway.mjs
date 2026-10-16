@@ -80,6 +80,7 @@ import http from "node:http";
 import { spawnSync, execFileSync } from "node:child_process";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { lookNote, projectHistory } from "./opencode-context.mjs";
+import { recordTurnsToWeft } from "./opencode-weft-record.mjs";
 import { archonNote } from "./opencode-archons.mjs";
 import { connect as matrixConnect } from "./fold-matrix.mjs";
 import { connect as driveConnect } from "./fold-gdrive.mjs";
@@ -1044,6 +1045,7 @@ function writeTurns({ task, agent, turns }) {
     fs.mkdirSync(path.dirname(file), { recursive: true });
     const sections = turns.map((t) => `## turn ${t.n}\n\nask: ${t.ask}\n${t.grounds?.length ? `tools: ${t.grounds.join(", ")}\n` : ""}\n${t.answer || "(no text reply)"}\n`);
     fs.writeFileSync(file, `# turns ${agent}\n\n${sections.join("\n")}`);
+    try { recordTurnsToWeft({ task, agent, turns, file }); } catch { /* the weft store never blocks a turn */ }
     return file;
   } catch { return null; }
 }
