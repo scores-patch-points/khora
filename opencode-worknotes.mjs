@@ -21,6 +21,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import crypto from "node:crypto";
+import { neutralize } from "./opencode-defang.mjs";
 
 export const KINDS = Object.freeze(["fact", "claim", "done", "block"]);
 const root = () => process.env.FOLD_WORKNOTES_DIR ?? path.join(os.homedir(), ".fold", "worknotes");
@@ -37,14 +38,19 @@ export function mark({ task, agent, kind = "fact", text = "", now = Date.now() }
   const file = agentFile(task, agent);
   if (!file || !KINDS.includes(kind)) return { ok: false, gap: "bad-address" };
   fs.mkdirSync(path.dirname(file), { recursive: true });
-  const line = `${new Date(now).toISOString()} · ${agent} · ${kind} · ${oneLine(text).slice(0, 500)}\n`;
+  // THE FIREWALL, on this store too: a forged <fold-…>/[[snip:…]]/evt_…/src_… marker in one agent's
+  // text is defanged before it can reach another agent's note (same strip as the EOT log).
+  const line = `${new Date(now).toISOString()} · ${agent} · ${kind} · ${neutralize(oneLine(text)).slice(0, 500)}\n`;
   fs.appendFileSync(file, line);
   return { ok: true, file };
 }
 
 const slugOf = (item) => `${oneLine(item).toLowerCase().replace(/[^a-z0-9]+/g, "-").slice(0, 40) || "item"}-${crypto.createHash("sha1").update(oneLine(item).toLowerCase()).digest("hex").slice(0, 8)}`;
 const readClaim = (file) => { try { return JSON.parse(fs.readFileSync(file, "utf8")); } catch { return null; } };
-const live = (c, now, ttl) => c && !c.done && now - c.t <= (c.ttl ?? ttl);
+// A claim is live only if it has STARTED. An agent that stamps a future `now` used to hold an item
+// forever (now - t stays negative); a start more than a small skew in the future is not yet in force.
+const CLOCK_SKEW_MS = 2000;
+const live = (c, now, ttl) => c && !c.done && now >= c.t - CLOCK_SKEW_MS && now - c.t <= (c.ttl ?? ttl);
 
 /** Take an item. Atomic: exactly one concurrent caller creates the claim file. A lapsed claim can be taken over; a finished one cannot (done is final). */
 export function claim({ task, agent, item, ttlMs = DEFAULT_TTL, now = Date.now() } = {}) {
@@ -96,11 +102,17 @@ export function done({ task, agent, item, now = Date.now() } = {}) {
 export function read({ task, now = Date.now(), ttlMs = DEFAULT_TTL, limit = 200 } = {}) {
   const dir = taskDir(task);
   if (!dir || !fs.existsSync(dir)) return { marks: [], open: [], finished: [] };
-  const marks = fs.readdirSync(dir).filter((f) => f.endsWith(".md") && !f.endsWith(".turns.md")).flatMap((f) =>
-    fs.readFileSync(path.join(dir, f), "utf8").split("\n").flatMap((line) => {
+  const marks = fs.readdirSync(dir).filter((f) => f.endsWith(".md") && !f.endsWith(".turns.md")).flatMap((f) => {
+    // ATTRIBUTION IS THE FILE'S, not the line's: a write to <agent>.md is that agent's, so a line whose
+    // text names a different agent cannot put words in that agent's mouth. And text is defanged on read
+    // too, so a mark written before the firewall existed (or by hand) still cannot forge a marker.
+    const owner = f.slice(0, -3);
+    if (!ident(owner)) return [];
+    return fs.readFileSync(path.join(dir, f), "utf8").split("\n").flatMap((line) => {
       const m = /^(\S+) · ([\w.-]+) · (fact|claim|done|block) · (.*)$/.exec(line);
-      return m ? [{ t: Date.parse(m[1]), agent: m[2], kind: m[3], text: m[4] }] : [];
-    }));
+      return m ? [{ t: Date.parse(m[1]), agent: owner, kind: m[3], text: neutralize(m[4]) }] : [];
+    });
+  });
   marks.sort((a, b) => a.t - b.t);
   const cdir = path.join(dir, "claims");
   const claims = fs.existsSync(cdir) ? fs.readdirSync(cdir).filter((f) => f.endsWith(".json")).flatMap((f) => { const c = readClaim(path.join(cdir, f)); return c ? [c] : []; }) : [];

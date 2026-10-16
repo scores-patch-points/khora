@@ -126,6 +126,7 @@ export const STANDING_LAWS = Object.freeze([
 export const FLAG_CELLS = Object.freeze({
   unknown_path: "SIG·Figure", // the answer names a path that resolves to no referent — cast: beyond-reach
   unverified_pass: "EVA·Figure", // a check nothing can trigger — the unreachable guard / insufficient
+  polarity_mismatch: "EVA·Figure", // the sentence negates the witnessed source it overlaps — contradiction
 });
 export const cellForFlag = (kind) => FLAG_CELLS[kind] ?? null;
 
