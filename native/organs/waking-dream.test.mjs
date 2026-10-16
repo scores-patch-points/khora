@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { wakingDream, projectMemory, pruneWorktree, reopen, recall, WAKE_SCHEMA } from "./waking-dream.js";
+import { wakingDream, projectMemory, pruneWorktree, reopen, recall, actionsFrom, WAKE_SCHEMA } from "./waking-dream.js";
 
 // The Titanic, 1912 — one night, several accounts that do not agree on how many were saved.
 // This is the living corpus the organ was built against (holodeck-samples/titanic-1912 and
@@ -128,6 +128,36 @@ test("CLEAN CONTROL: a log with no recurrence and no disagreement emits nothing"
   assert.equal(hypotheses.length, 0);
   assert.equal(memory.length, 0);
   assert.equal(pruned.length, 0);
+});
+
+test("THE DAY'S READER: the record's live answers map to actions, and a fork becomes a discrepancy", () => {
+  const live = [
+    { referent: "saved", delta0: "711", id: "british#1" },
+    { referent: "saved", delta0: "705", id: "marshall#2" },
+    { referent: "saved", delta0: "nearly 500", id: "senate#3" },
+  ];
+  const { actions, skipped } = actionsFrom(live, {
+    being: (a) => a.referent, predicate: () => "answer", value: (a) => a.delta0, witness: (a) => a.id,
+  });
+  assert.equal(actions.length, 3);
+  assert.equal(skipped.length, 0);
+  const d = wakingDream(actions).memory.find((e) => e.kind === "discrepancy");
+  assert.ok(d, "one referent, three answers: the fork is disclosed, never collapsed");
+  assert.deepEqual(d.readings.map((r) => r.value), ["705", "711", "nearly 500"]);
+});
+
+test("THE DAY'S READER: an incomplete row is a TYPED skip, never a throw and never a guess", () => {
+  const { actions, skipped } = actionsFrom(
+    [{ referent: "ok", answer: "1", id: "s1" }, { referent: "no answer", id: "s2" }],
+    { being: (r) => r.referent, predicate: () => "answer", value: (r) => r.answer, witness: (r) => r.id },
+  );
+  assert.equal(actions.length, 1);
+  assert.equal(skipped.length, 1);
+  assert.match(skipped[0].why, /typed|skipped/);
+});
+
+test("THE DAY'S READER: a spec missing a function refuses — the caller owns the shape", () => {
+  assert.throws(() => actionsFrom([], { being: (r) => r.x }), /spec\.predicate is a function/);
 });
 
 test("the schema is declared", () => {

@@ -55,6 +55,13 @@
 //                  (holodeck-ambiguity.js; corroboration.js's CONTESTED — at n=2 the record
 //                  keeps THAT they disagree, and no opinion about which is right).
 //
+// THE DAY'S READER. The organ is medium-blind: it folds opaque actions and knows no word, no
+// sentence, no event schema. actionsFrom(rows, spec) is the seam — the caller owns what a
+// being, a predicate, a value and a witness are, and the doorway (or the record, or a
+// reasoning log) supplies the spec. So the record's own primitive — a referent with more than
+// one live answer, which opencode-record.js calls a FORK — arrives here as a `discrepancy`
+// with no special case: feed one action per live answer and the same fold discloses it.
+//
 // FALSIFYING CONTROL. (1) a row whose `at` exceeds the step that produced it, or a prefix
 // run that disagrees with the whole run's prefix; (2) a memory that is not a pure function of
 // the action prefix it was folded from (a leak); (3) any row asserting standing or a
@@ -230,4 +237,31 @@ export function recall(being, actionLog = [], { floor = 2 } = {}) {
   const addrs = freeze([...new Set(entries.flatMap((e) => e.addrs ?? []))].sort((a, b) => a - b));
   if (!entries.length) return freeze({ schema: WAKE_SCHEMA, query: q, status: "absent", entries: freeze([]), addrs: freeze([]), basis: "no action names this being on the log — a typed absence, not an empty recall" });
   return freeze({ schema: WAKE_SCHEMA, query: q, status: "recalled", entries: freeze(entries), addrs, basis: "re-folded from the immortal action log — recall is a re-fold, never a write" });
+}
+
+/**
+ * actionsFrom(rows, spec) — THE DAY'S READER. Maps whatever the worktree holds (EOT events,
+ * record blocks, a reasoning log, a witness stream) into the opaque actions the waking dream
+ * folds, so the organ stays medium-blind. `spec` is four functions { being, predicate, value,
+ * witness } from a row to a string — the caller owns what each is. A row the spec turns out
+ * incomplete for is a TYPED skip, named in `skipped`, never thrown and never guessed.
+ *
+ * Example — the record's forks (opencode-record.js: a referent with >1 live answer), one
+ * action per live answer, so the fold discloses the fork as a `discrepancy`:
+ *   actionsFrom(liveAnswers, {
+ *     being: (a) => a.referent, predicate: () => "answer",
+ *     value: (a) => a.delta0, witness: (a) => a.id,
+ *   }).actions
+ */
+export function actionsFrom(rows = [], spec = {}) {
+  for (const k of ["being", "predicate", "value", "witness"]) {
+    if (typeof spec?.[k] !== "function") throw new TypeError(`actionsFrom: spec.${k} is a function — the caller owns what a being/predicate/value/witness is`);
+  }
+  const actions = [], skipped = [];
+  rows.forEach((r, i) => {
+    const a = { being: str(spec.being(r, i)), predicate: str(spec.predicate(r, i)), value: str(spec.value(r, i)), witness: str(spec.witness(r, i)) };
+    if (a.being && a.predicate && a.value && a.witness) actions.push(a);
+    else skipped.push({ at: i, why: "an incomplete action — the spec did not name all four; skipped, not guessed" });
+  });
+  return freeze({ schema: WAKE_SCHEMA, actions: freeze(actions), skipped: freeze(skipped) });
 }
