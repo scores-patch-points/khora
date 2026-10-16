@@ -51,6 +51,29 @@ export function shouldRecord(candidate = {}, prior = {}) {
  * fold (unit → { value, standing, event_id }); `kept` are the recorded shifts; `dropped` are the
  * no-differences and the ungrounded, each with its typed reason — never silently lost.
  */
+/**
+ * understandingOf({ events, sources }) → { understanding, kept, dropped }
+ * Fold a task's EOT log into the UNDERSTANDING. The raw log keeps everything (commons, provenance,
+ * replay need it); the understanding — what the record believes — keeps only the shifts grounded in
+ * priors: a witnessed change, or a change resting on the prior it revises. A said-thing with no ground
+ * is dropped (a standpoint, not knowledge); a restatement is dropped (a Bateson zero). Both come back
+ * typed in `dropped`, never lost.
+ */
+export function understandingOf({ events = [], sources = new Map() } = {}) {
+  const prior = {}, kept = [], dropped = [];
+  for (const e of events) {
+    if (e?.t !== "evt") continue;
+    const src = e.source_id ? sources.get(e.source_id) : null;
+    const candidate = { unit: String(e.unit ?? e.event_id), value: e.detail ?? e.unit ?? null, parent: e.parent ?? null, source: src, event_id: e.event_id, stage: e.stage, said: e.standing };
+    const v = shouldRecord(candidate, prior);
+    if (v.record) {
+      prior[candidate.unit] = { value: candidate.value, standing: v.why === "witness" ? "witnessed" : "asserted", event_id: e.event_id, stage: e.stage, why: v.why };
+      kept.push({ ...candidate, why: v.why });
+    } else dropped.push({ ...candidate, why: v.why });
+  }
+  return { understanding: prior, kept, dropped };
+}
+
 export function recordShifts(candidates = []) {
   const understanding = {}, kept = [], dropped = [];
   for (const c of candidates) {
