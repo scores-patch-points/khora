@@ -16,6 +16,10 @@
 //                        matchArchons over the ask, dossier-gated, capped.
 //                        Recorded always; injected only when FOLD_ARCHONS=1
 //                        (default 0 is shadow).
+//               memory   the memory surface (holodeck/docs/USER-MEMORY.md): the
+//                        operator's standing facts (which repo is canonical,
+//                        which account publishes) the ask bears on, from
+//                        ~/.config/opencode/user-memory.md. Need-gated, capped.
 //             Adapters: opencode-context.mjs. Each fails open with a typed gap.
 //   title     opencode wants a session title. It is derived from the ask by
 //             rule (first words, cleaned), so the frontier is never consulted
@@ -134,7 +138,7 @@ const blankTokens = () => ({ input: 0, output: 0, reasoning: 0, cacheRead: 0, ca
 function turnFor(sessionID) {
   let turn = sessions.get(sessionID);
   if (!turn) {
-    turn = { sessionID, ask: "", address: null, model: null, steps: 0, tools: new Map(), answer: "", tokens: blankTokens(), cost: 0, startedAt: Date.now(), recalled: false, projectedChars: 0, system: null, look: null, project: null, title: null, archons: null };
+    turn = { sessionID, ask: "", address: null, model: null, steps: 0, tools: new Map(), answer: "", tokens: blankTokens(), cost: 0, startedAt: Date.now(), recalled: false, projectedChars: 0, system: null, look: null, project: null, title: null, archons: null, memory: null };
     sessions.set(sessionID, turn);
   }
   return turn;
@@ -203,12 +207,96 @@ function recallNote(address) {
   ].join("\n");
 }
 
-// The context event answers four things, each an existing organ:
+// ── memory (the operator's standing facts, injected by need) ────────────
+// The memory surface (holodeck/docs/USER-MEMORY.md): facts about the operator(s)
+// and their world — which repo is canonical, which account publishes — folded
+// from history and dropped explicitly. The opencode-side store is
+// ~/.config/opencode/user-memory.md; the doorway parses it and injects the
+// entries an ask actually bears on, exactly like `look` and `project`. Fails
+// open: an unreadable or empty store answers nothing and opencode runs as
+// upstream. Mechanical, never a model call.
+const USER_MEMORY = process.env.FOLD_USER_MEMORY ?? path.join(os.homedir(), ".config", "opencode", "user-memory.md");
+const MEMORY_CHARS = Number(process.env.FOLD_MEMORY_CHARS ?? 500);
+
+// The markdown grammar, mirrored with holodeck/holodeck-memory.js (no shared
+// code — the same protocol as content-rules.md ↔ content-rules.json):
+//   ## <tag>  ·  - <claim>  ·  indented `key: value` fields.
+function parseUserMemory(md) {
+  const entries = [];
+  let tag = null, cur = null;
+  const push = () => { if (cur && cur.claim && cur.tag) entries.push(cur); cur = null; };
+  for (const raw of String(md ?? "").split("\n")) {
+    const line = raw.replace(/\r$/, "");
+    if (line.startsWith("## ")) { push(); tag = line.slice(3).trim(); continue; }
+    if (line.startsWith("- ")) { push(); cur = { claim: line.slice(2).trim(), tag: tag ?? "", status: "current" }; continue; }
+    if (cur && /^\s{2}[a-z]+:/.test(line)) {
+      const m = line.trim().match(/^([a-z]+):\s*(.*)$/);
+      if (m) { if (m[1] === "provenance") cur.provenance = m[2] ? m[2].split(",").map((s) => s.trim()).filter(Boolean) : []; else cur[m[1]] = m[2].trim(); }
+    }
+  }
+  push();
+  return entries;
+}
+
+function readUserMemory() {
+  try { return parseUserMemory(fs.readFileSync(USER_MEMORY, "utf8")); } catch { return []; }
+}
+
+// Function words never name a memory. Without this, a 3+ letter stopword ("the",
+// "is", "and") would make every entry match every ask, since they appear in all
+// of them. The matcher scores on the remaining CONTENT terms only — the same
+// fold the holodeck's kind induction uses to tell a connector from a relation.
+const MEMORY_STOP = new Set(["the", "and", "for", "are", "was", "were", "been", "being", "with", "this", "that", "these", "those", "from", "into", "onto", "about", "which", "whose", "does", "have", "has", "had", "having", "what", "when", "where", "who", "whom", "why", "how", "not", "nor", "its", "our", "your", "their", "there", "here", "then", "than", "will", "would", "could", "should", "can", "may", "might", "must", "shall", "they", "them", "you", "but", "also", "only", "very", "just", "some", "any", "each", "both", "other", "such"]);
+
+function memoryNote(ask) {
+  const entries = readUserMemory().filter((e) => e.status !== "superseded");
+  if (!entries.length) return null;
+  const terms = new Set((String(ask ?? "").toLowerCase().match(/[\p{L}\p{N}_]{3,}/gu) ?? []).filter((w) => !MEMORY_STOP.has(w)));
+  if (!terms.size) return null;
+  const hits = entries
+    .map((e) => ({ e, score: new Set((`${e.claim} ${e.tag}`.toLowerCase().match(/[\p{L}\p{N}_]{3,}/gu) ?? []).filter((w) => terms.has(w))).size }))
+    .filter((h) => h.score > 0)
+    .sort((a, b) => b.score - a.score);
+  if (!hits.length) return null;
+  const lines = ["<fold-memory>"];
+  let used = 0;
+  for (const { e } of hits) {
+    const line = `- [${e.tag.replace(/^about:user:/, "")}] ${e.claim}`;
+    if (used + line.length > MEMORY_CHARS) break;
+    lines.push(line);
+    used += line.length + 1;
+  }
+  lines.push("</fold-memory>");
+  return lines.join("\n");
+}
+
+// An explicit drop ("remember this"): append a claim to the opencode-side
+// store. Append-only — a new section is appended even if the tag already
+// appears above; the parser merges duplicate sections, so nothing is edited.
+function memoryDrop(body) {
+  const claim = String(body?.claim ?? "").replace(/\s+/g, " ").trim();
+  const tag = String(body?.tag ?? "").replace(/\s+/g, " ").trim() || "about:user:preferences";
+  if (!claim) return { ok: false, gap: "no-claim" };
+  const falsifying = String(body?.falsifying ?? "").replace(/\s+/g, " ").trim();
+  const block = `\n## ${tag}\n- ${claim}\n  status: current\n${falsifying ? `  falsifying: ${falsifying}\n` : ""}`;
+  try {
+    fs.mkdirSync(path.dirname(USER_MEMORY), { recursive: true });
+    fs.appendFileSync(USER_MEMORY, block);
+    return { ok: true, claim, tag };
+  } catch (e) {
+    return { ok: false, gap: "unwritable", why: String(e?.message ?? e).slice(0, 120) };
+  }
+}
+
+// The context event answers five things, each an existing organ:
 //   system   the hunt-first recall of an exact repeat ask (the record)
 //   look     LOOK: the places the ask's own words point at, as addresses
 //   project  HOUDINI: which earlier exchanges ride, and the record that stands
 //            in for the rest. Decided once per ASK; the client holds the
 //            decision for the turn's steps so the request prefix is stable.
+//   memory   the memory surface: the operator's standing facts (which repo is
+//            canonical, which account publishes) that the ask bears on, from
+//            ~/.config/opencode/user-memory.md. Need-gated, capped, mechanical.
 //   archons  the archon ground note (opencode-archons.mjs): matchArchons over
 //            the ask, dossier-gated, top 2 hits, ≤600 chars. Computed and
 //            recorded on every turn; injected into the answer only when
@@ -266,6 +354,10 @@ async function onContext(body) {
     out.archons = { note: arch.note, handles: arch.handles, chars: arch.chars };
     turn.archons.injected = true;
   }
+  // Memory: the operator's standing facts the ask bears on. Mechanical word
+  // overlap, need-gated, capped; an ask touching nothing in the store gets none.
+  const mem = memoryNote(turn.ask);
+  if (mem) { out.memory = mem; turn.memory = mem; } else { turn.memory = null; }
   return out;
 }
 
@@ -505,6 +597,7 @@ function finish(turn, endType) {
     project: turn.project,
     title: turn.title,
     archons: turn.archons,
+    memory: turn.memory,
     settled,
     repeat: prior.length, // how many times this exact ask was already bought
     projected: turn.projectedChars, // chars of earlier exchanges this turn kept out of the frontier's context
@@ -589,6 +682,7 @@ export function audit({ limit = 20 } = {}) {
       project: turn.project,
       title: turn.title,
       archons: turn.archons,
+      memory: turn.memory,
       prompt: prompts.get(turn.sessionID)?.body ?? null,
     })),
     turns: rows.map((r) => ({
@@ -602,6 +696,7 @@ export function audit({ limit = 20 } = {}) {
       project: r.project ?? null,
       title: r.title ?? null,
       archons: r.archons ?? null,
+      memory: r.memory ?? null,
       plan: r.plan ?? [],
       steps: r.steps ?? 0,
       settled: !!r.settled,
@@ -1231,6 +1326,7 @@ export async function answer(body, opts = {}) {
     case "shadow": return onShadow(body);
     case "draft": return onDraft(body);
     case "act": return onAct(body);
+    case "memory": return memoryDrop(body);
     default: return {};
   }
 }
@@ -1366,6 +1462,15 @@ export async function route(req, res, { log = () => {} } = {}) {
     res.end(JSON.stringify({ schema: "WorkPlans@1", plans: workPlans({ limit }) }));
     return true;
   }
+  // The memory surface, read back: the operator's standing facts the door
+  // injects. Serves what is on disk now, so the operator can check what the
+  // next ask will hear. Fails open (an unreadable store reads as none).
+  if (url === "/v1/hooks/opencode/memory" && req.method === "GET") {
+    const entries = readUserMemory();
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify({ schema: "UserMemory@1", source: USER_MEMORY, entries }, null, 2));
+    return true;
+  }
   if (url === "/v1/hooks/opencode/audit" && req.method === "GET") {
     const limit = Number(new URL(req.url, "http://x").searchParams.get("limit")) || 20;
     res.writeHead(200, { "content-type": "application/json" });
@@ -1375,7 +1480,7 @@ export async function route(req, res, { log = () => {} } = {}) {
   if (url !== "/v1/hooks/opencode") return false;
   if (req.method === "GET") {
     res.writeHead(200, { "content-type": "application/json" });
-    res.end(JSON.stringify({ door: "opencode", priors: seedStatus(), events: ["context", "surf", "mark", "claim", "done", "notes", "admit", "record", "provenance", "snip", "ground", "nextVoid", "chase", "title", "event", "prompt", "perceive", "draft", "act"] }));
+    res.end(JSON.stringify({ door: "opencode", priors: seedStatus(), events: ["context", "surf", "mark", "claim", "done", "notes", "admit", "record", "provenance", "snip", "ground", "nextVoid", "chase", "title", "event", "prompt", "perceive", "draft", "act", "memory"] }));
     return true;
   }
   if (req.method !== "POST") return false;
