@@ -7,6 +7,16 @@
 //
 // A mark line:  <iso-ts> · <agent> · <kind> · <text>      kinds: fact | claim | done | block
 // Readers merge by timestamp. Claims that outlive their TTL without `done` lapse (pheromone decay).
+//
+// Handle: Grassé — after Pierre-Paul Grassé, who coined STIGMERGY (1959, from
+// stigma + ergon, mark + work): the work itself is the message. Ants coordinate
+// by depositing marks in a shared environment and reading the marks others
+// left; no ant holds the plan. Here the task directory is the mound and the log
+// is the medium — one writer per file, marks that persist, claims that decay.
+// Grassé supplies the picture; the marks/claims/leases (O_EXCL, TTL) are our
+// engineering (archon: grasse; dossier in the-fold/docs/archons/dossier). The
+// kernel's own trails are named for others (Wilson, kernel/stigmergy.js; Atta,
+// kernel/activation.js) — this handle is the opencode medium, the log itself.
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -172,6 +182,14 @@ export function projectRoot(workspace) {
 export function projectKey(workspace) {
   const rootDir = projectRoot(workspace);
   if (!rootDir) return null;
+  // A home directory (or the filesystem root, or anything above home) is not a project: sessions the
+  // app starts with no project report it as their workspace, and keying on it pools UNRELATED sessions
+  // into one medium, so one session's sentences would reach another's prompt through the commons.
+  // Such a workspace gets no project key; the caller falls back to the session alone.
+  try {
+    const home = fs.realpathSync(os.homedir());
+    if (rootDir === home || home.startsWith(rootDir + path.sep) || rootDir === path.parse(rootDir).root) return null;
+  } catch { /* home unreadable: do not guess */ }
   const base = path.basename(rootDir).replace(/[^\w.-]+/g, "-").replace(/^\.+/, "") || "root";
   return `proj-${base.slice(0, 40)}-${crypto.createHash("sha1").update(rootDir).digest("hex").slice(0, 6)}`;
 }

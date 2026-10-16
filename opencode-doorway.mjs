@@ -84,6 +84,7 @@ import { lookNote, projectHistory } from "./opencode-context.mjs";
 import { recordTurnsToWeft } from "./opencode-weft-record.mjs";
 import { findInWeft } from "./opencode-weft-find.mjs";
 import { archonNote } from "./opencode-archons.mjs";
+import { memoryNote } from "./opencode-memory.mjs";
 import { connect as matrixConnect } from "./fold-matrix.mjs";
 import { connect as driveConnect } from "./fold-gdrive.mjs";
 import { perceiveMedia, probeBackends, PERCEIVE_VERSION } from "./khora/perceive/local.mjs";
@@ -97,6 +98,10 @@ const LEDGER = path.join(STATE, "savings.json");
 const matrix = matrixConnect({ state: STATE });
 const drive = driveConnect({ state: STATE }); // the same record, sealed, in Google Drive's hidden app folder
 const RECALL = (process.env.FOLD_RECALL ?? "1") !== "0";
+// The user-memory surface: facts about the operator, injected when the ask's
+// own words bear on them. Mechanical word overlap, no model, milliseconds.
+// FOLD_MEMORY=0 removes it; the store lives at ~/.config/opencode/user-memory.md.
+const MEMORY_ON = (process.env.FOLD_MEMORY ?? "1") !== "0";
 // Step 1 of the doorway plan (archon-aware context): FOLD_ARCHONS=1 injects
 // the archon ground note into the context answer. Default 0 is shadow — the
 // decision is computed and recorded on every turn, but never injected, so a
@@ -115,7 +120,7 @@ export const addressOf = (ask) =>
   crypto.createHash("sha256").update(String(ask ?? "").toLowerCase().replace(/\s+/g, " ").trim()).digest("hex").slice(0, 16);
 
 const sessions = new Map(); // sessionID -> the open turn
-const counters = { titlesLocal: 0, titlesFailed: 0, recallsServed: 0, turnsRecorded: 0, looksServed: 0, looksDeclined: 0, projections: 0, projectionGaps: 0 };
+const counters = { titlesLocal: 0, titlesFailed: 0, recallsServed: 0, turnsRecorded: 0, looksServed: 0, looksDeclined: 0, projections: 0, projectionGaps: 0, memoriesServed: 0 };
 
 // The EXACT assembled frontier prompts, verbatim, for the audit: what the model
 // was actually sent. Kept per session (last one wins) and persisted. Never
@@ -135,7 +140,7 @@ const blankTokens = () => ({ input: 0, output: 0, reasoning: 0, cacheRead: 0, ca
 function turnFor(sessionID) {
   let turn = sessions.get(sessionID);
   if (!turn) {
-    turn = { sessionID, ask: "", address: null, model: null, steps: 0, tools: new Map(), answer: "", tokens: blankTokens(), cost: 0, startedAt: Date.now(), recalled: false, projectedChars: 0, system: null, look: null, project: null, title: null, archons: null };
+    turn = { sessionID, ask: "", address: null, model: null, steps: 0, tools: new Map(), answer: "", tokens: blankTokens(), cost: 0, startedAt: Date.now(), recalled: false, projectedChars: 0, system: null, look: null, project: null, title: null, archons: null, memory: null };
     sessions.set(sessionID, turn);
   }
   return turn;
@@ -204,12 +209,15 @@ function recallNote(address) {
   ].join("\n");
 }
 
-// The context event answers four things, each an existing organ:
+// The context event answers five things, each an existing organ:
 //   system   the hunt-first recall of an exact repeat ask (the record)
 //   look     LOOK: the places the ask's own words point at, as addresses
 //   project  HOUDINI: which earlier exchanges ride, and the record that stands
 //            in for the rest. Decided once per ASK; the client holds the
 //            decision for the turn's steps so the request prefix is stable.
+//   memory   the USER-MEMORY surface: facts about the operator the ask's own
+//            words bear on, injected read-only (opencode-memory.mjs). Mechanical
+//            word overlap, no model, milliseconds; FOLD_MEMORY=0 removes it.
 //   archons  the archon ground note (opencode-archons.mjs): matchArchons over
 //            the ask, dossier-gated, top 2 hits, ≤600 chars. Computed and
 //            recorded on every turn; injected into the answer only when
@@ -267,6 +275,13 @@ async function onContext(body) {
     out.archons = { note: arch.note, handles: arch.handles, chars: arch.chars };
     turn.archons.injected = true;
   }
+  // The operator's own facts: read from the user-memory surface and injected
+  // when the ask's words bear on them. Mechanical word overlap — no model, no
+  // guess, milliseconds. A missing store or no match is a typed gap (nothing
+  // injected), recorded so the audit can disclose what the door kept out.
+  const mem = MEMORY_ON ? memoryNote(turn.ask) : { gap: "off" };
+  if (mem.note) { counters.memoriesServed++; out.memory = mem.note; turn.memory = mem.note; }
+  else turn.memory = mem.gap ?? null;
   return out;
 }
 
@@ -427,6 +442,12 @@ function onTree(body) {
     case "diff": return { ok: true, ...eot.treeDiff(task, body.from ?? null, body.to ?? null) };
     case "drift": return root ? { ok: true, drift: eot.treeVsDisk(task, root) } : { ok: false, gap: "no-workspace" };
     case "reconcile": return root ? eot.reconcile({ task, agent: String(body.agent ?? body.sessionID ?? "door"), root }) : { ok: false, gap: "no-workspace" };
+    case "event": return { ok: true, event: eot.eventDetail(task, String(body.id ?? "")) };
+    case "materialize":
+      // A write to an arbitrary local path: opt-in, like chase's FOLD_REC_EXEC. The dir is the panel's choice,
+      // so the door refuses unless the operator turned writes on, and only then for an absolute existing path.
+      if (process.env.FOLD_EOT_WRITE !== "1") return { ok: false, gap: "write-disabled" };
+      { const dir = String(body.dir ?? ""); if (!path.isAbsolute(dir)) return { ok: false, gap: "bad-dir" }; return { ok: true, ...eot.materialize(task, dir, { asOf }) }; }
     default: return { ok: true, ...eot.projectTreeNote(task) };
   }
 }
@@ -514,6 +535,7 @@ function finish(turn, endType) {
     project: turn.project,
     title: turn.title,
     archons: turn.archons,
+    memory: turn.memory,
     settled,
     repeat: prior.length, // how many times this exact ask was already bought
     projected: turn.projectedChars, // chars of earlier exchanges this turn kept out of the frontier's context
@@ -546,6 +568,7 @@ export function meter() {
     looksServed: counters.looksServed,
     looksDeclined: counters.looksDeclined,
     projections: counters.projections,
+    memoriesServed: counters.memoriesServed,
     savings: {
       since: ledger.since,
       formulas: {
@@ -598,6 +621,7 @@ export function audit({ limit = 20 } = {}) {
       project: turn.project,
       title: turn.title,
       archons: turn.archons,
+      memory: turn.memory,
       prompt: prompts.get(turn.sessionID)?.body ?? null,
     })),
     turns: rows.map((r) => ({
@@ -611,6 +635,7 @@ export function audit({ limit = 20 } = {}) {
       project: r.project ?? null,
       title: r.title ?? null,
       archons: r.archons ?? null,
+      memory: r.memory ?? null,
       plan: r.plan ?? [],
       steps: r.steps ?? 0,
       settled: !!r.settled,
@@ -1225,6 +1250,14 @@ function onRead(body) { return readNotes({ task: body.task }); }
 
 export async function answer(body, opts = {}) {
   if (process.env.FOLD_DOOR_DEBUG) console.error(`door ← ${body?.event} ${body?.type ?? ""} ${body?.sessionID ?? ""}`);
+  // FOLD_DOOR_DEBUG also says what a context/surf body CARRIES (never its content): whether the client
+  // sent a workspace and a task, how many turns, which key the door will resolve the task from.
+  if (process.env.FOLD_DOOR_DEBUG && (body?.event === "context" || body?.event === "surf")) {
+    const agent = String(body.sessionID ?? "");
+    let resolved = "?";
+    try { resolved = taskFor(body, agent); } catch { /* shown as ? */ }
+    console.error(`door ${body.event} carries: ws=${body.workspace ? JSON.stringify(String(body.workspace)) : "ABSENT"} task=${body.task ? JSON.stringify(String(body.task)) : "absent"} turns=${Array.isArray(body.turns) ? body.turns.length : "absent"} ask=${body.ask ? String(body.ask).length + "ch" : "absent"} -> task ${resolved === agent ? "PER-SESSION" : "project"} ${resolved}`);
+  }
   switch (body?.event) {
     case "context": return onContext(body);
     case "title": return onTitle(body);
@@ -1260,6 +1293,35 @@ export async function route(req, res, { log = () => {} } = {}) {
   if (url === "/v1/hooks/opencode/meter" && req.method === "GET") {
     res.writeHead(200, { "content-type": "application/json" });
     res.end(JSON.stringify(meter(), null, 2));
+    return true;
+  }
+  // THE WORK TREE AS THE LOG SAYS IT (read-only folds of the EOT log at a cursor). ?task= or ?workspace= names the
+  // task; ?asOf= is an event id or a ms timestamp. The panel never keeps a tree of its own: it asks.
+  if (url.startsWith("/v1/hooks/opencode/eot/") && req.method === "GET") {
+    const q = new URL(req.url, "http://x").searchParams;
+    const task = taskFor({ task: q.get("task"), workspace: q.get("workspace") }, "");
+    const raw = q.get("asOf");
+    const asOf = raw == null || raw === "" ? null : /^\d+$/.test(raw) ? Number(raw) : raw;
+    const what = url.slice("/v1/hooks/opencode/eot/".length);
+    let body = { error: "unknown eot view" }, code = 404;
+    if (what === "tree") {
+      const { files, worktrees } = eot.projectTree(task, { asOf });
+      const root = q.get("workspace") ? realOf(q.get("workspace")) : null;
+      body = { task, asOf, files: [...files.values()].map(({ path: p, sha, bytes, agent, ts, event_id }) => ({ path: p, sha, bytes, agent, ts, event_id })).sort((a, b) => a.path.localeCompare(b.path)), worktrees: [...worktrees], drift: root ? eot.treeVsDisk(task, root) : null };
+      code = 200;
+    } else if (what === "log") {
+      body = { task, ...eot.projectLog(task, { asOf, limit: Math.min(Number(q.get("limit")) || 400, 2000) }) }; code = 200;
+    } else if (what === "file") {
+      const p = String(q.get("path") ?? "");
+      const buf = eot.fileAt(task, p, { asOf });
+      body = { task, path: p, asOf, text: buf == null ? null : buf.includes(0) ? null : buf.toString("utf8"), binary: !!buf?.includes(0), changes: eot.editsOf(task, p, { asOf }) }; code = 200;
+    } else if (what === "event") {
+      body = { task, event: eot.eventDetail(task, String(q.get("id") ?? "")) }; code = 200;
+    } else if (what === "diff") {
+      body = { task, ...eot.treeDiff(task, q.get("from"), q.get("to")) }; code = 200;
+    }
+    res.writeHead(code, { "content-type": "application/json", "access-control-allow-origin": "*" });
+    res.end(JSON.stringify(body));
     return true;
   }
   if (url === "/v1/workspace/tree" && req.method === "GET") {

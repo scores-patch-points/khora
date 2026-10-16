@@ -338,6 +338,7 @@ table, and `archon-holocracy/archons.json`. See CODING-LESSONS.md #75.
 | File | Handle | One line |
 |---|---|---|
 | `kernel/activation.js` | Atta | Trails evaporate unless reinforced. |
+| `opencode-worknotes.mjs` | Grassé | The stigmergic log — indirect coordination through the work itself: per-agent append-only marks, atomic claims that decay, one writer per file; no agent messages another (stigmergy, 1959; see archon dossier). |
 | `kernel/identity.js` | Ise | Same shrine through total rebuilding. |
 | `kernel/return-curve.js` | Sockeye | How an identity comes home, as a curve. |
 | `kernel/rhythm-priors.js` | Tala | The WHEN, held independent of content. |

@@ -247,3 +247,18 @@ test("FIREWALL at the prompt: an agent's words and the system's observations nev
   assert.doesNotMatch(mech, /ESCAPE_ME|forged/, "model words never appear inside the mechanical section");
   assert.equal((s.note.match(/<fold-mechanical>/g) ?? []).length, 1, "a forged tag in model text cannot open a second mechanical section");
 });
+
+test("a home directory is not a project: unrelated sessions reporting it stay apart (no pooled commons)", async () => {
+  const { answer } = await boot();
+  const { projectKey } = await import("./opencode-worknotes.mjs");
+  assert.equal(projectKey(os.homedir()), null);
+  assert.equal(projectKey(path.dirname(os.homedir())), null, "anything above home is not a project either");
+  assert.equal(projectKey("/"), null);
+  await answer({ event: "context", sessionID: "ses_FLIGHT", workspace: os.homedir(), ask: "x", turns: [turn(1, "flight data", "Pulled 100% of the flight paths for every city.")] });
+  const other = await answer({ event: "context", sessionID: "ses_PASSWORDS", workspace: os.homedir(), ask: "flight paths for cities", turns: [] });
+  assert.equal(other.commons, undefined, "the other session's words never reach it");
+  assert.equal(fs.readdirSync(process.env.FOLD_WORKNOTES_DIR).some((d) => d.startsWith("proj-")), false, "no pooled project task is created");
+  // a real repo under home still gets its own project key
+  const ws = repo();
+  assert.match(projectKey(ws), /^proj-/);
+});
