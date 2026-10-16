@@ -1244,6 +1244,31 @@ export async function route(req, res, { log = () => {} } = {}) {
     res.end(JSON.stringify(meter(), null, 2));
     return true;
   }
+  // THE WORK TREE AS THE LOG SAYS IT (read-only folds of the EOT log at a cursor). ?task= or ?workspace= names the
+  // task; ?asOf= is an event id or a ms timestamp. The panel never keeps a tree of its own: it asks.
+  if (url.startsWith("/v1/hooks/opencode/eot/") && req.method === "GET") {
+    const q = new URL(req.url, "http://x").searchParams;
+    const task = taskFor({ task: q.get("task"), workspace: q.get("workspace") }, "");
+    const raw = q.get("asOf");
+    const asOf = raw == null || raw === "" ? null : /^\d+$/.test(raw) ? Number(raw) : raw;
+    const what = url.slice("/v1/hooks/opencode/eot/".length);
+    let body = { error: "unknown eot view" }, code = 404;
+    if (what === "tree") {
+      const { files, worktrees } = eot.projectTree(task, { asOf });
+      const root = q.get("workspace") ? realOf(q.get("workspace")) : null;
+      body = { task, asOf, files: [...files.values()].map(({ path: p, sha, bytes, agent, ts, event_id }) => ({ path: p, sha, bytes, agent, ts, event_id })).sort((a, b) => a.path.localeCompare(b.path)), worktrees: [...worktrees], drift: root ? eot.treeVsDisk(task, root) : null };
+      code = 200;
+    } else if (what === "log") {
+      body = { task, ...eot.projectLog(task, { asOf, limit: Math.min(Number(q.get("limit")) || 400, 2000) }) }; code = 200;
+    } else if (what === "file") {
+      const p = String(q.get("path") ?? "");
+      const buf = eot.fileAt(task, p, { asOf });
+      body = { task, path: p, asOf, text: buf == null ? null : buf.includes(0) ? null : buf.toString("utf8"), binary: !!buf?.includes(0), changes: eot.editsOf(task, p, { asOf }) }; code = 200;
+    }
+    res.writeHead(code, { "content-type": "application/json", "access-control-allow-origin": "*" });
+    res.end(JSON.stringify(body));
+    return true;
+  }
   if (url === "/v1/workspace/tree" && req.method === "GET") {
     const rel = new URL(req.url, "http://x").searchParams.get("path") ?? "";
     const tree = workspaceTree(rel);

@@ -206,20 +206,23 @@ const relOf = (root, file) => { const r = path.relative(root, file); return r &&
  * One file transformation. `before`/`after` are bytes (or null = absent). When `before` is omitted the tree's
  * own last state for the path stands in, so the chain never has a hole. A no-op (same bytes) is not an event.
  */
-export function recordEdit({ task, agent, root, file, before, after, tool = "edit", now } = {}) {
+export function recordEdit({ task, agent, root, file, before, after, tool = "edit", now, tree = null } = {}) {
   const rel = relOf(root, file);
   if (!rel) return { ok: false, gap: "outside_root" };
-  const prior = projectTree(task).files.get(rel) ?? null;
+  const prior = (tree ?? projectTree(task).files).get(rel) ?? null;
   const b = before === undefined ? (prior ? getBlob(task, prior.after) : null) : asBuf(before);
   const a = asBuf(after);
   const shaB = b ? sha(b) : prior?.sha ?? null, shaA = a ? sha(a) : null;
   if (shaB === shaA) return { ok: true, noop: true };
   const beforeId = b ? putBlob(task, b) : null, afterId = a ? putBlob(task, a) : null;
-  return append({
+  const r = append({
     task, agent, stage: "edit", unit: rel, parent: prior?.event_id ?? null, now,
     source: { kind: "fs", locator: rel, meta: { sha256: shaA ?? "deleted" } },
     detail: { path: rel, op: !a ? "delete" : shaB == null ? "create" : "edit", tool, before: beforeId, after: afterId, shaBefore: shaB, sha: shaA, bytes: a ? a.length : 0 },
   });
+  // a caller holding the fold (a sweep) keeps it current instead of re-reading the whole log per file
+  if (r.ok && tree) { if (a) tree.set(rel, { path: rel, after: afterId, sha: shaA, bytes: a.length, event_id: r.event_id, agent: String(agent), ts: now ?? Date.now() }); else tree.delete(rel); }
+  return r;
 }
 
 /** A command the box ran. The door saw the result, so it is witnessed; it is not a `verify`, and cannot admit. */
@@ -253,14 +256,15 @@ function* walk(dir, root, since, budget) {
 export function sweepEdits({ task, agent, root, since, tool = "bash", max = 200, now } = {}) {
   let wrote = 0;
   const budget = { n: max };
+  const tree = projectTree(task).files;
   for (const f of walk(root, root, since - 2, budget)) {
     let buf = null;
     try { buf = fs.readFileSync(f); } catch { continue; }
-    const r = recordEdit({ task, agent, root, file: f, after: buf, tool, now });
+    const r = recordEdit({ task, agent, root, file: f, after: buf, tool, now, tree });
     if (r.ok && !r.noop) wrote += 1;
   }
-  for (const [rel] of projectTree(task).files) {
-    if (!fs.existsSync(path.join(root, rel)) && recordEdit({ task, agent, root, file: path.join(root, rel), after: null, tool, now }).noop === undefined) wrote += 1;
+  for (const rel of [...tree.keys()]) {
+    if (!fs.existsSync(path.join(root, rel)) && recordEdit({ task, agent, root, file: path.join(root, rel), after: null, tool, now, tree }).noop === undefined) wrote += 1;
   }
   return { ok: true, wrote, capped: budget.n <= 0 };
 }
@@ -375,6 +379,32 @@ export function projectTree(task, { asOf = null } = {}) {
     if (typeof asOf === "string" && e.event_id === asOf) break;
   }
   return { files, worktrees };
+}
+
+
+/** The log as the panel's spine: compact events (no bytes) up to a cursor, newest last. Bytes are fetched per path. */
+export function projectLog(task, { asOf = null, limit = 400 } = {}) {
+  const { events } = read(task);
+  const out = [];
+  for (const e of events) {
+    if (typeof asOf === "number" && e.ts > asOf) break;
+    out.push({ id: e.event_id, ts: e.ts, stage: e.stage, agent: e.agent, standing: e.standing, origin: e.origin, ...(e.parent ? { parent: e.parent } : {}), ...(e.unit ? { unit: e.unit } : {}), ...(e.detail?.path ? { path: e.detail.path, op: e.detail.op } : {}), ...(e.detail?.directory ? { directory: e.detail.directory, op: e.detail.op } : {}) });
+    if (typeof asOf === "string" && e.event_id === asOf) break;
+  }
+  return { total: out.length, events: out.slice(-limit) };
+}
+
+const textOf = (buf) => (buf == null ? "" : buf.includes(0) ? null : buf.toString("utf8"));
+/** Every edit of one path up to a cursor, with before/after text (null = binary, "" = absent). */
+export function editsOf(task, rel, { asOf = null } = {}) {
+  const { events } = read(task);
+  const out = [];
+  for (const e of events) {
+    if (typeof asOf === "number" && e.ts > asOf) break;
+    if (e.stage === "edit" && e.detail?.path === rel) out.push({ id: e.event_id, at: e.ts, by: e.agent, op: e.detail.op, tool: e.detail.tool, standing: e.standing, before: textOf(e.detail.before ? getBlob(task, e.detail.before) : null), after: textOf(e.detail.after ? getBlob(task, e.detail.after) : null) });
+    if (typeof asOf === "string" && e.event_id === asOf) break;
+  }
+  return out;
 }
 
 /** The bytes of a path at a cursor, from the blob store (null when absent or never stored). */
