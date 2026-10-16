@@ -161,6 +161,38 @@ test("guard: a sentence is typed grounded / asserted / self:model against the lo
   assert.deepEqual(r.sentences.map((s) => s.type), ["grounded", "asserted", "self:model"]);
 });
 
+test("guard: a model-authored claim cannot whitelist a fabricated path (the model cannot mint its own evidence)", () => {
+  fresh();
+  E.recordClaim({ task: "t", agent: "M", item: "edit src/ghost/phantom.ts", ttlMs: 60_000 });
+  const r = E.groundCheck({ task: "t", text: "I wired it into src/ghost/phantom.ts." });
+  assert.ok(r.flags.some((f) => f.kind === "unknown_path" && f.detail === "src/ghost/phantom.ts"), "a claim is MODEL origin and does not make a path known");
+});
+
+test("guard: a completion paraphrase is caught, not only the literal words test/pass", () => {
+  fresh();
+  for (const s of ["The implementation is complete and correct.", "Everything works now.", "I have finished the refactor successfully."])
+    assert.ok(E.groundCheck({ task: "t", text: s }).flags.some((f) => f.kind === "unverified_pass"), s);
+});
+
+test("guard: polarity — a sentence that negates the source it overlaps is flagged, agreement is not", () => {
+  fresh();
+  E.recordJudged({ task: "t", agent: "a", referent: "migration", delta: "the migration was reverted safely", check: "bun test", exit: 0, judge: "box" });
+  const agreed = E.groundCheck({ task: "t", text: "The migration was reverted safely." });
+  assert.equal(agreed.sentences[0].type, "grounded");
+  assert.ok(!agreed.flags.some((f) => f.kind === "polarity_mismatch"), "agreement with the grounded source is not a contradiction");
+  const denied = E.groundCheck({ task: "t", text: "The migration was never reverted." });
+  assert.equal(denied.sentences[0].type, "grounded", "the WORDS overlap the source…");
+  assert.ok(denied.flags.some((f) => f.kind === "polarity_mismatch"), "…but the polarity contradicts it, so it is flagged");
+});
+
+test("taken: a done item cannot be resurrected by a case/space variant", () => {
+  fresh();
+  E.recordClaim({ task: "t", agent: "A", item: "Migrate Users", ttlMs: 1e9 });
+  E.recordDone({ task: "t", agent: "A", item: "Migrate Users" });
+  E.recordClaim({ task: "t", agent: "B", item: "migrate  users", ttlMs: 1e9 });
+  assert.deepEqual(E.projectTaken("t", "C"), [], "done is done under any casing");
+});
+
 // ── THE FIREWALL ───────────────────────────────────────────────────────────────────────────────────
 test("FIREWALL: a model-origin source cannot author a mechanical stage", () => {
   fresh();

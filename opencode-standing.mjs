@@ -19,7 +19,10 @@ export function standingOf({ agent, n = 0, ground }) {
   sentences.forEach((s, i) => {
     const id = `${String(agent).replace(/^ses_/, "").slice(0, 8)}.t${n}.s${i}`;
     const text = String(s.text ?? "");
-    const hit = flags.find((f) => (f.kind === "unknown_path" && text.includes(f.detail)) || (f.kind === "unverified_pass" && text.startsWith(f.detail.slice(0, 40))));
+    const hit = flags.find((f) =>
+      (f.kind === "unknown_path" && text.includes(f.detail)) ||
+      (f.kind === "unverified_pass" && text.startsWith(f.detail.slice(0, 40))) ||
+      (f.kind === "polarity_mismatch" && text.startsWith(f.detail.slice(0, 40))));
     log = appendReasoning(log, { kind: "propose", id, forWhom: String(agent), giver: String(agent), relation: { subject: String(agent), verb: "said", object: text.slice(0, 160) } });
     const verdict = hit ? "refuted" : s.type === "grounded" ? "supported" : "unresolved";
     log = appendReasoning(log, {
