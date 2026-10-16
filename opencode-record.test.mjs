@@ -262,3 +262,28 @@ test("reasonFor keeps the prompt small and current as the reasoning trace grows"
   // superseded reasoning collapses to the current survivor — one admit, not two
   assert.equal((q.note.match(/EVA admit `retry`/g) ?? []).length, 1, "superseded reasoning collapses to the current survivor");
 });
+
+test("adapter: a supersede is a REC that deriveSurprise sees; a new referent is a DEF; EVA precedes", async () => {
+  const { deriveSurprise } = await import("./native/kernel/dynamics.js");
+  fresh();
+  R.admit({ task: "t", agent: "a", referent: "retry@1", delta: "maxRetries 3", check: "bun test retry", exitCode: 0 });
+  R.admit({ task: "t", agent: "a", referent: "other@1", delta: "x", check: "bun test o", exitCode: 0 });
+  const first = R.blocks("t");
+  const { operations: ops0 } = R.blocksToOperations(first);
+  assert.deepEqual(ops0.map((o) => o.operator), ["EVA", "DEF", "EVA", "DEF"]);
+  assert.equal(deriveSurprise(R.blocksToOperations(first)).recanonicalizations.length, 0);
+  R.admit({ task: "t", agent: "a", referent: "retry@1", delta: "maxRetries 5", check: "bun test retry", exitCode: 0, supersedes: first[0].id });
+  const all = R.blocks("t");
+  const s = deriveSurprise(R.blocksToOperations(all));
+  const supersedeCount = all.filter((b) => b.supersedes !== "none").length;
+  assert.equal(supersedeCount, 1, "fixture must contain a supersede");
+  assert.equal(s.recanonicalizations.length, 1);
+  assert.deepEqual(s.recanonicalizations[0].inputs, [first[0].id]);
+});
+
+test("adapter mutation check: with supersedes ignored, the REC test would fail", () => {
+  const blk = [{ id: "e1", referent: "r", supersedes: "none", delta: ["a"], check: "c" }, { id: "e2", referent: "r", supersedes: "e1", delta: ["b"], check: "c" }];
+  const broken = blk.map((b) => ({ ...b, supersedes: "none" }));
+  assert.equal(R.blocksToOperations(blk).operations.filter((o) => o.operator === "REC").length, 1);
+  assert.equal(R.blocksToOperations(broken).operations.filter((o) => o.operator === "REC").length, 0);
+});

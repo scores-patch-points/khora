@@ -100,6 +100,11 @@ import { recordTurnsToWeft } from "./opencode-weft-record.mjs";
 import { findInWeft } from "./opencode-weft-find.mjs";
 import { archonNote } from "./opencode-archons.mjs";
 import { memoryNote } from "./opencode-memory.mjs";
+import { blocks as recordBlocks } from "./opencode-record.mjs";
+import { DELTA_ON, measure as measureDelta } from "./opencode-delta.mjs";
+import { STAKES_ON, stakeCheck } from "./opencode-stakes.mjs";
+import { ETHOS_ON, ethosShadow } from "./opencode-ethos.mjs";
+import { PATHOS_ON, pathosPass } from "./opencode-pathos.mjs";
 import * as remember from "./opencode-remember.mjs";
 import { connect as matrixConnect } from "./fold-matrix.mjs";
 import { connect as driveConnect } from "./fold-gdrive.mjs";
@@ -605,6 +610,8 @@ function onEvent(body) {
     case "session.text.ended":
       turn.answer = String(data.text ?? "");
       try { guardAnswer(body.sessionID, turn); } catch { /* the guard never blocks a turn */ }
+      // the pathos pass (shadow, FOLD_PATHOS): the person undergoes the turn; a concession lands on the ledger, nothing is injected
+      try { if (PATHOS_ON() && turn.task && turn.answer.trim()) pathosPass({ task: turn.task, text: turn.answer, turn: turn.steps }); } catch { /* never blocks a turn */ }
       // the reply's provenance, returned on the same post; the plugin draws it as a notice row.
       review = reviewOf(turn);
       break;
@@ -1423,7 +1430,22 @@ function onDone(body) {
   try { eot.recordDone({ task: body.task, agent: body.agent, item: body.item }); } catch { /* */ }
   return doneItem({ task: body.task, agent: body.agent, item: body.item });
 }
-function onAdmit(body) { return admitChange({ task: body.task, agent: body.agent, referent: body.referent, delta: body.delta, check: body.check, cwd: body.cwd, exitCode: body.exitCode, address: body.address, source: body.source, model: body.model }); }
+// The meaning framework rides admit in SHADOW: each piece behind its own flag, appends to the task's weft.jsonl ledger,
+// injects nothing, and never changes what admit answers (a failure here is swallowed, like the other trace seams).
+function onAdmit(body) {
+  const res = admitChange({ task: body.task, agent: body.agent, referent: body.referent, delta: body.delta, check: body.check, cwd: body.cwd, exitCode: body.exitCode, address: body.address, source: body.source, model: body.model });
+  try {
+    if (res?.kept && res.id && (DELTA_ON() || STAKES_ON() || ETHOS_ON())) {
+      const block = recordBlocks(body.task).find((b) => b.id === res.id);
+      if (block) {
+        if (DELTA_ON()) measureDelta({ task: body.task, block, judge: res.judge, frame: body.frame ?? null, git: body.git ?? null });
+        if (STAKES_ON()) stakeCheck({ task: body.task, block, judge: res.judge });
+        if (ETHOS_ON() && body.closure) ethosShadow({ task: body.task, referent: block.referent, block: block.id, closure: body.closure, known: (r) => recordBlocks(body.task).some((b) => b.referent === r) });
+      }
+    }
+  } catch { /* the shadow never blocks an admit */ }
+  return res;
+}
 function onRecord(body) {
   const r = reconcile({ task: body.task });
   return { record: r.fold, supersedes: r.supersedes, disagreements: r.disagreements };

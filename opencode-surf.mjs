@@ -32,9 +32,12 @@ const membersList = (ns, cap = 8) => (ns.length <= cap ? ns.join(",") : `${ns.sl
 // Default is POINTER (2026-10-16): the trail on disk is the memory, so the window carries addresses, not sentences.
 // The falsifier (opencode-surf-pointer.test.mjs) is green and the locality suite is unchanged, so the drop is lossless.
 // FOLD_SURF_MODE=ladder restores the sentence-carrying arm for the ablation.
-export function surf({ ask = "", turns = [], figure = 2, kindCap = 6, sentencesPer = 2, mode = process.env.FOLD_SURF_MODE ?? "pointer" } = {}) {
+// `delta` (FOLD_SURF_MODE=delta, shadow arm): pointer lines, but the Figure rung holds the turns the record says MOVED the
+// reader most (`rank`: Map turn n → position, 0 = largest delta), newest breaking ties, instead of simply the newest.
+// Order only: no number reaches the note. Without a rank it is exactly the pointer arm.
+export function surf({ ask = "", turns = [], figure = 2, kindCap = 6, sentencesPer = 2, mode = process.env.FOLD_SURF_MODE ?? "pointer", rank = null } = {}) {
   if (!turns.length) return { note: "", rungs: [], chars: 0 };
-  const pointer = mode === "pointer";
+  const pointer = mode === "pointer" || mode === "delta";
   // idf over the old turns; a term in at least half the units is the thread's idiom and weighs nothing
   const docs = turns.map((t) => new Set(terms(`${t.ask} ${t.answer}`)));
   const df = new Map();
@@ -45,8 +48,12 @@ export function surf({ ask = "", turns = [], figure = 2, kindCap = 6, sentencesP
 
   const rungs = [];
   const n = turns.length;
-  const figureFrom = Math.max(0, n - figure);
-  for (let i = figureFrom; i < n; i++) {
+  const newest = Array.from({ length: Math.min(figure, n) }, (_, k) => n - Math.min(figure, n) + k);
+  const figureIdx = mode === "delta" && rank
+    ? Array.from({ length: n }, (_, i) => i).sort((a, b) => (rank.get(turns[a].n) ?? Infinity) - (rank.get(turns[b].n) ?? Infinity) || b - a).slice(0, Math.min(figure, n)).sort((a, b) => a - b)
+    : newest;
+  const inFigure = new Set(figureIdx);
+  for (const i of figureIdx) {
     const t = turns[i];
     const ss = sentences(t.answer ?? "");
     const scored = ss.map((s, k) => ({ ...s, k, score: terms(s.text).reduce((a, w) => a + (askTerms.has(w) ? idf(w) || 0.1 : 0), 0) }));
@@ -61,7 +68,7 @@ export function surf({ ask = "", turns = [], figure = 2, kindCap = 6, sentencesP
   }
 
   // older turns: Kind by signature, then Pattern past the cap
-  const older = Array.from({ length: figureFrom }, (_, i) => i);
+  const older = Array.from({ length: n }, (_, i) => i).filter((i) => !inFigure.has(i));
 
   // ANCHORS — the rung surf was missing, and its absence is exactly why a one-off needle is invisible. A needle IS
   // the term that occurs once; sig() keeps only terms a second turn shares (df >= 2) and so drops it, and the

@@ -48,7 +48,7 @@ export function fold({ task } = {}) {
  *  superseding it (`"none"` on an already-answered referent) is a PARALLEL
  *  answer: a second live verified answer. A referent with more than one live
  *  answer is a fork — the reopen signal. Computed over the record, never a model. */
-function liveAnswers(all) {
+export function liveAnswers(all) {
   const live = new Map(); // referent -> [{ id, delta0 }] distinct live answers
   for (const b of all) {
     const delta0 = b.delta[0] ?? "";
@@ -85,6 +85,24 @@ export function reconcile({ task } = {}) {
   for (const s of supersedes) reason({ task, op: "REC", rule: "supersede", basis: [{ referent: s.referent, superseded: s.superseded, supersededBy: s.supersededBy }], to: s, by: "box", model: null });
   for (const d of disagreements) reason({ task, op: "REC", rule: "contradiction", basis: d.answers.map((a) => ({ referent: d.referent, answer: a })), to: d, by: "box", model: null });
   return { fold: fold({ task }), supersedes, disagreements };
+}
+
+/** Block -> operations adapter (pure; no I/O, no flag). Translates EOT blocks into the operations
+ *  shape native/kernel/dynamics.js reads, so deriveSurprise(...) can see the record. The mapping is a
+ *  PROPOSAL, not the repo's: a block whose check is present was admitted by exit 0, so it is preceded
+ *  by an EVA; a first block for a referent is a DEF; a block carrying `supersedes:` is a REC (the
+ *  frame change, naming the block it redefines as input and itself as output). A block that answers
+ *  an already-answered referent without superseding is a DEF too (the parallel fork stays visible
+ *  to the reader, not resolved here). Returns { operations } in record order. */
+export function blocksToOperations(list = []) {
+  const addr = { mode: "record", domain: "eot", grain: "block" };
+  const operations = [];
+  for (const b of list) {
+    if (b.check) operations.push({ operator: "EVA", ...addr, inputs: [b.referent], outputs: [b.id], witness: b.check });
+    if (b.supersedes && b.supersedes !== "none") operations.push({ operator: "REC", ...addr, inputs: [b.supersedes], outputs: [b.id], payload: { id: b.referent } });
+    else operations.push({ operator: "DEF", ...addr, inputs: [], outputs: [b.id], payload: { id: b.referent } });
+  }
+  return { operations };
 }
 
 /** The void log (LOG.jsonl): every draw the declared test judged — green (kept
