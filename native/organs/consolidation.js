@@ -30,7 +30,18 @@
 // ever mutates or removes a ledger entry; `echo` is a projection of the
 // same record, re-openable by address. The record keeps everything; the
 // field must not. "The ground must not close; sclerosis is death."
+//
+// THE DAY'S CHEAP PASS, FOLDED INTO THE NIGHT (2026-10-16). The waking
+// dream (organs/waking-dream.js) runs in real time over the day's action
+// log and hands the night what it already knows for free: the RECURRENT
+// keys (a note with a second independent witness needs no model call), the
+// identity QUESTIONS opened, and the DISCREPANCIES disclosed. `dream` takes
+// the day's `actions` (optional) and carries the waking dream's BOUNDED
+// worktree forward — its memory, capped, with every pruned entry and its
+// path back to the immortal action log. So the night's output is a worktree
+// that cannot balloon, not an ever-growing one.
 import { corroborateLedger } from "./corroboration.js";
+import { wakingDream } from "./waking-dream.js";
 
 /** note task_id -> the seq of its latest hearing — the present's reach. */
 function recencyOf(log) {
@@ -81,11 +92,13 @@ export function projectField(door, log, { floor = 2, window = null, now = null }
 export async function dream(door, log, {
   sources = [], ask = null, selectAsk = null, testimony = null, maxAsks = 0,
   elenchus = corroborateLedger, compose = null, floor = 2, window = null, now = null,
-  limitPerSource = null, splitSentences = null,
+  limitPerSource = null, splitSentences = null, actions = null, cap = 64,
 } = {}) {
   if (typeof elenchus !== "function") throw new TypeError("dream: the elenchus is a function — the witness at the door");
   let next = log;
   const report = { asks: 0, attested: [], contradicted: [], derived: [], refused: null, candidatePairs: 0, standings: null };
+  const waking = Array.isArray(actions) && actions.length ? wake(actions, { floor, cap }) : null;
+  if (waking) report.waking = { recurrent: waking.recurrent.length, alternatives: waking.alternatives.length, discrepancies: waking.discrepancies.length, worktree: waking.worktree.length, pruned: waking.pruned.length };
   if (maxAsks > 0 && sources.length) {
     const r = await elenchus(next, door, sources, { ask, selectAsk, testimony, maxAsks, limitPerSource, splitSentences });
     next = r.log ?? next;
@@ -102,5 +115,25 @@ export async function dream(door, log, {
     report.derived = products.map((p) => `${p.end1 ?? p.subject} ${p.label ?? p.verb} ${p.end2 ?? p.object}`);
   }
   const { field, echo, cursor } = projectField(door, next, { floor, window, now });
-  return { log: next, report, field, echo, cursor };
+  return { log: next, report, field, echo, cursor, waking };
+}
+
+/**
+ * wake(actions, {floor, cap}) — the night's cheap pre-pass over the day's action log.
+ * Runs the waking dream (organs/waking-dream.js) and hands the night exactly what it saves
+ * on: the RECURRENT keys (already a second independent witness — no model call owed), the
+ * alternatives opened and the discrepancies disclosed, and the BOUNDED worktree with every
+ * pruned entry's path back. Pure; the action log is returned unchanged and never pruned.
+ */
+export function wake(actions = [], { floor = 2, cap = 64 } = {}) {
+  const w = wakingDream(actions, { floor, cap });
+  return {
+    schema: w.schema,
+    recurrent: w.hypotheses.filter((h) => h.kind === "support"),
+    alternatives: w.hypotheses.filter((h) => h.kind === "nomination"),
+    discrepancies: w.hypotheses.filter((h) => h.kind === "discrepancy"),
+    worktree: w.memory,   // the bounded memory — the pruned worktree
+    pruned: w.pruned,     // path back: addrs / actionLog#i, one hop to the immortal log
+    actionLog: w.actionLog,
+  };
 }
