@@ -28,6 +28,7 @@ import crypto from "node:crypto";
 import { taskDir } from "./opencode-worknotes.mjs";
 import { STAGES } from "./opencode-eot-stages.mjs";
 import { neutralize } from "./opencode-defang.mjs";
+import { readIndexed } from "./opencode-eot-index.mjs";
 
 export const EOT_SCHEMA = "OpenCodeEOT@1";
 export { STAGES };
@@ -59,8 +60,8 @@ const readRows = (file) => {
   catch { return []; }
 };
 
-/** The task's merged log: sources by id, events in time order. A line that does not parse is dropped. */
-export function read(task) {
+/** A full parse straight off the jsonl logs — the index's fallback and its equality oracle. */
+function readDirect(task) {
   const d = dirOf(task);
   const sources = new Map(), events = [];
   if (!d || !fs.existsSync(d)) return { sources, events };
@@ -72,6 +73,14 @@ export function read(task) {
   }
   events.sort((a, b) => (a.ts - b.ts) || String(a.event_id).localeCompare(String(b.event_id)));
   return { sources, events };
+}
+
+/** The task's merged log: sources by id, events in time order. Served from the derived binary index
+ *  (opencode-eot-index.mjs) when it is usable — parsing only the bytes appended since the last read —
+ *  and from a full jsonl parse otherwise. Identical in either case; the index is a cache, never
+ *  authoritative (readIndexed's own test pins the equality). */
+export function read(task) {
+  try { return readIndexed(task); } catch { return readDirect(task); }
 }
 
 /** Compute the standing of an event from its source: the one place it is decided. */
