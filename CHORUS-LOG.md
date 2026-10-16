@@ -1,5 +1,14 @@
 # Chorus log — append-only, one entry per lint run
 
+## 2026-10-16 — eventDetail for the panel, and a home directory is not a project (branch `feat/eot-panel-byte-views`, working diff)
+
+fast: 4 files · affected tests 51/51 pass · law: ok (pre-existing dup-header WARN S17/S96 in native/READING-SPEC.md, not this diff)
+The opening run FAILed on 3 pre-existing tests (`opencode-standing*`); they were red because this worktree had no `../janus` sibling, and `opencode-standing.mjs` degrades to no standing without it (its own header says the door still runs). A sibling symlink made the instrument resolvable and all 51 pass; nothing in this diff was changed to green them.
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Ostrom | scope of credit | opencode-worknotes.mjs:projectKey | noted | returning no key for the home dir also denies a key to a repo kept AT `~`; that narrowing is the disclosed cost of not pooling unrelated sessions, and the test checks both sides (a repo under home still keys) |
+clean: (no other lens routed)
+
 ## 2026-09-21 — kleeneUp pre-commit chorus (branch `archon-kleeneup`, staged diff)
 
 fast: 14 files · affected tests 39/39 pass (kleene-up 19, verbatim-snip 10, content-rules 5 × 8 runs — the ordering flake fixed) · law: ok (P5.2 cited, verified against POLICIES.md — the self-verification discipline, exactly the ADDRESS-BOUND wall; pre-existing dup-header WARNs P115/P116/P117/P19/P233 and S17/S96, untouched by this diff)
