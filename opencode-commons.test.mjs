@@ -262,3 +262,16 @@ test("a home directory is not a project: unrelated sessions reporting it stay ap
   const ws = repo();
   assert.match(projectKey(ws), /^proj-/);
 });
+
+test("MECHANICAL FOLD: the surf note carries the thread across many distinct asks (penelope/organs/fold-note.mjs)", async () => {
+  const { answer } = await boot();
+  const ws = repo();
+  const topics = ["parser", "deploy", "billing"];
+  const turns = Array.from({ length: 30 }, (_, i) =>
+    turn(i + 1, `work on the ${topics[i % 3]} item ${i}`, `settled the ${topics[i % 3]} work`, ["edit"]),
+  );
+  const r = await answer({ event: "surf", sessionID: "ses_FOLD1", workspace: ws, ask: "what did we settle about the parser?", turns });
+  assert.match(String(r.note ?? ""), /fold: the thread/, "the note carries the mechanical fold (the shared capacity)");
+  assert.match(String(r.note ?? ""), /thread\(s\)/, "threads, not a per-turn list");
+  assert.doesNotMatch(String(r.note ?? ""), /\bNaN\b|\bundefined\b/);
+});
