@@ -1,6 +1,6 @@
 // opencode-doorway.mjs — OPENCODE, AS A CLIENT OF THE ONE PIPELINE.
 //
-// The opencode-fold fork (the real opencode, rebased on upstream, plus one
+// The openfold fork (the real opencode, rebased on upstream, plus one
 // internal plugin: packages/core/src/plugin/fold.ts) forwards three things
 // here and carries no fold logic of its own:
 //
@@ -91,6 +91,7 @@ import { plan as trailPlan, shouldCompact as trailGate, trailEnabled } from "./o
 import { standingOf } from "./opencode-standing.mjs";
 import { admit as admitChange, fold as foldRecord, recordNote, recordSink, reconcile, nextVoid, reasonFor, provenance, refusalsFor } from "./opencode-record.mjs";
 import * as eot from "./opencode-eot.mjs";
+import { checkAnswer } from "./opencode-ledger-check.mjs";
 import { mark as markNote, claim as claimItem, done as doneItem, read as readNotes, noteFor, stateFor, turnsFile, writeTurnsFile, turnsOf, root as notesRoot, projectKey, projectRoot, plans as workPlans } from "./opencode-worknotes.mjs";
 import fs from "node:fs";
 import path from "node:path";
@@ -1382,8 +1383,14 @@ function onSnip(body) {
 }
 function onGround(body) {
   const agent = String(body.agent ?? body.sessionID ?? "");
-  const r = eot.groundCheck({ task: taskFor(body, agent), text: String(body.text ?? ""), root: body.workspace ? String(body.workspace) : null });
-  const flags = (r.flags ?? []).map((f) => ({ ...f, cell: cellForFlag(f.kind) }));
+  const task = taskFor(body, agent);
+  const r = eot.groundCheck({ task, text: String(body.text ?? ""), root: body.workspace ? String(body.workspace) : null });
+  // THE LEDGER CHECK, beside the lexical ground: what this answer says against what the task's own
+  // turns already heard (opencode-ledger-check.mjs) — a re-sighting is retold, a denial of a standing
+  // note is a contest. Display-only; a failed check is a typed gap, never a block.
+  let ledger = [];
+  try { ledger = checkAnswer({ turns: turnsOf({ task }), text: String(body.text ?? "") }).flags ?? []; } catch { ledger = []; }
+  const flags = [...(r.flags ?? []), ...ledger].map((f) => ({ ...f, cell: cellForFlag(f.kind) }));
   return { ...r, flags, standing: standingFor(flags) };
 }
 
