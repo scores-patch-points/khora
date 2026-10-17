@@ -20,7 +20,20 @@ import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));      // .../khora/native/docs
-const ROOT = path.resolve(HERE, "../../..");                    // .../3.0
+const KHORA = path.resolve(HERE, "../..");                      // .../khora (as invoked)
+// ROOT holds the three sibling repos. The syntactic `../../..` breaks when khora is reached
+// through a symlink — workspace/khora → ~/.khora puts the parent chain in $HOME (2026-10-17:
+// it read 21 live citations as stale). Try the declared stack hint, the syntactic parent, and
+// the realpath parent; the first that actually holds janus AND penelope wins.
+const ROOT = (() => {
+  const candidates = [
+    process.env.FOLD_SIBLINGS_DIR,
+    path.resolve(HERE, "../../.."),
+    (() => { try { return path.resolve(fs.realpathSync(path.join(HERE, "../..")), ".."); } catch { return undefined; } })(),
+  ].filter(Boolean);
+  return candidates.find((c) => fs.existsSync(path.join(c, "janus")) && fs.existsSync(path.join(c, "penelope"))) ?? candidates[1];
+})();
+const SIBLINGS_FOUND = fs.existsSync(path.join(ROOT, "janus")) && fs.existsSync(path.join(ROOT, "penelope"));
 const DOC = path.join(HERE, "THE-SPINE.md");
 const REPOS = ["khora", "janus", "penelope"].map((d) => path.join(ROOT, d));
 const SKIP = new Set(["node_modules", ".git", "vendor", ".venv", "dist", "build", "__pycache__"]);
@@ -61,11 +74,15 @@ function bodyHash(src) {
 const doc = fs.readFileSync(DOC, "utf8");
 const cited = [...new Set([...doc.matchAll(/`([\w./-]+\.(?:js|mjs|md|json))(?::(\d+))?`/g)].map((m) => [m[1], m[2] ? Number(m[2]) : null]))];
 
-const prefixes = [ROOT, path.join(ROOT, "khora"), path.join(ROOT, "khora/native/docs"), path.join(ROOT, "khora/native"), path.join(ROOT, "janus"), path.join(ROOT, "penelope")];
+// Citations are khora-relative ("native/organs/…", "THE-SPINE.md" beside this file) or
+// repo-relative ("cli/holograph.mjs"); try khora itself first, so resolution never depends on
+// sibling discovery, then the ROOT candidates.
+const prefixes = [KHORA, path.join(KHORA, "native/docs"), path.join(KHORA, "native"), ROOT, path.join(ROOT, "khora"), path.join(ROOT, "khora/native/docs"), path.join(ROOT, "khora/native"), path.join(ROOT, "janus"), path.join(ROOT, "penelope")];
 const resolveCite = (rel) => prefixes.map((base) => path.join(base, rel)).find((p) => fs.existsSync(p) && fs.statSync(p).isFile());
 
 let failures = 0;
 console.log(`# check-spine — THE-SPINE.md against the tree\n`);
+console.log(`root: ${ROOT}${SIBLINGS_FOUND ? "" : "   (NOTE: no janus+penelope siblings found — set FOLD_SIBLINGS_DIR)"}\n`);
 console.log(`## 1. citations (${cited.length})`);
 for (const [rel, line] of cited) {
   const abs = resolveCite(rel);
@@ -111,7 +128,7 @@ const EXCEPTIONS = {
   "corroboration.js": "janus injects the witness-read (wireWitnessRead) so the reasoner never reaches into the reader's ledger (JANUS-EXTRACTION); khora binds notes.js directly. The seam requires two forms.",
 };
 
-if (!duplicates.length) console.log(`  no duplicate organs — every shared module has one home.`);
+if (!duplicates.length) console.log(SIBLINGS_FOUND ? `  no duplicate organs — every shared module has one home.` : `  SKIPPED — janus/penelope absent; the duplicate check needs all three repos (set FOLD_SIBLINGS_DIR).`);
 for (const d of duplicates) {
   const kind = d.sameBody ? "DUPLICATE (identical)" : "DIVERGED COPIES";
   const where = d.acrossRepo ? "across repos" : "within a repo";
@@ -140,7 +157,7 @@ for (const [key, files] of byRel) {
   }
 }
 console.log(`\n## 3. forks (same path, different code)`);
-if (!collisions.length) console.log(`  none.`);
+if (!collisions.length) console.log(SIBLINGS_FOUND ? `  none.` : `  SKIPPED — janus/penelope absent.`);
 for (const c of collisions) {
   console.log(`  ${c.declared ? "declared exception" : "UNDECLARED FORK"}: ${c.base}`);
   if (c.declared) console.log(`      reason: ${c.declared}`);
@@ -148,7 +165,7 @@ for (const c of collisions) {
 }
 const undeclared = collisions.filter((c) => !c.declared).length;
 
-console.log(`\nverdict: ${failures === 0 ? "citations RESOLVE" : `${failures} STALE citation(s)`}; ` +
+console.log(`\nverdict: ${failures === 0 ? "citations RESOLVE" : `${failures} STALE citation(s)`}${SIBLINGS_FOUND ? "" : " (siblings absent — 3-repo checks skipped)"}; ` +
   `${duplicates.length === 0 ? "no duplicate organs" : `${duplicates.length} duplicate organ group(s) — FATAL`}; ` +
   `${undeclared} undeclared fork(s).`);
 process.exit(failures === 0 && duplicates.length === 0 ? 0 : 1);
