@@ -20,6 +20,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { loadModel, analyse, tokenize } from "../../../adapters/text/english-parser.js";
+import { isNegatorRow } from "./derived-lexicon.mjs";
 
 const FOLD = "/Users/mlacy/Documents/3.0/the-fold";
 const { indexOf, mindPassagesFor, contentStems } = await import(path.join(FOLD, "fold-chat-foundation.js"));
@@ -90,7 +92,12 @@ console.log(`  everyone else's voices, same size:    ${opp.n}`);
 console.log(`  → the point of view ${pov.n > nullBest ? "MAKES a difference" : "does NOT make a difference above random points of view"}`);
 
 // ── the reading ──────────────────────────────────────────────────────────────────────────────────────────────────────────────
-const NEG = /\b(?:not|never|no|nobody|none|nothing|neither|nor|cannot|without)\b|n['’]t\b/i;
+// negation is what the parser's own lexicon types as negation (Polarity=Neg / PronType=Neg, class agreeing with the POS prior), read off
+// the parsed row of each token — derived-lexicon.mjs. Same call shape as the regex this replaced.
+const NEG = (() => {
+  const model = loadModel(JSON.parse(fs.readFileSync("/Users/mlacy/Documents/3.0/janus/priors/parser-eng-ewt.json", "utf8")));
+  return { test: (s) => analyse(model, tokenize(String(s)).map((t) => t.form)).some(isNegatorRow) };
+})();
 const lines = [`# The Republic's discussion of slaves and rules, read as the ruled`, "", `*${items.length} sentences from ${hits.length} Stephanus sections (${total} in the discussion), in order. The point of view is ${povUnits.length} sentences spoken by people who were ruled: formerly enslaved narrators (WPA), TRC witnesses, the struggle's documents. A sentence is HELD only where the reader's born-null bar licenses a lived sentence for it; otherwise it is said to be unheld.*`, "", `**Held ${pov.n} of ${items.length}.** Random points of view of the same size hold ${nullMean.toFixed(1)} on average, ${nullBest} at best; everyone else's voices hold ${opp.n}.`, ""];
 let lastSec = "";
 items.forEach((it, i) => {

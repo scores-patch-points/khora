@@ -205,3 +205,29 @@ test("route answers the door and declines other paths", async () => {
   assert.ok(JSON.parse(sink.body).turns >= 3);
   assert.equal(await door.route({ method: "GET", url: "/v1/models" }, sink), false);
 });
+
+// ── memory surface ───────────────────────────────────────────────────────
+test("memory: the canonical-repo fact rides when the ask bears on it", async () => {
+  fs.writeFileSync(process.env.FOLD_USER_MEMORY, [
+    "## about:user:repos",
+    "- khora is the canonical perceiver repo; eoreader7 is legacy",
+    "## about:user:accounts",
+    "- scores-patch-points is the publishing account",
+  ].join("\n"));
+  const out = await door.answer({ event: "context", sessionID: "m1", ask: "which repo is canonical?" });
+  assert.match(out.memory, /<fold-memory>/);
+  assert.match(out.memory, /khora/);
+  assert.doesNotMatch(out.memory, /scores-patch-points/, "the account fact does not bear on a repo ask");
+});
+
+test("memory: stopwords and unrelated asks stay silent", async () => {
+  fs.writeFileSync(process.env.FOLD_USER_MEMORY, "## about:user:repos\n- khora is the canonical perceiver repo\n");
+  assert.deepEqual(await door.answer({ event: "context", sessionID: "m2", ask: "the and for are" }), {});
+  assert.deepEqual(await door.answer({ event: "context", sessionID: "m3", ask: "compute the fibonacci series" }), {});
+});
+
+test("memory: an unreadable or empty store fails open", async () => {
+  fs.writeFileSync(process.env.FOLD_USER_MEMORY, "preamble the parser ignores, no grammar lines");
+  assert.equal((await door.answer({ event: "context", sessionID: "m4", ask: "which repo is canonical?" })).memory, undefined);
+});
+

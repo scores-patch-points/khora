@@ -24,7 +24,7 @@ import crypto from "node:crypto";
 import { neutralize } from "./opencode-defang.mjs";
 
 export const KINDS = Object.freeze(["fact", "claim", "done", "block"]);
-const root = () => process.env.FOLD_WORKNOTES_DIR ?? path.join(os.homedir(), ".fold", "worknotes");
+export const root = () => process.env.FOLD_WORKNOTES_DIR ?? path.join(os.homedir(), ".fold", "worknotes");
 const DEFAULT_TTL = Number(process.env.FOLD_CLAIM_TTL_MS ?? 15 * 60_000);
 const ident = (s) => { const v = String(s ?? ""); return /^[\w.-]+$/.test(v) && v !== "." && v !== ".." ? v : null; };
 const oneLine = (s) => String(s ?? "").replace(/\s+/g, " ").trim();
@@ -169,6 +169,54 @@ export function turnsOf({ task } = {}) {
     }
   }
   return turns;
+}
+
+const SECTION = (t) => {
+  const answer = t.answer || "(no text reply)";
+  const ask = String(t.ask ?? "").replace(/\s*\n\s*/g, " ");
+  const tools = t.grounds?.length ? `tools: ${t.grounds.join(", ")}\n` : "";
+  return `## turn ${t.n}\n\nask: ${ask}\n${tools}answer-bytes: ${Buffer.byteLength(answer)}\n\n${answer}\n`;
+};
+export function parseTurnsFile(buf) {
+  const out = [];
+  let i = buf.indexOf("## turn ");
+  while (i >= 0 && i < buf.length) {
+    const nextOld = buf.indexOf("\n## turn ", i + 1);
+    const ab = buf.indexOf("\nanswer-bytes: ", i);
+    const framed = ab >= 0 && (nextOld < 0 || ab < nextOld);
+    if (framed) {
+      const line = buf.indexOf("\n", ab + 1);
+      const len = Number(buf.subarray(ab + "\nanswer-bytes: ".length, line).toString());
+      const head = buf.subarray(i, ab).toString("utf8");
+      const start = line + 2; // the blank line after the frame
+      const text = buf.subarray(start, start + len).toString("utf8");
+      out.push({ n: Number(/^## turn (\d+)/.exec(head)?.[1] ?? 0), ask: /^ask: (.*)$/m.exec(head)?.[1] ?? "", tools: (/^tools: (.*)$/m.exec(head)?.[1] ?? "").split(",").map((t) => t.trim()).filter(Boolean), text });
+      const nx = buf.indexOf("## turn ", start + len);
+      i = nx;
+    } else {
+      const part = buf.subarray(i + "## turn ".length, nextOld < 0 ? buf.length : nextOld).toString("utf8");
+      const n = Number(/^(\d+)/.exec(part)?.[1] ?? 0);
+      const ask = /^ask: (.*)$/m.exec(part)?.[1] ?? "";
+      const tools = (/^tools: (.*)$/m.exec(part)?.[1] ?? "").split(",").map((t) => t.trim()).filter(Boolean);
+      const body = part.replace(/^\d+\s*\n/, "").replace(/^ask: .*\n?/m, "").replace(/^tools: .*\n?/m, "").trim();
+      out.push({ n, ask, tools, text: body });
+      i = nextOld < 0 ? -1 : nextOld + 1;
+    }
+  }
+  return out;
+}
+
+export function writeTurnsFile({ file, agent, turns }) {
+  let have = [];
+  try { have = parseTurnsFile(fs.readFileSync(file)).map((t) => ({ n: t.n, ask: t.ask, grounds: t.tools, answer: t.text })); } catch { /* first write */ }
+  const byN = new Map(have.map((t) => [t.n, t]));
+  for (const t of turns) byN.set(t.n, t);
+  const merged = [...byN.values()].sort((a, b) => a.n - b.n);
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  const tmp = `${file}.${process.pid}.tmp`;
+  fs.writeFileSync(tmp, `# turns ${agent}\n\n${merged.map(SECTION).join("\n")}`);
+  fs.renameSync(tmp, file);
+  return merged.length;
 }
 
 /** The git root (or the directory itself) a path belongs to, or null. Pure fs reads. */

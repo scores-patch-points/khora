@@ -10,6 +10,13 @@ fast: 9 files · affected tests 103 pass / 18 fail (all pre-existing FALSIFIER a
 |---|---|---|---|---|
 | Ostrom | scope of credit | native/organs/archon-dossiers.js (grasse `scope` bend) | noted | the credit's scope stretch (termite nest → a filesystem of marks) is disclosed as a bend (ours vs theirs), never hidden |
 | Simon/Chekhov | a real mechanism must not ship unwired | tests/opencode-archons.test.mjs | fixed | the mint is pinned: a stigmergy ask surfaces grassé through the doorway note and carries its dossier disclosure |
+## 2026-10-16 — eventDetail for the panel, and a home directory is not a project (branch `feat/eot-panel-byte-views`, working diff)
+
+fast: 4 files · affected tests 51/51 pass · law: ok (pre-existing dup-header WARN S17/S96 in native/READING-SPEC.md, not this diff)
+The opening run FAILed on 3 pre-existing tests (`opencode-standing*`); they were red because this worktree had no `../janus` sibling, and `opencode-standing.mjs` degrades to no standing without it (its own header says the door still runs). A sibling symlink made the instrument resolvable and all 51 pass; nothing in this diff was changed to green them.
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Ostrom | scope of credit | opencode-worknotes.mjs:projectKey | noted | returning no key for the home dir also denies a key to a repo kept AT `~`; that narrowing is the disclosed cost of not pooling unrelated sessions, and the test checks both sides (a repo under home still keys) |
 clean: (no other lens routed)
 
 ## 2026-09-21 — kleeneUp pre-commit chorus (branch `archon-kleeneup`, staged diff)
@@ -1151,3 +1158,13 @@ fast: 1 files · 0 affected tests (no test imports the guard; CI's native-kernel
 | lens | citation | file:line | verdict | one line |
 | Simon/Chekhov | new/untested source | native/scripts/check-no-legacy-submodule.mjs | clean | the diff only adds a Set entry; the guard is exercised by CI's native-kernel gate, which this change turns green — no new module, no unwired seam |
 clean: Simon/Chekhov (the entry is data the guard itself consumes)
+
+## 2026-10-17 — the ledger checker: the answer heard against the task's turns (feat/ledger-check, staged in khora-ledger-verify)
+fast: 7 files · 41 affected tests pass · law: WARN pre-existing dup S17 S96 (READING-SPEC, own commit) · WARN cite P159 P186 P23 P3 P32 P60 (content-rules.json is one minified line — every entry's citations ride the diff) + II.9 (the reason-gate entry; the constitution text lives outside this checkout — carried in the commit)
+| lens | citation | file:line | verdict | one line |
+| Greenberg | Latin-only sentence split + SVO fields | opencode-ledger-check.mjs:33,60 | noted | the English text face's scope, now declared in the header; the ledger beneath is medium-blind |
+| Simon/Chekhov | new modules | opencode-ledger-check.{mjs,test}, opencode-ledger-fold.{mjs,test} | noted | all four are test-imported; scripts/opencode-ledger-shadow.mjs is a manual measurement tool, no test by design |
+| Feynman | caps, skipped texts, swallowed errors | opencode-ledger-check.mjs:24,73; opencode-ledger-fold.mjs:23 | noted | caps disclosed (FOLD_LEDGER_TURNS/NOTE); a register gap is a typed gap, never a clean bill |
+| Marshall | law cited S69/S97/S113/II.9; P/S warnings | content-rules.json entries | noted | S69 resolves; the not-in-law WARNs are the one-line artifact + II.9 carried in the commit |
+| Kondo | diff adds no dead code | opencode-ledger-fold.mjs | noted | the fold is deliberately unwired — its gate (the 1,010-output replay) is documented in the header |
+clean: Diaconis, Holmes, Pearl, Ostrom, Frankfurt, Alexander

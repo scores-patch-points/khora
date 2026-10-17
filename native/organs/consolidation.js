@@ -30,7 +30,27 @@
 // ever mutates or removes a ledger entry; `echo` is a projection of the
 // same record, re-openable by address. The record keeps everything; the
 // field must not. "The ground must not close; sclerosis is death."
+//
+// THE DAY'S CHEAP PASS, FOLDED INTO THE NIGHT (2026-10-16). The waking
+// dream (organs/waking-dream.js) runs in real time over the day's action
+// log and hands the night what it already knows for free: the RECURRENT
+// keys (a note with a second independent witness needs no model call), the
+// identity QUESTIONS opened, and the DISCREPANCIES disclosed. `dream` takes
+// the day's `actions` (optional) and carries the waking dream's BOUNDED
+// worktree forward — its memory, capped, with every pruned entry and its
+// path back to the immortal action log. So the night's output is a worktree
+// that cannot balloon, not an ever-growing one.
+//
+// THE MORNING DECIDES NOTHING (settle). The waking dream's three hypotheses are settled the
+// night's way: a discrepancy becomes a CONTEST (disclosed, no verdict), a nomination a
+// QUESTION for the meet, a support a CANDIDATE whose consequence is still owed. `settle`
+// never promotes — standing is the gate's, on a later turn.
 import { corroborateLedger } from "./corroboration.js";
+import { wakingDream } from "./waking-dream.js";
+import { survivingIdentity, survivingIdentityAtPoints } from "../kernel/identity-meet.js";
+import { evaluatePromotion } from "../the-fold/consequence.js";
+
+const freeze = (x) => Object.freeze(x);
 
 /** note task_id -> the seq of its latest hearing — the present's reach. */
 function recencyOf(log) {
@@ -81,11 +101,13 @@ export function projectField(door, log, { floor = 2, window = null, now = null }
 export async function dream(door, log, {
   sources = [], ask = null, selectAsk = null, testimony = null, maxAsks = 0,
   elenchus = corroborateLedger, compose = null, floor = 2, window = null, now = null,
-  limitPerSource = null, splitSentences = null,
+  limitPerSource = null, splitSentences = null, actions = null, cap = 64,
 } = {}) {
   if (typeof elenchus !== "function") throw new TypeError("dream: the elenchus is a function — the witness at the door");
   let next = log;
   const report = { asks: 0, attested: [], contradicted: [], derived: [], refused: null, candidatePairs: 0, standings: null };
+  const waking = Array.isArray(actions) && actions.length ? wake(actions, { floor, cap }) : null;
+  if (waking) report.waking = { recurrent: waking.recurrent.length, alternatives: waking.alternatives.length, discrepancies: waking.discrepancies.length, worktree: waking.worktree.length, pruned: waking.pruned.length };
   if (maxAsks > 0 && sources.length) {
     const r = await elenchus(next, door, sources, { ask, selectAsk, testimony, maxAsks, limitPerSource, splitSentences });
     next = r.log ?? next;
@@ -102,5 +124,90 @@ export async function dream(door, log, {
     report.derived = products.map((p) => `${p.end1 ?? p.subject} ${p.label ?? p.verb} ${p.end2 ?? p.object}`);
   }
   const { field, echo, cursor } = projectField(door, next, { floor, window, now });
-  return { log: next, report, field, echo, cursor };
+  return { log: next, report, field, echo, cursor, waking };
+}
+
+/**
+ * wake(actions, {floor, cap}) — the night's cheap pre-pass over the day's action log.
+ * Runs the waking dream (organs/waking-dream.js) and hands the night exactly what it saves
+ * on: the RECURRENT keys (already a second independent witness — no model call owed), the
+ * alternatives opened and the discrepancies disclosed, and the BOUNDED worktree with every
+ * pruned entry's path back. Pure; the action log is returned unchanged and never pruned.
+ */
+export function wake(actions = [], { floor = 2, cap = 64 } = {}) {
+  const w = wakingDream(actions, { floor, cap });
+  return {
+    schema: w.schema,
+    recurrent: w.hypotheses.filter((h) => h.kind === "support"),
+    alternatives: w.hypotheses.filter((h) => h.kind === "nomination"),
+    discrepancies: w.hypotheses.filter((h) => h.kind === "discrepancy"),
+    worktree: w.memory,   // the bounded memory — the pruned worktree
+    pruned: w.pruned,     // path back: addrs / actionLog#i, one hop to the immortal log
+    actionLog: w.actionLog,
+  };
+}
+
+/**
+ * settle(waking) — THE MORNING'S JUDGMENT over the day's hypotheses. The waking dream opened
+ * QUESTIONS (nominations), disclosed DISAGREEMENTS (discrepancies), and recorded RECURRENCE
+ * (support). The night settles none of them by deciding:
+ *   · a discrepancy becomes a CONTEST — at n >= 2 the record keeps THAT they disagree and no
+ *     opinion about which is right (corroboration.js's own rule), every reading carried;
+ *   · a nomination becomes a QUESTION for the meet. Give `reads` (one per for-whom, each with
+ *     its own ctx) and the meet RUNS (identity-meet.js): the identity that SURVIVES every frame
+ *     is in `meet.survivors`, and a pair one frame joins and another divides is in
+ *     `meet.splits` (the falsifier). No reads → `meet: null`, the questions handed over unmett.
+ *   · a support becomes a CANDIDATE — recurrence is met, CONSEQUENCE is still owed, and only
+ *     the gate (the-fold/consequence.js) may promote, on a LATER turn this morning cannot see.
+ * It NEVER promotes: `promoted` is always empty, with the reason named. Pure; accepts the
+ * object `wake()` returns. `meet` is injectable and `atPoints` switches to the referent-level
+ * meet (survivingIdentityAtPoints).
+ */
+export function settle(waking = {}, { reads = null, meet = null, atPoints = false } = {}) {
+  const discrepancies = waking.discrepancies ?? [];
+  const alternatives = waking.alternatives ?? [];
+  const recurrent = waking.recurrent ?? [];
+  const contests = discrepancies.map((d) => freeze({
+    schema: "EOContest@1", kind: "contest", being: d.being, predicate: d.predicate,
+    readings: d.readings, at: d.at ?? null,
+    disclosure: `${d.readings.length} readings of “${d.being} · ${d.predicate}” disagree — kept as a contest, no opinion about which is right (corroboration.js)`,
+  }));
+  const questions = alternatives.map((n) => n.alternative);
+  const runner = typeof meet === "function" ? meet : (atPoints ? survivingIdentityAtPoints : survivingIdentity);
+  const met = Array.isArray(reads) && reads.length ? runner(reads) : null;
+  const candidates = recurrent.map((s) => freeze({
+    key: s.key, being: s.being, predicate: s.predicate, value: s.value, refs: s.refs, count: s.count,
+    owed: "consequence", basis: "recurrence met; standing is owed the gate (recurrence AND consequence, on a later turn)",
+  }));
+  return freeze({
+    schema: "EODreamSettle@1",
+    contests: freeze(contests),
+    questions: freeze(questions),
+    meet: met,
+    candidates: freeze(candidates),
+    promoted: freeze([]),
+    reason: "the night decides nothing: a contest is disclosed, a question is met by its for-whoms, a candidate awaits a later turn's consequence — never promoted here",
+  });
+}
+
+/**
+ * promote(candidates, { consequenceOf }) — THE GATE, APPLIED (the-fold/consequence.js).
+ * `settle` promotes nothing; this is the step a caller runs when it can MEASURE consequence.
+ * A candidate already meets the recurrence half; standing also needs CONSEQUENCE — a later
+ * turn's verdict actually changed because the claim was available (S9: a count is possibility,
+ * never standing). `consequenceOf(candidate)` returns the candidate's classified consequence
+ * (classifyConsequence's {status: "mattered" | "recurring_no_consequence" | "consequence_untested"}).
+ * A missing or untyped measurement is held as `consequence_untested` — a gap is not a zero and
+ * never a silent promote (seriesOf's own rule). The gate always names which half failed.
+ */
+export function promote(candidates = [], { consequenceOf = null } = {}) {
+  if (typeof consequenceOf !== "function") throw new TypeError("promote: consequenceOf is a function — consequence is measured, never assumed");
+  const promoted = [], held = [];
+  for (const c of candidates) {
+    const raw = consequenceOf(c);
+    const consequence = raw && raw.status ? raw : { status: "consequence_untested", gap: "consequence_untested" };
+    const verdict = evaluatePromotion({ recurs: true, consequence });
+    (verdict.promoted ? promoted : held).push(freeze({ key: c.key, value: c.value, reason: verdict.reason }));
+  }
+  return freeze({ schema: "EODreamPromote@1", promoted: freeze(promoted), held: freeze(held) });
 }
