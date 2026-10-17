@@ -85,10 +85,13 @@
 // carries on exactly as upstream would.
 import os from "node:os";
 import { surf as surfLadder } from "./opencode-surf.mjs";
+import { breakEven, makeGateTracker } from "./opencode-cost-gate.mjs";
+import { semanticTerms, semanticOn } from "./opencode-semantic.mjs";
+import { plan as trailPlan, shouldCompact as trailGate, trailEnabled } from "./opencode-trail.mjs";
 import { standingOf } from "./opencode-standing.mjs";
 import { admit as admitChange, fold as foldRecord, recordNote, recordSink, reconcile, nextVoid, reasonFor, provenance, refusalsFor } from "./opencode-record.mjs";
 import * as eot from "./opencode-eot.mjs";
-import { mark as markNote, claim as claimItem, done as doneItem, read as readNotes, noteFor, stateFor, turnsFile, turnsOf, projectKey, projectRoot, plans as workPlans } from "./opencode-worknotes.mjs";
+import { mark as markNote, claim as claimItem, done as doneItem, read as readNotes, noteFor, stateFor, turnsFile, writeTurnsFile, turnsOf, root as notesRoot, projectKey, projectRoot, plans as workPlans } from "./opencode-worknotes.mjs";
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
@@ -97,7 +100,7 @@ import { spawnSync, execFileSync } from "node:child_process";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { lookNote, projectHistory } from "./opencode-context.mjs";
 import { recordTurnsToWeft } from "./opencode-weft-record.mjs";
-import { findInWeft } from "./opencode-weft-find.mjs";
+import { findInWeft, findInWeftSemantic } from "./opencode-weft-find.mjs";
 import { archonNote } from "./opencode-archons.mjs";
 import { memoryNote } from "./opencode-memory.mjs";
 import { blocks as recordBlocks } from "./opencode-record.mjs";
@@ -118,6 +121,21 @@ const STANDING = makeStandingCube({ operators: cube });
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const STATE = process.env.FOLD_OPENCODE_STATE ?? path.join(HERE, "state", "opencode");
+
+// THE MECHANICAL FOLD — penelope/organs/fold-note.mjs, the shared capacity every fold-suite surface uses (it folds
+// a session's turns to a bounded note: threads + derivation). Reached lazily and failing open: a missing sibling is
+// a typed gap (an empty note), never a broken turn. The door is where the surfaces meet, so it is wired here.
+let _foldNote = null;
+async function foldNoteOf(turns, ask, opts) {
+  if (_foldNote === null) {
+    try {
+      _foldNote = (await import(path.resolve(HERE, "..", "penelope", "organs", "fold-note.mjs"))).foldNote;
+    } catch {
+      _foldNote = false;
+    }
+  }
+  return _foldNote ? _foldNote(turns, ask, opts) : "";
+}
 const RECORD = path.join(STATE, "record.jsonl");
 const LEDGER = path.join(STATE, "savings.json");
 // The record also rides to the account's Matrix room as EODB operators (fold-matrix.mjs)
@@ -1122,16 +1140,28 @@ async function commonsNote({ task, agent, ask }, { prosify = null } = {}) {
   let held = [], conflicts = [], contextualized = 0;
   try {
     const { projectPerspectives, perspectiveOperation, divergence, BASIS, STANCE } = await import("./native/kernel/perspective.js");
-    const ops = picked.map((e) => perspectiveOperation({
-      holder: `holder:${e.holder}`, claim: String(e.a).replace(/\s+/g, " ").slice(0, 160) || e.q,
-      stance: STANCE.HOLDS, basis: BASIS.ASSERTED, witness: e.id,
-    }));
+    // A flat negation is a refusal of the same claim, not a different claim: the claim is keyed on its content stems
+    // (negation words and auxiliaries removed), the stance is REFUSES when the sentence carries a received negation word.
+    const { NEGATION_WORDS } = await import("./native/adapters/text/priors.js");
+    const AUX = new Set(["do", "does", "did", "is", "are", "was", "were", "will", "would", "can", "could", "should", "has", "have", "had", "the", "a", "an"]);
+    const toks = (s) => String(s).toLowerCase().replace(/n't\b/g, " not").match(/[a-z0-9_]+/g) ?? [];
+    const negated = (s) => toks(s).some((w) => NEGATION_WORDS.has(w) || NEGATION_WORDS.has(`${w}n't`));
+    const claimKey = (s) => toks(s).filter((w) => w.length > 2 && !AUX.has(w) && !NEGATION_WORDS.has(w) && w !== "not").map((w) => w.slice(0, 4)).join(" ");
+    const textOfKey = new Map();
+    const ops = picked.map((e) => {
+      const text = String(e.a).replace(/\s+/g, " ").slice(0, 160) || e.q;
+      if (!textOfKey.has(claimKey(text) || text)) textOfKey.set(claimKey(text) || text, text);
+      return perspectiveOperation({
+        holder: `holder:${e.holder}`, claim: claimKey(text) || text, claimText: text,
+        stance: negated(text) ? STANCE.REFUSES : STANCE.HOLDS, basis: BASIS.ASSERTED, witness: e.id,
+      });
+    });
     const view = projectPerspectives(ops.map((op, seq) => ({ ...op, seq })));
     held = picked.map((e) => ({ holder: e.holder, q: e.q, id: e.id }));
     const holders = [...new Set(picked.map((e) => e.holder))];
     for (let i = 0; i < holders.length; i++) for (let j = i + 1; j < holders.length; j++) {
       const d = divergence(view, `holder:${holders[i]}`, `holder:${holders[j]}`);
-      for (const c of d?.conflicting ?? []) conflicts.push({ a: holders[i], b: holders[j], claim: c.claim });
+      for (const c of d?.conflicting ?? []) conflicts.push({ a: holders[i], b: holders[j], claim: textOfKey.get(c.claim) ?? c.claim });
     }
   } catch { held = picked.map((e) => ({ holder: e.holder, q: e.q, id: e.id })); }
   try {
@@ -1198,24 +1228,63 @@ function writeTurns({ task, agent, turns }) {
   if (!file || !turns.length) return null;
   try {
     fs.mkdirSync(path.dirname(file), { recursive: true });
-    const sections = turns.map((t) => `## turn ${t.n}\n\nask: ${t.ask}\n${t.grounds?.length ? `tools: ${t.grounds.join(", ")}\n` : ""}\n${t.answer || "(no text reply)"}\n`);
-    fs.writeFileSync(file, `# turns ${agent}\n\n${sections.join("\n")}`);
+    writeTurnsFile({ file, agent, turns });
     try { recordTurnsToWeft({ task, agent, turns, file }); } catch { /* the weft store never blocks a turn */ }
     return file;
   } catch { return null; }
 }
 
+// ── the cost gate's door side ────────────────────────────────────────────────────────────────────────────
+const gateTracker = makeGateTracker({ ttlMs: Number(process.env.FOLD_CACHE_TTL_MS ?? 300_000), defaultCalls: Number(process.env.FOLD_GATE_CALLS ?? 4) });
+function costGateFor({ body, agent, task, out, now = Date.now() }) {
+  if (process.env.FOLD_COST_GATE === "0" || out.uncut || !Array.isArray(body.turns) || !body.turns.length) return null;
+  const seen = gateTracker.observe({ session: agent, ask: String(body.ask ?? ""), now });
+  // later calls of the ask keep the arm the first call took: switching mid-ask rewrites the prefix call one wrote
+  if (!seen.first && seen.arm) return { decided: true, fire: seen.arm === "cut", arm: seen.arm, basis: "reused: the ask's first call decided", margin: null };
+  const d = breakEven({
+    removedChars: body.keptOutChars, noteChars: String(out.note ?? "").length, remainingCalls: seen.remainingCalls,
+    priceIn: body.priceIn, priceCacheRead: body.priceCacheRead, priceCacheWrite: body.priceCacheWrite, cold: seen.cold, lastArm: seen.lastArm,
+  });
+  gateTracker.settle({ session: agent, arm: d.arm });
+  try {
+    eot.append({ task, agent, stage: "reason", detail: { op: "COST_GATE", by: "khora:opencode-cost-gate", arm: d.arm, fire: d.fire, decided: d.decided, margin: d.margin ?? null, costKeep: d.costKeep ?? null, costCut: d.costCut ?? null, inputs: { ...d.inputs, callsSource: seen.callsSource }, basis: d.basis } });
+  } catch { /* the log never blocks a turn */ }
+  return d;
+}
+
 async function onSurf(body) {
   const turns = Array.isArray(body.turns) ? body.turns : [];
-  const out = surfLadder({ ask: String(body.ask ?? ""), turns });
+  // SEMANTIC FALLBACK: only when the ask shares no term with the old turns (a synonym cue). The embedder is asked over the
+  // turns' own vocabulary; down or slow, the ladder is built lexically exactly as before.
+  let extraTerms = [];
+  if (semanticOn() && turns.length) {
+    const WORDS = /[\p{L}\p{N}_]{4,}/gu, SENT = /[^.!?\n]+[.!?]?/g;
+    // each word with the sentence it was said in: a sentence carries what the work said about the word, a bare word almost nothing
+    const vocab = new Map(), known = new Set();
+    for (const t of turns) for (const text of `${t.ask ?? ""}. ${t.answer ?? ""}`.match(SENT) ?? []) {
+      const s = text.trim();
+      for (const w of s.toLowerCase().match(WORDS) ?? []) { known.add(w); if (s.length > 12 && vocab.size < 600 && !vocab.has(w)) vocab.set(w, s); }
+    }
+    const askWords = new Set(String(body.ask ?? "").toLowerCase().match(WORDS) ?? []);
+    // only a TRUE lexical miss (no ask word appears anywhere in the history) asks the embedder
+    if (askWords.size && ![...askWords].some((w) => known.has(w))) extraTerms = (await semanticTerms({ ask: String(body.ask ?? ""), vocab: [...vocab].map(([term, text]) => ({ term, text })) })).terms;
+  }
+  let out = surfLadder({ ask: String(body.ask ?? ""), turns, extraTerms });
   const agent = String(body.sessionID ?? "");
   const task = taskFor(body, agent);
   writeTurns({ task, agent, turns });
+  // THE COST GATE (opencode-cost-gate.mjs): a cut rewrites the head of the request and burns the provider's
+  // cached prefix, so it fires only when the tokens it keeps out of the remaining calls cost more than the cache
+  // it throws away. Decided once per ask (the arm is reused for the ask's later calls), logged as an EOT event.
+  // Not decidable (no prices, no measured chars) = the old behaviour, disclosed. FOLD_COST_GATE=0 turns it off.
+  const gate = costGateFor({ body, agent, task, out });
+  if (gate && !gate.fire) out = { note: "", rungs: [], chars: 0, mode: out.mode, uncut: true, gated: true };
+  if (gate) out.gate = { arm: gate.arm, fire: gate.fire, decided: gate.decided, margin: gate.margin ?? null, basis: gate.basis };
   // THE SURF CUT, ledgered. The client measures the chars its own cut kept out of THIS request (the
   // older turns it spliced away) and reports them, so the savings ledger and the top-right tally
   // record the real reduction, not only the title calls. Counted like a Houdini drop (onContext);
   // GROSS per request, disclosed as an estimate, never net of what the model then re-opens.
-  const kept = Number(body.keptOutChars);
+  const kept = out.gated ? 0 : Number(body.keptOutChars);
   if (Number.isFinite(kept) && kept > 0) {
     turnFor(agent).projectedChars += kept;
     counters.projections++;
@@ -1250,12 +1319,16 @@ async function onSurf(body) {
   if (turnState.flags?.length) mech.push({ p: 1, t: `unverified in your last answer: ${turnState.flags.slice(0, 3).map((f) => `${f.kind}${f.kind === "unknown_path" ? ` ${f.detail}` : ""}`).join("; ")}`.slice(0, 200) });
   if (turnState.standing && (turnState.standing.refuted.length || turnState.standing.unresolved)) mech.push({ p: 1, t: `standing of your last answer: ${turnState.standing.licensed} licensed, ${turnState.standing.refuted.length} refuted${turnState.standing.refuted.length ? ` (${turnState.standing.refuted.join(",")})` : ""}, ${turnState.standing.unresolved} untested` });
   for (const b of blocks.slice(-2)) said.push({ p: 2, t: `block [${short8(b.agent)}]: ${String(b.text).slice(0, 110)}` });
-  said.push({ p: 3, t: String(out.note ?? "").split("\n").slice(0, 5).join("\n").slice(0, 380) });
+  if (!out.uncut) said.push({ p: 3, t: String(out.note ?? "").split("\n").slice(0, 5).join("\n").slice(0, 380) });
+  // THE MECHANICAL FOLD (penelope/organs/fold-note.mjs): the turns folded to their threads — the shared capacity
+  // every fold-suite surface uses, not a per-surface reimplementation.
+  const folded = await foldNoteOf(turns, String(body.ask ?? ""), { budget: 500, threads: 4 });
+  if (folded) said.push({ p: 3, t: folded });
   // THE WEFT: where in the raw turns the ask's own beings are (offsets into <agent>.turns.md, from the lean records).
   // A ref is an argument to SNIP, so it rides; the filesystem path it lives at does not — Gary's own rule (P55:
   // the mouth never sees an address), and a path changes no tool the model would call.
   try {
-    const w = process.env.FOLD_WEFT === "0" ? null : findInWeft({ ask: String(body.ask ?? ""), task, max: 3 });
+    const w = process.env.FOLD_WEFT === "0" ? null : await findInWeftSemantic({ ask: String(body.ask ?? ""), task, max: 3, root: notesRoot() });
     if (w?.hits.length || w?.conflicts.length) {
       const strip = (a) => a.slice(a.indexOf("/") + 1);
       const parts = [...w.hits.map((h) => strip(h.address)), ...w.conflicts.slice(0, 1).map((c) => `conflict ${c.relation.replace(/\|/g, " ")}: held ${strip(c.holds[0])} denied ${strip(c.denies[0])}`)];
@@ -1285,6 +1358,19 @@ async function onSurf(body) {
     saidKept.length ? `<fold-said>\n${saidKept.join("\n")}\n</fold-said>` : "",
   ].filter(Boolean).join("\n");
   return out;
+}
+
+// TRAIL (layer 3, opencode-trail.mjs): which tool results stay verbatim and which become opaque handles. The client sends the
+// results it holds (id, key = what each is about, step) and how long the session has been idle; the door applies the COST GATE
+// (compaction rewrites the cached prefix, so only when the cache is cold or the prompt is near its window) and the decayed-trail
+// plan. It holds no bytes: the client keeps them and resolves a handle itself. FOLD_TRAIL=1 turns it on; anything else answers go:false.
+function onTrail(body) {
+  if (!trailEnabled()) return { go: false, why: "off" };
+  const results = (Array.isArray(body.results) ? body.results : []).filter((r) => r && typeof r.id === "string" && typeof r.key === "string" && Number.isFinite(r.step)).slice(-2000);
+  const gate = trailGate({ idleMs: Number(body.idleMs) || 0, tokens: Number(body.tokens) || 0, window: Number(body.window) || 200_000 });
+  if (!gate.go || !results.length) return { go: false, why: gate.why };
+  const p = trailPlan({ results, already: new Set((Array.isArray(body.already) ? body.already : []).map(String)) });
+  return { go: true, why: gate.why, keep: [...p.keep], point: Object.fromEntries(p.point) };
 }
 
 // SNIP: the model composes by reference; the door returns the verbatim bytes and their provenance.
@@ -1536,6 +1622,7 @@ export async function answer(body, opts = {}) {
     case "nextVoid": return onNextVoid(body);
     case "reason": return onReason(body);
     case "prompt": return onPrompt(body);
+    case "trail": return onTrail(body);
     case "event": return onEvent(body);
     case "perceive": return onPerceive(body);
     case "shadow": return onShadow(body);
@@ -1715,7 +1802,7 @@ export async function route(req, res, { log = () => {} } = {}) {
   if (url !== "/v1/hooks/opencode") return false;
   if (req.method === "GET") {
     res.writeHead(200, { "content-type": "application/json" });
-    res.end(JSON.stringify({ door: "opencode", priors: seedStatus(), senses: huntOrgans({ stateDir: STATE }), events: ["context", "surf", "mark", "claim", "done", "notes", "admit", "record", "provenance", "snip", "swarm", "ground", "nextVoid", "chase", "title", "event", "prompt", "perceive", "draft", "act", "memory", "refs", "system"] }));
+    res.end(JSON.stringify({ door: "opencode", priors: seedStatus(), senses: huntOrgans({ stateDir: STATE }), events: ["context", "surf", "mark", "claim", "done", "notes", "admit", "record", "provenance", "snip", "swarm", "ground", "nextVoid", "chase", "title", "event", "prompt", "trail", "perceive", "draft", "act", "memory", "refs", "system"] }));
     return true;
   }
   if (req.method !== "POST") return false;
