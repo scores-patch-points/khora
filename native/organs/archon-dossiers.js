@@ -2,7 +2,7 @@
 // Do not edit. Edit the dossier and re-export. This is AntiStrauss's disclosure data: for each archon, the verdict on whether our use
 // matches what the author argued, and every place we bend, narrow or invent beyond them (ours vs theirs). A credit line that leaves these out
 // lets a name stand in for an argument it does not make. Dossier digest binds this file to its sources.
-export const ARCHON_DOSSIERS_DIGEST = "cd89d7e292bfca2a20a13e4b447606450970271c4412bc55122b9a40be98bc3a";
+export const ARCHON_DOSSIERS_DIGEST = "065813f04ee279e19d35e0b9185e25e4cde83f074d2590512457cb5ce29de41f";
 export const ARCHON_DOSSIERS = Object.freeze({
  "abhinavagupta": {
   "standing": "verified",
@@ -432,6 +432,30 @@ export const ARCHON_DOSSIERS = Object.freeze({
   ],
   "noBendReason": null
  },
+ "champollion": {
+  "standing": "verified",
+  "verdict": "partial",
+  "creditAsScholarship": true,
+  "disclosure": "By our reading, not the author's own claim. re-scoped: the UDHR parallel provides content to verify (paragraph alignment, proposition presence). / theirs: the Rosetta stone was a grid of POSITIONS and rigid proper-name pins, never content; Greek on the stone was n… | affirmed: proper names bind by recurrence and company within the known grid (the case-free cast; th… / theirs: Ptolemy and Cleopatra pinned the phonetic system by their recurrence across the cartouche — names are fixed p…",
+  "bends": [
+   {
+    "id": "rosetta-as-grid-not-content",
+    "kind": "re-scoped",
+    "ours": "the UDHR parallel provides content to verify (paragraph alignment, proposition presence).",
+    "theirs": "the Rosetta stone was a grid of POSITIONS and rigid proper-name pins, never content; Greek on the stone was not 'the meaning' but the coordinate system."
+   },
+   {
+    "id": "names-as-pins",
+    "kind": "affirmed",
+    "ours": "proper names bind by recurrence and company within the known grid (the case-free cast; the seat before the verb).",
+    "theirs": "Ptolemy and Cleopatra pinned the phonetic system by their recurrence across the cartouche — names are fixed points, not dictionary lookups."
+   }
+  ],
+  "snips": [
+   "eo-teachings/manifest/champollion-linguistic-decipherment.json"
+  ],
+  "noBendReason": null
+ },
  "chomsky": {
   "standing": "deferred",
   "verdict": "partial",
@@ -712,6 +736,40 @@ export const ARCHON_DOSSIERS = Object.freeze({
   "snips": [
    "eo-teachings/manifest/goffman-deferred.json"
   ],
+  "noBendReason": null
+ },
+ "grasse": {
+  "standing": "verified",
+  "verdict": "partial",
+  "creditAsScholarship": true,
+  "disclosure": "By our reading, not the author's own claim. narrowed: Compendium role: the medium's append-only per-writer marks, atomic O_EXCL claims, TTL dec… / theirs: None of that machinery is in Grassé's work. Those are engineering choices with their own ancestors - one writ… | re-scoped: Role/credit phrasing that 'no agent messages another' / 'the environment is the message'. / theirs: Stigmergy is INDIRECT coordination, not the total absence of signals; Grassé's termites still sense nestmates…",
+  "bends": [
+   {
+    "id": "mechanism-is-not-his",
+    "kind": "narrowed",
+    "ours": "Compendium role: the medium's append-only per-writer marks, atomic O_EXCL claims, TTL decay and done-is-final.",
+    "theirs": "None of that machinery is in Grassé's work. Those are engineering choices with their own ancestors - one writer owns its own file (Bernstein's Maildir) and leases that lapse when a holder dies (Gray & Cheriton). Grassé supplies the picture (the work is the me…"
+   },
+   {
+    "id": "no-communication-is-our-gloss",
+    "kind": "re-scoped",
+    "ours": "Role/credit phrasing that 'no agent messages another' / 'the environment is the message'.",
+    "theirs": "Stigmergy is INDIRECT coordination, not the total absence of signals; Grassé's termites still sense nestmates and deposits directly. Our 'no talking' is the agent-level reading of his indirect mechanism, not his sentence."
+   },
+   {
+    "id": "decay-rate-not-his",
+    "kind": "decorative",
+    "ours": "The 15-minute claim TTL and the kernel's exponential evaporation are presented under the stigmergy image.",
+    "theirs": "Grassé specified no decay rate. Making evaporation a tunable parameter is Dorigo's later move (ant-colony optimization); our TTL is a chosen default, not a number taken from the termites."
+   },
+   {
+    "id": "scope",
+    "kind": "re-scoped",
+    "ours": "A task directory shared by coding agents across a repository.",
+    "theirs": "Grassé's object is termite nest construction. Applying 'the structure coordinates' to a filesystem of marks is a generalization his paper does not make."
+   }
+  ],
+  "snips": [],
   "noBendReason": null
  },
  "houdini": {

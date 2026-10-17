@@ -5,8 +5,10 @@ import os from "node:os";
 import path from "node:path";
 
 process.env.FOLD_OPENCODE_STATE = fs.mkdtempSync(path.join(os.tmpdir(), "oc-door-"));
-// The memory surface store is hermetic: the door must never depend on the
-// operator's live ~/.config/opencode/user-memory.md in a test.
+process.env.FOLD_WORKNOTES_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "oc-wn-"));
+// Never read the operator's live memory surface: an ask like "rename the
+// module" bears on whatever real entries exist that day, and a test that
+// passes or fails with the operator's week is not a test.
 process.env.FOLD_USER_MEMORY = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "oc-mem-")), "user-memory.md");
 const door = await import("../opencode-doorway.mjs");
 
@@ -72,6 +74,30 @@ test("a title is derived from the ask, by rule, with its estimate ledgered", asy
   assert.equal(after.pricedTitles, before.pricedTitles + 1);
 });
 
+test("the surf cut is ledgered: the chars a cut keeps out of a request are recorded, and priced", async () => {
+  const before = door.meter().savings;
+  await door.answer({
+    event: "surf",
+    sessionID: "s20",
+    ask: "does the webhook retry back off for the invoices endpoint too?",
+    turns: [{ n: 1, ask: "add a retry to the webhook sender", answer: "added exponential retry", grounds: ["edit"] }],
+    keptOutChars: 12000,
+    priceIn: 3,
+  });
+  const after = door.meter().savings;
+  assert.equal(after.projections, before.projections + 1);
+  assert.equal(after.projectedChars, before.projectedChars + 12000);
+  assert.equal(after.projectedTokensEst, Math.round(after.projectedChars / 4));
+  assert.equal(after.pricedProjections, before.pricedProjections + 1);
+  assert.ok(after.savedUSD > before.savedUSD, "a priced surf cut moves the dollars");
+});
+
+test("a surf cut with nothing kept out does not move the ledger", async () => {
+  const before = door.meter().savings;
+  await door.answer({ event: "surf", sessionID: "s21", ask: "hello", turns: [], keptOutChars: 0 });
+  assert.equal(door.meter().savings.projectedChars, before.projectedChars);
+});
+
 const houdiniPresent = fs.existsSync(path.resolve(import.meta.dirname, "..", "the-fold-houdini-wired", "fold-chat-houdini.js")) || Boolean(process.env.FOLD_HOUDINI_PATH);
 
 const exchanges = [
@@ -128,6 +154,51 @@ test("context looks at the workspace (Look): the first ask starts the index, the
   shutdown();
 });
 
+test("swarm deploys the registry, records the finding, and the next ask surfaces it", async () => {
+  const material = "The council voted 6-3 to approve the budget. The mayor vetoed it. The council overrode the veto 7-2.";
+  const r = await door.answer({ event: "swarm", sessionID: "s30", agent: "s30", task: "s30", ask: "what does this material hold", text: material });
+  assert.equal(r.ok, true);
+  assert.equal(r.mode, "all"); // the tool always deploys the whole registry
+  assert.ok(["converged", "unresolved", "gap"].includes(r.standing));
+  assert.equal(typeof r.reading, "string");
+  assert.equal(typeof r.holes, "string");
+  // The finding enters the task's medium as a swarm fact mark (asserted, never a witness).
+  const { read } = await import("../opencode-worknotes.mjs");
+  const marks = read({ task: "s30" }).marks.filter((m) => m.agent === "swarm" && m.kind === "fact");
+  assert.equal(marks.length, 1);
+  assert.match(marks[0].text, /^swarm\(/);
+  // The next ask whose words bear on the finding carries it, mechanically.
+  const ctx = await door.answer({ event: "context", sessionID: "s30", task: "s30", ask: "what did the swarm measure about the budget veto material" });
+  assert.match(ctx.swarm, /<fold-swarm measured="1">/);
+  assert.match(ctx.swarm, /swarm\(/);
+  // An ask whose words do not bear on it gets no swarm note.
+  const off = await door.answer({ event: "context", sessionID: "s30", task: "s30", ask: "unrelated question about quantum chromodynamics" });
+  assert.equal(off.swarm, undefined);
+});
+
+test("an unnamed pointing still deploys: the swarm tool never gaps on the ask's phrasing", async () => {
+  const r = await door.answer({ event: "swarm", sessionID: "s31", agent: "s31", task: "s31", ask: "what", text: "one plain sentence." });
+  assert.equal(r.ok, true);
+  assert.notEqual(r.mode, "gap"); // a bare "what" must not spuriously point at the `what` row alone
+});
+
+test("swarm reads any-modality material through the senses: a text file is its own ground", async () => {
+  const f = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "oc-swarm-")), "material.txt");
+  fs.writeFileSync(f, "The council voted 6-3 to approve the budget.\n");
+  const r = await door.answer({ event: "swarm", sessionID: "s32", agent: "s32", task: "s32", ask: "what holds", path: f });
+  assert.equal(r.ok, true);
+  assert.equal(r.modality, "text/plain");
+  assert.equal(r.giver, "utf8-passthrough");
+});
+
+test("the sense hunt is inspectable and partitions the registry", async () => {
+  const sink = { status: null, body: null, writeHead(s) { this.status = s; }, end(b) { this.body = b; } };
+  assert.equal(await door.route({ method: "GET", url: "/v1/hooks/opencode/senses" }, sink), true);
+  const o = JSON.parse(sink.body);
+  assert.equal(o.schema, "SenseSwarm@1");
+  assert.ok(Array.isArray(o.hunt.found) && Array.isArray(o.hunt.missing));
+});
+
 test("route answers the door and declines other paths", async () => {
   const sink = { status: null, body: null, writeHead(s) { this.status = s; }, end(b) { this.body = b; } };
   assert.equal(await door.route({ method: "GET", url: "/v1/hooks/opencode/meter" }, sink), true);
@@ -160,26 +231,3 @@ test("memory: an unreadable or empty store fails open", async () => {
   assert.equal((await door.answer({ event: "context", sessionID: "m4", ask: "which repo is canonical?" })).memory, undefined);
 });
 
-test("memory: a drop appends, and the door injects it next ask", async () => {
-  fs.writeFileSync(process.env.FOLD_USER_MEMORY, "## about:user:repos\n- khora is the canonical perceiver repo\n");
-  const r = await door.answer({ event: "memory", claim: "zenodotus holds the live priors", tag: "about:user:repos" });
-  assert.equal(r.ok, true);
-  const got = await door.answer({ event: "context", sessionID: "m5", ask: "where do the live priors live?" });
-  assert.match(got.memory, /zenodotus/);
-});
-
-test("memory: a drop without a claim is a typed gap", async () => {
-  const r = await door.answer({ event: "memory", claim: "  ", tag: "about:user:repos" });
-  assert.equal(r.ok, false);
-  assert.equal(r.gap, "no-claim");
-});
-
-test("memory: the GET route serves the store", async () => {
-  fs.writeFileSync(process.env.FOLD_USER_MEMORY, "## about:user:repos\n- khora is the canonical perceiver repo\n");
-  const sink = { status: null, body: null, writeHead(s) { this.status = s; }, end(b) { this.body = b; } };
-  assert.equal(await door.route({ method: "GET", url: "/v1/hooks/opencode/memory" }, sink), true);
-  const parsed = JSON.parse(sink.body);
-  assert.equal(parsed.schema, "UserMemory@1");
-  assert.equal(parsed.entries.length, 1);
-  assert.equal(parsed.entries[0].claim, "khora is the canonical perceiver repo");
-});

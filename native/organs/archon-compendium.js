@@ -976,6 +976,18 @@ export const ARCHONS = Object.freeze([
     credit: "KleeneUp — our name for a rule: a pattern that generalizes is a shape, a closed list is a table. Named for the Kleene star; the rule is ours, not Kleene's.",
     topics: ["regex", "regular expression", "pattern", "table", "lookup", "kleene", "star", "tokenizer", "alternation", "shape", "list", "code", "inspection"],
   },
+  // ── COORDINATION, MEDIUM ─────────────────────────────────────────────────
+  {
+    handle: "grasse",
+    name: "Pierre-Paul Grassé",
+    organ: "opencode-worknotes.mjs",
+    role: "the stigmergic log — indirect coordination through the work itself: agents leave marks in a shared medium (append-only, one writer per file, atomic claims that decay), read what others left, and never message one another",
+    pdStatus: "fair-use",
+    work: "The French zoologist who coined 'stigmergy' (1959) while studying termite nests, from the Greek stigma (mark) and ergon (work): the structure being built IS the coordination — a builder is triggered and oriented by the existing work (a deposit, a heap, a half-built wall), never by a plan or a foreman. A deposit persists and is read by the next builder; the mound is the message. Stated narrowly, of termites; the medium, marks and decay here are our engineering (see archon dossier).",
+    source: "P.-P. Grassé, 'La reconstruction du nid et les coordinations interindividuelles... La théorie de la stigmergie', Insectes Sociaux 6 (1959); the term persists in swarm robotics and ant-colony optimization",
+    credit: "Pierre-Paul Grassé — he coined stigmergy (stigma + ergon, mark + work): the work itself is the message, and a builder builds where the last one left off (1959).",
+    topics: ["stigmerg", "pheromone", "termite", "mound", "colony", "swarm", "deposit", "trail", "evaporat", "reinforce", "coordination", "medium", "environment", "worknotes", "shared medium"],
+  },
 ]);
 
 // ── HELPERS ────────────────────────────────────────────────────────────────

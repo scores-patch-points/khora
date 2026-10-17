@@ -80,6 +80,16 @@
 //              files for a different meaning must have each file's own
 //              header say so. Checked mechanically against hl.js's real
 //              values and involution, never asserted. (live)
+//   grasse     the stigmergic log — indirect coordination through the work
+//              itself: `opencode-worknotes.mjs`'s medium of append-only
+//              per-agent marks, atomic O_EXCL claims (TTL decay, done final),
+//              one writer per file, the merged view injected as a note. No
+//              agent messages another; the environment is the message. After
+//              Pierre-Paul Grassé, who coined stigmergy (1959). Beside
+//              wilson (kernel/stigmergy.js, the pheromone routes) and atta
+//              (kernel/activation.js, decay): those are the kernel trails,
+//              this is the opencode medium. Ratified by the person
+//              2026-10-16. (built — the medium is tested; no live colony yet)
 //
 // Amendment: an archon is added or removed by proposal — ratified by the
 // person, checked by the chorus — never by a session alone.

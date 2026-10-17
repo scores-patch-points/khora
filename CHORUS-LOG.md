@@ -1,5 +1,15 @@
 # Chorus log — append-only, one entry per lint run
 
+## 2026-10-16 — mint the stigmergic-log archon (Grassé) (branch `feat/draft-standing-and-penelope-prosifier`, working diff)
+
+fast: 9 files · affected tests 103 pass / 18 fail (all pre-existing FALSIFIER arms of the untracked `opencode-stigmergy-*` suite — the mint's own pin `tests/opencode-archons.test.mjs` 5/5 pass) · law: ok (pre-existing dup-header WARN S17/S96; no P/S citations added by this diff)
+
+**Tier 1 FAIL is pre-existing, disclosed:** the 18 red tests are the operator's in-progress falsifier suite, whose own header states a red test is a FALSIFIED claim, not a flake; they are unrelated to this diff. The diff's only source edit with a suite is a header comment in `opencode-worknotes.mjs`, whose own tests pass 6/6. The mint rides the register's amendment law (solon.js: "an archon is added or removed by proposal — ratified by the person, checked by the chorus"), ratified by the person 2026-10-16.
+
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Ostrom | scope of credit | native/organs/archon-dossiers.js (grasse `scope` bend) | noted | the credit's scope stretch (termite nest → a filesystem of marks) is disclosed as a bend (ours vs theirs), never hidden |
+| Simon/Chekhov | a real mechanism must not ship unwired | tests/opencode-archons.test.mjs | fixed | the mint is pinned: a stigmergy ask surfaces grassé through the doorway note and carries its dossier disclosure |
 ## 2026-10-16 — eventDetail for the panel, and a home directory is not a project (branch `feat/eot-panel-byte-views`, working diff)
 
 fast: 4 files · affected tests 51/51 pass · law: ok (pre-existing dup-header WARN S17/S96 in native/READING-SPEC.md, not this diff)

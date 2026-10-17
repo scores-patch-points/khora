@@ -1,0 +1,181 @@
+#!/usr/bin/env python3
+"""cube-tools sync: cube-tools.json is the one home; the two uv projects are generated from it.
+
+usage:  python3 sync.py            validate the JSON, then write py312/ and py313-cltk/ project files
+        python3 sync.py --check    validate, and exit 1 if any generated file differs from the JSON
+
+Optional per-tool keys: spec (version bound such as "<2.4"), marker (PEP 508, such as "sys_platform == 'darwin'"), note,
+ci (true marks an assay witness the CI job installs — rendered as a small `ci` group beside the domain groups).
+
+stdlib only; installs nothing. After a change, run sync.py, then
+    uv lock --project py312 --no-python-downloads
+    uv lock --project py313-cltk --no-python-downloads
+"""
+import json
+import re
+import sys
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+OPS = ["NUL", "SIG", "INS", "SEG", "CON", "SYN", "DEF", "EVA", "REC"]  # kernel/cube.js OPERATOR_CHAIN
+GRAINS = ["Ground", "Figure", "Pattern"]
+DOMAIN = {"NUL": "existence", "SIG": "existence", "INS": "existence",
+          "SEG": "structure", "CON": "structure", "SYN": "structure",
+          "DEF": "interpretation", "EVA": "interpretation", "REC": "interpretation"}
+GROUPS = ["existence", "structure", "interpretation"]
+ROLES = {"move", "null", "witness"}
+FAMILIES = {"perturbation", "prediction", "deduction", "substrate"}
+SOURCES = {"pypi", "stdlib", "in-house"}
+ENVS = {
+    "py312": {"dir": "py312", "name": "cube-tools-py312", "requires": ">=3.12,<3.13", "pin": "3.12"},
+    "py313": {"dir": "py313-cltk", "name": "cube-tools-py313-cltk", "requires": ">=3.13,<3.14", "pin": "3.13"},
+}
+EXCLUDE_NEWER = "2026-10-17T00:00:00Z"
+CELL_KEYS = {"organs", "move", "null_owed", "caveat", "tools"}
+TOOL_KEYS = {"package", "source", "role", "family", "env", "spec", "marker", "use", "note", "ci"}
+
+
+def norm(name):
+    return re.sub(r"[-_.]+", "-", name).lower()
+
+
+def load():
+    with open(HERE / "cube-tools.json", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def validate(cells):
+    errs = []
+    want = [f"{op}·{g}" for op in OPS for g in GRAINS]
+    if list(cells) != want:
+        errs.append(f"keys must be the 27 cells in cube order; missing {sorted(set(want) - set(cells))}, extra {sorted(set(cells) - set(want))}")
+    groups = {e: {g: {} for g in GROUPS} for e in ENVS}  # env -> group -> normalized name -> requirement string
+    ci = {e: {} for e in ENVS}  # env -> normalized name -> requirement (the small CI group)
+    for key, c in cells.items():
+        op = key.split("·")[0]
+        extra = set(c) - CELL_KEYS
+        if extra:
+            errs.append(f"{key}: unknown cell keys {sorted(extra)}")
+        for k in ("organs", "move", "null_owed", "tools"):
+            if not c.get(k):
+                errs.append(f"{key}: missing or empty '{k}'")
+        seen = set()
+        for tool in c.get("tools", []):
+            where = f"{key}/{tool.get('package')}"
+            extra = set(tool) - TOOL_KEYS
+            if extra:
+                errs.append(f"{where}: unknown tool keys {sorted(extra)}")
+            for k in ("package", "source", "role", "family", "env", "use"):
+                if k not in tool:
+                    errs.append(f"{where}: missing '{k}'")
+            if tool.get("role") not in ROLES:
+                errs.append(f"{where}: role {tool.get('role')!r} not in {sorted(ROLES)}")
+            if tool.get("family") not in FAMILIES:
+                errs.append(f"{where}: family {tool.get('family')!r} not in {sorted(FAMILIES)}")
+            if tool.get("source") not in SOURCES:
+                errs.append(f"{where}: source {tool.get('source')!r} not in {sorted(SOURCES)}")
+            sig = (tool.get("package"), tool.get("use"))
+            if sig in seen:
+                errs.append(f"{where}: duplicate entry in one cell")
+            seen.add(sig)
+            if "ci" in tool and not isinstance(tool["ci"], bool):
+                errs.append(f"{where}: ci must be true or absent")
+            if tool.get("source") == "pypi":
+                env = tool.get("env")
+                if env not in ENVS:
+                    errs.append(f"{where}: env {env!r} not in {sorted(ENVS)}")
+                    continue
+                req = tool["package"] + tool.get("spec", "") + (f"; {tool['marker']}" if tool.get("marker") else "")
+                slot = groups[env][DOMAIN[op]]
+                n = norm(tool["package"])
+                if n in slot and slot[n] != req:
+                    errs.append(f"{where}: {req!r} disagrees with {slot[n]!r} in group {DOMAIN[op]}")
+                slot[n] = req
+                if tool.get("ci") is True:
+                    ci[env][n] = req
+            elif tool.get("env") is not None:
+                errs.append(f"{where}: env must be null for source {tool.get('source')}")
+    return errs, groups, ci
+
+
+def render(env, groups, ci):
+    e = ENVS[env]
+    lines = [
+        "# GENERATED by ../sync.py from ../cube-tools.json. Edit the JSON and run sync.py; do not edit by hand.",
+        "[project]",
+        f'name = "{e["name"]}"',
+        'version = "0.0.0"',
+        f'description = "Python movers, nulls and witnesses for the 27-cell cube ({env}); see ../cube-tools.json"',
+        f'requires-python = "{e["requires"]}"',
+        "",
+        "[dependency-groups]",
+    ]
+    for g in GROUPS:
+        reqs = [groups[env][g][k] for k in sorted(groups[env][g])]
+        if reqs:
+            lines.append(f"{g} = [")
+            lines += [f'    "{r}",' for r in reqs]
+            lines.append("]")
+    # The small CI group: the assay's preregistered control witnesses, only.
+    # Nothing installs unless a group is named (default-groups = []), so this
+    # group is invisible to every operator sync and reachable by name in CI.
+    if ci:
+        lines.append("ci = [")
+        lines += [f'    "{ci[k]}",' for k in sorted(ci)]
+        lines.append("]")
+    lines += [
+        "",
+        "[tool.uv]",
+        "package = false",
+        "# never run an sdist build script at lock or sync time",
+        "no-build = true",
+        "# nothing is installed unless a group is named: uv sync --group structure",
+        "default-groups = []",
+        "# freezes the resolution date so a re-lock reproduces this lock",
+        f'exclude-newer = "{EXCLUDE_NEWER}"',
+        "# macOS (this machine) and Linux (CI); no Windows",
+        "environments = [",
+        "    \"sys_platform == 'darwin'\",",
+        "    \"sys_platform == 'linux'\",",
+        "]",
+        "",
+    ]
+    return "\n".join(lines)
+
+
+def main():
+    check = "--check" in sys.argv
+    cells = load()
+    errs, groups, ci = validate(cells)
+    if errs:
+        print("\n".join(errs))
+        return 1
+    drift = []
+    for env, e in ENVS.items():
+        outdir = HERE / e["dir"]
+        for name, text in (("pyproject.toml", render(env, groups, ci[env])), (".python-version", e["pin"] + "\n")):
+            path = outdir / name
+            if check:
+                if not path.exists() or path.read_text(encoding="utf-8") != text:
+                    drift.append(str(path.relative_to(HERE)))
+            else:
+                outdir.mkdir(parents=True, exist_ok=True)
+                path.write_text(text, encoding="utf-8")
+    tools = [t for c in cells.values() for t in c["tools"]]
+    no_check = [k for k, c in cells.items() if not any(t["role"] in ("null", "witness") for t in c["tools"])]
+    print(f"{len(cells)} cells, {len(tools)} tool entries, {len({norm(t['package']) for t in tools if t['source'] == 'pypi'})} PyPI packages")
+    for env in ENVS:
+        print(f"  {env}: " + ", ".join(f"{g} {len(groups[env][g])}" for g in GROUPS) + (f", ci {len(ci[env])}" if ci[env] else ""))
+    print("by role:  " + ", ".join(f"{r} {sum(t['role'] == r for t in tools)}" for r in sorted(ROLES)))
+    print("by family: " + ", ".join(f"{f} {sum(t['family'] == f for t in tools)}" for f in sorted(FAMILIES)))
+    print("cells with no null or witness tool: " + (", ".join(no_check) or "none"))
+    if check:
+        if drift:
+            print("OUT OF SYNC: " + ", ".join(drift))
+            return 1
+        print("generated files match cube-tools.json")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

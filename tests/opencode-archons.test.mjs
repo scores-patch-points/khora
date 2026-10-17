@@ -27,6 +27,16 @@ test("archonNote answers a typed gap on the null control", async () => {
   assert.equal(r.gap, "no-archon-match");
 });
 
+test("the stigmergic-log archon (Grassé) surfaces for a stigmergy ask, with its dossier", async () => {
+  const ask = "the stigmergic medium: worknotes marks, colony coordination, pheromone deposits that evaporate";
+  const r = await archonNote(ask);
+  assert.ok(r.handles?.includes("grasse"), `expected grasse in ${JSON.stringify(r.handles)}`);
+  assert.match(r.note, /grasse/);
+  const { archonOf, disclosureOf } = await import("../native/organs/archon-compendium.js");
+  assert.ok(archonOf("grasse"), "grasse must be a compendium entry");
+  assert.ok(disclosureOf("grasse")?.disclosure, "grasse must carry a dossier disclosure (the dossier gate)");
+});
+
 test("shadow (default): decided and recorded, never injected", async () => {
   const ctx = await door.answer({ event: "context", sessionID: "sh1", ask: MATCH_ASK, model: { id: "m" } });
   assert.ok(!("archons" in ctx), "shadow arm must not add an answer field");
