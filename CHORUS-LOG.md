@@ -1148,3 +1148,13 @@ fast: 1 files · 0 affected tests (no test imports the guard; CI's native-kernel
 | lens | citation | file:line | verdict | one line |
 | Simon/Chekhov | new/untested source | native/scripts/check-no-legacy-submodule.mjs | clean | the diff only adds a Set entry; the guard is exercised by CI's native-kernel gate, which this change turns green — no new module, no unwired seam |
 clean: Simon/Chekhov (the entry is data the guard itself consumes)
+
+## 2026-10-17 — the ledger checker: the answer heard against the task's turns (feat/ledger-check, staged in khora-ledger-verify)
+fast: 7 files · 41 affected tests pass · law: WARN pre-existing dup S17 S96 (READING-SPEC, own commit) · WARN cite P159 P186 P23 P3 P32 P60 (content-rules.json is one minified line — every entry's citations ride the diff) + II.9 (the reason-gate entry; the constitution text lives outside this checkout — carried in the commit)
+| lens | citation | file:line | verdict | one line |
+| Greenberg | Latin-only sentence split + SVO fields | opencode-ledger-check.mjs:33,60 | noted | the English text face's scope, now declared in the header; the ledger beneath is medium-blind |
+| Simon/Chekhov | new modules | opencode-ledger-check.{mjs,test}, opencode-ledger-fold.{mjs,test} | noted | all four are test-imported; scripts/opencode-ledger-shadow.mjs is a manual measurement tool, no test by design |
+| Feynman | caps, skipped texts, swallowed errors | opencode-ledger-check.mjs:24,73; opencode-ledger-fold.mjs:23 | noted | caps disclosed (FOLD_LEDGER_TURNS/NOTE); a register gap is a typed gap, never a clean bill |
+| Marshall | law cited S69/S97/S113/II.9; P/S warnings | content-rules.json entries | noted | S69 resolves; the not-in-law WARNs are the one-line artifact + II.9 carried in the commit |
+| Kondo | diff adds no dead code | opencode-ledger-fold.mjs | noted | the fold is deliberately unwired — its gate (the 1,010-output replay) is documented in the header |
+clean: Diaconis, Holmes, Pearl, Ostrom, Frankfurt, Alexander

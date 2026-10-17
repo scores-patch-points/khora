@@ -78,6 +78,7 @@ import { standingOf } from "./opencode-standing.mjs";
 import { admit as admitChange, fold as foldRecord, recordNote, recordSink, reconcile, nextVoid, reasonFor, provenance, refusalsFor } from "./opencode-record.mjs";
 import { dreamTask } from "./opencode-dream.mjs";
 import * as eot from "./opencode-eot.mjs";
+import { checkAnswer } from "./opencode-ledger-check.mjs";
 import { mark as markNote, claim as claimItem, done as doneItem, read as readNotes, noteFor, stateFor, turnsFile, turnsOf, projectKey, projectRoot, plans as workPlans } from "./opencode-worknotes.mjs";
 import fs from "node:fs";
 import path from "node:path";
@@ -1248,7 +1249,14 @@ function onSnip(body) {
 }
 function onGround(body) {
   const agent = String(body.agent ?? body.sessionID ?? "");
-  return eot.groundCheck({ task: taskFor(body, agent), text: String(body.text ?? ""), root: body.workspace ? String(body.workspace) : null });
+  const task = taskFor(body, agent);
+  const r = eot.groundCheck({ task, text: String(body.text ?? ""), root: body.workspace ? String(body.workspace) : null });
+  // THE LEDGER CHECK, beside the lexical ground: what this answer says against what the task's own
+  // turns already heard (opencode-ledger-check.mjs) — a re-sighting is retold, a denial of a standing
+  // note is a contest. Display-only; a failed check is a typed gap, never a block.
+  let ledger = [];
+  try { ledger = checkAnswer({ turns: turnsOf({ task }), text: String(body.text ?? "") }).flags ?? []; } catch { ledger = []; }
+  return { ...r, flags: [...(r.flags ?? []), ...ledger] };
 }
 
 function onMark(body) {
