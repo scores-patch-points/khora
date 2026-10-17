@@ -114,6 +114,7 @@ import { connect as matrixConnect } from "./fold-matrix.mjs";
 import { connect as driveConnect } from "./fold-gdrive.mjs";
 import { perceiveMedia, probeBackends, PERCEIVE_VERSION } from "./khora/perceive/local.mjs";
 import { perceiveMany as senseMany, huntOrgans, organStanding } from "./senses/registry.mjs";
+import { cube as cubeEvent, cubeMap } from "./opencode-cube.mjs";
 import * as cube from "./native/kernel/cube.js";
 import { makeStandingCube, cellForFlag } from "./native/the-fold/standing-cube.js";
 // THE STANDING CUBE (native/the-fold/standing-cube.js): where a reply's claim stands, and which cell
@@ -121,6 +122,10 @@ import { makeStandingCube, cellForFlag } from "./native/the-fold/standing-cube.j
 const STANDING = makeStandingCube({ operators: cube });
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
+// Siblings (penelope, janus, Zenodotus) live beside the stack on a dev box; under launchd the
+// stack is ~/.khora and the box's siblings sit elsewhere. FOLD_SIBLINGS_DIR names where to look
+// (default: beside the stack). A missing sibling stays a typed gap (fails open), never an error.
+const SIBLINGS = process.env.FOLD_SIBLINGS_DIR ?? path.resolve(HERE, "..");
 const STATE = process.env.FOLD_OPENCODE_STATE ?? path.join(HERE, "state", "opencode");
 
 // THE MECHANICAL FOLD — penelope/organs/fold-note.mjs, the shared capacity every fold-suite surface uses (it folds
@@ -130,7 +135,7 @@ let _foldNote = null;
 async function foldNoteOf(turns, ask, opts) {
   if (_foldNote === null) {
     try {
-      _foldNote = (await import(path.resolve(HERE, "..", "penelope", "organs", "fold-note.mjs"))).foldNote;
+      _foldNote = (await import(path.join(SIBLINGS, "penelope", "organs", "fold-note.mjs"))).foldNote;
     } catch {
       _foldNote = false;
     }
@@ -193,9 +198,10 @@ const blankTokens = () => ({ input: 0, output: 0, reasoning: 0, cacheRead: 0, ca
 function turnFor(sessionID) {
   let turn = sessions.get(sessionID);
   if (!turn) {
-    turn = { sessionID, ask: "", address: null, model: null, steps: 0, tools: new Map(), answer: "", tokens: blankTokens(), cost: 0, startedAt: Date.now(), recalled: false, projectedChars: 0, system: null, look: null, project: null, title: null, archons: null, memory: null, refs: null, systemPrompt: null };
+    turn = { sessionID, ask: "", address: null, model: null, steps: 0, tools: new Map(), answer: "", tokens: blankTokens(), cost: 0, startedAt: Date.now(), touched: Date.now(), recalled: false, projectedChars: 0, system: null, look: null, project: null, title: null, archons: null, memory: null, refs: null, systemPrompt: null };
     sessions.set(sessionID, turn);
   }
+  turn.touched = Date.now();
   return turn;
 }
 
@@ -453,6 +459,18 @@ const realOf = (file) => {
   try { return fs.realpathSync(file); } catch { /* new file */ }
   try { return path.join(fs.realpathSync(path.dirname(file)), path.basename(file)); } catch { return file; }
 };
+// The fork clips a tool's input to a JSON STRING before it leaves the process (fold.ts clip), and a
+// string clipped past the cap is not parseable JSON. An object arrives only from clients that send
+// the shape raw. Parse once here — the boundary that owns the value — so every reader below sees an
+// object or null and never re-checks; a string that will not parse stays null (a typed nothing, never a guess).
+function parseToolInput(input) {
+  if (input && typeof input === "object") return input;
+  if (typeof input !== "string") return null;
+  try {
+    const parsed = JSON.parse(input);
+    return parsed && typeof parsed === "object" ? parsed : null;
+  } catch { return null; }
+}
 function traceStart(sessionID, turn, tool) {
   const name = String(tool?.name ?? "");
   tool.t0 = Date.now();
@@ -509,8 +527,10 @@ function autoClaim(sessionID, turn, tool) {
     try { return fs.realpathSync(file); } catch { /* new file */ }
     try { return path.join(fs.realpathSync(path.dirname(file)), path.basename(file)); } catch { return file; }
   })();
-  const rootDir = projectRoot(real);
-  const task = turn.task ?? projectKey(real);
+  const rootDir = projectRoot(real) ?? projectRoot(path.dirname(real));
+  // projectKey needs an existing path; a `write` creating a NEW file has none, so the git root
+  // (which rootDir already is) stands in — the claim fires from the first sight of the new path.
+  const task = turn.task ?? projectKey(real) ?? (rootDir ? projectKey(rootDir) : null);
   if (!rootDir || !task) return;
   const rel = path.relative(rootDir, real);
   if (!rel || rel.startsWith("..")) return;
@@ -612,7 +632,7 @@ function onEvent(body) {
       break;
     case "session.tool.called": {
       const tool = turn.tools.get(data.id) ?? { name: "?", input: null, ok: null };
-      tool.input = data.input;
+      tool.input = parseToolInput(data.input);
       turn.tools.set(data.id, tool);
       try { autoClaim(body.sessionID, turn, tool); } catch { /* a trace is never worth a turn */ }
       try { traceStart(body.sessionID, turn, tool); } catch { /* the log never blocks */ }
@@ -678,6 +698,17 @@ function finish(turn, endType) {
   try { if (drive.enqueue(lastRow())) drive.push().catch(() => {}); } catch { /* the record is already local */ }
 }
 
+// LIVE TTL: an in-memory turn is live only while its events arrive. A session whose server dies
+// mid-turn (restart churn, a killed process) never sends the boundary, so its turn would show in
+// the audit as "being prompted RIGHT NOW" forever. Silence past FOLD_LIVE_TTL_MS is the boundary:
+// the turn finishes as interrupted (recorded honestly), never silently dropped.
+const LIVE_TTL_MS = Number(process.env.FOLD_LIVE_TTL_MS ?? 30 * 60_000);
+function sweepLive(now = Date.now()) {
+  for (const turn of [...sessions.values()])
+    if (now - (turn.touched ?? turn.startedAt) > LIVE_TTL_MS) finish(turn, "session.execution.interrupted");
+}
+setInterval(() => { try { sweepLive(); } catch { /* never blocks */ } }, 60_000).unref?.();
+
 // ── meter ────────────────────────────────────────────────────────────────
 // Rate AND health together, never the rate alone (teacher doc §X). Health here
 // is only what is honestly knowable: how often a recalled ask still needed the
@@ -730,6 +761,7 @@ export function meter() {
 // the frontier then did with it. Read-only; nothing here is the model's own
 // words, and nothing is generated for display.
 export function audit({ limit = 20 } = {}) {
+  sweepLive();
   const rows = readRecord().filter((r) => (r.kind ?? "instance") !== "draft-lint").slice(-limit).reverse();
   return {
     door: "opencode",
@@ -1050,7 +1082,7 @@ export { loadPerceiveConfig, savePerceiveConfig, onPerceive, PERCEIVE_DEFAULTS }
 let seedCache = null;
 function seedStatus() {
   if (seedCache) return seedCache;
-  const dir = process.env.FOLD_PRIORS_DIR ?? path.resolve(HERE, "..", "janus", "priors");
+  const dir = process.env.FOLD_PRIORS_DIR ?? path.join(SIBLINGS, "janus", "priors");
   try {
     const files = fs.readdirSync(dir).filter((f) => /^udhr-.+\.lexicon\.json$/.test(f));
     const languages = files.map((f) => f.replace(/^udhr-/, "").replace(/\.lexicon\.json$/, "")).sort();
@@ -1092,7 +1124,7 @@ async function penelopeProsify(args) {
   return text;
 }
 async function penelopeWeave({ ask, ground }) {
-  const api = path.resolve(HERE, "..", "penelope", "organs", "generation", "api.mjs");
+  const api = path.join(SIBLINGS, "penelope", "organs", "generation", "api.mjs");
   if (!fs.existsSync(api)) return null;
   process.env.PENELOPE_MOUTH_URL ??= process.env.FOLD_PROSIFY_MOUTH ?? "http://127.0.0.1:11435";
   const { weave } = await import(api);
@@ -1510,6 +1542,16 @@ function swarmFindingsNote({ task, ask }) {
   ].join("\n");
 }
 
+// CUBE: the 27-address tool registry — a map that always answers, a call that
+// runs in shadow behind FOLD_CUBE=1. The handler lives in opencode-cube.mjs
+// (the opencode-surf.mjs pattern); here the door resolves the task whose
+// record and medium the finding lands on, exactly as the swarm does.
+async function onCube(body) {
+  const agent = String(body.agent ?? body.sessionID ?? "cube");
+  const task = taskFor(body, agent);
+  return cubeEvent({ body, task, agent, stateDir: STATE });
+}
+
 function onMark(body) {
   try { eot.recordMark({ task: body.task, agent: body.agent, kind: body.kind, text: body.text }); } catch { /* the log never blocks */ }
   return markNote({ task: body.task, agent: body.agent, kind: body.kind, text: body.text });
@@ -1621,6 +1663,7 @@ export async function answer(body, opts = {}) {
     case "admit": return onAdmit(body);
     case "snip": return onSnip(body);
     case "swarm": return onSwarm(body);
+    case "cube": return onCube(body);
     case "tree": return onTree(body);
     case "ground": return onGround(body);
     case "provenance": return { ok: true, ...provenance({ task: taskFor(body, String(body.agent ?? body.sessionID ?? "")) }) };
@@ -1806,10 +1849,18 @@ export async function route(req, res, { log = () => {} } = {}) {
     res.end(JSON.stringify({ schema: "SenseSwarm@1", hunt: huntOrgans({ stateDir: STATE }), standing: organStanding({ stateDir: STATE }) }, null, 2));
     return true;
   }
+  // THE CUBE, inspected: the 27-cell map — registry × locked-venv presence ×
+  // the ledger's last agreements. Read-only; the probe is bounded, and with no
+  // venv it is a typed gap disclosed in `sidecar`, never a silent absence.
+  if (url === "/v1/hooks/opencode/cube" && req.method === "GET") {
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify(cubeMap({ stateDir: STATE }), null, 2));
+    return true;
+  }
   if (url !== "/v1/hooks/opencode") return false;
   if (req.method === "GET") {
     res.writeHead(200, { "content-type": "application/json" });
-    res.end(JSON.stringify({ door: "opencode", priors: seedStatus(), senses: huntOrgans({ stateDir: STATE }), events: ["context", "surf", "mark", "claim", "done", "notes", "admit", "record", "provenance", "snip", "swarm", "ground", "nextVoid", "chase", "title", "event", "prompt", "trail", "perceive", "draft", "act", "memory", "refs", "system"] }));
+    res.end(JSON.stringify({ door: "opencode", priors: seedStatus(), senses: huntOrgans({ stateDir: STATE }), events: ["context", "surf", "mark", "claim", "done", "notes", "admit", "record", "provenance", "snip", "swarm", "cube", "ground", "nextVoid", "chase", "title", "event", "prompt", "trail", "perceive", "draft", "act", "memory", "refs", "system"] }));
     return true;
   }
   if (req.method !== "POST") return false;

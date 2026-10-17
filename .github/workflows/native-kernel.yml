@@ -74,3 +74,33 @@ jobs:
         run: npm test
       - name: Run coding loop and void gates
         run: npm run test:code
+
+  # THE CUBE'S WITNESSES (a second job, Python 3.12): sync.py renders a small
+  # `ci` group from cube-tools.json's ci flags — the assay's preregistered
+  # control packages only (clingo, mutmut, pydmd), never the torch-sized
+  # domain groups. This job runs the sidecar live: the protocol gates, the
+  # PyDMD-vs-dmd.js witness, and the preregistered trial in assay/.
+  cube-sidecar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: astral-sh/setup-uv@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install root dependencies (the cube tests load the doorway)
+        run: npm ci
+      - name: Install the cube's ci group (frozen to the committed lock)
+        working-directory: cube-tools/py312
+        run: uv sync --frozen --no-python-downloads --group ci
+      - name: Run the cube gate with the locked venv (the sidecar live)
+        env:
+          FOLD_CUBE_PYTHON: ${{ github.workspace }}/cube-tools/py312/.venv/bin/python
+        run: node --test tests/opencode-cube.test.mjs
+      - name: Run the preregistered witness trial (PyDMD against dmd.js + the shuffled null)
+        env:
+          FOLD_CUBE_PYTHON: ${{ github.workspace }}/cube-tools/py312/.venv/bin/python
+        run: node assay/run.mjs --record

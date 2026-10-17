@@ -1,0 +1,42 @@
+{
+  "schema": "CubeAssay@1",
+  "policy": "shadow first: a witness's verdicts are observe-only until its trial holds; a disagreement triggers REC (a changed licence or frame), never a retry; every entry carries the control that would falsify it",
+  "trials": [
+    {
+      "tool": "pydmd",
+      "cell": "DEF·Pattern",
+      "family": "prediction",
+      "role": "witness",
+      "witness_against": "native/kernel/dmd.js",
+      "control": "a series from a declared linear system (x_{t+1} = A x_t with published eigenvalues), plus a shuffled null of the same series (seeded Fisher-Yates)",
+      "reads": "eigenvalue multiset agreement at the declared tolerance (EIGEN_AGREEMENT_TOL); the real series must agree, the shuffled null must not",
+      "falsifying": "the shuffled null matching at the same rate as the real series (the witness reads noise), or the real series failing its declared eigenvalues in EITHER engine",
+      "runner": "assay/run.mjs (wired)",
+      "status": "preregistered"
+    },
+    {
+      "tool": "mutmut",
+      "cell": "EVA·Figure",
+      "family": "perturbation",
+      "role": "null",
+      "witness_against": "the suite's own coverage of the guard's entry point",
+      "control": "a mutated entry point must be caught by the suite; the control is the same suite on the unmutated entry (a surviving mutant means the guard was never reached)",
+      "reads": "mutants killed / produced on the named entry; the control run must be green before any mutant verdict counts",
+      "falsifying": "a surviving mutant on the entry function the guard names — the guard named a check it never ran",
+      "runner": "not wired (needs FOLD_CUBE traffic against python code; step 5)",
+      "status": "preregistered"
+    },
+    {
+      "tool": "clingo",
+      "cell": "SYN·Pattern",
+      "family": "deduction",
+      "role": "move",
+      "witness_against": "derive's transitive withdrawal (the licensed composition organ)",
+      "control": "premises as #external atoms; withdrawing one premise must retract exactly the products derive retracts on the same premise set — no more, no fewer",
+      "reads": "the retracted set, both engines, same premises; set equality is the finding",
+      "falsifying": "clingo retracting fewer or more products than derive's own transitive withdrawal — the two named derivations disagree about what an withdrawn premise carried",
+      "runner": "not wired (step 5)",
+      "status": "preregistered"
+    }
+  ]
+}

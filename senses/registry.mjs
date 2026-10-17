@@ -26,6 +26,7 @@ import {
   decodeGrayStdin,
   describeGray,
 } from "../khora/perceive/local.mjs";
+import { huntSidecar, perceiveOrgan, probeModules } from "../native/organs/cube-sidecar.mjs";
 
 export const SENSES_VERSION = "khora-senses@0.1";
 
@@ -138,8 +139,50 @@ const ORGAN_CANDIDATES = [
   { id: "whisper", kind: "asr", modality: "audio", provider: "local", probe: ["whisper", ["--help"]], run: whisperOrgan },
 ];
 
+// ── the python organs (the cube sidecar): the SAME fan-out, hunted the same way ──
+// cube-tools.json registers python readers for modalities the local binaries
+// already serve (ocrmac for images, pdfplumber/pymupdf for PDFs, mlx-whisper
+// for audio). They join the swarm as ordinary organs — hunted (a missing venv
+// or module is a typed gap, never an install), run on the same bytes, kept in
+// the same delta and ledger. Never a second swarm.
+const sidecarProbeCache = new Map();
+const sidecarModulePresent = (module) => {
+  if (!sidecarProbeCache.has(module)) {
+    const r = probeModules([module]);
+    sidecarProbeCache.set(module, r.ok === true && Array.isArray(r.present) && r.present.includes(module));
+  }
+  return sidecarProbeCache.get(module);
+};
+
+const pyOrganRun = (organ, suffix) => async (bytes, { lang = "eng" } = {}) => {
+  const r = await perceiveOrgan({ organ, bytes, lang, suffix });
+  if (r.ok !== true) return { text: "", via: `sidecar-${organ}`, gaps: [{ reason: r.gap ?? "perceive_failed", detail: String(r.why ?? "").slice(0, 200) }] };
+  const text = String(r.text ?? "").trim();
+  if (!text) return { text: "", via: `sidecar-${organ}`, gaps: [{ reason: "organ_empty", detail: `${organ} found no text` }] };
+  return { text, via: `sidecar-${organ}`, chars: text.length, meta: { producer: r.producer } };
+};
+
+export const PY_ORGAN_CANDIDATES = [
+  { id: "sidecar-ocrmac", kind: "ocr", modality: "image", provider: "sidecar", module: "ocrmac", organ: "ocrmac", suffix: ".png" },
+  { id: "sidecar-pdfplumber", kind: "text-layer", modality: "pdf", provider: "sidecar", module: "pdfplumber", organ: "pdfplumber", suffix: ".pdf" },
+  { id: "sidecar-pymupdf", kind: "text-layer", modality: "pdf", provider: "sidecar", module: "pymupdf", organ: "pymupdf", suffix: ".pdf" },
+  { id: "sidecar-mlx-whisper", kind: "asr", modality: "audio", provider: "sidecar", module: "mlx_whisper", organ: "mlx_whisper", suffix: ".wav" },
+].map((spec) => ({
+  id: spec.id,
+  kind: spec.kind,
+  modality: spec.modality,
+  provider: spec.provider,
+  module: spec.module,
+  available: () => huntSidecar().found && sidecarModulePresent(spec.module),
+  run: pyOrganRun(spec.organ, spec.suffix),
+}));
+
+const allCandidates = () => [...ORGAN_CANDIDATES, ...PY_ORGAN_CANDIDATES];
+
 const probes = new Map();
-const isAvailable = ({ probe: [cmd, args] }) => {
+const isAvailable = (organ) => {
+  if (typeof organ.available === "function") return !!organ.available();
+  const [cmd, args] = organ.probe;
   const key = `${cmd} ${args.join(" ")}`;
   if (!probes.has(key)) {
     const r = spawnSync(cmd, args, { encoding: "utf8", timeout: 15_000 });
@@ -166,8 +209,11 @@ const organsFile = (stateDir) => path.join(stateDir, "senses-organs.json");
  */
 export function huntOrgans({ stateDir = path.join(os.homedir(), ".fold", "opencode-senses") } = {}) {
   const found = [], missing = [];
-  for (const organ of ORGAN_CANDIDATES) (isAvailable(organ) ? found : missing).push({ id: organ.id, kind: organ.kind, modality: organ.modality, provider: organ.provider });
-  const report = { schema: "SenseHunt@1", at: new Date().toISOString(), found, missing, byModality: found.reduce((a, o) => ({ ...a, [o.modality]: (a[o.modality] ?? 0) + 1 }), {}) };
+  for (const organ of allCandidates()) (isAvailable(organ) ? found : missing).push({ id: organ.id, kind: organ.kind, modality: organ.modality, provider: organ.provider });
+  // Why a python organ is missing is disclosed in the report: an absent venv
+  // (fold-door.sh FOLD_CUBE=1, or uv sync) and an absent module are different
+  // gaps, and the difference is the whole reason this hunt exists.
+  const report = { schema: "SenseHunt@1", at: new Date().toISOString(), found, missing, sidecar: huntSidecar(), byModality: found.reduce((a, o) => ({ ...a, [o.modality]: (a[o.modality] ?? 0) + 1 }), {}) };
   try { fs.mkdirSync(stateDir, { recursive: true }); fs.writeFileSync(organsFile(stateDir), JSON.stringify(report, null, 2) + "\n"); } catch { /* the hunt never blocks */ }
   return report;
 }
@@ -175,8 +221,9 @@ export function huntOrgans({ stateDir = path.join(os.homedir(), ".fold", "openco
 /** Applicable, present organs for a modality. The hunt gates by presence, never by a list. */
 export function organsFor(mime) {
   const mod = modalityOf(mime);
-  const pdfOrgans = mod === "pdf" ? ORGAN_CANDIDATES.filter((o) => o.modality === "pdf") : [];
-  const base = ORGAN_CANDIDATES.filter((o) => o.modality === mod && !pdfOrgans.includes(o));
+  const candidates = allCandidates();
+  const pdfOrgans = mod === "pdf" ? candidates.filter((o) => o.modality === "pdf") : [];
+  const base = candidates.filter((o) => o.modality === mod && !pdfOrgans.includes(o));
   return [...base, ...pdfOrgans].filter(isAvailable);
 }
 

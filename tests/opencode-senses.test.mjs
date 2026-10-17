@@ -25,10 +25,19 @@ test("a single reading has no delta to compute", () => {
   assert.match(d.line, /single organ/);
 });
 
-test("the hunt partitions every candidate into found or missing, and persists", () => {
+test("the hunt partitions every candidate (local binaries + cube-sidecar organs) into found or missing, and persists", () => {
   const h = senses.huntOrgans({ stateDir });
   const ids = [...h.found, ...h.missing].map((o) => o.id).sort();
-  assert.deepEqual(ids, senses.ORGAN_CANDIDATES.map((o) => o.id).sort());
+  const all = [...senses.ORGAN_CANDIDATES, ...senses.PY_ORGAN_CANDIDATES].map((o) => o.id).sort();
+  assert.deepEqual(ids, all);
+  // The python organs are hunted, never assumed: with no locked venv every
+  // one of them sits in missing, and the report says why.
+  assert.equal(typeof h.sidecar?.found, "boolean");
+  if (!h.sidecar.found) {
+    const pyIds = senses.PY_ORGAN_CANDIDATES.map((o) => o.id);
+    assert.ok(pyIds.every((id) => h.missing.some((o) => o.id === id)), "a missing venv puts every sidecar organ in missing");
+    assert.match(String(h.sidecar.why), /venv|FOLD_CUBE/);
+  }
   assert.ok(fs.existsSync(path.join(stateDir, "senses-organs.json")));
 });
 

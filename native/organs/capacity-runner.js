@@ -151,36 +151,25 @@ import { withExperiencer } from "./experiencer.js";
 const CAPACITY_TEXT_MAX_CHARS = 8000;
 
 export function makeCapacityRunner({ referentIndexFor, relationsFor }) {
-  return function runCapacity(id, { text, name, query, claim } = {}) {
-    if (id !== "cast" && id !== "relations") {
-      return {
-        gap: "not_yet_executable",
-        id,
-        detail: `"${id}" is in the capacity registry but not yet wired to run from the terminal — only "cast" and "relations" execute this pass (capacities.js, CLAUDE.md: "the terminal language" section names the rest as open).`,
-      };
-    }
-    if (!text || !text.trim()) {
-      // This module only ever sees bytes (or their absence) — it cannot
-      // itself distinguish "no source by this name is loaded" from "one
-      // is loaded and it is empty." Callers that can tell the two apart
-      // (term.js checks source-key presence before ever calling this) do
-      // so on their own side; the wording here stays true either way.
-      return { gap: "no_material", id, detail: `no material to read for "${name ?? "?"}" — either nothing by that name is loaded, or what is loaded there is empty` };
-    }
-    const totalChars = text.length;
-    const truncated = totalChars > CAPACITY_TEXT_MAX_CHARS;
-    const boundedText = truncated ? text.slice(0, CAPACITY_TEXT_MAX_CHARS) : text;
-    const bound = truncated ? { truncated: true, examinedChars: CAPACITY_TEXT_MAX_CHARS, totalChars } : { truncated: false };
-    if (id === "cast") {
-      const index = referentIndexFor([{ text: boundedText }]);
+  // THE EXECUTOR MAP — one entry per capacity that actually executes from the
+  // terminal. capacities.js stays the data table it declares itself to be
+  // ("A DATA TABLE, NOT A RUNTIME"); the runtime's bindings live here, so the
+  // next capacity wired (a cube tool among them) is one map entry added —
+  // never another branch in the dispatch. This replaces the hardcoded
+  // `id !== "cast" && id !== "relations"` check; the not_yet_executable gap
+  // still names exactly which ids execute, derived from the map's own keys.
+  const executors = new Map([
+    ["cast", ({ id, text, name, bound }) => {
+      const index = referentIndexFor([{ text }]);
       const referents = [...index.referents]
         .map((rid) => ({ id: rid, surface: index.represent(rid) }))
         .sort((a, b) => a.surface.localeCompare(b.surface));
       return { id, name: name ?? null, count: referents.length, referents, ...bound };
-    }
-    if (!relationsFor) {
-      return { gap: "not_yet_executable", id, detail: `"relations" is registered but this page has not wired relationsFor in yet` };
-    }
+    }],
+    ["relations", ({ id, text, name, query, claim, bound }) => {
+      if (!relationsFor) {
+        return { gap: "not_yet_executable", id, detail: `"relations" is registered but this page has not wired relationsFor in yet` };
+      }
     // Real addresses, not a bare unaddressed blob: `cast` doesn't need refs
     // (it reports referent identities, not evidence), but a "relations"
     // result IS evidence — an edge or a filler with no address is a claim
@@ -188,7 +177,7 @@ export function makeCapacityRunner({ referentIndexFor, relationsFor }) {
     // SAME chunker every attachment/preflight/priors source in this app
     // already goes through (source.js) — one addressing scheme, not a
     // second one invented for the terminal.
-    const reader = relationsFor(chunkSource(name ?? "material", boundedText));
+    const reader = relationsFor(chunkSource(name ?? "material", text));
     if (!reader.examined) {
       return { gap: "no_material", id, detail: `no relation vocabulary could be measured for "${name ?? "?"}"`, ...bound };
     }
@@ -223,6 +212,30 @@ export function makeCapacityRunner({ referentIndexFor, relationsFor }) {
       };
     }
     return { id, name: name ?? null, query, count: fillers.length, fillers, ...bound };
+    }],
+  ]);
+  return function runCapacity(id, { text, name, query, claim } = {}) {
+    const exec = executors.get(id);
+    if (!exec) {
+      return {
+        gap: "not_yet_executable",
+        id,
+        detail: `"${id}" is in the capacity registry but not yet wired to run from the terminal — only ${[...executors.keys()].map((k) => `"${k}"`).join(" and ")} execute this pass (capacities.js, CLAUDE.md: "the terminal language" section names the rest as open).`,
+      };
+    }
+    if (!text || !text.trim()) {
+      // This module only ever sees bytes (or their absence) — it cannot
+      // itself distinguish "no source by this name is loaded" from "one
+      // is loaded and it is empty." Callers that can tell the two apart
+      // (term.js checks source-key presence before ever calling this) do
+      // so on their own side; the wording here stays true either way.
+      return { gap: "no_material", id, detail: `no material to read for "${name ?? "?"}" — either nothing by that name is loaded, or what is loaded there is empty` };
+    }
+    const totalChars = text.length;
+    const truncated = totalChars > CAPACITY_TEXT_MAX_CHARS;
+    const boundedText = truncated ? text.slice(0, CAPACITY_TEXT_MAX_CHARS) : text;
+    const bound = truncated ? { truncated: true, examinedChars: CAPACITY_TEXT_MAX_CHARS, totalChars } : { truncated: false };
+    return exec({ id, text: boundedText, name, query, claim, bound });
   };
 }
 

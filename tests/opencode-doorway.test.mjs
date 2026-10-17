@@ -6,6 +6,10 @@ import path from "node:path";
 
 process.env.FOLD_OPENCODE_STATE = fs.mkdtempSync(path.join(os.tmpdir(), "oc-door-"));
 process.env.FOLD_WORKNOTES_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "oc-wn-"));
+// Never read the operator's live memory surface: an ask like "rename the
+// module" bears on whatever real entries exist that day, and a test that
+// passes or fails with the operator's week is not a test.
+process.env.FOLD_USER_MEMORY = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "oc-mem-")), "user-memory.md");
 const door = await import("../opencode-doorway.mjs");
 
 const ev = (sessionID, type, data = {}) => door.answer({ event: "event", sessionID, type, data });
