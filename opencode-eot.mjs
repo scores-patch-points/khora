@@ -2,8 +2,12 @@
 // content key, events pointing at a source and a parent, byte anchors where material exists) is the only
 // thing written; the note, commons, record, claims and provenance are PROJECTIONS of it at a cursor.
 //
-//   <root>/<task>/eot/<agent>.jsonl     one writer per file (append-only, whole lines, no contention);
-//                                       the task's log is the UNION of its writers' files.
+//   <root>/<task>/eot/<agent>.bin      one writer per file (append-only, binary — opencode-eot-bin.mjs:
+//                                      fixed 24-byte headers + JSON bodies, learned from eodb). The
+//                                      task's log is the UNION of its writers' files. FOLD_EOT_BIN=0
+//                                      reverts to the legacy jsonl lane below.
+//   <root>/<task>/eot/<agent>.jsonl    LEGACY (read-merged until the writer's next append migrates it;
+//                                      a text mirror again with FOLD_EOT_TEXT=1).
 //   rows:  { t:"src", source_id, kind, locator, anchor?, meta? }            (a source, once)
 //          { t:"evt", event_id, stage, agent, ts, standing, source_id?, parent?, unit?, range?, detail? }
 //
@@ -23,12 +27,13 @@
 //
 // PURE of any model. Fails typed, never throws past the caller.
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import crypto from "node:crypto";
-import { taskDir } from "./opencode-worknotes.mjs";
+import { taskDir, turnsOf } from "./opencode-worknotes.mjs";
 import { STAGES } from "./opencode-eot-stages.mjs";
 import { neutralize } from "./opencode-defang.mjs";
-import { readIndexed } from "./opencode-eot-index.mjs";
+import { BIN_ON, TEXT_MIRROR, appendRows, hasEvent, readBin } from "./opencode-eot-bin.mjs";
 
 export const EOT_SCHEMA = "OpenCodeEOT@1";
 export { STAGES };
@@ -75,12 +80,11 @@ function readDirect(task) {
   return { sources, events };
 }
 
-/** The task's merged log: sources by id, events in time order. Served from the derived binary index
- *  (opencode-eot-index.mjs) when it is usable — parsing only the bytes appended since the last read —
- *  and from a full jsonl parse otherwise. Identical in either case; the index is a cache, never
- *  authoritative (readIndexed's own test pins the equality). */
+/** The task's merged log: sources by id, events in time order. Served from the BINARY logs
+ *  (opencode-eot-bin.mjs — headers strided, bodies parsed at most once per process, warm reads parse
+ *  nothing) plus any un-migrated jsonl; readDirect stays the full-parse oracle and the typed fallback. */
 export function read(task) {
-  try { return readIndexed(task); } catch { return readDirect(task); }
+  try { return readBin(task); } catch { return readDirect(task); }
 }
 
 /** Compute the standing of an event from its source: the one place it is decided. */
@@ -95,7 +99,7 @@ function standingOf(source, range) {
 /**
  * append({ task, agent, stage, source, parent, unit, range, detail, now }) → { ok, event_id, source_id, standing } | { ok:false, gap }
  */
-export function append({ task, agent, stage, source = null, parent = null, unit = null, range = null, detail = null, now = Date.now() } = {}) {
+export function append({ task, agent, stage, source = null, parent = null, unit = null, range = null, detail = null, now = Date.now(), universe } = {}) {
   const file = fileOf(task, agent);
   if (!file) return { ok: false, gap: "bad-address" };
   if (!STAGES.includes(stage)) return { ok: false, gap: "bad-stage" };
@@ -125,13 +129,28 @@ export function append({ task, agent, stage, source = null, parent = null, unit 
   }
   // an admit passed the law above: its parent verify is witnessed and exited 0, so it is witnessed
   const standing = stage === "admit" ? "witnessed" : standingOf(src, range);
-  fs.mkdirSync(path.dirname(file), { recursive: true });
-  const n = readRows(file).filter((r) => r.t === "evt").length;
   if (detail && origin_of_detail(stage)) detail = neutralizeDetail(detail);
-  const body = { n, agent: String(agent), stage, source_id, parent, unit, range, detail: detail ?? null };
+  // content-addressed: the id is the event's own content and time, so replaying the identical event is the same event
+  const body = { ts: now, agent: String(agent), stage, source_id, parent, unit, range, detail: detail ?? null, ...(universe ? { universe } : {}) };
   const event_id = stableId(body, "evt");
   const origin = src ? src.origin : (MECHANICAL_STAGES.has(stage) ? "mechanical" : "model");
-  const row = { t: "evt", event_id, stage, agent: String(agent), ts: now, origin, standing, ...(source_id ? { source_id } : {}), ...(parent ? { parent } : {}), ...(unit ? { unit } : {}), ...(range ? { range } : {}), ...(detail ? { detail } : {}) };
+  const row = { t: "evt", event_id, stage, agent: String(agent), ts: now, origin, standing, ...(source_id ? { source_id } : {}), ...(parent ? { parent } : {}), ...(unit ? { unit } : {}), ...(range ? { range } : {}), ...(detail ? { detail } : {}), ...(universe ? { universe } : {}) };
+  // THE BINARY LOG: dedup via the header's id hash (verified against the one record's body — exact, a
+  // hash collision can never drop a real event), then one packed append through a cached fd — O(1), the
+  // file is never re-read. A bin failure falls through to the jsonl, so a row can never be lost.
+  if (BIN_ON()) {
+    try {
+      if (hasEvent(task, agent, event_id)) return { ok: true, event_id, source_id, standing, deduped: true };
+      const w = appendRows(task, agent, src ? [src, row] : [row]);
+      if (w.ok) {
+        if (TEXT_MIRROR()) { fs.mkdirSync(path.dirname(file), { recursive: true }); fs.appendFileSync(file, `${src ? `${JSON.stringify(src)}\n` : ""}${JSON.stringify(row)}\n`); }
+        return { ok: true, event_id, source_id, standing };
+      }
+    } catch { /* the legacy lane below carries the row instead */ }
+  }
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  const rows = readRows(file);
+  if (rows.some((r) => r.t === "evt" && r.event_id === event_id)) return { ok: true, event_id, source_id, standing, deduped: true };
   // one O_APPEND write of the whole pair, so concurrent writers interleave whole lines
   fs.appendFileSync(file, `${src ? `${JSON.stringify(src)}\n` : ""}${JSON.stringify(row)}\n`);
   return { ok: true, event_id, source_id, standing };
@@ -145,10 +164,12 @@ const neutralizeDetail = (d) => { const o = {}; for (const [k, v] of Object.entr
 const sentencesOf = (text) => String(text ?? "").replace(/\s+/g, " ").trim().split(/(?<=[.!?])\s+(?=[A-Z0-9`"'(\[])/).map((s) => s.trim()).filter((s) => s.length > 1);
 
 /** This agent's settled turns, one `turn` event per sentence (idempotent: the same unit+text is never twice). */
-export function recordTurns({ task, agent, turns = [] } = {}) {
+export function recordTurns({ task, agent, turns = [], universe } = {}) {
   const file = fileOf(task, agent);
   if (!file) return { ok: false, gap: "bad-address" };
-  const have = new Set(readRows(file).filter((r) => r.t === "evt" && r.stage === "turn").map((r) => `${r.unit}|${r.source_id}`));
+  // the idempotence reads the MERGED log (binary + legacy), never the jsonl alone: once the bin is
+  // authoritative the jsonl is empty and the dedupe must still see the turns already stored.
+  const have = new Set(read(task).events.filter((e) => e.stage === "turn" && e.agent === String(agent)).map((e) => `${e.unit}|${e.source_id}`));
   let wrote = 0;
   for (const t of turns) {
     const sents = sentencesOf(t.answer || "(no text reply)").slice(0, 8);
@@ -156,21 +177,21 @@ export function recordTurns({ task, agent, turns = [] } = {}) {
       const unit = `t${t.n}.s${i}`;
       const sid = sourceIdOf({ kind: "turn", locator: s });
       if (have.has(`${unit}|${sid}`)) return;
-      const r = append({ task, agent, stage: "turn", source: { kind: "turn", locator: s }, unit, detail: i === 0 ? { ask: oneLine(t.ask).slice(0, 200), tools: t.grounds ?? [] } : null });
+      const r = append({ task, agent, stage: "turn", source: { kind: "turn", locator: s }, unit, detail: i === 0 ? { ask: oneLine(t.ask).slice(0, 200), tools: t.grounds ?? [] } : null, universe });
       if (r.ok) { wrote += 1; have.add(`${unit}|${sid}`); }
     });
   }
   return { ok: true, wrote };
 }
 
-export const recordMark = ({ task, agent, kind, text, now }) =>
-  append({ task, agent, stage: "mark", source: { kind: "mark", locator: oneLine(text).slice(0, 500) }, detail: { kind }, now });
-export const recordContention = ({ task, agent, item, holder, now }) =>
-  append({ task, agent, stage: "contend", source: { kind: "tool", locator: `contended ${oneLine(item)}`, meta: { exit: null, holder, system: true, sha256: stableId({ item, holder, agent }, "sys").slice(4) } }, unit: oneLine(item), detail: { item: oneLine(item), holder }, now });
-export const recordClaim = ({ task, agent, item, ttlMs, now }) =>
-  append({ task, agent, stage: "claim", source: { kind: "claim", locator: oneLine(item) }, detail: { item: oneLine(item), ttlMs }, now });
-export const recordDone = ({ task, agent, item, now }) =>
-  append({ task, agent, stage: "done", source: { kind: "claim", locator: oneLine(item) }, detail: { item: oneLine(item) }, now });
+export const recordMark = ({ task, agent, kind, text, now, universe }) =>
+  append({ task, agent, stage: "mark", source: { kind: "mark", locator: oneLine(text).slice(0, 500) }, detail: { kind }, now, universe });
+export const recordContention = ({ task, agent, item, holder, now, universe }) =>
+  append({ task, agent, stage: "contend", source: { kind: "tool", locator: `contended ${oneLine(item)}`, meta: { exit: null, holder, system: true, sha256: stableId({ item, holder, agent }, "sys").slice(4) } }, unit: oneLine(item), detail: { item: oneLine(item), holder }, now, universe });
+export const recordClaim = ({ task, agent, item, ttlMs, now, universe }) =>
+  append({ task, agent, stage: "claim", source: { kind: "claim", locator: oneLine(item) }, detail: { item: oneLine(item), ttlMs }, now, universe });
+export const recordDone = ({ task, agent, item, now, universe }) =>
+  append({ task, agent, stage: "done", source: { kind: "claim", locator: oneLine(item) }, detail: { item: oneLine(item) }, now, universe });
 
 /** A judged draw: the check's own exit code is the witness (`verify`); only a witnessed pass is admitted. */
 export function recordJudged({ task, agent, referent, delta, check, exit, judge, address = null, draw = null, now }) {
@@ -212,7 +233,7 @@ const relOf = (root, file) => { const r = path.relative(root, file); return r &&
  * One file transformation. `before`/`after` are bytes (or null = absent). When `before` is omitted the tree's
  * own last state for the path stands in, so the chain never has a hole. A no-op (same bytes) is not an event.
  */
-export function recordEdit({ task, agent, root, file, before, after, tool = "edit", now, tree = null } = {}) {
+export function recordEdit({ task, agent, root, file, before, after, tool = "edit", now, tree = null, universe } = {}) {
   const rel = relOf(root, file);
   if (!rel) return { ok: false, gap: "outside_root" };
   const prior = (tree ?? projectTree(task).files).get(rel) ?? null;
@@ -243,36 +264,59 @@ export const recordWorktree = ({ task, agent, op, directory, branch = null, now 
     source: { kind: "fs", locator: String(directory), meta: { sha256: stableId({ op, directory, branch }, "wt").slice(3) } },
     detail: { op, directory: String(directory), branch } });
 
-const IGNORE = new Set([".git", "node_modules", ".next", "dist", "build", ".turbo", ".cache", "target", ".venv"]);
+const IGNORE = new Set([".git", "node_modules", ".next", "dist", "build", "out", "coverage", ".turbo", ".cache", "target", ".venv"]);
 function* walk(dir, root, since, budget) {
   let ents = [];
   try { ents = fs.readdirSync(dir, { withFileTypes: true }); } catch { return; }
   for (const e of ents) {
     if (budget.n <= 0) return;
+    // The entries budget bounds the WALK, not only its yields: a tree with nothing recent must not cost
+    // a full traversal per command. Exhausted means capped, and the caller sees it typed.
+    if (budget.e <= 0) { budget.capped = true; return; }
+    budget.e -= 1;
     const f = path.join(dir, e.name);
     if (e.isDirectory()) { if (!IGNORE.has(e.name)) yield* walk(f, root, since, budget); }
     else if (e.isFile()) { try { if (fs.statSync(f).mtimeMs >= since) { budget.n -= 1; yield f; } } catch { /* gone */ } }
   }
 }
 
+// The home directory (the app's "Default Project") and the filesystem root have no bounded tree: a sweep
+// there is minutes of synchronous walking per command, on the door's own loop, for artifacts nobody asked
+// to track. Refuse, typed — the exec event still records that the command ran, and a project inside the
+// home directory sweeps normally when it is the session's workspace.
+const tooLargeToSweep = (root) => {
+  try {
+    const abs = fs.realpathSync(root);
+    return abs === fs.realpathSync(os.homedir()) || abs === path.parse(abs).root;
+  } catch { return false; }
+};
+
 /**
  * After a command whose writes we cannot see (bash), record what changed on disk since `since`: files whose
  * mtime moved and whose bytes differ from the tree, plus tracked paths that vanished. Bounded; typed when capped.
+ * Every file recorded is also an edit CLAIM deposited in the EOT — the stigmergic ledger of the sweep, written
+ * where the ledger lives (bounded; TTL decay is the projection's business, claim cap via FOLD_SWEEP_CLAIMS).
  */
-export function sweepEdits({ task, agent, root, since, tool = "bash", max = 200, now } = {}) {
+export function sweepEdits({ task, agent, root, since, tool = "bash", max = 200, entries = Number(process.env.FOLD_SWEEP_ENTRIES ?? 20_000), maxClaims = Number(process.env.FOLD_SWEEP_CLAIMS ?? 8), ttlMs = Number(process.env.FOLD_FILE_CLAIM_TTL_MS ?? 10 * 60_000), now } = {}) {
+  if (tooLargeToSweep(root)) return { ok: false, gap: "root-too-large", root: String(root ?? "") };
   let wrote = 0;
-  const budget = { n: max };
+  const budget = { n: max, e: entries, capped: false };
   const tree = projectTree(task).files;
+  const paths = [];
   for (const f of walk(root, root, since - 2, budget)) {
     let buf = null;
     try { buf = fs.readFileSync(f); } catch { continue; }
     const r = recordEdit({ task, agent, root, file: f, after: buf, tool, now, tree });
-    if (r.ok && !r.noop) wrote += 1;
+    if (r.ok && !r.noop) { wrote += 1; paths.push(relOf(root, f)); }
   }
   for (const rel of [...tree.keys()]) {
     if (!fs.existsSync(path.join(root, rel)) && recordEdit({ task, agent, root, file: path.join(root, rel), after: null, tool, now, tree }).noop === undefined) wrote += 1;
   }
-  return { ok: true, wrote, capped: budget.n <= 0 };
+  const claimed = [];
+  for (const rel of paths.filter(Boolean).slice(0, Math.max(maxClaims, 0))) {
+    try { if (recordClaim({ task, agent, item: `edit ${rel}`, ttlMs, now }).ok) claimed.push(rel); } catch { /* the log never blocks */ }
+  }
+  return { ok: true, wrote, capped: budget.n <= 0 || budget.capped, paths, claimed };
 }
 
 // ── projections: pure functions of the log ───────────────────────────────────────────────────────
@@ -313,15 +357,26 @@ export function projectBlocks(task, agent, limit = 3) {
     .slice(-limit).map((e) => ({ agent: e.agent, text: sources.get(e.source_id)?.locator ?? "" }));
 }
 
+/** The marks of one kind (the swarm's learned facts, an agent's notes) folded from the EOT, newest last. */
+export function projectMarks(task, { agent = null, kind = "fact", limit = 200 } = {}) {
+  const { events, sources } = read(task);
+  return events.filter((e) => e.stage === "mark" && e.detail?.kind === kind && (!agent || e.agent === agent))
+    .slice(-limit).map((e) => ({ agent: e.agent, t: e.ts, kind, text: sources.get(e.source_id)?.locator ?? "" }));
+}
+
 /**
  * The commons: other agents' asserted sentences, ONE per content key (the same sentence said twice, or by
  * two agents, is one source), ranked by term overlap with the ask, each holder's best match guaranteed,
  * each with its address. Standing is always "asserted": a standpoint, never relayed as fact.
  */
-export function projectCommons(task, agent, { ask = "", max = 4 } = {}) {
-  const { events, sources } = read(task);
+export function projectCommons(task, agent, { ask = "", max = 4, asOf = null } = {}) {
+  const read_ = read(task);
+  const { sources } = read_;
+  // a cursor picks the time of the view: only what had been said by `asOf` (ms) is in it
+  const events = Number.isFinite(asOf) ? read_.events.filter((e) => !(e.ts > asOf)) : read_.events;
   const askTerms = new Set(String(ask).toLowerCase().match(/[\p{L}\p{N}_]{3,}/gu) ?? []);
   const score = (t) => (String(t).toLowerCase().match(/[\p{L}\p{N}_]{3,}/gu) ?? []).filter((w) => askTerms.has(w)).length;
+  const agentIds = [...new Set(events.filter((e) => e.stage === "turn").map((e) => String(e.agent)))];
   const bySource = new Map();
   for (const e of events) {
     if (e.stage !== "turn" || e.agent === agent) continue;
@@ -337,7 +392,7 @@ export function projectCommons(task, agent, { ask = "", max = 4 } = {}) {
   }
   for (const e of all.slice().sort((a, b) => b.score - a.score || b.i - a.i)) { if (picked.size >= max) break; picked.set(e.source_id, e); }
   return [...picked.values()].sort((a, b) => a.i - b.i).slice(0, Math.max(max, holders.length)).map((e) => ({
-    text: e.text, ref: `${String(e.agent).replace(/^ses_/, "").slice(0, 8)}#${e.unit}`, agent: e.agent, source_id: e.source_id, standing: "asserted", also: [...e.holders].filter((h) => h !== e.agent),
+    text: e.text, ref: `${agentTag(e.agent, agentIds)}#${e.unit}`, agent: e.agent, source_id: e.source_id, standing: "asserted", also: [...e.holders].filter((h) => h !== e.agent),
   }));
 }
 
@@ -559,7 +614,19 @@ export function groundCheck({ task, text, root = null, now = Date.now(), passWin
 //   path/to/file.js#120-340   a byte span;  path/to/file.js#L10-L20   a line span   (inside the project root)
 const SNIP_MAX = Number(process.env.FOLD_SNIP_MAX_BYTES ?? 4000);
 
-export function snip({ task, agent = null, ref, root = null, now = Date.now() } = {}) {
+/** A commons address names an agent by the SHORTEST prefix (at least 8 chars, session ids are time-ordered and share leading
+ *  characters) that no other agent in the log shares. Minted against the agents present, so two sessions never get one tag. */
+export function agentTag(agent, agents = []) {
+  const id = String(agent).replace(/^ses_/, "");
+  const others = agents.map((a) => String(a).replace(/^ses_/, "")).filter((a) => a !== id);
+  for (let n = Math.min(8, id.length); n <= id.length; n++) {
+    const p = id.slice(0, n);
+    if (!others.some((o) => o.startsWith(p))) return p;
+  }
+  return id;
+}
+
+export function snip({ task, agent = null, ref, root = null, now = Date.now(), universe } = {}) {
   const r = String(ref ?? "").trim().replace(/^[⟨\[]+|[⟩\]]+$/g, "");
   if (!r) return { ok: false, gap: "no_ref" };
   const { events, sources } = read(task);
@@ -576,7 +643,12 @@ export function snip({ task, agent = null, ref, root = null, now = Date.now() } 
   // 2) a commons address: <agent prefix>#t<n>.s<i>
   const c = /^([\w.-]+)#(t\d+\.s\d+)$/.exec(r);
   if (c) {
-    const hit = events.find((e) => e.stage === "turn" && e.unit === c[2] && String(e.agent).replace(/^ses_/, "").startsWith(c[1].replace(/^ses_/, "")));
+    const want = c[1].replace(/^ses_/, "");
+    const hits = events.filter((e) => e.stage === "turn" && e.unit === c[2] && String(e.agent).replace(/^ses_/, "").startsWith(want));
+    // a tag that more than one agent now answers to is ambiguous: say so, never pick one
+    const exact = hits.filter((e) => String(e.agent).replace(/^ses_/, "") === want);
+    if (!exact.length && new Set(hits.map((e) => e.agent)).size > 1) return { ok: false, gap: "ambiguous_ref", ref: r };
+    const hit = exact[0] ?? hits[0];
     const s = hit ? sources.get(hit.source_id) : null;
     if (!s) return { ok: false, gap: "not_found", ref: r };
     return { ok: true, ref: r, bytes: String(s.locator).slice(0, SNIP_MAX), standing: "asserted", provenance: { event_id: hit.event_id, source_id: hit.source_id, kind: "turn", agent: hit.agent } };
@@ -607,6 +679,18 @@ export function snip({ task, agent = null, ref, root = null, now = Date.now() } 
     if (agent) logged = append({ task, agent, stage: "read", source: { kind: "file", locator: real, meta: { sha256: sha, rel } }, unit: rel, range: { unit: "byte", start, end: start + slice.length }, now });
     return { ok: true, ref: r, bytes: slice.toString("utf8"), standing: "witnessed", provenance: { kind: "file", file: rel, range: { start, end: start + slice.length }, sha256: sha, event_id: logged?.event_id ?? null }, truncated: end - start > slice.length };
   }
+  // 4) a turn address shown in a <fold-index> block: "turn N" / "turn N.sI". The surf note tells the model to
+  // SNIP a "turn N" to re-read its bytes; without this rung the address was never resolvable, so every drill the
+  // note promised returned a gap and the model re-measured from disk instead of reading what it already had.
+  const tn = /^turn\s+(\d+)(?:\.s\d+)?$/i.exec(r);
+  if (tn) {
+    const want = Number(tn[1]);
+    const all = turnsOf({ task });
+    const hit = (agent ? all.find((x) => x.agent === agent && x.n === want) : undefined) ?? all.find((x) => x.n === want);
+    if (!hit) return { ok: false, gap: "not_found", ref: r };
+    const bytes = `turn ${hit.n} — ask: ${hit.ask}\n${hit.tools?.length ? `tools: ${hit.tools.join(", ")}\n` : ""}${hit.text || "(no text reply)"}`.slice(0, SNIP_MAX);
+    return { ok: true, ref: r, bytes, standing: "asserted", provenance: { kind: "turn", agent: hit.agent, n: hit.n } };
+  }
   return { ok: false, gap: f ? "no_root" : "unresolvable_ref", ref: r };
 }
 
@@ -617,8 +701,9 @@ export function expand(text, { task, agent = null, root = null } = {}) {
   const out = String(text ?? "").replace(/⟨([^⟩\n]+)⟩|\[\[snip:([^\]\n]+)\]\]/g, (m, a, b) => {
     const s = snip({ task, agent, ref: a ?? b, root });
     if (!s.ok) return `${m}{${s.gap}}`;
-    used.push({ ref: s.ref, standing: s.standing, provenance: s.provenance });
-    return s.bytes;
+    used.push({ ref: s.ref, standing: s.standing, provenance: s.provenance, ...(s.truncated ? { truncated: true } : {}) });
+    // a span cut at SNIP_MAX says so: bytes that were not delivered are never passed off as the whole span
+    return s.truncated ? `${s.bytes}…[truncated: more bytes in ${s.ref}]` : s.bytes;
   });
   return { text: out, used };
 }

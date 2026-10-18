@@ -97,5 +97,29 @@ export function weft(task) {
 /** The cloth (hologram) projected from the ledger at a cursor: weft.js clothAt. */
 export const cloth = (task, { asOf = Infinity } = {}) => clothAt(weft(task), { asOf });
 
+/** C6 CLOTH RETIREMENT (a projection, never a delete): a referent whose last row is older than `horizonMs`
+ *  and touches no stake drops out of the default cloth; `asOf` and an explicit drill still see it.
+ *  Returns the same Cloth@1 shape with retired referents removed and a `retired` list (the typed gap). */
+export function clothLive(task, { now = Date.now(), horizonMs = Number(process.env.FOLD_CLOTH_HORIZON_MS ?? 7 * 24 * 3600_000), stakeReferents = [], asOf = Infinity } = {}) {
+  const c = cloth(task, { asOf });
+  if (!(horizonMs > 0)) return { ...c, retired: [] };
+  const stakes = new Set(stakeReferents);
+  const lastTs = new Map();
+  for (const r of rows(task)) {
+    if (!r.referent) continue;
+    const ts = Number(r.ts) || 0;
+    if (ts > (lastTs.get(r.referent) ?? 0)) lastTs.set(r.referent, ts);
+  }
+  const retired = [];
+  const referents = c.referents.filter((ref) => {
+    if (stakes.has(ref.ref)) return true;
+    const ts = lastTs.get(ref.ref) ?? 0;
+    if (ts && now - ts <= horizonMs) return true;
+    retired.push(ref.ref);
+    return false;
+  });
+  return Object.freeze({ ...c, referents: Object.freeze(referents), retired: Object.freeze(retired) });
+}
+
 /** Test seam: forget the cursors (a fresh process). */
 export const _forget = () => cursors.clear();

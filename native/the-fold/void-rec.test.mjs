@@ -111,3 +111,33 @@ test("a mouth that answers the wrong unit is refused before any test, then narro
   assert.doesNotMatch(seen[1], /do not|don't|never/i, "no imperative negation in the ground (it trips the gate)");
   assert.equal(seen.length, 2);
 });
+
+test("slotDefId: the DEF is content-addressed — same frame, same id; new ground, new id; notes are not ground", async () => {
+  const { slotDefId } = await import("./code-loop.js");
+  const base = { file: "lib.py", unit: "f", decl: "def f(x):", ground: [] };
+  assert.equal(slotDefId(base), slotDefId({ ...base }), "same frame, same id");
+  assert.notEqual(slotDefId(base), slotDefId({ ...base, ground: ["The test that decides — ..."] }), "new ground, new id");
+  assert.notEqual(slotDefId(base), slotDefId({ ...base, unit: "g" }), "another unit, another DEF");
+  assert.notEqual(slotDefId({ ...base, ground: ["a", "b"] }), slotDefId({ ...base, ground: ["b", "a"] }), "ground is ordered");
+  assert.match(slotDefId(base), /^def_[0-9a-f]{20}$/);
+});
+
+test("re-entry: every REC step in a failing run moves the slot DEF (defFrom !== defTo) and no refuted DEF is drawn twice", opts, async () => {
+  const ws = workspace();
+  const seen = [];
+  const r = await runVoidLoop({
+    sessionId: "t", model: "scripted", task: "implement is_palindrome", workspace: ws,
+    testCommand: "python3 check.py", maxRounds: 6, candidates: 6,
+    turn: async (args) => { seen.push(String(args.task)); return { text: `    return ${seen.length % 2 ? "True" : "False"}` }; },
+  });
+  const stepped = r.rounds.filter((x) => x.action === "REC" && x.rung);
+  assert.ok(stepped.length >= 1, "at least one REC step happened");
+  for (const s of stepped) {
+    assert.match(s.defFrom, /^def_/);
+    assert.match(s.defTo, /^def_/);
+    assert.notEqual(s.defFrom, s.defTo, "REC changed the frame, not just the note");
+  }
+  const froms = stepped.map((s) => s.defFrom);
+  assert.equal(new Set(froms).size, froms.length, "no DEF was refuted twice");
+  assert.equal(r.rounds.some((x) => x.gap?.kind === "same_def"), false, "the guard stayed silent because REC always moved the frame");
+});

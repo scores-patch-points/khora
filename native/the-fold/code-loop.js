@@ -638,6 +638,10 @@ export function precheckSyntax(fileName, code) {
 // next round. No FIND/ADD grammar, no PATH, no fences to author.
 
 const sha = (t) => createHash("sha256").update(String(t ?? "")).digest("hex").slice(0, 16);
+
+/** The slot DEF's content address: same file, unit, declaration and stacked ground ⇒ same DEF. */
+export const slotDefId = ({ file, unit, decl, ground = [] }) =>
+  `def_${createHash("sha256").update(JSON.stringify([file ?? "", unit ?? "", decl ?? "", [...ground]])).digest("hex").slice(0, 20)}`;
 const escapeRe = (s) => String(s ?? "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 /** detectVoidUnits(text, fileName) -> the located file's own function
@@ -917,6 +921,14 @@ export async function runVoidLoop({ sessionId, userId = null, model, task, works
     }
     return recOf.get(k);
   };
+  // RE-ENTRY GUARD (2026-10-16): "a spiral with no re-entry is a line", made a
+  // predicate. The slot DEF is content-addressed (slotDefId: file, unit, the
+  // declaration and the ground the REC rungs stacked on it). A DEF whose draw
+  // EVA refuted is never drawn again: if the next draw would stand on the same
+  // DEF id, the frame did not change, so the unit is walled and disclosed
+  // instead of spending a draw. Notes (lastTestFailure) are not ground.
+  const refutedDefs = new Set();
+  const slotDef = (target) => slotDefId({ file: currentFile(), unit: target.name, decl: target.declText, ground: recFor(target.name).ground });
   const namesUnit = (name) => new RegExp(`\\b${escapeRe(name)}\\b`);
   const findingsAbout = (output, name) => String(output ?? "").split("\n").filter((l) => l.trim() && namesUnit(name).test(l)).length;
   // The deciding material, as text: the files the test command names, else the other files of the
@@ -1190,6 +1202,14 @@ export async function runVoidLoop({ sessionId, userId = null, model, task, works
         target.indent,
       ].filter((l) => l !== null).join("\n");
 
+      const defId = slotDef(target);
+      if (refutedDefs.has(defId)) {
+        if (!walledTargets.has(currentFile())) walledTargets.set(currentFile(), new Set());
+        walledTargets.get(currentFile()).add(target.name);
+        push({ round, file: currentFile(), target: target.name, by: "rec", action: "REC", defId, gap: { kind: "same_def", reason: `the slot DEF ${defId} was already refuted by EVA and nothing restructured it — a redraw in the same frame is a line` }, basis: `no draw spent: re-entry requires a different DEF` });
+        break; // walled: the gate skips it; no flat re-draw
+      }
+
       const turned = await turn({
         sessionId, userId, model, task: fragment, chatHistory: [], workspace: root, mode: "chat", drawOnly: true, caller, signal,
         ...(kelsen === null ? null : { kelsen: kelsenFor ?? kelsen }),
@@ -1316,6 +1336,7 @@ export async function runVoidLoop({ sessionId, userId = null, model, task, works
         lastNote = cycleNote;
         // REC, not re-draw: the DEF that did not EVA is restructured onto new ground.
         const rec = recFor(target.name);
+        refutedDefs.add(defId);
         rec.refused.push(body);
         rec.loop.push(findingsAbout(test.output, target.name));
         const recd = recSlot(target, rec, { unit: target.name, outcome: "implicated" });
@@ -1325,7 +1346,7 @@ export async function runVoidLoop({ sessionId, userId = null, model, task, works
           push({ round, file: currentFile(), target: target.name, by: "rec", action: "REC", gap: { kind: recd.kind, reason: recd.reason }, basis: `EVA failed and the slot DEF cannot be restructured: ${recd.reason}` });
           break; // walled: the gate skips it; no flat re-draw
         }
-        push({ round, file: currentFile(), target: target.name, by: "rec", action: "REC", move: `REC ${target.name}: + ${recd.rung}`, rung: recd.rung, basis: `EVA failed (${recd.because}); the slot DEF now stands on new ground: ${recd.rung} (${recd.chars} chars)` });
+        push({ round, file: currentFile(), target: target.name, by: "rec", action: "REC", move: `REC ${target.name}: + ${recd.rung}`, rung: recd.rung, defFrom: defId, defTo: slotDef(target), basis: `EVA failed (${recd.because}); the slot DEF now stands on new ground: ${recd.rung} (${recd.chars} chars)` });
         continue; // the next draw is at the REC'd DEF
       }
       // the failure is another unit's — carry this change, chase what the

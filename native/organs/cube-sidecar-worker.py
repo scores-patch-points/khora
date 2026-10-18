@@ -44,9 +44,14 @@ stableProvenanceId is JS (khora/opencode-eot.mjs, penelope's derivation) and
 hashes what this worker returns. rfc8785 was removed from the registry for the
 same reason: canonical JSON buys nothing when the hasher is not python.
 
-Bounds: replies are serialized and refused (`over_bounds`) above the request's
-declared maxBytes; non-JSON-able values degrade to a marker (`nonfinite`,
-`bytes_b64`, `repr`) rather than an exception.
+Bounds: a reply is serialized, and one whose serialized size is over the bound is
+refused WHOLE as `over_bounds` (it names the size; nothing is truncated). The bound
+is FOLD_CUBE_MAX_BYTES, which the host sets from its one declared constant; a
+request's own `maxBytes` can only lower it. Non-JSON-able values degrade to a
+marker (`nonfinite`, `bytes_b64`, `repr`) rather than an exception.
+
+Known limit: the audit hook sees Python-level I/O only. Native code (duckdb,
+sqlite, pyarrow, ...) writes and reads through C and is not walled here.
 """
 import base64
 import importlib
@@ -105,6 +110,11 @@ _DENY_WRITE_EVENTS = ("os.remove", "os.rename", "os.mkdir", "os.rmdir")
 
 
 def _under_scratch(p):
+    # /dev/null is a write that keeps nothing: libraries open it for writing at import time
+    # (spaCy, stanza, coreferee, sentence-transformers, xgrammar all do), and refusing it made
+    # every one of them unimportable here. It is the one path outside scratch that is allowed.
+    if p == os.devnull:
+        return True
     try:
         return os.path.commonpath([os.path.realpath(p), str(SCRATCH)]) == str(SCRATCH)
     except (TypeError, ValueError):
@@ -325,10 +335,12 @@ def do_perceive(req):
     producer = f"py:perceive.{organ}@sidecar"
     try:
         if organ == "ocrmac":
-            import ocrmac  # noqa: PLC0415
+            # the OCR class lives in the ocrmac.ocrmac submodule, not on the package
+            from ocrmac import ocrmac  # noqa: PLC0415
 
             pref = [lang] if lang and lang != "eng" else ["en-US"]
-            text = "\n".join(t for t, _ in ocrmac.OCR(str(f), language_preference=pref).recognize())
+            # recognize() yields (text, confidence, bounding box) rows
+            text = "\n".join(row[0] for row in ocrmac.OCR(str(f), language_preference=pref).recognize())
         elif organ == "pdfplumber":
             import pdfplumber  # noqa: PLC0415
 
@@ -375,6 +387,36 @@ def handle(req):
     return gap("unknown_op", f'"{op}" is not an op of the cube worker')
 
 
+# The reply bound: the host declares it once (cube-sidecar.mjs CUBE_MAX_BYTES) and passes it in
+# FOLD_CUBE_MAX_BYTES. 4 MiB is the same figure py-engine.js already uses.
+MAX_BYTES = int(os.environ.get("FOLD_CUBE_MAX_BYTES") or 4 * 1024 * 1024)
+
+
+def cap_for(req):
+    """The bound for this reply: the declared one, or lower when the request asks for lower."""
+    asked = req.get("maxBytes") if isinstance(req, dict) else None
+    if isinstance(asked, int) and not isinstance(asked, bool) and asked > 0:
+        return min(MAX_BYTES, asked)
+    return MAX_BYTES
+
+
+def bounded(out, cap):
+    """The reply as one JSON line, or a typed refusal naming its size when it is over the bound."""
+    payload = json.dumps(out, ensure_ascii=False)
+    size = len(payload.encode("utf-8"))
+    if size <= cap:
+        return payload
+    refusal = gap(
+        "over_bounds",
+        f"the reply is {size} bytes, over the {cap}-byte bound — refused whole, nothing was truncated",
+        bytes=size,
+        bound=cap,
+    )
+    if "id" in out:
+        refusal["id"] = out["id"]
+    return json.dumps(refusal, ensure_ascii=False)
+
+
 def main():
     oneshot = "--oneshot" in sys.argv
     for line in sys.stdin:
@@ -382,6 +424,7 @@ def main():
         if not line:
             continue
         req_id = None
+        doc = None
         try:
             doc = json.loads(line)
             req_id = doc.get("id") if isinstance(doc, dict) else None
@@ -394,7 +437,7 @@ def main():
             out = gap("worker_error", "the handler returned a non-object")
         if req_id is not None:
             out["id"] = req_id
-        sys.stdout.write(json.dumps(out, ensure_ascii=False) + "\n")
+        sys.stdout.write(bounded(out, cap_for(doc)) + "\n")
         sys.stdout.flush()
         if oneshot:
             return 0

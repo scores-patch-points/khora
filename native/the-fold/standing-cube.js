@@ -127,6 +127,7 @@ export const FLAG_CELLS = Object.freeze({
   unknown_path: "SIG·Figure", // the answer names a path that resolves to no referent — cast: beyond-reach
   unverified_pass: "EVA·Figure", // a check nothing can trigger — the unreachable guard / insufficient
   polarity_mismatch: "EVA·Figure", // the sentence negates the witnessed source it overlaps — contradiction
+  ledger_contested: "CON·Figure", // this answer denies an arrangement the task's turns already heard — the cut meets its link (S69)
 });
 export const cellForFlag = (kind) => FLAG_CELLS[kind] ?? null;
 

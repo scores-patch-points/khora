@@ -45,6 +45,7 @@ import { runProxyTurn } from "../../proxy-runner.mjs";
 import { detectCodeLanguage, generationBriefFor } from "../adapters/code/language.js";
 import { loadCodeKeywordPrior, keywordSetOf } from "../adapters/text/code-structure.js";
 import { declaresKeyword } from "../adapters/code/mechanical.js";
+import { stepTask } from "./step-fold.js";
 
 export const AGENT_MAX_TURNS = 25;
 const RUN_TIMEOUT_MS = 3000;
@@ -184,7 +185,7 @@ export function languageBlockFor(files) {
  * is the FINAL virtual filesystem state, so a caller can read back what
  * was built. Never throws for an ordinary run — only for a malformed call.
  */
-export async function runOpenCodingLoop({ sessionId, userId = null, model, task, files = new Map(), maxTurns = AGENT_MAX_TURNS, caller = null, signal = null, onNote = null }) {
+export async function runOpenCodingLoop({ sessionId, userId = null, model, task, files = new Map(), maxTurns = AGENT_MAX_TURNS, caller = null, signal = null, onNote = null, turnRunner = runProxyTurn, stepFold = true }) {
   if (!task || typeof task !== "string") throw new Error("task must be a declared string");
   const rounds = [];
   let lastNote = null;
@@ -199,9 +200,9 @@ export async function runOpenCodingLoop({ sessionId, userId = null, model, task,
   for (let turn = 1; turn <= maxTurns; turn += 1) {
     const roundTask = turn === 1
       ? `${task}\n\nVirtual files so far:\n${renderFiles(files)}${languageBlockFor(files)}\n\n${ACTION_FORMAT}`
-      : `${task}\n\n${lastNote}\n\n${ACTION_FORMAT}`;
+      : stepFold ? stepTask({ task, rounds, files, lastNote, actionFormat: ACTION_FORMAT }) : `${task}\n\n${lastNote}\n\n${ACTION_FORMAT}`;
 
-    const result = await runProxyTurn({ sessionId, userId, model, task: roundTask, chatHistory: [], mode: "chat", drawOnly: true, caller, signal }, null, (n) => note({ ...n, agentTurn: turn }));
+    const result = await turnRunner({ sessionId, userId, model, task: roundTask, chatHistory: [], mode: "chat", drawOnly: true, caller, signal }, null, (n) => note({ ...n, agentTurn: turn }));
     const parsed = parseAction(result.text);
 
     if (!parsed.ok) {

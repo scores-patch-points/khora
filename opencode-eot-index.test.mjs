@@ -1,5 +1,8 @@
 // Falsification: the derived binary index.
 //
+// This suite falsifies the LEGACY jsonl+idx lane (the FOLD_EOT_BIN=0 escape hatch; the binary log —
+// now the default writer — has its own suite, opencode-eot-bin.test.mjs).
+//
 // Claims under test (adapted from eodb's store/fold falsifiers):
 //   1. EQUIVALENCE — readIndexed(task) deep-equals read(task). The index is a cache; if it ever
 //      diverges from the log, these tests fail.
@@ -8,6 +11,7 @@
 //   3. DERIVED, NOT AUTHORITATIVE — building the index never touches the jsonl bytes.
 //   4. HEADER SCAN — count/range come from fixed headers, no body decode.
 //   5. DRIFT IS TYPED — a corrupt or foreign index falls back to a full parse and stays equivalent.
+process.env.FOLD_EOT_BIN = "0"; // this suite is the jsonl lane's falsifier
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";

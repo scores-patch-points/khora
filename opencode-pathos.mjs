@@ -9,6 +9,7 @@ import { pathosOf, reGroundCondition, reGround, landReGround } from "./native/or
 import { pathosTurn } from "./native/the-fold/pathos-turn.js";
 import { blocks, liveAnswers, blocksToOperations } from "./opencode-record.mjs";
 import { append, rows, lean } from "./opencode-ledger.mjs";
+import { rezero } from "./opencode-delta.mjs";
 
 export const PATHOS_ON = () => (process.env.FOLD_PATHOS ?? "0") !== "0";
 const ORGANS = { pathosOf, reGroundCondition, reGround, landReGround };
@@ -47,5 +48,14 @@ export function pathosPass({ task, text, person = "person", turn = null, state =
     m: { condition: r.condition.kind, measured: r.read.curve.measured, experiencer: r.read.forWhom.who, concession: conceded },
   });
   const note = conceded ? `ground conceded: ${conceded.kind} at ${conceded.at ?? "e?"}` : null; // a mechanical fact; never a feeling
-  return { condition: r.condition.kind, measured: r.read.curve.measured, act: r.act, note, id: row.id, lastKind: r.lastKind, heldSinceLast: r.heldSinceLast };
+  // C5 RE-ZERO: a conceded ground is a frame change — the holograph re-zeros for the workspace reader
+  // (a new generation, seeded fresh; the old rows stay frozen on the ledger, never deleted).
+  let rezeroed = null;
+  if (conceded) {
+    try {
+      const z = rezero({ task, reader: "workspace", register: "witnessed", reason: `pathos:${conceded.kind}@${conceded.at ?? "?"}` });
+      rezeroed = z?.id ?? true;
+    } catch { /* re-zero never blocks a pass */ }
+  }
+  return { condition: r.condition.kind, measured: r.read.curve.measured, act: r.act, note, id: row.id, lastKind: r.lastKind, heldSinceLast: r.heldSinceLast, rezeroed };
 }

@@ -44,6 +44,12 @@ export const REC_AGREEMENT_FLOOR = 0.5;
  *  never silently tuned. A pair counts as matched within 1e-3 of |1+|λ|+|μ||. */
 export const EIGEN_AGREEMENT_TOL = 1e-3;
 
+/** The longest series the witness will take. dmd.js is cubic in the window (which defaults to n/2)
+ *  and runs on the door's own thread, which every turn's calls wait behind. Measured here:
+ *  800 points held the door ~230 ms, 1,600 held it ~1.6 s, 3,200 held it ~16 s. Over the cap the
+ *  call is refused by name and nothing is truncated. FOLD_CUBE_MAX_SERIES moves it. */
+export const CUBE_MAX_SERIES = Number(process.env.FOLD_CUBE_MAX_SERIES ?? 512);
+
 /** The four families' domains, derived (never restated): OPERATOR_CHAIN is
  *  domain-major in threes (cube.js: DOMAINS.flatMap(...)), so the op's index
  *  IS its domain. */
@@ -180,24 +186,64 @@ export function eigenAgreement(pyValues, jsValues) {
 }
 
 /**
+ * The model order both engines are given when the caller declares none.
+ *
+ * Gavish & Donoho's (2014) optimal hard threshold for UNKNOWN noise — the rule PyDMD's own
+ * svd_rank=0 uses: tau = omega(beta) * median(sigma), omega(beta) = 0.56 beta^3 - 0.95 beta^2 +
+ * 1.82 beta + 1.43, beta = min(m,n) / max(m,n) — floored at the precision the singular values
+ * actually have. dmd.js's economySVD eigendecomposes X Xᵀ, which squares the condition number, so
+ * a value below sqrt(max(m,n) * eps) * sigma_1 is rounding, not signal. (dmd.js's own "numerical"
+ * rank applies the textbook max(m,n) * eps floor to those Gram-route values and so keeps rounding
+ * noise as modes: 16 of them for a 3-mode series, which read as a disagreement with PyDMD.)
+ *
+ * `s` may be shorter than min(m,n): economySVD drops values at its absolute floor, and the dropped
+ * ones count as zeros in the median. Returns rank 0 when there is no signal at all.
+ */
+export function derivedRank(s, m, n) {
+  const k = Math.min(m, n);
+  if (!Array.isArray(s) || !s.length || !(s[0] > 0)) return { rank: 0, basis: "derived: no signal — the spectrum is empty or zero" };
+  const padded = [...s, ...Array(Math.max(0, k - s.length)).fill(0)].sort((a, b) => a - b);
+  const median = k % 2 ? padded[(k - 1) / 2] : (padded[k / 2 - 1] + padded[k / 2]) / 2;
+  const beta = k / Math.max(m, n);
+  const omega = 0.56 * beta ** 3 - 0.95 * beta ** 2 + 1.82 * beta + 1.43;
+  const noiseTau = omega * median;
+  const floor = Math.sqrt(Math.max(m, n) * Number.EPSILON) * s[0];
+  const tau = Math.max(noiseTau, floor);
+  const rank = s.filter((v) => v > tau).length;
+  return {
+    rank,
+    tau,
+    basis: `derived: Gavish-Donoho threshold ${noiseTau.toExponential(2)}, floored at the Gram-route precision ${floor.toExponential(2)} → ${rank} of ${k} singular values`,
+  };
+}
+
+/**
  * The pydmd witness (DEF·Pattern): PyDMD against the kernel's own dmd.js on the
  * same declared series. Both engines read the SAME Hankel embedding (built here
- * once, from the declared window), return discrete eigenvalues; the agreement
- * is the finding, recorded in shadow. Sidecar absent → the JS reading alone,
- * disclosed as fallback; JS absent → the python reading alone. No score is
- * claimed, so the prequential firewall is satisfied by the replication
+ * once, from the declared window) and the SAME model order (declared, or derived
+ * once by derivedRank and recorded with its basis), return discrete eigenvalues;
+ * the agreement is the finding, recorded in shadow. Sidecar absent → the JS
+ * reading alone, disclosed as fallback; JS absent → the python reading alone. No
+ * score is claimed, so the prequential firewall is satisfied by the replication
  * declaration, never by an after-the-fact framing.
  */
 async function pydmdWitness({ body, task, agent, cell, row, spread }) {
   const series = seriesFrom(body.text);
   if (!series.series) return { ok: false, gap: series.gap, why: series.why ?? "the call carried no series in text" };
   const n = series.series.length;
+  if (n > CUBE_MAX_SERIES) {
+    return {
+      ok: false,
+      gap: "series_too_long",
+      why: `${n} points; the cap is ${CUBE_MAX_SERIES} — the decomposition is cubic in the window and runs on the door's own thread. Nothing was truncated: send a shorter series, or a downsampled one you name as such.`,
+    };
+  }
   const declared = Number.isInteger(body.frame) && body.frame >= 2 && body.frame < n;
   const window = declared ? body.frame : Math.max(2, Math.floor(n / 2));
   const windowBasis = declared ? "declared (body.frame)" : "series length / 2 (mechanical default, disclosed)";
-  // A declared model order makes the two engines comparable (both truncated to
-  // the same rank); without one, dmd.js derives "numerical" and PyDMD runs
-  // full-rank — the disagreement then includes rank choice, disclosed.
+  // Both engines are given the SAME model order, so the agreement compares readings and not rank
+  // choices: the caller's declared one, or one derived once from the spectrum (derivedRank) and
+  // recorded with its basis. Each engine's own default differs and read as a false disagreement.
   const declaredRank = Number.isInteger(body.rank) && body.rank >= 1 ? body.rank : null;
   const H = hankel(series.series, window);
   const X = H.map((r) => r.slice(0, -1));
@@ -206,10 +252,18 @@ async function pydmdWitness({ body, task, agent, cell, row, spread }) {
 
   let js = null;
   let jsWhy = null;
+  let rank = declaredRank;
+  let rankBasis = declaredRank ? "declared (body.rank)" : "none — dmd.js was unavailable to derive one; PyDMD's own default";
   try {
-    const { dmd } = await import("./native/kernel/dmd.js");
-    const out = dmd(X, Xp, { rank: declaredRank ?? "numerical" });
-    js = { eigenvalues: out.eigenvalues.map((e) => ({ re: e.re, im: e.im })), rank: out.rank, producer: `js:dmd.js@${declaredRank ?? "numerical"}` };
+    const { dmd, economySVD } = await import("./native/kernel/dmd.js");
+    if (!declaredRank) {
+      const derived = derivedRank(economySVD(X, { rank: Infinity, relTol: 0 }).s, X.length, X[0].length);
+      if (derived.rank === 0) return { ok: false, gap: "no_signal", why: "the series carries no signal to decompose (its spectrum is empty or zero)" };
+      rank = derived.rank;
+      rankBasis = derived.basis;
+    }
+    const out = dmd(X, Xp, { rank });
+    js = { eigenvalues: out.eigenvalues.map((e) => ({ re: e.re, im: e.im })), rank: out.rank, producer: `js:dmd.js@${rank}` };
   } catch (e) {
     jsWhy = String(e?.message ?? e).slice(0, 200);
   }
@@ -221,7 +275,7 @@ async function pydmdWitness({ body, task, agent, cell, row, spread }) {
     module: "pydmd",
     attr: "DMD",
     construct_args: [],
-    construct_kwargs: declaredRank ? { svd_rank: declaredRank } : {},
+    construct_kwargs: rank ? { svd_rank: rank } : {},
     method: "fit",
     coerce: "numpy",
     args: [X],
@@ -251,7 +305,8 @@ async function pydmdWitness({ body, task, agent, cell, row, spread }) {
     evaluates: {
       window,
       windowBasis,
-      rank: declaredRank,
+      rank,
+      rankBasis,
       seriesLength: n,
       prequential: { scored: "before", basis: `${spread} — no prediction score is claimed; agreement with dmd.js only` },
       producer,
@@ -352,7 +407,8 @@ export async function cube({ body = {}, task = null, agent = "cube", stateDir = 
   // THE RECORD, in shadow: one exec event through the one appender, one mark
   // on the medium (the next turn's note carries it), one ledger row.
   const agreementTxt = result.agreement === null ? "no agreement computable" : `agreement ${result.agreement.toFixed(2)} (${result.matched}/${result.pairs} eigenvalue(s) matched)`;
-  const finding = `cube(${row.role}) ${cell} ${row.package} [shadow]: ${agreementTxt}; ${result.standing}; producer ${result.producer ?? "unknown"}${result.fallback.used ? `; fallback: ${result.fallback.why}` : ""}${result.rec ? `; REC: ${result.rec.why}` : ""}`;
+  const rankTxt = `rank ${result.evaluates.rank ?? "default"} (${String(result.evaluates.rankBasis).split(/[ :(]/)[0]})`;
+  const finding = `cube(${row.role}) ${cell} ${row.package} [shadow]: ${agreementTxt}; ${rankTxt}; ${result.standing}; producer ${result.producer ?? "unknown"}${result.fallback.used ? `; fallback: ${result.fallback.why}` : ""}${result.rec ? `; REC: ${result.rec.why}` : ""}`;
   try {
     eot.append({
       task,
@@ -372,6 +428,7 @@ export async function cube({ body = {}, task = null, agent = "cube", stateDir = 
         window: result.evaluates.window,
         windowBasis: result.evaluates.windowBasis,
         rank: result.evaluates.rank,
+        rankBasis: result.evaluates.rankBasis,
         agreement: result.agreement,
         matched: result.matched,
         pairs: result.pairs,
@@ -412,6 +469,7 @@ export async function cube({ body = {}, task = null, agent = "cube", stateDir = 
     window: result.evaluates.window,
     windowBasis: result.evaluates.windowBasis,
     rank: result.evaluates.rank,
+    rankBasis: result.evaluates.rankBasis,
     agreement: result.agreement,
     matched: result.matched,
     pairs: result.pairs,

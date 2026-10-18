@@ -12,6 +12,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { taskDir } from "./opencode-worknotes.mjs";
+import { append as ledgerAppend, lean } from "./opencode-ledger.mjs";
 
 const REFERENT = /^[\w.@:/-]{1,80}$/;
 const oneLine = (s) => String(s ?? "").replace(/\s+/g, " ").trim();
@@ -297,7 +298,7 @@ const lastSeqFor = (logFile, referent) => {
 const tail = (s, n = 400) => { const t = String(s ?? "").trim(); return t.length > n ? t.slice(-n) : t; };
 
 /** DEF -> EVA -> admit. Returns { ok, kept, id, judge, exitCode, tail } or { ok:false, gap }. */
-export function admit({ task, agent, referent, delta, check, cwd, exitCode, address = "", source = "box", model = "box", provisional = false, parallel = false, action = null, by = null, before = null, after = null, rungs = [], def = null, draw = null, refused = null, now = Date.now() } = {}) {
+export function admit({ task, agent, referent, delta, check, cwd, exitCode, address = "", source = "box", model = "box", provisional = false, parallel = false, action = null, by = null, before = null, after = null, rungs = [], def = null, draw = null, refused = null, git = null, now = Date.now() } = {}) {
   const f = files(task);
   if (!f || !/^[\w.-]+$/.test(String(agent ?? ""))) return { ok: false, gap: "bad-address" };
   if (!REFERENT.test(String(referent ?? "")) || !oneLine(delta)) return { ok: false, gap: "bad-referent" };
@@ -349,6 +350,23 @@ export function admit({ task, agent, referent, delta, check, cwd, exitCode, addr
       `◼ EOT`, "", "",
     ].join("\n"));
   }
+  // B1 WRITE-THROUGH (gated, FOLD_ONE_LEDGER=1): the same act lands on the ONE ledger (weft.jsonl) as a
+  // lean row, so every view (stakes, holograph, cloth, rank) is a fold of one store. EOT.md/LOG.jsonl stay
+  // on disk as read-compat. Off by default while the one-ledger migration is being validated.
+  if (process.env.FOLD_ONE_LEDGER === "1") try {
+    const env = lean(task, {
+      layer: "record",
+      ins: [referent],
+      con: prior ? [[referent, kept ? "supersedes" : "answers", prior.id]] : [],
+      eva: kept ? [] : [["con", 0]],
+      clause: kept ? id : "",
+    });
+    ledgerAppend(task, {
+      schema: "EOTBlock@1", op: kept ? "ADMIT" : "REC", task, referent, ...env,
+      dmd: true, ...(git ? { git } : {}),
+      m: { verdict: kept ? "green" : provisional ? "carried" : "reverted", judge, exitCode: exit, check: oneLine(check), delta: [oneLine(delta)], id: kept ? id : null, prior: prior?.id ?? null },
+    });
+  } catch { /* the one-ledger write never blocks an admit */ }
   // EVA reasoning, recorded: WHY this draw was admitted / carried / reverted —
   // the check that judged it, the judge, the exit code, and the block it
   // supersedes. The mouth is disclosed as `model`, never as the reasoner.

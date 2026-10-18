@@ -35,7 +35,7 @@ const membersList = (ns, cap = 8) => (ns.length <= cap ? ns.join(",") : `${ns.sl
 // `delta` (FOLD_SURF_MODE=delta, shadow arm): pointer lines, but the Figure rung holds the turns the record says MOVED the
 // reader most (`rank`: Map turn n → position, 0 = largest delta), newest breaking ties, instead of simply the newest.
 // Order only: no number reaches the note. Without a rank it is exactly the pointer arm.
-export function surf({ ask = "", turns = [], figure = 2, kindCap = 6, sentencesPer = 2, mode = process.env.FOLD_SURF_MODE ?? "pointer", rank = null } = {}) {
+export function surf({ ask = "", turns = [], figure = 2, kindCap = 6, sentencesPer = 2, mode = process.env.FOLD_SURF_MODE ?? "pointer", rank = null, extraTerms = [] } = {}) {
   if (!turns.length) return { note: "", rungs: [], chars: 0 };
   const pointer = mode === "pointer" || mode === "delta";
   // idf over the old turns; a term in at least half the units is the thread's idiom and weighs nothing
@@ -43,7 +43,7 @@ export function surf({ ask = "", turns = [], figure = 2, kindCap = 6, sentencesP
   const df = new Map();
   for (const d of docs) for (const w of d) df.set(w, (df.get(w) ?? 0) + 1);
   const idf = (w) => (turns.length > 1 && (df.get(w) ?? 0) * 2 >= turns.length ? 0 : Math.log(1 + turns.length / (df.get(w) ?? 1)));
-  const askTerms = new Set(terms(ask));
+  const askTerms = new Set([...terms(ask), ...extraTerms.map((t) => String(t).toLowerCase())]); // extraTerms: words the ask MEANS (opencode-semantic.mjs), used as if it had named them
   const sig = (i) => [...docs[i]].map((w) => [w, idf(w)]).filter(([w, s]) => s > 0 && (df.get(w) ?? 0) >= 2).sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1)).slice(0, 3).map(([w]) => w);
 
   const rungs = [];
@@ -113,5 +113,9 @@ export function surf({ ask = "", turns = [], figure = 2, kindCap = 6, sentencesP
     ? `[fold: ${n} earlier turn(s) as addresses — SNIP a "turn N" to re-read its bytes from the session]`
     : `[fold: ${n} earlier turn(s) held as a ladder; the full history stays in the session, drill down by address]`;
   const note = `${head}\n${rungs.map((r) => r.line).join("\n")}`;
+  // Ascent must compress. A history so short that the ladder (its head alone) outweighs the turns it stands for is
+  // not collapsed: the caller keeps the turns and the ladder says nothing.
+  const raw = turns.reduce((a, t) => a + String(t.ask ?? "").length + String(t.answer ?? "").length, 0);
+  if (note.length >= raw) return { note: "", rungs: [], chars: 0, mode, uncut: true };
   return { note, rungs: rungs.map(({ rung, turn }) => ({ rung, turn })), chars: note.length, mode };
 }

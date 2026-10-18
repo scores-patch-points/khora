@@ -7,6 +7,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { surf } from "./opencode-surf.mjs";
+import { semanticTerms, _resetForTests } from "./opencode-semantic.mjs";
+import { STUB } from "./semantic-stub.mjs";
 
 // The arm under test: FOLD_SURF_MODE=ladder (default, sentences ride) or =pointer (addresses only). The ablation is
 // the same suite run twice; a red in pointer where ladder is green is the case where the trail alone is NOT enough.
@@ -19,8 +21,8 @@ const history = (len, plant) => Array.from({ length: len }, (_, i) => plant[i + 
 
 const cites = (note, n) => new RegExp(`(?:turns? |,)${n}(?:[,\\s]|$)|turn ${n}:|\\b${n}–|–${n}\\b`).test(note);
 const quotes = (note, s) => note.includes(s);
-const arms = (turns, ask, needed, mode = MODE) => {
-  const note = surf({ ask, turns, mode }).note;
+const arms = (turns, ask, needed, mode = MODE, extraTerms = []) => {
+  const note = surf({ ask, turns, mode, extraTerms }).note;
   const nullView = turns.slice(-2).map((t) => `${t.ask} ${t.answer}`).join(" ");
   return {
     trace: { addr: cites(note, needed), text: false, note },
@@ -60,10 +62,16 @@ test("L3 FALSIFIER: a detail the later step depends on but does not name still l
 });
 
 // ── L4: an indirect cue through a synonym ──
-test("L4 FALSIFIER: the ask paraphrases the earlier term (retry → resend) and still finds it", () => {
+test("L4 the ask paraphrases the earlier term (retry → resend): missed lexically, found with the semantic expansion", async () => {
   const turns = history(100, { 30: { ask: "pick the retry policy", answer: "Retry uses jittered backoff. Tests pass." } });
-  const a = arms(turns, "make the resend logic more patient", 30);
-  assert.ok(a.trace.addr || a.quotes("jittered backoff"), "synonym cue missed (lexical matching only)");
+  const ask = "make the resend logic more patient";
+  const lexical = arms(turns, ask, 30);
+  assert.ok(!(lexical.trace.addr || lexical.quotes("jittered backoff")), "premise: lexical-only matching misses the synonym (the documented limit)");
+  _resetForTests();
+  const vocab = [...new Set(turns.flatMap((t) => `${t.ask} ${t.answer}`.toLowerCase().match(/[a-z]{4,}/g) ?? []))];
+  const sem = await semanticTerms({ ask, vocab, embedFn: STUB, env: {} });
+  const a = arms(turns, ask, 30, MODE, sem.terms);
+  assert.ok(a.trace.addr || a.quotes("jittered backoff"), `synonym cue still missed with semantic terms ${sem.terms}`);
 });
 
 // ── L5: a trace that the work itself leaves keeps the needle findable (the stigmergic move: deposit, don't remember) ──

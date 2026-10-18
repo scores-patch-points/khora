@@ -79,6 +79,8 @@ const workerEnv = ({ scratch, registryFile }) => ({
   TMPDIR: scratch,
   FOLD_CUBE_SCRATCH: scratch,
   FOLD_CUBE_REGISTRY: registryFile,
+  // The reply bound is declared once, here; the worker enforces it (`over_bounds`).
+  FOLD_CUBE_MAX_BYTES: String(CUBE_MAX_BYTES),
   PYTHONDONTWRITEBYTECODE: "1",
   PYTHONNOUSERSITE: "1",
   LANG: process.env.LANG ?? "en_US.UTF-8",
@@ -178,6 +180,19 @@ function startService(python, registryFile) {
   proc.stdout.setEncoding("utf8");
   proc.stdout.on("data", (chunk) => {
     state.buf += chunk;
+    // The worker refuses replies over CUBE_MAX_BYTES. A line that has grown to twice that with no
+    // newline is a worker that is not keeping its bound: kill it rather than buffer it without end.
+    if (state.buf.length > CUBE_MAX_BYTES * 2 && !state.buf.includes("\n")) {
+      state.dead = true;
+      state.buf = "";
+      for (const p of state.pending.values()) {
+        clearTimeout(p.timer);
+        p.resolve({ ok: false, gap: "over_bounds", why: `a reply line passed ${CUBE_MAX_BYTES * 2} bytes without ending — the worker was killed; the next call starts a fresh one` });
+      }
+      state.pending.clear();
+      kill(state);
+      return;
+    }
     let i;
     while ((i = state.buf.indexOf("\n")) !== -1) {
       const line = state.buf.slice(0, i);

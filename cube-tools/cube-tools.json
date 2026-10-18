@@ -60,7 +60,6 @@
     "tools": [
       {"package": "igraph", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "Graph.community_leiden"},
       {"package": "leidenalg", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "find_partition"},
-      {"package": "infomap", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "Infomap flow-based communities"},
       {"package": "igraph", "source": "pypi", "role": "null", "family": "perturbation", "env": "py312", "use": "Graph.rewire: degree-preserving rewiring null"},
       {"package": "networkx", "source": "pypi", "role": "null", "family": "perturbation", "env": "py312", "use": "double_edge_swap: degree-preserving rewiring null"}
     ]
@@ -169,8 +168,7 @@
     "tools": [
       {"package": "stumpy", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "stump and motifs: recurring motifs and discords in the series the ants read"},
       {"package": "mlxtend", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "frequent_patterns.fpgrowth"},
-      {"package": "networkx", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "isomorphism.GraphMatcher (VF2) for a recurring subgraph"},
-      {"package": "pm4py", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "discover_petri_net_inductive: recurring arrangements of events"}
+      {"package": "networkx", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "isomorphism.GraphMatcher (VF2) for a recurring subgraph"}
     ]
   },
   "SYN·Ground": {
@@ -286,7 +284,7 @@
     "tools": [
       {"package": "river", "source": "pypi", "role": "move", "family": "prediction", "env": "py312", "use": "drift.ADWIN as the trigger: it resets its own window on change"},
       {"package": "ruptures", "source": "pypi", "role": "move", "family": "prediction", "env": "py312", "use": "Pelt as the offline trigger"},
-      {"package": "statsmodels", "source": "pypi", "role": "witness", "family": "prediction", "env": "py312", "use": "tsa.regime_switching.MarkovRegression"}
+      {"package": "statsmodels", "source": "pypi", "role": "witness", "family": "prediction", "env": "py312", "use": "tsa.regime_switching.markov_regression.MarkovRegression"}
     ]
   },
   "REC·Figure": {

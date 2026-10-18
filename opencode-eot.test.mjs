@@ -292,13 +292,50 @@ test("a model cannot author an edit; drift is closed by reconcile; bash is swept
   assert.equal(E.treeVsDisk("t", root).length, 0);
   const t0 = Date.now();
   fs.writeFileSync(path.join(root, "made-by-bash.txt"), "hi");
-  assert.equal(E.sweepEdits({ task: "t", agent: "a", root, since: t0 }).wrote, 1);
+  const swept = E.sweepEdits({ task: "t", agent: "a", root, since: t0 });
+  assert.equal(swept.wrote, 1);
   assert.equal(E.projectTree("t").files.has("made-by-bash.txt"), true);
+  // THE STIGMERGIC LEDGER, IN THE EOT: the swept file is an edit claim the agent deposited, so every
+  // other agent's `taken` projection sees it — the same item the one-file tools claim (autoClaim).
+  assert.deepEqual(swept.claimed, ["made-by-bash.txt"]);
+  assert.deepEqual(E.projectTaken("t", "b"), [{ item: "edit made-by-bash.txt", agent: "a" }]);
+  assert.deepEqual(E.projectTaken("t", "a"), [], "the claimant's own edits are not 'taken' for itself");
   const w = E.recordWorktree({ task: "t", agent: "a", op: "create", directory: "/x/wt1", branch: "b" });
   assert.equal(w.standing, "witnessed");
   assert.deepEqual([...E.projectTree("t").worktrees], ["/x/wt1"]);
   assert.equal(E.recordExec({ task: "t", agent: "a", command: "ls", ok: true }).standing, "witnessed");
   assert.equal(E.append({ task: "t", agent: "a", stage: "admit", parent: E.recordExec({ task: "t", agent: "a", command: "ls", ok: true }).event_id }).gap, "unwitnessed_admit", "an exec is not a verify");
+});
+
+test("a sweep of home or the filesystem root is refused, typed — no walk, no rows", () => {
+  fresh();
+  const home = fs.realpathSync(os.homedir());
+  const r = E.sweepEdits({ task: "t", agent: "a", root: home, since: 0 });
+  assert.equal(r.ok, false);
+  assert.equal(r.gap, "root-too-large");
+  assert.equal(E.sweepEdits({ task: "t", agent: "a", root: path.parse(home).root, since: 0 }).gap, "root-too-large");
+  assert.equal(E.read("t").events.length, 0, "refused typed, nothing written");
+});
+
+test("the sweep's walk is bounded by entries, not only yields; a capped sweep says so", () => {
+  fresh();
+  const root = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), "wt-")));
+  fs.writeFileSync(path.join(root, "a.txt"), "a");
+  fs.writeFileSync(path.join(root, "b.txt"), "b");
+  const r = E.sweepEdits({ task: "t", agent: "a", root, since: Date.now() - 1000, entries: 1 });
+  assert.equal(r.capped, true);
+  assert.equal(r.wrote, 1, "one entry visited, the other left for the next sweep");
+});
+
+test("projectMarks folds an agent's marks of one kind from the EOT, newest last", () => {
+  fresh();
+  E.recordMark({ task: "t", agent: "swarm", kind: "fact", text: "first fact", now: 1 });
+  E.recordMark({ task: "t", agent: "swarm", kind: "block", text: "a block", now: 2 });
+  E.recordMark({ task: "t", agent: "swarm", kind: "fact", text: "second fact", now: 3 });
+  E.recordMark({ task: "t", agent: "other", kind: "fact", text: "not the swarm's", now: 4 });
+  assert.deepEqual(E.projectMarks("t", { agent: "swarm", kind: "fact" }).map((m) => m.text), ["first fact", "second fact"]);
+  assert.deepEqual(E.projectMarks("t", { kind: "block" }).map((m) => m.text), ["a block"]);
+  assert.equal(E.projectMarks("t", { agent: "swarm", kind: "fact" })[1].t, 3);
 });
 
 test("the panel's views: log without bytes, per-path edits with before/after, both at a cursor", () => {
@@ -333,4 +370,22 @@ test("eventDetail: the full event, its source, the parent chain, and who held it
   assert.equal(d.chain[0].id, r1.event_id);
   assert.deepEqual(d.held.map((h) => [h.stage, h.agent, h.holder]), [["claim", "a", null], ["contend", "b", "a"]], "claims and contentions for the path, chronological");
   assert.equal(E.eventDetail("t", "evt_missing"), null);
+});
+
+// The fold-index tells the model to SNIP a "turn N"; before this rung the address was unresolvable, so every
+// promised drill returned a gap and the model re-measured from disk. Resolve it from the session's turns file.
+test("snip resolves a turn address from the session's turns file (and a bad turn is a typed gap)", async () => {
+  fresh();
+  const wn = await import("./opencode-worknotes.mjs");
+  wn.writeTurnsFile({ file: wn.turnsFile("t", "ses_abcd1234"), agent: "ses_abcd1234", turns: [
+    { n: 1, ask: "open the terminal locally", grounds: ["shell"], answer: "the tunnel is up on 8787" },
+    { n: 2, ask: "now show me", grounds: [], answer: "here it is" },
+  ] });
+  const s = E.snip({ task: "t", agent: "ses_abcd1234", ref: "turn 1" });
+  assert.equal(s.ok, true);
+  assert.match(s.bytes, /open the terminal locally/);
+  assert.equal(s.provenance.kind, "turn");
+  assert.equal(s.provenance.n, 1);
+  assert.equal(s.standing, "asserted"); // a turn is model-origin
+  assert.equal(E.snip({ task: "t", agent: "ses_abcd1234", ref: "turn 99" }).ok, false);
 });

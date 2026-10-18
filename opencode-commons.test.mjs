@@ -275,3 +275,28 @@ test("MECHANICAL FOLD: the surf note carries the thread across many distinct ask
   assert.match(String(r.note ?? ""), /thread\(s\)/, "threads, not a per-turn list");
   assert.doesNotMatch(String(r.note ?? ""), /\bNaN\b|\bundefined\b/);
 });
+
+test("REALSHAPE: the fork's payload — tool input as a JSON string — still leaves the claim, and the note carries it", async () => {
+  const { answer } = await boot();
+  const ws = repo();
+  const file = path.join(ws, "src", "real.js");
+  fs.writeFileSync(file, "x");
+  // exactly what the plugin sends: session.tool.called carrying the input JSON-stringified
+  await answer({ event: "event", sessionID: "ses_A", type: "session.tool.input.started", data: { id: "call1", name: "edit" } });
+  await answer({ event: "event", sessionID: "ses_A", type: "session.tool.called", data: { id: "call1", input: JSON.stringify({ filePath: file, oldString: "x", newString: "y" }), executed: false } });
+  const s = await answer({ event: "surf", sessionID: "ses_B", workspace: ws, ask: "real", turns: [turn(1, "a", "b"), turn(2, "c", "d")] });
+  assert.match(s.note, /<fold-mechanical>[\s\S]*taken: edit src\/real\.js \[A\]/);
+});
+
+test("REALSHAPE FALSIFIER: a clipped string (clip truncates past its cap) is NOT guessed at — no claim, no note line", async () => {
+  const { answer } = await boot();
+  const ws = repo();
+  const file = path.join(ws, "src", "big.js");
+  fs.writeFileSync(file, "x");
+  const big = JSON.stringify({ filePath: file, oldString: "x", newString: "y".repeat(5000) });
+  const clipped = `${big.slice(0, 1000)}…[${big.length - 1000} more]`; // the old wire shape, a JSON string cut mid-token
+  await answer({ event: "event", sessionID: "ses_A", type: "session.tool.input.started", data: { id: "c1", name: "edit" } });
+  await answer({ event: "event", sessionID: "ses_A", type: "session.tool.called", data: { id: "c1", input: clipped, executed: false } });
+  const s = await answer({ event: "surf", sessionID: "ses_B", workspace: ws, ask: "big", turns: [turn(1, "a", "b"), turn(2, "c", "d")] });
+  assert.doesNotMatch(s.note, /taken:/, "an unparseable payload is a typed nothing, never a guess");
+});

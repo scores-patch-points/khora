@@ -89,10 +89,15 @@ import { breakEven, makeGateTracker } from "./opencode-cost-gate.mjs";
 import { semanticTerms, semanticOn } from "./opencode-semantic.mjs";
 import { plan as trailPlan, shouldCompact as trailGate, trailEnabled } from "./opencode-trail.mjs";
 import { standingOf } from "./opencode-standing.mjs";
-import { admit as admitChange, fold as foldRecord, recordNote, recordSink, reconcile, nextVoid, reasonFor, provenance, refusalsFor } from "./opencode-record.mjs";
+import { admit as admitChange, fold as foldRecord, recordNote, recordSink, reconcile, nextVoid, reasonFor, provenance, refusalsFor, liveAnswers } from "./opencode-record.mjs";
 import * as eot from "./opencode-eot.mjs";
 import { checkAnswer } from "./opencode-ledger-check.mjs";
-import { mark as markNote, claim as claimItem, done as doneItem, read as readNotes, noteFor, stateFor, turnsFile, writeTurnsFile, turnsOf, root as notesRoot, projectKey, projectRoot, plans as workPlans } from "./opencode-worknotes.mjs";
+import { mark as markNote, claim as claimItem, done as doneItem, read as readNotes, noteFor, stateFor, turnsFile, writeTurnsFile, turnsOf, root as notesRoot, projectKey, projectRoot, plans as workPlans, scent as scentNote, scentsOf, stuckScents, scentClose, releaseAnswered, releaseByMerge, releaseByQuestion, releaseNested, ident as identTask, universeInfo } from "./opencode-worknotes.mjs";
+import { metaWorkerTick, runEcology } from "./opencode-ecology.mjs";
+import { selfCheck } from "./opencode-self-monitor.mjs";
+import { planNext } from "./opencode-plan.mjs";
+import { dream as dreamPass } from "./opencode-dream.mjs";
+import { layers, renderLayersHtml } from "./opencode-layers.mjs";
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
@@ -105,7 +110,7 @@ import { findInWeft, findInWeftSemantic } from "./opencode-weft-find.mjs";
 import { archonNote } from "./opencode-archons.mjs";
 import { memoryNote } from "./opencode-memory.mjs";
 import { blocks as recordBlocks } from "./opencode-record.mjs";
-import { DELTA_ON, measure as measureDelta } from "./opencode-delta.mjs";
+import { DELTA_ON, measure as measureDelta, rankTurns } from "./opencode-delta.mjs";
 import { STAKES_ON, stakeCheck } from "./opencode-stakes.mjs";
 import { ETHOS_ON, ethosShadow } from "./opencode-ethos.mjs";
 import { PATHOS_ON, pathosPass } from "./opencode-pathos.mjs";
@@ -127,6 +132,9 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 // (default: beside the stack). A missing sibling stays a typed gap (fails open), never an error.
 const SIBLINGS = process.env.FOLD_SIBLINGS_DIR ?? path.resolve(HERE, "..");
 const STATE = process.env.FOLD_OPENCODE_STATE ?? path.join(HERE, "state", "opencode");
+// THE RELEASE KILL SWITCH — the falsifier's control. FOLD_RELEASE=0 keeps the deposits but disables every
+// mechanical release (arrival / prose / merge / wall), reproducing the pre-release amplification for an A/B.
+const releaseOn = () => process.env.FOLD_RELEASE !== "0";
 
 // THE MECHANICAL FOLD — penelope/organs/fold-note.mjs, the shared capacity every fold-suite surface uses (it folds
 // a session's turns to a bounded note: threads + derivation). Reached lazily and failing open: a missing sibling is
@@ -253,6 +261,42 @@ function scheduleSleep() {
   sleepTimer = setTimeout(compactRecord, SLEEP_MS);
   sleepTimer.unref?.();
 }
+const DREAM_IDLE_MS = Number(process.env.FOLD_DREAM_IDLE_MS ?? 30 * 60_000);
+let dreamTimer = null;
+function runDream() {
+  try {
+    const base = notesRoot();
+    if (!fs.existsSync(base)) return;
+    for (const d of fs.readdirSync(base, { withFileTypes: true })) {
+      if (!d.isDirectory() || !identTask(d.name)) continue;
+      try { dreamPass({ task: d.name }); } catch { /* dream never blocks */ }
+    }
+  } catch { /* never blocks */ }
+}
+function scheduleDream() {
+  clearTimeout(dreamTimer);
+  dreamTimer = setTimeout(() => { runDream(); scheduleDream();
+const META_IDLE_MS = Number(process.env.FOLD_META_EVERY_MS ?? 60 * 1000);
+let metaTimer = null;
+function runMeta() {
+  try {
+    const base = notesRoot();
+    if (!fs.existsSync(base)) return;
+    for (const d of fs.readdirSync(base, { withFileTypes: true })) {
+      if (!d.isDirectory() || !identTask(d.name)) continue;
+      try { metaWorkerTick({ task: d.name }); } catch { /* never blocks */ }
+    }
+  } catch { /* never blocks */ }
+}
+function scheduleMeta() {
+  clearTimeout(metaTimer);
+  metaTimer = setTimeout(() => { runMeta(); scheduleMeta(); }, META_IDLE_MS);
+  metaTimer.unref?.();
+}
+scheduleMeta(); }, DREAM_IDLE_MS);
+  dreamTimer.unref?.();
+}
+scheduleDream();
 function append(row) {
   if (dmdSame(appended, row)) return appended; // carries no difference: not recorded
   appended = row;
@@ -491,12 +535,19 @@ function traceEnd(sessionID, turn, tool) {
     const root = projectRoot(tool.trace.file);
     if (!root) return;
     let after = null; try { after = fs.readFileSync(tool.trace.file); } catch { /* deleted */ }
-    eot.recordEdit({ task, agent: sessionID, root, file: tool.trace.file, before: tool.trace.before, after, tool: name });
+    eot.recordEdit({ task, agent: sessionID, root, file: tool.trace.file, before: tool.trace.before, after, tool: name, universe: universeOf(body) });
   } else if (SWEEP_TOOLS.test(name)) {
     const cmd = tool.input && typeof tool.input === "object" ? String(tool.input.command ?? tool.input.cmd ?? name) : name;
     eot.recordExec({ task, agent: sessionID, command: cmd, ok, cwd: turn.workspace ?? null, tool: name });
     const root = turn.workspace ? realOf(turn.workspace) : null;
-    if (root && tool.t0) eot.sweepEdits({ task, agent: sessionID, root, since: tool.t0, tool: name });
+    if (root && tool.t0) {
+      const swept = eot.sweepEdits({ task, agent: sessionID, root, since: tool.t0, tool: name });
+      // THE STIGMERGIC PAIR for swept writes: the sweep deposited the edit claims in the EOT (the
+      // ledger's one store); the medium gets the same items, so the file-readers (the plans panel,
+      // a legacy stateFor) show the same ledger, never a second one.
+      if (swept?.ok && Array.isArray(swept.claimed))
+        for (const rel of swept.claimed) { try { claimItem({ task, agent: sessionID, item: `edit ${rel}`, ttlMs: CLAIM_TTL_MS }); } catch { /* the medium never blocks */ } }
+    }
   }
   delete tool.trace;
 }
@@ -561,9 +612,9 @@ function guardAnswer(sessionID, turn) {
   try {
     const st = standingOf({ agent: sessionID, n: answerCount.set(sessionID, (answerCount.get(sessionID) ?? 0) + 1).get(sessionID), ground: r });
     turn.standing = { ...st.counts, refuted: st.refuted.slice(0, 3) };
-    if (st.claims) eot.append({ task, agent: sessionID, stage: "reason", detail: { op: "SPIRAL", by: "khora:opencode-eot.groundCheck", counts: st.counts, refuted: st.refuted.slice(0, 6) } });
+    if (st.claims) eot.append({ task, agent: sessionID, stage: "reason", universe: universeOf(body), detail: { op: "SPIRAL", by: "khora:opencode-eot.groundCheck", counts: st.counts, refuted: st.refuted.slice(0, 6) } });
   } catch { /* the spiral never blocks a turn */ }
-  if (r.flags.length) eot.append({ task, agent: sessionID, stage: "flag", detail: { flags: r.flags.slice(0, 6), summary: r.summary } });
+  if (r.flags.length) eot.append({ task, agent: sessionID, stage: "flag", universe: universeOf(body), detail: { flags: r.flags.slice(0, 6), summary: r.summary } });
 }
 
 // THE VISIBLE PROVENANCE, read off the standing cube: what the reply rests on (the ground summary),
@@ -916,10 +967,40 @@ function startDocumentJob(body) {
 function onPrompt(body) {
   const sessionID = body?.sessionID;
   if (!sessionID) return {};
-  prompts.set(sessionID, { when: new Date().toISOString(), model: body.model ?? null, body: String(body.body ?? "") });
+  const text = String(body.body ?? "");
+  const note = String(body.note ?? ""); // L1: the fold-index the model was actually handed this turn
+  const when = new Date().toISOString();
+  const sha = crypto.createHash("sha256").update(text).digest("hex");
+  prompts.set(sessionID, { when, model: body.model ?? null, sha, note, body: text });
   while (prompts.size > 50) prompts.delete(prompts.keys().next().value);
   savePrompts();
+  // (1) DISCLOSE PRECISELY WHAT THE MODEL WAS PROMPTED. The exact request body is content-addressed and appended
+  // under the task, so the record PROVES it and any answer can cite it as `prompt#<sha16>`. Mechanical: the system
+  // wrote the bytes it sent. A forged ref hashes to no file and is a typed gap, never a guess (the source cannot lie).
+  try {
+    const task = taskFor(body, sessionID);
+    const pdir = path.join(notesRoot(), task, "prompts");
+    fs.mkdirSync(pdir, { recursive: true });
+    const blob = path.join(pdir, `${sha}.txt`);
+    if (!fs.existsSync(blob)) fs.writeFileSync(blob, text);
+    fs.appendFileSync(
+      path.join(pdir, "index.jsonl"),
+      JSON.stringify({ when, task, agent: sessionID, model: body.model ?? null, sha, ref: `prompt#${sha.slice(0, 16)}`, bytes: text.length, note: note.slice(0, 8000) }) + "\n",
+    );
+  } catch { /* disclosure never blocks a turn */ }
   return {};
+}
+
+// Read a disclosed prompt source back by its content address. The bytes ARE the sha's preimage; a wrong address
+// resolves to nothing. This is how "what the model was prompted" becomes citable in an answer's composition.
+function readPromptSource({ task, sha, ref }) {
+  const pdir = path.join(notesRoot(), task, "prompts");
+  let hit = null;
+  try { for (const f of fs.readdirSync(pdir).filter((x) => x.endsWith(".txt"))) if (f.startsWith(sha)) { hit = path.join(pdir, f); break; } } catch { /* none */ }
+  if (!hit) return { ok: false, gap: "not_found", ref };
+  const bytes = fs.readFileSync(hit, "utf8");
+  if (!crypto.createHash("sha256").update(bytes).digest("hex").startsWith(sha)) return { ok: false, gap: "hash_mismatch", ref };
+  return { ok: true, ref, bytes, standing: "witnessed", provenance: { kind: "prompt", sha, from: "the request the model was sent" } };
 }
 
 // ── perceive (local-first media perception + its tab-facing config) ───────
@@ -1101,6 +1182,10 @@ const taskFor = (body, agent) => {
   const t = body.task ? String(body.task) : null;
   return t && /^[\w.-]+$/.test(t) && t !== ".." ? t : (projectKey(body.workspace) ?? sessionTask.get(agent) ?? agent);
 };
+const universeOf = (body) => {
+  const u = body?.universe ? String(body.universe) : (process.env.FOLD_UNIVERSE ?? "world");
+  return /^[\w.-]+$/.test(u) && u !== ".." ? u : "world";
+};
 
 // THE COMMONS: what the OTHER agents of this project have settled, ingested and reasoned
 // over before the model sees it. Their turns are read as addressed exchanges and put
@@ -1145,7 +1230,7 @@ const COMMONS_MAX_SENTENCES = Number(process.env.FOLD_COMMONS_SENTENCES ?? 4);
 const NOTE_CHARS = Number(process.env.FOLD_NOTE_CHARS ?? 700);
 async function commonsNote({ task, agent, ask }, { prosify = null } = {}) {
   const fromLog = (() => { try { return eot.turnsFromLog(task); } catch { return []; } })();
-  const theirs = (fromLog.length ? fromLog : turnsOf({ task })).filter((t) => t.agent !== agent);
+  const theirs = (fromLog.length ? fromLog : turnsOf({ task, universe: universeOf(body) })).filter((t) => t.agent !== agent);
   if (!theirs.length) return "";
   const exchanges = theirs.map((t) => ({
     id: `${t.agent}#${t.n}`, q: t.ask, a: t.text, chars: (t.ask?.length ?? 0) + (t.text?.length ?? 0),
@@ -1256,7 +1341,7 @@ async function commonsNote({ task, agent, ask }, { prosify = null } = {}) {
 
 // This agent's settled turns, single-writer, so the others can read them.
 function writeTurns({ task, agent, turns }) {
-  try { if (turns.length) eot.recordTurns({ task, agent, turns }); } catch { /* the log never blocks a turn */ }
+  try { if (turns.length) eot.recordTurns({ task, agent, turns, universe: universeOf(body) }); } catch { /* the log never blocks a turn */ }
   const file = turnsFile(task, agent);
   if (!file || !turns.length) return null;
   try {
@@ -1280,7 +1365,7 @@ function costGateFor({ body, agent, task, out, now = Date.now() }) {
   });
   gateTracker.settle({ session: agent, arm: d.arm });
   try {
-    eot.append({ task, agent, stage: "reason", detail: { op: "COST_GATE", by: "khora:opencode-cost-gate", arm: d.arm, fire: d.fire, decided: d.decided, margin: d.margin ?? null, costKeep: d.costKeep ?? null, costCut: d.costCut ?? null, inputs: { ...d.inputs, callsSource: seen.callsSource }, basis: d.basis } });
+    eot.append({ task, agent, stage: "reason", universe: universeOf(body), detail: { op: "COST_GATE", by: "khora:opencode-cost-gate", arm: d.arm, fire: d.fire, decided: d.decided, margin: d.margin ?? null, costKeep: d.costKeep ?? null, costCut: d.costCut ?? null, inputs: { ...d.inputs, callsSource: seen.callsSource }, basis: d.basis } });
   } catch { /* the log never blocks a turn */ }
   return d;
 }
@@ -1302,7 +1387,9 @@ async function onSurf(body) {
     // only a TRUE lexical miss (no ask word appears anywhere in the history) asks the embedder
     if (askWords.size && ![...askWords].some((w) => known.has(w))) extraTerms = (await semanticTerms({ ask: String(body.ask ?? ""), vocab: [...vocab].map(([term, text]) => ({ term, text })) })).terms;
   }
-  let out = surfLadder({ ask: String(body.ask ?? ""), turns, extraTerms });
+  const surfMode = process.env.FOLD_SURF_MODE ?? "pointer";
+  const rank = surfMode === "delta" ? rankTurns(task, {}) : null;
+  let out = surfLadder({ ask: String(body.ask ?? ""), turns, extraTerms, mode: surfMode, rank });
   const agent = String(body.sessionID ?? "");
   const task = taskFor(body, agent);
   writeTurns({ task, agent, turns });
@@ -1343,11 +1430,20 @@ async function onSurf(body) {
     const rec = eot.projectRecord(task);
     recordLines = rec.slice(-3).map((r) => `${r.referent}: ${String(r.delta).slice(0, 80)}`);
   } catch { /* the files answer below */ }
-  if (!taken.length && !blocks.length) { const st = stateFor({ task, agent }); taken = st.taken; blocks = st.blocks; }
+    if (!taken.length && !blocks.length) { const st = stateFor({ task, agent, universe: universeOf(body) }); taken = st.taken; blocks = st.blocks; }
   if (!recordLines.length) { const legacy = recordNote({ task, limit: 3 }); if (legacy) recordLines = legacy.split("\n").slice(1, 4).map((l) => l.replace(/^-\s*/, "").slice(0, 100)); }
   if (taken.length) mech.push({ p: 1, t: `taken: ${taken.slice(0, 4).map((c) => `${c.item} [${short8(c.agent)}]`).join("; ")}${taken.length > 4 ? ` +${taken.length - 4}` : ""}` });
   for (const c of contention.slice(-2)) mech.push({ p: 2, t: c.holder === agent ? `contended: [${short8(c.contender)}] also edited ${c.item}` : `contended: ${c.item} held by [${short8(c.holder)}]` });
   if (recordLines.length) mech.push({ p: 4, t: `verified: ${recordLines.join("; ")}`.slice(0, 240) });
+  // THE PLAN (M2): the next actionable goal from the EOT dependency graph, if any. A finding changes what
+  // the local workers encounter next — the plan rides the mechanical note, not an agent-to-agent message.
+  try { const next = planNext({ task }); if (next.ok && next.node) mech.push({ p: 3, t: `plan: ${String(next.node.goal).slice(0, 160)}` }); } catch { /* no plan never blocks */ }
+  // OPEN FORKS (C3): a referent with two LIVE verified answers is a parallel fork, kept and never resolved.
+  // Read-only (liveAnswers), surfaced so the discrepancy reaches the next turn, never auto-merged.
+  try {
+    const forks = [...liveAnswers(recordBlocks(task)).entries()].filter(([, list]) => list.length > 1);
+    if (forks.length) mech.push({ p: 2, t: `fork: ${forks.slice(0, 2).map(([r, l]) => `${r} (${l.length} live answers)`).join("; ")}`.slice(0, 200) });
+  } catch { /* no fork read never blocks */ }
   const turnState = turnFor(agent);
   if (turnState.flags?.length) mech.push({ p: 1, t: `unverified in your last answer: ${turnState.flags.slice(0, 3).map((f) => `${f.kind}${f.kind === "unknown_path" ? ` ${f.detail}` : ""}`).join("; ")}`.slice(0, 200) });
   if (turnState.standing && (turnState.standing.refuted.length || turnState.standing.unresolved)) mech.push({ p: 1, t: `standing of your last answer: ${turnState.standing.licensed} licensed, ${turnState.standing.refuted.length} refuted${turnState.standing.refuted.length ? ` (${turnState.standing.refuted.join(",")})` : ""}, ${turnState.standing.unresolved} untested` });
@@ -1386,10 +1482,40 @@ async function onSurf(body) {
   };
   const mechKept = pack(mech, Math.floor(NOTE_CHARS * 0.45));
   const saidKept = pack(said, NOTE_CHARS - mechKept.join("\n").length - 60);
+  // THE TRAIL (P1): the task's open questions, each anchored at the address it motivated. This is what lets a
+  // folded window keep its INTENT — the next thought reads why the last drill happened, not just where. Its own
+  // block, bounded small; a closed/evaporated scent never rides.
+  let trail = [];
+  try {
+    // THE MECHANICAL RELEASE IS TRANSCENDENTAL — it is a condition of what CAN appear in the window, and it may not
+    // appear IN the window. A category that makes the projection possible (here: which tensions are still live)
+    // cannot be a conscious determiner the model reasons over or answers — that is transcendental illusion, and
+    // the same failure as a person-facing notice reaching the model. So the machine RELEASES (merge, then wall)
+    // and says nothing; the model only ever sees the consequence — the question is gone, or rides at a coarser
+    // grain. The release is recorded (the scent files' own released/walled lines), never injected.
+    if (releaseOn()) {
+      try { releaseByMerge({ task }); } catch { /* never blocks */ }
+      for (const s of stuckScents({ task })) { try { releaseNested({ task, agent: s.agent, at: s.at, by: "wall" }); } catch { /* never blocks */ } }
+    }
+    trail = scentsOf({ task, limit: 5, universe: universeOf(body) }).map(
+      (s) =>
+        `- open q="${String(s.q).slice(0, 90)}" at="${s.at}"${s.parent ? ` parent="${s.parent}"` : ""}`,
+    );
+  } catch { /* the trail read never blocks a turn */ }
   out.note = [
     mechKept.length ? `<fold-mechanical>\n${mechKept.join("\n")}\n</fold-mechanical>` : "",
     saidKept.length ? `<fold-said>\n${saidKept.join("\n")}\n</fold-said>` : "",
+    trail.length ? `<fold-trail>\n${trail.join("\n")}\n</fold-trail>` : "",
   ].filter(Boolean).join("\n");
+  const __u = universeOf(body);
+  if (__u !== "world") {
+    const __info = universeInfo({ task, universe: __u });
+    const __stips = Array.isArray(__info?.stipulations) ? __info.stipulations : [];
+    if (__stips.length) {
+      const __lines = __stips.map((x) => `- ${String(x.fact ?? x)} = ${String(x.value ?? "true")} (truth:${x.truth ?? "false"})`).join("\n");
+      out.note = `${out.note ? out.note + "\n" : ""}<fold-holding universe="${__u}">\n${__lines}\n</fold-holding>`;
+    }
+  }
   return out;
 }
 
@@ -1407,21 +1533,45 @@ function onTrail(body) {
 }
 
 // SNIP: the model composes by reference; the door returns the verbatim bytes and their provenance.
+// THE PHEROMONE TRAIL (P1): a drill deposits the OPEN QUESTION it serves (body.why) anchored at the address it
+// motivated, so the next thought (or a resumed session) knows WHY it drilled, not only where. Reinforced on
+// every re-drill, evaporates by TTL. The motive is echoed back on the answer for the immediate next step.
 function onSnip(body) {
   const agent = String(body.agent ?? body.sessionID ?? "");
   const task = taskFor(body, agent);
   const root = body.root ?? body.workspace ?? turnFor(agent).workspace ?? null;
-  return eot.snip({ task, agent: agent || null, ref: body.ref, root: root ? String(root) : null });
+  const ref = String(body.ref ?? "").trim();
+  const pm = /^prompt#([0-9a-f]{8,64})$/.exec(ref);
+  const result = pm
+    ? readPromptSource({ task, sha: pm[1], ref }) // a disclosed prompt source resolves to the exact bytes sent
+    : eot.snip({ task, agent: agent || null, ref: body.ref, root: root ? String(root) : null, universe: universeOf(body) });
+  // THE MODEL ANSWERS; THE SYSTEM DOES THE STIGMERGY. The tension a drill serves is derived MECHANICALLY from the
+  // ask in front of the model (never authored by it): the ask is the open question, the address is where the model
+  // went to answer it. On success the arrival releases the tension; on failure it stays open and walls if re-asked.
+  const ask = String(body.ask ?? body.why ?? "").trim(); // body.why only until the client is rebuilt onto `ask`
+  const at = String(body.ref ?? "");
+  if (result && result.ok !== false) {
+    if (releaseOn())
+      try {
+        releaseNested({ task, agent: agent || "session", at, by: "arrival" }); // the address and everything nested under it
+        releaseByQuestion({ task, agent: agent || "session", q: ask, by: "arrival" }); // the ask itself — any address it searched
+      } catch { /* the trail never blocks a read */ }
+  } else if (ask) {
+    try { scentNote({ task, agent: agent || "session", q: ask, at }); } catch { /* the trail never blocks a read */ }
+  }
+  return result;
 }
 function onGround(body) {
   const agent = String(body.agent ?? body.sessionID ?? "");
   const task = taskFor(body, agent);
+  // RELEASE BY ARRIVAL-IN-PROSE: this answer is an arrival — release every open tension its own words bear on.
+  if (releaseOn()) try { releaseAnswered({ task, agent, text: String(body.text ?? "") }); } catch { /* the trail never blocks a turn */ }
   const r = eot.groundCheck({ task, text: String(body.text ?? ""), root: body.workspace ? String(body.workspace) : null });
   // THE LEDGER CHECK, beside the lexical ground: what this answer says against what the task's own
   // turns already heard (opencode-ledger-check.mjs) — a re-sighting is retold, a denial of a standing
   // note is a contest. Display-only; a failed check is a typed gap, never a block.
   let ledger = [];
-  try { ledger = checkAnswer({ turns: turnsOf({ task }), text: String(body.text ?? "") }).flags ?? []; } catch { ledger = []; }
+  try { ledger = checkAnswer({ turns: turnsOf({ task, universe: universeOf(body) }), text: String(body.text ?? "") }).flags ?? []; } catch { ledger = []; }
   const flags = [...(r.flags ?? []), ...ledger].map((f) => ({ ...f, cell: cellForFlag(f.kind) }));
   return { ...r, flags, standing: standingFor(flags) };
 }
@@ -1526,9 +1676,12 @@ async function onSwarm(body) {
 // THE SWARM'S LEARNING, at the next ask. The swarm's own marks (agent "swarm"),
 // ranked by term overlap with the ask, injected as one note. Mechanical, no model:
 // the standing the swarm measured rides with each finding. Nothing relevant → no note.
+// The ledger is read from the EOT (the swarm's fact marks are events there); the file
+// medium stays only as the fallback for rows written before the EOT carried them.
 function swarmFindingsNote({ task, ask }) {
   let marks = [];
-  try { marks = (readNotes({ task })?.marks ?? []).filter((m) => m.agent === "swarm" && m.kind === "fact"); } catch { return null; }
+  try { marks = eot.projectMarks(task, { agent: "swarm", kind: "fact" }); } catch { marks = []; }
+  if (!marks.length) { try { marks = (readNotes({ task })?.marks ?? []).filter((m) => m.agent === "swarm" && m.kind === "fact"); } catch { return null; } }
   if (!marks.length) return null;
   const terms = new Set(String(ask ?? "").toLowerCase().match(/[\p{L}\p{N}_]{3,}/gu) ?? []);
   const score = (t) => (String(t).toLowerCase().match(/[\p{L}\p{N}_]{3,}/gu) ?? []).filter((w) => terms.has(w)).length;
@@ -1641,6 +1794,15 @@ async function onChase(body, opts = {}) {
 }
 function onRead(body) { return readNotes({ task: body.task }); }
 
+// SCENT: the pheromone trail for agents that are not this fork — deposit one question (q + at), or read the
+// task's open trail back. Same store the fork's snip deposits into; the firewall is the worknotes module's.
+function onScent(body) {
+  const agent = String(body.agent ?? body.sessionID ?? "");
+  const task = taskFor(body, agent);
+  if (body.q) return scentNote({ task, agent: agent || "session", q: String(body.q), at: String(body.at ?? ""), parent: body.parent ? String(body.parent) : "" });
+  return { trail: scentsOf({ task }) };
+}
+
 export async function answer(body, opts = {}) {
   if (process.env.FOLD_DOOR_DEBUG) console.error(`door ← ${body?.event} ${body?.type ?? ""} ${body?.sessionID ?? ""}`);
   // FOLD_DOOR_DEBUG also says what a context/surf body CARRIES (never its content): whether the client
@@ -1660,6 +1822,7 @@ export async function answer(body, opts = {}) {
     case "claim": return onClaim(body);
     case "done": return onDone(body);
     case "notes": return onRead(body);
+    case "scent": return onScent(body);
     case "admit": return onAdmit(body);
     case "snip": return onSnip(body);
     case "swarm": return onSwarm(body);
@@ -1689,6 +1852,45 @@ export async function route(req, res, { log = () => {} } = {}) {
   if (url === "/v1/hooks/opencode/meter" && req.method === "GET") {
     res.writeHead(200, { "content-type": "application/json" });
     res.end(JSON.stringify(meter(), null, 2));
+    return true;
+  }
+  // THE LAYERS — the projected reality at five grains (prompt · projection · answer · sources · record). JSON by
+  // default; `?html=1` serves the self-contained toggle view (one grain switch + per-node pins). Read-only.
+  if (url === "/v1/hooks/opencode/layers" && req.method === "GET") {
+    const q = new URL(req.url, "http://x").searchParams;
+    const agent = q.get("agent");
+    const task = taskFor({ task: q.get("task"), workspace: q.get("workspace") }, agent ?? "");
+    const L = layers({ task, agent, root: q.get("root") });
+    if (q.get("html") === "1") {
+      res.writeHead(200, { "content-type": "text/html; charset=utf-8" });
+      res.end(renderLayersHtml(L, { task, agent: agent ?? "" }));
+      return true;
+    }
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify(L));
+    return true;
+  }
+  if (url === "/v1/hooks/opencode/ecology" && req.method === "POST") {
+    let body = {};
+    try { body = JSON.parse((await readBody(req)) || "{}"); } catch { /* answered as an empty run */ }
+    const task = taskFor(body, String(body.agent ?? body.sessionID ?? ""));
+    const r = runEcology({ task, candidates: Array.isArray(body.candidates) ? body.candidates : [], workers: Number(body.workers) || 3 });
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify(r));
+    return true;
+  }
+  if (url === "/v1/hooks/opencode/self" && req.method === "GET") {
+    const q = new URL(req.url, "http://x").searchParams;
+    const agent = q.get("agent");
+    const task = taskFor({ task: q.get("task"), workspace: q.get("workspace") }, agent ?? "");
+    const signals = {
+      reopenCount: Number(q.get("reopen") ?? 0) || 0,
+      duplicateCount: Number(q.get("duplicate") ?? 0) || 0,
+      recurringFailureCount: Number(q.get("recurring") ?? 0) || 0,
+      mechanismFailureCount: Number(q.get("mechanism") ?? 0) || 0,
+    };
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify(selfCheck({ task, agent, signals })));
     return true;
   }
   // THE WORK TREE AS THE LOG SAYS IT (read-only folds of the EOT log at a cursor). ?task= or ?workspace= names the
@@ -1860,7 +2062,7 @@ export async function route(req, res, { log = () => {} } = {}) {
   if (url !== "/v1/hooks/opencode") return false;
   if (req.method === "GET") {
     res.writeHead(200, { "content-type": "application/json" });
-    res.end(JSON.stringify({ door: "opencode", priors: seedStatus(), senses: huntOrgans({ stateDir: STATE }), events: ["context", "surf", "mark", "claim", "done", "notes", "admit", "record", "provenance", "snip", "swarm", "cube", "ground", "nextVoid", "chase", "title", "event", "prompt", "trail", "perceive", "draft", "act", "memory", "refs", "system"] }));
+    res.end(JSON.stringify({ door: "opencode", priors: seedStatus(), senses: huntOrgans({ stateDir: STATE }), events: ["context", "surf", "mark", "claim", "done", "notes", "scent", "admit", "record", "provenance", "snip", "swarm", "cube", "ground", "nextVoid", "chase", "title", "event", "prompt", "trail", "perceive", "draft", "act", "memory", "refs", "system"] }));
     return true;
   }
   if (req.method !== "POST") return false;

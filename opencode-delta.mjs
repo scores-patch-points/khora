@@ -14,6 +14,7 @@
 import { createHolograph, admit as holoAdmit, predict } from "./native/kernel/bayes-surprise.js";
 import { append, rows, lean } from "./opencode-ledger.mjs";
 import { blocks } from "./opencode-record.mjs";
+import { turnsOf } from "./opencode-worknotes.mjs";
 
 export const DELTA_ON = () => (process.env.FOLD_DELTA ?? "0") !== "0";
 export const DECLARED = Object.freeze({ alpha: 1, gamma: 1 });
@@ -83,6 +84,34 @@ export function rezero({ task, reader = "workspace", register = "witnessed", rea
   return append(task, { schema: "HolographRezero@1", op: "REC", task, reader, register, reason: String(reason ?? "").slice(0, 200) });
 }
 
+/** C4 FADING: per reader, gamma is declared (every MeaningDelta row carries it); the holograph is a
+ *  projection of those rows, so decay is a fold, never hidden state. The dream calls this at sleep to
+ *  report the generations and drop the in-memory projection so the next read re-derives it fresh. */
+export function fade({ task, reader = "workspace", register = "witnessed" } = {}) {
+  const gens = rows(task, { schema: "HolographRezero@1" }).filter((r) => r.reader === reader && r.register === register);
+  const deltaRows = rows(task, { schema: "MeaningDelta@1" }).filter((r) => r.reader === reader && r.register === register && r.counted);
+  const gamma = deltaRows.at(-1)?.gamma ?? DECLARED.gamma;
+  _forgetHolos(); // the next read re-derives from the rows (the fold), never a cached count
+  return { ok: true, reader, register, generation: gens.length, rows: deltaRows.length, gamma, rededuced: true };
+}
+
+/** D1 IMPRESSIONS (audit only): the reader's slots and how settled each is — a projection of the ledger,
+ *  named for the audit view. NEVER reaches a model-facing note (see the D2 firewall test). */
+export function impressionOf({ task, reader = "workspace", register = "witnessed" } = {}) {
+  const generation = generationOf(task, reader, register);
+  const mine = rows(task, { schema: "MeaningDelta@1" }).filter((r) => r.reader === reader && r.register === register && r.generation === generation && r.m?.slots && !r.m.gap && r.counted);
+  const slots = {};
+  for (const r of mine) {
+    const s = r.m.slots;
+    for (const [k, v] of Object.entries(s)) {
+      slots[k] ??= { values: {}, count: 0 };
+      slots[k].values[String(v)] = (slots[k].values[String(v)] ?? 0) + 1;
+      slots[k].count += 1;
+    }
+  }
+  return { schema: "Impression@1", task, reader, register, generation, alpha: DECLARED.alpha, gamma: DECLARED.gamma, slots, rows: mine.length };
+}
+
 /** The ORDER of blocks by delta, highest first (counted witnessed rows only), ids never scores. For surf. */
 export function rankOf(task, { reader = "workspace", register = "witnessed" } = {}) {
   return rows(task, { schema: "MeaningDelta@1" })
@@ -90,4 +119,24 @@ export function rankOf(task, { reader = "workspace", register = "witnessed" } = 
     .map((r, i) => ({ block: r.block, referent: r.referent, bayes: r.m.bayes, i }))
     .sort((a, b) => b.bayes - a.bayes || b.i - a.i)
     .map((r) => r.block);
+}
+
+/** The ORDER as a turn map (turn n -> position, 0 = moved the reader most), for surf's delta arm.
+ *  A block has no turn number, so a turn is scored by the highest-ranked referent its own text names;
+ *  a turn naming none is unranked (Infinity). ORDER only: no number reaches the note. */
+export function rankTurns(task, opts = {}) {
+  const order = rankOf(task, opts); // block ids, highest delta first
+  if (!order.length) return new Map();
+  const byId = new Map(blocks(task).map((b) => [b.id, b.referent]));
+  const posOf = new Map(order.map((id, pos) => [byId.get(id) ?? id, pos]));
+  const rank = new Map();
+  for (const t of turnsOf({ task })) {
+    const text = `${t.ask ?? ""} ${t.text ?? ""}`.toLowerCase();
+    let best = Infinity;
+    for (const [referent, pos] of posOf) {
+      if (referent && text.includes(String(referent).toLowerCase()) && pos < best) best = pos;
+    }
+    rank.set(t.n, best);
+  }
+  return rank;
 }
