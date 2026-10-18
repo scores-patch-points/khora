@@ -138,13 +138,13 @@ test("TINY: the whole surf note stays under its budget however much there is to 
   assert.doesNotMatch(s.note, /fold-commons/, "the commons rides the context event only, never twice");
 });
 
-test("TINY: the marks cue appears once per session, not every turn", async () => {
+test("TINY: the marks cue is GONE — the stack writes the claim, the model never appends", async () => {
   const { answer } = await boot();
   const ws = repo();
   const t = [turn(1, "a", "b"), turn(2, "c", "d"), turn(3, "e", "f")];
   const one = await answer({ event: "surf", sessionID: "ses_Z", workspace: ws, ask: "q", turns: t });
   const two = await answer({ event: "surf", sessionID: "ses_Z", workspace: ws, ask: "q", turns: t });
-  assert.match(one.note, /marks: append/);
+  assert.doesNotMatch(one.note, /marks: append/);
   assert.doesNotMatch(two.note, /marks: append/);
 });
 
@@ -261,4 +261,42 @@ test("a home directory is not a project: unrelated sessions reporting it stay ap
   // a real repo under home still gets its own project key
   const ws = repo();
   assert.match(projectKey(ws), /^proj-/);
+});
+
+test("MECHANICAL FOLD: the surf note carries the thread across many distinct asks (penelope/organs/fold-note.mjs)", async () => {
+  const { answer } = await boot();
+  const ws = repo();
+  const topics = ["parser", "deploy", "billing"];
+  const turns = Array.from({ length: 30 }, (_, i) =>
+    turn(i + 1, `work on the ${topics[i % 3]} item ${i}`, `settled the ${topics[i % 3]} work`, ["edit"]),
+  );
+  const r = await answer({ event: "surf", sessionID: "ses_FOLD1", workspace: ws, ask: "what did we settle about the parser?", turns });
+  assert.match(String(r.note ?? ""), /fold: the thread/, "the note carries the mechanical fold (the shared capacity)");
+  assert.match(String(r.note ?? ""), /thread\(s\)/, "threads, not a per-turn list");
+  assert.doesNotMatch(String(r.note ?? ""), /\bNaN\b|\bundefined\b/);
+});
+
+test("REALSHAPE: the fork's payload — tool input as a JSON string — still leaves the claim, and the note carries it", async () => {
+  const { answer } = await boot();
+  const ws = repo();
+  const file = path.join(ws, "src", "real.js");
+  fs.writeFileSync(file, "x");
+  // exactly what the plugin sends: session.tool.called carrying the input JSON-stringified
+  await answer({ event: "event", sessionID: "ses_A", type: "session.tool.input.started", data: { id: "call1", name: "edit" } });
+  await answer({ event: "event", sessionID: "ses_A", type: "session.tool.called", data: { id: "call1", input: JSON.stringify({ filePath: file, oldString: "x", newString: "y" }), executed: false } });
+  const s = await answer({ event: "surf", sessionID: "ses_B", workspace: ws, ask: "real", turns: [turn(1, "a", "b"), turn(2, "c", "d")] });
+  assert.match(s.note, /<fold-mechanical>[\s\S]*taken: edit src\/real\.js \[A\]/);
+});
+
+test("REALSHAPE FALSIFIER: a clipped string (clip truncates past its cap) is NOT guessed at — no claim, no note line", async () => {
+  const { answer } = await boot();
+  const ws = repo();
+  const file = path.join(ws, "src", "big.js");
+  fs.writeFileSync(file, "x");
+  const big = JSON.stringify({ filePath: file, oldString: "x", newString: "y".repeat(5000) });
+  const clipped = `${big.slice(0, 1000)}…[${big.length - 1000} more]`; // the old wire shape, a JSON string cut mid-token
+  await answer({ event: "event", sessionID: "ses_A", type: "session.tool.input.started", data: { id: "c1", name: "edit" } });
+  await answer({ event: "event", sessionID: "ses_A", type: "session.tool.called", data: { id: "c1", input: clipped, executed: false } });
+  const s = await answer({ event: "surf", sessionID: "ses_B", workspace: ws, ask: "big", turns: [turn(1, "a", "b"), turn(2, "c", "d")] });
+  assert.doesNotMatch(s.note, /taken:/, "an unparseable payload is a typed nothing, never a guess");
 });

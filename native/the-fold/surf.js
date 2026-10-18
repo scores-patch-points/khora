@@ -1,6 +1,11 @@
 // surf.js — STAGE 3: SEEK ACROSS MULTIPLE SOURCES FOR MATERIAL SHAPED LIKE
 // THE VOID (2026-09-22). Not "the file I was handed": an active search.
 //
+// SURF IS THE GENERAL TERM (2026-10-17): every act that brings material to a
+// reader — a snip, a grep, a fetch, a recall — is a surf; its subtypes are the
+// cube's 9 families over 27 cells, each act declaring its cell (surf-types.js,
+// beside this file). This file is surf's web arm.
+//
 // The user: "it surfs and seeks a shape of the void, extracting it from
 // multiple sources … if we dont hunt for the shape of what would satisfy,
 // everything breaks." Two hunts leave here, both from the void's own words:

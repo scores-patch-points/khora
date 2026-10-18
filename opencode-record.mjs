@@ -12,6 +12,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { taskDir } from "./opencode-worknotes.mjs";
+import { append as ledgerAppend, lean } from "./opencode-ledger.mjs";
 
 const REFERENT = /^[\w.@:/-]{1,80}$/;
 const oneLine = (s) => String(s ?? "").replace(/\s+/g, " ").trim();
@@ -48,7 +49,7 @@ export function fold({ task } = {}) {
  *  superseding it (`"none"` on an already-answered referent) is a PARALLEL
  *  answer: a second live verified answer. A referent with more than one live
  *  answer is a fork — the reopen signal. Computed over the record, never a model. */
-function liveAnswers(all) {
+export function liveAnswers(all) {
   const live = new Map(); // referent -> [{ id, delta0 }] distinct live answers
   for (const b of all) {
     const delta0 = b.delta[0] ?? "";
@@ -85,6 +86,24 @@ export function reconcile({ task } = {}) {
   for (const s of supersedes) reason({ task, op: "REC", rule: "supersede", basis: [{ referent: s.referent, superseded: s.superseded, supersededBy: s.supersededBy }], to: s, by: "box", model: null });
   for (const d of disagreements) reason({ task, op: "REC", rule: "contradiction", basis: d.answers.map((a) => ({ referent: d.referent, answer: a })), to: d, by: "box", model: null });
   return { fold: fold({ task }), supersedes, disagreements };
+}
+
+/** Block -> operations adapter (pure; no I/O, no flag). Translates EOT blocks into the operations
+ *  shape native/kernel/dynamics.js reads, so deriveSurprise(...) can see the record. The mapping is a
+ *  PROPOSAL, not the repo's: a block whose check is present was admitted by exit 0, so it is preceded
+ *  by an EVA; a first block for a referent is a DEF; a block carrying `supersedes:` is a REC (the
+ *  frame change, naming the block it redefines as input and itself as output). A block that answers
+ *  an already-answered referent without superseding is a DEF too (the parallel fork stays visible
+ *  to the reader, not resolved here). Returns { operations } in record order. */
+export function blocksToOperations(list = []) {
+  const addr = { mode: "record", domain: "eot", grain: "block" };
+  const operations = [];
+  for (const b of list) {
+    if (b.check) operations.push({ operator: "EVA", ...addr, inputs: [b.referent], outputs: [b.id], witness: b.check });
+    if (b.supersedes && b.supersedes !== "none") operations.push({ operator: "REC", ...addr, inputs: [b.supersedes], outputs: [b.id], payload: { id: b.referent } });
+    else operations.push({ operator: "DEF", ...addr, inputs: [], outputs: [b.id], payload: { id: b.referent } });
+  }
+  return { operations };
 }
 
 /** The void log (LOG.jsonl): every draw the declared test judged — green (kept
@@ -279,7 +298,7 @@ const lastSeqFor = (logFile, referent) => {
 const tail = (s, n = 400) => { const t = String(s ?? "").trim(); return t.length > n ? t.slice(-n) : t; };
 
 /** DEF -> EVA -> admit. Returns { ok, kept, id, judge, exitCode, tail } or { ok:false, gap }. */
-export function admit({ task, agent, referent, delta, check, cwd, exitCode, address = "", source = "box", model = "box", provisional = false, parallel = false, action = null, by = null, before = null, after = null, rungs = [], def = null, draw = null, refused = null, now = Date.now() } = {}) {
+export function admit({ task, agent, referent, delta, check, cwd, exitCode, address = "", source = "box", model = "box", provisional = false, parallel = false, action = null, by = null, before = null, after = null, rungs = [], def = null, draw = null, refused = null, git = null, now = Date.now() } = {}) {
   const f = files(task);
   if (!f || !/^[\w.-]+$/.test(String(agent ?? ""))) return { ok: false, gap: "bad-address" };
   if (!REFERENT.test(String(referent ?? "")) || !oneLine(delta)) return { ok: false, gap: "bad-referent" };
@@ -331,6 +350,23 @@ export function admit({ task, agent, referent, delta, check, cwd, exitCode, addr
       `◼ EOT`, "", "",
     ].join("\n"));
   }
+  // B1 WRITE-THROUGH (gated, FOLD_ONE_LEDGER=1): the same act lands on the ONE ledger (weft.jsonl) as a
+  // lean row, so every view (stakes, holograph, cloth, rank) is a fold of one store. EOT.md/LOG.jsonl stay
+  // on disk as read-compat. Off by default while the one-ledger migration is being validated.
+  if (process.env.FOLD_ONE_LEDGER === "1") try {
+    const env = lean(task, {
+      layer: "record",
+      ins: [referent],
+      con: prior ? [[referent, kept ? "supersedes" : "answers", prior.id]] : [],
+      eva: kept ? [] : [["con", 0]],
+      clause: kept ? id : "",
+    });
+    ledgerAppend(task, {
+      schema: "EOTBlock@1", op: kept ? "ADMIT" : "REC", task, referent, ...env,
+      dmd: true, ...(git ? { git } : {}),
+      m: { verdict: kept ? "green" : provisional ? "carried" : "reverted", judge, exitCode: exit, check: oneLine(check), delta: [oneLine(delta)], id: kept ? id : null, prior: prior?.id ?? null },
+    });
+  } catch { /* the one-ledger write never blocks an admit */ }
   // EVA reasoning, recorded: WHY this draw was admitted / carried / reverted —
   // the check that judged it, the judge, the exit code, and the block it
   // supersedes. The mouth is disclosed as `model`, never as the reasoner.

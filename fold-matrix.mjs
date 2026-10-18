@@ -116,7 +116,7 @@ export function connect({ state, fetchImpl = (...a) => globalThis.fetch(...a) })
   async function login({ base, user, password }) {
     const r = await api({ base }, "POST", "/login", {
       type: "m.login.password", identifier: { type: "m.id.user", user }, password: String(password),
-      initial_device_display_name: "opencode-fold (" + (process.env.HOSTNAME || "machine") + ")",
+      initial_device_display_name: "openfold (" + (process.env.HOSTNAME || "machine") + ")",
     });
     if (!r.ok) return { ok: false, gap: "login-" + r.status, why: r.j.error ?? "login failed" };
     const sess = { base, userId: r.j.user_id, deviceId: r.j.device_id, token: r.j.access_token, key: deriveKey(password, r.j.user_id) };

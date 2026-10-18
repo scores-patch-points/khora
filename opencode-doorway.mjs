@@ -1,6 +1,6 @@
 // opencode-doorway.mjs — OPENCODE, AS A CLIENT OF THE ONE PIPELINE.
 //
-// The opencode-fold fork (the real opencode, rebased on upstream, plus one
+// The openfold fork (the real opencode, rebased on upstream, plus one
 // internal plugin: packages/core/src/plugin/fold.ts) forwards three things
 // here and carries no fold logic of its own:
 //
@@ -16,10 +16,6 @@
 //                        matchArchons over the ask, dossier-gated, capped.
 //                        Recorded always; injected only when FOLD_ARCHONS=1
 //                        (default 0 is shadow).
-//               memory   the memory surface (holodeck/docs/USER-MEMORY.md): the
-//                        operator's standing facts (which repo is canonical,
-//                        which account publishes) the ask bears on, from
-//                        ~/.config/opencode/user-memory.md. Need-gated, capped.
 //             Adapters: opencode-context.mjs. Each fails open with a typed gap.
 //   title     opencode wants a session title. It is derived from the ask by
 //             rule (first words, cleaned), so the frontier is never consulted
@@ -45,11 +41,24 @@
 // on to use as often as head/tail or random lines did at the same size
 // (scripts/opencode-fold-replay.mjs). The `fold` event now answers {}.
 //
+//   swarm     deploy the model-free capacity-swarm on hard material (the `swarm`
+//             tool). Reads any language and any modality: a file is resolved by the
+//             SENSE-SWARM first — every present organ (khora/senses/registry.mjs:
+//             the macOS Vision organ, tesseract, cv-khora, sips, poppler, whisper,
+//             each found by the hunt, none assumed) reads the bytes at once, the
+//             delta is their agreement, and the representative reading is the one
+//             that best agrees with the consensus, never a blend. The swarm points
+//             the registry at that ground's referent-physics, and records the
+//             surviving read as a task mark the next turn's note carries.
+//
 //   POST /v1/hooks/opencode          the events above, plus draft + act
 //                                    (DRAFT-LINT shadow: recorded, never
 //                                    enforced until the composer is built)
 //   GET  /v1/hooks/opencode/meter    what the frontier cost, first ask vs
 //                                    repeat, and what the fold kept out of it
+//   GET  /v1/hooks/opencode/senses   the sense hunt: which organs are present or
+//                                    absent, and what the ledger has learned about
+//                                    each one's agreement over time
 //   GET  /v1/hooks/opencode/perceive-config
 //   POST /v1/hooks/opencode/perceive-config
 //                                    the Perceive tab's routing config
@@ -57,7 +66,9 @@
 //                                    plus a live backend-availability probe
 //
 // The savings ledger (state/savings.json) counts, honestly:
-//   projectedChars     chars of earlier exchanges left out of a request
+//   projectedChars     chars of earlier exchanges left out of a request — the
+//                      Houdini drop (context) and the surf cut (surf), both
+//                      measured on the sizes the client sent
 //   projectedTokensEst projectedChars/4 — GROSS, an estimate, disclosed as one
 //   titleTokensEst     ceil(ask chars/4) + 150 per title — the frontier title
 //                      request avoided, disclosed as an estimate
@@ -74,10 +85,19 @@
 // carries on exactly as upstream would.
 import os from "node:os";
 import { surf as surfLadder } from "./opencode-surf.mjs";
+import { breakEven, makeGateTracker } from "./opencode-cost-gate.mjs";
+import { semanticTerms, semanticOn } from "./opencode-semantic.mjs";
+import { plan as trailPlan, shouldCompact as trailGate, trailEnabled } from "./opencode-trail.mjs";
 import { standingOf } from "./opencode-standing.mjs";
-import { admit as admitChange, fold as foldRecord, recordNote, recordSink, reconcile, nextVoid, reasonFor, provenance, refusalsFor } from "./opencode-record.mjs";
+import { admit as admitChange, fold as foldRecord, recordNote, recordSink, reconcile, nextVoid, reasonFor, provenance, refusalsFor, liveAnswers } from "./opencode-record.mjs";
 import * as eot from "./opencode-eot.mjs";
-import { mark as markNote, claim as claimItem, done as doneItem, read as readNotes, noteFor, stateFor, turnsFile, turnsOf, projectKey, projectRoot, plans as workPlans } from "./opencode-worknotes.mjs";
+import { checkAnswer } from "./opencode-ledger-check.mjs";
+import { mark as markNote, claim as claimItem, done as doneItem, read as readNotes, noteFor, stateFor, turnsFile, writeTurnsFile, turnsOf, root as notesRoot, projectKey, projectRoot, plans as workPlans, scent as scentNote, scentsOf, stuckScents, scentClose, releaseAnswered, releaseByMerge, releaseByQuestion, releaseNested, ident as identTask, universeInfo } from "./opencode-worknotes.mjs";
+import { metaWorkerTick, runEcology } from "./opencode-ecology.mjs";
+import { selfCheck } from "./opencode-self-monitor.mjs";
+import { planNext } from "./opencode-plan.mjs";
+import { dream as dreamPass } from "./opencode-dream.mjs";
+import { layers, renderLayersHtml } from "./opencode-layers.mjs";
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
@@ -86,14 +106,50 @@ import { spawnSync, execFileSync } from "node:child_process";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { lookNote, projectHistory } from "./opencode-context.mjs";
 import { recordTurnsToWeft } from "./opencode-weft-record.mjs";
-import { findInWeft } from "./opencode-weft-find.mjs";
+import { findInWeft, findInWeftSemantic } from "./opencode-weft-find.mjs";
 import { archonNote } from "./opencode-archons.mjs";
+import { memoryNote } from "./opencode-memory.mjs";
+import { blocks as recordBlocks } from "./opencode-record.mjs";
+import { DELTA_ON, measure as measureDelta, rankTurns } from "./opencode-delta.mjs";
+import { STAKES_ON, stakeCheck } from "./opencode-stakes.mjs";
+import { ETHOS_ON, ethosShadow } from "./opencode-ethos.mjs";
+import { PATHOS_ON, pathosPass } from "./opencode-pathos.mjs";
+import * as remember from "./opencode-remember.mjs";
 import { connect as matrixConnect } from "./fold-matrix.mjs";
 import { connect as driveConnect } from "./fold-gdrive.mjs";
 import { perceiveMedia, probeBackends, PERCEIVE_VERSION } from "./khora/perceive/local.mjs";
+import { perceiveMany as senseMany, huntOrgans, organStanding } from "./senses/registry.mjs";
+import { cube as cubeEvent, cubeMap } from "./opencode-cube.mjs";
+import * as cube from "./native/kernel/cube.js";
+import { makeStandingCube, cellForFlag } from "./native/the-fold/standing-cube.js";
+// THE STANDING CUBE (native/the-fold/standing-cube.js): where a reply's claim stands, and which cell
+// a failed claim is owed to. Generated from the cube; read-only here, never a model.
+const STANDING = makeStandingCube({ operators: cube });
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
+// Siblings (penelope, janus, Zenodotus) live beside the stack on a dev box; under launchd the
+// stack is ~/.khora and the box's siblings sit elsewhere. FOLD_SIBLINGS_DIR names where to look
+// (default: beside the stack). A missing sibling stays a typed gap (fails open), never an error.
+const SIBLINGS = process.env.FOLD_SIBLINGS_DIR ?? path.resolve(HERE, "..");
 const STATE = process.env.FOLD_OPENCODE_STATE ?? path.join(HERE, "state", "opencode");
+// THE RELEASE KILL SWITCH — the falsifier's control. FOLD_RELEASE=0 keeps the deposits but disables every
+// mechanical release (arrival / prose / merge / wall), reproducing the pre-release amplification for an A/B.
+const releaseOn = () => process.env.FOLD_RELEASE !== "0";
+
+// THE MECHANICAL FOLD — penelope/organs/fold-note.mjs, the shared capacity every fold-suite surface uses (it folds
+// a session's turns to a bounded note: threads + derivation). Reached lazily and failing open: a missing sibling is
+// a typed gap (an empty note), never a broken turn. The door is where the surfaces meet, so it is wired here.
+let _foldNote = null;
+async function foldNoteOf(turns, ask, opts) {
+  if (_foldNote === null) {
+    try {
+      _foldNote = (await import(path.join(SIBLINGS, "penelope", "organs", "fold-note.mjs"))).foldNote;
+    } catch {
+      _foldNote = false;
+    }
+  }
+  return _foldNote ? _foldNote(turns, ask, opts) : "";
+}
 const RECORD = path.join(STATE, "record.jsonl");
 const LEDGER = path.join(STATE, "savings.json");
 // The record also rides to the account's Matrix room as EODB operators (fold-matrix.mjs)
@@ -101,6 +157,17 @@ const LEDGER = path.join(STATE, "savings.json");
 const matrix = matrixConnect({ state: STATE });
 const drive = driveConnect({ state: STATE }); // the same record, sealed, in Google Drive's hidden app folder
 const RECALL = (process.env.FOLD_RECALL ?? "1") !== "0";
+// The user-memory surface: facts about the operator, injected when the ask's
+// own words bear on them. Mechanical word overlap, no model, milliseconds.
+// FOLD_MEMORY=0 removes it; the store lives at ~/.config/opencode/user-memory.md.
+const MEMORY_ON = (process.env.FOLD_MEMORY ?? "1") !== "0";
+// The other two standing stores the Remember window writes (opencode-remember.mjs):
+// refs — addresses the system may read on demand; system — prompt text attached
+// to asks like this one. Both are injected by need, never wholesale. FOLD_REFS=0
+// / FOLD_SYSTEM=0 removes one; the stores live at ~/.config/opencode/{user-refs.md,
+// system-prompts.json}.
+const REFS_ON = (process.env.FOLD_REFS ?? "1") !== "0";
+const SYSTEM_ON = (process.env.FOLD_SYSTEM ?? "1") !== "0";
 // Step 1 of the doorway plan (archon-aware context): FOLD_ARCHONS=1 injects
 // the archon ground note into the context answer. Default 0 is shadow — the
 // decision is computed and recorded on every turn, but never injected, so a
@@ -119,7 +186,7 @@ export const addressOf = (ask) =>
   crypto.createHash("sha256").update(String(ask ?? "").toLowerCase().replace(/\s+/g, " ").trim()).digest("hex").slice(0, 16);
 
 const sessions = new Map(); // sessionID -> the open turn
-const counters = { titlesLocal: 0, titlesFailed: 0, recallsServed: 0, turnsRecorded: 0, looksServed: 0, looksDeclined: 0, projections: 0, projectionGaps: 0 };
+const counters = { titlesLocal: 0, titlesFailed: 0, recallsServed: 0, turnsRecorded: 0, looksServed: 0, looksDeclined: 0, projections: 0, projectionGaps: 0, memoriesServed: 0, refsServed: 0, systemServed: 0 };
 
 // The EXACT assembled frontier prompts, verbatim, for the audit: what the model
 // was actually sent. Kept per session (last one wins) and persisted. Never
@@ -139,9 +206,10 @@ const blankTokens = () => ({ input: 0, output: 0, reasoning: 0, cacheRead: 0, ca
 function turnFor(sessionID) {
   let turn = sessions.get(sessionID);
   if (!turn) {
-    turn = { sessionID, ask: "", address: null, model: null, steps: 0, tools: new Map(), answer: "", tokens: blankTokens(), cost: 0, startedAt: Date.now(), recalled: false, projectedChars: 0, system: null, look: null, project: null, title: null, archons: null, memory: null };
+    turn = { sessionID, ask: "", address: null, model: null, steps: 0, tools: new Map(), answer: "", tokens: blankTokens(), cost: 0, startedAt: Date.now(), touched: Date.now(), recalled: false, projectedChars: 0, system: null, look: null, project: null, title: null, archons: null, memory: null, refs: null, systemPrompt: null };
     sessions.set(sessionID, turn);
   }
+  turn.touched = Date.now();
   return turn;
 }
 
@@ -153,13 +221,91 @@ function readRecord() {
   } catch { return []; }
 }
 
+// ONLY THE DMD + SLEEP CLEANING (2026-10-16). The record keeps only the DIFFERENCE THAT MAKES A
+// DIFFERENCE: a turn that carries nothing the last recorded turn for the same address lacked — the
+// same plan, settled outcome, recall, injected notes and answer — is a repetition, and is not appended.
+// When the door has been idle for FOLD_SLEEP_MS it compacts the file, dropping those repetitions, so a
+// long session folds to its differences rather than its "did it again"s.
+const SLEEP_MS = Number(process.env.FOLD_SLEEP_MS ?? 30 * 60_000);
+// The DMD is the OUTCOME of the work — what was done and how it ended — not the prompting that produced
+// it: a repeat answered the same way through a recall carries no new difference, so `recalled`/`system`
+// are deliberately NOT compared.
+const DMD_FIELDS = ["address", "plan", "settled", "answer"];
+const dmdSame = (a, b) =>
+  !!a && !!b && a.sessionID === b.sessionID && DMD_FIELDS.every((k) => JSON.stringify(a[k] ?? null) === JSON.stringify(b[k] ?? null));
+
 let appended = null;
 const lastRow = () => appended;
+let sleepTimer = null;
+
+// SLEEP CLEANING: idle -> compact. Per address the last row stands; a row identical in the DMD fields to
+// the last kept row for its address is a repetition and drops. Atomic rewrite; cleaning never blocks a turn.
+function compactRecord() {
+  try {
+    const rows = readRecord();
+    const byAddr = new Map();
+    const kept = [];
+    for (const r of rows) {
+      if (r.address && dmdSame(byAddr.get(r.address), r)) continue;
+      if (r.address) byAddr.set(r.address, r);
+      kept.push(r);
+    }
+    if (kept.length === rows.length) return;
+    const tmp = `${RECORD}.tmp`;
+    fs.writeFileSync(tmp, kept.map((r) => JSON.stringify(r)).join("\n") + (kept.length ? "\n" : ""));
+    fs.renameSync(tmp, RECORD);
+  } catch { /* cleaning never blocks a turn */ }
+}
+function scheduleSleep() {
+  clearTimeout(sleepTimer);
+  sleepTimer = setTimeout(compactRecord, SLEEP_MS);
+  sleepTimer.unref?.();
+}
+const DREAM_IDLE_MS = Number(process.env.FOLD_DREAM_IDLE_MS ?? 30 * 60_000);
+let dreamTimer = null;
+function runDream() {
+  try {
+    const base = notesRoot();
+    if (!fs.existsSync(base)) return;
+    for (const d of fs.readdirSync(base, { withFileTypes: true })) {
+      if (!d.isDirectory() || !identTask(d.name)) continue;
+      try { dreamPass({ task: d.name }); } catch { /* dream never blocks */ }
+    }
+  } catch { /* never blocks */ }
+}
+function scheduleDream() {
+  clearTimeout(dreamTimer);
+  dreamTimer = setTimeout(() => { runDream(); scheduleDream();
+const META_IDLE_MS = Number(process.env.FOLD_META_EVERY_MS ?? 60 * 1000);
+let metaTimer = null;
+function runMeta() {
+  try {
+    const base = notesRoot();
+    if (!fs.existsSync(base)) return;
+    for (const d of fs.readdirSync(base, { withFileTypes: true })) {
+      if (!d.isDirectory() || !identTask(d.name)) continue;
+      try { metaWorkerTick({ task: d.name }); } catch { /* never blocks */ }
+    }
+  } catch { /* never blocks */ }
+}
+function scheduleMeta() {
+  clearTimeout(metaTimer);
+  metaTimer = setTimeout(() => { runMeta(); scheduleMeta(); }, META_IDLE_MS);
+  metaTimer.unref?.();
+}
+scheduleMeta(); }, DREAM_IDLE_MS);
+  dreamTimer.unref?.();
+}
+scheduleDream();
 function append(row) {
+  if (dmdSame(appended, row)) return appended; // carries no difference: not recorded
   appended = row;
   fs.mkdirSync(STATE, { recursive: true });
   fs.appendFileSync(RECORD, JSON.stringify(row) + "\n");
+  scheduleSleep();
 }
+try { appended = readRecord().at(-1) ?? null; } catch { appended = null; }
+if (appended) scheduleSleep();
 
 // ── savings ledger ───────────────────────────────────────────────────────
 // The counter the operator reads. Chars are measured; tokens are chars/4 and
@@ -168,7 +314,7 @@ function append(row) {
 const blankLedger = () => ({
   since: new Date().toISOString(),
   projections: 0,
-  projectedChars: 0, // chars of earlier exchanges left out of a request (Houdini's drop), measured on the exchange sizes the client sent
+  projectedChars: 0, // chars of earlier exchanges left out of a request (the Houdini drop and the surf cut), measured on the sizes the client sent
   titleTokensEst: 0, // ceil(ask chars/4) + 150 per title: the frontier title request avoided, disclosed as an estimate
   savedUSD: 0,
   pricedProjections: 0,
@@ -208,96 +354,15 @@ function recallNote(address) {
   ].join("\n");
 }
 
-// ── memory (the operator's standing facts, injected by need) ────────────
-// The memory surface (holodeck/docs/USER-MEMORY.md): facts about the operator(s)
-// and their world — which repo is canonical, which account publishes — folded
-// from history and dropped explicitly. The opencode-side store is
-// ~/.config/opencode/user-memory.md; the doorway parses it and injects the
-// entries an ask actually bears on, exactly like `look` and `project`. Fails
-// open: an unreadable or empty store answers nothing and opencode runs as
-// upstream. Mechanical, never a model call.
-const USER_MEMORY = process.env.FOLD_USER_MEMORY ?? path.join(os.homedir(), ".config", "opencode", "user-memory.md");
-const MEMORY_CHARS = Number(process.env.FOLD_MEMORY_CHARS ?? 500);
-
-// The markdown grammar, mirrored with holodeck/holodeck-memory.js (no shared
-// code — the same protocol as content-rules.md ↔ content-rules.json):
-//   ## <tag>  ·  - <claim>  ·  indented `key: value` fields.
-function parseUserMemory(md) {
-  const entries = [];
-  let tag = null, cur = null;
-  const push = () => { if (cur && cur.claim && cur.tag) entries.push(cur); cur = null; };
-  for (const raw of String(md ?? "").split("\n")) {
-    const line = raw.replace(/\r$/, "");
-    if (line.startsWith("## ")) { push(); tag = line.slice(3).trim(); continue; }
-    if (line.startsWith("- ")) { push(); cur = { claim: line.slice(2).trim(), tag: tag ?? "", status: "current" }; continue; }
-    if (cur && /^\s{2}[a-z]+:/.test(line)) {
-      const m = line.trim().match(/^([a-z]+):\s*(.*)$/);
-      if (m) { if (m[1] === "provenance") cur.provenance = m[2] ? m[2].split(",").map((s) => s.trim()).filter(Boolean) : []; else cur[m[1]] = m[2].trim(); }
-    }
-  }
-  push();
-  return entries;
-}
-
-function readUserMemory() {
-  try { return parseUserMemory(fs.readFileSync(USER_MEMORY, "utf8")); } catch { return []; }
-}
-
-// Function words never name a memory. Without this, a 3+ letter stopword ("the",
-// "is", "and") would make every entry match every ask, since they appear in all
-// of them. The matcher scores on the remaining CONTENT terms only — the same
-// fold the holodeck's kind induction uses to tell a connector from a relation.
-const MEMORY_STOP = new Set(["the", "and", "for", "are", "was", "were", "been", "being", "with", "this", "that", "these", "those", "from", "into", "onto", "about", "which", "whose", "does", "have", "has", "had", "having", "what", "when", "where", "who", "whom", "why", "how", "not", "nor", "its", "our", "your", "their", "there", "here", "then", "than", "will", "would", "could", "should", "can", "may", "might", "must", "shall", "they", "them", "you", "but", "also", "only", "very", "just", "some", "any", "each", "both", "other", "such"]);
-
-function memoryNote(ask) {
-  const entries = readUserMemory().filter((e) => e.status !== "superseded");
-  if (!entries.length) return null;
-  const terms = new Set((String(ask ?? "").toLowerCase().match(/[\p{L}\p{N}_]{3,}/gu) ?? []).filter((w) => !MEMORY_STOP.has(w)));
-  if (!terms.size) return null;
-  const hits = entries
-    .map((e) => ({ e, score: new Set((`${e.claim} ${e.tag}`.toLowerCase().match(/[\p{L}\p{N}_]{3,}/gu) ?? []).filter((w) => terms.has(w))).size }))
-    .filter((h) => h.score > 0)
-    .sort((a, b) => b.score - a.score);
-  if (!hits.length) return null;
-  const lines = ["<fold-memory>"];
-  let used = 0;
-  for (const { e } of hits) {
-    const line = `- [${e.tag.replace(/^about:user:/, "")}] ${e.claim}`;
-    if (used + line.length > MEMORY_CHARS) break;
-    lines.push(line);
-    used += line.length + 1;
-  }
-  lines.push("</fold-memory>");
-  return lines.join("\n");
-}
-
-// An explicit drop ("remember this"): append a claim to the opencode-side
-// store. Append-only — a new section is appended even if the tag already
-// appears above; the parser merges duplicate sections, so nothing is edited.
-function memoryDrop(body) {
-  const claim = String(body?.claim ?? "").replace(/\s+/g, " ").trim();
-  const tag = String(body?.tag ?? "").replace(/\s+/g, " ").trim() || "about:user:preferences";
-  if (!claim) return { ok: false, gap: "no-claim" };
-  const falsifying = String(body?.falsifying ?? "").replace(/\s+/g, " ").trim();
-  const block = `\n## ${tag}\n- ${claim}\n  status: current\n${falsifying ? `  falsifying: ${falsifying}\n` : ""}`;
-  try {
-    fs.mkdirSync(path.dirname(USER_MEMORY), { recursive: true });
-    fs.appendFileSync(USER_MEMORY, block);
-    return { ok: true, claim, tag };
-  } catch (e) {
-    return { ok: false, gap: "unwritable", why: String(e?.message ?? e).slice(0, 120) };
-  }
-}
-
 // The context event answers five things, each an existing organ:
 //   system   the hunt-first recall of an exact repeat ask (the record)
 //   look     LOOK: the places the ask's own words point at, as addresses
 //   project  HOUDINI: which earlier exchanges ride, and the record that stands
 //            in for the rest. Decided once per ASK; the client holds the
 //            decision for the turn's steps so the request prefix is stable.
-//   memory   the memory surface: the operator's standing facts (which repo is
-//            canonical, which account publishes) that the ask bears on, from
-//            ~/.config/opencode/user-memory.md. Need-gated, capped, mechanical.
+//   memory   the USER-MEMORY surface: facts about the operator the ask's own
+//            words bear on, injected read-only (opencode-memory.mjs). Mechanical
+//            word overlap, no model, milliseconds; FOLD_MEMORY=0 removes it.
 //   archons  the archon ground note (opencode-archons.mjs): matchArchons over
 //            the ask, dossier-gated, top 2 hits, ≤600 chars. Computed and
 //            recorded on every turn; injected into the answer only when
@@ -355,10 +420,31 @@ async function onContext(body) {
     out.archons = { note: arch.note, handles: arch.handles, chars: arch.chars };
     turn.archons.injected = true;
   }
-  // Memory: the operator's standing facts the ask bears on. Mechanical word
-  // overlap, need-gated, capped; an ask touching nothing in the store gets none.
-  const mem = memoryNote(turn.ask);
-  if (mem) { out.memory = mem; turn.memory = mem; } else { turn.memory = null; }
+  // The operator's own facts: read from the user-memory surface and injected
+  // when the ask's words bear on them. Mechanical word overlap — no model, no
+  // guess, milliseconds. A missing store or no match is a typed gap (nothing
+  // injected), recorded so the audit can disclose what the door kept out.
+  const mem = MEMORY_ON ? memoryNote(turn.ask) : { gap: "off" };
+  if (mem.note) { counters.memoriesServed++; out.memory = mem.note; turn.memory = mem.note; }
+  else turn.memory = mem.gap ?? null;
+  // Refs: addresses the operator gave the system, injected when the ask's own
+  // words bear on one. The source is named; its bytes are read on demand (the
+  // snip tool), never carried in the note. Mechanical word overlap, no model.
+  const refs = REFS_ON ? remember.noteFor("refs", turn.ask) : { gap: "off" };
+  if (refs.note) { counters.refsServed++; out.refs = refs.note; turn.refs = refs.note; }
+  else turn.refs = refs.gap ?? null;
+  // System: standing prompt text the operator attached to asks like this one,
+  // injected only when it bears — never every prompt. Same mechanical match.
+  const system = SYSTEM_ON ? remember.noteFor("system", turn.ask) : { gap: "off" };
+  if (system.note) { counters.systemServed++; out.systemPrompt = system.note; turn.systemPrompt = system.note; }
+  else turn.systemPrompt = system.gap ?? null;
+  // The swarm's learning: what the ants already measured on this task, injected when
+  // the ask's own words bear on it. A mechanical read of the swarm's own marks — no
+  // model, no guess; the standing the swarm measured rides with each finding.
+  if (turn.ask.trim() && (body.workspace || body.task)) {
+    const swarmNote = swarmFindingsNote({ task: taskFor(body, String(body.sessionID ?? "")), ask: turn.ask });
+    if (swarmNote) { out.swarm = swarmNote; turn.swarm = swarmNote; }
+  }
   return out;
 }
 
@@ -417,6 +503,18 @@ const realOf = (file) => {
   try { return fs.realpathSync(file); } catch { /* new file */ }
   try { return path.join(fs.realpathSync(path.dirname(file)), path.basename(file)); } catch { return file; }
 };
+// The fork clips a tool's input to a JSON STRING before it leaves the process (fold.ts clip), and a
+// string clipped past the cap is not parseable JSON. An object arrives only from clients that send
+// the shape raw. Parse once here — the boundary that owns the value — so every reader below sees an
+// object or null and never re-checks; a string that will not parse stays null (a typed nothing, never a guess).
+function parseToolInput(input) {
+  if (input && typeof input === "object") return input;
+  if (typeof input !== "string") return null;
+  try {
+    const parsed = JSON.parse(input);
+    return parsed && typeof parsed === "object" ? parsed : null;
+  } catch { return null; }
+}
 function traceStart(sessionID, turn, tool) {
   const name = String(tool?.name ?? "");
   tool.t0 = Date.now();
@@ -437,12 +535,19 @@ function traceEnd(sessionID, turn, tool) {
     const root = projectRoot(tool.trace.file);
     if (!root) return;
     let after = null; try { after = fs.readFileSync(tool.trace.file); } catch { /* deleted */ }
-    eot.recordEdit({ task, agent: sessionID, root, file: tool.trace.file, before: tool.trace.before, after, tool: name });
+    eot.recordEdit({ task, agent: sessionID, root, file: tool.trace.file, before: tool.trace.before, after, tool: name, universe: universeOf(body) });
   } else if (SWEEP_TOOLS.test(name)) {
     const cmd = tool.input && typeof tool.input === "object" ? String(tool.input.command ?? tool.input.cmd ?? name) : name;
     eot.recordExec({ task, agent: sessionID, command: cmd, ok, cwd: turn.workspace ?? null, tool: name });
     const root = turn.workspace ? realOf(turn.workspace) : null;
-    if (root && tool.t0) eot.sweepEdits({ task, agent: sessionID, root, since: tool.t0, tool: name });
+    if (root && tool.t0) {
+      const swept = eot.sweepEdits({ task, agent: sessionID, root, since: tool.t0, tool: name });
+      // THE STIGMERGIC PAIR for swept writes: the sweep deposited the edit claims in the EOT (the
+      // ledger's one store); the medium gets the same items, so the file-readers (the plans panel,
+      // a legacy stateFor) show the same ledger, never a second one.
+      if (swept?.ok && Array.isArray(swept.claimed))
+        for (const rel of swept.claimed) { try { claimItem({ task, agent: sessionID, item: `edit ${rel}`, ttlMs: CLAIM_TTL_MS }); } catch { /* the medium never blocks */ } }
+    }
   }
   delete tool.trace;
 }
@@ -473,8 +578,10 @@ function autoClaim(sessionID, turn, tool) {
     try { return fs.realpathSync(file); } catch { /* new file */ }
     try { return path.join(fs.realpathSync(path.dirname(file)), path.basename(file)); } catch { return file; }
   })();
-  const rootDir = projectRoot(real);
-  const task = turn.task ?? projectKey(real);
+  const rootDir = projectRoot(real) ?? projectRoot(path.dirname(real));
+  // projectKey needs an existing path; a `write` creating a NEW file has none, so the git root
+  // (which rootDir already is) stands in — the claim fires from the first sight of the new path.
+  const task = turn.task ?? projectKey(real) ?? (rootDir ? projectKey(rootDir) : null);
   if (!rootDir || !task) return;
   const rel = path.relative(rootDir, real);
   if (!rel || rel.startsWith("..")) return;
@@ -505,9 +612,22 @@ function guardAnswer(sessionID, turn) {
   try {
     const st = standingOf({ agent: sessionID, n: answerCount.set(sessionID, (answerCount.get(sessionID) ?? 0) + 1).get(sessionID), ground: r });
     turn.standing = { ...st.counts, refuted: st.refuted.slice(0, 3) };
-    if (st.claims) eot.append({ task, agent: sessionID, stage: "reason", detail: { op: "SPIRAL", by: "khora:opencode-eot.groundCheck", counts: st.counts, refuted: st.refuted.slice(0, 6) } });
+    if (st.claims) eot.append({ task, agent: sessionID, stage: "reason", universe: universeOf(body), detail: { op: "SPIRAL", by: "khora:opencode-eot.groundCheck", counts: st.counts, refuted: st.refuted.slice(0, 6) } });
   } catch { /* the spiral never blocks a turn */ }
-  if (r.flags.length) eot.append({ task, agent: sessionID, stage: "flag", detail: { flags: r.flags.slice(0, 6), summary: r.summary } });
+  if (r.flags.length) eot.append({ task, agent: sessionID, stage: "flag", universe: universeOf(body), detail: { flags: r.flags.slice(0, 6), summary: r.summary } });
+}
+
+// THE VISIBLE PROVENANCE, read off the standing cube: what the reply rests on (the ground summary),
+// its verifiable failures, and WHERE each failed claim stands (the cell it is owed to). A flagged
+// reply is a set-level standing (EVA·Pattern, across witnesses); a clean one is a figure judged
+// through the lens (EVA·Figure). The cell's own nulls ride as what the reading watched for.
+function standingFor(flags) {
+  const cell = STANDING.interrogate("EVA", flags.length ? "Pattern" : "Figure");
+  return { cell: cell.cell, meaning: cell.positive, watched: cell.nulls };
+}
+function reviewOf(turn) {
+  const flags = (turn.flags ?? []).map((f) => ({ kind: f.kind, detail: f.detail ?? null, cell: cellForFlag(f.kind) }));
+  return { summary: turn.groundSummary ?? null, flags, standing: standingFor(flags) };
 }
 
 // THE WORK TREE, asked: a fold of the log at a cursor. op: note | files | diff | drift | reconcile.
@@ -519,6 +639,12 @@ function onTree(body) {
     case "diff": return { ok: true, ...eot.treeDiff(task, body.from ?? null, body.to ?? null) };
     case "drift": return root ? { ok: true, drift: eot.treeVsDisk(task, root) } : { ok: false, gap: "no-workspace" };
     case "reconcile": return root ? eot.reconcile({ task, agent: String(body.agent ?? body.sessionID ?? "door"), root }) : { ok: false, gap: "no-workspace" };
+    case "event": return { ok: true, event: eot.eventDetail(task, String(body.id ?? "")) };
+    case "materialize":
+      // A write to an arbitrary local path: opt-in, like chase's FOLD_REC_EXEC. The dir is the panel's choice,
+      // so the door refuses unless the operator turned writes on, and only then for an absolute existing path.
+      if (process.env.FOLD_EOT_WRITE !== "1") return { ok: false, gap: "write-disabled" };
+      { const dir = String(body.dir ?? ""); if (!path.isAbsolute(dir)) return { ok: false, gap: "bad-dir" }; return { ok: true, ...eot.materialize(task, dir, { asOf }) }; }
     default: return { ok: true, ...eot.projectTreeNote(task) };
   }
 }
@@ -532,6 +658,7 @@ function onEvent(body) {
   }
   if (!body.sessionID) return {};
   const turn = turnFor(body.sessionID);
+  let review = null;
   switch (type) {
     case "session.step.started":
       turn.model = data.model ?? turn.model;
@@ -556,7 +683,7 @@ function onEvent(body) {
       break;
     case "session.tool.called": {
       const tool = turn.tools.get(data.id) ?? { name: "?", input: null, ok: null };
-      tool.input = data.input;
+      tool.input = parseToolInput(data.input);
       turn.tools.set(data.id, tool);
       try { autoClaim(body.sessionID, turn, tool); } catch { /* a trace is never worth a turn */ }
       try { traceStart(body.sessionID, turn, tool); } catch { /* the log never blocks */ }
@@ -573,12 +700,16 @@ function onEvent(body) {
     case "session.text.ended":
       turn.answer = String(data.text ?? "");
       try { guardAnswer(body.sessionID, turn); } catch { /* the guard never blocks a turn */ }
+      // the pathos pass (shadow, FOLD_PATHOS): the person undergoes the turn; a concession lands on the ledger, nothing is injected
+      try { if (PATHOS_ON() && turn.task && turn.answer.trim()) pathosPass({ task: turn.task, text: turn.answer, turn: turn.steps }); } catch { /* never blocks a turn */ }
+      // the reply's provenance, returned on the same post; the plugin draws it as a notice row.
+      review = reviewOf(turn);
       break;
     default:
       break;
   }
   if (TURN_END.has(type)) finish(turn, type);
-  return {};
+  return review ? { review } : {};
 }
 
 function finish(turn, endType) {
@@ -618,6 +749,17 @@ function finish(turn, endType) {
   try { if (drive.enqueue(lastRow())) drive.push().catch(() => {}); } catch { /* the record is already local */ }
 }
 
+// LIVE TTL: an in-memory turn is live only while its events arrive. A session whose server dies
+// mid-turn (restart churn, a killed process) never sends the boundary, so its turn would show in
+// the audit as "being prompted RIGHT NOW" forever. Silence past FOLD_LIVE_TTL_MS is the boundary:
+// the turn finishes as interrupted (recorded honestly), never silently dropped.
+const LIVE_TTL_MS = Number(process.env.FOLD_LIVE_TTL_MS ?? 30 * 60_000);
+function sweepLive(now = Date.now()) {
+  for (const turn of [...sessions.values()])
+    if (now - (turn.touched ?? turn.startedAt) > LIVE_TTL_MS) finish(turn, "session.execution.interrupted");
+}
+setInterval(() => { try { sweepLive(); } catch { /* never blocks */ } }, 60_000).unref?.();
+
 // ── meter ────────────────────────────────────────────────────────────────
 // Rate AND health together, never the rate alone (teacher doc §X). Health here
 // is only what is honestly knowable: how often a recalled ask still needed the
@@ -639,10 +781,11 @@ export function meter() {
     looksServed: counters.looksServed,
     looksDeclined: counters.looksDeclined,
     projections: counters.projections,
+    memoriesServed: counters.memoriesServed,
     savings: {
       since: ledger.since,
       formulas: {
-        projectedTokensEst: "projectedChars / 4 — GROSS: earlier exchanges left out of a request, not net of anything the model then had to re-open",
+        projectedTokensEst: "projectedChars / 4 — GROSS: earlier exchanges/turns left out of a request (Houdini's drop and the surf cut), not net of anything the model then had to re-open",
         titleTokensEst: "ceil(ask chars / 4) + 150, per title served",
         dollars: "estimated tokens × priceIn the client sent (the running model's own catalog price)",
       },
@@ -669,6 +812,7 @@ export function meter() {
 // the frontier then did with it. Read-only; nothing here is the model's own
 // words, and nothing is generated for display.
 export function audit({ limit = 20 } = {}) {
+  sweepLive();
   const rows = readRecord().filter((r) => (r.kind ?? "instance") !== "draft-lint").slice(-limit).reverse();
   return {
     door: "opencode",
@@ -823,10 +967,40 @@ function startDocumentJob(body) {
 function onPrompt(body) {
   const sessionID = body?.sessionID;
   if (!sessionID) return {};
-  prompts.set(sessionID, { when: new Date().toISOString(), model: body.model ?? null, body: String(body.body ?? "") });
+  const text = String(body.body ?? "");
+  const note = String(body.note ?? ""); // L1: the fold-index the model was actually handed this turn
+  const when = new Date().toISOString();
+  const sha = crypto.createHash("sha256").update(text).digest("hex");
+  prompts.set(sessionID, { when, model: body.model ?? null, sha, note, body: text });
   while (prompts.size > 50) prompts.delete(prompts.keys().next().value);
   savePrompts();
+  // (1) DISCLOSE PRECISELY WHAT THE MODEL WAS PROMPTED. The exact request body is content-addressed and appended
+  // under the task, so the record PROVES it and any answer can cite it as `prompt#<sha16>`. Mechanical: the system
+  // wrote the bytes it sent. A forged ref hashes to no file and is a typed gap, never a guess (the source cannot lie).
+  try {
+    const task = taskFor(body, sessionID);
+    const pdir = path.join(notesRoot(), task, "prompts");
+    fs.mkdirSync(pdir, { recursive: true });
+    const blob = path.join(pdir, `${sha}.txt`);
+    if (!fs.existsSync(blob)) fs.writeFileSync(blob, text);
+    fs.appendFileSync(
+      path.join(pdir, "index.jsonl"),
+      JSON.stringify({ when, task, agent: sessionID, model: body.model ?? null, sha, ref: `prompt#${sha.slice(0, 16)}`, bytes: text.length, note: note.slice(0, 8000) }) + "\n",
+    );
+  } catch { /* disclosure never blocks a turn */ }
   return {};
+}
+
+// Read a disclosed prompt source back by its content address. The bytes ARE the sha's preimage; a wrong address
+// resolves to nothing. This is how "what the model was prompted" becomes citable in an answer's composition.
+function readPromptSource({ task, sha, ref }) {
+  const pdir = path.join(notesRoot(), task, "prompts");
+  let hit = null;
+  try { for (const f of fs.readdirSync(pdir).filter((x) => x.endsWith(".txt"))) if (f.startsWith(sha)) { hit = path.join(pdir, f); break; } } catch { /* none */ }
+  if (!hit) return { ok: false, gap: "not_found", ref };
+  const bytes = fs.readFileSync(hit, "utf8");
+  if (!crypto.createHash("sha256").update(bytes).digest("hex").startsWith(sha)) return { ok: false, gap: "hash_mismatch", ref };
+  return { ok: true, ref, bytes, standing: "witnessed", provenance: { kind: "prompt", sha, from: "the request the model was sent" } };
 }
 
 // ── perceive (local-first media perception + its tab-facing config) ───────
@@ -989,7 +1163,7 @@ export { loadPerceiveConfig, savePerceiveConfig, onPerceive, PERCEIVE_DEFAULTS }
 let seedCache = null;
 function seedStatus() {
   if (seedCache) return seedCache;
-  const dir = process.env.FOLD_PRIORS_DIR ?? path.resolve(HERE, "..", "janus", "priors");
+  const dir = process.env.FOLD_PRIORS_DIR ?? path.join(SIBLINGS, "janus", "priors");
   try {
     const files = fs.readdirSync(dir).filter((f) => /^udhr-.+\.lexicon\.json$/.test(f));
     const languages = files.map((f) => f.replace(/^udhr-/, "").replace(/\.lexicon\.json$/, "")).sort();
@@ -1007,6 +1181,10 @@ const sessionTask = new Map();
 const taskFor = (body, agent) => {
   const t = body.task ? String(body.task) : null;
   return t && /^[\w.-]+$/.test(t) && t !== ".." ? t : (projectKey(body.workspace) ?? sessionTask.get(agent) ?? agent);
+};
+const universeOf = (body) => {
+  const u = body?.universe ? String(body.universe) : (process.env.FOLD_UNIVERSE ?? "world");
+  return /^[\w.-]+$/.test(u) && u !== ".." ? u : "world";
 };
 
 // THE COMMONS: what the OTHER agents of this project have settled, ingested and reasoned
@@ -1031,7 +1209,7 @@ async function penelopeProsify(args) {
   return text;
 }
 async function penelopeWeave({ ask, ground }) {
-  const api = path.resolve(HERE, "..", "penelope", "organs", "generation", "api.mjs");
+  const api = path.join(SIBLINGS, "penelope", "organs", "generation", "api.mjs");
   if (!fs.existsSync(api)) return null;
   process.env.PENELOPE_MOUTH_URL ??= process.env.FOLD_PROSIFY_MOUTH ?? "http://127.0.0.1:11435";
   const { weave } = await import(api);
@@ -1050,10 +1228,9 @@ const COMMONS_CHARS = Number(process.env.FOLD_COMMONS_CHARS ?? 600);
 const COMMONS_SENTENCE_CHARS = Number(process.env.FOLD_COMMONS_SENTENCE_CHARS ?? 150);
 const COMMONS_MAX_SENTENCES = Number(process.env.FOLD_COMMONS_SENTENCES ?? 4);
 const NOTE_CHARS = Number(process.env.FOLD_NOTE_CHARS ?? 700);
-const cueSeen = new Set();
 async function commonsNote({ task, agent, ask }, { prosify = null } = {}) {
   const fromLog = (() => { try { return eot.turnsFromLog(task); } catch { return []; } })();
-  const theirs = (fromLog.length ? fromLog : turnsOf({ task })).filter((t) => t.agent !== agent);
+  const theirs = (fromLog.length ? fromLog : turnsOf({ task, universe: universeOf(body) })).filter((t) => t.agent !== agent);
   if (!theirs.length) return "";
   const exchanges = theirs.map((t) => ({
     id: `${t.agent}#${t.n}`, q: t.ask, a: t.text, chars: (t.ask?.length ?? 0) + (t.text?.length ?? 0),
@@ -1081,16 +1258,28 @@ async function commonsNote({ task, agent, ask }, { prosify = null } = {}) {
   let held = [], conflicts = [], contextualized = 0;
   try {
     const { projectPerspectives, perspectiveOperation, divergence, BASIS, STANCE } = await import("./native/kernel/perspective.js");
-    const ops = picked.map((e) => perspectiveOperation({
-      holder: `holder:${e.holder}`, claim: String(e.a).replace(/\s+/g, " ").slice(0, 160) || e.q,
-      stance: STANCE.HOLDS, basis: BASIS.ASSERTED, witness: e.id,
-    }));
+    // A flat negation is a refusal of the same claim, not a different claim: the claim is keyed on its content stems
+    // (negation words and auxiliaries removed), the stance is REFUSES when the sentence carries a received negation word.
+    const { NEGATION_WORDS } = await import("./native/adapters/text/priors.js");
+    const AUX = new Set(["do", "does", "did", "is", "are", "was", "were", "will", "would", "can", "could", "should", "has", "have", "had", "the", "a", "an"]);
+    const toks = (s) => String(s).toLowerCase().replace(/n't\b/g, " not").match(/[a-z0-9_]+/g) ?? [];
+    const negated = (s) => toks(s).some((w) => NEGATION_WORDS.has(w) || NEGATION_WORDS.has(`${w}n't`));
+    const claimKey = (s) => toks(s).filter((w) => w.length > 2 && !AUX.has(w) && !NEGATION_WORDS.has(w) && w !== "not").map((w) => w.slice(0, 4)).join(" ");
+    const textOfKey = new Map();
+    const ops = picked.map((e) => {
+      const text = String(e.a).replace(/\s+/g, " ").slice(0, 160) || e.q;
+      if (!textOfKey.has(claimKey(text) || text)) textOfKey.set(claimKey(text) || text, text);
+      return perspectiveOperation({
+        holder: `holder:${e.holder}`, claim: claimKey(text) || text, claimText: text,
+        stance: negated(text) ? STANCE.REFUSES : STANCE.HOLDS, basis: BASIS.ASSERTED, witness: e.id,
+      });
+    });
     const view = projectPerspectives(ops.map((op, seq) => ({ ...op, seq })));
     held = picked.map((e) => ({ holder: e.holder, q: e.q, id: e.id }));
     const holders = [...new Set(picked.map((e) => e.holder))];
     for (let i = 0; i < holders.length; i++) for (let j = i + 1; j < holders.length; j++) {
       const d = divergence(view, `holder:${holders[i]}`, `holder:${holders[j]}`);
-      for (const c of d?.conflicting ?? []) conflicts.push({ a: holders[i], b: holders[j], claim: c.claim });
+      for (const c of d?.conflicting ?? []) conflicts.push({ a: holders[i], b: holders[j], claim: textOfKey.get(c.claim) ?? c.claim });
     }
   } catch { held = picked.map((e) => ({ holder: e.holder, q: e.q, id: e.id })); }
   try {
@@ -1152,24 +1341,79 @@ async function commonsNote({ task, agent, ask }, { prosify = null } = {}) {
 
 // This agent's settled turns, single-writer, so the others can read them.
 function writeTurns({ task, agent, turns }) {
-  try { if (turns.length) eot.recordTurns({ task, agent, turns }); } catch { /* the log never blocks a turn */ }
+  try { if (turns.length) eot.recordTurns({ task, agent, turns, universe: universeOf(body) }); } catch { /* the log never blocks a turn */ }
   const file = turnsFile(task, agent);
   if (!file || !turns.length) return null;
   try {
     fs.mkdirSync(path.dirname(file), { recursive: true });
-    const sections = turns.map((t) => `## turn ${t.n}\n\nask: ${t.ask}\n${t.grounds?.length ? `tools: ${t.grounds.join(", ")}\n` : ""}\n${t.answer || "(no text reply)"}\n`);
-    fs.writeFileSync(file, `# turns ${agent}\n\n${sections.join("\n")}`);
+    writeTurnsFile({ file, agent, turns });
     try { recordTurnsToWeft({ task, agent, turns, file }); } catch { /* the weft store never blocks a turn */ }
     return file;
   } catch { return null; }
 }
 
+// ── the cost gate's door side ────────────────────────────────────────────────────────────────────────────
+const gateTracker = makeGateTracker({ ttlMs: Number(process.env.FOLD_CACHE_TTL_MS ?? 300_000), defaultCalls: Number(process.env.FOLD_GATE_CALLS ?? 4) });
+function costGateFor({ body, agent, task, out, now = Date.now() }) {
+  if (process.env.FOLD_COST_GATE === "0" || out.uncut || !Array.isArray(body.turns) || !body.turns.length) return null;
+  const seen = gateTracker.observe({ session: agent, ask: String(body.ask ?? ""), now });
+  // later calls of the ask keep the arm the first call took: switching mid-ask rewrites the prefix call one wrote
+  if (!seen.first && seen.arm) return { decided: true, fire: seen.arm === "cut", arm: seen.arm, basis: "reused: the ask's first call decided", margin: null };
+  const d = breakEven({
+    removedChars: body.keptOutChars, noteChars: String(out.note ?? "").length, remainingCalls: seen.remainingCalls,
+    priceIn: body.priceIn, priceCacheRead: body.priceCacheRead, priceCacheWrite: body.priceCacheWrite, cold: seen.cold, lastArm: seen.lastArm,
+  });
+  gateTracker.settle({ session: agent, arm: d.arm });
+  try {
+    eot.append({ task, agent, stage: "reason", universe: universeOf(body), detail: { op: "COST_GATE", by: "khora:opencode-cost-gate", arm: d.arm, fire: d.fire, decided: d.decided, margin: d.margin ?? null, costKeep: d.costKeep ?? null, costCut: d.costCut ?? null, inputs: { ...d.inputs, callsSource: seen.callsSource }, basis: d.basis } });
+  } catch { /* the log never blocks a turn */ }
+  return d;
+}
+
 async function onSurf(body) {
   const turns = Array.isArray(body.turns) ? body.turns : [];
-  const out = surfLadder({ ask: String(body.ask ?? ""), turns });
+  // SEMANTIC FALLBACK: only when the ask shares no term with the old turns (a synonym cue). The embedder is asked over the
+  // turns' own vocabulary; down or slow, the ladder is built lexically exactly as before.
+  let extraTerms = [];
+  if (semanticOn() && turns.length) {
+    const WORDS = /[\p{L}\p{N}_]{4,}/gu, SENT = /[^.!?\n]+[.!?]?/g;
+    // each word with the sentence it was said in: a sentence carries what the work said about the word, a bare word almost nothing
+    const vocab = new Map(), known = new Set();
+    for (const t of turns) for (const text of `${t.ask ?? ""}. ${t.answer ?? ""}`.match(SENT) ?? []) {
+      const s = text.trim();
+      for (const w of s.toLowerCase().match(WORDS) ?? []) { known.add(w); if (s.length > 12 && vocab.size < 600 && !vocab.has(w)) vocab.set(w, s); }
+    }
+    const askWords = new Set(String(body.ask ?? "").toLowerCase().match(WORDS) ?? []);
+    // only a TRUE lexical miss (no ask word appears anywhere in the history) asks the embedder
+    if (askWords.size && ![...askWords].some((w) => known.has(w))) extraTerms = (await semanticTerms({ ask: String(body.ask ?? ""), vocab: [...vocab].map(([term, text]) => ({ term, text })) })).terms;
+  }
+  const surfMode = process.env.FOLD_SURF_MODE ?? "pointer";
+  const rank = surfMode === "delta" ? rankTurns(task, {}) : null;
+  let out = surfLadder({ ask: String(body.ask ?? ""), turns, extraTerms, mode: surfMode, rank });
   const agent = String(body.sessionID ?? "");
   const task = taskFor(body, agent);
   writeTurns({ task, agent, turns });
+  // THE COST GATE (opencode-cost-gate.mjs): a cut rewrites the head of the request and burns the provider's
+  // cached prefix, so it fires only when the tokens it keeps out of the remaining calls cost more than the cache
+  // it throws away. Decided once per ask (the arm is reused for the ask's later calls), logged as an EOT event.
+  // Not decidable (no prices, no measured chars) = the old behaviour, disclosed. FOLD_COST_GATE=0 turns it off.
+  const gate = costGateFor({ body, agent, task, out });
+  if (gate && !gate.fire) out = { note: "", rungs: [], chars: 0, mode: out.mode, uncut: true, gated: true };
+  if (gate) out.gate = { arm: gate.arm, fire: gate.fire, decided: gate.decided, margin: gate.margin ?? null, basis: gate.basis };
+  // THE SURF CUT, ledgered. The client measures the chars its own cut kept out of THIS request (the
+  // older turns it spliced away) and reports them, so the savings ledger and the top-right tally
+  // record the real reduction, not only the title calls. Counted like a Houdini drop (onContext);
+  // GROSS per request, disclosed as an estimate, never net of what the model then re-opens.
+  const kept = out.gated ? 0 : Number(body.keptOutChars);
+  if (Number.isFinite(kept) && kept > 0) {
+    turnFor(agent).projectedChars += kept;
+    counters.projections++;
+    const saved = readLedger();
+    saved.projections++;
+    saved.projectedChars += kept;
+    if (body.priceIn !== undefined) countPrice(saved, kept, body.priceIn, "pricedProjections");
+    writeLedger(saved);
+  }
   // PRIORITY PACKING under one hard budget (FOLD_NOTE_CHARS). What is actionable first (what others
   // hold, what they raised), then the ladder, then the verified record. The marks cue rides once
   // per session, not every turn. The commons is NOT here: the context event already delivers it.
@@ -1186,31 +1430,44 @@ async function onSurf(body) {
     const rec = eot.projectRecord(task);
     recordLines = rec.slice(-3).map((r) => `${r.referent}: ${String(r.delta).slice(0, 80)}`);
   } catch { /* the files answer below */ }
-  if (!taken.length && !blocks.length) { const st = stateFor({ task, agent }); taken = st.taken; blocks = st.blocks; }
+    if (!taken.length && !blocks.length) { const st = stateFor({ task, agent, universe: universeOf(body) }); taken = st.taken; blocks = st.blocks; }
   if (!recordLines.length) { const legacy = recordNote({ task, limit: 3 }); if (legacy) recordLines = legacy.split("\n").slice(1, 4).map((l) => l.replace(/^-\s*/, "").slice(0, 100)); }
   if (taken.length) mech.push({ p: 1, t: `taken: ${taken.slice(0, 4).map((c) => `${c.item} [${short8(c.agent)}]`).join("; ")}${taken.length > 4 ? ` +${taken.length - 4}` : ""}` });
   for (const c of contention.slice(-2)) mech.push({ p: 2, t: c.holder === agent ? `contended: [${short8(c.contender)}] also edited ${c.item}` : `contended: ${c.item} held by [${short8(c.holder)}]` });
   if (recordLines.length) mech.push({ p: 4, t: `verified: ${recordLines.join("; ")}`.slice(0, 240) });
+  // THE PLAN (M2): the next actionable goal from the EOT dependency graph, if any. A finding changes what
+  // the local workers encounter next — the plan rides the mechanical note, not an agent-to-agent message.
+  try { const next = planNext({ task }); if (next.ok && next.node) mech.push({ p: 3, t: `plan: ${String(next.node.goal).slice(0, 160)}` }); } catch { /* no plan never blocks */ }
+  // OPEN FORKS (C3): a referent with two LIVE verified answers is a parallel fork, kept and never resolved.
+  // Read-only (liveAnswers), surfaced so the discrepancy reaches the next turn, never auto-merged.
+  try {
+    const forks = [...liveAnswers(recordBlocks(task)).entries()].filter(([, list]) => list.length > 1);
+    if (forks.length) mech.push({ p: 2, t: `fork: ${forks.slice(0, 2).map(([r, l]) => `${r} (${l.length} live answers)`).join("; ")}`.slice(0, 200) });
+  } catch { /* no fork read never blocks */ }
   const turnState = turnFor(agent);
   if (turnState.flags?.length) mech.push({ p: 1, t: `unverified in your last answer: ${turnState.flags.slice(0, 3).map((f) => `${f.kind}${f.kind === "unknown_path" ? ` ${f.detail}` : ""}`).join("; ")}`.slice(0, 200) });
   if (turnState.standing && (turnState.standing.refuted.length || turnState.standing.unresolved)) mech.push({ p: 1, t: `standing of your last answer: ${turnState.standing.licensed} licensed, ${turnState.standing.refuted.length} refuted${turnState.standing.refuted.length ? ` (${turnState.standing.refuted.join(",")})` : ""}, ${turnState.standing.unresolved} untested` });
   for (const b of blocks.slice(-2)) said.push({ p: 2, t: `block [${short8(b.agent)}]: ${String(b.text).slice(0, 110)}` });
-  said.push({ p: 3, t: String(out.note ?? "").split("\n").slice(0, 5).join("\n").slice(0, 380) });
-  // THE WEFT: where in the raw turns the ask's own beings are (offsets into <agent>.turns.md, from the lean records). Addresses only, never prose.
+  if (!out.uncut) said.push({ p: 3, t: String(out.note ?? "").split("\n").slice(0, 5).join("\n").slice(0, 380) });
+  // THE MECHANICAL FOLD (penelope/organs/fold-note.mjs): the turns folded to their threads — the shared capacity
+  // every fold-suite surface uses, not a per-surface reimplementation.
+  const folded = await foldNoteOf(turns, String(body.ask ?? ""), { budget: 500, threads: 4 });
+  if (folded) said.push({ p: 3, t: folded });
+  // THE WEFT: where in the raw turns the ask's own beings are (offsets into <agent>.turns.md, from the lean records).
+  // A ref is an argument to SNIP, so it rides; the filesystem path it lives at does not — Gary's own rule (P55:
+  // the mouth never sees an address), and a path changes no tool the model would call.
   try {
-    const w = process.env.FOLD_WEFT === "0" ? null : findInWeft({ ask: String(body.ask ?? ""), task, max: 3 });
+    const w = process.env.FOLD_WEFT === "0" ? null : await findInWeftSemantic({ ask: String(body.ask ?? ""), task, max: 3, root: notesRoot() });
     if (w?.hits.length || w?.conflicts.length) {
       const strip = (a) => a.slice(a.indexOf("/") + 1);
-      const home = (process.env.FOLD_WORKNOTES_DIR ?? "~/.fold/worknotes").replace(process.env.HOME ?? "\0", "~");
       const parts = [...w.hits.map((h) => strip(h.address)), ...w.conflicts.slice(0, 1).map((c) => `conflict ${c.relation.replace(/\|/g, " ")}: held ${strip(c.holds[0])} denied ${strip(c.denies[0])}`)];
-      said.push({ p: 4, atomic: true, t: `weft ${home}/${task}/: ${parts.join(" · ")}` });
+      said.push({ p: 4, atomic: true, t: `weft: ${parts.join(" · ")}` });
     }
   } catch { /* the weft read never blocks a turn */ }
-  if (!cueSeen.has(agent)) {
-    cueSeen.add(agent);
-    const home = (process.env.FOLD_WORKNOTES_DIR ?? "~/.fold/worknotes").replace(process.env.HOME ?? "\0", "~");
-    mech.push({ p: 5, t: `marks: append "<iso> · ${short8(agent)} · fact|claim|done|block · text" to ${home}/${task}/${agent}.md` });
-  }
+  // The marks cue is GONE (2026-10-16): autoClaim (this file, on every edit) already writes the claim mark and a
+  // block on contention — the stack does the bookkeeping, the model never appends a line. The cue named a
+  // filesystem path (P55) and narrated a format, and changed no tool the model would call. Only distinctions
+  // that change the next call ride.
   const pack = (items, budget) => {
     let used = 0; const kept = [];
     for (const part of items.sort((a, b) => a.p - b.p)) {
@@ -1225,23 +1482,227 @@ async function onSurf(body) {
   };
   const mechKept = pack(mech, Math.floor(NOTE_CHARS * 0.45));
   const saidKept = pack(said, NOTE_CHARS - mechKept.join("\n").length - 60);
+  // THE TRAIL (P1): the task's open questions, each anchored at the address it motivated. This is what lets a
+  // folded window keep its INTENT — the next thought reads why the last drill happened, not just where. Its own
+  // block, bounded small; a closed/evaporated scent never rides.
+  let trail = [];
+  try {
+    // THE MECHANICAL RELEASE IS TRANSCENDENTAL — it is a condition of what CAN appear in the window, and it may not
+    // appear IN the window. A category that makes the projection possible (here: which tensions are still live)
+    // cannot be a conscious determiner the model reasons over or answers — that is transcendental illusion, and
+    // the same failure as a person-facing notice reaching the model. So the machine RELEASES (merge, then wall)
+    // and says nothing; the model only ever sees the consequence — the question is gone, or rides at a coarser
+    // grain. The release is recorded (the scent files' own released/walled lines), never injected.
+    if (releaseOn()) {
+      try { releaseByMerge({ task }); } catch { /* never blocks */ }
+      for (const s of stuckScents({ task })) { try { releaseNested({ task, agent: s.agent, at: s.at, by: "wall" }); } catch { /* never blocks */ } }
+    }
+    trail = scentsOf({ task, limit: 5, universe: universeOf(body) }).map(
+      (s) =>
+        `- open q="${String(s.q).slice(0, 90)}" at="${s.at}"${s.parent ? ` parent="${s.parent}"` : ""}`,
+    );
+  } catch { /* the trail read never blocks a turn */ }
   out.note = [
     mechKept.length ? `<fold-mechanical>\n${mechKept.join("\n")}\n</fold-mechanical>` : "",
     saidKept.length ? `<fold-said>\n${saidKept.join("\n")}\n</fold-said>` : "",
+    trail.length ? `<fold-trail>\n${trail.join("\n")}\n</fold-trail>` : "",
   ].filter(Boolean).join("\n");
+  const __u = universeOf(body);
+  if (__u !== "world") {
+    const __info = universeInfo({ task, universe: __u });
+    const __stips = Array.isArray(__info?.stipulations) ? __info.stipulations : [];
+    if (__stips.length) {
+      const __lines = __stips.map((x) => `- ${String(x.fact ?? x)} = ${String(x.value ?? "true")} (truth:${x.truth ?? "false"})`).join("\n");
+      out.note = `${out.note ? out.note + "\n" : ""}<fold-holding universe="${__u}">\n${__lines}\n</fold-holding>`;
+    }
+  }
   return out;
 }
 
+// TRAIL (layer 3, opencode-trail.mjs): which tool results stay verbatim and which become opaque handles. The client sends the
+// results it holds (id, key = what each is about, step) and how long the session has been idle; the door applies the COST GATE
+// (compaction rewrites the cached prefix, so only when the cache is cold or the prompt is near its window) and the decayed-trail
+// plan. It holds no bytes: the client keeps them and resolves a handle itself. FOLD_TRAIL=1 turns it on; anything else answers go:false.
+function onTrail(body) {
+  if (!trailEnabled()) return { go: false, why: "off" };
+  const results = (Array.isArray(body.results) ? body.results : []).filter((r) => r && typeof r.id === "string" && typeof r.key === "string" && Number.isFinite(r.step)).slice(-2000);
+  const gate = trailGate({ idleMs: Number(body.idleMs) || 0, tokens: Number(body.tokens) || 0, window: Number(body.window) || 200_000 });
+  if (!gate.go || !results.length) return { go: false, why: gate.why };
+  const p = trailPlan({ results, already: new Set((Array.isArray(body.already) ? body.already : []).map(String)) });
+  return { go: true, why: gate.why, keep: [...p.keep], point: Object.fromEntries(p.point) };
+}
+
 // SNIP: the model composes by reference; the door returns the verbatim bytes and their provenance.
+// THE PHEROMONE TRAIL (P1): a drill deposits the OPEN QUESTION it serves (body.why) anchored at the address it
+// motivated, so the next thought (or a resumed session) knows WHY it drilled, not only where. Reinforced on
+// every re-drill, evaporates by TTL. The motive is echoed back on the answer for the immediate next step.
 function onSnip(body) {
   const agent = String(body.agent ?? body.sessionID ?? "");
   const task = taskFor(body, agent);
   const root = body.root ?? body.workspace ?? turnFor(agent).workspace ?? null;
-  return eot.snip({ task, agent: agent || null, ref: body.ref, root: root ? String(root) : null });
+  const ref = String(body.ref ?? "").trim();
+  const pm = /^prompt#([0-9a-f]{8,64})$/.exec(ref);
+  const result = pm
+    ? readPromptSource({ task, sha: pm[1], ref }) // a disclosed prompt source resolves to the exact bytes sent
+    : eot.snip({ task, agent: agent || null, ref: body.ref, root: root ? String(root) : null, universe: universeOf(body) });
+  // THE MODEL ANSWERS; THE SYSTEM DOES THE STIGMERGY. The tension a drill serves is derived MECHANICALLY from the
+  // ask in front of the model (never authored by it): the ask is the open question, the address is where the model
+  // went to answer it. On success the arrival releases the tension; on failure it stays open and walls if re-asked.
+  const ask = String(body.ask ?? body.why ?? "").trim(); // body.why only until the client is rebuilt onto `ask`
+  const at = String(body.ref ?? "");
+  if (result && result.ok !== false) {
+    if (releaseOn())
+      try {
+        releaseNested({ task, agent: agent || "session", at, by: "arrival" }); // the address and everything nested under it
+        releaseByQuestion({ task, agent: agent || "session", q: ask, by: "arrival" }); // the ask itself — any address it searched
+      } catch { /* the trail never blocks a read */ }
+  } else if (ask) {
+    try { scentNote({ task, agent: agent || "session", q: ask, at }); } catch { /* the trail never blocks a read */ }
+  }
+  return result;
 }
 function onGround(body) {
   const agent = String(body.agent ?? body.sessionID ?? "");
-  return eot.groundCheck({ task: taskFor(body, agent), text: String(body.text ?? ""), root: body.workspace ? String(body.workspace) : null });
+  const task = taskFor(body, agent);
+  // RELEASE BY ARRIVAL-IN-PROSE: this answer is an arrival — release every open tension its own words bear on.
+  if (releaseOn()) try { releaseAnswered({ task, agent, text: String(body.text ?? "") }); } catch { /* the trail never blocks a turn */ }
+  const r = eot.groundCheck({ task, text: String(body.text ?? ""), root: body.workspace ? String(body.workspace) : null });
+  // THE LEDGER CHECK, beside the lexical ground: what this answer says against what the task's own
+  // turns already heard (opencode-ledger-check.mjs) — a re-sighting is retold, a denial of a standing
+  // note is a contest. Display-only; a failed check is a typed gap, never a block.
+  let ledger = [];
+  try { ledger = checkAnswer({ turns: turnsOf({ task, universe: universeOf(body) }), text: String(body.text ?? "") }).flags ?? []; } catch { ledger = []; }
+  const flags = [...(r.flags ?? []), ...ledger].map((f) => ({ ...f, cell: cellForFlag(f.kind) }));
+  return { ...r, flags, standing: standingFor(flags) };
+}
+
+// The modality of a file by extension, for the local senses. Text-family is the
+// fallback (utf8), so code and prose need no enumeration; only the senses that read
+// bytes differently (image / PDF / audio) are named. Video and provider refs are the
+// local senses' own typed gaps (perceiveMedia), never derived here.
+const SWARM_MIME = { png: "image/png", jpg: "image/jpeg", jpeg: "image/jpeg", gif: "image/gif", webp: "image/webp", bmp: "image/bmp", tif: "image/tiff", tiff: "image/tiff", pdf: "application/pdf", wav: "audio/wav", mp3: "audio/mpeg", m4a: "audio/mp4", flac: "audio/flac", ogg: "audio/ogg", opus: "audio/opus", aac: "audio/aac", webm: "audio/webm", mp4: "video/mp4", mov: "video/quicktime", mkv: "video/x-matroska", avi: "video/x-msvideo" };
+const mimeOfPath = (p) => SWARM_MIME[path.extname(String(p)).slice(1).toLowerCase()] ?? "text/plain";
+
+// SWARM: deploy the ant-swarm on hard meaning. The capacity-swarm is model-free
+// (pure organ reads, same as proxy.mjs's /v1/swarm), so this runs with no Heimdall
+// admission and no model draw. It reads any language and any modality — a file is
+// resolved to its own ground by the local senses first (khora/perceive/local.mjs) —
+// and points the registry at that ground's referent-physics (the reader's cast and
+// relations), never at tokens. It returns the swarm's own report (a measurement,
+// never a guess) and records the finding in the task's medium so the next turn's
+// note carries it — the cross-session standing rule for the content type is written
+// inside runSwarmTurn (preserveHardMeaningRule, content-rules.json).
+async function onSwarm(body) {
+  const agent = String(body.agent ?? body.sessionID ?? "swarm");
+  const task = taskFor(body, agent);
+  const workspace = body.workspace ? String(body.workspace) : null;
+  const ask = String(body.ask ?? "");
+  const lang = typeof body.lang === "string" && body.lang ? body.lang : "eng";
+  // Material, in order: a file of any modality (its text read by the local senses
+  // first), then the caller's text, then the bytes at an address, then this task's
+  // own recent turns. Never guessed into existence; an unreadable or textless sense
+  // (video, an unsupported container) is a typed gap, never a swarm over nothing.
+  let text = "", via = null, modality = null, materialName = "swarm-material";
+  let sense = null;
+  if (typeof body.path === "string" && body.path) {
+    try {
+      const bytes = fs.readFileSync(body.path);
+      materialName = path.basename(body.path);
+      modality = mimeOfPath(body.path);
+      // A named-text extension whose bytes carry a NUL is not text: hand it to the
+      // senses as an opaque container instead, so an unreadable binary gaps, never
+      // swarms garbage. Keeps code/prose on the utf8 path with no enumeration.
+      if (modality === "text/plain" && bytes.includes(0)) modality = "application/octet-stream";
+      if (modality.startsWith("text/") || modality === "application/json") {
+        // Text-family is its own ground (utf8) — no organ needed; the senses are for
+        // what bytes do not already spell out.
+        text = bytes.toString("utf8");
+        via = "utf8-passthrough";
+      } else {
+        // THE SENSE-SWARM: every present organ for this modality reads the bytes at
+        // once; the representative reading is the one that best agrees with the
+        // consensus (never a blend), and the delta rides with the finding.
+        sense = await senseMany(bytes, { mime: modality, name: materialName, lang, stateDir: STATE });
+        text = String(sense.text ?? "");
+        via = sense.via ?? null;
+        if (!text) return { ok: false, gap: "no_ground", why: via ?? "unsupported", modality, gaps: sense.gaps ?? [], delta: sense.delta ?? null };
+      }
+    } catch (e) {
+      return { ok: false, gap: "unreadable", why: String(e?.message ?? e).slice(0, 200), modality: mimeOfPath(body.path) };
+    }
+  }
+  if (!text && typeof body.text === "string" && body.text) { text = body.text; via = "text"; modality = "text/plain"; }
+  if (!text && typeof body.ref === "string" && body.ref) {
+    const s = eot.snip({ task, agent, ref: body.ref, root: workspace });
+    if (s && s.ok && typeof s.bytes === "string") { text = s.bytes; via = "snip"; modality = "text/plain"; }
+  }
+  let history = [];
+  if (!text) {
+    try { history = (eot.turnsFromLog(task) ?? []).slice(-4).map((t) => ({ name: agent, text: String(t.text ?? "") })).filter((t) => t.text.trim()); } catch { history = []; }
+    if (history.length) { via = "session-turns"; modality = "text/plain"; }
+  }
+  const texts = text ? [{ name: materialName, text }] : [];
+  const { runSwarmTurn } = await import("./swarm-server.mjs");
+  // Deploy the whole registry: the tool IS "the swarm". The NL is prefixed with the
+  // registry's own "everything" pointing (pointCapacities, capacity-swarm.mjs) rather
+  // than the raw ask, whose ordinary words otherwise spuriously name a capacity (a
+  // bare "what" matches the `what` row). The ask rides for context and hard-meaning.
+  const report = runSwarmTurn({ task: `swarm everything — ${ask}`, texts, history, name: "swarm-material", force: true });
+  if (!report || report.routed !== true) return { ok: false, gap: "not-routed", why: report?.reason ?? null };
+  const best = report.best ?? null;
+  const bar = Number(report.bar ?? 0);
+  const converged = !!(best && Number.isFinite(best.f) && best.f > bar && best.f > 0);
+  // The sense delta rides ahead of the swarm read: which organs read the material,
+  // how they agreed, and what they disputed — the ground's own provenance, disclosed.
+  const senseLine = sense?.delta?.pairs > 0 ? `[${sense.delta.line}]\n` : "";
+  const rawReading = `${senseLine}${String(report.answer ?? "")}`;
+  const reading = rawReading.length > 3500 ? `${rawReading.slice(0, 3500)}…[+${rawReading.length - 3500}]` : rawReading;
+  const standing = report.mode === "gap" ? "gap" : converged ? "converged" : "unresolved";
+  const holes = String(report.residue?.line ?? "");
+  // LEARN: the finding enters the task's medium as a fact mark, attributed to the
+  // swarm (asserted, never a witness — it is what the swarm measured, disclosed as
+  // such), so the next turn's note carries it. Compact by construction: the best
+  // capacity, the ones that measured signal, and the residue — not the whole census.
+  // Written to both the EOT log and the stigmergic medium, the pair every mark uses.
+  const signals = (report.ants ?? []).filter((a) => Number(a.yield) > 0).map((a) => `${(a.ids ?? []).join("+")}(${a.yield})`);
+  const bestTxt = best && Array.isArray(best.ids) ? `${best.ids.join("+")} at ${best.f}` : "none";
+  const src = `${via ?? "?"}${modality && modality !== "text/plain" ? `/${modality}` : ""}${modality !== "text/plain" && lang ? ` ${lang}` : ""}`;
+  const finding = `swarm(${standing}) on "${ask.replace(/\s+/g, " ").slice(0, 80)}" [read ${src}]: best ${bestTxt}${signals.length ? `; signal: ${signals.slice(0, 6).join(", ")}` : "; no capacity measured signal"}${holes ? `; ${holes}` : ""}`;
+  try { eot.recordMark({ task, agent: "swarm", kind: "fact", text: finding }); } catch { /* the log never blocks */ }
+  try { markNote({ task, agent: "swarm", kind: "fact", text: finding }); } catch { /* the medium never blocks */ }
+  return { ok: true, reading, standing, holes, giver: via ?? "ant-swarm", modality, lang, bar, best, mode: report.mode ?? null, meaning: report.meaning ?? null, ants: report.ants ?? [], residue: report.residue ?? null, senses: sense ? { delta: sense.delta, readings: sense.readings } : null };
+}
+
+// THE SWARM'S LEARNING, at the next ask. The swarm's own marks (agent "swarm"),
+// ranked by term overlap with the ask, injected as one note. Mechanical, no model:
+// the standing the swarm measured rides with each finding. Nothing relevant → no note.
+// The ledger is read from the EOT (the swarm's fact marks are events there); the file
+// medium stays only as the fallback for rows written before the EOT carried them.
+function swarmFindingsNote({ task, ask }) {
+  let marks = [];
+  try { marks = eot.projectMarks(task, { agent: "swarm", kind: "fact" }); } catch { marks = []; }
+  if (!marks.length) { try { marks = (readNotes({ task })?.marks ?? []).filter((m) => m.agent === "swarm" && m.kind === "fact"); } catch { return null; } }
+  if (!marks.length) return null;
+  const terms = new Set(String(ask ?? "").toLowerCase().match(/[\p{L}\p{N}_]{3,}/gu) ?? []);
+  const score = (t) => (String(t).toLowerCase().match(/[\p{L}\p{N}_]{3,}/gu) ?? []).filter((w) => terms.has(w)).length;
+  const ranked = marks.slice().sort((a, b) => score(b.text) - score(a.text) || b.t - a.t);
+  const picked = (terms.size ? ranked.filter((m) => score(m.text) > 0) : ranked).slice(0, 3);
+  if (!picked.length) return null;
+  return [
+    `<fold-swarm measured="${marks.length}">`,
+    ...picked.map((m) => `- ${String(m.text).replace(/\s+/g, " ").slice(0, 300)}`),
+    "</fold-swarm>",
+  ].join("\n");
+}
+
+// CUBE: the 27-address tool registry — a map that always answers, a call that
+// runs in shadow behind FOLD_CUBE=1. The handler lives in opencode-cube.mjs
+// (the opencode-surf.mjs pattern); here the door resolves the task whose
+// record and medium the finding lands on, exactly as the swarm does.
+async function onCube(body) {
+  const agent = String(body.agent ?? body.sessionID ?? "cube");
+  const task = taskFor(body, agent);
+  return cubeEvent({ body, task, agent, stateDir: STATE });
 }
 
 function onMark(body) {
@@ -1257,7 +1718,22 @@ function onDone(body) {
   try { eot.recordDone({ task: body.task, agent: body.agent, item: body.item }); } catch { /* */ }
   return doneItem({ task: body.task, agent: body.agent, item: body.item });
 }
-function onAdmit(body) { return admitChange({ task: body.task, agent: body.agent, referent: body.referent, delta: body.delta, check: body.check, cwd: body.cwd, exitCode: body.exitCode, address: body.address, source: body.source, model: body.model }); }
+// The meaning framework rides admit in SHADOW: each piece behind its own flag, appends to the task's weft.jsonl ledger,
+// injects nothing, and never changes what admit answers (a failure here is swallowed, like the other trace seams).
+function onAdmit(body) {
+  const res = admitChange({ task: body.task, agent: body.agent, referent: body.referent, delta: body.delta, check: body.check, cwd: body.cwd, exitCode: body.exitCode, address: body.address, source: body.source, model: body.model });
+  try {
+    if (res?.kept && res.id && (DELTA_ON() || STAKES_ON() || ETHOS_ON())) {
+      const block = recordBlocks(body.task).find((b) => b.id === res.id);
+      if (block) {
+        if (DELTA_ON()) measureDelta({ task: body.task, block, judge: res.judge, frame: body.frame ?? null, git: body.git ?? null });
+        if (STAKES_ON()) stakeCheck({ task: body.task, block, judge: res.judge });
+        if (ETHOS_ON() && body.closure) ethosShadow({ task: body.task, referent: block.referent, block: block.id, closure: body.closure, known: (r) => recordBlocks(body.task).some((b) => b.referent === r) });
+      }
+    }
+  } catch { /* the shadow never blocks an admit */ }
+  return res;
+}
 function onRecord(body) {
   const r = reconcile({ task: body.task });
   return { record: r.fold, supersedes: r.supersedes, disagreements: r.disagreements };
@@ -1318,8 +1794,25 @@ async function onChase(body, opts = {}) {
 }
 function onRead(body) { return readNotes({ task: body.task }); }
 
+// SCENT: the pheromone trail for agents that are not this fork — deposit one question (q + at), or read the
+// task's open trail back. Same store the fork's snip deposits into; the firewall is the worknotes module's.
+function onScent(body) {
+  const agent = String(body.agent ?? body.sessionID ?? "");
+  const task = taskFor(body, agent);
+  if (body.q) return scentNote({ task, agent: agent || "session", q: String(body.q), at: String(body.at ?? ""), parent: body.parent ? String(body.parent) : "" });
+  return { trail: scentsOf({ task }) };
+}
+
 export async function answer(body, opts = {}) {
   if (process.env.FOLD_DOOR_DEBUG) console.error(`door ← ${body?.event} ${body?.type ?? ""} ${body?.sessionID ?? ""}`);
+  // FOLD_DOOR_DEBUG also says what a context/surf body CARRIES (never its content): whether the client
+  // sent a workspace and a task, how many turns, which key the door will resolve the task from.
+  if (process.env.FOLD_DOOR_DEBUG && (body?.event === "context" || body?.event === "surf")) {
+    const agent = String(body.sessionID ?? "");
+    let resolved = "?";
+    try { resolved = taskFor(body, agent); } catch { /* shown as ? */ }
+    console.error(`door ${body.event} carries: ws=${body.workspace ? JSON.stringify(String(body.workspace)) : "ABSENT"} task=${body.task ? JSON.stringify(String(body.task)) : "absent"} turns=${Array.isArray(body.turns) ? body.turns.length : "absent"} ask=${body.ask ? String(body.ask).length + "ch" : "absent"} -> task ${resolved === agent ? "PER-SESSION" : "project"} ${resolved}`);
+  }
   switch (body?.event) {
     case "context": return onContext(body);
     case "title": return onTitle(body);
@@ -1329,8 +1822,11 @@ export async function answer(body, opts = {}) {
     case "claim": return onClaim(body);
     case "done": return onDone(body);
     case "notes": return onRead(body);
+    case "scent": return onScent(body);
     case "admit": return onAdmit(body);
     case "snip": return onSnip(body);
+    case "swarm": return onSwarm(body);
+    case "cube": return onCube(body);
     case "tree": return onTree(body);
     case "ground": return onGround(body);
     case "provenance": return { ok: true, ...provenance({ task: taskFor(body, String(body.agent ?? body.sessionID ?? "")) }) };
@@ -1339,12 +1835,12 @@ export async function answer(body, opts = {}) {
     case "nextVoid": return onNextVoid(body);
     case "reason": return onReason(body);
     case "prompt": return onPrompt(body);
+    case "trail": return onTrail(body);
     case "event": return onEvent(body);
     case "perceive": return onPerceive(body);
     case "shadow": return onShadow(body);
     case "draft": return onDraft(body);
     case "act": return onAct(body);
-    case "memory": return memoryDrop(body);
     default: return {};
   }
 }
@@ -1356,6 +1852,45 @@ export async function route(req, res, { log = () => {} } = {}) {
   if (url === "/v1/hooks/opencode/meter" && req.method === "GET") {
     res.writeHead(200, { "content-type": "application/json" });
     res.end(JSON.stringify(meter(), null, 2));
+    return true;
+  }
+  // THE LAYERS — the projected reality at five grains (prompt · projection · answer · sources · record). JSON by
+  // default; `?html=1` serves the self-contained toggle view (one grain switch + per-node pins). Read-only.
+  if (url === "/v1/hooks/opencode/layers" && req.method === "GET") {
+    const q = new URL(req.url, "http://x").searchParams;
+    const agent = q.get("agent");
+    const task = taskFor({ task: q.get("task"), workspace: q.get("workspace") }, agent ?? "");
+    const L = layers({ task, agent, root: q.get("root") });
+    if (q.get("html") === "1") {
+      res.writeHead(200, { "content-type": "text/html; charset=utf-8" });
+      res.end(renderLayersHtml(L, { task, agent: agent ?? "" }));
+      return true;
+    }
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify(L));
+    return true;
+  }
+  if (url === "/v1/hooks/opencode/ecology" && req.method === "POST") {
+    let body = {};
+    try { body = JSON.parse((await readBody(req)) || "{}"); } catch { /* answered as an empty run */ }
+    const task = taskFor(body, String(body.agent ?? body.sessionID ?? ""));
+    const r = runEcology({ task, candidates: Array.isArray(body.candidates) ? body.candidates : [], workers: Number(body.workers) || 3 });
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify(r));
+    return true;
+  }
+  if (url === "/v1/hooks/opencode/self" && req.method === "GET") {
+    const q = new URL(req.url, "http://x").searchParams;
+    const agent = q.get("agent");
+    const task = taskFor({ task: q.get("task"), workspace: q.get("workspace") }, agent ?? "");
+    const signals = {
+      reopenCount: Number(q.get("reopen") ?? 0) || 0,
+      duplicateCount: Number(q.get("duplicate") ?? 0) || 0,
+      recurringFailureCount: Number(q.get("recurring") ?? 0) || 0,
+      mechanismFailureCount: Number(q.get("mechanism") ?? 0) || 0,
+    };
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify(selfCheck({ task, agent, signals })));
     return true;
   }
   // THE WORK TREE AS THE LOG SAYS IT (read-only folds of the EOT log at a cursor). ?task= or ?workspace= names the
@@ -1378,6 +1913,10 @@ export async function route(req, res, { log = () => {} } = {}) {
       const p = String(q.get("path") ?? "");
       const buf = eot.fileAt(task, p, { asOf });
       body = { task, path: p, asOf, text: buf == null ? null : buf.includes(0) ? null : buf.toString("utf8"), binary: !!buf?.includes(0), changes: eot.editsOf(task, p, { asOf }) }; code = 200;
+    } else if (what === "event") {
+      body = { task, event: eot.eventDetail(task, String(q.get("id") ?? "")) }; code = 200;
+    } else if (what === "diff") {
+      body = { task, ...eot.treeDiff(task, q.get("from"), q.get("to")) }; code = 200;
     }
     res.writeHead(code, { "content-type": "application/json", "access-control-allow-origin": "*" });
     res.end(JSON.stringify(body));
@@ -1480,13 +2019,22 @@ export async function route(req, res, { log = () => {} } = {}) {
     res.end(JSON.stringify({ schema: "WorkPlans@1", plans: workPlans({ limit }) }));
     return true;
   }
-  // The memory surface, read back: the operator's standing facts the door
-  // injects. Serves what is on disk now, so the operator can check what the
-  // next ask will hear. Fails open (an unreadable store reads as none).
-  if (url === "/v1/hooks/opencode/memory" && req.method === "GET") {
-    const entries = readUserMemory();
+  // THE REMEMBER WINDOW's backend (opencode-remember.mjs): the operator's three
+  // standing stores. GET lists a store read back for the window; POST appends
+  // one entry — append-only, and a `supersedes:` names an earlier claim to
+  // retire, never an edit of the old line. The same entries reach a prompt only
+  // through the context event's by-need match, never wholesale.
+  if (["/v1/hooks/opencode/memory", "/v1/hooks/opencode/refs", "/v1/hooks/opencode/system"].includes(url) && (req.method === "GET" || req.method === "POST")) {
+    const kind = url.slice("/v1/hooks/opencode/".length);
+    let out;
+    if (req.method === "GET") out = { schema: "Remember@1", kind, ...remember.readStore(kind) };
+    else {
+      let entry = {};
+      try { entry = JSON.parse((await readBody(req)) || "{}"); } catch { /* answered as a typed gap */ }
+      out = { schema: "Remember@1", kind, ...remember.appendEntry(kind, entry), ...(remember.isKind(kind) ? { store: remember.readStore(kind) } : {}) };
+    }
     res.writeHead(200, { "content-type": "application/json" });
-    res.end(JSON.stringify({ schema: "UserMemory@1", source: USER_MEMORY, entries }, null, 2));
+    res.end(JSON.stringify(out));
     return true;
   }
   if (url === "/v1/hooks/opencode/audit" && req.method === "GET") {
@@ -1495,10 +2043,26 @@ export async function route(req, res, { log = () => {} } = {}) {
     res.end(JSON.stringify(audit({ limit: Math.min(Math.max(limit, 1), 200) }), null, 2));
     return true;
   }
+  // THE SENSE-SWARM, inspected: which organs the hunt found or found absent, and what
+  // the ledger has learned about each one's agreement. Read-only; a missing state dir
+  // is an empty hunt, never an error.
+  if (url === "/v1/hooks/opencode/senses" && req.method === "GET") {
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify({ schema: "SenseSwarm@1", hunt: huntOrgans({ stateDir: STATE }), standing: organStanding({ stateDir: STATE }) }, null, 2));
+    return true;
+  }
+  // THE CUBE, inspected: the 27-cell map — registry × locked-venv presence ×
+  // the ledger's last agreements. Read-only; the probe is bounded, and with no
+  // venv it is a typed gap disclosed in `sidecar`, never a silent absence.
+  if (url === "/v1/hooks/opencode/cube" && req.method === "GET") {
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify(cubeMap({ stateDir: STATE }), null, 2));
+    return true;
+  }
   if (url !== "/v1/hooks/opencode") return false;
   if (req.method === "GET") {
     res.writeHead(200, { "content-type": "application/json" });
-    res.end(JSON.stringify({ door: "opencode", priors: seedStatus(), events: ["context", "surf", "mark", "claim", "done", "notes", "admit", "record", "provenance", "snip", "ground", "nextVoid", "chase", "title", "event", "prompt", "perceive", "draft", "act", "memory"] }));
+    res.end(JSON.stringify({ door: "opencode", priors: seedStatus(), senses: huntOrgans({ stateDir: STATE }), events: ["context", "surf", "mark", "claim", "done", "notes", "scent", "admit", "record", "provenance", "snip", "swarm", "cube", "ground", "nextVoid", "chase", "title", "event", "prompt", "trail", "perceive", "draft", "act", "memory", "refs", "system"] }));
     return true;
   }
   if (req.method !== "POST") return false;

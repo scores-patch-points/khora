@@ -319,6 +319,17 @@ function modeFromHeaders(req, bodyMode) {
   return bodyMode;
 }
 
+// The surface's explicit ask for the reading narration on the chat door
+// (header x-er7-disclose-thinking). opencode's chat sets it because its
+// OpenAI-compatible provider cannot send the body-only discloseThinking
+// field; with it, the door's humanized notes and grounding block ride as
+// reasoning_content deltas and the client's thinking row shows the work
+// live instead of a silent wait for the first content token.
+function discloseThinkingFromHeaders(req) {
+  const v = String(req.headers["x-er7-disclose-thinking"] ?? "").trim().toLowerCase();
+  return v === "1" || v === "true" || v === "yes";
+}
+
 // WHO is at the door (organs/interlocutor.js, Buber): the mechanical signals a
 // request already carries, read into a bundle the runner turns into a belief
 // about whether an agent or a person is speaking. Nothing here is asked of the
@@ -1750,6 +1761,10 @@ async function handleRequest(req, res) {
       }
       reqData.mode = modeFromHeaders(req, reqData.mode);
       reqData.caller = callerFromRequest(req, "chat", parsed);
+      // The surface's own request for the reading narration (see
+      // discloseThinkingFromHeaders): folded into reqData so every existing
+      // reqData.discloseThinking read below honors it, stream and hold alike.
+      reqData.discloseThinking = reqData.discloseThinking || discloseThinkingFromHeaders(req);
 
       const sessionId = sessionIdFromHeaders(req);
       const workspace = workspaceFromHeaders(req);

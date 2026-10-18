@@ -1,0 +1,314 @@
+{
+  "NUL·Ground": {
+    "organs": ["measure"],
+    "move": "test a declared statistic against a licensed, deliberately broken null",
+    "null_owed": ["no_ground", "degenerate_ground", "incommensurate_extent", "trending_material"],
+    "tools": [
+      {"package": "scipy", "source": "pypi", "role": "null", "family": "perturbation", "env": "py312", "use": "stats.permutation_test, stats.monte_carlo_test"},
+      {"package": "arch", "source": "pypi", "role": "null", "family": "perturbation", "env": "py312", "use": "bootstrap.StationaryBootstrap and CircularBlockBootstrap: break long-range order, keep local order"},
+      {"package": "statsmodels", "source": "pypi", "role": "witness", "family": "perturbation", "env": "py312", "use": "tsa.stattools.adfuller and kpss: catch trending_material before the null is built"},
+      {"package": "iaaft-surrogates", "source": "in-house", "role": "null", "family": "perturbation", "env": null, "use": "IAAFT surrogate (keeps spectrum and amplitude distribution), written in numpy beside organs/er7py/swarm.py"}
+    ]
+  },
+  "NUL·Figure": {
+    "organs": ["clear"],
+    "move": "does this figure clear its ground: the establishment ladder over a presence set",
+    "null_owed": ["exceeds_witness", "censored"],
+    "tools": [
+      {"package": "scipy", "source": "pypi", "role": "null", "family": "perturbation", "env": "py312", "use": "stats.false_discovery_control: the multiplicity behind a recurrence floor"},
+      {"package": "statsmodels", "source": "pypi", "role": "null", "family": "perturbation", "env": "py312", "use": "stats.multitest.multipletests"},
+      {"package": "scikit-learn", "source": "pypi", "role": "null", "family": "perturbation", "env": "py312", "use": "model_selection.permutation_test_score"},
+      {"package": "rapidfuzz", "source": "pypi", "role": "witness", "family": "substrate", "env": "py312", "use": "process.cdist: count the surface collisions that raise ambiguous_surface"}
+    ]
+  },
+  "NUL·Pattern": {
+    "organs": ["kindnull"],
+    "move": "challenge a declared kind membership against a random-subset null",
+    "null_owed": ["made_no_difference", "slack_ground"],
+    "tools": [
+      {"package": "scikit-learn", "source": "pypi", "role": "null", "family": "perturbation", "env": "py312", "use": "cluster.HDBSCAN and metrics.silhouette_score, each against a random-subset baseline"},
+      {"package": "diptest", "source": "pypi", "role": "witness", "family": "perturbation", "env": "py312", "use": "diptest.diptest: is the population more than one mode"}
+    ]
+  },
+  "SIG·Ground": {
+    "organs": ["settle"],
+    "move": "name what is absent as the questions that would settle it, fastest first",
+    "null_owed": ["unread_extent", "empty_material"],
+    "tools": [
+      {"package": "python-sat", "source": "pypi", "role": "move", "family": "deduction", "env": "py312", "use": "pysat.examples.musx and hitman: smallest sets of missing facts that entail the goal"},
+      {"package": "z3-solver", "source": "pypi", "role": "witness", "family": "deduction", "env": "py312", "use": "Solver.unsat_core with assert_and_track"},
+      {"package": "scipy", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "stats.entropy: order the questions by expected information"},
+      {"package": "intervaltree", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "IntervalTree: hold read vs unread extent as typed intervals"}
+    ]
+  },
+  "SIG·Figure": {
+    "organs": ["cast"],
+    "move": "names resolve to who, not to byte strings",
+    "null_owed": ["unheard", "beyond-reach"],
+    "caveat": "cast is the one implementation of 'the same name'; these tools are witnesses and never a second resolver.",
+    "tools": [
+      {"package": "splink", "source": "pypi", "role": "witness", "family": "perturbation", "env": "py312", "use": "Fellegi-Sunter linkage; its u-probabilities come from random pairs, a destroyed-relation null"},
+      {"package": "rapidfuzz", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "fuzz and distance scorers for surface match"},
+      {"package": "jellyfish", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "metaphone and jaro_winkler_similarity for phonetic variants"},
+      {"package": "coreferee", "source": "pypi", "role": "witness", "family": "substrate", "env": "py312", "use": "spaCy coreference chains", "note": "needs a separate model download after install"}
+    ]
+  },
+  "SIG·Pattern": {
+    "organs": ["kinds"],
+    "move": "sign recurring kind candidates provisionally from a population's own interaction field, each basin with its own null arm",
+    "null_owed": ["no_candidate", "control_survived"],
+    "tools": [
+      {"package": "igraph", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "Graph.community_leiden"},
+      {"package": "leidenalg", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "find_partition"},
+      {"package": "igraph", "source": "pypi", "role": "null", "family": "perturbation", "env": "py312", "use": "Graph.rewire: degree-preserving rewiring null"},
+      {"package": "networkx", "source": "pypi", "role": "null", "family": "perturbation", "env": "py312", "use": "double_edge_swap: degree-preserving rewiring null"}
+    ]
+  },
+  "INS·Ground": {
+    "organs": ["preflight"],
+    "move": "generate ground where none exists",
+    "null_owed": ["no_material", "empty_material"],
+    "tools": [
+      {"package": "trafilatura", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "extract: page text"},
+      {"package": "pdfplumber", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "Page.extract_text with character boxes"},
+      {"package": "pymupdf", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "page text with positions"},
+      {"package": "docling", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "DocumentConverter for layout-heavy documents", "note": "downloads layout models on first use"},
+      {"package": "mlx-whisper", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "marker": "sys_platform == 'darwin'", "use": "transcribe on Apple silicon; pairs with the yt-dlp already installed", "note": "downloads weights on first use"},
+      {"package": "ocrmac", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "marker": "sys_platform == 'darwin'", "use": "OCR through Apple Vision"},
+      {"package": "playwright", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "render pages whose text exists only after their scripts run", "note": "needs 'playwright install' for a browser download"},
+      {"package": "warcio", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "ArchiveIterator over WARC captures"}
+    ]
+  },
+  "INS·Figure": {
+    "organs": ["build", "cast"],
+    "move": "birth: individuate a signed figure and give it a content address",
+    "null_owed": ["INCOMPLETE", "UNADDRESSED", "NOT_A_VERB"],
+    "tools": [
+      {"package": "hashlib", "source": "stdlib", "role": "move", "family": "substrate", "env": null, "use": "sha256 hexdigest for byte-anchor checks only — ids are NEVER minted in python; stableProvenanceId is JS (opencode-eot.mjs) and hashes JSON.stringify, order-dependent by the record's own construction"},
+      {"package": "pydantic", "source": "pypi", "role": "null", "family": "substrate", "env": "py312", "use": "ConfigDict(extra='forbid'): refuse an event with no address (UNADDRESSED) — validates a candidate shape, never mints an id"}
+    ]
+  },
+  "INS·Pattern": {
+    "organs": ["skill"],
+    "move": "instantiate a known procedure onto new material: skill, then slot-fill, then model",
+    "null_owed": ["missing_kind_prior", "refused-as-underpowered", "ambiguous_surface"],
+    "tools": [
+      {"package": "llguidance", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "grammar-constrained decoding for the one slot-fill call"},
+      {"package": "xgrammar", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "grammar-constrained decoding, alternative to llguidance"},
+      {"package": "jinja2", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "Template: the procedure as a template"},
+      {"package": "copier", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "run_copy for whole-project procedures"},
+      {"package": "hypothesis", "source": "pypi", "role": "null", "family": "perturbation", "env": "py312", "use": "given: a skill's check as a property; a skill without a check is a wish"}
+    ]
+  },
+  "SEG·Ground": {
+    "organs": ["extent"],
+    "move": "the extent a question's space must cover, and its units",
+    "null_owed": ["extent_excludes", "no_slot", "no_anchor", "no_closing_condition", "gap_between_parts", "overlapping_parts", "byte_mismatch"],
+    "caveat": "The documented failure of this cell is a year-grain extent that could not see six weeks inside 1865: carry the unit, not just the number.",
+    "tools": [
+      {"package": "portion", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "closed intervals; union and difference expose gaps and overlaps"},
+      {"package": "intervaltree", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "overlap queries over parts"},
+      {"package": "pint", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "UnitRegistry: carry the unit of the extent"},
+      {"package": "edtf", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "parse_edtf: dates with uncertainty"},
+      {"package": "dateparser", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "date parsing that reports its period (day, month, year)"}
+    ]
+  },
+  "SEG·Figure": {
+    "organs": ["patch"],
+    "move": "snip one span out of one artifact, the op derived off the bytes; also the cut (a denial heard apart from the link it denies)",
+    "null_owed": ["cut"],
+    "tools": [
+      {"package": "tree-sitter", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "byte-ranged spans for any grammar"},
+      {"package": "tree-sitter-javascript", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "JavaScript grammar for tree-sitter"},
+      {"package": "tree-sitter-python", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "Python grammar for tree-sitter"},
+      {"package": "libcst", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "lossless Python edits"},
+      {"package": "diff-match-patch", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "patch_apply: apply, or descend to the full rewrite"},
+      {"package": "unidiff", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "PatchSet: parse unified diffs into hunks"},
+      {"package": "negspacy", "source": "pypi", "role": "witness", "family": "substrate", "env": "py312", "use": "negation scope in spaCy", "note": "needs a spaCy model download"},
+      {"package": "stanza", "source": "pypi", "role": "witness", "family": "substrate", "env": "py312", "use": "the 'neg' dependency relation as a second reading of denial", "note": "needs a model download"}
+    ]
+  },
+  "SEG·Pattern": {
+    "organs": ["unravel"],
+    "move": "separate a network at its bridges, parameter-free",
+    "null_owed": ["no_seam"],
+    "tools": [
+      {"package": "networkx", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "bridges, k_edge_components, articulation_points"},
+      {"package": "igraph", "source": "pypi", "role": "witness", "family": "substrate", "env": "py312", "use": "Graph.bridges as a second implementation"}
+    ]
+  },
+  "CON·Ground": {
+    "organs": ["field"],
+    "move": "maintain the running fold: append, count, never decide",
+    "null_owed": ["no_population", "skippedNoCopresence"],
+    "tools": [
+      {"package": "datasketch", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "MinHash and HyperLogLog: mergeable incremental sketches"},
+      {"package": "ddsketch", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "DDSketch: mergeable quantiles"},
+      {"package": "river", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "stats.Mean and stats.Var: one-pass running statistics"},
+      {"package": "sqlite-utils", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "append-only tables"},
+      {"package": "duckdb", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "append-only tables over Parquet"}
+    ]
+  },
+  "CON·Figure": {
+    "organs": ["relations"],
+    "move": "subject-verb-object edges read against a vocabulary measured from the text",
+    "null_owed": ["unbound", "object_unspecific", "undetermined"],
+    "tools": [
+      {"package": "spacy", "source": "pypi", "role": "witness", "family": "substrate", "env": "py312", "use": "DependencyMatcher for subject-verb-object", "note": "needs a model download"},
+      {"package": "stanza", "source": "pypi", "role": "witness", "family": "substrate", "env": "py312", "use": "depparse", "note": "needs a model download"},
+      {"package": "ufal.udpipe", "source": "pypi", "role": "witness", "family": "substrate", "env": "py312", "use": "UDPipe 1 parses"},
+      {"package": "sentence-transformers", "source": "pypi", "role": "witness", "family": "deduction", "env": "py312", "use": "CrossEncoder NLI for the entailment criterion; hand it the claim and span, never the raw page", "note": "downloads weights on first use"},
+      {"package": "rdflib", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "Graph as the edge store"}
+    ]
+  },
+  "CON·Pattern": {
+    "organs": ["network"],
+    "move": "find and bind a recurring arrangement, recurrence floor of 2",
+    "null_owed": ["pronoun_no_candidate", "pronoun_no_margin", "no_incoming_face"],
+    "tools": [
+      {"package": "stumpy", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "stump and motifs: recurring motifs and discords in the series the ants read"},
+      {"package": "mlxtend", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "frequent_patterns.fpgrowth"},
+      {"package": "networkx", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "isomorphism.GraphMatcher (VF2) for a recurring subgraph"}
+    ]
+  },
+  "SYN·Ground": {
+    "organs": ["compile"],
+    "move": "merge sedimented readings into one carried ground; compiling never promotes a standing",
+    "null_owed": ["empty_field"],
+    "caveat": "SYN at Ground is a hard desert-cell error in the-fold/fold-blocks.js and a desert in organs/cube-telling.js, yet THE-27-CELLS registers compile here and THE-NULL-STATES gives it empty_field. Tools here are compile-step only: they build a carried artifact offline and never declare a contract or emit a statement.",
+    "tools": [
+      {"package": "pyarrow", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "parquet.write_table: compile once, read many"},
+      {"package": "duckdb", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "COPY ... TO parquet"},
+      {"package": "pooch", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "registry of received priors: file, giver URL, sha-256; a hash mismatch is a typed failure"}
+    ]
+  },
+  "SYN·Figure": {
+    "organs": ["hear"],
+    "move": "fold a re-sighting into the same note, witnesses and spans unioned",
+    "null_owed": ["withheld", "vetoed", "UNLICENSED_PERTURBATION"],
+    "tools": [
+      {"package": "datasketch", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "MinHashLSH: find re-sightings"},
+      {"package": "rapidfuzz", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "process.cdist"},
+      {"package": "scipy", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "sparse.csgraph.connected_components as union-find"},
+      {"package": "splink", "source": "pypi", "role": "witness", "family": "perturbation", "env": "py312", "use": "cluster pairwise predictions into entities"}
+    ]
+  },
+  "SYN·Pattern": {
+    "organs": ["graph", "derive"],
+    "move": "licensed composition: derive never-stated facts; conceding a premise withdraws every product",
+    "null_owed": ["not_yet_executable", "undeclared_organ", "undeclared_cell", "organ_unreachable"],
+    "tools": [
+      {"package": "clingo", "source": "pypi", "role": "move", "family": "deduction", "env": "py312", "ci": true, "use": "premises as #external atoms; set one false to retract everything it supported"},
+      {"package": "owlrl", "source": "pypi", "role": "witness", "family": "deduction", "env": "py312", "use": "DeductiveClosure over rdflib graphs"},
+      {"package": "z3-solver", "source": "pypi", "role": "witness", "family": "deduction", "env": "py312", "use": "entailment checks"},
+      {"package": "python-sat", "source": "pypi", "role": "witness", "family": "deduction", "env": "py312", "use": "solve(assumptions=...)"}
+    ]
+  },
+  "DEF·Ground": {
+    "organs": ["frame", "setting"],
+    "move": "define the interpretive ambient",
+    "null_owed": ["declared_void", "no_frame", "undeclared", "constitution_unresolved"],
+    "tools": [
+      {"package": "pydantic-settings", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "BaseSettings.model_fields_set: which values were declared and which were left to a default (undeclared)"},
+      {"package": "lingua-language-detector", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "LanguageDetectorBuilder: declare the language"},
+      {"package": "py3langid", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "classify: light language ID"},
+      {"package": "babel", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "Locale: calendar and number conventions"}
+    ]
+  },
+  "DEF·Figure": {
+    "organs": ["priors"],
+    "move": "check one claim against the received priors, provenance-carrying, zero egress",
+    "null_owed": ["wish", "fixture_absent", "control_absent"],
+    "tools": [
+      {"package": "conllu", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "parse: UD treebanks (the Greek and Latin priors come from UD data)"},
+      {"package": "udapi", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "Document API over UD"},
+      {"package": "lark", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "a lens as a grammar"},
+      {"package": "nltk", "source": "pypi", "role": "witness", "family": "substrate", "env": "py312", "use": "corpus.wordnet", "note": "needs a corpus data download"},
+      {"package": "cltk", "source": "pypi", "role": "witness", "family": "substrate", "env": "py313", "use": "Latin and Greek morphology and lemmas"}
+    ]
+  },
+  "DEF·Pattern": {
+    "organs": ["declare", "dmd"],
+    "move": "declare Pattern-grain claims (functional, transitive) that a corpus can refute but never earn",
+    "null_owed": ["unmeasured", "no_pronoun_prior_for_language"],
+    "tools": [
+      {"package": "desbordante", "source": "pypi", "role": "move", "family": "deduction", "env": "py312", "use": "functional-dependency discovery, exact and approximate: candidate declarations plus the rows that refute them"},
+      {"package": "hypothesis", "source": "pypi", "role": "null", "family": "perturbation", "env": "py312", "use": "refute a candidate declaration by counterexample"},
+      {"package": "pydmd", "source": "pypi", "role": "witness", "family": "prediction", "env": "py312", "ci": true, "use": "DMD: an independent check on kernel/dmd.js"},
+      {"package": "pysindy", "source": "pypi", "role": "witness", "family": "prediction", "env": "py312", "use": "SINDy: a second reading of the same dynamics"}
+    ]
+  },
+  "EVA·Ground": {
+    "organs": ["atmosphere", "drift"],
+    "move": "meter the reader's accumulated ground; carry or refresh the summary",
+    "null_owed": ["unexamined"],
+    "tools": [
+      {"package": "river", "source": "pypi", "role": "move", "family": "prediction", "env": "py312", "use": "drift.ADWIN, drift.PageHinkley, drift.KSWIN"},
+      {"package": "ruptures", "source": "pypi", "role": "witness", "family": "prediction", "env": "py312", "use": "Pelt and Binseg change-point detection"},
+      {"package": "evidently", "source": "pypi", "role": "witness", "family": "prediction", "env": "py312", "use": "data-drift report"},
+      {"package": "scipy", "source": "pypi", "role": "null", "family": "prediction", "env": "py312", "use": "stats.ks_2samp: window against reference window"}
+    ]
+  },
+  "EVA·Figure": {
+    "organs": ["web", "witness"],
+    "move": "judge a figure through a lens: stated by N of M pages (K distinct hosts); does a patch compile",
+    "null_owed": ["unreachable_guard", "insufficient", "unstable", "inconclusive"],
+    "tools": [
+      {"package": "tldextract", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "extract: the registrable domain, so K counts distinct sites and not hostnames"},
+      {"package": "trafilatura", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "extract: page text for the containment fold"},
+      {"package": "mypy", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "api.run: type verdict on Python"},
+      {"package": "ruff", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "check with JSON output"},
+      {"package": "tree-sitter", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "ERROR nodes as a syntax verdict for any grammar"},
+      {"package": "tree-sitter-javascript", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "JavaScript grammar for the syntax verdict"},
+      {"package": "tree-sitter-python", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "Python grammar for the syntax verdict"},
+      {"package": "mutmut", "source": "pypi", "role": "null", "family": "perturbation", "env": "py312", "ci": true, "use": "mutate the guard; a surviving mutant means the guard was never reached", "note": "Python code only; the .mjs suites would need Stryker"},
+      {"package": "coverage", "source": "pypi", "role": "null", "family": "substrate", "env": "py312", "use": "branch coverage: a guard with zero hits was never reached"}
+    ]
+  },
+  "EVA·Pattern": {
+    "organs": ["standing", "consequence"],
+    "move": "a claim's standing across witnesses; evaluate against what actually came next",
+    "null_owed": ["control_survived", "LR=1", "NOT_COMPARABLE", "unlicensed"],
+    "tools": [
+      {"package": "crowd-kit", "source": "pypi", "role": "move", "family": "deduction", "env": "py312", "use": "aggregation.DawidSkene and MACE: truth and per-witness reliability from disagreement"},
+      {"package": "krippendorff", "source": "pypi", "role": "witness", "family": "perturbation", "env": "py312", "use": "alpha: chance-corrected agreement"},
+      {"package": "river", "source": "pypi", "role": "move", "family": "prediction", "env": "py312", "use": "evaluate.progressive_val_score: test-then-train, the prequential firewall"},
+      {"package": "scoringrules", "source": "pypi", "role": "null", "family": "prediction", "env": "py312", "use": "proper scores (CRPS, Brier, log) for predictions made before seeing"}
+    ]
+  },
+  "REC·Ground": {
+    "organs": ["regime"],
+    "move": "tolerance-triggered re-zero: a new ambient ground begins",
+    "null_owed": ["no_rezero_trigger", "not_earned"],
+    "caveat": "The same detectors serve EVA·Ground as the meter and REC·Ground as the trigger that starts a new ground; register each use separately.",
+    "tools": [
+      {"package": "river", "source": "pypi", "role": "move", "family": "prediction", "env": "py312", "use": "drift.ADWIN as the trigger: it resets its own window on change"},
+      {"package": "ruptures", "source": "pypi", "role": "move", "family": "prediction", "env": "py312", "use": "Pelt as the offline trigger"},
+      {"package": "statsmodels", "source": "pypi", "role": "witness", "family": "prediction", "env": "py312", "use": "tsa.regime_switching.markov_regression.MarkovRegression"}
+    ]
+  },
+  "REC·Figure": {
+    "organs": ["rezero"],
+    "move": "a complaint concedes one ground and births the next, carrying the operator's words verbatim",
+    "null_owed": ["record_gap", "record_conflict", "source_absent", "posture_spent"],
+    "caveat": "Counts as REC only if the frame changes (the DEF slot, grain or ground); a retry, re-sample or sweep inside the same frame is a redraw. Model-backed tools return a first draft for janus and penelope to verify, and any ground text they produce must state facts, not prohibitions.",
+    "tools": [
+      {"package": "dspy", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "compile a program with the complaint as new evidence", "note": "model-backed"},
+      {"package": "river", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "learn_one: online refit of one lens"},
+      {"package": "mlflow", "source": "pypi", "role": "witness", "family": "substrate", "env": "py312", "use": "log the new ground as a run"}
+    ]
+  },
+  "REC·Pattern": {
+    "organs": ["reshape"],
+    "move": "a finding contradicting the declared space re-zeros the space itself, carries testimony across, returns refused candidates to wish",
+    "null_owed": ["paradigm_unraveled", "empty_paradigm", "kept_ground", "anchor_ground"],
+    "caveat": "Counts as REC only if the frame changes (the declared space, not one figure); a retry or sweep inside the same space is a redraw.",
+    "tools": [
+      {"package": "pgmpy", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "estimators.HillClimbSearch and PC: re-learn structure"},
+      {"package": "causal-learn", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "PC algorithm for structure"},
+      {"package": "arviz", "source": "pypi", "role": "null", "family": "prediction", "env": "py312", "use": "PSIS-LOO model comparison between the old and new paradigm"},
+      {"package": "pymc", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "fit the candidate paradigms that ArviZ compares"},
+      {"package": "optuna", "source": "pypi", "role": "move", "family": "substrate", "env": "py312", "use": "Study.add_trials: carry evaluations into a study over the reshaped space", "note": "fit by analogy, untested"}
+    ]
+  }
+}

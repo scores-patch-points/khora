@@ -3,6 +3,8 @@ node_modules/
 dist/
 *.bundle
 .cv-venv/
+# uv environments (cube-tools/py312, py313-cltk): built by uv sync, never source
+.venv/
 *.log
 # conductor runtime state (session workspaces + traces), never source
 native/state/

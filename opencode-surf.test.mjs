@@ -27,14 +27,17 @@ test("no inline address tags a model could imitate", () => {
   assert.doesNotMatch(surf({ ask: "x", turns: mk(6) }).note, /#\d+-\d+\]/);
 });
 
-test("surf writes this agent's turns file and a note with the task directory", async () => {
+test("surf writes this agent's turns file; the note carries no address and no mark cue", async () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "wn-"));
   process.env.FOLD_WORKNOTES_DIR = dir;
   process.env.FOLD_OPENCODE_STATE = fs.mkdtempSync(path.join(os.tmpdir(), "st-"));
   const { answer } = await import(`./opencode-doorway.mjs?t=${Date.now()}`);
   const r = await answer({ event: "surf", sessionID: "s1", task: "t1", ask: "q", turns: mk(5) });
   assert.match(fs.readFileSync(path.join(dir, "t1", "s1.turns.md"), "utf8"), /## turn 5/);
-  assert.match(r.note, /marks: append .*t1\/s1\.md/, "the cue (once per session) names the task directory and the agent file");
+  // The trail is on disk; the window feeds only distinctions that change the next call. The hand-written-mark
+  // cue is gone (autoClaim writes the claim as a side effect) and no filesystem path rides (P55).
+  assert.doesNotMatch(r.note, /marks: append/, "the hand-written-mark cue is gone");
+  assert.doesNotMatch(r.note, /t1\/s1\.md|worknotes:|~\/\.fold/, "no filesystem address in the model's view");
   assert.ok(r.note.length <= 700, `the note stays tiny: ${r.note.length}`);
   const bad = await answer({ event: "surf", sessionID: "s1", task: "../evil", ask: "q", turns: mk(2) });
   assert.doesNotMatch(bad.note, /evil/);

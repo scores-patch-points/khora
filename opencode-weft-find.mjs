@@ -6,6 +6,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { unpack } from "./native/the-fold/weft-lean.mjs";
 import { weftDir } from "./opencode-weft-record.mjs";
+import { semanticTerms } from "./opencode-semantic.mjs";
 
 const WORD = /[a-z_][a-z0-9_]*/g;
 // segments are immutable once written, so each is unpacked once per process; only new segments are read on a later call
@@ -14,7 +15,7 @@ function storePasses(dir) {
   const files = fs.readdirSync(dir).filter((f) => /^seg-\d{6}\.bin$/.test(f)).sort();
   return files.flatMap((f) => { const k = `${dir}/${f}`; if (!SEG.has(k)) SEG.set(k, unpack(fs.readFileSync(path.join(dir, f)))); return SEG.get(k); });
 }
-export function findInWeft({ ask = "", task = null, dir = weftDir(), hops = 1, max = 5 } = {}) {
+export function findInWeft({ ask = "", task = null, dir = weftDir(), hops = 1, max = 5, extraTerms = [] } = {}) {
   let passes = []; try { passes = storePasses(dir); } catch { return { hits: [], conflicts: [], gap: "no-store" }; }
   if (task) passes = passes.filter((p) => p.a.startsWith(`${task}/`));
   const beings = new Map(), cons = [];
@@ -24,7 +25,7 @@ export function findInWeft({ ask = "", task = null, dir = weftDir(), hops = 1, m
     const neg = new Set((p.eva ?? []).filter((v) => v[0] === "con").map((v) => v[1]));
     p.con.forEach((c, i) => cons.push({ p, e1: c[0], label: c[1], e2: c[2], at: c[3], neg: neg.has(i), turn: /^t(\d+)$/.exec(c[6] ?? "")?.[1] ?? null }));
   }
-  const terms = [...new Set(String(ask).toLowerCase().match(WORD) ?? [])].filter((w) => beings.has(w));
+  const terms = [...new Set([...(String(ask).toLowerCase().match(WORD) ?? []), ...extraTerms.map((t) => String(t).toLowerCase())])].filter((w) => beings.has(w));
   const score = new Map(); // `${a}@${at}` -> { hit, w }
   const put = (p, at, being, via, w) => { const k = `${p.a}@${at}`; const cur = score.get(k); if (!cur || cur.w < w) score.set(k, { w, hit: { address: `${p.a}#${at}`, file: p.a, at, turn: null, being, via } }); };
   for (const b of terms) for (const r of beings.get(b)) put(r.p, r.at, b, "named", 1 / beings.get(b).length);
@@ -47,4 +48,45 @@ export function expandHit(hit, { root } = {}) {
   while (s > 0 && !/[.!?\n]/.test(String.fromCharCode(buf[s - 1]))) s--;
   while (e < buf.length && !/[.!?\n]/.test(String.fromCharCode(buf[e]))) e++;
   return { address: hit.address, text: buf.subarray(s, Math.min(buf.length, e + 1)).toString("utf8").trim() };
+}
+
+/** The beings a store holds (for a task, or all): the vocabulary a semantic cue can land on. */
+export function beingsInWeft({ task = null, dir = weftDir() } = {}) {
+  let passes = []; try { passes = storePasses(dir); } catch { return []; }
+  if (task) passes = passes.filter((p) => p.a.startsWith(`${task}/`));
+  return [...new Set(passes.flatMap((p) => p.ins))];
+}
+
+/** The vocabulary WITH its sentences: each being paired with a sentence it was stated in (read verbatim from the raw turns by
+ *  address, so the store still holds offsets only). A being whose sentence cannot be read stays a bare term. */
+export function vocabInWeft({ task = null, dir = weftDir(), root = null } = {}) {
+  let passes = []; try { passes = storePasses(dir); } catch { return []; }
+  if (task) passes = passes.filter((p) => p.a.startsWith(`${task}/`));
+  const out = [], seen = new Set();
+  for (const p of passes) {
+    for (const c of p.con) {
+      for (const e of [c[0], c[2]]) {
+        if (!p.ins.includes(e) || seen.has(`${e}@${p.a}#${c[3]}`)) continue;
+        seen.add(`${e}@${p.a}#${c[3]}`);
+        const text = root ? expandHit({ file: p.a, at: c[3], address: `${p.a}#${c[3]}` }, { root })?.text : null;
+        out.push(text ? { term: e, text } : e);
+      }
+    }
+    for (const b of p.ins) if (!out.some((o) => (o.term ?? o) === b)) out.push(b);
+  }
+  return out;
+}
+
+/**
+ * findInWeft with a semantic fallback: when the lexical read finds nothing for the ask, the ask is matched against the
+ * store's own beings by meaning (opencode-semantic.mjs) and the read is repeated with those beings as if the ask had
+ * named them. Lexical-only mode (embedder down, FOLD_SEMANTIC=0) returns the lexical result untouched, with the gap named.
+ */
+export async function findInWeftSemantic(opts = {}) {
+  const lexical = findInWeft(opts);
+  if (lexical.hits.length > 0 || lexical.gap === "no-store") return { ...lexical, via: "lexical" };
+  const sem = await semanticTerms({ ask: opts.ask, vocab: opts.root ? vocabInWeft(opts) : beingsInWeft(opts), embedFn: opts.embedFn, env: opts.env });
+  if (!sem.terms.length) return { ...lexical, via: "lexical", semanticGap: sem.gap };
+  const r = findInWeft({ ...opts, extraTerms: sem.terms });
+  return { ...r, via: r.hits.length ? "semantic" : "lexical", semantic: sem.terms };
 }
