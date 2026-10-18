@@ -458,7 +458,6 @@ export function turnsOf({ task, universe } = {}) {
   return turns;
 }
 
-/** The git root (or the directory itself) a path belongs to, or null. Pure fs reads. */
 export function projectRoot(workspace) {
   const w = String(workspace ?? "");
   if (!path.isAbsolute(w)) return null;

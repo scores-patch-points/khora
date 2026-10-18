@@ -66,6 +66,16 @@ export function liveAnswers(all) {
   return live;
 }
 
+/** live({ task }) — the LIVE answers as flat rows, one { referent, id, delta0 } per live
+ *  answer (last-wins with a fork kept parallel: `liveAnswers` above). THE DOORWAY'S DOOR
+ *  TO THE DREAM: feed these to native/organs/consolidation.js so a referent with two live
+ *  answers arrives there as a disclosed discrepancy, never collapsed. Pure over the record. */
+export function live({ task } = {}) {
+  const out = [];
+  for (const [referent, list] of liveAnswers(blocks(task))) for (const a of list) out.push({ referent, id: a.id, delta0: a.delta0 });
+  return out;
+}
+
 /** REC applied to the heap: the fold is last-wins-per-referent (same as fold()),
  *  but reconcile also names the shape change the wins caused — the supersession
  *  edges (which block a later one redefined) and the contradictions left

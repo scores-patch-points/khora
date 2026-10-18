@@ -90,6 +90,7 @@ import { semanticTerms, semanticOn } from "./opencode-semantic.mjs";
 import { plan as trailPlan, shouldCompact as trailGate, trailEnabled } from "./opencode-trail.mjs";
 import { standingOf } from "./opencode-standing.mjs";
 import { admit as admitChange, fold as foldRecord, recordNote, recordSink, reconcile, nextVoid, reasonFor, provenance, refusalsFor, liveAnswers } from "./opencode-record.mjs";
+import { dreamTask } from "./opencode-dream.mjs";
 import * as eot from "./opencode-eot.mjs";
 import { checkAnswer } from "./opencode-ledger-check.mjs";
 import { mark as markNote, claim as claimItem, done as doneItem, read as readNotes, noteFor, stateFor, turnsFile, writeTurnsFile, turnsOf, root as notesRoot, projectKey, projectRoot, plans as workPlans, scent as scentNote, scentsOf, stuckScents, scentClose, releaseAnswered, releaseByMerge, releaseByQuestion, releaseNested, ident as identTask, universeInfo } from "./opencode-worknotes.mjs";
@@ -1434,6 +1435,12 @@ async function onSurf(body) {
   if (!recordLines.length) { const legacy = recordNote({ task, limit: 3 }); if (legacy) recordLines = legacy.split("\n").slice(1, 4).map((l) => l.replace(/^-\s*/, "").slice(0, 100)); }
   if (taken.length) mech.push({ p: 1, t: `taken: ${taken.slice(0, 4).map((c) => `${c.item} [${short8(c.agent)}]`).join("; ")}${taken.length > 4 ? ` +${taken.length - 4}` : ""}` });
   for (const c of contention.slice(-2)) mech.push({ p: 2, t: c.holder === agent ? `contended: [${short8(c.contender)}] also edited ${c.item}` : `contended: ${c.item} held by [${short8(c.holder)}]` });
+  // THE DREAM: a referent with two LIVE answers (a fork) is a disagreement — surfaced, never
+  // collapsed. Computed from the record (no model); the dream never blocks a turn.
+  try {
+    const contests = dreamTask({ task }).settled.contests;
+    if (contests.length) mech.push({ p: 2, t: `open disagreement: ${contests.slice(0, 2).map((c) => `${c.being}: ${c.readings.map((r) => r.value).join(" vs ")}`).join("; ")}`.slice(0, 200) });
+  } catch { /* the dream never blocks a turn */ }
   if (recordLines.length) mech.push({ p: 4, t: `verified: ${recordLines.join("; ")}`.slice(0, 240) });
   // THE PLAN (M2): the next actionable goal from the EOT dependency graph, if any. A finding changes what
   // the local workers encounter next — the plan rides the mechanical note, not an agent-to-agent message.
@@ -1738,6 +1745,9 @@ function onRecord(body) {
   const r = reconcile({ task: body.task });
   return { record: r.fold, supersedes: r.supersedes, disagreements: r.disagreements };
 }
+// DREAM: the khora dream over this task's record — the live answers folded (waking dream),
+// settled (contests · meet · candidates). Read-only; a fork is disclosed, never collapsed.
+function onDream(body) { return dreamTask({ task: taskFor(body, String(body.agent ?? body.sessionID ?? "")) }); }
 function onNextVoid(body) { return nextVoid({ task: body.task }); }
 function onReason(body) { return reasonFor({ task: body.task, ask: String(body.ask ?? ""), limit: Number(body.limit) || 6 }); }
 // CHASE: run the DEF->EVA->REC void loop over a workspace. The loop executes
@@ -1832,6 +1842,7 @@ export async function answer(body, opts = {}) {
     case "provenance": return { ok: true, ...provenance({ task: taskFor(body, String(body.agent ?? body.sessionID ?? "")) }) };
     case "chase": return onChase(body, opts);
     case "record": return onRecord(body);
+    case "dream": return onDream(body);
     case "nextVoid": return onNextVoid(body);
     case "reason": return onReason(body);
     case "prompt": return onPrompt(body);
@@ -2062,7 +2073,7 @@ export async function route(req, res, { log = () => {} } = {}) {
   if (url !== "/v1/hooks/opencode") return false;
   if (req.method === "GET") {
     res.writeHead(200, { "content-type": "application/json" });
-    res.end(JSON.stringify({ door: "opencode", priors: seedStatus(), senses: huntOrgans({ stateDir: STATE }), events: ["context", "surf", "mark", "claim", "done", "notes", "scent", "admit", "record", "provenance", "snip", "swarm", "cube", "ground", "nextVoid", "chase", "title", "event", "prompt", "trail", "perceive", "draft", "act", "memory", "refs", "system"] }));
+    res.end(JSON.stringify({ door: "opencode", priors: seedStatus(), senses: huntOrgans({ stateDir: STATE }), events: ["context", "surf", "mark", "claim", "done", "notes", "scent", "admit", "record", "dream", "provenance", "snip", "swarm", "cube", "ground", "nextVoid", "chase", "title", "event", "prompt", "trail", "perceive", "draft", "act", "memory", "refs", "system"] }));
     return true;
   }
   if (req.method !== "POST") return false;
