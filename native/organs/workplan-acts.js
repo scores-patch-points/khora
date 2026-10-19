@@ -39,53 +39,69 @@ const STANDING = makeStandingCube({ operators: cube });
 const CENSUS = new Map(STANDING.everyCell().map((c) => [c.cell, c]));
 
 /**
- * The resolution table. Each entry is one act at one grain. A POSITIVE resolution
- * omits `null` and OWES the cell's census nulls; a NEGATIVE resolution (a wall, a
- * block, a cut) names the specific null it lands. Keys are namespaced by the
- * object they belong to (`mark:`, `claim:`, `scent:`, `plan:`, `eot:`) because
- * the same word means a different act in a different object — a plan's `open` is
- * a birth (INS), a scent's `open` is a declared void (DEF·Ground).
+ * THE ACT-ALGEBRA (2026-10-18). The operator is no longer hand-set per resolution — it is DERIVED from
+ * the ACT the resolution is (its effect on the store) through the cube's own nine. A resolution declares
+ * only its effect and its grain; the operator follows, so a resolution can never carry an operator that
+ * disagrees with what it does, and the derivation is one table (nine, total, bijective) instead of
+ * thirty-four free choices. The effect names the move the cube's own theory names: differentiate the
+ * ground (measure) · notice (sign) · bring into being (create) · cut (separate) · bind (relate) ·
+ * compose (compose) · declare (declare) · judge (judge) · change the frame (reframe).
+ */
+export const EFFECT_OP = Object.freeze({
+  measure: "NUL", sign: "SIG", create: "INS", separate: "SEG", relate: "CON",
+  compose: "SYN", declare: "DEF", judge: "EVA", reframe: "REC",
+});
+export const opOfEffect = (effect) => EFFECT_OP[String(effect)] ?? null;
+
+/**
+ * The resolution table. Each entry is one ACT at one grain, anchored to the function that produces it.
+ * A POSITIVE resolution omits `null` and OWES the cell's census nulls; a NEGATIVE resolution (a wall, a
+ * block, a cut) names the specific null it lands. Keys are namespaced by the object they belong to
+ * (`mark:`, `claim:`, `scent:`, `plan:`, `eot:`) because the same word means a different act in a
+ * different object — a plan's `open` is a birth (create), a scent's `open` is a declared void (declare).
+ * `source` names the real `{ file, fn }` that lands the resolution; a test pins that the file exists and
+ * holds the symbol, so a mapping cannot float free of the code it claims to type.
  */
 export const RESOLUTIONS = Object.freeze({
   // ── marks (opencode-worknotes.mjs KINDS) ────────────────────────────────────
-  "mark:fact": Object.freeze({ op: "DEF", grain: "Figure", why: "a value asserted of a thing" }),
-  "mark:claim": Object.freeze({ op: "INS", grain: "Figure", why: "an item taken — a unit instantiated (build / birth)" }),
-  "mark:done": Object.freeze({ op: "EVA", grain: "Figure", why: "the item's own witness" }),
-  "mark:block": Object.freeze({ op: "DEF", grain: "Ground", why: "a declared obstacle — the void, with its scope" }),
+  "mark:fact": Object.freeze({ effect: "declare", grain: "Figure", source: { file: "opencode-worknotes.mjs", fn: "mark" }, why: "a value asserted of a thing" }),
+  "mark:claim": Object.freeze({ effect: "create", grain: "Figure", source: { file: "opencode-worknotes.mjs", fn: "claim" }, why: "an item taken — a unit instantiated (build / birth)" }),
+  "mark:done": Object.freeze({ effect: "judge", grain: "Figure", source: { file: "opencode-worknotes.mjs", fn: "done" }, why: "the item's own witness" }),
+  "mark:block": Object.freeze({ effect: "declare", grain: "Ground", source: { file: "opencode-worknotes.mjs", fn: "mark" }, why: "a declared obstacle — the void, with its scope" }),
   // ── a claim's life ──────────────────────────────────────────────────────────
-  "claim:contended": Object.freeze({ op: "CON", grain: "Figure", why: "two holders on one item — the contest" }),
-  "claim:lapsed": Object.freeze({ op: "INS", grain: "Figure", null: "INCOMPLETE", why: "the build never completed — the lease expired" }),
+  "claim:contended": Object.freeze({ effect: "relate", grain: "Figure", source: { file: "opencode-doorway.mjs", fn: "autoClaim" }, why: "two holders on one item — the contest" }),
+  "claim:lapsed": Object.freeze({ effect: "create", grain: "Figure", null: "INCOMPLETE", source: { file: "opencode-worknotes.mjs", fn: "read" }, why: "the build never completed — the lease expired" }),
   // ── the scent trail ─────────────────────────────────────────────────────────
-  "scent:open": Object.freeze({ op: "DEF", grain: "Ground", why: "an open question declared over an extent (the void)" }),
-  "scent:arrival": Object.freeze({ op: "REC", grain: "Ground", why: "the void re-zeroed by an arrival" }),
-  "scent:reframe": Object.freeze({ op: "REC", grain: "Figure", why: "a coarser note replaces it (rezero)" }),
-  "scent:merge": Object.freeze({ op: "SYN", grain: "Ground", why: "the ascent — settled material compiles" }),
-  "scent:walled": Object.freeze({ op: "REC", grain: "Ground", null: "not_earned", why: "a terminal NUL — the tension never earned resolution" }),
+  "scent:open": Object.freeze({ effect: "declare", grain: "Ground", source: { file: "opencode-worknotes.mjs", fn: "scent" }, why: "an open question declared over an extent (the void)" }),
+  "scent:arrival": Object.freeze({ effect: "reframe", grain: "Ground", source: { file: "opencode-worknotes.mjs", fn: "scentClose" }, why: "the void re-zeroed by an arrival" }),
+  "scent:reframe": Object.freeze({ effect: "reframe", grain: "Figure", source: { file: "opencode-worknotes.mjs", fn: "scentClose" }, why: "a coarser note replaces it (rezero)" }),
+  "scent:merge": Object.freeze({ effect: "compose", grain: "Ground", source: { file: "opencode-worknotes.mjs", fn: "releaseByMerge" }, why: "the ascent — settled material compiles" }),
+  "scent:walled": Object.freeze({ effect: "reframe", grain: "Ground", null: "not_earned", source: { file: "opencode-worknotes.mjs", fn: "scentClose" }, why: "a terminal NUL — the tension never earned resolution" }),
   // ── plan nodes (opencode-plan.mjs status) ───────────────────────────────────
-  "plan:open": Object.freeze({ op: "INS", grain: "Figure", why: "a goal node instantiated (birth)" }),
-  "plan:dep": Object.freeze({ op: "CON", grain: "Figure", why: "a dependency — a bond from a premise to its dependent" }),
-  "plan:resolved": Object.freeze({ op: "EVA", grain: "Figure", why: "judged, with its evidence" }),
-  "plan:refuted": Object.freeze({ op: "SEG", grain: "Figure", null: "beyond-reach", why: "the cut — a veto, never a premise" }),
-  "plan:blocked": Object.freeze({ op: "CON", grain: "Figure", null: "unbound", why: "the bond to a refuted premise is unbound" }),
+  "plan:open": Object.freeze({ effect: "create", grain: "Figure", source: { file: "opencode-plan.mjs", fn: "planCreate" }, why: "a goal node instantiated (birth)" }),
+  "plan:dep": Object.freeze({ effect: "relate", grain: "Figure", source: { file: "opencode-plan.mjs", fn: "planDep" }, why: "a dependency — a bond from a premise to its dependent" }),
+  "plan:resolved": Object.freeze({ effect: "judge", grain: "Figure", source: { file: "opencode-plan.mjs", fn: "planResolve" }, why: "judged, with its evidence" }),
+  "plan:refuted": Object.freeze({ effect: "separate", grain: "Figure", null: "beyond-reach", source: { file: "opencode-plan.mjs", fn: "planRefute" }, why: "the cut — a veto, never a premise" }),
+  "plan:blocked": Object.freeze({ effect: "relate", grain: "Figure", null: "unbound", source: { file: "opencode-plan.mjs", fn: "recompute" }, why: "the bond to a refuted premise is unbound" }),
   // ── EOT stages (opencode-eot.mjs STAGES) ────────────────────────────────────
-  "eot:read": Object.freeze({ op: "NUL", grain: "Ground", why: "measure the ground" }),
-  "eot:turn": Object.freeze({ op: "DEF", grain: "Figure", why: "a turn's words asserted of a thing" }),
-  "eot:mark": Object.freeze({ op: "DEF", grain: "Figure", why: "a mark (its cell is the kind's — see markCell)" }),
-  "eot:claim": Object.freeze({ op: "INS", grain: "Figure", why: "an item taken (a birth)" }),
-  "eot:done": Object.freeze({ op: "EVA", grain: "Figure", why: "the item's own witness" }),
-  "eot:draw": Object.freeze({ op: "DEF", grain: "Figure", why: "a model draw — words asserted" }),
-  "eot:hunt": Object.freeze({ op: "SIG", grain: "Ground", why: "going to name what is absent (settle)" }),
-  "eot:refuse": Object.freeze({ op: "SEG", grain: "Figure", null: "beyond-reach", why: "a refusal — the cut, a veto" }),
-  "eot:verify": Object.freeze({ op: "EVA", grain: "Figure", why: "a witness" }),
-  "eot:admit": Object.freeze({ op: "EVA", grain: "Pattern", why: "standing — a property of the set of witnesses" }),
-  "eot:reject": Object.freeze({ op: "SEG", grain: "Figure", null: "beyond-reach", why: "a rejected draw — the cut" }),
-  "eot:reason": Object.freeze({ op: "SYN", grain: "Figure", why: "a derivation composes from its premises" }),
-  "eot:flag": Object.freeze({ op: "EVA", grain: "Figure", why: "a guard's judgment of a figure" }),
-  "eot:ibid": Object.freeze({ op: "SYN", grain: "Figure", why: "a re-sighting folds into the SAME note (hear)" }),
-  "eot:contend": Object.freeze({ op: "CON", grain: "Figure", why: "the contest" }),
-  "eot:edit": Object.freeze({ op: "REC", grain: "Figure", why: "a part restructured at its address" }),
-  "eot:exec": Object.freeze({ op: "EVA", grain: "Figure", why: "a check's witness" }),
-  "eot:wt": Object.freeze({ op: "REC", grain: "Figure", why: "a worktree change — the tree re-folded" }),
+  "eot:read": Object.freeze({ effect: "measure", grain: "Ground", source: { file: "opencode-eot.mjs", fn: "append" }, why: "measure the ground" }),
+  "eot:turn": Object.freeze({ effect: "declare", grain: "Figure", source: { file: "opencode-eot.mjs", fn: "recordTurns" }, why: "a turn's words asserted of a thing" }),
+  "eot:mark": Object.freeze({ effect: "declare", grain: "Figure", source: { file: "opencode-eot.mjs", fn: "recordMark" }, why: "a mark (its cell is the kind's — see markCell)" }),
+  "eot:claim": Object.freeze({ effect: "create", grain: "Figure", source: { file: "opencode-eot.mjs", fn: "recordClaim" }, why: "an item taken (a birth)" }),
+  "eot:done": Object.freeze({ effect: "judge", grain: "Figure", source: { file: "opencode-eot.mjs", fn: "recordDone" }, why: "the item's own witness" }),
+  "eot:draw": Object.freeze({ effect: "declare", grain: "Figure", source: { file: "opencode-eot.mjs", fn: "append" }, why: "a model draw — words asserted" }),
+  "eot:hunt": Object.freeze({ effect: "sign", grain: "Ground", source: { file: "opencode-eot.mjs", fn: "append" }, why: "going to name what is absent (settle)" }),
+  "eot:refuse": Object.freeze({ effect: "separate", grain: "Figure", null: "beyond-reach", source: { file: "opencode-eot.mjs", fn: "append" }, why: "a refusal — the cut, a veto" }),
+  "eot:verify": Object.freeze({ effect: "judge", grain: "Figure", source: { file: "opencode-eot.mjs", fn: "recordJudged" }, why: "a witness" }),
+  "eot:admit": Object.freeze({ effect: "judge", grain: "Pattern", source: { file: "opencode-eot.mjs", fn: "recordJudged" }, why: "standing — a property of the set of witnesses" }),
+  "eot:reject": Object.freeze({ effect: "separate", grain: "Figure", null: "beyond-reach", source: { file: "opencode-eot.mjs", fn: "recordJudged" }, why: "a rejected draw — the cut" }),
+  "eot:reason": Object.freeze({ effect: "compose", grain: "Figure", source: { file: "opencode-eot.mjs", fn: "append" }, why: "a derivation composes from its premises" }),
+  "eot:flag": Object.freeze({ effect: "judge", grain: "Figure", source: { file: "opencode-eot.mjs", fn: "append" }, why: "a guard's judgment of a figure" }),
+  "eot:ibid": Object.freeze({ effect: "compose", grain: "Figure", source: { file: "opencode-eot.mjs", fn: "append" }, why: "a re-sighting folds into the SAME note (hear)" }),
+  "eot:contend": Object.freeze({ effect: "relate", grain: "Figure", source: { file: "opencode-eot.mjs", fn: "recordContention" }, why: "the contest" }),
+  "eot:edit": Object.freeze({ effect: "reframe", grain: "Figure", source: { file: "opencode-eot.mjs", fn: "recordEdit" }, why: "a part restructured at its address" }),
+  "eot:exec": Object.freeze({ effect: "judge", grain: "Figure", source: { file: "opencode-eot.mjs", fn: "recordExec" }, why: "a check's witness" }),
+  "eot:wt": Object.freeze({ effect: "reframe", grain: "Figure", source: { file: "opencode-eot.mjs", fn: "recordWorktree" }, why: "a worktree change — the tree re-folded" }),
 });
 
 // The marks the medium writes carry their resolution's name directly: KINDS are these.
@@ -114,17 +130,20 @@ export const cubeCells = () => [...CENSUS.keys()];
 export function actOf(resolution) {
   const a = RESOLUTIONS[String(resolution)];
   if (!a) return { gap: "unknown_resolution", known: Object.keys(RESOLUTIONS) };
-  const cell = cube.cellOf(a.op, a.grain);
+  const op = opOfEffect(a.effect);
+  if (!op) return { gap: "unknown_effect", effect: a.effect, known: Object.keys(EFFECT_OP) };
+  const cell = cube.cellOf(op, a.grain);
   if (cell?.gap) return cell;
-  const key = `${a.op}·${a.grain}`;
+  const key = `${op}·${a.grain}`;
   const census = CENSUS.get(key) ?? null;
   return {
     resolution: String(resolution),
-    op: a.op, grain: a.grain, cell: key,
+    effect: a.effect, op, grain: a.grain, cell: key,
     mode: cell.mode, domain: cell.domain, terrain: cell.terrain, stance: cell.stance,
     positive: census?.positive ?? null,
     owes: census ? [...census.nulls] : [],
     null: a.null ?? null,
+    source: a.source ?? null,
     why: a.why,
     typedBy: "workplan-acts",
   };
@@ -153,8 +172,8 @@ export function scentResolution(state, by = "none") {
 /** drift() — the resolutions naming a cell outside the cube, or one the census does not carry. */
 export function drift() {
   const cells = new Set(CENSUS.keys());
-  return Object.entries(RESOLUTIONS)
-    .map(([name, a]) => ({ name, cell: `${a.op}·${a.grain}` }))
+  return Object.keys(RESOLUTIONS)
+    .map((name) => ({ name, cell: actOf(name).cell }))
     .filter(({ name, cell }) => {
       const a = actOf(name);
       return a.gap || !cells.has(cell);
