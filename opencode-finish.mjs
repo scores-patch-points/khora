@@ -119,7 +119,33 @@ async function factsOf({ ground = null, notes = null, material = null } = {}) {
  *  A sentence with neither is SELF:MODEL — the mouth's own, named, never
  *  laundered. The output text is NOT rewritten; the ground is what is created.
  */
-async function groundDraw(draw, { material, facts }) {
+/** THE SOURCE PROPOSITIONS a grounded sentence rests on, LOCATED not generated: the passage sentences whose beings
+ *  (the material's own referents) the draw sentence names. Each is the passage's VERBATIM slice with offsets
+ *  (fold-chat-provenance.js `locate`'s rule: what is shown is the source's bytes, never a model's copy). */
+/** The passage's own slice (verbatim) for a located sentence. */
+const located = (passage, start, end) => ({ passage: passage.name, start, end, text: passage.text.slice(start, end) });
+
+function sourcesFor(text, beings, R, passages, max = 2) {
+  if (!R || !passages.length) return [];
+  const want = R.resolveText(text);
+  if (!want.size) return [];
+  const found = [];
+  passages.forEach((passage, pi) => {
+    let at = 0;
+    for (const raw of splitSentences(passage.text)) {
+      const sent = String(typeof raw === "string" ? raw : raw?.text ?? "");
+      const start = passage.text.indexOf(sent, at);
+      if (!sent.trim() || start < 0) continue;
+      at = start + sent.length;
+      const have = R.resolveText(sent);
+      const shared = [...want].filter((id) => have.has(id));
+      if (shared.length) found.push({ ...located(passage, start, start + sent.length), index: pi, shared: shared.map((id) => R.represent(id)).filter(Boolean), n: shared.length });
+    }
+  });
+  return found.sort((a, b) => b.n - a.n || a.index - b.index || a.start - b.start).slice(0, max).map(({ n, index, ...keep }) => keep);
+}
+
+async function groundDraw(draw, { material, facts, passages = [] }) {
   const sentences = splitSentences(String(draw))
     .map((s) => (typeof s === "string" ? s : s?.text ?? ""))
     .map((s) => s.trim())
@@ -147,7 +173,7 @@ async function groundDraw(draw, { material, facts }) {
       standing: grounded ? "grounded" : "self:model",
       ...(onFact ? { ref: t.ref ?? null, fact: t.groundedOn ?? null } : {}),
       ...(beings.length ? { beings } : {}),
-      ...(grounded ? {} : { source: "the mouth" }),
+      ...(grounded ? (() => { const sources = sourcesFor(text, beings, R, passages); return sources.length ? { sources } : {}; })() : { source: "the mouth" }),
     };
   });
 }
@@ -157,7 +183,7 @@ async function groundDraw(draw, { material, facts }) {
  *    eot, ground_trace, tiers, disclosure }
  *  `output` is what should stand (the draw, or the settled computed value);
  *  `ground_trace` shows, per sentence, what it rests on. Pure of turn effects. */
-export async function finish({ ask, draft, ground = null, notes = null, material = null } = {}) {
+export async function finish({ ask, draft, ground = null, notes = null, material = null, passages = null } = {}) {
   const task = String(ask ?? "").trim();
   const draw = String(draft ?? "");
   if (!task) return { ok: false, gap: "empty-ask" };
@@ -169,9 +195,11 @@ export async function finish({ ask, draft, ground = null, notes = null, material
   // ground, it does not rewrite the words.
   const output = settled ? race.text : draw;
   const records = await parseEot(output);
-  const facts = await factsOf({ ground, notes, material });
+  const read = Array.isArray(passages) ? passages.filter((p) => p && typeof p.text === "string" && p.text) : [];
+  const stuff = material || (read.length ? read.map((p) => p.text).join("\n\n") : null);
+  const facts = await factsOf({ ground, notes, material: stuff });
   // THE MECHANICALLY GROUNDED OUTPUT — created here, model-free.
-  const grounded = await groundDraw(output, { material, facts });
+  const grounded = await groundDraw(output, { material: stuff, facts, passages: read.length ? read : stuff ? [{ name: "material", text: String(stuff) }] : [] });
   const nGround = grounded.filter((s) => s.standing === "grounded").length;
   const nSelf = grounded.length - nGround;
   return {
