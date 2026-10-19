@@ -147,7 +147,7 @@ export function done({ task, agent, item, now = Date.now(), universe } = {}) {
 export function read({ task, now = Date.now(), ttlMs = DEFAULT_TTL, limit = 200, universe } = {}) {
   const u = universe ?? defaultUniverse();
   const dir = universeDir(task, u);
-  if (!dir || !fs.existsSync(dir)) return { marks: [], open: [], finished: [], conflicts: [], universe: u };
+  if (!dir || !fs.existsSync(dir)) return { marks: [], open: [], finished: [], lapsed: [], conflicts: [], universe: u };
   const readDir = (d, tag) => {
     if (!fs.existsSync(d)) return [];
     return fs.readdirSync(d).filter((f) => f.endsWith(".md") && !f.endsWith(".turns.md")).flatMap((f) => {
@@ -180,6 +180,10 @@ export function read({ task, now = Date.now(), ttlMs = DEFAULT_TTL, limit = 200,
     marks: marks.slice(-limit),
     open: claims.filter((c) => live(c, now, ttlMs)).map((c) => ({ item: c.item, agent: c.agent, since: c.t, cell: c.cell ?? null })),
     finished: claims.filter((c) => c.done).map((c) => ({ item: c.item, agent: c.doneBy ?? c.agent, cell: c.cell ?? null })),
+    // THE OWED NULL, PAID (workplan-acts.js, the pairing rule): a claim that lapsed — not done, not live —
+    // is a build that never completed. It is surfaced with the null its cell owes (INS·Figure · INCOMPLETE),
+    // never silently forgotten: a positive that lands without its null reads silence as support.
+    lapsed: claims.filter((c) => !c.done && !live(c, now, ttlMs)).map((c) => ({ item: c.item, agent: c.agent, since: c.t, cell: workplanActOf("claim:lapsed").cell, null: workplanActOf("claim:lapsed").null })),
     conflicts,
     universe: u,
   };
