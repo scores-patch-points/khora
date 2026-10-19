@@ -1,9 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { buildReadingTimeline, foldLog, isCoherent, CELLS } from "./reading-timeline.js";
+import { buildReadingTimeline, buildCorpusTimeline, splitOf, foldLog, isCoherent, CELLS } from "./reading-timeline.js";
 import { splitSentences } from "./spans.js";
-import { extractSurfaces, discoverReferents, diaNorm } from "./surfaces.js";
+import { extractSurfaces, discoverReferents, diaNorm, namesCorefer, genericTokens } from "./surfaces.js";
 import { resolvePronouns } from "./pronouns.js";
 import { classifyWord } from "./wordclass.js";
 import { readDocumentEvidence, classifyWithDocument } from "./document-evidence.js";
@@ -127,7 +127,7 @@ test("a mention's link to its referent is an event; reassigning appends a CON th
   const first = cons[0], re = cons.find((e) => e.supersedes === first.id);
   assert.ok(re, "the second CON names the first it supersedes");
   assert.notEqual(re.ref, first.ref);
-  const before = foldLog(tl.log.filter((e) => e.id <= first.id || tl.log.indexOf(e) <= tl.log.indexOf(first)));
+  const before = foldLog(tl.log.slice(0, tl.log.indexOf(first) + 1));
   assert.equal(before.assign.get(first.span), first.ref, "the fold at the earlier cursor still shows the earlier assignment");
   assert.equal(foldLog(tl.log).assign.get(first.span), re.ref);
 });
@@ -163,4 +163,152 @@ test("a snapshot's cursor into the log lets the fold be taken at any frontier", 
   const tl = buildReadingTimeline(JOHNSON, deps, { maxSnapshots: 10 });
   const sizes = tl.snapshots.map((s) => foldLog(tl.log.slice(0, s.logTo)).mentions.size);
   assert.deepEqual([...sizes].sort((a, b) => a - b), sizes, "more is known as more is read");
+});
+
+
+// ── many sources: provenance and the ontological split ───────────────────────────────────────────────────────
+const cdeps = { ...deps, namesCorefer, genericTokens };
+const REPORT = "Captain Smith ordered the boats lowered. Captain Smith spoke to Ismay on the bridge. Ismay asked the Captain about the ice. Captain Smith went down with the ship.";
+const SCRIPT = "Captain Smith stood on the bridge. Jack Dawson climbed to the rail. Captain Smith ordered the boats lowered. Jack Dawson held the girl.";
+const MEMOIR = "Beesley saw Captain Smith on the bridge. Beesley wrote that Captain Smith ordered the boats lowered.";
+
+test("every event carries the source and register it was read in", () => {
+  const c = buildCorpusTimeline([{ id: "src_report", label: "Report", text: REPORT, register: "report" }, { id: "src_script", label: "Script", text: SCRIPT, register: "fiction" }], cdeps, { maxSnapshots: 6 });
+  const perSource = (id) => c.log.filter((e) => e.source === id);
+  assert.ok(perSource("src_report").length > 3 && perSource("src_script").length > 3);
+  assert.ok(perSource("src_report").every((e) => e.register === "report"));
+  assert.ok(perSource("src_script").every((e) => e.register === "fiction"));
+  const spans = c.log.filter((e) => e.op === "INS" && e.kind === "mention");
+  assert.equal(new Set(spans.map((e) => e.span)).size, spans.length, "the same range in two sources is two different spans");
+});
+
+test("a link across sources keeps both ends, their sources and registers, and names the split — it is not a merge", () => {
+  const c = buildCorpusTimeline([{ id: "src_report", text: REPORT, register: "report" }, { id: "src_script", text: SCRIPT, register: "fiction" }], cdeps, { maxSnapshots: 6 });
+  const link = c.links.find((l) => /smith/i.test(l.from.name) && /smith/i.test(l.to.name));
+  assert.ok(link, "the two Smiths correspond");
+  assert.equal(link.op, "CON"); assert.equal(link.kind, "correspondence");
+  assert.deepEqual([link.from.register, link.to.register], ["fiction", "report"], "the telling-end first");
+  assert.deepEqual([link.from.source, link.to.source], ["src_script", "src_report"]);
+  assert.equal(link.split.kind, "fictionalizes"); assert.equal(link.split.across, true);
+  assert.deepEqual(link.split.truthClaiming, [false, true]);
+  assert.match(link.checkedBy, /namesCorefer/);
+  assert.equal(isCoherent(link), true);
+  const f = foldLog(c.log);
+  assert.notEqual(link.from.ref, link.to.ref, "two referents remain — the ends stay ends");
+  assert.ok(f.referents.has(link.from.ref) && f.referents.has(link.to.ref));
+  const being = f.beingOf.get(link.from.ref);
+  assert.equal(being, f.beingOf.get(link.to.ref), "one being across the readings");
+  assert.equal(being.ends.length >= 2, true);
+  assert.equal(being.reality, "fictionalized-real");
+});
+
+test("a being only a telling attests is fictional; one only the record attests is real", () => {
+  const c = buildCorpusTimeline([{ id: "src_report", text: REPORT, register: "report" }, { id: "src_script", text: SCRIPT, register: "fiction" }], cdeps, { maxSnapshots: 6 });
+  const f = foldLog(c.log);
+  const named = (re) => f.beings.find((b) => re.test(b.name ?? ""));
+  assert.equal(named(/dawson/i).reality, "fictional");
+  assert.equal(named(/dawson/i).registers.join(), "fiction");
+  // a being only the record attests (more mentions, so the engine admits it)
+  const R2 = "Bruce Ismay asked the Captain. Ismay spoke to Smith. Ismay left the bridge. Bruce Ismay went below. Captain Smith ordered the boats lowered. Captain Smith spoke to Bruce Ismay.";
+  const c2 = buildCorpusTimeline([{ id: "src_report", text: R2, register: "report" }, { id: "src_script", text: SCRIPT, register: "fiction" }], cdeps, { maxSnapshots: 6 });
+  const f2 = foldLog(c2.log);
+  assert.equal(f2.beings.find((b) => /ismay/i.test(b.name ?? "")).reality, "real");
+});
+
+test("two sources that both claim correspondence to the ground corroborate; the link says so and is still a link, not a merge", () => {
+  const c = buildCorpusTimeline([{ id: "src_report", text: REPORT, register: "report" }, { id: "src_memoir", text: MEMOIR, register: "testimony" }], cdeps, { maxSnapshots: 6 });
+  const link = c.links.find((l) => /smith/i.test(l.from.name));
+  assert.ok(link); assert.equal(link.split.kind, "corroborates"); assert.equal(link.split.across, false);
+  const f = foldLog(c.log);
+  assert.equal(f.beingOf.get(link.from.ref).reality, "real");
+  assert.equal(f.beingOf.get(link.from.ref).ends.map((e) => e.register).sort().join(), "report,testimony");
+});
+
+test("a source with no declared register is read but refused for linking — never guessed", () => {
+  const c = buildCorpusTimeline([{ id: "src_report", text: REPORT, register: "report" }, { id: "src_x", text: SCRIPT }], cdeps, { maxSnapshots: 6 });
+  assert.equal(c.refused.length, 1); assert.equal(c.refused[0].reason, "no_register_declared"); assert.equal(c.refused[0].source, "src_x");
+  assert.equal(c.links.length, 0);
+  assert.ok(c.log.some((e) => e.source === "src_x"), "it was still read");
+});
+
+test("a person severs a wrong correspondence with one more event; the ends survive and the reader's log is untouched", () => {
+  const c = buildCorpusTimeline([{ id: "src_report", text: REPORT, register: "report" }, { id: "src_script", text: SCRIPT, register: "fiction" }], cdeps, { maxSnapshots: 6 });
+  const link = c.links.find((l) => /smith/i.test(l.from.name));
+  const cut = { id: "evt_you_cut", op: "CON", ...CELLS.CON, kind: "correspondence", severs: link.id, from: link.from, to: link.to, giver: "you", basis: "these are two different men" };
+  const f = foldLog(c.log, { overlay: [cut] });
+  assert.notEqual(f.beingOf.get(link.from.ref), f.beingOf.get(link.to.ref), "no longer one being");
+  assert.equal(f.beingOf.get(link.from.ref).reality, "fictional", "the telling-end alone is fictional; the world-end is untouched");
+  const whole = foldLog(c.log);
+  assert.equal(whole.beingOf.get(link.from.ref).id, whole.beingOf.get(link.to.ref).id, "without the cut they are one being again — the cut was an event, not an edit");
+});
+
+test("a common given name does not license a cross-source identity (the generic-token guard)", () => {
+  const A = "Pierre spoke. Pierre left. Pierre Bezukhov wrote. Pierre Bezukhov came. Pierre Dupont ate. Pierre Dupont ran. Pierre Lenoir sat. Pierre Lenoir slept.";
+  const B = "Pierre arrived. Pierre sat. Pierre Aumont sang. Pierre Aumont danced. Pierre Gagnon read. Pierre Gagnon wrote.";
+  const c = buildCorpusTimeline([{ id: "a", text: A, register: "fiction" }, { id: "b", text: B, register: "report" }], cdeps, { maxSnapshots: 6 });
+  assert.equal(c.links.some((l) => l.matched && /^pierre$/i.test(l.matched.from) && /^pierre$/i.test(l.matched.to)), false);
+});
+
+test("splitOf names the difference between two creators' relationships to the ground", () => {
+  assert.equal(splitOf("report", "testimony").kind, "corroborates");
+  assert.equal(splitOf("fiction", "report").kind, "fictionalizes");
+  assert.equal(splitOf("comment", "report").kind, "comments-on");
+  assert.equal(splitOf("fiction", "fiction").kind, "tells-the-same");
+  assert.equal(splitOf("fiction", "report").across, true);
+});
+
+// ── who is saying what ───────────────────────────────────────────────────────────────────────────────────────
+const SAYV = new Set("said told asked testified heard wrote struck sailed".split(" "));
+const isVerb = (w) => SAYV.has(String(w).toLowerCase());
+const fakeCast = (names) => ({ extractSurfaces: () => [], discoverReferents: () => ({ events: Object.entries(names).map(([surface, id]) => ({ surface, referent_id: id })), merges: [], gaps: [], addresses: { born: new Map(), next: 0, refs: new Map() } }) });
+const SPEECH = "Smith testified that Ismay told Andrews that the ship struck. Later Smith said, “Andrews heard it.”";
+
+test("every source has a ROOT frame (its creator's voice, in its register); every other frame points at another frame", () => {
+  const tl = buildReadingTimeline(SPEECH, { ...deps, ...fakeCast({ Smith: "A", Ismay: "B", Andrews: "C" }), isVerb, source: { id: "src_speech", label: "Senate speech", register: "testimony", creator: "Hon. William Alden Smith" } }, { maxSnapshots: 4 });
+  const frames = tl.log.filter((e) => e.op === "DEF" && e.kind === "frame");
+  const roots = frames.filter((e) => e.root);
+  assert.equal(roots.length, 1); assert.equal(roots[0].register, "testimony"); assert.equal(roots[0].creator, "Hon. William Alden Smith"); assert.equal(roots[0].parent, null);
+  const byId = new Map(frames.map((e) => [e.id, e]));
+  for (const f of frames.filter((e) => !e.root)) assert.ok(byId.has(f.parent), "a frame's parent is another frame in the log");
+  for (const e of frames) assert.equal(isCoherent(e), true);
+  assert.ok(frames.every((e) => e.source === "src_speech" && e.register === "testimony"));
+});
+
+test("the chain at a position names every voice, innermost first, and ends at the source's own voice — resolved to beings", () => {
+  const tl = buildReadingTimeline(SPEECH, { ...deps, ...fakeCast({ Smith: "A", Ismay: "B", Andrews: "C" }), isVerb, source: { id: "src_speech", label: "Senate speech", register: "testimony", creator: "Smith (Senate)" } }, { maxSnapshots: 4 });
+  const f = foldLog(tl.log);
+  const at = SPEECH.indexOf("the ship struck");
+  const v = f.voices(at, "src_speech");
+  assert.deepEqual(v.chain.map((c) => c.root ? "«source»" : c.name), ["Ismay", "Smith", "«source»"]);
+  assert.equal(v.depth, 2); assert.equal(v.truncated, null);
+  assert.match(v.chain[0].ref, /^ref_/, "the speaker is a being with an id, not a spelling");
+  assert.equal(v.chain.at(-1).register, "testimony"); assert.equal(v.chain.at(-1).creator, "Smith (Senate)");
+  const q = f.voices(SPEECH.indexOf("Andrews heard"), "src_speech");
+  assert.deepEqual(q.chain.map((c) => c.root ? "«source»" : c.name), ["Smith", "«source»"]);
+});
+
+test("reassigning the mention that stands for the speaker changes who is speaking — the voice follows the link", () => {
+  const tl = buildReadingTimeline(SPEECH, { ...deps, ...fakeCast({ Smith: "A", Ismay: "B", Andrews: "C" }), isVerb, source: { id: "src_speech", register: "testimony" } }, { maxSnapshots: 4 });
+  const base = foldLog(tl.log);
+  const at = SPEECH.indexOf("the ship struck");
+  const ismay = base.voices(at, "src_speech").chain[0];
+  const andrews = [...base.referents.values()].find((r) => r.name === "Andrews");
+  const move = { id: "evt_you_move", op: "CON", ...CELLS.CON, span: ismay.span, ref: andrews.id, supersedes: base.cons.get(ismay.span), giver: "you", basis: "that was Andrews speaking" };
+  const after = foldLog(tl.log, { overlay: [move] });
+  assert.equal(after.voices(at, "src_speech").chain[0].name, "Andrews");
+  assert.equal(base.voices(at, "src_speech").chain[0].name, "Ismay", "the reader's own log still says what it said");
+});
+
+test("a source with no frames still has its root voice, so 'who is saying this' always has an answer", () => {
+  const tl = buildReadingTimeline("The ship sailed. The ice was near.", { ...deps, isVerb, source: { id: "src_plain", register: "report" } }, { maxSnapshots: 3 });
+  const v = foldLog(tl.log).voices(5, "src_plain");
+  assert.equal(v.chain.length, 1); assert.equal(v.chain[0].root, true); assert.equal(v.depth, 0);
+});
+
+test("voices across sources never mix: each source's chain ends at its own root", () => {
+  const c = buildCorpusTimeline([{ id: "src_a", text: SPEECH, register: "testimony" }, { id: "src_b", text: "Cameron wrote that Rose said that the ship struck.", register: "fiction" }], { ...cdeps, ...fakeCast({ Smith: "A", Ismay: "B", Andrews: "C", Cameron: "D", Rose: "E" }), isVerb }, { maxSnapshots: 4 });
+  const f = foldLog(c.log);
+  const a = f.voices(SPEECH.indexOf("the ship struck"), "src_a"), b = f.voices("Cameron wrote that Rose said that the ship struck.".indexOf("the ship struck"), "src_b");
+  assert.equal(a.chain.at(-1).register, "testimony"); assert.equal(b.chain.at(-1).register, "fiction");
+  assert.deepEqual(b.chain.filter((x) => !x.root).map((x) => x.name), ["Rose", "Cameron"]);
 });
