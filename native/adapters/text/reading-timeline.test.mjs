@@ -312,3 +312,10 @@ test("voices across sources never mix: each source's chain ends at its own root"
   assert.equal(a.chain.at(-1).register, "testimony"); assert.equal(b.chain.at(-1).register, "fiction");
   assert.deepEqual(b.chain.filter((x) => !x.root).map((x) => x.name), ["Rose", "Cameron"]);
 });
+
+test("correcting a source's register changes the split on its links and mints no new referent ids", () => {
+  const ids = (reg) => { const c = buildCorpusTimeline([{ id: "src_report", text: REPORT, register: "report" }, { id: "src_script", text: SCRIPT, register: reg }], cdeps, { maxSnapshots: 6 }); const f = foldLog(c.log); return { refs: [...f.referents.keys()].sort(), kinds: f.links.map((l) => l.split.kind).sort() }; };
+  const fic = ids("fiction"), rep = ids("report");
+  assert.deepEqual(fic.refs, rep.refs, "the same ends under either register — a person's merge/sever/reassign on an id survives a corrected register");
+  assert.notDeepEqual(fic.kinds, rep.kinds, "while the split on the links does change");
+});
