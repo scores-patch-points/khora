@@ -27,7 +27,7 @@ const turn = async (sessionID, ask, { tool = "read", ok = true, answer = "done",
 
 test("a first ask gets no recall and is recorded as an instance", async () => {
   const ctx = await turn("s1", "Fix the failing parser test");
-  assert.deepEqual(ctx, {});
+  assert.ok(!ctx.system, "a first ask must carry no recall (the standing openness note is not a recall)");
   const m = door.meter();
   assert.equal(m.turns, 1);
   assert.equal(m.firstAsks.tokens, 1020);
@@ -50,7 +50,7 @@ test("the same ask again is recalled, and counted as a repeat", async () => {
 test("an unsettled turn is never recalled", async () => {
   await turn("s3", "Rename the module", { ok: false, answer: "broke" });
   const ctx = await door.answer({ event: "context", sessionID: "s4", ask: "rename the module" });
-  assert.deepEqual(ctx, {});
+  assert.ok(!ctx.system, "an unsettled turn must not be recalled (the standing openness note is not a recall)");
 });
 
 test("unknown events and junk fail open", async () => {

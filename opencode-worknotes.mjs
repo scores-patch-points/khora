@@ -454,7 +454,7 @@ export function turnsOf({ task, universe } = {}) {
     const out = [];
     if (!d || !fs.existsSync(d)) return out;
     for (const f of fs.readdirSync(d).filter((x) => x.endsWith(".turns.md"))) {
-      const agent = f.replace(/\\.turns\\.md$/, "");
+      const agent = f.replace(/\.turns\.md$/, "");
       let buf;
       try { buf = fs.readFileSync(path.join(d, f)); } catch { continue; }
       for (const t of parseTurnsFile(buf)) out.push({ agent, ...t, universe: u });

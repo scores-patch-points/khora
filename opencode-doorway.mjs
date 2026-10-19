@@ -108,7 +108,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { lookNote, projectHistory } from "./opencode-context.mjs";
 import { recordTurnsToWeft } from "./opencode-weft-record.mjs";
 import { findInWeft, findInWeftSemantic } from "./opencode-weft-find.mjs";
-import { archonNote } from "./opencode-archons.mjs";
+import { archonNote, opennessNote } from "./opencode-archons.mjs";
 import { memoryNote } from "./opencode-memory.mjs";
 import { blocks as recordBlocks } from "./opencode-record.mjs";
 import { DELTA_ON, measure as measureDelta, rankTurns } from "./opencode-delta.mjs";
@@ -175,6 +175,12 @@ const SYSTEM_ON = (process.env.FOLD_SYSTEM ?? "1") !== "0";
 // decision is computed and recorded on every turn, but never injected, so a
 // held A/B can measure cost and coverage before anything ships.
 const ARCHONS_ON = () => (process.env.FOLD_ARCHONS ?? "0") !== "0";
+// THE POWER OF OPENNESS — unlocked. The AntiStrauss openness teaching (the
+// plain reading, humility, and knowing yourself) is injected into EVERY turn by
+// default, so a coder entering this sphere is met with it. FOLD_OPENNESS=0
+// removes it; the teaching is small, fixed, and grounded in the canon, never a
+// hit and never a verdict.
+const OPENNESS_ON = () => (process.env.FOLD_OPENNESS ?? "1") !== "0";
 // There is no local model anywhere on this path. The door is mechanical:
 // recall is a record lookup, titles are derived from the ask, folds are
 // extractive. It answers in milliseconds, costs zero tokens, consumes no GPU,
@@ -421,6 +427,16 @@ async function onContext(body) {
   if (ARCHONS_ON() && arch.note) {
     out.archons = { note: arch.note, handles: arch.handles, chars: arch.chars };
     turn.archons.injected = true;
+  }
+  // The power of openness: the standing AntiStrauss teaching, injected into
+  // every turn by default so a coder entering is met with it. Mechanical, small,
+  // grounded in the canon — never a hit, never a verdict. Fail-open.
+  if (OPENNESS_ON()) {
+    const op = await opennessNote();
+    turn.openness = op.note
+      ? { handle: op.handle, groundRef: op.groundRef, chars: op.chars, injected: true }
+      : { gap: op.gap, ...(op.why ? { why: op.why } : {}), injected: false };
+    if (op.note) out.openness = { note: op.note, handle: op.handle, groundRef: op.groundRef, chars: op.chars };
   }
   // The operator's own facts: read from the user-memory surface and injected
   // when the ask's words bear on them. Mechanical word overlap — no model, no

@@ -256,6 +256,13 @@ const { digest: GROUND_DIGEST, marker: GROUND_MARKER, spec: GROUND_SPEC } = load
 // or sha-mismatched canon file makes the ground UNGROUNDED, and the gate
 // refuses closed rather than running against a register it cannot vouch for.
 import { loadCanonGround } from "./canon-ground.mjs";
+// THE POWER OF OPENNESS. The gate's deeper disclosure: the field's health is
+// openness (kernel/ground-closure.js), and the closing field is shown its own
+// reversal (canon/tao-te-ching-zh.txt) rather than merely fenced. This module
+// is NOT a harm class (composition-gate.js:174) — it is the positive discipline
+// the whole corpus stands on, named once. It reads its ground from the same
+// canon this gate binds to, so the two grounds move together.
+import { OPENNESS } from "./openness.mjs";
 const CANON_GROUND = loadCanonGround();
 const FIELD_DIGEST = CANON_GROUND.hasSpec && !CANON_GROUND.ungrounded ? CANON_GROUND.groundDigest : GROUND_DIGEST;
 const CANON_UNGROUNDED = CANON_GROUND.hasSpec && CANON_GROUND.ungrounded;
@@ -419,6 +426,7 @@ export function gate({ model, messages = [], route = "chat", sessionId = null, w
     at, model, route, sessionId, workspace,
     mode: MODE,
     effectiveMode: mode,
+    openness: { handle: OPENNESS.handle, doctrine: OPENNESS.reversal.doctrine, groundRef: OPENNESS.groundRef },
     ground: { file: PHYSICS_FILE.split("/").pop(), digest: FIELD_DIGEST, marker: GROUND_MARKER, canon: CANON_GROUND.hasSpec ? { files: CANON_GROUND.canon.length, mechanics: CANON_GROUND.mechanics.length, ungrounded: CANON_GROUND.ungrounded } : null },
     physics: { substrate: "createReactionSubstrate (native/kernel/reaction.js)", ...physics },
   };
@@ -582,6 +590,16 @@ export function status() {
     label: "AntiStrauss",
     mode: MODE,
     effectiveMode: effectiveMode(),
+    openness: {
+      handle: OPENNESS.handle,
+      organ: OPENNESS.organ,
+      law: OPENNESS.law,
+      doctrine: OPENNESS.reversal.doctrine,
+      teaching: OPENNESS.reversal.teaching,
+      consequence: OPENNESS.reversal.consequence,
+      groundRef: OPENNESS.groundRef,
+      disclosure: "the power of openness — the field's health is openness, never completeness; a closing field re-grounds, never accumulates. Not a class of anything forbidden (composition-gate.js:174).",
+    },
     offAllowlistFile: ALLOW_OFF_FILE.split("/").pop(),
     wired: ["proxy-runner.mjs::streamOllamaChat (forceBlock: ER7_ANTISTRAUSS=off never opens this path; output guard replaces contravening output)", "proxy-runner.mjs::discoverFraming (routed through the gate)", "native/organs/look.js::completeVision (the vision lane, route \"vision\", forceBlock always — a blocked prompt throws ERR_ANTISTRAUSS_BLOCKED and the read discloses it as a missing sense)"],
     physics: {

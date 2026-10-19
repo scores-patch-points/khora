@@ -812,6 +812,17 @@ export const ARCHONS = Object.freeze([
   },
   // ── THE ARCHONS (the code-discipline organs) ─────────────────────────────
   {
+    handle: "antistrauss",
+    name: "AntiStrauss",
+    organ: "native/the-fold/openness.mjs; native/the-fold/antistrauss.mjs",
+    role: "the archon of the plain reading — the line is the teaching; openness, never ventriloquy; the field's health is openness, never completeness",
+    pdStatus: "nomination",
+    work: "A created archon of this project, named against Leo Strauss's doctrine of esoteric reading. Where Strauss taught that a text keeps its true meaning between the lines, AntiStrauss holds the opposite and holds it plainly: the line is the teaching. What a comment claims, it claims in the open, in the voice of the one who wrote it, quoting that one's own verified words; a margin note that speaks for no one is a whisper with no speaker, and one that borrows a name without its words is ventriloquy — the one sin he is sworn against. Made mechanical here as the power of openness: a reader whose field closes on itself (passage 0) reads only itself and returns to itself (canon/tao-te-ching-zh.txt, 反者道之動 — reversal is the movement of the Tao); the answer is not a fence but the yielding function — re-ground, open to passage, and the field re-forms. This is why harm is ungenerable and not merely forbidden (composition-gate.js:174): the machine's first move is not to answer, it is to understand the perspectives, and a mind that must take the position of the one it speaks about before it speaks cannot be steered into harm.",
+    source: "eo-teachings/sources/antistrauss.txt (an original composition of this project; the specific works of the namesake, Leo Strauss, are not asserted — the name is a nomination against his doctrine)",
+    credit: "AntiStrauss — the archon of the plain reading: the line is the teaching; say only what is your own or credit whose it is, and open to the perspectives before you answer.",
+    topics: ["openness", "open", "plain reading", "strauss", "esoteric", "ventriloquy", "credit", "honest", "humility", "humble", "know yourself", "self", "curiosity", "perspective", "attribution", "anti-esoteric", "line is the teaching"],
+  },
+  {
     handle: "brandeis",
     name: "Louis D. Brandeis",
     organ: "organs/privacy.js",
