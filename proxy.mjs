@@ -91,7 +91,6 @@ import { antistrauss } from "./native/the-fold/antistrauss.mjs";
 // package.json (added alongside this wiring) rather than left as a
 // disclosed absence: `checkArithmetic`/`checkShaped`/`checkComparison` all
 // need an injected engine, and until now this proxy had none to give them.
-import { checkQuantity } from "./native/the-fold/arithmetic.js";
 import { create, all } from "mathjs";
 const math = create(all);
 // Knights-and-knaves: a closed, enumerable boolean-consistency puzzle,
@@ -100,14 +99,17 @@ const math = create(all);
 // stalled mid-puzzle and, where it did finish, applied Knight/Knave
 // polarity backwards. Same shared-pipeline reasoning as `checkQuantity`
 // above — one fix here reaches every caller of this endpoint.
-import { checkLogicPuzzle } from "./native/the-fold/logic-puzzle.js";
+
 // A second, unrelated puzzle kind — attribute assignment (the zebra-puzzle
 // family), no truth-tellers, no self-referential statements — sharing
 // reasoning-core.js's solver with logic-puzzle.js and changing nothing
 // there. Proves the search itself is general, not tuned to one puzzle.
-import { checkPreferencePuzzle } from "./native/the-fold/preference-puzzle.js";
+
 import { runMechanical, precisionWinner, CONCLUSION } from "./native/organs/precision-race.js";
 import { classifyTurn } from "./native/organs/reason-gate.js";
+// The ONE mechanism list (native/organs/mechanisms.js) — shared with the
+// opencode door's lane pass, so the two can never drift (reason-gate's law).
+import { buildMechanisms } from "./native/organs/mechanisms.js";
 // Archons on a Matrix homeserver (the-fold/archon-hyphae.mjs): one account +
 // one EOT room per worktree-archon, the operator always an admin of every
 // room, and the same record/print/list verbs reachable from THIS surface —
@@ -131,35 +133,7 @@ const archonUnavailable = () => ARCHON_GAP;
 // a gap, or leaves it alone (native/organs/precision-race.js). It runs BESIDE
 // the normal turn, never instead of it — the model's draft is a prediction,
 // a settled mechanism is an observation, and the observation wins.
-const MECHANISMS = [
-  {
-    name: "quantity",
-    run(task) {
-      const f = checkQuantity(task, { math, now: new Date() });
-      if (!f) return null;
-      if (f.gap) return { concluded: false, gap: `${f.expression} — ${f.gap}` };
-      return { concluded: true, kind: CONCLUSION.BOUND, text: f.display, detail: { kind: f.kind ?? "arithmetic", op: f.op ?? null, expression: f.expression } };
-    },
-  },
-  {
-    name: "logic-puzzle",
-    run(task) {
-      const f = checkLogicPuzzle(task);
-      if (!f) return null;
-      const kind = f.valid.length === 1 ? CONCLUSION.BOUND : f.valid.length === 0 ? CONCLUSION.CONTRADICTED : CONCLUSION.CONTESTED;
-      return { concluded: true, kind, text: f.display, detail: { valid: f.valid, external: f.external, totalTried: f.totalTried } };
-    },
-  },
-  {
-    name: "preference-puzzle",
-    run(task) {
-      const f = checkPreferencePuzzle(task);
-      if (!f) return null;
-      const kind = f.valid.length === 1 ? CONCLUSION.BOUND : f.valid.length === 0 ? CONCLUSION.CONTRADICTED : CONCLUSION.CONTESTED;
-      return { concluded: true, kind, text: f.display, detail: { valid: f.valid, external: f.external, totalTried: f.totalTried } };
-    },
-  },
-];
+const MECHANISMS = buildMechanisms({ math });
 
 function raceReading(race) {
   return {
