@@ -1,5 +1,18 @@
 # Chorus log — append-only, one entry per lint run
 
+## 2026-10-18 — workplan-acts: the plan's resolutions typed to cube phaseposts (branch `feat/draft-standing-and-penelope-prosifier`, working diff)
+
+fast: 7 files · whole root suite 412 tests: 379 pass / 29 fail · law: ok (pre-existing dup-header WARN S17/S96; no P/S citations added by this diff)
+
+**Tier 1 FAIL is pre-existing, disclosed:** the red arms are the operator's in-progress falsifier suites (`opencode-stigmergy-*` P1/P3 byte-store pointer, `opencode-commons` prosifier, `opencode-surf-pointer`, `opencode-standing-doorway`, `coding-c1`) — unrelated to this diff. A stash-diff of the four changed sources over the whole root suite shows **zero** tests broke (baseline 363/45 → 379/29), and the diff's own suites pass: `opencode-workplan-acts.test.mjs` 11/11, `opencode-workplan-e2e-falsify.test.mjs` 11/11, `npm test` 81/81.
+
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Holmes | one entity or two — identity preserved | opencode-eot.mjs:63 | noted | the `cell` is added to the event ROW, not the content-addressed `body`, so `event_id` and dedupe are unchanged |
+| Feynman | a tuned constant / a swallowed error | opencode-doorway.mjs:1436 | false-positive-on-review | `taken.slice(0,4)`/`+N-4` are the pre-existing note budget, untouched; the diff only appends the cell to each item |
+| Greenberg | a casing gate standing in for identity | opencode-worknotes.mjs:157 | noted | the `cell=` token is parsed by the cube's own fixed shape (`[A-Z]+·[A-Za-z]+`); a malformed token falls to text (a typed gap), never a wrong cell — the writer's own cell wins (pinned by A9) |
+clean: (no other lens routed)
+
 ## 2026-10-16 — mint the stigmergic-log archon (Grassé) (branch `feat/draft-standing-and-penelope-prosifier`, working diff)
 
 fast: 9 files · affected tests 103 pass / 18 fail (all pre-existing FALSIFIER arms of the untracked `opencode-stigmergy-*` suite — the mint's own pin `tests/opencode-archons.test.mjs` 5/5 pass) · law: ok (pre-existing dup-header WARN S17/S96; no P/S citations added by this diff)
