@@ -89,6 +89,14 @@
       "needle": "nātmānaṃ na paraṃ caiva na satyaṃ nāpi cānṛtam",
       "window": 600,
       "organ": "native/kernel/self.js"
+    },
+    {
+      "id": "openness",
+      "canon": "tao-te-ching",
+      "anchor": [3882, 3887],
+      "needle": "反者道之動",
+      "window": 600,
+      "organ": "native/the-fold/openness.mjs"
     }
   ]
 }

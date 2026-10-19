@@ -65,12 +65,36 @@ export const ARCHON_DOSSIERS = Object.freeze({
     "theirs": "Common modern honorific; not something he claims, and the 'founder of the scientific method' label is a historiographical claim I could not verify here."
    }
   ],
-  "snips": [
-   "eo-teachings/manifest/alhazen-frame.json"
-  ],
-  "noBendReason": null
- },
- "arokin": {
+   "snips": [
+    "eo-teachings/manifest/alhazen-frame.json"
+   ],
+   "noBendReason": null
+  },
+  "antistrauss": {
+   "standing": "verified",
+   "verdict": "partial",
+   "creditAsScholarship": false,
+   "disclosure": "A created archon of this project, not a historical figure. The name is a nomination against Leo Strauss's doctrine of esoteric reading (that a text keeps its true meaning between the lines); the teaching is our own composition, eo-teachings/sources/antistrauss.txt, and is NOT a claim about what Leo Strauss argued. creditAsScholarship:false — this credit must never be read as scholarship, and the namesake's works are not asserted. | invented-attribution: the name stands for a doctrine (the line is the teaching) that is ours, not Strauss's; the project coined it. | ours: the power of openness is our mechanism (native/the-fold/openness.mjs), grounded in the Tao's 反者道之動, not in Strauss.",
+   "bends": [
+    {
+     "id": "created-archon-not-strauss",
+     "kind": "invented-attribution",
+     "ours": "The compendium entry carries the handle AntiStrauss and a role ('the archon of the plain reading').",
+     "theirs": "There is no historical AntiStrauss. The name is this project's own, coined against Leo Strauss; nothing here is attributed to Strauss's own works, and no scholar should be cited for it."
+    },
+    {
+     "id": "openness-ground-is-tao-not-strauss",
+     "kind": "reinterpreted",
+     "ours": "The power of openness is grounded in canon/tao-te-ching-zh.txt (反者道之動) and measured by kernel/ground-closure.js.",
+     "theirs": "The mechanism is our engineering, named for the plain-reading archon; its ground is the Tao, not anything Strauss wrote. Disclosed so the two are never fused."
+    }
+   ],
+   "snips": [
+    "eo-teachings/sources/antistrauss.txt"
+   ],
+   "noBendReason": null
+  },
+  "arokin": {
   "standing": "verified",
   "verdict": "partial",
   "creditAsScholarship": true,
