@@ -354,6 +354,21 @@ export function projectTaken(task, agent, { now = Date.now(), ttlMs = 15 * 60_00
     .map((e) => ({ item: e.detail.item, agent: e.agent, cell: e.cell ?? null }));
 }
 
+/** THE OWED NULL, PAID, on the EOT path (the twin of worknotes read().lapsed): a claim that lapsed —
+ *  not done, past its ttl — is a build that never completed, surfaced with the null its cell owes
+ *  (INS·Figure · INCOMPLETE). The next agent reads an abandoned unit as an actionable fact, never silence. */
+export function projectLapsed(task, agent, { now = Date.now(), ttlMs = 15 * 60_000 } = {}) {
+  const { events } = read(task);
+  const key = (s) => oneLine(s).toLowerCase();
+  const done = new Set(events.filter((e) => e.stage === "done").map((e) => key(e.detail?.item)));
+  const latest = new Map();
+  for (const e of events) if (e.stage === "claim") latest.set(`${key(e.detail?.item)}|${e.agent}`, e);
+  const nul = workplanActOf("claim:lapsed");
+  return [...latest.values()]
+    .filter((e) => e.agent !== agent && !done.has(key(e.detail?.item)) && now - e.ts > (e.detail?.ttlMs ?? ttlMs))
+    .map((e) => ({ item: e.detail.item, agent: e.agent, cell: e.cell ?? nul.cell, null: nul.null }));
+}
+
 /** Contention the system observed: another live agent held the path this agent edited. MECHANICAL. */
 export function projectContention(task, agent, { limit = 3 } = {}) {
   const { events } = read(task);

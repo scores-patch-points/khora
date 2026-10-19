@@ -1424,17 +1424,21 @@ async function onSurf(body) {
   // blocks others raised). Two tags, never interleaved; an agent's words never sit inside <fold-mechanical>.
   const mech = [], said = [];
   const short8 = (a) => String(a).replace(/^ses_/, "").slice(0, 8);
-  let taken = [], contention = [], blocks = [], recordLines = [];
+  let taken = [], contention = [], blocks = [], recordLines = [], lapsed = [];
   try {
     taken = eot.projectTaken(task, agent);
     contention = eot.projectContention(task, agent);
     blocks = eot.projectBlocks(task, agent);
+    lapsed = eot.projectLapsed(task, agent);
     const rec = eot.projectRecord(task);
     recordLines = rec.slice(-3).map((r) => `${r.referent}: ${String(r.delta).slice(0, 80)}`);
   } catch { /* the files answer below */ }
     if (!taken.length && !blocks.length) { const st = stateFor({ task, agent, universe: universeOf(body) }); taken = st.taken; blocks = st.blocks; }
   if (!recordLines.length) { const legacy = recordNote({ task, limit: 3 }); if (legacy) recordLines = legacy.split("\n").slice(1, 4).map((l) => l.replace(/^-\s*/, "").slice(0, 100)); }
   if (taken.length) mech.push({ p: 1, t: `taken: ${taken.slice(0, 4).map((c) => `${c.item} [${short8(c.agent)}]${c.cell ? ` (${c.cell})` : ""}`).join("; ")}${taken.length > 4 ? ` +${taken.length - 4}` : ""}` });
+  // THE OWED NULL, PAID, reaches the model: a claim that lapsed is a build that never completed — an
+  // abandoned unit, named with its cell and its owed null (INS·Figure · INCOMPLETE), retakeable.
+  if (lapsed.length) mech.push({ p: 1, t: `lapsed: ${lapsed.slice(0, 3).map((c) => `${c.item} [${short8(c.agent)}] (${c.cell} · ${c.null})`).join("; ")}${lapsed.length > 3 ? ` +${lapsed.length - 3}` : ""}` });
   for (const c of contention.slice(-2)) mech.push({ p: 2, t: c.holder === agent ? `contended: [${short8(c.contender)}] also edited ${c.item}` : `contended: ${c.item} held by [${short8(c.holder)}]` });
   // THE DREAM: a referent with two LIVE answers (a fork) is a disagreement — surfaced, never
   // collapsed. Computed from the record (no model); the dream never blocks a turn.
@@ -1445,7 +1449,7 @@ async function onSurf(body) {
   if (recordLines.length) mech.push({ p: 4, t: `verified: ${recordLines.join("; ")}`.slice(0, 240) });
   // THE PLAN (M2): the next actionable goal from the EOT dependency graph, if any. A finding changes what
   // the local workers encounter next — the plan rides the mechanical note, not an agent-to-agent message.
-  try { const next = planNext({ task }); if (next.ok && next.node) mech.push({ p: 3, t: `plan: ${String(next.node.goal).slice(0, 160)}` }); } catch { /* no plan never blocks */ }
+  try { const next = planNext({ task }); if (next.ok && next.node) mech.push({ p: 3, t: `plan${next.node.cell ? ` [${next.node.cell}]` : ""}: ${String(next.node.goal).slice(0, 160)}` }); } catch { /* no plan never blocks */ }
   // OPEN FORKS (C3): a referent with two LIVE verified answers is a parallel fork, kept and never resolved.
   // Read-only (liveAnswers), surfaced so the discrepancy reaches the next turn, never auto-merged.
   try {
@@ -1507,7 +1511,7 @@ async function onSurf(body) {
     }
     trail = scentsOf({ task, limit: 5, universe: universeOf(body) }).map(
       (s) =>
-        `- open q="${String(s.q).slice(0, 90)}" at="${s.at}"${s.parent ? ` parent="${s.parent}"` : ""}`,
+        `- open [${s.cell ?? "?"}] q="${String(s.q).slice(0, 90)}" at="${s.at}"${s.parent ? ` parent="${s.parent}"` : ""}`,
     );
   } catch { /* the trail read never blocks a turn */ }
   out.note = [

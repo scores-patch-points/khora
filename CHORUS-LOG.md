@@ -1,5 +1,19 @@
 # Chorus log — append-only, one entry per lint run
 
+## 2026-10-18 — the typed medium reaches the model (branch `feat/typed-window`, working diff)
+
+fast: 4 files · affected tests 173: 166 pass / 7 fail · law: ok (pre-existing dup-header WARN S17/S96)
+
+**The improvement:** the cells were stored and surfaced but had almost no consumer. Now the door's note carries the typed medium — `taken:` and `lapsed: item [agent] (INS·Figure · INCOMPLETE)` (the paid null, an abandoned unit named as retakeable), the trail's cells, and the plan node's cell — so the model reads phaseposts, not free strings, every turn. `eot.projectLapsed` is the EOT twin of the medium's `read().lapsed`.
+
+**Tier 1 FAIL is pre-existing, disclosed:** the red arms are the operator's in-progress suites (`opencode-stigmergy-*` X1/X2, `layers`, `penelope`, ghost-path) — unrelated to this diff. A stash-diff of the two changed sources shows **zero** new failures (219/26 → 221/24); the diff's own tests pass: `opencode-workplan-live-e2e.test.mjs` 8/8 (L6/L7 over HTTP).
+
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Feynman | a swallowed error | opencode-doorway.mjs (projectLapsed try) | false-positive-on-review | the lapsed read is inside the existing `try { … } catch { the files answer below }` that guards every EOT projection; a failure is not swallowed into a wrong note |
+| Ostrom | credit/absence at the wrong scope | opencode-eot.mjs (projectLapsed) | noted | the lapsed projection filters `e.agent !== agent` like projectTaken — an agent is not told its own abandoned unit back as another's |
+clean: (no other lens routed)
+
 ## 2026-10-18 — the operator is derived, not hand-set (branch `feat/act-algebra`, working diff)
 
 fast: 3 files · affected tests 16 pass / 0 fail · law: ok (pre-existing dup-header WARN S17/S96)
