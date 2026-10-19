@@ -298,7 +298,7 @@ test("a model cannot author an edit; drift is closed by reconcile; bash is swept
   // THE STIGMERGIC LEDGER, IN THE EOT: the swept file is an edit claim the agent deposited, so every
   // other agent's `taken` projection sees it — the same item the one-file tools claim (autoClaim).
   assert.deepEqual(swept.claimed, ["made-by-bash.txt"]);
-  assert.deepEqual(E.projectTaken("t", "b"), [{ item: "edit made-by-bash.txt", agent: "a" }]);
+  assert.deepEqual(E.projectTaken("t", "b"), [{ item: "edit made-by-bash.txt", agent: "a", cell: "INS·Figure" }]);
   assert.deepEqual(E.projectTaken("t", "a"), [], "the claimant's own edits are not 'taken' for itself");
   const w = E.recordWorktree({ task: "t", agent: "a", op: "create", directory: "/x/wt1", branch: "b" });
   assert.equal(w.standing, "witnessed");

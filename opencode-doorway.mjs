@@ -122,6 +122,7 @@ import { perceiveMany as senseMany, huntOrgans, organStanding } from "./senses/r
 import { cube as cubeEvent, cubeMap } from "./opencode-cube.mjs";
 import * as cube from "./native/kernel/cube.js";
 import { makeStandingCube, cellForFlag } from "./native/the-fold/standing-cube.js";
+import { actOf as workplanActOf } from "./native/organs/workplan-acts.js";
 // THE STANDING CUBE (native/the-fold/standing-cube.js): where a reply's claim stands, and which cell
 // a failed claim is owed to. Generated from the cube; read-only here, never a model.
 const STANDING = makeStandingCube({ operators: cube });
@@ -590,7 +591,7 @@ function autoClaim(sessionID, turn, tool) {
   if (r.ok) { try { eot.recordClaim({ task, agent: sessionID, item: `edit ${rel}`, ttlMs: CLAIM_TTL_MS }); } catch { /* */ } }
   if (r.ok === false && r.holder && r.holder !== sessionID && !r.done) {
     try { eot.recordContention({ task, agent: sessionID, item: `edit ${rel}`, holder: r.holder }); } catch { /* the log never blocks */ }
-    markNote({ task, agent: sessionID, kind: "block", text: `contended: ${rel} is held by ${r.holder}` });
+    markNote({ task, agent: sessionID, kind: "block", text: `contended: ${rel} is held by ${r.holder}`, cell: workplanActOf("claim:contended").cell });
     turn.contended = (turn.contended ?? 0) + 1;
   }
 }
@@ -1432,7 +1433,7 @@ async function onSurf(body) {
   } catch { /* the files answer below */ }
     if (!taken.length && !blocks.length) { const st = stateFor({ task, agent, universe: universeOf(body) }); taken = st.taken; blocks = st.blocks; }
   if (!recordLines.length) { const legacy = recordNote({ task, limit: 3 }); if (legacy) recordLines = legacy.split("\n").slice(1, 4).map((l) => l.replace(/^-\s*/, "").slice(0, 100)); }
-  if (taken.length) mech.push({ p: 1, t: `taken: ${taken.slice(0, 4).map((c) => `${c.item} [${short8(c.agent)}]`).join("; ")}${taken.length > 4 ? ` +${taken.length - 4}` : ""}` });
+  if (taken.length) mech.push({ p: 1, t: `taken: ${taken.slice(0, 4).map((c) => `${c.item} [${short8(c.agent)}]${c.cell ? ` (${c.cell})` : ""}`).join("; ")}${taken.length > 4 ? ` +${taken.length - 4}` : ""}` });
   for (const c of contention.slice(-2)) mech.push({ p: 2, t: c.holder === agent ? `contended: [${short8(c.contender)}] also edited ${c.item}` : `contended: ${c.item} held by [${short8(c.holder)}]` });
   if (recordLines.length) mech.push({ p: 4, t: `verified: ${recordLines.join("; ")}`.slice(0, 240) });
   // THE PLAN (M2): the next actionable goal from the EOT dependency graph, if any. A finding changes what
