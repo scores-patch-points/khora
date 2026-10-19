@@ -122,7 +122,7 @@ export function readTap(out) {
       if (s.startsWith("ok ")) cur = null;
       continue;
     }
-    if (cur && (s.startsWith("error:") || s.startsWith("expected") || s.startsWith("actual") || s.startsWith("+ ") || s.startsWith("- ") || s.includes("Error") || s.startsWith("message:"))) { if (cur.detail.length < 6) cur.detail.push(s.slice(0, 160)); }
+    if (cur && (s.startsWith("error:") || s.startsWith("expected") || s.startsWith("actual") || s.startsWith("+ ") || s.startsWith("- ") || s.includes("Error") || s.startsWith("message:") || s.includes("file://") || s.startsWith("at "))) { if (cur.detail.length < 12) cur.detail.push(s.slice(0, 200)); }
   }
   // the whole suite failing to load leaves no ok lines at all
   const loaded = passed.length + failed.length > 0;
@@ -287,7 +287,22 @@ export function makeCodeForm({ ask, mouth = "mouth", log = () => {}, spec, testF
       // a runtime error at load (a bad import) blames the importer's module's functions
       if (!blame.size) { const err = String(r.stderr).split("\n").filter((l) => l.includes("Error") || l.includes("does not provide")).slice(0, 2).join(" "); for (const f of fns) blame.set(f.name, [`the program does not load: ${err.slice(0, 140)}`]); }
     }
-    for (const t of tap.failed) for (const p of t.parts) blame.set(p, [...(blame.get(p) ?? []), `${t.title.slice(t.title.indexOf("]") + 1).trim()}: ${t.detail.filter((d) => !d.startsWith("error:")).slice(0, 3).join("; ") || t.detail[0] || "failed"}`]);
+    // ATTRIBUTION FROM THE FAILURE, NOT THE TITLE (2026-10-18): a thrown error's own stack names the
+    // function it died in — blame that, before the human-authored title. Only when no frame names a spec
+    // function (a bare assertion mismatch, whose stack is the test's own) does the title decide.
+    const frameFn = (t) => {
+      const names = new Set();
+      for (const d of t.detail) {
+        const m = /\b([A-Za-z_$][\w$]*)\s*\(file:\/\/[^)]*\.(?:mjs|js):\d+:\d+\)/.exec(d);
+        if (m && byName.has(m[1])) names.add(m[1]);
+      }
+      return [...names];
+    };
+    for (const t of tap.failed) {
+      const parts = frameFn(t).length ? frameFn(t) : t.parts;
+      const detail = `${t.title.slice(t.title.indexOf("]") + 1).trim()}: ${t.detail.filter((d) => !d.startsWith("error:")).slice(0, 3).join("; ") || t.detail[0] || "failed"}`;
+      for (const p of parts) blame.set(p, [...(blame.get(p) ?? []), detail]);
+    }
     return { passed: tap.passed.length, failed: tap.failed.length, total: tap.total, loaded: tap.loaded, blame, titles: tap.failed.map((t) => t.title) };
   }
 
@@ -300,12 +315,18 @@ export function makeCodeForm({ ask, mouth = "mouth", log = () => {}, spec, testF
     history.push({ round: 0, passed: now.passed, total: now.total, loaded: now.loaded, failing: [...now.blame.keys()] });
     log({ kind: "test", round: 0, ...history[0], titles: now.titles });
     for (let round = 1; round <= rounds && now.blame.size; round++) {
-      // callees first: a caller's failure may be its callee's
-      const order = fns.filter((f) => now.blame.has(f.name)).sort((a, b) => (calleesOf(notes, b).includes(a) ? -1 : calleesOf(notes, a).includes(b) ? 1 : 0));
+      // CALLEES FIRST, AND A CALLEE IS A CANDIDATE EVEN IF NOT NAMED (2026-10-18): a failing test may
+      // name only its caller while the defect sits in a function it calls (measured: a suite titled
+      // [evaluate] over a broken `parse` revised evaluate — a no-op — and never reached parse). The
+      // blamed set is expanded along the record's own call bonds; the trial still decides, so a sound
+      // callee redrawn is simply undone.
+      const candidates = new Set(now.blame.keys());
+      for (const name of [...candidates]) { const f = byName.get(name); if (f) for (const c of calleesOf(notes, f)) candidates.add(c.name); }
+      const order = fns.filter((f) => candidates.has(f.name)).sort((a, b) => (calleesOf(notes, b).includes(a) ? -1 : calleesOf(notes, a).includes(b) ? 1 : 0));
       const kept = [], undone = [];
       for (const f of order) {
-        const failures = now.blame.get(f.name) ?? [];
-        if (!failures.length) continue;
+        const failures = [...(now.blame.get(f.name) ?? [])];
+        if (!failures.length) failures.push(`a caller failed while calling ${f.name} — this callee may be the cause`);
         const draw = await drawBodyText({ notes, f, failures, round });
         if (!draw) { undone.push(f.name); continue; }
         // THE TRIAL: committed to a SCRATCH copy of the notes, tested there.

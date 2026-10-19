@@ -22,6 +22,7 @@ import os from "node:os";
 import path from "node:path";
 import crypto from "node:crypto";
 import { neutralize } from "./opencode-defang.mjs";
+import { actOf as workplanActOf, markCell, scentResolution } from "./native/organs/workplan-acts.js";
 
 export const KINDS = Object.freeze(["fact", "claim", "done", "block"]);
 export const root = () => process.env.FOLD_WORKNOTES_DIR ?? path.join(os.homedir(), ".fold", "worknotes");
@@ -73,13 +74,16 @@ export function promoteUniverse({ task, from, addr, now = Date.now() } = {}) {
 }
 
 /** Append one mark. A single O_APPEND write of one short line: concurrent writers interleave whole lines, never bytes. */
-export function mark({ task, agent, kind = "fact", text = "", now = Date.now(), universe } = {}) {
+export function mark({ task, agent, kind = "fact", text = "", now = Date.now(), universe, cell } = {}) {
   const file = agentFile(task, agent, universe ?? defaultUniverse());
   if (!file || !KINDS.includes(kind)) return { ok: false, gap: "bad-address" };
   fs.mkdirSync(path.dirname(file), { recursive: true });
   // THE FIREWALL, on this store too: a forged <fold-…>/[[snip:…]]/evt_…/src_… marker in one agent's
   // text is defanged before it can reach another agent's note (same strip as the EOT log).
-  const line = `${new Date(now).toISOString()} · ${agent} · ${kind} · ${neutralize(oneLine(text)).slice(0, 500)}\n`;
+  // THE CELL (workplan-acts.js): a mark is one of the 27 phaseposts — its kind names the act, and the
+  // cell rides the line so a reader (and the plan surface) sees WHERE the move stands, not a free word.
+  const c = cell ?? markCell(kind);
+  const line = `${new Date(now).toISOString()} · ${agent} · ${kind} · ${c ? `cell=${c} · ` : ""}${neutralize(oneLine(text)).slice(0, 500)}\n`;
   fs.appendFileSync(file, line);
   return { ok: true, file };
 }
@@ -98,7 +102,7 @@ export function claim({ task, agent, item, ttlMs = DEFAULT_TTL, now = Date.now()
   if (!dir || !ident(agent) || !oneLine(item)) return { ok: false, gap: "bad-address" };
   fs.mkdirSync(path.join(dir, "claims"), { recursive: true });
   const file = path.join(dir, "claims", `${slugOf(item)}.json`);
-  const body = JSON.stringify({ item: oneLine(item), agent, t: now, ttl: ttlMs });
+  const body = JSON.stringify({ item: oneLine(item), agent, t: now, ttl: ttlMs, cell: workplanActOf("mark:claim").cell });
   for (let attempt = 0; attempt < 2; attempt++) {
     try {
       fs.writeFileSync(file, body, { flag: "wx" });
@@ -143,15 +147,15 @@ export function done({ task, agent, item, now = Date.now(), universe } = {}) {
 export function read({ task, now = Date.now(), ttlMs = DEFAULT_TTL, limit = 200, universe } = {}) {
   const u = universe ?? defaultUniverse();
   const dir = universeDir(task, u);
-  if (!dir || !fs.existsSync(dir)) return { marks: [], open: [], finished: [], conflicts: [], universe: u };
+  if (!dir || !fs.existsSync(dir)) return { marks: [], open: [], finished: [], lapsed: [], conflicts: [], universe: u };
   const readDir = (d, tag) => {
     if (!fs.existsSync(d)) return [];
     return fs.readdirSync(d).filter((f) => f.endsWith(".md") && !f.endsWith(".turns.md")).flatMap((f) => {
       const owner = f.slice(0, -3);
       if (!ident(owner)) return [];
       return fs.readFileSync(path.join(d, f), "utf8").split("\n").flatMap((line) => {
-        const m = /^(\S+) · ([\w.-]+) · (fact|claim|done|block) · (.*)$/.exec(line);
-        return m ? [{ t: Date.parse(m[1]), agent: owner, kind: m[3], text: neutralize(m[4]), universe: tag }] : [];
+        const m = /^(\S+) · ([\w.-]+) · (fact|claim|done|block) · (?:cell=([A-Z]+·[A-Za-z]+) · )?(.*)$/.exec(line);
+        return m ? [{ t: Date.parse(m[1]), agent: owner, kind: m[3], cell: m[4] ?? null, text: neutralize(m[5]), universe: tag }] : [];
       });
     });
   };
@@ -174,8 +178,12 @@ export function read({ task, now = Date.now(), ttlMs = DEFAULT_TTL, limit = 200,
   const claims = fs.existsSync(cdir) ? fs.readdirSync(cdir).filter((f) => f.endsWith(".json")).flatMap((f) => { const c = readClaim(path.join(cdir, f)); return c ? [c] : []; }) : [];
   return {
     marks: marks.slice(-limit),
-    open: claims.filter((c) => live(c, now, ttlMs)).map((c) => ({ item: c.item, agent: c.agent, since: c.t })),
-    finished: claims.filter((c) => c.done).map((c) => ({ item: c.item, agent: c.doneBy ?? c.agent })),
+    open: claims.filter((c) => live(c, now, ttlMs)).map((c) => ({ item: c.item, agent: c.agent, since: c.t, cell: c.cell ?? null })),
+    finished: claims.filter((c) => c.done).map((c) => ({ item: c.item, agent: c.doneBy ?? c.agent, cell: c.cell ?? null })),
+    // THE OWED NULL, PAID (workplan-acts.js, the pairing rule): a claim that lapsed — not done, not live —
+    // is a build that never completed. It is surfaced with the null its cell owes (INS·Figure · INCOMPLETE),
+    // never silently forgotten: a positive that lands without its null reads silence as support.
+    lapsed: claims.filter((c) => !c.done && !live(c, now, ttlMs)).map((c) => ({ item: c.item, agent: c.agent, since: c.t, cell: workplanActOf("claim:lapsed").cell, null: workplanActOf("claim:lapsed").null })),
     conflicts,
     universe: u,
   };
@@ -201,7 +209,11 @@ const SCENT_GAMMA = 0.7;
 const scentFile = (task, agent, universe = defaultUniverse()) => { const d = universeDir(task, universe); const a = ident(agent); return d && a ? path.join(d, "scents", `${a}.md`) : null; };
 const scentLine = (s) => {
   const val = (v, n) => neutralize(oneLine(v)).replace(/"/g, "'").slice(0, n);
-  return `${new Date(s.t).toISOString()} · ${s.agent} · scent · q="${val(s.q, 200)}" · at="${val(s.at, 80)}" · parent="${val(s.parent, 80)}" · ${s.state} · passes=${s.passes} · by=${s.by ?? "none"}\n`;
+  // THE CELL (workplan-acts.js): a scent is a declared void (DEF·Ground) while open; a release is a
+  // re-zero (REC), a merge an ascent (SYN·Ground); a wall is a terminal NUL (REC·Ground · not_earned).
+  const a = workplanActOf(scentResolution(s.state, s.by));
+  const cellPart = a.gap ? "" : `cell=${a.cell} · `;
+  return `${new Date(s.t).toISOString()} · ${s.agent} · scent · q="${val(s.q, 200)}" · at="${val(s.at, 80)}" · parent="${val(s.parent, 80)}" · ${s.state} · ${cellPart}passes=${s.passes} · by=${s.by ?? "none"}\n`;
 };
 
 /** Declare (open) one tension. A released/walled question with the same q is NOT re-opened (sticky release). */
@@ -233,7 +245,7 @@ export function scentClose({ task, agent, at, by = "arrival", now = Date.now(), 
   return { ok: true, state, by };
 }
 
-const SCENT_RE = /^(\S+) · ([\w.-]+) · scent · q="([^"]*)" · at="([^"]*)" · parent="([^"]*)" · (open|released|walled) · passes=(\d+)(?: · by=([\w-]*))?$/;
+const SCENT_RE = /^(\S+) · ([\w.-]+) · scent · q="([^"]*)" · at="([^"]*)" · parent="([^"]*)" · (open|released|walled) · (?:cell=([A-Z]+·[A-Za-z]+) · )?passes=(\d+)(?: · by=([\w-]*))?$/;
 function scentsRaw({ task, universe } = {}) {
   const u = universe ?? defaultUniverse();
   const dir = universeDir(task, u);
@@ -247,7 +259,7 @@ function scentsRaw({ task, universe } = {}) {
     for (const line of buf.split("\n")) {
       const m = SCENT_RE.exec(line);
       if (!m) continue;
-      byAt.set(`${owner}\u0000${m[4]}`, { t: Date.parse(m[1]), agent: owner, q: neutralize(m[3]), at: m[4], parent: m[5], state: m[6], passes: Number(m[7]), by: m[8] || "none" });
+      byAt.set(`${owner}\u0000${m[4]}`, { t: Date.parse(m[1]), agent: owner, q: neutralize(m[3]), at: m[4], parent: m[5], state: m[6], cell: m[7] ?? null, passes: Number(m[8]), by: m[9] || "none" });
     }
   }
   return [...byAt.values()];
@@ -345,7 +357,7 @@ export function releaseByMerge({ task, now = Date.now() } = {}) {
     const qw = contentWords(s.q);
     if (!qw.length) continue;
     if (qw.filter((w) => settled.has(w)).length >= Math.min(2, qw.length)) {
-      try { if (scentClose({ task, agent: s.agent, at: s.at, by: "reframe", now }).ok) released++; } catch { /* skip */ }
+      try { if (scentClose({ task, agent: s.agent, at: s.at, by: "merge", now }).ok) released++; } catch { /* skip */ }
     }
   }
   return { ok: true, released };
@@ -356,7 +368,7 @@ export function releaseByMerge({ task, now = Date.now() } = {}) {
 export function stateFor({ task, agent, now = Date.now(), universe } = {}) {
   const v = read({ task, now, universe });
   return {
-    taken: v.open.filter((c) => c.agent !== agent).map((c) => ({ item: c.item, agent: c.agent })),
+    taken: v.open.filter((c) => c.agent !== agent).map((c) => ({ item: c.item, agent: c.agent, cell: c.cell ?? null })),
     blocks: v.marks.filter((m) => m.kind === "block" && m.agent !== agent).slice(-3).map((m) => ({ text: m.text, agent: m.agent })),
   };
 }
@@ -373,7 +385,7 @@ export function noteFor({ task, agent, now = Date.now(), universe } = {}) {
     ...(others.length ? [`taken by others (do not duplicate): ${others.map((c) => `${c.item} [${c.agent}]`).join("; ")}`] : []),
     ...(v.finished.length ? [`done: ${v.finished.slice(-8).map((c) => c.item).join("; ")}`] : []),
     ...v.marks.filter((m) => m.kind === "fact" || m.kind === "block").slice(-5).map((m) => `${m.kind} [${m.agent}]: ${m.text}`),
-    `leave marks by appending lines "<iso-ts> · ${agent} · fact|claim|done|block · <text>" to ${path.join(dir, `${agent}.md`)}`,
+    `leave marks by appending lines "<iso-ts> · ${agent} · fact|claim|done|block · [cell=OP·Grain · ]<text>" to ${path.join(dir, `${agent}.md`)}`,
   ];
   return lines.join("\n");
 }

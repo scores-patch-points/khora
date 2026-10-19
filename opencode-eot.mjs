@@ -34,6 +34,7 @@ import { taskDir, turnsOf } from "./opencode-worknotes.mjs";
 import { STAGES } from "./opencode-eot-stages.mjs";
 import { neutralize } from "./opencode-defang.mjs";
 import { BIN_ON, TEXT_MIRROR, appendRows, hasEvent, readBin } from "./opencode-eot-bin.mjs";
+import { actOf as workplanActOf, markCell } from "./native/organs/workplan-acts.js";
 
 export const EOT_SCHEMA = "OpenCodeEOT@1";
 export { STAGES };
@@ -56,6 +57,15 @@ const oneLine = (s) => String(s ?? "").replace(/\s+/g, " ").trim();
 /** penelope's id: sha256 of the JSON value, first 20 hex, behind a prefix. */
 export const stableId = (value, prefix = "src") => `${prefix}_${crypto.createHash("sha256").update(JSON.stringify(value)).digest("hex").slice(0, 20)}`;
 export const sourceIdOf = ({ kind, locator }) => stableId({ kind, locator }, "src");
+
+// THE CELL (workplan-acts.js): every event row carries the phasepost of its stage, so the record is
+// typed, not a free verb. A `mark` row's cell is its KIND's (fact/claim/done/block); the rest are the
+// stage's own. The cell is NOT in the content-addressed body, so event ids and dedupe are unchanged.
+const stageCell = (stage, detail) => {
+  if (stage === "mark" && detail?.kind) return markCell(detail.kind);
+  const a = workplanActOf(`eot:${stage}`);
+  return a.gap ? null : a.cell;
+};
 
 const dirOf = (task) => { const d = taskDir(task); return d ? path.join(d, "eot") : null; };
 const fileOf = (task, agent) => { const d = dirOf(task); const a = ident(agent); return d && a ? path.join(d, `${a}.jsonl`) : null; };
@@ -134,7 +144,8 @@ export function append({ task, agent, stage, source = null, parent = null, unit 
   const body = { ts: now, agent: String(agent), stage, source_id, parent, unit, range, detail: detail ?? null, ...(universe ? { universe } : {}) };
   const event_id = stableId(body, "evt");
   const origin = src ? src.origin : (MECHANICAL_STAGES.has(stage) ? "mechanical" : "model");
-  const row = { t: "evt", event_id, stage, agent: String(agent), ts: now, origin, standing, ...(source_id ? { source_id } : {}), ...(parent ? { parent } : {}), ...(unit ? { unit } : {}), ...(range ? { range } : {}), ...(detail ? { detail } : {}), ...(universe ? { universe } : {}) };
+  const cell = stageCell(stage, detail);
+  const row = { t: "evt", event_id, stage, agent: String(agent), ts: now, origin, standing, ...(cell ? { cell } : {}), ...(source_id ? { source_id } : {}), ...(parent ? { parent } : {}), ...(unit ? { unit } : {}), ...(range ? { range } : {}), ...(detail ? { detail } : {}), ...(universe ? { universe } : {}) };
   // THE BINARY LOG: dedup via the header's id hash (verified against the one record's body — exact, a
   // hash collision can never drop a real event), then one packed append through a cached fd — O(1), the
   // file is never re-read. A bin failure falls through to the jsonl, so a row can never be lost.
@@ -340,7 +351,22 @@ export function projectTaken(task, agent, { now = Date.now(), ttlMs = 15 * 60_00
   for (const e of events) if (e.stage === "claim") latest.set(`${key(e.detail?.item)}|${e.agent}`, e);
   return [...latest.values()]
     .filter((e) => e.agent !== agent && !done.has(key(e.detail?.item)) && now - e.ts <= (e.detail?.ttlMs ?? ttlMs))
-    .map((e) => ({ item: e.detail.item, agent: e.agent }));
+    .map((e) => ({ item: e.detail.item, agent: e.agent, cell: e.cell ?? null }));
+}
+
+/** THE OWED NULL, PAID, on the EOT path (the twin of worknotes read().lapsed): a claim that lapsed —
+ *  not done, past its ttl — is a build that never completed, surfaced with the null its cell owes
+ *  (INS·Figure · INCOMPLETE). The next agent reads an abandoned unit as an actionable fact, never silence. */
+export function projectLapsed(task, agent, { now = Date.now(), ttlMs = 15 * 60_000 } = {}) {
+  const { events } = read(task);
+  const key = (s) => oneLine(s).toLowerCase();
+  const done = new Set(events.filter((e) => e.stage === "done").map((e) => key(e.detail?.item)));
+  const latest = new Map();
+  for (const e of events) if (e.stage === "claim") latest.set(`${key(e.detail?.item)}|${e.agent}`, e);
+  const nul = workplanActOf("claim:lapsed");
+  return [...latest.values()]
+    .filter((e) => e.agent !== agent && !done.has(key(e.detail?.item)) && now - e.ts > (e.detail?.ttlMs ?? ttlMs))
+    .map((e) => ({ item: e.detail.item, agent: e.agent, cell: e.cell ?? nul.cell, null: nul.null }));
 }
 
 /** Contention the system observed: another live agent held the path this agent edited. MECHANICAL. */

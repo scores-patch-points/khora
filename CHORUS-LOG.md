@@ -1,5 +1,56 @@
 # Chorus log — append-only, one entry per lint run
 
+## 2026-10-18 — the typed medium reaches the model (branch `feat/typed-window`, working diff)
+
+fast: 4 files · affected tests 173: 166 pass / 7 fail · law: ok (pre-existing dup-header WARN S17/S96)
+
+**The improvement:** the cells were stored and surfaced but had almost no consumer. Now the door's note carries the typed medium — `taken:` and `lapsed: item [agent] (INS·Figure · INCOMPLETE)` (the paid null, an abandoned unit named as retakeable), the trail's cells, and the plan node's cell — so the model reads phaseposts, not free strings, every turn. `eot.projectLapsed` is the EOT twin of the medium's `read().lapsed`.
+
+**Tier 1 FAIL is pre-existing, disclosed:** the red arms are the operator's in-progress suites (`opencode-stigmergy-*` X1/X2, `layers`, `penelope`, ghost-path) — unrelated to this diff. A stash-diff of the two changed sources shows **zero** new failures (219/26 → 221/24); the diff's own tests pass: `opencode-workplan-live-e2e.test.mjs` 8/8 (L6/L7 over HTTP).
+
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Feynman | a swallowed error | opencode-doorway.mjs (projectLapsed try) | false-positive-on-review | the lapsed read is inside the existing `try { … } catch { the files answer below }` that guards every EOT projection; a failure is not swallowed into a wrong note |
+| Ostrom | credit/absence at the wrong scope | opencode-eot.mjs (projectLapsed) | noted | the lapsed projection filters `e.agent !== agent` like projectTaken — an agent is not told its own abandoned unit back as another's |
+clean: (no other lens routed)
+
+## 2026-10-18 — the operator is derived, not hand-set (branch `feat/act-algebra`, working diff)
+
+fast: 3 files · affected tests 16 pass / 0 fail · law: ok (pre-existing dup-header WARN S17/S96)
+
+**The improvement:** the mapping was hand-set (`{op, grain}` per resolution). Now each resolution declares the ACT it is (its `effect` — measure · sign · create · separate · relate · compose · declare · judge · reframe), the operator is DERIVED through a tested nine-effect algebra, and every resolution is anchored to the real `file:function` that lands it.
+
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Marshall | does the cited entry say what the diff claims | opencode-workplan-acts.test.mjs:186 | fixed | the test labels were `S1/S2/S3`, which read as READING-SPEC §S citations; renamed `ALG1/ALG2/ALG3` so the chorus does not associate them |
+| LeviStrauss | a piece reclaimed | native/organs/workplan-acts.js:75 | noted | the `effect` names the act-algebra the cube's own theory already held; the `source` anchors each move to the function that produces it |
+clean: Alexander (the README row composes; no seam)
+
+## 2026-10-18 — pay the owed nulls + attribution from the failure (branch `feat/workplan-nulls`, working diff)
+
+fast: 6 files · affected tests 188: 165 pass / 23 fail · law: ok (pre-existing dup-header WARN S17/S96; no P/S citations added)
+
+**Tier 1 FAIL is pre-existing, disclosed:** the red arms are the operator's in-progress falsifier suites (`opencode-stigmergy-*` P1 pointer, `fold-note`, commons) — unrelated to this diff. A stash-diff of the three changed sources shows **zero** new failures (179/25 → 182/22) and the diff's own tests pass: `opencode-workplan-acts.test.mjs` 13/13 (N1/N2), `native/organs/code-form.test.mjs` 2/2 (the callee-blame falsifier goes red without the fix).
+
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Feynman | a numeric constant / a swallowed error | native/organs/code-form.js:125 | false-positive-on-review | the `detail.length < 12` is a bounded capture buffer for stack frames, not a tuned threshold; a frame that does not parse simply falls back to the title |
+| Simon/Chekhov | a real mechanism must not ship unwired | opencode-worknotes.mjs (read lapsed) · opencode-plan.mjs (planResolve) | fixed | the owed nulls are now PAID (a lapsed claim → INS·Figure·INCOMPLETE; a resolution with no evidence → EVA·Figure·insufficient), each pinned by test |
+clean: (no other lens routed)
+
+## 2026-10-18 — workplan-acts: the plan's resolutions typed to cube phaseposts (branch `feat/draft-standing-and-penelope-prosifier`, working diff)
+
+fast: 7 files · whole root suite 412 tests: 379 pass / 29 fail · law: ok (pre-existing dup-header WARN S17/S96; no P/S citations added by this diff)
+
+**Tier 1 FAIL is pre-existing, disclosed:** the red arms are the operator's in-progress falsifier suites (`opencode-stigmergy-*` P1/P3 byte-store pointer, `opencode-commons` prosifier, `opencode-surf-pointer`, `opencode-standing-doorway`, `coding-c1`) — unrelated to this diff. A stash-diff of the four changed sources over the whole root suite shows **zero** tests broke (baseline 363/45 → 379/29), and the diff's own suites pass: `opencode-workplan-acts.test.mjs` 11/11, `opencode-workplan-e2e-falsify.test.mjs` 11/11, `npm test` 81/81.
+
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Holmes | one entity or two — identity preserved | opencode-eot.mjs:63 | noted | the `cell` is added to the event ROW, not the content-addressed `body`, so `event_id` and dedupe are unchanged |
+| Feynman | a tuned constant / a swallowed error | opencode-doorway.mjs:1436 | false-positive-on-review | `taken.slice(0,4)`/`+N-4` are the pre-existing note budget, untouched; the diff only appends the cell to each item |
+| Greenberg | a casing gate standing in for identity | opencode-worknotes.mjs:157 | noted | the `cell=` token is parsed by the cube's own fixed shape (`[A-Z]+·[A-Za-z]+`); a malformed token falls to text (a typed gap), never a wrong cell — the writer's own cell wins (pinned by A9) |
+clean: (no other lens routed)
+
 ## 2026-10-16 — mint the stigmergic-log archon (Grassé) (branch `feat/draft-standing-and-penelope-prosifier`, working diff)
 
 fast: 9 files · affected tests 103 pass / 18 fail (all pre-existing FALSIFIER arms of the untracked `opencode-stigmergy-*` suite — the mint's own pin `tests/opencode-archons.test.mjs` 5/5 pass) · law: ok (pre-existing dup-header WARN S17/S96; no P/S citations added by this diff)
