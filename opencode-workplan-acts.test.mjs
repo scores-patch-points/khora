@@ -26,6 +26,7 @@ process.env.FOLD_WORKNOTES_DIR = ROOT;
 
 const A = await import("./native/organs/workplan-acts.js");
 const W = await import("./opencode-worknotes.mjs");
+const plan = await import("./opencode-plan.mjs");
 import * as cube from "./native/kernel/cube.js";
 import { makeStandingCube } from "./native/the-fold/standing-cube.js";
 
@@ -150,6 +151,34 @@ test("A10 the two stores agree where a worknotes act and an EOT stage name the s
   assert.equal(A.actOf("claim:contended").cell, A.actOf("eot:contend").cell, "the two contests disagree");
   assert.equal(A.actOf("mark:claim").cell, "INS·Figure");
   assert.equal(A.actOf("scent:walled").null, "not_earned", "a wall is not the terminal null it names");
+});
+
+test("N1 THE OWED NULL IS PAID: a lapsed claim surfaces INS·Figure · INCOMPLETE, not silence", () => {
+  const task = fresh();
+  W.claim({ task, agent: "A", item: "x", ttlMs: 1000, now: 10_000 });
+  const v = W.read({ task, now: 11_001, ttlMs: 1000 });
+  assert.equal(v.open.length, 0, "a lapsed claim is still open");
+  assert.equal(v.lapsed.length, 1, "the lapse was silently forgotten — the null was never paid");
+  assert.equal(v.lapsed[0].cell, "INS·Figure");
+  assert.equal(v.lapsed[0].null, "INCOMPLETE");
+  // control: a live claim is not lapsed, and a done one is finished, never lapsed
+  const t2 = fresh();
+  W.claim({ task: t2, agent: "A", item: "y", ttlMs: 10_000, now: 0 });
+  assert.equal(W.read({ task: t2, now: 1000, ttlMs: 10_000 }).lapsed.length, 0);
+  W.done({ task: t2, agent: "A", item: "y", now: 2000 });
+  const v2 = W.read({ task: t2, now: 999_999, ttlMs: 10_000 });
+  assert.equal(v2.lapsed.length, 0, "a done claim was called lapsed");
+  assert.equal(v2.finished.length, 1);
+});
+
+test("N2 THE OWED NULL IS PAID: a plan resolution with no evidence carries EVA·Figure · insufficient", () => {
+  const task = fresh();
+  const a = plan.planCreate({ task, goal: "g" });
+  plan.planResolve({ task, id: a.id }); // no evidence
+  assert.equal(plan.planView({ task }).nodes.find((n) => n.id === a.id).null, "insufficient", "a resolution over silence carried no null");
+  const b = plan.planCreate({ task, goal: "h" });
+  plan.planResolve({ task, id: b.id, evidence: "tests green" });
+  assert.ok(!plan.planView({ task }).nodes.find((n) => n.id === b.id).null, "a witnessed resolution carried a null it does not owe");
 });
 
 test("cleanup", () => fs.rmSync(ROOT, { recursive: true, force: true }));

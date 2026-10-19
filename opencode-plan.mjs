@@ -56,6 +56,10 @@ export function planResolve({ task, id, evidence = "" } = {}) {
   n.status = "resolved";
   n.cell = workplanActOf("plan:resolved").cell;
   n.evidence = oneLine(evidence).slice(0, 200);
+  // THE OWED NULL, PAID (workplan-acts.js, the pairing rule): a resolution with no evidence is judged
+  // INSUFFICIENT — the cell's own null (EVA·Figure), recorded on the node, never a clean positive over
+  // silence. A resolution that names its evidence owes nothing and carries no null.
+  if (n.evidence) delete n.null; else n.null = "insufficient";
   n.resolvedAt = new Date().toISOString();
   plan.log.push({ resolution: "plan:resolved", target: id, at: n.resolvedAt });
   // recompute: dependents of a resolved node stay open; a resolved node's blockers unblock

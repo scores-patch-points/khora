@@ -1,5 +1,17 @@
 # Chorus log — append-only, one entry per lint run
 
+## 2026-10-18 — pay the owed nulls + attribution from the failure (branch `feat/workplan-nulls`, working diff)
+
+fast: 6 files · affected tests 188: 165 pass / 23 fail · law: ok (pre-existing dup-header WARN S17/S96; no P/S citations added)
+
+**Tier 1 FAIL is pre-existing, disclosed:** the red arms are the operator's in-progress falsifier suites (`opencode-stigmergy-*` P1 pointer, `fold-note`, commons) — unrelated to this diff. A stash-diff of the three changed sources shows **zero** new failures (179/25 → 182/22) and the diff's own tests pass: `opencode-workplan-acts.test.mjs` 13/13 (N1/N2), `native/organs/code-form.test.mjs` 2/2 (the callee-blame falsifier goes red without the fix).
+
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Feynman | a numeric constant / a swallowed error | native/organs/code-form.js:125 | false-positive-on-review | the `detail.length < 12` is a bounded capture buffer for stack frames, not a tuned threshold; a frame that does not parse simply falls back to the title |
+| Simon/Chekhov | a real mechanism must not ship unwired | opencode-worknotes.mjs (read lapsed) · opencode-plan.mjs (planResolve) | fixed | the owed nulls are now PAID (a lapsed claim → INS·Figure·INCOMPLETE; a resolution with no evidence → EVA·Figure·insufficient), each pinned by test |
+clean: (no other lens routed)
+
 ## 2026-10-18 — workplan-acts: the plan's resolutions typed to cube phaseposts (branch `feat/draft-standing-and-penelope-prosifier`, working diff)
 
 fast: 7 files · whole root suite 412 tests: 379 pass / 29 fail · law: ok (pre-existing dup-header WARN S17/S96; no P/S citations added by this diff)
