@@ -1224,37 +1224,15 @@ async function handleRequest(req, res) {
         // referents ← the CAST (the reader's admitted beings), relations ← the addressed
         // edges — plus the canonical fields (cast, edges, surprise, vocabulary, primed), so
         // every caller reads through ONE reader: openfold, the fold surface, heimdall.
-        const { readToWeft } = await import("./native/the-fold/read-process.mjs");
-        const { splitSentences } = await import("./native/adapters/text/spans.js");
-        const language = parsed.language ? String(parsed.language) : null;
-        if (language && !/^[a-z]{2,3}(-[A-Za-z0-9]+)*$/.test(language)) { res.writeHead(400, { "content-type": "application/json" }); res.end(JSON.stringify({ error: `unsupported language tag: ${language}` })); return; }
-        const doc = text.slice(0, maxCharacters);
-        // GREENBERG (chorus, 2026-10-18): do NOT silently default the language to English —
-        // that is the exact defect the old door's header names ("it used to be forced to 'en'
-        // here for every document, which switched the reader's own language leg off"). An
-        // undeclared language is reported as null/unreported, and the reader's actual scope is
-        // disclosed: readToWeft (this build) reads with the English priors (grammarPrior) and
-        // does not switch ears per document — a declared limit, not a hidden default.
-        const w = readToWeft(doc, { address: name || "read", category: parsed.category ?? null, language: language ?? undefined });
-        const out = {
-          schema: "EORead@1",
-          reader: "read-process.mjs::readToWeft",
-          name: name || null,
-          language: language ?? null,
-          languageSource: language ? "declared" : "unreported",
-          readerScope: "readToWeft reads with the English priors (pos-eng + morphology-eng) in this build; it does not switch ears per document",
-          chars: doc.length,
-          primed: w.vocabulary?.grammarPrior === true,
-          sentences: splitSentences(doc),
-          referents: (w.cast ?? []).map((c) => ({ surfaces: c.allSurfaces?.length ? c.allSurfaces : [c.surface], routes: ["referent"], grain: null, mentions: c.mentionsAt?.length ?? 0, standing: c.standing ?? null })),
-          relations: (w.edges ?? []).map((e) => ({ participants: [{ surface: e.end1Face ?? e.end1 ?? null }, { surface: e.end2Face ?? e.end2 ?? null }], relation: e.label ?? null, polarity: e.polarity ?? null, scope: { refs: e.refs ?? null, spans: e.spans ?? null }, assertion: e.assertion ?? null })),
-          descriptorBeings: [],
-          surprise: w.surprise ?? null,
-          vocabulary: w.vocabulary ?? null,
-          gaps: w.skipped ? [{ reason: w.skipped }] : [],
-          error: w.error ?? null,
-          ms: Date.now() - t0,
-        };
+        // THE BODY LIVES IN native/the-fold/read-door-canonical.mjs so a test can call it
+        // without a server (the same convention read-door.mjs had for the 6.1 host). It
+        // serves the canonical reader: read-process.mjs::readToWeft. GREENBERG (chorus,
+        // 2026-10-18): the language is never silently defaulted to English — undeclared is
+        // null/unreported, and the reader's scope is disclosed.
+        const { readCanonical } = await import("./native/the-fold/read-door-canonical.mjs");
+        let out;
+        try { out = readCanonical(text, { name, language: parsed.language ?? null, category: parsed.category ?? null, maxCharacters }); }
+        catch (e) { res.writeHead(400, { "content-type": "application/json" }); res.end(JSON.stringify({ error: String(e.message ?? e) })); return; }
         log(`read → ${out.referents.length} referents (cast), ${out.relations.length} edges (canonical), primed ${out.primed}, language ${out.language} (${out.languageSource}), ${Date.now() - t0}ms`);
         res.writeHead(200, { "content-type": "application/json" });
         res.end(JSON.stringify(out));

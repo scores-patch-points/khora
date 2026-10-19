@@ -945,36 +945,23 @@ function workspaceTexts(limitFiles = 300) {
   walk("");
   return out;
 }
-function mechanicalRead(task, documents) {
-  // With a workspace configured, the door reads IT (the codebase the fold is in); otherwise the documents it is handed.
+// ── the document read: THE REAL READING PIPELINE (2026-10-18) ────────────────
+// The door's document read used to be a word-overlap grep over the text's own
+// sentences. It now reads through the ONE reader — native/the-fold/read-process
+// .mjs::readToWeft (whole document, in order, primed from native/priors) — and
+// grounds the turn in what the reader found: the CAST (the beings it admitted)
+// and the ADDRESSED edges. The lexical pass only SELECTS which sources to read;
+// the reading is the reader's. Model-free; the mouth is never consulted.
+let _documentRead = null;
+async function mechanicalRead(task, documents) {
+  if (!_documentRead) _documentRead = await import("./native/the-fold/document-read.mjs");
   const docs = WS ? workspaceTexts() : Array.isArray(documents) && documents.length ? documents : [];
-  const want = wordsOf(task);
-  const now = Date.now();
-  const id = (n) => `$read-${now.toString(36)}-${n.toString(36)}`;
-  const q = String(task ?? "").trim() || "what does this workspace say?";
-  const rows = [{ schema: EOT, id: id(0), role: "plan", title: "the void plan", text: `- ${q}`, giver: "eoreader7:plan", supersedes: [] }];
-  const passages = [];
-  for (const doc of docs) {
-    const text = String(doc?.text ?? "");
-    for (const s of text.split(/(?<=[.!?\n])\s+/).map((x) => x.trim()).filter((x) => x.split(/\s+/).length >= 4)) {
-      const hit = [...wordsOf(s)].filter((w) => want.has(w)).length;
-      if (hit > 0) passages.push({ s, hit, name: doc.name });
-    }
-  }
-  passages.sort((a, b) => b.hit - a.hit);
-  const keep = passages.slice(0, 8);
-  let n = 1;
-  if (keep.length) for (const p of keep) rows.push({ schema: EOT, id: id(n++), role: "part", title: q, text: p.s, giver: `eoreader7:snip ${p.name}`, supersedes: [] });
-  else rows.push({ schema: EOT, id: id(n++), role: "part", title: "No ground", text: "No ground: nothing in this workspace shares a word with the task.", giver: "eoreader7:ground", supersedes: [] });
-  const projection = keep.length
-    ? keep.map((p) => `${p.s}\n\n— ${p.name}`).join("\n\n")
-    : "DISCLOSED UNGROUNDED\n\nNo passage in the workspace shares a word with the task, so nothing here states anything about it.";
-  return { rows, projection };
+  return _documentRead.documentRead(task, docs);
 }
-function startDocumentJob(body) {
+async function startDocumentJob(body) {
   const jobId = String(body?.sessionId || body?.jobId || `hd-${Date.now().toString(36)}`);
-  const { rows, projection } = mechanicalRead(body?.task, body?.documents);
-  jobs.set(jobId, { jobId, rows, projection, status: "complete", satisfaction: { ok: true, basis: "mechanical read of the workspace" } });
+  const { rows, projection } = await mechanicalRead(body?.task, body?.documents);
+  jobs.set(jobId, { jobId, rows, projection, status: "complete", satisfaction: { ok: true, basis: "the canonical reading pipeline (readToWeft)" } });
   return { jobId, status: "complete" };
 }
 
@@ -2005,7 +1992,7 @@ export async function route(req, res, { log = () => {} } = {}) {
     let body = {};
     try { body = JSON.parse((await readBody(req)) || "{}"); } catch { /* answered as an empty job */ }
     res.writeHead(200, { "content-type": "application/json" });
-    res.end(JSON.stringify(startDocumentJob(body)));
+    res.end(JSON.stringify(await startDocumentJob(body)));
     return true;
   }
   if (url.startsWith("/v1/documents/") && req.method === "GET") {
