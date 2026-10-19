@@ -124,6 +124,16 @@ import { cube as cubeEvent, cubeMap } from "./opencode-cube.mjs";
 import * as cube from "./native/kernel/cube.js";
 import { makeStandingCube, cellForFlag } from "./native/the-fold/standing-cube.js";
 import { actOf as workplanActOf } from "./native/organs/workplan-acts.js";
+// THE LANE PASS (opencode-lane.mjs): the reason-gate (II.9) + the language leg
+// on the door's context path. Additive — it classifies the current ask and
+// hands the window a typed <fold-lane> block; it changes no turn and reroutes
+// no model traffic. The heavy parts (the parser, the mechanism list) are warmed
+// OFF the request path below and budgeted per call.
+import { LANE_ON, lanePass, warm as warmLane } from "./opencode-lane.mjs";
+// THE SHAPE CHECK (opencode-shape.mjs): every hunt act declares its cube cell
+// (surf-types.js), checked against the void's declared shape — a wrong-shaped
+// hunt is a typed gap, never a silent miss.
+import { shapeOf, checkShape } from "./opencode-shape.mjs";
 // THE STANDING CUBE (native/the-fold/standing-cube.js): where a reply's claim stands, and which cell
 // a failed claim is owed to. Generated from the cube; read-only here, never a model.
 const STANDING = makeStandingCube({ operators: cube });
@@ -137,6 +147,10 @@ const STATE = process.env.FOLD_OPENCODE_STATE ?? path.join(HERE, "state", "openc
 // THE RELEASE KILL SWITCH — the falsifier's control. FOLD_RELEASE=0 keeps the deposits but disables every
 // mechanical release (arrival / prose / merge / wall), reproducing the pre-release amplification for an A/B.
 const releaseOn = () => process.env.FOLD_RELEASE !== "0";
+// Warm the lane's parser + mechanism list once, off the request path, so the
+// first context turn does not pay the 16 MB parser load. Fire-and-forget; a
+// missing parser is a typed gap on the lane, never a boot failure.
+if (LANE_ON()) warmLane().catch(() => {});
 
 // THE MECHANICAL FOLD — penelope/organs/fold-note.mjs, the shared capacity every fold-suite surface uses (it folds
 // a session's turns to a bounded note: threads + derivation). Reached lazily and failing open: a missing sibling is
@@ -463,6 +477,44 @@ async function onContext(body) {
     const swarmNote = swarmFindingsNote({ task: taskFor(body, String(body.sessionID ?? "")), ask: turn.ask });
     if (swarmNote) { out.swarm = swarmNote; turn.swarm = swarmNote; }
   }
+  // THE LANE: the reason-gate's classification of THIS ask + the language leg's
+  // grounding disclosure, computed once and injected only when it arrives (the
+  // plugin carries no gate logic). Budgeted — a slow first load yields a typed
+  // gap, never a stalled turn. Additive: it changes no turn.
+  if (LANE_ON() && turn.ask.trim()) {
+    const lane = await lanePass({ ask: turn.ask, budgetMs: Number(process.env.FOLD_LANE_MS ?? 800) });
+    if (lane?.block) { out.lane = lane.block; turn.lane = lane.lane ?? null; }
+    else turn.lane = lane?.gap ?? "off";
+    // THE VOID'S SHAPE: a generation ask declares the void's cells (what the
+    // piece owes) and takes the shape the hunt must occupy from the first cell —
+    // the constraint the shape check enforces on every tool call (a wrong-shaped
+    // hunt is a typed gap, never a silent miss). Disclosed; a missing organ is a
+    // typed gap, never a guessed shape.
+    if (lane?.demand) {
+      try {
+        // THE TOPIC IS THE ASK'S SUBJECT PHRASE, never the raw ask — khora's own
+        // topicPhrase (proxy-runner.mjs), the same one the prose pipeline uses.
+        const { topicPhrase } = await import("./proxy-runner.mjs");
+        const { voidCellsFor } = await import("./native/the-fold/document-ledger.js");
+        const topic = topicPhrase(turn.ask);
+        const { cells } = voidCellsFor({ topic, question: turn.ask });
+        if (cells?.length) {
+          // THE SHAPE IS THE FIRST UNMET CELL THAT REQUIRES REACHING. The void's
+          // cells are what the piece owes; the receive cells (NUL — mark the
+          // subject off, name it, kind it) are settled by what is handed over,
+          // not reached for, so the hunt's shape is the first cell whose operator
+          // is a reach op (scout / snip / admit / bind). The shape check holds
+          // every tool call to it.
+          const HUNT_OPS = new Set(["SIG", "SEG", "INS", "CON"]);
+          const need = cells.find((c) => HUNT_OPS.has(c.op)) ?? cells[0];
+          turn.shape = need.op;
+          turn.shapeCell = `${need.op}·${need.grain}`;
+          turn.topic = topic;
+          turn.void = cells.slice(0, 8).map((c) => ({ cell: `${c.op}·${c.grain}`, question: c.question }));
+        }
+      } catch { /* a missing organ is a typed gap */ }
+    }
+  }
   return out;
 }
 
@@ -702,6 +754,16 @@ function onEvent(body) {
     case "session.tool.called": {
       const tool = turn.tools.get(data.id) ?? { name: "?", input: null, ok: null };
       tool.input = parseToolInput(data.input);
+      // THE SHAPE CHECK: type the act's cell from its own declared domicile
+      // (surf-types.js), and check it against the void's shape when one is
+      // declared for this turn. A wrong-shaped hunt rides as a typed gap on the
+      // tool — recorded, never blocking. A producing act (write/edit/run) is
+      // not surf and carries no cell.
+      try {
+        const shape = shapeOf(tool.name);
+        tool.cell = shape?.cell ?? null;
+        if (shape && turn.shape) tool.shape = checkShape({ tool: tool.name, require: turn.shape });
+      } catch { /* the shape table never blocks a turn */ }
       turn.tools.set(data.id, tool);
       try { autoClaim(body.sessionID, turn, tool); } catch { /* a trace is never worth a turn */ }
       try { traceStart(body.sessionID, turn, tool); } catch { /* the log never blocks */ }
@@ -844,7 +906,7 @@ export function audit({ limit = 20 } = {}) {
       address: turn.address,
       model: turn.model,
       steps: turn.steps,
-      tools: [...turn.tools.values()].map((t) => ({ name: t.name, ok: t.ok })),
+      tools: [...turn.tools.values()].map((t) => ({ name: t.name, ok: t.ok, cell: t.cell ?? null, shape: t.shape ?? null })),
       recalled: turn.recalled,
       projectedChars: turn.projectedChars,
       startedAt: turn.startedAt,
@@ -854,6 +916,10 @@ export function audit({ limit = 20 } = {}) {
       title: turn.title,
       archons: turn.archons,
       memory: turn.memory,
+      shape: turn.shape ?? null,
+      shapeCell: turn.shapeCell ?? null,
+      topic: turn.topic ?? null,
+      void: turn.void ?? null,
       prompt: prompts.get(turn.sessionID)?.body ?? null,
     })),
     turns: rows.map((r) => ({
@@ -945,36 +1011,23 @@ function workspaceTexts(limitFiles = 300) {
   walk("");
   return out;
 }
-function mechanicalRead(task, documents) {
-  // With a workspace configured, the door reads IT (the codebase the fold is in); otherwise the documents it is handed.
+// ── the document read: THE REAL READING PIPELINE (2026-10-18) ────────────────
+// The door's document read used to be a word-overlap grep over the text's own
+// sentences. It now reads through the ONE reader — native/the-fold/read-process
+// .mjs::readToWeft (whole document, in order, primed from native/priors) — and
+// grounds the turn in what the reader found: the CAST (the beings it admitted)
+// and the ADDRESSED edges. The lexical pass only SELECTS which sources to read;
+// the reading is the reader's. Model-free; the mouth is never consulted.
+let _documentRead = null;
+async function mechanicalRead(task, documents) {
+  if (!_documentRead) _documentRead = await import("./native/the-fold/document-read.mjs");
   const docs = WS ? workspaceTexts() : Array.isArray(documents) && documents.length ? documents : [];
-  const want = wordsOf(task);
-  const now = Date.now();
-  const id = (n) => `$read-${now.toString(36)}-${n.toString(36)}`;
-  const q = String(task ?? "").trim() || "what does this workspace say?";
-  const rows = [{ schema: EOT, id: id(0), role: "plan", title: "the void plan", text: `- ${q}`, giver: "eoreader7:plan", supersedes: [] }];
-  const passages = [];
-  for (const doc of docs) {
-    const text = String(doc?.text ?? "");
-    for (const s of text.split(/(?<=[.!?\n])\s+/).map((x) => x.trim()).filter((x) => x.split(/\s+/).length >= 4)) {
-      const hit = [...wordsOf(s)].filter((w) => want.has(w)).length;
-      if (hit > 0) passages.push({ s, hit, name: doc.name });
-    }
-  }
-  passages.sort((a, b) => b.hit - a.hit);
-  const keep = passages.slice(0, 8);
-  let n = 1;
-  if (keep.length) for (const p of keep) rows.push({ schema: EOT, id: id(n++), role: "part", title: q, text: p.s, giver: `eoreader7:snip ${p.name}`, supersedes: [] });
-  else rows.push({ schema: EOT, id: id(n++), role: "part", title: "No ground", text: "No ground: nothing in this workspace shares a word with the task.", giver: "eoreader7:ground", supersedes: [] });
-  const projection = keep.length
-    ? keep.map((p) => `${p.s}\n\n— ${p.name}`).join("\n\n")
-    : "DISCLOSED UNGROUNDED\n\nNo passage in the workspace shares a word with the task, so nothing here states anything about it.";
-  return { rows, projection };
+  return _documentRead.documentRead(task, docs);
 }
-function startDocumentJob(body) {
+async function startDocumentJob(body) {
   const jobId = String(body?.sessionId || body?.jobId || `hd-${Date.now().toString(36)}`);
-  const { rows, projection } = mechanicalRead(body?.task, body?.documents);
-  jobs.set(jobId, { jobId, rows, projection, status: "complete", satisfaction: { ok: true, basis: "mechanical read of the workspace" } });
+  const { rows, projection } = await mechanicalRead(body?.task, body?.documents);
+  jobs.set(jobId, { jobId, rows, projection, status: "complete", satisfaction: { ok: true, basis: "the canonical reading pipeline (readToWeft)" } });
   return { jobId, status: "complete" };
 }
 
@@ -1589,7 +1642,7 @@ function onSnip(body) {
   }
   return result;
 }
-function onGround(body) {
+async function onGround(body) {
   const agent = String(body.agent ?? body.sessionID ?? "");
   const task = taskFor(body, agent);
   // RELEASE BY ARRIVAL-IN-PROSE: this answer is an arrival — release every open tension its own words bear on.
@@ -1601,7 +1654,21 @@ function onGround(body) {
   let ledger = [];
   try { ledger = checkAnswer({ turns: turnsOf({ task, universe: universeOf(body) }), text: String(body.text ?? "") }).flags ?? []; } catch { ledger = []; }
   const flags = [...(r.flags ?? []), ...ledger].map((f) => ({ ...f, cell: cellForFlag(f.kind) }));
-  return { ...r, flags, standing: standingFor(flags) };
+  // THE MECHANICAL STEP (opencode-finish.mjs): the finished answer as ONE STEP —
+  // its propositions typed against the ground (MATERIAL @ address vs SELF:MODEL,
+  // paraphrase-invariant), and the settled output when a mechanism outweighed the
+  // draw (the draw kept as `superseded`). SHOWN, never enforced; the second
+  // version the facing renders beside the model's own. Fail-open: a missing step
+  // is a typed gap, never a broken turn.
+  let step = null;
+  if (process.env.FOLD_FINISH !== "0") {
+    try {
+      const { finish } = await import("./opencode-finish.mjs");
+      const f = await finish({ ask: String(body.ask ?? ""), draft: String(body.text ?? ""), material: body.material ?? null });
+      if (f?.ok) step = { output: f.output, superseded: f.superseded, grounded: f.grounded, ground_trace: f.ground_trace, lane: f.lane, disclosure: f.disclosure, eot: f.eot };
+    } catch { /* typed gap */ }
+  }
+  return { ...r, flags, standing: standingFor(flags), ...(step ? { step } : {}) };
 }
 
 // The modality of a file by extension, for the local senses. Text-family is the
@@ -1771,6 +1838,22 @@ function onRecord(body) {
 function onDream(body) { return dreamTask({ task: taskFor(body, String(body.agent ?? body.sessionID ?? "")) }); }
 function onNextVoid(body) { return nextVoid({ task: body.task }); }
 function onReason(body) { return reasonFor({ task: body.task, ask: String(body.ask ?? ""), limit: Number(body.limit) || 6 }); }
+// THE MECHANICAL STEP (opencode-finish.mjs): the model's finished text is one
+// step; this runs the precision race (and, for a generation, the essay fold)
+// over it and returns the OUTPUT, keeping the raw draw as `superseded`. Bounded
+// and fail-open: a slow first load yields a typed gap; the draw still stands,
+// disclosed as un-stepped. Gated by FOLD_FINISH (default on).
+async function onFinish(body) {
+  if (process.env.FOLD_FINISH === "0") return { ok: false, gap: "finish-off" };
+  const budget = Number(process.env.FOLD_FINISH_MS ?? 800);
+  const { finish } = await import("./opencode-finish.mjs");
+  const run = finish({ ask: String(body.ask ?? ""), draft: String(body.draft ?? ""), material: body.material ?? null });
+  const raced = await Promise.race([
+    run.catch(() => ({ ok: false, gap: "finish-error" })),
+    budget > 0 ? new Promise((r) => setTimeout(() => r({ ok: false, gap: "finish-budget" }), budget)) : run,
+  ]);
+  return raced;
+}
 // CHASE: run the DEF->EVA->REC void loop over a workspace. The loop executes
 // the caller's declared testCommand, so this is OFF unless FOLD_REC_EXEC=1 (the
 // same opt-in as the box judge), takes only an absolute existing directory, and
@@ -1866,6 +1949,7 @@ export async function answer(body, opts = {}) {
     case "dream": return onDream(body);
     case "nextVoid": return onNextVoid(body);
     case "reason": return onReason(body);
+    case "finish": return onFinish(body);
     case "prompt": return onPrompt(body);
     case "trail": return onTrail(body);
     case "event": return onEvent(body);
@@ -2005,7 +2089,7 @@ export async function route(req, res, { log = () => {} } = {}) {
     let body = {};
     try { body = JSON.parse((await readBody(req)) || "{}"); } catch { /* answered as an empty job */ }
     res.writeHead(200, { "content-type": "application/json" });
-    res.end(JSON.stringify(startDocumentJob(body)));
+    res.end(JSON.stringify(await startDocumentJob(body)));
     return true;
   }
   if (url.startsWith("/v1/documents/") && req.method === "GET") {

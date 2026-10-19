@@ -91,7 +91,6 @@ import { antistrauss } from "./native/the-fold/antistrauss.mjs";
 // package.json (added alongside this wiring) rather than left as a
 // disclosed absence: `checkArithmetic`/`checkShaped`/`checkComparison` all
 // need an injected engine, and until now this proxy had none to give them.
-import { checkQuantity } from "./native/the-fold/arithmetic.js";
 import { create, all } from "mathjs";
 const math = create(all);
 // Knights-and-knaves: a closed, enumerable boolean-consistency puzzle,
@@ -100,14 +99,17 @@ const math = create(all);
 // stalled mid-puzzle and, where it did finish, applied Knight/Knave
 // polarity backwards. Same shared-pipeline reasoning as `checkQuantity`
 // above — one fix here reaches every caller of this endpoint.
-import { checkLogicPuzzle } from "./native/the-fold/logic-puzzle.js";
+
 // A second, unrelated puzzle kind — attribute assignment (the zebra-puzzle
 // family), no truth-tellers, no self-referential statements — sharing
 // reasoning-core.js's solver with logic-puzzle.js and changing nothing
 // there. Proves the search itself is general, not tuned to one puzzle.
-import { checkPreferencePuzzle } from "./native/the-fold/preference-puzzle.js";
+
 import { runMechanical, precisionWinner, CONCLUSION } from "./native/organs/precision-race.js";
 import { classifyTurn } from "./native/organs/reason-gate.js";
+// The ONE mechanism list (native/organs/mechanisms.js) — shared with the
+// opencode door's lane pass, so the two can never drift (reason-gate's law).
+import { buildMechanisms } from "./native/organs/mechanisms.js";
 // Archons on a Matrix homeserver (the-fold/archon-hyphae.mjs): one account +
 // one EOT room per worktree-archon, the operator always an admin of every
 // room, and the same record/print/list verbs reachable from THIS surface —
@@ -131,35 +133,7 @@ const archonUnavailable = () => ARCHON_GAP;
 // a gap, or leaves it alone (native/organs/precision-race.js). It runs BESIDE
 // the normal turn, never instead of it — the model's draft is a prediction,
 // a settled mechanism is an observation, and the observation wins.
-const MECHANISMS = [
-  {
-    name: "quantity",
-    run(task) {
-      const f = checkQuantity(task, { math, now: new Date() });
-      if (!f) return null;
-      if (f.gap) return { concluded: false, gap: `${f.expression} — ${f.gap}` };
-      return { concluded: true, kind: CONCLUSION.BOUND, text: f.display, detail: { kind: f.kind ?? "arithmetic", op: f.op ?? null, expression: f.expression } };
-    },
-  },
-  {
-    name: "logic-puzzle",
-    run(task) {
-      const f = checkLogicPuzzle(task);
-      if (!f) return null;
-      const kind = f.valid.length === 1 ? CONCLUSION.BOUND : f.valid.length === 0 ? CONCLUSION.CONTRADICTED : CONCLUSION.CONTESTED;
-      return { concluded: true, kind, text: f.display, detail: { valid: f.valid, external: f.external, totalTried: f.totalTried } };
-    },
-  },
-  {
-    name: "preference-puzzle",
-    run(task) {
-      const f = checkPreferencePuzzle(task);
-      if (!f) return null;
-      const kind = f.valid.length === 1 ? CONCLUSION.BOUND : f.valid.length === 0 ? CONCLUSION.CONTRADICTED : CONCLUSION.CONTESTED;
-      return { concluded: true, kind, text: f.display, detail: { valid: f.valid, external: f.external, totalTried: f.totalTried } };
-    },
-  },
-];
+const MECHANISMS = buildMechanisms({ math });
 
 function raceReading(race) {
   return {
@@ -1215,14 +1189,25 @@ async function handleRequest(req, res) {
       }
       const t0 = Date.now();
       try {
-        // THE READING DOOR — khora perceives, model-free; the mouth is never consulted (GL-RR-04/05; a read is not a
-        // draw). The body lives in native/the-fold/read-door.mjs so a test can call it without a server. A caller may
-        // DECLARE `language` ("es", "zh-Hans"); otherwise the reader hears it from the text. It used to be forced to
-        // "en" here for every document, which switched the reader's own language leg off.
-        const { readDoor, declaredLanguage } = await import("./native/the-fold/read-door.mjs");
-        try { declaredLanguage(parsed.language); } catch (e) { res.writeHead(400, { "content-type": "application/json" }); res.end(JSON.stringify({ error: String(e.message) })); return; }
-        const out = await readDoor({ text, name, language: parsed.language ?? null, maxCharacters });
-        log(`read → ${out.referents.length} referents, ${out.relations.length} relations, language ${out.language ?? "none"} (${out.languageSource}), ${Date.now() - t0}ms`);
+        // THE REAL READING PIPELINE (2026-10-18). The door serves the CANONICAL reader:
+        // native/the-fold/read-process.mjs::readToWeft — reader-bundle.js::engineRelationsFor,
+        // one document, WHOLE, in order, PRIMED from native/priors (grammarPrior === true
+        // proves it; see native/docs/THE-READING-PIPELINE.md). It supersedes the 6.1 legacy
+        // host (read-door.mjs::readDoor → corpus-session.js, chunked) that this door ran
+        // until now. The WeftEntry@4 is served in the door's own EORead@1 shape —
+        // referents ← the CAST (the reader's admitted beings), relations ← the addressed
+        // edges — plus the canonical fields (cast, edges, surprise, vocabulary, primed), so
+        // every caller reads through ONE reader: openfold, the fold surface, heimdall.
+        // THE BODY LIVES IN native/the-fold/read-door-canonical.mjs so a test can call it
+        // without a server (the same convention read-door.mjs had for the 6.1 host). It
+        // serves the canonical reader: read-process.mjs::readToWeft. GREENBERG (chorus,
+        // 2026-10-18): the language is never silently defaulted to English — undeclared is
+        // null/unreported, and the reader's scope is disclosed.
+        const { readCanonical } = await import("./native/the-fold/read-door-canonical.mjs");
+        let out;
+        try { out = readCanonical(text, { name, language: parsed.language ?? null, category: parsed.category ?? null, maxCharacters }); }
+        catch (e) { res.writeHead(400, { "content-type": "application/json" }); res.end(JSON.stringify({ error: String(e.message ?? e) })); return; }
+        log(`read → ${out.referents.length} referents (cast), ${out.relations.length} edges (canonical), primed ${out.primed}, language ${out.language} (${out.languageSource}), ${Date.now() - t0}ms`);
         res.writeHead(200, { "content-type": "application/json" });
         res.end(JSON.stringify(out));
       } catch (e) {

@@ -60,6 +60,11 @@ let _cache = null;
 function loadPriors() {
   if (_cache) return _cache;
   const posPrior = readJson(path.join(PRIORS, "pos-eng.json"), null);
+  // The received class lexicon (POSLexicon@1: UniMorph N/V + the declared legal-register closed class)
+  // rides on the prior; classifyWord consults it only where the treebank has no entry. Data-gated:
+  // absent, the prior is byte-identical to before.
+  const posLexicon = readJson(path.join(PRIORS, "pos-eng-lexicon.json"), null);
+  if (posPrior && posLexicon) posPrior.lexicon = posLexicon;
   const morphRaw = readJson(path.join(PRIORS, "morphology-eng.json"), null);
   const unimorphRaw = readJson(path.join(HERE, "..", "eval", "the-fold", "fixtures", "unimorph-morphology-prior.json"), null);
   const morph = morphRaw ? morphologyFromPrior(morphRaw) : null;

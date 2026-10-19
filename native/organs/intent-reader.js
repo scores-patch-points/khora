@@ -115,7 +115,11 @@ function readOne(rec) {
     rows.some((r) => r.upos === "PRON" && r.feats.Person === "2" && (r.deprel === "nsubj" || r.deprel?.startsWith("nsubj:"))) &&
     root.upos === "VERB";
   const hasQuestionWord = rows.some((r) => isInterrogativePron(r) && (r.deprel === "nsubj" || r.deprel === "root" || r.deprel === "obj" || r.head === root.id || r.id === root.id));
-  const endsQuestion = /[?؟؟؟؟؟]?\s*$/.test(text) && (root.upos === "AUX" || root.upos === "VERB" || root.upos === "NOUN" || root.upos === "ADJ");
+  // A QUESTION MARK AT THE END — the class is NOT optional: `/[?]?/` matches
+  // the empty string and so reads EVERY ask as a question (the latent bug this
+  // line carried while the function was unreferenced). `structure.endsQuestion`
+  // above uses the same shape correctly; this now matches it.
+  const endsQuestion = /[?؟؟؟؟؟]\s*$/.test(text) && (root.upos === "AUX" || root.upos === "VERB" || root.upos === "NOUN" || root.upos === "ADJ");
   const auxInterrogative = rows.some((r) => r.upos === "AUX" && (r.feats.Mood === "Int" || r.feats.VerbForm === "Fin") && (r.deprel === "aux" || r.deprel === "cop" || r.head === root.id));
   const interrogative = !howAreYou && (hasQuestionWord || endsQuestion || auxInterrogative);
 

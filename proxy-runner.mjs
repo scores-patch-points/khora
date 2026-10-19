@@ -27,7 +27,11 @@ import { createRecursiveReader } from "./native/kernel/reading.js";
 import { reconstruct } from "./native/kernel/fold.js";
 import { createHyperlexicon, admitHyperlexiconCandidates, giveHyperlexiconAffordance } from "./native/kernel/hyperlexicon.js";
 import { createRelationCompositionLedger, acquireCompositionCandidates } from "./native/kernel/relation-composition.js";
-import { createSession as createCorpusSession, admitChunked } from "./native/the-fold/corpus-session.js";
+// THE CANONICAL SESSION READING (2026-10-18). The session used to accumulate its reading through the 6.1 host
+// (corpus-session.js — superseded by native/docs/THE-READING-PIPELINE.md). It now reads through the ONE reader:
+// session-read.js → read-process.mjs::readToWeft (whole document, in order, primed). Same surface — `documents`
+// (a Map) and `{deduped}` — so the call sites below are unchanged.
+import { createSessionRead as createCorpusSession, admitText as admitChunked } from "./native/the-fold/session-read.js";
 // surfTask's own absolute address ladder (2026-09-23, user direction: "rip
 // out all the surf thats not happening in eoreader7... the fold is just a
 // surface") — native/organs/source.js's chunkSource+retrieve replaces the
