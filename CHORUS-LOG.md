@@ -1,5 +1,17 @@
 # Chorus log — append-only, one entry per lint run
 
+## 2026-10-18 — the operator is derived, not hand-set (branch `feat/act-algebra`, working diff)
+
+fast: 3 files · affected tests 16 pass / 0 fail · law: ok (pre-existing dup-header WARN S17/S96)
+
+**The improvement:** the mapping was hand-set (`{op, grain}` per resolution). Now each resolution declares the ACT it is (its `effect` — measure · sign · create · separate · relate · compose · declare · judge · reframe), the operator is DERIVED through a tested nine-effect algebra, and every resolution is anchored to the real `file:function` that lands it.
+
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Marshall | does the cited entry say what the diff claims | opencode-workplan-acts.test.mjs:186 | fixed | the test labels were `S1/S2/S3`, which read as READING-SPEC §S citations; renamed `ALG1/ALG2/ALG3` so the chorus does not associate them |
+| LeviStrauss | a piece reclaimed | native/organs/workplan-acts.js:75 | noted | the `effect` names the act-algebra the cube's own theory already held; the `source` anchors each move to the function that produces it |
+clean: Alexander (the README row composes; no seam)
+
 ## 2026-10-18 — pay the owed nulls + attribution from the failure (branch `feat/workplan-nulls`, working diff)
 
 fast: 6 files · affected tests 188: 165 pass / 23 fail · law: ok (pre-existing dup-header WARN S17/S96; no P/S citations added)

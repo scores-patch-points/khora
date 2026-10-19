@@ -19,6 +19,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 // point the medium at a scratch dir BEFORE importing it
 const ROOT = fs.mkdtempSync(path.join(os.tmpdir(), "wpa-"));
@@ -179,6 +180,37 @@ test("N2 THE OWED NULL IS PAID: a plan resolution with no evidence carries EVA·
   const b = plan.planCreate({ task, goal: "h" });
   plan.planResolve({ task, id: b.id, evidence: "tests green" });
   assert.ok(!plan.planView({ task }).nodes.find((n) => n.id === b.id).null, "a witnessed resolution carried a null it does not owe");
+});
+
+// ── S: the operator is DERIVED, not hand-set ─────────────────────────────────────────────────────
+test("ALG1 the act-algebra is total and bijective over the cube's nine operators", () => {
+  const ops = Object.values(A.EFFECT_OP);
+  assert.equal(ops.length, 9, "the algebra is not nine effects");
+  assert.equal(new Set(ops).size, 9, "two effects share an operator");
+  const cubeOps = new Set(cube.algebraAddresses().map((c) => c.op));
+  assert.equal(cubeOps.size, 9);
+  for (const op of ops) assert.ok(cubeOps.has(op), `${op} is not a cube operator`);
+  for (const effect of Object.keys(A.EFFECT_OP)) assert.equal(A.opOfEffect(effect), A.EFFECT_OP[effect]);
+});
+
+test("ALG2 FALSIFIER: no resolution carries a hand-set operator — it is derived from its effect", () => {
+  for (const [name, r] of Object.entries(A.RESOLUTIONS)) {
+    assert.equal(r.op, undefined, `${name} still hand-sets op`);
+    assert.ok(A.EFFECT_OP[r.effect], `${name}'s effect "${r.effect}" is not in the algebra`);
+    assert.equal(A.actOf(name).op, A.EFFECT_OP[r.effect], `${name} derives the wrong operator`);
+  }
+  assert.equal(A.opOfEffect("levitate"), null, "an unknown effect was not a gap");
+  assert.equal(A.actOf("mark:claim").effect, "create");
+});
+
+test("ALG3 every resolution is ANCHORED to a real function that exists in the tree", () => {
+  const HERE = path.dirname(fileURLToPath(import.meta.url));
+  for (const [name, r] of Object.entries(A.RESOLUTIONS)) {
+    assert.ok(r.source?.file && r.source?.fn, `${name} names no source`);
+    const f = path.join(HERE, r.source.file);
+    assert.ok(fs.existsSync(f), `${name}'s source file ${r.source.file} does not exist`);
+    assert.match(fs.readFileSync(f, "utf8"), new RegExp(`function\\s+${r.source.fn}\\b|\\b${r.source.fn}\\s*[=(]`), `${name}'s source ${r.source.file}:${r.source.fn} is not in the file`);
+  }
 });
 
 test("cleanup", () => fs.rmSync(ROOT, { recursive: true, force: true }));
