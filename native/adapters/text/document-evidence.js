@@ -48,7 +48,7 @@ const ABBR = /((?:[A-Z][\p{L}&'’.\-]*\s+(?:(?:of|and|for|the|in|on|at|&)\s+)*)
 // word, not a name; a measured control on Metro contracts showed exactly that failure. Callers may
 // pass their own (`orgSuffixes`, `titles` — e.g. the name-parts prior's titles) to override.
 const ORG_SUFFIXES = new Set("inc incorporated llc llp lp ltd limited corp corporation co company plc gmbh".split(" "));
-const TITLES = new Set("mr mrs ms miss mx dr prof professor rev reverend sir madam madame judge justice mayor governor senator councilmember councilman councilwoman sheriff".split(" "));
+const TITLES = new Set("mr mrs ms miss mx dr prof professor rev reverend sir madam madame judge mayor governor senator councilmember councilman councilwoman sheriff".split(" "));
 const APPOSITION = new RegExp(`((?:[A-Z][\\p{L}&'’.\\-]*\\s+){0,3}[A-Z][\\p{L}&'’\\-]*),?\\s+(?:a|an)\\s+(?:[\\p{L}]+\\s+){0,3}?(?:corporation|company|partnership|nonprofit|non-profit|organization|agency|department|firm|entity|association|trust|authority|university)\\b`, "gu");
 
 const isCapToken = (t) => /^\p{Lu}[\p{L}'’]*$/u.test(t) || /^\p{Lu}{2,}[\p{L}\p{N}&.\-]*$/u.test(t);
@@ -177,7 +177,8 @@ const findNameRuns = (src, { titles, orgSuffixes }) => {
     }
     if (titles.has(low) && i + 1 < toks.length && sameLine(t, toks[i + 1]) && isCapToken(toks[i + 1].bare) && !titles.has(toks[i + 1].bare.toLowerCase())) {
       let b = i + 1;
-      while (b + 1 < toks.length && b - i < 3 && isCapToken(toks[b + 1].bare) && sameLine(toks[b], toks[b + 1])) b++;
+      const caps = (x) => /^\p{Lu}{2,}[\p{Lu}\p{N}'’&.\-]*$/u.test(x); // ALLCAPS vs Capitalised: a run keeps one style
+      while (b + 1 < toks.length && b - i < 3 && isCapToken(toks[b + 1].bare) && caps(toks[b + 1].bare) === caps(toks[i + 1].bare) && sameLine(toks[b], toks[b + 1])) b++;
       runs.push({ kind: "person", via: `honorific “${t.bare}”`, at: [toks[i + 1].start, toks[b].end], text: src.slice(toks[i + 1].start, toks[b].end), members: toks.slice(i + 1, b + 1).map((x) => x.bare) });
     }
   }

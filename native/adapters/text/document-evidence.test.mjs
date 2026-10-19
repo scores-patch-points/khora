@@ -180,3 +180,10 @@ test("a defined term that is a word of its own definiens is a common-noun short 
   const by = Object.fromEntries(defs.map((d) => [d.term, d]));
   assert.equal(by.Fund.kind, "short-form");
 });
+
+test("'Justice' is a common noun, not an honorific; a person run keeps one capitalisation style", () => {
+  const doc = readDocumentEvidence("the Criminal Justice Space here. Attn: Mr. Fred Royals DATE THEREOF.", { classify: () => ({ found: false, candidates: [] }) });
+  assert.equal(doc.nameRuns.some((r) => /Justice/.test(r.via)), false);
+  const person = doc.nameRuns.find((r) => r.kind === "person");
+  assert.equal(person.text, "Fred Royals");
+});
