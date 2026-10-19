@@ -1215,14 +1215,47 @@ async function handleRequest(req, res) {
       }
       const t0 = Date.now();
       try {
-        // THE READING DOOR — khora perceives, model-free; the mouth is never consulted (GL-RR-04/05; a read is not a
-        // draw). The body lives in native/the-fold/read-door.mjs so a test can call it without a server. A caller may
-        // DECLARE `language` ("es", "zh-Hans"); otherwise the reader hears it from the text. It used to be forced to
-        // "en" here for every document, which switched the reader's own language leg off.
-        const { readDoor, declaredLanguage } = await import("./native/the-fold/read-door.mjs");
-        try { declaredLanguage(parsed.language); } catch (e) { res.writeHead(400, { "content-type": "application/json" }); res.end(JSON.stringify({ error: String(e.message) })); return; }
-        const out = await readDoor({ text, name, language: parsed.language ?? null, maxCharacters });
-        log(`read → ${out.referents.length} referents, ${out.relations.length} relations, language ${out.language ?? "none"} (${out.languageSource}), ${Date.now() - t0}ms`);
+        // THE REAL READING PIPELINE (2026-10-18). The door serves the CANONICAL reader:
+        // native/the-fold/read-process.mjs::readToWeft — reader-bundle.js::engineRelationsFor,
+        // one document, WHOLE, in order, PRIMED from native/priors (grammarPrior === true
+        // proves it; see native/docs/THE-READING-PIPELINE.md). It supersedes the 6.1 legacy
+        // host (read-door.mjs::readDoor → corpus-session.js, chunked) that this door ran
+        // until now. The WeftEntry@4 is served in the door's own EORead@1 shape —
+        // referents ← the CAST (the reader's admitted beings), relations ← the addressed
+        // edges — plus the canonical fields (cast, edges, surprise, vocabulary, primed), so
+        // every caller reads through ONE reader: openfold, the fold surface, heimdall.
+        const { readToWeft } = await import("./native/the-fold/read-process.mjs");
+        const { splitSentences } = await import("./native/adapters/text/spans.js");
+        const language = parsed.language ? String(parsed.language) : null;
+        if (language && !/^[a-z]{2,3}(-[A-Za-z0-9]+)*$/.test(language)) { res.writeHead(400, { "content-type": "application/json" }); res.end(JSON.stringify({ error: `unsupported language tag: ${language}` })); return; }
+        const doc = text.slice(0, maxCharacters);
+        // GREENBERG (chorus, 2026-10-18): do NOT silently default the language to English —
+        // that is the exact defect the old door's header names ("it used to be forced to 'en'
+        // here for every document, which switched the reader's own language leg off"). An
+        // undeclared language is reported as null/unreported, and the reader's actual scope is
+        // disclosed: readToWeft (this build) reads with the English priors (grammarPrior) and
+        // does not switch ears per document — a declared limit, not a hidden default.
+        const w = readToWeft(doc, { address: name || "read", category: parsed.category ?? null, language: language ?? undefined });
+        const out = {
+          schema: "EORead@1",
+          reader: "read-process.mjs::readToWeft",
+          name: name || null,
+          language: language ?? null,
+          languageSource: language ? "declared" : "unreported",
+          readerScope: "readToWeft reads with the English priors (pos-eng + morphology-eng) in this build; it does not switch ears per document",
+          chars: doc.length,
+          primed: w.vocabulary?.grammarPrior === true,
+          sentences: splitSentences(doc),
+          referents: (w.cast ?? []).map((c) => ({ surfaces: c.allSurfaces?.length ? c.allSurfaces : [c.surface], routes: ["referent"], grain: null, mentions: c.mentionsAt?.length ?? 0, standing: c.standing ?? null })),
+          relations: (w.edges ?? []).map((e) => ({ participants: [{ surface: e.end1Face ?? e.end1 ?? null }, { surface: e.end2Face ?? e.end2 ?? null }], relation: e.label ?? null, polarity: e.polarity ?? null, scope: { refs: e.refs ?? null, spans: e.spans ?? null }, assertion: e.assertion ?? null })),
+          descriptorBeings: [],
+          surprise: w.surprise ?? null,
+          vocabulary: w.vocabulary ?? null,
+          gaps: w.skipped ? [{ reason: w.skipped }] : [],
+          error: w.error ?? null,
+          ms: Date.now() - t0,
+        };
+        log(`read → ${out.referents.length} referents (cast), ${out.relations.length} edges (canonical), primed ${out.primed}, language ${out.language} (${out.languageSource}), ${Date.now() - t0}ms`);
         res.writeHead(200, { "content-type": "application/json" });
         res.end(JSON.stringify(out));
       } catch (e) {
