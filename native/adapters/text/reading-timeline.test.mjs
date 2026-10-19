@@ -170,8 +170,8 @@ test("a snapshot's cursor into the log lets the fold be taken at any frontier", 
 // ── many sources: provenance and the ontological split ───────────────────────────────────────────────────────
 const sameYes = { prepare: () => () => ({ same: true, verdict: "bound", forWhom: null, basis: "decided by the test: the mechanics under test are the link, not the identity" }) };
 const cdeps = { ...deps, namesCorefer, genericTokens, sameBeing: sameYes };
-const REPORT = "Captain Edward Smith ordered the boats lowered. Captain Edward Smith spoke to Ismay on the bridge. Ismay asked the Captain about the ice. Captain Edward Smith went down with the ship.";
-const SCRIPT = "Captain Edward Smith stood on the bridge. Jack Dawson climbed to the rail. Captain Edward Smith ordered the boats lowered. Jack Dawson held the girl.";
+const REPORT = "Captain Smith ordered the boats lowered. Captain Smith spoke to Ismay on the bridge. Ismay asked the Captain about the ice. Captain Smith went down with the ship.";
+const SCRIPT = "Captain Smith stood on the bridge. Jack Dawson climbed to the rail. Captain Smith ordered the boats lowered. Jack Dawson held the girl.";
 const MEMOIR = "Beesley saw Captain Smith on the bridge. Beesley wrote that Captain Smith ordered the boats lowered.";
 
 test("every event carries the source and register it was read in", () => {
