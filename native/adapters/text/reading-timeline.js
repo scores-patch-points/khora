@@ -99,7 +99,7 @@ export function buildReadingTimeline(text, deps, opts = {}) {
     for (const w of words) if (w.si < f) tokens.set(w.s, { w: w.w, s: w.s, e: w.e, ...labelOf(classify(w.w)) });
     const coref = corefOf(sents.slice(0, f).map((s) => ({ text: s.text, offset: s.offset, order: s.n - 1 })), prefixText, deps, { minActivation, minMargin });
     let claims = [];
-    if (readClaims) { try { claims = readClaims(prefixText).map((c) => ({ key: `${c.label}|${c.span ?? ""}|${c.s ?? ""}`, end1: c.end1, label: c.label, end2: c.end2, polarity: c.polarity ?? "+", s: c.s ?? null, e: c.e ?? null, verdict: c.verdict ?? null, raw: c })); } catch { claims = []; } }
+    if (readClaims) { try { claims = readClaims(prefixText).map((c) => ({ key: `${c.label}|${c.span ?? ""}|${c.s ?? ""}`, end1: c.end1, label: c.label, end2: c.end2, polarity: c.polarity ?? "+", located: c.located !== false, s: c.located === false ? null : (c.s ?? null), e: c.located === false ? null : (c.e ?? null), verdict: c.verdict ?? null, raw: c })); } catch { claims = []; } }
     snaps.push({ frontier: f, tokens, mentions: coref.mentions, referents: coref.referents, claims });
   }
 
@@ -126,6 +126,14 @@ export function buildReadingTimeline(text, deps, opts = {}) {
       if (m.kind !== "name" || ma.has(m.s)) continue;
       const inner = a.mentions.filter((p) => p.kind === "name" && p.s >= m.s && p.e <= m.e && p.text !== m.text);
       if (inner.length) revisions[i].push({ kind: "referent", s: m.s, e: m.e, text: m.text, from: inner.map((p) => p.text).join(" + "), to: m.text, because: { sentence: b.frontier } });
+    }
+    // a referent the reading had established and now no longer does: retracted by what was just read
+    const namesB = new Set(b.referents.map((r) => r.name));
+    for (const r of a.referents) {
+      if (namesB.has(r.name)) continue;
+      const absorbed = b.referents.find((x) => x.surfaces.some((sf) => r.surfaces.includes(sf)));
+      if (absorbed) continue; // renamed or merged — reported as a referent revision on its mentions
+      revisions[i].push({ kind: "referent-retracted", s: null, e: null, text: r.name, from: `${r.name} ×${r.mentions}`, to: "no longer established", because: { sentence: b.frontier, why: "no longer admitted by the engine at this length — its admission floor is derived from the text read so far, so a longer text can drop a referent a shorter one admitted" } });
     }
     const ca = new Map(a.claims.map((c) => [c.key, c]));
     for (const c of b.claims) {
