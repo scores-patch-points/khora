@@ -41,6 +41,7 @@ const fold = (s) => {
 };
 const compiled = Object.fromEntries(Object.entries(DICT.languages).map(([lang, d]) => [lang, { script: d.script, kinds: Object.fromEntries(Object.entries(d).filter(([k]) => k !== "script").map(([k, v]) => [k, v.map(fold)])) }]));
 const KIND_NAMES = ["invented", "invent", "genre", "account", "know", "seek", "compute", "arith", "fresh", "view", "greet", "work", "wh", "ask"];
+const TOPIC_KINDS = [...KIND_NAMES, "frame"];   // the frame is stripped from a topic but is no intent: it never routes
 
 const segmenter = new Intl.Segmenter(undefined, { granularity: "word" });
 const tokensOf = (folded) => [...segmenter.segment(folded)].filter((s) => s.isWordLike).map((s) => s.segment);
@@ -164,7 +165,63 @@ async function englishFacts(text) {
   };
 }
 
-export async function routeOf(ask, { history = [] } = {}) {
+// ── the topic: what the ask is about, once the request's frame is taken out ────────────────────────────────────────────
+// A search or an account is run on the TOPIC ("dolphins"), never on the request ("write me an essay about dolphins": that finds essay mills). The topic is the
+// ask's content words: the words that are not an intent kind (write, essay, explain, find are the request) and not closed-class or a verb, where the class is read
+// from the language's own part-of-speech prior (UD gold, pos-<language>.json: the dominant class of the form) and, in English, from the parser. A form the prior has not
+// seen is kept: an unknown word is more likely the subject than the frame.
+const POS_FILE = { en: "eng", es: "spa", fr: "fra", de: "deu", ru: "rus", zh: "cmn-hans", ja: "jpn", ar: "arb" };
+const posPriors = new Map();
+function posPrior(lang) {
+  if (!posPriors.has(lang)) {
+    let forms = null;
+    try { forms = JSON.parse(fs.readFileSync(new URL(`./native/priors/pos-${POS_FILE[lang]}.json`, import.meta.url), "utf8")).forms; } catch { /* no prior: every form is kept */ }
+    posPriors.set(lang, forms);
+  }
+  return posPriors.get(lang);
+}
+const DROP_CLASSES = new Set(["ADP", "DET", "PRON", "AUX", "SCONJ", "CCONJ", "PART", "INTJ", "PUNCT", "VERB", "SYM"]);
+function classOf(lang, token) {
+  const row = posPrior(lang)?.[token];
+  if (!row) return null;
+  return Object.entries(row).sort((a, b) => b[1] - a[1])[0][0];
+}
+export async function topicOf(ask, { language = null } = {}) {
+  const text = String(ask ?? "").trim();
+  if (!text) return "";
+  const lang = language ?? languageOf(text) ?? "en";
+  const d = compiled[lang];
+  const intentToken = (tok) => d && TOPIC_KINDS.some((k) => (d.kinds[k] ?? []).some((surface) => !surface.includes(" ") && (surface.endsWith("*") ? tok.startsWith(surface.slice(0, -1)) : tok === surface)));
+  if (lang === "en") {
+    const en = await englishFacts(text);
+    // the parser's content words, and a word the parser took for a verb that the language's own prior knows as a noun ("earthquakes" after "what causes")
+    if (en) return en.rows.filter((r) => (["NOUN", "PROPN", "ADJ", "NUM"].includes(r.upos) || (r.upos === "VERB" && ["NOUN", "PROPN"].includes(classOf("en", r.form.toLowerCase())))) && !intentToken(fold(r.form))).map((r) => r.form).join(" ");
+  }
+  let work = text;
+  if (d?.script === "unspaced" || lang === "ar") {
+    const folded = fold(text);
+    for (const kind of TOPIC_KINDS) for (const surface of d.kinds[kind] ?? []) if (surface.length > 0) work = fold(work).split(surface).join(" ");
+    work = fold(work);
+  }
+  const out = [];
+  for (const seg of segmenter.segment(work)) {
+    if (!seg.isWordLike) continue;
+    const f = fold(seg.segment);
+    if (d?.script !== "unspaced" && lang !== "ar" && intentToken(f)) continue;
+    if ([...seg.segment].length === 1 && isLetter(seg.segment) && seg.segment.codePointAt(0) < 0x4e00) continue;   // a lone particle or clitic, not a han character
+    const cls = classOf(lang, f) ?? classOf(lang, seg.segment.toLowerCase());
+    if (cls && DROP_CLASSES.has(cls)) continue;
+    out.push(seg.segment);
+  }
+  return out.join(" ");
+}
+
+export async function routeOf(ask, opts = {}) {
+  const v = await decide(ask, opts);
+  return v.research ? { ...v, topic: await topicOf(ask, { language: v.language === "undecided" ? null : v.language }) } : v;
+}
+
+async function decide(ask, { history = [] } = {}) {
   const text = String(ask ?? "").trim();
   if (!text) return { gap: "empty-ask", detail: "no ask to route" };
   const lang = languageOf(text);

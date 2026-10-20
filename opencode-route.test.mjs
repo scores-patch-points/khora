@@ -45,3 +45,14 @@ test("ROUTER: an ask in a language the dictionary does not cover is a typed gap,
   assert.ok(r.gap || r.kind, "returns something typed");
   if (r.gap) assert.ok(r.detail.length > 0);
 });
+
+test("ROUTER: a research ask carries its topic, the request's frame taken out, in each language", async () => {
+  const want = { "write me an essay about dolphins": "dolphins", "escríbeme un ensayo sobre los delfines": "delfines", "écris-moi un essai sur les dauphins": "dauphins", "给我写一篇关于海豚的文章": "海豚", "イルカについてのエッセイを書いて": "イルカ" };
+  for (const [ask, topic] of Object.entries(want)) {
+    const r = await routeOf(ask);
+    assert.equal(r.research, true);
+    assert.ok(r.topic.includes(topic), `${ask} -> ${r.topic}`);
+    assert.ok(!r.topic.toLowerCase().includes("essay") && !r.topic.includes("ensayo") && !r.topic.includes("essai"), `${ask} -> ${r.topic}`);
+  }
+  assert.equal((await routeOf("write a poem about autumn")).topic, undefined);   // no research, no topic
+});
