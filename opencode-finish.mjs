@@ -35,6 +35,9 @@ import { holographType, groundFacts } from "./native/organs/output-holograph.js"
 import { splitSentences } from "./native/adapters/text/spans.js";
 import { laneFor, laneBlock } from "./opencode-lane.mjs";
 import { loadEotParser } from "./native/the-fold/eot-notation.js";
+import { proseUnits, judgeAll, symbolUses, resolveSymbols, kindOf, restsOn } from "./opencode-profile.mjs";
+import { janusPass } from "./opencode-janus.mjs";
+import { isSummary, derive, leftOut } from "./opencode-summary.mjs";
 
 let _mech = null;
 async function mechanisms() {
@@ -99,9 +102,12 @@ async function factsFromMaterial(material, source) {
   }
 }
 
-async function factsOf({ ground = null, notes = null, material = null } = {}) {
+async function factsOf({ ground = null, notes = null, material = null, passages = [] } = {}) {
   if (Array.isArray(ground) && ground.length) return groundFacts(ground);
   if (Array.isArray(notes) && notes.length) return groundFacts(notes);
+  // Each labelled passage is read on its own, so a fact's address is the passage's name and the offset inside it
+  // ("mat.txt#42"), never an offset into the joined material.
+  if (passages.length) return (await Promise.all(passages.map(async (p) => groundFacts(await factsFromMaterial(p.text, p.name))))).flat();
   if (material) return groundFacts(await factsFromMaterial(material, "material"));
   return [];
 }
@@ -119,7 +125,33 @@ async function factsOf({ ground = null, notes = null, material = null } = {}) {
  *  A sentence with neither is SELF:MODEL — the mouth's own, named, never
  *  laundered. The output text is NOT rewritten; the ground is what is created.
  */
-async function groundDraw(draw, { material, facts }) {
+/** THE SOURCE PROPOSITIONS a grounded sentence rests on, LOCATED not generated: the passage sentences whose beings
+ *  (the material's own referents) the draw sentence names. Each is the passage's VERBATIM slice with offsets
+ *  (fold-chat-provenance.js `locate`'s rule: what is shown is the source's bytes, never a model's copy). */
+/** The passage's own slice (verbatim) for a located sentence. */
+const located = (passage, start, end) => ({ passage: passage.name, start, end, text: passage.text.slice(start, end) });
+
+function sourcesFor(text, beings, R, passages, max = 2) {
+  if (!R || !passages.length) return [];
+  const want = R.resolveText(text);
+  if (!want.size) return [];
+  const found = [];
+  passages.forEach((passage, pi) => {
+    let at = 0;
+    for (const raw of splitSentences(passage.text)) {
+      const sent = String(typeof raw === "string" ? raw : raw?.text ?? "");
+      const start = passage.text.indexOf(sent, at);
+      if (!sent.trim() || start < 0) continue;
+      at = start + sent.length;
+      const have = R.resolveText(sent);
+      const shared = [...want].filter((id) => have.has(id));
+      if (shared.length) found.push({ ...located(passage, start, start + sent.length), index: pi, shared: shared.map((id) => R.represent(id)).filter(Boolean), n: shared.length });
+    }
+  });
+  return found.sort((a, b) => b.n - a.n || a.index - b.index || a.start - b.start).slice(0, max).map(({ n, index, ...keep }) => keep);
+}
+
+async function groundDraw(draw, { material, facts, passages = [] }) {
   const sentences = splitSentences(String(draw))
     .map((s) => (typeof s === "string" ? s : s?.text ?? ""))
     .map((s) => s.trim())
@@ -140,16 +172,77 @@ async function groundDraw(draw, { material, facts }) {
     const t = byFact[i] ?? null;
     const ids = R ? [...R.resolveText(text)] : [];
     const beings = ids.map((id) => R.represent(id)).filter(Boolean);
-    const onFact = t?.ground === "material";
+    // A fact is carried only when the sentence carries ALL of its content ends (carry 1). A partial carry ("Marie"
+    // of "Marie won Nobel") is a shared name, which the beings already disclose, never the fact's address.
+    const onFact = t?.ground === "material" && t.carry >= 1;
     const grounded = onFact || beings.length > 0;
     return {
       text,
       standing: grounded ? "grounded" : "self:model",
       ...(onFact ? { ref: t.ref ?? null, fact: t.groundedOn ?? null } : {}),
       ...(beings.length ? { beings } : {}),
-      ...(grounded ? {} : { source: "the mouth" }),
+      ...(grounded ? (() => { const sources = sourcesFor(text, beings, R, passages); return sources.length ? { sources } : {}; })() : { source: "the mouth" }),
     };
   });
+}
+
+/** THE PROFILE of the output (opencode-profile.mjs): its kind, its checkable units (claims in prose, symbols in
+ *  code), each judged against the turn's passages, and — when `research` is on — every claim or symbol the passages
+ *  leave unsupported handed to the falsifier (opencode-research.mjs: the workspace, then Wikipedia), which re-judges
+ *  it by the same rule and records where it looked. Argument is not checked; the words are never edited. */
+async function profileDraw(draw, { passages = [], workspace = null, research = true, own = [], ask = "" } = {}) {
+  const t0 = Date.now();
+  let R = null;
+  try {
+    const { buildReferents } = await import("./native/the-fold/referents.js");
+    // the beings the material AND the answer individuate: a subject the answer names is a subject even with no material
+    R = buildReferents([...passages.map((p) => p.text), String(draw)].join("\n\n"));
+  } catch { R = null; }
+  const resolve = (s) => (R ? [...R.resolveText(s)].map((id) => R.represent(id)).filter(Boolean) : []);
+  const summary = isSummary(ask, draw, passages);
+  // In a SUMMARY every declarative sentence is a claim about the source — there is no "argument" to leave unchecked
+  // ("the governor had already funded it" names no one and carries no number, and is exactly the invention to catch).
+  const units = proseUnits(draw, { resolve, split: (t) => splitSentences(t) }).map((u) => (summary && u.standing === "argument" ? { ...u, standing: "unchecked" } : u));
+  // every checkable sentence in ONE falsifier pass over the turn's passages (each passage an independent source)
+  const todo = units.filter((u) => u.standing === "unchecked");
+  const verdicts = judgeAll(todo.map((u) => u.text), passages, { own });
+  let claims = units.map((u) => (u.standing === "unchecked" ? { ...u, ...verdicts[todo.indexOf(u)], searched: ["material"] } : u));
+  // what the Fold's judge cannot read — order and counts — is arithmetic over the source's own numbers, decided by Janus
+  claims = await janusPass(claims, passages);
+  // A SUMMARY abstracts several source sentences and answers for what it leaves out (opencode-summary.mjs)
+  if (summary) claims = derive(claims, passages);
+  const parsed = symbolUses(draw);
+  const fsx = await import("node:fs");
+  const pathx = await import("node:path");
+  const exists = (p) => { try { return !!workspace && fsx.existsSync(pathx.resolve(workspace, p)); } catch { return false; } };
+  let symbols = resolveSymbols(parsed, passages, { exists });
+  const log = [];
+  let beings = [];
+  if (research) {
+    const { researchClaims, researchSymbols } = await import("./opencode-research.mjs");
+    const rc = await researchClaims(claims, { workspace, text: passages.map((p) => p.text).join(" ") });
+    claims = rc.claims; log.push(...rc.log); beings = rc.beings;
+    const rs = await researchSymbols(symbols, { workspace });
+    symbols = rs.symbols; log.push(...rs.log);
+  }
+  const count = (xs, k) => xs.filter((x) => x.standing === k).length;
+  return {
+    v: 2,
+    ...kindOf(draw, units),
+    claims,
+    symbols,
+    counts: {
+      supported: count(claims, "supported"), contradicted: count(claims, "contradicted"), unsupported: count(claims, "unsupported"),
+      argument: count(claims, "argument") + count(claims, "question"),
+      found: count(symbols, "found") + count(symbols, "own"), not_found: count(symbols, "not_found"), symbol_contradicted: count(symbols, "contradicted"), unchecked: count(symbols, "unchecked"),
+    },
+    rests: restsOn(claims, symbols),
+    // THE SUMMARY's second reading: what it left out (beings the material individuates and figures it states, never carried)
+    ...(summary ? { summary: { derived: claims.filter((c) => c.derived).length, added: claims.filter((c) => c.added).length, leftOut: leftOut(draw, passages, resolve) } } : {}),
+    // which being each looked-up name was bound to (or why none was), with the candidates it was chosen from
+    beings,
+    research: { on: !!research, log, ms: Date.now() - t0, pending: research ? 0 : claims.filter((c) => c.standing === "unsupported").length + symbols.filter((x) => x.standing === "not_found" || x.standing === "unchecked").length },
+  };
 }
 
 /** finish({ ask, draft, ground, notes, material }) -> {
@@ -157,7 +250,7 @@ async function groundDraw(draw, { material, facts }) {
  *    eot, ground_trace, tiers, disclosure }
  *  `output` is what should stand (the draw, or the settled computed value);
  *  `ground_trace` shows, per sentence, what it rests on. Pure of turn effects. */
-export async function finish({ ask, draft, ground = null, notes = null, material = null } = {}) {
+export async function finish({ ask, draft, ground = null, notes = null, material = null, passages = null, workspace = null, own = [], research = process.env.FOLD_RESEARCH !== "0" } = {}) {
   const task = String(ask ?? "").trim();
   const draw = String(draft ?? "");
   if (!task) return { ok: false, gap: "empty-ask" };
@@ -169,9 +262,12 @@ export async function finish({ ask, draft, ground = null, notes = null, material
   // ground, it does not rewrite the words.
   const output = settled ? race.text : draw;
   const records = await parseEot(output);
-  const facts = await factsOf({ ground, notes, material });
+  const read = Array.isArray(passages) ? passages.filter((p) => p && typeof p.text === "string" && p.text) : [];
+  const stuff = material || (read.length ? read.map((p) => p.text).join("\n\n") : null);
+  const facts = await factsOf({ ground, notes, material: material || null, passages: material ? [] : read });
   // THE MECHANICALLY GROUNDED OUTPUT — created here, model-free.
-  const grounded = await groundDraw(output, { material, facts });
+  const grounded = await groundDraw(output, { material: stuff, facts, passages: read.length ? read : stuff ? [{ name: "material", text: String(stuff) }] : [] });
+  const profile = await profileDraw(output, { passages: read.length ? read : stuff ? [{ name: "material", text: String(stuff) }] : [], workspace, research, own, ask });
   const nGround = grounded.filter((s) => s.standing === "grounded").length;
   const nSelf = grounded.length - nGround;
   return {
@@ -189,6 +285,8 @@ export async function finish({ ask, draft, ground = null, notes = null, material
     // to and/or the byte ref it rests on) or self:model (the mouth's own).
     grounded,
     ground_trace: grounded,
+    // THE PROFILE: what the window draws (the panel under the answer).
+    profile,
     disclosure: settled
       ? "the machine settled this ask — the computed value stands, the model's draw is kept as superseded"
       : `the model's draw stands; its ground is shown — ${nGround} sentence(s) grounded, ${nSelf} the mouth's own`,
