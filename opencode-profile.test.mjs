@@ -263,3 +263,12 @@ test("FALSIFIER: a name Wikidata keeps only under the language-neutral label is 
   assert.equal(r.entity.qid, "Q37463");
   assert.equal(r.entity.label, "Pierre Curie");
 });
+
+test("an argument sentence about the material is a claim: a negation or a widening of a stated line is judged", async () => {
+  const passages = [{ name: "p", text: "Dolphins are a diverse group of animals, ranging from small to large. Some dolphin species are endangered, such as the Maui dolphin." }];
+  const { aboutPassages } = await import("./opencode-profile.mjs");
+  assert.equal(aboutPassages("Dolphins are not a diverse group of animals.", passages), true);
+  assert.equal(aboutPassages("Every dolphin species is endangered.", passages), true);
+  assert.equal(aboutPassages("What should we take from this?", passages), false);
+  assert.equal(aboutPassages("Nothing here is about ships.", passages), false);
+});
