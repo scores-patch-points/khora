@@ -1667,8 +1667,18 @@ async function onGround(body) {
       const { finish } = await import("./opencode-finish.mjs");
       const f = await finish({ ask: String(body.ask ?? ""), draft: String(body.text ?? ""), material: body.material ?? null, passages: body.passages ?? null, workspace: body.workspace ? String(body.workspace) : null, own: Array.isArray(body.own) ? body.own.map(String) : [], ...(typeof body.research === "boolean" ? { research: body.research } : {}) });
       if (f?.ok) step = { output: f.output, superseded: f.superseded, grounded: f.grounded, ground_trace: f.ground_trace, profile: f.profile, lane: f.lane, disclosure: f.disclosure, eot: f.eot };
-    } catch { /* typed gap */ }
+      // no readable ask (the app's message reaches the plugin without text the CLI's has): the answer is still profiled
+      else if (f?.gap === "empty-ask") {
+        const { profileOf } = await import("./opencode-finish.mjs");
+        const p = await profileOf({ draft: String(body.text ?? ""), material: body.material ?? null, passages: body.passages ?? null, workspace: body.workspace ? String(body.workspace) : null, own: Array.isArray(body.own) ? body.own.map(String) : [], ...(typeof body.research === "boolean" ? { research: body.research } : {}) });
+        step = { output: p.output, superseded: null, grounded: [], ground_trace: [], profile: p.profile, lane: null, disclosure: p.disclosure, eot: null };
+      }
+    } catch (e) {
+      // a typed gap for the window, and the reason for the door's own log: a swallowed error here is a ground nobody can explain
+      console.error(`ground: no step for ${String(body.sessionID ?? "").slice(0, 14)} — ${e?.stack ?? e}`.split("\n").slice(0, 4).join(" | "));
+    }
   }
+  if (!step) console.error(`ground: no step for ${String(body.sessionID ?? "").slice(0, 14)} (ask ${String(body.ask ?? "").length} chars, text ${String(body.text ?? "").length}, passages ${(body.passages ?? []).length}, own ${(body.own ?? []).length})`);
   // THE TURN'S SHAPE (the audit's live row, read once more here so the window never reaches for the door):
   // what the void owes, the first unmet reach cell, and the acts with their cube cells and shape verdicts.
   let turn = null;
