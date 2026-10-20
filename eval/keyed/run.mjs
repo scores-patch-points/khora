@@ -18,14 +18,16 @@ const { BATTERY } = await import("./battery.mjs");
 const { profileOf, warmFinish } = await import("../../opencode-finish.mjs");
 await warmFinish();
 
-const ARMS = { A0: "0", A1: "1", A2: "1", A3: "1", A4: "1" };
+const ARMS = { A0: "0", A1: "1", A2: "1", A3: "1", A4: "1", A5: "1" };
+if (RECORD && !process.env.BRAVE_API_KEY) console.log("note: BRAVE_API_KEY is not set; arm A5 will record nothing new (searches fail as a typed gap)");
 const only = process.argv.find((a) => a.startsWith("--only="))?.slice(7)?.split(",");
 const rows = [];
 for (const [arm, flag] of Object.entries(ARMS)) {
   process.env.FOLD_KEYED = flag === "1" ? "1" : "0";
-  process.env.FOLD_KEYED_SOLE = arm === "A2" || arm === "A3" || arm === "A4" ? "1" : "0";
-  process.env.FOLD_KEYED_JULIAN_GUARD = arm === "A3" || arm === "A4" ? "1" : "0";
-  process.env.FOLD_PRIMARY = arm === "A4" ? "1" : "0";
+  process.env.FOLD_KEYED_SOLE = arm === "A2" || arm === "A3" || arm === "A4" || arm === "A5" ? "1" : "0";
+  process.env.FOLD_KEYED_JULIAN_GUARD = arm === "A3" || arm === "A4" || arm === "A5" ? "1" : "0";
+  process.env.FOLD_PRIMARY = arm === "A4" || arm === "A5" ? "1" : "0";
+  process.env.FOLD_BRAVE = arm === "A5" ? "1" : "0";
   for (const item of BATTERY) {
     if (only && !only.includes(item.id)) continue;
     const t0 = Date.now();
@@ -47,7 +49,7 @@ console.log("\nA0", JSON.stringify(tally("A0")));
 console.log("A1", JSON.stringify(tally("A1")));
 console.log("A2", JSON.stringify(tally("A2")));
 console.log("A3", JSON.stringify(tally("A3")));
-console.log("A4", JSON.stringify(tally("A4")), "tiers:", JSON.stringify(rows.filter((x) => x.arm === "A4").reduce((a, x) => (x.tier ? ((a[x.tier] = (a[x.tier] ?? 0) + 1), a) : a), {})));
+for (const arm of ["A4", "A5"]) console.log(arm, JSON.stringify(tally(arm)), "tiers:", JSON.stringify(rows.filter((x) => x.arm === arm).reduce((a, x) => (x.tier ? ((a[x.tier] = (a[x.tier] ?? 0) + 1), a) : a), {})));
 // V4: evidence earned
 const v4 = rows.filter((x) => x.arm === "A1" && x.verdict !== "U").every((x) => /^Q\d+#P\d+$/.test(x.evidence ?? "") || /wikipedia|Q\d+#P/.test(x.evidence ?? ""));
 console.log("V4 evidence addressed:", v4);

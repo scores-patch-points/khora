@@ -121,3 +121,30 @@ export async function citedFor(title, claim, { lang = "en", deadline = Infinity,
   const links = [...new Set(ids.map((id) => refs.get(id)).filter(Boolean))].map((url) => ({ title: new URL(url).hostname.replace(/^www\./, ""), url, snippet: "" }));
   return { sentence: best.sent.replace(/⟦[^⟧]*⟧/g, "").trim(), links, footnotes: ids.length, why: links.length ? null : ids.length ? "its footnotes cite no web page" : "that sentence carries no footnote" };
 }
+
+/** The Brave Search API (keyed): BRAVE_API_KEY from the environment, never written anywhere. Free tier is one request a second; answers are cached by query. */
+export const braveKeyed = () => Boolean(process.env.BRAVE_API_KEY);
+export function makeBraveSearch({ deadline = Infinity, fetchImpl = globalThis.fetch, count = 20 } = {}) {
+  return (query) => {
+    const hit = read(key("brave", query));
+    if (hit) { stats.cached++; return Promise.resolve(hit); }
+    if (offline()) return Promise.reject(new Error("offline: not in the recording"));
+    if (!process.env.BRAVE_API_KEY) return Promise.reject(new Error("BRAVE_API_KEY is not set"));
+    const run = chain.then(async () => {
+      const wait = Math.max(0, last + Number(process.env.FOLD_BRAVE_GAP_MS ?? 1100) - Date.now());
+      if (Date.now() + wait + 4000 > deadline) { stats.skipped++; throw new Error("skipped: past this answer's research budget"); }
+      if (wait) await sleep(wait);
+      last = Date.now();
+      stats.searches++;
+      const res = await fetchImpl(`https://api.search.brave.com/res/v1/web/search?${new URLSearchParams({ q: query, count: String(count) })}`, { headers: { accept: "application/json", "x-subscription-token": process.env.BRAVE_API_KEY }, signal: AbortSignal.timeout(Math.max(3000, Math.min(10_000, deadline - Date.now()))) });
+      if (!res.ok) throw new Error(`Brave API answered ${res.status}`);
+      const j = await res.json();
+      const results = (j?.web?.results ?? []).filter((r) => /^https?:\/\//.test(r.url)).map((r) => ({ title: String(r.title ?? "").replace(/<[^>]+>/g, ""), url: r.url, snippet: String(r.description ?? "").replace(/<[^>]+>/g, "").slice(0, 300) }));
+      if (!results.length) throw new Error("no results");
+      remember("brave", query, results, "api.search.brave.com");
+      return results;
+    });
+    chain = run.catch(() => {});
+    return run;
+  };
+}

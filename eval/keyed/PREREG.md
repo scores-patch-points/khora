@@ -85,3 +85,13 @@ X4 holds (no search engine, no model). **The primary tier found no primary page 
 peo.gov.au). Where it stopped, by the trail: the sentence's footnote cites a book or journal with no web page (Einstein, Curie leads), the article sentence is only in the
 infobox or has no footnote (Canberra), or a cited page was read and failed the gate or was unreadable (nytimes archive). The scraped search engines refuse this address
 (Brave 429, DuckDuckGo challenge, Bing serves unrelated pages), so a claim whose footnote cites no web page has no route to a primary page here.
+
+## Amendment 4 (written before arm A5 was run): a keyed search API
+Reason: Amendment 3's tier found nothing because a claim whose footnote cites no web page has no route to one, and the scraped search engines refuse this address.
+- **A5:** A4 plus the Brave Search API (BRAVE_API_KEY from the environment, never stored or logged; free tier, one request a second, 20 results a query, up to 3
+  queries a claim from The Fold's queriesFor: the quoted distinctive phrase, then content terms). Its results join the footnote pages as candidates; every candidate meets the
+  same ranking (host kind), mirror/tertiary drops and strict assertion gate as in A4. Recorded online once (cache: recording/web/brave), replayed offline.
+- **Bars for A5:** Y1 A5 WRONG = 0 (a false claim must never become supported through a page); Y2 A5 RIGHT >= A4 RIGHT; Y3 every "primary" support names the page URL and its
+  own sentence and that sentence passes the gate (checked by the runner); Y4 no model is used and the only search host is api.search.brave.com. The count of "primary" supports
+  and the hosts read are reported; they are descriptive, not a bar. A5 is reported whatever it finds.
+- Declared, not measured: Brave's ranking decides which pages are offered; the same Fold tables rank hosts by kind.
