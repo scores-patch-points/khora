@@ -64,8 +64,12 @@ export async function whoIs(name, { text = "", person = false, deadline = Infini
   if (!ents.ok) return { verdict: ents.skipped ? "skipped" : "none", name, basis: ents.why, candidates: found.candidates };
   // KIND, from the text itself: a being the text calls "she"/"he" is a person, so only a human (P31 = Q5) can be it.
   // A unit, a family name or a ferry that shares the name is not a candidate for who the text means.
-  const candidates = ents.entities.filter((e) => !/disambiguation page|Wikimedia list/i.test(e.description ?? "") && (!person || e.instanceOf.includes("Q5")));
-  if (!candidates.length) return { verdict: "none", name, basis: person ? "no human among the items this name nominates (the text refers to the being as a person)" : "only disambiguation items", candidates: ents.entities.map(({ qid, label, description }) => ({ qid, label, description })) };
+  // Wikidata's search is a prefix search ("the water" nominates "The Waterboys"): a candidate must carry EXACTLY the name, by its label or
+  // an alias, after folding case and a leading article — a nearby name is not the being, and no reading of the text can make it one.
+  const fold = (x) => String(x ?? "").normalize("NFKC").toLowerCase().replace(/^(?:the|a|an)\s+/, "").replace(/\s+/g, " ").trim();
+  const exact = (e) => [e.label, ...(e.aliases ?? [])].some((x) => fold(x) === fold(name));
+  const candidates = ents.entities.filter((e) => exact(e) && !/disambiguation page|Wikimedia list/i.test(e.description ?? "") && (!person || e.instanceOf.includes("Q5")));
+  if (!candidates.length) return { verdict: "none", name, basis: person ? "no human among the items this name nominates (the text refers to the being as a person)" : "no item carries exactly this name", candidates: ents.entities.map(({ qid, label, description }) => ({ qid, label, description })) };
   const intros = (await wikipediaIntros(candidates.map((c) => c.enwiki).filter(Boolean), opts)).intros;
 
   const textSentences = sentencesOf(text);

@@ -220,7 +220,7 @@ async function profileDraw(draw, { passages = [], workspace = null, research = t
   let beings = [];
   if (research) {
     const { researchClaims, researchSymbols } = await import("./opencode-research.mjs");
-    const rc = await researchClaims(claims, { workspace, text: passages.map((p) => p.text).join(" ") });
+    const rc = await researchClaims(claims, { workspace, text: passages.map((p) => p.text).join(" "), answer: draw });
     claims = rc.claims; log.push(...rc.log); beings = rc.beings;
     const rs = await researchSymbols(symbols, { workspace });
     symbols = rs.symbols; log.push(...rs.log);
@@ -229,6 +229,8 @@ async function profileDraw(draw, { passages = [], workspace = null, research = t
   return {
     v: 2,
     ...kindOf(draw, units),
+    // nothing was read this turn: every claim rests on the model's own knowledge (the panel says so, instead of listing each)
+    noMaterial: passages.length === 0,
     claims,
     symbols,
     counts: {
@@ -291,6 +293,16 @@ export async function finish({ ask, draft, ground = null, notes = null, material
       ? "the machine settled this ask — the computed value stands, the model's draw is kept as superseded"
       : `the model's draw stands; its ground is shown — ${nGround} sentence(s) grounded, ${nSelf} the mouth's own`,
   };
+}
+
+/** The profile of an answer WITHOUT the settle step: grounding needs the material, not the ask. The window's message can reach the
+ *  plugin with no readable ask text (the app builds its user message differently from the CLI), and an answer must not go unprofiled
+ *  for that: the door profiles it, and says no ask was recorded. */
+export async function profileOf({ draft, passages = null, material = null, workspace = null, own = [], research = process.env.FOLD_RESEARCH !== "0" } = {}) {
+  const read = Array.isArray(passages) ? passages.filter((p) => p && typeof p.text === "string" && p.text) : [];
+  const profile = await profileDraw(String(draft ?? ""), { passages: read.length ? read : material ? [{ name: "material", text: String(material) }] : [], workspace, research, own, ask: "" });
+  return { ok: true, output: String(draft ?? ""), superseded: null, grounded: [], ground_trace: [], profile, lane: null, eot: null,
+    disclosure: "no ask was recorded for this turn; the answer is profiled without the settling step" };
 }
 
 /** Pay the one-off cold cost (language-id models, the English parser, referent and relation priors, the Fold's judge, Janus) once,

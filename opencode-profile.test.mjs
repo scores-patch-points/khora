@@ -96,7 +96,7 @@ test("FALSIFIER: research tries to falsify an unsupported claim and records wher
   const seen = [];
   const claims = [
     { text: "Marie Curie discovered radium in 1899.", standing: "unsupported", beings: ["Marie Curie"], searched: ["material"] },
-    { text: "Marie Curie collected seashells in Brittany.", standing: "unsupported", beings: ["Marie Curie"], searched: ["material"] },
+    { text: "Marie Curie collected 40 seashells in Brittany.", standing: "unsupported", beings: ["Marie Curie"], searched: ["material"] },
   ];
   const r = await researchClaims(claims, { fetchImpl: fakeFetch(seen), budgetMs: 10_000 });
   assert.equal(r.claims[0].standing, "contradicted");
@@ -190,4 +190,71 @@ test("FALSIFIER: in a summary an invented sentence that names no one and carries
   assert.match(summary.why, /governor/);
   const essay = (await run("write something about it")).profile.claims.find((c) => /governor/.test(c.text));
   assert.ok(["argument", "unsupported"].includes(essay.standing), "outside a summary the essay gate is unchanged");
+});
+
+const { properName, midSentenceNames, subjectsOf } = await import("./opencode-research.mjs");
+
+test("FALSIFIER: only a name is looked up — a noun phrase the referent reader individuates is not", () => {
+  assert.equal(properName("Marie Curie"), true);
+  for (const phrase of ["the water", "the animal", "the sea", "their young"]) assert.equal(properName(phrase), false, phrase);
+  const mid = midSentenceNames("Web pages are many. Dolphins live in pods, and Flipper lives in Florida. The vaquita is a porpoise.");
+  assert.equal(mid.has("Flipper"), true, "a capitalised word in the middle of a sentence is a name");
+  assert.equal(mid.has("Florida"), true);
+  assert.equal(mid.has("Web"), false, "a word that is only capitalised because it opens a sentence is not");
+  assert.deepEqual(subjectsOf({ text: "The water is warm.", beings: ["the water", "Web"] }, (b) => mid.has(b)), [], "nothing here is worth a lookup");
+});
+
+test("FALSIFIER: a candidate must carry exactly the name; a nearby name is not the being (\"the water\" is not The Waterboys)", async () => {
+  const fetchImpl = async (url) => {
+    const p = new URL(url).searchParams;
+    if (p.get("action") === "wbsearchentities") return { ok: true, status: 200, json: async () => ({ search: [{ id: "Q1422720", label: "The Waterboys" }] }) };
+    if (p.get("action") === "wbgetentities") return { ok: true, status: 200, json: async () => ({ entities: { Q1422720: { id: "Q1422720", labels: { en: { value: "The Waterboys" } }, descriptions: { en: { value: "Scottish-Irish rock band" } }, sitelinks: {}, claims: {} } } }) };
+    return { ok: false, status: 404, json: async () => ({}) };
+  };
+  const r = await whoIs("the water", { text: "The water is warm and the sea is calm.", fetchImpl });
+  assert.notEqual(r.verdict, "bound");
+  assert.match(r.basis, /exactly this name/);
+});
+
+test("FALSIFIER: research spends its lookups on claims that carry a figure and name a being, and says what it did not research", async () => {
+  const seen = [];
+  const fetchImpl = async (url) => { seen.push(url); return { ok: false, status: 404, json: async () => ({}) }; };
+  const claims = [
+    { text: "Dolphins are mammals.", standing: "unsupported", beings: ["Dolphins"], searched: ["material"] },
+    { text: "Marie Curie discovered radium in 1899.", standing: "unsupported", beings: ["Marie Curie"], searched: ["material"] },
+  ];
+  const r = await researchClaims(claims, { fetchImpl, budgetMs: 5000, answer: "Dolphins are mammals. Marie Curie discovered radium in 1899." });
+  assert.ok(r.claims[0].searched.some((x) => /not researched/.test(x)), "no figure: not researched, and said so");
+  assert.ok(!r.claims[1].searched.some((x) => /not researched/.test(x)), "a figure and a name: researched");
+});
+
+test("FALSIFIER: a turn that read nothing says so on the profile", async () => {
+  const { finish } = await import("./opencode-finish.mjs");
+  const none = await finish({ ask: "write about dolphins", draft: "Dolphins are mammals. They live in pods.", passages: [], research: false });
+  assert.equal(none.profile.noMaterial, true);
+  const some = await finish({ ask: "write about dolphins", draft: "Dolphins are mammals.", passages: [{ name: "d.md", text: "Dolphins are mammals that live in pods." }], research: false });
+  assert.equal(some.profile.noMaterial, false);
+});
+
+test("FALSIFIER: an answer with no recorded ask is still profiled, and says so; the settle step still refuses an empty ask", async () => {
+  const { finish, profileOf } = await import("./opencode-finish.mjs");
+  assert.equal((await finish({ ask: "", draft: "Marie Curie was born in 1867.", passages: [], research: false })).ok, false, "the settle step's empty-ask guard stands");
+  const r = await profileOf({ draft: "Marie Curie was born in 1867. She won two Nobel Prizes.", passages: [], research: false });
+  assert.equal(r.ok, true);
+  assert.equal(r.profile.claims.filter((c) => c.standing === "unsupported").length, 2, "both claims are shown, rest on nothing read");
+  assert.equal(r.profile.noMaterial, true);
+  assert.match(r.disclosure, /no ask was recorded/);
+});
+
+test("FALSIFIER: a name Wikidata keeps only under the language-neutral label is still the being (the physicist Pierre Curie has no `en` label)", async () => {
+  const fetchImpl = async (url) => {
+    const p = new URL(url).searchParams;
+    if (p.get("action") === "wbsearchentities") return { ok: true, status: 200, json: async () => ({ search: [{ id: "Q37463", label: "Pierre Curie" }] }) };
+    if (p.get("action") === "wbgetentities") return { ok: true, status: 200, json: async () => ({ entities: { Q37463: { id: "Q37463", labels: { mul: { value: "Pierre Curie" } }, descriptions: { en: { value: "French physicist and chemist (1859\u20131906)" } }, sitelinks: { enwiki: { title: "Pierre Curie" } }, claims: { P31: [{ mainsnak: { datavalue: { value: { id: "Q5" } } } }], P570: [{ mainsnak: { datavalue: { value: { time: "+1906-04-19T00:00:00Z" } } } }] } } } }) };
+    return { ok: true, status: 200, json: async () => ({ query: { pages: [{ title: "Pierre Curie", extract: "Pierre Curie was a French physicist who died in 1906." }] } }) };
+  };
+  const r = await whoIs("Pierre Curie", { text: "Pierre Curie died in 1906.", fetchImpl });
+  assert.equal(r.verdict, "bound");
+  assert.equal(r.entity.qid, "Q37463");
+  assert.equal(r.entity.label, "Pierre Curie");
 });

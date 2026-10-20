@@ -19,7 +19,8 @@ import { wikipediaArticle, wiktionary } from "./opencode-wiki.mjs";
 import { whoIs } from "./opencode-identity.mjs";
 import { janusPass } from "./opencode-janus.mjs";
 
-const WIKI_MAX = Number(process.env.FOLD_RESEARCH_MAX ?? 3); // beings looked up per answer
+const WIKI_MAX = Number(process.env.FOLD_RESEARCH_MAX ?? 4); // beings looked up per answer
+const RESEARCH_CLAIMS = Number(process.env.FOLD_RESEARCH_CLAIMS ?? 8); // claims researched per answer
 const TEXTY = ["md", "txt", "rst", "adoc", "org", "html", "json", "yaml", "yml", "csv"];
 const CODEY = ["ts", "tsx", "js", "jsx", "mjs", "cjs", "py", "go", "rs", "java", "kt", "rb", "swift", "c", "h", "cpp", "cs", "php", "sh"];
 
@@ -51,10 +52,24 @@ export function claimNamed(claim, name) {
 
 /** The subjects a claim could be looked up under, most specific first: its beings (subject first), else its longest
  *  capitalised run past the first word. */
-export function subjectsOf(claim) {
-  if (claim.beings?.length) return claim.beings.slice(0, 3);
+export function subjectsOf(claim, named = () => true) {
+  const names = (claim.beings ?? []).filter((b) => properName(b) && named(b));
+  if (names.length) return names.slice(0, 3);
   const one = subjectOf(claim);
-  return one ? [one] : [];
+  return one && properName(one) && named(one) ? [one] : [];
+}
+
+// A thing worth a lookup is a NAME: a capitalised word that is not a determiner phrase ("the water", "the animal" are noun phrases the
+// referent reader individuates, not beings anyone could look up). Declared, English-shaped: a language without capitals is a typed gap
+// here (nothing is looked up), never a guess. A single word must also be written capitalised somewhere NOT at a sentence start
+// ("Web" opening a sentence is a word, "Curie" in the middle of one is a name) — the `named` check the caller builds from the answer.
+const DETERMINER = /^(?:the|a|an|this|that|these|those|their|his|her|its|our|my|your|some|many|most|each|every|all|no)\s/i;
+export const properName = (name) => /^\p{Lu}/u.test(String(name ?? "")) && !DETERMINER.test(String(name ?? ""));
+/** Names written capitalised in the middle of a sentence of `text`: the answer's own evidence that a capitalised word is a name. */
+export function midSentenceNames(text) {
+  const out = new Set();
+  for (const m of String(text ?? "").matchAll(/(?<=[^.!?\n]\s)\p{Lu}[\p{L}'’-]+(?:\s+\p{Lu}[\p{L}'’-]+)*/gu)) out.add(m[0]);
+  return out;
 }
 export function subjectOf(claim) {
   if (claim.beings?.length) return claim.beings[0];
@@ -102,7 +117,7 @@ async function isName(word, opts, log) {
 
 /** Try to falsify (or support) each unsupported claim by research. Returns the re-judged claims, the beings bound
  *  (which one the text means, and why), and the research log (every request: where, what, cached, or why skipped). */
-export async function researchClaims(claims, { workspace = null, budgetMs = Number(process.env.FOLD_RESEARCH_MS ?? 90_000), fetchImpl, text = "" } = {}) {
+export async function researchClaims(claims, { workspace = null, budgetMs = Number(process.env.FOLD_RESEARCH_MS ?? 90_000), fetchImpl, text = "", answer = "" } = {}) {
   const deadline = Date.now() + budgetMs;
   const opts = { deadline, fetchImpl };
   const log = [];
@@ -112,8 +127,14 @@ export async function researchClaims(claims, { workspace = null, budgetMs = Numb
   const out = [];
   // everything the turn says about a being: the context identity is judged against
   const about = (name) => claims.filter((c) => (c.beings ?? []).includes(name)).map((c) => c.text).join(" ") + " " + text;
+  // The lookup budget is spent where a lookup can settle something: a claim that carries a figure or a date AND names a being. The rest
+  // stay unsupported — said so — and a long essay is not 70 requests at one per 10 s.
+  const mid = midSentenceNames(answer || claims.map((c) => c.text).join(" "));
+  const named = (b) => b.includes(" ") || mid.has(b);
+  const eligible = new Set(claims.filter((c) => c.standing === "unsupported" && /\d/.test(c.text) && subjectsOf(c, named).length).slice(0, RESEARCH_CLAIMS));
   for (const c of claims) {
     if (c.standing !== "unsupported") { out.push(c); continue; }
+    if (!eligible.has(c)) { out.push({ ...c, searched: [...(c.searched ?? ["material"]), "not researched: no figure or no name to look up"] }); continue; }
     const searched = [...(c.searched ?? ["material"])];
     let verdict = { standing: "unsupported" };
     let identity = null;
@@ -132,7 +153,7 @@ export async function researchClaims(claims, { workspace = null, budgetMs = Numb
     }
     // 2. the world: WHICH being the text means (Wikidata nominates, identity decides), then its own statements, then
     //    its article. A name no identity binds is disclosed as ambiguous and nothing is judged against a guess.
-    for (const name of verdict.standing === "unsupported" ? subjectsOf(c) : []) {
+    for (const name of verdict.standing === "unsupported" ? subjectsOf(c, named) : []) {
       if (!bound.has(name)) {
         if (bound.size >= WIKI_MAX) { searched.push(`wikidata: ${name} (lookup budget spent)`); break; }
         if (!c.beings?.includes(name) && !(await isName(name, opts, log))) { bound.set(name, { verdict: "none", name, basis: "Wiktionary reads it as a common word, not a name", candidates: [] }); }

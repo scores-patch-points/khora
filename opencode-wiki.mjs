@@ -69,13 +69,14 @@ const claimItems = (claims, p) => (claims?.[p] ?? []).map((c) => c?.mainsnak?.da
  *  the falsifier reads structurally (birth/death dates, instance-of, place ids). */
 export async function wikidataEntities(ids, opts) {
   if (!ids.length) return { ok: true, entities: [] };
-  const r = await wikiGet(`https://www.wikidata.org/w/api.php?${q({ action: "wbgetentities", format: "json", ids: ids.join("|"), props: "labels|descriptions|aliases|sitelinks|claims", languages: "en", sitefilter: "enwiki" })}`, opts);
+  const r = await wikiGet(`https://www.wikidata.org/w/api.php?${q({ action: "wbgetentities", format: "json", ids: ids.join("|"), props: "labels|descriptions|aliases|sitelinks|claims", languages: "en|mul", languagefallback: 1, sitefilter: "enwiki" })}`, opts);
   if (!r.ok) return { ok: false, entities: [], why: r.why, skipped: r.skipped };
   const entities = ids.map((id) => r.json?.entities?.[id]).filter((e) => e && !e.missing).map((e) => ({
     qid: e.id,
-    label: e.labels?.en?.value ?? null,
+    // Wikidata keeps many names (people's especially) under the language-neutral `mul` label, with no `en` one
+    label: e.labels?.en?.value ?? e.labels?.mul?.value ?? null,
     description: e.descriptions?.en?.value ?? null,
-    aliases: (e.aliases?.en ?? []).map((a) => a.value),
+    aliases: [...(e.aliases?.en ?? []), ...(e.aliases?.mul ?? [])].map((a) => a.value),
     enwiki: e.sitelinks?.enwiki?.title ?? null,
     born: claimTimes(e.claims, "P569"),
     died: claimTimes(e.claims, "P570"),
