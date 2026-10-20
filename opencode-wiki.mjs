@@ -27,6 +27,8 @@ export function wikiGet(url, { deadline = Infinity, fetchImpl = globalThis.fetch
     stats.cached++;
     return Promise.resolve({ ok: true, json: hit, cached: true });
   } catch { /* not cached */ }
+  // A replay of a recording (eval/keyed, eval/void): a request the recording does not hold is an error, never a fetch.
+  if (process.env.FOLD_WIKI_OFFLINE === "1") return Promise.resolve({ ok: false, why: "offline: not in the recording", offline: true });
   // serialized: concurrent callers wait their turn through ONE gate
   const run = chain.then(async () => {
     const wait = Math.max(0, last + GAP_MS - Date.now());
@@ -49,7 +51,79 @@ export function wikiGet(url, { deadline = Infinity, fetchImpl = globalThis.fetch
   return run;
 }
 function remember(url, json) {
-  try { fs.mkdirSync(path.dirname(file(url)), { recursive: true }); fs.writeFileSync(file(url), JSON.stringify(json)); } catch { /* a miss next time */ }
+  try {
+    fs.mkdirSync(path.dirname(file(url)), { recursive: true });
+    fs.writeFileSync(file(url), JSON.stringify(json));
+    // an index of what was fetched (the host of every request is auditable: eval/keyed V5)
+    fs.appendFileSync(path.join(path.dirname(file(url)), "index.jsonl"), JSON.stringify({ url: url.replace(/(search|ids|titles)=[^&]*/g, "$1=…"), host: new URL(url).host, at: new Date().toISOString() }) + "\n");
+  } catch { /* a miss next time */ }
+}
+
+// ── THE ENTITY STORE: every Wikidata entity (a property, a class, an item) is fetched ONCE and kept ────────────────────────────────────────────────
+// The keyed door asks for the same things over and over: the labels, aliases and datatypes of the properties an entity carries, the classes' declared
+// keys, the labels of the items a value points at. Measured on the first recording pass of eval/keyed: 63 requests in ten minutes, 27 of them labels and
+// 16 claims — none of it changes between one entity and the next. A record keeps WHICH props and languages it holds, so a request for a subset is served
+// with no request, and a request for a mix fetches only the ids not held, in one batch. Properties never expire; an item's record is refreshed after 30 days.
+const entDir = () => path.join(CACHE, "wikidata-entities");
+const entFile = (id) => path.join(entDir(), `${id.replace(/[^A-Za-z0-9]/g, "_")}.json`);
+const ITEM_TTL_MS = Number(process.env.FOLD_ENTITY_TTL_MS ?? 30 * 24 * 3600 * 1000);
+function entRead(id) {
+  try {
+    const rec = JSON.parse(fs.readFileSync(entFile(id), "utf8"));
+    if (id.startsWith("Q") && Date.now() - (rec.at ?? 0) > ITEM_TTL_MS) return null;
+    return rec;
+  } catch { return null; }
+}
+function entWrite(id, props, langs, data) {
+  try {
+    const old = entRead(id);
+    const rec = { at: Date.now(), props: [...new Set([...(old?.props ?? []), ...props])], langs: [...new Set([...(old?.langs ?? []), ...langs])], data: { ...(old?.data ?? {}), ...data } };
+    fs.mkdirSync(entDir(), { recursive: true });
+    fs.writeFileSync(entFile(id), JSON.stringify(rec));
+  } catch { /* a miss next time */ }
+}
+/** Keep every entity of a wbgetentities response (what one request already paid for). */
+export function seedEntities(json, props, langs) {
+  for (const [id, e] of Object.entries(json?.entities ?? {})) if (e && !e.missing && /^[PQ]\d+$/.test(id)) entWrite(id, props, langs, e);
+}
+const csv = (v, d) => String(v || d).split("|").filter(Boolean);
+export const entityStats = { served: 0, fetched: 0 };
+
+/** The getJson the keyed door takes: a wbgetentities request is answered from the store for the ids it holds and fetched (one batch) for the rest;
+ *  a pageprops lookup for a title whose item is already known is answered without a request; anything else goes through the gate and its cache. */
+export function makeGetJson({ known = {}, ...opts } = {}) {
+  return async (url) => {
+    const u = new URL(url);
+    const a = u.searchParams;
+    if (u.host.endsWith("wikipedia.org") && a.get("prop") === "pageprops" && known.pageprops?.[a.get("titles")]) {
+      return { query: { pages: { 1: { pageprops: { wikibase_item: known.pageprops[a.get("titles")] } } } } };
+    }
+    if (u.host === "www.wikidata.org" && a.get("action") === "wbgetentities" && a.get("ids")) {
+      const ids = a.get("ids").split("|").filter(Boolean);
+      const props = csv(a.get("props"), "labels"), langs = csv(a.get("languages"), "en");
+      const have = {}, missing = [];
+      for (const id of ids) {
+        const rec = entRead(id);
+        if (rec && props.every((p) => rec.props.includes(p)) && langs.every((l) => rec.langs.includes(l))) have[id] = rec.data;
+        else missing.push(id);
+      }
+      entityStats.served += ids.length - missing.length;
+      for (let i = 0; i < missing.length; i += 50) {
+        const batch = missing.slice(i, i + 50);
+        const b = new URL(url);
+        b.searchParams.set("ids", batch.join("|"));
+        const r = await wikiGet(b.toString(), opts);
+        if (!r.ok) throw new Error(r.why);
+        entityStats.fetched += batch.length;
+        seedEntities(r.json, props, langs);
+        for (const id of batch) if (r.json?.entities?.[id]) have[id] = r.json.entities[id];
+      }
+      return { entities: have };
+    }
+    const r = await wikiGet(url, opts);
+    if (!r.ok) throw new Error(r.why);
+    return r.json;
+  };
 }
 
 const q = (o) => Object.entries(o).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join("&");
@@ -71,6 +145,7 @@ export async function wikidataEntities(ids, opts) {
   if (!ids.length) return { ok: true, entities: [] };
   const r = await wikiGet(`https://www.wikidata.org/w/api.php?${q({ action: "wbgetentities", format: "json", ids: ids.join("|"), props: "labels|descriptions|aliases|sitelinks|claims", languages: "en|mul", languagefallback: 1, sitefilter: "enwiki" })}`, opts);
   if (!r.ok) return { ok: false, entities: [], why: r.why, skipped: r.skipped };
+  seedEntities(r.json, ["labels", "descriptions", "aliases", "sitelinks", "claims"], ["en", "mul"]);   // what this request paid for is kept for the keyed door
   const entities = ids.map((id) => r.json?.entities?.[id]).filter((e) => e && !e.missing).map((e) => ({
     qid: e.id,
     // Wikidata keeps many names (people's especially) under the language-neutral `mul` label, with no `en` one
