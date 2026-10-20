@@ -36,3 +36,18 @@ entity carries equal, differ from, or fail to speak to what the sentence says?
 - A property marked single-valued by Wikidata (P2302) that returns one value and a sentence that differs is CONTRADICTED; a multi-valued property
   that does not list the sentence's filler is UNSUPPORTED with the listed values shown, never contradicted.
 - Relation words are the sentence's open-class words after the anchor's own words, years and numbers are removed; no verb-to-property table.
+
+## Amendment 1 (written before arm A2 was run)
+Run on the frozen battery (battery.sha unchanged) after A0/A1 were measured: 7 false claims were found with the right value shown but left UNSUPPORTED
+(k02 k05 k06 k16 k18 k33 and the quantity k26), because their properties are not marked single-valued.
+- **A2:** A1 plus: a time or item property that lists exactly ONE value, bound unambiguously, and a sentence whose filler differs, is CONTRADICTED.
+  Quantities are excluded (a sentence may round: "about 9,000").
+- **Bars for A2:** W1 A2 RIGHT is strictly greater than A1 RIGHT; W2 A2 WRONG is not greater than 0; V3, V4, V5 as above. Failed bars are reported.
+- Declared, not measured: a property that has a single stored value is read as a single true value. A fact with several true values stored as one
+  (a country with two capitals, one stored) is the case this would get wrong; the battery holds no such claim, so a pass here does not clear it.
+
+### Amendment 1 result (replay, offline)
+A0 10 RIGHT / 0 WRONG; A1 12 / 0; A2 17 RIGHT / 1 WRONG. W1 holds (17 > 12). **W2 FAILS: A2 has 1 WRONG.**
+The wrong one is k05 ("Isaac Newton was born in 1643", true by the Gregorian calendar): Wikidata stores 25 December 1642 (Julian), so the sole value
+differs and A2 contradicts a true sentence. This is the case declared above, arrived as a calendar rather than a second value. A2 is NOT admitted.
+Any follow-up (for example, never contradicting a time value whose calendar model is Julian) is a new amendment, and is informed by having seen k05.

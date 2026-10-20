@@ -120,6 +120,8 @@ export async function checkByIdentity({ claim, anchorNames = [], entity, getJson
   const kind = wantType === "time" ? "time" : wantType === "quantity" ? "quantity" : "item";
   if (matches(typed, filler, kind)) return { ...out, standing: "supported" };
   const said = kind === "time" ? filler.years.join(", ") : kind === "quantity" ? filler.numbers.map((x) => x.raw).join(", ") : filler.names.join(", ");
-  if (r.property.single && r.verdict === "bound" && typed.length === 1) return { ...out, standing: "contradicted", why: `${r.property.label} is ${shown}, not ${said}` };
+  // AMENDMENT 1 (eval/keyed/PREREG.md): a date or item property that lists exactly ONE value and a sentence that differs is contradicted, as a single-valued one is
+  const sole = process.env.FOLD_KEYED_SOLE === "1" && kind !== "quantity";
+  if ((r.property.single || sole) && r.verdict === "bound" && typed.length === 1) return { ...out, standing: "contradicted", why: `${r.property.label} is ${shown}, not ${said}` };
   return { ...out, standing: "unsupported", why: `${r.property.label} lists ${shown}; the sentence says ${said}` };
 }
