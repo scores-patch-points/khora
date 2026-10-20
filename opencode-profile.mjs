@@ -156,6 +156,22 @@ function residueOf(claim, witness) {
   return WORDS4(claim).filter((w) => !names.has(w) && !have.has(stemmed(w)) && ![...have].some((h) => h.startsWith(stemmed(w).slice(0, 4)))).slice(0, 4);
 }
 
+/** Is this "argument" sentence ABOUT what was read? A declarative that shares most of its content words with one sentence of a passage is a claim about that
+ *  material ("Dolphins are not a diverse group of animals" negates a stated line; "Every dolphin species is endangered" widens one), so it is judged, never left
+ *  as opinion. A sentence that shares nothing stays an argument. */
+export function aboutPassages(sentence, passages) {
+  const own = WORDS4(sentence).map(stemmed);
+  if (own.length < 2) return false;
+  const need = Math.max(2, Math.ceil(own.length * 0.6));
+  for (const p of passages ?? []) {
+    for (const line of String(p?.text ?? "").split(/(?<=[.!?])\s+|\n+/u)) {
+      const have = new Set(WORDS4(line).map(stemmed));
+      if (own.filter((w) => have.has(w)).length >= need) return true;
+    }
+  }
+  return false;
+}
+
 /** Judge sentences against passages: [{ standing, evidence?, why?, verdict, witnesses[], swap }] in the sentences' order. */
 export function judgeAll(sentences, passages, { own = [] } = {}) {
   if (!sentences.length) return [];
