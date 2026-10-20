@@ -148,3 +148,33 @@ export function makeBraveSearch({ deadline = Infinity, fetchImpl = globalThis.fe
     return run;
   };
 }
+
+/** Marginalia's public search API (keyless: the shared key "public"; an independent small-web index; results are CC-BY-NC-SA, used here for local checking only).
+ *  A refusal (HTTP 429 on the shared key) is a typed error. Cached by query. */
+// Marginalia ANDs every term and stalls on a query of closed-class words ("was born in"): ask it the open-class words only, as read from the parser prior
+// (opencode-keyed.mjs openClassOf), passed in; no word list.
+export const marginaliaTerms = (q, isOpen = () => true) => String(q).replace(/[\"“”]/g, " ").split(/\s+/).filter((w) => w && (/\d/.test(w) || isOpen(w))).join(" ");
+
+export function makeMarginaliaSearch({ deadline = Infinity, fetchImpl = globalThis.fetch, count = 20 } = {}) {
+  return (query) => {
+    const hit = read(key("marginalia", query));
+    if (hit) { stats.cached++; return Promise.resolve(hit); }
+    if (offline()) return Promise.reject(new Error("offline: not in the recording"));
+    const run = chain.then(async () => {
+      const wait = Math.max(0, last + Number(process.env.FOLD_MARGINALIA_GAP_MS ?? 2000) - Date.now());
+      if (Date.now() + wait + 4000 > deadline) { stats.skipped++; throw new Error("skipped: past this answer's research budget"); }
+      if (wait) await sleep(wait);
+      last = Date.now();
+      stats.searches++;
+      const res = await fetchImpl(`https://api.marginalia.nu/public/search/${encodeURIComponent(marginaliaTerms(query))}?count=${count}`, { headers: { accept: "application/json", "user-agent": UA }, signal: AbortSignal.timeout(Math.max(3000, Math.min(10_000, deadline - Date.now()))) });
+      if (!res.ok) throw new Error(`Marginalia answered ${res.status}`);
+      const j = await res.json();
+      const results = (j?.results ?? []).filter((r) => /^https?:\/\//.test(r.url)).map((r) => ({ title: String(r.title ?? ""), url: r.url, snippet: String(r.description ?? "").slice(0, 300) }));
+      if (!results.length) throw new Error("no results");
+      remember("marginalia", query, results, "api.marginalia.nu");
+      return results;
+    });
+    chain = run.catch(() => {});
+    return run;
+  };
+}

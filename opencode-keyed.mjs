@@ -43,6 +43,12 @@ async function organsOnce() {
   return organs;
 }
 
+/** Is a word open-class (noun, verb, adjective, adverb, proper name, number)? Read from the received parser prior's dominant class for the word, never from a list. */
+export async function openClassOf() {
+  const { dominantOf } = await organsOnce();
+  return (w) => { const d = dominantOf(String(w).toLowerCase().replace(/[^\p{L}\p{N}-]/gu, "")); return !d || ["NOUN", "VERB", "ADJ", "ADV", "PROPN", "NUM", "X"].includes(d.upos); };
+}
+
 const fold = (s) => String(s ?? "").normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/\s+/g, " ").trim();
 const words = (s) => String(s ?? "").match(/[\p{L}\p{N}]+(?:['’][\p{L}]+)?/gu) ?? [];
 
