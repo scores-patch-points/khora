@@ -18,11 +18,12 @@ const { BATTERY } = await import("./battery.mjs");
 const { profileOf, warmFinish } = await import("../../opencode-finish.mjs");
 await warmFinish();
 
-const ARMS = { A0: "0", A1: "1" };
+const ARMS = { A0: "0", A1: "1", A2: "1" };
 const only = process.argv.find((a) => a.startsWith("--only="))?.slice(7)?.split(",");
 const rows = [];
 for (const [arm, flag] of Object.entries(ARMS)) {
   process.env.FOLD_KEYED = flag === "1" ? "1" : "0";
+  process.env.FOLD_KEYED_SOLE = arm === "A2" ? "1" : "0";
   for (const item of BATTERY) {
     if (only && !only.includes(item.id)) continue;
     const t0 = Date.now();
@@ -42,6 +43,7 @@ fs.writeFileSync(path.join(HERE, RECORD ? "results-record.json" : "results.json"
 const tally = (arm, f = () => true) => { const rs = rows.filter((x) => x.arm === arm && f(x)); return { n: rs.length, RIGHT: rs.filter((x) => x.outcome === "RIGHT").length, WRONG: rs.filter((x) => x.outcome === "WRONG").length, GAP: rs.filter((x) => x.outcome === "GAP").length, informative: rs.filter((x) => x.informativeGap).length }; };
 console.log("\nA0", JSON.stringify(tally("A0")));
 console.log("A1", JSON.stringify(tally("A1")));
+console.log("A2", JSON.stringify(tally("A2")));
 // V4: evidence earned
 const v4 = rows.filter((x) => x.arm === "A1" && x.verdict !== "U").every((x) => /^Q\d+#P\d+$/.test(x.evidence ?? "") || /wikipedia|Q\d+#P/.test(x.evidence ?? ""));
 console.log("V4 evidence addressed:", v4);
