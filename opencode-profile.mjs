@@ -156,6 +156,13 @@ function residueOf(claim, witness) {
   return WORDS4(claim).filter((w) => !names.has(w) && !have.has(stemmed(w)) && ![...have].some((h) => h.startsWith(stemmed(w).slice(0, 4)))).slice(0, 4);
 }
 
+/** A sentence that is only a parenthetical source tag: it opens with ( or [, closes with ) or ], and holds a link, a URL or a quoted title. */
+export function sourceTagOnly(sentence) {
+  const t = String(sentence ?? "").trim().replace(/[.!?;:\s]+$/u, "");
+  if (t.length < 3 || !"([".includes(t[0]) || !")]".includes(t[t.length - 1])) return false;
+  return t.includes("](") || t.includes("http") || t.includes("“") || t.includes('"') || t.includes("«");
+}
+
 /** Is this "argument" sentence ABOUT what was read? A declarative that shares most of its content words with one sentence of a passage is a claim about that
  *  material ("Dolphins are not a diverse group of animals" negates a stated line; "Every dolphin species is endangered" widens one), so it is judged, never left
  *  as opinion. A sentence that shares nothing stays an argument. */
@@ -234,6 +241,8 @@ export function proseUnits(text, { resolve = () => [], split = splitPlain, known
       // A lead personal pronoun makes the last named being the SUBJECT; the beings this sentence names are its objects.
       if (leadPronoun(s) && last.length) { beings = [...last, ...beings.filter((b) => !last.includes(b))]; via = "pronoun"; }
       else if (beings.length) last = beings;
+      // a source tag standing alone as a sentence ("(MarineBio, “Dolphin Biology”).", "([MarineBio](https://…)).") is provenance, not a claim
+      if (sourceTagOnly(s)) { units.push({ text: s, standing: "heading", citation: true }); continue; }
       const kind = checkable(s, beings);
       units.push({ text: s, standing: kind === "claim" ? "unchecked" : kind, ...(beings.length ? { beings } : {}), ...(via ? { carried: via, ...(/\b(he|she|him|his|her|hers)\b/i.test(s.split(/\s+/).slice(0, 5).join(" ")) ? { person: true } : {}) } : {}) });
     }

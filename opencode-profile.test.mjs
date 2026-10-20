@@ -272,3 +272,12 @@ test("an argument sentence about the material is a claim: a negation or a wideni
   assert.equal(aboutPassages("What should we take from this?", passages), false);
   assert.equal(aboutPassages("Nothing here is about ships.", passages), false);
 });
+
+test("a source tag standing alone is provenance, not a claim", async () => {
+  const { proseUnits, sourceTagOnly } = await import("./opencode-profile.mjs");
+  assert.equal(sourceTagOnly("(MarineBio, “Dolphin Biology”)."), true);
+  assert.equal(sourceTagOnly("([MarineBio](https://www.marinebio.org/creatures/dolphins/biology/))."), true);
+  assert.equal(sourceTagOnly("(22,838 ft)"), false);
+  const u = proseUnits("Dolphins are a diverse group of animals. (MarineBio, “Dolphin Biology”).");
+  assert.ok(u.every((x) => x.standing !== "unchecked" || !x.text.startsWith("(")), "the tag is not judged");
+});
