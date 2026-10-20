@@ -71,3 +71,9 @@ test("the gather session's misses: codebase searches are work, 'tell me about' i
   assert.equal(await kind("écris une histoire sur un dragon"), "creative");
   assert.equal(await kind("raconte moi l histoire de France"), "account");
 });
+
+test("'tell me about X' is an account in every covered language; 'tell me a story' stays creative", async () => {
+  for (const ask of ["háblame de los delfines", "parle-moi des dauphins", "erzähl mir von Delfinen", "расскажи про дельфинов", "给我讲讲海豚", "イルカについて教えて", "حدثني عن الدلافين"]) assert.equal((await routeOf(ask)).kind, "account", ask);
+  assert.equal((await routeOf("raconte moi une histoire de dragon")).kind, "creative");
+  assert.equal((await routeOf("dis moi une blague")).kind, "creative");
+});
