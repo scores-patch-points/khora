@@ -145,7 +145,7 @@ async function englishFacts(text) {
   const imperative = root.upos === "VERB" && !subj && root.feats.VerbForm === "Inf";
   return {
     rows, root, nouns, subj, imperative, lemmas: new Set(rows.map((r) => r.lemma)),
-    interrogative: rows.some((r) => r.feats.PronType === "Int"),
+    interrogative: rows.some((r) => r.feats.PronType === "Int") || rows[0]?.feats.PronType === "Rel",   // the parser takes a sentence-initial "who" for a relative pronoun
     addressee: (subj && subj.feats.Person === "2") || (root.upos === "PRON" && root.feats.Person === "2"),   // "how are you": the addressee is the copular root
     speaker: Boolean(subj && subj.feats.Person === "1"),
     secondPerson: rows.some((r) => r.feats.Person === "2" && r.upos === "PRON"),
@@ -196,7 +196,9 @@ export async function topicOf(ask, { language = null } = {}) {
   if (lang === "en") {
     const en = await englishFacts(text);
     // the parser's content words, and a word the parser took for a verb that the language's own prior knows as a noun ("earthquakes" after "what causes")
-    if (en) return en.rows.filter((r) => (["NOUN", "PROPN", "ADJ", "NUM"].includes(r.upos) || (r.upos === "VERB" && ["NOUN", "PROPN"].includes(classOf("en", r.form.toLowerCase())))) && !intentToken(fold(r.form))).map((r) => r.form).join(" ");
+    // The parser mis-tags the asked-about noun in "what height do airlines fly at" (height/AUX): where the language's own prior says the word is a noun, it is one.
+    // A verb that modifies the topic ("fly" in "what height do airlines fly at", "work" in "how vaccines work") is the predicate of the question and stays; the root verb is the request's frame, unless the prior has never seen the word ("photosynthesis" taken for the root verb of "how does photosynthesis work").
+    if (en) return en.rows.filter((r) => (["NOUN", "PROPN", "ADJ", "NUM"].includes(r.upos) || (r.upos !== "PUNCT" && ["NOUN", "PROPN"].includes(classOf("en", r.form.toLowerCase()))) || (r.upos === "VERB" && (r.head !== 0 || classOf("en", r.form.toLowerCase()) === null))) && !intentToken(fold(r.form))).map((r) => r.form).join(" ");
   }
   let work = text;
   if (d?.script === "unspaced" || lang === "ar") {

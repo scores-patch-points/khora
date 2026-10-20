@@ -77,3 +77,13 @@ test("'tell me about X' is an account in every covered language; 'tell me a stor
   assert.equal((await routeOf("raconte moi une histoire de dragon")).kind, "creative");
   assert.equal((await routeOf("dis moi une blague")).kind, "creative");
 });
+
+test("the topic keeps what the question asks about: the attribute noun and the predicate verb survive a mis-tagged parse", async () => {
+  const topic = async (ask) => (await routeOf(ask)).topic;
+  assert.match(await topic("what height do commerical airlines fly at?"), /height/, "the asked-about attribute");
+  assert.match(await topic("what height do commerical airlines fly at?"), /fly/, "the predicate");
+  assert.match(await topic("how does photosynthesis work"), /photosynthesis/, "a word the prior has never seen is not dropped as a verb");
+  assert.match(await topic("what do dolphins eat"), /dolphins/);
+  assert.equal((await routeOf("who invented the telephone")).kind, "account", "a sentence-initial who is a question, not the verb 'invent' asked of the model");
+  assert.equal((await routeOf("invent a name for my cat")).kind, "creative");
+});
