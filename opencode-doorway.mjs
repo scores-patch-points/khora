@@ -1664,8 +1664,8 @@ async function onGround(body) {
   if (process.env.FOLD_FINISH !== "0") {
     try {
       const { finish } = await import("./opencode-finish.mjs");
-      const f = await finish({ ask: String(body.ask ?? ""), draft: String(body.text ?? ""), material: body.material ?? null, passages: body.passages ?? null });
-      if (f?.ok) step = { output: f.output, superseded: f.superseded, grounded: f.grounded, ground_trace: f.ground_trace, lane: f.lane, disclosure: f.disclosure, eot: f.eot };
+      const f = await finish({ ask: String(body.ask ?? ""), draft: String(body.text ?? ""), material: body.material ?? null, passages: body.passages ?? null, workspace: body.workspace ? String(body.workspace) : null, own: Array.isArray(body.own) ? body.own.map(String) : [], ...(typeof body.research === "boolean" ? { research: body.research } : {}) });
+      if (f?.ok) step = { output: f.output, superseded: f.superseded, grounded: f.grounded, ground_trace: f.ground_trace, profile: f.profile, lane: f.lane, disclosure: f.disclosure, eot: f.eot };
     } catch { /* typed gap */ }
   }
   // THE TURN'S SHAPE (the audit's live row, read once more here so the window never reaches for the door):

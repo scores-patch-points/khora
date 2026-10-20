@@ -6,6 +6,9 @@ import assert from "node:assert/strict";
 import { finish } from "./opencode-finish.mjs";
 import { warm } from "./opencode-lane.mjs";
 
+// The falsifier's research reaches the network; these controls are offline (opencode-profile.test.mjs covers it).
+process.env.FOLD_RESEARCH = "0";
+
 test.before(async () => {
   await warm();
 });
