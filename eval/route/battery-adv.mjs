@@ -1,0 +1,21 @@
+// eval/route/battery-adv.mjs — written after Result 1, before the fixes were run against it. Each item targets a break the router is expected to have.
+export const ADV = [
+  { id: "X01", ask: "can you explain how photosynthesis works?", kind: "account" },
+  { id: "X02", ask: "could you write me an essay on volcanoes?", kind: "account" },
+  { id: "X03", ask: "do you know who invented the telephone?", kind: "account" },
+  { id: "X04", ask: "what do you know about the Silk Road?", kind: "account" },
+  { id: "X05", ask: "can you find me a good book on stoicism?", kind: "search" },
+  { id: "X06", ask: "please write a poem about the sea", kind: "creative" },
+  { id: "X07", ask: "write an essay about my cat Biscuit", kind: "creative" },
+  { id: "X08", ask: "tell me about yourself", kind: "chat" },
+  { id: "X09", ask: "explain what this function does", kind: "work" },
+  { id: "X10", ask: "what is the best way to learn Rust?", kind: "account" },
+  { id: "X11", ask: "make it sound more formal", kind: "followup" },
+  { id: "X12", ask: "why?", kind: "followup" },
+  { id: "X13", ask: "is a tomato a fruit?", kind: "account" },
+  { id: "X14", ask: "what's the weather like in Oslo today?", kind: "search" },
+  { id: "X15", ask: "write a haiku and then explain the history of haiku", kind: "account" },
+  { id: "X16", ask: "I think dolphins are overrated", kind: "chat" },
+  { id: "X17", ask: "dolphins", kind: "account" },
+  { id: "X18", ask: "what is 3 plus 4, and who discovered zero?", kind: "account" },
+];

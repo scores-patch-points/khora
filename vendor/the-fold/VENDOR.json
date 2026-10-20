@@ -1,15 +1,19 @@
 {
   "repo": "the-fold",
-  "commit": "2fcba50b0f97d14e96d752299bcb89e41785ff65",
-  "uncommittedAtSync": "M essay-seam.mjs\n M essay-seam.test.mjs\n M eval/ants/falsify-checks/f2/_pv.gen.mjs\n M fold-chat-falsify-answer.js\n M school.html\n?? .probe/\n?? fold-chat-falsify-heads.test.mjs",
-  "at": "2026-10-20T03:05:24.065Z",
+  "commit": "0055d480f946ea216144860b15d42f9be76f17ad",
+  "uncommittedAtSync": "M essay-seam.mjs\n M essay-seam.test.mjs\n M eval/ants/falsify-checks/f2/_pv.gen.mjs\n M school.html\n?? .probe/",
+  "at": "2026-10-20T15:28:00.466Z",
   "entry": [
     "fold-chat-falsify-answer.js",
     "fold-chat-ground.js",
-    "fold-chat-provenance.js"
+    "fold-chat-provenance.js",
+    "fold-chat-void-keyed.js",
+    "fold-chat-primary.js",
+    "fold-chat-engines.js"
   ],
   "files": {
     "fold-chat-creole-priors.js": "948e75872c992a4872083b6eba1f5b5732095f4be2983ac0ca903b79a251eb37",
+    "fold-chat-engines.js": "0b3d472b61131637983999b33eb9eb80d201c78a583363d451b4dcc7157f0180",
     "fold-chat-falsify-answer.js": "2a21d850ce219886376955d115436fd6f5b6bc0345d95760ec97121f7669d759",
     "fold-chat-foldtext.js": "44648d2878fb726dd5c85a223ed6fef37f4547a4249a45c4b49f800c5eb80107",
     "fold-chat-function-words.js": "7de668eb25848aad2ac09e552033d980fdd98b376964ca553aa7591bfcbd7f8e",
@@ -22,8 +26,10 @@
     "fold-chat-langid-creole.js": "d25f4657da66c9bf8a37a62c87a404a188278f21c6390e326a77545e990c8602",
     "fold-chat-langid.js": "0dcd6ebd08dde24df8b8539918869e4d0d68c5c5b8e18247d077b87dbb2ca5de",
     "fold-chat-mind.js": "f3fd2db695b2671bdeef3a7c41ba928374c8c4d7ec65baf55d5d7185ea15d8ea",
+    "fold-chat-primary.js": "fe917ca7281ee63e22e6fc314a75c8feabba82ee01228179026311dd6748d92d",
     "fold-chat-provenance.js": "b98acb97f65044f48219fd9881919b2aaee27c727d0ed442ee01e905fa9c4201",
     "fold-chat-salience.js": "816ab26b576a5a3d3ab1e712e33dd2504d59b7a7a53182784a2992b550a34554",
-    "fold-chat-tertiary.js": "e171bae205d4b2ddf81ade74e60b9ec0d8857a5cf73e7bc3a580e4d5d2414372"
+    "fold-chat-tertiary.js": "e171bae205d4b2ddf81ade74e60b9ec0d8857a5cf73e7bc3a580e4d5d2414372",
+    "fold-chat-void-keyed.js": "cb105ff61ea3556ee5215e0548fb9b7e0f5719225f397860df8b493cac3fe182"
   }
 }

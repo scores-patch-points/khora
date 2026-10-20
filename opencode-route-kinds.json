@@ -1,0 +1,1054 @@
+{
+  "schema": "RouteKinds@1",
+  "giver": "the author (a model), minimal attested surfaces per language, NOT a native speaker's and not exhaustive; a native speaker refines each. Declared, not measured, until eval/route/PREREG.md measures it.",
+  "match": "A surface is folded (lowercase, diacritics and Arabic vowel marks dropped). In a spaced script: a token equal to it, a token starting with it when it ends in *, or consecutive tokens when it holds a space. In an unspaced script (zh, ja) and in Arabic: a substring of the folded text.",
+  "kinds": "invented: an invented work is asked for. invent: the verb invents. genre: an informative genre noun. account: an accounting verb. know: to know. seek: to look for. compute: to convert or calculate. arith: an arithmetic operator word. fresh: something only true now. view: the model's own opinion or preference. greet: a greeting, thanks or farewell. work: a work noun (the workspace, code). wh: an interrogative word. ask: a question particle. frame: the request's own frame (write me, give me, tell me, about): removed to leave the topic.",
+  "languages": {
+    "en": {
+      "script": "spaced",
+      "invented": [
+        "poem*",
+        "story",
+        "stories",
+        "song*",
+        "joke*",
+        "haiku*",
+        "limerick*",
+        "sonnet*",
+        "riddle*",
+        "lyric*",
+        "fable*",
+        "tale*"
+      ],
+      "invent": [
+        "invent*",
+        "imagin*",
+        "compos*",
+        "pretend*",
+        "come up with",
+        "make up"
+      ],
+      "genre": [
+        "essay*",
+        "report*",
+        "summary",
+        "overview*",
+        "explanation*",
+        "history",
+        "account",
+        "article*",
+        "biograph*",
+        "analysis",
+        "introduction"
+      ],
+      "account": [
+        "explain*",
+        "describ*",
+        "compar*",
+        "outline",
+        "discuss*",
+        "teach*",
+        "summariz*",
+        "understand*",
+        "contrast*"
+      ],
+      "know": [
+        "know"
+      ],
+      "seek": [
+        "find",
+        "search*",
+        "locat*",
+        "browse",
+        "look* up",
+        "look* for"
+      ],
+      "compute": [
+        "convert*",
+        "calculat*",
+        "comput*",
+        "solve"
+      ],
+      "arith": [
+        "times",
+        "plus",
+        "minus",
+        "divided",
+        "multiplied",
+        "squared",
+        "percent*"
+      ],
+      "fresh": [
+        "today",
+        "tonight",
+        "now",
+        "currently",
+        "latest",
+        "recent*",
+        "current*",
+        "tomorrow",
+        "forecast",
+        "weather"
+      ],
+      "view": [
+        "think",
+        "like",
+        "prefer*",
+        "feel*",
+        "enjoy*",
+        "love",
+        "hate",
+        "believe",
+        "favorite",
+        "favourite"
+      ],
+      "greet": [
+        "hello",
+        "hi",
+        "hey",
+        "thanks",
+        "thank",
+        "goodbye",
+        "bye",
+        "good morning",
+        "good evening"
+      ],
+      "work": [
+        "file*",
+        "repo",
+        "repos",
+        "repositor*",
+        "function*",
+        "method*",
+        "test*",
+        "commit*",
+        "code",
+        "bug*",
+        "branch*",
+        "import*",
+        "script*",
+        "stack",
+        "trace",
+        "build",
+        "class",
+        "module*",
+        "variable*",
+        "config*",
+        "endpoint*"
+      ],
+      "wh": [
+        "who",
+        "whom",
+        "what",
+        "why",
+        "how",
+        "when",
+        "where",
+        "which"
+      ],
+      "ask": [],
+      "frame": [
+        "write*",
+        "give",
+        "tell",
+        "show",
+        "make",
+        "create",
+        "draft",
+        "produce",
+        "need",
+        "want",
+        "please",
+        "can",
+        "could",
+        "would"
+      ]
+    },
+    "es": {
+      "script": "spaced",
+      "invented": [
+        "poema*",
+        "cuento*",
+        "cancion*",
+        "canciones",
+        "chiste*",
+        "haiku*",
+        "adivinanza*",
+        "soneto*",
+        "fabula*",
+        "relato*"
+      ],
+      "invent": [
+        "invent*",
+        "imagin*",
+        "compon*",
+        "finge*"
+      ],
+      "genre": [
+        "ensayo*",
+        "informe*",
+        "resumen",
+        "panorama",
+        "explicacion*",
+        "historia",
+        "articulo*",
+        "biograf*",
+        "analisis",
+        "introduccion"
+      ],
+      "account": [
+        "explic*",
+        "descri*",
+        "compar*",
+        "resum*",
+        "discut*",
+        "ensen*",
+        "entender",
+        "comprender",
+        "contrast*"
+      ],
+      "know": [
+        "sabes",
+        "sabe",
+        "conoces",
+        "saber"
+      ],
+      "seek": [
+        "busca*",
+        "buscame",
+        "encuentr*",
+        "localiza*",
+        "hallar"
+      ],
+      "compute": [
+        "convierte*",
+        "convert*",
+        "calcula*",
+        "resuelve"
+      ],
+      "arith": [
+        "por",
+        "mas",
+        "menos",
+        "dividido",
+        "multiplicado",
+        "raiz",
+        "porcentaje",
+        "entre"
+      ],
+      "fresh": [
+        "hoy",
+        "ahora",
+        "actual*",
+        "ultim*",
+        "reciente*",
+        "manana",
+        "pronostico",
+        "clima"
+      ],
+      "view": [
+        "piensas",
+        "opinas",
+        "crees",
+        "prefieres",
+        "sientes",
+        "gusta*",
+        "favorit*"
+      ],
+      "greet": [
+        "hola",
+        "gracias",
+        "adios",
+        "buenos dias",
+        "buenas tardes",
+        "buenas noches"
+      ],
+      "work": [
+        "archivo*",
+        "prueba*",
+        "test*",
+        "funcion",
+        "funciones",
+        "commit*",
+        "codigo",
+        "bug*",
+        "rama",
+        "script*",
+        "modulo*",
+        "variable*",
+        "config*"
+      ],
+      "wh": [
+        "quien*",
+        "que",
+        "cual*",
+        "como",
+        "cuando",
+        "donde",
+        "cuanto*",
+        "cuanta*",
+        "por que"
+      ],
+      "ask": [],
+      "frame": [
+        "escrib*",
+        "dame",
+        "dime",
+        "muestr*",
+        "hazme",
+        "necesito",
+        "quiero",
+        "puedes",
+        "podrias",
+        "por favor"
+      ]
+    },
+    "fr": {
+      "script": "spaced",
+      "invented": [
+        "poeme*",
+        "conte*",
+        "chanson*",
+        "blague*",
+        "haiku*",
+        "devinette*",
+        "sonnet*",
+        "fable*",
+        "limerick*"
+      ],
+      "invent": [
+        "invent*",
+        "imagin*",
+        "compos*"
+      ],
+      "genre": [
+        "essai*",
+        "rapport*",
+        "resume",
+        "apercu",
+        "explication*",
+        "histoire",
+        "article*",
+        "biograph*",
+        "analyse",
+        "introduction"
+      ],
+      "account": [
+        "expliqu*",
+        "decri*",
+        "compar*",
+        "resum*",
+        "discut*",
+        "enseign*",
+        "comprend*",
+        "contrast*"
+      ],
+      "know": [
+        "sais",
+        "sait",
+        "connais",
+        "savoir"
+      ],
+      "seek": [
+        "cherche*",
+        "trouve*",
+        "localise*",
+        "recherche*"
+      ],
+      "compute": [
+        "convertis*",
+        "convert*",
+        "calcul*",
+        "resous"
+      ],
+      "arith": [
+        "fois",
+        "plus",
+        "moins",
+        "divise",
+        "multiplie",
+        "racine",
+        "pourcent*"
+      ],
+      "fresh": [
+        "aujourd*",
+        "maintenant",
+        "actuel*",
+        "dernier*",
+        "recent*",
+        "demain",
+        "meteo"
+      ],
+      "view": [
+        "penses",
+        "aimes",
+        "preferes",
+        "ressens",
+        "crois",
+        "adores",
+        "favori*"
+      ],
+      "greet": [
+        "bonjour",
+        "salut",
+        "merci",
+        "bonsoir",
+        "au revoir"
+      ],
+      "work": [
+        "fichier*",
+        "test*",
+        "fonction",
+        "fonctions",
+        "commit*",
+        "code",
+        "bug*",
+        "branche*",
+        "script*",
+        "module*",
+        "variable*",
+        "config*"
+      ],
+      "wh": [
+        "qui",
+        "quoi",
+        "pourquoi",
+        "comment",
+        "quand",
+        "ou",
+        "quel*",
+        "combien"
+      ],
+      "ask": [],
+      "frame": [
+        "ecri*",
+        "donne*",
+        "dis",
+        "dites",
+        "montre*",
+        "fais",
+        "besoin",
+        "veux",
+        "peux",
+        "pourrais",
+        "svp"
+      ]
+    },
+    "de": {
+      "script": "spaced",
+      "invented": [
+        "gedicht*",
+        "geschichte*",
+        "lied*",
+        "witz*",
+        "haiku*",
+        "ratsel*",
+        "sonett*",
+        "fabel*",
+        "marchen"
+      ],
+      "invent": [
+        "erfind*",
+        "komponier*"
+      ],
+      "genre": [
+        "aufsatz",
+        "bericht*",
+        "zusammenfassung*",
+        "uberblick",
+        "erklarung*",
+        "geschichte",
+        "artikel*",
+        "biografie*",
+        "analyse",
+        "einfuhrung"
+      ],
+      "account": [
+        "erklar*",
+        "beschreib*",
+        "vergleich*",
+        "diskutier*",
+        "lehr*",
+        "verstehen",
+        "zusammenfass*"
+      ],
+      "know": [
+        "weisst",
+        "kennst",
+        "wissen"
+      ],
+      "seek": [
+        "such*",
+        "finde*",
+        "find",
+        "durchsuch*"
+      ],
+      "compute": [
+        "umrechn*",
+        "rechne*",
+        "berechn*",
+        "lose",
+        "konvertier*"
+      ],
+      "arith": [
+        "mal",
+        "plus",
+        "minus",
+        "geteilt",
+        "durch",
+        "wurzel",
+        "prozent*"
+      ],
+      "fresh": [
+        "heute",
+        "jetzt",
+        "aktuell*",
+        "neueste*",
+        "morgen",
+        "wetter"
+      ],
+      "view": [
+        "denkst",
+        "haltst",
+        "magst",
+        "bevorzugst",
+        "fuhlst",
+        "glaubst",
+        "liebst",
+        "lieblings*"
+      ],
+      "greet": [
+        "hallo",
+        "danke",
+        "tschuss",
+        "guten morgen",
+        "servus",
+        "guten abend",
+        "guten tag",
+        "gute nacht"
+      ],
+      "work": [
+        "datei*",
+        "test*",
+        "funktion",
+        "funktionen",
+        "commit*",
+        "code",
+        "bug*",
+        "branch*",
+        "skript*",
+        "modul*",
+        "variable*",
+        "konfig*"
+      ],
+      "wh": [
+        "wer",
+        "wen",
+        "wem",
+        "was",
+        "warum",
+        "wieso",
+        "wie",
+        "wann",
+        "wo",
+        "welche*",
+        "wieviel*"
+      ],
+      "ask": [],
+      "frame": [
+        "schreib*",
+        "gib",
+        "gibt",
+        "sag*",
+        "zeig*",
+        "mach*",
+        "brauche",
+        "will",
+        "kannst",
+        "konntest",
+        "bitte"
+      ]
+    },
+    "ru": {
+      "script": "spaced",
+      "invented": [
+        "стих*",
+        "рассказ*",
+        "песн*",
+        "анекдот*",
+        "шутк*",
+        "хайку",
+        "загадк*",
+        "сонет*",
+        "басн*",
+        "сказк*"
+      ],
+      "invent": [
+        "придума*",
+        "вообрази*",
+        "сочини*",
+        "представь*"
+      ],
+      "genre": [
+        "эссе",
+        "отчёт*",
+        "отчет*",
+        "резюме",
+        "обзор*",
+        "объяснени*",
+        "истори*",
+        "стать*",
+        "биографи*",
+        "анализ*",
+        "введени*"
+      ],
+      "account": [
+        "объясни*",
+        "опиши*",
+        "описа*",
+        "сравни*",
+        "обсуд*",
+        "понима*"
+      ],
+      "know": [
+        "знаешь",
+        "знаете",
+        "знать"
+      ],
+      "seek": [
+        "найд*",
+        "найти",
+        "ищи",
+        "поищи",
+        "искать",
+        "поиск*"
+      ],
+      "compute": [
+        "переведи*",
+        "перевести",
+        "посчитай*",
+        "вычисли*",
+        "реши"
+      ],
+      "arith": [
+        "умножить",
+        "умножь",
+        "плюс",
+        "минус",
+        "разделить",
+        "корень",
+        "процент*"
+      ],
+      "fresh": [
+        "сегодня",
+        "сейчас",
+        "текущ*",
+        "последн*",
+        "завтра",
+        "погод*",
+        "прогноз*"
+      ],
+      "view": [
+        "думаешь",
+        "считаешь",
+        "нравится",
+        "предпочитаешь",
+        "чувствуешь",
+        "любишь",
+        "веришь",
+        "любим*"
+      ],
+      "greet": [
+        "привет",
+        "здравствуй*",
+        "спасибо",
+        "пока",
+        "добрый",
+        "как дела"
+      ],
+      "work": [
+        "файл*",
+        "тест*",
+        "функци*",
+        "коммит*",
+        "код*",
+        "баг*",
+        "ветк*",
+        "скрипт*",
+        "модул*",
+        "переменн*",
+        "конфиг*"
+      ],
+      "wh": [
+        "кто",
+        "что",
+        "почему",
+        "как",
+        "когда",
+        "где",
+        "какой*",
+        "какая",
+        "сколько"
+      ],
+      "ask": [],
+      "frame": [
+        "напиши*",
+        "дай",
+        "скажи*",
+        "покажи*",
+        "сделай",
+        "нужно",
+        "хочу",
+        "можешь",
+        "пожалуйста"
+      ]
+    },
+    "zh": {
+      "script": "unspaced",
+      "invented": [
+        "诗",
+        "故事",
+        "歌",
+        "笑话",
+        "俳句",
+        "谜语",
+        "十四行诗",
+        "寓言"
+      ],
+      "invent": [
+        "想象",
+        "虚构",
+        "编一个"
+      ],
+      "genre": [
+        "文章",
+        "论文",
+        "报告",
+        "总结",
+        "概述",
+        "历史",
+        "传记",
+        "分析",
+        "作文"
+      ],
+      "account": [
+        "解释",
+        "说明",
+        "描述",
+        "比较",
+        "讨论",
+        "讲解",
+        "理解",
+        "介绍"
+      ],
+      "know": [
+        "知道"
+      ],
+      "seek": [
+        "找",
+        "搜索",
+        "查",
+        "寻找"
+      ],
+      "compute": [
+        "换算",
+        "转换",
+        "计算"
+      ],
+      "arith": [
+        "乘",
+        "加",
+        "减",
+        "除",
+        "平方",
+        "百分"
+      ],
+      "fresh": [
+        "今天",
+        "现在",
+        "最新",
+        "目前",
+        "明天",
+        "天气"
+      ],
+      "view": [
+        "觉得",
+        "认为",
+        "喜欢",
+        "偏好",
+        "感觉",
+        "想法"
+      ],
+      "greet": [
+        "你好",
+        "谢谢",
+        "再见",
+        "早上好",
+        "晚上好"
+      ],
+      "work": [
+        "文件",
+        "测试",
+        "函数",
+        "提交",
+        "代码",
+        "分支",
+        "脚本",
+        "模块",
+        "变量",
+        "配置"
+      ],
+      "wh": [
+        "谁",
+        "什么",
+        "为什么",
+        "怎么",
+        "怎样",
+        "何时",
+        "哪",
+        "多少"
+      ],
+      "ask": [
+        "吗",
+        "呢"
+      ],
+      "frame": [
+        "给我",
+        "写",
+        "一篇",
+        "一个",
+        "一首",
+        "关于",
+        "帮我",
+        "请",
+        "我想",
+        "我要"
+      ]
+    },
+    "ja": {
+      "script": "unspaced",
+      "invented": [
+        "詩",
+        "物語",
+        "歌",
+        "ジョーク",
+        "冗談",
+        "俳句",
+        "なぞなぞ",
+        "ソネット",
+        "寓話",
+        "小説"
+      ],
+      "invent": [
+        "想像",
+        "創作"
+      ],
+      "genre": [
+        "エッセイ",
+        "作文",
+        "レポート",
+        "報告",
+        "要約",
+        "概要",
+        "歴史",
+        "伝記",
+        "分析",
+        "記事"
+      ],
+      "account": [
+        "説明",
+        "解説",
+        "描写",
+        "比較",
+        "議論",
+        "理解",
+        "教え"
+      ],
+      "know": [
+        "知って",
+        "知る"
+      ],
+      "seek": [
+        "探",
+        "検索",
+        "調べ"
+      ],
+      "compute": [
+        "変換",
+        "換算",
+        "計算"
+      ],
+      "arith": [
+        "かける",
+        "掛け",
+        "足す",
+        "引く",
+        "割る",
+        "割った",
+        "平方",
+        "パーセント",
+        "乗"
+      ],
+      "fresh": [
+        "今日",
+        "最新",
+        "現在",
+        "明日",
+        "天気"
+      ],
+      "view": [
+        "思い",
+        "好き",
+        "感じ",
+        "考え",
+        "好み"
+      ],
+      "greet": [
+        "こんにちは",
+        "ありがとう",
+        "さようなら",
+        "おはよう",
+        "こんばんは",
+        "元気"
+      ],
+      "work": [
+        "ファイル",
+        "テスト",
+        "関数",
+        "コミット",
+        "コード",
+        "バグ",
+        "ブランチ",
+        "スクリプト",
+        "モジュール",
+        "変数",
+        "設定"
+      ],
+      "wh": [
+        "誰",
+        "何",
+        "なぜ",
+        "どう",
+        "いつ",
+        "どこ",
+        "どの",
+        "いくつ"
+      ],
+      "ask": [
+        "ですか",
+        "ますか"
+      ],
+      "frame": [
+        "について",
+        "書",
+        "教え",
+        "ください",
+        "お願い"
+      ]
+    },
+    "ar": {
+      "script": "unspaced",
+      "invented": [
+        "قصيدة",
+        "شعر",
+        "قصة",
+        "نكتة",
+        "اغنية",
+        "لغز",
+        "هايكو"
+      ],
+      "invent": [
+        "تخيل",
+        "اخترع"
+      ],
+      "genre": [
+        "مقال",
+        "تقرير",
+        "ملخص",
+        "نظرة عامة",
+        "تاريخ",
+        "سيرة",
+        "تحليل",
+        "مقدمة"
+      ],
+      "account": [
+        "اشرح",
+        "شرح",
+        "قارن",
+        "ناقش",
+        "افهم",
+        "لخص",
+        "صف"
+      ],
+      "know": [
+        "تعرف",
+        "تعلم"
+      ],
+      "seek": [
+        "ابحث",
+        "بحث",
+        "اوجد"
+      ],
+      "compute": [
+        "حول",
+        "احسب"
+      ],
+      "arith": [
+        "ضرب",
+        "زائد",
+        "ناقص",
+        "قسمة",
+        "جذر",
+        "بالمئة"
+      ],
+      "fresh": [
+        "اليوم",
+        "الان",
+        "احدث",
+        "حالي",
+        "غدا",
+        "الطقس"
+      ],
+      "view": [
+        "رايك",
+        "تعتقد",
+        "تفضل",
+        "تشعر",
+        "تحب",
+        "تظن"
+      ],
+      "greet": [
+        "مرحبا",
+        "شكرا",
+        "وداعا",
+        "صباح الخير",
+        "كيف حالك",
+        "مساء الخير"
+      ],
+      "work": [
+        "ملف",
+        "اختبار",
+        "دالة",
+        "كود",
+        "فرع",
+        "سكربت",
+        "وحدة",
+        "متغير",
+        "اعداد"
+      ],
+      "wh": [],
+      "ask": [
+        "هل"
+      ],
+      "frame": [
+        "اكتب",
+        "اعطني",
+        "اخبرني",
+        "اريد",
+        "ارجو",
+        "لي",
+        "عن"
+      ]
+    }
+  }
+}

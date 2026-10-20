@@ -220,7 +220,7 @@ async function profileDraw(draw, { passages = [], workspace = null, research = t
   let beings = [];
   if (research) {
     const { researchClaims, researchSymbols } = await import("./opencode-research.mjs");
-    const rc = await researchClaims(claims, { workspace, text: passages.map((p) => p.text).join(" "), answer: draw });
+    const rc = await researchClaims(claims, { workspace, text: passages.map((p) => p.text).join(" "), answer: draw, ask });
     claims = rc.claims; log.push(...rc.log); beings = rc.beings;
     const rs = await researchSymbols(symbols, { workspace });
     symbols = rs.symbols; log.push(...rs.log);
