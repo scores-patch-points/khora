@@ -18,6 +18,8 @@ import { judge, definitionIn } from "./opencode-profile.mjs";
 import { wikipediaArticle, wiktionary } from "./opencode-wiki.mjs";
 import { whoIs } from "./opencode-identity.mjs";
 import { janusPass } from "./opencode-janus.mjs";
+import { checkByIdentity } from "./opencode-keyed.mjs";
+import { makeGetJson } from "./opencode-wiki.mjs";
 
 const WIKI_MAX = Number(process.env.FOLD_RESEARCH_MAX ?? 4); // beings looked up per answer
 const RESEARCH_CLAIMS = Number(process.env.FOLD_RESEARCH_CLAIMS ?? 8); // claims researched per answer
@@ -117,7 +119,7 @@ async function isName(word, opts, log) {
 
 /** Try to falsify (or support) each unsupported claim by research. Returns the re-judged claims, the beings bound
  *  (which one the text means, and why), and the research log (every request: where, what, cached, or why skipped). */
-export async function researchClaims(claims, { workspace = null, budgetMs = Number(process.env.FOLD_RESEARCH_MS ?? 90_000), fetchImpl, text = "", answer = "" } = {}) {
+export async function researchClaims(claims, { workspace = null, budgetMs = Number(process.env.FOLD_RESEARCH_MS ?? 90_000), fetchImpl, text = "", answer = "", keyed = process.env.FOLD_KEYED !== "0" } = {}) {
   const deadline = Date.now() + budgetMs;
   const opts = { deadline, fetchImpl };
   const log = [];
@@ -131,7 +133,8 @@ export async function researchClaims(claims, { workspace = null, budgetMs = Numb
   // stay unsupported — said so — and a long essay is not 70 requests at one per 10 s.
   const mid = midSentenceNames(answer || claims.map((c) => c.text).join(" "));
   const named = (b) => b.includes(" ") || mid.has(b);
-  const eligible = new Set(claims.filter((c) => c.standing === "unsupported" && /\d/.test(c.text) && subjectsOf(c, named).length).slice(0, RESEARCH_CLAIMS));
+  // keyed (the default): a sentence that names a being is worth a look even with no figure — the entity's own keys may name its relation
+  const eligible = new Set(claims.filter((c) => c.standing === "unsupported" && (keyed || /\d/.test(c.text)) && subjectsOf(c, named).length).slice(0, RESEARCH_CLAIMS));
   for (const c of claims) {
     if (c.standing !== "unsupported") { out.push(c); continue; }
     if (!eligible.has(c)) { out.push({ ...c, searched: [...(c.searched ?? ["material"]), "not researched: no figure or no name to look up"] }); continue; }
@@ -167,6 +170,15 @@ export async function researchClaims(claims, { workspace = null, budgetMs = Numb
       if (who.verdict !== "bound") { searched.push(`wikidata: ${name} (${who.verdict}${who.verdict === "skipped" ? "" : `: ${who.basis}`})`); continue; }
       identity = { name, qid: who.entity.qid, label: who.entity.label, description: who.entity.description, url: who.entity.url, basis: who.basis };
       searched.push(`wikidata: ${who.entity.label} (${who.entity.qid})`);
+      // THE KEYED DOOR first (opencode-keyed.mjs): the sentence's relation as a key of the entity's own kind, the typed value against the filler.
+      // A refusal is typed and goes in the trail; the dated-statement check below stays as the fallback.
+      if (keyed) {
+        const getJson = makeGetJson({ known: { pageprops: { [who.entity.enwiki]: who.entity.qid } }, ...opts });
+        const k = await checkByIdentity({ claim: c.text, anchorNames: [name, who.entity.label].filter(Boolean), entity: who.entity, getJson });
+        if (k.standing) { verdict = { standing: k.standing, evidence: k.evidence, ...(k.why ? { why: k.why } : {}), keyed: { property: k.property?.id, label: k.property?.label, values: k.values } }; searched.push(`wikidata key: ${k.property?.label} (${k.property?.id})`); break; }
+        searched.push(`wikidata key: ${k.gap}${k.detail ? ` — ${k.detail}` : ""}`);
+        log.push({ where: "wikidata-key", query: c.text.slice(0, 60), gap: k.gap, detail: k.detail ?? null });
+      }
       const structured = structuredVerdict(c, who.entity);
       if (structured) { verdict = structured; break; }
       if (!who.entity.enwiki) break;
