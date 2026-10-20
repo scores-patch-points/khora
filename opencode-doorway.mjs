@@ -103,6 +103,7 @@ import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 import http from "node:http";
+import net from "node:net";
 import { spawnSync, execFileSync } from "node:child_process";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { lookNote, projectHistory } from "./opencode-context.mjs";
@@ -2200,6 +2201,10 @@ export async function route(req, res, { log = () => {} } = {}) {
 // a box whose proxy has not been restarted onto the mount yet, and for tests.
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href && process.argv.includes("--serve")) {
   const port = Number(process.argv[process.argv.indexOf("--serve") + 1]) || 11470;
+  // A door that is already serving this port is not started a second time: the keeper's watchdog can start another while the first
+  // is still warming under load, and the second would spend minutes warming only to die on the busy port.
+  const taken = await new Promise((resolve) => { const probe = net.connect({ port, host: "127.0.0.1" }); probe.once("connect", () => { probe.destroy(); resolve(true); }); probe.once("error", () => resolve(false)); });
+  if (taken) { console.error(`opencode doorway: :${port} is already served; exiting`); process.exit(0); }
   // Warm BEFORE listening: the first finish() is ~36 s of synchronous work; a closed port fails fast and open (the plugin cools down),
   // where a blocked event loop leaves every connection hanging and the watchdog starting a second door.
   if (process.env.FOLD_FINISH !== "0" && process.env.FOLD_WARM !== "0") {
