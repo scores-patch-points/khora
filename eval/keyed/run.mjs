@@ -18,12 +18,13 @@ const { BATTERY } = await import("./battery.mjs");
 const { profileOf, warmFinish } = await import("../../opencode-finish.mjs");
 await warmFinish();
 
-const ARMS = { A0: "0", A1: "1", A2: "1" };
+const ARMS = { A0: "0", A1: "1", A2: "1", A3: "1" };
 const only = process.argv.find((a) => a.startsWith("--only="))?.slice(7)?.split(",");
 const rows = [];
 for (const [arm, flag] of Object.entries(ARMS)) {
   process.env.FOLD_KEYED = flag === "1" ? "1" : "0";
-  process.env.FOLD_KEYED_SOLE = arm === "A2" ? "1" : "0";
+  process.env.FOLD_KEYED_SOLE = arm === "A2" || arm === "A3" ? "1" : "0";
+  process.env.FOLD_KEYED_JULIAN_GUARD = arm === "A3" ? "1" : "0";
   for (const item of BATTERY) {
     if (only && !only.includes(item.id)) continue;
     const t0 = Date.now();
@@ -44,6 +45,7 @@ const tally = (arm, f = () => true) => { const rs = rows.filter((x) => x.arm ===
 console.log("\nA0", JSON.stringify(tally("A0")));
 console.log("A1", JSON.stringify(tally("A1")));
 console.log("A2", JSON.stringify(tally("A2")));
+console.log("A3", JSON.stringify(tally("A3")));
 // V4: evidence earned
 const v4 = rows.filter((x) => x.arm === "A1" && x.verdict !== "U").every((x) => /^Q\d+#P\d+$/.test(x.evidence ?? "") || /wikipedia|Q\d+#P/.test(x.evidence ?? ""));
 console.log("V4 evidence addressed:", v4);

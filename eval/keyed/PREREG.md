@@ -51,3 +51,16 @@ A0 10 RIGHT / 0 WRONG; A1 12 / 0; A2 17 RIGHT / 1 WRONG. W1 holds (17 > 12). **W
 The wrong one is k05 ("Isaac Newton was born in 1643", true by the Gregorian calendar): Wikidata stores 25 December 1642 (Julian), so the sole value
 differs and A2 contradicts a true sentence. This is the case declared above, arrived as a calendar rather than a second value. A2 is NOT admitted.
 Any follow-up (for example, never contradicting a time value whose calendar model is Julian) is a new amendment, and is informed by having seen k05.
+
+## Amendment 2 (written after Amendment 1's result, which showed k05; so informed by it)
+- **A3:** A2 plus: a time value whose statement carries the Julian calendar model (Q1985786) is never contradicted by a year; the standing stays
+  UNSUPPORTED with the stored value shown. If the calendar cannot be read, the same.
+- **Bars for A3:** W1 A3 RIGHT strictly greater than A1 RIGHT (12); W2 A3 WRONG = 0; V3, V4, V5 as above. Failed bars are reported.
+- Declared, not measured: Julian is the only calendar guarded; no Julian-to-Gregorian conversion is attempted (that could SUPPORT k05, and is a
+  separate amendment). The battery holds one Julian-dated claim, so a pass shows the guard works on that claim, not that it covers others.
+
+### Amendment 2 result (replay, offline)
+A0 10 RIGHT / 0 WRONG; A1 12 / 0; A2 17 / 1; **A3 16 RIGHT / 0 WRONG**. W1 holds (16 > 12), W2 holds (0 wrong), V3 holds (all 17 gaps carry a typed reason),
+V4 and V5 hold. A3 IS ADMITTED and is the default (FOLD_KEYED_SOLE=0 and FOLD_KEYED_JULIAN_GUARD=0 turn the parts off).
+Cost seen: the guard also withholds k06 (Newton's death, "1730", false; Julian-dated), which A2 contradicted correctly: one wrong call avoided, one correct contradiction lost.
+Open: Julian-to-Gregorian conversion would turn k05 into a SUPPORT and k06 back into a contradiction; not attempted, not measured.

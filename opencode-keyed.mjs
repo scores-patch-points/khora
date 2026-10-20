@@ -98,6 +98,14 @@ function matches(values, filler, wantType) {
   return values.some((v) => (v.kind === "item" || v.kind === "string") && want.some((w) => { const t = fold(v.text ?? v.id); return t.length >= 2 && (t === w || w.includes(t)); }));
 }
 
+const JULIAN = "http://www.wikidata.org/entity/Q1985786";
+async function hasJulian(getJson, qid, pid) {
+  try {
+    const j = await getJson(`https://www.wikidata.org/w/api.php?${new URLSearchParams({ format: "json", origin: "*", action: "wbgetentities", ids: qid, props: "claims", languages: "en" })}`);
+    return (j?.entities?.[qid]?.claims?.[pid] ?? []).some((c) => c.rank !== "deprecated" && c.mainsnak?.datavalue?.value?.calendarmodel === JULIAN);
+  } catch { return true; }   // cannot tell the calendar: do not contradict
+}
+
 export async function checkByIdentity({ claim, anchorNames = [], entity, getJson, lang = "en" }) {
   if (!entity?.enwiki && !entity?.label) return { gap: "no_anchor", detail: "the identity step bound no encyclopedia page" };
   const filler = fillerOf(claim, anchorNames);
@@ -121,7 +129,9 @@ export async function checkByIdentity({ claim, anchorNames = [], entity, getJson
   if (matches(typed, filler, kind)) return { ...out, standing: "supported" };
   const said = kind === "time" ? filler.years.join(", ") : kind === "quantity" ? filler.numbers.map((x) => x.raw).join(", ") : filler.names.join(", ");
   // AMENDMENT 1 (eval/keyed/PREREG.md): a date or item property that lists exactly ONE value and a sentence that differs is contradicted, as a single-valued one is
-  const sole = process.env.FOLD_KEYED_SOLE === "1" && kind !== "quantity";
+  let sole = process.env.FOLD_KEYED_SOLE !== "0" && kind !== "quantity";
+  // AMENDMENT 2: a time value stored with the Julian calendar model is never contradicted by a year (the sentence may be Gregorian); the value is shown
+  if (sole && kind === "time" && process.env.FOLD_KEYED_JULIAN_GUARD !== "0" && await hasJulian(getJson, r.qid, r.property.id)) sole = false;
   if ((r.property.single || sole) && r.verdict === "bound" && typed.length === 1) return { ...out, standing: "contradicted", why: `${r.property.label} is ${shown}, not ${said}` };
   return { ...out, standing: "unsupported", why: `${r.property.label} lists ${shown}; the sentence says ${said}` };
 }
