@@ -292,3 +292,20 @@ export async function finish({ ask, draft, ground = null, notes = null, material
       : `the model's draw stands; its ground is shown — ${nGround} sentence(s) grounded, ${nSelf} the mouth's own`,
   };
 }
+
+/** Pay the one-off cold cost (language-id models, the English parser, referent and relation priors, the Fold's judge, Janus) once,
+ *  at boot, before the door listens. Measured 2026-10-19: the first finish() in a process takes ~36 s of synchronous work and every
+ *  later one ~100 ms; paid on a live request it blocked the door's event loop for minutes and the stack's own watchdog read the door
+ *  as down. A typed gap on any part is never a boot failure. */
+export async function warmFinish() {
+  const t0 = Date.now();
+  try {
+    await finish({
+      ask: "summarize the minutes",
+      draft: "The council voted 7 to 4 to approve the compromise. Marie Curie discovered radium in 1898, and she won two Nobel Prizes.\n\n```ts\nwithRetry(fn, { attempts: 3 })\n```",
+      passages: [{ name: "warm.md", text: "The council voted 7 to 4 to approve the compromise after a long debate. Marie Curie discovered radium in 1898. Marie Curie won the Nobel Prize in Physics in 1903 and the Nobel Prize in Chemistry in 1911. export function withRetry(fn, opts: { attempts: number }) {}" }],
+      research: false,
+    });
+  } catch { /* a typed gap */ }
+  return { ok: true, ms: Date.now() - t0 };
+}

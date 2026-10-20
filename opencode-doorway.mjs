@@ -2200,6 +2200,13 @@ export async function route(req, res, { log = () => {} } = {}) {
 // a box whose proxy has not been restarted onto the mount yet, and for tests.
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href && process.argv.includes("--serve")) {
   const port = Number(process.argv[process.argv.indexOf("--serve") + 1]) || 11470;
+  // Warm BEFORE listening: the first finish() is ~36 s of synchronous work; a closed port fails fast and open (the plugin cools down),
+  // where a blocked event loop leaves every connection hanging and the watchdog starting a second door.
+  if (process.env.FOLD_FINISH !== "0" && process.env.FOLD_WARM !== "0") {
+    const { warmFinish } = await import("./opencode-finish.mjs");
+    const w = await warmFinish();
+    console.error(`opencode doorway warmed in ${w.ms} ms`);
+  }
   http.createServer(async (req, res) => {
     // CORS: the app reads the audit from the window (a different origin). The
     // mounted proxy sets this globally; the standalone server must too.
