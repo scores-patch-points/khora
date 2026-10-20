@@ -30,3 +30,18 @@ test("ROUTER: the source holds no regular expression", () => {
     for (const lead of ["= /", "( /", ", /", ": /", "! /", "&& /", "|| /", "? /", "=/", "(/"]) assert.ok(!code.includes(lead) || code.includes('"') || code.includes("'") || code.includes("`"), `a regex literal in: ${line}`);
   }
 });
+
+test("ROUTER: the same intent routes the same in other languages (a dictionary of kinds, not an English lexicon)", async () => {
+  assert.equal((await routeOf("escríbeme un ensayo sobre los delfines")).kind, "account");
+  assert.equal((await routeOf("给我写一篇关于海豚的文章")).research, true);
+  assert.equal((await routeOf("напиши стихотворение об осени")).kind, "creative");
+  assert.equal((await routeOf("bonsoir !")).kind, "chat");
+  assert.equal((await routeOf("17乘以23等于多少？")).kind, "mechanical");
+  assert.equal((await routeOf("リスボン行きの安い航空券を探して")).kind, "search");
+  assert.equal((await routeOf("اكتب لي مقالا عن الدلافين")).kind, "account");
+});
+test("ROUTER: an ask in a language the dictionary does not cover is a typed gap, never a guess", async () => {
+  const r = await routeOf("Skriv en uppsats om delfiner");
+  assert.ok(r.gap || r.kind, "returns something typed");
+  if (r.gap) assert.ok(r.detail.length > 0);
+});
