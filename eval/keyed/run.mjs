@@ -19,7 +19,6 @@ const { profileOf, warmFinish } = await import("../../opencode-finish.mjs");
 await warmFinish();
 
 const ARMS = { A0: "0", A1: "1", A2: "1", A3: "1", A4: "1", A5: "1" };
-if (RECORD && !process.env.BRAVE_API_KEY) console.log("note: BRAVE_API_KEY is not set; arm A5 will record nothing new (searches fail as a typed gap)");
 const only = process.argv.find((a) => a.startsWith("--only="))?.slice(7)?.split(",");
 const rows = [];
 for (const [arm, flag] of Object.entries(ARMS)) {
@@ -27,7 +26,8 @@ for (const [arm, flag] of Object.entries(ARMS)) {
   process.env.FOLD_KEYED_SOLE = arm === "A2" || arm === "A3" || arm === "A4" || arm === "A5" ? "1" : "0";
   process.env.FOLD_KEYED_JULIAN_GUARD = arm === "A3" || arm === "A4" || arm === "A5" ? "1" : "0";
   process.env.FOLD_PRIMARY = arm === "A4" || arm === "A5" ? "1" : "0";
-  process.env.FOLD_BRAVE = arm === "A5" ? "1" : "0";
+  process.env.FOLD_BRAVE = "0";
+  process.env.FOLD_MARGINALIA = arm === "A5" ? "1" : "0";
   for (const item of BATTERY) {
     if (only && !only.includes(item.id)) continue;
     const t0 = Date.now();
