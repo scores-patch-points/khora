@@ -19,9 +19,11 @@ import { wikipediaArticle, wiktionary } from "./opencode-wiki.mjs";
 import { whoIs } from "./opencode-identity.mjs";
 import { janusPass } from "./opencode-janus.mjs";
 import { checkByIdentity } from "./opencode-keyed.mjs";
+import { primaryFor } from "./opencode-primary.mjs";
 import { makeGetJson } from "./opencode-wiki.mjs";
 
 const WIKI_MAX = Number(process.env.FOLD_RESEARCH_MAX ?? 4); // beings looked up per answer
+const PRIMARY_MAX = Number(process.env.FOLD_PRIMARY_MAX ?? 3);
 const RESEARCH_CLAIMS = Number(process.env.FOLD_RESEARCH_CLAIMS ?? 8); // claims researched per answer
 const TEXTY = ["md", "txt", "rst", "adoc", "org", "html", "json", "yaml", "yml", "csv"];
 const CODEY = ["ts", "tsx", "js", "jsx", "mjs", "cjs", "py", "go", "rs", "java", "kt", "rb", "swift", "c", "h", "cpp", "cs", "php", "sh"];
@@ -126,6 +128,8 @@ export async function researchClaims(claims, { workspace = null, budgetMs = Numb
   const bound = new Map(); // name → whoIs result
   const articles = new Map(); // qid → article
   const grepped = new Map();
+  let primaryUsed = 0;
+  const primaryOn = process.env.FOLD_PRIMARY !== "0";
   const out = [];
   // everything the turn says about a being: the context identity is judged against
   const about = (name) => claims.filter((c) => (c.beings ?? []).includes(name)).map((c) => c.text).join(" ") + " " + text;
@@ -141,6 +145,7 @@ export async function researchClaims(claims, { workspace = null, budgetMs = Numb
     const searched = [...(c.searched ?? ["material"])];
     let verdict = { standing: "unsupported" };
     let identity = null;
+    let indexTitle = null;
     // 1. the workspace: the subject's own name, in the project's prose
     const subject = subjectOf(c);
     if (workspace && subject && Date.now() < deadline) {
@@ -168,6 +173,7 @@ export async function researchClaims(claims, { workspace = null, budgetMs = Numb
       }
       const who = bound.get(name);
       if (who.verdict !== "bound") { searched.push(`wikidata: ${name} (${who.verdict}${who.verdict === "skipped" ? "" : `: ${who.basis}`})`); continue; }
+      indexTitle = who.entity.enwiki ?? null;
       identity = { name, qid: who.entity.qid, label: who.entity.label, description: who.entity.description, url: who.entity.url, basis: who.basis };
       searched.push(`wikidata: ${who.entity.label} (${who.entity.qid})`);
       // THE KEYED DOOR first (opencode-keyed.mjs): the sentence's relation as a key of the entity's own kind, the typed value against the filler.
@@ -197,7 +203,22 @@ export async function researchClaims(claims, { workspace = null, budgetMs = Numb
       if (verdict.evidence) verdict.evidence = { ...verdict.evidence, url: a.url };
       break;
     }
-    out.push({ ...c, ...verdict, searched, ...(identity ? { identity } : {}), ...(verdict.standing !== "unsupported" ? { researched: true } : {}) });
+    // THE PRIMARY TIER (opencode-primary.mjs): an encyclopedia is an index, so the footnote on the sentence that states the claim is followed to the page it
+    // cites; a page of another kind of host that asserts the claim under The Fold's strict gate makes the tier "primary", else a researched support stays "index".
+    let tier = null;
+    if (primaryOn && identity && indexTitle && (verdict.standing === "supported" || verdict.standing === "unsupported") && primaryUsed < PRIMARY_MAX && Date.now() < deadline) {
+      primaryUsed++;
+      const pr = await primaryFor({ claim: claimNamed(c, identity.label ?? identity.name), indexTitle, deadline, fetchImpl });
+      log.push({ where: "primary", query: c.text.slice(0, 60), tier: pr.tier, hosts: (pr.trail ?? []).map((t) => `${t.host ?? ""}:${t.verdict}${t.why ? `:${t.why}` : ""}`).slice(0, 8) });
+      if (pr.tier === "primary") {
+        searched.push(`primary: ${pr.evidence.source}`);
+        if (verdict.standing === "unsupported") verdict = { standing: "supported", evidence: pr.evidence };
+        verdict = { ...verdict, primary: pr.evidence };
+        tier = "primary";
+      } else searched.push(`primary: none (${(pr.trail ?? []).at(-1)?.why ?? "no page"})`);
+    }
+    if (!tier && verdict.standing === "supported" && identity) tier = "index";
+    out.push({ ...c, ...verdict, searched, ...(tier ? { tier } : {}), ...(identity ? { identity } : {}), ...(verdict.standing !== "unsupported" ? { researched: true } : {}) });
   }
   const beings = [...bound.values()].map((w) => ({ name: w.name, verdict: w.verdict, basis: w.basis, ...(w.entity ? { qid: w.entity.qid, label: w.entity.label, description: w.entity.description, url: w.entity.url } : {}), candidates: (w.candidates ?? []).slice(0, 5) }));
   return { claims: out, beings, log };
