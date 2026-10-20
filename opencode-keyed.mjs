@@ -49,6 +49,12 @@ export async function openClassOf() {
   return (w) => { const d = dominantOf(String(w).toLowerCase().replace(/[^\p{L}\p{N}-]/gu, "")); return !d || ["NOUN", "VERB", "ADJ", "ADV", "PROPN", "NUM", "X"].includes(d.upos); };
 }
 
+/** The noun lemmas of a text, read from the received parser prior (dominant class and lemma of each word); no list. */
+export async function nounLemmasOf(text) {
+  const { dominantOf } = await organsOnce();
+  return words(text).map((w) => dominantOf(String(w).toLowerCase())).filter((d) => d?.upos === "NOUN").map((d) => d.lemma);
+}
+
 const fold = (s) => String(s ?? "").normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/\s+/g, " ").trim();
 const words = (s) => String(s ?? "").match(/[\p{L}\p{N}]+(?:['’][\p{L}]+)?/gu) ?? [];
 
