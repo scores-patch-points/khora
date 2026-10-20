@@ -99,9 +99,12 @@ async function factsFromMaterial(material, source) {
   }
 }
 
-async function factsOf({ ground = null, notes = null, material = null } = {}) {
+async function factsOf({ ground = null, notes = null, material = null, passages = [] } = {}) {
   if (Array.isArray(ground) && ground.length) return groundFacts(ground);
   if (Array.isArray(notes) && notes.length) return groundFacts(notes);
+  // Each labelled passage is read on its own, so a fact's address is the passage's name and the offset inside it
+  // ("mat.txt#42"), never an offset into the joined material.
+  if (passages.length) return (await Promise.all(passages.map(async (p) => groundFacts(await factsFromMaterial(p.text, p.name))))).flat();
   if (material) return groundFacts(await factsFromMaterial(material, "material"));
   return [];
 }
@@ -166,7 +169,9 @@ async function groundDraw(draw, { material, facts, passages = [] }) {
     const t = byFact[i] ?? null;
     const ids = R ? [...R.resolveText(text)] : [];
     const beings = ids.map((id) => R.represent(id)).filter(Boolean);
-    const onFact = t?.ground === "material";
+    // A fact is carried only when the sentence carries ALL of its content ends (carry 1). A partial carry ("Marie"
+    // of "Marie won Nobel") is a shared name, which the beings already disclose, never the fact's address.
+    const onFact = t?.ground === "material" && t.carry >= 1;
     const grounded = onFact || beings.length > 0;
     return {
       text,
@@ -197,7 +202,7 @@ export async function finish({ ask, draft, ground = null, notes = null, material
   const records = await parseEot(output);
   const read = Array.isArray(passages) ? passages.filter((p) => p && typeof p.text === "string" && p.text) : [];
   const stuff = material || (read.length ? read.map((p) => p.text).join("\n\n") : null);
-  const facts = await factsOf({ ground, notes, material: stuff });
+  const facts = await factsOf({ ground, notes, material: material || null, passages: material ? [] : read });
   // THE MECHANICALLY GROUNDED OUTPUT — created here, model-free.
   const grounded = await groundDraw(output, { material: stuff, facts, passages: read.length ? read : stuff ? [{ name: "material", text: String(stuff) }] : [] });
   const nGround = grounded.filter((s) => s.standing === "grounded").length;

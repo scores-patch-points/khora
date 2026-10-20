@@ -71,3 +71,22 @@ test("FALSIFIER: an empty ask yields no output (the empty guard)", async () => {
   assert.equal(r.gap, "empty-ask");
   assert.equal(r.output, undefined);
 });
+
+test("FALSIFIER: a shared name is not a fact, and a fact's address is the passage it was read in", async () => {
+  // "Marie Curie discovered radium" shares only the name "Marie" with the fact "Marie won Nobel": that is identity,
+  // never the fact's address. The sentence that carries the fact's ends rests on it, addressed by the passage's own
+  // name, not an offset into the joined material.
+  const r = await finish({
+    ask: "who discovered radium",
+    draft: "Marie Curie discovered radium in 1898. Marie won Nobel prizes. Radium glows faintly in the dark.",
+    passages: [
+      { name: "other.txt", text: "The lab was cold in winter." },
+      { name: "mat.txt", text: "Marie Curie and Pierre Curie discovered radium in 1898. Marie won Nobel prizes." },
+    ],
+  });
+  const [named, carried, mouth] = r.grounded;
+  assert.equal(named.ref, undefined, "a sentence sharing one name with a fact does not claim its address");
+  assert.equal(named.standing, "grounded", "its being is still individuated by the material");
+  assert.match(carried.ref ?? "", /^mat\.txt#\d+$/, "the fact's address names the passage it was read in");
+  assert.equal(mouth.standing, "self:model");
+});
