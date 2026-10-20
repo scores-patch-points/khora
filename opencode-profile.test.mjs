@@ -166,12 +166,17 @@ test("FALSIFIER: what a summary leaves out is disclosed — figures the material
   assert.equal(leftOut("The council voted 7 to 4 and the bond is 80 million dollars with 1,200 jobs.", MINUTES).figures.length, 0, "the control: a summary that carries them leaves them out of the list");
 });
 
-test("FALSIFIER: summary-shaped by the ask or by the answer being a small fraction of what it was handed", () => {
+test("FALSIFIER: summary-shaped by what the ask wants, never by the answer being a small fraction of what it was handed", () => {
   assert.equal(isSummary("summarize the meeting", "x", MINUTES), true);
   assert.equal(isSummary("what is the capital of France", "Paris.", MINUTES), false);
   assert.equal(isSummary("say what the function does", "I'll read the file and locate that function.", MINUTES), false, "a short note after a big read is not a summary of it");
   assert.equal(isSummary("read opencode-summary.mjs and say what it does", "x", MINUTES), false, "a word inside a file name is not the ask");
   assert.equal(isSummary("summarize the meeting", "x", []), false, "nothing handed to it, nothing to summarize");
+  const bigRead = [{ name: "websearch", text: Array.from({ length: 40 }, (_, i) => `Mountain number ${i} is tall and stands in a range with many peaks and valleys around it.`).join(" ") }];
+  const answer = Array.from({ length: 12 }, () => "Denali in Alaska is the highest peak in North America at 20,310 feet.").join(" ");
+  assert.equal(isSummary("what is the tallest mountain in america?", answer, bigRead), false, "a question answered from a big read is not a summary of it");
+  assert.equal(isSummary("resume la reunión", "x", MINUTES), true, "the ask wants a summary, in Spanish");
+  assert.equal(isSummary("总结一下会议", "x", MINUTES), true);
 });
 
 test("FALSIFIER: Janus's arithmetic supports only a single-clause claim; one clause's count does not carry a compound sentence", async () => {
