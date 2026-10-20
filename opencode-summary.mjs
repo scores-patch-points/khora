@@ -38,8 +38,8 @@ export function isSummary(ask, answer, passages) {
   // nothing handed to it, nothing to summarize
   if (!passages.length) return false;
   // a word inside a file name ("opencode-summary.mjs") is a name, not the ask
-  const words = String(ask ?? "").replace(/\S*\.[A-Za-z0-9]{1,6}\b/g, " ");
-  if (/\b(summar(?:y|ise|ize|ised|ized)|tl;?dr|recap|overview|in brief|gist|abstract|key points|main points|what happened)\b/i.test(words)) return true;
+  const askText = String(ask ?? "").replace(/\S*\.[A-Za-z0-9]{1,6}\b/g, " ");
+  if (/\b(summar(?:y|ise|ize|ised|ized)|tl;?dr|recap|overview|in brief|gist|abstract|key points|main points|what happened)\b/i.test(askText)) return true;
   const have = passages.reduce((n, p) => n + words(p.text).length, 0);
   const said = words(answer).length;
   // An eight-word note after a big read ("I'll read the file.") is not a summary of it: the shape needs some substance.
