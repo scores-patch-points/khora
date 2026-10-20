@@ -64,3 +64,24 @@ A0 10 RIGHT / 0 WRONG; A1 12 / 0; A2 17 / 1; **A3 16 RIGHT / 0 WRONG**. W1 holds
 V4 and V5 hold. A3 IS ADMITTED and is the default (FOLD_KEYED_SOLE=0 and FOLD_KEYED_JULIAN_GUARD=0 turn the parts off).
 Cost seen: the guard also withholds k06 (Newton's death, "1730", false; Julian-dated), which A2 contradicted correctly: one wrong call avoided, one correct contradiction lost.
 Open: Julian-to-Gregorian conversion would turn k05 into a SUPPORT and k06 back into a contradiction; not attempted, not measured.
+
+## Amendment 3 (written before arm A4 was run): the primary tier
+Reason: "Wikipedia is an index, not a source". Built: for a claim whose subject the identity step bound to an encyclopedia article, the article sentence that
+carries the claim (every figure, most stems) is found; its FOOTNOTES are followed to the pages they cite (the scraped search engines refuse this address:
+Brave 429, DuckDuckGo challenge, Bing serves unrelated pages, so no search engine is used); each page is read (one per host, ranked by host kind, mirrors and
+tertiary hosts dropped) and run through The Fold's findPrimary strict gate (every content stem and figure of the claim; the sentence must ASSERT it). The
+"pointing" step is mechanical (the first sentence that already passes the gate); no model is called.
+- **A4:** A3 plus the primary tier. A claim supported through Wikidata/Wikipedia is labelled tier "index" unless a primary page asserts it ("primary"). A claim
+  nothing read supports may become supported at tier "primary" if a cited page asserts it.
+- **Bars for A4:** X1 A4 WRONG = 0 (a false claim must never become supported through a page); X2 A4 RIGHT >= A3 RIGHT; X3 every "primary" support names the
+  cited page's URL and the page's own sentence, and that sentence passes the gate (checked by the runner); X4 no search engine and no model is used; the hosts of pages read
+  are reported (they are the article's own cited pages, not a fixed list). A4 is reported even if the tier finds nothing: the count of "primary" is descriptive, not a bar.
+- Declared, not measured: host-kind ranking and the assertion cues are The Fold's own tables (fold-chat-primary.js); the page reader sends one GET per page with an
+  honest user agent and does not read robots.txt; a PDF or paywalled page is a typed unreadable, not a miss.
+
+### Amendment 3 result (recorded online once, replayed offline)
+A3 16 RIGHT / 0 WRONG; **A4 16 RIGHT / 0 WRONG**, tiers {"index": 12, "primary": 0}. X1 holds (0 wrong), X2 holds (16 >= 16), X3 is vacuous (no primary support was made),
+X4 holds (no search engine, no model). **The primary tier found no primary page for any of the 33 claims.** Pages fetched: 3 (archive.nytimes.com, users.clas.ufl.edu,
+peo.gov.au). Where it stopped, by the trail: the sentence's footnote cites a book or journal with no web page (Einstein, Curie leads), the article sentence is only in the
+infobox or has no footnote (Canberra), or a cited page was read and failed the gate or was unreadable (nytimes archive). The scraped search engines refuse this address
+(Brave 429, DuckDuckGo challenge, Bing serves unrelated pages), so a claim whose footnote cites no web page has no route to a primary page here.
