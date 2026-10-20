@@ -18,7 +18,7 @@ import { judge, definitionIn } from "./opencode-profile.mjs";
 import { wikipediaArticle, wiktionary } from "./opencode-wiki.mjs";
 import { whoIs } from "./opencode-identity.mjs";
 import { janusPass } from "./opencode-janus.mjs";
-import { checkByIdentity } from "./opencode-keyed.mjs";
+import { checkByIdentity, nounLemmasOf } from "./opencode-keyed.mjs";
 import { primaryFor } from "./opencode-primary.mjs";
 import { makeGetJson } from "./opencode-wiki.mjs";
 
@@ -121,7 +121,7 @@ async function isName(word, opts, log) {
 
 /** Try to falsify (or support) each unsupported claim by research. Returns the re-judged claims, the beings bound
  *  (which one the text means, and why), and the research log (every request: where, what, cached, or why skipped). */
-export async function researchClaims(claims, { workspace = null, budgetMs = Number(process.env.FOLD_RESEARCH_MS ?? 90_000), fetchImpl, text = "", answer = "", keyed = process.env.FOLD_KEYED !== "0" } = {}) {
+export async function researchClaims(claims, { workspace = null, budgetMs = Number(process.env.FOLD_RESEARCH_MS ?? 90_000), fetchImpl, text = "", answer = "", keyed = process.env.FOLD_KEYED !== "0", ask = "" } = {}) {
   const deadline = Date.now() + budgetMs;
   const opts = { deadline, fetchImpl };
   const log = [];
@@ -139,8 +139,45 @@ export async function researchClaims(claims, { workspace = null, budgetMs = Numb
   const named = (b) => b.includes(" ") || mid.has(b);
   // keyed (the default): a sentence that names a being is worth a look even with no figure — the entity's own keys may name its relation
   const eligible = new Set(claims.filter((c) => c.standing === "unsupported" && (keyed || /\d/.test(c.text)) && subjectsOf(c, named).length).slice(0, RESEARCH_CLAIMS));
+  // THE TOPIC AS A THING. An essay "about dolphins" names no being, so no claim of it is eligible above; but its topic noun is the one thing most of its claims
+  // are about. The noun (the parser prior's lemma, most claims, preferring the ask's) is bound to its encyclopedia article, and the claims that mention it are judged
+  // against that article by the same falsifier. A topic that is not a single article (a disambiguation) binds nothing and says so.
+  let topic = null;
+  const pending = claims.filter((c) => (c.standing === "unsupported" || c.standing === "argument") && !eligible.has(c));
+  // OFF unless FOLD_TOPIC=1: measured 2026-10-20, the article judged "Dolphins are fish." SUPPORTED from "dolphins ... feed largely on fish" (shared stems, no relation read)
+  if (process.env.FOLD_TOPIC === "1" && pending.length >= 3 && Date.now() < deadline) {
+    const askNouns = new Set(await nounLemmasOf(ask));
+    const counts = new Map();
+    const lemmas = new Map();
+    for (const c of pending) { const ls = [...new Set(await nounLemmasOf(c.text))]; lemmas.set(c, new Set(ls)); for (const l of ls) counts.set(l, (counts.get(l) ?? 0) + 1); }
+    const best = [...counts].filter(([, n]) => n >= 3 && n >= pending.length * 0.2).sort((a, b) => (askNouns.has(b[0]) - askNouns.has(a[0])) || b[1] - a[1])[0];
+    if (best) {
+      const title = best[0][0].toUpperCase() + best[0].slice(1);
+      const article = await wikipediaArticle(title, opts);
+      log.push({ where: "wikipedia", query: title, topic: true, found: article.found, why: article.found ? null : article.why });
+      topic = { lemma: best[0], title, article, lemmas };
+    }
+  }
   for (const c of claims) {
+    // a sentence the gate called argument (it names no being, number or quote) that states a fact about the bound topic is judged too, and is PROMOTED only by evidence:
+    // the article states it (supported) or contradicts it; silence leaves it exactly what it was
+    if (c.standing === "argument" && topic?.article.found && topic.lemmas.get(c)?.has(topic.lemma)) {
+      const a = topic.article;
+      const v = judge(c.text, [{ name: `wikipedia: ${a.title}`, text: a.text, url: a.url }]);
+      if (v.standing === "supported" || v.standing === "contradicted") {
+        out.push({ ...c, ...v, ...(v.evidence ? { evidence: { ...v.evidence, url: a.url } } : {}), searched: [`wikipedia: ${a.title} (the topic: ${topic.lemma})`], researched: true, ...(v.standing === "supported" ? { tier: "index" } : {}) });
+        continue;
+      }
+    }
     if (c.standing !== "unsupported") { out.push(c); continue; }
+    if (!eligible.has(c) && topic?.article.found && topic.lemmas.get(c)?.has(topic.lemma)) {
+      const a = topic.article;
+      let verdict = judge(c.text, [{ name: `wikipedia: ${a.title}`, text: a.text, url: a.url }]);
+      if (verdict.standing === "unsupported") verdict = (await janusPass([{ ...c, ...verdict }], [{ name: `wikipedia: ${a.title}`, text: a.text }]))[0];
+      if (verdict.evidence) verdict.evidence = { ...verdict.evidence, url: a.url };
+      out.push({ ...c, ...verdict, searched: [...(c.searched ?? ["material"]), `wikipedia: ${a.title} (the topic: ${topic.lemma})`], ...(verdict.standing === "supported" ? { tier: "index", researched: true } : verdict.standing === "contradicted" ? { researched: true } : {}) });
+      continue;
+    }
     if (!eligible.has(c)) { out.push({ ...c, searched: [...(c.searched ?? ["material"]), "not researched: no figure or no name to look up"] }); continue; }
     const searched = [...(c.searched ?? ["material"])];
     let verdict = { standing: "unsupported" };
