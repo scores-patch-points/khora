@@ -40,7 +40,7 @@ const fold = (s) => {
   return out;
 };
 const compiled = Object.fromEntries(Object.entries(DICT.languages).map(([lang, d]) => [lang, { script: d.script, kinds: Object.fromEntries(Object.entries(d).filter(([k]) => k !== "script").map(([k, v]) => [k, v.map(fold)])) }]));
-const KIND_NAMES = ["invented", "invent", "genre", "account", "know", "seek", "compute", "arith", "fresh", "view", "greet", "work", "wh", "ask"];
+const KIND_NAMES = ["invented", "invent", "genre", "account", "know", "seek", "compute", "arith", "fresh", "view", "greet", "work", "wh", "ask", "summary"];
 const TOPIC_KINDS = [...KIND_NAMES, "frame"];   // the frame is stripped from a topic but is no intent: it never routes
 
 const segmenter = new Intl.Segmenter(undefined, { granularity: "word" });
@@ -214,6 +214,14 @@ export async function topicOf(ask, { language = null } = {}) {
     out.push(seg.segment);
   }
   return out.join(" ");
+}
+
+/** Does the ask want a summary of what was just read? By the kind dictionary, in any language; a size or a word like "overview" is not that. */
+export function summaryIntent(ask) {
+  const text = String(ask ?? "");
+  const lang = languageOf(text);
+  const langs = lang && compiled[lang] ? [lang] : Object.keys(compiled).filter((l) => compiled[l].script === "spaced");
+  return kindsIn(text, langs).hit.summary;
 }
 
 export async function routeOf(ask, opts = {}) {
