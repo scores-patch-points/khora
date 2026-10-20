@@ -19,7 +19,7 @@ import { splitSentences } from "./native/adapters/text/spans.js";
 
 // Declared, not measured (the author, 2026-10-19; the same status as the judge's own thresholds): a union carries a claim when it
 // covers this share of the claim's content words; at most this many source sentences are joined; a being is "spoken of" at this count.
-export const SUMMARY = Object.freeze({ cover: 0.75, maxSources: 4, minContent: 2, spokenOf: 2, maxLeftOut: 6 });
+export const SUMMARY = Object.freeze({ cover: 0.75, maxSources: 4, minContent: 2, spokenOf: 2, maxLeftOut: 6, minWords: 20 });
 
 const STOP = new Set("the and for with from that this was were has have had its into onto upon over under about after before which when where what who whom whose their they them then than also been being such these those there here very more most much many some any each every both either neither not but nor yet will would shall should may might must can could".split(" "));
 const NEG = /\b(not|never|no|none|neither|nor|without|cannot|n't|rejected|denied|refused|declined|withdrew|withdrawn)\b/i;
@@ -35,10 +35,15 @@ const namesOf = (t) => [...new Set((String(t).match(/(?<=[^.!?]\s)\p{Lu}[\p{L}'-
 
 /** The summary-shaped ask or answer: the ask says so, or the answer is a small fraction of what it was handed. */
 export function isSummary(ask, answer, passages) {
-  if (/\b(summar(?:y|ise|ize|ised|ized)|tl;?dr|recap|overview|in brief|gist|abstract|key points|main points|what happened)\b/i.test(String(ask ?? ""))) return true;
+  // nothing handed to it, nothing to summarize
+  if (!passages.length) return false;
+  // a word inside a file name ("opencode-summary.mjs") is a name, not the ask
+  const askText = String(ask ?? "").replace(/\S*\.[A-Za-z0-9]{1,6}\b/g, " ");
+  if (/\b(summar(?:y|ise|ize|ised|ized)|tl;?dr|recap|overview|in brief|gist|abstract|key points|main points|what happened)\b/i.test(askText)) return true;
   const have = passages.reduce((n, p) => n + words(p.text).length, 0);
   const said = words(answer).length;
-  return have >= 120 && said > 0 && said / have <= 0.25 && passages.length <= 3;
+  // An eight-word note after a big read ("I'll read the file.") is not a summary of it: the shape needs some substance.
+  return have >= 120 && said >= SUMMARY.minWords && said / have <= 0.25 && passages.length <= 3;
 }
 
 /** The source's sentences, each with its passage and line (the passage's own address). */

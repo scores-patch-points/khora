@@ -169,6 +169,9 @@ test("FALSIFIER: what a summary leaves out is disclosed — figures the material
 test("FALSIFIER: summary-shaped by the ask or by the answer being a small fraction of what it was handed", () => {
   assert.equal(isSummary("summarize the meeting", "x", MINUTES), true);
   assert.equal(isSummary("what is the capital of France", "Paris.", MINUTES), false);
+  assert.equal(isSummary("say what the function does", "I'll read the file and locate that function.", MINUTES), false, "a short note after a big read is not a summary of it");
+  assert.equal(isSummary("read opencode-summary.mjs and say what it does", "x", MINUTES), false, "a word inside a file name is not the ask");
+  assert.equal(isSummary("summarize the meeting", "x", []), false, "nothing handed to it, nothing to summarize");
 });
 
 test("FALSIFIER: Janus's arithmetic supports only a single-clause claim; one clause's count does not carry a compound sentence", async () => {
