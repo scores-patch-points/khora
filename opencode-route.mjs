@@ -40,8 +40,9 @@ const fold = (s) => {
   return out;
 };
 const compiled = Object.fromEntries(Object.entries(DICT.languages).map(([lang, d]) => [lang, { script: d.script, kinds: Object.fromEntries(Object.entries(d).filter(([k]) => k !== "script").map(([k, v]) => [k, v.map(fold)])) }]));
-const KIND_NAMES = ["invented", "invent", "genre", "account", "know", "seek", "compute", "arith", "fresh", "view", "greet", "work", "wh", "ask"];
-const TOPIC_KINDS = [...KIND_NAMES, "frame"];   // the frame is stripped from a topic but is no intent: it never routes
+const KIND_NAMES = ["invented", "invent", "genre", "account", "know", "seek", "compute", "arith", "fresh", "view", "greet", "work", "wh", "ask", "summary", "rank"];
+const KEEP_IN_TOPIC = new Set(["fresh", "rank"]);   // "weather", "latest", "best" are the predicate of a search: a topic without them is a different question
+const TOPIC_KINDS = [...KIND_NAMES, "frame"].filter((k) => !KEEP_IN_TOPIC.has(k));   // the frame is stripped from a topic but is no intent: it never routes
 
 const segmenter = new Intl.Segmenter(undefined, { granularity: "word" });
 const tokensOf = (folded) => [...segmenter.segment(folded)].filter((s) => s.isWordLike).map((s) => s.segment);
@@ -74,7 +75,7 @@ function kindsIn(text, langs) {
     if (!d) continue;
     for (const kind of KIND_NAMES) for (const surface of d.kinds[kind] ?? []) {
       let found = false;
-      if (d.script === "unspaced" || lang === "ar") found = folded.includes(surface);
+      if (d.script === "unspaced" || lang === "ar") { const i = folded.indexOf(surface); found = i >= 0; if (found) at[kind] = Math.min(at[kind] ?? 99, i === 0 ? 0 : 1); }   // unspaced: a surface at the very start is the first word
       else {
         const parts = surface.split(" ");
         for (let i = 0; i + parts.length <= toks.length && !found; i++) found = parts.every((p, j) => (p.endsWith("*") ? toks[i + j].startsWith(p.slice(0, -1)) : toks[i + j] === p));
@@ -216,6 +217,14 @@ export async function topicOf(ask, { language = null } = {}) {
   return out.join(" ");
 }
 
+/** Does the ask want a summary of what was just read? By the kind dictionary, in any language; a size or a word like "overview" is not that. */
+export function summaryIntent(ask) {
+  const text = String(ask ?? "");
+  const lang = languageOf(text);
+  const langs = lang && compiled[lang] ? [lang] : Object.keys(compiled).filter((l) => compiled[l].script === "spaced");
+  return kindsIn(text, langs).hit.summary;
+}
+
 export async function routeOf(ask, opts = {}) {
   const v = await decide(ask, opts);
   return v.research ? { ...v, topic: await topicOf(ask, { language: v.language === "undecided" ? null : v.language }) } : v;
@@ -274,11 +283,11 @@ async function decide(ask, { history = [] } = {}) {
   // 8. what is left, by shape
   if (question && !(en?.speaker)) return verdict("account", "a question about a third thing");
   if (en) {
-    if (en.bareTopic) return verdict("account", "a bare noun is a topic");
-    if (en.modifiedTopic) return verdict("account", "a bare topic");
+    if (en.bareTopic || en.modifiedTopic) return hit.fresh || hit.rank ? verdict("search", "a topic with a freshness or ranking word asks for current resources") : verdict("account", en.bareTopic ? "a bare noun is a topic" : "a bare topic");
     if (en.bareNoun) return verdict("chat", "a bare noun with only an adjective (a greeting)");
     if (en.speaker && !question) return verdict("chat", "a statement about the speaker");
     if (!en.nounCount) return verdict("chat", "names nothing in the world");
+    if (hit.fresh || hit.rank) return verdict("search", "names a thing and a freshness or ranking word");
     return gap("unclassified", `root ${en.root.lemma}/${en.root.upos}, ${en.nounCount} noun(s)`);
   }
   return gap("no-intent-read", `no kind of intent found in the ${lang ?? "undecided"} dictionary; ${KIND_LANGUAGES.includes(lang) ? "" : "the language is not covered; "}${toks.length} word(s)`);

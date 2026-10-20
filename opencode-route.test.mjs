@@ -56,3 +56,18 @@ test("ROUTER: a research ask carries its topic, the request's frame taken out, i
   }
   assert.equal((await routeOf("write a poem about autumn")).topic, undefined);   // no research, no topic
 });
+
+test("the gather session's misses: codebase searches are work, 'tell me about' is an account, a sort over numbers is computed, a freshness or ranking word makes a topic a search", async () => {
+  const kind = async (ask) => (await routeOf(ask)).kind;
+  assert.equal(await kind("search the codebase for TODO comments"), "work");
+  assert.equal(await kind("add a README to this project"), "work");
+  assert.equal(await kind("tell me about the French Revolution"), "account");
+  assert.equal(await kind("sort these numbers: 5 3 9 1"), "mechanical");
+  assert.equal(await kind("latest news about SpaceX"), "search");
+  assert.equal(await kind("best laptops of 2026"), "search");
+  assert.equal(await kind("weather in Chicago today"), "search");
+  assert.match((await routeOf("what is the weather in Chicago today")).topic, /weather/, "the predicate stays in the topic of a search");
+  assert.equal(await kind("ما هي عاصمة أستراليا"), "account");
+  assert.equal(await kind("écris une histoire sur un dragon"), "creative");
+  assert.equal(await kind("raconte moi l histoire de France"), "account");
+});

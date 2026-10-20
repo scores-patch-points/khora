@@ -16,6 +16,7 @@
 // material's referents share — terrain induction over their features (khora/native/kernel/terrain-induction.js) — and is not wired;
 // such a sentence reads as added when its words are not the source's. Declared constants below say so and name their giver.
 import { splitSentences } from "./native/adapters/text/spans.js";
+import { summaryIntent } from "./opencode-route.mjs";
 
 // Declared, not measured (the author, 2026-10-19; the same status as the judge's own thresholds): a union carries a claim when it
 // covers this share of the claim's content words; at most this many source sentences are joined; a being is "spoken of" at this count.
@@ -33,17 +34,14 @@ const FIGURE = /\b\d[\d,.]*(?:\s+(?:to|of|-)\s+\d[\d,.]*)?(?:\s+(?:million|billi
 const figuresOf = (t) => [...new Set((String(t).match(FIGURE) ?? []).map((x) => x.replace(/[,.]+$/, "").replace(/(\d),(\d)/g, "$1$2").replace(/\s+/g, " ").trim()))];
 const namesOf = (t) => [...new Set((String(t).match(/(?<=[^.!?]\s)\p{Lu}[\p{L}'-]{2,}/gu) ?? []).map((n) => n.toLowerCase()))];
 
-/** The summary-shaped ask or answer: the ask says so, or the answer is a small fraction of what it was handed. */
+/** The summary-shaped ask: the ask wants a summary of what was read (the router's kind dictionary, in any language). NOT a size: an answer that is a small
+ *  fraction of a long web search ("what is the tallest mountain in america?") is a question answered, and its sentences are claims, not a summary's "added". */
 export function isSummary(ask, answer, passages) {
   // nothing handed to it, nothing to summarize
   if (!passages.length) return false;
   // a word inside a file name ("opencode-summary.mjs") is a name, not the ask
   const askText = String(ask ?? "").replace(/\S*\.[A-Za-z0-9]{1,6}\b/g, " ");
-  if (/\b(summar(?:y|ise|ize|ised|ized)|tl;?dr|recap|overview|in brief|gist|abstract|key points|main points|what happened)\b/i.test(askText)) return true;
-  const have = passages.reduce((n, p) => n + words(p.text).length, 0);
-  const said = words(answer).length;
-  // An eight-word note after a big read ("I'll read the file.") is not a summary of it: the shape needs some substance.
-  return have >= 120 && said >= SUMMARY.minWords && said / have <= 0.25 && passages.length <= 3;
+  return Boolean(summaryIntent(askText));
 }
 
 /** The source's sentences, each with its passage and line (the passage's own address). */
