@@ -51,7 +51,7 @@ test("foldFrameNegation without a framer changes nothing", () => {
 });
 test("a framer that says 'negated' flips polarity only when foldFrameNegation is on", () => {
   const neg = () => ({ negated: true, modal: [], ending: false, dir: null, root: "x" });
-  const off = engineRelationsFor([TEXT], { framer: neg }).read(TEXT), on = engineRelationsFor([TEXT], { framer: neg, foldFrameNegation: true }).read(TEXT);
+  const T2 = "In March 2014, we entered into a Collaboration and Exclusive License Agreement with GSK", off = engineRelationsFor([T2], { framer: neg }).read(T2), on = engineRelationsFor([T2], { framer: neg, foldFrameNegation: true }).read(T2);
   assert.ok(off.claims.length > 0 && off.claims.every((c) => c.polarity === "+"));
   assert.ok(on.claims.some((c) => c.polarity === "-" && c.negationFolded === "frame"));
 });
