@@ -134,7 +134,9 @@ function propositionsOf(text, rows = rowsOf(text)) {
   for (const v of rows) {
     if (!isMain(v)) continue;
     const ks = kids(rows, v.id);
-    const neg = ks.some((k) => /^(not|n't|never|no)$/i.test(k.form)) || ks.some((k) => /^(nsubj|obj)/.test(k.deprel) && kids(rows, k.id).some((c) => c.deprel === "det" && /^no$/i.test(c.form)));
+    const negOwn = (x) => kids(rows, x.id).some((k) => /^(not|n't|never|no)$/i.test(k.form)) || kids(rows, x.id).some((k) => /^(nsubj|obj)/.test(k.deprel) && kids(rows, k.id).some((c) => c.deprel === "det" && /^no$/i.test(c.form)));
+    // a conjoined verb with no subject of its own shares its head's negation: "we have never declared or paid a dividend" denies both
+    const neg = negOwn(v) || (v.deprel === "conj" && !ks.some((k) => /^nsubj/.test(k.deprel)) && negOwn(byId(v.head) ?? { id: -1 }));
     const passive = ks.some((k) => k.deprel === "aux:pass" || k.deprel === "nsubj:pass") || (v.deprel === "conj" && kids(rows, v.head).some((k) => k.deprel === "aux:pass"));
     const subj = subjOf(v);
     let obj = ks.find((k) => /^(obj|iobj)$/.test(k.deprel));
