@@ -6,7 +6,7 @@ import fs from "node:fs";
 //   node eval/meaning/run.mjs          (V=1 for per-pair verdicts)
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { claimsOf, READER } from "../../native/adapters/text/grammar-en.js";
+import { claimsOf, claimsOfK, READER } from "../../native/adapters/text/grammar-en.js";
 import { verdict } from "../../native/kernel/eot-claim-match.js";
 import { janusContradictions } from "../../native/organs/eot-janus.js";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -19,6 +19,8 @@ const normEnd = (e) => (e && typeof e === "object" ? { text: String(e.text ?? ""
 const verifySpans = (text, claims) => (claims ?? []).filter((c) => (!c.span || (c.span[0] >= 0 && c.span[1] <= text.length && c.span[1] > c.span[0]))).map((c) => ({ ...c, rel: String(c.rel ?? "").toLowerCase(), ARG0: normEnd(c.ARG0), ARG1: normEnd(c.ARG1), OBL: (c.OBL ?? []).map(normEnd).filter(Boolean), polarity: c.polarity === "-" ? "-" : "+", asserted: c.asserted !== false })).filter((c) => [c.ARG0, c.ARG1, ...c.OBL].filter(Boolean).every((e) => !e.text || text.includes(e.text) || text.replace(/\s+/g, " ").includes(e.text)));
 const arms = {
   "grammar-en": (t, lang) => (lang === "en" ? claimsOf(t) : null),
+  // the source read under its 3 best parses (the claim under its best): a source states what any close reading of it states
+  "grammar-k3": (t, lang, side) => (lang === "en" ? (side === "source" ? claimsOfK(t, 3) : claimsOf(t)) : null),
   oracle: (t) => (FR[t] ? verifySpans(t, FR[t]) : null),
 };
 const C3 = process.env.FOLD_C3_DIR ?? path.join(HERE, "../../../the-fold/eval/ants/c3");
@@ -34,12 +36,12 @@ for (const [name, f] of Object.entries(sets)) {
   for (const arm of Object.keys(all)) {
     let acc = 0, fa = 0, fr = 0, cc = 0, gap = 0; const rows = [];
     // janus over every pair this arm can read, in one call (one ground per pair)
-    const jset = arm === "wording" ? new Set() : janusContradictions(pairs.map((p) => ({ id: String(p.id), C: arms[arm](p.claim, p.lang ?? "en") ?? [], S: arms[arm](p.sentence, p.lang ?? "en") ?? [] })).filter((x) => x.C.length && x.S.length));
+    const jset = arm === "wording" ? new Set() : janusContradictions(pairs.map((p) => ({ id: String(p.id), C: arms[arm](p.claim, p.lang ?? "en", "claim") ?? [], S: arms[arm](p.sentence, p.lang ?? "en", "source") ?? [] })).filter((x) => x.C.length && x.S.length));
     for (const p of pairs) {
       const lang = p.lang ?? "en";
       let v;
       if (arm === "wording") v = lexical(p.claim, p.sentence);
-      else { const A = arms[arm](p.claim, lang), B = arms[arm](p.sentence, lang); if (!A || !B) { v = "G"; gap++; } else { v = verdict(A, B).v; if (v !== "C" && jset.has(String(p.id))) v = "C"; } }
+      else { const A = arms[arm](p.claim, lang, "claim"), B = arms[arm](p.sentence, lang, "source"); if (!A || !B) { v = "G"; gap++; } else { v = verdict(A, B).v; if (v !== "C" && jset.has(String(p.id))) v = "C"; } }
       const said = v === "E";
       if ((p.label === "E") === said) acc++; if (said && p.label !== "E") fa++; if (!said && p.label === "E") fr++; if (p.label === "C" && v === "C") cc++;
       rows.push(`${p.id}:${p.label}${v}`);

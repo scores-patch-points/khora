@@ -23,7 +23,7 @@ function newState(n) {
 }
 const top = (st) => st.stack[st.stack.length - 1];
 
-function features(st, W, T) {
+function features(st, W, T, C = null) {
   const f = [];
   const add = (k, ...v) => f.push(k + "\u0001" + v.join("\u0002"));
   const s0 = st.stack.length ? top(st) : -1, n0 = st.i < st.n ? st.i : -1, n1 = st.i + 1 < st.n ? st.i + 1 : -1, n2 = st.i + 2 < st.n ? st.i + 2 : -1;
@@ -51,6 +51,9 @@ function features(st, W, T) {
   add("s0l2w", w(s0l2)); add("s0l2t", t(s0l2)); add("s0l2l", lab(s0l2)); add("s0r2w", w(s0r2)); add("s0r2t", t(s0r2)); add("s0r2l", lab(s0r2));
   add("n0l2w", w(n0l2)); add("n0l2t", t(n0l2)); add("n0l2l", lab(n0l2));
   add("s0t.s0lt.s0l2t", t(s0), t(s0l), t(s0l2)); add("s0t.s0rt.s0r2t", t(s0), t(s0r), t(s0r2)); add("s0t.s0ht.s0h2t", t(s0), t(s0h), t(s0h2)); add("n0t.n0lt.n0l2t", t(n0), t(n0l), t(n0l2));
+  if (C) { const c = (k, g) => (k < 0 ? "∅" : C[k]?.[g] ?? "-");
+    add("s0c1", c(s0, 0)); add("n0c1", c(n0, 0)); add("n1c1", c(n1, 0)); add("s0c2", c(s0, 1)); add("n0c2", c(n0, 1));
+    add("s0c1.n0c1", c(s0, 0), c(n0, 0)); add("s0c2.n0t", c(s0, 1), t(n0)); add("s0t.n0c2", t(s0), c(n0, 1)); add("s0hc1.s0c1.n0c1", c(s0h, 0), c(s0, 0), c(n0, 0)); add("n0c1.n1c1", c(n0, 0), c(n1, 0)); }
   add("s0w.sr", w(s0), setR(s0)); add("s0t.sr", t(s0), setR(s0)); add("s0w.sl", w(s0), setL(s0)); add("s0t.sl", t(s0), setL(s0)); add("n0w.sl", w(n0), setL(n0)); add("n0t.sl", t(n0), setL(n0));
   return f;
 }
@@ -98,21 +101,21 @@ function costs(st, gh, gl, M) {
 
 const clone = (st) => ({ n: st.n, i: st.i, stack: st.stack.slice(), head: st.head.slice(), label: st.label.slice(), left: st.left.map((x) => x.slice()), right: st.right.map((x) => x.slice()) });
 /** one beam step: every item expanded by every valid move, the `size` best by total score kept */
-function beamStep(items, parser, M, W, T, size) {
+function beamStep(items, parser, M, W, T, size, Cl = null) {
   const cand = [];
   for (const it of items) {
     if (it.st.i >= it.st.n) { cand.push({ ...it, done: true }); continue; }
-    const v = valid(it.st, M), f = features(it.st, W, T), s = parser.scores(f);
+    const v = valid(it.st, M), f = features(it.st, W, T, Cl), s = parser.scores(f);
     for (let a = 0; a < v.length; a++) if (v[a]) cand.push({ it, a, f, score: it.score + s[a] });
   }
   cand.sort((x, y) => y.score - x.score);
   return cand.slice(0, size).map((c) => { if (c.done) return c; const st = clone(c.it.st); apply(st, c.a, M); return { st, score: c.score, moves: [...c.it.moves, c.a], steps: [...c.it.steps, [c.f, c.a]] }; });
 }
-function parseWith(parser, M, W, T, beam = 1) {
+function parseWith(parser, M, W, T, beam = 1, Cl = null) {
   let st;
   if (beam > 1) {
     let items = [{ st: newState(W.length), score: 0, moves: [], steps: [] }], guard = 0;
-    while (items.some((x) => x.st.i < x.st.n) && guard++ < 4 * W.length + 10) items = beamStep(items, parser, M, W, T, beam);
+    while (items.some((x) => x.st.i < x.st.n) && guard++ < 4 * W.length + 10) items = beamStep(items, parser, M, W, T, beam, Cl);
     st = items[0].st;
   } else {
     st = newState(W.length);
@@ -120,10 +123,14 @@ function parseWith(parser, M, W, T, beam = 1) {
     while (st.i < st.n && guard++ < 4 * st.n + 10) {
       const v = valid(st, M);
       if (!v.some(Boolean)) break;
-      apply(st, parser.best(features(st, W, T), v), M);
+      apply(st, parser.best(features(st, W, T, Cl), v), M);
     }
   }
-  // a word left without a head hangs on the root's dependent (or becomes the root if there is none): a tree, never a forest
+  return finish(st);
+}
+// a word left without a head hangs on the root's dependent (or becomes the root if there is none): a tree, never a forest
+function finish(st0) {
+  const st = { ...st0, head: st0.head.slice(), label: st0.label.slice() };
   let root = -1; for (let k = 1; k < st.n; k++) if (st.head[k] === 0) { root = k; break; }
   for (let k = 1; k < st.n; k++) if (st.head[k] < 0) { if (root < 0) { root = k; st.head[k] = 0; st.label[k] = "root"; } else { st.head[k] = root; st.label[k] = "dep"; } }
   for (let k = 1; k < st.n; k++) if (st.head[k] === 0 && k !== root) { st.head[k] = root; st.label[k] = "parataxis"; }
@@ -134,7 +141,7 @@ function parseWith(parser, M, W, T, beam = 1) {
 // A word's lexicon entry (UniMorph: the parts of speech its form is attested with, e.g. "N|V" for "boils") is a FEATURE of that word and of
 // its neighbours, never a constraint: the treebank teaches how far to trust it, and a form the lexicon lacks just has no such feature.
 const shapeOf = (w) => w.replace(/[A-Z]+/g, "X").replace(/[a-z]+/g, "x").replace(/[0-9]+/g, "d").replace(/\p{L}+/gu, "l").slice(0, 8);
-function tagFeats(i, F, L, prev, prev2, lex) {
+function tagFeats(i, F, L, prev, prev2, lex, cl = null) {
   const f = [], add = (k, ...v) => f.push(k + "\u0001" + v.join("\u0002"));
   const w = F[i], lw = L[i], at = (k) => (k < 0 ? "<s>" : k >= F.length ? "</s>" : L[k]);
   const lx = (k) => (lex && k >= 0 && k < F.length ? lex.get(L[k]) ?? "-" : "?");
@@ -143,23 +150,24 @@ function tagFeats(i, F, L, prev, prev2, lex) {
   add("sh", shapeOf(w)); add("cap", /^\p{Lu}/u.test(w) ? (i === 0 ? "first" : "mid") : "no"); add("dig", /\d/.test(w) ? "y" : "n"); add("hy", w.includes("-") ? "y" : "n");
   add("w-1", at(i - 1)); add("w-2", at(i - 2)); add("w+1", at(i + 1)); add("w+2", at(i + 2)); add("w-1w", at(i - 1), lw); add("ww+1", lw, at(i + 1));
   add("s3-1", at(i - 1).slice(-3)); add("s3+1", at(i + 1).slice(-3)); add("t1w+1", prev, at(i + 1));
+  if (cl) { const c = (k, g) => (k < 0 || k >= F.length ? "∅" : cl.get(L[k])?.[g] ?? "-"); add("c1", c(i, 0)); add("c2", c(i, 1)); add("c1-1", c(i - 1, 0)); add("c1+1", c(i + 1, 0)); add("t1c2", prev, c(i, 1)); add("c2s3", c(i, 1), lw.slice(-3)); }
   add("lx", lx(i)); add("lx-1", lx(i - 1)); add("lx+1", lx(i + 1)); add("lxw", lx(i), lw.slice(-3)); add("t1lx", prev, lx(i));
   return f;
 }
-export function tagWith(tagger, forms, lex = null) {
+export function tagWith(tagger, forms, lex = null, cl = null) {
   const L = forms.map((w) => (/^\d/.test(w) ? w.replace(/\d/g, "#") : w.toLowerCase()));
   let prev = "<s>", prev2 = "<s2>"; const out = [];
-  for (let i = 0; i < forms.length; i++) { const t = tagger.classes[tagger.best(tagFeats(i, forms, L, prev, prev2, lex))]; out.push(t); prev2 = prev; prev = t; }
+  for (let i = 0; i < forms.length; i++) { const t = tagger.classes[tagger.best(tagFeats(i, forms, L, prev, prev2, lex, cl))]; out.push(t); prev2 = prev; prev = t; }
   return out;
 }
-export function trainTagger(sents, { iterations = 10, seed = "tag", lex = null, log = () => {} } = {}) {
+export function trainTagger(sents, { iterations = 10, seed = "tag", lex = null, cl = null, log = () => {} } = {}) {
   const rand = seeded(seed), classes = [...new Set(sents.flatMap((s) => s.tokens.map((t) => t.upos)))].sort(), tg = new Perceptron(classes);
   for (let it = 0; it < iterations; it++) {
     let ok = 0, n = 0;
     for (const s of shuffle(sents, rand)) {
       const F = s.tokens.map((t) => t.form), L = F.map((w) => (/^\d/.test(w) ? w.replace(/\d/g, "#") : w.toLowerCase()));
       let prev = "<s>", prev2 = "<s2>";
-      for (let i = 0; i < F.length; i++) { const f = tagFeats(i, F, L, prev, prev2, lex), g = tg.best(f), t = tg.index.get(s.tokens[i].upos); tg.update(t, g, f); n++; if (g === t) ok++; prev2 = prev; prev = tg.classes[g]; }
+      for (let i = 0; i < F.length; i++) { const f = tagFeats(i, F, L, prev, prev2, lex, cl), g = tg.best(f), t = tg.index.get(s.tokens[i].upos); tg.update(t, g, f); n++; if (g === t) ok++; prev2 = prev; prev = tg.classes[g]; }
     }
     log(`tagger iteration ${it + 1}/${iterations}: ${(100 * ok / n).toFixed(2)}% on training`);
   }
@@ -193,11 +201,11 @@ function beamSentence(parser, M, d, size) {
   let guard = 0, n = 0;
   while (gold.st.i < gold.st.n && guard++ < 4 * d.W.length + 10) {
     const v = valid(gold.st, M); if (!v.some(Boolean)) break;
-    const f = features(gold.st, d.W, d.T), s = parser.scores(f), c = costs(gold.st, d.gh, d.gl, M);
+    const f = features(gold.st, d.W, d.T, d.C), s = parser.scores(f), c = costs(gold.st, d.gh, d.gl, M);
     let g = -1; for (let a = 0; a < v.length; a++) if (v[a] && c[a] === 0 && (g < 0 || s[a] > s[g])) g = a;
     if (g < 0) { let m = Infinity; for (let a = 0; a < v.length; a++) if (v[a] && c[a] < m) { m = c[a]; g = a; } }
     apply(gold.st, g, M); gold.moves.push(g); gold.steps.push([f, g]);
-    items = beamStep(items, parser, M, d.W, d.T, size); n++;
+    items = beamStep(items, parser, M, d.W, d.T, size, d.C); n++;
     const key = gold.moves.join(",");
     if (!items.some((x) => x.moves.join(",") === key)) {
       parser.i++;
@@ -210,21 +218,21 @@ function beamSentence(parser, M, d, size) {
   return { ok: n, n };
 }
 
-export function train(sents, { iterations = 10, seed = "ud", folds = 4, explore = 0.9, lex = null, lexSource = null, tagIterations = 10, beam = 1, log = () => {} } = {}) {
+export function train(sents, { iterations = 10, seed = "ud", folds = 4, explore = 0.9, lex = null, lexSource = null, clusters = null, clustersSource = null, tagIterations = 10, beam = 1, log = () => {} } = {}) {
   const rand = seeded(seed);
   // the lemma lexicon from english-parser.js's builder (one pass); the tagger is this file's, with the received lexicon as a feature;
   // the parser's training tags come from k-fold taggers that never saw the sentence
   const base = trainTaggerAndLexicon(sents, { iterations: 1, seed: `${seed}#lexicon`, log: () => {} });
-  const taggerAll = trainTagger(sents, { iterations: tagIterations, seed: `${seed}#tagger`, lex });
+  const taggerAll = trainTagger(sents, { iterations: tagIterations, seed: `${seed}#tagger`, lex, cl: clusters });
   const predicted = new Array(sents.length);
   for (let f = 0; f < folds; f++) {
-    const tg = trainTagger(sents.filter((_, i) => i % folds !== f), { iterations: tagIterations, seed: `${seed}#fold${f}`, lex });
-    sents.forEach((s, i) => { if (i % folds === f) predicted[i] = tagWith(tg, s.tokens.map((t) => t.form), lex); });
+    const tg = trainTagger(sents.filter((_, i) => i % folds !== f), { iterations: tagIterations, seed: `${seed}#fold${f}`, lex, cl: clusters });
+    sents.forEach((s, i) => { if (i % folds === f) predicted[i] = tagWith(tg, s.tokens.map((t) => t.form), lex, clusters); });
     log(`jackknife fold ${f + 1}/${folds}`);
   }
   const labels = [...new Set(sents.flatMap((s) => s.tokens.map((t) => t.deprel)))].sort();
   const M = moveSet(labels), parser = new Perceptron(M.names);
-  const data = sents.map((s, i) => ({ W: ["ROOT", ...s.tokens.map((t) => norm(t.form))], T: ["ROOT", ...predicted[i]], gh: [-1, ...s.tokens.map((t) => t.head)], gl: ["_", ...s.tokens.map((t) => t.deprel)] }));
+  const data = sents.map((s, i) => ({ W: ["ROOT", ...s.tokens.map((t) => norm(t.form))], T: ["ROOT", ...predicted[i]], gh: [-1, ...s.tokens.map((t) => t.head)], gl: ["_", ...s.tokens.map((t) => t.deprel)], C: clusters ? ["ROOT", ...s.tokens.map((t) => clusters.get(norm(t.form)) ?? null)] : null }));
   for (let it = 0; it < iterations; it++) {
     let ok = 0, n = 0;
     for (const d of shuffle(data, rand)) {
@@ -234,7 +242,7 @@ export function train(sents, { iterations = 10, seed = "ud", folds = 4, explore 
       while (st.i < st.n && guard++ < 4 * st.n + 10) {
         const v = valid(st, M);
         if (!v.some(Boolean)) break;
-        const f = features(st, d.W, d.T), s = parser.scores(f), c = costs(st, d.gh, d.gl, M);
+        const f = features(st, d.W, d.T, d.C), s = parser.scores(f), c = costs(st, d.gh, d.gl, M);
         let pred = -1, bestZero = -1;
         for (let a = 0; a < v.length; a++) { if (!v[a]) continue; if (pred < 0 || s[a] > s[pred]) pred = a; if (c[a] === 0 && (bestZero < 0 || s[a] > s[bestZero])) bestZero = a; }
         if (bestZero < 0) { let m = Infinity; for (let a = 0; a < v.length; a++) if (v[a] && c[a] < m) { m = c[a]; bestZero = a; } }
@@ -247,17 +255,39 @@ export function train(sents, { iterations = 10, seed = "ud", folds = 4, explore 
     log(`iteration ${it + 1}/${iterations}: zero-cost moves ${(100 * ok / n).toFixed(2)}%`);
   }
   parser.average();
-  return { schema: UD_PARSER_SCHEMA, meta: { trainedOn: sents.length, iterations, seed, folds, explore, beam, labels: labels.length, lexicon: lexSource }, labels, tagger: taggerAll.toJSON(), parser: parser.toJSON(), lexicon: base.lexicon };
+  return { schema: UD_PARSER_SCHEMA, meta: { trainedOn: sents.length, iterations, seed, folds, explore, beam, labels: labels.length, lexicon: lexSource, clusters: clustersSource }, labels, tagger: taggerAll.toJSON(), parser: parser.toJSON(), lexicon: base.lexicon };
 }
 
 /** loadModel(json, { lex }) — `lex` is the same received lexicon the model was trained with (json.meta.lexicon names it), or none */
-export function loadModel(json, { lex = null, beam = json.meta?.beam ?? 1 } = {}) {
-  return { tagger: Perceptron.fromJSON(json.tagger), parser: Perceptron.fromJSON(json.parser), M: moveSet(json.labels), lexicon: json.lexicon, meta: json.meta, lex, beam };
+export function loadModel(json, { lex = null, clusters = null, beam = json.meta?.beam ?? 1 } = {}) {
+  return { tagger: Perceptron.fromJSON(json.tagger), parser: Perceptron.fromJSON(json.parser), M: moveSet(json.labels), lexicon: json.lexicon, meta: json.meta, lex, clusters, beam };
 }
+/** Measured 2026-10-21: reading sources under their 3 best parses LOWERED the meaning check (fresh set 79% → 67%): extra readings bring
+ *  contradicting claims along, and beam decoding of a greedily trained model is not better than its greedy parse. Kept for callers that
+ *  want alternatives; the meaning check reads one parse.
+ *  analyseK(model, forms, k) → up to k parses (best first) from a beam of width max(k, model beam), each the rows analyse returns, with
+ *  its score margin below the best: a sentence can be read more than one way, and a caller may let a source count under any close reading */
+export function analyseK(model, forms, k = 3, givenTags = null) {
+  const tags = givenTags ?? tagWith(model.tagger, forms, model.lex, model.clusters);
+  const C = model.clusters ? ["ROOT", ...forms.map((w) => model.clusters.get(norm(w)) ?? null)] : null;
+  const W = ["ROOT", ...forms.map(norm)], T = ["ROOT", ...tags];
+  let items = [{ st: newState(W.length), score: 0, moves: [], steps: [] }], guard = 0;
+  while (items.some((x) => x.st.i < x.st.n) && guard++ < 4 * W.length + 10) items = beamStep(items, model.parser, model.M, W, T, Math.max(k, model.beam ?? 1, 4), C);
+  const best = items[0]?.score ?? 0, seen = new Set(), out = [];
+  for (const it of items) {
+    const st = finish(it.st), key = Array.from(st.head).join(",") + "|" + st.label.join(",");
+    if (seen.has(key)) continue; seen.add(key);
+    out.push({ margin: best - it.score, rows: forms.map((form, j) => { const { lemma, feats } = lemmaAndFeats(model.lexicon, form, tags[j]); return { id: j + 1, form, lemma, upos: tags[j], feats, head: st.head[j + 1], deprel: st.label[j + 1] ?? "dep" }; }) });
+    if (out.length >= k) break;
+  }
+  return out;
+}
+
 /** analyse(model, forms, tags?) → UD rows (tags given: the parse runs on them, as when a repair has re-tagged a word) {id, form, lemma, upos, feats, head, deprel} */
 export function analyse(model, forms, givenTags = null) {
-  const tags = givenTags ?? tagWith(model.tagger, forms, model.lex);
-  const st = parseWith(model.parser, model.M, ["ROOT", ...forms.map(norm)], ["ROOT", ...tags], model.beam);
+  const tags = givenTags ?? tagWith(model.tagger, forms, model.lex, model.clusters);
+  const C = model.clusters ? ["ROOT", ...forms.map((w) => model.clusters.get(norm(w)) ?? null)] : null;
+  const st = parseWith(model.parser, model.M, ["ROOT", ...forms.map(norm)], ["ROOT", ...tags], model.beam, C);
   return forms.map((form, k) => { const { lemma, feats } = lemmaAndFeats(model.lexicon, form, tags[k]); return { id: k + 1, form, lemma, upos: tags[k], feats, head: st.head[k + 1], deprel: st.label[k + 1] ?? "dep" }; });
 }
 
@@ -270,7 +300,9 @@ export async function readJsonMaybeGz(file) {
 /** a UniMorphPOS@1 file → the Map the tagger reads */
 export async function loadLexiconFile(file) { const j = await readJsonMaybeGz(file); return new Map(Object.entries(j.forms)); }
 /** a UDParser@1 file (optionally with its lexicon) → a model analyse() takes */
-export async function loadModelFile(file, { lexFile = null, beam } = {}) {
+/** a WordClusters@1 file → Map word → [coarse, fine] */
+export async function loadClustersFile(file) { const j = await readJsonMaybeGz(file); return new Map(Object.entries(j.words)); }
+export async function loadModelFile(file, { lexFile = null, clustersFile = null, beam } = {}) {
   const json = await readJsonMaybeGz(file);
-  return loadModel(json, { lex: lexFile ? await loadLexiconFile(lexFile) : null, ...(beam ? { beam } : {}) });
+  return loadModel(json, { lex: lexFile ? await loadLexiconFile(lexFile) : null, clusters: clustersFile ? await loadClustersFile(clustersFile) : null, ...(beam ? { beam } : {}) });
 }

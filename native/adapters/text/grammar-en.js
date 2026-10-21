@@ -16,7 +16,10 @@ export const CARDINAL = { zero: 0, one: 1, two: 2, three: 3, four: 4, five: 5, s
 // the reader: ud-parser.js with its English prior and the UniMorph lexicon it was trained with, when both are on disk; else english-parser.js
 const UD_MODEL = process.env.FOLD_UD_MODEL ?? `${K}/priors/ud-parser-eng-ewt.json.gz`, UD_LEX = process.env.FOLD_UD_LEX ?? `${K}/priors/unimorph-eng-pos.json.gz`;
 const U = process.env.FOLD_READER !== "english-parser" && fs.existsSync(UD_MODEL) ? await import("./ud-parser.js") : null;
-const UM = U ? await U.loadModelFile(UD_MODEL, { lexFile: fs.existsSync(UD_LEX) ? UD_LEX : null }) : null;
+const UD_CL = process.env.FOLD_UD_CLUSTERS ?? `${K}/priors/clusters-eng.json.gz`;
+const UM0 = U ? await U.readJsonMaybeGz(UD_MODEL) : null;
+// the clusters file is read only when the model was trained with one (its meta names it)
+const UM = U ? U.loadModel(UM0, { lex: fs.existsSync(UD_LEX) ? await U.loadLexiconFile(UD_LEX) : null, clusters: UM0.meta?.clusters && fs.existsSync(UD_CL) ? await U.loadClustersFile(UD_CL) : null }) : null;
 export const READER = UM ? "ud-parser" : "english-parser";
 const build = (forms, tags) => {
   if (UM) return U.analyse(UM, forms, tags).map((r) => (r.upos === "NUM" ? { ...r, lemma: r.form.toLowerCase() } : r));
@@ -25,10 +28,12 @@ const build = (forms, tags) => {
   return forms.map((form, k) => { const { lemma, feats } = P.lemmaAndFeats(model.lexicon, form, tags[k]); return { id: k + 1, form, lemma: tags[k] === "NUM" ? form.toLowerCase() : lemma, upos: tags[k], feats, head: heads[k + 1], deprel: labels[k + 1] }; });
 };
 export const repairs = { cardinal: 0, verb: 0 };
-export function rowsOf(text) {
+export function rowsOf(text) { return rowsOfK(text, 1)[0] ?? []; }
+/** up to k readings of one sentence (k > 1 needs the ud-parser reader), each with the same repairs */
+export function rowsOfK(text, k = 1) {
   const tk = P.tokenize(text); if (!tk.length) return [];
   const forms = tk.map((t) => t.form);
-  const tags = UM ? (U.tagWith ? (UM.meta?.lexicon !== undefined ? U.tagWith(UM.tagger, forms, UM.lex) : P.tagSentence(UM.tagger, forms)) : P.tagSentence(UM.tagger, forms)) : P.tagSentence(model.tagger, forms);
+  const tags = UM ? (U.tagWith ? (UM.meta?.lexicon !== undefined ? U.tagWith(UM.tagger, forms, UM.lex, UM.clusters) : P.tagSentence(UM.tagger, forms)) : P.tagSentence(UM.tagger, forms)) : P.tagSentence(model.tagger, forms);
   let fixed = false;
   tags.forEach((t, i) => { if (t !== "NUM" && CARDINAL[forms[i].toLowerCase()] != null && /^(VERB|ADJ|NOUN)$/.test(t) && i + 1 < forms.length && /^\p{L}/u.test(forms[i + 1])) { tags[i] = "NUM"; fixed = true; repairs.cardinal++; } });
   // 3. "have/has/had" tagged as an auxiliary with no verb after it in the clause is the main verb ("spiders have eight legs")
@@ -39,6 +44,10 @@ export function rowsOf(text) {
     const j = firstNoun < 0 ? -1 : forms.findIndex((f, i) => i > firstNoun && /^(NOUN|ADJ)$/.test(tags[i]) && VERBISH.has(f.toLowerCase()) && /(s|ed)$/i.test(f));
     if (j >= 0) { tags[j] = "VERB"; rows = build(forms, tags); repairs.verb++; fixed = true; }
   }
+  const readings = k > 1 && UM ? U.analyseK(UM, forms, k, tags).map((x) => x.rows.map((r) => (r.upos === "NUM" ? { ...r, lemma: r.form.toLowerCase() } : r))) : [rows];
+  return readings.map((rs) => repairRelcl(rs, tk));
+}
+function repairRelcl(rows, tk) {
   // 4. a verb with its own auxiliary hung as a relative clause under a nominal root ("Marie Curie was born in 1867" parsed as a name modified
   //    by "born") is the sentence's verb: a relative clause has a relative pronoun or none, never a finite "was" of its own after the name
   const root = rows.find((r) => r.head === 0);
@@ -104,8 +113,8 @@ const endOf = (rows, id, text) => { if (!id) return null; const head = rows.find
     sup: (ws.find((w) => w.upos === "ADJ" && (/Degree=Sup/.test(w.feats || "") || /est$/i.test(w.form))) ? comparativeBase(ws.find((w) => w.upos === "ADJ" && (/Degree=Sup/.test(w.feats || "") || /est$/i.test(w.form))).form.replace(/est$/i, "er")) : null),
     figs: figuresIn(rows, ws, text), quant: ws.map((w) => w.form.toLowerCase()).find((f) => /^(all|every|each|some|many|most|few|no)$/.test(f)) ?? null, agent: agentN ? endOf(rows, agentN.id, text) : null }; };
 
-function propositionsOf(text) {
-  const rows = rowsOf(text), out = [];
+function propositionsOf(text, rows = rowsOf(text)) {
+  const out = [];
   const byId = (id) => rows.find((r) => r.id === id);
   const reportedUnder = (v) => { let x = v; for (let i = 0; i < 6 && x; i++) { const h = byId(x.head); if (!h) return false; if (/^(ccomp|parataxis)$/.test(x.deprel) && REPORT.has(lem(h))) return true; x = h; } return false; };
   const REL_PRON = /^(which|who|whom|that)$/i;
@@ -167,6 +176,12 @@ const surname = (e) => e.names.filter((n) => !TITLES.has(n)).at(-1) ?? null;
 const keyEnd = (e) => e && { text: e.text, head: e.head, sup: e.sup ?? null, names: e.names.filter((n) => !TITLES.has(n)), keys: e.lemmas.filter((l) => !TITLES.has(l)), figs: e.figs, quant: e.quant ? QUANT[e.quant] : null, agent: keyEnd(e.agent) };
 const QUANT = { all: "all", every: "all", each: "all", some: "some", many: "many", most: "most", few: "few", no: "none" };
 /** EOTClaim@1 — the only thing the EOT layer sees */
-export function claimsOf(text) {
-  return propositionsOf(text).map((p, i) => ({ main: !!p.main, schema: "EOTClaim@1", id: `c${i + 1}`, lang: "en", by: "grammar-en", rel: p.rel, ARG0: keyEnd(p.ARG0), ARG1: keyEnd(p.ARG1), OBL: (p.OBL || []).map(keyEnd), polarity: p.polarity, tense: p.tense, asserted: p.asserted, asym: !!p.asym }));
+/** the claims of every one of the k best readings, once each: a source states what any close reading of it states */
+export function claimsOfK(text, k = 3) {
+  const seen = new Set(), out = [];
+  for (const rows of rowsOfK(text, k)) for (const c of claimsOf(text, rows)) { const key = JSON.stringify([c.rel, c.ARG0?.text, c.ARG1?.text, c.polarity, (c.OBL || []).map((o) => o?.text)]); if (!seen.has(key)) { seen.add(key); out.push(c); } }
+  return out;
+}
+export function claimsOf(text, rows = undefined) {
+  return propositionsOf(text, rows ?? rowsOf(text)).map((p, i) => ({ main: !!p.main, schema: "EOTClaim@1", id: `c${i + 1}`, lang: "en", by: "grammar-en", rel: p.rel, ARG0: keyEnd(p.ARG0), ARG1: keyEnd(p.ARG1), OBL: (p.OBL || []).map(keyEnd), polarity: p.polarity, tense: p.tense, asserted: p.asserted, asym: !!p.asym }));
 }
