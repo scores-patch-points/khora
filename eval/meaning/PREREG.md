@@ -97,4 +97,4 @@ Reported per language and same- vs cross-language; every failure assigned to a l
 committing the set and the first run; any later fix is post hoc and reported as such.
 Label audit, before any run (the pairs' sentences checked against their sources; labels read against the sentence alone): 663 relabelled
 C → T ("Climbing Mount Fuji is popular in winter" against "夏季シーズンには富士登山が盛んである": summer popularity neither states nor rules
-out winter). Final counts: 64 pairs, 31 E, 23 C, 10 T. Committed before any arm ran.
+out winter). Final counts: 64 pairs, 32 E, 23 C, 9 T. Committed before any arm ran.
