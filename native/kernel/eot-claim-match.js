@@ -39,14 +39,18 @@ function frameOf(c, cls0) {
   // a relative pronoun is not a party ("pursuant to which"): it is the clause's link, read where it points, not here
   const obl = (...cs) => (c.OBL ?? []).find((o) => cs.includes(caseOf(o)) && !/^(which|that|who|whom|whose|what)$/.test(o.head)) ?? null;
   // a verb of giving said with a "from" phrase and no recipient is the taking side ("we licensed rights from third parties")
-  if (cls === "out" && obl("from") && !c.ARG2 && !obl("to")) cls = "in";
+  // (and a verb whose senses give both ways, "license", takes the side its case marking names)
+  if ((cls === "out" || cls === "both") && obl("from") && !c.ARG2 && !obl("to")) cls = "in";
+  if (cls === "both") cls = "out";
   if (cls === "out") return { giver: c.ARG0, recipient: c.ARG2 ?? obl("to"), thing: c.ARG1 };
   if (cls === "in") return { recipient: c.ARG0, giver: obl("from", "by") ?? c.ARG0?.agent ?? null, thing: c.ARG1 };
   return null;
 }
 function frameVerdict(fc, fs) {
   const both = (r) => fc[r] && fs[r];
-  if ((fc.giver && fs.recipient && linked(fc.giver, fs.recipient) && !(fc.giver && fs.giver && linked(fc.giver, fs.giver))) || (fc.recipient && fs.giver && linked(fc.recipient, fs.giver) && !(fs.recipient && linked(fc.recipient, fs.recipient)))) return "reversed";
+  // one party on the other side of the same thing reverses it ("we paid the $4.0 million" / "we received the $4.0 million"). Requiring both parties
+  // crossed was measured (PREREG run 7) and loses three labelled reversals for the one pair (511, sold / purchased shares) it settles
+  if ((fc.giver && fs.recipient && linked(fc.giver, fs.recipient) && !(fs.giver && linked(fc.giver, fs.giver))) || (fc.recipient && fs.giver && linked(fc.recipient, fs.giver) && !(fs.recipient && linked(fc.recipient, fs.recipient)))) return "reversed";
   const roles = ["giver", "recipient", "thing"].filter(both), met = roles.filter((r) => linked(fc[r], fs[r]));
   if (met.length >= 2 && met.length === roles.length) return "met";
   if (met.length && met.length === roles.length && roles.length === 1 && roles[0] !== "thing") return "met";

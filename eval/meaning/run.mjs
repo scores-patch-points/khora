@@ -9,11 +9,11 @@ import { fileURLToPath } from "node:url";
 import { claimsOf, claimsOfK, claimsOfGated, READER } from "../../native/adapters/text/grammar-en.js";
 import { verdict } from "../../native/kernel/eot-claim-match.js";
 import { janusContradictions } from "../../native/organs/eot-janus.js";
-import { makeRelationDefs } from "../../native/organs/relation-defs.js";
+import { makeRelationDefs, loadVerbIndexFile } from "../../native/organs/relation-defs.js";
 // relation identity nominated by Wiktionary definitions, read from a cache of REST payloads (FOLD_WIKT_CACHE: <dir>/<word>.json); a word not in
-// the cache nominates nothing
-const WIKT = process.env.FOLD_WIKT_CACHE;
-const DEFS = WIKT ? makeRelationDefs((w) => { try { return JSON.parse(fs.readFileSync(path.join(WIKT, `${w}.json`), "utf8")); } catch { return null; } }) : null;
+// the cache nominates nothing. FOLD_WIKT_INDEX (a VerbIndex@1 file built from a local Wiktionary by cli/wikt-verbs.mjs) is read instead when set
+const WIKT = process.env.FOLD_WIKT_CACHE, WIKT_INDEX = process.env.FOLD_WIKT_INDEX;
+const DEFS = WIKT_INDEX ? makeRelationDefs(await loadVerbIndexFile(WIKT_INDEX)) : WIKT ? makeRelationDefs((w) => { try { return JSON.parse(fs.readFileSync(path.join(WIKT, `${w}.json`), "utf8")); } catch { return null; } }) : null;
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const F = await import("../../vendor/the-fold/fold-chat-falsify-answer.js");
 const lexical = (claim, sentence) => { const r = F.falsifyAnswer([claim], [{ name: "https://src.example/p", text: sentence }]); const c = (r.claims ?? r)[0] ?? {}; const v = c.verdict ?? c.standing; return /corroborated|held/.test(v) ? "E" : /contested/.test(v) ? "C" : "U"; };

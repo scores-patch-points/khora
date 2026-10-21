@@ -29,6 +29,11 @@ const build = (forms, tags) => {
   return forms.map((form, k) => { const { lemma, feats } = P.lemmaAndFeats(model.lexicon, form, tags[k]); return { id: k + 1, form, lemma: tags[k] === "NUM" ? form.toLowerCase() : lemma, upos: tags[k], feats, head: heads[k + 1], deprel: labels[k + 1] }; });
 };
 export const repairs = { cardinal: 0, verb: 0 };
+// 2b. a hyphenated word coordinated right after a verb ("discovered and out-licensed"), whose last part the lexicon allows as a verb, is a verb
+export function hyphenVerbTags(forms, tags) {
+  forms.forEach((f, i) => { if (i >= 2 && tags[i] !== "VERB" && /\p{L}-\p{L}/u.test(f) && /^(and|or)$/i.test(forms[i - 1]) && tags[i - 2] === "VERB" && /(^|\|)V(\||$)/.test(UM?.lex?.get(f.slice(f.lastIndexOf("-") + 1).toLowerCase()) ?? "")) { tags[i] = "VERB"; repairs.hyphenVerb = (repairs.hyphenVerb ?? 0) + 1; } });
+  return tags;
+}
 export function rowsOf(text) { return rowsOfK(text, 1)[0] ?? []; }
 /** up to k readings of one sentence (k > 1 needs the ud-parser reader), each with the same repairs */
 export function rowsOfK(text, k = 1) {
@@ -39,6 +44,7 @@ export function rowsOfK(text, k = 1) {
   tags.forEach((t, i) => { if (t !== "NUM" && CARDINAL[forms[i].toLowerCase()] != null && /^(VERB|ADJ|NOUN)$/.test(t) && i + 1 < forms.length && /^\p{L}/u.test(forms[i + 1])) { tags[i] = "NUM"; fixed = true; repairs.cardinal++; } });
   // 3. "have/has/had" tagged as an auxiliary with no verb after it in the clause is the main verb ("spiders have eight legs")
   tags.forEach((t, i) => { if (t === "AUX" && /^(have|has|had)$/i.test(forms[i])) { const next = tags.slice(i + 1).findIndex((x) => /^(VERB|PUNCT)$/.test(x)); if (next < 0 || tags[i + 1 + next] === "PUNCT") { tags[i] = "VERB"; repairs.have = (repairs.have ?? 0) + 1; } } });
+  hyphenVerbTags(forms, tags);
   let rows = build(forms, tags);
   if (!rows.some((r) => /^(VERB|AUX)$/.test(r.upos))) {
     const firstNoun = tags.findIndex((t) => /^(NOUN|PROPN|PRON)$/.test(t));
@@ -48,7 +54,10 @@ export function rowsOfK(text, k = 1) {
   const readings = k > 1 && UM ? U.analyseK(UM, forms, k, tags).map((x) => x.rows.map((r) => (r.upos === "NUM" ? { ...r, lemma: r.form.toLowerCase() } : r))) : [rows];
   return readings.map((rs) => repairRelcl(rs, tk));
 }
+// a hyphenated verb the lexicon does not know keeps its prefix and takes its last part's lemma ("out-licensed" → "out-license")
+const lemmaHyphen = (rows) => { for (const r of rows) if (r.upos === "VERB" && /\p{L}-\p{L}/u.test(r.form) && r.lemma.toLowerCase() === r.form.toLowerCase()) { const i = r.form.lastIndexOf("-"), tail = r.form.slice(i + 1); const t = UM ? U.analyse(UM, [tail], ["VERB"])[0]?.lemma : P.lemmaAndFeats(model.lexicon, tail, "VERB").lemma; if (t) r.lemma = `${r.form.slice(0, i + 1).toLowerCase()}${String(t).toLowerCase()}`; } return rows; };
 function repairRelcl(rows, tk) {
+  lemmaHyphen(rows);
   // 4. a verb with its own auxiliary hung as a relative clause under a nominal root ("Marie Curie was born in 1867" parsed as a name modified
   //    by "born") is the sentence's verb: a relative clause has a relative pronoun or none, never a finite "was" of its own after the name
   const root = rows.find((r) => r.head === 0);
@@ -56,7 +65,30 @@ function repairRelcl(rows, tk) {
     const v = rows.find((r) => r.head === root.id && r.deprel === "acl:relcl" && r.upos === "VERB" && rows.some((a) => a.head === r.id && /^aux/.test(a.deprel)) && !rows.some((a) => a.head === r.id && /^(nsubj|nsubj:pass)$/.test(a.deprel)));
     if (v) { const pass = rows.some((a) => a.head === v.id && a.deprel === "aux:pass"); v.head = 0; v.deprel = "root"; root.head = v.id; root.deprel = pass ? "nsubj:pass" : "nsubj"; repairs.relcl = (repairs.relcl ?? 0) + 1; }
   }
+  repairShape(rows);
   rows.forEach((r, k) => { r.start = tk[k].start; r.end = tk[k].end; });
+  return rows;
+}
+/** layer-3 repairs of tree shapes UD rules out or English word order settles, each measured on UD_English-EWT test (eval/meaning PREREG run 7);
+ *  `only` names the repairs to apply (all by default). Mutates and returns rows. */
+export const SHAPE_REPAIRS = ["doubleObj", "reducedRelative"];
+export function repairShape(rows, only = SHAPE_REPAIRS) {
+  const kids = (id) => rows.filter((r) => r.head === id), byId = (id) => rows.find((r) => r.id === id);
+  // 5. a verb with two objects: UD gives a verb one obj, and English says the recipient first ("paid Centessa an upfront payment")
+  //    The recipient is a party (a name or personal pronoun, right after the verb), the thing a noun or number after it (a
+  //    pronoun there is a misread relative clause: "have everything what a customer needs"); "someone else 's phone" is a possessor
+  if (only.includes("doubleObj")) for (const v of rows) {
+    const o = kids(v.id).filter((k) => k.deprel === "obj");
+    if (o.length === 2 && (o[0].upos === "PROPN" || o[0].upos === "PRON" && /^(me|you|him|her|it|us|them)$/i.test(o[0].form)) && o[0].id < o[1].id && /^(NOUN|NUM)$/.test(o[1].upos) && !kids(o[0].id).some((d) => d.deprel === "case") && !rows.some((r) => r.id > v.id && r.id < o[0].id && r.head !== o[0].id)) { o[0].deprel = "iobj"; repairs.doubleObj = (repairs.doubleObj ?? 0) + 1; }
+  }
+  // 6. a reduced relative read as the main verb: "The milestone, achieved when …, was paid to Sagard": a bare participle root with a subject
+  //    before it, and a later verb with its own auxiliary and no subject hanging from it, is a modifier of that subject; the later verb is the clause
+  if (only.includes("reducedRelative")) {
+    const R = rows.find((r) => r.head === 0);
+    const X = R && R.upos === "VERB" && /ed$|en$/.test(R.form) && !kids(R.id).some((k) => /^(aux|aux:pass|cop|mark)$/.test(k.deprel)) ? kids(R.id).find((k) => k.deprel === "nsubj" && k.id < R.id && byId(R.id - 1)?.upos === "PUNCT") : null;
+    const V = X ? kids(R.id).find((k) => k.id > R.id && k.upos === "VERB" && /^(parataxis|conj|ccomp|advcl)$/.test(k.deprel) && kids(k.id).some((a) => /^aux/.test(a.deprel)) && !kids(k.id).some((a) => /^(nsubj|nsubj:pass|expl|mark|cc)$/.test(a.deprel))) : null;
+    if (V) { const pass = kids(V.id).some((a) => a.deprel === "aux:pass"); V.head = 0; V.deprel = "root"; X.head = V.id; X.deprel = pass ? "nsubj:pass" : "nsubj"; R.head = X.id; R.deprel = "acl"; repairs.reducedRelative = (repairs.reducedRelative ?? 0) + 1; }
+  }
   return rows;
 }
 
