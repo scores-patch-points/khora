@@ -6,6 +6,7 @@
 //      word re-tagged VERB and is re-parsed (giver: UniMorph English, khora/native/priors/pos-eng-lexicon.json)
 import fs from "node:fs";
 import * as P from "./english-parser.js";
+import { bindFigures } from "./figure-binding.js";
 const K = new URL("../..", import.meta.url).pathname.replace(/\/$/, "");
 const model = P.loadModel(JSON.parse(fs.readFileSync(`${K}/priors/parser-eng-ewt.json`, "utf8")), { morphology: JSON.parse(fs.readFileSync(`${K}/priors/morphology-eng.json`, "utf8")) });
 const LEX = JSON.parse(fs.readFileSync(`${K}/priors/pos-eng-lexicon.json`, "utf8")).classes;
@@ -187,7 +188,11 @@ export function claimsOfK(text, k = 3) {
   return out;
 }
 export function claimsOf(text, rows = undefined) {
-  return propositionsOf(text, rows ?? rowsOf(text)).map((p, i) => ({ main: !!p.main, schema: "EOTClaim@1", id: `c${i + 1}`, lang: "en", by: "grammar-en", rel: p.rel, ARG0: keyEnd(p.ARG0), ARG1: keyEnd(p.ARG1), OBL: (p.OBL || []).map(keyEnd), polarity: p.polarity, tense: p.tense, asserted: p.asserted, asym: !!p.asym }));
+  const R = rows ?? rowsOf(text);
+  return [...propositionClaims(text, R), ...figureClaimsOf(text, R)];
+}
+function propositionClaims(text, rows) {
+  return propositionsOf(text, rows).map((p, i) => ({ main: !!p.main, schema: "EOTClaim@1", id: `c${i + 1}`, lang: "en", by: "grammar-en", rel: p.rel, ARG0: keyEnd(p.ARG0), ARG1: keyEnd(p.ARG1), OBL: (p.OBL || []).map(keyEnd), polarity: p.polarity, tense: p.tense, asserted: p.asserted, asym: !!p.asym }));
 }
 
 
@@ -224,4 +229,35 @@ export function readingsOf(text, { budget = Infinity } = {}) {
     const rows = repairRelcl(U.analyse(UM, forms, re.tags).map((r) => (r.upos === "NUM" ? { ...r, lemma: r.form.toLowerCase() } : r)), tk);
     return { flip: { i, word: forms[i], from: first.tags[i], to: first.runnerUp[i] }, cost: first.margins[i], claims: claimsOf(text, rows) };
   })];
+}
+
+
+// ── the English half of figure binding (figure-binding.js reads the tree; these are English words, each class declared) ─────────────────
+const TENS = { twenty: 20, thirty: 30, forty: 40, fifty: 50, sixty: 60, seventy: 70, eighty: 80, ninety: 90 };
+const SCALE = { hundred: 100, thousand: 1e3, million: 1e6, billion: 1e9, trillion: 1e12 };
+const MONTHS = /^(january|february|march|april|may|june|july|august|september|october|november|december|jan|feb|mar|apr|jun|jul|aug|sep|sept|oct|nov|dec)\.?$/i;
+const DIMENSION = new Set(["tall", "long", "wide", "high", "deep", "old", "thick", "heavy", "broad", "across"]);
+const wordNumber = (w) => { const k = w.toLowerCase(); if (CARDINAL[k] != null && !SCALE[k]) return CARDINAL[k]; if (TENS[k] != null) return TENS[k]; const m = /^([a-z]+)-([a-z]+)$/.exec(k); if (m && TENS[m[1]] != null && CARDINAL[m[2]] != null && CARDINAL[m[2]] < 10) return TENS[m[1]] + CARDINAL[m[2]]; return null; };
+export const FIGURE_LEX = {
+  numberOf(form, next) {
+    const f = String(form).replace(/,/g, "");
+    let m;
+    if ((m = /^(\d+(?:\.\d+)?)[–-](\d+(?:\.\d+)?)$/.exec(f))) return { value: +m[1], hi: +m[2] };
+    if ((m = /^(\d+(?:\.\d+)?)-(\p{L}+)$/u.exec(f))) return { value: +m[1], unit: m[2] };
+    if ((m = /^(\d+)\/(\d+)$/.exec(f)) && +m[2]) return { value: +m[1] / +m[2] };
+    if (/^\d+(\.\d+)?$/.test(f)) return { value: +f };
+    const wn = wordNumber(String(form)); if (wn != null) { const m2 = /^(\p{L}+)-(\p{L}+)$/u.exec(String(form)); return { value: wn, word: true, ...(m2 && !TENS[m2[1].toLowerCase()] ? { unit: m2[2] } : {}) }; }
+    return null;
+  },
+  scaleOf: (w) => SCALE[String(w).toLowerCase()] ?? null,
+  unitOf: (w) => { const k = String(w).toLowerCase(); return UNITS[k] ?? UNITS[k.replace(/(?<=[a-z]{2})s$/, "")] ?? (k === "feet" ? UNITS.foot : k === "lbs" ? UNITS.lb : k === "°c" ? UNITS.celsius : k === "°f" ? UNITS.fahrenheit : null); },
+  isYear: (v, form, rows, i) => /^\d{4}$/.test(String(form)) && v >= 1000 && v <= 2100 || [rows[i - 1], rows[i + 1], rows[i - 2]].some((x) => x && MONTHS.test(x.form)),
+  singular: (w) => (/(us|ss|is|ies)$/.test(w) ? w : w.replace(/(?<=[a-z]{3})s$/, "")),
+  isDimension: (w) => DIMENSION.has(w),
+  isApprox: (rows, i) => rows.slice(Math.max(0, i - 3), i).some((x) => /^(about|around|roughly|nearly|approximately|almost|some|over|under|up|than|just)$/i.test(x.form)),
+};
+/** the figures of a sentence as EOT claims: rel "fig", ARG0 the being they describe, the binding on the claim */
+export function figureClaimsOf(text, rows = rowsOf(text)) {
+  return bindFigures(rows, FIGURE_LEX).map((f, i) => ({ schema: "EOTClaim@1", id: `f${i + 1}`, lang: "en", by: "grammar-en", rel: "fig", main: false, ARG0: f.beingId ? keyEnd(endOf(rows, f.beingId, text)) : null, ARG1: null, OBL: [], polarity: "+", tense: "present", asserted: true, asym: false,
+    fig: { measure: f.measure, attribute: f.attribute, event: f.eventLemma, base: f.base, hiBase: f.hiBase, alts: f.alts, approx: f.approx } }));
 }

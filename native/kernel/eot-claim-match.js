@@ -34,6 +34,26 @@ export function verdict(C, S, { janus = null } = {}) {
   const eqs = S.filter((x) => x.rel === "be" && x.ARG0 && x.ARG1 && x.polarity === "+");
   S = [...S, ...S.flatMap((x) => eqs.flatMap((q) => ["ARG0", "ARG1"].filter((r) => x !== q && x[r] && linked(x[r], q.ARG1)).map((r) => ({ ...x, [r]: q.ARG0 }))))];
   const per = [];
+  // FIGURES (figure-binding.js): a claim's figure against the source's figures of the same measure (and attribute, when both name one) of the
+  // same being; dates and counts also need the same event. Same value (within the precision a hedge allows; ranges and bracketed equivalents
+  // count) supports, another value contradicts, nothing comparable says nothing.
+  const figVerdicts = [];
+  for (const c of C.filter((x) => x.rel === "fig" && x.ARG0)) {
+    let v = null;
+    for (const s of S.filter((x) => x.rel === "fig" && x.ARG0)) {
+      const a = c.fig, b = s.fig;
+      if (a.measure !== b.measure || (a.attribute && b.attribute && a.attribute !== b.attribute) || !linked(c.ARG0, s.ARG0)) continue;
+      if ((a.measure === "date" || a.measure.startsWith("count")) && a.event !== b.event && !(STATIVE.has(a.event) && STATIVE.has(b.event))) continue;
+      const tol = (x) => Math.max(0.5, (a.approx || b.approx ? 0.03 : 0.015) * Math.abs(x));
+      const hit = [b.base, ...(b.alts ?? [])].some((y) => Math.abs(a.base - y) <= tol(y)) || (b.hiBase != null && a.base >= b.base - tol(b.base) && a.base <= b.hiBase + tol(b.hiBase)) || (a.hiBase != null && b.base >= a.base && b.base <= a.hiBase);
+      v = hit ? "E" : v ?? "C";
+      if (hit) break;
+    }
+    if (v) figVerdicts.push(v);
+  }
+  if (figVerdicts.includes("C")) return { v: "C", why: "figure differs" };
+  C = C.filter((x) => x.rel !== "fig"); S = S.filter((x) => x.rel !== "fig");
+  if (!C.length) return { v: figVerdicts.includes("E") ? "E" : "X", why: figVerdicts.length ? "figure" : "no claim read" };
   for (const c of C) {
     let best = { v: "U", why: "" };
     for (const s of S) {
