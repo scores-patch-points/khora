@@ -34,21 +34,22 @@ export function bindFigures(rows, lex) {
   const out = [], used = new Set();
   for (let i = 0; i < rows.length; i++) {
     const r = rows[i]; if (used.has(r.id)) continue;
+    const mine = [], take = (id) => { used.add(id); mine.push(id); };
     const num = lex.numberOf(r.form, rows[i + 1]?.form);
     if (!num) continue;
-    used.add(r.id);
+    take(r.id);
     let value = num.value, hi = num.hi ?? null, unitWord = num.unit ?? null, unitRow = null;
     // a range said with a dash or "to" between two numbers ("35 – 40", "35 to 40")
-    if (hi == null && rows[i + 1] && /^(–|-|—|to)$/.test(rows[i + 1].form) && rows[i + 2]) { const n2 = lex.numberOf(rows[i + 2].form); if (n2 && !n2.unit) { hi = n2.value; used.add(rows[i + 1].id); used.add(rows[i + 2].id); i += 2; } }
+    if (hi == null && rows[i + 1] && /^(–|-|—|to)$/.test(rows[i + 1].form) && rows[i + 2]) { const n2 = lex.numberOf(rows[i + 2].form); if (n2 && !n2.unit) { hi = n2.value; take(rows[i + 1].id); take(rows[i + 2].id); i += 2; } }
     // a scale word right after it multiplies ("1.2 billion")
-    const scale = rows[i + 1] && lex.scaleOf(rows[i + 1].form); if (scale) { value *= scale; if (hi != null) hi *= scale; used.add(rows[i + 1].id); }
+    const scale = rows[i + 1] && lex.scaleOf(rows[i + 1].form); if (scale) { value *= scale; if (hi != null) hi *= scale; take(rows[i + 1].id); }
     let next = rows[i + (scale ? 2 : 1)];
     // the unit may stand one modifier away ("88 Earth days", "45 metric tons")
     const next2 = rows[i + (scale ? 3 : 2)];
-    if (!unitWord && next && !lex.unitOf(next.form) && next2 && lex.unitOf(next2.form) && next2.head !== r.id && /^(PROPN|ADJ|NOUN)$/.test(next.upos)) { unitWord = next2.form; unitRow = next2; used.add(next2.id); }
-    if (!unitWord && next && lex.unitOf(next.form)) { unitWord = next.form; unitRow = next; used.add(next.id); }
+    if (!unitWord && next && !lex.unitOf(next.form) && next2 && lex.unitOf(next2.form) && next2.head !== r.id && /^(PROPN|ADJ|NOUN)$/.test(next.upos)) { unitWord = next2.form; unitRow = next2; take(next2.id); take(next.id); }
+    if (!unitWord && next && lex.unitOf(next.form)) { unitWord = next.form; unitRow = next; take(next.id); }
     // "100 degrees Celsius": the scale word after "degree" names the scale
-    if (unitWord && /^degrees?$/i.test(unitWord)) { const sc = rows[rows.indexOf(unitRow ?? next) + 1]; if (sc && lex.unitOf(sc.form)) { unitWord = sc.form; used.add(sc.id); } }
+    if (unitWord && /^degrees?$/i.test(unitWord)) { const sc = rows[rows.indexOf(unitRow ?? next) + 1]; if (sc && lex.unitOf(sc.form)) { unitWord = sc.form; take(sc.id); } }
     const U = unitWord ? lex.unitOf(unitWord) : null;
     const date = !U && lex.isYear(value, r.form, rows, i);
     const counted = !U && !date ? (r.upos === "NUM" || num.word) && byId(rows, r.head) && /^(NOUN|PROPN)$/.test(byId(rows, r.head).upos) ? byId(rows, r.head) : null : null;
@@ -60,7 +61,7 @@ export function bindFigures(rows, lex) {
     if (U && open >= 0 && open <= 3) {
       const inside = after.slice(open + 1, open + 4), n2 = inside[0] && lex.numberOf(inside[0].form, inside[1]?.form);
       const u2 = n2 && (n2.unit ? lex.unitOf(n2.unit) : inside[1] && lex.unitOf(inside[1].form));
-      if (u2 && u2[0] === U[0]) { alts.push((n2.value + (u2[2] ?? 0)) * u2[1]); for (const x of inside.slice(0, 2)) used.add(x.id); }
+      if (u2 && u2[0] === U[0]) { alts.push((n2.value + (u2[2] ?? 0)) * u2[1]); for (const x of inside.slice(0, 2)) take(x.id); }
     }
     // the attribute: a noun that has the figure through "of" ("a radius of 1,516 miles"), or the adjective it qualifies ("8,849 metres tall")
     const anchor = unitRow ?? counted ?? r;
@@ -76,7 +77,7 @@ export function bindFigures(rows, lex) {
     if (!being) { const root = rows.find((x) => x.head === 0); being = root ? subjectOf(rows, root) : null; }
     // the figure counts the subject itself: "Twelve astronauts walked on the Moon"
     if (counted && being && counted.id === being.id) being = counted;
-    out.push({ value, hi, base: toBase(value), hiBase: hi != null ? toBase(hi) : null, alts, measure, attribute, beingId: being?.id ?? null, eventLemma: pred ? lem(pred) : null, approx: lex.isApprox(rows, i), ids: [r.id] });
+    out.push({ value, hi, base: toBase(value), hiBase: hi != null ? toBase(hi) : null, alts, measure, attribute, beingId: being?.id ?? null, eventLemma: pred ? lem(pred) : null, approx: lex.isApprox(rows, i), ids: mine });
   }
   return out;
 }

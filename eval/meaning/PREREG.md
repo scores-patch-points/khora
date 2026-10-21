@@ -106,3 +106,16 @@ RESULT (first run, code as of 3c4ae889, no changes since the set was committed):
  50 failures by layer: tokens/sentences 4, word senses 5, attachment 3, claim building 8, figures 7, referents 10 (7 of them a pronoun or
  dropped subject the page supplies), relations 11, verdict 2. False accepts: 626 and 642 (the claim's distinguishing phrase was dropped by
  the parse, the rest matched), 602 (antonym modifiers linked: "más bajo" / "más alto").
+
+## Run 10 (2026-10-21): no support for a claim not read whole (post hoc on fresh-ml: these are the three false accepts run 9 found)
+- Coverage (claim-coverage.js): each grammar reports the claim sentence's content words (nouns, names, adjectives) that no claim read; the
+  verdict never says supported while any are left. Discourse openers ("In addition, …") count as read, set aside on purpose.
+- Modifier phrases and coordinated words of an end are carried as its sub-ends (nmods: "an agreement WITH GSK", "a Collaboration AND …
+  Agreement", "Groq, Inc."); a claim is met only when each meets something the source says. One claim per coordinated object, as per subject.
+- Ends whose modifiers are a declared opposite pair are two beings ("the lowest navigable lake" / "the highest"); the check reads every declared
+  pair (the one-partner maps had "short" → "long", never "tall").
+- Figures mark every word they bind as read ("88 Earth days").
+fresh-ml (post hoc): 46.9 → 51.6%, false-accept 9.4% → 0% (602, 626, 642 now T), contradictions 4 of 23. Costs: filing 99.2 → 96.9% (eo-029,
+eo-030, eo-034: fragments ending in a dangling "an exclusive" no claim reads), fresh 87.5 → 83.3% (404: "Mercury orbits the Sun every 88
+Earth days" mis-tagged, so "Sun" is read by nothing). main 76.7, cf 78.6, held-out 80.0, other 100, relations 81.8 unchanged; false accepts
+are now 0% on every set but main (5.6%) and held-out (7.1%).

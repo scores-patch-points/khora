@@ -52,3 +52,19 @@ test("a one-character word in a logographic script is a word; a bracketed alias 
   assert.equal(v("Kilimanjaro International Airport is a 45-minute drive from Moshi.", "Kilimanjaro International Airport (JRO) is a 45-minute drive from Moshi."), "E");
   assert.equal(v("Jan Ingenhousz discovered the process of photosynthesis.", "Jan Ingenhousz, the Dutch-born British physician and scientist, discovered the process of photosynthesis."), "E");
 });
+
+test("a claim is supported only when read whole: dropped words, unmet modifiers and opposite modifiers keep it apart", () => {
+  const v = (a, b) => verdict(claimsOf(a), claimsOf(b)).v;
+  // a modifier phrase the source does not meet: "with Pfizer" is checked against "with GSK"
+  assert.notEqual(v("In March 2014, we entered into a license agreement with Pfizer.", "In March 2014, we entered into a license agreement with GSK."), "E");
+  assert.equal(v("In March 2014, we entered into a license agreement with GSK.", "In March 2014, we entered into a license agreement with GSK."), "E");
+  // coordinated words are part of an end and are met too
+  assert.equal(v("We entered into a Collaboration and Exclusive License Agreement with GSK.", "We entered into a Collaboration and Exclusive License Agreement with GSK."), "E");
+  // opposite modifiers are two beings
+  const end = (keys) => ({ text: "", head: "lake", names: [], aliases: [], keys: ["lake", ...keys], figs: [], quant: null });
+  assert.ok(!linked(end(["navigable", "short"]), end(["navigable", "tall"])), "the lowest lake is not the highest lake");
+  assert.ok(linked(end(["navigable", "tall"]), end(["navigable", "tall", "world"])));
+  // a word no claim read: the claim is not supported
+  const C = claimsOf("Spiders, like all arachnids, have six legs.");
+  if (C[0]?.unread?.length) assert.notEqual(verdict(C, claimsOf("Spiders have six legs.")).v, "E");
+});

@@ -7,6 +7,7 @@
 import fs from "node:fs";
 import * as P from "./english-parser.js";
 import { bindFigures } from "./figure-binding.js";
+import { unreadWords } from "./claim-coverage.js";
 const K = new URL("../..", import.meta.url).pathname.replace(/\/$/, "");
 const model = P.loadModel(JSON.parse(fs.readFileSync(`${K}/priors/parser-eng-ewt.json`, "utf8")), { morphology: JSON.parse(fs.readFileSync(`${K}/priors/morphology-eng.json`, "utf8")) });
 const LEX = JSON.parse(fs.readFileSync(`${K}/priors/pos-eng-lexicon.json`, "utf8")).classes;
@@ -131,7 +132,9 @@ const kids = (rows, id) => rows.filter((r) => r.head === id);
 // an appositive is a second statement about its head ("Jan Ingenhousz, the Dutch-born British physician"), read as its own "be" claim, not
 // part of the head's name
 const SKIP = /^(punct|acl|acl:relcl|advcl|ccomp|parataxis|conj|cc|nsubj|nsubj:pass|csubj|cop|aux|aux:pass|mark|obl|obl:agent|obl:tmod|obl:npmod|advmod|xcomp|nmod|appos)$/;
-const spanOf = (rows, id) => { const out = [], st = [id]; while (st.length) { const x = st.pop(); out.push(x); for (const r of rows) if (r.head === x && !(x === id && SKIP.test(r.deprel)) && !/^(punct|acl:relcl|parataxis|cc)$/.test(r.deprel)) st.push(r.id); } return out.map((i) => rows.find((r) => r.id === i)).sort((a, b) => a.id - b.id); };
+// a short appositive name is part of the name ("Groq, Inc."), not a second statement
+const nameAppos = (rows, r) => r.deprel === "appos" && r.upos === "PROPN" && rows.find((h) => h.id === r.head)?.upos === "PROPN" && Math.abs(r.id - r.head) <= 2;
+const spanOf = (rows, id) => { const out = [], st = [id]; while (st.length) { const x = st.pop(); out.push(x); for (const r of rows) if (r.head === x && !(x === id && SKIP.test(r.deprel) && !nameAppos(rows, r)) && !/^(punct|acl:relcl|parataxis|cc)$/.test(r.deprel)) st.push(r.id); } return out.map((i) => rows.find((r) => r.id === i)).sort((a, b) => a.id - b.id); };
 const numOf = (w) => { const f = w.form.toLowerCase().replace(/,/g, ""); if (/^\d+(\.\d+)?$/.test(f)) return +f; return CARDINAL[f] ?? null; };
 /** the figures in a word span, each bound to the unit or counted noun right after it */
 const unitKey = (w) => (w ? String(w.form).toLowerCase().replace(/(?<=[a-z]{3})s$/, "").replace(/^metre$|^meter$/, "m").replace(/^fee$/, "feet") : "");
@@ -148,12 +151,16 @@ const bracketed = (rows, ws) => { let d = 0; const inside = new Set(); for (cons
 const endOf = (rows, id, text) => { if (!id) return null; const head = rows.find((r) => r.id === id), ws = spanOf(rows, id);
   const agentN = kids(rows, id).find((k) => /^nmod/.test(k.deprel) && kids(rows, k.id).some((c) => /^by$/i.test(c.form)));
   const inBr = bracketed(rows, ws);
-  return { text: ws.map((w) => w.form).join(" "), head: lem(head), names: ws.filter((w, k) => w.upos === "PROPN" && !inBr[k]).map((w) => w.form.toLowerCase()), aliases: ws.filter((w, k) => /^(PROPN|NOUN|X)$/.test(w.upos) && inBr[k]).map((w) => w.form.toLowerCase()), lemmas: ws.filter((w) => /^(NOUN|PROPN|ADJ)$/.test(w.upos)).map(lem).filter((l) => !FW.has(l)),
+  return { text: ws.map((w) => w.form).join(" "), ids: ws.map((w) => w.id), head: lem(head), names: ws.filter((w, k) => w.upos === "PROPN" && !inBr[k]).map((w) => w.form.toLowerCase()), aliases: ws.filter((w, k) => /^(PROPN|NOUN|X)$/.test(w.upos) && inBr[k]).map((w) => w.form.toLowerCase()), lemmas: ws.filter((w) => /^(NOUN|PROPN|ADJ)$/.test(w.upos)).map(lem).filter((l) => !FW.has(l)),
     sup: (ws.find((w) => w.upos === "ADJ" && (/Degree=Sup/.test(w.feats || "") || /est$/i.test(w.form))) ? comparativeBase(ws.find((w) => w.upos === "ADJ" && (/Degree=Sup/.test(w.feats || "") || /est$/i.test(w.form))).form.replace(/est$/i, "er")) : null),
-    figs: figuresIn(rows, ws, text), quant: ws.map((w) => w.form.toLowerCase()).find((f) => /^(all|every|each|some|many|most|few|no)$/.test(f)) ?? null, agent: agentN ? endOf(rows, agentN.id, text) : null }; };
+    figs: figuresIn(rows, ws, text), quant: ws.map((w) => w.form.toLowerCase()).find((f) => /^(all|every|each|some|many|most|few|no)$/.test(f)) ?? null, agent: agentN ? endOf(rows, agentN.id, text) : null,
+    // its modifier phrases ("an agreement WITH GSK", "the process OF PHOTOSYNTHESIS") and its coordinated words ("a Collaboration AND …
+    // Agreement", "Groq, Inc."), each an end of its own the check must meet in the source
+    nmods: kids(rows, id).filter((k) => (/^nmod(:poss)?$/.test(k.deprel) && k !== agentN) || (k.deprel === "conj" && /^(NOUN|PROPN|ADJ|NUM)$/.test(k.upos))).map((k) => endOf(rows, k.id, text)) }; };
 
 function propositionsOf(text, rows = rowsOf(text)) {
-  const out = [];
+  // out.framed: the words of discourse connectives, set aside on purpose (read, not dropped)
+  const out = [], framed = new Set(); out.framed = framed;
   const byId = (id) => rows.find((r) => r.id === id);
   const reportedUnder = (v) => { let x = v; for (let i = 0; i < 6 && x; i++) { const h = byId(x.head); if (!h) return false; if (/^(ccomp|parataxis)$/.test(x.deprel) && REPORT.has(lem(h))) return true; x = h; } return false; };
   const REL_PRON = /^(which|who|whom|that)$/i;
@@ -193,7 +200,8 @@ function propositionsOf(text, rows = rowsOf(text)) {
     // a DISCOURSE connective ("In addition, …", "For example, …") frames the sentence and says nothing of its event (declared English closed class)
     const discourse = (k) => /^(in addition|in particular|for example|for instance|in fact|in turn|in short|in contrast|on the other hand|as a result|in summary|in conclusion)$/i.test(spanOf(rows, k.id).map((w) => w.form).join(" "));
     const obls = ks.filter((k) => /^(obl|obl:tmod|obl:npmod|nmod)$/.test(k.deprel) && k !== agent && !discourse(k)).map((k) => ({ ...endOf(rows, k.id, text), than: kids(rows, k.id).some((c) => /^than$/i.test(c.form)), with: kids(rows, k.id).some((c) => /^with$/i.test(c.form)) }));
-    const base = { polarity: neg ? "-" : "+", tense, asserted, OBL: obls.filter((o) => !o.with), main: v.head === 0 || (v.deprel === "conj" && byId(v.head)?.head === 0) };
+    for (const k of ks) if (/^(obl|obl:tmod|obl:npmod|nmod)$/.test(k.deprel) && discourse(k)) for (const w of spanOf(rows, k.id)) framed.add(w.id);
+    const base = { vid: v.id, polarity: neg ? "-" : "+", tense, asserted, OBL: obls.filter((o) => !o.with), main: v.head === 0 || (v.deprel === "conj" && byId(v.head)?.head === 0) };
     const conjRoot = subj && subj.deprel === "conj" ? byId(subj.head) : subj;
     const subjects = subj ? [...new Set([subj, conjRoot, ...rows.filter((r) => conjRoot && r.head === conjRoot.id && r.deprel === "conj" && /^(NOUN|PROPN)$/.test(r.upos))])].filter(Boolean) : [null];
     for (const S0 of subjects) {
@@ -204,10 +212,13 @@ function propositionsOf(text, rows = rowsOf(text)) {
         if (v.upos === "ADJ" && than) out.push({ ...base, rel: comparativeBase(v.form), ARG0: endOf(rows, S0.id, text), ARG1: than, asym: true });
         else out.push({ ...base, rel: "be", ARG0: endOf(rows, S0.id, text), ARG1: endOf(rows, v.id, text) });
       } else if (/^(VERB|AUX|ADJ)$/.test(v.upos) && (S0 || obj)) {
-        const A0 = passive ? agent : S0, A1 = passive ? S0 : obj;
-        // with no object, the second end is the first oblique AFTER the verb ("entered into an agreement"): a phrase before it frames the event
-        // ("In March 2014, …", "In addition, …") and stays an oblique, never an argument
-        out.push({ ...base, rel: lem(v), ARG0: endOf(rows, A0?.id, text), ARG1: endOf(rows, (A1 ?? ks.find((k) => /^(obl|xcomp)$/.test(k.deprel) && k.id > v.id))?.id, text), ARG2: iobj ? endOf(rows, iobj.id, text) : null, voice: passive ? "passive" : "active", asym: !!(A0 && A1) });
+        // one claim per coordinated object, as per coordinated subject ("a Collaboration and Exclusive License Agreement with GSK")
+        for (const O of !passive && obj ? [obj, ...rows.filter((r) => r.head === obj.id && r.deprel === "conj" && /^(NOUN|PROPN)$/.test(r.upos))] : [obj]) {
+          const A0 = passive ? agent : S0, A1 = passive ? S0 : O;
+          // with no object, the second end is the first oblique AFTER the verb ("entered into an agreement"): a phrase before it frames the event
+          // ("In March 2014, …", "In addition, …") and stays an oblique, never an argument
+          out.push({ ...base, rel: lem(v), ARG0: endOf(rows, A0?.id, text), ARG1: endOf(rows, (A1 ?? ks.find((k) => /^(obl|xcomp)$/.test(k.deprel) && k.id > v.id))?.id, text), ARG2: iobj ? endOf(rows, iobj.id, text) : null, voice: passive ? "passive" : "active", asym: !!(A0 && A1) });
+        }
       }
       // "With a radius of 1,516 miles, Mercury is …": the with-phrase is something the subject has
       for (const w of obls.filter((o) => o.with)) if (S0) out.push({ ...base, OBL: [], rel: "have", ARG0: endOf(rows, S0.id, text), ARG1: w, asym: true });
@@ -215,14 +226,14 @@ function propositionsOf(text, rows = rowsOf(text)) {
   }
   // an appositive is a statement that the two are one ("the Malus genus, a group of about 32 species")
   for (const a of rows.filter((r) => r.deprel === "appos" && !(r.upos === "PROPN" && byId(r.head)?.upos === "PROPN" && Math.abs(r.id - r.head) <= 2))) out.push({ polarity: "+", tense: "present", asserted: true, OBL: [], rel: "be", ARG0: endOf(rows, a.head, text), ARG1: endOf(rows, a.id, text) });
-  return out.filter((p) => p.ARG0 || p.ARG1);
+  const kept = out.filter((p) => p.ARG0 || p.ARG1); kept.framed = framed; return kept;
 }
 
 const surname = (e) => e.names.filter((n) => !TITLES.has(n)).at(-1) ?? null;
 
 // a pronoun's case is grammar, not identity: "us" is "we" (declared English closed class)
 const PRON_CASE = { us: "we", me: "i", him: "he", her: "she", them: "they", ourselves: "we", themselves: "they" };
-const keyEnd = (e) => e && { text: e.text, head: PRON_CASE[e.head] ?? e.head, sup: e.sup ?? null, names: e.names.filter((n) => !TITLES.has(n)), aliases: e.aliases ?? [], keys: e.lemmas.filter((l) => !TITLES.has(l)), figs: e.figs, quant: e.quant ? QUANT[e.quant] : null, agent: keyEnd(e.agent) };
+const keyEnd = (e) => e && { text: e.text, head: PRON_CASE[e.head] ?? e.head, sup: e.sup ?? null, names: e.names.filter((n) => !TITLES.has(n)), aliases: e.aliases ?? [], keys: e.lemmas.filter((l) => !TITLES.has(l)), figs: e.figs, quant: e.quant ? QUANT[e.quant] : null, agent: keyEnd(e.agent), nmods: (e.nmods ?? []).map(keyEnd) };
 const QUANT = { all: "all", every: "all", each: "all", some: "some", many: "many", most: "most", few: "few", no: "none" };
 /** EOTClaim@1 — the only thing the EOT layer sees */
 /** the claims of every one of the k best readings, once each: a source states what any close reading of it states */
@@ -232,11 +243,13 @@ export function claimsOfK(text, k = 3) {
   return out;
 }
 export function claimsOf(text, rows = undefined) {
-  const R = rows ?? rowsOf(text);
-  return [...propositionClaims(text, R), ...figureClaimsOf(text, R)];
+  const R = rows ?? rowsOf(text), props = propositionsOf(text, R);
+  // the sentence's content words no claim read (claim-coverage.js): carried on every claim, so the check never calls a partly read claim supported
+  const unread = unreadWords(R.filter((r) => !props.framed.has(r.id)), props, bindFigures(R, FIGURE_LEX), { isUnit: (f) => !!FIGURE_LEX.unitOf(f), key: lem });
+  return [...propositionClaims(text, R, props), ...figureClaimsOf(text, R)].map((c) => ({ ...c, unread }));
 }
-function propositionClaims(text, rows) {
-  return propositionsOf(text, rows).map((p, i) => ({ main: !!p.main, schema: "EOTClaim@1", id: `c${i + 1}`, lang: "en", by: "grammar-en", rel: p.rel, ARG0: keyEnd(p.ARG0), ARG1: keyEnd(p.ARG1), ARG2: keyEnd(p.ARG2 ?? null), OBL: (p.OBL || []).map(keyEnd), polarity: p.polarity, tense: p.tense, asserted: p.asserted, asym: !!p.asym }));
+function propositionClaims(text, rows, props = propositionsOf(text, rows)) {
+  return props.map((p, i) => ({ main: !!p.main, schema: "EOTClaim@1", id: `c${i + 1}`, lang: "en", by: "grammar-en", rel: p.rel, ARG0: keyEnd(p.ARG0), ARG1: keyEnd(p.ARG1), ARG2: keyEnd(p.ARG2 ?? null), OBL: (p.OBL || []).map(keyEnd), polarity: p.polarity, tense: p.tense, asserted: p.asserted, asym: !!p.asym }));
 }
 
 

@@ -2,9 +2,13 @@
 // figures (measure + base value), polarity, tense, assertion, quantifier. Relation TYPES are declared here over the neutral keys, each with its
 // giver; the grammar adapters are what turn a language's words into those keys.
 // DECLARED (giver: comparative adjective pairs, enumerated over the neutral keys, not measured)
-const CONVERSE = Object.fromEntries([["tall", "short"], ["large", "small"], ["big", "small"], ["old", "young"], ["heavy", "light"], ["long", "short"], ["high", "low"], ["fast", "slow"], ["wide", "narrow"], ["deep", "shallow"], ["early", "late"], ["many", "few"], ["much", "little"], ["rich", "poor"], ["hot", "cold"], ["before", "after"], ["above", "below"]].flatMap(([a, b]) => [[a, b], [b, a]]));
+const CONVERSE_PAIRS = [["tall", "short"], ["large", "small"], ["big", "small"], ["old", "young"], ["heavy", "light"], ["long", "short"], ["high", "low"], ["fast", "slow"], ["wide", "narrow"], ["deep", "shallow"], ["early", "late"], ["many", "few"], ["much", "little"], ["rich", "poor"], ["hot", "cold"], ["before", "after"], ["above", "below"]];
+const CONVERSE = Object.fromEntries(CONVERSE_PAIRS.flatMap(([a, b]) => [[a, b], [b, a]]));
 // DECLARED (giver: antonymous predicate pairs over the neutral keys): the same ends with one of these flips polarity
-const ANTONYM = Object.fromEntries([["open", "closed"], ["open", "close"], ["alive", "dead"], ["true", "false"], ["present", "absent"], ["legal", "illegal"], ["possible", "impossible"], ["safe", "dangerous"], ["visible", "invisible"], ["active", "inactive"], ["extinct", "extant"], ["extinct", "dormant"], ["extinct", "active"]].flatMap(([a, b]) => [[a, b], [b, a]]));
+const ANTONYM_PAIRS = [["open", "closed"], ["open", "close"], ["alive", "dead"], ["true", "false"], ["present", "absent"], ["legal", "illegal"], ["possible", "impossible"], ["safe", "dangerous"], ["visible", "invisible"], ["active", "inactive"], ["extinct", "extant"], ["extinct", "dormant"], ["extinct", "active"]];
+const ANTONYM = Object.fromEntries(ANTONYM_PAIRS.flatMap(([a, b]) => [[a, b], [b, a]]));
+// every declared opposite, both ways (the maps above keep one partner per word, so "short" names only one of "tall" and "long")
+const OPPOSITE = new Set([...CONVERSE_PAIRS, ...ANTONYM_PAIRS].flatMap(([a, b]) => [`${a}|${b}`, `${b}|${a}`]));
 // DECLARED: relations whose object is a measure of the subject, and relations that only join their ends (the ends decide)
 const STATIVE = new Set(["be", "have", "stand", "measure", "weigh", "reach", "rise", "span", "cover", "total", "number", "carry", "contain", "hold", "boil", "freeze", "melt", "travel"]);
 const LIGHT = new Set(["be", "have", "by", "of"]);
@@ -25,6 +29,8 @@ export const linked = (a, b) => { if (!a || !b) return false;
   // a one-letter head is no word in an alphabet ("s", "a"), but one character is a whole word in a logographic script (葉 leaf, 根 root)
   if (a.head !== b.head || isNum(a.head) || (a.head.length < 2 && !/\p{Script=Han}|\p{Script=Hiragana}|\p{Script=Katakana}|\p{Script=Hangul}/u.test(a.head))) return false;
   const ma = mods(a), mb = mods(b);
+  // modifiers that are a declared opposite pair are two beings: "the lowest navigable lake" is not "the highest navigable lake"
+  if (ma.some((k) => mb.some((j) => OPPOSITE.has(`${k}|${j}`)))) return false;
   return !(ma.length && mb.length && !ma.some((k) => mb.includes(k))); };
 const figs = (p) => [p.ARG0, p.ARG1, ...(p.OBL || [])].filter(Boolean).flatMap((e) => [...e.figs, ...(e.agent?.figs ?? [])]);
 const sameValue = (x, y) => { const tol = x.approx || y.approx ? 0.02 : 0.005; return Math.abs(x.base - y.base) <= Math.max(0.5, tol * Math.abs(y.base)); };
@@ -32,6 +38,14 @@ const measureMeet = (c, s) => { if (!(c.rel === s.rel || (STATIVE.has(c.rel) && 
   const a = figs(c).filter((f) => f.measure !== "date" && f.measure !== "count"), b = figs(s).filter((f) => f.measure !== "date" && f.measure !== "count");
   for (const x of a) for (const y of b) if (x.measure === y.measure) return sameValue(x, y) ? "same" : "differs"; return null; };
 const RANK = { C: 3, E: 2, T: 1, U: 0 };
+// every end a source says, with their modifier phrases and agents: what a claim's own modifiers may meet
+const endsOf = (e, out = []) => { if (!e) return out; out.push(e); endsOf(e.agent, out); for (const n of e.nmods ?? []) endsOf(n, out); return out; };
+const unmetMods = (c, S) => {
+  const pool = S.flatMap((s) => [s.ARG0, s.ARG1, s.ARG2, ...(s.OBL ?? [])].flatMap((e) => endsOf(e)));
+  const out = [], walk = (e) => { for (const n of e?.nmods ?? []) { if (!pool.some((x) => linked(n, x))) out.push(n.head); walk(n); } };
+  for (const e of [c.ARG0, c.ARG1, c.ARG2, ...(c.OBL ?? [])]) walk(e);
+  return out;
+};
 /** claims (the answer's) against source claims → { v: E | C | T | U | X, why } */
 // TRANSFER FRAMES: a giver, a recipient and a thing, read from a claim by its verb's side of the transfer (relation-defs.js classOf): a verb
 // of giving has the giver as subject and the recipient as indirect object or "to" phrase; a verb of taking has the recipient as subject and
@@ -61,6 +75,10 @@ function frameVerdict(fc, fs) {
 }
 export function verdict(C, S, { janus = null, relations = null } = {}) {
   if (!C.length) return { v: "X", why: "no claim read" };
+  // a claim its grammar did not read whole (claim-coverage.js: content words in no claim) is never supported: what was read may match, but
+  // the words the parse dropped ("… northeast of Garmisch-Partenkirchen", "… to the port of Bordeaux") were checked against nothing
+  const unread = [...new Set(C.flatMap((c) => c.unread ?? []))];
+  const supported = (why) => (unread.length ? { v: "T", why: `claim partly read (unread: ${unread.join(", ")}); ${why}` } : { v: "E", why });
   // identity inside the source: "Mercury is the fastest planet, zipping around the Sun" — what the source says of "the fastest planet" it
   // says of Mercury. Each source claim is also read with an end that a copula of the same source equates replaced by its other side.
   const eqs = S.filter((x) => x.rel === "be" && x.ARG0 && x.ARG1 && x.polarity === "+");
@@ -85,7 +103,7 @@ export function verdict(C, S, { janus = null, relations = null } = {}) {
   }
   if (figVerdicts.includes("C")) return { v: "C", why: "figure differs" };
   C = C.filter((x) => x.rel !== "fig"); S = S.filter((x) => x.rel !== "fig");
-  if (!C.length) return { v: figVerdicts.includes("E") ? "E" : "X", why: figVerdicts.length ? "figure" : "no claim read" };
+  if (!C.length) return figVerdicts.includes("E") ? supported("figure") : { v: "X", why: figVerdicts.length ? "figure" : "no claim read" };
   for (const c of C) {
     let best = { v: "U", why: "" };
     for (const s of S) {
@@ -133,10 +151,13 @@ export function verdict(C, S, { janus = null, relations = null } = {}) {
       if (RANK[r.v] > RANK[best.v]) best = r;
       if (r.v === "C") break;
     }
+    // a claim is met only when its ends' modifier phrases are too: each must link to something the source says ("the port of Bordeaux"
+    // meets nothing in "… jusqu'au port de Nantes")
+    if (best.v === "E") { const um = unmetMods(c, S); if (um.length) best = { v: "T", why: `modifier unmet: ${um.join(", ")}` }; }
     per.push(best);
   }
   if (per.some((p) => p.v === "C")) return { v: "C", why: per.map((p) => p.why).join("; ") };
   const mainIdx = C.map((c, i) => (c.main ? i : -1)).filter((i) => i >= 0);
-  if ((mainIdx.length ? mainIdx.map((i) => per[i]) : per).every((p) => p.v === "E")) return { v: "E", why: per.map((p) => p.why).join("; ") };
+  if ((mainIdx.length ? mainIdx.map((i) => per[i]) : per).every((p) => p.v === "E")) return supported(per.map((p) => p.why).join("; "));
   return { v: per.some((p) => p.v === "T" || p.v === "E") ? "T" : "U", why: per.map((p) => `${p.v}:${p.why}`).join("; ") };
 }
