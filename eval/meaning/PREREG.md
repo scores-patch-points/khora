@@ -98,3 +98,11 @@ committing the set and the first run; any later fix is post hoc and reported as 
 Label audit, before any run (the pairs' sentences checked against their sources; labels read against the sentence alone): 663 relabelled
 C → T ("Climbing Mount Fuji is popular in winter" against "夏季シーズンには富士登山が盛んである": summer popularity neither states nor rules
 out winter). Final counts: 64 pairs, 32 E, 23 C, 9 T. Committed before any arm ran.
+RESULT (first run, code as of 3c4ae889, no changes since the set was committed):
+ product arm (grammar-ud): accuracy 46.9%, false-accept 9.4% (3 of 32), false-reject 96.9% (31 of 32 E missed), contradictions 4 of 23,
+ no typed gaps. Wording judge: 70.3%, false-accept 12.5%, contradictions 1 of 23. Same-language 45.8%, cross-language 50.0%; es 41.7,
+ fr 41.7, de 41.7, ja 58.3 (each of 12). F1 PASS, F2 PASS (9.4%), F3 FAIL (17%), F4 FAIL.
+ The "other" set's 100% (run 8) did not hold on unseen pages: run 8 was fitted to its pairs.
+ 50 failures by layer: tokens/sentences 4, word senses 5, attachment 3, claim building 8, figures 7, referents 10 (7 of them a pronoun or
+ dropped subject the page supplies), relations 11, verdict 2. False accepts: 626 and 642 (the claim's distinguishing phrase was dropped by
+ the parse, the rest matched), 602 (antonym modifiers linked: "más bajo" / "más alto").
