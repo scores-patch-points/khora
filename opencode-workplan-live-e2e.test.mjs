@@ -34,7 +34,7 @@ after(() => { try { proc?.kill("SIGKILL"); } catch { /* gone */ } fs.rmSync(WN, 
 
 test("L0 the REAL door comes up (a subprocess over HTTP)", async () => {
   proc = spawn(process.execPath, [path.join(HERE, "opencode-doorway.mjs"), "--serve", String(PORT)], {
-    env: { ...process.env, FOLD_WORKNOTES_DIR: WN, FOLD_OPENCODE_STATE: ST, FOLD_COMMONS_PROSIFY: "extractive", FOLD_LOOK_IDLE_MS: "50", FOLD_WARM: "0" },
+    env: { ...process.env, FOLD_WORKNOTES_DIR: WN, FOLD_OPENCODE_STATE: ST, FOLD_COMMONS_PROSIFY: "extractive", FOLD_LOOK_IDLE_MS: "50", FOLD_WARM: "0", FOLD_ROUTE_WARM: "0" },
     stdio: ["ignore", "ignore", "pipe"],
   });
   let up = false;

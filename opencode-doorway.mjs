@@ -101,6 +101,7 @@ import { dream as dreamPass } from "./opencode-dream.mjs";
 import { layers, renderLayersHtml } from "./opencode-layers.mjs";
 import fs from "node:fs";
 import path from "node:path";
+import { Worker } from "node:worker_threads";
 import crypto from "node:crypto";
 import http from "node:http";
 import net from "node:net";
@@ -1116,6 +1117,76 @@ function savePerceiveConfig(patch) {
   return next;
 }
 
+// GATHER: a search ask answered from the pages read, with no model (opencode-gather.mjs: the Holodeck's research, then its summary
+// selected by the asker's stance). The work runs in a worker thread: the door is one event loop, and reading pages is seconds of
+// synchronous work that every other request would wait behind. At most two gathers at once; a slow one is cut at the budget.
+let gathersRunning = 0;
+async function onGather(body) {
+  const ask = String(body.ask ?? "").trim();
+  if (!ask) return { ok: false, error: "no ask" };
+  if (gathersRunning >= 2) return { ok: false, error: "busy: two gathers are already running" };
+  const budget = Math.max(5000, Math.min(Number(body.budgetMs) || 90_000, 180_000));
+  gathersRunning++;
+  try {
+    const out = await new Promise((resolve) => {
+      const w = new Worker(new URL("./opencode-gather-worker.mjs", import.meta.url), { workerData: { ask, opts: { gapMs: body.gapMs, retryMs: body.retryMs, softMs: Number(body.softMs) || undefined, plan: body.plan && typeof body.plan === "object" ? body.plan : undefined, topic: typeof body.topic === "string" && body.topic.trim() ? body.topic.trim().slice(0, 300) : undefined, kind: typeof body.kind === "string" ? body.kind.slice(0, 20) : undefined } } });
+      const timer = setTimeout(() => { w.terminate(); resolve({ ok: false, error: `gather exceeded its ${budget} ms budget` }); }, budget);
+      w.once("message", (m) => { clearTimeout(timer); resolve(m); w.terminate(); });
+      w.once("error", (e) => { clearTimeout(timer); resolve({ ok: false, error: String(e?.message ?? e).slice(0, 300) }); });
+    });
+    // keep the assembled text for the model call the harness is about to make for this turn (served by /v1/gather/chat/completions)
+    if (out?.ok && out.result?.text) {
+      const id = `g${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`;
+      gatherAnswers.set(id, { text: out.result.text, at: Date.now() });
+      for (const [k, v] of gatherAnswers) if (Date.now() - v.at > 300_000 || gatherAnswers.size > 50) gatherAnswers.delete(k);
+      return { ok: true, id, result: out.result };
+    }
+    return out;
+  } finally { gathersRunning--; }
+}
+const gatherAnswers = new Map();
+
+// ESSAY, a long piece as a file written a section at a time across the harness's model calls (opencode-essay.mjs): the door keeps the job, applies each
+// reply to the file, grades the section against its own material with the grounding check, and says what the next model call is asked. The model
+// calls are the harness's; the door never calls a model. `start` gathers first (an account ask, topic, a short time budget).
+const essayJobs = new Map();
+async function onEssay(body) {
+  const { essayStart, essayStep, essayRevise } = await import("./opencode-essay.mjs");
+  for (const [k, v] of essayJobs) if (Date.now() - v.at > 3600_000) essayJobs.delete(k);
+  const op = String(body.op ?? "");
+  try {
+    if (op === "start") {
+      const ask = String(body.ask ?? "").trim();
+      const topic = typeof body.topic === "string" && body.topic.trim() ? body.topic.trim().slice(0, 300) : ask;
+      const g = await onGather({ ask, topic, kind: "account", softMs: Number(body.softMs) || 20_000, budgetMs: Number(body.budgetMs) || 90_000, plan: body.plan });
+      if (!g?.ok) return { ok: false, error: g?.error ?? "the gather failed" };
+      const s = essayStart({ ask, topic, gathered: g.result, outline: body.outline });
+      if (s.gap) return { ok: false, error: s.gap.reason };
+      essayJobs.set(s.job.id, { job: s.job, at: Date.now() });
+      return { ok: true, job: s.job.id, prompt: s.prompt, section: s.section.id, sections: s.job.outline.length, sources: g.result.sources.length, path: s.job.file, passages: g.result.passages };
+    }
+    const entry = essayJobs.get(String(body.job ?? ""));
+    if (!entry) return { ok: false, error: "no such essay job (expired or never started)" };
+    entry.at = Date.now();
+    if (op === "step") {
+      const { profileOf } = await import("./opencode-finish.mjs");
+      const ground = async (text, passages) => { const p = await profileOf({ draft: text, material: null, passages, workspace: null, own: [], research: false }); return (p?.profile?.claims ?? []).map((c) => ({ text: c.text, standing: c.standing })); };
+      const r = await essayStep(entry.job, String(body.text ?? ""), { ground });
+      if (r.done) {
+        const id = `g${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`;
+        gatherAnswers.set(id, { text: r.done.text, at: Date.now() });
+        return { ok: true, done: { path: r.done.path, standing: r.done.standing, cut: r.done.cut.length, gaps: r.done.gaps, calls: r.done.calls, sections: r.done.sections }, id };
+      }
+      return { ok: true, next: r.next };
+    }
+    if (op === "revise") {
+      const r = essayRevise(entry.job, String(body.section ?? ""), String(body.instruction ?? ""));
+      return r.gap ? { ok: false, error: r.gap.reason } : { ok: true, next: r.next };
+    }
+    return { ok: false, error: `unknown op ${op}` };
+  } catch (e) { return { ok: false, error: String(e?.message ?? e).slice(0, 300) }; }
+}
+
 async function onPerceive(body) {
   const cfg = loadPerceiveConfig();
   const mime = String(body?.mime ?? "application/octet-stream").toLowerCase();
@@ -1970,6 +2041,17 @@ export async function answer(body, opts = {}) {
     case "trail": return onTrail(body);
     case "event": return onEvent(body);
     case "perceive": return onPerceive(body);
+    case "gather": return onGather(body);
+    case "essay": return onEssay(body);
+    case "route": {
+      // THE CONVERSATION ROUTER (opencode-route.mjs): which handling this ask gets, by intent, before any model is called. Fails open: a gap or an
+      // error is an answer the plugin reads as "no route" and falls back to its own classifier.
+      try {
+        const { routeOf } = await import("./opencode-route.mjs");
+        const r = await routeOf(String(body.ask ?? ""), { history: body.hasHistory ? [{ role: "assistant" }] : [] });
+        return { ok: true, ...r };
+      } catch (e) { return { ok: false, error: String(e?.message ?? e).slice(0, 200) }; }
+    }
     case "shadow": return onShadow(body);
     case "draft": return onDraft(body);
     case "act": return onAct(body);
@@ -2084,6 +2166,19 @@ export async function route(req, res, { log = () => {} } = {}) {
   }
   // POST /v1/perceive { path } → the local vision sense: OCR the image on this box (tesseract), no network, no
   // vision model. Returns the measured text with a giver; the model reads this, never the pixels.
+  // POST /v1/gather/chat/completions: the answer a gather assembled, served as the reply of an OpenAI-compatible chat model. The
+  // plugin points one model call at this path (x-gather-id names the answer); nothing leaves the machine and no model runs.
+  if (url === "/v1/gather/chat/completions" && req.method === "POST") {
+    let body = {};
+    try { body = JSON.parse((await readBody(req)) || "{}"); } catch { /* an empty request */ }
+    const a = gatherAnswers.get(String(req.headers["x-gather-id"] ?? ""));
+    if (!a) { res.writeHead(404, { "content-type": "application/json" }); res.end(JSON.stringify({ error: { message: "no gather answer for this id (expired or never made)" } })); return true; }
+    const { chatCompletion } = await import("./opencode-gather.mjs");
+    const c = chatCompletion({ text: a.text, model: typeof body.model === "string" ? body.model : "fold-gather", stream: body.stream === true });
+    res.writeHead(200, { "content-type": c.type, "cache-control": "no-cache" });
+    res.end(c.body);
+    return true;
+  }
   if (url === "/v1/perceive" && req.method === "POST") {
     let body = {};
     try { body = JSON.parse((await readBody(req)) || "{}"); } catch { /* answered as an empty read */ }
@@ -2194,7 +2289,7 @@ export async function route(req, res, { log = () => {} } = {}) {
   if (url !== "/v1/hooks/opencode") return false;
   if (req.method === "GET") {
     res.writeHead(200, { "content-type": "application/json" });
-    res.end(JSON.stringify({ door: "opencode", priors: seedStatus(), senses: huntOrgans({ stateDir: STATE }), events: ["context", "surf", "mark", "claim", "done", "notes", "scent", "admit", "record", "dream", "provenance", "snip", "swarm", "cube", "ground", "nextVoid", "chase", "title", "event", "prompt", "trail", "perceive", "draft", "act", "memory", "refs", "system"] }));
+    res.end(JSON.stringify({ door: "opencode", priors: seedStatus(), senses: huntOrgans({ stateDir: STATE }), events: ["context", "surf", "gather", "route", "mark", "claim", "done", "notes", "scent", "admit", "record", "dream", "provenance", "snip", "swarm", "cube", "ground", "nextVoid", "chase", "title", "event", "prompt", "trail", "perceive", "draft", "act", "memory", "refs", "system"] }));
     return true;
   }
   if (req.method !== "POST") return false;
@@ -2221,6 +2316,11 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href &
     const { warmFinish } = await import("./opencode-finish.mjs");
     const w = await warmFinish();
     console.error(`opencode doorway warmed in ${w.ms} ms`);
+  }
+  // The router loads its English parser on its first call (about 3 s of synchronous work): pay it here, before listening, so the plugin's
+  // first route call (a short timeout) is never the one that waits.
+  if (process.env.FOLD_ROUTE_WARM !== "0") {
+    try { const { routeOf } = await import("./opencode-route.mjs"); const t = Date.now(); await routeOf("hello", { history: [] }); console.error(`opencode route warmed in ${Date.now() - t} ms`); } catch (e) { console.error(`opencode route not warmed: ${e?.message ?? e}`); }
   }
   http.createServer(async (req, res) => {
     // CORS: the app reads the audit from the window (a different origin). The
