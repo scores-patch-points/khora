@@ -52,7 +52,9 @@ for (const [name, f] of Object.entries(sets)) {
       const lang = p.lang ?? "en";
       let v;
       if (arm === "wording") v = lexical(p.claim, p.sentence);
-      else { const A = arms[arm](p.claim, lang, "claim"), B = arms[arm](p.sentence, lang, "source"); if (!A || !B) { v = "G"; gap++; } else { v = verdict(A, B, arm === "grammar-defs" ? { relations: DEFS } : {}).v; if (v !== "C" && jset.has(String(p.id))) v = "C"; } }
+      else { const A = arms[arm](p.claim, lang, "claim"), B = arms[arm](p.sentence, lang, "source"); let why = null; if (!A || !B) { v = "G"; gap++; } else { const r = verdict(A, B, arm === "grammar-defs" ? { relations: DEFS } : {}); v = r.v; why = r.why; if (v !== "C" && jset.has(String(p.id))) { v = "C"; why = "janus"; } }
+        // MEANING_DUMP=<file.jsonl>: every pair's verdict, basis and claims, per arm, for the failure breakdown
+        if (process.env.MEANING_DUMP) fs.appendFileSync(process.env.MEANING_DUMP, JSON.stringify({ set: name, arm, id: p.id, label: p.label, type: p.type ?? p.why ?? null, v, why, claim: p.claim, sentence: p.sentence, C: A, S: B }) + "\n"); }
       const said = v === "E";
       if ((p.label === "E") === said) acc++; if (said && p.label !== "E") fa++; if (!said && p.label === "E") fr++; if (p.label === "C" && v === "C") cc++;
       rows.push(`${p.id}:${p.label}${v}`);
