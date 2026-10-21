@@ -53,5 +53,6 @@ test("a framer that says 'negated' flips polarity only when foldFrameNegation is
   const neg = () => ({ negated: true, modal: [], ending: false, dir: null, root: "x" });
   const T2 = "In March 2014, we entered into a Collaboration and Exclusive License Agreement with GSK", off = engineRelationsFor([T2], { framer: neg }).read(T2), on = engineRelationsFor([T2], { framer: neg, foldFrameNegation: true }).read(T2);
   assert.ok(off.claims.length > 0 && off.claims.every((c) => c.polarity === "+"));
-  assert.ok(on.claims.some((c) => c.polarity === "-" && c.negationFolded === "frame"));
+  assert.ok(on.claims.length > 0 && on.claims.every((c) => c.polarity === "-")); // both sides read as negated, so they agree: still bound
+  assert.ok(on.claims.every((c) => c.verdict === "bound"));
 });
