@@ -19,6 +19,9 @@ const isNum = (k) => /^\d/.test(k);
 const mods = (e) => e.keys.filter((k) => k !== e.head && !isNum(k));
 // two ends that are amounts are one when they are the same amount ("$35.0 million" read twice)
 const sameAmount = (a, b) => a.figs?.length && b.figs?.length && a.figs.some((x) => b.figs.some((y) => x.measure === y.measure && Math.abs(x.base - y.base) <= Math.max(0.5, 0.005 * Math.abs(y.base))));
+// two keys meet when either's alternatives hold the other's key (a gloss's synonyms: "relier" → connect, link, join)
+const headMeet = (a, b) => a.head === b.head || (a.heads ?? []).includes(b.head) || (b.heads ?? []).includes(a.head);
+const relMeet = (c, s) => c.rel === s.rel || (c.rels ?? []).includes(s.rel) || (s.rels ?? []).includes(c.rel);
 export const linked = (a, b) => { if (!a || !b) return false;
   if (sameAmount(a, b)) return true;
   const sa = a.names.at(-1) ?? null, sb = b.names.at(-1) ?? null;
@@ -27,7 +30,7 @@ export const linked = (a, b) => { if (!a || !b) return false;
   if (sa && sb) return sa === sb;
   if (sa && (b.head === sa || b.keys.includes(sa))) return true; if (sb && (a.head === sb || a.keys.includes(sb))) return true;
   // a one-letter head is no word in an alphabet ("s", "a"), but one character is a whole word in a logographic script (葉 leaf, 根 root)
-  if (a.head !== b.head || isNum(a.head) || (a.head.length < 2 && !/\p{Script=Han}|\p{Script=Hiragana}|\p{Script=Katakana}|\p{Script=Hangul}/u.test(a.head))) return false;
+  if (!headMeet(a, b) || isNum(a.head) || (a.head.length < 2 && !/\p{Script=Han}|\p{Script=Hiragana}|\p{Script=Katakana}|\p{Script=Hangul}/u.test(a.head))) return false;
   const ma = mods(a), mb = mods(b);
   // modifiers that are a declared opposite pair are two beings: "the lowest navigable lake" is not "the highest navigable lake"
   if (ma.some((k) => mb.some((j) => OPPOSITE.has(`${k}|${j}`)))) return false;
@@ -116,13 +119,13 @@ export function verdict(C, S, { janus = null, relations = null } = {}) {
       // and every oblique the claim carries ("mainly in the roots") must meet one of the source's, or the claim says more than the source
       const both = c.ARG0 && c.ARG1 ? linked(c.ARG0, s.ARG0 ?? s.ARG1) && linked(c.ARG1, s.ARG1) : true;
       const oblMet = (c.OBL || []).filter((o) => !o.figs?.length).every((o) => (s.OBL || []).some((x) => linked(o, x)) || [s.ARG0, s.ARG1].some((x) => linked(o, x)));
-      const sameRel = (c.rel === s.rel && oblMet) || ((LIGHT.has(c.rel) || LIGHT.has(s.rel)) && straight && both && oblMet);
+      const sameRel = (relMeet(c, s) && oblMet) || ((LIGHT.has(c.rel) || LIGHT.has(s.rel)) && straight && both && oblMet);
       const measure = c.ARG0 && linked(c.ARG0, s.ARG0) ? measureMeet(c, s) : null;
       const antonym = c.rel === "be" && (s.rel !== "be" ? ANTONYM[c.ARG1?.head] === s.rel : ANTONYM[c.ARG1?.head] === s.ARG1?.head);
       const guard = !s.asserted && c.asserted ? "the source only reports or hedges it" : c.tense === "present" && s.tense === "past" && sameRel ? "other tense" : c.ARG0?.quant && s.ARG0?.quant && c.ARG0.quant !== s.ARG0.quant && /^(all|none)$/.test(c.ARG0.quant) ? "other quantifier" : null;
       let r = null;
       // transfer verbs, the same or a converse by the language's definitions: compare who gives, who gets, what
-      const rk = relations ? (c.rel === s.rel ? "same" : relations.relate(c.rel, s.rel)) : null;
+      const rk = relations ? (relMeet(c, s) ? "same" : relations.relate(c.rel, s.rel)) : null;
       const cc = rk ? relations.classOf(c.rel) : null, sc = rk ? relations.classOf(s.rel) : null;
       // the claim's other obliques (where, when, how) must still be met: "takes place mainly in the roots" is not "… in the leaves"
       const roleCase = new Set(["to", "from", "by"]);

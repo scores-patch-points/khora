@@ -39,6 +39,7 @@ function figureLex(L) {
       return null;
     },
     scaleOf: (w) => L.scale[String(w).toLowerCase()] ?? null,
+    dateUnit: (w) => !!L.dateUnits?.has(String(w)),
     unitOf: unit,
     isYear: (v, form, rows, i) => (/^\d{4}$/.test(String(form)) && v >= 1000 && v <= 2100) || [rows[i - 1], rows[i + 1], rows[i - 2]].some((x) => x && L.months.has(low(x))),
     singular: (w) => w,
@@ -52,7 +53,11 @@ export function makeGrammar(lang, { model, tokenizer, glossary = null }) {
   const L = PACKS[lang]; if (!L) throw new Error(`no grammar pack for ${lang}`);
   const LEX = figureLex(L);
   // the neutral key of a word: the glossary's, else the language's own lemma
-  const key = (r) => { const l = lem(r); if (!glossary || /^(PROPN|NUM|PRON)$/.test(r?.upos)) return l; return glossary(lang, l, r?.upos) ?? l; };
+  // a verb with its reflexive pronoun ("se llama", "sich verlaufen") reads the senses Wiktionary tags reflexive
+  const reflexiveIn = (rows, r) => !!rows && kidsOf(rows, r.id).some((k) => /^(expl|expl:pv|expl:pass|expl:impers|obj|iobj)$/.test(k.deprel) && (feat(k, "Reflex=Yes") || L.reflexive?.has(low(k))));
+  const key = (r, rows = null) => { const l = lem(r); if (!glossary || /^(PROPN|NUM|PRON)$/.test(r?.upos)) return l; return glossary(lang, l, r?.upos, { reflexive: reflexiveIn(rows, r) }) ?? l; };
+  // every English key the word's gloss gives ("relier: to connect, link, join"), the key first: any of them meets the other side's key
+  const keysOf = (r, rows = null) => { const k = key(r, rows); if (!glossary?.all || /^(PROPN|NUM|PRON)$/.test(r?.upos)) return [k]; return [...new Set([k, ...(glossary.all(lang, lem(r), r?.upos, { reflexive: reflexiveIn(rows, r) }) ?? [])])]; };
   const hasCase = (rows, r, words) => kidsOf(rows, r.id).some((c) => /^(case|mark|cc|fixed)$/.test(c.deprel) && (words.has(low(c)) || words.has(lem(c))));
 
   function rowsOf(text) {
@@ -66,7 +71,7 @@ export function makeGrammar(lang, { model, tokenizer, glossary = null }) {
     let d = 0; const inside = new Set(); for (const r of rows) { if (r.form === "(") d++; else if (r.form === ")") d = Math.max(0, d - 1); else if (d > 0) inside.add(r.id); }
     const inBr = ws.map((w) => inside.has(w.id));
     const names = ws.filter((w, k) => w.upos === "PROPN" && !inBr[k]).map(low).filter((n) => !L.titles.has(n.replace(/\.$/, ""))), aliases = ws.filter((w, k) => /^(PROPN|NOUN|X)$/.test(w.upos) && inBr[k]).map(low);
-    return { text: ws.map((w) => w.form).join(" "), ids: ws.map((w) => w.id), head: head.upos === "PROPN" ? low(head) : key(head), sup: null, names, aliases,
+    return { text: ws.map((w) => w.form).join(" "), ids: ws.map((w) => w.id), head: head.upos === "PROPN" ? low(head) : key(head), heads: head.upos === "PROPN" ? [low(head)] : keysOf(head, rows), sup: null, names, aliases,
       keys: ws.filter((w) => /^(NOUN|PROPN|ADJ)$/.test(w.upos) && !L.titles.has(low(w))).map((w) => (w.upos === "PROPN" ? low(w) : key(w))),
       figs: [], quant: ws.map((w) => L.quant[low(w)]).find(Boolean) ?? null, agent: agentN ? endOf(rows, agentN.id, text) : null,
       nmods: kidsOf(rows, id).filter((k) => (/^nmod(:poss)?$/.test(k.deprel) && k !== agentN) || (k.deprel === "conj" && /^(NOUN|PROPN|ADJ|NUM)$/.test(k.upos))).map((k) => endOf(rows, k.id, text)) };
@@ -85,8 +90,12 @@ export function makeGrammar(lang, { model, tokenizer, glossary = null }) {
       if (/^acl/.test(v.deprel) && !/relcl/.test(v.deprel)) return byId(v.head);
       return null;
     };
-    const negOwn = (x) => kidsOf(rows, x.id).some((k) => (feat(k, "Polarity=Neg") && !/^(det)$/.test(k.deprel)) || (/^(advmod|aux|neg|discourse|fixed|mark)$/.test(k.deprel) && (L.neg.has(low(k)) || L.neg.has(lem(k)))))
+    // a negator; one that needs a partner (French "pas", "plus") only beside it; also one fixed under the copula (Japanese "ではない")
+    const isNeg = (k, sibs) => (L.neg.has(low(k)) || L.neg.has(lem(k))) && !(L.negNeedsNe?.has(low(k)) && !sibs.some((x) => L.ne?.has(low(x))));
+    const negOwn = (x) => { const ks = kidsOf(rows, x.id), all = [...ks, ...ks.filter((k) => /^(cop|case|aux)$/.test(k.deprel)).flatMap((k) => kidsOf(rows, k.id))];
+      return all.some((k) => (feat(k, "Polarity=Neg") && !/^(det)$/.test(k.deprel)) || (/^(advmod|aux|neg|discourse|fixed|mark)$/.test(k.deprel) && isNeg(k, all)))
       || kidsOf(rows, x.id).some((k) => /^(nsubj|obj)/.test(k.deprel) && kidsOf(rows, k.id).some((c) => c.deprel === "det" && (L.neg.has(low(c)) || L.quant[low(c)] === "none")));
+    };
     for (const v of rows) {
       if (!/^(VERB|AUX|ADJ|NOUN|PROPN)$/.test(v.upos)) continue;
       const ks = kidsOf(rows, v.id), cop = ks.find((k) => k.deprel === "cop");
@@ -126,7 +135,7 @@ export function makeGrammar(lang, { model, tokenizer, glossary = null }) {
         if (v.upos === "ADJ" && thanEnd && S0) {
           const less = ks.some((k) => L.less.has(low(k)));
           const A = endOf(rows, S0.id, text);
-          out.push({ ...base, rel: key(v), ARG0: less ? thanEnd : A, ARG1: less ? A : thanEnd, asym: true });
+          out.push({ ...base, rel: key(v), rels: keysOf(v), ARG0: less ? thanEnd : A, ARG1: less ? A : thanEnd, asym: true });
         } else if (cop && S0) out.push({ ...base, rel: "be", ARG0: endOf(rows, S0.id, text), ARG1: endOf(rows, v.id, text) });
         else if (/^(VERB|ADJ)$/.test(v.upos) && (S0 || obj)) {
           const A0 = passive ? agent : S0, A1 = passive ? S0 : obj;
@@ -134,11 +143,11 @@ export function makeGrammar(lang, { model, tokenizer, glossary = null }) {
           // verb's first sense would say an act ("éteindre: to turn off")
           const state = passive && !agent && !obj && glossary ? glossary(lang, low(v), "ADJ") : null;
           if (state && S0) { out.push({ ...base, rel: "be", ARG0: endOf(rows, S0.id, text), ARG1: { text: v.form, head: state, names: [], aliases: [], keys: [state], figs: [], quant: null, agent: null } }); continue; }
-          const rel = L.have.has(lem(v)) ? "have" : key(v);
+          const rel = L.have.has(lem(v)) ? "have" : key(v, rows), rels = L.have.has(lem(v)) ? ["have"] : keysOf(v, rows);
           // one claim per coordinated object, as per coordinated subject
           for (const O of !passive && obj ? [obj, ...rows.filter((r) => r.head === obj.id && r.deprel === "conj" && /^(NOUN|PROPN)$/.test(r.upos))] : [A1]) {
             const B = passive ? A1 : O;
-            out.push({ ...base, rel, ARG0: endOf(rows, A0?.id, text), ARG1: endOf(rows, (B ?? ks.find((k) => /^(obl|obl:arg|xcomp)$/.test(k.deprel) && k.id > v.id && k !== agent && !discourse(k)))?.id, text), ARG2: iobj ? endOf(rows, iobj.id, text) : null, voice: passive ? "passive" : "active", asym: !!(A0 && B) });
+            out.push({ ...base, rel, rels, ARG0: endOf(rows, A0?.id, text), ARG1: endOf(rows, (B ?? ks.find((k) => /^(obl|obl:arg|xcomp)$/.test(k.deprel) && k.id > v.id && k !== agent && !discourse(k)))?.id, text), ARG2: iobj ? endOf(rows, iobj.id, text) : null, voice: passive ? "passive" : "active", asym: !!(A0 && B) });
           }
         }
         for (const w of obls.filter((o) => o.with)) if (S0) out.push({ ...base, OBL: [], rel: "have", ARG0: endOf(rows, S0.id, text), ARG1: w, asym: true });
@@ -147,11 +156,11 @@ export function makeGrammar(lang, { model, tokenizer, glossary = null }) {
     for (const a of rows.filter((r) => r.deprel === "appos" && !(r.upos === "PROPN" && byId(r.head)?.upos === "PROPN" && Math.abs(r.id - r.head) <= 2))) out.push({ polarity: "+", tense: "present", asserted: true, OBL: [], rel: "be", ARG0: endOf(rows, a.head, text), ARG1: endOf(rows, a.id, text) });
     const kept = out.filter((p) => p.ARG0 || p.ARG1); kept.framed = framed; return kept;
   }
-  const keyEnd = (e) => e && { text: e.text, head: e.head, sup: null, names: e.names, aliases: e.aliases ?? [], keys: e.keys, figs: e.figs, quant: e.quant, agent: keyEnd(e.agent), nmods: (e.nmods ?? []).map(keyEnd) };
+  const keyEnd = (e) => e && { text: e.text, head: e.head, heads: e.heads ?? [e.head], sup: null, names: e.names, aliases: e.aliases ?? [], keys: e.keys, figs: e.figs, quant: e.quant, agent: keyEnd(e.agent), nmods: (e.nmods ?? []).map(keyEnd) };
   function claimsOf(text, rows = rowsOf(text)) {
     const P = propositionsOf(text, rows), bound = bindFigures(rows, LEX);
     const unread = unreadWords(rows.filter((r) => !P.framed.has(r.id)), P, bound, { isUnit: (f) => !!LEX.unitOf(f), key: (r) => (r.upos === "PROPN" ? low(r) : key(r)) });
-    const props = P.map((p, i) => ({ main: !!p.main, schema: "EOTClaim@1", id: `c${i + 1}`, lang, by: "grammar-ud", rel: p.rel, ARG0: keyEnd(p.ARG0), ARG1: keyEnd(p.ARG1), ARG2: keyEnd(p.ARG2 ?? null), OBL: (p.OBL || []).map(keyEnd), polarity: p.polarity, tense: p.tense, asserted: p.asserted, asym: !!p.asym }));
+    const props = P.map((p, i) => ({ main: !!p.main, schema: "EOTClaim@1", id: `c${i + 1}`, lang, by: "grammar-ud", rel: p.rel, rels: p.rels ?? [p.rel], ARG0: keyEnd(p.ARG0), ARG1: keyEnd(p.ARG1), ARG2: keyEnd(p.ARG2 ?? null), OBL: (p.OBL || []).map(keyEnd), polarity: p.polarity, tense: p.tense, asserted: p.asserted, asym: !!p.asym }));
     const figs = bindFigures(rows, LEX).map((f, i) => { const ev = f.eventLemma ? rows.find((r) => lem(r) === f.eventLemma) : null; return { schema: "EOTClaim@1", id: `f${i + 1}`, lang, by: "grammar-ud", rel: "fig", main: false, ARG0: f.beingId ? keyEnd(endOf(rows, f.beingId, text)) : null, ARG1: null, OBL: [], polarity: "+", tense: "present", asserted: true, asym: false,
       fig: { measure: f.measure.startsWith("count:") ? `count:${key(rows.find((r) => lem(r) === f.measure.slice(6)) ?? { lemma: f.measure.slice(6) })}` : f.measure, attribute: f.attribute, event: ev ? (L.have.has(f.eventLemma) ? "have" : key(ev)) : f.eventLemma, base: f.base, hiBase: f.hiBase, alts: f.alts, approx: f.approx } }; });
     return [...props, ...figs].map((c) => ({ ...c, unread }));

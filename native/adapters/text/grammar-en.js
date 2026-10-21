@@ -117,7 +117,7 @@ const LIGHT = new Set(["be", "have", "by", "of"]);
 const UNITS = { m: ["length", 1], metre: ["length", 1], meter: ["length", 1], km: ["length", 1000], kilometre: ["length", 1000], kilometer: ["length", 1000], cm: ["length", 0.01], ft: ["length", 0.3048], foot: ["length", 0.3048], feet: ["length", 0.3048], mile: ["length", 1609.344], mi: ["length", 1609.344],
   kg: ["mass", 1], kilogram: ["mass", 1], g: ["mass", 0.001], gram: ["mass", 0.001], lb: ["mass", 0.4536], pound: ["mass", 0.4536], ton: ["mass", 1000], tonne: ["mass", 1000],
   celsius: ["temperature", 1, 0], c: ["temperature", 1, 0], fahrenheit: ["temperature", 5 / 9, -32], f: ["temperature", 5 / 9, -32], kelvin: ["temperature", 1, -273.15], degree: ["temperature", 1, 0],
-  second: ["time", 1], minute: ["time", 60], hour: ["time", 3600], day: ["time", 86400], year: ["time", 31557600], percent: ["share", 0.01], "%": ["share", 0.01] };
+  "km²": ["area", 1e6], km2: ["area", 1e6], "m²": ["area", 1], m2: ["area", 1], hectare: ["area", 1e4], acre: ["area", 4046.856], second: ["time", 1], minute: ["time", 60], hour: ["time", 3600], day: ["time", 86400], year: ["time", 31557600], percent: ["share", 0.01], "%": ["share", 0.01] };
 const APPROX = /\b(about|around|roughly|nearly|approximately|almost|some|over|more than|less than|up to)\b/i;
 const REPORT = new Set(["say", "claim", "report", "believe", "allege", "suggest", "argue", "think", "rumor", "rumour", "insist"]);
 // the base of a comparative, from its form: shorter → short, bigger → big, heavier → heavy, larger → large

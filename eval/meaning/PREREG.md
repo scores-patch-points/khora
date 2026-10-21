@@ -119,3 +119,16 @@ fresh-ml (post hoc): 46.9 → 51.6%, false-accept 9.4% → 0% (602, 626, 642 now
 eo-030, eo-034: fragments ending in a dangling "an exclusive" no claim reads), fresh 87.5 → 83.3% (404: "Mercury orbits the Sun every 88
 Earth days" mis-tagged, so "Sun" is read by nothing). main 76.7, cf 78.6, held-out 80.0, other 100, relations 81.8 unchanged; false accepts
 are now 0% on every set but main (5.6%) and held-out (7.1%).
+
+## Run 11 (2026-10-21): the mechanical bugs fresh-ml found (post hoc on fresh-ml)
+- French elisions match a curly apostrophe ("L’influence"); "pas", "plus", "jamais" … negate only beside "ne" ("plus d'un cinquième").
+- Figures: area units in every pack and in English (km², km2, m², hectare); a thousands mark written as a space ("1 006", "4 807,47",
+  "117 000"); a year said with its unit is a date (1936年), a small number with it a duration.
+- Japanese ではない: a negator fixed under the copula negates.
+- Glossary: a word in another language reads its gloss as translations (the first word of each comma item: "relier" → connect, link, join,
+  relate; "cuello" → neck, not "part"), all carried as alternative keys that the matcher meets; a sense tagged reflexive holds only when the
+  verb has its reflexive pronoun ("verläuft" → run; "sich verlaufen" → get lost).
+Each fix takes effect on its pair (609, 611, 614, 616, 619, 620, 621, 630, 631, 645, 653, 658). No verdict changes on any set: every one of
+those pairs is also held by another layer — referents (a pronoun or dropped subject, an alias by participle: 609, 611, 620, 653, 658), word
+senses ("s'écouler" → sell, 619; a German compound, 645), a fraction as a figure (621), relations (remonter / extend, 631), parse (657).
+All sets: main 76.7, cf 78.6, held-out 80.0, other 100, fresh 83.3, relations 81.8, fresh-ml 51.6 (FA 0%), filing 96.9 — unchanged.

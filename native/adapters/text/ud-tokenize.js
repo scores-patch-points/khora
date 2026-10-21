@@ -64,7 +64,7 @@ export function trainTokenizer(sents, { iterations = 5, seed = "ud-tokenize", lo
 
 /** loadTokenizer(json) → a tokenizer tokenizeWith() takes */
 export function loadTokenizer(json) {
-  return { mwt: new Map(Object.entries(json.mwt ?? {})), abbrev: new Set(json.abbrev ?? []), elided: new Set(json.words ?? []), punctRuns: [...(json.punctRuns ?? [])].sort((a, b) => b.length - a.length),
+  return { mwt: new Map(Object.entries(json.mwt ?? {})), abbrev: new Set(json.abbrev ?? []), elided: new Set((json.words ?? []).map((w) => w.replace(/’/g, "'"))), punctRuns: [...(json.punctRuns ?? [])].sort((a, b) => b.length - a.length),
     clitics: [...(json.hyphenClitics ?? [])].sort((a, b) => b.length - a.length), splitHyphens: !!json.splitHyphens, seg: json.segmenter ? Perceptron.fromJSON(json.segmenter) : null };
 }
 
@@ -87,7 +87,8 @@ export function tokenizeWith(tok, text) {
     const pieces = [];
     // an elided word glued to the next ("L'aéroport", "d'eau", "qu'il")
     const el = /^(\p{L}+['’])(\p{L}.*)$/u.exec(chunk);
-    let rest = chunk; if (el && tok.elided.has(lc(el[1]))) { pieces.push(el[1]); rest = el[2]; }
+    // an elision is the same word with a straight or a curly apostrophe ("l'", "l’")
+    let rest = chunk; if (el && tok.elided.has(lc(el[1]).replace(/’/g, "'"))) { pieces.push(el[1]); rest = el[2]; }
     // a clitic after a hyphen ("a-t-il" → a -t-il), then the treebank's own hyphen policy
     const cl = tok.clitics.find((c) => lc(rest).endsWith(c) && rest.length > c.length);
     const tail = cl ? rest.slice(rest.length - cl.length) : null; if (cl) rest = rest.slice(0, rest.length - cl.length);

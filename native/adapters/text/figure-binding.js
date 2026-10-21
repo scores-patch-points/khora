@@ -39,6 +39,10 @@ export function bindFigures(rows, lex) {
     if (!num) continue;
     take(r.id);
     let value = num.value, hi = num.hi ?? null, unitWord = num.unit ?? null, unitRow = null;
+    // a thousands mark written as a space ("1 006 kilomètres", "4 807,47 mètres", "117 000 km2"): the next word is three digits, nothing between
+    for (let at = r; !num.unit && /^\d{1,3}$/.test(at.form) && rows[i + 1] && /^\d{3}([.,]\d+)?$/.test(rows[i + 1].form) && (at.end == null || rows[i + 1].start - at.end === 1); ) {
+      const nx = rows[i + 1]; value = value * 1000 + +nx.form.replace(",", "."); take(nx.id); i++; at = nx; if (/[.,]/.test(nx.form)) break;
+    }
     // a range said with a dash or "to" between two numbers ("35 – 40", "35 to 40")
     if (hi == null && rows[i + 1] && /^(–|-|—|to)$/.test(rows[i + 1].form) && rows[i + 2]) { const n2 = lex.numberOf(rows[i + 2].form); if (n2 && !n2.unit) { hi = n2.value; take(rows[i + 1].id); take(rows[i + 2].id); i += 2; } }
     // a scale word right after it multiplies ("1.2 billion")
@@ -51,10 +55,12 @@ export function bindFigures(rows, lex) {
     // "100 degrees Celsius": the scale word after "degree" names the scale
     if (unitWord && /^degrees?$/i.test(unitWord)) { const sc = rows[rows.indexOf(unitRow ?? next) + 1]; if (sc && lex.unitOf(sc.form)) { unitWord = sc.form; take(sc.id); } }
     const U = unitWord ? lex.unitOf(unitWord) : null;
-    const date = !U && lex.isYear(value, r.form, rows, i);
+    // a year said with its unit is a date (1936年), where the same unit after a small number is a duration (3年)
+    const dateByUnit = U && lex.dateUnit?.(unitWord) && Number.isInteger(value) && value >= 1000 && value <= 2100;
+    const date = dateByUnit || (!U && lex.isYear(value, r.form, rows, i));
     const counted = !U && !date ? (r.upos === "NUM" || num.word) && byId(rows, r.head) && /^(NOUN|PROPN)$/.test(byId(rows, r.head).upos) ? byId(rows, r.head) : null : null;
-    const measure = U ? U[0] : date ? "date" : counted ? `count:${lex.singular(lem(counted))}` : "count";
-    const toBase = (v) => (U ? (v + (U[2] ?? 0)) * U[1] : v);
+    const measure = dateByUnit ? "date" : U ? U[0] : date ? "date" : counted ? `count:${lex.singular(lem(counted))}` : "count";
+    const toBase = (v) => (U && !dateByUnit ? (v + (U[2] ?? 0)) * U[1] : v);
     // the same quantity again in brackets: "36 kg (79 lbs)"
     const alts = [];
     const after = rows.slice(i + 1, i + 8), open = after.findIndex((x) => x.form === "(");
