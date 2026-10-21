@@ -9,6 +9,11 @@ import { fileURLToPath } from "node:url";
 import { claimsOf, claimsOfK, claimsOfGated, READER } from "../../native/adapters/text/grammar-en.js";
 import { verdict } from "../../native/kernel/eot-claim-match.js";
 import { janusContradictions } from "../../native/organs/eot-janus.js";
+import { makeRelationDefs } from "../../native/organs/relation-defs.js";
+// relation identity nominated by Wiktionary definitions, read from a cache of REST payloads (FOLD_WIKT_CACHE: <dir>/<word>.json); a word not in
+// the cache nominates nothing
+const WIKT = process.env.FOLD_WIKT_CACHE;
+const DEFS = WIKT ? makeRelationDefs((w) => { try { return JSON.parse(fs.readFileSync(path.join(WIKT, `${w}.json`), "utf8")); } catch { return null; } }) : null;
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const F = await import("../../vendor/the-fold/fold-chat-falsify-answer.js");
 const lexical = (claim, sentence) => { const r = F.falsifyAnswer([claim], [{ name: "https://src.example/p", text: sentence }]); const c = (r.claims ?? r)[0] ?? {}; const v = c.verdict ?? c.standing; return /corroborated|held/.test(v) ? "E" : /contested/.test(v) ? "C" : "U"; };
@@ -19,6 +24,7 @@ const normEnd = (e) => (e && typeof e === "object" ? { text: String(e.text ?? ""
 const verifySpans = (text, claims) => (claims ?? []).filter((c) => (!c.span || (c.span[0] >= 0 && c.span[1] <= text.length && c.span[1] > c.span[0]))).map((c) => ({ ...c, rel: String(c.rel ?? "").toLowerCase(), ARG0: normEnd(c.ARG0), ARG1: normEnd(c.ARG1), OBL: (c.OBL ?? []).map(normEnd).filter(Boolean), polarity: c.polarity === "-" ? "-" : "+", asserted: c.asserted !== false })).filter((c) => [c.ARG0, c.ARG1, ...c.OBL].filter(Boolean).every((e) => !e.text || text.includes(e.text) || text.replace(/\s+/g, " ").includes(e.text)));
 const arms = {
   "grammar-en": (t, lang) => (lang === "en" ? claimsOf(t) : null),
+  ...(DEFS ? { "grammar-defs": (t, lang) => (lang === "en" ? claimsOf(t) : null) } : {}),
   // layer 4's gate revising through layer 2's runner-up readings, on both sides
   "grammar-gated": (t, lang) => (lang === "en" ? claimsOfGated(t) : null),
   // the source read under its 3 best parses (the claim under its best): a source states what any close reading of it states
@@ -46,7 +52,7 @@ for (const [name, f] of Object.entries(sets)) {
       const lang = p.lang ?? "en";
       let v;
       if (arm === "wording") v = lexical(p.claim, p.sentence);
-      else { const A = arms[arm](p.claim, lang, "claim"), B = arms[arm](p.sentence, lang, "source"); if (!A || !B) { v = "G"; gap++; } else { v = verdict(A, B).v; if (v !== "C" && jset.has(String(p.id))) v = "C"; } }
+      else { const A = arms[arm](p.claim, lang, "claim"), B = arms[arm](p.sentence, lang, "source"); if (!A || !B) { v = "G"; gap++; } else { v = verdict(A, B, arm === "grammar-defs" ? { relations: DEFS } : {}).v; if (v !== "C" && jset.has(String(p.id))) v = "C"; } }
       const said = v === "E";
       if ((p.label === "E") === said) acc++; if (said && p.label !== "E") fa++; if (!said && p.label === "E") fr++; if (p.label === "C" && v === "C") cc++;
       rows.push(`${p.id}:${p.label}${v}`);

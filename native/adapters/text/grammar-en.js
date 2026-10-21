@@ -139,7 +139,9 @@ function propositionsOf(text, rows = rowsOf(text)) {
     const neg = negOwn(v) || (v.deprel === "conj" && !ks.some((k) => /^nsubj/.test(k.deprel)) && negOwn(byId(v.head) ?? { id: -1 }));
     const passive = ks.some((k) => k.deprel === "aux:pass" || k.deprel === "nsubj:pass") || (v.deprel === "conj" && kids(rows, v.head).some((k) => k.deprel === "aux:pass"));
     const subj = subjOf(v);
-    let obj = ks.find((k) => /^(obj|iobj)$/.test(k.deprel));
+    // the thing given is the object; the one it goes to is the indirect object ("we paid Centessa an upfront payment")
+    let obj = ks.find((k) => k.deprel === "obj") ?? ks.find((k) => k.deprel === "iobj");
+    const iobj = ks.find((k) => k.deprel === "iobj" && k !== obj);
     if (obj && REL_PRON.test(obj.form) && /relcl/.test(v.deprel)) obj = byId(v.head);
     // the by-agent of a passive, wherever the parser hung it inside this clause ("created in the early 1990s by Guido van Rossum")
     const inClause = (r) => { let x = r; for (let i = 0; i < 4 && x; i++) { if (x.head === v.id) return true; if (/^(acl|acl:relcl|advcl|ccomp|conj)$/.test(x.deprel)) return false; x = byId(x.head); } return false; };
@@ -167,7 +169,7 @@ function propositionsOf(text, rows = rowsOf(text)) {
         const A0 = passive ? agent : S0, A1 = passive ? S0 : obj;
         // with no object, the second end is the first oblique AFTER the verb ("entered into an agreement"): a phrase before it frames the event
         // ("In March 2014, …", "In addition, …") and stays an oblique, never an argument
-        out.push({ ...base, rel: lem(v), ARG0: endOf(rows, A0?.id, text), ARG1: endOf(rows, (A1 ?? ks.find((k) => /^(obl|xcomp)$/.test(k.deprel) && k.id > v.id))?.id, text), voice: passive ? "passive" : "active", asym: !!(A0 && A1) });
+        out.push({ ...base, rel: lem(v), ARG0: endOf(rows, A0?.id, text), ARG1: endOf(rows, (A1 ?? ks.find((k) => /^(obl|xcomp)$/.test(k.deprel) && k.id > v.id))?.id, text), ARG2: iobj ? endOf(rows, iobj.id, text) : null, voice: passive ? "passive" : "active", asym: !!(A0 && A1) });
       }
       // "With a radius of 1,516 miles, Mercury is …": the with-phrase is something the subject has
       for (const w of obls.filter((o) => o.with)) if (S0) out.push({ ...base, OBL: [], rel: "have", ARG0: endOf(rows, S0.id, text), ARG1: w, asym: true });
@@ -180,7 +182,9 @@ function propositionsOf(text, rows = rowsOf(text)) {
 
 const surname = (e) => e.names.filter((n) => !TITLES.has(n)).at(-1) ?? null;
 
-const keyEnd = (e) => e && { text: e.text, head: e.head, sup: e.sup ?? null, names: e.names.filter((n) => !TITLES.has(n)), keys: e.lemmas.filter((l) => !TITLES.has(l)), figs: e.figs, quant: e.quant ? QUANT[e.quant] : null, agent: keyEnd(e.agent) };
+// a pronoun's case is grammar, not identity: "us" is "we" (declared English closed class)
+const PRON_CASE = { us: "we", me: "i", him: "he", her: "she", them: "they", ourselves: "we", themselves: "they" };
+const keyEnd = (e) => e && { text: e.text, head: PRON_CASE[e.head] ?? e.head, sup: e.sup ?? null, names: e.names.filter((n) => !TITLES.has(n)), keys: e.lemmas.filter((l) => !TITLES.has(l)), figs: e.figs, quant: e.quant ? QUANT[e.quant] : null, agent: keyEnd(e.agent) };
 const QUANT = { all: "all", every: "all", each: "all", some: "some", many: "many", most: "most", few: "few", no: "none" };
 /** EOTClaim@1 — the only thing the EOT layer sees */
 /** the claims of every one of the k best readings, once each: a source states what any close reading of it states */
@@ -194,7 +198,7 @@ export function claimsOf(text, rows = undefined) {
   return [...propositionClaims(text, R), ...figureClaimsOf(text, R)];
 }
 function propositionClaims(text, rows) {
-  return propositionsOf(text, rows).map((p, i) => ({ main: !!p.main, schema: "EOTClaim@1", id: `c${i + 1}`, lang: "en", by: "grammar-en", rel: p.rel, ARG0: keyEnd(p.ARG0), ARG1: keyEnd(p.ARG1), OBL: (p.OBL || []).map(keyEnd), polarity: p.polarity, tense: p.tense, asserted: p.asserted, asym: !!p.asym }));
+  return propositionsOf(text, rows).map((p, i) => ({ main: !!p.main, schema: "EOTClaim@1", id: `c${i + 1}`, lang: "en", by: "grammar-en", rel: p.rel, ARG0: keyEnd(p.ARG0), ARG1: keyEnd(p.ARG1), ARG2: keyEnd(p.ARG2 ?? null), OBL: (p.OBL || []).map(keyEnd), polarity: p.polarity, tense: p.tense, asserted: p.asserted, asym: !!p.asym }));
 }
 
 

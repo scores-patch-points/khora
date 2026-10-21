@@ -13,7 +13,10 @@ const isNum = (k) => /^\d/.test(k);
 // "baleen whale" share a head and are two beings; "the smallest female jaguars" and "jaguars" are one kind read at two grains. Sharing
 // any one word is not identity ("the largest cat in Africa" is not "a large cat species").
 const mods = (e) => e.keys.filter((k) => k !== e.head && !isNum(k));
+// two ends that are amounts are one when they are the same amount ("$35.0 million" read twice)
+const sameAmount = (a, b) => a.figs?.length && b.figs?.length && a.figs.some((x) => b.figs.some((y) => x.measure === y.measure && Math.abs(x.base - y.base) <= Math.max(0.5, 0.005 * Math.abs(y.base))));
 export const linked = (a, b) => { if (!a || !b) return false;
+  if (sameAmount(a, b)) return true;
   const sa = a.names.at(-1) ?? null, sb = b.names.at(-1) ?? null;
   if (sa && sb) return sa === sb;
   if (sa && (b.head === sa || b.keys.includes(sa))) return true; if (sb && (a.head === sb || a.keys.includes(sb))) return true;
@@ -27,7 +30,29 @@ const measureMeet = (c, s) => { if (!(c.rel === s.rel || (STATIVE.has(c.rel) && 
   for (const x of a) for (const y of b) if (x.measure === y.measure) return sameValue(x, y) ? "same" : "differs"; return null; };
 const RANK = { C: 3, E: 2, T: 1, U: 0 };
 /** claims (the answer's) against source claims → { v: E | C | T | U | X, why } */
-export function verdict(C, S, { janus = null } = {}) {
+// TRANSFER FRAMES: a giver, a recipient and a thing, read from a claim by its verb's side of the transfer (relation-defs.js classOf): a verb
+// of giving has the giver as subject and the recipient as indirect object or "to" phrase; a verb of taking has the recipient as subject and
+// the giver as "from" / "by" phrase. Two claims whose relations are the same or converse meet when their frames do.
+const caseOf = (o) => String(o?.text ?? "").split(" ")[0].toLowerCase();
+function frameOf(c, cls0) {
+  let cls = cls0;
+  // a relative pronoun is not a party ("pursuant to which"): it is the clause's link, read where it points, not here
+  const obl = (...cs) => (c.OBL ?? []).find((o) => cs.includes(caseOf(o)) && !/^(which|that|who|whom|whose|what)$/.test(o.head)) ?? null;
+  // a verb of giving said with a "from" phrase and no recipient is the taking side ("we licensed rights from third parties")
+  if (cls === "out" && obl("from") && !c.ARG2 && !obl("to")) cls = "in";
+  if (cls === "out") return { giver: c.ARG0, recipient: c.ARG2 ?? obl("to"), thing: c.ARG1 };
+  if (cls === "in") return { recipient: c.ARG0, giver: obl("from", "by") ?? c.ARG0?.agent ?? null, thing: c.ARG1 };
+  return null;
+}
+function frameVerdict(fc, fs) {
+  const both = (r) => fc[r] && fs[r];
+  if ((fc.giver && fs.recipient && linked(fc.giver, fs.recipient) && !(fc.giver && fs.giver && linked(fc.giver, fs.giver))) || (fc.recipient && fs.giver && linked(fc.recipient, fs.giver) && !(fs.recipient && linked(fc.recipient, fs.recipient)))) return "reversed";
+  const roles = ["giver", "recipient", "thing"].filter(both), met = roles.filter((r) => linked(fc[r], fs[r]));
+  if (met.length >= 2 && met.length === roles.length) return "met";
+  if (met.length && met.length === roles.length && roles.length === 1 && roles[0] !== "thing") return "met";
+  return met.length ? "partial" : null;
+}
+export function verdict(C, S, { janus = null, relations = null } = {}) {
   if (!C.length) return { v: "X", why: "no claim read" };
   // identity inside the source: "Mercury is the fastest planet, zipping around the Sun" — what the source says of "the fastest planet" it
   // says of Mercury. Each source claim is also read with an end that a copula of the same source equates replaced by its other side.
@@ -71,6 +96,20 @@ export function verdict(C, S, { janus = null } = {}) {
       const antonym = c.rel === "be" && (s.rel !== "be" ? ANTONYM[c.ARG1?.head] === s.rel : ANTONYM[c.ARG1?.head] === s.ARG1?.head);
       const guard = !s.asserted && c.asserted ? "the source only reports or hedges it" : c.tense === "present" && s.tense === "past" && sameRel ? "other tense" : c.ARG0?.quant && s.ARG0?.quant && c.ARG0.quant !== s.ARG0.quant && /^(all|none)$/.test(c.ARG0.quant) ? "other quantifier" : null;
       let r = null;
+      // transfer verbs, the same or a converse by the language's definitions: compare who gives, who gets, what
+      const rk = relations ? (c.rel === s.rel ? "same" : relations.relate(c.rel, s.rel)) : null;
+      const cc = rk ? relations.classOf(c.rel) : null, sc = rk ? relations.classOf(s.rel) : null;
+      // the claim's other obliques (where, when, how) must still be met: "takes place mainly in the roots" is not "… in the leaves"
+      const roleCase = new Set(["to", "from", "by"]);
+      const otherOblMet = (c.OBL || []).filter((o) => !o.figs?.length && !roleCase.has(caseOf(o))).every((o) => (s.OBL || []).some((x) => linked(o, x)) || [s.ARG0, s.ARG1].some((x) => linked(o, x)));
+      if (rk && cc && sc && otherOblMet) {
+        const fv = frameVerdict(frameOf(c, cc), frameOf(s, sc));
+        if (fv === "reversed") r = { v: "C", why: `direction reversed: ${c.rel}/${s.rel}` };
+        else if (fv === "met") r = c.polarity !== s.polarity ? { v: "C", why: `polarity: ${c.rel}/${s.rel}` } : !s.asserted && c.asserted ? { v: "T", why: "the source only reports or hedges it" } : { v: "E", why: `${rk} by definition: ${c.rel}/${s.rel}` };
+        else if (fv === "partial") r = { v: "T", why: `frame partly met: ${c.rel}/${s.rel}` };
+      }
+      if (!r && rk === "same" && c.rel !== s.rel && straight) r = c.polarity !== s.polarity ? { v: "C", why: `polarity: ${c.rel}/${s.rel}` } : { v: "E", why: `same by definition: ${c.rel}/${s.rel}` };
+      if (r) { if (RANK[r.v] > RANK[best.v]) best = r; if (r.v === "C") break; continue; }
       if ((sameRel && straight) || byAgent || (conv && crossed) || measure === "same") {
         if (c.polarity !== s.polarity) r = { v: "C", why: `polarity: ${c.rel}` };
         else if (measure === "differs") r = { v: "C", why: `measure differs: ${c.rel}` };
