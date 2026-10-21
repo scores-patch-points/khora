@@ -67,6 +67,7 @@ export function judgeFrame(frame, kind, { vocab = DEFAULT_VOCAB } = {}) {
 export function makeFramer(parse, { vocab = DEFAULT_VOCAB } = {}) {
   return (sentence, claim) => {
     const recs = parse(String(sentence ?? "")); if (!recs?.length) return null;
+    if (!claim) { const f = frameFromRecords(recs, [], { vocab }); return f && { negated: f.negated, modal: f.modal, ending: f.ending, dir: null, root: f.root.lemma }; }
     for (const end of [claim?.end2, claim?.end1]) {
       if (!end) continue; const f = frameFromRecords(recs, [end], { vocab }); if (!f) continue;
       return { negated: f.negated, modal: f.modal, ending: f.ending, dir: f.counterparty?.dir ?? null, root: f.root.lemma };

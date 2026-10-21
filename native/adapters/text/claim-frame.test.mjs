@@ -29,7 +29,7 @@ test("no record, or no alias found, gives null", () => { assert.equal(frameFromR
 import { engineRelationsFor } from "../../the-fold/reader-bundle.js";
 import { makeFramer } from "./claim-frame.js";
 const TEXT = "In 2024, we entered into a license agreement with Vanda Pharmaceuticals Inc. in March. Later, we terminated the license agreement with Vanda Pharmaceuticals Inc. for cause.";
-const strip = (r) => JSON.parse(JSON.stringify(r, (k, v) => (k === "frame" ? undefined : v)));
+const strip = (r) => JSON.parse(JSON.stringify(r, (k, v) => (k === "frame" || k === "frames" ? undefined : v)));
 test("framer is additive: with a framer the report equals the report without it once `frame` is removed", () => {
   const plain = engineRelationsFor([TEXT]).read(TEXT);
   const framed = engineRelationsFor([TEXT], { framer: () => ({ negated: false, modal: [], ending: false, dir: null, root: "x" }) }).read(TEXT);
@@ -44,4 +44,14 @@ test("makeFramer maps a parse to the claim's frame", () => {
   const parse = () => [{ meaning: { nodes: [{ key: 1, lemma: "enter", upos: "VERB", feats: [] }, { key: 3, lemma: "vanda", upos: "PROPN", markers: [20] }, { key: 4, lemma: "not", upos: "PART", feats: [{ name: "Polarity", value: "Neg" }] }], markers: [{ key: 20, lemma: "with" }], arcs: [{ from: null, to: 1, rel: "root" }, { from: 1, to: 3, rel: "obl" }, { from: 1, to: 4, rel: "advmod" }] } }];
   const f = makeFramer(parse)("we did not enter into an agreement with Vanda", { end1: "we", end2: "Vanda" });
   assert.equal(f.negated, true); assert.equal(f.root, "enter");
+});
+test("foldFrameNegation without a framer changes nothing", () => {
+  const plain = engineRelationsFor([TEXT]).read(TEXT), folded = engineRelationsFor([TEXT], { foldFrameNegation: true }).read(TEXT);
+  assert.deepEqual(folded, plain);
+});
+test("a framer that says 'negated' flips polarity only when foldFrameNegation is on", () => {
+  const neg = () => ({ negated: true, modal: [], ending: false, dir: null, root: "x" });
+  const off = engineRelationsFor([TEXT], { framer: neg }).read(TEXT), on = engineRelationsFor([TEXT], { framer: neg, foldFrameNegation: true }).read(TEXT);
+  assert.ok(off.claims.length > 0 && off.claims.every((c) => c.polarity === "+"));
+  assert.ok(on.claims.some((c) => c.polarity === "-" && c.negationFolded === "frame"));
 });
