@@ -83,3 +83,18 @@ If B5/B6 fail, the cause is assigned to the grammar adapter (no proposition / wr
   (223, 224, 215, 217); main 76.7, cf 78.6, fresh 87.5, relations 81.8, filing 99.2 unchanged. Left: 310 (extinct vs "endormi", glossed
   asleep: the slim dictionary keeps no antonym lists), 314 ("mainly in the roots" vs "the leaves": the verdict's one-place reading, as in
   English 213). A fresh, independently labelled multilingual set is the measure that counts.
+
+## Run 9 (2026-10-21): fresh multilingual set (fresh-ml.json), PRE-REGISTERED — bars written before the pairs were seen
+Source: the intros of 8 Wikipedia pages none of the earlier sets touch (es: Lago Titicaca, Cotopaxi; fr: Mont Blanc, Loire; de: Bodensee,
+Zugspitze; ja: 富士山, 琵琶湖), fetched 2026-10-21 with revision ids (fresh-ml.sources.json). Pairs written and labelled by a separate agent
+from those sentences alone (no code, no other sets, no results): 4 × 12 same-language and 4 × 4 English-claim cross-language pairs.
+Bars, for the product arm (grammar-ud: English by grammar-en, the rest by grammar-ud, glossed from the slim Wiktionary, relation definitions on):
+ F1 coverage: every pair read (no typed gap).
+ F2 false-accept at most 10%.
+ F3 at least half the contradictions named (C, not merely T).
+ F4 accuracy at least the wording judge's, with fewer false accepts.
+Reported per language and same- vs cross-language; every failure assigned to a layer as in MEANING-FAILURES.md. No code changes between
+committing the set and the first run; any later fix is post hoc and reported as such.
+Label audit, before any run (the pairs' sentences checked against their sources; labels read against the sentence alone): 663 relabelled
+C → T ("Climbing Mount Fuji is popular in winter" against "夏季シーズンには富士登山が盛んである": summer popularity neither states nor rules
+out winter). Final counts: 64 pairs, 31 E, 23 C, 10 T. Committed before any arm ran.
