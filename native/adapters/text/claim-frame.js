@@ -61,3 +61,16 @@ export function judgeFrame(frame, kind, { vocab = DEFAULT_VOCAB } = {}) {
   if ((kind === "licensor-in" || kind === "landlord") && dir === "to") out.push({ level: "error", why: `the counterparty is the recipient ("to"), but the claim says the filer receives ${kind === "landlord" ? "premises" : "rights"} from it` });
   return out;
 }
+
+/** makeFramer(parse, { vocab }) -> (sentence, claim) => { negated, modal, ending, dir, root } | null — the `framer` organ makeRelationReader accepts.
+ *  `parse(sentence)` returns the sentence's EOTRich@1 records (the-fold/eot-notation.js loadEotParser().parse(text, "claim")). The claim's two ends are tried as the counterparty. */
+export function makeFramer(parse, { vocab = DEFAULT_VOCAB } = {}) {
+  return (sentence, claim) => {
+    const recs = parse(String(sentence ?? "")); if (!recs?.length) return null;
+    for (const end of [claim?.end2, claim?.end1]) {
+      if (!end) continue; const f = frameFromRecords(recs, [end], { vocab }); if (!f) continue;
+      return { negated: f.negated, modal: f.modal, ending: f.ending, dir: f.counterparty?.dir ?? null, root: f.root.lemma };
+    }
+    return null;
+  };
+}

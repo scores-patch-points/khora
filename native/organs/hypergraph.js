@@ -861,6 +861,11 @@ export function makeRelationReader(organs) {
     // self-gating: it must run even when the vocabulary pass returns
     // nothing, which is by design for both dispatch modes.
     extractorsMode = "legacy",
+    // `framer` — OPTIONAL (default null: the report is byte-identical to before). (sentence, claim) -> { negated, modal, ending, dir, root } | null, the clause frame
+    // adapters/text/claim-frame.js reads from the UD parse. It is ATTACHED to each heard claim as `claim.frame`; it changes no verdict and no polarity. The extractors
+    // leave polarity "+" because a negation class is a language's own lens; the frame is where the parse's reading of "did not", "may", "terminated" and "from/to" is
+    // kept, so a consumer can see what the string-level claim could not say. Folding the frame's negation into polarity needs the material's own edges read the same way.
+    framer = null,
     verbForms = null,
     // `oovLexicon` — OPTIONAL, a Set of known verb surface forms used ONLY to
     // gate an out-of-vocabulary connector at the POS gate (discoverRelationVocab's
@@ -2302,7 +2307,11 @@ export function makeRelationReader(organs) {
         } catch {
           heard = [];
         }
-        for (const t of heard) report.claims.push(judge(sentence, foldNegation(t)));
+        for (const t of heard) {
+          const claim = judge(sentence, foldNegation(t));
+          if (framer) { try { const f = framer(sentence, claim); if (f) claim.frame = f; } catch { /* a framer that declines leaves the claim as it was */ } }
+          report.claims.push(claim);
+        }
 
         // The claims this tier CANNOT hear: verbs the answer uses after an
         // established surface that the material's vocabulary never measured,
