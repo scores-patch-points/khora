@@ -35,3 +35,11 @@ test("janus finds a second maker of one made thing", () => {
   const ids = janusContradictions([{ id: "p1", C: claimsOf("Joseph Priestley discovered photosynthesis."), S: claimsOf("Jan Ingenhousz discovered photosynthesis.") }]);
   assert.ok(ids.has("p1"));
 });
+
+test("a sentence-opening phrase frames the event and is never its argument (layer 4)", () => {
+  const [c] = claimsOf("In March 2014, we entered into a license agreement with GSK.");
+  assert.equal(c.rel, "enter");
+  assert.ok(!/March/.test(c.ARG1?.text ?? ""), `the opening date is not the second end: ${c.ARG1?.text}`);
+  assert.ok((c.OBL ?? []).some((o) => /March 2014/.test(o.text)), "it stays an oblique (time)");
+  assert.equal(v("In addition, in March 2014, we entered into a license agreement with GSK.", "In March 2014, we entered into a license agreement with GSK."), "E");
+});

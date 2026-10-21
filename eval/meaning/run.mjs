@@ -6,7 +6,7 @@ import fs from "node:fs";
 //   node eval/meaning/run.mjs          (V=1 for per-pair verdicts)
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { claimsOf, claimsOfK, READER } from "../../native/adapters/text/grammar-en.js";
+import { claimsOf, claimsOfK, claimsOfGated, READER } from "../../native/adapters/text/grammar-en.js";
 import { verdict } from "../../native/kernel/eot-claim-match.js";
 import { janusContradictions } from "../../native/organs/eot-janus.js";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -19,12 +19,17 @@ const normEnd = (e) => (e && typeof e === "object" ? { text: String(e.text ?? ""
 const verifySpans = (text, claims) => (claims ?? []).filter((c) => (!c.span || (c.span[0] >= 0 && c.span[1] <= text.length && c.span[1] > c.span[0]))).map((c) => ({ ...c, rel: String(c.rel ?? "").toLowerCase(), ARG0: normEnd(c.ARG0), ARG1: normEnd(c.ARG1), OBL: (c.OBL ?? []).map(normEnd).filter(Boolean), polarity: c.polarity === "-" ? "-" : "+", asserted: c.asserted !== false })).filter((c) => [c.ARG0, c.ARG1, ...c.OBL].filter(Boolean).every((e) => !e.text || text.includes(e.text) || text.replace(/\s+/g, " ").includes(e.text)));
 const arms = {
   "grammar-en": (t, lang) => (lang === "en" ? claimsOf(t) : null),
+  // layer 4's gate revising through layer 2's runner-up readings, on both sides
+  "grammar-gated": (t, lang) => (lang === "en" ? claimsOfGated(t) : null),
   // the source read under its 3 best parses (the claim under its best): a source states what any close reading of it states
   "grammar-k3": (t, lang, side) => (lang === "en" ? (side === "source" ? claimsOfK(t, 3) : claimsOf(t)) : null),
   oracle: (t) => (FR[t] ? verifySpans(t, FR[t]) : null),
 };
 const C3 = process.env.FOLD_C3_DIR ?? path.join(HERE, "../../../the-fold/eval/ants/c3");
 const sets = { main: path.join(C3, "battery.json"), cf: path.join(C3, "battery-cf.json"), heldout: path.join(HERE, "heldout.json"), other: path.join(HERE, "heldout-other.json"), fresh: path.join(HERE, "fresh.json") };
+// MEANING_EXTRA=name=file.json[,name=file.json] adds sets (another session's pairs, say) to this run
+for (const kv of (process.env.MEANING_EXTRA ?? "").split(",").filter(Boolean)) { const [k, f] = kv.split("="); sets[k] = f; }
+if (process.env.MEANING_ONLY) for (const k of Object.keys(sets)) if (!process.env.MEANING_ONLY.split(",").includes(k)) delete sets[k];
 console.log(`reader: ${READER}`);
 const out = {};
 for (const [name, f] of Object.entries(sets)) {

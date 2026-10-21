@@ -154,6 +154,19 @@ function tagFeats(i, F, L, prev, prev2, lex, cl = null) {
   add("lx", lx(i)); add("lx-1", lx(i - 1)); add("lx+1", lx(i + 1)); add("lxw", lx(i), lw.slice(-3)); add("t1lx", prev, lx(i));
   return f;
 }
+/** tagWithMargins(tagger, forms, lex, cl, allowed) → { tags, margins, runnerUp } — the same greedy tagging, with each word's margin between its best
+ *  and second class, and an optional per-position restriction (allowed: Map index → Set of classes): the place another giver's evidence enters */
+export function tagWithMargins(tagger, forms, lex = null, cl = null, allowed = null) {
+  const L = forms.map((w) => (/^\d/.test(w) ? w.replace(/\d/g, "#") : w.toLowerCase()));
+  let prev = "<s>", prev2 = "<s2>"; const tags = [], margins = [], runnerUp = [];
+  for (let i = 0; i < forms.length; i++) {
+    const s = tagger.scores(tagFeats(i, forms, L, prev, prev2, lex, cl)), ok = allowed?.get(i);
+    let b = -1, r = -1;
+    for (let c = 0; c < tagger.n; c++) { if (ok && !ok.has(tagger.classes[c])) continue; if (b < 0 || s[c] > s[b]) { r = b; b = c; } else if (r < 0 || s[c] > s[r]) r = c; }
+    const t = tagger.classes[b]; tags.push(t); margins.push(r < 0 ? Infinity : s[b] - s[r]); runnerUp.push(r < 0 ? null : tagger.classes[r]); prev2 = prev; prev = t;
+  }
+  return { tags, margins, runnerUp };
+}
 export function tagWith(tagger, forms, lex = null, cl = null) {
   const L = forms.map((w) => (/^\d/.test(w) ? w.replace(/\d/g, "#") : w.toLowerCase()));
   let prev = "<s>", prev2 = "<s2>"; const out = [];

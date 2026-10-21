@@ -147,7 +147,9 @@ function propositionsOf(text, rows = rowsOf(text)) {
     const tenseW = [v, ...auxes, ...inherited].map((w) => w.form.toLowerCase());
     const tense = tenseW.some((f) => /^(was|were|had|did)$/.test(f)) || (/ed$/.test(v.form) && !auxes.some((k) => /^(is|are|am|has|have)$/i.test(k.form)) && !passive) ? "past" : tenseW.some((f) => /^(will|shall)$/.test(f)) ? "future" : "present";
     const asserted = !reportedUnder(v) && ![...auxes, ...inherited].some((k) => /^(may|might|could|would)$/i.test(k.form));
-    const obls = ks.filter((k) => /^(obl|obl:tmod|obl:npmod|nmod)$/.test(k.deprel) && k !== agent).map((k) => ({ ...endOf(rows, k.id, text), than: kids(rows, k.id).some((c) => /^than$/i.test(c.form)), with: kids(rows, k.id).some((c) => /^with$/i.test(c.form)) }));
+    // a DISCOURSE connective ("In addition, …", "For example, …") frames the sentence and says nothing of its event (declared English closed class)
+    const discourse = (k) => /^(in addition|in particular|for example|for instance|in fact|in turn|in short|in contrast|on the other hand|as a result|in summary|in conclusion)$/i.test(spanOf(rows, k.id).map((w) => w.form).join(" "));
+    const obls = ks.filter((k) => /^(obl|obl:tmod|obl:npmod|nmod)$/.test(k.deprel) && k !== agent && !discourse(k)).map((k) => ({ ...endOf(rows, k.id, text), than: kids(rows, k.id).some((c) => /^than$/i.test(c.form)), with: kids(rows, k.id).some((c) => /^with$/i.test(c.form)) }));
     const base = { polarity: neg ? "-" : "+", tense, asserted, OBL: obls.filter((o) => !o.with), main: v.head === 0 || (v.deprel === "conj" && byId(v.head)?.head === 0) };
     const conjRoot = subj && subj.deprel === "conj" ? byId(subj.head) : subj;
     const subjects = subj ? [...new Set([subj, conjRoot, ...rows.filter((r) => conjRoot && r.head === conjRoot.id && r.deprel === "conj" && /^(NOUN|PROPN)$/.test(r.upos))])].filter(Boolean) : [null];
@@ -160,7 +162,9 @@ function propositionsOf(text, rows = rowsOf(text)) {
         else out.push({ ...base, rel: "be", ARG0: endOf(rows, S0.id, text), ARG1: endOf(rows, v.id, text) });
       } else if (/^(VERB|AUX|ADJ)$/.test(v.upos) && (S0 || obj)) {
         const A0 = passive ? agent : S0, A1 = passive ? S0 : obj;
-        out.push({ ...base, rel: lem(v), ARG0: endOf(rows, A0?.id, text), ARG1: endOf(rows, (A1 ?? ks.find((k) => /^(obl|xcomp)$/.test(k.deprel)))?.id, text), voice: passive ? "passive" : "active", asym: !!(A0 && A1) });
+        // with no object, the second end is the first oblique AFTER the verb ("entered into an agreement"): a phrase before it frames the event
+        // ("In March 2014, …", "In addition, …") and stays an oblique, never an argument
+        out.push({ ...base, rel: lem(v), ARG0: endOf(rows, A0?.id, text), ARG1: endOf(rows, (A1 ?? ks.find((k) => /^(obl|xcomp)$/.test(k.deprel) && k.id > v.id))?.id, text), voice: passive ? "passive" : "active", asym: !!(A0 && A1) });
       }
       // "With a radius of 1,516 miles, Mercury is …": the with-phrase is something the subject has
       for (const w of obls.filter((o) => o.with)) if (S0) out.push({ ...base, OBL: [], rel: "have", ARG0: endOf(rows, S0.id, text), ARG1: w, asym: true });
@@ -184,4 +188,40 @@ export function claimsOfK(text, k = 3) {
 }
 export function claimsOf(text, rows = undefined) {
   return propositionsOf(text, rows ?? rowsOf(text)).map((p, i) => ({ main: !!p.main, schema: "EOTClaim@1", id: `c${i + 1}`, lang: "en", by: "grammar-en", rel: p.rel, ARG0: keyEnd(p.ARG0), ARG1: keyEnd(p.ARG1), OBL: (p.OBL || []).map(keyEnd), polarity: p.polarity, tense: p.tense, asserted: p.asserted, asym: !!p.asym }));
+}
+
+
+// ── LAYER 4's high gate, revising through LAYER 2 (spiral-contract.js: low sets possibility, high sets probability) ─────────────────────────
+// A tree-shape gate cannot tell a wrong parse from a right one in web text (on UD_English-EWT test gold trees fail "the root is a noun" 74 times,
+// greedy parses 80), so the gate sits where the consequence shows: a declarative sentence must yield a claim whose ends are beings (not a lone
+// date or number). When it does not, each word's runner-up reading is tried (layer 2 keeps both; the gold tag is in the pair 98.5% of the
+// time), the sentence re-parsed and re-read, and of the readings that pass, the one the tagger gives up least for is kept.
+const endOk = (e) => !!e && !(e.figs?.length && e.figs.every((f) => f.measure === "date") && !e.names?.length && (e.keys ?? []).every((k) => /^[\d#]/.test(k)));
+export const claimGate = (claims) => claims.some((c) => c.main && (endOk(c.ARG0) || endOk(c.ARG1)));
+export function claimsOfGated(text, { budget = 8 } = {}) {
+  const base = claimsOf(text);
+  if (!UM || claimGate(base) || !/[.!]\s*$/.test(text) || (text.match(/\p{L}+/gu) ?? []).length < 4) return base;
+  const tk = P.tokenize(text), forms = tk.map((t) => t.form), first = U.tagWithMargins(UM.tagger, forms, UM.lex, UM.clusters);
+  const order = forms.map((_, i) => i).filter((i) => first.runnerUp[i] && /^\p{L}/u.test(forms[i])).sort((a, b) => first.margins[a] - first.margins[b]).slice(0, budget);
+  for (const i of order) {
+    const re = U.tagWithMargins(UM.tagger, forms, UM.lex, UM.clusters, new Map([[i, new Set([first.runnerUp[i]])]]));
+    const rows = repairRelcl(U.analyse(UM, forms, re.tags).map((r) => (r.upos === "NUM" ? { ...r, lemma: r.form.toLowerCase() } : r)), tk);
+    const claims = claimsOf(text, rows);
+    if (claimGate(claims)) return claims.map((c) => ({ ...c, revised: { word: forms[i], from: first.tags[i], to: first.runnerUp[i] } }));
+  }
+  return base;
+}
+
+/** readingsOf(text) → the base reading and every one-word re-reading (one word swapped to its runner-up), each with its claims and its tagger
+ *  cost (the margin given up): layer 2's possibilities carried through layers 3 and 4, for a higher layer to choose among */
+export function readingsOf(text, { budget = Infinity } = {}) {
+  const base = { flip: null, cost: 0, claims: claimsOf(text) };
+  if (!UM) return [base];
+  const tk = P.tokenize(text), forms = tk.map((t) => t.form), first = U.tagWithMargins(UM.tagger, forms, UM.lex, UM.clusters);
+  const order = forms.map((_, i) => i).filter((i) => first.runnerUp[i] && /^\p{L}/u.test(forms[i])).sort((a, b) => first.margins[a] - first.margins[b]).slice(0, budget);
+  return [base, ...order.map((i) => {
+    const re = U.tagWithMargins(UM.tagger, forms, UM.lex, UM.clusters, new Map([[i, new Set([first.runnerUp[i]])]]));
+    const rows = repairRelcl(U.analyse(UM, forms, re.tags).map((r) => (r.upos === "NUM" ? { ...r, lemma: r.form.toLowerCase() } : r)), tk);
+    return { flip: { i, word: forms[i], from: first.tags[i], to: first.runnerUp[i] }, cost: first.margins[i], claims: claimsOf(text, rows) };
+  })];
 }
