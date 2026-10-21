@@ -1643,6 +1643,46 @@ function onSnip(body) {
   }
   return result;
 }
+// the words a sentence asserts with: function words and stems shorter than three letters carry no claim
+const REVISE_FW = new Set("the and for with from that this these those was were are has have had its his her their she he they them who which what when where not but than then into onto over under about after before also only very more most some any each one".split(" "));
+const reviseWords = (t) => new Set((String(t).toLowerCase().match(/[\p{L}\p{N}]+/gu) ?? []).filter((w) => (w.length > 2 || /\d/.test(w)) && !REVISE_FW.has(w)));
+const recorded = new Set();
+/** The sentence of the answer that now stands for a revised one. First choice: a claim the door finds SUPPORTED by the very source
+ *  sentence the revised one was found against (`against`), sharing at least a quarter of the claim words of the two together (the
+ *  correction may restate it in the source's own words). Otherwise: a sentence sharing at least half of them. Never one that quotes
+ *  the revised sentence (a reply naming its mistake is not the correction), and never one the door contradicts. Null when none. */
+export function successorOf(was, claims, against = null) {
+  const a = reviseWords(was);
+  const flat = (t) => String(t ?? "").toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+  const quoted = flat(was);
+  const scored = claims
+    .filter((c) => c.standing !== "contradicted" && c.standing !== "argument" && c.standing !== "question")
+    .filter((c) => !flat(c.text).includes(quoted))
+    .map((c) => {
+      const b = reviseWords(c.text);
+      const shared = [...a].filter((w) => b.has(w)).length;
+      return { c, score: shared / (a.size + b.size - shared || 1) };
+    })
+    .sort((x, y) => y.score - x.score);
+  const restsOn = (c) => c.standing === "supported" && !!against && [c.evidence, ...(c.from ?? [])].some((e) => e?.text && (flat(e.text).includes(flat(against)) || flat(against).includes(flat(e.text))));
+  return scored.find((x) => x.score >= 0.25 && restsOn(x.c))?.c ?? scored.find((x) => x.score >= 0.5)?.c ?? null;
+}
+/** Each revised sentence, paired with its successor in the answer (successorOf): { was, now, standing }. A found pair is appended
+ *  once to the task's log (the quick and the researched pass both carry it). */
+function reviseLedger({ task, agent, universe, revises, claims }) {
+  return revises.map(({ was, against }) => {
+    const now = successorOf(was, claims, against);
+    const pair = { was, now: now?.text ?? null, standing: now?.standing ?? null };
+    const key = `${task}\u0000${agent}\u0000${was}\u0000${pair.now}`;
+    // only a pair is a revision: a text with no successor (a preamble before the reply reads) appends nothing
+    if (pair.now && !recorded.has(key)) {
+      recorded.add(key);
+      try { eot.append({ task, agent, stage: "reason", universe, detail: { op: "REC", by: "khora:opencode-doorway.revise", was, now: pair.now, standing: pair.standing, evidence: now?.evidence ?? null } }); } catch { /* the log never blocks */ }
+    }
+    return pair;
+  });
+}
+
 async function onGround(body) {
   const agent = String(body.agent ?? body.sessionID ?? "");
   const task = taskFor(body, agent);
@@ -1678,6 +1718,11 @@ async function onGround(body) {
       console.error(`ground: no step for ${String(body.sessionID ?? "").slice(0, 14)} — ${e?.stack ?? e}`.split("\n").slice(0, 4).join(" | "));
     }
   }
+  // A REVISION the reader asked for (the app's fold note): each sentence revised is paired with the answer's sentence that now
+  // stands for it, and the pair is appended to the task's log as REC. The sentence revised is never erased; the window shows both.
+  // each { was, against? } (a bare string is a sentence with no source sentence named)
+  const revises = (Array.isArray(body.revises) ? body.revises : []).flatMap((r) => (typeof r === "string" ? (r ? [{ was: r }] : []) : r && typeof r.was === "string" && r.was ? [{ was: r.was, against: typeof r.against === "string" ? r.against : null }] : []));
+  if (step?.profile && revises.length) step.profile.revises = reviseLedger({ task, agent, universe: universeOf(body), revises, claims: step.profile.claims ?? [] });
   if (!step) console.error(`ground: no step for ${String(body.sessionID ?? "").slice(0, 14)} (ask ${String(body.ask ?? "").length} chars, text ${String(body.text ?? "").length}, passages ${(body.passages ?? []).length}, own ${(body.own ?? []).length})`);
   // THE TURN'S SHAPE (the audit's live row, read once more here so the window never reaches for the door):
   // what the void owes, the first unmet reach cell, and the acts with their cube cells and shape verdicts.

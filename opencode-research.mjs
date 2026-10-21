@@ -131,6 +131,9 @@ export async function researchClaims(claims, { workspace = null, budgetMs = Numb
   let primaryUsed = 0;
   const primaryOn = process.env.FOLD_PRIMARY !== "0";
   const out = [];
+  // every article the falsifier read, kept whole so the window can show a claim in its source
+  const pages = new Map();
+  const keep = (a) => pages.set(a.url, { name: `wikipedia: ${a.title}`, url: a.url, text: a.text });
   // everything the turn says about a being: the context identity is judged against
   const about = (name) => claims.filter((c) => (c.beings ?? []).includes(name)).map((c) => c.text).join(" ") + " " + text;
   // The lookup budget is spent where a lookup can settle something: a claim that carries a figure or a date AND names a being. The rest
@@ -163,6 +166,7 @@ export async function researchClaims(claims, { workspace = null, budgetMs = Numb
     // the article states it (supported) or contradicts it; silence leaves it exactly what it was
     if (c.standing === "argument" && topic?.article.found && topic.lemmas.get(c)?.has(topic.lemma)) {
       const a = topic.article;
+      keep(a);
       const v = judge(c.text, [{ name: `wikipedia: ${a.title}`, text: a.text, url: a.url }]);
       if (v.standing === "supported" || v.standing === "contradicted") {
         out.push({ ...c, ...v, ...(v.evidence ? { evidence: { ...v.evidence, url: a.url } } : {}), searched: [`wikipedia: ${a.title} (the topic: ${topic.lemma})`], researched: true, ...(v.standing === "supported" ? { tier: "index" } : {}) });
@@ -172,6 +176,7 @@ export async function researchClaims(claims, { workspace = null, budgetMs = Numb
     if (c.standing !== "unsupported") { out.push(c); continue; }
     if (!eligible.has(c) && topic?.article.found && topic.lemmas.get(c)?.has(topic.lemma)) {
       const a = topic.article;
+      keep(a);
       let verdict = judge(c.text, [{ name: `wikipedia: ${a.title}`, text: a.text, url: a.url }]);
       if (verdict.standing === "unsupported") verdict = (await janusPass([{ ...c, ...verdict }], [{ name: `wikipedia: ${a.title}`, text: a.text }]))[0];
       if (verdict.evidence) verdict.evidence = { ...verdict.evidence, url: a.url };
@@ -234,6 +239,7 @@ export async function researchClaims(claims, { workspace = null, budgetMs = Numb
       const subject = who.entity.label;
       const sentence = claimNamed(c, subject);
       const article = [{ name: `wikipedia: ${a.title}`, text: a.text, url: a.url }];
+      keep(a);
       verdict = judge(sentence, article);
       // order and counts are arithmetic over the article's own numbers, decided by Janus
       if (verdict.standing === "unsupported") verdict = (await janusPass([{ ...c, text: sentence, ...verdict }], article))[0];
@@ -258,7 +264,7 @@ export async function researchClaims(claims, { workspace = null, budgetMs = Numb
     out.push({ ...c, ...verdict, searched, ...(tier ? { tier } : {}), ...(identity ? { identity } : {}), ...(verdict.standing !== "unsupported" ? { researched: true } : {}) });
   }
   const beings = [...bound.values()].map((w) => ({ name: w.name, verdict: w.verdict, basis: w.basis, ...(w.entity ? { qid: w.entity.qid, label: w.entity.label, description: w.entity.description, url: w.entity.url } : {}), candidates: (w.candidates ?? []).slice(0, 5) }));
-  return { claims: out, beings, log };
+  return { claims: out, beings, log, pages: [...pages.values()] };
 }
 
 /** Code: a symbol not found (or a key whose function was not read) is looked for in the workspace's own source. */

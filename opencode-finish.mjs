@@ -186,6 +186,17 @@ async function groundDraw(draw, { material, facts, passages = [] }) {
   });
 }
 
+const SOURCE_CAP = 60_000;
+/** The read sources some unit's evidence cites (by name or by url), each with its text capped. */
+function citedSources(read, units) {
+  const cited = units.flatMap((u) => [u.evidence, ...(u.from ?? [])]).filter(Boolean);
+  const seen = new Set();
+  return read
+    .filter((p) => cited.some((e) => e.source === p.name || (p.url && e.url === p.url)))
+    .filter((p) => !seen.has(p.name) && !!seen.add(p.name))
+    .map((p) => ({ name: p.name, ...(p.url ? { url: p.url } : {}), text: p.text.length > SOURCE_CAP ? p.text.slice(0, SOURCE_CAP) : p.text }));
+}
+
 /** THE PROFILE of the output (opencode-profile.mjs): its kind, its checkable units (claims in prose, symbols in
  *  code), each judged against the turn's passages, and — when `research` is on — every claim or symbol the passages
  *  leave unsupported handed to the falsifier (opencode-research.mjs: the workspace, then Wikipedia), which re-judges
@@ -218,10 +229,11 @@ async function profileDraw(draw, { passages = [], workspace = null, research = t
   let symbols = resolveSymbols(parsed, passages, { exists });
   const log = [];
   let beings = [];
+  let pages = [];
   if (research) {
     const { researchClaims, researchSymbols } = await import("./opencode-research.mjs");
     const rc = await researchClaims(claims, { workspace, text: passages.map((p) => p.text).join(" "), answer: draw, ask });
-    claims = rc.claims; log.push(...rc.log); beings = rc.beings;
+    claims = rc.claims; log.push(...rc.log); beings = rc.beings; pages = rc.pages ?? [];
     const rs = await researchSymbols(symbols, { workspace });
     symbols = rs.symbols; log.push(...rs.log);
   }
@@ -239,6 +251,8 @@ async function profileDraw(draw, { passages = [], workspace = null, research = t
       found: count(symbols, "found") + count(symbols, "own"), not_found: count(symbols, "not_found"), symbol_contradicted: count(symbols, "contradicted"), unchecked: count(symbols, "unchecked"),
     },
     rests: restsOn(claims, symbols),
+    // the sources the evidence cites, whole, so the window can show each claim where it stands in its source
+    sources: citedSources([...passages, ...pages], [...claims, ...symbols]),
     // THE SUMMARY's second reading: what it left out (beings the material individuates and figures it states, never carried)
     ...(summary ? { summary: { derived: claims.filter((c) => c.derived).length, added: claims.filter((c) => c.added).length, leftOut: leftOut(draw, passages, resolve) } } : {}),
     // which being each looked-up name was bound to (or why none was), with the candidates it was chosen from
