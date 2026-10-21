@@ -13,7 +13,30 @@ import { makeRelationDefs, loadVerbIndexFile } from "../../native/organs/relatio
 // relation identity nominated by Wiktionary definitions, read from a cache of REST payloads (FOLD_WIKT_CACHE: <dir>/<word>.json); a word not in
 // the cache nominates nothing. FOLD_WIKT_INDEX (a VerbIndex@1 file built from a local Wiktionary by cli/wikt-verbs.mjs) is read instead when set
 const WIKT = process.env.FOLD_WIKT_CACHE, WIKT_INDEX = process.env.FOLD_WIKT_INDEX;
-const DEFS = WIKT_INDEX ? makeRelationDefs(await loadVerbIndexFile(WIKT_INDEX)) : WIKT ? makeRelationDefs((w) => { try { return JSON.parse(fs.readFileSync(path.join(WIKT, `${w}.json`), "utf8")); } catch { return null; } }) : null;
+// FOLD_WIKT_SLIM: the slim English Wiktionary on this machine (wikt-slim.js) — every verb's senses and every language's glosses, read first
+const SLIM = process.env.FOLD_WIKT_SLIM ? (await import("../../native/organs/wikt-slim.js")).openSlim(process.env.FOLD_WIKT_SLIM) : null;
+const DEFS = SLIM ? makeRelationDefs((w) => SLIM.entries("en", w)) : WIKT_INDEX ? makeRelationDefs(await loadVerbIndexFile(WIKT_INDEX)) : WIKT ? makeRelationDefs((w) => { try { return JSON.parse(fs.readFileSync(path.join(WIKT, `${w}.json`), "utf8")); } catch { return null; } }) : null;
+// every other language: its own grammar (grammar-ud.js) from FOLD_UD_DIR (ud-parser-<lang>.json[.gz], ud-tokenizer-<lang>.json, and when
+// present unimorph-<lang>-pos.json.gz); keys glossed from English Wiktionary entries cached in FOLD_WIKT_ENTRIES/<lang>/<word>.json (wiktextract
+// entries); a word missing there is appended to MEANING_GLOSS_MISSING, so it can be looked up and the run repeated
+const UDG = {};
+{
+  const { makeGrammar, loadGrammar } = await import("../../native/adapters/text/grammar-ud.js");
+  const UDP = await import("../../native/adapters/text/ud-parser.js"), UDT = await import("../../native/adapters/text/ud-tokenize.js");
+  const { makeGlossary } = await import("../../native/organs/wikt-gloss.js");
+  const E = process.env.FOLD_WIKT_ENTRIES, miss = process.env.MEANING_GLOSS_MISSING;
+  const glossary = SLIM ? makeGlossary((lang, w) => SLIM.entries(lang, w)) : E ? makeGlossary((lang, w) => { const f = path.join(E, lang, `${w}.json`); if (fs.existsSync(f)) return JSON.parse(fs.readFileSync(f, "utf8")); if (miss) fs.appendFileSync(miss, `${lang}\t${w}\n`); return null; }) : null;
+  // the priors by default (grammar-ud.js loadGrammar); FOLD_UD_DIR reads models being trained instead
+  const D = process.env.FOLD_UD_DIR, at = (n) => D && [path.join(D, n), path.join(D, n + ".gz")].find((f) => fs.existsSync(f));
+  for (const lang of ["es", "fr", "de", "ja"]) {
+    if (!D) { const g = await loadGrammar(lang, { glossary }); if (g) UDG[lang] = g; continue; }
+    const m = at(`ud-parser-${lang}.json`), t = at(`ud-tokenizer-${lang}.json`); if (!m || !t) continue;
+    const lx = at(`unimorph-${lang}-pos.json`);
+    UDG[lang] = makeGrammar(lang, { model: UDP.loadModel(await UDP.readJsonMaybeGz(m), { lex: lx ? await UDP.loadLexiconFile(lx) : null }), tokenizer: UDT.loadTokenizer(await UDP.readJsonMaybeGz(t)), glossary });
+  }
+}
+// a pair's language per side: "es" is both; "es-en" is a Spanish source read against an English claim
+const sideLang = (lang, side) => { const [src, claim] = String(lang).split("-"); return side === "claim" ? (claim ?? src) : src; };
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const F = await import("../../vendor/the-fold/fold-chat-falsify-answer.js");
 const lexical = (claim, sentence) => { const r = F.falsifyAnswer([claim], [{ name: "https://src.example/p", text: sentence }]); const c = (r.claims ?? r)[0] ?? {}; const v = c.verdict ?? c.standing; return /corroborated|held/.test(v) ? "E" : /contested/.test(v) ? "C" : "U"; };
@@ -29,6 +52,8 @@ const arms = {
   "grammar-gated": (t, lang) => (lang === "en" ? claimsOfGated(t) : null),
   // the source read under its 3 best parses (the claim under its best): a source states what any close reading of it states
   "grammar-k3": (t, lang, side) => (lang === "en" ? (side === "source" ? claimsOfK(t, 3) : claimsOf(t)) : null),
+  // each side read by its own language's grammar: English by grammar-en, the rest by grammar-ud (a language with none is a typed gap)
+  ...(Object.keys(UDG).length ? { "grammar-ud": (t, lang, side) => { const l = sideLang(lang, side); return l === "en" ? claimsOf(t) : UDG[l] ? UDG[l].claimsOf(t) : null; } } : {}),
   oracle: (t) => (FR[t] ? verifySpans(t, FR[t]) : null),
 };
 const C3 = process.env.FOLD_C3_DIR ?? path.join(HERE, "../../../the-fold/eval/ants/c3");
@@ -52,7 +77,7 @@ for (const [name, f] of Object.entries(sets)) {
       const lang = p.lang ?? "en";
       let v;
       if (arm === "wording") v = lexical(p.claim, p.sentence);
-      else { const A = arms[arm](p.claim, lang, "claim"), B = arms[arm](p.sentence, lang, "source"); let why = null; if (!A || !B) { v = "G"; gap++; } else { const r = verdict(A, B, arm === "grammar-defs" ? { relations: DEFS } : {}); v = r.v; why = r.why; if (v !== "C" && jset.has(String(p.id))) { v = "C"; why = "janus"; } }
+      else { const A = arms[arm](p.claim, lang, "claim"), B = arms[arm](p.sentence, lang, "source"); let why = null; if (!A || !B) { v = "G"; gap++; } else { const r = verdict(A, B, arm === "grammar-defs" || arm === "grammar-ud" ? { relations: DEFS } : {}); v = r.v; why = r.why; if (v !== "C" && jset.has(String(p.id))) { v = "C"; why = "janus"; } }
         // MEANING_DUMP=<file.jsonl>: every pair's verdict, basis and claims, per arm, for the failure breakdown
         if (process.env.MEANING_DUMP) fs.appendFileSync(process.env.MEANING_DUMP, JSON.stringify({ set: name, arm, id: p.id, label: p.label, type: p.type ?? p.why ?? null, v, why, claim: p.claim, sentence: p.sentence, C: A, S: B }) + "\n"); }
       const said = v === "E";

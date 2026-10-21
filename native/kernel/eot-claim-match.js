@@ -18,9 +18,12 @@ const sameAmount = (a, b) => a.figs?.length && b.figs?.length && a.figs.some((x)
 export const linked = (a, b) => { if (!a || !b) return false;
   if (sameAmount(a, b)) return true;
   const sa = a.names.at(-1) ?? null, sb = b.names.at(-1) ?? null;
+  // a bracketed alias ("… Airport (JRO)") is another name for the same being: either side's alias meets the other's name or alias
+  if (sa && sb && sa !== sb && ((a.aliases ?? []).includes(sb) || (b.aliases ?? []).includes(sa))) return true;
   if (sa && sb) return sa === sb;
   if (sa && (b.head === sa || b.keys.includes(sa))) return true; if (sb && (a.head === sb || a.keys.includes(sb))) return true;
-  if (a.head !== b.head || isNum(a.head) || a.head.length < 2) return false;
+  // a one-letter head is no word in an alphabet ("s", "a"), but one character is a whole word in a logographic script (葉 leaf, 根 root)
+  if (a.head !== b.head || isNum(a.head) || (a.head.length < 2 && !/\p{Script=Han}|\p{Script=Hiragana}|\p{Script=Katakana}|\p{Script=Hangul}/u.test(a.head))) return false;
   const ma = mods(a), mb = mods(b);
   return !(ma.length && mb.length && !ma.some((k) => mb.includes(k))); };
 const figs = (p) => [p.ARG0, p.ARG1, ...(p.OBL || [])].filter(Boolean).flatMap((e) => [...e.figs, ...(e.agent?.figs ?? [])]);
@@ -110,7 +113,9 @@ export function verdict(C, S, { janus = null, relations = null } = {}) {
         const fv = frameVerdict(frameOf(c, cc), frameOf(s, sc));
         if (fv === "reversed") r = { v: "C", why: `direction reversed: ${c.rel}/${s.rel}` };
         else if (fv === "met") r = c.polarity !== s.polarity ? { v: "C", why: `polarity: ${c.rel}/${s.rel}` } : !s.asserted && c.asserted ? { v: "T", why: "the source only reports or hedges it" } : { v: "E", why: `${rk} by definition: ${c.rel}/${s.rel}` };
-        else if (fv === "partial") r = { v: "T", why: `frame partly met: ${c.rel}/${s.rel}` };
+        // with one verb on both sides the frame only adds a reversal: "partly met" leaves the plain reading to decide ("named for" is a
+        // giving only by its definition's head, "to give a name to")
+        else if (fv === "partial" && c.rel !== s.rel) r = { v: "T", why: `frame partly met: ${c.rel}/${s.rel}` };
       }
       if (!r && rk === "same" && c.rel !== s.rel && straight) r = c.polarity !== s.polarity ? { v: "C", why: `polarity: ${c.rel}/${s.rel}` } : { v: "E", why: `same by definition: ${c.rel}/${s.rel}` };
       if (r) { if (RANK[r.v] > RANK[best.v]) best = r; if (r.v === "C") break; continue; }

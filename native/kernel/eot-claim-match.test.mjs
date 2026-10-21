@@ -43,3 +43,12 @@ test("a sentence-opening phrase frames the event and is never its argument (laye
   assert.ok((c.OBL ?? []).some((o) => /March 2014/.test(o.text)), "it stays an oblique (time)");
   assert.equal(v("In addition, in March 2014, we entered into a license agreement with GSK.", "In March 2014, we entered into a license agreement with GSK."), "E");
 });
+
+test("a one-character word in a logographic script is a word; a bracketed alias is another name; an appositive is not part of a name", () => {
+  const end = (head, extra = {}) => ({ text: head, head, names: [], aliases: [], keys: [head], figs: [], quant: null, ...extra });
+  assert.ok(linked(end("葉"), end("葉")), "葉 (leaf) links to itself");
+  assert.ok(!linked(end("s"), end("s")), "a lone Latin letter is still no word");
+  const v = (a, b) => verdict(claimsOf(a), claimsOf(b)).v;
+  assert.equal(v("Kilimanjaro International Airport is a 45-minute drive from Moshi.", "Kilimanjaro International Airport (JRO) is a 45-minute drive from Moshi."), "E");
+  assert.equal(v("Jan Ingenhousz discovered the process of photosynthesis.", "Jan Ingenhousz, the Dutch-born British physician and scientist, discovered the process of photosynthesis."), "E");
+});

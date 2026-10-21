@@ -23,7 +23,8 @@ const UM0 = U ? await U.readJsonMaybeGz(UD_MODEL) : null;
 const UM = U ? U.loadModel(UM0, { lex: fs.existsSync(UD_LEX) ? await U.loadLexiconFile(UD_LEX) : null, clusters: UM0.meta?.clusters && fs.existsSync(UD_CL) ? await U.loadClustersFile(UD_CL) : null }) : null;
 export const READER = UM ? "ud-parser" : "english-parser";
 const build = (forms, tags) => {
-  if (UM) return U.analyse(UM, forms, tags).map((r) => (r.upos === "NUM" ? { ...r, lemma: r.form.toLowerCase() } : r));
+  // a number and a name are their own lemma ("Jan" is not "January")
+  if (UM) return U.analyse(UM, forms, tags).map((r) => (r.upos === "NUM" ? { ...r, lemma: r.form.toLowerCase() } : r.upos === "PROPN" ? { ...r, lemma: r.form } : r));
   const words = ["ROOT", ...forms], T = ["ROOT", ...tags];
   const heads = P.parseSentence(model.parser, words, T), labels = P.labelSentence(model.labeller, heads, words, T);
   return forms.map((form, k) => { const { lemma, feats } = P.lemmaAndFeats(model.lexicon, form, tags[k]); return { id: k + 1, form, lemma: tags[k] === "NUM" ? form.toLowerCase() : lemma, upos: tags[k], feats, head: heads[k + 1], deprel: labels[k + 1] }; });
@@ -127,7 +128,9 @@ const STATIVE = new Set(["be", "have", "stand", "measure", "weigh", "reach", "ri
 const TITLES = new Set(["dr", "mr", "mrs", "ms", "sir", "dame", "saint", "st", "lord", "lady", "king", "queen", "prince", "princess", "president", "professor", "prof"]);
 const lem = (r) => String(r.lemma || r.form).toLowerCase();
 const kids = (rows, id) => rows.filter((r) => r.head === id);
-const SKIP = /^(punct|acl|acl:relcl|advcl|ccomp|parataxis|conj|cc|nsubj|nsubj:pass|csubj|cop|aux|aux:pass|mark|obl|obl:agent|obl:tmod|obl:npmod|advmod|xcomp|nmod)$/;
+// an appositive is a second statement about its head ("Jan Ingenhousz, the Dutch-born British physician"), read as its own "be" claim, not
+// part of the head's name
+const SKIP = /^(punct|acl|acl:relcl|advcl|ccomp|parataxis|conj|cc|nsubj|nsubj:pass|csubj|cop|aux|aux:pass|mark|obl|obl:agent|obl:tmod|obl:npmod|advmod|xcomp|nmod|appos)$/;
 const spanOf = (rows, id) => { const out = [], st = [id]; while (st.length) { const x = st.pop(); out.push(x); for (const r of rows) if (r.head === x && !(x === id && SKIP.test(r.deprel)) && !/^(punct|acl:relcl|parataxis|cc)$/.test(r.deprel)) st.push(r.id); } return out.map((i) => rows.find((r) => r.id === i)).sort((a, b) => a.id - b.id); };
 const numOf = (w) => { const f = w.form.toLowerCase().replace(/,/g, ""); if (/^\d+(\.\d+)?$/.test(f)) return +f; return CARDINAL[f] ?? null; };
 /** the figures in a word span, each bound to the unit or counted noun right after it */
@@ -140,9 +143,12 @@ const figuresIn = (rows, ws, text) => ws.filter((w) => numOf(w) != null).map((w)
   const U = UNITS[u] ?? UNITS[u + "s"];
   const counted = !U && next && /^(NOUN|PROPN)$/.test(next.upos) ? lem(next).replace(/s$/, "") : null;
   return { v, measure: U ? U[0] : counted ? `count:${counted}` : "count", base: U ? (v + (U[2] ?? 0)) * U[1] : v, approx: APPROX.test(text) }; });
+// the words of a span inside brackets: "Kilimanjaro International Airport (JRO)" — a bracketed name is another name for it, not part of it
+const bracketed = (rows, ws) => { let d = 0; const inside = new Set(); for (const r of rows) { if (r.form === "(") d++; else if (r.form === ")") d = Math.max(0, d - 1); else if (d > 0) inside.add(r.id); } return ws.map((w) => inside.has(w.id)); };
 const endOf = (rows, id, text) => { if (!id) return null; const head = rows.find((r) => r.id === id), ws = spanOf(rows, id);
   const agentN = kids(rows, id).find((k) => /^nmod/.test(k.deprel) && kids(rows, k.id).some((c) => /^by$/i.test(c.form)));
-  return { text: ws.map((w) => w.form).join(" "), head: lem(head), names: ws.filter((w) => w.upos === "PROPN").map((w) => w.form.toLowerCase()), lemmas: ws.filter((w) => /^(NOUN|PROPN|ADJ)$/.test(w.upos)).map(lem).filter((l) => !FW.has(l)),
+  const inBr = bracketed(rows, ws);
+  return { text: ws.map((w) => w.form).join(" "), head: lem(head), names: ws.filter((w, k) => w.upos === "PROPN" && !inBr[k]).map((w) => w.form.toLowerCase()), aliases: ws.filter((w, k) => /^(PROPN|NOUN|X)$/.test(w.upos) && inBr[k]).map((w) => w.form.toLowerCase()), lemmas: ws.filter((w) => /^(NOUN|PROPN|ADJ)$/.test(w.upos)).map(lem).filter((l) => !FW.has(l)),
     sup: (ws.find((w) => w.upos === "ADJ" && (/Degree=Sup/.test(w.feats || "") || /est$/i.test(w.form))) ? comparativeBase(ws.find((w) => w.upos === "ADJ" && (/Degree=Sup/.test(w.feats || "") || /est$/i.test(w.form))).form.replace(/est$/i, "er")) : null),
     figs: figuresIn(rows, ws, text), quant: ws.map((w) => w.form.toLowerCase()).find((f) => /^(all|every|each|some|many|most|few|no)$/.test(f)) ?? null, agent: agentN ? endOf(rows, agentN.id, text) : null }; };
 
@@ -216,7 +222,7 @@ const surname = (e) => e.names.filter((n) => !TITLES.has(n)).at(-1) ?? null;
 
 // a pronoun's case is grammar, not identity: "us" is "we" (declared English closed class)
 const PRON_CASE = { us: "we", me: "i", him: "he", her: "she", them: "they", ourselves: "we", themselves: "they" };
-const keyEnd = (e) => e && { text: e.text, head: PRON_CASE[e.head] ?? e.head, sup: e.sup ?? null, names: e.names.filter((n) => !TITLES.has(n)), keys: e.lemmas.filter((l) => !TITLES.has(l)), figs: e.figs, quant: e.quant ? QUANT[e.quant] : null, agent: keyEnd(e.agent) };
+const keyEnd = (e) => e && { text: e.text, head: PRON_CASE[e.head] ?? e.head, sup: e.sup ?? null, names: e.names.filter((n) => !TITLES.has(n)), aliases: e.aliases ?? [], keys: e.lemmas.filter((l) => !TITLES.has(l)), figs: e.figs, quant: e.quant ? QUANT[e.quant] : null, agent: keyEnd(e.agent) };
 const QUANT = { all: "all", every: "all", each: "all", some: "some", many: "many", most: "most", few: "few", no: "none" };
 /** EOTClaim@1 — the only thing the EOT layer sees */
 /** the claims of every one of the k best readings, once each: a source states what any close reading of it states */
