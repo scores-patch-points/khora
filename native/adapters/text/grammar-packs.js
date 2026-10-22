@@ -12,7 +12,9 @@ const LEN = (f) => ["length", f], MASS = (f) => ["mass", f], TIME = (f) => ["tim
 export const PACKS = {
   es: {
     neg: set("no nunca jamás tampoco ni"), agent: set("por"), than: set("que"), more: set("más"), less: set("menos"), with: set("con"),
-    reflexive: set("se me te nos os"), have: set("tener poseer"), report: set("decir afirmar asegurar informar creer sostener sugerir"), modal: set("poder deber"),
+    reflexive: set("se me te nos os"), have: set("tener poseer"), proDrop: true, pronouns: set("él ella ellos ellas ello"),
+    naming: set("llamar denominar nombrar apodar bautizar"), namingAs: set("conocer designar"), as: set("como"),
+    namingPart: ["denominad", "llamad", "nombrad", "apodad", "bautizad"], namingPartAs: ["conocid", "designad"], report: set("decir afirmar asegurar informar creer sostener sugerir"), modal: set("poder deber"),
     quant: { todo: "all", toda: "all", todos: "all", todas: "all", cada: "all", alguno: "some", algunos: "some", algunas: "some", unos: "some", ningún: "none", ninguno: "none", ninguna: "none", muchos: "many", muchas: "many" },
     discourse: set("además sin_embargo por_ejemplo mientras_tanto en_cambio así_pues por_lo_tanto"), titles: set("dr dra sr sra don doña san santa rey reina presidente"),
     numbers: { uno: 1, una: 1, dos: 2, tres: 3, cuatro: 4, cinco: 5, seis: 6, siete: 7, ocho: 8, nueve: 9, diez: 10, once: 11, doce: 12, veinte: 20, treinta: 30, cuarenta: 40, cincuenta: 50, sesenta: 60, setenta: 70, ochenta: 80, noventa: 90, cien: 100, ciento: 100, mil: 1000 },
@@ -24,7 +26,7 @@ export const PACKS = {
   fr: {
     // "pas", "plus", "jamais" … negate only beside "ne" ("il n'est plus"); alone they are a degree ("plus d'un cinquième": more than a fifth)
     neg: set("ne n' pas jamais plus aucun aucune guère nullement"), negNeedsNe: set("pas plus jamais aucun aucune guère nullement"), ne: set("ne n' n’"), agent: set("par"), than: set("que qu'"), more: set("plus"), less: set("moins"), with: set("avec"),
-    reflexive: set("se s' s’ me m' m’ te t' t’ nous vous"), have: set("avoir posséder"), report: set("dire affirmer déclarer rapporter croire prétendre suggérer"), modal: set("pouvoir devoir"),
+    reflexive: set("se s' s’ me m' m’ te t' t’ nous vous"), have: set("avoir posséder"), pronouns: set("il elle ils elles"), naming: set("appeler nommer dénommer surnommer baptiser"), namingAs: set("connaître désigner"), as: set("comme"), namingPart: ["appelé", "nommé", "dénommé", "surnommé", "baptisé", "dit", "dite"], namingPartAs: ["connu", "désigné"], report: set("dire affirmer déclarer rapporter croire prétendre suggérer"), modal: set("pouvoir devoir"),
     quant: { tout: "all", toute: "all", tous: "all", toutes: "all", chaque: "all", certains: "some", certaines: "some", quelques: "some", aucun: "none", aucune: "none", nul: "none", beaucoup: "many", plusieurs: "many" },
     discourse: set("par_exemple en_outre de_plus cependant toutefois en_effet par_ailleurs ainsi"), titles: set("dr m mme mlle saint sainte roi reine président"),
     numbers: { un: 1, une: 1, deux: 2, trois: 3, quatre: 4, cinq: 5, six: 6, sept: 7, huit: 8, neuf: 9, dix: 10, onze: 11, douze: 12, vingt: 20, trente: 30, quarante: 40, cinquante: 50, soixante: 60, cent: 100, mille: 1000 },
@@ -35,7 +37,7 @@ export const PACKS = {
   },
   de: {
     neg: set("nicht nie niemals kein keine keinen keinem keiner keines nirgends"), agent: set("von durch"), than: set("als"), more: set("mehr"), less: set("weniger"), with: set("mit"),
-    reflexive: set("sich mich dich uns euch"), have: set("haben besitzen"), report: set("sagen behaupten erklären berichten glauben meinen vermuten"), modal: set("können dürfen mögen sollen müssen"),
+    reflexive: set("sich mich dich uns euch"), have: set("haben besitzen"), pronouns: set("er sie es"), naming: set("heißen nennen taufen"), namingAs: set("bezeichnen kennen"), as: set("als"), namingPart: ["genannt", "getauft"], namingPartAs: ["bekannt", "bezeichnet"], report: set("sagen behaupten erklären berichten glauben meinen vermuten"), modal: set("können dürfen mögen sollen müssen"),
     quant: { alle: "all", aller: "all", allen: "all", jeder: "all", jede: "all", jedes: "all", einige: "some", manche: "some", kein: "none", keine: "none", viele: "many" },
     discourse: set("außerdem zum_beispiel jedoch allerdings dennoch also übrigens"), titles: set("dr herr frau sankt könig königin präsident prof"),
     numbers: { ein: 1, eine: 1, eins: 1, zwei: 2, drei: 3, vier: 4, fünf: 5, sechs: 6, sieben: 7, acht: 8, neun: 9, zehn: 10, elf: 11, zwölf: 12, zwanzig: 20, dreißig: 30, vierzig: 40, fünfzig: 50, hundert: 100, tausend: 1000 },
@@ -46,7 +48,7 @@ export const PACKS = {
   },
   ja: {
     neg: set("ない ず ぬ ません なかっ"), agent: set("によって により"), than: set("より"), more: set("もっと より"), less: set(""), with: set("と"),
-    have: set("持つ ある"), report: set("言う 述べる 報告 主張 考える"), modal: set("かもしれない でしょう だろう"),
+    have: set("持つ ある"), proDrop: true, pronouns: set("それ これ 彼 彼女 同"), naming: set(""), namingAs: set("呼ぶ 称する"), as: set("と"), report: set("言う 述べる 報告 主張 考える"), modal: set("かもしれない でしょう だろう"),
     quant: { すべて: "all", 全て: "all", 全部: "all", 各: "all", 一部: "some", いくつか: "some" },
     discourse: set("また さらに 例えば しかし 一方"), titles: set("博士 氏 さん 様 王 女王 大統領 教授"),
     numbers: { 一: 1, 二: 2, 三: 3, 四: 4, 五: 5, 六: 6, 七: 7, 八: 8, 九: 9, 十: 10, 百: 100, 千: 1000 },

@@ -36,6 +36,12 @@ const UDG = {};
   }
 }
 // a pair's language per side: "es" is both; "es-en" is a Spanish source read against an English claim
+// a source sentence's PAGE, where the set names it (pair.source.url, with <set>.sources.json beside the set): the title and the sentences before
+// it, so a pronoun or a dropped subject can take the page's topic; split as the set was built (Japanese at 。, else at a sentence end)
+let PAGES = null;
+const pagesOf = () => { if (!PAGES) { PAGES = new Map(); for (const f of fs.readdirSync(HERE).filter((x) => x.endsWith(".sources.json"))) for (const pg of JSON.parse(fs.readFileSync(path.join(HERE, f), "utf8")).pages ?? []) PAGES.set(pg.url, pg); } return PAGES; };
+const sentencesOf = (pg) => (pg.lang === "ja" ? pg.text.replace(/\n+/g, "").split(/(?<=。)/) : pg.text.replace(/\n+/g, " ").split(/(?<=[.!?])\s+(?=[A-ZÁÉÍÓÚÑÀÂÈÊÎÔÛÄÖÜ«"(])/)).map((x) => x.trim()).filter(Boolean);
+const contextOf = (p) => { const pg = p.source?.url && pagesOf().get(p.source.url); if (!pg) return null; const ss = sentencesOf(pg), head = p.sentence.slice(0, 30), i = ss.findIndex((x) => x.startsWith(head)); return { title: pg.title, previous: i > 0 ? ss.slice(0, i) : [] }; };
 const sideLang = (lang, side) => { const [src, claim] = String(lang).split("-"); return side === "claim" ? (claim ?? src) : src; };
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const F = await import("../../vendor/the-fold/fold-chat-falsify-answer.js");
@@ -53,7 +59,7 @@ const arms = {
   // the source read under its 3 best parses (the claim under its best): a source states what any close reading of it states
   "grammar-k3": (t, lang, side) => (lang === "en" ? (side === "source" ? claimsOfK(t, 3) : claimsOf(t)) : null),
   // each side read by its own language's grammar: English by grammar-en, the rest by grammar-ud (a language with none is a typed gap)
-  ...(Object.keys(UDG).length ? { "grammar-ud": (t, lang, side) => { const l = sideLang(lang, side); return l === "en" ? claimsOf(t) : UDG[l] ? UDG[l].claimsOf(t) : null; } } : {}),
+  ...(Object.keys(UDG).length ? { "grammar-ud": (t, lang, side, ctx) => { const l = sideLang(lang, side); return l === "en" ? claimsOf(t) : UDG[l] ? UDG[l].claimsOf(t, side === "source" && ctx ? { context: ctx } : null) : null; } } : {}),
   oracle: (t) => (FR[t] ? verifySpans(t, FR[t]) : null),
 };
 const C3 = process.env.FOLD_C3_DIR ?? path.join(HERE, "../../../the-fold/eval/ants/c3");
@@ -72,12 +78,12 @@ for (const [name, f] of Object.entries(sets)) {
   for (const arm of Object.keys(all)) {
     let acc = 0, fa = 0, fr = 0, cc = 0, gap = 0; const rows = [];
     // janus over every pair this arm can read, in one call (one ground per pair)
-    const jset = arm === "wording" ? new Set() : janusContradictions(pairs.map((p) => ({ id: String(p.id), C: arms[arm](p.claim, p.lang ?? "en", "claim") ?? [], S: arms[arm](p.sentence, p.lang ?? "en", "source") ?? [] })).filter((x) => x.C.length && x.S.length));
+    const jset = arm === "wording" ? new Set() : janusContradictions(pairs.map((p) => ({ id: String(p.id), C: arms[arm](p.claim, p.lang ?? "en", "claim") ?? [], S: arms[arm](p.sentence, p.lang ?? "en", "source", contextOf(p)) ?? [] })).filter((x) => x.C.length && x.S.length));
     for (const p of pairs) {
       const lang = p.lang ?? "en";
       let v;
       if (arm === "wording") v = lexical(p.claim, p.sentence);
-      else { const A = arms[arm](p.claim, lang, "claim"), B = arms[arm](p.sentence, lang, "source"); let why = null; if (!A || !B) { v = "G"; gap++; } else { const r = verdict(A, B, arm === "grammar-defs" || arm === "grammar-ud" ? { relations: DEFS } : {}); v = r.v; why = r.why; if (v !== "C" && jset.has(String(p.id))) { v = "C"; why = "janus"; } }
+      else { const A = arms[arm](p.claim, lang, "claim"), B = arms[arm](p.sentence, lang, "source", contextOf(p)); let why = null; if (!A || !B) { v = "G"; gap++; } else { const r = verdict(A, B, arm === "grammar-defs" || arm === "grammar-ud" ? { relations: DEFS } : {}); v = r.v; why = r.why; if (v !== "C" && jset.has(String(p.id))) { v = "C"; why = "janus"; } }
         // MEANING_DUMP=<file.jsonl>: every pair's verdict, basis and claims, per arm, for the failure breakdown
         if (process.env.MEANING_DUMP) fs.appendFileSync(process.env.MEANING_DUMP, JSON.stringify({ set: name, arm, id: p.id, label: p.label, type: p.type ?? p.why ?? null, v, why, claim: p.claim, sentence: p.sentence, C: A, S: B }) + "\n"); }
       const said = v === "E";

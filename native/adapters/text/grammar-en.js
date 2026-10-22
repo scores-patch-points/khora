@@ -126,6 +126,7 @@ const comparativeBase = (f) => { const w = f.toLowerCase(); if (/ier$/.test(w)) 
 const ANTONYM = Object.fromEntries([["open", "closed"], ["alive", "dead"], ["true", "false"], ["present", "absent"], ["legal", "illegal"], ["possible", "impossible"], ["safe", "dangerous"], ["visible", "invisible"], ["active", "inactive"], ["extinct", "extant"]].flatMap(([a, b]) => [[a, b], [b, a]]));
 // DECLARED (giver: English relations whose object is a measure of the subject): a figure under one of these is a property of the subject
 const STATIVE = new Set(["be", "have", "stand", "measure", "weigh", "reach", "rise", "span", "cover", "total", "number", "carry", "contain", "hold", "boil", "freeze", "melt", "travel"]);
+const NAMING = new Set(["call", "name", "dub", "term", "nickname", "rename"]), NAMING_AS = new Set(["know", "refer", "designate"]);
 const TITLES = new Set(["dr", "mr", "mrs", "ms", "sir", "dame", "saint", "st", "lord", "lady", "king", "queen", "prince", "princess", "president", "professor", "prof"]);
 const lem = (r) => String(r.lemma || r.form).toLowerCase();
 const kids = (rows, id) => rows.filter((r) => r.head === id);
@@ -212,6 +213,15 @@ function propositionsOf(text, rows = rowsOf(text)) {
         if (v.upos === "ADJ" && than) out.push({ ...base, rel: comparativeBase(v.form), ARG0: endOf(rows, S0.id, text), ARG1: than, asym: true });
         else out.push({ ...base, rel: "be", ARG0: endOf(rows, S0.id, text), ARG1: endOf(rows, v.id, text) });
       } else if (/^(VERB|AUX|ADJ)$/.test(v.upos) && (S0 || obj)) {
+        // a NAMING verb says the two are one ("X is called Y", "X, also known as Y", "X is named Y"): its subject (or, as a participle, the
+        // noun it modifies) and each name it gives, as "be" claims (declared English closed class: call, name, dub, term, nickname; know
+        // and refer only with "as")
+        if (S0 && (NAMING.has(lem(v)) || NAMING_AS.has(lem(v)))) {
+          const named = [...ks.filter((k) => /^(obl|xcomp|obj|nmod|advcl)$/.test(k.deprel) && kids(rows, k.id).some((c) => /^(case|mark)$/.test(c.deprel) && /^as$/i.test(c.form))),
+            ...(NAMING.has(lem(v)) ? ks.filter((k) => /^(obj|xcomp)$/.test(k.deprel) && !REL_PRON.test(k.form)) : [])];
+          const Ys = [...new Set(named.flatMap((y) => [y, ...rows.filter((r) => r.head === y.id && r.deprel === "conj" && /^(NOUN|PROPN)$/.test(r.upos))]))];
+          if (Ys.length) { for (const Y of Ys) out.push({ ...base, rel: "be", alias: true, ARG0: endOf(rows, S0.id, text), ARG1: endOf(rows, Y.id, text) }); continue; }
+        }
         // one claim per coordinated object, as per coordinated subject ("a Collaboration and Exclusive License Agreement with GSK")
         for (const O of !passive && obj ? [obj, ...rows.filter((r) => r.head === obj.id && r.deprel === "conj" && /^(NOUN|PROPN)$/.test(r.upos))] : [obj]) {
           const A0 = passive ? agent : S0, A1 = passive ? S0 : O;
@@ -249,7 +259,7 @@ export function claimsOf(text, rows = undefined) {
   return [...propositionClaims(text, R, props), ...figureClaimsOf(text, R)].map((c) => ({ ...c, unread }));
 }
 function propositionClaims(text, rows, props = propositionsOf(text, rows)) {
-  return props.map((p, i) => ({ main: !!p.main, schema: "EOTClaim@1", id: `c${i + 1}`, lang: "en", by: "grammar-en", rel: p.rel, ARG0: keyEnd(p.ARG0), ARG1: keyEnd(p.ARG1), ARG2: keyEnd(p.ARG2 ?? null), OBL: (p.OBL || []).map(keyEnd), polarity: p.polarity, tense: p.tense, asserted: p.asserted, asym: !!p.asym }));
+  return props.map((p, i) => ({ main: !!p.main, schema: "EOTClaim@1", id: `c${i + 1}`, lang: "en", by: "grammar-en", rel: p.rel, alias: !!p.alias, ARG0: keyEnd(p.ARG0), ARG1: keyEnd(p.ARG1), ARG2: keyEnd(p.ARG2 ?? null), OBL: (p.OBL || []).map(keyEnd), polarity: p.polarity, tense: p.tense, asserted: p.asserted, asym: !!p.asym }));
 }
 
 

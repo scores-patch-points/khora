@@ -77,8 +77,14 @@ export function makeGrammar(lang, { model, tokenizer, glossary = null }) {
       nmods: kidsOf(rows, id).filter((k) => (/^nmod(:poss)?$/.test(k.deprel) && k !== agentN) || (k.deprel === "conj" && /^(NOUN|PROPN|ADJ|NUM)$/.test(k.upos))).map((k) => endOf(rows, k.id, text)) };
   };
 
-  function propositionsOf(text, rows) {
+  // ante: the page's current topic (an end), for a subject the sentence leaves to its page: a third-person pronoun ("Elle se jette …",
+  // "Er besteht aus …") or, in a language that drops subjects, none at all ("Se encuentra en los Andes", Japanese topic carried over)
+  function propositionsOf(text, rows, ante = null) {
     const framed = new Set(), out = [], byId = (id) => rows.find((r) => r.id === id);
+    const ANTE = { id: -1, upos: "PRON", form: "", lemma: "", deprel: "nsubj", head: -2 };
+    let anteNow = null;
+    const endFor = (x) => (x === ANTE ? anteNow : x ? endOf(rows, x.id, text) : null);
+    const personal = (r) => !!r && r.upos === "PRON" && !(feat(r, "PronType=Rel")) && !feat(r, "Person=1") && !feat(r, "Person=2") && (feat(r, "PronType=Prs") || L.pronouns?.has(low(r))) && (L.pronouns?.has(low(r)) ?? true);
     const relPron = (r) => r && (feat(r, "PronType=Rel") || (r.upos === "PRON" && /relcl/.test(byId(r.head)?.deprel ?? "")));
     const reported = (v) => { let x = v; for (let i = 0; i < 6 && x; i++) { const h = byId(x.head); if (!h) return false; if (/^(ccomp|parataxis)$/.test(x.deprel) && L.report.has(lem(h))) return true; x = h; } return false; };
     const subjOf = (v, d = 0) => {
@@ -105,7 +111,13 @@ export function makeGrammar(lang, { model, tokenizer, glossary = null }) {
       const neg = negOwn(v) || (v.deprel === "conj" && !ks.some((k) => /^nsubj/.test(k.deprel)) && negOwn(byId(v.head) ?? { id: -1 })) || (v.deprel === "xcomp" && negOwn(byId(v.head) ?? { id: -1 }));
       const auxes = ks.filter((k) => /^(aux|aux:pass|cop)$/.test(k.deprel)), carrier = v.deprel === "xcomp" ? byId(v.head) : null;
       const passive = ks.some((k) => /^(aux:pass|nsubj:pass|expl:pass)$/.test(k.deprel)) || (v.deprel === "conj" && kidsOf(rows, v.head).some((k) => k.deprel === "aux:pass")) || (L === PACKS.ja && auxes.some((k) => /^(れる|られる)$/.test(lem(k))));
-      const subj = subjOf(v);
+      const mainClause = v.head === 0 || (v.deprel === "conj" && byId(v.head)?.head === 0);
+      const finite = [v, ...auxes].some((w) => feat(w, "VerbForm=Fin")) || !!cop || L === PACKS.ja;
+      let subj = subjOf(v);
+      // a pronoun stands for the nearest earlier subject; a subject left out stands for the page's own subject (an encyclopedia's sentences
+      // are about their article: "Se encuentra en los Andes", Japanese sentences that carry their topic)
+      if (ante && personal(subj) && (ante.last ?? ante.title)) { subj = ANTE; anteNow = ante.last ?? ante.title; }
+      else if (ante && !subj && mainClause && L.proDrop && finite && /^(VERB|AUX|ADJ|NOUN|PROPN)$/.test(v.upos) && (ante.title ?? ante.last)) { subj = ANTE; anteNow = ante.title ?? ante.last; }
       let obj = ks.find((k) => k.deprel === "obj") ?? null; const iobj = ks.find((k) => k.deprel === "iobj") ?? null;
       if (obj && relPron(obj) && /relcl/.test(v.deprel)) obj = byId(v.head);
       const inClause = (r) => { let x = r; for (let i = 0; i < 4 && x; i++) { if (x.head === v.id) return true; if (/^(acl|acl:relcl|advcl|ccomp|conj)$/.test(x.deprel)) return false; x = byId(x.head); } return false; };
@@ -134,33 +146,66 @@ export function makeGrammar(lang, { model, tokenizer, glossary = null }) {
         // a comparison: "X es más grande que Y", "X ist größer als Y", "XはYより大きい" — the adjective's key, the ends in order; "menos" reverses them
         if (v.upos === "ADJ" && thanEnd && S0) {
           const less = ks.some((k) => L.less.has(low(k)));
-          const A = endOf(rows, S0.id, text);
+          const A = endFor(S0);
           out.push({ ...base, rel: key(v), rels: keysOf(v), ARG0: less ? thanEnd : A, ARG1: less ? A : thanEnd, asym: true });
-        } else if (cop && S0) out.push({ ...base, rel: "be", ARG0: endOf(rows, S0.id, text), ARG1: endOf(rows, v.id, text) });
+        } else if (cop && S0) out.push({ ...base, rel: "be", ARG0: endFor(S0), ARG1: endOf(rows, v.id, text) });
         else if (/^(VERB|ADJ)$/.test(v.upos) && (S0 || obj)) {
           const A0 = passive ? agent : S0, A1 = passive ? S0 : obj;
           // a participle as a state, with no agent ("le Kibo est éteint"): its own adjective entry says the state ("extinct"), where the
           // verb's first sense would say an act ("éteindre: to turn off")
           const state = passive && !agent && !obj && glossary ? glossary(lang, low(v), "ADJ") : null;
-          if (state && S0) { out.push({ ...base, rel: "be", ARG0: endOf(rows, S0.id, text), ARG1: { text: v.form, head: state, names: [], aliases: [], keys: [state], figs: [], quant: null, agent: null } }); continue; }
+          if (state && S0) { out.push({ ...base, rel: "be", ARG0: endFor(S0), ARG1: { text: v.form, head: state, names: [], aliases: [], keys: [state], figs: [], quant: null, agent: null } }); continue; }
+          // a NAMING verb says the two are one ("X se llama Y", "X heißt Y", "X, denominado Y", "X, conocido como Y", "Yと呼ばれる"): its
+          // subject (or, as a participle, the noun it modifies) and each name it gives, as "be" claims, which the check reads as identity
+          if (S0 && (L.naming?.has(lem(v)) || L.namingAs?.has(lem(v)))) {
+            const named = [...ks.filter((k) => /^(obl|obl:arg|advcl|xcomp|obj|nmod)$/.test(k.deprel) && hasCase(rows, k, L.as ?? new Set())),
+              ...(L.naming?.has(lem(v)) ? ks.filter((k) => /^(obj|xcomp)$/.test(k.deprel) && !relPron(k)) : [])];
+            const Ys = [...new Set(named.flatMap((y) => [y, ...rows.filter((r) => r.head === y.id && r.deprel === "conj" && /^(NOUN|PROPN)$/.test(r.upos))]))];
+            if (Ys.length) { for (const Y of Ys) out.push({ ...base, rel: "be", alias: true, ARG0: endFor(S0), ARG1: endOf(rows, Y.id, text) }); continue; }
+          }
           const rel = L.have.has(lem(v)) ? "have" : key(v, rows), rels = L.have.has(lem(v)) ? ["have"] : keysOf(v, rows);
           // one claim per coordinated object, as per coordinated subject
           for (const O of !passive && obj ? [obj, ...rows.filter((r) => r.head === obj.id && r.deprel === "conj" && /^(NOUN|PROPN)$/.test(r.upos))] : [A1]) {
             const B = passive ? A1 : O;
-            out.push({ ...base, rel, rels, ARG0: endOf(rows, A0?.id, text), ARG1: endOf(rows, (B ?? ks.find((k) => /^(obl|obl:arg|xcomp)$/.test(k.deprel) && k.id > v.id && k !== agent && !discourse(k)))?.id, text), ARG2: iobj ? endOf(rows, iobj.id, text) : null, voice: passive ? "passive" : "active", asym: !!(A0 && B) });
+            out.push({ ...base, rel, rels, ARG0: endFor(A0), ARG1: endFor(B ?? ks.find((k) => /^(obl|obl:arg|xcomp)$/.test(k.deprel) && k.id > v.id && k !== agent && !discourse(k))), ARG2: iobj ? endOf(rows, iobj.id, text) : null, voice: passive ? "passive" : "active", asym: !!(A0 && B) });
           }
         }
-        for (const w of obls.filter((o) => o.with)) if (S0) out.push({ ...base, OBL: [], rel: "have", ARG0: endOf(rows, S0.id, text), ARG1: w, asym: true });
+        for (const w of obls.filter((o) => o.with)) if (S0) out.push({ ...base, OBL: [], rel: "have", ARG0: endFor(S0), ARG1: w, asym: true });
       }
+    }
+    // a NAMING PARTICIPLE the tagger reads as an adjective (AnCora: "denominado", "conocido"; the pack lists their stems): on a noun that
+    // is another's appositive, that noun is the other's name ("El sector, denominado lago Mayor o Chucuito"); on a noun with names hung from
+    // it, those are its names ("El sector, conocido como lago Menor o Huiñaymarca")
+    const namingPart = (r) => /^(ADJ|VERB)$/.test(r.upos) && /^(amod|acl)$/.test(r.deprel) && [...(L.namingPart ?? []), ...(L.namingPartAs ?? [])].some((p) => low(r).startsWith(p));
+    for (const P of rows.filter(namingPart)) {
+      const N = byId(P.head); if (!N) continue;
+      const conjs = (y) => [y, ...rows.filter((r) => r.head === y.id && /^(conj|appos)$/.test(r.deprel) && /^(NOUN|PROPN)$/.test(r.upos)).flatMap(conjs)];
+      const own = kidsOf(rows, P.id).filter((k) => (/^(obl|obl:arg|nmod|xcomp|obj|advcl)$/.test(k.deprel) && (hasCase(rows, k, L.as ?? new Set()) || !(L.namingPartAs ?? []).some((p) => low(P).startsWith(p)))) || (k.deprel === "conj" && /^(NOUN|PROPN)$/.test(k.upos)));
+      const pairs = own.length ? own.flatMap(conjs).map((y) => [N, y]) : N.deprel === "appos" && byId(N.head) ? conjs(N).map((y) => [byId(N.head), y]) : [];
+      for (const [x, y] of pairs) out.push({ vid: P.id, polarity: "+", tense: "present", asserted: true, OBL: [], rel: "be", alias: true, ARG0: endOf(rows, x.id, text), ARG1: endOf(rows, y.id, text) });
     }
     for (const a of rows.filter((r) => r.deprel === "appos" && !(r.upos === "PROPN" && byId(r.head)?.upos === "PROPN" && Math.abs(r.id - r.head) <= 2))) out.push({ polarity: "+", tense: "present", asserted: true, OBL: [], rel: "be", ARG0: endOf(rows, a.head, text), ARG1: endOf(rows, a.id, text) });
     const kept = out.filter((p) => p.ARG0 || p.ARG1); kept.framed = framed; return kept;
   }
   const keyEnd = (e) => e && { text: e.text, head: e.head, heads: e.heads ?? [e.head], sup: null, names: e.names, aliases: e.aliases ?? [], keys: e.keys, figs: e.figs, quant: e.quant, agent: keyEnd(e.agent), nmods: (e.nmods ?? []).map(keyEnd) };
-  function claimsOf(text, rows = rowsOf(text)) {
-    const P = propositionsOf(text, rows), bound = bindFigures(rows, LEX);
+  // the page's topic before a sentence: the title, then each earlier sentence's main subject in turn (a sentence whose subject is left to
+  // the page keeps the topic it had)
+  const topicOf = (context) => {
+    if (!context) return null;
+    let title = null, last = null;
+    if (context.title) { const tr = rowsOf(context.title), root = tr.find((r) => r.head === 0) ?? tr[0]; if (root) title = endOf(tr, root.id, context.title); }
+    for (const s of context.previous ?? []) {
+      const ps = propositionsOf(s, rowsOf(s), { title, last }), m = ps.find((p) => p.main && (p.voice === "passive" ? p.ARG1 : p.ARG0));
+      const subj = m && (m.voice === "passive" ? m.ARG1 : m.ARG0); if (subj && (subj.names?.length || subj.keys?.length)) last = subj;
+    }
+    return { title, last };
+  };
+  /** claimsOf(text, rows | { rows, context: { title, previous: [earlier sentences of the page] } }) */
+  function claimsOf(text, opt = null) {
+    const rows = Array.isArray(opt) ? opt : opt?.rows ?? rowsOf(text), ante = Array.isArray(opt) ? null : topicOf(opt?.context);
+    const P = propositionsOf(text, rows, ante), bound = bindFigures(rows, LEX);
     const unread = unreadWords(rows.filter((r) => !P.framed.has(r.id)), P, bound, { isUnit: (f) => !!LEX.unitOf(f), key: (r) => (r.upos === "PROPN" ? low(r) : key(r)) });
-    const props = P.map((p, i) => ({ main: !!p.main, schema: "EOTClaim@1", id: `c${i + 1}`, lang, by: "grammar-ud", rel: p.rel, rels: p.rels ?? [p.rel], ARG0: keyEnd(p.ARG0), ARG1: keyEnd(p.ARG1), ARG2: keyEnd(p.ARG2 ?? null), OBL: (p.OBL || []).map(keyEnd), polarity: p.polarity, tense: p.tense, asserted: p.asserted, asym: !!p.asym }));
+    const props = P.map((p, i) => ({ main: !!p.main, schema: "EOTClaim@1", id: `c${i + 1}`, lang, by: "grammar-ud", rel: p.rel, rels: p.rels ?? [p.rel], alias: !!p.alias, ARG0: keyEnd(p.ARG0), ARG1: keyEnd(p.ARG1), ARG2: keyEnd(p.ARG2 ?? null), OBL: (p.OBL || []).map(keyEnd), polarity: p.polarity, tense: p.tense, asserted: p.asserted, asym: !!p.asym }));
     const figs = bindFigures(rows, LEX).map((f, i) => { const ev = f.eventLemma ? rows.find((r) => lem(r) === f.eventLemma) : null; return { schema: "EOTClaim@1", id: `f${i + 1}`, lang, by: "grammar-ud", rel: "fig", main: false, ARG0: f.beingId ? keyEnd(endOf(rows, f.beingId, text)) : null, ARG1: null, OBL: [], polarity: "+", tense: "present", asserted: true, asym: false,
       fig: { measure: f.measure.startsWith("count:") ? `count:${key(rows.find((r) => lem(r) === f.measure.slice(6)) ?? { lemma: f.measure.slice(6) })}` : f.measure, attribute: f.attribute, event: ev ? (L.have.has(f.eventLemma) ? "have" : key(ev)) : f.eventLemma, base: f.base, hiBase: f.hiBase, alts: f.alts, approx: f.approx } }; });
     return [...props, ...figs].map((c) => ({ ...c, unread }));

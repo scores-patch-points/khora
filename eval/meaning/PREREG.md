@@ -132,3 +132,16 @@ Each fix takes effect on its pair (609, 611, 614, 616, 619, 620, 621, 630, 631, 
 those pairs is also held by another layer — referents (a pronoun or dropped subject, an alias by participle: 609, 611, 620, 653, 658), word
 senses ("s'écouler" → sell, 619; a German compound, 645), a fraction as a figure (621), relations (remonter / extend, 631), parse (657).
 All sets: main 76.7, cf 78.6, held-out 80.0, other 100, fresh 83.3, relations 81.8, fresh-ml 51.6 (FA 0%), filing 96.9 — unchanged.
+
+## Run 12 (2026-10-21): referents from the page, and namings as identity (post hoc on fresh-ml)
+- A source sentence is read with its page (title and the sentences before it, from <set>.sources.json): a third-person pronoun subject takes
+  the nearest earlier sentence's subject ("Elle se jette …", "Er besteht aus …"); in a language that drops subjects (Spanish, Japanese), a
+  subject left out takes the page's own subject, its title ("Se encuentra en los Andes", Japanese sentences carrying their topic). Following
+  the chain of earlier subjects for a dropped subject was tried first and resolved 653 to "Fuji worship"; the title is what such a sentence
+  is about.
+- Naming verbs (declared per language: llamar, denominar, appeler, heißen, 呼ぶ, call, name; conocer, connaître, bezeichnen, know only with
+  their "as" word) and their participles, including those the tagger reads as adjectives (AnCora "denominado", "conocido"), give "be"
+  claims marked alias; an alias substitutes both ways in the source (held-out 214: "also known as the Calvin cycle").
+- A claim's oblique meets a source oblique's sub-ends too ("… d'Europe occidentale et de l'Union européenne").
+fresh-ml (post hoc): 51.6 → 57.8%, false-accept 0%, contradictions 4 of 23 (609, 618, 620, 653 now supported). held-out 80.0 → 83.3% (214).
+main 76.7, cf 78.6, other 100, fresh 83.3, relations 81.8, filing 96.9 unchanged.

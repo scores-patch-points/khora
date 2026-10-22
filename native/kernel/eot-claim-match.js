@@ -85,7 +85,9 @@ export function verdict(C, S, { janus = null, relations = null } = {}) {
   // identity inside the source: "Mercury is the fastest planet, zipping around the Sun" — what the source says of "the fastest planet" it
   // says of Mercury. Each source claim is also read with an end that a copula of the same source equates replaced by its other side.
   const eqs = S.filter((x) => x.rel === "be" && x.ARG0 && x.ARG1 && x.polarity === "+");
-  S = [...S, ...S.flatMap((x) => eqs.flatMap((q) => ["ARG0", "ARG1"].filter((r) => x !== q && x[r] && linked(x[r], q.ARG1)).map((r) => ({ ...x, [r]: q.ARG0 }))))];
+  // an ALIAS (a naming: "also known as", "denominado") is an identity both ways: an end equal to either side is read with the other
+  S = [...S, ...S.flatMap((x) => eqs.flatMap((q) => ["ARG0", "ARG1"].filter((r) => x !== q && x[r] && linked(x[r], q.ARG1)).map((r) => ({ ...x, [r]: q.ARG0 })))),
+    ...S.flatMap((x) => eqs.filter((q) => q.alias).flatMap((q) => ["ARG0", "ARG1"].filter((r) => x !== q && x[r] && linked(x[r], q.ARG0)).map((r) => ({ ...x, [r]: q.ARG1 }))))];
   const per = [];
   // FIGURES (figure-binding.js): a claim's figure against the source's figures of the same measure (and attribute, when both name one) of the
   // same being; dates and counts also need the same event. Same value (within the precision a hedge allows; ranges and bracketed equivalents
@@ -118,7 +120,8 @@ export function verdict(C, S, { janus = null, relations = null } = {}) {
       // a light relation joins its two ends and nothing more, so BOTH ends must be met (an oblique does not stand in for "be"'s second end);
       // and every oblique the claim carries ("mainly in the roots") must meet one of the source's, or the claim says more than the source
       const both = c.ARG0 && c.ARG1 ? linked(c.ARG0, s.ARG0 ?? s.ARG1) && linked(c.ARG1, s.ARG1) : true;
-      const oblMet = (c.OBL || []).filter((o) => !o.figs?.length).every((o) => (s.OBL || []).some((x) => linked(o, x)) || [s.ARG0, s.ARG1].some((x) => linked(o, x)));
+      // a claim's oblique meets a source oblique, an end, or one of their sub-ends ("… d'Europe occidentale et de l'Union européenne")
+      const oblMet = (c.OBL || []).filter((o) => !o.figs?.length).every((o) => [...(s.OBL || []), s.ARG0, s.ARG1].flatMap((x) => endsOf(x)).some((x) => linked(o, x)));
       const sameRel = (relMeet(c, s) && oblMet) || ((LIGHT.has(c.rel) || LIGHT.has(s.rel)) && straight && both && oblMet);
       const measure = c.ARG0 && linked(c.ARG0, s.ARG0) ? measureMeet(c, s) : null;
       const antonym = c.rel === "be" && (s.rel !== "be" ? ANTONYM[c.ARG1?.head] === s.rel : ANTONYM[c.ARG1?.head] === s.ARG1?.head);
