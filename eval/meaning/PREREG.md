@@ -178,3 +178,10 @@ RESULT (first run, the system as committed in c9bf70c7, its output written befor
  relations 59, obliques 52, kinds 40, names 11 — mostly a wrong or fragmentary argument (the referent behind it). Synonyms: no synonym lists
  in the slim build (asked for); Japanese and verbs (situate ~ locate, formar ~ constituir) have no shared key.
  The atomizer is not yet fit to build on. Any fix from here is post hoc on this set; the next measure is a second held-out set.
+Run 13b (post hoc, synonyms only): the v2 English Wiktionary pack (local, unpublished: wiktionary-slim-2026-10-01-v2.pack, sha256 3ca48e8a…,
+per-sense syn / ant / hyper / hypo and per-entry rel lists) read by wikt-slim.js; the synonym judgement reads listed synonyms first, vetoes
+listed antonyms, then shared keys, then — for words of other languages — keys that are themselves English synonyms (listed, or translated
+alike in at least half the pivot languages). S1 79 → 83% (synonyms found 31 → 36 of 50; es 100, en 90, fr 85, de 85, ja 55); S2 4 → 6% (3 of
+50, over the bar: puy ~ montagne and Meer ~ See are listed by Wiktionary, fleuve ~ rivière share the key "river"). A one-step English link
+through 2 of 8 languages let Berg ~ Erhebung through; requiring half the languages refused it. Japanese misses have no shared or synonymous
+key (標高 / 海抜, 呼称 / 名称): the Japanese entries carry no lists.

@@ -1,7 +1,7 @@
 import fs from "node:fs";
 const N = "/private/tmp/claude-501/khora-wt/native";
 const { openSlim } = await import(`${N}/organs/wikt-slim.js`), { makeSynonymy, loadTranslations } = await import(`${N}/organs/wikt-gloss.js`);
-const P = openSlim(process.env.HOME + "/.cache/live_priors/wiktionary/wiktionary-slim-2026-10-01.pack"), T = loadTranslations("/Users/mlacy/Downloads/workspace/data/wiktionary-translations");
+const P = openSlim(process.env.HOME + "/.cache/live_priors/wiktionary/" + (process.env.PACK ?? "wiktionary-slim-2026-10-01.pack")), T = loadTranslations("/Users/mlacy/Downloads/workspace/data/wiktionary-translations");
 const same = makeSynonymy({ lookup: (l, w) => P.entries(l, w), translations: T });
 const G = JSON.parse(fs.readFileSync("/private/tmp/claude-501/khora-wt/eval/meaning/atoms/gold.json", "utf8")).synonyms;
 let right = 0; const byLang = {}, wrong = [], miss = [];

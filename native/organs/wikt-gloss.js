@@ -93,11 +93,23 @@ export function makeSynonymy({ lookup, translations = null, pivots = ["es", "fr"
     for (const e of lookup("en", w) ?? []) if (want.includes(e.pos)) for (const t of e.translations ?? []) if (pivots.includes(t.code)) { const set = out.get(t.code) ?? new Set(); set.add(String(t.word).toLowerCase()); out.set(t.code, set); }
     trOf.set(k, out); return out;
   };
-  return (lang, a, b, upos) => {
+  // the dictionary's own lists come first: a word in the other's synonym list means the same; one in its antonym list never does
+  const listed = (lang, w, upos, kind) => {
+    const want = POS[upos] ?? ["noun", "verb", "adj", "adv"], out = new Set();
+    for (const e of lookup(lang, w) ?? []) if (want.includes(e.pos)) { for (const s of e.senses ?? []) for (const x of s[kind] ?? []) out.add(String(x.word).toLowerCase()); for (const x of e.rel?.[kind] ?? []) out.add(String(x.word).toLowerCase()); }
+    return out;
+  };
+  const judge = (lang, a, b, upos) => {
     if (a === b) return { same: true, why: "same word", weight: 1 };
+    const A = String(a).toLowerCase(), B = String(b).toLowerCase();
+    if (listed(lang, a, upos, "ant").has(B) || listed(lang, b, upos, "ant").has(A)) return { same: false, why: "listed antonyms", weight: 0 };
+    if (listed(lang, a, upos, "syn").has(B) || listed(lang, b, upos, "syn").has(A)) return { same: true, why: "listed synonyms", weight: 0.95 };
     if (lang !== "en") {
       const ka = G.all(lang, a, upos) ?? [], kb = G.all(lang, b, upos) ?? [], shared = ka.filter((x) => kb.includes(x));
-      return shared.length ? { same: true, why: `shared keys: ${shared.slice(0, 3).join(", ")}`, weight: shared.includes(ka[0]) && shared.includes(kb[0]) ? 0.9 : 0.75 } : { same: false, why: "no shared key", weight: 0 };
+      if (shared.length) return { same: true, why: `shared keys: ${shared.slice(0, 3).join(", ")}`, weight: shared.includes(ka[0]) && shared.includes(kb[0]) ? 0.9 : 0.75 };
+      // no shared key: two keys that are English synonyms (listed, or translated alike) — one step further, so weighed lower
+      for (const x of ka.slice(0, 3)) for (const y of kb.slice(0, 3)) { const r = sameEn(x, y, upos); if (r.same && (r.why === "listed synonyms" || r.weight >= 0.5)) return { same: true, why: `keys ${x} ~ ${y}: ${r.why}`, weight: 0.65 * (r.weight || 0.5) }; }
+      return { same: false, why: "no shared key", weight: 0 };
     }
     const ta = transOfEn(a, upos), tb = transOfEn(b, upos);
     const langs = [...ta.keys()].filter((l) => tb.has(l) && [...ta.get(l)].some((x) => tb.get(l).has(x)));
@@ -105,4 +117,6 @@ export function makeSynonymy({ lookup, translations = null, pivots = ["es", "fr"
     return langs.length >= minLanguages ? { same: true, why: `shared translations in ${langs.length} of ${covered} languages (${langs.slice(0, 4).join(", ")})`, weight: covered ? langs.length / covered : 0 }
       : { same: false, why: `shared translations in ${langs.length} of ${covered} languages`, weight: covered ? langs.length / covered : 0 };
   };
+  const sameEn = (x, y, upos) => judge("en", x, y, upos);
+  return judge;
 }

@@ -33,6 +33,10 @@ export function openSlim(dir, { cacheChunks = 16 } = {}) {
   };
   const row = (w) => { const c = chunkFor(w); if (!c) return null; const ls = lines(c); let lo = 0, hi = ls.length - 1; while (lo <= hi) { const m = (lo + hi) >> 1, r = JSON.parse(ls[m]); if (w < r.w) hi = m - 1; else if (w > r.w) lo = m + 1; else return r.e; } return null; };
   const memo = new Map();
+  // the v2 build's word lists (per sense: syn, ant, hyper, hypo; per entry, from a page's sections: rel): a word is a string or [word, qualifier];
+  // a pointer to a Thesaurus page is not a word
+  const words = (xs) => (xs ?? []).map((x) => (Array.isArray(x) ? { word: x[0], q: x[1] ?? null } : { word: x, q: null })).filter((x) => x.word && !/^Thesaurus:/.test(x.word));
+  const rels = (o) => { const r = {}; for (const k of ["syn", "ant", "hyper", "hypo"]) if (o?.[k]?.length) r[k] = words(o[k]); return r; };
   return {
     licence: manifest.licence, snapshot: manifest.snapshot ?? null, entriesTotal: manifest.entriesKept ?? manifest.entries ?? null,
     /** every chunk's rows, in order (for building indexes over the whole snapshot) */
@@ -41,8 +45,8 @@ export function openSlim(dir, { cacheChunks = 16 } = {}) {
     entries(lang, word) {
       const k = `${lang}\t${word}`; if (memo.has(k)) return memo.get(k);
       const es = (row(word) ?? []).filter((e) => e.c === lang && !e.redirect).map((e) => ({ word: e.w, lang_code: e.c, pos: e.p,
-        senses: (e.s ?? []).map((s) => ({ glosses: s.g, form_of: s.of ? [{ word: s.of }] : undefined, tags: s.tags })),
-        translations: (e.t ?? []).map(([code, word]) => ({ code, word })) }));
+        senses: (e.s ?? []).map((s) => ({ glosses: s.g, form_of: s.of ? [{ word: s.of }] : undefined, tags: s.tags, ...rels(s) })),
+        translations: (e.t ?? []).map(([code, word]) => ({ code, word })), rel: e.rel ? rels(e.rel) : null }));
       const out = es.length ? es : null; memo.set(k, out); return out;
     },
   };
