@@ -26,7 +26,22 @@ export function headOfGloss(gloss, pos) {
 // each comma-separated item's first word (after "to", "a", "the") is an English key for the word, the first one its key
 export function translationsOfGloss(gloss, pos) {
   const t = String(gloss ?? "").replace(/\([^)]*\)/g, " ").replace(/\[[^\]]*\]/g, " ").toLowerCase().split(/[;:]/)[0];
-  return [...new Set(t.split(",").map((x) => x.trim().replace(/^to\s+/, "").replace(/^(be\s+)/, "").replace(ARTICLE, "").replace(ARTICLE, "").split(/\s+/)[0]).filter((x) => /^\p{L}[\p{L}'-]*$/u.test(x ?? "")))];
+  // "for a river, airstream, etc. to flow into a larger body": a frame around the verb, read whole before the commas
+  if (pos === "verb" && /^for\b/.test(t.trim())) { const m = /\bto\s+([a-z][a-z'-]*)/.exec(t); if (m) return [m[1]]; }
+  const items = t.split(/,|\s+or\s+/).map((x) => x.trim()).filter(Boolean);
+  const head = (x) => {
+    let w = x.replace(/^(to be|to)\s+/, "").replace(ARTICLE, "").replace(ARTICLE, "").trim();
+    if (pos === "verb") {
+      // "for a river … to flow into a larger body" → flow; "to carefully select" → select
+      const late = /\bto\s+([a-z][a-z'-]*)/.exec(w.split(/\s+/).slice(1).join(" ")); if (/^for\b/.test(w) && late) return late[1];
+      return w.split(/\s+/).find((x) => !/ly$/.test(x) && !/^(be|to|a|an|the)$/.test(x)) ?? null;
+    }
+    // a short item is a noun phrase, its head last ("careful selection"); a long one is a translation with its description run on, the
+    // translation first ("neck part of body connecting the head …")
+    if (pos === "noun") { const ws = w.split(/\s+/); if (ws.length > 3) return ws[0]; w = w.split(/\s+(of|that|which|who|in|for|from|with|used|measured)\s+/)[0]; return w.split(/\s+/).at(-1) ?? null; }
+    return w.split(/\s+/)[0] ?? null;
+  };
+  return [...new Set(items.map(head).filter((x) => /^\p{L}[\p{L}'-]*$/u.test(x ?? "") && !/^(or|and|etc)$/.test(x)))];
 }
 
 // translations(lang, word) → [[english, pos], …]: the English entries whose translation tables list the word (cli/wikt-translations.mjs).
@@ -105,7 +120,15 @@ export function makeSynonymy({ lookup, translations = null, pivots = ["es", "fr"
     if (listed(lang, a, upos, "ant").has(B) || listed(lang, b, upos, "ant").has(A)) return { same: false, why: "listed antonyms", weight: 0 };
     if (listed(lang, a, upos, "syn").has(B) || listed(lang, b, upos, "syn").has(A)) return { same: true, why: "listed synonyms", weight: 0.95 };
     if (lang !== "en") {
-      const ka = G.all(lang, a, upos) ?? [], kb = G.all(lang, b, upos) ?? [], shared = ka.filter((x) => kb.includes(x));
+      // a Japanese する verb is its noun's meaning done (位置する: 位置 "position, location"); the dictionary files the noun
+      const keysOf = (w) => G.all(lang, w, upos) ?? (lang === "ja" && /(する|させる|される)$/.test(w) ? G.all(lang, w.replace(/(する|させる|される)$/, ""), "NOUN") : null) ?? [];
+      const ka = keysOf(a), kb = keysOf(b);
+      // a noun key and a verb key of one derivation meet ("selection" / "select", "recognition" / "recognize")
+      const stem = (x) => x.replace(/(ation|ition|ion|ment|ance|ence|ing|ize|ise|ate|al|e|s)$/, "");
+      const derive = (x, y) => x !== y && x.length >= 5 && y.length >= 5 && stem(x).length >= 5 && stem(x) === stem(y);
+      // a key meets only through the first key of one of the two words: a later sense shared ("étang": pond, lake) is not the same meaning
+      const meets = (x, y) => x === y || derive(x, y);
+      const shared = [...new Set([...ka.slice(0, 1).filter((x) => kb.some((y) => meets(x, y))), ...kb.slice(0, 1).filter((y) => ka.some((x) => meets(x, y)))])];
       if (shared.length) return { same: true, why: `shared keys: ${shared.slice(0, 3).join(", ")}`, weight: shared.includes(ka[0]) && shared.includes(kb[0]) ? 0.9 : 0.75 };
       // no shared key: two keys that are English synonyms (listed, or translated alike) — one step further, so weighed lower
       for (const x of ka.slice(0, 3)) for (const y of kb.slice(0, 3)) { const r = sameEn(x, y, upos); if (r.same && (r.why === "listed synonyms" || r.weight >= 0.5)) return { same: true, why: `keys ${x} ~ ${y}: ${r.why}`, weight: 0.65 * (r.weight || 0.5) }; }

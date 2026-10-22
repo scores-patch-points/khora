@@ -185,3 +185,22 @@ alike in at least half the pivot languages). S1 79 → 83% (synonyms found 31 �
 50, over the bar: puy ~ montagne and Meer ~ See are listed by Wiktionary, fleuve ~ rivière share the key "river"). A one-step English link
 through 2 of 8 languages let Berg ~ Erhebung through; requiring half the languages refused it. Japanese misses have no shared or synonymous
 key (標高 / 海抜, 呼称 / 名称): the Japanese entries carry no lists.
+
+## Run 13c (2026-10-22): fixes from run 13's misses — POST HOC on the run-13 set
+- Coreference (coref.js): pronouns take a named entity or the page (the current clause's earlier subject, else the most recent earlier
+  subject that names a known entity), never a description the text only introduced, nor the phrase a possessive sits in; number agrees;
+  relative pronouns are mentions (the noun their clause modifies, or a copula's subject); definite descriptions prefer the page's entity,
+  then a named entity of that kind (kinds from copulas, from names headed by a common noun, and from dictionary synonyms); negated and
+  "other" descriptions are never antecedents; aliases from appositives, brackets after a singular name, naming verbs (the object when
+  active, the subject when passive or reflexive) and participles; names link to the entity holding all their name words with the fewest
+  others, never across two common-noun heads; possessors are their own mentions; a dropped subject before a copula is reported at it.
+  Run-13 set, name-based (as pre-registered): C1 35.3 → 56.3%, C2 86.1 → 89.1%. Cluster-based (the system entity's defining name against
+  every text the gold groups under its entity, so another name for the same entity is not a miss): C1 65.5 → 81.5%, C2 94.8 → 93.5%.
+- Atoms (atoms.js): no date attributes (the event's oblique states them), no bracketed equivalents, no figure on a pronoun or fragment;
+  adjectives only from the head noun's own modifiers and never on a name; no kind or name atom from a pronoun, wh-word, letter or number.
+  822 → 655 atoms; not re-judged on run 13.
+- Synonyms (wikt-gloss.js): translations read by part of speech (a short noun item's head is last, a long one's translation first; a verb
+  item skips adverbs and "for … to V" frames); a Japanese する verb reads its noun; a noun key and a verb key of one derivation meet; keys
+  meet only through a word's first key. S1 79 → 85%, S2 4 → 8% (puy ~ montagne, Meer ~ See listed by Wiktionary; fleuve ~ rivière and
+  lac ~ étang share "river" / "lake").
+The system is frozen here for run 14.

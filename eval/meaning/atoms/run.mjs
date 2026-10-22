@@ -10,9 +10,10 @@ const { resolvePage } = await import(`${N}/organs/coref.js`), { atomize, realize
 const { openSlim } = await import(`${N}/organs/wikt-slim.js`), { makeGlossary, loadTranslations } = await import(`${N}/organs/wikt-gloss.js`);
 const arg = (k, d) => { const i = process.argv.indexOf(`--${k}`); return i < 0 ? d : process.argv[i + 1]; };
 const out = process.argv[2] ?? "system.json";
-const slim = openSlim(arg("slim", `${process.env.HOME}/.cache/live_priors/wiktionary/wiktionary-slim-2026-10-01.pack`));
+const slim = openSlim(arg("slim", `${process.env.HOME}/.cache/live_priors/wiktionary/${process.env.PACK ?? "wiktionary-slim-2026-10-01-v2.pack"}`));
 const T = loadTranslations(arg("translations", "/Users/mlacy/Downloads/workspace/data/wiktionary-translations"));
 const glossary = makeGlossary((l, w) => slim.entries(l, w), { translations: T });
+const { makeSynonymy } = await import(`${N}/organs/wikt-gloss.js`), synonymy = makeSynonymy({ lookup: (l, w) => slim.entries(l, w), translations: T });
 const S = JSON.parse(fs.readFileSync(path.join(HERE, "sentences.json"), "utf8"));
 const pages = new Map(); for (const s of S) { const k = `${s.lang}\t${s.title}`; if (!pages.has(k)) pages.set(k, []); pages.get(k).push(s); }
 const grammars = {};
@@ -21,7 +22,7 @@ for (const [k, items] of pages) {
   const lang = items[0].lang, last = items.reduce((a, b) => (b.previous.length > a.previous.length ? b : a));
   const all = [...last.previous, last.sentence];
   const g = lang === "en" ? { rowsOf: G.rowsOf, claimsOf: (t, rows) => G.claimsOf(t, rows) } : (grammars[lang] ??= await loadGrammar(lang, { glossary }));
-  const R = resolvePage({ lang, title: items[0].title, sentences: all, rowsOf: g.rowsOf, pack: PACKS[lang] ?? null });
+  const R = resolvePage({ lang, title: items[0].title, sentences: all, rowsOf: g.rowsOf, pack: PACKS[lang] ?? null, same: (a, b) => synonymy(lang, a, b, "NOUN").same });
   const name = (id) => R.entities.find((e) => e.id === id)?.name ?? null;
   for (const it of items) {
     const i = it.previous.length, sr = R.sentences[i];

@@ -42,7 +42,11 @@ export function atomize({ claims, rows, mentions, entities, text }) {
     if (/Degree=Cmp/.test(w.feats ?? "") || ks.some((k) => MORE.has(lc(k.form)))) return defNoun ? "most:" : "more:";
     return "";
   };
-  const adjAtoms = (end, owner, base) => { for (const w of (end?.ids ?? []).map(byId).filter((x) => x && x.upos === "ADJ")) push(degreeOf(w) + lc(w.lemma && w.lemma !== "_" ? w.lemma : w.form), [owner], base, [[w.id], owner?.ids ?? []]); };
+  const word = (w) => { const l = lc(w.lemma && w.lemma !== "_" ? w.lemma : w.form), f = lc(w.form); return l.slice(0, 3) === f.slice(0, 3) || /[^\x00-\x7f]/.test(f) ? l : f; };
+  const adjAtoms = (end, owner, base) => {
+    const head = end?.hid != null ? byId(end.hid) : null; if (!head || head.upos === "PROPN" || !owner) return;
+    for (const w of rows.filter((x) => x.head === head.id && x.upos === "ADJ" && /^(amod|acl)$/.test(x.deprel))) push(degreeOf(w) + word(w), [owner], base, [[w.id], owner?.ids ?? []]);
+  };
   // a modifier phrase is a relation between its owner and it; a coordinated word repeats the relation of the word it is coordinated with
   const modAtoms = (end, owner, base, parent = null) => {
     for (const n of end?.nmods ?? []) {
@@ -58,12 +62,16 @@ export function atomize({ claims, rows, mentions, entities, text }) {
     const base = { neg: c.polarity === "-", hedged: c.asserted === false, from: c.id };
     if (c.rel === "fig") {
       const being = arg(c.ARG0), f = c.fig ?? {};
+      const inBr = (c.ids ?? []).some((id) => { let d = 0; for (const r of rows) { if (r.id >= id) break; if (r.form === "(") d++; else if (r.form === ")") d--; } return d > 0; });
+      if (f.measure === "date" || inBr || !being?.entity || /^(PRON|DET|NUM)$/.test(byId(c.ARG0?.hid)?.upos ?? "")) continue;
       const pred = `has_${f.attribute ?? String(f.measure ?? "value").replace(/^count:/, "number_of_")}`;
       push(pred, [being, { value: textOfIds(c.ids ?? []), ids: c.ids ?? [] }], { ...base, approx: !!f.approx }, [c.ids ?? [], being?.ids ?? []]);
       continue;
     }
     const A0 = arg(c.ARG0) ?? (c.ARG1 && c.voice !== "passive" ? dropped(c.vid) : null) ?? (c.rel === "be" ? dropped(c.vid) : null);
     const A1 = arg(c.ARG1), A2 = arg(c.ARG2), V = c.vid ? [c.vid] : [];
+    const junk = (end) => { const h = end?.hid != null ? byId(end.hid) : null; return !h || /^(PRON|DET|NUM|PUNCT|ADP|SYM)$/.test(h.upos) || h.form.length < 2; };
+    if (c.rel === "be" && (junk(c.ARG0) && !A0?.entity || junk(c.ARG1) || !(c.ARG1?.ids ?? []).map(byId).some((w) => w && /^(NOUN|PROPN|ADJ)$/.test(w.upos)))) continue;
     if (c.rel === "be") {
       const m1 = c.ARG1?.hid != null ? mentionOf(c.ARG1.hid) : null;
       if (c.alias || m1?.how === "name") push("named", [A0, { value: c.ARG1?.text, ids: c.ARG1?.ids ?? [] }], base, [V, A0?.ids ?? [], c.ARG1?.ids ?? []]);
