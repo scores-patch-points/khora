@@ -260,3 +260,34 @@ RESULT (system frozen at 0e20e8f0; output written before the gold; gold by two n
  The round-14b fixes, which raised run 14 post hoc (coreference 79.2 / 95.0 by cluster, synonyms 81% / 6%), did NOT carry to a third
  unseen set: every measure is at or below the run-14 frozen result. Rule-by-rule fixing from seen misses has stopped generalizing; the
  numbers now move with the set more than with the fixes.
+
+## Run 16a (2026-10-22): LEARNED coreference and atom selection, cross-validated over runs 13–15 (no new gold)
+Rule patching stopped. Two learned models, each an averaged perceptron (no frontier model, nothing remote), trained on the 300 gold-labelled
+sentences of runs 13–15 and measured by three-fold cross-validation: train on two sets, test on the third.
+- Coreference (native/organs/coref-learned.js; eval/meaning/atoms/learn-coref.mjs). coref.js still finds the mentions and their cues; a
+  ranker decides what each refers to: for every mention in page order it scores each entity built so far, the page and "new" by the pair's
+  features (kinds, name and head overlap, dictionary synonymy of heads, number, sentence distance, recency rank, subjecthood, entity size).
+  A detector (same learner) adds parse noun phrases and subjectless predicates the rules did not propose. Five shuffles, weights averaged
+  (one shuffle's luck moved C1 ±3 points). The ranker does as well WITHOUT the rules' own choice as a feature (set 15: C1 75.0 vs 76.0%),
+  so the frozen model omits it: the decision is the learned weights'. A dropped subject's "at" is now its whole predicate (aux and copula
+  with the verb), as the labellers write it.
+  Held out, by cluster (frozen rule system on that set when first measured → learned):
+    set 13: C1 65.5 → 84.0%, C2 94.8 → 98.3%
+    set 14: C1 73.6 → 83.2%, C2 92.2 → 96.8%
+    set 15: C1 69.2 → 75.0%, C2 86.1 → 91.3%   (the only fold whose rules were never tuned on it: the cleanest comparison)
+  Remaining misses on set 15: 31 of 86 are mentions never proposed (mostly parse errors: "km" as a subject, a Japanese predicate parsed as a
+  number), most others entity naming (an alias kept apart from its page, "the Company" as a new entity).
+- Atom selection (native/organs/atom-select.js; learn-select.mjs): keep or drop each atom by its shape (kind, argument types, origin,
+  span), trained on the precision judges' verdicts, estimated on the held-out set's own judges. NEGATIVE: precision rises only as recall
+  falls (set 15: keep 90% → A1 58.7 → 62.3, A2 41.3 → 40.2; keep 70% → 65.1 / 34.2); with the keep share chosen inside the training folds
+  the selector keeps everything on sets 13 and 15 and drops 14 of 709 atoms on set 14 (A1 +0.9, A2 −0.4). The judges' "wrong" atoms are wrong
+  in content (wrong entity or relation), which an atom's shape does not show. The frozen system keeps every atom.
+
+## Run 16 (2026-10-22): a FOURTH held-out set — PRE-REGISTERED (written before the labellers saw it)
+Set: eval/meaning/atoms16/sentences.json, 100 sentences from pages no earlier set touched: English Wikipedia 21 (Lake Tahoe, Colorado
+River), AnaptysBio 10-K 20 (Item 1. Business), Spanish 13 (Lago Titicaca, Ebro, Citlaltépetl), French 16 (Loire, Mont Blanc, Lac de
+Serre-Ponçon), German 15 (Bodensee, Zugspitze, Mosel), Japanese 15 (琵琶湖, 御嶽山, 猪苗代湖, 北上川, 槍ヶ岳; 木曽川 too short for a sentence);
+sources with revision ids in sources.json. Same guide, two new independent labellers (A: en, filing, es; B: fr, de, ja), four judge agents.
+System: coreference by the learned ranker trained on all of runs 13–15 (eval/meaning/atoms/coref-ranker.json, config as run 16a), atoms by
+atoms.js over its entities, every atom kept, synonyms unchanged since run 15. Bars as runs 13–15: A1 ≥ 85%, A2 ≥ 70%, C1 ≥ 90%,
+C2 ≥ 95% (cluster measure), S1 ≥ 90%, S2 ≤ 5%. Expected from run 16a (not a bar): C1 75–84%, C2 91–98%; atoms near run 15.

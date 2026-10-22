@@ -107,7 +107,9 @@ export function mentionsOf(rows, { lang = "en", pack = null } = {}) {
     if (v.deprel === "conj" && kids(v.head).some((k) => /^nsubj/.test(k.deprel))) continue; // a conjoined verb shares its head's subject
     if (/relcl/.test(v.deprel) && ks.some((k) => RELATIVE.has(lc(k.form)) && /^nsubj/.test(k.deprel))) continue;
     const cop = ks.filter((k) => /^(cop|aux)$/.test(k.deprel)).sort((a, b) => a.id - b.id);
-    out.push({ ids: [], hid: v.id, how: "dropped", at: cop.length ? cop.map((k) => k.form).join("") : v.form });
+    // at: the whole predicate, its auxiliaries and copula with it, in their order ("está unido", "Es compartido", "日本一である")
+    const pred = [...cop, v].sort((a, b) => a.id - b.id);
+    out.push({ ids: [], hid: v.id, how: "dropped", at: pred.map((k) => k.form).join(lang === "ja" ? "" : " ") });
   }
   return out.map((m) => {
     const ws = m.ids.map(byId).filter(Boolean);
@@ -204,7 +206,9 @@ export function resolvePage({ lang = "en", title = null, sentences = [], rowsOf,
       const subj = rows.find((c) => c.head === r.id && /^nsubj/.test(c.deprel)), sm = subj ? byHid(subj.id) : ms.find((m) => m.how === "dropped" && m.hid === r.id);
       if (sm?.entity) sm.entity.kinds.add(lem(r));
     }
-    out.push({ text, rows, mentions: ms.map((m) => ({ text: textOf(m), start: m.start, end: m.end, ids: m.ids, hid: m.hid, how: m.how === "relative" ? "pronoun" : m.how, at: m.at, entity: m.entity?.id ?? null })) });
+    out.push({ text, rows, mentions: ms.map((m) => ({ text: textOf(m), start: m.start, end: m.end, ids: m.ids, hid: m.hid, how: m.how === "relative" ? "pronoun" : m.how, at: m.at, entity: m.entity?.id ?? null,
+      // what a learned resolver (coref-learned.js) reads beside the rules' choice
+      cues: { names: m.names ?? [], head: m.head ?? null, headNoun: m.headNoun ?? null, plural: !!m.plural, subject: !!m.subject, negated: !!m.negated, poss: !!m.poss, relative: m.how === "relative", alias: m.aliasOf != null } })) });
   });
   return { entities: entities.map((e) => ({ id: e.id, name: e.name, names: e.names, head: e.head, kinds: [...e.kinds] })), sentences: out };
 }
