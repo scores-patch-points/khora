@@ -14,7 +14,7 @@ const slim = openSlim(arg("slim", `${process.env.HOME}/.cache/live_priors/wiktio
 const T = loadTranslations(arg("translations", "/Users/mlacy/Downloads/workspace/data/wiktionary-translations"));
 const glossary = makeGlossary((l, w) => slim.entries(l, w), { translations: T });
 const { makeSynonymy } = await import(`${N}/organs/wikt-gloss.js`), synonymy = makeSynonymy({ lookup: (l, w) => slim.entries(l, w), translations: T });
-const S = JSON.parse(fs.readFileSync(path.join(HERE, "sentences.json"), "utf8"));
+const S = JSON.parse(fs.readFileSync(process.env.SET ?? path.join(HERE, "sentences.json"), "utf8"));
 const pages = new Map(); for (const s of S) { const k = `${s.lang}\t${s.title}`; if (!pages.has(k)) pages.set(k, []); pages.get(k).push(s); }
 const grammars = {};
 const result = { schema: "SystemAtoms@1", built: new Date().toISOString(), sentences: [] };
