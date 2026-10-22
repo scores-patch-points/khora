@@ -143,23 +143,52 @@ export function done({ task, agent, item, now = Date.now(), universe } = {}) {
   return { ok: true };
 }
 
+/** Parsed tails of mark files, keyed by file + mtime + size + limit (an append changes the key). */
+const tailCache = new Map();
+
 /** The merged view of a task: marks by time, open claims, finished items. */
 export function read({ task, now = Date.now(), ttlMs = DEFAULT_TTL, limit = 200, universe } = {}) {
   const u = universe ?? defaultUniverse();
   const dir = universeDir(task, u);
   if (!dir || !fs.existsSync(dir)) return { marks: [], open: [], finished: [], lapsed: [], conflicts: [], universe: u };
-  const readDir = (d, tag) => {
+  const MARK = /^(\S+) · ([\w.-]+) · (fact|claim|done|block) · (?:cell=([A-Z]+·[A-Za-z]+) · )?(.*)$/;
+  const parseLines = (text, owner, tag) => text.split("\n").flatMap((line) => {
+    const m = MARK.exec(line);
+    return m ? [{ t: Date.parse(m[1]), agent: owner, kind: m[3], cell: m[4] ?? null, text: neutralize(m[5]), universe: tag }] : [];
+  });
+  // A view of `limit` marks never needs more than the last `limit` marks of any one file, and the files are append-only:
+  // a mark file can reach 8 MB, and parsing all of it on every read blocked the door's event loop for seconds. `tail`
+  // reads from the end, growing until it holds `limit` marks or the whole file. Conflict detection (a non-world
+  // universe) compares against EVERY world mark, so that path keeps the full read.
+  const readDir = (d, tag, tail = false) => {
     if (!fs.existsSync(d)) return [];
     return fs.readdirSync(d).filter((f) => f.endsWith(".md") && !f.endsWith(".turns.md")).flatMap((f) => {
       const owner = f.slice(0, -3);
       if (!ident(owner)) return [];
-      return fs.readFileSync(path.join(d, f), "utf8").split("\n").flatMap((line) => {
-        const m = /^(\S+) · ([\w.-]+) · (fact|claim|done|block) · (?:cell=([A-Z]+·[A-Za-z]+) · )?(.*)$/.exec(line);
-        return m ? [{ t: Date.parse(m[1]), agent: owner, kind: m[3], cell: m[4] ?? null, text: neutralize(m[5]), universe: tag }] : [];
-      });
+      const file = path.join(d, f);
+      if (!tail) return parseLines(fs.readFileSync(file, "utf8"), owner, tag);
+      const st = fs.statSync(file);
+      const key = `${file}\u0000${st.mtimeMs}\u0000${st.size}\u0000${limit}`;
+      const hit = tailCache.get(key);
+      if (hit) return hit.map((x) => ({ ...x, universe: tag }));
+      let want = 256 * 1024, marks = [];
+      for (;;) {
+        const n = Math.min(want, st.size), fd = fs.openSync(file, "r");
+        const buf = Buffer.alloc(n);
+        try { fs.readSync(fd, buf, 0, n, st.size - n); } finally { fs.closeSync(fd); }
+        let text = buf.toString("utf8");
+        if (n < st.size) text = text.slice(text.indexOf("\n") + 1); // the first line is cut mid-way: drop it
+        marks = parseLines(text, owner, tag);
+        if (marks.length >= limit || n >= st.size) break;
+        want *= 4;
+      }
+      marks = marks.slice(-limit);
+      if (tailCache.size > 512) tailCache.clear();
+      tailCache.set(key, marks);
+      return marks;
     });
   };
-  let marks = readDir(dir, u);
+  let marks = readDir(dir, u, u === "world");
   const conflicts = [];
   if (u !== "world") {
     const worldDir = taskDir(task);
