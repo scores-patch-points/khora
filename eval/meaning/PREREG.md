@@ -380,3 +380,17 @@ System: run 17's (coreference coref-ranker.json and producer atom-producer.json,
 Bars as before: A1 ≥ 85%, A2 ≥ 70%, C1 ≥ 90%, C2 ≥ 95% (cluster measure), S1 ≥ 90%, S2 ≤ 5%. Also measured, as run 17: the judged
 precision of atoms.js's and of the produced atoms apart, and the recall found only through produced atoms.
 Expected (not a bar): produced atoms judged stated 55–65% (run 17: 41%); A1 near 75%; A2 a few points under run 17's.
+RESULT (system frozen at 5dc5aa31; output written before the gold (93a78129); gold by two new independent labellers — 271 entities,
+448 mentions, 580 atoms, 100 pairs; atoms judged by four judge agents, not told which atoms were produced; judge 1's first run had a file
+read declined and judged nothing, and was relaunched with the same brief):
+ A1 atom precision 68.8% (671 of 976)   FAIL   — es 79, fr 74, ja 71, de 70, en 69, filing 60   (run 17: 65.2%)
+      atoms.js's atoms 71.6% (562 of 785; run 17: 80.8%); the produced atoms 57.1% (109 of 191; run 17: 41.3%)
+ A2 atom recall    50.2% (291 of 580)   FAIL   — fr 60, filing 54, en 53, ja 45, de 45, es 40   (run 17: 59.3%)
+      through an atoms.js atom 42.8% (run 17: 47.9%); only through a produced atom 7.4% (run 17: 11.5%)
+ C1 by cluster 74.8% (95 of 127)   FAIL   (run 16: 74.1%, run 17: 81.9%)
+ C2 by cluster 96.5% (245 of 254)  PASS   (with the `name` clarification it covers 254 mentions again; run 16: 95.4%)
+ S1 81% (33/50 synonyms found)   FAIL;   S2 4% (2 of 50)   PASS   — synonyms unchanged since run 15
+ The chooser and filter did what was pre-registered for the produced atoms: judged stated 41.3 → 57.1% (expected 55–65), and they keep
+ 7.4 points of recall (run 17 page-out estimate: 7.9). The whole-set numbers moved with the set more than with the change: atoms.js,
+ untouched, fell from 80.8 to 71.6% precision and from 47.9 to 42.8% recall on this set. Five sets in, atom recall sits at 42–60% and
+ precision at 65–74% across sets, far from the 70 / 85 bars; the next measure is the one the atoms are for (run 19: the verdict).
