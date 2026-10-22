@@ -59,7 +59,7 @@ export const PINNED_STEMS = PIN ? [...PIN].sort() : null;
  *  missing home is no stems. `dir` and `pin` are injectable for the tests. */
 export function availableStems({ dir = PRIORS_DIR, pin = PIN } = {}) {
   try {
-    const all = fs.readdirSync(dir).filter((f) => /^pos-[a-z-]+\.json$/.test(f) && !/unimorph|^pos-prior-|^pos-en\.json$/.test(f)).map((f) => f.slice(4, -5)).sort();
+    const all = fs.readdirSync(dir).filter((f) => /^pos-[a-z-]+\.json$/.test(f) && !/unimorph|^pos-prior-|^pos-en\.json$|-lexicon\.json$/.test(f)).map((f) => f.slice(4, -5)).sort();
     return pin ? all.filter((s) => pin.has(s)) : all;
   } catch { return []; }
 }

@@ -58,10 +58,10 @@ const cached = (f) => { if (!cache.has(f)) cache.set(f, read(f)); return cache.g
 
 /** The prior stems present on disk. A missing home is no stems (every language
  *  then a typed gap), never a throw. Non-language priors (unimorph-derived,
- *  `pos-prior-*` backoffs, the legacy `pos-en`) are not language stems. */
+ *  `pos-prior-*` backoffs, the legacy `pos-en`, a word-class list like `pos-eng-lexicon`) are not language stems. */
 export const availableStems = () => {
   try {
-    return fs.readdirSync(PRIORS_DIR).filter((f) => /^pos-[a-z-]+\.json$/.test(f) && !/unimorph|^pos-prior-|^pos-en\.json$/.test(f)).map((f) => f.slice(4, -5)).sort();
+    return fs.readdirSync(PRIORS_DIR).filter((f) => /^pos-[a-z-]+\.json$/.test(f) && !/unimorph|^pos-prior-|^pos-en\.json$|-lexicon\.json$/.test(f)).map((f) => f.slice(4, -5)).sort();
   } catch { return []; }
 };
 

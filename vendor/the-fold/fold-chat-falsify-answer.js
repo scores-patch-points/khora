@@ -187,12 +187,18 @@ function longestRun(claim, sent) {
   return { n: best, text: best ? bRaw.slice(end - best, end).join(" ") : "" };
 }
 
+/** A figure that is a BOUND, not a value ("higher than 15,000 feet", "over 100 m", "at least 3"): it says where a value lies, so it is no rival to the claim's own figure. */
+function isBound(sent, fig) {
+  if (typeof fig?.start !== "number") return false;
+  const before = String(sent).slice(Math.max(0, fig.start - 16), fig.start).toLowerCase().trimEnd();
+  return /(?:than|over|above|under|below|beyond|exceeding|least|most)$/.test(before);
+}
 function figuresAgree(claimFigs, sent) {
   const sf = figuresIn(sent);
   const missing = claimFigs.filter((c) => !sf.some((w) => figureMatches(c, w)));
   // a DIFFERENT figure of the same kind where the claim's is absent: same unit dimension, or both bare years
   const year = (f) => f.numeric && !f.unit && /^\d{4}$/.test(f.norm) && f.v >= 1000 && f.v <= 2200;
-  const clash = missing.map((c) => ({ c, w: sf.find((w) => w.numeric && c.numeric && w.norm !== c.norm && ((c.unit && w.unit && c.unit.dim === w.unit.dim) || (year(c) && year(w)) || (!c.unit && !w.unit && c.norm.endsWith("%") === w.norm.endsWith("%") && c.norm.endsWith("%")))) })).filter((x) => x.w);
+  const clash = missing.map((c) => ({ c, w: sf.find((w) => !isBound(sent, w) && w.numeric && c.numeric && w.norm !== c.norm && ((c.unit && w.unit && c.unit.dim === w.unit.dim) || (year(c) && year(w)) || (!c.unit && !w.unit && c.norm.endsWith("%") === w.norm.endsWith("%") && c.norm.endsWith("%")))) })).filter((x) => x.w);
   return { missing, clash };
 }
 /** nearest non-be verb stem to a char offset, staying inside the figure's own clause (F2 S1 c14:
@@ -320,6 +326,7 @@ function firstSharedVerb(claim, sent, cnames) {
     if (w.length < 3 || inNames(w)) continue;
     const v = groundStem(w);
     if (!v || BE_VERB.has(v) || STATIVE.has(v)) continue;
+    if (i > 0 && v === groundStem((claimWords[0] || "").toLowerCase())) continue;   // the subject noun again ("Dolphins vary… Māui’s dolphins"): a plural -s is not a verb
     // verb-shaped per isVerbish (irregulars, suffixes, light verbs — never bare-e strips like
     // "people"→"peopl"). Plain nouns ("battle") rarely qualify; when they do, the
     // both-roles-must-mismatch gate below still protects true statements.
@@ -334,6 +341,17 @@ export function roleConfusion(claim, sent, cnames) {
   if (neg(claim) || neg(sent)) return null;
   const verb = firstSharedVerb(claim, sent, cnames);
   if (!verb) return null;
+  // A PASSIVE or NAMING use has no agent and patient to reverse: "was born", "is known as", "was named". rolesOf reads every verb as active, so
+  // "Ada was born in 1815 to Byron" against "Byron's daughter Ada, born in 1815" looked like a swap.
+  // either side: "the light reaction converts energy" against "energy … which is converted into chemical energy" is one event told actively and passively
+  const noRoles = (text) => {
+    const toks = rawWords(text).map((w) => w.toLowerCase());
+    const at = toks.findIndex((w) => groundStem(w) === verb);
+    // a participle opening an appositive ("Ada, born in 1815 in London, was the daughter…") modifies a name, it does not act on one
+    const appositive = at >= 0 && String(text).toLowerCase().includes(", " + toks[at] + " ");
+    return appositive || (at > 0 && (BE_VERB.has(groundStem(toks[at - 1])) || toks[at + 1] === "as"));
+  };
+  if (noRoles(claim) || noRoles(sent)) return null;
   const sharedName = (cnames || []).some((n) => { const nw = words(n).filter((w) => w.length > 1 && !FW.has(w)); const head = nw[nw.length - 1]; return head && (fold(sent).includes(head) || nw.every((w) => fold(sent).includes(w))); });
   if (!sharedName) return null;
   const cr = rolesOf(claim, verb), sr = rolesOf(sent, verb);
@@ -397,6 +415,43 @@ function headIsSame(name, nw, head, around) {
     return nw.some((w) => w === fold(before));                                        // behind one of the claim's own name words
   });
 }
+const SUBJECT_REACH = 3;   // tokens: the name of a claim's subject sits within the first few words
+/** "converts chemical energy into solar energy" against "converts solar energy into chemical energy": the same two phrases around "into", in the other order. Role
+ *  windows compare bags of words and cannot see direction; this reads the order of the two phrases the connector joins (two content words each side). */
+function directionSwapped(claim, sent) {
+  const sides = (text) => {
+    const ws = [...String(text).toLowerCase().matchAll(/[\p{L}\p{N}]+/gu)].map((m) => m[0]);
+    const at = ws.indexOf("into");
+    if (at < 1 || at > ws.length - 2) return null;
+    const stems = (list) => list.filter((w) => w.length > 2 && !FW.has(w)).map((w) => groundStem(w));
+    return { left: stems(ws.slice(Math.max(0, at - 3), at)).slice(-2), right: stems(ws.slice(at + 1, at + 4)).slice(0, 2) };
+  };
+  const c = sides(claim), w = sides(sent);
+  if (!c || !w || !c.left.length || !c.right.length) return false;
+  const same = (x, y) => x.length === y.length && x.every((k) => y.includes(k));
+  return same(c.left, w.right) && same(c.right, w.left) && !same(c.left, c.right);
+}
+/** Two figures that the sentence pairs with the OTHER names: "Māui’s dolphins reach 8 m and orcas 1.7 m" against "Māui’s dolphins ( 1.7 m ) to large Orcas ( 8 m )". Each figure is tied to the nearest word
+ *  both texts share; when two or more figures sit beside a different shared word in the sentence than in the claim, the claim has swapped them. Needs two figures the sentence also holds. */
+function figuresSwapped(claim, sent, cfigs) {
+  if ((cfigs || []).length < 2) return false;
+  const sfigs = figuresIn(sent);
+  const pairs = cfigs.map((c) => ({ c, w: sfigs.find((w) => figureMatches(c, w)) }));
+  if (pairs.some((x) => !x.w) || new Set(pairs.map((x) => x.c.norm)).size < 2) return false;
+  const shared = new Set(contentStems(claim).filter((k) => contentStems(sent).includes(k)));
+  const toks = (text) => [...String(text).matchAll(/[\p{L}\p{N}]+/gu)].map((m) => ({ at: m.index, stem: /^\p{N}+$/u.test(m[0]) ? null : groundStem(fold(m[0])) }));
+  const anchorOf = (text, figStart) => {
+    const ts = toks(text);
+    const fi = ts.findIndex((t) => t.at >= figStart);
+    if (fi < 0) return null;
+    let best = null, bd = Infinity;
+    ts.forEach((t, i) => { if (!t.stem || !shared.has(t.stem)) return; const d = Math.abs(i - fi) + (i > fi ? 0.5 : 0); if (d < bd) { bd = d; best = t.stem; } });
+    return best;
+  };
+  const moved = pairs.filter((x) => { const a = anchorOf(claim, x.c.start), b = anchorOf(sent, x.w.start); return a && b && a !== b; });
+  const anchors = new Set(pairs.map((x) => anchorOf(claim, x.c.start)).filter(Boolean));
+  return moved.length >= 2 && anchors.size >= 2;
+}
 function judge(claim, cs, cfigs, cnames, sent, around, joined = false) {
   const ss = new Set(contentStems(sent));
   const shared = cs.filter((k) => ss.has(k));
@@ -413,7 +468,8 @@ function judge(claim, cs, cfigs, cnames, sent, around, joined = false) {
   if (cnames.length) {
     const subj = words(cnames[0]).filter((w) => w.length > 1 && !FW.has(w));
     const head = subj[subj.length - 1];
-    if (head && run.text) { const stoks = words(sent); const hi = stoks.indexOf(head), ri = stoks.indexOf(fold(run.text).split(" ")[0]); if (hi >= 0 && ri >= 0 && hi > ri + 2) subjectMissing = true; }
+    const openIdx = words(claim).indexOf(subj[0]);   // a SUBJECT name opens the claim ("The Eiffel Tower", "In 1903 Marie Curie"); one further in is an object
+    if (head && run.text && openIdx >= 0 && openIdx <= SUBJECT_REACH) { const stoks = words(sent); const hi = stoks.indexOf(head), ri = stoks.indexOf(fold(run.text).split(" ")[0]); if (hi >= 0 && ri >= 0 && hi > ri + 2) subjectMissing = true; }
     // VETO, never a trigger: a sentence-initial capital the name-list dropped ("Mars has two small moons…",
     // where namesIn skips the opener) standing at the match's start clears a false miss. It cannot create
     // one — the Trump-won guard above still fires on its own terms.
@@ -435,7 +491,10 @@ function judge(claim, cs, cfigs, cnames, sent, around, joined = false) {
   const scopedNeg = neg(sent) && !neg(claim) && figuresIn(sent).some((f) => f.numeric && !f.unit && /^\d{4}$/.test(f.norm) && f.v >= 1000 && f.v <= 2200) && !cfigs.some((f) => /^\d{4}$/.test(f.norm));
   const polarity = clash.length || joined || scopedNeg ? true : !flipsPolarity(claim, sent, cs, [...ss], around, cHead);
   const about = overlap >= FALSIFY.ABOUT_OVERLAP && shared.length >= 1;
-  const close = run.n >= FALSIFY.RUN || (overlap >= FALSIFY.STATE_OVERLAP && shared.length >= Math.min(FALSIFY.STATE_MIN_SHARED, cs.length));
+  // A claim of two or three content words is "stated" by overlap only when its words come in the claim's order and close together (within three content words): "Dolphins are fish." is not
+  // stated by "Unlike fish, dolphins breathe air" or "Many fish are prey of dolphins", which hold both words and say another thing.
+  const ordered = cs.length > 3 || !joined && (() => { const ssArr = contentStems(sent); let from = 0, prev = -1; for (const k of cs) { const i = ssArr.indexOf(k, from); if (i < 0 || (prev >= 0 && i - prev > 3)) return false; prev = i; from = i + 1; } return true; })();
+  const close = run.n >= FALSIFY.RUN || (overlap >= FALSIFY.STATE_OVERLAP && shared.length >= Math.min(FALSIFY.STATE_MIN_SHARED, cs.length) && ordered);
   const role = about && !joined ? roleConfusion(claim, sent, cnames) : null;
   if (TRACE()) console.error("DBG q=" + JSON.stringify(claim.slice(0,40)) + " s=" + JSON.stringify(sent.slice(0,50)) + " about=" + about + " pol=" + polarity + " ov=" + overlap.toFixed(2) + " sh=" + shared.length + " role=" + JSON.stringify(role) + " clashN=" + clash.length);
   // a figure-clash counts only on its own event: the figure's nearest verb is the pair's shared verb.
@@ -446,11 +505,21 @@ function judge(claim, cs, cfigs, cnames, sent, around, joined = false) {
   // figure in it trivially "clashes" with the claim's (F2 S1 c04/c14 truthful). Single sentences only.
   // ... and only between sentences of the SAME polarity: "did not win … in 1900" gives no rival year for "won … in 1903" (it says no
   // event happened then), so a figure read from a negated sentence is not a clash for an affirmed claim, nor the reverse.
-  const clashHere = !joined && neg(claim) === neg(sent) ? clash.filter((x) => pairVerb && nearestVerb(claim, x.c.start) === pairVerb) : [];
+  // A rival figure counts only from a sentence about the claim's own subject: "reaching 6,793 m" of ANOTHER peak shares the verb and the range, and is no
+  // rival to Aconcagua's 6,961 m. The subject is the claim's first name; a claim that names nothing keeps the old rule.
+  const aboutSubject = !cnames.length || (() => {
+    // the name list drops a sentence opener ("Aconcagua is…"): the opening capital word is the subject when it is no function word
+    const opener = fold((String(claim).trim().match(/^[\p{Lu}][\p{L}'-]+/u) || [""])[0]);
+    const sw = opener.length > 2 && !FW.has(opener) ? [opener] : words(cnames[0]).filter((w) => w.length > 1 && !FW.has(w));
+    return !sw.length || sw.some((w) => fold(sent).includes(w));
+  })();
+  const clashHere = !joined && aboutSubject && neg(claim) === neg(sent) ? clash.filter((x) => pairVerb && nearestVerb(claim, x.c.start) === pairVerb) : [];
   if (TRACE() && clash.length) console.error("DBGCL3 pv=" + pairVerb + " nv=" + JSON.stringify(clash.map((x) => [x.c.raw, nearestVerb(claim, x.c.start)])) + " joined=" + joined);
   let verdict = "silent", why = "", kind = null;
   if (TRACE() && about) console.error("DBG role=" + JSON.stringify(role) + " clashN=" + clash.length + " clashHere=" + clashHere.length);
   if (about && !polarity) { verdict = "contradicts"; kind = "polarity"; why = "same subject, opposite polarity"; }
+  else if (about && !joined && directionSwapped(claim, sent)) { verdict = "contradicts"; kind = "direction"; why = "runs the other way (into)"; }
+  else if (about && !joined && figuresSwapped(claim, sent, cfigs)) { verdict = "contradicts"; kind = "pairing"; why = "gives the figures to the other names"; }
   else if (role && role.confused) { verdict = "contradicts"; kind = "role"; why = role.why; }
   else if (about && clashHere.length) { verdict = "contradicts"; kind = "figure"; why = `gives ${clashHere[0].w.raw} where the claim says ${clashHere[0].c.raw}`; }
   else if (close && !missing.length && !namesMissing.length && !subjectMissing) { verdict = "states"; why = run.n >= FALSIFY.RUN ? `shares the run \u201c${run.text}\u201d` : `${shared.length} of ${cs.length} content words`; }
@@ -521,7 +590,7 @@ function swapTest(claim, cfigs, cnames, src, witness) {
   // a rival NAME is a name of the same shape: a person for a person (two or more capitalised words), a single word for a
   // single word; never a lone capitalised word that follows an article or sits inside another name ("a Polish physicist",
   // "the Guinness World Records"): an adjective or a fragment is not someone the claim could have been about.
-  const capSeq = /(?<![\p{L}])\p{Lu}[\p{L}'’-]+(?:\s+\p{Lu}[\p{L}'’-]+)*/gu;
+  const capSeq = /(?<![\p{L}])\p{Lu}[\p{L}\p{N}'’-]+(?:\s+\p{Lu}[\p{L}\p{N}'’-]+)*/gu;   // digits stay in a name: "CO2" is not the rival "CO"
   const inClaim = new Set(words(claim));
   for (const n of cnames) {
     const multi = /\s/.test(n.trim());
@@ -558,10 +627,32 @@ export function clausesOf(s) {
 }
 
 /** Falsify an answer. `sentences`: the answer's sentences (strings). `passages`: everything read ({ text | before/mark/after, url, ref }). */
+/** A closing SOURCE TAG is provenance, not a claim: "(MarineBio, “Dolphin Biology”).", "([MarineBio](https://…))." — a trailing parenthetical that holds a link, a URL or a quoted title.
+ *  A figure or a unit in parentheses ("(22,838 ft)") is kept: only a group with a link or quotes is a tag. Returns the sentence without it. */
+export function withoutSourceTag(text) {
+  const t = String(text ?? "").trim();
+  let end = t.length;
+  while (end > 0 && ".!?;:\"”’' ".includes(t[end - 1]) && t[end - 1] !== ")") end--;
+  if (t[end - 1] !== ")") return t;
+  let depth = 0, open = -1;
+  for (let i = end - 1; i >= 0; i--) { if (t[i] === ")") depth++; else if (t[i] === "(") { depth--; if (depth === 0) { open = i; break; } } }
+  if (open <= 0) return t;
+  const group = t.slice(open, end);
+  const isTag = group.includes("](") || group.includes("http") || group.includes("“") || group.includes("\"") || group.includes("«");
+  if (!isTag) return t;
+  const body = t.slice(0, open).trimEnd();
+  return /[.!?]$/.test(body) || !/[.!?]$/.test(t) ? body : body + t.slice(-1);
+}
+/** One spelling for what pages spell many ways: compatibility forms ("CO₂", ligatures, full-width) and HTML sub/superscript tags ("CO<sub>2</sub>"), so "CO2" is one name. */
+export function normalizeForms(text) {
+  const t = String(text ?? "").normalize("NFKC");
+  return t.includes("<su") ? t.replace(/<\/?su[bp]>/gi, "") : t;
+}
 export function falsifyAnswer(sentences, passages) {
-  const sources = sourcesOf(passages);
+  const sources = sourcesOf((passages || []).map((p) => (p && typeof p === "object" && typeof p.text === "string" ? { ...p, text: normalizeForms(p.text) } : p)));
   const claims = (sentences || []).map((raw, i) => {
-    const s = String(raw ?? "").trim();
+    const shown = String(raw ?? "").trim();
+    const s = withoutSourceTag(normalizeForms(shown));
     const cs = contentStems(s), cfigs = figuresIn(s), cnames = namesOf(s);
     const per = sources.map((src) => {
       const b = bestIn(src, s, cs, cfigs, cnames);
@@ -579,8 +670,12 @@ export function falsifyAnswer(sentences, passages) {
     const states = per.filter((w) => w.verdict === "states");
     const chains = [];
     for (const w of states) { const c = chains.find((ch) => longestRun(ch[0].sentence, w.sentence).n >= FALSIFY.SYNDICATED_RUN); if (c) { c.push(w); w.sameChainAs = c[0].src; } else chains.push([w]); }
-    const contra = per.filter((w) => w.verdict === "contradicts");
-    const contraBuried = per.filter((w) => w.verdict !== "contradicts" && w.contraAlt);
+    // A ROLE reading ("reverses who did what to whom") is the weakest signal here, a parse of word order: when another source states the claim
+    // (a shared run, every clause, or word for word) it does not make the claim contested. Figure and polarity contradictions still do.
+    const contra = per.filter((w) => w.verdict === "contradicts" && !(w.kind === "role" && states.length));
+    // a contradiction READ INTO another sentence of a source that never states this claim is not weighed against a source that states it word for word
+    const stated = states.some((w) => words(w.sentence).join(" ").includes(words(s).join(" ")));
+    const contraBuried = stated ? [] : per.filter((w) => w.verdict !== "contradicts" && w.contraAlt && !(w.contraAlt.kind === "role" && states.length));
     const lead = states[0] ? sources.find((x) => x.key === states[0].src) : null;
     const swap = lead && !states[0].clauseSupport ? swapTest(s, cfigs, cnames, lead, states[0]) : { armed: false };
     let verdict;
@@ -591,7 +686,7 @@ export function falsifyAnswer(sentences, passages) {
     else if (chains.length === 1) verdict = "held";
     else if (per.some((w) => w.verdict === "near")) verdict = "weak";
     else verdict = "unsupported";
-    return { i, s, figures: cfigs.map((f) => f.raw), names: cnames, witnesses: per, chains: chains.length, contradictions: contra.length, swap, verdict };
+    return { i, s: shown, figures: cfigs.map((f) => f.raw), names: cnames, witnesses: per, chains: chains.length, contradictions: contra.length, swap, verdict };
   });
   const count = (v) => claims.filter((c) => c.verdict === v).length;
   const scored = claims.filter((c) => c.verdict !== "n/a");

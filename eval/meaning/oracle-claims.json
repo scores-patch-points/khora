@@ -1,0 +1,8830 @@
+{
+ "Baleen whales tend to be larger than toothed whales.": [
+  {
+   "rel": "large",
+   "ARG0": {
+    "text": "Baleen whales",
+    "head": "whale",
+    "names": [],
+    "keys": [
+     "baleen",
+     "whale"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "toothed whales",
+    "head": "whale",
+    "names": [],
+    "keys": [
+     "tooth",
+     "whale"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": true,
+   "span": [
+    0,
+    51
+   ]
+  }
+ ],
+ "In the wild, toothed whales (such as the Orca) tend to be smaller than baleen whales (such as the Blue whale).": [
+  {
+   "rel": "small",
+   "ARG0": {
+    "text": "toothed whales",
+    "head": "whale",
+    "names": [],
+    "keys": [
+     "tooth",
+     "whale"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "baleen whales",
+    "head": "whale",
+    "names": [],
+    "keys": [
+     "baleen",
+     "whale"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "In the wild",
+     "head": "wild",
+     "names": [],
+     "keys": [
+      "wild"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": true,
+   "span": [
+    13,
+    109
+   ]
+  },
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "the Orca",
+    "head": "orca",
+    "names": [],
+    "keys": [
+     "orca"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "toothed whales",
+    "head": "whale",
+    "names": [],
+    "keys": [
+     "tooth",
+     "whale"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    13,
+    46
+   ]
+  },
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "the Blue whale",
+    "head": "whale",
+    "names": [],
+    "keys": [
+     "blue",
+     "whale"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "baleen whales",
+    "head": "whale",
+    "names": [],
+    "keys": [
+     "baleen",
+     "whale"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    71,
+    109
+   ]
+  }
+ ],
+ "Toothed whales tend to be larger than baleen whales.": [
+  {
+   "rel": "large",
+   "ARG0": {
+    "text": "Toothed whales",
+    "head": "whale",
+    "names": [],
+    "keys": [
+     "tooth",
+     "whale"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "baleen whales",
+    "head": "whale",
+    "names": [],
+    "keys": [
+     "baleen",
+     "whale"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": true,
+   "span": [
+    0,
+    51
+   ]
+  }
+ ],
+ "Some dolphin species live in freshwater rivers.": [
+  {
+   "rel": "live",
+   "ARG0": {
+    "text": "Some dolphin species",
+    "head": "species",
+    "names": [],
+    "keys": [
+     "dolphin",
+     "species"
+    ],
+    "figs": [],
+    "quant": "some",
+    "agent": null
+   },
+   "ARG1": null,
+   "OBL": [
+    {
+     "text": "in freshwater rivers",
+     "head": "river",
+     "names": [],
+     "keys": [
+      "freshwater",
+      "river"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    46
+   ]
+  }
+ ],
+ "Not all dolphins live in the sea - a few remarkable species are found in freshwater rivers.": [
+  {
+   "rel": "live",
+   "ARG0": {
+    "text": "all dolphins",
+    "head": "dolphin",
+    "names": [],
+    "keys": [
+     "dolphin"
+    ],
+    "figs": [],
+    "quant": "all",
+    "agent": null
+   },
+   "ARG1": null,
+   "OBL": [
+    {
+     "text": "in the sea",
+     "head": "sea",
+     "names": [],
+     "keys": [
+      "sea"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "-",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    32
+   ]
+  },
+  {
+   "rel": "find",
+   "ARG0": null,
+   "ARG1": {
+    "text": "a few remarkable species",
+    "head": "species",
+    "names": [],
+    "keys": [
+     "remarkable",
+     "species"
+    ],
+    "figs": [],
+    "quant": "few",
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "in freshwater rivers",
+     "head": "river",
+     "names": [],
+     "keys": [
+      "freshwater",
+      "river"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    35,
+    90
+   ]
+  }
+ ],
+ "All dolphins live in the sea.": [
+  {
+   "rel": "live",
+   "ARG0": {
+    "text": "All dolphins",
+    "head": "dolphin",
+    "names": [],
+    "keys": [
+     "dolphin"
+    ],
+    "figs": [],
+    "quant": "all",
+    "agent": null
+   },
+   "ARG1": null,
+   "OBL": [
+    {
+     "text": "in the sea",
+     "head": "sea",
+     "names": [],
+     "keys": [
+      "sea"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    28
+   ]
+  }
+ ],
+ "The smallest female jaguars in Central America weigh 36 kg.": [
+  {
+   "rel": "weigh",
+   "ARG0": {
+    "text": "The smallest female jaguars in Central America",
+    "head": "jaguar",
+    "names": [
+     "central",
+     "america"
+    ],
+    "keys": [
+     "small",
+     "female",
+     "jaguar"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "36 kg",
+    "head": "kilogram",
+    "names": [],
+    "keys": [
+     "kilogram"
+    ],
+    "figs": [
+     {
+      "measure": "mass",
+      "base": 36,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    58
+   ]
+  }
+ ],
+ "Meanwhile, the smallest female jaguars in Central America weigh just 36 kg (79 lbs).": [
+  {
+   "rel": "weigh",
+   "ARG0": {
+    "text": "the smallest female jaguars in Central America",
+    "head": "jaguar",
+    "names": [
+     "central",
+     "america"
+    ],
+    "keys": [
+     "small",
+     "female",
+     "jaguar"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "just 36 kg (79 lbs)",
+    "head": "kilogram",
+    "names": [],
+    "keys": [
+     "kilogram",
+     "pound"
+    ],
+    "figs": [
+     {
+      "measure": "mass",
+      "base": 36,
+      "approx": false
+     },
+     {
+      "measure": "mass",
+      "base": 35.834,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "Meanwhile",
+     "head": "meanwhile",
+     "names": [],
+     "keys": [
+      "meanwhile"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    83
+   ]
+  }
+ ],
+ "The smallest female jaguars in Central America weigh 60 kg.": [
+  {
+   "rel": "weigh",
+   "ARG0": {
+    "text": "The smallest female jaguars in Central America",
+    "head": "jaguar",
+    "names": [
+     "central",
+     "america"
+    ],
+    "keys": [
+     "small",
+     "female",
+     "jaguar"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "60 kg",
+    "head": "kilogram",
+    "names": [],
+    "keys": [
+     "kilogram"
+    ],
+    "figs": [
+     {
+      "measure": "mass",
+      "base": 60,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    58
+   ]
+  }
+ ],
+ "The smallest female jaguars in Central America weigh about 79 pounds.": [
+  {
+   "rel": "weigh",
+   "ARG0": {
+    "text": "The smallest female jaguars in Central America",
+    "head": "jaguar",
+    "names": [
+     "central",
+     "america"
+    ],
+    "keys": [
+     "small",
+     "female",
+     "jaguar"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "about 79 pounds",
+    "head": "pound",
+    "names": [],
+    "keys": [
+     "pound"
+    ],
+    "figs": [
+     {
+      "measure": "mass",
+      "base": 35.834,
+      "approx": true
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    68
+   ]
+  }
+ ],
+ "The jaguar is native to the Americas.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "The jaguar",
+    "head": "jaguar",
+    "names": [],
+    "keys": [
+     "jaguar"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "native to the Americas",
+    "head": "native",
+    "names": [
+     "americas"
+    ],
+    "keys": [
+     "native"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    36
+   ]
+  }
+ ],
+ "The jaguar is a large cat species and the only living member of the genus Panthera that is native to the Americas.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "The jaguar",
+    "head": "jaguar",
+    "names": [],
+    "keys": [
+     "jaguar"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "a large cat species",
+    "head": "species",
+    "names": [],
+    "keys": [
+     "large",
+     "cat",
+     "species"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    33
+   ]
+  },
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "The jaguar",
+    "head": "jaguar",
+    "names": [],
+    "keys": [
+     "jaguar"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "the only living member of the genus Panthera that is native to the Americas",
+    "head": "member",
+    "names": [
+     "panthera",
+     "americas"
+    ],
+    "keys": [
+     "only",
+     "living",
+     "member",
+     "genus",
+     "panthera",
+     "native"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    113
+   ]
+  },
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "The jaguar",
+    "head": "jaguar",
+    "names": [],
+    "keys": [
+     "jaguar"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "native to the Americas",
+    "head": "native",
+    "names": [
+     "americas"
+    ],
+    "keys": [
+     "native"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    83,
+    113
+   ]
+  }
+ ],
+ "The jaguar is the largest cat in Africa.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "The jaguar",
+    "head": "jaguar",
+    "names": [],
+    "keys": [
+     "jaguar"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "the largest cat in Africa",
+    "head": "cat",
+    "names": [
+     "africa"
+    ],
+    "keys": [
+     "large",
+     "cat"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    39
+   ]
+  }
+ ],
+ "Chlorophyll gives plants their green color.": [
+  {
+   "rel": "give",
+   "ARG0": {
+    "text": "Chlorophyll",
+    "head": "chlorophyll",
+    "names": [],
+    "keys": [
+     "chlorophyll"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "their green color",
+    "head": "color",
+    "names": [],
+    "keys": [
+     "green",
+     "color"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "plants",
+     "head": "plant",
+     "names": [],
+     "keys": [
+      "plant"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    42
+   ]
+  }
+ ],
+ "Chlorophyll is a pigment that gives plants their green color, and it helps plants create their own food through photosynthesis.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Chlorophyll",
+    "head": "chlorophyll",
+    "names": [],
+    "keys": [
+     "chlorophyll"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "a pigment",
+    "head": "pigment",
+    "names": [],
+    "keys": [
+     "pigment"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    24
+   ]
+  },
+  {
+   "rel": "give",
+   "ARG0": {
+    "text": "Chlorophyll",
+    "head": "chlorophyll",
+    "names": [],
+    "keys": [
+     "chlorophyll"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "their green color",
+    "head": "color",
+    "names": [],
+    "keys": [
+     "green",
+     "color"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "plants",
+     "head": "plant",
+     "names": [],
+     "keys": [
+      "plant"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    60
+   ]
+  },
+  {
+   "rel": "help",
+   "ARG0": {
+    "text": "it",
+    "head": "chlorophyll",
+    "names": [],
+    "keys": [
+     "chlorophyll"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "plants",
+    "head": "plant",
+    "names": [],
+    "keys": [
+     "plant"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    66,
+    126
+   ]
+  },
+  {
+   "rel": "create",
+   "ARG0": {
+    "text": "plants",
+    "head": "plant",
+    "names": [],
+    "keys": [
+     "plant"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "their own food",
+    "head": "food",
+    "names": [],
+    "keys": [
+     "own",
+     "food"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "through photosynthesis",
+     "head": "photosynthesis",
+     "names": [],
+     "keys": [
+      "photosynthesis"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    75,
+    126
+   ]
+  }
+ ],
+ "Chlorophyll does not give plants their green color.": [
+  {
+   "rel": "give",
+   "ARG0": {
+    "text": "Chlorophyll",
+    "head": "chlorophyll",
+    "names": [],
+    "keys": [
+     "chlorophyll"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "their green color",
+    "head": "color",
+    "names": [],
+    "keys": [
+     "green",
+     "color"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "plants",
+     "head": "plant",
+     "names": [],
+     "keys": [
+      "plant"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "-",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    50
+   ]
+  }
+ ],
+ "Photosynthesis takes place mainly in the leaves of green plants.": [
+  {
+   "rel": "take",
+   "ARG0": null,
+   "ARG1": {
+    "text": "Photosynthesis",
+    "head": "photosynthesis",
+    "names": [],
+    "keys": [
+     "photosynthesis"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "mainly in the leaves of green plants",
+     "head": "leaf",
+     "names": [],
+     "keys": [
+      "leaf",
+      "green",
+      "plant"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    63
+   ]
+  }
+ ],
+ "Photosynthesis takes place mainly in the leaves of green plants and also in the stems of herbaceous plants as they also contain chlorophyll.": [
+  {
+   "rel": "take",
+   "ARG0": null,
+   "ARG1": {
+    "text": "Photosynthesis",
+    "head": "photosynthesis",
+    "names": [],
+    "keys": [
+     "photosynthesis"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "mainly in the leaves of green plants",
+     "head": "leaf",
+     "names": [],
+     "keys": [
+      "leaf",
+      "green",
+      "plant"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    63
+   ]
+  },
+  {
+   "rel": "take",
+   "ARG0": null,
+   "ARG1": {
+    "text": "Photosynthesis",
+    "head": "photosynthesis",
+    "names": [],
+    "keys": [
+     "photosynthesis"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "also in the stems of herbaceous plants",
+     "head": "stem",
+     "names": [],
+     "keys": [
+      "stem",
+      "herbaceous",
+      "plant"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    68,
+    106
+   ]
+  },
+  {
+   "rel": "contain",
+   "ARG0": {
+    "text": "they",
+    "head": "plant",
+    "names": [],
+    "keys": [
+     "herbaceous",
+     "plant"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "chlorophyll",
+    "head": "chlorophyll",
+    "names": [],
+    "keys": [
+     "chlorophyll"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    110,
+    139
+   ]
+  }
+ ],
+ "Photosynthesis takes place mainly in the roots of green plants.": [
+  {
+   "rel": "take",
+   "ARG0": null,
+   "ARG1": {
+    "text": "Photosynthesis",
+    "head": "photosynthesis",
+    "names": [],
+    "keys": [
+     "photosynthesis"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "mainly in the roots of green plants",
+     "head": "root",
+     "names": [],
+     "keys": [
+      "root",
+      "green",
+      "plant"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    62
+   ]
+  }
+ ],
+ "The Calvin cycle takes place in the stroma.": [
+  {
+   "rel": "take",
+   "ARG0": null,
+   "ARG1": {
+    "text": "The Calvin cycle",
+    "head": "cycle",
+    "names": [
+     "calvin"
+    ],
+    "keys": [
+     "calvin",
+     "cycle"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "in the stroma",
+     "head": "stroma",
+     "names": [],
+     "keys": [
+      "stroma"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    42
+   ]
+  }
+ ],
+ "The light-independent stage, also known as the Calvin cycle, takes place in the stroma, the space between the thylakoid membranes.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "The light-independent stage",
+    "head": "stage",
+    "names": [],
+    "keys": [
+     "light",
+     "independent",
+     "stage"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "the Calvin cycle",
+    "head": "cycle",
+    "names": [
+     "calvin"
+    ],
+    "keys": [
+     "calvin",
+     "cycle"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    59
+   ]
+  },
+  {
+   "rel": "take",
+   "ARG0": null,
+   "ARG1": {
+    "text": "The light-independent stage, also known as the Calvin cycle",
+    "head": "stage",
+    "names": [
+     "calvin"
+    ],
+    "keys": [
+     "light",
+     "independent",
+     "stage",
+     "calvin",
+     "cycle"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "in the stroma",
+     "head": "stroma",
+     "names": [],
+     "keys": [
+      "stroma"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    86
+   ]
+  },
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "the stroma",
+    "head": "stroma",
+    "names": [],
+    "keys": [
+     "stroma"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "the space between the thylakoid membranes",
+    "head": "space",
+    "names": [],
+    "keys": [
+     "space",
+     "thylakoid",
+     "membrane"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    76,
+    129
+   ]
+  }
+ ],
+ "Jan Ingenhousz discovered the process of photosynthesis.": [
+  {
+   "rel": "discover",
+   "ARG0": {
+    "text": "Jan Ingenhousz",
+    "head": "ingenhousz",
+    "names": [
+     "jan",
+     "ingenhousz"
+    ],
+    "keys": [
+     "ingenhousz"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "the process of photosynthesis",
+    "head": "process",
+    "names": [],
+    "keys": [
+     "process",
+     "photosynthesis"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    55
+   ]
+  }
+ ],
+ "Jan Ingenhousz, the Dutch-born British physician and scientist, discovered the process of photosynthesis.": [
+  {
+   "rel": "discover",
+   "ARG0": {
+    "text": "Jan Ingenhousz",
+    "head": "ingenhousz",
+    "names": [
+     "jan",
+     "ingenhousz"
+    ],
+    "keys": [
+     "ingenhousz"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "the process of photosynthesis",
+    "head": "process",
+    "names": [],
+    "keys": [
+     "process",
+     "photosynthesis"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    104
+   ]
+  },
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Jan Ingenhousz",
+    "head": "ingenhousz",
+    "names": [
+     "jan",
+     "ingenhousz"
+    ],
+    "keys": [
+     "ingenhousz"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "the Dutch-born British physician and scientist",
+    "head": "physician",
+    "names": [],
+    "keys": [
+     "dutch",
+     "bear",
+     "british",
+     "physician",
+     "scientist"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    62
+   ]
+  },
+  {
+   "rel": "bear",
+   "ARG0": null,
+   "ARG1": {
+    "text": "Jan Ingenhousz",
+    "head": "ingenhousz",
+    "names": [
+     "jan",
+     "ingenhousz"
+    ],
+    "keys": [
+     "ingenhousz"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "Dutch-born",
+     "head": "dutch",
+     "names": [],
+     "keys": [
+      "dutch"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    20,
+    30
+   ]
+  }
+ ],
+ "Joseph Priestley discovered the process of photosynthesis.": [
+  {
+   "rel": "discover",
+   "ARG0": {
+    "text": "Joseph Priestley",
+    "head": "priestley",
+    "names": [
+     "joseph",
+     "priestley"
+    ],
+    "keys": [
+     "priestley"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "the process of photosynthesis",
+    "head": "process",
+    "names": [],
+    "keys": [
+     "process",
+     "photosynthesis"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    57
+   ]
+  }
+ ],
+ "The process of photosynthesis was discovered by Jan Ingenhousz.": [
+  {
+   "rel": "discover",
+   "ARG0": {
+    "text": "Jan Ingenhousz",
+    "head": "ingenhousz",
+    "names": [
+     "jan",
+     "ingenhousz"
+    ],
+    "keys": [
+     "ingenhousz"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "The process of photosynthesis",
+    "head": "process",
+    "names": [],
+    "keys": [
+     "process",
+     "photosynthesis"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    62
+   ]
+  }
+ ],
+ "Mawenzi is extinct.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Mawenzi",
+    "head": "mawenzi",
+    "names": [
+     "mawenzi"
+    ],
+    "keys": [
+     "mawenzi"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "extinct",
+    "head": "extinct",
+    "names": [],
+    "keys": [
+     "extinct"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    18
+   ]
+  }
+ ],
+ "Mawenzi and Shira are extinct, while Kibo is dormant and could erupt again.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Mawenzi",
+    "head": "mawenzi",
+    "names": [
+     "mawenzi"
+    ],
+    "keys": [
+     "mawenzi"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "extinct",
+    "head": "extinct",
+    "names": [],
+    "keys": [
+     "extinct"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    29
+   ]
+  },
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Shira",
+    "head": "shira",
+    "names": [
+     "shira"
+    ],
+    "keys": [
+     "shira"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "extinct",
+    "head": "extinct",
+    "names": [],
+    "keys": [
+     "extinct"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    29
+   ]
+  },
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Kibo",
+    "head": "kibo",
+    "names": [
+     "kibo"
+    ],
+    "keys": [
+     "kibo"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "dormant",
+    "head": "dormant",
+    "names": [],
+    "keys": [
+     "dormant"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    37,
+    52
+   ]
+  },
+  {
+   "rel": "erupt",
+   "ARG0": {
+    "text": "Kibo",
+    "head": "kibo",
+    "names": [
+     "kibo"
+    ],
+    "keys": [
+     "kibo"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": null,
+   "OBL": [
+    {
+     "text": "again",
+     "head": "again",
+     "names": [],
+     "keys": [
+      "again"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "future",
+   "asserted": false,
+   "asym": false,
+   "span": [
+    37,
+    74
+   ]
+  }
+ ],
+ "Kibo is extinct.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Kibo",
+    "head": "kibo",
+    "names": [
+     "kibo"
+    ],
+    "keys": [
+     "kibo"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "extinct",
+    "head": "extinct",
+    "names": [],
+    "keys": [
+     "extinct"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    15
+   ]
+  }
+ ],
+ "Kibo is dormant.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Kibo",
+    "head": "kibo",
+    "names": [
+     "kibo"
+    ],
+    "keys": [
+     "kibo"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "dormant",
+    "head": "dormant",
+    "names": [],
+    "keys": [
+     "dormant"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    15
+   ]
+  }
+ ],
+ "Uhuru Peak is the highest summit on Kibo's crater rim.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Uhuru Peak",
+    "head": "peak",
+    "names": [
+     "uhuru",
+     "peak"
+    ],
+    "keys": [
+     "uhuru",
+     "peak"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "the highest summit on Kibo's crater rim",
+    "head": "summit",
+    "names": [
+     "kibo"
+    ],
+    "keys": [
+     "high",
+     "summit",
+     "kibo",
+     "crater",
+     "rim"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    53
+   ]
+  }
+ ],
+ "Uhuru Peak is in Tanzania.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Uhuru Peak",
+    "head": "peak",
+    "names": [
+     "uhuru",
+     "peak"
+    ],
+    "keys": [
+     "uhuru",
+     "peak"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": null,
+   "OBL": [
+    {
+     "text": "in Tanzania",
+     "head": "tanzania",
+     "names": [
+      "tanzania"
+     ],
+     "keys": [
+      "tanzania"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    25
+   ]
+  }
+ ],
+ "Kilimanjaro International Airport is a 45-minute drive from Moshi.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Kilimanjaro International Airport",
+    "head": "airport",
+    "names": [
+     "kilimanjaro",
+     "international",
+     "airport"
+    ],
+    "keys": [
+     "kilimanjaro",
+     "international",
+     "airport"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "a 45-minute drive",
+    "head": "drive",
+    "names": [],
+    "keys": [
+     "minute",
+     "drive"
+    ],
+    "figs": [
+     {
+      "measure": "time",
+      "base": 2700,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "from Moshi",
+     "head": "moshi",
+     "names": [
+      "moshi"
+     ],
+     "keys": [
+      "moshi"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    65
+   ]
+  }
+ ],
+ "Kilimanjaro International Airport (JRO) is a 45-minute drive from Moshi.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Kilimanjaro International Airport (JRO)",
+    "head": "airport",
+    "names": [
+     "kilimanjaro",
+     "international",
+     "airport",
+     "jro"
+    ],
+    "keys": [
+     "kilimanjaro",
+     "international",
+     "airport"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "a 45-minute drive",
+    "head": "drive",
+    "names": [],
+    "keys": [
+     "minute",
+     "drive"
+    ],
+    "figs": [
+     {
+      "measure": "time",
+      "base": 2700,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "from Moshi",
+     "head": "moshi",
+     "names": [
+      "moshi"
+     ],
+     "keys": [
+      "moshi"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    71
+   ]
+  }
+ ],
+ "Kilimanjaro International Airport is a 3-hour drive from Moshi.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Kilimanjaro International Airport",
+    "head": "airport",
+    "names": [
+     "kilimanjaro",
+     "international",
+     "airport"
+    ],
+    "keys": [
+     "kilimanjaro",
+     "international",
+     "airport"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "a 3-hour drive",
+    "head": "drive",
+    "names": [],
+    "keys": [
+     "hour",
+     "drive"
+    ],
+    "figs": [
+     {
+      "measure": "time",
+      "base": 10800,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "from Moshi",
+     "head": "moshi",
+     "names": [
+      "moshi"
+     ],
+     "keys": [
+      "moshi"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    62
+   ]
+  }
+ ],
+ "Jaguars generate a strong bite force.": [
+  {
+   "rel": "generate",
+   "ARG0": {
+    "text": "Jaguars",
+    "head": "jaguar",
+    "names": [],
+    "keys": [
+     "jaguar"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "a strong bite force",
+    "head": "force",
+    "names": [],
+    "keys": [
+     "strong",
+     "bite",
+     "force"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    36
+   ]
+  }
+ ],
+ "Dolphins are mammals.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Dolphins",
+    "head": "dolphin",
+    "names": [],
+    "keys": [
+     "dolphin"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "mammals",
+    "head": "mammal",
+    "names": [],
+    "keys": [
+     "mammal"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    20
+   ]
+  }
+ ],
+ "Taxonomically, about 35–40 species are recognized in the dolphin family (Delphinidae), while porpoises number roughly seven species in Phocoenidae.": [
+  {
+   "rel": "recognize",
+   "ARG0": null,
+   "ARG1": {
+    "text": "about 35–40 species",
+    "head": "species",
+    "names": [],
+    "keys": [
+     "species"
+    ],
+    "figs": [
+     {
+      "measure": "count:species",
+      "base": 35,
+      "approx": true
+     },
+     {
+      "measure": "count:species",
+      "base": 40,
+      "approx": true
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "in the dolphin family (Delphinidae)",
+     "head": "family",
+     "names": [
+      "delphinidae"
+     ],
+     "keys": [
+      "dolphin",
+      "family",
+      "delphinidae"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    },
+    {
+     "text": "Taxonomically",
+     "head": "taxonomy",
+     "names": [],
+     "keys": [
+      "taxonomy"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    85
+   ]
+  },
+  {
+   "rel": "number",
+   "ARG0": {
+    "text": "porpoises",
+    "head": "porpoise",
+    "names": [],
+    "keys": [
+     "porpoise"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "roughly seven species",
+    "head": "species",
+    "names": [],
+    "keys": [
+     "species"
+    ],
+    "figs": [
+     {
+      "measure": "count:species",
+      "base": 7,
+      "approx": true
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "in Phocoenidae",
+     "head": "phocoenidae",
+     "names": [
+      "phocoenidae"
+     ],
+     "keys": [
+      "phocoenidae"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    93,
+    146
+   ]
+  }
+ ],
+ "About 35 to 40 species are recognized in the dolphin family.": [
+  {
+   "rel": "recognize",
+   "ARG0": null,
+   "ARG1": {
+    "text": "About 35 to 40 species",
+    "head": "species",
+    "names": [],
+    "keys": [
+     "species"
+    ],
+    "figs": [
+     {
+      "measure": "count:species",
+      "base": 35,
+      "approx": true
+     },
+     {
+      "measure": "count:species",
+      "base": 40,
+      "approx": true
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "in the dolphin family",
+     "head": "family",
+     "names": [],
+     "keys": [
+      "dolphin",
+      "family"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    59
+   ]
+  }
+ ],
+ "Porpoises number roughly seventy species.": [
+  {
+   "rel": "number",
+   "ARG0": {
+    "text": "Porpoises",
+    "head": "porpoise",
+    "names": [],
+    "keys": [
+     "porpoise"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "roughly seventy species",
+    "head": "species",
+    "names": [],
+    "keys": [
+     "species"
+    ],
+    "figs": [
+     {
+      "measure": "count:species",
+      "base": 70,
+      "approx": true
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    40
+   ]
+  }
+ ],
+ "Mawenzi is the highest of the three cones.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Mawenzi",
+    "head": "mawenzi",
+    "names": [
+     "mawenzi"
+    ],
+    "keys": [
+     "mawenzi"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "the highest of the three cones",
+    "head": "cone",
+    "names": [],
+    "keys": [
+     "high",
+     "cone"
+    ],
+    "figs": [
+     {
+      "measure": "count:cone",
+      "base": 3,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    41
+   ]
+  }
+ ],
+ "Kilimanjaro is a large dormant stratovolcano composed of three distinct volcanic cones: Kibo, the highest; Mawenzi at 5,149 m; and Shira, the lowest at 4,005 m.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Kilimanjaro",
+    "head": "kilimanjaro",
+    "names": [
+     "kilimanjaro"
+    ],
+    "keys": [
+     "kilimanjaro"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "a large dormant stratovolcano",
+    "head": "stratovolcano",
+    "names": [],
+    "keys": [
+     "large",
+     "dormant",
+     "stratovolcano"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    44
+   ]
+  },
+  {
+   "rel": "compose",
+   "ARG0": {
+    "text": "three distinct volcanic cones",
+    "head": "cone",
+    "names": [],
+    "keys": [
+     "distinct",
+     "volcanic",
+     "cone"
+    ],
+    "figs": [
+     {
+      "measure": "count:cone",
+      "base": 3,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "Kilimanjaro",
+    "head": "kilimanjaro",
+    "names": [
+     "kilimanjaro"
+    ],
+    "keys": [
+     "kilimanjaro"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    86
+   ]
+  },
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Kibo",
+    "head": "kibo",
+    "names": [
+     "kibo"
+    ],
+    "keys": [
+     "kibo"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "the highest",
+    "head": "high",
+    "names": [],
+    "keys": [
+     "high"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    88,
+    105
+   ]
+  },
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Mawenzi",
+    "head": "mawenzi",
+    "names": [
+     "mawenzi"
+    ],
+    "keys": [
+     "mawenzi"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "5,149 m",
+    "head": "metre",
+    "names": [],
+    "keys": [
+     "metre"
+    ],
+    "figs": [
+     {
+      "measure": "length",
+      "base": 5149,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    107,
+    125
+   ]
+  },
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Shira",
+    "head": "shira",
+    "names": [
+     "shira"
+    ],
+    "keys": [
+     "shira"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "the lowest",
+    "head": "low",
+    "names": [],
+    "keys": [
+     "low"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    131,
+    148
+   ]
+  },
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Shira",
+    "head": "shira",
+    "names": [
+     "shira"
+    ],
+    "keys": [
+     "shira"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "4,005 m",
+    "head": "metre",
+    "names": [],
+    "keys": [
+     "metre"
+    ],
+    "figs": [
+     {
+      "measure": "length",
+      "base": 4005,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    131,
+    159
+   ]
+  }
+ ],
+ "Kibo is the highest of the three cones.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Kibo",
+    "head": "kibo",
+    "names": [
+     "kibo"
+    ],
+    "keys": [
+     "kibo"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "the highest of the three cones",
+    "head": "cone",
+    "names": [],
+    "keys": [
+     "high",
+     "cone"
+    ],
+    "figs": [
+     {
+      "measure": "count:cone",
+      "base": 3,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    38
+   ]
+  }
+ ],
+ "Las ballenas barbadas suelen ser más grandes que las ballenas dentadas.": [
+  {
+   "rel": "large",
+   "ARG0": {
+    "text": "Las ballenas barbadas",
+    "head": "whale",
+    "names": [],
+    "keys": [
+     "baleen",
+     "whale"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "las ballenas dentadas",
+    "head": "whale",
+    "names": [],
+    "keys": [
+     "tooth",
+     "whale"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": true,
+   "span": [
+    0,
+    70
+   ]
+  }
+ ],
+ "En estado salvaje, las ballenas dentadas (como la orca) suelen ser más pequeñas que las ballenas barbadas (como la ballena azul).": [
+  {
+   "rel": "small",
+   "ARG0": {
+    "text": "las ballenas dentadas",
+    "head": "whale",
+    "names": [],
+    "keys": [
+     "tooth",
+     "whale"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "las ballenas barbadas",
+    "head": "whale",
+    "names": [],
+    "keys": [
+     "baleen",
+     "whale"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "En estado salvaje",
+     "head": "wild",
+     "names": [],
+     "keys": [
+      "wild"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": true,
+   "span": [
+    19,
+    128
+   ]
+  },
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "la orca",
+    "head": "orca",
+    "names": [],
+    "keys": [
+     "orca"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "las ballenas dentadas",
+    "head": "whale",
+    "names": [],
+    "keys": [
+     "tooth",
+     "whale"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    19,
+    55
+   ]
+  },
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "la ballena azul",
+    "head": "whale",
+    "names": [],
+    "keys": [
+     "blue",
+     "whale"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "las ballenas barbadas",
+    "head": "whale",
+    "names": [],
+    "keys": [
+     "baleen",
+     "whale"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    84,
+    128
+   ]
+  }
+ ],
+ "Las ballenas dentadas suelen ser más grandes que las ballenas barbadas.": [
+  {
+   "rel": "large",
+   "ARG0": {
+    "text": "Las ballenas dentadas",
+    "head": "whale",
+    "names": [],
+    "keys": [
+     "tooth",
+     "whale"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "las ballenas barbadas",
+    "head": "whale",
+    "names": [],
+    "keys": [
+     "baleen",
+     "whale"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": true,
+   "span": [
+    0,
+    70
+   ]
+  }
+ ],
+ "Las hembras de jaguar más pequeñas de América Central pesan 36 kg.": [
+  {
+   "rel": "weigh",
+   "ARG0": {
+    "text": "Las hembras de jaguar más pequeñas de América Central",
+    "head": "jaguar",
+    "names": [
+     "américa",
+     "central"
+    ],
+    "keys": [
+     "small",
+     "female",
+     "jaguar"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "36 kg",
+    "head": "kilogram",
+    "names": [],
+    "keys": [
+     "kilogram"
+    ],
+    "figs": [
+     {
+      "measure": "mass",
+      "base": 36,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    65
+   ]
+  }
+ ],
+ "Mientras tanto, las hembras de jaguar más pequeñas de América Central pesan apenas 36 kg (79 libras).": [
+  {
+   "rel": "weigh",
+   "ARG0": {
+    "text": "las hembras de jaguar más pequeñas de América Central",
+    "head": "jaguar",
+    "names": [
+     "américa",
+     "central"
+    ],
+    "keys": [
+     "small",
+     "female",
+     "jaguar"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "apenas 36 kg (79 libras)",
+    "head": "kilogram",
+    "names": [],
+    "keys": [
+     "kilogram",
+     "pound"
+    ],
+    "figs": [
+     {
+      "measure": "mass",
+      "base": 36,
+      "approx": false
+     },
+     {
+      "measure": "mass",
+      "base": 35.834,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "Mientras tanto",
+     "head": "meanwhile",
+     "names": [],
+     "keys": [
+      "meanwhile"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    100
+   ]
+  }
+ ],
+ "Las hembras de jaguar más pequeñas de América Central pesan 60 kg.": [
+  {
+   "rel": "weigh",
+   "ARG0": {
+    "text": "Las hembras de jaguar más pequeñas de América Central",
+    "head": "jaguar",
+    "names": [
+     "américa",
+     "central"
+    ],
+    "keys": [
+     "small",
+     "female",
+     "jaguar"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "60 kg",
+    "head": "kilogram",
+    "names": [],
+    "keys": [
+     "kilogram"
+    ],
+    "figs": [
+     {
+      "measure": "mass",
+      "base": 60,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    65
+   ]
+  }
+ ],
+ "Jan Ingenhousz entdeckte den Vorgang der Photosynthese.": [
+  {
+   "rel": "discover",
+   "ARG0": {
+    "text": "Jan Ingenhousz",
+    "head": "ingenhousz",
+    "names": [
+     "jan",
+     "ingenhousz"
+    ],
+    "keys": [
+     "ingenhousz"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "den Vorgang der Photosynthese",
+    "head": "process",
+    "names": [],
+    "keys": [
+     "process",
+     "photosynthesis"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    54
+   ]
+  }
+ ],
+ "Jan Ingenhousz, der in den Niederlanden geborene britische Arzt und Naturforscher, entdeckte den Vorgang der Photosynthese.": [
+  {
+   "rel": "discover",
+   "ARG0": {
+    "text": "Jan Ingenhousz",
+    "head": "ingenhousz",
+    "names": [
+     "jan",
+     "ingenhousz"
+    ],
+    "keys": [
+     "ingenhousz"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "den Vorgang der Photosynthese",
+    "head": "process",
+    "names": [],
+    "keys": [
+     "process",
+     "photosynthesis"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    122
+   ]
+  },
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Jan Ingenhousz",
+    "head": "ingenhousz",
+    "names": [
+     "jan",
+     "ingenhousz"
+    ],
+    "keys": [
+     "ingenhousz"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "der in den Niederlanden geborene britische Arzt und Naturforscher",
+    "head": "physician",
+    "names": [
+     "niederlanden"
+    ],
+    "keys": [
+     "netherlands",
+     "bear",
+     "british",
+     "physician",
+     "naturalist"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    81
+   ]
+  },
+  {
+   "rel": "bear",
+   "ARG0": null,
+   "ARG1": {
+    "text": "Jan Ingenhousz",
+    "head": "ingenhousz",
+    "names": [
+     "jan",
+     "ingenhousz"
+    ],
+    "keys": [
+     "ingenhousz"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "in den Niederlanden",
+     "head": "netherlands",
+     "names": [
+      "niederlanden"
+     ],
+     "keys": [
+      "netherlands"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    20,
+    48
+   ]
+  }
+ ],
+ "Joseph Priestley entdeckte den Vorgang der Photosynthese.": [
+  {
+   "rel": "discover",
+   "ARG0": {
+    "text": "Joseph Priestley",
+    "head": "priestley",
+    "names": [
+     "joseph",
+     "priestley"
+    ],
+    "keys": [
+     "priestley"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "den Vorgang der Photosynthese",
+    "head": "process",
+    "names": [],
+    "keys": [
+     "process",
+     "photosynthesis"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    56
+   ]
+  }
+ ],
+ "Der Vorgang der Photosynthese wurde von Jan Ingenhousz entdeckt.": [
+  {
+   "rel": "discover",
+   "ARG0": {
+    "text": "Jan Ingenhousz",
+    "head": "ingenhousz",
+    "names": [
+     "jan",
+     "ingenhousz"
+    ],
+    "keys": [
+     "ingenhousz"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "Der Vorgang der Photosynthese",
+    "head": "process",
+    "names": [],
+    "keys": [
+     "process",
+     "photosynthesis"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    63
+   ]
+  }
+ ],
+ "Chlorophyll gibt den Pflanzen nicht ihre grüne Farbe.": [
+  {
+   "rel": "give",
+   "ARG0": {
+    "text": "Chlorophyll",
+    "head": "chlorophyll",
+    "names": [],
+    "keys": [
+     "chlorophyll"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "ihre grüne Farbe",
+    "head": "color",
+    "names": [],
+    "keys": [
+     "green",
+     "color"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "den Pflanzen",
+     "head": "plant",
+     "names": [],
+     "keys": [
+      "plant"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "-",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    52
+   ]
+  }
+ ],
+ "Chlorophyll ist ein Pigment, das den Pflanzen ihre grüne Farbe gibt, und es hilft den Pflanzen, durch Photosynthese ihre eigene Nahrung herzustellen.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Chlorophyll",
+    "head": "chlorophyll",
+    "names": [],
+    "keys": [
+     "chlorophyll"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "ein Pigment",
+    "head": "pigment",
+    "names": [],
+    "keys": [
+     "pigment"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    27
+   ]
+  },
+  {
+   "rel": "give",
+   "ARG0": {
+    "text": "Chlorophyll",
+    "head": "chlorophyll",
+    "names": [],
+    "keys": [
+     "chlorophyll"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "ihre grüne Farbe",
+    "head": "color",
+    "names": [],
+    "keys": [
+     "green",
+     "color"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "den Pflanzen",
+     "head": "plant",
+     "names": [],
+     "keys": [
+      "plant"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    67
+   ]
+  },
+  {
+   "rel": "help",
+   "ARG0": {
+    "text": "es",
+    "head": "chlorophyll",
+    "names": [],
+    "keys": [
+     "chlorophyll"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "den Pflanzen",
+    "head": "plant",
+    "names": [],
+    "keys": [
+     "plant"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    73,
+    148
+   ]
+  },
+  {
+   "rel": "create",
+   "ARG0": {
+    "text": "den Pflanzen",
+    "head": "plant",
+    "names": [],
+    "keys": [
+     "plant"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "ihre eigene Nahrung",
+    "head": "food",
+    "names": [],
+    "keys": [
+     "own",
+     "food"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "durch Photosynthese",
+     "head": "photosynthesis",
+     "names": [],
+     "keys": [
+      "photosynthesis"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    82,
+    148
+   ]
+  }
+ ],
+ "Le Mawenzi est éteint.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Le Mawenzi",
+    "head": "mawenzi",
+    "names": [
+     "mawenzi"
+    ],
+    "keys": [
+     "mawenzi"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "éteint",
+    "head": "extinct",
+    "names": [],
+    "keys": [
+     "extinct"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    21
+   ]
+  }
+ ],
+ "Le Mawenzi et le Shira sont éteints, tandis que le Kibo est endormi et pourrait entrer à nouveau en éruption.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Le Mawenzi",
+    "head": "mawenzi",
+    "names": [
+     "mawenzi"
+    ],
+    "keys": [
+     "mawenzi"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "éteints",
+    "head": "extinct",
+    "names": [],
+    "keys": [
+     "extinct"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    35
+   ]
+  },
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "le Shira",
+    "head": "shira",
+    "names": [
+     "shira"
+    ],
+    "keys": [
+     "shira"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "éteints",
+    "head": "extinct",
+    "names": [],
+    "keys": [
+     "extinct"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    35
+   ]
+  },
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "le Kibo",
+    "head": "kibo",
+    "names": [
+     "kibo"
+    ],
+    "keys": [
+     "kibo"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "endormi",
+    "head": "dormant",
+    "names": [],
+    "keys": [
+     "dormant"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    48,
+    67
+   ]
+  },
+  {
+   "rel": "erupt",
+   "ARG0": {
+    "text": "le Kibo",
+    "head": "kibo",
+    "names": [
+     "kibo"
+    ],
+    "keys": [
+     "kibo"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": null,
+   "OBL": [
+    {
+     "text": "à nouveau",
+     "head": "again",
+     "names": [],
+     "keys": [
+      "again"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "future",
+   "asserted": false,
+   "asym": false,
+   "span": [
+    48,
+    108
+   ]
+  }
+ ],
+ "Le Kibo est éteint.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Le Kibo",
+    "head": "kibo",
+    "names": [
+     "kibo"
+    ],
+    "keys": [
+     "kibo"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "éteint",
+    "head": "extinct",
+    "names": [],
+    "keys": [
+     "extinct"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    18
+   ]
+  }
+ ],
+ "L'aéroport international du Kilimandjaro est à 45 minutes de route de Moshi.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "L'aéroport international du Kilimandjaro",
+    "head": "airport",
+    "names": [
+     "kilimandjaro"
+    ],
+    "keys": [
+     "kilimanjaro",
+     "international",
+     "airport"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "45 minutes de route",
+    "head": "drive",
+    "names": [],
+    "keys": [
+     "minute",
+     "drive"
+    ],
+    "figs": [
+     {
+      "measure": "time",
+      "base": 2700,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "de Moshi",
+     "head": "moshi",
+     "names": [
+      "moshi"
+     ],
+     "keys": [
+      "moshi"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    75
+   ]
+  }
+ ],
+ "L'aéroport international du Kilimandjaro (JRO) est à 45 minutes de route de Moshi.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "L'aéroport international du Kilimandjaro (JRO)",
+    "head": "airport",
+    "names": [
+     "kilimandjaro",
+     "jro"
+    ],
+    "keys": [
+     "kilimanjaro",
+     "international",
+     "airport"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "45 minutes de route",
+    "head": "drive",
+    "names": [],
+    "keys": [
+     "minute",
+     "drive"
+    ],
+    "figs": [
+     {
+      "measure": "time",
+      "base": 2700,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "de Moshi",
+     "head": "moshi",
+     "names": [
+      "moshi"
+     ],
+     "keys": [
+      "moshi"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    81
+   ]
+  }
+ ],
+ "L'aéroport international du Kilimandjaro est à trois heures de route de Moshi.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "L'aéroport international du Kilimandjaro",
+    "head": "airport",
+    "names": [
+     "kilimandjaro"
+    ],
+    "keys": [
+     "kilimanjaro",
+     "international",
+     "airport"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "trois heures de route",
+    "head": "drive",
+    "names": [],
+    "keys": [
+     "hour",
+     "drive"
+    ],
+    "figs": [
+     {
+      "measure": "time",
+      "base": 10800,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "de Moshi",
+     "head": "moshi",
+     "names": [
+      "moshi"
+     ],
+     "keys": [
+      "moshi"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    77
+   ]
+  }
+ ],
+ "光合成は主に緑色植物の葉で行われる。": [
+  {
+   "rel": "take",
+   "ARG0": null,
+   "ARG1": {
+    "text": "光合成",
+    "head": "photosynthesis",
+    "names": [],
+    "keys": [
+     "photosynthesis"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "主に緑色植物の葉で",
+     "head": "leaf",
+     "names": [],
+     "keys": [
+      "leaf",
+      "green",
+      "plant"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    17
+   ]
+  }
+ ],
+ "光合成は主に緑色植物の葉で行われ、葉緑素を含む草本植物の茎でも行われる。": [
+  {
+   "rel": "take",
+   "ARG0": null,
+   "ARG1": {
+    "text": "光合成",
+    "head": "photosynthesis",
+    "names": [],
+    "keys": [
+     "photosynthesis"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "主に緑色植物の葉で",
+     "head": "leaf",
+     "names": [],
+     "keys": [
+      "leaf",
+      "green",
+      "plant"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    16
+   ]
+  },
+  {
+   "rel": "take",
+   "ARG0": null,
+   "ARG1": {
+    "text": "光合成",
+    "head": "photosynthesis",
+    "names": [],
+    "keys": [
+     "photosynthesis"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "葉緑素を含む草本植物の茎でも",
+     "head": "stem",
+     "names": [],
+     "keys": [
+      "chlorophyll",
+      "contain",
+      "herbaceous",
+      "plant",
+      "stem"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    17,
+    35
+   ]
+  },
+  {
+   "rel": "contain",
+   "ARG0": {
+    "text": "草本植物",
+    "head": "plant",
+    "names": [],
+    "keys": [
+     "herbaceous",
+     "plant"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "葉緑素",
+    "head": "chlorophyll",
+    "names": [],
+    "keys": [
+     "chlorophyll"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    17,
+    27
+   ]
+  }
+ ],
+ "光合成は主に緑色植物の根で行われる。": [
+  {
+   "rel": "take",
+   "ARG0": null,
+   "ARG1": {
+    "text": "光合成",
+    "head": "photosynthesis",
+    "names": [],
+    "keys": [
+     "photosynthesis"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "主に緑色植物の根で",
+     "head": "root",
+     "names": [],
+     "keys": [
+      "root",
+      "green",
+      "plant"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    17
+   ]
+  }
+ ],
+ "ジャガーはアフリカ最大のネコ科動物である。": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "ジャガー",
+    "head": "jaguar",
+    "names": [],
+    "keys": [
+     "jaguar"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "アフリカ最大のネコ科動物",
+    "head": "cat",
+    "names": [
+     "africa"
+    ],
+    "keys": [
+     "large",
+     "cat"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    20
+   ]
+  }
+ ],
+ "ジャガーは大型のネコ科動物で、アメリカ大陸に生息するヒョウ属の唯一の現生種である。": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "ジャガー",
+    "head": "jaguar",
+    "names": [],
+    "keys": [
+     "jaguar"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "大型のネコ科動物",
+    "head": "cat",
+    "names": [],
+    "keys": [
+     "large",
+     "cat"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    13
+   ]
+  },
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "ジャガー",
+    "head": "jaguar",
+    "names": [],
+    "keys": [
+     "jaguar"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "アメリカ大陸に生息するヒョウ属の唯一の現生種",
+    "head": "species",
+    "names": [
+     "america",
+     "panthera"
+    ],
+    "keys": [
+     "america",
+     "continent",
+     "live",
+     "panthera",
+     "genus",
+     "only",
+     "living",
+     "species"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    15,
+    40
+   ]
+  },
+  {
+   "rel": "live",
+   "ARG0": {
+    "text": "ジャガー",
+    "head": "jaguar",
+    "names": [],
+    "keys": [
+     "jaguar"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": null,
+   "OBL": [
+    {
+     "text": "アメリカ大陸に",
+     "head": "continent",
+     "names": [
+      "america"
+     ],
+     "keys": [
+      "america",
+      "continent"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    15,
+    26
+   ]
+  }
+ ],
+ "Jan Ingenhousz, médico y científico británico nacido en los Países Bajos, descubrió el proceso de la fotosíntesis.": [
+  {
+   "rel": "discover",
+   "ARG0": {
+    "text": "Jan Ingenhousz",
+    "head": "ingenhousz",
+    "names": [
+     "jan",
+     "ingenhousz"
+    ],
+    "keys": [
+     "ingenhousz"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "el proceso de la fotosíntesis",
+    "head": "process",
+    "names": [],
+    "keys": [
+     "process",
+     "photosynthesis"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    113
+   ]
+  },
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Jan Ingenhousz",
+    "head": "ingenhousz",
+    "names": [
+     "jan",
+     "ingenhousz"
+    ],
+    "keys": [
+     "ingenhousz"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "médico y científico británico nacido en los Países Bajos",
+    "head": "physician",
+    "names": [
+     "países",
+     "bajos"
+    ],
+    "keys": [
+     "physician",
+     "scientist",
+     "british",
+     "bear",
+     "netherlands"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    72
+   ]
+  },
+  {
+   "rel": "bear",
+   "ARG0": null,
+   "ARG1": {
+    "text": "Jan Ingenhousz",
+    "head": "ingenhousz",
+    "names": [
+     "jan",
+     "ingenhousz"
+    ],
+    "keys": [
+     "ingenhousz"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "en los Países Bajos",
+     "head": "netherlands",
+     "names": [
+      "países",
+      "bajos"
+     ],
+     "keys": [
+      "netherlands"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    46,
+    72
+   ]
+  }
+ ],
+ "Hamlet was written by William Shakespeare.": [
+  {
+   "rel": "write",
+   "ARG0": {
+    "text": "William Shakespeare",
+    "head": "shakespeare",
+    "names": [
+     "william",
+     "shakespeare"
+    ],
+    "keys": [
+     "shakespeare"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "Hamlet",
+    "head": "hamlet",
+    "names": [
+     "hamlet"
+    ],
+    "keys": [
+     "hamlet"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    41
+   ]
+  }
+ ],
+ "Hamlet is a tragedy by William Shakespeare, believed to have been written between 1599 and 1601.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Hamlet",
+    "head": "hamlet",
+    "names": [
+     "hamlet"
+    ],
+    "keys": [
+     "hamlet"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "a tragedy by William Shakespeare",
+    "head": "tragedy",
+    "names": [],
+    "keys": [
+     "tragedy"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": {
+     "text": "William Shakespeare",
+     "head": "shakespeare",
+     "names": [
+      "william",
+      "shakespeare"
+     ],
+     "keys": [
+      "shakespeare"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    42
+   ]
+  },
+  {
+   "rel": "write",
+   "ARG0": null,
+   "ARG1": {
+    "text": "Hamlet",
+    "head": "hamlet",
+    "names": [
+     "hamlet"
+    ],
+    "keys": [
+     "hamlet"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "between 1599 and 1601",
+     "head": "date",
+     "names": [],
+     "keys": [
+      "date"
+     ],
+     "figs": [
+      {
+       "measure": "date",
+       "base": 1599,
+       "approx": false
+      },
+      {
+       "measure": "date",
+       "base": 1601,
+       "approx": false
+      }
+     ],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": false,
+   "asym": false,
+   "span": [
+    44,
+    95
+   ]
+  }
+ ],
+ "Mount Everest is 8,849 metres tall.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Mount Everest",
+    "head": "everest",
+    "names": [
+     "everest"
+    ],
+    "keys": [
+     "everest"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "8,849 metres tall",
+    "head": "tall",
+    "names": [],
+    "keys": [
+     "metre",
+     "tall"
+    ],
+    "figs": [
+     {
+      "measure": "length",
+      "base": 8849,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    34
+   ]
+  }
+ ],
+ "Mount Everest stands 8,849 meters above sea level.": [
+  {
+   "rel": "stand",
+   "ARG0": {
+    "text": "Mount Everest",
+    "head": "everest",
+    "names": [
+     "everest"
+    ],
+    "keys": [
+     "everest"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "8,849 meters",
+    "head": "metre",
+    "names": [],
+    "keys": [
+     "metre"
+    ],
+    "figs": [
+     {
+      "measure": "length",
+      "base": 8849,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "above sea level",
+     "head": "level",
+     "names": [],
+     "keys": [
+      "sea",
+      "level"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    49
+   ]
+  }
+ ],
+ "Spiders have eight legs.": [
+  {
+   "rel": "have",
+   "ARG0": {
+    "text": "Spiders",
+    "head": "spider",
+    "names": [],
+    "keys": [
+     "spider"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "eight legs",
+    "head": "leg",
+    "names": [],
+    "keys": [
+     "leg"
+    ],
+    "figs": [
+     {
+      "measure": "count:leg",
+      "base": 8,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    23
+   ]
+  }
+ ],
+ "All spiders have eight legs, which distinguishes them from insects.": [
+  {
+   "rel": "have",
+   "ARG0": {
+    "text": "All spiders",
+    "head": "spider",
+    "names": [],
+    "keys": [
+     "spider"
+    ],
+    "figs": [],
+    "quant": "all",
+    "agent": null
+   },
+   "ARG1": {
+    "text": "eight legs",
+    "head": "leg",
+    "names": [],
+    "keys": [
+     "leg"
+    ],
+    "figs": [
+     {
+      "measure": "count:leg",
+      "base": 8,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    27
+   ]
+  },
+  {
+   "rel": "distinguish",
+   "ARG0": {
+    "text": "which",
+    "head": "leg",
+    "names": [],
+    "keys": [
+     "leg"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "them",
+    "head": "spider",
+    "names": [],
+    "keys": [
+     "spider"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "from insects",
+     "head": "insect",
+     "names": [],
+     "keys": [
+      "insect"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    29,
+    66
+   ]
+  }
+ ],
+ "Spiders have six legs.": [
+  {
+   "rel": "have",
+   "ARG0": {
+    "text": "Spiders",
+    "head": "spider",
+    "names": [],
+    "keys": [
+     "spider"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "six legs",
+    "head": "leg",
+    "names": [],
+    "keys": [
+     "leg"
+    ],
+    "figs": [
+     {
+      "measure": "count:leg",
+      "base": 6,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    21
+   ]
+  }
+ ],
+ "Spiders have eight legs, unlike insects, which have six.": [
+  {
+   "rel": "have",
+   "ARG0": {
+    "text": "Spiders",
+    "head": "spider",
+    "names": [],
+    "keys": [
+     "spider"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "eight legs",
+    "head": "leg",
+    "names": [],
+    "keys": [
+     "leg"
+    ],
+    "figs": [
+     {
+      "measure": "count:leg",
+      "base": 8,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    23
+   ]
+  },
+  {
+   "rel": "have",
+   "ARG0": {
+    "text": "insects",
+    "head": "insect",
+    "names": [],
+    "keys": [
+     "insect"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "six",
+    "head": "leg",
+    "names": [],
+    "keys": [
+     "leg"
+    ],
+    "figs": [
+     {
+      "measure": "count:leg",
+      "base": 6,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    32,
+    55
+   ]
+  }
+ ],
+ "Queen Elizabeth II is the monarch of the United Kingdom.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Queen Elizabeth II",
+    "head": "elizabeth",
+    "names": [
+     "elizabeth",
+     "ii"
+    ],
+    "keys": [
+     "elizabeth"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "the monarch of the United Kingdom",
+    "head": "monarch",
+    "names": [
+     "united",
+     "kingdom"
+    ],
+    "keys": [
+     "monarch",
+     "united",
+     "kingdom"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    55
+   ]
+  }
+ ],
+ "King Charles III is the monarch of the United Kingdom, having acceded in 2022.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "King Charles III",
+    "head": "charles",
+    "names": [
+     "charles",
+     "iii"
+    ],
+    "keys": [
+     "charles"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "the monarch of the United Kingdom",
+    "head": "monarch",
+    "names": [
+     "united",
+     "kingdom"
+    ],
+    "keys": [
+     "monarch",
+     "united",
+     "kingdom"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    53
+   ]
+  },
+  {
+   "rel": "accede",
+   "ARG0": {
+    "text": "King Charles III",
+    "head": "charles",
+    "names": [
+     "charles",
+     "iii"
+    ],
+    "keys": [
+     "charles"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": null,
+   "OBL": [
+    {
+     "text": "in 2022",
+     "head": "date",
+     "names": [],
+     "keys": [
+      "date"
+     ],
+     "figs": [
+      {
+       "measure": "date",
+       "base": 2022,
+       "approx": false
+      }
+     ],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    55,
+    77
+   ]
+  }
+ ],
+ "King Charles III is the monarch of the United Kingdom.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "King Charles III",
+    "head": "charles",
+    "names": [
+     "charles",
+     "iii"
+    ],
+    "keys": [
+     "charles"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "the monarch of the United Kingdom",
+    "head": "monarch",
+    "names": [
+     "united",
+     "kingdom"
+    ],
+    "keys": [
+     "monarch",
+     "united",
+     "kingdom"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    53
+   ]
+  }
+ ],
+ "Queen Elizabeth II was the monarch of the United Kingdom from 1952 until her death in 2022.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Queen Elizabeth II",
+    "head": "elizabeth",
+    "names": [
+     "elizabeth",
+     "ii"
+    ],
+    "keys": [
+     "elizabeth"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "the monarch of the United Kingdom",
+    "head": "monarch",
+    "names": [
+     "united",
+     "kingdom"
+    ],
+    "keys": [
+     "monarch",
+     "united",
+     "kingdom"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "from 1952 until her death in 2022",
+     "head": "date",
+     "names": [],
+     "keys": [
+      "death"
+     ],
+     "figs": [
+      {
+       "measure": "date",
+       "base": 1952,
+       "approx": false
+      },
+      {
+       "measure": "date",
+       "base": 2022,
+       "approx": false
+      }
+     ],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    90
+   ]
+  },
+  {
+   "rel": "die",
+   "ARG0": null,
+   "ARG1": {
+    "text": "her",
+    "head": "elizabeth",
+    "names": [
+     "elizabeth",
+     "ii"
+    ],
+    "keys": [
+     "elizabeth"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "in 2022",
+     "head": "date",
+     "names": [],
+     "keys": [
+      "date"
+     ],
+     "figs": [
+      {
+       "measure": "date",
+       "base": 2022,
+       "approx": false
+      }
+     ],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    73,
+    90
+   ]
+  }
+ ],
+ "The Great Wall of China is visible from space with the naked eye.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "The Great Wall of China",
+    "head": "wall",
+    "names": [
+     "great",
+     "wall",
+     "china"
+    ],
+    "keys": [
+     "great",
+     "wall",
+     "china"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "visible",
+    "head": "visible",
+    "names": [],
+    "keys": [
+     "visible"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "from space",
+     "head": "space",
+     "names": [],
+     "keys": [
+      "space"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    },
+    {
+     "text": "with the naked eye",
+     "head": "eye",
+     "names": [],
+     "keys": [
+      "naked",
+      "eye"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    64
+   ]
+  }
+ ],
+ "The Great Wall of China is not visible to the naked eye from low Earth orbit.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "The Great Wall of China",
+    "head": "wall",
+    "names": [
+     "great",
+     "wall",
+     "china"
+    ],
+    "keys": [
+     "great",
+     "wall",
+     "china"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "visible",
+    "head": "visible",
+    "names": [],
+    "keys": [
+     "visible"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "to the naked eye",
+     "head": "eye",
+     "names": [],
+     "keys": [
+      "naked",
+      "eye"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    },
+    {
+     "text": "from low Earth orbit",
+     "head": "orbit",
+     "names": [
+      "earth"
+     ],
+     "keys": [
+      "low",
+      "earth",
+      "orbit"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "-",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    76
+   ]
+  }
+ ],
+ "Marie Curie was born in 1867.": [
+  {
+   "rel": "bear",
+   "ARG0": null,
+   "ARG1": {
+    "text": "Marie Curie",
+    "head": "curie",
+    "names": [
+     "marie",
+     "curie"
+    ],
+    "keys": [
+     "curie"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "in 1867",
+     "head": "date",
+     "names": [],
+     "keys": [
+      "date"
+     ],
+     "figs": [
+      {
+       "measure": "date",
+       "base": 1867,
+       "approx": false
+      }
+     ],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    28
+   ]
+  }
+ ],
+ "Marie Curie was born on 7 November 1867 in Warsaw.": [
+  {
+   "rel": "bear",
+   "ARG0": null,
+   "ARG1": {
+    "text": "Marie Curie",
+    "head": "curie",
+    "names": [
+     "marie",
+     "curie"
+    ],
+    "keys": [
+     "curie"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "on 7 November 1867",
+     "head": "date",
+     "names": [],
+     "keys": [
+      "november"
+     ],
+     "figs": [
+      {
+       "measure": "date",
+       "base": 1867,
+       "approx": false
+      }
+     ],
+     "quant": null,
+     "agent": null
+    },
+    {
+     "text": "in Warsaw",
+     "head": "warsaw",
+     "names": [
+      "warsaw"
+     ],
+     "keys": [
+      "warsaw"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    49
+   ]
+  }
+ ],
+ "Marie Curie was born in 1876.": [
+  {
+   "rel": "bear",
+   "ARG0": null,
+   "ARG1": {
+    "text": "Marie Curie",
+    "head": "curie",
+    "names": [
+     "marie",
+     "curie"
+    ],
+    "keys": [
+     "curie"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "in 1876",
+     "head": "date",
+     "names": [],
+     "keys": [
+      "date"
+     ],
+     "figs": [
+      {
+       "measure": "date",
+       "base": 1876,
+       "approx": false
+      }
+     ],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    28
+   ]
+  }
+ ],
+ "The adult human body has 206 bones.": [
+  {
+   "rel": "have",
+   "ARG0": {
+    "text": "The adult human body",
+    "head": "body",
+    "names": [],
+    "keys": [
+     "adult",
+     "human",
+     "body"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "206 bones",
+    "head": "bone",
+    "names": [],
+    "keys": [
+     "bone"
+    ],
+    "figs": [
+     {
+      "measure": "count:bone",
+      "base": 206,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    34
+   ]
+  }
+ ],
+ "An adult skeleton has 206 bones.": [
+  {
+   "rel": "have",
+   "ARG0": {
+    "text": "An adult skeleton",
+    "head": "skeleton",
+    "names": [],
+    "keys": [
+     "adult",
+     "skeleton"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "206 bones",
+    "head": "bone",
+    "names": [],
+    "keys": [
+     "bone"
+    ],
+    "figs": [
+     {
+      "measure": "count:bone",
+      "base": 206,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    31
+   ]
+  }
+ ],
+ "Newborn babies have about 300 bones, many of which fuse as they grow.": [
+  {
+   "rel": "have",
+   "ARG0": {
+    "text": "Newborn babies",
+    "head": "baby",
+    "names": [],
+    "keys": [
+     "newborn",
+     "baby"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "about 300 bones",
+    "head": "bone",
+    "names": [],
+    "keys": [
+     "bone"
+    ],
+    "figs": [
+     {
+      "measure": "count:bone",
+      "base": 300,
+      "approx": true
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    35
+   ]
+  },
+  {
+   "rel": "fuse",
+   "ARG0": null,
+   "ARG1": {
+    "text": "many of which",
+    "head": "bone",
+    "names": [],
+    "keys": [
+     "bone"
+    ],
+    "figs": [],
+    "quant": "many",
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "as they grow",
+     "head": "grow",
+     "names": [],
+     "keys": [
+      "grow"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    37,
+    68
+   ]
+  },
+  {
+   "rel": "grow",
+   "ARG0": {
+    "text": "they",
+    "head": "baby",
+    "names": [],
+    "keys": [
+     "newborn",
+     "baby"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": null,
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    59,
+    68
+   ]
+  }
+ ],
+ "Brutus stabbed Caesar.": [
+  {
+   "rel": "stab",
+   "ARG0": {
+    "text": "Brutus",
+    "head": "brutus",
+    "names": [
+     "brutus"
+    ],
+    "keys": [
+     "brutus"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "Caesar",
+    "head": "caesar",
+    "names": [
+     "caesar"
+    ],
+    "keys": [
+     "caesar"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    21
+   ]
+  }
+ ],
+ "Caesar stabbed Brutus.": [
+  {
+   "rel": "stab",
+   "ARG0": {
+    "text": "Caesar",
+    "head": "caesar",
+    "names": [
+     "caesar"
+    ],
+    "keys": [
+     "caesar"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "Brutus",
+    "head": "brutus",
+    "names": [
+     "brutus"
+    ],
+    "keys": [
+     "brutus"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    21
+   ]
+  }
+ ],
+ "Caesar was stabbed by Brutus and other senators in 44 BC.": [
+  {
+   "rel": "stab",
+   "ARG0": {
+    "text": "Brutus",
+    "head": "brutus",
+    "names": [
+     "brutus"
+    ],
+    "keys": [
+     "brutus"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "Caesar",
+    "head": "caesar",
+    "names": [
+     "caesar"
+    ],
+    "keys": [
+     "caesar"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "in 44 BC",
+     "head": "date",
+     "names": [],
+     "keys": [
+      "date"
+     ],
+     "figs": [
+      {
+       "measure": "date",
+       "base": -44,
+       "approx": false
+      }
+     ],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    56
+   ]
+  },
+  {
+   "rel": "stab",
+   "ARG0": {
+    "text": "other senators",
+    "head": "senator",
+    "names": [],
+    "keys": [
+     "other",
+     "senator"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "Caesar",
+    "head": "caesar",
+    "names": [
+     "caesar"
+    ],
+    "keys": [
+     "caesar"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "in 44 BC",
+     "head": "date",
+     "names": [],
+     "keys": [
+      "date"
+     ],
+     "figs": [
+      {
+       "measure": "date",
+       "base": -44,
+       "approx": false
+      }
+     ],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    56
+   ]
+  }
+ ],
+ "K2 is taller than Everest.": [
+  {
+   "rel": "tall",
+   "ARG0": {
+    "text": "K2",
+    "head": "k2",
+    "names": [
+     "k2"
+    ],
+    "keys": [
+     "k2"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "Everest",
+    "head": "everest",
+    "names": [
+     "everest"
+    ],
+    "keys": [
+     "everest"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": true,
+   "span": [
+    0,
+    25
+   ]
+  }
+ ],
+ "Everest is taller than K2, at 8,849 metres against 8,611.": [
+  {
+   "rel": "tall",
+   "ARG0": {
+    "text": "Everest",
+    "head": "everest",
+    "names": [
+     "everest"
+    ],
+    "keys": [
+     "everest"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "K2",
+    "head": "k2",
+    "names": [
+     "k2"
+    ],
+    "keys": [
+     "k2"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": true,
+   "span": [
+    0,
+    25
+   ]
+  },
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Everest",
+    "head": "everest",
+    "names": [
+     "everest"
+    ],
+    "keys": [
+     "everest"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "8,849 metres",
+    "head": "metre",
+    "names": [],
+    "keys": [
+     "metre"
+    ],
+    "figs": [
+     {
+      "measure": "length",
+      "base": 8849,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    27,
+    42
+   ]
+  },
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "K2",
+    "head": "k2",
+    "names": [
+     "k2"
+    ],
+    "keys": [
+     "k2"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "8,611",
+    "head": "metre",
+    "names": [],
+    "keys": [
+     "metre"
+    ],
+    "figs": [
+     {
+      "measure": "length",
+      "base": 8611,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    43,
+    56
+   ]
+  }
+ ],
+ "K2 is shorter than Everest.": [
+  {
+   "rel": "short",
+   "ARG0": {
+    "text": "K2",
+    "head": "k2",
+    "names": [
+     "k2"
+    ],
+    "keys": [
+     "k2"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "Everest",
+    "head": "everest",
+    "names": [
+     "everest"
+    ],
+    "keys": [
+     "everest"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": true,
+   "span": [
+    0,
+    26
+   ]
+  }
+ ],
+ "Paris is the capital of France.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Paris",
+    "head": "paris",
+    "names": [
+     "paris"
+    ],
+    "keys": [
+     "paris"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "the capital of France",
+    "head": "capital",
+    "names": [
+     "france"
+    ],
+    "keys": [
+     "capital",
+     "france"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    30
+   ]
+  }
+ ],
+ "Paris Hilton is an American media personality and businesswoman.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Paris Hilton",
+    "head": "hilton",
+    "names": [
+     "paris",
+     "hilton"
+    ],
+    "keys": [
+     "hilton"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "an American media personality",
+    "head": "personality",
+    "names": [
+     "american"
+    ],
+    "keys": [
+     "american",
+     "media",
+     "personality"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    45
+   ]
+  },
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Paris Hilton",
+    "head": "hilton",
+    "names": [
+     "paris",
+     "hilton"
+    ],
+    "keys": [
+     "hilton"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "businesswoman",
+    "head": "businesswoman",
+    "names": [],
+    "keys": [
+     "businesswoman"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    63
+   ]
+  }
+ ],
+ "France's capital is Paris, its largest city.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "France's capital",
+    "head": "capital",
+    "names": [
+     "france"
+    ],
+    "keys": [
+     "france",
+     "capital"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "Paris",
+    "head": "paris",
+    "names": [
+     "paris"
+    ],
+    "keys": [
+     "paris"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    25
+   ]
+  },
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Paris",
+    "head": "paris",
+    "names": [
+     "paris"
+    ],
+    "keys": [
+     "paris"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "its largest city",
+    "head": "city",
+    "names": [],
+    "keys": [
+     "large",
+     "city"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    20,
+    43
+   ]
+  }
+ ],
+ "The Earth orbits the Sun.": [
+  {
+   "rel": "orbit",
+   "ARG0": {
+    "text": "The Earth",
+    "head": "earth",
+    "names": [
+     "earth"
+    ],
+    "keys": [
+     "earth"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "the Sun",
+    "head": "sun",
+    "names": [
+     "sun"
+    ],
+    "keys": [
+     "sun"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    24
+   ]
+  }
+ ],
+ "The Moon orbits the Earth once every 27.3 days.": [
+  {
+   "rel": "orbit",
+   "ARG0": {
+    "text": "The Moon",
+    "head": "moon",
+    "names": [
+     "moon"
+    ],
+    "keys": [
+     "moon"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "the Earth",
+    "head": "earth",
+    "names": [
+     "earth"
+    ],
+    "keys": [
+     "earth"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "once every 27.3 days",
+     "head": "day",
+     "names": [],
+     "keys": [
+      "day"
+     ],
+     "figs": [
+      {
+       "measure": "time",
+       "base": 2358720.0,
+       "approx": false
+      }
+     ],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    46
+   ]
+  }
+ ],
+ "Vaccines cause autism.": [
+  {
+   "rel": "cause",
+   "ARG0": {
+    "text": "Vaccines",
+    "head": "vaccine",
+    "names": [],
+    "keys": [
+     "vaccine"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "autism",
+    "head": "autism",
+    "names": [],
+    "keys": [
+     "autism"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    21
+   ]
+  }
+ ],
+ "Large studies have found no link between vaccines and autism.": [
+  {
+   "rel": "find",
+   "ARG0": {
+    "text": "Large studies",
+    "head": "study",
+    "names": [],
+    "keys": [
+     "large",
+     "study"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "no link between vaccines and autism",
+    "head": "link",
+    "names": [],
+    "keys": [
+     "link",
+     "vaccine",
+     "autism"
+    ],
+    "figs": [],
+    "quant": "none",
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    60
+   ]
+  },
+  {
+   "rel": "link",
+   "ARG0": {
+    "text": "vaccines",
+    "head": "vaccine",
+    "names": [],
+    "keys": [
+     "vaccine"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "autism",
+    "head": "autism",
+    "names": [],
+    "keys": [
+     "autism"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "-",
+   "tense": "present",
+   "asserted": false,
+   "asym": false,
+   "span": [
+    25,
+    60
+   ]
+  }
+ ],
+ "The Earth is flat.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "The Earth",
+    "head": "earth",
+    "names": [
+     "earth"
+    ],
+    "keys": [
+     "earth"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "flat",
+    "head": "flat",
+    "names": [],
+    "keys": [
+     "flat"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    17
+   ]
+  }
+ ],
+ "Some people claim that the Earth is flat.": [
+  {
+   "rel": "claim",
+   "ARG0": {
+    "text": "Some people",
+    "head": "people",
+    "names": [],
+    "keys": [
+     "person"
+    ],
+    "figs": [],
+    "quant": "some",
+    "agent": null
+   },
+   "ARG1": {
+    "text": "that the Earth is flat",
+    "head": "be",
+    "names": [
+     "earth"
+    ],
+    "keys": [
+     "earth",
+     "flat"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    40
+   ]
+  },
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "the Earth",
+    "head": "earth",
+    "names": [
+     "earth"
+    ],
+    "keys": [
+     "earth"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "flat",
+    "head": "flat",
+    "names": [],
+    "keys": [
+     "flat"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": false,
+   "asym": false,
+   "span": [
+    23,
+    40
+   ]
+  }
+ ],
+ "Light travels at about 300,000 kilometres per second.": [
+  {
+   "rel": "travel",
+   "ARG0": {
+    "text": "Light",
+    "head": "light",
+    "names": [],
+    "keys": [
+     "light"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": null,
+   "OBL": [
+    {
+     "text": "at about 300,000 kilometres per second",
+     "head": "kilometre",
+     "names": [],
+     "keys": [
+      "kilometre",
+      "second"
+     ],
+     "figs": [
+      {
+       "measure": "length",
+       "base": 300000000.0,
+       "approx": true
+      },
+      {
+       "measure": "time",
+       "base": 1,
+       "approx": false
+      }
+     ],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    52
+   ]
+  }
+ ],
+ "The speed of light in vacuum is 299,792 kilometres per second.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "The speed of light in vacuum",
+    "head": "speed",
+    "names": [],
+    "keys": [
+     "speed",
+     "light",
+     "vacuum"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "299,792 kilometres per second",
+    "head": "kilometre",
+    "names": [],
+    "keys": [
+     "kilometre",
+     "second"
+    ],
+    "figs": [
+     {
+      "measure": "length",
+      "base": 299792000,
+      "approx": false
+     },
+     {
+      "measure": "time",
+      "base": 1,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    61
+   ]
+  }
+ ],
+ "Water boils at 100 degrees Celsius at sea level.": [
+  {
+   "rel": "boil",
+   "ARG0": null,
+   "ARG1": {
+    "text": "Water",
+    "head": "water",
+    "names": [],
+    "keys": [
+     "water"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "at 100 degrees Celsius",
+     "head": "degree",
+     "names": [],
+     "keys": [
+      "degree",
+      "celsius"
+     ],
+     "figs": [
+      {
+       "measure": "temperature",
+       "base": 100,
+       "approx": false
+      }
+     ],
+     "quant": null,
+     "agent": null
+    },
+    {
+     "text": "at sea level",
+     "head": "level",
+     "names": [],
+     "keys": [
+      "sea",
+      "level"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    47
+   ]
+  }
+ ],
+ "Water boils at 212 degrees Fahrenheit at sea level.": [
+  {
+   "rel": "boil",
+   "ARG0": null,
+   "ARG1": {
+    "text": "Water",
+    "head": "water",
+    "names": [],
+    "keys": [
+     "water"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "at 212 degrees Fahrenheit",
+     "head": "degree",
+     "names": [],
+     "keys": [
+      "degree",
+      "fahrenheit"
+     ],
+     "figs": [
+      {
+       "measure": "temperature",
+       "base": 100,
+       "approx": false
+      }
+     ],
+     "quant": null,
+     "agent": null
+    },
+    {
+     "text": "at sea level",
+     "head": "level",
+     "names": [],
+     "keys": [
+      "sea",
+      "level"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    50
+   ]
+  }
+ ],
+ "Water freezes at 0 degrees Celsius at sea level.": [
+  {
+   "rel": "freeze",
+   "ARG0": null,
+   "ARG1": {
+    "text": "Water",
+    "head": "water",
+    "names": [],
+    "keys": [
+     "water"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "at 0 degrees Celsius",
+     "head": "degree",
+     "names": [],
+     "keys": [
+      "degree",
+      "celsius"
+     ],
+     "figs": [
+      {
+       "measure": "temperature",
+       "base": 0,
+       "approx": false
+      }
+     ],
+     "quant": null,
+     "agent": null
+    },
+    {
+     "text": "at sea level",
+     "head": "level",
+     "names": [],
+     "keys": [
+      "sea",
+      "level"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    47
+   ]
+  }
+ ],
+ "The Concorde is in service.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "The Concorde",
+    "head": "concorde",
+    "names": [
+     "concorde"
+    ],
+    "keys": [
+     "concorde"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": null,
+   "OBL": [
+    {
+     "text": "in service",
+     "head": "service",
+     "names": [],
+     "keys": [
+      "service"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    26
+   ]
+  }
+ ],
+ "The Concorde was retired from service in 2003.": [
+  {
+   "rel": "retire",
+   "ARG0": null,
+   "ARG1": {
+    "text": "The Concorde",
+    "head": "concorde",
+    "names": [
+     "concorde"
+    ],
+    "keys": [
+     "concorde"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "from service",
+     "head": "service",
+     "names": [],
+     "keys": [
+      "service"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    },
+    {
+     "text": "in 2003",
+     "head": "date",
+     "names": [],
+     "keys": [
+      "date"
+     ],
+     "figs": [
+      {
+       "measure": "date",
+       "base": 2003,
+       "approx": false
+      }
+     ],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    45
+   ]
+  }
+ ],
+ "The Concorde was retired in 2003.": [
+  {
+   "rel": "retire",
+   "ARG0": null,
+   "ARG1": {
+    "text": "The Concorde",
+    "head": "concorde",
+    "names": [
+     "concorde"
+    ],
+    "keys": [
+     "concorde"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "in 2003",
+     "head": "date",
+     "names": [],
+     "keys": [
+      "date"
+     ],
+     "figs": [
+      {
+       "measure": "date",
+       "base": 2003,
+       "approx": false
+      }
+     ],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    32
+   ]
+  }
+ ],
+ "Concorde made its final commercial flight in 2003, ending 27 years of service.": [
+  {
+   "rel": "make",
+   "ARG0": {
+    "text": "Concorde",
+    "head": "concorde",
+    "names": [
+     "concorde"
+    ],
+    "keys": [
+     "concorde"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "its final commercial flight",
+    "head": "flight",
+    "names": [],
+    "keys": [
+     "final",
+     "commercial",
+     "flight"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "in 2003",
+     "head": "date",
+     "names": [],
+     "keys": [
+      "date"
+     ],
+     "figs": [
+      {
+       "measure": "date",
+       "base": 2003,
+       "approx": false
+      }
+     ],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    49
+   ]
+  },
+  {
+   "rel": "end",
+   "ARG0": null,
+   "ARG1": {
+    "text": "27 years of service",
+    "head": "service",
+    "names": [],
+    "keys": [
+     "year",
+     "service"
+    ],
+    "figs": [
+     {
+      "measure": "time",
+      "base": 852055200,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    51,
+    77
+   ]
+  }
+ ],
+ "All swans are white.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "All swans",
+    "head": "swan",
+    "names": [],
+    "keys": [
+     "swan"
+    ],
+    "figs": [],
+    "quant": "all",
+    "agent": null
+   },
+   "ARG1": {
+    "text": "white",
+    "head": "white",
+    "names": [],
+    "keys": [
+     "white"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    19
+   ]
+  }
+ ],
+ "Black swans are native to Australia.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Black swans",
+    "head": "swan",
+    "names": [],
+    "keys": [
+     "black",
+     "swan"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "native to Australia",
+    "head": "native",
+    "names": [
+     "australia"
+    ],
+    "keys": [
+     "native",
+     "australia"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    35
+   ]
+  }
+ ],
+ "Honey never spoils.": [
+  {
+   "rel": "spoil",
+   "ARG0": null,
+   "ARG1": {
+    "text": "Honey",
+    "head": "honey",
+    "names": [],
+    "keys": [
+     "honey"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "-",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    18
+   ]
+  }
+ ],
+ "The Pacific is the largest and deepest of Earth's oceans.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "The Pacific",
+    "head": "pacific",
+    "names": [
+     "pacific"
+    ],
+    "keys": [
+     "pacific"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "largest and deepest of Earth's oceans",
+    "head": "ocean",
+    "names": [
+     "earth"
+    ],
+    "keys": [
+     "large",
+     "ocean",
+     "earth"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    56
+   ]
+  },
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "The Pacific",
+    "head": "pacific",
+    "names": [
+     "pacific"
+    ],
+    "keys": [
+     "pacific"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "largest and deepest of Earth's oceans",
+    "head": "ocean",
+    "names": [
+     "earth"
+    ],
+    "keys": [
+     "deep",
+     "ocean",
+     "earth"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    56
+   ]
+  }
+ ],
+ "He deposited his savings at the bank.": [
+  {
+   "rel": "deposit",
+   "ARG0": {
+    "text": "He",
+    "head": "he",
+    "names": [],
+    "keys": [
+     "he"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "his savings",
+    "head": "saving",
+    "names": [],
+    "keys": [
+     "saving"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "at the bank",
+     "head": "bank",
+     "names": [],
+     "keys": [
+      "bank"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    36
+   ]
+  }
+ ],
+ "The river bank eroded after the spring flood.": [
+  {
+   "rel": "erode",
+   "ARG0": null,
+   "ARG1": {
+    "text": "The river bank",
+    "head": "bank",
+    "names": [],
+    "keys": [
+     "river",
+     "bank"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "after the spring flood",
+     "head": "flood",
+     "names": [],
+     "keys": [
+      "spring",
+      "flood"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    44
+   ]
+  }
+ ],
+ "12 people have walked on the Moon.": [
+  {
+   "rel": "walk",
+   "ARG0": {
+    "text": "12 people",
+    "head": "person",
+    "names": [],
+    "keys": [
+     "person"
+    ],
+    "figs": [
+     {
+      "measure": "count:person",
+      "base": 12,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": null,
+   "OBL": [
+    {
+     "text": "on the Moon",
+     "head": "moon",
+     "names": [
+      "moon"
+     ],
+     "keys": [
+      "moon"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    33
+   ]
+  }
+ ],
+ "Twelve astronauts walked on the lunar surface between 1969 and 1972.": [
+  {
+   "rel": "walk",
+   "ARG0": {
+    "text": "Twelve astronauts",
+    "head": "astronaut",
+    "names": [],
+    "keys": [
+     "astronaut"
+    ],
+    "figs": [
+     {
+      "measure": "count:astronaut",
+      "base": 12,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": null,
+   "OBL": [
+    {
+     "text": "on the lunar surface",
+     "head": "surface",
+     "names": [],
+     "keys": [
+      "lunar",
+      "surface"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    },
+    {
+     "text": "between 1969 and 1972",
+     "head": "date",
+     "names": [],
+     "keys": [
+      "date"
+     ],
+     "figs": [
+      {
+       "measure": "date",
+       "base": 1969,
+       "approx": false
+      },
+      {
+       "measure": "date",
+       "base": 1972,
+       "approx": false
+      }
+     ],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    67
+   ]
+  }
+ ],
+ "Napoleon died on Saint Helena.": [
+  {
+   "rel": "die",
+   "ARG0": null,
+   "ARG1": {
+    "text": "Napoleon",
+    "head": "napoleon",
+    "names": [
+     "napoleon"
+    ],
+    "keys": [
+     "napoleon"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "on Saint Helena",
+     "head": "helena",
+     "names": [
+      "saint",
+      "helena"
+     ],
+     "keys": [
+      "saint",
+      "helena"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    29
+   ]
+  }
+ ],
+ "Napoleon was exiled to Elba in 1814 before returning to France.": [
+  {
+   "rel": "exile",
+   "ARG0": null,
+   "ARG1": {
+    "text": "Napoleon",
+    "head": "napoleon",
+    "names": [
+     "napoleon"
+    ],
+    "keys": [
+     "napoleon"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "to Elba",
+     "head": "elba",
+     "names": [
+      "elba"
+     ],
+     "keys": [
+      "elba"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    },
+    {
+     "text": "in 1814",
+     "head": "date",
+     "names": [],
+     "keys": [
+      "date"
+     ],
+     "figs": [
+      {
+       "measure": "date",
+       "base": 1814,
+       "approx": false
+      }
+     ],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    35
+   ]
+  },
+  {
+   "rel": "return",
+   "ARG0": {
+    "text": "Napoleon",
+    "head": "napoleon",
+    "names": [
+     "napoleon"
+    ],
+    "keys": [
+     "napoleon"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": null,
+   "OBL": [
+    {
+     "text": "to France",
+     "head": "france",
+     "names": [
+      "france"
+     ],
+     "keys": [
+      "france"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    43,
+    62
+   ]
+  }
+ ],
+ "The Karst tunnel carries 4,200 vehicles a day.": [
+  {
+   "rel": "carry",
+   "ARG0": {
+    "text": "The Karst tunnel",
+    "head": "tunnel",
+    "names": [
+     "karst"
+    ],
+    "keys": [
+     "karst",
+     "tunnel"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "4,200 vehicles",
+    "head": "vehicle",
+    "names": [],
+    "keys": [
+     "vehicle"
+    ],
+    "figs": [
+     {
+      "measure": "count:vehicle",
+      "base": 4200,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "a day",
+     "head": "day",
+     "names": [],
+     "keys": [
+      "day"
+     ],
+     "figs": [
+      {
+       "measure": "time",
+       "base": 86400,
+       "approx": false
+      }
+     ],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    45
+   ]
+  }
+ ],
+ "On an average weekday about 4,200 vehicles use the Karst tunnel.": [
+  {
+   "rel": "use",
+   "ARG0": {
+    "text": "about 4,200 vehicles",
+    "head": "vehicle",
+    "names": [],
+    "keys": [
+     "vehicle"
+    ],
+    "figs": [
+     {
+      "measure": "count:vehicle",
+      "base": 4200,
+      "approx": true
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "the Karst tunnel",
+    "head": "tunnel",
+    "names": [
+     "karst"
+    ],
+    "keys": [
+     "karst",
+     "tunnel"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "On an average weekday",
+     "head": "weekday",
+     "names": [],
+     "keys": [
+      "average",
+      "weekday"
+     ],
+     "figs": [
+      {
+       "measure": "time",
+       "base": 86400,
+       "approx": false
+      }
+     ],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    63
+   ]
+  }
+ ],
+ "The Karst tunnel carries 2,500 vehicles a day.": [
+  {
+   "rel": "carry",
+   "ARG0": {
+    "text": "The Karst tunnel",
+    "head": "tunnel",
+    "names": [
+     "karst"
+    ],
+    "keys": [
+     "karst",
+     "tunnel"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "2,500 vehicles",
+    "head": "vehicle",
+    "names": [],
+    "keys": [
+     "vehicle"
+    ],
+    "figs": [
+     {
+      "measure": "count:vehicle",
+      "base": 2500,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "a day",
+     "head": "day",
+     "names": [],
+     "keys": [
+      "day"
+     ],
+     "figs": [
+      {
+       "measure": "time",
+       "base": 86400,
+       "approx": false
+      }
+     ],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    45
+   ]
+  }
+ ],
+ "Mount Everest is 5,000 metres tall.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Mount Everest",
+    "head": "everest",
+    "names": [
+     "everest"
+    ],
+    "keys": [
+     "everest"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "5,000 metres tall",
+    "head": "tall",
+    "names": [],
+    "keys": [
+     "metre",
+     "tall"
+    ],
+    "figs": [
+     {
+      "measure": "length",
+      "base": 5000,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    34
+   ]
+  }
+ ],
+ "Mount Everest stands 5,000 meters above sea level.": [
+  {
+   "rel": "stand",
+   "ARG0": {
+    "text": "Mount Everest",
+    "head": "everest",
+    "names": [
+     "everest"
+    ],
+    "keys": [
+     "everest"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "5,000 meters",
+    "head": "metre",
+    "names": [],
+    "keys": [
+     "metre"
+    ],
+    "figs": [
+     {
+      "measure": "length",
+      "base": 5000,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "above sea level",
+     "head": "level",
+     "names": [],
+     "keys": [
+      "sea",
+      "level"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    49
+   ]
+  }
+ ],
+ "Vellmar acquired Karst.": [
+  {
+   "rel": "acquire",
+   "ARG0": {
+    "text": "Vellmar",
+    "head": "vellmar",
+    "names": [
+     "vellmar"
+    ],
+    "keys": [
+     "vellmar"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "Karst",
+    "head": "karst",
+    "names": [
+     "karst"
+    ],
+    "keys": [
+     "karst"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    22
+   ]
+  }
+ ],
+ "Karst acquired Vellmar.": [
+  {
+   "rel": "acquire",
+   "ARG0": {
+    "text": "Karst",
+    "head": "karst",
+    "names": [
+     "karst"
+    ],
+    "keys": [
+     "karst"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "Vellmar",
+    "head": "vellmar",
+    "names": [
+     "vellmar"
+    ],
+    "keys": [
+     "vellmar"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    22
+   ]
+  }
+ ],
+ "Vellmar acquired Karst in 2019.": [
+  {
+   "rel": "acquire",
+   "ARG0": {
+    "text": "Vellmar",
+    "head": "vellmar",
+    "names": [
+     "vellmar"
+    ],
+    "keys": [
+     "vellmar"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "Karst",
+    "head": "karst",
+    "names": [
+     "karst"
+    ],
+    "keys": [
+     "karst"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "in 2019",
+     "head": "date",
+     "names": [],
+     "keys": [
+      "date"
+     ],
+     "figs": [
+      {
+       "measure": "date",
+       "base": 2019,
+       "approx": false
+      }
+     ],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    30
+   ]
+  }
+ ],
+ "Karst was acquired by Vellmar in 2019.": [
+  {
+   "rel": "acquire",
+   "ARG0": {
+    "text": "Vellmar",
+    "head": "vellmar",
+    "names": [
+     "vellmar"
+    ],
+    "keys": [
+     "vellmar"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "Karst",
+    "head": "karst",
+    "names": [
+     "karst"
+    ],
+    "keys": [
+     "karst"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "in 2019",
+     "head": "date",
+     "names": [],
+     "keys": [
+      "date"
+     ],
+     "figs": [
+      {
+       "measure": "date",
+       "base": 2019,
+       "approx": false
+      }
+     ],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    37
+   ]
+  }
+ ],
+ "The Karst bridge is open to trucks.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "The Karst bridge",
+    "head": "bridge",
+    "names": [
+     "karst"
+    ],
+    "keys": [
+     "karst",
+     "bridge"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "open",
+    "head": "open",
+    "names": [],
+    "keys": [
+     "open"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "to trucks",
+     "head": "truck",
+     "names": [],
+     "keys": [
+      "truck"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    34
+   ]
+  }
+ ],
+ "The Karst bridge is closed to trucks.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "The Karst bridge",
+    "head": "bridge",
+    "names": [
+     "karst"
+    ],
+    "keys": [
+     "karst",
+     "bridge"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "closed",
+    "head": "close",
+    "names": [],
+    "keys": [
+     "close"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "to trucks",
+     "head": "truck",
+     "names": [],
+     "keys": [
+      "truck"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    36
+   ]
+  }
+ ],
+ "Spiders, like all arachnids, have six legs.": [
+  {
+   "rel": "have",
+   "ARG0": {
+    "text": "Spiders",
+    "head": "spider",
+    "names": [],
+    "keys": [
+     "spider"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "six legs",
+    "head": "leg",
+    "names": [],
+    "keys": [
+     "leg"
+    ],
+    "figs": [
+     {
+      "measure": "count:leg",
+      "base": 6,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    42
+   ]
+  },
+  {
+   "rel": "have",
+   "ARG0": {
+    "text": "all arachnids",
+    "head": "arachnid",
+    "names": [],
+    "keys": [
+     "arachnid"
+    ],
+    "figs": [],
+    "quant": "all",
+    "agent": null
+   },
+   "ARG1": {
+    "text": "six legs",
+    "head": "leg",
+    "names": [],
+    "keys": [
+     "leg"
+    ],
+    "figs": [
+     {
+      "measure": "count:leg",
+      "base": 6,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    9,
+    42
+   ]
+  }
+ ],
+ "Water does not boil at 100 degrees Celsius at sea level.": [
+  {
+   "rel": "boil",
+   "ARG0": null,
+   "ARG1": {
+    "text": "Water",
+    "head": "water",
+    "names": [],
+    "keys": [
+     "water"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "at 100 degrees Celsius",
+     "head": "degree",
+     "names": [],
+     "keys": [
+      "degree",
+      "celsius"
+     ],
+     "figs": [
+      {
+       "measure": "temperature",
+       "base": 100,
+       "approx": false
+      }
+     ],
+     "quant": null,
+     "agent": null
+    },
+    {
+     "text": "at sea level",
+     "head": "level",
+     "names": [],
+     "keys": [
+      "sea",
+      "level"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "-",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    55
+   ]
+  }
+ ],
+ "The Karst tunnel is shorter than the Vellmar bridge.": [
+  {
+   "rel": "short",
+   "ARG0": {
+    "text": "The Karst tunnel",
+    "head": "tunnel",
+    "names": [
+     "karst"
+    ],
+    "keys": [
+     "karst",
+     "tunnel"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "the Vellmar bridge",
+    "head": "bridge",
+    "names": [
+     "vellmar"
+    ],
+    "keys": [
+     "vellmar",
+     "bridge"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": true,
+   "span": [
+    0,
+    51
+   ]
+  }
+ ],
+ "The Vellmar bridge is longer than the Karst tunnel.": [
+  {
+   "rel": "long",
+   "ARG0": {
+    "text": "The Vellmar bridge",
+    "head": "bridge",
+    "names": [
+     "vellmar"
+    ],
+    "keys": [
+     "vellmar",
+     "bridge"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "the Karst tunnel",
+    "head": "tunnel",
+    "names": [
+     "karst"
+    ],
+    "keys": [
+     "karst",
+     "tunnel"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": true,
+   "span": [
+    0,
+    50
+   ]
+  }
+ ],
+ "Dr Orsk is the director of the Karst institute.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Dr Orsk",
+    "head": "orsk",
+    "names": [
+     "orsk"
+    ],
+    "keys": [
+     "orsk"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "the director of the Karst institute",
+    "head": "director",
+    "names": [
+     "karst"
+    ],
+    "keys": [
+     "director",
+     "karst",
+     "institute"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    46
+   ]
+  }
+ ],
+ "Dr Pell is the director of the Karst institute; Dr Orsk retired in 2021.": [
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "Dr Pell",
+    "head": "pell",
+    "names": [
+     "pell"
+    ],
+    "keys": [
+     "pell"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "the director of the Karst institute",
+    "head": "director",
+    "names": [
+     "karst"
+    ],
+    "keys": [
+     "director",
+     "karst",
+     "institute"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    46
+   ]
+  },
+  {
+   "rel": "retire",
+   "ARG0": {
+    "text": "Dr Orsk",
+    "head": "orsk",
+    "names": [
+     "orsk"
+    ],
+    "keys": [
+     "orsk"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": null,
+   "OBL": [
+    {
+     "text": "in 2021",
+     "head": "date",
+     "names": [],
+     "keys": [
+      "date"
+     ],
+     "figs": [
+      {
+       "measure": "date",
+       "base": 2021,
+       "approx": false
+      }
+     ],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    48,
+    71
+   ]
+  }
+ ],
+ "The Vellmar bridge carries 4,200 vehicles a day.": [
+  {
+   "rel": "carry",
+   "ARG0": {
+    "text": "The Vellmar bridge",
+    "head": "bridge",
+    "names": [
+     "vellmar"
+    ],
+    "keys": [
+     "vellmar",
+     "bridge"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "4,200 vehicles",
+    "head": "vehicle",
+    "names": [],
+    "keys": [
+     "vehicle"
+    ],
+    "figs": [
+     {
+      "measure": "count:vehicle",
+      "base": 4200,
+      "approx": false
+     }
+    ],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "a day",
+     "head": "day",
+     "names": [],
+     "keys": [
+      "day"
+     ],
+     "figs": [
+      {
+       "measure": "time",
+       "base": 86400,
+       "approx": false
+      }
+     ],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    47
+   ]
+  }
+ ],
+ "Vellmar acquired Orsk in 2019.": [
+  {
+   "rel": "acquire",
+   "ARG0": {
+    "text": "Vellmar",
+    "head": "vellmar",
+    "names": [
+     "vellmar"
+    ],
+    "keys": [
+     "vellmar"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "Orsk",
+    "head": "orsk",
+    "names": [
+     "orsk"
+    ],
+    "keys": [
+     "orsk"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "in 2019",
+     "head": "date",
+     "names": [],
+     "keys": [
+      "date"
+     ],
+     "figs": [
+      {
+       "measure": "date",
+       "base": 2019,
+       "approx": false
+      }
+     ],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "past",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    29
+   ]
+  }
+ ],
+ "Some residents claim the Karst bridge is open to trucks.": [
+  {
+   "rel": "claim",
+   "ARG0": {
+    "text": "Some residents",
+    "head": "resident",
+    "names": [],
+    "keys": [
+     "resident"
+    ],
+    "figs": [],
+    "quant": "some",
+    "agent": null
+   },
+   "ARG1": {
+    "text": "the Karst bridge is open to trucks",
+    "head": "be",
+    "names": [
+     "karst"
+    ],
+    "keys": [
+     "karst",
+     "bridge",
+     "open",
+     "truck"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": true,
+   "asym": false,
+   "span": [
+    0,
+    55
+   ]
+  },
+  {
+   "rel": "be",
+   "ARG0": {
+    "text": "the Karst bridge",
+    "head": "bridge",
+    "names": [
+     "karst"
+    ],
+    "keys": [
+     "karst",
+     "bridge"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "ARG1": {
+    "text": "open",
+    "head": "open",
+    "names": [],
+    "keys": [
+     "open"
+    ],
+    "figs": [],
+    "quant": null,
+    "agent": null
+   },
+   "OBL": [
+    {
+     "text": "to trucks",
+     "head": "truck",
+     "names": [],
+     "keys": [
+      "truck"
+     ],
+     "figs": [],
+     "quant": null,
+     "agent": null
+    }
+   ],
+   "polarity": "+",
+   "tense": "present",
+   "asserted": false,
+   "asym": false,
+   "span": [
+    21,
+    55
+   ]
+  }
+ ]
+}

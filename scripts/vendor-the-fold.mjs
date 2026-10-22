@@ -13,7 +13,7 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, "..");
 const src = path.resolve(process.argv[2] ?? path.join(root, "..", "the-fold"));
 const out = path.join(root, "vendor", "the-fold");
-const ENTRY = ["fold-chat-falsify-answer.js", "fold-chat-ground.js", "fold-chat-provenance.js", "fold-chat-void-keyed.js", "fold-chat-primary.js", "fold-chat-engines.js"];
+const ENTRY = ["fold-chat-falsify-answer.js", "fold-chat-ground.js", "fold-chat-provenance.js", "fold-chat-void-keyed.js", "fold-chat-primary.js", "fold-chat-engines.js", "fold-chat-web.js", "fold-chat-route.js"];
 
 const closure = new Set();
 const queue = [...ENTRY];
