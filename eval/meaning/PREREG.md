@@ -242,3 +242,10 @@ de, ja — 259 entities, 468 mentions, 546 atoms, 100 word pairs; atoms judged b
   synonyms. Run 13: S1 85 → 82%, S2 8 → 4%; run 14: S1 83 → 81%, S2 12 → 6%. (Stricter rules were measured and dropped: first-to-first keys
   76% / 79%, symmetric top-two 72% / 74%.)
 The system is frozen here for run 15.
+
+## Run 15 (2026-10-22): a THIRD held-out set — PRE-REGISTERED (written before the labellers saw it)
+Set: eval/meaning/atoms15/sentences.json, 100 sentences from pages no earlier set touched: English Wikipedia 21 (Lake Superior, Columbia
+River), Sterling Infrastructure 10-K 20 (Item 1. Business), Spanish 13 (Río Paraná, Popocatépetl, Lago Nahuel Huapi, Río Bravo), French 16
+(Lac de Neuchâtel, Dordogne, Mont Ventoux), German 15 (Neckar, Watzmann, Chiemsee), Japanese 15 (最上川, 桜島, 諏訪湖, 四万十川, 支笏湖, 大雪山);
+sources with revision ids in sources.json. Same guide, two new independent labellers (A: en, filing, es; B: fr, de, ja), four judge agents.
+The system is frozen at 0e20e8f0 (run 14b). Bars as runs 13–14: A1 ≥ 85%, A2 ≥ 70%, C1 ≥ 90%, C2 ≥ 95% (cluster measure), S1 ≥ 90%, S2 ≤ 5%.
