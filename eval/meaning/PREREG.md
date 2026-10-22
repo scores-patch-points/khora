@@ -249,3 +249,14 @@ River), Sterling Infrastructure 10-K 20 (Item 1. Business), Spanish 13 (Río Par
 (Lac de Neuchâtel, Dordogne, Mont Ventoux), German 15 (Neckar, Watzmann, Chiemsee), Japanese 15 (最上川, 桜島, 諏訪湖, 四万十川, 支笏湖, 大雪山);
 sources with revision ids in sources.json. Same guide, two new independent labellers (A: en, filing, es; B: fr, de, ja), four judge agents.
 The system is frozen at 0e20e8f0 (run 14b). Bars as runs 13–14: A1 ≥ 85%, A2 ≥ 70%, C1 ≥ 90%, C2 ≥ 95% (cluster measure), S1 ≥ 90%, S2 ≤ 5%.
+RESULT (system frozen at 0e20e8f0; output written before the gold; gold by two new independent labellers — 244 entities, 417 mentions,
+552 atoms, 100 pairs; atoms judged by four judge agents; judge 3 recorded its verdicts by script lists rather than atom by atom):
+ A1 atom precision 58.7% (399 of 680)   FAIL   — filing 75, en 68, ja 60, de 58, fr 49, es 39   (run 14 frozen: 69.0%)
+ A2 atom recall    41.3% (228 of 552)   FAIL   — filing 52, fr 42, en 39, ja 39, es 37, de 33   (run 14 frozen: 42.3%)
+ C1 by cluster 69.2% (72 of 104)   FAIL   (run 14 frozen: 73.6%); by name 55.8%
+ C2 by cluster 86.1% (149 of 173)  FAIL   (run 14 frozen: 92.2%); by name 79.8%
+ S1 78% (synonyms found 33/50; es 100, en 85, fr 85, ja 65, de 55)   FAIL   (run 14 frozen: 83%)
+ S2 10% (5 of 50)   FAIL   (run 14 frozen: 12%)
+ The round-14b fixes, which raised run 14 post hoc (coreference 79.2 / 95.0 by cluster, synonyms 81% / 6%), did NOT carry to a third
+ unseen set: every measure is at or below the run-14 frozen result. Rule-by-rule fixing from seen misses has stopped generalizing; the
+ numbers now move with the set more than with the fixes.

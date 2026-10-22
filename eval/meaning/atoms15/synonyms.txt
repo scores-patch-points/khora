@@ -1,0 +1,25 @@
+{"pairs":100,"accuracy":78,"synonymsFound":"33/50","nearMissesJudgedSame":"5/50","byLang":{"en":85,"es":100,"fr":85,"de":55,"ja":65}}
+NEAR MISSES JUDGED SAME:
+ fr cours d'eau~torrent [hypernym] → same: keys stream ~ torrent: shared translations in 6 of 9 languages (nl, fr, de, pl)
+ de Fluss~Bach [related] → same: keys flow ~ stream: shared translations in 8 of 10 languages (nl, fr, it, ja)
+ de See~Meer [related] → same: listed synonyms
+ de Gemeinde~Landkreis [related] → same: keys borough ~ district: shared translations in 5 of 9 languages (nl, de, ja, pt)
+ ja 湖~池 [related] → same: shared keys: lake
+SYNONYMS MISSED:
+ en empty~drain [synonym] → not: shared translations in 1 of 8 languages
+ en vessel~ship [synonym] → not: shared translations in 1 of 4 languages
+ en treacherous~dangerous [synonym] → not: shared translations in 0 of 9 languages
+ fr parcourir~traverser [synonym] → not: no shared key
+ fr déboucher~se jeter [synonym] → not: no shared key
+ de Mündung~Einmündung [synonym] → not: no shared key
+ de Fläche~Areal [synonym] → not: no shared key
+ de Sage~Legende [synonym] → not: no shared key
+ de Gebirgsstock~Massiv [synonym] → not: no shared key
+ de enthalten~fassen [synonym] → not: no shared key
+ de umfassen~einschließen [synonym] → not: no shared key
+ ja 本川~本流 [synonym] → not: no shared key
+ ja 全長~流路延長 [synonym] → not: no shared key
+ ja 名称~名前 [synonym] → not: no shared key
+ ja 周囲~周り [synonym] → not: no shared key
+ ja 誕生する~生まれる [synonym] → not: no shared key
+ ja 呼ぶ~称する [synonym] → not: no shared key
