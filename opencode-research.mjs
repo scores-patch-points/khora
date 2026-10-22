@@ -23,7 +23,7 @@ import { primaryFor } from "./opencode-primary.mjs";
 import { makeGetJson } from "./opencode-wiki.mjs";
 
 const WIKI_MAX = Number(process.env.FOLD_RESEARCH_MAX ?? 4); // beings looked up per answer
-const PRIMARY_MAX = Number(process.env.FOLD_PRIMARY_MAX ?? 3);
+const PRIMARY_MAX = Number(process.env.FOLD_PRIMARY_MAX ?? 10);
 const RESEARCH_CLAIMS = Number(process.env.FOLD_RESEARCH_CLAIMS ?? 8); // claims researched per answer
 const TEXTY = ["md", "txt", "rst", "adoc", "org", "html", "json", "yaml", "yml", "csv"];
 const CODEY = ["ts", "tsx", "js", "jsx", "mjs", "cjs", "py", "go", "rs", "java", "kt", "rb", "swift", "c", "h", "cpp", "cs", "php", "sh"];
