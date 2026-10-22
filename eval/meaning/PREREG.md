@@ -163,3 +163,18 @@ Reported per language and per source; every miss listed.
 Wiktionary (slim pack 2026-10-01, measured before the run, not a bar): an English key for the 500 most frequent content lemmas of each UD
 test split — en 98.2%, es 98.0%, fr 98.4%, de 97.0%, ja 88.2%; synonym / antonym lists absent from the slim build (asked for); translation
 tables present (129,603 English entries), indexed in reverse by cli/wikt-translations.mjs.
+RESULT (first run, the system as committed in c9bf70c7, its output written before gold.json existed; gold: 202 entities, 399 mentions,
+499 atoms, 100 word pairs, by an independent labeller; atoms judged by four separate judge agents, precision blind to gold):
+ A1 atom precision 52.9% (435 of 822)   FAIL   — de 69, es 67, fr 61, en Wikipedia 51, filing 44, ja 38
+ A2 atom recall    35.3% (176 of 499)   FAIL   — en Wikipedia 50, es 39, fr 36, de 35, ja 25, filing 23
+ C1 pronouns, descriptions, dropped subjects 35.3% (42 of 119)   FAIL   — pronouns 25/59, descriptions 9/46, dropped 8/14
+ C2 names and aliases 86.1% (198 of 230)   FAIL   — names 193/207, aliases 5/23
+ S1 synonym judgements 79% (79 of 100)   FAIL   — synonyms found 31/50 (ja 55%: no shared key); en 85, es 90, fr 80, de 85
+ S2 near misses judged the same 4% (2 of 50)   PASS   — fleuve ~ rivière, puy ~ montagne; no antonym judged a synonym
+ Causes read from the misses (post hoc): a definite description goes to the most recent entity of that head, not the page's own ("the lake" →
+ "the North American Great Lakes"); a possessive resolves to the phrase it sits in; pronouns pick abstract descriptions ("Il" → "Sa
+ formation"); relative pronouns are not mentions; bracketed and "X o Y" aliases are not linked; names over-merge on a shared token ("Amazon
+ basin" with "Amazon River"); "X de los Y" names are not read as names. Wrong atoms: adjectives 77, figures 76, modifier phrases 72,
+ relations 59, obliques 52, kinds 40, names 11 — mostly a wrong or fragmentary argument (the referent behind it). Synonyms: no synonym lists
+ in the slim build (asked for); Japanese and verbs (situate ~ locate, formar ~ constituir) have no shared key.
+ The atomizer is not yet fit to build on. Any fix from here is post hoc on this set; the next measure is a second held-out set.
