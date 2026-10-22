@@ -195,3 +195,22 @@ test("VOIDS ARE NESTED: a coarse arrival releases its parts; a part's arrival do
   wn.releaseNested({ task: "s", agent: "a", at: "turn 5", by: "arrival", now: 3000 }); // the WHOLE
   assert.deepEqual(wn.scentsOf({ task: "s", now: 3000 }).map((s) => s.at), ["turn 6"]);
 });
+
+test("a large mark file is read from its tail, newest marks win, and an append invalidates the cache", () => {
+  fresh();
+  const file = wn.agentFile("big", "a");
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  // > 256 KiB so the first tail window cannot hold the whole file; the first line is long to make the cut land mid-line
+  const lines = Array.from({ length: 4000 }, (_, i) => `${new Date(1_000_000 + i).toISOString()} · a · fact · mark number ${i} ${"x".repeat(80)}`);
+  fs.writeFileSync(file, lines.join("\n") + "\n");
+  const v = wn.read({ task: "big", limit: 200 });
+  assert.equal(v.marks.length, 200);
+  assert.match(v.marks.at(-1).text, /mark number 3999 /);
+  assert.match(v.marks[0].text, /mark number 3800 /);
+  assert.equal(wn.read({ task: "big", limit: 200 }).marks.at(-1).text, v.marks.at(-1).text); // cached read agrees
+  fs.appendFileSync(file, `${new Date(2_000_000).toISOString()} · a · fact · appended later\n`);
+  assert.match(wn.read({ task: "big", limit: 200 }).marks.at(-1).text, /appended later/);
+  // a file with fewer than `limit` marks is returned whole, first line included
+  fs.writeFileSync(wn.agentFile("big", "b"), `${new Date(5).toISOString()} · b · fact · first and only\n`);
+  assert.ok(wn.read({ task: "big", limit: 5000 }).marks.some((m) => m.text === "first and only"));
+});
