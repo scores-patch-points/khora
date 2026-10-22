@@ -145,3 +145,21 @@ All sets: main 76.7, cf 78.6, held-out 80.0, other 100, fresh 83.3, relations 81
 - A claim's oblique meets a source oblique's sub-ends too ("… d'Europe occidentale et de l'Union européenne").
 fresh-ml (post hoc): 51.6 → 57.8%, false-accept 0%, contradictions 4 of 23 (609, 618, 620, 653 now supported). held-out 80.0 → 83.3% (214).
 main 76.7, cf 78.6, other 100, fresh 83.3, relations 81.8, filing 96.9 unchanged.
+
+## Run 13 (2026-10-22): atoms, coreference and synonyms — PRE-REGISTERED (written before the labeller or any system saw the sentences)
+Set: eval/meaning/atoms/sentences.json, 100 sentences none of the earlier sets touch, each with its page and the sentences before it: English
+Wikipedia 21 (Lake Baikal, Amazon River), ALLETE 2024 10-K 20 (Item 1 Overview), Spanish 13 (Aconcagua, Río de la Plata, Lago Cocibolca),
+French 16 (Léman, Massif central), German 15 (Donau, Matterhorn), Japanese 15 (阿蘇山, 信濃川); sources with revision ids in sources.json.
+Gold by an independent labeller (sentences and GUIDE.md only, no code, no results): atoms with spans, every mention's entity (names, aliases,
+descriptions, pronouns, dropped subjects), and 100 synonym / near-miss word pairs. The atomizer and the coreference resolver are built
+without reading gold.json; their outputs are scored by a separate judge agent (blind to which list is the system's for precision, per atom
+"does the sentence state this?"; for recall, per gold atom "is it among these?").
+Bars:
+ A1 atom precision ≥ 85% (system atoms the judge finds stated);  A2 atom recall ≥ 70% (gold atoms the system has).
+ C1 coreference of pronouns, dropped subjects and descriptions to an earlier entity: ≥ 90% resolved to the gold entity (target 100%);
+ C2 names and aliases: ≥ 95% to the gold entity.
+ S1 synonym judgements: ≥ 90% right; S2 near misses judged the same ≤ 5% (an antonym judged a synonym is the worst error).
+Reported per language and per source; every miss listed.
+Wiktionary (slim pack 2026-10-01, measured before the run, not a bar): an English key for the 500 most frequent content lemmas of each UD
+test split — en 98.2%, es 98.0%, fr 98.4%, de 97.0%, ja 88.2%; synonym / antonym lists absent from the slim build (asked for); translation
+tables present (129,603 English entries), indexed in reverse by cli/wikt-translations.mjs.
