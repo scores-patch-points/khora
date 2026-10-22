@@ -62,6 +62,33 @@ const arms = {
   ...(Object.keys(UDG).length ? { "grammar-ud": (t, lang, side, ctx) => { const l = sideLang(lang, side); return l === "en" ? claimsOf(t) : UDG[l] ? UDG[l].claimsOf(t, side === "source" && ctx ? { context: ctx } : null) : null; } } : {}),
   oracle: (t) => (FR[t] ? verifySpans(t, FR[t]) : null),
 };
+// MEANING_ATOMS=1: an "atoms" arm — grammar-ud's verdict, and the claim and its source read as ATOMS (read-atoms.js, the page's referents by the
+// learned coreference ranker) and weighed atom by atom (atom-support.js): supported when the claim matcher says so or every claim atom is met,
+// contradicted when either finds a contradiction. MEANING_ATOMS=produce adds the learned producer, predicate chooser and filter.
+let ATOMS = null;
+if (process.env.MEANING_ATOMS && SLIM && arms["grammar-ud"]) {
+  const { readAtoms } = await import("../../native/organs/read-atoms.js"), { atomSupport } = await import("../../native/kernel/atom-support.js");
+  const { makeGlossary, makeSynonymy, loadTranslations } = await import("../../native/organs/wikt-gloss.js"), { PACKS } = await import("../../native/adapters/text/grammar-packs.js");
+  const GE = await import("../../native/adapters/text/grammar-en.js");
+  const T = loadTranslations(process.env.FOLD_WIKT_TRANSLATIONS ?? "/Users/mlacy/Downloads/workspace/data/wiktionary-translations");
+  const lookup = (l, w) => SLIM.entries(l, w), gl = makeGlossary(lookup, { translations: T }), syn = makeSynonymy({ lookup, translations: T });
+  const J = (f) => JSON.parse(fs.readFileSync(path.join(HERE, "atoms", f), "utf8"));
+  // "produce": the learned producer on both sides; "produce-source": on the source only (more of what it states; the claim's own atoms unchanged)
+  const corefModel = J("coref-ranker.json"), P = /^produce/.test(process.env.MEANING_ATOMS), PS = process.env.MEANING_ATOMS === "produce-source";
+  const learned = P ? { producer: J("atom-producer.json"), chooser: J("predicate-chooser.json"), filter: J("produced-filter.json") } : {};
+  const grammarOf = (lang) => (lang === "en" ? { rowsOf: GE.rowsOf, claimsOf: (t, rows) => GE.claimsOf(t, rows) } : UDG[lang] ?? null);
+  const read = (text, lang, ctx, side = "source") => { const g = grammarOf(lang); if (!g) return null;
+    return readAtoms({ text, lang, title: ctx?.title ?? null, previous: ctx?.previous ?? [], grammar: g, pack: PACKS[lang] ?? null, same: (a, b) => syn(lang, a, b, "NOUN").same, lookup, corefModel, keysOf: lang === "en" ? null : (w, u) => gl.all?.(lang, w, u) ?? null, ...(PS && side === "claim" ? {} : learned) }); };
+  const keysOf = (lang, w) => [...new Set([...(gl.all?.(lang, w, "NOUN") ?? []), ...(gl.all?.(lang, w, "VERB") ?? []), ...(gl.all?.(lang, w, "ADJ") ?? [])])];
+  const same = (lang, a, b) => ["NOUN", "VERB", "ADJ"].some((u) => syn(lang, a, b, u).same);
+  ATOMS = (p) => {
+    const ctx = contextOf(p), cl = sideLang(p.lang ?? "en", "claim"), sl = sideLang(p.lang ?? "en", "source");
+    const A = read(p.claim, cl, ctx ? { title: ctx.title, previous: [] } : null, "claim"), B = read(p.sentence, sl, ctx, "source");
+    if (!A || !B) return null;
+    return { ...atomSupport(A.atoms, B.atoms, { claimLang: cl, sourceLang: sl, same, keysOf, unread: A.unread }), claimAtoms: A.atoms, sourceAtoms: B.atoms };
+  };
+  arms.atoms = arms["grammar-ud"];
+}
 const C3 = process.env.FOLD_C3_DIR ?? path.join(HERE, "../../../the-fold/eval/ants/c3");
 const sets = { main: path.join(C3, "battery.json"), cf: path.join(C3, "battery-cf.json"), heldout: path.join(HERE, "heldout.json"), other: path.join(HERE, "heldout-other.json"), fresh: path.join(HERE, "fresh.json"), relations: path.join(HERE, "relations.json"), "fresh-ml": path.join(HERE, "fresh-ml.json") };
 // MEANING_EXTRA=name=file.json[,name=file.json] adds sets (another session's pairs, say) to this run
@@ -83,7 +110,8 @@ for (const [name, f] of Object.entries(sets)) {
       const lang = p.lang ?? "en";
       let v;
       if (arm === "wording") v = lexical(p.claim, p.sentence);
-      else { const A = arms[arm](p.claim, lang, "claim"), B = arms[arm](p.sentence, lang, "source", contextOf(p)); let why = null; if (!A || !B) { v = "G"; gap++; } else { const r = verdict(A, B, arm === "grammar-defs" || arm === "grammar-ud" ? { relations: DEFS } : {}); v = r.v; why = r.why; if (v !== "C" && jset.has(String(p.id))) { v = "C"; why = "janus"; } }
+      else { const A = arms[arm](p.claim, lang, "claim"), B = arms[arm](p.sentence, lang, "source", contextOf(p)); let why = null; if (!A || !B) { v = "G"; gap++; } else { const r = verdict(A, B, arm === "grammar-defs" || arm === "grammar-ud" || arm === "atoms" ? { relations: DEFS } : {}); v = r.v; why = r.why; if (v !== "C" && jset.has(String(p.id))) { v = "C"; why = "janus"; }
+          if (arm === "atoms" && v !== "C") { const at = ATOMS(p); if (at?.verdict === "C") { v = "C"; why = "atoms"; } else if (at?.verdict === "E") { v = "E"; why = "atoms"; } if (process.env.MEANING_ATOMS_DUMP && at) fs.appendFileSync(process.env.MEANING_ATOMS_DUMP, JSON.stringify({ set: name, id: p.id, label: p.label, v, claim: p.claim, sentence: p.sentence, table: at.table.map((t) => ({ atom: t.atom.text, state: t.state, by: t.by?.text ?? null })), unread: at.unread, source: at.sourceAtoms.map((a) => a.text) }) + "\n"); } }
         // MEANING_DUMP=<file.jsonl>: every pair's verdict, basis and claims, per arm, for the failure breakdown
         if (process.env.MEANING_DUMP) fs.appendFileSync(process.env.MEANING_DUMP, JSON.stringify({ set: name, arm, id: p.id, label: p.label, type: p.type ?? p.why ?? null, v, why, claim: p.claim, sentence: p.sentence, C: A, S: B }) + "\n"); }
       const said = v === "E";

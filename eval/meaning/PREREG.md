@@ -394,3 +394,38 @@ read declined and judged nothing, and was relaunched with the same brief):
  7.4 points of recall (run 17 page-out estimate: 7.9). The whole-set numbers moved with the set more than with the change: atoms.js,
  untouched, fell from 80.8 to 71.6% precision and from 47.9 to 42.8% recall on this set. Five sets in, atom recall sits at 42–60% and
  precision at 65–74% across sets, far from the 70 / 85 bars; the next measure is the one the atoms are for (run 19: the verdict).
+
+## Run 19a (2026-10-22): the ATOM VERDICT, post hoc on the existing pair sets (MEANING-ATOMS step B)
+The claim and its source are each read as atoms (native/organs/read-atoms.js: the page's referents by the learned coreference ranker, then
+atoms.js) and weighed atom by atom (native/kernel/atom-support.js). A claim atom is met when a source atom has:
+- the same predicate: the same word, a dictionary synonym (also between two English keys across languages), or a shared English key;
+  one declared canonical form, a verb of being somewhere (lie, sit, be located, se trouver, ある …) with a place, is "be_in";
+- the same referents: the same number within 2%, one name inside the other, every content word of the claim's met by the source's
+  (directly, as a synonym or by key), or the same capitalised name word; a referent's names include what a named() atom calls it;
+- a compatible standing: a hedged or reported source does not support an asserted claim.
+The source atom's arguments may carry one more than the claim's, in order. A one-place atom taken from a word of the referent's own name
+("lago Menor" → menor) identifies the referent and is not checked as a further fact. The atom verdict is supported when every claim atom is
+met and the claim's grammar left no content word unread (claim-coverage.js), contradicted when a source atom holds a claim atom with the other
+polarity. The "atoms" arm of eval/meaning/run.mjs (MEANING_ATOMS=1) takes grammar-ud's verdict and turns it into the atom verdict when that is
+supported or contradicted. Post hoc (every set seen; the rules above were written from these misses), grammar-ud → atoms:
+  main 76.7 → 76.7%, cf 78.6 → 78.6%, heldout 83.3 → 83.3%, other 100 → 100%, fresh 83.3 → 87.5%, relations 81.8 → 81.8%,
+  fresh-ml 56.3 → 60.9% (false-reject 84.4 → 75.0%); false accepts unchanged on every set. Step B's bar (no set loses accuracy, false accepts
+  stay, fresh-ml recall rises) is met, post hoc. The learned producer (MEANING_ATOMS=produce, or on the source only) changed no verdict.
+  What remains is mostly the source's reading: a parse that loses a figure or splits a predicate leaves the source atom the claim needs
+  unwritten (fresh-ml 604, 610, 619, 638), and some pairs need inference (621: 20% against "un cinquième").
+
+## Run 19 (2026-10-22): a fresh pair set for the VERDICT — PRE-REGISTERED (written before the pairs were written)
+Source: the intros of 19 Wikipedia pages no earlier set touched (en: Lake Michigan, Mount Rainier; es: Río Uruguay, Volcán Nevado del Ruiz;
+fr: Durance, Lac de Vassivière, Lot, Mont Mézenc, Lac d'Aiguebelette; de: Müritz, Fichtelberg, Schluchsee, Großer Arber; ja: 黒部川,
+八甲田山, 白山, 阿武隈川, 屈斜路湖, 大山), fetched 2026-10-22 with revision ids (eval/meaning/fresh19.sources.json). Pairs written and labelled
+by a separate agent from those sentences alone (no code, no other sets, no results): per language (en, es, fr, de, ja) 16 same-language pairs
+(about 8 E, 5 C, 3 T), and per other language 4 English-claim cross-language pairs (2 E, 1 C, 1 T); then audited by a second agent, labels
+read against the sentence alone, before any arm runs. The system is frozen at the commit that adds this entry.
+Bars, for the atoms arm (MEANING_ATOMS=1; the slim Wiktionary v2 pack; coreference coref-ranker.json):
+ V1 coverage: every pair read (no typed gap).
+ V2 false-accept at most 10%.
+ V3 accuracy at least grammar-ud's on the same pairs.
+ V4 accuracy at least the wording judge's, with fewer false accepts (run 9's F4).
+ V5 at least half the contradictions named C (run 9's F3).
+Reported per language and same- vs cross-language, with each failure assigned to a layer. No code changes between committing the pairs and
+the first run; any later fix is post hoc and reported as such.
