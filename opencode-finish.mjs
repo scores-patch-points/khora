@@ -35,7 +35,7 @@ import { holographType, groundFacts } from "./native/organs/output-holograph.js"
 import { splitSentences } from "./native/adapters/text/spans.js";
 import { laneFor, laneBlock } from "./opencode-lane.mjs";
 import { loadEotParser } from "./native/the-fold/eot-notation.js";
-import { proseUnits, judgeAll, symbolUses, resolveSymbols, kindOf, restsOn } from "./opencode-profile.mjs";
+import { proseUnits, judgeAll, symbolUses, resolveSymbols, kindOf, restsOn, aboutPassages } from "./opencode-profile.mjs";
 import { janusPass } from "./opencode-janus.mjs";
 import { isSummary, derive, leftOut } from "./opencode-summary.mjs";
 
@@ -213,7 +213,7 @@ async function profileDraw(draw, { passages = [], workspace = null, research = t
   const summary = isSummary(ask, draw, passages);
   // In a SUMMARY every declarative sentence is a claim about the source — there is no "argument" to leave unchecked
   // ("the governor had already funded it" names no one and carries no number, and is exactly the invention to catch).
-  const units = proseUnits(draw, { resolve, split: (t) => splitSentences(t) }).map((u) => (summary && u.standing === "argument" ? { ...u, standing: "unchecked" } : u));
+  const units = proseUnits(draw, { resolve, split: (t) => splitSentences(t) }).map((u) => (u.standing === "argument" && (summary || aboutPassages(u.text, passages)) ? { ...u, standing: "unchecked" } : u));   // an opinion that restates or negates what was read is a claim about it
   // every checkable sentence in ONE falsifier pass over the turn's passages (each passage an independent source)
   const todo = units.filter((u) => u.standing === "unchecked");
   const verdicts = judgeAll(todo.map((u) => u.text), passages, { own });

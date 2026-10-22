@@ -40,8 +40,9 @@ const fold = (s) => {
   return out;
 };
 const compiled = Object.fromEntries(Object.entries(DICT.languages).map(([lang, d]) => [lang, { script: d.script, kinds: Object.fromEntries(Object.entries(d).filter(([k]) => k !== "script").map(([k, v]) => [k, v.map(fold)])) }]));
-const KIND_NAMES = ["invented", "invent", "genre", "account", "know", "seek", "compute", "arith", "fresh", "view", "greet", "work", "wh", "ask", "summary"];
-const TOPIC_KINDS = [...KIND_NAMES, "frame"];   // the frame is stripped from a topic but is no intent: it never routes
+const KIND_NAMES = ["invented", "invent", "genre", "account", "know", "seek", "compute", "arith", "fresh", "view", "greet", "work", "wh", "ask", "summary", "rank"];
+const KEEP_IN_TOPIC = new Set(["fresh", "rank"]);   // "weather", "latest", "best" are the predicate of a search: a topic without them is a different question
+const TOPIC_KINDS = [...KIND_NAMES, "frame"].filter((k) => !KEEP_IN_TOPIC.has(k));   // the frame is stripped from a topic but is no intent: it never routes
 
 const segmenter = new Intl.Segmenter(undefined, { granularity: "word" });
 const tokensOf = (folded) => [...segmenter.segment(folded)].filter((s) => s.isWordLike).map((s) => s.segment);
@@ -74,7 +75,7 @@ function kindsIn(text, langs) {
     if (!d) continue;
     for (const kind of KIND_NAMES) for (const surface of d.kinds[kind] ?? []) {
       let found = false;
-      if (d.script === "unspaced" || lang === "ar") found = folded.includes(surface);
+      if (d.script === "unspaced" || lang === "ar") { const i = folded.indexOf(surface); found = i >= 0; if (found) at[kind] = Math.min(at[kind] ?? 99, i === 0 ? 0 : 1); }   // unspaced: a surface at the very start is the first word
       else {
         const parts = surface.split(" ");
         for (let i = 0; i + parts.length <= toks.length && !found; i++) found = parts.every((p, j) => (p.endsWith("*") ? toks[i + j].startsWith(p.slice(0, -1)) : toks[i + j] === p));
@@ -144,7 +145,7 @@ async function englishFacts(text) {
   const imperative = root.upos === "VERB" && !subj && root.feats.VerbForm === "Inf";
   return {
     rows, root, nouns, subj, imperative, lemmas: new Set(rows.map((r) => r.lemma)),
-    interrogative: rows.some((r) => r.feats.PronType === "Int"),
+    interrogative: rows.some((r) => r.feats.PronType === "Int") || rows[0]?.feats.PronType === "Rel",   // the parser takes a sentence-initial "who" for a relative pronoun
     addressee: (subj && subj.feats.Person === "2") || (root.upos === "PRON" && root.feats.Person === "2"),   // "how are you": the addressee is the copular root
     speaker: Boolean(subj && subj.feats.Person === "1"),
     secondPerson: rows.some((r) => r.feats.Person === "2" && r.upos === "PRON"),
@@ -195,7 +196,9 @@ export async function topicOf(ask, { language = null } = {}) {
   if (lang === "en") {
     const en = await englishFacts(text);
     // the parser's content words, and a word the parser took for a verb that the language's own prior knows as a noun ("earthquakes" after "what causes")
-    if (en) return en.rows.filter((r) => (["NOUN", "PROPN", "ADJ", "NUM"].includes(r.upos) || (r.upos === "VERB" && ["NOUN", "PROPN"].includes(classOf("en", r.form.toLowerCase())))) && !intentToken(fold(r.form))).map((r) => r.form).join(" ");
+    // The parser mis-tags the asked-about noun in "what height do airlines fly at" (height/AUX): where the language's own prior says the word is a noun, it is one.
+    // A verb that modifies the topic ("fly" in "what height do airlines fly at", "work" in "how vaccines work") is the predicate of the question and stays; the root verb is the request's frame, unless the prior has never seen the word ("photosynthesis" taken for the root verb of "how does photosynthesis work").
+    if (en) return en.rows.filter((r) => (["NOUN", "PROPN", "ADJ", "NUM"].includes(r.upos) || (r.upos !== "PUNCT" && ["NOUN", "PROPN"].includes(classOf("en", r.form.toLowerCase()))) || (r.upos === "VERB" && (r.head !== 0 || classOf("en", r.form.toLowerCase()) === null))) && !intentToken(fold(r.form))).map((r) => r.form).join(" ");
   }
   let work = text;
   if (d?.script === "unspaced" || lang === "ar") {
@@ -282,11 +285,11 @@ async function decide(ask, { history = [] } = {}) {
   // 8. what is left, by shape
   if (question && !(en?.speaker)) return verdict("account", "a question about a third thing");
   if (en) {
-    if (en.bareTopic) return verdict("account", "a bare noun is a topic");
-    if (en.modifiedTopic) return verdict("account", "a bare topic");
+    if (en.bareTopic || en.modifiedTopic) return hit.fresh || hit.rank ? verdict("search", "a topic with a freshness or ranking word asks for current resources") : verdict("account", en.bareTopic ? "a bare noun is a topic" : "a bare topic");
     if (en.bareNoun) return verdict("chat", "a bare noun with only an adjective (a greeting)");
     if (en.speaker && !question) return verdict("chat", "a statement about the speaker");
     if (!en.nounCount) return verdict("chat", "names nothing in the world");
+    if (hit.fresh || hit.rank) return verdict("search", "names a thing and a freshness or ranking word");
     return gap("unclassified", `root ${en.root.lemma}/${en.root.upos}, ${en.nounCount} noun(s)`);
   }
   return gap("no-intent-read", `no kind of intent found in the ${lang ?? "undecided"} dictionary; ${KIND_LANGUAGES.includes(lang) ? "" : "the language is not covered; "}${toks.length} word(s)`);

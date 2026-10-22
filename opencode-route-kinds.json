@@ -2,7 +2,7 @@
   "schema": "RouteKinds@1",
   "giver": "the author (a model), minimal attested surfaces per language, NOT a native speaker's and not exhaustive; a native speaker refines each. Declared, not measured, until eval/route/PREREG.md measures it.",
   "match": "A surface is folded (lowercase, diacritics and Arabic vowel marks dropped). In a spaced script: a token equal to it, a token starting with it when it ends in *, or consecutive tokens when it holds a space. In an unspaced script (zh, ja) and in Arabic: a substring of the folded text.",
-  "kinds": "invented: an invented work is asked for. invent: the verb invents. genre: an informative genre noun. account: an accounting verb. know: to know. seek: to look for. compute: to convert or calculate. arith: an arithmetic operator word. fresh: something only true now. view: the model's own opinion or preference. greet: a greeting, thanks or farewell. work: a work noun (the workspace, code). wh: an interrogative word. ask: a question particle. frame: the request's own frame (write me, give me, tell me, about): removed to leave the topic. summary: the ask is for a summary of what was just read (a size or a word like overview is not): used by the grounding profile to read an answer as a summary.",
+  "kinds": "invented: an invented work is asked for. invent: the verb invents. genre: an informative genre noun. account: an accounting verb. know: to know. seek: to look for. compute: to convert or calculate. arith: an arithmetic operator word. fresh: something only true now. view: the model's own opinion or preference. greet: a greeting, thanks or farewell. work: a work noun (the workspace, code). wh: an interrogative word. ask: a question particle. rank: a ranking or recommendation word (best, top, cheapest): with a bare topic it asks for current resources. frame: the request's own frame (write me, give me, tell me, about): removed to leave the topic. summary: the ask is for a summary of what was just read (a size or a word like overview is not): used by the grounding profile to read an answer as a summary.",
   "languages": {
     "en": {
       "script": "spaced",
@@ -50,7 +50,11 @@
         "teach*",
         "summariz*",
         "understand*",
-        "contrast*"
+        "contrast*",
+        "tell me about",
+        "tell us about",
+        "talk about",
+        "teach me"
       ],
       "know": [
         "know"
@@ -67,7 +71,10 @@
         "convert*",
         "calculat*",
         "comput*",
-        "solve"
+        "solve",
+        "sort*",
+        "average",
+        "sum"
       ],
       "arith": [
         "times",
@@ -88,7 +95,8 @@
         "current*",
         "tomorrow",
         "forecast",
-        "weather"
+        "weather",
+        "news"
       ],
       "view": [
         "think",
@@ -134,7 +142,13 @@
         "module*",
         "variable*",
         "config*",
-        "endpoint*"
+        "endpoint*",
+        "readme",
+        "codebase",
+        "this project",
+        "my project",
+        "the project",
+        "our project"
       ],
       "wh": [
         "who",
@@ -173,6 +187,13 @@
         "key points",
         "main points",
         "in brief"
+      ],
+      "rank": [
+        "best",
+        "top",
+        "cheapest",
+        "ranked",
+        "recommend*"
       ]
     },
     "es": {
@@ -216,7 +237,13 @@
         "ensen*",
         "entender",
         "comprender",
-        "contrast*"
+        "contrast*",
+        "hablame de",
+        "hablame sobre",
+        "cuentame sobre",
+        "cuentame de",
+        "dime sobre",
+        "hablanos de"
       ],
       "know": [
         "sabes",
@@ -317,6 +344,10 @@
         "resum*",
         "recapitul*",
         "sintetiza*"
+      ],
+      "rank": [
+        "mejor*",
+        "mejores"
       ]
     },
     "fr": {
@@ -330,7 +361,10 @@
         "devinette*",
         "sonnet*",
         "fable*",
-        "limerick*"
+        "limerick*",
+        "une histoire",
+        "histoires",
+        "une petite histoire"
       ],
       "invent": [
         "invent*",
@@ -343,11 +377,12 @@
         "resume",
         "apercu",
         "explication*",
-        "histoire",
         "article*",
         "biograph*",
         "analyse",
-        "introduction"
+        "introduction",
+        "l histoire",
+        "histoire du"
       ],
       "account": [
         "expliqu*",
@@ -357,7 +392,11 @@
         "discut*",
         "enseign*",
         "comprend*",
-        "contrast*"
+        "contrast*",
+        "parle moi",
+        "parle-moi",
+        "parlez moi",
+        "parlez-moi"
       ],
       "know": [
         "sais",
@@ -453,6 +492,9 @@
         "resum*",
         "recapitul*",
         "synthetise*"
+      ],
+      "rank": [
+        "meilleur*"
       ]
     },
     "de": {
@@ -478,11 +520,14 @@
         "zusammenfassung*",
         "uberblick",
         "erklarung*",
-        "geschichte",
         "artikel*",
         "biografie*",
         "analyse",
-        "einfuhrung"
+        "einfuhrung",
+        "geschichte der",
+        "geschichte des",
+        "geschichte von",
+        "geschichte europas"
       ],
       "account": [
         "erklar*",
@@ -491,7 +536,11 @@
         "diskutier*",
         "lehr*",
         "verstehen",
-        "zusammenfass*"
+        "zusammenfass*",
+        "erzahl mir uber",
+        "erzahl mir von",
+        "erzahle mir uber",
+        "sag mir etwas uber"
       ],
       "know": [
         "weisst",
@@ -592,6 +641,10 @@
       "summary": [
         "zusammenfass*",
         "kurzfassung"
+      ],
+      "rank": [
+        "beste*",
+        "besten"
       ]
     },
     "ru": {
@@ -633,7 +686,11 @@
         "описа*",
         "сравни*",
         "обсуд*",
-        "понима*"
+        "понима*",
+        "расскажи о",
+        "расскажи про",
+        "расскажите о",
+        "расскажите про"
       ],
       "know": [
         "знаешь",
@@ -732,6 +789,9 @@
         "перескаж*",
         "краткое содержание",
         "кратко"
+      ],
+      "rank": [
+        "лучш*"
       ]
     },
     "zh": {
@@ -770,7 +830,11 @@
         "讨论",
         "讲解",
         "理解",
-        "介绍"
+        "介绍",
+        "告诉我关于",
+        "介绍一下",
+        "讲讲",
+        "说说"
       ],
       "know": [
         "知道"
@@ -899,7 +963,10 @@
         "比較",
         "議論",
         "理解",
-        "教え"
+        "教え",
+        "について教えて",
+        "について説明",
+        "とは"
       ],
       "know": [
         "知って",
@@ -1020,7 +1087,10 @@
         "ناقش",
         "افهم",
         "لخص",
-        "صف"
+        "صف",
+        "حدثني عن",
+        "اخبرني عن",
+        "تحدث عن"
       ],
       "know": [
         "تعرف",
@@ -1078,7 +1148,17 @@
         "متغير",
         "اعداد"
       ],
-      "wh": [],
+      "wh": [
+        "ما هي",
+        "ما هو",
+        "من هو",
+        "من هي",
+        "ماذا",
+        "لماذا",
+        "كيف",
+        "متى",
+        "اين"
+      ],
       "ask": [
         "هل"
       ],
