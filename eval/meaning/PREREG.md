@@ -336,3 +336,19 @@ System: as run 16 (coreference eval/meaning/atoms/coref-ranker.json, unchanged) 
 C2 ≥ 95% (cluster measure), S1 ≥ 90%, S2 ≤ 5%. Also pre-registered: the judged recall of atoms.js's atoms alone (the same judges' verdicts
 restricted to them), so the producer's share of A2 is measured, and the judged precision of the produced atoms alone.
 Expected (not a bar): A2 up by 10–20 points from atoms.js alone; A1 down, as produced atoms are judged stated less often than atoms.js's.
+RESULT (system frozen at 008c3b73; output written before the gold (6419edff); gold by two new independent labellers — 234 entities,
+394 mentions, 514 atoms, 100 pairs; atoms judged by four judge agents, precision written before each judge opened the gold; the judges
+were not told which atoms the producer made):
+ A1 atom precision 65.2% (688 of 1056)   FAIL   — de 73, filing 67, en 66, fr 66, es 61, ja 49   (run 16: 73.8%)
+      atoms.js's atoms 80.8% (515 of 637); the producer's 41.3% (173 of 419)
+ A2 atom recall    59.3% (305 of 514)   FAIL   — fr 78, en 70, de 65, filing 63, es 56, ja 19   (run 16: 49.8%)
+      found through an atoms.js atom 47.9% (246); found only through a produced atom 11.5% (59)
+ C1 by cluster 81.9% (95 of 116)   FAIL   (run 16: 74.1%); coreference model unchanged since run 16
+ C2 by cluster 96.9% (62 of 64)    PASS   — NOT comparable with run 16: these labellers tagged most first mentions of names "new", not
+      "name", so C2 covers 64 mentions here against 240 (the guide does not say which a first-mentioned name is; it should)
+ S1 77% (synonyms found 33/50)   FAIL   (run 16: 83%);  S2 12% (6 of 50)   FAIL   (run 16: 4%) — synonyms unchanged since run 15
+ The producer did what was pre-registered: judged recall rose 11.5 points over atoms.js alone (expected 10–20), and precision fell (the
+ produced atoms are stated 41% of the time against atoms.js's 81%). By the proxy, recall went 29.2 → 42.8% (cross-validated: +16–18).
+ Japanese is where it fails (A2 19%, A1 49%): the parse, not the producer, splits its predicates. Neither atom bar is met; the next lever
+ for precision is the produced predicates (the path's words joined, "variar_encontrar_entre"), which the proxy never checked and the
+ judges do; and for recall the Japanese parse.
