@@ -1,9 +1,9 @@
 // coref.mjs — each gold mention against the system's: the same mention (by its text, in order; a dropped subject by its verb), resolved to an
 // entity whose name is the gold entity's (same normalized name, one containing the other, or the same last word)
 import fs from "node:fs";
-const gold = JSON.parse(fs.readFileSync("/private/tmp/claude-501/khora-wt/eval/meaning/atoms/gold.json", "utf8"));
+const gold = JSON.parse(fs.readFileSync(process.env.GOLD ?? "/private/tmp/claude-501/khora-wt/eval/meaning/atoms/gold.json", "utf8"));
 const sys = JSON.parse(fs.readFileSync(process.env.SYS ?? "/private/tmp/claude-501/khora-wt/eval/meaning/atoms/run13/system.json", "utf8"));
-const S = JSON.parse(fs.readFileSync("/private/tmp/claude-501/khora-wt/eval/meaning/atoms/sentences.json", "utf8"));
+const S = JSON.parse(fs.readFileSync(process.env.SET ?? "/private/tmp/claude-501/khora-wt/eval/meaning/atoms/sentences.json", "utf8"));
 const norm = (s) => String(s ?? "").normalize("NFC").toLowerCase().replace(/^(the|el|la|los|las|le|les|l'|l’|der|die|das|den|dem)\s+/u, "").replace(/[“”"'’(),.]/g, "").trim();
 const sameName = (a, b) => { a = norm(a); b = norm(b); if (!a || !b) return false; if (a === b || a.includes(b) || b.includes(a)) return true; const la = a.split(/\s+/).at(-1), lb = b.split(/\s+/).at(-1); return la.length > 2 && la === lb; };
 const titleOf = new Map(S.map((s) => [s.sid, s.title]));
