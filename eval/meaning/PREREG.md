@@ -433,3 +433,17 @@ Set committed before any arm ran: eval/meaning/fresh19.json, 96 pairs (48 E, 29 
 covering 79 of the 89 sentences and all 19 pages. Label audit by a second agent, labels hidden, from the sentence alone: 96 of 96 agreed
 (fresh19.audit.json empty). Borderline, kept as given: 738 ("la Creuse" as river or département), 736 and 762 (a stated figure or list read
 as complete), 755/756 and 764 (a disambiguation line and a cut sentence, intact where the claim needs it), 793/794 (names transliterated).
+RESULT (first run, code as of 8bd3b8e2, no changes since the set was committed at 5747afa3):
+ atoms arm: accuracy 45.8%, false-accept 8.3% (4 of 48 not-E), false-reject 100% (0 of 48 E accepted), contradictions 2 of 29, no gaps.
+ grammar-ud: 46.9%, false-accept 6.3%, false-reject 100%, contradictions 2 of 29. Wording judge: 53.1%, false-accept 12.5%, false-reject
+ 81.3%, contradictions 2 of 29. Per language (atoms): en 50, es 50, fr 38, de 44, ja 44, cross-language 50.
+ V1 PASS, V2 PASS (8.3%), V3 FAIL (45.8 < 46.9), V4 FAIL, V5 FAIL (7%).
+ The atom verdict did not carry: on a set written as real paraphrase it accepts nothing, as the claim matcher accepts nothing. Its two new
+ false accepts are matcher faults: 758 (a direction word in the predicate, "lie_nordwestlich", met by plain "lie"), 746 (the claim's
+ "inhabitées" carried by no atom yet not counted unread). The 48 rejected E pairs, by what is missing (from the atom tables):
+ - the reading of real Wikipedia text: a pronunciation in brackets breaks the parse ("Mount Rainier ( ray-NEER), also known as Tahoma" →
+   mount(Rainier)); a figure in brackets is never an atom ("depth (923 ft; 281 m)"); a long list sentence loses its members;
+ - paraphrase that needs a canonical rewrite: a superlative against a negated comparative ("the highest mountain in Washington" / "no
+   mountain in Washington is higher"), an ordinal against "only X is more" ("second-largest after Lake Superior"), "also known as" against
+   "another name for";
+ - claim atoms the source does state but under another predicate or referent name (derive_from / come_from met; think / believe not).
