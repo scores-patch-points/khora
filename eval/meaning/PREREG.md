@@ -204,3 +204,14 @@ key (標高 / 海抜, 呼称 / 名称): the Japanese entries carry no lists.
   meet only through a word's first key. S1 79 → 85%, S2 4 → 8% (puy ~ montagne, Meer ~ See listed by Wiktionary; fleuve ~ rivière and
   lac ~ étang share "river" / "lake").
 The system is frozen here for run 14.
+
+## Run 14 (2026-10-22): atoms, coreference and synonyms on a SECOND held-out set — PRE-REGISTERED (written before the labeller saw it)
+Set: eval/meaning/atoms14/sentences.json, 100 sentences from pages no earlier set touched: English Wikipedia 21 (Lake Victoria, Mississippi
+River), Utah Medical Products 10-K 20 (ITEM 1 – BUSINESS), Spanish 13 (Río Orinoco, Chimborazo, Lago de Maracaibo, Río Magdalena, Lago de
+Atitlán), French 16 (Lac d'Annecy, Lac du Bourget, Garonne), German 15 (Elbe, Großglockner, Weser), Japanese 15 (利根川, 浅間山, 富士川, 八ヶ岳,
+霞ヶ浦, 十和田湖); sources with revision ids in sources.json. Same guide (atoms/GUIDE.md), a new independent labeller, the same judging.
+The system is frozen at b36991d7 (run 13c); the v2 Wiktionary pack (local) is the dictionary.
+Bars, as run 13: A1 ≥ 85%, A2 ≥ 70%, C1 ≥ 90% (target 100%), C2 ≥ 95%, S1 ≥ 90%, S2 ≤ 5%.
+Coreference is scored both ways; the bars apply to the CLUSTER measure (the system entity's defining name against every text the gold groups
+under the gold entity), declared here before the run because the name measure fails a correct link whose entity is named differently ("a
+law" for "the 2040 law"); the name measure is reported beside it.
