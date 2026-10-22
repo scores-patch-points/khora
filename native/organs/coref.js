@@ -40,7 +40,8 @@ export function mentionsOf(rows, { lang = "en", pack = null } = {}) {
   const out = [];
   // a common noun with a name in its own words, or right after it through "de" ("cordillera de los Andes", "lago Cocibolca") is a name
   const nameParts = (r) => kids(r.id).filter((k) => k.upos === "PROPN" && (/^(flat|flat:name|appos|compound)$/.test(k.deprel) && Math.abs(k.id - r.id) <= 2 || /^nmod$/.test(k.deprel) && k.id === r.id + 2 + (byId(r.id + 2)?.upos === "DET" ? 1 : 0) - (byId(r.id + 2)?.upos === "DET" ? 0 : 0) && kids(k.id).some((c) => c.deprel === "case" && /^(de|del|des|du|von|of)$/i.test(c.form))));
-  const span = (id) => { const ids = [id], st = [id]; while (st.length) { const x = st.pop(); for (const k of kids(x)) if (OWN.test(k.deprel)) { ids.push(k.id); st.push(k.id); } } return ids.sort((a, b) => a - b); };
+  const label = (k, x) => k.upos === "ADJ" && k.deprel === "amod" && byId(x)?.upos === "PROPN" && /^\p{Ll}/u.test(k.form);
+  const span = (id) => { const ids = [id], st = [id]; while (st.length) { const x = st.pop(); for (const k of kids(x)) if (OWN.test(k.deprel) && !label(k, x)) { ids.push(k.id); st.push(k.id); } } return ids.sort((a, b) => a - b); };
   for (const r of rows) {
     const f = lc(r.form), poss = (r.upos === "DET" || r.upos === "PRON") && (feat(r, "Poss=Yes") || P.possessive.has(f));
     const head = byId(r.head);
@@ -70,8 +71,8 @@ export function mentionsOf(rows, { lang = "en", pack = null } = {}) {
     const prep = kids(r.id).some((k) => k.deprel === "case" && k.upos === "ADP");
     const bracketHead = inBrackets ? (() => { const open = [...rows].reverse().find((x) => x.form === "(" && x.id < r.id); const before = open && [...rows].reverse().find((x) => x.id < open.id && x.upos !== "PUNCT"); return before && (before.upos === "PROPN" ? rows.find((x) => x.id === before.id && x.deprel !== "flat") ?? before : null); })() : null;
     const bracketTarget = bracketHead ? (byId(bracketHead.head)?.upos === "PROPN" && /^(flat|flat:name)$/.test(bracketHead.deprel) ? byId(bracketHead.head) : bracketHead) : null;
-    const aliasOf = named && head && headIsName && !feat(head, "Number=Plur") && (r.deprel === "appos" || (inBrackets && r.id > head.id && bracketNames === 0)) ? head.id
-      : named && inBrackets && bracketTarget && !prep && !feat(bracketTarget, "Number=Plur") && bracketTarget.id !== r.id ? bracketTarget.id
+    const aliasOf = named && inBrackets && bracketTarget && !prep && !feat(bracketTarget, "Number=Plur") && bracketTarget.id !== r.id ? bracketTarget.id
+      : named && head && headIsName && !feat(head, "Number=Plur") && ((r.deprel === "appos" && r.id - head.id <= 4) || (inBrackets && r.id > head.id && bracketNames === 0)) ? head.id
       // a naming verb names its OBJECT when active ("Brazilians call this stretch the Solimões"), its subject when passive or reflexive ("is
       // known as", "se llama"), and the noun it modifies as a participle ("denominado"); the name itself is never the namer
       : named && viaNaming ? (/^(amod|acl)$/.test(head.deprel) ? head.head
@@ -81,14 +82,30 @@ export function mentionsOf(rows, { lang = "en", pack = null } = {}) {
     out.push({ ids, hid: r.id, how: negated ? "new" : named ? (aliasOf != null ? "alias" : "name") : definite ? "description" : "new", aliasOf, negated, plural: feat(r, "Number=Plur") || /s$/i.test(r.form) && lc(r.form) !== lem(r),
       headNoun: r.upos === "NOUN" ? lem(r) : null, names: ws.filter((w) => w.upos === "PROPN").map((w) => lc(w.form)) });
   }
+  // a reading in kana, in brackets right after a name ("利根川（とねがわ）"), is another name for it
+  const KANA = /^[\p{Script=Hiragana}\p{Script=Katakana}ー・]+$/u;
+  for (const open of rows.filter((x) => /^[(（]$/.test(x.form))) {
+    const inner = []; for (const x of rows.filter((y) => y.id > open.id)) { if (/^[)）、,]$/.test(x.form)) break; inner.push(x); }
+    const before = rows.find((y) => y.id === open.id - 1);
+    if (inner.length && inner.every((x) => KANA.test(x.form)) && before && /^(PROPN|NOUN)$/.test(before.upos)) out.push({ ids: inner.map((x) => x.id), hid: inner.at(-1).id, how: "alias", aliasOf: before.id, names: [inner.map((x) => x.form).join("")], headNoun: null, plural: false, reading: true });
+  }
+  // a place name inside a Japanese compound chain ("長野県北佐久郡軽井沢町及び御代田町"): a name followed by its suffix is a mention of its own
+  if (lang === "ja") for (const r of rows) {
+    const nx = rows.find((y) => y.id === r.id + 1);
+    if (r.upos === "PROPN" && nx && /^(県|都|府|道|郡|町|村|市|区|川|湖|山|岳|島|半島|湾|平野|峠|浦|沼)$/.test(nx.form) && !out.some((m) => m.hid === nx.id && m.ids.length === 2))
+      out.push({ ids: [r.id, nx.id], hid: nx.id, how: "name", names: [r.form + nx.form], headNoun: null, plural: false, unit: true });
+  }
   // a subject the sentence leaves out: a finite main predicate with no subject, in a language that drops subjects
+  // any finite clause with no subject of its own (a main clause, a second predicate, a clause under "donde"), including the impersonal
+  // reflexive ("se trata de"), unless it shares its head's subject or its relative pronoun is its subject
   if (pack?.proDrop) for (const v of rows) {
-    const main = v.head === 0 || (v.deprel === "conj" && byId(v.head)?.head === 0);
-    if (!main || !/^(VERB|AUX|ADJ|NOUN|PROPN)$/.test(v.upos)) continue;
+    if (!/^(VERB|AUX|ADJ|NOUN|PROPN)$/.test(v.upos) || !/^(root|conj|advcl|acl:relcl|parataxis|ccomp)$/.test(v.head === 0 ? "root" : v.deprel)) continue;
+    if (/^(NOUN|PROPN|ADJ)$/.test(v.upos) && !kids(v.id).some((k) => k.deprel === "cop") && lang !== "ja") continue;
     const ks = kids(v.id);
-    if (ks.some((k) => /^(nsubj|csubj|expl)/.test(k.deprel))) continue;
+    if (ks.some((k) => /^(nsubj|csubj)/.test(k.deprel) || k.deprel === "expl" && !/^(se|s')$/i.test(k.form))) continue;
     if (!(lang === "ja" || [v, ...ks.filter((k) => /^(aux|cop)/.test(k.deprel))].some((w) => feat(w, "VerbForm=Fin")) || ks.some((k) => k.deprel === "cop"))) continue;
     if (v.deprel === "conj" && kids(v.head).some((k) => /^nsubj/.test(k.deprel))) continue; // a conjoined verb shares its head's subject
+    if (/relcl/.test(v.deprel) && ks.some((k) => RELATIVE.has(lc(k.form)) && /^nsubj/.test(k.deprel))) continue;
     const cop = ks.filter((k) => /^(cop|aux)$/.test(k.deprel)).sort((a, b) => a.id - b.id);
     out.push({ ids: [], hid: v.id, how: "dropped", at: cop.length ? cop.map((k) => k.form).join("") : v.form });
   }
@@ -100,7 +117,8 @@ export function mentionsOf(rows, { lang = "en", pack = null } = {}) {
 }
 
 // same(a, b): optional, two common nouns that mean the same (wikt-gloss.js makeSynonymy), so "der Strom" can find an entity of the kind "Fluss"
-export function resolvePage({ lang = "en", title = null, sentences = [], rowsOf, pack = null, same = null }) {
+// lookup(lang, word): optional, the dictionary (wikt-slim.js entries), so an abbreviation can be expanded
+export function resolvePage({ lang = "en", title = null, sentences = [], rowsOf, pack = null, same = null, lookup = null }) {
   const entities = [], recent = []; // recent: the known entities in mention order, most recent last, with their number
   const newEntity = (name, names, head, plural = false, headNoun = null) => { const e = { id: `E${entities.length + 1}`, name, names: [...new Set(names)], head, headNoun, kinds: new Set(head ? [head] : []), plural, known: false }; entities.push(e); return e; };
   // a name links to the entity that holds all its name words with the fewest others ("ALLETE" is "ALLETE, Inc.", not "ALLETE Clean Energy";
@@ -127,6 +145,8 @@ export function resolvePage({ lang = "en", title = null, sentences = [], rowsOf,
     // the most recent known entity that agrees in number, before this point; never the phrase a possessive sits in
     const antecedent = (m) => {
       const inside = m.inside != null ? byHid(m.inside) : null;
+      const mainDropped = ms.find((x) => x.how === "dropped" && rows.find((r) => r.id === x.hid)?.head === 0);
+      if (m.poss && mainDropped?.entity) return mainDropped.entity;
       const here = ms.filter((x) => x.entity && x !== m && x !== inside && (x.start ?? 1e9) < (m.start ?? 0) && x.entity.known && !x.negated && x.how !== "we" && x.how !== "relative");
       const agree = (x) => (m.plural ? x.plural || x.entity.plural : !(x.plural || x.entity.plural));
       // in the sentence: only an earlier SUBJECT (a name met in passing — "in Brazil", "of France" — is not what "it" picks up)
@@ -144,10 +164,16 @@ export function resolvePage({ lang = "en", title = null, sentences = [], rowsOf,
       // an alias attaches to a NAMED entity (the parse may hang it on a common noun: "pléonasme"): else the sentence's main name, else the page
       if (m.how === "alias" && m.aliasOf != null && m.aliasOf > 0) { e = byHid(m.aliasOf)?.entity ?? null; if (e && !e.names.length && e !== page) e = ordered.find((x) => x !== m && (x.how === "name" || x.how === "alias") && x.entity?.names.length)?.entity ?? page; }
       if (m.how === "alias" && m.aliasOf != null && m.aliasOf < 0) { const h = byHid(-m.aliasOf); if (h?.how === "alias") e = h.entity ?? null; else m.how = "name"; }
-      if (!e && (m.how === "name" || m.how === "alias")) { e = byName(m); if (!e) { e = newEntity(textOf(m), m.names, m.head, m.plural, m.headNoun); } else if (m.how === "alias") { for (const n of m.names) if (!e.names.includes(n)) e.names.push(n); } }
+      if (!e && (m.how === "name" || m.how === "alias") && lookup && /^[A-Z][A-Z.&]{1,7}$/.test(textOf(m).replace(/^the\s+/i, ""))) {
+        const ab = textOf(m).replace(/^the\s+/i, ""), exps = [];
+        for (const en of [...(lookup(lang, ab) ?? []), ...(lang !== "en" ? lookup("en", ab) ?? [] : [])]) for (const sn of en.senses ?? []) { if (sn.form_of?.[0]?.word) exps.push(sn.form_of[0].word); const g = (sn.glosses ?? []).at(-1) ?? ""; const x = /(?:abbreviation|initialism|acronym) of ([^.;,(]+)/i.exec(g); if (x) exps.push(x[1].trim()); }
+        const low = (t) => t.toLowerCase().replace(/^the\s+/, "");
+        e = entities.find((x) => exps.some((t) => low(t) === low(x.name) || x.names.join(" ") === low(t))) ?? null;
+      }
+      if (!e && (m.how === "name" || m.how === "alias")) { e = byName(m); if (!e) { e = newEntity(textOf(m), m.names, m.head, m.plural, m.headNoun); } else if (m.how === "alias" && (!m.headNoun || !e.headNoun || m.headNoun === e.headNoun)) { for (const n of m.names) if (!e.names.includes(n)) e.names.push(n); } }
       // a name headed by a common noun ("lac Léman", "Lake Baikal") says its entity's kind: a later "le lac" finds it
       if (e && (m.how === "name" || m.how === "alias") && m.headNoun) e.kinds.add(m.headNoun);
-      else if (m.how === "alias" && e) { for (const n of m.names) if (!e.names.includes(n)) e.names.push(n); }
+      else if (m.how === "alias" && e) { if (!m.headNoun || !e.headNoun || m.headNoun === e.headNoun) for (const n of m.names) if (!e.names.includes(n)) e.names.push(n); }
       else if (m.how === "we") e = page ?? newEntity("we", ["we"], null);
       else if (m.how === "pronoun") e = antecedent(m);
       else if (m.how === "relative") {

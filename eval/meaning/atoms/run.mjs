@@ -22,7 +22,7 @@ for (const [k, items] of pages) {
   const lang = items[0].lang, last = items.reduce((a, b) => (b.previous.length > a.previous.length ? b : a));
   const all = [...last.previous, last.sentence];
   const g = lang === "en" ? { rowsOf: G.rowsOf, claimsOf: (t, rows) => G.claimsOf(t, rows) } : (grammars[lang] ??= await loadGrammar(lang, { glossary }));
-  const R = resolvePage({ lang, title: items[0].title, sentences: all, rowsOf: g.rowsOf, pack: PACKS[lang] ?? null, same: (a, b) => synonymy(lang, a, b, "NOUN").same });
+  const R = resolvePage({ lang, title: items[0].title, sentences: all, rowsOf: g.rowsOf, pack: PACKS[lang] ?? null, same: (a, b) => synonymy(lang, a, b, "NOUN").same, lookup: (l, w) => slim.entries(l, w) });
   const name = (id) => R.entities.find((e) => e.id === id)?.name ?? null;
   for (const it of items) {
     const i = it.previous.length, sr = R.sentences[i];

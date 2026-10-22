@@ -226,3 +226,19 @@ de, ja — 259 entities, 468 mentions, 546 atoms, 100 word pairs; atoms judged b
  The run-13 fixes carried to unseen text for atoms (+16 points precision, +7 recall) and for pronoun/description/dropped coreference
  (+8 points), not for names (−2.6) and not for near misses (the one-step English link and the shared-key rule let more related words through).
  No bar is met; the atomizer is still not fit to build on, and the synonym near-miss rate is now the worst number.
+
+## Run 14b (2026-10-22): fixes from run 14's misses — POST HOC on runs 13 and 14
+- Atoms: an oblique's coordinated words repeat its relation (lists of places); every alias mention is a named atom; a name joined to a common
+  noun through "de" / "of" ("la ciudad de Barranquilla") gives its kind. Run 14 re-judged by four new judges: precision 69.0 → 67.2%,
+  recall 42.3 → 46.9% (783 atoms).
+- Names: a lowercase label adjective is no part of a name ("niederdeutsch Elv"); a kana reading in brackets after a name is an alias; a
+  Japanese place name inside a compound chain is a mention of its own; the bracket rule precedes the appositive rule and an appositive alias
+  sits within four words of its head; an abbreviation the dictionary expands ("U.S.") links to its expansion's entity; an alias adds its name
+  only to an entity of its own kind. Dropped subjects: any finite clause without a subject in a language that drops them (not only main
+  clauses; the impersonal reflexive included); a possessive in a sentence whose main subject is dropped takes it.
+  Cluster measure, run 13: C1 81.5 → 83.2%, C2 93.5%; run 14: C1 73.6 → 79.2%, C2 92.2 → 95.0%.
+- Synonyms: a word's first key meets any of the other's, vetoed when the dictionary lists the two first keys as antonyms, hypernym or hyponym;
+  two first glosses that are different phrases do not meet; the one-step English link compares the first three keys and keeps listed
+  synonyms. Run 13: S1 85 → 82%, S2 8 → 4%; run 14: S1 83 → 81%, S2 12 → 6%. (Stricter rules were measured and dropped: first-to-first keys
+  76% / 79%, symmetric top-two 72% / 74%.)
+The system is frozen here for run 15.

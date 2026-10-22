@@ -86,8 +86,19 @@ export function atomize({ claims, rows, mentions, entities, text }) {
     skipMod = new Set((c.OBL ?? []).map((o) => o.hid));
     for (const [end, a] of [[c.ARG0, A0], [c.ARG1, c.rel === "be" ? A0 : A1], [c.ARG2, A2], ...(c.OBL ?? []).map((o) => [o, arg(o)])]) {
       if (c.rel !== "be" || end !== c.ARG1) adjAtoms(end, a, base);
-      modAtoms(end, end === c.ARG1 && c.rel === "be" ? A0 : a, base);
+      // an oblique's coordinated words repeat its relation ("borders … Wisconsin, Iowa, Illinois"); a modifier's do as before
+      const isObl = (c.OBL ?? []).includes(end);
+      modAtoms(end, end === c.ARG1 && c.rel === "be" ? A0 : a, base, isObl ? { pred: `${c.rel}_${caseOf(end) ?? "at"}`, owner: A0 ?? A1 } : null);
     }
+  }
+  // every other name the sentence gives an entity is a fact of the sentence (named), and a name joined to a common noun through "de" / "of"
+  // ("la ciudad de Barranquilla") says the entity's kind
+  for (const m of mentions) {
+    const e = m.entity && E.get(m.entity); if (!e) continue;
+    if (m.how === "alias" && m.text && lc(m.text) !== lc(e.name)) push("named", [{ entity: e.id, name: e.name, ids: [] }, { value: m.text, ids: m.ids ?? [] }], { from: "alias" }, [m.ids ?? []]);
+    const h = m.hid != null ? byId(m.hid) : null;
+    if (h && h.upos === "NOUN" && (m.how === "name" || m.how === "alias") && rows.some((k) => k.head === h.id && k.upos === "PROPN" && k.deprel === "nmod" && rows.some((c) => c.head === k.id && c.deprel === "case")))
+      push("is_a", [{ entity: e.id, name: e.name, ids: [] }, { value: h.form, ids: [h.id] }], { from: "name" }, [m.ids ?? []]);
   }
   return out;
 }

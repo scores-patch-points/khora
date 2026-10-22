@@ -90,9 +90,16 @@ export function makeGlossary(lookup, { translations = null } = {}) {
     }
     return memo.get(k);
   };
+  // the first gloss item of a word as a phrase ("broad sense", "active volcano"): two words whose keys meet only on a phrase's head do not
+  // mean the same when the phrases differ
+  const phrase = (lang, w, upos) => {
+    for (const e of lookup(lang, w) ?? []) if ((POS[upos] ?? []).includes(e.pos)) for (const s of e.senses ?? []) { if (s.form_of) continue; const g = (s.glosses ?? []).at(-1); if (!g) continue;
+      const t = String(g).replace(/\([^)]*\)/g, " ").toLowerCase().split(/[;:,]/)[0].replace(/^(to be|to|a|an|the)\s+/, "").replace(/\s+/g, " ").trim(); if (t) return t.split(" ").length <= 3 ? t : t.split(" ")[0]; }
+    return null;
+  };
   /** gloss(lang, lemma, upos, ctx) → the word's key; gloss.all(…) → every English key its gloss gives (synonyms), the key first */
   const gloss = (lang, lemma, upos, ctx) => all(lang, lemma, upos, ctx)?.[0] ?? null;
-  gloss.all = all;
+  gloss.all = all; gloss.phrase = phrase;
   return gloss;
 }
 
@@ -126,12 +133,19 @@ export function makeSynonymy({ lookup, translations = null, pivots = ["es", "fr"
       // a noun key and a verb key of one derivation meet ("selection" / "select", "recognition" / "recognize")
       const stem = (x) => x.replace(/(ation|ition|ion|ment|ance|ence|ing|ize|ise|ate|al|e|s)$/, "");
       const derive = (x, y) => x !== y && x.length >= 5 && y.length >= 5 && stem(x).length >= 5 && stem(x) === stem(y);
-      // a key meets only through the first key of one of the two words: a later sense shared ("étang": pond, lake) is not the same meaning
+      // keys meet FIRST TO FIRST: a later sense shared ("étang": pond, lake; "Berg": mountain, hill) is not the same meaning; and two words whose
+      // first glosses are phrases that differ ("broad sense" / "narrow sense", "active volcano" / "volcano") do not mean the same
       const meets = (x, y) => x === y || derive(x, y);
-      const shared = [...new Set([...ka.slice(0, 1).filter((x) => kb.some((y) => meets(x, y))), ...kb.slice(0, 1).filter((y) => ka.some((x) => meets(x, y)))])];
+      const pa = G.phrase(lang, a, upos), pb = G.phrase(lang, b, upos);
+      const phrasesDiffer = pa && pb && pa !== pb && (pa.includes(" ") || pb.includes(" ")) && !(ka[0] && kb[0] && ka[0] === kb[0] && !pa.includes(" ") && !pb.includes(" "));
+      // a word's first key meets any of the other's; but not when the dictionary lists the two words' first keys as opposites or as kind and
+      // sub-kind (stream / torrent, mountain / hill, volcano / active volcano): those are near misses, not the same meaning
+      const vetoed = (x, y) => x !== y && (listed("en", x, upos, "ant").has(y) || listed("en", y, upos, "ant").has(x) || listed("en", x, upos, "hyper").has(y) || listed("en", y, upos, "hyper").has(x) || listed("en", x, upos, "hypo").has(y) || listed("en", y, upos, "hypo").has(x));
+      const cand = [...new Set([...ka.slice(0, 1).filter((x) => kb.some((y) => meets(x, y))), ...kb.slice(0, 1).filter((y) => ka.some((x) => meets(x, y)))])];
+      const shared = !phrasesDiffer && ka[0] && kb[0] && !vetoed(ka[0], kb[0]) ? cand : [];
       if (shared.length) return { same: true, why: `shared keys: ${shared.slice(0, 3).join(", ")}`, weight: shared.includes(ka[0]) && shared.includes(kb[0]) ? 0.9 : 0.75 };
       // no shared key: two keys that are English synonyms (listed, or translated alike) — one step further, so weighed lower
-      for (const x of ka.slice(0, 3)) for (const y of kb.slice(0, 3)) { const r = sameEn(x, y, upos); if (r.same && (r.why === "listed synonyms" || r.weight >= 0.5)) return { same: true, why: `keys ${x} ~ ${y}: ${r.why}`, weight: 0.65 * (r.weight || 0.5) }; }
+      for (const x of ka.slice(0, 3)) for (const y of kb.slice(0, 3)) { if (vetoed(x, y)) continue; const r = sameEn(x, y, upos); if (r.same && (r.why === "listed synonyms" || r.weight >= 0.5) && !phrasesDiffer) return { same: true, why: `keys ${x} ~ ${y}: ${r.why}`, weight: 0.65 * (r.weight || 0.5) }; }
       return { same: false, why: "no shared key", weight: 0 };
     }
     const ta = transOfEn(a, upos), tb = transOfEn(b, upos);
