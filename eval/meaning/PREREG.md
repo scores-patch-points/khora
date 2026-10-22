@@ -429,3 +429,7 @@ Bars, for the atoms arm (MEANING_ATOMS=1; the slim Wiktionary v2 pack; coreferen
  V5 at least half the contradictions named C (run 9's F3).
 Reported per language and same- vs cross-language, with each failure assigned to a layer. No code changes between committing the pairs and
 the first run; any later fix is post hoc and reported as such.
+Set committed before any arm ran: eval/meaning/fresh19.json, 96 pairs (48 E, 29 C, 19 T; 80 same-language, 16 English-claim cross-language),
+covering 79 of the 89 sentences and all 19 pages. Label audit by a second agent, labels hidden, from the sentence alone: 96 of 96 agreed
+(fresh19.audit.json empty). Borderline, kept as given: 738 ("la Creuse" as river or département), 736 and 762 (a stated figure or list read
+as complete), 755/756 and 764 (a disambiguation line and a cut sentence, intact where the claim needs it), 793/794 (names transliterated).

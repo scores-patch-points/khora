@@ -1,0 +1,1254 @@
+{
+ "schema": "MeaningPairs@1",
+ "authored": "2026-10-22, written and labelled from the sentences alone, before any system ran on them",
+ "pairs": [
+  {
+   "id": 701,
+   "lang": "en",
+   "label": "E",
+   "type": "near-restatement, membership",
+   "claim": "Lake Michigan is one of North America's Great Lakes.",
+   "sentence": "Lake Michigan (  MISH-ig-ən) is one of the five Great Lakes of North America.",
+   "source": {
+    "sid": "en-0",
+    "url": "https://en.wikipedia.org/wiki/Lake_Michigan",
+    "revid": 1380240874
+   }
+  },
+  {
+   "id": 702,
+   "lang": "en",
+   "label": "E",
+   "type": "ordinal paraphrase: second-largest by volume after Superior",
+   "claim": "Among the Great Lakes, only Lake Superior holds more water than Lake Michigan.",
+   "sentence": "It is the second-largest of the Great Lakes by volume (1,180 cu mi; 4,900 km3) and depth (923 ft; 281 m) after Lake Superior and the third-largest by surface area (22,300 square miles; 57,757 km2), after Lake Superior and Lake Huron.",
+   "source": {
+    "sid": "en-1",
+    "url": "https://en.wikipedia.org/wiki/Lake_Michigan",
+    "revid": 1380240874
+   }
+  },
+  {
+   "id": 703,
+   "lang": "en",
+   "label": "C",
+   "type": "wrong ordinal for surface area (third, not second)",
+   "claim": "Lake Michigan is the second-largest Great Lake by surface area.",
+   "sentence": "It is the second-largest of the Great Lakes by volume (1,180 cu mi; 4,900 km3) and depth (923 ft; 281 m) after Lake Superior and the third-largest by surface area (22,300 square miles; 57,757 km2), after Lake Superior and Lake Huron.",
+   "source": {
+    "sid": "en-1",
+    "url": "https://en.wikipedia.org/wiki/Lake_Michigan",
+    "revid": 1380240874
+   }
+  },
+  {
+   "id": 704,
+   "lang": "en",
+   "label": "E",
+   "type": "figure with unit from long sentence",
+   "claim": "Lake Michigan reaches a depth of 281 metres.",
+   "sentence": "It is the second-largest of the Great Lakes by volume (1,180 cu mi; 4,900 km3) and depth (923 ft; 281 m) after Lake Superior and the third-largest by surface area (22,300 square miles; 57,757 km2), after Lake Superior and Lake Huron.",
+   "source": {
+    "sid": "en-1",
+    "url": "https://en.wikipedia.org/wiki/Lake_Michigan",
+    "revid": 1380240874
+   }
+  },
+  {
+   "id": 705,
+   "lang": "en",
+   "label": "E",
+   "type": "fact picked out of long sentence: shared elevation",
+   "claim": "Lake Michigan and Lake Huron sit at the same surface elevation.",
+   "sentence": "To the east, its basin is conjoined with that of Lake Huron through the wide and deep Straits of Mackinac, giving it the same surface elevation as its eastern counterpart; hydrologically, the two bodies are a single lake that is, by area, the largest freshwater lake in the world.",
+   "source": {
+    "sid": "en-2",
+    "url": "https://en.wikipedia.org/wiki/Lake_Michigan",
+    "revid": 1380240874
+   }
+  },
+  {
+   "id": 706,
+   "lang": "en",
+   "label": "C",
+   "type": "opposite: shared vs fully in the US",
+   "claim": "Lake Michigan is shared between the United States and Canada.",
+   "sentence": "Lake Michigan is the only Great Lake located fully in the United States; the other four are shared between the U.S. and Canada.",
+   "source": {
+    "sid": "en-3",
+    "url": "https://en.wikipedia.org/wiki/Lake_Michigan",
+    "revid": 1380240874
+   }
+  },
+  {
+   "id": 707,
+   "lang": "en",
+   "label": "E",
+   "type": "one item from a list of bordering states",
+   "claim": "Indiana is one of the states on Lake Michigan.",
+   "sentence": "It is the world's largest lake, by area, located fully in one country, and is shared, from west to east, by the U.S. states of Wisconsin, Illinois, Indiana, and Michigan.",
+   "source": {
+    "sid": "en-4",
+    "url": "https://en.wikipedia.org/wiki/Lake_Michigan",
+    "revid": 1380240874
+   }
+  },
+  {
+   "id": 708,
+   "lang": "en",
+   "label": "T",
+   "type": "unsupported ranking of a listed port",
+   "claim": "Chicago is the busiest port on Lake Michigan.",
+   "sentence": "Ports along its shores include Chicago, Illinois; Gary, Indiana; Milwaukee and Green Bay, Wisconsin; and Muskegon, Michigan.",
+   "source": {
+    "sid": "en-5",
+    "url": "https://en.wikipedia.org/wiki/Lake_Michigan",
+    "revid": 1380240874
+   }
+  },
+  {
+   "id": 709,
+   "lang": "en",
+   "label": "C",
+   "type": "wrong direction: northwest vs northeast",
+   "claim": "Green Bay lies in the northeast of Lake Michigan.",
+   "sentence": "To the north, the lake is flanked by long bays, including Green Bay in the northwest, and Grand Traverse and Little Traverse bays in the northeast.",
+   "source": {
+    "sid": "en-6",
+    "url": "https://en.wikipedia.org/wiki/Lake_Michigan",
+    "revid": 1380240874
+   }
+  },
+  {
+   "id": 710,
+   "lang": "en",
+   "label": "E",
+   "type": "etymology paraphrase",
+   "claim": "The name Michigan is thought to derive from an Ojibwe word for great water.",
+   "sentence": "The word michigan is believed to come from the Ojibwe ᒥᓯᑲᒥ (michi-gami or mishigami), meaning \"great water\".",
+   "source": {
+    "sid": "en-7",
+    "url": "https://en.wikipedia.org/wiki/Lake_Michigan",
+    "revid": 1380240874
+   }
+  },
+  {
+   "id": 711,
+   "lang": "en",
+   "label": "E",
+   "type": "alias as identity",
+   "claim": "Tahoma is another name for Mount Rainier.",
+   "sentence": "Mount Rainier ( ray-NEER), also known as Tahoma ( tə-HOH-mə), is a large, active stratovolcano in the Cascade Range of the Pacific Northwest in the United States.",
+   "source": {
+    "sid": "en-8",
+    "url": "https://en.wikipedia.org/wiki/Mount_Rainier",
+    "revid": 1381139265
+   }
+  },
+  {
+   "id": 712,
+   "lang": "en",
+   "label": "C",
+   "type": "wrong direction relative to Seattle",
+   "claim": "Mount Rainier lies about 95 km north of Seattle.",
+   "sentence": "The mountain is located in Mount Rainier National Park about 59 miles (95 km) south-southeast of Seattle.",
+   "source": {
+    "sid": "en-9",
+    "url": "https://en.wikipedia.org/wiki/Mount_Rainier",
+    "revid": 1381139265
+   }
+  },
+  {
+   "id": 713,
+   "lang": "en",
+   "label": "E",
+   "type": "superlative as negated comparison",
+   "claim": "No mountain in Washington state is higher than Mount Rainier.",
+   "sentence": "At 14,406 ft (4,391 m) it is the highest mountain in the U.S. state of Washington, the most topographically prominent mountain in the contiguous United States, and the tallest in the Cascade Volcanic Arc.",
+   "source": {
+    "sid": "en-10",
+    "url": "https://en.wikipedia.org/wiki/Mount_Rainier",
+    "revid": 1381139265
+   }
+  },
+  {
+   "id": 714,
+   "lang": "en",
+   "label": "T",
+   "type": "eruption date not given",
+   "claim": "Mount Rainier last erupted in the 19th century.",
+   "sentence": "Due to its high probability of an eruption in the near future and proximity to a major urban area, Mount Rainier is considered one of the most dangerous volcanoes in the world, and it is on the Decade Volcano list.",
+   "source": {
+    "sid": "en-11",
+    "url": "https://en.wikipedia.org/wiki/Mount_Rainier",
+    "revid": 1381139265
+   }
+  },
+  {
+   "id": 715,
+   "lang": "en",
+   "label": "C",
+   "type": "wrong figure (order of magnitude) for climbers",
+   "claim": "Between 1950 and 2022, about 47,000 people attempted to climb Mount Rainier.",
+   "sentence": "According to the United States Geological Survey's 2008 report, \"about 80,000 people and their homes are at risk in Mount Rainier's lahar-hazard zones.\" Between 1950 and 2022, 471,792 people attempted to climb Mount Rainier according to NPS statistics.",
+   "source": {
+    "sid": "en-13",
+    "url": "https://en.wikipedia.org/wiki/Mount_Rainier",
+    "revid": 1381139265
+   }
+  },
+  {
+   "id": 716,
+   "lang": "en",
+   "label": "T",
+   "type": "cause of deaths not given",
+   "claim": "Most of the deaths on Mount Rainier between 1947 and 2018 were caused by avalanches.",
+   "sentence": "Approximately 84 people died in mountaineering accidents on Mount Rainier from 1947 to 2018.",
+   "source": {
+    "sid": "en-14",
+    "url": "https://en.wikipedia.org/wiki/Mount_Rainier",
+    "revid": 1381139265
+   }
+  },
+  {
+   "id": 717,
+   "lang": "es",
+   "label": "E",
+   "type": "fact picked out of long sentence: mouth",
+   "claim": "El río Uruguay vierte sus aguas en el Río de la Plata.",
+   "sentence": "El río Uruguay (en portugués: rio Uruguai) es un río internacional de América del Sur que junto con los ríos Paraná, Paraguay y otros cursos fluviales forman la cuenca del Plata.​ Nace en la Sierra Geral en el sudeste de Brasil en la confluencia de los ríos Canoas (de 570 km) y Pelotas (de 437 km) en el límite entre los estados de Río Grande del Sur y Santa Catarina, y desemboca en el Río de la Plata en el lugar llamado punta Gorda​ (kilómetro 0 del río Uruguay a 33°54′58″S 58°24′52″O) entre el departamento uruguayo de Colonia y el argentino de Islas del Ibicuy en la provincia de Entre Ríos.",
+   "source": {
+    "sid": "es-15",
+    "url": "https://es.wikipedia.org/wiki/R%C3%ADo_Uruguay",
+    "revid": 174930868
+   }
+  },
+  {
+   "id": 718,
+   "lang": "es",
+   "label": "C",
+   "type": "wrong confluent river (Paraná for Pelotas)",
+   "claim": "El río Uruguay nace de la unión de los ríos Canoas y Paraná.",
+   "sentence": "El río Uruguay (en portugués: rio Uruguai) es un río internacional de América del Sur que junto con los ríos Paraná, Paraguay y otros cursos fluviales forman la cuenca del Plata.​ Nace en la Sierra Geral en el sudeste de Brasil en la confluencia de los ríos Canoas (de 570 km) y Pelotas (de 437 km) en el límite entre los estados de Río Grande del Sur y Santa Catarina, y desemboca en el Río de la Plata en el lugar llamado punta Gorda​ (kilómetro 0 del río Uruguay a 33°54′58″S 58°24′52″O) entre el departamento uruguayo de Colonia y el argentino de Islas del Ibicuy en la provincia de Entre Ríos.",
+   "source": {
+    "sid": "es-15",
+    "url": "https://es.wikipedia.org/wiki/R%C3%ADo_Uruguay",
+    "revid": 174930868
+   }
+  },
+  {
+   "id": 719,
+   "lang": "es",
+   "label": "E",
+   "type": "elevation figure with unit, paraphrased",
+   "claim": "Los ríos Canoas y Pelotas se unen a unos 433 metros sobre el nivel del mar.",
+   "sentence": "La confluencia del Canoas con el Pelotas (27°36′26″S 51°27′24″O) Se encuentra a unos 433 m s. n. m.",
+   "source": {
+    "sid": "es-17",
+    "url": "https://es.wikipedia.org/wiki/R%C3%ADo_Uruguay",
+    "revid": 174930868
+   }
+  },
+  {
+   "id": 720,
+   "lang": "es",
+   "label": "C",
+   "type": "wrong initial direction (north-south vs east-west)",
+   "claim": "Al principio el río Uruguay corre de norte a sur durante unos 600 km.",
+   "sentence": "Al principio sigue la dirección este-oeste por unos 600 km hasta recibir por la margen derecha las aguas del río Pepirí Guazú, punto en el cual empieza a torcer hacia el sudoeste.",
+   "source": {
+    "sid": "es-18",
+    "url": "https://es.wikipedia.org/wiki/R%C3%ADo_Uruguay",
+    "revid": 174930868
+   }
+  },
+  {
+   "id": 721,
+   "lang": "es",
+   "label": "E",
+   "type": "border role paraphrase with page subject",
+   "claim": "A partir de su confluencia con el Pepirí Guazú, el río Uruguay separa Brasil de Argentina.",
+   "sentence": "Desde esa confluencia porta el límite entre Argentina y Brasil hasta el punto en el cual recibe las aguas del río Cuareim, afluente desde la margen izquierda que sirve a su vez como límite entre Brasil y Uruguay.",
+   "source": {
+    "sid": "es-19",
+    "url": "https://es.wikipedia.org/wiki/R%C3%ADo_Uruguay",
+    "revid": 174930868
+   }
+  },
+  {
+   "id": 722,
+   "lang": "es",
+   "label": "E",
+   "type": "fact from long sentence: triple border",
+   "claim": "Bella Unión, Monte Caseros y Barra do Quaraí forman una triple frontera.",
+   "sentence": "Después de recibir las aguas del Cuareim, donde se forma una triple frontera entre Bella Unión (Uruguay), Monte Caseros (Argentina) y la Barra do Quaraí (Brasil), el río Uruguay continúa su recorrido hacia el sur portando el límite entre Argentina y Uruguay hasta el paraje de punta Gorda, en donde desemboca en el Río de la Plata.",
+   "source": {
+    "sid": "es-20",
+    "url": "https://es.wikipedia.org/wiki/R%C3%ADo_Uruguay",
+    "revid": 174930868
+   }
+  },
+  {
+   "id": 723,
+   "lang": "es",
+   "label": "T",
+   "type": "navigability not stated",
+   "claim": "El río Uruguay es navegable en su último tramo.",
+   "sentence": "En el último tramo recibe por su margen derecha algunos brazos del río Paraná.",
+   "source": {
+    "sid": "es-16",
+    "url": "https://es.wikipedia.org/wiki/R%C3%ADo_Uruguay",
+    "revid": 174930868
+   }
+  },
+  {
+   "id": 724,
+   "lang": "es",
+   "label": "E",
+   "type": "structure paraphrase",
+   "claim": "El Nevado del Ruiz está formado por capas alternas de lava y ceniza volcánica endurecida.",
+   "sentence": "Es un estratovolcán compuesto por muchas capas de lava que se alternan con ceniza volcánica endurecida y otros piroclastos.",
+   "source": {
+    "sid": "es-22",
+    "url": "https://es.wikipedia.org/wiki/Volc%C3%A1n_Nevado_del_Ruiz",
+    "revid": 174763196
+   }
+  },
+  {
+   "id": 725,
+   "lang": "es",
+   "label": "C",
+   "type": "wrong figure: cone age vs activity age",
+   "claim": "El cono volcánico del Nevado del Ruiz empezó a formarse hace 1,8 millones de años.",
+   "sentence": "Ha estado activo alrededor de 1,8 millones de años, desde el Pleistoceno temprano o el Plioceno tardío, con tres períodos eruptivos importantes: Ruíz Ancestral, Ruíz Antiguo y Ruíz Presente.​ La formación del cono volcánico, en el marco del período eruptivo actual, comenzó hace 150 000 años.",
+   "source": {
+    "sid": "es-23",
+    "url": "https://es.wikipedia.org/wiki/Volc%C3%A1n_Nevado_del_Ruiz",
+    "revid": 174763196
+   }
+  },
+  {
+   "id": 726,
+   "lang": "es",
+   "label": "E",
+   "type": "reordered pair superlative",
+   "claim": "El Galeras y el Nevado del Ruiz son los dos volcanes más activos de Colombia.",
+   "sentence": "El volcán Nevado del Ruíz es uno de los más activos de Sudamérica, teniendo como “hermano” en el mismo país al volcán Galeras, el cual está ubicado en la ciudad de Pasto en el departamento de Nariño, siendo los dos volcanes más activos de Colombia.",
+   "source": {
+    "sid": "es-24",
+    "url": "https://es.wikipedia.org/wiki/Volc%C3%A1n_Nevado_del_Ruiz",
+    "revid": 174763196
+   }
+  },
+  {
+   "id": 727,
+   "lang": "es",
+   "label": "C",
+   "type": "antonym: effusive vs explosive",
+   "claim": "Las erupciones del Nevado del Ruiz son principalmente efusivas.",
+   "sentence": "Las erupciones del Nevado del Ruiz son predominantemente explosivas, con un índice de explosividad volcánica (VEI) de 3 a 4 en una escala de 0 a 8, correspondiente a erupciones de tipo vulcaniano a pliniano.​ Se caracterizan por producir rápidas corrientes de gas caliente y roca llamadas flujos piroclásticos.",
+   "source": {
+    "sid": "es-25",
+    "url": "https://es.wikipedia.org/wiki/Volc%C3%A1n_Nevado_del_Ruiz",
+    "revid": 174763196
+   }
+  },
+  {
+   "id": 728,
+   "lang": "es",
+   "label": "E",
+   "type": "figure picked from second sentence",
+   "claim": "La erupción del 13 de noviembre de 1985 tuvo un índice de explosividad de 3.",
+   "sentence": "Estas erupciones, incluso las de magnitud moderada, frecuentemente generan lahares, masivos flujos de lodo y escombros, al derretir el extenso casquete glaciar del volcán, los cuales representan una grave amenaza para la vida humana y el medio ambiente en los valles circundantes.​ El 13 de noviembre de 1985, una erupción vulcaniana de magnitud moderada (VEI 3) desencadenó una serie de lahares masivos , que derritieron aproximadamente el 10% del casquete glaciar del volcán.",
+   "source": {
+    "sid": "es-26",
+    "url": "https://es.wikipedia.org/wiki/Volc%C3%A1n_Nevado_del_Ruiz",
+    "revid": 174763196
+   }
+  },
+  {
+   "id": 729,
+   "lang": "es",
+   "label": "C",
+   "type": "wrong death toll (factor of ten)",
+   "claim": "La Tragedia de Armero causó la muerte de unas 2.300 personas.",
+   "sentence": "El mayor de estos flujos sepultó por completo el municipio de Armero (Tolima) en la conocida Tragedia de Armero, donde al menos 23.000 personas fallecieron según el Comité de Estudios sobre Desastres de Colombia.​ Este evento, considerado el desastre volcánico más mortífero del siglo XX en Sudamérica y el cuarto a nivel mundial desde el siglo XVI, evidenció el riesgo letal de los lahares en volcanes con glaciares.​ Patrones similares ocurrieron en erupciones históricas del Ruiz: en 1595 (VEI 4) y 1845 (VEI 3-4),​ que también generaron lahares mortales pero con menor impacto demográfico.​​ El volcán forma parte del Parque Nacional Natural Los Nevados que incluye otras cumbres nevadas como las de Tolima, Santa Isabel, El Cisne y Quindío.",
+   "source": {
+    "sid": "es-27",
+    "url": "https://es.wikipedia.org/wiki/Volc%C3%A1n_Nevado_del_Ruiz",
+    "revid": 174763196
+   }
+  },
+  {
+   "id": 730,
+   "lang": "es",
+   "label": "T",
+   "type": "visitor numbers not given",
+   "claim": "El parque del Nevado del Ruiz recibe más de cien mil turistas al año.",
+   "sentence": "Sus glaciares, entre los más septentrionales de Sudamérica, han experimentado un retroceso acelerado desde mediados del siglo XX, perdiendo cerca del 90% de su área en las últimas décadas debido al calentamiento global y a la actividad volcánica.​ El parque es un destino ecoturístico destacado, con refugios de montaña, balnearios termales, lugares de pesca como la Laguna del Otún y estaciones de esquí.​ La exploración científica se inició en 1868 con la expedición alemana de Reiss y Stübel (primer intento documentado de ascenso).",
+   "source": {
+    "sid": "es-28",
+    "url": "https://es.wikipedia.org/wiki/Volc%C3%A1n_Nevado_del_Ruiz",
+    "revid": 174763196
+   }
+  },
+  {
+   "id": 731,
+   "lang": "es",
+   "label": "E",
+   "type": "first ascent, active/passive",
+   "claim": "Cunet y Gansser fueron los primeros en alcanzar la cumbre, en 1936.",
+   "sentence": "El primer ascenso a la cumbre lo lograron Cunet y Gansser en 1936, quienes repitieron el ascenso en 1939.​  En 2022, la Unión Internacional de Ciencias Geológicas (IUGS) de la Unesco lo declaró uno de los 100 sitios de patrimonio geológico mundial.​",
+   "source": {
+    "sid": "es-29",
+    "url": "https://es.wikipedia.org/wiki/Volc%C3%A1n_Nevado_del_Ruiz",
+    "revid": 174763196
+   }
+  },
+  {
+   "id": 732,
+   "lang": "es",
+   "label": "T",
+   "type": "height ranking not given",
+   "claim": "El Nevado del Ruiz es el volcán más alto de Colombia.",
+   "sentence": "El volcán Nevado del Ruiz o Mesa de Herveo,​ en época precolombina conocido como Kumanday (Cerro Blanco), Tabuchía (Candela o Fuego) y Tama (Padre Mayor o Grande),​ también denominado \"del Ruiz\" (como homenaje a Alfonso Ruíz de Sahajosa, miembro del cabildo y persona notable de Ibagué ​)  es uno de los volcanes activos más septentrionales del cinturón volcánico de los Andes, ubicado entre los departamentos de Tolima y Caldas (Colombia).",
+   "source": {
+    "sid": "es-21",
+    "url": "https://es.wikipedia.org/wiki/Volc%C3%A1n_Nevado_del_Ruiz",
+    "revid": 174763196
+   }
+  },
+  {
+   "id": 733,
+   "lang": "fr",
+   "label": "E",
+   "type": "ordinal as 'only one longer'",
+   "claim": "Parmi les affluents du Rhône, seule la Saône est plus longue que la Durance.",
+   "sentence": "La Durance est une rivière du Sud-Est de la France se jetant dans le Rhône, dont elle est le deuxième affluent après la Saône pour la longueur et le troisième après la Saône et l’Isère pour le débit.",
+   "source": {
+    "sid": "fr-30",
+    "url": "https://fr.wikipedia.org/wiki/Durance",
+    "revid": 240076657
+   }
+  },
+  {
+   "id": 734,
+   "lang": "fr",
+   "label": "C",
+   "type": "wrong ordinal for discharge (second vs third)",
+   "claim": "La Durance est le deuxième affluent du Rhône par le débit.",
+   "sentence": "La Durance est une rivière du Sud-Est de la France se jetant dans le Rhône, dont elle est le deuxième affluent après la Saône pour la longueur et le troisième après la Saône et l’Isère pour le débit.",
+   "source": {
+    "sid": "fr-30",
+    "url": "https://fr.wikipedia.org/wiki/Durance",
+    "revid": 240076657
+   }
+  },
+  {
+   "id": 735,
+   "lang": "fr",
+   "label": "E",
+   "type": "length figure with unit, reordered",
+   "claim": "La rivière la plus importante de Provence est la Durance, longue de 323,2 km.",
+   "sentence": "Longue de 323,2 km, la Durance est la plus importante rivière de Provence.",
+   "source": {
+    "sid": "fr-31",
+    "url": "https://fr.wikipedia.org/wiki/Durance",
+    "revid": 240076657
+   }
+  },
+  {
+   "id": 736,
+   "lang": "fr",
+   "label": "C",
+   "type": "wrong irrigated area figure",
+   "claim": "La Durance permet d'irriguer 7 500 ha de cultures.",
+   "sentence": "Rivière dite « capricieuse », autrefois redoutée pour ses crues, elle a été soumise à un effort continu d'aménagement, en particulier depuis le XIXe siècle, à des fins hydrauliques (approvisionnement en eau potable de Marseille et des villes alentour), agricole (irrigation de 75 000 ha de cultures, responsable de prélèvements pouvant aller jusqu'à 114 m3/s d'eau dans la rivière, souvent au moment de l'étiage) et hydroélectriques (avec le Verdon, 6 à 7 milliards de kWh produits par an).",
+   "source": {
+    "sid": "fr-32",
+    "url": "https://fr.wikipedia.org/wiki/Durance",
+    "revid": 240076657
+   }
+  },
+  {
+   "id": 737,
+   "lang": "fr",
+   "label": "E",
+   "type": "artificial stated by negation",
+   "claim": "Le lac de Vassivière n'est pas un lac naturel.",
+   "sentence": "Le lac de Vassivière (Estanh de Vaciviera en occitan) est un lac artificiel situé en France, dans l'ouest du Massif central, au nord-ouest du plateau de Millevaches.",
+   "source": {
+    "sid": "fr-33",
+    "url": "https://fr.wikipedia.org/wiki/Lac_de_Vassivi%C3%A8re",
+    "revid": 237842559
+   }
+  },
+  {
+   "id": 738,
+   "lang": "fr",
+   "label": "C",
+   "type": "wrong river for the dam",
+   "claim": "Le barrage qui a créé le lac de Vassivière est situé sur la Creuse.",
+   "sentence": "Créé au début des années 1950 par la construction d'un barrage hydroélectrique situé sur la Maulde, il est partagé entre les départements de la Creuse et de la Haute-Vienne, et s'inscrit dans un environnement forestier dense.",
+   "source": {
+    "sid": "fr-34",
+    "url": "https://fr.wikipedia.org/wiki/Lac_de_Vassivi%C3%A8re",
+    "revid": 237842559
+   }
+  },
+  {
+   "id": 739,
+   "lang": "fr",
+   "label": "E",
+   "type": "superlative as negated comparison",
+   "claim": "Aucun plan d'eau du Limousin n'est plus étendu que le lac de Vassivière.",
+   "sentence": "Sa superficie atteint 9,76 km2, ce qui en fait le plan d'eau le plus important du Limousin et un des plus grands lacs artificiels de France.",
+   "source": {
+    "sid": "fr-35",
+    "url": "https://fr.wikipedia.org/wiki/Lac_de_Vassivi%C3%A8re",
+    "revid": 237842559
+   }
+  },
+  {
+   "id": 740,
+   "lang": "fr",
+   "label": "E",
+   "type": "naming relation, one of two departments",
+   "claim": "Le département de Lot-et-Garonne tient son nom en partie de la rivière Lot.",
+   "sentence": "Il a donné son nom aux départements français du Lot et du Lot-et-Garonne.",
+   "source": {
+    "sid": "fr-47",
+    "url": "https://fr.wikipedia.org/wiki/Lot_(rivi%C3%A8re)",
+    "revid": 238644355
+   }
+  },
+  {
+   "id": 741,
+   "lang": "fr",
+   "label": "C",
+   "type": "first vs second longest",
+   "claim": "Le Lot est la plus longue rivière entièrement française.",
+   "sentence": "C'est la deuxième rivière la plus longue entièrement en France après la Marne.",
+   "source": {
+    "sid": "fr-48",
+    "url": "https://fr.wikipedia.org/wiki/Lot_(rivi%C3%A8re)",
+    "revid": 238644355
+   }
+  },
+  {
+   "id": 742,
+   "lang": "fr",
+   "label": "T",
+   "type": "source location not given (crossing only)",
+   "claim": "Le Lot prend sa source en Lozère.",
+   "sentence": "Il traverse cinq départements, que sont la Lozère, l'Aveyron, le Cantal, le Lot et le Lot-et-Garonne, compris dans les régions Occitanie, Auvergne-Rhône-Alpes et Nouvelle-Aquitaine.",
+   "source": {
+    "sid": "fr-49",
+    "url": "https://fr.wikipedia.org/wiki/Lot_(rivi%C3%A8re)",
+    "revid": 238644355
+   }
+  },
+  {
+   "id": 743,
+   "lang": "fr",
+   "label": "E",
+   "type": "altitude figure, paraphrase",
+   "claim": "Le mont Mézenc s'élève à 1 753 mètres.",
+   "sentence": "Il culmine à 1 753 m d'altitude au cœur du massif du Mézenc.",
+   "source": {
+    "sid": "fr-51",
+    "url": "https://fr.wikipedia.org/wiki/Mont_M%C3%A9zenc",
+    "revid": 239786982
+   }
+  },
+  {
+   "id": 744,
+   "lang": "fr",
+   "label": "E",
+   "type": "figure from the end of a long sentence",
+   "claim": "La profondeur du lac d'Aiguebelette ne dépasse pas 71 mètres.",
+   "sentence": "Bordé à l'est par la chaîne de l'Épine qui culmine avec le mont Grelle à 1 427 mètres et à l'ouest par le mont Tournier, sa profondeur maximale est de 71 mètres.",
+   "source": {
+    "sid": "fr-56",
+    "url": "https://fr.wikipedia.org/wiki/Lac_d'Aiguebelette",
+    "revid": 240200460
+   }
+  },
+  {
+   "id": 745,
+   "lang": "fr",
+   "label": "C",
+   "type": "antonym: public vs private",
+   "claim": "Le lac d'Aiguebelette est un lac public.",
+   "sentence": "Le lac d'Aiguebelette est un lac privé qui appartient à la famille de Rivérieulx de Chambost de Lépin et à Électricité de France, qui ont confié sa gestion à la communauté de communes du Lac d'Aiguebelette.",
+   "source": {
+    "sid": "fr-58",
+    "url": "https://fr.wikipedia.org/wiki/Lac_d'Aiguebelette",
+    "revid": 240200460
+   }
+  },
+  {
+   "id": 746,
+   "lang": "fr",
+   "label": "T",
+   "type": "inhabitation of islands not stated",
+   "claim": "Les deux îles du lac d'Aiguebelette sont inhabitées.",
+   "sentence": "Dans la partie sud du lac se trouvent deux îles, entourées de roselières.",
+   "source": {
+    "sid": "fr-60",
+    "url": "https://fr.wikipedia.org/wiki/Lac_d'Aiguebelette",
+    "revid": 240200460
+   }
+  },
+  {
+   "id": 747,
+   "lang": "fr",
+   "label": "T",
+   "type": "visitor ranking not stated",
+   "claim": "Le lac d'Aiguebelette est la réserve naturelle la plus visitée de France.",
+   "sentence": "Il est en outre depuis mars 2015 la plus grande réserve naturelle française d'eau douce.",
+   "source": {
+    "sid": "fr-62",
+    "url": "https://fr.wikipedia.org/wiki/Lac_d'Aiguebelette",
+    "revid": 240200460
+   }
+  },
+  {
+   "id": 748,
+   "lang": "fr",
+   "label": "E",
+   "type": "active/passive paraphrase of a ban",
+   "claim": "Un arrêté de 1976 a banni du lac d'Aiguebelette les bateaux à moteur thermique.",
+   "sentence": "Afin de préserver la qualité de ses eaux et de son environnement, les bateaux à moteur thermiques sont interdits sur le lac depuis un arrêté de 1976.",
+   "source": {
+    "sid": "fr-61",
+    "url": "https://fr.wikipedia.org/wiki/Lac_d'Aiguebelette",
+    "revid": 240200460
+   }
+  },
+  {
+   "id": 749,
+   "lang": "de",
+   "label": "E",
+   "type": "superlative as negated comparison",
+   "claim": "Kein anderer See, der ganz in Deutschland liegt, ist größer als die Müritz.",
+   "sentence": "Sie ist der größte See, der vollständig innerhalb Deutschlands liegt.",
+   "source": {
+    "sid": "de-37",
+    "url": "https://de.wikipedia.org/wiki/M%C3%BCritz",
+    "revid": 268703610
+   }
+  },
+  {
+   "id": 750,
+   "lang": "de",
+   "label": "E",
+   "type": "converse ratio: more than four times vs less than a quarter",
+   "claim": "Die Müritz ist weniger als ein Viertel so groß wie der Bodensee.",
+   "sentence": "Der Bodensee ist zwar mehr als viermal so groß wie die Müritz, an ihm haben aber auch Österreich und die Schweiz Anteile.",
+   "source": {
+    "sid": "de-38",
+    "url": "https://de.wikipedia.org/wiki/M%C3%BCritz",
+    "revid": 268703610
+   }
+  },
+  {
+   "id": 751,
+   "lang": "de",
+   "label": "C",
+   "type": "dropped holder: Switzerland omitted with 'only'",
+   "claim": "Am Bodensee haben außer Deutschland nur Österreich Anteile.",
+   "sentence": "Der Bodensee ist zwar mehr als viermal so groß wie die Müritz, an ihm haben aber auch Österreich und die Schweiz Anteile.",
+   "source": {
+    "sid": "de-38",
+    "url": "https://de.wikipedia.org/wiki/M%C3%BCritz",
+    "revid": 268703610
+   }
+  },
+  {
+   "id": 752,
+   "lang": "de",
+   "label": "C",
+   "type": "wrong responsible authority",
+   "claim": "Für die Müritz ist das Wasserstraßen- und Schifffahrtsamt Oder-Havel zuständig.",
+   "sentence": "Die gesamte Müritz ist Bestandteil der Bundeswasserstraße Müritz-Elde-Wasserstraße mit der Wasserstraßenklasse I; zuständig ist das Wasserstraßen- und Schifffahrtsamt Elbe.",
+   "source": {
+    "sid": "de-39",
+    "url": "https://de.wikipedia.org/wiki/M%C3%BCritz",
+    "revid": 268703610
+   }
+  },
+  {
+   "id": 753,
+   "lang": "de",
+   "label": "E",
+   "type": "converse adjacency and apposition",
+   "claim": "Der größte terrestrische Nationalpark Deutschlands, der Müritz-Nationalpark, liegt östlich der Müritz.",
+   "sentence": "Im Osten grenzt an den See der Müritz-Nationalpark an, Deutschlands größter terrestrischer Nationalpark.",
+   "source": {
+    "sid": "de-40",
+    "url": "https://de.wikipedia.org/wiki/M%C3%BCritz",
+    "revid": 268703610
+   }
+  },
+  {
+   "id": 754,
+   "lang": "de",
+   "label": "T",
+   "type": "depth ranking not given",
+   "claim": "Die Müritz ist der tiefste See Mecklenburg-Vorpommerns.",
+   "sentence": "Die Müritz [ˈmyːʁɪts] (wohl von slawisch „kleines Meer“, vgl. niedersorbisch mórjo, polnisch morze, „Meer“) ist ein See innerhalb der Mecklenburgischen Seenplatte im Landkreis Mecklenburgische Seenplatte, Mecklenburg-Vorpommern.",
+   "source": {
+    "sid": "de-36",
+    "url": "https://de.wikipedia.org/wiki/M%C3%BCritz",
+    "revid": 268703610
+   }
+  },
+  {
+   "id": 755,
+   "lang": "de",
+   "label": "E",
+   "type": "one item from a disambiguation list, with figure",
+   "claim": "Der höchste Berg Sachsens ist der Fichtelberg im Erzgebirge mit 1215 m.",
+   "sentence": "Fichtelberg heißen: Fichtelberg (Oberfranken), Gemeinde im Landkreis Bayreuth in Bayern Fichtelberg (Gemarkung), Gemarkung im Landkreis Bayreuth in Bayern Fichtelberg (gemeindefreies Gebiet), gemeindefreies Gebiet im Landkreis Bayreuth in Bayern Fichtelberg (Erzgebirge), 1215 m, der höchste Berg Sachsens Fichtelberg (Illschwang), 521 m, Berg auf der Fränkischen Alb bei Illschwang im Landkreis Amberg-Sulzbach in Bayern Fichtelberg (Königstein), 580 m, Berg auf der Fränkischen Alb bei Königstein im Landkreis Amberg-Sulzbach in Bayern Fichtelberg (Naturschutzgebiet), Naturschutzgebiet in Sachsen Fichtelberg (Odenwald), 492 m, Berg im Odenwald, nördlich von Oberzent-Raubach im Landkreis Bergstraße Fichtelberg (Planetoid), ein Planetoid (29736) zwischen den Planeten Mars und Jupiter",
+   "source": {
+    "sid": "de-41",
+    "url": "https://de.wikipedia.org/wiki/Fichtelberg",
+    "revid": 262618730
+   }
+  },
+  {
+   "id": 756,
+   "lang": "de",
+   "label": "C",
+   "type": "height swapped between two list items",
+   "claim": "Der Fichtelberg bei Illschwang ist 580 m hoch.",
+   "sentence": "Fichtelberg heißen: Fichtelberg (Oberfranken), Gemeinde im Landkreis Bayreuth in Bayern Fichtelberg (Gemarkung), Gemarkung im Landkreis Bayreuth in Bayern Fichtelberg (gemeindefreies Gebiet), gemeindefreies Gebiet im Landkreis Bayreuth in Bayern Fichtelberg (Erzgebirge), 1215 m, der höchste Berg Sachsens Fichtelberg (Illschwang), 521 m, Berg auf der Fränkischen Alb bei Illschwang im Landkreis Amberg-Sulzbach in Bayern Fichtelberg (Königstein), 580 m, Berg auf der Fränkischen Alb bei Königstein im Landkreis Amberg-Sulzbach in Bayern Fichtelberg (Naturschutzgebiet), Naturschutzgebiet in Sachsen Fichtelberg (Odenwald), 492 m, Berg im Odenwald, nördlich von Oberzent-Raubach im Landkreis Bergstraße Fichtelberg (Planetoid), ein Planetoid (29736) zwischen den Planeten Mars und Jupiter",
+   "source": {
+    "sid": "de-41",
+    "url": "https://de.wikipedia.org/wiki/Fichtelberg",
+    "revid": 262618730
+   }
+  },
+  {
+   "id": 757,
+   "lang": "de",
+   "label": "E",
+   "type": "ordinal as 'only one larger'",
+   "claim": "In Baden-Württemberg ist nur der Bodensee größer als der Schluchsee.",
+   "sentence": "Er liegt südöstlich des Titisees und ist, nach dem Bodensee, der zweitgrößte See in Baden-Württemberg.",
+   "source": {
+    "sid": "de-65",
+    "url": "https://de.wikipedia.org/wiki/Schluchsee",
+    "revid": 267840869
+   }
+  },
+  {
+   "id": 758,
+   "lang": "de",
+   "label": "C",
+   "type": "wrong direction: northwest vs southeast",
+   "claim": "Der Schluchsee liegt nordwestlich des Titisees.",
+   "sentence": "Er liegt südöstlich des Titisees und ist, nach dem Bodensee, der zweitgrößte See in Baden-Württemberg.",
+   "source": {
+    "sid": "de-65",
+    "url": "https://de.wikipedia.org/wiki/Schluchsee",
+    "revid": 267840869
+   }
+  },
+  {
+   "id": 759,
+   "lang": "de",
+   "label": "E",
+   "type": "source of inflow paraphrased",
+   "claim": "Ein Teil des Wassers im Schluchsee stammt aus dem Rhein.",
+   "sentence": "Neben einem natürlichen Zufluss wird der See über verschiedene Kraftwerksstufen mit Wasser aus dem Rhein befüllt.",
+   "source": {
+    "sid": "de-67",
+    "url": "https://de.wikipedia.org/wiki/Schluchsee",
+    "revid": 267840869
+   }
+  },
+  {
+   "id": 760,
+   "lang": "de",
+   "label": "T",
+   "type": "founding date of the operator not given",
+   "claim": "Das Schluchseewerk wurde in den 1930er Jahren gegründet.",
+   "sentence": "Der See dient seit den 1960er Jahren auch als Zufluss des Pumpspeicherkraftwerks des Schluchseewerks.",
+   "source": {
+    "sid": "de-66",
+    "url": "https://de.wikipedia.org/wiki/Schluchsee",
+    "revid": 267840869
+   }
+  },
+  {
+   "id": 761,
+   "lang": "de",
+   "label": "E",
+   "type": "ordinal as 'only one higher' outside the Alps",
+   "claim": "Außerhalb der Alpen ist in Deutschland nur der Feldberg höher als der Große Arber.",
+   "sentence": "Er ist zudem der höchste Berg Bayerns außerhalb der Alpen und nach dem Feldberg der zweithöchste Berg Deutschlands außerhalb der Alpen.",
+   "source": {
+    "sid": "de-70",
+    "url": "https://de.wikipedia.org/wiki/Gro%C3%9Fer_Arber",
+    "revid": 270769026
+   }
+  },
+  {
+   "id": 762,
+   "lang": "de",
+   "label": "C",
+   "type": "wrong district (Passau for Cham)",
+   "claim": "Der Große Arber liegt in den Landkreisen Regen und Passau.",
+   "sentence": "Daher wird der im niederbayerischen Landkreis Regen und im oberpfälzischen Landkreis Cham gelegene Berg als König des Bayerischen Waldes bezeichnet.",
+   "source": {
+    "sid": "de-73",
+    "url": "https://de.wikipedia.org/wiki/Gro%C3%9Fer_Arber",
+    "revid": 270769026
+   }
+  },
+  {
+   "id": 763,
+   "lang": "de",
+   "label": "T",
+   "type": "access by cable car not stated",
+   "claim": "Der Gipfel des Großen Arbers ist mit einer Seilbahn erreichbar.",
+   "sentence": "Seine Gipfelregion besteht aus Paragneis.",
+   "source": {
+    "sid": "de-74",
+    "url": "https://de.wikipedia.org/wiki/Gro%C3%9Fer_Arber",
+    "revid": 270769026
+   }
+  },
+  {
+   "id": 764,
+   "lang": "de",
+   "label": "E",
+   "type": "Stausee paraphrased",
+   "claim": "Der Schluchsee ist ein aufgestauter See in der gleichnamigen Gemeinde.",
+   "sentence": "Der Schluchsee ist ein Stausee in der Gemeinde Schluchsee bei St.",
+   "source": {
+    "sid": "de-63",
+    "url": "https://de.wikipedia.org/wiki/Schluchsee",
+    "revid": 267840869
+   }
+  },
+  {
+   "id": 765,
+   "lang": "ja",
+   "label": "E",
+   "type": "paraphrase of location",
+   "claim": "黒部川は富山県の東部を流れている川だ。",
+   "sentence": "黒部川（くろべがわ）は、富山県東部を流れる一級河川。",
+   "source": {
+    "sid": "ja-42",
+    "url": "https://ja.wikipedia.org/wiki/%E9%BB%92%E9%83%A8%E5%B7%9D",
+    "revid": 110136182
+   }
+  },
+  {
+   "id": 766,
+   "lang": "ja",
+   "label": "T",
+   "type": "tributary count not given",
+   "claim": "黒部川水系には十本以上の支流がある。",
+   "sentence": "黒部川水系の本流である。",
+   "source": {
+    "sid": "ja-43",
+    "url": "https://ja.wikipedia.org/wiki/%E9%BB%92%E9%83%A8%E5%B7%9D",
+    "revid": 110136182
+   }
+  },
+  {
+   "id": 767,
+   "lang": "ja",
+   "label": "E",
+   "type": "main peak picked from long sentence",
+   "claim": "八甲田山の主峰は大岳である。",
+   "sentence": "八甲田山（はっこうださん）は、青森市の南側にそびえる大岳（標高1,584m）を主峰とする18の山々からなる複数火山の総称。",
+   "source": {
+    "sid": "ja-44",
+    "url": "https://ja.wikipedia.org/wiki/%E5%85%AB%E7%94%B2%E7%94%B0%E5%B1%B1",
+    "revid": 110592725
+   }
+  },
+  {
+   "id": 768,
+   "lang": "ja",
+   "label": "C",
+   "type": "wrong direction: north vs south of Aomori",
+   "claim": "八甲田山は青森市の北側にそびえている。",
+   "sentence": "八甲田山（はっこうださん）は、青森市の南側にそびえる大岳（標高1,584m）を主峰とする18の山々からなる複数火山の総称。",
+   "source": {
+    "sid": "ja-44",
+    "url": "https://ja.wikipedia.org/wiki/%E5%85%AB%E7%94%B2%E7%94%B0%E5%B1%B1",
+    "revid": 110592725
+   }
+  },
+  {
+   "id": 769,
+   "lang": "ja",
+   "label": "E",
+   "type": "membership, passive selection",
+   "claim": "八甲田山は日本百名山に選ばれている。",
+   "sentence": "日本百名山の一つ。",
+   "source": {
+    "sid": "ja-45",
+    "url": "https://ja.wikipedia.org/wiki/%E5%85%AB%E7%94%B2%E7%94%B0%E5%B1%B1",
+    "revid": 110592725
+   }
+  },
+  {
+   "id": 770,
+   "lang": "ja",
+   "label": "C",
+   "type": "transposed digits in elevation",
+   "claim": "白山の標高は2,072メートルである。",
+   "sentence": "白山（はくさん）は、日本の北陸地方、白山国立公園内の石川県白山市と岐阜県大野郡白川村にまたがる標高2,702メートルの活火山。",
+   "source": {
+    "sid": "ja-75",
+    "url": "https://ja.wikipedia.org/wiki/%E7%99%BD%E5%B1%B1",
+    "revid": 111077719
+   }
+  },
+  {
+   "id": 771,
+   "lang": "ja",
+   "label": "E",
+   "type": "spans two prefectures, from long sentence",
+   "claim": "白山は石川県と岐阜県にまたがっている。",
+   "sentence": "白山（はくさん）は、日本の北陸地方、白山国立公園内の石川県白山市と岐阜県大野郡白川村にまたがる標高2,702メートルの活火山。",
+   "source": {
+    "sid": "ja-75",
+    "url": "https://ja.wikipedia.org/wiki/%E7%99%BD%E5%B1%B1",
+    "revid": 111077719
+   }
+  },
+  {
+   "id": 772,
+   "lang": "ja",
+   "label": "E",
+   "type": "reordered membership of a triple",
+   "claim": "富士山と立山と白山は、日本三霊山に数えられる。",
+   "sentence": "また富士山、立山とともに日本三霊山の一つである。",
+   "source": {
+    "sid": "ja-77",
+    "url": "https://ja.wikipedia.org/wiki/%E7%99%BD%E5%B1%B1",
+    "revid": 111077719
+   }
+  },
+  {
+   "id": 773,
+   "lang": "ja",
+   "label": "T",
+   "type": "list not containing the claimed item",
+   "claim": "白山は日本百景に選定されている。",
+   "sentence": "日本百名山、新日本百名山、花の百名山および新・花の百名山に選定されている。",
+   "source": {
+    "sid": "ja-78",
+    "url": "https://ja.wikipedia.org/wiki/%E7%99%BD%E5%B1%B1",
+    "revid": 111077719
+   }
+  },
+  {
+   "id": 774,
+   "lang": "ja",
+   "label": "C",
+   "type": "first vs second longest",
+   "claim": "阿武隈川は東北地方で最も長い川である。",
+   "sentence": "水系としての流路延長239 kmは、東北地方で北上川に次ぐ長さである。",
+   "source": {
+    "sid": "ja-80",
+    "url": "https://ja.wikipedia.org/wiki/%E9%98%BF%E6%AD%A6%E9%9A%88%E5%B7%9D",
+    "revid": 110780836
+   }
+  },
+  {
+   "id": 775,
+   "lang": "ja",
+   "label": "E",
+   "type": "converse comparison",
+   "claim": "東北地方では、北上川の流路延長は阿武隈川よりも長い。",
+   "sentence": "水系としての流路延長239 kmは、東北地方で北上川に次ぐ長さである。",
+   "source": {
+    "sid": "ja-80",
+    "url": "https://ja.wikipedia.org/wiki/%E9%98%BF%E6%AD%A6%E9%9A%88%E5%B7%9D",
+    "revid": 110780836
+   }
+  },
+  {
+   "id": 776,
+   "lang": "ja",
+   "label": "E",
+   "type": "superlative paraphrase",
+   "claim": "屈斜路湖は日本で一番大きなカルデラ湖だ。",
+   "sentence": "日本最大のカルデラ湖で、全面結氷する淡水湖としても日本最大の面積を持つ。",
+   "source": {
+    "sid": "ja-82",
+    "url": "https://ja.wikipedia.org/wiki/%E5%B1%88%E6%96%9C%E8%B7%AF%E6%B9%96",
+    "revid": 109928215
+   }
+  },
+  {
+   "id": 777,
+   "lang": "ja",
+   "label": "C",
+   "type": "wrong year of designation",
+   "claim": "屈斜路湖は1954年に阿寒国立公園に指定された。",
+   "sentence": "1934年（昭和9年）に全域が阿寒国立公園に指定された（2017年に阿寒摩周国立公園に名称変更）。",
+   "source": {
+    "sid": "ja-83",
+    "url": "https://ja.wikipedia.org/wiki/%E5%B1%88%E6%96%9C%E8%B7%AF%E6%B9%96",
+    "revid": 109928215
+   }
+  },
+  {
+   "id": 778,
+   "lang": "ja",
+   "label": "C",
+   "type": "opposite polarity: treated as active volcano",
+   "claim": "大山は活火山として扱われている。",
+   "sentence": "成層火山であるが、活火山としては扱われていない。",
+   "source": {
+    "sid": "ja-85",
+    "url": "https://ja.wikipedia.org/wiki/%E5%A4%A7%E5%B1%B1_(%E9%B3%A5%E5%8F%96%E7%9C%8C)",
+    "revid": 111102825
+   }
+  },
+  {
+   "id": 779,
+   "lang": "ja",
+   "label": "E",
+   "type": "superlative as negated comparison",
+   "claim": "中国地方には大山より高い山はない。",
+   "sentence": "鳥取県および中国地方の最高峰でもある。",
+   "source": {
+    "sid": "ja-86",
+    "url": "https://ja.wikipedia.org/wiki/%E5%A4%A7%E5%B1%B1_(%E9%B3%A5%E5%8F%96%E7%9C%8C)",
+    "revid": 111102825
+   }
+  },
+  {
+   "id": 780,
+   "lang": "ja",
+   "label": "T",
+   "type": "climber numbers not given",
+   "claim": "大山は鳥取県で最も登山者の多い山である。",
+   "sentence": "日本百名山や日本百景にも選定され、鳥取県のシンボルの一つとされている。",
+   "source": {
+    "sid": "ja-88",
+    "url": "https://ja.wikipedia.org/wiki/%E5%A4%A7%E5%B1%B1_(%E9%B3%A5%E5%8F%96%E7%9C%8C)",
+    "revid": 111102825
+   }
+  },
+  {
+   "id": 781,
+   "lang": "es-en",
+   "label": "E",
+   "type": "cross-language: date and explorers from long sentence",
+   "claim": "Scientific exploration of the volcano began in 1868 with a German expedition by Reiss and Stübel.",
+   "sentence": "Sus glaciares, entre los más septentrionales de Sudamérica, han experimentado un retroceso acelerado desde mediados del siglo XX, perdiendo cerca del 90% de su área en las últimas décadas debido al calentamiento global y a la actividad volcánica.​ El parque es un destino ecoturístico destacado, con refugios de montaña, balnearios termales, lugares de pesca como la Laguna del Otún y estaciones de esquí.​ La exploración científica se inició en 1868 con la expedición alemana de Reiss y Stübel (primer intento documentado de ascenso).",
+   "source": {
+    "sid": "es-28",
+    "url": "https://es.wikipedia.org/wiki/Volc%C3%A1n_Nevado_del_Ruiz",
+    "revid": 174763196
+   }
+  },
+  {
+   "id": 782,
+   "lang": "es-en",
+   "label": "E",
+   "type": "cross-language: basin membership",
+   "claim": "The Uruguay River is part of the Plata basin.",
+   "sentence": "El río Uruguay (en portugués: rio Uruguai) es un río internacional de América del Sur que junto con los ríos Paraná, Paraguay y otros cursos fluviales forman la cuenca del Plata.​ Nace en la Sierra Geral en el sudeste de Brasil en la confluencia de los ríos Canoas (de 570 km) y Pelotas (de 437 km) en el límite entre los estados de Río Grande del Sur y Santa Catarina, y desemboca en el Río de la Plata en el lugar llamado punta Gorda​ (kilómetro 0 del río Uruguay a 33°54′58″S 58°24′52″O) entre el departamento uruguayo de Colonia y el argentino de Islas del Ibicuy en la provincia de Entre Ríos.",
+   "source": {
+    "sid": "es-15",
+    "url": "https://es.wikipedia.org/wiki/R%C3%ADo_Uruguay",
+    "revid": 174930868
+   }
+  },
+  {
+   "id": 783,
+   "lang": "es-en",
+   "label": "C",
+   "type": "cross-language: wrong year (2012 vs 2022)",
+   "claim": "In 2012 the IUGS named Nevado del Ruiz one of the 100 geological heritage sites of the world.",
+   "sentence": "El primer ascenso a la cumbre lo lograron Cunet y Gansser en 1936, quienes repitieron el ascenso en 1939.​  En 2022, la Unión Internacional de Ciencias Geológicas (IUGS) de la Unesco lo declaró uno de los 100 sitios de patrimonio geológico mundial.​",
+   "source": {
+    "sid": "es-29",
+    "url": "https://es.wikipedia.org/wiki/Volc%C3%A1n_Nevado_del_Ruiz",
+    "revid": 174763196
+   }
+  },
+  {
+   "id": 784,
+   "lang": "es-en",
+   "label": "T",
+   "type": "cross-language: comparison not given",
+   "claim": "The Uruguay River is longer than the Paraná.",
+   "sentence": "Después de recibir las aguas del Cuareim, donde se forma una triple frontera entre Bella Unión (Uruguay), Monte Caseros (Argentina) y la Barra do Quaraí (Brasil), el río Uruguay continúa su recorrido hacia el sur portando el límite entre Argentina y Uruguay hasta el paraje de punta Gorda, en donde desemboca en el Río de la Plata.",
+   "source": {
+    "sid": "es-20",
+    "url": "https://es.wikipedia.org/wiki/R%C3%ADo_Uruguay",
+    "revid": 174930868
+   }
+  },
+  {
+   "id": 785,
+   "lang": "fr-en",
+   "label": "E",
+   "type": "cross-language: distance figure",
+   "claim": "Lake Aiguebelette is about ten kilometres from Chambéry.",
+   "sentence": "Principal lac de l'Avant-Pays savoyard, dans l'extrémité sud du massif du Jura, il est situé à environ dix kilomètres de Chambéry, environ quarante kilomètres de Grenoble et à environ cent kilomètres de Lyon.",
+   "source": {
+    "sid": "fr-54",
+    "url": "https://fr.wikipedia.org/wiki/Lac_d'Aiguebelette",
+    "revid": 240200460
+   }
+  },
+  {
+   "id": 786,
+   "lang": "fr-en",
+   "label": "E",
+   "type": "cross-language: watershed position",
+   "claim": "Mont Mézenc lies on the divide between the Atlantic and Mediterranean basins.",
+   "sentence": "Il est situé sur la même ligne de crête que le mont Gerbier-de-Jonc, entre Velay et Vivarais, sur la ligne de partage des eaux entre les basins de l'Atlantique et de la Méditerranée.",
+   "source": {
+    "sid": "fr-52",
+    "url": "https://fr.wikipedia.org/wiki/Mont_M%C3%A9zenc",
+    "revid": 239786982
+   }
+  },
+  {
+   "id": 787,
+   "lang": "fr-en",
+   "label": "C",
+   "type": "cross-language: swapped colours of two lakes",
+   "claim": "Lake Aiguebelette is usually blue, whereas Lake Annecy is green.",
+   "sentence": "Au premier regard, il se caractérise par sa couleur souvent verte, alors que, dans la même région, le lac d'Annecy est plus bleu et le lac du Bourget plus souvent gris acier.",
+   "source": {
+    "sid": "fr-57",
+    "url": "https://fr.wikipedia.org/wiki/Lac_d'Aiguebelette",
+    "revid": 240200460
+   }
+  },
+  {
+   "id": 788,
+   "lang": "fr-en",
+   "label": "T",
+   "type": "cross-language: size ranking of communes not given",
+   "claim": "Novalaise is the largest of the communes on the shore of Lake Aiguebelette.",
+   "sentence": "Ses rives se partagent quant à elles entre cinq communes riveraines que sont : Aiguebelette-le-Lac, Lépin-le-Lac, Saint-Alban-de-Montbel, Novalaise et Nances.",
+   "source": {
+    "sid": "fr-59",
+    "url": "https://fr.wikipedia.org/wiki/Lac_d'Aiguebelette",
+    "revid": 240200460
+   }
+  },
+  {
+   "id": 789,
+   "lang": "de-en",
+   "label": "E",
+   "type": "cross-language: Czech name",
+   "claim": "In Czech, the Großer Arber is called Velký Javor.",
+   "sentence": "Der Große Arber (tschechisch Velký Javor) ist mit 1455,5 m ü.",
+   "source": {
+    "sid": "de-68",
+    "url": "https://de.wikipedia.org/wiki/Gro%C3%9Fer_Arber",
+    "revid": 270769026
+   }
+  },
+  {
+   "id": 790,
+   "lang": "de-en",
+   "label": "E",
+   "type": "cross-language: etymology hedged",
+   "claim": "The name Müritz probably comes from a Slavic word meaning small sea.",
+   "sentence": "Die Müritz [ˈmyːʁɪts] (wohl von slawisch „kleines Meer“, vgl. niedersorbisch mórjo, polnisch morze, „Meer“) ist ein See innerhalb der Mecklenburgischen Seenplatte im Landkreis Mecklenburgische Seenplatte, Mecklenburg-Vorpommern.",
+   "source": {
+    "sid": "de-36",
+    "url": "https://de.wikipedia.org/wiki/M%C3%BCritz",
+    "revid": 268703610
+   }
+  },
+  {
+   "id": 791,
+   "lang": "de-en",
+   "label": "C",
+   "type": "cross-language: first vs second highest outside the Alps",
+   "claim": "The Großer Arber is the highest mountain in Germany outside the Alps.",
+   "sentence": "Er ist zudem der höchste Berg Bayerns außerhalb der Alpen und nach dem Feldberg der zweithöchste Berg Deutschlands außerhalb der Alpen.",
+   "source": {
+    "sid": "de-70",
+    "url": "https://de.wikipedia.org/wiki/Gro%C3%9Fer_Arber",
+    "revid": 270769026
+   }
+  },
+  {
+   "id": 792,
+   "lang": "de-en",
+   "label": "T",
+   "type": "cross-language: cargo traffic not stated",
+   "claim": "The Müritz is used by commercial cargo ships.",
+   "sentence": "Die gesamte Müritz ist Bestandteil der Bundeswasserstraße Müritz-Elde-Wasserstraße mit der Wasserstraßenklasse I; zuständig ist das Wasserstraßen- und Schifffahrtsamt Elbe.",
+   "source": {
+    "sid": "de-39",
+    "url": "https://de.wikipedia.org/wiki/M%C3%BCritz",
+    "revid": 268703610
+   }
+  },
+  {
+   "id": 793,
+   "lang": "ja-en",
+   "label": "E",
+   "type": "cross-language: location and type",
+   "claim": "Lake Kussharo is a natural lake in the town of Teshikaga in eastern Hokkaido.",
+   "sentence": "屈斜路湖（くっしゃろこ）は、北海道東部（道東）の弟子屈町に位置する自然湖。",
+   "source": {
+    "sid": "ja-81",
+    "url": "https://ja.wikipedia.org/wiki/%E5%B1%88%E6%96%9C%E8%B7%AF%E6%B9%96",
+    "revid": 109928215
+   }
+  },
+  {
+   "id": 794,
+   "lang": "ja-en",
+   "label": "E",
+   "type": "cross-language: alias",
+   "claim": "Daisen is also known as Hōki Fuji.",
+   "sentence": "角盤山（かくばんざん）とも呼ばれるほか、鳥取県西部の旧国名が伯耆国であったことから伯耆大山（ほうきだいせん）、見る方角によっては富士形に見えるその山容から、郷土富士として伯耆富士や出雲富士とも呼ばれる。",
+   "source": {
+    "sid": "ja-87",
+    "url": "https://ja.wikipedia.org/wiki/%E5%A4%A7%E5%B1%B1_(%E9%B3%A5%E5%8F%96%E7%9C%8C)",
+    "revid": 111102825
+   }
+  },
+  {
+   "id": 795,
+   "lang": "ja-en",
+   "label": "C",
+   "type": "cross-language: transposed digits in elevation",
+   "claim": "Daisen in Tottori Prefecture is 1,792 metres high.",
+   "sentence": "大山（だいせん）は、日本の鳥取県にある標高1,729メートルの山。",
+   "source": {
+    "sid": "ja-84",
+    "url": "https://ja.wikipedia.org/wiki/%E5%A4%A7%E5%B1%B1_(%E9%B3%A5%E5%8F%96%E7%9C%8C)",
+    "revid": 111102825
+   }
+  },
+  {
+   "id": 796,
+   "lang": "ja-en",
+   "label": "T",
+   "type": "cross-language: river mouth not given",
+   "claim": "The Abukuma River flows into the Pacific Ocean.",
+   "sentence": "阿武隈川（あぶくまがわ）は、福島県および宮城県を流れる阿武隈川水系の本流で、一級河川である。",
+   "source": {
+    "sid": "ja-79",
+    "url": "https://ja.wikipedia.org/wiki/%E9%98%BF%E6%AD%A6%E9%9A%88%E5%B7%9D",
+    "revid": 110780836
+   }
+  }
+ ]
+}
