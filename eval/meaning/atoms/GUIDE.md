@@ -1,4 +1,4 @@
-# Gold atoms, coreference and synonyms: the labelling guide (written 2026-10-22, before any labeller or system saw the sentences)
+# Gold atoms, coreference and synonyms: the labelling guide (written 2026-10-22, before any labeller or system saw the sentences; run 18 clarified that a first-mentioned proper name is `name`)
 
 You label `sentences.json`: 100 sentences, each with its page title and the sentences before it on its page. Judge **only from the
 sentence and its page context**, never from what you know of the world. Write `gold.json` (format at the end).
@@ -20,7 +20,7 @@ For every mention of an entity in the sentence, write `{ "text": "<exact words f
 | `description` | a description that refers back to a known entity | "the lake", "the company", "ALLETE's largest business" |
 | `pronoun` | a pronoun | "it", "its", "elle", "er", "それ", "our", "we" |
 | `dropped` | a subject the sentence leaves out (Spanish, Japanese) | text "" — write `"text": "", "at": "<the verb it is the subject of>"` |
-| `new` | a first mention of an entity | — |
+| `new` | a first mention of an entity that is not a proper name (a proper name is `name` at its first mention too) | "a rift lake" |
 
 "We", "our" and "us" in the filing are the company. A mention that refers to nothing on the page (an indefinite new entity) is `new`.
 

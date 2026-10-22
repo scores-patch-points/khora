@@ -352,3 +352,31 @@ were not told which atoms the producer made):
  Japanese is where it fails (A2 19%, A1 49%): the parse, not the producer, splits its predicates. Neither atom bar is met; the next lever
  for precision is the produced predicates (the path's words joined, "variar_encontrar_entre"), which the proxy never checked and the
  judges do; and for recall the Japanese parse.
+
+## Run 18a (2026-10-22): a LEARNED predicate for produced atoms, and a filter trained on the run-17 judges (no new gold)
+Run 17's produced atoms were judged stated 41% of the time; their predicate was every word on the path joined
+("lake_straddl_border_between"). Two learned stages, both averaged perceptrons, both local:
+- Predicate chooser (native/organs/atom-predicate.js; eval/meaning/atoms/learn-predicate.mjs). The options are each path word alone, each
+  ordered pair (a verb and its case word: "flow_into"), and all of them; the ranker scores each by its words' roles, parts of speech,
+  relations, lemmas and English dictionary keys (so languages share weights). Labels from GOLD predicates (runs 13–17): for a candidate whose
+  participants meet a gold atom, the right options are those whose words best name that atom's predicate, directly or through a key
+  (1,470 labelled of 3,853 aligned: most gold predicates use no path word). Five-fold, each set held out in turn, share of labelled
+  candidates whose chosen predicate is a right one: learned 59.7 / 68.3 / 67.5 / 61.0 / 64.5% (sets 13–17); all words joined, as run 17
+  produced them, 25.8 / 22.5 / 19.8 / 22.4 / 23.9%; first word alone 38.5 / 41.9 / 47.2 / 42.7 / 43.6%.
+- Produced-atom filter (learn-filter.mjs; filterFeatures in atom-produce.js): keep or drop a produced atom by its path, its chosen
+  predicate's option and how that was built, trained on the run-17 precision judges' 419 verdicts on produced atoms. Left out one page at a
+  time on run 17 (verdicts were given to the joined predicates): the produced atoms kept 190 of 419, judged stated 41.3 → 59.5%; the
+  whole set A1 65.2 → 75.9%, A2 59.3 → 55.8% (the producer's share of recall 11.5 → 7.9 points).
+- Guide: a first-mentioned proper name is `name`, not `new` (run 17's labellers read it the other way; C2 then covered 64 mentions).
+
+## Run 18 (2026-10-22): a SIXTH held-out set — PRE-REGISTERED (written before the labellers saw it)
+Set: eval/meaning/atoms18/sentences.json, 100 sentences from pages no earlier set touched: English Wikipedia 21 (Lake Champlain, Ohio
+River), Wabash National 10-K 20 (Item 1, Business), Spanish 13 (Río Biobío, Volcán Osorno, Laguna de Términos), French 16 (Seine, Lac du
+Der-Chantecoq, Mont Aigoual), German 15 (Starnberger See, Feldberg, Isar), Japanese 15 (十勝岳, 阿寒湖, 筑後川, 那須岳, 中禅寺湖, 吉野川); sources
+with revision ids. The guide as run 17 with the `name` clarification; two new independent labellers (A: en, filing, es; B: fr, de, ja);
+four judge agents, not told which atoms are produced.
+System: run 17's (coreference coref-ranker.json and producer atom-producer.json, both unchanged) plus the predicate chooser trained on runs
+13–17 (eval/meaning/atoms/predicate-chooser.json) and the filter trained on the run-17 verdicts (produced-filter.json, threshold 0).
+Bars as before: A1 ≥ 85%, A2 ≥ 70%, C1 ≥ 90%, C2 ≥ 95% (cluster measure), S1 ≥ 90%, S2 ≤ 5%. Also measured, as run 17: the judged
+precision of atoms.js's and of the produced atoms apart, and the recall found only through produced atoms.
+Expected (not a bar): produced atoms judged stated 55–65% (run 17: 41%); A1 near 75%; A2 a few points under run 17's.

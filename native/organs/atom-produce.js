@@ -5,13 +5,15 @@
 // state facts; the path's shape and words are its features, and no rule here says which shapes to keep.
 //   candidatesOf({ rows, mentions, entities, text, lang }) → [{ pred, args, start, end, feats, from: "path" }]
 //   produce(ctx, model, { have }) → the candidates scoring above model.threshold that no atom in `have` already states over the same arguments
+import { optionsOf, optionFeatures, choosePredicate } from "./atom-predicate.js";
 const low = (s) => String(s ?? "").normalize("NFC").toLowerCase();
 const bucket = (n, cuts) => { for (const c of cuts) if (n <= c) return String(c); return `>${cuts.at(-1)}`; };
 // a phrase stops at its clauses, appositions, conjuncts and, when it is a copula's noun, at that clause's subject, copula and obliques
 const CUT = /^(acl|acl:relcl|appos|conj|cc|parataxis|punct|advcl|ccomp|xcomp|csubj|dep|list|reparandum|orphan|mark|nsubj|nsubj:pass|cop|aux|aux:pass|obl|obl:agent|advmod|expl|expl:pass)$/;
 const lem = (r) => low(r.lemma && r.lemma !== "_" ? r.lemma : r.form);
 
-export function candidatesOf({ rows, mentions = [], entities = [], text = "", lang = "en" }) {
+// keysOf(lemma, upos): optional, a word's English keys (wikt-gloss.js gloss.all), carried on each path word for the predicate chooser
+export function candidatesOf({ rows, mentions = [], entities = [], text = "", lang = "en", keysOf = null }) {
   const byId = new Map(rows.map((r) => [r.id, r])), kids = new Map();
   for (const r of rows) (kids.get(r.head) ?? kids.set(r.head, []).get(r.head)).push(r);
   const E = new Map(entities.map((e) => [e.id, e]));
@@ -56,7 +58,10 @@ export function candidatesOf({ rows, mentions = [], entities = [], text = "", la
       `between=${between.length}`, `betweenU=${between.map((x) => x.upos).join("+") || "-"}`, `lcaLemma=${lem(lca)}`, `gap=${bucket(Math.abs(a.r.id - b.r.id), [1, 3, 6, 12])}`,
       `aEnt=${a.arg.entity ? 1 : 0}`, `bEnt=${b.arg.entity ? 1 : 0}`, `sigCase=${sig}|${cs ? "case" : "-"}`, `neg=${(kids.get(lca.id) ?? []).some((k) => /Polarity=Neg/.test(k.feats ?? "") || /^(not|no|ne|nicht|kein|no|ない)$/.test(low(k.form))) ? 1 : 0}`];
     f.push(`stand=${A !== a || B !== b ? 1 : 0}`);
-    out.push({ pred, args: [A.arg, B.arg], start: Math.min(a.start, b.start), end: Math.max(a.end, b.end), from: "path", feats: feat(f), surfaces: [A.surface, B.surface] });
+    // the path's words, for the predicate chooser (atom-predicate.js): the content words between, then the case words of the second
+    const wordOf = (x, role) => ({ lemma: lem(x), upos: x.upos, deprel: x.head === 0 ? "root" : x.deprel, role, lca: x === lca, keys: lang === "en" ? [lem(x)] : (keysOf?.(lem(x), x.upos) ?? []).slice(0, 4) });
+    const words = copula ? [] : [...between.map((x) => wordOf(x, "between")), ...(kids.get(b.r.id) ?? []).filter((k) => k.deprel === "case" || k.deprel === "mark" && k.upos === "ADP").map((k) => wordOf(k, "case"))];
+    out.push({ pred, args: [A.arg, B.arg], start: Math.min(a.start, b.start), end: Math.max(a.end, b.end), from: "path", feats: feat(f), surfaces: [A.surface, B.surface], words, copula, sig, lang });
   }
   // one-place facts: an adjective on a phrase
   for (const a of parts) for (const k of (kids.get(a.r.id) ?? []).filter((x) => x.upos === "ADJ" && /^amod/.test(x.deprel))) {
@@ -80,8 +85,21 @@ export function select(cands, model, { have = [] } = {}) {
   }
   return out;
 }
-export function produce(ctx, model, { have = [] } = {}) {
-  return select(candidatesOf(ctx), model, { have }).map(([{ feats, surfaces, ...a }, v]) => ({ ...a, neg: false, hedged: false, approx: false, score: +v.toFixed(3) }));
+// the produced atom's predicate chosen from its path's words (chooser: PredicateChooser@1, atom-predicate.js), then a second stage that keeps
+// or drops it (filter: ProducedFilter@1, trained on the precision judges' verdicts) by its path, its chosen predicate and how that was built
+export function filterFeatures(c, lang, chooser = null) {
+  const cand = { ...c, lang }, os = optionsOf(cand);
+  const pick = chooser ? os.find((o) => o.pred === choosePredicate(cand, chooser)) ?? os[0] : os.find((o) => o.pred === c.pred) ?? os[0];
+  return [...c.feats, ...(c.words?.length ? optionFeatures(cand, pick).map((x) => `opt|${x}`) : ["opt|none"]), `nwords=${(c.words ?? []).length}`];
+}
+export function produce(ctx, model, { have = [], chooser = null, filter = null } = {}) {
+  const out = [];
+  for (const [c, v] of select(candidatesOf(ctx), model, { have })) {
+    if (filter && filterFeatures(c, ctx.lang, chooser).reduce((a, x) => a + (filter.w[x] ?? 0), 0) <= (filter.threshold ?? 0)) continue;
+    const { feats, surfaces, words, copula, sig, lang, ...a } = c;
+    out.push({ ...a, pred: chooser && c.args.length > 1 ? choosePredicate({ ...c, lang: ctx.lang }, chooser) : c.pred, neg: false, hedged: false, approx: false, score: +v.toFixed(3) });
+  }
+  return out;
 }
 export function trainProducer(examples, { epochs = 10, seed = 7 } = {}) {
   const w = {}, tot = {}, ts = {}; let t = 0, r = seed;
