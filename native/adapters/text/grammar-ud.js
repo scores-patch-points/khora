@@ -55,9 +55,11 @@ export function makeGrammar(lang, { model, tokenizer, glossary = null }) {
   // the neutral key of a word: the glossary's, else the language's own lemma
   // a verb with its reflexive pronoun ("se llama", "sich verlaufen") reads the senses Wiktionary tags reflexive
   const reflexiveIn = (rows, r) => !!rows && kidsOf(rows, r.id).some((k) => /^(expl|expl:pv|expl:pass|expl:impers|obj|iobj)$/.test(k.deprel) && (feat(k, "Reflex=Yes") || L.reflexive?.has(low(k))));
-  const key = (r, rows = null) => { const l = lem(r); if (!glossary || /^(PROPN|NUM|PRON)$/.test(r?.upos)) return l; return glossary(lang, l, r?.upos, { reflexive: reflexiveIn(rows, r) }) ?? l; };
+  // a lemma the dictionary does not file under that spelling (UD Japanese writes 居る, 有る, 為る; Wiktionary files いる, ある, する) is read by the
+  // word's own form
+  const key = (r, rows = null) => { const l = lem(r); if (!glossary || /^(PROPN|NUM|PRON)$/.test(r?.upos)) return l; const ctx = { reflexive: reflexiveIn(rows, r) }; return glossary(lang, l, r?.upos, ctx) ?? (low(r) !== l ? glossary(lang, low(r), r?.upos, ctx) : null) ?? l; };
   // every English key the word's gloss gives ("relier: to connect, link, join"), the key first: any of them meets the other side's key
-  const keysOf = (r, rows = null) => { const k = key(r, rows); if (!glossary?.all || /^(PROPN|NUM|PRON)$/.test(r?.upos)) return [k]; return [...new Set([k, ...(glossary.all(lang, lem(r), r?.upos, { reflexive: reflexiveIn(rows, r) }) ?? [])])]; };
+  const keysOf = (r, rows = null) => { const k = key(r, rows); if (!glossary?.all || /^(PROPN|NUM|PRON)$/.test(r?.upos)) return [k]; const ctx = { reflexive: reflexiveIn(rows, r) }; return [...new Set([k, ...(glossary.all(lang, lem(r), r?.upos, ctx) ?? glossary.all(lang, low(r), r?.upos, ctx) ?? [])])]; };
   const hasCase = (rows, r, words) => kidsOf(rows, r.id).some((c) => /^(case|mark|cc|fixed)$/.test(c.deprel) && (words.has(low(c)) || words.has(lem(c))));
 
   function rowsOf(text) {
@@ -71,10 +73,10 @@ export function makeGrammar(lang, { model, tokenizer, glossary = null }) {
     let d = 0; const inside = new Set(); for (const r of rows) { if (r.form === "(") d++; else if (r.form === ")") d = Math.max(0, d - 1); else if (d > 0) inside.add(r.id); }
     const inBr = ws.map((w) => inside.has(w.id));
     const names = ws.filter((w, k) => w.upos === "PROPN" && !inBr[k]).map(low).filter((n) => !L.titles.has(n.replace(/\.$/, ""))), aliases = ws.filter((w, k) => /^(PROPN|NOUN|X)$/.test(w.upos) && inBr[k]).map(low);
-    return { text: ws.map((w) => w.form).join(" "), ids: ws.map((w) => w.id), head: head.upos === "PROPN" ? low(head) : key(head), heads: head.upos === "PROPN" ? [low(head)] : keysOf(head, rows), sup: null, names, aliases,
+    return { text: ws.map((w) => w.form).join(" "), ids: ws.map((w) => w.id), hid: id, head: head.upos === "PROPN" ? low(head) : key(head), heads: head.upos === "PROPN" ? [low(head)] : keysOf(head, rows), sup: null, names, aliases,
       keys: ws.filter((w) => /^(NOUN|PROPN|ADJ)$/.test(w.upos) && !L.titles.has(low(w))).map((w) => (w.upos === "PROPN" ? low(w) : key(w))),
       figs: [], quant: ws.map((w) => L.quant[low(w)]).find(Boolean) ?? null, agent: agentN ? endOf(rows, agentN.id, text) : null,
-      nmods: kidsOf(rows, id).filter((k) => (/^nmod(:poss)?$/.test(k.deprel) && k !== agentN) || (k.deprel === "conj" && /^(NOUN|PROPN|ADJ|NUM)$/.test(k.upos))).map((k) => endOf(rows, k.id, text)) };
+      nmods: kidsOf(rows, id).filter((k) => (/^nmod(:poss)?$/.test(k.deprel) && k !== agentN) || (k.deprel === "conj" && /^(NOUN|PROPN|ADJ|NUM)$/.test(k.upos))).map((k) => ({ ...endOf(rows, k.id, text), conj: k.deprel === "conj" })) };
   };
 
   // ante: the page's current topic (an end), for a subject the sentence leaves to its page: a third-person pronoun ("Elle se jette …",
@@ -187,7 +189,7 @@ export function makeGrammar(lang, { model, tokenizer, glossary = null }) {
     for (const a of rows.filter((r) => r.deprel === "appos" && !(r.upos === "PROPN" && byId(r.head)?.upos === "PROPN" && Math.abs(r.id - r.head) <= 2))) out.push({ polarity: "+", tense: "present", asserted: true, OBL: [], rel: "be", ARG0: endOf(rows, a.head, text), ARG1: endOf(rows, a.id, text) });
     const kept = out.filter((p) => p.ARG0 || p.ARG1); kept.framed = framed; return kept;
   }
-  const keyEnd = (e) => e && { text: e.text, head: e.head, heads: e.heads ?? [e.head], sup: null, names: e.names, aliases: e.aliases ?? [], keys: e.keys, figs: e.figs, quant: e.quant, agent: keyEnd(e.agent), nmods: (e.nmods ?? []).map(keyEnd) };
+  const keyEnd = (e) => e && { text: e.text, ids: e.ids ?? [], hid: e.hid ?? null, head: e.head, heads: e.heads ?? [e.head], sup: null, names: e.names, aliases: e.aliases ?? [], keys: e.keys, figs: e.figs, quant: e.quant, agent: keyEnd(e.agent), nmods: (e.nmods ?? []).map(keyEnd), conj: !!e.conj };
   // the page's topic before a sentence: the title, then each earlier sentence's main subject in turn (a sentence whose subject is left to
   // the page keeps the topic it had)
   const topicOf = (context) => {
@@ -205,8 +207,8 @@ export function makeGrammar(lang, { model, tokenizer, glossary = null }) {
     const rows = Array.isArray(opt) ? opt : opt?.rows ?? rowsOf(text), ante = Array.isArray(opt) ? null : topicOf(opt?.context);
     const P = propositionsOf(text, rows, ante), bound = bindFigures(rows, LEX);
     const unread = unreadWords(rows.filter((r) => !P.framed.has(r.id)), P, bound, { isUnit: (f) => !!LEX.unitOf(f), key: (r) => (r.upos === "PROPN" ? low(r) : key(r)) });
-    const props = P.map((p, i) => ({ main: !!p.main, schema: "EOTClaim@1", id: `c${i + 1}`, lang, by: "grammar-ud", rel: p.rel, rels: p.rels ?? [p.rel], alias: !!p.alias, ARG0: keyEnd(p.ARG0), ARG1: keyEnd(p.ARG1), ARG2: keyEnd(p.ARG2 ?? null), OBL: (p.OBL || []).map(keyEnd), polarity: p.polarity, tense: p.tense, asserted: p.asserted, asym: !!p.asym }));
-    const figs = bindFigures(rows, LEX).map((f, i) => { const ev = f.eventLemma ? rows.find((r) => lem(r) === f.eventLemma) : null; return { schema: "EOTClaim@1", id: `f${i + 1}`, lang, by: "grammar-ud", rel: "fig", main: false, ARG0: f.beingId ? keyEnd(endOf(rows, f.beingId, text)) : null, ARG1: null, OBL: [], polarity: "+", tense: "present", asserted: true, asym: false,
+    const props = P.map((p, i) => ({ main: !!p.main, schema: "EOTClaim@1", id: `c${i + 1}`, lang, by: "grammar-ud", rel: p.rel, rels: p.rels ?? [p.rel], alias: !!p.alias, vid: p.vid ?? null, ARG0: keyEnd(p.ARG0), ARG1: keyEnd(p.ARG1), ARG2: keyEnd(p.ARG2 ?? null), OBL: (p.OBL || []).map(keyEnd), polarity: p.polarity, tense: p.tense, asserted: p.asserted, asym: !!p.asym }));
+    const figs = bindFigures(rows, LEX).map((f, i) => { const ev = f.eventLemma ? rows.find((r) => lem(r) === f.eventLemma) : null; return { schema: "EOTClaim@1", id: `f${i + 1}`, lang, by: "grammar-ud", rel: "fig", main: false, ids: f.ids, ARG0: f.beingId ? keyEnd(endOf(rows, f.beingId, text)) : null, ARG1: null, OBL: [], polarity: "+", tense: "present", asserted: true, asym: false,
       fig: { measure: f.measure.startsWith("count:") ? `count:${key(rows.find((r) => lem(r) === f.measure.slice(6)) ?? { lemma: f.measure.slice(6) })}` : f.measure, attribute: f.attribute, event: ev ? (L.have.has(f.eventLemma) ? "have" : key(ev)) : f.eventLemma, base: f.base, hiBase: f.hiBase, alts: f.alts, approx: f.approx } }; });
     return [...props, ...figs].map((c) => ({ ...c, unread }));
   }

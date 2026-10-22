@@ -152,12 +152,12 @@ const bracketed = (rows, ws) => { let d = 0; const inside = new Set(); for (cons
 const endOf = (rows, id, text) => { if (!id) return null; const head = rows.find((r) => r.id === id), ws = spanOf(rows, id);
   const agentN = kids(rows, id).find((k) => /^nmod/.test(k.deprel) && kids(rows, k.id).some((c) => /^by$/i.test(c.form)));
   const inBr = bracketed(rows, ws);
-  return { text: ws.map((w) => w.form).join(" "), ids: ws.map((w) => w.id), head: lem(head), names: ws.filter((w, k) => w.upos === "PROPN" && !inBr[k]).map((w) => w.form.toLowerCase()), aliases: ws.filter((w, k) => /^(PROPN|NOUN|X)$/.test(w.upos) && inBr[k]).map((w) => w.form.toLowerCase()), lemmas: ws.filter((w) => /^(NOUN|PROPN|ADJ)$/.test(w.upos)).map(lem).filter((l) => !FW.has(l)),
+  return { text: ws.map((w) => w.form).join(" "), ids: ws.map((w) => w.id), hid: id, head: lem(head), names: ws.filter((w, k) => w.upos === "PROPN" && !inBr[k]).map((w) => w.form.toLowerCase()), aliases: ws.filter((w, k) => /^(PROPN|NOUN|X)$/.test(w.upos) && inBr[k]).map((w) => w.form.toLowerCase()), lemmas: ws.filter((w) => /^(NOUN|PROPN|ADJ)$/.test(w.upos)).map(lem).filter((l) => !FW.has(l)),
     sup: (ws.find((w) => w.upos === "ADJ" && (/Degree=Sup/.test(w.feats || "") || /est$/i.test(w.form))) ? comparativeBase(ws.find((w) => w.upos === "ADJ" && (/Degree=Sup/.test(w.feats || "") || /est$/i.test(w.form))).form.replace(/est$/i, "er")) : null),
     figs: figuresIn(rows, ws, text), quant: ws.map((w) => w.form.toLowerCase()).find((f) => /^(all|every|each|some|many|most|few|no)$/.test(f)) ?? null, agent: agentN ? endOf(rows, agentN.id, text) : null,
     // its modifier phrases ("an agreement WITH GSK", "the process OF PHOTOSYNTHESIS") and its coordinated words ("a Collaboration AND …
     // Agreement", "Groq, Inc."), each an end of its own the check must meet in the source
-    nmods: kids(rows, id).filter((k) => (/^nmod(:poss)?$/.test(k.deprel) && k !== agentN) || (k.deprel === "conj" && /^(NOUN|PROPN|ADJ|NUM)$/.test(k.upos))).map((k) => endOf(rows, k.id, text)) }; };
+    nmods: kids(rows, id).filter((k) => (/^nmod(:poss)?$/.test(k.deprel) && k !== agentN) || (k.deprel === "conj" && /^(NOUN|PROPN|ADJ|NUM)$/.test(k.upos))).map((k) => ({ ...endOf(rows, k.id, text), conj: k.deprel === "conj" })) }; };
 
 function propositionsOf(text, rows = rowsOf(text)) {
   // out.framed: the words of discourse connectives, set aside on purpose (read, not dropped)
@@ -243,7 +243,7 @@ const surname = (e) => e.names.filter((n) => !TITLES.has(n)).at(-1) ?? null;
 
 // a pronoun's case is grammar, not identity: "us" is "we" (declared English closed class)
 const PRON_CASE = { us: "we", me: "i", him: "he", her: "she", them: "they", ourselves: "we", themselves: "they" };
-const keyEnd = (e) => e && { text: e.text, head: PRON_CASE[e.head] ?? e.head, sup: e.sup ?? null, names: e.names.filter((n) => !TITLES.has(n)), aliases: e.aliases ?? [], keys: e.lemmas.filter((l) => !TITLES.has(l)), figs: e.figs, quant: e.quant ? QUANT[e.quant] : null, agent: keyEnd(e.agent), nmods: (e.nmods ?? []).map(keyEnd) };
+const keyEnd = (e) => e && { text: e.text, ids: e.ids ?? [], hid: e.hid ?? null, head: PRON_CASE[e.head] ?? e.head, sup: e.sup ?? null, names: e.names.filter((n) => !TITLES.has(n)), aliases: e.aliases ?? [], keys: e.lemmas.filter((l) => !TITLES.has(l)), figs: e.figs, quant: e.quant ? QUANT[e.quant] : null, agent: keyEnd(e.agent), nmods: (e.nmods ?? []).map(keyEnd), conj: !!e.conj };
 const QUANT = { all: "all", every: "all", each: "all", some: "some", many: "many", most: "most", few: "few", no: "none" };
 /** EOTClaim@1 — the only thing the EOT layer sees */
 /** the claims of every one of the k best readings, once each: a source states what any close reading of it states */
@@ -259,7 +259,7 @@ export function claimsOf(text, rows = undefined) {
   return [...propositionClaims(text, R, props), ...figureClaimsOf(text, R)].map((c) => ({ ...c, unread }));
 }
 function propositionClaims(text, rows, props = propositionsOf(text, rows)) {
-  return props.map((p, i) => ({ main: !!p.main, schema: "EOTClaim@1", id: `c${i + 1}`, lang: "en", by: "grammar-en", rel: p.rel, alias: !!p.alias, ARG0: keyEnd(p.ARG0), ARG1: keyEnd(p.ARG1), ARG2: keyEnd(p.ARG2 ?? null), OBL: (p.OBL || []).map(keyEnd), polarity: p.polarity, tense: p.tense, asserted: p.asserted, asym: !!p.asym }));
+  return props.map((p, i) => ({ main: !!p.main, schema: "EOTClaim@1", id: `c${i + 1}`, lang: "en", by: "grammar-en", rel: p.rel, alias: !!p.alias, vid: p.vid ?? null, ARG0: keyEnd(p.ARG0), ARG1: keyEnd(p.ARG1), ARG2: keyEnd(p.ARG2 ?? null), OBL: (p.OBL || []).map(keyEnd), polarity: p.polarity, tense: p.tense, asserted: p.asserted, asym: !!p.asym }));
 }
 
 
@@ -325,6 +325,6 @@ export const FIGURE_LEX = {
 };
 /** the figures of a sentence as EOT claims: rel "fig", ARG0 the being they describe, the binding on the claim */
 export function figureClaimsOf(text, rows = rowsOf(text)) {
-  return bindFigures(rows, FIGURE_LEX).map((f, i) => ({ schema: "EOTClaim@1", id: `f${i + 1}`, lang: "en", by: "grammar-en", rel: "fig", main: false, ARG0: f.beingId ? keyEnd(endOf(rows, f.beingId, text)) : null, ARG1: null, OBL: [], polarity: "+", tense: "present", asserted: true, asym: false,
+  return bindFigures(rows, FIGURE_LEX).map((f, i) => ({ schema: "EOTClaim@1", id: `f${i + 1}`, lang: "en", by: "grammar-en", rel: "fig", main: false, ids: f.ids, ARG0: f.beingId ? keyEnd(endOf(rows, f.beingId, text)) : null, ARG1: null, OBL: [], polarity: "+", tense: "present", asserted: true, asym: false,
     fig: { measure: f.measure, attribute: f.attribute, event: f.eventLemma, base: f.base, hiBase: f.hiBase, alts: f.alts, approx: f.approx } }));
 }

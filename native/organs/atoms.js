@@ -1,0 +1,89 @@
+// atoms.js — a sentence's EOTClaim@1 claims as ATOMS: one fact each, over the page's entities (coref.js), with the character span of the words
+// that state it. The atom is the unit the meaning check weighs (MEANING-ATOMS.md): a claim is supported atom by atom, so a paraphrase that
+// repackages the same facts meets, a misattachment damages one atom and not the claim, and what was not read is reported, atom by atom.
+//   atomize({ claims, rows, mentions, entities, text }) → [{ pred, args: [{ entity, name } | { value }], neg, hedged, approx, start, end, from }]
+//   realize(atom) → "pred(arg, arg)" in plain words, for reading and judging
+// Atoms, and where they come from:
+//   is_a(x, kind)          a copula with a noun ("Lake Baikal is a rift lake")
+//   named(x, name)         a naming or alias ("also known as", "denominado"), or a copula whose other side is a name
+//   <adjective>(x)         an adjective on a referent, or on a copula's predicate ("the deepest lake")
+//   <relation>(x, y, z)    a claim's relation over its subject, object and recipient
+//   <relation>_<case>(x, y) an oblique of the claim ("situated in Siberia" → situate_in)
+//   <case>(x, y)           a modifier phrase of a referent ("the frontier between Bolivia and Peru" → between)
+//   has_<attribute>(x, v)  a bound figure, its value in the sentence's own words
+const lc = (s) => String(s ?? "").toLowerCase();
+
+export function atomize({ claims, rows, mentions, entities, text }) {
+  const byId = (id) => rows.find((r) => r.id === id), E = new Map(entities.map((e) => [e.id, e]));
+  const mentionOf = (hid) => mentions.find((m) => m.hid === hid) ?? mentions.find((m) => m.ids?.includes(hid)) ?? null;
+  const textOfIds = (ids) => { const ws = ids.map(byId).filter(Boolean); if (!ws.length) return ""; return text.slice(Math.min(...ws.map((w) => w.start)), Math.max(...ws.map((w) => w.end))); };
+  const arg = (end) => {
+    if (!end) return null;
+    const m = end.hid != null ? mentionOf(end.hid) : null;
+    if (m?.entity && E.get(m.entity)) return { entity: m.entity, name: E.get(m.entity).name, ids: end.ids ?? [] };
+    const ws = (end.ids ?? []).map(byId).filter((w) => w && !/^(DET|ADP|PUNCT)$/.test(w.upos));
+    return { value: ws.length ? textOfIds(ws.map((w) => w.id)) : end.text, ids: end.ids ?? [] };
+  };
+  const dropped = (vid) => { const m = mentions.find((x) => x.how === "dropped" && x.hid === vid); return m?.entity && E.get(m.entity) ? { entity: m.entity, name: E.get(m.entity).name, ids: [] } : null; };
+  const caseOf = (end) => { const w = (end?.ids ?? []).map(byId).find((r) => r && r.upos === "ADP"); return w ? lc(w.lemma && w.lemma !== "_" ? w.lemma : w.form) : null; };
+  const out = [], seen = new Set();
+  const push = (pred, args, base, idsUsed) => {
+    const as = args.filter(Boolean); if (!pred || !as.length) return;
+    const key = JSON.stringify([pred, as.map((a) => a.entity ?? lc(a.value)), base.neg]); if (seen.has(key)) return; seen.add(key);
+    const ws = [...new Set(idsUsed.flat().filter((x) => x != null))].map(byId).filter(Boolean);
+    out.push({ pred, args: as.map(({ ids, ...a }) => a), neg: !!base.neg, hedged: !!base.hedged, approx: !!base.approx, start: ws.length ? Math.min(...ws.map((w) => w.start)) : null, end: ws.length ? Math.max(...ws.map((w) => w.end)) : null, from: base.from });
+  };
+  // an adjective keeps its degree: "the largest lake" is most:large, "más alto" more:tall (a "more" word or the Degree feature; with a
+  // definite article on its noun, the comparative is a superlative)
+  const MORE = new Set(["more", "most", "más", "plus", "mehr", "meist", "最も", "もっと", "最"]);
+  const degreeOf = (w) => {
+    const ks = rows.filter((k) => k.head === w.id), noun = byId(w.head), defNoun = noun && rows.some((k) => k.head === noun.id && /^det/.test(k.deprel) && /Definite=Def/.test(k.feats ?? ""));
+    if (/Degree=Sup/.test(w.feats ?? "") || /est$/i.test(w.form) && lc(w.lemma) !== lc(w.form) || ks.some((k) => /^(most|最も|最)$/i.test(k.form))) return "most:";
+    if (/Degree=Cmp/.test(w.feats ?? "") || ks.some((k) => MORE.has(lc(k.form)))) return defNoun ? "most:" : "more:";
+    return "";
+  };
+  const adjAtoms = (end, owner, base) => { for (const w of (end?.ids ?? []).map(byId).filter((x) => x && x.upos === "ADJ")) push(degreeOf(w) + lc(w.lemma && w.lemma !== "_" ? w.lemma : w.form), [owner], base, [[w.id], owner?.ids ?? []]); };
+  // a modifier phrase is a relation between its owner and it; a coordinated word repeats the relation of the word it is coordinated with
+  const modAtoms = (end, owner, base, parent = null) => {
+    for (const n of end?.nmods ?? []) {
+      const a = arg(n);
+      if (n.conj) { if (parent) push(parent.pred, [parent.owner, a], base, [parent.owner?.ids ?? [], n.ids ?? []]); adjAtoms(n, a, base); modAtoms(n, a, base, parent); continue; }
+      const pred = caseOf(n) ?? "of";
+      if (!skipMod.has(n.hid)) push(pred, [owner, a], base, [owner?.ids ?? [], n.ids ?? []]);
+      adjAtoms(n, a, base); modAtoms(n, a, base, { pred, owner });
+    }
+  };
+  let skipMod = new Set();
+  for (const c of claims) {
+    const base = { neg: c.polarity === "-", hedged: c.asserted === false, from: c.id };
+    if (c.rel === "fig") {
+      const being = arg(c.ARG0), f = c.fig ?? {};
+      const pred = `has_${f.attribute ?? String(f.measure ?? "value").replace(/^count:/, "number_of_")}`;
+      push(pred, [being, { value: textOfIds(c.ids ?? []), ids: c.ids ?? [] }], { ...base, approx: !!f.approx }, [c.ids ?? [], being?.ids ?? []]);
+      continue;
+    }
+    const A0 = arg(c.ARG0) ?? (c.ARG1 && c.voice !== "passive" ? dropped(c.vid) : null) ?? (c.rel === "be" ? dropped(c.vid) : null);
+    const A1 = arg(c.ARG1), A2 = arg(c.ARG2), V = c.vid ? [c.vid] : [];
+    if (c.rel === "be") {
+      const m1 = c.ARG1?.hid != null ? mentionOf(c.ARG1.hid) : null;
+      if (c.alias || m1?.how === "name") push("named", [A0, { value: c.ARG1?.text, ids: c.ARG1?.ids ?? [] }], base, [V, A0?.ids ?? [], c.ARG1?.ids ?? []]);
+      else {
+        const kind = (c.ARG1?.ids ?? []).map(byId).filter((w) => w && /^(NOUN|PROPN)$/.test(w.upos) && w.id === c.ARG1.hid || (w && w.upos === "NOUN" && w.deprel === "compound")).map((w) => w.form).join(" ");
+        push("is_a", [A0, { value: kind || c.ARG1?.text, ids: c.ARG1?.ids ?? [] }], base, [V, A0?.ids ?? [], c.ARG1?.ids ?? []]);
+        adjAtoms(c.ARG1, A0, base);
+      }
+    } else push(c.rel, [A0, A1, A2], base, [V, A0?.ids ?? [], A1?.ids ?? [], A2?.ids ?? []]);
+    for (const o of c.OBL ?? []) push(`${c.rel}_${caseOf(o) ?? "at"}`, [A0 ?? A1, arg(o)], base, [V, o.ids ?? []]);
+    // an oblique already said as the claim's own place or time is not said again as a modifier of its predicate noun
+    skipMod = new Set((c.OBL ?? []).map((o) => o.hid));
+    for (const [end, a] of [[c.ARG0, A0], [c.ARG1, c.rel === "be" ? A0 : A1], [c.ARG2, A2], ...(c.OBL ?? []).map((o) => [o, arg(o)])]) {
+      if (c.rel !== "be" || end !== c.ARG1) adjAtoms(end, a, base);
+      modAtoms(end, end === c.ARG1 && c.rel === "be" ? A0 : a, base);
+    }
+  }
+  return out;
+}
+
+export function realize(a) {
+  return `${a.neg ? "NOT " : ""}${a.pred}(${a.args.map((x) => x.name ?? x.value).join(", ")})${a.hedged ? " [hedged]" : ""}${a.approx ? " [approx]" : ""}`;
+}

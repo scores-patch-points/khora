@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+import { gunzipSync } from "node:zlib";
 // wikt-gloss.js — a word of any language → its NEUTRAL KEY, from English Wiktionary's gloss of it: "descubrir" (Spanish verb) → "to discover"
 // → discover; "proceso" → "process"; "grande" → "big". The keys the meaning check compares (eot-claim-match.js) are these glosses, so one
 // relation said in two languages is one key. The gloss of a word is its entry's first sense for the part of speech the parse gave it; a
@@ -27,7 +29,17 @@ export function translationsOfGloss(gloss, pos) {
   return [...new Set(t.split(",").map((x) => x.trim().replace(/^to\s+/, "").replace(/^(be\s+)/, "").replace(ARTICLE, "").replace(ARTICLE, "").split(/\s+/)[0]).filter((x) => /^\p{L}[\p{L}'-]*$/u.test(x ?? "")))];
 }
 
-export function makeGlossary(lookup) {
+// translations(lang, word) → [[english, pos], …]: the English entries whose translation tables list the word (cli/wikt-translations.mjs).
+// A second source of keys, after the word's own gloss: "topónimo" has the gloss "placename", and English "toponym" lists it as a translation.
+export function loadTranslations(dir) {
+  const cache = new Map();
+  return (lang, word) => {
+    if (!cache.has(lang)) { const f = `${dir}/translations-${lang}.json.gz`; let m = null; try { m = JSON.parse(gunzipSync(readFileSync(f)).toString("utf8")).words; } catch { m = null; } cache.set(lang, m); }
+    const m = cache.get(lang); return m ? m[word] ?? m[String(word).toLowerCase()] ?? null : null;
+  };
+}
+
+export function makeGlossary(lookup, { translations = null } = {}) {
   const memo = new Map();
   // ctx.reflexive: the verb has its reflexive pronoun ("se llama", "sich verlaufen"); a sense Wiktionary tags reflexive holds only then
   const first = (lang, word, pos, depth, ctx) => {
@@ -52,11 +64,45 @@ export function makeGlossary(lookup) {
   };
   const all = (lang, lemma, upos, ctx = {}) => {
     const k = `${lang}\t${lemma}\t${upos}\t${ctx.reflexive ? 1 : 0}`;
-    if (!memo.has(k)) memo.set(k, POS[upos] ? first(lang, lemma, POS[upos], 0, ctx) : null);
+    if (!memo.has(k)) {
+      let keys = POS[upos] ? first(lang, lemma, POS[upos], 0, ctx) : null;
+      // the English entries that translate to the word add their own headwords (single words of the same part of speech), after its gloss
+      if (translations && lang !== "en" && POS[upos]) {
+        const tr = (translations(lang, lemma) ?? []).filter(([w, p]) => POS[upos].includes(p) && /^\p{L}[\p{L}'-]*$/u.test(w)).map(([w]) => w.toLowerCase());
+        if (tr.length) keys = [...new Set([...(keys ?? []), ...tr])];
+      }
+      memo.set(k, keys?.length ? keys : null);
+    }
     return memo.get(k);
   };
   /** gloss(lang, lemma, upos, ctx) → the word's key; gloss.all(…) → every English key its gloss gives (synonyms), the key first */
   const gloss = (lang, lemma, upos, ctx) => all(lang, lemma, upos, ctx)?.[0] ?? null;
   gloss.all = all;
   return gloss;
+}
+
+/** makeSynonymy({ lookup, translations, pivots }) → same(lang, a, b, upos) → { same, why, weight }: two words of one language mean the same when
+ *  their keys meet. For a word of another language, its keys are its gloss and the English entries translating to it. For English words, two
+ *  are synonyms when they share translations in several pivot languages (pivoting): a word and its antonym almost never translate alike. */
+export function makeSynonymy({ lookup, translations = null, pivots = ["es", "fr", "de", "it", "pt", "ru", "nl", "sv", "pl", "ja"], minLanguages = 2 } = {}) {
+  const G = makeGlossary(lookup, { translations });
+  const trOf = new Map();
+  const transOfEn = (w, upos) => {
+    const k = `${w}\t${upos}`; if (trOf.has(k)) return trOf.get(k);
+    const want = POS[upos] ?? ["noun", "verb", "adj"], out = new Map();
+    for (const e of lookup("en", w) ?? []) if (want.includes(e.pos)) for (const t of e.translations ?? []) if (pivots.includes(t.code)) { const set = out.get(t.code) ?? new Set(); set.add(String(t.word).toLowerCase()); out.set(t.code, set); }
+    trOf.set(k, out); return out;
+  };
+  return (lang, a, b, upos) => {
+    if (a === b) return { same: true, why: "same word", weight: 1 };
+    if (lang !== "en") {
+      const ka = G.all(lang, a, upos) ?? [], kb = G.all(lang, b, upos) ?? [], shared = ka.filter((x) => kb.includes(x));
+      return shared.length ? { same: true, why: `shared keys: ${shared.slice(0, 3).join(", ")}`, weight: shared.includes(ka[0]) && shared.includes(kb[0]) ? 0.9 : 0.75 } : { same: false, why: "no shared key", weight: 0 };
+    }
+    const ta = transOfEn(a, upos), tb = transOfEn(b, upos);
+    const langs = [...ta.keys()].filter((l) => tb.has(l) && [...ta.get(l)].some((x) => tb.get(l).has(x)));
+    const covered = [...ta.keys()].filter((l) => tb.has(l)).length;
+    return langs.length >= minLanguages ? { same: true, why: `shared translations in ${langs.length} of ${covered} languages (${langs.slice(0, 4).join(", ")})`, weight: covered ? langs.length / covered : 0 }
+      : { same: false, why: `shared translations in ${langs.length} of ${covered} languages`, weight: covered ? langs.length / covered : 0 };
+  };
 }
