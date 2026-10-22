@@ -291,3 +291,17 @@ sources with revision ids in sources.json. Same guide, two new independent label
 System: coreference by the learned ranker trained on all of runs 13–15 (eval/meaning/atoms/coref-ranker.json, config as run 16a), atoms by
 atoms.js over its entities, every atom kept, synonyms unchanged since run 15. Bars as runs 13–15: A1 ≥ 85%, A2 ≥ 70%, C1 ≥ 90%,
 C2 ≥ 95% (cluster measure), S1 ≥ 90%, S2 ≤ 5%. Expected from run 16a (not a bar): C1 75–84%, C2 91–98%; atoms near run 15.
+RESULT (system frozen at 01cc6f01; output written before the gold (4a5277f2); gold by two new independent labellers — 267 entities,
+444 mentions, 540 atoms, 100 pairs; atoms judged by four judge agents, precision written before each judge opened the gold):
+ A1 atom precision 73.8% (574 of 778)   FAIL   — es 78, en 76, filing 75, fr 75, de 75, ja 60   (run 15 frozen: 58.7%)
+ A2 atom recall    49.8% (269 of 540)   FAIL   — en 60, de 57, filing 54, ja 45, es 43, fr 37   (run 15 frozen: 41.3%)
+ C1 by cluster 74.1% (83 of 112)   FAIL   (run 15 frozen: 69.2%); by name 58.0%
+ C2 by cluster 95.4% (229 of 240)  PASS   (run 15 frozen: 86.1%) — the first coreference bar any run has passed
+ S1 83% (synonyms found 35/50; en 90, es 90, fr 85, de 85, ja 65)   FAIL   (run 15 frozen: 78%)
+ S2 4% (2 of 50)   PASS   (run 15 frozen: 10%)
+ Comparison on this set, not pre-registered: the current RULES alone (the run-14b rules, at as whole predicate) score C1 77.7%, C2 93.8%:
+ the learned ranker is 3.6 points BELOW the rules on pronouns/descriptions/dropped subjects and 1.6 above on names. Learning held its
+ cross-validated range on names (C2 91–98 → 95.4) and fell to the bottom of it on C1 (75–84 → 74.1); with 300 training sentences it does
+ not yet beat the rules where the rules were already tuned. Synonyms are unchanged since run 15, so S1/S2 moved with the set, not a fix.
+ Atom precision and recall rose on this set without a change to atoms.js beyond the entities it reads; part of that is the set (the filing
+ and the en pages read more cleanly), and none of it is attributable to atom selection, which was not used.
