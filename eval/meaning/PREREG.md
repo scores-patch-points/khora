@@ -305,3 +305,34 @@ RESULT (system frozen at 01cc6f01; output written before the gold (4a5277f2); go
  not yet beat the rules where the rules were already tuned. Synonyms are unchanged since run 15, so S1/S2 moved with the set, not a fix.
  Atom precision and recall rose on this set without a change to atoms.js beyond the entities it reads; part of that is the set (the filing
  and the en pages read more cleanly), and none of it is attributable to atom selection, which was not used.
+
+## Run 17a (2026-10-22): a LEARNED atom producer, cross-validated over runs 13–16 (no new gold)
+Atom recall was under half (run 16: 49.8%): atoms.js never produces about half the facts the gold states. The producer
+(native/organs/atom-produce.js; eval/meaning/atoms/learn-produce.mjs) takes every phrase of the parse (a noun, name, pronoun or number with
+its modifiers; a copula's noun stands for its subject) as a possible participant, every dependency path of one to four edges between two
+of them as a possible fact (predicate: the verb, noun or adjective words on the path and the second participant's case word; "is_a" for a
+copula), and an adjective on a phrase as a one-place fact. An averaged perceptron (five shuffles, weights averaged) scores each by its
+path's shape and words; the kept ones join atoms.js's atoms, best first, one per set of arguments, none over arguments atoms.js already
+relates. Labels and measure are MECHANICAL: proxy-recall.mjs counts a gold atom met when a system atom's arguments align with its arguments
+(two of them for a fact over three or more; a one-place fact also needs a predicate word in common); the predicate of a relation is NOT
+compared. Checked against the recall judges of runs 13–16 the proxy agrees on 67–74% of gold atoms and runs below them (judges 35–50%,
+proxy 29–35%): the judges also accept a fact assembled from several partial atoms. The threshold is chosen inside the training folds.
+  Held out, by the proxy (atoms.js alone → with the producer):
+    set 13: recall 34.9 → 51.1%, precision 26.7 → 35.0%   (+483 atoms, 47% of them meet a gold atom)
+    set 14: recall 33.5 → 51.3%, precision 28.4 → 35.8%   (+578, 46%)
+    set 15: recall 34.4 → 50.2%, precision 32.4 → 37.9%   (+498, 45%)
+    set 16: recall 29.4 → 47.2%, precision 22.9 → 29.3%   (+463, 40%)
+  What the proxy cannot see: a produced atom's predicate is the path's words ("lake_straddl_border_between(Lake Tahoe, California)"), and
+  a wrong path over the right participants counts as met. Japanese parses are often broken (a predicate split as "がり"), and their paths
+  with them. The judges on a new set decide.
+
+## Run 17 (2026-10-22): a FIFTH held-out set — PRE-REGISTERED (written before the labellers saw it)
+Set: eval/meaning/atoms17/sentences.json, 100 sentences from pages no earlier set touched: English Wikipedia 21 (Crater Lake, Snake
+River), Highwater Ethanol 10-K 20 (Item 1. Business), Spanish 13 (Guadalquivir, Teide, Lago Llanquihue), French 14 (Rhône, Puy de Dôme,
+Lac de Gérardmer — all their sentences), German 15 (Ammersee, Brocken, Main), Japanese 17 (富士山, 石狩川, 洞爺湖, 天竜川, 立山, 摩周湖);
+sources with revision ids in sources.json. Same guide, two new independent labellers (A: en, filing, es; B: fr, de, ja), four judge agents.
+System: as run 16 (coreference eval/meaning/atoms/coref-ranker.json, unchanged) plus the atom producer trained on all of runs 13–16
+(eval/meaning/atoms/atom-producer.json, threshold −0.5 from the inner folds). Bars as runs 13–16: A1 ≥ 85%, A2 ≥ 70%, C1 ≥ 90%,
+C2 ≥ 95% (cluster measure), S1 ≥ 90%, S2 ≤ 5%. Also pre-registered: the judged recall of atoms.js's atoms alone (the same judges' verdicts
+restricted to them), so the producer's share of A2 is measured, and the judged precision of the produced atoms alone.
+Expected (not a bar): A2 up by 10–20 points from atoms.js alone; A1 down, as produced atoms are judged stated less often than atoms.js's.

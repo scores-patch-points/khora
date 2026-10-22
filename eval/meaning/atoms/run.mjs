@@ -9,6 +9,10 @@ const G = await import(`${N}/adapters/text/grammar-en.js`), { loadGrammar } = aw
 const { resolvePage } = await import(`${N}/organs/coref.js`), { atomize, realize } = await import(`${N}/organs/atoms.js`);
 // COREF_MODEL: a trained CorefRanker@1 (learn-coref.mjs --model); without it the rules' entities are used
 const { resolveWithModel } = await import(`${N}/organs/coref-learned.js`);
+// PRODUCER: a trained AtomProducer@1 (learn-produce.mjs): the parse's further atoms it keeps join atoms.js's; CANDS=1 writes every candidate
+// with its features (for training) beside the atoms
+const { produce, candidatesOf } = await import(`${N}/organs/atom-produce.js`);
+const producer = process.env.PRODUCER ? JSON.parse(fs.readFileSync(process.env.PRODUCER, "utf8")) : null;
 const corefModel = process.env.COREF_MODEL ? JSON.parse(fs.readFileSync(process.env.COREF_MODEL, "utf8")) : null;
 const { openSlim } = await import(`${N}/organs/wikt-slim.js`), { makeGlossary, loadTranslations } = await import(`${N}/organs/wikt-gloss.js`);
 const arg = (k, d) => { const i = process.argv.indexOf(`--${k}`); return i < 0 ? d : process.argv[i + 1]; };
@@ -33,10 +37,13 @@ for (const [k, items] of pages) {
     const i = it.previous.length, sr = R.sentences[i];
     if (!sr || sr.text !== it.sentence) { result.sentences.push({ sid: it.sid, error: "sentence not found in its page reading" }); continue; }
     const claims = g.claimsOf(sr.text, sr.rows);
-    const atoms = atomize({ claims, rows: sr.rows, mentions: sr.mentions, entities: R.entities, text: sr.text });
+    const ctx = { rows: sr.rows, mentions: sr.mentions, entities: R.entities, text: sr.text, lang };
+    const base = atomize({ claims, ...ctx });
+    const atoms = producer ? [...base, ...produce(ctx, producer, { have: base })] : base;
+    const cands = process.env.CANDS ? candidatesOf(ctx).map(({ feats, args, pred, surfaces }) => ({ pred, args, feats, surfaces })) : undefined;
     result.sentences.push({ sid: it.sid, lang, title: it.title, sentence: it.sentence,
       mentions: sr.mentions.map((m) => ({ text: m.text, at: m.at, how: m.how, entity: m.entity, entityName: name(m.entity) })),
-      atoms: atoms.map((a) => ({ ...a, text: realize(a), span: a.start != null ? sr.text.slice(a.start, a.end) : null })) });
+      atoms: atoms.map((a) => ({ ...a, text: realize(a), span: a.start != null ? sr.text.slice(a.start, a.end) : null })), ...(cands ? { cands } : {}) });
   }
 }
 fs.writeFileSync(out, JSON.stringify(result, null, 1));
