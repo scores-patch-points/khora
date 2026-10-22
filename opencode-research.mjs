@@ -18,7 +18,7 @@ import { judge, definitionIn } from "./opencode-profile.mjs";
 import { wikipediaArticle, wiktionary } from "./opencode-wiki.mjs";
 import { whoIs } from "./opencode-identity.mjs";
 import { janusPass } from "./opencode-janus.mjs";
-import { checkByIdentity, nounLemmasOf } from "./opencode-keyed.mjs";
+import { checkByIdentity, nounLemmasOf, subjectNounsOf } from "./opencode-keyed.mjs";
 import { primaryFor } from "./opencode-primary.mjs";
 import { makeGetJson } from "./opencode-wiki.mjs";
 
@@ -161,6 +161,36 @@ export async function researchClaims(claims, { workspace = null, budgetMs = Numb
       topic = { lemma: best[0], title, article, lemmas };
     }
   }
+  // THE CLAIM'S OWN SUBJECT. A claim that names no being is still about something: its subject nouns (subjectNounsOf: before the verb,
+  // head first), at most three, are tried as encyclopedia articles, and the first article found judges the claim by the same falsifier. A disambiguation
+  // binds nothing. Supported or contradicted is recorded with the article as evidence; silence leaves the claim unsupported, with the
+  // article named where it looked. FOLD_SUBJECT_NOUN=0 turns it off.
+  let nounLooks = 0;
+  const bySubjectNoun = async (c) => {
+    if (process.env.FOLD_SUBJECT_NOUN === "0") return null;
+    nounLooks++;
+    const searched = [...(c.searched ?? ["material"])];
+    for (const lemma of (await subjectNounsOf(c.text)).slice(0, 3)) {
+      if (Date.now() >= deadline) break;
+      const title = lemma[0].toUpperCase() + lemma.slice(1);
+      if (!articles.has(title)) {
+        const found = await wikipediaArticle(title, opts);
+        articles.set(title, found);
+        log.push({ where: "wikipedia", query: title, subjectNoun: true, found: found.found, why: found.found ? null : found.why });
+      }
+      const a = articles.get(title);
+      if (!a.found) continue;
+      keep(a);
+      searched.push(`wikipedia: ${a.title} (the claim's subject: ${lemma})`);
+      let verdict = judge(c.text, [{ name: `wikipedia: ${a.title}`, text: a.text, url: a.url }]);
+      if (verdict.standing === "unsupported") verdict = (await janusPass([{ ...c, ...verdict }], [{ name: `wikipedia: ${a.title}`, text: a.text }]))[0];
+      if (verdict.evidence) verdict.evidence = { ...verdict.evidence, url: a.url };
+      if (verdict.standing === "supported" || verdict.standing === "contradicted")
+        return { ...c, ...verdict, searched, researched: true, ...(verdict.standing === "supported" ? { tier: "index" } : {}) };
+      return { ...c, searched };
+    }
+    return searched.length > (c.searched ?? ["material"]).length ? { ...c, searched } : null;
+  };
   for (const c of claims) {
     // a sentence the gate called argument (it names no being, number or quote) that states a fact about the bound topic is judged too, and is PROMOTED only by evidence:
     // the article states it (supported) or contradicts it; silence leaves it exactly what it was
@@ -183,7 +213,12 @@ export async function researchClaims(claims, { workspace = null, budgetMs = Numb
       out.push({ ...c, ...verdict, searched: [...(c.searched ?? ["material"]), `wikipedia: ${a.title} (the topic: ${topic.lemma})`], ...(verdict.standing === "supported" ? { tier: "index", researched: true } : verdict.standing === "contradicted" ? { researched: true } : {}) });
       continue;
     }
-    if (!eligible.has(c)) { out.push({ ...c, searched: [...(c.searched ?? ["material"]), "not researched: no figure or no name to look up"] }); continue; }
+    if (!eligible.has(c)) {
+      // a claim with no named being is looked up by its own subject noun ("The element radium glows…" → Radium)
+      const found = nounLooks < RESEARCH_CLAIMS && Date.now() < deadline ? await bySubjectNoun(c) : null;
+      out.push(found ?? { ...c, searched: [...(c.searched ?? ["material"]), "not researched: no figure or no name to look up"] });
+      continue;
+    }
     const searched = [...(c.searched ?? ["material"])];
     let verdict = { standing: "unsupported" };
     let identity = null;
