@@ -236,6 +236,11 @@ async function profileDraw(draw, { passages = [], workspace = null, research = t
     claims = rc.claims; log.push(...rc.log); beings = rc.beings; pages = rc.pages ?? [];
     const rs = await researchSymbols(symbols, { workspace });
     symbols = rs.symbols; log.push(...rs.log);
+    // an encyclopedia is an index: a support that rests on one is followed to the page it cites (opencode-primary.mjs followIndexes)
+    const { followIndexes } = await import("./opencode-primary.mjs");
+    // only the time this pass has left: the plugin stops waiting for it at 120 s (FOLD_RESEARCH_TIMEOUT_MS), and a pass that runs over loses its research too
+    const followed = await followIndexes(claims, { deadline: Math.min(Date.now() + Number(process.env.FOLD_FOLLOW_MS ?? 45_000), t0 + Number(process.env.FOLD_PROFILE_BUDGET_MS ?? 110_000)) });
+    claims = followed.claims; log.push(...followed.log); pages = [...pages, ...followed.pages];
   }
   const count = (xs, k) => xs.filter((x) => x.standing === k).length;
   return {
