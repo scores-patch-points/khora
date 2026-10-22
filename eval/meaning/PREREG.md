@@ -215,3 +215,14 @@ Bars, as run 13: A1 ≥ 85%, A2 ≥ 70%, C1 ≥ 90% (target 100%), C2 ≥ 95%, S
 Coreference is scored both ways; the bars apply to the CLUSTER measure (the system entity's defining name against every text the gold groups
 under the gold entity), declared here before the run because the name measure fails a correct link whose entity is named differently ("a
 law" for "the 2040 law"); the name measure is reported beside it.
+RESULT (system frozen at b36991d7, its output written before the gold existed; gold by two independent labellers, A: en, filing, es; B: fr,
+de, ja — 259 entities, 468 mentions, 546 atoms, 100 word pairs; atoms judged by four judge agents, precision blind to the gold):
+ A1 atom precision 69.0% (489 of 709)   FAIL   — ja 81, en 72, fr 72, es 68, filing 64, de 62   (run 13: 52.9%)
+ A2 atom recall    42.3% (231 of 546)   FAIL   — en 50, de 46, ja 44, es 42, filing 39, fr 34   (run 13: 35.3%)
+ C1 pronouns, descriptions, dropped subjects, by cluster 73.6% (92 of 125)   FAIL   (run 13 system by cluster: 65.5%); by name 58.4%
+ C2 names and aliases, by cluster 92.2% (259 of 281)   FAIL   (run 13 system by cluster: 94.8%); by name 86.8%
+ S1 synonym judgements 83% (83 of 100)   FAIL   — synonyms found 39/50; es 95, de 90, en 85, fr 80, ja 65   (run 13: 79%)
+ S2 near misses judged the same 12% (6 of 50)   FAIL   (run 13: 4%)
+ The run-13 fixes carried to unseen text for atoms (+16 points precision, +7 recall) and for pronoun/description/dropped coreference
+ (+8 points), not for names (−2.6) and not for near misses (the one-step English link and the shared-key rule let more related words through).
+ No bar is met; the atomizer is still not fit to build on, and the synonym near-miss rate is now the worst number.

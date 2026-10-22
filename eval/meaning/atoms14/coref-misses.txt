@@ -1,0 +1,89 @@
+h001 [name] "Elbe" gold=Elbe sys=niederdeutsch Elv (description)
+h001 [alias] "Elv" gold=Elbe sys=niederdeutsch Elv (name)
+h001 [alias] "Labe" gold=Elbe sys=tschechisch Labe (new)
+h001 [alias] "Albis" gold=Elbe sys=lateinisch Albis (name)
+h004 [name] "Norddeutschen Tieflandes" gold=Norddeutsches Tiefland sys=Norddeutschen (name)
+h005 [description] "Einzugsgebietes" gold=Einzugsgebiet der Elbe sys=ihres Einzugsgebietes (new)
+h007 [description] "Die markante Spitze" gold=Großglockner sys=Die markante Spitze (description)
+h007 [description] "einer Bergkette im mittleren Teil der Hohen Tauern" gold=Glocknergruppe sys=einer Bergkette (new)
+h010 [pronoun] "er" gold=Großglockner sys=der Leitung von Fürstbischof Salm-Reifferscheidt-Krautheim (pronoun)
+h011 [alias] "Werser" gold=Weser sys=niederdeutsch Werser (new)
+h011 [alias] "Wersern" gold=Weser sys=Wersern (new)
+h013 [name] "Münden" gold=Hann. Münden sys=no such mention
+h013 [pronoun] "wo" gold=Hann. Münden sys=no such mention
+h027 [alias] "U.S." gold=United States sys=the U.S. (name)
+h029 [alias] "U.S." gold=United States sys=the U.S. (name)
+h029 [name] "Canadian" gold=Canada sys=two Canadian provinces (new)
+h031 [description] "The main stem" gold=Mississippi River sys=The main stem (description)
+h031 [description] "the total drainage basin" gold=Mississippi drainage basin (watershed) sys=the largest drainage basin (description)
+h031 [pronoun] "which" gold=Mississippi drainage basin (watershed) sys=no such mention
+h034 [pronoun] "Many" gold=Native Americans sys=no such mention
+h034 [pronoun] "some" gold=Native Americans sys=some, such as the Mound Builders (name)
+h034 [name] "the Mound Builders" gold=Mound Builders sys=no such mention
+h035 [description] "the basin" gold=Mississippi drainage basin (watershed) sys=the largest drainage basin (description)
+h040 [description] "this report" gold=this report sys=UTMD (description)
+h041 [name] "UTMD" gold=Utah Medical Products, Inc. (UTMD, the Company) sys=no such mention
+h045 [description] "a broad range of medical devices" gold=UTMD medical devices sys=a broad range (new)
+h050 [alias] "UK" gold=United Kingdom sys=Utah Medical Products, Inc. (alias)
+h050 [alias] "AUS" gold=Australia sys=Utah Medical Products, Inc. (alias)
+h050 [alias] "NZ" gold=New Zealand sys=Utah Medical Products, Inc. (alias)
+h051 [pronoun] "which" gold=UTMD OUS distributors (approximately 200) sys=null (pronoun)
+h055 [description] "a wholly-owned subsidiary" gold=Utah Medical Products Ltd. sys=a wholly-owned subsidiary (new)
+h057 [description] "una ciudad de la parroquia de Saint Joseph" gold=Chimborazo (ciudad en Barbados) sys=una ciudad (new)
+h057 [name] "la provincia de Chimborazo" gold=provincia de Chimborazo sys=la parroquia de Saint Joseph (alias)
+h057 [name] "el volcán Chimborazo" gold=volcán Chimborazo sys=la parroquia de Saint Joseph (alias)
+h057 [description] "la montaña más alta del Ecuador" gold=volcán Chimborazo sys=la montaña más alta (description)
+h059 [pronoun] "donde" gold=Departamento de Sololá sys=no such mention
+h059 [dropped] "∅ at queda" gold=Lago de Atitlán sys=no such mention
+h061 [pronoun] "sus" gold=Lago de Maracaibo sys=los estados de Trujillo (pronoun)
+h061 [dropped] "∅ at es" gold=Lago de Maracaibo sys=no such mention
+h062 [dropped] "∅ at alimentado" gold=Lago de Maracaibo sys=no such mention
+h062 [description] "su cuenca" gold=cuenca de Maracaibo sys=su cuenca (new)
+h063 [description] "esta área" gold=cuenca de Maracaibo sys=una superficie (description)
+h063 [description] "fenómeno" gold=relámpago del Catatumbo sys=fenómeno (new)
+h063 [pronoun] "que" gold=relámpago del Catatumbo sys=fenómeno (pronoun)
+h063 [description] "planeta" gold=Tierra (el planeta) sys=del mundo (description)
+h064 [alias] "río Grande de la Magdalena" gold=río Magdalena (río Grande de la Magdalena) sys=no such mention
+h065 [dropped] "∅ at trata" gold=río Magdalena (río Grande de la Magdalena) sys=no such mention
+h065 [description] "una corriente de agua continua de Colombia" gold=río Magdalena (río Grande de la Magdalena) sys=una corriente (new)
+h065 [pronoun] "que" gold=río Magdalena (río Grande de la Magdalena) sys=una corriente (pronoun)
+h065 [dropped] "∅ at Fluye" gold=río Magdalena (río Grande de la Magdalena) sys=no such mention
+h065 [description] "país" gold=Colombia sys=del país (description)
+h066 [pronoun] "su" gold=río Magdalena (río Grande de la Magdalena) sys=el departamento del Huila (pronoun)
+h067 [name] "río Amazonas" gold=río Amazonas sys=Río Orinoco (alias)
+h067 [dropped] "∅ at hace" gold=río Orinoco sys=no such mention
+h069 [pronoun] "los que" gold=cuenca del Orinoco sys=una superficie (pronoun)
+h069 [description] "territorio venezolano" gold=Venezuela sys=territorio venezolano (new)
+h070 [name] "Gironde" gold=Gironde (estuaire) sys=Garonne (alias)
+h071 [description] "Le fleuve" gold=Garonne sys=l’océan Atlantique (description)
+h073 [pronoun] "celui" gold=lac du Bourget sys=no such mention
+h073 [name] "Bourget" gold=lac du Bourget sys=du Bourget, très proche (name)
+h075 [dropped] "∅ at correspondant" gold=période de formation (17 000 – 15 000 av. J.-C.) sys=no such mention
+h078 [pronoun] "qui" gold=Thiou sys=eau (pronoun)
+h078 [pronoun] "celui-ci" gold=Fier sys=no such mention
+h081 [description] "Lac post-glaciaire" gold=lac du Bourget sys=Lac post-glaciaire (new)
+h081 [alias] "Alpes" gold=pré-Alpes sys=no such mention
+h085 [pronoun] "qui" gold=Alphonse de Lamartine sys=du poète Alphonse (pronoun)
+h085 [pronoun] "il" gold=Alphonse de Lamartine sys=Lac du Bourget (pronoun)
+h085 [pronoun] "son" gold=Alphonse de Lamartine sys=Lac du Bourget (pronoun)
+h086 [alias] "やつがたけ" gold=八ヶ岳 sys=no such mention
+h086 [alias] "八ケ岳" gold=八ヶ岳 sys=八ケ岳 (name)
+h088 [alias] "とねがわ" gold=利根川 sys=わ (new)
+h091 [alias] "とわだこ" gold=十和田湖 sys=no such mention
+h092 [dropped] "∅ at 12番目で" gold=十和田湖 sys=no such mention
+h093 [alias] "ふじかわ" gold=富士川 sys=no such mention
+h093 [name] "山梨県" gold=山梨県 sys=no such mention
+h094 [dropped] "∅ at 本流であり" gold=富士川 sys=no such mention
+h095 [dropped] "∅ at 要路であり" gold=富士川 sys=no such mention
+h095 [dropped] "∅ at 密着してきた" gold=富士川 sys=no such mention
+h096 [alias] "あさまやま" gold=浅間山 sys=あさまやま (new)
+h096 [name] "御代田町" gold=御代田町 sys=no such mention
+h096 [name] "吾妻郡" gold=吾妻郡 sys=no such mention
+h096 [name] "嬬恋村" gold=嬬恋村 sys=no such mention
+h097 [description] "山体" gold=浅間山 sys=山体 (new)
+h097 [dropped] "∅ at 知られる" gold=浅間山 sys=no such mention
+h098 [alias] "霞ケ浦" gold=霞ヶ浦 sys=霞ケ浦（かすみがうら (name)
+h098 [alias] "かすみがうら" gold=霞ヶ浦 sys=no such mention
+h099 [dropped] "∅ at 水域である" gold=霞ヶ浦 sys=no such mention
+h099 [name] "北利根川" gold=北利根川 sys=no such mention
+h099 [name] "河川法" gold=河川法 sys=no such mention
