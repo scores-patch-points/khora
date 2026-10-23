@@ -112,7 +112,15 @@ export function scriptOf(text) {
   return "latin";
 }
 
-const UPDATE_PREFIX = /^\s*(?:update|correction|note|change|heads[- ]up|fyi|btw|quick note|just so you know|for the record)\s*[:\-—]\s*/i;
+const UPDATE_PREFIX = /^\s*(?:just\s+)?(?:a\s+|quick\s+|small\s+)?(?:update|correction|note|change|heads[- ]up|fyi|btw|quick note|just so you know|for the record)\s*[:\-—]\s*/i;
+// WHAT IS NEVER A STATEMENT (precision over recall; measured 2026-10-23 on live sessions): a question anywhere in the sentence (a stray
+// quote after the mark defeated the end-anchored test), markup or a harness block (the compaction `<conversation-checkpoint>` arrives
+// as a user-role message and read as the person's words), and a sentence too long to be one stated fact.
+const QUESTION = /\?/;
+const MARKUP = /^\s*[<\[#]|<\/?[a-z][\w-]*[\s>]|\bconversation-checkpoint\b/i;
+const INTERROGATIVE = /^\s*(?:what|when|where|who|whom|which|why|how|did|do|does|is|are|was|were|can|could|would|should|will|has|have)\b/i;
+const MAX_SENTENCE_CHARS = 240;
+const notAStatement = (s) => QUESTION.test(s) || MARKUP.test(s) || INTERROGATIVE.test(s) || s.length > MAX_SENTENCE_CHARS;
 const VALUE_PREFIX = /^(?:currently|now|set at|set to|priced at|numbered|located in|led by|run by|managed by|in|at|on)\s+/i;
 const ACK_SENTENCE = /^(?:just\s+)?(?:acknowledge|ack|acknowledgement|thanks|thank you|got it|noted|no long reply|one[- ]line)/i;
 const ROLE = /\b(?:lead|owner|manager|head|director|chief|officer|coordinator|champion|contact)\b/i;
@@ -139,6 +147,8 @@ function bindingOf({ subject, value, attr = null, sentence, turn, span, update =
   if (!hasWord(subject) || !(hasWord(valueRaw) || /\d/.test(valueRaw))) return null;
   if (isPronoun(subject)) return null;
   if (/^(?:it|this|that)\b/i.test(subject)) return null;
+  // a subject that still carries a colon or a question is a discourse frame the patterns did not strip, not a thing: refused
+  if (/[:?]/.test(subject) || INTERROGATIVE.test(subject)) return null;
   return { subject: canon(subject), subjectRaw: stripEdge(subject), attr: attr ? canon(attr) : null, value: valueRaw, kind: classify(valueRaw), sentence, turn, span, update, verb };
 }
 
@@ -207,7 +217,8 @@ export function extractBindings(turns, { lang = "en" } = {}) {
     if (!text.trim()) continue;
     const script = scriptOf(text);
     if (script !== "latin") { gaps.push(gap(GAP.LANG, { turn: n, script })); continue; }
-    const sents = sentences(text);
+    if (MARKUP.test(text)) { gaps.push(gap(GAP.UNPARSED, { turn: n, reason: "markup or a harness block, not the person's words" })); continue; }
+    const sents = sentences(text).filter((s) => !notAStatement(s.text));
     let carry = null;      // "X moved." → the subject the next sentence's "It is now …" binds to
     let carried = null;    // that sentence, verbatim, so the binding's own sentence is the whole run that bound it (a mark must round-trip)
     for (const sen of sents) {

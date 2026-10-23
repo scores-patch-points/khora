@@ -142,6 +142,18 @@ test("a two-sentence update ('X moved. It is now Y.') is one mark that reads bac
   assert.match(R.registerNote(reg), /before that it was Thursdays at 02:00 UTC/);
 });
 
+test("precision: a compaction checkpoint, a question with a stray quote, a framed subject and an over-long sentence bind nothing", () => {
+  const seen = (...t) => R.extractBindings(turns(...t)).bindings;
+  assert.equal(seen('<conversation-checkpoint>\nThe following is a summary. The staging cluster is Pelican.\n</conversation-checkpoint>').length, 0, "a harness block is not the person's words");
+  assert.equal(seen('What is the deploy window now?"').length, 0, "a question with a stray quote after the mark");
+  assert.equal(seen("Is the staging cluster Pelican").length, 0, "an interrogative without a mark");
+  const b = seen("A heads up: the staging cluster is Pelican.");
+  assert.equal(b.length, 1);
+  assert.equal(b[0].subject, "staging cluster", "the discourse frame is stripped, not bound");
+  assert.equal(seen(`The plan is ${"very ".repeat(60)}long.`).length, 0, "too long to be one stated fact");
+  assert.equal(seen("## Next Move 1 — the owner is Sven.").length, 0, "markdown is not a statement");
+});
+
 test("the block: prose the model can quote, bounded, the cut disclosed; empty when there is nothing to say", () => {
   assert.equal(R.registerNote(R.buildRegister([])), "");
   const mem = R.ingest(turns("The staging cluster is named Pelican.", "Update: the staging cluster is now Heron."));
