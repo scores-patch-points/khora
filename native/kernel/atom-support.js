@@ -16,7 +16,34 @@ const DEG = /^(most|more|less|least):/;
 const argText = (a) => (a && typeof a === "object" ? a.name ?? a.value ?? "" : String(a ?? ""));
 
 // unread: the claim's content words no claim atom carries; a claim with any is never supported (what was not read cannot be checked)
-export function atomSupport(C, S, { claimLang = "en", sourceLang = "en", same = null, keysOf = null, unread = [] } = {}) {
+// CANONICAL REWRITES of the claim, declared once (MEANING-ATOMS §5.1), so it meets a source that says the same in its usual form:
+// - "no X is higher than Y" is "Y is the highest": a negated comparison from a "no" quantifier becomes the superlative of its second
+//   referent, and the other negated atoms on the "no X" referent are said of that referent, asserted ("NOT in(no mountain, Washington)" →
+//   in(Rainier, Washington));
+// - "X is another name for Y" is named(Y, X).
+const NO = /^(no|none|neither|kein|keine|keiner|keinen|aucun|aucune|nul|nulle|ningún|ninguna|ninguno|nadie)\s/i;
+const NAME = /^(name|nom|nombre|name|bezeichnung|名前|別名|名称)$/i;
+export function canonical(C) {
+  let out = [...C];
+  const noArg = (a) => a && typeof a === "object" && NO.test(String(a.name ?? a.value ?? ""));
+  const cmp = out.find((c) => c.neg && (c.args ?? []).length === 2 && noArg(c.args[0]) && !noArg(c.args[1]));
+  if (cmp) {
+    const Y = cmp.args[1], X = cmp.args[0], w = low(cmp.pred).replace(/^(more|most):/, "").split(/[_\s]+/)[0];
+    const key = (a) => a.entity ?? low(a.value ?? a.name);
+    out = out.filter((c) => !(c.pred === cmp.pred || (c.args ?? []).length === 2 && key(c.args[0]) === key(X) && key(c.args[1]) === key(Y)))
+      .map((c) => (c.neg && noArg(c.args?.[0]) && key(c.args[0]) === key(X) ? { ...c, neg: false, args: [Y, ...c.args.slice(1)], rewritten: "no-comparative" } : c));
+    out.push({ pred: `most:${w}`, args: [Y], neg: false, hedged: !!cmp.hedged, rewritten: "no-comparative", text: `most:${w}(${Y.name ?? Y.value})` });
+  }
+  for (const n of out.filter((c) => c.pred === "is_a" && NAME.test(low(c.args?.[1]?.value ?? c.args?.[1]?.name ?? "").replace(ART, "").split(/\s+/).at(-1) ?? ""))) {
+    const X = n.args[0], f = out.find((c) => c !== n && (c.args ?? []).length === 2 && /(_|^)(for|de|für|pour|del|の)$/.test(c.pred) && (c.args[0].entity ?? c.args[0].value) === (X.entity ?? X.value));
+    if (!f) continue;
+    out = out.filter((c) => c !== n && c !== f);
+    out.push({ pred: "named", args: [f.args[1], X], neg: !!n.neg, hedged: !!n.hedged, rewritten: "another-name", text: `named(${f.args[1].name ?? f.args[1].value}, ${X.name ?? X.value})` });
+  }
+  return out;
+}
+export function atomSupport(C0, S, { claimLang = "en", sourceLang = "en", same = null, keysOf = null, unread = [] } = {}) {
+  const C = canonical(C0);
   const keys = (lang, w) => { const ks = new Set([stem(w)]); if (keysOf && lang !== "en") for (const k of keysOf(lang, low(w)) ?? []) for (const x of words(k)) ks.add(stem(x)); return ks; };
   const wordMeet = (a, b) => {
     if (stem(a) && stem(a) === stem(b)) return true;
@@ -31,7 +58,9 @@ export function atomSupport(C, S, { claimLang = "en", sourceLang = "en", same = 
   const namesOf = (atoms) => { const m = new Map(); for (const a of atoms) if (a.pred === "named" && a.args?.[0]?.entity != null) { const k = a.args[0].entity; (m.get(k) ?? m.set(k, new Set()).get(k)).add(argText(a.args[1])); } return m; };
   const NC = namesOf(C), NS = namesOf(S);
   const allNames = (a, N) => [argText(a), ...(a?.entity != null ? [...(N.get(a.entity) ?? [])] : [])];
-  const refMeet = (x, y) => allNames(x, NC).some((tx) => allNames(y, NS).some((ty) => refMeet1(tx, ty)));
+  // two figures of one measure meet by their values in base units (any bracketed equivalent too), within 2%, or 5% when either is approximate
+  const figMeet = (x, y) => { if (!x?.measure || x.measure !== y?.measure || x.base == null || y.base == null) return null; const tol = 0.02; return [x.base, ...(x.alts ?? [])].some((a) => [y.base, ...(y.alts ?? [])].some((b) => Math.abs(a - b) <= tol * Math.max(Math.abs(a), Math.abs(b), 1e-9))); };
+  const refMeet = (x, y) => { const f = figMeet(x, y); if (f != null) return f; return allNames(x, NC).some((tx) => allNames(y, NS).some((ty) => refMeet1(tx, ty))); };
   // two names of one referent: every content word of the claim's is met by a word of the source's
   const STOP = new Set(["de", "del", "des", "du", "of", "von", "vom", "der", "die", "das", "la", "le", "el", "the", "di", "da", "y", "et", "und", "and", "en", "in", "a", "à"]);
   const refMeet1 = (tx, ty) => {
@@ -58,7 +87,10 @@ export function atomSupport(C, S, { claimLang = "en", sourceLang = "en", same = 
     const dp = DEG.exec(p)?.[1] ?? null, dq = DEG.exec(q)?.[1] ?? null; if (dp !== dq) return false;
     if (p === "is_a" || q === "is_a" || p === "named" || q === "named") return p === q;
     if (/^has_/.test(p) && /^has_/.test(q)) return true; // a figure meets a figure; the value decides
-    const a = predWords(p), b = predWords(q); return a.some((x) => b.some((y) => wordMeet(x, y)));
+    // every content word of the claim's predicate must be met (a direction or manner word too: "lie_nordwestlich" is not "lie"); a case word
+    // (four letters or fewer: in, of, de, à, über) may be met by the source's or left to the place it marks
+    const a = predWords(p), b = predWords(q), content = a.filter((x) => x.length > 4 || /\p{Script=Han}|\p{Script=Hiragana}|\p{Script=Katakana}/u.test(x));
+    return (content.length ? content : a).every((x) => b.some((y) => wordMeet(x, y)));
   };
   // the claim's arguments in the source atom's, in order (a source atom may carry one more: "occupy(sector, known, 2112 km²)")
   const argsMeet = (cargs, sargs) => { let j = 0; for (const a of cargs) { while (j < sargs.length && !refMeet(a, sargs[j])) j++; if (j >= sargs.length) return false; j++; } return true; };

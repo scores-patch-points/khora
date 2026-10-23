@@ -447,3 +447,28 @@ RESULT (first run, code as of 8bd3b8e2, no changes since the set was committed a
    mountain in Washington is higher"), an ordinal against "only X is more" ("second-largest after Lake Superior"), "also known as" against
    "another name for";
  - claim atoms the source does state but under another predicate or referent name (derive_from / come_from met; think / believe not).
+
+## Run 19b (2026-10-22): five fixes from the run-19 triage — POST HOC on every pair set (fresh19 is spent; no bar is re-judged)
+The fixes, each from a run-19 failure:
+ 1. english-parser.js: a suffix rule may cut at most k letters and leave a lemma of 3 or more (closest → clogood, red → r); a lemma attested
+    in UniMorph in the same class (priorLemma) is taken before the irregular check.
+ 2. atoms.js: a bracketed figure is skipped only when the same measure of the same being is also stated outside brackets; the figure arg
+    carries measure, base value and alternates ("923 ft; 281 m").
+ 3. atom-support.js: figures meet by base value or an alternate within 2%; a predicate meets only if every content word of it (over 4
+    letters, or CJK) meets (758 lie_nordwestlich); canonical rewrites for a negated comparative ("no mountain in W is higher than X" →
+    most:high(X), in(X, W)) and for "Y is another name for X" → named(X, Y).
+ 4. read-atoms.js: pronunciations in brackets (respellings, IPA, an audio link's empty brackets; kana readings kept) are cut before reading,
+    spans mapped back.
+ 5. read-atoms.js: unread also counts a content word (NOUN/PROPN/ADJ/NUM, not a claim head) that no atom carries (746 inhabitées).
+Atoms arm (MEANING_ATOMS=1), before (8bd3b8e2) → after; grammar-ud is unchanged on every set:
+ main 76.7 → 76.7 · cf 78.6 → 78.6 · heldout 83.3 → 86.7 (false-reject 25.0 → 18.8) · other 100 → 100 · fresh 87.5 → 87.5 · relations
+ 81.8 → 81.8 · fresh-ml 60.9 → 60.9 · fresh19 45.8 → 47.9 (false-accept 8.3 → 6.3; false-reject 100 → 97.9). No set lost; no false accept rose.
+ Native tests (relation-defs, eot-claim-match, grammar-ud) pass. The door e2e test (opencode-workplan-live-e2e) fails 0/8 with and without
+ these changes (stashed), so it is environmental, not from them.
+What still rejects the 47 fresh19 E pairs, from the atom tables:
+ - 22 by the unread guard (claim words no claim atom carries; in 11 every such word is in the source sentence: the claim's reading drops
+   them, "one of North America's Great Lakes" → has_count(Lake Michigan, one));
+ - 25 by unmet claim atoms: of the unmet atoms, 39 have every argument in the source but meet no source predicate (derive_from / come_from,
+   sit_at / same surface elevation, pour_en / desemboca), 19 some arguments, 14 none (the source reading or its coreference lost them).
+ The largest single fault is now predicate equivalence across paraphrase; rules have stopped paying there (fix 3 moved one pair). Next: a
+ LEARNED atom-pair matcher, trained cross-validated on the eight existing pair sets, measured on run 20.

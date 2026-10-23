@@ -63,9 +63,13 @@ export function atomize({ claims, rows, mentions, entities, text }) {
     if (c.rel === "fig") {
       const being = arg(c.ARG0), f = c.fig ?? {};
       const inBr = (c.ids ?? []).some((id) => { let d = 0; for (const r of rows) { if (r.id >= id) break; if (r.form === "(") d++; else if (r.form === ")") d--; } return d > 0; });
-      if (f.measure === "date" || inBr || !being?.entity || /^(PRON|DET|NUM)$/.test(byId(c.ARG0?.hid)?.upos ?? "")) continue;
+      // a figure in brackets is a second atom only when it repeats one outside them; when the brackets hold the only figures ("depth (923 ft;
+      // 281 m)") they are the figure
+      const outside = claims.some((d) => d !== c && d.rel === "fig" && d.fig?.measure === f.measure && d.ARG0?.hid === c.ARG0?.hid && !(d.ids ?? []).some((id) => { let k = 0; for (const r of rows) { if (r.id >= id) break; if (r.form === "(") k++; else if (r.form === ")") k--; } return k > 0; }));
+      if (f.measure === "date" || (inBr && outside) || !being?.entity || /^(PRON|DET|NUM)$/.test(byId(c.ARG0?.hid)?.upos ?? "")) continue;
       const pred = `has_${f.attribute ?? String(f.measure ?? "value").replace(/^count:/, "number_of_")}`;
-      push(pred, [being, { value: textOfIds(c.ids ?? []), ids: c.ids ?? [] }], { ...base, approx: !!f.approx }, [c.ids ?? [], being?.ids ?? []]);
+      // the value keeps its measure in base units and its bracketed equivalents, so "281 metres" meets "923 ft (281 m)"
+      push(pred, [being, { value: textOfIds(c.ids ?? []), ids: c.ids ?? [], measure: f.measure ?? null, base: f.base ?? null, alts: f.alts ?? [] }], { ...base, approx: !!f.approx }, [c.ids ?? [], being?.ids ?? []]);
       continue;
     }
     const A0 = arg(c.ARG0) ?? (c.ARG1 && c.voice !== "passive" ? dropped(c.vid) : null) ?? (c.rel === "be" ? dropped(c.vid) : null);
