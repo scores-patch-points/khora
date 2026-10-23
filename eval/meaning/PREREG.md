@@ -616,3 +616,14 @@ Prediction, written before running: this is the pure-prefix conclusion already r
 zero), so it will give the same thresholds (0.99 in all nine folds), the same depths (8–16 of ~330), E accepted 8 of 194, false-accept 0.5%,
 C named 40 of 129, false-C 2.7%. If it differs, the difference is in code, not in the rule. Evaluation bars as 21b: E, false accepts not above
 the rules' pooled rate (3.5% on these rows) and accuracy above the rules'; C, C1–C4 of 21a.
+RESULT (run 21c, the same code and nine folds as 21b′): as predicted, identical. te and tc 0.99 in all nine folds, depth 8–16 of ~330; pooled E
+ accuracy 63.6 → 52.4, false-accept 3.5% → 0.5%, E accepted 8 of 194; C named 35 → 40 of 129 (31.0%), false-C 2.7%; C4 non-English 14.1%
+ against English 10.0%. E bar: accuracy NOT above the rules' (fails), false accepts below. C bars: C1 FAIL (+3.9 points), C2 pass.
+ Nothing frozen; run 21 is not run on new pairs.
+ Why the share moves so early: of the 40 highest-entailment pairs the first unsupported one is at rank 9, and the unsupported share among
+ pairs accepted at each score, over all 393 rows: 9.5% at ≥0.99 (21 accepted, 2 unsupported), 15.5% at ≥0.97 (71), 16.3% at ≥0.95, 15.1% at ≥0.9,
+ 19.5% at ≥0.8. (Many of those unsupported pairs are ones the chain calls C first; the 20b/21a "false-accept" rates divide by the not-E pairs,
+ not by the accepted ones, so the two are not the same number.) The top unsupported pairs are role and direction swaps the NLI model entails at
+ 0.99: "we paid $250.0 million" against "we received" (relations 521), "paid" against "received" an upfront payment (503), "licensed rights to
+ third parties" against "licensed from third parties" (506), "Luftseilbahn" against "Zahnradbahn" in a sentence that also names a
+ Luftseilbahn (fresh-ml 641). These are what an atom check sees (a different predicate over the same arguments) and the NLI score does not.
