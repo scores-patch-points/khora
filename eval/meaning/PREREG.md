@@ -490,3 +490,7 @@ Bars, for the matcher arm:
  M4 at least a quarter of the E pairs accepted (run 19: 0 of 48; 19b: 1 of 47).
  M5 accuracy at least the wording judge's, with fewer false accepts.
 Reported per language and same- vs cross-language, each failure assigned to a layer. Any change after the matcher is frozen is post hoc.
+Set committed before any arm ran: eval/meaning/fresh20.json, 96 pairs (48 E, 29 C, 19 T; 80 same-language, 16 English-claim cross-language),
+over 90 of the 122 sentences and all 18 pages. Label audit by a second agent, labels hidden, from the sentence alone: 96 of 96 agreed
+(fresh20.audit.json). Borderline, kept as given: 849 (a rank without its measure), 860/872 (a sentence cut before its subject, the title
+supplies it), 852, 804 (third after two is smaller than both), 807 (a bearing read from the other end).
