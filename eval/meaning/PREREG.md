@@ -472,3 +472,21 @@ What still rejects the 47 fresh19 E pairs, from the atom tables:
    sit_at / same surface elevation, pour_en / desemboca), 19 some arguments, 14 none (the source reading or its coreference lost them).
  The largest single fault is now predicate equivalence across paraphrase; rules have stopped paying there (fix 3 moved one pair). Next: a
  LEARNED atom-pair matcher, trained cross-validated on the eight existing pair sets, measured on run 20.
+
+## Run 20 (2026-10-22): a fresh pair set for a LEARNED atom-pair matcher — PRE-REGISTERED (written before the pairs were written)
+Set: 122 sentences from 18 Wikipedia pages not used before (en Lake Erie, Mount Hood; es Lago de Chapala, Pico Duarte, Río Grijalva; fr
+Lac de Grand-Lieu, Mont Lozère, Vienne (affluent de la Loire), Lac de Paladru; de Tegernsee, Hohe Acht, Fulda (Fluss), Schweriner See; ja
+宍道湖, 鳥海山, 球磨川, 浜名湖, 日光白根山), fetched 2026-10-22 with revision ids (eval/meaning/fresh20.sources.json). Pairs written and
+labelled by a separate agent from those sentences alone (no code, no other sets, no results), as run 19: per language 16 same-language
+pairs (about 8 E, 5 C, 3 T), and per other language 4 English-claim cross-language pairs (2 E, 1 C, 1 T); audited by a second agent from
+the sentence alone before any arm runs.
+What is measured: the atoms arm with a learned atom-pair matcher (which claim atom a source atom meets, by predicate and arguments), trained
+cross-validated on the eight existing pair sets (main, cf, heldout, other, fresh, relations, fresh-ml, fresh19) and frozen at the commit
+that adds it; the arm as of 67b3d503 (run 19b) is the baseline. This set is seen by no training.
+Bars, for the matcher arm:
+ M1 coverage: every pair read (no typed gap).
+ M2 false-accept at most 10%.
+ M3 accuracy at least the 67b3d503 atoms arm's on the same pairs, and at least grammar-ud's.
+ M4 at least a quarter of the E pairs accepted (run 19: 0 of 48; 19b: 1 of 47).
+ M5 accuracy at least the wording judge's, with fewer false accepts.
+Reported per language and same- vs cross-language, each failure assigned to a layer. Any change after the matcher is frozen is post hoc.
