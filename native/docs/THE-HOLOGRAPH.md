@@ -330,6 +330,21 @@ carrying one; the constitutional reader establishes 113 and addresses
 refuses — capitalised runs with no second occurrence, sentence openers,
 titles, "God Which".
 
+*Amendment (2026-10-23; the paragraph above stands as written).* The
+2026-10-05 polyglot session (no model, 25 languages, held-out TEST split;
+`khora-polyglot-session-2026-10-05/README.md`) measured that the standing
+gate is the wrong mechanism for a being's EXISTENCE: it failed against the
+prior's own word list in 23 of 23 languages, and a held-out pre-registered
+run falsified 3 of 4 predictions. Its law: a being is born at first
+mention; recurrence can raise standing, not decide existence. Read the
+paragraph above with that split. "Recurrence past the floor" decides a
+being's standing, not whether it is on the record; the 113 above are
+the beings that reached standing. The same session found that on
+cased scripts the capital-letter witness beat the heard reader in 13 of 16
+languages, so the heard rule (LEVELS) is still a becoming there. This
+amendment changes the wording only; whether the reader's code separates
+birth from standing is not shown here.
+
 **Reading is omnilingual and omnimodal by construction, or it is not the
 reader (S6, S16, S34–S39).** The kernel speaks no medium's grammar; the
 text face declares its script, whether case is significant in it
