@@ -113,7 +113,8 @@ import { findInWeft, findInWeftSemantic } from "./opencode-weft-find.mjs";
 import { archonNote, opennessNote } from "./opencode-archons.mjs";
 import { memoryNote } from "./opencode-memory.mjs";
 import { registerNote } from "./opencode-register.mjs";
-import { ingest as ingestAttachment, pagesNote } from "./opencode-ingest.mjs";
+import { ingest as ingestAttachment, pagesNote, docsOf } from "./opencode-ingest.mjs";
+import { computeNote } from "./opencode-records.mjs";
 import { blocks as recordBlocks } from "./opencode-record.mjs";
 import { DELTA_ON, measure as measureDelta, rankTurns } from "./opencode-delta.mjs";
 import { STAKES_ON, stakeCheck } from "./opencode-stakes.mjs";
@@ -464,8 +465,12 @@ async function onContext(body) {
   if (mem.note) { counters.memoriesServed++; out.memory = mem.note; turn.memory = mem.note; }
   else turn.memory = mem.gap ?? null;
   // Attachments the plugin handed over (opencode-ingest.mjs): the pages this ask bears on, quoted whole with their addresses.
-  { const pg = pagesNote({ sessionID: body.sessionID, ask: turn.ask });
-    if (pg.note) { out.memory = out.memory ? out.memory + "\n\n" + pg.note : pg.note; turn.pages = { pages: pg.pages, chars: pg.chars }; } }
+  // What the ask asks OF the attachment, computed from its records (opencode-records.mjs): counts, maxima, current values, sums, one hop.
+  // It goes first: a settled fact with its witnesses outranks pages the model would have to add up itself.
+  { const computed = docsOf(body.sessionID).map((doc) => computeNote({ doc, ask: turn.ask }).note).filter(Boolean);
+    const pg = pagesNote({ sessionID: body.sessionID, ask: turn.ask });
+    const notes = [...computed, ...(pg.note ? [pg.note] : [])];
+    if (notes.length) { out.memory = [out.memory, ...notes].filter(Boolean).join("\n\n"); turn.pages = { computed: computed.length, pages: pg.pages ?? 0, chars: pg.chars ?? 0 }; } }
   // The verbatim register (FOLD_REGISTER=1): the person's own statements, kept word for word by the machine so that a
   // model-written compaction summary cannot lose or rewrite them. Rides the same memory channel the plugin already injects.
   if (process.env.FOLD_REGISTER === "1") {

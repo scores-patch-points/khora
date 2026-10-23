@@ -17,11 +17,23 @@ const words = (s) => String(s ?? "").toLowerCase().match(/[\p{L}\p{N}]+(?:[-'][\
 // identities written in the text: an id (letters, hyphen, digits) or a proper name joined by a hyphen or spaces (Rotterdam-North, Halvorsen Reefer Services)
 export const identitiesOf = (s) => {
   const t = String(s ?? "");
-  const ids = t.match(/\b[A-Z]{1,5}-\d{2,}\b/g) ?? [];
+  const ids = t.match(/\b[A-Z]{1,5}-\d+\b/g) ?? [];
   const names = t.match(/\b[A-Z][a-z]+(?:(?:-| & | )[A-Z][a-z]+)+\b/g) ?? [];
   return [...new Set([...ids, ...names])];
 };
 
+// The document's own page numbers are the addresses when it has them ("---- Page 12 of 40 ----"); text before the first mark is page 0.
+export const labelledPagesOf = (text, opts) => {
+  const t = String(text ?? "");
+  const parts = t.split(/^-{2,}\s*Page\s+(\d+)(?:\s+of\s+\d+)?\s*-{2,}\s*$/m);
+  if (parts.length > 2) {
+    const out = [];
+    if (parts[0].trim()) out.push({ label: 0, text: parts[0].trim() });
+    for (let i = 1; i < parts.length; i += 2) if (parts[i + 1]?.trim()) out.push({ label: Number(parts[i]), text: parts[i + 1].trim() });
+    return out;
+  }
+  return pagesOf(t, opts).map((p, i) => ({ label: i + 1, text: p }));
+};
 export const pagesOf = (text, { chunk = 3000 } = {}) => {
   const t = String(text ?? "");
   const marked = t.split(/^-{2,}\s*Page\s+\d+(?:\s+of\s+\d+)?\s*-{2,}\s*$/m).map((s) => s.trim()).filter(Boolean);
@@ -46,6 +58,7 @@ const load = (sid) => {
   return d;
 };
 function index(doc) {
+  doc.labels ??= doc.pages.map((_, i) => i + 1);
   doc.tf = doc.pages.map((p) => { const m = new Map(); for (const w of words(p)) m.set(w, (m.get(w) ?? 0) + 1); return m; });
   doc.df = new Map(); for (const m of doc.tf) for (const w of m.keys()) doc.df.set(w, (doc.df.get(w) ?? 0) + 1);
   doc.lens = doc.pages.map((p) => p.length); doc.avg = doc.lens.reduce((a, b) => a + b, 0) / Math.max(1, doc.lens.length);
@@ -62,9 +75,10 @@ export function ingest({ sessionID, id, name = "attachment", text = "", part = 0
   const list = load(sid);
   let doc = list.find((d) => d.id === id);
   if (!doc) {
-    doc = { id: String(id), name: String(name), pages: pagesOf(buf.join("")) };
+    const lp = labelledPagesOf(buf.join(""));
+    doc = { id: String(id), name: String(name), pages: lp.map((p) => p.text), labels: lp.map((p) => p.label) };
     list.push(doc);
-    try { fs.mkdirSync(DIR(), { recursive: true }); fs.writeFileSync(file(sid), JSON.stringify(list.map(({ id, name, pages }) => ({ id, name, pages })))); } catch { /* memory still serves it */ }
+    try { fs.mkdirSync(DIR(), { recursive: true }); fs.writeFileSync(file(sid), JSON.stringify(list.map(({ id, name, pages, labels }) => ({ id, name, pages, labels })))); } catch { /* memory still serves it */ }
     index(doc);
   }
   return { ok: true, id: doc.id, name: doc.name, pages: doc.pages.length, chars: doc.pages.reduce((n, p) => n + p.length, 0),
@@ -72,7 +86,7 @@ export function ingest({ sessionID, id, name = "attachment", text = "", part = 0
 }
 
 /** The pages an ask bears on: exact identities first, then BM25 over words. */
-export function pagesNote({ sessionID, ask, maxPages = 10, maxChars = 18000 }) {
+export function pagesNote({ sessionID, ask, maxPages = 10, maxChars = 24000 }) {
   const list = load(String(sessionID ?? ""));
   if (!list.length || !String(ask ?? "").trim()) return { gap: list.length ? "empty-ask" : "none" };
   const q = words(ask).filter((w) => !STOP.has(w) && w.length > 1), ids = identitiesOf(ask);
@@ -92,10 +106,17 @@ export function pagesNote({ sessionID, ask, maxPages = 10, maxChars = 18000 }) {
     });
   }
   scored.sort((a, b) => b.s - a.s);
+  // every named thing in the ask gets its best page first (a question about two clauses needs both), then the rest by score
+  const order = [], seen = new Set();
+  for (const id of ids) {
+    const best = scored.find((x) => x.doc.pages[x.i].includes(id) && !seen.has(x));
+    if (best) { order.push(best); seen.add(best); }
+  }
+  for (const x of scored) if (!seen.has(x)) order.push(x);
   const out = []; let size = 0;
-  for (const x of scored) {
+  for (const x of order) {
     if (out.length >= maxPages) break;
-    const block = `[${x.doc.name}#p${x.i + 1}]\n${x.doc.pages[x.i]}`;
+    const block = `[${x.doc.name}#p${x.doc.labels[x.i]}]\n${x.doc.pages[x.i]}`;
     if (size + block.length > maxChars && out.length) break;
     out.push(block); size += block.length;
   }
@@ -103,4 +124,5 @@ export function pagesNote({ sessionID, ask, maxPages = 10, maxChars = 18000 }) {
   const note = `<fold-pages source="pages of the attached document(s), chosen by the machine for this question (exact names and ids first, then word overlap); quoted whole">\n${out.join("\n\n")}\n</fold-pages>`;
   return { note, pages: out.length, chars: note.length };
 }
+export const docsOf = (sessionID) => load(String(sessionID ?? ""));
 export const _resetForTest = () => { docs.clear(); pending.clear(); };
