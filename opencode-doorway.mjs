@@ -1146,13 +1146,13 @@ async function onGather(body) {
 }
 const gatherAnswers = new Map();
 
-// ESSAY, a long piece as a file written a section at a time across the harness's model calls (opencode-essay.mjs): the door keeps the job, applies each
+// LONGFORM, a long piece as a file written a section at a time across the harness's model calls (opencode-longform.mjs): the door keeps the job, applies each
 // reply to the file, grades the section against its own material with the grounding check, and says what the next model call is asked. The model
 // calls are the harness's; the door never calls a model. `start` gathers first (an account ask, topic, a short time budget).
-const essayJobs = new Map();
-async function onEssay(body) {
-  const { essayStart, essayStep, essayRevise } = await import("./opencode-essay.mjs");
-  for (const [k, v] of essayJobs) if (Date.now() - v.at > 3600_000) essayJobs.delete(k);
+const longformJobs = new Map();
+async function onLongform(body) {
+  const { longformStart, longformStep, longformRevise } = await import("./opencode-longform.mjs");
+  for (const [k, v] of longformJobs) if (Date.now() - v.at > 3600_000) longformJobs.delete(k);
   const op = String(body.op ?? "");
   try {
     if (op === "start") {
@@ -1160,18 +1160,18 @@ async function onEssay(body) {
       const topic = typeof body.topic === "string" && body.topic.trim() ? body.topic.trim().slice(0, 300) : ask;
       const g = await onGather({ ask, topic, kind: "account", softMs: Number(body.softMs) || 20_000, budgetMs: Number(body.budgetMs) || 90_000, plan: body.plan });
       if (!g?.ok) return { ok: false, error: g?.error ?? "the gather failed" };
-      const s = essayStart({ ask, topic, gathered: g.result, outline: body.outline });
+      const s = longformStart({ ask, topic, gathered: g.result, outline: body.outline, freeform: body.freeform });
       if (s.gap) return { ok: false, error: s.gap.reason };
-      essayJobs.set(s.job.id, { job: s.job, at: Date.now() });
-      return { ok: true, job: s.job.id, prompt: s.prompt, section: s.section.id, sections: s.job.outline.length, sources: g.result.sources.length, path: s.job.file, passages: g.result.passages };
+      longformJobs.set(s.job.id, { job: s.job, at: Date.now() });
+      return { ok: true, job: s.job.id, prompt: s.prompt, section: s.section, title: s.title, facts: s.facts, sections: s.job.outline.length, sources: g.result.sources.length, path: s.job.file, passages: g.result.passages };
     }
-    const entry = essayJobs.get(String(body.job ?? ""));
-    if (!entry) return { ok: false, error: "no such essay job (expired or never started)" };
+    const entry = longformJobs.get(String(body.job ?? ""));
+    if (!entry) return { ok: false, error: "no such longform job (expired or never started)" };
     entry.at = Date.now();
     if (op === "step") {
       const { profileOf } = await import("./opencode-finish.mjs");
       const ground = async (text, passages) => { const p = await profileOf({ draft: text, material: null, passages, workspace: null, own: [], research: false }); return (p?.profile?.claims ?? []).map((c) => ({ text: c.text, standing: c.standing })); };
-      const r = await essayStep(entry.job, String(body.text ?? ""), { ground });
+      const r = await longformStep(entry.job, String(body.text ?? ""), { ground });
       if (r.done) {
         const id = `g${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`;
         gatherAnswers.set(id, { text: r.done.text, at: Date.now() });
@@ -1180,7 +1180,7 @@ async function onEssay(body) {
       return { ok: true, next: r.next };
     }
     if (op === "revise") {
-      const r = essayRevise(entry.job, String(body.section ?? ""), String(body.instruction ?? ""));
+      const r = longformRevise(entry.job, String(body.section ?? ""), String(body.instruction ?? ""));
       return r.gap ? { ok: false, error: r.gap.reason } : { ok: true, next: r.next };
     }
     return { ok: false, error: `unknown op ${op}` };
@@ -1714,6 +1714,46 @@ function onSnip(body) {
   }
   return result;
 }
+// the words a sentence asserts with: function words and stems shorter than three letters carry no claim
+const REVISE_FW = new Set("the and for with from that this these those was were are has have had its his her their she he they them who which what when where not but than then into onto over under about after before also only very more most some any each one".split(" "));
+const reviseWords = (t) => new Set((String(t).toLowerCase().match(/[\p{L}\p{N}]+/gu) ?? []).filter((w) => (w.length > 2 || /\d/.test(w)) && !REVISE_FW.has(w)));
+const recorded = new Set();
+/** The sentence of the answer that now stands for a revised one. First choice: a claim the door finds SUPPORTED by the very source
+ *  sentence the revised one was found against (`against`), sharing at least a quarter of the claim words of the two together (the
+ *  correction may restate it in the source's own words). Otherwise: a sentence sharing at least half of them. Never one that quotes
+ *  the revised sentence (a reply naming its mistake is not the correction), and never one the door contradicts. Null when none. */
+export function successorOf(was, claims, against = null) {
+  const a = reviseWords(was);
+  const flat = (t) => String(t ?? "").toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+  const quoted = flat(was);
+  const scored = claims
+    .filter((c) => c.standing !== "contradicted" && c.standing !== "argument" && c.standing !== "question")
+    .filter((c) => !flat(c.text).includes(quoted))
+    .map((c) => {
+      const b = reviseWords(c.text);
+      const shared = [...a].filter((w) => b.has(w)).length;
+      return { c, score: shared / (a.size + b.size - shared || 1) };
+    })
+    .sort((x, y) => y.score - x.score);
+  const restsOn = (c) => c.standing === "supported" && !!against && [c.evidence, ...(c.from ?? [])].some((e) => e?.text && (flat(e.text).includes(flat(against)) || flat(against).includes(flat(e.text))));
+  return scored.find((x) => x.score >= 0.25 && restsOn(x.c))?.c ?? scored.find((x) => x.score >= 0.5)?.c ?? null;
+}
+/** Each revised sentence, paired with its successor in the answer (successorOf): { was, now, standing }. A found pair is appended
+ *  once to the task's log (the quick and the researched pass both carry it). */
+function reviseLedger({ task, agent, universe, revises, claims }) {
+  return revises.map(({ was, against }) => {
+    const now = successorOf(was, claims, against);
+    const pair = { was, now: now?.text ?? null, standing: now?.standing ?? null };
+    const key = `${task}\u0000${agent}\u0000${was}\u0000${pair.now}`;
+    // only a pair is a revision: a text with no successor (a preamble before the reply reads) appends nothing
+    if (pair.now && !recorded.has(key)) {
+      recorded.add(key);
+      try { eot.append({ task, agent, stage: "reason", universe, detail: { op: "REC", by: "khora:opencode-doorway.revise", was, now: pair.now, standing: pair.standing, evidence: now?.evidence ?? null } }); } catch { /* the log never blocks */ }
+    }
+    return pair;
+  });
+}
+
 async function onGround(body) {
   const agent = String(body.agent ?? body.sessionID ?? "");
   const task = taskFor(body, agent);
@@ -1749,6 +1789,11 @@ async function onGround(body) {
       console.error(`ground: no step for ${String(body.sessionID ?? "").slice(0, 14)} — ${e?.stack ?? e}`.split("\n").slice(0, 4).join(" | "));
     }
   }
+  // A REVISION the reader asked for (the app's fold note): each sentence revised is paired with the answer's sentence that now
+  // stands for it, and the pair is appended to the task's log as REC. The sentence revised is never erased; the window shows both.
+  // each { was, against? } (a bare string is a sentence with no source sentence named)
+  const revises = (Array.isArray(body.revises) ? body.revises : []).flatMap((r) => (typeof r === "string" ? (r ? [{ was: r }] : []) : r && typeof r.was === "string" && r.was ? [{ was: r.was, against: typeof r.against === "string" ? r.against : null }] : []));
+  if (step?.profile && revises.length) step.profile.revises = reviseLedger({ task, agent, universe: universeOf(body), revises, claims: step.profile.claims ?? [] });
   if (!step) console.error(`ground: no step for ${String(body.sessionID ?? "").slice(0, 14)} (ask ${String(body.ask ?? "").length} chars, text ${String(body.text ?? "").length}, passages ${(body.passages ?? []).length}, own ${(body.own ?? []).length})`);
   // THE TURN'S SHAPE (the audit's live row, read once more here so the window never reaches for the door):
   // what the void owes, the first unmet reach cell, and the acts with their cube cells and shape verdicts.
@@ -1926,7 +1971,7 @@ function onDream(body) { return dreamTask({ task: taskFor(body, String(body.agen
 function onNextVoid(body) { return nextVoid({ task: body.task }); }
 function onReason(body) { return reasonFor({ task: body.task, ask: String(body.ask ?? ""), limit: Number(body.limit) || 6 }); }
 // THE MECHANICAL STEP (opencode-finish.mjs): the model's finished text is one
-// step; this runs the precision race (and, for a generation, the essay fold)
+// step; this runs the precision race (and, for a generation, the longform fold)
 // over it and returns the OUTPUT, keeping the raw draw as `superseded`. Bounded
 // and fail-open: a slow first load yields a typed gap; the draw still stands,
 // disclosed as un-stepped. Gated by FOLD_FINISH (default on).
@@ -2042,7 +2087,7 @@ export async function answer(body, opts = {}) {
     case "event": return onEvent(body);
     case "perceive": return onPerceive(body);
     case "gather": return onGather(body);
-    case "essay": return onEssay(body);
+    case "longform": return onLongform(body);
     case "route": {
       // THE CONVERSATION ROUTER (opencode-route.mjs): which handling this ask gets, by intent, before any model is called. Fails open: a gap or an
       // error is an answer the plugin reads as "no route" and falls back to its own classifier.

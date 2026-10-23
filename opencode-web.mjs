@@ -91,6 +91,7 @@ export async function citedFor(title, claim, { lang = "en", deadline = Infinity,
   if (!html) return { sentence: null, links: [], why: "no article text" };
   // 1. footnote id -> the page it cites (the original URL, not an archive copy, when both are given)
   const refs = new Map();
+  const notes = new Map();
   for (const m of html.matchAll(/<li id="(cite_note-[^"]+)"[^>]*>([\s\S]*?)<\/li>/g)) {
     // a short-form note (sfn) names a bibliography entry (#CITEREF…) instead of linking out: the entry's own links are the note's
     const via = [...m[2].matchAll(/href="#(CITEREF[^"]+)"/g)].map((x) => x[1]);
@@ -99,6 +100,10 @@ export async function citedFor(title, claim, { lang = "en", deadline = Infinity,
     const hrefs = [...body.matchAll(/<a[^>]*class="[^"]*external[^"]*"[^>]*href="(https?:\/\/[^"]+)"/g)].map((x) => ent(x[1]));
     const own = hrefs.find((u) => !/web\.archive\.org|archive\.(is|today|ph)|webcitation/.test(u)) ?? hrefs[0];
     if (own) refs.set(m[1], own);
+    // the citation itself, as the reader would see it: a book or paper cites something even when it links nowhere
+    // (the note's back-links to each place it is cited, "a b c", are the list's furniture, not the citation)
+    const text = ent(body.replace(/<style[\s\S]*?<\/style>/g, " ").replace(/<[^>]+>/g, " ")).replace(/\^|\s+/g, " ").replace(/\s+([.,;:])/g, "$1").trim().replace(/^(?:[a-z]{1,2}\s+)+(?=\S)/, "")
+    if (text) notes.set(m[1], { text: text.length > 240 ? text.slice(0, 237) + "\u2026" : text, ...(own ? { url: own } : {}) });
   }
   // 2. the prose, with each footnote mark kept as a token on the sentence it ends
   const body = html.replace(/<style[\s\S]*?<\/style>/g, " ").replace(/<sup[^>]*class="[^"]*\breference\b[^"]*"[^>]*>\s*<a[^>]*href="#(cite_note-[^"]+)"[^>]*>[\s\S]*?<\/a>\s*<\/sup>/g, "⟦$1⟧");
@@ -119,7 +124,9 @@ export async function citedFor(title, claim, { lang = "en", deadline = Infinity,
   if (!best) return { sentence: null, links: [], why: "no article sentence carries the claim" };
   const ids = [...best.sent.matchAll(/⟦([^⟧]+)⟧/g)].map((m) => m[1]);
   const links = [...new Set(ids.map((id) => refs.get(id)).filter(Boolean))].map((url) => ({ title: new URL(url).hostname.replace(/^www\./, ""), url, snippet: "" }));
-  return { sentence: best.sent.replace(/⟦[^⟧]*⟧/g, "").trim(), links, footnotes: ids.length, why: links.length ? null : ids.length ? "its footnotes cite no web page" : "that sentence carries no footnote" };
+  // what the sentence cites, every footnote of it (a book with no link included), once each
+  const cites = [...new Set(ids)].flatMap((id) => (notes.has(id) ? [notes.get(id)] : [])).filter((c, i, all) => all.findIndex((o) => o.text === c.text) === i);
+  return { sentence: best.sent.replace(/⟦[^⟧]*⟧/g, "").trim(), links, cites, footnotes: ids.length, why: links.length ? null : ids.length ? "its footnotes cite no web page" : "that sentence carries no footnote" };
 }
 
 /** The Brave Search API (keyed): BRAVE_API_KEY from the environment, never written anywhere. Free tier is one request a second; answers are cached by query. */

@@ -50,3 +50,14 @@ test("the read carries the gate: readToWeft emits WeftEntry@4 with a SurpriseCut
   // the gate is declared, not fitted: every parameter is on the record
   for (const k of ["order", "alpha", "draws", "seed", "minLength"]) assert.ok(k in entry.surprise);
 });
+
+test("a prime is a ground heard first: it lowers the surprise of what it predicts and is never shuffled into the null", async () => {
+  const { surprises } = await import("../kernel/surprise-segments.js");
+  const prime = Array.from({ length: 60 }, (_, i) => ["the", "cat", "sat", "on"][i % 4]);
+  const doc = ["the", "cat", "sat", "on", "the", "cat"];
+  const cold = surprises(doc, { order: 2 }), warm = surprises(doc, { order: 2, prime });
+  assert.ok(warm.reduce((a, b) => a + b, 0) < cold.reduce((a, b) => a + b, 0), "the primed ground predicts the document");
+  assert.deepEqual(Array.from(surprises(doc, { order: 2, prime: null })), Array.from(cold), "no prime is the old behaviour");
+  const seg = surpriseCut(["the", "cat", "sat", "on", "the", "mat", "the", "cat"], { order: 2, alpha: 0.05, draws: 5, seed: 1, minLength: 2, prime });
+  assert.equal(seg.primed, 60);
+});

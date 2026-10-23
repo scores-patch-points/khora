@@ -62,7 +62,7 @@ export const MIRROR_HOSTS = Object.freeze([
   /(^|\.)wik[a-z0-9-]*\.[a-z.]+$/i, /(^|\.)[a-z0-9-]*pedia\.[a-z.]+$/i,   // any other host whose name is wiki-something or something-pedia: a wiki or a copy of one (conservative)
 ]);
 /** Other encyclopedias and tertiary references: indexes too, not primary sources. */
-export const ENCYCLOPEDIAS = Object.freeze([/(^|\.)(britannica\.com|encyclopedia\.com|newworldencyclopedia\.org|citizendium\.org|worldhistory\.org|encyclopedia\.pub|thefamouspeople\.com|famousbirthdays\.com|infoplease\.com|thefreedictionary\.com|dictionary\.com|merriam-webster\.com)$/i]);
+export const ENCYCLOPEDIAS = Object.freeze([/(^|\.)(britannica\.com|newworldencyclopedia\.org|citizendium\.org|worldhistory\.org|encyclopedia\.pub|thefamouspeople\.com|famousbirthdays\.com|infoplease\.com|thefreedictionary\.com|dictionary\.com|merriam-webster\.com)$/i]);
 /** Strong attribution lines of an encyclopedia copy, in the page's own text. */
 const COPY_MARKERS = Object.freeze([/from wikipedia,? the free encyclopedia/i, /this (?:article|page|text) (?:uses|incorporates|is based on|is adapted from|is licensed).{0,100}wikipedia/i, /text is available under the creative commons attribution-sharealike.{0,200}wikipedia/i, /wikipedia,? the free encyclopedia/i]);
 

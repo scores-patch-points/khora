@@ -22,6 +22,14 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const NATIVE = path.join(here, "native");
 
 // The received organs, loaded once: the UD English-EWT parser prior (the dominant class and lemma of a word) and the morphology prior (sameAct).
+let parserModel = null;
+async function parserOnce() {
+  if (parserModel) return parserModel;
+  const { loadModel } = await import(path.join(NATIVE, "adapters/text/english-parser.js"));
+  parserModel = loadModel(JSON.parse(fs.readFileSync(path.join(NATIVE, "priors/parser-eng-ewt.json"), "utf8")));
+  return parserModel;
+}
+
 let organs = null;
 async function organsOnce() {
   if (organs) return organs;
@@ -53,6 +61,26 @@ export async function openClassOf() {
 export async function nounLemmasOf(text) {
   const { dominantOf } = await organsOnce();
   return words(text).map((w) => dominantOf(String(w).toLowerCase())).filter((d) => d?.upos === "NOUN").map((d) => d.lemma);
+}
+
+/** What a sentence is about, as words to look up: its subject as the received dependency parser reads it (the nsubj of the root),
+ *  head first, then the words that name it with it (compound, flat, appos) — "The element radium glows" gives radium, element. A
+ *  common noun is looked up by its lemma, a name by its form. Empty when the parse finds no subject (a pronoun subject is not looked up). */
+export async function subjectNounsOf(text) {
+  const model = await parserOnce();
+  const { parseText } = await import(path.join(NATIVE, "adapters/text/english-parser.js"));
+  const rows = String(parseText(model, String(text)))
+    .split("\n")
+    .filter((line) => /^\d+\t/.test(line))
+    .map((line) => { const [id, form, lemma, upos, , , head, deprel] = line.split("\t"); return { id, form, lemma, upos, head, deprel }; });
+  const root = rows.find((r) => r.deprel === "root")?.id;
+  const word = (r) => (r.upos === "PROPN" ? r.form : r.lemma).toLowerCase();
+  const nouns = (rs) => [...new Set(rs.filter((r) => ["NOUN", "PROPN"].includes(r.upos)).map(word))];
+  const subject = rows.find((r) => r.deprel.startsWith("nsubj") && r.head === root) ?? rows.find((r) => r.deprel.startsWith("nsubj"));
+  if (subject) return nouns([subject, ...rows.filter((r) => r.head === subject.id && ["compound", "flat", "appos"].includes(r.deprel))]);
+  // no nsubj: the parser read the verb (or a copula's predicate) as the head of one noun phrase ("radium glows" → glows/root with
+  // radium as its compound); the subject is then the root's compound words, nearest first
+  return nouns(rows.filter((r) => r.head === root && r.deprel === "compound").sort((a, b) => Number(b.id) - Number(a.id)));
 }
 
 const fold = (s) => String(s ?? "").normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/\s+/g, " ").trim();
