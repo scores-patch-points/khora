@@ -40,7 +40,7 @@ const fold = (s) => {
   return out;
 };
 const compiled = Object.fromEntries(Object.entries(DICT.languages).map(([lang, d]) => [lang, { script: d.script, kinds: Object.fromEntries(Object.entries(d).filter(([k]) => k !== "script").map(([k, v]) => [k, v.map(fold)])) }]));
-const KIND_NAMES = ["invented", "invent", "genre", "account", "know", "seek", "compute", "arith", "fresh", "view", "greet", "work", "wh", "ask", "summary", "rank"];
+const KIND_NAMES = ["invented", "invent", "genre", "account", "know", "seek", "compute", "arith", "fresh", "view", "greet", "work", "wh", "ask", "summary", "rank", "produce"];
 const KEEP_IN_TOPIC = new Set(["fresh", "rank"]);   // "weather", "latest", "best" are the predicate of a search: a topic without them is a different question
 const TOPIC_KINDS = [...KIND_NAMES, "frame"].filter((k) => !KEEP_IN_TOPIC.has(k));   // the frame is stripped from a topic but is no intent: it never routes
 
@@ -237,7 +237,7 @@ async function decide(ask, { history = [] } = {}) {
   if (!text) return { gap: "empty-ask", detail: "no ask to route" };
   const lang = languageOf(text);
   const langs = lang && compiled[lang] ? [lang] : Object.keys(compiled).filter((l) => compiled[l].script === "spaced");
-  const verdict = (kind, why, extra = {}) => ({ kind, research: kind === "account" || kind === "search", why, language: lang ?? "undecided", ...extra });
+  const verdict = (kind, why, extra = {}) => ({ kind, research: kind === "account" || kind === "search", why, language: lang ?? "undecided", ...(kind === "account" && hit.genre && hit.produce ? { form: "longform" } : {}), ...extra });
   const gap = (g, detail) => ({ gap: g, detail, language: lang ?? "undecided" });
   const { hit, toks, at } = kindsIn(text, langs);
   const numbers = toks.filter(isNumberToken);
