@@ -1202,3 +1202,14 @@ fast: 1 files · 0 affected tests (no test imports the guard; CI's native-kernel
 | lens | citation | file:line | verdict | one line |
 | Simon/Chekhov | new/untested source | native/scripts/check-no-legacy-submodule.mjs | clean | the diff only adds a Set entry; the guard is exercised by CI's native-kernel gate, which this change turns green — no new module, no unwired seam |
 clean: Simon/Chekhov (the entry is data the guard itself consumes)
+
+## 2026-10-23 — the register: stated facts as `fact` marks, projected as `<fold-register>`, answered before gather (branch register-door, door)
+fast: 3 files · register 14/14, eot 31/31 pass · law: WARN pre-existing duplicate S17 S96 (not this diff) · FAIL opencode-workplan-live-e2e L0 pre-existing: the door now warms longer than the test's ~15 s wait; fails identically with this diff stashed
+| lens | citation | file:line | verdict | one line |
+| Greenberg | FOLD-CONSTITUTION II.1 (giver named) | opencode-register.mjs:scriptOf / matchStatement | noted | English-only patterns and a Latin-script gate, declared in the header and in SPEC §13.1; another script is a typed `lang` gap, never a guess |
+| Feynman | II.11 earned constant | opencode-register.mjs:REGISTER | noted | maxChars 2400 / maxLines 60 are declared, giver SPEC §6 (≤ 600 tokens at 60 turns), measured ~459 on the synthetic sessions |
+| Dijkstra | II.7 consequence test | opencode-register.mjs:keyOf | deferred-with-reason | subjects are keyed by a lowercased surface; two names for one thing are two keys. The referent-keyed register is Gate C1 of FOLDCODE-MVP-PLAN.md; until then precision bars keep a wrong merge out, not a missed one |
+| Holmes | II.7 | opencode-register.mjs:ingestTurns | noted | dedupe is by normalised sentence across renumbered turns: an identical sentence said twice is one fact, by design (the log keeps both turns) |
+| Simon/Chekhov | — | opencode-doorway.mjs:onRegister, onContext | fixed | the new module is imported by the door, routed in the handshake, exercised by 14 tests and a live smoke on a scratch port (F5 answered, update supersedes, false premise flagged) |
+| Kondo | — | foldcode-poc/mech/index.mjs | noted | the poc copy is now a duplicate; its header names the door module as home and keeps the poc harness working |
+clean: Diaconis, Pearl, Alexander, Ostrom, Frankfurt, Marshall (no law edited or cited)
