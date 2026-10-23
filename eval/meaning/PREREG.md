@@ -564,3 +564,14 @@ Bars (pooled over the nine held-out sets; the rules' own pooled figures are the 
     non-English claims at least the English rate minus 15 points.
 If C1 and C2 pass, a new held-out pair set is pre-registered (run 21) from pages used by no set so far, with the arm frozen at the commit that
 adds it; if either fails, the result is recorded and the arm is not run on new pairs.
+RESULT (run 21a, leave-one-set-out over the nine spent sets; eval/meaning/atoms/learn-nli-c.mjs; C1 read as 15 absolute points of all C pairs):
+ per held-out set (C named by the chain → with NLI; false-C): main 4→7 of 9, 1→3 of 21 (14%) · cf 5→5 of 6, 0→2 of 8 (25%) · heldout 7→8 of 10,
+ 0 of 20 · other 5→6 of 8, 0 of 9 · fresh 6→6 of 8, 1→2 of 16 (13%) · relations 1→1 of 7, 0→1 of 15 (7%) · fresh-ml 4→18 of 23, 2→2 of 41 (5%) ·
+ fresh19 2→3 of 29, 2→2 of 67 (3%) · fresh20 1→6 of 29, 0 of 67. tc per fold 0.94–0.98 (0.95 on all nine).
+ pooled: C named 35→60 of 129 (27.1% → 46.5%, +19.4 points); false-C 6→12 of 264 (4.5%); E pairs lost to a false C: 0 of 194.
+ C1 PASS (+19.4 ≥ 15). C2 FAIL: pooled 4.5% is within 5%, but three sets are over 10% (cf 25%, main 14%, fresh 13%; on 8, 21 and 16 non-C pairs,
+ so 2, 3 and 2 pairs). C3: no E lost. C4 PASS: on fresh-ml, fresh19 and fresh20, non-English or cross-language C named 36.6% (chain 8.5%,
+ 71 pairs) against English 10.0% (chain 10.0%, 10 pairs); the gain is in the other languages, where the chain names almost nothing.
+ By the pre-registered rule (C1 and C2 both needed), the arm is NOT run on new pairs. The NLI contradiction score is a real signal (it
+ turns 25 of the 94 missed C pairs, mostly fresh-ml and fresh20), and its misses sit on the small English sets where a 5% cap is two pairs.
+ Not tried, so as not to tune on the spent sets: a stricter cap (CAP is a parameter) or a tc that uses the entailment score too.
