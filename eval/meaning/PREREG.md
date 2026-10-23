@@ -575,3 +575,16 @@ RESULT (run 21a, leave-one-set-out over the nine spent sets; eval/meaning/atoms/
  By the pre-registered rule (C1 and C2 both needed), the arm is NOT run on new pairs. The NLI contradiction score is a real signal (it
  turns 25 of the 94 missed C pairs, mostly fresh-ml and fresh20), and its misses sit on the small English sets where a 5% cap is two pairs.
  Not tried, so as not to tune on the spent sets: a stricter cap (CAP is a parameter) or a tc that uses the entailment score too.
+
+## Run 21b (2026-10-23): the thresholds chosen by DMD, no cap — registered BEFORE the run (the user: "caps should be DMD based")
+The 5% / 10% false-accept and false-C caps of 20b and 21a are hand-set limits, which the standing rule does not allow (the stop is measured, not
+chosen: dmdWindow, native/kernel/activation.js). Replaced, for both thresholds (entailment te for E, contradiction tc for C), by:
+ observations: the training pairs, ordered by that score from highest to lowest (the strictest first); restrict(obs, depth) = the top `depth`;
+ derive(obs): the threshold with the best accuracy on obs for its own decision (E against not-E for te; C against not-C for tc), ties to the
+ strictest; the conclusion is that threshold. dmdWindow gives the shallowest depth at which the top-`depth` pairs already give the whole
+ training set's threshold (candidate depths 8, 16, 32 … below the training size; none agreeing is the typed gap reach_exceeds_candidates, and the
+ threshold is then taken from the whole set and flagged, not silently accepted).
+ The cap is gone: the threshold is what the evidence determines. The depth is reported per fold. Selection is otherwise as 20b/21a
+ (leave-one-set-out over the nine spent sets; rows and scores as then). The bars of those runs stand as EVALUATION bars, not selection
+ parameters: for the E arm, pooled accuracy above the rules' and false accepts not above the rules' pooled rate (5.5%); for C, C1–C4 of 21a.
+ Run 20's frozen arm (te 0.97 from the 5% cap) is not replaced, and fresh20 is spent: what DMD gives for te is reported post hoc.
