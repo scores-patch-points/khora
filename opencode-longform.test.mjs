@@ -220,3 +220,40 @@ test("no facet found: the default shape still has a body (the topic itself), nev
   assert.equal(job.outline.length, 3);
   assert.ok(job.material.s2.length >= 1, "the body section is given lines to write from");
 });
+
+test("the same fact quoted from two pages is one fact, written once", () => {
+  const twice = [
+    "River dolphins are rather small, ranging in size from the 5-foot South Asian river dolphin to the 8-foot Amazon river dolphin.",
+    "River dolphins are rather small, ranging in size from the 5-foot South Asian river dolphin to the 8-foot Amazon river dolphin!",
+    "  river dolphins are rather small, ranging in size from the 5-foot south asian river dolphin to the 8-foot amazon river dolphin.  ",
+    ...QUOTES.slice(0, 3),
+  ];
+  assert.equal(E.dedupeLines(twice).length, 4);
+  const { job } = E.longformStart({ ask: "write an essay on dolphins", topic: "dolphins", gathered: { quotes: twice, passages: [], voids: [], parts: [] }, now: 1_700_000_000_000 + 11 });
+  const all = Object.values(job.material).flat();
+  assert.equal(all.filter((l) => /rather small/.test(l)).length, 1);
+});
+
+test("start and every step answer carry the outline as data: each section's state (planned/writing/written/cut) and its fact count", async () => {
+  const start = E.longformStart({ ask: "write me a piece about dolphins", topic: "dolphins", gathered, outline: OUTLINE, now: 1_700_000_000_000 + 21 });
+  const { job } = start;
+  assert.equal(start.outline.length, OUTLINE.length);
+  assert.deepEqual(start.outline.map((s) => s.state), ["writing", "planned", "planned", "planned", "planned"]);
+  assert.ok(start.outline.every((s) => typeof s.id === "string" && typeof s.title === "string" && Number.isInteger(s.facts)), "id, title, facts on every section");
+  assert.deepEqual(start.outline.map((s) => s.facts), job.outline.map((s) => job.material[s.id].length), "the fact count is the section's material");
+  // s4 never passes (cut); the others are written from their lines
+  const model = async (prompt) => (/Threats and conservation/.test(prompt.split("\n")[0]) ? "Dolphins run banks. Sharks hold elections. Whales sell insurance." : [...prompt.matchAll(/^- (.+)$/gm)].map((x) => x[1]).slice(0, 2).join(" ") || "Connects.");
+  let next = { prompt: start.prompt }, seen = [], last = null, guard = 0;
+  while (!last && guard++ < 60) {
+    const r = await E.longformStep(job, await model(next.prompt), { ground, now: 1_700_000_000_000 });
+    assert.ok(Array.isArray(r.outline) && r.outline.length === OUTLINE.length, "every step answer carries the whole outline");
+    seen.push(r.outline.map((s) => s.state));
+    if (r.done) last = r; else next = r.next;
+  }
+  assert.deepEqual(seen[0], ["written", "writing", "planned", "planned", "planned"], "after the first reply s1 is written and s2 is being written");
+  // a repair round keeps the section "writing" (nothing is written yet); the title and facts ride the repair prompt's answer too
+  const repair = seen.find((st) => st[3] === "writing");
+  assert.ok(repair, "s4 is seen in the writing state");
+  assert.deepEqual(last.outline.map((s) => s.state), ["written", "written", "written", "cut", "written"], "when the piece is done every state is final; the placeholder section is cut");
+  assert.ok(last.outline.every((s) => s.state !== "writing" && s.state !== "planned"));
+});

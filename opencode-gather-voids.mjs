@@ -4,6 +4,7 @@
 // the corpus alone (no list of facets): the content word that the most remaining sentences share, across at least two sites, seeds a
 // void; the sentences that carry it are its material; they leave the pool; the next seed is found among what is left. A nominator (a model,
 // given only cards: the facet words and one line each) may rename or drop a void, never add material: what fills a void is the pages'.
+import { classOf } from "./opencode-route.mjs";
 const clean = (t) => String(t ?? "").replace(/\s+/g, " ").trim();
 export const LIMITS = { voids: 6, minSentences: 3, minHosts: 2, perVoid: 6, sentenceChars: 300, minWord: 4, maxShare: 0.5 };
 
@@ -13,7 +14,9 @@ const shown = new Map(); // stem -> the form most often written, for a label a p
 const stem = (w) => w.replace(/(?:ies)$/, "y").replace(/(?:es|s)$/, "");
 
 /** sentences: [{ text, host }] (prose sentences from the read pages); topic: the word(s) every sentence is already about. */
-export function defineVoids(sentences, { topic = "" } = {}) {
+// wordClass: a form's part of speech from the language's prior (NOUN, PROPN, ADJ, NUM, ...), null when unknown; the void's LABEL prefers nouns, so a
+// section is titled "River dolphins · Amazon", never "Three" or "Numerous and accredited" (2026-10-23: titles that were the seed words as written).
+export function defineVoids(sentences, { topic = "", wordClass = (w) => classOf("en", w) } = {}) {
   const topicStems = new Set(clean(topic).toLowerCase().split(/\s+/).map(stem));
   shown.clear();
   const forms = new Map();
@@ -31,8 +34,14 @@ export function defineVoids(sentences, { topic = "" } = {}) {
     const mine = left.filter((s) => s.ws.has(seed[0]));
     const co = new Map();
     for (const s of mine) for (const w of s.ws) if (w !== seed[0]) co.set(w, (co.get(w) ?? 0) + 1);
-    const second = [...co].filter(([, n]) => n >= 2).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))[0]?.[0];
-    voids.push({ id: `v${voids.length + 1}`, label: second ? `${word(seed[0])} · ${word(second)}` : word(seed[0]), seed: seed[0], sentences: mine.slice(0, LIMITS.perVoid).map((s) => ({ text: s.text.slice(0, LIMITS.sentenceChars), host: s.host })), hosts: [...hosts.get(seed[0])], size: mine.length });
+    const ranked = [...co].filter(([, n]) => n >= 2).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).map(([w]) => w);
+    const isNoun = (k) => { try { const c = wordClass ? wordClass(word(k)) : null; return c === null ? true : c === "NOUN" || c === "PROPN"; } catch { return true; } };
+    // the label: the seed when it is a noun, then the most shared nouns among the void's sentences (two words at most); a void with no noun keeps its seed
+    const labelStems = isNoun(seed[0]) ? [seed[0]] : [];
+    for (const w of ranked) { if (labelStems.length >= 2) break; if (isNoun(w) && !labelStems.includes(w)) labelStems.push(w); }
+    if (!labelStems.length) labelStems.push(seed[0]);
+    const second = ranked[0];
+    voids.push({ id: `v${voids.length + 1}`, label: labelStems.map(word).join(" · "), seed: seed[0], sentences: mine.slice(0, LIMITS.perVoid).map((s) => ({ text: s.text.slice(0, LIMITS.sentenceChars), host: s.host })), hosts: [...hosts.get(seed[0])], size: mine.length });
     const gone = new Set(mine.map((s) => s.i));
     left = left.filter((s) => !gone.has(s.i));
   }

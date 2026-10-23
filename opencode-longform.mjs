@@ -143,9 +143,21 @@ const sentences = (t) => clean(t).split(/(?<=[.!?])\s+(?=[\p{Lu}\p{N}"“(])/u).
 const once = (sents) => { const seen = new Set(); return sents.filter((x) => { const k = clean(x).toLowerCase(); if (seen.has(k) || /\b(?:the lines do not state|left out of the section|says what the lines say)\b/i.test(k)) return false; seen.add(k); return true; }); };
 const bare = (t) => String(t ?? "").replace(/^```[a-z]*\n?|```$/gim, "").replace(/^#{1,6}\s.*$/gm, "").replace(/<!--[\s\S]*?-->/g, "").trim();
 
+export const dedupeLines = (ls) => { const seen = new Set(); return ls.filter((l) => { const k = clean(l).toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim().slice(0, 90); if (!k || seen.has(k)) return false; seen.add(k); return true; }); };
+
+/** The piece's progress as data, for the window: every section with its state and how many facts it writes from. A section is "written" once
+ * the job has its text, "cut" when that text is a placeholder (nothing kept), "writing" when it is the one being asked for, else "planned". */
+export const PLACEHOLDERS = Object.freeze(["(The model wrote nothing for this section.)", "(No page stated enough for this section.)"]);
+export const outlineStates = (job) => job.outline.map((s, i) => {
+  const text = job.texts?.[s.id];
+  const state = typeof text === "string" ? (PLACEHOLDERS.includes(text.trim()) ? "cut" : "written") : i === job.idx ? "writing" : "planned";
+  return { id: s.id, title: s.title, facts: (job.material?.[s.id] ?? []).length, state };
+});
+
 /** longformStart: the outline, the material per section, the file, and the first prompt. `gathered` is the door's gather result ({ passages, text, quotes }). */
 export function longformStart({ ask, topic, gathered, outline: nominated = null, root = null, now = Date.now(), freeform = freeformOn() }) {
-  const lines = (gathered?.quotes ?? []).map(clean).filter(Boolean);
+  // the same fact quoted from two pages (a mirror, a reprint) is one fact: the second copy would be given to another section and written twice
+  const lines = dedupeLines((gathered?.quotes ?? []).map(clean).filter(Boolean));
   // nothing to write from is a typed gap, never a piece: the caller falls back to saying what was (not) read
   if (lines.length < LIMITS.minFacts) return { gap: { kind: "nothing-read", reason: `${lines.length} fact(s) were read for ${clean(topic)}${gathered?.stop?.reason ? ` (${gathered.stop.reason})` : ""}; a piece is written from at least ${LIMITS.minFacts}` } };
   // the outline's sections are the FACETS the corpus covers (the voids' labels), not the recurring entity names the pages share;
@@ -160,7 +172,7 @@ export function longformStart({ ask, topic, gathered, outline: nominated = null,
   const file = path.join(dir, "longform.md");
   const job = { id, ask, topic, outline, material: Object.fromEntries(outline.map((s) => [s.id, material.get(s.id)])), passages: gathered?.passages ?? [], file, idx: 0, round: 0, texts: {}, standing: {}, calls: 0, cut: [], gaps: [], freeform, startedAt: now };
   fs.writeFileSync(file, fileOf(`${topic}`, outline));
-  return { job, prompt: sectionPrompt({ topic, section: outline[0], lines: job.material[outline[0].id], freeform }), section: outline[0].id, title: outline[0].title, facts: job.material[outline[0].id] };
+  return { job, prompt: sectionPrompt({ topic, section: outline[0], lines: job.material[outline[0].id], freeform }), section: outline[0].id, title: outline[0].title, facts: job.material[outline[0].id], outline: outlineStates(job) };
 }
 
 const record = (job, detail, now) => { try { EOT.append({ task: job.id, agent: "longform", stage: "reason", source: { kind: "tool", locator: `longform:${detail.section}:${detail.round}`, meta: { sha256: sha(JSON.stringify(detail)), exit: detail.accepted ? 0 : 1, judge: "ground" } }, unit: `${detail.section}:${detail.round}`, detail: { kind: "longform-section", ...detail }, now }); } catch { /* the log never blocks a draft */ } };
@@ -168,7 +180,7 @@ const record = (job, detail, now) => { try { EOT.append({ task: job.id, agent: "
 /** longformStep: the model's reply to the current prompt. Apply it, grade the section, accept / repair / cut, and say what is asked next. */
 export async function longformStep(job, modelText, { ground, now = Date.now(), freeform = job.freeform ?? freeformOn() } = {}) {
   const section = job.outline[job.idx];
-  if (!section) return { done: finish(job) };
+  if (!section) return { done: finish(job), outline: outlineStates(job) };
   job.calls++;
   const text = bare(modelText);
   const sents = once(sentences(text));
@@ -188,23 +200,23 @@ export async function longformStep(job, modelText, { ground, now = Date.now(), f
   if (!accepted && job.round < LIMITS.maxRec) {
     // REC: the frame changes (the failed claims are named, the material is restated); a redraw in the same frame is not repair
     job.round++;
-    return { next: { prompt: repairPrompt({ topic: job.topic, section, lines, failed, round: job.round }), section: section.id, round: job.round } };
+    return { next: { prompt: repairPrompt({ topic: job.topic, section, lines, failed, round: job.round }), section: section.id, round: job.round, title: section.title, facts: lines }, outline: outlineStates(job) };
   }
   // accepted, or out of rounds: what failed is cut, never kept
   const kept = accepted ? supportedSents.join(" ") : "";
   if (failed.length) job.cut.push(...failed.map((f) => ({ section: section.id, sentence: f })));
   if (!kept) job.gaps.push({ section: section.id, kind: "no-supported-text", reason: `no sentence of ${job.round + 1} attempt(s) was stated by the section's material` });
-  const body = kept || (freeform ? "(The model wrote nothing for this section.)" : "(No page stated enough for this section.)");
+  const body = kept || (freeform ? PLACEHOLDERS[0] : PLACEHOLDERS[1]);
   const applied = applySection(fs.readFileSync(job.file, "utf8"), section.id, body);
   if (!applied.ok) { job.gaps.push({ section: section.id, kind: applied.gap.kind, reason: applied.gap.reason }); } else fs.writeFileSync(job.file, applied.file);
   job.texts[section.id] = body;
   job.standing[section.id] = { sentences: sents.length, supported: supportedSents.length, rounds: job.round + 1, cut: failed.length, ...(freeform ? { freeform: true } : {}) };
   job.round = 0;
-  if (job.revising) { job.revising = false; job.idx = job.outline.length; return { done: finish(job) }; } // a revision touches one section and stops
+  if (job.revising) { job.revising = false; job.idx = job.outline.length; return { done: finish(job), outline: outlineStates(job) }; } // a revision touches one section and stops
   job.idx++;
   const nextSection = job.outline[job.idx];
-  if (!nextSection) return { done: finish(job) };
-  return { next: { prompt: sectionPrompt({ topic: job.topic, section: nextSection, lines: job.material[nextSection.id], before: body, freeform }), section: nextSection.id, round: 0, title: nextSection.title, facts: job.material[nextSection.id] } };
+  if (!nextSection) return { done: finish(job), outline: outlineStates(job) };
+  return { next: { prompt: sectionPrompt({ topic: job.topic, section: nextSection, lines: job.material[nextSection.id], before: body, freeform }), section: nextSection.id, round: 0, title: nextSection.title, facts: job.material[nextSection.id] }, outline: outlineStates(job) };
 }
 
 const finish = (job) => {
@@ -220,5 +232,5 @@ export function longformRevise(job, sectionId, instruction) {
   const file = fs.readFileSync(job.file, "utf8");
   job.idx = i; job.round = 0;
   job.revising = true;
-  return { next: { prompt: revisePrompt({ topic: job.topic, section: job.outline[i], lines: job.material[sectionId], current: sectionText(file, sectionId) ?? "", instruction, freeform: job.freeform ?? freeformOn() }), section: sectionId, round: 0 } };
+  return { next: { prompt: revisePrompt({ topic: job.topic, section: job.outline[i], lines: job.material[sectionId], current: sectionText(file, sectionId) ?? "", instruction, freeform: job.freeform ?? freeformOn() }), section: sectionId, round: 0, title: job.outline[i].title, facts: job.material[sectionId] }, outline: outlineStates(job) };
 }

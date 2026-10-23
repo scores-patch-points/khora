@@ -39,3 +39,18 @@ test("a nominator may rename a void and nothing else", () => {
   assert.deepEqual(named.map((v) => v.sentences), voids.map((v) => v.sentences), "material is never touched");
   assert.equal(named.length, voids.length, "no void is added");
 });
+
+test("a void is named by its nouns: an adjective or a number seed does not title a section", () => {
+  const found = V.defineVoids([
+    { text: "Numerous organizations rate the alliance highly for its dolphin work.", host: "a.org" },
+    { text: "The alliance is accredited by numerous organizations and charities.", host: "b.org" },
+    { text: "Numerous organizations list the alliance among accredited charities.", host: "c.org" },
+    { text: "Three species of river dolphin live in the Amazon basin.", host: "a.org" },
+    { text: "Three river dolphin species share the Amazon basin with manatees.", host: "b.org" },
+    { text: "Scientists count three species of dolphin in the Amazon.", host: "c.org" },
+  ], { topic: "dolphins" });
+  assert.ok(found.length >= 1, "voids are found");
+  for (const v of found) {
+    assert.doesNotMatch(v.label, /\b(numerous|three|accredited)\b/i, `label "${v.label}" is a noun phrase`);
+  }
+});

@@ -1136,6 +1136,26 @@ function savePerceiveConfig(patch) {
 // selected by the asker's stance). The work runs in a worker thread: the door is one event loop, and reading pages is seconds of
 // synchronous work that every other request would wait behind. At most two gathers at once; a slow one is cut at the budget.
 let gathersRunning = 0;
+// GATHER PROGRESS, per session, while a gather runs: what the research has found and read so far (the worker forwards the Holodeck's
+// own events). GET /v1/hooks/opencode/gather/progress?sessionID= reads it, so the window can say "reading… 3 pages" instead of "working".
+const gatherProgress = new Map();
+const hostOfUrl = (u) => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch { return String(u ?? "").slice(0, 40); } };
+function noteProgress(key, ev) {
+  const p = gatherProgress.get(key);
+  if (!p || !ev || typeof ev !== "object") return;
+  if (ev.t === "search" && ev.state === "found") { const q = String(ev.q ?? "").slice(0, 80); const had = p.searches.find((s) => s.q === q); if (had) had.n = Math.max(had.n, Number(ev.n) || 0); else p.searches.push({ q, n: Number(ev.n) || 0 }); }
+  else if (ev.t === "search" && ev.state === "failed") p.searches.push({ q: String(ev.q ?? "").slice(0, 80), failed: String(ev.why ?? "").slice(0, 80) });
+  else if (ev.t === "candidate") p.candidates++;
+  else if (ev.t === "read" && ev.state === "reading") p.reading = { host: hostOfUrl(ev.url), title: String(ev.title ?? "").slice(0, 120) };
+  else if (ev.t === "read" && ev.state === "read") { p.read.push({ host: hostOfUrl(ev.url), title: String(ev.title ?? "").slice(0, 120) }); if (p.reading?.host === hostOfUrl(ev.url)) p.reading = null; }
+  else if (ev.t === "read") { p.skipped++; if (p.reading?.host === hostOfUrl(ev.url)) p.reading = null; }
+  else if (ev.t === "stop") p.stop = String(ev.stop?.reason ?? "").slice(0, 120) || "stopped";
+}
+function progressOf(key) {
+  const p = gatherProgress.get(key);
+  if (!p) return { ok: false, gap: "no gather for this session" };
+  return { ok: true, elapsedMs: Date.now() - p.startedAt, searches: p.searches, candidates: p.candidates, read: p.read, reading: p.reading, skipped: p.skipped, stop: p.stop, done: p.done };
+}
 // THE REGISTER (opencode-register.mjs): the facts the person stated in this session, kept as `fact` marks in the task's EOT log under the
 // session, projected to `<fold-register>` and answered mechanically (M1–M6, no model). The plugin asks it BEFORE route and gather on a new
 // ask, so a question the conversation itself answers never becomes web research (FAILURES.md F5: "what is the mascot service called"
@@ -1164,12 +1184,14 @@ async function onGather(body) {
   if (!ask) return { ok: false, error: "no ask" };
   if (gathersRunning >= 2) return { ok: false, error: "busy: two gathers are already running" };
   const budget = Math.max(5000, Math.min(Number(body.budgetMs) || 90_000, 180_000));
+  const key = String(body.sessionID ?? body.agent ?? "anon");
+  gatherProgress.set(key, { startedAt: Date.now(), searches: [], candidates: 0, read: [], reading: null, skipped: 0, stop: null, done: false });
   gathersRunning++;
   try {
     const out = await new Promise((resolve) => {
       const w = new Worker(new URL("./opencode-gather-worker.mjs", import.meta.url), { workerData: { ask, opts: { gapMs: body.gapMs, retryMs: body.retryMs, softMs: Number(body.softMs) || undefined, plan: body.plan && typeof body.plan === "object" ? body.plan : undefined, topic: typeof body.topic === "string" && body.topic.trim() ? body.topic.trim().slice(0, 300) : undefined, kind: typeof body.kind === "string" ? body.kind.slice(0, 20) : undefined } } });
       const timer = setTimeout(() => { w.terminate(); resolve({ ok: false, error: `gather exceeded its ${budget} ms budget` }); }, budget);
-      w.once("message", (m) => { clearTimeout(timer); resolve(m); w.terminate(); });
+      w.on("message", (m) => { if (m && m.progress) { noteProgress(key, m.progress); return; } clearTimeout(timer); resolve(m); w.terminate(); });
       w.once("error", (e) => { clearTimeout(timer); resolve({ ok: false, error: String(e?.message ?? e).slice(0, 300) }); });
     });
     // keep the assembled text for the model call the harness is about to make for this turn (served by /v1/gather/chat/completions)
@@ -1180,7 +1202,12 @@ async function onGather(body) {
       return { ok: true, id, result: out.result };
     }
     return out;
-  } finally { gathersRunning--; }
+  } finally {
+    gathersRunning--;
+    const p = gatherProgress.get(key);
+    if (p) { p.done = true; p.doneAt = Date.now(); }
+    for (const [k, v] of gatherProgress) if (v.done && Date.now() - (v.doneAt ?? 0) > 300_000) gatherProgress.delete(k);
+  }
 }
 const gatherAnswers = new Map();
 
@@ -1203,7 +1230,8 @@ async function onLongform(body) {
       const s = longformStart({ ask, topic, gathered: g.result, outline: body.outline, freeform: body.freeform });
       if (s.gap) return { ok: false, error: s.gap.reason };
       longformJobs.set(s.job.id, { job: s.job, at: Date.now() });
-      return { ok: true, job: s.job.id, prompt: s.prompt, section: s.section, title: s.title, facts: s.facts, sections: s.job.outline.length, sources: g.result.sources.length, path: s.job.file, passages: g.result.passages };
+      // the outline with each section's state and fact count rides every answer, so the window draws the piece's progress as data
+      return { ok: true, job: s.job.id, prompt: s.prompt, section: s.section, title: s.title, facts: s.facts, sections: s.job.outline.length, sources: g.result.sources.length, path: s.job.file, passages: g.result.passages, topic, outline: s.outline };
     }
     const entry = longformJobs.get(String(body.job ?? ""));
     if (!entry) return { ok: false, error: "no such longform job (expired or never started)" };
@@ -1215,13 +1243,13 @@ async function onLongform(body) {
       if (r.done) {
         const id = `g${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`;
         gatherAnswers.set(id, { text: r.done.text, at: Date.now() });
-        return { ok: true, done: { path: r.done.path, standing: r.done.standing, cut: r.done.cut.length, gaps: r.done.gaps, calls: r.done.calls, sections: r.done.sections }, id };
+        return { ok: true, done: { path: r.done.path, standing: r.done.standing, cut: r.done.cut.length, gaps: r.done.gaps, calls: r.done.calls, sections: r.done.sections }, id, outline: r.outline };
       }
-      return { ok: true, next: r.next };
+      return { ok: true, next: r.next, outline: r.outline };
     }
     if (op === "revise") {
       const r = longformRevise(entry.job, String(body.section ?? ""), String(body.instruction ?? ""));
-      return r.gap ? { ok: false, error: r.gap.reason } : { ok: true, next: r.next };
+      return r.gap ? { ok: false, error: r.gap.reason } : { ok: true, next: r.next, outline: r.outline };
     }
     return { ok: false, error: `unknown op ${op}` };
   } catch (e) { return { ok: false, error: String(e?.message ?? e).slice(0, 300) }; }
@@ -2149,6 +2177,12 @@ export async function answer(body, opts = {}) {
 // with one line ahead of its other routes.
 export async function route(req, res, { log = () => {} } = {}) {
   const url = String(req.url ?? "").split("?")[0];
+  if (url.split("?")[0] === "/v1/hooks/opencode/gather/progress" && req.method === "GET") {
+    const q = new URL(url, "http://door").searchParams;
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify(progressOf(String(q.get("sessionID") ?? q.get("agent") ?? "anon"))));
+    return true;
+  }
   if (url === "/v1/hooks/opencode/meter" && req.method === "GET") {
     res.writeHead(200, { "content-type": "application/json" });
     res.end(JSON.stringify(meter(), null, 2));
