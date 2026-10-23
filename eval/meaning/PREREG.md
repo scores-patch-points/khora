@@ -548,3 +548,19 @@ RESULT (run 20, first and only run of the frozen arm, code as of 1e90f5f8; fresh
  contradiction probability is not used by the frozen arm, so using it is a post hoc change, not a result). Japanese is no worse than the
  other languages here (56%, 1 of 8 accepted), though the model never saw ja; the cross-language English claims over ja/es/fr/de sources
  score the same as same-language ones (56 vs 59).
+
+## Run 21a (2026-10-23): the NLI model's CONTRADICTION score to name C — cross-validated on the nine spent sets, bars set BEFORE the run
+Why: run 20's frozen arm names 1 of 29 contradictions; the claim matcher names a contradiction only when a source atom of the other polarity
+meets a claim atom. The NLI model (same model, same scores as 20b; fresh20 is spent and joins the other eight as the ninth set) also gives a
+contradiction probability.
+Arm "nli-c" (one parameter, tc): a pair is C if the arm chain already says C (grammar-ud, janus, the atom rules: as the frozen nli arm), or the
+NLI contradiction probability reaches tc; otherwise as the frozen nli arm (E at entailment 0.97, else N). tc is chosen on the training sets as the
+lowest threshold whose false-C rate (E and T pairs called C) is at most 5%, and tested on the held-out set; leave-one-set-out over the nine sets.
+Bars (pooled over the nine held-out sets; the rules' own pooled figures are the reference, read from the same run):
+ C1 contradictions named: at least 15 points of the 29+... C pairs more than the rules' pooled rate (absolute, of all C pairs).
+ C2 false-C: E and T pairs called C at most 5% pooled, and at most 10% on any one set.
+ C3 E accepted and false-accept as the frozen nli arm (an E pair turned C counts as a miss; reported, no bar).
+ C4 on the three sets with the most ja/es/fr/de pairs (fresh-ml, fresh19, fresh20) the C gain is not confined to English: named-C rate for
+    non-English claims at least the English rate minus 15 points.
+If C1 and C2 pass, a new held-out pair set is pre-registered (run 21) from pages used by no set so far, with the arm frozen at the commit that
+adds it; if either fails, the result is recorded and the arm is not run on new pairs.
