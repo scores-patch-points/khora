@@ -627,3 +627,20 @@ RESULT (run 21c, the same code and nine folds as 21b′): as predicted, identica
  0.99: "we paid $250.0 million" against "we received" (relations 521), "paid" against "received" an upfront payment (503), "licensed rights to
  third parties" against "licensed from third parties" (506), "Luftseilbahn" against "Zahnradbahn" in a sentence that also names a
  Luftseilbahn (fresh-ml 641). These are what an atom check sees (a different predicate over the same arguments) and the NLI score does not.
+
+## Run 22a (2026-10-23): NLI entailment AND no role/direction swap in the atoms — cross-validated on the nine spent sets, registered BEFORE the run
+Arm "nli-swap": a pair is C if the chain says C (as the frozen nli arm); otherwise E only if (1) the NLI entailment reaches te and (2) the swap
+flag is off; else N. The swap flag (atom-support.js swapFlags, defined here before it is written): over the claim atoms after canonical(), with two
+or more arguments and a predicate that is not is_a, named or has_*:
+ role swap: some source atom's arguments meet the claim atom's arguments (argsMeet, in order) but its predicate does not meet the claim's
+ (predMeet false), and no source atom meets the claim atom with both;
+ direction swap: a source atom with a meeting predicate meets the claim's arguments only REVERSED (argsMeet on the reversed list) and not in order.
+ The flag is on when any claim atom is either. No predicate lexicon, no antonym list: a different predicate over the same arguments is a swap.
+te: the 21c rule (the false-accept share) applied to the training pairs that are not chain-C and not flagged: the top-ranked run with no unsupported pair,
+ depth by dmdWindow, no number chosen. Leave-one-set-out over the nine sets; the held-out set's pairs are scored with the te from the other eight.
+Prediction, written before running: the veto fires on paraphrase too (derive_from against come_from is a different predicate over the same
+arguments, 39 of the 72 unmet claim atoms in 19b were of that kind), so it will remove many true E pairs along with the swaps; the threshold will
+fall below 0.99 because the 0.99-ranked unsupported pairs (relations 521, 503, 506) are removed, and the net E accepted will be small.
+Evaluation bars (pooled, over the nine held-out sets, rules = the atoms arm on the same rows): E1 accuracy above the rules'; E2 false-accept rate
+(unsupported accepted / not-E pairs) not above the rules'; E3 the unsupported share of accepted claims reported, with no bar. Per-language and
+same/cross split reported. If E1 and E2 pass, a new held-out pair set is registered (run 22); if not, the result is recorded and no new pairs are run.
