@@ -510,3 +510,19 @@ run; fresh20 stays untouched. Reading: the matcher can only move the accept thre
 does not separate "derive from the Ojibwe word" from "come from the Ojibwe word" any better than a synonym list does, and the units it
 scores are the rules' own atoms, many of which are wrongly read (the unmet-atom triage of 19b: 14 of 72 had no source argument at all).
 Next candidate, not tried: a small local multilingual NLI/cross-encoder scoring claim against sentence, as a feature or as the check.
+
+## Run 20b (2026-10-23): a local multilingual NLI model as the check, and as a matcher feature — cross-validated on the eight existing sets (run 20 NOT run)
+Model: MoritzLaurer/multilingual-MiniLMv2-L6-mnli-xnli (MIT; MNLI + XNLI: en, es, fr, de among its languages, no ja), ONNX, run locally through
+@huggingface/transformers (scratch install outside the repo); sentence (brackets cleaned) as premise, claim as hypothesis; 0.1 s a pair. Scores
+(entail, neutral, contradict) for all 297 pairs; script eval/meaning/atoms/learn-nli.mjs. Leave-one-set-out; rows are those the atoms arm reads
+as not-C (as 19b). "nli": E when entailment ≥ a threshold chosen on the other sets (best accuracy with false accepts at most FACAP).
+Pooled, E against not-E (false accepts in brackets): rules 63.1 (5.5)
+ nli, FACAP 10 → 72.2 (11.9) · FACAP 5 → 64.3 (3.7) · FACAP 3 → 59.1 (2.8) · FACAP 0 → 50.8 (0.9)
+ matcher with the NLI unit, NEGW 3 → 71.4 (26.6) · NEGW 5 → 70.2 (21.1) (false accepts too high at every cap)
+fresh19 under nli: FACAP 10 → 59.1, 17 of 47 E accepted, fa 17%; FACAP 5 → 57.0, 8 of 47, fa 2%. Rules there: 47.3, 1 of 47, fa 7%.
+Bar (freeze only if it beats the rules without raising false accepts): MET ONLY NARROWLY and only by the strict variant: nli at FACAP 5 is
++1.2 points pooled (about 3 pairs of 297) with false accepts 3.7 against 5.5, but loses on heldout (82.6 → 65.2). The variant with the real gain
+(FACAP 10, +9.1 points) raises false accepts to 11.9 and fails the bar. The matcher's own units still inflate false accepts; the NLI score is
+the whole gain. NLI alone is the first thing in this line that moves fresh19 and fresh-ml materially (fresh-ml 59.3 → 76.3 at FACAP 10).
+Not frozen; run 20 not run. Open: which false-accept budget to freeze at (the bar names none beyond "not raised"); ja is unscored (the model has
+no ja), and 16 + 4 per-language cross pairs in fresh19 and fresh-ml are the only ja-adjacent check.
