@@ -186,7 +186,7 @@ function posPrior(lang) {
   return posPriors.get(lang);
 }
 const DROP_CLASSES = new Set(["ADP", "DET", "PRON", "AUX", "SCONJ", "CCONJ", "PART", "INTJ", "PUNCT", "VERB", "SYM"]);
-function classOf(lang, token) {
+export function classOf(lang, token) {
   const row = posPrior(lang)?.[token];
   if (!row) return null;
   return Object.entries(row).sort((a, b) => b[1] - a[1])[0][0];
