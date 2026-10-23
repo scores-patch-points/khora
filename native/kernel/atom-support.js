@@ -42,8 +42,8 @@ export function canonical(C) {
   }
   return out;
 }
-export function atomSupport(C0, S, { claimLang = "en", sourceLang = "en", same = null, keysOf = null, unread = [] } = {}) {
-  const C = canonical(C0);
+// the meeting tests over one claim and one source (its referents' names on each side), shared with the learned matcher (atom-match.js)
+export function meeters(C, S, { claimLang = "en", sourceLang = "en", same = null, keysOf = null } = {}) {
   const keys = (lang, w) => { const ks = new Set([stem(w)]); if (keysOf && lang !== "en") for (const k of keysOf(lang, low(w)) ?? []) for (const x of words(k)) ks.add(stem(x)); return ks; };
   const wordMeet = (a, b) => {
     if (stem(a) && stem(a) === stem(b)) return true;
@@ -96,6 +96,12 @@ export function atomSupport(C0, S, { claimLang = "en", sourceLang = "en", same =
   const argsMeet = (cargs, sargs) => { let j = 0; for (const a of cargs) { while (j < sargs.length && !refMeet(a, sargs[j])) j++; if (j >= sargs.length) return false; j++; } return true; };
   // a source that only reports or hedges a fact does not support it asserted
   const standing = (c, s) => !s.hedged || !!c.hedged;
+  return { wordMeet, refMeet, figMeet, predMeet, predWords, argsMeet, standing, canon };
+}
+export { low, words, stem, argText, DEG };
+export function atomSupport(C0, S, { claimLang = "en", sourceLang = "en", same = null, keysOf = null, unread = [] } = {}) {
+  const C = canonical(C0);
+  const { wordMeet, refMeet, predMeet, predWords, argsMeet, standing } = meeters(C, S, { claimLang, sourceLang, same, keysOf });
   const table = [];
   for (const c of C) {
     const cargs = c.args ?? [];

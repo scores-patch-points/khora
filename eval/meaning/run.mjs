@@ -67,7 +67,11 @@ const arms = {
 // contradicted when either finds a contradiction. MEANING_ATOMS=produce adds the learned producer, predicate chooser and filter.
 let ATOMS = null;
 if (process.env.MEANING_ATOMS && SLIM && arms["grammar-ud"]) {
-  const { readAtoms } = await import("../../native/organs/read-atoms.js"), { atomSupport } = await import("../../native/kernel/atom-support.js");
+  const { readAtoms, cleanText } = await import("../../native/organs/read-atoms.js"), { atomSupport } = await import("../../native/kernel/atom-support.js");
+  const { matchVerdict, matchUnits } = await import("../../native/kernel/atom-match.js");
+  const MATCHER = process.env.MEANING_MATCHER ? JSON.parse(fs.readFileSync(process.env.MEANING_MATCHER, "utf8")) : null;
+  // MEANING_VECTORS=<dir>: the aligned word vectors (word-vectors.js) as matcher features
+  const VECTORS = process.env.MEANING_VECTORS ? (await import("../../native/organs/word-vectors.js")).loadVectors(process.env.MEANING_VECTORS) : null;
   const { makeGlossary, makeSynonymy, loadTranslations } = await import("../../native/organs/wikt-gloss.js"), { PACKS } = await import("../../native/adapters/text/grammar-packs.js");
   const GE = await import("../../native/adapters/text/grammar-en.js");
   const T = loadTranslations(process.env.FOLD_WIKT_TRANSLATIONS ?? "/Users/mlacy/Downloads/workspace/data/wiktionary-translations");
@@ -85,7 +89,10 @@ if (process.env.MEANING_ATOMS && SLIM && arms["grammar-ud"]) {
     const ctx = contextOf(p), cl = sideLang(p.lang ?? "en", "claim"), sl = sideLang(p.lang ?? "en", "source");
     const A = read(p.claim, cl, ctx ? { title: ctx.title, previous: [] } : null, "claim"), B = read(p.sentence, sl, ctx, "source");
     if (!A || !B) return null;
-    return { ...atomSupport(A.atoms, B.atoms, { claimLang: cl, sourceLang: sl, same, keysOf, unread: A.unread }), claimAtoms: A.atoms, sourceAtoms: B.atoms };
+    const o = { claimLang: cl, sourceLang: sl, same, keysOf, unread: A.unread, sourceText: cleanText(p.sentence).text, vectors: VECTORS };
+    // MEANING_MATCHER=<model.json>: the learned matcher decides E (atom-match.js); MEANING_ATOMS_UNITS=<file.jsonl>: its features, for training
+    const r = MATCHER ? matchVerdict(A.atoms, B.atoms, o, MATCHER) : atomSupport(A.atoms, B.atoms, o);
+    return { ...r, claimAtoms: A.atoms, sourceAtoms: B.atoms, units: process.env.MEANING_ATOMS_UNITS ? matchUnits(A.atoms, B.atoms, o).units.map((u) => ({ what: u.what, options: u.options })) : null };
   };
   arms.atoms = arms["grammar-ud"];
 }
@@ -111,7 +118,8 @@ for (const [name, f] of Object.entries(sets)) {
       let v;
       if (arm === "wording") v = lexical(p.claim, p.sentence);
       else { const A = arms[arm](p.claim, lang, "claim"), B = arms[arm](p.sentence, lang, "source", contextOf(p)); let why = null; if (!A || !B) { v = "G"; gap++; } else { const r = verdict(A, B, arm === "grammar-defs" || arm === "grammar-ud" || arm === "atoms" ? { relations: DEFS } : {}); v = r.v; why = r.why; if (v !== "C" && jset.has(String(p.id))) { v = "C"; why = "janus"; }
-          if (arm === "atoms" && v !== "C") { const at = ATOMS(p); if (at?.verdict === "C") { v = "C"; why = "atoms"; } else if (at?.verdict === "E") { v = "E"; why = "atoms"; } if (process.env.MEANING_ATOMS_DUMP && at) fs.appendFileSync(process.env.MEANING_ATOMS_DUMP, JSON.stringify({ set: name, id: p.id, label: p.label, v, claim: p.claim, sentence: p.sentence, table: at.table.map((t) => ({ atom: t.atom.text, state: t.state, by: t.by?.text ?? null })), unread: at.unread, source: at.sourceAtoms.map((a) => a.text) }) + "\n"); } }
+          if (arm === "atoms" && v !== "C") { const at = ATOMS(p), base = v;
+            if (process.env.MEANING_ATOMS_UNITS && at) fs.appendFileSync(process.env.MEANING_ATOMS_UNITS, JSON.stringify({ set: name, id: p.id, label: p.label, lang: p.lang ?? "en", base, rule: at.rule?.verdict ?? at.verdict, units: at.units }) + "\n"); if (at?.verdict === "C") { v = "C"; why = "atoms"; } else if (at?.verdict === "E") { v = "E"; why = "atoms"; } if (process.env.MEANING_ATOMS_DUMP && at) fs.appendFileSync(process.env.MEANING_ATOMS_DUMP, JSON.stringify({ set: name, id: p.id, label: p.label, v, claim: p.claim, sentence: p.sentence, table: at.table.map((t) => ({ atom: t.atom.text, state: t.state, by: t.by?.text ?? null })), unread: at.unread, source: at.sourceAtoms.map((a) => a.text) }) + "\n"); } }
         // MEANING_DUMP=<file.jsonl>: every pair's verdict, basis and claims, per arm, for the failure breakdown
         if (process.env.MEANING_DUMP) fs.appendFileSync(process.env.MEANING_DUMP, JSON.stringify({ set: name, arm, id: p.id, label: p.label, type: p.type ?? p.why ?? null, v, why, claim: p.claim, sentence: p.sentence, C: A, S: B }) + "\n"); }
       const said = v === "E";

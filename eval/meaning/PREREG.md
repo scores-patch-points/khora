@@ -494,3 +494,19 @@ Set committed before any arm ran: eval/meaning/fresh20.json, 96 pairs (48 E, 29 
 over 90 of the 122 sentences and all 18 pages. Label audit by a second agent, labels hidden, from the sentence alone: 96 of 96 agreed
 (fresh20.audit.json). Borderline, kept as given: 849 (a rank without its measure), 860/872 (a sentence cut before its subject, the title
 supplies it), 852, 804 (third after two is smaller than both), 807 (a bearing read from the other end).
+
+## Run 20a (2026-10-23): a LEARNED atom matcher, with and without aligned word vectors — cross-validated on the eight existing sets (negative; run 20 NOT run)
+Matcher (native/kernel/atom-match.js): each claim atom is met by its best source atom, or left aside, under a linear score of what the rules
+measure; each unread claim word is scored by whether the source sentence carries it; a pair is supported when its weakest unit scores above
+zero. Trained on pair labels only (E against not-E), leave-one-set-out over main, cf, heldout, other, fresh, relations, fresh-ml, fresh19.
+Vector features (native/organs/word-vectors.js; ~/.cache/live_priors/vectors/muse5): MUSE aligned vectors for en, es, fr, de; ja fastText
+mapped into that space by Procrustes on MUSE's ja-en dictionary (held-out dictionary pairs: nearest English word right 198 of 511).
+Pooled accuracy, E against not-E, by the penalty on a wrong accept (NEGW):
+ rules 63.1 · no vectors: NEGW 1 → 61.5, 3 → 67.5, 8 → 63.1 · with vectors: NEGW 1 → 58.7, 3 → 67.8, 5 → 63.9
+ At NEGW 3 (best pooled) false accepts rise: fresh19 6.5 → 10.9 (no vectors 17.4), heldout 14.3 → 42.9, main 7.1 → 28.6. At NEGW 5, where false
+ accepts do not rise, it accepts 2 of 47 fresh19 E pairs. The vectors add 0.3 points pooled at NEGW 3: nothing.
+Bar set before this (freeze only if it beats the rules without raising false accepts): NOT MET. The matcher is not frozen and run 20 is not
+run; fresh20 stays untouched. Reading: the matcher can only move the accept threshold. Word nearness (a bag of word vectors per predicate)
+does not separate "derive from the Ojibwe word" from "come from the Ojibwe word" any better than a synonym list does, and the units it
+scores are the rules' own atoms, many of which are wrongly read (the unmet-atom triage of 19b: 14 of 72 had no source argument at all).
+Next candidate, not tried: a small local multilingual NLI/cross-encoder scoring claim against sentence, as a feature or as the check.
