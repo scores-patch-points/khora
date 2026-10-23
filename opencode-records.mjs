@@ -30,7 +30,8 @@ export function readRecords(doc) {
     const subject = (/\s[—–-]\s(.+)$/.exec(head) ?? [])[1]?.trim() ?? null;
     const effective = (/effective (\d{4}-\d{2}-\d{2})/i.exec(head) ?? [])[1] ?? null;
     const fields = {};
-    for (const m of text.matchAll(/(?:^|[.\n]\s*)([A-Z][A-Za-z ]{1,28}?):\s*([^.\n;]+)/g)) {
+    // a value runs to the end of its sentence (". " or a line end), so "1.5 m" and "A; B; C" stay whole
+    for (const m of text.matchAll(/(?:^|[.\n]\s*)([A-Z][A-Za-z ]{1,28}?):\s*([^\n]+?)(?=\.\s|\.$|\n|$)/g)) {
       const label = lower(m[1]).trim();
       if (!(label in fields)) fields[label] = m[2].trim();
     }
@@ -80,7 +81,7 @@ export function computeNote({ doc, ask, maxWitnesses = 15 }) {
   const { records, slots } = doc.read ?? (doc.read = readRecords(doc));
   const aw = new Set(words(ask).map(sing)), a = lower(ask);
   const names = [...new Set([...(ask.match(new RegExp(ID.source, "g")) ?? []), ...(ask.match(NAMES) ?? [])])];
-  const lines = [], addr = (r) => `${doc.name}#p${r.page}`;
+  const lines = [], facts = [], addr = (r) => `${doc.name}#p${r.page}`;
 
   // 0. one hop: a record the ask names by id (MIN-3, IR-20011) lends the names written in its fields ("Owner: Hana Yilmaz"), so a
   //    question about "that person" can be followed to statements about them elsewhere in the document
@@ -105,11 +106,13 @@ export function computeNote({ doc, ask, maxWitnesses = 15 }) {
     const values = [...new Map(chain.map((c) => [`${c.value}|${c.effective}`, c])).values()];
     const cur = values.at(-1);
     current.push(cur);
+    facts.push({ op: "value", entity: st.entity, attribute: st.attribute, value: cur.value, unit: cur.unit, earlier: values.slice(0, -1).map((c) => c.value), at: `${doc.name}#p${cur.page}` });
     lines.push(`- ${st.attribute} at ${st.entity}: CURRENT ${cur.value} ${cur.unit} (${cur.effective ? `effective ${cur.effective}` : "original"}, ${doc.name}#p${cur.page})` +
       (values.length > 1 ? `; earlier: ${values.slice(0, -1).reverse().map((c) => `${c.value} ${c.unit} (${c.effective ? `effective ${c.effective}` : "original"}, ${doc.name}#p${c.page})`).join("; ")}` : ""));
   }
   if (current.length >= 2 && /\b(sum|total|add|plus|combined)\b/.test(a)) {
     const units = new Set(current.map((c) => lower(c.unit)));
+    if (units.size === 1) facts.push({ op: "sum", value: current.reduce((n, c) => n + c.value, 0), unit: current[0].unit, entities: current.map((c) => c.entity) });
     lines.push(units.size === 1 ? `- sum of the current values above: ${current.reduce((n, c) => n + c.value, 0)} ${current[0].unit}` : `- not added: the values are in different units (${[...units].join(", ")})`);
   }
 
@@ -127,6 +130,7 @@ export function computeNote({ doc, ask, maxWitnesses = 15 }) {
       const iv = intervalOf(ask), dslot = Object.entries(sl).find(([, d]) => d.type === "date")?.[0];
       if (iv && dslot) { rs = rs.filter((r) => r.fields[dslot] >= iv.from && r.fields[dslot] <= iv.to); filters.push(`${dslot} in ${iv.said}`); }
       if (op === "count") {
+        facts.push({ op: "count", kind, value: rs.length, ids: rs.map((r) => r.id), entities: names });
         lines.push(`- count of ${kind} records where ${filters.join(", ") || "(no filter)"}: ${rs.length}` + (rs.length ? ` — ${rs.slice(0, maxWitnesses).map((r) => `${r.id ?? "?"} (${addr(r)})`).join(", ")}${rs.length > maxWitnesses ? ", …" : ""}` : ""));
       } else {
         const numSlots = Object.entries(sl).filter(([l, d]) => d.type === "number" && words(l).some((w) => aw.has(sing(w))));
@@ -135,11 +139,60 @@ export function computeNote({ doc, ask, maxWitnesses = 15 }) {
           if (!vals.length) continue;
           const best = op === "max" ? Math.max(...vals.map((x) => x.v)) : Math.min(...vals.map((x) => x.v));
           const ties = vals.filter((x) => x.v === best);
+          facts.push({ op, kind, slot: label, value: best, ids: ties.map((x) => x.r.id) });
           lines.push(`- ${op === "max" ? "largest" : "smallest"} ${label} among ${rs.length} ${kind} records${filters.length ? ` where ${filters.join(", ")}` : ""}: ${best} — ${ties.map((x) => `${x.r.id ?? "?"} (${addr(x.r)})`).join(", ")}${ties.length > 1 ? " (tie)" : ""}`);
         }
       }
     }
   }
-  if (!lines.length) return { gap: "nothing-computed" };
-  return { note: `<fold-computed source="computed by the machine from the attached document's own records and statements; each value cites its page">\n${lines.join("\n")}\n</fold-computed>`, lines: lines.length };
+  // 2b. a record the ask names by id or exact subject, with no operation asked: its fields, as written
+  if (!op) for (const r of records) {
+    if (!(r.id && names.includes(r.id)) && !(r.subject && names.includes(r.subject))) continue;
+    const f = Object.entries(r.fields).slice(0, 10).map(([l, v]) => `${l}: ${v}`).join("; ");
+    if (f) { lines.push(`- ${r.kind ?? "record"}${r.id ? " " + r.id : ""}${r.subject ? " — " + r.subject : ""} (${addr(r)}): ${f}`); facts.push({ op: "record", id: r.id, subject: r.subject, fields: r.fields }); }
+  }
+  // 3. a premise in the ask ("the archive says it is 91, correct?") compared with what the document says
+  if (/\b(says?|said|stated?|correct|right|true|isn't it|is it)\b/.test(a)) {
+    const asserted = (ask.replace(new RegExp(ID.source, "g"), " ").replace(/\b(19|20)\d{2}-\d{2}-\d{2}\b/g, " ").match(/\b\d[\d,.]*\b/g) ?? []).map((x) => Number(x.replace(/,/g, "")));
+    for (const f of facts.filter((x) => x.op === "value")) for (const n of asserted) {
+      if (n === f.value) lines.push(`- premise check: ${n} AGREES with the document (${f.attribute} at ${f.entity}, ${f.at})`);
+      else lines.push(`- premise check: ${n} is CONTRADICTED — the document gives ${f.value} ${f.unit} for ${f.attribute} at ${f.entity} (${f.at})${f.earlier.includes(n) ? `; ${n} was an earlier value, since replaced` : ""}`);
+    }
+  }
+  // 4. absence: a value the ask asks for that no statement, slot or page gives. The attachment is the whole scope of the question, so a
+  //    closed-world answer is honest — but only when the asked words never meet in one sentence anywhere; otherwise the pages decide.
+  if (!facts.length) {
+    const m = /\bwhat (?:is|are|was|were) (?:the |our |a |an )?((?:[a-z][a-z\-]*\s?){1,6}?)(?=\s(?:at|of|for|in|per|on)\b|\?|$)/i.exec(ask);
+    const asked = m ? words(m[1]).filter((w) => !["current", "maximum", "minimum", "default", "the", "a", "an"].includes(w)) : [];
+    if (asked.length >= 1) {
+      const meet = records.some((r) => r.text.split(/(?<=[.!?])\s+/).some((sent) => { const sw = new Set(words(sent).map(sing)); return asked.every((w) => sw.has(sing(w))); }));
+      if (!meet) lines.push(`- not in ${doc.name}: no statement, record field or sentence gives "${m[1].trim()}" (searched ${records.length} pages; the words ${asked.map((w) => `"${w}"`).join(" + ")} never occur together in one sentence)`), facts.push({ op: "absent", asked: m[1].trim() });
+    }
+  }
+  if (!lines.length) return { gap: "nothing-computed", facts };
+  return { facts, note: `<fold-computed source="computed by the machine from the attached document's own records and statements; each value cites its page">\n${lines.join("\n")}\n</fold-computed>`, lines: lines.length };
+}
+
+/** The answer against the computed facts for its ask: a sentence that speaks of a fact's thing but gives none of its numbers is
+ *  CONTRADICTED, with the fact as evidence (the plugin hands a contradicted sentence back once, with the evidence). Conservative:
+ *  a sentence with no number, or one that names nothing a fact is about, is never judged. */
+export function checkAgainstFacts(text, facts) {
+  const sentences = String(text ?? "").replace(/\*\*/g, "").split(/(?<=[.!?])\s+|\n+/).map((s) => s.trim()).filter(Boolean);
+  const numsIn = (s) => (s.replace(new RegExp(ID.source, "g"), " ").replace(/\b(19|20)\d{2}-\d{2}-\d{2}\b/g, " ").match(/\b\d[\d,]*(?:\.\d+)?\b/g) ?? []).map((x) => Number(x.replace(/,/g, "")));
+  const claims = [];
+  for (const f of facts ?? []) {
+    if (!["value", "count", "max", "min", "sum"].includes(f.op)) continue;
+    const about = (s) => f.op === "value" ? s.includes(f.entity)
+      : f.op === "sum" ? /\b(sum|total|combined|together)\b/i.test(s)
+      : (f.ids ?? []).some((id) => id && s.includes(id)) || words(f.kind ?? "").every((w) => words(s).map(sing).includes(sing(w)));
+    for (const s of sentences) {
+      if (!about(s)) continue;
+      const ns = numsIn(s);
+      if (!ns.length || ns.includes(f.value)) continue;
+      if (f.op === "value" && f.earlier?.some((e) => ns.includes(e)) && /\b(earlier|was|previous|before|replac|supersed|original)/i.test(s)) continue; // naming the replaced value as replaced is right
+      const said = f.op === "value" ? `${f.attribute} at ${f.entity} is ${f.value} ${f.unit} (${f.at})` : f.op === "sum" ? `the sum is ${f.value} ${f.unit}` : `${f.op === "count" ? "the count" : f.op === "max" ? `the largest ${f.slot}` : `the smallest ${f.slot}`} is ${f.value}${f.ids?.length ? ` (${f.ids.slice(0, 5).join(", ")})` : ""}`;
+      claims.push({ text: s, standing: "contradicted", evidence: { source: "records", text: `The attached document's records say: ${said}.` } });
+    }
+  }
+  return claims;
 }

@@ -48,3 +48,15 @@ test("nothing computable is a gap, not a guess; intervals read quarters and sing
   assert.deepEqual(intervalOf("in Q2 2026"), { from: "2026-04-01", to: "2026-06-31", said: "Q2 2026" });
   assert.equal(intervalOf("in March 2026").from, "2026-03-01");
 });
+
+test("the answer is checked against the computed facts: a wrong number is contradicted, the right one and a replaced value named as replaced are not", async () => {
+  const { checkAgainstFacts } = await import("./opencode-records.mjs");
+  const facts = computeNote({ doc: { ...doc }, ask: "What is the maximum daily dose at North Clinic now?" }).facts;
+  assert.equal(checkAgainstFacts("The maximum daily dose at North Clinic is 30 milligrams.", facts).length, 0);
+  assert.equal(checkAgainstFacts("The maximum daily dose at North Clinic is 30 milligrams. It was 40 before the amendment.", facts).length, 0);
+  const bad = checkAgainstFacts("The maximum daily dose at North Clinic is 40 milligrams.", facts);
+  assert.equal(bad.length, 1); assert.equal(bad[0].standing, "contradicted"); assert.match(bad[0].evidence.text, /is 30 milligrams/);
+  const cf = computeNote({ doc: { ...doc }, ask: "How many urgent visit notes were filed for North Clinic between April and June 2026?" }).facts;
+  assert.equal(checkAgainstFacts("There were 3 urgent visit notes for North Clinic.", cf).length, 1);
+  assert.equal(checkAgainstFacts("There were 2 urgent visit notes for North Clinic: V-101 and V-103.", cf).length, 0);
+});
