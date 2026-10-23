@@ -92,6 +92,7 @@ import { standingOf } from "./opencode-standing.mjs";
 import { admit as admitChange, fold as foldRecord, recordNote, recordSink, reconcile, nextVoid, reasonFor, provenance, refusalsFor, liveAnswers } from "./opencode-record.mjs";
 import { dreamTask } from "./opencode-dream.mjs";
 import * as eot from "./opencode-eot.mjs";
+import * as register from "./opencode-register.mjs";
 import { checkAnswer } from "./opencode-ledger-check.mjs";
 import { mark as markNote, claim as claimItem, done as doneItem, read as readNotes, noteFor, stateFor, turnsFile, writeTurnsFile, turnsOf, root as notesRoot, projectKey, projectRoot, plans as workPlans, scent as scentNote, scentsOf, stuckScents, scentClose, releaseAnswered, releaseByMerge, releaseByQuestion, releaseNested, ident as identTask, universeInfo } from "./opencode-worknotes.mjs";
 import { metaWorkerTick, runEcology } from "./opencode-ecology.mjs";
@@ -416,6 +417,20 @@ async function onContext(body) {
     const agent = String(body.sessionID ?? "");
     const task = taskFor(body, agent);
     if (Array.isArray(body.turns)) writeTurns({ task, agent, turns: body.turns });
+    // THE REGISTER rides with the notes (opencode-register.mjs): the facts the person stated in this session, written once as `fact`
+    // marks and projected here as prose the model can quote. The plugin pins the block in event.system, which native compaction never
+    // summarises (compaction.ts skips `system`), so a model-written checkpoint cannot lose a stated binding (FAILURES.md F1). The ask
+    // ingested is the person's own words (`userAsk`): on a gather turn the plugin rewrites the last message, and page sentences are not facts
+    // the person stated.
+    if (REGISTER_ON) {
+      try {
+        register.ingestTurns({ task, agent, turns: registerTurns(body, typeof body.userAsk === "string" ? body.userAsk : turn.ask) });
+        const reg = register.registerOf(task, agent);
+        const note = register.registerNote(reg);
+        if (note) { out.register = note; out.registerLegend = register.REGISTER_LEGEND; turn.register = reg.facts.length; counters.registersServed = (counters.registersServed ?? 0) + 1; }
+        else turn.register = 0;
+      } catch { /* the register never blocks a turn */ }
+    }
     try { const commons = await commonsNote({ task, agent, ask: turn.ask }, { prosify: commonsProsify }); if (commons) { out.commons = commons; turn.commons = commons.length; } } catch { /* never blocks */ }
   }
   if (projected.drop) {
@@ -1121,6 +1136,29 @@ function savePerceiveConfig(patch) {
 // selected by the asker's stance). The work runs in a worker thread: the door is one event loop, and reading pages is seconds of
 // synchronous work that every other request would wait behind. At most two gathers at once; a slow one is cut at the budget.
 let gathersRunning = 0;
+// THE REGISTER (opencode-register.mjs): the facts the person stated in this session, kept as `fact` marks in the task's EOT log under the
+// session, projected to `<fold-register>` and answered mechanically (M1–M6, no model). The plugin asks it BEFORE route and gather on a new
+// ask, so a question the conversation itself answers never becomes web research (FAILURES.md F5: "what is the mascot service called"
+// went to a mascot-cleaning company's pages), and onContext projects it again so the block rides with the other notes. FOLD_REGISTER=0 off.
+const REGISTER_ON = process.env.FOLD_REGISTER !== "0";
+function registerTurns(body, ask) {
+  const prior = (Array.isArray(body.turns) ? body.turns : []).filter((t) => t && typeof t.ask === "string").map((t, i) => ({ n: Number(t.n) || i + 1, ask: t.ask }));
+  return String(ask ?? "").trim() ? [...prior, { n: prior.length + 1, ask: String(ask) }] : prior;
+}
+function onRegister(body) {
+  if (!REGISTER_ON) return { ok: false, gap: "off" };
+  const agent = String(body.sessionID ?? body.agent ?? "");
+  if (!identTask(agent)) return { ok: false, gap: "bad-agent" };
+  const task = taskFor(body, agent);
+  const ask = String(body.ask ?? "");
+  const turns = registerTurns(body, ask);
+  const ingested = register.ingestTurns({ task, agent, turns });
+  const reg = register.registerOf(task, agent);
+  const note = register.registerNote(reg);
+  const answer = body.op === "note" || !ask.trim() ? null : register.registerAnswer(ask, reg, turns);
+  return { ok: true, facts: reg.facts.length, wrote: ingested.wrote, gaps: ingested.gaps.length, note, answer, legend: register.REGISTER_LEGEND };
+}
+
 async function onGather(body) {
   const ask = String(body.ask ?? "").trim();
   if (!ask) return { ok: false, error: "no ask" };
@@ -1158,7 +1196,9 @@ async function onLongform(body) {
     if (op === "start") {
       const ask = String(body.ask ?? "").trim();
       const topic = typeof body.topic === "string" && body.topic.trim() ? body.topic.trim().slice(0, 300) : ask;
-      const g = await onGather({ ask, topic, kind: "account", softMs: Number(body.softMs) || 20_000, budgetMs: Number(body.budgetMs) || 90_000, plan: body.plan });
+      // a piece is read for longer than a question is: the soft deadline has a floor (FOLD_LONGFORM_SOFT_MS, 45 s), under the hard budget the caller waits for
+      const softMs = Math.max(Number(body.softMs) || 0, Number(process.env.FOLD_LONGFORM_SOFT_MS ?? 45_000));
+      const g = await onGather({ ask, topic, kind: "account", softMs, budgetMs: Math.max(Number(body.budgetMs) || 90_000, softMs + 30_000), plan: body.plan });
       if (!g?.ok) return { ok: false, error: g?.error ?? "the gather failed" };
       const s = longformStart({ ask, topic, gathered: g.result, outline: body.outline, freeform: body.freeform });
       if (s.gap) return { ok: false, error: s.gap.reason };
@@ -2086,6 +2126,7 @@ export async function answer(body, opts = {}) {
     case "trail": return onTrail(body);
     case "event": return onEvent(body);
     case "perceive": return onPerceive(body);
+    case "register": return onRegister(body);
     case "gather": return onGather(body);
     case "longform": return onLongform(body);
     case "route": {
@@ -2334,7 +2375,7 @@ export async function route(req, res, { log = () => {} } = {}) {
   if (url !== "/v1/hooks/opencode") return false;
   if (req.method === "GET") {
     res.writeHead(200, { "content-type": "application/json" });
-    res.end(JSON.stringify({ door: "opencode", priors: seedStatus(), senses: huntOrgans({ stateDir: STATE }), events: ["context", "surf", "gather", "route", "mark", "claim", "done", "notes", "scent", "admit", "record", "dream", "provenance", "snip", "swarm", "cube", "ground", "nextVoid", "chase", "title", "event", "prompt", "trail", "perceive", "draft", "act", "memory", "refs", "system"] }));
+    res.end(JSON.stringify({ door: "opencode", priors: seedStatus(), senses: huntOrgans({ stateDir: STATE }), events: ["context", "surf", "gather", "route", "register", "mark", "claim", "done", "notes", "scent", "admit", "record", "dream", "provenance", "snip", "swarm", "cube", "ground", "nextVoid", "chase", "title", "event", "prompt", "trail", "perceive", "draft", "act", "memory", "refs", "system"] }));
     return true;
   }
   if (req.method !== "POST") return false;
