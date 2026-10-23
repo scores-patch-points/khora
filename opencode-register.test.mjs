@@ -65,6 +65,29 @@ test("a message wrapped in quotes by the client is stored without them", () => {
   assert.equal(R.record({ sessionID: "i", ask: '"Our mascot service is called Orbit."' })[0].text, "Our mascot service is called Orbit.");
 });
 
+test("identity: a paraphrased update replaces the old statement; near-miss subjects stay apart", async () => {
+  process.env.FOLD_REGISTER_IDENTITY = "1";
+  try {
+    fresh();
+    R.record({ sessionID: "j", ask: "The Lisbon office has 31 desks." });
+    R.record({ sessionID: "j", ask: "Our staging cluster is named Pelican." });
+    R.record({ sessionID: "j", ask: "Our production cluster is named Heron." });
+    R.record({ sessionID: "j", ask: "Correction: the Lisbon site now seats 36." });
+    R.record({ sessionID: "j", ask: "Update: the production cluster is now named Falcon." });
+    const { note } = R.registerNote({ sessionID: "j", ask: "x" });
+    assert.match(note, /\(replaced at turn 4\) The Lisbon office has 31 desks\./);
+    assert.match(note, /\[turn 2\] Our staging cluster is named Pelican\./);
+    assert.match(note, /\[turn 3\] \(replaced at turn 5\) Our production cluster is named Heron\./);
+  } finally { delete process.env.FOLD_REGISTER_IDENTITY; }
+});
+
+test("identity is off unless asked for: the same paraphrase does not replace without the flag", () => {
+  fresh();
+  R.record({ sessionID: "k", ask: "The Lisbon office has 31 desks." });
+  R.record({ sessionID: "k", ask: "Correction: the Lisbon site now seats 36." });
+  assert.doesNotMatch(R.registerNote({ sessionID: "k", ask: "x" }).note, /\(replaced at turn/);
+});
+
 test("no statements, no block", () => {
   fresh();
   assert.equal(R.registerNote({ sessionID: "g", ask: "Explain consistent hashing in 600 words." }).gap, "empty");
