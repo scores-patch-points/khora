@@ -605,3 +605,14 @@ pairs plus those the chain calls C; "rules" = the atoms arm; accuracy is E again
 Reading: neither DMD conclusion reproduces the 5% operating point, and nothing is frozen from 21b or 21b′. A DMD-based cap needs a conclusion
 that carries the cost of a false accept itself; the two tried carry it as zero (accuracy) or as infinite (pure prefix). Run 20's arm (te 0.97)
 and its recorded result stand; run 21 is not run on new pairs.
+
+## Run 21c (2026-10-23): the false-accept SHARE as the conclusion — registered BEFORE the run (the user's rule for the stop)
+Rule as given: take the conclusion from the labelled pairs in the ranking (strictest score first), count a false accept against it as the share of
+accepted claims that were not supported, and stop where that share first moves. Operationalised, for te (E) and tc (C): over the top-d ranked
+training pairs the share s(d) = (not supported among them) / d; the conclusion derive(prefix) is the lowest score at which s is still at the value
+it started with (the first value, 0); dmdWindow gives the shallowest depth at which the prefix already gives the whole set's conclusion. The cap is
+then whatever share the ranking shows at that stop, with no number chosen.
+Prediction, written before running: this is the pure-prefix conclusion already run post hoc as 21b′ (the first unsupported pair moves the share off
+zero), so it will give the same thresholds (0.99 in all nine folds), the same depths (8–16 of ~330), E accepted 8 of 194, false-accept 0.5%,
+C named 40 of 129, false-C 2.7%. If it differs, the difference is in code, not in the rule. Evaluation bars as 21b: E, false accepts not above
+the rules' pooled rate (3.5% on these rows) and accuracy above the rules'; C, C1–C4 of 21a.
