@@ -11,7 +11,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 
-const VERB = "is|are|was|were|has|have|had|ends?|starts?|begins?|moved|changed|switched|renamed|runs?|costs?|pays?|owns?|lives?|means|equals|called|named|will be|stays?|opens?|closes?";
+const VERB = "is|are|was|were|has|have|had|ends?|starts?|begins?|moved|changed|switched|renamed|runs?|costs?|pays?|owns?|lives?|means|equals|called|named|will be|stays?|opens?|closes?|seats?|holds?|hosts?|employs?|uses?|supports?|requires?|takes?|measures?|totals?|reaches?|contains?|houses?|launch(?:es)?|departs?|changes?|rotates?";
 const VERB_RE = new RegExp(`\\b(?:${VERB})\\b`, "i");
 const NOT_A_STATEMENT = /^(?:you (?:told|said|mentioned|wrote|asked|promised)|earlier you|what|which|who|whom|whose|when|where|why|how|is|are|do|does|did|can|could|would|will|should|please|explain|write|list|describe|tell|give|show|make|compare|summari[sz]e|in roughly|in about|read|run|check|find|fix|add|remove|create|update the|can you)\b/i;
 const CUE = /^(?:update|note|fyi|heads up|reminder|correction|also|ps)\s*[:,\-–]\s*/i;
@@ -59,6 +59,38 @@ const same = (a, b) => {
   return small.size >= 2 && [...small].every((w) => big.has(w));
 };
 
+
+// ── identity (FOLD_REGISTER_IDENTITY=1): when is a later statement about the SAME referent as an earlier one?
+// Word overlap alone misses a paraphrase ("the Lisbon site now seats 36" vs "the Lisbon office has 31 desks"), and a looser rule
+// merges what must stay apart ("the staging cluster" vs "the production cluster"). A statement replaces an earlier one only when
+// four things hold together; otherwise both stay, because a wrong merge is worse than a missed one:
+//   1. the later one says it is a change (an update cue, "now", "moved", "pushed" ...);
+//   2. both carry the same TYPE of value (a date, a duration, a count, money, a name);
+//   3. the subjects share a rare word (one that few subjects in this conversation use);
+//   4. neither subject has a modifier the other lacks (staging / production), the heads (office / site) may differ.
+const STOP = new Set(["for", "of", "the", "a", "an", "our", "this", "that", "to", "in", "on", "at", "and", "new"]);
+const stem = (w) => (w.length > 3 && w.endsWith("s") && !w.endsWith("ss") ? w.slice(0, -1) : w);
+const toks = (subject) => String(subject ?? "").split(/\s+/).filter((w) => w && !STOP.has(w)).map(stem);
+export const valueType = (text) => {
+  if (/\d{4}-\d{2}-\d{2}|\b(?:january|february|march|april|may|june|july|august|september|october|november|december)\b/i.test(text)) return "date";
+  if (/\b\d{1,2}:\d{2}\b/.test(text)) return "time";
+  if (/\b\d+\s*(?:minute|hour|day|week|month|second)s?\b/i.test(text)) return "duration";
+  if (/(?:EUR|USD|GBP|€|\$|£)\s*[\d,.]+|[\d,.]+\s*(?:EUR|USD|GBP|euros?|dollars?)/i.test(text)) return "money";
+  if (/\b\d[\d,.]*\b/.test(text)) return "count";
+  if (/\b(?:called|named)\b/i.test(text)) return "name";
+  return "other";
+};
+const CHANGE = /\b(?:update|correction|moved|changed|switched|renamed|replaced|pushed|now|instead|no longer|revised)\b/i;
+export const sameReferent = (oldE, newE, subjectDF) => {
+  if (!oldE.subject || !newE.subject || !CHANGE.test(newE.text)) return false;
+  if (valueType(oldE.text) !== valueType(newE.text) || valueType(newE.text) === "other") return false;
+  const A = toks(oldE.subject), B = toks(newE.subject), a = new Set(A), b = new Set(B);
+  if (![...a].some((w) => b.has(w) && (subjectDF.get(w) ?? 0) <= 3)) return false;
+  const headA = A.at(-1), headB = B.at(-1);
+  const oddA = A.filter((w) => !b.has(w) && w !== headA), oddB = B.filter((w) => !a.has(w) && w !== headB);
+  return !(oddA.length && oddB.length);
+};
+
 const DIR = () => process.env.FOLD_REGISTER_DIR ?? path.join(os.homedir(), ".fold", "register");
 const sessions = new Map();
 const file = (sid) => path.join(DIR(), `${String(sid).replace(/[^\w.-]/g, "_")}.json`);
@@ -87,7 +119,13 @@ export function record({ sessionID, ask }) {
       prev = null;
       if (!isStatement(clause)) continue;
       const e = { turn: st.turns, text: clause, subject: subjectOf(clause), by: null };
-      for (const old of st.entries) if (!old.by && same(old.subject, e.subject)) old.by = e.turn;
+      const df = new Map();
+      if (process.env.FOLD_REGISTER_IDENTITY === "1") for (const x of [...st.entries, e]) for (const w of new Set(toks(x.subject))) df.set(w, (df.get(w) ?? 0) + 1);
+      for (const old of st.entries) {
+        if (old.by) continue;
+        if (same(old.subject, e.subject)) old.by = e.turn;
+        else if (process.env.FOLD_REGISTER_IDENTITY === "1" && sameReferent(old, e, df)) { old.by = e.turn; old.via = "identity"; }
+      }
       st.entries.push(e); added.push(e); prev = e;
     }
   }
