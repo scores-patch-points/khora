@@ -534,3 +534,17 @@ all eight existing sets pooled (learn-nli.mjs, FACAP=5); no matcher, no vectors.
 fp32, tokenizer as shipped; scoring eval/meaning/atoms/nli-score.mjs (sentence, brackets cleaned, as premise; claim as hypothesis). Baselines
 on the same pairs: the atoms arm (rules, 67b3d503 reader), grammar-ud, the wording judge. Bars M1–M5 as registered in Run 20 above; M3 is read
 as accuracy at least the atoms arm's and grammar-ud's; M4 a quarter of E accepted. No change to the arm after this commit.
+RESULT (run 20, first and only run of the frozen arm, code as of 1e90f5f8; fresh20 had been seen by no training and no arm before):
+ nli (frozen): accuracy 58.3%, false-accept 0.0% (0 of 48 not-E), false-reject 83.3% (8 of 48 E accepted), contradictions 1 of 29, no gaps.
+ atoms (rules): 51.0%, false-accept 2.1%, false-reject 95.8% (2 of 48 E), contradictions 1 of 29. grammar-ud: 51.0%, same.
+ wording judge: 57.3%, false-accept 8.3%, false-reject 77.1% (11 of 48 E), contradictions 1 of 29.
+ Per language (nli): en 56, es 56, fr 63, de 63, ja 56, cross-language 56; same-language 58.8% (atoms 51.3, wording 56.3). E accepted by
+ language (of 8 each; cross 8): en 1, es 1, fr 2, de 2, ja 1, cross 1. The 5% cap held out of sample: 0 false accepts here, as 3.7% pooled in
+ the cross-validation.
+ M1 PASS (no typed gap). M2 PASS (0%). M3 PASS (58.3 ≥ 51.0 atoms, ≥ 51.0 grammar-ud). M4 FAIL (8 of 48 E accepted, 17%, against a quarter).
+ M5 PASS (58.3 ≥ 57.3, with 0 false accepts against 4). The cross-validated gain held in direction (+7.3 points over the rules; the
+ cross-validation said +1.2), but it is small in absolute terms and the check still accepts one supported claim in six.
+ What it does not do: it names one contradiction in 29 (the claim of 29 C pairs is read as contradiction only when the atoms say so; the NLI
+ contradiction probability is not used by the frozen arm, so using it is a post hoc change, not a result). Japanese is no worse than the
+ other languages here (56%, 1 of 8 accepted), though the model never saw ja; the cross-language English claims over ja/es/fr/de sources
+ score the same as same-language ones (56 vs 59).
