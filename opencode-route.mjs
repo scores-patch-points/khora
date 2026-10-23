@@ -154,6 +154,10 @@ async function englishFacts(text) {
     evaluation: root.upos !== "VERB" && rows.some((r) => depIs(r, "nsubj") && anaphoric(r)) && rows.some((r) => depIs(r, "cop")) && rows.some((r) => r.upos === "ADJ"),
     privateReferent: nouns.some((n) => rows.some((r) => r.head === n.id && depIs(r, "nmod") && r.deprel.includes("poss") && r.feats.Person === "1")),
     referent: nouns.some((n) => n.upos === "PROPN" || modifiedBy(n)),
+    // a definite description of the conversation's OWN thing: no proper name anywhere, and every noun-phrase head (a noun that does not itself modify another
+    // noun) is definite or the speaker's own ("the mascot service", "our deploy window"). "the capital of Mongolia" names Mongolia; "the speed of light" has a
+    // bare head (light): both stay the world's. Identity, not a word list: what has no name in the world can only be the referent this conversation set up.
+    definiteLocal: nouns.length > 0 && !rows.some((r) => r.upos === "PROPN") && nouns.filter((n) => !(depIs(n, "compound") || depIs(n, "flat"))).every((n) => rows.some((r) => r.head === n.id && ((depIs(r, "det") && r.feats.Definite === "Def") || (depIs(r, "nmod") && r.deprel.includes("poss") && r.feats.Person === "1")))),
     onlyDefinite: nouns.length > 0 && nouns.every((n) => rows.some((r) => r.head === n.id && depIs(r, "det") && r.feats.Definite === "Def") || rows.some((r) => r.head === n.id && r.upos === "ADJ" && r.feats.NumType === "Ord")),
     whereCan: rows.some((r) => r.lemma === "where") && rows.some((r) => r.lemma === "can"),
     seeksImperative: imperative && ["get"].includes(root.lemma),
@@ -266,6 +270,7 @@ async function decide(ask, { history = [] } = {}) {
     if (en?.pronObject) return verdict("followup", "acts on a pronoun object");
     if (toks.length <= 4 && !intentful && !named && !(hit.wh && toks.length > 1)) return verdict("followup", "short, and names nothing in the world");
     if (en?.onlyDefinite) return verdict("followup", "only definite back-references");
+    if (en?.definiteLocal) return verdict("followup", "a definite description with no name in the world: this conversation's own thing");
   }
   // 5. invented work, or writing about the speaker's own thing
   const accountSignal = hit.genre || hit.account || (hit.know && (hit.wh || question || en?.referent));

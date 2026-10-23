@@ -113,6 +113,8 @@ import { recordTurnsToWeft } from "./opencode-weft-record.mjs";
 import { findInWeft, findInWeftSemantic } from "./opencode-weft-find.mjs";
 import { archonNote, opennessNote } from "./opencode-archons.mjs";
 import { memoryNote } from "./opencode-memory.mjs";
+import { ingest as ingestAttachment, pagesNote, docsOf } from "./opencode-ingest.mjs";
+import { computeNote, checkAgainstFacts } from "./opencode-records.mjs";
 import { blocks as recordBlocks } from "./opencode-record.mjs";
 import { DELTA_ON, measure as measureDelta, rankTurns } from "./opencode-delta.mjs";
 import { STAKES_ON, stakeCheck } from "./opencode-stakes.mjs";
@@ -476,6 +478,13 @@ async function onContext(body) {
   const mem = MEMORY_ON ? memoryNote(turn.ask) : { gap: "off" };
   if (mem.note) { counters.memoriesServed++; out.memory = mem.note; turn.memory = mem.note; }
   else turn.memory = mem.gap ?? null;
+  // Attachments the plugin handed over (opencode-ingest.mjs): the pages this ask bears on, quoted whole with their addresses.
+  // What the ask asks OF the attachment, computed from its records (opencode-records.mjs): counts, maxima, current values, sums, one hop.
+  // It goes first: a settled fact with its witnesses outranks pages the model would have to add up itself.
+  { const computed = docsOf(body.sessionID).map((doc) => computeNote({ doc, ask: turn.ask }).note).filter(Boolean);
+    const pg = pagesNote({ sessionID: body.sessionID, ask: turn.ask });
+    const notes = [...computed, ...(pg.note ? [pg.note] : [])];
+    if (notes.length) { out.memory = [out.memory, ...notes].filter(Boolean).join("\n\n"); turn.pages = { computed: computed.length, pages: pg.pages ?? 0, chars: pg.chars ?? 0 }; } }
   // Refs: addresses the operator gave the system, injected when the ask's own
   // words bear on one. The source is named; its bytes are read on demand (the
   // snip tool), never carried in the note. Mechanical word overlap, no model.
@@ -1862,6 +1871,17 @@ async function onGround(body) {
   // each { was, against? } (a bare string is a sentence with no source sentence named)
   const revises = (Array.isArray(body.revises) ? body.revises : []).flatMap((r) => (typeof r === "string" ? (r ? [{ was: r }] : []) : r && typeof r.was === "string" && r.was ? [{ was: r.was, against: typeof r.against === "string" ? r.against : null }] : []));
   if (step?.profile && revises.length) step.profile.revises = reviseLedger({ task, agent, universe: universeOf(body), revises, claims: step.profile.claims ?? [] });
+  // THE ANSWER AGAINST THE ATTACHMENT'S COMPUTED FACTS (opencode-records.mjs): a sentence that gives the wrong number for a thing the
+  // door computed is contradicted, with the computed fact as evidence; the plugin hands a contradicted sentence back once.
+  try {
+    const facts = docsOf(body.sessionID).flatMap((doc) => computeNote({ doc, ask: String(body.ask ?? "") }).facts ?? []);
+    const against = checkAgainstFacts(String(body.text ?? ""), facts);
+    if (against.length) {
+      step ??= { output: String(body.text ?? ""), superseded: null, grounded: [], ground_trace: [], profile: { claims: [] }, lane: null, disclosure: null, eot: null };
+      step.profile ??= { claims: [] };
+      step.profile.claims = [...(step.profile.claims ?? []), ...against];
+    }
+  } catch { /* the check never blocks a turn */ }
   if (!step) console.error(`ground: no step for ${String(body.sessionID ?? "").slice(0, 14)} (ask ${String(body.ask ?? "").length} chars, text ${String(body.text ?? "").length}, passages ${(body.passages ?? []).length}, own ${(body.own ?? []).length})`);
   // THE TURN'S SHAPE (the audit's live row, read once more here so the window never reaches for the door):
   // what the void owes, the first unmet reach cell, and the acts with their cube cells and shape verdicts.
@@ -2129,6 +2149,7 @@ export async function answer(body, opts = {}) {
   }
   switch (body?.event) {
     case "context": return onContext(body);
+    case "ingest": return ingestAttachment(body);
     case "title": return onTitle(body);
     case "fold": return {}; // retired: the line-level fold measured equal to its null (see the replay script)
     case "surf": return onSurf(body);
