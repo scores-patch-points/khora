@@ -120,7 +120,7 @@ for (const [name, f] of Object.entries(sets)) {
       const lang = p.lang ?? "en";
       let v;
       if (arm === "wording") v = lexical(p.claim, p.sentence);
-      else { const A = arms[arm](p.claim, lang, "claim"), B = arms[arm](p.sentence, lang, "source", contextOf(p)); let why = null; if (!A || !B) { v = "G"; gap++; } else { const r = verdict(A, B, arm === "grammar-defs" || arm === "grammar-ud" || arm === "atoms" ? { relations: DEFS } : {}); v = r.v; why = r.why; if (v !== "C" && jset.has(String(p.id))) { v = "C"; why = "janus"; }
+      else { const A = arms[arm](p.claim, lang, "claim"), B = arms[arm](p.sentence, lang, "source", contextOf(p)); let why = null; if (!A || !B) { v = "G"; gap++; } else { const r = verdict(A, B, arm === "grammar-defs" || arm === "grammar-ud" || arm === "atoms" || arm === "nli" ? { relations: DEFS } : {}); v = r.v; why = r.why; if (v !== "C" && jset.has(String(p.id))) { v = "C"; why = "janus"; }
           if (arm === "nli" && v !== "C") { const at = ATOMS(p), [nf, nt] = process.env.MEANING_NLI.split(":"); NLI ??= new Map(fs.readFileSync(nf, "utf8").trim().split("\n").map((l) => JSON.parse(l)).map((r) => [`${r.set}:${r.id}`, r.nli]));
             const e = NLI.get(`${name}:${p.id}`)?.[0]; if (at?.rule?.verdict === "C" || at?.verdict === "C") { v = "C"; why = "atoms"; } else if (e != null && e >= +nt) { v = "E"; why = "nli"; } else v = "N"; }
           if (arm === "atoms" && v !== "C") { const at = ATOMS(p), base = v;

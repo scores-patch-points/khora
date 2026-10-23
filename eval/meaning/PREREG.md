@@ -657,3 +657,24 @@ RESULT (run 22a, leave-one-set-out over the nine spent sets; native/kernel/atom-
  chain (grammar-ud or janus) already calls them C before the atoms arm runs; they were false accepts of the raw NLI score only. The pair the
  chain does not catch, fresh-ml 641 (Luftseilbahn/Zahnradbahn), carries no swap flag. So the role-swap errors the NLI model makes are mostly
  already caught by the chain; the swap veto adds nothing there and costs true accepts.
+
+## Run 22b (2026-10-23): WIRING — a bug, a correction, and the arms wired together (POST HOC on the nine spent sets; nothing frozen)
+The user: "we are not this bad; we are not wiring together the right reasoning." Checked, and so it is.
+ Bug: run.mjs passed the relation definitions (DEFS: paid/received, sold/purchased, licensed to/from…) to the grammar and atoms arms but not to
+ the "nli" arm, so the frozen arm's chain was weaker than the rules'. grammar-ud names relations 502, 503, 506, 509, 521 C; the nli arm turned them
+ E. Fixed (the nli arm now gets DEFS). On fresh20 the frozen arm's result is unchanged (58.3%, 0 false accepts, 8 of 48 E): no fresh20 pair
+ needed DEFS. But every chain-C count read from the nli arm in runs 21a, 21b, 21c and 22a is short by these pairs.
+ Correction of the 22a correction: relations 503, 506, 521 ARE caught by the full chain (grammar-ud with DEFS), as 22a's note said, but not
+ for the reason it gave (they were missing from the atoms dump because the atoms arm already held them as C).
+ Wiring (same scores, threshold 0.97 unchanged, nothing trained), over the nine sets, 393 pairs:
+  rules (atoms arm) 63.6%, false-accept 7/199 (3.5%), E accepted 58/194
+  frozen NLI arm with the full chain 64.6%, 4/199 (2.0%), 59/194
+  NLI with the referent named in the premise (page title, then the previous sentence where the source page is on file; eval/meaning/atoms/
+   nli-score-ctx.mjs), full chain: 65.9%, 6/199 (3.0%), 66/194 (29 of fresh20's 48 E sentences do not name their referent)
+  …OR the rules' E: 71.2%, 13/199 (6.5%), 94/194
+  …OR the rules' E unless the NLI model's own top label is contradiction: 71.5%, 8/199 (4.0%), 90/194
+ The rules' false accepts are what NLI contradicts (Curie 1876/1867, "all dolphins", 静岡/滋賀, nordwestlich/südöstlich, 1950s/1930s: NLI
+ contradiction 0.95–0.99); NLI's false accepts are what the chain's relation definitions see (role and direction swaps). Each arm's errors are
+ the other's strengths. Remaining false accepts (8): hedges (cf 114 "some residents claim", fresh 418 "may cause … in large quantities"), a
+ quantifier (fresh19 751 "nur"), referents (fresh-ml 641, fresh20 885), a time (fresh19 725), two rule accepts (fresh19 736, 773).
+ This wiring was chosen after seeing these sets' failures, so these figures are optimistic; it is to be frozen and measured on a fresh set.
