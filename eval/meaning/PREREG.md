@@ -526,3 +526,11 @@ Bar (freeze only if it beats the rules without raising false accepts): MET ONLY 
 the whole gain. NLI alone is the first thing in this line that moves fresh19 and fresh-ml materially (fresh-ml 59.3 → 76.3 at FACAP 10).
 Not frozen; run 20 not run. Open: which false-accept budget to freeze at (the bar names none beyond "not raised"); ja is unscored (the model has
 no ja), and 16 + 4 per-language cross pairs in fresh19 and fresh-ml are the only ja-adjacent check.
+
+## Run 20 — FROZEN arm (2026-10-23, before the run-20 pairs were scored or read by any arm)
+The user chose the strict false-accept budget. Frozen: the "nli" arm. Contradiction as the atoms arm finds it (and grammar-ud's and janus's);
+otherwise E when the NLI entailment probability reaches 0.97, else N. Threshold 0.97 = the best accuracy with at most 5% false accepts over
+all eight existing sets pooled (learn-nli.mjs, FACAP=5); no matcher, no vectors. Model MoritzLaurer/multilingual-MiniLMv2-L6-mnli-xnli, ONNX
+fp32, tokenizer as shipped; scoring eval/meaning/atoms/nli-score.mjs (sentence, brackets cleaned, as premise; claim as hypothesis). Baselines
+on the same pairs: the atoms arm (rules, 67b3d503 reader), grammar-ud, the wording judge. Bars M1–M5 as registered in Run 20 above; M3 is read
+as accuracy at least the atoms arm's and grammar-ud's; M4 a quarter of E accepted. No change to the arm after this commit.
