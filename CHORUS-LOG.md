@@ -1213,3 +1213,12 @@ fast: 3 files · register 14/14, eot 31/31 pass · law: WARN pre-existing duplic
 | Simon/Chekhov | — | opencode-doorway.mjs:onRegister, onContext | fixed | the new module is imported by the door, routed in the handshake, exercised by 14 tests and a live smoke on a scratch port (F5 answered, update supersedes, false premise flagged) |
 | Kondo | — | foldcode-poc/mech/index.mjs | noted | the poc copy is now a duplicate; its header names the door module as home and keeps the poc harness working |
 clean: Diaconis, Pearl, Alexander, Ostrom, Frankfurt, Marshall (no law edited or cited)
+
+## 2026-10-23 — register C1: subjects keyed by referent (given name, aka, narrowed), janus organs vendored with a pin (branch register-door)
+fast: 4 files + vendor/janus (4 byte-identical copies, VENDOR-JANUS.json @ 5e4d6ac2) · register 16/16, eot 31/31 · law: no citation changed
+| lens | citation | file:line | verdict | one line |
+| Holmes | FOLD-CONSTITUTION II.7 | opencode-register.mjs:referentsOf | noted | three merges only, each an edge with a holder under lens "session": a given name, a stated aka, a narrowed subject with exactly one candidate; a shared head noun or an ambiguous narrowing stays apart (tested) |
+| Dijkstra | II.7 | opencode-register.mjs:referentsOf | noted | surfaces are read by read-nodes against the session's own index, not by string distance; a miss keys by the surface as before |
+| Alexander | THE-SPINE one home per organ | vendor/janus/VENDOR-JANUS.json | deferred-with-reason | khora importing janus is decision D5; until it is taken the organs ride as pinned byte-identical copies with the home named, refreshed by re-copying, never edited |
+| Simon/Chekhov | — | vendor/janus/identity/same.mjs, fold-depth.mjs | noted | ride only because referents.mjs imports them; nothing here calls them |
+clean: Greenberg (no new language rule), Feynman, Diaconis, Pearl, Marshall

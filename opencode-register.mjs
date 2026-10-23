@@ -31,6 +31,12 @@
 // (2026-10-23), logic unchanged, so the bars measured there (M1 1.00/1.00, M2 1.00, M3 50/50, M4 5/5, M5 5/5, M6 10/10, register
 // ~459 tokens on 15 synthetic sessions) are the bars this module carries. English only in v1; another script is a typed `lang` gap.
 import * as eot from "./opencode-eot.mjs";
+// THE REFERENT (FOLDCODE-MVP-PLAN.md Gate C1): a subject is keyed by the thing it names, not by its spelling. janus's organs, vendored
+// byte-identical under vendor/janus (VENDOR-JANUS.json pins them): read-nodes reads a subject against the session's own index (the
+// surfaces already bound and the names they were given), referents holds each alias claim as an edge under the lens "session" and folds
+// the groups at read time, so a wrong merge is undone by its edge, never by rewriting an id.
+import { newStore, admit, assertEdge, groups } from "./vendor/janus/identity/referents.mjs";
+import { readNodes } from "./vendor/janus/identity/read-nodes.mjs";
 
 export const REGISTER_SCHEMA = "FoldRegister@1";
 // The one legend sentence: a fact stated, never a prohibition (the small-mouth safety gate trips on imperative negations).
@@ -124,6 +130,7 @@ const notAStatement = (s) => QUESTION.test(s) || MARKUP.test(s) || INTERROGATIVE
 const VALUE_PREFIX = /^(?:currently|now|set at|set to|priced at|numbered|located in|led by|run by|managed by|in|at|on)\s+/i;
 const ACK_SENTENCE = /^(?:just\s+)?(?:acknowledge|ack|acknowledgement|thanks|thank you|got it|noted|no long reply|one[- ]line)/i;
 const ROLE = /\b(?:lead|owner|manager|head|director|chief|officer|coordinator|champion|contact)\b/i;
+const AKA_CLAUSE = /,?\s*\(?\b(?:also known as|aka|a\.k\.a\.|also called)\s+[^,;.()]+\)?,?/i;
 const TEAM_OBJ = /\b(?:team|platform|audit|program|programme|group|function|desk)\b/i;
 
 function parseQuantity(v) {
@@ -156,12 +163,13 @@ function bindingOf({ subject, value, attr = null, sentence, turn, span, update =
 export function matchStatement(text) {
   const s0 = String(text ?? "").trim().replace(/\s+/g, " ");
   const update = UPDATE_PREFIX.test(s0);
-  const s = s0.replace(UPDATE_PREFIX, "").replace(/^[\s,]+/, "").trim();
+  // an "also known as …" clause is an alias claim the referent layer reads from the verbatim sentence; it is not part of the subject
+  const s = s0.replace(UPDATE_PREFIX, "").replace(AKA_CLAUSE, "").replace(/\s+,/g, ",").replace(/^[\s,]+/, "").trim();
   let m;
   if ((m = s.match(/^(?:the\s+)?name\s+of\s+(?<sub>.+?)\s+is\s+(?<val>.+)$/i)))
     return bindingOf({ subject: m.groups.sub, value: m.groups.val, sentence: s0, verb: "name-of" });
-  if ((m = s.match(/^(?<sub>.+?)\s+(?:is|are|was|were)\s+(?:called|named|known as)\s+(?<val>.+)$/i)))
-    return bindingOf({ subject: m.groups.sub, value: m.groups.val, sentence: s0, update, verb: "called" });
+  if ((m = s.match(/^(?<sub>.+?)\s+(?:is|are|was|were)\s+(?:(?<now>now|currently)\s+)?(?:called|named|known as)\s+(?<val>.+)$/i)))
+    return bindingOf({ subject: m.groups.sub, value: m.groups.val, sentence: s0, update: update || !!m.groups.now, verb: "called" });
   if ((m = s.match(/^(?:we|they|everyone|people|i|let's|let us)\s+(?:call|name|named|refer to)\s+(?<sub>.+?)\s+(?<val>.+)$/i)))
     return bindingOf({ subject: m.groups.sub, value: m.groups.val, sentence: s0, update, verb: "call" });
   if ((m = s.match(/^we\s+pay\s+(?<sub>.+?)\s+(?<val>.+?)\s+for\s+(?<attr>.+)$/i)))
@@ -243,13 +251,59 @@ export function extractBindings(turns, { lang = "en" } = {}) {
   return { bindings, gaps };
 }
 
+// ── the referents: which subjects are one thing ──────────────────────────────────────────────────────────────────────
+// Three ways two surfaces are one referent, each a claim with a holder and the lens "session", folded by janus's union-find:
+//   named     "the mascot service is called Orbit"  → the name given IS the thing (holder: the person, by saying so)
+//   aka       "X, also known as Y" / "X (aka Y)"      → an alias the person stated
+//   narrowed  "the mascot service" after "our cat-named mascot service" → the shorter subject is the longer one with its modifiers
+//             dropped, admitted only when exactly ONE earlier subject ends in it (two candidates: refused, the subjects stay apart)
+// Anything else is a different thing. A subject is read against the index of surfaces already bound (read-nodes, longest match), so
+// "Orbit" in a later statement keys to the mascot service. Precision over recall: a miss keys by the surface, as before.
+const NAMING = new Set(["called", "name-of", "call"]);
+const AKA = /\b(?:also known as|aka|a\.k\.a\.|also called)\s+(?<alias>[^,;.()]+)/i;
+export function referentsOf(bindings) {
+  const store = newStore();
+  const index = new Map();          // surface (canon) -> referent id
+  const first = new Map();          // referent id -> the surface first seen for it (the canonical spelling)
+  const subjects = [];              // canon subjects in order, for the narrowed rule
+  const keyOfBinding = new Map();   // binding -> referent id
+  const say = (surface) => { const s = canon(surface); if (!s) return null; let id = index.get(s); if (id === undefined) { id = admit(store, s); index.set(s, id); if (!first.has(id)) first.set(id, s); } return id; };
+  for (const b of bindings || []) {
+    const s = canon(b.subject);
+    let id = index.get(s);
+    if (id === undefined) {
+      // read the subject against what is already bound: a known surface inside it (the longest) names the thing
+      const read = index.size ? readNodes(s, index) : { spans: [] };
+      const whole = read.spans.find((sp) => sp.surface === s);
+      if (whole) id = whole.node;
+      else {
+        const ends = subjects.filter((p) => p !== s && (p.endsWith(` ${s}`)));
+        if (ends.length === 1) { id = index.get(ends[0]); assertEdge(store, { holder: "register:narrowed", lens: "session", a: id, b: admit(store, s) }); index.set(s, id); }
+        else id = say(s);
+      }
+      if (!subjects.includes(s)) subjects.push(s);
+    }
+    keyOfBinding.set(b, id);
+    if (NAMING.has(b.verb) && b.kind === "name") { const v = say(b.value); if (v !== null && v !== id) assertEdge(store, { holder: "user", lens: "session", a: id, b: v }); }
+    const aka = AKA.exec(String(b.sentence ?? ""));
+    if (aka) { const v = say(aka.groups.alias); if (v !== null && v !== id) assertEdge(store, { holder: "user", lens: "session", a: id, b: v }); }
+  }
+  // fold: each id to its group's root (the first-seen member), so aliases share one key
+  const root = new Map();
+  for (const g of groups(store, "session")) { const ordered = g.slice().sort((x, y) => [...first.keys()].indexOf(x) - [...first.keys()].indexOf(y)); for (const m of g) root.set(m, ordered[0]); }
+  const aliasesOf = (id) => [...index.entries()].filter(([, v]) => root.get(v) === root.get(id)).map(([s]) => s);
+  return { store, index, keyOf: (b) => root.get(keyOfBinding.get(b)) ?? keyOfBinding.get(b), surfaceOf: (id) => first.get(id), aliasesOf };
+}
+
 // ── M2: the register (supersession) ──────────────────────────────────────────────────────────────────────────────────
 export function buildRegister(bindings) {
+  const refs = referentsOf(bindings);
   const order = [];
   const map = new Map();
   for (const b of bindings || []) {
-    const key = keyOf(b.subject, b.attr);
-    if (!map.has(key)) { map.set(key, { key, subject: b.subject, attr: b.attr, history: [] }); order.push(key); }
+    const rid = refs.keyOf(b);
+    const key = `${rid}${b.attr ? `|${canon(b.attr)}` : ""}`;
+    if (!map.has(key)) { map.set(key, { key, subject: refs.surfaceOf(rid) ?? b.subject, attr: b.attr, history: [], referent: rid }); order.push(key); }
     map.get(key).history.push(b);
   }
   const facts = order.map((k) => {
@@ -262,7 +316,8 @@ export function buildRegister(bindings) {
       seen.add(v);
       history.push(b);
     }
-    return { key: f.key, subject: f.subject, attr: f.attr, current: history.at(-1), history };
+    const aliases = refs.aliasesOf(f.referent).filter((s) => s !== f.subject);
+    return { key: f.key, subject: f.subject, attr: f.attr, current: history.at(-1), history, referent: f.referent, aliases };
   });
   return { facts, byKey: map, order };
 }
@@ -285,7 +340,7 @@ export function findFact(question, register) {
   const parsed = typeof question === "string" ? parseQuestion(question) : question;
   let best = null, bestHits = 0, bestKey = null, ties = 0;
   for (const f of register.facts) {
-    const ftoks = new Set(contentTokens(`${f.subject} ${f.attr ?? ""}`));
+    const ftoks = new Set(contentTokens(`${f.subject} ${(f.aliases ?? []).join(" ")} ${f.attr ?? ""}`));
     let hits = 0;
     for (const t of ftoks) if (parsed.tokens.has(t)) hits += 1;
     if (hits === 0) continue;
@@ -443,7 +498,10 @@ export function answer(question, memory) {
 export function registerLines(register, { maxLines = REGISTER.maxLines } = {}) {
   const lines = [];
   for (const f of register.facts) {
-    const subj = f.subject + (f.attr ? ` ${f.attr}` : "");
+    // one name per referent in the line; the other names the person used are disclosed, never a second line
+    const values = new Set(f.history.map((h) => norm(String(h.value))));
+    const also = (f.aliases ?? []).filter((a) => !values.has(norm(a)));  // a name the fact itself states, now or before, is not "also"
+    const subj = f.subject + (also.length ? ` (also: ${also.join(", ")})` : "") + (f.attr ? ` ${f.attr}` : "");
     if (f.history.length > 1) {
       const cur = f.current, prev = f.history.at(-2);
       lines.push(`The ${subj} is ${cur.value} — you said so in turn ${cur.turn}; before that it was ${prev.value} (turn ${prev.turn}).`);

@@ -1,0 +1,25 @@
+{
+ "schema": "VendorPin@1",
+ "repo": "scores-patch-points/janus",
+ "commit": "5e4d6ac28c981809b317f8cf4d8c4c2ea5aa69ee",
+ "pinned": "2026-10-23",
+ "why": "the register keys its subjects by referent (FOLDCODE-MVP-PLAN.md Gate C1): read-nodes reads a subject against the session's own index, referents holds the alias edges under lens 'session' and folds groups at read time; same.mjs rides only because referents imports it. Byte-identical copies; the home is janus. Interim until decision D5 (khora importing janus, or the /v1/reason door); refresh by re-copying and re-pinning, never by editing here. fold-depth.mjs rides because same.mjs imports it.",
+ "files": {
+  "referents.mjs": {
+   "sha256": "064c6225e22fcb3c90f463414cd6bc56c382b78fb4515e6731a3c9115e5e968c",
+   "from": "janus/native/organs/identity/referents.mjs"
+  },
+  "read-nodes.mjs": {
+   "sha256": "a3d31cc61c0675ac18eba107c80264185feff7607507844e6add2c776f1904f1",
+   "from": "janus/native/organs/identity/read-nodes.mjs"
+  },
+  "same.mjs": {
+   "sha256": "225a40a3d04f3dc5791fcd8e6289ed2bcc39e4393c9a500445803452feb589c0",
+   "from": "janus/native/organs/identity/same.mjs"
+  },
+  "fold-depth.mjs": {
+   "sha256": "7c97ae67aebad3bb4657a1693786e2bf93a0d38094f89c70d82a4cf5052143fd",
+   "from": "janus/native/organs/identity/fold-depth.mjs"
+  }
+ }
+}
