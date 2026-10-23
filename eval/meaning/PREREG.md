@@ -447,3 +447,213 @@ RESULT (first run, code as of 8bd3b8e2, no changes since the set was committed a
    mountain in Washington is higher"), an ordinal against "only X is more" ("second-largest after Lake Superior"), "also known as" against
    "another name for";
  - claim atoms the source does state but under another predicate or referent name (derive_from / come_from met; think / believe not).
+
+## Run 19b (2026-10-22): five fixes from the run-19 triage — POST HOC on every pair set (fresh19 is spent; no bar is re-judged)
+The fixes, each from a run-19 failure:
+ 1. english-parser.js: a suffix rule may cut at most k letters and leave a lemma of 3 or more (closest → clogood, red → r); a lemma attested
+    in UniMorph in the same class (priorLemma) is taken before the irregular check.
+ 2. atoms.js: a bracketed figure is skipped only when the same measure of the same being is also stated outside brackets; the figure arg
+    carries measure, base value and alternates ("923 ft; 281 m").
+ 3. atom-support.js: figures meet by base value or an alternate within 2%; a predicate meets only if every content word of it (over 4
+    letters, or CJK) meets (758 lie_nordwestlich); canonical rewrites for a negated comparative ("no mountain in W is higher than X" →
+    most:high(X), in(X, W)) and for "Y is another name for X" → named(X, Y).
+ 4. read-atoms.js: pronunciations in brackets (respellings, IPA, an audio link's empty brackets; kana readings kept) are cut before reading,
+    spans mapped back.
+ 5. read-atoms.js: unread also counts a content word (NOUN/PROPN/ADJ/NUM, not a claim head) that no atom carries (746 inhabitées).
+Atoms arm (MEANING_ATOMS=1), before (8bd3b8e2) → after; grammar-ud is unchanged on every set:
+ main 76.7 → 76.7 · cf 78.6 → 78.6 · heldout 83.3 → 86.7 (false-reject 25.0 → 18.8) · other 100 → 100 · fresh 87.5 → 87.5 · relations
+ 81.8 → 81.8 · fresh-ml 60.9 → 60.9 · fresh19 45.8 → 47.9 (false-accept 8.3 → 6.3; false-reject 100 → 97.9). No set lost; no false accept rose.
+ Native tests (relation-defs, eot-claim-match, grammar-ud) pass. The door e2e test (opencode-workplan-live-e2e) fails 0/8 with and without
+ these changes (stashed), so it is environmental, not from them.
+What still rejects the 47 fresh19 E pairs, from the atom tables:
+ - 22 by the unread guard (claim words no claim atom carries; in 11 every such word is in the source sentence: the claim's reading drops
+   them, "one of North America's Great Lakes" → has_count(Lake Michigan, one));
+ - 25 by unmet claim atoms: of the unmet atoms, 39 have every argument in the source but meet no source predicate (derive_from / come_from,
+   sit_at / same surface elevation, pour_en / desemboca), 19 some arguments, 14 none (the source reading or its coreference lost them).
+ The largest single fault is now predicate equivalence across paraphrase; rules have stopped paying there (fix 3 moved one pair). Next: a
+ LEARNED atom-pair matcher, trained cross-validated on the eight existing pair sets, measured on run 20.
+
+## Run 20 (2026-10-22): a fresh pair set for a LEARNED atom-pair matcher — PRE-REGISTERED (written before the pairs were written)
+Set: 122 sentences from 18 Wikipedia pages not used before (en Lake Erie, Mount Hood; es Lago de Chapala, Pico Duarte, Río Grijalva; fr
+Lac de Grand-Lieu, Mont Lozère, Vienne (affluent de la Loire), Lac de Paladru; de Tegernsee, Hohe Acht, Fulda (Fluss), Schweriner See; ja
+宍道湖, 鳥海山, 球磨川, 浜名湖, 日光白根山), fetched 2026-10-22 with revision ids (eval/meaning/fresh20.sources.json). Pairs written and
+labelled by a separate agent from those sentences alone (no code, no other sets, no results), as run 19: per language 16 same-language
+pairs (about 8 E, 5 C, 3 T), and per other language 4 English-claim cross-language pairs (2 E, 1 C, 1 T); audited by a second agent from
+the sentence alone before any arm runs.
+What is measured: the atoms arm with a learned atom-pair matcher (which claim atom a source atom meets, by predicate and arguments), trained
+cross-validated on the eight existing pair sets (main, cf, heldout, other, fresh, relations, fresh-ml, fresh19) and frozen at the commit
+that adds it; the arm as of 67b3d503 (run 19b) is the baseline. This set is seen by no training.
+Bars, for the matcher arm:
+ M1 coverage: every pair read (no typed gap).
+ M2 false-accept at most 10%.
+ M3 accuracy at least the 67b3d503 atoms arm's on the same pairs, and at least grammar-ud's.
+ M4 at least a quarter of the E pairs accepted (run 19: 0 of 48; 19b: 1 of 47).
+ M5 accuracy at least the wording judge's, with fewer false accepts.
+Reported per language and same- vs cross-language, each failure assigned to a layer. Any change after the matcher is frozen is post hoc.
+Set committed before any arm ran: eval/meaning/fresh20.json, 96 pairs (48 E, 29 C, 19 T; 80 same-language, 16 English-claim cross-language),
+over 90 of the 122 sentences and all 18 pages. Label audit by a second agent, labels hidden, from the sentence alone: 96 of 96 agreed
+(fresh20.audit.json). Borderline, kept as given: 849 (a rank without its measure), 860/872 (a sentence cut before its subject, the title
+supplies it), 852, 804 (third after two is smaller than both), 807 (a bearing read from the other end).
+
+## Run 20a (2026-10-23): a LEARNED atom matcher, with and without aligned word vectors — cross-validated on the eight existing sets (negative; run 20 NOT run)
+Matcher (native/kernel/atom-match.js): each claim atom is met by its best source atom, or left aside, under a linear score of what the rules
+measure; each unread claim word is scored by whether the source sentence carries it; a pair is supported when its weakest unit scores above
+zero. Trained on pair labels only (E against not-E), leave-one-set-out over main, cf, heldout, other, fresh, relations, fresh-ml, fresh19.
+Vector features (native/organs/word-vectors.js; ~/.cache/live_priors/vectors/muse5): MUSE aligned vectors for en, es, fr, de; ja fastText
+mapped into that space by Procrustes on MUSE's ja-en dictionary (held-out dictionary pairs: nearest English word right 198 of 511).
+Pooled accuracy, E against not-E, by the penalty on a wrong accept (NEGW):
+ rules 63.1 · no vectors: NEGW 1 → 61.5, 3 → 67.5, 8 → 63.1 · with vectors: NEGW 1 → 58.7, 3 → 67.8, 5 → 63.9
+ At NEGW 3 (best pooled) false accepts rise: fresh19 6.5 → 10.9 (no vectors 17.4), heldout 14.3 → 42.9, main 7.1 → 28.6. At NEGW 5, where false
+ accepts do not rise, it accepts 2 of 47 fresh19 E pairs. The vectors add 0.3 points pooled at NEGW 3: nothing.
+Bar set before this (freeze only if it beats the rules without raising false accepts): NOT MET. The matcher is not frozen and run 20 is not
+run; fresh20 stays untouched. Reading: the matcher can only move the accept threshold. Word nearness (a bag of word vectors per predicate)
+does not separate "derive from the Ojibwe word" from "come from the Ojibwe word" any better than a synonym list does, and the units it
+scores are the rules' own atoms, many of which are wrongly read (the unmet-atom triage of 19b: 14 of 72 had no source argument at all).
+Next candidate, not tried: a small local multilingual NLI/cross-encoder scoring claim against sentence, as a feature or as the check.
+
+## Run 20b (2026-10-23): a local multilingual NLI model as the check, and as a matcher feature — cross-validated on the eight existing sets (run 20 NOT run)
+Model: MoritzLaurer/multilingual-MiniLMv2-L6-mnli-xnli (MIT; MNLI + XNLI: en, es, fr, de among its languages, no ja), ONNX, run locally through
+@huggingface/transformers (scratch install outside the repo); sentence (brackets cleaned) as premise, claim as hypothesis; 0.1 s a pair. Scores
+(entail, neutral, contradict) for all 297 pairs; script eval/meaning/atoms/learn-nli.mjs. Leave-one-set-out; rows are those the atoms arm reads
+as not-C (as 19b). "nli": E when entailment ≥ a threshold chosen on the other sets (best accuracy with false accepts at most FACAP).
+Pooled, E against not-E (false accepts in brackets): rules 63.1 (5.5)
+ nli, FACAP 10 → 72.2 (11.9) · FACAP 5 → 64.3 (3.7) · FACAP 3 → 59.1 (2.8) · FACAP 0 → 50.8 (0.9)
+ matcher with the NLI unit, NEGW 3 → 71.4 (26.6) · NEGW 5 → 70.2 (21.1) (false accepts too high at every cap)
+fresh19 under nli: FACAP 10 → 59.1, 17 of 47 E accepted, fa 17%; FACAP 5 → 57.0, 8 of 47, fa 2%. Rules there: 47.3, 1 of 47, fa 7%.
+Bar (freeze only if it beats the rules without raising false accepts): MET ONLY NARROWLY and only by the strict variant: nli at FACAP 5 is
++1.2 points pooled (about 3 pairs of 297) with false accepts 3.7 against 5.5, but loses on heldout (82.6 → 65.2). The variant with the real gain
+(FACAP 10, +9.1 points) raises false accepts to 11.9 and fails the bar. The matcher's own units still inflate false accepts; the NLI score is
+the whole gain. NLI alone is the first thing in this line that moves fresh19 and fresh-ml materially (fresh-ml 59.3 → 76.3 at FACAP 10).
+Not frozen; run 20 not run. Open: which false-accept budget to freeze at (the bar names none beyond "not raised"); ja is unscored (the model has
+no ja), and 16 + 4 per-language cross pairs in fresh19 and fresh-ml are the only ja-adjacent check.
+
+## Run 20 — FROZEN arm (2026-10-23, before the run-20 pairs were scored or read by any arm)
+The user chose the strict false-accept budget. Frozen: the "nli" arm. Contradiction as the atoms arm finds it (and grammar-ud's and janus's);
+otherwise E when the NLI entailment probability reaches 0.97, else N. Threshold 0.97 = the best accuracy with at most 5% false accepts over
+all eight existing sets pooled (learn-nli.mjs, FACAP=5); no matcher, no vectors. Model MoritzLaurer/multilingual-MiniLMv2-L6-mnli-xnli, ONNX
+fp32, tokenizer as shipped; scoring eval/meaning/atoms/nli-score.mjs (sentence, brackets cleaned, as premise; claim as hypothesis). Baselines
+on the same pairs: the atoms arm (rules, 67b3d503 reader), grammar-ud, the wording judge. Bars M1–M5 as registered in Run 20 above; M3 is read
+as accuracy at least the atoms arm's and grammar-ud's; M4 a quarter of E accepted. No change to the arm after this commit.
+RESULT (run 20, first and only run of the frozen arm, code as of 1e90f5f8; fresh20 had been seen by no training and no arm before):
+ nli (frozen): accuracy 58.3%, false-accept 0.0% (0 of 48 not-E), false-reject 83.3% (8 of 48 E accepted), contradictions 1 of 29, no gaps.
+ atoms (rules): 51.0%, false-accept 2.1%, false-reject 95.8% (2 of 48 E), contradictions 1 of 29. grammar-ud: 51.0%, same.
+ wording judge: 57.3%, false-accept 8.3%, false-reject 77.1% (11 of 48 E), contradictions 1 of 29.
+ Per language (nli): en 56, es 56, fr 63, de 63, ja 56, cross-language 56; same-language 58.8% (atoms 51.3, wording 56.3). E accepted by
+ language (of 8 each; cross 8): en 1, es 1, fr 2, de 2, ja 1, cross 1. The 5% cap held out of sample: 0 false accepts here, as 3.7% pooled in
+ the cross-validation.
+ M1 PASS (no typed gap). M2 PASS (0%). M3 PASS (58.3 ≥ 51.0 atoms, ≥ 51.0 grammar-ud). M4 FAIL (8 of 48 E accepted, 17%, against a quarter).
+ M5 PASS (58.3 ≥ 57.3, with 0 false accepts against 4). The cross-validated gain held in direction (+7.3 points over the rules; the
+ cross-validation said +1.2), but it is small in absolute terms and the check still accepts one supported claim in six.
+ What it does not do: it names one contradiction in 29 (the claim of 29 C pairs is read as contradiction only when the atoms say so; the NLI
+ contradiction probability is not used by the frozen arm, so using it is a post hoc change, not a result). Japanese is no worse than the
+ other languages here (56%, 1 of 8 accepted), though the model never saw ja; the cross-language English claims over ja/es/fr/de sources
+ score the same as same-language ones (56 vs 59).
+
+## Run 21a (2026-10-23): the NLI model's CONTRADICTION score to name C — cross-validated on the nine spent sets, bars set BEFORE the run
+Why: run 20's frozen arm names 1 of 29 contradictions; the claim matcher names a contradiction only when a source atom of the other polarity
+meets a claim atom. The NLI model (same model, same scores as 20b; fresh20 is spent and joins the other eight as the ninth set) also gives a
+contradiction probability.
+Arm "nli-c" (one parameter, tc): a pair is C if the arm chain already says C (grammar-ud, janus, the atom rules: as the frozen nli arm), or the
+NLI contradiction probability reaches tc; otherwise as the frozen nli arm (E at entailment 0.97, else N). tc is chosen on the training sets as the
+lowest threshold whose false-C rate (E and T pairs called C) is at most 5%, and tested on the held-out set; leave-one-set-out over the nine sets.
+Bars (pooled over the nine held-out sets; the rules' own pooled figures are the reference, read from the same run):
+ C1 contradictions named: at least 15 points of the 29+... C pairs more than the rules' pooled rate (absolute, of all C pairs).
+ C2 false-C: E and T pairs called C at most 5% pooled, and at most 10% on any one set.
+ C3 E accepted and false-accept as the frozen nli arm (an E pair turned C counts as a miss; reported, no bar).
+ C4 on the three sets with the most ja/es/fr/de pairs (fresh-ml, fresh19, fresh20) the C gain is not confined to English: named-C rate for
+    non-English claims at least the English rate minus 15 points.
+If C1 and C2 pass, a new held-out pair set is pre-registered (run 21) from pages used by no set so far, with the arm frozen at the commit that
+adds it; if either fails, the result is recorded and the arm is not run on new pairs.
+RESULT (run 21a, leave-one-set-out over the nine spent sets; eval/meaning/atoms/learn-nli-c.mjs; C1 read as 15 absolute points of all C pairs):
+ per held-out set (C named by the chain → with NLI; false-C): main 4→7 of 9, 1→3 of 21 (14%) · cf 5→5 of 6, 0→2 of 8 (25%) · heldout 7→8 of 10,
+ 0 of 20 · other 5→6 of 8, 0 of 9 · fresh 6→6 of 8, 1→2 of 16 (13%) · relations 1→1 of 7, 0→1 of 15 (7%) · fresh-ml 4→18 of 23, 2→2 of 41 (5%) ·
+ fresh19 2→3 of 29, 2→2 of 67 (3%) · fresh20 1→6 of 29, 0 of 67. tc per fold 0.94–0.98 (0.95 on all nine).
+ pooled: C named 35→60 of 129 (27.1% → 46.5%, +19.4 points); false-C 6→12 of 264 (4.5%); E pairs lost to a false C: 0 of 194.
+ C1 PASS (+19.4 ≥ 15). C2 FAIL: pooled 4.5% is within 5%, but three sets are over 10% (cf 25%, main 14%, fresh 13%; on 8, 21 and 16 non-C pairs,
+ so 2, 3 and 2 pairs). C3: no E lost. C4 PASS: on fresh-ml, fresh19 and fresh20, non-English or cross-language C named 36.6% (chain 8.5%,
+ 71 pairs) against English 10.0% (chain 10.0%, 10 pairs); the gain is in the other languages, where the chain names almost nothing.
+ By the pre-registered rule (C1 and C2 both needed), the arm is NOT run on new pairs. The NLI contradiction score is a real signal (it
+ turns 25 of the 94 missed C pairs, mostly fresh-ml and fresh20), and its misses sit on the small English sets where a 5% cap is two pairs.
+ Not tried, so as not to tune on the spent sets: a stricter cap (CAP is a parameter) or a tc that uses the entailment score too.
+
+## Run 21b (2026-10-23): the thresholds chosen by DMD, no cap — registered BEFORE the run (the user: "caps should be DMD based")
+The 5% / 10% false-accept and false-C caps of 20b and 21a are hand-set limits, which the standing rule does not allow (the stop is measured, not
+chosen: dmdWindow, native/kernel/activation.js). Replaced, for both thresholds (entailment te for E, contradiction tc for C), by:
+ observations: the training pairs, ordered by that score from highest to lowest (the strictest first); restrict(obs, depth) = the top `depth`;
+ derive(obs): the threshold with the best accuracy on obs for its own decision (E against not-E for te; C against not-C for tc), ties to the
+ strictest; the conclusion is that threshold. dmdWindow gives the shallowest depth at which the top-`depth` pairs already give the whole
+ training set's threshold (candidate depths 8, 16, 32 … below the training size; none agreeing is the typed gap reach_exceeds_candidates, and the
+ threshold is then taken from the whole set and flagged, not silently accepted).
+ The cap is gone: the threshold is what the evidence determines. The depth is reported per fold. Selection is otherwise as 20b/21a
+ (leave-one-set-out over the nine spent sets; rows and scores as then). The bars of those runs stand as EVALUATION bars, not selection
+ parameters: for the E arm, pooled accuracy above the rules' and false accepts not above the rules' pooled rate (5.5%); for C, C1–C4 of 21a.
+ Run 20's frozen arm (te 0.97 from the 5% cap) is not replaced, and fresh20 is spent: what DMD gives for te is reported post hoc.
+RESULT (run 21b, leave-one-set-out over the nine spent sets; eval/meaning/atoms/dmd-threshold.mjs, learn-dmd.mjs). Rows are the atoms-arm
+pairs plus those the chain calls C; "rules" = the atoms arm; accuracy is E against not-E over all pairs of the held-out set.
+ te by DMD (best-accuracy conclusion): 0.04–0.07 in every fold (0.19 with fresh20 held out), depth 256 of ~330 (the window is deep: the optimum
+ is fixed only far down the ranking). Pooled E accuracy 63.6 → 75.1, false-accept 3.5% → 26.6%, E accepted 58 → 149 of 194. Fails the E
+ evaluation bar (false accepts above the rules'): per set up to 8 of 10 (relations), 23 of 48 (fresh19).
+ tc by DMD (best-accuracy): 0.75–0.79, depth 128 of ~370. Pooled C named 27.1% → 66.7% (35 → 86 of 129), false-C 6 → 29 of 264 (11.0%). C1
+ PASS (+39.6), C2 FAIL (11.0% pooled; cf 37.5%, main 33%, fresh19 13%), C4 PASS (non-English 62.0% against English 40.0%).
+ Why the accuracy conclusion is loose: most not-E pairs (C, T) score near zero on entailment, so a threshold near zero already separates them and
+ accuracy hardly charges the few not-E pairs that score high; accuracy weighs a false accept like a missed E, and the cap existed to say it does
+ not. DMD finds where that conclusion stops moving, not what it should be.
+21b′ (POST HOC, a second conclusion tried after seeing 21b; not pre-registered): the pure-prefix conclusion (the lowest score above which every
+ pair is positive). It stops at depth 8–16 of ~330 in every fold, because the first not-E pair near the top of the ranking ends the prefix: te and
+ tc 0.99 in all nine folds. Pooled E accuracy 52.4, false-accept 0.5%, E accepted 8 of 194; C named 31.0% (40 of 129), false-C 2.7%. Strict to
+ the point of accepting almost nothing; the stop is set by a few pairs at the top (a single odd pair at 0.99 moves it).
+Reading: neither DMD conclusion reproduces the 5% operating point, and nothing is frozen from 21b or 21b′. A DMD-based cap needs a conclusion
+that carries the cost of a false accept itself; the two tried carry it as zero (accuracy) or as infinite (pure prefix). Run 20's arm (te 0.97)
+and its recorded result stand; run 21 is not run on new pairs.
+
+## Run 21c (2026-10-23): the false-accept SHARE as the conclusion — registered BEFORE the run (the user's rule for the stop)
+Rule as given: take the conclusion from the labelled pairs in the ranking (strictest score first), count a false accept against it as the share of
+accepted claims that were not supported, and stop where that share first moves. Operationalised, for te (E) and tc (C): over the top-d ranked
+training pairs the share s(d) = (not supported among them) / d; the conclusion derive(prefix) is the lowest score at which s is still at the value
+it started with (the first value, 0); dmdWindow gives the shallowest depth at which the prefix already gives the whole set's conclusion. The cap is
+then whatever share the ranking shows at that stop, with no number chosen.
+Prediction, written before running: this is the pure-prefix conclusion already run post hoc as 21b′ (the first unsupported pair moves the share off
+zero), so it will give the same thresholds (0.99 in all nine folds), the same depths (8–16 of ~330), E accepted 8 of 194, false-accept 0.5%,
+C named 40 of 129, false-C 2.7%. If it differs, the difference is in code, not in the rule. Evaluation bars as 21b: E, false accepts not above
+the rules' pooled rate (3.5% on these rows) and accuracy above the rules'; C, C1–C4 of 21a.
+RESULT (run 21c, the same code and nine folds as 21b′): as predicted, identical. te and tc 0.99 in all nine folds, depth 8–16 of ~330; pooled E
+ accuracy 63.6 → 52.4, false-accept 3.5% → 0.5%, E accepted 8 of 194; C named 35 → 40 of 129 (31.0%), false-C 2.7%; C4 non-English 14.1%
+ against English 10.0%. E bar: accuracy NOT above the rules' (fails), false accepts below. C bars: C1 FAIL (+3.9 points), C2 pass.
+ Nothing frozen; run 21 is not run on new pairs.
+ Why the share moves so early: of the 40 highest-entailment pairs the first unsupported one is at rank 9, and the unsupported share among
+ pairs accepted at each score, over all 393 rows: 9.5% at ≥0.99 (21 accepted, 2 unsupported), 15.5% at ≥0.97 (71), 16.3% at ≥0.95, 15.1% at ≥0.9,
+ 19.5% at ≥0.8. (Many of those unsupported pairs are ones the chain calls C first; the 20b/21a "false-accept" rates divide by the not-E pairs,
+ not by the accepted ones, so the two are not the same number.) The top unsupported pairs are role and direction swaps the NLI model entails at
+ 0.99: "we paid $250.0 million" against "we received" (relations 521), "paid" against "received" an upfront payment (503), "licensed rights to
+ third parties" against "licensed from third parties" (506), "Luftseilbahn" against "Zahnradbahn" in a sentence that also names a
+ Luftseilbahn (fresh-ml 641). These are what an atom check sees (a different predicate over the same arguments) and the NLI score does not.
+
+## Run 22a (2026-10-23): NLI entailment AND no role/direction swap in the atoms — cross-validated on the nine spent sets, registered BEFORE the run
+Arm "nli-swap": a pair is C if the chain says C (as the frozen nli arm); otherwise E only if (1) the NLI entailment reaches te and (2) the swap
+flag is off; else N. The swap flag (atom-support.js swapFlags, defined here before it is written): over the claim atoms after canonical(), with two
+or more arguments and a predicate that is not is_a, named or has_*:
+ role swap: some source atom's arguments meet the claim atom's arguments (argsMeet, in order) but its predicate does not meet the claim's
+ (predMeet false), and no source atom meets the claim atom with both;
+ direction swap: a source atom with a meeting predicate meets the claim's arguments only REVERSED (argsMeet on the reversed list) and not in order.
+ The flag is on when any claim atom is either. No predicate lexicon, no antonym list: a different predicate over the same arguments is a swap.
+te: the 21c rule (the false-accept share) applied to the training pairs that are not chain-C and not flagged: the top-ranked run with no unsupported pair,
+ depth by dmdWindow, no number chosen. Leave-one-set-out over the nine sets; the held-out set's pairs are scored with the te from the other eight.
+Prediction, written before running: the veto fires on paraphrase too (derive_from against come_from is a different predicate over the same
+arguments, 39 of the 72 unmet claim atoms in 19b were of that kind), so it will remove many true E pairs along with the swaps; the threshold will
+fall below 0.99 because the 0.99-ranked unsupported pairs (relations 521, 503, 506) are removed, and the net E accepted will be small.
+Evaluation bars (pooled, over the nine held-out sets, rules = the atoms arm on the same rows): E1 accuracy above the rules'; E2 false-accept rate
+(unsupported accepted / not-E pairs) not above the rules'; E3 the unsupported share of accepted claims reported, with no bar. Per-language and
+same/cross split reported. If E1 and E2 pass, a new held-out pair set is registered (run 22); if not, the result is recorded and no new pairs are run.
+RESULT (run 22a, leave-one-set-out over the nine spent sets; native/kernel/atom-support.js swapFlags, eval/meaning/atoms/learn-swap.mjs):
+ te is 0.99 in every fold, with or without the swap filter (depth 8–16 of ~230–300): removing the flagged pairs from the training ranking does not
+ move the first unsupported pair, so the false-accept share gives the same stop as run 21c.
+ pooled accuracy: rules 63.6 · nli (21c) 52.4 · nli+swap 51.9. False-accept (of 199 not-E): 3.5 · 0.5 · 0.5. E accepted (of 194): 58 · 8 · 6.
+ Unsupported share of accepted claims: rules 10.8% · nli 11.1% · nli+swap 14.3% (1 of 7).
+ E1 FAIL (51.9 < 63.6). E2 PASS (0.5% ≤ 3.5%). Per the registered rule, no new pairs; nothing frozen.
+ The prediction held in part: the swap flag fired on 45 pairs, 33 of them E (paraphrase: Paris/capital of France, retire/make, give/help), so it
+ removes true accepts with the swaps (63 role flags, 2 direction). It did not lower te: the prediction that the threshold would fall below 0.99
+ was wrong.
+ Correction to the 21c record: relations 521, 503 and 506 (the paid/received and licensed to/from pairs) are not in the atoms dump, because the
+ chain (grammar-ud or janus) already calls them C before the atoms arm runs; they were false accepts of the raw NLI score only. The pair the
+ chain does not catch, fresh-ml 641 (Luftseilbahn/Zahnradbahn), carries no swap flag. So the role-swap errors the NLI model makes are mostly
+ already caught by the chain; the swap veto adds nothing there and costs true accepts.
