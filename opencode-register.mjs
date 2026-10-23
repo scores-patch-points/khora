@@ -19,7 +19,7 @@ const DET = /^(?:our|my|your|their|its|the|a|an|this|that|these|those|we|new)\s+
 const PRONOUN_VALUE = /^(?:it|they|this|that)\s+(?:is|are|will be|has|have)\b/i;
 
 export const sentencesOf = (text) =>
-  String(text ?? "").split(/\n+/).flatMap((line) => line.split(/(?<=[.!?])\s+(?=[A-Z0-9"'(\[])/)).map((s) => s.trim()).filter(Boolean);
+  String(text ?? "").replace(/^[\s"“”]+|[\s"“”]+$/g, "").split(/\n+/).flatMap((line) => line.split(/(?<=[.!?])\s+(?=[A-Z0-9"'(\[])/)).map((s) => s.trim()).filter(Boolean);
 
 // A coordinated second clause with its own subject and verb is its own statement: "A is X and the B has Y".
 export const clausesOf = (sentence) => {

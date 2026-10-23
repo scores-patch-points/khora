@@ -60,6 +60,11 @@ test("what the person says the assistant said is not the person's own statement 
   assert.equal(R.record({ sessionID: "h", ask: "You told me earlier that the mascot service was called Comet." }).length, 0);
 });
 
+test("a message wrapped in quotes by the client is stored without them", () => {
+  fresh();
+  assert.equal(R.record({ sessionID: "i", ask: '"Our mascot service is called Orbit."' })[0].text, "Our mascot service is called Orbit.");
+});
+
 test("no statements, no block", () => {
   fresh();
   assert.equal(R.registerNote({ sessionID: "g", ask: "Explain consistent hashing in 600 words." }).gap, "empty");
