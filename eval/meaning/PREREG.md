@@ -588,3 +588,20 @@ chosen: dmdWindow, native/kernel/activation.js). Replaced, for both thresholds (
  (leave-one-set-out over the nine spent sets; rows and scores as then). The bars of those runs stand as EVALUATION bars, not selection
  parameters: for the E arm, pooled accuracy above the rules' and false accepts not above the rules' pooled rate (5.5%); for C, C1–C4 of 21a.
  Run 20's frozen arm (te 0.97 from the 5% cap) is not replaced, and fresh20 is spent: what DMD gives for te is reported post hoc.
+RESULT (run 21b, leave-one-set-out over the nine spent sets; eval/meaning/atoms/dmd-threshold.mjs, learn-dmd.mjs). Rows are the atoms-arm
+pairs plus those the chain calls C; "rules" = the atoms arm; accuracy is E against not-E over all pairs of the held-out set.
+ te by DMD (best-accuracy conclusion): 0.04–0.07 in every fold (0.19 with fresh20 held out), depth 256 of ~330 (the window is deep: the optimum
+ is fixed only far down the ranking). Pooled E accuracy 63.6 → 75.1, false-accept 3.5% → 26.6%, E accepted 58 → 149 of 194. Fails the E
+ evaluation bar (false accepts above the rules'): per set up to 8 of 10 (relations), 23 of 48 (fresh19).
+ tc by DMD (best-accuracy): 0.75–0.79, depth 128 of ~370. Pooled C named 27.1% → 66.7% (35 → 86 of 129), false-C 6 → 29 of 264 (11.0%). C1
+ PASS (+39.6), C2 FAIL (11.0% pooled; cf 37.5%, main 33%, fresh19 13%), C4 PASS (non-English 62.0% against English 40.0%).
+ Why the accuracy conclusion is loose: most not-E pairs (C, T) score near zero on entailment, so a threshold near zero already separates them and
+ accuracy hardly charges the few not-E pairs that score high; accuracy weighs a false accept like a missed E, and the cap existed to say it does
+ not. DMD finds where that conclusion stops moving, not what it should be.
+21b′ (POST HOC, a second conclusion tried after seeing 21b; not pre-registered): the pure-prefix conclusion (the lowest score above which every
+ pair is positive). It stops at depth 8–16 of ~330 in every fold, because the first not-E pair near the top of the ranking ends the prefix: te and
+ tc 0.99 in all nine folds. Pooled E accuracy 52.4, false-accept 0.5%, E accepted 8 of 194; C named 31.0% (40 of 129), false-C 2.7%. Strict to
+ the point of accepting almost nothing; the stop is set by a few pairs at the top (a single odd pair at 0.99 moves it).
+Reading: neither DMD conclusion reproduces the 5% operating point, and nothing is frozen from 21b or 21b′. A DMD-based cap needs a conclusion
+that carries the cost of a false accept itself; the two tried carry it as zero (accuracy) or as infinite (pure prefix). Run 20's arm (te 0.97)
+and its recorded result stand; run 21 is not run on new pairs.
