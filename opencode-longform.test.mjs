@@ -201,3 +201,22 @@ test("a reply that repeats itself, or echoes the prompt's wording, is cleaned be
   assert.ok(!/left out of the section/.test(s1));
   assert.ok(job.calls >= 5);
 });
+
+test("fewer facts than a piece is written from is a typed gap, never a piece written from nothing", () => {
+  const thin = { quotes: QUOTES.slice(0, 2), passages: [], parts: [], stop: { reason: "time budget (20 s) reached before the sources saturated" } };
+  const r = E.longformStart({ ask: "write an essay on dolphins", topic: "dolphins", gathered: thin, now: 1_700_000_000_000 + 7 });
+  assert.equal(r.gap?.kind, "nothing-read");
+  assert.match(r.gap.reason, /2 fact\(s\) were read for dolphins \(time budget/);
+  assert.ok(!r.job, "no job is started");
+  const empty = E.longformStart({ ask: "write an essay on dolphins", topic: "dolphins", gathered: { quotes: [], passages: [] }, now: 1_700_000_000_000 + 8 });
+  assert.equal(empty.gap?.kind, "nothing-read");
+});
+
+test("no facet found: the default shape still has a body (the topic itself), never just an opening and a close", () => {
+  const d = E.defaultOutline("dolphins", []);
+  assert.deepEqual(d.map((s) => s.title), ["Introduction", "Dolphins", "Conclusion"]);
+  assert.equal(d.length, E.LIMITS.minSections);
+  const { job } = E.longformStart({ ask: "write an essay on dolphins", topic: "dolphins", gathered: { quotes: QUOTES.slice(0, 4), passages: [], voids: [], parts: [] }, now: 1_700_000_000_000 + 9 });
+  assert.equal(job.outline.length, 3);
+  assert.ok(job.material.s2.length >= 1, "the body section is given lines to write from");
+});
