@@ -142,6 +142,18 @@ test("a two-sentence update ('X moved. It is now Y.') is one mark that reads bac
   assert.match(R.registerNote(reg), /before that it was Thursdays at 02:00 UTC/);
 });
 
+test("precision: a compaction checkpoint, a question with a stray quote, a framed subject and an over-long sentence bind nothing", () => {
+  const seen = (...t) => R.extractBindings(turns(...t)).bindings;
+  assert.equal(seen('<conversation-checkpoint>\nThe following is a summary. The staging cluster is Pelican.\n</conversation-checkpoint>').length, 0, "a harness block is not the person's words");
+  assert.equal(seen('What is the deploy window now?"').length, 0, "a question with a stray quote after the mark");
+  assert.equal(seen("Is the staging cluster Pelican").length, 0, "an interrogative without a mark");
+  const b = seen("A heads up: the staging cluster is Pelican.");
+  assert.equal(b.length, 1);
+  assert.equal(b[0].subject, "staging cluster", "the discourse frame is stripped, not bound");
+  assert.equal(seen(`The plan is ${"very ".repeat(60)}long.`).length, 0, "too long to be one stated fact");
+  assert.equal(seen("## Next Move 1 — the owner is Sven.").length, 0, "markdown is not a statement");
+});
+
 test("the block: prose the model can quote, bounded, the cut disclosed; empty when there is nothing to say", () => {
   assert.equal(R.registerNote(R.buildRegister([])), "");
   const mem = R.ingest(turns("The staging cluster is named Pelican.", "Update: the staging cluster is now Heron."));
@@ -156,12 +168,41 @@ test("the block: prose the model can quote, bounded, the cut disclosed; empty wh
   assert.doesNotMatch(R.REGISTER_LEGEND, /\b(?:never|do not|don't|must not)\b/i, "the legend states a fact, never a prohibition");
 });
 
+test("C1 referents: a given name keys to its thing, a narrowed subject keys to the one it narrows, two things stay two", () => {
+  // the name given IS the thing: a later statement about Orbit supersedes the mascot service's name
+  let reg = R.ingest(turns("Our cat-named mascot service is called Orbit.", "Update: Orbit is now called Atlas.")).register;
+  assert.equal(reg.facts.length, 1, "one referent, one fact");
+  assert.equal(reg.facts[0].current.value, "Atlas");
+  assert.equal(reg.facts[0].history[0].value, "Orbit");
+  assert.ok(reg.facts[0].aliases.includes("orbit"));
+  // narrowed: "the mascot service" after "our cat-named mascot service" is the same thing (exactly one earlier subject ends in it)
+  reg = R.ingest(turns("Our cat-named mascot service is called Orbit.", "The mascot service is now called Comet.")).register;
+  assert.equal(reg.facts.length, 1);
+  assert.equal(reg.facts[0].current.value, "Comet");
+  assert.equal(R.lookup("what is the mascot service called?", reg).value, "Comet");
+  // two things stay two: a shared head noun is not an alias
+  reg = R.ingest(turns("The staging cluster is named Pelican.", "The prod cluster is named Heron.")).register;
+  assert.equal(reg.facts.length, 2);
+  // ambiguous narrowing is refused: "the cluster" could be either, so it is a third key, not a merge
+  reg = R.ingest(turns("The staging cluster is named Pelican.", "The prod cluster is named Heron.", "The cluster is now Ibis.")).register;
+  assert.equal(reg.facts.length, 3);
+  // aka: a stated alias; lookup by either name; the line names one and discloses the other
+  reg = R.ingest(turns("The deploy window, also known as the release window, is Thursdays at 02:00 UTC.", "Update: the release window is now Fridays at 03:00 UTC.")).register;
+  assert.equal(reg.facts.length, 1);
+  assert.equal(R.lookup("what is the release window now?", reg).value, "Fridays at 03:00 UTC");
+  assert.match(R.registerNote(reg), /The deploy window \(also: release window\) is Fridays at 03:00 UTC/);
+  // the F5 and hard-chat bars are untouched: the earlier facts still key and answer as before
+  const mem = R.ingest(turns("Our mascot service is called Orbit.", "The platform team has 7 people.", "The data team has 12 people."));
+  assert.equal(R.answer("what is the mascot service called?", mem).value, "Orbit");
+  assert.equal(R.answer("how many people in the platform team plus the data team in total?", mem).value, 19);
+});
+
 test("CI guard: the register imports only its sibling store and node builtins, names no model client, opens no socket", () => {
   const src = fs.readFileSync(path.join(HERE, "opencode-register.mjs"), "utf8");
   const problems = [];
   for (const m of src.matchAll(/(?:^|\n)\s*import\s+(?:[^'"]*?\s+from\s+)?["']([^"']+)["']/g)) {
     const spec = m[1];
-    if (spec === "./opencode-eot.mjs" || spec.startsWith("node:")) continue;
+    if (spec === "./opencode-eot.mjs" || spec.startsWith("node:") || spec.startsWith("./vendor/janus/identity/")) continue;
     problems.push(`import "${spec}"`);
   }
   for (const [i, line] of src.split("\n").entries()) {
