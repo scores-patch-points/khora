@@ -99,6 +99,22 @@ export function meeters(C, S, { claimLang = "en", sourceLang = "en", same = null
   return { wordMeet, refMeet, figMeet, predMeet, predWords, argsMeet, standing, canon };
 }
 export { low, words, stem, argText, DEG };
+// swapFlags (PREREG run 22a): claim atoms (two or more arguments; not is_a, named, has_*) whose arguments the source holds under a different
+// predicate (role swap), or in the reverse order under a meeting predicate (direction swap). A different predicate over the same arguments is a
+// swap; no lexicon of antonyms or converses is consulted.
+export function swapFlags(C0, S, { claimLang = "en", sourceLang = "en", same = null, keysOf = null } = {}) {
+  const C = canonical(C0), { predMeet, argsMeet } = meeters(C, S, { claimLang, sourceLang, same, keysOf });
+  const out = [];
+  for (const c of C) {
+    const cargs = c.args ?? []; if (cargs.length < 2 || c.pred === "is_a" || c.pred === "named" || /^has_/.test(c.pred) || DEG.test(c.pred)) continue;
+    const full = S.some((s) => (s.args ?? []).length >= cargs.length && predMeet(c.pred, s.pred) && argsMeet(cargs, s.args));
+    if (full) continue;
+    const role = S.find((s) => (s.args ?? []).length >= cargs.length && !predMeet(c.pred, s.pred) && argsMeet(cargs, s.args));
+    const dir = S.find((s) => (s.args ?? []).length >= cargs.length && predMeet(c.pred, s.pred) && argsMeet([...cargs].reverse(), s.args));
+    if (role) out.push({ kind: "role", claim: c.text, source: role.text }); else if (dir) out.push({ kind: "direction", claim: c.text, source: dir.text });
+  }
+  return out;
+}
 export function atomSupport(C0, S, { claimLang = "en", sourceLang = "en", same = null, keysOf = null, unread = [] } = {}) {
   const C = canonical(C0);
   const { wordMeet, refMeet, predMeet, predWords, argsMeet, standing } = meeters(C, S, { claimLang, sourceLang, same, keysOf });

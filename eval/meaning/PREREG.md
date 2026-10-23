@@ -644,3 +644,16 @@ fall below 0.99 because the 0.99-ranked unsupported pairs (relations 521, 503, 5
 Evaluation bars (pooled, over the nine held-out sets, rules = the atoms arm on the same rows): E1 accuracy above the rules'; E2 false-accept rate
 (unsupported accepted / not-E pairs) not above the rules'; E3 the unsupported share of accepted claims reported, with no bar. Per-language and
 same/cross split reported. If E1 and E2 pass, a new held-out pair set is registered (run 22); if not, the result is recorded and no new pairs are run.
+RESULT (run 22a, leave-one-set-out over the nine spent sets; native/kernel/atom-support.js swapFlags, eval/meaning/atoms/learn-swap.mjs):
+ te is 0.99 in every fold, with or without the swap filter (depth 8–16 of ~230–300): removing the flagged pairs from the training ranking does not
+ move the first unsupported pair, so the false-accept share gives the same stop as run 21c.
+ pooled accuracy: rules 63.6 · nli (21c) 52.4 · nli+swap 51.9. False-accept (of 199 not-E): 3.5 · 0.5 · 0.5. E accepted (of 194): 58 · 8 · 6.
+ Unsupported share of accepted claims: rules 10.8% · nli 11.1% · nli+swap 14.3% (1 of 7).
+ E1 FAIL (51.9 < 63.6). E2 PASS (0.5% ≤ 3.5%). Per the registered rule, no new pairs; nothing frozen.
+ The prediction held in part: the swap flag fired on 45 pairs, 33 of them E (paraphrase: Paris/capital of France, retire/make, give/help), so it
+ removes true accepts with the swaps (63 role flags, 2 direction). It did not lower te: the prediction that the threshold would fall below 0.99
+ was wrong.
+ Correction to the 21c record: relations 521, 503 and 506 (the paid/received and licensed to/from pairs) are not in the atoms dump, because the
+ chain (grammar-ud or janus) already calls them C before the atoms arm runs; they were false accepts of the raw NLI score only. The pair the
+ chain does not catch, fresh-ml 641 (Luftseilbahn/Zahnradbahn), carries no swap flag. So the role-swap errors the NLI model makes are mostly
+ already caught by the chain; the swap veto adds nothing there and costs true accepts.
