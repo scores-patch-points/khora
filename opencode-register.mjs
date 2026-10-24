@@ -224,6 +224,23 @@ export function unwrapCliQuote(text) {
   return m ? m[1].replace(/\\"/g, '"') : s;
 }
 
+/** After a compaction, the "last user message" the plugin hands the door is the harness's checkpoint:
+ *    <conversation-checkpoint> … <summary>(model-written)</summary> <recent-context>[User]: "…"</recent-context> </conversation-checkpoint>
+ *  The summary is a model's paraphrase and is never read for facts; the recent-context lines are the person's own words, verbatim, and are the
+ *  only place a statement made in a compacted window survives. Returns the person's recent turns (still as the CLI quoted them), [] for a
+ *  checkpoint with none, or null when the text is not a checkpoint. Measured on the foldcode-poc hard chat at a 32k cap: every request after
+ *  turn 1 was one checkpoint message, so the register held 1 fact after 6 live turns. */
+export function checkpointUserTurns(text) {
+  const s = String(text ?? "");
+  if (!/^\s*<conversation-checkpoint>/.test(s)) return null;
+  const rc = /<recent-context>([\s\S]*?)<\/recent-context>/.exec(s);
+  if (!rc) return [];
+  const out = [];
+  const re = /\[(User|Assistant)\]:\s*([\s\S]*?)(?=\n\[(?:User|Assistant)\]:|\s*$)/g;
+  for (let m; (m = re.exec(rc[1]));) if (m[1] === "User" && m[2].trim()) out.push(m[2].trim());
+  return out;
+}
+
 export function extractBindings(turns, { lang = "en" } = {}) {
   const bindings = [];
   const gaps = [];
@@ -569,9 +586,19 @@ const sentenceKey = (s) => norm(s);
 /** Write the session's new bindings as `fact` marks under the session (agent). Idempotent by SENTENCE: after a compaction the
  *  window's turns renumber from 1, and the same sentence must not become a second fact. Returns what it wrote and the typed gaps. */
 export function ingestTurns({ task, agent, turns }) {
-  const list = (Array.isArray(turns) ? turns : []).map((t, i) => ({ n: Number(t.n ?? t.turn) || i + 1, role: t.role ?? "user", text: String(t.text ?? t.ask ?? "") }));
+  const marks = bindingsFromMarks(eot.projectMarks(task, { agent, kind: "fact" }));
+  const have = new Set(marks.map((b) => sentenceKey(b.sentence)));
+  // a compacted window renumbers from 1 and hands over a checkpoint, not the person's message: its recent-context lines are the person's
+  // turns, numbered after the highest turn already recorded so "you said so in turn N" never claims a turn the window cannot show
+  let seq = marks.reduce((m, b) => Math.max(m, Number(b.turn) || 0), 0);
+  const list = [];
+  for (const [i, t] of (Array.isArray(turns) ? turns : []).entries()) {
+    const role = t.role ?? "user", raw = String(t.text ?? t.ask ?? "");
+    const recent = role === "user" ? checkpointUserTurns(raw) : null;
+    if (recent === null) list.push({ n: Number(t.n ?? t.turn) || i + 1, role, text: raw });
+    else for (const u of recent) list.push({ n: ++seq, role: "user", text: u });
+  }
   const { bindings, gaps } = extractBindings(list);
-  const have = new Set(bindingsFromMarks(eot.projectMarks(task, { agent, kind: "fact" })).map((b) => sentenceKey(b.sentence)));
   let wrote = 0;
   for (const b of bindings) {
     const k = sentenceKey(b.sentence);

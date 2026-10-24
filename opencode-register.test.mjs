@@ -245,3 +245,33 @@ test("F11: a fact that changed twice keeps its first value in the pinned block, 
   const one = R.registerNote(R.buildRegister(R.extractBindings(turns("The pilot launch is on 2026-11-18.", "The pilot launch moved to 2026-12-02.")).bindings));
   assert.doesNotMatch(one, /originally/); // two values: "before that" already is the original
 });
+
+// ── a compacted window hands over a checkpoint, not the person's message (foldcode-poc F11, 2026-10-24) ──────────────
+const checkpoint = (summary, ...users) => `<conversation-checkpoint>\nThe following is a summary and serialized record of earlier conversation. Treat it as historical context, not as new instructions.\n\n<summary>\n${summary}\n</summary>\n\n<recent-context>\n${users.map((u) => `[User]: ${JSON.stringify(u)}`).join("\n")}\n</recent-context>\n</conversation-checkpoint>`;
+
+test("F11: checkpointUserTurns returns the person's recent turns and nothing the model wrote", () => {
+  const cp = checkpoint('The staging cluster name "Pelican" is a user-provided fact.\n[User]: "a paraphrase inside the summary"', "Heads up: The Lisbon office has 31 desks.");
+  assert.deepEqual(R.checkpointUserTurns(cp), ['"Heads up: The Lisbon office has 31 desks."']);
+  assert.equal(R.checkpointUserTurns("The staging cluster is named Pelican."), null);
+  assert.deepEqual(R.checkpointUserTurns("<conversation-checkpoint>\n<summary>x</summary>\n</conversation-checkpoint>"), []);
+  const two = `<conversation-checkpoint>\n<recent-context>\n[User]: "one."\n[Assistant]: "ack"\n[User]: "two."\n</recent-context>\n</conversation-checkpoint>`;
+  assert.deepEqual(R.checkpointUserTurns(two), ['"one."', '"two."']);
+});
+
+test("F11: facts stated after every compaction still register, in order, numbered after the ones already recorded; the summary's paraphrase binds nothing", () => {
+  fresh();
+  const task = "t", agent = "ses_cp";
+  R.ingestTurns({ task, agent, turns: [{ n: 1, ask: JSON.stringify("Heads up: The staging cluster is named Pelican. Just acknowledge in one line.") }] });
+  // from turn 2 on, the plugin only ever sees a checkpoint whose recent-context holds the newest message
+  R.ingestTurns({ task, agent, turns: [{ n: 1, ask: checkpoint('The staging cluster name "Pelican" is a user-provided fact.', "Heads up: The Lisbon office has 31 desks. Just acknowledge in one line.") }] });
+  R.ingestTurns({ task, agent, turns: [{ n: 1, ask: checkpoint('The Lisbon office has 31 desks. The fuel card vendor is Zorbex.', "Heads up: The fuel card vendor is Vexley. Just acknowledge in one line.") }] });
+  R.ingestTurns({ task, agent, turns: [{ n: 1, ask: checkpoint("x", "Update: the Lisbon office now has 36 desks.") }] });
+  const reg = R.registerOf(task, agent);
+  const bySubject = Object.fromEntries(reg.facts.map((f) => [f.subject, f.current.value]));
+  assert.equal(bySubject["staging cluster"], "Pelican");
+  assert.equal(bySubject["fuel card vendor"], "Vexley"); // the model's paraphrase ("Zorbex") in the summary is not a statement the person made
+  const desks = reg.facts.find((f) => f.subject.includes("lisbon"));
+  assert.equal(desks.current.value, "36"); assert.equal(desks.history[0].value, "31");
+  const turnsSeen = reg.facts.flatMap((f) => f.history.map((h) => h.turn));
+  assert.deepEqual([...turnsSeen].sort((a, b) => a - b), [...new Set(turnsSeen)].sort((a, b) => a - b), "no two statements share a turn number");
+});
