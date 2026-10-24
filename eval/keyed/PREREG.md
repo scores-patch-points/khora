@@ -1,0 +1,116 @@
+# Entity-property claims, checked by identity: pre-registration
+
+2026-10-20. Written before the keyed tier exists in the pipeline and before any arm is run. Battery: `eval/keyed/battery.mjs`, 33 sentences (14 true and
+expressible, 12 false, 6 true but with no key the relation word can name, 1 unverifiable), frozen at sha256 in `battery.sha`.
+
+## The question
+The standalone app measured that prose-level clause binding earned nothing while ANSWERING BY IDENTITY (anchor QID, the kind's own keys, a typed
+value; `fold-chat-void-keyed.js`, eval/void L5) more than doubled RIGHT. Can the same door CHECK an answer's sentence: does the typed value the
+entity carries equal, differ from, or fail to speak to what the sentence says?
+
+## Arms (each sentence alone, as the whole draft, no passages; the pipeline binds the anchor itself)
+- **A0, as merged:** `finish` with research on: the bound entity's Wikipedia article judged by The Fold's falsifier, plus the hardcoded
+  born/died structured check (`structuredVerdict`).
+- **A1, keyed:** A0 plus the keyed door: the claim's relation words against the bound entity's own keys (`keyedFill`), the property's datatype
+  as the admits kind, the typed value compared with the sentence's filler.
+- Both arms replay the same recording of Wikimedia responses (every request the pipeline makes, recorded once through the 10 s gate; replay is
+  offline and a miss is an error, never a fetch).
+
+## Scoring (from the arm's output alone)
+- **RIGHT:** the verdict equals the truth (supported for true, contradicted for false).
+- **WRONG:** the verdict contradicts the truth (contradicted for true, supported for false, any supported/contradicted for `truth: null`).
+- **GAP:** unsupported. Informative if its trace carries a typed refusal naming why (no key matched, datatype mismatch, no identity, no value).
+- Reported: RIGHT, WRONG, informative GAP, silent GAP, per arm and per `key` class.
+
+## Bars (A1 is admitted only if every one holds; a failed bar is reported as failed)
+- **V1 (earns):** A1 RIGHT is strictly greater than A0 RIGHT.
+- **V2 (never more wrong):** A1 WRONG is not greater than A0 WRONG.
+- **V3 (typed gaps):** every non-RIGHT, non-WRONG verdict of A1 carries a typed refusal; none is silent.
+- **V4 (evidence is earned):** every A1 supported/contradicted cites a Wikidata statement (`Q…#P…`) whose value is shown; every contradicted one shows a
+  value that differs from the sentence's filler, and every supported one a value that equals it (checked by the runner, not read by eye).
+- **V5 (hosts):** only wikipedia.org, wikidata.org and wiktionary.org were fetched; no model.
+
+## What is declared, not measured (named so a measurement can reverse it)
+- A numeric claim matches a stated quantity at the claim's own precision (8,849 against 8848.86), and a year matches a time value at year grain
+  or finer. A claim naming a month or day is compared at that grain.
+- A property marked single-valued by Wikidata (P2302) that returns one value and a sentence that differs is CONTRADICTED; a multi-valued property
+  that does not list the sentence's filler is UNSUPPORTED with the listed values shown, never contradicted.
+- Relation words are the sentence's open-class words after the anchor's own words, years and numbers are removed; no verb-to-property table.
+
+## Amendment 1 (written before arm A2 was run)
+Run on the frozen battery (battery.sha unchanged) after A0/A1 were measured: 7 false claims were found with the right value shown but left UNSUPPORTED
+(k02 k05 k06 k16 k18 k33 and the quantity k26), because their properties are not marked single-valued.
+- **A2:** A1 plus: a time or item property that lists exactly ONE value, bound unambiguously, and a sentence whose filler differs, is CONTRADICTED.
+  Quantities are excluded (a sentence may round: "about 9,000").
+- **Bars for A2:** W1 A2 RIGHT is strictly greater than A1 RIGHT; W2 A2 WRONG is not greater than 0; V3, V4, V5 as above. Failed bars are reported.
+- Declared, not measured: a property that has a single stored value is read as a single true value. A fact with several true values stored as one
+  (a country with two capitals, one stored) is the case this would get wrong; the battery holds no such claim, so a pass here does not clear it.
+
+### Amendment 1 result (replay, offline)
+A0 10 RIGHT / 0 WRONG; A1 12 / 0; A2 17 RIGHT / 1 WRONG. W1 holds (17 > 12). **W2 FAILS: A2 has 1 WRONG.**
+The wrong one is k05 ("Isaac Newton was born in 1643", true by the Gregorian calendar): Wikidata stores 25 December 1642 (Julian), so the sole value
+differs and A2 contradicts a true sentence. This is the case declared above, arrived as a calendar rather than a second value. A2 is NOT admitted.
+Any follow-up (for example, never contradicting a time value whose calendar model is Julian) is a new amendment, and is informed by having seen k05.
+
+## Amendment 2 (written after Amendment 1's result, which showed k05; so informed by it)
+- **A3:** A2 plus: a time value whose statement carries the Julian calendar model (Q1985786) is never contradicted by a year; the standing stays
+  UNSUPPORTED with the stored value shown. If the calendar cannot be read, the same.
+- **Bars for A3:** W1 A3 RIGHT strictly greater than A1 RIGHT (12); W2 A3 WRONG = 0; V3, V4, V5 as above. Failed bars are reported.
+- Declared, not measured: Julian is the only calendar guarded; no Julian-to-Gregorian conversion is attempted (that could SUPPORT k05, and is a
+  separate amendment). The battery holds one Julian-dated claim, so a pass shows the guard works on that claim, not that it covers others.
+
+### Amendment 2 result (replay, offline)
+A0 10 RIGHT / 0 WRONG; A1 12 / 0; A2 17 / 1; **A3 16 RIGHT / 0 WRONG**. W1 holds (16 > 12), W2 holds (0 wrong), V3 holds (all 17 gaps carry a typed reason),
+V4 and V5 hold. A3 IS ADMITTED and is the default (FOLD_KEYED_SOLE=0 and FOLD_KEYED_JULIAN_GUARD=0 turn the parts off).
+Cost seen: the guard also withholds k06 (Newton's death, "1730", false; Julian-dated), which A2 contradicted correctly: one wrong call avoided, one correct contradiction lost.
+Open: Julian-to-Gregorian conversion would turn k05 into a SUPPORT and k06 back into a contradiction; not attempted, not measured.
+
+## Amendment 3 (written before arm A4 was run): the primary tier
+Reason: "Wikipedia is an index, not a source". Built: for a claim whose subject the identity step bound to an encyclopedia article, the article sentence that
+carries the claim (every figure, most stems) is found; its FOOTNOTES are followed to the pages they cite (the scraped search engines refuse this address:
+Brave 429, DuckDuckGo challenge, Bing serves unrelated pages, so no search engine is used); each page is read (one per host, ranked by host kind, mirrors and
+tertiary hosts dropped) and run through The Fold's findPrimary strict gate (every content stem and figure of the claim; the sentence must ASSERT it). The
+"pointing" step is mechanical (the first sentence that already passes the gate); no model is called.
+- **A4:** A3 plus the primary tier. A claim supported through Wikidata/Wikipedia is labelled tier "index" unless a primary page asserts it ("primary"). A claim
+  nothing read supports may become supported at tier "primary" if a cited page asserts it.
+- **Bars for A4:** X1 A4 WRONG = 0 (a false claim must never become supported through a page); X2 A4 RIGHT >= A3 RIGHT; X3 every "primary" support names the
+  cited page's URL and the page's own sentence, and that sentence passes the gate (checked by the runner); X4 no search engine and no model is used; the hosts of pages read
+  are reported (they are the article's own cited pages, not a fixed list). A4 is reported even if the tier finds nothing: the count of "primary" is descriptive, not a bar.
+- Declared, not measured: host-kind ranking and the assertion cues are The Fold's own tables (fold-chat-primary.js); the page reader sends one GET per page with an
+  honest user agent and does not read robots.txt; a PDF or paywalled page is a typed unreadable, not a miss.
+
+### Amendment 3 result (recorded online once, replayed offline)
+A3 16 RIGHT / 0 WRONG; **A4 16 RIGHT / 0 WRONG**, tiers {"index": 12, "primary": 0}. X1 holds (0 wrong), X2 holds (16 >= 16), X3 is vacuous (no primary support was made),
+X4 holds (no search engine, no model). **The primary tier found no primary page for any of the 33 claims.** Pages fetched: 3 (archive.nytimes.com, users.clas.ufl.edu,
+peo.gov.au). Where it stopped, by the trail: the sentence's footnote cites a book or journal with no web page (Einstein, Curie leads), the article sentence is only in the
+infobox or has no footnote (Canberra), or a cited page was read and failed the gate or was unreadable (nytimes archive). The scraped search engines refuse this address
+(Brave 429, DuckDuckGo challenge, Bing serves unrelated pages), so a claim whose footnote cites no web page has no route to a primary page here.
+
+## Amendment 4 (written before arm A5 was run): a keyed search API
+Reason: Amendment 3's tier found nothing because a claim whose footnote cites no web page has no route to one, and the scraped search engines refuse this address.
+- **A5:** A4 plus the Brave Search API (BRAVE_API_KEY from the environment, never stored or logged; free tier, one request a second, 20 results a query, up to 3
+  queries a claim from The Fold's queriesFor: the quoted distinctive phrase, then content terms). Its results join the footnote pages as candidates; every candidate meets the
+  same ranking (host kind), mirror/tertiary drops and strict assertion gate as in A4. Recorded online once (cache: recording/web/brave), replayed offline.
+- **Bars for A5:** Y1 A5 WRONG = 0 (a false claim must never become supported through a page); Y2 A5 RIGHT >= A4 RIGHT; Y3 every "primary" support names the page URL and its
+  own sentence and that sentence passes the gate (checked by the runner); Y4 no model is used and the only search host is api.search.brave.com. The count of "primary" supports
+  and the hosts read are reported; they are descriptive, not a bar. A5 is reported whatever it finds.
+- Declared, not measured: Brave's ranking decides which pages are offered; the same Fold tables rank hosts by kind.
+
+## Amendment 5 (written before arm A5 was run; supersedes Amendment 4's search source)
+Instruction: use public APIs, not a keyed one. A5 is therefore A4 plus **Marginalia's public search API** (keyless, the shared key "public"; api.marginalia.nu;
+up to 3 queries a claim, 20 results each, 2 s apart). The Brave code stays in the tree, off unless FOLD_BRAVE=1, and is not run. Bars Y1–Y4 of Amendment 4 stand
+unchanged, with Y4 read as: no model, and the only search host is api.marginalia.nu. Probed keyless and answering: Marginalia (web index), Crossref and OpenAlex
+(scholarly works only), Nobel Prize API (Nobel claims only), Internet Archive advanced search; not used here. Wikidata statement references were checked: mostly database
+identifiers, almost no URLs, so they are not a source of pages.
+Declared, not measured: Marginalia indexes a small independent web, so a claim about a mainstream topic may have no page in it; the shared key can be throttled.
+
+### Amendment 5 result (recorded online once through Marginalia, replayed offline)
+First A5 run (17 RIGHT / 0 WRONG, 4 primary) used The Fold's function-word table in the gate and a hand-written stoplist for Marginalia's query. The user ruled word lists out,
+so that run is DISCARDED and A5 was recorded again with open/closed class read from the received parser prior (opencode-keyed.mjs openClassOf) in both places.
+**A5: 17 RIGHT / 0 WRONG / 16 GAP; tiers {primary: 5, index: 8}** (A4: 16 / 0, index 12). Y1 holds (0 wrong), Y2 holds (17 >= 16), Y3 holds (each primary support carries the page URL
+and its own sentence, which passed the gate), Y4 holds (no model; search host api.marginalia.nu). The five: k01 system-overload.org, k03 encyc.org, k15 transcend.org,
+k19 theworld.org, k20 handwiki.org. Pages read: 30+ hosts, every one from the footnote or a Marginalia result.
+**Caveat, said plainly:** "primary" here means a page on another host that the gate accepts as asserting the claim, not an authoritative source. The host kinds are The Fold's
+declared table (".org" = organisation), so system-overload.org (a physics-notes site), encyc.org and handwiki.org (a wiki derived from the encyclopedia, not in the mirror list)
+count. Only theworld.org (a public-radio site) is plainly independent reporting. Of the 5 primary supports, 4 were already supported at the index tier, so the tier added ONE
+new support (k19) and raised the independent corroboration of four. The false claims (k02 k16 k18 k33) stayed contradicted at the index tier.

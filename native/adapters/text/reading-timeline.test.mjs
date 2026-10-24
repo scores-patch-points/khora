@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
+import { makeSameBeing } from "./corpus-identity.js";
 import { buildReadingTimeline, buildCorpusTimeline, splitOf, foldLog, isCoherent, CELLS } from "./reading-timeline.js";
 import { splitSentences } from "./spans.js";
 import { extractSurfaces, discoverReferents, diaNorm, namesCorefer, genericTokens } from "./surfaces.js";
@@ -167,7 +168,8 @@ test("a snapshot's cursor into the log lets the fold be taken at any frontier", 
 
 
 // ── many sources: provenance and the ontological split ───────────────────────────────────────────────────────
-const cdeps = { ...deps, namesCorefer, genericTokens };
+const sameYes = { prepare: () => () => ({ same: true, verdict: "bound", forWhom: null, basis: "decided by the test: the mechanics under test are the link, not the identity" }) };
+const cdeps = { ...deps, namesCorefer, genericTokens, sameBeing: sameYes };
 const REPORT = "Captain Smith ordered the boats lowered. Captain Smith spoke to Ismay on the bridge. Ismay asked the Captain about the ice. Captain Smith went down with the ship.";
 const SCRIPT = "Captain Smith stood on the bridge. Jack Dawson climbed to the rail. Captain Smith ordered the boats lowered. Jack Dawson held the girl.";
 const MEMOIR = "Beesley saw Captain Smith on the bridge. Beesley wrote that Captain Smith ordered the boats lowered.";
@@ -191,7 +193,7 @@ test("a link across sources keeps both ends, their sources and registers, and na
   assert.deepEqual([link.from.source, link.to.source], ["src_script", "src_report"]);
   assert.equal(link.split.kind, "fictionalizes"); assert.equal(link.split.across, true);
   assert.deepEqual(link.split.truthClaiming, [false, true]);
-  assert.match(link.checkedBy, /namesCorefer/);
+  assert.match(link.checkedBy, /holographic identity/);
   assert.equal(isCoherent(link), true);
   const f = foldLog(c.log);
   assert.notEqual(link.from.ref, link.to.ref, "two referents remain — the ends stay ends");
@@ -311,4 +313,30 @@ test("voices across sources never mix: each source's chain ends at its own root"
   const a = f.voices(SPEECH.indexOf("the ship struck"), "src_a"), b = f.voices("Cameron wrote that Rose said that the ship struck.".indexOf("the ship struck"), "src_b");
   assert.equal(a.chain.at(-1).register, "testimony"); assert.equal(b.chain.at(-1).register, "fiction");
   assert.deepEqual(b.chain.filter((x) => !x.root).map((x) => x.name), ["Rose", "Cameron"]);
+});
+
+test("correcting a source's register changes the split on its links and mints no new referent ids", () => {
+  const ids = (reg) => { const c = buildCorpusTimeline([{ id: "src_report", text: REPORT, register: "report" }, { id: "src_script", text: SCRIPT, register: reg }], cdeps, { maxSnapshots: 6 }); const f = foldLog(c.log); return { refs: [...f.referents.keys()].sort(), kinds: f.links.map((l) => l.split.kind).sort() }; };
+  const fic = ids("fiction"), rep = ids("report");
+  assert.deepEqual(fic.refs, rep.refs, "the same ends under either register — a person's merge/sever/reassign on an id survives a corrected register");
+  assert.notDeepEqual(fic.kinds, rep.kinds, "while the split on the links does change");
+});
+
+test("a shared name only NOMINATES: with no identity test injected nothing joins, and the pairs are returned as candidates", () => {
+  const { sameBeing: _x, ...noIdentity } = cdeps;
+  const c = buildCorpusTimeline([{ id: "src_report", text: REPORT, register: "report" }, { id: "src_script", text: SCRIPT, register: "fiction" }], noIdentity, { maxSnapshots: 6 });
+  assert.equal(c.links.length, 0); assert.ok(c.candidates.length >= 1); assert.equal(c.candidates[0].identity.reason, "no_identity_test_injected");
+});
+
+test("holographic identity: a surname or a title never joins two sources' people — an unread pair is a typed gap, not a verdict of difference", () => {
+  const A = "Senator Smith asked Bruce Ismay about the boats. Senator Smith asked again. Smith adjourned the hearing.";
+  const B = "Captain Smith stayed on the bridge. Captain Smith gave the order. Smith never left the ship.";
+  const c = buildCorpusTimeline([{ id: "src_a", text: A, register: "testimony" }, { id: "src_b", text: B, register: "journalism" }], { ...cdeps, sameBeing: makeSameBeing() }, { maxSnapshots: 4 });
+  assert.equal(foldLog(c.log).links.length, 0, "no join on a shared surname");
+  for (const k of c.candidates) { assert.equal(k.identity.same, false); assert.notEqual(k.identity.verdict, "contradicted", "too little reading is a gap, never 'different'"); }
+});
+
+test("byte-identical sources are one witness: nothing is linked between a source and its own copy", () => {
+  const c = buildCorpusTimeline([{ id: "src_a", text: REPORT, register: "report" }, { id: "src_b", text: REPORT, register: "journalism" }], cdeps, { maxSnapshots: 4 });
+  assert.equal(c.links.length, 0); assert.equal(c.duplicates.length, 1); assert.equal(c.duplicates[0].reason, "identical_bytes");
 });

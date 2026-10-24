@@ -1,0 +1,9597 @@
+{
+ "schema": "GoldAtoms@1",
+ "labeller": "independent-labeller-A (en, filing, es) + independent-labeller-B (fr, de, ja)",
+ "entities": {
+  "Crater Lake": [
+   {
+    "id": "E1",
+    "name": "Crater Lake"
+   },
+   {
+    "id": "E2",
+    "name": "Oregon"
+   },
+   {
+    "id": "E3",
+    "name": "Western United States"
+   },
+   {
+    "id": "E4",
+    "name": "Crater Lake National Park"
+   },
+   {
+    "id": "E5",
+    "name": "Wizard Island"
+   },
+   {
+    "id": "E6",
+    "name": "United States Mint"
+   },
+   {
+    "id": "E7",
+    "name": "Oregon State Quarter"
+   },
+   {
+    "id": "E8",
+    "name": "Oregon regular-issue license-plate design featuring Crater Lake"
+   },
+   {
+    "id": "E9",
+    "name": "United States"
+   },
+   {
+    "id": "E10",
+    "name": "the two small islands of Crater Lake"
+   },
+   {
+    "id": "E11",
+    "name": "one-time plate surcharge"
+   }
+  ],
+  "Snake River": [
+   {
+    "id": "E1",
+    "name": "Snake River"
+   },
+   {
+    "id": "E2",
+    "name": "Pacific Northwest"
+   },
+   {
+    "id": "E3",
+    "name": "United States"
+   },
+   {
+    "id": "E4",
+    "name": "Columbia River"
+   },
+   {
+    "id": "E5",
+    "name": "Pacific Ocean"
+   },
+   {
+    "id": "E6",
+    "name": "Tri-Cities, Washington"
+   },
+   {
+    "id": "E7",
+    "name": "Columbia Basin"
+   },
+   {
+    "id": "E8",
+    "name": "Snake River watershed"
+   },
+   {
+    "id": "E9",
+    "name": "Rocky Mountains"
+   },
+   {
+    "id": "E10",
+    "name": "Great Basin"
+   },
+   {
+    "id": "E11",
+    "name": "Blue Mountains"
+   },
+   {
+    "id": "E12",
+    "name": "Oregon high desert"
+   },
+   {
+    "id": "E13",
+    "name": "most recent Ice Age"
+   },
+   {
+    "id": "E14",
+    "name": "catastrophic Ice Age flooding"
+   },
+   {
+    "id": "E15",
+    "name": "Snake River Canyon"
+   },
+   {
+    "id": "E16",
+    "name": "Shoshone Falls"
+   },
+   {
+    "id": "E17",
+    "name": "Shoshone"
+   },
+   {
+    "id": "E18",
+    "name": "Nez Perce"
+   },
+   {
+    "id": "E19",
+    "name": "Lewis and Clark"
+   },
+   {
+    "id": "E20",
+    "name": "Oregon Trail"
+   },
+   {
+    "id": "E21",
+    "name": "travelers on the Oregon Trail"
+   },
+   {
+    "id": "E22",
+    "name": "Snake River region"
+   },
+   {
+    "id": "E23",
+    "name": "settlers"
+   },
+   {
+    "id": "E24",
+    "name": "gold discoveries of the 1860s"
+   },
+   {
+    "id": "E25",
+    "name": "tribes"
+   },
+   {
+    "id": "E26",
+    "name": "early large irrigation projects along the Snake River"
+   },
+   {
+    "id": "E27",
+    "name": "hydroelectric dams"
+   },
+   {
+    "id": "E28",
+    "name": "four navigation dams on the lower Snake River"
+   },
+   {
+    "id": "E29",
+    "name": "shipping channel to Lewiston"
+   },
+   {
+    "id": "E30",
+    "name": "Lewiston, Idaho"
+   },
+   {
+    "id": "E31",
+    "name": "West Coast"
+   },
+   {
+    "id": "E32",
+    "name": "anadromous fish"
+   },
+   {
+    "id": "E33",
+    "name": "public agencies"
+   },
+   {
+    "id": "E34",
+    "name": "tribal governments"
+   },
+   {
+    "id": "E35",
+    "name": "private utilities"
+   },
+   {
+    "id": "E36",
+    "name": "Idaho"
+   }
+  ],
+  "Highwater Ethanol, LLC": [
+   {
+    "id": "E1",
+    "name": "Highwater Ethanol, LLC"
+   },
+   {
+    "id": "E2",
+    "name": "Minnesota"
+   },
+   {
+    "id": "E3",
+    "name": "Highwater ethanol plant near Lamberton"
+   },
+   {
+    "id": "E4",
+    "name": "Lamberton, Minnesota"
+   },
+   {
+    "id": "E5",
+    "name": "ethanol"
+   },
+   {
+    "id": "E6",
+    "name": "distillers grains"
+   },
+   {
+    "id": "E7",
+    "name": "Minnesota Pollution Control Agency"
+   },
+   {
+    "id": "E8",
+    "name": "Highwater air permit application"
+   },
+   {
+    "id": "E9",
+    "name": "corn oil"
+   },
+   {
+    "id": "E10",
+    "name": "corn"
+   },
+   {
+    "id": "E11",
+    "name": "ethanol industry"
+   },
+   {
+    "id": "E12",
+    "name": "biomass"
+   },
+   {
+    "id": "E13",
+    "name": "corn-based production technologies"
+   },
+   {
+    "id": "E14",
+    "name": "carbohydrates"
+   },
+   {
+    "id": "E15",
+    "name": "glucose"
+   },
+   {
+    "id": "E16",
+    "name": "beer (fermented mash)"
+   },
+   {
+    "id": "E17",
+    "name": "certified denaturant"
+   },
+   {
+    "id": "E18",
+    "name": "unleaded gasoline"
+   },
+   {
+    "id": "E19",
+    "name": "wholesale gasoline marketer"
+   },
+   {
+    "id": "E20",
+    "name": "blender"
+   },
+   {
+    "id": "E21",
+    "name": "ITEM 7 - Management's Discussion and Analysis"
+   },
+   {
+    "id": "E22",
+    "name": "ITEM 8 - Financial Statements and Supplementary Data"
+   },
+   {
+    "id": "E23",
+    "name": "revenue percentage table"
+   },
+   {
+    "id": "E24",
+    "name": "ethanol plant (kind)"
+   },
+   {
+    "id": "E25",
+    "name": "Highwater products"
+   }
+  ],
+  "Guadalquivir": [
+   {
+    "id": "E1",
+    "name": "Guadalquivir"
+   },
+   {
+    "id": "E2",
+    "name": "España"
+   },
+   {
+    "id": "E3",
+    "name": "Andalucía"
+   },
+   {
+    "id": "E4",
+    "name": "sierra de Cazorla"
+   },
+   {
+    "id": "E5",
+    "name": "provincia de Jaén"
+   },
+   {
+    "id": "E6",
+    "name": "cuenca hidrográfica del Guadalquivir"
+   },
+   {
+    "id": "E7",
+    "name": "provincia de Almería"
+   },
+   {
+    "id": "E8",
+    "name": "provincia de Córdoba"
+   },
+   {
+    "id": "E9",
+    "name": "provincia de Sevilla"
+   },
+   {
+    "id": "E10",
+    "name": "provincia de Huelva"
+   },
+   {
+    "id": "E11",
+    "name": "provincia de Cádiz"
+   },
+   {
+    "id": "E12",
+    "name": "provincia de Málaga"
+   },
+   {
+    "id": "E13",
+    "name": "provincia de Granada"
+   },
+   {
+    "id": "E14",
+    "name": "Murcia"
+   },
+   {
+    "id": "E15",
+    "name": "Albacete"
+   },
+   {
+    "id": "E16",
+    "name": "Ciudad Real"
+   },
+   {
+    "id": "E17",
+    "name": "Badajoz"
+   },
+   {
+    "id": "E18",
+    "name": "océano Atlántico"
+   },
+   {
+    "id": "E19",
+    "name": "estuario del Guadalquivir"
+   },
+   {
+    "id": "E20",
+    "name": "Almonte"
+   },
+   {
+    "id": "E21",
+    "name": "Sanlúcar de Barrameda"
+   },
+   {
+    "id": "E22",
+    "name": "Sevilla (ciudad)"
+   },
+   {
+    "id": "E23",
+    "name": "marismas del Guadalquivir"
+   },
+   {
+    "id": "E24",
+    "name": "parque nacional de Doñana"
+   },
+   {
+    "id": "E25",
+    "name": "península ibérica"
+   },
+   {
+    "id": "E26",
+    "name": "Andújar"
+   },
+   {
+    "id": "E27",
+    "name": "Córdoba (ciudad)"
+   }
+  ],
+  "Teide": [
+   {
+    "id": "E1",
+    "name": "Teide"
+   },
+   {
+    "id": "E2",
+    "name": "parque nacional del Teide"
+   },
+   {
+    "id": "E3",
+    "name": "Unesco"
+   },
+   {
+    "id": "E4",
+    "name": "complejo volcánico Teide-Pico Viejo"
+   },
+   {
+    "id": "E5",
+    "name": "Narices del Teide"
+   },
+   {
+    "id": "E6",
+    "name": "última erupción de las Narices del Teide (1798)"
+   },
+   {
+    "id": "E7",
+    "name": "fumarolas del Teide-Pico Viejo"
+   },
+   {
+    "id": "E8",
+    "name": "archipiélago canario"
+   },
+   {
+    "id": "E9",
+    "name": "isla de Tenerife"
+   }
+  ],
+  "Lago Llanquihue": [
+   {
+    "id": "E1",
+    "name": "lago Llanquihue"
+   },
+   {
+    "id": "E2",
+    "name": "Chile"
+   },
+   {
+    "id": "E3",
+    "name": "lago General Carrera"
+   },
+   {
+    "id": "E4",
+    "name": "sondas de cordel"
+   }
+  ],
+  "Rhône": [
+   {
+    "id": "E1",
+    "name": "Rhône"
+   },
+   {
+    "id": "E2",
+    "name": "Europe"
+   },
+   {
+    "id": "E3",
+    "name": "Suisse"
+   },
+   {
+    "id": "E4",
+    "name": "France"
+   },
+   {
+    "id": "E5",
+    "name": "Midi de la France"
+   },
+   {
+    "id": "E6",
+    "name": "glacier du Rhône"
+   },
+   {
+    "id": "E7",
+    "name": "Valais"
+   },
+   {
+    "id": "E8",
+    "name": "Alpes uranaises"
+   },
+   {
+    "id": "E9",
+    "name": "Léman"
+   },
+   {
+    "id": "E10",
+    "name": "Genève"
+   },
+   {
+    "id": "E11",
+    "name": "Encyclopédie Larousse"
+   },
+   {
+    "id": "E12",
+    "name": "SANDRE"
+   },
+   {
+    "id": "E13",
+    "name": "Lyon"
+   },
+   {
+    "id": "E14",
+    "name": "delta de Camargue"
+   },
+   {
+    "id": "E15",
+    "name": "mer Méditerranée"
+   },
+   {
+    "id": "E16",
+    "name": "Port-Saint-Louis-du-Rhône"
+   },
+   {
+    "id": "E17",
+    "name": "Nil"
+   },
+   {
+    "id": "E18",
+    "name": "mer Noire"
+   },
+   {
+    "id": "E19",
+    "name": "Danube"
+   },
+   {
+    "id": "E20",
+    "name": "Don"
+   },
+   {
+    "id": "E21",
+    "name": "bras du delta"
+   },
+   {
+    "id": "E22",
+    "name": "crues exceptionnelles"
+   },
+   {
+    "id": "E23",
+    "name": "Éridan"
+   },
+   {
+    "id": "E24",
+    "name": "Océan"
+   },
+   {
+    "id": "E25",
+    "name": "Téthys"
+   }
+  ],
+  "Puy de Dôme": [
+   {
+    "id": "E1",
+    "name": "puy de Dôme"
+   },
+   {
+    "id": "E2",
+    "name": "Massif central"
+   },
+   {
+    "id": "E3",
+    "name": "Clermont-Ferrand"
+   },
+   {
+    "id": "E4",
+    "name": "département du Puy-de-Dôme"
+   },
+   {
+    "id": "E5",
+    "name": "chaîne des Puys"
+   }
+  ],
+  "Lac de Gérardmer": [
+   {
+    "id": "E1",
+    "name": "lac de Gérardmer"
+   },
+   {
+    "id": "E2",
+    "name": "commune de Gérardmer"
+   },
+   {
+    "id": "E3",
+    "name": "Vologne"
+   },
+   {
+    "id": "E4",
+    "name": "Jamagne"
+   }
+  ],
+  "Ammersee": [
+   {
+    "id": "E1",
+    "name": "Ammersee"
+   },
+   {
+    "id": "E2",
+    "name": "Chiemsee"
+   },
+   {
+    "id": "E3",
+    "name": "Starnberger See"
+   },
+   {
+    "id": "E4",
+    "name": "Bayern (Freistaat)"
+   },
+   {
+    "id": "E5",
+    "name": "gemeindefreies Gebiet Ammersee"
+   },
+   {
+    "id": "E6",
+    "name": "Bayerische Verwaltung der staatlichen Schlösser, Gärten und Seen"
+   },
+   {
+    "id": "E7",
+    "name": "Gemeinden am Ostufer"
+   },
+   {
+    "id": "E8",
+    "name": "Landkreis Starnberg"
+   },
+   {
+    "id": "E9",
+    "name": "Gebiet um die Mündung der Ammer"
+   },
+   {
+    "id": "E10",
+    "name": "Ammer"
+   },
+   {
+    "id": "E11",
+    "name": "Landkreis Weilheim-Schongau"
+   },
+   {
+    "id": "E12",
+    "name": "Schwedeninsel"
+   },
+   {
+    "id": "E13",
+    "name": "Ufer des Ammersees"
+   }
+  ],
+  "Brocken": [
+   {
+    "id": "E1",
+    "name": "Brocken"
+   },
+   {
+    "id": "E2",
+    "name": "Gemarkung Schierke"
+   },
+   {
+    "id": "E3",
+    "name": "Wernigerode"
+   },
+   {
+    "id": "E4",
+    "name": "Landkreis Harz"
+   },
+   {
+    "id": "E5",
+    "name": "Deutschland"
+   },
+   {
+    "id": "E6",
+    "name": "Sendeanlagen auf dem Brocken"
+   },
+   {
+    "id": "E7",
+    "name": "Hochharz"
+   }
+  ],
+  "Main": [
+   {
+    "id": "E1",
+    "name": "Main"
+   },
+   {
+    "id": "E2",
+    "name": "Rhein"
+   },
+   {
+    "id": "E3",
+    "name": "Kulmbach"
+   },
+   {
+    "id": "E4",
+    "name": "Melkendorf"
+   },
+   {
+    "id": "E5",
+    "name": "Schloss Steinenhausen"
+   },
+   {
+    "id": "E6",
+    "name": "Quellflüsse des Mains (Weißer Main, Roter Main)"
+   },
+   {
+    "id": "E7",
+    "name": "fränkisches Weinbaugebiet"
+   },
+   {
+    "id": "E8",
+    "name": "historische Stadtkerne am Main"
+   },
+   {
+    "id": "E9",
+    "name": "Mainzer Altstadt"
+   },
+   {
+    "id": "E10",
+    "name": "Ginsheim-Gustavsburg"
+   },
+   {
+    "id": "E11",
+    "name": "Maaraue"
+   },
+   {
+    "id": "E12",
+    "name": "Mainz-Kostheim"
+   },
+   {
+    "id": "E13",
+    "name": "Eisenbahnbrücke bei Hallstadt"
+   },
+   {
+    "id": "E14",
+    "name": "Hallstadt"
+   },
+   {
+    "id": "E15",
+    "name": "Unterlauf des Mains"
+   },
+   {
+    "id": "E16",
+    "name": "Miltenberg"
+   },
+   {
+    "id": "E17",
+    "name": "Großkrotzenburg"
+   },
+   {
+    "id": "E18",
+    "name": "Provinz Obergermanien"
+   },
+   {
+    "id": "E19",
+    "name": "Römisches Reich"
+   },
+   {
+    "id": "E20",
+    "name": "Oberdeutschland"
+   },
+   {
+    "id": "E21",
+    "name": "Mainlinie"
+   },
+   {
+    "id": "E22",
+    "name": "Deutschland"
+   }
+  ],
+  "富士山": [
+   {
+    "id": "E1",
+    "name": "富士山"
+   },
+   {
+    "id": "E2",
+    "name": "日本"
+   },
+   {
+    "id": "E3",
+    "name": "山梨県"
+   },
+   {
+    "id": "E4",
+    "name": "富士吉田市"
+   },
+   {
+    "id": "E5",
+    "name": "南都留郡鳴沢村"
+   },
+   {
+    "id": "E6",
+    "name": "静岡県"
+   },
+   {
+    "id": "E7",
+    "name": "富士宮市"
+   },
+   {
+    "id": "E8",
+    "name": "富士市"
+   },
+   {
+    "id": "E9",
+    "name": "裾野市"
+   },
+   {
+    "id": "E10",
+    "name": "御殿場市"
+   },
+   {
+    "id": "E11",
+    "name": "駿東郡小山町"
+   },
+   {
+    "id": "E12",
+    "name": "駿河湾"
+   },
+   {
+    "id": "E13",
+    "name": "律令国家"
+   },
+   {
+    "id": "E14",
+    "name": "浅間神社"
+   },
+   {
+    "id": "E15",
+    "name": "浅間信仰"
+   },
+   {
+    "id": "E16",
+    "name": "富士信仰"
+   },
+   {
+    "id": "E17",
+    "name": "村山修験"
+   },
+   {
+    "id": "E18",
+    "name": "富士講"
+   },
+   {
+    "id": "E19",
+    "name": "日本三名山"
+   },
+   {
+    "id": "E20",
+    "name": "日本百名山"
+   },
+   {
+    "id": "E21",
+    "name": "日本の地質百選"
+   },
+   {
+    "id": "E22",
+    "name": "世界文化遺産"
+   },
+   {
+    "id": "E23",
+    "name": "関連する文化財群"
+   }
+  ],
+  "石狩川": [
+   {
+    "id": "E1",
+    "name": "石狩川"
+   },
+   {
+    "id": "E2",
+    "name": "利根川"
+   },
+   {
+    "id": "E3",
+    "name": "信濃川"
+   },
+   {
+    "id": "E4",
+    "name": "北海道遺産"
+   }
+  ],
+  "洞爺湖": [
+   {
+    "id": "E1",
+    "name": "洞爺湖"
+   },
+   {
+    "id": "E2",
+    "name": "長流川"
+   },
+   {
+    "id": "E3",
+    "name": "長流川水系"
+   },
+   {
+    "id": "E4",
+    "name": "日本百景"
+   },
+   {
+    "id": "E5",
+    "name": "新日本旅行地100選"
+   },
+   {
+    "id": "E6",
+    "name": "美しい日本の歩きたくなるみち500選"
+   }
+  ],
+  "天竜川": [
+   {
+    "id": "E1",
+    "name": "天竜川"
+   },
+   {
+    "id": "E2",
+    "name": "日本"
+   }
+  ],
+  "立山": [
+   {
+    "id": "E1",
+    "name": "立山"
+   },
+   {
+    "id": "E2",
+    "name": "中部山岳国立公園"
+   },
+   {
+    "id": "E3",
+    "name": "富山県"
+   },
+   {
+    "id": "E4",
+    "name": "日本海"
+   },
+   {
+    "id": "E5",
+    "name": "剱岳"
+   },
+   {
+    "id": "E6",
+    "name": "鹿島槍ヶ岳"
+   },
+   {
+    "id": "E7",
+    "name": "唐松岳"
+   },
+   {
+    "id": "E8",
+    "name": "日本"
+   }
+  ],
+  "摩周湖": [
+   {
+    "id": "E1",
+    "name": "摩周湖"
+   },
+   {
+    "id": "E2",
+    "name": "北海道川上郡弟子屈町"
+   },
+   {
+    "id": "E3",
+    "name": "北海道遺産"
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "sid": "r001",
+   "mentions": [
+    {
+     "text": "Crater Lake",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "Giiwas",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "Oregon",
+     "entity": "E2",
+     "how": "new"
+    },
+    {
+     "text": "Western United States",
+     "entity": "E3",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "Giiwas"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Crater Lake (Klamath: Giiwas)"
+    },
+    {
+     "pred": "name_language",
+     "args": [
+      "Giiwas",
+      "Klamath"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Klamath: Giiwas"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "crater lake"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "a volcanic crater lake"
+    },
+    {
+     "pred": "volcanic",
+     "args": [
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "volcanic crater lake"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "in south-central Oregon"
+    },
+    {
+     "pred": "located_in_part",
+     "args": [
+      "E1",
+      "south-central Oregon"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "south-central Oregon"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E2",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Oregon in the Western United States"
+    }
+   ]
+  },
+  {
+   "sid": "r002",
+   "mentions": [
+    {
+     "text": "It",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "Crater Lake National Park",
+     "entity": "E4",
+     "how": "new"
+    },
+    {
+     "text": "its",
+     "entity": "E1",
+     "how": "pronoun"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "main_feature_of",
+     "args": [
+      "E1",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "It is the main feature of Crater Lake National Park"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "tourist attraction"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "is a tourist attraction"
+    },
+    {
+     "pred": "known_for",
+     "args": [
+      "E1",
+      "deep blue color"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "known for its deep blue color"
+    },
+    {
+     "pred": "known_for",
+     "args": [
+      "E1",
+      "water clarity"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "water clarity"
+    }
+   ]
+  },
+  {
+   "sid": "r003",
+   "mentions": [
+    {
+     "text": "the lake",
+     "entity": "E1",
+     "how": "description"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "has_inflowing_river",
+     "args": [
+      "E1"
+     ],
+     "neg": true,
+     "hedged": false,
+     "span": "No rivers flow into or out of the lake"
+    },
+    {
+     "pred": "has_outflowing_river",
+     "args": [
+      "E1"
+     ],
+     "neg": true,
+     "hedged": false,
+     "span": "No rivers flow into or out of the lake"
+    },
+    {
+     "pred": "loses_water_by",
+     "args": [
+      "E1",
+      "evaporation"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the evaporation"
+    },
+    {
+     "pred": "compensated_by",
+     "args": [
+      "evaporation",
+      "rain"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the evaporation is compensated for by rain and snowfall"
+    },
+    {
+     "pred": "compensated_by",
+     "args": [
+      "evaporation",
+      "snowfall"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the evaporation is compensated for by rain and snowfall"
+    },
+    {
+     "pred": "water_replaced_every",
+     "args": [
+      "E1",
+      "150 years"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the total amount of water is replaced every 150 years"
+    }
+   ]
+  },
+  {
+   "sid": "r004",
+   "mentions": [
+    {
+     "text": "the lake",
+     "entity": "E1",
+     "how": "description"
+    },
+    {
+     "text": "the United States",
+     "entity": "E9",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "has_depth",
+     "args": [
+      "E1",
+      "1949 ft"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "With a depth of 1,949 feet (594 m)"
+    },
+    {
+     "pred": "deepest",
+     "args": [
+      "E1",
+      "lakes in the United States"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the lake is the deepest in the United States"
+    }
+   ]
+  },
+  {
+   "sid": "r005",
+   "mentions": [
+    {
+     "text": "Crater Lake",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "two small islands",
+     "entity": "E10",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "has_part",
+     "args": [
+      "E1",
+      "E10"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Crater Lake features two small islands"
+    },
+    {
+     "pred": "count",
+     "args": [
+      "E10",
+      "2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "two small islands"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E10",
+      "island"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "two small islands"
+    },
+    {
+     "pred": "small",
+     "args": [
+      "E10"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "small islands"
+    }
+   ]
+  },
+  {
+   "sid": "r006",
+   "mentions": [
+    {
+     "text": "Wizard Island",
+     "entity": "E5",
+     "how": "new"
+    },
+    {
+     "text": "the lake",
+     "entity": "E1",
+     "how": "description"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "located_near",
+     "args": [
+      "E5",
+      "western shore of E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "located near the western shore of the lake"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E5",
+      "cinder cone"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "is a cinder cone"
+    },
+    {
+     "pred": "has_area",
+     "args": [
+      "E5",
+      "316 acres"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "about 316 acres (128 hectares) in size",
+     "approx": true
+    }
+   ]
+  },
+  {
+   "sid": "r007",
+   "mentions": [
+    {
+     "text": "Oregon's",
+     "entity": "E2",
+     "how": "name"
+    },
+    {
+     "text": "one of Oregon's regular-issue license-plate design",
+     "entity": "E8",
+     "how": "new"
+    },
+    {
+     "text": "Crater Lake",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "a one-time plate surcharge",
+     "entity": "E11",
+     "how": "new"
+    },
+    {
+     "text": "Crater Lake National Park",
+     "entity": "E4",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E8",
+      "regular-issue license-plate design"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "one of Oregon's regular-issue license-plate design"
+    },
+    {
+     "pred": "belongs_to",
+     "args": [
+      "E8",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Oregon's regular-issue license-plate design"
+    },
+    {
+     "pred": "features",
+     "args": [
+      "E8",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "has featured Crater Lake"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "E8 features E1",
+      "since 2002"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Since 2002"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E11",
+      "one-time plate surcharge"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "a one-time plate surcharge"
+    },
+    {
+     "pred": "supports",
+     "args": [
+      "E11",
+      "operation of E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "is used to support the operation of Crater Lake National Park"
+    }
+   ]
+  },
+  {
+   "sid": "r008",
+   "mentions": [
+    {
+     "text": "The commemorative Oregon State Quarter",
+     "entity": "E7",
+     "how": "new"
+    },
+    {
+     "text": "which",
+     "entity": "E7",
+     "how": "pronoun"
+    },
+    {
+     "text": "the United States Mint",
+     "entity": "E6",
+     "how": "new"
+    },
+    {
+     "text": "Crater Lake",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "its",
+     "entity": "E7",
+     "how": "pronoun"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "commemorative",
+     "args": [
+      "E7"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "The commemorative Oregon State Quarter"
+    },
+    {
+     "pred": "released_by",
+     "args": [
+      "E7",
+      "E6"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "released by the United States Mint"
+    },
+    {
+     "pred": "released_in",
+     "args": [
+      "E7",
+      "2005"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "released by the United States Mint in 2005"
+    },
+    {
+     "pred": "features_image_of",
+     "args": [
+      "E7",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "features an image of Crater Lake"
+    },
+    {
+     "pred": "image_location",
+     "args": [
+      "E7",
+      "reverse"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "on its reverse"
+    }
+   ]
+  },
+  {
+   "sid": "r009",
+   "mentions": [
+    {
+     "text": "The Snake River",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "Pacific Northwest",
+     "entity": "E2",
+     "how": "new"
+    },
+    {
+     "text": "the United States",
+     "entity": "E3",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "river"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "a major river"
+    },
+    {
+     "pred": "major",
+     "args": [
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "a major river"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "in the interior Pacific Northwest region"
+    },
+    {
+     "pred": "located_in_part",
+     "args": [
+      "E1",
+      "interior of E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "interior Pacific Northwest"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E2",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Pacific Northwest region of the United States"
+    }
+   ]
+  },
+  {
+   "sid": "r010",
+   "mentions": [
+    {
+     "text": "it",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "the Columbia River",
+     "entity": "E4",
+     "how": "new"
+    },
+    {
+     "text": "which",
+     "entity": "E4",
+     "how": "pronoun"
+    },
+    {
+     "text": "the Pacific Ocean",
+     "entity": "E5",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "has_length",
+     "args": [
+      "E1",
+      "1080 mi"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "About 1,080 miles (1,740 km) long",
+     "approx": true
+    },
+    {
+     "pred": "tributary_of",
+     "args": [
+      "E1",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the largest tributary of the Columbia River"
+    },
+    {
+     "pred": "largest",
+     "args": [
+      "E1",
+      "tributaries of E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the largest tributary of the Columbia River"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E4",
+      "river"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the largest North American river"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E4",
+      "North America"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "North American river"
+    },
+    {
+     "pred": "flows_into",
+     "args": [
+      "E4",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "empties into the Pacific Ocean"
+    },
+    {
+     "pred": "largest",
+     "args": [
+      "E4",
+      "North American rivers that empty into the Pacific Ocean"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the largest North American river that empties into the Pacific Ocean"
+    }
+   ]
+  },
+  {
+   "sid": "r011",
+   "mentions": [
+    {
+     "text": "It",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "the Columbia River",
+     "entity": "E4",
+     "how": "name"
+    },
+    {
+     "text": "the Tri-Cities, Washington",
+     "entity": "E6",
+     "how": "new"
+    },
+    {
+     "text": "the southern Columbia Basin",
+     "entity": "E7",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "joins",
+     "args": [
+      "E1",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "It joins the Columbia River"
+    },
+    {
+     "pred": "joins_downstream_of",
+     "args": [
+      "E1",
+      "E6"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "just downstream from the Tri-Cities, Washington"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E6",
+      "Washington"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the Tri-Cities, Washington"
+    },
+    {
+     "pred": "joins_in",
+     "args": [
+      "E1",
+      "E7"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "in the southern Columbia Basin"
+    },
+    {
+     "pred": "located_in_part",
+     "args": [
+      "confluence of E1 and E4",
+      "southern E7"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "southern Columbia Basin"
+    }
+   ]
+  },
+  {
+   "sid": "r012",
+   "mentions": [
+    {
+     "text": "The river's watershed",
+     "entity": "E8",
+     "how": "new"
+    },
+    {
+     "text": "The river",
+     "entity": "E1",
+     "how": "description"
+    },
+    {
+     "text": "which",
+     "entity": "E8",
+     "how": "pronoun"
+    },
+    {
+     "text": "U.S.",
+     "entity": "E3",
+     "how": "name"
+    },
+    {
+     "text": "the Rocky Mountains",
+     "entity": "E9",
+     "how": "new"
+    },
+    {
+     "text": "the Great Basin",
+     "entity": "E10",
+     "how": "new"
+    },
+    {
+     "text": "the Blue Mountains",
+     "entity": "E11",
+     "how": "new"
+    },
+    {
+     "text": "Oregon high desert",
+     "entity": "E12",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "watershed_of",
+     "args": [
+      "E8",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "The river's watershed"
+    },
+    {
+     "pred": "drains",
+     "args": [
+      "E8",
+      "parts of six U.S. states"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "drains parts of six U.S. states"
+    },
+    {
+     "pred": "bounded_by",
+     "args": [
+      "E8",
+      "E9",
+      "north and east"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "between the Rocky Mountains to the north and east"
+    },
+    {
+     "pred": "bounded_by",
+     "args": [
+      "E8",
+      "E10",
+      "south"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the Great Basin to the south"
+    },
+    {
+     "pred": "bounded_by",
+     "args": [
+      "E8",
+      "E11",
+      "west"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the Blue Mountains and Oregon high desert to the west"
+    },
+    {
+     "pred": "bounded_by",
+     "args": [
+      "E8",
+      "E12",
+      "west"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the Blue Mountains and Oregon high desert to the west"
+    }
+   ]
+  },
+  {
+   "sid": "r013",
+   "mentions": [
+    {
+     "text": "The river",
+     "entity": "E1",
+     "how": "description"
+    },
+    {
+     "text": "catastrophic flooding",
+     "entity": "E14",
+     "how": "new"
+    },
+    {
+     "text": "the most recent Ice Age",
+     "entity": "E13",
+     "how": "new"
+    },
+    {
+     "text": "which",
+     "entity": "E14",
+     "how": "pronoun"
+    },
+    {
+     "text": "the Snake River Canyon",
+     "entity": "E15",
+     "how": "new"
+    },
+    {
+     "text": "Shoshone Falls",
+     "entity": "E16",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "altered_by",
+     "args": [
+      "E1",
+      "E14"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "The river was further altered by catastrophic flooding"
+    },
+    {
+     "pred": "catastrophic",
+     "args": [
+      "E14"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "catastrophic flooding"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "E14",
+      "E13"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "in the most recent Ice Age"
+    },
+    {
+     "pred": "created",
+     "args": [
+      "E14",
+      "E15"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "which created such features as the Snake River Canyon"
+    },
+    {
+     "pred": "created",
+     "args": [
+      "E14",
+      "E16"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Shoshone Falls"
+    }
+   ]
+  },
+  {
+   "sid": "r014",
+   "mentions": [
+    {
+     "text": "The Snake River",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "other anadromous fish",
+     "entity": "E32",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "hosted",
+     "args": [
+      "E1",
+      "runs of salmon"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "hosted some of the largest North American runs of salmon"
+    },
+    {
+     "pred": "hosted",
+     "args": [
+      "E1",
+      "runs of anadromous fish"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "other anadromous fish"
+    },
+    {
+     "pred": "among_largest",
+     "args": [
+      "runs of E1",
+      "North American runs of salmon and anadromous fish"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "some of the largest North American runs"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "E1 hosted runs",
+      "once"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "once hosted"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "salmon",
+      "anadromous fish"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "salmon and other anadromous fish"
+    }
+   ]
+  },
+  {
+   "sid": "r015",
+   "mentions": [
+    {
+     "text": "The Shoshone",
+     "entity": "E17",
+     "how": "new"
+    },
+    {
+     "text": "Nez Perce",
+     "entity": "E18",
+     "how": "new"
+    },
+    {
+     "text": "several tribes",
+     "entity": "E25",
+     "how": "new"
+    },
+    {
+     "text": "the river",
+     "entity": "E1",
+     "how": "description"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E17",
+      "tribe"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the largest of several tribes"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E18",
+      "tribe"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the largest of several tribes"
+    },
+    {
+     "pred": "largest",
+     "args": [
+      "E17",
+      "tribes along the river"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "were the largest of several tribes"
+    },
+    {
+     "pred": "largest",
+     "args": [
+      "E18",
+      "tribes along the river"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "were the largest of several tribes"
+    },
+    {
+     "pred": "lived_along",
+     "args": [
+      "E25",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "several tribes that lived along the river"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "E25 lived along E1",
+      "turn of the 19th century"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "by the turn of the 19th century"
+    }
+   ]
+  },
+  {
+   "sid": "r016",
+   "mentions": [
+    {
+     "text": "US",
+     "entity": "E3",
+     "how": "name"
+    },
+    {
+     "text": "the Pacific",
+     "entity": "E5",
+     "how": "name"
+    },
+    {
+     "text": "Lewis and Clark",
+     "entity": "E19",
+     "how": "new"
+    },
+    {
+     "text": "the river",
+     "entity": "E1",
+     "how": "description"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "saw",
+     "args": [
+      "E19",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "to see the river"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "E19 saw E1",
+      "1805"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "In 1805"
+    },
+    {
+     "pred": "first",
+     "args": [
+      "E19",
+      "non-natives to see the river"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "became the first non-natives to see the river"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E19",
+      "non-native"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the first non-natives"
+    },
+    {
+     "pred": "searched_for",
+     "args": [
+      "E19",
+      "route from the eastern US to the Pacific"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "while searching for a route from the eastern US to the Pacific"
+    }
+   ]
+  },
+  {
+   "sid": "r017",
+   "mentions": [
+    {
+     "text": "travelers on the Oregon Trail",
+     "entity": "E21",
+     "how": "new"
+    },
+    {
+     "text": "the Oregon Trail",
+     "entity": "E20",
+     "how": "new"
+    },
+    {
+     "text": "the dry and rocky Snake River region",
+     "entity": "E22",
+     "how": "new"
+    },
+    {
+     "text": "a flood of settlers",
+     "entity": "E23",
+     "how": "new"
+    },
+    {
+     "text": "gold discoveries",
+     "entity": "E24",
+     "how": "new"
+    },
+    {
+     "text": "tribes",
+     "entity": "E25",
+     "how": "description"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "traveled_on",
+     "args": [
+      "E21",
+      "E20"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "travelers on the Oregon Trail"
+    },
+    {
+     "pred": "shunned",
+     "args": [
+      "E21",
+      "E22"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "initially shunned the dry and rocky Snake River region"
+    },
+    {
+     "pred": "dry",
+     "args": [
+      "E22"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the dry and rocky"
+    },
+    {
+     "pred": "rocky",
+     "args": [
+      "E22"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "rocky Snake River region"
+    },
+    {
+     "pred": "followed",
+     "args": [
+      "E23",
+      "E24"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "a flood of settlers followed gold discoveries"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "E24",
+      "1860s"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "gold discoveries in the 1860s"
+    },
+    {
+     "pred": "led_to",
+     "args": [
+      "E23",
+      "decades of military conflict"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "leading to decades of military conflict"
+    },
+    {
+     "pred": "led_to",
+     "args": [
+      "E23",
+      "expulsion of E25 to reservations"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the eventual expulsion of tribes to reservations"
+    }
+   ]
+  },
+  {
+   "sid": "r018",
+   "mentions": [
+    {
+     "text": "some of the first large irrigation projects in the western US",
+     "entity": "E26",
+     "how": "new"
+    },
+    {
+     "text": "US",
+     "entity": "E3",
+     "how": "name"
+    },
+    {
+     "text": "the Snake River",
+     "entity": "E1",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "developed_along",
+     "args": [
+      "E26",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "were developed along the Snake River"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "E26",
+      "turn of the 20th century"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "At the turn of the 20th century"
+    },
+    {
+     "pred": "among_first",
+     "args": [
+      "E26",
+      "large irrigation projects in the western US"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "some of the first large irrigation projects in the western US"
+    },
+    {
+     "pred": "large",
+     "args": [
+      "E26"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "large irrigation projects"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E26",
+      "western E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "in the western US"
+    }
+   ]
+  },
+  {
+   "sid": "r019",
+   "mentions": [
+    {
+     "text": "Numerous hydroelectric dams",
+     "entity": "E27",
+     "how": "new"
+    },
+    {
+     "text": "four navigation dams on its lower section",
+     "entity": "E28",
+     "how": "new"
+    },
+    {
+     "text": "its",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "a shipping channel",
+     "entity": "E29",
+     "how": "new"
+    },
+    {
+     "text": "Lewiston, Idaho",
+     "entity": "E30",
+     "how": "new"
+    },
+    {
+     "text": "Idaho",
+     "entity": "E36",
+     "how": "new"
+    },
+    {
+     "text": "the furthest inland seaport on the West Coast",
+     "entity": "E30",
+     "how": "description"
+    },
+    {
+     "text": "the West Coast",
+     "entity": "E31",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "constructed",
+     "args": [
+      "E27"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Numerous hydroelectric dams were also constructed"
+    },
+    {
+     "pred": "numerous",
+     "args": [
+      "E27"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Numerous hydroelectric dams"
+    },
+    {
+     "pred": "count",
+     "args": [
+      "E28",
+      "4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "four navigation dams"
+    },
+    {
+     "pred": "located_on",
+     "args": [
+      "E28",
+      "lower section of E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "on its lower section"
+    },
+    {
+     "pred": "created",
+     "args": [
+      "E28",
+      "E29"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "created a shipping channel"
+    },
+    {
+     "pred": "leads_to",
+     "args": [
+      "E29",
+      "E30"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "a shipping channel to Lewiston, Idaho"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E30",
+      "E36"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Lewiston, Idaho"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E30",
+      "seaport"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the furthest inland seaport"
+    },
+    {
+     "pred": "furthest_inland",
+     "args": [
+      "E30",
+      "seaports on the West Coast"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the furthest inland seaport on the West Coast"
+    }
+   ]
+  },
+  {
+   "sid": "r020",
+   "mentions": [
+    {
+     "text": "anadromous fish populations",
+     "entity": "E32",
+     "how": "description"
+    },
+    {
+     "text": "the Snake River watershed",
+     "entity": "E8",
+     "how": "name"
+    },
+    {
+     "text": "these fish",
+     "entity": "E32",
+     "how": "description"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "reduced",
+     "args": [
+      "dam construction",
+      "populations of E32"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "dam construction, commercial fishing and other human activities have greatly reduced anadromous fish populations"
+    },
+    {
+     "pred": "reduced",
+     "args": [
+      "commercial fishing",
+      "populations of E32"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "dam construction, commercial fishing and other human activities have greatly reduced anadromous fish populations"
+    },
+    {
+     "pred": "reduced",
+     "args": [
+      "other human activities",
+      "populations of E32"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "dam construction, commercial fishing and other human activities have greatly reduced anadromous fish populations"
+    },
+    {
+     "pred": "greatly",
+     "args": [
+      "reduction of E32 populations"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "greatly reduced"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "reduction of E32 populations",
+      "since late 19th century"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "since the late 19th century"
+    },
+    {
+     "pred": "habitat_for",
+     "args": [
+      "E8",
+      "E32"
+     ],
+     "neg": false,
+     "hedged": true,
+     "span": "the Snake River watershed is still considered important habitat for these fish"
+    },
+    {
+     "pred": "important",
+     "args": [
+      "E8 as habitat"
+     ],
+     "neg": false,
+     "hedged": true,
+     "span": "important habitat"
+    }
+   ]
+  },
+  {
+   "sid": "r021",
+   "mentions": [
+    {
+     "text": "public agencies",
+     "entity": "E33",
+     "how": "new"
+    },
+    {
+     "text": "tribal governments",
+     "entity": "E34",
+     "how": "new"
+    },
+    {
+     "text": "private utilities",
+     "entity": "E35",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "invested_in",
+     "args": [
+      "E33",
+      "fishery restoration and hatchery programs"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "public agencies, tribal governments and private utilities have invested heavily in fishery restoration and hatchery programs"
+    },
+    {
+     "pred": "invested_in",
+     "args": [
+      "E34",
+      "fishery restoration and hatchery programs"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "public agencies, tribal governments and private utilities have invested heavily in fishery restoration and hatchery programs"
+    },
+    {
+     "pred": "invested_in",
+     "args": [
+      "E35",
+      "fishery restoration and hatchery programs"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "public agencies, tribal governments and private utilities have invested heavily in fishery restoration and hatchery programs"
+    },
+    {
+     "pred": "heavily",
+     "args": [
+      "investment"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "invested heavily"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "investment",
+      "since 1950s"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Since the 1950s"
+    },
+    {
+     "pred": "success",
+     "args": [
+      "fishery restoration and hatchery programs",
+      "limited"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "with limited success"
+    }
+   ]
+  },
+  {
+   "sid": "r022",
+   "mentions": [
+    {
+     "text": "Highwater Ethanol, LLC",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "we",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "our",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "Highwater Ethanol",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "Company",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "Minnesota",
+     "entity": "E2",
+     "how": "new"
+    },
+    {
+     "text": "a 50 million gallon per year nameplate ethanol plant",
+     "entity": "E3",
+     "how": "new"
+    },
+    {
+     "text": "Lamberton, Minnesota",
+     "entity": "E4",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "Highwater Ethanol"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "“Highwater Ethanol”"
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "the Company"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the “Company”"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "limited liability company"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "a Minnesota limited liability company"
+    },
+    {
+     "pred": "organized_in",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "a Minnesota limited liability company"
+    },
+    {
+     "pred": "formed_on",
+     "args": [
+      "E1",
+      "2006-05-02"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "was formed as a Minnesota limited liability company on May 2, 2006"
+    },
+    {
+     "pred": "formed_for",
+     "args": [
+      "E1",
+      "constructing E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "for the purpose of constructing"
+    },
+    {
+     "pred": "formed_for",
+     "args": [
+      "E1",
+      "owning E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "owning"
+    },
+    {
+     "pred": "formed_for",
+     "args": [
+      "E1",
+      "operating E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "operating a 50 million gallon per year nameplate ethanol plant"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E3",
+      "ethanol plant"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "ethanol plant"
+    },
+    {
+     "pred": "has_nameplate_capacity",
+     "args": [
+      "E3",
+      "50 million gal/year"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "a 50 million gallon per year nameplate"
+    },
+    {
+     "pred": "located_near",
+     "args": [
+      "E3",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "ethanol plant near Lamberton, Minnesota"
+    }
+   ]
+  },
+  {
+   "sid": "r023",
+   "mentions": [
+    {
+     "text": "we",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "ethanol",
+     "entity": "E5",
+     "how": "new"
+    },
+    {
+     "text": "distillers grains",
+     "entity": "E6",
+     "how": "new"
+    },
+    {
+     "text": "the plant",
+     "entity": "E3",
+     "how": "description"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "produces",
+     "args": [
+      "E1",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "we have been engaged in the production of ethanol"
+    },
+    {
+     "pred": "produces",
+     "args": [
+      "E1",
+      "E6"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "distillers grains"
+    },
+    {
+     "pred": "produces_at",
+     "args": [
+      "E1",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "at the plant"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "E1 produces at E3",
+      "since 2009-08"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Since August 2009"
+    }
+   ]
+  },
+  {
+   "sid": "r024",
+   "mentions": [
+    {
+     "text": "our air permit application",
+     "entity": "E8",
+     "how": "new"
+    },
+    {
+     "text": "our",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "the Minnesota Pollution Control Agency",
+     "entity": "E7",
+     "how": "new"
+    },
+    {
+     "text": "denatured ethanol",
+     "entity": "E5",
+     "how": "description"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E8",
+      "air permit application"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "our air permit application"
+    },
+    {
+     "pred": "applicant",
+     "args": [
+      "E8",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "our air permit application"
+    },
+    {
+     "pred": "submitted_to",
+     "args": [
+      "E8",
+      "E7"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "application to the Minnesota Pollution Control Agency"
+    },
+    {
+     "pred": "allows",
+     "args": [
+      "E8",
+      "70.2 million gal denatured ethanol per 12-month rolling average"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "to allow for 70.2 million gallons of denatured ethanol per 12-month rolling average"
+    },
+    {
+     "pred": "approved",
+     "args": [
+      "E8"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "was approved"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "approval of E8",
+      "2019-10"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "In October 2019"
+    }
+   ]
+  },
+  {
+   "sid": "r025",
+   "mentions": [
+    {
+     "text": "Our",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "ethanol",
+     "entity": "E5",
+     "how": "description"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "production_rate",
+     "args": [
+      "E1",
+      "70.2 million gal/year"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "were at an annual rate of approximately 70.2 million gallons",
+     "approx": true
+    },
+    {
+     "pred": "product",
+     "args": [
+      "production rate of E1",
+      "ethanol"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Our ethanol production levels"
+    },
+    {
+     "pred": "fiscal_year_end",
+     "args": [
+      "E1",
+      "2025-10-31"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the fiscal year ended October 31, 2025"
+    }
+   ]
+  },
+  {
+   "sid": "r026",
+   "mentions": [
+    {
+     "text": "our",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "“ITEM 7 - Management's Discussion and Analysis of Financial Condition and Results of Operations”",
+     "entity": "E21",
+     "how": "new"
+    },
+    {
+     "text": "“ITEM 8 - Financial Statements and Supplementary Data”",
+     "entity": "E22",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "contains",
+     "args": [
+      "E21",
+      "information about revenue of E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "for information about our revenue"
+    },
+    {
+     "pred": "contains",
+     "args": [
+      "E21",
+      "profit and loss measurements of E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "profit and loss measurements"
+    },
+    {
+     "pred": "contains",
+     "args": [
+      "E21",
+      "total assets and liabilities of E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "total assets and liabilities"
+    },
+    {
+     "pred": "contains",
+     "args": [
+      "E22",
+      "financial statements of E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "for our financial statements"
+    },
+    {
+     "pred": "contains",
+     "args": [
+      "E22",
+      "supplementary data of E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "supplementary data."
+    }
+   ]
+  },
+  {
+   "sid": "r027",
+   "mentions": [
+    {
+     "text": "we",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "the ethanol plant",
+     "entity": "E3",
+     "how": "description"
+    },
+    {
+     "text": "fuel-grade ethanol",
+     "entity": "E5",
+     "how": "description"
+    },
+    {
+     "text": "distillers grains",
+     "entity": "E6",
+     "how": "description"
+    },
+    {
+     "text": "corn oil",
+     "entity": "E9",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "principal_product",
+     "args": [
+      "E1",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "The principal products we currently produce at the ethanol plant are fuel-grade ethanol"
+    },
+    {
+     "pred": "principal_product",
+     "args": [
+      "E1",
+      "E6"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "distillers grains"
+    },
+    {
+     "pred": "principal_product",
+     "args": [
+      "E1",
+      "E9"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "corn oil"
+    },
+    {
+     "pred": "produces_at",
+     "args": [
+      "E1",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "we currently produce at the ethanol plant"
+    },
+    {
+     "pred": "fuel_grade",
+     "args": [
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "fuel-grade ethanol"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "E1 produces",
+      "currently"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "currently produce"
+    }
+   ]
+  },
+  {
+   "sid": "r028",
+   "mentions": [
+    {
+     "text": "The table below",
+     "entity": "E23",
+     "how": "new"
+    },
+    {
+     "text": "our",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "our products",
+     "entity": "E25",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "shows",
+     "args": [
+      "E23",
+      "approximate percentage of total revenue of E1 attributed to each product"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "shows the approximate percentage of our total revenue which is attributed to each of our products"
+    },
+    {
+     "pred": "covers",
+     "args": [
+      "E23",
+      "last three fiscal years"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "for each of our last three fiscal years"
+    },
+    {
+     "pred": "located",
+     "args": [
+      "E23",
+      "below"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "The table below"
+    }
+   ]
+  },
+  {
+   "sid": "r029",
+   "mentions": [
+    {
+     "text": "Our",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "ethanol",
+     "entity": "E5",
+     "how": "description"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "primary_product",
+     "args": [
+      "E1",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Our primary product is ethanol"
+    }
+   ]
+  },
+  {
+   "sid": "r030",
+   "mentions": [
+    {
+     "text": "Ethanol",
+     "entity": "E5",
+     "how": "description"
+    },
+    {
+     "text": "ethyl alcohol",
+     "entity": "E5",
+     "how": "alias"
+    },
+    {
+     "text": "corn",
+     "entity": "E10",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "named",
+     "args": [
+      "E5",
+      "ethyl alcohol"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Ethanol is ethyl alcohol"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E5",
+      "fuel component"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "a fuel component"
+    },
+    {
+     "pred": "made_from",
+     "args": [
+      "E5",
+      "E10"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "made primarily from corn"
+    },
+    {
+     "pred": "primarily",
+     "args": [
+      "E5 made from E10"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "primarily from corn"
+    },
+    {
+     "pred": "made_from",
+     "args": [
+      "E5",
+      "various other grains"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "various other grains"
+    }
+   ]
+  },
+  {
+   "sid": "r031",
+   "mentions": [
+    {
+     "text": "The ethanol we produce",
+     "entity": "E5",
+     "how": "description"
+    },
+    {
+     "text": "we",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "corn",
+     "entity": "E10",
+     "how": "description"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "produces",
+     "args": [
+      "E1",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "The ethanol we produce"
+    },
+    {
+     "pred": "made_from",
+     "args": [
+      "E5",
+      "E10"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "is manufactured from corn"
+    }
+   ]
+  },
+  {
+   "sid": "r032",
+   "mentions": [
+    {
+     "text": "the ethanol industry",
+     "entity": "E11",
+     "how": "new"
+    },
+    {
+     "text": "biomass",
+     "entity": "E12",
+     "how": "new"
+    },
+    {
+     "text": "corn-based production technologies",
+     "entity": "E13",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "explores",
+     "args": [
+      "E11",
+      "production technologies employing various feedstocks"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the ethanol industry continues to explore production technologies employing various feedstocks"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E12",
+      "feedstock"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "various feedstocks, such as biomass"
+    },
+    {
+     "pred": "based_on",
+     "args": [
+      "E13",
+      "E10"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "corn-based production technologies"
+    },
+    {
+     "pred": "most_practical",
+     "args": [
+      "E13",
+      "production technologies"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "remain the most practical"
+    },
+    {
+     "pred": "provide",
+     "args": [
+      "E13",
+      "lowest operating risks"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "provide the lowest operating risks"
+    }
+   ]
+  },
+  {
+   "sid": "r033",
+   "mentions": [
+    {
+     "text": "Corn",
+     "entity": "E10",
+     "how": "description"
+    },
+    {
+     "text": "carbohydrates",
+     "entity": "E14",
+     "how": "new"
+    },
+    {
+     "text": "which",
+     "entity": "E14",
+     "how": "pronoun"
+    },
+    {
+     "text": "glucose",
+     "entity": "E15",
+     "how": "new"
+    },
+    {
+     "text": "most other kinds of biomass",
+     "entity": "E12",
+     "how": "description"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "produces",
+     "args": [
+      "E10",
+      "E14"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Corn produces large quantities of carbohydrates"
+    },
+    {
+     "pred": "large_quantity",
+     "args": [
+      "E14 produced by E10"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "large quantities"
+    },
+    {
+     "pred": "converts_into",
+     "args": [
+      "E14",
+      "E15"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "convert into glucose"
+    },
+    {
+     "pred": "converts_more_easily_than",
+     "args": [
+      "E10",
+      "most other kinds of E12"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "convert into glucose more easily than most other kinds of biomass"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E10",
+      "biomass"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "most other kinds of biomass"
+    }
+   ]
+  },
+  {
+   "sid": "r034",
+   "mentions": [
+    {
+     "text": "An ethanol plant",
+     "entity": "E24",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E24",
+      "fermentation plant"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "An ethanol plant is essentially a fermentation plant"
+    }
+   ]
+  },
+  {
+   "sid": "r035",
+   "mentions": [
+    {
+     "text": "Ground corn",
+     "entity": "E10",
+     "how": "description"
+    },
+    {
+     "text": "“beer,”",
+     "entity": "E16",
+     "how": "new"
+    },
+    {
+     "text": "a substance called “beer,”",
+     "entity": "E16",
+     "how": "description"
+    },
+    {
+     "text": "which",
+     "entity": "E16",
+     "how": "pronoun"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "mixed_with",
+     "args": [
+      "ground E10 and water",
+      "enzymes"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Ground corn and water are mixed with enzymes and yeast"
+    },
+    {
+     "pred": "mixed_with",
+     "args": [
+      "ground E10 and water",
+      "yeast"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Ground corn and water are mixed with enzymes and yeast"
+    },
+    {
+     "pred": "produces",
+     "args": [
+      "mixture",
+      "E16"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "to produce a substance called “beer,”"
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E16",
+      "beer"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "a substance called “beer,”"
+    },
+    {
+     "pred": "contains",
+     "args": [
+      "E16",
+      "10 percent alcohol"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "contains about 10% alcohol",
+     "approx": true
+    },
+    {
+     "pred": "contains",
+     "args": [
+      "E16",
+      "90 percent water"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "90% water",
+     "approx": true
+    }
+   ]
+  },
+  {
+   "sid": "r036",
+   "mentions": [
+    {
+     "text": "The “beer”",
+     "entity": "E16",
+     "how": "description"
+    },
+    {
+     "text": "ethyl alcohol",
+     "entity": "E5",
+     "how": "alias"
+    },
+    {
+     "text": "which",
+     "entity": "E5",
+     "how": "pronoun"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "boiled",
+     "args": [
+      "E16"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "The “beer” is boiled"
+    },
+    {
+     "pred": "purpose",
+     "args": [
+      "boiling of E16",
+      "separate the water"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "to separate the water"
+    },
+    {
+     "pred": "results_in",
+     "args": [
+      "boiling of E16",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "resulting in ethyl alcohol"
+    },
+    {
+     "pred": "dehydrated",
+     "args": [
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "which is then dehydrated"
+    },
+    {
+     "pred": "purpose",
+     "args": [
+      "dehydration of E5",
+      "increase the alcohol content"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "to increase the alcohol content"
+    }
+   ]
+  },
+  {
+   "sid": "r037",
+   "mentions": [
+    {
+     "text": "This product",
+     "entity": "E5",
+     "how": "description"
+    },
+    {
+     "text": "a certified denaturant",
+     "entity": "E17",
+     "how": "new"
+    },
+    {
+     "text": "the product",
+     "entity": "E5",
+     "how": "description"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "mixed_with",
+     "args": [
+      "E5",
+      "E17"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "This product is then mixed with a certified denaturant"
+    },
+    {
+     "pred": "certified",
+     "args": [
+      "E17"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "a certified denaturant"
+    },
+    {
+     "pred": "unfit_for_human_consumption",
+     "args": [
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "to make the product unfit for human consumption"
+    },
+    {
+     "pred": "commercially_saleable",
+     "args": [
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "commercially saleable"
+    }
+   ]
+  },
+  {
+   "sid": "r038",
+   "mentions": [
+    {
+     "text": "Ethanol",
+     "entity": "E5",
+     "how": "description"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "used_as",
+     "args": [
+      "E5",
+      "octane enhancer in fuels"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "(i) an octane enhancer in fuels"
+    },
+    {
+     "pred": "used_as",
+     "args": [
+      "E5",
+      "oxygenated fuel additive"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "(ii) an oxygenated fuel additive"
+    },
+    {
+     "pred": "reduces",
+     "args": [
+      "oxygenated fuel additive",
+      "ozone emissions"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "for the purpose of reducing ozone and carbon monoxide emissions"
+    },
+    {
+     "pred": "reduces",
+     "args": [
+      "oxygenated fuel additive",
+      "carbon monoxide emissions"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "for the purpose of reducing ozone and carbon monoxide emissions"
+    },
+    {
+     "pred": "used_as",
+     "args": [
+      "E5",
+      "non-petroleum-based gasoline substitute"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "(iii) a non-petroleum-based gasoline substitute"
+    }
+   ]
+  },
+  {
+   "sid": "r039",
+   "mentions": [
+    {
+     "text": "all ethanol",
+     "entity": "E5",
+     "how": "description"
+    },
+    {
+     "text": "its",
+     "entity": "E5",
+     "how": "pronoun"
+    },
+    {
+     "text": "unleaded gasoline",
+     "entity": "E18",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "share_used_for_blending",
+     "args": [
+      "E5",
+      "95 percent"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Approximately 95% of all ethanol is used",
+     "approx": true
+    },
+    {
+     "pred": "blended_with",
+     "args": [
+      "E5",
+      "E18"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "for blending with unleaded gasoline"
+    },
+    {
+     "pred": "blended_with",
+     "args": [
+      "E5",
+      "other fuel products"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "other fuel products"
+    },
+    {
+     "pred": "form",
+     "args": [
+      "blended E5",
+      "primary form"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "in its primary form"
+    }
+   ]
+  },
+  {
+   "sid": "r040",
+   "mentions": [
+    {
+     "text": "ethanol",
+     "entity": "E5",
+     "how": "description"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "used_as",
+     "args": [
+      "E5",
+      "fuel oxygenate"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Used as a fuel oxygenate"
+    },
+    {
+     "pred": "provides",
+     "args": [
+      "E5",
+      "means to control carbon monoxide emissions"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "ethanol provides a means to control carbon monoxide emissions"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "carbon monoxide control",
+      "large metropolitan areas"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "in large metropolitan areas"
+    }
+   ]
+  },
+  {
+   "sid": "r041",
+   "mentions": [
+    {
+     "text": "ethanol",
+     "entity": "E5",
+     "how": "description"
+    },
+    {
+     "text": "the wholesale gasoline marketer",
+     "entity": "E19",
+     "how": "new"
+    },
+    {
+     "text": "blender",
+     "entity": "E20",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "principal_purchaser_of",
+     "args": [
+      "E19",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "The principal purchasers of ethanol are generally the wholesale gasoline marketer"
+    },
+    {
+     "pred": "principal_purchaser_of",
+     "args": [
+      "E20",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "The principal purchasers of ethanol are generally the wholesale gasoline marketer or blender"
+    }
+   ]
+  },
+  {
+   "sid": "r042",
+   "mentions": [
+    {
+     "text": "El Guadalquivir",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "al-wādi al-kabīr",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "Betis",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "Bætis",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "Baetis",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "España",
+     "entity": "E2",
+     "how": "new"
+    },
+    {
+     "text": "cuyo",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "Andalucía",
+     "entity": "E3",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "al-wādi al-kabīr"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "al-wādi al-kabīr"
+    },
+    {
+     "pred": "name_language",
+     "args": [
+      "al-wādi al-kabīr",
+      "Arabic"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "del árabe"
+    },
+    {
+     "pred": "means",
+     "args": [
+      "al-wādi al-kabīr",
+      "the great river"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "«el río grande»"
+    },
+    {
+     "pred": "formerly_named",
+     "args": [
+      "E1",
+      "Betis"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "antiguamente llamado Betis"
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "Bætis"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "del latín: Bætis, Baetis"
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "Baetis"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Baetis"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "river"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "es un río de España"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "un río de España"
+    },
+    {
+     "pred": "flows_through",
+     "args": [
+      "E1",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "cuyo cauce discurre por Andalucía"
+    }
+   ]
+  },
+  {
+   "sid": "r043",
+   "mentions": [
+    {
+     "text": "su",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "la sierra de Cazorla",
+     "entity": "E4",
+     "how": "new"
+    },
+    {
+     "text": "provincia de Jaén",
+     "entity": "E5",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "source_in",
+     "args": [
+      "E1",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": true,
+     "span": "se ha situado su nacimiento en la sierra de Cazorla"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "placement of source of E1 in E4",
+      "since antiquity"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Desde la antigüedad"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E4",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "la sierra de Cazorla, provincia de Jaén"
+    }
+   ]
+  },
+  {
+   "sid": "r044",
+   "mentions": [
+    {
+     "text": "Su",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "Su cuenca hidrográfica",
+     "entity": "E6",
+     "how": "new"
+    },
+    {
+     "text": "Almería",
+     "entity": "E7",
+     "how": "new"
+    },
+    {
+     "text": "Jaén",
+     "entity": "E5",
+     "how": "name"
+    },
+    {
+     "text": "Córdoba",
+     "entity": "E8",
+     "how": "new"
+    },
+    {
+     "text": "Sevilla",
+     "entity": "E9",
+     "how": "new"
+    },
+    {
+     "text": "Huelva",
+     "entity": "E10",
+     "how": "new"
+    },
+    {
+     "text": "Cádiz",
+     "entity": "E11",
+     "how": "new"
+    },
+    {
+     "text": "Málaga",
+     "entity": "E12",
+     "how": "new"
+    },
+    {
+     "text": "Granada",
+     "entity": "E13",
+     "how": "new"
+    },
+    {
+     "text": "Murcia",
+     "entity": "E14",
+     "how": "new"
+    },
+    {
+     "text": "Albacete",
+     "entity": "E15",
+     "how": "new"
+    },
+    {
+     "text": "Ciudad Real",
+     "entity": "E16",
+     "how": "new"
+    },
+    {
+     "text": "Badajoz",
+     "entity": "E17",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "basin_of",
+     "args": [
+      "E6",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Su cuenca hidrográfica"
+    },
+    {
+     "pred": "covers_part_of",
+     "args": [
+      "E6",
+      "E7"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Almería"
+    },
+    {
+     "pred": "covers_part_of",
+     "args": [
+      "E6",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Jaén"
+    },
+    {
+     "pred": "covers_part_of",
+     "args": [
+      "E6",
+      "E8"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Córdoba"
+    },
+    {
+     "pred": "covers_part_of",
+     "args": [
+      "E6",
+      "E9"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Sevilla"
+    },
+    {
+     "pred": "covers_part_of",
+     "args": [
+      "E6",
+      "E10"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Huelva"
+    },
+    {
+     "pred": "covers_part_of",
+     "args": [
+      "E6",
+      "E11"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Cádiz"
+    },
+    {
+     "pred": "covers_part_of",
+     "args": [
+      "E6",
+      "E12"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Málaga"
+    },
+    {
+     "pred": "covers_part_of",
+     "args": [
+      "E6",
+      "E13"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Granada"
+    },
+    {
+     "pred": "covers_part_of",
+     "args": [
+      "E6",
+      "E14"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Murcia"
+    },
+    {
+     "pred": "covers_part_of",
+     "args": [
+      "E6",
+      "E15"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Albacete"
+    },
+    {
+     "pred": "covers_part_of",
+     "args": [
+      "E6",
+      "E16"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Ciudad Real"
+    },
+    {
+     "pred": "covers_part_of",
+     "args": [
+      "E6",
+      "E17"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Badajoz"
+    }
+   ]
+  },
+  {
+   "sid": "r045",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "Desemboca"
+    },
+    {
+     "text": "el océano Atlántico",
+     "entity": "E18",
+     "how": "new"
+    },
+    {
+     "text": "un amplio estuario",
+     "entity": "E19",
+     "how": "new"
+    },
+    {
+     "text": "Almonte",
+     "entity": "E20",
+     "how": "new"
+    },
+    {
+     "text": "Huelva",
+     "entity": "E10",
+     "how": "name"
+    },
+    {
+     "text": "Sanlúcar de Barrameda",
+     "entity": "E21",
+     "how": "new"
+    },
+    {
+     "text": "provincia de Cádiz",
+     "entity": "E11",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "flows_into",
+     "args": [
+      "E1",
+      "E18"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Desemboca en el océano Atlántico"
+    },
+    {
+     "pred": "mouth_is",
+     "args": [
+      "E1",
+      "E19"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "en un amplio estuario"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E19",
+      "estuary"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "un amplio estuario"
+    },
+    {
+     "pred": "wide",
+     "args": [
+      "E19"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "amplio estuario"
+    },
+    {
+     "pred": "located_between",
+     "args": [
+      "E19",
+      "E20",
+      "E21"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "un amplio estuario entre Almonte (Huelva) y Sanlúcar de Barrameda"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E20",
+      "E10"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Almonte (Huelva)"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E21",
+      "E11"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Sanlúcar de Barrameda (provincia de Cádiz)"
+    }
+   ]
+  },
+  {
+   "sid": "r046",
+   "mentions": [
+    {
+     "text": "Sevilla",
+     "entity": "E22",
+     "how": "new"
+    },
+    {
+     "text": "el estuario",
+     "entity": "E19",
+     "how": "description"
+    },
+    {
+     "text": "una amplia zona húmeda",
+     "entity": "E23",
+     "how": "new"
+    },
+    {
+     "text": "las marismas del Guadalquivir",
+     "entity": "E23",
+     "how": "name"
+    },
+    {
+     "text": "estas marismas",
+     "entity": "E23",
+     "how": "description"
+    },
+    {
+     "text": "parque nacional de Doñana",
+     "entity": "E24",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "located_between",
+     "args": [
+      "E23",
+      "E22",
+      "E19"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Entre Sevilla y el estuario se sitúa una amplia zona húmeda"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E23",
+      "wetland"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "una amplia zona húmeda"
+    },
+    {
+     "pred": "wide",
+     "args": [
+      "E23"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "una amplia zona húmeda"
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E23",
+      "marismas del Guadalquivir"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "las marismas del Guadalquivir"
+    },
+    {
+     "pred": "partly_within",
+     "args": [
+      "E23",
+      "E24"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "parte de estas marismas están dentro del parque nacional de Doñana"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E24",
+      "national park"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "parque nacional de Doñana"
+    }
+   ]
+  },
+  {
+   "sid": "r047",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "Es"
+    },
+    {
+     "text": "la península ibérica",
+     "entity": "E25",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "river"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Es el quinto río"
+    },
+    {
+     "pred": "fifth_longest",
+     "args": [
+      "E1",
+      "rivers of the Iberian Peninsula"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Es el quinto río por longitud de la península ibérica"
+    }
+   ]
+  },
+  {
+   "sid": "r048",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "Tiene"
+    },
+    {
+     "text": "la sierra de Cazorla",
+     "entity": "E4",
+     "how": "name"
+    },
+    {
+     "text": "Sanlúcar",
+     "entity": "E21",
+     "how": "name"
+    },
+    {
+     "text": "su",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "Andalucía",
+     "entity": "E3",
+     "how": "name"
+    },
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "atraviesa"
+    },
+    {
+     "text": "Andújar",
+     "entity": "E26",
+     "how": "new"
+    },
+    {
+     "text": "Córdoba",
+     "entity": "E27",
+     "how": "new"
+    },
+    {
+     "text": "Sevilla",
+     "entity": "E22",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "has_length",
+     "args": [
+      "E1",
+      "657 km"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Tiene 657 km desde la sierra de Cazorla hasta Sanlúcar"
+    },
+    {
+     "pred": "runs_from",
+     "args": [
+      "E1",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "desde la sierra de Cazorla"
+    },
+    {
+     "pred": "runs_to",
+     "args": [
+      "E1",
+      "E21"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "hasta Sanlúcar"
+    },
+    {
+     "pred": "flows_through",
+     "args": [
+      "E1",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "En su recorrido por Andalucía"
+    },
+    {
+     "pred": "direction",
+     "args": [
+      "E1",
+      "east to west"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "de este a oeste"
+    },
+    {
+     "pred": "passes_through",
+     "args": [
+      "E1",
+      "E26"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "atraviesa ciudades como Andújar"
+    },
+    {
+     "pred": "passes_through",
+     "args": [
+      "E1",
+      "E27"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Córdoba"
+    },
+    {
+     "pred": "passes_through",
+     "args": [
+      "E1",
+      "E22"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Córdoba y Sevilla"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E26",
+      "city"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "ciudades como Andújar"
+    }
+   ]
+  },
+  {
+   "sid": "r049",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "Forma"
+    },
+    {
+     "text": "parque nacional homónimo",
+     "entity": "E2",
+     "how": "new"
+    },
+    {
+     "text": "la Unesco",
+     "entity": "E3",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "part_of",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Forma parte del parque nacional homónimo"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E2",
+      "national park"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "parque nacional homónimo"
+    },
+    {
+     "pred": "same_name_as",
+     "args": [
+      "E2",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "homónimo"
+    },
+    {
+     "pred": "declared",
+     "args": [
+      "E2",
+      "World Heritage Site"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "declarado Patrimonio de la Humanidad"
+    },
+    {
+     "pred": "declared_by",
+     "args": [
+      "E2",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "declarado Patrimonio de la Humanidad por la Unesco"
+    },
+    {
+     "pred": "declared_on",
+     "args": [
+      "E2",
+      "2007-06-28"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "el 28 de junio de 2007"
+    }
+   ]
+  },
+  {
+   "sid": "r050",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "Es"
+    },
+    {
+     "text": "el complejo volcánico Teide-Pico Viejo",
+     "entity": "E4",
+     "how": "new"
+    },
+    {
+     "text": "un gran estratovolcán de tipo vesubiano",
+     "entity": "E4",
+     "how": "description"
+    },
+    {
+     "text": "las Narices del Teide",
+     "entity": "E5",
+     "how": "new"
+    },
+    {
+     "text": "la última erupción de las Narices del Teide",
+     "entity": "E6",
+     "how": "new"
+    },
+    {
+     "text": "las fumarolas",
+     "entity": "E7",
+     "how": "new"
+    },
+    {
+     "text": "",
+     "entity": "E4",
+     "how": "dropped",
+     "at": "emite"
+    },
+    {
+     "text": "su",
+     "entity": "E4",
+     "how": "pronoun"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "protected natural area"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "un espacio natural protegido"
+    },
+    {
+     "pred": "category",
+     "args": [
+      "E1",
+      "natural monument"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "en la categoría de monumento natural"
+    },
+    {
+     "pred": "encloses",
+     "args": [
+      "E1",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "que encierra el complejo volcánico Teide-Pico Viejo"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E4",
+      "stratovolcano"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "un gran estratovolcán"
+    },
+    {
+     "pred": "large",
+     "args": [
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "un gran estratovolcán"
+    },
+    {
+     "pred": "type",
+     "args": [
+      "E4",
+      "Vesuvian"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "de tipo vesubiano"
+    },
+    {
+     "pred": "dormant_since",
+     "args": [
+      "E4",
+      "E6"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "se mantiene dormido desde la última erupción de las Narices del Teide"
+    },
+    {
+     "pred": "eruption_of",
+     "args": [
+      "E6",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "la última erupción de las Narices del Teide"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "E6",
+      "1798"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "ocurrida en 1798"
+    },
+    {
+     "pred": "active",
+     "args": [
+      "E7"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "permanecen activas las fumarolas"
+    },
+    {
+     "pred": "emits",
+     "args": [
+      "E4",
+      "E7"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "las fumarolas que emite regularmente desde su cráter"
+    },
+    {
+     "pred": "regularly",
+     "args": [
+      "E4 emits E7"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "emite regularmente"
+    },
+    {
+     "pred": "from",
+     "args": [
+      "E7",
+      "crater of E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "desde su cráter"
+    }
+   ]
+  },
+  {
+   "sid": "r051",
+   "mentions": [
+    {
+     "text": "El Teide",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "el monumento natural más emblemático del archipiélago canario",
+     "entity": "E1",
+     "how": "description"
+    },
+    {
+     "text": "el archipiélago canario",
+     "entity": "E8",
+     "how": "new"
+    },
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "También es"
+    },
+    {
+     "text": "el volcán",
+     "entity": "E1",
+     "how": "description"
+    },
+    {
+     "text": "la isla de Tenerife",
+     "entity": "E9",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "natural monument"
+     ],
+     "neg": false,
+     "hedged": true,
+     "span": "El Teide es considerado el monumento natural"
+    },
+    {
+     "pred": "most_emblematic",
+     "args": [
+      "E1",
+      "natural monuments of E8"
+     ],
+     "neg": false,
+     "hedged": true,
+     "span": "El Teide es considerado el monumento natural más emblemático del archipiélago canario"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "tourist attraction"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "También es un gran atractivo turístico"
+    },
+    {
+     "pred": "major",
+     "args": [
+      "E1 as tourist attraction"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "un gran atractivo turístico"
+    },
+    {
+     "pred": "attracts",
+     "args": [
+      "E1",
+      "millions of people per year"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "cada año atrae a millones de personas",
+     "approx": true
+    },
+    {
+     "pred": "became",
+     "args": [
+      "E1",
+      "establishing shot location"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "el volcán se ha convertido en un plano de establecimiento"
+    },
+    {
+     "pred": "appears_in",
+     "args": [
+      "E1",
+      "films"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "en películas"
+    },
+    {
+     "pred": "appears_in",
+     "args": [
+      "E1",
+      "television series"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "series de televisión"
+    },
+    {
+     "pred": "appears_in",
+     "args": [
+      "E1",
+      "programmes"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "o programas"
+    },
+    {
+     "pred": "set_in",
+     "args": [
+      "films, series and programmes",
+      "E9"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "ambientados en la isla de Tenerife"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E9",
+      "island"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "la isla de Tenerife"
+    }
+   ]
+  },
+  {
+   "sid": "r052",
+   "mentions": [
+    {
+     "text": "El lago Llanquihue",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "Chile",
+     "entity": "E2",
+     "how": "new"
+    },
+    {
+     "text": "el lago General Carrera",
+     "entity": "E3",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "lake"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "El lago Llanquihue"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "lago de Chile"
+    },
+    {
+     "pred": "second_largest",
+     "args": [
+      "E1",
+      "lakes of Chile"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "corresponde al segundo mayor lago de Chile"
+    },
+    {
+     "pred": "larger_than",
+     "args": [
+      "E3",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "tras el lago General Carrera"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E3",
+      "lake"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "el lago General Carrera"
+    },
+    {
+     "pred": "has_area",
+     "args": [
+      "E1",
+      "860 km2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "con una extensión de 860 km²"
+    }
+   ]
+  },
+  {
+   "sid": "r053",
+   "mentions": [
+    {
+     "text": "Su",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "algunas sondas de cordel",
+     "entity": "E4",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "depth_known_with_certainty",
+     "args": [
+      "E1"
+     ],
+     "neg": true,
+     "hedged": false,
+     "span": "Su profundidad no se conoce con certeza"
+    },
+    {
+     "pred": "has_depth",
+     "args": [
+      "E1",
+      "> 350 m"
+     ],
+     "neg": false,
+     "hedged": true,
+     "span": "algunas sondas de cordel han arrojado cifras superiores a 350 m"
+    },
+    {
+     "pred": "measured_by",
+     "args": [
+      "depth of E1",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "algunas sondas de cordel han arrojado cifras"
+    }
+   ]
+  },
+  {
+   "sid": "r054",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "Está"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "has_altitude",
+     "args": [
+      "E1",
+      "70 m above sea level"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Está a una altitud de 70 m sobre el nivel del mar"
+    }
+   ]
+  },
+  {
+   "sid": "r055",
+   "mentions": [
+    {
+     "text": "Le Rhône",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "Midi de la France",
+     "entity": "E5",
+     "how": "new"
+    },
+    {
+     "text": "Europe",
+     "entity": "E2",
+     "how": "new"
+    },
+    {
+     "text": "Suisse",
+     "entity": "E3",
+     "how": "new"
+    },
+    {
+     "text": "France",
+     "entity": "E4",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "fleuve"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "est un fleuve"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "un fleuve d'Europe"
+    },
+    {
+     "pred": "has_length",
+     "args": [
+      "E1",
+      "812 km"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "long de 812 kilomètres"
+    },
+    {
+     "pred": "length_in",
+     "args": [
+      "E1",
+      "E3",
+      "one third"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "un tiers en Suisse"
+    },
+    {
+     "pred": "length_in",
+     "args": [
+      "E1",
+      "E4",
+      "two thirds"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "deux tiers en France"
+    },
+    {
+     "pred": "pronounced",
+     "args": [
+      "E1",
+      "[ʁon]",
+      "standard French"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "prononcé [ʁon] en français standard"
+    },
+    {
+     "pred": "pronounced",
+     "args": [
+      "E1",
+      "[ˈʁɔ.nə]",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "[ˈʁɔ.nə] dans le Midi de la France"
+    }
+   ]
+  },
+  {
+   "sid": "r056",
+   "mentions": [
+    {
+     "text": "Il",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "glacier du Rhône",
+     "entity": "E6",
+     "how": "new"
+    },
+    {
+     "text": "Suisse",
+     "entity": "E3",
+     "how": "name"
+    },
+    {
+     "text": "Valais",
+     "entity": "E7",
+     "how": "new"
+    },
+    {
+     "text": "Alpes uranaises",
+     "entity": "E8",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "has_source",
+     "args": [
+      "E1",
+      "E6"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Il prend sa source dans le glacier du Rhône"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E6",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "en Suisse"
+    },
+    {
+     "pred": "source_altitude",
+     "args": [
+      "E1",
+      "2209 m"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "à une altitude de 2 209 m"
+    },
+    {
+     "pred": "at_eastern_end_of",
+     "args": [
+      "E6",
+      "E7"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "à l'extrémité orientale du Valais"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E6",
+      "E8"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "dans le massif des Alpes uranaises"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E8",
+      "massif"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "massif des Alpes uranaises"
+    }
+   ]
+  },
+  {
+   "sid": "r057",
+   "mentions": [
+    {
+     "text": "Il",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "Suisse",
+     "entity": "E3",
+     "how": "name"
+    },
+    {
+     "text": "Léman",
+     "entity": "E9",
+     "how": "new"
+    },
+    {
+     "text": "en",
+     "entity": "E9",
+     "how": "pronoun"
+    },
+    {
+     "text": "Genève",
+     "entity": "E10",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "length_in",
+     "args": [
+      "E1",
+      "E3",
+      "290 km"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Il parcourt 290 km en Suisse"
+    },
+    {
+     "pred": "flows_into",
+     "args": [
+      "E1",
+      "E9"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "se jetant dans le Léman"
+    },
+    {
+     "pred": "flows_out_of",
+     "args": [
+      "E1",
+      "E9"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "pour en sortir"
+    },
+    {
+     "pred": "exits_at",
+     "args": [
+      "E1",
+      "E10"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "sortir à Genève"
+    }
+   ]
+  },
+  {
+   "sid": "r058",
+   "mentions": [
+    {
+     "text": "Il",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "France",
+     "entity": "E4",
+     "how": "name"
+    },
+    {
+     "text": "où",
+     "entity": "E4",
+     "how": "pronoun"
+    },
+    {
+     "text": "il",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "Encyclopédie Larousse",
+     "entity": "E11",
+     "how": "new"
+    },
+    {
+     "text": "SANDRE",
+     "entity": "E12",
+     "how": "new"
+    },
+    {
+     "text": "son",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "Lyon",
+     "entity": "E13",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "enters",
+     "args": [
+      "E1",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Il entre ensuite en France"
+    },
+    {
+     "pred": "length_in",
+     "args": [
+      "E1",
+      "E4",
+      "522 km"
+     ],
+     "neg": false,
+     "hedged": true,
+     "span": "il parcourt 522 km, selon l'Encyclopédie Larousse"
+    },
+    {
+     "pred": "reports",
+     "args": [
+      "E11",
+      "E1",
+      "522 km"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "522 km, selon l'Encyclopédie Larousse"
+    },
+    {
+     "pred": "length_in",
+     "args": [
+      "E1",
+      "E4",
+      "545 km"
+     ],
+     "neg": false,
+     "hedged": true,
+     "span": "ou 545 km, selon le SANDRE"
+    },
+    {
+     "pred": "reports",
+     "args": [
+      "E12",
+      "E1",
+      "545 km"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "545 km, selon le SANDRE"
+    },
+    {
+     "pred": "turns_south_at",
+     "args": [
+      "E1",
+      "E13"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "prenant son virage vers le sud à Lyon"
+    }
+   ]
+  },
+  {
+   "sid": "r059",
+   "mentions": [
+    {
+     "text": "Il",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "delta de Camargue",
+     "entity": "E14",
+     "how": "new"
+    },
+    {
+     "text": "mer Méditerranée",
+     "entity": "E15",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "ends_in",
+     "args": [
+      "E1",
+      "E14"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Il termine son cours dans le delta de Camargue"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E14",
+      "delta"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "delta de Camargue"
+    },
+    {
+     "pred": "flows_into",
+     "args": [
+      "E1",
+      "E15"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "se jeter dans la mer Méditerranée"
+    }
+   ]
+  },
+  {
+   "sid": "r060",
+   "mentions": [
+    {
+     "text": "Port-Saint-Louis-du-Rhône",
+     "entity": "E16",
+     "how": "new"
+    },
+    {
+     "text": "le Rhône",
+     "entity": "E1",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E16",
+      "ville"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "est la dernière ville"
+    },
+    {
+     "pred": "flows_through",
+     "args": [
+      "E1",
+      "E16"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "ville traversée par le Rhône"
+    },
+    {
+     "pred": "last_town_on",
+     "args": [
+      "E16",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "la dernière ville traversée par le Rhône"
+    }
+   ]
+  },
+  {
+   "sid": "r061",
+   "mentions": [
+    {
+     "text": "Méditerranée",
+     "entity": "E15",
+     "how": "name"
+    },
+    {
+     "text": "Rhône",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "celui du Nil",
+     "entity": "E17",
+     "how": "new"
+    },
+    {
+     "text": "mer Noire",
+     "entity": "E18",
+     "how": "new"
+    },
+    {
+     "text": "où",
+     "entity": "E18",
+     "how": "pronoun"
+    },
+    {
+     "text": "Danube",
+     "entity": "E19",
+     "how": "new"
+    },
+    {
+     "text": "Don",
+     "entity": "E20",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "flows_into",
+     "args": [
+      "E1",
+      "E15"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "De tous les fleuves s'écoulant en Méditerranée"
+    },
+    {
+     "pred": "second_largest_discharge",
+     "args": [
+      "E1",
+      "rivers flowing into the Mediterranean"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "le débit du Rhône est le deuxième plus important"
+    },
+    {
+     "pred": "larger_discharge_than",
+     "args": [
+      "E17",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "après celui du Nil"
+    },
+    {
+     "pred": "excluded_from_comparison",
+     "args": [
+      "E18"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "si l'on ne tient pas compte de la mer Noire"
+    },
+    {
+     "pred": "flows_into",
+     "args": [
+      "E19",
+      "E18"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "où se jettent en particulier le Danube"
+    },
+    {
+     "pred": "flows_into",
+     "args": [
+      "E20",
+      "E18"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "où se jettent en particulier le Danube et le Don"
+    }
+   ]
+  },
+  {
+   "sid": "r062",
+   "mentions": [
+    {
+     "text": "une mer sans marée",
+     "entity": "E15",
+     "how": "description"
+    },
+    {
+     "text": "le fleuve",
+     "entity": "E1",
+     "how": "description"
+    },
+    {
+     "text": "un delta",
+     "entity": "E14",
+     "how": "description"
+    },
+    {
+     "text": "des bras",
+     "entity": "E21",
+     "how": "new"
+    },
+    {
+     "text": "qui",
+     "entity": "E21",
+     "how": "pronoun"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "ends_in",
+     "args": [
+      "E1",
+      "E15"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Finissant son cours dans une mer sans marée"
+    },
+    {
+     "pred": "has_tide",
+     "args": [
+      "E15"
+     ],
+     "neg": true,
+     "hedged": false,
+     "span": "une mer sans marée"
+    },
+    {
+     "pred": "formed",
+     "args": [
+      "E1",
+      "E14"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "le fleuve a formé un delta"
+    },
+    {
+     "pred": "has_part",
+     "args": [
+      "E14",
+      "E21"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "un delta avec des bras"
+    },
+    {
+     "pred": "moved",
+     "args": [
+      "E21",
+      "west to east"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "se sont déplacés principalement d'ouest en est"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "moved(E21)",
+      "over history"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "au cours de l'histoire"
+    }
+   ]
+  },
+  {
+   "sid": "r063",
+   "mentions": [
+    {
+     "text": "ce delta",
+     "entity": "E14",
+     "how": "description"
+    },
+    {
+     "text": "crues exceptionnelles",
+     "entity": "E22",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "embanked",
+     "args": [
+      "E14"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Désormais endigué"
+    },
+    {
+     "pred": "fixed",
+     "args": [
+      "E14"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "ce delta est figé"
+    },
+    {
+     "pred": "changes_during",
+     "args": [
+      "E14",
+      "E22"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "hormis lors de crues exceptionnelles"
+    },
+    {
+     "pred": "exceptional",
+     "args": [
+      "E22"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "crues exceptionnelles"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "E22",
+      "1993"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "comme en 1993"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "E22",
+      "1994"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "1994"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "E22",
+      "2003"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "2003"
+    }
+   ]
+  },
+  {
+   "sid": "r064",
+   "mentions": [
+    {
+     "text": "Il",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "l'Éridan",
+     "entity": "E23",
+     "how": "new"
+    },
+    {
+     "text": "qui",
+     "entity": "E23",
+     "how": "pronoun"
+    },
+    {
+     "text": "Océan",
+     "entity": "E24",
+     "how": "new"
+    },
+    {
+     "text": "Téthys",
+     "entity": "E25",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "identified_with",
+     "args": [
+      "E1",
+      "E23"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Il est parfois identifié à l'Éridan"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E23",
+      "river god"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "le nom d'un dieu fleuve"
+    },
+    {
+     "pred": "from",
+     "args": [
+      "E23",
+      "Greek mythology"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "de la mythologie grecque"
+    },
+    {
+     "pred": "child_of",
+     "args": [
+      "E23",
+      "E24"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "fils d'Océan"
+    },
+    {
+     "pred": "child_of",
+     "args": [
+      "E23",
+      "E25"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "fils d'Océan et de Téthys"
+    }
+   ]
+  },
+  {
+   "sid": "r065",
+   "mentions": [
+    {
+     "text": "puy de Dôme",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "Massif central",
+     "entity": "E2",
+     "how": "new"
+    },
+    {
+     "text": "Clermont-Ferrand",
+     "entity": "E3",
+     "how": "new"
+    },
+    {
+     "text": "il",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "son",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "département du Puy-de-Dôme",
+     "entity": "E4",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "lava dome"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "un dôme de lave"
+    },
+    {
+     "pred": "trachytic",
+     "args": [
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "dôme de lave trachytique"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "situé dans le Massif central"
+    },
+    {
+     "pred": "west_of",
+     "args": [
+      "E1",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "à l'ouest de Clermont-Ferrand"
+    },
+    {
+     "pred": "distance_from",
+     "args": [
+      "E1",
+      "E3",
+      "10 km"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "à dix kilomètres à l'ouest de Clermont-Ferrand"
+    },
+    {
+     "pred": "named_after",
+     "args": [
+      "E4",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "il a donné son nom au département du Puy-de-Dôme"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E4",
+      "département"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "département du Puy-de-Dôme"
+    }
+   ]
+  },
+  {
+   "sid": "r066",
+   "mentions": [
+    {
+     "text": "c'",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "chaîne des Puys",
+     "entity": "E5",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "has_age",
+     "args": [
+      "E1",
+      "11000 years"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Âgé d'environ 11 000 ans",
+     "approx": true
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "volcano"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "un des volcans"
+    },
+    {
+     "pred": "among_youngest",
+     "args": [
+      "E1",
+      "volcanoes of the chaîne des Puys"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "un des volcans les plus jeunes de la chaîne des Puys"
+    },
+    {
+     "pred": "part_of",
+     "args": [
+      "E1",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "volcans les plus jeunes de la chaîne des Puys"
+    }
+   ]
+  },
+  {
+   "sid": "r067",
+   "mentions": [
+    {
+     "text": "lac de Gérardmer",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "Girômwè",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "commune de Gérardmer",
+     "entity": "E2",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "lake"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Le lac"
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "Girômwè",
+      "valley patois"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Girômwè dans le patois de la vallée"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "se situe sur la commune de Gérardmer"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E2",
+      "commune"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "commune de Gérardmer"
+    }
+   ]
+  },
+  {
+   "sid": "r068",
+   "mentions": [
+    {
+     "text": "Il",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "la Vologne",
+     "entity": "E3",
+     "how": "new"
+    },
+    {
+     "text": "un court émissaire",
+     "entity": "E4",
+     "how": "new"
+    },
+    {
+     "text": "la Jamagne",
+     "entity": "E4",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "drains_into",
+     "args": [
+      "E1",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Il se déverse dans la Vologne"
+    },
+    {
+     "pred": "drains_via",
+     "args": [
+      "E1",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "par l'intermédiaire d'un court émissaire"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E4",
+      "outflow"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "émissaire"
+    },
+    {
+     "pred": "short",
+     "args": [
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "court émissaire"
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E4",
+      "Jamagne"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "la Jamagne"
+    }
+   ]
+  },
+  {
+   "sid": "r069",
+   "mentions": [
+    {
+     "text": "Der Ammersee",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "Chiemsee",
+     "entity": "E2",
+     "how": "new"
+    },
+    {
+     "text": "Starnberger See",
+     "entity": "E3",
+     "how": "new"
+    },
+    {
+     "text": "Bayern",
+     "entity": "E4",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "pre-alpine lake"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Voralpensee"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E1",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Voralpensee in Bayern"
+    },
+    {
+     "pred": "northernmost",
+     "args": [
+      "E1",
+      "pre-alpine lakes in Bavaria"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "der am weitesten nach Norden reichende"
+    },
+    {
+     "pred": "third_largest",
+     "args": [
+      "E1",
+      "pre-alpine lakes in Bavaria"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "drittgrößte Voralpensee in Bayern"
+    },
+    {
+     "pred": "larger_than",
+     "args": [
+      "E2",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "nach dem Chiemsee"
+    },
+    {
+     "pred": "larger_than",
+     "args": [
+      "E3",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "dem Starnberger See"
+    }
+   ]
+  },
+  {
+   "sid": "r070",
+   "mentions": [
+    {
+     "text": "Der See",
+     "entity": "E1",
+     "how": "description"
+    },
+    {
+     "text": "gleichnamiges gemeindefreies Gebiet",
+     "entity": "E5",
+     "how": "new"
+    },
+    {
+     "text": "des Freistaates",
+     "entity": "E4",
+     "how": "description"
+    },
+    {
+     "text": "das",
+     "entity": "E5",
+     "how": "pronoun"
+    },
+    {
+     "text": "die Bayerische Verwaltung der staatlichen Schlösser, Gärten und Seen",
+     "entity": "E6",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "constitutes",
+     "args": [
+      "E1",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Der See ist als gleichnamiges gemeindefreies Gebiet"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E5",
+      "unincorporated area"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "gemeindefreies Gebiet"
+    },
+    {
+     "pred": "same_name_as",
+     "args": [
+      "E5",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "gleichnamiges"
+    },
+    {
+     "pred": "owned_by",
+     "args": [
+      "E1",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Eigentum des Freistaates"
+    },
+    {
+     "pred": "responsible_for",
+     "args": [
+      "E6",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "für das die Bayerische Verwaltung der staatlichen Schlösser, Gärten und Seen zuständig ist"
+    }
+   ]
+  },
+  {
+   "sid": "r071",
+   "mentions": [
+    {
+     "text": "Die Gemeinden am Ostufer",
+     "entity": "E7",
+     "how": "new"
+    },
+    {
+     "text": "Landkreis Starnberg",
+     "entity": "E8",
+     "how": "new"
+    },
+    {
+     "text": "das Gebiet um die Mündung der Ammer",
+     "entity": "E9",
+     "how": "new"
+    },
+    {
+     "text": "Ammer",
+     "entity": "E10",
+     "how": "new"
+    },
+    {
+     "text": "Landkreis Weilheim-Schongau",
+     "entity": "E11",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "on_east_shore_of",
+     "args": [
+      "E7",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Die Gemeinden am Ostufer"
+    },
+    {
+     "pred": "belongs_to",
+     "args": [
+      "E7",
+      "E8"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Die Gemeinden am Ostufer gehören zum Landkreis Starnberg"
+    },
+    {
+     "pred": "around_mouth_of",
+     "args": [
+      "E9",
+      "E10"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "das Gebiet um die Mündung der Ammer"
+    },
+    {
+     "pred": "in_south_of",
+     "args": [
+      "E9",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "im Süden"
+    },
+    {
+     "pred": "belongs_to",
+     "args": [
+      "E9",
+      "E11"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "das Gebiet um die Mündung der Ammer im Süden zum Landkreis Weilheim-Schongau"
+    }
+   ]
+  },
+  {
+   "sid": "r072",
+   "mentions": [
+    {
+     "text": "Schwedeninsel",
+     "entity": "E12",
+     "how": "new"
+    },
+    {
+     "text": "dem Ufer",
+     "entity": "E13",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "at_south_end_of",
+     "args": [
+      "E12",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "am südlichen Seeende gelegene"
+    },
+    {
+     "pred": "became",
+     "args": [
+      "E12",
+      "peninsula"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "ist inzwischen zur Halbinsel geworden"
+    },
+    {
+     "pred": "will_merge_with",
+     "args": [
+      "E12",
+      "E13"
+     ],
+     "neg": false,
+     "hedged": true,
+     "span": "wird bei fortschreitender Verlandung mit dem Ufer verschmelzen"
+    },
+    {
+     "pred": "condition",
+     "args": [
+      "will_merge_with(E12,E13)",
+      "progressive silting"
+     ],
+     "neg": false,
+     "hedged": true,
+     "span": "bei fortschreitender Verlandung"
+    }
+   ]
+  },
+  {
+   "sid": "r073",
+   "mentions": [
+    {
+     "text": "Der Brocken",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "Blocksberg",
+     "entity": "E1",
+     "how": "alias"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "Blocksberg",
+      "colloquial"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "volkstümlich Blocksberg genannt"
+    },
+    {
+     "pred": "has_elevation",
+     "args": [
+      "E1",
+      "1141.2 m"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "mit 1141,2 m ü"
+    }
+   ]
+  },
+  {
+   "sid": "r074",
+   "mentions": [
+    {
+     "text": "Er",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "Gemarkung Schierke",
+     "entity": "E2",
+     "how": "new"
+    },
+    {
+     "text": "Stadt Wernigerode",
+     "entity": "E3",
+     "how": "new"
+    },
+    {
+     "text": "Landkreis Harz",
+     "entity": "E4",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "located_in",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Er befindet sich in der Gemarkung Schierke"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E2",
+      "cadastral district"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Gemarkung Schierke"
+    },
+    {
+     "pred": "part_of",
+     "args": [
+      "E2",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Gemarkung Schierke der Stadt Wernigerode"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E3",
+      "town"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Stadt Wernigerode"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E3",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Stadt Wernigerode im Landkreis Harz"
+    }
+   ]
+  },
+  {
+   "sid": "r075",
+   "mentions": [
+    {
+     "text": "Der Brocken",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "Deutschland",
+     "entity": "E5",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "mountain"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "der dominanteste Berg"
+    },
+    {
+     "pred": "most_dominant",
+     "args": [
+      "E1",
+      "mountains in Germany"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "der dominanteste Berg in Deutschland"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E1",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Berg in Deutschland"
+    }
+   ]
+  },
+  {
+   "sid": "r076",
+   "mentions": [
+    {
+     "text": "Die seit den 1930er Jahren vorhandenen Sendeanlagen",
+     "entity": "E6",
+     "how": "new"
+    },
+    {
+     "text": "Brocken",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "Hochharz",
+     "entity": "E7",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E6",
+      "transmitter facility"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Sendeanlagen"
+    },
+    {
+     "pred": "located_on",
+     "args": [
+      "E6",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Sendeanlagen auf dem Brocken"
+    },
+    {
+     "pred": "exists_since",
+     "args": [
+      "E6",
+      "1930s"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "seit den 1930er Jahren vorhandenen"
+    },
+    {
+     "pred": "has_range",
+     "args": [
+      "E6",
+      "large technical range"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "eine große technische Reichweite"
+    },
+    {
+     "pred": "because_of",
+     "args": [
+      "has_range(E6)",
+      "exposed location"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "aufgrund der exponierten Lage im Hochharz"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E1",
+      "E7"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Lage im Hochharz"
+    }
+   ]
+  },
+  {
+   "sid": "r077",
+   "mentions": [
+    {
+     "text": "Der Main",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "des Rheins",
+     "entity": "E2",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "has_length",
+     "args": [
+      "E1",
+      "527 km"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "mit 527 Kilometern Fließstrecke"
+    },
+    {
+     "pred": "tributary_of",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Nebenfluss des Rheins"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "right tributary"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "rechte Nebenfluss"
+    },
+    {
+     "pred": "longest",
+     "args": [
+      "E1",
+      "right tributaries of the Rhine"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "der längste rechte Nebenfluss des Rheins"
+    }
+   ]
+  },
+  {
+   "sid": "r078",
+   "mentions": [
+    {
+     "text": "Stadt Kulmbach",
+     "entity": "E3",
+     "how": "new"
+    },
+    {
+     "text": "Stadtteil Melkendorf",
+     "entity": "E4",
+     "how": "new"
+    },
+    {
+     "text": "Schloss Steinenhausen",
+     "entity": "E5",
+     "how": "new"
+    },
+    {
+     "text": "die beiden Quellflüsse",
+     "entity": "E6",
+     "how": "description"
+    },
+    {
+     "text": "Main",
+     "entity": "E1",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "merge_into",
+     "args": [
+      "E6",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "vereinigen sich die beiden Quellflüsse zum eigentlichen Main"
+    },
+    {
+     "pred": "count",
+     "args": [
+      "E6",
+      "2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "die beiden Quellflüsse"
+    },
+    {
+     "pred": "confluence_at_western_edge_of",
+     "args": [
+      "E6",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Am westlichen Rand der Stadt Kulmbach"
+    },
+    {
+     "pred": "confluence_in",
+     "args": [
+      "E6",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "im Stadtteil Melkendorf"
+    },
+    {
+     "pred": "part_of",
+     "args": [
+      "E4",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Stadt Kulmbach im Stadtteil Melkendorf"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E3",
+      "town"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Stadt Kulmbach"
+    },
+    {
+     "pred": "confluence_near",
+     "args": [
+      "E6",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "nahe dem Schloss Steinenhausen"
+    }
+   ]
+  },
+  {
+   "sid": "r079",
+   "mentions": [
+    {
+     "text": "Main",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "große Teile des fränkischen Weinbaugebiets",
+     "entity": "E7",
+     "how": "new"
+    },
+    {
+     "text": "zahlreiche, teils gut erhaltene historische Stadtkerne",
+     "entity": "E8",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "large_parts_located_on",
+     "args": [
+      "E7",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Am Main liegen große Teile des fränkischen Weinbaugebiets"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E7",
+      "wine region"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Weinbaugebiets"
+    },
+    {
+     "pred": "franconian",
+     "args": [
+      "E7"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "fränkischen Weinbaugebiets"
+    },
+    {
+     "pred": "located_on",
+     "args": [
+      "E8",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Am Main liegen"
+    },
+    {
+     "pred": "numerous",
+     "args": [
+      "E8"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "zahlreiche"
+    },
+    {
+     "pred": "partly_well_preserved",
+     "args": [
+      "E8"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "teils gut erhaltene"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E8",
+      "historic town centre"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "historische Stadtkerne"
+    }
+   ]
+  },
+  {
+   "sid": "r080",
+   "mentions": [
+    {
+     "text": "der Mainzer Altstadt",
+     "entity": "E9",
+     "how": "new"
+    },
+    {
+     "text": "Ginsheim-Gustavsburg",
+     "entity": "E10",
+     "how": "new"
+    },
+    {
+     "text": "der Maaraue",
+     "entity": "E11",
+     "how": "new"
+    },
+    {
+     "text": "Mainz-Kostheim",
+     "entity": "E12",
+     "how": "new"
+    },
+    {
+     "text": "er",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "den Rhein",
+     "entity": "E2",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "flows_into",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "mündet er in den Rhein"
+    },
+    {
+     "pred": "mouth_opposite",
+     "args": [
+      "E1",
+      "E9"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Gegenüber der Mainzer Altstadt"
+    },
+    {
+     "pred": "mouth_between",
+     "args": [
+      "E1",
+      "E10",
+      "E11"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "zwischen Ginsheim-Gustavsburg und der Maaraue"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E11",
+      "E12"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "der Maaraue in Mainz-Kostheim"
+    }
+   ]
+  },
+  {
+   "sid": "r081",
+   "mentions": [
+    {
+     "text": "der Eisenbahnbrücke bei Hallstadt",
+     "entity": "E13",
+     "how": "new"
+    },
+    {
+     "text": "Hallstadt",
+     "entity": "E14",
+     "how": "new"
+    },
+    {
+     "text": "der Main",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "Ma",
+     "entity": "E1",
+     "how": "alias"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "federal waterway"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "ist der Main (Ma) Bundeswasserstraße"
+    },
+    {
+     "pred": "federal_waterway_from",
+     "args": [
+      "E1",
+      "km 0"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Von dort (Kilometer 0)"
+    },
+    {
+     "pred": "federal_waterway_to",
+     "args": [
+      "E1",
+      "above E13"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "flussaufwärts bis oberhalb der Eisenbahnbrücke bei Hallstadt"
+    },
+    {
+     "pred": "at_km",
+     "args": [
+      "E13",
+      "387.69 km"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Kilometer 387,69"
+    },
+    {
+     "pred": "near",
+     "args": [
+      "E13",
+      "E14"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Eisenbahnbrücke bei Hallstadt"
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "Ma"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "(Ma)"
+    }
+   ]
+  },
+  {
+   "sid": "r082",
+   "mentions": [
+    {
+     "text": "sein",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "sein Unterlauf",
+     "entity": "E15",
+     "how": "new"
+    },
+    {
+     "text": "Miltenberg",
+     "entity": "E16",
+     "how": "new"
+    },
+    {
+     "text": "Großkrotzenburg",
+     "entity": "E17",
+     "how": "new"
+    },
+    {
+     "text": "der Provinz Obergermanien",
+     "entity": "E18",
+     "how": "new"
+    },
+    {
+     "text": "des Römischen Reichs",
+     "entity": "E19",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "lower_course_of",
+     "args": [
+      "E15",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "sein Unterlauf"
+    },
+    {
+     "pred": "between",
+     "args": [
+      "E15",
+      "E16",
+      "E17"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "zwischen Miltenberg und Großkrotzenburg"
+    },
+    {
+     "pred": "formed_part_of_outer_border_of",
+     "args": [
+      "E15",
+      "E18"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "ein kurzes Stück der Außengrenze der Provinz Obergermanien"
+    },
+    {
+     "pred": "short",
+     "args": [
+      "stretch of border formed by E15"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "ein kurzes Stück"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "formed_part_of_outer_border_of(E15,E18)",
+      "Late Antiquity"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "In der Spätantike"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E18",
+      "province"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Provinz Obergermanien"
+    },
+    {
+     "pred": "province_of",
+     "args": [
+      "E18",
+      "E19"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Provinz Obergermanien des Römischen Reichs"
+    }
+   ]
+  },
+  {
+   "sid": "r083",
+   "mentions": [
+    {
+     "text": "Main",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "Oberdeutschlands",
+     "entity": "E20",
+     "how": "new"
+    },
+    {
+     "text": "die Mainlinie",
+     "entity": "E21",
+     "how": "new"
+    },
+    {
+     "text": "Deutschland",
+     "entity": "E22",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "flows_within",
+     "args": [
+      "E1",
+      "E20"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "tatsächlich über weite Strecken innerhalb Oberdeutschlands verlaufende"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "dialect boundary"
+     ],
+     "neg": true,
+     "hedged": false,
+     "span": "weder eine Dialekt-"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "cultural boundary"
+     ],
+     "neg": true,
+     "hedged": false,
+     "span": "noch eine Kulturgrenze"
+    },
+    {
+     "pred": "divides",
+     "args": [
+      "E21",
+      "E22",
+      "northern and southern part"
+     ],
+     "neg": false,
+     "hedged": true,
+     "span": "gliedert nach häufigem Verständnis die Mainlinie Deutschland in einen nördlichen und südlichen Teil"
+    }
+   ]
+  },
+  {
+   "sid": "r084",
+   "mentions": [
+    {
+     "text": "富士山",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "日本",
+     "entity": "E2",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "ふじさん"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "（ふじさん）"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "active volcano"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "活火山である"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "日本の活火山"
+    }
+   ]
+  },
+  {
+   "sid": "r085",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "跨る"
+    },
+    {
+     "text": "山梨県",
+     "entity": "E3",
+     "how": "new"
+    },
+    {
+     "text": "富士吉田市",
+     "entity": "E4",
+     "how": "new"
+    },
+    {
+     "text": "南都留郡鳴沢村",
+     "entity": "E5",
+     "how": "new"
+    },
+    {
+     "text": "静岡県",
+     "entity": "E6",
+     "how": "new"
+    },
+    {
+     "text": "富士宮市",
+     "entity": "E7",
+     "how": "new"
+    },
+    {
+     "text": "富士市",
+     "entity": "E8",
+     "how": "new"
+    },
+    {
+     "text": "裾野市",
+     "entity": "E9",
+     "how": "new"
+    },
+    {
+     "text": "御殿場市",
+     "entity": "E10",
+     "how": "new"
+    },
+    {
+     "text": "駿東郡小山町",
+     "entity": "E11",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "straddles",
+     "args": [
+      "E1",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "山梨県（富士吉田市、南都留郡鳴沢村）と"
+    },
+    {
+     "pred": "straddles",
+     "args": [
+      "E1",
+      "E6"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "静岡県（富士宮市、富士市、裾野市、御殿場市、駿東郡小山町）に跨る"
+    },
+    {
+     "pred": "straddles",
+     "args": [
+      "E1",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "富士吉田市"
+    },
+    {
+     "pred": "straddles",
+     "args": [
+      "E1",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "南都留郡鳴沢村"
+    },
+    {
+     "pred": "straddles",
+     "args": [
+      "E1",
+      "E7"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "富士宮市"
+    },
+    {
+     "pred": "straddles",
+     "args": [
+      "E1",
+      "E8"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "富士市"
+    },
+    {
+     "pred": "straddles",
+     "args": [
+      "E1",
+      "E9"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "裾野市"
+    },
+    {
+     "pred": "straddles",
+     "args": [
+      "E1",
+      "E10"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "御殿場市"
+    },
+    {
+     "pred": "straddles",
+     "args": [
+      "E1",
+      "E11"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "駿東郡小山町"
+    },
+    {
+     "pred": "part_of",
+     "args": [
+      "E4",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "山梨県（富士吉田市"
+    },
+    {
+     "pred": "part_of",
+     "args": [
+      "E5",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "南都留郡鳴沢村）"
+    },
+    {
+     "pred": "part_of",
+     "args": [
+      "E7",
+      "E6"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "静岡県（富士宮市"
+    },
+    {
+     "pred": "part_of",
+     "args": [
+      "E8",
+      "E6"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "富士市、"
+    },
+    {
+     "pred": "part_of",
+     "args": [
+      "E9",
+      "E6"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "裾野市、"
+    },
+    {
+     "pred": "part_of",
+     "args": [
+      "E10",
+      "E6"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "御殿場市、"
+    },
+    {
+     "pred": "part_of",
+     "args": [
+      "E11",
+      "E6"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "駿東郡小山町）"
+    }
+   ]
+  },
+  {
+   "sid": "r086",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "構成され"
+    },
+    {
+     "text": "その",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "駿河湾",
+     "entity": "E12",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "has_profile",
+     "args": [
+      "E1",
+      "catenary curve"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "懸垂曲線の山容を有した"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "stratovolcano"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "成層火山で構成され"
+    },
+    {
+     "pred": "basaltic",
+     "args": [
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "玄武岩質成層火山"
+    },
+    {
+     "pred": "extends_to_coast_of",
+     "args": [
+      "E1",
+      "E12"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "その山体は駿河湾の海岸まで及ぶ"
+    }
+   ]
+  },
+  {
+   "sid": "r087",
+   "mentions": [
+    {
+     "text": "律令国家",
+     "entity": "E13",
+     "how": "new"
+    },
+    {
+     "text": "浅間神社",
+     "entity": "E14",
+     "how": "new"
+    },
+    {
+     "text": "浅間信仰",
+     "entity": "E15",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "enshrined_by",
+     "args": [
+      "E14",
+      "E13"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "律令国家により浅間神社が祭祀され"
+    },
+    {
+     "pred": "purpose",
+     "args": [
+      "enshrined_by(E14,E13)",
+      "to calm eruptions"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "噴火を沈静化するため"
+    },
+    {
+     "pred": "established",
+     "args": [
+      "E15"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "浅間信仰が確立された"
+    }
+   ]
+  },
+  {
+   "sid": "r088",
+   "mentions": [
+    {
+     "text": "これら富士信仰",
+     "entity": "E16",
+     "how": "description"
+    },
+    {
+     "text": "村山修験",
+     "entity": "E17",
+     "how": "new"
+    },
+    {
+     "text": "富士講",
+     "entity": "E18",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "includes",
+     "args": [
+      "E16",
+      "E15"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "これら富士信仰"
+    },
+    {
+     "pred": "diversified",
+     "args": [
+      "E16",
+      "over the ages"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "時代により多様化し"
+    },
+    {
+     "pred": "formed",
+     "args": [
+      "E16",
+      "E17"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "村山修験や富士講といった一派を形成するに至る"
+    },
+    {
+     "pred": "formed",
+     "args": [
+      "E16",
+      "E18"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "富士講といった一派を形成するに至る"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E17",
+      "sect"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "村山修験や富士講といった一派"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E18",
+      "sect"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "富士講といった一派"
+    }
+   ]
+  },
+  {
+   "sid": "r089",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "選定されている"
+    },
+    {
+     "text": "日本三名山",
+     "entity": "E19",
+     "how": "new"
+    },
+    {
+     "text": "三霊山",
+     "entity": "E19",
+     "how": "alias"
+    },
+    {
+     "text": "日本百名山",
+     "entity": "E20",
+     "how": "new"
+    },
+    {
+     "text": "日本の地質百選",
+     "entity": "E21",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "selected_as",
+     "args": [
+      "E1",
+      "E19"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "日本三名山（三霊山）"
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E19",
+      "三霊山"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "（三霊山）"
+    },
+    {
+     "pred": "selected_as",
+     "args": [
+      "E1",
+      "E20"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "日本百名山"
+    },
+    {
+     "pred": "selected_as",
+     "args": [
+      "E1",
+      "E21"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "日本の地質百選に選定されている"
+    }
+   ]
+  },
+  {
+   "sid": "r090",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "登録された"
+    },
+    {
+     "text": "世界文化遺産",
+     "entity": "E22",
+     "how": "new"
+    },
+    {
+     "text": "関連する文化財群",
+     "entity": "E23",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "designated_as",
+     "args": [
+      "E1",
+      "special place of scenic beauty",
+      "1952"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "1952年（昭和27年）に特別名勝"
+    },
+    {
+     "pred": "designated_as",
+     "args": [
+      "E1",
+      "historic site",
+      "2011"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "2011年（平成23年）に史跡"
+    },
+    {
+     "pred": "registered_as",
+     "args": [
+      "E1",
+      "E22"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "世界文化遺産に登録された"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "registered_as(E1,E22)",
+      "2013-06-22"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "2013年（平成25年）6月22日"
+    },
+    {
+     "pred": "registered_with",
+     "args": [
+      "E1",
+      "E23"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "関連する文化財群とともに"
+    },
+    {
+     "pred": "registered_under_name",
+     "args": [
+      "E1",
+      "富士山-信仰の対象と芸術の源泉"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "「富士山-信仰の対象と芸術の源泉」の名で"
+    }
+   ]
+  },
+  {
+   "sid": "r091",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "である"
+    },
+    {
+     "text": "利根川",
+     "entity": "E2",
+     "how": "new"
+    },
+    {
+     "text": "信濃川",
+     "entity": "E3",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "has_basin_area",
+     "args": [
+      "E1",
+      "14330 km2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "流域面積は 14,330km2"
+    },
+    {
+     "pred": "second_largest_basin",
+     "args": [
+      "E1",
+      "rivers in Japan"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "全国2位"
+    },
+    {
+     "pred": "larger_basin_than",
+     "args": [
+      "E2",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "利根川に次いで全国2位"
+    },
+    {
+     "pred": "has_length",
+     "args": [
+      "E1",
+      "268 km"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "長さは268km"
+    },
+    {
+     "pred": "third_longest",
+     "args": [
+      "E1",
+      "rivers in Japan"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "3位である"
+    },
+    {
+     "pred": "longer_than",
+     "args": [
+      "E3",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "信濃川、利根川に次いで3位"
+    },
+    {
+     "pred": "longer_than",
+     "args": [
+      "E2",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "利根川に次いで3位"
+    }
+   ]
+  },
+  {
+   "sid": "r092",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "選定されている"
+    },
+    {
+     "text": "北海道遺産",
+     "entity": "E4",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "selected_as",
+     "args": [
+      "E1",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "北海道遺産に選定されている"
+    }
+   ]
+  },
+  {
+   "sid": "r093",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "属する"
+    },
+    {
+     "text": "長流川",
+     "entity": "E2",
+     "how": "new"
+    },
+    {
+     "text": "長流川水系",
+     "entity": "E3",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "belongs_to",
+     "args": [
+      "E1",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "長流川水系に属する"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E2",
+      "class-2 river"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "二級河川長流川"
+    },
+    {
+     "pred": "river_system_of",
+     "args": [
+      "E3",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "長流川水系"
+    }
+   ]
+  },
+  {
+   "sid": "r094",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "選定されている"
+    },
+    {
+     "text": "日本百景",
+     "entity": "E4",
+     "how": "new"
+    },
+    {
+     "text": "新日本旅行地100選",
+     "entity": "E5",
+     "how": "new"
+    },
+    {
+     "text": "美しい日本の歩きたくなるみち500選",
+     "entity": "E6",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "selected_for",
+     "args": [
+      "E1",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "「日本百景」"
+    },
+    {
+     "pred": "selected_for",
+     "args": [
+      "E1",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "「新日本旅行地100選」"
+    },
+    {
+     "pred": "selected_for",
+     "args": [
+      "E1",
+      "E6"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "「美しい日本の歩きたくなるみち500選」にも選定されている"
+    }
+   ]
+  },
+  {
+   "sid": "r095",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "幹川流路延長は213キロメートル"
+    },
+    {
+     "text": "日本全国",
+     "entity": "E2",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "has_main_channel_length",
+     "args": [
+      "E1",
+      "213 km"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "幹川流路延長は213キロメートル"
+    },
+    {
+     "pred": "ninth_longest",
+     "args": [
+      "E1",
+      "rivers in Japan"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "日本全国9位"
+    },
+    {
+     "pred": "has_basin_area",
+     "args": [
+      "E1",
+      "5090 km2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "流域面積は5,090平方キロメートル"
+    },
+    {
+     "pred": "twelfth_largest_basin",
+     "args": [
+      "E1",
+      "rivers in Japan"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "日本全国12位"
+    }
+   ]
+  },
+  {
+   "sid": "r096",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "属する"
+    },
+    {
+     "text": "中部山岳国立公園",
+     "entity": "E2",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "belongs_to",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "中部山岳国立公園に属する"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E2",
+      "national park"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "国立公園"
+    }
+   ]
+  },
+  {
+   "sid": "r097",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "最高峰であり"
+    },
+    {
+     "text": "富山県",
+     "entity": "E3",
+     "how": "new"
+    },
+    {
+     "text": "日本海",
+     "entity": "E4",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "highest_peak_of",
+     "args": [
+      "E1",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "富山県の最高峰"
+    },
+    {
+     "pred": "highest_peak_of",
+     "args": [
+      "E1",
+      "prefectures facing the Sea of Japan"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "日本海に面する道府県の最高峰"
+    }
+   ]
+  },
+  {
+   "sid": "r098",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "山である"
+    },
+    {
+     "text": "剱岳",
+     "entity": "E5",
+     "how": "new"
+    },
+    {
+     "text": "鹿島槍ヶ岳",
+     "entity": "E6",
+     "how": "new"
+    },
+    {
+     "text": "唐松岳",
+     "entity": "E7",
+     "how": "new"
+    },
+    {
+     "text": "日本",
+     "entity": "E8",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "mountain"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "山である"
+    },
+    {
+     "pred": "has_extant_glacier",
+     "args": [
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "氷河の現存する山"
+    },
+    {
+     "pred": "one_of_few",
+     "args": [
+      "E1",
+      "mountains in Japan with extant glaciers"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "日本では数少ない氷河の現存する山"
+    },
+    {
+     "pred": "has_extant_glacier",
+     "args": [
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "剱岳、鹿島槍ヶ岳、唐松岳と並び"
+    },
+    {
+     "pred": "has_extant_glacier",
+     "args": [
+      "E6"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "鹿島槍ヶ岳、唐松岳と並び"
+    },
+    {
+     "pred": "has_extant_glacier",
+     "args": [
+      "E7"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "唐松岳と並び"
+    }
+   ]
+  },
+  {
+   "sid": "r099",
+   "mentions": [
+    {
+     "text": "摩周湖",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "北海道川上郡弟子屈町",
+     "entity": "E2",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "ましゅうこ"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "（ましゅうこ）"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "lake"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "にある湖"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "北海道川上郡弟子屈町にある"
+    }
+   ]
+  },
+  {
+   "sid": "r100",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "選定された"
+    },
+    {
+     "text": "北海道遺産",
+     "entity": "E3",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "selected_as",
+     "args": [
+      "E1",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "北海道遺産に選定された"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "selected_as(E1,E3)",
+      "2001"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "2001年"
+    }
+   ]
+  }
+ ],
+ "synonyms": [
+  {
+   "lang": "en",
+   "a": "shore",
+   "b": "coast",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "en",
+   "a": "large",
+   "b": "big",
+   "pos": "ADJ",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "en",
+   "a": "manufacture",
+   "b": "produce",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "en",
+   "a": "purchaser",
+   "b": "buyer",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "en",
+   "a": "reduce",
+   "b": "decrease",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "en",
+   "a": "principal",
+   "b": "main",
+   "pos": "ADJ",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "en",
+   "a": "route",
+   "b": "path",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "en",
+   "a": "shun",
+   "b": "avoid",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "en",
+   "a": "dry",
+   "b": "arid",
+   "pos": "ADJ",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "en",
+   "a": "construct",
+   "b": "build",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "en",
+   "a": "deep",
+   "b": "shallow",
+   "pos": "ADJ",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "en",
+   "a": "dry",
+   "b": "wet",
+   "pos": "ADJ",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "en",
+   "a": "inland",
+   "b": "coastal",
+   "pos": "ADJ",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "en",
+   "a": "increase",
+   "b": "decrease",
+   "pos": "VERB",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "en",
+   "a": "river",
+   "b": "tributary",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "hypernym"
+  },
+  {
+   "lang": "en",
+   "a": "grain",
+   "b": "corn",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "hypernym"
+  },
+  {
+   "lang": "en",
+   "a": "alcohol",
+   "b": "ethanol",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "hypernym"
+  },
+  {
+   "lang": "en",
+   "a": "fish",
+   "b": "salmon",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "hypernym"
+  },
+  {
+   "lang": "en",
+   "a": "dam",
+   "b": "reservoir",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "en",
+   "a": "island",
+   "b": "peninsula",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "es",
+   "a": "amplio",
+   "b": "ancho",
+   "pos": "ADJ",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "es",
+   "a": "nacimiento",
+   "b": "origen",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "es",
+   "a": "cauce",
+   "b": "lecho",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "es",
+   "a": "atravesar",
+   "b": "cruzar",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "es",
+   "a": "altitud",
+   "b": "altura",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "es",
+   "a": "dormido",
+   "b": "inactivo",
+   "pos": "ADJ",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "es",
+   "a": "cifra",
+   "b": "número",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "es",
+   "a": "situar",
+   "b": "ubicar",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "es",
+   "a": "abarcar",
+   "b": "comprender",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "es",
+   "a": "emblemático",
+   "b": "representativo",
+   "pos": "ADJ",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "es",
+   "a": "mayor",
+   "b": "menor",
+   "pos": "ADJ",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "es",
+   "a": "activo",
+   "b": "inactivo",
+   "pos": "ADJ",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "es",
+   "a": "dormido",
+   "b": "despierto",
+   "pos": "ADJ",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "es",
+   "a": "antiguo",
+   "b": "moderno",
+   "pos": "ADJ",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "es",
+   "a": "este",
+   "b": "oeste",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "es",
+   "a": "río",
+   "b": "afluente",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "hypernym"
+  },
+  {
+   "lang": "es",
+   "a": "montaña",
+   "b": "volcán",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "hypernym"
+  },
+  {
+   "lang": "es",
+   "a": "humedal",
+   "b": "marisma",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "hypernym"
+  },
+  {
+   "lang": "es",
+   "a": "estuario",
+   "b": "delta",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "es",
+   "a": "isla",
+   "b": "archipiélago",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "fr",
+   "a": "terminer",
+   "b": "achever",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "fr",
+   "a": "commencer",
+   "b": "débuter",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "fr",
+   "a": "important",
+   "b": "considérable",
+   "pos": "ADJ",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "fr",
+   "a": "ville",
+   "b": "cité",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "fr",
+   "a": "sommet",
+   "b": "cime",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "fr",
+   "a": "figé",
+   "b": "immobile",
+   "pos": "ADJ",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "fr",
+   "a": "parcourir",
+   "b": "traverser",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "fr",
+   "a": "situer",
+   "b": "localiser",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "fr",
+   "a": "dieu",
+   "b": "divinité",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "fr",
+   "a": "nom",
+   "b": "appellation",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "fr",
+   "a": "jeune",
+   "b": "vieux",
+   "pos": "ADJ",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "fr",
+   "a": "est",
+   "b": "ouest",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "fr",
+   "a": "entrer",
+   "b": "sortir",
+   "pos": "VERB",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "fr",
+   "a": "court",
+   "b": "long",
+   "pos": "ADJ",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "fr",
+   "a": "source",
+   "b": "embouchure",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "fr",
+   "a": "fleuve",
+   "b": "rivière",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "fr",
+   "a": "volcan",
+   "b": "montagne",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "fr",
+   "a": "glacier",
+   "b": "neige",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "fr",
+   "a": "delta",
+   "b": "estuaire",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "fr",
+   "a": "département",
+   "b": "commune",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "de",
+   "a": "Gemeinde",
+   "b": "Kommune",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "de",
+   "a": "Gipfel",
+   "b": "Spitze",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "de",
+   "a": "Fluss",
+   "b": "Strom",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "de",
+   "a": "münden",
+   "b": "einmünden",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "de",
+   "a": "vereinigen",
+   "b": "verbinden",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "de",
+   "a": "bedeutend",
+   "b": "wichtig",
+   "pos": "ADJ",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "de",
+   "a": "Ufer",
+   "b": "Gestade",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "de",
+   "a": "Eigentum",
+   "b": "Besitz",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "de",
+   "a": "zuständig",
+   "b": "verantwortlich",
+   "pos": "ADJ",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "de",
+   "a": "gelegen",
+   "b": "befindlich",
+   "pos": "ADJ",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "de",
+   "a": "nördlich",
+   "b": "südlich",
+   "pos": "ADJ",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "de",
+   "a": "Quelle",
+   "b": "Mündung",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "de",
+   "a": "hoch",
+   "b": "niedrig",
+   "pos": "ADJ",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "de",
+   "a": "lang",
+   "b": "kurz",
+   "pos": "ADJ",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "de",
+   "a": "Halbinsel",
+   "b": "Insel",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "de",
+   "a": "See",
+   "b": "Gewässer",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "hypernym"
+  },
+  {
+   "lang": "de",
+   "a": "Nebenfluss",
+   "b": "Fluss",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "hypernym"
+  },
+  {
+   "lang": "de",
+   "a": "Landkreis",
+   "b": "Gemeinde",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "de",
+   "a": "Dialekt",
+   "b": "Sprache",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "hypernym"
+  },
+  {
+   "lang": "de",
+   "a": "Berg",
+   "b": "Hügel",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "ja",
+   "a": "頂上",
+   "b": "山頂",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "ja",
+   "a": "湖",
+   "b": "湖水",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "ja",
+   "a": "選定する",
+   "b": "選ぶ",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "ja",
+   "a": "注ぐ",
+   "b": "流れ込む",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "ja",
+   "a": "属する",
+   "b": "所属する",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "ja",
+   "a": "美しい",
+   "b": "綺麗",
+   "pos": "ADJ",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "ja",
+   "a": "信仰",
+   "b": "信心",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "ja",
+   "a": "流域",
+   "b": "集水域",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "ja",
+   "a": "河川",
+   "b": "川",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "ja",
+   "a": "確立する",
+   "b": "打ち立てる",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "ja",
+   "a": "高い",
+   "b": "低い",
+   "pos": "ADJ",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "ja",
+   "a": "長い",
+   "b": "短い",
+   "pos": "ADJ",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "ja",
+   "a": "北",
+   "b": "南",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "ja",
+   "a": "最高",
+   "b": "最低",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "ja",
+   "a": "活火山",
+   "b": "火山",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "hypernym"
+  },
+  {
+   "lang": "ja",
+   "a": "成層火山",
+   "b": "火山",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "hypernym"
+  },
+  {
+   "lang": "ja",
+   "a": "湖",
+   "b": "池",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "ja",
+   "a": "山",
+   "b": "峰",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "ja",
+   "a": "神社",
+   "b": "寺",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "ja",
+   "a": "海",
+   "b": "湾",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  }
+ ]
+}

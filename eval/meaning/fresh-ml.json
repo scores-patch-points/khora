@@ -1,0 +1,839 @@
+{
+ "schema": "pairs",
+ "authored": "2026-10-21, written and labelled from the sentences alone, before any system ran on them; one label corrected on audit before any run (663, see its audit note)",
+ "pairs": [
+  {
+   "id": 601,
+   "lang": "es",
+   "label": "E",
+   "type": "paraphrase superlative",
+   "claim": "El Titicaca es el lago navegable situado a mayor altura del mundo.",
+   "sentence": "El lago Titicaca (en aimara y en quechua sureño, ortografía contemporánea: Titiqaqa) es el lago navegable más alto del mundo.",
+   "source": {
+    "sid": "es-1",
+    "url": "https://es.wikipedia.org/wiki/Lago_Titicaca",
+    "revid": 175856114
+   }
+  },
+  {
+   "id": 602,
+   "lang": "es",
+   "label": "C",
+   "type": "reversed superlative",
+   "claim": "El lago Titicaca es el lago navegable más bajo del mundo.",
+   "sentence": "El lago Titicaca (en aimara y en quechua sureño, ortografía contemporánea: Titiqaqa) es el lago navegable más alto del mundo.",
+   "source": {
+    "sid": "es-1",
+    "url": "https://es.wikipedia.org/wiki/Lago_Titicaca",
+    "revid": 175856114
+   }
+  },
+  {
+   "id": 603,
+   "lang": "es",
+   "label": "T",
+   "type": "same subject, unsettled fact",
+   "claim": "El lago Titicaca tiene una superficie de más de 8000 km².",
+   "sentence": "El lago Titicaca (en aimara y en quechua sureño, ortografía contemporánea: Titiqaqa) es el lago navegable más alto del mundo.",
+   "source": {
+    "sid": "es-1",
+    "url": "https://es.wikipedia.org/wiki/Lago_Titicaca",
+    "revid": 175856114
+   }
+  },
+  {
+   "id": 604,
+   "lang": "es",
+   "label": "E",
+   "type": "restated figure",
+   "claim": "La altitud media del lugar es de 3812 metros sobre el nivel del mar.",
+   "sentence": "Se encuentra en los Andes centrales, dentro de la meseta del Collao, a una altitud media de 3812 m s. n. m., en la frontera entre Bolivia y Perú.",
+   "source": {
+    "sid": "es-2",
+    "url": "https://es.wikipedia.org/wiki/Lago_Titicaca",
+    "revid": 175856114
+   }
+  },
+  {
+   "id": 605,
+   "lang": "es",
+   "label": "C",
+   "type": "changed place",
+   "claim": "Se encuentra en los Andes meridionales, en la frontera entre Chile y Perú.",
+   "sentence": "Se encuentra en los Andes centrales, dentro de la meseta del Collao, a una altitud media de 3812 m s. n. m., en la frontera entre Bolivia y Perú.",
+   "source": {
+    "sid": "es-2",
+    "url": "https://es.wikipedia.org/wiki/Lago_Titicaca",
+    "revid": 175856114
+   }
+  },
+  {
+   "id": 606,
+   "lang": "es",
+   "label": "E",
+   "type": "one fact from a long run-on",
+   "claim": "Dos grandes cuerpos de agua forman el lago, separados por el estrecho de Tiquina.",
+   "sentence": "El nivel del agua varía estacionalmente, con un incremento durante el verano austral.​ El lago Titicaca se encuentra entre las cordilleras andinas en una cuenca de alrededor de 58 000 km².​   El lago está conformado por dos grandes cuerpos de agua, separados por el estrecho de Tiquina.",
+   "source": {
+    "sid": "es-3",
+    "url": "https://es.wikipedia.org/wiki/Lago_Titicaca",
+    "revid": 175856114
+   }
+  },
+  {
+   "id": 607,
+   "lang": "es",
+   "label": "C",
+   "type": "negation of seasonal variation",
+   "claim": "El nivel del agua es constante durante todo el año.",
+   "sentence": "El nivel del agua varía estacionalmente, con un incremento durante el verano austral.​ El lago Titicaca se encuentra entre las cordilleras andinas en una cuenca de alrededor de 58 000 km².​   El lago está conformado por dos grandes cuerpos de agua, separados por el estrecho de Tiquina.",
+   "source": {
+    "sid": "es-3",
+    "url": "https://es.wikipedia.org/wiki/Lago_Titicaca",
+    "revid": 175856114
+   }
+  },
+  {
+   "id": 608,
+   "lang": "es",
+   "label": "T",
+   "type": "related, unsettled",
+   "claim": "El estrecho de Tiquina mide diez kilómetros de largo.",
+   "sentence": "El nivel del agua varía estacionalmente, con un incremento durante el verano austral.​ El lago Titicaca se encuentra entre las cordilleras andinas en una cuenca de alrededor de 58 000 km².​   El lago está conformado por dos grandes cuerpos de agua, separados por el estrecho de Tiquina.",
+   "source": {
+    "sid": "es-3",
+    "url": "https://es.wikipedia.org/wiki/Lago_Titicaca",
+    "revid": 175856114
+   }
+  },
+  {
+   "id": 609,
+   "lang": "es",
+   "label": "E",
+   "type": "alias",
+   "claim": "El lago Mayor también se llama Chucuito.",
+   "sentence": "El sector septentrional, denominado lago Mayor o Chucuito, tiene una superficie de 6450 km² y alcanza su mayor profundidad (283 m) cerca de la isla Soto.",
+   "source": {
+    "sid": "es-4",
+    "url": "https://es.wikipedia.org/wiki/Lago_Titicaca",
+    "revid": 175856114
+   }
+  },
+  {
+   "id": 610,
+   "lang": "es",
+   "label": "E",
+   "type": "synonym phrasing",
+   "claim": "La profundidad máxima del sector septentrional es de 283 metros.",
+   "sentence": "El sector septentrional, denominado lago Mayor o Chucuito, tiene una superficie de 6450 km² y alcanza su mayor profundidad (283 m) cerca de la isla Soto.",
+   "source": {
+    "sid": "es-4",
+    "url": "https://es.wikipedia.org/wiki/Lago_Titicaca",
+    "revid": 175856114
+   }
+  },
+  {
+   "id": 611,
+   "lang": "es",
+   "label": "E",
+   "type": "single figure",
+   "claim": "El lago Menor ocupa 2112 km².",
+   "sentence": "El sector meridional, conocido como lago Menor o Huiñaymarca, ocupa 2112 km² y presenta una profundidad máxima de 45 m.",
+   "source": {
+    "sid": "es-5",
+    "url": "https://es.wikipedia.org/wiki/Lago_Titicaca",
+    "revid": 175856114
+   }
+  },
+  {
+   "id": 612,
+   "lang": "es",
+   "label": "C",
+   "type": "changed number",
+   "claim": "El sector meridional presenta una profundidad máxima de 145 m.",
+   "sentence": "El sector meridional, conocido como lago Menor o Huiñaymarca, ocupa 2112 km² y presenta una profundidad máxima de 45 m.",
+   "source": {
+    "sid": "es-5",
+    "url": "https://es.wikipedia.org/wiki/Lago_Titicaca",
+    "revid": 175856114
+   }
+  },
+  {
+   "id": 613,
+   "lang": "es-en",
+   "label": "E",
+   "type": "plain restatement",
+   "claim": "Cotopaxi is an Ecuadorian toponym.",
+   "sentence": "Cotopaxi es un topónimo ecuatoriano que en lengua local significa \"cuello de la luna\".",
+   "source": {
+    "sid": "es-6",
+    "url": "https://es.wikipedia.org/wiki/Cotopaxi",
+    "revid": 104227503
+   }
+  },
+  {
+   "id": 614,
+   "lang": "es-en",
+   "label": "C",
+   "type": "changed meaning",
+   "claim": "In the local language, Cotopaxi means \"neck of the sun\".",
+   "sentence": "Cotopaxi es un topónimo ecuatoriano que en lengua local significa \"cuello de la luna\".",
+   "source": {
+    "sid": "es-6",
+    "url": "https://es.wikipedia.org/wiki/Cotopaxi",
+    "revid": 104227503
+   }
+  },
+  {
+   "id": 615,
+   "lang": "es-en",
+   "label": "E",
+   "type": "alias",
+   "claim": "The southern sector is known as Lake Menor or Huiñaymarca.",
+   "sentence": "El sector meridional, conocido como lago Menor o Huiñaymarca, ocupa 2112 km² y presenta una profundidad máxima de 45 m.",
+   "source": {
+    "sid": "es-5",
+    "url": "https://es.wikipedia.org/wiki/Lago_Titicaca",
+    "revid": 175856114
+   }
+  },
+  {
+   "id": 616,
+   "lang": "es-en",
+   "label": "C",
+   "type": "swapped figure from other sector",
+   "claim": "The northern sector has a surface area of 2112 km².",
+   "sentence": "El sector septentrional, denominado lago Mayor o Chucuito, tiene una superficie de 6450 km² y alcanza su mayor profundidad (283 m) cerca de la isla Soto.",
+   "source": {
+    "sid": "es-4",
+    "url": "https://es.wikipedia.org/wiki/Lago_Titicaca",
+    "revid": 175856114
+   }
+  },
+  {
+   "id": 617,
+   "lang": "fr",
+   "label": "E",
+   "type": "reversed comparison",
+   "claim": "Aucun sommet de la chaîne des Alpes n'est plus haut que le mont Blanc.",
+   "sentence": "Le mont Blanc (en italien : Monte Bianco), dans le massif du Mont-Blanc, est le point culminant de la chaîne des Alpes.",
+   "source": {
+    "sid": "fr-1",
+    "url": "https://fr.wikipedia.org/wiki/Mont_Blanc",
+    "revid": 240363155
+   }
+  },
+  {
+   "id": 618,
+   "lang": "fr",
+   "label": "E",
+   "type": "one conjunct",
+   "claim": "Le mont Blanc est le plus haut sommet de l'Union européenne.",
+   "sentence": "Avec une altitude de 4 807 mètres, il est le plus haut sommet d'Europe occidentale et de l'Union européenne ainsi que le sixième sur le plan continental en prenant en compte les montagnes du Caucase, dont l'Elbrouz (5 643 mètres) est le plus haut sommet.",
+   "source": {
+    "sid": "fr-2",
+    "url": "https://fr.wikipedia.org/wiki/Mont_Blanc",
+    "revid": 240363155
+   }
+  },
+  {
+   "id": 619,
+   "lang": "fr",
+   "label": "E",
+   "type": "plain restatement",
+   "claim": "La Loire mesure 1 006 kilomètres de long.",
+   "sentence": "La Loire est, avec une longueur de 1 006 kilomètres, le plus long fleuve s’écoulant entièrement en France.",
+   "source": {
+    "sid": "fr-8",
+    "url": "https://fr.wikipedia.org/wiki/Loire",
+    "revid": 240490677
+   }
+  },
+  {
+   "id": 620,
+   "lang": "fr",
+   "label": "E",
+   "type": "one fact from long sentence",
+   "claim": "La Loire se jette dans l'océan Atlantique.",
+   "sentence": "Elle prend sa source sur le versant sud du mont Gerbier-de-Jonc au sud-est du Massif central dans le département de l’Ardèche, et se jette dans l’océan Atlantique par un estuaire situé en Loire-Atlantique, dans la région des Pays de la Loire.",
+   "source": {
+    "sid": "fr-9",
+    "url": "https://fr.wikipedia.org/wiki/Loire",
+    "revid": 240490677
+   }
+  },
+  {
+   "id": 621,
+   "lang": "fr",
+   "label": "E",
+   "type": "fraction as percent",
+   "claim": "Le bassin versant de la Loire couvre plus de 20 % du territoire français.",
+   "sentence": "Son bassin versant de 117 000 km2 occupe plus d’un cinquième du territoire français.",
+   "source": {
+    "sid": "fr-17",
+    "url": "https://fr.wikipedia.org/wiki/Loire",
+    "revid": 240490677
+   }
+  },
+  {
+   "id": 622,
+   "lang": "fr",
+   "label": "E",
+   "type": "synonym verb",
+   "claim": "On peut naviguer sur la Loire depuis l'estuaire jusqu'à Montsoreau.",
+   "sentence": "De nos jours, la Loire est navigable depuis son estuaire jusqu’à Montsoreau (près de Saumur).",
+   "source": {
+    "sid": "fr-22",
+    "url": "https://fr.wikipedia.org/wiki/Loire",
+    "revid": 240490677
+   }
+  },
+  {
+   "id": 623,
+   "lang": "fr",
+   "label": "C",
+   "type": "changed date",
+   "claim": "La première ascension du sommet a eu lieu en 1886.",
+   "sentence": "Le sommet, objet de fascination et d'inspiration de nombreuses œuvres culturelles, a depuis plusieurs siècles représenté un objectif pour toutes sortes d'aventuriers, depuis sa première ascension en 1786.",
+   "source": {
+    "sid": "fr-4",
+    "url": "https://fr.wikipedia.org/wiki/Mont_Blanc",
+    "revid": 240363155
+   }
+  },
+  {
+   "id": 624,
+   "lang": "fr",
+   "label": "C",
+   "type": "changed number",
+   "claim": "La dernière mesure connue de l'altitude est de 4 707,47 mètres.",
+   "sentence": "La dernière mesure connue, en septembre 2026, est de 4 807,47 mètres.",
+   "source": {
+    "sid": "fr-7",
+    "url": "https://fr.wikipedia.org/wiki/Mont_Blanc",
+    "revid": 240363155
+   }
+  },
+  {
+   "id": 625,
+   "lang": "fr",
+   "label": "C",
+   "type": "changed place",
+   "claim": "La Loire prend sa source dans les Pyrénées.",
+   "sentence": "Elle prend sa source sur le versant sud du mont Gerbier-de-Jonc au sud-est du Massif central dans le département de l’Ardèche, et se jette dans l’océan Atlantique par un estuaire situé en Loire-Atlantique, dans la région des Pays de la Loire.",
+   "source": {
+    "sid": "fr-9",
+    "url": "https://fr.wikipedia.org/wiki/Loire",
+    "revid": 240490677
+   }
+  },
+  {
+   "id": 626,
+   "lang": "fr",
+   "label": "C",
+   "type": "changed port",
+   "claim": "Jusqu'au milieu du XIXe siècle, les marchandises de l'intérieur transitaient par la Loire jusqu'au port de Bordeaux.",
+   "sentence": "Jusqu’au milieu du XIXe siècle, la Loire navigable à partir des environs de Roanne était la voie principale par laquelle transitaient les marchandises de l’intérieur du pays jusqu’au port de Nantes.",
+   "source": {
+    "sid": "fr-19",
+    "url": "https://fr.wikipedia.org/wiki/Loire",
+    "revid": 240490677
+   }
+  },
+  {
+   "id": 627,
+   "lang": "fr",
+   "label": "T",
+   "type": "same subject, unsettled",
+   "claim": "Les géomètres mesurent l'altitude du sommet avec des instruments GPS.",
+   "sentence": "Afin de déterminer son altitude précise et mesurer son évolution, liée aux variations d'épaisseur de la crête neigeuse du sommet, des géomètres experts en font l'ascension tous les deux ans.",
+   "source": {
+    "sid": "fr-6",
+    "url": "https://fr.wikipedia.org/wiki/Mont_Blanc",
+    "revid": 240363155
+   }
+  },
+  {
+   "id": 628,
+   "lang": "fr",
+   "label": "T",
+   "type": "same subject, unsettled",
+   "claim": "Le mont Blanc est la montagne la plus visitée d'Europe.",
+   "sentence": "Il se situe entre le département de la Haute-Savoie en France et la région autonome de la Vallée d'Aoste en Italie, sur ou près de la frontière franco-italienne, celle-ci étant l'objet d'un litige historique entre les deux pays.",
+   "source": {
+    "sid": "fr-3",
+    "url": "https://fr.wikipedia.org/wiki/Mont_Blanc",
+    "revid": 240363155
+   }
+  },
+  {
+   "id": 629,
+   "lang": "fr-en",
+   "label": "E",
+   "type": "passive/active",
+   "claim": "Many heavily used routes now allow the summit to be climbed, provided one prepares seriously.",
+   "sentence": "De nombreux itinéraires, très fréquentés, permettent désormais de le gravir sous réserve d'une préparation sérieuse.",
+   "source": {
+    "sid": "fr-5",
+    "url": "https://fr.wikipedia.org/wiki/Mont_Blanc",
+    "revid": 240363155
+   }
+  },
+  {
+   "id": 630,
+   "lang": "fr-en",
+   "label": "E",
+   "type": "one fact",
+   "claim": "The railway links Paris to Saint-Nazaire via Angers and Le Mans.",
+   "sentence": "L’arrivée du chemin de fer, qui relie aujourd’hui Paris à Saint-Nazaire en passant par Angers et Le Mans, a changé la donne.",
+   "source": {
+    "sid": "fr-20",
+    "url": "https://fr.wikipedia.org/wiki/Loire",
+    "revid": 240490677
+   }
+  },
+  {
+   "id": 631,
+   "lang": "fr-en",
+   "label": "C",
+   "type": "negated frequency",
+   "claim": "Tidal influence rarely extends upstream of Nantes.",
+   "sentence": "L’influence de la marée remonte souvent en amont de Nantes, largement au-delà du large estuaire de Saint-Nazaire.",
+   "source": {
+    "sid": "fr-21",
+    "url": "https://fr.wikipedia.org/wiki/Loire",
+    "revid": 240490677
+   }
+  },
+  {
+   "id": 632,
+   "lang": "fr-en",
+   "label": "C",
+   "type": "reversed direction",
+   "claim": "The Loire's course first runs from north to south.",
+   "sentence": "Son cours est orienté d’abord du sud vers le nord jusqu’aux environs de Briare dans le Loiret, puis vers l’ouest.",
+   "source": {
+    "sid": "fr-10",
+    "url": "https://fr.wikipedia.org/wiki/Loire",
+    "revid": 240490677
+   }
+  },
+  {
+   "id": 633,
+   "lang": "de",
+   "label": "E",
+   "type": "plain restatement",
+   "claim": "Der Bodensee liegt im südwestlichen Mitteleuropa.",
+   "sentence": "Der Bodensee ist ein Binnengewässer im südwestlichen Mitteleuropa.",
+   "source": {
+    "sid": "de-1",
+    "url": "https://de.wikipedia.org/wiki/Bodensee",
+    "revid": 271291379
+   }
+  },
+  {
+   "id": 634,
+   "lang": "de",
+   "label": "E",
+   "type": "reordered subject",
+   "claim": "Deutschland, Österreich und die Schweiz grenzen an den Bodensee.",
+   "sentence": "An den Bodensee grenzen die drei Staaten Deutschland, Österreich und Schweiz.",
+   "source": {
+    "sid": "de-4",
+    "url": "https://de.wikipedia.org/wiki/Bodensee",
+    "revid": 271291379
+   }
+  },
+  {
+   "id": 635,
+   "lang": "de",
+   "label": "E",
+   "type": "one fact",
+   "claim": "Der Alpenrhein fließt dem Bodensee zu.",
+   "sentence": "Der Bodensee liegt im vom Rhein durchflossenen Bodenseebecken, einem Teil des nördlichen Alpenvorlands; der Zufluss heißt Alpenrhein, der Abfluss Hochrhein.",
+   "source": {
+    "sid": "de-3",
+    "url": "https://de.wikipedia.org/wiki/Bodensee",
+    "revid": 271291379
+   }
+  },
+  {
+   "id": 636,
+   "lang": "de",
+   "label": "E",
+   "type": "comparative other way round",
+   "claim": "Kein anderes Binnengewässer Deutschlands ist größer als der Bodensee.",
+   "sentence": "Der Bodensee ist das größte Binnengewässer Deutschlands, das größte Binnengewässer Österreichs, und das – je nach Flächenbetrachtung – zweit- oder drittgrößte Binnengewässer der Schweiz.",
+   "source": {
+    "sid": "de-7",
+    "url": "https://de.wikipedia.org/wiki/Bodensee",
+    "revid": 271291379
+   }
+  },
+  {
+   "id": 637,
+   "lang": "de",
+   "label": "E",
+   "type": "passive to active",
+   "claim": "Drei Bergbahnen erschließen den Berg.",
+   "sentence": "Der Berg ist heute mit drei Bergbahnen – der Tiroler Zugspitzbahn, der Bayerischen Zugspitzbahn und der Seilbahn Zugspitze – erschlossen.",
+   "source": {
+    "sid": "de-18",
+    "url": "https://de.wikipedia.org/wiki/Zugspitze",
+    "revid": 271266791
+   }
+  },
+  {
+   "id": 638,
+   "lang": "de",
+   "label": "E",
+   "type": "one conjunct",
+   "claim": "Die Zugspitze ist der höchste Berg Deutschlands.",
+   "sentence": "Die Zugspitze ist mit 2962 m ü. NHN der höchste Gipfel des Wettersteingebirges und gleichzeitig Deutschlands höchster Berg.",
+   "source": {
+    "sid": "de-9+de-10",
+    "url": "https://de.wikipedia.org/wiki/Zugspitze",
+    "revid": 271266791
+   }
+  },
+  {
+   "id": 639,
+   "lang": "de",
+   "label": "C",
+   "type": "negation/other lake part",
+   "claim": "Eine anerkannte Grenze gibt es auch im Obersee.",
+   "sentence": "Eine anerkannte Grenze gibt es nur im Untersee zwischen Deutschland und der Schweiz.",
+   "source": {
+    "sid": "de-5",
+    "url": "https://de.wikipedia.org/wiki/Bodensee",
+    "revid": 271291379
+   }
+  },
+  {
+   "id": 640,
+   "lang": "de",
+   "label": "C",
+   "type": "changed date",
+   "claim": "Die erste namentlich nachgewiesene Besteigung der Zugspitze gelang 1920.",
+   "sentence": "Die erste namentlich nachgewiesene Besteigung der Zugspitze gelang 1820 dem Vermessungsingenieur und damaligen Leutnant des bayerischen Heeres Josef Naus, seinem Messgehilfen Maier und dem Bergführer Johann Georg Tauschl.",
+   "source": {
+    "sid": "de-15",
+    "url": "https://de.wikipedia.org/wiki/Zugspitze",
+    "revid": 271266791
+   }
+  },
+  {
+   "id": 641,
+   "lang": "de",
+   "label": "C",
+   "type": "wrong type",
+   "claim": "Die Bayerische Zugspitzbahn ist eine Luftseilbahn.",
+   "sentence": "Die Bayerische Zugspitzbahn ist eine Zahnradbahn, die auf Schienen und überwiegend in Tunneln zum Zugspitzplatt einige hundert Meter unterhalb der Zugspitze fährt, von wo aus eine weitere Luftseilbahn zur Zugspitze führt.",
+   "source": {
+    "sid": "de-21",
+    "url": "https://de.wikipedia.org/wiki/Zugspitze",
+    "revid": 271266791
+   }
+  },
+  {
+   "id": 642,
+   "lang": "de",
+   "label": "C",
+   "type": "changed direction",
+   "claim": "Das Zugspitzmassiv liegt nordöstlich von Garmisch-Partenkirchen.",
+   "sentence": "Das Zugspitzmassiv liegt südwestlich von Garmisch-Partenkirchen in Bayern und im Norden Tirols.",
+   "source": {
+    "sid": "de-11",
+    "url": "https://de.wikipedia.org/wiki/Zugspitze",
+    "revid": 271266791
+   }
+  },
+  {
+   "id": 643,
+   "lang": "de",
+   "label": "T",
+   "type": "same subject, unsettled",
+   "claim": "Das Zugspitzplatt ist die größte Karst-Hochfläche Bayerns.",
+   "sentence": "Südlich des Berges schließt sich das Zugspitzplatt an, eine Karst-Hochfläche mit zahlreichen Höhlen.",
+   "source": {
+    "sid": "de-13",
+    "url": "https://de.wikipedia.org/wiki/Zugspitze",
+    "revid": 271266791
+   }
+  },
+  {
+   "id": 644,
+   "lang": "de",
+   "label": "T",
+   "type": "same subject, unsettled",
+   "claim": "Die Bodenseeregion hat mehr als eine Million Einwohner.",
+   "sentence": "Dieser Artikel behandelt neben dem Bodensee selbst auch die umgebende Bodenseeregion, die sich je nach räumlicher Definition weit ins Hinterland erstreckt.",
+   "source": {
+    "sid": "de-8",
+    "url": "https://de.wikipedia.org/wiki/Bodensee",
+    "revid": 271291379
+   }
+  },
+  {
+   "id": 645,
+   "lang": "de-en",
+   "label": "E",
+   "type": "one fact",
+   "claim": "The border between Germany and Austria runs over the west summit of the Zugspitze.",
+   "sentence": "Ein Teil des Zugspitzmassivs liegt somit auf österreichischem Staatsgebiet, über seinen Westgipfel verläuft die Grenze zwischen Deutschland und Österreich.",
+   "source": {
+    "sid": "de-12",
+    "url": "https://de.wikipedia.org/wiki/Zugspitze",
+    "revid": 271266791
+   }
+  },
+  {
+   "id": 646,
+   "lang": "de-en",
+   "label": "E",
+   "type": "list member",
+   "claim": "The Untersee includes the Zeller See and the Gnadensee.",
+   "sentence": "Er besteht aus dem Obersee mit Überlinger See und Konstanzer Trichter und dem Untersee mit Rheinsee, Zeller See und Gnadensee inklusive Markelfinger Winkel sowie dem Seerhein vom Ober- zum Untersee im Stadtgebiet von Konstanz.",
+   "source": {
+    "sid": "de-2",
+    "url": "https://de.wikipedia.org/wiki/Bodensee",
+    "revid": 271291379
+   }
+  },
+  {
+   "id": 647,
+   "lang": "de-en",
+   "label": "C",
+   "type": "negation",
+   "claim": "In the Obersee area, an agreed border line has been established.",
+   "sentence": "Im Bereich des Obersees wurde kein einvernehmlicher Grenzverlauf festgelegt.",
+   "source": {
+    "sid": "de-6",
+    "url": "https://de.wikipedia.org/wiki/Bodensee",
+    "revid": 271291379
+   }
+  },
+  {
+   "id": 648,
+   "lang": "de-en",
+   "label": "C",
+   "type": "wrong type",
+   "claim": "The Tiroler Zugspitzbahn is a rack railway.",
+   "sentence": "Die Tiroler Zugspitzbahn und die Seilbahn Zugspitze sind Luftseilbahnen.",
+   "source": {
+    "sid": "de-20",
+    "url": "https://de.wikipedia.org/wiki/Zugspitze",
+    "revid": 271266791
+   }
+  },
+  {
+   "id": 649,
+   "lang": "ja",
+   "label": "E",
+   "type": "restatement",
+   "claim": "富士山は活動中の火山で、日本にある。",
+   "sentence": "富士山（ふじさん）は、日本の活火山である。",
+   "source": {
+    "sid": "ja-1",
+    "url": "https://ja.wikipedia.org/wiki/%E5%AF%8C%E5%A3%AB%E5%B1%B1",
+    "revid": 111200261
+   }
+  },
+  {
+   "id": 650,
+   "lang": "ja",
+   "label": "E",
+   "type": "superlative restated",
+   "claim": "琵琶湖は日本で最も面積が大きい湖である。",
+   "sentence": "琵琶湖（びわこ）は、滋賀県にある日本最大の面積と貯水量を持つ湖。",
+   "source": {
+    "sid": "ja-13",
+    "url": "https://ja.wikipedia.org/wiki/%E7%90%B5%E7%90%B6%E6%B9%96",
+    "revid": 111103619
+   }
+  },
+  {
+   "id": 651,
+   "lang": "ja",
+   "label": "E",
+   "type": "verb synonym",
+   "claim": "富士山は山梨県と静岡県にまたがっている。",
+   "sentence": "山梨県（富士吉田市、南都留郡鳴沢村）と静岡県（富士宮市、富士市、裾野市、御殿場市、駿東郡小山町）に跨る。",
+   "source": {
+    "sid": "ja-3",
+    "url": "https://ja.wikipedia.org/wiki/%E5%AF%8C%E5%A3%AB%E5%B1%B1",
+    "revid": 111200261
+   }
+  },
+  {
+   "id": 652,
+   "lang": "ja",
+   "label": "E",
+   "type": "passive to active",
+   "claim": "琵琶湖は滋賀県知事が管理している。",
+   "sentence": "国土交通大臣から委託を受けて滋賀県知事が管理を担う。",
+   "source": {
+    "sid": "ja-15",
+    "url": "https://ja.wikipedia.org/wiki/%E7%90%B5%E7%90%B6%E6%B9%96",
+    "revid": 111103619
+   }
+  },
+  {
+   "id": 653,
+   "lang": "ja",
+   "label": "E",
+   "type": "one fact",
+   "claim": "富士山は1936年に富士箱根伊豆国立公園に指定された。",
+   "sentence": "また、1936年（昭和11年）には富士箱根伊豆国立公園に指定されている。",
+   "source": {
+    "sid": "ja-12",
+    "url": "https://ja.wikipedia.org/wiki/%E5%AF%8C%E5%A3%AB%E5%B1%B1",
+    "revid": 111200261
+   }
+  },
+  {
+   "id": 654,
+   "lang": "ja",
+   "label": "E",
+   "type": "passive to active",
+   "claim": "律令国家は噴火を鎮めるために浅間神社を祭祀した。",
+   "sentence": "噴火を沈静化するため律令国家により浅間神社が祭祀され、浅間信仰が確立された。",
+   "source": {
+    "sid": "ja-7",
+    "url": "https://ja.wikipedia.org/wiki/%E5%AF%8C%E5%A3%AB%E5%B1%B1",
+    "revid": 111200261
+   }
+  },
+  {
+   "id": 655,
+   "lang": "ja",
+   "label": "C",
+   "type": "changed number",
+   "claim": "富士山の標高は3000 mである。",
+   "sentence": "標高は3775.56 m、山体の最高地点は3776.12 mで、日本最高峰（剣ヶ峰）の独立峰で、その優美な風貌は日本国外でも日本の象徴として広く知られている。",
+   "source": {
+    "sid": "ja-2",
+    "url": "https://ja.wikipedia.org/wiki/%E5%AF%8C%E5%A3%AB%E5%B1%B1",
+    "revid": 111200261
+   }
+  },
+  {
+   "id": 656,
+   "lang": "ja",
+   "label": "C",
+   "type": "changed place",
+   "claim": "琵琶湖は静岡県にある。",
+   "sentence": "琵琶湖（びわこ）は、滋賀県にある日本最大の面積と貯水量を持つ湖。",
+   "source": {
+    "sid": "ja-13",
+    "url": "https://ja.wikipedia.org/wiki/%E7%90%B5%E7%90%B6%E6%B9%96",
+    "revid": 111103619
+   }
+  },
+  {
+   "id": 657,
+   "lang": "ja",
+   "label": "C",
+   "type": "negation",
+   "claim": "琵琶湖はラムサール条約登録湿地ではない。",
+   "sentence": "湖沼水質保全特別措置法指定湖沼で、ラムサール条約登録湿地でもある。",
+   "source": {
+    "sid": "ja-16",
+    "url": "https://ja.wikipedia.org/wiki/%E7%90%B5%E7%90%B6%E6%B9%96",
+    "revid": 111103619
+   }
+  },
+  {
+   "id": 658,
+   "lang": "ja",
+   "label": "C",
+   "type": "negation of type",
+   "claim": "富士山は成層火山ではない。",
+   "sentence": "懸垂曲線の山容を有した玄武岩質成層火山で構成され、その山体は駿河湾の海岸まで及ぶ。",
+   "source": {
+    "sid": "ja-5",
+    "url": "https://ja.wikipedia.org/wiki/%E5%AF%8C%E5%A3%AB%E5%B1%B1",
+    "revid": 111200261
+   }
+  },
+  {
+   "id": 659,
+   "lang": "ja",
+   "label": "T",
+   "type": "same subject, unsettled",
+   "claim": "富士山は世界遺産に登録されている。",
+   "sentence": "富士山（ふじさん）は、日本の活火山である。",
+   "source": {
+    "sid": "ja-1",
+    "url": "https://ja.wikipedia.org/wiki/%E5%AF%8C%E5%A3%AB%E5%B1%B1",
+    "revid": 111200261
+   }
+  },
+  {
+   "id": 660,
+   "lang": "ja",
+   "label": "T",
+   "type": "same subject, unsettled",
+   "claim": "琵琶湖には竹生島という島がある。",
+   "sentence": "一級水系「淀川水系」に属する一級河川である。",
+   "source": {
+    "sid": "ja-14",
+    "url": "https://ja.wikipedia.org/wiki/%E7%90%B5%E7%90%B6%E6%B9%96",
+    "revid": 111103619
+   }
+  },
+  {
+   "id": 661,
+   "lang": "ja-en",
+   "label": "E",
+   "type": "one fact",
+   "claim": "Mount Fuji has been selected as one of the Three Famous Mountains of Japan.",
+   "sentence": "日本三名山（三霊山）、日本百名山、日本の地質百選に選定されている。",
+   "source": {
+    "sid": "ja-11",
+    "url": "https://ja.wikipedia.org/wiki/%E5%AF%8C%E5%A3%AB%E5%B1%B1",
+    "revid": 111200261
+   }
+  },
+  {
+   "id": 662,
+   "lang": "ja-en",
+   "label": "E",
+   "type": "one fact",
+   "claim": "Some landforms and species have been lost or reduced through modern development.",
+   "sentence": "内湖（ないこ）を含む多様な地形や多数の固有種を含む豊かな生態系をもっているが、近現代の開発により失われたり減少したりした地形や種もある。",
+   "source": {
+    "sid": "ja-17",
+    "url": "https://ja.wikipedia.org/wiki/%E7%90%B5%E7%90%B6%E6%B9%96",
+    "revid": 111103619
+   }
+  },
+  {
+   "id": 663,
+   "lang": "ja-en",
+   "label": "T",
+   "type": "changed season",
+   "claim": "Climbing Mount Fuji is popular in winter.",
+   "sentence": "現在、富士山麓周辺には、観光名所が多くある他、夏季シーズンには富士登山が盛んである。",
+   "source": {
+    "sid": "ja-10",
+    "url": "https://ja.wikipedia.org/wiki/%E5%AF%8C%E5%A3%AB%E5%B1%B1",
+    "revid": 111200261
+   },
+   "audit": "relabelled C → T before any run: the sentence says climbing is popular in the summer season; that neither states nor rules out winter"
+  },
+  {
+   "id": 664,
+   "lang": "ja-en",
+   "label": "C",
+   "type": "negation",
+   "claim": "The summit was not regarded as sacred.",
+   "sentence": "古来霊峰とされ、特に山頂部は浅間大神が鎮座するとされたため、神聖視された。",
+   "source": {
+    "sid": "ja-6",
+    "url": "https://ja.wikipedia.org/wiki/%E5%AF%8C%E5%A3%AB%E5%B1%B1",
+    "revid": 111200261
+   }
+  }
+ ]
+}

@@ -1,0 +1,8 @@
+{"schema":"audit","auditor":"Claude Opus 5.5 subagent; blind relabel from id/claim/sentence (+source url for pronoun resolution), compared after all 96 decided","agreed":96,"disagreements":[],"borderline":[
+{"id":849,"note":"'cinquieme lac naturel d'origine glaciaire' leaves the ranking metric implicit (size assumed); C relies on reading it as fifth-largest"},
+{"id":860,"note":"sentence is a fragment ('NHN der hoechste Berg der Eifel'); E holds but depends on the subject being restored from the page title"},
+{"id":872,"note":"same fragment; T is right from the sentence alone, though world knowledge says Hohe Acht is volcanic"},
+{"id":852,"note":"free bathing access at Charavines says nothing about lifeguards; T, but a reader might infer an unsupervised beach"},
+{"id":804,"note":"'third largest after Chicago and Detroit' entails smaller than both; E is right but needs the ranking inference"},
+{"id":807,"note":"E needs inverting the bearing (Hood ESE of Portland -> Portland WNW of Hood); 'east-east-southeast' wording is odd but the inversion holds"}
+]}

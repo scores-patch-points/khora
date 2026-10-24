@@ -92,6 +92,7 @@ import { standingOf } from "./opencode-standing.mjs";
 import { admit as admitChange, fold as foldRecord, recordNote, recordSink, reconcile, nextVoid, reasonFor, provenance, refusalsFor, liveAnswers } from "./opencode-record.mjs";
 import { dreamTask } from "./opencode-dream.mjs";
 import * as eot from "./opencode-eot.mjs";
+import * as register from "./opencode-register.mjs";
 import { checkAnswer } from "./opencode-ledger-check.mjs";
 import { mark as markNote, claim as claimItem, done as doneItem, read as readNotes, noteFor, stateFor, turnsFile, writeTurnsFile, turnsOf, root as notesRoot, projectKey, projectRoot, plans as workPlans, scent as scentNote, scentsOf, stuckScents, scentClose, releaseAnswered, releaseByMerge, releaseByQuestion, releaseNested, ident as identTask, universeInfo } from "./opencode-worknotes.mjs";
 import { metaWorkerTick, runEcology } from "./opencode-ecology.mjs";
@@ -101,8 +102,10 @@ import { dream as dreamPass } from "./opencode-dream.mjs";
 import { layers, renderLayersHtml } from "./opencode-layers.mjs";
 import fs from "node:fs";
 import path from "node:path";
+import { Worker } from "node:worker_threads";
 import crypto from "node:crypto";
 import http from "node:http";
+import net from "node:net";
 import { spawnSync, execFileSync } from "node:child_process";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { lookNote, projectHistory } from "./opencode-context.mjs";
@@ -110,6 +113,8 @@ import { recordTurnsToWeft } from "./opencode-weft-record.mjs";
 import { findInWeft, findInWeftSemantic } from "./opencode-weft-find.mjs";
 import { archonNote, opennessNote } from "./opencode-archons.mjs";
 import { memoryNote } from "./opencode-memory.mjs";
+import { ingest as ingestAttachment, pagesNote, docsOf } from "./opencode-ingest.mjs";
+import { computeNote, checkAgainstFacts } from "./opencode-records.mjs";
 import { blocks as recordBlocks } from "./opencode-record.mjs";
 import { DELTA_ON, measure as measureDelta, rankTurns } from "./opencode-delta.mjs";
 import { STAKES_ON, stakeCheck } from "./opencode-stakes.mjs";
@@ -414,6 +419,20 @@ async function onContext(body) {
     const agent = String(body.sessionID ?? "");
     const task = taskFor(body, agent);
     if (Array.isArray(body.turns)) writeTurns({ task, agent, turns: body.turns });
+    // THE REGISTER rides with the notes (opencode-register.mjs): the facts the person stated in this session, written once as `fact`
+    // marks and projected here as prose the model can quote. The plugin pins the block in event.system, which native compaction never
+    // summarises (compaction.ts skips `system`), so a model-written checkpoint cannot lose a stated binding (FAILURES.md F1). The ask
+    // ingested is the person's own words (`userAsk`): on a gather turn the plugin rewrites the last message, and page sentences are not facts
+    // the person stated.
+    if (REGISTER_ON) {
+      try {
+        register.ingestTurns({ task, agent, turns: registerTurns(body, typeof body.userAsk === "string" ? body.userAsk : turn.ask) });
+        const reg = register.registerOf(task, agent);
+        const note = register.registerNote(reg);
+        if (note) { out.register = note; out.registerLegend = register.REGISTER_LEGEND; turn.register = reg.facts.length; counters.registersServed = (counters.registersServed ?? 0) + 1; }
+        else turn.register = 0;
+      } catch { /* the register never blocks a turn */ }
+    }
     try { const commons = await commonsNote({ task, agent, ask: turn.ask }, { prosify: commonsProsify }); if (commons) { out.commons = commons; turn.commons = commons.length; } } catch { /* never blocks */ }
   }
   if (projected.drop) {
@@ -459,6 +478,13 @@ async function onContext(body) {
   const mem = MEMORY_ON ? memoryNote(turn.ask) : { gap: "off" };
   if (mem.note) { counters.memoriesServed++; out.memory = mem.note; turn.memory = mem.note; }
   else turn.memory = mem.gap ?? null;
+  // Attachments the plugin handed over (opencode-ingest.mjs): the pages this ask bears on, quoted whole with their addresses.
+  // What the ask asks OF the attachment, computed from its records (opencode-records.mjs): counts, maxima, current values, sums, one hop.
+  // It goes first: a settled fact with its witnesses outranks pages the model would have to add up itself.
+  { const computed = docsOf(body.sessionID).map((doc) => computeNote({ doc, ask: turn.ask }).note).filter(Boolean);
+    const pg = pagesNote({ sessionID: body.sessionID, ask: turn.ask });
+    const notes = [...computed, ...(pg.note ? [pg.note] : [])];
+    if (notes.length) { out.memory = [out.memory, ...notes].filter(Boolean).join("\n\n"); turn.pages = { computed: computed.length, pages: pg.pages ?? 0, chars: pg.chars ?? 0 }; } }
   // Refs: addresses the operator gave the system, injected when the ask's own
   // words bear on one. The source is named; its bytes are read on demand (the
   // snip tool), never carried in the note. Mechanical word overlap, no model.
@@ -1115,6 +1141,129 @@ function savePerceiveConfig(patch) {
   return next;
 }
 
+// GATHER: a search ask answered from the pages read, with no model (opencode-gather.mjs: the Holodeck's research, then its summary
+// selected by the asker's stance). The work runs in a worker thread: the door is one event loop, and reading pages is seconds of
+// synchronous work that every other request would wait behind. At most two gathers at once; a slow one is cut at the budget.
+let gathersRunning = 0;
+// GATHER PROGRESS, per session, while a gather runs: what the research has found and read so far (the worker forwards the Holodeck's
+// own events). GET /v1/hooks/opencode/gather/progress?sessionID= reads it, so the window can say "reading… 3 pages" instead of "working".
+const gatherProgress = new Map();
+const hostOfUrl = (u) => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch { return String(u ?? "").slice(0, 40); } };
+function noteProgress(key, ev) {
+  const p = gatherProgress.get(key);
+  if (!p || !ev || typeof ev !== "object") return;
+  if (ev.t === "search" && ev.state === "found") { const q = String(ev.q ?? "").slice(0, 80); const had = p.searches.find((s) => s.q === q); if (had) had.n = Math.max(had.n, Number(ev.n) || 0); else p.searches.push({ q, n: Number(ev.n) || 0 }); }
+  else if (ev.t === "search" && ev.state === "failed") p.searches.push({ q: String(ev.q ?? "").slice(0, 80), failed: String(ev.why ?? "").slice(0, 80) });
+  else if (ev.t === "candidate") p.candidates++;
+  else if (ev.t === "read" && ev.state === "reading") p.reading = { host: hostOfUrl(ev.url), title: String(ev.title ?? "").slice(0, 120) };
+  else if (ev.t === "read" && ev.state === "read") { p.read.push({ host: hostOfUrl(ev.url), title: String(ev.title ?? "").slice(0, 120) }); if (p.reading?.host === hostOfUrl(ev.url)) p.reading = null; }
+  else if (ev.t === "read") { p.skipped++; if (p.reading?.host === hostOfUrl(ev.url)) p.reading = null; }
+  else if (ev.t === "stop") p.stop = String(ev.stop?.reason ?? "").slice(0, 120) || "stopped";
+}
+function progressOf(key) {
+  const p = gatherProgress.get(key);
+  if (!p) return { ok: false, gap: "no gather for this session" };
+  return { ok: true, elapsedMs: Date.now() - p.startedAt, searches: p.searches, candidates: p.candidates, read: p.read, reading: p.reading, skipped: p.skipped, stop: p.stop, done: p.done };
+}
+// THE REGISTER (opencode-register.mjs): the facts the person stated in this session, kept as `fact` marks in the task's EOT log under the
+// session, projected to `<fold-register>` and answered mechanically (M1–M6, no model). The plugin asks it BEFORE route and gather on a new
+// ask, so a question the conversation itself answers never becomes web research (FAILURES.md F5: "what is the mascot service called"
+// went to a mascot-cleaning company's pages), and onContext projects it again so the block rides with the other notes. FOLD_REGISTER=0 off.
+const REGISTER_ON = process.env.FOLD_REGISTER !== "0";
+function registerTurns(body, ask) {
+  const prior = (Array.isArray(body.turns) ? body.turns : []).filter((t) => t && typeof t.ask === "string").map((t, i) => ({ n: Number(t.n) || i + 1, ask: t.ask }));
+  return String(ask ?? "").trim() ? [...prior, { n: prior.length + 1, ask: String(ask) }] : prior;
+}
+function onRegister(body) {
+  if (!REGISTER_ON) return { ok: false, gap: "off" };
+  const agent = String(body.sessionID ?? body.agent ?? "");
+  if (!identTask(agent)) return { ok: false, gap: "bad-agent" };
+  const task = taskFor(body, agent);
+  const ask = String(body.ask ?? "");
+  const turns = registerTurns(body, ask);
+  const ingested = register.ingestTurns({ task, agent, turns });
+  const reg = register.registerOf(task, agent);
+  const note = register.registerNote(reg);
+  const answer = body.op === "note" || !ask.trim() ? null : register.registerAnswer(ask, reg, turns);
+  return { ok: true, facts: reg.facts.length, wrote: ingested.wrote, gaps: ingested.gaps.length, note, answer, legend: register.REGISTER_LEGEND };
+}
+
+async function onGather(body) {
+  const ask = String(body.ask ?? "").trim();
+  if (!ask) return { ok: false, error: "no ask" };
+  if (gathersRunning >= 2) return { ok: false, error: "busy: two gathers are already running" };
+  const budget = Math.max(5000, Math.min(Number(body.budgetMs) || 90_000, 180_000));
+  const key = String(body.sessionID ?? body.agent ?? "anon");
+  gatherProgress.set(key, { startedAt: Date.now(), searches: [], candidates: 0, read: [], reading: null, skipped: 0, stop: null, done: false });
+  gathersRunning++;
+  try {
+    const out = await new Promise((resolve) => {
+      const w = new Worker(new URL("./opencode-gather-worker.mjs", import.meta.url), { workerData: { ask, opts: { gapMs: body.gapMs, retryMs: body.retryMs, softMs: Number(body.softMs) || undefined, plan: body.plan && typeof body.plan === "object" ? body.plan : undefined, topic: typeof body.topic === "string" && body.topic.trim() ? body.topic.trim().slice(0, 300) : undefined, kind: typeof body.kind === "string" ? body.kind.slice(0, 20) : undefined } } });
+      const timer = setTimeout(() => { w.terminate(); resolve({ ok: false, error: `gather exceeded its ${budget} ms budget` }); }, budget);
+      w.on("message", (m) => { if (m && m.progress) { noteProgress(key, m.progress); return; } clearTimeout(timer); resolve(m); w.terminate(); });
+      w.once("error", (e) => { clearTimeout(timer); resolve({ ok: false, error: String(e?.message ?? e).slice(0, 300) }); });
+    });
+    // keep the assembled text for the model call the harness is about to make for this turn (served by /v1/gather/chat/completions)
+    if (out?.ok && out.result?.text) {
+      const id = `g${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`;
+      gatherAnswers.set(id, { text: out.result.text, at: Date.now() });
+      for (const [k, v] of gatherAnswers) if (Date.now() - v.at > 300_000 || gatherAnswers.size > 50) gatherAnswers.delete(k);
+      return { ok: true, id, result: out.result };
+    }
+    return out;
+  } finally {
+    gathersRunning--;
+    const p = gatherProgress.get(key);
+    if (p) { p.done = true; p.doneAt = Date.now(); }
+    for (const [k, v] of gatherProgress) if (v.done && Date.now() - (v.doneAt ?? 0) > 300_000) gatherProgress.delete(k);
+  }
+}
+const gatherAnswers = new Map();
+
+// LONGFORM, a long piece as a file written a section at a time across the harness's model calls (opencode-longform.mjs): the door keeps the job, applies each
+// reply to the file, grades the section against its own material with the grounding check, and says what the next model call is asked. The model
+// calls are the harness's; the door never calls a model. `start` gathers first (an account ask, topic, a short time budget).
+const longformJobs = new Map();
+async function onLongform(body) {
+  const { longformStart, longformStep, longformRevise } = await import("./opencode-longform.mjs");
+  for (const [k, v] of longformJobs) if (Date.now() - v.at > 3600_000) longformJobs.delete(k);
+  const op = String(body.op ?? "");
+  try {
+    if (op === "start") {
+      const ask = String(body.ask ?? "").trim();
+      const topic = typeof body.topic === "string" && body.topic.trim() ? body.topic.trim().slice(0, 300) : ask;
+      // a piece is read for longer than a question is: the soft deadline has a floor (FOLD_LONGFORM_SOFT_MS, 45 s), under the hard budget the caller waits for
+      const softMs = Math.max(Number(body.softMs) || 0, Number(process.env.FOLD_LONGFORM_SOFT_MS ?? 45_000));
+      const g = await onGather({ ask, topic, kind: "account", softMs, budgetMs: Math.max(Number(body.budgetMs) || 90_000, softMs + 30_000), plan: body.plan });
+      if (!g?.ok) return { ok: false, error: g?.error ?? "the gather failed" };
+      const s = longformStart({ ask, topic, gathered: g.result, outline: body.outline, freeform: body.freeform });
+      if (s.gap) return { ok: false, error: s.gap.reason };
+      longformJobs.set(s.job.id, { job: s.job, at: Date.now() });
+      // the outline with each section's state and fact count rides every answer, so the window draws the piece's progress as data
+      return { ok: true, job: s.job.id, prompt: s.prompt, section: s.section, title: s.title, facts: s.facts, sections: s.job.outline.length, sources: g.result.sources.length, path: s.job.file, passages: g.result.passages, topic, outline: s.outline };
+    }
+    const entry = longformJobs.get(String(body.job ?? ""));
+    if (!entry) return { ok: false, error: "no such longform job (expired or never started)" };
+    entry.at = Date.now();
+    if (op === "step") {
+      const { profileOf } = await import("./opencode-finish.mjs");
+      const ground = async (text, passages) => { const p = await profileOf({ draft: text, material: null, passages, workspace: null, own: [], research: false }); return (p?.profile?.claims ?? []).map((c) => ({ text: c.text, standing: c.standing })); };
+      const r = await longformStep(entry.job, String(body.text ?? ""), { ground });
+      if (r.done) {
+        const id = `g${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`;
+        gatherAnswers.set(id, { text: r.done.text, at: Date.now() });
+        return { ok: true, done: { path: r.done.path, standing: r.done.standing, cut: r.done.cut.length, gaps: r.done.gaps, calls: r.done.calls, sections: r.done.sections }, id, outline: r.outline };
+      }
+      return { ok: true, next: r.next, outline: r.outline };
+    }
+    if (op === "revise") {
+      const r = longformRevise(entry.job, String(body.section ?? ""), String(body.instruction ?? ""));
+      return r.gap ? { ok: false, error: r.gap.reason } : { ok: true, next: r.next, outline: r.outline };
+    }
+    return { ok: false, error: `unknown op ${op}` };
+  } catch (e) { return { ok: false, error: String(e?.message ?? e).slice(0, 300) }; }
+}
+
 async function onPerceive(body) {
   const cfg = loadPerceiveConfig();
   const mime = String(body?.mime ?? "application/octet-stream").toLowerCase();
@@ -1642,6 +1791,46 @@ function onSnip(body) {
   }
   return result;
 }
+// the words a sentence asserts with: function words and stems shorter than three letters carry no claim
+const REVISE_FW = new Set("the and for with from that this these those was were are has have had its his her their she he they them who which what when where not but than then into onto over under about after before also only very more most some any each one".split(" "));
+const reviseWords = (t) => new Set((String(t).toLowerCase().match(/[\p{L}\p{N}]+/gu) ?? []).filter((w) => (w.length > 2 || /\d/.test(w)) && !REVISE_FW.has(w)));
+const recorded = new Set();
+/** The sentence of the answer that now stands for a revised one. First choice: a claim the door finds SUPPORTED by the very source
+ *  sentence the revised one was found against (`against`), sharing at least a quarter of the claim words of the two together (the
+ *  correction may restate it in the source's own words). Otherwise: a sentence sharing at least half of them. Never one that quotes
+ *  the revised sentence (a reply naming its mistake is not the correction), and never one the door contradicts. Null when none. */
+export function successorOf(was, claims, against = null) {
+  const a = reviseWords(was);
+  const flat = (t) => String(t ?? "").toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+  const quoted = flat(was);
+  const scored = claims
+    .filter((c) => c.standing !== "contradicted" && c.standing !== "argument" && c.standing !== "question")
+    .filter((c) => !flat(c.text).includes(quoted))
+    .map((c) => {
+      const b = reviseWords(c.text);
+      const shared = [...a].filter((w) => b.has(w)).length;
+      return { c, score: shared / (a.size + b.size - shared || 1) };
+    })
+    .sort((x, y) => y.score - x.score);
+  const restsOn = (c) => c.standing === "supported" && !!against && [c.evidence, ...(c.from ?? [])].some((e) => e?.text && (flat(e.text).includes(flat(against)) || flat(against).includes(flat(e.text))));
+  return scored.find((x) => x.score >= 0.25 && restsOn(x.c))?.c ?? scored.find((x) => x.score >= 0.5)?.c ?? null;
+}
+/** Each revised sentence, paired with its successor in the answer (successorOf): { was, now, standing }. A found pair is appended
+ *  once to the task's log (the quick and the researched pass both carry it). */
+function reviseLedger({ task, agent, universe, revises, claims }) {
+  return revises.map(({ was, against }) => {
+    const now = successorOf(was, claims, against);
+    const pair = { was, now: now?.text ?? null, standing: now?.standing ?? null };
+    const key = `${task}\u0000${agent}\u0000${was}\u0000${pair.now}`;
+    // only a pair is a revision: a text with no successor (a preamble before the reply reads) appends nothing
+    if (pair.now && !recorded.has(key)) {
+      recorded.add(key);
+      try { eot.append({ task, agent, stage: "reason", universe, detail: { op: "REC", by: "khora:opencode-doorway.revise", was, now: pair.now, standing: pair.standing, evidence: now?.evidence ?? null } }); } catch { /* the log never blocks */ }
+    }
+    return pair;
+  });
+}
+
 async function onGround(body) {
   const agent = String(body.agent ?? body.sessionID ?? "");
   const task = taskFor(body, agent);
@@ -1664,11 +1853,42 @@ async function onGround(body) {
   if (process.env.FOLD_FINISH !== "0") {
     try {
       const { finish } = await import("./opencode-finish.mjs");
-      const f = await finish({ ask: String(body.ask ?? ""), draft: String(body.text ?? ""), material: body.material ?? null });
-      if (f?.ok) step = { output: f.output, superseded: f.superseded, grounded: f.grounded, ground_trace: f.ground_trace, lane: f.lane, disclosure: f.disclosure, eot: f.eot };
-    } catch { /* typed gap */ }
+      const f = await finish({ ask: String(body.ask ?? ""), draft: String(body.text ?? ""), material: body.material ?? null, passages: body.passages ?? null, workspace: body.workspace ? String(body.workspace) : null, own: Array.isArray(body.own) ? body.own.map(String) : [], ...(typeof body.research === "boolean" ? { research: body.research } : {}) });
+      if (f?.ok) step = { output: f.output, superseded: f.superseded, grounded: f.grounded, ground_trace: f.ground_trace, profile: f.profile, lane: f.lane, disclosure: f.disclosure, eot: f.eot };
+      // no readable ask (the app's message reaches the plugin without text the CLI's has): the answer is still profiled
+      else if (f?.gap === "empty-ask") {
+        const { profileOf } = await import("./opencode-finish.mjs");
+        const p = await profileOf({ draft: String(body.text ?? ""), material: body.material ?? null, passages: body.passages ?? null, workspace: body.workspace ? String(body.workspace) : null, own: Array.isArray(body.own) ? body.own.map(String) : [], ...(typeof body.research === "boolean" ? { research: body.research } : {}) });
+        step = { output: p.output, superseded: null, grounded: [], ground_trace: [], profile: p.profile, lane: null, disclosure: p.disclosure, eot: null };
+      }
+    } catch (e) {
+      // a typed gap for the window, and the reason for the door's own log: a swallowed error here is a ground nobody can explain
+      console.error(`ground: no step for ${String(body.sessionID ?? "").slice(0, 14)} — ${e?.stack ?? e}`.split("\n").slice(0, 4).join(" | "));
+    }
   }
-  return { ...r, flags, standing: standingFor(flags), ...(step ? { step } : {}) };
+  // A REVISION the reader asked for (the app's fold note): each sentence revised is paired with the answer's sentence that now
+  // stands for it, and the pair is appended to the task's log as REC. The sentence revised is never erased; the window shows both.
+  // each { was, against? } (a bare string is a sentence with no source sentence named)
+  const revises = (Array.isArray(body.revises) ? body.revises : []).flatMap((r) => (typeof r === "string" ? (r ? [{ was: r }] : []) : r && typeof r.was === "string" && r.was ? [{ was: r.was, against: typeof r.against === "string" ? r.against : null }] : []));
+  if (step?.profile && revises.length) step.profile.revises = reviseLedger({ task, agent, universe: universeOf(body), revises, claims: step.profile.claims ?? [] });
+  // THE ANSWER AGAINST THE ATTACHMENT'S COMPUTED FACTS (opencode-records.mjs): a sentence that gives the wrong number for a thing the
+  // door computed is contradicted, with the computed fact as evidence; the plugin hands a contradicted sentence back once.
+  try {
+    const facts = docsOf(body.sessionID).flatMap((doc) => computeNote({ doc, ask: String(body.ask ?? "") }).facts ?? []);
+    const against = checkAgainstFacts(String(body.text ?? ""), facts);
+    if (against.length) {
+      step ??= { output: String(body.text ?? ""), superseded: null, grounded: [], ground_trace: [], profile: { claims: [] }, lane: null, disclosure: null, eot: null };
+      step.profile ??= { claims: [] };
+      step.profile.claims = [...(step.profile.claims ?? []), ...against];
+    }
+  } catch { /* the check never blocks a turn */ }
+  if (!step) console.error(`ground: no step for ${String(body.sessionID ?? "").slice(0, 14)} (ask ${String(body.ask ?? "").length} chars, text ${String(body.text ?? "").length}, passages ${(body.passages ?? []).length}, own ${(body.own ?? []).length})`);
+  // THE TURN'S SHAPE (the audit's live row, read once more here so the window never reaches for the door):
+  // what the void owes, the first unmet reach cell, and the acts with their cube cells and shape verdicts.
+  let turn = null;
+  const open = sessions.get(String(body.sessionID ?? ""));
+  if (open) turn = { topic: open.topic ?? null, shape: open.shape ?? null, shapeCell: open.shapeCell ?? null, void: open.void ?? null, tools: [...open.tools.values()].map((t) => ({ name: t.name, ok: t.ok, cell: t.cell ?? null, shape: t.shape ?? null })) };
+  return { ...r, flags, standing: standingFor(flags), ...(step ? { step } : {}), ...(turn ? { turn } : {}) };
 }
 
 // The modality of a file by extension, for the local senses. Text-family is the
@@ -1839,7 +2059,7 @@ function onDream(body) { return dreamTask({ task: taskFor(body, String(body.agen
 function onNextVoid(body) { return nextVoid({ task: body.task }); }
 function onReason(body) { return reasonFor({ task: body.task, ask: String(body.ask ?? ""), limit: Number(body.limit) || 6 }); }
 // THE MECHANICAL STEP (opencode-finish.mjs): the model's finished text is one
-// step; this runs the precision race (and, for a generation, the essay fold)
+// step; this runs the precision race (and, for a generation, the longform fold)
 // over it and returns the OUTPUT, keeping the raw draw as `superseded`. Bounded
 // and fail-open: a slow first load yields a typed gap; the draw still stands,
 // disclosed as un-stepped. Gated by FOLD_FINISH (default on).
@@ -1929,6 +2149,7 @@ export async function answer(body, opts = {}) {
   }
   switch (body?.event) {
     case "context": return onContext(body);
+    case "ingest": return ingestAttachment(body);
     case "title": return onTitle(body);
     case "fold": return {}; // retired: the line-level fold measured equal to its null (see the replay script)
     case "surf": return onSurf(body);
@@ -1954,6 +2175,18 @@ export async function answer(body, opts = {}) {
     case "trail": return onTrail(body);
     case "event": return onEvent(body);
     case "perceive": return onPerceive(body);
+    case "register": return onRegister(body);
+    case "gather": return onGather(body);
+    case "longform": return onLongform(body);
+    case "route": {
+      // THE CONVERSATION ROUTER (opencode-route.mjs): which handling this ask gets, by intent, before any model is called. Fails open: a gap or an
+      // error is an answer the plugin reads as "no route" and falls back to its own classifier.
+      try {
+        const { routeOf } = await import("./opencode-route.mjs");
+        const r = await routeOf(String(body.ask ?? ""), { history: body.hasHistory ? [{ role: "assistant" }] : [] });
+        return { ok: true, ...r };
+      } catch (e) { return { ok: false, error: String(e?.message ?? e).slice(0, 200) }; }
+    }
     case "shadow": return onShadow(body);
     case "draft": return onDraft(body);
     case "act": return onAct(body);
@@ -1965,6 +2198,12 @@ export async function answer(body, opts = {}) {
 // with one line ahead of its other routes.
 export async function route(req, res, { log = () => {} } = {}) {
   const url = String(req.url ?? "").split("?")[0];
+  if (url.split("?")[0] === "/v1/hooks/opencode/gather/progress" && req.method === "GET") {
+    const q = new URL(url, "http://door").searchParams;
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(JSON.stringify(progressOf(String(q.get("sessionID") ?? q.get("agent") ?? "anon"))));
+    return true;
+  }
   if (url === "/v1/hooks/opencode/meter" && req.method === "GET") {
     res.writeHead(200, { "content-type": "application/json" });
     res.end(JSON.stringify(meter(), null, 2));
@@ -2068,6 +2307,19 @@ export async function route(req, res, { log = () => {} } = {}) {
   }
   // POST /v1/perceive { path } → the local vision sense: OCR the image on this box (tesseract), no network, no
   // vision model. Returns the measured text with a giver; the model reads this, never the pixels.
+  // POST /v1/gather/chat/completions: the answer a gather assembled, served as the reply of an OpenAI-compatible chat model. The
+  // plugin points one model call at this path (x-gather-id names the answer); nothing leaves the machine and no model runs.
+  if (url === "/v1/gather/chat/completions" && req.method === "POST") {
+    let body = {};
+    try { body = JSON.parse((await readBody(req)) || "{}"); } catch { /* an empty request */ }
+    const a = gatherAnswers.get(String(req.headers["x-gather-id"] ?? ""));
+    if (!a) { res.writeHead(404, { "content-type": "application/json" }); res.end(JSON.stringify({ error: { message: "no gather answer for this id (expired or never made)" } })); return true; }
+    const { chatCompletion } = await import("./opencode-gather.mjs");
+    const c = chatCompletion({ text: a.text, model: typeof body.model === "string" ? body.model : "fold-gather", stream: body.stream === true });
+    res.writeHead(200, { "content-type": c.type, "cache-control": "no-cache" });
+    res.end(c.body);
+    return true;
+  }
   if (url === "/v1/perceive" && req.method === "POST") {
     let body = {};
     try { body = JSON.parse((await readBody(req)) || "{}"); } catch { /* answered as an empty read */ }
@@ -2178,7 +2430,7 @@ export async function route(req, res, { log = () => {} } = {}) {
   if (url !== "/v1/hooks/opencode") return false;
   if (req.method === "GET") {
     res.writeHead(200, { "content-type": "application/json" });
-    res.end(JSON.stringify({ door: "opencode", priors: seedStatus(), senses: huntOrgans({ stateDir: STATE }), events: ["context", "surf", "mark", "claim", "done", "notes", "scent", "admit", "record", "dream", "provenance", "snip", "swarm", "cube", "ground", "nextVoid", "chase", "title", "event", "prompt", "trail", "perceive", "draft", "act", "memory", "refs", "system"] }));
+    res.end(JSON.stringify({ door: "opencode", priors: seedStatus(), senses: huntOrgans({ stateDir: STATE }), events: ["context", "surf", "gather", "route", "register", "mark", "claim", "done", "notes", "scent", "admit", "record", "dream", "provenance", "snip", "swarm", "cube", "ground", "nextVoid", "chase", "title", "event", "prompt", "trail", "perceive", "draft", "act", "memory", "refs", "system"] }));
     return true;
   }
   if (req.method !== "POST") return false;
@@ -2195,6 +2447,22 @@ export async function route(req, res, { log = () => {} } = {}) {
 // a box whose proxy has not been restarted onto the mount yet, and for tests.
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href && process.argv.includes("--serve")) {
   const port = Number(process.argv[process.argv.indexOf("--serve") + 1]) || 11470;
+  // A door that is already serving this port is not started a second time: the keeper's watchdog can start another while the first
+  // is still warming under load, and the second would spend minutes warming only to die on the busy port.
+  const taken = await new Promise((resolve) => { const probe = net.connect({ port, host: "127.0.0.1" }); probe.once("connect", () => { probe.destroy(); resolve(true); }); probe.once("error", () => resolve(false)); });
+  if (taken) { console.error(`opencode doorway: :${port} is already served; exiting`); process.exit(0); }
+  // Warm BEFORE listening: the first finish() is ~36 s of synchronous work; a closed port fails fast and open (the plugin cools down),
+  // where a blocked event loop leaves every connection hanging and the watchdog starting a second door.
+  if (process.env.FOLD_FINISH !== "0" && process.env.FOLD_WARM !== "0") {
+    const { warmFinish } = await import("./opencode-finish.mjs");
+    const w = await warmFinish();
+    console.error(`opencode doorway warmed in ${w.ms} ms`);
+  }
+  // The router loads its English parser on its first call (about 3 s of synchronous work): pay it here, before listening, so the plugin's
+  // first route call (a short timeout) is never the one that waits.
+  if (process.env.FOLD_ROUTE_WARM !== "0") {
+    try { const { routeOf } = await import("./opencode-route.mjs"); const t = Date.now(); await routeOf("hello", { history: [] }); console.error(`opencode route warmed in ${Date.now() - t} ms`); } catch (e) { console.error(`opencode route not warmed: ${e?.message ?? e}`); }
+  }
   http.createServer(async (req, res) => {
     // CORS: the app reads the audit from the window (a different origin). The
     // mounted proxy sets this globally; the standalone server must too.

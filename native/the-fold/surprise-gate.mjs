@@ -53,7 +53,7 @@ export const SURPRISE_DEFAULTS = Object.freeze({ ...(_readRules?.rules?.surprise
  *  stated instrument ("first 60000 chars" of Dracula). A missing rule set is a
  *  typed refusal (`no_reading_rule`), never a khora-supplied number.
  */
-export function surpriseCut(events = [], { order = SURPRISE_DEFAULTS.order, alpha = SURPRISE_DEFAULTS.alpha, draws = SURPRISE_DEFAULTS.draws, seed = SURPRISE_DEFAULTS.seed, minLength = SURPRISE_DEFAULTS.minLength, maxTokens = SURPRISE_DEFAULTS.maxTokens } = {}) {
+export function surpriseCut(events = [], { order = SURPRISE_DEFAULTS.order, alpha = SURPRISE_DEFAULTS.alpha, draws = SURPRISE_DEFAULTS.draws, seed = SURPRISE_DEFAULTS.seed, minLength = SURPRISE_DEFAULTS.minLength, maxTokens = SURPRISE_DEFAULTS.maxTokens, prime = null } = {}) {
   if (![order, alpha, draws, seed, minLength, maxTokens].every((x) => Number.isFinite(x))) {
     // The rules were not received — a typed refusal, never a synthesized number.
     return Object.freeze({ schema: "SurpriseCut@1", stream: "tokens", events: (events ?? []).length, cut: 0, nullCut: 0, figures: 0, boundaries: Object.freeze([]), segmentSizes: Object.freeze([]), refused: "no_reading_rule", source: _readRules.source, detail: _readRules.gap?.detail ?? null });
@@ -69,13 +69,14 @@ export function surpriseCut(events = [], { order = SURPRISE_DEFAULTS.order, alph
   // counts a bootstrap first-sighting as a figure — measured (probe 2026-10-08):
   // the periodic-stream control that must cut nothing cuts one spurious
   // boundary at [3] with a fixed floor and none with the growing one.
-  const seg = segmentBySurprise(ev, { order, alpha, draws, seed, minLength });
+  const seg = segmentBySurprise(ev, { order, alpha, draws, seed, minLength, prime });
   return Object.freeze({
     schema: "SurpriseCut@1",
     stream: "tokens",
     events: ev.length,
     streamCapped,
     order, alpha, draws, seed, minLength, maxTokens,
+    primed: prime ? prime.length : 0,
     cut: seg.cut,
     nullCut: seg.nullCut,
     figures: seg.figures,

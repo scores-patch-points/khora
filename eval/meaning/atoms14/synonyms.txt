@@ -1,0 +1,20 @@
+{"pairs":100,"accuracy":83,"synonymsFound":"39/50","nearMissesJudgedSame":"6/50","byLang":{"en":85,"es":95,"fr":80,"de":90,"ja":65}}
+NEAR MISSES JUDGED SAME:
+ es provincia~departamento [related] → same: keys province ~ department: listed synonyms
+ fr lac~étang [related] → same: shared keys: lake
+ fr torrent~ruisseau [related] → same: shared keys: stream
+ de Berg~Hügel [related] → same: shared keys: hill
+ ja 広義~狭義 [antonym] → same: shared keys: sense
+ ja 活火山~火山 [hypernym] → same: shared keys: volcano
+SYNONYMS MISSED:
+ en discharge~outflow [synonym] → not: shared translations in 1 of 5 languages
+ en economical~cost-effective [synonym] → not: shared translations in 0 of 4 languages
+ en form~establish [synonym] → not: shared translations in 0 of 8 languages
+ fr se jeter~déboucher [synonym] → not: no shared key
+ fr encadrer~entourer [synonym] → not: no shared key
+ de münden~einmünden [synonym] → not: no shared key
+ ja 本川~本流 [synonym] → not: no shared key
+ ja 注ぐ~流れ込む [synonym] → not: no shared key
+ ja 標高~海抜 [synonym] → not: no shared key
+ ja 連なる~連続する [synonym] → not: no shared key
+ ja 活発~盛ん [synonym] → not: no shared key

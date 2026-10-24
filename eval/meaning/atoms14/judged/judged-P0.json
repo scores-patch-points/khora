@@ -1,0 +1,890 @@
+[
+ {
+  "sid": "h001",
+  "i": 0,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h001",
+  "i": 1,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h001",
+  "i": 2,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h001",
+  "i": 3,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h001",
+  "i": 4,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h001",
+  "i": 5,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h001",
+  "i": 6,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h001",
+  "i": 7,
+  "verdict": "wrong",
+  "note": "alias self-name"
+ },
+ {
+  "sid": "h001",
+  "i": 8,
+  "verdict": "wrong",
+  "note": "fragment"
+ },
+ {
+  "sid": "h001",
+  "i": 9,
+  "verdict": "wrong",
+  "note": "garbled"
+ },
+ {
+  "sid": "h002",
+  "i": 0,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h002",
+  "i": 1,
+  "verdict": "wrong",
+  "note": "fragment"
+ },
+ {
+  "sid": "h002",
+  "i": 2,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h002",
+  "i": 3,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h002",
+  "i": 4,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h002",
+  "i": 5,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h003",
+  "i": 0,
+  "verdict": "wrong",
+  "note": "wrong"
+ },
+ {
+  "sid": "h003",
+  "i": 1,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h003",
+  "i": 2,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h003",
+  "i": 3,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h003",
+  "i": 4,
+  "verdict": "wrong",
+  "note": "wrong"
+ },
+ {
+  "sid": "h003",
+  "i": 5,
+  "verdict": "wrong",
+  "note": "wrong"
+ },
+ {
+  "sid": "h003",
+  "i": 6,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h003",
+  "i": 7,
+  "verdict": "wrong",
+  "note": "wrong"
+ },
+ {
+  "sid": "h003",
+  "i": 8,
+  "verdict": "wrong",
+  "note": "wrong"
+ },
+ {
+  "sid": "h003",
+  "i": 9,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h003",
+  "i": 10,
+  "verdict": "wrong",
+  "note": "wrong"
+ },
+ {
+  "sid": "h003",
+  "i": 11,
+  "verdict": "wrong",
+  "note": "wrong"
+ },
+ {
+  "sid": "h003",
+  "i": 12,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h003",
+  "i": 13,
+  "verdict": "wrong",
+  "note": "wrong"
+ },
+ {
+  "sid": "h003",
+  "i": 14,
+  "verdict": "wrong",
+  "note": "wrong"
+ },
+ {
+  "sid": "h003",
+  "i": 15,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h003",
+  "i": 16,
+  "verdict": "wrong",
+  "note": "wrong"
+ },
+ {
+  "sid": "h003",
+  "i": 17,
+  "verdict": "wrong",
+  "note": "wrong"
+ },
+ {
+  "sid": "h003",
+  "i": 18,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h003",
+  "i": 19,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h004",
+  "i": 0,
+  "verdict": "wrong",
+  "note": "garbled"
+ },
+ {
+  "sid": "h004",
+  "i": 1,
+  "verdict": "wrong",
+  "note": "garbled"
+ },
+ {
+  "sid": "h004",
+  "i": 2,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h004",
+  "i": 3,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h004",
+  "i": 4,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h004",
+  "i": 5,
+  "verdict": "wrong",
+  "note": "fragment"
+ },
+ {
+  "sid": "h005",
+  "i": 0,
+  "verdict": "wrong",
+  "note": "fragment"
+ },
+ {
+  "sid": "h005",
+  "i": 1,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h005",
+  "i": 2,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h005",
+  "i": 3,
+  "verdict": "wrong",
+  "note": "fragment"
+ },
+ {
+  "sid": "h005",
+  "i": 4,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h005",
+  "i": 5,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h005",
+  "i": 6,
+  "verdict": "wrong",
+  "note": "wrong subject"
+ },
+ {
+  "sid": "h005",
+  "i": 7,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h005",
+  "i": 8,
+  "verdict": "wrong",
+  "note": "fragment"
+ },
+ {
+  "sid": "h006",
+  "i": 0,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h006",
+  "i": 1,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h007",
+  "i": 0,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h007",
+  "i": 1,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h007",
+  "i": 2,
+  "verdict": "wrong",
+  "note": "wrong"
+ },
+ {
+  "sid": "h007",
+  "i": 3,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h007",
+  "i": 4,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h007",
+  "i": 5,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h007",
+  "i": 6,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h007",
+  "i": 7,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h007",
+  "i": 8,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h007",
+  "i": 9,
+  "verdict": "wrong",
+  "note": "fragment"
+ },
+ {
+  "sid": "h007",
+  "i": 10,
+  "verdict": "wrong",
+  "note": "fragment"
+ },
+ {
+  "sid": "h007",
+  "i": 11,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h007",
+  "i": 12,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h009",
+  "i": 0,
+  "verdict": "wrong",
+  "note": "wrong subject"
+ },
+ {
+  "sid": "h009",
+  "i": 1,
+  "verdict": "wrong",
+  "note": "wrong"
+ },
+ {
+  "sid": "h009",
+  "i": 2,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h009",
+  "i": 3,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h009",
+  "i": 4,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h009",
+  "i": 5,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h009",
+  "i": 6,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h009",
+  "i": 7,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h009",
+  "i": 8,
+  "verdict": "wrong",
+  "note": "wrong subject"
+ },
+ {
+  "sid": "h009",
+  "i": 9,
+  "verdict": "wrong",
+  "note": "wrong"
+ },
+ {
+  "sid": "h009",
+  "i": 10,
+  "verdict": "wrong",
+  "note": "wrong"
+ },
+ {
+  "sid": "h009",
+  "i": 11,
+  "verdict": "wrong",
+  "note": "wrong"
+ },
+ {
+  "sid": "h011",
+  "i": 0,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h011",
+  "i": 1,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h011",
+  "i": 2,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h011",
+  "i": 3,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h011",
+  "i": 4,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h011",
+  "i": 5,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h011",
+  "i": 6,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h011",
+  "i": 7,
+  "verdict": "wrong",
+  "note": "not stated"
+ },
+ {
+  "sid": "h011",
+  "i": 8,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h011",
+  "i": 9,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h011",
+  "i": 10,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h011",
+  "i": 11,
+  "verdict": "wrong",
+  "note": "garbled"
+ },
+ {
+  "sid": "h012",
+  "i": 0,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h012",
+  "i": 1,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h013",
+  "i": 0,
+  "verdict": "wrong",
+  "note": "wrong"
+ },
+ {
+  "sid": "h013",
+  "i": 1,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h013",
+  "i": 2,
+  "verdict": "wrong",
+  "note": "garbled"
+ },
+ {
+  "sid": "h014",
+  "i": 0,
+  "verdict": "wrong",
+  "note": "fragment"
+ },
+ {
+  "sid": "h014",
+  "i": 1,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h014",
+  "i": 2,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h014",
+  "i": 3,
+  "verdict": "wrong",
+  "note": "fragment"
+ },
+ {
+  "sid": "h014",
+  "i": 4,
+  "verdict": "wrong",
+  "note": "garbled"
+ },
+ {
+  "sid": "h015",
+  "i": 0,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h015",
+  "i": 1,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h015",
+  "i": 2,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h015",
+  "i": 3,
+  "verdict": "wrong",
+  "note": "garbled"
+ },
+ {
+  "sid": "h016",
+  "i": 0,
+  "verdict": "wrong",
+  "note": "garbled"
+ },
+ {
+  "sid": "h017",
+  "i": 0,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h017",
+  "i": 1,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h017",
+  "i": 2,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h017",
+  "i": 3,
+  "verdict": "wrong",
+  "note": "unit junk"
+ },
+ {
+  "sid": "h017",
+  "i": 4,
+  "verdict": "wrong",
+  "note": "unit junk"
+ },
+ {
+  "sid": "h018",
+  "i": 0,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h018",
+  "i": 1,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h018",
+  "i": 2,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h018",
+  "i": 3,
+  "verdict": "wrong",
+  "note": "fragment"
+ },
+ {
+  "sid": "h018",
+  "i": 4,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h018",
+  "i": 5,
+  "verdict": "wrong",
+  "note": "fragment"
+ },
+ {
+  "sid": "h018",
+  "i": 6,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h018",
+  "i": 7,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h018",
+  "i": 8,
+  "verdict": "wrong",
+  "note": "unit junk"
+ },
+ {
+  "sid": "h018",
+  "i": 9,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h019",
+  "i": 0,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h019",
+  "i": 1,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h019",
+  "i": 2,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h020",
+  "i": 0,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h020",
+  "i": 1,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h020",
+  "i": 2,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h020",
+  "i": 3,
+  "verdict": "wrong",
+  "note": "wrong"
+ },
+ {
+  "sid": "h020",
+  "i": 4,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h020",
+  "i": 5,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h020",
+  "i": 6,
+  "verdict": "wrong",
+  "note": "unit junk"
+ },
+ {
+  "sid": "h020",
+  "i": 7,
+  "verdict": "wrong",
+  "note": "unit junk"
+ },
+ {
+  "sid": "h021",
+  "i": 0,
+  "verdict": "wrong",
+  "note": "unit junk"
+ },
+ {
+  "sid": "h021",
+  "i": 1,
+  "verdict": "wrong",
+  "note": "unit junk"
+ },
+ {
+  "sid": "h022",
+  "i": 0,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h022",
+  "i": 1,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h022",
+  "i": 2,
+  "verdict": "wrong",
+  "note": "wrong"
+ },
+ {
+  "sid": "h022",
+  "i": 3,
+  "verdict": "wrong",
+  "note": "wrong"
+ },
+ {
+  "sid": "h022",
+  "i": 4,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h022",
+  "i": 5,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h022",
+  "i": 6,
+  "verdict": "wrong",
+  "note": "unit junk"
+ },
+ {
+  "sid": "h022",
+  "i": 7,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h023",
+  "i": 0,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h023",
+  "i": 1,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h023",
+  "i": 2,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h023",
+  "i": 3,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h023",
+  "i": 4,
+  "verdict": "wrong",
+  "note": "unit junk"
+ },
+ {
+  "sid": "h023",
+  "i": 5,
+  "verdict": "wrong",
+  "note": "unit junk"
+ },
+ {
+  "sid": "h023",
+  "i": 6,
+  "verdict": "wrong",
+  "note": "junk"
+ },
+ {
+  "sid": "h023",
+  "i": 7,
+  "verdict": "wrong",
+  "note": "junk"
+ },
+ {
+  "sid": "h023",
+  "i": 8,
+  "verdict": "wrong",
+  "note": "junk"
+ },
+ {
+  "sid": "h023",
+  "i": 9,
+  "verdict": "wrong",
+  "note": "junk"
+ },
+ {
+  "sid": "h023",
+  "i": 10,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h023",
+  "i": 11,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h023",
+  "i": 12,
+  "verdict": "wrong",
+  "note": "wrong"
+ },
+ {
+  "sid": "h023",
+  "i": 13,
+  "verdict": "wrong",
+  "note": "wrong"
+ },
+ {
+  "sid": "h024",
+  "i": 0,
+  "verdict": "wrong",
+  "note": "wrong"
+ },
+ {
+  "sid": "h024",
+  "i": 1,
+  "verdict": "wrong",
+  "note": "fragment"
+ },
+ {
+  "sid": "h024",
+  "i": 2,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h024",
+  "i": 3,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h025",
+  "i": 0,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h025",
+  "i": 1,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h025",
+  "i": 2,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h025",
+  "i": 3,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h025",
+  "i": 4,
+  "verdict": "stated"
+ },
+ {
+  "sid": "h025",
+  "i": 5,
+  "verdict": "stated"
+ }
+]

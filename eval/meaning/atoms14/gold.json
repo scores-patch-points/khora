@@ -1,0 +1,10440 @@
+{
+ "schema": "GoldAtoms@1",
+ "labeller": "two independent labellers (A: en, filing, es; B: fr, de, ja)",
+ "entities": {
+  "Lake Victoria": [
+   {
+    "id": "E1",
+    "name": "Lake Victoria"
+   },
+   {
+    "id": "E2",
+    "name": "African Great Lakes"
+   },
+   {
+    "id": "E3",
+    "name": "Africa"
+   },
+   {
+    "id": "E4",
+    "name": "Lake Superior"
+   },
+   {
+    "id": "E5",
+    "name": "North America"
+   },
+   {
+    "id": "E6",
+    "name": "Tanzania"
+   },
+   {
+    "id": "E7",
+    "name": "Uganda"
+   },
+   {
+    "id": "E8",
+    "name": "Kenya"
+   },
+   {
+    "id": "E9",
+    "name": "fish species of the lake that live nowhere else (endemic species)"
+   },
+   {
+    "id": "E10",
+    "name": "cichlids"
+   },
+   {
+    "id": "E11",
+    "name": "invasive fish"
+   },
+   {
+    "id": "E12",
+    "name": "Nile perch"
+   },
+   {
+    "id": "E14",
+    "name": "shallow depression occupied by Lake Victoria"
+   },
+   {
+    "id": "E15",
+    "name": "islands of Lake Victoria"
+   }
+  ],
+  "Mississippi River": [
+   {
+    "id": "E1",
+    "name": "Mississippi River"
+   },
+   {
+    "id": "E2",
+    "name": "Mississippi drainage basin (watershed)"
+   },
+   {
+    "id": "E3",
+    "name": "United States"
+   },
+   {
+    "id": "E4",
+    "name": "Missouri (river)"
+   },
+   {
+    "id": "E5",
+    "name": "Lake Itasca"
+   },
+   {
+    "id": "E6",
+    "name": "Minnesota"
+   },
+   {
+    "id": "E7",
+    "name": "Mississippi River Delta"
+   },
+   {
+    "id": "E8",
+    "name": "Gulf of Mexico"
+   },
+   {
+    "id": "E9",
+    "name": "tributaries of the Mississippi"
+   },
+   {
+    "id": "E10",
+    "name": "Rocky Mountains"
+   },
+   {
+    "id": "E11",
+    "name": "Appalachian Mountains"
+   },
+   {
+    "id": "E12",
+    "name": "Wisconsin"
+   },
+   {
+    "id": "E13",
+    "name": "Iowa"
+   },
+   {
+    "id": "E14",
+    "name": "Illinois"
+   },
+   {
+    "id": "E15",
+    "name": "Missouri (state)"
+   },
+   {
+    "id": "E16",
+    "name": "Kentucky"
+   },
+   {
+    "id": "E17",
+    "name": "Tennessee"
+   },
+   {
+    "id": "E18",
+    "name": "Arkansas"
+   },
+   {
+    "id": "E19",
+    "name": "Mississippi (state)"
+   },
+   {
+    "id": "E20",
+    "name": "Louisiana"
+   },
+   {
+    "id": "E21",
+    "name": "Canada"
+   },
+   {
+    "id": "E22",
+    "name": "North America"
+   },
+   {
+    "id": "E23",
+    "name": "Native Americans"
+   },
+   {
+    "id": "E24",
+    "name": "Mound Builders"
+   },
+   {
+    "id": "E25",
+    "name": "Europeans"
+   },
+   {
+    "id": "E26",
+    "name": "explorers"
+   },
+   {
+    "id": "E27",
+    "name": "settlers"
+   },
+   {
+    "id": "E28",
+    "name": "New Spain"
+   },
+   {
+    "id": "E29",
+    "name": "New France"
+   },
+   {
+    "id": "E30",
+    "name": "agricultural and urban civilizations formed by some Native Americans"
+   }
+  ],
+  "Utah Medical Products, Inc.": [
+   {
+    "id": "E1",
+    "name": "Utah Medical Products, Inc. (UTMD, the Company)"
+   },
+   {
+    "id": "E2",
+    "name": "UTMD medical devices"
+   },
+   {
+    "id": "E3",
+    "name": "UTMD corporate subsidiaries"
+   },
+   {
+    "id": "E4",
+    "name": "clinicians"
+   },
+   {
+    "id": "E5",
+    "name": "patients"
+   },
+   {
+    "id": "E6",
+    "name": "other companies that distribute and support UTMD devices"
+   },
+   {
+    "id": "E7",
+    "name": "clinical end-user facilities"
+   },
+   {
+    "id": "E8",
+    "name": "designated stocking distributors"
+   },
+   {
+    "id": "E9",
+    "name": "neonatal intensive care unit (NICU)"
+   },
+   {
+    "id": "E10",
+    "name": "labor and delivery (L&D) department"
+   },
+   {
+    "id": "E11",
+    "name": "women's health center"
+   },
+   {
+    "id": "E12",
+    "name": "hospitals"
+   },
+   {
+    "id": "E13",
+    "name": "outpatient clinics"
+   },
+   {
+    "id": "E14",
+    "name": "physician's offices"
+   },
+   {
+    "id": "E15",
+    "name": "core of practicing clinicians who introduce ideas to UTMD"
+   },
+   {
+    "id": "E16",
+    "name": "UTMD key employees"
+   },
+   {
+    "id": "E17",
+    "name": "other companies in the medical device business (subcontract customers)"
+   },
+   {
+    "id": "E18",
+    "name": "U.S."
+   },
+   {
+    "id": "E19",
+    "name": "Canada"
+   },
+   {
+    "id": "E20",
+    "name": "United Kingdom"
+   },
+   {
+    "id": "E21",
+    "name": "France"
+   },
+   {
+    "id": "E22",
+    "name": "Ireland"
+   },
+   {
+    "id": "E23",
+    "name": "Australia"
+   },
+   {
+    "id": "E24",
+    "name": "New Zealand"
+   },
+   {
+    "id": "E25",
+    "name": "UTMD OUS distributors (approximately 200)"
+   },
+   {
+    "id": "E26",
+    "name": "Utah"
+   },
+   {
+    "id": "E27",
+    "name": "the public (1982 stock buyers)"
+   },
+   {
+    "id": "E28",
+    "name": "Utah Medical Products Ltd."
+   },
+   {
+    "id": "E29",
+    "name": "Columbia Medical, Inc."
+   },
+   {
+    "id": "E30",
+    "name": "UTMD OUS customers"
+   },
+   {
+    "id": "E31",
+    "name": "this report"
+   },
+   {
+    "id": "E32",
+    "name": "currency amounts in this report"
+   },
+   {
+    "id": "E33",
+    "name": "independent medical products distributors in other countries"
+   },
+   {
+    "id": "E35",
+    "name": "labor-saving devices"
+   },
+   {
+    "id": "E36",
+    "name": "other businesses (subcontract customers)"
+   },
+   {
+    "id": "E37",
+    "name": "other medical device companies (OUS channel)"
+   },
+   {
+    "id": "E38",
+    "name": "UTMD public stockholders"
+   }
+  ],
+  "Chimborazo": [
+   {
+    "id": "E1",
+    "name": "Chimborazo (topónimo)"
+   },
+   {
+    "id": "E2",
+    "name": "Chimborazo (ciudad en Barbados)"
+   },
+   {
+    "id": "E3",
+    "name": "parroquia de Saint Joseph"
+   },
+   {
+    "id": "E4",
+    "name": "Barbados"
+   },
+   {
+    "id": "E5",
+    "name": "provincia de Chimborazo"
+   },
+   {
+    "id": "E6",
+    "name": "Ecuador"
+   },
+   {
+    "id": "E7",
+    "name": "volcán Chimborazo"
+   },
+   {
+    "id": "E8",
+    "name": "Cerro Chimborazo"
+   },
+   {
+    "id": "E9",
+    "name": "parque nacional Henri Pittier"
+   },
+   {
+    "id": "E10",
+    "name": "Venezuela"
+   }
+  ],
+  "Lago de Atitlán": [
+   {
+    "id": "E1",
+    "name": "Lago de Atitlán"
+   },
+   {
+    "id": "E2",
+    "name": "Centroamérica"
+   },
+   {
+    "id": "E3",
+    "name": "Guatemala"
+   },
+   {
+    "id": "E4",
+    "name": "Departamento de Sololá"
+   },
+   {
+    "id": "E5",
+    "name": "planeta Tierra"
+   }
+  ],
+  "Lago de Maracaibo": [
+   {
+    "id": "E1",
+    "name": "Lago de Maracaibo"
+   },
+   {
+    "id": "E2",
+    "name": "América Latina"
+   },
+   {
+    "id": "E3",
+    "name": "río Catatumbo"
+   },
+   {
+    "id": "E4",
+    "name": "cuenca de Maracaibo"
+   },
+   {
+    "id": "E5",
+    "name": "pozos perforados en la cuenca (más de 15 000)"
+   },
+   {
+    "id": "E6",
+    "name": "relámpago del Catatumbo"
+   },
+   {
+    "id": "E7",
+    "name": "Tierra (el planeta)"
+   },
+   {
+    "id": "E9",
+    "name": "ríos que alimentan el lago"
+   }
+  ],
+  "Río Magdalena": [
+   {
+    "id": "E1",
+    "name": "río Magdalena (río Grande de la Magdalena)"
+   },
+   {
+    "id": "E2",
+    "name": "Colombia"
+   },
+   {
+    "id": "E3",
+    "name": "departamento del Huila"
+   },
+   {
+    "id": "E4",
+    "name": "mar Caribe"
+   },
+   {
+    "id": "E5",
+    "name": "Barranquilla"
+   },
+   {
+    "id": "E6",
+    "name": "María Magdalena"
+   }
+  ],
+  "Río Orinoco": [
+   {
+    "id": "E1",
+    "name": "río Orinoco"
+   },
+   {
+    "id": "E2",
+    "name": "América del Sur"
+   },
+   {
+    "id": "E3",
+    "name": "río Amazonas"
+   },
+   {
+    "id": "E4",
+    "name": "Venezuela"
+   },
+   {
+    "id": "E5",
+    "name": "Colombia"
+   },
+   {
+    "id": "E6",
+    "name": "río Congo"
+   },
+   {
+    "id": "E7",
+    "name": "cuenca del Orinoco"
+   }
+  ],
+  "Elbe": [
+   {
+    "id": "E1",
+    "name": "Elbe"
+   },
+   {
+    "id": "E2",
+    "name": "Tschechien"
+   },
+   {
+    "id": "E3",
+    "name": "Deutschland"
+   },
+   {
+    "id": "E4",
+    "name": "Nordsee"
+   },
+   {
+    "id": "E5",
+    "name": "Ostdeutschland"
+   },
+   {
+    "id": "E6",
+    "name": "Böhmen"
+   },
+   {
+    "id": "E7",
+    "name": "Mittelgebirge"
+   },
+   {
+    "id": "E8",
+    "name": "Moldau"
+   },
+   {
+    "id": "E9",
+    "name": "Mulde"
+   },
+   {
+    "id": "E10",
+    "name": "Saale"
+   },
+   {
+    "id": "E11",
+    "name": "Havel"
+   },
+   {
+    "id": "E12",
+    "name": "Spree"
+   },
+   {
+    "id": "E13",
+    "name": "Elde"
+   },
+   {
+    "id": "E14",
+    "name": "Müritz"
+   },
+   {
+    "id": "E15",
+    "name": "Einzugsgebiet der Elbe"
+   },
+   {
+    "id": "E16",
+    "name": "Norddeutsches Tiefland"
+   },
+   {
+    "id": "E17",
+    "name": "Mitteleuropa"
+   },
+   {
+    "id": "E18",
+    "name": "Donau"
+   },
+   {
+    "id": "E19",
+    "name": "Weichsel"
+   },
+   {
+    "id": "E20",
+    "name": "Rhein"
+   },
+   {
+    "id": "E21",
+    "name": "Oder"
+   },
+   {
+    "id": "E22",
+    "name": "Memel"
+   },
+   {
+    "id": "E23",
+    "name": "Liste der Flüsse in Europa"
+   }
+  ],
+  "Großglockner": [
+   {
+    "id": "E1",
+    "name": "Großglockner"
+   },
+   {
+    "id": "E2",
+    "name": "Glocknergruppe"
+   },
+   {
+    "id": "E3",
+    "name": "Hohe Tauern"
+   },
+   {
+    "id": "E4",
+    "name": "Ostalpen"
+   },
+   {
+    "id": "E5",
+    "name": "erste Erkundungen"
+   },
+   {
+    "id": "E6",
+    "name": "Erstbesteigung"
+   },
+   {
+    "id": "E7",
+    "name": "vier Teilnehmer"
+   },
+   {
+    "id": "E8",
+    "name": "Großexpedition"
+   },
+   {
+    "id": "E9",
+    "name": "Salm-Reifferscheidt-Krautheim"
+   },
+   {
+    "id": "E10",
+    "name": "Alpinismus"
+   },
+   {
+    "id": "E11",
+    "name": "die Region"
+   },
+   {
+    "id": "E12",
+    "name": "Fremdenverkehr"
+   }
+  ],
+  "Weser": [
+   {
+    "id": "E1",
+    "name": "Weser"
+   },
+   {
+    "id": "E2",
+    "name": "Mittelgebirgsschwelle"
+   },
+   {
+    "id": "E3",
+    "name": "norddeutsches Tiefland"
+   },
+   {
+    "id": "E4",
+    "name": "Hann. Münden"
+   },
+   {
+    "id": "E5",
+    "name": "Werra"
+   },
+   {
+    "id": "E6",
+    "name": "Fulda"
+   }
+  ],
+  "Garonne": [
+   {
+    "id": "E1",
+    "name": "Garonne"
+   },
+   {
+    "id": "E2",
+    "name": "Pyrénées espagnoles"
+   },
+   {
+    "id": "E3",
+    "name": "Toulouse"
+   },
+   {
+    "id": "E4",
+    "name": "Bordeaux"
+   },
+   {
+    "id": "E5",
+    "name": "océan Atlantique"
+   },
+   {
+    "id": "E6",
+    "name": "Gironde (estuaire)"
+   },
+   {
+    "id": "E7",
+    "name": "Dordogne"
+   },
+   {
+    "id": "E8",
+    "name": "Haute-Garonne"
+   },
+   {
+    "id": "E9",
+    "name": "Lot-et-Garonne"
+   },
+   {
+    "id": "E10",
+    "name": "Tarn-et-Garonne"
+   }
+  ],
+  "Lac d'Annecy": [
+   {
+    "id": "E1",
+    "name": "lac d'Annecy"
+   },
+   {
+    "id": "E2",
+    "name": "France"
+   },
+   {
+    "id": "E3",
+    "name": "Alpes du Nord"
+   },
+   {
+    "id": "E4",
+    "name": "Haute-Savoie"
+   },
+   {
+    "id": "E5",
+    "name": "Auvergne-Rhône-Alpes"
+   },
+   {
+    "id": "E6",
+    "name": "lac du Bourget"
+   },
+   {
+    "id": "E7",
+    "name": "Léman"
+   },
+   {
+    "id": "E8",
+    "name": "glaciation de Würm"
+   },
+   {
+    "id": "E9",
+    "name": "grands glaciers alpins"
+   },
+   {
+    "id": "E10",
+    "name": "sept ruisseaux et torrents"
+   },
+   {
+    "id": "E11",
+    "name": "montagnes environnantes"
+   },
+   {
+    "id": "E12",
+    "name": "source sous-lacustre"
+   },
+   {
+    "id": "E13",
+    "name": "agglomération d'Annecy"
+   },
+   {
+    "id": "E14",
+    "name": "massif des Bornes"
+   },
+   {
+    "id": "E15",
+    "name": "massif des Bauges"
+   },
+   {
+    "id": "E16",
+    "name": "pays de Faverges"
+   },
+   {
+    "id": "E17",
+    "name": "Bout-du-Lac"
+   },
+   {
+    "id": "E18",
+    "name": "Thiou"
+   },
+   {
+    "id": "E19",
+    "name": "Fier"
+   },
+   {
+    "id": "E20",
+    "name": "commune d'Annecy"
+   },
+   {
+    "id": "E21",
+    "name": "Rhône"
+   },
+   {
+    "id": "E22",
+    "name": "partie française du Léman"
+   },
+   {
+    "id": "E23",
+    "name": "période de formation (17 000 – 15 000 av. J.-C.)"
+   }
+  ],
+  "Lac du Bourget": [
+   {
+    "id": "E1",
+    "name": "lac du Bourget"
+   },
+   {
+    "id": "E2",
+    "name": "France"
+   },
+   {
+    "id": "E3",
+    "name": "Savoie"
+   },
+   {
+    "id": "E4",
+    "name": "Auvergne-Rhône-Alpes"
+   },
+   {
+    "id": "E5",
+    "name": "UNESCO"
+   },
+   {
+    "id": "E6",
+    "name": "massif du Jura"
+   },
+   {
+    "id": "E7",
+    "name": "pré-Alpes"
+   },
+   {
+    "id": "E8",
+    "name": "glaciation de Würm"
+   },
+   {
+    "id": "E9",
+    "name": "grand glacier alpin du quaternaire"
+   },
+   {
+    "id": "E10",
+    "name": "Léman"
+   },
+   {
+    "id": "E11",
+    "name": "Suisse"
+   },
+   {
+    "id": "E12",
+    "name": "la commune au sud du lac"
+   },
+   {
+    "id": "E13",
+    "name": "Alphonse de Lamartine"
+   },
+   {
+    "id": "E14",
+    "name": "Le Lac (poème)"
+   },
+   {
+    "id": "E15",
+    "name": "Julie Charles"
+   },
+   {
+    "id": "E16",
+    "name": "idée reçue"
+   },
+   {
+    "id": "E17",
+    "name": "séjour de Lamartine (octobre 1816)"
+   }
+  ],
+  "八ヶ岳": [
+   {
+    "id": "E1",
+    "name": "八ヶ岳"
+   },
+   {
+    "id": "E2",
+    "name": "諏訪湖"
+   },
+   {
+    "id": "E3",
+    "name": "長野県"
+   },
+   {
+    "id": "E4",
+    "name": "山梨県"
+   },
+   {
+    "id": "E5",
+    "name": "南八ヶ岳"
+   },
+   {
+    "id": "E6",
+    "name": "日本百名山"
+   }
+  ],
+  "利根川": [
+   {
+    "id": "E1",
+    "name": "利根川"
+   },
+   {
+    "id": "E2",
+    "name": "大水上山"
+   },
+   {
+    "id": "E3",
+    "name": "関東地方"
+   },
+   {
+    "id": "E4",
+    "name": "太平洋"
+   },
+   {
+    "id": "E5",
+    "name": "利根川水系"
+   },
+   {
+    "id": "E6",
+    "name": "日本"
+   }
+  ],
+  "十和田湖": [
+   {
+    "id": "E1",
+    "name": "十和田湖"
+   },
+   {
+    "id": "E2",
+    "name": "青森県"
+   },
+   {
+    "id": "E3",
+    "name": "十和田市"
+   },
+   {
+    "id": "E4",
+    "name": "秋田県"
+   },
+   {
+    "id": "E5",
+    "name": "鹿角郡"
+   },
+   {
+    "id": "E6",
+    "name": "小坂町"
+   },
+   {
+    "id": "E7",
+    "name": "日本"
+   },
+   {
+    "id": "E8",
+    "name": "くぼ地"
+   }
+  ],
+  "富士川": [
+   {
+    "id": "E1",
+    "name": "富士川"
+   },
+   {
+    "id": "E2",
+    "name": "長野県"
+   },
+   {
+    "id": "E3",
+    "name": "山梨県"
+   },
+   {
+    "id": "E4",
+    "name": "静岡県"
+   },
+   {
+    "id": "E5",
+    "name": "一級水系富士川"
+   },
+   {
+    "id": "E6",
+    "name": "甲斐"
+   },
+   {
+    "id": "E7",
+    "name": "駿河"
+   }
+  ],
+  "浅間山": [
+   {
+    "id": "E1",
+    "name": "浅間山"
+   },
+   {
+    "id": "E2",
+    "name": "長野県"
+   },
+   {
+    "id": "E3",
+    "name": "北佐久郡"
+   },
+   {
+    "id": "E4",
+    "name": "軽井沢町"
+   },
+   {
+    "id": "E5",
+    "name": "御代田町"
+   },
+   {
+    "id": "E6",
+    "name": "群馬県"
+   },
+   {
+    "id": "E7",
+    "name": "吾妻郡"
+   },
+   {
+    "id": "E8",
+    "name": "嬬恋村"
+   }
+  ],
+  "霞ヶ浦": [
+   {
+    "id": "E1",
+    "name": "霞ヶ浦"
+   },
+   {
+    "id": "E2",
+    "name": "茨城県"
+   },
+   {
+    "id": "E3",
+    "name": "西浦"
+   },
+   {
+    "id": "E4",
+    "name": "北浦"
+   },
+   {
+    "id": "E5",
+    "name": "常陸利根川"
+   },
+   {
+    "id": "E6",
+    "name": "北利根川"
+   },
+   {
+    "id": "E7",
+    "name": "外浪逆浦"
+   },
+   {
+    "id": "E8",
+    "name": "常陸川"
+   },
+   {
+    "id": "E9",
+    "name": "鰐川"
+   },
+   {
+    "id": "E10",
+    "name": "横利根川"
+   },
+   {
+    "id": "E11",
+    "name": "河川法"
+   },
+   {
+    "id": "E12",
+    "name": "千葉県"
+   },
+   {
+    "id": "E13",
+    "name": "香取市"
+   },
+   {
+    "id": "E14",
+    "name": "栃木県"
+   },
+   {
+    "id": "E15",
+    "name": "益子町"
+   },
+   {
+    "id": "E16",
+    "name": "流域市町村"
+   }
+  ]
+ },
+ "sentences": [
+  {
+   "sid": "h001",
+   "mentions": [
+    {
+     "text": "Elbe",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "Elv",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "Labe",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "Albis",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "der",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "Tschechien",
+     "entity": "E2",
+     "how": "name"
+    },
+    {
+     "text": "Deutschland",
+     "entity": "E3",
+     "how": "name"
+    },
+    {
+     "text": "Nordsee",
+     "entity": "E4",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "Elv"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "niederdeutsch Elv"
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "Labe"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "tschechisch Labe"
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "Albis"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "lateinisch Albis"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "river"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "ist ein mitteleuropäischer Strom"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E1",
+      "Central Europe"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "mitteleuropäischer"
+    },
+    {
+     "pred": "rises_in",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "in Tschechien entspringt"
+    },
+    {
+     "pred": "flows_through",
+     "args": [
+      "E1",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "durch Deutschland fließt"
+    },
+    {
+     "pred": "flows_into",
+     "args": [
+      "E1",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "in die Nordsee mündet"
+    }
+   ]
+  },
+  {
+   "sid": "h002",
+   "mentions": [
+    {
+     "text": "Sie",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "Ostdeutschlands",
+     "entity": "E5",
+     "how": "name"
+    },
+    {
+     "text": "Mittelgebirgen",
+     "entity": "E7",
+     "how": "new"
+    },
+    {
+     "text": "Böhmen",
+     "entity": "E6",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "drains",
+     "args": [
+      "E1",
+      "E5",
+      "large part"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "entwässert unter anderem einen großen Teil Ostdeutschlands"
+    },
+    {
+     "pred": "drains",
+     "args": [
+      "E1",
+      "E6",
+      "nearly all"
+     ],
+     "neg": false,
+     "hedged": false,
+     "approx": true,
+     "span": "nahezu das ganze von Mittelgebirgen umschlossene Böhmen"
+    },
+    {
+     "pred": "enclosed_by",
+     "args": [
+      "E6",
+      "E7"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "von Mittelgebirgen umschlossene Böhmen"
+    }
+   ]
+  },
+  {
+   "sid": "h003",
+   "mentions": [
+    {
+     "text": "ihres",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "Einzugsgebietes",
+     "entity": "E15",
+     "how": "new"
+    },
+    {
+     "text": "Moldau",
+     "entity": "E8",
+     "how": "name"
+    },
+    {
+     "text": "Mulde",
+     "entity": "E9",
+     "how": "name"
+    },
+    {
+     "text": "Saale",
+     "entity": "E10",
+     "how": "name"
+    },
+    {
+     "text": "Havel",
+     "entity": "E11",
+     "how": "name"
+    },
+    {
+     "text": "Spree",
+     "entity": "E12",
+     "how": "name"
+    },
+    {
+     "text": "Elde",
+     "entity": "E13",
+     "how": "name"
+    },
+    {
+     "text": "Müritz",
+     "entity": "E14",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "has_catchment",
+     "args": [
+      "E1",
+      "E15"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "ihres Einzugsgebietes"
+    },
+    {
+     "pred": "among_best_known_waters_of",
+     "args": [
+      "E8",
+      "E15"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "gehören Moldau"
+    },
+    {
+     "pred": "among_best_known_waters_of",
+     "args": [
+      "E9",
+      "E15"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Mulde"
+    },
+    {
+     "pred": "among_best_known_waters_of",
+     "args": [
+      "E10",
+      "E15"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Saale"
+    },
+    {
+     "pred": "among_best_known_waters_of",
+     "args": [
+      "E11",
+      "E15"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Havel"
+    },
+    {
+     "pred": "among_best_known_waters_of",
+     "args": [
+      "E12",
+      "E15"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Spree"
+    },
+    {
+     "pred": "among_best_known_waters_of",
+     "args": [
+      "E13",
+      "E15"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Elde"
+    },
+    {
+     "pred": "among_best_known_waters_of",
+     "args": [
+      "E14",
+      "E15"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Müritz"
+    },
+    {
+     "pred": "with",
+     "args": [
+      "E11",
+      "E12"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Havel mit Spree"
+    },
+    {
+     "pred": "with",
+     "args": [
+      "E13",
+      "E14"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Elde mit Müritz"
+    }
+   ]
+  },
+  {
+   "sid": "h004",
+   "mentions": [
+    {
+     "text": "die Mittelgebirge",
+     "entity": "E7",
+     "how": "description"
+    },
+    {
+     "text": "sie",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "Norddeutschen Tieflandes",
+     "entity": "E16",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "shaped_by",
+     "args": [
+      "E1",
+      "E7",
+      "upper course"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Im Oberlauf durch die Mittelgebirge geprägt"
+    },
+    {
+     "pred": "follows",
+     "args": [
+      "E1",
+      "two glacial valleys",
+      "further course"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "folgt sie im weiteren Verlauf zwei Urstromtälern"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "two glacial valleys",
+      "E16"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Urstromtälern des Norddeutschen Tieflandes"
+    }
+   ]
+  },
+  {
+   "sid": "h005",
+   "mentions": [
+    {
+     "text": "ihres",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "Einzugsgebietes",
+     "entity": "E15",
+     "how": "description"
+    },
+    {
+     "text": "Elbe",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "Mitteleuropa",
+     "entity": "E17",
+     "how": "name"
+    },
+    {
+     "text": "Liste der Flüsse in Europa",
+     "entity": "E23",
+     "how": "name"
+    },
+    {
+     "text": "Donau",
+     "entity": "E18",
+     "how": "name"
+    },
+    {
+     "text": "Weichsel",
+     "entity": "E19",
+     "how": "name"
+    },
+    {
+     "text": "Rhein",
+     "entity": "E20",
+     "how": "name"
+    },
+    {
+     "text": "Oder",
+     "entity": "E21",
+     "how": "name"
+    },
+    {
+     "text": "Memel",
+     "entity": "E22",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "has_area",
+     "args": [
+      "E15",
+      "148300 km2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Einzugsgebietes von 148.300 km²"
+    },
+    {
+     "pred": "fourth_largest",
+     "args": [
+      "E1",
+      "rivers of Central Europe by catchment area"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "liegt die Elbe für Mitteleuropa gemäß Liste der Flüsse in Europa an vierter Stelle"
+    },
+    {
+     "pred": "according_to",
+     "args": [
+      "E1",
+      "E23"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "gemäß Liste der Flüsse in Europa"
+    },
+    {
+     "pred": "smaller_than",
+     "args": [
+      "E1",
+      "E18",
+      "catchment area"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "hinter Donau"
+    },
+    {
+     "pred": "smaller_than",
+     "args": [
+      "E1",
+      "E19",
+      "catchment area"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Weichsel"
+    },
+    {
+     "pred": "smaller_than",
+     "args": [
+      "E1",
+      "E20",
+      "catchment area"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Rhein"
+    },
+    {
+     "pred": "larger_than",
+     "args": [
+      "E1",
+      "E21",
+      "catchment area"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "gefolgt von Oder"
+    },
+    {
+     "pred": "larger_than",
+     "args": [
+      "E1",
+      "E22",
+      "catchment area"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Memel"
+    }
+   ]
+  },
+  {
+   "sid": "h006",
+   "mentions": [
+    {
+     "text": "Großglockner",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "Glockner",
+     "entity": "E1",
+     "how": "alias"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "Glockner"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "häufig auch kurz Glockner genannt"
+    },
+    {
+     "pred": "has_height",
+     "args": [
+      "E1",
+      "3798 m"
+     ],
+     "neg": false,
+     "hedged": false,
+     "approx": true,
+     "span": "mit einer Höhe von rund 3798 m"
+    }
+   ]
+  },
+  {
+   "sid": "h007",
+   "mentions": [
+    {
+     "text": "Die markante Spitze",
+     "entity": "E1",
+     "how": "description"
+    },
+    {
+     "text": "Glocknergruppe",
+     "entity": "E2",
+     "how": "name"
+    },
+    {
+     "text": "einer Bergkette im mittleren Teil der Hohen Tauern",
+     "entity": "E2",
+     "how": "description"
+    },
+    {
+     "text": "Hohen Tauern",
+     "entity": "E3",
+     "how": "name"
+    },
+    {
+     "text": "Ostalpen",
+     "entity": "E4",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "peak"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Spitze"
+    },
+    {
+     "pred": "prominent",
+     "args": [
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "markante Spitze"
+    },
+    {
+     "pred": "made_of",
+     "args": [
+      "E1",
+      "greenschist facies rock"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "aus Gesteinen der Grünschieferfazies"
+    },
+    {
+     "pred": "part_of",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "gehört zur Glocknergruppe"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E2",
+      "mountain range"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "einer Bergkette"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E2",
+      "E3",
+      "middle part"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "im mittleren Teil der Hohen Tauern"
+    },
+    {
+     "pred": "among_most_important_peaks_of",
+     "args": [
+      "E1",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "gilt als einer der bedeutendsten Gipfel der Ostalpen"
+    }
+   ]
+  },
+  {
+   "sid": "h008",
+   "mentions": [
+    {
+     "text": "ersten Erkundungen",
+     "entity": "E5",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "first",
+     "args": [
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "ersten Erkundungen"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "E5",
+      "late 18th century"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Erkundungen Ende des 18."
+    }
+   ]
+  },
+  {
+   "sid": "h009",
+   "mentions": [
+    {
+     "text": "Erstbesteigung",
+     "entity": "E6",
+     "how": "new"
+    },
+    {
+     "text": "vier Teilnehmer",
+     "entity": "E7",
+     "how": "new"
+    },
+    {
+     "text": "Großexpedition",
+     "entity": "E8",
+     "how": "new"
+    },
+    {
+     "text": "Salm-Reifferscheidt-Krautheim",
+     "entity": "E9",
+     "how": "name"
+    },
+    {
+     "text": "Großglockner",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "Alpinismus",
+     "entity": "E10",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E6",
+      "first ascent"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Erstbesteigung"
+    },
+    {
+     "pred": "by",
+     "args": [
+      "E6",
+      "E7"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Erstbesteigung durch vier Teilnehmer"
+    },
+    {
+     "pred": "count",
+     "args": [
+      "E7",
+      "4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "vier Teilnehmer"
+    },
+    {
+     "pred": "member_of",
+     "args": [
+      "E7",
+      "E8"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Teilnehmer einer Großexpedition"
+    },
+    {
+     "pred": "led_by",
+     "args": [
+      "E8",
+      "E9"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "unter der Leitung von Fürstbischof Salm-Reifferscheidt-Krautheim"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E9",
+      "prince-bishop"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Fürstbischof"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "E6",
+      "1800"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "im Jahr 1800"
+    },
+    {
+     "pred": "important_role_in",
+     "args": [
+      "E1",
+      "development of E10"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "spielte der Großglockner eine wichtige Rolle in der Entwicklung des Alpinismus"
+    },
+    {
+     "pred": "role_since",
+     "args": [
+      "E1",
+      "E6"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Jahrhunderts und der Erstbesteigung"
+    }
+   ]
+  },
+  {
+   "sid": "h010",
+   "mentions": [
+    {
+     "text": "er",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "Fremdenverkehr",
+     "entity": "E12",
+     "how": "new"
+    },
+    {
+     "text": "der Region",
+     "entity": "E11",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "important_for",
+     "args": [
+      "E1",
+      "E12"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "von großer Bedeutung für den Fremdenverkehr"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E12",
+      "E11"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Fremdenverkehr in der Region"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "important_for(E1,E12)",
+      "to this day"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Bis heute"
+    },
+    {
+     "pred": "has_ascents",
+     "args": [
+      "E1",
+      "more than 5000 per year"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "mehr als 5000 Gipfelbesteigungen pro Jahr"
+    },
+    {
+     "pred": "popular_destination_of",
+     "args": [
+      "E1",
+      "mountaineers"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "ein beliebtes Ziel der Bergsteiger"
+    }
+   ]
+  },
+  {
+   "sid": "h011",
+   "mentions": [
+    {
+     "text": "Weser",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "Werser",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "Wersern",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "Bisurgis",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "Visurgis",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "Wisera",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "Wisura",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "Wißuhr",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "der",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "Mittelgebirgsschwelle",
+     "entity": "E2",
+     "how": "name"
+    },
+    {
+     "text": "norddeutsche Tiefland",
+     "entity": "E3",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "Werser"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "niederdeutsch Werser"
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "Wersern"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "oder Wersern"
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "Bisurgis"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "lateinisch Bisurgis"
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "Visurgis"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Visurgis"
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "Wisera"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "althochdeutsch Wisera"
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "Wisura"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Wisura"
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "Wißuhr"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "weserfriesisch Wißuhr"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "river"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "ist ein Strom"
+    },
+    {
+     "pred": "flows_through",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "die Mittelgebirgsschwelle"
+    },
+    {
+     "pred": "flows_through",
+     "args": [
+      "E1",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "das norddeutsche Tiefland durchfließt"
+    },
+    {
+     "pred": "direction",
+     "args": [
+      "E1",
+      "north"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "in nördlicher Richtung"
+    }
+   ]
+  },
+  {
+   "sid": "h012",
+   "mentions": [
+    {
+     "text": "Seinen",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "er",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "Hann.",
+     "entity": "E4",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "bears_name_from",
+     "args": [
+      "E1",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Seinen Namen trägt er ab Hann."
+    }
+   ]
+  },
+  {
+   "sid": "h013",
+   "mentions": [
+    {
+     "text": "Münden",
+     "entity": "E4",
+     "how": "name"
+    },
+    {
+     "text": "wo",
+     "entity": "E4",
+     "how": "pronoun"
+    },
+    {
+     "text": "seine",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "Werra",
+     "entity": "E5",
+     "how": "name"
+    },
+    {
+     "text": "Fulda",
+     "entity": "E6",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "has_source_rivers",
+     "args": [
+      "E1",
+      "2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "seine beiden großen Quellflüsse"
+    },
+    {
+     "pred": "source_river_of",
+     "args": [
+      "E5",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "seine beiden großen Quellflüsse, Werra"
+    },
+    {
+     "pred": "source_river_of",
+     "args": [
+      "E6",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Fulda"
+    },
+    {
+     "pred": "large",
+     "args": [
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "großen Quellflüsse"
+    },
+    {
+     "pred": "large",
+     "args": [
+      "E6"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "großen Quellflüsse"
+    },
+    {
+     "pred": "join_at",
+     "args": [
+      "E5",
+      "E6",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "wo sich seine beiden großen Quellflüsse, Werra und Fulda, vereinigen"
+    }
+   ]
+  },
+  {
+   "sid": "h014",
+   "mentions": [
+    {
+     "text": "Weser",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "Werra",
+     "entity": "E5",
+     "how": "name"
+    },
+    {
+     "text": "Werra",
+     "entity": "E5",
+     "how": "name"
+    },
+    {
+     "text": "Weser",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "Fulda",
+     "entity": "E6",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "names_share_origin",
+     "args": [
+      "E1",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Die gemeinsame Herkunft der Flussnamen Weser und Werra"
+    },
+    {
+     "pred": "upper_course_of",
+     "args": [
+      "E5",
+      "E1",
+      "formerly"
+     ],
+     "neg": false,
+     "hedged": true,
+     "span": "die heutige Werra einst als Oberlauf der Weser galt"
+    },
+    {
+     "pred": "larger_than",
+     "args": [
+      "E6",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "die größere"
+    },
+    {
+     "pred": "shorter_than",
+     "args": [
+      "E6",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "aber kürzere Fulda"
+    },
+    {
+     "pred": "tributary_of",
+     "args": [
+      "E6",
+      "E1",
+      "formerly"
+     ],
+     "neg": false,
+     "hedged": true,
+     "span": "die größere, aber kürzere Fulda dagegen nur als Nebenfluss"
+    }
+   ]
+  },
+  {
+   "sid": "h015",
+   "mentions": [
+    {
+     "text": "Weser",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "Werra",
+     "entity": "E5",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "names_separate",
+     "args": [
+      "E1",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Die Trennung der Namen Weser und Werra"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "names_separate(E1,E5)",
+      "Early New High German"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "entstand erst im Frühneuhochdeutschen"
+    }
+   ]
+  },
+  {
+   "sid": "h016",
+   "mentions": [
+    {
+     "text": "Lake Victoria",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "African Great Lakes",
+     "entity": "E2",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "member_of",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "is one of the African Great Lakes"
+    }
+   ]
+  },
+  {
+   "sid": "h017",
+   "mentions": [
+    {
+     "text": "Lake Victoria",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "Africa",
+     "entity": "E3",
+     "how": "name"
+    },
+    {
+     "text": "Lake Superior",
+     "entity": "E4",
+     "how": "name"
+    },
+    {
+     "text": "North America",
+     "entity": "E5",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "has_area",
+     "args": [
+      "E1",
+      "59947 km2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "approx": true,
+     "span": "a surface area of approximately 59,947 km2"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "lake"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Africa's largest lake"
+    },
+    {
+     "pred": "largest",
+     "args": [
+      "E1",
+      "lakes of Africa by area"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Africa's largest lake by area"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "tropical lake"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "tropical lake"
+    },
+    {
+     "pred": "largest",
+     "args": [
+      "E1",
+      "tropical lakes of the world"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the world's largest tropical lake"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "fresh water lake"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "fresh water lake"
+    },
+    {
+     "pred": "second_largest",
+     "args": [
+      "E1",
+      "fresh water lakes of the world by surface area"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the world's second-largest fresh water lake by surface area"
+    },
+    {
+     "pred": "larger_than",
+     "args": [
+      "E4",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "second-largest fresh water lake by surface area after Lake Superior"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E4",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Lake Superior in North America"
+    }
+   ]
+  },
+  {
+   "sid": "h018",
+   "mentions": [
+    {
+     "text": "Lake Victoria",
+     "entity": "E1",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "continental lake"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "continental lake"
+    },
+    {
+     "pred": "ninth_largest",
+     "args": [
+      "E1",
+      "continental lakes of the world by volume"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "In terms of volume, Lake Victoria is the world's ninth-largest continental lake"
+    },
+    {
+     "pred": "has_volume",
+     "args": [
+      "E1",
+      "2424 km3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "approx": true,
+     "span": "containing about 2,424 km3"
+    }
+   ]
+  },
+  {
+   "sid": "h019",
+   "mentions": [
+    {
+     "text": "Lake Victoria",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "a shallow depression",
+     "entity": "E14",
+     "how": "new"
+    },
+    {
+     "text": "Africa",
+     "entity": "E3",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "occupy",
+     "args": [
+      "E1",
+      "E14"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "occupies a shallow depression"
+    },
+    {
+     "pred": "shallow",
+     "args": [
+      "E14"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "shallow depression"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E14",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "depression in Africa"
+    }
+   ]
+  },
+  {
+   "sid": "h020",
+   "mentions": [
+    {
+     "text": "The lake",
+     "entity": "E1",
+     "how": "description"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "has_average_depth",
+     "args": [
+      "E1",
+      "40 m"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "an average depth of 40 m"
+    },
+    {
+     "pred": "has_maximum_depth",
+     "args": [
+      "E1",
+      "80–81 m"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "a maximum depth of 80–81 m"
+    }
+   ]
+  },
+  {
+   "sid": "h021",
+   "mentions": [
+    {
+     "text": "Its",
+     "entity": "E1",
+     "how": "pronoun"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "has_catchment_area",
+     "args": [
+      "E1",
+      "169858 km2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Its catchment area covers 169,858 km2"
+    }
+   ]
+  },
+  {
+   "sid": "h022",
+   "mentions": [
+    {
+     "text": "The lake",
+     "entity": "E1",
+     "how": "description"
+    },
+    {
+     "text": "islands",
+     "entity": "E15",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "has_shoreline_length",
+     "args": [
+      "E1",
+      "7142 km"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "The lake has a shoreline of 7,142 km"
+    },
+    {
+     "pred": "measured_at_scale",
+     "args": [
+      "E1",
+      "1:25000"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "when digitized at the 1:25,000 level"
+    },
+    {
+     "pred": "share_of_shoreline",
+     "args": [
+      "E15",
+      "3.7 percent"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "islands constituting 3.7% of this length"
+    }
+   ]
+  },
+  {
+   "sid": "h023",
+   "mentions": [
+    {
+     "text": "The lake's",
+     "entity": "E1",
+     "how": "description"
+    },
+    {
+     "text": "Tanzania",
+     "entity": "E6",
+     "how": "name"
+    },
+    {
+     "text": "Uganda",
+     "entity": "E7",
+     "how": "name"
+    },
+    {
+     "text": "Kenya",
+     "entity": "E8",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "divided_among",
+     "args": [
+      "E1",
+      "3 countries"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "The lake's area is divided among three countries"
+    },
+    {
+     "pred": "occupies_share",
+     "args": [
+      "E6",
+      "E1",
+      "49 percent"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Tanzania occupies 49%"
+    },
+    {
+     "pred": "occupies_area",
+     "args": [
+      "E6",
+      "E1",
+      "33700 km2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "33,700 km2"
+    },
+    {
+     "pred": "occupies_share",
+     "args": [
+      "E7",
+      "E1",
+      "45 percent"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Uganda 45%"
+    },
+    {
+     "pred": "occupies_area",
+     "args": [
+      "E7",
+      "E1",
+      "31000 km2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "31,000 km2"
+    },
+    {
+     "pred": "occupies_share",
+     "args": [
+      "E8",
+      "E1",
+      "6 percent"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Kenya 6%"
+    },
+    {
+     "pred": "occupies_area",
+     "args": [
+      "E8",
+      "E1",
+      "4100 km2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "4,100 km2"
+    }
+   ]
+  },
+  {
+   "sid": "h024",
+   "mentions": [
+    {
+     "text": "The lake",
+     "entity": "E1",
+     "how": "description"
+    },
+    {
+     "text": "many species of fish",
+     "entity": "E9",
+     "how": "new"
+    },
+    {
+     "text": "which",
+     "entity": "E9",
+     "how": "pronoun"
+    },
+    {
+     "text": "cichlids",
+     "entity": "E10",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "home_to",
+     "args": [
+      "E1",
+      "E9"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "The lake is home to many species of fish"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E9",
+      "fish"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "species of fish"
+    },
+    {
+     "pred": "live_elsewhere",
+     "args": [
+      "E9"
+     ],
+     "neg": true,
+     "hedged": false,
+     "span": "live nowhere else"
+    },
+    {
+     "pred": "includes",
+     "args": [
+      "E9",
+      "E10"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "especially cichlids"
+    }
+   ]
+  },
+  {
+   "sid": "h025",
+   "mentions": [
+    {
+     "text": "Invasive fish",
+     "entity": "E11",
+     "how": "new"
+    },
+    {
+     "text": "the Nile perch",
+     "entity": "E12",
+     "how": "name"
+    },
+    {
+     "text": "many endemic species",
+     "entity": "E9",
+     "how": "description"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "invasive",
+     "args": [
+      "E11"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Invasive fish"
+    },
+    {
+     "pred": "includes",
+     "args": [
+      "E11",
+      "E12"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Invasive fish, such as the Nile perch"
+    },
+    {
+     "pred": "endemic",
+     "args": [
+      "E9"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "endemic species"
+    },
+    {
+     "pred": "drive_to_extinction",
+     "args": [
+      "E11",
+      "E9"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "have driven many endemic species to extinction"
+    }
+   ]
+  },
+  {
+   "sid": "h026",
+   "mentions": [
+    {
+     "text": "The Mississippi River",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "the largest drainage basin in the United States",
+     "entity": "E2",
+     "how": "new"
+    },
+    {
+     "text": "United States",
+     "entity": "E3",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "river"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the primary river"
+    },
+    {
+     "pred": "primary_river_of",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the primary river of the largest drainage basin"
+    },
+    {
+     "pred": "largest",
+     "args": [
+      "E2",
+      "drainage basins in the United States"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the largest drainage basin in the United States"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E2",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "drainage basin in the United States"
+    }
+   ]
+  },
+  {
+   "sid": "h027",
+   "mentions": [
+    {
+     "text": "It",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "U.S.",
+     "entity": "E3",
+     "how": "alias"
+    },
+    {
+     "text": "the Missouri",
+     "entity": "E4",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "second_longest",
+     "args": [
+      "E1",
+      "rivers in the U.S."
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the second-longest river in the U.S."
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E1",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "river in the U.S."
+    },
+    {
+     "pred": "longer_than",
+     "args": [
+      "E4",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "second-longest river in the U.S. after the Missouri"
+    }
+   ]
+  },
+  {
+   "sid": "h028",
+   "mentions": [
+    {
+     "text": "its",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "Lake Itasca",
+     "entity": "E5",
+     "how": "name"
+    },
+    {
+     "text": "Minnesota",
+     "entity": "E6",
+     "how": "name"
+    },
+    {
+     "text": "it",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "Mississippi River Delta",
+     "entity": "E7",
+     "how": "name"
+    },
+    {
+     "text": "Gulf of Mexico",
+     "entity": "E8",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "has_traditional_source",
+     "args": [
+      "E1",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "its traditional source of Lake Itasca"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E5",
+      "E6"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Lake Itasca in northern Minnesota"
+    },
+    {
+     "pred": "in_part",
+     "args": [
+      "E5",
+      "E6",
+      "north"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "northern Minnesota"
+    },
+    {
+     "pred": "flows_direction",
+     "args": [
+      "E1",
+      "south"
+     ],
+     "neg": false,
+     "hedged": false,
+     "approx": true,
+     "span": "it flows generally south"
+    },
+    {
+     "pred": "has_length",
+     "args": [
+      "E1",
+      "2340 mi"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "flows generally south for 2,340 mi"
+    },
+    {
+     "pred": "flows_into",
+     "args": [
+      "E1",
+      "E7"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "to the Mississippi River Delta"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E7",
+      "E8"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Mississippi River Delta in the Gulf of Mexico"
+    }
+   ]
+  },
+  {
+   "sid": "h029",
+   "mentions": [
+    {
+     "text": "its",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "many tributaries",
+     "entity": "E9",
+     "how": "new"
+    },
+    {
+     "text": "Mississippi",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "the Mississippi's watershed",
+     "entity": "E2",
+     "how": "description"
+    },
+    {
+     "text": "U.S.",
+     "entity": "E3",
+     "how": "alias"
+    },
+    {
+     "text": "Canadian",
+     "entity": "E21",
+     "how": "name"
+    },
+    {
+     "text": "Rocky",
+     "entity": "E10",
+     "how": "name"
+    },
+    {
+     "text": "Appalachian mountains",
+     "entity": "E11",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "has_tributary",
+     "args": [
+      "E1",
+      "E9"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "its many tributaries"
+    },
+    {
+     "pred": "watershed_of",
+     "args": [
+      "E2",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the Mississippi's watershed"
+    },
+    {
+     "pred": "drains",
+     "args": [
+      "E2",
+      "32 U.S. states (all or parts)"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "drains all or parts of 32 U.S. states"
+    },
+    {
+     "pred": "drains",
+     "args": [
+      "E2",
+      "2 Canadian provinces (all or parts)"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "two Canadian provinces"
+    },
+    {
+     "pred": "located_between",
+     "args": [
+      "E2",
+      "E10",
+      "E11"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "between the Rocky and Appalachian mountains"
+    }
+   ]
+  },
+  {
+   "sid": "h030",
+   "mentions": [
+    {
+     "text": "The river",
+     "entity": "E1",
+     "how": "description"
+    },
+    {
+     "text": "Minnesota",
+     "entity": "E6",
+     "how": "name"
+    },
+    {
+     "text": "Wisconsin",
+     "entity": "E12",
+     "how": "name"
+    },
+    {
+     "text": "Iowa",
+     "entity": "E13",
+     "how": "name"
+    },
+    {
+     "text": "Illinois",
+     "entity": "E14",
+     "how": "name"
+    },
+    {
+     "text": "Missouri",
+     "entity": "E15",
+     "how": "name"
+    },
+    {
+     "text": "Kentucky",
+     "entity": "E16",
+     "how": "name"
+    },
+    {
+     "text": "Tennessee",
+     "entity": "E17",
+     "how": "name"
+    },
+    {
+     "text": "Arkansas",
+     "entity": "E18",
+     "how": "name"
+    },
+    {
+     "text": "Mississippi",
+     "entity": "E19",
+     "how": "name"
+    },
+    {
+     "text": "Louisiana",
+     "entity": "E20",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "borders_or_passes_through",
+     "args": [
+      "E1",
+      "E6"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "borders or passes through the states of Minnesota"
+    },
+    {
+     "pred": "borders_or_passes_through",
+     "args": [
+      "E1",
+      "E12"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Wisconsin"
+    },
+    {
+     "pred": "borders_or_passes_through",
+     "args": [
+      "E1",
+      "E13"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Iowa"
+    },
+    {
+     "pred": "borders_or_passes_through",
+     "args": [
+      "E1",
+      "E14"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Illinois"
+    },
+    {
+     "pred": "borders_or_passes_through",
+     "args": [
+      "E1",
+      "E15"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Missouri"
+    },
+    {
+     "pred": "borders_or_passes_through",
+     "args": [
+      "E1",
+      "E16"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Kentucky"
+    },
+    {
+     "pred": "borders_or_passes_through",
+     "args": [
+      "E1",
+      "E17"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Tennessee"
+    },
+    {
+     "pred": "borders_or_passes_through",
+     "args": [
+      "E1",
+      "E18"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Arkansas"
+    },
+    {
+     "pred": "borders_or_passes_through",
+     "args": [
+      "E1",
+      "E19"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Mississippi, and"
+    },
+    {
+     "pred": "borders_or_passes_through",
+     "args": [
+      "E1",
+      "E20"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Louisiana"
+    }
+   ]
+  },
+  {
+   "sid": "h031",
+   "mentions": [
+    {
+     "text": "The main stem",
+     "entity": "E1",
+     "how": "description"
+    },
+    {
+     "text": "United States",
+     "entity": "E3",
+     "how": "name"
+    },
+    {
+     "text": "the total drainage basin",
+     "entity": "E2",
+     "how": "description"
+    },
+    {
+     "text": "which",
+     "entity": "E2",
+     "how": "pronoun"
+    },
+    {
+     "text": "Canada",
+     "entity": "E21",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "main_stem_within",
+     "args": [
+      "E1",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "The main stem is entirely within the United States"
+    },
+    {
+     "pred": "has_area",
+     "args": [
+      "E2",
+      "1151000 mi2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the total drainage basin is 1,151,000 mi2"
+    },
+    {
+     "pred": "share_in",
+     "args": [
+      "E2",
+      "E21",
+      "1 percent"
+     ],
+     "neg": false,
+     "hedged": false,
+     "approx": true,
+     "span": "only about one percent is in Canada"
+    }
+   ]
+  },
+  {
+   "sid": "h032",
+   "mentions": [
+    {
+     "text": "The Mississippi",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "North America",
+     "entity": "E22",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "river"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "tenth-largest river"
+    },
+    {
+     "pred": "tenth_largest",
+     "args": [
+      "E1",
+      "rivers of the world by discharge flow"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the world's tenth-largest river by discharge flow"
+    },
+    {
+     "pred": "largest",
+     "args": [
+      "E1",
+      "rivers in North America by discharge flow"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the largest in North America"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E1",
+      "E22"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "in North America"
+    }
+   ]
+  },
+  {
+   "sid": "h033",
+   "mentions": [
+    {
+     "text": "Native Americans",
+     "entity": "E23",
+     "how": "name"
+    },
+    {
+     "text": "the Mississippi River",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "its",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "its tributaries",
+     "entity": "E9",
+     "how": "description"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "lived_along",
+     "args": [
+      "E23",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Native Americans have lived along the Mississippi River"
+    },
+    {
+     "pred": "lived_along",
+     "args": [
+      "E23",
+      "E9"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "its tributaries"
+    },
+    {
+     "pred": "duration",
+     "args": [
+      "E23",
+      "thousands of years"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "for thousands of years"
+    }
+   ]
+  },
+  {
+   "sid": "h034",
+   "mentions": [
+    {
+     "text": "Many",
+     "entity": "E23",
+     "how": "pronoun"
+    },
+    {
+     "text": "some",
+     "entity": "E23",
+     "how": "pronoun"
+    },
+    {
+     "text": "the Mound Builders",
+     "entity": "E24",
+     "how": "name"
+    },
+    {
+     "text": "prolific agricultural and urban civilizations",
+     "entity": "E30",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E23",
+      "hunter-gatherers"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Many were hunter-gatherers"
+    },
+    {
+     "pred": "includes",
+     "args": [
+      "E23",
+      "E24"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "some, such as the Mound Builders"
+    },
+    {
+     "pred": "formed",
+     "args": [
+      "E24",
+      "E30"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "formed prolific agricultural and urban civilizations"
+    },
+    {
+     "pred": "prolific",
+     "args": [
+      "E30"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "prolific agricultural"
+    },
+    {
+     "pred": "agricultural",
+     "args": [
+      "E30"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "agricultural"
+    },
+    {
+     "pred": "urban",
+     "args": [
+      "E30"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "urban civilizations"
+    },
+    {
+     "pred": "practiced",
+     "args": [
+      "E23",
+      "aquaculture"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "some practiced aquaculture"
+    }
+   ]
+  },
+  {
+   "sid": "h035",
+   "mentions": [
+    {
+     "text": "Europeans",
+     "entity": "E25",
+     "how": "name"
+    },
+    {
+     "text": "explorers",
+     "entity": "E26",
+     "how": "new"
+    },
+    {
+     "text": "settlers",
+     "entity": "E27",
+     "how": "new"
+    },
+    {
+     "text": "the basin",
+     "entity": "E2",
+     "how": "description"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "arrived_in",
+     "args": [
+      "E25",
+      "16th century"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "The arrival of Europeans in the 16th century"
+    },
+    {
+     "pred": "changed",
+     "args": [
+      "E25",
+      "native way of life"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "changed the native way of life"
+    },
+    {
+     "pred": "ventured_into",
+     "args": [
+      "E26",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "first explorers, then settlers, ventured into the basin"
+    },
+    {
+     "pred": "ventured_into",
+     "args": [
+      "E27",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "settlers, ventured into the basin"
+    },
+    {
+     "pred": "before",
+     "args": [
+      "E26",
+      "E27"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "first explorers, then settlers"
+    },
+    {
+     "pred": "in_increasing_numbers",
+     "args": [
+      "E27"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "in increasing numbers"
+    }
+   ]
+  },
+  {
+   "sid": "h036",
+   "mentions": [
+    {
+     "text": "The river",
+     "entity": "E1",
+     "how": "description"
+    },
+    {
+     "text": "New Spain",
+     "entity": "E28",
+     "how": "name"
+    },
+    {
+     "text": "New France",
+     "entity": "E29",
+     "how": "name"
+    },
+    {
+     "text": "the early United States",
+     "entity": "E3",
+     "how": "description"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "served_as",
+     "args": [
+      "E1",
+      "barrier"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "The river served sometimes as a barrier"
+    },
+    {
+     "pred": "forms_border_for",
+     "args": [
+      "E1",
+      "E28"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "forming borders for New Spain"
+    },
+    {
+     "pred": "forms_border_for",
+     "args": [
+      "E1",
+      "E29"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "New France"
+    },
+    {
+     "pred": "forms_border_for",
+     "args": [
+      "E1",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the early United States"
+    },
+    {
+     "pred": "served_as",
+     "args": [
+      "E1",
+      "transportation artery"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "throughout as a vital transportation artery"
+    },
+    {
+     "pred": "vital",
+     "args": [
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "vital transportation artery"
+    },
+    {
+     "pred": "served_as",
+     "args": [
+      "E1",
+      "communications link"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "communications link"
+    }
+   ]
+  },
+  {
+   "sid": "h037",
+   "mentions": [
+    {
+     "text": "Currency amounts",
+     "entity": "E32",
+     "how": "new"
+    },
+    {
+     "text": "this report",
+     "entity": "E31",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "in_unit",
+     "args": [
+      "E32",
+      "thousands"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Currency amounts throughout this report are in thousands"
+    },
+    {
+     "pred": "appear_in",
+     "args": [
+      "E32",
+      "E31"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "throughout this report"
+    },
+    {
+     "pred": "in_unit",
+     "args": [
+      "per-share amounts",
+      "thousands"
+     ],
+     "neg": true,
+     "hedged": false,
+     "span": "except per-share amounts"
+    },
+    {
+     "pred": "in_unit",
+     "args": [
+      "amounts where noted",
+      "thousands"
+     ],
+     "neg": true,
+     "hedged": false,
+     "span": "and where noted"
+    }
+   ]
+  },
+  {
+   "sid": "h038",
+   "mentions": [
+    {
+     "text": "Utah Medical Products, Inc.",
+     "entity": "E1",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "Utah Medical Products, Inc."
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Utah Medical Products, Inc."
+    }
+   ]
+  },
+  {
+   "sid": "h039",
+   "mentions": [
+    {
+     "text": "UTMD",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "the Company",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "high quality cost-effective medical devices",
+     "entity": "E2",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "UTMD"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "“UTMD”"
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "the Company"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "“the Company”"
+    },
+    {
+     "pred": "produce",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "is in the business of producing high quality cost-effective medical devices"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E2",
+      "medical device"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "medical devices"
+    },
+    {
+     "pred": "high_quality",
+     "args": [
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "high quality"
+    },
+    {
+     "pred": "cost_effective",
+     "args": [
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "cost-effective"
+    },
+    {
+     "pred": "differentiated_by",
+     "args": [
+      "E2",
+      "safety"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "predominantly differentiated by safety"
+    },
+    {
+     "pred": "differentiated_by",
+     "args": [
+      "E2",
+      "improved patient outcomes"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "improved patient outcomes"
+    }
+   ]
+  },
+  {
+   "sid": "h040",
+   "mentions": [
+    {
+     "text": "this report",
+     "entity": "E31",
+     "how": "description"
+    },
+    {
+     "text": "UTMD",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "the Company",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "Utah Medical Products, Inc.",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "its",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "all of its corporate subsidiaries",
+     "entity": "E3",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "UTMD"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "“UTMD” or “the Company” refers jointly to Utah Medical Products, Inc."
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "the Company"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "“the Company” refers jointly to Utah Medical Products, Inc."
+    },
+    {
+     "pred": "naming_applies_in",
+     "args": [
+      "E1",
+      "E31"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Throughout this report"
+    },
+    {
+     "pred": "includes",
+     "args": [
+      "E1",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "refers jointly to Utah Medical Products, Inc. and all of its corporate subsidiaries"
+    },
+    {
+     "pred": "subsidiary_of",
+     "args": [
+      "E3",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "its corporate subsidiaries"
+    }
+   ]
+  },
+  {
+   "sid": "h041",
+   "mentions": [
+    {
+     "text": "clinicians",
+     "entity": "E4",
+     "how": "new"
+    },
+    {
+     "text": "patients",
+     "entity": "E5",
+     "how": "new"
+    },
+    {
+     "text": "UTMD",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "the Company",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "other companies",
+     "entity": "E6",
+     "how": "new"
+    },
+    {
+     "text": "the Company",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "the Company's devices",
+     "entity": "E2",
+     "how": "description"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "success_depends_on",
+     "args": [
+      "E1",
+      "recognizing and responding to needs of clinicians and patients"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Success depends on 1) recognizing and responding to needs of clinicians and patients"
+    },
+    {
+     "pred": "success_depends_on",
+     "args": [
+      "E1",
+      "rapidly designing or acquiring economical solutions that gain premarketing regulatory concurrence"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "rapidly designing or acquiring economical solutions that gain premarketing regulatory concurrence"
+    },
+    {
+     "pred": "success_depends_on",
+     "args": [
+      "E1",
+      "reliably producing devices that meet clinical needs"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "reliably producing devices that meet those clinical needs"
+    },
+    {
+     "pred": "success_depends_on",
+     "args": [
+      "E1",
+      "selling through own direct channels or through relationships with other companies"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "selling through a)UTMD's own direct channels"
+    },
+    {
+     "pred": "has_direct_channels",
+     "args": [
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "UTMD's own direct channels"
+    },
+    {
+     "pred": "enjoys_established_reputation",
+     "args": [
+      "E1",
+      "markets of its direct channels"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "markets where the Company enjoys an established reputation"
+    },
+    {
+     "pred": "has",
+     "args": [
+      "E1",
+      "critical mass of sales and support resources"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "has a critical mass of sales and support resources"
+    },
+    {
+     "pred": "sells_through",
+     "args": [
+      "E1",
+      "E6"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "relationships with other companies"
+    },
+    {
+     "pred": "has_resources_to_distribute_and_support",
+     "args": [
+      "E6",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "have the resources to effectively distribute and support the Company's devices"
+    }
+   ]
+  },
+  {
+   "sid": "h042",
+   "mentions": [
+    {
+     "text": "UTMD",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "its",
+     "entity": "E1",
+     "how": "pronoun"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "provide",
+     "args": [
+      "E1",
+      "reliable solutions"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "UTMD's success in providing reliable solutions"
+    },
+    {
+     "pred": "success_comes_from",
+     "args": [
+      "E1",
+      "ability to integrate engineering and technical disciplines"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "comes from its proven ability to integrate a number of engineering and technical disciplines"
+    },
+    {
+     "pred": "proven_ability",
+     "args": [
+      "E1",
+      "integrate engineering and technical disciplines"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "its proven ability"
+    },
+    {
+     "pred": "integrates_discipline",
+     "args": [
+      "E1",
+      "electronics"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "electronics"
+    },
+    {
+     "pred": "integrates_discipline",
+     "args": [
+      "E1",
+      "software"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "software"
+    },
+    {
+     "pred": "integrates_discipline",
+     "args": [
+      "E1",
+      "mechanical assembly and packaging"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "mechanical assembly and packaging"
+    },
+    {
+     "pred": "integrates_discipline",
+     "args": [
+      "E1",
+      "instrumentation"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "instrumentation"
+    },
+    {
+     "pred": "integrates_discipline",
+     "args": [
+      "E1",
+      "plastics processing"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "plastics processing"
+    },
+    {
+     "pred": "integrates_discipline",
+     "args": [
+      "E1",
+      "materials"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "and materials"
+    }
+   ]
+  },
+  {
+   "sid": "h043",
+   "mentions": [
+    {
+     "text": "The resulting differentiated devices",
+     "entity": "E2",
+     "how": "description"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "differentiated",
+     "args": [
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "differentiated devices"
+    },
+    {
+     "pred": "improve",
+     "args": [
+      "E2",
+      "patient safety"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "represent significant incremental improvements in patient safety"
+    },
+    {
+     "pred": "improve",
+     "args": [
+      "E2",
+      "clinical outcomes"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "clinical outcomes"
+    },
+    {
+     "pred": "improve",
+     "args": [
+      "E2",
+      "total cost"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "and/or total cost"
+    },
+    {
+     "pred": "improvement_size",
+     "args": [
+      "E2",
+      "significant incremental"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "significant incremental improvements"
+    },
+    {
+     "pred": "compared_to",
+     "args": [
+      "E2",
+      "preexisting clinical approaches"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "over preexisting clinical approaches"
+    }
+   ]
+  },
+  {
+   "sid": "h044",
+   "mentions": [
+    {
+     "text": "UTMD",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "labor-saving devices",
+     "entity": "E35",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "experience_of",
+     "args": [
+      "E1",
+      "cost-effectiveness improvement leads to healthcare improvement"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "UTMD's experience is that"
+    },
+    {
+     "pred": "labor_saving",
+     "args": [
+      "E35"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "labor-saving devices"
+    },
+    {
+     "pred": "leads_to",
+     "args": [
+      "E35",
+      "improvement in cost-effectiveness of clinical procedures",
+      "improvement in overall healthcare"
+     ],
+     "neg": false,
+     "hedged": true,
+     "span": "the improvement in cost-effectiveness of clinical procedures also leads to an improvement in overall healthcare"
+    },
+    {
+     "pred": "includes",
+     "args": [
+      "improvement in overall healthcare",
+      "lower risk of complications"
+     ],
+     "neg": false,
+     "hedged": true,
+     "span": "including lower risk of complications"
+    }
+   ]
+  },
+  {
+   "sid": "h045",
+   "mentions": [
+    {
+     "text": "UTMD",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "a broad range of medical devices",
+     "entity": "E2",
+     "how": "description"
+    },
+    {
+     "text": "the neonatal intensive care unit",
+     "entity": "E9",
+     "how": "new"
+    },
+    {
+     "text": "NICU",
+     "entity": "E9",
+     "how": "alias"
+    },
+    {
+     "text": "the labor and delivery (L&D) department",
+     "entity": "E10",
+     "how": "new"
+    },
+    {
+     "text": "L&D",
+     "entity": "E10",
+     "how": "alias"
+    },
+    {
+     "text": "the women’s health center",
+     "entity": "E11",
+     "how": "new"
+    },
+    {
+     "text": "hospitals",
+     "entity": "E12",
+     "how": "new"
+    },
+    {
+     "text": "medical devices sold to outpatient clinics",
+     "entity": "E2",
+     "how": "description"
+    },
+    {
+     "text": "outpatient clinics",
+     "entity": "E13",
+     "how": "new"
+    },
+    {
+     "text": "physician's offices",
+     "entity": "E14",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "market",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "UTMD markets a broad range of medical devices"
+    },
+    {
+     "pred": "used_in",
+     "args": [
+      "E2",
+      "critical care areas"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "medical devices used in critical care areas"
+    },
+    {
+     "pred": "used_in",
+     "args": [
+      "E2",
+      "E9"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "especially the neonatal intensive care unit"
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E9",
+      "NICU"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "(NICU)"
+    },
+    {
+     "pred": "used_in",
+     "args": [
+      "E2",
+      "E10"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the labor and delivery (L&D) department"
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E10",
+      "L&D"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "(L&D)"
+    },
+    {
+     "pred": "used_in",
+     "args": [
+      "E2",
+      "E11"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the women’s health center"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E9",
+      "E12"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "in hospitals"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E10",
+      "E12"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "in hospitals"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E11",
+      "E12"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the women’s health center in hospitals"
+    },
+    {
+     "pred": "sold_to",
+     "args": [
+      "E2",
+      "E13"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "medical devices sold to outpatient clinics"
+    },
+    {
+     "pred": "sold_to",
+     "args": [
+      "E2",
+      "E14"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "physician's offices"
+    }
+   ]
+  },
+  {
+   "sid": "h046",
+   "mentions": [
+    {
+     "text": "a core of practicing clinicians",
+     "entity": "E15",
+     "how": "new"
+    },
+    {
+     "text": "who",
+     "entity": "E15",
+     "how": "pronoun"
+    },
+    {
+     "text": "the Company",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "key employees",
+     "entity": "E16",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "opportunity_results_from",
+     "args": [
+      "E1",
+      "E15"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "The opportunity to apply solutions to recognized needs results from a core of practicing clinicians"
+    },
+    {
+     "pred": "practicing",
+     "args": [
+      "E15"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "practicing clinicians"
+    },
+    {
+     "pred": "introduce_ideas_to",
+     "args": [
+      "E15",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "clinicians who introduce ideas to the Company"
+    },
+    {
+     "pred": "opportunity_results_from",
+     "args": [
+      "E1",
+      "E16"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "together with key employees"
+    },
+    {
+     "pred": "savvy_in",
+     "args": [
+      "E16",
+      "clinical applications"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "clinical applications savvy"
+    },
+    {
+     "pred": "adept_in",
+     "args": [
+      "E16",
+      "development engineering"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "development engineering adept"
+    }
+   ]
+  },
+  {
+   "sid": "h047",
+   "mentions": [
+    {
+     "text": "UTMD",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "UTMD’s medical devices",
+     "entity": "E2",
+     "how": "description"
+    },
+    {
+     "text": "clinical end-user facilities",
+     "entity": "E7",
+     "how": "new"
+    },
+    {
+     "text": "designated stocking distributors",
+     "entity": "E8",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "sold_in",
+     "args": [
+      "E2",
+      "domestic market"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Domestically"
+    },
+    {
+     "pred": "sold_directly_to",
+     "args": [
+      "E2",
+      "E7"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "sold directly to clinical end-user facilities"
+    },
+    {
+     "pred": "sold_directly_to",
+     "args": [
+      "E2",
+      "E8"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "or designated stocking distributors"
+    },
+    {
+     "pred": "designated",
+     "args": [
+      "E8"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "designated stocking distributors"
+    },
+    {
+     "pred": "distribute_for",
+     "args": [
+      "E8",
+      "medical facilities"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "stocking distributors for medical facilities"
+    }
+   ]
+  },
+  {
+   "sid": "h048",
+   "mentions": [
+    {
+     "text": "UTMD",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "other companies in the medical device business",
+     "entity": "E17",
+     "how": "new"
+    },
+    {
+     "text": "other businesses",
+     "entity": "E36",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "manufacture",
+     "args": [
+      "E1",
+      "components"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "UTMD manufactures components"
+    },
+    {
+     "pred": "manufacture",
+     "args": [
+      "E1",
+      "finished devices"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "finished devices"
+    },
+    {
+     "pred": "on_subcontract_basis",
+     "args": [
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "on a subcontract basis"
+    },
+    {
+     "pred": "manufacture_for",
+     "args": [
+      "E1",
+      "E17"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "for other companies in the medical device business"
+    },
+    {
+     "pred": "in_business",
+     "args": [
+      "E17",
+      "medical device business"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "companies in the medical device business"
+    },
+    {
+     "pred": "manufacture_for",
+     "args": [
+      "E1",
+      "E36"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "as well as other businesses"
+    }
+   ]
+  },
+  {
+   "sid": "h049",
+   "mentions": [
+    {
+     "text": "U.S.",
+     "entity": "E18",
+     "how": "name"
+    }
+   ],
+   "atoms": []
+  },
+  {
+   "sid": "h050",
+   "mentions": [
+    {
+     "text": "devices",
+     "entity": "E2",
+     "how": "description"
+    },
+    {
+     "text": "Canada",
+     "entity": "E19",
+     "how": "name"
+    },
+    {
+     "text": "the United Kingdom",
+     "entity": "E20",
+     "how": "name"
+    },
+    {
+     "text": "UK",
+     "entity": "E20",
+     "how": "alias"
+    },
+    {
+     "text": "France",
+     "entity": "E21",
+     "how": "name"
+    },
+    {
+     "text": "Ireland",
+     "entity": "E22",
+     "how": "name"
+    },
+    {
+     "text": "Australia",
+     "entity": "E23",
+     "how": "name"
+    },
+    {
+     "text": "AUS",
+     "entity": "E23",
+     "how": "alias"
+    },
+    {
+     "text": "New Zealand",
+     "entity": "E24",
+     "how": "name"
+    },
+    {
+     "text": "NZ",
+     "entity": "E24",
+     "how": "alias"
+    },
+    {
+     "text": "other medical device companies",
+     "entity": "E37",
+     "how": "new"
+    },
+    {
+     "text": "independent medical products distributors",
+     "entity": "E33",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "sold_in",
+     "args": [
+      "E2",
+      "outside the U.S. (OUS)"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "(OUS), devices are sold"
+    },
+    {
+     "pred": "sold_directly_to_end_users_in",
+     "args": [
+      "E2",
+      "E19"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "devices are sold directly to end-users in Canada"
+    },
+    {
+     "pred": "sold_directly_to_end_users_in",
+     "args": [
+      "E2",
+      "E20"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "the United Kingdom (UK)"
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E20",
+      "UK"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "(UK)"
+    },
+    {
+     "pred": "sold_directly_to_end_users_in",
+     "args": [
+      "E2",
+      "E21"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "France"
+    },
+    {
+     "pred": "sold_directly_to_end_users_in",
+     "args": [
+      "E2",
+      "E22"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Ireland"
+    },
+    {
+     "pred": "sold_directly_to_end_users_in",
+     "args": [
+      "E2",
+      "E23"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Australia (AUS)"
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E23",
+      "AUS"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "(AUS)"
+    },
+    {
+     "pred": "sold_directly_to_end_users_in",
+     "args": [
+      "E2",
+      "E24"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "New Zealand (NZ)"
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E24",
+      "NZ"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "(NZ)"
+    },
+    {
+     "pred": "sold_through",
+     "args": [
+      "E2",
+      "E37"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "through other medical device companies"
+    },
+    {
+     "pred": "sold_through",
+     "args": [
+      "E2",
+      "E33"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "independent medical products distributors in other countries"
+    }
+   ]
+  },
+  {
+   "sid": "h051",
+   "mentions": [
+    {
+     "text": "UTMD",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "approximately 200 OUS distributors",
+     "entity": "E25",
+     "how": "new"
+    },
+    {
+     "text": "which",
+     "entity": "E25",
+     "how": "pronoun"
+    },
+    {
+     "text": "UTMD medical devices",
+     "entity": "E2",
+     "how": "description"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "has_representation_in",
+     "args": [
+      "E1",
+      "major developed countries"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "UTMD has representation globally in the major developed countries"
+    },
+    {
+     "pred": "has_representation_in",
+     "args": [
+      "E1",
+      "many underdeveloped countries"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "many underdeveloped countries"
+    },
+    {
+     "pred": "represented_through",
+     "args": [
+      "E1",
+      "E25"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "through approximately 200 OUS distributors"
+    },
+    {
+     "pred": "count",
+     "args": [
+      "E25",
+      "200"
+     ],
+     "neg": false,
+     "hedged": false,
+     "approx": true,
+     "span": "approximately 200 OUS distributors"
+    },
+    {
+     "pred": "count_purchasing_at_least",
+     "args": [
+      "E25",
+      "108",
+      "5000 USD"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "108 of which purchased at least five thousand dollars"
+    },
+    {
+     "pred": "purchased",
+     "args": [
+      "E25",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "purchased at least five thousand dollars in UTMD medical devices"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "purchased",
+      "2025"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "during 2025"
+    }
+   ]
+  },
+  {
+   "sid": "h052",
+   "mentions": [
+    {
+     "text": "UTMD",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "Utah",
+     "entity": "E26",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "corporation"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "a Utah corporation"
+    },
+    {
+     "pred": "incorporated_in",
+     "args": [
+      "E1",
+      "E26"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "formed as a Utah corporation"
+    },
+    {
+     "pred": "formed_in",
+     "args": [
+      "E1",
+      "1978"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "UTMD was formed as a Utah corporation in 1978"
+    }
+   ]
+  },
+  {
+   "sid": "h053",
+   "mentions": [
+    {
+     "text": "UTMD",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "the public",
+     "entity": "E27",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "sold_stock_to",
+     "args": [
+      "E1",
+      "E27"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "UTMD sold stock to the public"
+    },
+    {
+     "pred": "times",
+     "args": [
+      "E1",
+      "1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "one time"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "sold_stock_to",
+      "1982"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "in 1982"
+    },
+    {
+     "pred": "proceeds",
+     "args": [
+      "E1",
+      "1750000 USD"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "for $1,750"
+    },
+    {
+     "pred": "offering_costs",
+     "args": [
+      "E1",
+      "321000 USD"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "before offering costs of $321"
+    }
+   ]
+  },
+  {
+   "sid": "h054",
+   "mentions": [
+    {
+     "text": "UTMD",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "its",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "its public stockholders",
+     "entity": "E38",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "returned_via_share_repurchases",
+     "args": [
+      "E1",
+      "156000000 USD"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "UTMD has returned $156 million in the form of share repurchases"
+    },
+    {
+     "pred": "returned_via_cash_dividends",
+     "args": [
+      "E1",
+      "90000000 USD"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "an additional $90 million in cash dividends"
+    },
+    {
+     "pred": "returned_to",
+     "args": [
+      "E1",
+      "E38"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "to its public stockholders"
+    },
+    {
+     "pred": "since",
+     "args": [
+      "returned",
+      "1992"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Since 1992"
+    }
+   ]
+  },
+  {
+   "sid": "h055",
+   "mentions": [
+    {
+     "text": "Utah Medical Products Ltd.",
+     "entity": "E28",
+     "how": "name"
+    },
+    {
+     "text": "a wholly-owned subsidiary",
+     "entity": "E28",
+     "how": "description"
+    },
+    {
+     "text": "Ireland",
+     "entity": "E22",
+     "how": "name"
+    },
+    {
+     "text": "UTMD",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "UTMD’s OUS customers",
+     "entity": "E30",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "subsidiary_of",
+     "args": [
+      "E28",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "a wholly-owned subsidiary"
+    },
+    {
+     "pred": "wholly_owned",
+     "args": [
+      "E28"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "wholly-owned"
+    },
+    {
+     "pred": "manufacturing_located_in",
+     "args": [
+      "E28",
+      "E22"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "with manufacturing located in Ireland"
+    },
+    {
+     "pred": "formed_in",
+     "args": [
+      "E28",
+      "1995"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "was formed in 1995"
+    },
+    {
+     "pred": "purpose_serve",
+     "args": [
+      "E28",
+      "E30"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "to better serve UTMD’s OUS customers"
+    },
+    {
+     "pred": "customer_of",
+     "args": [
+      "E30",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "UTMD’s OUS customers"
+    },
+    {
+     "pred": "located_outside",
+     "args": [
+      "E30",
+      "E18"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "OUS customers"
+    }
+   ]
+  },
+  {
+   "sid": "h056",
+   "mentions": [
+    {
+     "text": "UTMD",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "Columbia Medical, Inc.",
+     "entity": "E29",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "purchased",
+     "args": [
+      "E1",
+      "E29"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "UTMD purchased Columbia Medical, Inc."
+    },
+    {
+     "pred": "time",
+     "args": [
+      "purchased",
+      "1997"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "In 1997"
+    }
+   ]
+  },
+  {
+   "sid": "h057",
+   "mentions": [
+    {
+     "text": "Chimborazo",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "que",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "Chimborazo",
+     "entity": "E2",
+     "how": "name"
+    },
+    {
+     "text": "una ciudad de la parroquia de Saint Joseph",
+     "entity": "E2",
+     "how": "description"
+    },
+    {
+     "text": "parroquia de Saint Joseph",
+     "entity": "E3",
+     "how": "name"
+    },
+    {
+     "text": "Barbados",
+     "entity": "E4",
+     "how": "name"
+    },
+    {
+     "text": "la provincia de Chimborazo",
+     "entity": "E5",
+     "how": "name"
+    },
+    {
+     "text": "Ecuador",
+     "entity": "E6",
+     "how": "name"
+    },
+    {
+     "text": "el volcán Chimborazo",
+     "entity": "E7",
+     "how": "name"
+    },
+    {
+     "text": "la montaña más alta del Ecuador",
+     "entity": "E7",
+     "how": "description"
+    },
+    {
+     "text": "Ecuador",
+     "entity": "E6",
+     "how": "name"
+    },
+    {
+     "text": "Cerro Chimborazo",
+     "entity": "E8",
+     "how": "name"
+    },
+    {
+     "text": "parque nacional Henri Pittier",
+     "entity": "E9",
+     "how": "name"
+    },
+    {
+     "text": "Venezuela",
+     "entity": "E10",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "toponym"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Chimborazo es un topónimo"
+    },
+    {
+     "pred": "can_refer_to",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "que puede referirse a: Chimborazo, una ciudad"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E2",
+      "city"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "una ciudad"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E2",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "una ciudad de la parroquia de Saint Joseph"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E3",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Saint Joseph, en Barbados"
+    },
+    {
+     "pred": "can_refer_to",
+     "args": [
+      "E1",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "la provincia de Chimborazo"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E5",
+      "province"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "la provincia"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E5",
+      "E6"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "la provincia de Chimborazo del Ecuador"
+    },
+    {
+     "pred": "can_refer_to",
+     "args": [
+      "E1",
+      "E7"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "el volcán Chimborazo"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E7",
+      "volcano"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "el volcán"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E7",
+      "mountain"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "la montaña"
+    },
+    {
+     "pred": "highest",
+     "args": [
+      "E7",
+      "mountains of Ecuador"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "la montaña más alta del Ecuador"
+    },
+    {
+     "pred": "inactive",
+     "args": [
+      "E7",
+      "currently"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "actualmente inactivo"
+    },
+    {
+     "pred": "can_refer_to",
+     "args": [
+      "E1",
+      "E8"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Cerro Chimborazo"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E8",
+      "E9"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Cerro Chimborazo, en el parque nacional Henri Pittier"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E9",
+      "national park"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "parque nacional"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E9",
+      "E10"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Henri Pittier, Venezuela"
+    }
+   ]
+  },
+  {
+   "sid": "h058",
+   "mentions": [
+    {
+     "text": "El Lago de Atitlán",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "Centroamérica",
+     "entity": "E2",
+     "how": "name"
+    },
+    {
+     "text": "Guatemala",
+     "entity": "E3",
+     "how": "name"
+    },
+    {
+     "text": "Su",
+     "entity": "E1",
+     "how": "pronoun"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "lake"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "es el lago más profundo"
+    },
+    {
+     "pred": "deepest",
+     "args": [
+      "E1",
+      "lakes of Central America"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "el lago más profundo de Centroamérica"
+    },
+    {
+     "pred": "second_largest",
+     "args": [
+      "E1",
+      "lakes of Guatemala by surface area"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "es el segundo lago más grande por superficie de Guatemala"
+    },
+    {
+     "pred": "has_maximum_depth",
+     "args": [
+      "E1",
+      "340 m"
+     ],
+     "neg": false,
+     "hedged": false,
+     "approx": true,
+     "span": "Su parte más profunda se encuentra a 340 metros aproximadamente"
+    },
+    {
+     "pred": "has_average_depth",
+     "args": [
+      "E1",
+      "220 m"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "la profundidad media es de 220 metros"
+    }
+   ]
+  },
+  {
+   "sid": "h059",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "Es"
+    },
+    {
+     "text": "Departamento de Sololá",
+     "entity": "E4",
+     "how": "name"
+    },
+    {
+     "text": "donde",
+     "entity": "E4",
+     "how": "pronoun"
+    },
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "queda"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "economic_source_of",
+     "args": [
+      "E1",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Es una importante fuente económica del Departamento de Sololá"
+    },
+    {
+     "pred": "important",
+     "args": [
+      "E1",
+      "economic source"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "una importante fuente económica"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E1",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "donde queda ubicado"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "tourist center"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "un centro turístico"
+    },
+    {
+     "pred": "of_commercial_interest",
+     "args": [
+      "E1",
+      "great"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "de gran interés comercial"
+    }
+   ]
+  },
+  {
+   "sid": "h060",
+   "mentions": [
+    {
+     "text": "El lago de Atitlán",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "planeta Tierra",
+     "entity": "E5",
+     "how": "name"
+    },
+    {
+     "text": "Guatemala",
+     "entity": "E3",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "among_most_beautiful",
+     "args": [
+      "E1",
+      "lakes of planet Earth"
+     ],
+     "neg": false,
+     "hedged": true,
+     "span": "es reconocido como uno de los lagos más bellos del planeta Tierra"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "tourist attraction"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "es una de las atracciones turísticas"
+    },
+    {
+     "pred": "among_most_important",
+     "args": [
+      "E1",
+      "national and international tourist attractions of Guatemala"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "una de las atracciones turísticas nacionales e internacionales más importantes de toda Guatemala"
+    },
+    {
+     "pred": "national",
+     "args": [
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "nacionales"
+    },
+    {
+     "pred": "international",
+     "args": [
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "internacionales"
+    }
+   ]
+  },
+  {
+   "sid": "h061",
+   "mentions": [
+    {
+     "text": "sus",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "debe"
+    },
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "es"
+    },
+    {
+     "text": "América Latina",
+     "entity": "E2",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "considered_as",
+     "args": [
+      "E1",
+      "lake"
+     ],
+     "neg": true,
+     "hedged": false,
+     "span": "no debe ser considerado como tal"
+    },
+    {
+     "pred": "reason",
+     "args": [
+      "E1",
+      "geological characteristics"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "por sus características geológicas"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "considered_as",
+      "present"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "en los actuales momentos"
+    },
+    {
+     "pred": "has_area",
+     "args": [
+      "E1",
+      "13210–13820 km2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Con una superficie de entre 13 210 y 13 820 km²"
+    },
+    {
+     "pred": "largest",
+     "args": [
+      "E1",
+      "lakes of Latin America"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "es el más grande de América Latina"
+    },
+    {
+     "pred": "nineteenth_largest",
+     "args": [
+      "E1",
+      "lakes of the world"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "el 19.º entre los lagos más grandes del mundo"
+    }
+   ]
+  },
+  {
+   "sid": "h062",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "alimentado"
+    },
+    {
+     "text": "numerosos ríos",
+     "entity": "E9",
+     "how": "new"
+    },
+    {
+     "text": "el río Catatumbo",
+     "entity": "E3",
+     "how": "name"
+    },
+    {
+     "text": "La cuenca de Maracaibo",
+     "entity": "E4",
+     "how": "name"
+    },
+    {
+     "text": "más de 15 000 pozos perforados",
+     "entity": "E5",
+     "how": "new"
+    },
+    {
+     "text": "su",
+     "entity": "E4",
+     "how": "pronoun"
+    },
+    {
+     "text": "su cuenca",
+     "entity": "E4",
+     "how": "description"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "fed_by",
+     "args": [
+      "E1",
+      "E9"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Es alimentado por numerosos ríos"
+    },
+    {
+     "pred": "includes",
+     "args": [
+      "E9",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "el más grande es el río Catatumbo"
+    },
+    {
+     "pred": "largest",
+     "args": [
+      "E3",
+      "rivers feeding the lake"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "el más grande es el río Catatumbo"
+    },
+    {
+     "pred": "among_richest_in_oil",
+     "args": [
+      "E4",
+      "zones of the world"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "es una de las zonas de mayor riqueza petrolífera del mundo"
+    },
+    {
+     "pred": "count_more_than",
+     "args": [
+      "E5",
+      "15000"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "con más de 15 000 pozos perforados"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E5",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "pozos perforados en su cuenca"
+    },
+    {
+     "pred": "drilled_since",
+     "args": [
+      "E5",
+      "1914"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "desde 1914"
+    }
+   ]
+  },
+  {
+   "sid": "h063",
+   "mentions": [
+    {
+     "text": "esta área",
+     "entity": "E4",
+     "how": "description"
+    },
+    {
+     "text": "relámpago del Catatumbo",
+     "entity": "E6",
+     "how": "name"
+    },
+    {
+     "text": "fenómeno",
+     "entity": "E6",
+     "how": "description"
+    },
+    {
+     "text": "que",
+     "entity": "E6",
+     "how": "pronoun"
+    },
+    {
+     "text": "planeta",
+     "entity": "E7",
+     "how": "description"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "occurs_in",
+     "args": [
+      "E6",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "En esta área se presenta el denominado relámpago del Catatumbo"
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E6",
+      "relámpago del Catatumbo"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "el denominado relámpago del Catatumbo"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E6",
+      "phenomenon"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "fenómeno"
+    },
+    {
+     "pred": "lightning_rate",
+     "args": [
+      "E6",
+      "1176000 per year"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "mediante 1 176 000 relámpagos por año"
+    },
+    {
+     "pred": "generates_up_to",
+     "args": [
+      "E6",
+      "10 percent",
+      "atmospheric ozone of E7"
+     ],
+     "neg": false,
+     "hedged": false,
+     "approx": true,
+     "span": "genera hasta cerca del 10 % del ozono atmosférico del planeta"
+    }
+   ]
+  },
+  {
+   "sid": "h064",
+   "mentions": [
+    {
+     "text": "El río Magdalena",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "río Grande de la Magdalena",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "Colombia",
+     "entity": "E2",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "río Grande de la Magdalena"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "también llamado río Grande de la Magdalena"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "river"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "el río más importante"
+    },
+    {
+     "pred": "most_important",
+     "args": [
+      "E1",
+      "rivers of Colombia"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "el río más importante de Colombia"
+    }
+   ]
+  },
+  {
+   "sid": "h065",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "trata"
+    },
+    {
+     "text": "una corriente de agua continua de Colombia",
+     "entity": "E1",
+     "how": "description"
+    },
+    {
+     "text": "Colombia",
+     "entity": "E2",
+     "how": "name"
+    },
+    {
+     "text": "que",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "el departamento del Huila",
+     "entity": "E3",
+     "how": "name"
+    },
+    {
+     "text": "Colombia",
+     "entity": "E2",
+     "how": "name"
+    },
+    {
+     "text": "el mar Caribe",
+     "entity": "E4",
+     "how": "name"
+    },
+    {
+     "text": "la ciudad de Barranquilla",
+     "entity": "E5",
+     "how": "name"
+    },
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "Fluye"
+    },
+    {
+     "text": "país",
+     "entity": "E2",
+     "how": "description"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "continuous watercourse"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "una corriente de agua continua"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "corriente de agua continua de Colombia"
+    },
+    {
+     "pred": "rises_in",
+     "args": [
+      "E1",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "nace en el departamento del Huila"
+    },
+    {
+     "pred": "in_part",
+     "args": [
+      "E3",
+      "E2",
+      "south"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "al sur de Colombia"
+    },
+    {
+     "pred": "flows_into",
+     "args": [
+      "E1",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "desemboca en el mar Caribe"
+    },
+    {
+     "pred": "mouth_near",
+     "args": [
+      "E1",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "cerca de la ciudad de Barranquilla"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E5",
+      "city"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "la ciudad de Barranquilla"
+    },
+    {
+     "pred": "flows_direction",
+     "args": [
+      "E1",
+      "north"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Fluye hacia el norte"
+    },
+    {
+     "pred": "has_length",
+     "args": [
+      "E1",
+      "1528 km"
+     ],
+     "neg": false,
+     "hedged": false,
+     "approx": true,
+     "span": "por alrededor de 1,528 km"
+    },
+    {
+     "pred": "flows_through_part",
+     "args": [
+      "E1",
+      "E2",
+      "west"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "por la sección occidental del país"
+    }
+   ]
+  },
+  {
+   "sid": "h066",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "Toma"
+    },
+    {
+     "text": "su",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "María Magdalena",
+     "entity": "E6",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "named_after",
+     "args": [
+      "E1",
+      "E6"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Toma su nombre de la bíblica figura de María Magdalena"
+    },
+    {
+     "pred": "biblical",
+     "args": [
+      "E6"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "la bíblica figura"
+    }
+   ]
+  },
+  {
+   "sid": "h067",
+   "mentions": [
+    {
+     "text": "El río Orinoco",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "América del Sur",
+     "entity": "E2",
+     "how": "name"
+    },
+    {
+     "text": "río Amazonas",
+     "entity": "E3",
+     "how": "name"
+    },
+    {
+     "text": "que",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "Venezuela",
+     "entity": "E4",
+     "how": "name"
+    },
+    {
+     "text": "su",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "hace"
+    },
+    {
+     "text": "Colombia",
+     "entity": "E5",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "river"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "uno de los ríos"
+    },
+    {
+     "pred": "among_most_important",
+     "args": [
+      "E1",
+      "rivers of South America"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "es uno de los ríos más importantes de América del Sur"
+    },
+    {
+     "pred": "among_most_important",
+     "args": [
+      "E3",
+      "rivers of South America"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "además del río Amazonas"
+    },
+    {
+     "pred": "rises_in",
+     "args": [
+      "E1",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "que nace y discurre por Venezuela"
+    },
+    {
+     "pred": "flows_through",
+     "args": [
+      "E1",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "discurre por Venezuela"
+    },
+    {
+     "pred": "forms_border_with",
+     "args": [
+      "E1",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "hace de frontera con Colombia"
+    },
+    {
+     "pred": "border_along_part",
+     "args": [
+      "E1",
+      "one stretch of its course"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "en un tramo de su recorrido"
+    }
+   ]
+  },
+  {
+   "sid": "h068",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "Es"
+    },
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "es"
+    },
+    {
+     "text": "Amazonas",
+     "entity": "E3",
+     "how": "name"
+    },
+    {
+     "text": "Congo",
+     "entity": "E6",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "river"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "río sudamericano"
+    },
+    {
+     "pred": "fourth_longest",
+     "args": [
+      "E1",
+      "South American rivers"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Es el cuarto río sudamericano más largo"
+    },
+    {
+     "pred": "has_length",
+     "args": [
+      "E1",
+      "2140 km"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "2140 km"
+    },
+    {
+     "pred": "has_average_discharge",
+     "args": [
+      "E1",
+      "39000 m3/s"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "con un caudal promedio 39 000 m³/s"
+    },
+    {
+     "pred": "third_largest_by_discharge",
+     "args": [
+      "E1",
+      "rivers of the world"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "es el tercer río más caudaloso del mundo"
+    },
+    {
+     "pred": "greater_discharge_than",
+     "args": [
+      "E3",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "después del Amazonas"
+    },
+    {
+     "pred": "greater_discharge_than",
+     "args": [
+      "E6",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "y del Congo"
+    }
+   ]
+  },
+  {
+   "sid": "h069",
+   "mentions": [
+    {
+     "text": "Su",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "Su cuenca",
+     "entity": "E7",
+     "how": "new"
+    },
+    {
+     "text": "los que",
+     "entity": "E7",
+     "how": "pronoun"
+    },
+    {
+     "text": "territorio venezolano",
+     "entity": "E4",
+     "how": "description"
+    },
+    {
+     "text": "territorio colombiano",
+     "entity": "E5",
+     "how": "description"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "basin_of",
+     "args": [
+      "E7",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Su cuenca"
+    },
+    {
+     "pred": "has_area",
+     "args": [
+      "E7",
+      "989000 km2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "approx": true,
+     "span": "Su cuenca tiene una superficie de casi 989 000 km²"
+    },
+    {
+     "pred": "share_in",
+     "args": [
+      "E7",
+      "E4",
+      "65 percent"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "el 65 % quedan en territorio venezolano"
+    },
+    {
+     "pred": "share_in",
+     "args": [
+      "E7",
+      "E5",
+      "35 percent"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "el 35 % restante en territorio colombiano"
+    }
+   ]
+  },
+  {
+   "sid": "h070",
+   "mentions": [
+    {
+     "text": "Garonne",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "Garona",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "qui",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "Pyrénées espagnoles",
+     "entity": "E2",
+     "how": "name"
+    },
+    {
+     "text": "Toulouse",
+     "entity": "E3",
+     "how": "name"
+    },
+    {
+     "text": "Bordeaux",
+     "entity": "E4",
+     "how": "name"
+    },
+    {
+     "text": "océan Atlantique",
+     "entity": "E5",
+     "how": "name"
+    },
+    {
+     "text": "son",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "estuaire commun",
+     "entity": "E6",
+     "how": "new"
+    },
+    {
+     "text": "Dordogne",
+     "entity": "E7",
+     "how": "name"
+    },
+    {
+     "text": "Gironde",
+     "entity": "E6",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "pronounced",
+     "args": [
+      "E1",
+      "[ga.ˈʁɔn̪(ə)]"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "prononcé en français : [ga.ˈʁɔn̪(ə)]"
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "Garona"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Garona en occitan, catalan et espagnol"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "river"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "est un fleuve"
+    },
+    {
+     "pred": "mainly_french",
+     "args": [
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "principalement français"
+    },
+    {
+     "pred": "rises_in",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "prend sa source dans les Pyrénées espagnoles"
+    },
+    {
+     "pred": "has_length",
+     "args": [
+      "E1",
+      "529 km"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "coule sur 529 kilomètres"
+    },
+    {
+     "pred": "passes_through",
+     "args": [
+      "E1",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "passant notamment par les villes de Toulouse"
+    },
+    {
+     "pred": "passes_through",
+     "args": [
+      "E1",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "de Bordeaux"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E3",
+      "city"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "villes de Toulouse"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E4",
+      "city"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "villes de Toulouse et de Bordeaux"
+    },
+    {
+     "pred": "flows_into",
+     "args": [
+      "E1",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "se jeter dans l’océan Atlantique"
+    },
+    {
+     "pred": "has_estuary",
+     "args": [
+      "E1",
+      "E6"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "son estuaire commun"
+    },
+    {
+     "pred": "has_estuary",
+     "args": [
+      "E7",
+      "E6"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "estuaire commun avec la Dordogne"
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E6",
+      "Gironde"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "s’appelle la Gironde"
+    }
+   ]
+  },
+  {
+   "sid": "h071",
+   "mentions": [
+    {
+     "text": "Le fleuve",
+     "entity": "E1",
+     "how": "description"
+    },
+    {
+     "text": "son",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "Haute-Garonne",
+     "entity": "E8",
+     "how": "name"
+    },
+    {
+     "text": "Lot-et-Garonne",
+     "entity": "E9",
+     "how": "name"
+    },
+    {
+     "text": "Tarn-et-Garonne",
+     "entity": "E10",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "gave_name_to",
+     "args": [
+      "E1",
+      "E8"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "a donné son nom aux départements français de Haute-Garonne"
+    },
+    {
+     "pred": "gave_name_to",
+     "args": [
+      "E1",
+      "E9"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Lot-et-Garonne"
+    },
+    {
+     "pred": "gave_name_to",
+     "args": [
+      "E1",
+      "E10"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Tarn-et-Garonne"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E8",
+      "French department"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "départements français de Haute-Garonne"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E9",
+      "French department"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "départements français"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E10",
+      "French department"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "départements français"
+    }
+   ]
+  },
+  {
+   "sid": "h072",
+   "mentions": [
+    {
+     "text": "lac d'Annecy",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "France",
+     "entity": "E2",
+     "how": "name"
+    },
+    {
+     "text": "Alpes du Nord",
+     "entity": "E3",
+     "how": "name"
+    },
+    {
+     "text": "Haute-Savoie",
+     "entity": "E4",
+     "how": "name"
+    },
+    {
+     "text": "Auvergne-Rhône-Alpes",
+     "entity": "E5",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "lake"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "est un lac"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "lac de France"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E1",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "situé dans les Alpes du Nord"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E1",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "en Haute-Savoie"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E1",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "dans la région Auvergne-Rhône-Alpes"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E5",
+      "region"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "la région Auvergne-Rhône-Alpes"
+    }
+   ]
+  },
+  {
+   "sid": "h073",
+   "mentions": [
+    {
+     "text": "sa",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "il",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "France",
+     "entity": "E2",
+     "how": "name"
+    },
+    {
+     "text": "celui",
+     "entity": "E6",
+     "how": "pronoun"
+    },
+    {
+     "text": "Bourget",
+     "entity": "E6",
+     "how": "name"
+    },
+    {
+     "text": "la partie française du Léman",
+     "entity": "E22",
+     "how": "new"
+    },
+    {
+     "text": "Léman",
+     "entity": "E7",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "second_largest",
+     "args": [
+      "E1",
+      "lakes of glacial origin in France by area"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Par sa superficie, il est le deuxième lac d'origine glaciaire de France"
+    },
+    {
+     "pred": "glacial_origin",
+     "args": [
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "lac d'origine glaciaire"
+    },
+    {
+     "pred": "smaller_than",
+     "args": [
+      "E1",
+      "E6",
+      "area"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "après celui du Bourget"
+    },
+    {
+     "pred": "near",
+     "args": [
+      "E6",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "très proche"
+    },
+    {
+     "pred": "excluded_from_ranking",
+     "args": [
+      "E22"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "exception faite de la partie française du Léman"
+    },
+    {
+     "pred": "part_of",
+     "args": [
+      "E22",
+      "E7"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "la partie française du Léman"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E22",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "partie française"
+    }
+   ]
+  },
+  {
+   "sid": "h074",
+   "mentions": [
+    {
+     "text": "Le lac",
+     "entity": "E1",
+     "how": "description"
+    },
+    {
+     "text": "glaciation de Würm",
+     "entity": "E8",
+     "how": "name"
+    },
+    {
+     "text": "une période",
+     "entity": "E23",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "formed_at",
+     "args": [
+      "E1",
+      "end of E8"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Le lac se forme à la fin de la glaciation de Würm"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E8",
+      "glaciation"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "glaciation de Würm"
+    },
+    {
+     "pred": "formed_during",
+     "args": [
+      "E1",
+      "E23"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "durant une période"
+    },
+    {
+     "pred": "starts",
+     "args": [
+      "E23",
+      "17000 BC"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "entre 17 000 av."
+    }
+   ]
+  },
+  {
+   "sid": "h075",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E23",
+     "how": "dropped",
+     "at": "correspondant"
+    },
+    {
+     "text": "grands glaciers alpins",
+     "entity": "E9",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "corresponds_to",
+     "args": [
+      "E23",
+      "melting of E9"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "correspondant à la fonte progressive des grands glaciers alpins"
+    },
+    {
+     "pred": "progressive",
+     "args": [
+      "melting of E9"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "fonte progressive"
+    },
+    {
+     "pred": "large",
+     "args": [
+      "E9"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "grands glaciers alpins"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E9",
+      "alpine glacier"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "glaciers alpins"
+    }
+   ]
+  },
+  {
+   "sid": "h076",
+   "mentions": [
+    {
+     "text": "Il",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "sept ruisseaux et torrents",
+     "entity": "E10",
+     "how": "new"
+    },
+    {
+     "text": "les montagnes environnantes",
+     "entity": "E11",
+     "how": "new"
+    },
+    {
+     "text": "une puissante source sous-lacustre",
+     "entity": "E12",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "fed_by",
+     "args": [
+      "E1",
+      "E10"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Il est alimenté par sept ruisseaux et torrents"
+    },
+    {
+     "pred": "count",
+     "args": [
+      "E10",
+      "7"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "sept ruisseaux et torrents"
+    },
+    {
+     "pred": "rises_in",
+     "args": [
+      "E10",
+      "E11"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "nés dans les montagnes environnantes"
+    },
+    {
+     "pred": "surround",
+     "args": [
+      "E11",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "montagnes environnantes"
+    },
+    {
+     "pred": "fed_by",
+     "args": [
+      "E1",
+      "E12"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "une puissante source sous-lacustre"
+    },
+    {
+     "pred": "powerful",
+     "args": [
+      "E12"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "puissante source"
+    },
+    {
+     "pred": "sublacustrine",
+     "args": [
+      "E12"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "source sous-lacustre"
+    }
+   ]
+  },
+  {
+   "sid": "h077",
+   "mentions": [
+    {
+     "text": "Le bassin",
+     "entity": "E1",
+     "how": "description"
+    },
+    {
+     "text": "agglomération d'Annecy",
+     "entity": "E13",
+     "how": "name"
+    },
+    {
+     "text": "massif des Bornes",
+     "entity": "E14",
+     "how": "name"
+    },
+    {
+     "text": "massif des Bauges",
+     "entity": "E15",
+     "how": "name"
+    },
+    {
+     "text": "pays de Faverges",
+     "entity": "E16",
+     "how": "name"
+    },
+    {
+     "text": "qui",
+     "entity": "E16",
+     "how": "pronoun"
+    },
+    {
+     "text": "Bout-du-Lac",
+     "entity": "E17",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "bordered_by",
+     "args": [
+      "E1",
+      "E13",
+      "north"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "encadré au nord par l'agglomération d'Annecy"
+    },
+    {
+     "pred": "bordered_by",
+     "args": [
+      "E1",
+      "E14",
+      "east"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "à l’est par le massif des Bornes"
+    },
+    {
+     "pred": "bordered_by",
+     "args": [
+      "E1",
+      "E15",
+      "west"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "à l’ouest par le massif des Bauges"
+    },
+    {
+     "pred": "bordered_by",
+     "args": [
+      "E1",
+      "E16",
+      "south"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "au sud par le pays de Faverges"
+    },
+    {
+     "pred": "extends",
+     "args": [
+      "E16",
+      "E17"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "qui prolonge le Bout-du-Lac"
+    }
+   ]
+  },
+  {
+   "sid": "h078",
+   "mentions": [
+    {
+     "text": "Le lac",
+     "entity": "E1",
+     "how": "description"
+    },
+    {
+     "text": "son",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "Thiou",
+     "entity": "E18",
+     "how": "name"
+    },
+    {
+     "text": "qui",
+     "entity": "E18",
+     "how": "pronoun"
+    },
+    {
+     "text": "Fier",
+     "entity": "E19",
+     "how": "name"
+    },
+    {
+     "text": "commune d'Annecy",
+     "entity": "E20",
+     "how": "name"
+    },
+    {
+     "text": "celui-ci",
+     "entity": "E19",
+     "how": "pronoun"
+    },
+    {
+     "text": "Rhône",
+     "entity": "E21",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "overflows_into",
+     "args": [
+      "E1",
+      "E18"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "déverse son trop-plein d’eau dans le Thiou"
+    },
+    {
+     "pred": "feeds",
+     "args": [
+      "E18",
+      "E19"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "qui alimente le Fier"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "feeds(E18,E19)",
+      "E20",
+      "north-west"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "dans le nord-ouest de la commune d'Annecy"
+    },
+    {
+     "pred": "flows_directly_into",
+     "args": [
+      "E19",
+      "E21"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "celui-ci se jetant ensuite directement dans le Rhône"
+    }
+   ]
+  },
+  {
+   "sid": "h079",
+   "mentions": [
+    {
+     "text": "lac du Bourget",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "France",
+     "entity": "E2",
+     "how": "name"
+    },
+    {
+     "text": "Savoie",
+     "entity": "E3",
+     "how": "name"
+    },
+    {
+     "text": "Auvergne-Rhône-Alpes",
+     "entity": "E4",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "alpine lake"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "est un lac alpin"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "situé en France"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E1",
+      "E3",
+      "west"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "à l'ouest du département de la Savoie"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E3",
+      "department"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "département de la Savoie"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E1",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "en région Auvergne-Rhône-Alpes"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E4",
+      "region"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "région Auvergne-Rhône-Alpes"
+    }
+   ]
+  },
+  {
+   "sid": "h080",
+   "mentions": [
+    {
+     "text": "le lac",
+     "entity": "E1",
+     "how": "description"
+    },
+    {
+     "text": "UNESCO",
+     "entity": "E5",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "recognized_as",
+     "args": [
+      "E1",
+      "biosphere reserve",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "le lac est reconnu comme réserve de biosphère par l'UNESCO"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "recognized_as(E1,biosphere reserve)",
+      "since 2025"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Depuis 2025"
+    }
+   ]
+  },
+  {
+   "sid": "h081",
+   "mentions": [
+    {
+     "text": "Lac post-glaciaire",
+     "entity": "E1",
+     "how": "description"
+    },
+    {
+     "text": "massif du Jura",
+     "entity": "E6",
+     "how": "name"
+    },
+    {
+     "text": "sa",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "pré-Alpes",
+     "entity": "E7",
+     "how": "name"
+    },
+    {
+     "text": "Alpes",
+     "entity": "E7",
+     "how": "alias"
+    },
+    {
+     "text": "sa",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "lac du Bourget",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "dernière glaciation de Würm",
+     "entity": "E8",
+     "how": "name"
+    },
+    {
+     "text": "grand glacier alpin du quaternaire",
+     "entity": "E9",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "post-glacial lake"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Lac post-glaciaire"
+    },
+    {
+     "pred": "bordered_by",
+     "args": [
+      "E1",
+      "E6",
+      "west shore"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "du massif du Jura (sur sa berge Ouest)"
+    },
+    {
+     "pred": "bordered_by",
+     "args": [
+      "E1",
+      "E7",
+      "east shore"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "des pré-Alpes (Alpes) sur sa berge Est"
+    },
+    {
+     "pred": "formed_at",
+     "args": [
+      "E1",
+      "end of E8"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "a été formé à l'issue de la dernière glaciation de Würm"
+    },
+    {
+     "pred": "last_glaciation",
+     "args": [
+      "E8"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "dernière glaciation de Würm"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "formed(E1)",
+      "19000 years ago"
+     ],
+     "neg": false,
+     "hedged": false,
+     "approx": true,
+     "span": "il y a environ 19 000 ans"
+    },
+    {
+     "pred": "formed_by",
+     "args": [
+      "E1",
+      "retreat of E9"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "par le retrait du grand glacier alpin du quaternaire"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "E9",
+      "Quaternary"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "glacier alpin du quaternaire"
+    }
+   ]
+  },
+  {
+   "sid": "h082",
+   "mentions": [
+    {
+     "text": "une idée reçue",
+     "entity": "E16",
+     "how": "new"
+    },
+    {
+     "text": "il",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "France",
+     "entity": "E2",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "largest",
+     "args": [
+      "E1",
+      "natural lakes of France"
+     ],
+     "neg": true,
+     "hedged": false,
+     "span": "il n'est pas le plus grand lac naturel de France"
+    },
+    {
+     "pred": "contrary_to",
+     "args": [
+      "largest(E1,natural lakes of France)",
+      "E16"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Contrairement à une idée reçue"
+    },
+    {
+     "pred": "widespread",
+     "args": [
+      "E16",
+      "still"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "encore largement répandue"
+    }
+   ]
+  },
+  {
+   "sid": "h083",
+   "mentions": [
+    {
+     "text": "il",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "France",
+     "entity": "E2",
+     "how": "name"
+    },
+    {
+     "text": "Léman",
+     "entity": "E10",
+     "how": "name"
+    },
+    {
+     "text": "Suisse",
+     "entity": "E11",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "largest",
+     "args": [
+      "E1",
+      "natural lakes of glacial origin entirely in France"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "il est le plus grand lac naturel d'origine glaciaire"
+    },
+    {
+     "pred": "glacial_origin",
+     "args": [
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "d'origine glaciaire"
+    },
+    {
+     "pred": "deepest",
+     "args": [
+      "E1",
+      "natural lakes of glacial origin entirely in France"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "le plus profond entièrement situé en France"
+    },
+    {
+     "pred": "located_entirely_in",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "entièrement situé en France"
+    },
+    {
+     "pred": "franco_swiss",
+     "args": [
+      "E10"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "le Léman étant franco-suisse"
+    },
+    {
+     "pred": "area_share",
+     "args": [
+      "E10",
+      "E11",
+      "60 percent"
+     ],
+     "neg": false,
+     "hedged": false,
+     "approx": true,
+     "span": "environ 60/40 en superficie en faveur de la Suisse"
+    },
+    {
+     "pred": "area_share",
+     "args": [
+      "E10",
+      "E2",
+      "40 percent"
+     ],
+     "neg": false,
+     "hedged": false,
+     "approx": true,
+     "span": "environ 60/40 en superficie"
+    }
+   ]
+  },
+  {
+   "sid": "h084",
+   "mentions": [
+    {
+     "text": "Son",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "la commune",
+     "entity": "E12",
+     "how": "new"
+    },
+    {
+     "text": "qui",
+     "entity": "E12",
+     "how": "pronoun"
+    },
+    {
+     "text": "sa",
+     "entity": "E1",
+     "how": "pronoun"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "name_linked_to",
+     "args": [
+      "E1",
+      "E12"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Son nom actuel, lié à la commune"
+    },
+    {
+     "pred": "borders",
+     "args": [
+      "E12",
+      "E1",
+      "southern part"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "la commune qui borde sa partie méridionale"
+    },
+    {
+     "pred": "name_used_since",
+     "args": [
+      "E1",
+      "13th century"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "n'a été utilisé qu'à compter du XIIIe siècle"
+    },
+    {
+     "pred": "name_used_before",
+     "args": [
+      "E1",
+      "13th century"
+     ],
+     "neg": true,
+     "hedged": false,
+     "span": "n'a été utilisé qu'à compter du XIIIe siècle"
+    }
+   ]
+  },
+  {
+   "sid": "h085",
+   "mentions": [
+    {
+     "text": "le lac",
+     "entity": "E1",
+     "how": "description"
+    },
+    {
+     "text": "Alphonse de Lamartine",
+     "entity": "E13",
+     "how": "name"
+    },
+    {
+     "text": "qui",
+     "entity": "E13",
+     "how": "pronoun"
+    },
+    {
+     "text": "y",
+     "entity": "E1",
+     "how": "pronoun"
+    },
+    {
+     "text": "Le Lac",
+     "entity": "E14",
+     "how": "name"
+    },
+    {
+     "text": "la femme qu'il aime",
+     "entity": "E15",
+     "how": "new"
+    },
+    {
+     "text": "il",
+     "entity": "E13",
+     "how": "pronoun"
+    },
+    {
+     "text": "Julie Charles",
+     "entity": "E15",
+     "how": "name"
+    },
+    {
+     "text": "son",
+     "entity": "E13",
+     "how": "pronoun"
+    },
+    {
+     "text": "son séjour",
+     "entity": "E17",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "linked_to",
+     "args": [
+      "E1",
+      "E13",
+      "artistically"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Artistiquement, le lac est particulièrement lié à la présence du poète Alphonse de Lamartine"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E13",
+      "poet"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "poète Alphonse de Lamartine"
+    },
+    {
+     "pred": "wrote_poems_at",
+     "args": [
+      "E13",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "qui y écrivit des poèmes"
+    },
+    {
+     "pred": "wrote",
+     "args": [
+      "E13",
+      "E14"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "dont Le Lac"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E14",
+      "poem"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "des poèmes, dont Le Lac"
+    },
+    {
+     "pred": "dedicated_to",
+     "args": [
+      "E14",
+      "E15"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "Le Lac dédié à la femme qu'il aime, Julie Charles"
+    },
+    {
+     "pred": "loves",
+     "args": [
+      "E13",
+      "E15"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "la femme qu'il aime"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "E17",
+      "1816-10"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "lors de son séjour en octobre 1816"
+    }
+   ]
+  },
+  {
+   "sid": "h086",
+   "mentions": [
+    {
+     "text": "八ヶ岳",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "やつがたけ",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "八ケ岳",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "諏訪湖",
+     "entity": "E2",
+     "how": "name"
+    },
+    {
+     "text": "長野県",
+     "entity": "E3",
+     "how": "name"
+    },
+    {
+     "text": "山梨県",
+     "entity": "E4",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "やつがたけ"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "やつがたけ"
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "八ケ岳"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "八ケ岳とも表記される"
+    },
+    {
+     "pred": "east_of",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "諏訪湖の東方にあって"
+    },
+    {
+     "pred": "extends_from_to",
+     "args": [
+      "E1",
+      "E3",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "長野県から山梨県へと"
+    },
+    {
+     "pred": "direction",
+     "args": [
+      "E1",
+      "north-south"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "南北に連なる"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "volcano"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "連なる火山"
+    }
+   ]
+  },
+  {
+   "sid": "h087",
+   "mentions": [
+    {
+     "text": "日本百名山",
+     "entity": "E6",
+     "how": "name"
+    },
+    {
+     "text": "八ヶ岳",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "南八ヶ岳",
+     "entity": "E5",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "refers_only_to",
+     "args": [
+      "E1",
+      "E5",
+      "in E6"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "日本百名山でいう八ヶ岳は南八ヶ岳のみを指す"
+    }
+   ]
+  },
+  {
+   "sid": "h088",
+   "mentions": [
+    {
+     "text": "利根川",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "とねがわ",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "大水上山",
+     "entity": "E2",
+     "how": "name"
+    },
+    {
+     "text": "関東地方",
+     "entity": "E3",
+     "how": "name"
+    },
+    {
+     "text": "太平洋",
+     "entity": "E4",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "とねがわ"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "とねがわ"
+    },
+    {
+     "pred": "has_source",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "大水上山を水源として"
+    },
+    {
+     "pred": "flows_through",
+     "args": [
+      "E1",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "関東地方を北から東へ流れ"
+    },
+    {
+     "pred": "direction",
+     "args": [
+      "E1",
+      "north to east"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "北から東へ流れ"
+    },
+    {
+     "pred": "flows_into",
+     "args": [
+      "E1",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "太平洋に注ぐ"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "class A river"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "一級河川"
+    }
+   ]
+  },
+  {
+   "sid": "h089",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "である"
+    },
+    {
+     "text": "利根川水系",
+     "entity": "E5",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "class A river system"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "一級水系であり"
+    },
+    {
+     "pred": "main_stem_of",
+     "args": [
+      "E1",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "利根川水系の本川（本流）である"
+    }
+   ]
+  },
+  {
+   "sid": "h090",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "ひとつ"
+    },
+    {
+     "text": "日本",
+     "entity": "E6",
+     "how": "name"
+    },
+    {
+     "text": "日本",
+     "entity": "E6",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "among_largest",
+     "args": [
+      "E1",
+      "rivers of Japan by scale"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "河川の規模は日本最大級"
+    },
+    {
+     "pred": "one_of",
+     "args": [
+      "E1",
+      "three great rivers of Japan"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "日本三大河川のひとつ"
+    }
+   ]
+  },
+  {
+   "sid": "h091",
+   "mentions": [
+    {
+     "text": "十和田湖",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "とわだこ",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "青森県",
+     "entity": "E2",
+     "how": "name"
+    },
+    {
+     "text": "十和田市",
+     "entity": "E3",
+     "how": "name"
+    },
+    {
+     "text": "秋田県",
+     "entity": "E4",
+     "how": "name"
+    },
+    {
+     "text": "鹿角郡",
+     "entity": "E5",
+     "how": "name"
+    },
+    {
+     "text": "小坂町",
+     "entity": "E6",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "とわだこ"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "とわだこ"
+    },
+    {
+     "pred": "straddles",
+     "args": [
+      "E1",
+      "E3",
+      "E6"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "青森県十和田市と秋田県鹿角郡小坂町にまたがる"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E3",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "青森県十和田市"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E6",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "鹿角郡小坂町"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E5",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "秋田県鹿角郡"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "double caldera lake"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "二重カルデラ湖である"
+    }
+   ]
+  },
+  {
+   "sid": "h092",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "12番目で"
+    },
+    {
+     "text": "日本",
+     "entity": "E7",
+     "how": "name"
+    },
+    {
+     "text": "くぼ地",
+     "entity": "E8",
+     "how": "new"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "twelfth_largest",
+     "args": [
+      "E1",
+      "lakes of Japan by area"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "面積は日本の湖沼では12番目"
+    },
+    {
+     "pred": "collapsed_by",
+     "args": [
+      "E8",
+      "volcanic eruption"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "火山噴火で陥没したくぼ地"
+    },
+    {
+     "pred": "became",
+     "args": [
+      "E8",
+      "lake"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "くぼ地が湖となった"
+    }
+   ]
+  },
+  {
+   "sid": "h093",
+   "mentions": [
+    {
+     "text": "富士川",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "ふじかわ",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "長野県",
+     "entity": "E2",
+     "how": "name"
+    },
+    {
+     "text": "山梨県",
+     "entity": "E3",
+     "how": "name"
+    },
+    {
+     "text": "静岡県",
+     "entity": "E4",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "ふじかわ"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "ふじかわ"
+    },
+    {
+     "pred": "flows_through",
+     "args": [
+      "E1",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "長野県"
+    },
+    {
+     "pred": "flows_through",
+     "args": [
+      "E1",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "山梨県"
+    },
+    {
+     "pred": "flows_through",
+     "args": [
+      "E1",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "静岡県を流れる"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "river"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "流れる河川"
+    }
+   ]
+  },
+  {
+   "sid": "h094",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "本流であり"
+    },
+    {
+     "text": "富士川",
+     "entity": "E5",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "main_stem_of",
+     "args": [
+      "E1",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "一級水系富士川の本流"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E5",
+      "class A river system"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "一級水系富士川"
+    },
+    {
+     "pred": "one_of",
+     "args": [
+      "E1",
+      "three fastest rivers of Japan"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "日本三大急流の一つに数えられている"
+    }
+   ]
+  },
+  {
+   "sid": "h095",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "要路であり"
+    },
+    {
+     "text": "甲斐",
+     "entity": "E6",
+     "how": "name"
+    },
+    {
+     "text": "駿河",
+     "entity": "E7",
+     "how": "name"
+    },
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "密着してきた"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "connects",
+     "args": [
+      "E1",
+      "E6",
+      "E7"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "甲斐と駿河を結ぶ"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "key water transport route"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "水運としての要路"
+    },
+    {
+     "pred": "close_to",
+     "args": [
+      "E1",
+      "people's lives"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "人々の暮らしに密着してきた"
+    },
+    {
+     "pred": "time",
+     "args": [
+      "close_to(E1,people's lives)",
+      "since ancient times"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "古くから"
+    }
+   ]
+  },
+  {
+   "sid": "h096",
+   "mentions": [
+    {
+     "text": "浅間山",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "あさまやま",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "長野県",
+     "entity": "E2",
+     "how": "name"
+    },
+    {
+     "text": "北佐久郡",
+     "entity": "E3",
+     "how": "name"
+    },
+    {
+     "text": "軽井沢町",
+     "entity": "E4",
+     "how": "name"
+    },
+    {
+     "text": "御代田町",
+     "entity": "E5",
+     "how": "name"
+    },
+    {
+     "text": "群馬県",
+     "entity": "E6",
+     "how": "name"
+    },
+    {
+     "text": "吾妻郡",
+     "entity": "E7",
+     "how": "name"
+    },
+    {
+     "text": "嬬恋村",
+     "entity": "E8",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "あさまやま"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "あさまやま"
+    },
+    {
+     "pred": "on_border_of",
+     "args": [
+      "E1",
+      "E4"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "長野県北佐久郡軽井沢町及び御代田町と群馬県吾妻郡嬬恋村との境にある"
+    },
+    {
+     "pred": "on_border_of",
+     "args": [
+      "E1",
+      "E5"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "長野県北佐久郡軽井沢町及び御代田町と群馬県吾妻郡嬬恋村との境にある"
+    },
+    {
+     "pred": "on_border_of",
+     "args": [
+      "E1",
+      "E8"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "長野県北佐久郡軽井沢町及び御代田町と群馬県吾妻郡嬬恋村との境にある"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E4",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "北佐久郡軽井沢町"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E5",
+      "E3"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "北佐久郡軽井沢町及び御代田町"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E3",
+      "E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "長野県北佐久郡"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E8",
+      "E7"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "吾妻郡嬬恋村"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E7",
+      "E6"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "群馬県吾妻郡"
+    },
+    {
+     "pred": "has_elevation",
+     "args": [
+      "E1",
+      "2568 m"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "標高2,568メートル"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "stratovolcano"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "成層火山"
+    }
+   ]
+  },
+  {
+   "sid": "h097",
+   "mentions": [
+    {
+     "text": "山体",
+     "entity": "E1",
+     "how": "description"
+    },
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "知られる"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "made_of",
+     "args": [
+      "E1",
+      "andesite"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "山体は安山岩質"
+    },
+    {
+     "pred": "shape",
+     "args": [
+      "E1",
+      "cone"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "円錐形"
+    },
+    {
+     "pred": "has_part",
+     "args": [
+      "E1",
+      "caldera"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "カルデラも形成されており"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "active volcano"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "活火山として知られる"
+    },
+    {
+     "pred": "vigorous",
+     "args": [
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "活発な活火山"
+    }
+   ]
+  },
+  {
+   "sid": "h098",
+   "mentions": [
+    {
+     "text": "霞ヶ浦",
+     "entity": "E1",
+     "how": "name"
+    },
+    {
+     "text": "霞ケ浦",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "かすみがうら",
+     "entity": "E1",
+     "how": "alias"
+    },
+    {
+     "text": "茨城県",
+     "entity": "E2",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "霞ケ浦"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "霞ヶ浦、霞ケ浦"
+    },
+    {
+     "pred": "named",
+     "args": [
+      "E1",
+      "かすみがうら"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "かすみがうら"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E1",
+      "E2",
+      "south-east"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "茨城県南東部に広がる"
+    },
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "lake"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "広がる湖"
+    }
+   ]
+  },
+  {
+   "sid": "h099",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "水域である"
+    },
+    {
+     "text": "西浦",
+     "entity": "E3",
+     "how": "name"
+    },
+    {
+     "text": "北浦",
+     "entity": "E4",
+     "how": "name"
+    },
+    {
+     "text": "常陸利根川",
+     "entity": "E5",
+     "how": "name"
+    },
+    {
+     "text": "北利根川",
+     "entity": "E6",
+     "how": "name"
+    },
+    {
+     "text": "外浪逆浦",
+     "entity": "E7",
+     "how": "name"
+    },
+    {
+     "text": "常陸川",
+     "entity": "E8",
+     "how": "name"
+    },
+    {
+     "text": "鰐川",
+     "entity": "E9",
+     "how": "name"
+    },
+    {
+     "text": "横利根川",
+     "entity": "E10",
+     "how": "name"
+    },
+    {
+     "text": "河川法",
+     "entity": "E11",
+     "how": "name"
+    },
+    {
+     "text": "流域市町村",
+     "entity": "E16",
+     "how": "new"
+    },
+    {
+     "text": "茨城県",
+     "entity": "E2",
+     "how": "name"
+    },
+    {
+     "text": "千葉県",
+     "entity": "E12",
+     "how": "name"
+    },
+    {
+     "text": "香取市",
+     "entity": "E13",
+     "how": "name"
+    },
+    {
+     "text": "栃木県",
+     "entity": "E14",
+     "how": "name"
+    },
+    {
+     "text": "益子町",
+     "entity": "E15",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "is_a",
+     "args": [
+      "E1",
+      "water area",
+      "broad sense"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "総称した水域である"
+    },
+    {
+     "pred": "comprises",
+     "args": [
+      "E1",
+      "E3",
+      "broad sense"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "広義には、西浦"
+    },
+    {
+     "pred": "comprises",
+     "args": [
+      "E1",
+      "E4",
+      "broad sense"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "北浦"
+    },
+    {
+     "pred": "comprises",
+     "args": [
+      "E1",
+      "E5",
+      "broad sense"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "常陸利根川"
+    },
+    {
+     "pred": "comprises",
+     "args": [
+      "E1",
+      "E9",
+      "broad sense"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "鰐川"
+    },
+    {
+     "pred": "comprises",
+     "args": [
+      "E1",
+      "E10",
+      "broad sense"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "横利根川"
+    },
+    {
+     "pred": "consists_of",
+     "args": [
+      "E5",
+      "E6"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "常陸利根川（北利根川"
+    },
+    {
+     "pred": "consists_of",
+     "args": [
+      "E5",
+      "E7"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "外浪逆浦"
+    },
+    {
+     "pred": "consists_of",
+     "args": [
+      "E5",
+      "E8"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "及び常陸川"
+    },
+    {
+     "pred": "rivers_under",
+     "args": [
+      "E1",
+      "5 rivers forming a class A river",
+      "E11"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "河川法上は5河川からなる一級河川"
+    },
+    {
+     "pred": "basin_municipalities_of",
+     "args": [
+      "E16",
+      "E1"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "流域市町村"
+    },
+    {
+     "pred": "includes",
+     "args": [
+      "E16",
+      "22 municipalities of E2"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "茨城県の22市町村"
+    },
+    {
+     "pred": "includes",
+     "args": [
+      "E16",
+      "E13"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "千葉県香取市"
+    },
+    {
+     "pred": "includes",
+     "args": [
+      "E16",
+      "E15"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "栃木県益子町を含む"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E13",
+      "E12"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "千葉県香取市"
+    },
+    {
+     "pred": "located_in",
+     "args": [
+      "E15",
+      "E14"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "栃木県益子町"
+    }
+   ]
+  },
+  {
+   "sid": "h100",
+   "mentions": [
+    {
+     "text": "",
+     "entity": "E1",
+     "how": "dropped",
+     "at": "いう"
+    },
+    {
+     "text": "西浦",
+     "entity": "E3",
+     "how": "name"
+    }
+   ],
+   "atoms": [
+    {
+     "pred": "refers_only_to",
+     "args": [
+      "E1",
+      "E3",
+      "narrow (limnological) sense"
+     ],
+     "neg": false,
+     "hedged": false,
+     "span": "狭義（湖沼学的）には西浦のみをいう"
+    }
+   ]
+  }
+ ],
+ "synonyms": [
+  {
+   "lang": "en",
+   "a": "large",
+   "b": "big",
+   "pos": "ADJ",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "en",
+   "a": "shoreline",
+   "b": "coastline",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "en",
+   "a": "purchase",
+   "b": "buy",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "en",
+   "a": "produce",
+   "b": "manufacture",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "en",
+   "a": "watershed",
+   "b": "catchment",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "en",
+   "a": "vital",
+   "b": "essential",
+   "pos": "ADJ",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "en",
+   "a": "border",
+   "b": "boundary",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "en",
+   "a": "discharge",
+   "b": "outflow",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "en",
+   "a": "economical",
+   "b": "cost-effective",
+   "pos": "ADJ",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "en",
+   "a": "form",
+   "b": "establish",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "en",
+   "a": "shallow",
+   "b": "deep",
+   "pos": "ADJ",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "en",
+   "a": "maximum",
+   "b": "minimum",
+   "pos": "ADJ",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "en",
+   "a": "buy",
+   "b": "sell",
+   "pos": "VERB",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "en",
+   "a": "developed",
+   "b": "underdeveloped",
+   "pos": "ADJ",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "en",
+   "a": "cichlid",
+   "b": "fish",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "hypernym"
+  },
+  {
+   "lang": "en",
+   "a": "device",
+   "b": "product",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "hypernym"
+  },
+  {
+   "lang": "en",
+   "a": "clinician",
+   "b": "physician",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "hypernym"
+  },
+  {
+   "lang": "en",
+   "a": "state",
+   "b": "province",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "en",
+   "a": "settler",
+   "b": "explorer",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "en",
+   "a": "lake",
+   "b": "river",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "es",
+   "a": "profundo",
+   "b": "hondo",
+   "pos": "ADJ",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "es",
+   "a": "nacer",
+   "b": "brotar",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "es",
+   "a": "desembocar",
+   "b": "desaguar",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "es",
+   "a": "bello",
+   "b": "hermoso",
+   "pos": "ADJ",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "es",
+   "a": "importante",
+   "b": "relevante",
+   "pos": "ADJ",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "es",
+   "a": "fluir",
+   "b": "discurrir",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "es",
+   "a": "frontera",
+   "b": "límite",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "es",
+   "a": "superficie",
+   "b": "área",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "es",
+   "a": "ciudad",
+   "b": "urbe",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "es",
+   "a": "perforar",
+   "b": "taladrar",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "es",
+   "a": "profundo",
+   "b": "superficial",
+   "pos": "ADJ",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "es",
+   "a": "grande",
+   "b": "pequeño",
+   "pos": "ADJ",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "es",
+   "a": "norte",
+   "b": "sur",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "es",
+   "a": "occidental",
+   "b": "oriental",
+   "pos": "ADJ",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "es",
+   "a": "inactivo",
+   "b": "activo",
+   "pos": "ADJ",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "es",
+   "a": "volcán",
+   "b": "montaña",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "hypernym"
+  },
+  {
+   "lang": "es",
+   "a": "lago",
+   "b": "laguna",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "es",
+   "a": "río",
+   "b": "afluente",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "es",
+   "a": "relámpago",
+   "b": "trueno",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "es",
+   "a": "provincia",
+   "b": "departamento",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "fr",
+   "a": "source",
+   "b": "origine",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "fr",
+   "a": "couler",
+   "b": "s'écouler",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "fr",
+   "a": "se jeter",
+   "b": "déboucher",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "fr",
+   "a": "alimenter",
+   "b": "approvisionner",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "fr",
+   "a": "superficie",
+   "b": "surface",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "fr",
+   "a": "berge",
+   "b": "rive",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "fr",
+   "a": "commune",
+   "b": "municipalité",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "fr",
+   "a": "ruisseau",
+   "b": "ru",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "fr",
+   "a": "encadrer",
+   "b": "entourer",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "fr",
+   "a": "proche",
+   "b": "voisin",
+   "pos": "ADJ",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "fr",
+   "a": "grand",
+   "b": "petit",
+   "pos": "ADJ",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "fr",
+   "a": "profond",
+   "b": "superficiel",
+   "pos": "ADJ",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "fr",
+   "a": "nord",
+   "b": "sud",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "fr",
+   "a": "fonte",
+   "b": "congélation",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "fr",
+   "a": "fleuve",
+   "b": "cours d'eau",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "hypernym"
+  },
+  {
+   "lang": "fr",
+   "a": "lac",
+   "b": "étang",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "fr",
+   "a": "torrent",
+   "b": "ruisseau",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "fr",
+   "a": "glacier",
+   "b": "glace",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "fr",
+   "a": "massif",
+   "b": "montagne",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "fr",
+   "a": "poète",
+   "b": "écrivain",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "hypernym"
+  },
+  {
+   "lang": "de",
+   "a": "Strom",
+   "b": "Fluss",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "de",
+   "a": "münden",
+   "b": "einmünden",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "de",
+   "a": "fließen",
+   "b": "strömen",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "de",
+   "a": "Gipfel",
+   "b": "Spitze",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "de",
+   "a": "Bergsteiger",
+   "b": "Alpinist",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "de",
+   "a": "Fremdenverkehr",
+   "b": "Tourismus",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "de",
+   "a": "bedeutend",
+   "b": "wichtig",
+   "pos": "ADJ",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "de",
+   "a": "beliebt",
+   "b": "populär",
+   "pos": "ADJ",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "de",
+   "a": "Herkunft",
+   "b": "Ursprung",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "de",
+   "a": "Nebenfluss",
+   "b": "Zufluss",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "de",
+   "a": "groß",
+   "b": "klein",
+   "pos": "ADJ",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "de",
+   "a": "kurz",
+   "b": "lang",
+   "pos": "ADJ",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "de",
+   "a": "Oberlauf",
+   "b": "Unterlauf",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "de",
+   "a": "Tiefland",
+   "b": "Hochland",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "de",
+   "a": "Berg",
+   "b": "Hügel",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "de",
+   "a": "Fluss",
+   "b": "Gewässer",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "hypernym"
+  },
+  {
+   "lang": "de",
+   "a": "Quellfluss",
+   "b": "Nebenfluss",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "de",
+   "a": "Gipfel",
+   "b": "Berg",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "de",
+   "a": "entspringen",
+   "b": "münden",
+   "pos": "VERB",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "de",
+   "a": "Erstbesteigung",
+   "b": "Besteigung",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "hypernym"
+  },
+  {
+   "lang": "ja",
+   "a": "河川",
+   "b": "川",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "ja",
+   "a": "本川",
+   "b": "本流",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "ja",
+   "a": "水源",
+   "b": "源流",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "ja",
+   "a": "注ぐ",
+   "b": "流れ込む",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "ja",
+   "a": "標高",
+   "b": "海抜",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "ja",
+   "a": "境",
+   "b": "境界",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "ja",
+   "a": "暮らし",
+   "b": "生活",
+   "pos": "NOUN",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "ja",
+   "a": "指す",
+   "b": "示す",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "ja",
+   "a": "連なる",
+   "b": "連続する",
+   "pos": "VERB",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "ja",
+   "a": "活発",
+   "b": "盛ん",
+   "pos": "ADJ",
+   "same": true,
+   "kind": "synonym"
+  },
+  {
+   "lang": "ja",
+   "a": "広義",
+   "b": "狭義",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "ja",
+   "a": "北",
+   "b": "南",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "ja",
+   "a": "東",
+   "b": "西",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "ja",
+   "a": "最大",
+   "b": "最小",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "antonym"
+  },
+  {
+   "lang": "ja",
+   "a": "火山",
+   "b": "山",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "hypernym"
+  },
+  {
+   "lang": "ja",
+   "a": "活火山",
+   "b": "火山",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "hypernym"
+  },
+  {
+   "lang": "ja",
+   "a": "湖",
+   "b": "沼",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "ja",
+   "a": "急流",
+   "b": "河川",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  },
+  {
+   "lang": "ja",
+   "a": "湖沼",
+   "b": "湖",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "hypernym"
+  },
+  {
+   "lang": "ja",
+   "a": "噴火",
+   "b": "陥没",
+   "pos": "NOUN",
+   "same": false,
+   "kind": "related"
+  }
+ ]
+}

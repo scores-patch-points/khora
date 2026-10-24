@@ -1,0 +1,1254 @@
+{
+ "schema": "pairs",
+ "authored": "Claude (Opus 5.5) subagent, 2026-10-22: hand-written claims from sentences.json only, no code or other evals read",
+ "pairs": [
+  {
+   "id": 801,
+   "lang": "en",
+   "label": "E",
+   "type": "superlative to rank, reworded",
+   "claim": "Among the five Great Lakes, Lake Erie ranks fourth in surface area.",
+   "sentence": "Lake Erie ( EER-ee) is the fourth-largest lake by surface area of the five Great Lakes in North America and the eleventh-largest globally.",
+   "source": {
+    "sid": "en-0",
+    "url": "https://en.wikipedia.org/wiki/Lake_Erie",
+    "revid": 1380979104
+   }
+  },
+  {
+   "id": 802,
+   "lang": "en",
+   "label": "E",
+   "type": "superlative recast as negated comparative",
+   "claim": "No other Great Lake holds less water than Lake Erie.",
+   "sentence": "It is the southernmost, shallowest, and smallest by volume of the Great Lakes and also has the shortest average water residence time.",
+   "source": {
+    "sid": "en-1",
+    "url": "https://en.wikipedia.org/wiki/Lake_Erie",
+    "revid": 1380979104
+   }
+  },
+  {
+   "id": 803,
+   "lang": "en",
+   "label": "E",
+   "type": "metric figure, restructured contrast",
+   "claim": "Lake Erie's maximum depth of 64 metres lies above sea level, something true of no other Great Lake.",
+   "sentence": "At its deepest point, Lake Erie is 210 feet (64 m) deep, making it the only Great Lake whose deepest point is above sea level.",
+   "source": {
+    "sid": "en-2",
+    "url": "https://en.wikipedia.org/wiki/Lake_Erie",
+    "revid": 1380979104
+   }
+  },
+  {
+   "id": 804,
+   "lang": "en",
+   "label": "E",
+   "type": "'third after' recast as smaller than both",
+   "claim": "Cleveland, the biggest city on Lake Erie, anchors a U.S. metro area in the Great Lakes region that is smaller than both Greater Chicago and Metro Detroit.",
+   "sentence": "The largest city on the lake is Cleveland, anchoring the third largest U.S. metro area in the Great Lakes region, after Greater Chicago and Metro Detroit.",
+   "source": {
+    "sid": "en-5",
+    "url": "https://en.wikipedia.org/wiki/Lake_Erie",
+    "revid": 1380979104
+   }
+  },
+  {
+   "id": 805,
+   "lang": "en",
+   "label": "E",
+   "type": "synonyms, voice change",
+   "claim": "Turbines near Niagara Falls spun by the Niagara River, Lake Erie's chief natural outlet, generate electricity for both the United States and Canada.",
+   "sentence": "The main natural outflow from the lake is via the Niagara River, which provides hydroelectric power to Canada and the U.S. as it spins huge turbines near Niagara Falls at Lewiston, New York, and Queenston, Ontario.",
+   "source": {
+    "sid": "en-8",
+    "url": "https://en.wikipedia.org/wiki/Lake_Erie",
+    "revid": 1380979104
+   }
+  },
+  {
+   "id": 806,
+   "lang": "en",
+   "label": "E",
+   "type": "metric figure, superlative reworded",
+   "claim": "At roughly 3,429 metres, Mount Hood is Oregon's tallest peak.",
+   "sentence": "With a summit elevation of 11,249 feet (3,429 m), it is the highest mountain in the U.S. state of Oregon and is the fourth highest in the Cascade Range.",
+   "source": {
+    "sid": "en-15",
+    "url": "https://en.wikipedia.org/wiki/Mount_Hood",
+    "revid": 1378909389
+   }
+  },
+  {
+   "id": 807,
+   "lang": "en",
+   "label": "E",
+   "type": "converse spatial relation with km figure",
+   "claim": "Portland lies some 80 km west-northwest of Mount Hood.",
+   "sentence": "It is located about 50 miles (80 km) east-east-southeast of Portland, on the border between Clackamas and Hood River counties, and forms part of the Mount Hood National Forest.",
+   "source": {
+    "sid": "en-14",
+    "url": "https://en.wikipedia.org/wiki/Mount_Hood",
+    "revid": 1378909389
+   }
+  },
+  {
+   "id": 808,
+   "lang": "en",
+   "label": "E",
+   "type": "reordering, synonyms",
+   "claim": "Each year an estimated ten thousand climbers are drawn to Hood.",
+   "sentence": "Hood attracts an estimated 10,000 climbers a year.",
+   "source": {
+    "sid": "en-19",
+    "url": "https://en.wikipedia.org/wiki/Mount_Hood",
+    "revid": 1378909389
+   }
+  },
+  {
+   "id": 809,
+   "lang": "en",
+   "label": "C",
+   "type": "wrong river for inlet",
+   "claim": "The Niagara River is Lake Erie's primary inlet.",
+   "sentence": "Situated below Lake Huron, Erie's primary inlet is the Detroit River.",
+   "source": {
+    "sid": "en-7",
+    "url": "https://en.wikipedia.org/wiki/Lake_Erie",
+    "revid": 1380979104
+   }
+  },
+  {
+   "id": 810,
+   "lang": "en",
+   "label": "C",
+   "type": "wrong volcano type and status",
+   "claim": "Mount Hood is an extinct shield volcano.",
+   "sentence": "Mount Hood is an active stratovolcano in the Cascade Range and is a member of the Cascade Volcanic Arc.",
+   "source": {
+    "sid": "en-12",
+    "url": "https://en.wikipedia.org/wiki/Mount_Hood",
+    "revid": 1378909389
+   }
+  },
+  {
+   "id": 811,
+   "lang": "en",
+   "label": "C",
+   "type": "figure changed",
+   "claim": "Fewer than ten named glaciers and snowfields are found on the peak.",
+   "sentence": "The peak is home to 12 named glaciers and snowfields.",
+   "source": {
+    "sid": "en-20",
+    "url": "https://en.wikipedia.org/wiki/Mount_Hood",
+    "revid": 1378909389
+   }
+  },
+  {
+   "id": 812,
+   "lang": "en",
+   "label": "C",
+   "type": "wrong jurisdiction for north shore",
+   "claim": "Lake Erie's northern shore belongs to the U.S. state of Michigan.",
+   "sentence": "Located on the International Boundary between Canada and the United States, Lake Erie's northern shore is the Canadian province of Ontario, specifically the Ontario Peninsula, with the U.S. states of Michigan, Ohio, Pennsylvania, and New York on its western, southern, and eastern shores.",
+   "source": {
+    "sid": "en-3",
+    "url": "https://en.wikipedia.org/wiki/Lake_Erie",
+    "revid": 1380979104
+   }
+  },
+  {
+   "id": 813,
+   "lang": "en",
+   "label": "C",
+   "type": "probability figure changed",
+   "claim": "The odds of Mount Hood erupting in the next 30 years are put at more than 20%.",
+   "sentence": "The odds of an eruption in the next 30 years are estimated at between 3 and 7%, so the U.S.",
+   "source": {
+    "sid": "en-22",
+    "url": "https://en.wikipedia.org/wiki/Mount_Hood",
+    "revid": 1378909389
+   }
+  },
+  {
+   "id": 814,
+   "lang": "en",
+   "label": "T",
+   "type": "topical, cause not stated",
+   "claim": "Algae blooms in Lake Erie are driven mainly by fertilizer runoff from farms.",
+   "sentence": "Lake Erie's environmental health has been an ongoing concern for decades, with issues such as overfishing, pollution, algae blooms, aquatic invasive species, and eutrophication generating headlines.",
+   "source": {
+    "sid": "en-11",
+    "url": "https://en.wikipedia.org/wiki/Lake_Erie",
+    "revid": 1380979104
+   }
+  },
+  {
+   "id": 815,
+   "lang": "en",
+   "label": "T",
+   "type": "topical, history not stated",
+   "claim": "Timberline Lodge was built during the Great Depression.",
+   "sentence": "Ski areas on the mountain include Timberline Lodge ski area, which offers the only year-round lift-served skiing in North America, Mount Hood Meadows, Mount Hood Skibowl, Summit Ski Area, and Cooper Spur ski area.",
+   "source": {
+    "sid": "en-16",
+    "url": "https://en.wikipedia.org/wiki/Mount_Hood",
+    "revid": 1378909389
+   }
+  },
+  {
+   "id": 816,
+   "lang": "en",
+   "label": "T",
+   "type": "topical, date not stated",
+   "claim": "Mount Hood last erupted in the 1790s.",
+   "sentence": "Mount Hood is considered the Oregon volcano most likely to erupt.",
+   "source": {
+    "sid": "en-21",
+    "url": "https://en.wikipedia.org/wiki/Mount_Hood",
+    "revid": 1378909389
+   }
+  },
+  {
+   "id": 817,
+   "lang": "es",
+   "label": "E",
+   "type": "superlative as negated comparative",
+   "claim": "Con sus 1112 km², ningún embalse natural de México supera en tamaño al lago de Chapala.",
+   "sentence": "El lago de Chapala es el embalse natural más grande de México, al contar con 1112 km².",
+   "source": {
+    "sid": "es-24",
+    "url": "https://es.wikipedia.org/wiki/Lago_de_Chapala",
+    "revid": 175507016
+   }
+  },
+  {
+   "id": 818,
+   "lang": "es",
+   "label": "E",
+   "type": "reordered percentages",
+   "claim": "Jalisco abarca el 86 % de la superficie del lago, frente a solo el 14 % de Michoacán.",
+   "sentence": "Se localiza en los estados de Jalisco y Michoacán, aunque la mayor parte del cuerpo de agua pertenece al primero.​El lago tiene una capacidad total de aproximadamente 8000 hectómetros cúbicos (hm³) y una superficie total de 114 659 hectáreas (1146,6 km²), de las cuales el 86 % se hallan en Jalisco y el 14 % en Michoacán.",
+   "source": {
+    "sid": "es-25",
+    "url": "https://es.wikipedia.org/wiki/Lago_de_Chapala",
+    "revid": 175507016
+   }
+  },
+  {
+   "id": 819,
+   "lang": "es",
+   "label": "E",
+   "type": "restructured cause",
+   "claim": "Del agua que llega a Guadalajara, el 60 % procede del lago de Chapala, su principal fuente de agua potable.",
+   "sentence": "Este lago es la principal fuente de abastecimiento de agua potable de la Zona Metropolitana de Guadalajara ya que aporta el 60 % de líquido que llega a la ciudad.",
+   "source": {
+    "sid": "es-26",
+    "url": "https://es.wikipedia.org/wiki/Lago_de_Chapala",
+    "revid": 175507016
+   }
+  },
+  {
+   "id": 820,
+   "lang": "es",
+   "label": "E",
+   "type": "passive to active, synonym",
+   "claim": "El lago de Chapala obtuvo en 2009 la designación Ramsar como humedal de importancia internacional.",
+   "sentence": "En febrero de 2009 el lago fue declarado sitio Ramsar (Humedal de Importancia Internacional).",
+   "source": {
+    "sid": "es-27",
+    "url": "https://es.wikipedia.org/wiki/Lago_de_Chapala",
+    "revid": 175507016
+   }
+  },
+  {
+   "id": 821,
+   "lang": "es",
+   "label": "E",
+   "type": "reordered superlative",
+   "claim": "El punto más alto de todas las Antillas es el pico Duarte, situado en la Cordillera Central dominicana.",
+   "sentence": "El pico Duarte es un pico perteneciente a la Cordillera Central en la República Dominicana, siendo el punto más elevado de La Española y de las Antillas en su conjunto.",
+   "source": {
+    "sid": "es-28",
+    "url": "https://es.wikipedia.org/wiki/Pico_Duarte",
+    "revid": 175788251
+   }
+  },
+  {
+   "id": 822,
+   "lang": "es",
+   "label": "E",
+   "type": "temporal reordering",
+   "claim": "El pico recibió el nombre que lleva hoy después de que muriera el dictador Trujillo.",
+   "sentence": "Tras la muerte del dictador Rafael Leónidas Trujillo le dieron su nombre actual.",
+   "source": {
+    "sid": "es-32",
+    "url": "https://es.wikipedia.org/wiki/Pico_Duarte",
+    "revid": 175788251
+   }
+  },
+  {
+   "id": 823,
+   "lang": "es",
+   "label": "E",
+   "type": "also-known-as recast as another name",
+   "claim": "Otro nombre con el que se conoce al Grijalva en México es el de río Mezcalapa.",
+   "sentence": "En México también es conocido como río Mezcalapa, cruzando el sureste del país.",
+   "source": {
+    "sid": "es-46",
+    "url": "https://es.wikipedia.org/wiki/R%C3%ADo_Grijalva",
+    "revid": 174220219
+   }
+  },
+  {
+   "id": 824,
+   "lang": "es",
+   "label": "E",
+   "type": "superlative as negated comparative",
+   "claim": "Ningún río mexicano genera más energía hidroeléctrica que el Grijalva.",
+   "sentence": "Es el principal productor de energía hidroeléctrica en México.",
+   "source": {
+    "sid": "es-47",
+    "url": "https://es.wikipedia.org/wiki/R%C3%ADo_Grijalva",
+    "revid": 174220219
+   }
+  },
+  {
+   "id": 825,
+   "lang": "es",
+   "label": "C",
+   "type": "decade changed",
+   "claim": "La Pelona Grande pasó a llamarse pico Trujillo en la década de 1950.",
+   "sentence": "La Pelona Grande fue bautizada como pico Trujillo en la década de 1930.",
+   "source": {
+    "sid": "es-31",
+    "url": "https://es.wikipedia.org/wiki/Pico_Duarte",
+    "revid": 175788251
+   }
+  },
+  {
+   "id": 826,
+   "lang": "es",
+   "label": "C",
+   "type": "distance changed",
+   "claim": "En línea recta, las cumbres del pico Duarte y La Pelona distan más de 5 km.",
+   "sentence": "La distancia recta entre las cumbres del pico Duarte y La Pelona es de 1 ½ km.",
+   "source": {
+    "sid": "es-36",
+    "url": "https://es.wikipedia.org/wiki/Pico_Duarte",
+    "revid": 175788251
+   }
+  },
+  {
+   "id": 827,
+   "lang": "es",
+   "label": "C",
+   "type": "comparison reversed",
+   "claim": "Según las mediciones con altímetro, La Pelona supera en altura al pico Duarte.",
+   "sentence": "Su altura exacta es desconocida, las diferentes estimaciones y mediciones sitúan al pico con altitudes de 3087, 3098, 3140, 3175 y 3179 metros sin haberse llegado a una cifra definitiva. ​​ Sin embargo, mediciones con altímetro muestran que La Pelona queda algunos metros por debajo del pico Duarte.",
+   "source": {
+    "sid": "es-35",
+    "url": "https://es.wikipedia.org/wiki/Pico_Duarte",
+    "revid": 175788251
+   }
+  },
+  {
+   "id": 828,
+   "lang": "es",
+   "label": "C",
+   "type": "wrong origin place and country",
+   "claim": "El río Grijalva nace en la sierra Madre de Chiapas, en territorio mexicano.",
+   "sentence": "El río Grijalva o río Seleguá nace en la sierra de los Cuchumatanes en el departamento de Huehuetenango en Guatemala.",
+   "source": {
+    "sid": "es-45",
+    "url": "https://es.wikipedia.org/wiki/R%C3%ADo_Grijalva",
+    "revid": 174220219
+   }
+  },
+  {
+   "id": 829,
+   "lang": "es",
+   "label": "C",
+   "type": "altitude changed",
+   "claim": "El valle de Lilís, que separa las cimas, se encuentra por encima de los 3000 metros de altitud.",
+   "sentence": "Las cimas están divididas por el valle de Lilís, con una altura de 2950 m s. n. m..",
+   "source": {
+    "sid": "es-37",
+    "url": "https://es.wikipedia.org/wiki/Pico_Duarte",
+    "revid": 175788251
+   }
+  },
+  {
+   "id": 830,
+   "lang": "es",
+   "label": "T",
+   "type": "topical, duration not stated",
+   "claim": "El ascenso al pico Duarte suele durar tres días.",
+   "sentence": "Normalmente este pico lo visitan muchas brigadas y colegios dominicanos.",
+   "source": {
+    "sid": "es-44",
+    "url": "https://es.wikipedia.org/wiki/Pico_Duarte",
+    "revid": 175788251
+   }
+  },
+  {
+   "id": 831,
+   "lang": "es",
+   "label": "T",
+   "type": "topical, date not stated",
+   "claim": "El Parque Nacional Armando Bermúdez fue creado en 1956.",
+   "sentence": "Está ubicado entre el Parque Nacional José del Carmen Ramírez y el parque nacional Armando Bermúdez.",
+   "source": {
+    "sid": "es-29",
+    "url": "https://es.wikipedia.org/wiki/Pico_Duarte",
+    "revid": 175788251
+   }
+  },
+  {
+   "id": 832,
+   "lang": "es",
+   "label": "T",
+   "type": "topical, navigability not stated",
+   "claim": "El río Grijalva es navegable en todo su tramo por Tabasco.",
+   "sentence": "Posteriormente, sirve de límite estatal entre los estados de Chiapas y Tabasco, para finalmente adentrarse en el estado de Tabasco después de pasar por la comunidad de San Manuel.",
+   "source": {
+    "sid": "es-53",
+    "url": "https://es.wikipedia.org/wiki/R%C3%ADo_Grijalva",
+    "revid": 174220219
+   }
+  },
+  {
+   "id": 833,
+   "lang": "es",
+   "label": "E",
+   "type": "cross-language, comparison derived from two figures",
+   "claim": "Loma de la Viuda, at 2,801 m, stands higher than Pico del Barraco at 2,644 m.",
+   "sentence": "Otras cumbres  importantes en los alrededores son el pico del Barraco (2644 m s. n. m.) y la Loma de la Viuda (2801 m s. n. m.).",
+   "source": {
+    "sid": "es-39",
+    "url": "https://es.wikipedia.org/wiki/Pico_Duarte",
+    "revid": 175788251
+   }
+  },
+  {
+   "id": 834,
+   "lang": "es",
+   "label": "E",
+   "type": "cross-language, number word conversion",
+   "claim": "The Grijalva and Usumacinta delta discharges about 125 billion cubic metres jointly, some 35% of Mexico's river flow.",
+   "sentence": "En su desembocadura el río Grijalva forma un amplio delta pantanoso llamado Pantanos de Centla, que también alimenta el río Usumacinta, que enlaza con el tramo final del Grijalva, ambos ríos forman un impresionante delta con una descarga conjunta de 125 000 millones de metros cúbicos, que representan el 35 % de las corrientes de México,​ por lo que está considerado como el sistema más importante de Norteamérica y Centroamérica y tiene el séptimo lugar a nivel mundial.​ El río Grijalva está formado por dos ríos diferentes en su origen: el río Grijalva y el río Grande de Chiapas, ya que en la década de 1950, la Secretaría de Recursos Hidráulicos uniformó todo el sistema dándole el nombre oficial de río Grijalva-Mezcalapa, y considerando los dos ríos en uno solo llamándolos Grijalva (desde la ciudad de Villahermosa hasta la desembocadura en el golfo de México) y Alto Grijalva (localizado en Chiapas).[cita requerida]",
+   "source": {
+    "sid": "es-55",
+    "url": "https://es.wikipedia.org/wiki/R%C3%ADo_Grijalva",
+    "revid": 174220219
+   }
+  },
+  {
+   "id": 835,
+   "lang": "es",
+   "label": "C",
+   "type": "cross-language, direction reversed",
+   "claim": "Loma La Rusilla lies to the west of Pico Duarte.",
+   "sentence": "Hacia el oriente está la Loma La Rusilla con 3038 m s. n. m. y el pico Yaque (2761 m s. n. m.).",
+   "source": {
+    "sid": "es-40",
+    "url": "https://es.wikipedia.org/wiki/Pico_Duarte",
+    "revid": 175788251
+   }
+  },
+  {
+   "id": 836,
+   "lang": "es",
+   "label": "T",
+   "type": "cross-language, vegetation not stated",
+   "claim": "The mountains rising between these valleys are covered in pine forest.",
+   "sentence": "Entre estos valles se levantan montañas que en muchos casos superan los 2000 metros de altitud.",
+   "source": {
+    "sid": "es-43",
+    "url": "https://es.wikipedia.org/wiki/Pico_Duarte",
+    "revid": 175788251
+   }
+  },
+  {
+   "id": 837,
+   "lang": "fr",
+   "label": "E",
+   "type": "cleft sentence, reordered",
+   "claim": "C'est dans le département français de la Loire-Atlantique que se trouve le lac de Grand-Lieu.",
+   "sentence": "Le lac de Grand-Lieu est un lac situé en France, dans le département de la Loire-Atlantique.",
+   "source": {
+    "sid": "fr-56",
+    "url": "https://fr.wikipedia.org/wiki/Lac_de_Grand-Lieu",
+    "revid": 238977611
+   }
+  },
+  {
+   "id": 838,
+   "lang": "fr",
+   "label": "E",
+   "type": "superlative as negated comparative",
+   "claim": "En hiver, aucun lac naturel de plaine de France métropolitaine n'est plus étendu que celui de Grand-Lieu.",
+   "sentence": "Il s'agit, en hiver, du plus grand lac naturel de plaine de France métropolitaine.",
+   "source": {
+    "sid": "fr-59",
+    "url": "https://fr.wikipedia.org/wiki/Lac_de_Grand-Lieu",
+    "revid": 238977611
+   }
+  },
+  {
+   "id": 839,
+   "lang": "fr",
+   "label": "E",
+   "type": "reordered figures",
+   "claim": "On recense dans la zone du lac 220 espèces d'algues et 250 espèces de plantes.",
+   "sentence": "La zone du lac abrite 250 espèces de végétaux et 220 d'algues.",
+   "source": {
+    "sid": "fr-62",
+    "url": "https://fr.wikipedia.org/wiki/Lac_de_Grand-Lieu",
+    "revid": 238977611
+   }
+  },
+  {
+   "id": 840,
+   "lang": "fr",
+   "label": "E",
+   "type": "active voice, synonym",
+   "claim": "En 1995, la convention de Ramsar a reconnu le lac comme zone humide d'importance internationale.",
+   "sentence": "Il a été classé en 1995 comme zone humide d'importance internationale par la convention de Ramsar.",
+   "source": {
+    "sid": "fr-65",
+    "url": "https://fr.wikipedia.org/wiki/Lac_de_Grand-Lieu",
+    "revid": 238977611
+   }
+  },
+  {
+   "id": 841,
+   "lang": "fr",
+   "label": "E",
+   "type": "culminating point as negated comparative",
+   "claim": "Aucun sommet des Cévennes n'est plus élevé que le mont Lozère.",
+   "sentence": "Il est le point culminant des Cévennes.",
+   "source": {
+    "sid": "fr-67",
+    "url": "https://fr.wikipedia.org/wiki/Mont_Loz%C3%A8re",
+    "revid": 240008508
+   }
+  },
+  {
+   "id": 842,
+   "lang": "fr",
+   "label": "E",
+   "type": "restructured superlative",
+   "claim": "Parmi les affluents de la Loire, c'est la Vienne qui présente le débit le plus fort.",
+   "sentence": "D'une longueur de 363,3 km, elle est l'un des principaux affluents de la Loire, avec l'Allier et le Cher, et celui qui a le plus important débit.",
+   "source": {
+    "sid": "fr-69",
+    "url": "https://fr.wikipedia.org/wiki/Vienne_(affluent_de_la_Loire)",
+    "revid": 234781206
+   }
+  },
+  {
+   "id": 843,
+   "lang": "fr",
+   "label": "E",
+   "type": "nickname, voice change",
+   "claim": "Les riverains appellent le lac de Paladru le « Lac bleu ».",
+   "sentence": "Le lac de Paladru, surnommé le « Lac bleu », par ses riverains, est un lac naturel des Terres froides, situé administrativement dans le département de l'Isère en région Auvergne-Rhône-Alpes et autrefois rattachée à l'ancienne province du Dauphiné.",
+   "source": {
+    "sid": "fr-71",
+    "url": "https://fr.wikipedia.org/wiki/Lac_de_Paladru",
+    "revid": 239928126
+   }
+  },
+  {
+   "id": 844,
+   "lang": "fr",
+   "label": "E",
+   "type": "midway recast as equal distance",
+   "claim": "Le lac de Paladru se trouve à peu près à égale distance de Grenoble et de Lyon.",
+   "sentence": "Le lac est situé à mi-chemin entre les agglomérations de Grenoble et de Lyon, dans un paysage de collines et de petites montagnes.",
+   "source": {
+    "sid": "fr-73",
+    "url": "https://fr.wikipedia.org/wiki/Lac_de_Paladru",
+    "revid": 239928126
+   }
+  },
+  {
+   "id": 845,
+   "lang": "fr",
+   "label": "C",
+   "type": "number of communes changed",
+   "claim": "Le lac de Paladru est réparti entre six communes.",
+   "sentence": "D'une longueur légèrement supérieure à 5 km et d'une superficie de 3,9 km2, ce lac est partagé entre quatre communes et deux cantons.",
+   "source": {
+    "sid": "fr-72",
+    "url": "https://fr.wikipedia.org/wiki/Lac_de_Paladru",
+    "revid": 239928126
+   }
+  },
+  {
+   "id": 846,
+   "lang": "fr",
+   "label": "C",
+   "type": "founding year changed",
+   "claim": "La Société du lac de Paladru a vu le jour en 1920.",
+   "sentence": "Le lac de Paladru est la propriété privée de la « Société du lac de Paladru », une société civile immobilière privée fondée en 1874 qui compte vingt et un copropriétaires.",
+   "source": {
+    "sid": "fr-76",
+    "url": "https://fr.wikipedia.org/wiki/Lac_de_Paladru",
+    "revid": 239928126
+   }
+  },
+  {
+   "id": 847,
+   "lang": "fr",
+   "label": "C",
+   "type": "direction reversed",
+   "claim": "Le lac de Grand-Lieu est situé au nord-est de Nantes.",
+   "sentence": "Situé au sud-ouest de Nantes (les communes de Bouaye et Saint-Aignan-Grandlieu qui le bordent au nord font partie de Nantes Métropole), ainsi qu'à une dizaine de kilomètres au sud de la Loire, il s'étend en quasi-totalité sur le territoire de la commune de Saint-Philbert-de-Grand-Lieu.",
+   "source": {
+    "sid": "fr-57",
+    "url": "https://fr.wikipedia.org/wiki/Lac_de_Grand-Lieu",
+    "revid": 238977611
+   }
+  },
+  {
+   "id": 848,
+   "lang": "fr",
+   "label": "C",
+   "type": "negation of protected plants",
+   "claim": "Aucune des plantes du lac ne bénéficie d'une protection internationale.",
+   "sentence": "Huit de ces plantes sont protégées au niveau international.",
+   "source": {
+    "sid": "fr-63",
+    "url": "https://fr.wikipedia.org/wiki/Lac_de_Grand-Lieu",
+    "revid": 238977611
+   }
+  },
+  {
+   "id": 849,
+   "lang": "fr",
+   "label": "C",
+   "type": "ordinal changed to first",
+   "claim": "Le lac de Paladru est le plus grand lac naturel d'origine glaciaire de France.",
+   "sentence": "Le lac est le cinquième lac naturel d'origine glaciaire de France.",
+   "source": {
+    "sid": "fr-74",
+    "url": "https://fr.wikipedia.org/wiki/Lac_de_Paladru",
+    "revid": 239928126
+   }
+  },
+  {
+   "id": 850,
+   "lang": "fr",
+   "label": "T",
+   "type": "topical, fishing not stated",
+   "claim": "L'anguille d'Europe fait l'objet d'une pêche commerciale dans le lac.",
+   "sentence": "C'est notamment un milieu très favorable pour l'anguille d'Europe.",
+   "source": {
+    "sid": "fr-61",
+    "url": "https://fr.wikipedia.org/wiki/Lac_de_Grand-Lieu",
+    "revid": 238977611
+   }
+  },
+  {
+   "id": 851,
+   "lang": "fr",
+   "label": "T",
+   "type": "topical, source not stated",
+   "claim": "La Vienne prend sa source au pied du mont Audouze.",
+   "sentence": "La Vienne est une rivière française traversant les départements qui portent son nom (Haute-Vienne et Vienne) et une partie de la Creuse (2 km en rive droite seulement), de la Corrèze, de la Charente, et de l'Indre-et-Loire.",
+   "source": {
+    "sid": "fr-68",
+    "url": "https://fr.wikipedia.org/wiki/Vienne_(affluent_de_la_Loire)",
+    "revid": 234781206
+   }
+  },
+  {
+   "id": 852,
+   "lang": "fr",
+   "label": "T",
+   "type": "topical, lifeguards not stated",
+   "claim": "La plage de Charavines est surveillée par des maîtres-nageurs en été.",
+   "sentence": "Pour cette raison, il n'existe que très peu d'accès gratuits à la baignade, l'un d'entre eux étant situé à Charavines, sur la rive sud du lac.",
+   "source": {
+    "sid": "fr-78",
+    "url": "https://fr.wikipedia.org/wiki/Lac_de_Paladru",
+    "revid": 239928126
+   }
+  },
+  {
+   "id": 853,
+   "lang": "fr",
+   "label": "E",
+   "type": "cross-language, naming relation reversed",
+   "claim": "Mont Lozère, known in Occitan as mont Losera, is the source of the Lozère department's name.",
+   "sentence": "Le mont Lozère (en occitan mont Losera) est un massif en majorité granitique situé dans le sud-est du Massif central français, principalement dans le département de la Lozère auquel il a donné son nom.",
+   "source": {
+    "sid": "fr-66",
+    "url": "https://fr.wikipedia.org/wiki/Mont_Loz%C3%A8re",
+    "revid": 240008508
+   }
+  },
+  {
+   "id": 854,
+   "lang": "fr",
+   "label": "E",
+   "type": "cross-language, figure extracted",
+   "claim": "Some 270 bird species inhabit the Grand-Lieu lake site.",
+   "sentence": "La faune et la flore du lac sont remarquables, et c'est à ce titre qu'il est classé comme réserve naturelle nationale pour sa plus grande partie (2 694,60 ha (26,946 km2)) et réserve naturelle régionale pour sa partie orientale (soit 655,79 ha (6,5579 km2)). 270 espèces d'oiseaux, 19 espèces de reptiles et batraciens, 30 espèces de poissons et une cinquantaine de mammifères peuplent le site.",
+   "source": {
+    "sid": "fr-60",
+    "url": "https://fr.wikipedia.org/wiki/Lac_de_Grand-Lieu",
+    "revid": 238977611
+   }
+  },
+  {
+   "id": 855,
+   "lang": "fr",
+   "label": "C",
+   "type": "cross-language, access negated",
+   "claim": "All of Lake Paladru's protected natural areas are open to the public.",
+   "sentence": "C'est aussi un haut lieu archéologique français, ainsi que de biodiversité piscicole ; plusieurs espaces sont classés en zones naturelles protégées et sont inaccessibles au public.",
+   "source": {
+    "sid": "fr-75",
+    "url": "https://fr.wikipedia.org/wiki/Lac_de_Paladru",
+    "revid": 239928126
+   }
+  },
+  {
+   "id": 856,
+   "lang": "fr",
+   "label": "T",
+   "type": "cross-language, species not stated",
+   "claim": "The floating meadows covering Lake Grand-Lieu consist mostly of water lilies.",
+   "sentence": "La majeure partie du lac est recouverte d'herbiers flottants.",
+   "source": {
+    "sid": "fr-64",
+    "url": "https://fr.wikipedia.org/wiki/Lac_de_Grand-Lieu",
+    "revid": 238977611
+   }
+  },
+  {
+   "id": 857,
+   "lang": "de",
+   "label": "E",
+   "type": "converse spatial relation",
+   "claim": "Rund 50 km nördlich des Tegernsees liegt München.",
+   "sentence": "Der Tegernsee liegt rund 50 km südlich von München in den Bayerischen Alpen und ist ein Ausflugs- und Fremdenverkehrsziel.",
+   "source": {
+    "sid": "de-79",
+    "url": "https://de.wikipedia.org/wiki/Tegernsee",
+    "revid": 271533754
+   }
+  },
+  {
+   "id": 858,
+   "lang": "de",
+   "label": "E",
+   "type": "cause clause fronted, synonym",
+   "claim": "Weil schon in den 1960er Jahren rund um den See ein Ringkanal gebaut wurde, gehört der Tegernsee zu den saubersten Gewässern Bayerns.",
+   "sentence": "Er zählt zu den saubersten Seen Bayerns, da bereits in den 1960er Jahren eine durchgängige Ringkanalisation um den See geschaffen wurde.",
+   "source": {
+    "sid": "de-80",
+    "url": "https://de.wikipedia.org/wiki/Tegernsee",
+    "revid": 271533754
+   }
+  },
+  {
+   "id": 859,
+   "lang": "de",
+   "label": "E",
+   "type": "ownership recast",
+   "claim": "Der Tegernsee gehört dem Freistaat Bayern.",
+   "sentence": "Er ist Eigentum des Freistaates Bayern und wird verwaltet durch die Bayerische Verwaltung der staatlichen Schlösser, Gärten und Seen, Außenstelle Chiemsee in Prien.",
+   "source": {
+    "sid": "de-82",
+    "url": "https://de.wikipedia.org/wiki/Tegernsee",
+    "revid": 271533754
+   }
+  },
+  {
+   "id": 860,
+   "lang": "de",
+   "label": "E",
+   "type": "superlative as negated comparative",
+   "claim": "Kein Berg der Eifel ist höher als die Hohe Acht.",
+   "sentence": "NHN der höchste Berg der Eifel und markiert die Grenze der Landkreise Ahrweiler und Mayen-Koblenz in Rheinland-Pfalz.",
+   "source": {
+    "sid": "de-84",
+    "url": "https://de.wikipedia.org/wiki/Hohe_Acht",
+    "revid": 270482647
+   }
+  },
+  {
+   "id": 861,
+   "lang": "de",
+   "label": "E",
+   "type": "locative inversion",
+   "claim": "Der Kaiser-Wilhelm-Turm steht auf der Hohen Acht.",
+   "sentence": "Auf dem bewaldeten Berg, der Wander- und Wintersportgebiet ist, steht der Kaiser-Wilhelm-Turm.",
+   "source": {
+    "sid": "de-85",
+    "url": "https://de.wikipedia.org/wiki/Hohe_Acht",
+    "revid": 270482647
+   }
+  },
+  {
+   "id": 862,
+   "lang": "de",
+   "label": "E",
+   "type": "subject swap",
+   "claim": "Die Weser hat als linken Quellfluss die 220,4 Kilometer lange Fulda.",
+   "sentence": "Die Fulda ist der 220,4 km lange linke Quellfluss der Weser.",
+   "source": {
+    "sid": "de-86",
+    "url": "https://de.wikipedia.org/wiki/Fulda_(Fluss)",
+    "revid": 264628510
+   }
+  },
+  {
+   "id": 863,
+   "lang": "de",
+   "label": "E",
+   "type": "concessive reworded",
+   "claim": "Obwohl sie kürzer ist als der andere Weser-Quellfluss, führt die Fulda am Zusammenfluss etwas mehr Wasser.",
+   "sentence": "Die 6.947 km² Einzugsgebiet entwässernde Fulda ist zwar der kürzere der beiden Weser-Quellflüsse, führt am Zusammenfluss aber etwas mehr Wasser.",
+   "source": {
+    "sid": "de-89",
+    "url": "https://de.wikipedia.org/wiki/Fulda_(Fluss)",
+    "revid": 264628510
+   }
+  },
+  {
+   "id": 864,
+   "lang": "de",
+   "label": "E",
+   "type": "superlative as negated comparative",
+   "claim": "Kein anderer Fluss in Hessen hat eine längere Fließstrecke als die Fulda.",
+   "sentence": "Die Fulda ist innerhalb Hessens der Fluss mit der größten Fließlänge.",
+   "source": {
+    "sid": "de-91",
+    "url": "https://de.wikipedia.org/wiki/Fulda_(Fluss)",
+    "revid": 264628510
+   }
+  },
+  {
+   "id": 865,
+   "lang": "de",
+   "label": "C",
+   "type": "height changed",
+   "claim": "Die Hohe Acht bei Adenau erreicht eine Höhe von 846 m.",
+   "sentence": "Die Hohe Acht bei Adenau ist mit 746 m ü.",
+   "source": {
+    "sid": "de-83",
+    "url": "https://de.wikipedia.org/wiki/Hohe_Acht",
+    "revid": 270482647
+   }
+  },
+  {
+   "id": 866,
+   "lang": "de",
+   "label": "C",
+   "type": "wrong resulting river",
+   "claim": "In Hann. Münden vereinigt sich die Fulda mit der Werra zur Elbe.",
+   "sentence": "Münden (Niedersachsen), wo sie sich mit der von rechts kommenden Werra zur Weser vereinigt.",
+   "source": {
+    "sid": "de-88",
+    "url": "https://de.wikipedia.org/wiki/Fulda_(Fluss)",
+    "revid": 264628510
+   }
+  },
+  {
+   "id": 867,
+   "lang": "de",
+   "label": "C",
+   "type": "wrong ice age",
+   "claim": "Der Schweriner See ist ein Gletscherzungensee aus der Saale-Eiszeit.",
+   "sentence": "Geomorphologisch ist er als Gletscherzungensee der Weichsel-Eiszeit zu bezeichnen und gehört zur Landschaft Mecklenburgische Seenplatte.",
+   "source": {
+    "sid": "de-93",
+    "url": "https://de.wikipedia.org/wiki/Schweriner_See",
+    "revid": 262507435
+   }
+  },
+  {
+   "id": 868,
+   "lang": "de",
+   "label": "C",
+   "type": "upper vs lower course",
+   "claim": "Die Eder fließt der Fulda bereits im Oberlauf zu.",
+   "sentence": "Davon entstammt wiederum etwa die Hälfte der Eder, die ihr erst im Unterlauf zufließt.",
+   "source": {
+    "sid": "de-90",
+    "url": "https://de.wikipedia.org/wiki/Fulda_(Fluss)",
+    "revid": 264628510
+   }
+  },
+  {
+   "id": 869,
+   "lang": "de",
+   "label": "C",
+   "type": "owner changed to private",
+   "claim": "Der Tegernsee befindet sich in Privatbesitz.",
+   "sentence": "Er ist Eigentum des Freistaates Bayern und wird verwaltet durch die Bayerische Verwaltung der staatlichen Schlösser, Gärten und Seen, Außenstelle Chiemsee in Prien.",
+   "source": {
+    "sid": "de-82",
+    "url": "https://de.wikipedia.org/wiki/Tegernsee",
+    "revid": 271533754
+   }
+  },
+  {
+   "id": 870,
+   "lang": "de",
+   "label": "T",
+   "type": "topical, boating rules not stated",
+   "claim": "Motorboote sind auf dem Tegernsee verboten.",
+   "sentence": "Der See liegt im Landschaftsschutzgebiet Schutz des Tegernsees und Umgebung.",
+   "source": {
+    "sid": "de-81",
+    "url": "https://de.wikipedia.org/wiki/Tegernsee",
+    "revid": 271533754
+   }
+  },
+  {
+   "id": 871,
+   "lang": "de",
+   "label": "T",
+   "type": "topical, size rank not stated",
+   "claim": "Der Schweriner See ist der viertgrößte See Deutschlands.",
+   "sentence": "Der Schweriner See ist ein See in Westmecklenburg zwischen Schwerin und Hohen Viecheln.",
+   "source": {
+    "sid": "de-92",
+    "url": "https://de.wikipedia.org/wiki/Schweriner_See",
+    "revid": 262507435
+   }
+  },
+  {
+   "id": 872,
+   "lang": "de",
+   "label": "T",
+   "type": "topical, geology not stated",
+   "claim": "Die Hohe Acht ist vulkanischen Ursprungs.",
+   "sentence": "NHN der höchste Berg der Eifel und markiert die Grenze der Landkreise Ahrweiler und Mayen-Koblenz in Rheinland-Pfalz.",
+   "source": {
+    "sid": "de-84",
+    "url": "https://de.wikipedia.org/wiki/Hohe_Acht",
+    "revid": 270482647
+   }
+  },
+  {
+   "id": 873,
+   "lang": "de",
+   "label": "E",
+   "type": "cross-language, membership reworded",
+   "claim": "Lake Schwerin belongs to the Mecklenburg Lake District landscape.",
+   "sentence": "Geomorphologisch ist er als Gletscherzungensee der Weichsel-Eiszeit zu bezeichnen und gehört zur Landschaft Mecklenburgische Seenplatte.",
+   "source": {
+    "sid": "de-93",
+    "url": "https://de.wikipedia.org/wiki/Schweriner_See",
+    "revid": 262507435
+   }
+  },
+  {
+   "id": 874,
+   "lang": "de",
+   "label": "E",
+   "type": "cross-language, protection area reworded",
+   "claim": "The Tegernsee lies within a protected landscape area.",
+   "sentence": "Der See liegt im Landschaftsschutzgebiet Schutz des Tegernsees und Umgebung.",
+   "source": {
+    "sid": "de-81",
+    "url": "https://de.wikipedia.org/wiki/Tegernsee",
+    "revid": 271533754
+   }
+  },
+  {
+   "id": 875,
+   "lang": "de",
+   "label": "C",
+   "type": "cross-language, wrong source region",
+   "claim": "The Fulda rises in the Harz mountains.",
+   "sentence": "Sie entspringt im hessischen Teil der Rhön an der Wasserkuppe und endet zwischen Kaufunger Wald und Reinhardswald in der Dreiflüssestadt Hann.",
+   "source": {
+    "sid": "de-87",
+    "url": "https://de.wikipedia.org/wiki/Fulda_(Fluss)",
+    "revid": 264628510
+   }
+  },
+  {
+   "id": 876,
+   "lang": "de",
+   "label": "T",
+   "type": "cross-language, construction date not stated",
+   "claim": "The Kaiser-Wilhelm-Turm was built in 1909.",
+   "sentence": "Auf dem bewaldeten Berg, der Wander- und Wintersportgebiet ist, steht der Kaiser-Wilhelm-Turm.",
+   "source": {
+    "sid": "de-85",
+    "url": "https://de.wikipedia.org/wiki/Hohe_Acht",
+    "revid": 270482647
+   }
+  },
+  {
+   "id": 877,
+   "lang": "ja",
+   "label": "E",
+   "type": "reworded spanning",
+   "claim": "宍道湖は松江市と出雲市の両方にかかっている。",
+   "sentence": "宍道湖（しんじこ）は、島根県松江市と出雲市にまたがる湖。",
+   "source": {
+    "sid": "ja-94",
+    "url": "https://ja.wikipedia.org/wiki/%E5%AE%8D%E9%81%93%E6%B9%96",
+    "revid": 110293678
+   }
+  },
+  {
+   "id": 878,
+   "lang": "ja",
+   "label": "E",
+   "type": "fraction reworded, negation of freshwater",
+   "claim": "宍道湖の平均塩分濃度は海水のおよそ10分の1で、淡水の湖ではない。",
+   "sentence": "主に大橋川・中海・境水道を介して日本海と接続し、淡水湖ではなく汽水湖となっている（平均塩分濃度は海水の約1/10である）。",
+   "source": {
+    "sid": "ja-98",
+    "url": "https://ja.wikipedia.org/wiki/%E5%AE%8D%E9%81%93%E6%B9%96",
+    "revid": 110293678
+   }
+  },
+  {
+   "id": 879,
+   "lang": "ja",
+   "label": "E",
+   "type": "synonym for major producer",
+   "claim": "宍道湖はヤマトシジミの主要な産地として有名だ。",
+   "sentence": "ヤマトシジミの一大産地として知られる。",
+   "source": {
+    "sid": "ja-101",
+    "url": "https://ja.wikipedia.org/wiki/%E5%AE%8D%E9%81%93%E6%B9%96",
+    "revid": 110293678
+   }
+  },
+  {
+   "id": 880,
+   "lang": "ja",
+   "label": "E",
+   "type": "reordered attributes",
+   "claim": "秋田・山形の両県にまたがる鳥海山は、標高2,236mの活火山である。",
+   "sentence": "鳥海山（ちょうかいさん、ちょうかいざん）は、山形県と秋田県に跨がる標高2,236mの活火山。",
+   "source": {
+    "sid": "ja-102",
+    "url": "https://ja.wikipedia.org/wiki/%E9%B3%A5%E6%B5%B7%E5%B1%B1",
+    "revid": 109933932
+   }
+  },
+  {
+   "id": 881,
+   "lang": "ja",
+   "label": "E",
+   "type": "also-called recast as alias",
+   "claim": "鳥海山には「出羽富士」という別名がある。",
+   "sentence": "山頂に雪が積もった姿が富士山に類似しているため、出羽富士（でわふじ）とも呼ばれ親しまれている。",
+   "source": {
+    "sid": "ja-104",
+    "url": "https://ja.wikipedia.org/wiki/%E9%B3%A5%E6%B5%B7%E5%B1%B1",
+    "revid": 109933932
+   }
+  },
+  {
+   "id": 882,
+   "lang": "ja",
+   "label": "E",
+   "type": "old name relation reversed",
+   "claim": "鳥見山とは鳥海山の古い呼び名である。",
+   "sentence": "古くからの名では鳥見山（とりみやま）という。",
+   "source": {
+    "sid": "ja-106",
+    "url": "https://ja.wikipedia.org/wiki/%E9%B3%A5%E6%B5%B7%E5%B1%B1",
+    "revid": 109933932
+   }
+  },
+  {
+   "id": 883,
+   "lang": "ja",
+   "label": "E",
+   "type": "largest reworded",
+   "claim": "熊本県で一番大きな川は球磨川である。",
+   "sentence": "熊本県内最大の川であり、最上川・富士川と並ぶ日本三大急流の一つ。",
+   "source": {
+    "sid": "ja-114",
+    "url": "https://ja.wikipedia.org/wiki/%E7%90%83%E7%A3%A8%E5%B7%9D",
+    "revid": 110291341
+   }
+  },
+  {
+   "id": 884,
+   "lang": "ja",
+   "label": "E",
+   "type": "superlative as negated comparative",
+   "claim": "北関東より北には、日光白根山より高い山はない。",
+   "sentence": "日本国内では北関東以北で最高峰の山かつ、中部地方に属さない山としても最高峰である。",
+   "source": {
+    "sid": "ja-121",
+    "url": "https://ja.wikipedia.org/wiki/%E6%97%A5%E5%85%89%E7%99%BD%E6%A0%B9%E5%B1%B1",
+    "revid": 109629722
+   }
+  },
+  {
+   "id": 885,
+   "lang": "ja",
+   "label": "C",
+   "type": "wrong prefecture for summit",
+   "claim": "鳥海山の最高地点は秋田県側にある。",
+   "sentence": "山頂となる最高標高2,236m地点は山形県側にある（飽海郡遊佐町）。",
+   "source": {
+    "sid": "ja-103",
+    "url": "https://ja.wikipedia.org/wiki/%E9%B3%A5%E6%B5%B7%E5%B1%B1",
+    "revid": 109933932
+   }
+  },
+  {
+   "id": 886,
+   "lang": "ja",
+   "label": "C",
+   "type": "readings swapped",
+   "claim": "山形県側では鳥海山を「ちょうかいさん」と読む。",
+   "sentence": "読みは、秋田県側で「ちょうかいさん」、山形県側で「ちょうかいざん」となっている。",
+   "source": {
+    "sid": "ja-111",
+    "url": "https://ja.wikipedia.org/wiki/%E9%B3%A5%E6%B5%B7%E5%B1%B1",
+    "revid": 109933932
+   }
+  },
+  {
+   "id": 887,
+   "lang": "ja",
+   "label": "C",
+   "type": "connection and water type negated",
+   "claim": "浜名湖は海とつながっておらず、淡水湖である。",
+   "sentence": "今切口で遠州灘とつながっており、太平洋の海水が流入する汽水湖となっている。",
+   "source": {
+    "sid": "ja-117",
+    "url": "https://ja.wikipedia.org/wiki/%E6%B5%9C%E5%90%8D%E6%B9%96",
+    "revid": 110216265
+   }
+  },
+  {
+   "id": 888,
+   "lang": "ja",
+   "label": "C",
+   "type": "elevation changed",
+   "claim": "日光白根山の標高は3,000mを超える。",
+   "sentence": "日光白根山（にっこうしらねさん、英：Mount Nikko Shirane）は、栃木県日光市と群馬県利根郡片品村の境界にある標高2,578mの山。",
+   "source": {
+    "sid": "ja-118",
+    "url": "https://ja.wikipedia.org/wiki/%E6%97%A5%E5%85%89%E7%99%BD%E6%A0%B9%E5%B1%B1",
+    "revid": 109629722
+   }
+  },
+  {
+   "id": 889,
+   "lang": "ja",
+   "label": "C",
+   "type": "year changed",
+   "claim": "鳥海山が日本の地質百選に選ばれたのは2017年のことである。",
+   "sentence": "2007年（平成19年）に日本の地質百選に選定された。",
+   "source": {
+    "sid": "ja-109",
+    "url": "https://ja.wikipedia.org/wiki/%E9%B3%A5%E6%B5%B7%E5%B1%B1",
+    "revid": 109933932
+   }
+  },
+  {
+   "id": 890,
+   "lang": "ja",
+   "label": "T",
+   "type": "topical, sunset not stated",
+   "claim": "宍道湖の夕日は特に美しいことで知られる。",
+   "sentence": "日本百景。",
+   "source": {
+    "sid": "ja-97",
+    "url": "https://ja.wikipedia.org/wiki/%E5%AE%8D%E9%81%93%E6%B9%96",
+    "revid": 110293678
+   }
+  },
+  {
+   "id": 891,
+   "lang": "ja",
+   "label": "T",
+   "type": "topical, eel farming not stated",
+   "claim": "浜名湖はうなぎの養殖で有名である。",
+   "sentence": "浜名湖（はまなこ）は、静岡県西部の浜松市と湖西市にまたがる湖。",
+   "source": {
+    "sid": "ja-116",
+    "url": "https://ja.wikipedia.org/wiki/%E6%B5%9C%E5%90%8D%E6%B9%96",
+    "revid": 110216265
+   }
+  },
+  {
+   "id": 892,
+   "lang": "ja",
+   "label": "T",
+   "type": "topical, river rafting not stated",
+   "claim": "球磨川では観光の川下りが盛んである。",
+   "sentence": "日本二十五勝にも選定されている。",
+   "source": {
+    "sid": "ja-115",
+    "url": "https://ja.wikipedia.org/wiki/%E7%90%83%E7%A3%A8%E5%B7%9D",
+    "revid": 110291341
+   }
+  },
+  {
+   "id": 893,
+   "lang": "ja",
+   "label": "E",
+   "type": "cross-language, alias for sea",
+   "claim": "The Kuma River empties into the Yatsushiro Sea, which is also called the Shiranui Sea.",
+   "sentence": "球磨川（くまがわ）は、熊本県南部の人吉盆地を貫流し、川辺川をはじめとする支流を併せながら、八代平野に至り八代海（不知火海）に注ぐ一級河川で、球磨川水系の本流である。",
+   "source": {
+    "sid": "ja-113",
+    "url": "https://ja.wikipedia.org/wiki/%E7%90%83%E7%A3%A8%E5%B7%9D",
+    "revid": 110291341
+   }
+  },
+  {
+   "id": 894,
+   "lang": "ja",
+   "label": "E",
+   "type": "cross-language, reworded",
+   "claim": "Mount Nikko-Shirane is an active volcano at the northwestern end of the Nikko volcanic group.",
+   "sentence": "日光火山群の北西端にある活火山で、西方への溶岩流の上に主峰・奥白根（おくしらね）などの溶岩ドームが形成されている。",
+   "source": {
+    "sid": "ja-119",
+    "url": "https://ja.wikipedia.org/wiki/%E6%97%A5%E5%85%89%E7%99%BD%E6%A0%B9%E5%B1%B1",
+    "revid": 109629722
+   }
+  },
+  {
+   "id": 895,
+   "lang": "ja",
+   "label": "C",
+   "type": "cross-language, rapid to slowest",
+   "claim": "The Kuma River is the slowest-flowing river in Japan.",
+   "sentence": "熊本県内最大の川であり、最上川・富士川と並ぶ日本三大急流の一つ。",
+   "source": {
+    "sid": "ja-114",
+    "url": "https://ja.wikipedia.org/wiki/%E7%90%83%E7%A3%A8%E5%B7%9D",
+    "revid": 110291341
+   }
+  },
+  {
+   "id": 896,
+   "lang": "ja",
+   "label": "T",
+   "type": "cross-language, shrine date not stated",
+   "claim": "A shrine was first built on Mount Chokai's summit in the 8th century.",
+   "sentence": "2009年（平成21年）に国史跡「鳥海山」として指定された。",
+   "source": {
+    "sid": "ja-110",
+    "url": "https://ja.wikipedia.org/wiki/%E9%B3%A5%E6%B5%B7%E5%B1%B1",
+    "revid": 109933932
+   }
+  }
+ ]
+}
