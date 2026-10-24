@@ -39,6 +39,7 @@ export const PARAMS = Object.freeze({
   minPartWords: 15,   // a heading's stretch shorter than this is a label, not a part; it joins the next
   titleWords: [2, 12],// a title clause: at least this many words, at most this many
   shuffles: 200,      // the cadence null: how many shuffled orders are measured
+  cadence: "say",     // the set a slot's step is measured on: "say" (what the section will say: its question terms + its fills' stems; eval/form/PREREG-2.md) or "body" (every stem of every sentence mentioning its seed; the first frame, kept as DIAGNOSTIC)
   order: "exhaustive",// the middle order: "exhaustive" (the permutation with the largest mean step, ends held; up to maxExhaustive middle slots) or "greedy" (next = most new terms)
   maxExhaustive: 8,   // above this many middle slots the exhaustive order falls back to greedy (8! = 40320 orders)
 });
@@ -235,14 +236,16 @@ const splitSentences = (t) => [...segmenter.segment(clean(t))].map((s) => s.segm
 const leavesOf = (n) => (n.children?.length ? n.children.flatMap(leavesOf) : [n]);
 const underOf = (n) => [n, ...(n.children ?? []).flatMap(underOf)];
 
-/** slotsFrom(tree, { params }) → [{ id, label, terms, question, body, sentences, facts, gap, form }]: the level-1 slots (and level-1 gaps) of a
+/** slotsFrom(tree, { params }) → [{ id, label, terms, question, body, say, sentences, facts, gap, form }]: the level-1 slots (and level-1 gaps) of a
  * StitchTree@1, or a plain list's items. `terms` are the slot's own stems (the void's label), `question` those plus its children's, `body` every
- * stem its sentences carry, `sentences` its defining sentences (the fill first, then its sentences ranked by the question terms they carry). */
+ * stem its sentences carry, `say` what the section will actually say (the question terms plus the stems of the stitched layer's fills under it;
+ * eval/form/PREREG-2.md), `sentences` its defining sentences (the fill first, then its sentences ranked by the question terms they carry).
+ * A plain list item may carry `fill` (texts); without it, its `say` is its terms plus its sentences' stems (no gather: its sentences are what it says). */
 export function slotsFrom(tree, { params = PARAMS } = {}) {
   const P = { ...PARAMS, ...params };
   if (Array.isArray(tree)) {
     const vocab = new Set();
-    for (const s of tree) for (const w of formsOf(`${s.label ?? ""} ${(s.terms ?? []).join(" ")} ${s.text ?? ""} ${(s.sentences ?? []).join(" ")}`)) if (w.length >= P.minTerm) vocab.add(w);
+    for (const s of tree) for (const w of formsOf(`${s.label ?? ""} ${(s.terms ?? []).join(" ")} ${s.text ?? ""} ${(s.sentences ?? []).join(" ")} ${(s.fill ?? []).map((x) => (typeof x === "string" ? x : x?.text ?? "")).join(" ")}`)) if (w.length >= P.minTerm) vocab.add(w);
     const stem = conflator(vocab);
     const shown = new Map();
     const stemsOf = (t) => { const out = new Set(); for (const w of formsOf(t)) { if (w.length < P.minTerm) continue; const k = stem(w); out.add(k); const m = shown.get(k) ?? shown.set(k, new Map()).get(k); m.set(w, (m.get(w) ?? 0) + 1); } return out; };
@@ -250,7 +253,8 @@ export function slotsFrom(tree, { params = PARAMS } = {}) {
       const sentences = s.sentences ?? splitSentences(s.text ?? "");
       const terms = s.terms?.length ? s.terms.map(stem) : [...stemsOf(s.label ?? "")];
       const body = new Set([...terms, ...sentences.flatMap((x) => [...stemsOf(x)])]);
-      return { id: s.id ?? `s${i + 1}`, label: clean(s.label ?? terms.join(" ")), terms, question: terms, body, sentences, facts: s.facts ?? sentences.length, gap: !!s.gap };
+      const say = s.fill ? new Set([...terms, ...s.fill.flatMap((x) => [...stemsOf(typeof x === "string" ? x : x?.text ?? "")])]) : new Set(body);
+      return { id: s.id ?? `s${i + 1}`, label: clean(s.label ?? terms.join(" ")), terms, question: terms, body, say, sentences, facts: s.facts ?? (s.fill?.length || sentences.length), gap: !!s.gap };
     });
     const form = (k) => [...(shown.get(k) ?? new Map([[k, 1]]))].sort((a, b) => b[1] - a[1])[0][0];
     return rows.map((r) => ({ ...r, form }));
@@ -267,10 +271,12 @@ export function slotsFrom(tree, { params = PARAMS } = {}) {
     const own = (n.sentences ?? []).map(sentenceOf).filter(Boolean);
     const fill = leavesOf(n).flatMap((l) => l.fill ?? []);
     const body = new Set([...question, ...own.flatMap((s) => [...(s.stems ?? stemsOfText(s.text))])]);
+    // what the section will SAY: its question terms and the stems of the stitched layer's fills (by sentence id into the index; by text when an address carries no id)
+    const say = new Set([...question, ...fill.flatMap((a) => [...((a.id !== undefined && sentenceOf(a.id)?.stems) || stemsOfText(a.text ?? ""))])]);
     const carry = (t) => { const st = stemsOfText(t); return question.filter((k) => st.has(k)).length; };
     const ranked = own.map((s) => s.text).sort((a, b) => carry(b) - carry(a) || a.length - b.length);
     const sentences = [...new Set([...fill.map((a) => a.text), ...ranked])];
-    return { id: n.id, label: clean(n.label), terms: [...(n.terms ?? [])], question, body, sentences, facts: fill.length || own.length, gap: !!n.gap, form };
+    return { id: n.id, label: clean(n.label), terms: [...(n.terms ?? [])], question, body, say, sentences, facts: fill.length || own.length, gap: !!n.gap, form };
   });
 }
 
@@ -307,30 +313,34 @@ export function titleOf(slot, { reader = null, params = PARAMS } = {}) {
 // ── the order: opener by recurrence, middle by cadence, closer by return ─────────────────────────────────────────────────────────────────
 
 const shared = (a, b) => { let n = 0; for (const k of a) if (b.has(k)) n++; return n; };
-/** The cadence of an order: for each slot after the first, step = the share of its body terms not yet seen. */
-export function cadenceOf(slots, order) {
+/** The set a slot's step is measured on: `say` (PREREG-2: question terms + fills' stems) or `body` (the first frame; DIAGNOSTIC). */
+const setOf = (slot, measure) => (measure === "body" ? slot.body : slot.say ?? slot.body);
+/** The cadence of an order: for each slot after the first, step = the share of its terms (on `measure`, default PARAMS.cadence = "say") not yet
+ * said by an earlier slot. `cadenceOf(slots, order, { measure: "body" })` is the old measure, kept for comparison, never the default. */
+export function cadenceOf(slots, order, { measure = PARAMS.cadence } = {}) {
   const seen = new Set();
   const steps = [];
   order.forEach((i, pos) => {
     const s = slots[i];
-    if (pos > 0) { const fresh = [...s.body].filter((k) => !seen.has(k)).length; steps.push({ slot: s.id, step: s.body.size ? Number((fresh / s.body.size).toFixed(3)) : 0, new: fresh, size: s.body.size }); }
-    for (const k of s.body) seen.add(k);
+    const set = setOf(s, measure);
+    if (pos > 0) { const fresh = [...set].filter((k) => !seen.has(k)).length; steps.push({ slot: s.id, step: set.size ? Number((fresh / set.size).toFixed(3)) : 0, new: fresh, size: set.size }); }
+    for (const k of set) seen.add(k);
   });
   const mean = steps.length ? steps.reduce((a, x) => a + x.step, 0) / steps.length : 0;
-  return { steps, mean: Number(mean.toFixed(4)) };
+  return { steps, mean: Number(mean.toFixed(4)), measure };
 }
 const mulberry = (seed) => () => { seed |= 0; seed = (seed + 0x6D2B79F5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
 /** The null: the mean step of `trials` shuffled orders of the same slots (seeded, so the number is reproducible). */
-export function shuffledCadence(slots, order, { trials = PARAMS.shuffles, seed = 1 } = {}) {
+export function shuffledCadence(slots, order, { trials = PARAMS.shuffles, seed = 1, measure = PARAMS.cadence } = {}) {
   const rnd = mulberry(seed);
   const means = [];
   for (let t = 0; t < trials; t++) {
     const o = order.slice();
     for (let i = o.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [o[i], o[j]] = [o[j], o[i]]; }
-    means.push(cadenceOf(slots, o).mean);
+    means.push(cadenceOf(slots, o, { measure }).mean);
   }
   const mean = means.length ? means.reduce((a, b) => a + b, 0) / means.length : 0;
-  return { trials, mean: Number(mean.toFixed(4)), max: Math.max(...means, 0) };
+  return { trials, mean: Number(mean.toFixed(4)), max: Math.max(...means, 0), measure };
 }
 
 /**
@@ -361,13 +371,16 @@ export function outlineFrom({ tree, skeleton, kind = skeleton?.kind ?? "essay", 
   // REC 2026-10-24, after B2 failed on two of three real trees: greed per step is not the largest mean step, because a broad slot taken early
   // swallows the small slots' terms and every later step collapses; the frame is now the permutation of the middle with the largest mean step
   // (the ends held), exhaustive while the middle is small, greedy above `maxExhaustive`. Which frame ran is disclosed in `measures.orderBy`.
-  const meanStepOf = (mid) => cadenceOf(slots, [opener, ...mid, ...(closer === null ? [] : [closer])]).mean;
-  const greedy = () => { const left = middle.slice(), out = [], seen = new Set(slots[opener].body); while (left.length) { const scored = left.map((i) => { const fresh = [...slots[i].body].filter((k) => !seen.has(k)).length; return { i, step: slots[i].body.size ? fresh / slots[i].body.size : 0, fresh }; }).sort((a, b) => b.step - a.step || b.fresh - a.fresh || a.i - b.i); out.push(scored[0].i); left.splice(left.indexOf(scored[0].i), 1); for (const k of slots[scored[0].i].body) seen.add(k); } return out; };
+  // REC 2 (eval/form/PREREG-2.md): the step is measured on what a section will SAY (its question terms + its fills' stems), not on every sentence
+  // mentioning its seed; the measure is `P.cadence` ("say"; "body" is the first frame, kept as a diagnostic). Opener, closer and isolation stay on the body.
+  const on = (i) => setOf(slots[i], P.cadence);
+  const meanStepOf = (mid) => cadenceOf(slots, [opener, ...mid, ...(closer === null ? [] : [closer])], { measure: P.cadence }).mean;
+  const greedy = () => { const left = middle.slice(), out = [], seen = new Set(on(opener)); while (left.length) { const scored = left.map((i) => { const fresh = [...on(i)].filter((k) => !seen.has(k)).length; return { i, step: on(i).size ? fresh / on(i).size : 0, fresh }; }).sort((a, b) => b.step - a.step || b.fresh - a.fresh || a.i - b.i); out.push(scored[0].i); left.splice(left.indexOf(scored[0].i), 1); for (const k of on(scored[0].i)) seen.add(k); } return out; };
   const exhaustive = () => { let best = null, bestMean = -1; const rec = (left, acc) => { if (!left.length) { const m = meanStepOf(acc); if (m > bestMean) { bestMean = m; best = acc.slice(); } return; } for (let i = 0; i < left.length; i++) rec([...left.slice(0, i), ...left.slice(i + 1)], [...acc, left[i]]); }; rec(middle.slice(), []); return best ?? []; };
   const orderBy = P.order === "exhaustive" && middle.length <= P.maxExhaustive ? "exhaustive" : "greedy";
   const order = [opener, ...(orderBy === "exhaustive" ? exhaustive() : greedy())];
   if (closer !== null) order.push(closer);
-  const cadence = cadenceOf(slots, order);
+  const cadence = cadenceOf(slots, order, { measure: P.cadence });
   const facts = slots.map((s) => s.facts);
   const medianFacts = quantile(facts, 0.5) || 1;
   const wordsFor = (role, f) => {
@@ -385,6 +398,6 @@ export function outlineFrom({ tree, skeleton, kind = skeleton?.kind ?? "essay", 
   });
   return {
     outline, appendix, steps: cadence.steps, order: order.map((i) => slots[i].id),
-    measures: { topic: clean(topic), slots: slots.length, isolated: isolated.size, orderBy, opener: { slot: slots[opener].id, recursIn: recurrence(opener), of: live.length - 1 }, closer: closer === null ? null : { slot: slots[closer].id, sharedWithOpener: shared(slots[closer].body, slots[opener].body) }, cadence: cadence.mean, medianFacts, kind, kindMismatch, skeleton: skeleton ? { kind: skeleton.kind, n: skeleton.n } : null },
+    measures: { topic: clean(topic), slots: slots.length, isolated: isolated.size, orderBy, cadenceOn: P.cadence, opener: { slot: slots[opener].id, recursIn: recurrence(opener), of: live.length - 1 }, closer: closer === null ? null : { slot: slots[closer].id, sharedWithOpener: shared(slots[closer].body, slots[opener].body) }, cadence: cadence.mean, medianFacts, kind, kindMismatch, skeleton: skeleton ? { kind: skeleton.kind, n: skeleton.n } : null },
   };
 }

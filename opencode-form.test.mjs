@@ -152,3 +152,54 @@ test("outline: the kind asked for is laid onto its own skeleton; another kind's 
   const m = outlineFrom({ tree: slots, skeleton, kind: "brief", topic: "lighthouses" });
   assert.deepEqual(m.measures.kindMismatch, { asked: "brief", skeleton: "essay" });
 });
+
+// ── REC 2 (eval/form/PREREG-2.md): the step is measured on what a section will SAY (its terms + its fills), not on every sentence carrying its seed ──
+
+/** A tree whose broadest slot `big` mentions its seed in many sentences (a wide body) but is filled by two units (a narrow say); the others are plain. */
+const bigBody = Array.from({ length: 40 }, (_, i) => `Harbor ${["pilots", "cranes", "ledgers", "gulls", "ropes", "barrels", "customs", "tariffs"][i % 8]} and harbor ${["wharves", "ferries", "anchors", "mooring", "dredging", "pilings", "berths", "quays"][(i * 3) % 8]} filled the harbor records of ${1700 + i} with cargo${L(i)}${L(i + 5)}load.`);
+const broadSlots = [
+  { id: "big", label: "harbor", terms: ["harbor"], sentences: bigBody, fill: ["The harbor sheltered ships from the storm.", "Ships waited in the harbor for the tide."] },
+  { id: "b", label: "lamps · keepers", terms: ["lamp", "keeper"], text: "The keepers trimmed the lamps every night. A lamp failed and the keeper climbed the tower. Ships depended on the lamp.", fill: ["The keepers trimmed the lamps every night.", "A lamp failed and the keeper climbed the tower."] },
+  { id: "c", label: "tower · stone", terms: ["tower", "stone"], text: "The tower was built of stone in 1790. Stone towers outlasted wooden ones. Ships steered by the tower, which kept the lamp above the storm.", fill: ["The tower was built of stone in 1790.", "Stone towers outlasted wooden ones."] },
+  { id: "d", label: "storm · tide", terms: ["storm", "tide"], text: "Storms drove ships toward the harbor at high tide. The tide and the storm decided when ships could enter the harbor.", fill: ["Storms drove ships toward the harbor at high tide."] },
+  { id: "e", label: "cranes · wharves", terms: ["crane", "wharf"], text: "Cranes on the wharves lifted barrels from the ferries. The harbor pilots guided ferries to the wharves at the berths.", fill: ["Cranes on the wharves lifted barrels from the ferries.", "The harbor pilots guided ferries to the wharves."] },
+];
+
+test("say: a broad slot with many seed mentions but few fills no longer dominates the step", () => {
+  const rows = slotsFrom(broadSlots);
+  const big = rows.find((r) => r.id === "big"), e = rows.find((r) => r.id === "e");
+  assert.ok(big.body.size > 3 * big.say.size, `body ${big.body.size} vs say ${big.say.size}`);
+  assert.ok(big.body.size > 3 * e.body.size, `big body ${big.body.size} should dwarf e body ${e.body.size}`);
+  assert.ok(big.say.size <= 2 * e.say.size, `big say ${big.say.size} should not dwarf e say ${e.say.size}`);
+  // the slot after the broad one keeps more of its terms to bring on say than on body (the broad body had swallowed them)
+  const order = [rows.indexOf(big), rows.indexOf(e)];
+  const onSay = cadenceOf(rows, order, { measure: "say" }).steps[0].step, onBody = cadenceOf(rows, order, { measure: "body" }).steps[0].step;
+  assert.ok(onSay > onBody, `step after big: say ${onSay} vs body ${onBody}`);
+  assert.equal(cadenceOf(rows, order).measure, PARAMS.cadence);
+  assert.equal(PARAMS.cadence, "say");
+});
+
+test("say: the chosen order's mean step is above 200 full shuffles on every synthetic tree", () => {
+  // the fixture, the broad tree, and generated chains of six slots each bringing two terms and returning one to the slot before
+  const chain = (salt) => Array.from({ length: 6 }, (_, i) => { const t = (n) => `term${L(salt)}${L(n)}word`; return { id: `k${i}`, label: `${t(2 * i)} · ${t(2 * i + 1)}`, terms: [t(2 * i), t(2 * i + 1)], text: `${t(2 * i)} meets ${t(2 * i + 1)} here. ${t(2 * i + 1)} returns to ${t(Math.max(0, 2 * i - 1))} and ${t(0)} again.` }; });
+  for (const [name, tree] of [["fixture", slots.filter((s) => s.id !== "z")], ["broad", broadSlots], ["chain a", chain(1)], ["chain b", chain(2)]]) {
+    const rows = slotsFrom(tree);
+    const o = outlineFrom({ tree, skeleton, topic: "harbors" });
+    const live = rows.filter((r) => !o.appendix.some((a) => a.slot === r.id));
+    const order = o.order.map((id) => live.findIndex((r) => r.id === id));
+    const chosen = cadenceOf(live, order), nul = shuffledCadence(live, order, { trials: 200, seed: 1 });
+    assert.equal(chosen.measure, "say"); assert.equal(nul.measure, "say");
+    assert.ok(chosen.mean > nul.mean, `${name}: chosen ${chosen.mean} vs shuffled ${nul.mean}`);
+  }
+});
+
+test("say: the opener and the closer are the same slots whether the step is measured on say or on body", () => {
+  for (const tree of [slots, broadSlots]) {
+    const a = outlineFrom({ tree, skeleton, topic: "harbors", params: { ...PARAMS, cadence: "say" } });
+    const b = outlineFrom({ tree, skeleton, topic: "harbors", params: { ...PARAMS, cadence: "body" } });
+    assert.equal(a.measures.cadenceOn, "say"); assert.equal(b.measures.cadenceOn, "body");
+    assert.equal(a.measures.opener.slot, b.measures.opener.slot);
+    assert.equal(a.measures.closer.slot, b.measures.closer.slot);
+    assert.deepEqual(a.appendix.map((x) => x.slot), b.appendix.map((x) => x.slot));
+  }
+});

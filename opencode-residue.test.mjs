@@ -76,3 +76,33 @@ test("a text grounded twice within minutes is one answer; a longform job's secti
   assert.equal(l.freeform, false);
   assert.ok(R.residueAcross({}).ledgers.some((x) => x.task === job && x.kind === "longform"));
 });
+
+test("the series: two same-config runs set the rerun band and name no change; a third outside it is a change; a freeform run is never a delta against a grounded one", async () => {
+  const EOT = (await import("./opencode-eot.mjs"));
+  const sec = (job, section, sentences, supported, now, extra = {}) => EOT.append({ task: job, agent: "longform", stage: "reason", detail: { kind: "longform-section", section, round: 0, sentences, supported, accepted: true, ...extra }, now });
+  const tree = (job, gaps, now, depth = 2) => EOT.append({ task: job, agent: "longform", stage: "reason", detail: { kind: "stitch-tree", tree: { id: "root", level: 0, children: depth > 1 ? [{ id: "s1", level: 1, children: depth > 2 ? [{ id: "s1.g1", level: 2, children: [] }] : [] }] : [] }, gaps }, now });
+  // piece "owls": grounded, layers=2 — run 1 at 50%, run 2 at 40% (the band is 10 pts), run 3 at 45% (inside), run 4 at 10% (outside: a change)
+  sec("longform-owls-aaaaaaaa", "s1", 10, 5, 10_000); tree("longform-owls-aaaaaaaa", [{ slot: "s1.g1" }], 10_000);
+  sec("longform-owls-bbbbbbbb", "s1", 10, 6, 20_000); tree("longform-owls-bbbbbbbb", [], 20_000);
+  sec("longform-owls-cccccccc", "s1", 20, 11, 30_000); tree("longform-owls-cccccccc", [{ slot: "a" }, { slot: "b" }], 30_000);
+  sec("longform-owls-dddddddd", "s1", 10, 9, 40_000); tree("longform-owls-dddddddd", [], 40_000);
+  // a freeform owls run between: 100% marked, its own config, never a delta against the grounded ones
+  sec("longform-owls-eeeeeeee", "s1", 8, 8, 25_000, { freeform: true });
+  const s = R.residueSeries({});
+  const owls = s.pieces.find((p) => p.piece === "owls");
+  assert.ok(owls, "the piece is the job id's slug");
+  assert.deepEqual(owls.runs.map((r) => r.job.slice(-8)), ["aaaaaaaa", "bbbbbbbb", "eeeeeeee", "cccccccc", "dddddddd"], "runs in time order");
+  const [a, b, e, c, d] = owls.runs;
+  assert.equal(a.change, null, "the first run has nothing to differ from");
+  assert.equal(b.change, false); assert.ok(Math.abs(b.delta - -0.1) < 1e-9, "the second same-config run's Δ is the band, not a change");
+  assert.equal(e.configKey, "freeform"); assert.equal(e.delta, null, "a freeform run is another config: no delta");
+  assert.equal(c.change, false, "5 pts inside a 10 pt band: no change named");
+  assert.equal(d.change, true, "35 pts outside the band: a change"); assert.ok(Math.abs(d.delta - -0.35) < 1e-9);
+  assert.ok(Math.abs(owls.bands["grounded/layers=2"] - 0.1) < 1e-9, "a named change does not widen the band");
+  assert.deepEqual(owls.runs.map((r) => r.gaps), [1, 0, null, 2, 0], "gaps come from the stitch-tree event; no tree, no number");
+  assert.ok(owls.runs.every((r) => r.contests === null), "no contest event recorded: contests are null, never guessed");
+  assert.equal(owls.changes.length, 1);
+  assert.ok(s.daily.length >= 1 && s.daily.every((x) => /^\d{4}-\d{2}-\d{2}$/.test(x.day) && (x.share == null || (x.share >= 0 && x.share <= 1))));
+  assert.match(R.renderSeries(s), /owls · 5 run\(s\)/);
+  assert.match(R.renderSeries(s), /CHANGE \(outside band\)/);
+});

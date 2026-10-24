@@ -22,7 +22,11 @@
 //   - a claim is any admitted UNIT of a generated piece — a sentence, a table row ("Species | 36"), a list item, a code comment: `{ text, standing,
 //     at, kind? }` as the residue ledger gives it. Nothing here assumes prose beyond what the referents builder needs.
 //
-//   claimGraph({ claims })                 -> { nodes, edges, byEnd, gaps }
+//   - ENDS are weighed by surprisal as janus resolve.mjs weighs company (PREREG Amendment 3): an end carried by more claims than the pool's chance
+//     floor (T/m: the pool's end tokens dealt evenly over its distinct ends) is a HUB and neither joins nor separates; nestedness, the concessions
+//     and the edges are judged over each claim's WEIGHTED ends (ends minus hubs). A claim with only hub ends is the typed gap `hub_ends`.
+//
+//   claimGraph({ claims }, { weighting })  -> { nodes, edges, byEnd, gaps, hubs }   weighting: "surprisal" (default) | "none" (runs 1-3, diagnostic)
 //   contests({ graph })                    -> [{ a, b, ends, kind, values, settled }]
 //   rest({ graph, contests })              -> { rests, contests, conceded }
 //   shuffleEnds(graph, rng)                -> the same graph with its ends dealt across claims at random (the null)
@@ -324,7 +328,7 @@ const norm = (s) => String(s ?? "").toLowerCase().replace(/['’]s\b/g, "").repl
  * Each node: { id, text, standing, at, kind, ends: [..], proper: [..], values: [..], gap? }. Ends are referent ids from the builder over the
  * whole piece plus recurrent noun lemmas; an ordinal qualifies its noun ("lighthouse#4"). Edges join nodes sharing at least one end.
  */
-export async function claimGraph({ claims = [] } = {}) {
+export async function claimGraph({ claims = [] } = {}, { weighting = "surprisal" } = {}) {
   const { dominantOf, buildReferents, sameAct } = await organsOnce();
   const units = (Array.isArray(claims) ? claims : []).map((c, i) => (typeof c === "string" ? { text: c } : c ?? {})).map((c, i) => ({
     id: i, text: String(c.text ?? "").replace(/\s+/g, " ").trim(), standing: c.standing ?? null, at: c.at ?? null, kind: c.kind ?? "prose", given: Array.isArray(c.ends) ? c.ends.map(norm).filter(Boolean) : [],
@@ -347,25 +351,48 @@ export async function claimGraph({ claims = [] } = {}) {
     for (const o of ordinals) {
       for (const e of [...ends]) if (e === o.noun || e.split(" ").includes(o.noun)) { ends.delete(e); ends.add(`${e}#${o.index}`); }
     }
-    const gap = !ends.size ? "no_ends" : !values.length ? "no_value" : null;
-    return { id: u.id, text: u.text, standing: u.standing, at: u.at, kind: u.kind, ends: [...ends].sort(), proper: [...new Set(proper[i])], values, ...(gap ? { gap } : {}) };
+    return { id: u.id, text: u.text, standing: u.standing, at: u.at, kind: u.kind, ends: [...ends].sort(), proper: [...new Set(proper[i])], values };
   });
-  const graph = { schema: CONTEST_SCHEMA, nodes, edges: [], byEnd: {}, gaps: nodes.filter((n) => n.gap).map((n) => ({ id: n.id, at: n.at, gap: n.gap })) };
+  const graph = { schema: CONTEST_SCHEMA, weighting, nodes, edges: [], byEnd: {}, gaps: [], hubs: [] };
   Object.defineProperty(graph, "organs", { value: { sameAct, dominantOf }, enumerable: false });
   return relink(graph);
 }
 
-/** Rebuild edges and byEnd from the nodes' ends (used after a shuffle). */
+/** The pool's hub ends (PREREG Amendment 3): over the claims that carry at least one end, c(e) is how many carry e, T the end tokens, m the distinct
+ *  ends; an end is a hub when c(e) > T / m — carried by more claims than the pool's chance floor, the count an end has when the pool's end tokens
+ *  are dealt evenly over its distinct ends (the deal the shuffled null draws from). In resolve's terms its surprisal, -log((c + 0.5) / (n + 1)), is
+ *  below that of a chance-dealt end. No constant is chosen; a pool of one end per claim has no hub. */
+export function hubEnds(nodes) {
+  const count = new Map();
+  let T = 0;
+  for (const n of nodes) for (const e of n.ends) { count.set(e, (count.get(e) ?? 0) + 1); T += 1; }
+  const m = count.size;
+  if (!m) return [];
+  const floor = T / m;
+  return [...count.entries()].filter(([, c]) => c > floor).map(([e]) => e).sort();
+}
+
+/** Rebuild hubs, weighted ends, gaps, edges and byEnd from the nodes' ends (used after a shuffle). Edges join nodes sharing a weighted end. */
 function relink(graph) {
+  const hubs = graph.weighting === "none" ? [] : hubEnds(graph.nodes);
+  const hubSet = new Set(hubs);
+  for (const n of graph.nodes) {
+    n.hubs = n.ends.filter((e) => hubSet.has(e));
+    n.weighted = n.ends.filter((e) => !hubSet.has(e));
+    const gap = !n.ends.length ? "no_ends" : !n.weighted.length ? "hub_ends" : !n.values.length ? "no_value" : null;
+    if (gap) n.gap = gap; else delete n.gap;
+  }
   const byEnd = {};
-  for (const n of graph.nodes) for (const e of n.ends) (byEnd[e] ??= []).push(n.id);
+  for (const n of graph.nodes) for (const e of n.weighted) (byEnd[e] ??= []).push(n.id);
   const edges = [];
   for (let i = 0; i < graph.nodes.length; i += 1) for (let j = i + 1; j < graph.nodes.length; j += 1) {
-    const shared = graph.nodes[i].ends.filter((e) => graph.nodes[j].ends.includes(e));
+    const shared = graph.nodes[i].weighted.filter((e) => graph.nodes[j].weighted.includes(e));
     if (shared.length) edges.push({ a: graph.nodes[i].id, b: graph.nodes[j].id, shared });
   }
+  graph.hubs = hubs;
   graph.edges = edges;
   graph.byEnd = byEnd;
+  graph.gaps = graph.nodes.filter((n) => n.gap).map((n) => ({ id: n.id, at: n.at, gap: n.gap }));
   return graph;
 }
 
@@ -408,7 +435,7 @@ export function contests({ graph } = {}) {
   const byId = new Map(graph.nodes.map((n) => [n.id, n]));
   for (const e of graph.edges) {
     const A = byId.get(e.a), B = byId.get(e.b);
-    if (A.gap || B.gap || !nested(A.ends, B.ends)) continue;
+    if (A.gap || B.gap || !nested(A.weighted, B.weighted)) continue; // hubs neither join nor separate (Amendment 3)
     for (const x of A.values) for (const y of B.values) {
       if (!comparable(x, y, sameAct) || meet(x, y)) continue;
       // both sides scoped to different years are two cells, not one contest
@@ -418,15 +445,15 @@ export function contests({ graph } = {}) {
       if (!!x.scope !== !!y.scope) {
         const s = x.scope ? A : B;
         settled = { by: s.at, how: `time-scoped: ${(x.scope ?? y.scope).raw}` };
-      } else if (x.kind === "count" && A.ends.length !== B.ends.length) {
-        const [wide, narrow] = A.ends.length < B.ends.length ? [A, B] : [B, A];
-        const extras = narrow.ends.filter((k) => !wide.ends.includes(k));
+      } else if (x.kind === "count" && A.weighted.length !== B.weighted.length) {
+        const [wide, narrow] = A.weighted.length < B.weighted.length ? [A, B] : [B, A];
+        const extras = narrow.weighted.filter((k) => !wide.weighted.includes(k));
         if (extras.length && extras.every((k) => narrow.proper.includes(k))) settled = { by: narrow.at, how: `narrower scope: ${extras.join(", ")}` };
       }
       if (!settled) {
         // a third claim on these ends that carries both values states the relation between them
         for (const C of graph.nodes) {
-          if (C === A || C === B || C.gap || !nested(C.ends, ends)) continue;
+          if (C === A || C === B || C.gap || !nested(C.weighted, ends)) continue;
           const covers = (v) => C.values.some((z) => comparable(z, v, sameAct) && meet(z, v));
           if (covers(x) && covers(y)) { settled = { by: C.at, how: `a third claim carries both: ${C.text.slice(0, 120)}` }; break; }
         }
@@ -444,4 +471,4 @@ export function rest({ graph, contests: cs = [] } = {}) {
   return { rests, contests: cs.length, conceded: cs.filter((c) => c.settled).length, gaps: graph.gaps.length };
 }
 
-export default { CONTEST_SCHEMA, claimGraph, contests, rest, shuffleEnds };
+export default { CONTEST_SCHEMA, claimGraph, contests, rest, shuffleEnds, hubEnds };

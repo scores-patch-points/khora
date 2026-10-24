@@ -38,7 +38,53 @@ B3 falls because hub ends no longer re-pair shuffled claims; B2 is the bar at ri
 
 ---
 
-## Latest run detail (seed 9), as `run.mjs` wrote it
+## Run 4 (2026-10-24, seed 10, Amendment 3: ends weighed by surprisal; goal `penelope-contest-2`)
+
+PREREG Amendment 3 frozen first (`PREREG.sha` line 5, `b8b4be32…16afb`): a hub end — carried by more claims than the pool's chance floor T/m (its end tokens
+dealt evenly over its distinct ends; resolve's surprisal below a chance-dealt end's) — neither joins nor separates; nestedness, edges and the concessions are judged
+over each claim's weighted ends; a claim with only hub ends is the typed gap `hub_ends`. The generator's lower-casing of the proper name in the scope phrasing is
+fixed. `claimGraph(…, { weighting: "none" })` keeps the run 1–3 frame for the diagnostic column. Tests: `opencode-contest.test.mjs` 12 of 12 (C10–C12 new).
+Detail: `RESULTS-run4-seed10.md` / `results-run4-seed10.json`; the diagnostic: `RESULTS-run4-oldweighting-seed10.md`.
+
+| seed 10, 300 pairs (125 planted, 53 settled, 175 clean), 660 units | Amendment 3 (this run) | old weighting (DIAGNOSTIC, same seed) |
+|---|---|---|
+| B1 recall (>= 90%) | **92.8% holds** | 69.6% missed |
+| B2 false contests (<= 5%) | **0.0% holds** | 0.0% holds |
+| B3 shuffled null (<= 10% of real) | **35.1 vs 134 real = 26.2% MISSED** | 14.3 vs 88 real = 16.2% missed |
+| concessions naming the planted settler | 47 of 53 | 40 of 53 |
+| contests across different pairs (descriptive) | 17 | 0 |
+| typed gaps | 95 (no_value 32, hub_ends 63) | 32 (no_value) |
+| hub ends | 62 (29 of them proper referents) | — |
+| dolphins pair alone | 1 contest, resting | 1 contest, resting |
+
+**Standing: B1 and B2 hold, B3 is missed and is worse than before; the goal is not passed. Not retuned on seed 10.** The prediction held for B1 (up) and B2
+(at risk, held) and failed for B3 (predicted down, went up). Two findings, read from the run, each named by what it is:
+
+1. **The nine remaining B1 misses are all `hub_ends` gaps with one cause: the set's names are not its own.** `freshName` cycles 24 × 14 = 336 stems over 660
+   names and changes only the building type ("Thornbury Lighthouse", then "Thornbury Bridge"); the referents builder merges the two into one being
+   ("thornbury lighthouse" on both pairs' claims), so a pair's own name is carried by 4–7 claims, crosses the floor (T/m ≈ 2.4) and the pair has nothing rare
+   left. The same merge is the 17 cross-pair contests. The PREREG promised "each pair its own referent names"; the generator breaks that promise at 300 pairs.
+   A set defect, like the lower-casing (Amendment 3) and the comma (Amendment 2), not a rule of the module — and not fixed here, because it was seen after the run.
+2. **B3 cannot go under the bar with this null on this set, and the weighting makes that visible rather than causing it.** The null deals END SETS across
+   claims. After the hubs are gone a pair's two sets are identical ({kelrow, kelrow lighthouse} on both sides), so wherever the twin sets land, the two claims
+   are "on the same ends" by construction and contest whenever their values are comparable and disjoint. The null count is then the set's own base rate of
+   comparable-disjoint values between random claims (≈ 12% of pairs: 35 of 300 twin deals), and the ratio to the real count (134 of 300) is ≈ 26% whatever
+   the ends are. In the old frame fewer twin sets were identical (one side carried "records", the other "kind"), which is why its null was LOWER — the same
+   defect that cost it recall. The 20 shuffles' false-contest rate on clean pairs stays 0.1%: the null is not raising clean pairs, it is re-pairing twins.
+
+**REC (proposed, not applied — the plan's law):** `penelope-contest-3`, Amendment 4 before any run, seed 11: (a) the generator draws every name from its own
+stem (PRE × SUF × TYPES without a repeated PRE+SUF), restoring the PREREG's own promise; (b) the B3 null deals end TOKENS across claims (each claim keeps its end
+count; a twin set is broken), which is what the PREREG says B3 tests — "the contests were about shared ends" — with the set-deal null reported beside it as
+the set's value base rate; (c) the weighting rule unchanged. Prediction: B1 ≥ 0.95 (the nine misses are the collision), B2 unchanged, B3 under 0.10 under the
+token deal. If B3 still misses under the token deal, the ends frame itself is wrong and the next REC is the subject-referent ends (keyed's `subjectNounsOf` +
+proper referents).
+
+Smaller things seen, declared: the builder admits "in April" and "fourth" and the verb forms "count"/"measure"/"stretch" as ends (the prior's noisy classes);
+all are hubs on this set and cost nothing here, and they are the noise the PREREG already declares ("the ends are the prior's, noisy where it is").
+
+---
+
+## Run 3 detail (seed 9), as `run.mjs` wrote it
 
 # Contest: synthetic run (seed 9)
 

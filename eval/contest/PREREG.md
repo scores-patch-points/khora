@@ -90,3 +90,35 @@ synthetic design; it is not a pass on seed 7, and the held-out real set remains 
 Reading the relation AFTER a date (Amendment 2, item 3) gave "In 2020 X had 36 bells" a relation for its year, so the year stopped being the count's time
 scope and the unit test for the scoped concession (C7) failed. The scope rule the PREREG and the code already stated — a year that opens the unit before
 every count frames it — is restored explicitly. No other change. Run 3 is seed 9; the misses that remain there are the frame's and are reported as such.
+
+## Amendment 3 (2026-10-24, plan goal `penelope-contest-2`; written AFTER runs 1–3 (seeds 7, 8, 9: B1 59–76% missed, B3 11.6–14% missed, B2 0–1.6% holds) and BEFORE any code of this amendment; the next run is on a NEW seed)
+The diagnosis on record (RESULTS.md): every missed pair contests when run alone; inside the ~650-unit graph the noun tier admits hub ends that recur
+piece-wide ("kind" from "of its kind", "records", the table label "length", the building type in every name), so one side of a pair carries an end the
+other lacks, the sets are not nested, and the pair reads as two cells; the same hubs re-pair shuffled claims (B3). This is a FRAME change (REC), not a retune.
+
+**The rule, as janus `resolve.mjs` weighs company ("a few rare shared things decide it; common ones count for nothing"; `makeSurprisal`):**
+- The POOL is the piece's claims that carry at least one end (n of them). For an end e, c(e) is the number of pool claims carrying it; its surprisal is
+  resolve's, −log((c(e) + 0.5) / (n + 1)). T is the pool's total end tokens (Σ over claims of |ends|), m its distinct ends.
+- The CHANCE FLOOR is the count an end has when the pool's T end tokens are dealt evenly over its m distinct ends: T / m — the same deal the B3 null
+  draws from. An end is a HUB when c(e) > T / m (equivalently: its surprisal is below the surprisal of a chance-dealt end, −log((T/m + 0.5)/(n + 1))).
+  No constant is chosen: the floor is the pool's own. The literal quantile reading of resolve's assert floor (1 − 1/n: an end carried by more than
+  n − 1 claims, i.e. by every claim) was examined and set aside before this run because no end of the synthetic pool is in every claim, so it could
+  not have changed runs 1–3; it is named here so it is not re-chosen after a result.
+- A hub end NEITHER JOINS NOR SEPARATES: edges, nestedness, the narrower-scope concession's extras and the third-claim cover are judged over each claim's
+  WEIGHTED ends (its ends minus the pool's hubs). The ordinal index stays on its noun as before (lighthouse#3 is a different end from lighthouse#4).
+- A claim all of whose ends are hubs has nothing rare to join on: it is the typed gap `hub_ends` (beside `no_ends` and `no_value`), counted and never
+  guessed into a contest. Declared cost: in a short piece about one thing, where that thing is in most claims, two claims on it alone will not contest
+  under this frame; the held-out real set is where that cost is measured.
+- The hub set is a property of the pool's end counts, so the shuffled null (ends dealt across claims) has the same hubs; weighted ends are recomputed
+  per shuffle from the dealt ends. The comparison claimGraph(…, { weighting: "none" }) keeps the run 1–3 behaviour for a DIAGNOSTIC column only.
+
+**The generator fix (a defect of the set, not of the module):** the settled-scope phrasing lower-cased the first character of the unit after "In YEAR ",
+which was the proper name when the phrasing opens with it ("In 1964 dunrow Lighthouse has …"), so the builder did not individuate it. Fixed: the first word is
+lower-cased only when it is not the proper name. Declared, not fixed: the conflict condition can draw a range at a coarser grain than its point
+("9,000 to 9,008" against 7,000 — grain 1000 against 1), which the declared grain rule reads as consistent; it stays a planted miss by construction.
+
+**Seed:** 10 (300 pairs, 20 shuffles). Bars unchanged: B1 ≥ 0.90, B2 ≤ 0.05, B3 ≤ 0.10 of real. The dolphins pair alone must still contest.
+**Prediction, before the run:** B1 rises (the missed pairs contest in isolation and the hubs that split them are above the floor by a wide margin);
+B3 falls (hubs no longer re-pair shuffled claims); B2 is the bar AT RISK, since two claims about different beings that share only a rare end would now
+meet — the set's unrelated-referent pairs are the test of that. On a miss: a REC with the next frame (subject referents via keyed's `subjectNounsOf` +
+proper referents as the ends), no retune on seed 10.

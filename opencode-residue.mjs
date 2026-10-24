@@ -12,6 +12,7 @@
 //   node opencode-residue.mjs                 every task's ledger
 //   node opencode-residue.mjs <task>          one task, answer by answer
 //   node opencode-residue.mjs --json [task]   the same as JSON
+//   node opencode-residue.mjs --series [--json] the series per piece with the rerun band, and by day (residueSeries)
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
@@ -124,6 +125,89 @@ export function residueAcross({ root = process.env.FOLD_WORKNOTES_DIR ?? path.jo
   return { schema: RESIDUE_SCHEMA, tasks: ledgers.length, answers: ledgers.reduce((n, l) => n + l.answers, 0), total, share: total.sentences ? total.marked / total.sentences : null, unclassed: ledgers.reduce((n, l) => n + l.unclassed, 0), ledgers: ledgers.sort((a, b) => (b.runs.at(-1)?.when ?? 0) - (a.runs.at(-1)?.when ?? 0)) };
 }
 
+/** THE SERIES (penelope layer 8, Pattern): the residue over versions, per piece and across pieces. A piece is the slug of a
+ *  longform job id (longform-<slug>-<sha>), its runs the jobs in time order. Each run carries the marked share, the counts,
+ *  the gaps its stitch-tree event named (no stitch-tree: null, shown as a dash), the contests a longform-contest event
+ *  recorded (none recorded: null, never a guess) and its config {freeform, layers}. THE RERUN BAND is the noise of
+ *  rerunning one config: the max |Δshare| between consecutive same-config runs that were not themselves named a change.
+ *  Two same-config runs establish it (their Δ is the band, not a change); from the third run on, a Δ from the previous
+ *  same-config run is a change only when |Δ| exceeds the band so far; a named change does not widen the band. Runs of
+ *  different configs (freeform vs grounded, a different layer depth) are never compared as a delta. */
+export const pieceOf = (task) => String(task ?? "").replace(/^longform-/, "").replace(/-[0-9a-f]{6,}$/, "");
+const CONTEST_KINDS = new Set(["longform-contest", "contest", "contests"]);
+const treeDepth = (n) => (n && typeof n === "object" ? 1 + Math.max(0, ...(Array.isArray(n.children) ? n.children : []).map(treeDepth)) : 0);
+export const configKey = (c) => `${c.freeform ? "freeform" : "grounded"}${c.layers == null ? "" : `/layers=${c.layers}`}`;
+
+/** One longform job as a run of the series. */
+export function longformRun({ task } = {}) {
+  let events = [];
+  try { events = EOT.read(task)?.events ?? []; } catch { events = []; }
+  if (!events.length) return null;
+  const l = longformLedger({ task });
+  if (!l.answers) return null;
+  const when = Math.min(...events.map(whenOf).filter((t) => t > 0), l.runs[0]?.when ?? Infinity);
+  const trees = events.filter((e) => e?.detail?.kind === "stitch-tree");
+  const tree = trees.at(-1)?.detail ?? null;
+  const gaps = tree ? (Array.isArray(tree.gaps) ? tree.gaps.length : 0) : null;
+  const contestEvents = events.filter((e) => CONTEST_KINDS.has(String(e?.detail?.kind ?? "")));
+  const contests = contestEvents.length ? contestEvents.reduce((n, e) => n + (Array.isArray(e.detail.contests) ? e.detail.contests.length : Number(e.detail.count ?? e.detail.open ?? 0) || 0), 0) : null;
+  const config = { freeform: l.freeform, layers: tree ? treeDepth(tree.tree) : null };
+  return { when: Number.isFinite(when) ? when : 0, job: task, piece: pieceOf(task), share: l.share, sentences: l.total.sentences, facing: l.total.facing, marked: l.total.marked, contradicted: l.total.contradicted, sections: l.answers, gaps, contests, config, configKey: configKey(config), delta: null, change: null, band: null };
+}
+
+/** Walk one piece's runs in time order, naming changes only outside the rerun band of their config. Mutates the runs. */
+export function bandRuns(runs) {
+  const prev = new Map(), band = new Map();
+  for (const r of runs) {
+    const k = r.configKey, p = prev.get(k);
+    if (p && p.share != null && r.share != null) {
+      r.delta = r.share - p.share;
+      const b = band.get(k);
+      if (b == null) { band.set(k, Math.abs(r.delta)); r.change = false; } // the first pair IS the band
+      else if (Math.abs(r.delta) > b) r.change = true;
+      else { r.change = false; band.set(k, Math.max(b, Math.abs(r.delta))); }
+      r.band = band.get(k);
+    }
+    prev.set(k, r);
+  }
+  return Object.fromEntries([...band].map(([k, b]) => [k, b]));
+}
+
+export function residueSeries({ root = process.env.FOLD_WORKNOTES_DIR ?? path.join(process.env.HOME ?? "", ".fold", "worknotes") } = {}) {
+  let tasks = [];
+  try { tasks = fs.readdirSync(root, { withFileTypes: true }).filter((d) => d.isDirectory() && d.name.startsWith("longform-") && fs.existsSync(path.join(root, d.name, "eot"))).map((d) => d.name); } catch { tasks = []; }
+  const runs = tasks.map((t) => longformRun({ task: t })).filter(Boolean).sort((a, b) => a.when - b.when);
+  const byPiece = new Map();
+  for (const r of runs) { if (!byPiece.has(r.piece)) byPiece.set(r.piece, []); byPiece.get(r.piece).push(r); }
+  const pieces = [...byPiece].map(([piece, rs]) => {
+    const bands = bandRuns(rs);
+    const changes = rs.filter((r) => r.change === true).map((r) => ({ job: r.job, delta: r.delta, band: r.band }));
+    return { piece, runs: rs, bands, configs: [...new Set(rs.map((r) => r.configKey))], changes, last: rs.at(-1)?.when ?? null };
+  }).sort((a, b) => (b.last ?? 0) - (a.last ?? 0));
+  const byDay = new Map();
+  for (const r of runs) {
+    const day = new Date(r.when).toISOString().slice(0, 10);
+    const d = byDay.get(day) ?? { day, runs: 0, pieces: new Set(), sentences: 0, marked: 0, facing: 0, gaps: 0, gapsKnown: 0, contests: 0, contestsKnown: 0 };
+    d.runs++; d.pieces.add(r.piece); d.sentences += r.sentences; d.marked += r.marked; d.facing += r.facing;
+    if (r.gaps != null) { d.gaps += r.gaps; d.gapsKnown++; }
+    if (r.contests != null) { d.contests += r.contests; d.contestsKnown++; }
+    byDay.set(day, d);
+  }
+  const daily = [...byDay.values()].sort((a, b) => a.day.localeCompare(b.day)).map((d) => ({ ...d, pieces: d.pieces.size, share: d.sentences ? d.marked / d.sentences : null, gaps: d.gapsKnown ? d.gaps : null, contests: d.contestsKnown ? d.contests : null }));
+  return { schema: "ResidueSeries@1", pieces, daily, runs: runs.length };
+}
+
+export function renderSeries(s) {
+  const lines = [`residue series · ${s.pieces.length} piece(s) · ${s.runs} run(s)`];
+  for (const p of s.pieces) {
+    lines.push(`  ${p.piece} · ${p.runs.length} run(s) · configs ${p.configs.join(", ")} · band ${Object.entries(p.bands).map(([k, b]) => `${k}=${(b * 100).toFixed(1)} pts`).join(", ") || "— (one run per config)"} · ${p.changes.length} change(s) named`);
+    for (const r of p.runs) lines.push(`    ${new Date(r.when).toISOString().slice(0, 16)} ${r.job.padEnd(38)} ${r.configKey.padEnd(18)} marked ${pct(r.share)} of ${String(r.sentences).padStart(3)} · gaps ${r.gaps ?? "—"} · contests ${r.contests ?? "—"}${r.delta == null ? "" : ` · Δ ${(r.delta * 100).toFixed(1)} pts ${r.change ? "CHANGE (outside band)" : "within band"}`}`);
+  }
+  lines.push("  by day:");
+  for (const d of s.daily) lines.push(`    ${d.day} · ${d.runs} run(s) of ${d.pieces} piece(s) · marked ${pct(d.share)} of ${d.sentences} · gaps ${d.gaps ?? "—"} · contests ${d.contests ?? "—"}`);
+  return lines.join("\n");
+}
+
 const pct = (x) => (x == null ? "—" : `${(x * 100).toFixed(0)}%`);
 export function renderLedger(l) {
   const lines = [`residue · ${l.task ?? "all tasks"} · ${l.answers} answer(s) · ${l.total.sentences} sentences · facing ${l.total.facing} · marked ${l.total.marked} · contradicted ${l.total.contradicted} · marked share ${pct(l.share)}${l.unclassed ? ` · UNCLASSED ${l.unclassed}` : ""}`];
@@ -136,6 +220,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const args = process.argv.slice(2);
   const json = args.includes("--json");
   const task = args.find((a) => !a.startsWith("--"));
+  if (args.includes("--series")) { const s = residueSeries({}); console.log(json ? JSON.stringify(s, null, 1) : renderSeries(s)); process.exit(0); }
   const l = task ? (task.startsWith("longform-") ? longformLedger({ task }) : residueLedger({ task })) : residueAcross({});
   console.log(json ? JSON.stringify(l, null, 1) : renderLedger(l));
 }

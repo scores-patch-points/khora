@@ -1,7 +1,7 @@
 // opencode-contest.test.mjs — the contest: two claims of one piece on the same ends whose typed values cannot both hold; the null collapses it.
 import test from "node:test";
 import assert from "node:assert/strict";
-import { claimGraph, contests, rest, shuffleEnds } from "./opencode-contest.mjs";
+import { claimGraph, contests, rest, shuffleEnds, hubEnds } from "./opencode-contest.mjs";
 
 const DOLPHINS = [
   { text: "Thirty-six dolphin species are found in every ocean.", standing: "grounded", at: "marinebio#1" },
@@ -107,4 +107,55 @@ test("C9 shuffled ends collapse the contest count", async () => {
   let shuffled = 0;
   for (let k = 0; k < 20; k += 1) shuffled += contests({ graph: shuffleEnds(graph, rng) }).length;
   assert.ok(shuffled / 20 <= 0.5 * real, `shuffled mean ${shuffled / 20} against real ${real}`);
+});
+
+// ── Amendment 3: ends weighed by surprisal; a hub end neither joins nor separates ──────────────────────────────────────────────────────────────
+test("C10 a hub end carried by most claims neither joins nor separates: pairs split only by a hub still contest, claims sharing only the hub do not", async () => {
+  // eight pairs on their own names; one side of each pair carries "records" (the records say), the other "kind" (of its kind), and every claim the
+  // building type "Tower": each side has an incidental end the other lacks, the piece-wide hubs of RESULTS.md's diagnosis
+  const names = ["Ashbury", "Caldmere", "Dunford", "Elswick", "Fenwick", "Garrow", "Holmby", "Ickford"];
+  const claims = names.flatMap((n, i) => [
+    { text: `The records say ${n} Tower has ${20 + i} rooms.`, at: `${n}-1` },
+    { text: `At ${40 + i} rooms, ${n} Tower is the largest of its kind.`, at: `${n}-2` },
+  ]);
+  const weighted = await claimGraph({ claims });
+  for (const h of ["tower", "kind", "record", "room"]) assert.ok(weighted.hubs.includes(h), `hub ${h} missing: ${weighted.hubs.join(", ")}`);
+  assert.ok(!weighted.hubs.some((h) => /ashbury|caldmere/.test(h)), "a pair's own name is below the floor");
+  const cs = contests({ graph: weighted });
+  assert.equal(cs.length, names.length, "every pair contests on its own name; no claim meets another through tower/kind/room alone");
+  assert.ok(cs.every((c) => c.a.at.split("-")[0] === c.b.at.split("-")[0]));
+  // the same piece under the old weighting: the "kind" side has an end the other lacks, so the pairs split into two cells
+  const old = await claimGraph({ claims }, { weighting: "none" });
+  assert.deepEqual(old.hubs, []);
+  assert.ok(contests({ graph: old }).length < names.length, "diagnostic: the run 1-3 frame misses pairs that differ by a hub");
+});
+
+test("C11 the dolphins pair still contests under the weighting; a two-claim pool has no hub; hubEnds is the pool's own floor", async () => {
+  const { graph, cs } = await run(DOLPHINS);
+  assert.deepEqual(graph.hubs, []);
+  assert.equal(cs.length, 1);
+  assert.equal(cs[0].settled, null);
+  // T/m: four claims, ends a,b,c each once and x in all four -> T = 7, m = 4, floor 1.75: x (4) is a hub, a/b/c (1) are not
+  assert.deepEqual(hubEnds([{ ends: ["x", "a"] }, { ends: ["x", "b"] }, { ends: ["x", "c"] }, { ends: ["x"] }]), ["x"]);
+  // dealt evenly (every end carried by the same number of claims) nothing is above the floor
+  assert.deepEqual(hubEnds([{ ends: ["x", "a"] }, { ends: ["x", "a"] }]), []);
+});
+
+test("C12 nestedness decides over the remaining ends: hubs on one side only do not separate; a rare extra end still does; only-hub claims are the typed gap hub_ends", async () => {
+  const filler = Array.from({ length: 10 }, (_, i) => ({ text: `${["Kelby", "Lanrow", "Morley", "Norham", "Oxworth", "Pemton", "Radstead", "Selcombe", "Thornmoor", "Uxdale"][i]} Tower keeps ${3 + i} records.`, at: `f${i}` }));
+  const { graph, cs } = await run([
+    { text: "Varmouth Tower has 36 bells.", at: "v1" },
+    { text: "The records say Varmouth Tower has 40 bells.", at: "v2" },             // extra end "records": a hub -> still nested -> contest
+    { text: "Welford Tower has 36 bells.", at: "w1" },
+    { text: "Welford Tower and Yarby Tower have 40 bells.", at: "w2" },            // extra end "Yarby Tower": rare -> nested (one side's extras) -> contest, conceded as narrower scope
+    { text: "Yarby Tower and Zelford Tower have 50 bells.", at: "y1" },             // against w2: Welford on one side, Zelford on the other, both rare -> NOT nested -> no contest
+    { text: "Every tower keeps records.", at: "h1" },                               // only hub ends -> hub_ends gap
+    ...filler,
+  ]);
+  assert.ok(graph.hubs.includes("record") && graph.hubs.includes("tower"), `hubs: ${graph.hubs.join(", ")}`);
+  const pairs = cs.map((c) => `${c.a.at}~${c.b.at}`).sort();
+  assert.ok(pairs.includes("v1~v2"), `v1~v2 missing: ${pairs.join(" ")}`);
+  assert.ok(pairs.includes("w1~w2"), `w1~w2 missing: ${pairs.join(" ")}`);
+  assert.ok(!pairs.includes("w2~y1"), `w2~y1 raised: ${pairs.join(" ")}`);
+  assert.ok(graph.gaps.some((g) => g.at === "h1" && g.gap === "hub_ends"), JSON.stringify(graph.gaps));
 });

@@ -1,8 +1,10 @@
-# FORM results (eval/form) — 2026-10-24T04:23:51.758Z
+# FORM results (eval/form) — 2026-10-24T14:47:40.109Z
 
 PREREG.md sha256: 8690bcf2ee2cc0dcf0d23d9542052e383ff02b824f65ce07ba7cf8c878504b5f
 
-Parameters: {"k":2,"minTerm":4,"newTerms":2,"pieceShare":1,"corpusShare":0.5,"minParts":3,"minPartWords":15,"titleWords":[2,12],"shuffles":200,"order":"exhaustive","maxExhaustive":8}
+PREREG-2.md sha256: 34258fe7c27cdba7e49e86b66d3917965dc443fb26d724e74311de596d3d32d9
+
+Parameters: {"k":2,"minTerm":4,"newTerms":2,"pieceShare":1,"corpusShare":0.5,"minParts":3,"minPartWords":15,"titleWords":[2,12],"shuffles":200,"cadence":"say","order":"exhaustive","maxExhaustive":8}
 
 ## Skeleton: essay (n=15, shaped=15, segmenter=prose, segmented={"heading":15}, furniture terms=254, parts per piece median 7 IQR [6,13])
 
@@ -105,7 +107,7 @@ Per piece (by, parts, opens / develops-new-per-part / closes-shared, words per p
 - fold-door-cf/build/claude-code/README.md: heading, 4 parts, opens true (1 terms), develops [16,0], closes false (0 shared, strict false); words [25,161,101,29]
 - fold-extract/holodeck/README.md: heading, 22 parts, opens true (44 terms), develops [25,32,86,45,22,25,15,12,10,9,15,3,2,3,12,11,7,1,0,0], closes true (11 shared, strict true); words [165,133,156,603,216,225,227,262,99,167,254,360,154,39,194,91,408,579,201,68,46,198]
 - fold-extract/holodeck/extension/README.md: heading, 5 parts, opens true (8 terms), develops [4,3,1], closes true (9 shared, strict true); words [159,64,101,92,73]
-- fold-suite/cron/README.md: heading, 6 parts, opens true (10 terms), develops [19,1,1,3], closes true (12 shared, strict true); words [88,291,54,36,65,114]
+- fold-suite/cron/README.md: heading, 6 parts, opens true (10 terms), develops [20,2,1,4], closes true (12 shared, strict true); words [88,291,54,36,65,138]
 - foldcode-next/README.md: heading, 6 parts, opens true (6 terms), develops [11,7,3,0], closes true (4 shared, strict false); words [43,90,55,65,94,39]
 - foldcode/README.md: heading, 4 parts, opens false (0 terms), develops [7,2], closes true (4 shared, strict true); words [120,144,59,184]
 - foldcode/github/README.md: heading, 5 parts, opens true (5 terms), develops [15,15,1], closes true (4 shared, strict true); words [26,177,153,18,229]
@@ -234,44 +236,44 @@ Per piece (by, parts, opens / develops-new-per-part / closes-shared, words per p
 - the-fold-numeral/experiments/specimen-assembly/README.md#table84: table, 9 parts, opens false (0 terms), develops [3,4,3,0,0,2,0], closes false (0 shared, strict false); words [4,15,17,17,18,23,14,16,20]
 - the-fold-numeral/experiments/specimen-assembly/README.md#table85: table, 9 parts, opens false (0 terms), develops [2,1,0,4,2,0,2], closes false (0 shared, strict false); words [3,17,11,9,22,20,29,15,18]
 
-## Three real trees: facet titles against skeleton titles
+## Three real trees: facet titles against skeleton titles (first frame; cadence on the body, as first recorded)
 
 Pages: from the gather cache at /Users/mlacy/.local/share/foldcode/gather-cache (read-only), the 8 pages whose title names the topic and whose text names it >= 20 times. Tree: opencode-stitch.mjs stitch() (voidHunt + fillSlots, zero model calls). F = defaultOutline(topic, slot labels) from opencode-longform.mjs; S = outlineFrom on the same tree with the essay skeleton; reader words = the ask's.
 
 ### elephants (job longform-elephants-6345f6e9; 8 cached pages)
 
+- https://en.wikipedia.org/wiki/Cultural_depictions_of_elephants (184 mentions, 24000 chars)
 - https://en.wikipedia.org/wiki/War_elephant (184 mentions, 24000 chars)
+- https://southernthailandelephants.org/the-asian-elephant/ (183 mentions, 23580 chars)
+- https://www.elephantsforafrica.org/elephant-facts/ (179 mentions, 22091 chars)
 - https://www.bbcearth.com/factfiles/animals/mammals/elephant (154 mentions, 24000 chars)
 - https://en.wikipedia.org/wiki/Elephant_cognition (145 mentions, 24000 chars)
+- https://en.wikipedia.org/wiki/Captive_elephants (136 mentions, 20010 chars)
 - https://www.thewildlifediaries.com/types-of-elephants-in-the-wild/ (131 mentions, 15601 chars)
-- https://elephantconservation.org/about-elephants/ (129 mentions, 23042 chars)
-- https://en.wikipedia.org/wiki/African_elephant (126 mentions, 24000 chars)
-- https://en.wikipedia.org/wiki/Elephant (117 mentions, 24000 chars)
-- https://en.wikipedia.org/wiki/Indian_elephant (108 mentions, 24000 chars)
 
 Recorded headings of the job's longform.md (the facet titles the piece actually got): "Introduction", "Asia and bulls", "Adult and trunks", "Asia", "Conclusion"
 
-Tree: 1223 sentences from 8 pages; 6 level-1 slots, 3 level-1 gaps; 16 typed gaps in all.
+Tree: 1075 sentences from 8 pages; 6 level-1 slots, 3 level-1 gaps; 18 typed gaps in all.
 
 | # | F (facet, defaultOutline) | S (skeleton, outlineFrom; run 1 order) | role | words | slot | facts | title by |
 |---|---|---|---|---|---|---|---|
-| 1 | Introduction | Even modest projects can transform outcomes for entire species | opens | 175 | s1 (species · forest) | 12 | clause: all top terms |
-| 2 | Species and forest | War elephants played a critical role in several key battles in antiquity | develops | 528 | sg2 (battle) | 18 | clause: all top terms |
-| 3 | Animals and terrestrial | Its trunk tip has two finger-like projections | develops | 364 | s6 (trunk · finger-like) | 12 | clause: all top terms |
-| 4 | Years and calves | Elephants are able to spend substantial time working on problems | develops | 195 | s5 (time · numbers) | 4 | clause: seed term |
-| 5 | Groups and family | Which are replaced by tusks when calves are about one year old | develops | 364 | s3 (years · calves) | 12 | clause: all top terms |
-| 6 | Time and numbers | Traveling in family groups that | develops | 364 | s4 (groups · family) | 12 | clause: all top terms |
-| 7 | Trunk and finger-like | Hannibal led an army of war elephants across the Alps | develops | 528 | sg1 (army) | 22 | clause: all top terms |
-| 8 | Conclusion | Not much is known about African pygmy elephants | develops | 528 | sg3 (pygmy) | 18 | clause: all top terms |
-| 9 |  | Elephants are the largest living terrestrial animals | closes | 223 | s2 (animals · terrestrial) | 12 | clause: all top terms |
+| 1 | Introduction | The La Plata dolphin has an EQ of 1.67 | opens | 175 | s1 (animals · land) | 12 | clause: all top terms |
+| 2 | Animals and land | The Romans were unprepared for fighting elephants | develops | 425 | sg3 (force) | 14 | clause: all top terms |
+| 3 | Years and time | Often resulting in elephant/human conflict | develops | 303 | s3 (humans · conflict) | 10 | clause: all top terms |
+| 4 | Humans and conflict | Elephants usually have 26 teeth at any one time | develops | 273 | s4 (time · males) | 9 | clause: seed term |
+| 5 | Time and males | Hannibal led an army of war elephants across the Alps | develops | 528 | sg1 (army) | 22 | clause: all top terms |
+| 6 | Numbers and africa | Creating habitats for new species to thrive | develops | 303 | s6 (species · forest) | 10 | clause: all top terms |
+| 7 | Species and forest | Indian rock reliefs include a number of depictions of elephants | develops | 195 | s5 (numbers · africa) | 5 | clause: all top terms |
+| 8 | Conclusion | Not much is known about African pygmy elephants | develops | 528 | sg2 (pygmy) | 18 | clause: all top terms |
+| 9 |  | By the time Alexander reached the borders of India five years later | closes | 223 | s2 (years · time) | 12 | clause: all top terms |
 
-Order: s1 → sg2 → s6 → s5 → s3 → s4 → sg1 → sg3 → s2; opener recurs in 8 / 8 other slots; closer shares 147 terms with the opener; median facts 12.
+Order: s1 → sg3 → s3 → s4 → sg1 → s6 → s5 → sg2 → s2; opener recurs in 8 / 8 other slots; closer shares 117 terms with the opener; median facts 12.
 
-Cadence: chosen order mean step 0.4903 (steps sg2:0.774, s6:0.735, s5:0.503, s3:0.469, s4:0.431, sg1:0.365, sg3:0.225, s2:0.42); shuffled mean 0.5235 over 200 orders (max 0.5995); B2 FAILS on this tree.
+Cadence: chosen order mean step 0.4992 (steps sg3:0.778, s3:0.635, s4:0.575, sg1:0.532, s6:0.488, s5:0.335, sg2:0.254, s2:0.397); shuffled mean 0.5408 over 200 orders (max 0.605); B2 FAILS on this tree.
 
-REC run 2 (post hoc, dev): exhaustive middle order s1 → sg3 → s5 → sg1 → sg2 → s4 → s3 → s6 → s2, mean step 0.5132 against the full shuffle null 0.5235 (not above) and the ends-held null 0.4928 (above).
+REC run 2 (post hoc, dev): exhaustive middle order s1 → sg2 → sg3 → s5 → sg1 → s4 → s6 → s3 → s2, mean step 0.524 against the full shuffle null 0.5408 (not above) and the ends-held null 0.5017 (above).
 
-Post-hoc diagnostic (not a bar): with the opener and closer held, shuffling only the middle gives mean step 0.4928; the chosen middle order is not above it.
+Post-hoc diagnostic (not a bar): with the opener and closer held, shuffling only the middle gives mean step 0.5017; the chosen middle order is not above it.
 
 ### lighthouses (job longform-lighthouses-ae26d638; 8 cached pages)
 
@@ -348,11 +350,119 @@ Post-hoc diagnostic (not a bar): with the opener and closer held, shuffling only
 - Facet-join titles among skeleton titles: 0 / 27.
 - Slots dropped (outline + appendix vs tree): 0.
 - Sections with words outside the essay skeleton's IQR for their role: 0.
-- Cadence null B2: FAILS — elephants 0.4903 vs 0.5235; lighthouses 0.5297 vs 0.5025; honeybees 0.2261 vs 0.3805.
-- Post-hoc diagnostic (ends held, middle shuffled; written after B2 was seen): elephants 0.4903 vs 0.4928 (not above); lighthouses 0.5297 vs 0.5514 (not above); honeybees 0.2261 vs 0.2501 (not above).
-- REC run 2 (exhaustive middle order; the frame after B2 failed; dev, not pre-registered): elephants 0.5132 vs full shuffle 0.5235 (not above); lighthouses 0.5917 vs full shuffle 0.5025 (above); honeybees 0.2802 vs full shuffle 0.3805 (not above). The REC's own bar is to be pre-registered and read on asks not seen here.
+- Cadence null B2: FAILS — elephants 0.4992 vs 0.5408; lighthouses 0.5297 vs 0.5025; honeybees 0.2261 vs 0.3805.
+- Post-hoc diagnostic (ends held, middle shuffled; written after B2 was seen): elephants 0.4992 vs 0.5017 (not above); lighthouses 0.5297 vs 0.5514 (not above); honeybees 0.2261 vs 0.2501 (not above).
+- REC run 2 (exhaustive middle order; the frame after B2 failed; dev, not pre-registered): elephants 0.524 vs full shuffle 0.5408 (not above); lighthouses 0.5917 vs full shuffle 0.5025 (above); honeybees 0.2802 vs full shuffle 0.3805 (not above). The REC's own bar is to be pre-registered and read on asks not seen here.
+## PREREG-2: three unseen trees, the step measured on what a section will say (fills + question terms)
+
+Frame: eval/form/PREREG-2.md (sha256 34258fe7c27cdba7e49e86b66d3917965dc443fb26d724e74311de596d3d32d9). Step on `say` = question terms + the stitched fills' stems; opener, closer, isolation unchanged (body); middle order exhaustive on the say measure. Null: 200 full shuffles (seed 1). BAR B3: chosen > shuffled on every tree. Beside it (not a bar): the same tree on the old body measure, the order the old frame would choose, against 200 full shuffles on body; and the ends-held null on say. Page rule as above (title names the topic, text names it >= 20 times, top 8 by mentions); homonym pages are not removed by hand.
+
+### dolphins (ask "write an essay about dolphins"; job longform-dolphins-*; 8 cached pages)
+
+- https://outforia.com/types-of-dolphins (169 mentions, 24000 chars)
+- https://en.wikipedia.org/wiki/Dolphins_(NRL) (144 mentions, 23247 chars)
+- https://en.wikipedia.org/wiki/Common_dolphin (139 mentions, 20950 chars)
+- https://sciencenotes.org/porpoise-vs-dolphin-differences-and-how-to-tell-them-apart/ (137 mentions, 23802 chars)
+- https://translate.google.com/translate?u=https%3A%2F%2Fwww.dolphinsplus.com%2Fdolphin-facts-everything-you-need-to-know&hl=es&sl=en&tl=es&client=srp (130 mentions, 18536 chars)
+- https://www.dolphinsplus.com/dolphin-facts-everything-you-need-to-know (130 mentions, 18536 chars)
+- https://en.wikipedia.org/wiki/Oceanic_dolphin (129 mentions, 24000 chars)
+- https://en.wikipedia.org/wiki/River_dolphin (127 mentions, 24000 chars)
+
+Tree: 1456 sentences from 8 pages; 6 level-1 slots, 3 level-1 gaps; 19 typed gaps in all. Per slot (body stems / say stems / fills): s1 503/106/12, s2 211/73/12, s3 208/80/10, s4 183/122/12, s5 846/123/12, s6 239/77/12, sg1 197/1/21, sg2 142/1/14, sg3 134/1/13.
+
+| # | F (facet, defaultOutline) | S (skeleton, outlineFrom; say order) | role | words | slot | facts | title by |
+|---|---|---|---|---|---|---|---|
+| 1 | Introduction | The Peale’s dolphin’s current species name is Sagmatias australis | opens | 146 | s3 (name · species) | 10 | clause: all top terms |
+| 2 | Water and species | Male dolphins typically mate with multiple females every year | develops | 364 | s2 (years · females) | 12 | clause: all top terms |
+| 3 | Years and females | Common dolphins and bottlenose dolphins are also known to interbreed in captivity | develops | 364 | s6 (bottlenose · captivity) | 12 | clause: all top terms |
+| 4 | Name and species | Some species log out of the water | develops | 364 | s1 (water · species) | 12 | clause: all top terms |
+| 5 | Head and body | Rounded head without an obvious beak | develops | 364 | s4 (head · body) | 12 | clause: seed term |
+| 6 | Species and fish | "Dolphins bid 'NRL-ready' with new stadium complete" | develops | 528 | sg1 (stadium) | 21 | clause: all top terms |
+| 7 | Bottlenose and captivity | Dolphin meat is high in mercury | develops | 425 | sg2 (meat) | 14 | clause: all top terms |
+| 8 | Conclusion | The official name of the NRL club is Dolphins | develops | 394 | sg3 (club) | 13 | clause: all top terms |
+| 9 |  | And aggressive fishing operations are impacting all species of dolphins | closes | 223 | s5 (species · fish) | 12 | clause: all top terms |
+
+Order (exhaustive, on say): s3 → s2 → s6 → s1 → s4 → sg1 → sg2 → sg3 → s5; opener recurs in 7 / 8 other slots; closer shares 101 terms with the opener; median facts 12.
+
+Cadence on SAY (the bar): chosen order mean step 0.8322 (steps s2:0.89 (65/73), s6:0.714 (55/77), s1:0.698 (74/106), s4:0.689 (84/122), sg1:1 (1/1), sg2:1 (1/1), sg3:1 (1/1), s5:0.667 (82/123)); 200 full shuffles mean 0.8129 (max 0.8339); B3 HOLDS on this tree. Ends-held null (diagnostic) 0.8242: chosen above.
+
+Cadence on BODY (diagnostic, the first frame): the body-chosen order s3 → sg3 → sg2 → s4 → sg1 → s2 → s6 → s1 → s5 mean step 0.652 (steps sg3:0.701, sg2:0.838, s4:0.721, sg1:0.65, s2:0.64, s6:0.544, s1:0.59, s5:0.532); 200 full shuffles on body mean 0.5592 (max 0.6674); above. The say-chosen order read on body: 0.6119.
+
+### beans (ask "write an essay about beans"; job longform-beans-*; 8 cached pages)
+
+- https://www.epicgardening.com/how-to-grow-beans/ (193 mentions, 23514 chars)
+- https://www.ndsu.edu/agriculture/extension/publications/all-about-beans-nutrition-health-benefits-preparation-and-use-menus (187 mentions, 24000 chars)
+- https://harvestsavvy.com/types-of-beans/ (174 mentions, 23498 chars)
+- https://plantaveg.com/how-to-grow-beans/ (172 mentions, 23796 chars)
+- https://www.epicgardening.com/types-of-beans/ (166 mentions, 23646 chars)
+- https://www.wrightsdaylily.com/beans.html (154 mentions, 23856 chars)
+- https://happydiyhome.com/harvesting-beans/ (149 mentions, 18000 chars)
+- https://www.liveeatlearn.com/types-of-beans/ (134 mentions, 16496 chars)
+
+Tree: 1524 sentences from 8 pages; 6 level-1 slots, 3 level-1 gaps; 17 typed gaps in all. Per slot (body stems / say stems / fills): s1 770/107/12, s2 594/126/12, s3 451/98/12, s4 181/103/9, s5 138/28/2, s6 383/101/12, sg1 143/1/11, sg2 79/1/9, sg3 103/1/8.
+
+| # | F (facet, defaultOutline) | S (skeleton, outlineFrom; say order) | role | words | slot | facts | title by |
+|---|---|---|---|---|---|---|---|
+| 1 | Introduction | King of the Garden is an heirloom variety from 1883 | opens | 191 | s2 (variety · heirloom) | 12 | clause: all top terms |
+| 2 | Plants and seeds | They taste good | develops | 195 | s5 (taste · texture) | 2 | clause: seed term |
+| 3 | Variety and heirloom | Full flavor and smooth texture | develops | 397 | s3 (flavor · texture) | 12 | clause: all top terms |
+| 4 | Flavor and texture | 9 seeds per pod | develops | 397 | s6 (seeds · pods) | 12 | clause: all top terms |
+| 5 | Tender and pods | The pods of Jade Bush Beans are sweet and tender | develops | 298 | s4 (tender · pods) | 9 | clause: all top terms |
+| 6 | Taste and texture | In an eight-week study | develops | 364 | sg1 (study) | 11 | clause: all top terms |
+| 7 | Seeds and pods | Unique Characteristics | develops | 298 | sg2 (characteristics) | 9 | clause: all top terms |
+| 8 | Conclusion | Obesity and many types of cancers | develops | 265 | sg3 (cancers) | 8 | clause: all top terms |
+| 9 |  | Beans are the seeds collected from certain plants | closes | 243 | s1 (plants · seeds) | 12 | clause: all top terms |
+
+Order (exhaustive, on say): s2 → s5 → s3 → s6 → s4 → sg1 → sg2 → sg3 → s1; opener recurs in 7 / 8 other slots; closer shares 264 terms with the opener; median facts 11.
+
+Cadence on SAY (the bar): chosen order mean step 0.8448 (steps s5:0.964 (27/28), s3:0.714 (70/98), s6:0.822 (83/101), s4:0.641 (66/103), sg1:1 (1/1), sg2:1 (1/1), sg3:1 (1/1), s1:0.617 (66/107)); 200 full shuffles mean 0.8315 (max 0.8586); B3 HOLDS on this tree. Ends-held null (diagnostic) 0.825: chosen above.
+
+Cadence on BODY (diagnostic, the first frame): the body-chosen order s2 → sg2 → sg3 → s5 → sg1 → s4 → s6 → s3 → s1 mean step 0.4626 (steps sg2:0.367, sg3:0.592, s5:0.464, sg1:0.392, s4:0.436, s6:0.525, s3:0.439, s1:0.486); 200 full shuffles on body mean 0.4675 (max 0.5826); not above. The say-chosen order read on body: 0.419.
+
+### jaguar (ask "write an essay about jaguar"; job essay-jaguar-bda71b3a; 8 cached pages)
+
+- https://www.wildlifenomads.com/blog/animal-jaguar-facts/ (185 mentions, 21390 chars)
+- https://en.wikipedia.org/wiki/Jaguar_Land_Rover (122 mentions, 24000 chars)
+- https://en.wikipedia.org/wiki/Jaguar (116 mentions, 24000 chars)
+- https://en.wikipedia.org/wiki/Jaguar_Cars (109 mentions, 24000 chars)
+- https://en.wikipedia.org/wiki/Atari_Jaguar (100 mentions, 24000 chars)
+- https://en.wikipedia.org/wiki/SEPECAT_Jaguar (98 mentions, 24000 chars)
+- https://en.wikipedia.org/wiki/Fender_Jaguar (97 mentions, 24000 chars)
+- https://en.wikipedia.org/wiki/Jacksonville_Jaguars (91 mentions, 24000 chars)
+
+Tree: 1334 sentences from 8 pages; 6 level-1 slots, 3 level-1 gaps; 18 typed gaps in all. Per slot (body stems / say stems / fills): s1 448/119/11, s2 365/157/12, s3 319/75/4, s4 217/64/6, s5 241/25/2, s6 472/137/12, sg1 394/1/46, sg2 306/1/35, sg3 193/1/34.
+
+| # | F (facet, defaultOutline) | S (skeleton, outlineFrom; say order) | role | words | slot | facts | title by |
+|---|---|---|---|---|---|---|---|
+| 1 | Introduction | In September of that year | opens | 160 | s1 (years · september) | 11 | clause: all top terms |
+| 2 | Years and september | The teal jersey was resurrected as an alternate | develops | 528 | sg3 (teal) | 34 | clause: all top terms |
+| 3 | Part and body | Matching the color of the numbers | develops | 195 | s5 (numbers · color) | 2 | clause: all top terms |
+| 4 | Time and engine | Called Jaguar Conservation Units | develops | 195 | s4 (units · conservation) | 6 | clause: all top terms |
+| 5 | Units and conservation | At about the same time | develops | 195 | s3 (time · engine) | 4 | clause: seed term |
+| 6 | Numbers and color | The illegal wildlife trade in jaguar body parts | develops | 364 | s2 (part · body) | 12 | clause: all top terms |
+| 7 | Company and motor | Jaguar sales were substantially below Atari's expectations | develops | 528 | sg1 (atari) | 46 | clause: all top terms |
+| 8 | Conclusion | "The Story of the Fender Jaguar" | develops | 528 | sg2 (fender) | 35 | clause: all top terms |
+| 9 |  | Ford Motor Company | closes | 223 | s6 (company · motor) | 12 | clause: all top terms |
+
+Order (exhaustive, on say): s1 → sg3 → s5 → s4 → s3 → s2 → sg1 → sg2 → s6; opener recurs in 8 / 8 other slots; closer shares 113 terms with the opener; median facts 12.
+
+Cadence on SAY (the bar): chosen order mean step 0.8558 (steps sg3:1 (1/1), s5:0.72 (18/25), s4:0.813 (52/64), s3:0.813 (61/75), s2:0.777 (122/157), sg1:1 (1/1), sg2:1 (1/1), s6:0.723 (99/137)); 200 full shuffles mean 0.7321 (max 0.8884); B3 HOLDS on this tree. Ends-held null (diagnostic) 0.7856: chosen above.
+
+Cadence on BODY (diagnostic, the first frame): the body-chosen order s1 → sg3 → s4 → s5 → sg2 → s3 → s2 → sg1 → s6 mean step 0.5496 (steps sg3:0.679, s4:0.677, s5:0.548, sg2:0.575, s3:0.502, s2:0.468, sg1:0.452, s6:0.496); 200 full shuffles on body mean 0.5408 (max 0.5859); above. The say-chosen order read on body: 0.5465.
+
+### PREREG-2 checks
+
+- BAR B3 (say measure, chosen > 200 full shuffles, every unseen tree): HOLDS on every tree — dolphins 0.8322 vs 0.8129 (above); beans 0.8448 vs 0.8315 (above); jaguar 0.8558 vs 0.7321 (above).
+- Old body measure on the same trees (diagnostic, not a bar): dolphins 0.652 vs 0.5592 (above); beans 0.4626 vs 0.4675 (not above); jaguar 0.5496 vs 0.5408 (above).
+- Ends-held null on say (diagnostic): dolphins 0.8322 vs 0.8242 (above); beans 0.8448 vs 0.825 (above); jaguar 0.8558 vs 0.7856 (above).
+- Facet-join titles among skeleton titles on the unseen trees: 0 / 27; slots dropped: 0.
+
 
 ## Pending
 
-- B1, the blind pair test (human judgement on the ten pre-registered asks): NOT run here. The three F/S title sets above are the material for three of the ten asks; the other seven asks have no gather yet.
+- B1, the blind pair test (human judgement on the ten pre-registered asks): NOT run here. The F/S title sets above are the material for five of the ten asks (elephants, lighthouses, honeybees; dolphins, beans) plus jaguar, which is not among the ten; sea turtles, coral reefs, the printing press, volcanoes and the Nile have no gather yet.
 
+## Notes written after the run (by hand, cc-outline2, 2026-10-24)
+
+- The first-frame sections above were re-run pinned to the body measure (`cadence: "body"`). Lighthouses and honeybees reproduce the first run's numbers exactly (0.5297 vs 0.5025; 0.2261 vs 0.3805). Elephants does NOT (now 0.4992 vs 0.5408; first run 0.4903 vs 0.5235): the gather cache gained elephant pages since (Cultural_depictions_of_elephants, southernthailandelephants.org, elephantsforafrica.org, Captive_elephants now among the top 8 by mentions), so the tree is a different tree. B2's verdict on it is unchanged (fails). The first run's elephants numbers stand in fold-suite's EOT log; the trees here are the trees the cache gives today.
+- POST-HOC DIAGNOSTIC on the say measure (not a bar; written after B3 was seen): a level-1 gap carries no fills, so its `say` is its one term and its step is 1 wherever it stands (dolphins sg1/sg2/sg3, beans sg1/sg2/sg3, jaguar sg1/sg2/sg3 all 1/1 above). With the level-1 gaps left out, chosen vs 200 full shuffles on say: dolphins 0.7316 vs 0.7003 (above); beans 0.7516 vs 0.7296 (above); jaguar 0.7786 vs 0.7751 (above, by 0.0035). The bar's verdict does not depend on the gaps, but the jaguar margin without them is thin, and that tree's pages are mostly homonyms (cars, consoles, guitars, a football club), as PREREG-2 declared.
