@@ -1,5 +1,15 @@
 # Chorus log — append-only, one entry per lint run
 
+## 2026-10-24 — register: unwrap the opencode CLI's quotes, keep a twice-changed fact's first value, read statements out of compaction checkpoints (branch `register-cli-quote`, stacked on `register-door`)
+fast: 2 files · affected tests 19 pass · law: ok (pre-existing dup-header WARN S17/S96) · NOTE a pre-existing flake: "after a compaction the window's turns renumber from 1…" failed 1 of 8 runs on the UNMODIFIED files and once in three on mine, and passes 25 of 25 run alone (an order/timestamp tie in the event log, not in this diff)
+| lens | citation | file:line | verdict | one line |
+| Greenberg | a language gate | opencode-register.mjs `unwrapCliQuote` | noted | it runs before `scriptOf`, strips only the ASCII `"` the opencode CLI emits, and leaves the English-only v1 scope unchanged |
+| Feynman | a numeric constant in a comparison | opencode-register.mjs:520 | noted | `history.length > 2` is where "before that" stops being the original; measured on the foldcode-poc hard chat: the block holds what the answer needs for 45 of 45 probes, 12 of 45 before |
+| Kondo | a stray file or dead code | opencode-register.mjs:218 | false-positive-on-review | the hit is the word "stray" in a comment; nothing is dead |
+| Dijkstra | coupled to what it claims at the base unit | opencode-register.mjs `checkpointUserTurns` | noted | it reads only the harness's `<recent-context>` `[User]:` lines (the person's verbatim words) and never the model-written `<summary>`, which a test pins with a paraphrase that must not bind; numbered after the highest recorded turn so no two statements share a turn |
+| Simon/Chekhov | a real mechanism shipped unwired | `ingestTurns` | fixed | the register was written but never fed after turn 1 at a 32k cap (every request is one checkpoint message): live, 6 Haiku turns left 1 fact; with this change 7 |
+clean: Simon/Chekhov (all three changes have a test that fails on the old module)
+
 ## 2026-10-18 — the typed medium reaches the model (branch `feat/typed-window`, working diff)
 
 fast: 4 files · affected tests 173: 166 pass / 7 fail · law: ok (pre-existing dup-header WARN S17/S96)

@@ -213,6 +213,34 @@ export function matchStatement(text) {
 }
 
 /** The user's turns ([{ n, role?, text | ask }]) → their bindings, with typed gaps for turns the layer cannot read. */
+/** `opencode run "<message>"` hands the plugin the message wrapped in double quotes, inner quotes backslash-escaped (the CLI quotes any
+ *  argument that contains a space). A person's own message is not quoted: the wrapper is the transport's, and it defeats every pattern that
+ *  anchors at the start of the text ("Heads up: …") and leaks a stray quote into the value ("Pelican.\"").
+ *  Only a WHOLE message that is one quoted token is unwrapped; `"a" and "b"` is left alone. Measured on the foldcode-poc hard chat: with the
+ *  wrapper the extractor read 14 of 33 bindings, without it 33 of 33. */
+export function unwrapCliQuote(text) {
+  const s = String(text ?? "");
+  const m = /^\s*"((?:[^"\\]|\\.)*)"\s*$/s.exec(s);
+  return m ? m[1].replace(/\\"/g, '"') : s;
+}
+
+/** After a compaction, the "last user message" the plugin hands the door is the harness's checkpoint:
+ *    <conversation-checkpoint> … <summary>(model-written)</summary> <recent-context>[User]: "…"</recent-context> </conversation-checkpoint>
+ *  The summary is a model's paraphrase and is never read for facts; the recent-context lines are the person's own words, verbatim, and are the
+ *  only place a statement made in a compacted window survives. Returns the person's recent turns (still as the CLI quoted them), [] for a
+ *  checkpoint with none, or null when the text is not a checkpoint. Measured on the foldcode-poc hard chat at a 32k cap: every request after
+ *  turn 1 was one checkpoint message, so the register held 1 fact after 6 live turns. */
+export function checkpointUserTurns(text) {
+  const s = String(text ?? "");
+  if (!/^\s*<conversation-checkpoint>/.test(s)) return null;
+  const rc = /<recent-context>([\s\S]*?)<\/recent-context>/.exec(s);
+  if (!rc) return [];
+  const out = [];
+  const re = /\[(User|Assistant)\]:\s*([\s\S]*?)(?=\n\[(?:User|Assistant)\]:|\s*$)/g;
+  for (let m; (m = re.exec(rc[1]));) if (m[1] === "User" && m[2].trim()) out.push(m[2].trim());
+  return out;
+}
+
 export function extractBindings(turns, { lang = "en" } = {}) {
   const bindings = [];
   const gaps = [];
@@ -220,7 +248,7 @@ export function extractBindings(turns, { lang = "en" } = {}) {
   for (const t of list) {
     const role = t.role ?? "user";
     if (role !== "user") continue;
-    const text = String(t.text ?? t.ask ?? "");
+    const text = unwrapCliQuote(String(t.text ?? t.ask ?? ""));
     const n = t.n ?? t.turn ?? 0;
     if (!text.trim()) continue;
     const script = scriptOf(text);
@@ -503,8 +531,11 @@ export function registerLines(register, { maxLines = REGISTER.maxLines } = {}) {
     const also = (f.aliases ?? []).filter((a) => !values.has(norm(a)));  // a name the fact itself states, now or before, is not "also"
     const subj = f.subject + (also.length ? ` (also: ${also.join(", ")})` : "") + (f.attr ? ` ${f.attr}` : "");
     if (f.history.length > 1) {
-      const cur = f.current, prev = f.history.at(-2);
-      lines.push(`The ${subj} is ${cur.value} — you said so in turn ${cur.turn}; before that it was ${prev.value} (turn ${prev.turn}).`);
+      const cur = f.current, prev = f.history.at(-2), first = f.history[0];
+      // a fact changed more than once keeps its FIRST value too ("what was it originally?"); without it the pinned block answers "before that" and
+      // nothing earlier (foldcode-poc F11: all six "original" probes of the first hard-chat run came back with the middle value)
+      const orig = f.history.length > 2 ? `, and originally ${first.value} (turn ${first.turn})` : "";
+      lines.push(`The ${subj} is ${cur.value} — you said so in turn ${cur.turn}; before that it was ${prev.value} (turn ${prev.turn})${orig}.`);
     } else lines.push(`The ${subj} is ${f.current.value} — you said so in turn ${f.current.turn}.`);
   }
   // the NEWEST facts survive a line cap: an older one is still in the log, and the window's own turns still carry the recent ones
@@ -555,9 +586,19 @@ const sentenceKey = (s) => norm(s);
 /** Write the session's new bindings as `fact` marks under the session (agent). Idempotent by SENTENCE: after a compaction the
  *  window's turns renumber from 1, and the same sentence must not become a second fact. Returns what it wrote and the typed gaps. */
 export function ingestTurns({ task, agent, turns }) {
-  const list = (Array.isArray(turns) ? turns : []).map((t, i) => ({ n: Number(t.n ?? t.turn) || i + 1, role: t.role ?? "user", text: String(t.text ?? t.ask ?? "") }));
+  const marks = bindingsFromMarks(eot.projectMarks(task, { agent, kind: "fact" }));
+  const have = new Set(marks.map((b) => sentenceKey(b.sentence)));
+  // a compacted window renumbers from 1 and hands over a checkpoint, not the person's message: its recent-context lines are the person's
+  // turns, numbered after the highest turn already recorded so "you said so in turn N" never claims a turn the window cannot show
+  let seq = marks.reduce((m, b) => Math.max(m, Number(b.turn) || 0), 0);
+  const list = [];
+  for (const [i, t] of (Array.isArray(turns) ? turns : []).entries()) {
+    const role = t.role ?? "user", raw = String(t.text ?? t.ask ?? "");
+    const recent = role === "user" ? checkpointUserTurns(raw) : null;
+    if (recent === null) list.push({ n: Number(t.n ?? t.turn) || i + 1, role, text: raw });
+    else for (const u of recent) list.push({ n: ++seq, role: "user", text: u });
+  }
   const { bindings, gaps } = extractBindings(list);
-  const have = new Set(bindingsFromMarks(eot.projectMarks(task, { agent, kind: "fact" })).map((b) => sentenceKey(b.sentence)));
   let wrote = 0;
   for (const b of bindings) {
     const k = sentenceKey(b.sentence);
