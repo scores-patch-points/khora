@@ -213,6 +213,17 @@ export function matchStatement(text) {
 }
 
 /** The user's turns ([{ n, role?, text | ask }]) → their bindings, with typed gaps for turns the layer cannot read. */
+/** `opencode run "<message>"` hands the plugin the message wrapped in double quotes, inner quotes backslash-escaped (the CLI quotes any
+ *  argument that contains a space). A person's own message is not quoted: the wrapper is the transport's, and it defeats every pattern that
+ *  anchors at the start of the text ("Heads up: …") and leaks a stray quote into the value ("Pelican.\"").
+ *  Only a WHOLE message that is one quoted token is unwrapped; `"a" and "b"` is left alone. Measured on the foldcode-poc hard chat: with the
+ *  wrapper the extractor read 14 of 33 bindings, without it 33 of 33. */
+export function unwrapCliQuote(text) {
+  const s = String(text ?? "");
+  const m = /^\s*"((?:[^"\\]|\\.)*)"\s*$/s.exec(s);
+  return m ? m[1].replace(/\\"/g, '"') : s;
+}
+
 export function extractBindings(turns, { lang = "en" } = {}) {
   const bindings = [];
   const gaps = [];
@@ -220,7 +231,7 @@ export function extractBindings(turns, { lang = "en" } = {}) {
   for (const t of list) {
     const role = t.role ?? "user";
     if (role !== "user") continue;
-    const text = String(t.text ?? t.ask ?? "");
+    const text = unwrapCliQuote(String(t.text ?? t.ask ?? ""));
     const n = t.n ?? t.turn ?? 0;
     if (!text.trim()) continue;
     const script = scriptOf(text);
@@ -503,8 +514,11 @@ export function registerLines(register, { maxLines = REGISTER.maxLines } = {}) {
     const also = (f.aliases ?? []).filter((a) => !values.has(norm(a)));  // a name the fact itself states, now or before, is not "also"
     const subj = f.subject + (also.length ? ` (also: ${also.join(", ")})` : "") + (f.attr ? ` ${f.attr}` : "");
     if (f.history.length > 1) {
-      const cur = f.current, prev = f.history.at(-2);
-      lines.push(`The ${subj} is ${cur.value} — you said so in turn ${cur.turn}; before that it was ${prev.value} (turn ${prev.turn}).`);
+      const cur = f.current, prev = f.history.at(-2), first = f.history[0];
+      // a fact changed more than once keeps its FIRST value too ("what was it originally?"); without it the pinned block answers "before that" and
+      // nothing earlier (foldcode-poc F11: all six "original" probes of the first hard-chat run came back with the middle value)
+      const orig = f.history.length > 2 ? `, and originally ${first.value} (turn ${first.turn})` : "";
+      lines.push(`The ${subj} is ${cur.value} — you said so in turn ${cur.turn}; before that it was ${prev.value} (turn ${prev.turn})${orig}.`);
     } else lines.push(`The ${subj} is ${f.current.value} — you said so in turn ${f.current.turn}.`);
   }
   // the NEWEST facts survive a line cap: an older one is still in the log, and the window's own turns still carry the recent ones

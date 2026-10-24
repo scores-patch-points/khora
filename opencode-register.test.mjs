@@ -212,3 +212,36 @@ test("CI guard: the register imports only its sibling store and node builtins, n
   }
   assert.deepEqual(problems, []);
 });
+
+// ── the transport's quotes (foldcode-poc FAILURES.md F11, 2026-10-23) ───────────────────────────────────────────────
+// `opencode run "<message>"` wraps the message in double quotes. The fold arm of the hard-chat benchmark ran through that CLI, so the
+// extractor read 14 of the 33 stated bindings and the register never reached a prompt.
+test("F11: a message the CLI wrapped in quotes binds exactly like the person's own words, and no quote leaks into the value", () => {
+  const plain = "Heads up: The staging cluster is named Pelican. Just acknowledge in one line.";
+  const a = R.extractBindings(turns(plain)).bindings;
+  const b = R.extractBindings(turns(JSON.stringify(plain))).bindings; // what `opencode run "<message>"` hands the plugin
+  assert.equal(a.length, 1);
+  assert.deepEqual(b.map((x) => [x.subject, x.value]), a.map((x) => [x.subject, x.value]));
+  assert.ok(b.every((x) => !x.value.includes('"')), "no stray quote in the value");
+});
+
+test("F11: unwrapCliQuote unwraps a whole quoted message and nothing else", () => {
+  assert.equal(R.unwrapCliQuote('"The cluster is Pelican."'), "The cluster is Pelican.");
+  assert.equal(R.unwrapCliQuote('"She said \\"yes\\" to it."'), 'She said "yes" to it.');
+  assert.equal(R.unwrapCliQuote("The cluster is Pelican."), "The cluster is Pelican.");
+  assert.equal(R.unwrapCliQuote('"a" and "b"'), '"a" and "b"'); // two quoted tokens are the person's own punctuation
+  assert.equal(R.unwrapCliQuote('He said "go" then left'), 'He said "go" then left');
+  assert.equal(R.unwrapCliQuote(""), "");
+});
+
+test("F11: a fact that changed twice keeps its first value in the pinned block, not only the one before the current", () => {
+  const { bindings } = R.extractBindings(turns(
+    "The pilot launch is on 2026-11-18.",
+    "The pilot launch moved to 2026-12-02.",
+    "The pilot launch moved to 2026-12-09.",
+  ));
+  const note = R.registerNote(R.buildRegister(bindings));
+  assert.match(note, /is 2026-12-09 — you said so in turn 3; before that it was 2026-12-02 \(turn 2\), and originally 2026-11-18 \(turn 1\)\./);
+  const one = R.registerNote(R.buildRegister(R.extractBindings(turns("The pilot launch is on 2026-11-18.", "The pilot launch moved to 2026-12-02.")).bindings));
+  assert.doesNotMatch(one, /originally/); // two values: "before that" already is the original
+});
