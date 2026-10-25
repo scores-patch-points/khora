@@ -147,6 +147,13 @@ export function toEot(sent, { language = null, source = null } = {}) {
     }
     arcs.push({ from: headKey, to: key.get(t.id), rel: t.deprel, cell: rel?.cell ?? null });
   }
+  // WHAT THE MEANING LAYER DOES NOT HOLD IS SAID, NOT HIDDEN (spec 5a, RC10). Enhanced dependencies (column 9: a control or shared subject, a
+  // conjunct's own arguments) and empty nodes (an elided predicate) are in the annotation and in the surface layer, but arcs here are the
+  // basic tree only. Each is a typed gap, so a consumer reading `gaps` knows a relation it needs may be absent rather than finding nothing.
+  const basic = (t) => `${t.head ?? 0}:${t.deprel}`;
+  const enhanced = sent.tokens.filter((t) => t.deps && t.deps !== "_" && t.deps.split("|").some((d) => d !== basic(t) && !/^\d+(\.\d+)?:(punct|root)$/.test(d) && d !== `0:${t.deprel}`));
+  for (const t of enhanced) gaps.push({ kind: "enhanced_deps", item: t.deps, where: key.get(t.id) });
+  for (const raw of sent.empty ?? []) gaps.push({ kind: "empty_node", item: raw.split("\t").slice(0, 4).join(" "), where: null });
   // A content word whose head is punctuation (rare, annotation noise) keeps
   // the arc as written; it is not silently rerouted.
   return {
