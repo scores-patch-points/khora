@@ -155,3 +155,12 @@ test("a surface extends the base extraction without rebuilding it", () => {
   assert.equal(typeof base, "function");
   assert.ok(w.edges.length >= readWith(DOC, { language: "en" }).edges.length);
 });
+
+test("every place the splitter cuts is a junction, and a dotted headword is a word even with no form-of", async () => {
+  const lex = makeLexicon({ ask: async (forms) => ({ giver: { name: "stub" }, results: Object.fromEntries(forms.map((f) => [f, f === "U.S." ? [{ w: "U.S.", senses: [{ of: null }] }] : f === "Co." ? [{ w: "Co.", senses: [{ of: "company" }] }] : null])) }) });
+  const text = "They bought the mill from Mary's Co. at the river in the U.S. for the town. It was cheap. The town paid for it in full in 1871 and kept it.";
+  const c = await consultAliases(text, lex, { priors: null });
+  assert.deepEqual(c.aliases.sort(), ["Co.", "U.S."], "a following lower-case word is still a junction; the headword 'U.S.' is a word");
+  const w = readWith(text, { language: "en", aliases: c.aliases, minCharacters: 1 });
+  assert.equal(w.sentences.length, 3, "Co. and U.S. end no sentence; the two real stops do");
+});
