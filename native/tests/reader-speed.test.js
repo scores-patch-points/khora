@@ -78,3 +78,58 @@ test("the quality pass reads a form the prior's object holds only by inheritance
   assert.deepEqual(tokensForCues("The constructor of the ship", pos).map((t) => t.upos), ["", "", "", "", "NOUN"]);
   assert.deepEqual(tokensForCues("__proto__ empty", pos).map((t) => t.upos), ["", ""]);
 });
+
+test("the lexicon asks a form once while it is in flight: concurrent callers wait on the same ask", async () => {
+  const { makeLexicon } = await import("../organs/lexicon.js");
+  const asked = [];
+  const lex = makeLexicon({ ask: async (forms) => { asked.push([...forms]); await new Promise((r) => setTimeout(r, 20)); return { giver: { name: "stub" }, results: Object.fromEntries(forms.map((f) => [f, f === "b." ? [{ w: f, senses: [{ of: "bee" }] }] : null])) }; } });
+  await Promise.all([lex.want(["a.", "b."]), lex.want(["b.", "c."]), lex.want(["a.", "b.", "c."])]);
+  assert.deepEqual(asked, [["a.", "b."], ["c."]], "each form is asked once");
+  assert.deepEqual(lex.aliasOf("b."), ["bee"]);
+  assert.equal(lex.get("a."), null, "an answered form with nothing listed is remembered as such");
+  await lex.want(["a.", "b.", "c."]);
+  assert.equal(asked.length, 2, "an answered form is never asked again");
+});
+
+test("a failed ask is not remembered: the form is asked again by the next caller", async () => {
+  const { makeLexicon } = await import("../organs/lexicon.js");
+  let n = 0;
+  const lex = makeLexicon({ ask: async () => { n++; return n === 1 ? null : { results: { "x.": null } }; } });
+  await lex.want(["x."]);
+  assert.equal(lex.get("x."), undefined);
+  assert.match(lex.log[0].gap, /no local lexicon/);
+  await lex.want(["x."]);
+  assert.equal(n, 2);
+  assert.equal(lex.get("x."), null);
+});
+
+test("the live consult asks nothing when the dotted-words prior is the giver's own pack (one probe to learn the pack)", async () => {
+  const { makeLexicon } = await import("../organs/lexicon.js");
+  const { consultAliases, priorsFor } = await import("../the-fold/read-core.mjs");
+  const giver = { name: "English Wiktionary", pack: "wiktionary-slim-2026-10-01-v3.pack", snapshot: "2026-10-01" };
+  const asked = [];
+  const lex = makeLexicon({ ask: async (forms) => { asked.push(...forms); return { giver, results: Object.fromEntries(forms.map((f) => [f, null])) }; } });
+  const text = "The fleet left the northern ports. Ice was sighted at dusk. The A.B.C.D.E.F.G. company sent word. Boats were lowered.";
+  const priors = { ...priorsFor("en"), dotted: new Set(["etc."]), dottedGiver: giver };
+  const c = await consultAliases(text, lex, { priors });
+  assert.equal(asked.length, 2, "one probe to learn the pack, then only the dotted form longer than the prior's 12 characters");
+  assert.ok(asked.includes("A.B.C.D.E.F.G."));
+  assert.deepEqual(c.aliases, []);
+  const again = await consultAliases("The ship sank. All was lost.", lex, { priors });
+  assert.match(again.settled, /this giver's own pack/);
+  assert.equal(asked.length, 2, "a giver whose pack is known is not asked again");
+  const other = makeLexicon({ ask: async (forms) => { asked.push(...forms); return { giver: { ...giver, pack: "another.pack" }, results: Object.fromEntries(forms.map((f) => [f, null])) }; } });
+  const before = asked.length;
+  await consultAliases(text, other, { priors });
+  assert.ok(asked.length - before > 2, "FALSIFIER: a giver reading another pack is asked every unsettled form");
+});
+
+test("the reading's aliasReport says when the live consult was settled by the prior", async () => {
+  const { makeLexicon } = await import("../organs/lexicon.js");
+  const { readDocument, priorsFor } = await import("../the-fold/read-core.mjs");
+  const giver = { name: "English Wiktionary", pack: "p.pack", snapshot: "2026-10-01" };
+  const lex = makeLexicon({ ask: async (forms) => ({ giver, results: Object.fromEntries(forms.map((f) => [f, null])) }) });
+  const text = "The fleet left the northern ports at dawn. Ice was sighted at dusk by the lookout. The boats were lowered slowly into the sea. Everyone waited for the rescue ship to come. It came at last before the morning.";
+  const W = await readDocument(text, { lexicon: lex, quality: false, priors: { ...priorsFor("en"), dotted: new Set(["etc."]), dottedGiver: giver } });
+  assert.match(W.aliasReport.settled, /this giver's own pack/);
+});
