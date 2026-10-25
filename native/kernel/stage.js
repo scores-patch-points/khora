@@ -28,6 +28,10 @@ export function defaultHyperlexicon() {
 const FIG = (a) => (a && typeof a === "object" && a.measure && a.base != null ? a : null);
 const isHas = (p) => /^has_/.test(p);
 const isMost = (p) => /^most:/.test(p);
+// two NAMED ends are the same only if their names share a capitalised word: the reader's coreference is lenient on kind (two persons "meet"),
+// identity is not
+const caps = (t) => new Set(String(t ?? "").match(/\b\p{Lu}[\p{L}\p{N}'-]*/gu)?.map((w) => w.toLowerCase()) ?? []);
+const namesClash = (x, y) => { const a = caps(argText(x)), b = caps(argText(y)); if (!a.size || !b.size) return false; for (const w of a) if (b.has(w)) return false; return true; };
 const nameOf = (a) => (a.entity != null ? `@${a.entity}` : `#${a.value}`);
 
 // the kind a referent belongs to in this reading: is_a(x, kind)
@@ -86,12 +90,17 @@ function bindEnd(stage, end, kind) {
   const meets = (a) => kind === "quantity"
     ? (a.kind === "quantity" && FIG(end) && a.figure?.measure === end.measure && M.figMeet(end, a.figure) ? `meets ${a.label} (${end.measure})` : null)
     : kind === "value" ? (a.kind === "value" && end.value != null && low(a.arg.value ?? "") === low(end.value) ? `is the value ${a.label}` : null)
-    : ((a.kind === "referent" || a.kind === "kind") && M.refMeet(end, a.arg) ? `is ${a.label}` : null);
+    : ((a.kind === "referent" || a.kind === "kind") && M.refMeet(end, a.arg) && !namesClash(end, a.arg) ? `is ${a.label}` : null);
   const derive = (obs) => obs.map((a) => ({ id: a.id, how: meets(a) })).filter((x) => x.how);
-  const candidates = []; for (let d = 1; d < all.length; d *= 2) candidates.push(d);
   const whole = derive(all);
   if (!whole.length) return null;
-  const w = candidates.length ? dmdWindow(all, derive, { candidates, restrict: (o, d) => o.slice(0, d) }) : { window: all.length, gap: null };
+  // DMD runs over SHELLS around the first anchor the end meets (graph distance over the stage's arrangements), not over insertion order: the
+  // window is the shallowest number of nearest anchors whose met-set already equals the whole's. A position in the text is not evidence depth.
+  const seed = whole[0].id, adj = new Map(); for (const r of stage.arrangements) { (adj.get(r.s) ?? adj.set(r.s, []).get(r.s)).push(r.o); (adj.get(r.o) ?? adj.set(r.o, []).get(r.o)).push(r.s); }
+  const dist = new Map([[seed, 0]]); for (let q = [seed]; q.length;) { const x = q.shift(); for (const y of adj.get(x) ?? []) if (!dist.has(y)) { dist.set(y, dist.get(x) + 1); q.push(y); } }
+  const near = [...all].sort((a, b) => (dist.get(a.id) ?? 1e9) - (dist.get(b.id) ?? 1e9) || (a.id < b.id ? -1 : 1));
+  const candidates = []; for (let d = 1; d < near.length; d *= 2) candidates.push(d); candidates.push(near.length);
+  const w = dmdWindow(near, derive, { candidates, restrict: (o, d) => o.slice(0, d) });
   if (w.gap) return { gap: w.gap };
   if (whole.length > 1) return { gap: "ambiguous_binding", among: whole.map((x) => x.id) };
   return { id: whole[0].id, how: `${whole[0].how} [identity settled by depth ${w.window ?? all.length} of ${all.length}]` };
@@ -152,7 +161,20 @@ export function judgeClaim(stage, claimAtoms, { licenses = LICENSES.map((l) => l
     if (undecided.length) { gaps.push({ kind: "undecided_reading", arrangements: undecided.map((r) => r.id) }); return { verdict: "N", hl: UNBOUND, proofs, gaps }; }
   }
   // E: every atom of the claim is covered and SAME as the source holds it (identity, never a score); anything uncovered leaves it unknown
-  if (verdict !== CONTRADICTED && C.length && supported === C.length) return { verdict: "E", hl: BOUND, proofs, gaps };
+  // SCAFFOLD: "Mercury has a radius of 2,440 km" is read as have(Mercury, a radius), of(a radius, 2,440 km) AND has_radius(Mercury, 2,440 km).
+  // The first two are the third taken apart; when the third is supported they say nothing more (same figure, same being, the attribute noun).
+  const sup = new Set(proofs.filter((x) => x.verdict === "bound" || x.verdict === BOUND).map((x) => x.atom));
+  let scaffold = 0;
+  for (const a of C) {
+    if (sup.has(a.text) || !a.args || a.args.length !== 2) continue;
+    const owner = C.find((h) => isHas(h.pred) && sup.has(h.text) && FIG(h.args?.[1]));
+    if (!owner) continue;
+    const attr = owner.pred.replace(/^has_(number_of_)?/, "").replace(/_/g, " "), fig = owner.args[1];
+    const isOf = (a.pred === "of" || a.pred === "with") && argText(a.args[1]) === argText(fig) && low(argText(a.args[0])).includes(attr);
+    const isHave = /^(have|has|had)$/.test(a.pred) && low(argText(a.args[1])).includes(attr) && argText(a.args[0]) === argText(owner.args[0]);
+    if (isOf || isHave) scaffold++;
+  }
+  if (verdict !== CONTRADICTED && C.length && supported + scaffold === C.length) return { verdict: "E", hl: BOUND, proofs, gaps };
   return { verdict: verdict === CONTRADICTED ? "C" : "N", hl: verdict, proofs, gaps };
 }
 
