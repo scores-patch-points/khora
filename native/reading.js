@@ -15,7 +15,7 @@
 
 import { readToWeft } from "./the-fold/read-process.mjs";
 import { readCanonical } from "./the-fold/read-door-canonical.mjs";
-import { priorsFor, consultAliases } from "./the-fold/read-core.mjs";
+import { priorsFor, consultAliases, readDocument as readCore } from "./the-fold/read-core.mjs";
 import { languageContextFor } from "./the-fold/language-context.js";
 import { stemOf, iso1Of } from "./the-fold/language-grammar.js";
 import { localLexicon, lexiconGap } from "./adapters/text/wiktionary-pack.js";
@@ -40,10 +40,15 @@ async function aliasesFor(text, { language, lexicon }) {
   return { stem, aliases: c.aliases, report: { giver: c.giver, rows: c.rows, gap: c.gap ?? (lexicon === "local" ? lexiconGap() : null) } };
 }
 
-/** Read one document the canonical way, the hyperlexicon asked first. */
+/** THE MASTER PIPELINE under Node: read-core.mjs::readDocument with the local Wiktionary pack as the hyperlexicon's giver
+ *  (lexicon: "local", the default), or a caller's own lexicon organ, or false to read without one. */
 export async function readDocument(text, { language = null, lexicon = "local", ...opts } = {}) {
-  const { aliases, report } = await aliasesFor(text, { language, lexicon });
-  return readToWeft(text, { ...opts, language, aliases, aliasReport: report });
+  const stem = (language ? stemOf(language) : null) ?? languageContextFor(String(text ?? ""), {}).language ?? "eng";
+  const lex = lexicon === "local" ? lexiconFor(stem) : lexicon || null;
+  const w = await readCore(text, { ...opts, language, lexicon: lex });
+  if (!lex) w.aliasReport = { giver: null, rows: [], gap: lexicon === false ? "the caller read without the hyperlexicon" : `no hyperlexicon giver is filed for ${stem}` };
+  else if (!w.aliasReport.gap && lexicon === "local" && lexiconGap()) w.aliasReport.gap = lexiconGap();
+  return w;
 }
 
 /** POST /v1/read's body, the hyperlexicon asked first. Throws the door's typed refusals (a malformed tag, a bad maxCharacters). */

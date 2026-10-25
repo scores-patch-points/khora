@@ -19,7 +19,11 @@
 //                                     forms the priors and the text cannot settle (organs/lexicon.js)
 //   makeReader({ priors, language, abbreviations, features, ...organs }) → the relation reader (organs/hypergraph.js)
 //   relationsFor(list, opts)        → the reader's report over passages (chunked, read through the language's ear)
-//   readWith(text, opts)            → WeftEntry@4: edges, the reader's own cast with every mention's address (mentionsAt: UTF-8 byte
+//   readDocument(text, opts)        → Promise<WeftEntry@4>: THE MASTER PIPELINE — the one call every surface makes. Asks the
+//                                     hyperlexicon handed in (opts.lexicon: an organs/lexicon.js organ over any giver) about the
+//                                     dotted forms the priors cannot settle, then readWith. Node (reading.js) hands in the local
+//                                     Wiktionary pack; a page hands in its server's; no lexicon is a typed gap on the entry.
+//   readWith(text, opts)            → WeftEntry@4 (synchronous, given the aliases): edges, the reader's own cast with every mention's address (mentionsAt: UTF-8 byte
 //                                     offsets, the weft's unit; mentionSpans: character spans), its sentences and pronoun bindings
 //                                     (character offsets), the clause tree, polarity, surprise, and every gap typed
 //
@@ -345,4 +349,18 @@ export function readWith(text, { address = null, category = null, language = nul
     sentences, pronouns,
     error: err, ms: Date.now() - t0,
   };
+}
+
+/**
+ * THE MASTER PIPELINE (2026-10-24): one document in, one WeftEntry@4 out, the same in Node and in a page. The language is declared
+ * or heard; the priors are that language's (prior-source.mjs); the hyperlexicon is asked first when one is handed in; then the one
+ * reader reads the document whole. Every tool reads through this call (reading.js re-exports it with the local giver as default).
+ */
+export async function readDocument(text, { language = null, lexicon = null, priors = null, ...opts } = {}) {
+  const str = String(text ?? "");
+  const heard = language ? null : languageContextFor(str, {});
+  const stem = (language ? stemOf(language) : null) ?? (heard?.language ? stemOf(heard.language) ?? heard.language : null) ?? "eng";
+  const pr = priors ?? priorsFor(stem);
+  const c = await consultAliases(str, lexicon, { priors: pr });
+  return readWith(str, { ...opts, language, priors: pr, aliases: [...(opts.aliases ?? []), ...c.aliases], aliasReport: { giver: c.giver, rows: c.rows, gap: c.gap } });
 }

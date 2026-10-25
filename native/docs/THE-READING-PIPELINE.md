@@ -4,6 +4,14 @@
 **unprimed** (the legacy host pointed at a 6.1 prior path that no longer exists). This names the real,
 native v7 reader, its priors, and what it does *not* run.
 
+## The master pipeline (2026-10-24)
+
+**One call:** `native/the-fold/read-core.mjs::readDocument(text, { language, lexicon })` → `Promise<WeftEntry@4>`. It hears or
+takes the language, loads that language's priors through the prior door, asks the hyperlexicon it is handed about the dotted forms
+the priors cannot settle, and reads the document whole with the one reader (`readWith`). It runs the same in Node and in a page.
+Under Node, `native/reading.js::readDocument` is the same call with the local Wiktionary pack as the default giver; a page hands in
+its server's giver. Every surface that reads a document calls this; nothing assembles a second reader or a second cut.
+
 ## One core, every surface (2026-10-24)
 
 The relation reader is assembled in **one** place: `native/the-fold/read-core.mjs`. Every surface reads through it:

@@ -170,3 +170,14 @@ test("every place the splitter cuts is a junction, and a dotted headword is a wo
   const w = readWith(text, { language: "en", aliases: c.aliases, minCharacters: 1 });
   assert.equal(w.sentences.length, 3, "Co. and U.S. end no sentence; the two real stops do");
 });
+
+test("THE MASTER PIPELINE: readDocument asks the lexicon it is handed, then reads; with none, the gap is on the entry", async () => {
+  const { readDocument } = await import("../the-fold/read-core.mjs");
+  const lex = makeLexicon({ ask: async (forms) => ({ giver: { name: "stub" }, results: Object.fromEntries(forms.map((f) => [f, f === "Messrs." ? [{ w: f, senses: [{ of: "Mr." }] }] : null])) }) });
+  const w = await readDocument(DOC, { lexicon: lex });
+  assert.equal(w.aliasReport.giver.name, "stub");
+  assert.ok(w.sentences.some((s) => s.text === "In 1850 Messrs. Smith and Jones bought the mill."));
+  const bare = await readDocument(DOC, {});
+  assert.match(bare.aliasReport.gap, /no hyperlexicon/);
+  assert.ok(bare.sentences.some((s) => s.text === "In 1850 Messrs."));
+});
