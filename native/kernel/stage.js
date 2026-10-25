@@ -85,6 +85,7 @@ function bindEnd(stage, end, kind) {
   const M = stage._M, all = [...stage._anchors.values()];
   const meets = (a) => kind === "quantity"
     ? (a.kind === "quantity" && FIG(end) && a.figure?.measure === end.measure && M.figMeet(end, a.figure) ? `meets ${a.label} (${end.measure})` : null)
+    : kind === "value" ? (a.kind === "value" && end.value != null && low(a.arg.value ?? "") === low(end.value) ? `is the value ${a.label}` : null)
     : ((a.kind === "referent" || a.kind === "kind") && M.refMeet(end, a.arg) ? `is ${a.label}` : null);
   const derive = (obs) => obs.map((a) => ({ id: a.id, how: meets(a) })).filter((x) => x.how);
   const candidates = []; for (let d = 1; d < all.length; d *= 2) candidates.push(d);
@@ -102,7 +103,8 @@ export function judgeClaim(stage, claimAtoms, { licenses = LICENSES.map((l) => l
   // a stage restricted to the licenses switched on (ablation): declarations are rebuilt, edges are shared
   const hl = createStage(); hl.anchors = new Set(stage.hl.anchors); hl.types = new Map(stage.hl.types); hl.edges = new Map(stage.hl.edges);
   for (const L of stage.licenses) if (on.has(L.id) && L.standing === "given") declareFunctional(hl, L.rel, { giver: L.giver });
-  let verdict = UNBOUND;
+  let verdict = UNBOUND, supported = 0;
+  const hasEdge = (rel, s_, o_, pol = "+") => [...hl.edges.values()].some((e) => e.rel === rel && e.s === s_ && e.o === o_ && e.polarity === pol);
   for (const [i, a] of C.entries()) {
     const as = a.args ?? [];
     let rel = a.pred, s, o, binds = [], bs = null, bk = null;
@@ -122,8 +124,17 @@ export function judgeClaim(stage, claimAtoms, { licenses = LICENSES.map((l) => l
       let hid; if (bh) { hid = bh.id; binds.push(`${argText(as[0])} ${bh.how}`); }
       else { hid = `claim:h:${i}`; addAnchor(hl, hid, "referent"); binds.push(`${argText(as[0])} is not in the source; it enters fresh because the slot it fills (${rel} of ${argText(K)}) is functional`); }
       s = bk.id; o = hid;
+    } else if (as.length === 2 && !isHas(rel) && !isMost(rel) && rel !== "is_a" && rel !== "named" && !a.neg && !a.hedged) {
+      // a binary relation: IDENTITY decides. Both ends bind to source anchors and the source holds the same relation between them, in the same
+      // order, positively: that is a supported atom. The reverse order is a swap, never support. No contradiction is read from a relation.
+      const b0 = bindEnd(stage, as[0], "referent"), b1 = as[1].entity != null ? bindEnd(stage, as[1], "referent") : bindEnd(stage, as[1], "value");
+      if (b0?.gap || b1?.gap) { gaps.push({ kind: (b0?.gap ?? b1.gap), atom: a.text }); continue; }
+      if (!b0 || !b1) continue;
+      if (hasEdge(rel, b0.id, b1.id)) { supported++; proofs.push({ atom: a.text, rel, binds: [`${argText(as[0])} ${b0.how}`, `${argText(as[1])} ${b1.how}`], lic: [], verdict: "bound", cites: [] }); }
+      else if (hasEdge(rel, b1.id, b0.id)) gaps.push({ kind: "direction_swap", atom: a.text });
+      continue;
     } else continue;
-    if (!hl.functional.has(rel)) continue;                                   // no license, nothing to read
+    if (!hl.functional.has(rel)) { if (hasEdge(rel, s, o)) supported++; continue; }   // no license: it can still be SAME, never different
     const v = read(hl, ["atom", rel, s, o]);
     const heldE = [...hl.edges.values()].filter((e) => e.rel === rel && e.s === s && e.o !== o);
     const cites = heldE.map((e) => e.source).flat();
@@ -132,7 +143,7 @@ export function judgeClaim(stage, claimAtoms, { licenses = LICENSES.map((l) => l
     proofs.push({ atom: a.text, rel, binds, lic: [...hl.functional.entries()].filter(([r]) => r === rel).map(([r, d]) => `functional(${r}) giver "${d.giver}"`), verdict: v, cites,
       record: { rel, subject: lab(s) ?? lab(bs?.id ?? bk?.id), giver: hl.functional.get(rel)?.giver ?? null, claim: claimEnd,
         held: heldE.map((e) => ({ span: String(e.source[0]).replace(/^[^:]*:/, "").split("-").map(Number), label: lab(e.o), measure: fg(e.o)?.measure ?? null, base: fg(e.o)?.base ?? null })) } });
-    if (v === CONTRADICTED) verdict = CONTRADICTED; else if (v === BOUND && verdict !== CONTRADICTED) verdict = BOUND;
+    if (v === CONTRADICTED) verdict = CONTRADICTED; else if (v === BOUND) { supported++; if (verdict !== CONTRADICTED) verdict = BOUND; }
   }
   // a contradiction is committed only if every source arrangement it cites has a decided reading
   if (verdict === CONTRADICTED) {
@@ -140,6 +151,8 @@ export function judgeClaim(stage, claimAtoms, { licenses = LICENSES.map((l) => l
     const undecided = stage.arrangements.filter((r) => spans.has(`${stage.doc}:${r.span[0]}-${r.span[1]}`) && !r.reading?.decided);
     if (undecided.length) { gaps.push({ kind: "undecided_reading", arrangements: undecided.map((r) => r.id) }); return { verdict: "N", hl: UNBOUND, proofs, gaps }; }
   }
+  // E: every atom of the claim is covered and SAME as the source holds it (identity, never a score); anything uncovered leaves it unknown
+  if (verdict !== CONTRADICTED && C.length && supported === C.length) return { verdict: "E", hl: BOUND, proofs, gaps };
   return { verdict: verdict === CONTRADICTED ? "C" : "N", hl: verdict, proofs, gaps };
 }
 
