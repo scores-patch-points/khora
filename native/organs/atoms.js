@@ -11,6 +11,13 @@
 //   <relation>_<case>(x, y) an oblique of the claim ("situated in Siberia" → situate_in)
 //   <case>(x, y)           a modifier phrase of a referent ("the frontier between Bolivia and Peru" → between)
 //   has_<attribute>(x, v)  a bound figure, its value in the sentence's own words
+// WHERE A NEGATION LANDS. A clause's polarity scopes over its predication; what a participant is said to be in passing stays asserted, because a
+// negation leaves its presuppositions standing. "Mercury does not orbit the large star" denies the orbit, not that the star is large; "Mercury is not
+// the hottest planet in the solar system" denies hottest, not that Mercury is a planet or is in the solar system. So the modifiers inside a
+// participant's noun phrase are asserted whatever the clause's polarity; and when a negated copula's predicate noun phrase carries an adjective, that
+// adjective is the focus and the head noun's kind and the clause's frame (its obliques) are presupposed with it. A clause negated through a quantifier
+// ("no mountain is higher than Y") keeps every atom under its polarity: atom-support.js's canonical() rewrites them together.
+import { NO } from "../kernel/atom-support.js";
 const lc = (s) => String(s ?? "").toLowerCase();
 
 export function atomize({ claims, rows, mentions, entities, text }) {
@@ -47,19 +54,25 @@ export function atomize({ claims, rows, mentions, entities, text }) {
     const head = end?.hid != null ? byId(end.hid) : null; if (!head || head.upos === "PROPN" || !owner) return;
     for (const w of rows.filter((x) => x.head === head.id && x.upos === "ADJ" && /^(amod|acl)$/.test(x.deprel))) push(degreeOf(w) + word(w), [owner], base, [[w.id], owner?.ids ?? []]);
   };
-  // a modifier phrase is a relation between its owner and it; a coordinated word repeats the relation of the word it is coordinated with
-  const modAtoms = (end, owner, base, parent = null) => {
+  // a modifier phrase is a relation between its owner and it; a coordinated word repeats the relation of the word it is coordinated with.
+  // `inner` is the polarity of what sits inside a noun phrase (see WHERE A NEGATION LANDS); a repeated oblique relation keeps its parent's own
+  const modAtoms = (end, owner, inner, parent = null) => {
     for (const n of end?.nmods ?? []) {
       const a = arg(n);
-      if (n.conj) { if (parent) push(parent.pred, [parent.owner, a], base, [parent.owner?.ids ?? [], n.ids ?? []]); adjAtoms(n, a, base); modAtoms(n, a, base, parent); continue; }
+      if (n.conj) { if (parent) push(parent.pred, [parent.owner, a], parent.base ?? inner, [parent.owner?.ids ?? [], n.ids ?? []]); adjAtoms(n, a, inner); modAtoms(n, a, inner, parent); continue; }
       const pred = caseOf(n) ?? "of";
-      if (!skipMod.has(n.hid)) push(pred, [owner, a], base, [owner?.ids ?? [], n.ids ?? []]);
-      adjAtoms(n, a, base); modAtoms(n, a, base, { pred, owner });
+      if (!skipMod.has(n.hid)) push(pred, [owner, a], inner, [owner?.ids ?? [], n.ids ?? []]);
+      adjAtoms(n, a, inner); modAtoms(n, a, inner, { pred, owner });
     }
   };
   let skipMod = new Set();
   for (const c of claims) {
     const base = { neg: c.polarity === "-", hedged: c.asserted === false, from: c.id };
+    const quantified = [c.ARG0, c.ARG1, c.ARG2].some((e) => NO.test(e?.text ?? ""));
+    const pres = base.neg && !quantified ? { ...base, neg: false } : base;
+    const predHead = c.rel === "be" && c.ARG1?.hid != null ? byId(c.ARG1.hid) : null;
+    const focus = pres !== base && !c.alias && !!predHead && predHead.upos !== "PROPN" && rows.some((x) => x.head === predHead.id && x.upos === "ADJ" && /^(amod|acl)$/.test(x.deprel));
+    const frame = focus ? pres : base;
     if (c.rel === "fig") {
       const being = arg(c.ARG0), f = c.fig ?? {};
       const inBr = (c.ids ?? []).some((id) => { let d = 0; for (const r of rows) { if (r.id >= id) break; if (r.form === "(") d++; else if (r.form === ")") d--; } return d > 0; });
@@ -81,18 +94,20 @@ export function atomize({ claims, rows, mentions, entities, text }) {
       if (c.alias || m1?.how === "name") push("named", [A0, { value: c.ARG1?.text, ids: c.ARG1?.ids ?? [] }], base, [V, A0?.ids ?? [], c.ARG1?.ids ?? []]);
       else {
         const kind = (c.ARG1?.ids ?? []).map(byId).filter((w) => w && /^(NOUN|PROPN)$/.test(w.upos) && w.id === c.ARG1.hid || (w && w.upos === "NOUN" && w.deprel === "compound")).map((w) => w.form).join(" ");
-        push("is_a", [A0, { value: kind || c.ARG1?.text, ids: c.ARG1?.ids ?? [] }], base, [V, A0?.ids ?? [], c.ARG1?.ids ?? []]);
+        push("is_a", [A0, { value: kind || c.ARG1?.text, ids: c.ARG1?.ids ?? [] }], frame, [V, A0?.ids ?? [], c.ARG1?.ids ?? []]);
         adjAtoms(c.ARG1, A0, base);
       }
     } else push(c.rel, [A0, A1, A2], base, [V, A0?.ids ?? [], A1?.ids ?? [], A2?.ids ?? []]);
-    for (const o of c.OBL ?? []) push(`${c.rel}_${caseOf(o) ?? "at"}`, [A0 ?? A1, arg(o)], base, [V, o.ids ?? []]);
+    for (const o of c.OBL ?? []) push(`${c.rel}_${caseOf(o) ?? "at"}`, [A0 ?? A1, arg(o)], frame, [V, o.ids ?? []]);
     // an oblique already said as the claim's own place or time is not said again as a modifier of its predicate noun
     skipMod = new Set((c.OBL ?? []).map((o) => o.hid));
     for (const [end, a] of [[c.ARG0, A0], [c.ARG1, c.rel === "be" ? A0 : A1], [c.ARG2, A2], ...(c.OBL ?? []).map((o) => [o, arg(o)])]) {
-      if (c.rel !== "be" || end !== c.ARG1) adjAtoms(end, a, base);
-      // an oblique's coordinated words repeat its relation ("borders … Wisconsin, Iowa, Illinois"); a modifier's do as before
+      // inside a noun phrase the polarity is the participant's, not the clause's — except the predicate noun phrase of a copula without a focus adjective
+      const inner = c.rel === "be" && end === c.ARG1 ? frame : pres;
+      if (c.rel !== "be" || end !== c.ARG1) adjAtoms(end, a, pres);
+      // an oblique's coordinated words repeat its relation ("borders … Wisconsin, Iowa, Illinois"), under the clause's polarity; a modifier's do as before
       const isObl = (c.OBL ?? []).includes(end);
-      modAtoms(end, end === c.ARG1 && c.rel === "be" ? A0 : a, base, isObl ? { pred: `${c.rel}_${caseOf(end) ?? "at"}`, owner: A0 ?? A1 } : null);
+      modAtoms(end, end === c.ARG1 && c.rel === "be" ? A0 : a, inner, isObl ? { pred: `${c.rel}_${caseOf(end) ?? "at"}`, owner: A0 ?? A1, base: frame } : null);
     }
   }
   // every other name the sentence gives an entity is a fact of the sentence (named), and a name joined to a common noun through "de" / "of"

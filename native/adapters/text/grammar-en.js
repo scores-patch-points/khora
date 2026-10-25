@@ -9,7 +9,8 @@ import * as P from "./english-parser.js";
 import { bindFigures } from "./figure-binding.js";
 import { unreadWords } from "./claim-coverage.js";
 const K = new URL("../..", import.meta.url).pathname.replace(/\/$/, "");
-const model = P.loadModel(JSON.parse(fs.readFileSync(`${K}/priors/parser-eng-ewt.json`, "utf8")), { morphology: JSON.parse(fs.readFileSync(`${K}/priors/morphology-eng.json`, "utf8")) });
+const MORPH = JSON.parse(fs.readFileSync(`${K}/priors/morphology-eng.json`, "utf8"));
+const model = P.loadModel(JSON.parse(fs.readFileSync(`${K}/priors/parser-eng-ewt.json`, "utf8")), { morphology: MORPH });
 const LEX = JSON.parse(fs.readFileSync(`${K}/priors/pos-eng-lexicon.json`, "utf8")).classes;
 export const VERB_FORMS = new Set(LEX.VERB.map((w) => String(w).toLowerCase()));
 const VERBISH = new Set([...LEX.VERB, ...LEX["NOUN|VERB"]].map((w) => String(w).toLowerCase()));
@@ -23,9 +24,21 @@ const UM0 = U ? await U.readJsonMaybeGz(UD_MODEL) : null;
 // the clusters file is read only when the model was trained with one (its meta names it)
 const UM = U ? U.loadModel(UM0, { lex: fs.existsSync(UD_LEX) ? await U.loadLexiconFile(UD_LEX) : null, clusters: UM0.meta?.clusters && fs.existsSync(UD_CL) ? await U.loadClustersFile(UD_CL) : null }) : null;
 export const READER = UM ? "ud-parser" : "english-parser";
+// A SUPERLATIVE THE TREEBANK NEVER SAW ("hottest", "saddest", "happiest") comes back from the UD reader as a positive adjective that is its own
+// lemma, so "the hottest planet" was atomised as hottest(planet) and never met most:hot. The english-parser path already asks the morphology
+// prior for such a lemma (priorLemma); the UD path did not. Two givers, in order, and only for a form the treebank does not attest as an
+// adjective itself ("modest", "honest" keep what the treebank says): the prior's own table (UniMorph English: hottest → hot), else the regular
+// -est spelling (happiest → happy, saddest → sad, largest → large) whose base the treebank attests as an adjective.
+const estBases = (f) => [...(/iest$/.test(f) ? [`${f.slice(0, -4)}y`] : []), ...(/([bdgmnprt])\1est$/.test(f) ? [f.slice(0, -4)] : []), f.slice(0, -3), f.slice(0, -2)];
+function superlativeLemma(r) {
+  const f = r.form.toLowerCase();
+  if (r.upos !== "ADJ" || f.length < 5 || !f.endsWith("est") || /Degree=Sup/.test(r.feats ?? "") || String(r.lemma).toLowerCase() !== f || UM.lexicon.form[`${f}|ADJ`]) return r;
+  const base = P.priorLemma({ morphology: { forms: MORPH.forms }, lexicon: UM.lexicon }, r.form, "ADJ") ?? estBases(f).find((b) => UM.lexicon.form[`${b}|ADJ`]);
+  return base ? { ...r, lemma: base, feats: /Degree=/.test(r.feats ?? "") ? r.feats.replace(/Degree=\w+/, "Degree=Sup") : "Degree=Sup" } : r;
+}
 const build = (forms, tags) => {
   // a number and a name are their own lemma ("Jan" is not "January")
-  if (UM) return U.analyse(UM, forms, tags).map((r) => (r.upos === "NUM" ? { ...r, lemma: r.form.toLowerCase() } : r.upos === "PROPN" ? { ...r, lemma: r.form } : r));
+  if (UM) return U.analyse(UM, forms, tags).map((r) => (r.upos === "NUM" ? { ...r, lemma: r.form.toLowerCase() } : r.upos === "PROPN" ? { ...r, lemma: r.form } : superlativeLemma(r)));
   const words = ["ROOT", ...forms], T = ["ROOT", ...tags];
   const heads = P.parseSentence(model.parser, words, T), labels = P.labelSentence(model.labeller, heads, words, T);
   return forms.map((form, k) => { const { lemma, feats } = P.lemmaAndFeats(model.lexicon, form, tags[k]); return { id: k + 1, form, lemma: tags[k] === "NUM" ? form.toLowerCase() : lemma, upos: tags[k], feats, head: heads[k + 1], deprel: labels[k + 1] }; });

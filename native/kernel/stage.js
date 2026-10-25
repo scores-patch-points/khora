@@ -146,6 +146,9 @@ export function judgeClaim(stage, claimAtoms, { licenses = LICENSES.map((l) => l
     if (!hl.functional.has(rel)) { if (hasEdge(rel, s, o)) supported++; continue; }   // no license: it can still be SAME, never different
     const v = read(hl, ["atom", rel, s, o]);
     const heldE = [...hl.edges.values()].filter((e) => e.rel === rel && e.s === s && e.o !== o);
+    // HL reads a source's denial of this very arrangement ("Mercury is NOT the hottest planet") as contradicted. That needs no license and cites no held
+    // value, so there is nothing for the independent checker to re-check: the license layer does not commit it (the atoms arm owns direct denial).
+    if (v === CONTRADICTED && !heldE.length) { gaps.push({ kind: "denial_not_licensed", atom: a.text }); continue; }
     const cites = heldE.map((e) => e.source).flat();
     const lab = (id) => stage._anchors.get(id)?.label ?? null, fg = (id) => stage._anchors.get(id)?.figure ?? null;
     const claimEnd = isHas(rel) ? { label: argText(as[1]), measure: as[1].measure, base: as[1].base } : { label: argText(as[0]) };
