@@ -156,20 +156,63 @@ test("the core loads in a page: nothing in its import graph imports node: static
   assert.ok(seen.size > 30, "the walk covered the reader");
 });
 
-test("the Node door asks the local Wiktionary pack first, and an absent pack is a typed gap, never a silent read", async () => {
-  const { packPath, readerPath, wiktionaryAsk } = await import("../adapters/text/wiktionary-pack.js");
-  const { readDocument } = await import("../reading.js");
-  if (packPath() && readerPath() && fs.existsSync(packPath())) {
-    const r = await wiktionaryAsk(["Messrs."], "en");
-    assert.ok(r.results["Messrs."]?.some((e) => e.senses.some((s) => s.of === "Mr.")), "the pack lists Messrs. as a form of Mr.");
-    const w = await readDocument(DOC, { address: "mill" });
-    // the giver keeps it live, or the read-ahead dotted words already settled it and it was not asked again
-    assert.ok(w.aliasReport.rows.some((x) => x.form === "Messrs." && x.kept) || w.abbreviations.dotted >= 1);
+// a stand-in for janus's hyperlexicon door (native/organs/hyperlexicon/door.mjs): `names` answers as the ledger does — every name a giver
+// lists, and `written`, the nodes whose own names write the form exactly
+async function standInDoor(written) {
+  const http = await import("node:http");
+  const srv = http.createServer(async (req, res) => {
+    const chunks = []; for await (const c of req) chunks.push(c);
+    const body = JSON.parse(Buffer.concat(chunks).toString("utf8"));
+    const answers = body.asks.map((a) => ({ head: "stand-in-head", standing: "given · ungrounded · undecided", surfaces: Object.fromEntries(a.surfaces.map((f) => [f, { languages: written[f] ? 1 : 0, here: [], written: written[f] ?? [] }])) }));
+    res.writeHead(200, { "content-type": "application/json" }); res.end(JSON.stringify({ head: "stand-in-head", answers }));
+  });
+  await new Promise((r) => srv.listen(0, "127.0.0.1", r));
+  return { url: `http://127.0.0.1:${srv.address().port}`, close: () => srv.close() };
+}
+
+test("the Node door asks the hyperlexicon through its door first, and a door that does not answer is a typed gap, never a silent read", async () => {
+  const { readDocument, lexiconFor } = await import("../reading.js");
+  const door = await standInDoor({ "Messrs.": [{ node: "n_m", kind: "lemma", of: ["Mr."], pos: ["noun"] }] });
+  const was = process.env.HL_DOOR; process.env.HL_DOOR = door.url;
+  try {
+    const w = await readDocument(DOC, { address: "mill", priors: { ...priorsFor("en"), dotted: null } });
+    assert.equal(w.aliasReport.giver?.name, "janus hyperlexicon");
+    assert.equal(w.aliasReport.giver?.head, "stand-in-head");
+    assert.ok(w.aliasReport.rows.some((x) => x.form === "Messrs." && x.kept), "the ledger's givers name Messrs. as written; the text never writes it bare");
     assert.ok(w.sentences.some((s) => s.text === "In 1850 Messrs. Smith and Jones bought the mill."));
-  }
+  } finally { door.close(); }
+  process.env.HL_DOOR = "http://127.0.0.1:9";   // nothing listens
+  try {
+    const gone = await readDocument("Messrs. Hall and Lee sold the mill in 1861 to a company from the north. The company ran it for twenty years. It closed in 1881 and was pulled down.", { language: "en", lexicon: (await import("../organs/lexicon.js")).makeHyperlexicon({ ask: async (b) => { const r = await fetch("http://127.0.0.1:9/v1/batch", { method: "POST", body: JSON.stringify(b) }).catch(() => null); return r && r.ok ? r.json() : null; } }), priors: { ...priorsFor("en"), dotted: null } });
+    assert.match(gone.aliasReport.gap ?? "", /did not answer/);
+  } finally { if (was === undefined) delete process.env.HL_DOOR; else process.env.HL_DOOR = was; }
   const off = await readDocument(DOC, { address: "mill", lexicon: false, priors: { ...priorsFor("en"), dotted: null } });
   assert.match(off.aliasReport.gap, /without the hyperlexicon/);
-  assert.ok(off.sentences.some((s) => s.text === "In 1850 Messrs."), "FALSIFIER: with no giver and no read-ahead dotted words the cut is the splitter's own");
+  assert.ok(off.sentences.some((s) => s.text === "In 1850 Messrs."), "FALSIFIER: with no hyperlexicon and no read-ahead dotted words the cut is the splitter's own");
+  assert.equal(typeof lexiconFor("en").want, "function");
+});
+
+test("the hyperlexicon client keeps a form only as the givers write it, its giver is the ledger's head, and a prior from the same head settles the consult", async () => {
+  const { makeHyperlexicon } = await import("../organs/lexicon.js");
+  const asked = [];
+  const ask = async (body) => { asked.push(...body.asks[0].surfaces); return { head: "h1", answers: [{ head: "h1", surfaces: Object.fromEntries(body.asks[0].surfaces.map((f) => [f, { written: f === "etc." ? [{ node: "n_e", kind: "lemma", of: [], pos: ["phrase"] }] : [] }])) }] }; };
+  const hl = makeHyperlexicon({ ask });
+  await hl.want(["etc.", "Etc.", "etc."]);
+  assert.deepEqual(asked, ["etc.", "Etc."], "each form asked once");
+  assert.equal(hl.get("etc.")[0].w, "etc.");
+  assert.equal(hl.get("Etc."), null, "as written: the givers write 'etc.', not 'Etc.'");
+  assert.deepEqual(hl.giver, { name: "janus hyperlexicon", head: "h1", standing: null });
+  const text = "They sold bread, eggs, etc. to the town. The town paid them well. Everyone came back for more bread.";
+  const settled = await consultAliases(text, makeHyperlexicon({ ask }), { priors: { ...priorsFor("en"), dotted: new Set(["etc."]), dottedGiver: { name: "janus hyperlexicon v1", head: "h1" } } });
+  assert.match(settled.settled ?? "", /this hyperlexicon's own/);
+  // a gap is the consult's own: once the door fails for one read, a later read whose forms are all known reports none
+  let up = true;
+  const flaky = makeHyperlexicon({ ask: async (body) => (up ? ask(body) : null), door: "stand-in" });
+  const t1 = "They sold bread, eggs, etc. to the town. The town paid them well.", t2 = "We met Messrs. Hall and Lee by the mill. They sold it in 1861.";
+  await consultAliases(t1, flaky, { priors: { ...priorsFor("en"), dotted: null } });
+  up = false;
+  assert.match((await consultAliases(t2, flaky, { priors: { ...priorsFor("en"), dotted: null } })).gap ?? "", /door \(stand-in\) did not answer/);
+  assert.equal((await consultAliases(t1, flaky, { priors: { ...priorsFor("en"), dotted: null } })).gap, null, "t1's forms were answered before the door went down");
 });
 
 test("a surface extends the base extraction without rebuilding it", () => {
