@@ -12,6 +12,7 @@ import { priorJson, setPriorSource, priorNames } from "../the-fold/prior-source.
 import { readCanonical } from "../the-fold/read-door-canonical.mjs";
 import { readToWeft } from "../the-fold/read-process.mjs";
 import { makeLexicon } from "../organs/lexicon.js";
+import { splitSentences } from "../adapters/text/spans.js";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const MILL = "In 1850 Messrs. Smith and Jones bought the mill. They sold it to the town in 1871. The town council then built a school on the site, and the school stood for forty years. Years later Smith wrote that the sale was a mistake.";
@@ -61,6 +62,20 @@ test("the hyperlexicon is asked only about unsure dotted forms, and the text's o
   assert.ok(!asked.includes("Smith."), "a form at no junction is never asked about");
   const none = await consultAliases(text, null);
   assert.match(none.gap, /no hyperlexicon/);
+});
+
+test("a dotted form a giver lists beside an ordinary word is refused by the treebank's evidence; one the treebank writes dotted is kept", async () => {
+  const lex = makeLexicon({ ask: async (forms) => ({ giver: { name: "stub" }, results: Object.fromEntries(forms.map((f) => [f, f === "ports." ? [{ w: f, senses: [{ of: "portraits" }] }] : f === "Messrs." ? [{ w: f, senses: [{ of: "Mr." }] }] : null])) }) });
+  const text = "Trade ran between the northern ports. Messrs. Hall and Lee sailed at dawn.";
+  const pr = { ...priorsFor("en"), dotted: null };
+  assert.ok(pr.posPrior?.forms?.ports, "the class prior attests 'ports' as a word");
+  const c = await consultAliases(text, lex, { priors: pr });
+  const ports = c.rows.find((r) => r.form === "ports.");
+  assert.ok(ports && ports.kept === false && /treebank/.test(ports.why), "'ports.' is listed, the text never writes 'ports' bare, and the treebank still refuses it");
+  assert.deepEqual(c.aliases, ["Messrs."], "a form whose base the treebank does not attest as a word is the giver's and the text's to decide");
+  const bare = await consultAliases(text, lex, { priors: { ...pr, posPrior: null } });
+  assert.ok(bare.aliases.includes("ports."), "FALSIFIER: with no class prior the rule cannot be read, and the text's own use keeps 'ports.'");
+  assert.deepEqual(splitSentences(text, { abbreviations: abbreviationsFor(text, { priors: pr, aliases: c.aliases }).set }).map((x) => x.text), ["Trade ran between the northern ports.", "Messrs. Hall and Lee sailed at dawn."]);
 });
 
 test("the declared language is read with its own priors; undeclared is heard; an unknown name is a typed gap", () => {
