@@ -104,3 +104,47 @@ test("no reading is a parser_absent gap, never a verdict", () => {
   assert.deepEqual(st.gaps.map((g) => g.kind), ["parser_absent"]);
   assert.equal(stageVerdict({ claim: st, source: st, bind: bindFolded }).verdict, "beyond-reach");
 });
+
+// ---- M2: binding by janus's resolve (injected) and the deranged control ------------------------------------------------------------------
+import { makeResolveBind, derange } from "./stage-bind.js";
+import { JANUS_DIR } from "../the-fold/priors-home.js";
+import fs from "node:fs";
+import path from "node:path";
+
+test("INS by an injected resolver: assert binds, ask is end_unresolved (an ambiguous end is never resolved), anything else no_correspondence", () => {
+  const claim = stageOf(reading()), source = sourceOf(reading());
+  const decide = { "Lake Baikal": "assert", Siberia: "ask" };
+  const fake = ({ mention, candidates, lens }) => {
+    assert.ok(lens?.name, "a lens is stated");
+    const want = mention.nodes.includes("w:baikal") ? "Lake Baikal" : "Siberia";
+    const c = candidates.find((x) => source.anchors.find((a) => a.id === x.id)?.names.includes(want));
+    return decide[want] === "assert" ? { decision: "assert", asserted: c.id } : { decision: "ask", between: candidates.map((x) => x.id) };
+  };
+  const b = makeResolveBind({ resolveReferent: fake })(claim, source);
+  assert.equal(b.map.get(claim.anchors.find((a) => a.label === "Lake Baikal").id), source.anchors.find((a) => a.label === "Lake Baikal").id);
+  assert.deepEqual(b.gaps.filter((g) => g.kind === "end_unresolved").length, 1);
+  const kindC = claim.anchors.find((a) => a.kind === "kind"), kindS = source.anchors.find((a) => a.kind === "kind");
+  assert.equal(b.map.get(kindC.id), kindS.id, "a kind binds the source kind with its head and modifiers");
+  assert.throws(() => makeResolveBind({}), /injected/);
+});
+
+test("the deranged control moves every bound end to another anchor and keeps holds", () => {
+  const claim = stageOf(reading({ extra: [{ pred: "deep", args: [BAIKAL], neg: false, hedged: false, approx: false, start: 0, end: 11, head: 2 }] }));
+  const source = sourceOf(reading({ extra: [{ pred: "deep", args: [BAIKAL], neg: false, hedged: false, approx: false, start: 0, end: 11, head: 2 }] }));
+  const real = bindFolded(claim, source), d = derange(real, source);
+  for (const [c, s] of real.map) if (c === HOLDS) assert.equal(d.map.get(c), HOLDS); else assert.notEqual(d.map.get(c), s);
+  assert.equal(stageVerdict({ claim, source, bind: () => real }).verdict, "bound");
+  assert.notEqual(stageVerdict({ claim, source, bind: () => d }).verdict, "bound", "a wrong universe binds nothing the source states");
+});
+
+const RESOLVE = path.join(JANUS_DIR ?? "", "native/organs/identity/resolve.mjs");
+test("INS with janus's own resolve.mjs, where the janus checkout is beside khora", { skip: !fs.existsSync(RESOLVE) && "no janus checkout beside khora" }, async () => {
+  const { resolveReferent } = await import(RESOLVE);
+  const claim = stageOf(reading());
+  // a source page with two lakes: the claim's "Lake Baikal" is the one whose rare word it shares
+  const src = { ...reading(), entities: [{ id: "E1", name: "Lake Baikal" }, { id: "E2", name: "Lake Victoria" }],
+    page: [{ rows: [], mentions: [{ text: "Lake Victoria", how: "name", entity: "E2" }] }, { rows: ROWS, mentions: [{ text: "Lake Baikal", ids: [1, 2], hid: 2, how: "name", entity: "E1" }] }] };
+  const source = sourceOf(src);
+  const b = makeResolveBind({ resolveReferent })(claim, source);
+  assert.equal(b.map.get(claim.anchors.find((a) => a.label === "Lake Baikal").id), source.anchors.find((a) => a.label === "Lake Baikal").id);
+});

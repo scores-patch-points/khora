@@ -6,6 +6,8 @@
 //   bindNone(claim, source)            no binding at all: every claim atom is beyond reach (the check of law 1)
 //   bindFolded(claim, source)          LEGACY: an end binds the source anchor of its kind that shares a folded name (the string identity of
 //                                      stageFromEdges's default, marked so on the binding); kept for comparison, never the arm's binding
+//   makeResolveBind({ … })(claim, source)  THE ARM'S BINDING (M2): janus resolve.mjs over the source page's referents, below
+//   derange(binding, source)           the control built to fail: every bound end moved to another anchor
 // Each returns { how, map: Map(claimId → sourceId), gaps: [{ kind, anchor, detail }] }.
 import { HOLDS, fold } from "./stage.js";
 
@@ -26,4 +28,76 @@ export function bindFolded(claim, source) {
     if (hit) map.set(a.id, hit.id); else gaps.push({ kind: "no_correspondence", anchor: a.id, detail: "no source anchor shares a folded name" });
   }
   return { how: "folded-string", map, gaps };
+}
+
+// ---- M2: binding by janus's identity organs (injected, never copied: janus native/organs/identity/resolve.mjs and correspond.mjs) ------------
+// A claim referent (an entity of the claim's reading, or an end it left unresolved) is bound by resolveReferent: the candidates are the source
+// page's referents, each mention's and candidate's company the lemmas of its namings (with English keys, the reader's own glossary giver, when
+// the two languages differ), and, for a claim lemma that correspond.mjs's matchPair confirms against its own null, the source lemma it
+// corresponds to. resolve's assert binds; its ask (torn between candidates) is an end_unresolved gap, for law 2 — an ambiguous end is never
+// resolved here; its gap or refusal is a no_correspondence gap. A kind binds the source kind with the same head (by key across languages)
+// whose modifiers include the claim kind's; a name binds the source name with its folded words; a quantity binds nothing yet (M3).
+//   makeResolveBind({ resolveReferent, correspond, keysOf, claimLang, sourceLang, claimReading, sourceReading }) → (claim, source) → binding
+export function makeResolveBind({ resolveReferent, correspond = null, keysOf = null, claimLang = "en", sourceLang = "en", claimReading = null, sourceReading = null, quantities = null } = {}) {
+  if (typeof resolveReferent !== "function") throw new TypeError("makeResolveBind: resolveReferent (janus resolve.mjs) is injected, never re-implemented here");
+  const cross = claimLang !== sourceLang;
+  const keyNodes = (lang, l) => { if (!cross || !keysOf) return []; const out = []; for (const k of keysOf(lang, l) ?? []) { const f = fold(k); if (!f) continue; out.push(`w:${f}`); const last = f.split(" ").at(-1); if (last && last !== f) out.push(`w:${last}`); } return out; };
+  // a side's company nodes: its lemmas, and (across languages) the English keys of the non-English side's lemmas; English stays itself
+  const nodesOf = (lemmas, lang, extra = []) => [...new Set([...lemmas.map((l) => `w:${fold(l)}`), ...(lang === "en" ? [] : lemmas.flatMap((l) => keyNodes(lang, l))), ...extra])];
+  return function bindResolve(claim, source) {
+    const map = new Map(), gaps = [], S = sorted(source.anchors);
+    // correspondence of claim lemmas to source lemmas, from relations alone, against correspond's own null (rewired source graphs)
+    const corr = new Map(); let confirmed = 0;
+    if (correspond && claimReading?.rows?.length && sourceReading?.page?.length) {
+      const sent = (rows) => rows.map((r) => [fold(r.lemma && r.lemma !== "_" ? r.lemma : r.form), r.upos, r.head, r.deprel]);
+      const gA = correspond.graphOf([sent(claimReading.rows)]), gB = correspond.graphOf(sourceReading.page.map((p) => sent(p.rows ?? [])));
+      const r = correspond.matchPair(gA, gB, correspond.Q?.seed ?? 20261025);
+      for (const [a, b] of r.confirmed ?? []) { corr.set(gA.keys[a], gB.keys[b]); confirmed++; }
+    }
+    const refs = S.filter((b) => b.kind === "referent" && b.lemmas.length);
+    const candidates = refs.map((b) => ({ id: b.id, nodes: nodesOf(b.lemmas, sourceLang) }));
+    for (const a of claim.anchors) {
+      if (a.id === HOLDS) { map.set(HOLDS, HOLDS); continue; }
+      if (a.kind === "referent") {
+        const nodes = nodesOf(a.lemmas, claimLang, a.lemmas.map((l) => corr.get(fold(l))).filter(Boolean).map((u) => `w:${u}`));
+        const r = resolveReferent({ mention: { nodes }, candidates, lens: { name: "meaning-check binding" }, giver: "janus resolve.mjs" });
+        if (r.decision === "assert") map.set(a.id, r.asserted);
+        else gaps.push({ kind: r.decision === "ask" ? "end_unresolved" : "no_correspondence", anchor: a.id, detail: r.reason ?? (r.decision === "ask" ? `torn between ${(r.between ?? []).length} candidates` : r.decision) });
+        continue;
+      }
+      if (a.kind === "kind") {
+        const meets = (x, y) => fold(x) === fold(y) || (cross && keysOf && (keysOf(sourceLang, y) ?? []).some((k) => fold(k) === fold(x) || fold(k).split(" ").at(-1) === fold(x)));
+        const ks = S.filter((b) => b.kind === "kind" && meets(a.head, b.head) && a.modifiers.every((m) => b.modifiers.some((n) => meets(m, n))));
+        const exact = ks.filter((b) => b.modifiers.length === a.modifiers.length);
+        const pick = exact.length === 1 ? exact[0] : ks.length === 1 ? ks[0] : null;
+        if (pick) map.set(a.id, pick.id); else gaps.push({ kind: ks.length > 1 ? "end_unresolved" : "no_correspondence", anchor: a.id, detail: ks.length > 1 ? `${ks.length} source kinds carry its words` : "no source kind carries its words" });
+        continue;
+      }
+      if (a.kind === "name") {
+        const ns = S.filter((b) => b.kind === "name" && fold(b.label) === fold(a.label));
+        if (ns.length === 1) map.set(a.id, ns[0].id); else gaps.push({ kind: "no_correspondence", anchor: a.id, detail: "no source name with its words" });
+        continue;
+      }
+      if (a.kind === "quantity") {
+        if (!quantities) { gaps.push({ kind: "no_correspondence", anchor: a.id, detail: "quantities are not bound before M3" }); continue; }
+        quantities(a, S, map, gaps);
+      }
+    }
+    return { how: "resolve", map, gaps, correspondence: confirmed };
+  };
+}
+
+/** the control built to fail: every bound claim end re-bound to the next source anchor of its kind in sorted order, so none keeps its binding;
+ *  an end whose kind has one anchor goes to the next anchor of any kind. holds stays holds. */
+export function derange(binding, source) {
+  const S = sorted(source.anchors).filter((b) => b.id !== HOLDS), ids = S.map((b) => b.id), kindOf = new Map(S.map((b) => [b.id, b.kind]));
+  const next = (list, x) => { const i = list.indexOf(x); return list.length > 1 ? list[(i + 1) % list.length] : null; };
+  const map = new Map();
+  for (const [c, s] of binding.map) {
+    if (c === HOLDS) { map.set(c, s); continue; }
+    const same = ids.filter((x) => kindOf.get(x) === kindOf.get(s));
+    const to = (same.length > 1 ? next(same, s) : null) ?? next(ids.includes(s) ? ids : [...ids, s].sort(), s);
+    if (to && to !== s) map.set(c, to);
+  }
+  return { ...binding, how: `${binding.how}+deranged`, map };
 }

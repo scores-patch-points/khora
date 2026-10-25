@@ -18,6 +18,11 @@ const { readAtoms } = await import(`${N}/organs/read-atoms.js`);
 const GE = await import(`${N}/adapters/text/grammar-en.js`), { loadGrammar } = await import(`${N}/adapters/text/grammar-ud.js`), { PACKS } = await import(`${N}/adapters/text/grammar-packs.js`);
 const { openSlim } = await import(`${N}/organs/wikt-slim.js`), { makeGlossary, makeSynonymy, loadTranslations } = await import(`${N}/organs/wikt-gloss.js`);
 const { priorsHome } = await import(`${N}/the-fold/prior-source.mjs`);
+// janus's identity organs, read where khora reads janus (priors-home.js JANUS_DIR, the sibling checkout), or from MEANING_JANUS_DIR: imported,
+// never copied (janus native/organs/identity/resolve.mjs, correspond.mjs)
+const { JANUS_DIR } = await import(`${N}/the-fold/priors-home.js`);
+const JD = process.env.MEANING_JANUS_DIR ?? JANUS_DIR;
+const JANUS = await (async () => { try { return { resolve: await import(path.join(JD, "native/organs/identity/resolve.mjs")), correspond: await import(path.join(JD, "native/organs/identity/correspond.mjs")) }; } catch { return null; } })();
 
 // ---- the reader, as the atoms arm reads (run.mjs): English by grammar-en, the rest by grammar-ud, glossed from the slim Wiktionary --------
 const SLIM = openSlim(process.env.FOLD_WIKT_SLIM ?? `${process.env.HOME}/.cache/live_priors/wiktionary/wiktionary-slim-2026-10-01-v2.pack`);
@@ -51,9 +56,15 @@ export function readPair(p) {
 }
 
 // ---- modes: a binding (and, from M3, licenses) per name ------------------------------------------------------------------------------------
+const resolveBind = (R, { correspond = true } = {}) => BIND.makeResolveBind({ resolveReferent: JANUS.resolve.resolveReferent, correspond: correspond ? JANUS.correspond : null, keysOf, claimLang: R.claimLang, sourceLang: R.sourceLang, claimReading: R.claimReading, sourceReading: R.sourceReading });
+// one binding per pair and mode family, shared by the modes built on it (the deranged control moves exactly the binding the arm used)
+const cached = (R, k, f) => (c, s) => ((R.cache ??= {})[k] ??= f(c, s));
 export const MODES = {
   none: { bind: () => BIND.bindNone },
   folded: { bind: () => BIND.bindFolded },
+  resolve: { bind: (R) => cached(R, "resolve", resolveBind(R)) },
+  "resolve-deranged": { bind: (R) => (c, s) => BIND.derange(cached(R, "resolve", resolveBind(R))(c, s), s) },
+  "resolve-only": { bind: (R) => cached(R, "resolve-only", resolveBind(R, { correspond: false })) },
 };
 
 // ---- scoring: accuracy E against not-E, false accepts, E accepted, C named, false-C, per set and pooled, and per language ---------------------
@@ -79,7 +90,8 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
   const stagesOut = arg("stages", null), pairsOut = arg("pairs", null), out = arg("out", null);
   if (stagesOut) fs.writeFileSync(stagesOut, ""); if (pairsOut) fs.writeFileSync(pairsOut, "");
   const rows = Object.fromEntries(modes.map((m) => [m, []]));
-  console.log(`stage arm · reader ${GE.READER} · priors ${PRIORS?.slice(0, 12) ?? "none"} · modes ${modes.join(", ")}`);
+  if (modes.some((m) => /^resolve/.test(m)) && !JANUS) throw new Error(`janus's identity organs are not at ${JD} (set MEANING_JANUS_DIR)`);
+  console.log(`stage arm · reader ${GE.READER} · priors ${PRIORS?.slice(0, 12) ?? "none"} · janus ${JANUS ? JD : "absent"} · modes ${modes.join(", ")}`);
   for (const [set, pairs] of Object.entries(sets)) {
     for (const p of pairs) {
       const R = readPair(p);
@@ -87,7 +99,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
       for (const m of modes) {
         const M = MODES[m], rec = stageVerdict({ claim: R.claim, source: R.source, bind: M.bind(R), licenses: M.licenses?.(R) ?? [], ...(M.layers ? { layers: M.layers } : {}) });
         rows[m].push({ set, id: p.id, label: p.label, v: rec.label, hl: rec.verdict, lang: langKey(p) });
-        if (pairsOut) fs.appendFileSync(pairsOut, JSON.stringify({ set, id: p.id, mode: m, label: p.label, v: rec.label, hl: rec.verdict, conjuncts: rec.conjuncts, gaps: rec.gaps.length }) + "\n");
+        if (pairsOut) fs.appendFileSync(pairsOut, JSON.stringify({ set, id: p.id, mode: m, label: p.label, v: rec.label, hl: rec.verdict, conjuncts: rec.conjuncts, gaps: rec.gaps.map((g) => g.kind), correspondence: R.cache?.resolve?.correspondence ?? null }) + "\n");
       }
     }
   }
