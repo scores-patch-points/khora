@@ -123,3 +123,13 @@ test("the live consult asks nothing when the dotted-words prior is the giver's o
   await consultAliases(text, other, { priors });
   assert.ok(asked.length - before > 2, "FALSIFIER: a giver reading another pack is asked every unsettled form");
 });
+
+test("the reading's aliasReport says when the live consult was settled by the prior", async () => {
+  const { makeLexicon } = await import("../organs/lexicon.js");
+  const { readDocument, priorsFor } = await import("../the-fold/read-core.mjs");
+  const giver = { name: "English Wiktionary", pack: "p.pack", snapshot: "2026-10-01" };
+  const lex = makeLexicon({ ask: async (forms) => ({ giver, results: Object.fromEntries(forms.map((f) => [f, null])) }) });
+  const text = "The fleet left the northern ports at dawn. Ice was sighted at dusk by the lookout. The boats were lowered slowly into the sea. Everyone waited for the rescue ship to come. It came at last before the morning.";
+  const W = await readDocument(text, { lexicon: lex, quality: false, priors: { ...priorsFor("en"), dotted: new Set(["etc."]), dottedGiver: giver } });
+  assert.match(W.aliasReport.settled, /this giver's own pack/);
+});
