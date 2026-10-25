@@ -739,3 +739,12 @@ pairs (about 8 E, 5 C, 3 T), and per other language 4 English-claim cross-langua
 sentence alone before any arm runs. Run 23 is run only if the M2 gate passed. It is run once, with the rules arm and the wording judge beside
 it; the control, V5 and the ablation run on it too; results are reported per language and same- vs cross-language. If the bars are met only in
 part, the result is recorded and the arm is not adopted (nothing frozen), as in every run so far.
+M1 RESULT (code ab1da21b; diagnostic, post hoc on the nine spent sets; eval/meaning/stage-run.mjs, stage-coverage.mjs):
+ S1 rerun: all 786 stages (393 pairs, claim and source) byte-identical on a second run in a fresh process (cwd /tmp, TZ Asia/Tokyo, locale
+    de_DE). Across machines: not run.
+ S2 PASS: of the 3,231 gold atoms of runs 13–18, today's atoms meet 1,083 (proxy); the atoms read back from the arrangements meet the same
+    1,083 (0 lost, 0 gained).
+ Claim anchors unbound: 1 E of 194, 0 false accepts, 0 C. The one is heldout 221. Its claim is byte-identical to its sentence and both are read
+    with the same empty page, so they are one document and share one set of anchors (law 6, same bytes, same stage). No binding produced it.
+ Folded-string anchors (legacy, marked so): accuracy 55.2%; E 22 of 194; false accepts 4 of 199 (2.0%); C named 2 of 129; false-C 1 of 264
+    (0.4%). By language: en 17 of 74 E; es, fr, de, ja 1–2 of 23–24 each; cross-language 0 of 25.
