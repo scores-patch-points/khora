@@ -39,7 +39,7 @@ reader-bundle read through it, so nothing in the reader's import graph imports `
   English prior applied to it (Greenberg). The English closed classes (`adapters/text/priors.js`) reach only an English read.
 - **abbreviations** — the tokens that keep their period at the sentence cut: the language's **measured** punctuation prior
   (janus `priors/punctuation-<stem>.json`, built by janus `scripts/build-punctuation-priors.mjs` from corpora, never typed),
-  the text's own (`spans.js::deriveAbbreviations`), and the **aliases the hyperlexicon resolved** for this text
+  the text's own (`spans.js::deriveAbbreviations`), the hyperlexicon's **dotted words read ahead** (janus `priors/dotted-<stem>.json`, built from the giver by janus `scripts/build-dotted-priors.mjs`: "etc.", "e.g.", "U.S.", "Inc." … kept where the text never writes the token without its period, so any surface knows them with no giver in reach), and the **aliases the hyperlexicon resolved** live for this text
   (`organs/lexicon.js`: "Messrs." is listed as a form of "Mr.", so the period belongs to the word). The hand-curated
   `lang/en.json` list is not used. The lookup is asynchronous and the read is not, so `native/reading.js::readDocument`
   asks first (the local English Wiktionary pack, `adapters/text/wiktionary-pack.js`; its absence is a typed gap) and hands
@@ -52,6 +52,10 @@ ids its edges were resolved against), each being with `mentionsAt` (UTF-8 byte o
 holds only through the heard tier (common nouns are not beings, so they stay out of the weft's company); `sentences` with
 offsets that read back in the caller's text; `pronouns` — every binding the resolver made, addressed and named; `language`,
 `abbreviations`, `aliasReport`, and `gaps`. The door adds a `truncated` gap when `maxCharacters` cut the text.
+
+Measured and declined (2026-10-25): a "never cut before a lower-case word" rule. On gold English (UD EWT, GUM, LinES, ParTUT)
+it would fix 308 in-sentence cuts and break 624 real boundaries (EWT alone 175 against 557), so the splitter keeps cutting there
+and the dotted words settle "etc. and" / "U.S. for".
 
 **Not yet:** the hyperlexicon's L1 traversal (`janus` `openHyperlexicon`) needs the hyphae data, so on the Mac the giver is
 the Wiktionary pack alone. The engine's pronoun resolver binds conservatively (on "Lincoln was shot in April. He died the next
