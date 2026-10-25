@@ -69,3 +69,12 @@ for (const p of pairs) { const r = arm(p.A, p.B, all); if (r.v !== "C" || !r.pro
   console.log(`\n[${p.set} ${p.id}] labelled ${p.label}${p.type ? ` (${p.type})` : ""}\n  claim : ${p.claim}\n  source: ${p.sentence.slice(0, 150)}`);
   for (const pr of r.proofs.filter((x) => x.verdict === "contradicted")) console.log(`  atom  : ${pr.atom}\n  INS   : ${pr.binds.join("; ")}\n  CON   : ${pr.lic.join("; ")}\n  EVA   : HL read(${pr.atom.split("(")[0]}) = ${pr.verdict}; the source holds ${pr.cites.join(", ")}`); }
 if (process.env.DERANGE) pairs.forEach((p, i) => { const q = pairs[(i + 1) % pairs.length], r = arm(p.A, q.B, all); if (r.v === "C") console.log(`\nDERANGED C: claim "${p.claim}"\n  vs source "${q.sentence.slice(0, 160)}"\n  ${r.proofs.filter((x) => x.verdict === "contradicted").map((x) => x.binds.join("; ")).join(" | ")}`); });
+
+// hyperlexicon: the license rows are data. A hyperlexicon with the same rows only NOMINATED (candidates) licenses nothing; an empty one likewise.
+{ const HX = await import(path.join(K, "native/kernel/hyperlexicon.js"));
+  const cand = HX.admitHyperlexiconCandidates(HX.createHyperlexicon(), LICENSES.map((l) => ({ left: "functional", right: l.on, giver: l.giver })));
+  const named = (hx) => pairs.filter((p) => p.label === "C" && rulesOf(p.A, p.B) === "N" && judgeClaim(stageFromAtoms(p.B.atoms, { doc: "src", hyperlexicon: hx }), p.A.atoms, {}).verdict === "C").length;
+  const SF = await import(path.join(K, "native/kernel/stage.js"));
+  console.log(`\nhyperlexicon: contradictions beyond the rules with the given rows ${named(SF.defaultHyperlexicon())}, with the rows only nominated ${named(cand)}, with an empty hyperlexicon ${named(HX.createHyperlexicon())}`);
+  const kinds = {}; for (const p of pairs) for (const g of judgeClaim(stageFromAtoms(p.B.atoms, { doc: "src" }), p.A.atoms, {}).gaps) kinds[g.kind] = (kinds[g.kind] ?? 0) + 1;
+  console.log(`DMD-bounded identity: gaps raised while binding claim ends: ${JSON.stringify(kinds)}`); }
