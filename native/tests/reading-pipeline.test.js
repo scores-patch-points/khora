@@ -215,6 +215,26 @@ test("the hyperlexicon client keeps a form only as the givers write it, its give
   assert.equal((await consultAliases(t1, flaky, { priors: { ...priorsFor("en"), dotted: null } })).gap, null, "t1's forms were answered before the door went down");
 });
 
+test("the hyperlexicon client asks a word's context once per ground: uses, the dated span, and the givers' candidates in the caller's language", async () => {
+  const { makeHyperlexicon } = await import("../organs/lexicon.js");
+  const bodies = [];
+  const ask = async (body) => { bodies.push(body); const a = body.asks[0]; return { head: "h2", answers: [{ head: "h2", ground: a.ground, lang: a.lang, words: Object.fromEntries(a.words.map((w) => [w, w === "ports" ? { uses: 2, documents: 2, dated: { uses: 2, earliest: 1912, latest: 1997, documents: 2 }, undated: 0, candidates: [{ kind: "lemma", lang: "en", node: "n_p", pos: ["noun"], of: [], gloss: ["a harbour"] }], candidatesTotal: 1 } : { uses: 0, null: "never-set", gap: "unheard" }])) }] }; };
+  const hl = makeHyperlexicon({ ask });
+  const c = await hl.context(["ports", "zzz", "ports"]);
+  assert.equal(c.get("ports").candidates[0].pos[0], "noun");
+  assert.equal(c.get("ports").dated.earliest, 1912);
+  assert.equal(c.get("zzz").candidates, undefined, "a word the log never heard names no node");
+  assert.deepEqual(bodies[0].asks[0], { op: "context", words: ["ports", "zzz"], ground: {}, lang: "en" });
+  await hl.context(["ports"]);
+  assert.equal(bodies.length, 1, "asked once per ground");
+  await hl.context(["ports"], { ground: { year: [1900, 1950] } });
+  assert.equal(bodies.length, 2, "another ground is another ask");
+  assert.equal(hl.giver.head, "h2");
+  const down = makeHyperlexicon({ ask: async () => null, door: "stand-in" });
+  assert.equal((await down.context(["ports"])).get("ports"), undefined);
+  assert.match(down.log.at(-1).gap, /stand-in\) did not answer/);
+});
+
 test("a surface extends the base extraction without rebuilding it", () => {
   let base = null;
   const reader = makeReader({ language: "en", extendRelations: (b) => { base = b; return (t, o) => [...b(t, o), ...(/\bschool\b/.test(t) ? [{ end1: "the town council", label: "built", end2: "a school", polarity: "+", offset: 0 }] : [])]; } });

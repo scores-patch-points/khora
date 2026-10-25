@@ -74,12 +74,16 @@ export function makeLexicon({ ask, lang = "en" } = {}) {
  *  at its junctions, each answer read AS WRITTEN (the nodes whose own names write the form exactly, case included — the givers' word,
  *  janus DOTTED-PREREG-4.md). The same interface the consult reads as makeLexicon's (want, get, aliasOf, giver, log): a form is asked
  *  once while in flight; the giver is the ledger (its head), learnt from the first answer.
+ *  .context(words, { ground, lang }) asks the ledger what it holds of each word (the door's `context`): its uses and documents under
+ *  a ground, the dated span, and the givers' candidates in `lang` (kind, pos, of, gloss), each undecided. A word the log never heard
+ *  answers with no candidates: experience nominates.
  *  ask(body) posts the door's batch body ({ asks: [...] }) and resolves to its JSON ({ head, answers }); `door` names it in a gap. */
 export function makeHyperlexicon({ ask, lang = "en", door = null } = {}) {
   const cache = new Map();
   const log = [];
   let giver = null;
   const inFlight = new Map();
+  const noAnswer = () => `the hyperlexicon's door${door ? ` (${door})` : ""} did not answer`;
   async function want(forms) {
     const all = [...new Set([...forms].map(String))].filter((f) => f && !cache.has(f));
     if (!all.length || typeof ask !== "function") return;
@@ -99,7 +103,7 @@ export function makeHyperlexicon({ ask, lang = "en", door = null } = {}) {
       let res = null;
       try { res = await ask({ asks: [{ op: "names", surfaces: batch, lang }] }); } catch { res = null; }
       const a = res?.answers?.[0];
-      if (!a || !a.surfaces) { log.push({ forms: batch.length, answered: 0, ms: Date.now() - t0, gap: a?.gap ?? res?.gap ?? `the hyperlexicon's door${door ? ` (${door})` : ""} did not answer` }); return; }
+      if (!a || !a.surfaces) { log.push({ forms: batch.length, answered: 0, ms: Date.now() - t0, gap: a?.gap ?? res?.gap ?? noAnswer() }); return; }
       giver = giver ?? { name: "janus hyperlexicon", head: a.head ?? res.head ?? null, standing: a.standing ?? null };
       let answered = 0;
       for (const f of batch) {
@@ -110,13 +114,30 @@ export function makeHyperlexicon({ ask, lang = "en", door = null } = {}) {
       log.push({ forms: batch.length, answered, ms: Date.now() - t0 });
     }
   }
+  const contexts = new Map();
+  async function context(words, { ground = {}, lang: l = lang } = {}) {
+    const key = (w) => `${l}|${JSON.stringify(ground)}|${w}`;
+    const list = [...new Set([...words].map(String))].filter(Boolean);
+    const todo = typeof ask === "function" ? list.filter((w) => !contexts.has(key(w))) : [];
+    for (let i = 0; i < todo.length; i += 200) {
+      const batch = todo.slice(i, i + 200), t0 = Date.now();
+      let res = null;
+      try { res = await ask({ asks: [{ op: "context", words: batch, ground, lang: l }] }); } catch { res = null; }
+      const a = res?.answers?.[0];
+      if (!a || !a.words) { log.push({ op: "context", words: batch.length, answered: 0, ms: Date.now() - t0, gap: a?.gap ?? res?.gap ?? noAnswer() }); break; }
+      giver = giver ?? { name: "janus hyperlexicon", head: a.head ?? res.head ?? null, standing: null };
+      for (const w of batch) contexts.set(key(w), a.words[w] ?? null);
+      log.push({ op: "context", words: batch.length, answered: batch.filter((w) => a.words[w]?.candidatesTotal).length, ms: Date.now() - t0 });
+    }
+    return new Map(list.map((w) => [w, contexts.get(key(w))]));
+  }
   const get = (form) => cache.get(String(form));
   const aliasOf = (form) => {
     const e = get(form);
     if (!e) return [];
     return [...new Set(e.flatMap((x) => (x.senses ?? []).map((s) => s.of).filter(Boolean)))];
   };
-  return { want, get, aliasOf, get giver() { return giver; }, log, cache, lang, kind: "hyperlexicon" };
+  return { want, get, aliasOf, context, get giver() { return giver; }, log, cache, lang, kind: "hyperlexicon" };
 }
 
 // "<letters>." followed by white space and more text: a place the splitter cuts (spans.js cuts after any terminator it is not told
