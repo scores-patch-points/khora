@@ -192,3 +192,14 @@ test("a surface's organs join the master's one assembly; selfRead gives the clai
   assert.ok(w.abbreviationSet instanceof Set);
   assert.ok(!("reader" in JSON.parse(JSON.stringify(w))), "the entry on the wire is plain data");
 });
+
+test("a word whose period is its own is not a being: 'Messrs.' and 'No.' stay out of the cast", async () => {
+  const { readDocument, isAbbreviationSurface } = await import("../the-fold/read-core.mjs");
+  const lex = makeLexicon({ ask: async (forms) => ({ giver: { name: "stub" }, results: Object.fromEntries(forms.map((f) => [f, f === "Messrs." ? [{ w: f, senses: [{ of: "Mr." }] }] : f === "No." ? [{ w: f, senses: [{ of: "number" }] }] : null])) }) });
+  const text = `${DOC}\n\nThe deed was filed as No. 5 in the town book, and No. 6 followed it a year later in the same book.`;
+  const w = await readDocument(text, { lexicon: lex });
+  assert.ok(!w.cast.some((c) => c.allSurfaces.some((x) => ["Messrs", "No"].includes(x))), "neither is a being");
+  assert.ok(w.cast.some((c) => c.allSurfaces.includes("Smith")), "the names beside them still are");
+  assert.equal(isAbbreviationSurface("Mr", new Set(["Mr"])), true);
+  assert.equal(isAbbreviationSurface("Mr Brown", new Set(["Mr"])), false, "a name that opens with a title is still a name");
+});
