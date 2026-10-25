@@ -657,3 +657,85 @@ RESULT (run 22a, leave-one-set-out over the nine spent sets; native/kernel/atom-
  chain (grammar-ud or janus) already calls them C before the atoms arm runs; they were false accepts of the raw NLI score only. The pair the
  chain does not catch, fresh-ml 641 (Luftseilbahn/Zahnradbahn), carries no swap flag. So the role-swap errors the NLI model makes are mostly
  already caught by the chain; the swap veto adds nothing there and costs true accepts.
+
+## Run 23 (2026-10-25): the reader emits a STAGE, HL reasons over it — PRE-REGISTERED (written before any part of the arm is built or run)
+Prediction, written first (the diagnostic runs on the nine spent sets and the run-23 result are read against it):
+ - S1 and S2 hold: a stage re-encodes the atoms the reader already writes, sorted and content-addressed.
+ - With R1 alone and binding by resolve (M2) the arm accepts far fewer supported pairs than the rules: 15–35 of 194 against 58. Half the rules'
+   accepts come from the chain's claim matcher (30 of the 65 pairs the rules accept), the rest from loose predicate meeting (five-letter
+   stems, synonyms, shared keys, the be_in form), and R1 does none of that. False accepts stay at or under the rules' rate, except that until
+   RC7 (M4) a claim word left unread can let a claim through.
+ - The deranged control removes almost every accept, so the M2 gate passes.
+ - Contradictions appear only with M3's functional licenses, and only where every claim end binds (a different figure; another holder of a
+   superlative the source names): 5–20 of 129, far short of V4's 55. A referent the source never names ("Venus" against a page about
+   Mercury) stays beyond reach by law 3, however plainly the claim is false.
+ - So V1, V3 and V4 fail on the spent sets and on run 23; V2, V5, the control and the ablation hold. The arm is safe and narrow: what it
+   adds is that every verdict is a stage path with named licenses, not accuracy.
+Arm "stage" (the stage spec, "the reader emits a stage, HL reasons over it", proposal of 2026-10-25). The claim and its source sentence, with its
+page as the atoms arm reads it, are each read by read-atoms.js and written as a Stage@1 record (native/organs/stage.js): reader {grammar, priors
+hash, reader version}; doc {id, bytes hash, lang}; anchors {id, kind referent | quantity | kind | holds, names, via}; arrangements {id = sha256 of
+(doc, span, rel, s, o, polarity, key), rel {lang, lemma, surface, senses}, s, o, key, polarity, layer, span, approx}; licenses {kind, rels, giver,
+standing}; gaps {kind end_unresolved | unread_word | no_correspondence | parser_absent, span}. The verdict is HL's read(stage, formula)
+(native/interpretation/hl.js), the formula the conjunction of the claim's load-bearing arrangements over the source anchors their ends bind to,
+negation as polarity: bound → E; contradicted → C; unbound, beyond-reach and contested → N (contested recorded as "the source disagrees with
+itself"). Nothing else decides: no claim matcher, no janus contradiction pass, no atom rules, no model, embedding, learned matcher, score
+threshold or hand-set list. The rules arm (the atoms arm as of e1e1dac0: 63.6% pooled, false-accept 3.5% (7 of 199), 58 of 194 E accepted, 35 of
+129 C named; rerun before this entry, identical) is the reference.
+The chain (spec §7), built with plan() (the-fold/turn-order.js), so a cell needing a later cell's product is refused at construction and no cell
+upgrades an earlier one's refusal: NUL the claim's load-bearing arrangements (a one-place fact taken from a word of its referent's own name
+identifies it and is not load-bearing, as in atom-support.js); SIG both stages; INS binding; SEG roles and layers; CON licenses; EVA read; REC
+the verdict, its path and its licenses.
+INS, fixed here. A claim referent (an entity of the claim's reading, or an end it left unresolved) is bound by janus resolve.mjs
+(resolveReferent, lens "meaning-check binding", no assertAt, so the pool's chance floor 1 − 1/n). The candidates are the source page's
+referents: the entities of its reading over title, earlier sentences and sentence, and the sentence's unresolved ends. The company of a mention
+and of each candidate is the lemmas of the content words of every text its reading names it by, plus English keys (wikt-gloss, the reader's
+own giver) when the two languages differ, plus the source lemmas that janus correspond.mjs (matchPair, with its own null) confirms for a
+claim lemma, where it confirms any. Measured before this entry on one synthetic sentence pair, correspond confirms 0 pairs at sentence
+scale; it is wired anyway and its share is reported. resolve's assert binds; its ask is an end_unresolved gap; its gap or refusal is a
+no_correspondence gap. A kind binds the source kind with the same head lemma (by key across languages) whose modifiers include the claim
+kind's. From M3, a quantity binds a source quantity of its measure within 2% (the existing meeting test). A quantity that meets none enters
+as a distinct quantity anchor: a value is its own identity, the binding cell decides "different", and only R2 can use that, and only toward
+contradicted. A referent that binds nothing is never entered, so its atom is beyond reach (law 3). holds binds holds.
+Licenses, by milestone: M1–M2 none (R1 only). M3: functional(has_<attribute>) for a figure whose binding names its attribute, key the time the
+text gives (none is read today: empty on both sides), giver "a being has one value of an attribute at one time"; a superlative as an edge
+most:<adj>(its comparison class, its holder), the class being the holder's kind in the same claim with its places, functional, giver the
+language's own Degree feature (the parse's Degree=Sup, or Degree=Cmp on a definite noun), declared only where the parse carries it; the
+negated-comparative and "another name for" rewrites move from atom-support.js into the reader. M4: hedged text in the reported layer (an
+asserted claim is read on the asserted layer only, a hedged one on both); unread claim words as unread_word gaps (a claim arrangement whose
+span overlaps one is beyond reach; a gap outside every arrangement makes the formula beyond reach). M5: R7, declareEquivalent(relA, relB,
+{giver}), read through the class at read time and never by rewriting the stage, giver the Wiktionary synonymy the reader already uses
+(wikt-gloss makeSynonymy). M6 converse: built only if a named giver that is not a hand-written list is found; otherwise recorded as blocked.
+R6 transitive (containment): the spec names no giver, so it is not declared. M7 persistence: not part of this run.
+Bars (spec §9), fixed here:
+ S1 determinism: every stage of every pair is byte-identical (sha256 of its serialization) on a second run in a fresh process (another cwd, TZ
+    and locale). Across machines needs a second machine; this run uses this Mac only, so that half is reported as not run.
+ S2 coverage: on the six atom sets of runs 13–18 (gold.json), every gold atom met by today's atoms is met by the atoms read back from the
+    arrangements, by proxy-recall.mjs metBy (the judges cannot be rerun).
+ V1 accuracy, E against not-E, at least the rules arm's: 63.6% pooled on the nine sets (diagnostic), and the rules arm's on the run-23 pairs (the test).
+ V2 false accepts (not-E called E, of the not-E pairs) not above the rules': 3.5% pooled; on run 23, the rules' on the same pairs.
+ V3 E pairs accepted at least the rules' count: 58 of 194 pooled; on run 23, the rules' count on the same pairs. The share accepted is reported
+    against the quarter bar run 20's NLI arm failed (its M4).
+ V4 contradictions named at least 15 points of all C pairs above the rules' share: pooled 35 of 129 (27.1%), so at least 55 of 129; on run 23,
+    the rules' share on the same pairs plus 15 points. False-C (E and T pairs called C, of the E and T pairs) at most 5%.
+ V5 constructed swaps, zero false accepts. For every pair the arm calls E, every bound two-place claim arrangement is (a) reversed (direction
+    swap) and (b) given, for each of its referent ends in turn, each other referent of the source page in that end (role swap: the sibling is
+    drawn from the source's own universe, testimony's null, no model). Only swaps whose two ends the source stage relates under no relation
+    at all are kept, so the swapped claim is one the source does not state. A swapped formula read as bound is a false accept.
+ Control built to fail: deranged anchors. Each bound claim end is re-bound to the next source anchor of its kind in sorted order, so none
+    keeps its binding; an end whose kind has one anchor goes to the next anchor of any kind. This must collapse V3 and V4: E accepted and C
+    named each at most half the real binding's, pooled on the nine sets and on run 23.
+ License ablation: each declared license is removed in turn and every pair re-read. No pair may become E that was not E with the license
+    (law 1); any that does is a bug, reported pair by pair.
+Gates. M2 go/no-go: the deranged control hurts, meaning fewer E pairs accepted pooled on the nine sets than with the real binding, and no more
+C named. M5 go/no-go: R7 is kept only if, pooled on the nine sets, E accepted rises over M4 and false accepts stay at or under 3.5% (V2);
+otherwise R7 is left out and the build stops at M5. A failed gate stops the build there: the result is recorded, the rule is not adjusted and
+nothing is redrawn in this frame. A milestone's numbers are those of the first run of its committed code; a fault found afterwards is fixed
+post hoc and reported as such, and does not re-judge the gate. M1's diagnostic baseline is read two ways: claim anchors unbound (every atom
+beyond reach: 0 E and 0 C, the check of law 1), and the legacy folded-string anchors of stageFromEdges (marked so on the stage).
+Run 23 set (the test): written after the arm's code is fixed, and committed before any arm runs on it. The intros of about 18 Wikipedia pages
+none of the earlier sets touched (en, es, fr, de, ja), fetched with revision ids (eval/meaning/fresh23.sources.json). Pairs are written and
+labelled by a separate agent from those sentences alone (no code, no other sets, no results), as runs 19–20: per language 16 same-language
+pairs (about 8 E, 5 C, 3 T), and per other language 4 English-claim cross-language pairs (2 E, 1 C, 1 T). A second agent audits them from the
+sentence alone before any arm runs. Run 23 is run only if the M2 gate passed. It is run once, with the rules arm and the wording judge beside
+it; the control, V5 and the ablation run on it too; results are reported per language and same- vs cross-language. If the bars are met only in
+part, the result is recorded and the arm is not adopted (nothing frozen), as in every run so far.
