@@ -4,7 +4,10 @@
 // period, elision words that end in an apostrophe ("l'"), hyphen clitics ("-il"), whether letter-hyphen-letter forms are split, and —
 // where the script writes no spaces — an averaged-perceptron character segmenter (B = a token boundary before this character). This is
 // the code that reads it; it was first written in identity-udhr-emergence/run3/ud5.mjs (2026-10-24) and moved here, its home beside
-// ud-parser.js, unchanged in behaviour. Sentences: the script's own ICU rules (Intl.Segmenter).
+// ud-parser.js, unchanged in behaviour. Sentences (2026-10-24): khora's one sentence cut (spans.js::splitSentences, the cut every
+// reader shares), told which dotted tokens are words by the prior's own measured abbreviations — no second splitter.
+import { splitSentences } from "./spans.js";
+
 const PUNCT = /^[\p{P}\p{S}]$/u;
 const cap = (orig, s) => (orig[0] !== orig[0].toLowerCase() ? s[0].toUpperCase() + s.slice(1) : s);
 
@@ -48,9 +51,10 @@ export function tokenizeUnspaced(text, T) {
 /** tokenize(text, prior) — by the prior's own kind: a segmenter means an unspaced script. No prior: whitespace and punctuation only. */
 export function tokenize(text, T = null) { return T?.segmenter ? tokenizeUnspaced(text, T) : tokenizeSpaced(text, T); }
 
-/** sentences(text, locale) — the script's own sentence rules; a paragraph break always ends a sentence. */
-export function sentences(text, locale = "und") {
-  const seg = new Intl.Segmenter(locale, { granularity: "sentence" }); const out = [];
-  for (const para of String(text ?? "").split(/\n\s*\n/)) for (const s of seg.segment(para)) { const t = s.segment.trim(); if (t) out.push(t); }
-  return out;
+/** sentences(text, locale, prior) — khora's one sentence cut (spans.js), with the prior's measured abbreviations ("etc." keeps its
+ *  period) as the tokens that end no sentence; a paragraph break always ends one. `locale` is kept for the callers that pass it. With
+ *  no prior the splitter derives what it can from the text itself, as every reader's cut does. */
+export function sentences(text, locale = "und", T = null) {
+  const abbreviations = T?.abbrev?.length ? new Set(T.abbrev.flatMap((a) => { const t = String(a).replace(/\.$/, "").split(".").pop(); return t ? [t, t.charAt(0).toUpperCase() + t.slice(1), t.toUpperCase()] : []; })) : null;
+  return splitSentences(String(text ?? ""), abbreviations ? { abbreviations } : {}).map((x) => x.text).filter(Boolean);
 }

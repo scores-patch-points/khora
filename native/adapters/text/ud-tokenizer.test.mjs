@@ -27,6 +27,8 @@ test("an unspaced script is cut by the prior's segmenter: B before a character o
   assert.equal(segmentFeatures([..."人権"], 1).length, 14);
 });
 
-test("sentences follow the script's own rules; a paragraph break always ends one", () => {
+test("sentences are khora's one cut; a paragraph break always ends one; the prior's abbreviations keep their period", () => {
   assert.deepEqual(sentences("One. Two?\n\nThree", "en"), ["One.", "Two?", "Three"]);
+  assert.deepEqual(sentences("Brot, Käse usw. kamen dann. Danach nichts.", "de", { abbrev: ["usw."] }), ["Brot, Käse usw. kamen dann.", "Danach nichts."]);
+  assert.deepEqual(sentences("Brot, Käse usw. Kamen dann.", "de", null), ["Brot, Käse usw.", "Kamen dann."], "FALSIFIER: without the prior the cut falls after usw.");
 });
