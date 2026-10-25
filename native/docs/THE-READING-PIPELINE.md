@@ -9,8 +9,8 @@ native v7 reader, its priors, and what it does *not* run.
 **One call:** `native/the-fold/read-core.mjs::readDocument(text, { language, lexicon })` → `Promise<WeftEntry@4>`. It hears or
 takes the language, loads that language's priors through the prior door, asks the hyperlexicon it is handed about the dotted forms
 the priors cannot settle, and reads the document whole with the one reader (`readWith`). It runs the same in Node and in a page.
-Under Node, `native/reading.js::readDocument` is the same call with the local Wiktionary pack as the default giver; a page hands in
-its server's giver. Every surface that reads a document calls this; nothing assembles a second reader or a second cut.
+Under Node, `native/reading.js::readDocument` is the same call with the hyperlexicon asked through its door (janus
+`native/organs/hyperlexicon/door.mjs`; `HL_DOOR`, default loopback port 11450) as the default; a page hands in its server's. Every surface that reads a document calls this; nothing assembles a second reader or a second cut.
 
 ## One core, every surface (2026-10-24)
 
@@ -42,8 +42,9 @@ reader-bundle read through it, so nothing in the reader's import graph imports `
   the text's own (`spans.js::deriveAbbreviations`), the hyperlexicon's **dotted words read ahead** (janus `priors/dotted-<stem>.json`, built from the giver by janus `scripts/build-dotted-priors.mjs`: "etc.", "e.g.", "U.S.", "Inc." … kept where the text never writes the token without its period, so any surface knows them with no giver in reach), and the **aliases the hyperlexicon resolved** live for this text
   (`organs/lexicon.js`: "Messrs." is listed as a form of "Mr.", so the period belongs to the word). The hand-curated
   `lang/en.json` list is not used. The lookup is asynchronous and the read is not, so `native/reading.js::readDocument`
-  asks first (the local English Wiktionary pack, `adapters/text/wiktionary-pack.js`; its absence is a typed gap) and hands
-  the kept aliases to `readToWeft`.
+  asks first (the hyperlexicon's door, `organs/lexicon.js::makeHyperlexicon`: the ledger's `names`, each form kept only as the
+  givers write it, case included — janus `scripts/hyperlexicon/DOTTED-PREREG-4.md` measured this equal to reading the Wiktionary
+  pack directly on UD English gold; a door that does not answer is a typed gap on that read) and hands the kept aliases to `readToWeft`.
 - **one set of cuts** — the clause parser (`read-quality.mjs::nestedClauses`) parses inside the reader's own sentences,
   so the clause tree and the relations never disagree about where a sentence ends.
 
@@ -57,8 +58,8 @@ Measured and declined (2026-10-25): a "never cut before a lower-case word" rule.
 it would fix 308 in-sentence cuts and break 624 real boundaries (EWT alone 175 against 557), so the splitter keeps cutting there
 and the dotted words settle "etc. and" / "U.S. for".
 
-**Not yet:** the hyperlexicon's L1 traversal (`janus` `openHyperlexicon`) needs the hyphae data, so on the Mac the giver is
-the Wiktionary pack alone. The engine's pronoun resolver binds conservatively (on "Lincoln was shot in April. He died the next
+**Not yet:** the door runs beside the ledger's log (about 13 GB; rebuilt from its release with the hyperlexicon repository's
+`fetch.sh`), so a machine with no door in reach reads with the dotted words read ahead and reports the gap. The engine's pronoun resolver binds conservatively (on "Lincoln was shot in April. He died the next
 morning." it reports `pronoun_no_candidate`); the entry now carries what it binds, and the resolver itself is unchanged.
 The `cast`/`heard` split is the capital tier's, a cased-script test: a caseless script yields an empty cast (as before) and German
 makes every capitalised noun a being (Faust, 20 KB: 443 beings) — disclosed, not solved.

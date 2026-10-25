@@ -1226,3 +1226,10 @@ fast: 18 files · 86 affected tests, 85 pass, 1 skipped · law: WARN pre-existin
 | Kondo | — | native/the-fold/read-process.mjs | clean | the second-cast code was removed, not left beside the new path; reader-bundle keeps its exports for its callers |
 clean: Frankfurt
 compat: reader-bundle.js::engineRelationsFor byte-identical to main 49df4a51 on 16 of 16 texts; npm test 195 pass / 6 fail on both main and the branch (the same six)
+
+## 2026-10-25 — the reader asks the hyperlexicon through its door (reader-asks-hyperlexicon, native)
+fast: 5 files · 53 affected tests pass · law: ok (WARN pre-existing S17 S96 duplicates in READING-SPEC.md)
+| lens | citation | file:line | verdict | one line |
+| Ostrom | — | native/the-fold/read-core.mjs:167 (`lexicon.log[last].gap`) | fixed | a read whose forms were all known inherited an earlier read's unanswered ask; the gap is now the consult's own asks, tested |
+| Kondo | — | native/adapters/text/wiktionary-pack.js | noted | unwired (reading.js was its one importer); stashed in place, not deleted |
+clean: Dijkstra (identity is the exact form, case kept — "as written"), Holmes (aliasOf returns the givers' own `of` targets, no surface merge), Frankfurt (standing is the door's, no placeholder)
