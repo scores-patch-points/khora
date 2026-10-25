@@ -11,13 +11,17 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 import { readGreek, PRIORS_DIR } from "./greek-production.mjs";
 import { caseOf } from "./greek.mjs";
 import { identifyLanguage } from "../../the-fold/langid.mjs";
 import { detectLanguage } from "../../the-fold/language-grammar.js";
 
-const FIXTURE = "/Users/mlacy/Documents/3.0/Zenodotus/11-multi-language/greek-originals/homer-iliad.txt";
+// Zenodotus sits beside khora in the workspace (native/eval/lavar → up four); ZENODOTUS_DIR overrides. The old absolute
+// /Users/mlacy/Documents/3.0 path no longer exists, so this test failed on every machine before it read a line.
+const WORKSPACE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "..");
+const FIXTURE = path.join(process.env.ZENODOTUS_DIR ?? path.join(WORKSPACE, "Zenodotus"), "11-multi-language", "greek-originals", "homer-iliad.txt");
 const raw = fs.readFileSync(FIXTURE, "utf8");
 const TEXT = raw.slice(0, 2000);
 

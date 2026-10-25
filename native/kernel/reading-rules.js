@@ -10,20 +10,21 @@
 // janus" and khora is the empty receptacle — it receives all, codifies none.
 // Every consumer of a reading-rule number reads it from here; a number that
 // a caller still hardcodes in khora code is a form the receptacle accreted.
-import fs from "node:fs";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+// The rules arrive through the one prior door (the-fold/prior-source.mjs, 2026-10-24): the janus home under Node, the page's
+// fetched copy in a browser, so this file loads in both and no surface keeps a shim of it.
+import { IS_NODE, PRIORS_HOME, priorJson } from "../the-fold/prior-source.mjs";
+const fs = IS_NODE ? (await import("node:fs")).default : null;
 
-const HERE = path.dirname(fileURLToPath(import.meta.url));
-// native/kernel → up three = the three-repo root; the rules live beside every
-// other prior at <root>/janus/priors (priors-have-one-home-janus).
-export const READING_RULES_FILE =
-  process.env.ER7_READING_RULES_FILE ?? path.join(HERE, "..", "..", "..", "janus", "priors", "reading-rules.json");
+const NAME = "reading-rules.json";
+const env = () => (IS_NODE ? process.env.ER7_READING_RULES_FILE : undefined);
+// rules live beside every other prior at <root>/janus/priors (priors-have-one-home-janus)
+const HOME_FILE = PRIORS_HOME.dir ? `${PRIORS_HOME.dir}/${NAME}` : new URL(NAME, PRIORS_HOME.base).href;
+export const READING_RULES_FILE = env() ?? HOME_FILE;
 
 // The live resolver: an operator's ER7_READING_RULES_FILE override wins per
 // CALL, so a test (or a bare deployment) can repoint without re-import. The
-// default is the resolved janus path computed above.
-export const resolveReadingRulesFile = () => process.env.ER7_READING_RULES_FILE ?? READING_RULES_FILE;
+// default is the home the prior door reads.
+export const resolveReadingRulesFile = () => env() ?? READING_RULES_FILE;
 
 let _cache = null;
 
@@ -36,7 +37,8 @@ export function loadReadingRules() {
   const source = resolveReadingRulesFile();
   let rules = null, gap = null;
   try {
-    const d = JSON.parse(fs.readFileSync(source, "utf8"));
+    const d = source !== HOME_FILE && fs ? JSON.parse(fs.readFileSync(source, "utf8")) : priorJson(NAME);
+    if (d == null) throw new Error("absent");
     rules = Object.freeze(d?.rules ?? null);
     if (!rules || rules.surprise === undefined) gap = { refused: "no_reading_rule", detail: `reading rules at ${source} carry no rule object` };
   } catch {

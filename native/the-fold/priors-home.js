@@ -11,11 +11,11 @@
 // `..`-tripping from native/the-fold lands on the workspace root, then
 // janus/priors. Data-gated still: an absent file leaves the leg null, never a
 // guessed table. A missing home makes every language a typed gap, not English.
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+// The directory is resolved by prior-source.mjs, the one door every reading module reads a prior through (2026-10-24): under Node it
+// is this path; in a page there is no directory (null) and the door fetches the vendored copy instead.
+import { PRIORS_HOME } from "./prior-source.mjs";
 
-const HERE = path.dirname(fileURLToPath(import.meta.url));
-export const WORKSPACE_ROOT = path.join(HERE, "..", "..", "..");
-export const JANUS_DIR = path.join(WORKSPACE_ROOT, "janus");
-export const PRIORS_DIR = path.join(JANUS_DIR, "priors");
+export const WORKSPACE_ROOT = PRIORS_HOME.root;
+export const JANUS_DIR = PRIORS_HOME.janus;
+export const PRIORS_DIR = PRIORS_HOME.dir;
 export default PRIORS_DIR;
