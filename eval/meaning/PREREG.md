@@ -748,3 +748,11 @@ M1 RESULT (code ab1da21b; diagnostic, post hoc on the nine spent sets; eval/mean
     with the same empty page, so they are one document and share one set of anchors (law 6, same bytes, same stage). No binding produced it.
  Folded-string anchors (legacy, marked so): accuracy 55.2%; E 22 of 194; false accepts 4 of 199 (2.0%); C named 2 of 129; false-C 1 of 264
     (0.4%). By language: en 17 of 74 E; es, fr, de, ja 1–2 of 23–24 each; cross-language 0 of 25.
+M2 RESULT (code 95ea7f1a; the gate's first run, the nine spent sets):
+ Binding by resolve: accuracy 54.5%; E 19 of 194; false accepts 4 of 199 (2.0%); C 2 of 129; false-C 0 of 264. Of 1,179 claim ends left unbound,
+    691 are resolve's ask (end_unresolved: torn between page referents that share the end's words) and 488 its gap (no_correspondence).
+ correspond.mjs confirmed 63 lemma pairs in 36 of the 393 pairs, against the source page's graph. resolve without it gives identical verdicts
+    (resolve-only), so its share is nil.
+ Deranged control: E 1 of 194 (heldout 220); false accepts 2 (main 12, cf 105); C 0; false-C 1 (fresh 403).
+ M2 GATE PASS: the deranged control hurts. E accepted falls 19 → 1, and C named 2 → 0 (not more).
+ Folded-string anchors for comparison (unchanged from M1): E 22, false accepts 4, C 2.
