@@ -10,9 +10,11 @@ const HERE = path.dirname(fileURLToPath(import.meta.url)), K = path.join(HERE, "
 const GE = await import(path.join(K, "native/adapters/text/grammar-en.js"));
 const { readAtoms } = await import(path.join(K, "native/organs/read-atoms.js"));
 const { atomSupport } = await import(path.join(K, "native/kernel/atom-support.js"));
+const { checkProof } = await import(path.join(K, "native/kernel/proof-check.js"));
 const { stageFromAtoms, judgeClaim, stageBytes, LICENSES } = await import(path.join(K, "native/kernel/stage.js"));
 const grammar = { rowsOf: GE.rowsOf, claimsOf: (t, rows) => GE.claimsOf(t, rows) };
 const corefModel = JSON.parse(fs.readFileSync(path.join(HERE, "atoms/coref-ranker.json"), "utf8"));
+const SRC = new WeakMap();
 const rank = { E: 2, C: 2, N: 0 };
 
 const pairs = [];
@@ -20,11 +22,15 @@ for (const s of ["fresh", "heldout", "relations", "fresh19", "fresh20"]) {
   const d = JSON.parse(fs.readFileSync(path.join(HERE, `${s}.json`), "utf8"));
   for (const p of d.pairs ?? d) if ((p.lang ?? "en") === "en") {
     const A = readAtoms({ text: p.claim, lang: "en", grammar, corefModel }), B = readAtoms({ text: p.sentence, lang: "en", grammar, corefModel });
-    pairs.push({ ...p, set: s, A, B });
+    SRC.set(B, p.sentence); pairs.push({ ...p, set: s, A, B });
   }
 }
 const rulesOf = (A, B) => atomSupport(A.atoms, B.atoms, { unread: A.unread }).verdict;
-const arm = (A, B, lic) => { const r = rulesOf(A, B); if (r !== "N") return { v: r, proofs: [] }; const st = stageFromAtoms(B.atoms, { doc: "src" }), j = judgeClaim(st, A.atoms, { licenses: lic }); return { v: j.verdict, proofs: j.proofs }; };
+const GIVERS = LICENSES.map((l) => l.giver);
+// commit a contradiction only if the independent checker (proof-check.js, no shared code) accepts every proof behind it
+const arm = (A, B, lic) => { const r = rulesOf(A, B); if (r !== "N") return { v: r, proofs: [] }; const st = stageFromAtoms(B.atoms, { doc: "src" }), j = judgeClaim(st, A.atoms, { licenses: lic });
+  if (j.verdict === "C") { const bad = j.proofs.filter((x) => x.verdict === "contradicted" && !checkProof(x.record, (SRC.get(B) ?? ""), { licenses: GIVERS }).ok); if (bad.length) return { v: "N", proofs: j.proofs, rejected: bad.length }; }
+  return { v: j.verdict, proofs: j.proofs, gaps: j.gaps, stage: st }; };
 
 const all = LICENSES.map((l) => l.id), tally = (f) => { const t = {}; for (const p of pairs) { const k = `${p.label}>${f(p)}`; t[k] = (t[k] ?? 0) + 1; } return t; };
 const C = pairs.filter((p) => p.label === "C"), nonC = pairs.filter((p) => p.label !== "C");
@@ -49,7 +55,17 @@ const h = (s) => crypto.createHash("sha256").update(s).digest("hex").slice(0, 12
 let same = 0; for (const p of pairs) { const b2 = readAtoms({ text: p.sentence, lang: "en", grammar, corefModel }); if (h(stageBytes(stageFromAtoms(p.B.atoms, { doc: "src" }))) === h(stageBytes(stageFromAtoms(b2.atoms, { doc: "src" })))) same++; }
 console.log(`determinism: ${same}/${pairs.length} sources give a byte-identical stage on a second read`);
 
+// the checker: every contradiction proof accepted; and mutants (corrupted proofs) all rejected
+let okN = 0, tot = 0, mutOk = 0, mutTot = 0, undec = 0, refuted = 0;
+for (const p of pairs) { const st = stageFromAtoms(p.B.atoms, { doc: "src" }); refuted += st.licenses.filter((l) => l.standing === "refuted").length;
+  const j = judgeClaim(st, p.A.atoms, {}); if (j.gaps.some((g) => g.kind === "undecided_reading")) undec++;
+  for (const x of j.proofs.filter((y) => y.verdict === "contradicted")) { tot++; if (checkProof(x.record, (SRC.get(p.B) ?? ""), { licenses: GIVERS }).ok) okN++;
+    const R = x.record, muts = [{ ...R, giver: "made up" }, { ...R, held: R.held.map((h) => ({ ...h, span: [h.span[0], h.span[1] + 99999] })) }, { ...R, held: R.held.map((h) => ({ ...h, label: "zzzz" })) }, { ...R, held: R.held.map((h) => ({ ...h, base: R.claim.base ?? h.base, label: R.claim.label })) }];
+    for (const m of muts) { mutTot++; if (!checkProof(m, (SRC.get(p.B) ?? ""), { licenses: GIVERS }).ok) mutOk++; } } }
+console.log(`independent checker: accepts ${okN}/${tot} contradiction proofs; rejects ${mutOk}/${mutTot} corrupted proofs; licenses refuted by their own source: ${refuted}; contradictions withheld for an undecided reading: ${undec}`);
+
 console.log("\nproofs for every contradiction the licenses name:");
 for (const p of pairs) { const r = arm(p.A, p.B, all); if (r.v !== "C" || !r.proofs.length) continue;
   console.log(`\n[${p.set} ${p.id}] labelled ${p.label}${p.type ? ` (${p.type})` : ""}\n  claim : ${p.claim}\n  source: ${p.sentence.slice(0, 150)}`);
   for (const pr of r.proofs.filter((x) => x.verdict === "contradicted")) console.log(`  atom  : ${pr.atom}\n  INS   : ${pr.binds.join("; ")}\n  CON   : ${pr.lic.join("; ")}\n  EVA   : HL read(${pr.atom.split("(")[0]}) = ${pr.verdict}; the source holds ${pr.cites.join(", ")}`); }
+if (process.env.DERANGE) pairs.forEach((p, i) => { const q = pairs[(i + 1) % pairs.length], r = arm(p.A, q.B, all); if (r.v === "C") console.log(`\nDERANGED C: claim "${p.claim}"\n  vs source "${q.sentence.slice(0, 160)}"\n  ${r.proofs.filter((x) => x.verdict === "contradicted").map((x) => x.binds.join("; ")).join(" | ")}`); });

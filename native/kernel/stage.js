@@ -43,10 +43,26 @@ export function stageFromAtoms(atoms, { doc = "doc" } = {}) {
       arrangements.push({ id: `a${i}`, rel: a.pred, s: k, o: h, polarity: a.neg ? "-" : "+", layer: a.hedged ? "reported" : "asserted", span: [a.start, a.end] });
     }
   }
+  // READINGS: a functional arrangement (a measure, a superlative) has one reading, its ends are fixed by what they are. A binary relation
+  // between two referents carries no voice in the atoms, so its end order is a candidate, not a fact: decided only when the language's own
+  // marking decides it, which this slice cannot see. A verdict that rests on an undecided reading is never committed (law: undecided degrades
+  // to unbound).
+  for (const r of arrangements) r.reading = (isHas(r.rel) || isMost(r.rel)) ? { decided: true, by: "functional ends are typed" } : { decided: false, candidates: [[r.s, r.o], [r.o, r.s]], by: null };
   for (const r of arrangements) if (r.layer === "asserted") addEdge(hl, { rel: r.rel, s: r.s, o: r.o, polarity: r.polarity, source: [`${doc}:${r.span[0]}-${r.span[1]}`] });
   const rels = [...new Set(arrangements.map((r) => r.rel))];
   const licenses = [];
-  for (const rel of rels) for (const L of LICENSES) if (L.on === "has_*" ? isHas(rel) : isMost(rel)) { declareFunctional(hl, rel, { giver: L.giver }); licenses.push({ id: L.id, rel, giver: L.giver, standing: "given" }); }
+  for (const rel of rels) for (const L of LICENSES) if (L.on === "has_*" ? isHas(rel) : isMost(rel)) {
+    // REFUTATION PATH: a license is a claim about the world and the source can refute it. If the source itself holds two different values for one
+    // key (one subject, one relation, asserted positively), the license is refuted for this reading and nothing is judged under it.
+    // the key of a measure license is (being, what is measured): a figure whose attribute the reading did not name ("has_count", "has_value") has
+    // no key, so the license does not apply to it (a "$50 million milestone" is not the "total of $216 million")
+    if (L.id === "measure" && /^has_(count|value)$/.test(rel)) { licenses.push({ id: L.id, rel, giver: L.giver, standing: "unkeyed" }); gaps.push({ kind: "unkeyed_measure", rel }); continue; }
+    const held = arrangements.filter((r) => r.rel === rel && r.layer === "asserted" && r.polarity === "+"), bySubj = new Map();
+    for (const r of held) { const k = r.s; (bySubj.get(k) ?? bySubj.set(k, []).get(k)).push(r); }
+    const broken = [...bySubj.entries()].filter(([, rs]) => new Set(rs.map((r) => r.o)).size > 1);
+    if (broken.length) { licenses.push({ id: L.id, rel, giver: L.giver, standing: "refuted", by: broken.map(([k, rs]) => ({ subject: k, values: rs.map((r) => ({ o: r.o, span: r.span })) })) }); gaps.push({ kind: "license_refuted", license: L.id, rel }); continue; }
+    declareFunctional(hl, rel, { giver: L.giver }); licenses.push({ id: L.id, rel, giver: L.giver, standing: "given" });
+  }
   return { schema: STAGE_SCHEMA, doc, anchors: [...anchors.values()], arrangements, licenses, gaps, hl, _anchors: anchors, _M: M, _C: C };
 }
 
@@ -66,13 +82,13 @@ export function judgeClaim(stage, claimAtoms, { licenses = LICENSES.map((l) => l
   const on = new Set(licenses);
   // a stage restricted to the licenses switched on (ablation): declarations are rebuilt, edges are shared
   const hl = createStage(); hl.anchors = new Set(stage.hl.anchors); hl.types = new Map(stage.hl.types); hl.edges = new Map(stage.hl.edges);
-  for (const L of stage.licenses) if (on.has(L.id)) declareFunctional(hl, L.rel, { giver: L.giver });
+  for (const L of stage.licenses) if (on.has(L.id) && L.standing === "given") declareFunctional(hl, L.rel, { giver: L.giver });
   let verdict = UNBOUND;
   for (const [i, a] of C.entries()) {
     const as = a.args ?? [];
-    let rel = a.pred, s, o, binds = [];
+    let rel = a.pred, s, o, binds = [], bs = null, bk = null;
     if (isHas(rel) && as.length === 2 && FIG(as[1]) && !a.neg && !a.hedged) {
-      const bs = bindEnd(stage, as[0], "referent"); if (!bs) continue;
+      bs = bindEnd(stage, as[0], "referent"); if (!bs) continue;
       binds.push(`${argText(as[0])} ${bs.how}`);
       const bq = bindEnd(stage, as[1], "quantity");
       let qid; if (bq) { qid = bq.id; binds.push(`${argText(as[1])} ${bq.how}`); }
@@ -80,7 +96,7 @@ export function judgeClaim(stage, claimAtoms, { licenses = LICENSES.map((l) => l
       s = bs.id; o = qid;
     } else if (isMost(rel) && as.length === 1 && !a.neg && !a.hedged) {
       const K = kindOf(C, as[0], CM); if (!K) continue;
-      const bk = bindEnd(stage, K, "kind"); if (!bk) continue;
+      bk = bindEnd(stage, K, "kind"); if (!bk) continue;
       binds.push(`kind ${argText(K)} ${bk.how}`);
       const bh = bindEnd(stage, as[0], "referent");
       let hid; if (bh) { hid = bh.id; binds.push(`${argText(as[0])} ${bh.how}`); }
@@ -89,9 +105,20 @@ export function judgeClaim(stage, claimAtoms, { licenses = LICENSES.map((l) => l
     } else continue;
     if (!hl.functional.has(rel)) continue;                                   // no license, nothing to read
     const v = read(hl, ["atom", rel, s, o]);
-    const cites = [...hl.edges.values()].filter((e) => e.rel === rel && e.s === s && e.o !== o).map((e) => e.source).flat();
-    proofs.push({ atom: a.text, binds, lic: [...hl.functional.entries()].filter(([r]) => r === rel).map(([r, d]) => `functional(${r}) giver "${d.giver}"`), verdict: v, cites });
+    const heldE = [...hl.edges.values()].filter((e) => e.rel === rel && e.s === s && e.o !== o);
+    const cites = heldE.map((e) => e.source).flat();
+    const lab = (id) => stage._anchors.get(id)?.label ?? null, fg = (id) => stage._anchors.get(id)?.figure ?? null;
+    const claimEnd = isHas(rel) ? { label: argText(as[1]), measure: as[1].measure, base: as[1].base } : { label: argText(as[0]) };
+    proofs.push({ atom: a.text, rel, binds, lic: [...hl.functional.entries()].filter(([r]) => r === rel).map(([r, d]) => `functional(${r}) giver "${d.giver}"`), verdict: v, cites,
+      record: { rel, subject: lab(s) ?? lab(bs?.id ?? bk?.id), giver: hl.functional.get(rel)?.giver ?? null, claim: claimEnd,
+        held: heldE.map((e) => ({ span: String(e.source[0]).replace(/^[^:]*:/, "").split("-").map(Number), label: lab(e.o), measure: fg(e.o)?.measure ?? null, base: fg(e.o)?.base ?? null })) } });
     if (v === CONTRADICTED) verdict = CONTRADICTED; else if (v === BOUND && verdict !== CONTRADICTED) verdict = BOUND;
+  }
+  // a contradiction is committed only if every source arrangement it cites has a decided reading
+  if (verdict === CONTRADICTED) {
+    const spans = new Set(proofs.flatMap((p) => p.cites));
+    const undecided = stage.arrangements.filter((r) => spans.has(`${stage.doc}:${r.span[0]}-${r.span[1]}`) && !r.reading?.decided);
+    if (undecided.length) { gaps.push({ kind: "undecided_reading", arrangements: undecided.map((r) => r.id) }); return { verdict: "N", hl: UNBOUND, proofs, gaps }; }
   }
   return { verdict: verdict === CONTRADICTED ? "C" : "N", hl: verdict, proofs, gaps };
 }
