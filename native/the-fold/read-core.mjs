@@ -140,6 +140,16 @@ export async function consultAliases(text, lexicon, { priors = null } = {}) {
   if (!junctions.size) return { aliases: [], rows: [], giver: lexicon.giver ?? null, gap: null };
   await lexicon.want(junctions.keys());
   const rows = resolveAliases(lexicon, junctions, text);
+  // the treebank's own evidence, the rule janus's dotted prior is built by (scripts/build-dotted-priors.mjs): a giver lists "ports."
+  // (portraits) and "Apr." beside the words "ports" and "APR", and a text that writes the word only at a stop cannot refuse them by
+  // its own use. A single-dot form whose base the class prior attests as a word is kept only where the class prior also attests the
+  // dotted token ("Inc.", "Dr.", "etc."). With no class prior the rule cannot be read, and the text's own use decides alone.
+  const attested = (f) => Object.values(priors?.posPrior?.forms?.[String(f).toLowerCase()] ?? {}).some((n) => n > 0);
+  if (priors?.posPrior?.forms) for (const r of rows) {
+    if (!r.kept || r.form.split(".").length !== 2) continue;
+    const base = r.form.slice(0, -1);
+    if (attested(base) && !attested(r.form)) Object.assign(r, { kept: false, why: `the treebank writes “${base}” as a word and never “${r.form}”` });
+  }
   const last = lexicon.log?.[lexicon.log.length - 1];
   return { aliases: rows.filter((r) => r.kept).map((r) => r.form), rows, giver: lexicon.giver ?? null, gap: last?.gap ?? null };
 }
