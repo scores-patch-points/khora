@@ -14,9 +14,9 @@
 //
 // Returns pos-* STEM codes (ISO 639-3: `cmn`, `spa`, `rus`, ...) so callers pass them straight to
 // grammarFor(). DECLARED thresholds as the fold (q = round(-ln p * 10); ALPHA/RHO/KW/K2/K3/FW).
-import fs from "node:fs";
-import path from "node:path";
 import { PRIORS_DIR } from "./priors-home.js";
+import { IS_NODE, priorJson, priorNames } from "./prior-source.mjs";
+const fs = IS_NODE ? (await import("node:fs")).default : null;
 
 // The one home for the priors (janus), resolved by priors-home.js. Re-exported
 // so callers that import PRIORS_DIR from this module keep working.
@@ -51,6 +51,7 @@ const KW = 500, K2 = 300, K3 = 900, FW = 120, RHO = 0.25, ALPHA = 0.5;
 // directory", so publishing more priors to janus changed this detector's answers without any change here: 177 new files turned the rus and
 // deu detections into nulls (near-ties) and broke khora main's CI (2026-10-14). A stem enters the set deliberately, with the falsification
 // re-run. No pin file = the old behaviour (every prior on disk).
+// In a page the candidate set is the stems the page preloaded (no pin is read there).
 const PIN = (() => { try { const j = JSON.parse(fs.readFileSync(new URL("./langid-stems.json", import.meta.url), "utf8")); return Array.isArray(j.stems) ? new Set(j.stems) : null; } catch { return null; } })();
 export const PINNED_STEMS = PIN ? [...PIN].sort() : null;
 
@@ -59,7 +60,8 @@ export const PINNED_STEMS = PIN ? [...PIN].sort() : null;
  *  missing home is no stems. `dir` and `pin` are injectable for the tests. */
 export function availableStems({ dir = PRIORS_DIR, pin = PIN } = {}) {
   try {
-    const all = fs.readdirSync(dir).filter((f) => /^pos-[a-z-]+\.json$/.test(f) && !/unimorph|^pos-prior-|^pos-en\.json$|-lexicon\.json$/.test(f)).map((f) => f.slice(4, -5)).sort();
+    const names = dir && dir !== PRIORS_DIR ? fs.readdirSync(dir) : priorNames();
+    const all = names.filter((f) => /^pos-[a-z-]+\.json$/.test(f) && !/unimorph|^pos-prior-|^pos-en\.json$|-lexicon\.json$/.test(f)).map((f) => f.slice(4, -5)).sort();
     return pin ? all.filter((s) => pin.has(s)) : all;
   } catch { return []; }
 }
@@ -100,8 +102,7 @@ function buildModel(cnt, script) {
 const models = new Map();
 function model(stem) {
   if (models.has(stem)) return models.get(stem);
-  const file = path.join(PRIORS_DIR, `pos-${stem}.json`);
-  let prior = null; try { prior = JSON.parse(fs.readFileSync(file, "utf8")); } catch { models.set(stem, null); return null; }
+  const prior = priorJson(`pos-${stem}.json`); if (!prior) { models.set(stem, null); return null; }
   const m = buildModel(countsOf(prior), scriptOfStem(stem, prior));
   models.set(stem, m); return m;
 }
@@ -124,12 +125,8 @@ const COMBINING_GREEK = /[\u0313\u0314\u0342\u0345]/u;
 const formCache = new Map();
 function wordset(stem) {
   if (formCache.has(stem)) return formCache.get(stem);
-  const file = path.join(PRIORS_DIR, `pos-${stem}.json`);
-  let set = null;
-  try {
-    const prior = JSON.parse(fs.readFileSync(file, "utf8"));
-    set = new Set(Object.keys(prior.forms || {}).map((f) => f.normalize("NFC").toLowerCase()));
-  } catch { set = null; }
+  const prior = priorJson(`pos-${stem}.json`);
+  const set = prior ? new Set(Object.keys(prior.forms || {}).map((f) => f.normalize("NFC").toLowerCase())) : null;
   formCache.set(stem, set); return set;
 }
 /** ancientGreekOf(text, stems) → "grc" | "ell" — the measured register choice. */

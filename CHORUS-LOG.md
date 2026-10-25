@@ -1213,3 +1213,16 @@ fast: 3 files · register 14/14, eot 31/31 pass · law: WARN pre-existing duplic
 | Simon/Chekhov | — | opencode-doorway.mjs:onRegister, onContext | fixed | the new module is imported by the door, routed in the handshake, exercised by 14 tests and a live smoke on a scratch port (F5 answered, update supersedes, false premise flagged) |
 | Kondo | — | foldcode-poc/mech/index.mjs | noted | the poc copy is now a duplicate; its header names the door module as home and keeps the poc harness working |
 clean: Diaconis, Pearl, Alexander, Ostrom, Frankfurt, Marshall (no law edited or cited)
+
+## 2026-10-24 — one reader core: read-core.mjs + the prior door, the hyperlexicon's aliases at the cut, the reader's own cast/sentences/pronouns on the entry (reading-pipeline, staged)
+fast: 18 files · 86 affected tests, 85 pass, 1 skipped · law: WARN pre-existing duplicate S17 S96 in READING-SPEC.md (not this diff) · the pre-existing greek-production FAIL (a stale /Users/mlacy/Documents/3.0 path) fixed here
+| lens | citation | file:line | verdict | one line |
+| Feynman | — | native/tests/reading-pipeline.test.js:43 | noted | `a.prior >= 10` asserts the measured list arrived (15 today), not a tuned value |
+| Dijkstra | — | native/the-fold/read-core.mjs (variants) | noted | case variants of abbreviation tokens are for cased scripts; locale-free toUpperCase (Turkish i) is a known limit |
+| Greenberg | — | native/the-fold/read-core.mjs (cast) | fixed (disclosed) | the being/heard split is the capital tier's — scope written in the code and the doc; English closed classes reach only an English read; an undeclared language is heard, else English with a `language_default` gap |
+| Holmes | — | native/the-fold/read-core.mjs (cast) | noted | identity is the reader's own index (the ids its edges resolved against); no merge rule changed |
+| Alexander | — | native/the-fold/read-core.mjs (sameAct) | clean | a surface's sameAct returning false is respected; null defers to the lemmatizer |
+| Simon/Chekhov | — | new modules | fixed | prior-source, read-core, lexicon, reading.js and wiktionary-pack are all imported by tests/reading-pipeline.test.js |
+| Kondo | — | native/the-fold/read-process.mjs | clean | the second-cast code was removed, not left beside the new path; reader-bundle keeps its exports for its callers |
+clean: Frankfurt
+compat: reader-bundle.js::engineRelationsFor byte-identical to main 49df4a51 on 16 of 16 texts; npm test 195 pass / 6 fail on both main and the branch (the same six)

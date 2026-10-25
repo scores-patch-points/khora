@@ -9,9 +9,9 @@
 // is a typed gap `{ language: null, gap }`, never a fall-back to another
 // language's grammar (the Greenberg rule).
 //
-// Which languages exist is read FROM DISK (`<workspace root>/janus/priors/
-// pos-<iso3>.json` — the ONE home for the priors; khora reads it as data,
-// never a module import), not from a list in this file; the only declared
+// Which languages exist is read from the priors home (`<workspace root>/janus/priors/
+// pos-<iso3>.json` — the ONE home for the priors; khora reads it as data through
+// prior-source.mjs, never a module import), not from a list in this file; the only declared
 // fact here is the mapping between the names a caller may use (BCP-47, ISO
 // 639-1/3) and the file stem.
 //
@@ -22,13 +22,12 @@
 // little the input shows. A text no candidate attests above `minCoverage`
 // is reported as undetected.
 //
-// Node only (reads the priors directory).
-import fs from "node:fs";
-import path from "node:path";
+// Isomorphic: every prior arrives through prior-source.mjs (the priors directory under Node, the page's preloaded copy in a browser).
 import { makeSegmenter } from "../adapters/text/script-segment.js";
 import { makeEar } from "../adapters/text/ear.js";
 import { identifyLanguage } from "./langid.mjs";
 import { PRIORS_DIR } from "./priors-home.js";
+import { priorJson, priorNames } from "./prior-source.mjs";
 
 // The one home for the priors (janus), resolved by priors-home.js. Re-exported
 // so the eval/organ callers that import PRIORS_DIR from this module keep working.
@@ -49,19 +48,24 @@ const STEM = Object.freeze({
 // a giant group of near cousins steals the text (Galician vs Spanish, etc.). English IS detected (the reader reads
 // it; "pos-en.json absent" would be a stale claim) — the exclusion was a grammar-selection rule, not detection.
 export const DETECT_STEMS = [...new Set(Object.values(STEM))];
+/** A stem (or any name stemOf reads) → its two-letter ISO 639-1 code where one is declared above, else null. The code a giver
+ *  files entries under (Wiktionary's `en`, `es`). */
+export function iso1Of(name) {
+  const stem = stemOf(name); if (!stem) return null;
+  return Object.entries(STEM).find(([k, v]) => v === stem && k.length === 2)?.[0] ?? null;
+}
 // script tags for the variants that differ by script
 const VARIANT = Object.freeze({ "zh-hans": "cmn-hans", "zh-cn": "cmn-hans", "zh-sg": "cmn-hans", "zh-hant": "cmn", "zh-tw": "cmn", "zh-hk": "cmn" });
 
-const read = (f) => { const p = path.join(PRIORS_DIR, f); return fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, "utf8")) : null; };
-const cache = new Map();
-const cached = (f) => { if (!cache.has(f)) cache.set(f, read(f)); return cache.get(f); };
+const read = (f) => priorJson(f);
+const cached = read; // the door caches, and forgets when a page replaces its source
 
 /** The prior stems present on disk. A missing home is no stems (every language
  *  then a typed gap), never a throw. Non-language priors (unimorph-derived,
  *  `pos-prior-*` backoffs, the legacy `pos-en`, a word-class list like `pos-eng-lexicon`) are not language stems. */
 export const availableStems = () => {
   try {
-    return fs.readdirSync(PRIORS_DIR).filter((f) => /^pos-[a-z-]+\.json$/.test(f) && !/unimorph|^pos-prior-|^pos-en\.json$|-lexicon\.json$/.test(f)).map((f) => f.slice(4, -5)).sort();
+    return priorNames().filter((f) => /^pos-[a-z-]+\.json$/.test(f) && !/unimorph|^pos-prior-|^pos-en\.json$|-lexicon\.json$/.test(f)).map((f) => f.slice(4, -5)).sort();
   } catch { return []; }
 };
 

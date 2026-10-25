@@ -11,189 +11,43 @@
 // committed fixtures (unimorph-morphology-prior.json), read once and
 // cached — the same data-gated posture app.js uses (exact match until the
 // prior resolves; byte-identical to a bare reader when a file is missing).
-import fs from "node:fs";
+//
+// ONE CORE (2026-10-24): the assembly itself now lives in read-core.mjs, which every surface (this Node loader, the Holodeck's page,
+// the canonical read) shares; this file keeps its exports and its byte-identical English reader for the callers that build on it
+// (swarm-server, proxy-runner, cli/reason, the claim-frame tests). What it still adds: the English priors read once, the fold's
+// UniMorph fixture beside them, and the English closed classes for every language it is asked in, exactly as before.
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { makeRelationReader } from "../organs/hypergraph.js";
-import { chunkSource, tokenize, blankLabelRows } from "../organs/source.js";
-import { splitSentences } from "../adapters/text/spans.js";
-import { GRAMMAR_MIN_SHARE } from "../adapters/text/grain-typing.js";
-import { discoverReferents, namesCorefer, diaNorm } from "../adapters/text/surfaces.js";
-import { extractSurfacesHeard as extractSurfaces, languageContextFor } from "./language-context.js";
-import { withEar } from "../adapters/text/active-ear.js";
-import { resolvePronouns } from "../adapters/text/pronouns.js";
-import { relationExtractorsFor } from "../adapters/text/relations-language.js";
-import { classifyWord, dominantClass } from "../adapters/text/wordclass.js";
-import { createLemmatizer, morphologyFromPrior } from "../adapters/text/morphology.js";
-import * as P from "../adapters/text/priors.js";
+import { buildPriors, makeReader, relationsFor, closedClassesFor } from "./read-core.mjs";
+import { priorJson, readJsonAt } from "./prior-source.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-// ONE HOME FOR THE PRIORS — janus (2026-10-08): the rules of reading are Relate's,
-// so every prior (pos · frame · role-config · morph-cues · morphology · case-marking ·
-// code · notation · lang · …) lives at <root>/janus/priors, and khora READS them from
-// there as DATA (a path, never a module import — janus imports khora, one-way, so a
-// module cycle is impossible). Data-gated still: an absent file leaves the reader bare
-// (exact-match only), byte-identical to before. `../..`-tripping from this file's dir
-// (native/the-fold) lands on the three-repo root: khora/../.. .. = the workspace root.
-const PRIORS = path.join(HERE, "..", "..", "..", "janus", "priors");
 
-function readJson(file, fallback = null) {
-  try {
-    return JSON.parse(fs.readFileSync(file, "utf8"));
-  } catch {
-    return fallback;
-  }
-}
-
-// The received closed classes (lang/en) — the same ones app.js injects.
-const DETERMINERS = new Set([...P.DEFINITE_DETERMINERS, ...P.INDEFINITE_DETERMINERS]);
-const NEGATION_WORDS = P.NEGATION_WORDS;
-const FIRST_PERSON = P.FIRST_PERSON;
-
-// Received priors, loaded once, never re-read per turn. `posPrior` gates
-// the relation vocabulary at the TYPE level; `morph`/`verbForms` widen
-// verb identity to the same act (took→take). Both are data-gated: absent
-// files leave the reader bare (exact-match only), byte-identical to the
-// fold's own behavior before its fetches resolve.
+// Received priors, loaded once, never re-read per turn — through the one prior door (prior-source.mjs: janus/priors). `posPrior`
+// gates the relation vocabulary at the TYPE level; `morph`/`verbForms` widen verb identity to the same act (took→take). Data-gated:
+// absent files leave the reader bare (exact-match only).
 let _cache = null;
 function loadPriors() {
   if (_cache) return _cache;
-  const posPrior = readJson(path.join(PRIORS, "pos-eng.json"), null);
-  // The received class lexicon (POSLexicon@1: UniMorph N/V + the declared legal-register closed class)
-  // rides on the prior; classifyWord consults it only where the treebank has no entry. Data-gated:
-  // absent, the prior is byte-identical to before.
-  const posLexicon = readJson(path.join(PRIORS, "pos-eng-lexicon.json"), null);
-  if (posPrior && posLexicon) posPrior.lexicon = posLexicon;
-  const morphRaw = readJson(path.join(PRIORS, "morphology-eng.json"), null);
-  const unimorphRaw = readJson(path.join(HERE, "..", "eval", "the-fold", "fixtures", "unimorph-morphology-prior.json"), null);
-  const morph = morphRaw ? morphologyFromPrior(morphRaw) : null;
-  const unimorph = unimorphRaw ? morphologyFromPrior(unimorphRaw) : null;
-  const prior = morph ?? unimorph;
-  const forms = new Set();
-  for (const source of [morph?.forms, unimorph?.forms]) {
-    for (const k of Object.keys(source ?? {})) {
-      forms.add(String(k).toLowerCase());
-      const v = source[k];
-      for (const x of Array.isArray(v) ? v : [v]) if (typeof x === "string") forms.add(x.toLowerCase());
-    }
-  }
-  // THE POS ATTESTATION (2026-09-29, the podcast binding): the morphology
-  // prior is an inflection subset (5531 forms) that omits the common verbs
-  // of ordinary prose — "uses", "implements", "is" are absent, so the
-  // answer's own claims could never join the vocabulary and every answer
-  // read ZERO claims (measured live: "The cat sat on the mat." → verbs 0,
-  // even the essay path's own sentences). The POS prior (UD-derived,
-  // pos-eng.json) attests these — "uses": {VERB:5}, "is": {AUX:2114} — so
-  // its verb-dominant forms (VERB|AUX at the same GRAMMAR_MIN_SHARE floor
-  // the vocabulary gate uses) join the attested set. A first-arrival verb
-  // in real prose is heard; a noun-only form is not.
-  if (posPrior?.forms) {
-    for (const [w, counts] of Object.entries(posPrior.forms)) {
-      const total = Object.values(counts).reduce((a, b) => a + b, 0);
-      if (total > 0 && ((counts.VERB ?? 0) + (counts.AUX ?? 0)) / total >= GRAMMAR_MIN_SHARE) forms.add(w.toLowerCase());
-    }
-  }
-  const lemmatizer = prior ? createLemmatizer(prior.forms, { language: prior.language }) : null;
-  _cache = { posPrior, verbForms: forms.size ? forms : null, lemmatizer };
+  _cache = buildPriors({
+    stem: "eng",
+    pos: priorJson("pos-eng.json"),
+    // the received class lexicon (POSLexicon@1); classifyWord consults it only where the treebank has no entry
+    posLexicon: priorJson("pos-eng-lexicon.json"),
+    morphology: priorJson("morphology-eng.json"),
+    unimorph: readJsonAt(path.join(HERE, "..", "eval", "the-fold", "fixtures"), "unimorph-morphology-prior.json"),
+  });
   return _cache;
 }
 
-// THE LANGUAGE DISPATCH (2026-09-23): this bundle's own header says it
-// exists so there is "exactly one implementation of the material's own
-// edges" once the proxy turn reads from it — but it had been left on the
-// older adapters/text/relations.js import while the-fold's own app.js
-// (RELATION_READER_OPTIONS, app.js:988) had already migrated to this
-// dispatch. Confirmed drift, found and reproduced live by a peer session's
-// pipeline audit (native/eval/lens-direction.mjs) and independently
-// verified here against both repos' real committed source. GFP mode, not
-// SVO: mirrors app.js's own dispatchExtractors exactly, including its
-// `roleConfig: null` — app.js's own SVO_DECLARED constant is hardcoded
-// false there because a direct, disclosed measurement (2026-09-20) found
-// the English positional/SVO reader failing on real prose ("Ulysses S.
-// Grant was born in Point Pleasant, Ohio, in 1822" → zero edges); a role
-// grammar is earned, never implied, and it has not been earned yet.
-// Per-LANGUAGE, not English-locked (2026-10-08): `language` reaches
-// relationExtractorsFor, which carries the case-marked language leg for
-// grc/sa/la — so Homer in Greek reads through the Greek reader, not the
-// English one (an English dispatch admitted 0 Greek verbs and emitted
-// garbage labels). Cached per language; "eng" is byte-identical to before.
-const _dispatches = new Map();
-function dispatchExtractors(language = "eng") {
-  if (!_dispatches.has(language)) _dispatches.set(language, relationExtractorsFor({ language, roleConfig: null, posPrior: null, classifyWord, dominantClass }));
-  return _dispatches.get(language);
-}
-
-/** The engine's own relation reader — `reader(list)` → the reader `read(answer)` returns per-sentence claims with verdicts and addresses. */
+/** The engine's own relation reader — `reader(list)` → the reader `read(answer)` returns per-sentence claims with verdicts and
+ *  addresses. `extra.language` picks the GFP dispatch (grc/sa/la read through the case-marked leg); the English priors and closed
+ *  classes stand for every language here, as they always have — read-core.mjs::readWith is the per-language read. `extra.priors`
+ *  and `extra.abbreviations` are passed to the core; every other key reaches makeRelationReader. */
 export function makeEngineRelationReader(extra = {}) {
-  const { posPrior, verbForms, lemmatizer } = loadPriors();
-  const lang = extra.language ?? "eng";
-  return makeRelationReader({
-    splitSentences,
-    extractSurfaces,
-    discoverReferents,
-    namesCorefer,
-    diaNorm,
-    // Read at CALL time, not bound at construction (app.js's own comment,
-    // reused verbatim): a reader built once picks up any later dispatch
-    // change with no re-construction. `extractorsMode: "dispatch"` tells
-    // hypergraph.js's own vocabulary gate that these extractors are
-    // self-gating BY DESIGN (GFP's own discoverRelationVocab, unlike the
-    // old relations.js, is not meant to pre-populate a verb set) — without
-    // it, an empty vocabulary would silence every edge.
-    discoverRelationVocab: (...a) => dispatchExtractors(lang).discoverRelationVocab(...a),
-    // clauseAware (2026-09-23): GFP mode's extractGfpRelations gains a real
-    // clause-boundary gate (adapters/text/clause-spans.js) as of this
-    // wiring, replacing the flat MAX_ADJACENCY byte-window as the primary
-    // adjacency bound. On by default here — measured live against a real
-    // Wikipedia fixture (Marie Curie): 195 -> 150 arrangements, a strict
-    // subset (0 edges added), the 45 dropped all confirmed cross-clause/
-    // cross-sentence garbage a byte count alone could not see. Only
-    // meaningful in "gfp" mode; the disabled positional/SVO path ignores an
-    // unknown option key, so this is skipped there rather than passed
-    // uselessly.
-    extractRelations: (text, opts = {}) => {
-      const d = dispatchExtractors(lang);
-      return d.extractRelations(text, d.mode === "gfp" ? { ...opts, clauseAware: true } : opts);
-    },
-    extractorsMode: "dispatch",
-    tokenize,
-    // TYPE-level vocabulary gate (the fold's own measured decision: junk
-    // connectors 18 → 0 with the prior in place).
-    posPriorFor: () => posPrior,
-    verbForms,
-    oovLexicon: verbForms,
-    // S50 (2026-09-02): a form the received POS prior already attests as
-    // verb-dominant joins the vocabulary on its FIRST arrival rather than
-    // waiting on the ordinary recurrence floor — closes a measured short-
-    // material starvation (a one-page face's own content verbs each arrive
-    // once and, gated, fold every edge to "subject were rest-of-sentence").
-    // eval/the-fold's own research scripts (ranke-backwards.mjs,
-    // model-swap-diff.mjs, mvp-acceptance.mjs) already set this; this
-    // bundle — the one production path cli/reason.mjs actually calls for
-    // arbitrary text — had not, until now. Needs nothing beyond verbForms/
-    // posPriorFor, already built above.
-    attestedVerbs: true,
-    determiners: DETERMINERS,
-    // queryReferents' verb-label fold reads a narrower organ than the
-    // combined DETERMINERS above (2026-09-23, adversarial falsification):
-    // definite article only, never indefinite — folding "a" with "the"
-    // wrongly clustered a non-unique claim with a unique one. See
-    // hypergraph.js's own `foldLabel` comment for the specimen.
-    definiteDeterminers: new Set(P.DEFINITE_DETERMINERS),
-    negationWords: NEGATION_WORDS,
-    firstPerson: FIRST_PERSON,
-    // Received morphology prior — "underwent" answers material that only
-    // wrote "undergoes" as the same claim, never a second mechanism.
-    ...(lemmatizer ? { createLemmatizer: () => ({ sameAct: (a, b) => lemmatizer.sameAct(a, b) }), morphologyIndex: {} } : {}),
-    // Wikipedia infobox furniture — never read as prose by the clause
-    // extractor (the same declared numbers app.js uses).
-    blankFurniture: (text) => blankLabelRows(text, { minRun: 4, maxCell: 60 }),
-    resolvePronouns,
-    nounPhraseSubjects: true,
-    phrasalPredicates: true,
-    ...extra,
-  });
+  const { language = "eng", priors = null, abbreviations = null, ...rest } = extra;
+  return makeReader({ priors: priors ?? loadPriors(), language, abbreviations, closedClasses: closedClassesFor("eng"), ...rest });
 }
 
 /** The same cached posPrior loadPriors() builds -- exported so other modules
@@ -203,24 +57,8 @@ export function getPosPrior() {
   return loadPriors().posPrior;
 }
 
-/** A fresh reader over a list of passages (chunk-shaped or surfaced segments). */
+/** A fresh reader over a list of passages (chunk-shaped or surfaced segments), read whole through the material's own ear (the
+ *  declared language, else the one its words attest; English and undetected material read through no ear). */
 export function engineRelationsFor(list, extra = {}) {
-  const reader = makeEngineRelationReader(extra);
-  const passages = (list ?? []).map((p) => {
-    if (p && typeof p === "object" && p.text && (p.ref ?? p._ledger?.source)) {
-      return { ref: String(p.ref ?? p._ledger.source), text: p.text };
-    }
-    if (typeof p === "string") return { ref: "surf", text: p };
-    return p;
-  });
-  const joined = passages.map((p) => p.text).join("\n\n");
-  // THE LANGUAGE LEG: the material's own language (declared by the caller, else
-  // the one its words attest) supplies the ear the shared tokenizers hear
-  // through — word boundaries for Chinese, bound proclitics for Arabic — for
-  // the span of this synchronous read. English and undetected material read
-  // through no ear: byte-identical to before.
-  const ctx = languageContextFor(joined, { language: extra.language ?? null });
-  return withEar(ctx.ear, () => reader(chunkSource("material", joined, {})));
+  return relationsFor(list, { reader: makeEngineRelationReader(extra), language: extra.language ?? null }).report;
 }
-
-export { chunkSource };

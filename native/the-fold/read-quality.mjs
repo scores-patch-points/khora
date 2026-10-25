@@ -19,33 +19,30 @@
 // the reader said), never a default. The model's own scope is its limit: the English model's carrier classes are
 // CCONJ/INTJ/PART ("not", "n't", "no"), so "never", "nobody" and "none" are not covered, and `scope` says so.
 
-import fs from "node:fs";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { priorJson, readJsonAt } from "./prior-source.mjs";
 import { predict } from "../adapters/text/morph-cues.js";
 import { loadModel, sentences as splitEn, tokenize as tokenizeEn, analyse } from "../adapters/text/english-parser.js";
 import { clausesOf } from "../adapters/text/nested-clauses.js";
 
-const HERE = path.dirname(fileURLToPath(import.meta.url));
-const PRIORS = path.resolve(HERE, "../../../janus/priors");
 // the corpus's language codes → the file stems the priors are filed under (morph-cues-en, morph-cues-la …)
 const MORPH_STEM = { en: "en", eng: "en", la: "la", lat: "la", grc: "grc", ar: "ar", arb: "ar", he: "he", heb: "he", sa: "sa-vedic", san: "sa-vedic" };
 const POS_STEM = { en: "eng", eng: "eng", la: "lat", lat: "lat", grc: "grc", ar: "arb", arb: "arb", he: "heb", heb: "heb", san: "san", sa: "san" };
 
 const cache = new Map();
-const readJson = (f) => { try { return JSON.parse(fs.readFileSync(f, "utf8")); } catch { return null; } };
+// a prior by name through the one door (prior-source.mjs), or from an explicit directory a test or an eval passes
+const readPrior = (priorsDir, name) => (priorsDir ? readJsonAt(priorsDir, name) : priorJson(name));
 
 /** The polarity lens for a language: { model, pos, scope } or { gap }. Cached. */
-export function polarityLens(language = "en", { priorsDir = PRIORS } = {}) {
+export function polarityLens(language = "en", { priorsDir = null } = {}) {
   const key = `${language}|${priorsDir}`;
   if (cache.has(key)) return cache.get(key);
   const stem = MORPH_STEM[String(language).toLowerCase()];
   let lens;
   if (!stem) lens = { gap: `no learned morph-cue prior filed for ${language}` };
   else {
-    const mc = readJson(path.join(priorsDir, `morph-cues-${stem}.json`));
+    const mc = readPrior(priorsDir, `morph-cues-${stem}.json`);
     const model = mc?.features?.Polarity;
-    const pos = readJson(path.join(priorsDir, `pos-${POS_STEM[String(language).toLowerCase()] ?? stem}.json`));
+    const pos = readPrior(priorsDir, `pos-${POS_STEM[String(language).toLowerCase()] ?? stem}.json`);
     if (!model?.cues) lens = { gap: `morph-cues-${stem} holds no Polarity model` };
     else lens = {
       model, pos, language: stem, giver: mc.provenance?.giver ?? null, license: mc.provenance?.license ?? null,
@@ -128,19 +125,25 @@ export function readGates({ edges = [], cast = [], text = "" } = {}) {
 // 160 hits for a random-parent null (nested-clauses.test.js) — real, and not good enough to call solved.
 let parserModel = null; let parserGap = null;
 function parser() {
-  if (parserModel || parserGap) return parserModel;
-  try { parserModel = loadModel(JSON.parse(fs.readFileSync(path.join(PRIORS, "parser-eng-ewt.json"), "utf8"))); }
+  if (parserModel) return parserModel;
+  const prior = priorJson("parser-eng-ewt.json");
+  if (!prior) { parserGap = "no English dependency parser: parser-eng-ewt.json is not in the priors home"; return null; }
+  try { parserModel = loadModel(prior); }
   catch (e) { parserGap = `no English dependency parser: ${String(e?.message ?? e).slice(0, 80)}`; }
   return parserModel;
 }
 const MAX_SENTENCE_TOKENS = 120;      // the parser is a transition system over a whole sentence; a run-on beyond this is cut, not parsed
 
-/** text → { clauses, sentences, gap }. English only; another language is a typed gap, never an English parse of it. */
-export function nestedClauses(text, language = "en") {
+/** text → { clauses, sentences, gap }. English only; another language is a typed gap, never an English parse of it.
+ *  `sentences` — the reader's own cuts ({ text, offset }, from spans.js::splitSentences with the read's abbreviations). Given,
+ *  the clause tree is parsed inside exactly the sentences the relations were read from, so the two never disagree about where a
+ *  sentence ends ("Messrs." is one word in both); omitted, the parser's own segmentation is used, as before. */
+export function nestedClauses(text, language = "en", { sentences = null } = {}) {
   if (!["en", "eng"].includes(String(language).toLowerCase())) return { clauses: [], sentences: 0, gap: `no dependency parser for ${language}` };
   const model = parser(); if (!model) return { clauses: [], sentences: 0, gap: parserGap };
   const out = []; let nSent = 0, skipped = 0;
-  for (const sent of splitEn(String(text ?? ""))) {
+  const cuts = Array.isArray(sentences) ? sentences.map((x) => ({ text: x.text, start: x.offset ?? x.start ?? 0 })) : splitEn(String(text ?? ""));
+  for (const sent of cuts) {
     const toks = tokenizeEn(sent.text); if (toks.length < 2) continue;
     if (toks.length > MAX_SENTENCE_TOKENS) { skipped += 1; continue; }
     nSent += 1;

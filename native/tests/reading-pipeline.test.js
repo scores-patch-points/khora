@@ -1,0 +1,148 @@
+// reading-pipeline.test.js — THE ONE READER (the-fold/read-core.mjs), read the canonical way: priors through the one door, the
+// hyperlexicon's aliases at the sentence cut, the declared language read with its own priors, and everything the reader saw (its
+// cast with addresses, its sentences, its pronoun bindings) on the entry, never read a second time. Falsifiers sit beside each claim.
+import test from "node:test";
+import assert from "node:assert/strict";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+import { readWith, makeReader, priorsFor, abbreviationsFor, consultAliases } from "../the-fold/read-core.mjs";
+import { priorJson, setPriorSource, priorNames } from "../the-fold/prior-source.mjs";
+import { readCanonical } from "../the-fold/read-door-canonical.mjs";
+import { readToWeft } from "../the-fold/read-process.mjs";
+import { makeLexicon } from "../organs/lexicon.js";
+
+const HERE = path.dirname(fileURLToPath(import.meta.url));
+const MILL = "In 1850 Messrs. Smith and Jones bought the mill. They sold it to the town in 1871. The town council then built a school on the site, and the school stood for forty years. Years later Smith wrote that the sale was a mistake.";
+const DOC = `${MILL}\n\n${MILL}`;
+
+test("the prior door serves the janus home by name, and a replaced source is what every reader then reads", () => {
+  assert.ok(priorJson("pos-eng.json")?.forms, "pos-eng.json arrives through the door");
+  assert.ok(priorNames().includes("reading-rules.json"));
+  const pos = priorJson("pos-eng.json");
+  setPriorSource({ read: (n) => (n === "pos-eng.json" ? pos : null), list: () => ["pos-eng.json"] });
+  try {
+    const p = priorsFor("en");
+    assert.ok(p.posPrior, "the stub's pos prior is read");
+    assert.equal(p.lemmatizer, null, "and nothing the stub lacks is guessed");
+    assert.ok(p.gaps.some((g) => g.gap === "no_morphology"), "the missing leg is a typed gap");
+  } finally { setPriorSource(null); }
+  assert.ok(priorsFor("en").lemmatizer, "restored: the home's morphology is back");
+});
+
+test("an alias the hyperlexicon resolves keeps its period: 'Messrs.' ends no sentence", () => {
+  const bare = readWith(DOC, { language: "en" });
+  const kept = readWith(DOC, { language: "en", aliases: ["Messrs."] });
+  assert.ok(bare.sentences.some((s) => s.text === "In 1850 Messrs."), "FALSIFIER: without the alias the splitter cuts after Messrs.");
+  assert.ok(kept.sentences.some((s) => s.text === "In 1850 Messrs. Smith and Jones bought the mill."), "with it, Messrs. stays in its sentence");
+  assert.equal(kept.sentences.length, bare.sentences.length - 2);
+  assert.equal(kept.abbreviations.aliases, 1);
+});
+
+test("the measured punctuation prior is passed to the splitter: 'Mr.' and 'Dr.' are words without any lookup", () => {
+  const pr = priorsFor("en");
+  if (!pr.punctuation) return test.skip?.("punctuation-eng.json is not in this priors home");
+  const a = abbreviationsFor("Dr. Watson met Mr. Holmes.", { priors: pr });
+  assert.ok(a.set.has("Mr") && a.set.has("Dr") && a.set.has("mr"), "the prior's tokens, as written and capitalised");
+  assert.ok(a.prior >= 10, "the prior is the measured list, not a handful");
+});
+
+test("the hyperlexicon is asked only about unsure dotted forms, and the text's own use can refuse an alias", async () => {
+  const asked = [];
+  const lex = makeLexicon({ ask: async (forms) => { asked.push(...forms); return { giver: { name: "stub" }, results: Object.fromEntries(forms.map((f) => [f, f === "Messrs." ? [{ w: f, senses: [{ of: "Mr." }] }] : f === "in." ? [{ w: f, senses: [{ of: "inch" }] }] : null])) }; } });
+  const text = "Messrs. Smith came in. He left. Messrs. Jones came in. The rest stayed in the hall.";
+  const c = await consultAliases(text, lex, { priors: priorsFor("en") });
+  assert.deepEqual(c.aliases, ["Messrs."]);
+  const inch = c.rows.find((r) => r.form === "in.");
+  assert.ok(inch && inch.kept === false, "'in.' is listed as a form of 'inch', but the text writes 'in' bare: refused");
+  assert.ok(!asked.includes("Smith."), "a form at no junction is never asked about");
+  const none = await consultAliases(text, null);
+  assert.match(none.gap, /no hyperlexicon/);
+});
+
+test("the declared language is read with its own priors; undeclared is heard; an unknown name is a typed gap", () => {
+  const es = "El Banco Central subió las tasas en marzo. Las tasas altas encarecieron el crédito para las pequeñas empresas. El Banco Central subió las tasas otra vez en junio, y las pequeñas empresas pagaron más. Los proveedores pasaron el costo a los clientes.";
+  const w = readWith(es, { language: "es" });
+  assert.equal(w.language.stem, "spa");
+  assert.equal(w.language.source, "declared");
+  assert.equal(w.vocabulary?.grammarPrior, true, "read with pos-spa, not the English prior");
+  const en = readWith(DOC, {});
+  assert.equal(en.language.source, "heard");
+  assert.equal(en.language.stem, "eng");
+  const xx = readWith(DOC, { language: "xx" });
+  assert.ok(xx.gaps.some((g) => g.gap === "unknown_language"));
+});
+
+test("the cast is the reader's own index, every mention addressed; the sentences carry the caller's offsets", () => {
+  const w = readToWeft(DOC, { address: "mill" });
+  assert.equal(w.error, null);
+  const smith = w.cast.find((c) => c.allSurfaces.includes("Smith"));
+  assert.ok(smith, "Smith is a being");
+  assert.equal(smith.mentionsAt.length, 4, "every mention of Smith, in both copies");
+  for (const c of w.cast) for (const [s, e] of c.mentionSpans) {
+    const got = DOC.slice(s, e).replace(/\./g, "").toLowerCase();
+    assert.ok(c.allSurfaces.some((x) => x.replace(/\./g, "").toLowerCase() === got), `${c.surface}: ${got} reads back`);
+  }
+  for (const s of w.sentences) assert.equal(DOC.slice(s.offset, s.offset + s.text.length), s.text, "a sentence's offset reads back");
+  assert.ok(w.cast.every((c) => c.standing === "referent") && w.heard.every((c) => c.standing === "heard"), "beings and heard nominals are kept apart");
+});
+
+test("the clause tree is parsed inside the reader's own sentences", () => {
+  const w = readWith(DOC, { language: "en", aliases: ["Messrs."] });
+  assert.ok(w.quality.clauses.sentences <= w.sentences.length, "never more sentences than the reader cut");
+});
+
+test("a pronoun binding the reader makes reaches the entry, addressed and tied to its being", () => {
+  const text = "Ada Lovelace wrote the notes in 1843. Ada Lovelace worked with Charles Babbage on the engine for many years. She published the notes under her initials, and the notes were read for more than a century after she died.";
+  // the resolver is an organ: a stub that binds every "She" to Ada Lovelace proves the plumbing, whatever the engine's own resolver decides
+  const resolvePronouns = (sentences) => ({ bindings: sentences.flatMap((s) => [...s.text.matchAll(/\bShe\b/g)].map((m) => ({ referentId: "r:ada", sentenceOrder: s.order, offset: s.offset + m.index, pronoun: "She" }))), gaps: [] });
+  const reader = makeReader({ language: "en", resolvePronouns });
+  const w = readWith(text, { language: "en", reader });
+  assert.equal(w.pronouns.length, 1);
+  const p = w.pronouns[0];
+  assert.equal(text.slice(p.at[0], p.at[1]), "She");
+  assert.equal(w.sentences[p.sentence].text.startsWith("She published"), true);
+});
+
+test("the door says when it cut the text, and a short source is still cut into sentences", () => {
+  const long = DOC.repeat(5);
+  const out = readCanonical(long, { name: "cut", maxCharacters: 400 });
+  const cut = out.gaps.find((g) => g.reason === "truncated");
+  assert.ok(cut, "FALSIFIER of the silent slice");
+  assert.equal(cut.readCharacters, 400);
+  assert.equal(cut.totalCharacters, long.length);
+  const tiny = readWith("Mr. Smith left. He came back.", { language: "en" });
+  assert.equal(tiny.skipped, "too_short");
+  assert.equal(tiny.sentences.length, 2, "Mr. is a word even in a source too short to read for relations");
+});
+
+test("the core loads in a page: nothing in its import graph imports node: statically", () => {
+  const seen = new Set(), stack = [path.join(HERE, "..", "the-fold", "read-core.mjs")], offenders = [];
+  while (stack.length) {
+    const f = stack.pop(); if (seen.has(f)) continue; seen.add(f);
+    const src = fs.readFileSync(f, "utf8");
+    for (const m of src.matchAll(/^\s*import\s+(?:[^'"]*?from\s+)?["']([^"']+)["']/gm)) {
+      const spec = m[1];
+      if (spec.startsWith("node:") || ["fs", "path", "url", "os"].includes(spec)) offenders.push(`${path.relative(HERE, f)} → ${spec}`);
+      else if (spec.startsWith(".")) stack.push(path.resolve(path.dirname(f), spec));
+    }
+  }
+  assert.deepEqual(offenders, [], "only prior-source.mjs-style guarded dynamic imports may reach node:");
+  assert.ok(seen.size > 30, "the walk covered the reader");
+});
+
+test("the Node door asks the local Wiktionary pack first, and an absent pack is a typed gap, never a silent read", async () => {
+  const { packPath, readerPath, wiktionaryAsk } = await import("../adapters/text/wiktionary-pack.js");
+  const { readDocument } = await import("../reading.js");
+  if (packPath() && readerPath() && fs.existsSync(packPath())) {
+    const r = await wiktionaryAsk(["Messrs."], "en");
+    assert.ok(r.results["Messrs."]?.some((e) => e.senses.some((s) => s.of === "Mr.")), "the pack lists Messrs. as a form of Mr.");
+    const w = await readDocument(DOC, { address: "mill" });
+    assert.ok(w.aliasReport.rows.some((x) => x.form === "Messrs." && x.kept));
+    assert.ok(w.sentences.some((s) => s.text === "In 1850 Messrs. Smith and Jones bought the mill."));
+  }
+  const off = await readDocument(DOC, { address: "mill", lexicon: false });
+  assert.match(off.aliasReport.gap, /without the hyperlexicon/);
+  assert.ok(off.sentences.some((s) => s.text === "In 1850 Messrs."), "FALSIFIER: with no giver the cut is the splitter's own");
+});

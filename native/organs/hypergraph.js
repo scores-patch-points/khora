@@ -2463,6 +2463,13 @@ export function makeRelationReader(organs) {
       edges: edges.map(edgeFace),
       read,
       queryReferents,
+      // WHAT THE READER ITSELF SAW (2026-10-24), so a caller never reads the passage a second time to learn it: the referent index
+      // the edges were resolved against (its admit events, resolve/represent), each passage's sentences exactly as cut above, and
+      // each passage's pronoun bindings with the surface of the being each one names. A caller that re-ran extractSurfaces +
+      // discoverReferents for "the cast" (read-process.mjs did) got a second cast the edges never saw.
+      index: { events: index.events ?? [], resolve: index.resolve, represent: index.represent },
+      sentences: passageSentences,
+      pronouns: passageBindings.map(({ bindings, bestSurface }) => (bindings ?? []).map((b) => ({ ...b, surface: bestSurface?.get(b.referentId) ?? null }))),
     };
   };
 }
