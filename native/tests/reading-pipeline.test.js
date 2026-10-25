@@ -181,3 +181,14 @@ test("THE MASTER PIPELINE: readDocument asks the lexicon it is handed, then read
   assert.match(bare.aliasReport.gap, /no hyperlexicon/);
   assert.ok(bare.sentences.some((s) => s.text === "In 1850 Messrs."));
 });
+
+test("a surface's organs join the master's one assembly; selfRead gives the claims with verdicts; the reader rides, not on the wire", async () => {
+  const { readDocument } = await import("../the-fold/read-core.mjs");
+  let used = false;
+  const w = await readDocument(DOC, { selfRead: true, readerOptions: { extendRelations: (base) => { used = true; return base; } } });
+  assert.ok(used, "the surface's organ was handed to the one reader");
+  assert.ok(Array.isArray(w.claims) && w.claims.every((c) => c.verdict), "every claim carries the reader's verdict");
+  assert.equal(typeof w.reader, "function");
+  assert.ok(w.abbreviationSet instanceof Set);
+  assert.ok(!("reader" in JSON.parse(JSON.stringify(w))), "the entry on the wire is plain data");
+});

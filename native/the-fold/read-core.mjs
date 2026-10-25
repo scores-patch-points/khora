@@ -23,7 +23,8 @@
 //                                     hyperlexicon handed in (opts.lexicon: an organs/lexicon.js organ over any giver) about the
 //                                     dotted forms the priors cannot settle, then readWith. Node (reading.js) hands in the local
 //                                     Wiktionary pack; a page hands in its server's; no lexicon is a typed gap on the entry.
-//   readWith(text, opts)            → WeftEntry@4 (synchronous, given the aliases): edges, the reader's own cast with every mention's address (mentionsAt: UTF-8 byte
+//   readWith(text, opts)            → WeftEntry@4 (synchronous, given the aliases; readerOptions: a surface's own organs;
+//                                     selfRead: claims with verdicts; .reader / .abbreviationSet ride it, not enumerable): edges, the reader's own cast with every mention's address (mentionsAt: UTF-8 byte
 //                                     offsets, the weft's unit; mentionSpans: character spans), its sentences and pronoun bindings
 //                                     (character offsets), the clause tree, polarity, surprise, and every gap typed
 //
@@ -254,7 +255,7 @@ const edgeOf = (e) => ({ end1: e.end1, end1Face: e.end1Face ?? null, label: e.la
  * synchronous read cannot ask, so an async caller asks first (reading.js::readDocument does) and hands its report in as
  * `aliasReport`, which rides the entry. A short source is a typed skip, a reader failure a typed error — never silent.
  */
-export function readWith(text, { address = null, category = null, language = null, priors = null, aliases = [], abbreviations = null, quality = true, minCharacters = 200, features = {}, reader = null, aliasReport = null } = {}) {
+export function readWith(text, { address = null, category = null, language = null, priors = null, aliases = [], abbreviations = null, quality = true, minCharacters = 200, features = {}, reader = null, readerOptions = {}, selfRead = false, aliasReport = null } = {}) {
   const str = String(text ?? "");
   const bytes = utf8Length(str);
   const gaps = [];
@@ -274,10 +275,14 @@ export function readWith(text, { address = null, category = null, language = nul
     return { ...empty, sentences, skipped: "too_short" };
   }
   const t0 = Date.now();
-  let out = null, chunks = [], err = null;
+  let out = null, chunks = [], err = null, R = null, claims;
   try {
-    const R = reader ?? makeReader({ priors: pr, language: stem, abbreviations: abbr.set, features });
+    // a surface's own organs (readerOptions: classifyWord, extendRelations, sameAct, roleConfig …) join the one assembly; the
+    // abbreviations are this read's, so a surface never builds a reader beside it
+    R = reader ?? makeReader({ priors: pr, language: stem, abbreviations: abbr.set, features, ...readerOptions });
     ({ report: out, chunks } = relationsFor([{ text: str }], { reader: R, language: language ? stem : null }));
+    // selfRead: the material read back as an answer against itself, so every claim carries the reader's verdict and its span
+    if (selfRead && out?.read) claims = out.read(str)?.claims ?? [];
   } catch (e) { err = String(e?.message ?? e); }
   const raw = toRawOffsets(str);
   // each chunk's own place in the document (chunk.text is its body trimmed, so it is located inside its span)
@@ -341,14 +346,20 @@ export function readWith(text, { address = null, category = null, language = nul
     } else qualityReport.clauses = { gap: nested.gap };
     qualityReport.gates = readGates({ edges, cast, text: str });
   }
-  return {
+  const entry = {
     ...empty,
     readCharacters: str.length,
     vocabulary: out?.vocabulary ?? null,
     cast, heard: heardRows, edges, clauses, quality: qualityReport, surprise,
     sentences, pronouns,
+    ...(selfRead ? { claims: claims ?? [] } : {}),
     error: err, ms: Date.now() - t0,
   };
+  // the reader this read used and its abbreviation set, for a surface that reads prefixes of the same text the same way (a replay);
+  // not enumerable, so the entry stays plain data on the wire and in the weft
+  Object.defineProperty(entry, "reader", { value: R, enumerable: false });
+  Object.defineProperty(entry, "abbreviationSet", { value: abbr.set, enumerable: false });
+  return entry;
 }
 
 /**
