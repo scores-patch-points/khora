@@ -112,7 +112,8 @@ test("the door says when it cut the text, and a short source is still cut into s
   assert.ok(cut, "FALSIFIER of the silent slice");
   assert.equal(cut.readCharacters, 400);
   assert.equal(cut.totalCharacters, long.length);
-  const tiny = readWith("Mr. Smith left. He came back.", { language: "en" });
+  // the alias is handed in, so the claim holds whether or not this checkout's janus carries the measured punctuation prior
+  const tiny = readWith("Mr. Smith left. He came back.", { language: "en", aliases: ["Mr."] });
   assert.equal(tiny.skipped, "too_short");
   assert.equal(tiny.sentences.length, 2, "Mr. is a word even in a source too short to read for relations");
 });
