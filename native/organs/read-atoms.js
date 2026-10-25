@@ -2,12 +2,13 @@
 // entities by coref.js, or by the learned ranker → EOTClaim@1 claims → atoms.js, plus the learned producer's further atoms when given).
 // The meaning check reads a claim and its source this way and weighs atom against atom (atom-support.js).
 //   readAtoms({ text, lang, title, previous, grammar, pack, same, lookup, corefModel, producer, chooser, filter, keysOf })
-//     → { atoms, entities, mentions, claims, rows, unread, page }
+//     → { atoms, forms, entities, mentions, claims, rows, unread, page }
 //   grammar: { rowsOf(text), claimsOf(text, rows) } (grammar-en.js, or grammar-ud.js's loadGrammar)
 import { resolvePage } from "./coref.js";
 import { resolveWithModel } from "./coref-learned.js";
 import { atomize, realize } from "./atoms.js";
 import { produce } from "./atom-produce.js";
+import { canonicalForms } from "./atom-forms.js";
 
 // a pronunciation in brackets is no part of the sentence: Wikipedia's respelling or IPA, or the empty brackets an audio link leaves ("Mount
 // Rainier ( ray-NEER), also known as …", "Lake Michigan (  MISH-ig-ən)"); it breaks the parse, so it is taken out before reading, and spans
@@ -45,5 +46,6 @@ export function readAtoms({ text, lang = "en", title = null, previous = [], gram
   const unread = [...new Set([...claims.flatMap((c) => c.unread ?? []), ...missed])].filter((w) => !carried.includes(low(w)));
   // the page as read (title, earlier sentences, this one): each sentence's rows and mentions, so a referent's every naming on the page is at hand
   const page = R0.sentences.map((s, i) => ({ text: s.text, rows: s.rows, mentions: pageMentions[i] ?? [] }));
-  return { atoms: out, entities, mentions, claims, rows, unread, page };
+  // the atoms in their canonical forms (atom-forms.js): what a claim says, as a check reads it; `atoms` stay as read
+  return { atoms: out, forms: canonicalForms(out), entities, mentions, claims, rows, unread, page };
 }

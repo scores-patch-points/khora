@@ -56,7 +56,9 @@ export function readPair(p) {
 }
 
 // ---- modes: a binding (and, from M3, licenses) per name ------------------------------------------------------------------------------------
-const resolveBind = (R, { correspond = true } = {}) => BIND.makeResolveBind({ resolveReferent: JANUS.resolve.resolveReferent, correspond: correspond ? JANUS.correspond : null, keysOf, claimLang: R.claimLang, sourceLang: R.sourceLang, claimReading: R.claimReading, sourceReading: R.sourceReading });
+const resolveBind = (R, { correspond = true, quantities = false } = {}) => BIND.makeResolveBind({ resolveReferent: JANUS.resolve.resolveReferent, correspond: correspond ? JANUS.correspond : null, keysOf, claimLang: R.claimLang, sourceLang: R.sourceLang, claimReading: R.claimReading, sourceReading: R.sourceReading, quantities: quantities ? BIND.bindQuantity : null });
+// the licenses both stages declared (each with its giver), one per kind and relation
+export const licensesOf = (R) => { const m = new Map(); for (const l of [...R.claim.licenses, ...R.source.licenses]) for (const rel of l.rels) { const k = `${l.kind}\u0000${rel}`; if (!m.has(k)) m.set(k, { kind: l.kind, rels: [rel], giver: l.giver, standing: l.standing }); } return [...m.values()].sort((a, b) => (a.rels[0] < b.rels[0] ? -1 : a.rels[0] > b.rels[0] ? 1 : 0)); };
 // one binding per pair and mode family, shared by the modes built on it (the deranged control moves exactly the binding the arm used)
 const cached = (R, k, f) => (c, s) => ((R.cache ??= {})[k] ??= f(c, s));
 export const MODES = {
@@ -65,6 +67,10 @@ export const MODES = {
   resolve: { bind: (R) => cached(R, "resolve", resolveBind(R)) },
   "resolve-deranged": { bind: (R) => (c, s) => BIND.derange(cached(R, "resolve", resolveBind(R))(c, s), s) },
   "resolve-only": { bind: (R) => cached(R, "resolve-only", resolveBind(R, { correspond: false })) },
+  // M3: figures bound by value (RC3) and the functional licenses the reader declared, with their givers, on either stage (RC3, RC6)
+  m3: { bind: (R) => cached(R, "m3", resolveBind(R, { quantities: true })), licenses: (R) => licensesOf(R) },
+  "m3-deranged": { bind: (R) => (c, s) => BIND.derange(cached(R, "m3", resolveBind(R, { quantities: true }))(c, s), s), licenses: (R) => licensesOf(R) },
+  "m3-unlicensed": { bind: (R) => cached(R, "m3", resolveBind(R, { quantities: true })), licenses: () => [] },
 };
 
 // ---- scoring: accuracy E against not-E, false accepts, E accepted, C named, false-C, per set and pooled, and per language ---------------------
@@ -99,7 +105,10 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
       for (const m of modes) {
         const M = MODES[m], rec = stageVerdict({ claim: R.claim, source: R.source, bind: M.bind(R), licenses: M.licenses?.(R) ?? [], ...(M.layers ? { layers: M.layers } : {}) });
         rows[m].push({ set, id: p.id, label: p.label, v: rec.label, hl: rec.verdict, lang: langKey(p) });
-        if (pairsOut) fs.appendFileSync(pairsOut, JSON.stringify({ set, id: p.id, mode: m, label: p.label, v: rec.label, hl: rec.verdict, conjuncts: rec.conjuncts, gaps: rec.gaps.map((g) => g.kind), correspondence: R.cache?.resolve?.correspondence ?? null }) + "\n");
+        if (pairsOut) fs.appendFileSync(pairsOut, JSON.stringify({ set, id: p.id, mode: m, label: p.label, v: rec.label, hl: rec.verdict, conjuncts: rec.conjuncts, gaps: rec.gaps.map((g) => g.kind), correspondence: R.cache?.resolve?.correspondence ?? null,
+          // each claim figure and what the binding cell made of it: the source figure it meets, "distinct" (a value of its own), or unbound
+          quantities: R.claim.anchors.filter((a) => a.kind === "quantity").map((a) => { const b = R.cache?.[m]?.map?.get(a.id) ?? null; return { label: a.label, measure: a.measure, bound: b == null ? null : b === a.id ? "distinct" : R.source.anchors.find((x) => x.id === b)?.label ?? b }; }),
+          licenses: rec.licenses.map((l) => l.rels[0]) }) + "\n");
       }
     }
   }

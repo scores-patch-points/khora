@@ -22,7 +22,7 @@ export function conjunctsOf(claim, map) {
   const B = (x) => (x == null ? null : map.get(x) ?? x);
   const out = [];
   for (const r of claim.arrangements) {
-    if (r.identifying) continue;
+    if (r.identifying || r.superseded) continue; // a fact naming its referent, or an atom the reader's canonical form replaced
     const unbound = [r.s, r.o, r.key].filter((x) => x != null && !map.has(x));
     const s = r.key != null && !map.has(r.key) ? r.key : B(r.s);
     const atom = ["atom", r.rel.lemma, s, B(r.o), r.key != null ? B(r.key) : null];
@@ -38,7 +38,8 @@ export function stageVerdict({ claim, source, bind, licenses = [], layers = ["as
     { name: "stages", cell: "SIG", needs: ["opening"], gives: ["claim-stage", "source-stage"], run: () => ({ "claim-stage": claim, "source-stage": source }) },
     { name: "bind", cell: "INS", needs: ["claim-stage", "source-stage"], gives: ["binding"], run: (c) => ({ binding: bind(c["claim-stage"], c["source-stage"]) }) },
     { name: "formula", cell: "SEG", needs: ["binding", "claim-stage"], gives: ["conjuncts"], run: (c) => ({ conjuncts: conjunctsOf(c["claim-stage"], c.binding.map) }) },
-    { name: "licenses", cell: "CON", needs: ["source-stage"], gives: ["licensed"], run: (c) => ({ licensed: { licenses, stage: (layers) => hlStageOf(c["source-stage"], { layers, licenses, extraAnchors: [{ id: HOLDS, kind: "holds" }] }) } }) },
+    // the binding cell may enter a claim value the source does not hold (a quantity that meets none of the source's) as an anchor of its own
+    { name: "licenses", cell: "CON", needs: ["source-stage", "binding"], gives: ["licensed"], run: (c) => ({ licensed: { licenses, stage: (layers) => hlStageOf(c["source-stage"], { layers, licenses, extraAnchors: [{ id: HOLDS, kind: "holds" }, ...(c.binding.extra ?? [])] }) } }) },
     { name: "read", cell: "EVA", needs: ["conjuncts", "licensed"], gives: ["verdict"], run: (c) => {
       const cs = c.conjuncts;
       if (!cs.length) return { verdict: { hl: BEYOND_REACH, per: [], why: "the claim opens nothing the reader read" } };

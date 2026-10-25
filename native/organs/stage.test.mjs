@@ -148,3 +148,68 @@ test("INS with janus's own resolve.mjs, where the janus checkout is beside khora
   const b = makeResolveBind({ resolveReferent })(claim, source);
   assert.equal(b.map.get(claim.anchors.find((a) => a.label === "Lake Baikal").id), source.anchors.find((a) => a.label === "Lake Baikal").id);
 });
+
+// ---- M3: figures bound by value, their attribute's license, superlatives over their comparison class (RC3, RC6) ---------------------------
+import { bindQuantity } from "./stage-bind.js";
+// a reading from tokens: [form, lemma, upos, head, deprel, feats]
+const readingOf = (text, toks, { entities, mentions, atoms }) => {
+  let at = 0; const rows = toks.map(([form, lemma, upos, head, deprel, feats = null], i) => { const start = text.indexOf(form, at); at = start + form.length; return { id: i + 1, form, lemma, upos, head, deprel, feats, start, end: start + form.length }; });
+  return { rows, entities, mentions, atoms: atoms(rows), page: [{ rows, mentions }] };
+};
+const byName = (claim, source) => { const map = new Map(); for (const a of claim.anchors) { if (a.id === HOLDS) { map.set(HOLDS, HOLDS); continue; } const b = source.anchors.find((x) => x.kind === a.kind && a.kind === "referent" && x.label === a.label); if (b) map.set(a.id, b.id); } return map; };
+const fakeResolve = (claim, source) => ({ mention, candidates }) => {
+  const a = claim.anchors.find((x) => x.kind === "referent" && x.lemmas.every((l) => mention.nodes.includes(`w:${l}`)) && x.lemmas.length === mention.nodes.length);
+  const b = a && source.anchors.find((x) => x.kind === "referent" && x.label === a.label && candidates.some((c) => c.id === x.id));
+  return b ? { decision: "assert", asserted: b.id } : { decision: "gap", reason: "no candidate" };
+};
+const lakeArea = (n, base) => readingOf(`Lake Tuva has a surface area of ${n} km2.`, [["Lake", "lake", "PROPN", 2, "compound"], ["Tuva", "Tuva", "PROPN", 3, "nsubj"], ["has", "have", "VERB", 0, "root"], ["a", "a", "DET", 6, "det"], ["surface", "surface", "NOUN", 6, "compound"], ["area", "area", "NOUN", 3, "obj"], ["of", "of", "ADP", 9, "case"], [String(n), String(n), "NUM", 9, "nummod"], ["km2", "km2", "NOUN", 6, "nmod"]],
+  { entities: [{ id: "E1", name: "Lake Tuva" }], mentions: [{ text: "Lake Tuva", ids: [1, 2], hid: 2, how: "name", entity: "E1" }],
+    atoms: () => [{ pred: "has_area", args: [{ entity: "E1", name: "Lake Tuva", ids: [1, 2] }, { value: `${n} km2`, ids: [8, 9], measure: "area", attribute: "area", base, alts: [] }], neg: false, hedged: false, approx: false, start: 0, end: 30, head: 9 }] });
+
+test("RC3: a figure binds a source figure of its measure within 2%; one that meets none is its own quantity, and its attribute's license contradicts", () => {
+  const src = readStage(lakeArea(500, 500e6), { text: "Lake Tuva has a surface area of 500 km2.", lang: "en", title: "Lake Tuva", previous: ["x"] });
+  assert.deepEqual(src.licenses.map((l) => [l.kind, l.rels[0]]), [["functional", "has_area"]]);
+  assert.match(src.licenses[0].giver, /one value of an attribute at one time/);
+  const read = (n, base) => readStage(lakeArea(n, base), { text: `Lake Tuva has a surface area of ${n} km2.`, lang: "en", title: "Lake Tuva", previous: [] });
+  const verdict = (claim, licenses) => stageVerdict({ claim, source: src, licenses, bind: makeResolveBind({ resolveReferent: fakeResolve(claim, src), quantities: bindQuantity }) });
+  const near = read(505, 505e6), far = read(600, 600e6);
+  assert.equal(verdict(near, src.licenses).verdict, "bound", "505 meets 500 within 2%");
+  assert.equal(verdict(far, src.licenses).verdict, "contradicted", "R2: a different value of a functional attribute");
+  assert.equal(verdict(far, []).verdict, "unbound", "law 1: without the license the different figure is unknown, never contradicted or bound");
+});
+
+const peak = (holder, others = []) => {
+  const text = `${holder} is the highest mountain in Washington.`;
+  return readingOf(text, [[holder, holder, "PROPN", 5, "nsubj"], ["is", "be", "AUX", 5, "cop"], ["the", "the", "DET", 5, "det", "Definite=Def|PronType=Art"], ["highest", "high", "ADJ", 5, "amod", "Degree=Sup"], ["mountain", "mountain", "NOUN", 0, "root"], ["in", "in", "ADP", 7, "case"], ["Washington", "Washington", "PROPN", 5, "nmod"]],
+    { entities: [{ id: "E1", name: holder }, { id: "E2", name: "Washington" }, ...others.map((o, i) => ({ id: `E${i + 3}`, name: o }))],
+      mentions: [{ text: holder, ids: [1], hid: 1, how: "name", entity: "E1" }, { text: "Washington", ids: [7], hid: 7, how: "name", entity: "E2" }],
+      atoms: () => { const H = { entity: "E1", name: holder, ids: [1] }; return [
+        { pred: "is_a", args: [H, { value: "mountain", ids: [3, 4, 5, 6, 7] }], neg: false, hedged: false, approx: false, start: 0, end: text.length - 1, head: 5 },
+        { pred: "most:high", args: [H], neg: false, hedged: false, approx: false, start: 0, end: text.length - 1, head: 4 },
+        { pred: "in", args: [H, { entity: "E2", name: "Washington", ids: [7] }], neg: false, hedged: false, approx: false, start: 0, end: text.length - 1, head: 6 }]; } });
+};
+test("RC6: a superlative is an edge from its comparison class to its holder, licensed by the language's Degree feature; another holder contradicts", () => {
+  const src = readStage(peak("Rainier", ["Adams"]), { text: "Rainier is the highest mountain in Washington.", lang: "en", title: "Rainier", previous: ["x"] });
+  const edge = src.arrangements.find((r) => r.derived === "superlative");
+  assert.ok(edge && edge.rel.lemma === "most:high" && src.anchors.find((a) => a.id === edge.s).via === "comparison-class");
+  assert.deepEqual(src.licenses.map((l) => l.rels[0]), ["most:high"]); assert.match(src.licenses[0].giver, /Degree=Sup/);
+  const verdict = (holder) => { const claim = readStage(peak(holder), { text: `${holder} is the highest mountain in Washington.`, lang: "en", title: "Rainier", previous: [] });
+    const bind = (c, s) => { const b = makeResolveBind({ resolveReferent: fakeResolve(c, s), quantities: bindQuantity })(c, s); return b; };
+    return stageVerdict({ claim, source: src, licenses: src.licenses, bind }); };
+  assert.equal(verdict("Rainier").verdict, "bound");
+  assert.equal(verdict("Adams").verdict, "contradicted", "one holder per class: the source names Adams on its page, and the class's holder is Rainier");
+  assert.equal(verdict("Hood").verdict, "beyond-reach", "law 3: a holder the source never names does not bind, so no contradiction is reached");
+  // no Degree feature on the word: the degree stays a one-place fact, and nothing is licensed
+  const bare = peak("Rainier"); bare.rows[3].feats = null;
+  const nofeat = readStage(bare, { text: "Rainier is the highest mountain in Washington.", lang: "en", title: "Rainier", previous: ["x"] });
+  assert.equal(nofeat.arrangements.filter((r) => r.derived).length, 0); assert.equal(nofeat.licenses.length, 0);
+});
+
+test("RC6: the reader's canonical forms are kept beside the atoms they replace, which are marked superseded and left out of a claim's formula", () => {
+  const r = reading(); const [isa, bein] = r.atoms; const rewritten = { ...bein, rewritten: "no-comparative", pred: "most:deep", args: [BAIKAL] };
+  const st = stageOf({ ...r, forms: [isa, rewritten] });
+  assert.ok(st.arrangements.find((x) => x.rel.lemma === "be_in").superseded);
+  assert.ok(st.arrangements.find((x) => x.rel.lemma === "most:deep").rewritten);
+  assert.deepEqual(conjunctsOf(st, new Map(st.anchors.map((a) => [a.id, a.id]))).map((k) => k.rel).sort(), ["is_a", "most:deep"]);
+  assert.deepEqual(fromArrangements(st).map((a) => a.pred).sort(), ["be_in", "is_a"], "read back: the atoms as read");
+});

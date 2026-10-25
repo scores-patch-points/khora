@@ -81,19 +81,25 @@ export function readStage(reading, { text, lang = "en", title = null, previous =
     for (const l of namings.get(entityId)?.lemmas ?? []) a.lemmas.add(l);
     return a.id;
   };
+  // a kind is its words as the copula's noun gives them (atoms.js's own kind): the head noun and the nouns compounded with it; its other
+  // modifiers are facts of their own (an adjective is an arrangement to holds; a phrase, an arrangement of its case word)
+  const kindAnchor = (headRow, t, via) => {
+    const kids = headRow ? rows.filter((r) => r.head === headRow.id && /^(compound|flat)/.test(r.deprel) && /^(NOUN|PROPN)$/.test(r.upos)) : [];
+    const ws = headRow ? [...kids, headRow].sort((x, y) => x.id - y.id) : [];
+    const ls = ws.length ? ws.map(lemmaOf) : lemmasOfText(t);
+    const a = anchor(`${docId}#k:${fold(ls.join(" ") || t)}`, "kind", via, { label: t || ws.map((r) => r.form).join(" "), head: headRow ? lemmaOf(headRow) : (ls.at(-1) ?? fold(t)), modifiers: kids.map(lemmaOf).sort() });
+    if (t) a.names.add(t); for (const l of ls) a.lemmas.add(l); return a.id;
+  };
   const endOf = (atom, arg, i) => {
     if (arg?.entity != null) return referent(arg.entity);
     const t = String(arg?.value ?? arg?.name ?? ""), ls = arg?.ids?.length ? lemmasOfIds(arg.ids) : lemmasOfText(t);
     if (arg?.measure != null || (/^has_/.test(atom.pred) && i === 1)) {
-      const a = anchor(`${docId}#q:${fold(arg?.measure ?? "")}:${arg?.base ?? ""}:${fold(t)}`, "quantity", "figure", { label: t, measure: arg?.measure ?? null, base: arg?.base ?? null, alts: arg?.alts ?? [] });
+      const a = anchor(`${docId}#q:${fold(arg?.measure ?? "")}:${arg?.base ?? ""}:${fold(t)}`, "quantity", "figure", { label: t, measure: arg?.measure ?? null, attribute: arg?.attribute ?? null, base: arg?.base ?? null, alts: arg?.alts ?? [] });
       a.names.add(t); return a.id;
     }
     if (atom.pred === "is_a" && i === 1) {
-      // a kind is its words: the head noun and its modifiers, as the parse gives them
       const ws = (arg?.ids ?? []).map((x) => byRow.get(x)).filter((r) => r && CONTENT.test(r.upos));
-      const head = ws.find((r) => !ws.some((o) => o.id === r.head)) ?? ws.at(-1);
-      const a = anchor(`${docId}#k:${fold(ls.join(" ") || t)}`, "kind", "copula", { label: t, head: head ? lemmaOf(head) : (ls.at(-1) ?? fold(t)), modifiers: ws.filter((r) => r !== head).map(lemmaOf).sort() });
-      a.names.add(t); for (const l of ls) a.lemmas.add(l); return a.id;
+      return kindAnchor(ws.find((r) => !ws.some((o) => o.id === r.head)) ?? ws.at(-1) ?? null, t, "copula");
     }
     if (atom.pred === "named" && i === 1) { const a = anchor(`${docId}#n:${fold(t)}`, "name", "naming", { label: t }); a.names.add(t); for (const l of lemmasOfText(t)) a.lemmas.add(l); return a.id; }
     // an end the reading left unresolved stays an end: an anchor that says so, and a gap over its words
@@ -101,9 +107,9 @@ export function readStage(reading, { text, lang = "en", title = null, previous =
     gaps.push({ kind: "end_unresolved", span: spanOfIds(arg?.ids), text: t });
     return a.id;
   };
-  const arrangements = [];
-  for (const atom of reading.atoms ?? []) {
-    const args = atom.args ?? []; if (!args.length) continue;
+  const arrangements = [], headOf = new Map();
+  const place = (atom, flags = {}) => {
+    const args = atom.args ?? []; if (!args.length) return null;
     const ends = args.map((x, i) => endOf(atom, x, i));
     const s = ends[0], o = args.length === 1 ? HOLDS : ends[1], key = args.length >= 3 ? ends[2] : null;
     if (args.length === 1) anchor(HOLDS, "holds", "reserved");
@@ -111,13 +117,49 @@ export function readStage(reading, { text, lang = "en", title = null, previous =
     const headRow = atom.head != null ? byRow.get(atom.head) : null;
     const rel = { lang, lemma: String(atom.pred), surface: headRow ? headRow.form : null, senses: [] };
     const id = hex([docId, span, rel.lemma, s, o, polarity, key]);
-    arrangements.push({ id, rel, s, o, key, polarity, layer: atom.hedged ? "reported" : "asserted", span, approx: !!atom.approx,
-      ...(identifying(atom) ? { identifying: true } : {}), ...(atom.rewritten ? { rewritten: atom.rewritten } : {}),
-      head: headRow ? { form: headRow.form, upos: headRow.upos, feats: headRow.feats ?? null } : null });
+    const r = { id, rel, s, o, key, polarity, layer: atom.hedged ? "reported" : "asserted", span, approx: !!atom.approx,
+      ...(identifying(atom) ? { identifying: true } : {}), ...(atom.rewritten ? { rewritten: atom.rewritten } : {}), ...flags,
+      head: headRow ? { form: headRow.form, upos: headRow.upos, feats: headRow.feats ?? null } : null };
+    arrangements.push(r); if (headRow) headOf.set(r, headRow); return r;
+  };
+  // the atoms as read, and the reader's canonical forms of them (atom-forms.js, RC6): an atom a rewrite consumed is kept, marked superseded
+  // (a claim's formula leaves it out); a rewritten atom is added, marked rewritten. Nothing is dropped.
+  const forms = reading.forms ? new Set(reading.forms) : null;
+  for (const atom of reading.atoms ?? []) place(atom, forms && !forms.has(atom) ? { superseded: true } : {});
+  for (const atom of reading.forms ?? []) if (atom.rewritten) place(atom);
+  // RC6, superlatives: a superlative is an edge from its comparison class to its holder, and the class has one holder (functional). The class is
+  // the noun the degree word qualifies (with the nouns compounded with it) and the phrases that qualify that noun; the license's giver is the
+  // language's own Degree feature on the word: Degree=Sup; or Degree=Cmp on a definite noun (the definite comparative, "el lago más profundo");
+  // or, for the reader's no-comparative rewrite, Degree=Cmp under a PronType=Neg quantifier. A degree word with none of these (the parse gave
+  // no feature) yields no class edge: it stays a one-place fact, and no license is declared for it.
+  const feat = (r, f) => !!r && String(r.feats ?? "").split("|").includes(f);
+  const licenses = [];
+  for (const r of [...arrangements]) {
+    if (!/^most:/.test(r.rel.lemma) || r.o !== HOLDS || r.superseded) continue;
+    const w = headOf.get(r); if (!w) continue;
+    const kids = rows.filter((k) => k.head === w.id), up = byRow.get(w.head);
+    const noun = up && /^(NOUN|PROPN)$/.test(up.upos) ? up : kids.find((k) => /^nsubj/.test(k.deprel) && /^(NOUN|PROPN)$/.test(k.upos)) ?? null;
+    const det = (f) => !!noun && rows.some((k) => k.head === noun.id && /^det/.test(k.deprel) && feat(k, f));
+    const sup = feat(w, "Degree=Sup") || kids.some((k) => k.upos === "ADV" && feat(k, "Degree=Sup"));
+    const cmp = feat(w, "Degree=Cmp") || kids.some((k) => k.upos === "ADV" && feat(k, "Degree=Cmp"));
+    const giver = sup ? `${lang} Degree=Sup (the language's grammar)` : cmp && det("Definite=Def") ? `${lang} Degree=Cmp on a Definite=Def noun (the language's grammar)` : cmp && r.rewritten === "no-comparative" && det("PronType=Neg") ? `${lang} Degree=Cmp under a PronType=Neg quantifier (the language's grammar)` : null;
+    if (!giver || !noun) continue;
+    const kindId = kindAnchor(noun, "", "comparison-class");
+    const places = [...new Set(arrangements.filter((x) => x.s === r.s && x.o !== HOLDS && !x.derived && (() => { const c = headOf.get(x); return c && c.upos === "ADP" && byRow.get(c.head)?.head === noun.id; })()).map((x) => x.o))].sort();
+    const A = anchors.get(kindId), classId = `${docId}#c:${hex([kindId, places]).slice(0, 16)}`;
+    const cls = anchor(classId, "kind", "comparison-class", { label: [A?.label, ...places.map((p) => anchors.get(p)?.label)].filter(Boolean).join(" · "), parts: { kind: kindId, places } });
+    for (const l of A?.lemmas ?? []) cls.lemmas.add(l);
+    const id = hex([docId, r.span, r.rel.lemma, classId, r.s, r.polarity, null]);
+    arrangements.push({ id, rel: r.rel, s: classId, o: r.s, key: null, polarity: r.polarity, layer: r.layer, span: r.span, approx: false, derived: "superlative", head: r.head });
+    licenses.push({ kind: "functional", rels: [r.rel.lemma], giver, standing: "given" });
   }
+  // RC3's license: a figure whose binding named its attribute ("a surface area of …" → area) is one value of that attribute at one time, so
+  // has_<attribute> is functional; its key is the time the text gives, and no time is read today, so the key is empty on both sides. A figure
+  // named only by its measure (has_length for a height, a depth or a prominence alike) is not licensed.
+  for (const r of arrangements) { const q = anchors.get(r.o); if (q?.kind === "quantity" && q.attribute && r.rel.lemma === `has_${q.attribute}` && !r.superseded) licenses.push({ kind: "functional", rels: [r.rel.lemma], giver: "a being has one value of an attribute at one time (the stage spec, §6); key: the time the text gives (none read)", standing: "given" }); }
   // every referent of the page's reading is an anchor of this stage, stated about here or not: the universe a claim end may be bound into
   for (const e of reading.entities ?? []) referent(e.id);
-  return finish({ schema: STAGE_SCHEMA, reader, doc, anchors: [...anchors.values()].map((a) => ({ ...a, names: [...a.names], lemmas: [...a.lemmas] })), arrangements, licenses: [], gaps });
+  return finish({ schema: STAGE_SCHEMA, reader, doc, anchors: [...anchors.values()].map((a) => ({ ...a, names: [...a.names], lemmas: [...a.lemmas] })), arrangements, licenses, gaps });
 }
 
 // sorted lists, fixed key order: the same reading gives the same bytes
@@ -128,7 +170,9 @@ function finish(st) {
   for (const r of [...st.arrangements].sort((a, b) => cmp(a.id, b.id))) { if (seen.has(r.id)) continue; seen.add(r.id); arrangements.push(r); }
   const gk = (g) => JSON.stringify([g.kind, g.span, g.text ?? null]), gseen = new Set(), gaps = [];
   for (const g of [...st.gaps].sort((a, b) => cmp(gk(a), gk(b)))) { if (gseen.has(gk(g))) continue; gseen.add(gk(g)); gaps.push({ kind: g.kind, span: g.span ?? null, text: g.text ?? null }); }
-  return { schema: st.schema, reader: st.reader, doc: st.doc, anchors, arrangements, licenses: [...st.licenses], gaps };
+  const lk = (l) => JSON.stringify([l.kind, l.rels, l.giver]), lseen = new Set(), licenses = [];
+  for (const l of [...st.licenses].sort((a, b) => cmp(lk(a), lk(b)))) { if (lseen.has(lk(l))) continue; lseen.add(lk(l)); licenses.push({ kind: l.kind, rels: [...l.rels], giver: l.giver, standing: l.standing ?? "given" }); }
+  return { schema: st.schema, reader: st.reader, doc: st.doc, anchors, arrangements, licenses, gaps };
 }
 
 export const serializeStage = (st) => JSON.stringify(st);
@@ -143,7 +187,7 @@ export function fromArrangements(st) {
     if (a.kind === "quantity") return { value: a.label ?? "", measure: a.measure, base: a.base, alts: a.alts };
     return { value: a.label ?? "" };
   };
-  return st.arrangements.filter((r) => !r.derived).map((r) => ({ pred: r.rel.lemma, args: [r.s, ...(r.o === HOLDS ? [] : [r.o]), ...(r.key != null ? [r.key] : [])].map(argOf), neg: r.polarity === "-", hedged: r.layer === "reported", approx: !!r.approx }));
+  return st.arrangements.filter((r) => !r.derived && !r.rewritten).map((r) => ({ pred: r.rel.lemma, args: [r.s, ...(r.o === HOLDS ? [] : [r.o]), ...(r.key != null ? [r.key] : [])].map(argOf), neg: r.polarity === "-", hedged: r.layer === "reported", approx: !!r.approx }));
 }
 
 /** an HL stage over a Stage@1: every anchor, and every arrangement in the named layers as an edge whose provenance is the arrangement's id */

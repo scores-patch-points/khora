@@ -8,6 +8,7 @@
 //                                      stageFromEdges's default, marked so on the binding); kept for comparison, never the arm's binding
 //   makeResolveBind({ … })(claim, source)  THE ARM'S BINDING (M2): janus resolve.mjs over the source page's referents, below
 //   derange(binding, source)           the control built to fail: every bound end moved to another anchor
+//   bindQuantity                       M3's quantity binding (RC3), passed to makeResolveBind as `quantities`
 // Each returns { how, map: Map(claimId → sourceId), gaps: [{ kind, anchor, detail }] }.
 import { HOLDS, fold } from "./stage.js";
 
@@ -45,7 +46,7 @@ export function makeResolveBind({ resolveReferent, correspond = null, keysOf = n
   // a side's company nodes: its lemmas, and (across languages) the English keys of the non-English side's lemmas; English stays itself
   const nodesOf = (lemmas, lang, extra = []) => [...new Set([...lemmas.map((l) => `w:${fold(l)}`), ...(lang === "en" ? [] : lemmas.flatMap((l) => keyNodes(lang, l))), ...extra])];
   return function bindResolve(claim, source) {
-    const map = new Map(), gaps = [], S = sorted(source.anchors);
+    const map = new Map(), gaps = [], extra = [], S = sorted(source.anchors);
     // correspondence of claim lemmas to source lemmas, from relations alone, against correspond's own null (rewired source graphs)
     const corr = new Map(); let confirmed = 0;
     if (correspond && claimReading?.rows?.length && sourceReading?.page?.length) {
@@ -65,6 +66,7 @@ export function makeResolveBind({ resolveReferent, correspond = null, keysOf = n
         else gaps.push({ kind: r.decision === "ask" ? "end_unresolved" : "no_correspondence", anchor: a.id, detail: r.reason ?? (r.decision === "ask" ? `torn between ${(r.between ?? []).length} candidates` : r.decision) });
         continue;
       }
+      if (a.kind === "kind" && a.via === "comparison-class") continue; // bound below, from its parts
       if (a.kind === "kind") {
         const meets = (x, y) => fold(x) === fold(y) || (cross && keysOf && (keysOf(sourceLang, y) ?? []).some((k) => fold(k) === fold(x) || fold(k).split(" ").at(-1) === fold(x)));
         const ks = S.filter((b) => b.kind === "kind" && meets(a.head, b.head) && a.modifiers.every((m) => b.modifiers.some((n) => meets(m, n))));
@@ -80,10 +82,17 @@ export function makeResolveBind({ resolveReferent, correspond = null, keysOf = n
       }
       if (a.kind === "quantity") {
         if (!quantities) { gaps.push({ kind: "no_correspondence", anchor: a.id, detail: "quantities are not bound before M3" }); continue; }
-        quantities(a, S, map, gaps);
+        quantities(a, S, map, gaps, extra);
       }
     }
-    return { how: "resolve", map, gaps, correspondence: confirmed };
+    // a comparison class binds the source class whose parts are the images of its own (its kind, and every place); after the kinds and
+    // referents it is made of
+    for (const a of claim.anchors.filter((x) => x.via === "comparison-class" && x.parts)) {
+      const kind = map.get(a.parts.kind), places = a.parts.places.map((p) => map.get(p));
+      const hit = kind && places.every(Boolean) ? S.find((b) => b.via === "comparison-class" && b.parts?.kind === kind && b.parts.places.length === places.length && [...places].sort().every((p, i) => p === [...b.parts.places].sort()[i])) : null;
+      if (hit) map.set(a.id, hit.id); else gaps.push({ kind: "no_correspondence", anchor: a.id, detail: "no source comparison class has its kind and places" });
+    }
+    return { how: quantities ? "resolve+quantities" : "resolve", map, gaps, extra, correspondence: confirmed };
   };
 }
 
@@ -100,4 +109,17 @@ export function derange(binding, source) {
     if (to && to !== s) map.set(c, to);
   }
   return { ...binding, how: `${binding.how}+deranged`, map };
+}
+
+/** RC3 in the binding cell: a claim quantity binds the source quantity of its measure whose value (base units, or a bracketed equivalent) is
+ *  within 2% of its own (the existing meeting test, atom-support.js figMeet); two or more such is an end_unresolved gap; none, and it enters
+ *  as a quantity of its own — a value is its own identity, so the cell has decided "different", which only R2 can use, toward contradicted. */
+export function bindQuantity(a, S, map, gaps, extra) {
+  const vals = (x) => [x.base, ...(x.alts ?? [])].filter((v) => v != null && Number.isFinite(+v)).map(Number);
+  if (!a.measure || !vals(a).length) { gaps.push({ kind: "no_correspondence", anchor: a.id, detail: "a figure with no measure or value" }); return; }
+  const meet = (x, y) => vals(x).some((u) => vals(y).some((v) => Math.abs(u - v) <= 0.02 * Math.max(Math.abs(u), Math.abs(v), 1e-9)));
+  const hits = S.filter((b) => b.kind === "quantity" && b.measure === a.measure && vals(b).length && meet(a, b));
+  if (hits.length === 1) map.set(a.id, hits[0].id);
+  else if (hits.length > 1) gaps.push({ kind: "end_unresolved", anchor: a.id, detail: `${hits.length} source figures of its measure meet it` });
+  else { map.set(a.id, a.id); extra.push({ id: a.id, kind: "quantity" }); }
 }

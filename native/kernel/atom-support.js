@@ -16,32 +16,8 @@ const DEG = /^(most|more|less|least):/;
 const argText = (a) => (a && typeof a === "object" ? a.name ?? a.value ?? "" : String(a ?? ""));
 
 // unread: the claim's content words no claim atom carries; a claim with any is never supported (what was not read cannot be checked)
-// CANONICAL REWRITES of the claim, declared once (MEANING-ATOMS §5.1), so it meets a source that says the same in its usual form:
-// - "no X is higher than Y" is "Y is the highest": a negated comparison from a "no" quantifier becomes the superlative of its second
-//   referent, and the other negated atoms on the "no X" referent are said of that referent, asserted ("NOT in(no mountain, Washington)" →
-//   in(Rainier, Washington));
-// - "X is another name for Y" is named(Y, X).
-const NO = /^(no|none|neither|kein|keine|keiner|keinen|aucun|aucune|nul|nulle|ningún|ninguna|ninguno|nadie)\s/i;
-const NAME = /^(name|nom|nombre|name|bezeichnung|名前|別名|名称)$/i;
-export function canonical(C) {
-  let out = [...C];
-  const noArg = (a) => a && typeof a === "object" && NO.test(String(a.name ?? a.value ?? ""));
-  const cmp = out.find((c) => c.neg && (c.args ?? []).length === 2 && noArg(c.args[0]) && !noArg(c.args[1]));
-  if (cmp) {
-    const Y = cmp.args[1], X = cmp.args[0], w = low(cmp.pred).replace(/^(more|most):/, "").split(/[_\s]+/)[0];
-    const key = (a) => a.entity ?? low(a.value ?? a.name);
-    out = out.filter((c) => !(c.pred === cmp.pred || (c.args ?? []).length === 2 && key(c.args[0]) === key(X) && key(c.args[1]) === key(Y)))
-      .map((c) => (c.neg && noArg(c.args?.[0]) && key(c.args[0]) === key(X) ? { ...c, neg: false, args: [Y, ...c.args.slice(1)], rewritten: "no-comparative" } : c));
-    out.push({ pred: `most:${w}`, args: [Y], neg: false, hedged: !!cmp.hedged, rewritten: "no-comparative", text: `most:${w}(${Y.name ?? Y.value})` });
-  }
-  for (const n of out.filter((c) => c.pred === "is_a" && NAME.test(low(c.args?.[1]?.value ?? c.args?.[1]?.name ?? "").replace(ART, "").split(/\s+/).at(-1) ?? ""))) {
-    const X = n.args[0], f = out.find((c) => c !== n && (c.args ?? []).length === 2 && /(_|^)(for|de|für|pour|del|の)$/.test(c.pred) && (c.args[0].entity ?? c.args[0].value) === (X.entity ?? X.value));
-    if (!f) continue;
-    out = out.filter((c) => c !== n && c !== f);
-    out.push({ pred: "named", args: [f.args[1], X], neg: !!n.neg, hedged: !!n.hedged, rewritten: "another-name", text: `named(${f.args[1].name ?? f.args[1].value}, ${X.name ?? X.value})` });
-  }
-  return out;
-}
+// The claim arrives in its CANONICAL FORMS, as the reader wrote them (organs/atom-forms.js canonicalForms, returned by read-atoms.js as
+// `forms`): the negated-comparative and "another name for" rewrites are the reader's (the stage spec, RC6), no longer done here.
 // the meeting tests over one claim and one source (its referents' names on each side), shared with the learned matcher (atom-match.js)
 export function meeters(C, S, { claimLang = "en", sourceLang = "en", same = null, keysOf = null } = {}) {
   const keys = (lang, w) => { const ks = new Set([stem(w)]); if (keysOf && lang !== "en") for (const k of keysOf(lang, low(w)) ?? []) for (const x of words(k)) ks.add(stem(x)); return ks; };
@@ -103,7 +79,7 @@ export { low, words, stem, argText, DEG };
 // predicate (role swap), or in the reverse order under a meeting predicate (direction swap). A different predicate over the same arguments is a
 // swap; no lexicon of antonyms or converses is consulted.
 export function swapFlags(C0, S, { claimLang = "en", sourceLang = "en", same = null, keysOf = null } = {}) {
-  const C = canonical(C0), { predMeet, argsMeet } = meeters(C, S, { claimLang, sourceLang, same, keysOf });
+  const C = C0, { predMeet, argsMeet } = meeters(C, S, { claimLang, sourceLang, same, keysOf });
   const out = [];
   for (const c of C) {
     const cargs = c.args ?? []; if (cargs.length < 2 || c.pred === "is_a" || c.pred === "named" || /^has_/.test(c.pred) || DEG.test(c.pred)) continue;
@@ -116,7 +92,7 @@ export function swapFlags(C0, S, { claimLang = "en", sourceLang = "en", same = n
   return out;
 }
 export function atomSupport(C0, S, { claimLang = "en", sourceLang = "en", same = null, keysOf = null, unread = [] } = {}) {
-  const C = canonical(C0);
+  const C = C0;
   const { wordMeet, refMeet, predMeet, predWords, argsMeet, standing } = meeters(C, S, { claimLang, sourceLang, same, keysOf });
   const table = [];
   for (const c of C) {
