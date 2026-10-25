@@ -32,8 +32,10 @@ test("the prior door serves the janus home by name, and a replaced source is wha
 });
 
 test("an alias the hyperlexicon resolves keeps its period: 'Messrs.' ends no sentence", () => {
-  const bare = readWith(DOC, { language: "en" });
-  const kept = readWith(DOC, { language: "en", aliases: ["Messrs."] });
+  // the read-ahead dotted words are withheld here, so the live alias is what keeps the period
+  const noDotted = { ...priorsFor("en"), dotted: null };
+  const bare = readWith(DOC, { language: "en", priors: noDotted });
+  const kept = readWith(DOC, { language: "en", priors: noDotted, aliases: ["Messrs."] });
   assert.ok(bare.sentences.some((s) => s.text === "In 1850 Messrs."), "FALSIFIER: without the alias the splitter cuts after Messrs.");
   assert.ok(kept.sentences.some((s) => s.text === "In 1850 Messrs. Smith and Jones bought the mill."), "with it, Messrs. stays in its sentence");
   assert.equal(kept.sentences.length, bare.sentences.length - 2);
@@ -52,7 +54,7 @@ test("the hyperlexicon is asked only about unsure dotted forms, and the text's o
   const asked = [];
   const lex = makeLexicon({ ask: async (forms) => { asked.push(...forms); return { giver: { name: "stub" }, results: Object.fromEntries(forms.map((f) => [f, f === "Messrs." ? [{ w: f, senses: [{ of: "Mr." }] }] : f === "in." ? [{ w: f, senses: [{ of: "inch" }] }] : null])) }; } });
   const text = "Messrs. Smith came in. He left. Messrs. Jones came in. The rest stayed in the hall.";
-  const c = await consultAliases(text, lex, { priors: priorsFor("en") });
+  const c = await consultAliases(text, lex, { priors: { ...priorsFor("en"), dotted: null } });
   assert.deepEqual(c.aliases, ["Messrs."]);
   const inch = c.rows.find((r) => r.form === "in.");
   assert.ok(inch && inch.kept === false, "'in.' is listed as a form of 'inch', but the text writes 'in' bare: refused");
@@ -146,12 +148,13 @@ test("the Node door asks the local Wiktionary pack first, and an absent pack is 
     const r = await wiktionaryAsk(["Messrs."], "en");
     assert.ok(r.results["Messrs."]?.some((e) => e.senses.some((s) => s.of === "Mr.")), "the pack lists Messrs. as a form of Mr.");
     const w = await readDocument(DOC, { address: "mill" });
-    assert.ok(w.aliasReport.rows.some((x) => x.form === "Messrs." && x.kept));
+    // the giver keeps it live, or the read-ahead dotted words already settled it and it was not asked again
+    assert.ok(w.aliasReport.rows.some((x) => x.form === "Messrs." && x.kept) || w.abbreviations.dotted >= 1);
     assert.ok(w.sentences.some((s) => s.text === "In 1850 Messrs. Smith and Jones bought the mill."));
   }
-  const off = await readDocument(DOC, { address: "mill", lexicon: false });
+  const off = await readDocument(DOC, { address: "mill", lexicon: false, priors: { ...priorsFor("en"), dotted: null } });
   assert.match(off.aliasReport.gap, /without the hyperlexicon/);
-  assert.ok(off.sentences.some((s) => s.text === "In 1850 Messrs."), "FALSIFIER: with no giver the cut is the splitter's own");
+  assert.ok(off.sentences.some((s) => s.text === "In 1850 Messrs."), "FALSIFIER: with no giver and no read-ahead dotted words the cut is the splitter's own");
 });
 
 test("a surface extends the base extraction without rebuilding it", () => {
@@ -177,9 +180,9 @@ test("THE MASTER PIPELINE: readDocument asks the lexicon it is handed, then read
   const w = await readDocument(DOC, { lexicon: lex });
   assert.equal(w.aliasReport.giver.name, "stub");
   assert.ok(w.sentences.some((s) => s.text === "In 1850 Messrs. Smith and Jones bought the mill."));
-  const bare = await readDocument(DOC, {});
+  const bare = await readDocument(DOC, { priors: { ...priorsFor("en"), dotted: null } });
   assert.match(bare.aliasReport.gap, /no hyperlexicon/);
-  assert.ok(bare.sentences.some((s) => s.text === "In 1850 Messrs."));
+  assert.ok(bare.sentences.some((s) => s.text === "In 1850 Messrs."), "FALSIFIER: no giver and no read-ahead dotted words, the cut falls after Messrs.");
 });
 
 test("a surface's organs join the master's one assembly; selfRead gives the claims with verdicts; the reader rides, not on the wire", async () => {
@@ -202,4 +205,18 @@ test("a word whose period is its own is not a being: 'Messrs.' and 'No.' stay ou
   assert.ok(w.cast.some((c) => c.allSurfaces.includes("Smith")), "the names beside them still are");
   assert.equal(isAbbreviationSurface("Mr", new Set(["Mr"])), true);
   assert.equal(isAbbreviationSurface("Mr Brown", new Set(["Mr"])), false, "a name that opens with a title is still a name");
+});
+
+test("the hyperlexicon read ahead: dotted words a giver lists hold their period with no giver in reach, and the text's own use can refuse one", async () => {
+  const { dottedIn } = await import("../organs/lexicon.js");
+  const words = new Set(["etc.", "U.S.", "e.g.", "in.", "Messrs."]);
+  const t = "They bought nails, etc. and paid. The firm in the U.S. for years sold it, e.g. the mill. He came in. Messrs. Smith left.";
+  assert.deepEqual(dottedIn(t, words).sort(), ["Messrs.", "U.S.", "e.g.", "etc."], "'in.' is listed, but this text writes 'in' bare: refused");
+  const pr = priorsFor("en");
+  if (!pr.dotted) return;   // a janus without dotted-eng.json: the live hyperlexicon is the only knowledge, and the entry says so
+  const w = readWith(`${t} ${DOC}`, { language: "en" });
+  assert.ok(w.sentences.some((s) => s.text === "They bought nails, etc. and paid."));
+  assert.ok(w.sentences.some((s) => s.text === "The firm in the U.S. for years sold it, e.g. the mill."));
+  assert.ok(w.sentences.some((s) => s.text === "He came in."));
+  assert.ok(w.abbreviations.dotted >= 3);
 });
