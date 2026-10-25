@@ -288,10 +288,12 @@ export function readWith(text, { address = null, category = null, language = nul
   // each chunk's own place in the document (chunk.text is its body trimmed, so it is located inside its span)
   const norm = str.replace(/\r\n?/g, "\n");
   const bases = chunks.map((c) => { const at = norm.indexOf(c.text, Math.max(0, (c.start ?? 0) - 2)); return at >= 0 ? at : c.start ?? 0; });
-  const cuts = []; // in the reader's (newline-normalised) space, for the clause parser; `sentences` carries the caller's addresses
-  (out?.sentences ?? []).forEach((list, pi) => { for (const s of list ?? []) cuts.push({ text: s.text, offset: bases[pi] + s.offset }); });
+  // THE SENTENCES are the one cut over the WHOLE document (the reader drops a passage under 20 characters, a heading, from what it
+  // relates; the document's sentences keep it). Same splitter, same abbreviations as the reader's, so inside a passage they agree.
+  // `cuts` are in the newline-normalised space the clause parser reads; `sentences` carry the caller's addresses.
+  const cuts = splitSentences(norm, { abbreviations: abbr.set }).map((x) => ({ text: x.text, offset: x.offset }));
   const sentences = cuts.map((c, order) => ({ text: c.text, offset: raw(c.offset), order }));
-  const sentenceBase = []; { let n = 0; for (const list of out?.sentences ?? []) { sentenceBase.push(n); n += (list ?? []).length; } }
+  const sentenceAt = (at) => { let lo = 0, hi = cuts.length - 1, best = -1; while (lo <= hi) { const m = (lo + hi) >> 1; if (cuts[m].offset <= at) { best = m; lo = m + 1; } else hi = m - 1; } return best; };
   // THE CAST — the reader's own index, the beings its edges were resolved against (its ids, its floor), each with the address of
   // every mention. A being is what the capital tier names; a row the index holds only through the heard tier (a caseless nominal,
   // a common noun) is kept apart in `heard`, because the weft's company is between beings (weft.js::weftReferents) and common
@@ -323,7 +325,7 @@ export function readWith(text, { address = null, category = null, language = nul
   (out?.pronouns ?? []).forEach((list, pi) => {
     for (const b of list ?? []) {
       const at = bases[pi] + (b.offset ?? 0);
-      pronouns.push({ pronoun: b.pronoun, at: [raw(at), raw(at + String(b.pronoun ?? "").length)], sentence: sentenceBase[pi] + (b.sentenceOrder ?? 0), surface: b.surface ?? null, ref: b.surface ? refOf(b.surface) : null, margin: b.margin ?? null });
+      pronouns.push({ pronoun: b.pronoun, at: [raw(at), raw(at + String(b.pronoun ?? "").length)], sentence: sentenceAt(at), surface: b.surface ?? null, ref: b.surface ? refOf(b.surface) : null, margin: b.margin ?? null });
     }
   });
   // SURPRISE — the canonical cycle's second constitutive gate (SEG+EVA)
